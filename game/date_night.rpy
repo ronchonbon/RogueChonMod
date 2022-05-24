@@ -3380,7 +3380,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             elif Girl == JubesX:
                 ch_v "More fun than the movie? . ."
 
-    $ Girl.change_outfit(Changed=0)
+    $ Girl.change_outfit(outfit_changed = 0)
     return
 
 

@@ -365,7 +365,7 @@ image Kitty_Sprite:
         (0,0), ConditionSwitch(
 
             "primary_action == 'lesbian' or not girl_offhand_action or focused_Girl != KittyX", Null(),
-            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and KittyX.Lust >= 70", "GirlFingerPussy_Kitty",
+            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and KittyX.lust >= 70", "GirlFingerPussy_Kitty",
             "girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Kitty",
             "girl_offhand_action == 'fondle_breasts' and (offhand_action == 'fondle_breasts' or offhand_action == 'suck_breasts')", "GirlGropeLeftBreast_Kitty",
             "girl_offhand_action == 'fondle_breasts' and (primary_action == 'fondle_breasts' or primary_action == 'suck_breasts')", "GirlGropeRightBreast_Kitty",
@@ -381,7 +381,7 @@ image Kitty_Sprite:
 
             "not second_girl_offhand_action or second_girl_primary_action != 'masturbation' or focused_Girl == KittyX", Null(),
 
-            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and KittyX.Lust >= 70", "GirlFingerPussy_Kitty",
+            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and KittyX.lust >= 70", "GirlFingerPussy_Kitty",
             "second_girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Kitty",
             "second_girl_offhand_action == 'fondle_breasts'", "GirlGropeRightBreast_Kitty",
             "second_girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
@@ -432,7 +432,7 @@ image Kitty_Sprite:
         (0,0), ConditionSwitch(
 
             "not second_girl_primary_action or focused_Girl != KittyX", Null(),
-            "second_girl_primary_action == 'fondle_pussy' and primary_action != 'sex' and KittyX.Lust >= 70", "GirlFingerPussy_Kitty",
+            "second_girl_primary_action == 'fondle_pussy' and primary_action != 'sex' and KittyX.lust >= 70", "GirlFingerPussy_Kitty",
             "second_girl_primary_action == 'fondle_pussy'", "GirlGropePussy_Kitty",
             "second_girl_primary_action == 'eat_pussy'", "Lickpussy_Kitty",
             "second_girl_primary_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast_Kitty",
@@ -451,7 +451,7 @@ image Kitty_Sprite:
         (0,0), ConditionSwitch(
 
             "primary_action != 'lesbian' or not girl_offhand_action or focused_Girl == KittyX", Null(),
-            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and KittyX.Lust >= 70", "GirlFingerPussy_Kitty",
+            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and KittyX.lust >= 70", "GirlFingerPussy_Kitty",
             "girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Kitty",
             "girl_offhand_action == 'eat_pussy'", "Lickpussy_Kitty",
             "girl_offhand_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast_Kitty",
@@ -1335,7 +1335,7 @@ image Kitty_Sex_Anus:
             "Player.Sprite and Player.Cock == 'anal' and action_speed >= 2", "images/KittySex/Kitty_Sex_Hole_Open.png",
             "Player.Sprite and Player.Cock == 'anal' and action_speed", "Kitty_Sex_Anal_Heading",
             "Player.Sprite and Player.Cock == 'anal'", "Kitty_Sex_Anal_Tip",
-            "KittyX.Loose", "images/KittySex/Kitty_Sex_Hole_Loose.png",
+            "KittyX.used_to_anal", "images/KittySex/Kitty_Sex_Hole_Loose.png",
             "True", "images/KittySex/Kitty_Sex_Hole_Tight.png",
             )
     contains:
@@ -1839,7 +1839,7 @@ transform Kitty_Sex_Body_FootAnimStaticA():
 
 
 label Kitty_Sex_Launch(Line=primary_action):
-    $ girl_offhand_action = 0 if girl_offhand_action == "hand" else girl_offhand_action
+    $ girl_offhand_action = 0 if girl_offhand_action == "handjob" else girl_offhand_action
 
 
 
@@ -1857,9 +1857,9 @@ label Kitty_Sex_Launch(Line=primary_action):
             $ offhand_action = 0
     elif Line == "hotdog":
         $ Player.Cock = "out"
-    elif Line == "foot":
-        $ ShowFeet = 1
-        $ Player.Cock = "foot"
+    elif Line == "footjob":
+        $ show_feet = 1
+        $ Player.Cock = "footjob"
     elif Line == "massage":
         $ Player.Sprite = 0
         $ Player.Cock = 0
@@ -1869,7 +1869,7 @@ label Kitty_Sex_Launch(Line=primary_action):
         $ action_speed = 0
     $ primary_action = Line
 
-    if KittyX.Pose == "doggy":
+    if KittyX.pose == "doggy":
         call Kitty_Doggy_Launch (Line)
         return
     if renpy.showing("Kitty_SexSprite"):
@@ -1955,7 +1955,7 @@ image Kitty_Doggy_Animation:
                     "action_speed", "Kitty_Doggy_Feet1",
                     "True", "Kitty_Doggy_Feet0",
                     ),
-            "not Player.Sprite and ShowFeet", "Kitty_Doggy_Feet0",
+            "not Player.Sprite and show_feet", "Kitty_Doggy_Feet0",
             "True", Null(),
             ),
         )
@@ -2292,7 +2292,7 @@ image Kitty_Doggy_Ass:
             "KittyX.underwear and not KittyX.underwear_pulled_down", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
             "primary_action == 'finger_ass' or offhand_action == 'finger_ass'", "Kitty_Anal_Fingering",
             "primary_action == 'dildo anal'", "Kitty_Anal_Fucking",
-            "KittyX.Loose", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
+            "KittyX.used_to_anal", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
             "True", "images/JeanDoggy/Jean_Doggy_Asshole_Tight.png",
             ),
 
@@ -3522,7 +3522,7 @@ image Kitty_BJ_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "action_speed and renpy.showing('Kitty_BJ_Animation')", ConditionSwitch(
+            "Speed and renpy.showing('Kitty_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/KittyBJFace/Kitty_BJ_Mouth_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -3555,7 +3555,7 @@ image Kitty_BJ_Head:
         (0,0), ConditionSwitch(
 
             "'mouth' not in KittyX.spunk", Null(),
-            "action_speed and renpy.showing('Kitty_BJ_Animation')", ConditionSwitch(
+            "Speed and renpy.showing('Kitty_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/KittyBJFace/Kitty_BJ_Spunk_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -3651,7 +3651,7 @@ image Kitty_BJ_MouthSuckingMask:
     contains:
         ConditionSwitch(
             "'mouth' not in KittyX.spunk", Null(),
-            "action_speed != 2 and action_speed != 5", Null(),
+            "Speed != 2 and action_speed != 5", Null(),
             "True", "images/KittyBJFace/Kitty_BJ_Spunk_SuckingU.png",
             )
         zoom 1.4
@@ -3896,23 +3896,23 @@ label Kitty_BJ_Launch(Line=primary_action):
         with dissolve
 
     if Line == "L":
-        if Taboo:
+        if taboo:
             if len(Present) >= 2:
                 if Present[0] != KittyX:
-                    "[KittyX.Name] looks back at [Present[0].Name] to see if she's watching."
+                    "[KittyX.name] looks back at [Present[0].name] to see if she's watching."
                 elif Present[1] != KittyX:
-                    "[KittyX.Name] looks back at [Present[1].Name] to see if she's watching."
+                    "[KittyX.name] looks back at [Present[1].name] to see if she's watching."
             else:
-                "[KittyX.Name] casually glances around to see if anyone can see her."
-        if not KittyX.Blow:
-            "[KittyX.Name] hesitantly kneels down and touches her mouth to your cock."
+                "[KittyX.name] casually glances around to see if anyone can see her."
+        if not KittyX.action_counter["blowjob"]:
+            "[KittyX.name] hesitantly kneels down and touches her mouth to your cock."
         else:
-            "[KittyX.Name] kneels down and begins to suck on your cock."
+            "[KittyX.name] kneels down and begins to suck on your cock."
 
     $ action_speed = 0
 
     if Line != "cum":
-        $ primary_action = "blow"
+        $ primary_action = "blowjob"
 
     show Kitty_Sprite zorder KittyX.sprite_layer:
         alpha 0
@@ -4646,14 +4646,14 @@ label Kitty_TJ_Launch(Line=primary_action):
     show Kitty_Sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
         alpha 1
         ease 1 zoom 2 xpos 700 yoffset 50
-    if Line == "L" and Taboo:
+    if Line == "L" and taboo:
         if len(Present) >= 2:
             if Present[0] != KittyX:
-                "[KittyX.Name] looks back at [Present[0].Name] to see if she's watching."
+                "[KittyX.name] looks back at [Present[0].name] to see if she's watching."
             elif Present[1] != KittyX:
-                "[KittyX.Name] looks back at [Present[1].Name] to see if she's watching."
+                "[KittyX.name] looks back at [Present[1].name] to see if she's watching."
         else:
-            "[KittyX.Name] casually glances around to see if anyone can see her."
+            "[KittyX.name] casually glances around to see if anyone can see her."
     if KittyX.bra and KittyX.top:
         "She throws off her [KittyX.top] and her [KittyX.bra]."
     elif KittyX.top:
@@ -4665,7 +4665,7 @@ label Kitty_TJ_Launch(Line=primary_action):
     $ KittyX.arm_pose = 0
     call Kitty_First_Topless
     if Line == "L":
-        if not KittyX.Tit:
+        if not KittyX.action_counter["titjob"]:
             "She hesitantly presses your cock against her chest."
         else:
             "She squeezes her breasts around your cock."
@@ -4795,7 +4795,7 @@ image Kitty_HJ_Animation:
 
 label Kitty_HJ_Launch(Line=primary_action):
     if renpy.showing("Kitty_HJ_Animation"):
-        $ primary_action = "hand"
+        $ primary_action = "handjob"
         return
     call hide_girl(KittyX)
     if Line == "L":
@@ -4809,18 +4809,18 @@ label Kitty_HJ_Launch(Line=primary_action):
         with dissolve
 
     if Line == "L":
-        if Taboo:
+        if taboo:
             if len(Present) >= 2:
                 if Present[0] != KittyX:
-                    "[KittyX.Name] looks back at [Present[0].Name] to see if she's watching."
+                    "[KittyX.name] looks back at [Present[0].name] to see if she's watching."
                 elif Present[1] != KittyX:
-                    "[KittyX.Name] looks back at [Present[1].Name] to see if she's watching."
+                    "[KittyX.name] looks back at [Present[1].name] to see if she's watching."
             else:
-                "[KittyX.Name] casually glances around to see if anyone can see her."
+                "[KittyX.name] casually glances around to see if anyone can see her."
 
     $ action_speed = 0
     if Line != "cum":
-        $ primary_action = "hand"
+        $ primary_action = "handjob"
     else:
         $ action_speed = 1
     pause .5
@@ -4852,25 +4852,25 @@ label Kitty_HJ_Reset:
 label Kitty_Kissing_Launch(T=primary_action, Set=1):
     call hide_girl(KittyX)
     $ primary_action = T
-    $ KittyX.Pose = "kiss" if Set else KittyX.Pose
+    $ KittyX.pose = "kiss" if Set else KittyX.pose
     show Kitty_Sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location)
     show Kitty_Sprite at sprite_location(stage_center):
         ease 0.5 offset (0,0) zoom 2 alpha 1
     return
 
 label Kitty_Kissing_Smooch:
-    $ KittyX.FaceChange("kiss")
+    $ KittyX.change_face("kiss")
     show Kitty_Sprite zorder KittyX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos KittyX.sprite_location zoom 1
-    $ KittyX.FaceChange("sexy")
+    $ KittyX.change_face("_sexy")
     return
 
 label Kitty_Breasts_Launch(T=primary_action, Set=1):
     call hide_girl(KittyX)
     $ primary_action = T
-    $ KittyX.Pose = "breasts" if Set else KittyX.Pose
+    $ KittyX.pose = "breasts" if Set else KittyX.pose
     show Kitty_Sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
         ease 0.5 pos (700,-50) offset (0,0) zoom 2 alpha 1
     return
@@ -4878,7 +4878,7 @@ label Kitty_Breasts_Launch(T=primary_action, Set=1):
 label Kitty_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(KittyX)
     $ primary_action = T
-    $ KittyX.Pose = "mid" if Set else KittyX.Pose
+    $ KittyX.pose = "mid" if Set else KittyX.pose
     show Kitty_Sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1
@@ -4887,7 +4887,7 @@ label Kitty_Middle_Launch(T=primary_action, Set=1):
 label Kitty_Pussy_Launch(T=primary_action, Set=1):
     call hide_girl(KittyX)
     $ primary_action = T
-    $ KittyX.Pose = "pussy" if Set else KittyX.Pose
+    $ KittyX.pose = "pussy" if Set else KittyX.pose
     show Kitty_Sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
         ease 0.5 pos (700,-400) offset (0,0) zoom 2 alpha 1
     return
@@ -4906,7 +4906,7 @@ label Kitty_Pos_Reset(T=0, Set=0):
         yzoom 1
         alpha 1
         pos (KittyX.sprite_location,50)
-    $ KittyX.Pose = "full" if Set else 0
+    $ KittyX.pose = "full" if Set else 0
     $ primary_action = T
     return
 

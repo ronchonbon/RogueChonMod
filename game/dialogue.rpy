@@ -601,10 +601,10 @@ label auto_rejected_lines(Girl, action):
         if action in dildo_actions:
             $ lines.append("Hey, what are you planning to do with that?!")
 
-        if action in ["fondle_thighs", pussy_actions, ass_actions]:
+        if action in below_actions:
             $ lines.append("Heh, keep it above the belt, " + Girl.player_petname + ".")
 
-        if action in [finger_actions, dildo_actions]:
+        if action in insertion_actions:
             $ lines.append("Um, no take that out.")
     elif Girl == EmmaX:
         $ lines = ["Whoa, back off, " + Girl.player_petname + ".",
@@ -629,7 +629,7 @@ label auto_rejected_lines(Girl, action):
         if action in dildo_actions:
             $ lines.append("Excuse yourself, what are you planning to do with that?!")
 
-        if action in ["fondle_thighs", pussy_actions, ass_actions]:
+        if action in below_actions:
             $ lines.append("Perhaps we keep it above the waist, " + Girl.player_petname + ".")
 
         if action == "hotdog":
@@ -646,7 +646,7 @@ label auto_rejected_lines(Girl, action):
         if action in dildo_actions:
             $ lines.append("Hey, what are you planning to do with that?!")
 
-        if action in ["fondle_thighs", pussy_actions, ass_actions]:
+        if action in below_actions:
             $ lines.append("Maybe we keep it above the waist, " + Girl.player_petname + ".")
 
         if action in anal_insertion_actions:
@@ -669,7 +669,7 @@ label auto_rejected_lines(Girl, action):
         if action in dildo_actions:
             $ lines.append("Hey, what are you planning to do with that?!")
 
-        if action in ["fondle_thighs", pussy_actions, ass_actions]:
+        if action in below_actions:
             $ lines.append("Keep it above the waist, " + Girl.player_petname + ".")
 
         if action in insertion_actions:
@@ -700,7 +700,7 @@ label auto_rejected_lines(Girl, action):
         if action in anal_insertion_actions:
             $ lines.append("Excuse me, what are you aiming at?")
 
-        if action in ["fondle_thighs", pussy_actions, ass_actions]:
+        if action in below_actions:
             $ lines.append("Perhaps we keep it above the waist, " + Girl.player_petname + ".")
 
         if action == "eat_pussy":
@@ -717,7 +717,7 @@ label auto_rejected_lines(Girl, action):
             $ lines.append("Watch your hands, or lose them.")
             $ lines.append("Hands off, " + Girl.player_petname + ".")
 
-        if action in ["fondle_thighs", pussy_actions, ass_actions]:
+        if action in below_actions:
             $ lines.append("Maybe we keep it above the waist, " + Girl.player_petname + ".")
 
         if action == "eat_pussy":
@@ -950,7 +950,7 @@ label taboo_action_rejected_lines(Girl, action):
             "Not here!",
             "I'd be a bit embarassed doing that here."]
 
-        if action in [dildo_actions, cock_actions]:
+        if action in cock_actions:
             $ lines.append("You really expect me to do that here? You realize how. . . exposed that would be?")
             $ lines.append("You really expect me to do that here?")
             $ lines.append("Even if I wanted to, it certainly wouldn't be here!")
@@ -972,7 +972,7 @@ label taboo_action_rejected_lines(Girl, action):
             "Not here, not anywhere near here.",
             "" + Girl.Like + "not here though?"]
 
-        if action in [dildo_actions, cock_actions]:
+        if action in cock_actions:
             $ lines.append("You're being ridiculous. That? Here?!")
 
         if action in passive_actions:
@@ -991,7 +991,7 @@ label taboo_action_rejected_lines(Girl, action):
             "How can you imagine this would be an appropriate location?",
             "This area is a bit too exposed for that sort of thing. . ."]
 
-        if action in [dildo_actions, cock_actions]:
+        if action in cock_actions:
             $ lines.append("Can you imagine the scandal? Here?")
 
         if action == "anal":
@@ -1006,7 +1006,7 @@ label taboo_action_rejected_lines(Girl, action):
             "This is too exposed.",
             "This place is way too exposed."]
 
-        if action in [dildo_actions, cock_actions]:
+        if action in cock_actions:
             $ lines.append("You really expect me to do that here? This isn't exactly \"covert\".")
             $ lines.append("This area is a bit too exposed for that sort of thing. . .")
 
@@ -1020,7 +1020,7 @@ label taboo_action_rejected_lines(Girl, action):
             "I'm just not comfortable with that right now. . .",
             "This area is a bit too exposed for that sort of thing. . ."]
 
-        if action in [dildo_actions, cock_actions]:
+        if action in cock_actions:
             $ lines.append("You really expect me to do that here?{p}You know I can't \"take care of that\" anymore. . .")
 
         if action in passive_actions:
@@ -1033,7 +1033,7 @@ label taboo_action_rejected_lines(Girl, action):
             "This truly is not an appropriate place for that.",
             "This area is a bit too exposed for that sort of thing. . ."]
 
-        if action in [dildo_actions, cock_actions]:
+        if action in cock_actions:
             $ lines.append("I could not possibly do that here.")
 
         if action in sex_actions:
@@ -1178,7 +1178,7 @@ label action_not_done_yet_lines(Girl, action):
             "Not yet, " + Girl.player_petname + ". . .",
             "I. . . don't think that's. . .",
             "I'm not really up for that, " + Girl.player_petname + ". . .",
-            "I don't know that I'm. . .", + Girl.like + "ready? . .",
+            "I don't know that I'm. . ." + Girl.like + "ready? . .",
             "I don't know, " + Girl.player_petname + ". . .",
             "That's kinda hot, " + Girl.player_petname + ". . ."]
 
@@ -1192,7 +1192,7 @@ label action_not_done_yet_lines(Girl, action):
             $ lines.append("That's pretty intimate, " + Girl.player_petname + ". . .")
 
         if action in ["eat_ass", "dildo_anal", "anal"]:
-            $ lines.append("I don't know that I'm. . .", + Girl.like + "that kind of girl?")
+            $ lines.append("I don't know that I'm. . ." + Girl.like + "that kind of girl?")
 
         if action == "blowjob":
             $ lines.append("I don't know about the taste, " + Girl.player_petname + ". . .")
@@ -1573,7 +1573,7 @@ label caught_masturbating_lines(Girl, action):
     elif Girl == LauraX:
         $ lines = ["Huh.{p}}When did you get here?"]
     elif Girl == JeanX:
-        $ lines = ["Oh, hey. . .", + Girl.player_petname + ".{p}}When did you get here?"]
+        $ lines = ["Oh, hey. . ." + Girl.player_petname + ".{p}}When did you get here?"]
     elif Girl == StormX:
         $ lines = ["!{p}}How long have you been there?!"]
     elif Girl == JubesX:
@@ -3297,10 +3297,10 @@ label get_out_lines(Girl, action):
     Girl.voice "[line]"
 
     if Girl in [RogueX, KittyX, EmmaX, LauraX, JeanX, JubesX]:
-        $ lines = ["" + Girl.Name + " pushes you back into the hall and slams the door. You head back to your room.",
-            "" + Girl.Name + " shoves you back into the hall and slams the door. You head back to your room."]
+        $ lines = ["" + Girl.name + " pushes you back into the hall and slams the door. You head back to your room.",
+            "" + Girl.name + " shoves you back into the hall and slams the door. You head back to your room."]
     elif Girl == StormX:
-        $ lines = ["" + Girl.Name + " pushes you to the top of the stairs and slams the door. You head back to your room."]
+        $ lines = ["" + Girl.name + " pushes you to the top of the stairs and slams the door. You head back to your room."]
     "[line]"
 
     return
@@ -5142,7 +5142,7 @@ label accepted_without_question_lines(Girl, action):
         if action in cock_actions:
             $ lines.append("Sure, whip it out.")
 
-        if action in [dildo_actions, cock_actions]:
+        if action in cock_actions:
             $ lines.append("Cool, lemme see it.")
             $ lines.append("Well, sure, put it here.")
 
@@ -5199,7 +5199,7 @@ label accepted_without_question_lines(Girl, action):
             $ lines.append("I suppose I could. . .")
             $ lines.append("I'll do it.")
 
-        if action in [dildo_actions, cock_actions]:
+        if action in cock_actions:
             $ lines.append("Well, give it here.")
     elif Girl == LauraX:
         $ lines = ["Sure, I guess.",
@@ -5346,7 +5346,7 @@ label accepted_without_question_lines(Girl, action):
             $ lines.append("I would do this.")
             $ lines.append("I suppose that I could. . .")
 
-        if action in [dildo_actions, cock_actions]:
+        if action in cock_actions:
             $ lines.append("Very well, give it here.")
     elif Girl = JubesX:
         $ lines = ["Sure, I guess.",

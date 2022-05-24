@@ -354,7 +354,7 @@ image Laura_Sprite:
             "not second_girl_offhand_action or second_girl_primary_action != 'masturbation' or focused_Girl == LauraX", Null(),
 
 
-            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and LauraX.Lust >= 70", "GirlFingerPussy_Laura",
+            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and LauraX.lust >= 70", "GirlFingerPussy_Laura",
             "second_girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Laura",
             "second_girl_offhand_action == 'fondle_breasts'", "GirlGropeRightBreast_Laura",
             "second_girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
@@ -411,7 +411,7 @@ image Laura_Sprite:
             "not second_girl_primary_action or focused_Girl != LauraX", Null(),
 
 
-            "second_girl_primary_action == 'fondle_pussy' and primary_action != 'sex' and LauraX.Lust >= 70", "GirlFingerPussy_Laura",
+            "second_girl_primary_action == 'fondle_pussy' and primary_action != 'sex' and LauraX.lust >= 70", "GirlFingerPussy_Laura",
             "second_girl_primary_action == 'fondle_pussy'", "GirlGropePussy_Laura",
             "second_girl_primary_action == 'eat_pussy'", "Lickpussy_Laura",
             "second_girl_primary_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast_Laura",
@@ -434,7 +434,7 @@ image Laura_Sprite:
             "primary_action != 'lesbian' or focused_Girl == LauraX or not girl_offhand_action", Null(),
 
 
-            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and LauraX.Lust >= 70", "GirlFingerPussy_Laura",
+            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and LauraX.lust >= 70", "GirlFingerPussy_Laura",
             "girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Laura",
             "girl_offhand_action == 'eat_pussy'", "Lickpussy_Laura",
             "girl_offhand_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast_Laura",
@@ -722,7 +722,7 @@ image Laura_Doggy_Animation:
                     "action_speed", "Laura_Doggy_Feet1",
                     "True", "Laura_Doggy_Feet0",
                     ),
-            "not Player.Sprite and ShowFeet", "Laura_Doggy_Shins",
+            "not Player.Sprite and show_feet", "Laura_Doggy_Shins",
             "True", Null(),
             ),
         )
@@ -1047,7 +1047,7 @@ image Laura_Doggy_Ass:
             "LauraX.underwear and not LauraX.underwear_pulled_down", "images/LauraDoggy/Laura_Doggy_Asshole_Loose.png",
             "primary_action == 'finger_ass' or offhand_action == 'finger_ass'", "Laura_Anal_Fingering",
             "primary_action == 'dildo anal'", "Laura_Anal_Fucking",
-            "LauraX.Loose", "images/LauraDoggy/Laura_Doggy_Asshole_Loose.png",
+            "LauraX.used_to_anal", "images/LauraDoggy/Laura_Doggy_Asshole_Loose.png",
             "True", "images/LauraDoggy/Laura_Doggy_Asshole_Tight.png",
             ),
 
@@ -1056,7 +1056,7 @@ image Laura_Doggy_Ass:
 
             "'anal' not in LauraX.spunk or Player.Sprite", Null(),
             "Player.Cock == 'anal'", "images/LauraDoggy/Laura_Doggy_SpunkAnalOpen.png",
-            "LauraX.Loose", "images/LauraDoggy/Laura_Doggy_SpunkAnalLoose.png",
+            "LauraX.used_to_anal", "images/LauraDoggy/Laura_Doggy_SpunkAnalLoose.png",
             "True", "images/LauraDoggy/Laura_Doggy_SpunkAnalLoose.png",
             ),
         (0,0), ConditionSwitch(
@@ -3832,7 +3832,7 @@ image Laura_Mega_Mask:
 
 
 label Laura_Sex_Launch(Line=primary_action):
-    $ girl_offhand_action = 0 if girl_offhand_action == "hand" else girl_offhand_action
+    $ girl_offhand_action = 0 if girl_offhand_action == "handjob" else girl_offhand_action
     $ Player.Sprite = 1
     $ Line = "solo" if not Line else Line
     if Line == "sex":
@@ -3848,9 +3848,9 @@ label Laura_Sex_Launch(Line=primary_action):
         $ Player.Cock = "out"
     elif Line == "hotdog":
         $ Player.Cock = "out"
-    elif Line == "foot":
-        $ ShowFeet = 1
-        $ Player.Cock = "foot"
+    elif Line == "footjob":
+        $ show_feet = 1
+        $ Player.Cock = "footjob"
     elif Line == "massage":
         $ Player.Sprite = 0
         $ Player.Cock = 0
@@ -3860,7 +3860,7 @@ label Laura_Sex_Launch(Line=primary_action):
         $ action_speed = 0
     $ primary_action = Line
 
-    if LauraX.Pose == "doggy":
+    if LauraX.pose == "doggy":
         call Laura_Doggy_Launch (Line)
         return
     if renpy.showing("Laura_SexSprite"):
@@ -5046,18 +5046,18 @@ label Laura_BJ_Launch(Line=primary_action):
 
     $ action_speed = 0
     if Line == "L":
-        if Taboo:
+        if taboo:
             if len(Present) >= 2:
                 if Present[0] != LauraX:
-                    "[LauraX.Name] looks back at [Present[0].Name] to see if she's watching."
+                    "[LauraX.name] looks back at [Present[0].name] to see if she's watching."
                 elif Present[1] != LauraX:
-                    "[LauraX.Name] looks back at [Present[1].Name] to see if she's watching."
+                    "[LauraX.name] looks back at [Present[1].name] to see if she's watching."
             else:
-                "[LauraX.Name] casually glances around to see if anyone can see her."
-        "[LauraX.Name] smoothly bends down and places your cock against her cheek."
+                "[LauraX.name] casually glances around to see if anyone can see her."
+        "[LauraX.name] smoothly bends down and places your cock against her cheek."
 
     if Line != "cum":
-        $ primary_action = "blow"
+        $ primary_action = "blowjob"
 
     show Laura_Sprite zorder LauraX.sprite_layer:
         alpha 0
@@ -5205,7 +5205,7 @@ image Laura_HJ_Animation:
 
 label Laura_HJ_Launch(Line=primary_action):
     if renpy.showing("Laura_HJ_Animation"):
-        $ primary_action = "hand"
+        $ primary_action = "handjob"
         return
     call hide_girl(LauraX)
     if Line == "L":
@@ -5220,7 +5220,7 @@ label Laura_HJ_Launch(Line=primary_action):
 
     $ action_speed = 0
     if Line != "cum":
-        $ primary_action = "hand"
+        $ primary_action = "handjob"
     else:
         $ action_speed = 1
     pause .5
@@ -6333,15 +6333,15 @@ label Laura_TJ_Launch(Line=primary_action):
         alpha 1
         ease 1 zoom 2.3 xpos 750 yoffset -100
     if Line == "L":
-        if Taboo:
+        if taboo:
             if len(Present) >= 2:
                 if Present[0] != LauraX:
-                    "[LauraX.Name] looks back at [Present[0].Name] to see if she's watching."
+                    "[LauraX.name] looks back at [Present[0].name] to see if she's watching."
                 elif Present[1] != LauraX:
-                    "[LauraX.Name] looks back at [Present[1].Name] to see if she's watching."
+                    "[LauraX.name] looks back at [Present[1].name] to see if she's watching."
             else:
-                "[LauraX.Name] casually glances around to see if anyone can see her."
-        "[LauraX.Name] bends over and places your cock between her breasts."
+                "[LauraX.name] casually glances around to see if anyone can see her."
+        "[LauraX.name] bends over and places your cock between her breasts."
 
     if LauraX.bra and LauraX.top:
         "She throws off her [LauraX.top] and her [LauraX.bra]."
@@ -6382,7 +6382,7 @@ label Laura_TJ_Reset:
         ease 1 zoom 1.5 xpos 700 yoffset 50
         pause .5
         ease .5 zoom 1 xpos LauraX.sprite_location yoffset 0
-    "[LauraX.Name] pulls back"
+    "[LauraX.name] pulls back"
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         alpha 1
         zoom 1 offset (0,0) xpos LauraX.sprite_location
@@ -6403,27 +6403,27 @@ label Laura_TJ_Reset:
 label Laura_Kissing_Launch(T=primary_action, Set=1):
     call hide_girl(LauraX)
     $ primary_action = T
-    $ LauraX.Pose = "kiss" if Set else LauraX.Pose
+    $ LauraX.pose = "kiss" if Set else LauraX.pose
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location)
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(stage_center):
         ease 0.5 offset (0,0) zoom 2 alpha 1
     return
 
 label Laura_Kissing_Smooch:
-    $ LauraX.FaceChange("kiss")
+    $ LauraX.change_face("kiss")
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos LauraX.sprite_location zoom 1
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         zoom 1
-    $ LauraX.FaceChange("sexy")
+    $ LauraX.change_face("_sexy")
     return
 
 label Laura_Breasts_Launch(T=primary_action, Set=1):
     call hide_girl(LauraX)
     $ primary_action = T
-    $ LauraX.Pose = "breasts" if Set else LauraX.Pose
+    $ LauraX.pose = "breasts" if Set else LauraX.pose
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 2 alpha 1
@@ -6432,7 +6432,7 @@ label Laura_Breasts_Launch(T=primary_action, Set=1):
 label Laura_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(LauraX)
     $ primary_action = T
-    $ LauraX.Pose = "mid" if Set else LauraX.Pose
+    $ LauraX.pose = "mid" if Set else LauraX.pose
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1
@@ -6441,7 +6441,7 @@ label Laura_Middle_Launch(T=primary_action, Set=1):
 label Laura_Pussy_Launch(T=primary_action, Set=1):
     call hide_girl(LauraX)
     $ primary_action = T
-    $ LauraX.Pose = "pussy" if Set else LauraX.Pose
+    $ LauraX.pose = "pussy" if Set else LauraX.pose
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         ease 0.5 pos (700,-400) offset (0,0) zoom 2 alpha 1
     return
@@ -6460,7 +6460,7 @@ label Laura_Pos_Reset(T=0, Set=0):
         yzoom 1
         alpha 1
         pos (LauraX.sprite_location,50)
-    $ LauraX.Pose = "full" if Set else 0
+    $ LauraX.pose = "full" if Set else 0
     $ primary_action = T
     return
 

@@ -4684,6 +4684,8 @@ label knows_her_place_narrations(Girl, action):
     $ lines = ["[Girl.name] doesn't seem to be into this, but she knows her place.",
         "[Girl.name] doesn't seem to be into this, you're lucky she's so obedient."]
 
+    $ line = renpy.random.choice(lines)
+
     "[line]"
 
     return
@@ -4693,6 +4695,8 @@ label not_ready_to_stop_narrations(Girl, action):
         "She is breathing heavily as your cock rubs inside her.",
         "She slowly turns back towards you and smiles.",
         "She doesn't seem ready to stop."]
+
+    $ line = renpy.random.choice(lines)
 
     "[line]"
 

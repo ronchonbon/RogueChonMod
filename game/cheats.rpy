@@ -57,7 +57,7 @@ label EmotionEditor(Chr=0):
                 if "handjob" in Chr.spunk:
                     $ Chr.spunk.remove("handjob")
                 else:
-                    $ Chr.spunk.append("handjob")
+                    $ Chr.spunk.append("hand")
             "Toggle Facial Spunk":
 
                 if "facial" in Chr.spunk and "hair" not in Chr.spunk:

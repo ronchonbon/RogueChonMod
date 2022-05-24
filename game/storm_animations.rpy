@@ -420,7 +420,7 @@ image Storm_Sprite:
             "not second_girl_offhand_action or second_girl_primary_action != 'masturbation' or focused_Girl == StormX", Null(),
 
 
-            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and StormX.Lust >= 70", "GirlFingerPussy_Storm",
+            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and StormX.lust >= 70", "GirlFingerPussy_Storm",
             "second_girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Storm",
             "second_girl_offhand_action == 'fondle_breasts'", "GirlGropeRightBreast_Storm",
             "second_girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
@@ -1162,15 +1162,15 @@ image Storm_Sex_Legs:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock == 'anal' and ShowFeet", "images/StormSex/Storm_Sex_Legs_FJ_Anal.png",
-            "ShowFeet", "images/StormSex/Storm_Sex_Legs_FJ.png",
+            "Player.Sprite and Player.Cock == 'anal' and show_feet", "images/StormSex/Storm_Sex_Legs_FJ_Anal.png",
+            "show_feet", "images/StormSex/Storm_Sex_Legs_FJ.png",
             "Player.Sprite and Player.Cock == 'anal'", "images/StormSex/Storm_Sex_Legs_Anal.png",
             "True", "images/StormSex/Storm_Sex_Legs.png",
             ),
         (0,0), ConditionSwitch(
 
             "not StormX.wet", Null(),
-            "ShowFeet", "images/StormSex/Storm_Sex_Wet_Legs_FJ.png",
+            "show_feet", "images/StormSex/Storm_Sex_Wet_Legs_FJ.png",
             "True", "images/StormSex/Storm_Sex_Wet_Legs.png",
             ),
 
@@ -1183,7 +1183,7 @@ image Storm_Sex_Legs:
 
         (0,0), ConditionSwitch(
 
-            "ShowFeet",ConditionSwitch(
+            "show_feet",ConditionSwitch(
 
                     "StormX.hose == '_stockings_and_garterbelt'", "images/StormSex/Storm_Sex_Hose_StockingsGarter_FJ.png",
                     "StormX.hose == '_garterbelt'", "images/StormSex/Storm_Sex_Hose_Garter_FJ.png",
@@ -1198,7 +1198,7 @@ image Storm_Sex_Legs:
         (0,0), ConditionSwitch(
 
             "not StormX.accessory == '_rings' or StormX.legs == '_pants' or StormX.legs == '_yoga_pants'", Null(),
-            "ShowFeet", "images/StormSex/Storm_Sex_LegRings_FJ.png",
+            "show_feet", "images/StormSex/Storm_Sex_LegRings_FJ.png",
             "True", "images/StormSex/Storm_Sex_LegRings.png",
             ),
         (0,0), ConditionSwitch(
@@ -1206,15 +1206,15 @@ image Storm_Sex_Legs:
             "StormX.legs and StormX.legs != '_skirt' and not StormX.upskirt", Null(),
             "StormX.underwear_pulled_down",ConditionSwitch(
 
-                    "StormX.underwear == '_cosplay_panties' and ShowFeet", "images/StormSex/Storm_Sex_Panties_Cos_FJ_Down.png",
+                    "StormX.underwear == '_cosplay_panties' and show_feet", "images/StormSex/Storm_Sex_Panties_Cos_FJ_Down.png",
                     "StormX.underwear == '_cosplay_panties'", "images/StormSex/Storm_Sex_Panties_Cos_Down.png",
-                    "StormX.underwear == '_white_panties' and ShowFeet", "images/StormSex/Storm_Sex_Panties_White_FJ_Down.png",
+                    "StormX.underwear == '_white_panties' and show_feet", "images/StormSex/Storm_Sex_Panties_White_FJ_Down.png",
                     "StormX.underwear == '_white_panties'", "images/StormSex/Storm_Sex_Panties_White_Down.png",
-                    "StormX.underwear and ShowFeet", "images/StormSex/Storm_Sex_Panties_Black_FJ_Down.png",
+                    "StormX.underwear and show_feet", "images/StormSex/Storm_Sex_Panties_Black_FJ_Down.png",
                     "StormX.underwear", "images/StormSex/Storm_Sex_Panties_Black_Down.png",
                     "True", Null(),
                     ),
-            "ShowFeet",ConditionSwitch(
+            "show_feet",ConditionSwitch(
 
                     "StormX.underwear == '_cosplay_panties' and StormX.grool", "images/StormSex/Storm_Sex_Panties_Cos_FJ_Wet.png",
                     "StormX.underwear == '_cosplay_panties'", "images/StormSex/Storm_Sex_Panties_Cos_FJ.png",
@@ -1254,7 +1254,7 @@ image Storm_Sex_Legs:
         (0,0), ConditionSwitch(
 
             "StormX.underwear and StormX.underwear_pulled_down", Null(),
-            "ShowFeet",ConditionSwitch(
+            "show_feet",ConditionSwitch(
 
                     "StormX.hose == '_pantyhose'", "images/StormSex/Storm_Sex_Hose_Pantyhose_FJ.png",
                     "StormX.hose == '_ripped_pantyhose'", "images/StormSex/Storm_Sex_Hose_Pantyhose_FJHoled.png",
@@ -1267,17 +1267,17 @@ image Storm_Sex_Legs:
 
         (0,0), ConditionSwitch(
 
-            "StormX.legs == '_skirt' and ShowFeet", "images/StormSex/Storm_Sex_Legs_Skirt_FJ.png",
+            "StormX.legs == '_skirt' and show_feet", "images/StormSex/Storm_Sex_Legs_Skirt_FJ.png",
             "StormX.upskirt",ConditionSwitch(
 
                     "StormX.legs == '_skirt'", "images/StormSex/Storm_Sex_Legs_Skirt_Up.png",
-                    "StormX.legs == '_pants' and ShowFeet", "images/StormSex/Storm_Sex_Legs_Pants_FJ_Down.png",
+                    "StormX.legs == '_pants' and show_feet", "images/StormSex/Storm_Sex_Legs_Pants_FJ_Down.png",
                     "StormX.legs == '_pants'", "images/StormSex/Storm_Sex_Legs_Pants_Down.png",
-                    "StormX.legs == '_yoga_pants' and ShowFeet", "images/StormSex/Storm_Sex_Legs_YogaPants_FJ_Down.png",
+                    "StormX.legs == '_yoga_pants' and show_feet", "images/StormSex/Storm_Sex_Legs_YogaPants_FJ_Down.png",
                     "StormX.legs == '_yoga_pants'", "images/StormSex/Storm_Sex_Legs_YogaPants_Down.png",
                     "True", Null(),
                     ),
-            "ShowFeet",ConditionSwitch(
+            "show_feet",ConditionSwitch(
 
                     "StormX.legs == '_pants' and StormX.grool > 1", "images/StormSex/Storm_Sex_Legs_Pants_FJ_Wet.png",
                     "StormX.legs == '_pants'", "images/StormSex/Storm_Sex_Legs_Pants_FJ.png",
@@ -1325,7 +1325,7 @@ image Storm_Sex_Legs:
             ),
         (0,0), ConditionSwitch(
 
-            "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
+            "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
 
             "True", Null(),
             ),
@@ -1407,13 +1407,13 @@ image Storm_Sex_Pussy:
         ConditionSwitch(
                 "not StormX.pubes", Null(),
 
-                "Player.Sprite and Player.Cock == 'in' and action_speed and ShowFeet", "images/StormSex/Storm_Sex_Pubes_Fucking_FJ.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed and show_feet", "images/StormSex/Storm_Sex_Pubes_Fucking_FJ.png",
                 "Player.Sprite and Player.Cock == 'in' and action_speed", "images/StormSex/Storm_Sex_Pubes_Fucking.png",
-                "Player.Sprite and Player.Cock == 'in' and ShowFeet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
+                "Player.Sprite and Player.Cock == 'in' and show_feet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
                 "Player.Sprite and Player.Cock == 'in'", "images/StormSex/Storm_Sex_Pubes_Open.png",
-                "primary_action == 'eat_pussy' and ShowFeet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
+                "primary_action == 'eat_pussy' and show_feet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
                 "primary_action == 'eat_pussy'", "images/StormSex/Storm_Sex_Pubes_Open.png",
-                "ShowFeet", "images/StormSex/Storm_Sex_Pubes_Closed_FJ.png",
+                "show_feet", "images/StormSex/Storm_Sex_Pubes_Closed_FJ.png",
                 "True", "images/StormSex/Storm_Sex_Pubes_Closed.png",
                 )
     contains:
@@ -1578,7 +1578,7 @@ image Storm_Sex_Static:
         subpixel True
         ConditionSwitch(
 
-                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
+                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
                 "True", Null(),
                 )
         pos (0,-140)
@@ -2319,7 +2319,7 @@ image Storm_Sex_Hotdog_action_speed1:
         subpixel True
         ConditionSwitch(
 
-                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
+                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
                 "True", Null(),
                 )
         pos (0,-160)
@@ -2390,7 +2390,7 @@ image Storm_Sex_Hotdog_action_speed2:
         subpixel True
         ConditionSwitch(
 
-                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
+                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
                 "True", Null(),
                 )
         pos (0,-160)
@@ -2458,7 +2458,7 @@ image Storm_Sex_FJ_action_speed0:
         subpixel True
         ConditionSwitch(
 
-                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
+                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
                 "True", Null(),
                 )
         pos (0,-200)
@@ -2529,7 +2529,7 @@ image Storm_Sex_FJ_action_speed1:
         subpixel True
         ConditionSwitch(
 
-                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
+                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
                 "True", Null(),
                 )
         pos (0,-200)
@@ -2600,7 +2600,7 @@ image Storm_Sex_FJ_action_speed2:
         subpixel True
         ConditionSwitch(
 
-                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
+                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
                 "True", Null(),
                 )
         pos (0,-200)
@@ -2617,10 +2617,10 @@ image Storm_Sex_FJ_action_speed2:
 
 
 label Storm_Sex_Launch(Line=primary_action):
-    $ girl_offhand_action = 0 if girl_offhand_action == "hand" else girl_offhand_action
+    $ girl_offhand_action = 0 if girl_offhand_action == "handjob" else girl_offhand_action
 
 
-    $ StormX.Pose = "sex"
+    $ StormX.pose = "sex"
 
 
     $ Player.Sprite = 1
@@ -2637,9 +2637,9 @@ label Storm_Sex_Launch(Line=primary_action):
         if StormX.legs_number() == 5:
             $ StormX.upskirt = 1
         $ Player.Cock = "out"
-    elif Line == "foot":
-        $ ShowFeet = 1
-        $ Player.Cock = "foot"
+    elif Line == "footjob":
+        $ show_feet = 1
+        $ Player.Cock = "footjob"
     elif Line == "massage":
         $ Player.Sprite = 0
         $ Player.Cock = 0
@@ -2649,7 +2649,7 @@ label Storm_Sex_Launch(Line=primary_action):
         $ action_speed = 0
     $ primary_action = Line
 
-    if StormX.Pose == "doggy":
+    if StormX.pose == "doggy":
         call Storm_Doggy_Launch (Line)
         return
     if renpy.showing("Storm_SexSprite"):
@@ -2798,7 +2798,7 @@ image Storm_HJ_Animation:
 label Storm_HJ_Launch(Line=primary_action):
     $ StormX.arm_pose = 2
     if renpy.showing("Storm_HJ_Animation"):
-        $ primary_action = "hand"
+        $ primary_action = "handjob"
         return
     call hide_girl(StormX)
     if Line == "L":
@@ -2813,7 +2813,7 @@ label Storm_HJ_Launch(Line=primary_action):
 
     $ action_speed = 0
     if Line != "cum":
-        $ primary_action = "hand"
+        $ primary_action = "handjob"
     else:
         $ action_speed = 1
     pause .5
@@ -2952,7 +2952,7 @@ image Storm_BJ_Head:
 
 
 
-            "action_speed and renpy.showing('Storm_BJ_Animation')", ConditionSwitch(
+            "Speed and renpy.showing('Storm_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/StormBJFace/Storm_BJ_Mouth_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -2985,7 +2985,7 @@ image Storm_BJ_Head:
         (0,0), ConditionSwitch(
 
             "'mouth' not in StormX.spunk", Null(),
-            "action_speed and renpy.showing('Storm_BJ_Animation')", ConditionSwitch(
+            "Speed and renpy.showing('Storm_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/StormBJFace/Storm_BJ_Spunk_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -3776,21 +3776,21 @@ label Storm_BJ_Launch(Line=primary_action):
     $ action_speed = 0
 
     if Line != "cum":
-        $ primary_action = "blow"
+        $ primary_action = "blowjob"
 
     show Storm_BJ_Animation zorder 150:
         pos (630,650)
-    if Taboo and Line == "L":
+    if taboo and Line == "L":
         if len(Present) >= 2:
             if Present[0] != StormX:
-                "[StormX.Name] looks back at [Present[0].Name] to see if she's watching."
+                "[StormX.name] looks back at [Present[0].name] to see if she's watching."
             elif Present[1] != StormX:
-                "[StormX.Name] looks back at [Present[1].Name] to see if she's watching."
+                "[StormX.name] looks back at [Present[1].name] to see if she's watching."
         else:
-            "[StormX.Name] looks around to see if anyone can see her."
+            "[StormX.name] looks around to see if anyone can see her."
         "She then bends down and puts your cock to her mouth."
     elif Line == "L":
-        "[StormX.Name] smoothly bends down and places your cock against her cheek."
+        "[StormX.name] smoothly bends down and places your cock against her cheek."
 
     return
 
@@ -5072,7 +5072,7 @@ label Storm_TJ_Reset:
         ease 1 zoom 1.5 xpos 700 yoffset 50
         pause .5
         ease .5 zoom 1 xpos StormX.sprite_location yoffset 0
-    "[StormX.Name] pulls back"
+    "[StormX.name] pulls back"
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
         zoom 1 offset (0,0) xpos StormX.sprite_location
@@ -5088,27 +5088,27 @@ label Storm_TJ_Reset:
 label Storm_Kissing_Launch(T=primary_action, Set=1):
     call hide_girl(StormX)
     $ primary_action = T
-    $ StormX.Pose = "kiss" if Set else StormX.Pose
+    $ StormX.pose = "kiss" if Set else StormX.pose
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location)
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_center):
         ease 0.5 offset (0,0) zoom 2 alpha 1
     return
 
 label Storm_Kissing_Smooch:
-    $ StormX.FaceChange("kiss")
+    $ StormX.change_face("kiss")
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos StormX.sprite_location zoom 1
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         zoom 1
-    $ StormX.FaceChange("sexy")
+    $ StormX.change_face("_sexy")
     return
 
 label Storm_Breasts_Launch(T=primary_action, Set=1):
     call hide_girl(StormX)
     $ primary_action = T
-    $ StormX.Pose = "breasts" if Set else StormX.Pose
+    $ StormX.pose = "breasts" if Set else StormX.pose
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 2 alpha 1
@@ -5117,7 +5117,7 @@ label Storm_Breasts_Launch(T=primary_action, Set=1):
 label Storm_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(StormX)
     $ primary_action = T
-    $ StormX.Pose = "mid" if Set else StormX.Pose
+    $ StormX.pose = "mid" if Set else StormX.pose
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1
@@ -5126,7 +5126,7 @@ label Storm_Middle_Launch(T=primary_action, Set=1):
 label Storm_Pussy_Launch(T=primary_action, Set=1):
     call hide_girl(StormX)
     $ primary_action = T
-    $ StormX.Pose = "pussy" if Set else StormX.Pose
+    $ StormX.pose = "pussy" if Set else StormX.pose
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         ease 0.5 pos (700,-400) offset (0,0) zoom 2 alpha 1
     return
@@ -5145,7 +5145,7 @@ label Storm_Pos_Reset(T=0, Set=0):
         yzoom 1
         alpha 1
         pos (StormX.sprite_location,50)
-    $ StormX.Pose = "full" if Set else 0
+    $ StormX.pose = "full" if Set else 0
     $ primary_action = T
     return
 

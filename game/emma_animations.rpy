@@ -447,7 +447,7 @@ image Emma_Sprite:
             "not second_girl_offhand_action or second_girl_primary_action != 'masturbation' or focused_Girl == EmmaX", Null(),
 
 
-            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and EmmaX.Lust >= 70", "GirlFingerPussy_Emma",
+            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and EmmaX.lust >= 70", "GirlFingerPussy_Emma",
             "second_girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Emma",
             "second_girl_offhand_action == 'fondle_breasts'", "GirlGropeRightBreast_Emma",
             "second_girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
@@ -508,7 +508,7 @@ image Emma_Sprite:
             "not second_girl_primary_action or focused_Girl != EmmaX", Null(),
 
 
-            "second_girl_primary_action == 'fondle_pussy' and primary_action != 'sex' and EmmaX.Lust >= 70", "GirlFingerPussy_Emma",
+            "second_girl_primary_action == 'fondle_pussy' and primary_action != 'sex' and EmmaX.lust >= 70", "GirlFingerPussy_Emma",
             "second_girl_primary_action == 'fondle_pussy'", "GirlGropePussy_Emma",
             "second_girl_primary_action == 'eat_pussy'", "Lickpussy_Emma",
             "second_girl_primary_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast_Emma",
@@ -536,7 +536,7 @@ image Emma_Sprite:
             "primary_action != 'lesbian' or focused_Girl == EmmaX or not girl_offhand_action", Null(),
 
 
-            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and EmmaX.Lust >= 70", "GirlFingerPussy_Emma",
+            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and EmmaX.lust >= 70", "GirlFingerPussy_Emma",
             "girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Emma",
             "girl_offhand_action == 'eat_pussy'", "Lickpussy_Emma",
             "girl_offhand_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast_Emma",
@@ -2230,7 +2230,7 @@ image Emma_Sex_Anus_A2:
 
 
 label Emma_Sex_Launch(Line=primary_action):
-    $ girl_offhand_action = 0 if girl_offhand_action == "hand" else girl_offhand_action
+    $ girl_offhand_action = 0 if girl_offhand_action == "handjob" else girl_offhand_action
 
 
 
@@ -2246,9 +2246,9 @@ label Emma_Sex_Launch(Line=primary_action):
             $ offhand_action = 0
     elif Line == "hotdog":
         $ Player.Cock = "out"
-    elif Line == "foot":
-        $ ShowFeet = 1
-        $ Player.Cock = "foot"
+    elif Line == "footjob":
+        $ show_feet = 1
+        $ Player.Cock = "footjob"
     elif Line == "massage":
         $ Player.Sprite = 0
         $ Player.Cock = 0
@@ -2259,7 +2259,7 @@ label Emma_Sex_Launch(Line=primary_action):
 
     $ primary_action = Line
 
-    if EmmaX.Pose == "doggy":
+    if EmmaX.pose == "doggy":
         call Emma_Doggy_Launch (Line)
         return
     if renpy.showing("Emma_SexSprite"):
@@ -2354,7 +2354,7 @@ image Emma_Doggy_Animation:
                     "action_speed", "Emma_Doggy_Feet1",
                     "True", "Emma_Doggy_Feet0",
                     ),
-            "not Player.Sprite and ShowFeet", "Emma_Doggy_Feet0",
+            "not Player.Sprite and show_feet", "Emma_Doggy_Feet0",
             "True", Null(),
             ),
         )
@@ -4216,14 +4216,14 @@ label Emma_TJ_Launch(Line=primary_action):
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
         ease 1 zoom 2 xpos 550 yoffset 50
-    if Taboo:
+    if taboo:
         if len(Present) >= 2:
             if Present[0] != EmmaX:
-                "[EmmaX.Name] looks back at [Present[0].Name] to see if she's watching."
+                "[EmmaX.name] looks back at [Present[0].name] to see if she's watching."
             elif Present[1] != EmmaX:
-                "[EmmaX.Name] looks back at [Present[1].Name] to see if she's watching."
+                "[EmmaX.name] looks back at [Present[1].name] to see if she's watching."
         else:
-            "[EmmaX.Name] looks around to see if anyone can see her."
+            "[EmmaX.name] looks around to see if anyone can see her."
 
 
 
@@ -4237,26 +4237,26 @@ label Emma_TJ_Launch(Line=primary_action):
 
     call Emma_First_Topless
 
-    if not EmmaX.Tit and Line == "L":
+    if not EmmaX.action_counter["titjob"] and Line == "L":
         if not EmmaX.bra and not EmmaX.top:
-            "As you pull out your cock, [EmmaX.Name] cautiously places it between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [EmmaX.name] cautiously places it between her breasts and starts to rub them up and down the shaft."
         elif EmmaX.bra and not EmmaX.top:
-            "As you pull out your cock, [EmmaX.Name] cautiously places it under her [EmmaX.bra], between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [EmmaX.name] cautiously places it under her [EmmaX.bra], between her breasts and starts to rub them up and down the shaft."
         elif EmmaX.bra and EmmaX.top:
-            "As you pull out your cock, [EmmaX.Name] cautiously places it under her [EmmaX.top], between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [EmmaX.name] cautiously places it under her [EmmaX.top], between her breasts and starts to rub them up and down the shaft."
         else:
-            "As you pull out your cock, [EmmaX.Name] cautiously places it under her clothes, between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [EmmaX.name] cautiously places it under her clothes, between her breasts and starts to rub them up and down the shaft."
     elif Line == "L":
         if not EmmaX.bra and not EmmaX.top:
-            "As you pull out your cock, [EmmaX.Name] places it between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [EmmaX.name] places it between her breasts and starts to rub them up and down the shaft."
         elif EmmaX.bra and not EmmaX.top:
-            "As you pull out your cock, [EmmaX.Name] places it under her [EmmaX.bra], between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [EmmaX.name] places it under her [EmmaX.bra], between her breasts and starts to rub them up and down the shaft."
         elif EmmaX.bra and EmmaX.top:
-            "As you pull out your cock, [EmmaX.Name] places it under her [EmmaX.top], between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [EmmaX.name] places it under her [EmmaX.top], between her breasts and starts to rub them up and down the shaft."
         else:
-            "As you pull out your cock, [EmmaX.Name] places it under her clothes, between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [EmmaX.name] places it under her clothes, between her breasts and starts to rub them up and down the shaft."
     else:
-        "[EmmaX.Name] wraps her tits around your cock."
+        "[EmmaX.name] wraps her tits around your cock."
 
     show blackscreen onlayer black with dissolve
     show Emma_Sprite zorder EmmaX.sprite_layer:
@@ -4287,7 +4287,7 @@ label Emma_TJ_Reset:
         alpha 1
         zoom 1 offset (0,0) xpos EmmaX.sprite_location
 
-    "[EmmaX.Name] pulls back"
+    "[EmmaX.name] pulls back"
     return
 
 
@@ -4432,7 +4432,7 @@ image Emma_BJ_Head:
 
 
 
-            "action_speed and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
+            "Speed and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/EmmaBJFace/Emma_BJ_Mouth_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -4465,7 +4465,7 @@ image Emma_BJ_Head:
         (0,0), ConditionSwitch(
 
             "'mouth' not in EmmaX.spunk", Null(),
-            "action_speed and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
+            "Speed and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/EmmaBJFace/Emma_BJ_Spunk_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -4871,21 +4871,21 @@ label Emma_BJ_Launch(Line=primary_action):
         with dissolve
 
     $ action_speed = 0
-    if Taboo and Line == "L":
+    if taboo and Line == "L":
         if len(Present) >= 2:
             if Present[0] != EmmaX:
-                "[EmmaX.Name] looks back at [Present[0].Name] to see if she's watching."
+                "[EmmaX.name] looks back at [Present[0].name] to see if she's watching."
             elif Present[1] != EmmaX:
-                "[EmmaX.Name] looks back at [Present[1].Name] to see if she's watching."
+                "[EmmaX.name] looks back at [Present[1].name] to see if she's watching."
         else:
-            "[EmmaX.Name] looks around to see if anyone can see her."
+            "[EmmaX.name] looks around to see if anyone can see her."
         "She then bends down and puts your cock to her mouth."
     elif Line == "L":
-        "[EmmaX.Name] smoothly bends down and places your cock against her cheek."
+        "[EmmaX.name] smoothly bends down and places your cock against her cheek."
 
 
     if Line != "cum":
-        $ primary_action = "blow"
+        $ primary_action = "blowjob"
 
     show Emma_Sprite zorder EmmaX.sprite_layer:
         alpha 0
@@ -5031,7 +5031,7 @@ image Emma_HJ_Animation:
 
 label Emma_HJ_Launch(Line=primary_action):
     if renpy.showing("Emma_HJ_Animation"):
-        $ primary_action = "hand"
+        $ primary_action = "handjob"
         return
     call hide_girl(EmmaX)
     if Line == "L":
@@ -5045,21 +5045,21 @@ label Emma_HJ_Launch(Line=primary_action):
         with dissolve
 
     if Line == "L":
-        if Taboo:
+        if taboo:
             if len(Present) >= 2:
                 if Present[0] != EmmaX:
-                    "[EmmaX.Name] looks back at [Present[0].Name] to see if she's watching."
+                    "[EmmaX.name] looks back at [Present[0].name] to see if she's watching."
                 elif Present[1] != EmmaX:
-                    "[EmmaX.Name] looks back at [Present[1].Name] to see if she's watching."
+                    "[EmmaX.name] looks back at [Present[1].name] to see if she's watching."
             else:
-                "[EmmaX.Name] looks around to see if anyone can see her."
+                "[EmmaX.name] looks around to see if anyone can see her."
             "She then bends down and grabs your cock."
         else:
-            "[EmmaX.Name] bends down and grabs your cock."
+            "[EmmaX.name] bends down and grabs your cock."
 
     $ action_speed = 0
     if Line != "cum":
-        $ primary_action = "hand"
+        $ primary_action = "handjob"
     else:
         $ action_speed = 1
     pause .5
@@ -5592,11 +5592,11 @@ image Emma_FJ_Calf:
 
 
 label Emma_FJ_Launch(Line=primary_action):
-    $ primary_action = "foot"
+    $ primary_action = "footjob"
     $ Player.Sprite = 1
-    $ ShowFeet = 1
-    if EmmaX.Pose == "doggy":
-        call Emma_Sex_Launch ("foot")
+    $ show_feet = 1
+    if EmmaX.pose == "doggy":
+        call Emma_Sex_Launch ("footjob")
         return
 
     if renpy.showing("Emma_FJ_Animation"):
@@ -5650,7 +5650,7 @@ label Emma_FJ_Reset:
         alpha 1
         zoom 1 offset (0,0) xpos EmmaX.sprite_location
 
-    "[EmmaX.Name] stands back up."
+    "[EmmaX.name] stands back up."
     return
 
 
@@ -5729,27 +5729,27 @@ image Emma_Behind_Podium:
 label Emma_Kissing_Launch(T=primary_action, Set=1):
     call hide_girl(EmmaX)
     $ primary_action = T
-    $ EmmaX.Pose = "kiss" if Set else EmmaX.Pose
+    $ EmmaX.pose = "kiss" if Set else EmmaX.pose
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location)
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(stage_center):
         ease 0.5 offset (0,0) zoom 2 alpha 1
     return
 
 label Emma_Kissing_Smooch:
-    $ EmmaX.FaceChange("kiss")
+    $ EmmaX.change_face("kiss")
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos EmmaX.sprite_location zoom 1
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         zoom 1
-    $ EmmaX.FaceChange("sexy")
+    $ EmmaX.change_face("_sexy")
     return
 
 label Emma_Breasts_Launch(T=primary_action, Set=1):
     call hide_girl(EmmaX)
     $ primary_action = T
-    $ EmmaX.Pose = "breasts" if Set else EmmaX.Pose
+    $ EmmaX.pose = "breasts" if Set else EmmaX.pose
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 2 alpha 1
@@ -5758,7 +5758,7 @@ label Emma_Breasts_Launch(T=primary_action, Set=1):
 label Emma_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(EmmaX)
     $ primary_action = T
-    $ EmmaX.Pose = "mid" if Set else EmmaX.Pose
+    $ EmmaX.pose = "mid" if Set else EmmaX.pose
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1
@@ -5767,7 +5767,7 @@ label Emma_Middle_Launch(T=primary_action, Set=1):
 label Emma_Pussy_Launch(T=primary_action, Set=1):
     call hide_girl(EmmaX)
     $ primary_action = T
-    $ EmmaX.Pose = "pussy" if Set else EmmaX.Pose
+    $ EmmaX.pose = "pussy" if Set else EmmaX.pose
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         ease 0.5 pos (700,-400) offset (0,0) zoom 2 alpha 1
     return
@@ -5786,7 +5786,7 @@ label Emma_Pos_Reset(T=0, Set=0):
         yzoom 1
         alpha 1
         pos (EmmaX.sprite_location,50)
-    $ EmmaX.Pose = "full" if Set else 0
+    $ EmmaX.pose = "full" if Set else 0
     $ primary_action = T
     return
 

@@ -3023,7 +3023,7 @@ label Emma_Wardrobe_Menu:
                     if EmmaX.seen_breasts or approval_check(EmmaX, 1000, TabM=(3-Public)):
                         ch_e "So do I."
                         $ EmmaX.bra = "_corset"
-                        $ EmmaX.TitsUp = 1
+                        $ EmmaX.top_pulled_up = 1
                     else:
                         call Display_dress_screen (EmmaX)
                         if not _return:

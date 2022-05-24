@@ -703,7 +703,7 @@ label change_out_of_gym_clothes(Girls = []):
 
     return
 
-label hide_girl(Girl, hide_Sprite = False):
+label hide_girl(Girl, hide_sprite = False):
     if Girl == RogueX:
         call Rogue_Sex_Reset
         hide Rogue_SexSprite
@@ -712,7 +712,7 @@ label hide_girl(Girl, hide_Sprite = False):
         hide Rogue_BJ_Animation
         hide Rogue_TJ_Animation
 
-        if hide_Sprite:
+        if hide_sprite:
             hide Rogue_Sprite
     elif Girl == KittyX:
         call Kitty_Sex_Reset
@@ -722,7 +722,7 @@ label hide_girl(Girl, hide_Sprite = False):
         hide Kitty_BJ_Animation
         hide Kitty_TJ_Animation
 
-        if hide_Sprite:
+        if hide_sprite:
             hide Kitty_Sprite
     elif Girl == EmmaX:
         call Emma_Sex_Reset
@@ -733,7 +733,7 @@ label hide_girl(Girl, hide_Sprite = False):
         hide Emma_TJ_Animation
         hide Emma_FJ_Animation
 
-        if hide_Sprite:
+        if hide_sprite:
             hide Emma_Sprite
     elif Girl == LauraX:
         call Laura_Sex_Reset
@@ -743,7 +743,7 @@ label hide_girl(Girl, hide_Sprite = False):
         hide Laura_BJ_Animation
         hide Laura_TJ_Animation
 
-        if hide_Sprite:
+        if hide_sprite:
             hide Laura_Sprite
     elif Girl == JeanX:
         call Jean_Sex_Reset
@@ -754,7 +754,7 @@ label hide_girl(Girl, hide_Sprite = False):
         hide Jean_TJ_Animation
         hide Jean_PJ_Animation
 
-        if hide_Sprite:
+        if hide_sprite:
             hide Jean_Sprite
     elif Girl == StormX:
         hide Storm_SexSprite
@@ -763,7 +763,7 @@ label hide_girl(Girl, hide_Sprite = False):
         hide Storm_BJ_Animation
         hide Storm_TJ_Animation
 
-        if hide_Sprite:
+        if hide_sprite:
             hide Storm_Sprite
     elif Girl == JubesX:
         call Jubes_Sex_Reset
@@ -773,7 +773,7 @@ label hide_girl(Girl, hide_Sprite = False):
         hide Jubes_BJ_Animation
         hide Jubes_TJ_Animation
 
-        if hide_Sprite:
+        if hide_sprite:
             hide Jubes_Sprite
 
     return
@@ -1064,7 +1064,7 @@ label event_calls(event_Girls=[]):
 
 label display_girl(Girl, check_if_dressed = True, trigger_reset = True, x_position = 0, y_position = 50):
     if Girl not in Party and Girl.location != bg_current:
-        call hide_girl(Girl, hide_Sprite = True)
+        call hide_girl(Girl, hide_sprite = True)
 
         $ Girl.change_outfit(outfit_changed = 1)
 
@@ -1356,25 +1356,25 @@ label tenth_round:
 
 label hide_all(cull = False):
     if cull or RogueX.location != bg_current:
-        call hide_girl(RogueX, hide_Sprite = True)
+        call hide_girl(RogueX, hide_sprite = True)
 
     if cull or KittyX.location != bg_current:
-        call hide_girl(KittyX, hide_Sprite = True)
+        call hide_girl(KittyX, hide_sprite = True)
 
     if cull or EmmaX.location != bg_current:
-        call hide_girl(EmmaX, hide_Sprite = True)
+        call hide_girl(EmmaX, hide_sprite = True)
 
     if cull or LauraX.location != bg_current:
-        call hide_girl(LauraX, hide_Sprite = True)
+        call hide_girl(LauraX, hide_sprite = True)
 
     if cull or JeanX.location != bg_current:
-        call hide_girl(JeanX, hide_Sprite = True)
+        call hide_girl(JeanX, hide_sprite = True)
 
     if cull or StormX.location != bg_current:
-        call hide_girl(StormX, hide_Sprite = True)
+        call hide_girl(StormX, hide_sprite = True)
 
     if cull or JubesX.location != bg_current:
-        call hide_girl(JubesX, hide_Sprite = True)
+        call hide_girl(JubesX, hide_sprite = True)
 
     if cull or "bg_study" != bg_current:
         hide Xavier_Sprite

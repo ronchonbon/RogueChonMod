@@ -11,17 +11,23 @@ While running game code:
     call event_calls
   File "game/utilities.rpy", line 789, in script call
     call DateNight
-  File "game/date_night.rpy", line 3973, in script call
-    call Girl_Date_End (Party[0])
-  File "game/date_night.rpy", line 4349, in script call
-    call sleepover (Girl)
-  File "game/locations.rpy", line 735, in script call
-    call event_calls
-  File "game/utilities.rpy", line 844, in script call
-    call meet_Laura
-  File "game/laura_scenes.rpy", line 137, in script
-    ch_l "Also I have claws."
-AttributeError: 'GirlClass' object has no attribute 'Claws'
+  File "game/locations.rpy", line 615, in script call
+    call chat
+  File "game/chat.rpy", line 122, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu
+  File "game/menus.rpy", line 61, in script call
+    call girl_sex_menu(focused_Girl)
+  File "game/actions.rpy", line 135, in script call
+    call action_disapproved(Girl, primary_action)
+  File "game/reactions.rpy", line 839, in script call
+    call action_not_done_yet_lines(Girl, action)
+  File "game/dialogue.rpy", line 1176, in script
+    $ lines = ["I'm" + Girl.like + "not ready for that, " + Girl.player_petname + ". . .",
+  File "game/dialogue.rpy", line 1181, in <module>
+    "I don't know that I'm. . .", + Girl.like + "ready? . .",
+TypeError: bad operand type for unary +: 'unicode'
 
 -- Full Traceback ------------------------------------------------------------
 
@@ -36,66 +42,29 @@ Full traceback:
     call event_calls
   File "game/utilities.rpy", line 789, in script call
     call DateNight
-  File "game/date_night.rpy", line 3973, in script call
-    call Girl_Date_End (Party[0])
-  File "game/date_night.rpy", line 4349, in script call
-    call sleepover (Girl)
-  File "game/locations.rpy", line 735, in script call
-    call event_calls
-  File "game/utilities.rpy", line 844, in script call
-    call meet_Laura
-  File "game/laura_scenes.rpy", line 137, in script
-    ch_l "Also I have claws."
-  File "renpy/ast.py", line 721, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "renpy/exports.py", line 1419, in say
-    who(what, *args, **kwargs)
-  File "renpy/character.py", line 1249, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
-  File "renpy/character.py", line 901, in do_display
-    **display_args)
-  File "renpy/character.py", line 647, in display_say
-    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
-  File "renpy/ui.py", line 298, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "renpy/display/core.py", line 3325, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "renpy/display/core.py", line 3737, in interact_core
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 558, in visit_all
-    for d in self.visit():
-  File "renpy/display/layout.py", line 1415, in visit
-    self.update(self.last_st, self.last_at)
-  File "renpy/display/layout.py", line 1426, in update
-    raw_child, redraw = self.function(st, at, *self.args, **self.kwargs)
-  File "renpy/display/layout.py", line 1517, in condition_switch_show
-    return condition_switch_pick(switch), None
-  File "renpy/display/layout.py", line 1508, in condition_switch_pick
-    if renpy.python.py_eval_bytecode(code):
-  File "renpy/python.py", line 2269, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "<none>", line 1, in <module>
-AttributeError: 'GirlClass' object has no attribute 'Claws'
+  File "game/locations.rpy", line 615, in script call
+    call chat
+  File "game/chat.rpy", line 122, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu
+  File "game/menus.rpy", line 61, in script call
+    call girl_sex_menu(focused_Girl)
+  File "game/actions.rpy", line 135, in script call
+    call action_disapproved(Girl, primary_action)
+  File "game/reactions.rpy", line 839, in script call
+    call action_not_done_yet_lines(Girl, action)
+  File "game/dialogue.rpy", line 1176, in script
+    $ lines = ["I'm" + Girl.like + "not ready for that, " + Girl.player_petname + ". . .",
+  File "renpy/ast.py", line 928, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "renpy/python.py", line 2245, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/dialogue.rpy", line 1181, in <module>
+    "I don't know that I'm. . .", + Girl.like + "ready? . .",
+TypeError: bad operand type for unary +: 'unicode'
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like 0.997f2
-Tue May 24 14:28:20 2022
+Tue May 24 15:23:57 2022

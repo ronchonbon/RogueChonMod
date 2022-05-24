@@ -106,7 +106,7 @@ label first_action_approval_reactions(Girl, action):
 
 label auto_approved_reactions(Girl, action):
     if action in ["fondle_thighs", "fondle_breasts"]:
-        $ Girl.change_face("sexy")
+        $ Girl.change_face("_sexy")
 
         call auto_accepted_narrations(Girl, action)
     else:
@@ -209,19 +209,19 @@ label first_time_asking_reactions(Girl, action):
         $ Girl.blushing = 1
 
     if action == "titjob":
-        if Girl.blowjob:
+        if Girl.action_counter["blowjob"]:
             $ Girl.mouth = "_smile"
 
-            call mouth_not_enough(Girl)
+            call mouth_not_enough(Girl, action)
         elif Girl.action_counter["handjob"]:
             $ Girl.mouth = "_smile"
 
-            call hand_not_enough(Girl)
+            call hand_not_enough(Girl, action)
     elif action == "blowjob":
         if Girl.action_counter["handjob"]:
             $ Girl.mouth = "_smile"
 
-            call hand_not_enough(Girl)
+            call hand_not_enough(Girl, action)
 
     if Girl.forced:
         $ Girl.change_face("_sad")

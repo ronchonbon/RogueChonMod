@@ -356,7 +356,7 @@ image Jean_Sprite:
             "not second_girl_offhand_action or second_girl_primary_action != 'masturbation' or focused_Girl == JeanX", Null(),
 
 
-            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and JeanX.Lust >= 70", "GirlFingerPussy_Jean",
+            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and JeanX.lust >= 70", "GirlFingerPussy_Jean",
             "second_girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Jean",
             "second_girl_offhand_action == 'fondle_breasts'", "GirlGropeRightBreast_Jean",
             "second_girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
@@ -413,7 +413,7 @@ image Jean_Sprite:
             "not second_girl_primary_action or focused_Girl != JeanX", Null(),
 
 
-            "second_girl_primary_action == 'fondle_pussy' and primary_action != 'sex' and JeanX.Lust >= 70", "GirlFingerPussy_Jean",
+            "second_girl_primary_action == 'fondle_pussy' and primary_action != 'sex' and JeanX.lust >= 70", "GirlFingerPussy_Jean",
             "second_girl_primary_action == 'fondle_pussy'", "GirlGropePussy_Jean",
             "second_girl_primary_action == 'eat_pussy'", "Lickpussy_Jean",
             "second_girl_primary_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast_Jean",
@@ -436,7 +436,7 @@ image Jean_Sprite:
             "primary_action != 'lesbian' or focused_Girl == JeanX or not girl_offhand_action", Null(),
 
 
-            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and JeanX.Lust >= 70", "GirlFingerPussy_Jean",
+            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and JeanX.lust >= 70", "GirlFingerPussy_Jean",
             "girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Jean",
             "girl_offhand_action == 'eat_pussy'", "Lickpussy_Jean",
             "girl_offhand_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast_Jean",
@@ -727,7 +727,7 @@ image Jean_Doggy_Animation:
                     "action_speed", "Jean_Doggy_Feet1",
                     "True", "Jean_Doggy_Feet0",
                     ),
-            "not Player.Sprite and ShowFeet", "Jean_Doggy_Feet0",
+            "not Player.Sprite and show_feet", "Jean_Doggy_Feet0",
             "True", Null(),
             ),
         )
@@ -1055,7 +1055,7 @@ image Jean_Doggy_Ass:
             "JeanX.underwear and not JeanX.underwear_pulled_down", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
             "primary_action == 'finger_ass' or offhand_action == 'finger_ass'", "Jean_Anal_Fingering",
             "primary_action == 'dildo anal'", "Jean_Anal_Fucking",
-            "JeanX.Loose", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
+            "JeanX.used_to_anal", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
             "True", "images/JeanDoggy/Jean_Doggy_Asshole_Tight.png",
             ),
 
@@ -1064,7 +1064,7 @@ image Jean_Doggy_Ass:
 
             "'anal' not in JeanX.spunk or Player.Sprite", Null(),
             "Player.Cock == 'anal'", "images/JeanDoggy/Jean_Doggy_SpunkAnalOpen.png",
-            "JeanX.Loose", "images/JeanDoggy/Jean_Doggy_SpunkAnalLoose.png",
+            "JeanX.used_to_anal", "images/JeanDoggy/Jean_Doggy_SpunkAnalLoose.png",
             "True", "images/JeanDoggy/Jean_Doggy_SpunkAnalLoose.png",
             ),
         (0,0), ConditionSwitch(
@@ -3203,7 +3203,7 @@ image Jean_Sex_Hotdog_action_speed2:
 
 
 label Jean_Sex_Launch(Line=primary_action):
-    $ girl_offhand_action = 0 if girl_offhand_action == "hand" else girl_offhand_action
+    $ girl_offhand_action = 0 if girl_offhand_action == "handjob" else girl_offhand_action
 
 
 
@@ -3222,10 +3222,10 @@ label Jean_Sex_Launch(Line=primary_action):
         if JeanX.legs_number() == 5:
             $ JeanX.upskirt = 1
         $ Player.Cock = "out"
-    elif Line == "foot":
-        $ ShowFeet = 1
-        $ Player.Cock = "foot"
-        $ JeanX.Pose = "doggy"
+    elif Line == "footjob":
+        $ show_feet = 1
+        $ Player.Cock = "footjob"
+        $ JeanX.pose = "doggy"
     elif Line == "massage":
         $ Player.Sprite = 0
         $ Player.Cock = 0
@@ -3235,7 +3235,7 @@ label Jean_Sex_Launch(Line=primary_action):
         $ action_speed = 0
     $ primary_action = Line
 
-    if JeanX.Pose == "doggy":
+    if JeanX.pose == "doggy":
         call Jean_Doggy_Launch (Line)
         return
     if renpy.showing("Jean_SexSprite"):
@@ -3422,7 +3422,7 @@ image Jean_BJ_Head:
 
 
 
-            "action_speed and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
+            "Speed and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/JeanBJFace/Jean_BJ_Mouth_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -3455,7 +3455,7 @@ image Jean_BJ_Head:
         (0,0), ConditionSwitch(
 
             "'mouth' not in JeanX.spunk", Null(),
-            "action_speed and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
+            "Speed and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/JeanBJFace/Jean_BJ_Spunk_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -3934,21 +3934,21 @@ label Jean_BJ_Launch(Line=primary_action):
     $ action_speed = 0
 
     if Line != "cum":
-        $ primary_action = "blow"
+        $ primary_action = "blowjob"
 
     show Jean_BJ_Animation zorder 150:
         pos (645,510)
-    if Taboo and Line == "L":
+    if taboo and Line == "L":
         if len(Present) >= 2:
             if Present[0] != JeanX:
-                "[JeanX.Name] looks back at [Present[0].Name] to see if she's watching."
+                "[JeanX.name] looks back at [Present[0].name] to see if she's watching."
             elif Present[1] != JeanX:
-                "[JeanX.Name] looks back at [Present[1].Name] to see if she's watching."
+                "[JeanX.name] looks back at [Present[1].name] to see if she's watching."
         else:
-            "[JeanX.Name] looks around to see if anyone can see her."
+            "[JeanX.name] looks around to see if anyone can see her."
         "She then bends down and puts your cock to her mouth."
     elif Line == "L":
-        "[JeanX.Name] smoothly bends down and places your cock against her cheek."
+        "[JeanX.name] smoothly bends down and places your cock against her cheek."
 
     return
 
@@ -4099,7 +4099,7 @@ image Jean_HJ_Animation:
 
 label Jean_HJ_Launch(Line=primary_action):
     if renpy.showing("Jean_HJ_Animation"):
-        $ primary_action = "hand"
+        $ primary_action = "handjob"
         return
     call hide_girl(JeanX)
     $ JeanX.arm_pose = 1
@@ -4115,7 +4115,7 @@ label Jean_HJ_Launch(Line=primary_action):
 
     $ action_speed = 0
     if Line != "cum":
-        $ primary_action = "hand"
+        $ primary_action = "handjob"
     else:
         $ action_speed = 1
     pause .5
@@ -5200,7 +5200,7 @@ label Jean_TJ_Reset:
         ease 1 zoom 1.5 xpos 700 yoffset 50
         pause .5
         ease .5 zoom 1 xpos JeanX.sprite_location yoffset 0
-    "[JeanX.Name] pulls back"
+    "[JeanX.name] pulls back"
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         alpha 1
         zoom 1 offset (0,0) xpos JeanX.sprite_location
@@ -5221,27 +5221,27 @@ label Jean_TJ_Reset:
 label Jean_Kissing_Launch(T=primary_action, Set=1):
     call hide_girl(JeanX)
     $ primary_action = T
-    $ JeanX.Pose = "kiss" if Set else JeanX.Pose
+    $ JeanX.pose = "kiss" if Set else JeanX.pose
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location)
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(stage_center):
         ease 0.5 offset (0,0) zoom 2 alpha 1
     return
 
 label Jean_Kissing_Smooch:
-    $ JeanX.FaceChange("kiss")
+    $ JeanX.change_face("kiss")
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos JeanX.sprite_location zoom 1
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         zoom 1
-    $ JeanX.FaceChange("sexy")
+    $ JeanX.change_face("_sexy")
     return
 
 label Jean_Breasts_Launch(T=primary_action, Set=1):
     call hide_girl(JeanX)
     $ primary_action = T
-    $ JeanX.Pose = "breasts" if Set else JeanX.Pose
+    $ JeanX.pose = "breasts" if Set else JeanX.pose
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 2 alpha 1
@@ -5250,7 +5250,7 @@ label Jean_Breasts_Launch(T=primary_action, Set=1):
 label Jean_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(JeanX)
     $ primary_action = T
-    $ JeanX.Pose = "mid" if Set else JeanX.Pose
+    $ JeanX.pose = "mid" if Set else JeanX.pose
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1
@@ -5259,7 +5259,7 @@ label Jean_Middle_Launch(T=primary_action, Set=1):
 label Jean_Pussy_Launch(T=primary_action, Set=1):
     call hide_girl(JeanX)
     $ primary_action = T
-    $ JeanX.Pose = "pussy" if Set else JeanX.Pose
+    $ JeanX.pose = "pussy" if Set else JeanX.pose
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         ease 0.5 pos (700,-400) offset (0,0) zoom 2 alpha 1
     return
@@ -5278,7 +5278,7 @@ label Jean_Pos_Reset(T=0, Set=0):
         yzoom 1
         alpha 1
         pos (JeanX.sprite_location,50)
-    $ JeanX.Pose = "full" if Set else 0
+    $ JeanX.pose = "full" if Set else 0
     $ primary_action = T
     return
 

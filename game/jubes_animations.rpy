@@ -380,7 +380,7 @@ image Jubes_Sprite:
             "not second_girl_offhand_action or second_girl_primary_action != 'masturbation' or focused_Girl == JubesX", Null(),
 
 
-            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and JubesX.Lust >= 70", "GirlFingerPussy_Jubes",
+            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and JubesX.lust >= 70", "GirlFingerPussy_Jubes",
             "second_girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Jubes",
             "second_girl_offhand_action == 'fondle_breasts'", "GirlGropeRightBreast_Jubes",
             "second_girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
@@ -437,7 +437,7 @@ image Jubes_Sprite:
             "not second_girl_primary_action or focused_Girl != JubesX", Null(),
 
 
-            "second_girl_primary_action == 'fondle_pussy' and primary_action != 'sex' and JubesX.Lust >= 70", "GirlFingerPussy_Jubes",
+            "second_girl_primary_action == 'fondle_pussy' and primary_action != 'sex' and JubesX.lust >= 70", "GirlFingerPussy_Jubes",
             "second_girl_primary_action == 'fondle_pussy'", "GirlGropePussy_Jubes",
             "second_girl_primary_action == 'eat_pussy'", "Lickpussy_Jubes",
             "second_girl_primary_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast_Jubes",
@@ -460,7 +460,7 @@ image Jubes_Sprite:
             "primary_action != 'lesbian' or focused_Girl == JubesX or not girl_offhand_action", Null(),
 
 
-            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and JubesX.Lust >= 70", "GirlFingerPussy_Jubes",
+            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and JubesX.lust >= 70", "GirlFingerPussy_Jubes",
             "girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Jubes",
             "girl_offhand_action == 'eat_pussy'", "Lickpussy_Jubes",
             "girl_offhand_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast_Jubes",
@@ -707,7 +707,7 @@ image Jubes_Doggy_Animation:
                     "action_speed", "Jubes_Doggy_Feet1",
                     "True", "Jubes_Doggy_Feet0",
                     ),
-            "not Player.Sprite and ShowFeet", "Jubes_Doggy_Shins",
+            "not Player.Sprite and show_feet", "Jubes_Doggy_Shins",
             "True", Null(),
             ),
         )
@@ -1032,7 +1032,7 @@ image Jubes_Doggy_Ass:
             "JubesX.underwear and not JubesX.underwear_pulled_down", "images/JubesDoggy/Jubes_Doggy_Asshole_Loose.png",
             "primary_action == 'finger_ass' or offhand_action == 'finger_ass'", "Jubes_Anal_Fingering",
             "primary_action == 'dildo anal'", "Jubes_Anal_Fucking",
-            "JubesX.Loose", "images/JubesDoggy/Jubes_Doggy_Asshole_Loose.png",
+            "JubesX.used_to_anal", "images/JubesDoggy/Jubes_Doggy_Asshole_Loose.png",
             "True", "images/JubesDoggy/Jubes_Doggy_Asshole_Tight.png",
             ),
 
@@ -1041,7 +1041,7 @@ image Jubes_Doggy_Ass:
 
             "'anal' not in JubesX.spunk or Player.Sprite", Null(),
             "Player.Cock == 'anal'", "images/JubesDoggy/Jubes_Doggy_SpunkAnalOpen.png",
-            "JubesX.Loose", "images/JubesDoggy/Jubes_Doggy_SpunkAnalLoose.png",
+            "JubesX.used_to_anal", "images/JubesDoggy/Jubes_Doggy_SpunkAnalLoose.png",
             "True", "images/JubesDoggy/Jubes_Doggy_SpunkAnalLoose.png",
             ),
         (0,0), ConditionSwitch(
@@ -3819,7 +3819,7 @@ image Jubes_Mega_Mask:
 
 label Jubes_Sex_Launch(Line=primary_action):
     return
-    $ girl_offhand_action = 0 if girl_offhand_action == "hand" else girl_offhand_action
+    $ girl_offhand_action = 0 if girl_offhand_action == "handjob" else girl_offhand_action
     $ Player.Sprite = 1
     $ Line = "solo" if not Line else Line
     if Line == "sex":
@@ -3835,9 +3835,9 @@ label Jubes_Sex_Launch(Line=primary_action):
         $ Player.Cock = "out"
     elif Line == "hotdog":
         $ Player.Cock = "out"
-    elif Line == "foot":
-        $ ShowFeet = 1
-        $ Player.Cock = "foot"
+    elif Line == "footjob":
+        $ show_feet = 1
+        $ Player.Cock = "footjob"
     elif Line == "massage":
         $ Player.Sprite = 0
         $ Player.Cock = 0
@@ -3847,7 +3847,7 @@ label Jubes_Sex_Launch(Line=primary_action):
         $ action_speed = 0
     $ primary_action = Line
 
-    if JubesX.Pose == "doggy":
+    if JubesX.pose == "doggy":
         call Jubes_Doggy_Launch (Line)
         return
     if renpy.showing("Jubes_SexSprite"):
@@ -5034,18 +5034,18 @@ label Jubes_BJ_Launch(Line=primary_action):
 
     $ action_speed = 0
     if Line == "L":
-        if Taboo:
+        if taboo:
             if len(Present) >= 2:
                 if Present[0] != JubesX:
-                    "[JubesX.Name] looks back at [Present[0].Name] to see if she's watching."
+                    "[JubesX.name] looks back at [Present[0].name] to see if she's watching."
                 elif Present[1] != JubesX:
-                    "[JubesX.Name] looks back at [Present[1].Name] to see if she's watching."
+                    "[JubesX.name] looks back at [Present[1].name] to see if she's watching."
             else:
-                "[JubesX.Name] casually glances around to see if anyone can see her."
-        "[JubesX.Name] smoothly bends down and places your cock against her cheek."
+                "[JubesX.name] casually glances around to see if anyone can see her."
+        "[JubesX.name] smoothly bends down and places your cock against her cheek."
 
     if Line != "cum":
-        $ primary_action = "blow"
+        $ primary_action = "blowjob"
 
     show Jubes_Sprite zorder JubesX.sprite_layer:
         alpha 0
@@ -5194,7 +5194,7 @@ image Jubes_HJ_Animation:
 label Jubes_HJ_Launch(Line=primary_action):
     return
     if renpy.showing("Jubes_HJ_Animation"):
-        $ primary_action = "hand"
+        $ primary_action = "handjob"
         return
     call hide_girl(JubesX)
     if Line == "L":
@@ -5209,7 +5209,7 @@ label Jubes_HJ_Launch(Line=primary_action):
 
     $ action_speed = 0
     if Line != "cum":
-        $ primary_action = "hand"
+        $ primary_action = "handjob"
     else:
         $ action_speed = 1
     pause .5
@@ -6323,15 +6323,15 @@ label Jubes_TJ_Launch(Line=primary_action):
         alpha 1
         ease 1 zoom 2.3 xpos 750 yoffset -100
     if Line == "L":
-        if Taboo:
+        if taboo:
             if len(Present) >= 2:
                 if Present[0] != JubesX:
-                    "[JubesX.Name] looks back at [Present[0].Name] to see if she's watching."
+                    "[JubesX.name] looks back at [Present[0].name] to see if she's watching."
                 elif Present[1] != JubesX:
-                    "[JubesX.Name] looks back at [Present[1].Name] to see if she's watching."
+                    "[JubesX.name] looks back at [Present[1].name] to see if she's watching."
             else:
-                "[JubesX.Name] casually glances around to see if anyone can see her."
-        "[JubesX.Name] bends over and places your cock between her breasts."
+                "[JubesX.name] casually glances around to see if anyone can see her."
+        "[JubesX.name] bends over and places your cock between her breasts."
 
     if JubesX.bra and JubesX.top:
         "She throws off her [JubesX.top] and her [JubesX.bra]."
@@ -6372,7 +6372,7 @@ label Jubes_TJ_Reset:
         ease 1 zoom 1.5 xpos 700 yoffset 50
         pause .5
         ease .5 zoom 1 xpos JubesX.sprite_location yoffset 0
-    "[JubesX.Name] pulls back"
+    "[JubesX.name] pulls back"
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         zoom 1 offset (0,0) xpos JubesX.sprite_location
@@ -6393,27 +6393,27 @@ label Jubes_TJ_Reset:
 label Jubes_Kissing_Launch(T=primary_action, Set=1):
     call hide_girl(JubesX)
     $ primary_action = T
-    $ JubesX.Pose = "kiss" if Set else JubesX.Pose
+    $ JubesX.pose = "kiss" if Set else JubesX.pose
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location)
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_center):
         ease 0.5 offset (0,0) zoom 2 alpha 1
     return
 
 label Jubes_Kissing_Smooch:
-    $ JubesX.FaceChange("kiss")
+    $ JubesX.change_face("kiss")
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos JubesX.sprite_location zoom 1
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         zoom 1
-    $ JubesX.FaceChange("sexy")
+    $ JubesX.change_face("_sexy")
     return
 
 label Jubes_Breasts_Launch(T=primary_action, Set=1):
     call hide_girl(JubesX)
     $ primary_action = T
-    $ JubesX.Pose = "breasts" if Set else JubesX.Pose
+    $ JubesX.pose = "breasts" if Set else JubesX.pose
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 2 alpha 1
@@ -6422,7 +6422,7 @@ label Jubes_Breasts_Launch(T=primary_action, Set=1):
 label Jubes_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(JubesX)
     $ primary_action = T
-    $ JubesX.Pose = "mid" if Set else JubesX.Pose
+    $ JubesX.pose = "mid" if Set else JubesX.pose
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1
@@ -6431,7 +6431,7 @@ label Jubes_Middle_Launch(T=primary_action, Set=1):
 label Jubes_Pussy_Launch(T=primary_action, Set=1):
     call hide_girl(JubesX)
     $ primary_action = T
-    $ JubesX.Pose = "pussy" if Set else JubesX.Pose
+    $ JubesX.pose = "pussy" if Set else JubesX.pose
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         ease 0.5 pos (700,-400) offset (0,0) zoom 2 alpha 1
     return
@@ -6450,7 +6450,7 @@ label Jubes_Pos_Reset(T=0, Set=0):
         yzoom 1
         alpha 1
         pos (JubesX.sprite_location,50)
-    $ JubesX.Pose = "full" if Set else 0
+    $ JubesX.pose = "full" if Set else 0
     $ primary_action = T
     return
 

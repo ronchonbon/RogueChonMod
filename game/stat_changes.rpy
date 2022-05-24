@@ -258,7 +258,7 @@ label first_action_changes(Girl, action):
                     $ Girl.change_stat("love", 90, 10)
                     $ Girl.change_stat("obedience", 70, 30)
                     $ Girl.change_stat("inhibition", 80, 70)
-            elif not Girl.Loose:
+            elif not Girl.used_to_anal:
                 if Girl.forced:
                     $ Girl.change_stat("love", 90, -20)
                     $ Girl.change_stat("obedience", 70, 10)

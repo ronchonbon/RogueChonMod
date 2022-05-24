@@ -428,7 +428,7 @@ image Rogue_Sprite:
         (0,0), ConditionSwitch(
 
             "primary_action == 'lesbian' or not girl_offhand_action or focused_Girl != RogueX", Null(),
-            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and RogueX.Lust >= 70", "GirlFingerPussy",
+            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and RogueX.lust >= 70", "GirlFingerPussy",
             "girl_offhand_action == 'fondle_pussy'", "GirlGropePussy",
             "girl_offhand_action == 'fondle_breasts' and (offhand_action == 'fondle_breasts' or offhand_action == 'suck_breasts')", "GirlGropeLeftBreast",
             "girl_offhand_action == 'fondle_breasts' and (primary_action == 'fondle_breasts' or primary_action == 'suck_breasts')", "GirlGropeRightBreast",
@@ -444,7 +444,7 @@ image Rogue_Sprite:
 
             "not second_girl_offhand_action or second_girl_primary_action != 'masturbation' or focused_Girl == RogueX", Null(),
 
-            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and RogueX.Lust >= 70", "GirlFingerPussy",
+            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and RogueX.lust >= 70", "GirlFingerPussy",
             "second_girl_offhand_action == 'fondle_pussy'", "GirlGropePussy",
             "second_girl_offhand_action == 'fondle_breasts'", "GirlGropeRightBreast",
             "second_girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
@@ -496,7 +496,7 @@ image Rogue_Sprite:
         (0,0), ConditionSwitch(
 
             "not second_girl_primary_action or focused_Girl != RogueX", Null(),
-            "second_girl_primary_action == 'fondle_pussy' and primary_action != 'sex' and RogueX.Lust >= 70", "GirlFingerPussy",
+            "second_girl_primary_action == 'fondle_pussy' and primary_action != 'sex' and RogueX.lust >= 70", "GirlFingerPussy",
             "second_girl_primary_action == 'fondle_pussy'", "GirlGropePussy",
             "second_girl_primary_action == 'eat_pussy'", "Lickpussy",
             "second_girl_primary_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast",
@@ -514,7 +514,7 @@ image Rogue_Sprite:
         (0,0), ConditionSwitch(
 
             "primary_action != 'lesbian' or not girl_offhand_action or focused_Girl == RogueX", Null(),
-            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and RogueX.Lust >= 70", "GirlFingerPussy",
+            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and RogueX.lust >= 70", "GirlFingerPussy",
             "girl_offhand_action == 'fondle_pussy'", "GirlGropePussy",
             "girl_offhand_action == 'eat_pussy'", "Lickpussy",
             "girl_offhand_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast",
@@ -802,7 +802,7 @@ image Rogue_Doggy_Animation:
                     "action_speed", "Rogue_Doggy_Feet1",
                     "True", "Rogue_Doggy_Feet0",
                     ),
-            "not Player.Sprite and ShowFeet", "Rogue_Doggy_Feet0",
+            "not Player.Sprite and show_feet", "Rogue_Doggy_Feet0",
             "True", Null(),
             ),
         )
@@ -1007,7 +1007,7 @@ image Rogue_Doggy_Ass = LiveComposite(
             "RogueX.underwear and not RogueX.underwear_pulled_down", "images/RogueDoggy/Rogue_Doggy_Asshole_Loose.png",
             "primary_action == 'finger_ass' or offhand_action == 'finger_ass'", "Rogue_Anal_Fingering",
             "primary_action == 'dildo anal'", "Rogue_Anal_Fucking",
-            "RogueX.Loose", "images/RogueDoggy/Rogue_Doggy_Asshole_Loose.png",
+            "RogueX.used_to_anal", "images/RogueDoggy/Rogue_Doggy_Asshole_Loose.png",
             "True", "images/RogueDoggy/Rogue_Doggy_Asshole_Tight.png",
             ),
 
@@ -1016,7 +1016,7 @@ image Rogue_Doggy_Ass = LiveComposite(
 
             "'anal' not in RogueX.spunk or Player.Sprite", Null(),
             "Player.Cock == 'anal'", "images/RogueDoggy/Rogue_Doggy_SpunkAnalOpen.png",
-            "RogueX.Loose", "images/RogueDoggy/Rogue_Doggy_SpunkAnalLoose.png",
+            "RogueX.used_to_anal", "images/RogueDoggy/Rogue_Doggy_SpunkAnalLoose.png",
             "True", "images/RogueDoggy/Rogue_Doggy_SpunkAnalLoose.png",
             ),
         (0,0), ConditionSwitch(
@@ -1204,7 +1204,7 @@ image Zero_Doggy_Up:
             ),
     contains:
         ConditionSwitch(
-            "Player.grool", "images/RogueDoggy/Rogue_Doggy_Cock_U_W.png",
+            "Player.cock_wet", "images/RogueDoggy/Rogue_Doggy_Cock_U_W.png",
             "True", Null(),
             ),
 
@@ -1238,7 +1238,7 @@ image Zero_Doggy_Insert:
             ),
     contains:
         ConditionSwitch(
-            "Player.grool", "images/RogueDoggy/Rogue_Doggy_Cock_In_Wet.png",
+            "Player.cock_wet", "images/RogueDoggy/Rogue_Doggy_Cock_In_Wet.png",
             "True", Null(),
             ),
     contains:
@@ -2490,7 +2490,7 @@ image Rogue_Sex_Legs:
 
         (0,0), ConditionSwitch(
 
-            "not action_speed or Player.Cock == 'footjob' or ShowFeet", "Rogue_Sex_Feet",
+            "not action_speed or Player.Cock == 'footjob' or show_feet", "Rogue_Sex_Feet",
 
             "True", AlphaMask("Rogue_Sex_Feet","images/RogueSex/Rogue_Sex_FeetMask2.png")
             ),
@@ -2898,7 +2898,7 @@ image Rogue_Sex_Anus:
             "Player.Sprite and Player.Cock == 'anal'", "Rogue_Sex_Anal_Tip",
             "primary_action == 'finger_ass' or offhand_action == 'finger_ass'", "Rogue_Sex_Anal_Tip",
             "primary_action == 'dildo anal'", "images/KittySex/Kitty_Sex_Hole_Open.png",
-            "RogueX.Loose", "images/RogueSex/Rogue_Sex_Hole_Loose.png",
+            "RogueX.used_to_anal", "images/RogueSex/Rogue_Sex_Hole_Loose.png",
             "True", "images/RogueSex/Rogue_Sex_Hole_Tight.png",
             )
     contains:
@@ -3432,7 +3432,7 @@ transform Rogue_Sex_Body_FootAnimStaticA():
 
 
 label Rogue_Sex_Launch(Line=primary_action):
-    $ girl_offhand_action = 0 if girl_offhand_action == "hand" else girl_offhand_action
+    $ girl_offhand_action = 0 if girl_offhand_action == "handjob" else girl_offhand_action
 
     $ Line = "solo" if not Line else Line
     $ Player.Sprite = 1
@@ -3446,9 +3446,9 @@ label Rogue_Sex_Launch(Line=primary_action):
             $ offhand_action = 0
     elif Line == "hotdog":
         $ Player.Cock = "out"
-    elif Line == "foot":
-        $ ShowFeet = 1
-        $ Player.Cock = "foot"
+    elif Line == "footjob":
+        $ show_feet = 1
+        $ Player.Cock = "footjob"
     elif Line == "massage":
         $ Player.Sprite = 0
         $ Player.Cock = 0
@@ -3458,7 +3458,7 @@ label Rogue_Sex_Launch(Line=primary_action):
         $ action_speed = 0
     $ primary_action = Line
 
-    if RogueX.Pose == "doggy":
+    if RogueX.pose == "doggy":
         call Rogue_Doggy_Launch (Line)
         return
     if renpy.showing("Rogue_SexSprite"):
@@ -3623,7 +3623,7 @@ image Blowcock:
             ),
     contains:
         ConditionSwitch(
-            "Player.grool", "images/RogueBJFace/Zero_Cock_Wet.png",
+            "Player.cock_wet", "images/RogueBJFace/Zero_Cock_Wet.png",
             "True", Null(),
             ),
     contains:
@@ -3774,25 +3774,25 @@ label Rogue_BJ_Launch(Line=primary_action):
             zoom 2.5 offset (70,140)
         with dissolve
 
-    if Taboo and Line == "L":
+    if taboo and Line == "L":
 
         if len(Present) >= 2:
             if Present[0] != RogueX:
-                "[RogueX.Name] looks back at [Present[0].Name] to see if she's watching."
+                "[RogueX.name] looks back at [Present[0].name] to see if she's watching."
             elif Present[1] != RogueX:
-                "[RogueX.Name] looks back at [Present[1].Name] to see if she's watching."
+                "[RogueX.name] looks back at [Present[1].name] to see if she's watching."
         else:
-            "[RogueX.Name] looks around to see if anyone can see her."
+            "[RogueX.name] looks around to see if anyone can see her."
     if Line == "L":
-        if not RogueX.Blow:
-            "[RogueX.Name] hesitantly pulls down your pants and touches her mouth to your cock."
+        if not RogueX.action_counter["blowjob"]:
+            "[RogueX.name] hesitantly pulls down your pants and touches her mouth to your cock."
         else:
-            "[RogueX.Name] bends down and begins to suck on your cock."
+            "[RogueX.name] bends down and begins to suck on your cock."
 
     $ action_speed = 0
 
     if Line != "cum":
-        $ primary_action = "blow"
+        $ primary_action = "blowjob"
 
     show Rogue_Sprite zorder RogueX.sprite_layer:
         alpha 0
@@ -3818,7 +3818,7 @@ label Rogue_BJ_Reset:
     show Rogue_Sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
-    $ RogueX.FaceChange("sexy")
+    $ RogueX.change_face("_sexy")
     return
 
 
@@ -3854,7 +3854,7 @@ image Zero_Blowcock:
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            "Player.grool", "images/RogueBJFace/Zero_Cock_Wet.png",
+            "Player.cock_wet", "images/RogueBJFace/Zero_Cock_Wet.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -4003,14 +4003,14 @@ label Rogue_TJ_Launch(Line=primary_action):
     show Rogue_Sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
         alpha 1
         ease 1 zoom 2 xpos 550 offset (0,50)
-    if Taboo:
+    if taboo:
         if len(Present) >= 2:
             if Present[0] != RogueX:
-                "[RogueX.Name] looks back at [Present[0].Name] to see if she's watching."
+                "[RogueX.name] looks back at [Present[0].name] to see if she's watching."
             elif Present[1] != RogueX:
-                "[RogueX.Name] looks back at [Present[1].Name] to see if she's watching."
+                "[RogueX.name] looks back at [Present[1].name] to see if she's watching."
         else:
-            "[RogueX.Name] looks around to see if anyone can see her."
+            "[RogueX.name] looks around to see if anyone can see her."
 
     if RogueX.bra and RogueX.top:
         "She throws off her [RogueX.top] and her [RogueX.bra]."
@@ -4024,26 +4024,26 @@ label Rogue_TJ_Launch(Line=primary_action):
 
     call Rogue_First_Topless
 
-    if not RogueX.Tit and Line == "L":
+    if not RogueX.action_counter["titjob"] and Line == "L":
         if not RogueX.bra and not RogueX.top:
-            "As you pull out your cock, [RogueX.Name] hesitantly places it between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [RogueX.name] hesitantly places it between her breasts and starts to rub them up and down the shaft."
         elif RogueX.bra and not RogueX.top:
-            "As you pull out your cock, [RogueX.Name] hesitantly places it under her [RogueX.bra], between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [RogueX.name] hesitantly places it under her [RogueX.bra], between her breasts and starts to rub them up and down the shaft."
         elif RogueX.bra and RogueX.top:
-            "As you pull out your cock, [RogueX.Name] hesitantly places it under her [RogueX.top], between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [RogueX.name] hesitantly places it under her [RogueX.top], between her breasts and starts to rub them up and down the shaft."
         else:
-            "As you pull out your cock, [RogueX.Name] hesitantly places it under her clothes, between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [RogueX.name] hesitantly places it under her clothes, between her breasts and starts to rub them up and down the shaft."
     elif Line == "L":
         if not RogueX.bra and not RogueX.top:
-            "As you pull out your cock, [RogueX.Name] places it between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [RogueX.name] places it between her breasts and starts to rub them up and down the shaft."
         elif RogueX.bra and not RogueX.top:
-            "As you pull out your cock, [RogueX.Name] places it under her [RogueX.bra], between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [RogueX.name] places it under her [RogueX.bra], between her breasts and starts to rub them up and down the shaft."
         elif RogueX.bra and RogueX.top:
-            "As you pull out your cock, [RogueX.Name] places it under her [RogueX.top], between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [RogueX.name] places it under her [RogueX.top], between her breasts and starts to rub them up and down the shaft."
         else:
-            "As you pull out your cock, [RogueX.Name] places it under her clothes, between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [RogueX.name] places it under her clothes, between her breasts and starts to rub them up and down the shaft."
     else:
-        "[RogueX.Name] wraps her tits around your cock."
+        "[RogueX.name] wraps her tits around your cock."
     show blackscreen onlayer black with dissolve
     show Rogue_Sprite zorder RogueX.sprite_layer:
         alpha 0
@@ -4071,7 +4071,7 @@ label Rogue_TJ_Reset:
         alpha 1
         zoom 1 xpos RogueX.sprite_location yoffset 0
 
-    "[RogueX.Name] pulls back"
+    "[RogueX.name] pulls back"
     return
 
 
@@ -4161,7 +4161,7 @@ image Rogue_HJ_Animation:
 
 label Rogue_HJ_Launch(Line=primary_action):
     if renpy.showing("Rogue_HJ_Animation"):
-        $ primary_action = "hand"
+        $ primary_action = "handjob"
         return
     call hide_girl(RogueX)
     $ RogueX.arms = 0
@@ -4175,30 +4175,30 @@ label Rogue_HJ_Launch(Line=primary_action):
         alpha 1
         ease 1 zoom 1.7 xpos 700 offset (0,200)
 
-    if Taboo and Line == "L":
+    if taboo and Line == "L":
 
         if len(Present) >= 2:
             if Present[0] != RogueX:
-                "[RogueX.Name] looks back at [Present[0].Name] to see if she's watching."
+                "[RogueX.name] looks back at [Present[0].name] to see if she's watching."
             elif Present[1] != RogueX:
-                "[RogueX.Name] looks back at [Present[1].Name] to see if she's watching."
+                "[RogueX.name] looks back at [Present[1].name] to see if she's watching."
         else:
-            "[RogueX.Name] looks around to see if anyone can see her."
-        if not RogueX.Hand and RogueX.arms:
-            "As you pull out your cock, [RogueX.Name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
+            "[RogueX.name] looks around to see if anyone can see her."
+        if not RogueX.action_counter["handjob"] and RogueX.arms:
+            "As you pull out your cock, [RogueX.name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
         else:
             "She then leans over and grabs your cock."
     elif Line == "L":
-        if not RogueX.Hand and RogueX.arms:
-            "As you pull out your cock, [RogueX.Name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
+        if not RogueX.action_counter["handjob"] and RogueX.arms:
+            "As you pull out your cock, [RogueX.name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
         else:
-            "[RogueX.Name] bends down and grabs your cock."
+            "[RogueX.name] bends down and grabs your cock."
     else:
-        "[RogueX.Name] bends down and grabs your cock."
+        "[RogueX.name] bends down and grabs your cock."
 
     $ action_speed = 0
     if Line != "cum":
-        $ primary_action = "hand"
+        $ primary_action = "handjob"
     show Rogue_HJ_Animation zorder 150 at sprite_location(RogueX.sprite_location) with easeinbottom
     return
 
@@ -5008,14 +5008,14 @@ image Chibi_UI:
 label Rogue_Kissing_Launch(T=primary_action, Set=1):
     call hide_girl(RogueX)
     $ primary_action = T
-    $ RogueX.Pose = "kiss" if Set else RogueX.Pose
+    $ RogueX.pose = "kiss" if Set else RogueX.pose
     show Rogue_Sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location)
     show Rogue_Sprite zorder RogueX.sprite_layer at sprite_location(stage_center):
         ease 0.5 offset (0,0) zoom 2 alpha 1
     return
 
 label Rogue_Kissing_Smooch:
-    $ RogueX.FaceChange("kiss")
+    $ RogueX.change_face("kiss")
     show Rogue_Sprite zorder RogueX.sprite_layer at sprite_location(stage_center):
         offset (0,0)
         alpha 1
@@ -5023,13 +5023,13 @@ label Rogue_Kissing_Smooch:
         pause 1
         ease 0.5 xpos RogueX.sprite_location zoom 1
     pause 1
-    $ RogueX.FaceChange("sexy")
+    $ RogueX.change_face("_sexy")
     return
 
 label Rogue_Breasts_Launch(T=primary_action, Set=1):
     call hide_girl(RogueX)
     $ primary_action = T
-    $ RogueX.Pose = "breasts" if Set else RogueX.Pose
+    $ RogueX.pose = "breasts" if Set else RogueX.pose
     show Rogue_Sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
         ease 0.5 pos (700,-50) zoom 2 offset (0,0) alpha 1
     return
@@ -5037,7 +5037,7 @@ label Rogue_Breasts_Launch(T=primary_action, Set=1):
 label Rogue_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(RogueX)
     $ primary_action = T
-    $ RogueX.Pose = "mid" if Set else RogueX.Pose
+    $ RogueX.pose = "mid" if Set else RogueX.pose
     show Rogue_Sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1
@@ -5046,7 +5046,7 @@ label Rogue_Middle_Launch(T=primary_action, Set=1):
 label Rogue_Pussy_Launch(T=primary_action, Set=1):
     call hide_girl(RogueX)
     $ primary_action = T
-    $ RogueX.Pose = "pussy" if Set else RogueX.Pose
+    $ RogueX.pose = "pussy" if Set else RogueX.pose
     show Rogue_Sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
         ease 0.5 pos (700,-400) zoom 2 offset (0,0) alpha 1
     return
@@ -5065,7 +5065,7 @@ label Rogue_Pos_Reset(T=0, Set=0):
         yzoom 1
         alpha 1
         pos (RogueX.sprite_location,50)
-    $ RogueX.Pose = "full" if Set else 0
+    $ RogueX.pose = "full" if Set else 0
     $ primary_action = T
     return
 
@@ -5328,8 +5328,8 @@ label Gwen_FaceEditor:
                 if G_Eyes == "normal":
                     $ G_Eyes = "surprised"
                 elif G_Eyes == "surprised":
-                    $ G_Eyes = "sexy"
-                elif G_Eyes == "sexy":
+                    $ G_Eyes = "_sexy"
+                elif G_Eyes == "_sexy":
                     $ G_Eyes = "squint"
                 elif G_Eyes == "squint":
                     $ G_Eyes = "closed"

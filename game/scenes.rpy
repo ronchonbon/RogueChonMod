@@ -779,7 +779,7 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
 
     call set_the_scene
     call clear_the_room (Girl)
-    call Taboo_Level (1)
+    call taboo_Level (1)
 
     if Girl.likes[Other.tag] >= 900:
         $ Resolution += 2

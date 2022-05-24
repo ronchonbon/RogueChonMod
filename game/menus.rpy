@@ -27,7 +27,7 @@ label enter_main_sex_menu:
     $ offhand_action = None
     $ girl_offhand_action = None
 
-    call hide_girl(focused_Girl, hide_Sprite = True)
+    call hide_girl(focused_Girl, hide_sprite = True)
 
     $ focused_Girl.arm_pose = 1
 
@@ -253,6 +253,7 @@ label girl_sex_menu(Girl):
             call expression Partner.tag + "_SexAct" pass ("switch")
         "Cheat Menu" if config.developer:
             call Cheat_Menu(Girl)
+            jump main_sex_menu
         "Never mind. [[exit]":
             if Girl.lust >= 50 or Girl.addiction >= 50:
                 $ Girl.change_face("_sad")
@@ -801,10 +802,10 @@ label try_something_else_menu(Girl, action):
 
 label girl_unsatisfied_menu(Girl, action):
     if action in sex_actions:
-        call not_ready_to_stop_lines(Girl)
+        call not_ready_to_stop_narrations(Girl, action)
 
         menu:
-            extend "Keep going?"
+            "Keep going?"
             "Yes, keep going for a bit." if Player.semen:
                 $ line = "You get back into it"
             "No, I'm done." if Player.semen:
@@ -930,7 +931,8 @@ label kiss_menu:
 
             $ action_context = "shift"
 
-            jump after_action
+            call after_action
+            jump main_sex_menu
         "End Scene":
             ch_p "Let's stop for now."
 
@@ -1098,16 +1100,16 @@ label fondle_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            # call expression focused_Girl.tag + "_Pos_Reset"
+            call expression focused_Girl.tag + "_Pos_Reset"
 
             $ action_context = "shift"
 
-            jump after_action
+            call after_action
+            jump main_sex_menu
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            # call expression focused_Girl.tag + "_Pos_Reset"
-
+            call expression focused_Girl.tag + "_Pos_Reset"
             jump after_action
 
     jump action_menu_return
@@ -1118,11 +1120,11 @@ label handjob_menu:
             pass
         "Start moving? . ." if primary_action in ["handjob", "footjob", "titjob"] and not action_speed:
             $ action_speed = 1
-        "action_speed up. . ." if primary_action in ["handjob", "footjob", "titjob"] and action_speed < 2:
+        "Speed up. . ." if primary_action in ["handjob", "footjob", "titjob"] and action_speed < 2:
             $ action_speed = 2
 
             "You ask her to up the pace a bit."
-        "action_speed up. . . (locked)" if primary_action in ["handjob", "footjob", "titjob"] and action_speed >= 2:
+        "Speed up. . . (locked)" if primary_action in ["handjob", "footjob", "titjob"] and action_speed >= 2:
             pass
         "Slow Down. . ." if primary_action in ["handjob", "footjob", "titjob"] and action_speed:
             $ action_speed -= 1
@@ -1373,16 +1375,16 @@ label handjob_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            # call expression focused_Girl.tag + "_HJ_Reset"
+            call expression focused_Girl.tag + "_HJ_Reset"
 
             $ action_context = "shift"
 
-            jump after_action
+            call after_action
+            jump main_sex_menu
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            # call expression focused_Girl.tag + "_HJ_Reset"
-
+            call expression focused_Girl.tag + "_HJ_Reset"
             jump after_action
 
     jump action_menu_return
@@ -1395,11 +1397,11 @@ label sex_menu:
             pass
         "Start moving? . ." if not action_speed:
             $ action_speed = 1
-        "action_speed up. . ." if 0 < action_speed < 3:
+        "Speed up. . ." if 0 < action_speed < 3:
             $ action_speed += 1
 
             "You ask her to up the pace a bit."
-        "action_speed up. . . (locked)" if action_speed >= 3:
+        "Speed up. . . (locked)" if action_speed >= 3:
             pass
         "Slow Down. . ." if action_speed:
             $ action_speed -= 1
@@ -1526,16 +1528,16 @@ label sex_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            # call expression focused_Girl.tag + "_Sex_Reset"
+            call expression focused_Girl.tag + "_Sex_Reset"
 
             $ action_context = "shift"
 
-            jump after_action
+            call after_action
+            jump main_sex_menu
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            # call expression focused_Girl.tag + "_Sex_Reset"
-
+            call expression focused_Girl.tag + "_Sex_Reset"
             jump after_action
 
     jump action_menu_return

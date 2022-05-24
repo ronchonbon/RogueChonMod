@@ -656,7 +656,7 @@ label sleepover_Morning:
 
     call shift_focus (Party[0])
 
-    if Party[0] == StormX and not StormX.sleepwear[0] and StormX.Taboo < 20:
+    if Party[0] == StormX and not StormX.sleepwear[0] and StormX.taboo < 20:
 
         $ Party[0].change_outfit("nude")
     else:
@@ -664,7 +664,7 @@ label sleepover_Morning:
     $ Party[0].today_outfit == Party[0].outfit
     if len(Party) >= 2:
 
-        if Party[1] == StormX and not StormX.sleepwear[0] and StormX.Taboo < 20:
+        if Party[1] == StormX and not StormX.sleepwear[0] and StormX.taboo < 20:
 
             $ Party[1].change_outfit("nude")
         else:

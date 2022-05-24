@@ -290,7 +290,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
         $ approval_bonus += 5
 
     if "exhibitionist" in Girl.traits:
-        $ approval_bonus += (3*Taboo)
+        $ approval_bonus += (3*taboo)
 
     if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
         $ approval_bonus += 10
@@ -332,9 +332,9 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
     $ Partner.add_word(1,"noticed "+Girl.tag,"noticed "+Girl.tag)
 
     if bg_current in personal_rooms:
-        $ Taboo = 0
-        $ Girl.Taboo = 0
-        $ Partner.Taboo = 0
+        $ taboo = 0
+        $ Girl.taboo = 0
+        $ Partner.taboo = 0
     if Girl.event_counter["forced"] and not Girl.forced:
         $ approval_bonus -= 5*Girl.event_counter["forced"]
 
@@ -844,7 +844,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
                 $ Girl.change_face("_smile", 1)
                 $ Girl.change_stat("love", 80, 2)
                 $ Girl.change_stat("inhibition", 70, 5)
-                call Taboo_Level
+                call taboo_Level
                 return
             "You look like you might be into it. . .":
 
@@ -983,7 +983,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
         $ Girl.change_stat("obedience", 50, -2)
         $ Girl.recent_history.append("_angry")
         $ Girl.daily_history.append("_angry")
-    elif Girl.Taboo > 20:
+    elif Girl.taboo > 20:
 
         $ Girl.change_face("_angry", 1)
         $ Girl.daily_history.append("no_taboo")
@@ -1059,7 +1059,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
     $ Girl.recent_history.append("no_lesbian")
     $ Girl.daily_history.append("no_lesbian")
     $ approval_bonus = 0
-    call Taboo_Level
+    call taboo_Level
     return
 
 label Les_Partner:
@@ -1129,7 +1129,7 @@ label Les_Prep(Girl=focused_Girl, temp_Girls=[]):
         $ renpy.pop_call()
         $ action_context = None
     $ line = 0
-    if Girl.Taboo:
+    if Girl.taboo:
         $ Girl.drain_word("no_taboo")
     $ Girl.drain_word("no_lesbian")
     $ Girl.add_word(0,"lesbian","lesbian")
@@ -1489,7 +1489,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
         $ Subject = focused_Girl
     if Speaker == EmmaX:
 
-        if "threesome" not in EmmaX.history or "classcaught" not in EmmaX.history or (Taboo > 20 and "taboo" not in EmmaX.history):
+        if "threesome" not in EmmaX.history or "classcaught" not in EmmaX.history or (taboo > 20 and "taboo" not in EmmaX.history):
             $ EmmaX.recent_history.append("no_lesbian")
             $ EmmaX.daily_history.append("no_lesbian")
             $ EmmaX.change_stat("obedience", 70, 5)
@@ -1539,7 +1539,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
         $ approval_bonus += 5
 
     if "exhibitionist" in Speaker.traits:
-        $ approval_bonus += (3*Taboo)
+        $ approval_bonus += (3*taboo)
 
     if Speaker in Player.Harem or "sex friend" in Speaker.player_petnames:
         $ approval_bonus += 10
@@ -1919,7 +1919,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
         if Speaker == RogueX:
             if B <= 0:
                 ch_r "Sorry, [Speaker.player_petname], it's just not like that with her."
-            if Speaker.Taboo > 20:
+            if Speaker.taboo > 20:
                 ch_r "Sorry, [Speaker.player_petname], this isn't a good place for it."
             if B >= 100:
                 ch_r "Sorry, [Speaker.player_petname], maybe if you weren't around. . ."
@@ -1928,7 +1928,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
         elif Speaker == KittyX:
             if B <= 0:
                 ch_k "Sorry, [Speaker.player_petname], I'm just not into her."
-            if Speaker.Taboo > 20:
+            if Speaker.taboo > 20:
                 ch_k "Sorry, [Speaker.player_petname], this isn't exactly the right place for that."
             if B >= 100:
                 ch_k "Sorry, [Speaker.player_petname], not with you watching. . ."
@@ -1937,7 +1937,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
         elif Speaker == EmmaX:
             if B <= 0:
                 ch_e "I'm sorry, [Speaker.player_petname], she's just not my type."
-            if Speaker.Taboo > 20:
+            if Speaker.taboo > 20:
                 ch_e "I'm sorry, [Speaker.player_petname], this would cause a scandal."
             if B >= 100:
                 ch_e "I'm sorry, [Speaker.player_petname], not with an audience. . ."
@@ -1946,7 +1946,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
         elif Speaker == LauraX:
             if B <= 0:
                 ch_l "Sorry, [Speaker.player_petname], she's not my type."
-            if Speaker.Taboo > 20:
+            if Speaker.taboo > 20:
                 ch_l "Sorry, [Speaker.player_petname], this area's a bit exposed."
             if B >= 100:
                 ch_l "Sorry, [Speaker.player_petname], I don't want an audience. . ."
@@ -1955,7 +1955,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
         elif Speaker == JeanX:
             if B <= 0:
                 ch_l "Sorry, [Speaker.player_petname], I know I can do better than her."
-            if Speaker.Taboo > 20:
+            if Speaker.taboo > 20:
                 ch_l "Sorry, [Speaker.player_petname]. . . not in public."
             if B >= 100:
                 ch_l "Sorry, [Speaker.player_petname], you'll have to earn that . ."
@@ -1964,7 +1964,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
         elif Speaker == StormX:
             if B <= 0:
                 ch_s "Apologies, [Speaker.player_petname], I could not, with her."
-            if Speaker.Taboo > 20:
+            if Speaker.taboo > 20:
                 ch_s "Apologies, [Speaker.player_petname], this is not the place for it."
             if B >= 100:
                 ch_s "Apologies, [Speaker.player_petname], this is a private affair. . ."
@@ -1973,7 +1973,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
         elif Speaker == JubesX:
             if B <= 0:
                 ch_v "Sorry, [Speaker.player_petname], she's not my type."
-            if Speaker.Taboo > 20:
+            if Speaker.taboo > 20:
                 ch_v "Sorry, [Speaker.player_petname], not here, at least."
             if B >= 100:
                 ch_v "Sorry, [Speaker.player_petname], I don't want an audience. . ."
@@ -3508,9 +3508,9 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
     $ Girl.location = Girl.home
     $ Girl2.location = Girl.home
     $ bg_current = Girl.home
-    $ Taboo= 0
-    $ Girl.Taboo = 0
-    $ Girl2.Taboo = 0
+    $ taboo= 0
+    $ Girl.taboo = 0
+    $ Girl2.taboo = 0
     $ line = 0
 
     $ Girl.drain_word("lesbian",1,0)

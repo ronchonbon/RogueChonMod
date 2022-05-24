@@ -416,8 +416,8 @@ label after_action:
         $ Player.cock_position = "out"
 
         call expression focused_Girl.tag + "_Sex_Reset"
-    elif primary_action in [fondle_actions, dildo_actions]:
-        call expression focused_Girl.tag + "_Pos_Reset"
+    else:
+        call expression focused_Girl.tag + "_Pos_Reset" pass(primary_action)
 
     $ focused_Girl.change_face("_sexy")
     $ focused_Girl.remaining_actions -= 1
