@@ -3,18 +3,18 @@
 image Laura_Sprite:
     LiveComposite(
         (402,965),
-        (0,0), "Laura_Sprite_hairback",
+        (0,0), "Laura_Sprite_HairBack",
         (0,0), ConditionSwitch(
 
-            "not LauraX.underwear or not LauraX.underwear_pulled_down or (LauraX.legs and LauraX.legs != 'skirt' and not LauraX.upskirt)", Null(),
-            "LauraX.underwear == 'wolvie_panties'", "images/LauraSprite/Laura_Sprite_Panties_Wolvie_Back.png",
-            "LauraX.underwear == 'bikini_bottoms'", "images/LauraSprite/Laura_Sprite_Panties_Bikini_Back.png",
+            "not LauraX.underwear or not LauraX.underwear_pulled_down or (LauraX.legs and LauraX.legs != '_skirt' and not LauraX.upskirt)", Null(),
+            "LauraX.underwear == '_wolvie_panties'", "images/LauraSprite/Laura_Sprite_Panties_Wolvie_Back.png",
+            "LauraX.underwear == '_bikini_bottoms'", "images/LauraSprite/Laura_Sprite_Panties_Bikini_Back.png",
             "True", "images/LauraSprite/Laura_Sprite_Panties_Lace_Back.png",
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.arms == 'gloves' and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Glove_Back2.png",
-            "LauraX.arms == 'gloves'", "images/LauraSprite/Laura_Sprite_Glove_Back1.png",
+            "LauraX.arms == '_gloves' and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Glove_Back2.png",
+            "LauraX.arms == '_gloves'", "images/LauraSprite/Laura_Sprite_Glove_Back1.png",
             "LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Arm_Back2.png",
             "True", "images/LauraSprite/Laura_Sprite_Arm_Back1.png",
             ),
@@ -35,8 +35,8 @@ image Laura_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "LauraX.arms == 'gloves' and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Glove_Mid2.png",
-            "LauraX.arms == 'gloves'", "images/LauraSprite/Laura_Sprite_Glove_Mid1.png",
+            "LauraX.arms == '_gloves' and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Glove_Mid2.png",
+            "LauraX.arms == '_gloves'", "images/LauraSprite/Laura_Sprite_Glove_Mid1.png",
             "LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Arm_Mid2.png",
             "True", "images/LauraSprite/Laura_Sprite_Arm_Mid1.png",
             ),
@@ -50,8 +50,8 @@ image Laura_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.arms == 'wrists' and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Wrist2.png",
-            "LauraX.arms == 'wrists'", "images/LauraSprite/Laura_Sprite_Wrist1.png",
+            "LauraX.arms == '_wrists' and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Wrist2.png",
+            "LauraX.arms == '_wrists'", "images/LauraSprite/Laura_Sprite_Wrist1.png",
             "True", Null(),
             ),
 
@@ -59,17 +59,17 @@ image Laura_Sprite:
         (145,560), ConditionSwitch(
 
             "not LauraX.grool", Null(),
-            "LauraX.legs and LauraX.legs != 'skirt' and not LauraX.upskirt", Null(),
-            "LauraX.legs and LauraX.legs != 'other_skirt' and not LauraX.upskirt", Null(),
+            "LauraX.legs and LauraX.legs != '_skirt' and not LauraX.upskirt", Null(),
+            "LauraX.legs and LauraX.legs != '_other_skirt' and not LauraX.upskirt", Null(),
             "LauraX.underwear and not LauraX.underwear_pulled_down and LauraX.grool <= 1", Null(),
             "LauraX.grool == 1", ConditionSwitch(
                     "LauraX.underwear and LauraX.underwear_pulled_down", AlphaMask("Wet_Drip","Laura_Drip_MaskP"),
-                    "LauraX.legs and LauraX.legs != 'skirt'", AlphaMask("Wet_Drip","Laura_Drip_MaskP"),
+                    "LauraX.legs and LauraX.legs != '_skirt'", AlphaMask("Wet_Drip","Laura_Drip_MaskP"),
                     "True", AlphaMask("Wet_Drip","Laura_Drip_Mask"),
                     ),
             "True", ConditionSwitch(
                     "LauraX.underwear and LauraX.underwear_pulled_down", AlphaMask("Wet_Drip2","Laura_Drip_MaskP"),
-                    "LauraX.legs and LauraX.legs != 'skirt'", AlphaMask("Wet_Drip2","Laura_Drip_MaskP"),
+                    "LauraX.legs and LauraX.legs != '_skirt'", AlphaMask("Wet_Drip2","Laura_Drip_MaskP"),
                     "LauraX.underwear", AlphaMask("Wet_Drip","Laura_Drip_Mask"),
                     "True", AlphaMask("Wet_Drip2","Laura_Drip_Mask"),
                     ),
@@ -77,8 +77,8 @@ image Laura_Sprite:
         (145,560), ConditionSwitch(
 
             "'in' not in LauraX.spunk and 'anal' not in LauraX.spunk", Null(),
-            "LauraX.legs and LauraX.legs != 'skirt' and not LauraX.upskirt", Null(),
-            "LauraX.legs and LauraX.legs != 'other_skirt' and not LauraX.upskirt", Null(),
+            "LauraX.legs and LauraX.legs != '_skirt' and not LauraX.upskirt", Null(),
+            "LauraX.legs and LauraX.legs != '_other_skirt' and not LauraX.upskirt", Null(),
             "LauraX.underwear and not LauraX.underwear_pulled_down and LauraX.grool <= 1", Null(),
             "True", ConditionSwitch(
                     "LauraX.underwear and LauraX.underwear_pulled_down", AlphaMask("Spunk_Drip2","Laura_Drip_MaskP"),
@@ -96,21 +96,21 @@ image Laura_Sprite:
 
             "not LauraX.piercings", Null(),
             "LauraX.underwear and not LauraX.underwear_pulled_down", Null(),
-            "LauraX.legs != 'skirt' and LauraX.legs and not LauraX.upskirt", Null(),
-            "LauraX.legs != 'other_skirt' and LauraX.legs and not LauraX.upskirt", Null(),
-            "LauraX.piercings == 'barbell'", "images/LauraSprite/Laura_Sprite_Barbell_Pussy.png",
-            "LauraX.piercings == 'ring'", "images/LauraSprite/Laura_Sprite_Ring_Pussy.png",
+            "LauraX.legs != '_skirt' and LauraX.legs and not LauraX.upskirt", Null(),
+            "LauraX.legs != '_other_skirt' and LauraX.legs and not LauraX.upskirt", Null(),
+            "LauraX.piercings == '_barbell'", "images/LauraSprite/Laura_Sprite_Barbell_Pussy.png",
+            "LauraX.piercings == '_ring'", "images/LauraSprite/Laura_Sprite_Ring_Pussy.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.hose == 'black stockings'", "images/LauraSprite/Laura_Sprite_BlackStockings.png",
-            "LauraX.hose == 'stockings' or LauraX.hose == 'stockings_and_garterbelt'", "images/LauraSprite/Laura_Sprite_Stockings.png",
+            "LauraX.hose == '_black_stockings'", "images/LauraSprite/Laura_Sprite_BlackStockings.png",
+            "LauraX.hose == '_stockings' or LauraX.hose == '_stockings_and_garterbelt'", "images/LauraSprite/Laura_Sprite_Stockings.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.hose == 'stockings_and_garterbelt' or LauraX.hose == 'garterbelt'", "images/LauraSprite/Laura_Sprite_Garters.png",
+            "LauraX.hose == '_stockings_and_garterbelt' or LauraX.hose == '_garterbelt'", "images/LauraSprite/Laura_Sprite_Garters.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -118,12 +118,12 @@ image Laura_Sprite:
             "not LauraX.underwear", Null(),
             "LauraX.underwear_pulled_down", ConditionSwitch(
 
-                    "not LauraX.legs or LauraX.upskirt or LauraX.legs == 'skirt'", ConditionSwitch(
+                    "not LauraX.legs or LauraX.upskirt or LauraX.legs == '_skirt'", ConditionSwitch(
 
-                            "LauraX.underwear == 'wolvie_panties' and LauraX.grool", "images/LauraSprite/Laura_Sprite_Panties_Wolvie_Down_W.png",
-                            "LauraX.underwear == 'wolvie_panties'", "images/LauraSprite/Laura_Sprite_Panties_Wolvie_Down.png",
-                            "LauraX.underwear == 'lace_panties'", "images/LauraSprite/Laura_Sprite_Panties_Lace_Down.png",
-                            "LauraX.underwear == 'bikini_bottoms'", "images/LauraSprite/Laura_Sprite_Panties_Bikini_Down.png",
+                            "LauraX.underwear == '_wolvie_panties' and LauraX.grool", "images/LauraSprite/Laura_Sprite_Panties_Wolvie_Down_W.png",
+                            "LauraX.underwear == '_wolvie_panties'", "images/LauraSprite/Laura_Sprite_Panties_Wolvie_Down.png",
+                            "LauraX.underwear == '_lace_panties'", "images/LauraSprite/Laura_Sprite_Panties_Lace_Down.png",
+                            "LauraX.underwear == '_bikini_bottoms'", "images/LauraSprite/Laura_Sprite_Panties_Bikini_Down.png",
                             "True", "images/LauraSprite/Laura_Sprite_Panties_Leather_Down.png",
                             ),
                     "True", Null(),
@@ -132,16 +132,16 @@ image Laura_Sprite:
 
                     "LauraX.grool", ConditionSwitch(
 
-                        "LauraX.underwear == 'wolvie_panties'", "images/LauraSprite/Laura_Sprite_Panties_Wolvie_W.png",
-                        "LauraX.underwear == 'lace_panties'", "images/LauraSprite/Laura_Sprite_Panties_Lace.png",
-                        "LauraX.underwear == 'bikini_bottoms'", "images/LauraSprite/Laura_Sprite_Panties_Bikini.png",
+                        "LauraX.underwear == '_wolvie_panties'", "images/LauraSprite/Laura_Sprite_Panties_Wolvie_W.png",
+                        "LauraX.underwear == '_lace_panties'", "images/LauraSprite/Laura_Sprite_Panties_Lace.png",
+                        "LauraX.underwear == '_bikini_bottoms'", "images/LauraSprite/Laura_Sprite_Panties_Bikini.png",
                         "True", "images/LauraSprite/Laura_Sprite_Panties_Leather.png",
                         ),
                     "True", ConditionSwitch(
 
-                        "LauraX.underwear == 'wolvie_panties'", "images/LauraSprite/Laura_Sprite_Panties_Wolvie.png",
-                        "LauraX.underwear == 'lace_panties'", "images/LauraSprite/Laura_Sprite_Panties_Lace.png",
-                        "LauraX.underwear == 'bikini_bottoms'", "images/LauraSprite/Laura_Sprite_Panties_Bikini.png",
+                        "LauraX.underwear == '_wolvie_panties'", "images/LauraSprite/Laura_Sprite_Panties_Wolvie.png",
+                        "LauraX.underwear == '_lace_panties'", "images/LauraSprite/Laura_Sprite_Panties_Lace.png",
+                        "LauraX.underwear == '_bikini_bottoms'", "images/LauraSprite/Laura_Sprite_Panties_Bikini.png",
                         "True", "images/LauraSprite/Laura_Sprite_Panties_Leather.png",
                         ),
                     ),
@@ -151,25 +151,25 @@ image Laura_Sprite:
             "not LauraX.legs", Null(),
             "LauraX.upskirt", ConditionSwitch(
 
-                        "LauraX.legs == 'other_skirt'", "images/LauraSprite/Laura_Sprite_SkirtCos_Up.png",
-                        "LauraX.legs == 'skirt'", "images/LauraSprite/Laura_Sprite_Skirt_Up.png",
+                        "LauraX.legs == '_other_skirt'", "images/LauraSprite/Laura_Sprite_SkirtCos_Up.png",
+                        "LauraX.legs == '_skirt'", "images/LauraSprite/Laura_Sprite_Skirt_Up.png",
                         "True", Null(),
                         ),
             "True", ConditionSwitch(
 
-                    "LauraX.legs == 'other_skirt'", "images/LauraSprite/Laura_Sprite_SkirtCos.png",
-                    "LauraX.legs == 'skirt'", "images/LauraSprite/Laura_Sprite_Skirt.png",
+                    "LauraX.legs == '_other_skirt'", "images/LauraSprite/Laura_Sprite_SkirtCos.png",
+                    "LauraX.legs == '_skirt'", "images/LauraSprite/Laura_Sprite_Skirt.png",
                     "LauraX.grool", ConditionSwitch(
 
-                        "LauraX.legs == 'leather_pants'", "images/LauraSprite/Laura_Sprite_Pants_Leather.png",
-                        "LauraX.legs == 'mesh_pants'", "images/LauraSprite/Laura_Sprite_Pants_Mesh.png",
+                        "LauraX.legs == '_leather_pants'", "images/LauraSprite/Laura_Sprite_Pants_Leather.png",
+                        "LauraX.legs == '_mesh_pants'", "images/LauraSprite/Laura_Sprite_Pants_Mesh.png",
 
                         "True", Null(),
                         ),
                     "True", ConditionSwitch(
 
-                        "LauraX.legs == 'leather_pants'", "images/LauraSprite/Laura_Sprite_Pants_Leather.png",
-                        "LauraX.legs == 'mesh_pants'", "images/LauraSprite/Laura_Sprite_Pants_Mesh.png",
+                        "LauraX.legs == '_leather_pants'", "images/LauraSprite/Laura_Sprite_Pants_Leather.png",
+                        "LauraX.legs == '_mesh_pants'", "images/LauraSprite/Laura_Sprite_Pants_Mesh.png",
 
                         "True", Null(),
                         ),
@@ -177,14 +177,14 @@ image Laura_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.legs == 'skirt' or LauraX.legs == 'other_skirt'", Null(),
-            "LauraX.piercings == 'barbell'", ConditionSwitch(
+            "LauraX.legs == '_skirt' or LauraX.legs == '_other_skirt'", Null(),
+            "LauraX.piercings == '_barbell'", ConditionSwitch(
 
                     "LauraX.legs and not LauraX.upskirt", "images/LauraSprite/Laura_Sprite_Barbell_PussyC.png",
                     "LauraX.underwear and not LauraX.underwear_pulled_down", "images/LauraSprite/Laura_Sprite_Barbell_PussyC.png",
                     "True", Null(),
                     ),
-            "LauraX.piercings == 'ring'", ConditionSwitch(
+            "LauraX.piercings == '_ring'", ConditionSwitch(
 
                     "LauraX.legs and not LauraX.upskirt", "images/LauraSprite/Laura_Sprite_Ring_PussyC.png",
                     "LauraX.underwear and not LauraX.underwear_pulled_down", "images/LauraSprite/Laura_Sprite_Ring_PussyC.png",
@@ -196,8 +196,8 @@ image Laura_Sprite:
 
             "not LauraX.grool", Null(),
             "LauraX.legs and LauraX.grool <= 1", Null(),
-            "LauraX.legs == 'other_skirt'", Null(),
-            "LauraX.legs == 'skirt'", Null(),
+            "LauraX.legs == '_other_skirt'", Null(),
+            "LauraX.legs == '_skirt'", Null(),
             "True", "images/LauraSprite/Laura_Sprite_Wetness.png",
             ),
         (0,0), ConditionSwitch(
@@ -210,13 +210,13 @@ image Laura_Sprite:
         (0,0), ConditionSwitch(
 
             "not LauraX.piercings", Null(),
-            "LauraX.piercings == 'barbell'", "images/LauraSprite/Laura_Sprite_Barbell_Tits.png",
-            "LauraX.piercings == 'ring'", "images/LauraSprite/Laura_Sprite_Ring_Tits.png",
+            "LauraX.piercings == '_barbell'", "images/LauraSprite/Laura_Sprite_Barbell_Tits.png",
+            "LauraX.piercings == '_ring'", "images/LauraSprite/Laura_Sprite_Ring_Tits.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.neck == 'leash choker'", "images/LauraSprite/Laura_Sprite_Neck_Leash.png",
+            "LauraX.neck == '_leash choker'", "images/LauraSprite/Laura_Sprite_Neck_Leash.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -224,18 +224,18 @@ image Laura_Sprite:
             "LauraX.top_pulled_up", ConditionSwitch(
 
                     "LauraX.bra == 'white tank'", "images/LauraSprite/Laura_Sprite_Bra_White_Up.png",
-                    "LauraX.bra == 'leather_bra'", "images/LauraSprite/Laura_Sprite_Bra_Leather_Up.png",
-                    "LauraX.bra == 'wolvie_top'", "images/LauraSprite/Laura_Sprite_Top_Wolvie_Up.png",
-                    "LauraX.bra == 'bikini_top'", "images/LauraSprite/Laura_Sprite_Top_Bikini_Up.png",
-                    "LauraX.bra == 'corset'", "images/LauraSprite/Laura_Sprite_Top_Corset_Up.png",
+                    "LauraX.bra == 'leather bra'", "images/LauraSprite/Laura_Sprite_Bra_Leather_Up.png",
+                    "LauraX.bra == 'wolvie top'", "images/LauraSprite/Laura_Sprite_Top_Wolvie_Up.png",
+                    "LauraX.bra == '_bikini_top'", "images/LauraSprite/Laura_Sprite_Top_Bikini_Up.png",
+                    "LauraX.bra == '_corset'", "images/LauraSprite/Laura_Sprite_Top_Corset_Up.png",
                     "LauraX.bra == 'lace corset'", "images/LauraSprite/Laura_Sprite_Top_Corset_Lace_Up.png",
                     "True", Null(),
                     ),
             "LauraX.bra == 'white tank'", "images/LauraSprite/Laura_Sprite_Bra_White.png",
-            "LauraX.bra == 'leather_bra'", "images/LauraSprite/Laura_Sprite_Bra_Leather.png",
-            "LauraX.bra == 'wolvie_top'", "images/LauraSprite/Laura_Sprite_Top_Wolvie.png",
-            "LauraX.bra == 'bikini_top'", "images/LauraSprite/Laura_Sprite_Top_Bikini.png",
-            "LauraX.bra == 'corset'", "images/LauraSprite/Laura_Sprite_Top_Corset.png",
+            "LauraX.bra == 'leather bra'", "images/LauraSprite/Laura_Sprite_Bra_Leather.png",
+            "LauraX.bra == 'wolvie top'", "images/LauraSprite/Laura_Sprite_Top_Wolvie.png",
+            "LauraX.bra == '_bikini_top'", "images/LauraSprite/Laura_Sprite_Top_Bikini.png",
+            "LauraX.bra == '_corset'", "images/LauraSprite/Laura_Sprite_Top_Corset.png",
             "LauraX.bra == 'lace corset'", "images/LauraSprite/Laura_Sprite_Top_Corset_Lace.png",
             "True", Null(),
             ),
@@ -243,9 +243,9 @@ image Laura_Sprite:
         (0,0), ConditionSwitch(
 
             "not LauraX.legs or LauraX.upskirt", Null(),
-            "LauraX.accessory == 'suspenders' and not LauraX.bra and not LauraX.top_pulled_up", "images/LauraSprite/Laura_Sprite_Acc_Suspenders2.png",
-            "LauraX.accessory == 'suspenders2'", "images/LauraSprite/Laura_Sprite_Acc_Suspenders2.png",
-            "LauraX.accessory == 'suspenders'", "images/LauraSprite/Laura_Sprite_Acc_Suspenders1.png",
+            "LauraX.accessory == '_suspenders' and not LauraX.bra and not LauraX.top_pulled_up", "images/LauraSprite/Laura_Sprite_Acc_Suspenders2.png",
+            "LauraX.accessory == '_suspenders2'", "images/LauraSprite/Laura_Sprite_Acc_Suspenders2.png",
+            "LauraX.accessory == '_suspenders'", "images/LauraSprite/Laura_Sprite_Acc_Suspenders1.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -259,15 +259,15 @@ image Laura_Sprite:
                     ),
             "LauraX.top == '_jacket' and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Jacket_A2.png",
             "LauraX.top == '_jacket'", "images/LauraSprite/Laura_Sprite_Jacket_A1.png",
-            "LauraX.top == 'towel'", "images/LauraSprite/Laura_Sprite_Towel.png",
+            "LauraX.top == '_towel'", "images/LauraSprite/Laura_Sprite_Towel.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not LauraX.piercings or (not LauraX.top and not LauraX.bra)", Null(),
             "LauraX.top == '_jacket'", Null(),
-            "LauraX.piercings == 'barbell'",  "images/LauraSprite/Laura_Sprite_Barbell_TitsC.png",
-            "LauraX.piercings == 'ring'", "images/LauraSprite/Laura_Sprite_Ring_TitsC.png",
+            "LauraX.piercings == '_barbell'",  "images/LauraSprite/Laura_Sprite_Barbell_TitsC.png",
+            "LauraX.piercings == '_ring'", "images/LauraSprite/Laura_Sprite_Ring_TitsC.png",
             "True", Null(),
             ),
 
@@ -290,7 +290,7 @@ image Laura_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.arms == 'gloves' and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Glove_Top2.png",
+            "LauraX.arms == '_gloves' and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Glove_Top2.png",
             "LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Arm_Left2.png",
             "True", Null(),
             ),
@@ -301,7 +301,7 @@ image Laura_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.arm_pose == 2 and LauraX.arms == 'wrists'", "images/LauraSprite/Laura_Sprite_Wrist_Left2.png",
+            "LauraX.arm_pose == 2 and LauraX.arms == '_wrists'", "images/LauraSprite/Laura_Sprite_Wrist_Left2.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -335,9 +335,9 @@ image Laura_Sprite:
 
             "girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_LauraSelf",
             "girl_offhand_action == 'fondle_breasts'", ConditionSwitch(
-                    "offhand_action == 'fondle_breasts' or offhand_action == 'suck breasts'", "GirlGropeLeftBreast_Laura",
+                    "offhand_action == 'fondle_breasts' or offhand_action == 'suck_breasts'", "GirlGropeLeftBreast_Laura",
 
-                    "primary_action == 'fondle_breasts' or primary_action == 'suck breasts'", "GirlGropeRightBreast_Laura",
+                    "primary_action == 'fondle_breasts' or primary_action == 'suck_breasts'", "GirlGropeRightBreast_Laura",
 
                     "True", "GirlGropeBothBreast_Laura",
 
@@ -354,7 +354,7 @@ image Laura_Sprite:
             "not second_girl_offhand_action or second_girl_primary_action != 'masturbation' or focused_Girl == LauraX", Null(),
 
 
-            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and LauraX.lust >= 70", "GirlFingerPussy_Laura",
+            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and LauraX.Lust >= 70", "GirlFingerPussy_Laura",
             "second_girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Laura",
             "second_girl_offhand_action == 'fondle_breasts'", "GirlGropeRightBreast_Laura",
             "second_girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
@@ -371,7 +371,7 @@ image Laura_Sprite:
             "primary_action == 'vibrator breasts'", "VibratorLeftBreast_Laura",
             "primary_action == 'fondle_thighs'", "GropeThigh_Laura",
             "primary_action == 'fondle_breasts'", "GropeLeftBreast_Laura",
-            "primary_action == 'suck breasts'", "LickRightBreast_Laura",
+            "primary_action == 'suck_breasts'", "LickRightBreast_Laura",
             "primary_action == 'fondle_pussy' and action_speed == 2", "FingerPussy_Laura",
             "primary_action == 'fondle_pussy'", "GropePussy_Laura",
             "primary_action == 'eat_pussy'", "Lickpussy_Laura",
@@ -387,16 +387,16 @@ image Laura_Sprite:
 
 
             "offhand_action == 'fondle_breasts'", ConditionSwitch(
-                    "offhand_action == 'fondle_breasts' and primary_action == 'suck breasts'", "GropeLeftBreast_Laura",
+                    "offhand_action == 'fondle_breasts' and primary_action == 'suck_breasts'", "GropeLeftBreast_Laura",
 
                     "True", "GropeRightBreast_Laura",
 
                     ),
-            "offhand_action == 'vibrator breasts' and primary_action == 'suck breasts'", "VibratorLeftBreast_Laura",
+            "offhand_action == 'vibrator breasts' and primary_action == 'suck_breasts'", "VibratorLeftBreast_Laura",
 
             "offhand_action == primary_action", Null(),
 
-            "offhand_action == 'suck breasts'", "LickLeftBreast_Laura",
+            "offhand_action == 'suck_breasts'", "LickLeftBreast_Laura",
             "offhand_action == 'fondle_pussy'", "GropePussy_Laura",
             "offhand_action == 'eat_pussy'", "Lickpussy_Laura",
             "offhand_action == 'vibrator breasts'", "VibratorRightBreast_Laura",
@@ -411,13 +411,13 @@ image Laura_Sprite:
             "not second_girl_primary_action or focused_Girl != LauraX", Null(),
 
 
-            "second_girl_primary_action == 'fondle_pussy' and primary_action != 'sex' and LauraX.lust >= 70", "GirlFingerPussy_Laura",
+            "second_girl_primary_action == 'fondle_pussy' and primary_action != 'sex' and LauraX.Lust >= 70", "GirlFingerPussy_Laura",
             "second_girl_primary_action == 'fondle_pussy'", "GirlGropePussy_Laura",
             "second_girl_primary_action == 'eat_pussy'", "Lickpussy_Laura",
-            "second_girl_primary_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast_Laura",
-            "second_girl_primary_action == 'suck breasts'", "LickRightBreast_Laura",
+            "second_girl_primary_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast_Laura",
+            "second_girl_primary_action == 'suck_breasts'", "LickRightBreast_Laura",
             "second_girl_primary_action == 'fondle_breasts'", ConditionSwitch(
-                    "primary_action == 'fondle_breasts' or primary_action == 'suck breasts'", "GirlGropeLeftBreast_Laura",
+                    "primary_action == 'fondle_breasts' or primary_action == 'suck_breasts'", "GirlGropeLeftBreast_Laura",
 
 
                     "True", "GirlGropeRightBreast_Laura",
@@ -434,17 +434,17 @@ image Laura_Sprite:
             "primary_action != 'lesbian' or focused_Girl == LauraX or not girl_offhand_action", Null(),
 
 
-            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and LauraX.lust >= 70", "GirlFingerPussy_Laura",
+            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and LauraX.Lust >= 70", "GirlFingerPussy_Laura",
             "girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Laura",
             "girl_offhand_action == 'eat_pussy'", "Lickpussy_Laura",
-            "girl_offhand_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast_Laura",
-            "girl_offhand_action == 'suck breasts'", "LickRightBreast_Laura",
+            "girl_offhand_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast_Laura",
+            "girl_offhand_action == 'suck_breasts'", "LickRightBreast_Laura",
             "girl_offhand_action == 'fondle_breasts'", ConditionSwitch(
-                    "primary_action == 'fondle_breasts' or primary_action == 'suck breasts'", "GirlGropeLeftBreast_Laura",
+                    "primary_action == 'fondle_breasts' or primary_action == 'suck_breasts'", "GirlGropeLeftBreast_Laura",
 
-                    "offhand_action == 'fondle_breasts' or offhand_action == 'suck breasts'", "GirlGropeRightBreast_Laura",
+                    "offhand_action == 'fondle_breasts' or offhand_action == 'suck_breasts'", "GirlGropeRightBreast_Laura",
 
-                    "girl_offhand_action == 'fondle_breasts' or girl_offhand_action == 'suck breasts'", "GirlGropeLeftBreast_Laura",
+                    "girl_offhand_action == 'fondle_breasts' or girl_offhand_action == 'suck_breasts'", "GirlGropeLeftBreast_Laura",
 
                     "True", "GirlGropeRightBreast_Laura",
 
@@ -461,7 +461,7 @@ image Laura_Sprite:
     yoffset 15
     zoom .75
 
-image Laura_Sprite_hairback:
+image Laura_Sprite_HairBack:
     ConditionSwitch(
 
             "not LauraX.hair", Null(),
@@ -522,50 +522,50 @@ image Laura_Sprite_Head:
             ),
         (0,0), ConditionSwitch(
             "renpy.showing('Laura_BJ_Animation')", "images/LauraSprite/Laura_Sprite_Mouth_SuckingBJ.png",
-            "LauraX.mouth == 'normal'", "images/LauraSprite/Laura_Sprite_Mouth_Normal.png",
-            "LauraX.mouth == 'lipbite'", "images/LauraSprite/Laura_Sprite_Mouth_Lipbite.png",
-            "LauraX.mouth == 'sucking'", "images/LauraSprite/Laura_Sprite_Mouth_Sucking.png",
-            "LauraX.mouth == 'kiss'", "images/LauraSprite/Laura_Sprite_Mouth_Kiss.png",
-            "LauraX.mouth == 'sad'", "images/LauraSprite/Laura_Sprite_Mouth_Sad.png",
-            "LauraX.mouth == 'smile'", "images/LauraSprite/Laura_Sprite_Mouth_Smile.png",
-            "LauraX.mouth == 'surprised'", "images/LauraSprite/Laura_Sprite_Mouth_Surprised.png",
-            "LauraX.mouth == 'tongue'", "images/LauraSprite/Laura_Sprite_Mouth_Tongue.png",
-            "LauraX.mouth == 'grimace'", "images/LauraSprite/Laura_Sprite_Mouth_Smile.png",
-            "LauraX.mouth == 'smirk'", "images/LauraSprite/Laura_Sprite_Mouth_Smirk.png",
+            "LauraX.mouth == '_normal'", "images/LauraSprite/Laura_Sprite_Mouth_Normal.png",
+            "LauraX.mouth == '_lipbite'", "images/LauraSprite/Laura_Sprite_Mouth_Lipbite.png",
+            "LauraX.mouth == '_sucking'", "images/LauraSprite/Laura_Sprite_Mouth_Sucking.png",
+            "LauraX.mouth == '_kiss'", "images/LauraSprite/Laura_Sprite_Mouth_Kiss.png",
+            "LauraX.mouth == '_sad'", "images/LauraSprite/Laura_Sprite_Mouth_Sad.png",
+            "LauraX.mouth == '_smile'", "images/LauraSprite/Laura_Sprite_Mouth_Smile.png",
+            "LauraX.mouth == '_surprised'", "images/LauraSprite/Laura_Sprite_Mouth_Surprised.png",
+            "LauraX.mouth == '_tongue'", "images/LauraSprite/Laura_Sprite_Mouth_Tongue.png",
+            "LauraX.mouth == '_grimace'", "images/LauraSprite/Laura_Sprite_Mouth_Smile.png",
+            "LauraX.mouth == '_smirk'", "images/LauraSprite/Laura_Sprite_Mouth_Smirk.png",
 
             "True", "images/LauraSprite/Laura_Sprite_Mouth_Normal.png",
             ),
         (0,0), ConditionSwitch(
             "'mouth' not in LauraX.spunk", Null(),
             "renpy.showing('Laura_BJ_Animation')", "images/LauraSprite/Laura_Sprite_Spunk_MouthSuck.png",
-            "LauraX.mouth == 'normal'", "images/LauraSprite/Laura_Sprite_Spunk_MouthNeutral.png",
-            "LauraX.mouth == 'lipbite'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmirk.png",
-            "LauraX.mouth == 'sucking'", "images/LauraSprite/Laura_Sprite_Spunk_MouthTongue.png",
-            "LauraX.mouth == 'kiss'", "images/LauraSprite/Laura_Sprite_Spunk_MouthKiss.png",
-            "LauraX.mouth == 'sad'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSad.png",
-            "LauraX.mouth == 'smile'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmile.png",
-            "LauraX.mouth == 'surprised'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSad.png",
-            "LauraX.mouth == 'tongue'", "images/LauraSprite/Laura_Sprite_Spunk_MouthTongue.png",
-            "LauraX.mouth == 'grimace'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmile.png",
-            "LauraX.mouth == 'smirk'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmirk.png",
+            "LauraX.mouth == '_normal'", "images/LauraSprite/Laura_Sprite_Spunk_MouthNeutral.png",
+            "LauraX.mouth == '_lipbite'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmirk.png",
+            "LauraX.mouth == '_sucking'", "images/LauraSprite/Laura_Sprite_Spunk_MouthTongue.png",
+            "LauraX.mouth == '_kiss'", "images/LauraSprite/Laura_Sprite_Spunk_MouthKiss.png",
+            "LauraX.mouth == '_sad'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSad.png",
+            "LauraX.mouth == '_smile'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmile.png",
+            "LauraX.mouth == '_surprised'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSad.png",
+            "LauraX.mouth == '_tongue'", "images/LauraSprite/Laura_Sprite_Spunk_MouthTongue.png",
+            "LauraX.mouth == '_grimace'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmile.png",
+            "LauraX.mouth == '_smirk'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmirk.png",
             "True", "images/LauraSprite/Laura_Sprite_Spunk_MouthNeutral.png",
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.blushing >= 2", ConditionSwitch(
-                    "LauraX.brows == 'normal'", "images/LauraSprite/Laura_Sprite_Brows_Normal_B.png",
-                    "LauraX.brows == 'angry'", "images/LauraSprite/Laura_Sprite_Brows_Angry_B.png",
-                    "LauraX.brows == 'sad'", "images/LauraSprite/Laura_Sprite_Brows_Sad_B.png",
-                    "LauraX.brows == 'surprised'", "images/LauraSprite/Laura_Sprite_Brows_Surprised_B.png",
-                    "LauraX.brows == 'confused'", "images/LauraSprite/Laura_Sprite_Brows_Confused_B.png",
+            "LauraX.blushing == '_blush2'", ConditionSwitch(
+                    "LauraX.brows == '_normal'", "images/LauraSprite/Laura_Sprite_Brows_Normal_B.png",
+                    "LauraX.brows == '_angry'", "images/LauraSprite/Laura_Sprite_Brows_Angry_B.png",
+                    "LauraX.brows == '_sad'", "images/LauraSprite/Laura_Sprite_Brows_Sad_B.png",
+                    "LauraX.brows == '_surprised'", "images/LauraSprite/Laura_Sprite_Brows_Surprised_B.png",
+                    "LauraX.brows == '_confused'", "images/LauraSprite/Laura_Sprite_Brows_Confused_B.png",
                     "True", "images/LauraSprite/Laura_Sprite_Brows_Normal_B.png",
                     ),
             "True", ConditionSwitch(
-                    "LauraX.brows == 'normal'", "images/LauraSprite/Laura_Sprite_Brows_Normal.png",
-                    "LauraX.brows == 'angry'", "images/LauraSprite/Laura_Sprite_Brows_Angry.png",
-                    "LauraX.brows == 'sad'", "images/LauraSprite/Laura_Sprite_Brows_Sad.png",
-                    "LauraX.brows == 'surprised'", "images/LauraSprite/Laura_Sprite_Brows_Surprised.png",
-                    "LauraX.brows == 'confused'", "images/LauraSprite/Laura_Sprite_Brows_Confused.png",
+                    "LauraX.brows == '_normal'", "images/LauraSprite/Laura_Sprite_Brows_Normal.png",
+                    "LauraX.brows == '_angry'", "images/LauraSprite/Laura_Sprite_Brows_Angry.png",
+                    "LauraX.brows == '_sad'", "images/LauraSprite/Laura_Sprite_Brows_Sad.png",
+                    "LauraX.brows == '_surprised'", "images/LauraSprite/Laura_Sprite_Brows_Surprised.png",
+                    "LauraX.brows == '_confused'", "images/LauraSprite/Laura_Sprite_Brows_Confused.png",
                     "True", "images/LauraSprite/Laura_Sprite_Brows_Normal.png",
                     ),
             ),
@@ -611,16 +611,16 @@ image Laura_Sprite_Head:
 
 image Laura Blink:
     ConditionSwitch(
-    "LauraX.eyes == 'sexy'", "images/LauraSprite/Laura_Sprite_Eyes_Squint.png",
-    "LauraX.eyes == 'side'", "images/LauraSprite/Laura_Sprite_Eyes_Side.png",
-    "LauraX.eyes == 'surprised'", "images/LauraSprite/Laura_Sprite_Eyes_Surprised.png",
-    "LauraX.eyes == 'normal'", "images/LauraSprite/Laura_Sprite_Eyes_Normal.png",
-    "LauraX.eyes == 'stunned'", "images/LauraSprite/Laura_Sprite_Eyes_Stunned.png",
-    "LauraX.eyes == 'down'", "images/LauraSprite/Laura_Sprite_Eyes_Down.png",
-    "LauraX.eyes == 'closed'", "images/LauraSprite/Laura_Sprite_Eyes_Closed.png",
-    "LauraX.eyes == 'leftside'", "images/LauraSprite/Laura_Sprite_Eyes_Leftside.png",
-    "LauraX.eyes == 'manic'", "images/LauraSprite/Laura_Sprite_Eyes_Normal.png",
-    "LauraX.eyes == 'squint'", "Laura_Squint",
+    "LauraX.eyes == '_sexy'", "images/LauraSprite/Laura_Sprite_Eyes_Squint.png",
+    "LauraX.eyes == '_side'", "images/LauraSprite/Laura_Sprite_Eyes_Side.png",
+    "LauraX.eyes == '_surprised'", "images/LauraSprite/Laura_Sprite_Eyes_Surprised.png",
+    "LauraX.eyes == '_normal'", "images/LauraSprite/Laura_Sprite_Eyes_Normal.png",
+    "LauraX.eyes == '_stunned'", "images/LauraSprite/Laura_Sprite_Eyes_Stunned.png",
+    "LauraX.eyes == '_down'", "images/LauraSprite/Laura_Sprite_Eyes_Down.png",
+    "LauraX.eyes == '_closed'", "images/LauraSprite/Laura_Sprite_Eyes_Closed.png",
+    "LauraX.eyes == '_leftside'", "images/LauraSprite/Laura_Sprite_Eyes_Leftside.png",
+    "LauraX.eyes == '_manic'", "images/LauraSprite/Laura_Sprite_Eyes_Normal.png",
+    "LauraX.eyes == '_squint'", "Laura_Squint",
     "True", "images/LauraSprite/Laura_Sprite_Eyes_Normal.png",
     ),
     choice:
@@ -675,54 +675,54 @@ image Laura_Doggy_Animation:
         (420,750),
         (0,0), ConditionSwitch(
 
-            "not Player.sprite", "Laura_Doggy_Body",
-            "Player.cock_position == 'anal'", ConditionSwitch(
+            "not Player.Sprite", "Laura_Doggy_Body",
+            "Player.Cock == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Laura_Doggy_Fuck2_Top",
                     "action_speed > 1", "Laura_Doggy_Fuck_Top",
-                    "action_speed ", "Laura_Doggy_Anal_Head_Top",
+                    "action_speed", "Laura_Doggy_Anal_Head_Top",
                     "True", "Laura_Doggy_Body",
                     ),
-            "Player.cock_position == 'in'", ConditionSwitch(
+            "Player.Cock == 'in'", ConditionSwitch(
                     "action_speed > 2", "Laura_Doggy_Fuck2_Top",
                     "action_speed > 1", "Laura_Doggy_Fuck_Top",
                     "True", "Laura_Doggy_Body",
                     ),
-            "Player.cock_position == 'foot'", ConditionSwitch(
+            "Player.Cock == 'footjob'", ConditionSwitch(
                     "action_speed > 1", "Laura_Doggy_Foot2_Top",
-                    "action_speed ", "Laura_Doggy_Foot1_Top",
+                    "action_speed", "Laura_Doggy_Foot1_Top",
                     "True", "Laura_Doggy_Foot0_Top",
                     ),
             "True", "Laura_Doggy_Body",
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.sprite", "Laura_Doggy_Ass",
-            "Player.cock_position == 'anal'", ConditionSwitch(
+            "not Player.Sprite", "Laura_Doggy_Ass",
+            "Player.Cock == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Laura_Doggy_Fuck2_Ass",
                     "action_speed > 1", "Laura_Doggy_Fuck_Ass",
-                    "action_speed ", "Laura_Doggy_Anal_Head_Ass",
+                    "action_speed", "Laura_Doggy_Anal_Head_Ass",
                     "True", "Laura_Doggy_Ass",
                     ),
-            "Player.cock_position == 'in'", ConditionSwitch(
+            "Player.Cock == 'in'", ConditionSwitch(
                     "action_speed > 2", "Laura_Doggy_Fuck2_Ass",
                     "action_speed > 1", "Laura_Doggy_Fuck_Ass",
                     "True", "Laura_Doggy_Ass",
                     ),
-            "Player.cock_position == 'foot'", ConditionSwitch(
+            "Player.Cock == 'footjob'", ConditionSwitch(
                     "action_speed > 1", "Laura_Doggy_Foot2_Ass",
-                    "action_speed ", "Laura_Doggy_Foot1_Ass",
+                    "action_speed", "Laura_Doggy_Foot1_Ass",
                     "True", "Laura_Doggy_Foot0_Ass",
                     ),
             "True", "Laura_Doggy_Ass",
             ),
         (0,0), ConditionSwitch(
 
-            "Player.cock_position == 'foot'", ConditionSwitch(
+            "Player.Cock == 'footjob'", ConditionSwitch(
                     "action_speed > 1", "Laura_Doggy_Feet2",
-                    "action_speed ", "Laura_Doggy_Feet1",
+                    "action_speed", "Laura_Doggy_Feet1",
                     "True", "Laura_Doggy_Feet0",
                     ),
-            "not Player.sprite and show_feet", "Laura_Doggy_Shins",
+            "not Player.Sprite and ShowFeet", "Laura_Doggy_Shins",
             "True", Null(),
             ),
         )
@@ -754,9 +754,9 @@ image Laura_Doggy_Body:
 
             "LauraX.bra == 'white tank'", "images/LauraDoggy/Laura_Doggy_Chest_Costume.png",
             "LauraX.bra == 'lace corset'", "images/LauraDoggy/Laura_Doggy_Chest_Corset.png",
-            "LauraX.bra == 'corset'", "images/LauraDoggy/Laura_Doggy_Chest_Corset.png",
-            "LauraX.bra == 'wolvie_top'", "images/LauraDoggy/Laura_Doggy_Chest_Wolvie.png",
-            "LauraX.bra == 'bikini_top'", "images/LauraDoggy/Laura_Doggy_Chest_Bikini.png",
+            "LauraX.bra == '_corset'", "images/LauraDoggy/Laura_Doggy_Chest_Corset.png",
+            "LauraX.bra == 'wolvie top'", "images/LauraDoggy/Laura_Doggy_Chest_Wolvie.png",
+            "LauraX.bra == '_bikini_top'", "images/LauraDoggy/Laura_Doggy_Chest_Bikini.png",
             "True", "images/LauraDoggy/Laura_Doggy_Chest_Tank.png",
             ),
 
@@ -767,19 +767,19 @@ image Laura_Doggy_Body:
         (0,0), ConditionSwitch(
 
             "not LauraX.legs", Null(),
-            "LauraX.accessory == 'suspenders'", "images/LauraDoggy/Laura_Doggy_Suspenders.png",
+            "LauraX.accessory == '_suspenders'", "images/LauraDoggy/Laura_Doggy_Suspenders.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.arms == 'gloves'", "images/LauraDoggy/Laura_Doggy_Gloves.png",
+            "LauraX.arms == '_gloves'", "images/LauraDoggy/Laura_Doggy_Gloves.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not LauraX.top", Null(),
             "LauraX.top == '_jacket'", "images/LauraDoggy/Laura_Doggy_Over_Jacket.png",
-            "LauraX.top == 'towel' and not LauraX.top_pulled_up", "images/LauraDoggy/Laura_Doggy_Over_TowelTop.png",
+            "LauraX.top == '_towel' and not LauraX.top_pulled_up", "images/LauraDoggy/Laura_Doggy_Over_TowelTop.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -821,15 +821,15 @@ image Laura_Doggy_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.mouth == 'normal'", "images/LauraDoggy/Laura_Doggy_Mouth_Smile.png",
-            "LauraX.mouth == 'lipbite'", "images/LauraDoggy/Laura_Doggy_Mouth_Smile.png",
-            "LauraX.mouth == 'sucking'", "images/LauraDoggy/Laura_Doggy_Mouth_Open.png",
-            "LauraX.mouth == 'kiss'", "images/LauraDoggy/Laura_Doggy_Mouth_Kiss.png",
-            "LauraX.mouth == 'sad'", "images/LauraDoggy/Laura_Doggy_Mouth_Sad.png",
-            "LauraX.mouth == 'smile'", "images/LauraDoggy/Laura_Doggy_Mouth_Smile.png",
-            "LauraX.mouth == 'grimace'", "images/LauraDoggy/Laura_Doggy_Mouth_Smile.png",
-            "LauraX.mouth == 'surprised'", "images/LauraDoggy/Laura_Doggy_Mouth_Open.png",
-            "LauraX.mouth == 'tongue'", "images/LauraDoggy/Laura_Doggy_Mouth_Tongue.png",
+            "LauraX.mouth == '_normal'", "images/LauraDoggy/Laura_Doggy_Mouth_Smile.png",
+            "LauraX.mouth == '_lipbite'", "images/LauraDoggy/Laura_Doggy_Mouth_Smile.png",
+            "LauraX.mouth == '_sucking'", "images/LauraDoggy/Laura_Doggy_Mouth_Open.png",
+            "LauraX.mouth == '_kiss'", "images/LauraDoggy/Laura_Doggy_Mouth_Kiss.png",
+            "LauraX.mouth == '_sad'", "images/LauraDoggy/Laura_Doggy_Mouth_Sad.png",
+            "LauraX.mouth == '_smile'", "images/LauraDoggy/Laura_Doggy_Mouth_Smile.png",
+            "LauraX.mouth == '_grimace'", "images/LauraDoggy/Laura_Doggy_Mouth_Smile.png",
+            "LauraX.mouth == '_surprised'", "images/LauraDoggy/Laura_Doggy_Mouth_Open.png",
+            "LauraX.mouth == '_tongue'", "images/LauraDoggy/Laura_Doggy_Mouth_Tongue.png",
             "True", "images/LauraDoggy/Laura_Doggy_Mouth_Smile.png",
             ),
 
@@ -854,9 +854,9 @@ image Laura_Doggy_Head:
         (0,0), ConditionSwitch(
 
 
-            "LauraX.brows == 'angry'", "images/LauraDoggy/Laura_Doggy_Brows_Angry.png",
-            "LauraX.brows == 'sad'", "images/LauraDoggy/Laura_Doggy_Brows_Sad.png",
-            "LauraX.brows == 'surprised'", "images/LauraDoggy/Laura_Doggy_Brows_Surprised.png",
+            "LauraX.brows == '_angry'", "images/LauraDoggy/Laura_Doggy_Brows_Angry.png",
+            "LauraX.brows == '_sad'", "images/LauraDoggy/Laura_Doggy_Brows_Sad.png",
+            "LauraX.brows == '_surprised'", "images/LauraDoggy/Laura_Doggy_Brows_Surprised.png",
 
             "True", "images/LauraDoggy/Laura_Doggy_Brows_Normal.png",
             ),
@@ -918,15 +918,15 @@ image Laura_Doggy_Head:
 image Laura Doggy Blink:
 
     ConditionSwitch(
-        "LauraX.eyes == 'sexy'", "images/LauraDoggy/Laura_Doggy_Eyes_Sexy.png",
-        "LauraX.eyes == 'side'", "images/LauraDoggy/Laura_Doggy_Eyes_Side.png",
-        "LauraX.eyes == 'normal'", "images/LauraDoggy/Laura_Doggy_Eyes_Sexy.png",
-        "LauraX.eyes == 'closed'", "images/LauraDoggy/Laura_Doggy_Eyes_Closed.png",
-        "LauraX.eyes == 'manic'", "images/LauraDoggy/Laura_Doggy_Eyes_Stunned.png",
-        "LauraX.eyes == 'down'", "images/LauraDoggy/Laura_Doggy_Eyes_Sexy.png",
-        "LauraX.eyes == 'stunned'", "images/LauraDoggy/Laura_Doggy_Eyes_Stunned.png",
-        "LauraX.eyes == 'surprised'", "images/LauraDoggy/Laura_Doggy_Eyes_Surprised.png",
-        "LauraX.eyes == 'squint'", "images/LauraDoggy/Laura_Doggy_Eyes_Sexy.png",
+        "LauraX.eyes == '_sexy'", "images/LauraDoggy/Laura_Doggy_Eyes_Sexy.png",
+        "LauraX.eyes == '_side'", "images/LauraDoggy/Laura_Doggy_Eyes_Side.png",
+        "LauraX.eyes == '_normal'", "images/LauraDoggy/Laura_Doggy_Eyes_Sexy.png",
+        "LauraX.eyes == '_closed'", "images/LauraDoggy/Laura_Doggy_Eyes_Closed.png",
+        "LauraX.eyes == '_manic'", "images/LauraDoggy/Laura_Doggy_Eyes_Stunned.png",
+        "LauraX.eyes == '_down'", "images/LauraDoggy/Laura_Doggy_Eyes_Sexy.png",
+        "LauraX.eyes == '_stunned'", "images/LauraDoggy/Laura_Doggy_Eyes_Stunned.png",
+        "LauraX.eyes == '_surprised'", "images/LauraDoggy/Laura_Doggy_Eyes_Surprised.png",
+        "LauraX.eyes == '_squint'", "images/LauraDoggy/Laura_Doggy_Eyes_Sexy.png",
         "True", "images/LauraDoggy/Laura_Doggy_Eyes_Normal.png",
         ),
 
@@ -955,9 +955,9 @@ image Laura_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "not LauraX.underwear_pulled_down or (LauraX.legs == 'pants' and not LauraX.upskirt)", Null(),
-            "LauraX.underwear == 'wolvie_panties'", "images/LauraDoggy/Laura_Doggy_Panties_Wolvie_Back.png",
-            "LauraX.underwear == 'lace_panties'", "images/LauraDoggy/Laura_Doggy_Panties_Lace_Back.png",
+            "not LauraX.underwear_pulled_down or (LauraX.legs == '_pants' and not LauraX.upskirt)", Null(),
+            "LauraX.underwear == '_wolvie_panties'", "images/LauraDoggy/Laura_Doggy_Panties_Wolvie_Back.png",
+            "LauraX.underwear == '_lace_panties'", "images/LauraDoggy/Laura_Doggy_Panties_Lace_Back.png",
             "LauraX.underwear", "images/LauraDoggy/Laura_Doggy_Panties_Back.png",
             "True", Null(),
             ),
@@ -969,76 +969,76 @@ image Laura_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "LauraX.hose == 'black stockings'", "images/LauraDoggy/Laura_Doggy_Stocking.png",
-            "LauraX.hose == 'stockings'", "images/LauraDoggy/Laura_Doggy_Hose.png",
-            "Player.sprite and Player.cock_position == 'in'", Null(),
-            "Player.sprite and Player.cock_position == 'anal'", Null(),
-            "LauraX.hose == 'stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
-            "LauraX.hose == 'garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
+            "LauraX.hose == '_black_stockings'", "images/LauraDoggy/Laura_Doggy_Stocking.png",
+            "LauraX.hose == '_stockings'", "images/LauraDoggy/Laura_Doggy_Hose.png",
+            "Player.Sprite and Player.Cock == 'in'", Null(),
+            "Player.Sprite and Player.Cock == 'anal'", Null(),
+            "LauraX.hose == '_stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
+            "LauraX.hose == '_garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "not LauraX.underwear_pulled_down or (LauraX.legs == 'pants' and not LauraX.upskirt)", Null(),
-            "LauraX.underwear == 'wolvie_panties'", "images/LauraDoggy/Laura_Doggy_Panties_Wolvie_Down.png",
-            "LauraX.underwear == 'bikini_bottoms'", "images/LauraDoggy/Laura_Doggy_Panties_Bikini_Down.png",
+            "not LauraX.underwear_pulled_down or (LauraX.legs == '_pants' and not LauraX.upskirt)", Null(),
+            "LauraX.underwear == '_wolvie_panties'", "images/LauraDoggy/Laura_Doggy_Panties_Wolvie_Down.png",
+            "LauraX.underwear == '_bikini_bottoms'", "images/LauraDoggy/Laura_Doggy_Panties_Bikini_Down.png",
             "LauraX.underwear", "images/LauraDoggy/Laura_Doggy_Panties_Black_Down.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'", "Laura_Pussy_Fingering",
-            "primary_action == 'dildo_pussy'", "Laura_Pussy_Fucking2",
-            "Player.sprite and Player.cock_position == 'in'", ConditionSwitch(
+            "primary_action == 'dildo pussy'", "Laura_Pussy_Fucking2",
+            "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
                     "action_speed > 2", "Laura_Pussy_Fucking3",
                     "action_speed > 1", "Laura_Pussy_Fucking2",
-                    "action_speed ", "Laura_Pussy_Heading",
+                    "action_speed", "Laura_Pussy_Heading",
                     "True", "Laura_Pussy_Static",
                     ),
             "primary_action == 'eat_pussy'", "images/LauraDoggy/Laura_Doggy_Pussy_Open.png",
             "LauraX.legs and not LauraX.upskirt", "images/LauraDoggy/Laura_Doggy_Pussy_Closed.png",
             "LauraX.underwear and not LauraX.underwear_pulled_down", "images/LauraDoggy/Laura_Doggy_Pussy_Closed.png",
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'", "Laura_Pussy_Fingering",
-            "primary_action == 'dildo_pussy'", "Laura_Pussy_Fucking2",
+            "primary_action == 'dildo pussy'", "Laura_Pussy_Fucking2",
             "True", "images/LauraDoggy/Laura_Doggy_Pussy_Closed.png",
             ),
 
 
         (0,0), ConditionSwitch(
 
-            "'in' in LauraX.spunk and Player.cock_position == 'in'",Null(),
+            "'in' in LauraX.spunk and Player.Cock == 'in'",Null(),
             "'in' in LauraX.spunk ", "images/LauraDoggy/Laura_Doggy_SpunkPussyClosed.png",
-            "LauraX.grool and Player.cock_position == 'in'", "images/Rogue_doggy/Rogue_Doggy_WetPussyOpen.png",
-            "LauraX.grool", "images/Rogue_doggy/Rogue_Doggy_WetPussyClosed.png",
+            "LauraX.grool and Player.Cock == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
+            "LauraX.grool", "images/RogueDoggy/Rogue_Doggy_WetPussyClosed.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not LauraX.pubes", Null(),
-            "Player.sprite and Player.cock_position == 'in'", Null(),
+            "Player.Sprite and Player.Cock == 'in'", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
-            "primary_action == 'dildo_pussy'", Null(),
-            "LauraX.legs == 'pants' and not LauraX.upskirt", "images/LauraDoggy/Laura_Doggy_Pubes_Panties.png",
+            "primary_action == 'dildo pussy'", Null(),
+            "LauraX.legs == '_pants' and not LauraX.upskirt", "images/LauraDoggy/Laura_Doggy_Pubes_Panties.png",
             "LauraX.underwear_pulled_down and primary_action == 'eat_pussy'", "images/LauraDoggy/Laura_Doggy_Pubes_Open.png",
             "LauraX.underwear_pulled_down", "images/LauraDoggy/Laura_Doggy_Pubes.png",
             "LauraX.underwear", "images/LauraDoggy/Laura_Doggy_Pubes_Panties.png",
-            "LauraX.hose and LauraX.hose != 'stockings'", "images/LauraDoggy/Laura_Doggy_Pubes_Panties.png",
+            "LauraX.hose and LauraX.hose != '_stockings'", "images/LauraDoggy/Laura_Doggy_Pubes_Panties.png",
             "primary_action == 'eat_pussy'", "images/LauraDoggy/Laura_Doggy_Pubes_Open.png",
             "True", "images/LauraDoggy/Laura_Doggy_Pubes.png",
             ),
         (0,0), ConditionSwitch(
 
-            "Player.sprite", Null(),
-            "LauraX.piercings == 'ring'", "images/LauraDoggy/Laura_Doggy_Pierce_Ring.png",
-            "LauraX.piercings == 'barbell'", "images/LauraDoggy/Laura_Doggy_Pierce_Barbell.png",
+            "Player.Sprite", Null(),
+            "LauraX.piercings == '_ring'", "images/LauraDoggy/Laura_Doggy_Pierce_Ring.png",
+            "LauraX.piercings == '_barbell'", "images/LauraDoggy/Laura_Doggy_Pierce_Barbell.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "Player.sprite and Player.cock_position == 'anal'", ConditionSwitch(
+            "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Laura_Anal_Fucking2",
                     "action_speed > 1", "Laura_Anal_Fucking",
-                    "action_speed ", "Laura_Anal_Heading",
+                    "action_speed", "Laura_Anal_Heading",
                     "True", "Laura_Anal",
                     ),
 
@@ -1046,29 +1046,29 @@ image Laura_Doggy_Ass:
             "LauraX.legs and not LauraX.upskirt", "images/LauraDoggy/Laura_Doggy_Asshole_Loose.png",
             "LauraX.underwear and not LauraX.underwear_pulled_down", "images/LauraDoggy/Laura_Doggy_Asshole_Loose.png",
             "primary_action == 'finger_ass' or offhand_action == 'finger_ass'", "Laura_Anal_Fingering",
-            "primary_action == 'dildo_anal'", "Laura_Anal_Fucking",
-            "LauraX.used_to_anal", "images/LauraDoggy/Laura_Doggy_Asshole_Loose.png",
+            "primary_action == 'dildo anal'", "Laura_Anal_Fucking",
+            "LauraX.Loose", "images/LauraDoggy/Laura_Doggy_Asshole_Loose.png",
             "True", "images/LauraDoggy/Laura_Doggy_Asshole_Tight.png",
             ),
 
 
         (0,0), ConditionSwitch(
 
-            "'anal' not in LauraX.spunk or Player.sprite", Null(),
-            "Player.cock_position == 'anal'", "images/LauraDoggy/Laura_Doggy_SpunkAnalOpen.png",
-            "LauraX.used_to_anal", "images/LauraDoggy/Laura_Doggy_SpunkAnalLoose.png",
+            "'anal' not in LauraX.spunk or Player.Sprite", Null(),
+            "Player.Cock == 'anal'", "images/LauraDoggy/Laura_Doggy_SpunkAnalOpen.png",
+            "LauraX.Loose", "images/LauraDoggy/Laura_Doggy_SpunkAnalLoose.png",
             "True", "images/LauraDoggy/Laura_Doggy_SpunkAnalLoose.png",
             ),
         (0,0), ConditionSwitch(
 
             "LauraX.underwear_pulled_down or not LauraX.underwear", Null(),
-            "Player.sprite and (Player.cock_position == 'in' or Player.cock_position == 'anal')", Null(),
+            "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
 
 
-            "LauraX.underwear == 'wolvie_panties' and LauraX.grool", "images/LauraDoggy/Laura_Doggy_Panties_Wolvie_Wet.png",
-            "LauraX.underwear == 'wolvie_panties'", "images/LauraDoggy/Laura_Doggy_Panties_Wolvie.png",
-            "LauraX.underwear == 'lace_panties'", "images/LauraDoggy/Laura_Doggy_Panties_Lace.png",
-            "LauraX.underwear == 'bikini_bottoms'", "images/LauraDoggy/Laura_Doggy_Panties_Bikini.png",
+            "LauraX.underwear == '_wolvie_panties' and LauraX.grool", "images/LauraDoggy/Laura_Doggy_Panties_Wolvie_Wet.png",
+            "LauraX.underwear == '_wolvie_panties'", "images/LauraDoggy/Laura_Doggy_Panties_Wolvie.png",
+            "LauraX.underwear == '_lace_panties'", "images/LauraDoggy/Laura_Doggy_Panties_Lace.png",
+            "LauraX.underwear == '_bikini_bottoms'", "images/LauraDoggy/Laura_Doggy_Panties_Bikini.png",
             "LauraX.grool", "images/LauraDoggy/Laura_Doggy_Panties_Black_Wet.png",
             "True", "images/LauraDoggy/Laura_Doggy_Panties_Black.png",
             ),
@@ -1088,7 +1088,7 @@ image Laura_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "LauraX.legs == 'leather_pants'", ConditionSwitch(
+            "LauraX.legs == '_leather_pants'", ConditionSwitch(
                     "LauraX.upskirt or LauraX.underwear_pulled_down", Null(),
 
                     "True", "images/LauraDoggy/Laura_Doggy_Legs_Pants.png",
@@ -1098,13 +1098,13 @@ image Laura_Doggy_Ass:
 
 
 
-            "LauraX.legs == 'other_skirt'", ConditionSwitch(
-                    "LauraX.upskirt and Player.sprite and Player.cock_position == 'anal' and action_speed" , "images/LauraDoggy/Laura_Doggy_Legs_SkirtCos_Up.png",
+            "LauraX.legs == '_other_skirt'", ConditionSwitch(
+                    "LauraX.upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/LauraDoggy/Laura_Doggy_Legs_SkirtCos_Up.png",
                     "LauraX.upskirt", "images/LauraDoggy/Laura_Doggy_Legs_SkirtCos_Up.png",
                     "True", "images/LauraDoggy/Laura_Doggy_Legs_SkirtCos.png",
                     ),
-            "LauraX.legs == 'skirt'", ConditionSwitch(
-                    "LauraX.upskirt and Player.sprite and Player.cock_position == 'anal' and action_speed" , "images/LauraDoggy/Laura_Doggy_Legs_Skirt_Up.png",
+            "LauraX.legs == '_skirt'", ConditionSwitch(
+                    "LauraX.upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/LauraDoggy/Laura_Doggy_Legs_Skirt_Up.png",
                     "LauraX.upskirt", "images/LauraDoggy/Laura_Doggy_Legs_Skirt_Up.png",
                     "True", "images/LauraDoggy/Laura_Doggy_Legs_Skirt.png",
                     ),
@@ -1112,16 +1112,16 @@ image Laura_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.top == 'towel' and LauraX.upskirt", "images/LauraDoggy/Laura_Doggy_Over_TowelAss_Up.png",
-            "LauraX.top == 'towel'", "images/LauraDoggy/Laura_Doggy_Over_TowelAss.png",
+            "LauraX.top == '_towel' and LauraX.upskirt", "images/LauraDoggy/Laura_Doggy_Over_TowelAss_Up.png",
+            "LauraX.top == '_towel'", "images/LauraDoggy/Laura_Doggy_Over_TowelAss.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "Player.sprite", Null(),
-            "LauraX.underwear_pulled_down or (not LauraX.underwear and LauraX.legs != 'leather_pants')", Null(),
-            "LauraX.piercings == 'ring'", "images/LauraDoggy/Laura_Doggy_Pierce_RingC.png",
-            "LauraX.piercings == 'barbell'", "images/LauraDoggy/Laura_Doggy_Pierce_BarbellC.png",
+            "Player.Sprite", Null(),
+            "LauraX.underwear_pulled_down or (not LauraX.underwear and LauraX.legs != '_leather_pants')", Null(),
+            "LauraX.piercings == '_ring'", "images/LauraDoggy/Laura_Doggy_Pierce_RingC.png",
+            "LauraX.piercings == '_barbell'", "images/LauraDoggy/Laura_Doggy_Pierce_BarbellC.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -1131,24 +1131,24 @@ image Laura_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.sprite and Player.cock_position", Null(),
-            "primary_action == 'eat_pussy'", "doggy_licking_pussy",
-            "primary_action == 'eat_ass'", "doggy_licking_ass",
+            "Player.Sprite and Player.Cock", Null(),
+            "primary_action == 'eat_pussy'", "Rogue_Doggy_Lick_Pussy",
+            "primary_action == 'eat_ass'", "Rogue_Doggy_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.sprite or Player.cock_position != 'out'", Null(),
-            "LauraX.legs == 'skirt' and LauraX.upskirt", "images/LauraDoggy/Laura_Doggy_Hotdog_Upskirt_Back.png",
+            "not Player.Sprite or Player.Cock != 'out'", Null(),
+            "LauraX.legs == '_skirt' and LauraX.upskirt", "images/LauraDoggy/Laura_Doggy_Hotdog_Upskirt_Back.png",
             "True", "images/LauraDoggy/Laura_Doggy_HotdogBack.png",
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.sprite or Player.cock_position != 'out'", Null(),
-            "LauraX.legs == 'skirt' and LauraX.upskirt and action_speed", AlphaMask("Zero_hotdog_moving", "images/Rogue_doggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
-            "LauraX.legs == 'skirt' and LauraX.upskirt", AlphaMask("Zero_hotdog_static", "images/Rogue_doggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
-            "action_speed ", AlphaMask("Zero_hotdog_moving", "images/Rogue_doggy/Rogue_Doggy_HotdogMask.png"),
-            "True", AlphaMask("Zero_hotdog_static", "images/Rogue_doggy/Rogue_Doggy_HotdogMask.png"),
+            "not Player.Sprite or Player.Cock != 'out'", Null(),
+            "LauraX.legs == '_skirt' and LauraX.upskirt and action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
+            "LauraX.legs == '_skirt' and LauraX.upskirt", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
+            "action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "True", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             ),
 
 
@@ -1173,16 +1173,16 @@ image Laura_Doggy_Shins:
 
         ConditionSwitch(
             "not LauraX.hose", Null(),
-            "LauraX.hose == 'stockings'", "images/LauraDoggy/Laura_Doggy_Feet_Hose_Back.png",
-            "LauraX.hose == 'stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_Feet_Hose_Back.png",
-            "LauraX.hose == 'black stockings'", "images/LauraDoggy/Laura_Doggy_Feet_Stockings_Back.png",
-            "LauraX.hose == 'pantyhose'", "images/LauraDoggy/Laura_Doggy_Feet_Hose_Back.png",
+            "LauraX.hose == '_stockings'", "images/LauraDoggy/Laura_Doggy_Feet_Hose_Back.png",
+            "LauraX.hose == '_stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_Feet_Hose_Back.png",
+            "LauraX.hose == '_black_stockings'", "images/LauraDoggy/Laura_Doggy_Feet_Stockings_Back.png",
+            "LauraX.hose == '_pantyhose'", "images/LauraDoggy/Laura_Doggy_Feet_Hose_Back.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-            "LauraX.legs == 'leather_pants'", "images/LauraDoggy/Laura_Doggy_Feet_Pants.png",
+            "LauraX.legs == '_leather_pants'", "images/LauraDoggy/Laura_Doggy_Feet_Pants.png",
             "True", Null(),
             )
 
@@ -1232,14 +1232,14 @@ image Zero_Laura_Hotdog_Static:
 
 
     contains:
-        "Zero_cock_doggy_out"
+        "Zero_Doggy_Up"
         pos (175, 370)
 
 image Zero_Laura_Hotdog_Moving:
 
 
     contains:
-        "Zero_cock_doggy_out"
+        "Zero_Doggy_Up"
         pos (175, 370)
         block:
             ease 1 ypos 330
@@ -1271,7 +1271,7 @@ image Zero_Laura_Doggy_Static:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         pos (169,545)
         block:
             ease 1 ypos 540
@@ -1283,7 +1283,7 @@ image Zero_Laura_Doggy_Heading:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         pos (171,545)
         block:
             ease 1 xpos 168 ypos 500
@@ -1294,7 +1294,7 @@ image Zero_Laura_Doggy_Heading:
 image Zero_Laura_Doggy_Fucking2:
 
     contains:
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         pos (169,500)
         block:
             ease .5 ypos 440
@@ -1305,7 +1305,7 @@ image Zero_Laura_Doggy_Fucking2:
 image Zero_Laura_Doggy_Fucking3:
 
     contains:
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         pos (169,500)
         block:
             ease .2 ypos 440
@@ -1318,7 +1318,7 @@ image Laura_Pussy_Mask:
 
     contains:
 
-        "images/Rogue_doggy/Rogue_Doggy_SexMask.png"
+        "images/RogueDoggy/Rogue_Doggy_SexMask.png"
         anchor (0.52,0.69)
         pos (217,518)
         xzoom .6
@@ -1333,7 +1333,7 @@ image Laura_Pussy_Mask_Static:
 
     contains:
 
-        "images/Rogue_doggy/Rogue_Doggy_SexMask.png"
+        "images/RogueDoggy/Rogue_Doggy_SexMask.png"
         anchor (0.52,0.69)
         pos (217,518)
         xzoom .6
@@ -1400,8 +1400,8 @@ image Laura_Pussy_Static:
     contains:
         ConditionSwitch(
 
-            "LauraX.hose == 'stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
-            "LauraX.hose == 'garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
+            "LauraX.hose == '_stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
+            "LauraX.hose == '_garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
 
 
 
@@ -1419,7 +1419,7 @@ image Laura_Pussy_Hole_Mask_Static:
 
     contains:
 
-        AlphaMask("images/LauraDoggy/Laura_Doggy_Pussy_FHole.png", "images/Rogue_doggy/Rogue_Doggy_SexMask.png")
+        AlphaMask("images/LauraDoggy/Laura_Doggy_Pussy_FHole.png", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
@@ -1470,8 +1470,8 @@ image Laura_Pussy_Heading:
     contains:
         ConditionSwitch(
 
-            "LauraX.hose == 'stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
-            "LauraX.hose == 'garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
+            "LauraX.hose == '_stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
+            "LauraX.hose == '_garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
 
 
 
@@ -1490,7 +1490,7 @@ image Laura_Pussy_Hole_Mask:
 
     contains:
 
-        AlphaMask("images/LauraDoggy/Laura_Doggy_Pussy_FHole.png", "images/Rogue_doggy/Rogue_Doggy_SexMask.png")
+        AlphaMask("images/LauraDoggy/Laura_Doggy_Pussy_FHole.png", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
@@ -1568,8 +1568,8 @@ image Laura_Pussy_Fucking2:
     contains:
         ConditionSwitch(
 
-            "LauraX.hose == 'stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
-            "LauraX.hose == 'garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
+            "LauraX.hose == '_stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
+            "LauraX.hose == '_garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
 
 
 
@@ -1578,8 +1578,8 @@ image Laura_Pussy_Fucking2:
     contains:
 
         ConditionSwitch(
-            "primary_action == 'dildo_pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/Rogue_doggy/Rogue_Doggy_SexMask.png"),
-            "True",AlphaMask("Zero_Laura_Doggy_Fucking2", "images/Rogue_doggy/Rogue_Doggy_SexMask.png"),
+            "primary_action == 'dildo pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
+            "True",AlphaMask("Zero_Laura_Doggy_Fucking2", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
             ),
 
 
@@ -1595,8 +1595,8 @@ image Laura_Pussy_Fucking3:
     contains:
         ConditionSwitch(
 
-            "LauraX.hose == 'stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
-            "LauraX.hose == 'garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
+            "LauraX.hose == '_stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
+            "LauraX.hose == '_garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
 
 
 
@@ -1604,7 +1604,7 @@ image Laura_Pussy_Fucking3:
             )
     contains:
 
-        AlphaMask("Zero_Laura_Doggy_Fucking3", "images/Rogue_doggy/Rogue_Doggy_SexMask.png")
+        AlphaMask("Zero_Laura_Doggy_Fucking3", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
 
 
 
@@ -1621,8 +1621,8 @@ image Laura_Anal:
     contains:
         ConditionSwitch(
 
-            "LauraX.hose == 'stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
-            "LauraX.hose == 'garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
+            "LauraX.hose == '_stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
+            "LauraX.hose == '_garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
 
 
 
@@ -1630,7 +1630,7 @@ image Laura_Anal:
             )
     contains:
 
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         pos (172,500)
 
 
@@ -1686,8 +1686,8 @@ image Laura_Anal_Heading:
     contains:
         ConditionSwitch(
 
-            "LauraX.hose == 'stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
-            "LauraX.hose == 'garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
+            "LauraX.hose == '_stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
+            "LauraX.hose == '_garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
 
 
 
@@ -1703,7 +1703,7 @@ image Laura_Anal_Heading:
 image Zero_Laura_Doggy_Anal_Heading:
 
     contains:
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         pos (172,500)
         block:
             ease .5 ypos 450
@@ -1725,7 +1725,7 @@ image Zero_Laura_Doggy_Anal_HeadingJunk:
 image Laura_Doggy_Anal_Heading_Mask:
 
     contains:
-        "images/Rogue_doggy/Rogue_Doggy_Anal_CockMask.png"
+        "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"
         anchor (0.52,0.69)
         pos (218,518)
         zoom .5
@@ -1766,7 +1766,7 @@ image Laura_Doggy_Anal_Head_Ass:
 image Zero_Laura_Doggy_Anal1:
 
     contains:
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         pos (172,460)
         block:
             ease .5 ypos 395
@@ -1788,8 +1788,8 @@ image Laura_Anal_Fucking:
     contains:
         ConditionSwitch(
 
-            "LauraX.hose == 'stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
-            "LauraX.hose == 'garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
+            "LauraX.hose == '_stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
+            "LauraX.hose == '_garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
 
 
 
@@ -1799,8 +1799,8 @@ image Laura_Anal_Fucking:
 
         ConditionSwitch(
 
-            "primary_action == 'dildo_anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/Rogue_doggy/Rogue_Doggy_Anal_CockMask.png"),
-            "True", AlphaMask("Zero_Laura_Doggy_Anal1", "images/Rogue_doggy/Rogue_Doggy_Anal_CockMask.png"),
+            "primary_action == 'dildo anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
+            "True", AlphaMask("Zero_Laura_Doggy_Anal1", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
             ),
 
 
@@ -1814,8 +1814,8 @@ image Laura_Doggy_Anal_FullMask:
     contains:
         ConditionSwitch(
 
-            "LauraX.hose == 'stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
-            "LauraX.hose == 'garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
+            "LauraX.hose == '_stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
+            "LauraX.hose == '_garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
 
 
 
@@ -1854,7 +1854,7 @@ image Laura_Doggy_Fuck_Ass:
 image Zero_Laura_Doggy_Anal2:
 
     contains:
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         pos (172,460)
         block:
             ease .2 ypos 395
@@ -1879,8 +1879,8 @@ image Laura_Anal_Fucking2:
     contains:
         ConditionSwitch(
 
-            "LauraX.hose == 'stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
-            "LauraX.hose == 'garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
+            "LauraX.hose == '_stockings_and_garterbelt'", "images/LauraDoggy/Laura_Doggy_StockingsGarter.png",
+            "LauraX.hose == '_garterbelt'", "images/LauraDoggy/Laura_Doggy_Garters.png",
 
 
 
@@ -1888,7 +1888,7 @@ image Laura_Anal_Fucking2:
             )
     contains:
 
-        AlphaMask("Zero_Laura_Doggy_Anal2", "images/Rogue_doggy/Rogue_Doggy_Anal_CockMask.png")
+        AlphaMask("Zero_Laura_Doggy_Anal2", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png")
 
 image Laura_Doggy_Fuck2_Top:
 
@@ -1936,7 +1936,7 @@ image Laura_Doggy_Feet0:
             repeat
     contains:
         ConditionSwitch(
-                "Player.sprite", "Zero_cock_doggy_out",
+                "Player.Sprite", "Zero_Doggy_Up",
                 "True", Null(),
                 )
         zoom 1.2
@@ -1963,7 +1963,7 @@ image Laura_Doggy_Feet1:
             ease 1 ypos 0
             repeat
     contains:
-        "Zero_cock_doggy_out"
+        "Zero_Doggy_Up"
         zoom 1.2
         pos (160,480)
         block:
@@ -1991,7 +1991,7 @@ image Laura_Doggy_Feet2:
             ease .3 ypos 0
             repeat
     contains:
-        "Zero_cock_doggy_out"
+        "Zero_Doggy_Up"
         zoom 1.2
         pos (160,480)
         block:
@@ -2093,11 +2093,11 @@ image Laura_Doggy_Foot2_Ass:
 
 
 
-label Laura_Doggy_Launch(line=primary_action):
+label Laura_Doggy_Launch(Line=primary_action):
     if renpy.showing("Laura_Doggy_Animation"):
         return
     $ action_speed = 0
-    call Laura_Hide (1)
+    call hide_girl(LauraX, hide_sprite = True)
     show Laura_Doggy_Animation zorder 150 at sprite_location(stage_center+150)
     with dissolve
     return
@@ -2107,9 +2107,9 @@ label Laura_Doggy_Reset:
         return
 
     $ LauraX.arm_pose = 2
-    $ LauraX.spriteVer = 0
+    $ LauraX.SpriteVer = 0
     hide Laura_Doggy_Animation
-    call Laura_Hide
+    call hide_girl(LauraX)
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         alpha 1
         zoom 1
@@ -2132,7 +2132,7 @@ image Laura_SexSprite:
     contains:
         ConditionSwitch(
 
-            "Player.cock_position == 'in'", ConditionSwitch(
+            "Player.Cock == 'in'", ConditionSwitch(
 
                     "action_speed == 1", "Laura_Sex_Body_S1",
                     "action_speed == 2", "Laura_Sex_Body_S2",
@@ -2140,7 +2140,7 @@ image Laura_SexSprite:
                     "action_speed >= 4", "Laura_Sex_Body_S4",
                     "True",       "Laura_Sex_Body_S0",
                     ),
-            "Player.cock_position == 'anal'", ConditionSwitch(
+            "Player.Cock == 'anal'", ConditionSwitch(
 
                     "action_speed == 1", "Laura_Sex_Body_A1",
                     "action_speed == 2", "Laura_Sex_Body_A2",
@@ -2148,9 +2148,9 @@ image Laura_SexSprite:
                     "action_speed >= 4", "Laura_Sex_Body_A4",
                     "True",       "Laura_Sex_Body_A0",
                     ),
-            "Player.cock_position == 'foot'", ConditionSwitch(
+            "Player.Cock == 'footjob'", ConditionSwitch(
 
-                    "not Player.sprite","Laura_Sex_Body_F0",
+                    "not Player.Sprite","Laura_Sex_Body_F0",
                     "action_speed == 1", "Laura_Sex_Body_F1",
                     "action_speed >= 4", "Laura_Sex_Body_F0",
                     "action_speed >= 2", "Laura_Sex_Body_F2",
@@ -2159,7 +2159,7 @@ image Laura_SexSprite:
 
             "True", ConditionSwitch(
 
-                    "not Player.sprite","Laura_Sex_Body_H0",
+                    "not Player.Sprite","Laura_Sex_Body_H0",
                     "action_speed == 1", "Laura_Sex_Body_H1",
                     "action_speed == 4", "Laura_Sex_Body_H0",
                     "action_speed >= 2", "Laura_Sex_Body_H2",
@@ -2169,7 +2169,7 @@ image Laura_SexSprite:
     contains:
         ConditionSwitch(
 
-            "Player.cock_position == 'in'", ConditionSwitch(
+            "Player.Cock == 'in'", ConditionSwitch(
 
                     "action_speed == 1", "Laura_Sex_Legs_S1",
                     "action_speed == 2", "Laura_Sex_Legs_S2",
@@ -2177,7 +2177,7 @@ image Laura_SexSprite:
                     "action_speed >= 4", "Laura_Sex_Legs_S4",
                     "True", "Laura_Sex_Legs_S0",
                     ),
-            "Player.cock_position == 'anal'", ConditionSwitch(
+            "Player.Cock == 'anal'", ConditionSwitch(
 
                     "action_speed == 1", "Laura_Sex_Legs_A1",
                     "action_speed == 2", "Laura_Sex_Legs_A2",
@@ -2185,9 +2185,9 @@ image Laura_SexSprite:
                     "action_speed >= 4", "Laura_Sex_Legs_A4",
                     "True", "Laura_Sex_Legs_A0",
                     ),
-            "Player.cock_position == 'foot'", ConditionSwitch(
+            "Player.Cock == 'footjob'", ConditionSwitch(
 
-                    "not Player.sprite","Laura_Sex_Legs_F0",
+                    "not Player.Sprite","Laura_Sex_Legs_F0",
                     "action_speed == 1", "Laura_Sex_Legs_F1",
                     "action_speed >= 4", "Laura_Sex_Legs_F0",
                     "action_speed >= 2", "Laura_Sex_Legs_F2",
@@ -2195,7 +2195,7 @@ image Laura_SexSprite:
                     ),
             "True", ConditionSwitch(
 
-                    "not Player.sprite","Laura_Sex_Legs_H0",
+                    "not Player.Sprite","Laura_Sex_Legs_H0",
                     "action_speed == 1", "Laura_Sex_Legs_H1",
                     "action_speed == 4", "Laura_Sex_Legs_H0",
                     "action_speed >= 2", "Laura_Sex_Legs_H2",
@@ -2207,9 +2207,9 @@ image Laura_SexSprite:
     anchor (.5,.5)
 
 
-image Laura_Sex_hairback:
+image Laura_Sex_HairBack:
 
-    "Laura_Sprite_hairback"
+    "Laura_Sprite_HairBack"
     transform_anchor True
     zoom 1.8
     anchor (0.5, 0.5)
@@ -2230,14 +2230,14 @@ image Laura_Sex_Head:
 image Laura_Sex_Body:
 
     contains:
-        "Laura_Sex_hairback"
+        "Laura_Sex_HairBack"
     contains:
 
 
 
         ConditionSwitch(
-                    "Player.cock_position == 'foot'", Null(),
-                    "LauraX.arms == 'gloves'", "images/LauraSex/Laura_Sex_Hand_Gloved.png",
+                    "Player.Cock == 'footjob'", Null(),
+                    "LauraX.arms == '_gloves'", "images/LauraSex/Laura_Sex_Hand_Gloved.png",
                     "True", "images/LauraSex/Laura_Sex_Hand.png"
                     )
     contains:
@@ -2262,20 +2262,20 @@ image Laura_Sex_Body:
 
         ConditionSwitch(
             "not LauraX.piercings", Null(),
-            "LauraX.piercings == 'barbell'", "images/LauraSex/Laura_Sex_Barbell_Tits.png",
-            "LauraX.piercings == 'ring'", "images/LauraSex/Laura_Sex_Ring_Tits.png",
+            "LauraX.piercings == '_barbell'", "images/LauraSex/Laura_Sex_Barbell_Tits.png",
+            "LauraX.piercings == '_ring'", "images/LauraSex/Laura_Sex_Ring_Tits.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-            "LauraX.neck == 'leash choker'", "images/LauraSex/Laura_Sex_Leash.png",
+            "LauraX.neck == '_leash choker'", "images/LauraSex/Laura_Sex_Leash.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-            "LauraX.hose == 'stockings_and_garterbelt' or LauraX.hose == 'garterbelt'", "images/LauraSex/Laura_Sex_Garter.png",
+            "LauraX.hose == '_stockings_and_garterbelt' or LauraX.hose == '_garterbelt'", "images/LauraSex/Laura_Sex_Garter.png",
             "True", Null(),
             )
     contains:
@@ -2286,22 +2286,22 @@ image Laura_Sex_Body:
 
                     "not LauraX.bra", Null(),
                     "LauraX.bra == 'white tank'", "images/LauraSex/Laura_Sex_WhiteTank_Up.png",
-                    "LauraX.bra == 'leather_bra'", "images/LauraSex/Laura_Sex_Bra_Leather_Up.png",
-                    "LauraX.bra == 'wolvie_top'", "images/LauraSex/Laura_Sex_Top_Wolvie_Up.png",
-                    "LauraX.bra == 'corset'", "images/LauraSex/Laura_Sex_Corset_Up.png",
+                    "LauraX.bra == 'leather bra'", "images/LauraSex/Laura_Sex_Bra_Leather_Up.png",
+                    "LauraX.bra == 'wolvie top'", "images/LauraSex/Laura_Sex_Top_Wolvie_Up.png",
+                    "LauraX.bra == '_corset'", "images/LauraSex/Laura_Sex_Corset_Up.png",
                     "LauraX.bra == 'lace corset'", "images/LauraSex/Laura_Sex_Corset_Lace_Up.png",
-                    "LauraX.bra == 'bikini_top'", "images/LauraSex/Laura_Sex_Top_Bikini_Up.png",
+                    "LauraX.bra == '_bikini_top'", "images/LauraSex/Laura_Sex_Top_Bikini_Up.png",
 
 
                     "True", Null(),
                     ),
 
             "LauraX.bra == 'white tank'", "images/LauraSex/Laura_Sex_WhiteTank.png",
-            "LauraX.bra == 'leather_bra'", "images/LauraSex/Laura_Sex_Bra_Leather.png",
-            "LauraX.bra == 'wolvie_top'", "images/LauraSex/Laura_Sex_Top_Wolvie.png",
-            "LauraX.bra == 'corset'", "images/LauraSex/Laura_Sex_Corset.png",
+            "LauraX.bra == 'leather bra'", "images/LauraSex/Laura_Sex_Bra_Leather.png",
+            "LauraX.bra == 'wolvie top'", "images/LauraSex/Laura_Sex_Top_Wolvie.png",
+            "LauraX.bra == '_corset'", "images/LauraSex/Laura_Sex_Corset.png",
             "LauraX.bra == 'lace corset'", "images/LauraSex/Laura_Sex_Corset_Lace.png",
-            "LauraX.bra == 'bikini_top'", "images/LauraSex/Laura_Sex_Top_Bikini.png",
+            "LauraX.bra == '_bikini_top'", "images/LauraSex/Laura_Sex_Top_Bikini.png",
 
 
             "True", Null(),
@@ -2310,17 +2310,17 @@ image Laura_Sex_Body:
 
         ConditionSwitch(
             "not LauraX.piercings or LauraX.top_pulled_up", Null(),
-            "LauraX.piercings == 'barbell'", "images/LauraSex/Laura_Sex_Barbell_Tits_C.png",
-            "LauraX.piercings == 'ring'", "images/LauraSex/Laura_Sex_Ring_Tits_C.png",
+            "LauraX.piercings == '_barbell'", "images/LauraSex/Laura_Sex_Barbell_Tits_C.png",
+            "LauraX.piercings == '_ring'", "images/LauraSex/Laura_Sex_Ring_Tits_C.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
             "not LauraX.legs", Null(),
-            "LauraX.accessory == 'suspenders' and not LauraX.bra and not LauraX.top_pulled_up", "images/LauraSex/Laura_Sex_Suspenders.png",
-            "LauraX.accessory == 'suspenders2'", "images/LauraSex/Laura_Sex_Suspenders.png",
-            "LauraX.accessory == 'suspenders'", "images/LauraSex/Laura_Sex_Suspenders_Up.png",
+            "LauraX.accessory == '_suspenders' and not LauraX.bra and not LauraX.top_pulled_up", "images/LauraSex/Laura_Sex_Suspenders.png",
+            "LauraX.accessory == '_suspenders2'", "images/LauraSex/Laura_Sex_Suspenders.png",
+            "LauraX.accessory == '_suspenders'", "images/LauraSex/Laura_Sex_Suspenders_Up.png",
             "True", Null(),
             )
     contains:
@@ -2355,7 +2355,7 @@ image Laura_Sex_Body:
     contains:
         ConditionSwitch(
 
-                "primary_action == 'suck breasts' or offhand_action == 'suck breasts'", "Laura_Sex_Lick_Breasts",
+                "primary_action == 'suck_breasts' or offhand_action == 'suck_breasts'", "Laura_Sex_Lick_Breasts",
                 "True", Null()
                 )
     contains:
@@ -2373,7 +2373,7 @@ image Laura_Sex_Body:
 
 
 image Laura_Sex_Lick_Breasts:
-    "licking"
+    "Lick_Anim"
     zoom 0.7
     offset (565,290)
 
@@ -2387,7 +2387,7 @@ image Laura_Sex_Legs:
     contains:
 
         ConditionSwitch(
-            "LauraX.legs == 'skirt'", "images/LauraSex/Laura_Sex_Skirt_Back.png",
+            "LauraX.legs == '_skirt'", "images/LauraSex/Laura_Sex_Skirt_Back.png",
             "True", Null(),
             )
     contains:
@@ -2399,14 +2399,14 @@ image Laura_Sex_Legs:
 
 
         ConditionSwitch(
-            "Player.cock_position == 'foot'", "images/LauraSex/Laura_Sex_Legs_Foot.png",
+            "Player.Cock == 'footjob'", "images/LauraSex/Laura_Sex_Legs_Foot.png",
             "True", "images/LauraSex/Laura_Sex_Legs_High.png",
             )
     contains:
 
         ConditionSwitch(
-            "Player.cock_position == 'anal' and action_speed > 1", "images/LauraSex/Laura_Sex_Anus_L.png",
-            "Player.cock_position == 'anal' and action_speed > 0", "images/LauraSex/Laura_Sex_Anus_M.png",
+            "Player.Cock == 'anal' and action_speed > 1", "images/LauraSex/Laura_Sex_Anus_L.png",
+            "Player.Cock == 'anal' and action_speed > 0", "images/LauraSex/Laura_Sex_Anus_M.png",
             "'anal' in LauraX.spunk", "images/LauraSex/Laura_Sex_Anus_M.png",
             "True", "images/LauraSex/Laura_Sex_Anus_S.png",
             )
@@ -2414,14 +2414,14 @@ image Laura_Sex_Legs:
 
         ConditionSwitch(
             "'anal' not in LauraX.spunk", Null(),
-            "Player.cock_position == 'anal' and action_speed > 1", "images/LauraSex/Laura_Sex_Spunk_Anal_U.png",
+            "Player.Cock == 'anal' and action_speed > 1", "images/LauraSex/Laura_Sex_Spunk_Anal_U.png",
             "True", "images/LauraSex/Laura_Sex_Spunk_Anal.png",
             )
     contains:
 
         ConditionSwitch(
-            "Player.cock_position == 'in' and action_speed > 1", "images/LauraSex/Laura_Sex_Pussy_Open.png",
-            "Player.cock_position == 'in' and action_speed > 0", "images/LauraSex/Laura_Sex_Pussy_Mid.png",
+            "Player.Cock == 'in' and action_speed > 1", "images/LauraSex/Laura_Sex_Pussy_Open.png",
+            "Player.Cock == 'in' and action_speed > 0", "images/LauraSex/Laura_Sex_Pussy_Mid.png",
             "primary_action == 'eat_pussy'", "images/LauraSex/Laura_Sex_Pussy_Mid.png",
             "True", "images/LauraSex/Laura_Sex_Pussy_Closed.png",
             )
@@ -2435,25 +2435,25 @@ image Laura_Sex_Legs:
 
         ConditionSwitch(
             "'in' not in LauraX.spunk", Null(),
-            "Player.cock_position == 'in' and action_speed > 1", "images/LauraSex/Laura_Sex_Spunk_Pussy_Open.png",
+            "Player.Cock == 'in' and action_speed > 1", "images/LauraSex/Laura_Sex_Spunk_Pussy_Open.png",
             "True", "images/LauraSex/Laura_Sex_Spunk_Pussy.png",
             )
     contains:
 
         ConditionSwitch(
             "not LauraX.pubes", Null(),
-            "Player.cock_position == 'in' and action_speed > 1", "images/LauraSex/Laura_Sex_Pubes_Open.png",
-            "Player.cock_position == 'in' and action_speed > 0", "images/LauraSex/Laura_Sex_Pubes_Mid.png",
+            "Player.Cock == 'in' and action_speed > 1", "images/LauraSex/Laura_Sex_Pubes_Open.png",
+            "Player.Cock == 'in' and action_speed > 0", "images/LauraSex/Laura_Sex_Pubes_Mid.png",
             "primary_action == 'eat_pussy'", "images/LauraSex/Laura_Sex_Pubes_Mid.png",
             "True", "images/LauraSex/Laura_Sex_Pubes_Closed.png",
             )
     contains:
 
         ConditionSwitch(
-            "LauraX.piercings == 'barbell' and Player.cock_position == 'in' and action_speed > 1", "images/LauraSex/Laura_Sex_Barbell_Pussy_O.png",
-            "LauraX.piercings == 'barbell'", "images/LauraSex/Laura_Sex_Barbell_Pussy.png",
-            "LauraX.piercings == 'ring' and Player.cock_position == 'in' and action_speed > 1", "images/LauraSex/Laura_Sex_Ring_Pussy_O.png",
-            "LauraX.piercings == 'ring'", "images/LauraSex/Laura_Sex_Ring_Pussy.png",
+            "LauraX.piercings == '_barbell' and Player.Cock == 'in' and action_speed > 1", "images/LauraSex/Laura_Sex_Barbell_Pussy_O.png",
+            "LauraX.piercings == '_barbell'", "images/LauraSex/Laura_Sex_Barbell_Pussy.png",
+            "LauraX.piercings == '_ring' and Player.Cock == 'in' and action_speed > 1", "images/LauraSex/Laura_Sex_Ring_Pussy_O.png",
+            "LauraX.piercings == '_ring'", "images/LauraSex/Laura_Sex_Ring_Pussy.png",
             "True", Null(),
             )
     contains:
@@ -2461,34 +2461,34 @@ image Laura_Sex_Legs:
         ConditionSwitch(
             "LauraX.underwear_pulled_down", Null(),
 
-            "LauraX.underwear == 'bikini_bottoms'", "images/LauraSex/Laura_Sex_Panties_Bikini.png",
-            "LauraX.underwear == 'wolvie_panties'", "images/LauraSex/Laura_Sex_Panties_Wolvie.png",
-            "LauraX.underwear == 'lace_panties'", "images/LauraSex/Laura_Sex_Panties_Lace.png",
+            "LauraX.underwear == '_bikini_bottoms'", "images/LauraSex/Laura_Sex_Panties_Bikini.png",
+            "LauraX.underwear == '_wolvie_panties'", "images/LauraSex/Laura_Sex_Panties_Wolvie.png",
+            "LauraX.underwear == '_lace_panties'", "images/LauraSex/Laura_Sex_Panties_Lace.png",
             "LauraX.underwear", "images/LauraSex/Laura_Sex_Panties_Black.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-            "Player.cock_position == 'foot' and (LauraX.hose == 'stockings_and_garterbelt' or LauraX.hose == 'stockings')", "images/LauraSex/Laura_Sex_Stockings_Base_Foot.png",
-            "Player.cock_position == 'foot' and LauraX.hose == 'black stockings'", "images/LauraSex/Laura_Sex_BlackStockings_Base_Foot.png",
-            "LauraX.hose == 'black stockings'", "images/LauraSex/Laura_Sex_BlackStockings_Base_Up.png",
-            "LauraX.hose == 'stockings_and_garterbelt' or LauraX.hose == 'stockings'", "images/LauraSex/Laura_Sex_Stockings_Base_Up.png",
+            "Player.Cock == 'footjob' and (LauraX.hose == '_stockings_and_garterbelt' or LauraX.hose == '_stockings')", "images/LauraSex/Laura_Sex_Stockings_Base_Foot.png",
+            "Player.Cock == 'footjob' and LauraX.hose == '_black_stockings'", "images/LauraSex/Laura_Sex_BlackStockings_Base_Foot.png",
+            "LauraX.hose == '_black_stockings'", "images/LauraSex/Laura_Sex_BlackStockings_Base_Up.png",
+            "LauraX.hose == '_stockings_and_garterbelt' or LauraX.hose == '_stockings'", "images/LauraSex/Laura_Sex_Stockings_Base_Up.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-            "LauraX.legs == 'skirt' or LauraX.legs == 'other_skirt'", "images/LauraSex/Laura_Sex_Skirt.png",
+            "LauraX.legs == '_skirt' or LauraX.legs == '_other_skirt'", "images/LauraSex/Laura_Sex_Skirt.png",
             "LauraX.upskirt", Null(),
-            "LauraX.legs == 'leather_pants' and Player.cock_position == 'foot'", "images/LauraSex/Laura_Sex_Pants_Base_Foot.png",
-            "LauraX.legs == 'leather_pants'", "images/LauraSex/Laura_Sex_Pants_Base_Up.png",
+            "LauraX.legs == '_leather_pants' and Player.Cock == 'footjob'", "images/LauraSex/Laura_Sex_Pants_Base_Foot.png",
+            "LauraX.legs == '_leather_pants'", "images/LauraSex/Laura_Sex_Pants_Base_Up.png",
             "True", Null(),
             )
     contains:
         ConditionSwitch(
 
-            "Player.sprite and Player.cock_position", Null(),
+            "Player.Sprite and Player.Cock", Null(),
             "primary_action == 'eat_pussy'", "Laura_Sex_Lick_Pussy",
             "primary_action == 'eat_ass'", "Laura_Sex_Lick_Ass",
             "True", Null()
@@ -2498,8 +2498,8 @@ image Laura_Sex_Legs:
         ConditionSwitch(
 
 
-            "LauraX.piercings == 'barbell'", "images/LauraSex/Laura_Sex_Barbell_Pussy_C.png",
-            "LauraX.piercings == 'ring'", "images/LauraSex/Laura_Sex_Ring_Pussy_C.png",
+            "LauraX.piercings == '_barbell'", "images/LauraSex/Laura_Sex_Barbell_Pussy_C.png",
+            "LauraX.piercings == '_ring'", "images/LauraSex/Laura_Sex_Ring_Pussy_C.png",
             "True", Null(),
             )
     contains:
@@ -2511,7 +2511,7 @@ image Laura_Sex_Legs:
 
 
         ConditionSwitch(
-            "Player.cock_position == 'foot'", "Laura_Footjob_Foot",
+            "Player.Cock == 'footjob'", "Laura_Footjob_Foot",
             "True", "Laura_Sex_Foot",
             )
     transform_anchor True
@@ -2522,12 +2522,12 @@ image Laura_Sex_Legs:
 
 
 image Laura_Sex_Lick_Pussy:
-    "licking"
+    "Lick_Anim"
     zoom 0.8
     offset (720,610)
 
 image Laura_Sex_Lick_Ass:
-    "licking"
+    "Lick_Anim"
     zoom 0.8
     offset (730,700)
 
@@ -2540,15 +2540,15 @@ image Laura_Sex_Foot:
     contains:
 
         ConditionSwitch(
-            "LauraX.hose == 'stockings_and_garterbelt' or LauraX.hose == 'stockings'", "images/LauraSex/Laura_Sex_Stockings_Up.png",
-            "LauraX.hose == 'black stockings'", "images/LauraSex/Laura_Sex_BlackStockings_Up.png",
+            "LauraX.hose == '_stockings_and_garterbelt' or LauraX.hose == '_stockings'", "images/LauraSex/Laura_Sex_Stockings_Up.png",
+            "LauraX.hose == '_black_stockings'", "images/LauraSex/Laura_Sex_BlackStockings_Up.png",
             "True", "images/LauraSex/Laura_Sex_FootHigh.png"
             )
     contains:
 
         ConditionSwitch(
             "LauraX.upskirt", Null(),
-            "LauraX.legs == 'leather_pants'", "images/LauraSex/Laura_Sex_Pants_Up.png",
+            "LauraX.legs == '_leather_pants'", "images/LauraSex/Laura_Sex_Pants_Up.png",
             "True", Null(),
             )
         xoffset -2
@@ -2637,7 +2637,7 @@ image Laura_Sex_Zero_Anim_S0:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         alpha 0.8
         pos (125,170)
@@ -2697,7 +2697,7 @@ image Laura_Sex_Zero_Anim_S1:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,115)
         block:
@@ -2769,7 +2769,7 @@ image Laura_Sex_Zero_Anim_S2:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,75)
         block:
@@ -2848,7 +2848,7 @@ image Laura_Sex_Zero_Anim_S3:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,75)
         block:
@@ -2920,7 +2920,7 @@ image Laura_Sex_Zero_Anim_S4:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,-60)
         block:
@@ -2983,7 +2983,7 @@ image Laura_Sex_Zero_Anim_A0:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,115)
         block:
@@ -3044,7 +3044,7 @@ image Laura_Sex_Zero_Anim_A1:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,115)
         block:
@@ -3116,7 +3116,7 @@ image Laura_Sex_Zero_Anim_A2:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,75)
         block:
@@ -3187,7 +3187,7 @@ image Laura_Sex_Zero_Anim_A3:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,75)
         block:
@@ -3259,7 +3259,7 @@ image Laura_Sex_Zero_Anim_A4:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,-60)
         block:
@@ -3322,7 +3322,7 @@ image Laura_Sex_Zero_Anim_H0:
     contains:
         subpixel True
         ConditionSwitch(
-            "Player.sprite", "Zero_cock_doggy_in",
+            "Player.Sprite", "Zero_Doggy_Insert",
             "True", Null(),
             )
 
@@ -3386,7 +3386,7 @@ image Laura_Sex_Zero_Anim_H1:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         alpha 0.8
         pos (125,250)
@@ -3446,7 +3446,7 @@ image Laura_Sex_Zero_Anim_H2:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         alpha 0.8
         pos (125,230)
@@ -3480,15 +3480,15 @@ image Laura_Footjob_Foot:
     contains:
 
         ConditionSwitch(
-            "LauraX.hose == 'stockings_and_garterbelt' or LauraX.hose == 'stockings'", "images/LauraSex/Laura_Sex_Stockings_Foot.png",
-            "LauraX.hose == 'black stockings'", "images/LauraSex/Laura_Sex_BlackStockings_Foot.png",
+            "LauraX.hose == '_stockings_and_garterbelt' or LauraX.hose == '_stockings'", "images/LauraSex/Laura_Sex_Stockings_Foot.png",
+            "LauraX.hose == '_black_stockings'", "images/LauraSex/Laura_Sex_BlackStockings_Foot.png",
             "True", "images/LauraSex/Laura_Sex_Foot.png"
             )
     contains:
 
         ConditionSwitch(
             "LauraX.upskirt", Null(),
-            "LauraX.legs == 'leather_pants'", "images/LauraSex/Laura_Sex_Pants_Foot.png",
+            "LauraX.legs == '_leather_pants'", "images/LauraSex/Laura_Sex_Pants_Foot.png",
             "True", Null(),
             )
     offset (1105,140)
@@ -3496,7 +3496,7 @@ image Laura_Footjob_Foot:
 
 image Laura_Sex_Zero_Anim_F:
 
-    "Zero_cock_titjob"
+    "Zero_Blowcock"
     zoom .7
     anchor (0.5, 0.9)
     offset (270,650)
@@ -3755,7 +3755,7 @@ image Laura_Sex_Zero_AnimX:
     contains:
         subpixel True
 
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
 
         zoom 1.6
         alpha 0.5
@@ -3831,45 +3831,45 @@ image Laura_Mega_Mask:
 
 
 
-label Laura_sex_launch(line=primary_action):
-    $ girl_offhand_action = None if girl_offhand_action == "handjob" else girl_offhand_action
-    $ Player.sprite = 1
-    $ line = "solo" if not line else line
-    if line == "sex":
-        $ Player.cock_position = "sex"
-        if offhand_action in ("fondle_pussy","dildo_pussy","eat_pussy"):
-            $ offhand_action = None
-    elif line == "anal":
-        $ Player.cock_position = "anal"
-        if offhand_action in ("finger_ass","dildo_anal","eat_ass"):
-            $ offhand_action = None
-    elif line == "solo":
-        $ Player.sprite = 0
-        $ Player.cock_position = "out"
-    elif line == "hotdog":
-        $ Player.cock_position = "out"
-    elif line == "footjob":
-        $ show_feet = 1
-        $ Player.cock_position = "footjob"
-    elif line == "massage":
-        $ Player.sprite = 0
-        $ Player.cock_position = 0
+label Laura_Sex_Launch(Line=primary_action):
+    $ girl_offhand_action = 0 if girl_offhand_action == "hand" else girl_offhand_action
+    $ Player.Sprite = 1
+    $ Line = "solo" if not Line else Line
+    if Line == "sex":
+        $ Player.Cock = "in"
+        if offhand_action in ("fondle pussy","dildo pussy","lick pussy"):
+            $ offhand_action = 0
+    elif Line == "anal":
+        $ Player.Cock = "anal"
+        if offhand_action in ("insert ass","dildo anal","lick ass"):
+            $ offhand_action = 0
+    elif Line == "solo":
+        $ Player.Sprite = 0
+        $ Player.Cock = "out"
+    elif Line == "hotdog":
+        $ Player.Cock = "out"
+    elif Line == "foot":
+        $ ShowFeet = 1
+        $ Player.Cock = "foot"
+    elif Line == "massage":
+        $ Player.Sprite = 0
+        $ Player.Cock = 0
     else:
-        $ Player.sprite = 0
-        $ Player.cock_position = "out"
+        $ Player.Sprite = 0
+        $ Player.Cock = "out"
         $ action_speed = 0
-    $ primary_action = line
+    $ primary_action = Line
 
-    if LauraX.pose == "doggy":
-        call Laura_Doggy_Launch (line)
+    if LauraX.Pose == "doggy":
+        call Laura_Doggy_Launch (Line)
         return
     if renpy.showing("Laura_SexSprite"):
         return
-    call Laura_Hide (1)
+    call hide_girl(LauraX, hide_sprite = True)
     $ action_speed = 0
 
     if primary_action == "in" or primary_action == "anal":
-        if LauraX.legs or LauraX.HoseNum() >= 5:
+        if LauraX.legs or LauraX.hose_number() >= 5:
             $ LauraX.upskirt = 1
         if LauraX.underwear:
             $ LauraX.underwear_pulled_down = 1
@@ -3887,7 +3887,7 @@ label Laura_Sex_Reset:
         return
     $ LauraX.arm_pose = 2
     hide Laura_SexSprite
-    call Laura_Hide
+    call hide_girl(LauraX)
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
@@ -3941,7 +3941,7 @@ image Laura_BJ_Animation:
 
 
 
-image Laura_Sprite_BJ_hairback:
+image Laura_Sprite_BJ_HairBack:
 
 
     ConditionSwitch(
@@ -3970,16 +3970,16 @@ image Laura_Sprite_BJ_Head:
         (0,0), ConditionSwitch(
             "action_speed >= 2", "images/LauraSprite/Laura_Sprite_Mouth_SuckingBJ.png",
             "action_speed == 1", "images/LauraSprite/Laura_Sprite_Mouth_Tongue.png",
-            "LauraX.mouth == 'normal'", "images/LauraSprite/Laura_Sprite_Mouth_Normal.png",
-            "LauraX.mouth == 'lipbite'", "images/LauraSprite/Laura_Sprite_Mouth_Lipbite.png",
-            "LauraX.mouth == 'sucking'", "images/LauraSprite/Laura_Sprite_Mouth_Sucking.png",
-            "LauraX.mouth == 'kiss'", "images/LauraSprite/Laura_Sprite_Mouth_Kiss.png",
-            "LauraX.mouth == 'sad'", "images/LauraSprite/Laura_Sprite_Mouth_Sad.png",
-            "LauraX.mouth == 'smile'", "images/LauraSprite/Laura_Sprite_Mouth_Smile.png",
-            "LauraX.mouth == 'surprised'", "images/LauraSprite/Laura_Sprite_Mouth_Surprised.png",
-            "LauraX.mouth == 'tongue'", "images/LauraSprite/Laura_Sprite_Mouth_Tongue.png",
-            "LauraX.mouth == 'grimace'", "images/LauraSprite/Laura_Sprite_Mouth_Smile.png",
-            "LauraX.mouth == 'smirk'", "images/LauraSprite/Laura_Sprite_Mouth_Smirk.png",
+            "LauraX.mouth == '_normal'", "images/LauraSprite/Laura_Sprite_Mouth_Normal.png",
+            "LauraX.mouth == '_lipbite'", "images/LauraSprite/Laura_Sprite_Mouth_Lipbite.png",
+            "LauraX.mouth == '_sucking'", "images/LauraSprite/Laura_Sprite_Mouth_Sucking.png",
+            "LauraX.mouth == '_kiss'", "images/LauraSprite/Laura_Sprite_Mouth_Kiss.png",
+            "LauraX.mouth == '_sad'", "images/LauraSprite/Laura_Sprite_Mouth_Sad.png",
+            "LauraX.mouth == '_smile'", "images/LauraSprite/Laura_Sprite_Mouth_Smile.png",
+            "LauraX.mouth == '_surprised'", "images/LauraSprite/Laura_Sprite_Mouth_Surprised.png",
+            "LauraX.mouth == '_tongue'", "images/LauraSprite/Laura_Sprite_Mouth_Tongue.png",
+            "LauraX.mouth == '_grimace'", "images/LauraSprite/Laura_Sprite_Mouth_Smile.png",
+            "LauraX.mouth == '_smirk'", "images/LauraSprite/Laura_Sprite_Mouth_Smirk.png",
 
             "True", "images/LauraSprite/Laura_Sprite_Mouth_Normal.png",
             ),
@@ -3987,16 +3987,16 @@ image Laura_Sprite_BJ_Head:
             "'mouth' not in LauraX.spunk", Null(),
             "action_speed >= 2", "images/LauraSprite/Laura_Sprite_Spunk_MouthSuck.png",
             "action_speed == 1", "images/LauraSprite/Laura_Sprite_Spunk_MouthTongue.png",
-            "LauraX.mouth == 'normal'", "images/LauraSprite/Laura_Sprite_Spunk_MouthNeutral.png",
-            "LauraX.mouth == 'lipbite'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmirk.png",
-            "LauraX.mouth == 'sucking'", "images/LauraSprite/Laura_Sprite_Spunk_MouthTongue.png",
-            "LauraX.mouth == 'kiss'", "images/LauraSprite/Laura_Sprite_Spunk_MouthKiss.png",
-            "LauraX.mouth == 'sad'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSad.png",
-            "LauraX.mouth == 'smile'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmile.png",
-            "LauraX.mouth == 'surprised'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSad.png",
-            "LauraX.mouth == 'tongue'", "images/LauraSprite/Laura_Sprite_Spunk_MouthTongue.png",
-            "LauraX.mouth == 'grimace'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmile.png",
-            "LauraX.mouth == 'smirk'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmirk.png",
+            "LauraX.mouth == '_normal'", "images/LauraSprite/Laura_Sprite_Spunk_MouthNeutral.png",
+            "LauraX.mouth == '_lipbite'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmirk.png",
+            "LauraX.mouth == '_sucking'", "images/LauraSprite/Laura_Sprite_Spunk_MouthTongue.png",
+            "LauraX.mouth == '_kiss'", "images/LauraSprite/Laura_Sprite_Spunk_MouthKiss.png",
+            "LauraX.mouth == '_sad'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSad.png",
+            "LauraX.mouth == '_smile'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmile.png",
+            "LauraX.mouth == '_surprised'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSad.png",
+            "LauraX.mouth == '_tongue'", "images/LauraSprite/Laura_Sprite_Spunk_MouthTongue.png",
+            "LauraX.mouth == '_grimace'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmile.png",
+            "LauraX.mouth == '_smirk'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmirk.png",
             "True", "images/LauraSprite/Laura_Sprite_Spunk_MouthNeutral.png",
             ),
         (0,0), ConditionSwitch(
@@ -4009,20 +4009,20 @@ image Laura_Sprite_BJ_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.blushing >= 2", ConditionSwitch(
-                    "LauraX.brows == 'normal'", "images/LauraSprite/Laura_Sprite_Brows_Normal_B.png",
-                    "LauraX.brows == 'angry'", "images/LauraSprite/Laura_Sprite_Brows_Angry_B.png",
-                    "LauraX.brows == 'sad'", "images/LauraSprite/Laura_Sprite_Brows_Sad_B.png",
-                    "LauraX.brows == 'surprised'", "images/LauraSprite/Laura_Sprite_Brows_Surprised_B.png",
-                    "LauraX.brows == 'confused'", "images/LauraSprite/Laura_Sprite_Brows_Confused_B.png",
+            "LauraX.blushing == '_blush2'", ConditionSwitch(
+                    "LauraX.brows == '_normal'", "images/LauraSprite/Laura_Sprite_Brows_Normal_B.png",
+                    "LauraX.brows == '_angry'", "images/LauraSprite/Laura_Sprite_Brows_Angry_B.png",
+                    "LauraX.brows == '_sad'", "images/LauraSprite/Laura_Sprite_Brows_Sad_B.png",
+                    "LauraX.brows == '_surprised'", "images/LauraSprite/Laura_Sprite_Brows_Surprised_B.png",
+                    "LauraX.brows == '_confused'", "images/LauraSprite/Laura_Sprite_Brows_Confused_B.png",
                     "True", "images/LauraSprite/Laura_Sprite_Brows_Normal_B.png",
                     ),
             "True", ConditionSwitch(
-                    "LauraX.brows == 'normal'", "images/LauraSprite/Laura_Sprite_Brows_Normal.png",
-                    "LauraX.brows == 'angry'", "images/LauraSprite/Laura_Sprite_Brows_Angry.png",
-                    "LauraX.brows == 'sad'", "images/LauraSprite/Laura_Sprite_Brows_Sad.png",
-                    "LauraX.brows == 'surprised'", "images/LauraSprite/Laura_Sprite_Brows_Surprised.png",
-                    "LauraX.brows == 'confused'", "images/LauraSprite/Laura_Sprite_Brows_Confused.png",
+                    "LauraX.brows == '_normal'", "images/LauraSprite/Laura_Sprite_Brows_Normal.png",
+                    "LauraX.brows == '_angry'", "images/LauraSprite/Laura_Sprite_Brows_Angry.png",
+                    "LauraX.brows == '_sad'", "images/LauraSprite/Laura_Sprite_Brows_Sad.png",
+                    "LauraX.brows == '_surprised'", "images/LauraSprite/Laura_Sprite_Brows_Surprised.png",
+                    "LauraX.brows == '_confused'", "images/LauraSprite/Laura_Sprite_Brows_Confused.png",
                     "True", "images/LauraSprite/Laura_Sprite_Brows_Normal.png",
                     ),
             ),
@@ -4093,7 +4093,7 @@ image Laura_BJ_Body_0:
 
     contains:
 
-        "Laura_Sprite_BJ_hairback"
+        "Laura_Sprite_BJ_HairBack"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (490,400)
@@ -4139,7 +4139,7 @@ image Laura_BJ_Body_0:
 
 
 
-        AlphaMask("Zero_cock_blowjob", "Laura_BlowCock_Mask")
+        AlphaMask("Blowcock", "Laura_BlowCock_Mask")
         subpixel True
         pos (412,292)
         zoom 0.4
@@ -4166,7 +4166,7 @@ image Laura_BJ_Body_1:
 
     contains:
 
-        "Laura_Sprite_BJ_hairback"
+        "Laura_Sprite_BJ_HairBack"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (535,340)
@@ -4253,7 +4253,7 @@ image Laura_BJ_Body_1:
 
 
 
-        AlphaMask("Zero_cock_blowjob", "Laura_BlowCock_Mask")
+        AlphaMask("Blowcock", "Laura_BlowCock_Mask")
         subpixel True
         pos (412,292)
         zoom 0.4
@@ -4279,7 +4279,7 @@ image Laura_BJ_Body_2:
 
     contains:
 
-        "Laura_Sprite_BJ_hairback"
+        "Laura_Sprite_BJ_HairBack"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (530,355)
@@ -4364,7 +4364,7 @@ image Laura_BJ_Body_2:
 
 
 
-        AlphaMask("Zero_cock_blowjob", "Laura_BlowCock_Mask")
+        AlphaMask("Blowcock", "Laura_BlowCock_Mask")
         subpixel True
         pos (412,292)
         zoom 0.4
@@ -4433,7 +4433,7 @@ image Laura_BJ_Body_3:
 
     contains:
 
-        "Laura_Sprite_BJ_hairback"
+        "Laura_Sprite_BJ_HairBack"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (523,380)
@@ -4520,7 +4520,7 @@ image Laura_BJ_Body_3:
 
 
 
-        AlphaMask("Zero_cock_blowjob", "Laura_BlowCock_Mask_3")
+        AlphaMask("Blowcock", "Laura_BlowCock_Mask_3")
         subpixel True
         pos (412,292)
         zoom 0.4
@@ -4586,7 +4586,7 @@ image Laura_BJ_Body_4:
 
     contains:
 
-        "Laura_Sprite_BJ_hairback"
+        "Laura_Sprite_BJ_HairBack"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (523,380)
@@ -4673,7 +4673,7 @@ image Laura_BJ_Body_4:
 
 
 
-        AlphaMask("Zero_cock_blowjob", "Laura_BlowCock_Mask_4")
+        AlphaMask("Blowcock", "Laura_BlowCock_Mask_4")
         subpixel True
         pos (412,292)
         zoom 0.4
@@ -4726,7 +4726,7 @@ image Laura_BJ_Body_5:
 
     contains:
 
-        "Laura_Sprite_BJ_hairback"
+        "Laura_Sprite_BJ_HairBack"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (520,375)
@@ -4816,7 +4816,7 @@ image Laura_BJ_Body_5:
 
 
 
-        AlphaMask("Zero_cock_blowjob", "Laura_BlowCock_Mask")
+        AlphaMask("Blowcock", "Laura_BlowCock_Mask")
         subpixel True
         pos (410,292)
         zoom 0.4
@@ -4882,7 +4882,7 @@ image Laura_BJ_Body_6:
 
     contains:
 
-        "Laura_Sprite_BJ_hairback"
+        "Laura_Sprite_BJ_HairBack"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (481,500)
@@ -4972,7 +4972,7 @@ image Laura_BJ_Body_6:
 
 
 
-        AlphaMask("Zero_cock_blowjob", "Laura_BlowCock_Mask_6")
+        AlphaMask("Blowcock", "Laura_BlowCock_Mask_6")
         subpixel True
         pos (407,262)
         zoom 0.4
@@ -5026,14 +5026,14 @@ image Laura_BJ_Body_6:
 
 
 
-label Laura_BJ_Launch(line=primary_action):
+label Laura_BJ_Launch(Line=primary_action):
 
     $ LauraX.arm_pose = 1
     if renpy.showing("Laura_BJ_Animation"):
         return
 
-    call Laura_Hide
-    if line == "L" or line == "cum":
+    call hide_girl(LauraX)
+    if Line == "L" or Line == "cum":
         show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(stage_center):
             alpha 1
             ease 1 zoom 2.5 offset (150,80)
@@ -5045,19 +5045,19 @@ label Laura_BJ_Launch(line=primary_action):
         with dissolve
 
     $ action_speed = 0
-    if line == "L":
-        if taboo:
+    if Line == "L":
+        if Taboo:
             if len(Present) >= 2:
                 if Present[0] != LauraX:
-                    "[LauraX.name] looks back at [Present[0].name] to see if she's watching."
+                    "[LauraX.Name] looks back at [Present[0].Name] to see if she's watching."
                 elif Present[1] != LauraX:
-                    "[LauraX.name] looks back at [Present[1].name] to see if she's watching."
+                    "[LauraX.Name] looks back at [Present[1].Name] to see if she's watching."
             else:
-                "[LauraX.name] casually glances around to see if anyone can see her."
-        "[LauraX.name] smoothly bends down and places your cock against her cheek."
+                "[LauraX.Name] casually glances around to see if anyone can see her."
+        "[LauraX.Name] smoothly bends down and places your cock against her cheek."
 
-    if line != "cum":
-        $ primary_action = "blowjob"
+    if Line != "cum":
+        $ primary_action = "blow"
 
     show Laura_Sprite zorder LauraX.sprite_layer:
         alpha 0
@@ -5069,7 +5069,7 @@ label Laura_BJ_Reset:
     if not renpy.showing("Laura_BJ_Animation"):
         return
 
-    call Laura_Hide
+    call hide_girl(LauraX)
     $ action_speed = 0
 
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(stage_center):
@@ -5094,13 +5094,13 @@ label Laura_BJ_Reset:
 
 
 
-image Laura_handjob_under:
+image Laura_Hand_Under:
     "images/LauraSprite/handlaura2.png"
     anchor (0.5,0.5)
     pos (-10,0)
 
 
-image Laura_handjob_over:
+image Laura_Hand_Over:
     "images/LauraSprite/handlaura1.png"
     anchor (0.5,0.5)
     pos (-10,0)
@@ -5177,38 +5177,38 @@ image Laura_HJ_Animation:
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Laura_handjob_under"),
-            "action_speed == 1", At("Laura_handjob_under", Laura_Hand_1()),
-            "action_speed >= 2", At("Laura_handjob_under", Laura_Hand_2()),
-            "action_speed ", Null(),
+            "not action_speed", Transform("Laura_Hand_Under"),
+            "action_speed == 1", At("Laura_Hand_Under", Laura_Hand_1()),
+            "action_speed >= 2", At("Laura_Hand_Under", Laura_Hand_2()),
+            "action_speed", Null(),
             ),
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Zero_cock_handjob"),
-            "action_speed == 1", At("Zero_cock_handjob", Handcock_1L()),
-            "action_speed >= 2", At("Zero_cock_handjob", Handcock_2L()),
-            "action_speed ", Null(),
+            "not action_speed", Transform("Zero_Handcock"),
+            "action_speed == 1", At("Zero_Handcock", Handcock_1L()),
+            "action_speed >= 2", At("Zero_Handcock", Handcock_2L()),
+            "action_speed", Null(),
             ),
         offset (0,0)
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Laura_handjob_over"),
-            "action_speed == 1", At("Laura_handjob_over", Laura_Hand_1()),
-            "action_speed >= 2", At("Laura_handjob_over", Laura_Hand_2()),
-            "action_speed ", Null(),
+            "not action_speed", Transform("Laura_Hand_Over"),
+            "action_speed == 1", At("Laura_Hand_Over", Laura_Hand_1()),
+            "action_speed >= 2", At("Laura_Hand_Over", Laura_Hand_2()),
+            "action_speed", Null(),
             ),
     anchor (0.51, -1.3)
     zoom 0.4
 
 
-label Laura_HJ_Launch(line=primary_action):
+label Laura_HJ_Launch(Line=primary_action):
     if renpy.showing("Laura_HJ_Animation"):
-        $ primary_action = "handjob"
+        $ primary_action = "hand"
         return
-    call Laura_Hide
-    if line == "L":
+    call hide_girl(LauraX)
+    if Line == "L":
         show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (-150,200)
@@ -5219,8 +5219,8 @@ label Laura_HJ_Launch(line=primary_action):
         with dissolve
 
     $ action_speed = 0
-    if line != "cum":
-        $ primary_action = "handjob"
+    if Line != "cum":
+        $ primary_action = "hand"
     else:
         $ action_speed = 1
     pause .5
@@ -5236,7 +5236,7 @@ label Laura_HJ_Reset:
     $ action_speed = 0
     $ LauraX.arm_pose = 1
     hide Laura_HJ_Animation with easeoutbottom
-    call Laura_Hide
+    call hide_girl(LauraX)
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         alpha 1
         zoom 1.7 offset (-50,200)
@@ -5264,7 +5264,7 @@ image Laura_TJ_Animation:
     contains:
         ConditionSwitch(
 
-                    "not Player.sprite","Laura_TJ_0",
+                    "not Player.Sprite","Laura_TJ_0",
                     "action_speed == 1", "Laura_TJ_1",
                     "action_speed == 4", "Laura_TJ_4",
                     "action_speed == 5", "Laura_TJ_5",
@@ -5278,9 +5278,9 @@ image Laura_TJ_Animation:
 
 
 
-image Laura_TJ_hairback:
+image Laura_TJ_HairBack:
 
-    "Laura_Sprite_hairback"
+    "Laura_Sprite_HairBack"
     transform_anchor True
     zoom 2.5
     anchor (0.5, 0.5)
@@ -5317,7 +5317,7 @@ image Laura_TJ_HairTop:
 
 image Laura_TJ_ZeroCock:
 
-    "Zero_cock_titjob"
+    "Zero_Blowcock"
     transform_anchor True
     zoom .7
     anchor (0.5, 0.5)
@@ -5352,7 +5352,7 @@ image Laura_TJ_LeftArm:
     contains:
         ConditionSwitch(
                         "not LauraX.arms",Null(),
-                        "LauraX.arms == 'gloves'",       "images/LauraSex/Laura_Titjob_LeftGlove.png",
+                        "LauraX.arms == '_gloves'",       "images/LauraSex/Laura_Titjob_LeftGlove.png",
                         "True",       "images/LauraSex/Laura_Titjob_wrists.png",
                         )
     contains:
@@ -5368,7 +5368,7 @@ image Laura_TJ_RightArm:
         "images/LauraSex/Laura_Titjob_RightHand.png"
     contains:
         ConditionSwitch(
-                        "LauraX.arms == 'gloves'",       "images/LauraSex/Laura_Titjob_RightGlove.png",
+                        "LauraX.arms == '_gloves'",       "images/LauraSex/Laura_Titjob_RightGlove.png",
                         "True", Null(),
                         )
     contains:
@@ -5384,7 +5384,7 @@ image Laura_TJ_RightArmBack:
         "images/LauraSex/Laura_Titjob_RightHandBack.png"
     contains:
         ConditionSwitch(
-                        "LauraX.arms == 'gloves'",       "images/LauraSex/Laura_Titjob_RightGloveBack.png",
+                        "LauraX.arms == '_gloves'",       "images/LauraSex/Laura_Titjob_RightGloveBack.png",
                         "True", Null(),
                         )
 
@@ -5395,7 +5395,7 @@ image Laura_TJ_0:
 
     contains:
 
-        "Laura_TJ_hairback"
+        "Laura_TJ_HairBack"
         subpixel True
         pos (0,0)
         transform_anchor True
@@ -5589,7 +5589,7 @@ image Laura_TJ_1:
 
     contains:
 
-        "Laura_TJ_hairback"
+        "Laura_TJ_HairBack"
         subpixel True
         pos (0,150)
         transform_anchor True
@@ -5783,7 +5783,7 @@ image Laura_TJ_2:
 
     contains:
 
-        "Laura_TJ_hairback"
+        "Laura_TJ_HairBack"
         subpixel True
         pos (0,80)
         transform_anchor True
@@ -5959,7 +5959,7 @@ image Laura_TJ_4:
 
     contains:
 
-        "Laura_TJ_hairback"
+        "Laura_TJ_HairBack"
         subpixel True
         pos (0,0)
         transform_anchor True
@@ -6145,7 +6145,7 @@ image Laura_TJ_5:
 
     contains:
 
-        "Laura_TJ_hairback"
+        "Laura_TJ_HairBack"
         subpixel True
         pos (-30,155)
         transform_anchor True
@@ -6325,23 +6325,23 @@ image Laura_TJ_5:
 
 
 
-label Laura_TJ_Launch(line=primary_action):
+label Laura_TJ_Launch(Line=primary_action):
     if renpy.showing("Laura_TJ_Animation"):
         return
-    call Laura_Hide
+    call hide_girl(LauraX)
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         alpha 1
         ease 1 zoom 2.3 xpos 750 yoffset -100
-    if line == "L":
-        if taboo:
+    if Line == "L":
+        if Taboo:
             if len(Present) >= 2:
                 if Present[0] != LauraX:
-                    "[LauraX.name] looks back at [Present[0].name] to see if she's watching."
+                    "[LauraX.Name] looks back at [Present[0].Name] to see if she's watching."
                 elif Present[1] != LauraX:
-                    "[LauraX.name] looks back at [Present[1].name] to see if she's watching."
+                    "[LauraX.Name] looks back at [Present[1].Name] to see if she's watching."
             else:
-                "[LauraX.name] casually glances around to see if anyone can see her."
-        "[LauraX.name] bends over and places your cock between her breasts."
+                "[LauraX.Name] casually glances around to see if anyone can see her."
+        "[LauraX.Name] bends over and places your cock between her breasts."
 
     if LauraX.bra and LauraX.top:
         "She throws off her [LauraX.top] and her [LauraX.bra]."
@@ -6349,22 +6349,22 @@ label Laura_TJ_Launch(line=primary_action):
         "She throws off her [LauraX.top], baring her breasts underneath."
     elif LauraX.bra:
         "She tugs off her [LauraX.bra] and throws it aside."
-    $ LauraX.top = ""
-    $ LauraX.bra = ""
+    $ LauraX.top = 0
+    $ LauraX.bra = 0
     $ LauraX.arm_pose = 0
 
     call Laura_First_Topless
 
-    show black_screen onlayer black with dissolve
+    show blackscreen onlayer black with dissolve
     show Laura_Sprite zorder LauraX.sprite_layer:
         alpha 0
     $ action_speed = 0
-    if line != "cum":
+    if Line != "cum":
         $ primary_action = "titjob"
     show Laura_TJ_Animation zorder 150:
         pos (700,520)
-    $ Player.sprite = 1
-    hide black_screen onlayer black with dissolve
+    $ Player.Sprite = 1
+    hide blackscreen onlayer black with dissolve
     return
 
 label Laura_TJ_Reset:
@@ -6372,8 +6372,8 @@ label Laura_TJ_Reset:
     if not renpy.showing("Laura_TJ_Animation"):
         return
 
-    call Laura_Hide
-    $ Player.sprite = 0
+    call hide_girl(LauraX)
+    $ Player.Sprite = 0
 
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         zoom 2.3 xpos 750 yoffset -100
@@ -6382,7 +6382,7 @@ label Laura_TJ_Reset:
         ease 1 zoom 1.5 xpos 700 yoffset 50
         pause .5
         ease .5 zoom 1 xpos LauraX.sprite_location yoffset 0
-    "[LauraX.name] pulls back"
+    "[LauraX.Name] pulls back"
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         alpha 1
         zoom 1 offset (0,0) xpos LauraX.sprite_location
@@ -6401,47 +6401,47 @@ label Laura_TJ_Reset:
 
 
 label Laura_Kissing_Launch(T=primary_action, Set=1):
-    call Laura_Hide
+    call hide_girl(LauraX)
     $ primary_action = T
-    $ LauraX.pose = "kiss" if Set else LauraX.pose
+    $ LauraX.Pose = "kiss" if Set else LauraX.Pose
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location)
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(stage_center):
         ease 0.5 offset (0,0) zoom 2 alpha 1
     return
 
 label Laura_Kissing_Smooch:
-    $ LauraX.change_face("_kiss")
+    $ LauraX.FaceChange("kiss")
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos LauraX.sprite_location zoom 1
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         zoom 1
-    $ LauraX.change_face("_sexy")
+    $ LauraX.FaceChange("sexy")
     return
 
 label Laura_Breasts_Launch(T=primary_action, Set=1):
-    call Laura_Hide
+    call hide_girl(LauraX)
     $ primary_action = T
-    $ LauraX.pose = "breasts" if Set else LauraX.pose
+    $ LauraX.Pose = "breasts" if Set else LauraX.Pose
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 2 alpha 1
     return
 
 label Laura_Middle_Launch(T=primary_action, Set=1):
-    call Laura_Hide
+    call hide_girl(LauraX)
     $ primary_action = T
-    $ LauraX.pose = "mid" if Set else LauraX.pose
+    $ LauraX.Pose = "mid" if Set else LauraX.Pose
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1
     return
 
 label Laura_Pussy_Launch(T=primary_action, Set=1):
-    call Laura_Hide
+    call hide_girl(LauraX)
     $ primary_action = T
-    $ LauraX.pose = "pussy" if Set else LauraX.pose
+    $ LauraX.Pose = "pussy" if Set else LauraX.Pose
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         ease 0.5 pos (700,-400) offset (0,0) zoom 2 alpha 1
     return
@@ -6449,7 +6449,7 @@ label Laura_Pussy_Launch(T=primary_action, Set=1):
 label Laura_Pos_Reset(T=0, Set=0):
     if LauraX.location != bg_current:
         return
-    call Laura_Hide
+    call hide_girl(LauraX)
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         ease .5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
     show Laura_Sprite zorder LauraX.sprite_layer:
@@ -6460,25 +6460,9 @@ label Laura_Pos_Reset(T=0, Set=0):
         yzoom 1
         alpha 1
         pos (LauraX.sprite_location,50)
-    $ LauraX.pose = "full" if Set else 0
+    $ LauraX.Pose = "full" if Set else 0
     $ primary_action = T
     return
-
-label Laura_Hide(Sprite=0):
-    call Laura_Sex_Reset
-
-
-
-
-    hide Laura_SexSprite
-    hide Laura_Doggy_Animation
-    hide Laura_HJ_Animation
-    hide Laura_BJ_Animation
-    hide Laura_TJ_Animation
-    if Sprite:
-        hide Laura_Sprite
-    return
-
 
 
 image GropeLeftBreast_Laura:

@@ -411,12 +411,12 @@ label not_forced_action_accepted_changes(Girl, action):
         $ Girl.change_stat("love", 90, 1)
         $ Girl.change_stat("inhibition", 50, 3)
     elif action in ["eat_pussy", "finger_ass"]:
-        $ Girl.Eyes = "_closed"
+        $ Girl.eyes = "_closed"
         $ Girl.change_stat("love", 90, 1)
         $ Girl.change_stat("inhibition", 50, 3)
         $ Girl.change_stat("lust", 200, 3)
     elif action in ["eat_ass"]:
-        $ Girl.Eyes = "_closed"
+        $ Girl.eyes = "_closed"
         $ Girl.change_stat("love", 90, 1)
         $ Girl.change_stat("inhibition", 60, 2)
         $ Girl.change_stat("lust", 200, 3)

@@ -8,6 +8,15 @@ label addiction_event(Girl):
 
     $ Player.add_word(1,0,"fix")
 
+    $ taboo = 0
+
+    $ Girl.taboo = 0
+
+    $ bg_current = "bg_player"
+
+    $ Girl.location = bg_current
+    $ Girl.change_outfit(outfit_changed=1)
+
     call locked_door(Girl, entering = True)
 
     if not _return:
@@ -24,14 +33,9 @@ label addiction_event(Girl):
         else:
             "[Girl.name] barges into your room in a tizzy."
 
-    $ taboo = 0
-
-    $ Girl.taboo = 0
-
     $ bg_current = "bg_player"
 
     $ Girl.location = bg_current
-    $ Girl.change_outfit(outfit_changed=1)
 
     call set_the_scene
     call clear_the_room(Girl)
@@ -649,7 +653,7 @@ label third_addiction_event:
         ch_j "I have had just about enough of your \"not doing what Jean says\" nonsense!"
         ch_j "What is it you want from me?!"
     elif Girl == StormX:
-        $ Girl.change_face("_angry",Eyes="white")
+        $ Girl.change_face("_angry",Eyes="_white")
 
         ch_s "[Player.name]!"
         ch_s "This has gone on long enough!"
@@ -1015,7 +1019,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                         $ approval_bonus = stored_count
 
-                        if Girl.PantsNum() > 6 or Girl.HoseNum() >= 5:
+                        if Girl.legs_number() > 6 or Girl.hose_number() >= 5:
                             if Girl == RogueX:
                                 ch_r "Ok, but after we do this, I get a little touch too."
                             elif Girl == KittyX:
@@ -1053,7 +1057,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                             elif Girl == JubesX:
                                 ch_v "So, fair trade?"
 
-                            if Girl.PantsNum() > 6 or Girl.HoseNum() >= 5:
+                            if Girl.legs_number() > 6 or Girl.hose_number() >= 5:
                                 call Girl_Tag (Girl)
                     "How about you let me touch your pussy?":
                         $ stored_count = approval_bonus
@@ -1226,7 +1230,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                         $ JeanX.eyes = "_normal"
                     elif Girl == StormX:
-                        $ StormX.eyes = "white"
+                        $ StormX.eyes = "_white"
 
                         ch_s ". . ."
 
@@ -1462,7 +1466,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
             $ Girl.change_stat("obedience", 80, 10)
             ch_j "Raaaaaaahhhh!"
         elif Girl == StormX:
-            $ StormX.eyes = "white"
+            $ StormX.eyes = "_white"
             ch_s ". . ."
             "You hear thunder outside. . ."
         elif Girl == JubesX:

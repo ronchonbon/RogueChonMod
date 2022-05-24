@@ -2984,9 +2984,9 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
 
             "You get back to it, [Previous.name] settles back into her seat with a glare."
 
-        if Girl.action_counter["anal"] and approval_check(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.PantsNum() <= 5:
+        if Girl.action_counter["anal"] and approval_check(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.legs_number() <= 5:
             $ OptionsDS.append("anal")
-        if Girl.action_counter["sex"] and approval_check(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.PantsNum() <= 5:
+        if Girl.action_counter["sex"] and approval_check(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.legs_number() <= 5:
             $ OptionsDS.append("sex")
         if Girl.action_counter["blowjob"] and approval_check(Girl, 1300, Bonus=(10*GirlBonus)):
             $ OptionsDS.append("blowjob")
@@ -3357,9 +3357,9 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
         elif OptionsDS[0] == "flash":
             $ Girl.change_face("_sexy")
             "After making out for a few minutes, [Girl.name] gets a sly look on her face, then shifts a bit lower in her seat."
-            if Girl.PantsNum() > 6:
+            if Girl.legs_number() > 6:
                 "Looking down, you notice she's pulled down her pants enough that you can see her bare pussy, lit by the movie screen."
-            elif Girl.PantsNum() == 6:
+            elif Girl.legs_number() == 6:
                 "Looking down, you notice she's pulled down her shorts enough that you can see her bare pussy, lit by the movie screen."
             else:
                 "Looking down, you notice she's hiked up her skirt enough that you can see her bare pussy, lit by the movie screen."
@@ -4163,7 +4163,7 @@ label Girl_Date_End(Girl=0):
                     elif Girl == JubesX:
                         ch_v "Sure, why not. . ."
                     call check_if_second_minds (Girl, 0, 2)
-                    $ multi_action = 0
+                    $ multi_action = False
                     $ primary_action = "kiss"
                     call before_action
                     $ multi_action = True

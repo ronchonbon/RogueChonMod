@@ -29,7 +29,7 @@ label chat:
         "Text [JubesX.name]" if JubesX.location != bg_current and "met" in JubesX.history:
             $ Girl = JubesX
         "Never Mind":
-            $ Girl = None
+            return
 
     if Girl:
         if Girl.location == bg_current:

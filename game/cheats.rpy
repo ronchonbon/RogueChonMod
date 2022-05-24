@@ -93,7 +93,7 @@ label WardrobeEditor(Chr=0):
                         "Body":
                             call expression Chr.tag + "_Pussy_Launch" pass (0)
                         "Face Low":
-                            call Storm_Hide
+                            call hide_girl(StormX)
                             show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location)
                             show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_center):
                                 ease 0.5 offset (100,200) zoom 1.5 alpha 1
@@ -116,12 +116,12 @@ label WardrobeEditor(Chr=0):
                         "Doggy" if Chr == RogueX:
                             $ Chr.pose = "doggy"
                             if not renpy.showing(Chr.tag+"_Doggy"):
-                                call expression Chr.tag + "_sex_launch"
+                                call expression Chr.tag + "_Sex_Launch"
                             else:
                                 call expression Chr.tag + "_Sex_Reset"
                         "Sexpose" if Chr != RogueX:
                             if not renpy.showing(Chr.tag+"_SexSprite"):
-                                call expression Chr.tag + "_sex_launch"
+                                call expression Chr.tag + "_Sex_Launch"
                             else:
                                 call expression Chr.tag + "_Sex_Reset"
                         "Back":
@@ -160,11 +160,11 @@ label WardrobeEditor(Chr=0):
                         "Add tube_top" if Chr == JubesX:
                             $ Chr.top = "_tube_top"
                         "Add pink_shirt" if Chr == JeanX:
-                            $ Chr.top = "pink_shirt"
+                            $ Chr.top = "_pink_shirt"
                         "Add green_shirt" if Chr == JeanX:
-                            $ Chr.top = "green_shirt"
+                            $ Chr.top = "_green_shirt"
                         "Add yellow_shirt" if Chr == JeanX:
-                            $ Chr.top = "yellow_shirt"
+                            $ Chr.top = "_yellow_shirt"
                         "Add_jacket":
                             if Chr == JubesX:
                                 $ Chr.accessory = "_jacket"
@@ -184,7 +184,7 @@ label WardrobeEditor(Chr=0):
                             $ Chr.accessory = ""
 
                         "Add white_shirt" if Chr == StormX:
-                            $ Chr.top = "white_shirt"
+                            $ Chr.top = "_white_shirt"
                         "Dress" if Chr == EmmaX:
                             $ Chr.top = "_dress"
                         "Add nighty":
@@ -223,13 +223,13 @@ label WardrobeEditor(Chr=0):
                         "Add sports_bra":
                             $ Chr.bra = "_sports_bra"
                         "Add leather_bra" if Chr == LauraX:
-                            $ Chr.bra = "leather_bra"
+                            $ Chr.bra = "_leather_bra"
                         "Add white_tank" if Chr == LauraX:
-                            $ Chr.bra = "white_tank"
+                            $ Chr.bra = "_white_tank"
                         "Add buttoned tank_top" if Chr == RogueX:
                             $ Chr.bra = "_buttoned_tank"
                         "Add lace_bra":
-                            $ Chr.bra = "lace_bra"
+                            $ Chr.bra = "_lace_bra"
                         "Add cami" if Chr == KittyX:
                             $ Chr.bra = "_cami"
                         "Add dress" if Chr == KittyX:
@@ -237,7 +237,7 @@ label WardrobeEditor(Chr=0):
                         "Add wolvie_top" if Chr == LauraX:
                             $ Chr.bra = "wolvie_top"
                         "Add green_bra" if Chr == JeanX:
-                            $ Chr.bra = "green_bra"
+                            $ Chr.bra = "_green_bra"
                         "Add tube_top" if Chr == StormX or Chr == RogueX:
                             $ Chr.bra = "_tube_top"
                         "Add_bra":
@@ -246,13 +246,13 @@ label WardrobeEditor(Chr=0):
                             else:
                                 $ Chr.bra = "_bra"
                         "Add cosplay_bra" if Chr == StormX:
-                            $ Chr.bra = "cos_bra"
+                            $ Chr.bra = "_cosplay_bra"
                         "Add bikini":
                             $ Chr.bra = "_bikini_top"
                         "Add corset":
                             $ Chr.bra = "_corset"
                         "Add lace corset":
-                            $ Chr.bra = "lace corset"
+                            $ Chr.bra = "_lace corset"
                         "Toggle up-top":
                             if Chr.top_pulled_up:
                                 $ Chr.top_pulled_up = 0
@@ -282,7 +282,7 @@ label WardrobeEditor(Chr=0):
                         "Add Skirt" if Chr != KittyX:
                             $ Chr.legs = "_skirt"
                         "Add cosplay Skirt" if Chr == LauraX:
-                            $ Chr.legs = "other_skirt"
+                            $ Chr.legs = "_other_skirt"
                         "Add blue Skirt" if Chr == KittyX:
                             $ Chr.legs = "_blue_skirt"
                         "Add_pants" if Chr != KittyX:
@@ -294,9 +294,9 @@ label WardrobeEditor(Chr=0):
                         "Add_shorts" if Chr == KittyX or Chr == JeanX or Chr == JubesX:
                             $ Chr.legs = "_shorts"
                         "Add leather_pants" if Chr == LauraX:
-                            $ Chr.legs = "leather_pants"
+                            $ Chr.legs = "_leather_pants"
                         "Add yoga_pants":
-                            $ Chr.legs = "yoga_pants"
+                            $ Chr.legs = "_yoga_pants"
                         "Dress" if Chr == EmmaX or Chr == KittyX:
                             $ Chr.legs = "_dress"
                         "Boots" if Chr == EmmaX:
@@ -355,7 +355,7 @@ label WardrobeEditor(Chr=0):
                                 "Add socks" if Chr == JubesX:
                                     $ Chr.hose = "socks"
                                 "Add black stockings" if Chr == LauraX:
-                                    $ Chr.hose = "black stockings"
+                                    $ Chr.hose = "_black_stockings"
                                 "Remove hose" if Chr.hose:
                                     $ Chr.hose = ""
                         "Remove_panties" if Chr.underwear:
@@ -365,7 +365,7 @@ label WardrobeEditor(Chr=0):
                         "Add white_panties" if Chr == StormX or Chr == EmmaX:
                             $ Chr.underwear = "_white_panties"
                         "Add cosplay_panties" if Chr == StormX:
-                            $ Chr.underwear = "cos_panties"
+                            $ Chr.underwear = "_cosplay_panties"
                         "Add bikini":
                             $ Chr.underwear = "_bikini_bottoms"
                         "Add_shorts":
@@ -485,17 +485,17 @@ label WardrobeEditor(Chr=0):
                                 $ Chr.neck = ""
                         "Toggle flower Necklace":
                             if not Chr.neck:
-                                $ Chr.neck = 'flower necklace'
+                                $ Chr.neck = '_flower_necklace'
                             else:
                                 $ Chr.neck = ""
                         "Toggle ring Necklace" if Chr == StormX:
                             if not Chr.neck:
-                                $ Chr.neck = 'rings'
+                                $ Chr.neck = '_rings'
                             else:
                                 $ Chr.neck = ""
                         "Toggle Rings" if Chr == StormX:
                             if not Chr.accessory:
-                                $ Chr.accessory = 'rings'
+                                $ Chr.accessory = '_rings'
                             else:
                                 $ Chr.accessory = ""
                         "Toggle_choker" if Chr == EmmaX or Chr == RogueX:
@@ -510,16 +510,16 @@ label WardrobeEditor(Chr=0):
                                 $ Chr.accessory = ""
                         "Toggle sweater" if Chr == RogueX:
                             if Chr.accessory != "_sweater":
-                                $ Chr.accessory ='sweater'
+                                $ Chr.accessory ='_sweater'
                             else:
                                 $ Chr.accessory = ""
                         "Toggle suspenders" if Chr == LauraX or Chr == JeanX:
-                            if Chr.accessory == "suspenders":
-                                $ Chr.accessory = "suspenders2"
-                            elif Chr.accessory == "suspenders2":
+                            if Chr.accessory == "_suspenders":
+                                $ Chr.accessory = "_suspenders2"
+                            elif Chr.accessory == "_suspenders2":
                                 $ Chr.accessory = ""
                             else:
-                                $ Chr.accessory = "suspenders"
+                                $ Chr.accessory = "_suspenders"
                         "Spunk Level":
                             menu:
                                 "Mouth":

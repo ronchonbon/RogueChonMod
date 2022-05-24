@@ -225,7 +225,7 @@ label Flirt(Girl=0):
                         ch_j "Back!"
                         $ Girl.eyes = "_sexy"
                     elif Girl == StormX:
-                        $ Girl.eyes = "white"
+                        $ Girl.eyes = "_white"
                         ch_s "What are you doing?!"
                         $ Girl.eyes = "_sexy"
                     elif Girl == JubesX:
@@ -880,7 +880,7 @@ label Flirt(Girl=0):
                         ch_v "Fuck off!"
 
 
-            "Flip her skirt up" if Girl.PantsNum() == 5 and not Girl.upskirt:
+            "Flip her skirt up" if Girl.legs_number() == 5 and not Girl.upskirt:
                 $ Girl.change_face("_surprised", 1)
                 $ Girl.upskirt = 1
                 pause 0.5
@@ -2174,7 +2174,7 @@ label Compliment(Girl=0, line0=0, line1=0, line2=0, Options=[], CountList=[], li
                 $ Girl.change_stat("inhibition", 80, 1)
                 ch_j "Don't be so basic."
             elif Girl == StormX:
-                $ Girl.eyes = "white"
+                $ Girl.eyes = "_white"
                 ch_s "Better?"
             elif Girl == JubesX:
                 ch_v "Sorry, I have that effect on people sometimes. . ."
@@ -3781,13 +3781,13 @@ label AskPanties(Girl=0, Store=0):
             $ approval_bonus -= 20
 
         $ line = 0
-        if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 10:
+        if Girl.legs_number() >= 6 or Girl.hose_number() >= 10:
 
             if approval_check(Girl, 1000, "OI", TabM = 5) or "exhibitionist" in Girl.traits:
                 $ line = "here"
             elif approval_check(Girl, 900, TabM = 5):
                 $ line = "change"
-        elif Girl.PantsNum() == 5:
+        elif Girl.legs_number() == 5:
 
             if approval_check(Girl, 600, "OI", TabM = 5) or "exhibitionist" in Girl.traits:
                 $ line = "here"
@@ -3808,11 +3808,11 @@ label AskPanties(Girl=0, Store=0):
             $ Girl.change_stat("obedience", 60, 4)
             $ Girl.change_stat("inhibition", 60, 4)
             call Remove_Panties (Girl)
-            if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 10:
+            if Girl.legs_number() >= 6 or Girl.hose_number() >= 10:
                 $ Girl.change_stat("lust", 60, 5)
                 $ Girl.change_stat("obedience", 60, 5)
                 $ Girl.change_stat("inhibition", 60, 5)
-            elif Girl.PantsNum() == 5:
+            elif Girl.legs_number() == 5:
                 $ Girl.change_stat("lust", 60, 5)
                 $ Girl.change_stat("obedience", 60, 4)
                 $ Girl.change_stat("inhibition", 60, 4)
@@ -3827,7 +3827,7 @@ label AskPanties(Girl=0, Store=0):
         if line == "here":
 
             $ Girl.change_face("_sly")
-            if Girl.PantsNum() == 5:
+            if Girl.legs_number() == 5:
 
                 $ Girl.change_stat("obedience", 60, 4)
                 $ Girl.change_stat("inhibition", 60, 4)
@@ -3970,11 +3970,11 @@ label AskPanties(Girl=0, Store=0):
                 if line:
 
                     $ Girl.change_face("_sly", 1)
-                    if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 10:
+                    if Girl.legs_number() >= 6 or Girl.hose_number() >= 10:
                         $ Girl.change_stat("lust", 60, 5)
                         $ Girl.change_stat("obedience", 60, 5)
                         $ Girl.change_stat("inhibition", 60, 5)
-                    elif Girl.PantsNum() == 5:
+                    elif Girl.legs_number() == 5:
                         $ Girl.change_stat("lust", 60, 5)
                         $ Girl.change_stat("obedience", 60, 4)
                         $ Girl.change_stat("inhibition", 60, 4)
@@ -4088,11 +4088,11 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
     if Girl == KittyX:
         $ Girl.underwear = ""
         $ Girl.change_face("_bemused")
-        if Girl.PantsNum() >= 6:
+        if Girl.legs_number() >= 6:
             "[Girl.name] looks around, reaches into her pocket, and tugs her panties out."
-        elif Girl.PantsNum() == 5:
+        elif Girl.legs_number() == 5:
             "[Girl.name] looks around, reaches into her skirt, and pulls her panties out."
-        elif Girl.HoseNum() >= 5:
+        elif Girl.hose_number() >= 5:
             "[Girl.name] looks around, reaches through her [Girl.hose], and pulls her panties out."
         else:
             "[Girl.name] looks around and pulls her panties off."
@@ -4100,21 +4100,21 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
         $ Girl.change_face("_sexy")
         "She hands them to you with a smirk."
 
-        if not Girl.legs and Girl.HoseNum() <= 10:
+        if not Girl.legs and Girl.hose_number() <= 10:
             call expression Girl.tag + "_First_Bottomless"
 
         $ Girl.daily_history.append("commando")
         $ Girl.change_outfit()
         call outfitShame (Girl, 20)
         return
-    elif Girl == JeanX and Girl.PantsNum() == 5 and not approval_check(Girl, 400, "L"):
+    elif Girl == JeanX and Girl.legs_number() == 5 and not approval_check(Girl, 400, "L"):
         $ Girl.underwear = ""
         $ Girl.change_face("_bemused",Eyes="psychic")
         "You notice some movement as her panties shoot down her legs and she quickly steps out of them."
         "They scoot along near the ground and then up to your hand."
         $ Girl.change_face("_sexy")
 
-        if not Girl.legs and Girl.HoseNum() <= 10:
+        if not Girl.legs and Girl.hose_number() <= 10:
             call expression Girl.tag + "_First_Bottomless"
 
         $ Girl.daily_history.append("commando")
@@ -4124,15 +4124,15 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
 
     $ Store = Girl.legs
     $ Store2 = Girl.hose
-    if Girl.PantsNum() >= 6:
+    if Girl.legs_number() >= 6:
 
         $ Girl.legs = ""
         $ Type = 1
-    elif Girl.PantsNum() == 5:
+    elif Girl.legs_number() == 5:
 
         $ Girl.upskirt = 1
         $ Type = 2
-    if Girl.HoseNum() >= 5:
+    if Girl.hose_number() >= 5:
         $ Girl.hose = ""
         $ Type = 3 if Type == 2 else 4
 
@@ -4163,22 +4163,22 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
 
     $ Girl.legs = Store
     $ Girl.hose = Store2
-    if Girl.PantsNum() > 6:
+    if Girl.legs_number() > 6:
 
         "She hands you the panties and then pulls her pants back on."
-    elif Girl.PantsNum() == 6 or Girl.underwear == "_shorts":
+    elif Girl.legs_number() == 6 or Girl.underwear == "_shorts":
 
         "She hands you the panties and then pulls her shorts back up."
         $ Girl.upskirt = 0
-    elif Girl.PantsNum() == 5 and Girl.HoseNum() >= 5:
+    elif Girl.legs_number() == 5 and Girl.hose_number() >= 5:
 
         "She hands you the panties and then pulls her [Girl.hose] back on and her skirt back down."
         $ Girl.upskirt = 0
-    elif Girl.PantsNum() == 5:
+    elif Girl.legs_number() == 5:
 
         "She hands you the panties and then pulls her skirt back down."
         $ Girl.upskirt = 0
-    elif Girl.HoseNum() >= 5:
+    elif Girl.hose_number() >= 5:
 
         "She hands you the panties and then pulls her [Girl.hose] back on."
     else:

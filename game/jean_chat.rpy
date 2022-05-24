@@ -1054,7 +1054,7 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
 
             if "book" not in JeanX.had_chat:
                 $ Options.append("booked")
-        if "lace_bra" in JeanX.inventory or "_lace_panties" in JeanX.inventory:
+        if "_lace_bra" in JeanX.inventory or "_lace_panties" in JeanX.inventory:
 
             if "lingerie" not in JeanX.had_chat:
                 $ Options.append("lingerie")
@@ -2594,20 +2594,20 @@ label Jean_Wardrobe_Menu:
             if not JeanX.bra and not renpy.showing('dress_screen'):
                 call Jean_First_Topless
 
-        "Try on that pink shirt." if JeanX.top != "pink_shirt":
+        "Try on that pink shirt." if JeanX.top != "_pink_shirt":
             $ JeanX.change_face("_bemused")
             ch_j "Sure."
-            $ JeanX.top = "pink_shirt"
+            $ JeanX.top = "_pink_shirt"
 
-        "Try on that green shirt." if JeanX.top != "green_shirt":
+        "Try on that green shirt." if JeanX.top != "_green_shirt":
             $ JeanX.change_face("_bemused")
             ch_j "Sure."
-            $ JeanX.top = "green_shirt"
+            $ JeanX.top = "_green_shirt"
 
-        "Try on that yellow tanktop." if JeanX.top != "yellow_shirt" and "halloween" in JeanX.history:
+        "Try on that yellow tanktop." if JeanX.top != "_yellow_shirt" and "halloween" in JeanX.history:
             $ JeanX.change_face("_bemused")
             ch_j "Sure."
-            $ JeanX.top = "yellow_shirt"
+            $ JeanX.top = "_yellow_shirt"
 
         "Maybe just throw on a towel?" if JeanX.top != "_towel":
             $ JeanX.change_face("_bemused", 1)
@@ -2638,13 +2638,13 @@ label Jean_Wardrobe_Menu:
                     $ JeanX.blushing = "_blush1"
                     ch_j "Well, it's not like I needed one. . ."
                     $ JeanX.blushing = ""
-                elif approval_check(JeanX, 900, TabM=2) and "lace_bra" in JeanX.inventory:
+                elif approval_check(JeanX, 900, TabM=2) and "_lace_bra" in JeanX.inventory:
                     ch_j "I guess I could find something."
-                    $ JeanX.bra  = "lace_bra"
+                    $ JeanX.bra  = "_lace_bra"
                     "She pulls out her lace bra and slips it under her [JeanX.top]."
                 elif approval_check(JeanX, 700, TabM=2):
                     ch_j "I guess I could find something."
-                    $ JeanX.bra  = "green_bra"
+                    $ JeanX.bra  = "_green_bra"
                     "She pulls out her green bra and slips it under her [JeanX.top]."
                 else:
                     ch_j "Yeah, I don't think so."
@@ -2702,7 +2702,7 @@ label Jean_Wardrobe_Menu:
                         ch_j "I'm not wearing any panties at the moment."
                     return
 
-            if JeanX.legs == "_pants" or JeanX.legs == "yoga_pants":
+            if JeanX.legs == "_pants" or JeanX.legs == "_yoga_pants":
                 $ JeanX.legs = ""
                 "She tugs her pants off and drops them to the ground."
             else:
@@ -2719,10 +2719,10 @@ label Jean_Wardrobe_Menu:
             ch_j "Yeah, I know."
             $ JeanX.legs = "_pants"
 
-        "You look great in those yoga pants." if JeanX.legs != "yoga_pants":
+        "You look great in those yoga pants." if JeanX.legs != "_yoga_pants":
             if approval_check(JeanX, 800, TabM=4):
                 ch_j "Yeah, I know."
-                $ JeanX.legs = "yoga_pants"
+                $ JeanX.legs = "_yoga_pants"
             else:
                 call Display_dress_screen (JeanX)
                 if not _return:
@@ -2834,24 +2834,24 @@ label Jean_Wardrobe_Menu:
                             call Jean_First_Topless
 
 
-                "Try on that green bra." if JeanX.bra != "green_bra":
+                "Try on that green bra." if JeanX.bra != "_green_bra":
                     ch_j "Ok."
-                    $ JeanX.bra = "green_bra"
+                    $ JeanX.bra = "_green_bra"
 
                 "How about that sports bra." if JeanX.bra != "_sports_bra":
                     ch_j "Ok."
                     $ JeanX.bra = "_sports_bra"
 
-                "I like that lace bra." if JeanX.bra != "lace_bra" and "lace_bra" in JeanX.inventory:
+                "I like that lace bra." if JeanX.bra != "_lace_bra" and "_lace_bra" in JeanX.inventory:
                     if JeanX.seen_breasts or approval_check(JeanX, 1300, TabM=2):
                         ch_j "Sure."
-                        $ JeanX.bra = "lace_bra"
+                        $ JeanX.bra = "_lace_bra"
                     else:
                         call Display_dress_screen (JeanX)
                         if not _return:
                             ch_j "It's a little transparent. . ."
                         else:
-                            $ JeanX.bra = "lace_bra"
+                            $ JeanX.bra = "_lace_bra"
 
                 "I like that black corset." if JeanX.bra != "_corset" and "_corset" in JeanX.inventory:
                     if JeanX.seen_breasts or approval_check(JeanX, 1000, TabM=1):
@@ -2864,16 +2864,16 @@ label Jean_Wardrobe_Menu:
                         else:
                             $ JeanX.bra = "_corset"
 
-                "I like that lace corset." if JeanX.bra != "lace corset" and "lace corset" in JeanX.inventory:
+                "I like that lace corset." if JeanX.bra != "_lace corset" and "_lace corset" in JeanX.inventory:
                     if JeanX.seen_breasts or approval_check(JeanX, 1300, TabM=2):
                         ch_j "Sure."
-                        $ JeanX.bra = "lace corset"
+                        $ JeanX.bra = "_lace corset"
                     else:
                         call Display_dress_screen (JeanX)
                         if not _return:
                             ch_j "It's a little transparent. . ."
                         else:
-                            $ JeanX.bra = "lace corset"
+                            $ JeanX.bra = "_lace corset"
 
                 "I like that bikini top." if JeanX.bra != "_bikini_top" and "_bikini_top" in JeanX.inventory:
                     if bg_current == "bg_pool":
@@ -3166,13 +3166,13 @@ label Jean_Wardrobe_Menu:
                 return
             $ JeanX.piercings = ""
 
-        "Add Suspenders" if JeanX.accessory != "suspenders" and JeanX.accessory != "suspenders2" and "halloween" in JeanX.history:
-            $ JeanX.accessory = "suspenders"
-        "Remove Suspenders" if JeanX.accessory == "suspenders" or JeanX.accessory == "suspenders2":
+        "Add Suspenders" if JeanX.accessory != "_suspenders" and JeanX.accessory != "_suspenders2" and "halloween" in JeanX.history:
+            $ JeanX.accessory = "_suspenders"
+        "Remove Suspenders" if JeanX.accessory == "_suspenders" or JeanX.accessory == "_suspenders2":
             $ JeanX.accessory = ""
 
-        "Shift Suspenders" if JeanX.accessory == "suspenders" or JeanX.accessory == "suspenders2":
-            $ JeanX.accessory = "suspenders" if JeanX.accessory == "suspenders2" else "suspenders2"
+        "Shift Suspenders" if JeanX.accessory == "_suspenders" or JeanX.accessory == "_suspenders2":
+            $ JeanX.accessory = "_suspenders" if JeanX.accessory == "_suspenders2" else "_suspenders2"
         "Never mind":
 
 

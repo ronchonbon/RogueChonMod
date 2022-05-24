@@ -14,12 +14,12 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
         $ temp_Girls.remove(temp_Girls[0])
     $ bg_current = "bg_study"
     call set_the_scene (0)
-    show Xavier_sprite at sprite_location(stage_left)
+    show Xavier_Sprite at sprite_location(stage_left)
 
     if Girl == RogueX:
-        show Rogue_sprite at sprite_location(stage_right) with ease
+        show Rogue_Sprite at sprite_location(stage_right) with ease
     elif Girl == KittyX:
-        show Kitty_sprite at sprite_location(stage_right) with ease
+        show Kitty_Sprite at sprite_location(stage_right) with ease
     elif Girl == EmmaX:
         show Emma_Sprite at sprite_location(stage_right) with ease
     elif Girl == LauraX:
@@ -35,9 +35,9 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
     $ Count = Girl.event_counter["caught"]
 
     if Partner == RogueX:
-        show Rogue_sprite at sprite_location(stage_far_right) with ease
+        show Rogue_Sprite at sprite_location(stage_far_right) with ease
     elif Partner == KittyX:
-        show Kitty_sprite at sprite_location(stage_far_right) with ease
+        show Kitty_Sprite at sprite_location(stage_far_right) with ease
     elif Partner == EmmaX:
         show Emma_Sprite at sprite_location(stage_far_right) with ease
     elif Partner == LauraX:
@@ -87,7 +87,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
             ch_x "Ororo, for Christ's sake. . ."
             ch_x "Put on some actual clothes!"
             show black_screen onlayer black
-            $ StormX.top = "white_shirt"
+            $ StormX.top = "_white_shirt"
             $ StormX.legs = "_skirt"
             hide black_screen onlayer black
             ch_x ". . . fine."
@@ -656,7 +656,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
 
     call remove_girl ("all")
     "You return to your room"
-    hide Xavier_sprite
+    hide Xavier_Sprite
     jump player_room
 
 
@@ -715,7 +715,7 @@ label Xavier_Plan(GirlX=0):
     if GirlX == RogueX:
         $ RogueX.arms = ""
         $ RogueX.arm_pose = 2
-        show Rogue_sprite zorder 24 at sprite_location(stage_left+100,85) with ease
+        show Rogue_Sprite zorder 24 at sprite_location(stage_left+100,85) with ease
         "[RogueX.name] moves in and also grabs his head, duplicating his powers as he watches helplessly."
         "Now that she posesses his full power, while his are negated, he has no defenses."
         call change_Xavier_face ("hypno")
@@ -731,7 +731,7 @@ label Xavier_Plan(GirlX=0):
         ch_r "I think we'll only get three tries at this. . ."
     elif GirlX == KittyX:
         $ KittyX.arm_pose = 2
-        show Kitty_sprite at sprite_location(stage_left+100,150) with ease
+        show Kitty_Sprite at sprite_location(stage_left+100,150) with ease
         $ KittyX.sprite_location = stage_center
         "[KittyX.name] moves in sits on his lap, pinning his arms to the chair."
         if "Kappa" in Player.traits:
@@ -1186,7 +1186,7 @@ label Xavier_Plan(GirlX=0):
 
     $ Player.daily_history.append("Xavier")
     call remove_girl ("all")
-    hide Xavier_sprite
+    hide Xavier_Sprite
     call set_the_scene
     "You return to your room"
     jump player_room
@@ -1269,7 +1269,7 @@ label Girl_Caught_Changing(Girl=0):
                 $ Girl.change_face("_surprised",Brows="_angry")
                 $ Girl.change_stat("love", 80, -50)
 
-                if not Girl.OverNum() or (Girl.OverNum()+Girl.ChestNum() <5) or (Girl.PantsNum() < 5 and Girl.HoseNum() < 10):
+                if not Girl.top_number() or (Girl.top_number()+Girl.bra_number() <5) or (Girl.legs_number() < 5 and Girl.hose_number() < 10):
 
 
                     call expression Girl.tag + "_First_Bottomless" pass (1)
@@ -1757,7 +1757,7 @@ label Girls_Caught_Lesing(Girl=0, Girl2=0, temp_Girls=[]):
 
 
 
-label girl_caught_showering(Girl):
+label caught_showering(Girl):
     call shift_focus (Girl)
 
     $ Options = []
@@ -1803,6 +1803,8 @@ label girl_caught_showering(Girl):
             "You hear a sharp shuffling sound and the water gets cut off."
             "After several seconds and some more shuffling, [Girl.name] comes to the door."
 
+            $ bg_current = "bg_showerroom"
+
             $ Girl.change_face("_perplexed",2,Mouth="_normal")
 
             call set_the_scene(check_if_dressed = False)
@@ -1828,6 +1830,8 @@ label girl_caught_showering(Girl):
         else:
             "You hear the rustling of a towel and some knocking around, but after a few seconds [Girl.name] comes to the door."
 
+            $ bg_current = "bg_showerroom"
+
             call set_the_scene(check_if_dressed = False)
 
             if Girl == RogueX:
@@ -1845,6 +1849,8 @@ label girl_caught_showering(Girl):
             elif Girl == JubesX:
                 ch_v "Oh, hey, [Girl.player_petname]. I was wrapping up here. . ."
     else:
+        $ bg_current = "bg_showerroom"
+
         if "will_masturbate" in Girl.daily_history:
             $ Girl.drain_word("will_masturbate",0,1)
             $ Girl.change_face("_sexy",Eyes="_closed")
@@ -1860,6 +1866,7 @@ label girl_caught_showering(Girl):
 
             call expression Girl.tag + "_SexAct" pass ("masturbation")
 
+            $ renpy.pop_call()
             jump shower_room
         elif D20 >= 15:
             call set_the_scene(check_if_dressed = False)

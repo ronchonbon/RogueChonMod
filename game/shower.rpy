@@ -469,6 +469,7 @@ label showering:
                     call expression temp_Girls[0].tag + "_First_Topless" pass (1)
                 else:
                     call remove_girl(temp_Girls[0])
+
                 while temp_Girls[0] in Nearby:
                     $ Nearby.remove(temp_Girls[0])
 

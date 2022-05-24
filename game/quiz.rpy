@@ -13,7 +13,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
 
 
     if Party[0] == RogueX:
-        if not RogueX.top and not RogueX.legs and RogueX.PantiesNum <= 5:
+        if not RogueX.top and not RogueX.legs and RogueX.underwear_number <= 5:
 
             $ RogueX.change_face("_sly")
             ch_r "Well, I did consider suggesting we do some \"strip studying,\". . ."

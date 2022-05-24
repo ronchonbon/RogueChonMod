@@ -1103,7 +1103,7 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
 
                 if "book" not in EmmaX.had_chat:
                     $ Options.append("booked")
-            if "lace_bra" in EmmaX.inventory or "_lace_panties" in EmmaX.inventory:
+            if "_lace_bra" in EmmaX.inventory or "_lace_panties" in EmmaX.inventory:
 
                 if "lingerie" not in EmmaX.had_chat:
                     $ Options.append("lingerie")
@@ -2804,9 +2804,9 @@ label Emma_Wardrobe_Menu:
             "Then you could slip something on under it. . .":
                 if (EmmaX.seen_breasts and approval_check(EmmaX, 1000, TabM=(4-Public))) or approval_check(EmmaX, 1200, TabM=(5-Public)):
                     ch_e "-not that I'm overly concerned about it. . ."
-                elif approval_check(EmmaX, 900, TabM=(3-Public)) and "lace_bra" in EmmaX.inventory:
+                elif approval_check(EmmaX, 900, TabM=(3-Public)) and "_lace_bra" in EmmaX.inventory:
                     ch_e "I suppose I could."
-                    $ EmmaX.bra  = "lace_bra"
+                    $ EmmaX.bra  = "_lace_bra"
                     "She pulls out her lace bra and slips it on under her [EmmaX.top]."
 
 
@@ -2912,9 +2912,9 @@ label Emma_Wardrobe_Menu:
             ch_e "I suppose."
             $ EmmaX.accessory = ""
 
-        "You look great in yoga pants." if EmmaX.legs != "yoga_pants":
+        "You look great in yoga pants." if EmmaX.legs != "_yoga_pants":
             ch_e "Yeah, ok."
-            $ EmmaX.legs = "yoga_pants"
+            $ EmmaX.legs = "_yoga_pants"
         "Never mind":
 
             pass
@@ -3031,16 +3031,16 @@ label Emma_Wardrobe_Menu:
                         else:
                             $ EmmaX.bra = "_corset"
 
-                "I like that lace bra." if "lace_bra" in EmmaX.inventory and EmmaX.bra != "lace_bra":
+                "I like that lace bra." if "_lace_bra" in EmmaX.inventory and EmmaX.bra != "_lace_bra":
                     if EmmaX.seen_breasts or approval_check(EmmaX, 1300, TabM=(3-Public)):
                         ch_e "Fine."
-                        $ EmmaX.bra = "lace_bra"
+                        $ EmmaX.bra = "_lace_bra"
                     else:
                         call Display_dress_screen (EmmaX)
                         if not _return:
                             ch_e "It's a bit revealing. . ."
                         else:
-                            $ EmmaX.bra = "lace_bra"
+                            $ EmmaX.bra = "_lace_bra"
 
                 "I like that sports bra." if EmmaX.bra != "_sports_bra":
                     if EmmaX.seen_breasts or approval_check(EmmaX, 1000, TabM=(3-Public)):

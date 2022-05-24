@@ -24,13 +24,13 @@ label prologue:
         menu:
             "What is your skin color?"
             "Green":
-                $ Player.color = "green"
+                $ Player.color = "_green"
             "White":
                 $ Player.color = "pink"
             "Black":
                 $ Player.color = "brown"
 
-    show Xavier_sprite at sprite_location(stage_left) with dissolve
+    show Xavier_Sprite at sprite_location(stage_left) with dissolve
 
     ch_x "Welcome to the Xavier Institute for Higher Learning. This is a home for all mutants to learn and grow."
     ch_x "My name is Charles Xavier, and I have dedicated my life to helping other mutants such as yourself."
@@ -46,14 +46,14 @@ label prologue:
     $ RogueX.change_face("_surprised")
     $ RogueX.sprite_location = stage_far_right
 
-    show Rogue_sprite at sprite_location(RogueX.sprite_location) with easeinright
+    show Rogue_Sprite at sprite_location(RogueX.sprite_location) with easeinright
 
     ch_r "What's that Prof? This new kid can negate mutant powers?"
 
     $ RogueX.mouth = "_normal"
     $ RogueX.sprite_location = stage_right
 
-    show Rogue_sprite at sprite_location(RogueX.sprite_location) with ease
+    show Rogue_Sprite at sprite_location(RogueX.sprite_location) with ease
 
     ch_r "Maybe even my own?"
     ch_x "That is correct, [RogueX.name], though currently, his powers are weak and uncontrolled."
@@ -66,11 +66,11 @@ label prologue:
     ch_x "This young lady is named [RogueX.name], one of our veteran students."
     ch_x "And [RogueX.name], this young man goes by the name \"[Player.name]\"."
 
-    hide Xavier_sprite with easeoutright
+    hide Xavier_Sprite with easeoutright
 
     $ RogueX.sprite_location = stage_center
 
-    show Rogue_sprite at sprite_location(RogueX.sprite_location) with ease
+    show Rogue_Sprite at sprite_location(RogueX.sprite_location) with ease
 
     $ active_Girls.append(RogueX) if RogueX not in active_Girls else active_Girls
 
@@ -118,7 +118,7 @@ label prologue:
             $ RogueX.change_stat("obedience", 200, 30)
             $ RogueX.change_face("_angry")
 
-            show Rogue_sprite at sprite_location(RogueX.sprite_location) with vpunch
+            show Rogue_Sprite at sprite_location(RogueX.sprite_location) with vpunch
 
             ch_r "Well I never!"
             ch_r "Hmph, I have to give the tour anyways, so get mov'in. . ."
@@ -350,7 +350,7 @@ label tour_parting:
                     ch_r "What the hell, [Player.name]?!"
                     ch_r "Way to take advantage of a girl's feelings there!"
 
-                    hide Rogue_sprite with easeoutright
+                    hide Rogue_Sprite with easeoutright
 
                     "[RogueX.name] tears off and you head back to your room."
                 else:
@@ -358,7 +358,7 @@ label tour_parting:
 
                     ch_r "That was real nice, [RogueX.player_petname]. I'll definitely be seeing you later."
 
-                    hide Rogue_sprite with easeoutright
+                    hide Rogue_Sprite with easeoutright
 
                     "You head back to your room."
 
@@ -384,7 +384,7 @@ label tour_parting:
                     ch_r "Nah, I think you've had enough for today, [RogueX.player_petname]."
                     "You head back to your room."
 
-                    hide Rogue_sprite
+                    hide Rogue_Sprite
 
                     $ RogueX.emotion = "_normal"
 
@@ -401,12 +401,12 @@ label tour_parting:
 label Rogue_first_kiss:
     $ RogueX.change_face("_kiss",2)
 
-    # call Rogue_Kissing_Launch
+    call Rogue_Kissing_Launch
 
     "She leans in for a kiss."
     "You lean in and your lips meet [RogueX.name]'s."
 
-    $ RogueX.Eyes = "_surprised"
+    $ RogueX.eyes = "_surprised"
     $ RogueX.change_stat("love", 90, 15)
     $ RogueX.change_stat("love", 60, 30)
 
@@ -423,6 +423,8 @@ label Rogue_first_kiss:
     $ RogueX.addiction -= 5
     $ RogueX.change_stat("obedience", 30, 20)
     $ RogueX.change_stat("inhibition", 30, 30)
+
+    call expression RogueX.tag + "_Pos_Reset"
 
     return
 

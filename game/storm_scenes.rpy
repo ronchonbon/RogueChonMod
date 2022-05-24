@@ -308,7 +308,7 @@ label StormMeet:
                             "None needed.":
                                 $ StormX.change_stat("love", 70, 5)
                             "How will you make it up to me?":
-                                $ StormX.change_face("_smile",Eyes="leftside")
+                                $ StormX.change_face("_smile",Eyes="_leftside")
                                 ch_s ". . ."
                                 $ StormX.change_face("_smile")
                                 $ StormX.change_stat("obedience", 80, 5)
@@ -318,14 +318,14 @@ label StormMeet:
                     "So about the leak." if "water" in Player.recent_history:
                         $ Player.drain_word("water")
                         "You point to some puddles under some of her plants."
-                        $ StormX.change_face("_surprised",2,Eyes="leftside")
+                        $ StormX.change_face("_surprised",2,Eyes="_leftside")
                         $ StormX.change_stat("obedience", 80, 5)
                         ch_s "Ah, yes. My apologies."
                         $ StormX.change_face("_smile",2,Brows="_sad")
                         ch_s "I was watering my plants, and must have gotten a bit out of hand."
                         $ StormX.change_face("_smile",1)
                         ch_s "One moment. . ."
-                        $ StormX.change_face("_smile",Eyes="white")
+                        $ StormX.change_face("_smile",Eyes="_white")
                         "The wind picks up and swirls around the room, drying the puddles."
                         $ StormX.change_face("_smile")
 
@@ -334,13 +334,13 @@ label StormMeet:
                         $ StormX.change_stat("love", 70, 7)
                         $ StormX.change_stat("inhibition", 200, 5)
                         ch_s "Thank you."
-                        $ StormX.change_face("_smile",Eyes="leftside")
+                        $ StormX.change_face("_smile",Eyes="_leftside")
                         ch_s "I do my best to bring a bit of nature into this place."
                         $ StormX.change_face("_smile")
                         $ StormX.add_word(1,"plants",0,0,0)
 
                     "[EmmaX.name] said that you were a ghost." if "ghost" not in StormX.recent_history:
-                        $ StormX.change_face("_angry",Eyes="leftside")
+                        $ StormX.change_face("_angry",Eyes="_leftside")
                         ch_s "Oh, I expect she -would- say something like that. . ."
                         $ StormX.change_face("_smile")
                         ch_s "Obviously I am as alive as you are."
@@ -362,7 +362,7 @@ label StormMeet:
                 $ StormX.change_face("_smile")
                 $ StormX.change_stat("love", 70, 3)
                 ch_s "I have the ability to influence the weather around me."
-                $ StormX.change_face("_smile", Eyes="white")
+                $ StormX.change_face("_smile", Eyes="_white")
                 call Punch
                 ch_s "I can summon the rain, call lightning, even glide on the winds."
                 $ StormX.change_face("_smile")
@@ -414,7 +414,7 @@ label StormMeet:
     if "powers" not in StormX.recent_history:
         $ StormX.change_face("_smile")
         ch_s "I suppose you should know, I normally have the ability to influence the weather around me."
-        $ StormX.change_face("_smile", Eyes="white")
+        $ StormX.change_face("_smile", Eyes="_white")
         ch_s "I can summon the rain, call lightning, even glide on the winds."
         $ StormX.change_face("_smile")
         ch_s "I very much enjoy the freedom my powers bring me, the connection to nature."
@@ -783,7 +783,7 @@ label Storm_Hairtalk:
             $ StormX.change_stat("obedience", 80, 2)
             $ StormX.change_face("_bemused", 1,Eyes="_side")
             pause 0.4
-            $ StormX.eyes = "leftside"
+            $ StormX.eyes = "_leftside"
             pause 0.4
             $ StormX.eyes = "_squint"
             if approval_check(StormX, 700):
@@ -806,7 +806,7 @@ label Storm_Hairtalk:
             $ StormX.change_stat("obedience", 80, 1)
             $ StormX.change_face("_bemused", 1,Eyes="_side")
             pause 0.4
-            $ StormX.eyes = "leftside"
+            $ StormX.eyes = "_leftside"
             pause 0.4
             $ StormX.eyes = "_squint"
             if approval_check(StormX, 800):
@@ -839,7 +839,7 @@ label Storm_Hairtalk:
             if approval_check(StormX, 900) or ((StormX.action_counter["fondle_breasts"]+ StormX.action_counter["fondle_pussy"] + StormX.action_counter["fondle_ass"]) > 0):
                 $ StormX.change_face("_bemused", 1,Eyes="_side")
                 pause 0.4
-                $ StormX.eyes = "leftside"
+                $ StormX.eyes = "_leftside"
                 pause 0.4
                 $ StormX.eyes = "_squint"
                 $ StormX.change_stat("inhibition", 80, 2)
@@ -2293,7 +2293,7 @@ label Storm_Poolnight:
     hide Storm_Sprite
     hide FullPool
     call set_the_scene(check_if_dressed = False)
-    $ StormX.change_face("_sly", 1,Eyes="leftside")
+    $ StormX.change_face("_sly", 1,Eyes="_leftside")
     ch_s "Now that you have me, [StormX.player_petname]. . ."
     $ StormX.change_face("_sly", 1)
     ch_s "What do you intend to do with me. . ."

@@ -132,7 +132,7 @@ init -1:
     default Xavier_mouth = "_happy"
     default Xavier_psychic = 0
     default Xavier_emotion = "_happy"
-    default Xavier_sprite_location = stage_center
+    default Xavier_Sprite_location = stage_center
 
     default Gwen_name = "????"
 

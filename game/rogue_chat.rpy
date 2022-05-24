@@ -1838,7 +1838,7 @@ label Rogue_Leave(approval_bonus=approval_bonus):
                 ch_r "I'm . . . headed out, see you later."
         else:
             ch_r "I'm headed out, see you later."
-        hide Rogue_sprite
+        hide Rogue_Sprite
         return
 
 
@@ -1948,7 +1948,7 @@ label Rogue_Leave(approval_bonus=approval_bonus):
     $ RogueX.recent_history.append("followed")
     if not line:
 
-        hide Rogue_sprite
+        hide Rogue_Sprite
         call change_out_of_gym_clothes ([RogueX])
         return
 
@@ -1960,7 +1960,7 @@ label Rogue_Leave(approval_bonus=approval_bonus):
             ch_r "Wish I could, [RogueX.player_petname], but I need to get some hours in."
         else:
             ch_r "I'm sorry, [RogueX.player_petname], but I'm kinda busy right now."
-        hide Rogue_sprite
+        hide Rogue_Sprite
         call change_out_of_gym_clothes ([RogueX])
         return
 
@@ -1973,8 +1973,13 @@ label Rogue_Leave(approval_bonus=approval_bonus):
         call drain_all_words ("arriving")
         $ RogueX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
-        hide Rogue_sprite
+        hide Rogue_Sprite
         call change_out_of_gym_clothes ([RogueX])
+
+        $ renpy.pop_call()
+        $ renpy.pop_call()
+        $ renpy.pop_call()
+
         if RogueX.location == "bg_classroom":
             ch_r "See you then!"
             jump classroom_entry
@@ -2542,8 +2547,8 @@ label Rogue_Wardrobe_Menu:
                     return
             else:
                 ch_r "Sure. . ."
-            if "lace_bra" in RogueX.inventory:
-                $ RogueX.bra = "lace_bra"
+            if "_lace_bra" in RogueX.inventory:
+                $ RogueX.bra = "_lace_bra"
             else:
                 $ RogueX.bra = "_bra"
             if "_lace_panties" in RogueX.inventory:
@@ -2584,9 +2589,9 @@ label Rogue_Wardrobe_Menu:
                     $ RogueX.blushing = "_blush2"
                     ch_r "'course, I don't exactly need something under it either. . ."
                     $ RogueX.blushing = "_blush1"
-                elif approval_check(RogueX, 900, TabM=2) and "lace_bra" in RogueX.inventory:
+                elif approval_check(RogueX, 900, TabM=2) and "_lace_bra" in RogueX.inventory:
                     ch_r "I suppose this would work. . ."
-                    $ RogueX.bra  = "lace_bra"
+                    $ RogueX.bra  = "_lace_bra"
                     "She pulls out her lace bra and slips it on under her [RogueX.top]."
                 elif approval_check(RogueX, 800, TabM=2):
                     ch_r "Yeah, I guess."
@@ -2652,7 +2657,7 @@ label Rogue_Wardrobe_Menu:
                     if not RogueX.underwear:
                         ch_r "Maybe if I put some panties on first. . ."
                     return
-            if RogueX.PantsNum() > 6:
+            if RogueX.legs_number() > 6:
                 $ RogueX.legs = ""
                 "She tugs her pants off and drops them to the ground."
             else:
@@ -2673,11 +2678,11 @@ label Rogue_Wardrobe_Menu:
             $ RogueX.legs = "_pants"
             $ RogueX.hose = ""
 
-        "The tights would look good with that." if RogueX.hose != 'tights' and RogueX.legs != "_pants":
+        "The tights would look good with that." if RogueX.hose != '_tights' and RogueX.legs != "_pants":
             $ RogueX.hose = "_tights"
         "Your ripped tights would look good with that." if RogueX.hose != 'ripped_tights' and "_ripped_tights" in RogueX.inventory and RogueX.legs != "_pants":
             $ RogueX.hose = "_ripped_tights"
-        "You could lose the tights." if RogueX.hose == 'ripped_tights' or RogueX.hose == 'tights':
+        "You could lose the tights." if RogueX.hose == 'ripped_tights' or RogueX.hose == '_tights':
             $ RogueX.hose = ""
 
         "What about wearing your shorts?" if RogueX.underwear != "_shorts":
@@ -2858,7 +2863,7 @@ label Rogue_Wardrobe_Menu:
                             return
                     $ RogueX.bra = "_tube_top"
 
-                "I like that lace bra." if "lace_bra" in RogueX.inventory and RogueX.bra != "lace_bra":
+                "I like that lace bra." if "_lace_bra" in RogueX.inventory and RogueX.bra != "_lace_bra":
                     if (RogueX.seen_breasts and approval_check(RogueX, 800)) or approval_check(RogueX, 1100, TabM=2):
                         ch_r "Sure."
                     else:
@@ -2866,7 +2871,7 @@ label Rogue_Wardrobe_Menu:
                         if not _return:
                             ch_r "That's a bit too revealing. . ."
                             return
-                    $ RogueX.bra = "lace_bra"
+                    $ RogueX.bra = "_lace_bra"
 
                 "I like that bikini top." if RogueX.bra != "_bikini_top" and "_bikini_top" in RogueX.inventory:
                     if bg_current == "bg_pool":
@@ -2888,7 +2893,7 @@ label Rogue_Wardrobe_Menu:
 
 
             menu:
-                "You could lose the hose." if RogueX.hose and RogueX.hose != 'ripped_tights' and RogueX.hose != 'tights':
+                "You could lose the hose." if RogueX.hose and RogueX.hose != 'ripped_tights' and RogueX.hose != '_tights':
                     $ RogueX.hose = ""
                 "The thigh-high hose would look good with that." if RogueX.hose != "_stockings" and RogueX.legs != "_pants":
                     $ RogueX.hose = "_stockings"

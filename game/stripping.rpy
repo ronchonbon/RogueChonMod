@@ -128,9 +128,9 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
     while counter:
         $ counter -= 1
         if Present[counter] == RogueX:
-            show Rogue_sprite at Girl_Dance1(RogueX)
+            show Rogue_Sprite at Girl_Dance1(RogueX)
         elif Present[counter] == KittyX:
-            show Kitty_sprite at Girl_Dance1(KittyX)
+            show Kitty_Sprite at Girl_Dance1(KittyX)
         elif Present[counter] == EmmaX:
             show Emma_Sprite at Girl_Dance1(EmmaX)
         elif Present[counter] == LauraX:
@@ -314,7 +314,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
             $ Nudist = Girl.taboo
     if "keepdancing" not in Girl.recent_history:
 
-        if Girl == JubesX and Girl.accessory and (Girl.top or Girl.bra) and (Girl.underwear or Girl.legs or Girl.HoseNum() >= 10):
+        if Girl == JubesX and Girl.accessory and (Girl.top or Girl.bra) and (Girl.underwear or Girl.legs or Girl.hose_number() >= 10):
 
             if approval_check(Girl, 750, TabM = 3):
                 $ Girl.change_stat("obedience", 50, 1)
@@ -325,7 +325,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 "She shrugs off her [line] and throws it behind her."
             else:
                 jump Strip_Ultimatum
-        elif Girl == JubesX and Girl.accessory and Girl.top and (Girl.underwear or Girl.legs or Girl.HoseNum() >= 10):
+        elif Girl == JubesX and Girl.accessory and Girl.top and (Girl.underwear or Girl.legs or Girl.hose_number() >= 10):
 
             if approval_check(Girl, 750, TabM = 3):
                 $ Girl.change_stat("obedience", 50, 1)
@@ -336,7 +336,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 "She shrugs off her [line] and throws it behind her."
             else:
                 jump Strip_Ultimatum
-        elif Girl.top and Girl.bra and (Girl.underwear or Girl.legs or Girl.HoseNum() >= 10):
+        elif Girl.top and Girl.bra and (Girl.underwear or Girl.legs or Girl.hose_number() >= 10):
 
             if approval_check(Girl, 750, TabM = 3,Alt=[[StormX],(300-Nudist*3)]):
                 $ Girl.change_stat("obedience", 50, 1)
@@ -351,7 +351,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
             else:
                 jump Strip_Ultimatum
 
-        elif Girl.legs and (Girl.underwear or Girl.HoseNum() >= 10):
+        elif Girl.legs and (Girl.underwear or Girl.hose_number() >= 10):
 
             if approval_check(Girl, 1200, TabM = 3,Alt=[[StormX],(600-Nudist*3)]) or (Girl.seen_underwear and approval_check(Girl, 900, TabM = 3) and not Girl.taboo):
                 $ Girl.change_stat("lust", 50, 5)
@@ -375,14 +375,14 @@ label Girl_Stripping(Girl=0, Nudist=0):
 
         elif Girl.hose:
 
-            if Girl.HoseNum() >= 10:
+            if Girl.hose_number() >= 10:
                 if approval_check(Girl, 1200, TabM = 3):
                     $ Girl.change_stat("lust", 50, 6)
                     $ Player.change_stat("focus", 60, 6)
                 else:
                     jump Strip_Ultimatum
 
-            elif Girl.HoseNum() >= 6 and approval_check(Girl, 1200, TabM = 3):
+            elif Girl.hose_number() >= 6 and approval_check(Girl, 1200, TabM = 3):
                 if approval_check(Girl, 1200, TabM = 3,Alt=[[StormX],(600-Nudist*3)]):
                     $ Girl.change_stat("lust", 50, 4)
                     $ Player.change_stat("focus", 60, 4)
@@ -398,7 +398,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 "She rolls the [line] down off her legs, leaving them in a small pile."
             call expression Girl.tag + "_First_Bottomless" pass (1)
 
-        elif Girl == JubesX and Girl.accessory and (Girl.underwear or Girl.legs or Girl.HoseNum() >= 10):
+        elif Girl == JubesX and Girl.accessory and (Girl.underwear or Girl.legs or Girl.hose_number() >= 10):
 
             if approval_check(Girl, 1250, TabM = 3) or (Girl.seen_breasts and approval_check(Girl, 1000, TabM = 3) and not Girl.taboo):
                 $ Girl.change_stat("lust", 60, 5)
@@ -418,7 +418,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     call expression Girl.tag + "_First_Topless" pass (1)
             else:
                 jump Strip_Ultimatum
-        elif Girl.top and not Girl.bra and (Girl.underwear or Girl.HoseNum() >= 10):
+        elif Girl.top and not Girl.bra and (Girl.underwear or Girl.hose_number() >= 10):
 
             if approval_check(Girl, 1250, TabM = 3,Alt=[[StormX],(650-Nudist*3)]) or (Girl.seen_breasts and approval_check(Girl, 1000, TabM = 3) and not Girl.taboo):
                 $ Girl.change_stat("lust", 60, 5)
@@ -704,9 +704,9 @@ label Girl_Stripping(Girl=0, Nudist=0):
         call AllReset (Girl)
 
         if Girl == RogueX:
-            show Rogue_sprite at Girl_Dance1(Girl)
+            show Rogue_Sprite at Girl_Dance1(Girl)
         elif Girl == KittyX:
-            show Kitty_sprite at Girl_Dance1(Girl)
+            show Kitty_Sprite at Girl_Dance1(Girl)
         elif Girl == EmmaX:
             show Emma_Sprite at Girl_Dance1(Girl)
         elif Girl == LauraX:
@@ -975,9 +975,9 @@ label Strip_Ultimatum:
         $ Girl.daily_history.append("ultimatum")
 
     if Girl == RogueX:
-        show Rogue_sprite at Girl_Dance1(Girl)
+        show Rogue_Sprite at Girl_Dance1(Girl)
     elif Girl == KittyX:
-        show Kitty_sprite at Girl_Dance1(Girl)
+        show Kitty_Sprite at Girl_Dance1(Girl)
     elif Girl == EmmaX:
         show Emma_Sprite at Girl_Dance1(Girl)
     elif Girl == LauraX:
@@ -1030,7 +1030,7 @@ transform Girl_Dance1(Chr=focused_Girl):
 label AutoStrip(Girl=0):
 
     $ Girl = check_girl(Girl)
-    if (Girl.underwear and not Girl.underwear_pulled_down) or Girl.PantsNum() >= 6 or Girl.HoseNum() >= 6:
+    if (Girl.underwear and not Girl.underwear_pulled_down) or Girl.legs_number() >= 6 or Girl.hose_number() >= 6:
         if Girl == RogueX:
             ch_r "Well, I guess some things are necessary, [RogueX.player_petname]."
         elif Girl == KittyX:
@@ -1046,18 +1046,18 @@ label AutoStrip(Girl=0):
         elif Girl == JubesX:
             ch_v "Let's get these out of the way. . ."
 
-        if (Girl.underwear and not Girl.underwear_pulled_down) and (Girl.PantsNum() > 6 and not Girl.upskirt):
+        if (Girl.underwear and not Girl.underwear_pulled_down) and (Girl.legs_number() > 6 and not Girl.upskirt):
             "She quickly drops her pants and her [Girl.underwear]."
-        elif (Girl.underwear and not Girl.underwear_pulled_down) and (Girl.PantsNum() == 6 and not Girl.upskirt):
+        elif (Girl.underwear and not Girl.underwear_pulled_down) and (Girl.legs_number() == 6 and not Girl.upskirt):
             "She quickly drops her shorts and her [Girl.underwear]."
-        elif Girl.PantsNum() > 6 and not Girl.upskirt:
+        elif Girl.legs_number() > 6 and not Girl.upskirt:
             "She tugs her pants down, exposing her bare pussy."
-        elif Girl.PantsNum() == 6 and not Girl.upskirt:
+        elif Girl.legs_number() == 6 and not Girl.upskirt:
             "She tugs her shorts down, exposing her bare pussy."
-        elif Girl.HoseNum() >= 6 and (Girl.underwear and not Girl.underwear_pulled_down):
+        elif Girl.hose_number() >= 6 and (Girl.underwear and not Girl.underwear_pulled_down):
             "She tugs her [Girl.hose] and [Girl.underwear] off."
 
-        elif Girl.HoseNum() >= 6:
+        elif Girl.hose_number() >= 6:
             "She tugs her [Girl.hose] off and drops them to the ground."
 
         elif (Girl.underwear and not Girl.underwear_pulled_down):
@@ -1065,7 +1065,7 @@ label AutoStrip(Girl=0):
 
     $ Girl.upskirt = 1 if Girl.legs else 0
     $ Girl.underwear_pulled_down = 1 if Girl.underwear else 0
-    $ Girl.hose = "" if Girl.HoseNum() >= 6 else Girl.hose
+    $ Girl.hose = "" if Girl.hose_number() >= 6 else Girl.hose
 
     $ Girl.seen_underwear = 1
     call expression Girl.tag + "_First_Bottomless"
@@ -1084,7 +1084,7 @@ label Girl_Undress(Girl=0, Region="ask", stored_count=0):
     if Region == "auto":
         if Girl.upskirt and Girl.underwear_pulled_down:
             return
-        if Girl.PantsNum() > 5 and approval_bonus < 20:
+        if Girl.legs_number() > 5 and approval_bonus < 20:
             $ approval_bonus = 20
         if Girl.lust >= 90:
             $ approval_bonus += 10
@@ -1392,11 +1392,11 @@ label Top_Off(Girl=0, Intro=1, line=0, counter=0):
                     $ Girl.arms = ""
                     "She pulls off her [line]."
 
-                "Why don't you lose the suspenders?" if Girl.accessory == "suspenders" or Girl.accessory == "suspenders2":
+                "Why don't you lose the suspenders?" if Girl.accessory == "_suspenders" or Girl.accessory == "_suspenders2":
                     $ Girl.accessory = ""
                     "[Girl.name] pulls her suspenders off."
 
-                "Why don't you lose the hoops?" if Girl.accessory == "rings" or Girl.accessory == "rings":
+                "Why don't you lose the hoops?" if Girl.accessory == "_rings" or Girl.accessory == "_rings":
                     $ Girl.accessory = ""
                     "[Girl.name] pulls her hoops off."
 
@@ -1408,7 +1408,7 @@ label Top_Off(Girl=0, Intro=1, line=0, counter=0):
                     $ Girl.change_face("_bemused", 1)
                     Girl.voice "All right, [Girl.player_petname]."
                     $ counter = 0
-        if Girl.ChestNum() < 3 and Girl.OverNum() < 3:
+        if Girl.bra_number() < 3 and Girl.top_number() < 3:
 
             $ Girl.change_stat("obedience", 50, 1)
             $ Girl.change_stat("obedience", 90, 1)
@@ -2115,7 +2115,7 @@ label Bottoms_Off(Girl=0, Intro=1, line=0, counter=0):
         $ approval_bonus += 20
 
     if Intro:
-        if Intro == 2 and Girl.PantsNum() > 5:
+        if Intro == 2 and Girl.legs_number() > 5:
 
             if Girl == RogueX:
                 ch_r "I don't know, I might need my knickers off for that. . ."
@@ -2143,7 +2143,7 @@ label Bottoms_Off(Girl=0, Intro=1, line=0, counter=0):
         $ counter = 0
 
         if not Girl.upskirt and not Girl.underwear_pulled_down:
-            if Girl.PantsNum() == 5:
+            if Girl.legs_number() == 5:
 
                 if approval >= 2 or (Girl.seen_pussy and not taboo):
                     $ Girl.change_stat("inhibition", 60, 1)
@@ -2153,7 +2153,7 @@ label Bottoms_Off(Girl=0, Intro=1, line=0, counter=0):
                     "She slides her skirt up."
                     $ counter = 1
 
-            if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 6:
+            if Girl.legs_number() >= 6 or Girl.hose_number() >= 6:
                 if Girl.underwear:
 
                     if not approval or (not Girl.seen_underwear and taboo):
@@ -2163,26 +2163,26 @@ label Bottoms_Off(Girl=0, Intro=1, line=0, counter=0):
                 elif Girl.upskirt:
                     return
                 $ Girl.change_stat("inhibition", 60, 1)
-                if Girl.HoseNum() >= 6:
+                if Girl.hose_number() >= 6:
                     $ line = Girl.hose
                     $ Girl.hose = ""
                 $ Girl.upskirt = 1
 
                 if Girl == KittyX:
-                    if Girl.PantsNum(0) >= 6:
+                    if Girl.legs_number(0) >= 6:
                         "[Girl.name] grumbles to herself, and then allows her [Girl.legs] to drop down her legs."
                     else:
                         "[Girl.name] grumbles to herself, and then allows her [line] to drop down her legs."
                     if Girl.underwear:
                         $ Girl.seen_underwear = 1
                 elif Girl.underwear:
-                    if Girl.PantsNum(0) >= 6:
+                    if Girl.legs_number(0) >= 6:
                         "[Girl.name] grumbles to herself, and then unzips her [Girl.legs], sliding them down her legs."
                     else:
                         "[Girl.name] grumbles to herself, and then pulls her [line] down her legs."
                     $ Girl.seen_underwear = 1
                 else:
-                    if Girl.PantsNum(0) >= 6:
+                    if Girl.legs_number(0) >= 6:
                         "[Girl.name] grumbles to herself, and then unzips her [Girl.legs], sliding them off her bare ass."
                     else:
                         "[Girl.name] grumbles to herself, and then pulls her [line] down her bare ass."
@@ -2198,7 +2198,7 @@ label Bottoms_Off(Girl=0, Intro=1, line=0, counter=0):
                 if taboo:
                     $ Girl.change_stat("inhibition", 90, (int(taboo/10)))
                 $ Girl.underwear_pulled_down = 1
-                if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 6:
+                if Girl.legs_number() >= 6 or Girl.hose_number() >= 6:
                     $ Girl.upskirt = 1
                 if Girl == KittyX:
                     if counter:
@@ -2317,9 +2317,9 @@ label Bottoms_Off(Girl=0, Intro=1, line=0, counter=0):
                 ch_k "I'm[Girl.like]not sure about this. . ."
             elif Girl.seen_pussy:
                 ch_k "Well, you've seen[Girl.like]it before . . ."
-            elif Girl.PantsNum(0) > 6:
+            elif Girl.legs_number(0) > 6:
                 ch_k "I'm keeping my pants on."
-            elif Girl.PantsNum(0) > 5:
+            elif Girl.legs_number(0) > 5:
                 ch_k "I'm keeping my shorts on."
             else:
                 ch_k "I'm keeping my panties on."
@@ -2342,11 +2342,11 @@ label Bottoms_Off(Girl=0, Intro=1, line=0, counter=0):
                 ch_e "Probably not. . ."
             elif Girl.seen_pussy:
                 ch_e "I think you've seen enough . . ."
-            elif Girl.PantsNum(0) > 6:
+            elif Girl.legs_number(0) > 6:
                 ch_e "I'm keeping my pants on."
-            elif Girl.PantsNum(0) == 5:
+            elif Girl.legs_number(0) == 5:
                 ch_e "I'm keeping my skirt on."
-            elif Girl.PantsNum(0) == 6:
+            elif Girl.legs_number(0) == 6:
                 ch_e "I'm keeping my shorts on."
             else:
                 ch_e "I'm keeping my panties on."
@@ -2369,11 +2369,11 @@ label Bottoms_Off(Girl=0, Intro=1, line=0, counter=0):
                 ch_l "Probably not. . ."
             elif Girl.seen_pussy:
                 ch_l "You've probably seen enough . . ."
-            elif Girl.PantsNum(0) > 6:
+            elif Girl.legs_number(0) > 6:
                 ch_l "Well, I'm keeping my pants on."
-            elif Girl.PantsNum(0) == 5:
+            elif Girl.legs_number(0) == 5:
                 ch_l "Well, I'm keeping my skirt on."
-            elif Girl.PantsNum(0) == 6:
+            elif Girl.legs_number(0) == 6:
                 ch_l "Well, I'm keeping my shorts on."
             else:
                 ch_l "Well, I'm keeping my panties on."
@@ -2394,11 +2394,11 @@ label Bottoms_Off(Girl=0, Intro=1, line=0, counter=0):
                 ch_j "Hmm. . ."
             elif Girl.seen_pussy:
                 ch_j "Hmm. . ."
-            elif Girl.PantsNum(0) > 6:
+            elif Girl.legs_number(0) > 6:
                 ch_j "I'm keeping my pants on though."
-            elif Girl.PantsNum(0) == 5:
+            elif Girl.legs_number(0) == 5:
                 ch_j "I'm keeping my skirt on though."
-            elif Girl.PantsNum(0) == 6:
+            elif Girl.legs_number(0) == 6:
                 ch_j "I'm keeping my shorts on though."
             else:
                 ch_j "I'm keeping my panties on though."
@@ -2410,11 +2410,11 @@ label Bottoms_Off(Girl=0, Intro=1, line=0, counter=0):
                 ch_s "I cannot in public, [Girl.player_petname]. . ."
             elif approval:
                 ch_s "I am unsure. . ."
-            elif Girl.PantsNum(0) > 6:
+            elif Girl.legs_number(0) > 6:
                 ch_s "I will be keeping my pants on."
-            elif Girl.PantsNum(0) == 5:
+            elif Girl.legs_number(0) == 5:
                 ch_s "I will be keeping my skirt on."
-            elif Girl.PantsNum(0) == 6:
+            elif Girl.legs_number(0) == 6:
                 ch_s "I will be keeping my shorts on."
             else:
                 ch_s "I will be keeping my panties on."
@@ -2437,11 +2437,11 @@ label Bottoms_Off(Girl=0, Intro=1, line=0, counter=0):
                 ch_v "Doubtful. . ."
             elif Girl.seen_pussy:
                 ch_v "Need another look?"
-            elif Girl.PantsNum(0) > 6:
+            elif Girl.legs_number(0) > 6:
                 ch_v "Well, I'm keeping my pants on."
 
 
-            elif Girl.PantsNum(0) == 6:
+            elif Girl.legs_number(0) == 6:
                 ch_v "Well, I'm keeping my shorts on."
             else:
                 ch_v "Well, I'm keeping my panties on."
@@ -2524,7 +2524,7 @@ label Bottoms_Off(Girl=0, Intro=1, line=0, counter=0):
                         $ Girl.change_face("_sexy")
                         call Bottoms_Off_Refused (Girl)
 
-            "It doesn't have to be everything. . ." if Girl.legs or Girl.HoseNum() >= 10 or Girl.underwear == "_shorts":
+            "It doesn't have to be everything. . ." if Girl.legs or Girl.hose_number() >= 10 or Girl.underwear == "_shorts":
                 if approval and "no_bottomless" not in Girl.daily_history:
                     $ Girl.change_face("_bemused", 1)
                     $ line = "Well what did you have in mind then?"
@@ -2533,7 +2533,7 @@ label Bottoms_Off(Girl=0, Intro=1, line=0, counter=0):
 
                     $ Girl.change_face("_sexy")
                     call Bottoms_Off_Refused (Girl)
-            "It doesn't have to be everything. . . (locked)" if not Girl.legs and Girl.HoseNum() < 10 and Girl.underwear != "_shorts":
+            "It doesn't have to be everything. . . (locked)" if not Girl.legs and Girl.hose_number() < 10 and Girl.underwear != "_shorts":
                 pass
             "No, lose 'em.":
 
@@ -2625,7 +2625,7 @@ label Bottoms_Off_Legs(Girl=0):
 
             "Take it all off" if line != "Well what did you have in mind then?":
 
-                if not Girl.underwear and Girl.HoseNum() < 10:
+                if not Girl.underwear and Girl.hose_number() < 10:
                     call NoPantiesOn (Girl)
 
                 if Girl.legs:
@@ -2642,7 +2642,7 @@ label Bottoms_Off_Legs(Girl=0):
                     else:
                         "[Girl.name] pulls her [line] off."
 
-                if approval < 2 and not Girl.underwear and Girl.HoseNum() >= 10:
+                if approval < 2 and not Girl.underwear and Girl.hose_number() >= 10:
                     call NoPantiesOn (Girl)
 
                 if Girl == JubesX and JubesX.accessory != "shut_jacket":
@@ -2696,7 +2696,7 @@ label Bottoms_Off_Legs(Girl=0):
                         ch_v "Well, I could do that. . ."
                 elif approval:
                     $ Girl.change_face("_sexy", 1)
-                    if approval < 2 and not Girl.underwear and Girl.HoseNum() < 10:
+                    if approval < 2 and not Girl.underwear and Girl.hose_number() < 10:
                         call NoPantiesOn (Girl)
                 else:
                     $ Girl.change_face("_sexy")
@@ -2705,7 +2705,7 @@ label Bottoms_Off_Legs(Girl=0):
 
                 $ line = Girl.legs
                 $ Girl.legs = ""
-                if not Girl.underwear and Girl.HoseNum() < 10:
+                if not Girl.underwear and Girl.hose_number() < 10:
                     $ Girl.change_face("_sly", 2)
                     if Girl == KittyX:
                         "She blushes and looks at you as her [line] drops at her feet."
@@ -2745,7 +2745,7 @@ label Bottoms_Off_Legs(Girl=0):
                     $ Girl.recent_history.append("no_bottomless")
                     $ Girl.daily_history.append("no_bottomless")
                     return
-                elif Girl.PantsNum() >= 6 or Girl.HoseNum() >= 6:
+                elif Girl.legs_number() >= 6 or Girl.hose_number() >= 6:
                     if Girl == RogueX:
                         ch_r "A little backwards, but sure. . ."
                     elif Girl == KittyX:
@@ -2772,17 +2772,17 @@ label Bottoms_Off_Legs(Girl=0):
                 $ line = Girl.underwear
                 $ Girl.underwear = ""
                 if Girl == KittyX:
-                    if Girl.PantsNum() >= 5:
+                    if Girl.legs_number() >= 5:
                         "She reaches a hand into her [Girl.legs] and pulls her [line] out through the pocket."
                         "She gives a little wink as she drops them to the ground."
-                    elif Girl.HoseNum() >= 5:
+                    elif Girl.hose_number() >= 5:
                         "She reaches a hand into her [Girl.hose] and pulls her [line] out through the pocket."
                         "She gives a little wink as she drops them to the ground."
                     else:
                         "With a little shimmy, her [line] drop to the ground."
-                elif Girl.PantsNum() >= 6:
+                elif Girl.legs_number() >= 6:
                     "She pulls her [Girl.legs] off, then removes her [line], before putting them back on."
-                elif Girl.HoseNum() >= 6:
+                elif Girl.hose_number() >= 6:
                     "She pulls her [Girl.hose] off, then removes her [line], before putting them back on."
                 elif Girl == JubesX and JubesX.accessory == "shut_jacket":
                     "She reaches under her jacket and pulls her [line] down."
@@ -2831,9 +2831,9 @@ label Bottoms_Off_Legs(Girl=0):
                 $ Girl.change_face("_bemused", 1)
                 if Girl.legs:
                     Girl.voice "All right, fine."
-                elif approval < 2 and not Girl.underwear and Girl.HoseNum() >= 10:
+                elif approval < 2 and not Girl.underwear and Girl.hose_number() >= 10:
                     call NoPantiesOn (Girl)
-                elif not approval and Girl.HoseNum() >= 6:
+                elif not approval and Girl.hose_number() >= 6:
                     if Girl == RogueX:
                         ch_r "No thanks, [Girl.player_petname]."
                     else:
@@ -2847,16 +2847,16 @@ label Bottoms_Off_Legs(Girl=0):
                 $ line = Girl.hose
                 $ Girl.hose = ""
                 if Girl == KittyX:
-                    if Girl.PantsNum() >= 5:
+                    if Girl.legs_number() >= 5:
                         "She reaches a hand into her [Girl.legs] and pulls her [line] right through her legs."
                         "She makes a little flourish and drops them to the ground."
                     else:
                         "She gives a little shake and her [line] drop to the ground."
-                elif Girl.PantsNum() >= 6:
+                elif Girl.legs_number() >= 6:
                     "She pulls off her [Girl.legs] and pulls her [line] off, then puts them back on."
                 elif Girl.legs:
                     "She reaches under her [Girl.legs] and pulls her [line] down."
-                elif Girl.HoseNum() < 10:
+                elif Girl.hose_number() < 10:
                     "[Girl.name] pulls her [line] off."
                 elif not Girl.underwear:
                     $ Girl.change_face("_sly", 2)
@@ -2873,9 +2873,9 @@ label Bottoms_Off_Legs(Girl=0):
                 $ Girl.change_face("_bemused", 1)
                 if Girl.legs:
                     Girl.voice "All right, fine."
-                elif approval < 2 and not Girl.underwear and Girl.HoseNum() >= 10:
+                elif approval < 2 and not Girl.underwear and Girl.hose_number() >= 10:
                     call NoPantiesOn (Girl)
-                elif not approval and Girl.HoseNum() >= 6:
+                elif not approval and Girl.hose_number() >= 6:
                     if Girl == RogueX:
                         ch_r "I'd rather you didn't, [Girl.player_petname]."
                     else:
@@ -2933,37 +2933,37 @@ label NoPantiesOn(Girl=0):
         return
 
     if Girl == RogueX:
-        if Girl.legs or Girl.HoseNum() >= 10:
+        if Girl.legs or Girl.hose_number() >= 10:
             ch_r "Well, I'm not exactly decent under here, you know. . ."
         else:
             ch_r "This is the last bit. . ."
     elif Girl == KittyX:
-        if Girl.legs or Girl.HoseNum() >= 10:
+        if Girl.legs or Girl.hose_number() >= 10:
             ch_k "[Girl.Like]I'm not wearing any panties. . ."
         else:
             ch_k "Not much else on. . ."
     elif Girl == EmmaX:
-        if Girl.legs or Girl.HoseNum() >= 10:
+        if Girl.legs or Girl.hose_number() >= 10:
             ch_e "I don't have anything on under this. . ."
         else:
             ch_e "This is all I have on. . ."
     elif Girl == LauraX:
-        if Girl.legs or Girl.HoseNum() >= 10:
+        if Girl.legs or Girl.hose_number() >= 10:
             ch_l "I don't have anything on under this. . ."
         else:
             ch_l "These are all I have on. . ."
     elif Girl == JeanX:
-        if Girl.legs or Girl.HoseNum() >= 10:
+        if Girl.legs or Girl.hose_number() >= 10:
             ch_j "I don't have panties on right now. . ."
         else:
             ch_j ". . ."
     elif Girl == StormX:
-        if Girl.legs or Girl.HoseNum() >= 10:
+        if Girl.legs or Girl.hose_number() >= 10:
             ch_s "I am naked under this. . ."
         else:
             ch_s "This is all I have on. . ."
     elif Girl == JubesX:
-        if Girl.PantsNum() >= 5 or Girl.HoseNum() >= 10:
+        if Girl.legs_number() >= 5 or Girl.hose_number() >= 10:
             ch_v "I don't have anything on under this. . ."
         else:
             ch_v "This is all I've got on. . ."

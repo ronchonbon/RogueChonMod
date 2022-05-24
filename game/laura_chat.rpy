@@ -971,7 +971,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
 
             if "book" not in LauraX.had_chat:
                 $ Options.append("booked")
-        if "lace_bra" in LauraX.inventory or "_lace_panties" in LauraX.inventory:
+        if "_lace_bra" in LauraX.inventory or "_lace_panties" in LauraX.inventory:
 
             if "lingerie" not in LauraX.had_chat:
                 $ Options.append("lingerie")
@@ -2553,7 +2553,7 @@ label Laura_Wardrobe_Menu:
 
         "Try on that leather jacket." if LauraX.top != "_jacket":
             $ LauraX.change_face("_bemused")
-            if not LauraX.top or LauraX.bra == "leather_bra":
+            if not LauraX.top or LauraX.bra == "_leather_bra":
 
                 ch_l "Sure."
             elif approval_check(LauraX, 800, TabM=0):
@@ -2599,9 +2599,9 @@ label Laura_Wardrobe_Menu:
                     $ LauraX.blushing = "_blush1"
                     ch_l "-I didn't say that I minded. . ."
                     $ LauraX.blushing = ""
-                elif approval_check(LauraX, 900, TabM=2) and "lace corset" in LauraX.inventory:
+                elif approval_check(LauraX, 900, TabM=2) and "_lace corset" in LauraX.inventory:
                     ch_l "I guess I could find something."
-                    $ LauraX.bra  = "lace corset"
+                    $ LauraX.bra  = "_lace corset"
                     "She pulls out her lace corset and slips it under her [LauraX.top]."
                 elif approval_check(LauraX, 700, TabM=2) and "_corset" in LauraX.inventory:
                     ch_l "I guess I could find something."
@@ -2609,7 +2609,7 @@ label Laura_Wardrobe_Menu:
                     "She pulls out her corset and slips it under her [LauraX.top]."
                 elif approval_check(LauraX, 600, TabM=2):
                     ch_l "Yeah, I guess."
-                    $ LauraX.bra = "leather_bra"
+                    $ LauraX.bra = "_leather_bra"
                     "She pulls out her leather bra and slips it on under her [LauraX.top]."
                 else:
                     ch_l "Yeah, I don't think so."
@@ -2667,7 +2667,7 @@ label Laura_Wardrobe_Menu:
                         ch_l "I'm going commando today. . ."
                     return
 
-            if LauraX.legs == "leather_pants" or LauraX.legs == "mesh_pants":
+            if LauraX.legs == "_leather_pants" or LauraX.legs == "mesh_pants":
                 $ LauraX.legs = ""
                 "She tugs her pants off and drops them to the ground."
             else:
@@ -2680,10 +2680,10 @@ label Laura_Wardrobe_Menu:
             else:
                 call Laura_First_Bottomless
 
-        "Add leather_pants" if LauraX.legs != "leather_pants":
+        "Add leather_pants" if LauraX.legs != "_leather_pants":
             ch_p "You look great in those leather_pants"
             ch_l "Yeah, ok."
-            $ LauraX.legs = "leather_pants"
+            $ LauraX.legs = "_leather_pants"
 
         "Add mesh pants." if LauraX.legs != "mesh_pants" and "mesh_pants" in LauraX.inventory:
             ch_p "You look great in those mesh pants."
@@ -2702,10 +2702,10 @@ label Laura_Wardrobe_Menu:
             ch_l "Sure, why not."
             $ LauraX.legs = "_skirt"
 
-        "Add leather_skirt" if LauraX.legs != "other_skirt" and "halloween" in LauraX.history:
+        "Add leather_skirt" if LauraX.legs != "_other_skirt" and "halloween" in LauraX.history:
             ch_p "What about wearing your leather skirt?"
             ch_l "Sure, why not."
-            $ LauraX.legs = "other_skirt"
+            $ LauraX.legs = "_other_skirt"
         "Never mind":
 
             pass
@@ -2812,15 +2812,15 @@ label Laura_Wardrobe_Menu:
                             call Laura_First_Topless
 
 
-                "Add leather_bra" if LauraX.bra != "leather_bra":
+                "Add leather_bra" if LauraX.bra != "_leather_bra":
                     ch_p "Try on that leather bra."
                     ch_l "Ok."
-                    $ LauraX.bra = "leather_bra"
+                    $ LauraX.bra = "_leather_bra"
 
-                "Add white tanktop" if LauraX.bra != "white_tank" and "halloween" in LauraX.history:
+                "Add white tanktop" if LauraX.bra != "_white_tank" and "halloween" in LauraX.history:
                     ch_p "Try on that white tanktop."
                     ch_l "Ok."
-                    $ LauraX.bra = "white_tank"
+                    $ LauraX.bra = "_white_tank"
 
                 "Add red corset." if LauraX.bra != "_corset" and "_corset" in LauraX.inventory:
                     ch_p "I like that red corset."
@@ -2834,17 +2834,17 @@ label Laura_Wardrobe_Menu:
                         else:
                             $ LauraX.bra = "_corset"
 
-                "Add lace corset" if LauraX.bra != "lace corset" and "lace corset" in LauraX.inventory:
+                "Add lace corset" if LauraX.bra != "_lace corset" and "_lace corset" in LauraX.inventory:
                     ch_p "I like that lace corset."
                     if LauraX.seen_breasts or approval_check(LauraX, 1300, TabM=2):
                         ch_l "K."
-                        $ LauraX.bra = "lace corset"
+                        $ LauraX.bra = "_lace corset"
                     else:
                         call Display_dress_screen (LauraX)
                         if not _return:
                             ch_l "It's a bit transparent. . ."
                         else:
-                            $ LauraX.bra = "lace corset"
+                            $ LauraX.bra = "_lace corset"
 
                 "Add wolverine tanktop" if LauraX.bra != "wolvie_top" and "wolvie_top" in LauraX.inventory:
                     ch_p "I like that wolverine tanktop."
@@ -2879,12 +2879,12 @@ label Laura_Wardrobe_Menu:
         "Hose and stockings options":
 
             menu:
-                "You could lose the hose." if LauraX.hose and LauraX.hose != 'ripped_tights' and LauraX.hose != 'tights':
+                "You could lose the hose." if LauraX.hose and LauraX.hose != 'ripped_tights' and LauraX.hose != '_tights':
                     $ LauraX.hose = ""
                 "The thigh-high hose would look good with that." if LauraX.hose != "_stockings":
                     $ LauraX.hose = "_stockings"
-                "The black stockings would look good with that." if LauraX.hose != "black stockings" and "halloween" in LauraX.history:
-                    $ LauraX.hose = "black stockings"
+                "The black stockings would look good with that." if LauraX.hose != "_black_stockings" and "halloween" in LauraX.history:
+                    $ LauraX.hose = "_black_stockings"
                 "The stockings and garterbelt would look good with that." if LauraX.hose != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in LauraX.inventory:
                     $ LauraX.hose = "_stockings_and_garterbelt"
                 "Just the garterbelt would look good with that." if LauraX.hose != "garterbelt" and "_stockings_and_garterbelt" in LauraX.inventory:
@@ -2949,7 +2949,7 @@ label Laura_Wardrobe_Menu:
                         $ LauraX.blushing = ""
                     $ line = 0
 
-                "Why don't you wear the black panties instead?" if LauraX.underwear and LauraX.underwear != "_black_panties" and LauraX.underwear != "leather_panties":
+                "Why don't you wear the black panties instead?" if LauraX.underwear and LauraX.underwear != "_black_panties" and LauraX.underwear != "_leather_panties":
                     if approval_check(LauraX, 1100, TabM=3):
                         ch_l "Ok."
                         $ LauraX.underwear = "_black_panties"
@@ -3147,30 +3147,30 @@ label Laura_Wardrobe_Menu:
                 return
             $ LauraX.piercings = ""
 
-        "Medallion_choker" if LauraX.neck != "leash_choker":
+        "Medallion_choker" if LauraX.neck != "_leash_choker":
             ch_p "Why don't you try on that medallion choker?"
             ch_l "Ok. . ."
-            $ LauraX.neck = "leash_choker"
+            $ LauraX.neck = "_leash_choker"
         "Remove Necklace" if LauraX.neck:
             ch_p "Maybe go without a necklace."
             ch_l "Ok. . ."
             $ LauraX.neck = ""
 
-        "Add Suspenders" if LauraX.accessory != "suspenders" and LauraX.accessory != "suspenders2" and "halloween" in LauraX.history:
-            $ LauraX.accessory = "suspenders"
-        "Remove Suspenders" if LauraX.accessory == "suspenders" or LauraX.accessory == "suspenders2":
+        "Add Suspenders" if LauraX.accessory != "_suspenders" and LauraX.accessory != "_suspenders2" and "halloween" in LauraX.history:
+            $ LauraX.accessory = "_suspenders"
+        "Remove Suspenders" if LauraX.accessory == "_suspenders" or LauraX.accessory == "_suspenders2":
             $ LauraX.accessory = ""
 
-        "Shift Suspenders" if LauraX.accessory == "suspenders" or LauraX.accessory == "suspenders2":
-            $ LauraX.accessory = "suspenders" if LauraX.accessory == "suspenders2" else "suspenders2"
+        "Shift Suspenders" if LauraX.accessory == "_suspenders" or LauraX.accessory == "_suspenders2":
+            $ LauraX.accessory = "_suspenders" if LauraX.accessory == "_suspenders2" else "_suspenders2"
         "Toggle Wristbands":
 
-            if LauraX.arms != "wrists":
+            if LauraX.arms != "_wrists":
                 ch_p "Why don't you put those wristbands on."
             else:
                 ch_p "Maybe go without the wristbands."
             ch_l "Ok. . ."
-            $ LauraX.arms = "wrists" if LauraX.arms != "wrists" else 0
+            $ LauraX.arms = "_wrists" if LauraX.arms != "_wrists" else 0
         "Toggle Gloves" if "halloween" in LauraX.history:
             if LauraX.arms != "_gloves":
                 ch_p "Why don't you put those long gloves on."

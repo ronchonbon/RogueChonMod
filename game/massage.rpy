@@ -299,7 +299,7 @@ label Massage_Cycle:
     $ Girl.add_word(1,"massage","massage",0,0)
 
     if Girl.pose == "doggy" or Girl.pose == "sex":
-        call expression Girl.tag + "_sex_launch" pass ("massage")
+        call expression Girl.tag + "_Sex_Launch" pass ("massage")
 
     $ primary_action = "massage"
 
@@ -608,7 +608,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if not Girl.legs and Girl.HoseNum() < 10:
+            if not Girl.legs and Girl.hose_number() < 10:
                 $ Girl.addiction -= 1
         elif Current == "ass":
             if Past in ("back","hips"):
@@ -636,7 +636,7 @@ label Massage_Cycle:
                 $ Girl.change_stat("lust", 90, 2)
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if not Girl.legs and not Girl.underwear and Girl.HoseNum() < 10:
+            if not Girl.legs and not Girl.underwear and Girl.hose_number() < 10:
                 $ Girl.addiction -= 3
         elif Current == "pussy":
             if Past in ("hips","ass"):
@@ -664,7 +664,7 @@ label Massage_Cycle:
                 $ Girl.change_stat("lust", 200, 3)
                 $ line = "You continue to rub " +Girl.name+ "'s " +Current
 
-            if not Girl.legs and not Girl.underwear and Girl.HoseNum() < 10:
+            if not Girl.legs and not Girl.underwear and Girl.hose_number() < 10:
                 $ Girl.addiction -= 5
         elif Current == "thighs":
             if Past == "calves":
@@ -690,7 +690,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if Girl.PantsNum() <= 6 and Girl.HoseNum() < 10:
+            if Girl.legs_number() <= 6 and Girl.hose_number() < 10:
                 $ Girl.addiction -= 3
         elif Current == "calves":
             if Past == "feet":
@@ -716,7 +716,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if Girl.PantsNum() <= 6 and Girl.HoseNum() < 10:
+            if Girl.legs_number() <= 6 and Girl.hose_number() < 10:
                 $ Girl.addiction -= 2
         elif Current == "feet":
             if Past == "calves":
@@ -739,7 +739,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to rub " +Girl.name+ "'s " +Current
 
-            if Girl.accessory != "boots" and Girl.HoseNum() < 10:
+            if Girl.accessory != "boots" and Girl.hose_number() < 10:
                 $ Girl.addiction -= 3
 
 

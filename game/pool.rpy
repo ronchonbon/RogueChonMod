@@ -470,7 +470,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
             $ Girl.add_word(1,"no_tan","no_tan")
             return
-        if not Girl.bra and not Girl.top and not Girl.underwear and not Girl.legs and Girl.HoseNum() < 10:
+        if not Girl.bra and not Girl.top and not Girl.underwear and not Girl.legs and Girl.hose_number() < 10:
             $ Girl.change_outfit("nude")
         $ Mod = 0
         $ line = 0
@@ -681,10 +681,10 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                         menu:
                             extend ""
                             "Then what about your undies?":
-                                if Girl.ChestNum() > 2 and Girl.PantiesNum() > 2 and approval_check(Girl, 1000):
+                                if Girl.bra_number() > 2 and Girl.underwear_number() > 2 and approval_check(Girl, 1000):
 
                                     pass
-                                elif Girl.ChestNum() > 1 and Girl.PantiesNum() > 1 and approval_check(Girl, 1200):
+                                elif Girl.bra_number() > 1 and Girl.underwear_number() > 1 and approval_check(Girl, 1200):
 
                                     pass
                                 else:
@@ -791,7 +791,7 @@ label Pool_Topless(Girl=focused_Girl, temp_Girls=[]):
             $ temp_Girls.remove(temp_Girls[0])
 
     $ focused_Girl = Girl
-    if (Girl.ChestNum() <= 1 and Girl.OverNum() <= 1) or Girl.location != bg_current:
+    if (Girl.bra_number() <= 1 and Girl.top_number() <= 1) or Girl.location != bg_current:
 
         $ D20 = renpy.random.randint(1, 14)
         return
@@ -877,7 +877,7 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
             if temp_Girls[0].bra == temp_Girls[0].swimwear[5] and temp_Girls[0].underwear == temp_Girls[0].swimwear[6]:
 
                 $ Swimmers.append(temp_Girls[0])
-            elif not temp_Girls[0].ChestNum() and not temp_Girls[0].OverNum() and not temp_Girls[0].PantiesNum() and not temp_Girls[0].PantsNum() and not temp_Girls[0].HoseNum():
+            elif not temp_Girls[0].bra_number() and not temp_Girls[0].top_number() and not temp_Girls[0].underwear_number() and not temp_Girls[0].legs_number() and not temp_Girls[0].hose_number():
 
                 $ Swimmers.append(temp_Girls[0])
             else:
@@ -975,9 +975,9 @@ label ShowPool(temp_Girls=[], PoolLoc=0):
             $ temp_Girls[0].spunk = []
             $ PoolLoc = 500 if len(temp_Girls) > 1 else 650
             if temp_Girls[0] == RogueX:
-                show Rogue_sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Rogue_Sprite zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == KittyX:
-                show Kitty_sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Kitty_Sprite zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == EmmaX:
                 show Emma_Sprite zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == LauraX:

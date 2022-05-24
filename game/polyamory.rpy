@@ -686,7 +686,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
                 ch_v "I don't know. . ."
         else:
             $ Girl.change_face("_sexy", 1)
-            $ Girl.ArmPose = 2
+            $ Girl.arm_pose = 2
             $ line = renpy.random.choice(["You do like to watch.",
                                     "So you'd like us to go again?",
                                     "You want to watch some more?",
@@ -945,7 +945,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
 
 
 
-    $ Girl.ArmPose = 1
+    $ Girl.arm_pose = 1
     if not Partner:
         if Girl == RogueX:
             ch_r "It would take two to tango, so. . ."
@@ -1108,7 +1108,7 @@ label Les_Prep(Girl=focused_Girl, temp_Girls=[]):
     if "unseen" not in Girl.recent_history:
 
         $ Girl.change_face("_sexy")
-        $ Girl.ArmPose = 2
+        $ Girl.arm_pose = 2
         "[Girl.name] move's closer to [Partner.name] and wraps her arms around her neck."
         if not Girl.event_counter["seen_with_girl"]:
 

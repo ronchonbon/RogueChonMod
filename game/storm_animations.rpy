@@ -3,14 +3,14 @@
 image Storm_Sprite:
     LiveComposite(
         (450,950),
-        (53,-45), "Storm_Sprite_hairback",
+        (53,-45), "Storm_Sprite_HairBack",
         (0,0), ConditionSwitch(
 
-            "StormX.legs == 'skirt'", "images/StormSprite/Storm_Sprite_Legs_SkirtB.png",
+            "StormX.legs == '_skirt'", "images/StormSprite/Storm_Sprite_Legs_SkirtB.png",
             "StormX.upskirt", ConditionSwitch(
 
-                        "StormX.legs == 'pants'", "images/StormSprite/Storm_Sprite_Legs_Pants_UpB.png",
-                        "StormX.legs == 'yoga_pants'", "images/StormSprite/Storm_Sprite_Legs_YogaPants_UpB.png",
+                        "StormX.legs == '_pants'", "images/StormSprite/Storm_Sprite_Legs_Pants_UpB.png",
+                        "StormX.legs == '_yoga_pants'", "images/StormSprite/Storm_Sprite_Legs_YogaPants_UpB.png",
                         "True", Null(),
                         ),
             "True", Null(),
@@ -27,10 +27,10 @@ image Storm_Sprite:
             "not StormX.underwear", Null(),
             "StormX.underwear_pulled_down", ConditionSwitch(
 
-                    "not StormX.legs or StormX.upskirt or StormX.legs == 'skirt'", ConditionSwitch(
+                    "not StormX.legs or StormX.upskirt or StormX.legs == '_skirt'", ConditionSwitch(
 
-                            "StormX.underwear == 'cos_panties'", "images/StormSprite/Storm_Sprite_Panties_Cos_DB.png",
-                            "StormX.underwear == 'white_panties'", "images/StormSprite/Storm_Sprite_Panties_White_DB.png",
+                            "StormX.underwear == '_cosplay_panties'", "images/StormSprite/Storm_Sprite_Panties_Cos_DB.png",
+                            "StormX.underwear == '_white_panties'", "images/StormSprite/Storm_Sprite_Panties_White_DB.png",
 
 
                             "True", "images/StormSprite/Storm_Sprite_Panties_Black_DB.png",
@@ -55,16 +55,16 @@ image Storm_Sprite:
         (165,560), ConditionSwitch(
 
             "not StormX.grool", Null(),
-            "StormX.legs and StormX.legs != 'skirt' and not StormX.upskirt", Null(),
+            "StormX.legs and StormX.legs != '_skirt' and not StormX.upskirt", Null(),
             "StormX.underwear and not StormX.underwear_pulled_down and StormX.grool <= 1", Null(),
             "StormX.grool == 1", ConditionSwitch(
                     "StormX.underwear and StormX.underwear_pulled_down", AlphaMask("Wet_Drip","Storm_Drip_MaskP"),
-                    "StormX.legs and StormX.legs != 'skirt'", AlphaMask("Wet_Drip","Storm_Drip_MaskP"),
+                    "StormX.legs and StormX.legs != '_skirt'", AlphaMask("Wet_Drip","Storm_Drip_MaskP"),
                     "True", AlphaMask("Wet_Drip","Storm_Drip_Mask"),
                     ),
             "True", ConditionSwitch(
                     "StormX.underwear and StormX.underwear_pulled_down", AlphaMask("Wet_Drip2","Storm_Drip_MaskP"),
-                    "StormX.legs and StormX.legs != 'skirt'", AlphaMask("Wet_Drip2","Storm_Drip_MaskP"),
+                    "StormX.legs and StormX.legs != '_skirt'", AlphaMask("Wet_Drip2","Storm_Drip_MaskP"),
                     "StormX.underwear", AlphaMask("Wet_Drip","Storm_Drip_Mask"),
                     "True", AlphaMask("Wet_Drip2","Storm_Drip_Mask"),
                     ),
@@ -72,7 +72,7 @@ image Storm_Sprite:
         (165,560), ConditionSwitch(
 
             "'in' not in StormX.spunk and 'anal' not in StormX.spunk", Null(),
-            "StormX.legs and StormX.legs != 'skirt' and not StormX.upskirt", Null(),
+            "StormX.legs and StormX.legs != '_skirt' and not StormX.upskirt", Null(),
             "StormX.underwear and not StormX.underwear_pulled_down and StormX.grool <= 1", Null(),
             "True", ConditionSwitch(
                     "StormX.underwear and StormX.underwear_pulled_down", AlphaMask("Spunk_Drip2","Storm_Drip_MaskP"),
@@ -91,21 +91,21 @@ image Storm_Sprite:
 
             "not StormX.piercings", Null(),
             "StormX.underwear and not StormX.underwear_pulled_down", Null(),
-            "StormX.legs != 'skirt' and StormX.legs and not StormX.upskirt", Null(),
-            "StormX.piercings == 'barbell'", "images/StormSprite/Storm_Sprite_Barbell_Pussy.png",
-            "StormX.piercings == 'ring'", "images/StormSprite/Storm_Sprite_Ring_Pussy.png",
+            "StormX.legs != '_skirt' and StormX.legs and not StormX.upskirt", Null(),
+            "StormX.piercings == '_barbell'", "images/StormSprite/Storm_Sprite_Barbell_Pussy.png",
+            "StormX.piercings == '_ring'", "images/StormSprite/Storm_Sprite_Ring_Pussy.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "not StormX.accessory == 'rings' or StormX.top == '_jacket'", Null(),
+            "not StormX.accessory == '_rings' or StormX.top == '_jacket'", Null(),
             "StormX.arm_pose == 1", "images/StormSprite/Storm_Sprite_ArmRings1.png",
             "True", "images/StormSprite/Storm_Sprite_ArmRings2.png",
             ),
         (0,0), ConditionSwitch(
 
             "StormX.top_pulled_up", "images/StormSprite/Storm_Sprite_Tits.png",
-            "StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra'", "images/StormSprite/Storm_Sprite_Tits_Up.png",
+            "StormX.bra == '_black_bra' or StormX.bra == '_lace_bra' or StormX.bra == '_sports_bra'", "images/StormSprite/Storm_Sprite_Tits_Up.png",
             "True", "images/StormSprite/Storm_Sprite_Tits.png",
             ),
         (0,0), ConditionSwitch(
@@ -114,13 +114,13 @@ image Storm_Sprite:
 
             "StormX.top_pulled_up", Null(),
 
-            "StormX.piercings == 'barbell'", ConditionSwitch(
+            "StormX.piercings == '_barbell'", ConditionSwitch(
 
-                    "StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra'", "images/StormSprite/Storm_Sprite_Barbell_TitsU.png",
+                    "StormX.bra == '_black_bra' or StormX.bra == '_lace_bra' or StormX.bra == '_sports_bra'", "images/StormSprite/Storm_Sprite_Barbell_TitsU.png",
                     "True", "images/StormSprite/Storm_Sprite_Barbell_TitsL.png",
                     ),
 
-            "StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra'", "images/StormSprite/Storm_Sprite_Ring_TitsUCU.png",
+            "StormX.bra == '_black_bra' or StormX.bra == '_lace_bra' or StormX.bra == '_sports_bra'", "images/StormSprite/Storm_Sprite_Ring_TitsUCU.png",
             "StormX.top or StormX.bra", "images/StormSprite/Storm_Sprite_Ring_TitsLCU.png",
             "True", "images/StormSprite/Storm_Sprite_Ring_TitsL.png",
             ),
@@ -129,27 +129,27 @@ image Storm_Sprite:
         (0,0), ConditionSwitch(
 
 
-            "StormX.neck == 'gold necklace'", "images/StormSprite/Storm_Sprite_Necklace1.png",
+            "StormX.neck == '_gold_necklace'", "images/StormSprite/Storm_Sprite_Necklace1.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "StormX.top_pulled_up", ConditionSwitch(
 
-                    "StormX.bra == 'cos_bra'", "images/StormSprite/Storm_Sprite_Chest_Cos_Up.png",
-                    "StormX.bra == 'black_bra'", "images/StormSprite/Storm_Sprite_Chest_Bra_Up.png",
-                    "StormX.bra == 'lace_bra'", "images/StormSprite/Storm_Sprite_Chest_Bra_Up.png",
-                    "StormX.bra == 'sports_bra'", "images/StormSprite/Storm_Sprite_Chest_Sportsbra_Up.png",
-                    "StormX.bra == 'bikini_top'", "images/StormSprite/Storm_Sprite_Chest_Bikini_Up.png",
-                    "StormX.bra == 'tube_top'", "images/StormSprite/Storm_Sprite_Chest_Tube_Up.png",
+                    "StormX.bra == '_cosplay_bra'", "images/StormSprite/Storm_Sprite_Chest_Cos_Up.png",
+                    "StormX.bra == '_black_bra'", "images/StormSprite/Storm_Sprite_Chest_Bra_Up.png",
+                    "StormX.bra == '_lace_bra'", "images/StormSprite/Storm_Sprite_Chest_Bra_Up.png",
+                    "StormX.bra == '_sports_bra'", "images/StormSprite/Storm_Sprite_Chest_Sportsbra_Up.png",
+                    "StormX.bra == '_bikini_top'", "images/StormSprite/Storm_Sprite_Chest_Bikini_Up.png",
+                    "StormX.bra == '_tube_top'", "images/StormSprite/Storm_Sprite_Chest_Tube_Up.png",
                     "True", Null(),
                     ),
-            "StormX.bra == 'cos_bra'", "images/StormSprite/Storm_Sprite_Chest_Cos.png",
-            "StormX.bra == 'black_bra'", "images/StormSprite/Storm_Sprite_Chest_Bra.png",
-            "StormX.bra == 'lace_bra'", "images/StormSprite/Storm_Sprite_Chest_LaceBra.png",
-            "StormX.bra == 'sports_bra'", "images/StormSprite/Storm_Sprite_Chest_Sportsbra.png",
-            "StormX.bra == 'bikini_top'", "images/StormSprite/Storm_Sprite_Chest_Bikini.png",
-            "StormX.bra == 'tube_top'", "images/StormSprite/Storm_Sprite_Chest_Tube.png",
+            "StormX.bra == '_cosplay_bra'", "images/StormSprite/Storm_Sprite_Chest_Cos.png",
+            "StormX.bra == '_black_bra'", "images/StormSprite/Storm_Sprite_Chest_Bra.png",
+            "StormX.bra == '_lace_bra'", "images/StormSprite/Storm_Sprite_Chest_LaceBra.png",
+            "StormX.bra == '_sports_bra'", "images/StormSprite/Storm_Sprite_Chest_Sportsbra.png",
+            "StormX.bra == '_bikini_top'", "images/StormSprite/Storm_Sprite_Chest_Bikini.png",
+            "StormX.bra == '_tube_top'", "images/StormSprite/Storm_Sprite_Chest_Tube.png",
             "True", Null(),
             ),
 
@@ -157,26 +157,26 @@ image Storm_Sprite:
 
             "not StormX.piercings or (not StormX.top and not StormX.bra and not StormX.top_pulled_up)", Null(),
             "StormX.top_pulled_up", Null(),
-            "StormX.piercings == 'barbell'", ConditionSwitch(
+            "StormX.piercings == '_barbell'", ConditionSwitch(
 
-                    "StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra'", "images/StormSprite/Storm_Sprite_Barbell_TitsUC.png",
+                    "StormX.bra == '_black_bra' or StormX.bra == '_lace_bra' or StormX.bra == '_sports_bra'", "images/StormSprite/Storm_Sprite_Barbell_TitsUC.png",
                     "True", "images/StormSprite/Storm_Sprite_Barbell_TitsLC.png",
                     ),
-            "StormX.piercings == 'ring' and (StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra')", "images/StormSprite/Storm_Sprite_Ring_TitsUC.png",
-            "StormX.piercings == 'ring'", "images/StormSprite/Storm_Sprite_Ring_TitsLC.png",
+            "StormX.piercings == '_ring' and (StormX.bra == '_black_bra' or StormX.bra == '_lace_bra' or StormX.bra == '_sports_bra')", "images/StormSprite/Storm_Sprite_Ring_TitsUC.png",
+            "StormX.piercings == '_ring'", "images/StormSprite/Storm_Sprite_Ring_TitsLC.png",
             "True", Null(),
             ),
 
         (0,0), ConditionSwitch(
 
-            "StormX.hose == 'stockings'", "images/StormSprite/Storm_Sprite_Hose_Stockings.png",
-            "StormX.hose == 'stockings_and_garterbelt'", "images/StormSprite/Storm_Sprite_Hose_StockingsandGarter.png",
-            "StormX.hose == 'garterbelt'", "images/StormSprite/Storm_Sprite_Hose_Garter.png",
+            "StormX.hose == '_stockings'", "images/StormSprite/Storm_Sprite_Hose_Stockings.png",
+            "StormX.hose == '_stockings_and_garterbelt'", "images/StormSprite/Storm_Sprite_Hose_StockingsandGarter.png",
+            "StormX.hose == '_garterbelt'", "images/StormSprite/Storm_Sprite_Hose_Garter.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "not StormX.accessory == 'rings' or StormX.legs == 'pants' or StormX.legs == 'yoga_pants'", Null(),
+            "not StormX.accessory == '_rings' or StormX.legs == '_pants' or StormX.legs == '_yoga_pants'", Null(),
             "True", "images/StormSprite/Storm_Sprite_LegRings.png",
             ),
         (0,0), ConditionSwitch(
@@ -184,12 +184,12 @@ image Storm_Sprite:
             "not StormX.underwear", Null(),
             "StormX.underwear_pulled_down", ConditionSwitch(
 
-                    "not StormX.legs or StormX.upskirt or StormX.legs == 'skirt'", ConditionSwitch(
+                    "not StormX.legs or StormX.upskirt or StormX.legs == '_skirt'", ConditionSwitch(
 
-                            "StormX.underwear == 'cos_panties'", "images/StormSprite/Storm_Sprite_Panties_Cos_D.png",
-                            "StormX.underwear == 'white_panties'", "images/StormSprite/Storm_Sprite_Panties_White_D.png",
-                            "StormX.underwear == 'lace_panties'", "images/StormSprite/Storm_Sprite_Panties_Lace_D.png",
-                            "StormX.underwear == 'bikini_bottoms'", "images/StormSprite/Storm_Sprite_Panties_Bikini_D.png",
+                            "StormX.underwear == '_cosplay_panties'", "images/StormSprite/Storm_Sprite_Panties_Cos_D.png",
+                            "StormX.underwear == '_white_panties'", "images/StormSprite/Storm_Sprite_Panties_White_D.png",
+                            "StormX.underwear == '_lace_panties'", "images/StormSprite/Storm_Sprite_Panties_Lace_D.png",
+                            "StormX.underwear == '_bikini_bottoms'", "images/StormSprite/Storm_Sprite_Panties_Bikini_D.png",
                             "True", "images/StormSprite/Storm_Sprite_Panties_Black_D.png",
                             ),
                     "True", Null(),
@@ -198,28 +198,28 @@ image Storm_Sprite:
 
                     "StormX.grool", ConditionSwitch(
 
-                        "StormX.underwear == 'cos_panties'", "images/StormSprite/Storm_Sprite_Panties_Cos.png",
-                        "StormX.underwear == 'white_panties'", "images/StormSprite/Storm_Sprite_Panties_WhiteW.png",
-                        "StormX.underwear == 'lace_panties'", "images/StormSprite/Storm_Sprite_Panties_Lace.png",
-                        "StormX.underwear == 'bikini_bottoms' and (StormX.bra != 'bikini_top' or StormX.top_pulled_up)", "images/StormSprite/Storm_Sprite_Panties_BikiniL.png",
-                        "StormX.underwear == 'bikini_bottoms'", "images/StormSprite/Storm_Sprite_Panties_Bikini.png",
+                        "StormX.underwear == '_cosplay_panties'", "images/StormSprite/Storm_Sprite_Panties_Cos.png",
+                        "StormX.underwear == '_white_panties'", "images/StormSprite/Storm_Sprite_Panties_WhiteW.png",
+                        "StormX.underwear == '_lace_panties'", "images/StormSprite/Storm_Sprite_Panties_Lace.png",
+                        "StormX.underwear == '_bikini_bottoms' and (StormX.bra != '_bikini_top' or StormX.top_pulled_up)", "images/StormSprite/Storm_Sprite_Panties_BikiniL.png",
+                        "StormX.underwear == '_bikini_bottoms'", "images/StormSprite/Storm_Sprite_Panties_Bikini.png",
                         "True", "images/StormSprite/Storm_Sprite_Panties_BlackW.png",
                         ),
                     "True", ConditionSwitch(
 
-                        "StormX.underwear == 'cos_panties'", "images/StormSprite/Storm_Sprite_Panties_Cos.png",
-                        "StormX.underwear == 'white_panties'", "images/StormSprite/Storm_Sprite_Panties_White.png",
-                        "StormX.underwear == 'lace_panties'", "images/StormSprite/Storm_Sprite_Panties_Lace.png",
-                        "StormX.underwear == 'bikini_bottoms' and (StormX.bra != 'bikini_top' or StormX.top_pulled_up)", "images/StormSprite/Storm_Sprite_Panties_BikiniL.png",
-                        "StormX.underwear == 'bikini_bottoms'", "images/StormSprite/Storm_Sprite_Panties_Bikini.png",
+                        "StormX.underwear == '_cosplay_panties'", "images/StormSprite/Storm_Sprite_Panties_Cos.png",
+                        "StormX.underwear == '_white_panties'", "images/StormSprite/Storm_Sprite_Panties_White.png",
+                        "StormX.underwear == '_lace_panties'", "images/StormSprite/Storm_Sprite_Panties_Lace.png",
+                        "StormX.underwear == '_bikini_bottoms' and (StormX.bra != '_bikini_top' or StormX.top_pulled_up)", "images/StormSprite/Storm_Sprite_Panties_BikiniL.png",
+                        "StormX.underwear == '_bikini_bottoms'", "images/StormSprite/Storm_Sprite_Panties_Bikini.png",
                         "True", "images/StormSprite/Storm_Sprite_Panties_Black.png",
                         ),
                     ),
             ),
         (0,0), ConditionSwitch(
 
-            "StormX.hose == 'pantyhose' and (not StormX.underwear_pulled_down or not StormX.underwear)", "images/StormSprite/Storm_Sprite_Hose_Pantyhose.png",
-            "StormX.hose == 'ripped_pantyhose' and (not StormX.underwear_pulled_down or not StormX.underwear)", "images/StormSprite/Storm_Sprite_Hose_Pantyhose_Holed.png",
+            "StormX.hose == '_pantyhose' and (not StormX.underwear_pulled_down or not StormX.underwear)", "images/StormSprite/Storm_Sprite_Hose_Pantyhose.png",
+            "StormX.hose == '_ripped_pantyhose' and (not StormX.underwear_pulled_down or not StormX.underwear)", "images/StormSprite/Storm_Sprite_Hose_Pantyhose_Holed.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -227,39 +227,39 @@ image Storm_Sprite:
             "not StormX.legs", Null(),
             "StormX.upskirt", ConditionSwitch(
 
-                        "StormX.legs == 'pants'", "images/StormSprite/Storm_Sprite_Legs_Pants_Up.png",
-                        "StormX.legs == 'yoga_pants'", "images/StormSprite/Storm_Sprite_Legs_YogaPants_Up.png",
-                        "StormX.legs == 'skirt'", "images/StormSprite/Storm_Sprite_Legs_Skirt_Up.png",
+                        "StormX.legs == '_pants'", "images/StormSprite/Storm_Sprite_Legs_Pants_Up.png",
+                        "StormX.legs == '_yoga_pants'", "images/StormSprite/Storm_Sprite_Legs_YogaPants_Up.png",
+                        "StormX.legs == '_skirt'", "images/StormSprite/Storm_Sprite_Legs_Skirt_Up.png",
                         "True", Null(),
                         ),
             "True", ConditionSwitch(
 
                     "StormX.grool", ConditionSwitch(
 
-                        "StormX.legs == 'pants'", "images/StormSprite/Storm_Sprite_Legs_PantsW.png",
-                        "StormX.legs == 'yoga_pants'", "images/StormSprite/Storm_Sprite_Legs_YogaPantsW.png",
-                        "StormX.legs == 'skirt'", "images/StormSprite/Storm_Sprite_Legs_Skirt.png",
+                        "StormX.legs == '_pants'", "images/StormSprite/Storm_Sprite_Legs_PantsW.png",
+                        "StormX.legs == '_yoga_pants'", "images/StormSprite/Storm_Sprite_Legs_YogaPantsW.png",
+                        "StormX.legs == '_skirt'", "images/StormSprite/Storm_Sprite_Legs_Skirt.png",
                         "True", Null(),
                         ),
                     "True", ConditionSwitch(
 
-                        "StormX.legs == 'pants'", "images/StormSprite/Storm_Sprite_Legs_Pants.png",
-                        "StormX.legs == 'yoga_pants'", "images/StormSprite/Storm_Sprite_Legs_YogaPants.png",
-                        "StormX.legs == 'skirt'", "images/StormSprite/Storm_Sprite_Legs_Skirt.png",
+                        "StormX.legs == '_pants'", "images/StormSprite/Storm_Sprite_Legs_Pants.png",
+                        "StormX.legs == '_yoga_pants'", "images/StormSprite/Storm_Sprite_Legs_YogaPants.png",
+                        "StormX.legs == '_skirt'", "images/StormSprite/Storm_Sprite_Legs_Skirt.png",
                         "True", Null(),
                         ),
                     ),
             ),
         (0,0), ConditionSwitch(
 
-            "StormX.legs == 'skirt' or StormX.legs == 'pants'", Null(),
-            "StormX.piercings == 'barbell'", ConditionSwitch(
+            "StormX.legs == '_skirt' or StormX.legs == '_pants'", Null(),
+            "StormX.piercings == '_barbell'", ConditionSwitch(
 
                     "StormX.legs and not StormX.upskirt", "images/StormSprite/Storm_Sprite_Barbell_PussyC.png",
                     "StormX.underwear and not StormX.underwear_pulled_down", "images/StormSprite/Storm_Sprite_Barbell_PussyC.png",
                     "True", Null(),
                     ),
-            "StormX.piercings == 'ring'", ConditionSwitch(
+            "StormX.piercings == '_ring'", ConditionSwitch(
 
                     "StormX.legs and not StormX.upskirt", "images/StormSprite/Storm_Sprite_Ring_PussyC.png",
                     "StormX.underwear and not StormX.underwear_pulled_down", "images/StormSprite/Storm_Sprite_Ring_PussyC.png",
@@ -276,8 +276,8 @@ image Storm_Sprite:
         (0,0), ConditionSwitch(
 
             "not StormX.wet", Null(),
-            "(StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra') and StormX.arm_pose == 1", "images/StormSprite/Storm_Sprite_Water_Tight1.png",
-            "StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra'", "images/StormSprite/Storm_Sprite_Water_Tight2.png",
+            "(StormX.bra == '_black_bra' or StormX.bra == '_lace_bra' or StormX.bra == '_sports_bra') and StormX.arm_pose == 1", "images/StormSprite/Storm_Sprite_Water_Tight1.png",
+            "StormX.bra == '_black_bra' or StormX.bra == '_lace_bra' or StormX.bra == '_sports_bra'", "images/StormSprite/Storm_Sprite_Water_Tight2.png",
             "StormX.arm_pose == 1", "images/StormSprite/Storm_Sprite_Water_Loose1.png",
             "True", "images/StormSprite/Storm_Sprite_Water_Loose2.png",
             ),
@@ -285,14 +285,14 @@ image Storm_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "StormX.neck == 'rings'", "images/StormSprite/Storm_Sprite_Necklace3.png",
+            "StormX.neck == '_rings'", "images/StormSprite/Storm_Sprite_Necklace3.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "StormX.top_pulled_up", ConditionSwitch(
 
-                    "StormX.top == 'white_shirt'", "images/StormSprite/Storm_Sprite_Over_WhiteShirt_Up.png",
+                    "StormX.top == '_white_shirt'", "images/StormSprite/Storm_Sprite_Over_WhiteShirt_Up.png",
                     "StormX.top == '_jacket' and StormX.arm_pose != 1", "images/StormSprite/Storm_Sprite_Over_Jacket2_Up.png",
                     "StormX.top == '_jacket'", "images/StormSprite/Storm_Sprite_Over_Jacket1_Up.png",
 
@@ -300,14 +300,14 @@ image Storm_Sprite:
                     ),
 
 
-            "StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra'", ConditionSwitch(
+            "StormX.bra == '_black_bra' or StormX.bra == '_lace_bra' or StormX.bra == '_sports_bra'", ConditionSwitch(
 
-                    "StormX.top == 'white_shirt'", "images/StormSprite/Storm_Sprite_Over_WhiteShirtU.png",
+                    "StormX.top == '_white_shirt'", "images/StormSprite/Storm_Sprite_Over_WhiteShirtU.png",
                     "StormX.top == '_jacket' and StormX.arm_pose != 1", "images/StormSprite/Storm_Sprite_Over_Jacket2U.png",
                     "StormX.top == '_jacket'", "images/StormSprite/Storm_Sprite_Over_Jacket1U.png",
                     "True", Null(),
                     ),
-            "StormX.top == 'white_shirt'", "images/StormSprite/Storm_Sprite_Over_WhiteShirtL.png",
+            "StormX.top == '_white_shirt'", "images/StormSprite/Storm_Sprite_Over_WhiteShirtL.png",
             "StormX.top == '_jacket' and StormX.arm_pose != 1", "images/StormSprite/Storm_Sprite_Over_Jacket2L.png",
             "StormX.top == '_jacket'", "images/StormSprite/Storm_Sprite_Over_Jacket1L.png",
             "True", Null(),
@@ -316,26 +316,26 @@ image Storm_Sprite:
 
             "not StormX.top_pulled_up or StormX.top != '_jacket'", Null(),
 
-            "StormX.bra == 'black_bra'", "images/StormSprite/Storm_Sprite_Chest_Bra_UpJ.png",
-            "StormX.bra == 'lace_bra'", "images/StormSprite/Storm_Sprite_Chest_Bra_UpJ.png",
-            "StormX.bra == 'sports_bra'", "images/StormSprite/Storm_Sprite_Chest_Sportsbra_UpJ.png",
-            "StormX.bra == 'bikini_top'", "images/StormSprite/Storm_Sprite_Chest_Bikini_UpJ.png",
-            "StormX.bra == 'tube_top'", "images/StormSprite/Storm_Sprite_Chest_Tube_UpJ.png",
+            "StormX.bra == '_black_bra'", "images/StormSprite/Storm_Sprite_Chest_Bra_UpJ.png",
+            "StormX.bra == '_lace_bra'", "images/StormSprite/Storm_Sprite_Chest_Bra_UpJ.png",
+            "StormX.bra == '_sports_bra'", "images/StormSprite/Storm_Sprite_Chest_Sportsbra_UpJ.png",
+            "StormX.bra == '_bikini_top'", "images/StormSprite/Storm_Sprite_Chest_Bikini_UpJ.png",
+            "StormX.bra == '_tube_top'", "images/StormSprite/Storm_Sprite_Chest_Tube_UpJ.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not StormX.piercings or (not StormX.top and not StormX.bra and not StormX.top_pulled_up)", Null(),
             "StormX.top == '_jacket' and not StormX.top_pulled_up", Null(),
-            "StormX.piercings == 'barbell'", ConditionSwitch(
+            "StormX.piercings == '_barbell'", ConditionSwitch(
 
                     "StormX.top_pulled_up", "images/StormSprite/Storm_Sprite_Barbell_TitsL.png",
-                    "StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra'", "images/StormSprite/Storm_Sprite_Barbell_TitsUC.png",
+                    "StormX.bra == '_black_bra' or StormX.bra == '_lace_bra' or StormX.bra == '_sports_bra'", "images/StormSprite/Storm_Sprite_Barbell_TitsUC.png",
                     "True", "images/StormSprite/Storm_Sprite_Barbell_TitsLC.png",
                     ),
             "StormX.top_pulled_up", "images/StormSprite/Storm_Sprite_Ring_TitsL.png",
-            "StormX.piercings == 'ring' and (StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra')", "images/StormSprite/Storm_Sprite_Ring_TitsUC.png",
-            "StormX.piercings == 'ring'", "images/StormSprite/Storm_Sprite_Ring_TitsLC.png",
+            "StormX.piercings == '_ring' and (StormX.bra == '_black_bra' or StormX.bra == '_lace_bra' or StormX.bra == '_sports_bra')", "images/StormSprite/Storm_Sprite_Ring_TitsUC.png",
+            "StormX.piercings == '_ring'", "images/StormSprite/Storm_Sprite_Ring_TitsLC.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -345,7 +345,7 @@ image Storm_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "'tits' in StormX.spunk and (StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra')", "images/StormSprite/Storm_Sprite_Spunk_TitsU.png",
+            "'tits' in StormX.spunk and (StormX.bra == '_black_bra' or StormX.bra == '_lace_bra' or StormX.bra == '_sports_bra')", "images/StormSprite/Storm_Sprite_Spunk_TitsU.png",
             "'tits' in StormX.spunk", "images/StormSprite/Storm_Sprite_Spunk_TitsL.png",
             "True", Null(),
             ),
@@ -375,7 +375,7 @@ image Storm_Sprite:
 
             "StormX.arm_pose != 1 and StormX.top == '_jacket' and renpy.showing('Storm_HJ_Animation')", "images/StormSprite/Storm_Sprite_Over_Jacket2H.png",
             "StormX.arm_pose != 1 and StormX.top == '_jacket'", "images/StormSprite/Storm_Sprite_Over_Jacket2A.png",
-            "StormX.arm_pose != 1 and StormX.accessory == 'rings'", "images/StormSprite/Storm_Sprite_ArmRings2Top.png",
+            "StormX.arm_pose != 1 and StormX.accessory == '_rings'", "images/StormSprite/Storm_Sprite_ArmRings2Top.png",
             "True", Null(),
             ),
 
@@ -401,9 +401,9 @@ image Storm_Sprite:
 
             "girl_offhand_action == 'fondle_pussy'", At('GirlGropePussy_StormSelf',GirlGropePussy_Storm1()),
             "girl_offhand_action == 'fondle_breasts'", ConditionSwitch(
-                    "offhand_action == 'fondle_breasts' or offhand_action == 'suck breasts'", "GirlGropeLeftBreast_Storm",
+                    "offhand_action == 'fondle_breasts' or offhand_action == 'suck_breasts'", "GirlGropeLeftBreast_Storm",
 
-                    "primary_action == 'fondle_breasts' or primary_action == 'suck breasts'", "GirlGropeRightBreast_Storm",
+                    "primary_action == 'fondle_breasts' or primary_action == 'suck_breasts'", "GirlGropeRightBreast_Storm",
 
                     "True", "GirlGropeBothBreast_Storm",
 
@@ -420,7 +420,7 @@ image Storm_Sprite:
             "not second_girl_offhand_action or second_girl_primary_action != 'masturbation' or focused_Girl == StormX", Null(),
 
 
-            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and StormX.lust >= 70", "GirlFingerPussy_Storm",
+            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and StormX.Lust >= 70", "GirlFingerPussy_Storm",
             "second_girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Storm",
             "second_girl_offhand_action == 'fondle_breasts'", "GirlGropeRightBreast_Storm",
             "second_girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
@@ -437,7 +437,7 @@ image Storm_Sprite:
             "primary_action == 'vibrator breasts'", "VibratorLeftBreast_Storm",
             "primary_action == 'fondle_thighs'", "GropeThigh_Storm",
             "primary_action == 'fondle_breasts'", "GropeLeftBreast_Storm",
-            "primary_action == 'suck breasts'", "LickRightBreast_Storm",
+            "primary_action == 'suck_breasts'", "LickRightBreast_Storm",
             "primary_action == 'fondle_pussy' and action_speed == 2", "FingerPussy_Storm",
             "primary_action == 'fondle_pussy'", "GropePussy_Storm",
             "primary_action == 'eat_pussy'", "Lickpussy_Storm",
@@ -453,16 +453,16 @@ image Storm_Sprite:
 
 
             "offhand_action == 'fondle_breasts'", ConditionSwitch(
-                    "offhand_action == 'fondle_breasts' and primary_action == 'suck breasts'", "GropeLeftBreast_Storm",
+                    "offhand_action == 'fondle_breasts' and primary_action == 'suck_breasts'", "GropeLeftBreast_Storm",
 
                     "True", "GropeRightBreast_Storm",
 
                     ),
-            "offhand_action == 'vibrator breasts' and primary_action == 'suck breasts'", "VibratorLeftBreast_Storm",
+            "offhand_action == 'vibrator breasts' and primary_action == 'suck_breasts'", "VibratorLeftBreast_Storm",
 
             "offhand_action == primary_action", Null(),
 
-            "offhand_action == 'suck breasts'", "LickLeftBreast_Storm",
+            "offhand_action == 'suck_breasts'", "LickLeftBreast_Storm",
             "offhand_action == 'fondle_pussy'", "GropePussy_Storm",
             "offhand_action == 'eat_pussy'", "Lickpussy_Storm",
             "offhand_action == 'vibrator breasts'", "VibratorRightBreast_Storm",
@@ -479,8 +479,8 @@ image Storm_Sprite:
 
             "second_girl_primary_action == 'fondle_pussy'", At('UI_PartnerHand',GirlGropePussy_Storm1()),
             "second_girl_primary_action == 'eat_pussy'", "Lickpussy_Storm",
-            "second_girl_primary_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast_Storm",
-            "second_girl_primary_action == 'suck breasts'", "LickRightBreast_Storm",
+            "second_girl_primary_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast_Storm",
+            "second_girl_primary_action == 'suck_breasts'", "LickRightBreast_Storm",
             "second_girl_primary_action == 'fondle_breasts'", At('UI_PartnerHand',GirlGropeRightBreast_Storm()),
 
 
@@ -503,14 +503,14 @@ image Storm_Sprite:
 
             "girl_offhand_action == 'fondle_pussy'", At('GirlGropePussy_StormSelf',GirlGropePussy_Storm1()),
             "girl_offhand_action == 'eat_pussy'", "Lickpussy_Storm",
-            "girl_offhand_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast_Storm",
-            "girl_offhand_action == 'suck breasts'", "LickRightBreast_Storm",
+            "girl_offhand_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast_Storm",
+            "girl_offhand_action == 'suck_breasts'", "LickRightBreast_Storm",
             "girl_offhand_action == 'fondle_breasts'", ConditionSwitch(
-                    "primary_action == 'fondle_breasts' or primary_action == 'suck breasts'", "GirlGropeLeftBreast_Storm",
+                    "primary_action == 'fondle_breasts' or primary_action == 'suck_breasts'", "GirlGropeLeftBreast_Storm",
 
-                    "offhand_action == 'fondle_breasts' or offhand_action == 'suck breasts'", "GirlGropeRightBreast_Storm",
+                    "offhand_action == 'fondle_breasts' or offhand_action == 'suck_breasts'", "GirlGropeRightBreast_Storm",
 
-                    "girl_offhand_action == 'fondle_breasts' or girl_offhand_action == 'suck breasts'", "GirlGropeLeftBreast_Storm",
+                    "girl_offhand_action == 'fondle_breasts' or girl_offhand_action == 'suck_breasts'", "GirlGropeLeftBreast_Storm",
 
                     "True", "GirlGropeRightBreast_Storm",
 
@@ -525,13 +525,13 @@ image Storm_Sprite:
         )
     anchor (0.6, 0.0)
     yoffset 15
-    zoom 0.75
+    zoom .75
 
-image Storm_Sprite_hairback:
+image Storm_Sprite_HairBack:
     contains:
         ConditionSwitch(
 
-                "StormX.top == 'towel'", "images/StormSprite/Storm_Sprite_Over_Towel_Under.png",
+                "StormX.top == '_towel'", "images/StormSprite/Storm_Sprite_Over_Towel_Under.png",
                 "True", Null(),
                 ),
     contains:
@@ -540,7 +540,7 @@ image Storm_Sprite_hairback:
 
 
 
-                "StormX.top == 'towel'", Null(),
+                "StormX.top == '_towel'", Null(),
                 "StormX.hair == 'wethawk'", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Back_Wet.png",
                 "StormX.hair == 'mohawk' and StormX.wet", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Back_Wet.png",
                 "StormX.hair == 'mohawk'", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Back.png",
@@ -552,7 +552,7 @@ image Storm_Sprite_hairback:
                 ),
 
     anchor (0.5, 0.5)
-    zoom 0.47
+    zoom .47
 
 
 
@@ -591,7 +591,7 @@ image Storm_Sprite_Head:
 
         (0,0), ConditionSwitch(
 
-                "StormX.blushing >= 2", "images/StormSprite/Storm_Sprite_Head_Blush.png",
+                "StormX.blushing == '_blush2'", "images/StormSprite/Storm_Sprite_Head_Blush.png",
 
                 "True", "images/StormSprite/Storm_Sprite_Head_Base.png",
                 ),
@@ -629,15 +629,15 @@ image Storm_Sprite_Head:
 
 
             "True", ConditionSwitch(
-                    "StormX.mouth == 'lipbite'", "images/StormSprite/Storm_Sprite_Mouth_Lipbite.png",
-                    "StormX.mouth == 'sucking'", "images/StormSprite/Storm_Sprite_Mouth_Open.png",
-                    "StormX.mouth == 'kiss'", "images/StormSprite/Storm_Sprite_Mouth_Kiss.png",
-                    "StormX.mouth == 'sad'", "images/StormSprite/Storm_Sprite_Mouth_Sad.png",
-                    "StormX.mouth == 'smile'", "images/StormSprite/Storm_Sprite_Mouth_Smile.png",
-                    "StormX.mouth == 'surprised'", "images/StormSprite/Storm_Sprite_Mouth_Kiss.png",
-                    "StormX.mouth == 'tongue'", "images/StormSprite/Storm_Sprite_Mouth_Tongue.png",
-                    "StormX.mouth == 'grimace'", "images/StormSprite/Storm_Sprite_Mouth_Smile.png",
-                    "StormX.mouth == 'smirk'", "images/StormSprite/Storm_Sprite_Mouth_Smirk.png",
+                    "StormX.mouth == '_lipbite'", "images/StormSprite/Storm_Sprite_Mouth_Lipbite.png",
+                    "StormX.mouth == '_sucking'", "images/StormSprite/Storm_Sprite_Mouth_Open.png",
+                    "StormX.mouth == '_kiss'", "images/StormSprite/Storm_Sprite_Mouth_Kiss.png",
+                    "StormX.mouth == '_sad'", "images/StormSprite/Storm_Sprite_Mouth_Sad.png",
+                    "StormX.mouth == '_smile'", "images/StormSprite/Storm_Sprite_Mouth_Smile.png",
+                    "StormX.mouth == '_surprised'", "images/StormSprite/Storm_Sprite_Mouth_Kiss.png",
+                    "StormX.mouth == '_tongue'", "images/StormSprite/Storm_Sprite_Mouth_Tongue.png",
+                    "StormX.mouth == '_grimace'", "images/StormSprite/Storm_Sprite_Mouth_Smile.png",
+                    "StormX.mouth == '_smirk'", "images/StormSprite/Storm_Sprite_Mouth_Smirk.png",
                     "True", "images/StormSprite/Storm_Sprite_Mouth_Normal.png",
                     ),
             ),
@@ -647,12 +647,12 @@ image Storm_Sprite_Head:
             "'mouth' not in StormX.spunk", Null(),
 
 
-            "StormX.mouth == 'sucking'", "images/StormSprite/Storm_Sprite_Spunk_Tongue.png",
-            "StormX.mouth == 'kiss'", "images/StormSprite/Storm_Sprite_Spunk_Kiss.png",
-            "StormX.mouth == 'sad'", "images/StormSprite/Storm_Sprite_Spunk_Sad.png",
-            "StormX.mouth == 'smile'", "images/StormSprite/Storm_Sprite_Spunk_Smile.png",
-            "StormX.mouth == 'surprised'", "images/StormSprite/Storm_Sprite_Spunk_Kiss.png",
-            "StormX.mouth == 'tongue'", "images/StormSprite/Storm_Sprite_Spunk_Tongue.png",
+            "StormX.mouth == '_sucking'", "images/StormSprite/Storm_Sprite_Spunk_Tongue.png",
+            "StormX.mouth == '_kiss'", "images/StormSprite/Storm_Sprite_Spunk_Kiss.png",
+            "StormX.mouth == '_sad'", "images/StormSprite/Storm_Sprite_Spunk_Sad.png",
+            "StormX.mouth == '_smile'", "images/StormSprite/Storm_Sprite_Spunk_Smile.png",
+            "StormX.mouth == '_surprised'", "images/StormSprite/Storm_Sprite_Spunk_Kiss.png",
+            "StormX.mouth == '_tongue'", "images/StormSprite/Storm_Sprite_Spunk_Tongue.png",
 
 
             "True", "images/StormSprite/Storm_Sprite_Spunk_Smirk.png",
@@ -660,10 +660,10 @@ image Storm_Sprite_Head:
 
         (0,0), ConditionSwitch(
 
-            "StormX.brows == 'angry'", "images/StormSprite/Storm_Sprite_Brows_Angry.png",
-            "StormX.brows == 'sad'", "images/StormSprite/Storm_Sprite_Brows_Sad.png",
-            "StormX.brows == 'surprised'", "images/StormSprite/Storm_Sprite_Brows_Surprised.png",
-            "StormX.brows == 'confused'", "images/StormSprite/Storm_Sprite_Brows_Confused.png",
+            "StormX.brows == '_angry'", "images/StormSprite/Storm_Sprite_Brows_Angry.png",
+            "StormX.brows == '_sad'", "images/StormSprite/Storm_Sprite_Brows_Sad.png",
+            "StormX.brows == '_surprised'", "images/StormSprite/Storm_Sprite_Brows_Surprised.png",
+            "StormX.brows == '_confused'", "images/StormSprite/Storm_Sprite_Brows_Confused.png",
             "True", "images/StormSprite/Storm_Sprite_Brows_Normal.png",
             ),
         (0,0), "Storm Blink",
@@ -676,7 +676,7 @@ image Storm_Sprite_Head:
         (0,0), ConditionSwitch(
 
 
-            "StormX.top == 'towel'", Null(),
+            "StormX.top == '_towel'", Null(),
             "StormX.hair == 'wethawk'", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Wet.png",
             "StormX.hair == 'mohawk' and StormX.wet", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Wet.png",
             "StormX.hair == 'mohawk'", "images/StormSprite/Storm_Sprite_Hair_Mohawk.png",
@@ -689,7 +689,7 @@ image Storm_Sprite_Head:
             ),
         (0,0),ConditionSwitch(
 
-            "StormX.top == 'towel'", "images/StormSprite/Storm_Sprite_Over_Towel.png",
+            "StormX.top == '_towel'", "images/StormSprite/Storm_Sprite_Over_Towel.png",
             "True", Null(),
             ),
 
@@ -713,22 +713,22 @@ image Storm_Sprite_Head:
             ),
         )
     anchor (0.5, 0.5)
-    zoom 0.47
+    zoom .47
 
 
 image Storm Blink:
     ConditionSwitch(
-    "StormX.eyes == 'sexy'", "images/StormSprite/Storm_Sprite_Eyes_Sexy.png",
-    "StormX.eyes == 'side'", "images/StormSprite/Storm_Sprite_Eyes_Side.png",
-    "StormX.eyes == 'surprised'", "images/StormSprite/Storm_Sprite_Eyes_Surprised.png",
-    "StormX.eyes == 'normal'", "images/StormSprite/Storm_Sprite_Eyes_Normal.png",
-    "StormX.eyes == 'stunned'", "images/StormSprite/Storm_Sprite_Eyes_Stunned.png",
-    "StormX.eyes == 'down'", "images/StormSprite/Storm_Sprite_Eyes_Down.png",
-    "StormX.eyes == 'closed'", "images/StormSprite/Storm_Sprite_Eyes_Closed.png",
-    "StormX.eyes == 'leftside'", "images/StormSprite/Storm_Sprite_Eyes_Leftside.png",
-    "StormX.eyes == 'manic'", "images/StormSprite/Storm_Sprite_Eyes_Normal.png",
+    "StormX.eyes == '_sexy'", "images/StormSprite/Storm_Sprite_Eyes_Sexy.png",
+    "StormX.eyes == '_side'", "images/StormSprite/Storm_Sprite_Eyes_Side.png",
+    "StormX.eyes == '_surprised'", "images/StormSprite/Storm_Sprite_Eyes_Surprised.png",
+    "StormX.eyes == '_normal'", "images/StormSprite/Storm_Sprite_Eyes_Normal.png",
+    "StormX.eyes == '_stunned'", "images/StormSprite/Storm_Sprite_Eyes_Stunned.png",
+    "StormX.eyes == '_down'", "images/StormSprite/Storm_Sprite_Eyes_Down.png",
+    "StormX.eyes == '_closed'", "images/StormSprite/Storm_Sprite_Eyes_Closed.png",
+    "StormX.eyes == '_leftside'", "images/StormSprite/Storm_Sprite_Eyes_Leftside.png",
+    "StormX.eyes == '_manic'", "images/StormSprite/Storm_Sprite_Eyes_Normal.png",
     "StormX.eyes == 'white'", "images/StormSprite/Storm_Sprite_Eyes_White.png",
-    "StormX.eyes == 'squint'", "Storm_Squint",
+    "StormX.eyes == '_squint'", "Storm_Squint",
     "True", "images/StormSprite/Storm_Sprite_Eyes_Normal.png",
     ),
     choice:
@@ -738,7 +738,7 @@ image Storm Blink:
     choice:
         3
     "images/StormSprite/Storm_Sprite_Eyes_Closed.png"
-    0.25
+    .25
     repeat
 
 image Storm_Squint:
@@ -750,7 +750,7 @@ image Storm_Squint:
     choice:
         3
     "images/StormSprite/Storm_Sprite_Eyes_Sexy.png"
-    0.25
+    .25
     repeat
 
 
@@ -783,7 +783,7 @@ image Storm_Drip_MaskP:
 
 
 
-label Storm_Doggy_Launch(line=primary_action):
+label Storm_Doggy_Launch(Line=primary_action):
 
     return
 
@@ -833,27 +833,27 @@ image Storm_SexSprite:
         (0,0), ConditionSwitch(
 
 
-                "Player.cock_position == 'in'", ConditionSwitch(
+                "Player.Cock == 'in'", ConditionSwitch(
 
-                        "action_speed >= 3", "Storm_Sex_Fucking_Speed3",
-                        "action_speed >= 2", "Storm_Sex_Fucking_Speed2",
-                        "action_speed ", "Storm_Sex_Fucking_Speed1",
-                        "True", "Storm_Sex_Fucking_Speed0",
+                        "action_speed >= 3", "Storm_Sex_Fucking_action_speed3",
+                        "action_speed >= 2", "Storm_Sex_Fucking_action_speed2",
+                        "action_speed", "Storm_Sex_Fucking_action_speed1",
+                        "True", "Storm_Sex_Fucking_action_speed0",
                         ),
-                "Player.cock_position == 'anal'", ConditionSwitch(
+                "Player.Cock == 'anal'", ConditionSwitch(
 
-                        "action_speed >= 3", "Storm_Sex_Anal_Speed3",
-                        "action_speed >= 2", "Storm_Sex_Anal_Speed2",
-                        "action_speed ", "Storm_Sex_Anal_Speed1",
-                        "True", "Storm_Sex_Anal_Speed0",
+                        "action_speed >= 3", "Storm_Sex_Anal_action_speed3",
+                        "action_speed >= 2", "Storm_Sex_Anal_action_speed2",
+                        "action_speed", "Storm_Sex_Anal_action_speed1",
+                        "True", "Storm_Sex_Anal_action_speed0",
                         ),
-                "Player.sprite and Player.cock_position == 'out' and action_speed >= 2","Storm_Sex_Hotdog_Speed2",
-                "Player.sprite and Player.cock_position == 'out' and action_speed >= 1","Storm_Sex_Hotdog_Speed1",
-                "Player.cock_position == 'foot'", ConditionSwitch(
+                "Player.Sprite and Player.Cock == 'out' and action_speed >= 2","Storm_Sex_Hotdog_action_speed2",
+                "Player.Sprite and Player.Cock == 'out' and action_speed >= 1","Storm_Sex_Hotdog_action_speed1",
+                "Player.Cock == 'footjob'", ConditionSwitch(
 
-                        "action_speed >= 2", "Storm_Sex_FJ_Speed2",
-                        "action_speed ", "Storm_Sex_FJ_Speed1",
-                        "True", "Storm_Sex_FJ_Speed0",
+                        "action_speed >= 2", "Storm_Sex_FJ_action_speed2",
+                        "action_speed", "Storm_Sex_FJ_action_speed1",
+                        "True", "Storm_Sex_FJ_action_speed0",
                         ),
 
                 "True", "Storm_Sex_Static",
@@ -895,7 +895,7 @@ image Storm_Sex_Body:
     LiveComposite(
 
         (1120,840),
-        (245,-225), "Storm_hairback_Sex",
+        (245,-225), "Storm_HairBack_Sex",
         (0,0), "images/StormSex/Storm_Sex_Body.png",
 
 
@@ -905,21 +905,21 @@ image Storm_Sex_Body:
 
         (0,0), ConditionSwitch(
 
-            "not StormX.accessory == 'rings' or StormX.top == '_jacket'", Null(),
+            "not StormX.accessory == '_rings' or StormX.top == '_jacket'", Null(),
             "True", "images/StormSex/Storm_Sex_Arms_Ring.png",
             ),
         (0,0), ConditionSwitch(
 
             "not StormX.bra", Null(),
-            "StormX.bra == 'cos_bra'", "images/StormSex/Storm_Sex_Chest_Cos.png",
-            "StormX.bra == 'tube_top'", "images/StormSex/Storm_Sex_Chest_Tube.png",
-            "StormX.bra == 'black_bra'", "images/StormSex/Storm_Sex_Chest_Bra.png",
-            "StormX.bra == 'lace_bra'", "images/StormSex/Storm_Sex_Chest_Bra.png",
+            "StormX.bra == '_cosplay_bra'", "images/StormSex/Storm_Sex_Chest_Cos.png",
+            "StormX.bra == '_tube_top'", "images/StormSex/Storm_Sex_Chest_Tube.png",
+            "StormX.bra == '_black_bra'", "images/StormSex/Storm_Sex_Chest_Bra.png",
+            "StormX.bra == '_lace_bra'", "images/StormSex/Storm_Sex_Chest_Bra.png",
             "not StormX.top_pulled_up", ConditionSwitch(
 
-                    "StormX.bra == 'sports_bra'", "images/StormSex/Storm_Sex_Chest_SportsBra.png",
-                    "StormX.bra == 'bikini_top' and StormX.underwear == 'bikini_bottoms'", "images/StormSex/Storm_Sex_Chest_Bikini_Combo.png",
-                    "StormX.bra == 'bikini_top'", "images/StormSex/Storm_Sex_Chest_Bikini.png",
+                    "StormX.bra == '_sports_bra'", "images/StormSex/Storm_Sex_Chest_SportsBra.png",
+                    "StormX.bra == '_bikini_top' and StormX.underwear == '_bikini_bottoms'", "images/StormSex/Storm_Sex_Chest_Bikini_Combo.png",
+                    "StormX.bra == '_bikini_top'", "images/StormSex/Storm_Sex_Chest_Bikini.png",
 
                     "True", Null(),
                     ),
@@ -933,9 +933,9 @@ image Storm_Sex_Body:
 
             "True", ConditionSwitch(
 
-                    "StormX.bra == 'sports_bra'", "images/StormSex/Storm_Sex_Chest_SportsBra_Up.png",
+                    "StormX.bra == '_sports_bra'", "images/StormSex/Storm_Sex_Chest_SportsBra_Up.png",
 
-                    "StormX.bra == 'bikini_top'", "images/StormSex/Storm_Sex_Chest_Bikini_Up.png",
+                    "StormX.bra == '_bikini_top'", "images/StormSex/Storm_Sex_Chest_Bikini_Up.png",
 
                     "True", Null(),
                     ),
@@ -947,8 +947,8 @@ image Storm_Sex_Body:
             ),
         (0,0), ConditionSwitch(
 
-            "StormX.top == 'white_shirt' and StormX.top_pulled_up", "images/StormSex/Storm_Sex_Chest_Shirt_Up.png",
-            "StormX.top == 'white_shirt'", "images/StormSex/Storm_Sex_Chest_Shirt.png",
+            "StormX.top == '_white_shirt' and StormX.top_pulled_up", "images/StormSex/Storm_Sex_Chest_Shirt_Up.png",
+            "StormX.top == '_white_shirt'", "images/StormSex/Storm_Sex_Chest_Shirt.png",
             "StormX.top == '_jacket'", "images/StormSex/Storm_Sex_Chest_Jacket.png",
             "True", Null(),
 
@@ -975,7 +975,7 @@ image Storm_Sex_Body:
 
         (0,0), ConditionSwitch(
 
-            "StormX.neck == 'rings'", "images/StormSex/Storm_Sex_Neck_Ring.png",
+            "StormX.neck == '_rings'", "images/StormSex/Storm_Sex_Neck_Ring.png",
             "True", Null(),
             ),
         (0,0),ConditionSwitch(
@@ -1002,9 +1002,9 @@ image Storm_Head_Sex:
     anchor (0.5,0.5)
     rotate -7
 
-image Storm_hairback_Sex:
+image Storm_HairBack_Sex:
 
-    "Storm_Sprite_hairback"
+    "Storm_Sprite_HairBack"
     zoom 1.25
     anchor (0.5,0.5)
     rotate -7
@@ -1019,27 +1019,27 @@ image Storm_Sex_Tits:
 
         (0,0), ConditionSwitch(
 
-            "StormX.bra == 'cos_bra'", "images/StormSex/Storm_Sex_Tits_Cos.png",
+            "StormX.bra == '_cosplay_bra'", "images/StormSex/Storm_Sex_Tits_Cos.png",
             "True", "images/StormSex/Storm_Sex_Tits.png",
             ),
 
         (0,0), ConditionSwitch(
 
-            "StormX.piercings == 'barbell'", "images/StormSex/Storm_Sex_Pierce_Tits_Barbell.png",
-            "StormX.piercings == 'ring'", "images/StormSex/Storm_Sex_Pierce_Tits_Ring.png",
+            "StormX.piercings == '_barbell'", "images/StormSex/Storm_Sex_Pierce_Tits_Barbell.png",
+            "StormX.piercings == '_ring'", "images/StormSex/Storm_Sex_Pierce_Tits_Ring.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not StormX.bra", Null(),
-            "StormX.bra == 'cos_bra'", Null(),
+            "StormX.bra == '_cosplay_bra'", Null(),
             "not StormX.top_pulled_up", ConditionSwitch(
 
-                    "StormX.bra == 'tube_top'", "images/StormSex/Storm_Sex_Tits_Tube.png",
-                    "StormX.bra == 'black_bra'", "images/StormSex/Storm_Sex_Tits_Bra.png",
-                    "StormX.bra == 'lace_bra'", "images/StormSex/Storm_Sex_Tits_LaceBra.png",
-                    "StormX.bra == 'sports_bra'", "images/StormSex/Storm_Sex_Tits_SportsBra.png",
-                    "StormX.bra == 'bikini_top'", "images/StormSex/Storm_Sex_Tits_Bikini.png",
+                    "StormX.bra == '_tube_top'", "images/StormSex/Storm_Sex_Tits_Tube.png",
+                    "StormX.bra == '_black_bra'", "images/StormSex/Storm_Sex_Tits_Bra.png",
+                    "StormX.bra == '_lace_bra'", "images/StormSex/Storm_Sex_Tits_LaceBra.png",
+                    "StormX.bra == '_sports_bra'", "images/StormSex/Storm_Sex_Tits_SportsBra.png",
+                    "StormX.bra == '_bikini_top'", "images/StormSex/Storm_Sex_Tits_Bikini.png",
                     "True", Null(),
                     ),
 
@@ -1052,11 +1052,11 @@ image Storm_Sex_Tits:
 
             "True", ConditionSwitch(
 
-                    "StormX.bra == 'tube_top'", "images/StormSex/Storm_Sex_Tits_Tube_Down.png",
+                    "StormX.bra == '_tube_top'", "images/StormSex/Storm_Sex_Tits_Tube_Down.png",
 
 
-                    "StormX.bra == 'sports_bra'", "images/StormSex/Storm_Sex_Tits_SportsBra_Up.png",
-                    "StormX.bra == 'bikini_top'", "images/StormSex/Storm_Sex_Tits_Bikini_Up.png",
+                    "StormX.bra == '_sports_bra'", "images/StormSex/Storm_Sex_Tits_SportsBra_Up.png",
+                    "StormX.bra == '_bikini_top'", "images/StormSex/Storm_Sex_Tits_Bikini_Up.png",
                     "True", Null(),
                     ),
             ),
@@ -1068,8 +1068,8 @@ image Storm_Sex_Tits:
         (0,0), ConditionSwitch(
 
             "not StormX.top", Null(),
-            "StormX.top == 'white_shirt' and StormX.top_pulled_up", "images/StormSex/Storm_Sex_Tits_Shirt_Up.png",
-            "StormX.top == 'white_shirt'", "images/StormSex/Storm_Sex_Tits_Shirt.png",
+            "StormX.top == '_white_shirt' and StormX.top_pulled_up", "images/StormSex/Storm_Sex_Tits_Shirt_Up.png",
+            "StormX.top == '_white_shirt'", "images/StormSex/Storm_Sex_Tits_Shirt.png",
             "True", Null(),
             ),
 
@@ -1103,8 +1103,8 @@ image Storm_Sex_Tits:
         (0,0), ConditionSwitch(
 
             "(not StormX.bra and not StormX.top) or StormX.top_pulled_up", Null(),
-            "StormX.piercings == 'barbell'", "images/StormSex/Storm_Sex_Pierce_Tits_BarbellC.png",
-            "StormX.piercings == 'ring'", "images/StormSex/Storm_Sex_Pierce_Tits_RingC.png",
+            "StormX.piercings == '_barbell'", "images/StormSex/Storm_Sex_Pierce_Tits_BarbellC.png",
+            "StormX.piercings == '_ring'", "images/StormSex/Storm_Sex_Pierce_Tits_RingC.png",
             "True", Null(),
             ),
         (0,0),ConditionSwitch(
@@ -1114,7 +1114,7 @@ image Storm_Sex_Tits:
             ),
         (0,0), ConditionSwitch(
 
-            "primary_action == 'suck breasts' or offhand_action == 'suck breasts'", "Storm_Sex_Lick_Breasts",
+            "primary_action == 'suck_breasts' or offhand_action == 'suck_breasts'", "Storm_Sex_Lick_Breasts",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -1128,7 +1128,7 @@ image Storm_Sex_Tits:
 
 
 image Storm_Sex_Lick_Breasts:
-    "licking"
+    "Lick_Anim"
     zoom 0.7
     offset (400,350)
 
@@ -1152,7 +1152,7 @@ image Storm_Sex_Legs:
 
         (0,0), ConditionSwitch(
 
-            "StormX.legs == 'skirt'", "images/StormSex/Storm_Sex_Legs_Skirt_Back.png",
+            "StormX.legs == '_skirt'", "images/StormSex/Storm_Sex_Legs_Skirt_Back.png",
             "True", Null(),
             ),
         (0,0),ConditionSwitch(
@@ -1162,15 +1162,15 @@ image Storm_Sex_Legs:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.sprite and Player.cock_position == 'anal' and show_feet", "images/StormSex/Storm_Sex_Legs_FJ_Anal.png",
-            "show_feet", "images/StormSex/Storm_Sex_Legs_FJ.png",
-            "Player.sprite and Player.cock_position == 'anal'", "images/StormSex/Storm_Sex_Legs_Anal.png",
+            "Player.Sprite and Player.Cock == 'anal' and ShowFeet", "images/StormSex/Storm_Sex_Legs_FJ_Anal.png",
+            "ShowFeet", "images/StormSex/Storm_Sex_Legs_FJ.png",
+            "Player.Sprite and Player.Cock == 'anal'", "images/StormSex/Storm_Sex_Legs_Anal.png",
             "True", "images/StormSex/Storm_Sex_Legs.png",
             ),
         (0,0), ConditionSwitch(
 
             "not StormX.wet", Null(),
-            "show_feet", "images/StormSex/Storm_Sex_Wet_Legs_FJ.png",
+            "ShowFeet", "images/StormSex/Storm_Sex_Wet_Legs_FJ.png",
             "True", "images/StormSex/Storm_Sex_Wet_Legs.png",
             ),
 
@@ -1183,57 +1183,57 @@ image Storm_Sex_Legs:
 
         (0,0), ConditionSwitch(
 
-            "show_feet",ConditionSwitch(
+            "ShowFeet",ConditionSwitch(
 
-                    "StormX.hose == 'stockings_and_garterbelt'", "images/StormSex/Storm_Sex_Hose_StockingsGarter_FJ.png",
-                    "StormX.hose == 'garterbelt'", "images/StormSex/Storm_Sex_Hose_Garter_FJ.png",
-                    "StormX.hose == 'stockings'", "images/StormSex/Storm_Sex_Hose_Stockings_FJ.png",
+                    "StormX.hose == '_stockings_and_garterbelt'", "images/StormSex/Storm_Sex_Hose_StockingsGarter_FJ.png",
+                    "StormX.hose == '_garterbelt'", "images/StormSex/Storm_Sex_Hose_Garter_FJ.png",
+                    "StormX.hose == '_stockings'", "images/StormSex/Storm_Sex_Hose_Stockings_FJ.png",
                     "True", Null(),
                     ),
-            "StormX.hose == 'stockings_and_garterbelt'", "images/StormSex/Storm_Sex_Hose_StockingsGarter.png",
-            "StormX.hose == 'garterbelt'", "images/StormSex/Storm_Sex_Hose_Garter.png",
-            "StormX.hose == 'stockings'", "images/StormSex/Storm_Sex_Hose_Stockings.png",
+            "StormX.hose == '_stockings_and_garterbelt'", "images/StormSex/Storm_Sex_Hose_StockingsGarter.png",
+            "StormX.hose == '_garterbelt'", "images/StormSex/Storm_Sex_Hose_Garter.png",
+            "StormX.hose == '_stockings'", "images/StormSex/Storm_Sex_Hose_Stockings.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "not StormX.accessory == 'rings' or StormX.legs == 'pants' or StormX.legs == 'yoga_pants'", Null(),
-            "show_feet", "images/StormSex/Storm_Sex_LegRings_FJ.png",
+            "not StormX.accessory == '_rings' or StormX.legs == '_pants' or StormX.legs == '_yoga_pants'", Null(),
+            "ShowFeet", "images/StormSex/Storm_Sex_LegRings_FJ.png",
             "True", "images/StormSex/Storm_Sex_LegRings.png",
             ),
         (0,0), ConditionSwitch(
 
-            "StormX.legs and StormX.legs != 'skirt' and not StormX.upskirt", Null(),
+            "StormX.legs and StormX.legs != '_skirt' and not StormX.upskirt", Null(),
             "StormX.underwear_pulled_down",ConditionSwitch(
 
-                    "StormX.underwear == 'cos_panties' and show_feet", "images/StormSex/Storm_Sex_Panties_Cos_FJ_Down.png",
-                    "StormX.underwear == 'cos_panties'", "images/StormSex/Storm_Sex_Panties_Cos_Down.png",
-                    "StormX.underwear == 'white_panties' and show_feet", "images/StormSex/Storm_Sex_Panties_White_FJ_Down.png",
-                    "StormX.underwear == 'white_panties'", "images/StormSex/Storm_Sex_Panties_White_Down.png",
-                    "StormX.underwear and show_feet", "images/StormSex/Storm_Sex_Panties_Black_FJ_Down.png",
+                    "StormX.underwear == '_cosplay_panties' and ShowFeet", "images/StormSex/Storm_Sex_Panties_Cos_FJ_Down.png",
+                    "StormX.underwear == '_cosplay_panties'", "images/StormSex/Storm_Sex_Panties_Cos_Down.png",
+                    "StormX.underwear == '_white_panties' and ShowFeet", "images/StormSex/Storm_Sex_Panties_White_FJ_Down.png",
+                    "StormX.underwear == '_white_panties'", "images/StormSex/Storm_Sex_Panties_White_Down.png",
+                    "StormX.underwear and ShowFeet", "images/StormSex/Storm_Sex_Panties_Black_FJ_Down.png",
                     "StormX.underwear", "images/StormSex/Storm_Sex_Panties_Black_Down.png",
                     "True", Null(),
                     ),
-            "show_feet",ConditionSwitch(
+            "ShowFeet",ConditionSwitch(
 
-                    "StormX.underwear == 'cos_panties' and StormX.grool", "images/StormSex/Storm_Sex_Panties_Cos_FJ_Wet.png",
-                    "StormX.underwear == 'cos_panties'", "images/StormSex/Storm_Sex_Panties_Cos_FJ.png",
-                    "StormX.underwear == 'white_panties' and StormX.grool", "images/StormSex/Storm_Sex_Panties_White_FJ_Wet.png",
-                    "StormX.underwear == 'white_panties'", "images/StormSex/Storm_Sex_Panties_White_FJ.png",
-                    "StormX.underwear == 'lace_panties'", "images/StormSex/Storm_Sex_Panties_Lace_FJ.png",
-                    "StormX.underwear == 'bikini_bottoms' and (StormX.bra != 'bikini_top' or StormX.top_pulled_up)", "images/StormSex/Storm_Sex_Panties_Bikini_FJ_Top.png",
-                    "StormX.underwear == 'bikini_bottoms'", "images/StormSex/Storm_Sex_Panties_Bikini_FJ.png",
+                    "StormX.underwear == '_cosplay_panties' and StormX.grool", "images/StormSex/Storm_Sex_Panties_Cos_FJ_Wet.png",
+                    "StormX.underwear == '_cosplay_panties'", "images/StormSex/Storm_Sex_Panties_Cos_FJ.png",
+                    "StormX.underwear == '_white_panties' and StormX.grool", "images/StormSex/Storm_Sex_Panties_White_FJ_Wet.png",
+                    "StormX.underwear == '_white_panties'", "images/StormSex/Storm_Sex_Panties_White_FJ.png",
+                    "StormX.underwear == '_lace_panties'", "images/StormSex/Storm_Sex_Panties_Lace_FJ.png",
+                    "StormX.underwear == '_bikini_bottoms' and (StormX.bra != '_bikini_top' or StormX.top_pulled_up)", "images/StormSex/Storm_Sex_Panties_Bikini_FJ_Top.png",
+                    "StormX.underwear == '_bikini_bottoms'", "images/StormSex/Storm_Sex_Panties_Bikini_FJ.png",
                     "StormX.underwear and StormX.grool", "images/StormSex/Storm_Sex_Panties_Black_FJ_Wet.png",
                     "StormX.underwear", "images/StormSex/Storm_Sex_Panties_Black_FJ.png",
                     "True", Null(),
                     ),
-            "StormX.underwear == 'cos_panties' and StormX.grool", "images/StormSex/Storm_Sex_Panties_Cos_Wet.png",
-            "StormX.underwear == 'cos_panties'", "images/StormSex/Storm_Sex_Panties_Cos.png",
-            "StormX.underwear == 'white_panties' and StormX.grool", "images/StormSex/Storm_Sex_Panties_White_Wet.png",
-            "StormX.underwear == 'white_panties'", "images/StormSex/Storm_Sex_Panties_White.png",
-            "StormX.underwear == 'lace_panties'", "images/StormSex/Storm_Sex_Panties_Lace.png",
-            "StormX.underwear == 'bikini_bottoms' and (StormX.bra != 'bikini_top' or StormX.top_pulled_up)", "images/StormSex/Storm_Sex_Panties_Bikini_Top.png",
-            "StormX.underwear == 'bikini_bottoms'", "images/StormSex/Storm_Sex_Panties_Bikini.png",
+            "StormX.underwear == '_cosplay_panties' and StormX.grool", "images/StormSex/Storm_Sex_Panties_Cos_Wet.png",
+            "StormX.underwear == '_cosplay_panties'", "images/StormSex/Storm_Sex_Panties_Cos.png",
+            "StormX.underwear == '_white_panties' and StormX.grool", "images/StormSex/Storm_Sex_Panties_White_Wet.png",
+            "StormX.underwear == '_white_panties'", "images/StormSex/Storm_Sex_Panties_White.png",
+            "StormX.underwear == '_lace_panties'", "images/StormSex/Storm_Sex_Panties_Lace.png",
+            "StormX.underwear == '_bikini_bottoms' and (StormX.bra != '_bikini_top' or StormX.top_pulled_up)", "images/StormSex/Storm_Sex_Panties_Bikini_Top.png",
+            "StormX.underwear == '_bikini_bottoms'", "images/StormSex/Storm_Sex_Panties_Bikini.png",
             "StormX.underwear and StormX.grool", "images/StormSex/Storm_Sex_Panties_Black_Wet.png",
             "StormX.underwear", "images/StormSex/Storm_Sex_Panties_Black.png",
             "True", Null(),
@@ -1243,53 +1243,53 @@ image Storm_Sex_Legs:
 
 
 
-            "not StormX.underwear and StormX.hose != 'pantyhose'", Null(),
-            "((StormX.underwear or StormX.hose == 'pantyhose') and StormX.underwear_pulled_down)", Null(),
+            "not StormX.underwear and StormX.hose != '_pantyhose'", Null(),
+            "((StormX.underwear or StormX.hose == '_pantyhose') and StormX.underwear_pulled_down)", Null(),
 
-            "StormX.piercings == 'barbell'", "images/StormSex/Storm_Sex_Pierce_Pussy_BarbellC.png",
-            "StormX.piercings == 'ring'", "images/StormSex/Storm_Sex_Pierce_Pussy_RingC.png",
+            "StormX.piercings == '_barbell'", "images/StormSex/Storm_Sex_Pierce_Pussy_BarbellC.png",
+            "StormX.piercings == '_ring'", "images/StormSex/Storm_Sex_Pierce_Pussy_RingC.png",
             "True", Null(),
             ),
 
         (0,0), ConditionSwitch(
 
             "StormX.underwear and StormX.underwear_pulled_down", Null(),
-            "show_feet",ConditionSwitch(
+            "ShowFeet",ConditionSwitch(
 
-                    "StormX.hose == 'pantyhose'", "images/StormSex/Storm_Sex_Hose_Pantyhose_FJ.png",
-                    "StormX.hose == 'ripped_pantyhose'", "images/StormSex/Storm_Sex_Hose_Pantyhose_FJHoled.png",
+                    "StormX.hose == '_pantyhose'", "images/StormSex/Storm_Sex_Hose_Pantyhose_FJ.png",
+                    "StormX.hose == '_ripped_pantyhose'", "images/StormSex/Storm_Sex_Hose_Pantyhose_FJHoled.png",
                     "True", Null(),
                     ),
-            "StormX.hose == 'pantyhose'", "images/StormSex/Storm_Sex_Hose_Pantyhose.png",
-            "StormX.hose == 'ripped_pantyhose'", "images/StormSex/Storm_Sex_Hose_Pantyhose_Holed.png",
+            "StormX.hose == '_pantyhose'", "images/StormSex/Storm_Sex_Hose_Pantyhose.png",
+            "StormX.hose == '_ripped_pantyhose'", "images/StormSex/Storm_Sex_Hose_Pantyhose_Holed.png",
             "True", Null(),
             ),
 
         (0,0), ConditionSwitch(
 
-            "StormX.legs == 'skirt' and show_feet", "images/StormSex/Storm_Sex_Legs_Skirt_FJ.png",
+            "StormX.legs == '_skirt' and ShowFeet", "images/StormSex/Storm_Sex_Legs_Skirt_FJ.png",
             "StormX.upskirt",ConditionSwitch(
 
-                    "StormX.legs == 'skirt'", "images/StormSex/Storm_Sex_Legs_Skirt_Up.png",
-                    "StormX.legs == 'pants' and show_feet", "images/StormSex/Storm_Sex_Legs_Pants_FJ_Down.png",
-                    "StormX.legs == 'pants'", "images/StormSex/Storm_Sex_Legs_Pants_Down.png",
-                    "StormX.legs == 'yoga_pants' and show_feet", "images/StormSex/Storm_Sex_Legs_YogaPants_FJ_Down.png",
-                    "StormX.legs == 'yoga_pants'", "images/StormSex/Storm_Sex_Legs_YogaPants_Down.png",
+                    "StormX.legs == '_skirt'", "images/StormSex/Storm_Sex_Legs_Skirt_Up.png",
+                    "StormX.legs == '_pants' and ShowFeet", "images/StormSex/Storm_Sex_Legs_Pants_FJ_Down.png",
+                    "StormX.legs == '_pants'", "images/StormSex/Storm_Sex_Legs_Pants_Down.png",
+                    "StormX.legs == '_yoga_pants' and ShowFeet", "images/StormSex/Storm_Sex_Legs_YogaPants_FJ_Down.png",
+                    "StormX.legs == '_yoga_pants'", "images/StormSex/Storm_Sex_Legs_YogaPants_Down.png",
                     "True", Null(),
                     ),
-            "show_feet",ConditionSwitch(
+            "ShowFeet",ConditionSwitch(
 
-                    "StormX.legs == 'pants' and StormX.grool > 1", "images/StormSex/Storm_Sex_Legs_Pants_FJ_Wet.png",
-                    "StormX.legs == 'pants'", "images/StormSex/Storm_Sex_Legs_Pants_FJ.png",
-                    "StormX.legs == 'yoga_pants' and StormX.grool > 1", "images/StormSex/Storm_Sex_Legs_YogaPants_FJ_Wet.png",
-                    "StormX.legs == 'yoga_pants'", "images/StormSex/Storm_Sex_Legs_YogaPants_FJ.png",
+                    "StormX.legs == '_pants' and StormX.grool > 1", "images/StormSex/Storm_Sex_Legs_Pants_FJ_Wet.png",
+                    "StormX.legs == '_pants'", "images/StormSex/Storm_Sex_Legs_Pants_FJ.png",
+                    "StormX.legs == '_yoga_pants' and StormX.grool > 1", "images/StormSex/Storm_Sex_Legs_YogaPants_FJ_Wet.png",
+                    "StormX.legs == '_yoga_pants'", "images/StormSex/Storm_Sex_Legs_YogaPants_FJ.png",
                     "True", Null(),
                     ),
-            "StormX.legs == 'skirt'", "images/StormSex/Storm_Sex_Legs_Skirt.png",
-            "StormX.legs == 'pants' and StormX.grool > 1", "images/StormSex/Storm_Sex_Legs_Pants_Wet.png",
-            "StormX.legs == 'pants'", "images/StormSex/Storm_Sex_Legs_Pants.png",
-            "StormX.legs == 'yoga_pants' and StormX.grool > 1", "images/StormSex/Storm_Sex_Legs_YogaPants_Wet.png",
-            "StormX.legs == 'yoga_pants'", "images/StormSex/Storm_Sex_Legs_YogaPants.png",
+            "StormX.legs == '_skirt'", "images/StormSex/Storm_Sex_Legs_Skirt.png",
+            "StormX.legs == '_pants' and StormX.grool > 1", "images/StormSex/Storm_Sex_Legs_Pants_Wet.png",
+            "StormX.legs == '_pants'", "images/StormSex/Storm_Sex_Legs_Pants.png",
+            "StormX.legs == '_yoga_pants' and StormX.grool > 1", "images/StormSex/Storm_Sex_Legs_YogaPants_Wet.png",
+            "StormX.legs == '_yoga_pants'", "images/StormSex/Storm_Sex_Legs_YogaPants.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -1298,10 +1298,10 @@ image Storm_Sex_Legs:
 
 
             "not StormX.legs", Null(),
-            "StormX.legs and StormX.legs != 'skirt' and StormX.upskirt", Null(),
+            "StormX.legs and StormX.legs != '_skirt' and StormX.upskirt", Null(),
 
-            "StormX.piercings == 'barbell'", "images/StormSex/Storm_Sex_Pierce_Pussy_BarbellC.png",
-            "StormX.piercings == 'ring'", "images/StormSex/Storm_Sex_Pierce_Pussy_RingC.png",
+            "StormX.piercings == '_barbell'", "images/StormSex/Storm_Sex_Pierce_Pussy_BarbellC.png",
+            "StormX.piercings == '_ring'", "images/StormSex/Storm_Sex_Pierce_Pussy_RingC.png",
             "True", Null(),
             ),
 
@@ -1312,20 +1312,20 @@ image Storm_Sex_Legs:
 
         (0,0), ConditionSwitch(
 
-            "Player.sprite and Player.cock_position", Null(),
+            "Player.Sprite and Player.Cock", Null(),
             "primary_action == 'eat_pussy'", "Storm_Sex_Lick_Pussy",
             "primary_action == 'eat_ass'", "Storm_Sex_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
 
-            "Player.sprite and Player.cock_position", Null(),
+            "Player.Sprite and Player.Cock", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'", "Storm_Sex_Fondle_Pussy",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
 
-            "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
+            "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
 
             "True", Null(),
             ),
@@ -1366,10 +1366,10 @@ image Storm_Sex_Feet:
 
         (0,0), ConditionSwitch(
 
-            "StormX.hose == 'ripped_pantyhose' and (not StormX.underwear or not StormX.underwear_pulled_down)", "images/StormSex/Storm_Sex_Hose_Pantyhose_FJHoled.png",
-            "StormX.hose and StormX.hose != 'garterbelt' and StormX.hose != 'pantyhose'", "images/StormSex/Storm_Sex_Hose_Pantyhose_FJ.png",
+            "StormX.hose == '_ripped_pantyhose' and (not StormX.underwear or not StormX.underwear_pulled_down)", "images/StormSex/Storm_Sex_Hose_Pantyhose_FJHoled.png",
+            "StormX.hose and StormX.hose != '_garterbelt' and StormX.hose != '_pantyhose'", "images/StormSex/Storm_Sex_Hose_Pantyhose_FJ.png",
             "StormX.underwear and StormX.underwear_pulled_down", Null(),
-            "StormX.hose == 'pantyhose'", "images/StormSex/Storm_Sex_Hose_Pantyhose_FJ.png",
+            "StormX.hose == '_pantyhose'", "images/StormSex/Storm_Sex_Hose_Pantyhose_FJ.png",
             "True", Null(),
             ),
 
@@ -1389,9 +1389,9 @@ image Storm_Sex_Pussy:
     contains:
 
         ConditionSwitch(
-                "Player.sprite and Player.cock_position == 'in' and action_speed >= 2", "images/StormSex/Storm_Sex_Pussy_Fucking.png",
-                "Player.sprite and Player.cock_position == 'in' and action_speed", "Storm_Sex_Heading_Pussy",
-                "Player.sprite and (Player.cock_position == 'in' or Player.cock_position == 'out')", "images/StormSex/Storm_Sex_Pussy_Open.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", "images/StormSex/Storm_Sex_Pussy_Fucking.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed", "Storm_Sex_Heading_Pussy",
+                "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'out')", "images/StormSex/Storm_Sex_Pussy_Open.png",
                 "primary_action == 'eat_pussy'", "images/StormSex/Storm_Sex_Pussy_Open.png",
                 "True", "images/StormSex/Storm_Sex_Pussy_Closed.png",
                 )
@@ -1407,13 +1407,13 @@ image Storm_Sex_Pussy:
         ConditionSwitch(
                 "not StormX.pubes", Null(),
 
-                "Player.sprite and Player.cock_position == 'in' and action_speed and show_feet", "images/StormSex/Storm_Sex_Pubes_Fucking_FJ.png",
-                "Player.sprite and Player.cock_position == 'in' and action_speed", "images/StormSex/Storm_Sex_Pubes_Fucking.png",
-                "Player.sprite and Player.cock_position == 'in' and show_feet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
-                "Player.sprite and Player.cock_position == 'in'", "images/StormSex/Storm_Sex_Pubes_Open.png",
-                "primary_action == 'eat_pussy' and show_feet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed and ShowFeet", "images/StormSex/Storm_Sex_Pubes_Fucking_FJ.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed", "images/StormSex/Storm_Sex_Pubes_Fucking.png",
+                "Player.Sprite and Player.Cock == 'in' and ShowFeet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
+                "Player.Sprite and Player.Cock == 'in'", "images/StormSex/Storm_Sex_Pubes_Open.png",
+                "primary_action == 'eat_pussy' and ShowFeet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
                 "primary_action == 'eat_pussy'", "images/StormSex/Storm_Sex_Pubes_Open.png",
-                "show_feet", "images/StormSex/Storm_Sex_Pubes_Closed_FJ.png",
+                "ShowFeet", "images/StormSex/Storm_Sex_Pubes_Closed_FJ.png",
                 "True", "images/StormSex/Storm_Sex_Pubes_Closed.png",
                 )
     contains:
@@ -1440,32 +1440,32 @@ image Storm_Sex_Pussy:
 
         ConditionSwitch(
 
-                "Player.sprite and Player.cock_position == 'in' and action_speed >= 3", AlphaMask("Storm_Sex_Fucking_Zero_Anim3", "Storm_Sex_Fucking_Mask"),
-                "Player.sprite and Player.cock_position == 'in' and action_speed >= 2", AlphaMask("Storm_Sex_Fucking_Zero_Anim2", "Storm_Sex_Fucking_Mask"),
-                "Player.sprite and Player.cock_position == 'in' and action_speed == 1", AlphaMask("Storm_Sex_Fucking_Zero_Anim1", "Storm_Sex_Heading_Mask"),
-                "Player.sprite and Player.cock_position == 'in'", "Storm_Sex_Fucking_Zero_Anim0",
+                "Player.Sprite and Player.Cock == 'in' and action_speed >= 3", AlphaMask("Storm_Sex_Fucking_Zero_Anim3", "Storm_Sex_Fucking_Mask"),
+                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", AlphaMask("Storm_Sex_Fucking_Zero_Anim2", "Storm_Sex_Fucking_Mask"),
+                "Player.Sprite and Player.Cock == 'in' and action_speed == 1", AlphaMask("Storm_Sex_Fucking_Zero_Anim1", "Storm_Sex_Heading_Mask"),
+                "Player.Sprite and Player.Cock == 'in'", "Storm_Sex_Fucking_Zero_Anim0",
                 "True", Null(),
                 )
     contains:
 
         ConditionSwitch(
-                "StormX.piercings == 'barbell' and Player.sprite and Player.cock_position == 'in' and action_speed", "images/StormSex/Storm_Sex_Pierce_Pussy_BarbellF.png",
-                "StormX.piercings == 'ring' and Player.sprite and Player.cock_position == 'in' and action_speed", "images/StormSex/Storm_Sex_Pierce_Pussy_RingF.png",
-                "StormX.piercings == 'barbell'", "images/StormSex/Storm_Sex_Pierce_Pussy_Barbell.png",
-                "StormX.piercings == 'ring'", "images/StormSex/Storm_Sex_Pierce_Pussy_Ring.png",
+                "StormX.piercings == '_barbell' and Player.Sprite and Player.Cock == 'in' and action_speed", "images/StormSex/Storm_Sex_Pierce_Pussy_BarbellF.png",
+                "StormX.piercings == '_ring' and Player.Sprite and Player.Cock == 'in' and action_speed", "images/StormSex/Storm_Sex_Pierce_Pussy_RingF.png",
+                "StormX.piercings == '_barbell'", "images/StormSex/Storm_Sex_Pierce_Pussy_Barbell.png",
+                "StormX.piercings == '_ring'", "images/StormSex/Storm_Sex_Pierce_Pussy_Ring.png",
                 "True", Null(),
                 )
     contains:
 
         ConditionSwitch(
-                "Player.sprite and Player.cock_position == 'in' and action_speed == 1", "Storm_Pussy_Spunk_Heading",
+                "Player.Sprite and Player.Cock == 'in' and action_speed == 1", "Storm_Pussy_Spunk_Heading",
                 "True", Null(),
                 )
     contains:
 
         ConditionSwitch(
                 "action_speed == 1", Null(),
-                "'in' not in StormX.spunk or not Player.sprite or Player.cock_position != 'in' or not action_speed", Null(),
+                "'in' not in StormX.spunk or not Player.Sprite or Player.Cock != 'in' or not action_speed", Null(),
 
                 "True", "images/StormSex/Storm_Sex_Spunk_Pussy_Over.png",
                 )
@@ -1473,12 +1473,12 @@ image Storm_Sex_Pussy:
 
 
 image Storm_Sex_Lick_Pussy:
-    "licking"
+    "Lick_Anim"
     zoom 0.7
     offset (535,500)
 
 image Storm_Sex_Lick_Ass:
-    "licking"
+    "Lick_Anim"
     zoom 0.7
     offset (535,550)
 
@@ -1502,7 +1502,7 @@ image Storm_Sex_Zero_Cock:
         subpixel True
 
         ConditionSwitch(
-                "Player.sprite", "Zero_cock_titjob" ,
+                "Player.Sprite", "Zero_Blowcock" ,
                 "True", Null(),
                 )
         subpixel True
@@ -1541,7 +1541,7 @@ image Storm_Sex_Static:
         block:
             pause 0.6
             ease 1.8 ypos -125
-            ease 0.5 ypos -130
+            ease .5 ypos -130
             pause 0.3
             ease 1.8 ypos -140
             repeat
@@ -1559,7 +1559,7 @@ image Storm_Sex_Static:
 
         subpixel True
         ConditionSwitch(
-                "Player.sprite", "Zero_cock_titjob" ,
+                "Player.Sprite", "Zero_Blowcock" ,
                 "True", Null(),
                 )
         subpixel True
@@ -1570,15 +1570,15 @@ image Storm_Sex_Static:
         rotate 10
         block:
             pause 1
-            ease 0.4 rotate 9
-            ease 0.2 rotate 10
+            ease .4 rotate 9
+            ease .2 rotate 10
             repeat
     contains:
 
         subpixel True
         ConditionSwitch(
 
-                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
+                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
                 "True", Null(),
                 )
         pos (0,-140)
@@ -1598,7 +1598,7 @@ image Storm_Sex_Static:
 
 
 
-image Storm_Sex_Fucking_Speed0:
+image Storm_Sex_Fucking_action_speed0:
 
     contains:
 
@@ -1620,7 +1620,7 @@ image Storm_Sex_Fucking_Speed0:
             pause 0.2
             ease 2 ypos -120
 
-            ease 0.9 ypos -130
+            ease .9 ypos -130
             pause 0.1
             ease 1.8 ypos -180
             repeat
@@ -1649,7 +1649,7 @@ image Storm_Sex_Fucking_Zero_Anim0:
         block:
             pause 0.2
             easeout 1 ypos 20
-            easein 0.8 ypos 10
+            easein .8 ypos 10
             pause 1.4
             easeout 0.6 ypos 10
             easein 1 ypos 40
@@ -1660,7 +1660,7 @@ image Storm_Sex_Fucking_Zero_Anim0:
 
 
 
-image Storm_Sex_Fucking_Speed1:
+image Storm_Sex_Fucking_action_speed1:
 
     contains:
 
@@ -1711,7 +1711,7 @@ image Storm_Sex_Fucking_Zero_Anim1:
             pause 0.2
 
             ease 2 ypos -10
-            pause 0.8
+            pause .8
             ease 2 ypos 40
             repeat
 
@@ -1737,42 +1737,42 @@ image Storm_Sex_Heading_Pussy:
         anchor (0.5,0)
         transform_anchor True
         xoffset 560
-        xzoom 0.7
+        xzoom .7
         block:
             pause 0.2
             ease 1.2 xzoom 1
-            ease 0.4 xzoom 0.9
+            ease .4 xzoom .9
             pause 1.2
-            ease 0.2 xzoom 1
-            ease 1.8 xzoom 0.7
+            ease .2 xzoom 1
+            ease 1.8 xzoom .7
             repeat
 
 image Storm_Pussy_Spunk_Heading:
 
     contains:
         ConditionSwitch(
-                "'in' in StormX.spunk and Player.sprite and Player.cock_position == 'in' and action_speed == 1", "images/StormSex/Storm_Sex_Spunk_Pussy_Over.png",
+                "'in' in StormX.spunk and Player.Sprite and Player.Cock == 'in' and action_speed == 1", "images/StormSex/Storm_Sex_Spunk_Pussy_Over.png",
                 "True", Null(),
                 )
         anchor (0.5,0)
         transform_anchor True
         xoffset 560
         yoffset 5
-        xzoom 0.7
+        xzoom .7
         block:
             pause 0.2
             ease 1.2 xzoom 1
-            ease 0.4 xzoom 0.9
+            ease .4 xzoom .9
             pause 1.2
-            ease 0.2 xzoom 1
-            ease 1.8 xzoom 0.7
+            ease .2 xzoom 1
+            ease 1.8 xzoom .7
             repeat
 
 
 
 
 
-image Storm_Sex_Fucking_Speed2:
+image Storm_Sex_Fucking_action_speed2:
 
     contains:
 
@@ -1829,7 +1829,7 @@ image Storm_Sex_Fucking_Zero_Anim2:
             pause 0.2
             ease 0.95 ypos -145
             ease 0.25 ypos -140
-            pause 0.8
+            pause .8
             ease 2 ypos -10
             repeat
 
@@ -1837,7 +1837,7 @@ image Storm_Sex_Fucking_Zero_Anim2:
 
 
 
-image Storm_Sex_Fucking_Speed3:
+image Storm_Sex_Fucking_action_speed3:
 
     contains:
 
@@ -1845,9 +1845,9 @@ image Storm_Sex_Fucking_Speed3:
         "Storm_Sex_Body"
         pos (0,-100)
         block:
-            ease 0.5 ypos 0
-            pause 0.4
-            ease 0.9 ypos -100
+            ease .5 ypos 0
+            pause .4
+            ease .9 ypos -100
             repeat
     contains:
 
@@ -1922,16 +1922,16 @@ image Storm_Sex_Anus:
     contains:
 
         ConditionSwitch(
-                "not Player.sprite or Player.cock_position != 'anal'", Null(),
+                "not Player.Sprite or Player.Cock != 'anal'", Null(),
                 "action_speed >= 3",  AlphaMask("Storm_Sex_Anal_Zero_Anim3", "Storm_Sex_Anal_Mask"),
                 "action_speed >= 2", AlphaMask("Storm_Sex_Anal_Zero_Anim2", "Storm_Sex_Anal_Mask"),
-                "action_speed ", AlphaMask("Storm_Sex_Anal_Zero_Anim1", "Storm_Sex_Anal_Mask"),
+                "action_speed", AlphaMask("Storm_Sex_Anal_Zero_Anim1", "Storm_Sex_Anal_Mask"),
                 "True", AlphaMask("Storm_Sex_Anal_Zero_Anim0", "Storm_Sex_Anal_Mask"),
                 )
     contains:
 
         ConditionSwitch(
-                "'anal' not in StormX.spunk or not Player.sprite or Player.cock_position != 'anal' or not action_speed", Null(),
+                "'anal' not in StormX.spunk or not Player.Sprite or Player.Cock != 'anal' or not action_speed", Null(),
                 "action_speed == 1", "Storm_Sex_Anal_Spunk_Heading_Over",
                 "True", "images/StormSex/Storm_Sex_Spunk_Anal_Over.png",
                 )
@@ -1943,9 +1943,9 @@ image Storm_Sex_Anal_Spunk_Heading_Over:
     xzoom 0.8
     block:
 
-        ease 0.75 xzoom 1.0
+        ease .75 xzoom 1.0
         pause 1.75
-        ease 0.25 xzoom 1.0
+        ease .25 xzoom 1.0
         ease 2.25 xzoom 0.8
         repeat
 image Storm_Sex_Anal_Spunk_Heading_Under:
@@ -1955,10 +1955,10 @@ image Storm_Sex_Anal_Spunk_Heading_Under:
     xzoom 0.6
     block:
 
-        ease 0.75 xzoom 1.0
-        ease 0.25 xzoom 0.95
+        ease .75 xzoom 1.0
+        ease .25 xzoom 0.95
         pause 1.50
-        ease 0.25 xzoom 1.0
+        ease .25 xzoom 1.0
         ease 2.25 xzoom 0.6
         repeat
 
@@ -1971,7 +1971,7 @@ image Storm_Sex_Anal_Mask:
 
 
 
-image Storm_Sex_Anal_Speed0:
+image Storm_Sex_Anal_action_speed0:
 
     contains:
 
@@ -1996,10 +1996,10 @@ image Storm_Sex_Anal_Speed0:
         pos (0,-235)
         parallel:
             pause 0.1
-            ease 0.9 xpos 10
-            ease 0.3 xpos 7
-            ease 0.9 xpos -20
-            ease 0.3 xpos -14
+            ease .9 xpos 10
+            ease .3 xpos 7
+            ease .9 xpos -20
+            ease .3 xpos -14
             repeat
     contains:
 
@@ -2029,8 +2029,8 @@ image Storm_Sex_Anal_Zero_Anim0:
     contains:
         subpixel True
         ConditionSwitch(
-                "not Player.sprite", Null(),
-                "True", "Zero_cock_titjob" ,
+                "not Player.Sprite", Null(),
+                "True", "Zero_Blowcock" ,
                 )
         subpixel True
         anchor (0.5,1.0)
@@ -2052,7 +2052,7 @@ image Storm_Sex_Anal_Zero_Anim0:
         parallel:
             pause 0.2
             ease 2 ypos 90
-            pause 0.8
+            pause .8
             ease 2 ypos 95
             repeat
 
@@ -2061,7 +2061,7 @@ image Storm_Sex_Anal_Zero_Anim0:
 
 
 
-image Storm_Sex_Anal_Speed1:
+image Storm_Sex_Anal_action_speed1:
 
     contains:
 
@@ -2126,7 +2126,7 @@ image Storm_Sex_Anal_Zero_Anim1:
             pause 0.2
 
             ease 2 ypos 40
-            pause 0.8
+            pause .8
             ease 2 ypos 90
             repeat
 
@@ -2135,7 +2135,7 @@ image Storm_Sex_Anal_Zero_Anim1:
 
 
 
-image Storm_Sex_Anal_Speed2:
+image Storm_Sex_Anal_action_speed2:
 
     contains:
 
@@ -2192,7 +2192,7 @@ image Storm_Sex_Anal_Zero_Anim2:
             pause 0.2
             ease 0.95 ypos -145
             ease 0.25 ypos -140
-            pause 0.8
+            pause .8
             ease 2 ypos -10
             repeat
 
@@ -2201,7 +2201,7 @@ image Storm_Sex_Anal_Zero_Anim2:
 
 
 
-image Storm_Sex_Anal_Speed3:
+image Storm_Sex_Anal_action_speed3:
 
     contains:
 
@@ -2209,9 +2209,9 @@ image Storm_Sex_Anal_Speed3:
         "Storm_Sex_Body"
         pos (0,-100)
         block:
-            ease 0.5 ypos 0
-            pause 0.4
-            ease 0.9 ypos -100
+            ease .5 ypos 0
+            pause .4
+            ease .9 ypos -100
             repeat
     contains:
 
@@ -2265,7 +2265,7 @@ image Storm_Sex_Anal_Zero_Anim3:
 
 
 
-image Storm_Sex_Hotdog_Speed1:
+image Storm_Sex_Hotdog_action_speed1:
 
     contains:
 
@@ -2286,7 +2286,7 @@ image Storm_Sex_Hotdog_Speed1:
         block:
             pause 0.2
             ease 2 ypos -75
-            ease 0.7 ypos -85
+            ease .7 ypos -85
             pause 0.1
             ease 2 ypos -160
             repeat
@@ -2312,14 +2312,14 @@ image Storm_Sex_Hotdog_Speed1:
             pause 1
             ease 1 ypos -145
             ease 0.2 ypos -140
-            pause 0.6
+            pause .6
             repeat
     contains:
 
         subpixel True
         ConditionSwitch(
 
-                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
+                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
                 "True", Null(),
                 )
         pos (0,-160)
@@ -2337,7 +2337,7 @@ image Storm_Sex_Hotdog_Speed1:
 
 
 
-image Storm_Sex_Hotdog_Speed2:
+image Storm_Sex_Hotdog_action_speed2:
 
     contains:
 
@@ -2357,8 +2357,8 @@ image Storm_Sex_Hotdog_Speed2:
         pos (0,-160)
         block:
             pause 0.1
-            ease 0.9 ypos -70
-            ease 0.5 ypos -80
+            ease .9 ypos -70
+            ease .5 ypos -80
             ease 1 ypos -160
             repeat
     contains:
@@ -2390,7 +2390,7 @@ image Storm_Sex_Hotdog_Speed2:
         subpixel True
         ConditionSwitch(
 
-                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
+                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
                 "True", Null(),
                 )
         pos (0,-160)
@@ -2411,7 +2411,7 @@ image Storm_Sex_Hotdog_Speed2:
 
 
 
-image Storm_Sex_FJ_Speed0:
+image Storm_Sex_FJ_action_speed0:
 
     contains:
 
@@ -2458,7 +2458,7 @@ image Storm_Sex_FJ_Speed0:
         subpixel True
         ConditionSwitch(
 
-                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
+                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
                 "True", Null(),
                 )
         pos (0,-200)
@@ -2476,7 +2476,7 @@ image Storm_Sex_FJ_Speed0:
 
 
 
-image Storm_Sex_FJ_Speed1:
+image Storm_Sex_FJ_action_speed1:
 
     contains:
 
@@ -2529,7 +2529,7 @@ image Storm_Sex_FJ_Speed1:
         subpixel True
         ConditionSwitch(
 
-                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
+                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
                 "True", Null(),
                 )
         pos (0,-200)
@@ -2547,7 +2547,7 @@ image Storm_Sex_FJ_Speed1:
 
 
 
-image Storm_Sex_FJ_Speed2:
+image Storm_Sex_FJ_action_speed2:
 
     contains:
 
@@ -2600,7 +2600,7 @@ image Storm_Sex_FJ_Speed2:
         subpixel True
         ConditionSwitch(
 
-                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
+                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
                 "True", Null(),
                 )
         pos (0,-200)
@@ -2616,46 +2616,46 @@ image Storm_Sex_FJ_Speed2:
 
 
 
-label Storm_sex_launch(line=primary_action):
-    $ girl_offhand_action = None if girl_offhand_action == "handjob" else girl_offhand_action
+label Storm_Sex_Launch(Line=primary_action):
+    $ girl_offhand_action = 0 if girl_offhand_action == "hand" else girl_offhand_action
 
 
-    $ StormX.pose = "sex"
+    $ StormX.Pose = "sex"
 
 
-    $ Player.sprite = 1
-    $ line = "solo" if not line else line
-    if line == "sex":
-        $ Player.cock_position = "sex"
-        if offhand_action in ("fondle_pussy","dildo_pussy","eat_pussy"):
-            $ offhand_action = None
-    elif line == "anal":
-        $ Player.cock_position = "anal"
-        if offhand_action in ("finger_ass","dildo_anal","eat_ass"):
-            $ offhand_action = None
-    elif line == "hotdog":
-        if StormX.PantsNum() == 5:
+    $ Player.Sprite = 1
+    $ Line = "solo" if not Line else Line
+    if Line == "sex":
+        $ Player.Cock = "in"
+        if offhand_action in ("fondle pussy","dildo pussy","lick pussy"):
+            $ offhand_action = 0
+    elif Line == "anal":
+        $ Player.Cock = "anal"
+        if offhand_action in ("insert ass","dildo anal","lick ass"):
+            $ offhand_action = 0
+    elif Line == "hotdog":
+        if StormX.legs_number() == 5:
             $ StormX.upskirt = 1
-        $ Player.cock_position = "out"
-    elif line == "footjob":
-        $ show_feet = 1
-        $ Player.cock_position = "footjob"
-    elif line == "massage":
-        $ Player.sprite = 0
-        $ Player.cock_position = 0
+        $ Player.Cock = "out"
+    elif Line == "foot":
+        $ ShowFeet = 1
+        $ Player.Cock = "foot"
+    elif Line == "massage":
+        $ Player.Sprite = 0
+        $ Player.Cock = 0
     else:
-        $ Player.sprite = 0
-        $ Player.cock_position = "out"
+        $ Player.Sprite = 0
+        $ Player.Cock = "out"
         $ action_speed = 0
-    $ primary_action = line
+    $ primary_action = Line
 
-    if StormX.pose == "doggy":
-        call Storm_Doggy_Launch (line)
+    if StormX.Pose == "doggy":
+        call Storm_Doggy_Launch (Line)
         return
     if renpy.showing("Storm_SexSprite"):
         return
     $ action_speed = 0
-    call Storm_Hide (1)
+    call hide_girl(StormX, hide_sprite = True)
     show Storm_SexSprite zorder 150
     with dissolve
     return
@@ -2668,7 +2668,7 @@ label Storm_Sex_Reset:
         return
     $ StormX.arm_pose = 2
     hide Storm_SexSprite
-    call Storm_Hide
+    call hide_girl(StormX)
 
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
@@ -2685,13 +2685,13 @@ label Storm_Sex_Reset:
 
 
 
-image Storm_handjob_under:
+image Storm_Hand_Under:
     "images/StormSprite/handstorm2.png"
     anchor (0.5,0.5)
     pos (-10,0)
     offset (0,130)
 
-image Storm_handjob_over:
+image Storm_Hand_Over:
     "images/StormSprite/handstorm1.png"
     anchor (0.5,0.5)
     pos (-10,0)
@@ -2702,7 +2702,7 @@ transform Storm_Hand_1():
     pos (-20,-100)
     rotate 5
     block:
-        ease 0.5 pos (0,150) rotate -5
+        ease .5 pos (0,150) rotate -5
         pause 0.25
         ease 1.0 pos (-20,-100) rotate 5
         pause 0.1
@@ -2748,7 +2748,7 @@ transform Handcock_1J():
     ypos 400
     rotate 0
     block:
-        ease 0.5 ypos 450 rotate -2
+        ease .5 ypos 450 rotate -2
         pause 0.25
         ease 1.0 ypos 400 rotate 0
         pause 0.1
@@ -2760,8 +2760,8 @@ transform Handcock_2J():
     ypos 400
     rotate 0
     block:
-        ease 0.2 ypos 430 rotate -3
-        ease 0.5 ypos 400 rotate 0
+        ease .2 ypos 430 rotate -3
+        ease .5 ypos 400 rotate 0
         pause 0.1
         repeat
 
@@ -2769,39 +2769,39 @@ image Storm_HJ_Animation:
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Storm_handjob_under"),
-            "action_speed == 1", At("Storm_handjob_under", Storm_Hand_1()),
-            "action_speed >= 2", At("Storm_handjob_under", Storm_Hand_2()),
-            "action_speed ", Null(),
+            "not action_speed", Transform("Storm_Hand_Under"),
+            "action_speed == 1", At("Storm_Hand_Under", Storm_Hand_1()),
+            "action_speed >= 2", At("Storm_Hand_Under", Storm_Hand_2()),
+            "action_speed", Null(),
             ),
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Zero_cock_handjob"),
-            "action_speed == 1", At("Zero_cock_handjob", Handcock_1J()),
-            "action_speed >= 2", At("Zero_cock_handjob", Handcock_2J()),
-            "action_speed ", Null(),
+            "not action_speed", Transform("Zero_Handcock"),
+            "action_speed == 1", At("Zero_Handcock", Handcock_1J()),
+            "action_speed >= 2", At("Zero_Handcock", Handcock_2J()),
+            "action_speed", Null(),
             ),
         offset (0,0)
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Storm_handjob_over"),
-            "action_speed == 1", At("Storm_handjob_over", Storm_Hand_1()),
-            "action_speed >= 2", At("Storm_handjob_over", Storm_Hand_2()),
-            "action_speed ", Null(),
+            "not action_speed", Transform("Storm_Hand_Over"),
+            "action_speed == 1", At("Storm_Hand_Over", Storm_Hand_1()),
+            "action_speed >= 2", At("Storm_Hand_Over", Storm_Hand_2()),
+            "action_speed", Null(),
             ),
     anchor (0.51, -1.3)
     zoom 0.4
 
 
-label Storm_HJ_Launch(line=primary_action):
+label Storm_HJ_Launch(Line=primary_action):
     $ StormX.arm_pose = 2
     if renpy.showing("Storm_HJ_Animation"):
-        $ primary_action = "handjob"
+        $ primary_action = "hand"
         return
-    call Storm_Hide
-    if line == "L":
+    call hide_girl(StormX)
+    if Line == "L":
         show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (-150,350)
@@ -2812,17 +2812,17 @@ label Storm_HJ_Launch(line=primary_action):
         with dissolve
 
     $ action_speed = 0
-    if line != "cum":
-        $ primary_action = "handjob"
+    if Line != "cum":
+        $ primary_action = "hand"
     else:
         $ action_speed = 1
-    pause 0.5
+    pause .5
     show Storm_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
 
         offset (250,250)
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_right):
         alpha 1
-        ease 0.5 zoom 1.7 offset (-150,200)
+        ease .5 zoom 1.7 offset (-150,200)
     return
 
 label Storm_HJ_Reset:
@@ -2831,16 +2831,16 @@ label Storm_HJ_Reset:
     $ action_speed = 0
     $ StormX.arm_pose = 1
     hide Storm_HJ_Animation with easeoutbottom
-    call Storm_Hide
+    call hide_girl(StormX)
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
         zoom 1.7 offset (-150,200)
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
         ease 1 zoom 1.5 offset (-150,50)
-        pause 0.5
-        ease 0.5 zoom 1 offset (0,0)
-        pause 0.5
+        pause .5
+        ease .5 zoom 1 offset (0,0)
+        pause .5
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
@@ -2869,10 +2869,10 @@ image Storm_BJ_Animation:
             "True", Null(),
             ),
         )
-    zoom 0.55
+    zoom .55
     anchor (.5,.5)
 
-image Storm_BJ_hairback:
+image Storm_BJ_HairBack:
 
     ConditionSwitch(
             "(StormX.hair == 'long' and StormX.wet) or StormX.hair == '_wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Under.png",
@@ -2938,7 +2938,7 @@ image Storm_BJ_Head:
 
 
 
-            "StormX.blushing > 1", "images/StormBJFace/Storm_BJ_Head_Blush2.png",
+            "StormX.blushing == '_blush2'", "images/StormBJFace/Storm_BJ_Head_Blush2.png",
 
             "True", "images/StormBJFace/Storm_BJ_Head_Blush0.png"
             ),
@@ -2955,22 +2955,22 @@ image Storm_BJ_Head:
             "action_speed and renpy.showing('Storm_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/StormBJFace/Storm_BJ_Mouth_Tongue.png",
-                    "(action_speed== 2 or action_speed == 5)", Null(),
+                    "(action_speed == 2 or action_speed == 5)", Null(),
                     "action_speed == 3", "images/StormBJFace/Storm_BJ_Mouth_Sucking.png",
                     "action_speed == 4", "images/StormBJFace/Storm_BJ_Mouth_Sucking.png",
                     "action_speed == 6", "images/StormBJFace/Storm_BJ_Mouth_Sucking.png",
                     ),
             "action_speed == 3 and renpy.showing('Storm_TJ_Animation')", "images/StormBJFace/Storm_BJ_Mouth_Tongue.png",
-            "StormX.mouth == 'normal'", "images/StormBJFace/Storm_BJ_Mouth_Smile.png",
-            "StormX.mouth == 'lipbite'", "images/StormBJFace/Storm_BJ_Mouth_Lipbite.png",
-            "StormX.mouth == 'sucking'", "images/StormBJFace/Storm_BJ_Mouth_Tongue.png",
-            "StormX.mouth == 'kiss'", "images/StormBJFace/Storm_BJ_Mouth_Kiss.png",
-            "StormX.mouth == 'sad'", "images/StormBJFace/Storm_BJ_Mouth_Sad.png",
-            "StormX.mouth == 'smile'", "images/StormBJFace/Storm_BJ_Mouth_Smile.png",
-            "StormX.mouth == 'smirk'", "images/StormBJFace/Storm_BJ_Mouth_Smirk.png",
-            "StormX.mouth == 'grimace'", "images/StormBJFace/Storm_BJ_Mouth_Smile.png",
-            "StormX.mouth == 'surprised'", "images/StormBJFace/Storm_BJ_Mouth_Kiss.png",
-            "StormX.mouth == 'tongue'", "images/StormBJFace/Storm_BJ_Mouth_Tongue.png",
+            "StormX.mouth == '_normal'", "images/StormBJFace/Storm_BJ_Mouth_Smile.png",
+            "StormX.mouth == '_lipbite'", "images/StormBJFace/Storm_BJ_Mouth_Lipbite.png",
+            "StormX.mouth == '_sucking'", "images/StormBJFace/Storm_BJ_Mouth_Tongue.png",
+            "StormX.mouth == '_kiss'", "images/StormBJFace/Storm_BJ_Mouth_Kiss.png",
+            "StormX.mouth == '_sad'", "images/StormBJFace/Storm_BJ_Mouth_Sad.png",
+            "StormX.mouth == '_smile'", "images/StormBJFace/Storm_BJ_Mouth_Smile.png",
+            "StormX.mouth == '_smirk'", "images/StormBJFace/Storm_BJ_Mouth_Smirk.png",
+            "StormX.mouth == '_grimace'", "images/StormBJFace/Storm_BJ_Mouth_Smile.png",
+            "StormX.mouth == '_surprised'", "images/StormBJFace/Storm_BJ_Mouth_Kiss.png",
+            "StormX.mouth == '_tongue'", "images/StormBJFace/Storm_BJ_Mouth_Tongue.png",
             "True", "images/StormBJFace/Storm_BJ_Mouth_Smile.png",
             ),
         (428,555), ConditionSwitch(
@@ -2988,28 +2988,28 @@ image Storm_BJ_Head:
             "action_speed and renpy.showing('Storm_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/StormBJFace/Storm_BJ_Spunk_Tongue.png",
-                    "(action_speed== 2 or action_speed == 5)", Null(),
+                    "(action_speed == 2 or action_speed == 5)", Null(),
                     "action_speed == 3", "images/StormBJFace/Storm_BJ_Spunk_SuckingUnder.png",
                     "action_speed == 4", "images/StormBJFace/Storm_BJ_Spunk_SuckingUnder.png",
                     "action_speed == 6", "images/StormBJFace/Storm_BJ_Spunk_SuckingUnder.png",
                     ),
-            "StormX.mouth == 'normal'", "images/StormBJFace/Storm_BJ_Spunk_Smile.png",
+            "StormX.mouth == '_normal'", "images/StormBJFace/Storm_BJ_Spunk_Smile.png",
 
 
 
-            "StormX.mouth == 'smile'", "images/StormBJFace/Storm_BJ_Spunk_Smile.png",
+            "StormX.mouth == '_smile'", "images/StormBJFace/Storm_BJ_Spunk_Smile.png",
 
 
-            "StormX.mouth == 'tongue'", "images/StormBJFace/Storm_BJ_Spunk_Tongue.png",
-            "StormX.mouth == 'sucking'", "images/StormBJFace/Storm_BJ_Spunk_SuckingUnder.png",
+            "StormX.mouth == '_tongue'", "images/StormBJFace/Storm_BJ_Spunk_Tongue.png",
+            "StormX.mouth == '_sucking'", "images/StormBJFace/Storm_BJ_Spunk_SuckingUnder.png",
             "True", "images/StormBJFace/Storm_BJ_Spunk_Kiss.png",
             ),
         (0,0), ConditionSwitch(
 
-            "StormX.brows == 'angry'", "images/StormBJFace/Storm_BJ_Brows_Angry.png",
-            "StormX.brows == 'sad'", "images/StormBJFace/Storm_BJ_Brows_Sad.png",
-            "StormX.brows == 'surprised'", "images/StormBJFace/Storm_BJ_Brows_Surprised.png",
-            "StormX.brows == 'confused'", "images/StormBJFace/Storm_BJ_Brows_Confused.png",
+            "StormX.brows == '_angry'", "images/StormBJFace/Storm_BJ_Brows_Angry.png",
+            "StormX.brows == '_sad'", "images/StormBJFace/Storm_BJ_Brows_Sad.png",
+            "StormX.brows == '_surprised'", "images/StormBJFace/Storm_BJ_Brows_Surprised.png",
+            "StormX.brows == '_confused'", "images/StormBJFace/Storm_BJ_Brows_Confused.png",
             "True", "images/StormBJFace/Storm_BJ_Brows_Normal.png",
             ),
         (0,0), "Storm BJ Blink",
@@ -3053,15 +3053,15 @@ image Storm_Tester:
 image Storm BJ Blink:
 
     ConditionSwitch(
-            "StormX.eyes == 'normal'", "images/StormBJFace/Storm_BJ_Eyes_Normal.png",
-            "StormX.eyes == 'sexy'", "images/StormBJFace/Storm_BJ_Eyes_Sexy.png",
-            "StormX.eyes == 'closed'", "images/StormBJFace/Storm_BJ_Eyes_Closed.png",
-            "StormX.eyes == 'surprised'", "images/StormBJFace/Storm_BJ_Eyes_Surprised.png",
-            "StormX.eyes == 'side'", "images/StormBJFace/Storm_BJ_Eyes_Side.png",
-            "StormX.eyes == 'stunned'", "images/StormBJFace/Storm_BJ_Eyes_Stunned.png",
-            "StormX.eyes == 'down'", "images/StormBJFace/Storm_BJ_Eyes_Down.png",
-            "StormX.eyes == 'manic'", "images/StormBJFace/Storm_BJ_Eyes_Surprised.png",
-            "StormX.eyes == 'squint'", "images/StormBJFace/Storm_BJ_Eyes_Sexy.png",
+            "StormX.eyes == '_normal'", "images/StormBJFace/Storm_BJ_Eyes_Normal.png",
+            "StormX.eyes == '_sexy'", "images/StormBJFace/Storm_BJ_Eyes_Sexy.png",
+            "StormX.eyes == '_closed'", "images/StormBJFace/Storm_BJ_Eyes_Closed.png",
+            "StormX.eyes == '_surprised'", "images/StormBJFace/Storm_BJ_Eyes_Surprised.png",
+            "StormX.eyes == '_side'", "images/StormBJFace/Storm_BJ_Eyes_Side.png",
+            "StormX.eyes == '_stunned'", "images/StormBJFace/Storm_BJ_Eyes_Stunned.png",
+            "StormX.eyes == '_down'", "images/StormBJFace/Storm_BJ_Eyes_Down.png",
+            "StormX.eyes == '_manic'", "images/StormBJFace/Storm_BJ_Eyes_Surprised.png",
+            "StormX.eyes == '_squint'", "images/StormBJFace/Storm_BJ_Eyes_Sexy.png",
             "True", "images/StormBJFace/Storm_BJ_Eyes_Normal.png",
             ),
     choice:
@@ -3071,7 +3071,7 @@ image Storm BJ Blink:
     choice:
         3
     "images/StormBJFace/Storm_BJ_Eyes_Closed.png"
-    0.25
+    .25
     repeat
 
 image Storm_BJ_MouthHeading:
@@ -3099,17 +3099,17 @@ image Storm_BJ_MouthHeading:
     subpixel True
     zoom 0.58
     block:
-        pause 0.20
-        easeout 0.15 zoom 0.6
-        linear 0.15 zoom 0.60
-        easein 0.25 zoom 0.65
-        pause 0.25
+        pause .20
+        easeout .15 zoom 0.6
+        linear .15 zoom 0.60
+        easein .25 zoom 0.65
+        pause .25
 
-        pause 0.40
-        easeout 0.40 zoom 0.58
-        linear 0.10 zoom 0.66
-        easein 0.30 zoom 0.45
-        pause 0.30
+        pause .40
+        easeout .40 zoom 0.58
+        linear .10 zoom 0.66
+        easein .30 zoom 0.45
+        pause .30
 
         repeat
 
@@ -3122,14 +3122,14 @@ image Storm_BJ_MouthCumHigh:
     subpixel True
     zoom 0.65
     block:
-        pause 0.20
-        ease 0.50 zoom 0.58
-        pause 0.60
-        ease 0.30 zoom 0.62
-        pause 0.10
-        ease 0.30 zoom 0.58
-        pause 0.20
-        ease 0.30 zoom 0.62
+        pause .20
+        ease .50 zoom 0.58
+        pause .60
+        ease .30 zoom 0.62
+        pause .10
+        ease .30 zoom 0.58
+        pause .20
+        ease .30 zoom 0.62
         repeat
 
 image Storm_BJ_MouthSuckingMask:
@@ -3181,17 +3181,17 @@ image Storm_BJ_MouthHeadingComposite:
     subpixel True
     zoom 0.58
     block:
-        pause 0.20
-        easeout 0.15 zoom 0.6
-        linear 0.15 zoom 0.60
-        easein 0.25 zoom 0.65
-        pause 0.25
+        pause .20
+        easeout .15 zoom 0.6
+        linear .15 zoom 0.60
+        easein .25 zoom 0.65
+        pause .25
 
-        pause 0.40
-        easeout 0.40 zoom 0.58
-        linear 0.10 zoom 0.66
-        easein 0.30 zoom 0.45
-        pause 0.30
+        pause .40
+        easeout .40 zoom 0.58
+        linear .10 zoom 0.66
+        easein .30 zoom 0.45
+        pause .30
 
         repeat
 
@@ -3208,17 +3208,17 @@ image StormHeadingSpunk:
     subpixel True
     zoom 0.58
     block:
-        pause 0.20
-        easeout 0.15 zoom 0.6
-        linear 0.15 zoom 0.60
-        easein 0.25 zoom 0.65
-        pause 0.25
+        pause .20
+        easeout .15 zoom 0.6
+        linear .15 zoom 0.60
+        easein .25 zoom 0.65
+        pause .25
 
-        pause 0.40
-        easeout 0.40 zoom 0.58
-        linear 0.10 zoom 0.66
-        easein 0.30 zoom 0.45
-        pause 0.30
+        pause .40
+        easeout .40 zoom 0.58
+        linear .10 zoom 0.66
+        easein .30 zoom 0.45
+        pause .30
 
         repeat
 
@@ -3233,14 +3233,14 @@ image Storm_BJ_MouthCumHighComposite:
     offset (30,-30)
     zoom 0.65
     block:
-        pause 0.20
-        ease 0.50 zoom 0.58
-        pause 0.60
-        ease 0.30 zoom 0.62
-        pause 0.10
-        ease 0.30 zoom 0.58
-        pause 0.20
-        ease 0.30 zoom 0.62
+        pause .20
+        ease .50 zoom 0.58
+        pause .60
+        ease .30 zoom 0.62
+        pause .10
+        ease .30 zoom 0.58
+        pause .20
+        ease .30 zoom 0.62
         repeat
 
 image StormCumHighSpunk:
@@ -3253,14 +3253,14 @@ image StormCumHighSpunk:
     subpixel True
     zoom 0.65
     block:
-        pause 0.20
-        ease 0.50 zoom 0.58
-        pause 0.60
-        ease 0.30 zoom 0.62
-        pause 0.10
-        ease 0.30 zoom 0.58
-        pause 0.20
-        ease 0.30 zoom 0.62
+        pause .20
+        ease .50 zoom 0.58
+        pause .60
+        ease .30 zoom 0.62
+        pause .10
+        ease .30 zoom 0.58
+        pause .20
+        ease .30 zoom 0.62
         repeat
 
 image StormSuckingSpunk:
@@ -3344,7 +3344,7 @@ image Storm_BJ_Anim0:
 
     contains:
 
-        "Storm_BJ_hairback"
+        "Storm_BJ_HairBack"
         subpixel True
         offset (350,210)
     contains:
@@ -3359,7 +3359,7 @@ image Storm_BJ_Anim0:
         offset (350,210)
     contains:
 
-        "Zero_cock_blowjob"
+        "Blowcock"
         anchor (.5,.5)
         rotate -10
         offset (650,370)
@@ -3369,14 +3369,14 @@ image Storm_BJ_Anim1:
 
     contains:
 
-        "Storm_BJ_hairback"
+        "Storm_BJ_HairBack"
         subpixel True
 
         offset (350,175)
         block:
             ease 2.5 offset (375,310)
             ease 2 offset (350,175)
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -3386,7 +3386,7 @@ image Storm_BJ_Anim1:
         block:
             ease 2.5 offset (30,90)
             ease 2 offset (0,-35)
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -3396,18 +3396,18 @@ image Storm_BJ_Anim1:
         block:
             ease 2.5 offset (375,310)
             ease 2 offset (350,175)
-            pause 0.5
+            pause .5
             repeat
     contains:
 
-        "Zero_cock_blowjob"
+        "Blowcock"
         subpixel True
         anchor (.5,.5)
         offset (650,370)
         rotate 0
         block:
             ease 2 rotate -5
-            pause 0.5
+            pause .5
             ease 2.5 rotate 0
             repeat
 
@@ -3417,7 +3417,7 @@ image Storm_BJ_Anim2:
 
     contains:
 
-        "Storm_BJ_hairback"
+        "Storm_BJ_HairBack"
         subpixel True
 
         offset (350,190)
@@ -3445,7 +3445,7 @@ image Storm_BJ_Anim2:
             repeat
     contains:
 
-        "Zero_cock_blowjob"
+        "Blowcock"
         subpixel True
         anchor (.5,.5)
         rotate 0
@@ -3482,7 +3482,7 @@ image Storm_BJ_Anim3:
 
     contains:
 
-        "Storm_BJ_hairback"
+        "Storm_BJ_HairBack"
         subpixel True
         offset (350,260)
         block:
@@ -3510,7 +3510,7 @@ image Storm_BJ_Anim3:
             repeat
     contains:
 
-        "Zero_cock_blowjob"
+        "Blowcock"
         subpixel True
         anchor (.5,.5)
         rotate 0
@@ -3544,14 +3544,14 @@ image Storm_BJ_Anim4:
 
     contains:
 
-        "Storm_BJ_hairback"
+        "Storm_BJ_HairBack"
         subpixel True
 
         offset (350,360)
         block:
             subpixel True
             ease 1 yoffset 560
-            pause 0.5
+            pause .5
             ease 2 yoffset 360
             repeat
     contains:
@@ -3562,7 +3562,7 @@ image Storm_BJ_Anim4:
         block:
             subpixel True
             ease 1.2 yoffset 250
-            pause 0.5
+            pause .5
             ease 1.8 yoffset 100
             repeat
     contains:
@@ -3573,12 +3573,12 @@ image Storm_BJ_Anim4:
         block:
             subpixel True
             ease 1 yoffset 560
-            pause 0.5
+            pause .5
             ease 2 yoffset 360
             repeat
     contains:
 
-        "Zero_cock_blowjob"
+        "Blowcock"
         subpixel True
         anchor (.5,.5)
         rotate 0
@@ -3592,7 +3592,7 @@ image Storm_BJ_Anim4:
         block:
             subpixel True
             ease 1 yoffset -90
-            pause 0.5
+            pause .5
             ease 2 yoffset -290
             repeat
     contains:
@@ -3614,7 +3614,7 @@ image Storm_BJ_Anim4:
         block:
             subpixel True
             ease 1 yoffset 560
-            pause 0.5
+            pause .5
             ease 2 yoffset 360
             repeat
 
@@ -3624,7 +3624,7 @@ image Storm_BJ_Anim5:
 
     contains:
 
-        "Storm_BJ_hairback"
+        "Storm_BJ_HairBack"
         subpixel True
         offset (350,200)
         block:
@@ -3652,7 +3652,7 @@ image Storm_BJ_Anim5:
             repeat
     contains:
 
-        "Zero_cock_blowjob"
+        "Blowcock"
         subpixel True
         anchor (.5,.5)
         rotate 0
@@ -3680,13 +3680,13 @@ image Storm_BJ_Anim6:
 
     contains:
 
-        "Storm_BJ_hairback"
+        "Storm_BJ_HairBack"
         subpixel True
         offset (350,440)
         block:
             subpixel True
             ease 1 yoffset 460
-            pause 0.5
+            pause .5
             ease 2 yoffset 440
             repeat
     contains:
@@ -3697,7 +3697,7 @@ image Storm_BJ_Anim6:
         block:
             subpixel True
             ease 1.2 yoffset 200
-            pause 0.5
+            pause .5
             ease 1.8 yoffset 190
             repeat
     contains:
@@ -3709,12 +3709,12 @@ image Storm_BJ_Anim6:
         block:
             subpixel True
             ease 1 yoffset 460
-            pause 0.5
+            pause .5
             ease 2 yoffset 440
             repeat
     contains:
 
-        "Zero_cock_blowjob"
+        "Blowcock"
         subpixel True
         anchor (.5,.5)
         rotate 0
@@ -3728,7 +3728,7 @@ image Storm_BJ_Anim6:
         block:
             subpixel True
             ease 1 yoffset -190
-            pause 0.5
+            pause .5
             ease 2 yoffset -210
             repeat
     contains:
@@ -3743,7 +3743,7 @@ image Storm_BJ_Anim6:
         block:
             subpixel True
             ease 1 yoffset 460
-            pause 0.5
+            pause .5
             ease 2 yoffset 440
             repeat
 
@@ -3752,7 +3752,7 @@ image Storm_BJ_Anim6:
 
 
 
-label Storm_BJ_Launch(line=primary_action):
+label Storm_BJ_Launch(Line=primary_action):
     if renpy.showing("Storm_BJ_Animation"):
         return
 
@@ -3760,8 +3760,8 @@ label Storm_BJ_Launch(line=primary_action):
     if renpy.showing("Storm_TJ_Animation"):
         hide Storm_TJ_Animation
     else:
-        call Storm_Hide
-        if line == "L" or line == "cum":
+        call hide_girl(StormX)
+        if Line == "L" or Line == "cum":
             show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_center):
                 alpha 1
                 ease 1 zoom 2.5 offset (150,80)
@@ -3775,22 +3775,22 @@ label Storm_BJ_Launch(line=primary_action):
 
     $ action_speed = 0
 
-    if line != "cum":
-        $ primary_action = "blowjob"
+    if Line != "cum":
+        $ primary_action = "blow"
 
     show Storm_BJ_Animation zorder 150:
         pos (630,650)
-    if taboo and line == "L":
+    if Taboo and Line == "L":
         if len(Present) >= 2:
             if Present[0] != StormX:
-                "[StormX.name] looks back at [Present[0].name] to see if she's watching."
+                "[StormX.Name] looks back at [Present[0].Name] to see if she's watching."
             elif Present[1] != StormX:
-                "[StormX.name] looks back at [Present[1].name] to see if she's watching."
+                "[StormX.Name] looks back at [Present[1].Name] to see if she's watching."
         else:
-            "[StormX.name] looks around to see if anyone can see her."
+            "[StormX.Name] looks around to see if anyone can see her."
         "She then bends down and puts your cock to her mouth."
-    elif line == "L":
-        "[StormX.name] smoothly bends down and places your cock against her cheek."
+    elif Line == "L":
+        "[StormX.Name] smoothly bends down and places your cock against her cheek."
 
     return
 
@@ -3798,7 +3798,7 @@ label Storm_BJ_Reset:
     if not renpy.showing("Storm_BJ_Animation"):
         return
 
-    call Storm_Hide
+    call hide_girl(StormX)
     $ action_speed = 0
 
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_center):
@@ -3809,8 +3809,8 @@ label Storm_BJ_Reset:
     show Storm_Sprite zorder StormX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 offset (-50,50)
-        pause 0.2
-        ease 0.3 zoom 1 offset (0,0)
+        pause .2
+        ease .3 zoom 1 offset (0,0)
     pause 1.5
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
@@ -3829,7 +3829,7 @@ image Storm_TJ_Animation:
     contains:
         ConditionSwitch(
 
-                    "not Player.sprite","Storm_TJ_0",
+                    "not Player.Sprite","Storm_TJ_0",
                     "action_speed == 1", "Storm_TJ_1",
                     "action_speed == 3", "Storm_TJ_3",
                     "action_speed == 4", "Storm_TJ_4",
@@ -3837,18 +3837,18 @@ image Storm_TJ_Animation:
                     "action_speed >= 2", "Storm_TJ_2",
                     "True",       "Storm_TJ_0",
                     )
-    zoom 0.8
+    zoom .8
     transform_anchor True
     anchor (.5,.5)
 
 
 
 
-image Storm_TJ_hairback:
+image Storm_TJ_HairBack:
 
-    "Storm_BJ_hairback"
+    "Storm_BJ_HairBack"
     transform_anchor True
-    zoom 0.7
+    zoom .7
     anchor (0.5, 0.5)
     offset (30,-450)
     rotate 0
@@ -3857,7 +3857,7 @@ image Storm_TJ_Head:
 
     "Storm_BJ_Head"
     transform_anchor True
-    zoom 0.7
+    zoom .7
     anchor (0.5, 0.5)
     offset (30,-450)
     rotate 0
@@ -3887,16 +3887,16 @@ image Storm_TJ_HairTop:
 
 
     transform_anchor True
-    zoom 0.98
+    zoom .98
     anchor (0.5, 0.5)
     offset (30,-450)
     rotate 0
 
 image Storm_TJ_ZeroCock:
 
-    "Zero_cock_titjob"
+    "Zero_Blowcock"
     transform_anchor True
-    zoom 0.6
+    zoom .6
     anchor (0.5, 0.5)
     offset (30,50)
     rotate 0
@@ -3906,7 +3906,7 @@ image Storm_TJ_Body:
     contains:
         ConditionSwitch(
                         "StormX.top or renpy.showing('Storm_TJ_Animation')", Null(),
-                        "StormX.bra == 'black_bra' or StormX.bra == 'lace_bra'","images/StormBJFace/Storm_TJ_Chest_Bra_Back.png",
+                        "StormX.bra == '_black_bra' or StormX.bra == '_lace_bra'","images/StormBJFace/Storm_TJ_Chest_Bra_Back.png",
                         "True", Null(),
                         )
     contains:
@@ -3919,23 +3919,23 @@ image Storm_TJ_Body:
     contains:
 
         ConditionSwitch(
-                        "not StormX.accessory == 'rings' or StormX.top == '_jacket'", Null(),
+                        "not StormX.accessory == '_rings' or StormX.top == '_jacket'", Null(),
                         "True", "images/StormBJFace/Storm_TJ_Arms_Ring.png",
                         )
     contains:
 
         ConditionSwitch(
 
-                        "StormX.bra == 'cos_bra'","images/StormBJFace/Storm_TJ_Chest_Cos_TopD.png",
-                        "StormX.bra == 'sports_bra'","images/StormBJFace/Storm_TJ_Chest_Sportsbra_Body.png",
-                        "StormX.bra == 'bikini_top'","images/StormBJFace/Storm_TJ_Chest_Bikini_Body.png",
+                        "StormX.bra == '_cosplay_bra'","images/StormBJFace/Storm_TJ_Chest_Cos_TopD.png",
+                        "StormX.bra == '_sports_bra'","images/StormBJFace/Storm_TJ_Chest_Sportsbra_Body.png",
+                        "StormX.bra == '_bikini_top'","images/StormBJFace/Storm_TJ_Chest_Bikini_Body.png",
                         "True", Null(),
                         )
     contains:
 
         ConditionSwitch(
-                        "StormX.top == 'white_shirt'","images/StormBJFace/Storm_titjob_over_WhiteShirt_Body.png",
-                        "StormX.top == '_jacket'","images/StormBJFace/Storm_titjob_over_Jacket_Body.png",
+                        "StormX.top == '_white_shirt'","images/StormBJFace/Storm_TJ_Over_WhiteShirt_Body.png",
+                        "StormX.top == '_jacket'","images/StormBJFace/Storm_TJ_Over_Jacket_Body.png",
                         "True", Null(),
                         )
     contains:
@@ -3947,7 +3947,7 @@ image Storm_TJ_Body:
     contains:
 
         ConditionSwitch(
-                        "StormX.neck == 'rings'", "images/StormBJFace/Storm_TJ_Neck_Ring.png",
+                        "StormX.neck == '_rings'", "images/StormBJFace/Storm_TJ_Neck_Ring.png",
                         "True", Null(),
                         )
     contains:
@@ -3970,7 +3970,7 @@ image Storm_TJ_Tit_Under:
 
         ConditionSwitch(
 
-                    "StormX.bra == 'cos_bra'",Null(),
+                    "StormX.bra == '_cosplay_bra'",Null(),
                     "renpy.showing('Storm_TJ_Animation')", "images/StormBJFace/Storm_TJ_TitsUnder.png",
                     "True",  Null(),
                     )
@@ -3991,7 +3991,7 @@ image Storm_TJ_Braback:
         ConditionSwitch(
 
                         "StormX.top",Null(),
-                        "StormX.bra == 'black_bra' or StormX.bra == 'lace_bra'","images/StormBJFace/Storm_TJ_Chest_Bra_Back.png",
+                        "StormX.bra == '_black_bra' or StormX.bra == '_lace_bra'","images/StormBJFace/Storm_TJ_Chest_Bra_Back.png",
                         "True", Null(),
                         )
     transform_anchor True
@@ -4005,8 +4005,8 @@ image Storm_TJ_BraStretch:
     contains:
         ConditionSwitch(
 
-                        "StormX.bra == 'bikini_top'","images/StormBJFace/Storm_TJ_Chest_Bikini_Tent.png",
-                        "StormX.bra == 'sports_bra'","images/StormBJFace/Storm_TJ_Chest_Sportsbra_Tent.png",
+                        "StormX.bra == '_bikini_top'","images/StormBJFace/Storm_TJ_Chest_Bikini_Tent.png",
+                        "StormX.bra == '_sports_bra'","images/StormBJFace/Storm_TJ_Chest_Sportsbra_Tent.png",
                         "True", Null(),
                         )
     transform_anchor True
@@ -4023,10 +4023,10 @@ image Storm_TJ_Tits:
     contains:
 
         ConditionSwitch(
-                        "StormX.piercings == 'barbell'","images/StormBJFace/Storm_TJ_Pierce_Barbell.png",
-                        "StormX.top == 'white_shirt' and not StormX.top_pulled_up",Null(),
+                        "StormX.piercings == '_barbell'","images/StormBJFace/Storm_TJ_Pierce_Barbell.png",
+                        "StormX.top == '_white_shirt' and not StormX.top_pulled_up",Null(),
                         "StormX.bra and not StormX.top_pulled_up",Null(),
-                        "StormX.piercings == 'ring'","images/StormBJFace/Storm_TJ_Pierce_Ring.png",
+                        "StormX.piercings == '_ring'","images/StormBJFace/Storm_TJ_Pierce_Ring.png",
                         "True", Null(),
                         )
     contains:
@@ -4042,41 +4042,41 @@ image Storm_TJ_Tits:
     contains:
 
         ConditionSwitch(
-                        "StormX.top == '_jacket'","images/StormBJFace/Storm_titjob_over_Jacket_Top.png",
+                        "StormX.top == '_jacket'","images/StormBJFace/Storm_TJ_Over_Jacket_Top.png",
 
                         "True", Null(),
                         )
     contains:
 
         ConditionSwitch(
-                        "StormX.bra == 'black_bra' and StormX.top_pulled_up and StormX.top","images/StormBJFace/Storm_TJ_Chest_Bra_TopUS.png",
-                        "StormX.bra == 'black_bra' and StormX.top_pulled_up","images/StormBJFace/Storm_TJ_Chest_Bra_TopU.png",
-                        "StormX.bra == 'lace_bra' and StormX.top_pulled_up and StormX.top","images/StormBJFace/Storm_TJ_Chest_Bra_TopUS.png",
-                        "StormX.bra == 'lace_bra' and StormX.top_pulled_up","images/StormBJFace/Storm_TJ_Chest_Bra_TopU.png",
-                        "StormX.bra == 'sports_bra' and StormX.top_pulled_up","images/StormBJFace/Storm_TJ_Chest_SportsBra_TopU.png",
-                        "StormX.bra == 'bikini_top' and StormX.top_pulled_up","images/StormBJFace/Storm_TJ_Chest_Bikini_TopU.png",
+                        "StormX.bra == '_black_bra' and StormX.top_pulled_up and StormX.top","images/StormBJFace/Storm_TJ_Chest_Bra_TopUS.png",
+                        "StormX.bra == '_black_bra' and StormX.top_pulled_up","images/StormBJFace/Storm_TJ_Chest_Bra_TopU.png",
+                        "StormX.bra == '_lace_bra' and StormX.top_pulled_up and StormX.top","images/StormBJFace/Storm_TJ_Chest_Bra_TopUS.png",
+                        "StormX.bra == '_lace_bra' and StormX.top_pulled_up","images/StormBJFace/Storm_TJ_Chest_Bra_TopU.png",
+                        "StormX.bra == '_sports_bra' and StormX.top_pulled_up","images/StormBJFace/Storm_TJ_Chest_SportsBra_TopU.png",
+                        "StormX.bra == '_bikini_top' and StormX.top_pulled_up","images/StormBJFace/Storm_TJ_Chest_Bikini_TopU.png",
 
-                        "StormX.bra == 'tube_top' and not StormX.top_pulled_up","images/StormBJFace/Storm_TJ_Chest_TubeD.png",
-                        "StormX.bra == 'black_bra' and StormX.top","images/StormBJFace/Storm_TJ_Chest_Bra_TopDS.png",
-                        "StormX.bra == 'black_bra'","images/StormBJFace/Storm_TJ_Chest_Bra_TopD.png",
-                        "StormX.bra == 'lace_bra' and StormX.top","images/StormBJFace/Storm_TJ_Chest_Lacebra_TopDS.png",
-                        "StormX.bra == 'lace_bra'","images/StormBJFace/Storm_TJ_Chest_Lacebra_TopD.png",
-                        "StormX.bra == 'sports_bra'","images/StormBJFace/Storm_TJ_Chest_Sportsbra_TopD.png",
-                        "StormX.bra == 'bikini_top'","images/StormBJFace/Storm_TJ_Chest_Bikini_TopD.png",
+                        "StormX.bra == '_tube_top' and not StormX.top_pulled_up","images/StormBJFace/Storm_TJ_Chest_TubeD.png",
+                        "StormX.bra == '_black_bra' and StormX.top","images/StormBJFace/Storm_TJ_Chest_Bra_TopDS.png",
+                        "StormX.bra == '_black_bra'","images/StormBJFace/Storm_TJ_Chest_Bra_TopD.png",
+                        "StormX.bra == '_lace_bra' and StormX.top","images/StormBJFace/Storm_TJ_Chest_Lacebra_TopDS.png",
+                        "StormX.bra == '_lace_bra'","images/StormBJFace/Storm_TJ_Chest_Lacebra_TopD.png",
+                        "StormX.bra == '_sports_bra'","images/StormBJFace/Storm_TJ_Chest_Sportsbra_TopD.png",
+                        "StormX.bra == '_bikini_top'","images/StormBJFace/Storm_TJ_Chest_Bikini_TopD.png",
                         "True", Null(),
                         )
     contains:
 
         ConditionSwitch(
-                        "StormX.top == 'white_shirt' and StormX.top_pulled_up","images/StormBJFace/Storm_titjob_over_WhiteShirt_TopU.png",
-                        "StormX.top == 'white_shirt'","images/StormBJFace/Storm_titjob_over_WhiteShirt_TopD.png",
+                        "StormX.top == '_white_shirt' and StormX.top_pulled_up","images/StormBJFace/Storm_TJ_Over_WhiteShirt_TopU.png",
+                        "StormX.top == '_white_shirt'","images/StormBJFace/Storm_TJ_Over_WhiteShirt_TopD.png",
 
                         "True", Null(),
                         )
     contains:
 
         ConditionSwitch(
-                        "not StormX.accessory == 'rings' or StormX.top == '_jacket'", Null(),
+                        "not StormX.accessory == '_rings' or StormX.top == '_jacket'", Null(),
                         "True", "images/StormBJFace/Storm_TJ_Wrists_Ring.png",
                         )
     contains:
@@ -4084,23 +4084,23 @@ image Storm_TJ_Tits:
         ConditionSwitch(
                         "StormX.top_pulled_up", Null(),
                         "(not StormX.top) and (not StormX.bra)", Null(),
-                        "StormX.piercings == 'ring' and StormX.top == 'white_shirt'","images/StormBJFace/Storm_TJ_Pierce_Ring_Shirt.png",
-                        "StormX.piercings == 'barbell' and StormX.top == 'white_shirt'","images/StormBJFace/Storm_TJ_Pierce_Barbell_Shirt.png",
-                        "StormX.bra == 'cos_bra'",Null(),
-                        "StormX.piercings == 'ring' and StormX.bra == 'lace_bra'","images/StormBJFace/Storm_TJ_Pierce_Ring_Lace.png",
-                        "StormX.piercings == 'barbell' and StormX.bra == 'lace_bra'","images/StormBJFace/Storm_TJ_Pierce_Barbell_Lace.png",
-                        "StormX.piercings == 'ring' and StormX.bra == 'tube_top'","images/StormBJFace/Storm_TJ_Pierce_Ring_Tube.png",
-                        "StormX.piercings == 'barbell' and StormX.bra == 'tube_top'","images/StormBJFace/Storm_TJ_Pierce_Barbell_Tube.png",
-                        "StormX.piercings == 'ring' and StormX.bra","images/StormBJFace/Storm_TJ_Pierce_Ring_Bra.png",
-                        "StormX.piercings == 'barbell' and StormX.bra","images/StormBJFace/Storm_TJ_Pierce_Barbell_Bra.png",
+                        "StormX.piercings == '_ring' and StormX.top == '_white_shirt'","images/StormBJFace/Storm_TJ_Pierce_Ring_Shirt.png",
+                        "StormX.piercings == '_barbell' and StormX.top == '_white_shirt'","images/StormBJFace/Storm_TJ_Pierce_Barbell_Shirt.png",
+                        "StormX.bra == '_cosplay_bra'",Null(),
+                        "StormX.piercings == '_ring' and StormX.bra == '_lace_bra'","images/StormBJFace/Storm_TJ_Pierce_Ring_Lace.png",
+                        "StormX.piercings == '_barbell' and StormX.bra == '_lace_bra'","images/StormBJFace/Storm_TJ_Pierce_Barbell_Lace.png",
+                        "StormX.piercings == '_ring' and StormX.bra == '_tube_top'","images/StormBJFace/Storm_TJ_Pierce_Ring_Tube.png",
+                        "StormX.piercings == '_barbell' and StormX.bra == '_tube_top'","images/StormBJFace/Storm_TJ_Pierce_Barbell_Tube.png",
+                        "StormX.piercings == '_ring' and StormX.bra","images/StormBJFace/Storm_TJ_Pierce_Ring_Bra.png",
+                        "StormX.piercings == '_barbell' and StormX.bra","images/StormBJFace/Storm_TJ_Pierce_Barbell_Bra.png",
                         "True", Null(),
                         )
     contains:
 
         ConditionSwitch(
-                        "not StormX.accessory == 'rings' or not StormX.piercings == 'ring'", Null(),
-                        "StormX.top == 'white_shirt' and not StormX.top_pulled_up", Null(),
-                        "StormX.bra and StormX.bra != 'cos_bra' and not StormX.top_pulled_up",Null(),
+                        "not StormX.accessory == '_rings' or not StormX.piercings == '_ring'", Null(),
+                        "StormX.top == '_white_shirt' and not StormX.top_pulled_up", Null(),
+                        "StormX.bra and StormX.bra != '_cosplay_bra' and not StormX.top_pulled_up",Null(),
                         "True","images/StormBJFace/Storm_TJ_Pierce_Ring.png",
 
 
@@ -4131,27 +4131,27 @@ image Storm_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
     contains:
 
-        "Storm_TJ_hairback"
+        "Storm_TJ_HairBack"
         subpixel True
         pos (0,0)
         transform_anchor True
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
         parallel:
-            pause 0.1
+            pause .1
             ease 2 rotate -5
-            pause 0.1
+            pause .1
             ease 2 rotate 0
             repeat
     contains:
@@ -4162,9 +4162,9 @@ image Storm_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -4175,14 +4175,14 @@ image Storm_TJ_0:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
         parallel:
-            pause 0.1
+            pause .1
             ease 2 rotate -5
-            pause 0.1
+            pause .1
             ease 2 rotate 0
             repeat
     contains:
@@ -4193,9 +4193,9 @@ image Storm_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos -0
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -4206,9 +4206,9 @@ image Storm_TJ_0:
         rotate -5
         parallel:
             ease 2 rotate -3
-            pause 0.1
+            pause .1
             ease 2 rotate -5
-            pause 0.1
+            pause .1
             repeat
     contains:
         contains:
@@ -4216,19 +4216,19 @@ image Storm_TJ_0:
         subpixel True
         pos (-70,-210)
         transform_anchor True
-        xzoom 0.75
-        yzoom 0.85
+        xzoom .75
+        yzoom .85
         parallel:
-            ease 2 yzoom 0.5
-            pause 0.1
-            ease 2 yzoom 0.85
-            pause 0.1
+            ease 2 yzoom .5
+            pause .1
+            ease 2 yzoom .85
+            pause .1
             repeat
         parallel:
             ease 2 pos (-60,-230)
-            pause 0.1
+            pause .1
             ease 2 pos (-70,-210)
-            pause 0.1
+            pause .1
             repeat
     contains:
         contains:
@@ -4238,9 +4238,9 @@ image Storm_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -4251,14 +4251,14 @@ image Storm_TJ_0:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
         parallel:
-            pause 0.1
+            pause .1
             ease 2 rotate -5
-            pause 0.1
+            pause .1
             ease 2 rotate 0
             repeat
 
@@ -4285,31 +4285,31 @@ image Storm_TJ_1:
         pos (0,50)
         transform_anchor True
         block:
-            pause 0.1
+            pause .1
             ease 1.9 ypos -60
-            pause 0.4
+            pause .4
             ease 1.8 ypos 60
-            ease 0.5 ypos 50
+            ease .5 ypos 50
             repeat
     contains:
 
 
-        "Storm_TJ_hairback"
+        "Storm_TJ_HairBack"
         subpixel True
         pos (0,60)
         transform_anchor True
         rotate -5
         parallel:
             ease 2 ypos -40
-            pause 0.2
+            pause .2
             ease 2 ypos 60
-            pause 0.5
+            pause .5
             repeat
         parallel:
             ease 2 rotate 0
-            pause 0.2
+            pause .2
             ease 2 rotate -5
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -4319,9 +4319,9 @@ image Storm_TJ_1:
         transform_anchor True
         parallel:
             ease 2 ypos -40
-            pause 0.2
+            pause .2
             ease 2 ypos 60
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -4332,15 +4332,15 @@ image Storm_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos -40
-            pause 0.2
+            pause .2
             ease 2 ypos 60
-            pause 0.5
+            pause .5
             repeat
         parallel:
             ease 2 rotate 0
-            pause 0.2
+            pause .2
             ease 2 rotate -5
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -4349,11 +4349,11 @@ image Storm_TJ_1:
         pos (0,60)
         transform_anchor True
         block:
-            pause 0.1
+            pause .1
             ease 1.9 ypos -60
-            pause 0.4
+            pause .4
             ease 1.8 ypos 60
-            ease 0.5 ypos 50
+            ease .5 ypos 50
             repeat
     contains:
 
@@ -4364,9 +4364,9 @@ image Storm_TJ_1:
         rotate -6
         parallel:
             ease 2 ypos 0
-            pause 0.4
+            pause .4
             ease 1.8 ypos 25
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -4380,29 +4380,29 @@ image Storm_TJ_1:
         subpixel True
         pos (-100,-150)
         transform_anchor True
-        xzoom 0.9
+        xzoom .9
         yzoom 1.3
         parallel:
-            pause 0.1
-            ease 1.6 yzoom 0.3
-            pause 0.9
+            pause .1
+            ease 1.6 yzoom .3
+            pause .9
             ease 1.6 yzoom 1.5
-            ease 0.5 yzoom 1.3
+            ease .5 yzoom 1.3
             repeat
         parallel:
-            pause 0.1
-            ease 1.9 xzoom 0.6
-            pause 0.4
-            ease 1.8 xzoom 0.9
-            pause 0.5
+            pause .1
+            ease 1.9 xzoom .6
+            pause .4
+            ease 1.8 xzoom .9
+            pause .5
 
             repeat
         parallel:
-            pause 0.1
+            pause .1
             ease 1.9 pos (-50,-260)
-            pause 0.4
+            pause .4
             ease 1.8 pos (-100,-140)
-            ease 0.5 pos (-100,-150)
+            ease .5 pos (-100,-150)
             repeat
     contains:
         contains:
@@ -4411,11 +4411,11 @@ image Storm_TJ_1:
         pos (0,50)
         transform_anchor True
         block:
-            pause 0.1
+            pause .1
             ease 1.9 ypos -60
-            pause 0.4
+            pause .4
             ease 1.8 ypos 60
-            ease 0.5 ypos 50
+            ease .5 ypos 50
             repeat
     contains:
 
@@ -4426,15 +4426,15 @@ image Storm_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos -40
-            pause 0.2
+            pause .2
             ease 2 ypos 60
-            pause 0.5
+            pause .5
             repeat
         parallel:
             ease 2 rotate 0
-            pause 0.2
+            pause .2
             ease 2 rotate -5
-            pause 0.5
+            pause .5
             repeat
 
 
@@ -4452,27 +4452,27 @@ image Storm_TJ_2:
         pos (0,80)
         transform_anchor True
         block:
-            ease 0.3 ypos 40
-            ease 0.7 ypos -40
-            pause 0.2
-            ease 0.4 ypos 80
+            ease .3 ypos 40
+            ease .7 ypos -40
+            pause .2
+            ease .4 ypos 80
             repeat
     contains:
 
-        "Storm_TJ_hairback"
+        "Storm_TJ_HairBack"
         subpixel True
         pos (0,80)
         transform_anchor True
         rotate -5
         parallel:
             ease 1 ypos -20
-            pause 0.1
-            ease 0.5 ypos 80
+            pause .1
+            ease .5 ypos 80
             repeat
         parallel:
             ease 1 rotate 0
-            pause 0.1
-            ease 0.5 rotate -5
+            pause .1
+            ease .5 rotate -5
             repeat
     contains:
 
@@ -4482,8 +4482,8 @@ image Storm_TJ_2:
         transform_anchor True
         parallel:
             ease 1 ypos -20
-            pause 0.1
-            ease 0.5 ypos 80
+            pause .1
+            ease .5 ypos 80
             repeat
     contains:
 
@@ -4494,13 +4494,13 @@ image Storm_TJ_2:
         rotate -5
         parallel:
             ease 1 ypos -20
-            pause 0.1
-            ease 0.5 ypos 80
+            pause .1
+            ease .5 ypos 80
             repeat
         parallel:
             ease 1 rotate 0
-            pause 0.1
-            ease 0.5 rotate -5
+            pause .1
+            ease .5 rotate -5
             repeat
     contains:
 
@@ -4509,10 +4509,10 @@ image Storm_TJ_2:
         pos (0,80)
         transform_anchor True
         block:
-            ease 0.3 ypos 40
-            ease 0.7 ypos -40
-            pause 0.2
-            ease 0.4 ypos 80
+            ease .3 ypos 40
+            ease .7 ypos -40
+            pause .2
+            ease .4 ypos 80
             repeat
     contains:
 
@@ -4523,13 +4523,13 @@ image Storm_TJ_2:
         rotate -4
         parallel:
             ease 1 ypos 0
-            pause 0.2
-            ease 0.4 ypos 30
+            pause .2
+            ease .4 ypos 30
             repeat
         parallel:
             ease 1 rotate -2
-            pause 0.1
-            ease 0.5 rotate -4
+            pause .1
+            ease .5 rotate -4
             repeat
     contains:
         contains:
@@ -4540,16 +4540,16 @@ image Storm_TJ_2:
         yzoom 1.7
         xzoom 1
         parallel:
-            ease 0.3 yzoom 1.3
-            ease 0.7 yzoom 0.3
-            pause 0.2
-            ease 0.4 yzoom 1.7
+            ease .3 yzoom 1.3
+            ease .7 yzoom .3
+            pause .2
+            ease .4 yzoom 1.7
             repeat
         parallel:
-            ease 0.3 pos (-100,-160)
-            ease 0.7 pos (-80,-240)
-            pause 0.2
-            ease 0.4 pos (-100,-120)
+            ease .3 pos (-100,-160)
+            ease .7 pos (-80,-240)
+            pause .2
+            ease .4 pos (-100,-120)
             repeat
     contains:
         contains:
@@ -4558,10 +4558,10 @@ image Storm_TJ_2:
         pos (0,80)
         transform_anchor True
         block:
-            ease 0.3 ypos 40
-            ease 0.7 ypos -40
-            pause 0.2
-            ease 0.4 ypos 80
+            ease .3 ypos 40
+            ease .7 ypos -40
+            pause .2
+            ease .4 ypos 80
             repeat
     contains:
 
@@ -4573,13 +4573,13 @@ image Storm_TJ_2:
         rotate -5
         parallel:
             ease 1 ypos -20
-            pause 0.1
-            ease 0.5 ypos 80
+            pause .1
+            ease .5 ypos 80
             repeat
         parallel:
             ease 1 rotate 0
-            pause 0.1
-            ease 0.5 rotate -5
+            pause .1
+            ease .5 rotate -5
             repeat
 
 
@@ -4594,27 +4594,27 @@ image Storm_TJ_3:
         pos (0,110)
         transform_anchor True
         block:
-            ease 0.3 ypos 100
-            ease 0.7 ypos 60
-            pause 0.2
-            ease 0.4 ypos 110
+            ease .3 ypos 100
+            ease .7 ypos 60
+            pause .2
+            ease .4 ypos 110
             repeat
     contains:
 
-        "Storm_TJ_hairback"
+        "Storm_TJ_HairBack"
         subpixel True
         pos (0,140)
         transform_anchor True
         rotate -5
         parallel:
             ease 1 ypos 70
-            pause 0.1
-            ease 0.5 ypos 140
+            pause .1
+            ease .5 ypos 140
             repeat
         parallel:
             ease 1 rotate 0
-            pause 0.1
-            ease 0.5 rotate -5
+            pause .1
+            ease .5 rotate -5
             repeat
     contains:
 
@@ -4624,8 +4624,8 @@ image Storm_TJ_3:
         transform_anchor True
         parallel:
             ease 1 ypos 100
-            pause 0.1
-            ease 0.5 ypos 130
+            pause .1
+            ease .5 ypos 130
             repeat
     contains:
 
@@ -4636,13 +4636,13 @@ image Storm_TJ_3:
         rotate -5
         parallel:
             ease 1 ypos 70
-            pause 0.1
-            ease 0.5 ypos 140
+            pause .1
+            ease .5 ypos 140
             repeat
         parallel:
             ease 1 rotate 0
-            pause 0.1
-            ease 0.5 rotate -5
+            pause .1
+            ease .5 rotate -5
             repeat
     contains:
 
@@ -4651,10 +4651,10 @@ image Storm_TJ_3:
         pos (0,110)
         transform_anchor True
         block:
-            ease 0.3 ypos 100
-            ease 0.7 ypos 60
-            pause 0.2
-            ease 0.4 ypos 110
+            ease .3 ypos 100
+            ease .7 ypos 60
+            pause .2
+            ease .4 ypos 110
             repeat
     contains:
 
@@ -4665,13 +4665,13 @@ image Storm_TJ_3:
         rotate -4
         parallel:
             ease 1 ypos 0
-            pause 0.2
-            ease 0.4 ypos 30
+            pause .2
+            ease .4 ypos 30
             repeat
         parallel:
             ease 1 rotate -2
-            pause 0.1
-            ease 0.5 rotate -4
+            pause .1
+            ease .5 rotate -4
             repeat
     contains:
         contains:
@@ -4682,16 +4682,16 @@ image Storm_TJ_3:
         yzoom 2
         xzoom 1
         parallel:
-            ease 0.3 yzoom 1.95
-            ease 0.7 yzoom 1.7
-            pause 0.2
-            ease 0.4 yzoom 2
+            ease .3 yzoom 1.95
+            ease .7 yzoom 1.7
+            pause .2
+            ease .4 yzoom 2
             repeat
         parallel:
-            ease 0.3 pos (-100,-115)
-            ease 0.7 pos (-90,-155)
-            pause 0.2
-            ease 0.4 pos (-100,-105)
+            ease .3 pos (-100,-115)
+            ease .7 pos (-90,-155)
+            pause .2
+            ease .4 pos (-100,-105)
             repeat
     contains:
 
@@ -4701,10 +4701,10 @@ image Storm_TJ_3:
         pos (0,110)
         transform_anchor True
         block:
-            ease 0.3 ypos 100
-            ease 0.7 ypos 60
-            pause 0.2
-            ease 0.4 ypos 110
+            ease .3 ypos 100
+            ease .7 ypos 60
+            pause .2
+            ease .4 ypos 110
             repeat
     contains:
 
@@ -4716,13 +4716,13 @@ image Storm_TJ_3:
         rotate -5
         parallel:
             ease 1 ypos 70
-            pause 0.1
-            ease 0.5 ypos 140
+            pause .1
+            ease .5 ypos 140
             repeat
         parallel:
             ease 1 rotate 0
-            pause 0.1
-            ease 0.5 rotate -5
+            pause .1
+            ease .5 rotate -5
             repeat
 
 
@@ -4739,28 +4739,28 @@ image Storm_TJ_4:
         pos (0,5)
         transform_anchor True
         parallel:
-            pause 0.2
+            pause .2
             ease 1.9 ypos -30
-            pause 0.2
+            pause .2
             ease 1.9 ypos 5
             repeat
     contains:
 
-        "Storm_TJ_hairback"
+        "Storm_TJ_HairBack"
         subpixel True
         pos (0,0)
         transform_anchor True
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
         parallel:
-            pause 0.1
+            pause .1
             ease 2 rotate -5
-            pause 0.1
+            pause .1
             ease 2 rotate 0
             repeat
     contains:
@@ -4771,9 +4771,9 @@ image Storm_TJ_4:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -4784,14 +4784,14 @@ image Storm_TJ_4:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
         parallel:
-            pause 0.1
+            pause .1
             ease 2 rotate -5
-            pause 0.1
+            pause .1
             ease 2 rotate 0
             repeat
     contains:
@@ -4801,9 +4801,9 @@ image Storm_TJ_4:
         pos (0,5)
         transform_anchor True
         parallel:
-            pause 0.2
+            pause .2
             ease 1.9 ypos -30
-            pause 0.2
+            pause .2
             ease 1.9 ypos 5
             repeat
     contains:
@@ -4815,9 +4815,9 @@ image Storm_TJ_4:
         rotate -5
         parallel:
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             ease 2 ypos 20
-            pause 0.1
+            pause .1
             repeat
     contains:
         contains:
@@ -4825,12 +4825,12 @@ image Storm_TJ_4:
         subpixel True
         pos (-70,-210)
         transform_anchor True
-        xzoom 0.75
-        yzoom 0.5
+        xzoom .75
+        yzoom .5
         parallel:
-            pause 0.2
+            pause .2
             ease 1.9 pos (-65,-230)
-            pause 0.2
+            pause .2
             ease 1.9 pos (-75,-210)
             repeat
     contains:
@@ -4840,9 +4840,9 @@ image Storm_TJ_4:
         pos (0,5)
         transform_anchor True
         parallel:
-            pause 0.2
+            pause .2
             ease 1.9 ypos -30
-            pause 0.2
+            pause .2
             ease 1.9 ypos 5
             repeat
     contains:
@@ -4854,14 +4854,14 @@ image Storm_TJ_4:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
         parallel:
-            pause 0.1
+            pause .1
             ease 2 rotate -5
-            pause 0.1
+            pause .1
             ease 2 rotate 0
             repeat
 
@@ -4877,28 +4877,28 @@ image Storm_TJ_5:
         pos (0,90)
         transform_anchor True
         parallel:
-            pause 0.1
+            pause .1
             ease 2 ypos 100
-            pause 0.2
+            pause .2
             ease 2 ypos 110
-            pause 0.4
+            pause .4
             repeat
     contains:
 
-        "Storm_TJ_hairback"
+        "Storm_TJ_HairBack"
         subpixel True
         pos (0,130)
         transform_anchor True
         rotate -5
         parallel:
             ease 2 ypos 125
-            pause 0.2
+            pause .2
             ease 2 ypos 130
-            pause 0.5
+            pause .5
             repeat
         parallel:
             ease 2 rotate -5
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -4908,9 +4908,9 @@ image Storm_TJ_5:
         transform_anchor True
         parallel:
             ease 2 ypos 130
-            pause 0.2
+            pause .2
             ease 2 ypos 140
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -4921,13 +4921,13 @@ image Storm_TJ_5:
         rotate -5
         parallel:
             ease 2 ypos 125
-            pause 0.2
+            pause .2
             ease 2 ypos 130
-            pause 0.5
+            pause .5
             repeat
         parallel:
             ease 2 rotate -5
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -4936,11 +4936,11 @@ image Storm_TJ_5:
         pos (0,90)
         transform_anchor True
         parallel:
-            pause 0.1
+            pause .1
             ease 2 ypos 100
-            pause 0.2
+            pause .2
             ease 2 ypos 110
-            pause 0.4
+            pause .4
             repeat
     contains:
 
@@ -4958,18 +4958,18 @@ image Storm_TJ_5:
         xzoom 1
         yzoom 2
         parallel:
-            pause 0.1
+            pause .1
             ease 2 yzoom 1.8
-            pause 0.2
+            pause .2
             ease 2 yzoom 2
-            pause 0.4
+            pause .4
             repeat
         parallel:
-            pause 0.1
+            pause .1
             ease 2 pos (-100,-115)
-            pause 0.2
+            pause .2
             ease 2 pos (-100,-105)
-            pause 0.4
+            pause .4
             repeat
     contains:
         contains:
@@ -4978,11 +4978,11 @@ image Storm_TJ_5:
         pos (0,90)
         transform_anchor True
         parallel:
-            pause 0.1
+            pause .1
             ease 2 ypos 100
-            pause 0.2
+            pause .2
             ease 2 ypos 110
-            pause 0.4
+            pause .4
             repeat
     contains:
 
@@ -4993,20 +4993,20 @@ image Storm_TJ_5:
         rotate -5
         parallel:
             ease 2 ypos 125
-            pause 0.2
+            pause .2
             ease 2 ypos 130
-            pause 0.5
+            pause .5
             repeat
         parallel:
             ease 2 rotate -5
-            pause 0.5
+            pause .5
             repeat
 
 
 
 
 
-label Storm_TJ_Launch(line=primary_action):
+label Storm_TJ_Launch(Line=primary_action):
     if renpy.showing("Storm_TJ_Animation"):
         return
 
@@ -5033,12 +5033,12 @@ label Storm_TJ_Launch(line=primary_action):
 
 
 
-    show black_screen onlayer black with dissolve
+    show blackscreen onlayer black with dissolve
 
     if renpy.showing("Storm_BJ_Animation"):
         hide Storm_BJ_Animation
     else:
-        call Storm_Hide
+        call hide_girl(StormX)
         show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
             alpha 1
             ease 1 zoom 2.3 xpos 750 yoffset -100
@@ -5049,12 +5049,12 @@ label Storm_TJ_Launch(line=primary_action):
 
 
     $ action_speed = 0
-    if line != "cum":
+    if Line != "cum":
         $ primary_action = "titjob"
     show Storm_TJ_Animation zorder 150:
         pos (1000,1050)
-    $ Player.sprite = 1
-    hide black_screen onlayer black with dissolve
+    $ Player.Sprite = 1
+    hide blackscreen onlayer black with dissolve
     return
 
 label Storm_TJ_Reset:
@@ -5062,17 +5062,17 @@ label Storm_TJ_Reset:
     if not renpy.showing("Storm_TJ_Animation"):
         return
 
-    call Storm_Hide
-    $ Player.sprite = 0
+    call hide_girl(StormX)
+    $ Player.Sprite = 0
 
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         zoom 2.3 xpos 750 yoffset -100
     show Storm_Sprite zorder StormX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 xpos 700 yoffset 50
-        pause 0.5
-        ease 0.5 zoom 1 xpos StormX.sprite_location yoffset 0
-    "[StormX.name] pulls back"
+        pause .5
+        ease .5 zoom 1 xpos StormX.sprite_location yoffset 0
+    "[StormX.Name] pulls back"
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
         zoom 1 offset (0,0) xpos StormX.sprite_location
@@ -5086,47 +5086,47 @@ label Storm_TJ_Reset:
 
 
 label Storm_Kissing_Launch(T=primary_action, Set=1):
-    call Storm_Hide
+    call hide_girl(StormX)
     $ primary_action = T
-    $ StormX.pose = "kiss" if Set else StormX.pose
+    $ StormX.Pose = "kiss" if Set else StormX.Pose
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location)
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_center):
         ease 0.5 offset (0,0) zoom 2 alpha 1
     return
 
 label Storm_Kissing_Smooch:
-    $ StormX.change_face("_kiss")
+    $ StormX.FaceChange("kiss")
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos StormX.sprite_location zoom 1
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         zoom 1
-    $ StormX.change_face("_sexy")
+    $ StormX.FaceChange("sexy")
     return
 
 label Storm_Breasts_Launch(T=primary_action, Set=1):
-    call Storm_Hide
+    call hide_girl(StormX)
     $ primary_action = T
-    $ StormX.pose = "breasts" if Set else StormX.pose
+    $ StormX.Pose = "breasts" if Set else StormX.Pose
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 2 alpha 1
     return
 
 label Storm_Middle_Launch(T=primary_action, Set=1):
-    call Storm_Hide
+    call hide_girl(StormX)
     $ primary_action = T
-    $ StormX.pose = "mid" if Set else StormX.pose
+    $ StormX.Pose = "mid" if Set else StormX.Pose
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1
     return
 
 label Storm_Pussy_Launch(T=primary_action, Set=1):
-    call Storm_Hide
+    call hide_girl(StormX)
     $ primary_action = T
-    $ StormX.pose = "pussy" if Set else StormX.pose
+    $ StormX.Pose = "pussy" if Set else StormX.Pose
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         ease 0.5 pos (700,-400) offset (0,0) zoom 2 alpha 1
     return
@@ -5134,9 +5134,9 @@ label Storm_Pussy_Launch(T=primary_action, Set=1):
 label Storm_Pos_Reset(T=0, Set=0):
     if StormX.location != bg_current:
         return
-    call Storm_Hide
+    call hide_girl(StormX)
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
-        ease 0.5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
+        ease .5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
     show Storm_Sprite zorder StormX.sprite_layer:
         offset (0,0)
         anchor (0.5, 0.0)
@@ -5145,22 +5145,9 @@ label Storm_Pos_Reset(T=0, Set=0):
         yzoom 1
         alpha 1
         pos (StormX.sprite_location,50)
-    $ StormX.pose = "full" if Set else 0
+    $ StormX.Pose = "full" if Set else 0
     $ primary_action = T
     return
-
-label Storm_Hide(Sprite=0):
-
-    hide Storm_SexSprite
-    hide Storm_Doggy_Animation
-    hide Storm_HJ_Animation
-    hide Storm_BJ_Animation
-    hide Storm_TJ_Animation
-    if Sprite:
-        hide Storm_Sprite
-    return
-
-
 
 image Storm_At_Desk:
     contains:
@@ -5184,9 +5171,9 @@ image Storm_Behind_Podium:
         pos (640,180)
         block:
             subpixel True
-            ease 0.5 ypos 183
-            ease 0.5 ypos 180
-            pause 0.5
+            ease .5 ypos 183
+            ease .5 ypos 180
+            pause .5
             repeat
 
 
@@ -5230,8 +5217,8 @@ image LickRightBreast_Storm:
         alpha 0.5
         rotate 30
         block:
-            ease 0.5 rotate -40 pos (55,310)
-            pause 0.5
+            ease .5 rotate -40 pos (55,310)
+            pause .5
             ease 1.5 rotate 30 pos (80,335)
             repeat
 
@@ -5247,8 +5234,8 @@ image LickLeftBreast_Storm:
         alpha 0.5
         rotate 30
         block:
-            ease 0.5 rotate -40 pos (185,330)
-            pause 0.5
+            ease .5 rotate -40 pos (185,330)
+            pause .5
             ease 1.5 rotate 30 pos (205,350)
             repeat
 
@@ -5256,13 +5243,13 @@ image GropeThigh_Storm:
     contains:
         subpixel True
         "UI_Hand"
-        zoom 0.65
+        zoom .65
         pos (145,630)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 100
         block:
-            pause 0.5
+            pause .5
             ease 1 rotate 110 pos (145,700)
             ease 1 rotate 100 pos (145,630)
             repeat
@@ -5271,18 +5258,18 @@ image GropePussy_Storm:
     contains:
         subpixel True
         "UI_Hand"
-        zoom 0.65
+        zoom .65
         pos (145,560)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 170
         block:
             choice:
-                ease 0.5 rotate 190 pos (145,545)
-                ease 0.75 rotate 170 pos (145,560)
+                ease .5 rotate 190 pos (145,545)
+                ease .75 rotate 170 pos (145,560)
             choice:
-                ease 0.5 rotate 190 pos (145,545)
-                pause 0.25
+                ease .5 rotate 190 pos (145,545)
+                pause .25
                 ease 1 rotate 170 pos (145,560)
             repeat
 
@@ -5298,21 +5285,21 @@ image FingerPussy_Storm:
         block:
             choice:
                 ease 1 rotate 40 pos (175,615)
-                pause 0.5
+                pause .5
                 ease 1 rotate 50 pos (165,640)
             choice:
-                ease 0.5 rotate 40 pos (175,615)
-                pause 0.5
+                ease .5 rotate 40 pos (175,615)
+                pause .5
                 ease 1.75 rotate 50 pos (165,640)
             choice:
                 ease 2 rotate 40 pos (175,615)
-                pause 0.5
+                pause .5
                 ease 1 rotate 50 pos (165,640)
             choice:
-                ease 0.25 rotate 40 pos (175,615)
-                ease 0.25 rotate 50 pos (165,640)
-                ease 0.25 rotate 40 pos (175,615)
-                ease 0.25 rotate 50 pos (165,640)
+                ease .25 rotate 40 pos (175,615)
+                ease .25 rotate 50 pos (165,640)
+                ease .25 rotate 40 pos (175,615)
+                ease .25 rotate 50 pos (165,640)
             repeat
 
 image Lickpussy_Storm:
@@ -5326,8 +5313,8 @@ image Lickpussy_Storm:
         alpha 0.5
         rotate 10
         block:
-            easeout 0.5 rotate -50 pos (165,575)
-            linear 0.5 rotate -60 pos (155,585)
+            easeout .5 rotate -50 pos (165,575)
+            linear .5 rotate -60 pos (155,585)
             easein 1 rotate 10 pos (175,595)
             repeat
 
@@ -5341,10 +5328,10 @@ image VibratorRightBreast_Storm:
         alpha 0.5
         rotate 55
         block:
-            ease 0.9 rotate 35 ypos 310
-            pause 0.25
-            ease 0.7 rotate 55 ypos 320
-            pause 0.25
+            ease .9 rotate 35 ypos 310
+            pause .25
+            ease .7 rotate 55 ypos 320
+            pause .25
             repeat
 
 image VibratorLeftBreast_Storm:
@@ -5358,9 +5345,9 @@ image VibratorLeftBreast_Storm:
         rotate 55
         block:
             ease 1.1 rotate 35 ypos 340
-            pause 0.25
-            ease 0.9 rotate 55 ypos 350
-            pause 0.25
+            pause .25
+            ease .9 rotate 55 ypos 350
+            pause .25
             repeat
 
 image VibratorPussy_Storm:
@@ -5374,9 +5361,9 @@ image VibratorPussy_Storm:
         rotate 70
         block:
             ease 1 rotate 35 xpos 160
-            pause 0.25
+            pause .25
             ease 1 rotate 70 xpos 170
-            pause 0.25
+            pause .25
             repeat
 
 image VibratorAnal_Storm:
@@ -5390,9 +5377,9 @@ image VibratorAnal_Storm:
         rotate 10
         block:
             ease 1 rotate 0 xpos 190
-            pause 0.25
+            pause .25
             ease 1 rotate 10 xpos 200
-            pause 0.25
+            pause .25
             repeat
 
 image VibratorPussyInsert_Storm:
@@ -5428,7 +5415,7 @@ image GirlGropeLeftBreast_Storm:
     contains:
         subpixel True
         "images/UI_GirlHandS.png"
-        zoom 0.6
+        zoom .6
         pos (220,340)
         anchor (0.5,0.5)
         alpha 0.5
@@ -5457,22 +5444,22 @@ image GirlGropeThigh_Storm:
     contains:
         subpixel True
         "images/UI_GirlHandS.png"
-        zoom 0.6
+        zoom .6
         anchor (0.5,0.5)
         pos (0,0)
         alpha 0.5
         rotate 100
         parallel:
-            pause 0.5
+            pause .5
             ease 1 ypos 780
             ease 1 ypos 730
             repeat
         parallel:
-            pause 0.5
-            ease 0.5 xpos 213
-            ease 0.5 xpos 210
-            ease 0.5 xpos 213
-            ease 0.5 xpos 210
+            pause .5
+            ease .5 xpos 213
+            ease .5 xpos 210
+            ease .5 xpos 213
+            ease .5 xpos 210
             repeat
 
 
@@ -5504,7 +5491,7 @@ transform GirlGropeRightBreast_Storm():
 
 transform GirlGropeLeftBreast_Storm():
     subpixel True
-    zoom 0.6
+    zoom .6
     offset (120,240)
     anchor (0.5,0.5)
     alpha 0.5
@@ -5523,27 +5510,27 @@ transform GirlGropePussy_Storm1():
     rotate 200
     block:
         choice:
-            ease 0.75 rotate 210 yoffset 465
-            ease 0.5 rotate 195
-            ease 0.75 rotate 210
-            ease 0.5 rotate 195
+            ease .75 rotate 210 yoffset 465
+            ease .5 rotate 195
+            ease .75 rotate 210
+            ease .5 rotate 195
         choice:
-            ease 0.5 rotate 210 yoffset 465
+            ease .5 rotate 210 yoffset 465
             ease 1 rotate 195
-            pause 0.25
-            ease 0.5 rotate 210
+            pause .25
+            ease .5 rotate 210
             ease 1 rotate 195
-            pause 0.25
+            pause .25
         choice:
-            ease 0.5 rotate 205 yoffset 465
-            ease 0.75 rotate 200 yoffset 470
-            ease 0.5 rotate 205 yoffset 465
-            ease 0.75 rotate 200 yoffset 470
+            ease .5 rotate 205 yoffset 465
+            ease .75 rotate 200 yoffset 470
+            ease .5 rotate 205 yoffset 465
+            ease .75 rotate 200 yoffset 470
         choice:
-            ease 0.3 rotate 205 yoffset 465
-            ease 0.3 rotate 200 yoffset 475
-            ease 0.3 rotate 205 yoffset 465
-            ease 0.3 rotate 200 yoffset 475
+            ease .3 rotate 205 yoffset 465
+            ease .3 rotate 200 yoffset 475
+            ease .3 rotate 205 yoffset 465
+            ease .3 rotate 200 yoffset 475
         repeat
 
 image GirlGropePussy_Storm:
@@ -5557,60 +5544,60 @@ image GirlGropePussy_Storm:
         rotate 200
         block:
             choice:
-                ease 0.75 rotate 210 pos (150,545)
-                ease 0.5 rotate 195
-                ease 0.75 rotate 210
-                ease 0.5 rotate 195
+                ease .75 rotate 210 pos (150,545)
+                ease .5 rotate 195
+                ease .75 rotate 210
+                ease .5 rotate 195
             choice:
-                ease 0.5 rotate 210 pos (150,545)
+                ease .5 rotate 210 pos (150,545)
                 ease 1 rotate 195
-                pause 0.25
-                ease 0.5 rotate 210
+                pause .25
+                ease .5 rotate 210
                 ease 1 rotate 195
-                pause 0.25
+                pause .25
             choice:
-                ease 0.5 rotate 205 pos (150,545)
-                ease 0.75 rotate 200 pos (150,550)
-                ease 0.5 rotate 205 pos (150,545)
-                ease 0.75 rotate 200 pos (150,550)
+                ease .5 rotate 205 pos (150,545)
+                ease .75 rotate 200 pos (150,550)
+                ease .5 rotate 205 pos (150,545)
+                ease .75 rotate 200 pos (150,550)
             choice:
-                ease 0.3 rotate 205 pos (150,545)
-                ease 0.3 rotate 200 pos (150,555)
-                ease 0.3 rotate 205 pos (150,545)
-                ease 0.3 rotate 200 pos (150,555)
+                ease .3 rotate 205 pos (150,545)
+                ease .3 rotate 200 pos (150,555)
+                ease .3 rotate 205 pos (150,545)
+                ease .3 rotate 200 pos (150,555)
             repeat
 
 image GirlFingerPussy_Storm:
     contains:
         subpixel True
         "images/UI_GirlFingerS.png"
-        zoom 0.6
+        zoom .6
         pos (250,550)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 200
         block:
             choice:
-                ease 0.75 rotate 210 pos (250,555)
-                ease 0.5 rotate 195
-                ease 0.75 rotate 210
-                ease 0.5 rotate 195
+                ease .75 rotate 210 pos (250,555)
+                ease .5 rotate 195
+                ease .75 rotate 210
+                ease .5 rotate 195
             choice:
-                ease 0.5 rotate 210 pos (250,555)
+                ease .5 rotate 210 pos (250,555)
                 ease 1 rotate 195
-                pause 0.25
-                ease 0.5 rotate 210
+                pause .25
+                ease .5 rotate 210
                 ease 1 rotate 195
-                pause 0.25
+                pause .25
             choice:
-                ease 0.5 rotate 205 ypos 565
-                ease 0.75 rotate 200 ypos 570
-                ease 0.5 rotate 205 ypos 565
-                ease 0.75 rotate 200 ypos 570
+                ease .5 rotate 205 ypos 565
+                ease .75 rotate 200 ypos 570
+                ease .5 rotate 205 ypos 565
+                ease .75 rotate 200 ypos 570
             choice:
-                ease 0.3 rotate 205 ypos 565
-                ease 0.3 rotate 200 ypos 575
-                ease 0.3 rotate 205 ypos 565
-                ease 0.3 rotate 200 ypos 575
+                ease .3 rotate 205 ypos 565
+                ease .3 rotate 200 ypos 575
+                ease .3 rotate 205 ypos 565
+                ease .3 rotate 200 ypos 575
             repeat
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

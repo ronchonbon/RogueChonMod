@@ -1362,7 +1362,7 @@ label Girl_Cum_Outside:
 
 
 
-            # call expression Girl.tag+"_sex_launch" pass ("hotdog")
+            # call expression Girl.tag+"_Sex_Launch" pass ("hotdog")
     $ action_speed = 0
     if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience))  and Girl.event_counter["swallowed"]:
         $ Girl.eyes = "_manic"
@@ -2007,9 +2007,9 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
     if primary_action == "striptease":
         call AllReset (Girl)
         if Girl == RogueX:
-            show Rogue_sprite at Girl_Dance1(RogueX)
+            show Rogue_Sprite at Girl_Dance1(RogueX)
         elif Girl == KittyX:
-            show Kitty_sprite at Girl_Dance1(KittyX)
+            show Kitty_Sprite at Girl_Dance1(KittyX)
         elif Girl == EmmaX:
             show Emma_Sprite at Girl_Dance1(EmmaX)
         elif Girl == LauraX:
@@ -2766,7 +2766,7 @@ label Self_Cleanup(Girl=0):
             ch_k "Wow, you really drenched me!"
         elif Girl == EmmaX:
             if "White Queen" not in EmmaX.names:
-                ch_e "I really was the \"white queen\" there."
+                ch_e "I really was the \"_white queen\" there."
                 $ EmmaX.names.append("White Queen")
             else:
                 ch_e "Well that was a lot of work."
@@ -2785,7 +2785,7 @@ label Self_Cleanup(Girl=0):
         elif Girl == KittyX:
             ch_k "Well that was a fine mess you got me into."
         elif Girl == EmmaX:
-            ch_e "I really was the \"white queen\" there."
+            ch_e "I really was the \"_white queen\" there."
             if "White Queen" not in EmmaX.names:
                 $ EmmaX.names.append("White Queen")
         elif Girl == LauraX:

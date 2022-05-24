@@ -439,7 +439,7 @@ label Slap_Ass(Girl=0):
                 $ Girl.change_stat("obedience", 80, 1)
             "She gives you a naughty grin."
         $ Girl.blushing = "_blush1"
-    if Girl.PantsNum() < 5 and Girl.PantiesNum() < 5:
+    if Girl.legs_number() < 5 and Girl.underwear_number() < 5:
         if approval_check(Girl, 500, "O") and Girl.recent_history.count("slap") < 4:
             $ Girl.change_stat("obedience", 90, 1)
             $ Girl.change_stat("lust", 200, 3)

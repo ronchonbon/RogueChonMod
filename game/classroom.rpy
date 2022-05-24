@@ -153,17 +153,16 @@ label classroom_Seating(Girls=[], GirlB=0, GirlLike=0, line=0, D20=0, temp_Girls
     while "junk" in Present:
         $ Present.remove("junk")
     if len(Present) == 2:
-        "You sit between [Present[0].name] and [Present[1].name]."
+        "You look for a seat between [Present[0].name] and [Present[1].name]."
         $ Present[0].location = "bg_classroom"
         $ Present[1].location = "bg_classroom"
     elif Present:
-        "You sit next to [Present[0].name]."
+        "You look for a seat next to [Present[0].name]."
         $ Present[0].location = "bg_classroom"
     else:
-        "You sit off to the side."
+        "You look for a seat off to the side."
 
     if len(Girls) > len(Present):
-
         "The rest are scattered around the room."
 
     while Girls:
@@ -197,10 +196,10 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
 
         if renpy.showing(temp_Girls[0].tag+"_Sprite"):
             if temp_Girls[0] == RogueX:
-                show Rogue_sprite at sprite_location(RogueX.sprite_location,50):
+                show Rogue_Sprite at sprite_location(RogueX.sprite_location,50):
                     ease .5 ypos 250
             elif temp_Girls[0] == KittyX:
-                show Kitty_sprite at sprite_location(KittyX.sprite_location,50):
+                show Kitty_Sprite at sprite_location(KittyX.sprite_location,50):
                     ease .5 ypos 250
             elif temp_Girls[0] == LauraX:
                 show Laura_Sprite at sprite_location(LauraX.sprite_location,50):
@@ -447,9 +446,9 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                     if line == "fondle_pussy":
                         $ Girl.change_face("_sly")
                         $ Girl.change_stat("lust", 94, 5)
-                        if Girl.PantsNum() == 5:
+                        if Girl.legs_number() == 5:
                             "[Girl.name]'s sly smile turns sultry as she feels your fingers sneak under the hem of her skirt, slowly tracing the soft contours of her mound."
-                        elif Girl.PantsNum() >= 7:
+                        elif Girl.legs_number() >= 7:
                             "[Girl.name]'s sly smile turns sultry as she feels your fingers sneak down her pants, slowly tracing the soft contours of her mound."
                         else:
                             "[Girl.name]'s sly smile turns sultry as she feels your fingers sneak between her legs, slowly tracing the soft contours of her mound."
@@ -728,7 +727,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         call remove_girl (Present[1])
                     elif approval_check(Present[1], 1500) and Present[1].likes[Girl.tag] >= 600:
 
-                        $ Present[1].eyes = "leftside"
+                        $ Present[1].eyes = "_leftside"
                         "[Present[1].name] seems to notice what you and [Girl.name] are doing."
                         $ Present[1].change_face("_sly",1)
                         "She seems to be kinda into it. . ."
@@ -743,7 +742,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                     else:
 
 
-                        $ Present[1].eyes = "leftside"
+                        $ Present[1].eyes = "_leftside"
                         "[Present[1].name] seems to notice what you and [Girl.name] are doing."
                         $ Present[1].add_word(1,0,0,"saw with " + Girl.tag)
                         $ Present[1].change_face("_angry",1)

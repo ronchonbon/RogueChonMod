@@ -164,13 +164,13 @@ label masturbate(Girl):
 
     if action_context == Girl:
         if approval > 2:
-            if Girl.PantsNum() == 5:
+            if Girl.legs_number() == 5:
                 "[Girl.name]'s hand snakes down her body, and hikes up her skirt."
 
                 $ Girl.upskirt = 1
-            elif Girl.PantsNum() > 6:
+            elif Girl.legs_number() > 6:
                 "[Girl.name] slides her hand down her body and into her jeans."
-            elif Girl.HoseNum() >= 5:
+            elif Girl.hose_number() >= 5:
                 "[Girl.name]'s hand slides down her body and under her [Girl.hose]."
             elif Girl.underwear:
                 "[Girl.name]'s hand slides down her body and under her [Girl.underwear]."

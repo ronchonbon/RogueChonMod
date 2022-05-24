@@ -1,46 +1,51 @@
 label world_map:
-    $ taboo = 0
     $ stack_depth = renpy.call_stack_depth()
+
+    $ taboo = 0
+
+    $ bg_current = "bg_campus"
+
+    call set_the_scene(silent = True)
 
     menu world_map_menu:
         "Where would you like to go?"
-        "My room" if bg_current != "bg_player":
+        "My room":# if bg_current != "bg_player":
             jump player_room_entry
         "Girl's rooms":
             menu:
-                "[RogueX.name]'s room" if bg_current != "bg_rogue":
+                "[RogueX.name]'s room":# if bg_current != "bg_rogue":
                     $ Girl = RogueX
 
                     jump girls_room_entry
-                "[KittyX.name]'s room" if "met" in KittyX.history and bg_current != "bg_kitty":
+                "[KittyX.name]'s room" if "met" in KittyX.history:# and bg_current != "bg_kitty":
                     $ Girl = KittyX
 
                     jump girls_room_entry
-                "[EmmaX.name]'s room" if "met" in EmmaX.history and bg_current != "bg_emma":
+                "[EmmaX.name]'s room" if "met" in EmmaX.history:# and bg_current != "bg_emma":
                     $ Girl = EmmaX
 
                     jump girls_room_entry
-                "[LauraX.name]'s room" if "met" in LauraX.history and bg_current != "bg_laura":
+                "[LauraX.name]'s room" if "met" in LauraX.history:# and bg_current != "bg_laura":
                     $ Girl = LauraX
 
                     jump girls_room_entry
-                "[JeanX.name]'s room" if "met" in JeanX.history and bg_current != "bg_jean":
+                "[JeanX.name]'s room" if "met" in JeanX.history:# and bg_current != "bg_jean":
                     $ Girl = JeanX
 
                     jump girls_room_entry
-                "[StormX.name]'s room" if "met" in StormX.history and bg_current != "bg_storm":
+                "[StormX.name]'s room" if "met" in StormX.history:# and bg_current != "bg_storm":
                     $ Girl = StormX
 
                     jump girls_room_entry
-                "[JubesX.name]'s room" if "met" in JubesX.history and bg_current != "bg_jubes":
+                "[JubesX.name]'s room" if "met" in JubesX.history:# and bg_current != "bg_jubes":
                     $ Girl = JubesX
 
                     jump girls_room_entry
                 "Back":
                     jump world_map_menu
-        "University Square" if bg_current != "bg_campus":
+        "University Square":# if bg_current != "bg_campus":
             jump campus_entry
-        "Class" if bg_current != "bg_classroom":
+        "Class":# if bg_current != "bg_classroom":
             if time_index < 3:
                 jump classroom_entry
             elif "Xavier" in keys:
@@ -51,20 +56,20 @@ label world_map:
                 "It's late for classes and the classrooms are locked down."
 
                 jump world_map
-        "The Danger Room" if bg_current != "bg_dangerroom":
+        "The Danger Room":# if bg_current != "bg_dangerroom":
             jump danger_room_entry
-        "The showers" if bg_current != "bg_showerroom":
+        "The showers":# if bg_current != "bg_showerroom":
             jump shower_entry
-        "The pool" if bg_current != "bg_pool":
+        "The pool":# if bg_current != "bg_pool":
             jump pool_entry
-        "Xavier's study" if bg_current != "bg_study":
+        "Xavier's study":# if bg_current != "bg_study":
             jump study_entry
-        "Go to the mall" if "mall" in Player.history and time_index < 3 and bg_current != "bg_mall":
+        "Go to the mall" if "mall" in Player.history and time_index < 3:# and bg_current != "bg_mall":
             jump Mall_entry
-        "Attic" if "attic" in Player.history and bg_current != "bg_storm":
+        "Attic" if "attic" in Player.history:# and bg_current != "bg_storm":
             jump StormMeet
-        "Stay where I am.":
-            return
+        # "Stay where I am.":
+        #     return
 
 label player_room_entry:
     $ door_locked = False
@@ -132,12 +137,13 @@ label player_room:
         "Special Options":
             call SpecialMenu
         "Leave":
-            call world_map
+            jump world_map
 
     jump player_room_menu
 
 label girls_room_entry:
-    $ bg_current = Girl.home
+    $ bg_current = "bg_entry"
+
     $ door_locked = False
 
     call shift_focus(Girl)
@@ -543,7 +549,7 @@ label girls_room:
             call girls_location
             call event_calls
         "Leave":
-            call world_map
+            jump world_map
 
     if "_angry" in Girl.recent_history:
         $ Girl.change_face("_angry")
@@ -614,13 +620,11 @@ label campus:
             call girls_location
             call event_calls
         "Leave":
-            call world_map
+            jump world_map
 
     jump campus_menu
 
 label classroom_entry:
-    call check_on_Jubes_sunshock
-
     $ bg_current = "bg_classroom"
 
     $ Player.drain_word("locked",0,0,1)
@@ -652,8 +656,6 @@ label classroom:
         "As you sit down, you see [StormX.name] at the podium."
     elif time_index == 2 or weekday > 5:
         "You enter the classroom."
-    else:
-        "You sit down at a desk"
 
     call taboo_level
     call set_the_scene(silent = True)
@@ -716,13 +718,11 @@ label classroom:
             else:
                 $ line = "Classes have let out for the day. What would you like to do?"
         "Leave":
-            call world_map
+            jump world_map
 
     jump classroom_menu
 
 label danger_room_entry:
-    call check_on_Jubes_sunshock
-
     $ bg_current = "bg_dangerroom"
 
     $ Player.drain_word("locked",0,0,1)
@@ -760,8 +760,10 @@ label danger_room:
 
     call are_girls_angry
 
+    "This is the Danger Room. What would you like to do?"
+
     menu danger_room_menu:
-        "This is the Danger Room. What would you like to do?"
+        extend ""
         "Train":
             if time_index >= 3:
                 "The Danger Room has been powered off for the night, maybe take a break."
@@ -795,7 +797,7 @@ label danger_room:
             call change_out_of_gym_clothes
         "Leave":
             call exit_gym
-            call world_map
+            jump world_map
 
     jump danger_room_menu
 
@@ -904,9 +906,7 @@ label gym_entry(number_of_girls = 0):
     return
 
 label shower_entry:
-    call check_on_Jubes_sunshock
-
-    $ bg_current = "bg_showerroom"
+    $ bg_current = "bg_entry"
 
     $ Player.drain_word("locked",0,0,1)
 
@@ -945,13 +945,17 @@ label shower_entry:
 
     if not Party and potential_Girls and potential_Girls[0] in all_Girls:
         if D20 > 15:
-            call girl_caught_showering(potential_Girls[0])
-            call shower_room
+            call caught_showering(potential_Girls[0])
+            jump shower_room
         elif D20 > 13:
             $ potential_Girls[0].add_word(1,"showered","showered",0,0)
 
+            $ bg_current = "bg_showerroom"
+
             call Girl_Caught_Changing(potential_Girls[0])
-            call shower_room
+            jump shower_room
+
+    $ bg_current = "bg_showerroom"
 
     python:
         for G in potential_Girls:
@@ -1167,10 +1171,8 @@ label shower_room:
                     $ Nearby[0].location = "nearby"
         "Leave":
             call quick_event
-            call world_map
-
-            if bg_current != "bg_showerroom":
-                call change_out_of_towels
+            call change_out_of_towels
+            jump world_map
 
     jump shower_menu
 
@@ -1241,13 +1243,12 @@ label pool:
             call girls_location
             call event_calls
         "Leave":
-            call world_map
+            jump world_map
 
     jump pool_menu
 
 label study_entry:
-    call check_on_Jubes_sunshock
-    $ bg_current = "bg_study"
+    $ bg_current = "bg_entry"
 
     $ Player.drain_word("locked",0,0,1)
 
@@ -1275,7 +1276,7 @@ label study_entry:
         "Ask [StormX.name]" if time_index >= 3 and StormX in Party:
             $ decision = "storm"
         "Leave":
-            call world_map
+            jump world_map
 
     if decision == "knock":
         if time_index >= 3:
@@ -1342,7 +1343,7 @@ label study_entry:
 
                         $ KittyX.recent_history.append("no_thief")
                 "Never mind. [[Leave]":
-                    call world_map
+                    jump world_map
 
         jump study_entry_menu
     elif decision == "storm":
@@ -1382,7 +1383,7 @@ label study_entry:
 
                     jump study_room
                 "Never mind. [[Leave]":
-                    call world_map
+                    jump world_map
 
         jump study_entry_menu
 
@@ -1484,6 +1485,6 @@ label study_room:
 
                 ch_x "Not that I mind the company, but is there something I can do for you?"
         "Leave":
-            call world_map
+            jump world_map
 
     jump study_menu

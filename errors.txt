@@ -2,9 +2,299 @@
 errors listed below, and try again.
 
 
-File "game/locations.rpy", line 496: expected 'label_name_declare' not found.
-    label:
-         ^
+The label Jubes_Doggy_Launch is defined twice, at File "game/jubes_animation.rpyc", line 2081:
+Ú=Å¸ @6˚É
+and File "game/jubes_animations.rpy", line 2081:
+Ú=Å¸ @6˚É
+
+
+The label Jubes_Doggy_Reset is defined twice, at File "game/jubes_animation.rpyc", line 2091:
+≠¨¨ïMk%ıI~f';©Â0≈îL©ËüŸ·<Èı\Êı‰¶ÿrõbÀC6y1l©ÿ"Oa>&N‚¸L\@'ò¬(R+(‘RNa
+and File "game/jubes_animations.rpy", line 2091:
+≠¨¨ïMk%ıI~f';©Â0≈îL©ËüŸ·<Èı\Êı‰¶ÿrõbÀC6y1l©ÿ"Oa>&N‚¸L\@'ò¬(R+(‘RNa
+
+
+The label Jubes_Sex_Reset is defined twice, at File "game/jubes_animation.rpyc", line 3869:
+
+and File "game/jubes_animations.rpy", line 3869:
+
+
+
+The label Jubes_BJ_Launch is defined twice, at File "game/jubes_animation.rpyc", line 5016:
+
+and File "game/jubes_animations.rpy", line 5016:
+
+
+
+The label Jubes_BJ_Reset is defined twice, at File "game/jubes_animation.rpyc", line 5056:
+
+and File "game/jubes_animations.rpy", line 5056:
+
+
+
+The label Jubes_HJ_Launch is defined twice, at File "game/jubes_animation.rpyc", line 5194:
+
+and File "game/jubes_animations.rpy", line 5194:
+
+
+
+The label Jubes_HJ_Reset is defined twice, at File "game/jubes_animation.rpyc", line 5222:
+
+and File "game/jubes_animations.rpy", line 5222:
+
+
+
+The label Jubes_TJ_Launch is defined twice, at File "game/jubes_animation.rpyc", line 6317:
+
+and File "game/jubes_animations.rpy", line 6317:
+
+
+
+The label Jubes_TJ_Reset is defined twice, at File "game/jubes_animation.rpyc", line 6360:
+
+and File "game/jubes_animations.rpy", line 6360:
+
+
+
+The label Jubes_Kissing_Launch is defined twice, at File "game/jubes_animation.rpyc", line 6393:
+
+and File "game/jubes_animations.rpy", line 6393:
+
+
+
+The label Jubes_Kissing_Smooch is defined twice, at File "game/jubes_animation.rpyc", line 6402:
+
+and File "game/jubes_animations.rpy", line 6402:
+
+
+
+The label Jubes_Breasts_Launch is defined twice, at File "game/jubes_animation.rpyc", line 6413:
+
+and File "game/jubes_animations.rpy", line 6413:
+
+
+
+The label Jubes_Middle_Launch is defined twice, at File "game/jubes_animation.rpyc", line 6422:
+
+and File "game/jubes_animations.rpy", line 6422:
+
+
+
+The label Jubes_Pussy_Launch is defined twice, at File "game/jubes_animation.rpyc", line 6431:
+
+and File "game/jubes_animations.rpy", line 6431:
+
+
+
+The label Jubes_Pos_Reset is defined twice, at File "game/jubes_animation.rpyc", line 6439:
+
+and File "game/jubes_animations.rpy", line 6439:
+
+
+
+The label Kitty_Doggy_Launch is defined twice, at File "game/kitty_animations.rpy", line 3295:
+label Kitty_Doggy_Launch(Line=Trigger):
+and File "game/kitty_animations_old.rpyc", line 2255:
+label Kitty_Doggy_Launch(Line=Trigger):
+
+
+The label Kitty_Doggy_Reset is defined twice, at File "game/kitty_animations.rpy", line 3304:
+label Kitty_Doggy_Reset:
+and File "game/kitty_animations_old.rpyc", line 2264:
+label Kitty_Doggy_Reset:
+
+
+The label Kitty_BJ_Launch is defined twice, at File "game/kitty_animations.rpy", line 3882:
+label Kitty_BJ_Launch(Line=Trigger):
+and File "game/kitty_animations_old.rpyc", line 2750:
+label Kitty_BJ_Launch(Line=Trigger):
+
+
+The label Kitty_BJ_Reset is defined twice, at File "game/kitty_animations.rpy", line 3923:
+label Kitty_BJ_Reset:
+and File "game/kitty_animations_old.rpyc", line 2791:
+label Kitty_BJ_Reset:
+
+
+The label Kitty_TJ_Launch is defined twice, at File "game/kitty_animations.rpy", line 4642:
+label Kitty_TJ_Launch(Line=Trigger):
+and File "game/kitty_animations_old.rpyc", line 3510:
+label Kitty_TJ_Launch(Line=Trigger):
+
+
+The label Kitty_TJ_Reset is defined twice, at File "game/kitty_animations.rpy", line 4685:
+label Kitty_TJ_Reset:
+and File "game/kitty_animations_old.rpyc", line 3553:
+label Kitty_TJ_Reset:
+
+
+The label Kitty_HJ_Launch is defined twice, at File "game/kitty_animations.rpy", line 4796:
+label Kitty_HJ_Launch(Line=Trigger):
+and File "game/kitty_animations_old.rpyc", line 3664:
+label Kitty_HJ_Launch(Line=Trigger):
+
+
+The label Kitty_HJ_Reset is defined twice, at File "game/kitty_animations.rpy", line 4832:
+label Kitty_HJ_Reset:
+and File "game/kitty_animations_old.rpyc", line 3700:
+label Kitty_HJ_Reset:
+
+
+The label Kitty_Kissing_Launch is defined twice, at File "game/kitty_animations.rpy", line 4852:
+label Kitty_Kissing_Launch(T=Trigger, Set=1):
+and File "game/kitty_animations_old.rpyc", line 3720:
+label Kitty_Kissing_Launch(T=Trigger, Set=1):
+
+
+The label Kitty_Kissing_Smooch is defined twice, at File "game/kitty_animations.rpy", line 4861:
+label Kitty_Kissing_Smooch:
+and File "game/kitty_animations_old.rpyc", line 3729:
+label Kitty_Kissing_Smooch:
+
+
+The label Kitty_Breasts_Launch is defined twice, at File "game/kitty_animations.rpy", line 4870:
+label Kitty_Breasts_Launch(T=Trigger, Set=1):
+and File "game/kitty_animations_old.rpyc", line 3738:
+label Kitty_Breasts_Launch(T=Trigger, Set=1):
+
+
+The label Kitty_Middle_Launch is defined twice, at File "game/kitty_animations.rpy", line 4878:
+label Kitty_Middle_Launch(T=Trigger, Set=1):
+and File "game/kitty_animations_old.rpyc", line 3746:
+label Kitty_Middle_Launch(T=Trigger, Set=1):
+
+
+The label Kitty_Pussy_Launch is defined twice, at File "game/kitty_animations.rpy", line 4887:
+label Kitty_Pussy_Launch(T=Trigger, Set=1):
+and File "game/kitty_animations_old.rpyc", line 3755:
+label Kitty_Pussy_Launch(T=Trigger, Set=1):
+
+
+The label Kitty_Pos_Reset is defined twice, at File "game/kitty_animations.rpy", line 4895:
+label Kitty_Pos_Reset(T=0, Set=0):
+and File "game/kitty_animations_old.rpyc", line 3763:
+label Kitty_Pos_Reset(T=0, Set=0):
+
+
+The label Kitty_ThreewayBreasts_Launch is defined twice, at File "game/kitty_animations.rpy", line 4913:
+label Kitty_ThreewayBreasts_Launch:
+and File "game/kitty_animations_old.rpyc", line 3781:
+label Kitty_ThreewayBreasts_Launch:
+
+
+The label Rogue_Doggy_Launch is defined twice, at File "game/rogue_animations.rpy", line 2145:
+label Rogue_Doggy_Launch(Line=Trigger):
+and File "game/rogue_animations_old.rpyc", line 826:
+label Rogue_Doggy_Launch(Line=Trigger):
+
+
+The label Rogue_Doggy_Reset is defined twice, at File "game/rogue_animations.rpy", line 2154:
+label Rogue_Doggy_Reset:
+and File "game/rogue_animations_old.rpyc", line 835:
+label Rogue_Doggy_Reset:
+
+
+The label Rogue_BJ_Launch is defined twice, at File "game/rogue_animations.rpy", line 3759:
+label Rogue_BJ_Launch(Line=Trigger):
+and File "game/rogue_animations_old.rpyc", line 1745:
+label Rogue_BJ_Launch(Line=Trigger):
+
+
+The label Rogue_BJ_Reset is defined twice, at File "game/rogue_animations.rpy", line 3803:
+label Rogue_BJ_Reset:
+and File "game/rogue_animations_old.rpyc", line 1789:
+label Rogue_BJ_Reset:
+
+
+The label Rogue_TJ_Launch is defined twice, at File "game/rogue_animations.rpy", line 3998:
+label Rogue_TJ_Launch(Line=Trigger):
+and File "game/rogue_animations_old.rpyc", line 1915:
+label Rogue_TJ_Launch(Line=Trigger):
+
+
+The label Rogue_TJ_Reset is defined twice, at File "game/rogue_animations.rpy", line 4057:
+label Rogue_TJ_Reset:
+and File "game/rogue_animations_old.rpyc", line 1974:
+label Rogue_TJ_Reset:
+
+
+The label Rogue_HJ_Launch is defined twice, at File "game/rogue_animations.rpy", line 4162:
+label Rogue_HJ_Launch(Line=Trigger):
+and File "game/rogue_animations_old.rpyc", line 2054:
+label Rogue_HJ_Launch(Line=Trigger):
+
+
+The label Rogue_HJ_Reset is defined twice, at File "game/rogue_animations.rpy", line 4205:
+label Rogue_HJ_Reset:
+and File "game/rogue_animations_old.rpyc", line 2097:
+label Rogue_HJ_Reset:
+
+
+The label Rogue_Kissing_Launch is defined twice, at File "game/rogue_animations.rpy", line 5008:
+label Rogue_Kissing_Launch(T=Trigger, Set=1):
+and File "game/rogue_animations_old.rpyc", line 2900:
+label Rogue_Kissing_Launch(T=Trigger, Set=1):
+
+
+The label Rogue_Kissing_Smooch is defined twice, at File "game/rogue_animations.rpy", line 5017:
+label Rogue_Kissing_Smooch:
+and File "game/rogue_animations_old.rpyc", line 2909:
+label Rogue_Kissing_Smooch:
+
+
+The label Rogue_Breasts_Launch is defined twice, at File "game/rogue_animations.rpy", line 5029:
+label Rogue_Breasts_Launch(T=Trigger, Set=1):
+and File "game/rogue_animations_old.rpyc", line 2921:
+label Rogue_Breasts_Launch(T=Trigger, Set=1):
+
+
+The label Rogue_Middle_Launch is defined twice, at File "game/rogue_animations.rpy", line 5037:
+label Rogue_Middle_Launch(T=Trigger, Set=1):
+and File "game/rogue_animations_old.rpyc", line 2929:
+label Rogue_Middle_Launch(T=Trigger, Set=1):
+
+
+The label Rogue_Pussy_Launch is defined twice, at File "game/rogue_animations.rpy", line 5046:
+label Rogue_Pussy_Launch(T=Trigger, Set=1):
+and File "game/rogue_animations_old.rpyc", line 2938:
+label Rogue_Pussy_Launch(T=Trigger, Set=1):
+
+
+The label Rogue_Pos_Reset is defined twice, at File "game/rogue_animations.rpy", line 5054:
+label Rogue_Pos_Reset(T=0, Set=0):
+and File "game/rogue_animations_old.rpyc", line 2946:
+label Rogue_Pos_Reset(T=0, Set=0):
+
+
+The label GwenFace is defined twice, at File "game/rogue_animations.rpy", line 5262:
+label GwenFace(Emote="normal", B=G_Blush, M=0, Mouth=0, Eyes=0, Brows=0):
+and File "game/rogue_animations_old.rpyc", line 3108:
+label GwenFace(Emote="normal", B=G_Blush, M=0, Mouth=0, Eyes=0, Brows=0):
+
+
+The label Gwen_FaceEditor is defined twice, at File "game/rogue_animations.rpy", line 5312:
+label Gwen_FaceEditor:
+and File "game/rogue_animations_old.rpyc", line 3158:
+label Gwen_FaceEditor:
+
+
+The label Display_Gwen is defined twice, at File "game/rogue_animations.rpy", line 5393:
+label Display_Gwen(GwLoc=350, YLoc=50):
+and File "game/rogue_animations_old.rpyc", line 3239:
+label Display_Gwen(GwLoc=350, YLoc=50):
+
+
+The label Close_Launch is defined twice, at File "game/rogue_animations.rpy", line 5412:
+label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
+and File "game/rogue_animations_old.rpyc", line 3258:
+label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
+
+
+The label Les_Launch is defined twice, at File "game/rogue_animations.rpy", line 5526:
+label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, BO=[]):
+and File "game/rogue_animations_old.rpyc", line 3372:
+label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, BO=[]):
+
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Tue May 24 03:18:22 2022
+Tue May 24 12:53:38 2022

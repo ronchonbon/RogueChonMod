@@ -12,7 +12,7 @@ label meet_Emma:
 
     call get_last_name
 
-    $ EmmaX.player_petnames.append(_return)
+    $ Em9maX.player_petnames.append(_return)
     $ EmmaX.player_petname = _return
 
     "You enter the classroom and have a seat."
@@ -132,7 +132,7 @@ label meet_Emma:
 
         ch_e ". . .though I haven't heard of much of a romantic life. . ."
 
-    if Player.level >= 4:
+    if Player.level >= 3:
         $ EmmaX.change_stat("love", 70, 5)
         $ EmmaX.change_stat("obedience", 80, 5)
         $ EmmaX.change_face("_smile")

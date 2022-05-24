@@ -5,7 +5,7 @@ init python:
             self.name = "Zero"
 
             self.sprite = None
-            self.color = "green"
+            self.color = "_green"
 
             self.semen = 2
             self.max_semen = 3
@@ -163,8 +163,8 @@ init python:
             self.mouth = "_normal"
             self.brows = "_normal"
             self.emotion = "_normal"
-            self.arms = ""
 
+            self.arms = ""
             self.legs = ""
             self.top = ""
             self.neck = ""
@@ -315,12 +315,12 @@ init python:
             elif self.tag == "Laura":
                 self.voice = ch_l
 
-                self.first_casual_outfit = [2,"wrists", "leather_pants", "", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
-                self.second_casual_outfit = [2,0, "_skirt", "_jacket", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
-                self.gym_clothes = [2,"wrists", "leather_pants", "", "", "leather_bra", "_black_panties", "", "", "", 0]
-                self.sleepwear = [0, "", "", "", "", "leather_bra", "leather_panties", "", "", "",20]
+                self.first_casual_outfit = [2,"_wrists", "_leather_pants", "", "_leash_choker", "_leather_bra", "_black_panties", "", "", "", 0]
+                self.second_casual_outfit = [2,0, "_skirt", "_jacket", "_leash_choker", "_leather_bra", "_black_panties", "", "", "", 0]
+                self.gym_clothes = [2,"_wrists", "_leather_pants", "", "", "_leather_bra", "_black_panties", "", "", "", 0]
+                self.sleepwear = [0, "", "", "", "", "_leather_bra", "_leather_panties", "", "", "",20]
                 self.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-                self.halloween_costume = [2,"_gloves", "other_skirt", "", "", "white_tank", "_black_panties", "suspenders", "", "black stockings", 0]
+                self.halloween_costume = [2,"_gloves", "_other_skirt", "", "", "_white_tank", "_black_panties", "_suspenders", "", "_black_stockings", 0]
 
                 self.home = "bg_laura"
                 self.hair = "_long"
@@ -351,12 +351,12 @@ init python:
 
                 self.IX = 500
 
-                self.first_casual_outfit = [2,0, "_pants", "pink_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
-                self.second_casual_outfit = [2,0, "_skirt", "green_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
-                self.gym_clothes = [0, "", "yoga_pants", "", "", "_sports_bra", "_green_panties", "", "", "", 0]
-                self.sleepwear = [0, "", "", "pink_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
+                self.first_casual_outfit = [2,0, "_pants", "_pink_shirt", "", "_green_bra", "_green_panties", "", "", "", 0]
+                self.second_casual_outfit = [2,0, "_skirt", "_green_shirt", "", "_green_bra", "_green_panties", "", "", "", 0]
+                self.gym_clothes = [0, "", "_yoga_pants", "", "", "_sports_bra", "_green_panties", "", "", "", 0]
+                self.sleepwear = [0, "", "", "_pink_shirt", "", "_green_bra", "_green_panties", "", "", "", 0]
                 self.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-                self.halloween_costume =  [2,0, "_shorts", "yellow_shirt", "", "green_bra", "_green_panties", "suspenders", "pony", "", 0]
+                self.halloween_costume =  [2,0, "_shorts", "_yellow_shirt", "", "_green_bra", "_green_panties", "_suspenders", "pony", "", 0]
 
                 self.home = "bg_jean"
                 self.hair = "_short"
@@ -383,12 +383,12 @@ init python:
             elif self.tag == "Storm":
                 self.voice = ch_s
 
-                self.first_casual_outfit = [2,0, "_skirt", "white_shirt", "", "black_bra", "_white_panties", "", "", "", 0]
+                self.first_casual_outfit = [2,0, "_skirt", "_white_shirt", "", "black_bra", "_white_panties", "", "", "", 0]
                 self.second_casual_outfit = [2,0, "_pants", "_jacket", "", "_sports_bra", "_white_panties", "", "", "", 0]
-                self.gym_clothes = [0, "", "yoga_pants", "", "", "_sports_bra", "_white_panties", "", "", "",10]
-                self.sleepwear = [0, "", "", "white_shirt", "", "", "_white_panties", "", "", "",25]
+                self.gym_clothes = [0, "", "_yoga_pants", "", "", "_sports_bra", "_white_panties", "", "", "",10]
+                self.sleepwear = [0, "", "", "_white_shirt", "", "", "_white_panties", "", "", "",25]
                 self.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-                self.halloween_costume = [2,0, "", "", "ring_necklace", "cos_bra", "cos_panties", "rings", "_short", "", 0]
+                self.halloween_costume = [2,0, "", "", "_ring_necklace", "_cosplay_bra", "_cosplay_panties", "_rings", "_short", "", 0]
 
                 self.home = "bg_storm"
                 self.hair = "_long"
@@ -472,7 +472,7 @@ init python:
                 if self.swimwear[2] == "_blue_skirt" and self.swimwear[6] and self.inhibition > 500:
                     self.swimwear[2] = 0
             elif self.tag == "Laura":
-                if self.inhibition >= 400 and self.second_casual_outfit[5] == "leather_bra" and "_corset" in self.inventory:
+                if self.inhibition >= 400 and self.second_casual_outfit[5] == "_leather_bra" and "_corset" in self.inventory:
                     self.second_casual_outfit[5] = "_corset"
                 if self.inhibition >= 600 and "_lace_panties" in self.inventory:
                     self.second_casual_outfit[6] = "_lace_panties"
@@ -487,9 +487,9 @@ init python:
                 if self.inhibition >= 600 and "_bikini_top" in self.inventory:
                     self.gym_clothes[5] = "_bikini_top" if self.gym_clothes[0] == 1 else self.gym_clothes[5]
 
-                if self.inhibition >= 600 and "lace_bra" in self.inventory:
-                    self.first_casual_outfit[5] = "lace_bra"
-                    self.second_casual_outfit[5] = "lace_bra"
+                if self.inhibition >= 600 and "_lace_bra" in self.inventory:
+                    self.first_casual_outfit[5] = "_lace_bra"
+                    self.second_casual_outfit[5] = "_lace_bra"
 
                 if self.inhibition >= 600 and "_lace_panties" in self.inventory:
                     self.first_casual_outfit[6] = "_lace_panties"
@@ -1139,7 +1139,7 @@ init python:
             self.today_outfit = "temporary"
             return
 
-        def ChestNum(self,Up=1):
+        def bra_number(self,Up=1):
 
             if Up and self.top_pulled_up and self.bra:
                 return True
@@ -1147,7 +1147,7 @@ init python:
                 if self.bra in ("_tank", "_buttoned_tank"):
                     return 5
             if self.tag == "Laura":
-                if self.bra in ("leather_bra", "white_tank"):
+                if self.bra in ("_leather_bra", "_white_tank"):
                     return 5
                 elif self.bra == "wolvie_top":
                     return 3
@@ -1159,20 +1159,20 @@ init python:
                     return 5
             if self.bra == "_tube_top":
                 return 5
-            if self.bra == "lace_bra":
+            if self.bra == "_lace_bra":
                 return 2
-            if self.bra == "lace corset":
+            if self.bra == "_lace corset":
                 return 2
             if self.bra == "_corset":
                 return 5
             if self.bra:
                 return 3
-            if self.accessory == "suspenders" or self.accessory == "suspenders2":
+            if self.accessory == "_suspenders" or self.accessory == "_suspenders2":
                 return 2
 
             return False
 
-        def OverNum(self,Up=1):
+        def top_number(self,Up=1):
 
             if Up and self.top_pulled_up and self.top:
                 return True
@@ -1209,7 +1209,7 @@ init python:
 
             return False
 
-        def PantsNum(self,Up=1):
+        def legs_number(self,Up=1):
 
 
 
@@ -1224,9 +1224,9 @@ init python:
                 return 6
             if self.legs == "_shorts":
                 return 6
-            if self.legs in ("_skirt", "_blue_skirt", "other_skirt", "_dress"):
+            if self.legs in ("_skirt", "_blue_skirt", "_other_skirt", "_dress"):
                 return 5
-            if self.legs == "yoga_pants":
+            if self.legs == "_yoga_pants":
                 return 8
             if self.top == "_towel" and self not in (EmmaX,StormX):
                 return 5
@@ -1240,7 +1240,7 @@ init python:
 
             return False
 
-        def PantiesNum(self,Up=1):
+        def underwear_number(self,Up=1):
 
             if Up and self.underwear_pulled_down and self.underwear:
                 return True
@@ -1254,7 +1254,7 @@ init python:
                 return 4
             return False
 
-        def HoseNum(self,Up=1):
+        def hose_number(self,Up=1):
 
             if Up and self.hose and (self.underwear_pulled_down or self.upskirt):
                 return True
@@ -1276,13 +1276,13 @@ init python:
         def ClothingCheck(self,C = 0):
             C = 0
 
-            if self.OverNum() >= 5:
+            if self.top_number() >= 5:
                 C += 1
             if self.bra:
                 C += 1
             if self.legs:
                 C += 1
-            if self.HoseNum() >= 5:
+            if self.hose_number() >= 5:
                 C += 1
             if self.underwear:
                 C += 1
@@ -1294,20 +1294,20 @@ init python:
 
             if Check == 2:
                 pass
-            elif self.OverNum() >= 3:
+            elif self.top_number() >= 3:
                 pass
-            elif self.ChestNum() >= 3:
+            elif self.bra_number() >= 3:
                 pass
             else:
                 C += 1
 
             if Check == 1:
                 pass
-            elif self.PantsNum() >= 5:
+            elif self.legs_number() >= 5:
                 pass
-            elif self.PantiesNum() >= 4:
+            elif self.underwear_number() >= 4:
                 pass
-            elif self.HoseNum() >= 5:
+            elif self.hose_number() >= 5:
                 pass
             else:
                 C += 1
@@ -1324,7 +1324,7 @@ init python:
                     C += 1
                 elif not self.legs or self.upskirt:
 
-                    if self.underwear_pulled_down or (self.HoseNum() < 5 and not self.underwear):
+                    if self.underwear_pulled_down or (self.hose_number() < 5 and not self.underwear):
 
                         C += 1
             return C

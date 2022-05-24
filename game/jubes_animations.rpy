@@ -10,7 +10,7 @@ image Jubes_Sprite:
             "True", Null(),
             ),
 
-        (147,48), "Jubes_Sprite_hairback",
+        (147,48), "Jubes_Sprite_HairBack",
 
 
 
@@ -20,19 +20,19 @@ image Jubes_Sprite:
         (0,0), ConditionSwitch(
 
             "not JubesX.legs or not JubesX.upskirt", Null(),
-            "JubesX.legs == 'pants'", "images/JubesSprite/Jubes_Sprite_Legs_Pants_Back.png",
-            "JubesX.legs == 'shorts'", "images/JubesSprite/Jubes_Sprite_Legs_Shorts_Back.png",
+            "JubesX.legs == '_pants'", "images/JubesSprite/Jubes_Sprite_Legs_Pants_Back.png",
+            "JubesX.legs == '_shorts'", "images/JubesSprite/Jubes_Sprite_Legs_Shorts_Back.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not JubesX.underwear or not JubesX.underwear_pulled_down", Null(),
 
-            "JubesX.legs and not JubesX.upskirt and JubesX.legs != 'skirt'", Null(),
+            "JubesX.legs and not JubesX.upskirt and JubesX.legs != '_skirt'", Null(),
 
-            "JubesX.underwear == 'lace_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Lace_Back.png",
-            "JubesX.underwear == 'tiger_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Tiger_Back.png",
-            "JubesX.underwear == 'bikini_bottoms'", "images/JubesSprite/Jubes_Sprite_Panties_Bikini_Back.png",
+            "JubesX.underwear == '_lace_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Lace_Back.png",
+            "JubesX.underwear == '_tiger_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Tiger_Back.png",
+            "JubesX.underwear == '_bikini_bottoms'", "images/JubesSprite/Jubes_Sprite_Panties_Bikini_Back.png",
             "True", "images/JubesSprite/Jubes_Sprite_Panties_Blue_Back.png",
             ),
 
@@ -57,8 +57,8 @@ image Jubes_Sprite:
 
 
             "not JubesX.accessory", Null(),
-            "(JubesX.top_pulled_up or JubesX.accessory == 'open jacket') and JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Open1_Back.png",
-            "(JubesX.top_pulled_up or JubesX.accessory == 'open jacket')", "images/JubesSprite/Jubes_Sprite_Jacket_Open2_Back.png",
+            "(JubesX.top_pulled_up or JubesX.accessory == '_open_jacket') and JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Open1_Back.png",
+            "(JubesX.top_pulled_up or JubesX.accessory == '_open_jacket')", "images/JubesSprite/Jubes_Sprite_Jacket_Open2_Back.png",
 
 
             "True", "images/JubesSprite/Jubes_Sprite_Jacket_Closed_Back.png",
@@ -105,8 +105,8 @@ image Jubes_Sprite:
             "not JubesX.piercings", Null(),
 
 
-            "JubesX.piercings == 'barbell'", "images/JubesSprite/Jubes_Sprite_Pierce_Barbell_Bot.png",
-            "JubesX.piercings == 'ring'", "images/JubesSprite/Jubes_Sprite_Pierce_Ring_Bot.png",
+            "JubesX.piercings == '_barbell'", "images/JubesSprite/Jubes_Sprite_Pierce_Barbell_Bot.png",
+            "JubesX.piercings == '_ring'", "images/JubesSprite/Jubes_Sprite_Pierce_Ring_Bot.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -115,7 +115,7 @@ image Jubes_Sprite:
 
 
 
-            "JubesX.piercings == 'barbell'", ConditionSwitch(
+            "JubesX.piercings == '_barbell'", ConditionSwitch(
 
 
                     "True", "images/JubesSprite/Jubes_Sprite_Pierce_Barbell_Top.png",
@@ -135,14 +135,14 @@ image Jubes_Sprite:
 
             "JubesX.top_pulled_up", ConditionSwitch(
 
-                    "JubesX.bra == 'lace_bra'", "images/JubesSprite/Jubes_Sprite_Chest_Lace_Up.png",
-                    "JubesX.bra == 'sports_bra'", "images/JubesSprite/Jubes_Sprite_Chest_Sports_Up.png",
-                    "JubesX.bra == 'bikini_top'", "images/JubesSprite/Jubes_Sprite_Chest_Bikini_Up.png",
+                    "JubesX.bra == '_lace_bra'", "images/JubesSprite/Jubes_Sprite_Chest_Lace_Up.png",
+                    "JubesX.bra == '_sports_bra'", "images/JubesSprite/Jubes_Sprite_Chest_Sports_Up.png",
+                    "JubesX.bra == '_bikini_top'", "images/JubesSprite/Jubes_Sprite_Chest_Bikini_Up.png",
                     "True", Null(),
                     ),
-            "JubesX.bra == 'lace_bra'", "images/JubesSprite/Jubes_Sprite_Chest_Lace.png",
-            "JubesX.bra == 'sports_bra'", "images/JubesSprite/Jubes_Sprite_Chest_Sports.png",
-            "JubesX.bra == 'bikini_top'", "images/JubesSprite/Jubes_Sprite_Chest_Bikini.png",
+            "JubesX.bra == '_lace_bra'", "images/JubesSprite/Jubes_Sprite_Chest_Lace.png",
+            "JubesX.bra == '_sports_bra'", "images/JubesSprite/Jubes_Sprite_Chest_Sports.png",
+            "JubesX.bra == '_bikini_top'", "images/JubesSprite/Jubes_Sprite_Chest_Bikini.png",
             "True", Null(),
             ),
 
@@ -162,10 +162,10 @@ image Jubes_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "JubesX.hose == 'socks'", "images/JubesSprite/Jubes_Sprite_Hose_Socks.png",
-            "JubesX.hose == 'stockings'", "images/JubesSprite/Jubes_Sprite_Hose_Stockings.png",
-            "JubesX.hose == 'stockings_and_garterbelt'", "images/JubesSprite/Jubes_Sprite_Hose_StockingsandGarter.png",
-            "JubesX.hose == 'garterbelt'", "images/JubesSprite/Jubes_Sprite_Hose_Garter.png",
+            "JubesX.hose == '_socks'", "images/JubesSprite/Jubes_Sprite_Hose_Socks.png",
+            "JubesX.hose == '_stockings'", "images/JubesSprite/Jubes_Sprite_Hose_Stockings.png",
+            "JubesX.hose == '_stockings_and_garterbelt'", "images/JubesSprite/Jubes_Sprite_Hose_StockingsandGarter.png",
+            "JubesX.hose == '_garterbelt'", "images/JubesSprite/Jubes_Sprite_Hose_Garter.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -173,13 +173,13 @@ image Jubes_Sprite:
             "not JubesX.underwear", Null(),
             "JubesX.underwear_pulled_down", ConditionSwitch(
 
-                    "not JubesX.legs or JubesX.upskirt or JubesX.legs == 'skirt'", ConditionSwitch(
+                    "not JubesX.legs or JubesX.upskirt or JubesX.legs == '_skirt'", ConditionSwitch(
 
-                            "JubesX.underwear == 'lace_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Lace_Down.png",
-                            "JubesX.underwear == 'bikini_bottoms' and JubesX.grool", "images/JubesSprite/Jubes_Sprite_Panties_Bikini_DownW.png",
-                            "JubesX.underwear == 'bikini_bottoms'", "images/JubesSprite/Jubes_Sprite_Panties_Bikini_Down.png",
-                            "JubesX.underwear == 'tiger_panties' and JubesX.grool", "images/JubesSprite/Jubes_Sprite_Panties_Tiger_DownW.png",
-                            "JubesX.underwear == 'tiger_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Tiger_Down.png",
+                            "JubesX.underwear == '_lace_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Lace_Down.png",
+                            "JubesX.underwear == '_bikini_bottoms' and JubesX.grool", "images/JubesSprite/Jubes_Sprite_Panties_Bikini_DownW.png",
+                            "JubesX.underwear == '_bikini_bottoms'", "images/JubesSprite/Jubes_Sprite_Panties_Bikini_Down.png",
+                            "JubesX.underwear == '_tiger_panties' and JubesX.grool", "images/JubesSprite/Jubes_Sprite_Panties_Tiger_DownW.png",
+                            "JubesX.underwear == '_tiger_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Tiger_Down.png",
                             "JubesX.grool", "images/JubesSprite/Jubes_Sprite_Panties_Blue_DownW.png",
                             "True", "images/JubesSprite/Jubes_Sprite_Panties_Blue_Down.png",
                             ),
@@ -187,23 +187,23 @@ image Jubes_Sprite:
                     ),
             "JubesX.grool", ConditionSwitch(
 
-                "JubesX.underwear == 'lace_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Lace.png",
-                "JubesX.underwear == 'bikini_bottoms'", "images/JubesSprite/Jubes_Sprite_Panties_Bikini_Wet.png",
-                "JubesX.underwear == 'tiger_panties' and JubesX.grool", "images/JubesSprite/Jubes_Sprite_Panties_Tiger_Wet.png",
+                "JubesX.underwear == '_lace_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Lace.png",
+                "JubesX.underwear == '_bikini_bottoms'", "images/JubesSprite/Jubes_Sprite_Panties_Bikini_Wet.png",
+                "JubesX.underwear == '_tiger_panties' and JubesX.grool", "images/JubesSprite/Jubes_Sprite_Panties_Tiger_Wet.png",
                 "True", "images/JubesSprite/Jubes_Sprite_Panties_Blue_Wet.png",
                 ),
             "True", ConditionSwitch(
 
-                "JubesX.underwear == 'lace_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Lace.png",
-                "JubesX.underwear == 'bikini_bottoms'", "images/JubesSprite/Jubes_Sprite_Panties_Bikini.png",
-                "JubesX.underwear == 'tiger_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Tiger.png",
+                "JubesX.underwear == '_lace_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Lace.png",
+                "JubesX.underwear == '_bikini_bottoms'", "images/JubesSprite/Jubes_Sprite_Panties_Bikini.png",
+                "JubesX.underwear == '_tiger_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Tiger.png",
                 "True", "images/JubesSprite/Jubes_Sprite_Panties_Blue.png",
                 ),
             ),
         (0,0), ConditionSwitch(
 
-            "JubesX.hose == 'pantyhose' and (not JubesX.underwear_pulled_down or not JubesX.underwear)", "images/JubesSprite/Jubes_Sprite_Hose_Pantyhose.png",
-            "JubesX.hose == 'ripped_pantyhose' and (not JubesX.underwear_pulled_down or not JubesX.underwear)", "images/JubesSprite/Jubes_Sprite_Hose_Pantyhose_Holed.png",
+            "JubesX.hose == '_pantyhose' and (not JubesX.underwear_pulled_down or not JubesX.underwear)", "images/JubesSprite/Jubes_Sprite_Hose_Pantyhose.png",
+            "JubesX.hose == '_ripped_pantyhose' and (not JubesX.underwear_pulled_down or not JubesX.underwear)", "images/JubesSprite/Jubes_Sprite_Hose_Pantyhose_Holed.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -211,22 +211,22 @@ image Jubes_Sprite:
             "not JubesX.legs", Null(),
             "JubesX.upskirt", ConditionSwitch(
 
-                        "JubesX.legs == 'pants'", "images/JubesSprite/Jubes_Sprite_Legs_Pants_Down.png",
-                        "JubesX.legs == 'shorts' and JubesX.grool > 1", "images/JubesSprite/Jubes_Sprite_Legs_Shorts_DownW.png",
-                        "JubesX.legs == 'shorts'", "images/JubesSprite/Jubes_Sprite_Legs_Shorts_Down.png",
+                        "JubesX.legs == '_pants'", "images/JubesSprite/Jubes_Sprite_Legs_Pants_Down.png",
+                        "JubesX.legs == '_shorts' and JubesX.grool > 1", "images/JubesSprite/Jubes_Sprite_Legs_Shorts_DownW.png",
+                        "JubesX.legs == '_shorts'", "images/JubesSprite/Jubes_Sprite_Legs_Shorts_Down.png",
                         "True", Null(),
                         ),
             "JubesX.grool > 1", ConditionSwitch(
 
-                "JubesX.legs == 'pants'", "images/JubesSprite/Jubes_Sprite_Legs_Pants.png",
-                "JubesX.legs == 'shorts'", "images/JubesSprite/Jubes_Sprite_Legs_Shorts_Wet.png",
+                "JubesX.legs == '_pants'", "images/JubesSprite/Jubes_Sprite_Legs_Pants.png",
+                "JubesX.legs == '_shorts'", "images/JubesSprite/Jubes_Sprite_Legs_Shorts_Wet.png",
 
                 "True", Null(),
                 ),
             "True", ConditionSwitch(
 
-                "JubesX.legs == 'pants'", "images/JubesSprite/Jubes_Sprite_Legs_Pants.png",
-                "JubesX.legs == 'shorts'", "images/JubesSprite/Jubes_Sprite_Legs_Shorts.png",
+                "JubesX.legs == '_pants'", "images/JubesSprite/Jubes_Sprite_Legs_Pants.png",
+                "JubesX.legs == '_shorts'", "images/JubesSprite/Jubes_Sprite_Legs_Shorts.png",
 
                 "True", Null(),
                 ),
@@ -259,26 +259,26 @@ image Jubes_Sprite:
 
             "JubesX.top_pulled_up", ConditionSwitch(
 
-                    "JubesX.top == 'tube_top'", "images/JubesSprite/Jubes_Sprite_Over_Tube_Up.png",
-                    "JubesX.top == 'red_shirt'", "images/JubesSprite/Jubes_Sprite_Over_Red_Up.png",
-                    "JubesX.top == 'black_shirt'", "images/JubesSprite/Jubes_Sprite_Over_Black_Up.png",
+                    "JubesX.top == '_tube_top'", "images/JubesSprite/Jubes_Sprite_Over_Tube_Up.png",
+                    "JubesX.top == '_red_shirt'", "images/JubesSprite/Jubes_Sprite_Over_Red_Up.png",
+                    "JubesX.top == '_black_shirt'", "images/JubesSprite/Jubes_Sprite_Over_Black_Up.png",
 
                     "True", Null(),
                     ),
 
 
-            "JubesX.top == 'tube_top'", "images/JubesSprite/Jubes_Sprite_Over_Tube.png",
-            "JubesX.top == 'red_shirt'", "images/JubesSprite/Jubes_Sprite_Over_Red.png",
-            "JubesX.top == 'black_shirt'", "images/JubesSprite/Jubes_Sprite_Over_Black.png",
-            "JubesX.top == 'towel' and JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_Over_Towel1.png",
-            "JubesX.top == 'towel'", "images/JubesSprite/Jubes_Sprite_Over_Towel2.png",
+            "JubesX.top == '_tube_top'", "images/JubesSprite/Jubes_Sprite_Over_Tube.png",
+            "JubesX.top == '_red_shirt'", "images/JubesSprite/Jubes_Sprite_Over_Red.png",
+            "JubesX.top == '_black_shirt'", "images/JubesSprite/Jubes_Sprite_Over_Black.png",
+            "JubesX.top == '_towel' and JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_Over_Towel1.png",
+            "JubesX.top == '_towel'", "images/JubesSprite/Jubes_Sprite_Over_Towel2.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not JubesX.accessory", Null(),
-            "JubesX.accessory == 'open jacket' and JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Open1.png",
-            "JubesX.accessory == 'open jacket'", "images/JubesSprite/Jubes_Sprite_Jacket_Open2.png",
+            "JubesX.accessory == '_open_jacket' and JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Open1.png",
+            "JubesX.accessory == '_open_jacket'", "images/JubesSprite/Jubes_Sprite_Jacket_Open2.png",
             "JubesX.top_pulled_up", ConditionSwitch(
 
                     "(JubesX.accessory == '_jacket' or JubesX.accessory == 'shut jacket') and JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Open1.png",
@@ -361,9 +361,9 @@ image Jubes_Sprite:
 
             "girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_JubesSelf",
             "girl_offhand_action == 'fondle_breasts'", ConditionSwitch(
-                    "offhand_action == 'fondle_breasts' or offhand_action == 'suck breasts'", "GirlGropeLeftBreast_Jubes",
+                    "offhand_action == 'fondle_breasts' or offhand_action == 'suck_breasts'", "GirlGropeLeftBreast_Jubes",
 
-                    "primary_action == 'fondle_breasts' or primary_action == 'suck breasts'", "GirlGropeRightBreast_Jubes",
+                    "primary_action == 'fondle_breasts' or primary_action == 'suck_breasts'", "GirlGropeRightBreast_Jubes",
 
                     "True", "GirlGropeBothBreast_Jubes",
 
@@ -380,7 +380,7 @@ image Jubes_Sprite:
             "not second_girl_offhand_action or second_girl_primary_action != 'masturbation' or focused_Girl == JubesX", Null(),
 
 
-            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and JubesX.lust >= 70", "GirlFingerPussy_Jubes",
+            "second_girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and JubesX.Lust >= 70", "GirlFingerPussy_Jubes",
             "second_girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Jubes",
             "second_girl_offhand_action == 'fondle_breasts'", "GirlGropeRightBreast_Jubes",
             "second_girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
@@ -397,7 +397,7 @@ image Jubes_Sprite:
             "primary_action == 'vibrator breasts'", "VibratorLeftBreast_Jubes",
             "primary_action == 'fondle_thighs'", "GropeThigh_Jubes",
             "primary_action == 'fondle_breasts'", "GropeLeftBreast_Jubes",
-            "primary_action == 'suck breasts'", "LickRightBreast_Jubes",
+            "primary_action == 'suck_breasts'", "LickRightBreast_Jubes",
             "primary_action == 'fondle_pussy' and action_speed == 2", "FingerPussy_Jubes",
             "primary_action == 'fondle_pussy'", "GropePussy_Jubes",
             "primary_action == 'eat_pussy'", "Lickpussy_Jubes",
@@ -413,16 +413,16 @@ image Jubes_Sprite:
 
 
             "offhand_action == 'fondle_breasts'", ConditionSwitch(
-                    "offhand_action == 'fondle_breasts' and primary_action == 'suck breasts'", "GropeLeftBreast_Jubes",
+                    "offhand_action == 'fondle_breasts' and primary_action == 'suck_breasts'", "GropeLeftBreast_Jubes",
 
                     "True", "GropeRightBreast_Jubes",
 
                     ),
-            "offhand_action == 'vibrator breasts' and primary_action == 'suck breasts'", "VibratorLeftBreast_Jubes",
+            "offhand_action == 'vibrator breasts' and primary_action == 'suck_breasts'", "VibratorLeftBreast_Jubes",
 
             "offhand_action == primary_action", Null(),
 
-            "offhand_action == 'suck breasts'", "LickLeftBreast_Jubes",
+            "offhand_action == 'suck_breasts'", "LickLeftBreast_Jubes",
             "offhand_action == 'fondle_pussy'", "GropePussy_Jubes",
             "offhand_action == 'eat_pussy'", "Lickpussy_Jubes",
             "offhand_action == 'vibrator breasts'", "VibratorRightBreast_Jubes",
@@ -437,13 +437,13 @@ image Jubes_Sprite:
             "not second_girl_primary_action or focused_Girl != JubesX", Null(),
 
 
-            "second_girl_primary_action == 'fondle_pussy' and primary_action != 'sex' and JubesX.lust >= 70", "GirlFingerPussy_Jubes",
+            "second_girl_primary_action == 'fondle_pussy' and primary_action != 'sex' and JubesX.Lust >= 70", "GirlFingerPussy_Jubes",
             "second_girl_primary_action == 'fondle_pussy'", "GirlGropePussy_Jubes",
             "second_girl_primary_action == 'eat_pussy'", "Lickpussy_Jubes",
-            "second_girl_primary_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast_Jubes",
-            "second_girl_primary_action == 'suck breasts'", "LickRightBreast_Jubes",
+            "second_girl_primary_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast_Jubes",
+            "second_girl_primary_action == 'suck_breasts'", "LickRightBreast_Jubes",
             "second_girl_primary_action == 'fondle_breasts'", ConditionSwitch(
-                    "primary_action == 'fondle_breasts' or primary_action == 'suck breasts'", "GirlGropeLeftBreast_Jubes",
+                    "primary_action == 'fondle_breasts' or primary_action == 'suck_breasts'", "GirlGropeLeftBreast_Jubes",
 
 
                     "True", "GirlGropeRightBreast_Jubes",
@@ -460,17 +460,17 @@ image Jubes_Sprite:
             "primary_action != 'lesbian' or focused_Girl == JubesX or not girl_offhand_action", Null(),
 
 
-            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and JubesX.lust >= 70", "GirlFingerPussy_Jubes",
+            "girl_offhand_action == 'fondle_pussy' and primary_action != 'sex' and JubesX.Lust >= 70", "GirlFingerPussy_Jubes",
             "girl_offhand_action == 'fondle_pussy'", "GirlGropePussy_Jubes",
             "girl_offhand_action == 'eat_pussy'", "Lickpussy_Jubes",
-            "girl_offhand_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast_Jubes",
-            "girl_offhand_action == 'suck breasts'", "LickRightBreast_Jubes",
+            "girl_offhand_action == 'suck_breasts' and (offhand_action != 'suck_breasts' or primary_action == 'suck_breasts')", "LickLeftBreast_Jubes",
+            "girl_offhand_action == 'suck_breasts'", "LickRightBreast_Jubes",
             "girl_offhand_action == 'fondle_breasts'", ConditionSwitch(
-                    "primary_action == 'fondle_breasts' or primary_action == 'suck breasts'", "GirlGropeLeftBreast_Jubes",
+                    "primary_action == 'fondle_breasts' or primary_action == 'suck_breasts'", "GirlGropeLeftBreast_Jubes",
 
-                    "offhand_action == 'fondle_breasts' or offhand_action == 'suck breasts'", "GirlGropeRightBreast_Jubes",
+                    "offhand_action == 'fondle_breasts' or offhand_action == 'suck_breasts'", "GirlGropeRightBreast_Jubes",
 
-                    "girl_offhand_action == 'fondle_breasts' or girl_offhand_action == 'suck breasts'", "GirlGropeLeftBreast_Jubes",
+                    "girl_offhand_action == 'fondle_breasts' or girl_offhand_action == 'suck_breasts'", "GirlGropeLeftBreast_Jubes",
 
                     "True", "GirlGropeRightBreast_Jubes",
 
@@ -485,10 +485,10 @@ image Jubes_Sprite:
         )
     anchor (0.6, 0.0)
     yoffset 0
-    zoom 0.85
+    zoom .85
 
 
-image Jubes_Sprite_hairback:
+image Jubes_Sprite_HairBack:
     contains:
         ConditionSwitch(
 
@@ -501,7 +501,7 @@ image Jubes_Sprite_hairback:
                 ),
 
     anchor (0.5, 0.5)
-    zoom 0.37
+    zoom .37
 
 
 image Jubes_Sprite_Head:
@@ -514,7 +514,7 @@ image Jubes_Sprite_Head:
 
         (0,0), ConditionSwitch(
 
-                "JubesX.blushing >= 2", "images/JubesSprite/Jubes_Sprite_Head_Blush2.png",
+                "JubesX.blushing == '_blush2'", "images/JubesSprite/Jubes_Sprite_Head_Blush2.png",
                 "JubesX.blushing", "images/JubesSprite/Jubes_Sprite_Head_Blush1.png",
                 "True", "images/JubesSprite/Jubes_Sprite_Head.png",
                 ),
@@ -523,40 +523,40 @@ image Jubes_Sprite_Head:
             "True", "images/JubesSprite/Jubes_Sprite_Spunk_Chin.png",
             ),
         (0,0), ConditionSwitch(
-            "JubesX.mouth == 'lipbite'", "images/JubesSprite/Jubes_Sprite_Mouth_Lipbite.png",
-            "JubesX.mouth == 'sucking'", "images/JubesSprite/Jubes_Sprite_Mouth_Open.png",
-            "JubesX.mouth == 'kiss'", "images/JubesSprite/Jubes_Sprite_Mouth_Kiss.png",
-            "JubesX.mouth == 'sad'", "images/JubesSprite/Jubes_Sprite_Mouth_Sad.png",
-            "JubesX.mouth == 'smile'", "images/JubesSprite/Jubes_Sprite_Mouth_Smile.png",
-            "JubesX.mouth == 'surprised'", "images/JubesSprite/Jubes_Sprite_Mouth_Open.png",
-            "JubesX.mouth == 'tongue'", "images/JubesSprite/Jubes_Sprite_Mouth_Tongue.png",
-            "JubesX.mouth == 'grimace'", "images/JubesSprite/Jubes_Sprite_Mouth_Smile.png",
-            "JubesX.mouth == 'smirk'", "images/JubesSprite/Jubes_Sprite_Mouth_Smirk.png",
+            "JubesX.mouth == '_lipbite'", "images/JubesSprite/Jubes_Sprite_Mouth_Lipbite.png",
+            "JubesX.mouth == '_sucking'", "images/JubesSprite/Jubes_Sprite_Mouth_Open.png",
+            "JubesX.mouth == '_kiss'", "images/JubesSprite/Jubes_Sprite_Mouth_Kiss.png",
+            "JubesX.mouth == '_sad'", "images/JubesSprite/Jubes_Sprite_Mouth_Sad.png",
+            "JubesX.mouth == '_smile'", "images/JubesSprite/Jubes_Sprite_Mouth_Smile.png",
+            "JubesX.mouth == '_surprised'", "images/JubesSprite/Jubes_Sprite_Mouth_Open.png",
+            "JubesX.mouth == '_tongue'", "images/JubesSprite/Jubes_Sprite_Mouth_Tongue.png",
+            "JubesX.mouth == '_grimace'", "images/JubesSprite/Jubes_Sprite_Mouth_Smile.png",
+            "JubesX.mouth == '_smirk'", "images/JubesSprite/Jubes_Sprite_Mouth_Smirk.png",
             "True", "images/JubesSprite/Jubes_Sprite_Mouth_Normal.png",
             ),
 
 
         (0,0), ConditionSwitch(
             "'mouth' not in JubesX.spunk", Null(),
-            "JubesX.mouth == 'sucking'", "images/JubesSprite/Jubes_Sprite_Spunk_Open.png",
-            "JubesX.mouth == 'kiss'", "images/JubesSprite/Jubes_Sprite_Spunk_Kiss.png",
-            "JubesX.mouth == 'sad'", "images/JubesSprite/Jubes_Sprite_Spunk_Kiss.png",
-            "JubesX.mouth == 'smile'", "images/JubesSprite/Jubes_Sprite_Spunk_Lipbite.png",
-            "JubesX.mouth == 'surprised'", "images/JubesSprite/Jubes_Sprite_Spunk_Kiss.png",
-            "JubesX.mouth == 'tongue'", "images/JubesSprite/Jubes_Sprite_Spunk_Open.png",
-            "JubesX.mouth == 'grimace'", "images/JubesSprite/Jubes_Sprite_Spunk_Lipbite.png",
+            "JubesX.mouth == '_sucking'", "images/JubesSprite/Jubes_Sprite_Spunk_Open.png",
+            "JubesX.mouth == '_kiss'", "images/JubesSprite/Jubes_Sprite_Spunk_Kiss.png",
+            "JubesX.mouth == '_sad'", "images/JubesSprite/Jubes_Sprite_Spunk_Kiss.png",
+            "JubesX.mouth == '_smile'", "images/JubesSprite/Jubes_Sprite_Spunk_Lipbite.png",
+            "JubesX.mouth == '_surprised'", "images/JubesSprite/Jubes_Sprite_Spunk_Kiss.png",
+            "JubesX.mouth == '_tongue'", "images/JubesSprite/Jubes_Sprite_Spunk_Open.png",
+            "JubesX.mouth == '_grimace'", "images/JubesSprite/Jubes_Sprite_Spunk_Lipbite.png",
             "True", "images/JubesSprite/Jubes_Sprite_Spunk_Smirk.png",
             ),
 
         (0,0), ConditionSwitch(
 
-            "JubesX.brows == 'angry' and JubesX.blushing >= 2", "images/JubesSprite/Jubes_Sprite_Brows_AngryB.png",
-            "JubesX.brows == 'angry'", "images/JubesSprite/Jubes_Sprite_Brows_Angry.png",
-            "JubesX.brows == 'sad' and JubesX.blushing >= 2", "images/JubesSprite/Jubes_Sprite_Brows_SadB.png",
-            "JubesX.brows == 'sad'", "images/JubesSprite/Jubes_Sprite_Brows_Sad.png",
-            "JubesX.brows == 'surprised'", "images/JubesSprite/Jubes_Sprite_Brows_Surprised.png",
-            "JubesX.brows == 'sad' and JubesX.blushing >= 2", "images/JubesSprite/Jubes_Sprite_Brows_ConfusedB.png",
-            "JubesX.brows == 'confused'", "images/JubesSprite/Jubes_Sprite_Brows_Confused.png",
+            "JubesX.brows == '_angry' and JubesX.blushing == '_blush2'", "images/JubesSprite/Jubes_Sprite_Brows_AngryB.png",
+            "JubesX.brows == '_angry'", "images/JubesSprite/Jubes_Sprite_Brows_Angry.png",
+            "JubesX.brows == '_sad' and JubesX.blushing == '_blush2'", "images/JubesSprite/Jubes_Sprite_Brows_SadB.png",
+            "JubesX.brows == '_sad'", "images/JubesSprite/Jubes_Sprite_Brows_Sad.png",
+            "JubesX.brows == '_surprised'", "images/JubesSprite/Jubes_Sprite_Brows_Surprised.png",
+            "JubesX.brows == '_sad' and JubesX.blushing == '_blush2'", "images/JubesSprite/Jubes_Sprite_Brows_ConfusedB.png",
+            "JubesX.brows == '_confused'", "images/JubesSprite/Jubes_Sprite_Brows_Confused.png",
             "True", "images/JubesSprite/Jubes_Sprite_Brows_Normal.png",
             ),
         (0,0), "Jubes Blink",
@@ -570,7 +570,7 @@ image Jubes_Sprite_Head:
 
 
             "JubesX.hair == '_wet' or JubesX.wet", "images/JubesSprite/Jubes_Sprite_Hair_Wet.png",
-            "JubesX.hair == 'shades'", "images/JubesSprite/Jubes_Sprite_Hair_Shades.png",
+            "JubesX.hair == '_shades'", "images/JubesSprite/Jubes_Sprite_Hair_Shades.png",
             "True", "images/JubesSprite/Jubes_Sprite_Hair_Short.png",
             ),
         (0,0), ConditionSwitch(
@@ -586,21 +586,21 @@ image Jubes_Sprite_Head:
             ),
         )
     anchor (0.5, 0.5)
-    zoom 0.37
+    zoom .37
 
 
 image Jubes Blink:
     ConditionSwitch(
-    "JubesX.eyes == 'sexy'", "images/JubesSprite/Jubes_Sprite_Eyes_Sexy.png",
-    "JubesX.eyes == 'side'", "images/JubesSprite/Jubes_Sprite_Eyes_Side.png",
-    "JubesX.eyes == 'surprised'", "images/JubesSprite/Jubes_Sprite_Eyes_Surprised.png",
-    "JubesX.eyes == 'normal'", "images/JubesSprite/Jubes_Sprite_Eyes_Normal.png",
-    "JubesX.eyes == 'stunned'", "images/JubesSprite/Jubes_Sprite_Eyes_Stunned.png",
-    "JubesX.eyes == 'down'", "images/JubesSprite/Jubes_Sprite_Eyes_Down.png",
-    "JubesX.eyes == 'closed'", "images/JubesSprite/Jubes_Sprite_Eyes_Closed.png",
-    "JubesX.eyes == 'leftside'", "images/JubesSprite/Jubes_Sprite_Eyes_Leftside.png",
-    "JubesX.eyes == 'manic'", "images/JubesSprite/Jubes_Sprite_Eyes_Squint.png",
-    "JubesX.eyes == 'squint'", "Jubes_Squint",
+    "JubesX.eyes == '_sexy'", "images/JubesSprite/Jubes_Sprite_Eyes_Sexy.png",
+    "JubesX.eyes == '_side'", "images/JubesSprite/Jubes_Sprite_Eyes_Side.png",
+    "JubesX.eyes == '_surprised'", "images/JubesSprite/Jubes_Sprite_Eyes_Surprised.png",
+    "JubesX.eyes == '_normal'", "images/JubesSprite/Jubes_Sprite_Eyes_Normal.png",
+    "JubesX.eyes == '_stunned'", "images/JubesSprite/Jubes_Sprite_Eyes_Stunned.png",
+    "JubesX.eyes == '_down'", "images/JubesSprite/Jubes_Sprite_Eyes_Down.png",
+    "JubesX.eyes == '_closed'", "images/JubesSprite/Jubes_Sprite_Eyes_Closed.png",
+    "JubesX.eyes == '_leftside'", "images/JubesSprite/Jubes_Sprite_Eyes_Leftside.png",
+    "JubesX.eyes == '_manic'", "images/JubesSprite/Jubes_Sprite_Eyes_Squint.png",
+    "JubesX.eyes == '_squint'", "Jubes_Squint",
     "True", "images/JubesSprite/Jubes_Sprite_Eyes_Normal.png",
     ),
     choice:
@@ -610,7 +610,7 @@ image Jubes Blink:
     choice:
         3
     "images/JubesSprite/Jubes_Sprite_Eyes_Closed.png"
-    0.25
+    .25
     repeat
 
 image Jubes_Squint:
@@ -622,7 +622,7 @@ image Jubes_Squint:
     choice:
         3
     "images/JubesSprite/Jubes_Sprite_Eyes_Squint.png"
-    0.25
+    .25
     repeat
 
 
@@ -660,54 +660,54 @@ image Jubes_Doggy_Animation:
         (420,750),
         (0,0), ConditionSwitch(
 
-            "not Player.sprite", "Jubes_Doggy_Body",
-            "Player.cock_position == 'anal'", ConditionSwitch(
+            "not Player.Sprite", "Jubes_Doggy_Body",
+            "Player.Cock == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Jubes_Doggy_Fuck2_Top",
                     "action_speed > 1", "Jubes_Doggy_Fuck_Top",
-                    "action_speed ", "Jubes_Doggy_Anal_Head_Top",
+                    "action_speed", "Jubes_Doggy_Anal_Head_Top",
                     "True", "Jubes_Doggy_Body",
                     ),
-            "Player.cock_position == 'in'", ConditionSwitch(
+            "Player.Cock == 'in'", ConditionSwitch(
                     "action_speed > 2", "Jubes_Doggy_Fuck2_Top",
                     "action_speed > 1", "Jubes_Doggy_Fuck_Top",
                     "True", "Jubes_Doggy_Body",
                     ),
-            "Player.cock_position == 'foot'", ConditionSwitch(
+            "Player.Cock == 'footjob'", ConditionSwitch(
                     "action_speed > 1", "Jubes_Doggy_Foot2_Top",
-                    "action_speed ", "Jubes_Doggy_Foot1_Top",
+                    "action_speed", "Jubes_Doggy_Foot1_Top",
                     "True", "Jubes_Doggy_Foot0_Top",
                     ),
             "True", "Jubes_Doggy_Body",
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.sprite", "Jubes_Doggy_Ass",
-            "Player.cock_position == 'anal'", ConditionSwitch(
+            "not Player.Sprite", "Jubes_Doggy_Ass",
+            "Player.Cock == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Jubes_Doggy_Fuck2_Ass",
                     "action_speed > 1", "Jubes_Doggy_Fuck_Ass",
-                    "action_speed ", "Jubes_Doggy_Anal_Head_Ass",
+                    "action_speed", "Jubes_Doggy_Anal_Head_Ass",
                     "True", "Jubes_Doggy_Ass",
                     ),
-            "Player.cock_position == 'in'", ConditionSwitch(
+            "Player.Cock == 'in'", ConditionSwitch(
                     "action_speed > 2", "Jubes_Doggy_Fuck2_Ass",
                     "action_speed > 1", "Jubes_Doggy_Fuck_Ass",
                     "True", "Jubes_Doggy_Ass",
                     ),
-            "Player.cock_position == 'foot'", ConditionSwitch(
+            "Player.Cock == 'footjob'", ConditionSwitch(
                     "action_speed > 1", "Jubes_Doggy_Foot2_Ass",
-                    "action_speed ", "Jubes_Doggy_Foot1_Ass",
+                    "action_speed", "Jubes_Doggy_Foot1_Ass",
                     "True", "Jubes_Doggy_Foot0_Ass",
                     ),
             "True", "Jubes_Doggy_Ass",
             ),
         (0,0), ConditionSwitch(
 
-            "Player.cock_position == 'foot'", ConditionSwitch(
+            "Player.Cock == 'footjob'", ConditionSwitch(
                     "action_speed > 1", "Jubes_Doggy_Feet2",
-                    "action_speed ", "Jubes_Doggy_Feet1",
+                    "action_speed", "Jubes_Doggy_Feet1",
                     "True", "Jubes_Doggy_Feet0",
                     ),
-            "not Player.sprite and show_feet", "Jubes_Doggy_Shins",
+            "not Player.Sprite and ShowFeet", "Jubes_Doggy_Shins",
             "True", Null(),
             ),
         )
@@ -739,9 +739,9 @@ image Jubes_Doggy_Body:
 
             "JubesX.bra == 'white tank'", "images/JubesDoggy/Jubes_Doggy_Chest_Costume.png",
             "JubesX.bra == 'lace corset'", "images/JubesDoggy/Jubes_Doggy_Chest_Corset.png",
-            "JubesX.bra == 'corset'", "images/JubesDoggy/Jubes_Doggy_Chest_Corset.png",
-            "JubesX.bra == 'wolvie_top'", "images/JubesDoggy/Jubes_Doggy_Chest_Wolvie.png",
-            "JubesX.bra == 'bikini_top'", "images/JubesDoggy/Jubes_Doggy_Chest_Bikini.png",
+            "JubesX.bra == '_corset'", "images/JubesDoggy/Jubes_Doggy_Chest_Corset.png",
+            "JubesX.bra == 'wolvie top'", "images/JubesDoggy/Jubes_Doggy_Chest_Wolvie.png",
+            "JubesX.bra == '_bikini_top'", "images/JubesDoggy/Jubes_Doggy_Chest_Bikini.png",
             "True", "images/JubesDoggy/Jubes_Doggy_Chest_Tank.png",
             ),
 
@@ -752,19 +752,19 @@ image Jubes_Doggy_Body:
         (0,0), ConditionSwitch(
 
             "not JubesX.legs", Null(),
-            "JubesX.accessory == 'suspenders'", "images/JubesDoggy/Jubes_Doggy_Suspenders.png",
+            "JubesX.accessory == '_suspenders'", "images/JubesDoggy/Jubes_Doggy_Suspenders.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "JubesX.arms == 'gloves'", "images/JubesDoggy/Jubes_Doggy_Gloves.png",
+            "JubesX.arms == '_gloves'", "images/JubesDoggy/Jubes_Doggy_Gloves.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not JubesX.top", Null(),
             "JubesX.top == '_jacket'", "images/JubesDoggy/Jubes_Doggy_Over_Jacket.png",
-            "JubesX.top == 'towel' and not JubesX.top_pulled_up", "images/JubesDoggy/Jubes_Doggy_Over_TowelTop.png",
+            "JubesX.top == '_towel' and not JubesX.top_pulled_up", "images/JubesDoggy/Jubes_Doggy_Over_TowelTop.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -806,15 +806,15 @@ image Jubes_Doggy_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "JubesX.mouth == 'normal'", "images/JubesDoggy/Jubes_Doggy_Mouth_Smile.png",
-            "JubesX.mouth == 'lipbite'", "images/JubesDoggy/Jubes_Doggy_Mouth_Smile.png",
-            "JubesX.mouth == 'sucking'", "images/JubesDoggy/Jubes_Doggy_Mouth_Open.png",
-            "JubesX.mouth == 'kiss'", "images/JubesDoggy/Jubes_Doggy_Mouth_Kiss.png",
-            "JubesX.mouth == 'sad'", "images/JubesDoggy/Jubes_Doggy_Mouth_Sad.png",
-            "JubesX.mouth == 'smile'", "images/JubesDoggy/Jubes_Doggy_Mouth_Smile.png",
-            "JubesX.mouth == 'grimace'", "images/JubesDoggy/Jubes_Doggy_Mouth_Smile.png",
-            "JubesX.mouth == 'surprised'", "images/JubesDoggy/Jubes_Doggy_Mouth_Open.png",
-            "JubesX.mouth == 'tongue'", "images/JubesDoggy/Jubes_Doggy_Mouth_Tongue.png",
+            "JubesX.mouth == '_normal'", "images/JubesDoggy/Jubes_Doggy_Mouth_Smile.png",
+            "JubesX.mouth == '_lipbite'", "images/JubesDoggy/Jubes_Doggy_Mouth_Smile.png",
+            "JubesX.mouth == '_sucking'", "images/JubesDoggy/Jubes_Doggy_Mouth_Open.png",
+            "JubesX.mouth == '_kiss'", "images/JubesDoggy/Jubes_Doggy_Mouth_Kiss.png",
+            "JubesX.mouth == '_sad'", "images/JubesDoggy/Jubes_Doggy_Mouth_Sad.png",
+            "JubesX.mouth == '_smile'", "images/JubesDoggy/Jubes_Doggy_Mouth_Smile.png",
+            "JubesX.mouth == '_grimace'", "images/JubesDoggy/Jubes_Doggy_Mouth_Smile.png",
+            "JubesX.mouth == '_surprised'", "images/JubesDoggy/Jubes_Doggy_Mouth_Open.png",
+            "JubesX.mouth == '_tongue'", "images/JubesDoggy/Jubes_Doggy_Mouth_Tongue.png",
             "True", "images/JubesDoggy/Jubes_Doggy_Mouth_Smile.png",
             ),
 
@@ -839,9 +839,9 @@ image Jubes_Doggy_Head:
         (0,0), ConditionSwitch(
 
 
-            "JubesX.brows == 'angry'", "images/JubesDoggy/Jubes_Doggy_Brows_Angry.png",
-            "JubesX.brows == 'sad'", "images/JubesDoggy/Jubes_Doggy_Brows_Sad.png",
-            "JubesX.brows == 'surprised'", "images/JubesDoggy/Jubes_Doggy_Brows_Surprised.png",
+            "JubesX.brows == '_angry'", "images/JubesDoggy/Jubes_Doggy_Brows_Angry.png",
+            "JubesX.brows == '_sad'", "images/JubesDoggy/Jubes_Doggy_Brows_Sad.png",
+            "JubesX.brows == '_surprised'", "images/JubesDoggy/Jubes_Doggy_Brows_Surprised.png",
 
             "True", "images/JubesDoggy/Jubes_Doggy_Brows_Normal.png",
             ),
@@ -903,15 +903,15 @@ image Jubes_Doggy_Head:
 image Jubes Doggy Blink:
 
     ConditionSwitch(
-        "JubesX.eyes == 'sexy'", "images/JubesDoggy/Jubes_Doggy_Eyes_Sexy.png",
-        "JubesX.eyes == 'side'", "images/JubesDoggy/Jubes_Doggy_Eyes_Side.png",
-        "JubesX.eyes == 'normal'", "images/JubesDoggy/Jubes_Doggy_Eyes_Sexy.png",
-        "JubesX.eyes == 'closed'", "images/JubesDoggy/Jubes_Doggy_Eyes_Closed.png",
-        "JubesX.eyes == 'manic'", "images/JubesDoggy/Jubes_Doggy_Eyes_Stunned.png",
-        "JubesX.eyes == 'down'", "images/JubesDoggy/Jubes_Doggy_Eyes_Sexy.png",
-        "JubesX.eyes == 'stunned'", "images/JubesDoggy/Jubes_Doggy_Eyes_Stunned.png",
-        "JubesX.eyes == 'surprised'", "images/JubesDoggy/Jubes_Doggy_Eyes_Surprised.png",
-        "JubesX.eyes == 'squint'", "images/JubesDoggy/Jubes_Doggy_Eyes_Sexy.png",
+        "JubesX.eyes == '_sexy'", "images/JubesDoggy/Jubes_Doggy_Eyes_Sexy.png",
+        "JubesX.eyes == '_side'", "images/JubesDoggy/Jubes_Doggy_Eyes_Side.png",
+        "JubesX.eyes == '_normal'", "images/JubesDoggy/Jubes_Doggy_Eyes_Sexy.png",
+        "JubesX.eyes == '_closed'", "images/JubesDoggy/Jubes_Doggy_Eyes_Closed.png",
+        "JubesX.eyes == '_manic'", "images/JubesDoggy/Jubes_Doggy_Eyes_Stunned.png",
+        "JubesX.eyes == '_down'", "images/JubesDoggy/Jubes_Doggy_Eyes_Sexy.png",
+        "JubesX.eyes == '_stunned'", "images/JubesDoggy/Jubes_Doggy_Eyes_Stunned.png",
+        "JubesX.eyes == '_surprised'", "images/JubesDoggy/Jubes_Doggy_Eyes_Surprised.png",
+        "JubesX.eyes == '_squint'", "images/JubesDoggy/Jubes_Doggy_Eyes_Sexy.png",
         "True", "images/JubesDoggy/Jubes_Doggy_Eyes_Normal.png",
         ),
 
@@ -923,7 +923,7 @@ image Jubes Doggy Blink:
     3
 
     "images/JubesDoggy/Jubes_Doggy_Eyes_Closed.png"
-    0.25
+    .25
     repeat
 
 image Jubes_Doggy_Ass:
@@ -940,9 +940,9 @@ image Jubes_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "not JubesX.underwear_pulled_down or (JubesX.legs == 'pants' and not JubesX.upskirt)", Null(),
-            "JubesX.underwear == 'wolvie_panties'", "images/JubesDoggy/Jubes_Doggy_Panties_Wolvie_Back.png",
-            "JubesX.underwear == 'lace_panties'", "images/JubesDoggy/Jubes_Doggy_Panties_Lace_Back.png",
+            "not JubesX.underwear_pulled_down or (JubesX.legs == '_pants' and not JubesX.upskirt)", Null(),
+            "JubesX.underwear == '_wolvie_panties'", "images/JubesDoggy/Jubes_Doggy_Panties_Wolvie_Back.png",
+            "JubesX.underwear == '_lace_panties'", "images/JubesDoggy/Jubes_Doggy_Panties_Lace_Back.png",
             "JubesX.underwear", "images/JubesDoggy/Jubes_Doggy_Panties_Back.png",
             "True", Null(),
             ),
@@ -954,76 +954,76 @@ image Jubes_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "JubesX.hose == 'black stockings'", "images/JubesDoggy/Jubes_Doggy_Stocking.png",
-            "JubesX.hose == 'stockings'", "images/JubesDoggy/Jubes_Doggy_Hose.png",
-            "Player.sprite and Player.cock_position == 'in'", Null(),
-            "Player.sprite and Player.cock_position == 'anal'", Null(),
-            "JubesX.hose == 'stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
-            "JubesX.hose == 'garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
+            "JubesX.hose == '_black_stockings'", "images/JubesDoggy/Jubes_Doggy_Stocking.png",
+            "JubesX.hose == '_stockings'", "images/JubesDoggy/Jubes_Doggy_Hose.png",
+            "Player.Sprite and Player.Cock == 'in'", Null(),
+            "Player.Sprite and Player.Cock == 'anal'", Null(),
+            "JubesX.hose == '_stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
+            "JubesX.hose == '_garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "not JubesX.underwear_pulled_down or (JubesX.legs == 'pants' and not JubesX.upskirt)", Null(),
-            "JubesX.underwear == 'wolvie_panties'", "images/JubesDoggy/Jubes_Doggy_Panties_Wolvie_Down.png",
-            "JubesX.underwear == 'bikini_bottoms'", "images/JubesDoggy/Jubes_Doggy_Panties_Bikini_Down.png",
+            "not JubesX.underwear_pulled_down or (JubesX.legs == '_pants' and not JubesX.upskirt)", Null(),
+            "JubesX.underwear == '_wolvie_panties'", "images/JubesDoggy/Jubes_Doggy_Panties_Wolvie_Down.png",
+            "JubesX.underwear == '_bikini_bottoms'", "images/JubesDoggy/Jubes_Doggy_Panties_Bikini_Down.png",
             "JubesX.underwear", "images/JubesDoggy/Jubes_Doggy_Panties_Black_Down.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'", "Jubes_Pussy_Fingering",
-            "primary_action == 'dildo_pussy'", "Jubes_Pussy_Fucking2",
-            "Player.sprite and Player.cock_position == 'in'", ConditionSwitch(
+            "primary_action == 'dildo pussy'", "Jubes_Pussy_Fucking2",
+            "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
                     "action_speed > 2", "Jubes_Pussy_Fucking3",
                     "action_speed > 1", "Jubes_Pussy_Fucking2",
-                    "action_speed ", "Jubes_Pussy_Heading",
+                    "action_speed", "Jubes_Pussy_Heading",
                     "True", "Jubes_Pussy_Static",
                     ),
             "primary_action == 'eat_pussy'", "images/JubesDoggy/Jubes_Doggy_Pussy_Open.png",
             "JubesX.legs and not JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Pussy_Closed.png",
             "JubesX.underwear and not JubesX.underwear_pulled_down", "images/JubesDoggy/Jubes_Doggy_Pussy_Closed.png",
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'", "Jubes_Pussy_Fingering",
-            "primary_action == 'dildo_pussy'", "Jubes_Pussy_Fucking2",
+            "primary_action == 'dildo pussy'", "Jubes_Pussy_Fucking2",
             "True", "images/JubesDoggy/Jubes_Doggy_Pussy_Closed.png",
             ),
 
 
         (0,0), ConditionSwitch(
 
-            "'in' in JubesX.spunk and Player.cock_position == 'in'",Null(),
+            "'in' in JubesX.spunk and Player.Cock == 'in'",Null(),
             "'in' in JubesX.spunk ", "images/JubesDoggy/Jubes_Doggy_SpunkPussyClosed.png",
-            "JubesX.grool and Player.cock_position == 'in'", "images/Rogue_doggy/Rogue_Doggy_WetPussyOpen.png",
-            "JubesX.grool", "images/Rogue_doggy/Rogue_Doggy_WetPussyClosed.png",
+            "JubesX.grool and Player.Cock == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
+            "JubesX.grool", "images/RogueDoggy/Rogue_Doggy_WetPussyClosed.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not JubesX.pubes", Null(),
-            "Player.sprite and Player.cock_position == 'in'", Null(),
+            "Player.Sprite and Player.Cock == 'in'", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
-            "primary_action == 'dildo_pussy'", Null(),
-            "JubesX.legs == 'pants' and not JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Pubes_Panties.png",
+            "primary_action == 'dildo pussy'", Null(),
+            "JubesX.legs == '_pants' and not JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Pubes_Panties.png",
             "JubesX.underwear_pulled_down and primary_action == 'eat_pussy'", "images/JubesDoggy/Jubes_Doggy_Pubes_Open.png",
             "JubesX.underwear_pulled_down", "images/JubesDoggy/Jubes_Doggy_Pubes.png",
             "JubesX.underwear", "images/JubesDoggy/Jubes_Doggy_Pubes_Panties.png",
-            "JubesX.hose and JubesX.hose != 'stockings'", "images/JubesDoggy/Jubes_Doggy_Pubes_Panties.png",
+            "JubesX.hose and JubesX.hose != '_stockings'", "images/JubesDoggy/Jubes_Doggy_Pubes_Panties.png",
             "primary_action == 'eat_pussy'", "images/JubesDoggy/Jubes_Doggy_Pubes_Open.png",
             "True", "images/JubesDoggy/Jubes_Doggy_Pubes.png",
             ),
         (0,0), ConditionSwitch(
 
-            "Player.sprite", Null(),
-            "JubesX.piercings == 'ring'", "images/JubesDoggy/Jubes_Doggy_Pierce_Ring.png",
-            "JubesX.piercings == 'barbell'", "images/JubesDoggy/Jubes_Doggy_Pierce_Barbell.png",
+            "Player.Sprite", Null(),
+            "JubesX.piercings == '_ring'", "images/JubesDoggy/Jubes_Doggy_Pierce_Ring.png",
+            "JubesX.piercings == '_barbell'", "images/JubesDoggy/Jubes_Doggy_Pierce_Barbell.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "Player.sprite and Player.cock_position == 'anal'", ConditionSwitch(
+            "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Jubes_Anal_Fucking2",
                     "action_speed > 1", "Jubes_Anal_Fucking",
-                    "action_speed ", "Jubes_Anal_Heading",
+                    "action_speed", "Jubes_Anal_Heading",
                     "True", "Jubes_Anal",
                     ),
 
@@ -1031,29 +1031,29 @@ image Jubes_Doggy_Ass:
             "JubesX.legs and not JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Asshole_Loose.png",
             "JubesX.underwear and not JubesX.underwear_pulled_down", "images/JubesDoggy/Jubes_Doggy_Asshole_Loose.png",
             "primary_action == 'finger_ass' or offhand_action == 'finger_ass'", "Jubes_Anal_Fingering",
-            "primary_action == 'dildo_anal'", "Jubes_Anal_Fucking",
-            "JubesX.used_to_anal", "images/JubesDoggy/Jubes_Doggy_Asshole_Loose.png",
+            "primary_action == 'dildo anal'", "Jubes_Anal_Fucking",
+            "JubesX.Loose", "images/JubesDoggy/Jubes_Doggy_Asshole_Loose.png",
             "True", "images/JubesDoggy/Jubes_Doggy_Asshole_Tight.png",
             ),
 
 
         (0,0), ConditionSwitch(
 
-            "'anal' not in JubesX.spunk or Player.sprite", Null(),
-            "Player.cock_position == 'anal'", "images/JubesDoggy/Jubes_Doggy_SpunkAnalOpen.png",
-            "JubesX.used_to_anal", "images/JubesDoggy/Jubes_Doggy_SpunkAnalLoose.png",
+            "'anal' not in JubesX.spunk or Player.Sprite", Null(),
+            "Player.Cock == 'anal'", "images/JubesDoggy/Jubes_Doggy_SpunkAnalOpen.png",
+            "JubesX.Loose", "images/JubesDoggy/Jubes_Doggy_SpunkAnalLoose.png",
             "True", "images/JubesDoggy/Jubes_Doggy_SpunkAnalLoose.png",
             ),
         (0,0), ConditionSwitch(
 
             "JubesX.underwear_pulled_down or not JubesX.underwear", Null(),
-            "Player.sprite and (Player.cock_position == 'in' or Player.cock_position == 'anal')", Null(),
+            "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
 
 
-            "JubesX.underwear == 'wolvie_panties' and JubesX.grool", "images/JubesDoggy/Jubes_Doggy_Panties_Wolvie_Wet.png",
-            "JubesX.underwear == 'wolvie_panties'", "images/JubesDoggy/Jubes_Doggy_Panties_Wolvie.png",
-            "JubesX.underwear == 'lace_panties'", "images/JubesDoggy/Jubes_Doggy_Panties_Lace.png",
-            "JubesX.underwear == 'bikini_bottoms'", "images/JubesDoggy/Jubes_Doggy_Panties_Bikini.png",
+            "JubesX.underwear == '_wolvie_panties' and JubesX.grool", "images/JubesDoggy/Jubes_Doggy_Panties_Wolvie_Wet.png",
+            "JubesX.underwear == '_wolvie_panties'", "images/JubesDoggy/Jubes_Doggy_Panties_Wolvie.png",
+            "JubesX.underwear == '_lace_panties'", "images/JubesDoggy/Jubes_Doggy_Panties_Lace.png",
+            "JubesX.underwear == '_bikini_bottoms'", "images/JubesDoggy/Jubes_Doggy_Panties_Bikini.png",
             "JubesX.grool", "images/JubesDoggy/Jubes_Doggy_Panties_Black_Wet.png",
             "True", "images/JubesDoggy/Jubes_Doggy_Panties_Black.png",
             ),
@@ -1073,7 +1073,7 @@ image Jubes_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "JubesX.legs == 'leather_pants'", ConditionSwitch(
+            "JubesX.legs == '_leather_pants'", ConditionSwitch(
                     "JubesX.upskirt or JubesX.underwear_pulled_down", Null(),
 
                     "True", "images/JubesDoggy/Jubes_Doggy_Legs_Pants.png",
@@ -1083,13 +1083,13 @@ image Jubes_Doggy_Ass:
 
 
 
-            "JubesX.legs == 'other_skirt'", ConditionSwitch(
-                    "JubesX.upskirt and Player.sprite and Player.cock_position == 'anal' and action_speed" , "images/JubesDoggy/Jubes_Doggy_Legs_SkirtCos_Up.png",
+            "JubesX.legs == '_other_skirt'", ConditionSwitch(
+                    "JubesX.upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/JubesDoggy/Jubes_Doggy_Legs_SkirtCos_Up.png",
                     "JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Legs_SkirtCos_Up.png",
                     "True", "images/JubesDoggy/Jubes_Doggy_Legs_SkirtCos.png",
                     ),
-            "JubesX.legs == 'skirt'", ConditionSwitch(
-                    "JubesX.upskirt and Player.sprite and Player.cock_position == 'anal' and action_speed" , "images/JubesDoggy/Jubes_Doggy_Legs_Skirt_Up.png",
+            "JubesX.legs == '_skirt'", ConditionSwitch(
+                    "JubesX.upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/JubesDoggy/Jubes_Doggy_Legs_Skirt_Up.png",
                     "JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Legs_Skirt_Up.png",
                     "True", "images/JubesDoggy/Jubes_Doggy_Legs_Skirt.png",
                     ),
@@ -1097,16 +1097,16 @@ image Jubes_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "JubesX.top == 'towel' and JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Over_TowelAss_Up.png",
-            "JubesX.top == 'towel'", "images/JubesDoggy/Jubes_Doggy_Over_TowelAss.png",
+            "JubesX.top == '_towel' and JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Over_TowelAss_Up.png",
+            "JubesX.top == '_towel'", "images/JubesDoggy/Jubes_Doggy_Over_TowelAss.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "Player.sprite", Null(),
-            "JubesX.underwear_pulled_down or (not JubesX.underwear and JubesX.legs != 'leather_pants')", Null(),
-            "JubesX.piercings == 'ring'", "images/JubesDoggy/Jubes_Doggy_Pierce_RingC.png",
-            "JubesX.piercings == 'barbell'", "images/JubesDoggy/Jubes_Doggy_Pierce_BarbellC.png",
+            "Player.Sprite", Null(),
+            "JubesX.underwear_pulled_down or (not JubesX.underwear and JubesX.legs != '_leather_pants')", Null(),
+            "JubesX.piercings == '_ring'", "images/JubesDoggy/Jubes_Doggy_Pierce_RingC.png",
+            "JubesX.piercings == '_barbell'", "images/JubesDoggy/Jubes_Doggy_Pierce_BarbellC.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -1116,24 +1116,24 @@ image Jubes_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.sprite and Player.cock_position", Null(),
-            "primary_action == 'eat_pussy'", "doggy_licking_pussy",
-            "primary_action == 'eat_ass'", "doggy_licking_ass",
+            "Player.Sprite and Player.Cock", Null(),
+            "primary_action == 'eat_pussy'", "Rogue_Doggy_Lick_Pussy",
+            "primary_action == 'eat_ass'", "Rogue_Doggy_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.sprite or Player.cock_position != 'out'", Null(),
-            "JubesX.legs == 'skirt' and JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Hotdog_Upskirt_Back.png",
+            "not Player.Sprite or Player.Cock != 'out'", Null(),
+            "JubesX.legs == '_skirt' and JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Hotdog_Upskirt_Back.png",
             "True", "images/JubesDoggy/Jubes_Doggy_HotdogBack.png",
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.sprite or Player.cock_position != 'out'", Null(),
-            "JubesX.legs == 'skirt' and JubesX.upskirt and action_speed", AlphaMask("Zero_hotdog_moving", "images/Rogue_doggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
-            "JubesX.legs == 'skirt' and JubesX.upskirt", AlphaMask("Zero_hotdog_static", "images/Rogue_doggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
-            "action_speed ", AlphaMask("Zero_hotdog_moving", "images/Rogue_doggy/Rogue_Doggy_HotdogMask.png"),
-            "True", AlphaMask("Zero_hotdog_static", "images/Rogue_doggy/Rogue_Doggy_HotdogMask.png"),
+            "not Player.Sprite or Player.Cock != 'out'", Null(),
+            "JubesX.legs == '_skirt' and JubesX.upskirt and action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
+            "JubesX.legs == '_skirt' and JubesX.upskirt", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
+            "action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "True", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             ),
 
 
@@ -1158,16 +1158,16 @@ image Jubes_Doggy_Shins:
 
         ConditionSwitch(
             "not JubesX.hose", Null(),
-            "JubesX.hose == 'stockings'", "images/JubesDoggy/Jubes_Doggy_Feet_Hose_Back.png",
-            "JubesX.hose == 'stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_Feet_Hose_Back.png",
-            "JubesX.hose == 'black stockings'", "images/JubesDoggy/Jubes_Doggy_Feet_Stockings_Back.png",
-            "JubesX.hose == 'pantyhose'", "images/JubesDoggy/Jubes_Doggy_Feet_Hose_Back.png",
+            "JubesX.hose == '_stockings'", "images/JubesDoggy/Jubes_Doggy_Feet_Hose_Back.png",
+            "JubesX.hose == '_stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_Feet_Hose_Back.png",
+            "JubesX.hose == '_black_stockings'", "images/JubesDoggy/Jubes_Doggy_Feet_Stockings_Back.png",
+            "JubesX.hose == '_pantyhose'", "images/JubesDoggy/Jubes_Doggy_Feet_Hose_Back.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-            "JubesX.legs == 'leather_pants'", "images/JubesDoggy/Jubes_Doggy_Feet_Pants.png",
+            "JubesX.legs == '_leather_pants'", "images/JubesDoggy/Jubes_Doggy_Feet_Pants.png",
             "True", Null(),
             )
 
@@ -1187,7 +1187,7 @@ image Jubes_Doggy_GropeBreast:
         subpixel True
         "images/UI_HandUnder.png"
         xzoom -.55
-        yzoom 0.55
+        yzoom .55
         offset (270,410)
         anchor (0.5,0.5)
         alpha 0.3
@@ -1217,14 +1217,14 @@ image Zero_Jubes_Hotdog_Static:
 
 
     contains:
-        "Zero_cock_doggy_out"
+        "Zero_Doggy_Up"
         pos (175, 370)
 
 image Zero_Jubes_Hotdog_Moving:
 
 
     contains:
-        "Zero_cock_doggy_out"
+        "Zero_Doggy_Up"
         pos (175, 370)
         block:
             ease 1 ypos 330
@@ -1256,7 +1256,7 @@ image Zero_Jubes_Doggy_Static:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         pos (169,545)
         block:
             ease 1 ypos 540
@@ -1268,7 +1268,7 @@ image Zero_Jubes_Doggy_Heading:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         pos (171,545)
         block:
             ease 1 xpos 168 ypos 500
@@ -1279,23 +1279,23 @@ image Zero_Jubes_Doggy_Heading:
 image Zero_Jubes_Doggy_Fucking2:
 
     contains:
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         pos (169,500)
         block:
-            ease 0.5 ypos 440
-            pause 0.25
+            ease .5 ypos 440
+            pause .25
             ease 1.75 ypos 500
             repeat
 
 image Zero_Jubes_Doggy_Fucking3:
 
     contains:
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         pos (169,500)
         block:
-            ease 0.2 ypos 440
-            pause 0.1
-            ease 0.6 ypos 500
+            ease .2 ypos 440
+            pause .1
+            ease .6 ypos 500
             repeat
 
 image Jubes_Pussy_Mask:
@@ -1303,14 +1303,14 @@ image Jubes_Pussy_Mask:
 
     contains:
 
-        "images/Rogue_doggy/Rogue_Doggy_SexMask.png"
+        "images/RogueDoggy/Rogue_Doggy_SexMask.png"
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom 0.6
+        xzoom .6
         block:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom 0.6
+            ease 3 xzoom .6
             repeat
 
 image Jubes_Pussy_Mask_Static:
@@ -1318,14 +1318,14 @@ image Jubes_Pussy_Mask_Static:
 
     contains:
 
-        "images/Rogue_doggy/Rogue_Doggy_SexMask.png"
+        "images/RogueDoggy/Rogue_Doggy_SexMask.png"
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom 0.6
+        xzoom .6
         block:
-            ease 1 xzoom 0.65
+            ease 1 xzoom .65
             pause 1
-            ease 3 xzoom 0.6
+            ease 3 xzoom .6
             repeat
 
 
@@ -1376,17 +1376,17 @@ image Jubes_Pussy_Static:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom 0.6
+        xzoom .6
         block:
-            ease 1 xzoom 0.65
+            ease 1 xzoom .65
             pause 1
-            ease 3 xzoom 0.6
+            ease 3 xzoom .6
             repeat
     contains:
         ConditionSwitch(
 
-            "JubesX.hose == 'stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
-            "JubesX.hose == 'garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
+            "JubesX.hose == '_stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
+            "JubesX.hose == '_garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
 
 
 
@@ -1404,15 +1404,15 @@ image Jubes_Pussy_Hole_Mask_Static:
 
     contains:
 
-        AlphaMask("images/JubesDoggy/Jubes_Doggy_Pussy_FHole.png", "images/Rogue_doggy/Rogue_Doggy_SexMask.png")
+        AlphaMask("images/JubesDoggy/Jubes_Doggy_Pussy_FHole.png", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom 0.6
+        xzoom .6
         block:
-            ease 1 xzoom 0.65
+            ease 1 xzoom .65
             pause 1
-            ease 3 xzoom 0.6
+            ease 3 xzoom .6
             repeat
 
 image Jubes_PussyHole_Static:
@@ -1423,7 +1423,7 @@ image Jubes_PussyHole_Static:
         anchor (0.52,0.69)
         pos (217,515)
         zoom 1
-        alpha 0.9
+        alpha .9
         block:
             ease 1 ypos 512
             pause 1
@@ -1446,17 +1446,17 @@ image Jubes_Pussy_Heading:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom 0.6
+        xzoom .6
         block:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom 0.6
+            ease 3 xzoom .6
             repeat
     contains:
         ConditionSwitch(
 
-            "JubesX.hose == 'stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
-            "JubesX.hose == 'garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
+            "JubesX.hose == '_stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
+            "JubesX.hose == '_garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
 
 
 
@@ -1475,15 +1475,15 @@ image Jubes_Pussy_Hole_Mask:
 
     contains:
 
-        AlphaMask("images/JubesDoggy/Jubes_Doggy_Pussy_FHole.png", "images/Rogue_doggy/Rogue_Doggy_SexMask.png")
+        AlphaMask("images/JubesDoggy/Jubes_Doggy_Pussy_FHole.png", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom 0.6
+        xzoom .6
         block:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom 0.6
+            ease 3 xzoom .6
             repeat
 
 image Jubes_Pussy_Heading_Flap:
@@ -1494,7 +1494,7 @@ image Jubes_Pussy_Heading_Flap:
         anchor (0.52,0.69)
         pos (217,515)
         zoom 1
-        alpha 0.9
+        alpha .9
         block:
             ease 1 ypos 505
             pause 1
@@ -1516,11 +1516,11 @@ image Jubes_Pussy_Fingering:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom 0.6
+        xzoom .6
         block:
-            ease 1 xzoom 0.9
+            ease 1 xzoom .9
             pause 1
-            ease 3 xzoom 0.6
+            ease 3 xzoom .6
             repeat
     contains:
 
@@ -1553,8 +1553,8 @@ image Jubes_Pussy_Fucking2:
     contains:
         ConditionSwitch(
 
-            "JubesX.hose == 'stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
-            "JubesX.hose == 'garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
+            "JubesX.hose == '_stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
+            "JubesX.hose == '_garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
 
 
 
@@ -1563,8 +1563,8 @@ image Jubes_Pussy_Fucking2:
     contains:
 
         ConditionSwitch(
-            "primary_action == 'dildo_pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/Rogue_doggy/Rogue_Doggy_SexMask.png"),
-            "True",AlphaMask("Zero_Jubes_Doggy_Fucking2", "images/Rogue_doggy/Rogue_Doggy_SexMask.png"),
+            "primary_action == 'dildo pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
+            "True",AlphaMask("Zero_Jubes_Doggy_Fucking2", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
             ),
 
 
@@ -1580,8 +1580,8 @@ image Jubes_Pussy_Fucking3:
     contains:
         ConditionSwitch(
 
-            "JubesX.hose == 'stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
-            "JubesX.hose == 'garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
+            "JubesX.hose == '_stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
+            "JubesX.hose == '_garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
 
 
 
@@ -1589,7 +1589,7 @@ image Jubes_Pussy_Fucking3:
             )
     contains:
 
-        AlphaMask("Zero_Jubes_Doggy_Fucking3", "images/Rogue_doggy/Rogue_Doggy_SexMask.png")
+        AlphaMask("Zero_Jubes_Doggy_Fucking3", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
 
 
 
@@ -1606,8 +1606,8 @@ image Jubes_Anal:
     contains:
         ConditionSwitch(
 
-            "JubesX.hose == 'stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
-            "JubesX.hose == 'garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
+            "JubesX.hose == '_stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
+            "JubesX.hose == '_garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
 
 
 
@@ -1615,7 +1615,7 @@ image Jubes_Anal:
             )
     contains:
 
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         pos (172,500)
 
 
@@ -1631,11 +1631,11 @@ image Jubes_Anal_Fingering:
         "images/JubesDoggy/Jubes_Doggy_Anal_FullHole.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom 0.6
+        zoom .6
         block:
-            ease 0.5 zoom 0.75
-            pause 0.5
-            ease 1.5 zoom 0.6
+            ease .5 zoom .75
+            pause .5
+            ease 1.5 zoom .6
             repeat
     contains:
 
@@ -1662,17 +1662,17 @@ image Jubes_Anal_Heading:
         "images/JubesDoggy/Jubes_Doggy_Anal_FullHole.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom 0.5
+        zoom .5
         block:
-            ease 0.5 zoom 1
-            pause 0.5
-            ease 1.5 zoom 0.5
+            ease .5 zoom 1
+            pause .5
+            ease 1.5 zoom .5
             repeat
     contains:
         ConditionSwitch(
 
-            "JubesX.hose == 'stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
-            "JubesX.hose == 'garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
+            "JubesX.hose == '_stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
+            "JubesX.hose == '_garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
 
 
 
@@ -1688,11 +1688,11 @@ image Jubes_Anal_Heading:
 image Zero_Jubes_Doggy_Anal_Heading:
 
     contains:
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         pos (172,500)
         block:
-            ease 0.5 ypos 450
-            pause 0.25
+            ease .5 ypos 450
+            pause .25
             ease 1.75 ypos 500
             repeat
 
@@ -1702,22 +1702,22 @@ image Zero_Jubes_Doggy_Anal_HeadingJunk:
         Solid("#159457", xysize=(150,150))
         pos (152,600)
         block:
-            ease 0.5 ypos 550
-            pause 0.25
+            ease .5 ypos 550
+            pause .25
             ease 1.75 ypos 600
             repeat
 
 image Jubes_Doggy_Anal_Heading_Mask:
 
     contains:
-        "images/Rogue_doggy/Rogue_Doggy_Anal_CockMask.png"
+        "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom 0.5
+        zoom .5
         block:
-            ease 0.5 zoom 1
-            pause 0.5
-            ease 1.5 zoom 0.5
+            ease .5 zoom 1
+            pause .5
+            ease 1.5 zoom .5
             repeat
 
 image Jubes_Doggy_Anal_Head_Top:
@@ -1727,10 +1727,10 @@ image Jubes_Doggy_Anal_Head_Top:
         "Jubes_Doggy_Body"
         ypos 0
         block:
-            pause 0.4
-            ease 0.3 ypos -5
+            pause .4
+            ease .3 ypos -5
             easeout 1 ypos 0
-            pause 0.8
+            pause .8
             repeat
 
 image Jubes_Doggy_Anal_Head_Ass:
@@ -1740,22 +1740,22 @@ image Jubes_Doggy_Anal_Head_Ass:
         "Jubes_Doggy_Ass"
         ypos 0
         block:
-            pause 0.4
-            ease 0.2 ypos -10
-            easeout 0.1 ypos -7
-            easein 0.9 ypos 0
-            pause 0.9
+            pause .4
+            ease .2 ypos -10
+            easeout .1 ypos -7
+            easein .9 ypos 0
+            pause .9
             repeat
 
 
 image Zero_Jubes_Doggy_Anal1:
 
     contains:
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         pos (172,460)
         block:
-            ease 0.5 ypos 395
-            pause 0.25
+            ease .5 ypos 395
+            pause .25
             ease 1.75 ypos 460
             repeat
 
@@ -1773,8 +1773,8 @@ image Jubes_Anal_Fucking:
     contains:
         ConditionSwitch(
 
-            "JubesX.hose == 'stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
-            "JubesX.hose == 'garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
+            "JubesX.hose == '_stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
+            "JubesX.hose == '_garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
 
 
 
@@ -1784,8 +1784,8 @@ image Jubes_Anal_Fucking:
 
         ConditionSwitch(
 
-            "primary_action == 'dildo_anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/Rogue_doggy/Rogue_Doggy_Anal_CockMask.png"),
-            "True", AlphaMask("Zero_Jubes_Doggy_Anal1", "images/Rogue_doggy/Rogue_Doggy_Anal_CockMask.png"),
+            "primary_action == 'dildo anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
+            "True", AlphaMask("Zero_Jubes_Doggy_Anal1", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
             ),
 
 
@@ -1799,8 +1799,8 @@ image Jubes_Doggy_Anal_FullMask:
     contains:
         ConditionSwitch(
 
-            "JubesX.hose == 'stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
-            "JubesX.hose == 'garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
+            "JubesX.hose == '_stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
+            "JubesX.hose == '_garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
 
 
 
@@ -1813,10 +1813,10 @@ image Jubes_Doggy_Fuck_Top:
         subpixel True
         "Jubes_Doggy_Body"
         ypos 15
-        pause 0.4
+        pause .4
         block:
-            ease 0.2 ypos 5
-            pause 0.3
+            ease .2 ypos 5
+            pause .3
             ease 2 ypos 15
             repeat
 
@@ -1827,10 +1827,10 @@ image Jubes_Doggy_Fuck_Ass:
         "Jubes_Doggy_Ass"
         ypos 0
         block:
-            pause 0.4
-            ease 0.2 ypos -15
-            ease 0.1 ypos -5
-            pause 0.2
+            pause .4
+            ease .2 ypos -15
+            ease .1 ypos -5
+            pause .2
             ease 1.6 ypos 0
             repeat
 
@@ -1839,12 +1839,12 @@ image Jubes_Doggy_Fuck_Ass:
 image Zero_Jubes_Doggy_Anal2:
 
     contains:
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         pos (172,460)
         block:
-            ease 0.2 ypos 395
-            pause 0.1
-            ease 0.6 ypos 465
+            ease .2 ypos 395
+            pause .1
+            ease .6 ypos 465
             repeat
 
 image Jubes_Anal_Fucking2:
@@ -1864,8 +1864,8 @@ image Jubes_Anal_Fucking2:
     contains:
         ConditionSwitch(
 
-            "JubesX.hose == 'stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
-            "JubesX.hose == 'garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
+            "JubesX.hose == '_stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
+            "JubesX.hose == '_garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
 
 
 
@@ -1873,7 +1873,7 @@ image Jubes_Anal_Fucking2:
             )
     contains:
 
-        AlphaMask("Zero_Jubes_Doggy_Anal2", "images/Rogue_doggy/Rogue_Doggy_Anal_CockMask.png")
+        AlphaMask("Zero_Jubes_Doggy_Anal2", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png")
 
 image Jubes_Doggy_Fuck2_Top:
 
@@ -1882,11 +1882,11 @@ image Jubes_Doggy_Fuck2_Top:
         "Jubes_Doggy_Body"
         ypos 20
         block:
-            pause 0.15
-            ease 0.1 ypos 0
-            pause 0.1
-            easein 0.5 ypos 20
-            pause 0.05
+            pause .15
+            ease .1 ypos 0
+            pause .1
+            easein .5 ypos 20
+            pause .05
             repeat
 
 image Jubes_Doggy_Fuck2_Ass:
@@ -1896,12 +1896,12 @@ image Jubes_Doggy_Fuck2_Ass:
         "Jubes_Doggy_Ass"
         ypos 5
         block:
-            pause 0.15
-            ease 0.1 ypos -25
-            ease 0.1 ypos -15
-            pause 0.1
-            ease 0.4 ypos 5
-            pause 0.05
+            pause .15
+            ease .1 ypos -25
+            ease .1 ypos -15
+            pause .1
+            ease .4 ypos 5
+            pause .05
             repeat
 
 
@@ -1914,14 +1914,14 @@ image Jubes_Doggy_Feet0:
         pos (0, 0)
         block:
             subpixel True
-            pause 0.5
+            pause .5
             ease 2 ypos 20
-            pause 0.5
+            pause .5
             ease 2 ypos 0
             repeat
     contains:
         ConditionSwitch(
-                "Player.sprite", "Zero_cock_doggy_out",
+                "Player.Sprite", "Zero_Doggy_Up",
                 "True", Null(),
                 )
         zoom 1.2
@@ -1931,9 +1931,9 @@ image Jubes_Doggy_Feet0:
         pos (0, 0)
         block:
             subpixel True
-            pause 0.5
+            pause .5
             ease 2 ypos 20
-            pause 0.5
+            pause .5
             ease 2 ypos 0
             repeat
 
@@ -1943,24 +1943,24 @@ image Jubes_Doggy_Feet1:
         "Jubes_Doggy_Shins"
         pos (0, 0)
         block:
-            pause 0.3
+            pause .3
             ease 1.7 ypos 100
             ease 1 ypos 0
             repeat
     contains:
-        "Zero_cock_doggy_out"
+        "Zero_Doggy_Up"
         zoom 1.2
         pos (160,480)
         block:
-            pause 0.4
+            pause .4
             ease 1.7 ypos 500
-            ease 0.9 ypos 480
+            ease .9 ypos 480
             repeat
     contains:
         "Jubes_Doggy_Feet"
         pos (0, 0)
         block:
-            pause 0.3
+            pause .3
             ease 1.7 ypos 100
             ease 1 ypos 0
             repeat
@@ -1971,26 +1971,26 @@ image Jubes_Doggy_Feet2:
         "Jubes_Doggy_Shins"
         pos (0, 0)
         block:
-            pause 0.05
-            ease 0.6 ypos 110
-            ease 0.3 ypos 0
+            pause .05
+            ease .6 ypos 110
+            ease .3 ypos 0
             repeat
     contains:
-        "Zero_cock_doggy_out"
+        "Zero_Doggy_Up"
         zoom 1.2
         pos (160,480)
         block:
-            pause 0.07
-            ease 0.6 ypos 500
-            ease 0.28 ypos 480
+            pause .07
+            ease .6 ypos 500
+            ease .28 ypos 480
             repeat
     contains:
         "Jubes_Doggy_Feet"
         pos (0, 0)
         block:
-            pause 0.05
-            ease 0.6 ypos 110
-            ease 0.3 ypos 0
+            pause .05
+            ease .6 ypos 110
+            ease .3 ypos 0
             repeat
 
 
@@ -2018,7 +2018,7 @@ image Jubes_Doggy_Foot0_Ass:
         block:
             pause 1
             ease 2 ypos 20
-            pause 0.5
+            pause .5
             ease 1.5 ypos 0
             repeat
 
@@ -2029,7 +2029,7 @@ image Jubes_Doggy_Foot1_Top:
         "Jubes_Doggy_Body"
         ypos 70
         block:
-            pause 0.3
+            pause .3
             ease 1.7 ypos 100
             ease 1 ypos 70
             repeat
@@ -2041,9 +2041,9 @@ image Jubes_Doggy_Foot1_Ass:
         "Jubes_Doggy_Ass"
         ypos 0
         block:
-            pause 0.3
+            pause .3
             ease 2 ypos 80
-            ease 0.7 ypos 0
+            ease .7 ypos 0
             repeat
 
 image Jubes_Doggy_Foot2_Top:
@@ -2059,9 +2059,9 @@ image Jubes_Doggy_Foot2_Top:
 
 
 
-            pause 0.05
-            ease 0.6 ypos 90
-            ease 0.3 ypos 70
+            pause .05
+            ease .6 ypos 90
+            ease .3 ypos 70
             repeat
 
 image Jubes_Doggy_Foot2_Ass:
@@ -2071,19 +2071,19 @@ image Jubes_Doggy_Foot2_Ass:
         "Jubes_Doggy_Ass"
         ypos 70
         block:
-            pause 0.15
-            ease 0.6 ypos 90
-            ease 0.2 ypos 70
+            pause .15
+            ease .6 ypos 90
+            ease .2 ypos 70
             repeat
 
 
 
-label Jubes_Doggy_Launch(line=primary_action):
+label Jubes_Doggy_Launch(Line=primary_action):
     return
     if renpy.showing("Jubes_Doggy_Animation"):
         return
     $ action_speed = 0
-    call Jubes_Hide (1)
+    call hide_girl(JubesX, hide_sprite = True)
     show Jubes_Doggy_Animation zorder 150 at sprite_location(stage_center+150)
     with dissolve
     return
@@ -2093,9 +2093,9 @@ label Jubes_Doggy_Reset:
         return
 
     $ JubesX.arm_pose = 2
-    $ JubesX.spriteVer = 0
+    $ JubesX.SpriteVer = 0
     hide Jubes_Doggy_Animation
-    call Jubes_Hide
+    call hide_girl(JubesX)
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         zoom 1
@@ -2118,7 +2118,7 @@ image Jubes_SexSprite:
     contains:
         ConditionSwitch(
 
-            "Player.cock_position == 'in'", ConditionSwitch(
+            "Player.Cock == 'in'", ConditionSwitch(
 
                     "action_speed == 1", "Jubes_Sex_Body_S1",
                     "action_speed == 2", "Jubes_Sex_Body_S2",
@@ -2126,7 +2126,7 @@ image Jubes_SexSprite:
                     "action_speed >= 4", "Jubes_Sex_Body_S4",
                     "True",       "Jubes_Sex_Body_S0",
                     ),
-            "Player.cock_position == 'anal'", ConditionSwitch(
+            "Player.Cock == 'anal'", ConditionSwitch(
 
                     "action_speed == 1", "Jubes_Sex_Body_A1",
                     "action_speed == 2", "Jubes_Sex_Body_A2",
@@ -2134,9 +2134,9 @@ image Jubes_SexSprite:
                     "action_speed >= 4", "Jubes_Sex_Body_A4",
                     "True",       "Jubes_Sex_Body_A0",
                     ),
-            "Player.cock_position == 'foot'", ConditionSwitch(
+            "Player.Cock == 'footjob'", ConditionSwitch(
 
-                    "not Player.sprite","Jubes_Sex_Body_F0",
+                    "not Player.Sprite","Jubes_Sex_Body_F0",
                     "action_speed == 1", "Jubes_Sex_Body_F1",
                     "action_speed >= 4", "Jubes_Sex_Body_F0",
                     "action_speed >= 2", "Jubes_Sex_Body_F2",
@@ -2145,7 +2145,7 @@ image Jubes_SexSprite:
 
             "True", ConditionSwitch(
 
-                    "not Player.sprite","Jubes_Sex_Body_H0",
+                    "not Player.Sprite","Jubes_Sex_Body_H0",
                     "action_speed == 1", "Jubes_Sex_Body_H1",
                     "action_speed == 4", "Jubes_Sex_Body_H0",
                     "action_speed >= 2", "Jubes_Sex_Body_H2",
@@ -2155,7 +2155,7 @@ image Jubes_SexSprite:
     contains:
         ConditionSwitch(
 
-            "Player.cock_position == 'in'", ConditionSwitch(
+            "Player.Cock == 'in'", ConditionSwitch(
 
                     "action_speed == 1", "Jubes_Sex_Legs_S1",
                     "action_speed == 2", "Jubes_Sex_Legs_S2",
@@ -2163,7 +2163,7 @@ image Jubes_SexSprite:
                     "action_speed >= 4", "Jubes_Sex_Legs_S4",
                     "True", "Jubes_Sex_Legs_S0",
                     ),
-            "Player.cock_position == 'anal'", ConditionSwitch(
+            "Player.Cock == 'anal'", ConditionSwitch(
 
                     "action_speed == 1", "Jubes_Sex_Legs_A1",
                     "action_speed == 2", "Jubes_Sex_Legs_A2",
@@ -2171,9 +2171,9 @@ image Jubes_SexSprite:
                     "action_speed >= 4", "Jubes_Sex_Legs_A4",
                     "True", "Jubes_Sex_Legs_A0",
                     ),
-            "Player.cock_position == 'foot'", ConditionSwitch(
+            "Player.Cock == 'footjob'", ConditionSwitch(
 
-                    "not Player.sprite","Jubes_Sex_Legs_F0",
+                    "not Player.Sprite","Jubes_Sex_Legs_F0",
                     "action_speed == 1", "Jubes_Sex_Legs_F1",
                     "action_speed >= 4", "Jubes_Sex_Legs_F0",
                     "action_speed >= 2", "Jubes_Sex_Legs_F2",
@@ -2181,21 +2181,21 @@ image Jubes_SexSprite:
                     ),
             "True", ConditionSwitch(
 
-                    "not Player.sprite","Jubes_Sex_Legs_H0",
+                    "not Player.Sprite","Jubes_Sex_Legs_H0",
                     "action_speed == 1", "Jubes_Sex_Legs_H1",
                     "action_speed == 4", "Jubes_Sex_Legs_H0",
                     "action_speed >= 2", "Jubes_Sex_Legs_H2",
                     "True", "Jubes_Sex_Legs_H0",
                     ),
             )
-    zoom 0.6
+    zoom .6
     transform_anchor True
     anchor (.5,.5)
 
 
-image Jubes_Sex_hairback:
+image Jubes_Sex_HairBack:
 
-    "Jubes_Sprite_hairback"
+    "Jubes_Sprite_HairBack"
     transform_anchor True
     zoom 1.8
     anchor (0.5, 0.5)
@@ -2216,14 +2216,14 @@ image Jubes_Sex_Head:
 image Jubes_Sex_Body:
 
     contains:
-        "Jubes_Sex_hairback"
+        "Jubes_Sex_HairBack"
     contains:
 
 
 
         ConditionSwitch(
-                    "Player.cock_position == 'foot'", Null(),
-                    "JubesX.arms == 'gloves'", "images/JubesSex/Jubes_Sex_Hand_Gloved.png",
+                    "Player.Cock == 'footjob'", Null(),
+                    "JubesX.arms == '_gloves'", "images/JubesSex/Jubes_Sex_Hand_Gloved.png",
                     "True", "images/JubesSex/Jubes_Sex_Hand.png"
                     )
     contains:
@@ -2248,20 +2248,20 @@ image Jubes_Sex_Body:
 
         ConditionSwitch(
             "not JubesX.piercings", Null(),
-            "JubesX.piercings == 'barbell'", "images/JubesSex/Jubes_Sex_Barbell_Tits.png",
-            "JubesX.piercings == 'ring'", "images/JubesSex/Jubes_Sex_Ring_Tits.png",
+            "JubesX.piercings == '_barbell'", "images/JubesSex/Jubes_Sex_Barbell_Tits.png",
+            "JubesX.piercings == '_ring'", "images/JubesSex/Jubes_Sex_Ring_Tits.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-            "JubesX.neck == 'leash choker'", "images/JubesSex/Jubes_Sex_Leash.png",
+            "JubesX.neck == '_leash choker'", "images/JubesSex/Jubes_Sex_Leash.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-            "JubesX.hose == 'stockings_and_garterbelt' or JubesX.hose == 'garterbelt'", "images/JubesSex/Jubes_Sex_Garter.png",
+            "JubesX.hose == '_stockings_and_garterbelt' or JubesX.hose == '_garterbelt'", "images/JubesSex/Jubes_Sex_Garter.png",
             "True", Null(),
             )
     contains:
@@ -2272,22 +2272,22 @@ image Jubes_Sex_Body:
 
                     "not JubesX.bra", Null(),
                     "JubesX.bra == 'white tank'", "images/JubesSex/Jubes_Sex_WhiteTank_Up.png",
-                    "JubesX.bra == 'leather_bra'", "images/JubesSex/Jubes_Sex_Bra_Leather_Up.png",
-                    "JubesX.bra == 'wolvie_top'", "images/JubesSex/Jubes_Sex_Top_Wolvie_Up.png",
-                    "JubesX.bra == 'corset'", "images/JubesSex/Jubes_Sex_Corset_Up.png",
+                    "JubesX.bra == 'leather bra'", "images/JubesSex/Jubes_Sex_Bra_Leather_Up.png",
+                    "JubesX.bra == 'wolvie top'", "images/JubesSex/Jubes_Sex_Top_Wolvie_Up.png",
+                    "JubesX.bra == '_corset'", "images/JubesSex/Jubes_Sex_Corset_Up.png",
                     "JubesX.bra == 'lace corset'", "images/JubesSex/Jubes_Sex_Corset_Lace_Up.png",
-                    "JubesX.bra == 'bikini_top'", "images/JubesSex/Jubes_Sex_Top_Bikini_Up.png",
+                    "JubesX.bra == '_bikini_top'", "images/JubesSex/Jubes_Sex_Top_Bikini_Up.png",
 
 
                     "True", Null(),
                     ),
 
             "JubesX.bra == 'white tank'", "images/JubesSex/Jubes_Sex_WhiteTank.png",
-            "JubesX.bra == 'leather_bra'", "images/JubesSex/Jubes_Sex_Bra_Leather.png",
-            "JubesX.bra == 'wolvie_top'", "images/JubesSex/Jubes_Sex_Top_Wolvie.png",
-            "JubesX.bra == 'corset'", "images/JubesSex/Jubes_Sex_Corset.png",
+            "JubesX.bra == 'leather bra'", "images/JubesSex/Jubes_Sex_Bra_Leather.png",
+            "JubesX.bra == 'wolvie top'", "images/JubesSex/Jubes_Sex_Top_Wolvie.png",
+            "JubesX.bra == '_corset'", "images/JubesSex/Jubes_Sex_Corset.png",
             "JubesX.bra == 'lace corset'", "images/JubesSex/Jubes_Sex_Corset_Lace.png",
-            "JubesX.bra == 'bikini_top'", "images/JubesSex/Jubes_Sex_Top_Bikini.png",
+            "JubesX.bra == '_bikini_top'", "images/JubesSex/Jubes_Sex_Top_Bikini.png",
 
 
             "True", Null(),
@@ -2296,17 +2296,17 @@ image Jubes_Sex_Body:
 
         ConditionSwitch(
             "not JubesX.piercings or JubesX.top_pulled_up", Null(),
-            "JubesX.piercings == 'barbell'", "images/JubesSex/Jubes_Sex_Barbell_Tits_C.png",
-            "JubesX.piercings == 'ring'", "images/JubesSex/Jubes_Sex_Ring_Tits_C.png",
+            "JubesX.piercings == '_barbell'", "images/JubesSex/Jubes_Sex_Barbell_Tits_C.png",
+            "JubesX.piercings == '_ring'", "images/JubesSex/Jubes_Sex_Ring_Tits_C.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
             "not JubesX.legs", Null(),
-            "JubesX.accessory == 'suspenders' and not JubesX.bra and not JubesX.top_pulled_up", "images/JubesSex/Jubes_Sex_Suspenders.png",
-            "JubesX.accessory == 'suspenders2'", "images/JubesSex/Jubes_Sex_Suspenders.png",
-            "JubesX.accessory == 'suspenders'", "images/JubesSex/Jubes_Sex_Suspenders_Up.png",
+            "JubesX.accessory == '_suspenders' and not JubesX.bra and not JubesX.top_pulled_up", "images/JubesSex/Jubes_Sex_Suspenders.png",
+            "JubesX.accessory == '_suspenders2'", "images/JubesSex/Jubes_Sex_Suspenders.png",
+            "JubesX.accessory == '_suspenders'", "images/JubesSex/Jubes_Sex_Suspenders_Up.png",
             "True", Null(),
             )
     contains:
@@ -2341,7 +2341,7 @@ image Jubes_Sex_Body:
     contains:
         ConditionSwitch(
 
-                "primary_action == 'suck breasts' or offhand_action == 'suck breasts'", "Jubes_Sex_Lick_Breasts",
+                "primary_action == 'suck_breasts' or offhand_action == 'suck_breasts'", "Jubes_Sex_Lick_Breasts",
                 "True", Null()
                 )
     contains:
@@ -2353,13 +2353,13 @@ image Jubes_Sex_Body:
     contains:
         "Jubes_Sex_Head"
     transform_anchor True
-    zoom 0.9
+    zoom .9
     offset (55,55)
 
 
 
 image Jubes_Sex_Lick_Breasts:
-    "licking"
+    "Lick_Anim"
     zoom 0.7
     offset (565,290)
 
@@ -2373,7 +2373,7 @@ image Jubes_Sex_Legs:
     contains:
 
         ConditionSwitch(
-            "JubesX.legs == 'skirt'", "images/JubesSex/Jubes_Sex_Skirt_Back.png",
+            "JubesX.legs == '_skirt'", "images/JubesSex/Jubes_Sex_Skirt_Back.png",
             "True", Null(),
             )
     contains:
@@ -2385,14 +2385,14 @@ image Jubes_Sex_Legs:
 
 
         ConditionSwitch(
-            "Player.cock_position == 'foot'", "images/JubesSex/Jubes_Sex_Legs_Foot.png",
+            "Player.Cock == 'footjob'", "images/JubesSex/Jubes_Sex_Legs_Foot.png",
             "True", "images/JubesSex/Jubes_Sex_Legs_High.png",
             )
     contains:
 
         ConditionSwitch(
-            "Player.cock_position == 'anal' and action_speed > 1", "images/JubesSex/Jubes_Sex_Anus_L.png",
-            "Player.cock_position == 'anal' and action_speed > 0", "images/JubesSex/Jubes_Sex_Anus_M.png",
+            "Player.Cock == 'anal' and action_speed > 1", "images/JubesSex/Jubes_Sex_Anus_L.png",
+            "Player.Cock == 'anal' and action_speed > 0", "images/JubesSex/Jubes_Sex_Anus_M.png",
             "'anal' in JubesX.spunk", "images/JubesSex/Jubes_Sex_Anus_M.png",
             "True", "images/JubesSex/Jubes_Sex_Anus_S.png",
             )
@@ -2400,14 +2400,14 @@ image Jubes_Sex_Legs:
 
         ConditionSwitch(
             "'anal' not in JubesX.spunk", Null(),
-            "Player.cock_position == 'anal' and action_speed > 1", "images/JubesSex/Jubes_Sex_Spunk_Anal_U.png",
+            "Player.Cock == 'anal' and action_speed > 1", "images/JubesSex/Jubes_Sex_Spunk_Anal_U.png",
             "True", "images/JubesSex/Jubes_Sex_Spunk_Anal.png",
             )
     contains:
 
         ConditionSwitch(
-            "Player.cock_position == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Pussy_Open.png",
-            "Player.cock_position == 'in' and action_speed > 0", "images/JubesSex/Jubes_Sex_Pussy_Mid.png",
+            "Player.Cock == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Pussy_Open.png",
+            "Player.Cock == 'in' and action_speed > 0", "images/JubesSex/Jubes_Sex_Pussy_Mid.png",
             "primary_action == 'eat_pussy'", "images/JubesSex/Jubes_Sex_Pussy_Mid.png",
             "True", "images/JubesSex/Jubes_Sex_Pussy_Closed.png",
             )
@@ -2421,25 +2421,25 @@ image Jubes_Sex_Legs:
 
         ConditionSwitch(
             "'in' not in JubesX.spunk", Null(),
-            "Player.cock_position == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Spunk_Pussy_Open.png",
+            "Player.Cock == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Spunk_Pussy_Open.png",
             "True", "images/JubesSex/Jubes_Sex_Spunk_Pussy.png",
             )
     contains:
 
         ConditionSwitch(
             "not JubesX.pubes", Null(),
-            "Player.cock_position == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Pubes_Open.png",
-            "Player.cock_position == 'in' and action_speed > 0", "images/JubesSex/Jubes_Sex_Pubes_Mid.png",
+            "Player.Cock == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Pubes_Open.png",
+            "Player.Cock == 'in' and action_speed > 0", "images/JubesSex/Jubes_Sex_Pubes_Mid.png",
             "primary_action == 'eat_pussy'", "images/JubesSex/Jubes_Sex_Pubes_Mid.png",
             "True", "images/JubesSex/Jubes_Sex_Pubes_Closed.png",
             )
     contains:
 
         ConditionSwitch(
-            "JubesX.piercings == 'barbell' and Player.cock_position == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Barbell_Pussy_O.png",
-            "JubesX.piercings == 'barbell'", "images/JubesSex/Jubes_Sex_Barbell_Pussy.png",
-            "JubesX.piercings == 'ring' and Player.cock_position == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Ring_Pussy_O.png",
-            "JubesX.piercings == 'ring'", "images/JubesSex/Jubes_Sex_Ring_Pussy.png",
+            "JubesX.piercings == '_barbell' and Player.Cock == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Barbell_Pussy_O.png",
+            "JubesX.piercings == '_barbell'", "images/JubesSex/Jubes_Sex_Barbell_Pussy.png",
+            "JubesX.piercings == '_ring' and Player.Cock == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Ring_Pussy_O.png",
+            "JubesX.piercings == '_ring'", "images/JubesSex/Jubes_Sex_Ring_Pussy.png",
             "True", Null(),
             )
     contains:
@@ -2447,34 +2447,34 @@ image Jubes_Sex_Legs:
         ConditionSwitch(
             "JubesX.underwear_pulled_down", Null(),
 
-            "JubesX.underwear == 'bikini_bottoms'", "images/JubesSex/Jubes_Sex_Panties_Bikini.png",
-            "JubesX.underwear == 'wolvie_panties'", "images/JubesSex/Jubes_Sex_Panties_Wolvie.png",
-            "JubesX.underwear == 'lace_panties'", "images/JubesSex/Jubes_Sex_Panties_Lace.png",
+            "JubesX.underwear == '_bikini_bottoms'", "images/JubesSex/Jubes_Sex_Panties_Bikini.png",
+            "JubesX.underwear == '_wolvie_panties'", "images/JubesSex/Jubes_Sex_Panties_Wolvie.png",
+            "JubesX.underwear == '_lace_panties'", "images/JubesSex/Jubes_Sex_Panties_Lace.png",
             "JubesX.underwear", "images/JubesSex/Jubes_Sex_Panties_Black.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-            "Player.cock_position == 'foot' and (JubesX.hose == 'stockings_and_garterbelt' or JubesX.hose == 'stockings')", "images/JubesSex/Jubes_Sex_Stockings_Base_Foot.png",
-            "Player.cock_position == 'foot' and JubesX.hose == 'black stockings'", "images/JubesSex/Jubes_Sex_BlackStockings_Base_Foot.png",
-            "JubesX.hose == 'black stockings'", "images/JubesSex/Jubes_Sex_BlackStockings_Base_Up.png",
-            "JubesX.hose == 'stockings_and_garterbelt' or JubesX.hose == 'stockings'", "images/JubesSex/Jubes_Sex_Stockings_Base_Up.png",
+            "Player.Cock == 'footjob' and (JubesX.hose == '_stockings_and_garterbelt' or JubesX.hose == '_stockings')", "images/JubesSex/Jubes_Sex_Stockings_Base_Foot.png",
+            "Player.Cock == 'footjob' and JubesX.hose == '_black_stockings'", "images/JubesSex/Jubes_Sex_BlackStockings_Base_Foot.png",
+            "JubesX.hose == '_black_stockings'", "images/JubesSex/Jubes_Sex_BlackStockings_Base_Up.png",
+            "JubesX.hose == '_stockings_and_garterbelt' or JubesX.hose == '_stockings'", "images/JubesSex/Jubes_Sex_Stockings_Base_Up.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-            "JubesX.legs == 'skirt' or JubesX.legs == 'other_skirt'", "images/JubesSex/Jubes_Sex_Skirt.png",
+            "JubesX.legs == '_skirt' or JubesX.legs == '_other_skirt'", "images/JubesSex/Jubes_Sex_Skirt.png",
             "JubesX.upskirt", Null(),
-            "JubesX.legs == 'leather_pants' and Player.cock_position == 'foot'", "images/JubesSex/Jubes_Sex_Pants_Base_Foot.png",
-            "JubesX.legs == 'leather_pants'", "images/JubesSex/Jubes_Sex_Pants_Base_Up.png",
+            "JubesX.legs == '_leather_pants' and Player.Cock == 'footjob'", "images/JubesSex/Jubes_Sex_Pants_Base_Foot.png",
+            "JubesX.legs == '_leather_pants'", "images/JubesSex/Jubes_Sex_Pants_Base_Up.png",
             "True", Null(),
             )
     contains:
         ConditionSwitch(
 
-            "Player.sprite and Player.cock_position", Null(),
+            "Player.Sprite and Player.Cock", Null(),
             "primary_action == 'eat_pussy'", "Jubes_Sex_Lick_Pussy",
             "primary_action == 'eat_ass'", "Jubes_Sex_Lick_Ass",
             "True", Null()
@@ -2484,8 +2484,8 @@ image Jubes_Sex_Legs:
         ConditionSwitch(
 
 
-            "JubesX.piercings == 'barbell'", "images/JubesSex/Jubes_Sex_Barbell_Pussy_C.png",
-            "JubesX.piercings == 'ring'", "images/JubesSex/Jubes_Sex_Ring_Pussy_C.png",
+            "JubesX.piercings == '_barbell'", "images/JubesSex/Jubes_Sex_Barbell_Pussy_C.png",
+            "JubesX.piercings == '_ring'", "images/JubesSex/Jubes_Sex_Ring_Pussy_C.png",
             "True", Null(),
             )
     contains:
@@ -2497,7 +2497,7 @@ image Jubes_Sex_Legs:
 
 
         ConditionSwitch(
-            "Player.cock_position == 'foot'", "Jubes_Footjob_Foot",
+            "Player.Cock == 'footjob'", "Jubes_Footjob_Foot",
             "True", "Jubes_Sex_Foot",
             )
     transform_anchor True
@@ -2508,12 +2508,12 @@ image Jubes_Sex_Legs:
 
 
 image Jubes_Sex_Lick_Pussy:
-    "licking"
+    "Lick_Anim"
     zoom 0.8
     offset (720,610)
 
 image Jubes_Sex_Lick_Ass:
-    "licking"
+    "Lick_Anim"
     zoom 0.8
     offset (730,700)
 
@@ -2526,15 +2526,15 @@ image Jubes_Sex_Foot:
     contains:
 
         ConditionSwitch(
-            "JubesX.hose == 'stockings_and_garterbelt' or JubesX.hose == 'stockings'", "images/JubesSex/Jubes_Sex_Stockings_Up.png",
-            "JubesX.hose == 'black stockings'", "images/JubesSex/Jubes_Sex_BlackStockings_Up.png",
+            "JubesX.hose == '_stockings_and_garterbelt' or JubesX.hose == '_stockings'", "images/JubesSex/Jubes_Sex_Stockings_Up.png",
+            "JubesX.hose == '_black_stockings'", "images/JubesSex/Jubes_Sex_BlackStockings_Up.png",
             "True", "images/JubesSex/Jubes_Sex_FootHigh.png"
             )
     contains:
 
         ConditionSwitch(
             "JubesX.upskirt", Null(),
-            "JubesX.legs == 'leather_pants'", "images/JubesSex/Jubes_Sex_Pants_Up.png",
+            "JubesX.legs == '_leather_pants'", "images/JubesSex/Jubes_Sex_Pants_Up.png",
             "True", Null(),
             )
         xoffset -2
@@ -2591,7 +2591,7 @@ image Jubes_Sex_Body_S0:
             pause 0.15
             ease 0.6 ypos -5
             pause 0.65
-            ease 0.6 ypos 0
+            ease .6 ypos 0
             repeat
 
 image Jubes_Sex_Legs_S0:
@@ -2623,13 +2623,13 @@ image Jubes_Sex_Zero_Anim_S0:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         alpha 0.8
         pos (125,170)
         block:
             ease 2 ypos 115
-            easeout 0.5 ypos 120
+            easeout .5 ypos 120
             easein 1.5 ypos 170
             repeat
 
@@ -2651,7 +2651,7 @@ image Jubes_Sex_Body_S1:
             pause 0.15
             ease 0.6 ypos -5
             pause 0.65
-            ease 0.6 ypos 0
+            ease .6 ypos 0
             repeat
 
 image Jubes_Sex_Legs_S1:
@@ -2683,12 +2683,12 @@ image Jubes_Sex_Zero_Anim_S1:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,115)
         block:
-            ease 0.5 ypos 90
-            easeout 0.5 ypos 100
+            ease .5 ypos 90
+            easeout .5 ypos 100
             easein 1 ypos 115
             repeat
 
@@ -2755,13 +2755,13 @@ image Jubes_Sex_Zero_Anim_S2:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,75)
         block:
-            ease 0.5 ypos -50
+            ease .5 ypos -50
             easeout 1.5 ypos 60
-            easein 0.5 ypos 75
+            easein .5 ypos 75
             repeat
 
     size (401,606)
@@ -2782,7 +2782,7 @@ image Jubes_Sex_Body_S3:
             pause 0.1
             ease 0.2 ypos -50
             pause 0.2
-            ease 0.7 ypos 10
+            ease .7 ypos 10
             repeat
 
 image Jubes_Sex_Legs_S3:
@@ -2796,7 +2796,7 @@ image Jubes_Sex_Legs_S3:
             pause 0.05
             ease 0.2 ypos -45
             easeout 0.45 ypos -40
-            easein 0.5 ypos 0
+            easein .5 ypos 0
             repeat
     contains:
         AlphaMask("Jubes_Sex_Zero_Anim_S3", "Jubes_SexMask")
@@ -2806,7 +2806,7 @@ image Jubes_Sex_Legs_S3:
             pause 0.05
             ease 0.2 ypos 433
             easeout 0.45 ypos 438
-            easein 0.5 ypos 478
+            easein .5 ypos 478
             repeat
     contains:
 
@@ -2826,7 +2826,7 @@ image Jubes_Sex_Legs_S3:
             pause 0.05
             ease 0.2 ypos -150
             easeout 0.45 ypos -145
-            easein 0.5 ypos -105
+            easein .5 ypos -105
             repeat
 
 
@@ -2834,13 +2834,13 @@ image Jubes_Sex_Zero_Anim_S3:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,75)
         block:
-            ease 0.2 ypos -70
-            easeout 0.5 ypos 0
-            easein 0.5 ypos 75
+            ease .2 ypos -70
+            easeout .5 ypos 0
+            easein .5 ypos 75
             repeat
 
     size (401,606)
@@ -2906,12 +2906,12 @@ image Jubes_Sex_Zero_Anim_S4:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,-60)
         block:
-            ease 0.2 ypos -70
-            easeout 0.5 ypos -68
+            ease .2 ypos -70
+            easeout .5 ypos -68
             easein 1.5 ypos -60
             repeat
 
@@ -2935,7 +2935,7 @@ image Jubes_Sex_Body_A0:
             pause 1.15
             ease 0.6 ypos -5
             pause 0.65
-            ease 0.6 ypos 0
+            ease .6 ypos 0
             repeat
 
 image Jubes_Sex_Legs_A0:
@@ -2969,12 +2969,12 @@ image Jubes_Sex_Zero_Anim_A0:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,115)
         block:
             ease 1.5 ypos 110
-            pause 0.5
+            pause .5
             ease 1.0 ypos 115
             repeat
     size (401,606)
@@ -2996,7 +2996,7 @@ image Jubes_Sex_Body_A1:
             pause 1.15
             ease 0.6 ypos -5
             pause 0.65
-            ease 0.6 ypos 0
+            ease .6 ypos 0
             repeat
 
 image Jubes_Sex_Legs_A1:
@@ -3030,13 +3030,13 @@ image Jubes_Sex_Zero_Anim_A1:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,115)
         block:
             easeout 1.2 ypos 100
-            easein 0.3 ypos 90
-            easeout 0.5 ypos 100
+            easein .3 ypos 90
+            easeout .5 ypos 100
             easein 1 ypos 115
             repeat
     size (401,606)
@@ -3102,13 +3102,13 @@ image Jubes_Sex_Zero_Anim_A2:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,75)
         block:
-            ease 0.5 ypos -50
+            ease .5 ypos -50
             easeout 1.5 ypos 60
-            easein 0.5 ypos 75
+            easein .5 ypos 75
             repeat
     size (401,606)
     anchor (0.1,0.5)
@@ -3127,7 +3127,7 @@ image Jubes_Sex_Body_A3:
             pause 0.1
             ease 0.2 ypos -50
             pause 0.2
-            ease 0.7 ypos 00
+            ease .7 ypos 00
             repeat
 
 image Jubes_Sex_Legs_A3:
@@ -3141,7 +3141,7 @@ image Jubes_Sex_Legs_A3:
             pause 0.05
             ease 0.2 ypos -55
             easeout 0.45 ypos -40
-            easein 0.5 ypos 0
+            easein .5 ypos 0
             repeat
     contains:
         AlphaMask("Jubes_Sex_Zero_Anim_A3", "Jubes_AnalMask")
@@ -3151,7 +3151,7 @@ image Jubes_Sex_Legs_A3:
             pause 0.05
             ease 0.2 ypos 525
             easeout 0.45 ypos 540
-            easein 0.5 ypos 580
+            easein .5 ypos 580
             repeat
     contains:
 
@@ -3165,7 +3165,7 @@ image Jubes_Sex_Legs_A3:
             pause 0.05
             ease 0.2 ypos -55
             easeout 0.45 ypos -40
-            easein 0.5 ypos 0
+            easein .5 ypos 0
             repeat
 
 
@@ -3173,13 +3173,13 @@ image Jubes_Sex_Zero_Anim_A3:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,75)
         block:
-            ease 0.2 ypos -70
-            easeout 0.7 ypos 0
-            easein 0.3 ypos 75
+            ease .2 ypos -70
+            easeout .7 ypos 0
+            easein .3 ypos 75
             repeat
 
     size (401,606)
@@ -3245,12 +3245,12 @@ image Jubes_Sex_Zero_Anim_A4:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         pos (125,-60)
         block:
-            ease 0.2 ypos -70
-            easeout 0.5 ypos -68
+            ease .2 ypos -70
+            easeout .5 ypos -68
             easein 1.5 ypos -60
             repeat
 
@@ -3272,7 +3272,7 @@ image Jubes_Sex_Body_H0:
             pause 1.15
             ease 0.6 ypos -5
             pause 0.65
-            ease 0.6 ypos 0
+            ease .6 ypos 0
             repeat
 
 image Jubes_Sex_Legs_H0:
@@ -3308,7 +3308,7 @@ image Jubes_Sex_Zero_Anim_H0:
     contains:
         subpixel True
         ConditionSwitch(
-            "Player.sprite", "Zero_cock_doggy_in",
+            "Player.Sprite", "Zero_Doggy_Insert",
             "True", Null(),
             )
 
@@ -3318,7 +3318,7 @@ image Jubes_Sex_Zero_Anim_H0:
         alpha 0.8
         block:
             ease 1.5 ypos 110
-            pause 0.5
+            pause .5
             ease 1.0 ypos 115
             repeat
     size (401,606)
@@ -3339,7 +3339,7 @@ image Jubes_Sex_Body_H1:
             pause 1.15
             ease 0.6 ypos -5
             pause 0.65
-            ease 0.6 ypos 0
+            ease .6 ypos 0
             repeat
 
 image Jubes_Sex_Legs_H1:
@@ -3372,13 +3372,13 @@ image Jubes_Sex_Zero_Anim_H1:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         alpha 0.8
         pos (125,250)
         block:
             ease 1.5 ypos 90
-            pause 0.5
+            pause .5
             ease 1.0 ypos 250
             repeat
     size (401,606)
@@ -3396,10 +3396,10 @@ image Jubes_Sex_Body_H2:
         subpixel True
         pos (0,0)
         block:
+            pause .3
+            ease .5 ypos -5
             pause 0.3
-            ease 0.5 ypos -5
-            pause 0.3
-            ease 0.4 ypos 0
+            ease .4 ypos 0
             repeat
 
 image Jubes_Sex_Legs_H2:
@@ -3411,7 +3411,7 @@ image Jubes_Sex_Legs_H2:
         pos (0,0)
         block:
             pause 0.1
-            ease 0.25 ypos -20
+            ease .25 ypos -20
             easeout 0.15 ypos -18
             easein 0.25 ypos 0
             repeat
@@ -3422,7 +3422,7 @@ image Jubes_Sex_Legs_H2:
         pos (558,580)
         block:
             pause 0.1
-            ease 0.25 ypos 560
+            ease .25 ypos 560
             easeout 0.15 ypos 562
             easein 0.25 ypos 580
             repeat
@@ -3432,12 +3432,12 @@ image Jubes_Sex_Zero_Anim_H2:
 
     contains:
         subpixel True
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
         zoom 1.7
         alpha 0.8
         pos (125,230)
         block:
-            ease 0.25 ypos 150
+            ease .25 ypos 150
             easeout 0.25 ypos 170
             easein 0.25 ypos 230
             repeat
@@ -3466,15 +3466,15 @@ image Jubes_Footjob_Foot:
     contains:
 
         ConditionSwitch(
-            "JubesX.hose == 'stockings_and_garterbelt' or JubesX.hose == 'stockings'", "images/JubesSex/Jubes_Sex_Stockings_Foot.png",
-            "JubesX.hose == 'black stockings'", "images/JubesSex/Jubes_Sex_BlackStockings_Foot.png",
+            "JubesX.hose == '_stockings_and_garterbelt' or JubesX.hose == '_stockings'", "images/JubesSex/Jubes_Sex_Stockings_Foot.png",
+            "JubesX.hose == '_black_stockings'", "images/JubesSex/Jubes_Sex_BlackStockings_Foot.png",
             "True", "images/JubesSex/Jubes_Sex_Foot.png"
             )
     contains:
 
         ConditionSwitch(
             "JubesX.upskirt", Null(),
-            "JubesX.legs == 'leather_pants'", "images/JubesSex/Jubes_Sex_Pants_Foot.png",
+            "JubesX.legs == '_leather_pants'", "images/JubesSex/Jubes_Sex_Pants_Foot.png",
             "True", Null(),
             )
     offset (1105,140)
@@ -3482,8 +3482,8 @@ image Jubes_Footjob_Foot:
 
 image Jubes_Sex_Zero_Anim_F:
 
-    "Zero_cock_titjob"
-    zoom 0.7
+    "Zero_Blowcock"
+    zoom .7
     anchor (0.5, 0.9)
     offset (270,650)
     rotate 0
@@ -3500,7 +3500,7 @@ image Jubes_Sex_Body_F0:
             pause 1.15
             ease 0.6 ypos -5
             pause 0.65
-            ease 0.6 ypos 0
+            ease .6 ypos 0
             repeat
     yoffset -100
 
@@ -3536,7 +3536,7 @@ image Jubes_Sex_Legs_F0:
         parallel:
             ease 2 rotate 5
             ease 2 rotate -5
-            pause 0.5
+            pause .5
             repeat
     contains:
         "Jubes_Sex_Zero_Anim_F"
@@ -3554,10 +3554,10 @@ image Jubes_Sex_Legs_F0:
         parallel:
             easeout 1 rotate -5
             easein 1 rotate -10
-            pause 0.2
-            easeout 0.8 rotate -5
+            pause .2
+            easeout .8 rotate -5
             easein 1 rotate 0
-            pause 0.5
+            pause .5
             repeat
 
     yoffset -100
@@ -3579,7 +3579,7 @@ image Jubes_Sex_Body_F1:
             pause 1.15
             ease 0.6 ypos -5
             pause 0.65
-            ease 0.6 ypos 0
+            ease .6 ypos 0
             repeat
     yoffset -100
 
@@ -3613,10 +3613,10 @@ image Jubes_Sex_Legs_F1:
         parallel:
             easeout 1 rotate -20
             easein 1 rotate -28
-            pause 0.2
-            easeout 0.8 rotate -20
+            pause .2
+            easeout .8 rotate -20
             easein 1 rotate -5
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -3636,7 +3636,7 @@ image Jubes_Sex_Legs_F1:
         parallel:
             ease 2 rotate 20
             ease 2 rotate 0
-            pause 0.5
+            pause .5
             repeat
 
     yoffset -100
@@ -3654,8 +3654,8 @@ image Jubes_Sex_Body_F2:
         subpixel True
         pos (0,0)
         block:
-            ease 0.7 ypos -10
-            ease 0.7 ypos 0
+            ease .7 ypos -10
+            ease .7 ypos 0
             repeat
     rotate 15
     yoffset -250
@@ -3672,7 +3672,7 @@ image Jubes_Sex_Legs_F2:
         block:
             ease 0.5 ypos -2
             ease 1 ypos -10
-            pause 0.1
+            pause .1
             repeat
     contains:
         "Jubes_Sex_Zero_Anim_F"
@@ -3681,12 +3681,12 @@ image Jubes_Sex_Legs_F2:
         pos (808,380)
         rotate -55
         parallel:
-            easeout 0.25 rotate -58
-            easein 0.25 rotate -60
-            pause 0.1
-            easeout 0.4 rotate -58
-            easein 0.5 rotate -55
-            pause 0.1
+            easeout .25 rotate -58
+            easein .25 rotate -60
+            pause .1
+            easeout .4 rotate -58
+            easein .5 rotate -55
+            pause .1
             repeat
     contains:
 
@@ -3704,9 +3704,9 @@ image Jubes_Sex_Legs_F2:
             easein 0.45 ypos 0
             repeat
         parallel:
-            ease 0.5 rotate 20
+            ease .5 rotate 20
             ease 1 rotate 0
-            pause 0.1
+            pause .1
             repeat
 
     yoffset -400
@@ -3741,7 +3741,7 @@ image Jubes_Sex_Zero_AnimX:
     contains:
         subpixel True
 
-        "Zero_cock_doggy_in"
+        "Zero_Doggy_Insert"
 
         zoom 1.6
         alpha 0.5
@@ -3800,7 +3800,7 @@ image Jubes_Mega_Mask:
 
 
 
-        alpha 0.5
+        alpha .5
 
 
 
@@ -3817,46 +3817,46 @@ image Jubes_Mega_Mask:
 
 
 
-label Jubes_sex_launch(line=primary_action):
+label Jubes_Sex_Launch(Line=primary_action):
     return
-    $ girl_offhand_action = None if girl_offhand_action == "handjob" else girl_offhand_action
-    $ Player.sprite = 1
-    $ line = "solo" if not line else line
-    if line == "sex":
-        $ Player.cock_position = "sex"
-        if offhand_action in ("fondle_pussy","dildo_pussy","eat_pussy"):
-            $ offhand_action = None
-    elif line == "anal":
-        $ Player.cock_position = "anal"
-        if offhand_action in ("finger_ass","dildo_anal","eat_ass"):
-            $ offhand_action = None
-    elif line == "solo":
-        $ Player.sprite = 0
-        $ Player.cock_position = "out"
-    elif line == "hotdog":
-        $ Player.cock_position = "out"
-    elif line == "footjob":
-        $ show_feet = 1
-        $ Player.cock_position = "footjob"
-    elif line == "massage":
-        $ Player.sprite = 0
-        $ Player.cock_position = 0
+    $ girl_offhand_action = 0 if girl_offhand_action == "hand" else girl_offhand_action
+    $ Player.Sprite = 1
+    $ Line = "solo" if not Line else Line
+    if Line == "sex":
+        $ Player.Cock = "in"
+        if offhand_action in ("fondle pussy","dildo pussy","lick pussy"):
+            $ offhand_action = 0
+    elif Line == "anal":
+        $ Player.Cock = "anal"
+        if offhand_action in ("insert ass","dildo anal","lick ass"):
+            $ offhand_action = 0
+    elif Line == "solo":
+        $ Player.Sprite = 0
+        $ Player.Cock = "out"
+    elif Line == "hotdog":
+        $ Player.Cock = "out"
+    elif Line == "foot":
+        $ ShowFeet = 1
+        $ Player.Cock = "foot"
+    elif Line == "massage":
+        $ Player.Sprite = 0
+        $ Player.Cock = 0
     else:
-        $ Player.sprite = 0
-        $ Player.cock_position = "out"
+        $ Player.Sprite = 0
+        $ Player.Cock = "out"
         $ action_speed = 0
-    $ primary_action = line
+    $ primary_action = Line
 
-    if JubesX.pose == "doggy":
-        call Jubes_Doggy_Launch (line)
+    if JubesX.Pose == "doggy":
+        call Jubes_Doggy_Launch (Line)
         return
     if renpy.showing("Jubes_SexSprite"):
         return
-    call Jubes_Hide (1)
+    call hide_girl(JubesX, hide_sprite = True)
     $ action_speed = 0
 
     if primary_action == "in" or primary_action == "anal":
-        if JubesX.legs or JubesX.HoseNum() >= 5:
+        if JubesX.legs or JubesX.hose_number() >= 5:
             $ JubesX.upskirt = 1
         if JubesX.underwear:
             $ JubesX.underwear_pulled_down = 1
@@ -3874,7 +3874,7 @@ label Jubes_Sex_Reset:
         return
     $ JubesX.arm_pose = 2
     hide Jubes_SexSprite
-    call Jubes_Hide
+    call hide_girl(JubesX)
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
@@ -3928,7 +3928,7 @@ image Jubes_BJ_Animation:
 
 
 
-image Jubes_Sprite_BJ_hairback:
+image Jubes_Sprite_BJ_HairBack:
 
 
     ConditionSwitch(
@@ -3945,7 +3945,7 @@ image Jubes_Sprite_BJ_Head:
         (806,806),
         (0,0), ConditionSwitch(
 
-                "JubesX.blushing == 'blush2'", "images/JubesSprite/Jubes_Sprite_Head_Blush2.png",
+                "JubesX.blushing == '_blush2'", "images/JubesSprite/Jubes_Sprite_Head_Blush2.png",
                 "JubesX.blushing", "images/JubesSprite/Jubes_Sprite_Head_Blush.png",
                 "True", "images/JubesSprite/Jubes_Sprite_Head.png",
                 ),
@@ -3957,16 +3957,16 @@ image Jubes_Sprite_BJ_Head:
         (0,0), ConditionSwitch(
             "action_speed >= 2", "images/JubesSprite/Jubes_Sprite_Mouth_SuckingBJ.png",
             "action_speed == 1", "images/JubesSprite/Jubes_Sprite_Mouth_Tongue.png",
-            "JubesX.mouth == 'normal'", "images/JubesSprite/Jubes_Sprite_Mouth_Normal.png",
-            "JubesX.mouth == 'lipbite'", "images/JubesSprite/Jubes_Sprite_Mouth_Lipbite.png",
-            "JubesX.mouth == 'sucking'", "images/JubesSprite/Jubes_Sprite_Mouth_Sucking.png",
-            "JubesX.mouth == 'kiss'", "images/JubesSprite/Jubes_Sprite_Mouth_Kiss.png",
-            "JubesX.mouth == 'sad'", "images/JubesSprite/Jubes_Sprite_Mouth_Sad.png",
-            "JubesX.mouth == 'smile'", "images/JubesSprite/Jubes_Sprite_Mouth_Smile.png",
-            "JubesX.mouth == 'surprised'", "images/JubesSprite/Jubes_Sprite_Mouth_Surprised.png",
-            "JubesX.mouth == 'tongue'", "images/JubesSprite/Jubes_Sprite_Mouth_Tongue.png",
-            "JubesX.mouth == 'grimace'", "images/JubesSprite/Jubes_Sprite_Mouth_Smile.png",
-            "JubesX.mouth == 'smirk'", "images/JubesSprite/Jubes_Sprite_Mouth_Smirk.png",
+            "JubesX.mouth == '_normal'", "images/JubesSprite/Jubes_Sprite_Mouth_Normal.png",
+            "JubesX.mouth == '_lipbite'", "images/JubesSprite/Jubes_Sprite_Mouth_Lipbite.png",
+            "JubesX.mouth == '_sucking'", "images/JubesSprite/Jubes_Sprite_Mouth_Sucking.png",
+            "JubesX.mouth == '_kiss'", "images/JubesSprite/Jubes_Sprite_Mouth_Kiss.png",
+            "JubesX.mouth == '_sad'", "images/JubesSprite/Jubes_Sprite_Mouth_Sad.png",
+            "JubesX.mouth == '_smile'", "images/JubesSprite/Jubes_Sprite_Mouth_Smile.png",
+            "JubesX.mouth == '_surprised'", "images/JubesSprite/Jubes_Sprite_Mouth_Surprised.png",
+            "JubesX.mouth == '_tongue'", "images/JubesSprite/Jubes_Sprite_Mouth_Tongue.png",
+            "JubesX.mouth == '_grimace'", "images/JubesSprite/Jubes_Sprite_Mouth_Smile.png",
+            "JubesX.mouth == '_smirk'", "images/JubesSprite/Jubes_Sprite_Mouth_Smirk.png",
 
             "True", "images/JubesSprite/Jubes_Sprite_Mouth_Normal.png",
             ),
@@ -3974,16 +3974,16 @@ image Jubes_Sprite_BJ_Head:
             "'mouth' not in JubesX.spunk", Null(),
             "action_speed >= 2", "images/JubesSprite/Jubes_Sprite_Spunk_MouthSuck.png",
             "action_speed == 1", "images/JubesSprite/Jubes_Sprite_Spunk_MouthTongue.png",
-            "JubesX.mouth == 'normal'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthNeutral.png",
-            "JubesX.mouth == 'lipbite'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthSmirk.png",
-            "JubesX.mouth == 'sucking'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthTongue.png",
-            "JubesX.mouth == 'kiss'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthKiss.png",
-            "JubesX.mouth == 'sad'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthSad.png",
-            "JubesX.mouth == 'smile'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthSmile.png",
-            "JubesX.mouth == 'surprised'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthSad.png",
-            "JubesX.mouth == 'tongue'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthTongue.png",
-            "JubesX.mouth == 'grimace'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthSmile.png",
-            "JubesX.mouth == 'smirk'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthSmirk.png",
+            "JubesX.mouth == '_normal'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthNeutral.png",
+            "JubesX.mouth == '_lipbite'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthSmirk.png",
+            "JubesX.mouth == '_sucking'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthTongue.png",
+            "JubesX.mouth == '_kiss'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthKiss.png",
+            "JubesX.mouth == '_sad'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthSad.png",
+            "JubesX.mouth == '_smile'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthSmile.png",
+            "JubesX.mouth == '_surprised'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthSad.png",
+            "JubesX.mouth == '_tongue'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthTongue.png",
+            "JubesX.mouth == '_grimace'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthSmile.png",
+            "JubesX.mouth == '_smirk'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthSmirk.png",
             "True", "images/JubesSprite/Jubes_Sprite_Spunk_MouthNeutral.png",
             ),
         (0,0), ConditionSwitch(
@@ -3996,20 +3996,20 @@ image Jubes_Sprite_BJ_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "JubesX.blushing >= 2", ConditionSwitch(
-                    "JubesX.brows == 'normal'", "images/JubesSprite/Jubes_Sprite_Brows_Normal_B.png",
-                    "JubesX.brows == 'angry'", "images/JubesSprite/Jubes_Sprite_Brows_Angry_B.png",
-                    "JubesX.brows == 'sad'", "images/JubesSprite/Jubes_Sprite_Brows_Sad_B.png",
-                    "JubesX.brows == 'surprised'", "images/JubesSprite/Jubes_Sprite_Brows_Surprised_B.png",
-                    "JubesX.brows == 'confused'", "images/JubesSprite/Jubes_Sprite_Brows_Confused_B.png",
+            "JubesX.blushing == '_blush2'", ConditionSwitch(
+                    "JubesX.brows == '_normal'", "images/JubesSprite/Jubes_Sprite_Brows_Normal_B.png",
+                    "JubesX.brows == '_angry'", "images/JubesSprite/Jubes_Sprite_Brows_Angry_B.png",
+                    "JubesX.brows == '_sad'", "images/JubesSprite/Jubes_Sprite_Brows_Sad_B.png",
+                    "JubesX.brows == '_surprised'", "images/JubesSprite/Jubes_Sprite_Brows_Surprised_B.png",
+                    "JubesX.brows == '_confused'", "images/JubesSprite/Jubes_Sprite_Brows_Confused_B.png",
                     "True", "images/JubesSprite/Jubes_Sprite_Brows_Normal_B.png",
                     ),
             "True", ConditionSwitch(
-                    "JubesX.brows == 'normal'", "images/JubesSprite/Jubes_Sprite_Brows_Normal.png",
-                    "JubesX.brows == 'angry'", "images/JubesSprite/Jubes_Sprite_Brows_Angry.png",
-                    "JubesX.brows == 'sad'", "images/JubesSprite/Jubes_Sprite_Brows_Sad.png",
-                    "JubesX.brows == 'surprised'", "images/JubesSprite/Jubes_Sprite_Brows_Surprised.png",
-                    "JubesX.brows == 'confused'", "images/JubesSprite/Jubes_Sprite_Brows_Confused.png",
+                    "JubesX.brows == '_normal'", "images/JubesSprite/Jubes_Sprite_Brows_Normal.png",
+                    "JubesX.brows == '_angry'", "images/JubesSprite/Jubes_Sprite_Brows_Angry.png",
+                    "JubesX.brows == '_sad'", "images/JubesSprite/Jubes_Sprite_Brows_Sad.png",
+                    "JubesX.brows == '_surprised'", "images/JubesSprite/Jubes_Sprite_Brows_Surprised.png",
+                    "JubesX.brows == '_confused'", "images/JubesSprite/Jubes_Sprite_Brows_Confused.png",
                     "True", "images/JubesSprite/Jubes_Sprite_Brows_Normal.png",
                     ),
             ),
@@ -4080,7 +4080,7 @@ image Jubes_BJ_Body_0:
 
     contains:
 
-        "Jubes_Sprite_BJ_hairback"
+        "Jubes_Sprite_BJ_HairBack"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (490,400)
@@ -4126,7 +4126,7 @@ image Jubes_BJ_Body_0:
 
 
 
-        AlphaMask("Zero_cock_blowjob", "Jubes_BlowCock_Mask")
+        AlphaMask("Blowcock", "Jubes_BlowCock_Mask")
         subpixel True
         pos (412,292)
         zoom 0.4
@@ -4135,14 +4135,14 @@ image Jubes_BJ_Body_0:
         parallel:
             pause 0.1
 
-            ease 0.15 rotate -5
+            ease .15 rotate -5
             pause 0.4
             ease 1.95 rotate 10
             repeat
         parallel:
             pause 0.1
 
-            ease 0.15 pos (405,255)
+            ease .15 pos (405,255)
             pause 0.4
             ease 1.95 pos (420,292)
             repeat
@@ -4153,7 +4153,7 @@ image Jubes_BJ_Body_1:
 
     contains:
 
-        "Jubes_Sprite_BJ_hairback"
+        "Jubes_Sprite_BJ_HairBack"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (535,340)
@@ -4167,10 +4167,10 @@ image Jubes_BJ_Body_1:
         parallel:
             pause 0.1
             easeout 1.2 xpos 470
-            easein 0.2 xpos 460
+            easein .2 xpos 460
             pause 0.3
-            easeout 0.75 xpos 500
-            easein 0.65 xpos 535
+            easeout .75 xpos 500
+            easein .65 xpos 535
             repeat
         parallel:
             pause 0.1
@@ -4194,11 +4194,11 @@ image Jubes_BJ_Body_1:
             repeat
         parallel:
             pause 0.15
-            easeout 0.9 xpos 740
-            easein 0.35 xpos 740
+            easeout .9 xpos 740
+            easein .35 xpos 740
             pause 0.5
-            easeout 0.65 xpos 710
-            easein 0.65 xpos 673
+            easeout .65 xpos 710
+            easein .65 xpos 673
             repeat
         parallel:
             pause 0.15
@@ -4223,10 +4223,10 @@ image Jubes_BJ_Body_1:
         parallel:
             pause 0.1
             easeout 1.2 xpos 470
-            easein 0.2 xpos 460
+            easein .2 xpos 460
             pause 0.3
-            easeout 0.75 xpos 500
-            easein 0.65 xpos 535
+            easeout .75 xpos 500
+            easein .65 xpos 535
             repeat
         parallel:
             pause 0.1
@@ -4240,7 +4240,7 @@ image Jubes_BJ_Body_1:
 
 
 
-        AlphaMask("Zero_cock_blowjob", "Jubes_BlowCock_Mask")
+        AlphaMask("Blowcock", "Jubes_BlowCock_Mask")
         subpixel True
         pos (412,292)
         zoom 0.4
@@ -4249,14 +4249,14 @@ image Jubes_BJ_Body_1:
         parallel:
             pause 0.1
             easeout 1.2 rotate 1
-            easein 0.3 rotate -1
+            easein .3 rotate -1
             pause 0.4
             ease 1.2 rotate 10
             repeat
         parallel:
             pause 0.1
             easeout 1.2 pos (407,262)
-            easein 0.3 pos (405,255)
+            easein .3 pos (405,255)
             pause 0.4
             ease 1.2 pos (412,292)
             repeat
@@ -4266,7 +4266,7 @@ image Jubes_BJ_Body_2:
 
     contains:
 
-        "Jubes_Sprite_BJ_hairback"
+        "Jubes_Sprite_BJ_HairBack"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (530,355)
@@ -4274,14 +4274,14 @@ image Jubes_BJ_Body_2:
         parallel:
             pause 0.1
             easeout 1.2 rotate -40
-            ease 0.6 rotate -32
+            ease .6 rotate -32
             pause 0.1
             ease 1.2 rotate -30
             repeat
         parallel:
             pause 0.1
             easeout 1.2 xpos 510
-            ease 0.7 xpos 520
+            ease .7 xpos 520
             pause 0.1
             ease 1.1 xpos 530
             repeat
@@ -4328,14 +4328,14 @@ image Jubes_BJ_Body_2:
         parallel:
             pause 0.1
             easeout 1.2 rotate -40
-            ease 0.6 rotate -32
+            ease .6 rotate -32
             pause 0.1
             ease 1.2 rotate -30
             repeat
         parallel:
             pause 0.1
             easeout 1.2 xpos 510
-            ease 0.7 xpos 520
+            ease .7 xpos 520
             pause 0.1
             ease 1.1 xpos 530
             repeat
@@ -4351,7 +4351,7 @@ image Jubes_BJ_Body_2:
 
 
 
-        AlphaMask("Zero_cock_blowjob", "Jubes_BlowCock_Mask")
+        AlphaMask("Blowcock", "Jubes_BlowCock_Mask")
         subpixel True
         pos (412,292)
         zoom 0.4
@@ -4359,17 +4359,17 @@ image Jubes_BJ_Body_2:
         rotate 10
         parallel:
             pause 1.3
-            ease 0.4 rotate 8
-            pause 0.2
+            ease .4 rotate 8
+            pause .2
             ease 1 rotate 10
-            pause 0.3
+            pause .3
             repeat
         parallel:
             pause 1.3
-            ease 0.4 pos (410,285)
-            pause 0.2
+            ease .4 pos (410,285)
+            pause .2
             ease 1 pos (412,292)
-            pause 0.3
+            pause .3
             repeat
     contains:
 
@@ -4382,14 +4382,14 @@ image Jubes_BJ_Body_2:
         parallel:
             pause 0.1
             easeout 1.2 rotate -40
-            ease 0.6 rotate -32
+            ease .6 rotate -32
             pause 0.1
             ease 1.2 rotate -30
             repeat
         parallel:
             pause 0.1
             easeout 1.2 xpos 510
-            ease 0.7 xpos 520
+            ease .7 xpos 520
             pause 0.1
             ease 1.1 xpos 530
             repeat
@@ -4420,28 +4420,28 @@ image Jubes_BJ_Body_3:
 
     contains:
 
-        "Jubes_Sprite_BJ_hairback"
+        "Jubes_Sprite_BJ_HairBack"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (523,380)
         rotate -30
         parallel:
 
-            ease 0.7 rotate -50
+            ease .7 rotate -50
 
             ease 1 rotate -30
             repeat
         parallel:
 
-            easeout 0.3 xpos 500
-            easein 0.4 xpos 481
+            easeout .3 xpos 500
+            easein .4 xpos 481
 
-            easeout 0.55 xpos 500
-            easein 0.45 xpos 523
+            easeout .55 xpos 500
+            easein .45 xpos 523
             repeat
         parallel:
 
-            ease 0.7 ypos 450
+            ease .7 ypos 450
 
             ease 1 ypos 380
             repeat
@@ -4455,21 +4455,21 @@ image Jubes_BJ_Body_3:
         subpixel True
         parallel:
 
-            ease 0.7 rotate -40
+            ease .7 rotate -40
 
             ease 1.0 rotate -20
             repeat
         parallel:
 
-            easeout 0.3 xpos 710
-            easein 0.4 xpos 760
+            easeout .3 xpos 710
+            easein .4 xpos 760
 
-            easeout 0.55 xpos 710
-            easein 0.45 xpos 673
+            easeout .55 xpos 710
+            easein .45 xpos 673
             repeat
         parallel:
 
-            ease 0.7 ypos 780
+            ease .7 ypos 780
 
             ease 1.0 ypos 780
             repeat
@@ -4483,21 +4483,21 @@ image Jubes_BJ_Body_3:
         rotate -30
         parallel:
 
-            ease 0.7 rotate -50
+            ease .7 rotate -50
 
             ease 1 rotate -30
             repeat
         parallel:
 
-            easeout 0.3 xpos 500
-            easein 0.4 xpos 481
+            easeout .3 xpos 500
+            easein .4 xpos 481
 
-            easeout 0.55 xpos 500
-            easein 0.45 xpos 523
+            easeout .55 xpos 500
+            easein .45 xpos 523
             repeat
         parallel:
 
-            ease 0.7 ypos 450
+            ease .7 ypos 450
 
             ease 1 ypos 380
             repeat
@@ -4507,7 +4507,7 @@ image Jubes_BJ_Body_3:
 
 
 
-        AlphaMask("Zero_cock_blowjob", "Jubes_BlowCock_Mask_3")
+        AlphaMask("Blowcock", "Jubes_BlowCock_Mask_3")
         subpixel True
         pos (412,292)
         zoom 0.4
@@ -4515,13 +4515,13 @@ image Jubes_BJ_Body_3:
         rotate 10
         parallel:
 
-            ease 0.7 rotate 0
+            ease .7 rotate 0
 
             ease 1 rotate 10
             repeat
         parallel:
 
-            ease 0.7 pos (407,262)
+            ease .7 pos (407,262)
 
             ease 1 pos (412,292)
             repeat
@@ -4535,21 +4535,21 @@ image Jubes_BJ_Body_3:
         rotate -30
         parallel:
 
-            ease 0.7 rotate -50
+            ease .7 rotate -50
 
             ease 1 rotate -30
             repeat
         parallel:
 
-            easeout 0.3 xpos 500
-            easein 0.4 xpos 481
+            easeout .3 xpos 500
+            easein .4 xpos 481
 
-            easeout 0.55 xpos 500
-            easein 0.45 xpos 523
+            easeout .55 xpos 500
+            easein .45 xpos 523
             repeat
         parallel:
 
-            ease 0.7 ypos 450
+            ease .7 ypos 450
 
             ease 1 ypos 380
             repeat
@@ -4573,7 +4573,7 @@ image Jubes_BJ_Body_4:
 
     contains:
 
-        "Jubes_Sprite_BJ_hairback"
+        "Jubes_Sprite_BJ_HairBack"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (523,380)
@@ -4586,11 +4586,11 @@ image Jubes_BJ_Body_4:
             repeat
         parallel:
             pause 0.1
-            easeout 0.7 xpos 500
-            easein 0.9 xpos 481
+            easeout .7 xpos 500
+            easein .9 xpos 481
             pause 0.1
-            easeout 0.75 xpos 500
-            easein 0.65 xpos 523
+            easeout .75 xpos 500
+            easein .65 xpos 523
             repeat
         parallel:
             pause 0.1
@@ -4614,11 +4614,11 @@ image Jubes_BJ_Body_4:
             repeat
         parallel:
             pause 0.15
-            easeout 0.65 xpos 710
-            easein 0.9 xpos 760
+            easeout .65 xpos 710
+            easein .9 xpos 760
             pause 0.15
-            easeout 0.70 xpos 710
-            easein 0.65 xpos 673
+            easeout .70 xpos 710
+            easein .65 xpos 673
             repeat
         parallel:
             pause 0.15
@@ -4642,11 +4642,11 @@ image Jubes_BJ_Body_4:
             repeat
         parallel:
             pause 0.1
-            easeout 0.7 xpos 500
-            easein 0.9 xpos 481
+            easeout .7 xpos 500
+            easein .9 xpos 481
             pause 0.1
-            easeout 0.75 xpos 500
-            easein 0.65 xpos 523
+            easeout .75 xpos 500
+            easein .65 xpos 523
             repeat
         parallel:
             pause 0.1
@@ -4660,7 +4660,7 @@ image Jubes_BJ_Body_4:
 
 
 
-        AlphaMask("Zero_cock_blowjob", "Jubes_BlowCock_Mask_4")
+        AlphaMask("Blowcock", "Jubes_BlowCock_Mask_4")
         subpixel True
         pos (412,292)
         zoom 0.4
@@ -4694,11 +4694,11 @@ image Jubes_BJ_Body_4:
             repeat
         parallel:
             pause 0.1
-            easeout 0.7 xpos 500
-            easein 0.9 xpos 481
+            easeout .7 xpos 500
+            easein .9 xpos 481
             pause 0.1
-            easeout 0.75 xpos 500
-            easein 0.65 xpos 523
+            easeout .75 xpos 500
+            easein .65 xpos 523
             repeat
         parallel:
             pause 0.1
@@ -4713,31 +4713,31 @@ image Jubes_BJ_Body_5:
 
     contains:
 
-        "Jubes_Sprite_BJ_hairback"
+        "Jubes_Sprite_BJ_HairBack"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (520,375)
         rotate -50
         parallel:
             pause 1
-            ease 0.3 rotate -30
-            easeout 0.3 rotate -32
-            easein 0.5 rotate -35
-            pause 0.5
+            ease .3 rotate -30
+            easeout .3 rotate -32
+            easein .5 rotate -35
+            pause .5
             repeat
         parallel:
             pause 1
-            easein 0.3 xpos 530
-            easeout 0.3 xpos 525
-            easein 0.5 xpos 520
-            pause 0.5
+            easein .3 xpos 530
+            easeout .3 xpos 525
+            easein .5 xpos 520
+            pause .5
             repeat
         parallel:
             pause 1
-            ease 0.3 ypos 355
-            easeout 0.3 ypos 365
-            easein 0.5 ypos 375
-            pause 0.5
+            ease .3 ypos 355
+            easeout .3 ypos 365
+            easein .5 ypos 375
+            pause .5
             repeat
     contains:
 
@@ -4749,24 +4749,24 @@ image Jubes_BJ_Body_5:
         pos (730,760)
         parallel:
             pause 1
-            ease 0.3 rotate -26
-            easeout 0.3 rotate -28
-            easein 0.5 rotate -30
-            pause 0.5
+            ease .3 rotate -26
+            easeout .3 rotate -28
+            easein .5 rotate -30
+            pause .5
             repeat
         parallel:
             pause 1
-            easein 0.3 xpos 710
-            easeout 0.3 xpos 720
-            easein 0.5 xpos 730
-            pause 0.5
+            easein .3 xpos 710
+            easeout .3 xpos 720
+            easein .5 xpos 730
+            pause .5
             repeat
         parallel:
             pause 1
-            ease 0.3 ypos 750
-            easeout 0.3 ypos 755
-            easein 0.5 ypos 760
-            pause 0.5
+            ease .3 ypos 750
+            easeout .3 ypos 755
+            easein .5 ypos 760
+            pause .5
             repeat
     contains:
 
@@ -4778,24 +4778,24 @@ image Jubes_BJ_Body_5:
         rotate -35
         parallel:
             pause 1
-            ease 0.3 rotate -30
-            easeout 0.3 rotate -32
-            easein 0.5 rotate -35
-            pause 0.5
+            ease .3 rotate -30
+            easeout .3 rotate -32
+            easein .5 rotate -35
+            pause .5
             repeat
         parallel:
             pause 1
-            easein 0.3 xpos 530
-            easeout 0.3 xpos 525
-            easein 0.5 xpos 520
-            pause 0.5
+            easein .3 xpos 530
+            easeout .3 xpos 525
+            easein .5 xpos 520
+            pause .5
             repeat
         parallel:
             pause 1
-            ease 0.3 ypos 355
-            easeout 0.3 ypos 365
-            easein 0.5 ypos 375
-            pause 0.5
+            ease .3 ypos 355
+            easeout .3 ypos 365
+            easein .5 ypos 375
+            pause .5
             repeat
     contains:
 
@@ -4803,7 +4803,7 @@ image Jubes_BJ_Body_5:
 
 
 
-        AlphaMask("Zero_cock_blowjob", "Jubes_BlowCock_Mask")
+        AlphaMask("Blowcock", "Jubes_BlowCock_Mask")
         subpixel True
         pos (410,292)
         zoom 0.4
@@ -4811,14 +4811,14 @@ image Jubes_BJ_Body_5:
         rotate 12
         parallel:
             pause 1
-            ease 0.3 rotate 10
-            ease 0.3 rotate 12
+            ease .3 rotate 10
+            ease .3 rotate 12
             pause 1
             repeat
         parallel:
             pause 1
-            ease 0.3 pos (412,285)
-            ease 0.3 pos (410,292)
+            ease .3 pos (412,285)
+            ease .3 pos (410,292)
             pause 1
             repeat
     contains:
@@ -4831,24 +4831,24 @@ image Jubes_BJ_Body_5:
         rotate -35
         parallel:
             pause 1
-            ease 0.3 rotate -30
-            easeout 0.3 rotate -32
-            easein 0.5 rotate -35
-            pause 0.5
+            ease .3 rotate -30
+            easeout .3 rotate -32
+            easein .5 rotate -35
+            pause .5
             repeat
         parallel:
             pause 1
-            easein 0.3 xpos 530
-            easeout 0.3 xpos 525
-            easein 0.5 xpos 520
-            pause 0.5
+            easein .3 xpos 530
+            easeout .3 xpos 525
+            easein .5 xpos 520
+            pause .5
             repeat
         parallel:
             pause 1
-            ease 0.3 ypos 355
-            easeout 0.3 ypos 365
-            easein 0.5 ypos 375
-            pause 0.5
+            ease .3 ypos 355
+            easeout .3 ypos 365
+            easein .5 ypos 375
+            pause .5
             repeat
 
 
@@ -4869,31 +4869,31 @@ image Jubes_BJ_Body_6:
 
     contains:
 
-        "Jubes_Sprite_BJ_hairback"
+        "Jubes_Sprite_BJ_HairBack"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (481,500)
         rotate -50
         parallel:
             pause 1
-            ease 0.3 rotate -45
-            easeout 0.3 rotate -48
-            easein 0.5 rotate -50
-            pause 0.5
+            ease .3 rotate -45
+            easeout .3 rotate -48
+            easein .5 rotate -50
+            pause .5
             repeat
         parallel:
             pause 1
-            easein 0.3 xpos 490
-            easeout 0.3 xpos 485
-            easein 0.5 xpos 481
-            pause 0.5
+            easein .3 xpos 490
+            easeout .3 xpos 485
+            easein .5 xpos 481
+            pause .5
             repeat
         parallel:
             pause 1
-            ease 0.3 ypos 490
-            easeout 0.3 ypos 496
-            easein 0.5 ypos 500
-            pause 0.5
+            ease .3 ypos 490
+            easeout .3 ypos 496
+            easein .5 ypos 500
+            pause .5
             repeat
     contains:
 
@@ -4905,24 +4905,24 @@ image Jubes_BJ_Body_6:
         pos (760,830)
         parallel:
             pause 1
-            ease 0.3 rotate -38
-            easeout 0.3 rotate -39
-            easein 0.5 rotate -40
-            pause 0.5
+            ease .3 rotate -38
+            easeout .3 rotate -39
+            easein .5 rotate -40
+            pause .5
             repeat
         parallel:
             pause 1
-            easein 0.3 xpos 750
-            easeout 0.3 xpos 756
-            easein 0.5 xpos 760
-            pause 0.5
+            easein .3 xpos 750
+            easeout .3 xpos 756
+            easein .5 xpos 760
+            pause .5
             repeat
         parallel:
             pause 1
-            ease 0.3 ypos 835
-            easeout 0.3 ypos 830
-            easein 0.5 ypos 830
-            pause 0.5
+            ease .3 ypos 835
+            easeout .3 ypos 830
+            easein .5 ypos 830
+            pause .5
             repeat
     contains:
 
@@ -4934,24 +4934,24 @@ image Jubes_BJ_Body_6:
         rotate -50
         parallel:
             pause 1
-            ease 0.3 rotate -45
-            easeout 0.3 rotate -48
-            easein 0.5 rotate -50
-            pause 0.5
+            ease .3 rotate -45
+            easeout .3 rotate -48
+            easein .5 rotate -50
+            pause .5
             repeat
         parallel:
             pause 1
-            easein 0.3 xpos 490
-            easeout 0.3 xpos 485
-            easein 0.5 xpos 481
-            pause 0.5
+            easein .3 xpos 490
+            easeout .3 xpos 485
+            easein .5 xpos 481
+            pause .5
             repeat
         parallel:
             pause 1
-            ease 0.3 ypos 490
-            easeout 0.3 ypos 496
-            easein 0.5 ypos 500
-            pause 0.5
+            ease .3 ypos 490
+            easeout .3 ypos 496
+            easein .5 ypos 500
+            pause .5
             repeat
     contains:
 
@@ -4959,7 +4959,7 @@ image Jubes_BJ_Body_6:
 
 
 
-        AlphaMask("Zero_cock_blowjob", "Jubes_BlowCock_Mask_6")
+        AlphaMask("Blowcock", "Jubes_BlowCock_Mask_6")
         subpixel True
         pos (407,262)
         zoom 0.4
@@ -4967,14 +4967,14 @@ image Jubes_BJ_Body_6:
         rotate 0
         parallel:
             pause 1
-            ease 0.3 rotate 2
-            ease 0.3 rotate 0
+            ease .3 rotate 2
+            ease .3 rotate 0
             pause 1
             repeat
         parallel:
             pause 1
-            ease 0.3 pos (409,268)
-            ease 0.3 pos (407,262)
+            ease .3 pos (409,268)
+            ease .3 pos (407,262)
             pause 1
             repeat
     contains:
@@ -4987,24 +4987,24 @@ image Jubes_BJ_Body_6:
         rotate -50
         parallel:
             pause 1
-            ease 0.3 rotate -45
-            easeout 0.3 rotate -48
-            easein 0.5 rotate -50
-            pause 0.5
+            ease .3 rotate -45
+            easeout .3 rotate -48
+            easein .5 rotate -50
+            pause .5
             repeat
         parallel:
             pause 1
-            easein 0.3 xpos 490
-            easeout 0.3 xpos 485
-            easein 0.5 xpos 481
-            pause 0.5
+            easein .3 xpos 490
+            easeout .3 xpos 485
+            easein .5 xpos 481
+            pause .5
             repeat
         parallel:
             pause 1
-            ease 0.3 ypos 490
-            easeout 0.3 ypos 496
-            easein 0.5 ypos 500
-            pause 0.5
+            ease .3 ypos 490
+            easeout .3 ypos 496
+            easein .5 ypos 500
+            pause .5
             repeat
 
 
@@ -5013,15 +5013,15 @@ image Jubes_BJ_Body_6:
 
 
 
-label Jubes_BJ_Launch(line=primary_action):
+label Jubes_BJ_Launch(Line=primary_action):
     return
 
     $ JubesX.arm_pose = 1
     if renpy.showing("Jubes_BJ_Animation"):
         return
 
-    call Jubes_Hide
-    if line == "L" or line == "cum":
+    call hide_girl(JubesX)
+    if Line == "L" or Line == "cum":
         show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_center):
             alpha 1
             ease 1 zoom 2.5 offset (150,80)
@@ -5033,19 +5033,19 @@ label Jubes_BJ_Launch(line=primary_action):
         with dissolve
 
     $ action_speed = 0
-    if line == "L":
-        if taboo:
+    if Line == "L":
+        if Taboo:
             if len(Present) >= 2:
                 if Present[0] != JubesX:
-                    "[JubesX.name] looks back at [Present[0].name] to see if she's watching."
+                    "[JubesX.Name] looks back at [Present[0].Name] to see if she's watching."
                 elif Present[1] != JubesX:
-                    "[JubesX.name] looks back at [Present[1].name] to see if she's watching."
+                    "[JubesX.Name] looks back at [Present[1].Name] to see if she's watching."
             else:
-                "[JubesX.name] casually glances around to see if anyone can see her."
-        "[JubesX.name] smoothly bends down and places your cock against her cheek."
+                "[JubesX.Name] casually glances around to see if anyone can see her."
+        "[JubesX.Name] smoothly bends down and places your cock against her cheek."
 
-    if line != "cum":
-        $ primary_action = "blowjob"
+    if Line != "cum":
+        $ primary_action = "blow"
 
     show Jubes_Sprite zorder JubesX.sprite_layer:
         alpha 0
@@ -5057,7 +5057,7 @@ label Jubes_BJ_Reset:
     if not renpy.showing("Jubes_BJ_Animation"):
         return
 
-    call Jubes_Hide
+    call hide_girl(JubesX)
     $ action_speed = 0
 
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_center):
@@ -5068,8 +5068,8 @@ label Jubes_BJ_Reset:
     show Jubes_Sprite zorder JubesX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 offset (-50,50)
-        pause 0.5
-        ease 0.5 zoom 1 offset (0,0)
+        pause .5
+        ease .5 zoom 1 offset (0,0)
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
@@ -5082,13 +5082,13 @@ label Jubes_BJ_Reset:
 
 
 
-image Jubes_handjob_under:
+image Jubes_Hand_Under:
     "images/JubesSprite/handjubes2.png"
     anchor (0.5,0.5)
     pos (-10,0)
 
 
-image Jubes_handjob_over:
+image Jubes_Hand_Over:
     "images/JubesSprite/handjubes1.png"
     anchor (0.5,0.5)
     pos (-10,0)
@@ -5098,7 +5098,7 @@ transform Jubes_Hand_1():
     pos (-20,-100)
     rotate 5
     block:
-        ease 0.5 pos (0,150) rotate -5
+        ease .5 pos (0,150) rotate -5
         pause 0.25
         ease 1.0 pos (-20,-100) rotate 5
         pause 0.1
@@ -5121,7 +5121,7 @@ transform Handcock_3():
     ypos 400
     rotate 0
     block:
-        ease 0.5 ypos 450 rotate -2
+        ease .5 ypos 450 rotate -2
         pause 0.25
         ease 1.0 ypos 400 rotate 0
         pause 0.1
@@ -5133,8 +5133,8 @@ transform Handcock_4():
     ypos 400
     rotate 0
     block:
-        ease 0.2 ypos 430 rotate -3
-        ease 0.5 ypos 400 rotate 0
+        ease .2 ypos 430 rotate -3
+        ease .5 ypos 400 rotate 0
         pause 0.1
         repeat
 
@@ -5144,7 +5144,7 @@ transform Handcock_1L():
     ypos 400
     rotate 0
     block:
-        ease 0.5 ypos 450 rotate -2
+        ease .5 ypos 450 rotate -2
         pause 0.25
         ease 1.0 ypos 400 rotate 0
         pause 0.1
@@ -5156,8 +5156,8 @@ transform Handcock_2L():
     ypos 400
     rotate 0
     block:
-        ease 0.2 ypos 430 rotate -3
-        ease 0.5 ypos 400 rotate 0
+        ease .2 ypos 430 rotate -3
+        ease .5 ypos 400 rotate 0
         pause 0.1
         repeat
 
@@ -5165,39 +5165,39 @@ image Jubes_HJ_Animation:
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Jubes_handjob_under"),
-            "action_speed == 1", At("Jubes_handjob_under", Jubes_Hand_1()),
-            "action_speed >= 2", At("Jubes_handjob_under", Jubes_Hand_2()),
-            "action_speed ", Null(),
+            "not action_speed", Transform("Jubes_Hand_Under"),
+            "action_speed == 1", At("Jubes_Hand_Under", Jubes_Hand_1()),
+            "action_speed >= 2", At("Jubes_Hand_Under", Jubes_Hand_2()),
+            "action_speed", Null(),
             ),
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Zero_cock_handjob"),
-            "action_speed == 1", At("Zero_cock_handjob", Handcock_1L()),
-            "action_speed >= 2", At("Zero_cock_handjob", Handcock_2L()),
-            "action_speed ", Null(),
+            "not action_speed", Transform("Zero_Handcock"),
+            "action_speed == 1", At("Zero_Handcock", Handcock_1L()),
+            "action_speed >= 2", At("Zero_Handcock", Handcock_2L()),
+            "action_speed", Null(),
             ),
         offset (0,0)
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Jubes_handjob_over"),
-            "action_speed == 1", At("Jubes_handjob_over", Jubes_Hand_1()),
-            "action_speed >= 2", At("Jubes_handjob_over", Jubes_Hand_2()),
-            "action_speed ", Null(),
+            "not action_speed", Transform("Jubes_Hand_Over"),
+            "action_speed == 1", At("Jubes_Hand_Over", Jubes_Hand_1()),
+            "action_speed >= 2", At("Jubes_Hand_Over", Jubes_Hand_2()),
+            "action_speed", Null(),
             ),
     anchor (0.51, -1.3)
     zoom 0.4
 
 
-label Jubes_HJ_Launch(line=primary_action):
+label Jubes_HJ_Launch(Line=primary_action):
     return
     if renpy.showing("Jubes_HJ_Animation"):
-        $ primary_action = "handjob"
+        $ primary_action = "hand"
         return
-    call Jubes_Hide
-    if line == "L":
+    call hide_girl(JubesX)
+    if Line == "L":
         show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (-150,200)
@@ -5208,11 +5208,11 @@ label Jubes_HJ_Launch(line=primary_action):
         with dissolve
 
     $ action_speed = 0
-    if line != "cum":
-        $ primary_action = "handjob"
+    if Line != "cum":
+        $ primary_action = "hand"
     else:
         $ action_speed = 1
-    pause 0.5
+    pause .5
     $ JubesX.arm_pose = 1
     show Jubes_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
 
@@ -5225,15 +5225,15 @@ label Jubes_HJ_Reset:
     $ action_speed = 0
     $ JubesX.arm_pose = 1
     hide Jubes_HJ_Animation with easeoutbottom
-    call Jubes_Hide
+    call hide_girl(JubesX)
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         zoom 1.7 offset (-50,200)
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         ease 1 zoom 1.5 offset (-150,50)
-        pause 0.5
-        ease 0.5 zoom 1 offset (0,0)
+        pause .5
+        ease .5 zoom 1 offset (0,0)
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
@@ -5253,23 +5253,23 @@ image Jubes_TJ_Animation:
     contains:
         ConditionSwitch(
 
-                    "not Player.sprite","Jubes_TJ_0",
+                    "not Player.Sprite","Jubes_TJ_0",
                     "action_speed == 1", "Jubes_TJ_1",
                     "action_speed == 4", "Jubes_TJ_4",
                     "action_speed == 5", "Jubes_TJ_5",
                     "action_speed >= 2", "Jubes_TJ_2",
                     "True",       "Jubes_TJ_0",
                     )
-    zoom 0.7
+    zoom .7
     transform_anchor True
     anchor (.5,.5)
 
 
 
 
-image Jubes_TJ_hairback:
+image Jubes_TJ_HairBack:
 
-    "Jubes_Sprite_hairback"
+    "Jubes_Sprite_HairBack"
     transform_anchor True
     zoom 2.5
     anchor (0.5, 0.5)
@@ -5306,9 +5306,9 @@ image Jubes_TJ_HairTop:
 
 image Jubes_TJ_ZeroCock:
 
-    "Zero_cock_titjob"
+    "Zero_Blowcock"
     transform_anchor True
-    zoom 0.7
+    zoom .7
     anchor (0.5, 0.5)
     offset (220,670)
     rotate 0
@@ -5341,7 +5341,7 @@ image Jubes_TJ_LeftArm:
     contains:
         ConditionSwitch(
                         "not JubesX.arms",Null(),
-                        "JubesX.arms == 'gloves'",       "images/JubesSex/Jubes_Titjob_LeftGlove.png",
+                        "JubesX.arms == '_gloves'",       "images/JubesSex/Jubes_Titjob_LeftGlove.png",
                         "True",       "images/JubesSex/Jubes_Titjob_wrists.png",
                         )
     contains:
@@ -5357,7 +5357,7 @@ image Jubes_TJ_RightArm:
         "images/JubesSex/Jubes_Titjob_RightHand.png"
     contains:
         ConditionSwitch(
-                        "JubesX.arms == 'gloves'",       "images/JubesSex/Jubes_Titjob_RightGlove.png",
+                        "JubesX.arms == '_gloves'",       "images/JubesSex/Jubes_Titjob_RightGlove.png",
                         "True", Null(),
                         )
     contains:
@@ -5373,7 +5373,7 @@ image Jubes_TJ_RightArmBack:
         "images/JubesSex/Jubes_Titjob_RightHandBack.png"
     contains:
         ConditionSwitch(
-                        "JubesX.arms == 'gloves'",       "images/JubesSex/Jubes_Titjob_RightGloveBack.png",
+                        "JubesX.arms == '_gloves'",       "images/JubesSex/Jubes_Titjob_RightGloveBack.png",
                         "True", Null(),
                         )
 
@@ -5384,21 +5384,21 @@ image Jubes_TJ_0:
 
     contains:
 
-        "Jubes_TJ_hairback"
+        "Jubes_TJ_HairBack"
         subpixel True
         pos (0,0)
         transform_anchor True
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
         parallel:
-            pause 0.1
+            pause .1
             ease 2 rotate -5
-            pause 0.1
+            pause .1
             ease 2 rotate 0
             repeat
     contains:
@@ -5409,9 +5409,9 @@ image Jubes_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -5421,9 +5421,9 @@ image Jubes_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -5
-            pause 0.1
+            pause .1
             ease 2 ypos -15
-            pause 0.1
+            pause .1
             repeat
     contains:
         contains:
@@ -5437,9 +5437,9 @@ image Jubes_TJ_0:
         pos (0,-15)
         transform_anchor True
         parallel:
-            pause 0.1
+            pause .1
             ease 2 ypos -5
-            pause 0.1
+            pause .1
             ease 2 ypos -15
             repeat
     contains:
@@ -5458,9 +5458,9 @@ image Jubes_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -5
-            pause 0.1
+            pause .1
             ease 2 ypos -15
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -5471,14 +5471,14 @@ image Jubes_TJ_0:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
         parallel:
-            pause 0.1
+            pause .1
             ease 2 rotate -5
-            pause 0.1
+            pause .1
             ease 2 rotate 0
             repeat
     contains:
@@ -5490,9 +5490,9 @@ image Jubes_TJ_0:
         rotate -2
         parallel:
             ease 2 rotate -2
-            pause 0.1
+            pause .1
             ease 2 rotate 3
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -5507,9 +5507,9 @@ image Jubes_TJ_0:
         pos (0,0)
         transform_anchor True
         parallel:
-            pause 0.1
+            pause .1
             ease 2 ypos -40
-            pause 0.1
+            pause .1
             ease 2 ypos 0
             repeat
     contains:
@@ -5528,9 +5528,9 @@ image Jubes_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -40
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -5541,14 +5541,14 @@ image Jubes_TJ_0:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
         parallel:
-            pause 0.1
+            pause .1
             ease 2 rotate -5
-            pause 0.1
+            pause .1
             ease 2 rotate 0
             repeat
     contains:
@@ -5560,14 +5560,14 @@ image Jubes_TJ_0:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
         parallel:
-            pause 0.1
+            pause .1
             ease 2 rotate -5
-            pause 0.1
+            pause .1
             ease 2 rotate 0
             repeat
 
@@ -5578,22 +5578,22 @@ image Jubes_TJ_1:
 
     contains:
 
-        "Jubes_TJ_hairback"
+        "Jubes_TJ_HairBack"
         subpixel True
         pos (0,150)
         transform_anchor True
         rotate -5
         parallel:
             ease 2 ypos 0
-            pause 0.2
+            pause .2
             ease 2 ypos 150
-            pause 0.5
+            pause .5
             repeat
         parallel:
             ease 2 rotate 0
-            pause 0.2
+            pause .2
             ease 2 rotate -5
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -5603,9 +5603,9 @@ image Jubes_TJ_1:
         transform_anchor True
         parallel:
             ease 2 ypos 0
-            pause 0.2
+            pause .2
             ease 2 ypos 150
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -5615,9 +5615,9 @@ image Jubes_TJ_1:
         transform_anchor True
         block:
             ease 2 ypos -20
-            pause 0.4
+            pause .4
             ease 1.8 ypos 150
-            pause 0.5
+            pause .5
             repeat
     contains:
         contains:
@@ -5631,11 +5631,11 @@ image Jubes_TJ_1:
         pos (0,150)
         transform_anchor True
         block:
-            pause 0.1
+            pause .1
             ease 1.9 ypos -20
-            pause 0.4
+            pause .4
             ease 1.8 ypos 150
-            ease 0.5 ypos 140
+            ease .5 ypos 140
             repeat
     contains:
 
@@ -5653,9 +5653,9 @@ image Jubes_TJ_1:
         transform_anchor True
         block:
             ease 2 ypos -20
-            pause 0.4
+            pause .4
             ease 1.8 ypos 150
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -5666,15 +5666,15 @@ image Jubes_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos 0
-            pause 0.2
+            pause .2
             ease 2 ypos 150
-            pause 0.5
+            pause .5
             repeat
         parallel:
             ease 2 rotate 0
-            pause 0.2
+            pause .2
             ease 2 rotate -5
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -5685,15 +5685,15 @@ image Jubes_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos 0
-            pause 0.4
+            pause .4
             ease 1.8 ypos 25
-            pause 0.5
+            pause .5
             repeat
         parallel:
             ease 2 rotate 0
-            pause 0.2
+            pause .2
             ease 2 rotate -5
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -5708,11 +5708,11 @@ image Jubes_TJ_1:
         pos (0,150)
         transform_anchor True
         block:
-            pause 0.1
+            pause .1
             ease 1.9 ypos -20
-            pause 0.4
+            pause .4
             ease 1.8 ypos 150
-            ease 0.5 ypos 140
+            ease .5 ypos 140
             repeat
     contains:
 
@@ -5722,9 +5722,9 @@ image Jubes_TJ_1:
         transform_anchor True
         block:
             ease 2 ypos -20
-            pause 0.4
+            pause .4
             ease 1.8 ypos 150
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -5735,15 +5735,15 @@ image Jubes_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos -20
-            pause 0.4
+            pause .4
             ease 1.8 ypos 160
-            pause 0.5
+            pause .5
             repeat
         parallel:
             ease 2 rotate 0
-            pause 0.2
+            pause .2
             ease 2 rotate -5
-            pause 0.5
+            pause .5
             repeat
     contains:
 
@@ -5754,15 +5754,15 @@ image Jubes_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos 0
-            pause 0.2
+            pause .2
             ease 2 ypos 150
-            pause 0.5
+            pause .5
             repeat
         parallel:
             ease 2 rotate 0
-            pause 0.2
+            pause .2
             ease 2 rotate -5
-            pause 0.5
+            pause .5
             repeat
 
 
@@ -5772,19 +5772,19 @@ image Jubes_TJ_2:
 
     contains:
 
-        "Jubes_TJ_hairback"
+        "Jubes_TJ_HairBack"
         subpixel True
         pos (0,80)
         transform_anchor True
         parallel:
             ease 1 ypos -20
-            pause 0.1
-            ease 0.5 ypos 80
+            pause .1
+            ease .5 ypos 80
             repeat
         parallel:
             ease 1 rotate 0
-            pause 0.1
-            ease 0.5 rotate -5
+            pause .1
+            ease .5 rotate -5
             repeat
     contains:
 
@@ -5794,8 +5794,8 @@ image Jubes_TJ_2:
         transform_anchor True
         parallel:
             ease 1 ypos -20
-            pause 0.1
-            ease 0.5 ypos 80
+            pause .1
+            ease .5 ypos 80
             repeat
     contains:
 
@@ -5805,8 +5805,8 @@ image Jubes_TJ_2:
         transform_anchor True
         block:
             ease 1 ypos -40
-            pause 0.2
-            ease 0.4 ypos 80
+            pause .2
+            ease .4 ypos 80
             repeat
     contains:
         contains:
@@ -5820,10 +5820,10 @@ image Jubes_TJ_2:
         pos (0,80)
         transform_anchor True
         block:
-            ease 0.3 ypos 40
-            ease 0.7 ypos -40
-            pause 0.2
-            ease 0.4 ypos 80
+            ease .3 ypos 40
+            ease .7 ypos -40
+            pause .2
+            ease .4 ypos 80
             repeat
     contains:
 
@@ -5841,8 +5841,8 @@ image Jubes_TJ_2:
         transform_anchor True
         block:
             ease 1 ypos -40
-            pause 0.2
-            ease 0.4 ypos 80
+            pause .2
+            ease .4 ypos 80
             repeat
     contains:
 
@@ -5852,13 +5852,13 @@ image Jubes_TJ_2:
         transform_anchor True
         parallel:
             ease 1 ypos -20
-            pause 0.1
-            ease 0.5 ypos 80
+            pause .1
+            ease .5 ypos 80
             repeat
         parallel:
             ease 1 rotate 0
-            pause 0.1
-            ease 0.5 rotate -5
+            pause .1
+            ease .5 rotate -5
             repeat
     contains:
 
@@ -5869,13 +5869,13 @@ image Jubes_TJ_2:
         rotate -2
         parallel:
             ease 1 ypos 0
-            pause 0.2
-            ease 0.4 ypos 30
+            pause .2
+            ease .4 ypos 30
             repeat
         parallel:
             ease 1 rotate 0
-            pause 0.1
-            ease 0.5 rotate -2
+            pause .1
+            ease .5 rotate -2
             repeat
     contains:
 
@@ -5890,10 +5890,10 @@ image Jubes_TJ_2:
         pos (0,80)
         transform_anchor True
         block:
-            ease 0.3 ypos 40
-            ease 0.7 ypos -40
-            pause 0.2
-            ease 0.4 ypos 80
+            ease .3 ypos 40
+            ease .7 ypos -40
+            pause .2
+            ease .4 ypos 80
             repeat
     contains:
 
@@ -5903,8 +5903,8 @@ image Jubes_TJ_2:
         transform_anchor True
         block:
             ease 1 ypos -40
-            pause 0.2
-            ease 0.4 ypos 80
+            pause .2
+            ease .4 ypos 80
             repeat
     contains:
 
@@ -5915,13 +5915,13 @@ image Jubes_TJ_2:
         rotate -5
         parallel:
             ease 1 ypos -40
-            pause 0.2
-            ease 0.4 ypos 90
+            pause .2
+            ease .4 ypos 90
             repeat
         parallel:
             ease 1 rotate 0
-            pause 0.2
-            ease 0.4 rotate -5
+            pause .2
+            ease .4 rotate -5
             repeat
     contains:
 
@@ -5932,13 +5932,13 @@ image Jubes_TJ_2:
         rotate -5
         parallel:
             ease 1 ypos -20
-            pause 0.1
-            ease 0.5 ypos 80
+            pause .1
+            ease .5 ypos 80
             repeat
         parallel:
             ease 1 rotate 0
-            pause 0.1
-            ease 0.5 rotate -5
+            pause .1
+            ease .5 rotate -5
             repeat
 
 
@@ -5948,21 +5948,21 @@ image Jubes_TJ_4:
 
     contains:
 
-        "Jubes_TJ_hairback"
+        "Jubes_TJ_HairBack"
         subpixel True
         pos (0,0)
         transform_anchor True
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
         parallel:
-            pause 0.1
+            pause .1
             ease 2 rotate -5
-            pause 0.1
+            pause .1
             ease 2 rotate 0
             repeat
     contains:
@@ -5973,9 +5973,9 @@ image Jubes_TJ_4:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -5985,9 +5985,9 @@ image Jubes_TJ_4:
         transform_anchor True
         parallel:
             ease 2 ypos -30
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
     contains:
         contains:
@@ -6001,9 +6001,9 @@ image Jubes_TJ_4:
         pos (0,5)
         transform_anchor True
         parallel:
-            pause 0.2
+            pause .2
             ease 1.9 ypos -30
-            pause 0.2
+            pause .2
             ease 1.9 ypos 5
             repeat
     contains:
@@ -6022,9 +6022,9 @@ image Jubes_TJ_4:
         transform_anchor True
         parallel:
             ease 2 ypos -30
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -6035,14 +6035,14 @@ image Jubes_TJ_4:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
         parallel:
-            pause 0.1
+            pause .1
             ease 2 rotate -5
-            pause 0.1
+            pause .1
             ease 2 rotate 0
             repeat
     contains:
@@ -6054,9 +6054,9 @@ image Jubes_TJ_4:
         rotate 2
         parallel:
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             ease 2 ypos 20
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -6071,9 +6071,9 @@ image Jubes_TJ_4:
         pos (0,5)
         transform_anchor True
         parallel:
-            pause 0.2
+            pause .2
             ease 1.9 ypos -30
-            pause 0.2
+            pause .2
             ease 1.9 ypos 5
             repeat
     contains:
@@ -6084,9 +6084,9 @@ image Jubes_TJ_4:
         transform_anchor True
         parallel:
             ease 2 ypos -30
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -6097,14 +6097,14 @@ image Jubes_TJ_4:
         rotate 0
         parallel:
             ease 2 ypos -15
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
         parallel:
-            pause 0.1
+            pause .1
             ease 2 rotate -5
-            pause 0.1
+            pause .1
             ease 2 rotate 0
             repeat
     contains:
@@ -6116,14 +6116,14 @@ image Jubes_TJ_4:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause 0.1
+            pause .1
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             repeat
         parallel:
-            pause 0.1
+            pause .1
             ease 2 rotate -5
-            pause 0.1
+            pause .1
             ease 2 rotate 0
             repeat
 
@@ -6134,16 +6134,16 @@ image Jubes_TJ_5:
 
     contains:
 
-        "Jubes_TJ_hairback"
+        "Jubes_TJ_HairBack"
         subpixel True
         pos (-30,155)
         transform_anchor True
         rotate -20
         parallel:
             ease 2 ypos 140
-            pause 0.1
+            pause .1
             ease 2 ypos 155
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -6168,9 +6168,9 @@ image Jubes_TJ_5:
         rotate -20
         parallel:
             ease 2 ypos 50
-            pause 0.1
+            pause .1
             ease 2 ypos 70
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -6182,9 +6182,9 @@ image Jubes_TJ_5:
         rotate -10
         parallel:
             ease 2 ypos -200
-            pause 0.1
+            pause .1
             ease 2 ypos -180
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -6200,9 +6200,9 @@ image Jubes_TJ_5:
         transform_anchor True
         rotate -10
         parallel:
-            ease 0.4 ypos -170
+            ease .4 ypos -170
             ease 1.7 ypos -190
-            pause 0.1
+            pause .1
             ease 2 ypos -160
             repeat
     contains:
@@ -6222,9 +6222,9 @@ image Jubes_TJ_5:
         rotate -10
         parallel:
             ease 2 ypos -200
-            pause 0.1
+            pause .1
             ease 2 ypos -180
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -6235,9 +6235,9 @@ image Jubes_TJ_5:
         rotate -20
         parallel:
             ease 2 ypos 140
-            pause 0.1
+            pause .1
             ease 2 ypos 155
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -6248,9 +6248,9 @@ image Jubes_TJ_5:
         rotate 2
         parallel:
             ease 2 ypos 0
-            pause 0.1
+            pause .1
             ease 2 ypos 20
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -6266,9 +6266,9 @@ image Jubes_TJ_5:
         transform_anchor True
         rotate -10
         parallel:
-            ease 0.4 ypos -170
+            ease .4 ypos -170
             ease 1.7 ypos -190
-            pause 0.1
+            pause .1
             ease 2 ypos -160
             repeat
     contains:
@@ -6280,9 +6280,9 @@ image Jubes_TJ_5:
         rotate -10
         parallel:
             ease 2 ypos -200
-            pause 0.1
+            pause .1
             ease 2 ypos -180
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -6293,9 +6293,9 @@ image Jubes_TJ_5:
         rotate -10
         parallel:
             ease 2 ypos 95
-            pause 0.1
+            pause .1
             ease 2 ypos 115
-            pause 0.1
+            pause .1
             repeat
     contains:
 
@@ -6306,32 +6306,32 @@ image Jubes_TJ_5:
         rotate -20
         parallel:
             ease 2 ypos 140
-            pause 0.1
+            pause .1
             ease 2 ypos 155
-            pause 0.1
+            pause .1
             repeat
 
 
 
 
-label Jubes_TJ_Launch(line=primary_action):
+label Jubes_TJ_Launch(Line=primary_action):
     return
     if renpy.showing("Jubes_TJ_Animation"):
         return
-    call Jubes_Hide
+    call hide_girl(JubesX)
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         ease 1 zoom 2.3 xpos 750 yoffset -100
-    if line == "L":
-        if taboo:
+    if Line == "L":
+        if Taboo:
             if len(Present) >= 2:
                 if Present[0] != JubesX:
-                    "[JubesX.name] looks back at [Present[0].name] to see if she's watching."
+                    "[JubesX.Name] looks back at [Present[0].Name] to see if she's watching."
                 elif Present[1] != JubesX:
-                    "[JubesX.name] looks back at [Present[1].name] to see if she's watching."
+                    "[JubesX.Name] looks back at [Present[1].Name] to see if she's watching."
             else:
-                "[JubesX.name] casually glances around to see if anyone can see her."
-        "[JubesX.name] bends over and places your cock between her breasts."
+                "[JubesX.Name] casually glances around to see if anyone can see her."
+        "[JubesX.Name] bends over and places your cock between her breasts."
 
     if JubesX.bra and JubesX.top:
         "She throws off her [JubesX.top] and her [JubesX.bra]."
@@ -6339,22 +6339,22 @@ label Jubes_TJ_Launch(line=primary_action):
         "She throws off her [JubesX.top], baring her breasts underneath."
     elif JubesX.bra:
         "She tugs off her [JubesX.bra] and throws it aside."
-    $ JubesX.top = ""
-    $ JubesX.bra = ""
+    $ JubesX.top = 0
+    $ JubesX.bra = 0
     $ JubesX.arm_pose = 0
 
     call Jubes_First_Topless
 
-    show black_screen onlayer black with dissolve
+    show blackscreen onlayer black with dissolve
     show Jubes_Sprite zorder JubesX.sprite_layer:
         alpha 0
     $ action_speed = 0
-    if line != "cum":
+    if Line != "cum":
         $ primary_action = "titjob"
     show Jubes_TJ_Animation zorder 150:
         pos (700,520)
-    $ Player.sprite = 1
-    hide black_screen onlayer black with dissolve
+    $ Player.Sprite = 1
+    hide blackscreen onlayer black with dissolve
     return
 
 label Jubes_TJ_Reset:
@@ -6362,17 +6362,17 @@ label Jubes_TJ_Reset:
     if not renpy.showing("Jubes_TJ_Animation"):
         return
 
-    call Jubes_Hide
-    $ Player.sprite = 0
+    call hide_girl(JubesX)
+    $ Player.Sprite = 0
 
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         zoom 2.3 xpos 750 yoffset -100
     show Jubes_Sprite zorder JubesX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 xpos 700 yoffset 50
-        pause 0.5
-        ease 0.5 zoom 1 xpos JubesX.sprite_location yoffset 0
-    "[JubesX.name] pulls back"
+        pause .5
+        ease .5 zoom 1 xpos JubesX.sprite_location yoffset 0
+    "[JubesX.Name] pulls back"
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         zoom 1 offset (0,0) xpos JubesX.sprite_location
@@ -6391,47 +6391,47 @@ label Jubes_TJ_Reset:
 
 
 label Jubes_Kissing_Launch(T=primary_action, Set=1):
-    call Jubes_Hide
+    call hide_girl(JubesX)
     $ primary_action = T
-    $ JubesX.pose = "kiss" if Set else JubesX.pose
+    $ JubesX.Pose = "kiss" if Set else JubesX.Pose
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location)
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_center):
         ease 0.5 offset (0,0) zoom 2 alpha 1
     return
 
 label Jubes_Kissing_Smooch:
-    $ JubesX.change_face("_kiss")
+    $ JubesX.FaceChange("kiss")
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos JubesX.sprite_location zoom 1
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         zoom 1
-    $ JubesX.change_face("_sexy")
+    $ JubesX.FaceChange("sexy")
     return
 
 label Jubes_Breasts_Launch(T=primary_action, Set=1):
-    call Jubes_Hide
+    call hide_girl(JubesX)
     $ primary_action = T
-    $ JubesX.pose = "breasts" if Set else JubesX.pose
+    $ JubesX.Pose = "breasts" if Set else JubesX.Pose
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 2 alpha 1
     return
 
 label Jubes_Middle_Launch(T=primary_action, Set=1):
-    call Jubes_Hide
+    call hide_girl(JubesX)
     $ primary_action = T
-    $ JubesX.pose = "mid" if Set else JubesX.pose
+    $ JubesX.Pose = "mid" if Set else JubesX.Pose
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1
     return
 
 label Jubes_Pussy_Launch(T=primary_action, Set=1):
-    call Jubes_Hide
+    call hide_girl(JubesX)
     $ primary_action = T
-    $ JubesX.pose = "pussy" if Set else JubesX.pose
+    $ JubesX.Pose = "pussy" if Set else JubesX.Pose
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         ease 0.5 pos (700,-400) offset (0,0) zoom 2 alpha 1
     return
@@ -6439,9 +6439,9 @@ label Jubes_Pussy_Launch(T=primary_action, Set=1):
 label Jubes_Pos_Reset(T=0, Set=0):
     if JubesX.location != bg_current:
         return
-    call Jubes_Hide
+    call hide_girl(JubesX)
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
-        ease 0.5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
+        ease .5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
     show Jubes_Sprite zorder JubesX.sprite_layer:
         offset (0,0)
         anchor (0.5, 0.0)
@@ -6450,23 +6450,8 @@ label Jubes_Pos_Reset(T=0, Set=0):
         yzoom 1
         alpha 1
         pos (JubesX.sprite_location,50)
-    $ JubesX.pose = "full" if Set else 0
+    $ JubesX.Pose = "full" if Set else 0
     $ primary_action = T
-    return
-
-label Jubes_Hide(Sprite=0):
-    call Jubes_Sex_Reset
-
-
-
-
-    hide Jubes_SexSprite
-    hide Jubes_Doggy_Animation
-    hide Jubes_HJ_Animation
-    hide Jubes_BJ_Animation
-    hide Jubes_TJ_Animation
-    if Sprite:
-        hide Jubes_Sprite
     return
 
 
@@ -6511,8 +6496,8 @@ image LickRightBreast_Jubes:
         alpha 0.5
         rotate 30
         block:
-            ease 0.5 rotate -40 pos (270,330)
-            pause 0.5
+            ease .5 rotate -40 pos (270,330)
+            pause .5
             ease 1.5 rotate 30 pos (290,350)
             repeat
 
@@ -6527,8 +6512,8 @@ image LickLeftBreast_Jubes:
         alpha 0.5
         rotate 30
         block:
-            ease 0.5 rotate -40 pos (170,320)
-            pause 0.5
+            ease .5 rotate -40 pos (170,320)
+            pause .5
             ease 1.5 rotate 30 pos (175,340)
             repeat
 
@@ -6536,13 +6521,13 @@ image GropeThigh_Jubes:
     contains:
         subpixel True
         "UI_Hand"
-        zoom 0.65
+        zoom .65
         pos (235,640)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 100
         block:
-            pause 0.5
+            pause .5
             ease 1 rotate 110 pos (195,740)
             ease 1 rotate 100 pos (235,640)
             repeat
@@ -6551,18 +6536,18 @@ image GropePussy_Jubes:
     contains:
         subpixel True
         "UI_Hand"
-        zoom 0.65
+        zoom .65
         pos (260,580)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 170
         block:
             choice:
-                ease 0.5 rotate 190 ypos 565
-                ease 0.75 rotate 170 ypos 580
+                ease .5 rotate 190 ypos 565
+                ease .75 rotate 170 ypos 580
             choice:
-                ease 0.5 rotate 190 ypos 565
-                pause 0.25
+                ease .5 rotate 190 ypos 565
+                pause .25
                 ease 1 rotate 170 ypos 580
             repeat
 
@@ -6578,21 +6563,21 @@ image FingerPussy_Jubes:
         block:
             choice:
                 ease 1 rotate 40 pos (285,625)
-                pause 0.5
+                pause .5
                 ease 1 rotate 50 pos (275,650)
             choice:
-                ease 0.5 rotate 40 pos (285,625)
-                pause 0.5
+                ease .5 rotate 40 pos (285,625)
+                pause .5
                 ease 1.75 rotate 50 pos (275,650)
             choice:
                 ease 2 rotate 40 pos (285,625)
-                pause 0.5
+                pause .5
                 ease 1 rotate 50 pos (275,650)
             choice:
-                ease 0.25 rotate 40 pos (285,625)
-                ease 0.25 rotate 50 pos (275,650)
-                ease 0.25 rotate 40 pos (285,625)
-                ease 0.25 rotate 50 pos (275,650)
+                ease .25 rotate 40 pos (285,625)
+                ease .25 rotate 50 pos (275,650)
+                ease .25 rotate 40 pos (285,625)
+                ease .25 rotate 50 pos (275,650)
             repeat
 
 image Lickpussy_Jubes:
@@ -6606,8 +6591,8 @@ image Lickpussy_Jubes:
         alpha 0.5
         rotate 10
         block:
-            easeout 0.5 rotate -50 pos (275,590)
-            linear 0.5 rotate -60 pos (265,600)
+            easeout .5 rotate -50 pos (275,590)
+            linear .5 rotate -60 pos (265,600)
             easein 1 rotate 10 pos (285,610)
             repeat
 
@@ -6621,9 +6606,9 @@ image VibratorRightBreast_Jubes:
         alpha 0.5
         rotate 55
         block:
-            pause 0.25
+            pause .25
             ease 1 rotate 35 ypos 320
-            pause 0.25
+            pause .25
             ease 1 rotate 55 ypos 330
             repeat
 
@@ -6638,9 +6623,9 @@ image VibratorLeftBreast_Jubes:
         rotate 55
         block:
             ease 1 rotate 35 ypos 330
-            pause 0.25
+            pause .25
             ease 1 rotate 55 ypos 340
-            pause 0.25
+            pause .25
             repeat
 
 image VibratorPussy_Jubes:
@@ -6654,9 +6639,9 @@ image VibratorPussy_Jubes:
         rotate 70
         block:
             ease 1 rotate 35 pos (275,590)
-            pause 0.25
+            pause .25
             ease 1 rotate 70 pos (285,600)
-            pause 0.25
+            pause .25
             repeat
 
 image VibratorAnal_Jubes:
@@ -6676,9 +6661,9 @@ image VibratorAnal_Jubes:
 
 
             ease 1 rotate 0 pos (295,580)
-            pause 0.25
+            pause .25
             ease 1 rotate 10 pos (305,590)
-            pause 0.25
+            pause .25
             repeat
 
 image VibratorPussyInsert_Jubes:
@@ -6714,7 +6699,7 @@ image GirlGropeLeftBreast_Jubes:
     contains:
         subpixel True
         "UI_GirlHand"
-        zoom 0.6
+        zoom .6
         pos (290,340)
         anchor (0.5,0.5)
         alpha 0.5
@@ -6743,22 +6728,22 @@ image GirlGropeThigh_Jubes:
     contains:
         subpixel True
         "UI_GirlHand"
-        zoom 0.6
+        zoom .6
         pos (210,730)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 100
         parallel:
-            pause 0.5
+            pause .5
             ease 1 ypos 780
             ease 1 ypos 730
             repeat
         parallel:
-            pause 0.5
-            ease 0.5 xpos 213
-            ease 0.5 xpos 210
-            ease 0.5 xpos 213
-            ease 0.5 xpos 210
+            pause .5
+            ease .5 xpos 213
+            ease .5 xpos 210
+            ease .5 xpos 213
+            ease .5 xpos 210
             repeat
 
 image GirlGropePussy_JubesSelf:
@@ -6780,61 +6765,61 @@ image GirlGropePussy_Jubes:
         rotate 200
         block:
             choice:
-                ease 0.75 rotate 210 ypos 570
-                ease 0.5 rotate 195
-                ease 0.75 rotate 210
-                ease 0.5 rotate 195
+                ease .75 rotate 210 ypos 570
+                ease .5 rotate 195
+                ease .75 rotate 210
+                ease .5 rotate 195
             choice:
-                ease 0.5 rotate 210 ypos 570
+                ease .5 rotate 210 ypos 570
                 ease 1 rotate 195
-                pause 0.25
-                ease 0.5 rotate 210
+                pause .25
+                ease .5 rotate 210
                 ease 1 rotate 195
-                pause 0.25
+                pause .25
             choice:
-                ease 0.5 rotate 205 ypos 570
-                ease 0.75 rotate 200 ypos 575
-                ease 0.5 rotate 205 ypos 570
-                ease 0.75 rotate 200 ypos 575
+                ease .5 rotate 205 ypos 570
+                ease .75 rotate 200 ypos 575
+                ease .5 rotate 205 ypos 570
+                ease .75 rotate 200 ypos 575
             choice:
-                ease 0.3 rotate 205 ypos 570
-                ease 0.3 rotate 200 ypos 580
-                ease 0.3 rotate 205 ypos 570
-                ease 0.3 rotate 200 ypos 580
+                ease .3 rotate 205 ypos 570
+                ease .3 rotate 200 ypos 580
+                ease .3 rotate 205 ypos 570
+                ease .3 rotate 200 ypos 580
             repeat
 
 image GirlFingerPussy_Jubes:
     contains:
         subpixel True
         "UI_GirlFinger"
-        zoom 0.6
+        zoom .6
         pos (265,570)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 200
         block:
             choice:
-                ease 0.75 rotate 210 ypos 575
-                ease 0.5 rotate 195
-                ease 0.75 rotate 210
-                ease 0.5 rotate 195
+                ease .75 rotate 210 ypos 575
+                ease .5 rotate 195
+                ease .75 rotate 210
+                ease .5 rotate 195
             choice:
-                ease 0.5 rotate 210 ypos 575
+                ease .5 rotate 210 ypos 575
                 ease 1 rotate 195
-                pause 0.25
-                ease 0.5 rotate 210
+                pause .25
+                ease .5 rotate 210
                 ease 1 rotate 195
-                pause 0.25
+                pause .25
             choice:
-                ease 0.5 rotate 205 ypos 575
-                ease 0.75 rotate 200 ypos 580
-                ease 0.5 rotate 205 ypos 575
-                ease 0.75 rotate 200 ypos 580
+                ease .5 rotate 205 ypos 575
+                ease .75 rotate 200 ypos 580
+                ease .5 rotate 205 ypos 575
+                ease .75 rotate 200 ypos 580
             choice:
-                ease 0.3 rotate 205 ypos 575
-                ease 0.3 rotate 200 ypos 585
-                ease 0.3 rotate 205 ypos 575
-                ease 0.3 rotate 200 ypos 585
+                ease .3 rotate 205 ypos 575
+                ease .3 rotate 200 ypos 585
+                ease .3 rotate 205 ypos 575
+                ease .3 rotate 200 ypos 585
             repeat
 
 
@@ -6868,7 +6853,7 @@ image Fireworks:
         transform_anchor True
 
         offset (0,0)
-        pause 0.2
+        pause .2
         choice:
             "Star1"
         choice:
@@ -6884,8 +6869,8 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease 0.5 offset (50,-100)
-                    ease 0.5 offset (100,150)
+                    ease .5 offset (50,-100)
+                    ease .5 offset (100,150)
                 parallel:
 
                     zoom 0.3
@@ -6893,17 +6878,17 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease 0.5 offset (-25,-120)
-                    ease 0.5 offset (-50,130)
+                    ease .5 offset (-25,-120)
+                    ease .5 offset (-50,130)
                 parallel:
 
                     zoom 0.2
-                    ease 1 zoom 0.9
+                    ease 1 zoom .9
             choice:
                 parallel:
 
-                    ease 0.5 offset (25,-130)
-                    ease 0.5 offset (50,140)
+                    ease .5 offset (25,-130)
+                    ease .5 offset (50,140)
                 parallel:
 
                     zoom 0.3
@@ -6911,17 +6896,17 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease 0.5 offset (10,-150)
-                    ease 0.5 offset (20,140)
+                    ease .5 offset (10,-150)
+                    ease .5 offset (20,140)
                 parallel:
 
                     zoom 0.3
-                    ease 1 zoom 0.9
+                    ease 1 zoom .9
             choice:
                 parallel:
 
-                    ease 0.5 offset (100,-100)
-                    ease 0.5 offset (150,150)
+                    ease .5 offset (100,-100)
+                    ease .5 offset (150,150)
                 parallel:
 
                     zoom 0.3
@@ -6932,7 +6917,7 @@ image Fireworks:
         anchor (0.5,0.5)
 
         transform_anchor True
-        pause 0.1
+        pause .1
         choice:
             "Star1"
         choice:
@@ -6948,8 +6933,8 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease 0.5 offset (50,-100)
-                    ease 0.5 offset (100,150)
+                    ease .5 offset (50,-100)
+                    ease .5 offset (100,150)
                 parallel:
 
                     zoom 0.3
@@ -6957,17 +6942,17 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease 0.5 offset (-25,-120)
-                    ease 0.5 offset (-50,130)
+                    ease .5 offset (-25,-120)
+                    ease .5 offset (-50,130)
                 parallel:
 
                     zoom 0.2
-                    ease 1 zoom 0.9
+                    ease 1 zoom .9
             choice:
                 parallel:
 
-                    ease 0.5 offset (25,-130)
-                    ease 0.5 offset (50,140)
+                    ease .5 offset (25,-130)
+                    ease .5 offset (50,140)
                 parallel:
 
                     zoom 0.3
@@ -6975,17 +6960,17 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease 0.5 offset (10,-150)
-                    ease 0.5 offset (20,140)
+                    ease .5 offset (10,-150)
+                    ease .5 offset (20,140)
                 parallel:
 
                     zoom 0.3
-                    ease 1 zoom 0.9
+                    ease 1 zoom .9
             choice:
                 parallel:
 
-                    ease 0.5 offset (100,-100)
-                    ease 0.5 offset (150,150)
+                    ease .5 offset (100,-100)
+                    ease .5 offset (150,150)
                 parallel:
 
                     zoom 0.3
@@ -7011,8 +6996,8 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease 0.5 offset (50,-100)
-                    ease 0.5 offset (100,150)
+                    ease .5 offset (50,-100)
+                    ease .5 offset (100,150)
                 parallel:
 
                     zoom 0.3
@@ -7020,17 +7005,17 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease 0.5 offset (-25,-120)
-                    ease 0.5 offset (-50,130)
+                    ease .5 offset (-25,-120)
+                    ease .5 offset (-50,130)
                 parallel:
 
                     zoom 0.2
-                    ease 1 zoom 0.9
+                    ease 1 zoom .9
             choice:
                 parallel:
 
-                    ease 0.5 offset (25,-130)
-                    ease 0.5 offset (50,140)
+                    ease .5 offset (25,-130)
+                    ease .5 offset (50,140)
                 parallel:
 
                     zoom 0.3
@@ -7038,17 +7023,17 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease 0.5 offset (10,-150)
-                    ease 0.5 offset (20,140)
+                    ease .5 offset (10,-150)
+                    ease .5 offset (20,140)
                 parallel:
 
                     zoom 0.3
-                    ease 1 zoom 0.9
+                    ease 1 zoom .9
             choice:
                 parallel:
 
-                    ease 0.5 offset (100,-100)
-                    ease 0.5 offset (150,150)
+                    ease .5 offset (100,-100)
+                    ease .5 offset (150,150)
                 parallel:
 
                     zoom 0.3

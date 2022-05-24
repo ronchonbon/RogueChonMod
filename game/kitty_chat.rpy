@@ -1039,7 +1039,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
 
             if "book" not in KittyX.had_chat:
                 $ Options.append("booked")
-        if "lace_bra" in KittyX.inventory or "_lace_panties" in KittyX.inventory:
+        if "_lace_bra" in KittyX.inventory or "_lace_panties" in KittyX.inventory:
 
             if "lingerie" not in KittyX.had_chat:
                 $ Options.append("lingerie")
@@ -2091,7 +2091,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                 ch_k "I'm outta here, later!"
         else:
             ch_k "I'm headed out, see you later."
-        hide Kitty_sprite
+        hide Kitty_Sprite
         return
 
 
@@ -2208,7 +2208,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
     $ KittyX.recent_history.append("followed")
     if not line:
 
-        hide Kitty_sprite
+        hide Kitty_Sprite
         call change_out_of_gym_clothes ([KittyX])
         return
 
@@ -2220,7 +2220,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_k "Sorry [KittyX.player_petname], but I[KittyX.like]need the practice?"
         else:
             ch_k "I'm[KittyX.like]sorry, [KittyX.player_petname], I've got things to do."
-        hide Kitty_sprite
+        hide Kitty_Sprite
         call change_out_of_gym_clothes ([KittyX])
         return
 
@@ -2233,7 +2233,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         call drain_all_words ("arriving")
         $ KittyX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
-        hide Kitty_sprite
+        hide Kitty_Sprite
         call change_out_of_gym_clothes ([KittyX])
         if KittyX.location == "bg_classroom":
             ch_k "Cool, study buddy!"
@@ -2684,9 +2684,9 @@ label Kitty_Wardrobe_Menu:
                     $ KittyX.blushing = "_blush2"
                     ch_k "-not that that's a problem. . ."
                     $ KittyX.blushing = "_blush1"
-                elif approval_check(KittyX, 900, TabM=2) and "lace_bra" in KittyX.inventory:
+                elif approval_check(KittyX, 900, TabM=2) and "_lace_bra" in KittyX.inventory:
                     ch_k "I could find {i}something{/i} to wear."
-                    $ KittyX.bra  = "lace_bra"
+                    $ KittyX.bra  = "_lace_bra"
                     "She pulls out her lace bra and passes it through her [KittyX.top]."
                 elif approval_check(KittyX, 800, TabM=2):
                     ch_k "Yeah, I guess."
@@ -2776,9 +2776,9 @@ label Kitty_Wardrobe_Menu:
             ch_k "K, no problem."
             $ KittyX.legs = "_black_jeans"
 
-        "You look great in yoga pants." if KittyX.legs != "yoga_pants":
+        "You look great in yoga pants." if KittyX.legs != "_yoga_pants":
             ch_k "Yeah, ok."
-            $ KittyX.legs = "yoga_pants"
+            $ KittyX.legs = "_yoga_pants"
 
         "What about wearing your yellow shorts?" if KittyX.legs != "_shorts":
             ch_k "K, no problem."
@@ -2907,16 +2907,16 @@ label Kitty_Wardrobe_Menu:
                         else:
                             $ KittyX.bra = "_bra"
 
-                "I like that lace bra." if "lace_bra" in KittyX.inventory and KittyX.bra != "lace_bra":
+                "I like that lace bra." if "_lace_bra" in KittyX.inventory and KittyX.bra != "_lace_bra":
                     if KittyX.seen_breasts or approval_check(KittyX, 1300, TabM=2):
                         ch_k "K."
-                        $ KittyX.bra = "lace_bra"
+                        $ KittyX.bra = "_lace_bra"
                     else:
                         call Display_dress_screen (KittyX)
                         if not _return:
                             ch_k "It's pretty skimpy. . ."
                         else:
-                            $ KittyX.bra = "lace_bra"
+                            $ KittyX.bra = "_lace_bra"
 
                 "I like that sports bra." if KittyX.bra != "_sports_bra":
                     if KittyX.seen_breasts or approval_check(KittyX, 1000, TabM=2):

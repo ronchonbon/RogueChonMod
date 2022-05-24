@@ -963,7 +963,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
 
             if "book" not in JubesX.had_chat:
                 $ Options.append("booked")
-        if "lace_bra" in JubesX.inventory or "_lace_panties" in JubesX.inventory:
+        if "_lace_bra" in JubesX.inventory or "_lace_panties" in JubesX.inventory:
 
             if "lingerie" not in JubesX.had_chat:
                 $ Options.append("lingerie")
@@ -2718,9 +2718,9 @@ label Jubes_Wardrobe_Menu:
                     $ JubesX.blushing = "_blush1"
                     ch_v "Oh, I was just warning -you-. . ."
                     $ JubesX.blushing = ""
-                elif approval_check(JubesX, 900, TabM=2) and "lace_bra" in JubesX.inventory:
+                elif approval_check(JubesX, 900, TabM=2) and "_lace_bra" in JubesX.inventory:
                     ch_v "Well, I do have something I could throw on. . ."
-                    $ JubesX.bra  = "lace_bra"
+                    $ JubesX.bra  = "_lace_bra"
                     "She pulls out her lace bra and slips it under her [JubesX.top]."
                 elif approval_check(JubesX, 600, TabM=2):
                     ch_v "Well, I do have something I could throw on. . ."
@@ -2919,17 +2919,17 @@ label Jubes_Wardrobe_Menu:
                     ch_v "Ok."
                     $ JubesX.bra = "_sports_bra"
 
-                "Add lace_bra" if JubesX.bra != "lace_bra" and "lace_bra" in JubesX.inventory:
+                "Add lace_bra" if JubesX.bra != "_lace_bra" and "_lace_bra" in JubesX.inventory:
                     ch_p "I like that bra corset."
                     if JubesX.seen_breasts or approval_check(JubesX, 1300, TabM=2):
                         ch_v "K."
-                        $ JubesX.bra = "lace_bra"
+                        $ JubesX.bra = "_lace_bra"
                     else:
                         call Display_dress_screen (JubesX)
                         if not _return:
                             ch_v "It's kinda revealing. . ."
                         else:
-                            $ JubesX.bra = "lace_bra"
+                            $ JubesX.bra = "_lace_bra"
 
                 "Add bikini_top" if JubesX.bra != "_bikini_top" and "_bikini_top" in JubesX.inventory:
                     ch_p "I like that bikini top."
@@ -2952,7 +2952,7 @@ label Jubes_Wardrobe_Menu:
         "Hose and stockings options":
 
             menu:
-                "You could lose the hose." if JubesX.hose and JubesX.hose != 'ripped_tights' and JubesX.hose != 'tights':
+                "You could lose the hose." if JubesX.hose and JubesX.hose != 'ripped_tights' and JubesX.hose != '_tights':
                     $ JubesX.hose = ""
                 "The thigh-high hose would look good with that." if JubesX.hose != "_stockings":
                     $ JubesX.hose = "_stockings"

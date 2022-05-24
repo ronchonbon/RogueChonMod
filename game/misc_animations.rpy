@@ -65,7 +65,7 @@ screen stat_holder_10(value, Color, XPOS):
     use stat_graphic(value, Color, 0.9, XPOS-30)
     timer 1.5 action Hide("stat_holder_10")
 
-layeredimage Xavier_sprite:
+layeredimage Xavier_Sprite:
     always:
         "images/NPC/Xavier_body.png"
 

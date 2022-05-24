@@ -353,7 +353,7 @@ label JeanMeet:
             repeat 4
     ". . ."
     hide JeanMFGrey with easeoutleft
-    $ EmmaX.change_face("_angry",1,Eyes="leftside")
+    $ EmmaX.change_face("_angry",1,Eyes="_leftside")
     show Emma_Sprite zorder 25 at sprite_location(-100)
     show Emma_Sprite zorder 25 at sprite_location(500) with easeinleft
     call shift_focus (EmmaX)
@@ -769,9 +769,9 @@ label Jean_Sub:
     ch_j ". . ."
     ch_j "When we first met. . . I was pretty rude."
     ch_j "I get that."
-    $ JeanX.change_face("_sly",1,Eyes="leftside")
+    $ JeanX.change_face("_sly",1,Eyes="_leftside")
     ch_j "When you're practically perfect in every way, you can look down your lessers."
-    $ JeanX.change_face("_angry",1,Eyes="leftside")
+    $ JeanX.change_face("_angry",1,Eyes="_leftside")
     ch_j ". . ."
     ch_j "Maybe that came out wrong."
     $ JeanX.change_face("_sly",1)

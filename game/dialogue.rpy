@@ -3322,7 +3322,7 @@ label first_time_ass_eaten_lines(Girl, action):
         elif Girl.obedience >= Girl.inhibition:
             Girl.voice "You really don't have to if you don't want to."
         else:
-            $ Girl.Eyes = "_sexy"
+            $ Girl.eyes = "_sexy"
 
             Girl.voice "Hmm. . . it's worth a shot. . ."
 

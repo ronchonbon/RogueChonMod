@@ -26,7 +26,7 @@ label anal_insertion_not_loose_done_today_reactions(Girl, action):
 label otherwise_rejected_reactions(Girl, action):
     if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "fondle_ass", "handjob", "blowjob", "sex"]:
         $ Girl.change_face("_sexy")
-        $ Girl.Mouth = "_sad"
+        $ Girl.mouth = "_sad"
     elif action in ["eat_pussy", "finger_ass", "eat_ass", "footjob", "titjob", "dildo_pussy", "dildo_ass", "anal", "hotdog"]:
         $ Girl.change_face("_surprised")
     elif action in ["masturbation"]:
@@ -69,8 +69,8 @@ label first_action_approval_forced_reactions(Girl, action):
 
 label first_action_approval_mostly_love_reactions(Girl, action):
     $ Girl.change_face("_sexy")
-    $ Girl.Brows = "_sad"
-    $ Girl.Mouth = "_smile"
+    $ Girl.brows = "_sad"
+    $ Girl.mouth = "_smile"
 
     call first_action_approval_mostly_love_lines(Girl, action)
 
@@ -96,7 +96,7 @@ label first_action_approval_addicted_reactions(Girl, action):
 label first_action_approval_reactions(Girl, action):
     if action in ["masturbation", "handjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:
         $ Girl.change_face("_sad")
-        $ Girl.Mouth = "_smile"
+        $ Girl.mouth = "_smile"
     elif action in ["footjob"]:
         $ Girl.change_face("_lipbite",1)
 
@@ -129,7 +129,7 @@ label auto_rejected_reactions(Girl, action):
         call auto_rejected_lines(Girl, action)
     elif action == "fondle_breasts":
         $ Girl.change_face("_surprised")
-        $ Girl.Brows = "_confused"
+        $ Girl.brows = "_confused"
 
         call auto_rejected_lines(Girl, action)
     elif action == "finger_pussy":
@@ -156,7 +156,7 @@ label auto_rejected_reactions(Girl, action):
 
         $ Girl.change_face("_bemused")
     elif action in dildo_actions or action in sex_actions:
-        $ Girl.Brows = "_angry"
+        $ Girl.brows = "_angry"
 
         call what_do_you_think_youre_doing_lines(Girl, action)
         call what_do_you_think_youre_doing_menu(Girl, action)
@@ -165,7 +165,7 @@ label auto_rejected_reactions(Girl, action):
 
 label pullback_reactions(Girl, action):
     $ Girl.change_face("_surprised")
-    $ Girl.Brows = "_sad"
+    $ Girl.brows = "_sad"
 
     call pullback_changes(Girl, action)
 
@@ -198,7 +198,7 @@ label daily_action_reactions(Girl, action):
 label first_time_asking_reactions(Girl, action):
     if primary_action != "footjob":
         $ Girl.change_face("_surprised", 1)
-        $ Girl.Mouth = "_kiss"
+        $ Girl.mouth = "_kiss"
 
         call first_time_asking_lines(Girl, action)
     else:
@@ -206,20 +206,20 @@ label first_time_asking_reactions(Girl, action):
 
         call first_time_asking_lines(Girl, action)
 
-        $ Girl.Blush = 1
+        $ Girl.blushing = 1
 
     if action == "titjob":
         if Girl.blowjob:
-            $ Girl.Mouth = "_smile"
+            $ Girl.mouth = "_smile"
 
             call mouth_not_enough(Girl)
         elif Girl.action_counter["handjob"]:
-            $ Girl.Mouth = "_smile"
+            $ Girl.mouth = "_smile"
 
             call hand_not_enough(Girl)
     elif action == "blowjob":
         if Girl.action_counter["handjob"]:
-            $ Girl.Mouth = "_smile"
+            $ Girl.mouth = "_smile"
 
             call hand_not_enough(Girl)
 
@@ -238,7 +238,7 @@ label anal_insertion_reactions(Girl, action):
     return
 
 label starting_to_get_bored_reactions(Girl, action):
-    $ Girl.Brows = "_confused"
+    $ Girl.brows = "_confused"
 
     call starting_to_get_bored_lines(Girl, action)
 
@@ -246,11 +246,11 @@ label starting_to_get_bored_reactions(Girl, action):
 
 label definitely_bored_now_reactions(Girl, action):
     if action == "kiss":
-        $ Girl.Brows = "_confused"
+        $ Girl.brows = "_confused"
 
         call try_something_else_lines(Girl, action)
     else:
-        $ Girl.Brows = "_angry"
+        $ Girl.brows = "_angry"
 
         call definitely_bored_now_lines(Girl, action)
 
@@ -262,7 +262,7 @@ label unsatisfied_reactions(Girl, action):
     $ Girl.change_face("_angry")
 
     if Girl != JeanX:
-        $ Girl.Eyes = "_side"
+        $ Girl.eyes = "_side"
 
     call unsatisfied_lines(Girl, action)
 
@@ -270,7 +270,7 @@ label unsatisfied_reactions(Girl, action):
 
 label would_you_like_more_reactions(Girl, action):
     $ Girl.change_face("_sexy", 1)
-    $ Girl.Brows = "_sad"
+    $ Girl.brows = "_sad"
 
     call would_you_like_more_lines(Girl, action)
 
@@ -289,7 +289,7 @@ label sex_acts(action = 0):
     call shift_focus(focused_Girl)
 
     if action == "SkipTo":
-        $ renpy.pop_call() #causes it to skip past the Trigger Swap
+        $ renpy.pop_call() #causes it to skip past the primary_action Swap
         $ renpy.pop_call()
 
         call SkipTo(focused_Girl)
@@ -326,11 +326,11 @@ label girl_initiated_action(Girl, action):
             $ covered_phrase = "head and shoves your face into her chest"
             $ topless_phrase = covered_phrase
 
-        if (Girl.Over or Girl.Chest) and not Girl.top_pulled_up:
+        if (Girl.top or Girl.bra) and not Girl.top_pulled_up:
             if approval_check(Girl, 1250, TabM = 1) or (Girl.seen_breasts and approval_check(Girl, 500) and not taboo):
                 $ Girl.top_pulled_up = 1
 
-                $ line = Girl.Over if Girl.Over else Girl.Chest
+                $ line = Girl.top if Girl.top else Girl.bra
 
                 "With a mischievous grin, [Girl.name] pulls her [line] up over her breasts."
 
@@ -360,7 +360,7 @@ label girl_initiated_action(Girl, action):
                 "grabs your arm and rubs your hand against her asshole"])
 
 
-        if (Girl.Legs and not Girl.upskirt) or (Girl.Panties and not Girl.underwear_pulled_down):
+        if (Girl.legs and not Girl.upskirt) or (Girl.underwear and not Girl.underwear_pulled_down):
             if approval_check(Girl, 1250, TabM = 1) or (Girl.seen_pussy and approval_check(Girl, 500) and not taboo):
                 $ Girl.upskirt = 1
                 $ Girl.underwear_pulled_down = 1
@@ -369,17 +369,17 @@ label girl_initiated_action(Girl, action):
 
                 if Girl.wearing_skirt:
                     $ line = Girl.name + " hikes up her skirt"
-                elif Girl.PantsNum() > 6:
-                    $ line = Girl.name + " pulls down her " + Girl.Legs
+                elif Girl.legs_number() > 6:
+                    $ line = Girl.name + " pulls down her " + Girl.legs
                 else:
                     $ line = 0
 
-                if Girl.Panties:
+                if Girl.underwear:
                     if line:
-                        "[line] and pulls her [Girl.Panties] out of the way."
+                        "[line] and pulls her [Girl.underwear] out of the way."
                         "She then [phrase], clearly intending you to get to work."
                     else:
-                        "She pulls her [Girl.Panties] out of the way, and then [phrase]."
+                        "She pulls her [Girl.underwear] out of the way, and then [phrase]."
                         "She clearly intends for you to get to work."
                 else:
                     "[line], and then [phrase]."
@@ -407,10 +407,10 @@ label girl_initiated_action(Girl, action):
             "[Girl.name] grabs her dildo, hiking up her skirt as she does."
 
             $ Girl.upskirt = 1
-        elif Girl.PantsNum() > 6:
+        elif Girl.legs_number() > 6:
             "[Girl.name] grabs her dildo, pulling down her pants as she does."
 
-            $ Girl.Legs = 0
+            $ Girl.legs = 0
         else:
             if action == "dildo_pussy":
                 "[Girl.name] grabs her dildo, rubbing it suggestively against her crotch."
@@ -434,16 +434,16 @@ label girl_initiated_action(Girl, action):
                 "[line]"
 
                 $ Girl.upskirt = 1
-            elif Girl.PantsNum() > 6:
-                $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock, sliding her [Girl.Legs] down as she does so.",
-                    "[Girl.name] rolls back and pulls you against her, sliding her [Girl.Legs] off as she does so.",
-                    "[Girl.name] pushes you down and climbs on top of you, sliding her [Girl.Legs] down as she does so.",
-                    "[Girl.name] turns around, sliding her [Girl.Legs] down as she does so.",
-                    "[Girl.name] lays back, sliding her [Girl.Legs] down as she does so."])
+            elif Girl.legs_number() > 6:
+                $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock, sliding her [Girl.legs] down as she does so.",
+                    "[Girl.name] rolls back and pulls you against her, sliding her [Girl.legs] off as she does so.",
+                    "[Girl.name] pushes you down and climbs on top of you, sliding her [Girl.legs] down as she does so.",
+                    "[Girl.name] turns around, sliding her [Girl.legs] down as she does so.",
+                    "[Girl.name] lays back, sliding her [Girl.legs] down as she does so."])
                 "[line]"
 
                 $ Girl.upskirt = 1
-            elif Girl.PantsNum() == 6:
+            elif Girl.legs_number() == 6:
                 $ line = renpy.random.choice(["[Girl.name] rolls onto her back and pulls you against her, sliding her shorts off as she does so."])
                 "[line]"
 
@@ -697,14 +697,14 @@ label first_action_response(Girl, action):
 
     if not action_context:
         if Girl.love >= 500 and "unsatisfied" not in Girl.recent_history:
-            $ Girl.Mouth = "_smile"
+            $ Girl.mouth = "_smile"
             call satisfied_lines(Girl, action)
         elif action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"] and Girl.obedience <= 500 and Player.focus <= 20:
             $ Girl.change_face("_perplexed", 1)
 
             call was_that_enough_lines(Girl, action)
         elif action in cock_actions and Player.focus <= 20:
-            $ Girl.Mouth = "_sad"
+            $ Girl.mouth = "_sad"
 
             call was_that_enough_lines(Girl, action)
 
@@ -805,8 +805,8 @@ label action_approved(Girl, action):
         return True
     elif Girl.action_counter[action] < 3:
         $ Girl.change_face("_sexy", 1)
-        $ Girl.Brows = "_confused"
-        $ Girl.Mouth = "_kiss"
+        $ Girl.brows = "_confused"
+        $ Girl.mouth = "_kiss"
 
         call before_action_less_than_three_times_lines(Girl, action)
     else:
@@ -847,9 +847,9 @@ label action_disapproved(Girl, action):
         call otherwise_not_interested_lines(Girl, action)
 
         if Girl in [RogueX, KittyX, EmmaX, StormX]:
-            $ Girl.Blush = 1
+            $ Girl.blushing = 1
         else:
-            $ Girl.Blush = 0
+            $ Girl.blushing = 0
 
     if action == "masturbation":
         ch_r "That's. . . a little intimate, [RogueX.player_petname]."

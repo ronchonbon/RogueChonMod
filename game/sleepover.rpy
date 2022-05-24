@@ -1004,7 +1004,7 @@ label sleepover_Morning:
         elif Party[0] == StormX:
             $ Party[0].change_face("_smile",1)
             ch_s "Well, yes, it was nice to sleep next to you as well, [StormX.player_petname]."
-            $ Party[0].change_face("_smile",2,Eyes="leftside")
+            $ Party[0].change_face("_smile",2,Eyes="_leftside")
             ch_s "I think we should make a habit of this. . ."
             $ Party[0].change_face("_smile",1)
         elif Party[0] == JubesX:
@@ -1164,7 +1164,7 @@ label sleepover_Morning:
             elif Party[1] == StormX:
                 $ Party[1].change_face("_smile",1)
                 ch_s "Well, yes, it was nice to sleep next to you as well, [StormX.player_petname]."
-                $ Party[1].change_face("_smile",2,Eyes="leftside")
+                $ Party[1].change_face("_smile",2,Eyes="_leftside")
                 ch_s "I think we should make a habit of this. . ."
                 $ Party[1].change_face("_smile",1)
             elif Party[1] == JubesX:
@@ -1320,7 +1320,7 @@ label sleepover_Morning:
             "The girls get changed for the day."
         else:
             "[Party[0].name] gets changed for the day."
-            
+
     $ Party = []
 
 
@@ -1569,10 +1569,10 @@ label sleepover_MorningWood:
 
     if Partner:
         if Partner == RogueX:
-            show Rogue_sprite:
+            show Rogue_Sprite:
                 pos (900,250)
         elif Partner == KittyX:
-            show Kitty_sprite:
+            show Kitty_Sprite:
                 pos (900,250)
         elif Partner == EmmaX:
             show Emma_Sprite:
@@ -1592,7 +1592,7 @@ label sleepover_MorningWood:
         $ Partner.recent_history.append("threesome")
 
     $ Party[0].recent_history.append("blanket")
-    call expression Party[0].tag + "_BJ_Launch"
+    # call expression Party[0].tag + "_BJ_Launch"
 
     $ Party[0].change_face("_closed",1)
     if Partner:
@@ -1697,7 +1697,7 @@ label sleepover_MorningWood:
             ch_j "Are u 'rain 'amaged?"
             $ action_speed = 1
             if Partner:
-                $ Party[0].eyes = "leftside"
+                $ Party[0].eyes = "_leftside"
                 ch_j "Is he brain damaged?"
             $ Party[0].change_face("_sly",1)
         elif Party[0] == StormX:
@@ -2071,14 +2071,14 @@ label sleepover_MorningWood:
 
         if len(Party) >= 2:
             if Party[1] == RogueX:
-                show Rogue_sprite:
+                show Rogue_Sprite:
                     ease 1 pos (700,50)
-                show Rogue_sprite:
+                show Rogue_Sprite:
                     pos (700,50)
             elif Party[1] == KittyX:
-                show Kitty_sprite:
+                show Kitty_Sprite:
                     ease 1 pos (700,50)
-                show Kitty_sprite:
+                show Kitty_Sprite:
                     pos (700,50)
             elif Party[1] == EmmaX:
                 show Emma_Sprite:
@@ -2146,7 +2146,12 @@ label sleepover_MorningWood:
         if Partner:
             $ second_girl_primary_action = "blowjob"
         call Morning_Partner
-        call expression Party[0].tag + "_SexAct" pass ("blowjob")
+
+        $ Girl = Party[0]
+        $ primary_action = "blowjob"
+
+        call action
+
     return
 
 
@@ -2157,9 +2162,9 @@ label Morning_Partner:
         return
     $ Partner.change_face("_sexy")
     if Partner == RogueX:
-        show Rogue_sprite:
+        show Rogue_Sprite:
             ease 1 pos (700,50)
-        show Rogue_sprite:
+        show Rogue_Sprite:
             pos (700,50)
     elif Partner == EmmaX:
         show Emma_Sprite:
@@ -2167,9 +2172,9 @@ label Morning_Partner:
         show Emma_Sprite:
             pos (700,50)
     elif Partner == KittyX:
-        show Kitty_sprite:
+        show Kitty_Sprite:
             ease 1 pos (700,50)
-        show Kitty_sprite:
+        show Kitty_Sprite:
             pos (700,50)
     elif Partner == LauraX:
         show Laura_Sprite:

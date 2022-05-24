@@ -224,7 +224,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
                     "After a moment, you can feel a tugging on your zipper as it releases."
                     "You cock floats free of your pants, lifted half under its own power and half due to. . ."
 
-                    $ Party[0].change_face("_sly",Eyes="leftside")
+                    $ Party[0].change_face("_sly",Eyes="_leftside")
 
                     "You glance over at [JeanX.name] and she smiles mischieviously as the pressure builds."
                     "You can feel a strong rubbing sensation along the length of the shaft, up and down."

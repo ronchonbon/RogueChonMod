@@ -1,4 +1,6 @@
 label wait(outfit = True, lights = True):
+    $ stack_depth = renpy.call_stack_depth()
+
     show black_screen onlayer black
 
     call checkout(total = True)
@@ -701,41 +703,77 @@ label change_out_of_gym_clothes(Girls = []):
 
     return
 
-label hide_girl(Girl, hide_sprite = False):
+label hide_girl(Girl, hide_Sprite = False):
     if Girl == RogueX:
-        # call Rogue_sex_Reset
-        # hide Rogue_sex_animation
-        # hide Rogue_doggy_animation
-        # hide Rogue_HJ_Animation
-        # hide Rogue_blowjob_animation
-        # hide Rogue_TJ_Animation
+        call Rogue_Sex_Reset
+        hide Rogue_SexSprite
+        hide Rogue_Doggy_Animation
+        hide Rogue_HJ_Animation
+        hide Rogue_BJ_Animation
+        hide Rogue_TJ_Animation
 
-        if hide_sprite:
-            hide Rogue_sprite
+        if hide_Sprite:
+            hide Rogue_Sprite
     elif Girl == KittyX:
-        # call Kitty_sex_Reset
-        # hide Kitty_sex_animation
-        # hide Kitty_Doggy_Animation
-        # hide Kitty_HJ_Animation
-        # hide Kitty_blowjob_animation
-        # hide Kitty_TJ_Animation
+        call Kitty_Sex_Reset
+        hide Kitty_SexSprite
+        hide Kitty_Doggy_Animation
+        hide Kitty_HJ_Animation
+        hide Kitty_BJ_Animation
+        hide Kitty_TJ_Animation
 
-        if hide_sprite:
-            hide Kitty_sprite
+        if hide_Sprite:
+            hide Kitty_Sprite
     elif Girl == EmmaX:
-        if hide_sprite:
+        call Emma_Sex_Reset
+        hide Emma_SexSprite
+        hide Emma_Doggy_Animation
+        hide Emma_HJ_Animation
+        hide Emma_BJ_Animation
+        hide Emma_TJ_Animation
+        hide Emma_FJ_Animation
+
+        if hide_Sprite:
             hide Emma_Sprite
     elif Girl == LauraX:
-        if hide_sprite:
+        call Laura_Sex_Reset
+        hide Laura_SexSprite
+        hide Laura_Doggy_Animation
+        hide Laura_HJ_Animation
+        hide Laura_BJ_Animation
+        hide Laura_TJ_Animation
+
+        if hide_Sprite:
             hide Laura_Sprite
     elif Girl == JeanX:
-        if hide_sprite:
+        call Jean_Sex_Reset
+        hide Jean_SexSprite
+        hide Jean_Doggy_Animation
+        hide Jean_HJ_Animation
+        hide Jean_BJ_Animation
+        hide Jean_TJ_Animation
+        hide Jean_PJ_Animation
+
+        if hide_Sprite:
             hide Jean_Sprite
     elif Girl == StormX:
-        if hide_sprite:
+        hide Storm_SexSprite
+        hide Storm_Doggy_Animation
+        hide Storm_HJ_Animation
+        hide Storm_BJ_Animation
+        hide Storm_TJ_Animation
+
+        if hide_Sprite:
             hide Storm_Sprite
     elif Girl == JubesX:
-        if hide_sprite:
+        call Jubes_Sex_Reset
+        hide Jubes_SexSprite
+        hide Jubes_Doggy_Animation
+        hide Jubes_HJ_Animation
+        hide Jubes_BJ_Animation
+        hide Jubes_TJ_Animation
+
+        if hide_Sprite:
             hide Jubes_Sprite
 
     return
@@ -1026,7 +1064,7 @@ label event_calls(event_Girls=[]):
 
 label display_girl(Girl, check_if_dressed = True, trigger_reset = True, x_position = 0, y_position = 50):
     if Girl not in Party and Girl.location != bg_current:
-        call hide_girl(Girl, hide_sprite = True)
+        call hide_girl(Girl, hide_Sprite = True)
 
         $ Girl.change_outfit(outfit_changed = 1)
 
@@ -1073,10 +1111,10 @@ label display_girl(Girl, check_if_dressed = True, trigger_reset = True, x_positi
         $ y_position = 250
 
     if Girl == RogueX:
-        show Rogue_sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
+        show Rogue_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
             anchor (0.5, 0.0)
     elif Girl == KittyX:
-        show Kitty_sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
+        show Kitty_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
             anchor (0.5, 0.0)
     elif Girl == EmmaX:
         show Emma_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
@@ -1142,9 +1180,9 @@ label set_the_scene(character = True, entering = False, check_if_dressed = True,
             call display_girl(focused_Girl, check_if_dressed, trigger_reset)
 
         if bg_current == "bg_study" and time_index < 3:
-            show Xavier_sprite zorder 25 at sprite_location(stage_left)
+            show Xavier_Sprite zorder 25 at sprite_location(stage_left)
         else:
-            hide Xavier_sprite
+            hide Xavier_Sprite
     else:
         call hide_all(cull = True)
 
@@ -1318,28 +1356,28 @@ label tenth_round:
 
 label hide_all(cull = False):
     if cull or RogueX.location != bg_current:
-        call hide_girl(RogueX, hide_sprite = True)
+        call hide_girl(RogueX, hide_Sprite = True)
 
     if cull or KittyX.location != bg_current:
-        call hide_girl(KittyX, hide_sprite = True)
+        call hide_girl(KittyX, hide_Sprite = True)
 
     if cull or EmmaX.location != bg_current:
-        call hide_girl(EmmaX, hide_sprite = True)
+        call hide_girl(EmmaX, hide_Sprite = True)
 
     if cull or LauraX.location != bg_current:
-        call hide_girl(LauraX, hide_sprite = True)
+        call hide_girl(LauraX, hide_Sprite = True)
 
     if cull or JeanX.location != bg_current:
-        call hide_girl(JeanX, hide_sprite = True)
+        call hide_girl(JeanX, hide_Sprite = True)
 
     if cull or StormX.location != bg_current:
-        call hide_girl(StormX, hide_sprite = True)
+        call hide_girl(StormX, hide_Sprite = True)
 
     if cull or JubesX.location != bg_current:
-        call hide_girl(JubesX, hide_sprite = True)
+        call hide_girl(JubesX, hide_Sprite = True)
 
     if cull or "bg_study" != bg_current:
-        hide Xavier_sprite
+        hide Xavier_Sprite
 
     return
 
@@ -1634,7 +1672,7 @@ label Hanks_Lab(line=0):
                 menu:
                     "What skin color would you like?"
                     "Green":
-                        $ Player.color = "green"
+                        $ Player.color = "_green"
                     "White":
                         $ Player.color = "pink"
                     "Black":
@@ -2003,8 +2041,8 @@ label clear_the_room(Character=0, Passive=0, Silent=0, Girls=[]):
             elif Girls:
                 ch_v "Hey, could you check out, [Girls[0].name]? I've gotta talk to [Player.name]."
 
-
     $ renpy.random.shuffle(Girls)
+
     while Girls:
         if Girls[0] in Party:
             $ Party.remove(Girls[0])
@@ -2063,9 +2101,9 @@ label clear_the_room(Character=0, Passive=0, Silent=0, Girls=[]):
             $ Girls[0].location = Girls[0].home
 
         if Girls[0] == RogueX:
-            hide Rogue_sprite with easeoutright
+            hide Rogue_Sprite with easeoutright
         elif Girls[0] == KittyX:
-            hide Kitty_sprite with easeoutright
+            hide Kitty_Sprite with easeoutright
         elif Girls[0] == EmmaX:
             hide Emma_Sprite with easeoutright
         elif Girls[0] == LauraX:
@@ -2852,11 +2890,12 @@ label exit_gym(temp_Girls = []):
                 $ line = "We should change out of these if we're leaving. . ."
             else:
                 $ line = "I should change out of these if we're leaving. . ."
+
             $ temp_Girls[0].outfit = temp_Girls[0].today_outfit
 
         $ temp_Girls.remove(temp_Girls[0])
 
-    if Party:
+    if Party and line:
         Party[0].voice "[line]"
 
     if line:
@@ -3318,7 +3357,7 @@ label Shop:
                         $ Player.cash -= 75
                     else:
                         "You don't have enough for that."
-                "Buy black lace bra for $90." if "lace_bra" not in RogueX.inventory and "Rogue lace_bra" not in Player.inventory:
+                "Buy black lace bra for $90." if "_lace_bra" not in RogueX.inventory and "Rogue lace_bra" not in Player.inventory:
                     if Player.cash >= 90:
                         "You purchase the lace bra, this will look nice on [RogueX.name]."
                         $ Player.inventory.append("Rogue lace_bra")
@@ -3357,7 +3396,7 @@ label Shop:
                     pass
         "Gifts for [KittyX.name]" if "met" in KittyX.history:
             menu:
-                "Buy white lace bra for $90." if "lace_bra" not in KittyX.inventory and "Kitty lace_bra" not in Player.inventory:
+                "Buy white lace bra for $90." if "_lace_bra" not in KittyX.inventory and "Kitty lace_bra" not in Player.inventory:
                     if Player.cash >= 90:
                         "You purchase the lace bra, this will look nice on [KittyX.name]."
                         $ Player.inventory.append("Kitty lace_bra")
@@ -3419,7 +3458,7 @@ label Shop:
                     pass
         "Gifts for [EmmaX.name]" if "met" in EmmaX.history:
             menu:
-                "Buy white lace bra for $90." if "lace_bra" not in EmmaX.inventory and "Emma lace_bra" not in Player.inventory:
+                "Buy white lace bra for $90." if "_lace_bra" not in EmmaX.inventory and "Emma lace_bra" not in Player.inventory:
                     if Player.cash >= 90:
                         "You purchase the lace bra, this will look nice on [EmmaX.name]."
                         $ Player.inventory.append("Emma lace_bra")
@@ -3472,7 +3511,7 @@ label Shop:
                         $ Player.cash -= 70
                     else:
                         "You don't have enough for that."
-                "Buy red lace corset for $90." if "lace corset" not in LauraX.inventory and "Laura lace corset" not in Player.inventory:
+                "Buy red lace corset for $90." if "_lace corset" not in LauraX.inventory and "Laura lace corset" not in Player.inventory:
                     if Player.cash >= 90:
                         "You purchase the lace corset, this will look nice on [LauraX.name]."
                         $ Player.inventory.append("Laura lace corset")
@@ -3519,7 +3558,7 @@ label Shop:
 
 
 
-                "Buy green lace bra for $90." if "lace_bra" not in JeanX.inventory and "Jean lace_bra" not in Player.inventory:
+                "Buy green lace bra for $90." if "_lace_bra" not in JeanX.inventory and "Jean lace_bra" not in Player.inventory:
                     if Player.cash >= 90:
                         "You purchase the lace bra, this will look nice on [JeanX.name]."
                         $ Player.inventory.append("Jean lace_bra")
@@ -3565,7 +3604,7 @@ label Shop:
                     pass
         "Gifts for [StormX.name]" if "met" in StormX.history:
             menu:
-                "Buy black lace bra for $90." if "lace_bra" not in StormX.inventory and "Storm lace_bra" not in Player.inventory:
+                "Buy black lace bra for $90." if "_lace_bra" not in StormX.inventory and "Storm lace_bra" not in Player.inventory:
                     if Player.cash >= 90:
                         "You purchase the lace bra, this will look nice on [StormX.name]."
                         $ Player.inventory.append("Storm lace_bra")
@@ -3787,13 +3826,13 @@ label ViewShift(Girl=0, View=0, ShouldHide=1, ViewTrig=primary_action):
                 call expression Girl.tag + "_Pussy_Launch" pass (ViewTrig)
             "Rear view" if Girl in (RogueX,KittyX,EmmaX,LauraX,JeanX):
                 $ Girl.pose = "doggy"
-                call expression Girl.tag + "_sex_launch" pass (ViewTrig)
+                call expression Girl.tag + "_Sex_Launch" pass (ViewTrig)
             "On top of you" if Girl in (EmmaX,JeanX,StormX):
                 $ Girl.pose = "sex"
-                call expression Girl.tag + "_sex_launch" pass (ViewTrig)
+                call expression Girl.tag + "_Sex_Launch" pass (ViewTrig)
             "Laying down" if Girl in (RogueX,KittyX,LauraX):
                 $ Girl.pose = "sex"
-                call expression Girl.tag + "_sex_launch" pass (ViewTrig)
+                call expression Girl.tag + "_Sex_Launch" pass (ViewTrig)
             "Never mind":
                 pass
     else:
@@ -3808,7 +3847,7 @@ label ViewShift(Girl=0, View=0, ShouldHide=1, ViewTrig=primary_action):
         elif View == "pussy":
             call expression Girl.tag + "_Pussy_Launch" pass (ViewTrig)
         elif View == "doggy" or View == "sex":
-            call expression Girl.tag + "_sex_launch" pass (ViewTrig)
+            call expression Girl.tag + "_Sex_Launch" pass (ViewTrig)
         elif View == "kiss":
             call expression Girl.tag + "_Kissing_Launch" pass (ViewTrig)
     return
@@ -3838,20 +3877,20 @@ label AllReset(Girl):
 
         if temp_Girls[0] == RogueX:
             if RogueX.location == bg_current:
-                show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location,50):
+                show Rogue_Sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location,50):
                     ease 0.5 anchor (0.6, 0.0)
-                show Rogue_sprite:
+                show Rogue_Sprite:
                     anchor (0.6, 0.0) pos (RogueX.sprite_location,50)
             else:
-                hide Rogue_sprite
+                hide Rogue_Sprite
         elif temp_Girls[0] == KittyX:
             if KittyX.location == bg_current:
-                show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location,50):
+                show Kitty_Sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location,50):
                     ease 0.5 anchor (0.5, 0.0)
-                show Kitty_sprite:
+                show Kitty_Sprite:
                     anchor (0.5, 0.0) pos (KittyX.sprite_location,50)
             else:
-                hide Kitty_sprite
+                hide Kitty_Sprite
         elif temp_Girls[0] == EmmaX:
             if EmmaX.location == bg_current:
                 show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location,50):
@@ -4787,7 +4826,7 @@ label Sex_Dialog(Primary=focused_Girl, Secondary=0, TempFocus=0, PrimaryLust=0, 
         "[line4]"
         if second_girl_primary_action == "suck_breasts" or second_girl_primary_action == "fondle_breasts":
 
-            if approval_check(Primary,500,"I",TabM=2) and Primary.lust >= 50 and (Primary.ChestNum() > 1 or Primary.OverNum() > 1):
+            if approval_check(Primary,500,"I",TabM=2) and Primary.lust >= 50 and (Primary.bra_number() > 1 or Primary.top_number() > 1):
 
                 $ Primary.top_pulled_up = 1
                 "[Primary.name] seems frustrated and pulls her top open."
@@ -5168,6 +5207,7 @@ label Seen_First_Peen(Primary=0, Secondary=0, Silent=0, Undress=0, Passive=0, Gi
                 return
             else:
                 "You whip your cock out."
+
             $ Player.add_word(1,"cockout",0,0,0)
     else:
 
@@ -6638,12 +6678,12 @@ label reset_outfits:
             $ LauraX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
             $ LauraX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
             $ LauraX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ LauraX.first_casual_outfit = [2,"wrists", "leather_pants", "", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
-            $ LauraX.second_casual_outfit = [2,0, "_skirt", "_jacket", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
-            $ LauraX.gym_clothes = [0, "wrists", "leather_pants", "", "", "leather_bra", "_black_panties", "", "", "", 0]
-            $ LauraX.sleepwear = [0, "", "", "", "", "leather_bra", "leather_panties", "", "", "", 0]
+            $ LauraX.first_casual_outfit = [2,"_wrists", "_leather_pants", "", "_leash_choker", "_leather_bra", "_black_panties", "", "", "", 0]
+            $ LauraX.second_casual_outfit = [2,0, "_skirt", "_jacket", "_leash_choker", "_leather_bra", "_black_panties", "", "", "", 0]
+            $ LauraX.gym_clothes = [0, "_wrists", "_leather_pants", "", "", "_leather_bra", "_black_panties", "", "", "", 0]
+            $ LauraX.sleepwear = [0, "", "", "", "", "_leather_bra", "_leather_panties", "", "", "", 0]
             $ LauraX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ LauraX.halloween_costume = [2,"_gloves", "other_skirt", "", "", "white_tank", "_black_panties", "suspenders", "", "black stockings", 0]
+            $ LauraX.halloween_costume = [2,"_gloves", "_other_skirt", "", "", "_white_tank", "_black_panties", "_suspenders", "", "_black_stockings", 0]
             $ LauraX.clothing = [0, "", "", "", "", "", "", "", "", 0]
             $ LauraX.outfit = "casual1"
             $ LauraX.today_outfit = "casual1"
@@ -6651,12 +6691,12 @@ label reset_outfits:
             $ JeanX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
             $ JeanX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
             $ JeanX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JeanX.first_casual_outfit = [2,0, "_pants", "pink_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
-            $ JeanX.second_casual_outfit = [2,0, "_skirt", "green_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
-            $ JeanX.gym_clothes = [0, "", "yoga_pants", "", "", "_sports_bra", "_green_panties", "", "", "", 0]
-            $ JeanX.sleepwear = [0, "", "", "pink_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
+            $ JeanX.first_casual_outfit = [2,0, "_pants", "_pink_shirt", "", "_green_bra", "_green_panties", "", "", "", 0]
+            $ JeanX.second_casual_outfit = [2,0, "_skirt", "_green_shirt", "", "_green_bra", "_green_panties", "", "", "", 0]
+            $ JeanX.gym_clothes = [0, "", "_yoga_pants", "", "", "_sports_bra", "_green_panties", "", "", "", 0]
+            $ JeanX.sleepwear = [0, "", "", "_pink_shirt", "", "_green_bra", "_green_panties", "", "", "", 0]
             $ JeanX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ JeanX.halloween_costume =  [2,0, "_shorts", "yellow_shirt", "", "green_bra", "_green_panties", "suspenders", "pony", "", 0]
+            $ JeanX.halloween_costume =  [2,0, "_shorts", "_yellow_shirt", "", "_green_bra", "_green_panties", "_suspenders", "pony", "", 0]
             $ JeanX.clothing = [0, "", "", "", "", "", "", "", "", 0]
             $ JeanX.outfit = "casual1"
             $ JeanX.today_outfit = "casual1"
@@ -6664,12 +6704,12 @@ label reset_outfits:
             $ StormX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
             $ StormX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
             $ StormX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ StormX.first_casual_outfit = [2,0, "_skirt", "white_shirt", "", "black_bra", "_white_panties", "", "", "", 0]
+            $ StormX.first_casual_outfit = [2,0, "_skirt", "_white_shirt", "", "black_bra", "_white_panties", "", "", "", 0]
             $ StormX.second_casual_outfit = [2,0, "_pants", "_jacket", "", "_tube_top", "_white_panties", "", "", "", 0]
-            $ StormX.gym_clothes = [0, "", "yoga_pants", "", "", "_sports_bra", "_white_panties", "", "", "",10]
-            $ StormX.sleepwear = [0, "", "", "white_shirt", "", "", "_white_panties", "", "", "",25]
+            $ StormX.gym_clothes = [0, "", "_yoga_pants", "", "", "_sports_bra", "_white_panties", "", "", "",10]
+            $ StormX.sleepwear = [0, "", "", "_white_shirt", "", "", "_white_panties", "", "", "",25]
             $ StormX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ StormX.halloween_costume = [2,0, "", "", "ring_necklace", "cos_bra", "cos_panties", "rings", "_short", "", 0]
+            $ StormX.halloween_costume = [2,0, "", "", "_ring_necklace", "_cosplay_bra", "_cosplay_panties", "_rings", "_short", "", 0]
             $ StormX.clothing = [0, "", "", "", "", "", "", "", "", 0]
             $ StormX.outfit = "casual1"
             $ StormX.today_outfit = "casual1"
