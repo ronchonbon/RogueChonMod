@@ -339,9 +339,10 @@ label tour_parting:
                 if simulation:
                     return True
 
+                $ Girl = RogueX
                 $ primary_action = "kiss"
 
-                call action(RogueX)
+                call action
 
                 if "_angry" in RogueX.recent_history:
                     $ RogueX.change_stat("love", 200, -10)

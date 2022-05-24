@@ -1,70 +1,26 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/locations.rpy", line 684, in script call
-    call take_class
-  File "game/classroom.rpy", line 52, in script call
-    call event_calls
-  File "game/locations.rpy", line 689, in script call
-    call take_class
-  File "game/locations.rpy", line 574, in script call
-    call event_calls
-  File "game/utilities.rpy", line 789, in script call
-    call DateNight
-  File "game/locations.rpy", line 615, in script call
-    call chat
-  File "game/chat.rpy", line 122, in script call
-    call chat_menu
-  File "game/chat.rpy", line 263, in script call
-    call enter_main_sex_menu
-  File "game/menus.rpy", line 61, in script call
-    call girl_sex_menu(focused_Girl)
-  File "game/actions.rpy", line 135, in script call
-    call action_disapproved(Girl, primary_action)
-  File "game/reactions.rpy", line 839, in script call
-    call action_not_done_yet_lines(Girl, action)
-  File "game/dialogue.rpy", line 1176, in script
-    $ lines = ["I'm" + Girl.like + "not ready for that, " + Girl.player_petname + ". . .",
-  File "game/dialogue.rpy", line 1181, in <module>
-    "I don't know that I'm. . .", + Girl.like + "ready? . .",
-TypeError: bad operand type for unary +: 'unicode'
+  File "game/rogue_scenes.rpy", line 345, in script call
+    call action
+  File "game/actions.rpy", line 1, in script
+    label action:
+Exception: Arguments supplied, but parameter list not present
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/locations.rpy", line 684, in script call
-    call take_class
-  File "game/classroom.rpy", line 52, in script call
-    call event_calls
-  File "game/locations.rpy", line 689, in script call
-    call take_class
-  File "game/locations.rpy", line 574, in script call
-    call event_calls
-  File "game/utilities.rpy", line 789, in script call
-    call DateNight
-  File "game/locations.rpy", line 615, in script call
-    call chat
-  File "game/chat.rpy", line 122, in script call
-    call chat_menu
-  File "game/chat.rpy", line 263, in script call
-    call enter_main_sex_menu
-  File "game/menus.rpy", line 61, in script call
-    call girl_sex_menu(focused_Girl)
-  File "game/actions.rpy", line 135, in script call
-    call action_disapproved(Girl, primary_action)
-  File "game/reactions.rpy", line 839, in script call
-    call action_not_done_yet_lines(Girl, action)
-  File "game/dialogue.rpy", line 1176, in script
-    $ lines = ["I'm" + Girl.like + "not ready for that, " + Girl.player_petname + ". . .",
-  File "renpy/ast.py", line 928, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "renpy/python.py", line 2245, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "game/dialogue.rpy", line 1181, in <module>
-    "I don't know that I'm. . .", + Girl.like + "ready? . .",
-TypeError: bad operand type for unary +: 'unicode'
+  File "game/rogue_scenes.rpy", line 345, in script call
+    call action
+  File "game/actions.rpy", line 1, in script
+    label action:
+  File "renpy/ast.py", line 869, in execute
+    values = apply_arguments(self.parameters, renpy.store._args, renpy.store._kwargs)
+  File "renpy/ast.py", line 155, in apply_arguments
+    raise Exception("Arguments supplied, but parameter list not present")
+Exception: Arguments supplied, but parameter list not present
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like 0.997f2
-Tue May 24 15:23:57 2022
+Tue May 24 16:28:52 2022
