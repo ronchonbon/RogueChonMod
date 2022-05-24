@@ -486,53 +486,56 @@ label chat_menu:
         "Disband party" if Girl in Party:
             ch_p "Ok, you can leave if you prefer."
 
-            python:
-                for G in Party:
-                    Party.remove(G)
+            $ temp_Girls = Party[:]
 
-                    renpy.call("change_into_scheduled_outfit", [G], 0)
+            while temp_Girls:
+                $ Party.remove(temp_Girls[0])
 
-                    if "leaving" in G.recent_history:
-                        G.drain_word("leaving")
-                    if G == RogueX:
-                        if G.location == bg_current:
-                            renpy.chat(ch_r, "Ok, I'll probably stick around for a bit anyway.")
-                        else:
-                            renpy.chat(ch_r, "Ok, see you later then.")
-                    elif G == KittyX:
-                        if G.location == bg_current:
-                            renpy.chat(ch_k, "Good to know, but I'm[G.like] fine here.")
-                        else:
-                            renpy.chat(ch_k, "Cool, later.")
-                    elif G == EmmaX:
-                        if G.location == bg_current:
-                            renpy.chat(ch_e, "I'm glad I have your \"permission\" to leave, but I'd rather be here.")
-                        elif G.location == "bg_teacher" and bg_current == "bg_classroom":
-                            renpy.chat(ch_e, "I'm glad I have your \"permission\" to leave, but I {i}do{/i} have a class to teach.")
-                        else:
-                            renpy.chat(ch_e, "If that's all then, I'll see you later.")
-                    elif G == LauraX:
-                        if G.location == bg_current:
-                            renpy.chat(ch_l, "I think I'm fine here.")
-                        else:
-                            renpy.chat(ch_l, "Ok, see ya then.")
-                    elif G == JeanX:
-                        renpy.chat(ch_j, "Ok.")
-                    elif G == StormX:
-                        if G.location == bg_current:
-                            renpy.chat(ch_s, "I would rather stay, thank you.")
-                        elif G.location == "bg_teacher" and bg_current == "bg_classroom":
-                            renpy.chat(ch_s, "I do have a class to teach. I think that I'll stay.")
-                        else:
-                            renpy.chat(ch_s, "Ah, fine, I'll see you later.")
-                    elif G == JubesX:
-                        if G.location == bg_current:
-                            renpy.chat(ch_v, "Ok, but I'll stick around.")
-                        else:
-                            renpy.chat(ch_v, "Ok, ok. Laters.")
+                call change_into_scheduled_outfit([temp_Girls[0]], 0)
 
-                    if G.location != bg_current:
-                        renpy.call("set_the_scene")
+                if "leaving" in temp_Girls[0].recent_history:
+                    $ temp_Girls[0].drain_word("leaving")
+                if temp_Girls[0] == RogueX:
+                    if temp_Girls[0].location == bg_current:
+                        ch_r "Ok, I'll probably stick around for a bit anyway."
+                    else:
+                        ch_r "Ok, see you later then."
+                elif temp_Girls[0] == KittyX:
+                    if temp_Girls[0].location == bg_current:
+                        ch_k "Good to know, but I'm[temp_Girls[0].like] fine here."
+                    else:
+                        ch_k "Cool, later."
+                elif temp_Girls[0] == EmmaX:
+                    if temp_Girls[0].location == bg_current:
+                        ch_e "I'm glad I have your \"permission\" to leave, but I'd rather be here."
+                    elif temp_Girls[0].location == "bg_teacher" and bg_current == "bg_classroom":
+                        ch_e "I'm glad I have your \"permission\" to leave, but I {i}do{/i} have a class to teach."
+                    else:
+                        ch_e "If that's all then, I'll see you later."
+                elif temp_Girls[0] == LauraX:
+                    if temp_Girls[0].location == bg_current:
+                        ch_l "I think I'm fine here."
+                    else:
+                        ch_l "Ok, see ya then."
+                elif temp_Girls[0] == JeanX:
+                    ch_j "Ok."
+                elif temp_Girls[0] == StormX:
+                    if temp_Girls[0].location == bg_current:
+                        ch_s "I would rather stay, thank you."
+                    elif temp_Girls[0].location == "bg_teacher" and bg_current == "bg_classroom":
+                        ch_s "I do have a class to teach. I think that I'll stay."
+                    else:
+                        ch_s "Ah, fine, I'll see you later."
+                elif temp_Girls[0] == JubesX:
+                    if temp_Girls[0].location == bg_current:
+                        ch_v "Ok, but I'll stick around."
+                    else:
+                        ch_v "Ok, ok. Laters."
+
+                if temp_Girls[0].location != bg_current:
+                    call set_the_scene
+
+                $ temp_Girls.remove(temp_Girls[0])
 
             return
         "Switch to. . .":

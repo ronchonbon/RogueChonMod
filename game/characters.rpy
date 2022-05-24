@@ -621,7 +621,7 @@ init python:
                     call_holder(value, Color, x_position)
 
                     if flavor == "lust" and stat >= 100 and not primary_action:
-                        renpy.call("Girl_Cumming",self,1)
+                        renpy.call("Girl_Cumming", self, 1)
 
                         return
 

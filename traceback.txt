@@ -3,112 +3,48 @@
 While running game code:
   File "game/locations.rpy", line 132, in script call
     call world_map
-  File "game/locations.rpy", line 711, in script call
+  File "game/locations.rpy", line 610, in script call
     call world_map
-  File "game/locations.rpy", line 790, in script call
-    call world_map
-  File "game/locations.rpy", line 1055, in script call
+  File "game/locations.rpy", line 610, in script call
     call world_map
   File "game/locations.rpy", line 132, in script call
     call world_map
-  File "game/locations.rpy", line 674, in script call
-    call take_class
-  File "game/classroom.rpy", line 52, in script call
-    call event_calls
+  File "game/locations.rpy", line 709, in script call
+    call world_map
   File "game/locations.rpy", line 132, in script call
     call world_map
-  File "game/locations.rpy", line 711, in script call
-    call world_map
-  File "game/locations.rpy", line 790, in script call
-    call world_map
-  File "game/locations.rpy", line 612, in script call
-    call world_map
-  File "game/locations.rpy", line 1055, in script call
-    call world_map
-  File "game/locations.rpy", line 612, in script call
-    call world_map
-  File "game/locations.rpy", line 612, in script call
-    call world_map
-  File "game/locations.rpy", line 542, in script call
-    call world_map
-  File "game/locations.rpy", line 612, in script call
-    call world_map
-  File "game/locations.rpy", line 612, in script call
-    call world_map
-  File "game/locations.rpy", line 790, in script call
-    call world_map
-  File "game/locations.rpy", line 1126, in script call
-    call world_map
-  File "game/locations.rpy", line 612, in script call
-    call world_map
-  File "game/locations.rpy", line 612, in script call
-    call world_map
-  File "game/locations.rpy", line 576, in script call
-    call quick_event
-  File "game/utilities.rpy", line 1167, in script
-    python:
-  File "game/utilities.rpy", line 1168, in <module>
-    for G in event_Girls:
-TypeError: 'NoneType' object is not iterable
+  File "game/locations.rpy", line 325, in script call
+    call set_the_scene
+  File "game/utilities.rpy", line 730, in script
+    return
+Exception: Could not find return label (u'game/utilities.rpy', 1653339557, 3).
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
   File "game/locations.rpy", line 132, in script call
     call world_map
-  File "game/locations.rpy", line 711, in script call
+  File "game/locations.rpy", line 610, in script call
     call world_map
-  File "game/locations.rpy", line 790, in script call
-    call world_map
-  File "game/locations.rpy", line 1055, in script call
+  File "game/locations.rpy", line 610, in script call
     call world_map
   File "game/locations.rpy", line 132, in script call
     call world_map
-  File "game/locations.rpy", line 674, in script call
-    call take_class
-  File "game/classroom.rpy", line 52, in script call
-    call event_calls
+  File "game/locations.rpy", line 709, in script call
+    call world_map
   File "game/locations.rpy", line 132, in script call
     call world_map
-  File "game/locations.rpy", line 711, in script call
-    call world_map
-  File "game/locations.rpy", line 790, in script call
-    call world_map
-  File "game/locations.rpy", line 612, in script call
-    call world_map
-  File "game/locations.rpy", line 1055, in script call
-    call world_map
-  File "game/locations.rpy", line 612, in script call
-    call world_map
-  File "game/locations.rpy", line 612, in script call
-    call world_map
-  File "game/locations.rpy", line 542, in script call
-    call world_map
-  File "game/locations.rpy", line 612, in script call
-    call world_map
-  File "game/locations.rpy", line 612, in script call
-    call world_map
-  File "game/locations.rpy", line 790, in script call
-    call world_map
-  File "game/locations.rpy", line 1126, in script call
-    call world_map
-  File "game/locations.rpy", line 612, in script call
-    call world_map
-  File "game/locations.rpy", line 612, in script call
-    call world_map
-  File "game/locations.rpy", line 576, in script call
-    call quick_event
-  File "game/utilities.rpy", line 1167, in script
-    python:
-  File "renpy/ast.py", line 928, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "renpy/python.py", line 2245, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "game/utilities.rpy", line 1168, in <module>
-    for G in event_Girls:
-TypeError: 'NoneType' object is not iterable
+  File "game/locations.rpy", line 325, in script call
+    call set_the_scene
+  File "game/utilities.rpy", line 730, in script
+    return
+  File "renpy/ast.py", line 1567, in execute
+    next_node(renpy.game.context().lookup_return(pop=True))
+  File "renpy/execution.py", line 710, in lookup_return
+    raise Exception("Could not find return label {!r}.".format(self.return_stack[-1]))
+Exception: Could not find return label (u'game/utilities.rpy', 1653339557, 3).
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like 0.997f2
-Tue May 24 00:04:36 2022
+Tue May 24 00:59:57 2022

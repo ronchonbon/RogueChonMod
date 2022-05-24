@@ -46,10 +46,13 @@ label training:
                     " Your team fight a simulation of Magneto."])
         "[line]"
 
-    python:
-        for Girl in active_Girls:
-            if Girl.location == bg_current:
-                renpy.call("Girl_TightsRipped", Girl)
+    $ temp_Girls = active_Girls[:]
+
+    while temp_Girls:
+        if temp_Girls[0].location == bg_current:
+            call Girl_TightsRipped(temp_Girls[0])
+
+        $ temp_Girls.remove(temp_Girls[0])
 
     call wait
     call girls_location

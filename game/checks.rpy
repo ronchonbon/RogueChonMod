@@ -343,65 +343,70 @@ label check_addiction:
 
                 return
 
-    python:
-        for G in temp_Girls:
-            if "locked" in Player.traits and G.location != bg_current:
-                pass
-            elif "asked_for_fix" in Player.daily_history and "asked_to_meet" not in G.daily_history:
-                pass
-            elif G.event_happened[3]:
-                pass
-            elif "_angry" not in G.recent_history and "addiction" not in G.daily_history and G.remaining_actions >= 1:
-                if (G.addiction >= 60 or (G.addiction >= 40 and G == JubesX)) and G.resistance:
-                    if bg_current == G.home or bg_current == "bg_player":
-                        renpy.call("addiction_fix", G)
+    while temp_Girls:
+        if "locked" in Player.traits and temp_Girls[0].location != bg_current:
+            pass
+        elif "asked_for_fix" in Player.daily_history and "asked_to_meet" not in temp_Girls[0].daily_history:
+            pass
+        elif temp_Girls[0].event_happened[3]:
+            pass
+        elif "_angry" not in temp_Girls[0].recent_history and "addiction" not in temp_Girls[0].daily_history and temp_Girls[0].remaining_actions >= 1:
+            if (temp_Girls[0].addiction >= 60 or (temp_Girls[0].addiction >= 40 and temp_Girls[0] == JubesX)) and temp_Girls[0].resistance:
+                if bg_current == temp_Girls[0].home or bg_current == "bg_player":
+                    call addiction_fix(temp_Girls[0])
+                else:
+                    if "asked_to_meet" in temp_Girls[0].recent_history:
+                        pass
+                    elif "asked_to_meet" in temp_Girls[0].daily_history and temp_Girls[0].addiction >= 80:
+                        "[temp_Girls[0].name] texts you. . ."
+                        temp_Girls[0].voice "I know I asked to meet you in your room earlier, but I'm serious, this is important."
+
+                        $ Player.add_word(1,"asked_for_fix",0,0,0)
+
+                        $ temp_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
+
+                        call return_to_room
+
+                        return
                     else:
-                        if "asked_to_meet" in G.recent_history:
-                            pass
-                        elif "asked_to_meet" in G.daily_history and G.addiction >= 80:
-                            renpy.say(None, "[G.name] texts you. . .")
-                            renpy.say(G.voice, "I know I asked to meet you in your room earlier, but I'm serious, this is important.")
+                        "[temp_Girls[0].name] texts and asks if you could meet her in your room later."
 
-                            Player.add_word(1,"asked_for_fix",0,0,0)
+                        $ temp_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
 
-                            G.add_word(1,"asked_to_meet","asked_to_meet",0,0)
+                        call return_to_room
 
-                            renpy.call("return_to_room")
-                            renpy.return_statement()
-                        else:
-                            "[G.name] texts and asks if you could meet her in your room later."
+                        return
+            elif temp_Girls[0].resistance:
+                pass
+            elif temp_Girls[0] == JubesX and temp_Girls[0].addiction < 50:
+                pass
+            elif (temp_Girls[0].addiction >= 35 and not temp_Girls[0].event_happened[1]) or (temp_Girls[0].addiction >= 60 and temp_Girls[0].event_happened[1] <= 2) or temp_Girls[0].addiction >= 90:
+                if bg_current == temp_Girls[0].home or bg_current == "bg_player":
+                    call addiction_event(temp_Girls[0])
+                else:
+                    if "asked_to_meet" in temp_Girls[0].recent_history:
+                        pass
+                    elif "asked_to_meet" in temp_Girls[0].daily_history and temp_Girls[0].addiction >= 80:
+                        "[temp_Girls[0].name] texts you. . ."
+                        temp_Girls[0].voice "I know I asked to meet you in your room earlier, but I'm serious, this is important."
 
-                            G.add_word(1,"asked_to_meet","asked_to_meet",0,0)
+                        $ Player.add_word(1,"asked_for_fix",0,0,0)
 
-                            renpy.call("return_to_room")
-                            renpy.return_statement()
-                elif G.resistance:
-                    pass
-                elif G == JubesX and G.addiction < 50:
-                    pass
-                elif (G.addiction >= 35 and not G.event_happened[1]) or (G.addiction >= 60 and G.event_happened[1] <= 2) or G.addiction >= 90:
-                    if bg_current == G.home or bg_current == "bg_player":
-                        renpy.call("addiction_event", G)
+                        $ temp_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
+
+                        call return_to_room
+
+                        return
                     else:
-                        if "asked_to_meet" in G.recent_history:
-                            pass
-                        elif "asked_to_meet" in G.daily_history and G.addiction >= 80:
-                            renpy.say(None, "[G.name] texts you. . .")
-                            renpy.say(G.voice, "I know I asked to meet you in your room earlier, but I'm serious, this is important.")
+                        "[temp_Girls[0].name] texts and asks if you could meet her in your room later."
 
-                            Player.add_word(1,"asked_for_fix",0,0,0)
+                        $ temp_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
 
-                            G.add_word(1,"asked_to_meet","asked_to_meet",0,0)
+                        call return_to_room
 
-                            renpy.call("return_to_room")
-                            renpy.return_statement()
-                        else:
-                            renpy.say(None, "[G.name] texts and asks if you could meet her in your room later.")
+                        return
 
-                            G.add_word(1,"asked_to_meet","asked_to_meet",0,0)
-
-                            renpy.call("return_to_room")
-                            renpy.return_statement()
+        $ temp_Girls.remove(temp_Girl[0])
 
     return
 
