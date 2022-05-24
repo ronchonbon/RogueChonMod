@@ -2084,8 +2084,8 @@ label Jubes_Doggy_Launch(line=primary_action):
         return
     $ action_speed = 0
     call Jubes_Hide (1)
-    # show Jubes_Doggy_Animation zorder 150 at sprite_location(stage_center+150)
-    # with dissolve
+    show Jubes_Doggy_Animation zorder 150 at sprite_location(stage_center+150)
+    with dissolve
     return
 
 label Jubes_Doggy_Reset:
@@ -5049,8 +5049,8 @@ label Jubes_BJ_Launch(line=primary_action):
 
     show Jubes_Sprite zorder JubesX.sprite_layer:
         alpha 0
-    # show Jubes_BJ_Animation zorder 150:
-    #     pos (645,510)
+    show Jubes_BJ_Animation zorder 150:
+        pos (645,510)
     return
 
 label Jubes_BJ_Reset:
@@ -5214,9 +5214,9 @@ label Jubes_HJ_Launch(line=primary_action):
         $ action_speed = 1
     pause 0.5
     $ JubesX.arm_pose = 1
-    # show Jubes_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
-    #
-    #     offset (250,250)
+    show Jubes_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
+
+        offset (250,250)
     return
 
 label Jubes_HJ_Reset:
@@ -6351,8 +6351,8 @@ label Jubes_TJ_Launch(line=primary_action):
     $ action_speed = 0
     if line != "cum":
         $ primary_action = "titjob"
-    # show Jubes_TJ_Animation zorder 150:
-    #     pos (700,520)
+    show Jubes_TJ_Animation zorder 150:
+        pos (700,520)
     $ Player.sprite = 1
     hide black_screen onlayer black with dissolve
     return

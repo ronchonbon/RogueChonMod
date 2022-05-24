@@ -409,9 +409,9 @@ label after_action:
         $ Player.sprite = 0
         $ Player.cock_position = "out"
 
-        call expression focused_Girl.tag + "_Sex_Reset"
-    elif primary_action in [fondle_actions, dildo_actions]:
-        call expression focused_Girl.tag + "_Pos_Reset"
+        # call expression focused_Girl.tag + "_Sex_Reset"
+    # elif primary_action in [fondle_actions, dildo_actions]:
+        # call expression focused_Girl.tag + "_Pos_Reset"
 
     $ focused_Girl.change_face("_sexy")
     $ focused_Girl.remaining_actions -= 1
@@ -479,16 +479,16 @@ label after_action:
 
     if action_context == "shift":
         call switching_action_lines(focused_Girl, primary_action)
-    elif primary_action == "kiss":
-        call expression focused_Girl.tag + "_Pos_Reset"
-    elif primary_action == "handjob":
-        call expression focused_Girl.tag + "_HJ_Reset"
-    elif primary_action == "footjob":
-        call expression focused_Girl.tag + "_Doggy_Reset"
-    elif primary_action == "titjob":
-        call expression focused_Girl.tag + "_TJ_Reset"
-    elif primary_action == "blowjob":
-        call expression focused_Girl.tag + "_BJ_Reset"
+    # elif primary_action == "kiss":
+    #     call expression focused_Girl.tag + "_Pos_Reset"
+    # elif primary_action == "handjob":
+    #     call expression focused_Girl.tag + "_HJ_Reset"
+    # elif primary_action == "footjob":
+    #     call expression focused_Girl.tag + "_Doggy_Reset"
+    # elif primary_action == "titjob":
+    #     call expression focused_Girl.tag + "_TJ_Reset"
+    # elif primary_action == "blowjob":
+    #     call expression focused_Girl.tag + "_BJ_Reset"
 
     call checkout
 
@@ -905,10 +905,10 @@ label end_of_action_round(Girl, action):
             call Player_Cumming(Girl)
 
             if "_angry" in Girl.recent_history:
-                if primary_action in sex_actions:
-                    call expression Girl.tag + "_Sex_Reset"
-                else:
-                    call expression Girl.tag + "_Pos_Reset"
+                # if primary_action in sex_actions:
+                #     call expression Girl.tag + "_Sex_Reset"
+                # else:
+                #     call expression Girl.tag + "_Pos_Reset"
 
                 return True
 

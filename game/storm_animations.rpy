@@ -2817,9 +2817,9 @@ label Storm_HJ_Launch(line=primary_action):
     else:
         $ action_speed = 1
     pause 0.5
-    # show Storm_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
-    #
-    #     offset (250,250)
+    show Storm_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
+
+        offset (250,250)
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_right):
         alpha 1
         ease 0.5 zoom 1.7 offset (-150,200)
@@ -3778,8 +3778,8 @@ label Storm_BJ_Launch(line=primary_action):
     if line != "cum":
         $ primary_action = "blowjob"
 
-    # show Storm_BJ_Animation zorder 150:
-    #     pos (630,650)
+    show Storm_BJ_Animation zorder 150:
+        pos (630,650)
     if taboo and line == "L":
         if len(Present) >= 2:
             if Present[0] != StormX:
@@ -5051,8 +5051,8 @@ label Storm_TJ_Launch(line=primary_action):
     $ action_speed = 0
     if line != "cum":
         $ primary_action = "titjob"
-    # show Storm_TJ_Animation zorder 150:
-    #     pos (1000,1050)
+    show Storm_TJ_Animation zorder 150:
+        pos (1000,1050)
     $ Player.sprite = 1
     hide black_screen onlayer black with dissolve
     return

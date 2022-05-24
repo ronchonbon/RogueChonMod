@@ -145,8 +145,8 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
                 menu:
                     extend ""
                     "Ok, if you'll swallow it.":
-                        if not renpy.showing(Girl.tag+"_BJ_Animation"):
-                            call expression Girl.tag+"_BJ_Launch" pass ("cum")
+                        # if not renpy.showing(Girl.tag+"_BJ_Animation"):
+                        #     call expression Girl.tag+"_BJ_Launch" pass ("cum")
                         $ Girl.change_face("_sucking")
                         $ action_speed = 2
                         "She nods and puts the tip into her mouth. As you release she gulps it down hungrily."
@@ -182,9 +182,9 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
                             $ Girl.change_stat("obedience", 70, -2)
                             $ Girl.change_stat("inhibition", 30, 2)
                             $ Girl.change_stat("inhibition", 70, 3)
-                            if not renpy.showing(Girl.tag+"_BJ_Animation"):
-                                call expression Girl.tag+"_BJ_Launch" pass ("cum")
-                                $ action_speed = 4
+                            # if not renpy.showing(Girl.tag+"_BJ_Animation"):
+                            #     call expression Girl.tag+"_BJ_Launch" pass ("cum")
+                            #     $ action_speed = 4
                             "She dives down on you and you can't resist filling her throat."
                             $ action_speed = 0
                             if Girl == RogueX:
@@ -281,9 +281,9 @@ label Girl_Warn_Her:
     if Girl.obedience >= 500:
         $ Girl.change_stat("obedience", 80, 5)
     if ("hungry" in Girl.traits and D20 >= 5):
-        if renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
-            call expression Girl.tag+"_HJ_Launch" pass ("cum")
-            "She grins and pulls out with a pop, and begins to stroke you off."
+        # if renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
+        #     call expression Girl.tag+"_HJ_Launch" pass ("cum")
+        #     "She grins and pulls out with a pop, and begins to stroke you off."
         $ action_speed = 2
         $ Girl.change_face("_sucking")
         ". . ."
@@ -356,9 +356,9 @@ label Girl_Warn_Her:
             $ Girl.spunk.append("mouth")
             "She makes a little humming sound, but keeps sucking."
         else:
-            if renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
-                call expression Girl.tag+"_BJ_Launch" pass ("cum")
-                $ action_speed = 2
+            # if renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
+            #     call expression Girl.tag+"_BJ_Launch" pass ("cum")
+            #     $ action_speed = 2
             $ Girl.change_face("_sucking")
             $ Girl.spunk.append("mouth")
             "She smiles and then puts your tip in her mouth."
@@ -373,9 +373,9 @@ label Girl_Warn_Her:
 
     elif Girl.event_counter["swallowed"] and D20 >= 10:
 
-        if renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
-            call expression Girl.tag+"_HJ_Launch" pass ("cum")
-            "She grins and pulls out with a pop, and begins to stroke you off."
+        # if renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
+        #     call expression Girl.tag+"_HJ_Launch" pass ("cum")
+        #     "She grins and pulls out with a pop, and begins to stroke you off."
         $ action_speed = 2
         if renpy.showing(Girl.tag+"_BJ_Animation"):
 
@@ -426,8 +426,8 @@ label Girl_Warn_Her:
     if renpy.showing(Girl.tag+"_BJ_Animation"):
         jump Girl_In_Mouth
     elif primary_action == "sex" or primary_action == "anal":
-        call expression Girl.tag+"_Doggy_Reset"
-        call expression Girl.tag+"_Sex_Reset"
+        # call expression Girl.tag+"_Doggy_Reset"
+        # call expression Girl.tag+"_Sex_Reset"
         "She pulls off of you and grabs your cock in her hand."
         jump Girl_Handy_Finish
     elif renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
@@ -450,8 +450,8 @@ label Girl_In_Mouth:
     $ Player.cock_position = "out"
     if action_context == "auto" or action_context == "warn":
         $ action_context = None
-        if not renpy.showing(Girl.tag+"_BJ_Animation"):
-            call expression Girl.tag+"_BJ_Launch" pass ("cum")
+        # if not renpy.showing(Girl.tag+"_BJ_Animation"):
+        #     call expression Girl.tag+"_BJ_Launch" pass ("cum")
         $ action_speed = 2
         if action_context == "warn":
             "She doesn't seem sure what to do about that, as you cum in her mouth."
@@ -708,10 +708,10 @@ label Girl_In_Mouth:
 
     $ action_context = None
     "You ask if you can cum in her mouth."
-    if renpy.showing(Girl.tag+"_PJ_Animation"):
-        call expression Girl.tag + "_Kissing_Launch" pass (primary_action, 0)
-    elif renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
-        call expression Girl.tag+"_HJ_Launch" pass ("cum")
+    # if renpy.showing(Girl.tag+"_PJ_Animation"):
+    #     call expression Girl.tag + "_Kissing_Launch" pass (primary_action, 0)
+    # elif renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
+    #     call expression Girl.tag+"_HJ_Launch" pass ("cum")
 
     if "full" in Girl.recent_history:
         pass
@@ -719,13 +719,13 @@ label Girl_In_Mouth:
     elif Girl.event_counter["swallowed"] >= 5 or "hungry" in Girl.traits:
 
         $ Girl.change_face("_sucking")
-        if not renpy.showing(Girl.tag+"_BJ_Animation"):
-            call expression Girl.tag+"_BJ_Launch" pass ("cum")
-            $ action_speed = 2
-            "She nods and bends down to put the tip between her lips."
-        else:
-            $ action_speed = 2
-            "She nods and hums a \"yes\" sound."
+        # if not renpy.showing(Girl.tag+"_BJ_Animation"):
+        #     call expression Girl.tag+"_BJ_Launch" pass ("cum")
+        #     $ action_speed = 2
+        #     "She nods and bends down to put the tip between her lips."
+        # else:
+        #     $ action_speed = 2
+        #     "She nods and hums a \"yes\" sound."
         $ Player.spunk = 1
         $ Girl.spunk.append("mouth")
         $ Girl.spunk.append("chin")
@@ -741,13 +741,13 @@ label Girl_In_Mouth:
 
         $ Girl.brows = "_confused"
         $ Girl.eyes = "_manic"
-        if not renpy.showing(Girl.tag+"_BJ_Animation"):
-            call expression Girl.tag+"_BJ_Launch" pass ("cum")
-            $ action_speed = 2
-            "She looks a bit quizzical, but gently puts the tip to her lips, just as you blow."
-        else:
-            $ action_speed = 2
-            "She nods and hums a \"yes\" sound."
+        # if not renpy.showing(Girl.tag+"_BJ_Animation"):
+        #     call expression Girl.tag+"_BJ_Launch" pass ("cum")
+        #     $ action_speed = 2
+        #     "She looks a bit quizzical, but gently puts the tip to her lips, just as you blow."
+        # else:
+        #     $ action_speed = 2
+        #     "She nods and hums a \"yes\" sound."
         $ Girl.mouth = "_sucking"
         $ Player.spunk = 1
         $ Girl.spunk.append("mouth")
@@ -769,16 +769,16 @@ label Girl_In_Mouth:
                 $ Girl.change_face("_kiss")
                 $ action_speed = 5
                 "She looks a bit confused, but gently puts the tip to her lips."
-            elif not renpy.showing(Girl.tag+"_BJ_Animation"):
-                call expression Girl.tag+"_BJ_Launch" pass ("cum")
-                $ action_speed = 2
-                "She looks a bit quizzical, but gently puts the tip to her lips, just as you blow."
-            else:
-                $ action_speed = 2
-                if Girl == KittyX:
-                    ch_k "[[mumbled] Huh?"
-                else:
-                    "She tilts her head and hums a \"huh?\" sound."
+            # elif not renpy.showing(Girl.tag+"_BJ_Animation"):
+            #     call expression Girl.tag+"_BJ_Launch" pass ("cum")
+            #     $ action_speed = 2
+            #     "She looks a bit quizzical, but gently puts the tip to her lips, just as you blow."
+            # else:
+            #     $ action_speed = 2
+            #     if Girl == KittyX:
+            #         ch_k "[[mumbled] Huh?"
+            #     else:
+            #         "She tilts her head and hums a \"huh?\" sound."
             $ Girl.mouth = "_sucking"
             $ Girl.spunk.append("chin")
             $ Girl.spunk.append("mouth")
@@ -932,8 +932,8 @@ label Girl_In_Mouth:
 
                 $ Girl.change_face("_angry", 1)
                 "She scowls at you, drops you cock and pulls back."
-                call expression Girl.tag+"_HJ_Launch" pass ("cum")
-                call expression Girl.tag+"_HJ_Reset"
+                # call expression Girl.tag+"_HJ_Launch" pass ("cum")
+                # call expression Girl.tag+"_HJ_Reset"
                 $ Girl.change_stat("love", 50, -3, 1)
                 $ Girl.change_stat("love", 80, -4, 1)
                 if Girl == RogueX:
@@ -959,8 +959,8 @@ label Girl_In_Mouth:
             $ Girl.change_stat("obedience", 50, 10,Alt=[[JeanX],900,10])
             $ Girl.change_stat("obedience", 70, 5)
 
-    if not renpy.showing(Girl.tag+"_BJ_Animation"):
-        call expression Girl.tag+"_BJ_Launch" pass ("cum")
+    # if not renpy.showing(Girl.tag+"_BJ_Animation"):
+    #     call expression Girl.tag+"_BJ_Launch" pass ("cum")
     $ action_speed = 2
     if approval_check(Girl, 1200):
         "She gently puts the tip to her lips, just as you blow."
@@ -1204,7 +1204,7 @@ label Girl_Facial:
     if renpy.showing(Girl.tag+"_BJ_Animation"):
         if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.event_counter["swallowed"]:
             jump Manic_Suck
-        call expression Girl.tag+"_HJ_Launch" pass ("cum")
+        # call expression Girl.tag+"_HJ_Launch" pass ("cum")
         $ action_speed = 2
         if "hair" in Girl.spunk:
             pass
@@ -1241,7 +1241,7 @@ label Girl_Facial:
             "As you're about to finish, you aim squarely at her face, and spray all over it."
         $ action_speed = 0
     elif renpy.showing(Girl.tag+"_PJ_Animation"):
-        call expression Girl.tag + "_Breasts_Launch" pass (primary_action, 0)
+        # call expression Girl.tag + "_Breasts_Launch" pass (primary_action, 0)
         if "hair" in Girl.spunk:
             pass
         elif "facial" in Girl.spunk:
@@ -1251,7 +1251,7 @@ label Girl_Facial:
         "As you're about to finish, you aim squarely at her face, and spray all over it."
         $ action_speed = 0
     else:
-        call expression Girl.tag+"_HJ_Launch" pass ("cum")
+        # call expression Girl.tag+"_HJ_Launch" pass ("cum")
         $ action_speed = 2
         if "hair" in Girl.spunk:
             pass
@@ -1306,10 +1306,10 @@ label Girl_TitSpunk:
             jump Manic_Suck
 
 
-    if renpy.showing(Girl.tag+"_PJ_Animation"):
-        call expression Girl.tag + "_Breasts_Launch" pass (primary_action, 0)
-    elif not renpy.showing(Girl.tag+"_TJ_Animation") and not renpy.showing(Girl.tag+"_HJ_Animation") and not renpy.showing(Girl.tag+"_BJ_Animation"):
-        call expression Girl.tag+"_HJ_Launch" pass ("cum")
+    # if renpy.showing(Girl.tag+"_PJ_Animation"):
+    #     call expression Girl.tag + "_Breasts_Launch" pass (primary_action, 0)
+    # elif not renpy.showing(Girl.tag+"_TJ_Animation") and not renpy.showing(Girl.tag+"_HJ_Animation") and not renpy.showing(Girl.tag+"_BJ_Animation"):
+    #     call expression Girl.tag+"_HJ_Launch" pass ("cum")
     $ Girl.spunk.append("tits")
     $ action_speed = 0
     "As you're about to finish, you speed up and spray all over her chest."
@@ -1352,22 +1352,22 @@ label Girl_TitSpunk:
 
 
 label Girl_Cum_Outside:
-    if primary_action != "footjob":
-        if renpy.showing(Girl.tag+"_PJ_Animation"):
-            call expression Girl.tag + "_Middle_Launch" pass (primary_action, 0)
+    # if primary_action != "footjob":
+        # if renpy.showing(Girl.tag+"_PJ_Animation"):
+        #     call expression Girl.tag + "_Middle_Launch" pass (primary_action, 0)
+        #
+        # elif Girl.pose != "doggy" and (Girl == JeanX or Girl == StormX):
+        #     call expression Girl.tag + "_Middle_Launch" pass (primary_action, 0)
+        # else:
 
-        elif Girl.pose != "doggy" and (Girl == JeanX or Girl == StormX):
-            call expression Girl.tag + "_Middle_Launch" pass (primary_action, 0)
-        else:
 
 
-
-            call expression Girl.tag+"_sex_launch" pass ("hotdog")
+            # call expression Girl.tag+"_sex_launch" pass ("hotdog")
     $ action_speed = 0
     if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience))  and Girl.event_counter["swallowed"]:
         $ Girl.eyes = "_manic"
         $ Girl.blushing = "_blush1"
-        call expression Girl.tag+"_BJ_Launch" pass ("cum")
+        # call expression Girl.tag+"_BJ_Launch" pass ("cum")
         if primary_action == "sex":
             "You pull out of her pussy with a pop, and her eyes widen in surprise. She leaps at your cock and sucks it deep, draining your fluids hungrily."
         elif primary_action == "anal":
@@ -1545,23 +1545,23 @@ label Girl_Cum_Outside:
 
 
 label Girl_Handy_Finish:
-    if renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
-        call expression Girl.tag+"_Doggy_Reset"
-        call expression Girl.tag+"_Sex_Reset"
-        if primary_action == "hotdog":
-            "She bends down and begins to stroke you off."
-        else:
-            "She grins and pulls out with a pop, and begins to stroke you off."
-        $ action_speed = 2
-    elif renpy.showing(Girl.tag+"_BJ_Animation"):
-        call expression Girl.tag+"_HJ_Launch" pass ("cum")
-        $ action_speed = 2
-        "She slides her lips off your cock, and begins to stroke you off."
-    elif renpy.showing(Girl.tag+"_PJ_Animation"):
-        call expression Girl.tag + "_Breasts_Launch" pass (primary_action, 0)
-    else:
-        call expression Girl.tag+"_HJ_Launch" pass ("cum")
-        $ action_speed = 2
+    # if renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
+    #     call expression Girl.tag+"_Doggy_Reset"
+    #     call expression Girl.tag+"_Sex_Reset"
+    #     if primary_action == "hotdog":
+    #         "She bends down and begins to stroke you off."
+    #     else:
+    #         "She grins and pulls out with a pop, and begins to stroke you off."
+    #     $ action_speed = 2
+    # elif renpy.showing(Girl.tag+"_BJ_Animation"):
+    #     call expression Girl.tag+"_HJ_Launch" pass ("cum")
+    #     $ action_speed = 2
+    #     "She slides her lips off your cock, and begins to stroke you off."
+    # elif renpy.showing(Girl.tag+"_PJ_Animation"):
+    #     call expression Girl.tag + "_Breasts_Launch" pass (primary_action, 0)
+    # else:
+    #     call expression Girl.tag+"_HJ_Launch" pass ("cum")
+    #     $ action_speed = 2
     $ Girl.spunk.append("handjob")
     "She grins and speeds up her efforts, placing her left hand over your tip. You burst all over her hands."
     $ action_speed = 0
@@ -1708,7 +1708,7 @@ label Girl_CleanCock(Girl=0):
             "She wipes your cock clean."
     elif Girl.action_counter["blowjob"] > 3 or Girl.event_counter["swallowed"]:
         if approval_check(Girl, 1200, TabM=1) or Girl.addiction >= 60:
-            call expression Girl.tag+"_BJ_Launch" pass ("cum")
+            # call expression Girl.tag+"_BJ_Launch" pass ("cum")
             $ action_speed = 1
             $ Girl.change_face("_sucking", 1)
             if approval_check(Girl, 1500, TabM=1):
@@ -1728,8 +1728,8 @@ label Girl_CleanCock(Girl=0):
                 "She licks you cock clean."
             $ Girl.change_face("_sexy")
         else:
-            if not renpy.showing(Girl.tag+"_HJ_Animation"):
-                call expression Girl.tag+"_HJ_Launch" pass ("cum")
+            # if not renpy.showing(Girl.tag+"_HJ_Animation"):
+            #     call expression Girl.tag+"_HJ_Launch" pass ("cum")
             if Partner and approval_check(Partner, 1000, TabM=1):
                 "Both girls reach down and wipe your cock clean."
             else:
@@ -1737,8 +1737,8 @@ label Girl_CleanCock(Girl=0):
     else:
         if renpy.showing(Girl.tag+"_PJ_Animation"):
             pass
-        elif not renpy.showing(Girl.tag+"_HJ_Animation"):
-            call expression Girl.tag+"_HJ_Launch" pass ("cum")
+        # elif not renpy.showing(Girl.tag+"_HJ_Animation"):
+        #     call expression Girl.tag+"_HJ_Launch" pass ("cum")
         if Partner and approval_check(Partner, 1000, TabM=1):
             "Both girls reach down and wipe your cock clean."
         else:
@@ -1784,8 +1784,8 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
     call Punch
 
     $ action_speed = 1
-    $ line = renpy.random.choice([Girl.name + " is suddenly rocked with spasms, holding back a muffled scream.", 
-                Girl.name + " grabs on tightly as her body shakes with pleasure.", 
+    $ line = renpy.random.choice([Girl.name + " is suddenly rocked with spasms, holding back a muffled scream.",
+                Girl.name + " grabs on tightly as her body shakes with pleasure.",
                 Girl.name + " stiffens and lets out a low moan.",
                 Girl.name + "'s body quivers and suddenly goes still."])
     "[line]"
@@ -1808,38 +1808,38 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
     $ Girl.brows = "_sad"
     $ Girl.mouth = "_tongue"
     if Girl == RogueX:
-        $ line = renpy.random.choice(["Wow. . .  just, wow.", 
-                "I don't know what came over me. . .", 
+        $ line = renpy.random.choice(["Wow. . .  just, wow.",
+                "I don't know what came over me. . .",
                 "Hmmmm. . . .",
                 "That, felt good. Thatfeltrealgood."])
     elif Girl == KittyX:
-        $ line = renpy.random.choice(["Wow. . .  just, wow.", 
-                "That was amazing!", 
+        $ line = renpy.random.choice(["Wow. . .  just, wow.",
+                "That was amazing!",
                 "Hmmmm. . . .",
                 "I loved that!"])
     elif Girl == EmmaX:
-        $ line = renpy.random.choice(["Oooooh. . . lovely.", 
-                "I really enjoyed that one. . .", 
+        $ line = renpy.random.choice(["Oooooh. . . lovely.",
+                "I really enjoyed that one. . .",
                 "Hmmmm. . . .",
                 "That was. . . greaaaaat. . ."])
     elif Girl == LauraX:
-        $ line = renpy.random.choice(["Oooooh. . .", 
-                "That was a good one. . .", 
+        $ line = renpy.random.choice(["Oooooh. . .",
+                "That was a good one. . .",
                 "Hmmmm. . . .",
                 "That was. . ."])
     elif Girl == JeanX:
-        $ line = renpy.random.choice(["Oooooh. . .", 
-                "Ah, I needed that. . .", 
+        $ line = renpy.random.choice(["Oooooh. . .",
+                "Ah, I needed that. . .",
                 "Hmmmm. . . .",
                 "Woo, nice. . ."])
     elif Girl == StormX:
-        $ line = renpy.random.choice(["Oooooh. . .", 
-                "Nnnnmmmmaaaaahhh. . .", 
+        $ line = renpy.random.choice(["Oooooh. . .",
+                "Nnnnmmmmaaaaahhh. . .",
                 "Hmmmm. . . .",
                 "That was. . . amaaazing. . ."])
     elif Girl == JubesX:
-        $ line = renpy.random.choice(["Oooooh. . .", 
-                "Wooooww. . .", 
+        $ line = renpy.random.choice(["Oooooh. . .",
+                "Wooooww. . .",
                 "Hmmmm. . . .",
                 "Wonderful. . ."])
     Girl.voice "[line]"

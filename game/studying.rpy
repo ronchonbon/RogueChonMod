@@ -17,7 +17,18 @@ label study:
 
                 $ round -= 30 if round >= 30 else round
             "Never mind.":
-                pass
+                return
+
+        if time_index >= 3:
+            $ round = 10
+
+            call tenth_round
+
+            return
+
+        call wait
+        call girls_location
+
         return
 
     $ renpy.random.shuffle(Party)

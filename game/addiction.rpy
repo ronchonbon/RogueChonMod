@@ -34,7 +34,7 @@ label addiction_event(Girl):
     $ Girl.change_outfit(outfit_changed=1)
 
     call set_the_scene
-    call clear_the_room (Girl)
+    call clear_the_room(Girl)
 
     if Girl.event_happened[1] == 1:
         if Girl == RogueX:
@@ -1789,7 +1789,7 @@ label addiction_fix(Girl):
         return
 
     call set_the_scene
-    call clear_the_room (Girl)
+    call clear_the_room(Girl)
 
     $ Girl.change_face("_manic")
 

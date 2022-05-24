@@ -1,18 +1,17 @@
-
-
-
 label meet_Kitty:
     $ bg_current = "bg_campus"
-    $ KittyX.today_outfit = "casual1"
+
     $ KittyX.outfit = "casual1"
-    $ KittyX.change_outfit("casual1")
-    call clear_the_room ("all", 0, 1)
+    $ KittyX.today_outfit = KittyX.outfit
+    $ KittyX.change_outfit(KittyX.outfit)
+
+    call clear_the_room("all", 0, 1)
+
     $ KittyX.location = "bg_kitty"
-    $ KittyX.love = 400
-    $ KittyX.obedience = 100
-    $ KittyX.inhibition = 0
-    call shift_focus (KittyX)
-    call set_the_scene (0)
+
+    call shift_focus(KittyX)
+    call set_the_scene(0)
+
     $ KittyX.sprite_location = stage_center
     $ KittyX.player_petname = Player.name[:1]
 
@@ -20,15 +19,21 @@ label meet_Kitty:
     "You try to move aside, but aren't fast enough to get out of her way,"
     "She crashes into you at a full jog, and you both fall to the ground."
     "You scramble to your feet and offer the girl a hand up."
+
     show Kitty_sprite at sprite_location(KittyX.sprite_location) with vpunch
+
     $ KittyX.location = "bg_campus"
     $ KittyX.change_stat("love", 90, -25)
     $ KittyX.change_face("_surprised")
     $ KittyX.arm_pose = 1
+
     ch_u "Hey!"
+
     $ KittyX.brows = "_angry"
+
     ch_u "What the hell was that?"
-    $ counter = 1
+
+    $ flag = True
 
     menu:
         extend ""
@@ -36,31 +41,43 @@ label meet_Kitty:
             $ KittyX.change_face("_confused", 2)
             $ KittyX.change_stat("love", 90, 5)
             $ KittyX.change_stat("obedience", 80, 20)
+
             ch_u "Wha! Well, yeah. . ."
+
             $ KittyX.blushing = "_blush1"
-            $ counter = 0
+
+            $ flag = False
         "Sorry about that.":
             $ KittyX.change_face("_bemused", 1)
             $ KittyX.eyes = "_side"
             $ KittyX.change_stat("love", 90, 25)
+
             ch_u "Well, I guess it[KittyX.like]wasn't entirely your fault. . ."
         "A meet-cute?":
             $ KittyX.change_face("_surprised", 2)
             $ KittyX.change_stat("love", 90, 15)
             $ KittyX.change_stat("inhibition", 70, 10)
+
             ch_u " ! "
+
             $ KittyX.change_face("_bemused", 1)
+
             ch_u "Hmm. . . maybe. . ."
 
     ch_p "My name's [Player.name], by the way."
-    if counter:
+
+    if flag:
         $ KittyX.change_face("_smile", 1)
+
         ch_k "Mine's Kitty! Kitty Pryde. Nice to meet you!"
     else:
         $ KittyX.change_face("_sadside", 1)
+
         ch_k "Um, mine's Kitty."
+
     $ KittyX.change_face("_normal", 1)
     $ KittyX.mouth = "_sad"
+
     ch_k "I just[KittyX.like]didn't expect to bounce off you like that. Normally I can phase through things."
 
     menu:
@@ -68,23 +85,29 @@ label meet_Kitty:
         "Losing your touch?":
             $ KittyX.change_face("_confused", 0)
             $ KittyX.change_stat("obedience", 80, 5)
+
             ch_k "I don't {i}think{/i} that's it. . ."
             ch_p "Just kidding. . ."
+
             $ KittyX.change_stat("love", 90, 5)
         "Was I too distracting?":
             $ KittyX.change_face("_angry", 1, Brows = "_normal")
             $ KittyX.change_stat("love", 90, -2)
             $ KittyX.change_stat("obedience", 80, 8)
             $ KittyX.change_stat("inhibition", 70, 4)
+
             ch_k "Like, no."
             ch_p "Heh, I guess not."
         "It must be my powers.":
             $ KittyX.change_face("_confused", 0)
             $ KittyX.change_stat("love", 90, 5)
+
             ch_k "Oh?"
 
     ch_p "I have the ability to negate mutant powers, so you can't phase through me."
+
     $ KittyX.change_face("_perplexed", 0)
+
     ch_k "Oh! Wow, that's an interesting power. So if you grab me, I can't get away?"
 
     menu:
@@ -93,29 +116,40 @@ label meet_Kitty:
             $ KittyX.change_face("_perplexed", 0)
             $ KittyX.change_stat("love", 90, 5)
             $ KittyX.change_stat("inhibition", 70, 5)
+
             ch_k "I'm definitely curious."
         "I guess so.":
             $ KittyX.change_face("_sadside", 0, Mouth = "_lipbite")
             $ KittyX.change_stat("obedience", 80, 3)
             $ KittyX.change_stat("inhibition", 70, 7)
+
             ch_k "I'd like to give it a try."
         "Does that turn you on?":
             $ KittyX.change_face("_surprised", 2)
             $ KittyX.change_stat("obedience", 80, 5)
+
             ch_k "What?! No! . ."
+
             $ KittyX.change_face("_bemused", 1)
             $ KittyX.change_stat("inhibition", 70, 5)
             $ KittyX.eyes = "_side"
+
             ch_k ". . . no."
+
             $ KittyX.eyes = "_sexy"
+
             ch_k "But it is[KittyX.like]worth testing."
 
     ch_p "Ok, let's give it a shot."
     "You reach out and grab her wrist."
+
     $ KittyX.change_face("_angry", 1, Eyes = "_down")
     $ KittyX.addiction_rate += 2
+
     "She struggles for a few moments to shake you free, but you hold firm."
+
     $ counter = 0
+
     while counter < 3:
         menu:
             extend ""
@@ -127,69 +161,99 @@ label meet_Kitty:
                     $ KittyX.change_stat("love", 90, 10)
                 else:
                     $ KittyX.change_stat("love", 90, 5)
+
                 "You release her arm and step back."
+
                 $ counter = 4
             "Hold on.":
                 "You continue to hold onto her arm and she fidgets uncomfortably."
+
                 if not counter:
                     $ KittyX.eyes = "_sexy"
+
                     ch_k "Are you[KittyX.like]going to let go of my arm any time soon?"
                 elif counter == 2:
                     ch_k "Ok, that's enough!"
+
                     $ KittyX.eyes = "_sexy"
                     $ KittyX.change_stat("love", 90, -10)
                     $ KittyX.change_stat("obedience", 80, -5)
                     $ KittyX.change_stat("inhibition", 70, 10)
+
                     "She reaches over and pries your hand loose."
+
                     $ counter = 4
                 else:
                     $ KittyX.change_stat("love", 90, -1)
                     $ KittyX.change_stat("obedience", 80, 2)
+
                     "Um. . ."
+
                 $ counter += 1
+
                 $ KittyX.addiction_rate += 1
             "Pull her in for a hug.":
-
                 $ KittyX.change_stat("love", 90, -5)
                 $ KittyX.change_face("_surprised", 2)
+
                 ch_k "Hey! Like, not cool!"
+
                 $ KittyX.change_face("_angry", 1)
+
                 show Kitty_sprite at sprite_location(KittyX.sprite_location) with vpunch
+
                 "She elbows you in the ribs and shoves herself back a few steps."
+
                 $ KittyX.change_stat("inhibition", 70, 10)
+
                 ch_k "My powers may not work on you, but I have[KittyX.like]a few years of combat experience on you."
                 ch_k "And don't you forget it!"
+
                 $ counter = 10
 
     if counter > 3:
         $ KittyX.eyes = "_side"
+
         ch_k "Still though, that was an interesting experience. . ."
     else:
         $ KittyX.change_face("_bemused", 1, Eyes = "_side")
+
         ch_k "That was an interesting experience. . ."
+
     $ KittyX.eyes = "_sexy"
     $ KittyX.mouth = "_lipbite"
+
     ch_k "Kinda tingly. . ."
 
-    $ counter = 0
     $ KittyX.change_face("_surprised", Mouth = "_kiss")
+
     ch_k "Oh! I[KittyX.like]totally forgot, I have to get to a briefing!"
+
     if counter < 5:
         $ KittyX.change_face("_smile")
+
         ch_k "I'll see you later though! Like, bye!"
     else:
         $ KittyX.change_face("_normal")
+
         ch_k "I'll see you around I guess. Like, bye!"
 
     $ KittyX.location = "bg_kitty"
-    call set_the_scene
+
+    hide Kitty_sprite
 
     "She jogs off down the path, and you continue on to class."
+
     $ KittyX.history.append("met")
-    $ active_Girls.append(KittyX) if KittyX not in active_Girls else active_Girls
+
+    $ active_Girls.append(KittyX)
+
     $ bg_current = "bg_classroom"
+
     $ round -= 10
-    call shift_focus (RogueX)
+
+    call shift_focus(RogueX)
+
     return
 
 

@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/actions.rpy", line 158: expected statement.
-    focused_Girl.action_counter["kiss"] += 1
-                                        ^
+File "game/utilities.rpy", line 5854: expected python code
+    $
+     ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Mon May 23 21:16:15 2022
+Tue May 24 00:02:42 2022

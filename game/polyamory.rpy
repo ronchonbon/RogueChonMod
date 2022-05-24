@@ -2669,7 +2669,7 @@ label Harem_Start(Newbie=0, round2=0):
 
     $ Party = [Player.Harem[0],Player.Harem[1]]
 
-    call Present_Check
+    call check_who_is_present
     $ Party = [Player.Harem[0],Player.Harem[1]]
     call shift_focus (Player.Harem[0])
     call set_the_scene

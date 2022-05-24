@@ -27,7 +27,7 @@ label enter_main_sex_menu:
     $ offhand_action = None
     $ girl_offhand_action = None
 
-    call expression focused_Girl.tag + "_Hide" pass(1)
+    call hide_girl(focused_Girl, hide_sprite = True)
 
     $ focused_Girl.arm_pose = 1
 
@@ -768,7 +768,6 @@ label try_something_else_menu(Girl, action):
 
             jump after_action
         "Let's try something else." if multi_action:
-            $ line = 0
             $ action_context = "shift"
 
             jump after_action
@@ -926,13 +925,10 @@ label kiss_menu:
             ch_p "Let's try something else."
 
             $ action_context = "shift"
-            $ line = 0
 
             jump after_action
         "End Scene":
             ch_p "Let's stop for now."
-
-            $ line = 0
 
             jump after_action
 
@@ -1146,18 +1142,15 @@ label fondle_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            call expression focused_Girl.tag + "_Pos_Reset"
+            # call expression focused_Girl.tag + "_Pos_Reset"
 
             $ action_context = "shift"
-            $ line = 0
 
             jump after_action
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            call expression focused_Girl.tag + "_Pos_Reset"
-
-            $ line = 0
+            # call expression focused_Girl.tag + "_Pos_Reset"
 
             jump after_action
 
@@ -1422,18 +1415,15 @@ label handjob_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            call expression focused_Girl.tag + "_HJ_Reset"
+            # call expression focused_Girl.tag + "_HJ_Reset"
 
             $ action_context = "shift"
-            $ line = 0
 
             jump after_action
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            call expression focused_Girl.tag + "_HJ_Reset"
-
-            $ line = 0
+            # call expression focused_Girl.tag + "_HJ_Reset"
 
             jump after_action
 
@@ -1576,18 +1566,15 @@ label sex_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            call expression focused_Girl.tag + "_Sex_Reset"
+            # call expression focused_Girl.tag + "_Sex_Reset"
 
             $ action_context = "shift"
-            $ line = 0
 
             jump after_action
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            call expression focused_Girl.tag + "_Sex_Reset"
-
-            $ line = 0
+            # call expression focused_Girl.tag + "_Sex_Reset"
 
             jump after_action
 

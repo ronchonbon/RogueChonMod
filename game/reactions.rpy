@@ -62,12 +62,8 @@ label forced_rejected_reactions(Girl, action):
 
 label first_action_approval_forced_reactions(Girl, action):
     $ Girl.change_face("_sad")
-
-    if action == "masturbation":
-        $ Girl.change_stat("love", 70, -3, 1)
-        $ Girl.change_stat("love", 20, -2, 1)
-
-    call first_action_approval_forced_reactions(Girl, action)
+    $ Girl.change_stat("love", 70, -3, 1)
+    $ Girl.change_stat("love", 20, -2, 1)
 
     return
 
@@ -671,6 +667,8 @@ label first_action_approval(Girl, action):
     else:
         call first_action_approval_reactions(Girl, action)
 
+    jump before_action
+
     return
 
 label first_action_response(Girl, action):
@@ -804,6 +802,7 @@ label action_approved(Girl, action):
         $ Girl.change_face("_sexy", 1)
 
         call daily_action_lines(Girl, action)
+        jump before_action
     elif Girl.action_counter[action] < 3:
         $ Girl.change_face("_sexy", 1)
         $ Girl.Brows = "_confused"
@@ -875,8 +874,6 @@ label action_accepted(Girl, action):
             call forced_action_accepted_changes(Girl, action)
 
         call action_accepted_enthusiastically_lines(Girl, action)
-        call action_accepted_changes(Girl, action)
-        jump before_action
     else:
         if Girl.forced:
             $ Girl.change_face("_sad")
@@ -894,10 +891,8 @@ label action_accepted(Girl, action):
             call not_forced_action_accepted_changes(Girl, action)
             call accepted_without_question_lines(Girl, action)
 
-        call action_accepted_changes(Girl, action)
-        jump before_action
-
-    return
+    call action_accepted_changes(Girl, action)
+    jump before_action
 
 label action_rejected(Girl, action):
     $ Girl.arm_pose = 1

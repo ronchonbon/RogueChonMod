@@ -16,7 +16,7 @@ label Halloween_chat(Girl=0):
         pass
     else:
         "You approach [Girl.name]"
-        call AllHide (1)
+        call hide_all (1)
         while Present:
 
             $ Nearby.append(Present[0])
@@ -427,7 +427,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
         ease 0.8 pos (-200,50)
     pause 0.8
     "[RogueX.name] heads over to mingle some more."
-    call AllHide (1)
+    call hide_all (1)
 
 
     if "met" not in KittyX.history:
@@ -593,7 +593,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
     if "met" not in LauraX.history:
         ch_k "Anyway, I was were[KittyX.like]going to check out the scene over there for a second."
         ch_k "Maybe I'll see you later, [KittyX.player_petname]."
-        call AllHide (1)
+        call hide_all (1)
         $ Present.remove(KittyX)
         $ Nearby.append(KittyX)
         $ KittyX.location = "nearby"
@@ -727,7 +727,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
                 pause 0.8
                 "[KittyX.name] heads off to the side."
                 $ KittyX.change_face("_normal")
-                call AllHide (1)
+                call hide_all (1)
                 $ Present.remove(KittyX)
                 $ Nearby.append(KittyX)
                 $ KittyX.location = "nearby"
@@ -807,7 +807,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
     "[KittyX.name] tugs [LauraX.name] off to the side."
     $ LauraX.change_face("_normal")
 
-    call AllHide (1)
+    call hide_all (1)
     $ Present.remove(KittyX)
     $ Nearby.append(KittyX)
     $ KittyX.location = "nearby"
@@ -1065,7 +1065,7 @@ label Halloween_Jean:
     pause 0.8
     "She wanders into the crowd."
 
-    call AllHide (1)
+    call hide_all (1)
     $ Present.remove(JeanX)
     $ Nearby.append(JeanX)
     $ JeanX.location = "nearby"
@@ -1232,7 +1232,7 @@ label Halloween_Jean:
     pause 0.8
     "[StormX.name] glides back onto the dance floor, and you head over toward the treeline."
 
-    call AllHide (1)
+    call hide_all (1)
     $ Present.remove(StormX)
     $ Nearby.append(StormX)
     $ StormX.location = "nearby"
@@ -1516,7 +1516,7 @@ label Halloween_Emma:
     pause 0.8
     "[EmmaX.name] heads over to the refreshments."
 
-    call AllHide (1)
+    call hide_all (1)
     $ Present.remove(EmmaX)
     $ Nearby.append(EmmaX)
     $ EmmaX.location = "nearby"
@@ -1528,7 +1528,7 @@ label Halloween_Emma:
     return
 
 label Halloween_Skip:
-    call AllHide (1)
+    call hide_all (1)
     $ Options = active_Girls[:]
     if LauraX in Options and "_angry" in LauraX.recent_history:
 

@@ -2961,17 +2961,6 @@ label Rogue_Pos_Reset(T=0, Set=0):
     $ primary_action = T
     return
 
-label Rogue_Hide(Sprite=0):
-    call Rogue_sex_Reset
-    hide Rogue_sex_animation
-    hide Rogue_doggy_animation
-    hide Rogue_HJ_Animation
-    hide Rogue_blowjob_animation
-    hide Rogue_TJ_Animation
-    if Sprite:
-        hide Rogue_sprite
-    return
-
 image cellphone:
     "images/cellphone.png"
     xoffset 0
@@ -3309,7 +3298,7 @@ label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
                 offset (0,0)
                 anchor (0.6, 0.0)
         elif temp_Girls[0] == KittyX:
-            call Kitty_Hide
+            call hide_girl(KittyX)
             show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
                 zoom 1
@@ -3440,7 +3429,7 @@ label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, temp_Girls=[]):
                 offset (0,0)
                 anchor (0.6, 0.0)
         elif temp_Girls[0] == KittyX:
-            call Kitty_Hide
+            call hide_girl(KittyX)
             show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
                 zoom 1

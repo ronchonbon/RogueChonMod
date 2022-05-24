@@ -401,7 +401,7 @@ label tour_parting:
 label Rogue_first_kiss:
     $ RogueX.change_face("_kiss",2)
 
-    call Rogue_Kissing_Launch
+    # call Rogue_Kissing_Launch
 
     "She leans in for a kiss."
     "You lean in and your lips meet [RogueX.name]'s."

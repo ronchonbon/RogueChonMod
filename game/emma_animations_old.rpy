@@ -3714,8 +3714,8 @@ label Emma_Doggy_Launch(line=primary_action):
         return
     $ action_speed = 0
     call Emma_Hide (1)
-    # show Emma_Doggy_Animation zorder 150 at sprite_location(stage_center+50)
-    # with dissolve
+    show Emma_Doggy_Animation zorder 150 at sprite_location(stage_center+50)
+    with dissolve
     return
 
 label Emma_Doggy_Reset:
@@ -4264,7 +4264,7 @@ label Emma_TJ_Launch(line=primary_action):
     $ action_speed = 0
     if line != "cum":
         $ primary_action = "titjob"
-    # show Emma_TJ_Animation zorder 150
+    show Emma_TJ_Animation zorder 150
     $ Player.sprite = 1
     hide black_screen onlayer black with dissolve
     return
@@ -4786,8 +4786,8 @@ label Emma_BJ_Launch(line=primary_action):
 
     show Emma_Sprite zorder EmmaX.sprite_layer:
         alpha 0
-    # show Emma_BJ_Animation zorder 150:
-    #     pos (645,510)
+    show Emma_BJ_Animation zorder 150:
+        pos (645,510)
     return
 
 label Emma_BJ_Reset:
@@ -4961,9 +4961,9 @@ label Emma_HJ_Launch(line=primary_action):
         $ action_speed = 1
     pause 0.5
     $ EmmaX.arm_pose = 1
-    # show Emma_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
-    #
-    #     offset (100,250)
+    show Emma_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
+
+        offset (100,250)
     return
 
 label Emma_HJ_Reset:
@@ -5504,9 +5504,9 @@ label Emma_FJ_Launch(line=primary_action):
         yoffset 170
         alpha 1
         ease 0.5 xpos 590
-    # show Emma_FJ_Animation zorder 150:
-    #     alpha 0
-    #     pos (950,200)
+    show Emma_FJ_Animation zorder 150:
+        alpha 0
+        pos (950,200)
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
         ease 1 zoom 0.8 xpos 580 yoffset 150
@@ -5518,11 +5518,11 @@ label Emma_FJ_Launch(line=primary_action):
     show Emma_Sprite zorder EmmaX.sprite_layer:
         alpha 0
     $ action_speed = 0
-    # show Emma_FJ_Animation zorder 150:
-    #     ease 0.5 alpha 1
-    # pause 0.5
-    # show Emma_FJ_Animation zorder 150:
-    #     alpha 1
+    show Emma_FJ_Animation zorder 150:
+        ease 0.5 alpha 1
+    pause 0.5
+    show Emma_FJ_Animation zorder 150:
+        alpha 1
     return
 
 label Emma_FJ_Reset:

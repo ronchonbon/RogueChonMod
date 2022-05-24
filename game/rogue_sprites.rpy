@@ -28,7 +28,7 @@ layeredimage Rogue_sprite:
         "images/Rogue_sprite/Rogue_standing_underwear[RogueX.underwear]_down_wet.png"
     elif RogueX.underwear_pulled_down:
         "images/Rogue_sprite/Rogue_standing_underwear[RogueX.underwear]_down.png"
-    elif RogueX.grool > 1:
+    elif RogueX.grool > 1 and RogueX.underwear != "_black_panties":
         "images/Rogue_sprite/Rogue_standing_underwear[RogueX.underwear]_wet.png"
     elif RogueX.underwear:
         "images/Rogue_sprite/Rogue_standing_underwear[RogueX.underwear].png"

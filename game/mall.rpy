@@ -660,7 +660,7 @@ label Swim_Shop:
             else:
 
                 show black_screen onlayer black
-                call AllHide
+                call hide_all
 
                 $ Girl.sprite_location = stage_center
                 $ Girl.sprite_layer = 100
@@ -1061,7 +1061,7 @@ label Lingerie_Shop:
             else:
 
                 show black_screen onlayer black
-                call AllHide
+                call hide_all
                 
                 $ Girl.sprite_location = stage_center
                 $ Girl.sprite_layer = 100
