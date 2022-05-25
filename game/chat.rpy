@@ -951,7 +951,7 @@ label Girl_Settings:
                     call taboo_level
                     call expression Girl.tag + "_Clothes"
 
-            "Shift her Personality" if approval_check(Girl, 900, "L", TabM=0) or approval_check(Girl, 900, "O", TabM=0)or approval_check(Girl, 900, "I", TabM=0):
+            "Shift her Personality" if approval_check(Girl, 900, "L", taboo_modifier=0) or approval_check(Girl, 900, "O", taboo_modifier=0)or approval_check(Girl, 900, "I", taboo_modifier=0):
                 ch_p "Could we talk about us?"
                 call expression Girl.tag + "_Personality"
             "Your Petname":
@@ -1032,7 +1032,7 @@ label Girl_Settings:
                             elif Girl == KittyX:
                                 ch_k "Aw, you miss me when I'm not around!"
                             elif Girl == EmmaX:
-                                $ Girl.change_face("_angry", Eyes="_side")
+                                $ Girl.change_face("_angry", eyes="_side")
                                 ch_e "I don't know why I put up with your nonsense."
                                 $ Girl.change_face("_sexy",1)
                                 ch_e "But {i}fine.{/i}"

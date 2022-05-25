@@ -673,18 +673,18 @@ label Swim_shop:
             while Girl:
                 menu:
                     "What did you want to try on here?"
-                    "Bikini Top (locked)" if Girl.bra == "_bikini_top":
+                    "Bikini Top (locked)" if Girl.outfit["bra"] == "_bikini_top":
                         pass
-                    "Bikini Top" if Girl.bra != "_bikini_top":
-                        if Girl.seen_breasts or approval_check(Girl, 1100, TabM=2):
+                    "Bikini Top" if Girl.outfit["bra"] != "_bikini_top":
+                        if Girl.seen_breasts or approval_check(Girl, 1100, taboo_modifier=2):
                             call Dressing_Strip_Bra ("_bikini_top")
                         else:
                             Girl.voice "I'll need some privacy here. . ."
                             show black_screen onlayer black
                             if Girl == JubesX:
-                                $ Girl.accessory = ""
-                            $ Girl.top = ""
-                            $ Girl.bra = "_bikini_top"
+                                $ Girl.outfit["front_outer_accessory"] = ""
+                            $ Girl.outfit["top"] = ""
+                            $ Girl.outfit["bra"] = "_bikini_top"
                             "You back out of the room for a moment. . ."
                             hide black_screen onlayer black
                         if "_bikini_top" in Cart:
@@ -693,22 +693,22 @@ label Swim_shop:
                             Girl.voice "I do already have one of these though."
                         else:
                             $ Cart.append("_bikini_top")
-                            if Girl == StormX and Girl.bra == "_bikini_top" and Girl.underwear == "_bikini_bottoms":
+                            if Girl == StormX and Girl.outfit["bra"] == "_bikini_top" and Girl.outfit["underwear"] == "_bikini_bottoms":
                                 ch_s "Oh! I understand the purpose of the flap now!"
 
 
 
-                    "Bikini Bottoms (locked)" if Girl.underwear == "_bikini_bottoms":
+                    "Bikini Bottoms (locked)" if Girl.outfit["underwear"] == "_bikini_bottoms":
                         pass
-                    "Bikini Bottoms" if Girl.underwear != "_bikini_bottoms":
-                        if Girl.seen_pussy or approval_check(Girl, 1200, TabM=2):
+                    "Bikini Bottoms" if Girl.outfit["underwear"] != "_bikini_bottoms":
+                        if Girl.seen_pussy or approval_check(Girl, 1200, taboo_modifier=2):
                             call Dressing_Strip_Panties ("_bikini_bottoms")
                         else:
                             Girl.voice "I'll need some privacy here. . ."
                             show black_screen onlayer black
-                            $ Girl.legs = ""
-                            $ Girl.hose = ""
-                            $ Girl.underwear = "_bikini_bottoms"
+                            $ Girl.outfit["bottom"] = ""
+                            $ Girl.outfit["hose"] = ""
+                            $ Girl.outfit["underwear"] = "_bikini_bottoms"
                             "You back out of the room for a moment. . ."
                             hide black_screen onlayer black
                         if "_bikini_bottoms" in Cart:
@@ -717,28 +717,28 @@ label Swim_shop:
                             Girl.voice "I do already have one of these though."
                         else:
                             $ Cart.append("_bikini_bottoms")
-                            if Girl == StormX and Girl.bra == "_bikini_top" and Girl.underwear == "_bikini_bottoms":
+                            if Girl == StormX and Girl.outfit["bra"] == "_bikini_top" and Girl.outfit["underwear"] == "_bikini_bottoms":
                                 ch_s "Oh! I understand the purpose of the flap now!"
 
 
 
-                    "Blue swim skirt (locked)" if Girl == KittyX and Girl.legs == "_blue_skirt":
+                    "Blue swim skirt (locked)" if Girl == KittyX and Girl.outfit["bottom"] == "_blue_skirt":
                         pass
-                    "Blue swim_skirt" if Girl == KittyX and Girl.legs != "_blue_skirt":
+                    "Blue swim_skirt" if Girl == KittyX and Girl.outfit["bottom"] != "_blue_skirt":
                         $ Girl.change_face("_smile")
-                        if (Girl.underwear and approval_check(Girl, 900, TabM=2)) or approval_check(Girl, 1200, TabM=2):
+                        if (Girl.outfit["underwear"] and approval_check(Girl, 900, taboo_modifier=2)) or approval_check(Girl, 1200, taboo_modifier=2):
                             Girl.voice "Sure. . ."
                             $ Girl.upskirt = 1
                             pause 0.3
-                            $ Girl.legs = ""
+                            $ Girl.outfit["bottom"] = ""
                             call expression Girl.tag + "_First_Bottomless"
                             pause 0.3
-                            $ Girl.legs = "_blue_skirt"
+                            $ Girl.outfit["bottom"] = "_blue_skirt"
                             $ Girl.upskirt = 0
                         else:
                             Girl.voice "I'll need some privacy here. . ."
                             show black_screen onlayer black
-                            $ Girl.legs = "_blue_skirt"
+                            $ Girl.outfit["bottom"] = "_blue_skirt"
                             "You back out of the room for a moment. . ."
                             hide black_screen onlayer black
                         if "_blue_skirt" in Cart:
@@ -1074,9 +1074,9 @@ label Lingerie_shop:
             while Girl:
                 menu:
                     "What did you want to try on here?"
-                    "Lace Bra (locked)" if Girl.bra == "_lace_bra":
+                    "Lace Bra (locked)" if Girl.outfit["bra"] == "_lace_bra":
                         pass
-                    "Lace Bra" if Girl.bra != "_lace_bra" and Girl != LauraX:
+                    "Lace Bra" if Girl.outfit["bra"] != "_lace_bra" and Girl != LauraX:
                         if "no_gift_bra" in Girl.recent_history:
                             Girl.voice "I said no. . ."
                         elif not Girl.seen_breasts and not approval_check(Girl, 900):
@@ -1090,15 +1090,15 @@ label Lingerie_shop:
                             $ Girl.change_face("_angry",1)
                             $ Girl.recent_history.append("no_gift_bra")
                         else:
-                            if Girl.seen_breasts or approval_check(Girl, 1000, TabM=2):
+                            if Girl.seen_breasts or approval_check(Girl, 1000, taboo_modifier=2):
                                 call Dressing_Strip_Bra ("_lace_bra")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
                                 show black_screen onlayer black
                                 if Girl == JubesX:
-                                    $ Girl.accessory = ""
-                                $ Girl.top = ""
-                                $ Girl.bra = "_lace_bra"
+                                    $ Girl.outfit["front_outer_accessory"] = ""
+                                $ Girl.outfit["top"] = ""
+                                $ Girl.outfit["bra"] = "_lace_bra"
                                 "You back out of the room for a moment. . ."
                                 hide black_screen onlayer black
                             if "_lace_bra" in Cart:
@@ -1109,9 +1109,9 @@ label Lingerie_shop:
                                 $ Cart.append("_lace_bra")
 
 
-                    "Corset (locked)" if Girl.bra == "_corset":
+                    "Corset (locked)" if Girl.outfit["bra"] == "_corset":
                         pass
-                    "Corset" if Girl.bra != "_corset" and Girl in (LauraX,JeanX):
+                    "Corset" if Girl.outfit["bra"] != "_corset" and Girl in (LauraX,JeanX):
                         if "no_gift_bra" in Girl.recent_history:
                             Girl.voice "I said no. . ."
                         elif not Girl.seen_breasts and not approval_check(Girl, 900):
@@ -1125,15 +1125,15 @@ label Lingerie_shop:
                             $ Girl.change_face("_angry",1)
                             $ Girl.recent_history.append("no_gift_bra")
                         else:
-                            if Girl.seen_breasts or approval_check(Girl, 1000, TabM=2):
+                            if Girl.seen_breasts or approval_check(Girl, 1000, taboo_modifier=2):
                                 call Dressing_Strip_Bra ("_corset")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
                                 show black_screen onlayer black
                                 if Girl == JubesX:
-                                    $ Girl.accessory = ""
-                                $ Girl.top = ""
-                                $ Girl.bra = "_corset"
+                                    $ Girl.outfit["front_outer_accessory"] = ""
+                                $ Girl.outfit["top"] = ""
+                                $ Girl.outfit["bra"] = "_corset"
                                 "You back out of the room for a moment. . ."
                                 hide black_screen onlayer black
                             if "_corset" in Cart:
@@ -1144,9 +1144,9 @@ label Lingerie_shop:
                                 $ Cart.append("_corset")
 
 
-                    "Lace Corset (locked)" if Girl.bra == "_lace_corset":
+                    "Lace Corset (locked)" if Girl.outfit["bra"] == "_lace_corset":
                         pass
-                    "Lace Corset" if Girl.bra != "_lace_corset" and Girl == LauraX:
+                    "Lace Corset" if Girl.outfit["bra"] != "_lace_corset" and Girl == LauraX:
                         if "no_gift_bra" in Girl.recent_history:
                             Girl.voice "I said no. . ."
                         elif not Girl.seen_breasts and not approval_check(Girl, 900):
@@ -1160,15 +1160,15 @@ label Lingerie_shop:
                             $ Girl.change_face("_angry",1)
                             $ Girl.recent_history.append("no_gift_bra")
                         else:
-                            if Girl.seen_breasts or approval_check(Girl, 1000, TabM=2):
+                            if Girl.seen_breasts or approval_check(Girl, 1000, taboo_modifier=2):
                                 call Dressing_Strip_Bra ("_lace_corset")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
                                 show black_screen onlayer black
                                 if Girl == JubesX:
-                                    $ Girl.accessory = ""
-                                $ Girl.top = ""
-                                $ Girl.bra = "_lace_corset"
+                                    $ Girl.outfit["front_outer_accessory"] = ""
+                                $ Girl.outfit["top"] = ""
+                                $ Girl.outfit["bra"] = "_lace_corset"
                                 "You back out of the room for a moment. . ."
                                 hide black_screen onlayer black
                             if "_lace_corset" in Cart:
@@ -1178,9 +1178,9 @@ label Lingerie_shop:
                             else:
                                 $ Cart.append("_lace_corset")
 
-                    "Lace Panties (locked)" if Girl.underwear == "_lace_panties":
+                    "Lace Panties (locked)" if Girl.outfit["underwear"] == "_lace_panties":
                         pass
-                    "Lace Panties" if Girl.underwear != "_lace_panties":
+                    "Lace Panties" if Girl.outfit["underwear"] != "_lace_panties":
                         if "no_gift_panties" in Girl.recent_history:
                             Girl.voice "I said no. . ."
                         elif not Girl.seen_pussy and not approval_check(Girl, 1000):
@@ -1194,14 +1194,14 @@ label Lingerie_shop:
                             $ Girl.change_face("_angry",1)
                             $ Girl.recent_history.append("no_gift_panties")
                         else:
-                            if Girl.seen_pussy or approval_check(Girl, 1200, TabM=2):
+                            if Girl.seen_pussy or approval_check(Girl, 1200, taboo_modifier=2):
                                 call Dressing_Strip_Panties ("_lace_panties")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
                                 show black_screen onlayer black
-                                $ Girl.legs = ""
-                                $ Girl.hose = ""
-                                $ Girl.underwear = "_lace_panties"
+                                $ Girl.outfit["bottom"] = ""
+                                $ Girl.outfit["hose"] = ""
+                                $ Girl.outfit["underwear"] = "_lace_panties"
                                 "You back out of the room for a moment. . ."
                                 hide black_screen onlayer black
                             if "_lace_panties" in Cart:
@@ -1212,9 +1212,9 @@ label Lingerie_shop:
                                 $ Cart.append("_lace_panties")
 
 
-                    "Tiger-Striped Panties (locked)" if Girl.underwear == "tiger_panties":
+                    "Tiger-Striped Panties (locked)" if Girl.outfit["underwear"] == "tiger_panties":
                         pass
-                    "Tiger-Striped Panties" if Girl.underwear != "tiger_panties" and Girl == JubesX:
+                    "Tiger-Striped Panties" if Girl.outfit["underwear"] != "tiger_panties" and Girl == JubesX:
                         if "no_gift_panties" in Girl.recent_history:
                             Girl.voice "I said no. . ."
                         elif not Girl.seen_pussy and not approval_check(Girl, 1000):
@@ -1223,14 +1223,14 @@ label Lingerie_shop:
                             $ Girl.change_face("_angry",1)
                             $ Girl.recent_history.append("no_gift_panties")
                         else:
-                            if Girl.seen_pussy or approval_check(Girl, 1200, TabM=2):
+                            if Girl.seen_pussy or approval_check(Girl, 1200, taboo_modifier=2):
                                 call Dressing_Strip_Panties ("tiger_panties")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
                                 show black_screen onlayer black
-                                $ Girl.legs = ""
-                                $ Girl.hose = ""
-                                $ Girl.underwear = "tiger_panties"
+                                $ Girl.outfit["bottom"] = ""
+                                $ Girl.outfit["hose"] = ""
+                                $ Girl.outfit["underwear"] = "tiger_panties"
                                 "You back out of the room for a moment. . ."
                                 hide black_screen onlayer black
                             if "tiger_panties" in Cart:
@@ -1241,20 +1241,20 @@ label Lingerie_shop:
                                 $ Cart.append("tiger_panties")
 
 
-                    "Stockings and Garterbelt (locked)" if Girl.hose == "_stockings_and_garterbelt":
+                    "Stockings and Garterbelt (locked)" if Girl.outfit["hose"] == "_stockings_and_garterbelt":
                         pass
-                    "Stockings and Garterbelt" if Girl.hose != "_stockings_and_garterbelt":
-                        if Girl.seen_pussy or approval_check(Girl, 900, TabM=2):
+                    "Stockings and Garterbelt" if Girl.outfit["hose"] != "_stockings_and_garterbelt":
+                        if Girl.seen_pussy or approval_check(Girl, 900, taboo_modifier=2):
                             $ Girl.change_face("_sexy")
                             Girl.voice "Sure. . ."
                             $ Girl.upskirt = 1
                             pause 0.3
-                            $ Girl.legs = ""
+                            $ Girl.outfit["bottom"] = ""
                             pause 0.3
-                            $ Girl.hose = ""
+                            $ Girl.outfit["hose"] = ""
                             call expression Girl.tag + "_First_Bottomless"
                             pause 0.3
-                            $ Girl.hose = "_stockings_and_garterbelt"
+                            $ Girl.outfit["hose"] = "_stockings_and_garterbelt"
                             $ Girl.underwear_pulled_down = 0
                             $ Girl.upskirt = 0
                             if Second and "_stockings_and_garterbelt" not in Cart:
@@ -1263,7 +1263,7 @@ label Lingerie_shop:
                         else:
                             Girl.voice "I'll need some privacy here. . ."
                             show black_screen onlayer black
-                            $ Girl.hose = "_stockings_and_garterbelt"
+                            $ Girl.outfit["hose"] = "_stockings_and_garterbelt"
                             "You back out of the room for a moment. . ."
                             hide black_screen onlayer black
                         if "_stockings_and_garterbelt" in Cart:
@@ -1274,14 +1274,14 @@ label Lingerie_shop:
                             $ Cart.append("_stockings_and_garterbelt")
 
 
-                    "Knee Stockings (locked)" if Girl.hose == "knee stockings":
+                    "Knee Stockings (locked)" if Girl.outfit["hose"] == "knee stockings":
                         pass
-                    "Knee Stockings" if Girl.hose != "knee stockings" and Girl == KittyX:
+                    "Knee Stockings" if Girl.outfit["hose"] != "knee stockings" and Girl == KittyX:
                         $ Girl.change_face("_sexy")
                         Girl.voice "Sure. . ."
-                        $ Girl.hose = ""
+                        $ Girl.outfit["hose"] = ""
                         pause 0.3
-                        $ Girl.hose = "knee stockings"
+                        $ Girl.outfit["hose"] = "knee stockings"
                         if "knee stockings" in Cart:
                             pass
                         elif "knee stockings" in Girl.inventory:
@@ -1290,14 +1290,14 @@ label Lingerie_shop:
                             $ Cart.append("knee stockings")
 
 
-                    "High Socks (locked)" if Girl.hose == "_socks":
+                    "High Socks (locked)" if Girl.outfit["hose"] == "_socks":
                         pass
-                    "High Socks" if Girl.hose != "_socks" and Girl == JubesX:
+                    "High Socks" if Girl.outfit["hose"] != "_socks" and Girl == JubesX:
                         $ Girl.change_face("_sexy")
                         Girl.voice "Sure. . ."
-                        $ Girl.hose = ""
+                        $ Girl.outfit["hose"] = ""
                         pause 0.3
-                        $ Girl.hose = "_socks"
+                        $ Girl.outfit["hose"] = "_socks"
                         if "_socks" in Cart:
                             pass
                         elif "_socks" in Girl.inventory:
@@ -1306,20 +1306,20 @@ label Lingerie_shop:
                             $ Cart.append("_socks")
 
 
-                    "Pantyhose (locked)" if Girl.hose == "_pantyhose":
+                    "Pantyhose (locked)" if Girl.outfit["hose"] == "_pantyhose":
                         pass
-                    "Pantyhose" if Girl.hose != "_pantyhose" and Girl != LauraX:
-                        if Girl.seen_pussy or approval_check(Girl, 900, TabM=2):
+                    "Pantyhose" if Girl.outfit["hose"] != "_pantyhose" and Girl != LauraX:
+                        if Girl.seen_pussy or approval_check(Girl, 900, taboo_modifier=2):
                             $ Girl.change_face("_sexy")
                             Girl.voice "Sure. . ."
                             $ Girl.upskirt = 1
                             pause 0.3
-                            $ Girl.legs = ""
+                            $ Girl.outfit["bottom"] = ""
                             pause 0.3
-                            $ Girl.hose = ""
+                            $ Girl.outfit["hose"] = ""
                             call expression Girl.tag + "_First_Bottomless"
                             pause 0.3
-                            $ Girl.hose = "_pantyhose"
+                            $ Girl.outfit["hose"] = "_pantyhose"
                             $ Girl.underwear_pulled_down = 0
                             $ Girl.upskirt = 0
                             if Second and "_pantyhose" not in Cart:
@@ -1328,7 +1328,7 @@ label Lingerie_shop:
                         else:
                             Girl.voice "I'll need some privacy here. . ."
                             show black_screen onlayer black
-                            $ Girl.hose = "_pantyhose"
+                            $ Girl.outfit["hose"] = "_pantyhose"
                             "You back out of the room for a moment. . ."
                             hide black_screen onlayer black
                         if "_pantyhose" in Cart:
@@ -1339,13 +1339,13 @@ label Lingerie_shop:
                             $ Cart.append("_pantyhose")
 
 
-                    "Lose the [Girl.hose]" if Girl.hose:
-                        if Girl.hose_number() < 10 or approval_check(Girl, 900, TabM=2):
+                    "Lose the [Girl.outfit['hose']]" if Girl.outfit["hose"]:
+                        if Girl.hose_number() < 10 or approval_check(Girl, 900, taboo_modifier=2):
                             if Girl in (EmmaX,StormX):
                                 Girl.voice "I suppose. . ."
                             else:
                                 Girl.voice "Ok. . ."
-                            $ Girl.hose = ""
+                            $ Girl.outfit["hose"] = ""
                             call expression Girl.tag + "_First_Bottomless"
                         else:
                             if Girl in (EmmaX,StormX):
@@ -1353,9 +1353,9 @@ label Lingerie_shop:
                             else:
                                 Girl.voice "No thanks. . ."
 
-                    "Nighty (locked)" if Girl.top == "nighty":
+                    "Nighty (locked)" if Girl.outfit["top"] == "_nighty":
                         pass
-                    "Nighty" if Girl.top != "nighty" and Girl == RogueX:
+                    "Nighty" if Girl.outfit["top"] != "_nighty" and Girl == RogueX:
                         if "no_gift_bra" in Girl.recent_history:
                             Girl.voice "I said no. . ."
                         elif not Girl.seen_breasts and not approval_check(Girl, 900):
@@ -1369,36 +1369,36 @@ label Lingerie_shop:
                             $ Girl.change_face("_angry",1)
                             $ Girl.recent_history.append("no_gift_bra")
                         else:
-                            if Girl.seen_breasts or approval_check(Girl, 900, TabM=2):
+                            if Girl.seen_breasts or approval_check(Girl, 900, taboo_modifier=2):
                                 $ Girl.change_face("_sexy")
                                 Girl.voice "Sure. . ."
                                 if Girl == JubesX:
-                                    $ Girl.accessory = ""
+                                    $ Girl.outfit["front_outer_accessory"] = ""
                                     pause 0.3
-                                $ Girl.top = ""
+                                $ Girl.outfit["top"] = ""
                                 call expression Girl.tag + "_First_Topless"
                                 call expression Girl.tag + "_First_Bottomless" pass (1)
                                 pause 0.3
-                                $ Girl.top = "nighty"
+                                $ Girl.outfit["top"] = "_nighty"
                                 pause 0.3
                                 $ Girl.top_pulled_up = 0
-                                if Second and "nighty" not in Cart:
+                                if Second and "_nighty" not in Cart:
                                     $ Girl.GirlLikeUp(Second,1)
                                     $ Second.GirlLikeUp(Girl,3)
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
                                 show black_screen onlayer black
                                 if Girl == JubesX:
-                                    $ Girl.accessory = ""
-                                $ Girl.top = "nighty"
+                                    $ Girl.outfit["front_outer_accessory"] = ""
+                                $ Girl.outfit["top"] = "_nighty"
                                 "You back out of the room for a moment. . ."
                                 hide black_screen onlayer black
-                            if "nighty" in Cart:
+                            if "_nighty" in Cart:
                                 pass
-                            elif "nighty" in Girl.inventory:
+                            elif "_nighty" in Girl.inventory:
                                 Girl.voice "I do already have one of these though."
                             else:
-                                $ Cart.append("nighty")
+                                $ Cart.append("_nighty")
                     "Leave Dressing Area.":
 
 
@@ -1710,7 +1710,7 @@ label Lingerie_shop:
                                         Girl.voice "These are lovely. . ."
 
 
-                                "The nighty" if "nighty" in Cart:
+                                "The nighty" if "_nighty" in Cart:
                                     "You agree to buy [Girl.name] the nighty."
                                     if Girl.tag + "_nighty" in Player.inventory:
                                         "Wait, you already have one of those."
@@ -1718,14 +1718,14 @@ label Lingerie_shop:
                                         $ Player.inventory.remove(Girl.tag + "_nighty")
                                     elif Player.cash < 75:
                                         "You look at the tag, and actually, it's $75, you can't afford it."
-                                        $ Cart.remove("nighty")
+                                        $ Cart.remove("_nighty")
                                     else:
                                         $ Player.cash -= 75
-                                    if "nighty" in Cart:
+                                    if "_nighty" in Cart:
 
-                                        $ Cart.remove("nighty")
+                                        $ Cart.remove("_nighty")
                                         $ Girl.change_face("_bemused",1)
-                                        $ Girl.inventory.append("nighty")
+                                        $ Girl.inventory.append("_nighty")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 40)
                                         $ Girl.change_stat("obedience", 200, 20)
@@ -1776,20 +1776,20 @@ label Dressing_Strip_Bra(Item=0):
         return
     $ Girl.change_face("_sexy")
     Girl.voice "Sure. . ."
-    if Girl.top or Girl.bra:
+    if Girl.outfit["top"] or Girl.outfit["bra"]:
         $ Girl.top_pulled_up = 1
         pause 0.3
-    if Girl == JubesX and Girl.accessory:
-        $ Girl.accessory = ""
+    if Girl == JubesX and Girl.outfit["front_outer_accessory"]:
+        $ Girl.outfit["front_outer_accessory"] = ""
         pause 0.3
-    if Girl.top:
-        $ Girl.top = ""
+    if Girl.outfit["top"]:
+        $ Girl.outfit["top"] = ""
         pause 0.3
-    if Girl.bra:
-        $ Girl.bra = ""
+    if Girl.outfit["bra"]:
+        $ Girl.outfit["bra"] = ""
     call expression Girl.tag + "_First_Topless"
     pause 0.3
-    $ Girl.bra = Item
+    $ Girl.outfit["bra"] = Item
     pause 0.3
     $ Girl.top_pulled_up = 0
     if Second and Item not in Cart:
@@ -1805,21 +1805,21 @@ label Dressing_Strip_Panties(Item=0):
         return
     $ Girl.change_face("_sexy")
     Girl.voice "Sure. . ."
-    if Girl.legs:
+    if Girl.outfit["bottom"]:
         $ Girl.upskirt = 1
         pause 0.3
-        $ Girl.legs = ""
+        $ Girl.outfit["bottom"] = ""
         pause 0.3
-    if Girl.hose:
-        $ Girl.hose = ""
+    if Girl.outfit["hose"]:
+        $ Girl.outfit["hose"] = ""
         pause 0.3
-    if Girl.underwear:
+    if Girl.outfit["underwear"]:
         $ Girl.underwear_pulled_down = 1
         pause 0.2
-        $ Girl.underwear = ""
+        $ Girl.outfit["underwear"] = ""
     call expression Girl.tag + "_First_Bottomless"
     pause 0.3
-    $ Girl.underwear = Item
+    $ Girl.outfit["underwear"] = Item
     $ Girl.underwear_pulled_down = 0
     $ Girl.upskirt = 0
     if Second and Item not in Cart:

@@ -812,12 +812,12 @@ label gym_entry(number_of_girls = 0):
 
     python:
         for G in all_Girls:
-            if G.location != "bg_dangerroom" and G.outfit == "gym":
-                G.outfit = G.today_outfit
-            elif G.outfit == "gym":
+            if G.location != "bg_dangerroom" and G.outfit_name == "gym":
+                G.outfit_name = G.today_outfit_name
+            elif G.outfit_name == "gym":
                 continue
             elif G.location == "bg_dangerroom" and G not in Party:
-                G.outfit = "gym"
+                G.outfit_name = "gym"
 
     call set_the_scene
 
@@ -849,7 +849,7 @@ label gym_entry(number_of_girls = 0):
                     else:
                         temp_Girls[0].voice "I'll be back soon, gotta change."
 
-                $ temp_Girls[0].outfit = "gym"
+                $ temp_Girls[0].outfit_name = "gym"
             else:
                 $ temp_Girls[0].daily_history.append("asked gym")
 
@@ -890,9 +890,9 @@ label gym_entry(number_of_girls = 0):
                     elif temp_Girls[0] == JubesX:
                         ch_v "K, be right back."
 
-                    $ temp_Girls[0].outfit = "gym"
+                    $ temp_Girls[0].outfit_name = "gym"
 
-            if temp_Girls[0].outfit == "gym":
+            if temp_Girls[0].outfit_name == "gym":
                 $ number_of_girls += 1
 
         $ temp_Girls.remove(temp_Girls[0])
@@ -969,7 +969,7 @@ label shower_entry:
                 if D20 >= 10:
                     G.add_word(1,"showered","showered",0,0)
 
-                G.change_outfit("_towel")
+                G.change_outfit("shower")
 
     call set_the_scene(check_if_dressed = False)
 
@@ -1425,43 +1425,43 @@ label study_room:
         "Chat" if time_index >= 3:
             call chat
         "Plan Omega!" if time_index < 3 and RogueX.location == bg_current and Player.level >= 5:
-            if approval_check(RogueX, 1500, TabM=1, Loc="No"):
+            if approval_check(RogueX, 1500, taboo_modifier=1, Loc="No"):
                 call Xavier_Plan(RogueX)
             else:
                 ch_r "I don't want to do that. . ."
         "Plan Kappa!" if time_index < 3 and KittyX.location == bg_current and Player.level >= 5:
-            if "Xavier's photo" in Player.inventory and approval_check(KittyX, 1500, TabM=1, Loc="No"):
+            if "Xavier's photo" in Player.inventory and approval_check(KittyX, 1500, taboo_modifier=1, Loc="No"):
                 call Xavier_Plan(KittyX)
             elif "Xavier's photo" in Player.inventory:
                 ch_k "I don't really want to do that. . ."
             else:
                 ch_k "What?"
         "Plan Psi!" if time_index < 3 and EmmaX.location == bg_current and Player.level >= 5:
-            if approval_check(EmmaX, 1500, TabM=1, Loc="No"):
+            if approval_check(EmmaX, 1500, taboo_modifier=1, Loc="No"):
                 call Xavier_Plan(EmmaX)
             else:
                 ch_e "I'd rather not. . ."
         "Plan Chi!" if time_index < 3 and LauraX.location == bg_current and Player.level >= 5:
-            if LauraX.level >= 2 and approval_check(LauraX, 1500, TabM=1, Loc="No") and approval_check(LauraX, 750, "I"):
+            if LauraX.level >= 2 and approval_check(LauraX, 1500, taboo_modifier=1, Loc="No") and approval_check(LauraX, 750, "I"):
                 call Xavier_Plan(LauraX)
             elif LauraX.level < 2 or not approval_check(LauraX, 750, "I"):
                 ch_l "I'm not ready for that."
             else:
                 ch_l "Huh?"
         "Plan Alpha!" if time_index < 3 and JeanX.location == bg_current and Player.level >= 5:
-            if approval_check(JeanX, 1500, TabM=1, Loc="No"):
+            if approval_check(JeanX, 1500, taboo_modifier=1, Loc="No"):
                 call Xavier_Plan(JeanX)
             else:
                 ch_j "You're on your own there."
         "Plan Rho!" if time_index < 3 and StormX.location == bg_current and Player.level >= 5:
-            if "Xavier's files" in Player.inventory and approval_check(StormX, 1500, TabM=1, Loc="No"):
+            if "Xavier's files" in Player.inventory and approval_check(StormX, 1500, taboo_modifier=1, Loc="No"):
                 call Xavier_Plan(StormX)
             elif "Xavier's files" in Player.inventory:
                 ch_s "I do not believe that would be approrpriate."
             else:
                 ch_s "What is that?"
         "Plan Zeta!" if time_index < 3 and JubesX.location == bg_current and Player.level >= 5:
-            if approval_check(JubesX, 1500, TabM=1, Loc="No"):
+            if approval_check(JubesX, 1500, taboo_modifier=1, Loc="No"):
                 call Xavier_Plan(JubesX)
             else:
                 ch_v "What's a \"Zeta?\""

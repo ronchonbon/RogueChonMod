@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/rogue_chat.rpy", line 3283: expected menuitem
-    return
-    ^
+File "game/rogue_sprites.rpy", line 114: condition expects a non-empty block.
+    else:
+         ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Wed May 25 01:12:02 2022
+Wed May 25 16:03:13 2022

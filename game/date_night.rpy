@@ -13,7 +13,7 @@ label check_if_second_minds(Girl = None, Previous = None, repeat = 0):
 
         return True
     elif Previous == JeanX and not approval_check(Previous, 500, "L"):
-        $ Previous.change_face("_sly",1,Eyes="_side")
+        $ Previous.change_face("_sly",1,eyes="_side")
 
         if bg_current == "bg_restaurant":
             "[Previous.name] rolls her eyes, but goes back to her meal."
@@ -47,7 +47,7 @@ label check_if_second_minds(Girl = None, Previous = None, repeat = 0):
         pass
 
     if repeat == 2:
-        $ Previous.change_face("_angry",Eyes="_side")
+        $ Previous.change_face("_angry",eyes="_side")
         $ Previous.change_stat("love", 80, -5)
         $ Previous.change_stat("obedience", 80, 5)
         $ Previous.check_if_likes(Girl, 800, -3, 1)
@@ -210,7 +210,7 @@ label Date_Ask(Girl=0):
         return
     if "ex" in Girl.traits:
         if approval_check(Girl, 1200):
-            $ Girl.change_face("_bemused",Brows = "_sad" )
+            $ Girl.change_face("_bemused",brows = "_sad" )
             if Girl == RogueX:
                 ch_r "We had some fun, I guess we could go out, as friends maybe."
             elif Girl == KittyX:
@@ -226,7 +226,7 @@ label Date_Ask(Girl=0):
             elif Girl == JubesX:
                 ch_v "Yeah, I mean we could go as friends or whatever. . ."
         else:
-            $ Girl.change_face("_angry",Eyes = "_side")
+            $ Girl.change_face("_angry",eyes = "_side")
             if Girl == RogueX:
                 ch_r "I don't think we really worked out, [Girl.player_petname]."
             elif Girl == KittyX:
@@ -245,7 +245,7 @@ label Date_Ask(Girl=0):
 
     if "stoodup" in Girl.history or "deadbeat" in Girl.history:
         if "stoodup" in Girl.history:
-            $ Girl.change_face("_angry",Eyes = "_side")
+            $ Girl.change_face("_angry",eyes = "_side")
             if Girl == RogueX:
                 ch_r "Don't you be leav'in me behind this time."
             elif Girl == KittyX:
@@ -335,7 +335,7 @@ label Date_Ask(Girl=0):
                     return
             "Yeah, so?":
                 if approval_check(Girl, 1400,Alt=[[EmmaX],1500]):
-                    $ Girl.change_face("_angry", Mouth = "_grimace")
+                    $ Girl.change_face("_angry", mouth = "_grimace")
                     if Girl == RogueX:
                         ch_r "It's a good thing you're so pretty."
                     elif Girl == KittyX:
@@ -407,7 +407,7 @@ label Date_Ask(Girl=0):
                     elif Girl == LauraX:
                         ch_l "Dick."
                     elif Girl == JeanX:
-                        $ Girl.change_face("_angry",1,Eyes="psychic")
+                        $ Girl.change_face("_angry",1,eyes="psychic")
                         ch_j ". . ."
                         $ Girl.change_face("_angry",1)
                     elif Girl == StormX:
@@ -435,7 +435,7 @@ label Date_Ask(Girl=0):
         elif Girl == JubesX:
             ch_v "Ok, so see you then. . ."
     elif approval_check(Girl, 400):
-        $ Girl.change_face("_angry",Eyes = "_side")
+        $ Girl.change_face("_angry",eyes = "_side")
         if Girl == RogueX:
             ch_r "I think I'm washing my hair tonight. . ."
         elif Girl == KittyX:
@@ -666,7 +666,7 @@ label Date_Stood_Up(Girl=0):
                 elif Girl == JubesX:
                     ch_v "Well. . . ok. . ."
                 if "stoodup" in Girl.history:
-                    $ Girl.change_face("_sad",Eyes="_side")
+                    $ Girl.change_face("_sad",eyes="_side")
                     $ Girl.change_stat("obedience", 80, 5)
                     if Girl == RogueX:
                         ch_r "You need'ta shape up."
@@ -681,7 +681,7 @@ label Date_Stood_Up(Girl=0):
                     elif Girl == JubesX:
                         ch_v "Just stop letting this happen."
             elif "stoodup" in Girl.history:
-                $ Girl.change_face("_sad",Eyes="_side")
+                $ Girl.change_face("_sad",eyes="_side")
                 $ Girl.change_stat("love", 80, -5)
                 $ Girl.change_stat("obedience", 80, 5)
                 if Girl == RogueX:
@@ -725,19 +725,19 @@ label Date_Stood_Up(Girl=0):
                 $ Girl.change_stat("obedience", 90, 15)
                 if Girl == RogueX:
                     ch_r "What? . . No, we definitely. . ."
-                    $ Girl.change_face("_confused",Eyes="_side")
+                    $ Girl.change_face("_confused",eyes="_side")
                     ch_r "Hm."
                 elif Girl == KittyX:
                     ch_k "Are you. . . I was sure that I. . ."
-                    $ Girl.change_face("_confused",Eyes="_side")
+                    $ Girl.change_face("_confused",eyes="_side")
                     ch_k "Huh."
                 elif Girl == EmmaX:
                     ch_e "What? . . No, we definitely. . ."
-                    $ Girl.change_face("_confused",Eyes="_side")
+                    $ Girl.change_face("_confused",eyes="_side")
                     ch_e "Hm."
                 elif Girl == LauraX:
                     ch_l "I don't think. . . I pretty sure. . ."
-                    $ Girl.change_face("_confused",Eyes="_side")
+                    $ Girl.change_face("_confused",eyes="_side")
                     ch_l "Eh."
                 elif Girl == JeanX:
                     $ Girl.change_face("_confused")
@@ -747,11 +747,11 @@ label Date_Stood_Up(Girl=0):
                     ch_j "If I think it, it is."
                 elif Girl == StormX:
                     ch_s "What? . . that is. . . unlikely. . ."
-                    $ Girl.change_face("_confused",Eyes="_side")
+                    $ Girl.change_face("_confused",eyes="_side")
                     ch_s "Hm."
                 elif Girl == JubesX:
                     ch_v "Huh? . . . well. . ."
-                    $ Girl.change_face("_confused",Eyes="_side")
+                    $ Girl.change_face("_confused",eyes="_side")
                     ch_v ". . . maybe. . ."
             elif approval_check(Girl, 700, "O",Alt=[[EmmaX],800]):
                 $ Girl.change_face("_angry")
@@ -799,7 +799,7 @@ label Date_Stood_Up(Girl=0):
                 elif Girl == JubesX:
                     ch_v "Don't even."
             else:
-                $ Girl.change_face("_sad",Eyes="_side")
+                $ Girl.change_face("_sad",eyes="_side")
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")
                 $ Girl.change_stat("love", 80, -5)
@@ -823,7 +823,7 @@ label Date_Stood_Up(Girl=0):
 
 
             if approval_check(Girl, 1200, "LO"):
-                $ Girl.change_face("_sad",Eyes="_side")
+                $ Girl.change_face("_sad",eyes="_side")
                 $ Girl.change_stat("love", 80, -5)
                 $ Girl.change_stat("obedience", 80, 5)
                 if Girl == RogueX:
@@ -876,7 +876,7 @@ label Date_Stood_Up(Girl=0):
                         ch_v "Yeah, well. . . "
                         ch_v ". . . don't do it again!"
             elif approval_check(Girl, 800, "LO"):
-                $ Girl.change_face("_angry",Eyes="_side")
+                $ Girl.change_face("_angry",eyes="_side")
                 $ Girl.change_stat("love", 80, -10)
                 $ Girl.change_stat("obedience", 80, 20)
                 if Girl == RogueX:
@@ -888,10 +888,10 @@ label Date_Stood_Up(Girl=0):
                 elif Girl == LauraX:
                     ch_l "Maybe I did too."
                 elif Girl == JeanX:
-                    $ Girl.change_face("_confused",Eyes="_side")
+                    $ Girl.change_face("_confused",eyes="_side")
                     ch_j "That can't be it. . ."
                     ch_j "Maybe I did? . ."
-                    $ Girl.change_face("_sly",Eyes="_side")
+                    $ Girl.change_face("_sly",eyes="_side")
                     ch_j "Yeah, I guess that's it."
                 elif Girl == StormX:
                     ch_s "That is no excuse."
@@ -1428,7 +1428,7 @@ label Date_Crossed(Girls=[], Check=0, Count=0, counter=0):
                         call Girl_Date_Over (LauraX)
                 "[JeanX.name], you can go" if JeanX in Party:
                     if approval_check(JeanX, 800, "LO"):
-                        $ JeanX.change_face("_normal", 1,Eyes="_side")
+                        $ JeanX.change_face("_normal", 1,eyes="_side")
                         if JeanX == Party[0]:
                             ch_j "You heard him, get going [Party[1].name]."
                             "[JeanX.name] apparently ignored you. . . and [Party[1].name] walks off."
@@ -1617,12 +1617,12 @@ label Date_Crossed(Girls=[], Check=0, Count=0, counter=0):
             elif Party[counter] == KittyX:
                 ch_k "You wish, player!"
             elif Party[counter] == EmmaX:
-                $ Party[counter].change_face("_surprised",Mouth="_smirk")
+                $ Party[counter].change_face("_surprised",mouth="_smirk")
                 ch_e "Oh, you do aim high."
                 $ Party[counter].change_face("_angry")
                 ch_e "Too high."
             elif Party[counter] == LauraX:
-                $ Party[counter].change_face("_surprised",Mouth="_smirk")
+                $ Party[counter].change_face("_surprised",mouth="_smirk")
                 ch_l "Really?"
                 $ Party[counter].change_face("_angry")
                 ch_l "That's your play here."
@@ -1644,24 +1644,24 @@ label Date_Prep(Girl=0):
     if Girl.clothing[7]:
 
         if Girl.clothing[7] == 2:
-            $ Girl.outfit = "casual2"
+            $ Girl.outfit_name = "casual2"
         elif Girl.clothing[7] == 3:
-            $ Girl.outfit = "custom1"
+            $ Girl.outfit_name = "custom1"
         elif Girl.clothing[7] == 4:
-            $ Girl.outfit = "gym"
+            $ Girl.outfit_name = "gym"
         elif Girl.clothing[7] == 5:
-            $ Girl.outfit = "custom2"
+            $ Girl.outfit_name = "custom2"
         elif Girl.clothing[7] == 6:
-            $ Girl.outfit = "custom3"
+            $ Girl.outfit_name = "custom3"
         else:
-            $ Girl.outfit = "casual1"
+            $ Girl.outfit_name = "casual1"
     else:
         $ Options = ["casual2", "casual1"]
         $ Options.append("custom1") if Girl.first_custom_outfit[0] == 2 else Options
         $ Options.append("custom2") if Girl.second_custom_outfit[0] == 2 else Options
         $ Options.append("custom3") if Girl.third_custom_outfit[0] == 2 else Options
         $ renpy.random.shuffle(Options)
-        $ Girl.outfit = Options[0]
+        $ Girl.outfit_name = Options[0]
         $ del Options[:]
     $ Girl.location = "date"
     $ Girl.change_outfit(outfit_changed=1)
@@ -1758,7 +1758,7 @@ label Rogue_Dinner(GirlCost=0):
     menu:
         "For [RogueX.name] you order. . ."
         "Surf and turf. ($20)":
-            $ RogueX.change_face("_smile", Brows = "_surprised")
+            $ RogueX.change_face("_smile", brows = "_surprised")
             ch_r "Ooh, you're really pulling out the stops here."
             $ RogueX.change_face()
             $ RogueX.change_stat("love", 80, 5)
@@ -1809,7 +1809,7 @@ label Kitty_Dinner(GirlCost=0):
     menu:
         "For [KittyX.name] you order. . ."
         "Surf and turf. ($20)":
-            $ KittyX.change_face("_sad",Brows = "_surprised")
+            $ KittyX.change_face("_sad",brows = "_surprised")
             ch_k "Um, I[KittyX.like]don't really eat shellfish. . ."
             $ KittyX.change_face()
             $ KittyX.change_stat("love", 80, -5)
@@ -1913,7 +1913,7 @@ label Laura_Dinner(GirlCost=0):
     menu:
         "For [LauraX.name] you order. . ."
         "Surf and turf. ($20)":
-            $ LauraX.change_face("_sad",Brows = "_surprised")
+            $ LauraX.change_face("_sad",brows = "_surprised")
             ch_l "Nice. . ."
             $ LauraX.change_face()
             $ LauraX.change_stat("love", 80, 5)
@@ -1981,7 +1981,7 @@ label Jean_Dinner(GirlCost=0):
         menu:
             "For [JeanX.name] you order. . ."
             "Surf and turf. ($20)":
-                $ JeanX.change_face("_sly",Brows = "_surprised")
+                $ JeanX.change_face("_sly",brows = "_surprised")
                 ch_j "Good choice."
                 $ JeanX.change_face()
                 $ JeanX.change_stat("love", 80, 3)
@@ -2054,7 +2054,7 @@ label Storm_Dinner(GirlCost=0):
     menu:
         "For [StormX.name] you order. . ."
         "Surf and turf. ($20)":
-            $ StormX.change_face("_confused",Mouth="_smile")
+            $ StormX.change_face("_confused",mouth="_smile")
             ch_s "This is a bit heavy. . ."
             $ StormX.change_face()
             $ StormX.change_stat("love", 80, 3)
@@ -2103,7 +2103,7 @@ label Jubes_Dinner(GirlCost=0):
     menu:
         "For [JubesX.name] you order. . ."
         "Surf and turf. ($20)":
-            $ JubesX.change_face("_sad",Brows = "_surprised")
+            $ JubesX.change_face("_sad",brows = "_surprised")
             ch_v "Show-off. . ."
             $ JubesX.change_face()
             $ JubesX.change_stat("love", 80, -5)
@@ -2452,8 +2452,8 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
         call check_if_second_minds (Girl, Previous)
         if _return == 4:
 
-            if Girl.legs:
-                "She takes your hand and pulls it over to her crotch, shoving it under her [Girl.legs]."
+            if Girl.outfit["bottom"]:
+                "She takes your hand and pulls it over to her crotch, shoving it under her [Girl.outfit['legs']]."
             else:
                 "She takes your hand and shoves it into her crotch."
             $ Girl.change_face("_sadside", 2)
@@ -2462,8 +2462,8 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             $ Girl.change_stat("inhibition", 80, -5)
             call Date_Bonus (Girl, -3)
         else:
-            if Girl.legs:
-                "She takes your hand and pulls it over to her crotch, shoving it under her [Girl.legs]."
+            if Girl.outfit["bottom"]:
+                "She takes your hand and pulls it over to her crotch, shoving it under her [Girl.outfit['legs']]."
             else:
                 "She takes your hand and shoves it into her crotch."
             "You can feel that she's warm as a furnace."
@@ -2661,20 +2661,20 @@ label Date_Movies:
 
     if line == "romcom":
         if RogueX in Party and primary_action != RogueX:
-            $ RogueX.change_face("_smile", Eyes="_surprised")
+            $ RogueX.change_face("_smile", eyes="_surprised")
             $ RogueX.change_stat("love", 50, 2)
             $ RogueX.change_stat("love", 95, 4)
             $ RogueX.change_stat("inhibition", 50, 2)
             ch_r "Oooh, I love a good rom-com, [RogueX.player_petname]. This should be great!"
             call Date_Bonus (RogueX, 15)
         if KittyX in Party and primary_action != KittyX:
-            $ KittyX.change_face("_smile", Eyes="_surprised")
+            $ KittyX.change_face("_smile", eyes="_surprised")
             $ KittyX.change_stat("love", 50, 2)
             $ KittyX.change_stat("love", 95, 3)
             ch_k "Aw, how cuuuute!"
             call Date_Bonus (KittyX, 5)
         if EmmaX in Party and primary_action != EmmaX:
-            $ EmmaX.change_face("_confused", Mouth="_sad")
+            $ EmmaX.change_face("_confused", mouth="_sad")
             $ EmmaX.change_stat("love", 70, 2)
             $ EmmaX.change_stat("obedience", 50, 5)
             $ EmmaX.change_stat("inhibition", 70, -3)
@@ -2719,7 +2719,7 @@ label Date_Movies:
             ch_k "Action movies are kind of fun."
             call Date_Bonus (KittyX, 5)
         if EmmaX in Party and primary_action != EmmaX:
-            $ EmmaX.change_face("_sadside", Brows="_angry")
+            $ EmmaX.change_face("_sadside", brows="_angry")
             $ EmmaX.change_stat("love", 70, -2)
             $ EmmaX.change_stat("obedience", 50, 5)
             ch_e "I suppose it will at least keep me occupied."
@@ -2751,14 +2751,14 @@ label Date_Movies:
             call Date_Bonus (JubesX, 15)
     elif line == "horror":
         if RogueX in Party and primary_action != RogueX:
-            $ RogueX.change_face("_sad", Eyes="_surprised")
+            $ RogueX.change_face("_sad", eyes="_surprised")
             $ RogueX.change_stat("love", 90, -3)
             $ RogueX.change_stat("obedience", 50, 3)
             $ RogueX.change_stat("obedience", 80, 2)
             ch_r "I'm not really into the spooky stuff, [RogueX.player_petname]."
 
         if KittyX in Party and primary_action != KittyX:
-            $ KittyX.change_face("_sad", Eyes="_surprised")
+            $ KittyX.change_face("_sad", eyes="_surprised")
             $ KittyX.change_stat("love", 90, -5)
             $ KittyX.change_stat("obedience", 50, 4)
             $ KittyX.change_stat("obedience", 80, 2)
@@ -2984,9 +2984,9 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
 
             "You get back to it, [Previous.name] settles back into her seat with a glare."
 
-        if Girl.action_counter["anal"] and approval_check(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.legs_number() <= 5:
+        if Girl.action_counter["anal"] and approval_check(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.bottom_number() <= 5:
             $ OptionsDS.append("anal")
-        if Girl.action_counter["sex"] and approval_check(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.legs_number() <= 5:
+        if Girl.action_counter["sex"] and approval_check(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.bottom_number() <= 5:
             $ OptionsDS.append("sex")
         if Girl.action_counter["blowjob"] and approval_check(Girl, 1300, Bonus=(10*GirlBonus)):
             $ OptionsDS.append("blowjob")
@@ -2997,7 +2997,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             $ OptionsDS.append("handjob")
         if Girl.action_counter["fondle_pussy"] and approval_check(Girl, 900, Bonus=(10*GirlBonus)):
             $ OptionsDS.append("pussy")
-        elif approval_check(Girl, 1200, Bonus=(5*GirlBonus)) and Girl.underwear:
+        elif approval_check(Girl, 1200, Bonus=(5*GirlBonus)) and Girl.outfit["underwear"]:
             $ OptionsDS.append("_panties")
         elif approval_check(Girl, 1200, Bonus=(5*GirlBonus)):
             $ OptionsDS.append("flash")
@@ -3007,7 +3007,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
 
         if OptionsDS[0] == "anal":
             $ Girl.change_face("_sexy", 1)
-            if Girl.underwear:
+            if Girl.outfit["underwear"]:
                 "As you make out, [Girl.name] reaches down and undoes your fly. She pulls her panties aside and shifts into your lap."
             else:
                 "As you make out, [Girl.name] reaches down and undoes your fly. She hikes her skirt up a bit and shifts into your lap."
@@ -3023,7 +3023,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 $ Girl.check_if_likes(Previous,1000,3,1)
                 $ Previous.check_if_likes(Girl,1000,2,1)
             if Girl.event_counter["anal_creampied"]:
-                if Girl.underwear:
+                if Girl.outfit["underwear"]:
                     "After several minutes of this, you can't take it anymore and come inside her."
                     "She pulls her panties back up and returns to her seat."
                 else:
@@ -3041,7 +3041,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                         "You cum into the popcorn bucket, which she then finishes off."
                     $ Girl.addiction -= 20
                     $ Girl.event_counter["swallowed"] += 1
-                    $ Girl.spunk.append("mouth")
+                    $ Girl.spunk["mouth"] = True
                     $ Girl.recent_history.append("swallowed")
                     $ Girl.daily_history.append("swallowed")
                 else:
@@ -3072,7 +3072,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             $ Girl.daily_history.append("anal")
         elif OptionsDS[0] == "sex":
             $ Girl.change_face("_sexy", 1)
-            if Girl.underwear:
+            if Girl.outfit["underwear"]:
                 "As you make out, [Girl.name] reaches down and undoes your fly. She pulls her panties aside and shifts into your lap."
             else:
                 "As you make out, [Girl.name] reaches down and undoes your fly. She hikes her skirt up a bit and shifts into your lap."
@@ -3088,7 +3088,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 $ Girl.check_if_likes(Previous,1000,3,1)
                 $ Previous.check_if_likes(Girl,1000,2,1)
             if Girl.event_counter["creampied"]:
-                if Girl.underwear:
+                if Girl.outfit["underwear"]:
                     "After several minutes of this, you can't take it anymore and come inside her."
                     "She pulls her panties up over her dripping slit and returns to her seat."
                 else:
@@ -3104,7 +3104,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                         "You cum into the popcorn bucket, which she and [Previous.name] then finish off together."
                     else:
                         "You cum into the popcorn bucket, which she then finishes off."
-                    $ Girl.spunk.append("mouth")
+                    $ Girl.spunk["mouth"] = True
                     $ Girl.addiction -= 20
                     $ Girl.event_counter["swallowed"] += 1
                     $ Girl.recent_history.append("swallowed")
@@ -3150,7 +3150,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 $ Previous.check_if_likes(Girl,1000,2,1)
             else:
                 "She sucks on it contentedly for several minutes before you finally cum."
-            $ Girl.spunk.append("mouth")
+            $ Girl.spunk["mouth"] = True
             if Girl.event_counter["swallowed"]:
                 "[Girl.name] wipes her mouth as she shifts back into her seat and washes it down with some soda."
                 $ Girl.change_face("_sexy")
@@ -3220,15 +3220,15 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
 
                     "You also reach down and begin stroking their pussies."
                 else:
-                    if Girl.legs:
-                        "You also lean over, reach into her [Girl.legs], and begin to stroke her pussy."
-                    elif Girl.hose:
-                        "You also lean in, reach under her [Girl.hose], and begin to stroke her pussy."
-                    elif Girl.underwear:
+                    if Girl.outfit["bottom"]:
+                        "You also lean over, reach into her [Girl.outfit['legs']], and begin to stroke her pussy."
+                    elif Girl.outfit["hose"]:
+                        "You also lean in, reach under her [Girl.outfit['hose']], and begin to stroke her pussy."
+                    elif Girl.outfit["underwear"]:
                         "You also lean in, reach under her panties, and begin to stroke her pussy."
                     else:
                         "You also lean over, notice she isn't wearing anything down there, and begin to stroke her pussy."
-            $ Girl.change_face("_sexy", 1, Eyes = "_closed")
+            $ Girl.change_face("_sexy", 1, eyes = "_closed")
             if Girl.action_counter["fondle_pussy"]:
                 if _return == 1:
                     "After several minutes of this, [Girl.name] and [Previous.name] shudder in orgasm, which sets you off as well."
@@ -3241,7 +3241,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                     "The girls finish off the remaining popcorn with a grin."
                 else:
                     "She finishes off the remaining popcorn with a grin."
-                $ Girl.spunk.append("mouth")
+                $ Girl.spunk["mouth"] = True
                 if Girl == RogueX:
                     ch_r "Best topping they got here, [Girl.player_petname]."
                 elif Girl == KittyX:
@@ -3290,11 +3290,11 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             $ Girl.daily_history.append("handjob")
         elif OptionsDS[0] == "pussy":
             $ Girl.change_face("_sexy")
-            if Girl.legs:
-                "As you make out, [Girl.name] grabs your hand and shoves it down her [Girl.legs]."
-            elif Girl.hose:
-                "As you make out, [Girl.name] grabs your hand and shoves it down her [Girl.hose]."
-            elif Girl.underwear:
+            if Girl.outfit["bottom"]:
+                "As you make out, [Girl.name] grabs your hand and shoves it down her [Girl.outfit['legs']]."
+            elif Girl.outfit["hose"]:
+                "As you make out, [Girl.name] grabs your hand and shoves it down her [Girl.outfit['hose']]."
+            elif Girl.outfit["underwear"]:
                 "As you make out, [Girl.name] grabs your hand and shoves it down her panties."
             else:
                 "As you make out, [Girl.name] grabs your hand and shoves it between her legs."
@@ -3339,7 +3339,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             "After a second, she hands you a cloth lump, apparently her panties."
             $ Girl.daily_history.append("commando")
             $ Girl.change_stat("inhibition", 60, 2)
-            $ Girl.underwear = ""
+            $ Girl.outfit["underwear"] = ""
             if Girl == RogueX:
                 ch_r "Just a little downpayment on later, [Girl.player_petname]."
             elif Girl == KittyX:
@@ -3357,9 +3357,9 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
         elif OptionsDS[0] == "flash":
             $ Girl.change_face("_sexy")
             "After making out for a few minutes, [Girl.name] gets a sly look on her face, then shifts a bit lower in her seat."
-            if Girl.legs_number() > 6:
+            if Girl.bottom_number() > 6:
                 "Looking down, you notice she's pulled down her pants enough that you can see her bare pussy, lit by the movie screen."
-            elif Girl.legs_number() == 6:
+            elif Girl.bottom_number() == 6:
                 "Looking down, you notice she's pulled down her shorts enough that you can see her bare pussy, lit by the movie screen."
             else:
                 "Looking down, you notice she's hiked up her skirt enough that you can see her bare pussy, lit by the movie screen."
@@ -3678,14 +3678,14 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
                 $ JeanX.change_stat("love", 200, -5)
                 $ JeanX.change_stat("obedience", 80, 4)
         if approval_check(JeanX, 900) and len(Party) < 2:
-            $ JeanX.change_face("_confused",Mouth="_smirk")
+            $ JeanX.change_face("_confused",mouth="_smirk")
             ch_j "Ooh, bad move . ."
             $ JeanX.change_stat("obedience", 30, 3)
             $ JeanX.change_stat("obedience", 80, 2)
             if bg_current == "bg_restaurant" and "dinnersex" in JeanX.recent_history:
                 call Date_Bonus (JeanX, -Play_Cost)
         elif approval_check(JeanX, 1100) and len(Party) >= 2:
-            $ JeanX.change_face("_confused",Mouth="_smirk")
+            $ JeanX.change_face("_confused",mouth="_smirk")
             ch_j "Seriously? . ."
             $ JeanX.change_stat("love", 80, -5)
             $ JeanX.change_stat("obedience", 30, 4)
@@ -3786,7 +3786,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
         while Count > 0:
             $ Count -= 1
             if approval_check(Party[Count], 600):
-                $ Party[Count].change_face("_sad",Mouth="_normal")
+                $ Party[Count].change_face("_sad",mouth="_normal")
                 $ Party[Count].change_stat("obedience", 50, 2)
                 if Party[Count] == RogueX:
                     ch_r "Fine, I guess that's fair."
@@ -3813,10 +3813,10 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
                 else:
                     $ Party[Count].change_stat("love", 200, -3,Alt=[[LauraX],200,0])
                 if Party[Count] == RogueX:
-                    $ RogueX.change_face("_angry",Eyes="_side")
+                    $ RogueX.change_face("_angry",eyes="_side")
                     ch_r "Tch. Cheapskate."
                 elif Party[Count] == KittyX:
-                    $ KittyX.change_face("_angry",Eyes="_side")
+                    $ KittyX.change_face("_angry",eyes="_side")
                     ch_k "Jerk."
                 elif Party[Count] == EmmaX:
                     $ EmmaX.change_face("_sadside")
@@ -3831,7 +3831,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
                     $ StormX.change_face("_sadside")
                     ch_s "Do not bite off more than you can chew."
                 elif Party[Count] == JubesX:
-                    $ JubesX.change_face("_angry",Eyes="_side")
+                    $ JubesX.change_face("_angry",eyes="_side")
                     ch_v "Kinda cheap, but. . ."
             $ Date_Bonus[Count] -= 10 if Date_Cost[Count] >= 15 else 0
         $ Player.cash -= Play_Cost
@@ -3898,7 +3898,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
     if JeanX in Party and line in (JeanX,"split","deadbeat"):
 
         ch_j "Waiter?"
-        $ JeanX.change_face("_confused",Eyes="psychic")
+        $ JeanX.change_face("_confused",eyes="psychic")
         ch_j ". . ."
         $ JeanX.change_face("_sly")
         ch_j "There, that should cover it."
@@ -4047,7 +4047,7 @@ label Girl_Date_End(Girl=0):
         "You walk [Girl.name] back to her room."
     if Date_Bonus[0] < 0:
 
-        $ Girl.change_face("_angry", 0,Eyes = "_side")
+        $ Girl.change_face("_angry", 0,eyes = "_side")
         if Girl == RogueX:
             ch_r "Well that was a waste of an evening. I'll see you around, [Player.name]."
         elif Girl == KittyX:

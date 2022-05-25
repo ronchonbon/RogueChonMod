@@ -376,23 +376,23 @@ label Jean_Monogamy:
 
     menu:
         "Could you not hook up with other girls?" if "monogamous" not in JeanX.traits:
-            if JeanX.thirst >= 60 and not approval_check(JeanX, 1700, "LO", TabM=0):
+            if JeanX.thirst >= 60 and not approval_check(JeanX, 1700, "LO", taboo_modifier=0):
 
                 $ JeanX.change_face("_sly",1)
                 if "monogamous" not in JeanX.daily_history:
                     $ JeanX.change_stat("obedience", 90, -2)
                 ch_j "Sorry, I've got plans later."
                 return
-            elif approval_check(JeanX, 1200, "LO", TabM=0) and JeanX.love >= JeanX.obedience:
+            elif approval_check(JeanX, 1200, "LO", taboo_modifier=0) and JeanX.love >= JeanX.obedience:
 
                 $ JeanX.change_face("_sly",1)
                 if "monogamous" not in JeanX.daily_history:
                     $ JeanX.change_stat("love", 90, 1)
                 ch_j "Oh, jealous?"
                 ch_j "Ok, fine, but you owe me. . ."
-            elif approval_check(JeanX, 700, "O", TabM=0):
+            elif approval_check(JeanX, 700, "O", taboo_modifier=0):
 
-                $ JeanX.change_face("_sly",1,Eyes="_side")
+                $ JeanX.change_face("_sly",1,eyes="_side")
                 ch_j "Well. . . ok, fine."
             else:
 
@@ -404,29 +404,29 @@ label Jean_Monogamy:
             $ JeanX.add_word(1,0,"monogamous")
             $ JeanX.traits.append("monogamous")
         "Don't hook up with other girls." if "monogamous" not in JeanX.traits:
-            if approval_check(JeanX, 900, "O", TabM=0):
+            if approval_check(JeanX, 900, "O", taboo_modifier=0):
 
-                $ JeanX.change_face("_sly",1,Eyes="_side")
+                $ JeanX.change_face("_sly",1,eyes="_side")
                 ch_j "Well. . . ok, fine."
-            elif JeanX.thirst >= 60 and not approval_check(JeanX, 1700, "LO", TabM=0):
+            elif JeanX.thirst >= 60 and not approval_check(JeanX, 1700, "LO", taboo_modifier=0):
 
                 $ JeanX.change_face("_sly",1)
                 if "monogamous" not in JeanX.daily_history:
                     $ JeanX.change_stat("obedience", 90, -2)
                 ch_j "Sorry, I've got plans later."
                 return
-            elif approval_check(JeanX, 600, "O", TabM=0):
+            elif approval_check(JeanX, 600, "O", taboo_modifier=0):
 
-                $ JeanX.change_face("_sly",1,Eyes="_side")
+                $ JeanX.change_face("_sly",1,eyes="_side")
                 ch_j "Well. . . ok, fine."
-            elif approval_check(JeanX, 1400, "LO", TabM=0):
+            elif approval_check(JeanX, 1400, "LO", taboo_modifier=0):
 
                 $ JeanX.change_face("_sly",1)
                 ch_j "Oh, jealous?"
                 ch_j "Ok, fine, but you owe me. . ."
             else:
 
-                $ JeanX.change_face("_sly",1,Brows="_confused")
+                $ JeanX.change_face("_sly",1,brows="_confused")
                 ch_j "Ha!"
                 return
             if "monogamous" not in JeanX.daily_history:
@@ -434,14 +434,14 @@ label Jean_Monogamy:
             $ JeanX.add_word(1,0,"monogamous")
             $ JeanX.traits.append("monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in JeanX.traits:
-            if approval_check(JeanX, 700, "O", TabM=0):
-                $ JeanX.change_face("_sly",1,Eyes="_side")
+            if approval_check(JeanX, 700, "O", taboo_modifier=0):
+                $ JeanX.change_face("_sly",1,eyes="_side")
                 ch_j ". . . good."
-            elif approval_check(JeanX, 800, "L", TabM=0):
+            elif approval_check(JeanX, 800, "L", taboo_modifier=0):
                 $ JeanX.change_face("_sly",1)
                 ch_j "Ok. . ."
             else:
-                $ JeanX.change_face("_sly",1,Brows="_confused")
+                $ JeanX.change_face("_sly",1,brows="_confused")
                 if "monogamous" not in JeanX.daily_history:
                     $ JeanX.change_stat("love", 90, -2)
                 ch_j "Good to know. . ."
@@ -459,12 +459,12 @@ label Jean_Monogamy:
 label Jean_Jumped:
 
     ch_p "Hey, Remember that time you threw yourself at me?"
-    $ JeanX.change_face("_sly",1,Brows="_confused")
+    $ JeanX.change_face("_sly",1,brows="_confused")
     ch_j "I'm not sure I'd put it like that, but. . . yeah?"
     menu:
         ch_j ". . . yeah?"
         "Could you maybe just ask instead?" if "chill" not in JeanX.traits:
-            if JeanX.thirst >= 60 and not approval_check(JeanX, 1500, "LO", TabM=0):
+            if JeanX.thirst >= 60 and not approval_check(JeanX, 1500, "LO", taboo_modifier=0):
 
                 $ JeanX.change_face("_sly",1)
                 if "chill" not in JeanX.daily_history:
@@ -472,17 +472,17 @@ label Jean_Jumped:
                 ch_j "Why waste the time?"
                 ch_j "It's not like you'd say \"no.\""
                 return
-            elif approval_check(JeanX, 1000, "LO", TabM=0) and JeanX.love >= JeanX.obedience:
+            elif approval_check(JeanX, 1000, "LO", taboo_modifier=0) and JeanX.love >= JeanX.obedience:
 
                 $ JeanX.change_face("_surprised",1)
                 if "chill" not in JeanX.daily_history:
                     $ JeanX.change_stat("love", 90, 1)
                 ch_j "I was really horny though. . ."
-                $ JeanX.change_face("_sly",1,Eyes="_side")
+                $ JeanX.change_face("_sly",1,eyes="_side")
                 ch_j "I'll give it some thought. . ."
-            elif approval_check(JeanX, 500, "O", TabM=0):
+            elif approval_check(JeanX, 500, "O", taboo_modifier=0):
 
-                $ JeanX.change_face("_sly",1,Eyes="_side")
+                $ JeanX.change_face("_sly",1,eyes="_side")
                 ch_j "Maybe. . ."
             else:
 
@@ -495,11 +495,11 @@ label Jean_Jumped:
             $ JeanX.add_word(1,0,"chill")
             $ JeanX.traits.append("chill")
         "Don't bother me like that." if "chill" not in JeanX.traits:
-            if approval_check(JeanX, 800, "O", TabM=0):
+            if approval_check(JeanX, 800, "O", taboo_modifier=0):
 
-                $ JeanX.change_face("_sly",1,Eyes="_side")
+                $ JeanX.change_face("_sly",1,eyes="_side")
                 ch_j ". . . fine. . ."
-            elif JeanX.thirst >= 60 and not approval_check(JeanX, 500, "O", TabM=0):
+            elif JeanX.thirst >= 60 and not approval_check(JeanX, 500, "O", taboo_modifier=0):
 
                 $ JeanX.change_face("_sly",1)
                 if "chill" not in JeanX.daily_history:
@@ -507,11 +507,11 @@ label Jean_Jumped:
                 ch_j "Why waste the time?"
                 ch_j "It's not like you'd say \"no.\""
                 return
-            elif approval_check(JeanX, 400, "O", TabM=0):
+            elif approval_check(JeanX, 400, "O", taboo_modifier=0):
 
-                $ JeanX.change_face("_sly",1,Eyes="_side")
+                $ JeanX.change_face("_sly",1,eyes="_side")
                 ch_j "Well. . . ok. . ."
-            elif approval_check(JeanX, 500, "LO", TabM=0) and not approval_check(JeanX, 500, "I", TabM=0):
+            elif approval_check(JeanX, 500, "LO", taboo_modifier=0) and not approval_check(JeanX, 500, "I", taboo_modifier=0):
 
                 $ JeanX.change_face("_sly",1)
                 ch_j "Rude."
@@ -527,14 +527,14 @@ label Jean_Jumped:
             $ JeanX.add_word(1,0,"chill")
             $ JeanX.traits.append("chill")
         "Knock yourself out.":
-            if approval_check(JeanX, 800, "L", TabM=0):
+            if approval_check(JeanX, 800, "L", taboo_modifier=0):
                 $ JeanX.change_face("_sly",1)
                 ch_j "Heh, you know how I think. . ."
-            elif approval_check(JeanX, 700, "O", TabM=0):
-                $ JeanX.change_face("_sly",1,Eyes="_side")
+            elif approval_check(JeanX, 700, "O", taboo_modifier=0):
+                $ JeanX.change_face("_sly",1,eyes="_side")
                 ch_j "Good to know."
             else:
-                $ JeanX.change_face("_sly",1,Brows="_confused")
+                $ JeanX.change_face("_sly",1,brows="_confused")
                 if "chill" not in JeanX.daily_history:
                     $ JeanX.change_stat("love", 90, -2)
                 ch_j "We'll see. . ."
@@ -608,7 +608,7 @@ label Jean_Sexchat:
                                 $ JeanX.change_face("_perplexed")
                                 ch_j "Oh? Who with?"
                             else:
-                                $ JeanX.change_face("_bemused",Eyes="_side")
+                                $ JeanX.change_face("_bemused",eyes="_side")
                                 ch_j "Heh, heh, yeah, um, it's ok. . ."
                             $ JeanX.player_favorite_action = "anal"
                         "Blowjobs.":
@@ -1344,7 +1344,7 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
         ch_j "Still, with you it's pretty fun."
 
     elif Options[0] == "seenpeen":
-        $ JeanX.change_face("_sly",1, Eyes="_down")
+        $ JeanX.change_face("_sly",1, eyes="_down")
         ch_j "Oh, I forgot to mention, congrats on that package you're swinging. . ."
         $ JeanX.change_face("_bemused",1)
         $ JeanX.change_stat("love", 50, 5)
@@ -1388,7 +1388,7 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
         if D20 == 1:
             $ JeanX.change_face("_normal")
             ch_j "Hey, pass me your physics notes."
-            $ JeanX.change_face("_angry",Eyes="_down")
+            $ JeanX.change_face("_angry",eyes="_down")
             ch_j ". . ."
             $ JeanX.change_face("_angry")
             ch_j "These notes are trash. Do better."
@@ -1396,7 +1396,7 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
             $ JeanX.change_face("_angry")
             ch_j "Where'd Lance go? I haven't seen him around in a while."
         elif D20 == 3:
-            $ JeanX.change_face("_normal",Eyes="_side")
+            $ JeanX.change_face("_normal",eyes="_side")
             ch_j ". . ."
             $ JeanX.change_face("_surprised")
             ch_j "Oh, what were you talking about?"
@@ -1417,7 +1417,7 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
         elif D20 == 8:
             $ JeanX.change_face("_angry")
             ch_j "Quiet."
-            $ JeanX.change_face("_angry",Eyes="_side")
+            $ JeanX.change_face("_angry",eyes="_side")
             ch_j "It's thinking time."
             $ JeanX.change_face("_smile")
             ch_j "Ok, done."
@@ -2257,13 +2257,13 @@ label Jean_Clothes:
     if JeanX.taboo:
         if "exhibitionist" in JeanX.traits:
             ch_j "Yeah? . ."
-        elif approval_check(JeanX, 900, TabM=4) or approval_check(JeanX, 400, "I", TabM=3):
+        elif approval_check(JeanX, 900, taboo_modifier=4) or approval_check(JeanX, 400, "I", taboo_modifier=3):
             ch_j "Oh, I guess we could. . ."
         else:
             ch_j "I think this is kind of exposed. . ."
             ch_j "Can we talk about this in our rooms?"
             return
-    elif approval_check(JeanX, 900, TabM=4) or approval_check(JeanX, 600, "L") or approval_check(JeanX, 300, "O"):
+    elif approval_check(JeanX, 900, taboo_modifier=4) or approval_check(JeanX, 600, "L") or approval_check(JeanX, 300, "O"):
         ch_j "Oh? What about them?"
     else:
         ch_j "Just enjoy, don't advise."
@@ -2330,7 +2330,7 @@ label Jean_Wardrobe_Menu:
                         hide dress_screen
                     else:
                         $ JeanX.change_outfit()
-                $ JeanX.Set_Temp_outfit()
+                $ JeanX.set_temp_outfit()
                 $ primary_action = None
                 call Switch_chat
                 if Girl != JeanX:
@@ -2363,7 +2363,7 @@ label Jean_Wardrobe_Menu:
                         hide dress_screen
                     else:
                         $ JeanX.change_outfit()
-                $ JeanX.Set_Temp_outfit()
+                $ JeanX.set_temp_outfit()
                 $ JeanX.had_chat[1] += 1
                 $ primary_action = None
                 return
@@ -2399,8 +2399,8 @@ label Jean_Wardrobe_Menu:
             $ JeanX.change_outfit("casual1")
             menu:
                 "You should wear this one out. [[set current outfit]":
-                    $ JeanX.outfit = "casual1"
-                    $ JeanX.shame = 0
+                    $ JeanX.outfit_name = "casual1"
+                    $ JeanX.outfit["shame"] = 0
                     ch_j "Yeah, I've worn this one a long time."
                 "Let's try something else though.":
                     ch_j "Sure. . ."
@@ -2409,8 +2409,8 @@ label Jean_Wardrobe_Menu:
             $ JeanX.change_outfit("casual2")
             menu:
                 "You should wear this one out. [[set current outfit]":
-                    $ JeanX.outfit = "casual2"
-                    $ JeanX.shame = 0
+                    $ JeanX.outfit_name = "casual2"
+                    $ JeanX.outfit["shame"] = 0
                     ch_j "Ok, this one has a real \"classic\" feel. . ."
                 "Let's try something else though.":
                     ch_j "Sure. . ."
@@ -2501,20 +2501,20 @@ label Jean_Wardrobe_Menu:
 
             $ JeanX.change_face("_sexy", 1)
             $ line = 0
-            if not JeanX.bra and not JeanX.underwear and not JeanX.top and not JeanX.legs and not JeanX.hose:
+            if not JeanX.outfit["bra"] and not JeanX.outfit["underwear"] and not JeanX.outfit["top"] and not JeanX.outfit["bottom"] and not JeanX.outfit["hose"]:
                 ch_j "Duh."
-            elif JeanX.seen_breasts and JeanX.seen_pussy and approval_check(JeanX, 1200, TabM=4):
+            elif JeanX.seen_breasts and JeanX.seen_pussy and approval_check(JeanX, 1200, taboo_modifier=4):
                 ch_j "You know it. . ."
                 $ line = 1
-            elif approval_check(JeanX, 2000, TabM=4):
+            elif approval_check(JeanX, 2000, taboo_modifier=4):
                 ch_j "Oh, going right for it, huh?"
                 $ line = 1
-            elif JeanX.seen_breasts and JeanX.seen_pussy and approval_check(JeanX, 1200, TabM=0):
+            elif JeanX.seen_breasts and JeanX.seen_pussy and approval_check(JeanX, 1200, taboo_modifier=0):
                 ch_j "You know it, but maybe not right here. . ."
-            elif approval_check(JeanX, 2000, TabM=0):
+            elif approval_check(JeanX, 2000, taboo_modifier=0):
                 ch_j "Maybe, but not here. . ."
-            elif approval_check(JeanX, 1000, TabM=0):
-                $ JeanX.change_face("_confused", 1,Mouth="_smirk")
+            elif approval_check(JeanX, 1000, taboo_modifier=0):
+                $ JeanX.change_face("_confused", 1,mouth="_smirk")
                 ch_j "Yeah, but I'm not sharing."
                 $ JeanX.change_face("_bemused", 0)
             else:
@@ -2533,14 +2533,14 @@ label Jean_Wardrobe_Menu:
                     "You know, you should wear this one out. [[set current outfit]":
                         if "exhibitionist" in JeanX.traits:
                             ch_j "mmmm. . ."
-                            $ JeanX.outfit = "nude"
+                            $ JeanX.outfit_name = "nude"
                             $ JeanX.change_stat("lust", 50, 10)
                             $ JeanX.change_stat("lust", 70, 5)
-                            $ JeanX.shame = 50
-                        elif "nowhammy" not in JeanX.traits or approval_check(JeanX, 800, "I") or approval_check(JeanX, 2800, TabM=0):
+                            $ JeanX.outfit["shame"] = 50
+                        elif "nowhammy" not in JeanX.traits or approval_check(JeanX, 800, "I") or approval_check(JeanX, 2800, taboo_modifier=0):
                             ch_j "Sure, ok. . ."
-                            $ JeanX.outfit = "nude"
-                            $ JeanX.shame = 50
+                            $ JeanX.outfit_name = "nude"
+                            $ JeanX.outfit["shame"] = 50
                         else:
                             $ JeanX.change_face("_sexy", 1)
                             $ JeanX.eyes = "_surprised"
@@ -2549,7 +2549,7 @@ label Jean_Wardrobe_Menu:
 
                         if "exhibitionist" in JeanX.traits:
                             ch_j "Oh, ok. . ."
-                        elif "nowhammy" not in JeanX.traits or approval_check(JeanX, 800, "I") or approval_check(JeanX, 2800, TabM=0):
+                        elif "nowhammy" not in JeanX.traits or approval_check(JeanX, 800, "I") or approval_check(JeanX, 2800, taboo_modifier=0):
                             $ JeanX.change_face("_bemused", 1)
                             ch_j "I thought you might want me to go out like this. . ."
                             ch_j ". . ."
@@ -2568,11 +2568,11 @@ label Jean_Wardrobe_Menu:
 
     menu Jean_Clothes_Over:
 
-        "Why don't you go with no [JeanX.top]?" if JeanX.top:
+        "Why don't you go with no [JeanX.outfit['top']]?" if JeanX.outfit["top"]:
             $ JeanX.change_face("_bemused", 1)
-            if approval_check(JeanX, 800, TabM=3) and (JeanX.bra or JeanX.seen_breasts):
+            if approval_check(JeanX, 800, taboo_modifier=3) and (JeanX.outfit["bra"] or JeanX.seen_breasts):
                 ch_j "Ok."
-            elif approval_check(JeanX, 600, TabM=0):
+            elif approval_check(JeanX, 600, taboo_modifier=0):
                 call Jean_NoBra
                 if not _return:
                     if not approval_check(JeanX, 1200):
@@ -2585,35 +2585,35 @@ label Jean_Wardrobe_Menu:
                 call Display_dress_screen (JeanX)
                 if not _return:
                     ch_j "Not right now."
-                    if not JeanX.bra:
+                    if not JeanX.outfit["bra"]:
                         ch_j "I'm not wearing a bra right now."
                     return
-            $ line = JeanX.top
-            $ JeanX.top = ""
+            $ line = JeanX.outfit["top"]
+            $ JeanX.outfit["top"] = ""
             "She throws her [line] at her feet."
-            if not JeanX.bra and not renpy.showing('dress_screen'):
+            if not JeanX.outfit["bra"] and not renpy.showing('dress_screen'):
                 call Jean_First_Topless
 
-        "Try on that pink shirt." if JeanX.top != "_pink_shirt":
+        "Try on that pink shirt." if JeanX.outfit["top"] != "_pink_shirt":
             $ JeanX.change_face("_bemused")
             ch_j "Sure."
-            $ JeanX.top = "_pink_shirt"
+            $ JeanX.outfit["top"] = "_pink_shirt"
 
-        "Try on that green shirt." if JeanX.top != "_green_shirt":
+        "Try on that green shirt." if JeanX.outfit["top"] != "_green_shirt":
             $ JeanX.change_face("_bemused")
             ch_j "Sure."
-            $ JeanX.top = "_green_shirt"
+            $ JeanX.outfit["top"] = "_green_shirt"
 
-        "Try on that yellow tanktop." if JeanX.top != "_yellow_shirt" and "halloween" in JeanX.history:
+        "Try on that yellow tanktop." if JeanX.outfit["top"] != "_yellow_shirt" and "halloween" in JeanX.history:
             $ JeanX.change_face("_bemused")
             ch_j "Sure."
-            $ JeanX.top = "_yellow_shirt"
+            $ JeanX.outfit["top"] = "_yellow_shirt"
 
-        "Maybe just throw on a towel?" if JeanX.top != "_towel":
+        "Maybe just throw on a towel?" if JeanX.outfit["top"] != "_towel":
             $ JeanX.change_face("_bemused", 1)
-            if JeanX.bra or JeanX.seen_breasts:
+            if JeanX.outfit["bra"] or JeanX.seen_breasts:
                 ch_j "Um, ok. . ."
-            elif approval_check(JeanX, 1000, TabM=0):
+            elif approval_check(JeanX, 1000, taboo_modifier=0):
                 $ JeanX.change_face("_perplexed", 1)
                 ch_j "Huh, ok . ."
             else:
@@ -2621,7 +2621,7 @@ label Jean_Wardrobe_Menu:
                 if not _return:
                     ch_j "That wouldn't look right."
                     return
-            $ JeanX.top = "_towel"
+            $ JeanX.outfit["top"] = "_towel"
         "Never mind":
 
             pass
@@ -2634,30 +2634,30 @@ label Jean_Wardrobe_Menu:
         menu:
             ch_j "I'm not wearing a bra right now."
             "Then you could slip something on under it. . .":
-                if approval_check(JeanX, 1200, TabM=4) or (JeanX.seen_breasts and approval_check(JeanX, 1000, TabM=3)):
+                if approval_check(JeanX, 1200, taboo_modifier=4) or (JeanX.seen_breasts and approval_check(JeanX, 1000, taboo_modifier=3)):
                     $ JeanX.blushing = "_blush1"
                     ch_j "Well, it's not like I needed one. . ."
                     $ JeanX.blushing = ""
-                elif approval_check(JeanX, 900, TabM=2) and "_lace_bra" in JeanX.inventory:
+                elif approval_check(JeanX, 900, taboo_modifier=2) and "_lace_bra" in JeanX.inventory:
                     ch_j "I guess I could find something."
-                    $ JeanX.bra  = "_lace_bra"
-                    "She pulls out her lace bra and slips it under her [JeanX.top]."
-                elif approval_check(JeanX, 700, TabM=2):
+                    $ JeanX.outfit["bra"]  = "_lace_bra"
+                    "She pulls out her lace bra and slips it under her [JeanX.outfit['top']]."
+                elif approval_check(JeanX, 700, taboo_modifier=2):
                     ch_j "I guess I could find something."
-                    $ JeanX.bra  = "_green_bra"
-                    "She pulls out her green bra and slips it under her [JeanX.top]."
+                    $ JeanX.outfit["bra"]  = "_green_bra"
+                    "She pulls out her green bra and slips it under her [JeanX.outfit['top']]."
                 else:
                     ch_j "Yeah, I don't think so."
                     return False
             "You could always just wear nothing at all. . .":
 
-                if approval_check(JeanX, 1100, "LI", TabM=2) and JeanX.love > JeanX.inhibition:
+                if approval_check(JeanX, 1100, "LI", taboo_modifier=2) and JeanX.love > JeanX.inhibition:
                     ch_j "I guess. . ."
-                elif approval_check(JeanX, 700, "OI", TabM=2) and JeanX.obedience > JeanX.inhibition:
+                elif approval_check(JeanX, 700, "OI", taboo_modifier=2) and JeanX.obedience > JeanX.inhibition:
                     ch_j "Sure. . ."
-                elif approval_check(JeanX, 600, "I", TabM=2):
+                elif approval_check(JeanX, 600, "I", taboo_modifier=2):
                     ch_j "Yeah. . ."
-                elif approval_check(JeanX, 1300, TabM=2):
+                elif approval_check(JeanX, 1300, taboo_modifier=2):
                     ch_j "Okay, fine."
                 else:
                     $ JeanX.change_face("_surprised")
@@ -2677,17 +2677,17 @@ label Jean_Wardrobe_Menu:
 
     menu Jean_Clothes_Legs:
 
-        "Maybe go without the [JeanX.legs]." if JeanX.legs:
+        "Maybe go without the [JeanX.outfit['legs']]." if JeanX.outfit["bottom"]:
             $ JeanX.change_face("_sexy", 1)
-            if JeanX.seen_underwear and JeanX.underwear and approval_check(JeanX, 500, TabM=5):
+            if JeanX.seen_underwear and JeanX.outfit["underwear"] and approval_check(JeanX, 500, taboo_modifier=5):
                 ch_j "Ok, sure."
-            elif JeanX.seen_pussy and approval_check(JeanX, 900, TabM=4):
+            elif JeanX.seen_pussy and approval_check(JeanX, 900, taboo_modifier=4):
                 ch_j "Yeah, ok."
-            elif approval_check(JeanX, 1300, TabM=2) and JeanX.underwear:
+            elif approval_check(JeanX, 1300, taboo_modifier=2) and JeanX.outfit["underwear"]:
                 ch_j "For you, fine. . ."
-            elif approval_check(JeanX, 700) and not JeanX.underwear:
+            elif approval_check(JeanX, 700) and not JeanX.outfit["underwear"]:
                 call Jean_NoPantiesOn
-                if not _return and not JeanX.underwear:
+                if not _return and not JeanX.outfit["underwear"]:
                     if not approval_check(JeanX, 1500):
                         call Display_dress_screen (JeanX)
                         if not _return:
@@ -2698,43 +2698,43 @@ label Jean_Wardrobe_Menu:
                 call Display_dress_screen (JeanX)
                 if not _return:
                     ch_j "Um, not with you around."
-                    if not JeanX.underwear:
+                    if not JeanX.outfit["underwear"]:
                         ch_j "I'm not wearing any panties at the moment."
                     return
 
-            if JeanX.legs == "_pants" or JeanX.legs == "_yoga_pants":
-                $ JeanX.legs = ""
+            if JeanX.outfit["bottom"] == "_pants" or JeanX.outfit["bottom"] == "_yoga_pants":
+                $ JeanX.outfit["bottom"] = ""
                 "She tugs her pants off and drops them to the ground."
             else:
-                $ JeanX.legs = ""
+                $ JeanX.outfit["bottom"] = ""
                 "She tugs her skirt off and drops it to the ground."
             if renpy.showing('dress_screen'):
                 pass
-            elif JeanX.underwear:
+            elif JeanX.outfit["underwear"]:
                 $ JeanX.seen_underwear = 1
             else:
                 call Jean_First_Bottomless
 
-        "You look great in those khaki pants." if JeanX.legs != "_pants":
+        "You look great in those khaki pants." if JeanX.outfit["bottom"] != "_pants":
             ch_j "Yeah, I know."
-            $ JeanX.legs = "_pants"
+            $ JeanX.outfit["bottom"] = "_pants"
 
-        "You look great in those yoga pants." if JeanX.legs != "_yoga_pants":
-            if approval_check(JeanX, 800, TabM=4):
+        "You look great in those yoga pants." if JeanX.outfit["bottom"] != "_yoga_pants":
+            if approval_check(JeanX, 800, taboo_modifier=4):
                 ch_j "Yeah, I know."
-                $ JeanX.legs = "_yoga_pants"
+                $ JeanX.outfit["bottom"] = "_yoga_pants"
             else:
                 call Display_dress_screen (JeanX)
                 if not _return:
                     ch_j "Those are kind of. . . tight."
 
-        "What about wearing your green skirt?" if JeanX.legs != "_skirt":
+        "What about wearing your green skirt?" if JeanX.outfit["bottom"] != "_skirt":
             ch_j "Sure, why not."
-            $ JeanX.legs = "_skirt"
+            $ JeanX.outfit["bottom"] = "_skirt"
 
-        "You look great in those shorts." if JeanX.legs != "_shorts" and "halloween" in JeanX.history:
+        "You look great in those shorts." if JeanX.outfit["bottom"] != "_shorts" and "halloween" in JeanX.history:
             ch_j "Yeah, I know."
-            $ JeanX.legs = "_shorts"
+            $ JeanX.outfit["bottom"] = "_shorts"
         "Never mind":
 
             pass
@@ -2747,41 +2747,41 @@ label Jean_Wardrobe_Menu:
         menu:
             ch_j "I'm not wearing any panties at the moment."
             "Then you could slip on a pair of panties. . .":
-                if approval_check(JeanX, 1500, TabM=4) or (JeanX.seen_pussy and approval_check(JeanX, 1100, TabM=4)):
+                if approval_check(JeanX, 1500, taboo_modifier=4) or (JeanX.seen_pussy and approval_check(JeanX, 1100, taboo_modifier=4)):
                     $ JeanX.blushing = "_blush1"
                     ch_j "No, this is fine. . ."
                     $ JeanX.blushing = ""
-                elif approval_check(JeanX, 700, TabM=4):
+                elif approval_check(JeanX, 700, taboo_modifier=4):
                     ch_j "Yeah, I guess."
                     if "_lace_panties" in JeanX.inventory:
-                        $ JeanX.underwear  = "_lace_panties"
+                        $ JeanX.outfit["underwear"]  = "_lace_panties"
                     else:
-                        $ JeanX.underwear = "_green_panties"
-                    if approval_check(JeanX, 1200, TabM=4):
-                        $ line = JeanX.legs
-                        $ JeanX.legs = ""
-                        "She pulls off her [line] and slips on the [JeanX.underwear]."
-                    elif JeanX.legs == "_skirt":
-                        "She pulls out her [JeanX.underwear] and pulls them up under her skirt."
-                        $ JeanX.legs = ""
+                        $ JeanX.outfit["underwear"] = "_green_panties"
+                    if approval_check(JeanX, 1200, taboo_modifier=4):
+                        $ line = JeanX.outfit["bottom"]
+                        $ JeanX.outfit["bottom"] = ""
+                        "She pulls off her [line] and slips on the [JeanX.outfit['underwear']]."
+                    elif JeanX.outfit["bottom"] == "_skirt":
+                        "She pulls out her [JeanX.outfit['underwear']] and pulls them up under her skirt."
+                        $ JeanX.outfit["bottom"] = ""
                         "Then she drops the skirt to the floor."
                     else:
-                        $ line = JeanX.legs
-                        $ JeanX.legs = ""
-                        "She steps away a moment and then comes back wearing only the [JeanX.underwear]."
+                        $ line = JeanX.outfit["bottom"]
+                        $ JeanX.outfit["bottom"] = ""
+                        "She steps away a moment and then comes back wearing only the [JeanX.outfit['underwear']]."
                     return
                 else:
                     ch_j "Nope."
                     return False
             "You could always just wear nothing at all. . .":
 
-                if approval_check(JeanX, 1100, "LI", TabM=3) and JeanX.love > JeanX.inhibition:
+                if approval_check(JeanX, 1100, "LI", taboo_modifier=3) and JeanX.love > JeanX.inhibition:
                     ch_j "True. . ."
-                elif approval_check(JeanX, 700, "OI", TabM=3) and JeanX.obedience > JeanX.inhibition:
+                elif approval_check(JeanX, 700, "OI", taboo_modifier=3) and JeanX.obedience > JeanX.inhibition:
                     ch_j "Yes. . ."
-                elif approval_check(JeanX, 600, "I", TabM=3):
+                elif approval_check(JeanX, 600, "I", taboo_modifier=3):
                     ch_j "Hrmm. . ."
-                elif approval_check(JeanX, 1300, TabM=3):
+                elif approval_check(JeanX, 1300, taboo_modifier=3):
                     ch_j "Fine."
                 else:
                     $ JeanX.change_face("_surprised")
@@ -2803,18 +2803,18 @@ label Jean_Wardrobe_Menu:
     menu Jean_Clothes_Under:
         "Tops":
             menu:
-                "How about you lose the [JeanX.bra]?" if JeanX.bra:
+                "How about you lose the [JeanX.outfit['bra']]?" if JeanX.outfit["bra"]:
                     $ JeanX.change_face("_bemused", 1)
-                    if JeanX.seen_breasts and approval_check(JeanX, 900, TabM=2.7):
+                    if JeanX.seen_breasts and approval_check(JeanX, 900, taboo_modifier=2.7):
                         ch_j "Ok."
-                    elif approval_check(JeanX, 1100, TabM=2):
+                    elif approval_check(JeanX, 1100, taboo_modifier=2):
                         if JeanX.taboo:
                             ch_j "I don't know, here. . ."
                         else:
                             ch_j "Maybe. . ."
-                    elif JeanX.top and approval_check(JeanX, 500, TabM=2):
+                    elif JeanX.outfit["top"] and approval_check(JeanX, 500, taboo_modifier=2):
                         ch_j "I guess I could. . ."
-                    elif not JeanX.top:
+                    elif not JeanX.outfit["top"]:
                         call Display_dress_screen (JeanX)
                         if not _return:
                             ch_j "Not without some other top."
@@ -2824,89 +2824,89 @@ label Jean_Wardrobe_Menu:
                         if not _return:
                             ch_j "Nah."
                             return
-                    $ line = JeanX.bra
-                    $ JeanX.bra = ""
-                    if JeanX.top:
-                        "She reaches under her [JeanX.top] grabs her [line], and pulls it off, dropping it to the ground."
+                    $ line = JeanX.outfit["bra"]
+                    $ JeanX.outfit["bra"] = ""
+                    if JeanX.outfit["top"]:
+                        "She reaches under her [JeanX.outfit['top']] grabs her [line], and pulls it off, dropping it to the ground."
                     else:
                         "She pulls off her [line] and drops it to the ground."
                         if not renpy.showing('dress_screen'):
                             call Jean_First_Topless
 
 
-                "Try on that green bra." if JeanX.bra != "_green_bra":
+                "Try on that green bra." if JeanX.outfit["bra"] != "_green_bra":
                     ch_j "Ok."
-                    $ JeanX.bra = "_green_bra"
+                    $ JeanX.outfit["bra"] = "_green_bra"
 
-                "How about that sports bra." if JeanX.bra != "_sports_bra":
+                "How about that sports bra." if JeanX.outfit["bra"] != "_sports_bra":
                     ch_j "Ok."
-                    $ JeanX.bra = "_sports_bra"
+                    $ JeanX.outfit["bra"] = "_sports_bra"
 
-                "I like that lace bra." if JeanX.bra != "_lace_bra" and "_lace_bra" in JeanX.inventory:
-                    if JeanX.seen_breasts or approval_check(JeanX, 1300, TabM=2):
+                "I like that lace bra." if JeanX.outfit["bra"] != "_lace_bra" and "_lace_bra" in JeanX.inventory:
+                    if JeanX.seen_breasts or approval_check(JeanX, 1300, taboo_modifier=2):
                         ch_j "Sure."
-                        $ JeanX.bra = "_lace_bra"
+                        $ JeanX.outfit["bra"] = "_lace_bra"
                     else:
                         call Display_dress_screen (JeanX)
                         if not _return:
                             ch_j "It's a little transparent. . ."
                         else:
-                            $ JeanX.bra = "_lace_bra"
+                            $ JeanX.outfit["bra"] = "_lace_bra"
 
-                "I like that black corset." if JeanX.bra != "_corset" and "_corset" in JeanX.inventory:
-                    if JeanX.seen_breasts or approval_check(JeanX, 1000, TabM=1):
+                "I like that black corset." if JeanX.outfit["bra"] != "_corset" and "_corset" in JeanX.inventory:
+                    if JeanX.seen_breasts or approval_check(JeanX, 1000, taboo_modifier=1):
                         ch_j "Sure."
-                        $ JeanX.bra = "_corset"
+                        $ JeanX.outfit["bra"] = "_corset"
                     else:
                         call Display_dress_screen (JeanX)
                         if not _return:
                             ch_j "It's a little revealing. . ."
                         else:
-                            $ JeanX.bra = "_corset"
+                            $ JeanX.outfit["bra"] = "_corset"
 
-                "I like that lace corset." if JeanX.bra != "_lace_corset" and "_lace_corset" in JeanX.inventory:
-                    if JeanX.seen_breasts or approval_check(JeanX, 1300, TabM=2):
+                "I like that lace corset." if JeanX.outfit["bra"] != "_lace_corset" and "_lace_corset" in JeanX.inventory:
+                    if JeanX.seen_breasts or approval_check(JeanX, 1300, taboo_modifier=2):
                         ch_j "Sure."
-                        $ JeanX.bra = "_lace_corset"
+                        $ JeanX.outfit["bra"] = "_lace_corset"
                     else:
                         call Display_dress_screen (JeanX)
                         if not _return:
                             ch_j "It's a little transparent. . ."
                         else:
-                            $ JeanX.bra = "_lace_corset"
+                            $ JeanX.outfit["bra"] = "_lace_corset"
 
-                "I like that bikini top." if JeanX.bra != "_bikini_top" and "_bikini_top" in JeanX.inventory:
+                "I like that bikini top." if JeanX.outfit["bra"] != "_bikini_top" and "_bikini_top" in JeanX.inventory:
                     if bg_current == "bg_pool":
                         ch_j "Sure."
-                        $ JeanX.bra = "_bikini_top"
+                        $ JeanX.outfit["bra"] = "_bikini_top"
                     else:
-                        if JeanX.seen_breasts or approval_check(JeanX, 1000, TabM=2):
+                        if JeanX.seen_breasts or approval_check(JeanX, 1000, taboo_modifier=2):
                             ch_j "Sure."
-                            $ JeanX.bra = "_bikini_top"
+                            $ JeanX.outfit["bra"] = "_bikini_top"
                         else:
                             call Display_dress_screen (JeanX)
                             if not _return:
                                 ch_j "This isn't really a \"bikini\" sort of place. . ."
                             else:
-                                $ JeanX.bra = "_bikini_top"
+                                $ JeanX.outfit["bra"] = "_bikini_top"
                 "Never mind":
                     pass
             return
         "Hose and stockings options":
 
             menu:
-                "You could lose the hose." if JeanX.hose:
-                    $ JeanX.hose = ""
-                "The thigh-high hose would look good with that." if JeanX.hose != "_stockings":
-                    $ JeanX.hose = "_stockings"
-                "The full length hose would look good with that." if JeanX.hose != "_pantyhose" and "_pantyhose" in JeanX.inventory:
-                    $ JeanX.hose = "_pantyhose"
-                "The ripped pantyhose would look good with that." if JeanX.hose != "_ripped_pantyhose" and "_ripped_pantyhose" in JeanX.inventory:
-                    $ JeanX.hose = "_ripped_pantyhose"
-                "The stockings and garterbelt would look good with that." if JeanX.hose != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in JeanX.inventory:
-                    $ JeanX.hose = "_stockings_and_garterbelt"
-                "Just the garterbelt would look good with that." if JeanX.hose != "garterbelt" and "_stockings_and_garterbelt" in JeanX.inventory:
-                    $ JeanX.hose = "garterbelt"
+                "You could lose the hose." if JeanX.outfit["hose"]:
+                    $ JeanX.outfit["hose"] = ""
+                "The thigh-high hose would look good with that." if JeanX.outfit["hose"] != "_stockings":
+                    $ JeanX.outfit["hose"] = "_stockings"
+                "The full length hose would look good with that." if JeanX.outfit["hose"] != "_pantyhose" and "_pantyhose" in JeanX.inventory:
+                    $ JeanX.outfit["hose"] = "_pantyhose"
+                "The ripped pantyhose would look good with that." if JeanX.outfit["hose"] != "_ripped_pantyhose" and "_ripped_pantyhose" in JeanX.inventory:
+                    $ JeanX.outfit["hose"] = "_ripped_pantyhose"
+                "The stockings and garterbelt would look good with that." if JeanX.outfit["hose"] != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in JeanX.inventory:
+                    $ JeanX.outfit["hose"] = "_stockings_and_garterbelt"
+                "Just the garterbelt would look good with that." if JeanX.outfit["hose"] != "garterbelt" and "_stockings_and_garterbelt" in JeanX.inventory:
+                    $ JeanX.outfit["hose"] = "garterbelt"
                 "Never mind":
                     pass
             return
@@ -2914,9 +2914,9 @@ label Jean_Wardrobe_Menu:
 
 
             menu:
-                "You could lose those panties. . ." if JeanX.underwear:
+                "You could lose those panties. . ." if JeanX.outfit["underwear"]:
                     $ JeanX.change_face("_bemused", 1)
-                    if approval_check(JeanX, 900) and (JeanX.legs or (JeanX.seen_pussy and not JeanX.taboo)):
+                    if approval_check(JeanX, 900) and (JeanX.outfit["bottom"] or (JeanX.seen_pussy and not JeanX.taboo)):
 
                         if approval_check(JeanX, 850, "L"):
                             ch_j "True. . ."
@@ -2927,13 +2927,13 @@ label Jean_Wardrobe_Menu:
                         else:
                             ch_j "Sure, I guess."
                     else:
-                        if approval_check(JeanX, 1100, "LI", TabM=3) and JeanX.love > JeanX.inhibition:
+                        if approval_check(JeanX, 1100, "LI", taboo_modifier=3) and JeanX.love > JeanX.inhibition:
                             ch_j "Well look, it's not about you, but. . ."
-                        elif approval_check(JeanX, 700, "OI", TabM=3) and JeanX.obedience > JeanX.inhibition:
+                        elif approval_check(JeanX, 700, "OI", taboo_modifier=3) and JeanX.obedience > JeanX.inhibition:
                             ch_j "Well. . ."
-                        elif approval_check(JeanX, 600, "I", TabM=3):
+                        elif approval_check(JeanX, 600, "I", taboo_modifier=3):
                             ch_j "Hrmm. . ."
-                        elif approval_check(JeanX, 1300, TabM=3):
+                        elif approval_check(JeanX, 1300, taboo_modifier=3):
                             ch_j "Okay, okay."
                         else:
                             call Display_dress_screen (JeanX)
@@ -2945,21 +2945,21 @@ label Jean_Wardrobe_Menu:
                                 else:
                                     ch_j "Ha! Not for you, [JeanX.player_petname]."
                                 return
-                    $ line = JeanX.underwear
-                    $ JeanX.underwear = ""
-                    if not JeanX.legs:
+                    $ line = JeanX.outfit["underwear"]
+                    $ JeanX.outfit["underwear"] = ""
+                    if not JeanX.outfit["bottom"]:
                         "She pulls off her [line], then drops them to the ground."
                         if not renpy.showing('dress_screen'):
                             call Jean_First_Bottomless
-                    elif approval_check(JeanX, 1200, TabM=4):
-                        $ primary_action = JeanX.legs
-                        $ JeanX.legs = ""
+                    elif approval_check(JeanX, 1200, taboo_modifier=4):
+                        $ primary_action = JeanX.outfit["bottom"]
+                        $ JeanX.outfit["bottom"] = ""
                         pause 0.5
-                        $ JeanX.legs = primary_action
-                        "She pulls off her [JeanX.legs] and [line], then pulls the [JeanX.legs] back on."
+                        $ JeanX.outfit["bottom"] = primary_action
+                        "She pulls off her [JeanX.outfit['legs']] and [line], then pulls the [JeanX.outfit['legs']] back on."
                         $ primary_action = 1
                         call Jean_First_Bottomless (1)
-                    elif JeanX.legs == "_skirt":
+                    elif JeanX.outfit["bottom"] == "_skirt":
                         "She reaches under her skirt and pulls her [line] off."
                     else:
                         $ JeanX.blushing = "_blush1"
@@ -2967,46 +2967,46 @@ label Jean_Wardrobe_Menu:
                         $ JeanX.blushing = ""
                     $ line = 0
 
-                "Why don't you wear the green panties instead?" if JeanX.underwear and JeanX.underwear != "_green_panties":
-                    if approval_check(JeanX, 1100, TabM=3):
+                "Why don't you wear the green panties instead?" if JeanX.outfit["underwear"] and JeanX.outfit["underwear"] != "_green_panties":
+                    if approval_check(JeanX, 1100, taboo_modifier=3):
                         ch_j "Sure."
-                        $ JeanX.underwear = "_green_panties"
+                        $ JeanX.outfit["underwear"] = "_green_panties"
                     else:
                         call Display_dress_screen (JeanX)
                         if not _return:
                             ch_j "That's none of your busines."
                         else:
-                            $ JeanX.underwear = "_green_panties"
+                            $ JeanX.outfit["underwear"] = "_green_panties"
 
-                "Why don't you wear the lace panties instead?" if "_lace_panties" in JeanX.inventory and JeanX.underwear and JeanX.underwear != "_lace_panties":
-                    if approval_check(JeanX, 1300, TabM=3):
+                "Why don't you wear the lace panties instead?" if "_lace_panties" in JeanX.inventory and JeanX.outfit["underwear"] and JeanX.outfit["underwear"] != "_lace_panties":
+                    if approval_check(JeanX, 1300, taboo_modifier=3):
                         ch_j "I guess."
-                        $ JeanX.underwear = "_lace_panties"
+                        $ JeanX.outfit["underwear"] = "_lace_panties"
                     else:
                         call Display_dress_screen (JeanX)
                         if not _return:
                             ch_j "That's none of your busines."
                         else:
-                            $ JeanX.underwear = "_lace_panties"
+                            $ JeanX.outfit["underwear"] = "_lace_panties"
 
-                "I like those bikini bottoms." if "_bikini_bottoms" in JeanX.inventory and JeanX.underwear != "_bikini_bottoms":
+                "I like those bikini bottoms." if "_bikini_bottoms" in JeanX.inventory and JeanX.outfit["underwear"] != "_bikini_bottoms":
                     if bg_current == "bg_pool":
                         ch_j "Sure."
-                        $ JeanX.underwear = "_bikini_bottoms"
+                        $ JeanX.outfit["underwear"] = "_bikini_bottoms"
                     else:
-                        if approval_check(JeanX, 1000, TabM=2):
+                        if approval_check(JeanX, 1000, taboo_modifier=2):
                             ch_j "Sure."
-                            $ JeanX.underwear = "_bikini_bottoms"
+                            $ JeanX.outfit["underwear"] = "_bikini_bottoms"
                         else:
                             call Display_dress_screen (JeanX)
                             if not _return:
                                 ch_j "This is not really a \"bikini\" sort of place. . ."
                             else:
-                                $ JeanX.underwear = "_bikini_bottoms"
+                                $ JeanX.outfit["underwear"] = "_bikini_bottoms"
 
-                "You know, you could wear some panties with that. . ." if not JeanX.underwear:
+                "You know, you could wear some panties with that. . ." if not JeanX.outfit["underwear"]:
                     $ JeanX.change_face("_bemused", 1)
-                    if JeanX.legs and (JeanX.love+JeanX.obedience) <= (2*JeanX.inhibition):
+                    if JeanX.outfit["bottom"] and (JeanX.love+JeanX.obedience) <= (2*JeanX.inhibition):
                         $ JeanX.mouth = "_smile"
                         ch_j "I -could,- but I'd rather not. . ."
                         menu:
@@ -3014,7 +3014,7 @@ label Jean_Wardrobe_Menu:
                                 return
                             "I insist, put some on.":
                                 if (JeanX.love+JeanX.obedience) <= (1.5*JeanX.inhibition):
-                                    $ JeanX.change_face("_angry", Eyes="_side")
+                                    $ JeanX.change_face("_angry", eyes="_side")
                                     ch_j "Well too bad."
                                     return
                                 else:
@@ -3026,10 +3026,10 @@ label Jean_Wardrobe_Menu:
                         extend ""
                         "How about the green ones?":
                             ch_j "Sure, ok."
-                            $ JeanX.underwear = "_green_panties"
+                            $ JeanX.outfit["underwear"] = "_green_panties"
                         "How about the lace ones?" if "_lace_panties" in JeanX.inventory:
                             ch_j "Fine."
-                            $ JeanX.underwear  = "_lace_panties"
+                            $ JeanX.outfit["underwear"]  = "_lace_panties"
                 "Never mind":
                     pass
             return
@@ -3042,36 +3042,36 @@ label Jean_Wardrobe_Menu:
 
     menu Jean_Clothes_Misc:
 
-        "Maybe dry out your hair." if JeanX.hair == "_wet":
+        "Maybe dry out your hair." if JeanX.outfit["hair"] == "_wet":
             ch_p "Maybe dry out your hair"
             if approval_check(JeanX, 600):
                 ch_j "Ok."
-                $ JeanX.hair = "_short"
+                $ JeanX.outfit["hair"] = "_short"
             else:
                 ch_j "I don't know, it's fine like this."
 
-        "Wet hair style." if JeanX.hair != "_wet":
+        "Wet hair style." if JeanX.outfit["hair"] != "_wet":
             ch_p "You should go for that wet look with your hair"
             if approval_check(JeanX, 800):
                 ch_j "Hmm?"
-                $ JeanX.hair = "_wet"
+                $ JeanX.outfit["hair"] = "_wet"
                 "She wanders off for a minute and comes back."
                 ch_j "Like this?"
             else:
                 ch_j "Ugh, too much work."
 
-        "Ponytail" if JeanX.hair != "pony" and "halloween" in JeanX.history:
+        "Ponytail" if JeanX.outfit["hair"] != "_pony" and "halloween" in JeanX.history:
             ch_p "Maybe do that side ponytail you had."
             if approval_check(JeanX, 600):
                 ch_j "Ok."
-                $ JeanX.hair = "pony"
+                $ JeanX.outfit["hair"] = "_pony"
             else:
                 ch_j "I don't know, it's fine like this."
-        "Let your hair loose" if JeanX.hair == "pony":
+        "Let your hair loose" if JeanX.outfit["hair"] == "_pony":
             ch_p "Maybe drop the ponytail."
             if approval_check(JeanX, 600):
                 ch_j "Ok."
-                $ JeanX.hair = "_short"
+                $ JeanX.outfit["hair"] = "_short"
             else:
                 ch_j "I don't know, it's fine like this."
 
@@ -3082,7 +3082,7 @@ label Jean_Wardrobe_Menu:
                 ch_j "Give it some time. . ."
             else:
                 $ JeanX.change_face("_bemused", 1)
-                if approval_check(JeanX, 1000, TabM=0):
+                if approval_check(JeanX, 1000, taboo_modifier=0):
                     ch_j "Ok, sure. . ."
                 else:
                     $ JeanX.change_face("_surprised")
@@ -3097,7 +3097,7 @@ label Jean_Wardrobe_Menu:
             if "shave" in JeanX.to_do:
                 ch_j "Yeah, I know, I'll get to it."
             else:
-                if approval_check(JeanX, 1100, TabM=0):
+                if approval_check(JeanX, 1100, taboo_modifier=0):
                     ch_j "Really? I guess I could give it a shave. . ."
                 else:
                     $ JeanX.change_face("_surprised")
@@ -3115,12 +3115,12 @@ label Jean_Wardrobe_Menu:
                 ch_j "Yeah, I know, I'll get to it."
             else:
                 $ JeanX.change_face("_bemused", 1)
-                $ approval = approval_check(JeanX, 1150, TabM=0)
-                if approval_check(JeanX, 900, "L", TabM=0) or (approval and JeanX.love > 2* JeanX.obedience):
+                $ approval = approval_check(JeanX, 1150, taboo_modifier=0)
+                if approval_check(JeanX, 900, "L", taboo_modifier=0) or (approval and JeanX.love > 2* JeanX.obedience):
                     ch_j "You think they'd look good on me?"
-                elif approval_check(JeanX, 600, "I", TabM=0) or (approval and JeanX.inhibition > JeanX.obedience):
+                elif approval_check(JeanX, 600, "I", taboo_modifier=0) or (approval and JeanX.inhibition > JeanX.obedience):
                     ch_j "I've been thinking about that for a while."
-                elif approval_check(JeanX, 500, "O", TabM=0) or approval:
+                elif approval_check(JeanX, 500, "O", taboo_modifier=0) or approval:
                     ch_j "Sure, [JeanX.player_petname]."
                 else:
                     $ JeanX.change_face("_surprised")
@@ -3135,12 +3135,12 @@ label Jean_Wardrobe_Menu:
                 ch_j "Yeah, I know, I'll get to it."
             else:
                 $ JeanX.change_face("_bemused", 1)
-                $ approval = approval_check(JeanX, 1150, TabM=0)
-                if approval_check(JeanX, 900, "L", TabM=0) or (approval and JeanX.love > 2*JeanX.obedience):
+                $ approval = approval_check(JeanX, 1150, taboo_modifier=0)
+                if approval_check(JeanX, 900, "L", taboo_modifier=0) or (approval and JeanX.love > 2*JeanX.obedience):
                     ch_j "You think they'd look good on me?"
-                elif approval_check(JeanX, 600, "I", TabM=0) or (approval and JeanX.inhibition > JeanX.obedience):
+                elif approval_check(JeanX, 600, "I", taboo_modifier=0) or (approval and JeanX.inhibition > JeanX.obedience):
                     ch_j "I've been thinking about that for a while."
-                elif approval_check(JeanX, 500, "O", TabM=0) or approval:
+                elif approval_check(JeanX, 500, "O", taboo_modifier=0) or approval:
                     ch_j "Sure, [JeanX.player_petname]."
                 else:
                     $ JeanX.change_face("_surprised")
@@ -3152,12 +3152,12 @@ label Jean_Wardrobe_Menu:
         "Remove Piercings" if JeanX.piercings:
             ch_p "You know, you'd look better without those piercings."
             $ JeanX.change_face("_bemused", 1)
-            $ approval = approval_check(JeanX, 1350, TabM=0)
-            if approval_check(JeanX, 950, "L", TabM=0) or (approval and JeanX.love > JeanX.obedience):
+            $ approval = approval_check(JeanX, 1350, taboo_modifier=0)
+            if approval_check(JeanX, 950, "L", taboo_modifier=0) or (approval and JeanX.love > JeanX.obedience):
                 ch_j "Make up your mind . ."
-            elif approval_check(JeanX, 700, "I", TabM=0) or (approval and JeanX.inhibition > JeanX.obedience):
+            elif approval_check(JeanX, 700, "I", taboo_modifier=0) or (approval and JeanX.inhibition > JeanX.obedience):
                 ch_j "What?"
-            elif approval_check(JeanX, 600, "O", TabM=0) or approval:
+            elif approval_check(JeanX, 600, "O", taboo_modifier=0) or approval:
                 ch_j "Fine."
             else:
                 $ JeanX.change_face("_surprised")
@@ -3166,13 +3166,13 @@ label Jean_Wardrobe_Menu:
                 return
             $ JeanX.piercings = ""
 
-        "Add Suspenders" if JeanX.accessory != "_suspenders" and JeanX.accessory != "_suspenders2" and "halloween" in JeanX.history:
-            $ JeanX.accessory = "_suspenders"
-        "Remove Suspenders" if JeanX.accessory == "_suspenders" or JeanX.accessory == "_suspenders2":
-            $ JeanX.accessory = ""
+        "Add Suspenders" if JeanX.outfit["front_outer_accessory"] != "_suspenders" and JeanX.outfit["front_outer_accessory"] != "_suspenders2" and "halloween" in JeanX.history:
+            $ JeanX.outfit["front_outer_accessory"] = "_suspenders"
+        "Remove Suspenders" if JeanX.outfit["front_outer_accessory"] == "_suspenders" or JeanX.outfit["front_outer_accessory"] == "_suspenders2":
+            $ JeanX.outfit["front_outer_accessory"] = ""
 
-        "Shift Suspenders" if JeanX.accessory == "_suspenders" or JeanX.accessory == "_suspenders2":
-            $ JeanX.accessory = "_suspenders" if JeanX.accessory == "_suspenders2" else "_suspenders2"
+        "Shift Suspenders" if JeanX.outfit["front_outer_accessory"] == "_suspenders" or JeanX.outfit["front_outer_accessory"] == "_suspenders2":
+            $ JeanX.outfit["front_outer_accessory"] = "_suspenders" if JeanX.outfit["front_outer_accessory"] == "_suspenders2" else "_suspenders2"
         "Never mind":
 
 

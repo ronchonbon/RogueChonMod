@@ -380,7 +380,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
         $ D20 = renpy.random.randint(1, 15)
         $ Girl.change_face("_sly")
         "You notice one of [Girl.name]'s shoes slip from her foot beneath the desk. She tosses you a sly grin."
-        if Girl.hose:
+        if Girl.outfit["hose"]:
             "You feel the smooth texture of her stockinged foot begin to slowly slide back and forth along the length of your calf."
         else:
             "You feel the smooth skin of her bare foot begin to slowly slide back and forth along the length of your calf."
@@ -446,17 +446,17 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                     if line == "fondle_pussy":
                         $ Girl.change_face("_sly")
                         $ Girl.change_stat("lust", 94, 5)
-                        if Girl.legs_number() == 5:
+                        if Girl.bottom_number() == 5:
                             "[Girl.name]'s sly smile turns sultry as she feels your fingers sneak under the hem of her skirt, slowly tracing the soft contours of her mound."
-                        elif Girl.legs_number() >= 7:
+                        elif Girl.bottom_number() >= 7:
                             "[Girl.name]'s sly smile turns sultry as she feels your fingers sneak down her pants, slowly tracing the soft contours of her mound."
                         else:
                             "[Girl.name]'s sly smile turns sultry as she feels your fingers sneak between her legs, slowly tracing the soft contours of her mound."
 
                         $ Girl.change_stat("lust", 94, 5)
-                        if Girl.underwear == "_shorts":
+                        if Girl.outfit["underwear"] == "_shorts":
                             "You think her shorts are becoming damp as you stroke the thin material. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
-                        elif Girl.underwear:
+                        elif Girl.outfit["underwear"]:
                             "You think her panties are becoming damp as you stroke the thin material. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
                         elif Girl.pubes:
                             "You feel her soft fur moisten as you stroke the soft flesh below. Her cheeks are flushed and her breathing's starting to become shallower and quicker."

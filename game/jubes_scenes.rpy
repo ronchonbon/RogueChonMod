@@ -6,8 +6,8 @@ label Jubes_Meet:
 
 
     show black_screen onlayer black
-    $ JubesX.today_outfit = "casual2"
-    $ JubesX.outfit = "casual2"
+    $ JubesX.today_outfit_name = "casual2"
+    $ JubesX.outfit_name = "casual2"
     $ JubesX.change_outfit("casual2")
     call clear_the_room ("all", 0, 1)
     $ JubesX.location = bg_current
@@ -104,7 +104,7 @@ label Jubes_Meet:
                 show Jubes_Sprite:
                     ease 0.5 offset (100,0) zoom 1.5 alpha 1
                 ch_v "Ah!"
-                $ JubesX.change_face("_sadside",1,Mouth="_normal")
+                $ JubesX.change_face("_sadside",1,mouth="_normal")
                 ch_v "Oh, I guess I was. . ."
                 $ Count = 1
             "That feels great, keep going. . .":
@@ -114,9 +114,9 @@ label Jubes_Meet:
                 show Jubes_Sprite:
                     ease 0.5 offset (100,0) zoom 1.5 alpha 1
                 ch_v "Oh!"
-                $ JubesX.change_face("_sadside",1,Mouth="_smile")
+                $ JubesX.change_face("_sadside",1,mouth="_smile")
                 ch_v "I, um. . . I wasn't expecting that reaction. . ."
-                $ JubesX.change_face("_sad",1,Mouth="_smile")
+                $ JubesX.change_face("_sad",1,mouth="_smile")
                 $ Count = 1
             "Hey, quit that!":
                 $ JubesX.change_stat("obedience", 90, 10)
@@ -125,7 +125,7 @@ label Jubes_Meet:
                 show Jubes_Sprite:
                     ease 0.5 offset (100,0) zoom 1.5 alpha 1
                 ch_v "Ah!"
-                $ JubesX.change_face("_sadside",1,Mouth="_normal")
+                $ JubesX.change_face("_sadside",1,mouth="_normal")
                 ch_v "Sorry!"
                 $ Count = 1
         $ Count -= 1
@@ -229,7 +229,7 @@ label Jubes_Meet:
             "Is it contagious?" if "vamp" in JubesX.recent_history and "contagious" not in JubesX.history:
                 $ JubesX.change_face("_sadside",2)
                 ch_v "Infectious. . ."
-                $ JubesX.change_face("_surprised",1,Mouth="_sucking")
+                $ JubesX.change_face("_surprised",1,mouth="_sucking")
                 ch_v "- and no!"
                 $ JubesX.change_face("_sadside",1)
                 ch_v "It was, but Dr. Strange was able to cast a spell or something."
@@ -238,7 +238,7 @@ label Jubes_Meet:
                 $ JubesX.add_word(1,0,0,0,"contagious")
             "Why me?" if "vamp" in JubesX.recent_history and "devamp" not in JubesX.recent_history:
                 $ JubesX.change_stat("love", 90, 1)
-                $ JubesX.change_face("_sly",1,Eyes="_side")
+                $ JubesX.change_face("_sly",1,eyes="_side")
                 ch_v "Well. . ."
                 ch_v "I had a theory. . ."
                 ch_v "I sorta figured that if you could negate powers, then maybe. . ."
@@ -275,7 +275,7 @@ label Jubes_Meet:
                 $ JubesX.change_stat("love", 90, 2)
                 $ JubesX.change_face("_smile",1)
                 ch_v "Yeah! Of course I am!"
-                $ JubesX.change_face("_smile",1,Eyes="_side")
+                $ JubesX.change_face("_smile",1,eyes="_side")
                 if "vamp" in JubesX.recent_history:
                     ch_v "You know, among other things. . ."
                 else:
@@ -309,7 +309,7 @@ label Jubes_Meet:
                     "K.":
                         $ JubesX.change_stat("obedience", 90, 2)
                         $ JubesX.change_stat("inhibition", 90, -1)
-                        $ JubesX.change_face("_angry",1,Eyes="_side")
+                        $ JubesX.change_face("_angry",1,eyes="_side")
                         ch_v "Ok, so it's not \"negating mutant powers\" cool or anything. . ."
                         ch_v "I can do other stuff. . ."
                         $ JubesX.change_face("_normal",1)
@@ -330,9 +330,9 @@ label Jubes_Meet:
                     $ JubesX.change_stat("love", 90, 2)
                     $ JubesX.change_stat("obedience", 90, 3)
                     $ JubesX.change_stat("inhibition", 90, -2)
-                    $ JubesX.change_face("_angry",1,Eyes="_squint",Mouth = "_kiss")
+                    $ JubesX.change_face("_angry",1,eyes="_squint",mouth = "_kiss")
                     ch_v "You are -remarkably- chill about this."
-                    $ JubesX.change_face("_smile",1,Eyes="_surprised", Brows = "_sad")
+                    $ JubesX.change_face("_smile",1,eyes="_surprised", brows = "_sad")
                     ch_v "Maybe I took too much? . ."
                 "Why is my neck bleeding?":
                     $ JubesX.change_stat("love", 90, 4)
@@ -378,7 +378,7 @@ label Jubes_Meet:
         $ JubesX.change_stat("obedience", 90, 10)
         $ JubesX.change_face("_angry",1)
         ch_v "Seriously? You don't even want to know my fucking name?"
-        $ JubesX.change_face("_sadside",1,Brows="_angry")
+        $ JubesX.change_face("_sadside",1,brows="_angry")
         ch_v "How many girls do you have going through this place?"
         ch_v ". . ."
         $ JubesX.change_face("_angry",1)
@@ -502,11 +502,11 @@ label Jubes_Meet:
                 $ JubesX.change_stat("inhibition", 90, 1)
                 $ JubesX.change_face("_sly",1)
                 ch_v "I guess I could. . ."
-                $ JubesX.change_face("_smile",1,Mouth="_sucking")
+                $ JubesX.change_face("_smile",1,mouth="_sucking")
             else:
                 $ JubesX.change_stat("love", 90, -2)
                 $ JubesX.change_stat("obedience", 90, 1)
-                $ JubesX.change_face("_angry",1,Mouth="_sucking")
+                $ JubesX.change_face("_angry",1,mouth="_sucking")
             $ JubesX.arm_pose = 1
             show Fireworks as Fire1 onlayer black:
                 pos (JubesX.sprite_location+250,350)
@@ -520,11 +520,11 @@ label Jubes_Meet:
                 $ JubesX.change_stat("love", 90, 1)
                 $ JubesX.change_stat("obedience", 90, 5)
                 $ JubesX.change_stat("inhibition", 90, 1)
-                $ JubesX.change_face("_smile",1,Mouth="_sucking")
+                $ JubesX.change_face("_smile",1,mouth="_sucking")
             else:
                 $ JubesX.change_stat("love", 90, -5)
                 $ JubesX.change_stat("obedience", 90, 2)
-                $ JubesX.change_face("_angry",1,Mouth="_sucking")
+                $ JubesX.change_face("_angry",1,mouth="_sucking")
 
             ch_v "Hey, I may suck more than most, but even I'm not that easy!"
             $ JubesX.change_face("_smile",1)
@@ -555,7 +555,7 @@ label Jubes_Sunshine:
     "On your way across the square, you see a shape charging toward you."
     call Punch
     "[JubesX.name] crashes into you."
-    $ JubesX.change_face("_smile",1,Mouth="_sucking")
+    $ JubesX.change_face("_smile",1,mouth="_sucking")
     ch_v "Hey, [Player.name]!"
     $ JubesX.change_face("_smile",1)
     ch_v "Check it out!"
@@ -563,7 +563,7 @@ label Jubes_Sunshine:
         extend ""
         "Oh, hey. . .":
             $ JubesX.change_stat("love", 90, 2)
-            $ JubesX.change_face("_smile",1,Mouth="_sucking")
+            $ JubesX.change_face("_smile",1,mouth="_sucking")
             ch_v "Yes, \"hey,\" but I am -outside!-"
             $ JubesX.change_stat("inhibition", 90, 2)
             $ JubesX.change_face("_smile",1)
@@ -577,13 +577,13 @@ label Jubes_Sunshine:
             ch_v "Look!"
             ch_v "I'm -outside!-"
             $ JubesX.change_stat("inhibition", 90, 2)
-            $ JubesX.change_face("_smile",1,Mouth="_sucking")
+            $ JubesX.change_face("_smile",1,mouth="_sucking")
             ch_v "During the -daytime!-"
             $ JubesX.change_face("_smile")
         "What the hell?":
             $ JubesX.change_stat("love", 90, -3)
             $ JubesX.change_stat("obedience", 90, 5)
-            $ JubesX.change_face("_surprised",2,Mouth="_sucking")
+            $ JubesX.change_face("_surprised",2,mouth="_sucking")
             ch_v "Sorry! I was just so excited!"
             $ JubesX.change_face("_smile",1)
             ch_v "I'm outside, during the daylight!"
@@ -593,7 +593,7 @@ label Jubes_Sunshine:
             $ JubesX.change_stat("love", 90, 5)
             $ JubesX.change_stat("obedience", 90, 1)
             $ JubesX.change_stat("inhibition", 90, 1)
-            $ JubesX.change_face("_surprised",1,Mouth="_sucking")
+            $ JubesX.change_face("_surprised",1,mouth="_sucking")
             ch_v "Right?!"
             $ JubesX.change_face("_smile",1)
         "So what? So am I.":
@@ -607,7 +607,7 @@ label Jubes_Sunshine:
             $ JubesX.change_stat("inhibition", 90, 2)
             $ JubesX.change_face("_confused",1)
             ch_v ". . . I'm a -vampire?-"
-    $ JubesX.change_face("_surprised",1,Mouth="_sucking")
+    $ JubesX.change_face("_surprised",1,mouth="_sucking")
     ch_v "I didn't used to be able to do this without catching fire!"
     $ JubesX.change_face("_smile",1)
     menu:
@@ -710,7 +710,7 @@ label check_on_Jubes_sunshock:
                     ch_v "I understand, later then. . ."
                 else:
                     $ JubesX.change_stat("love", 80, -4)
-                    $ JubesX.change_face("_angry",1,Mouth="_sucking")
+                    $ JubesX.change_face("_angry",1,mouth="_sucking")
 
                 "You leave her behind."
 
@@ -850,7 +850,7 @@ label Jubes_Mall(temp_Girls=[]):
     call set_the_scene
     $ Player.add_word(1,0,0,0,"mall")
 
-    $ JubesX.change_face("_surprised",1,Mouth="_sucking")
+    $ JubesX.change_face("_surprised",1,mouth="_sucking")
     ch_v "Hey, I just realized something!"
     $ JubesX.change_face("_smile")
     menu:
@@ -865,7 +865,7 @@ label Jubes_Mall(temp_Girls=[]):
             $ JubesX.change_stat("obedience", 50, 1)
             $ JubesX.change_stat("obedience", 60,1)
             $ JubesX.change_stat("inhibition", 50, -1)
-            $ JubesX.change_face("_angry",1,Mouth="_sucking")
+            $ JubesX.change_face("_angry",1,mouth="_sucking")
             ch_v "This is serious!"
         ". . .":
             $ JubesX.change_stat("love", 90, -1)
@@ -887,7 +887,7 @@ label Jubes_Mall(temp_Girls=[]):
                     $ JubesX.change_stat("love", 90, -1)
                     $ JubesX.change_stat("obedience", 60, 1)
                     ch_v "Ooookaaay. . ."
-    $ JubesX.change_face("_surprised",1,Mouth="_sucking")
+    $ JubesX.change_face("_surprised",1,mouth="_sucking")
     ch_v "Now that I can go out during the daytime, I can go to the mall again!!"
     menu:
         extend ""
@@ -921,7 +921,7 @@ label Jubes_Mall(temp_Girls=[]):
             $ JubesX.change_stat("obedience", 50, 2)
             $ JubesX.change_stat("obedience", 90, 2)
             $ JubesX.change_stat("inhibition", 50, -1)
-    $ JubesX.change_face("_surprised",1,Mouth="_sucking")
+    $ JubesX.change_face("_surprised",1,mouth="_sucking")
     ch_v "We've got to go there, right now!"
     $ JubesX.change_face("_smile")
     $ Party = [JubesX]
@@ -945,7 +945,7 @@ label Jubes_Mall(temp_Girls=[]):
             $ JubesX.change_stat("love", 90, -2)
             $ JubesX.change_stat("inhibition", 50, 2)
             $ JubesX.change_stat("inhibition", 60, 2)
-            $ JubesX.change_face("_angry",1,Mouth="_sucking")
+            $ JubesX.change_face("_angry",1,mouth="_sucking")
             ch_v "Stow the 'tude, we're going!"
             $ JubesX.change_face("_smile")
             show black_screen onlayer black with dissolve
@@ -955,7 +955,7 @@ label Jubes_Mall(temp_Girls=[]):
             $ JubesX.change_stat("love", 90, -1)
             $ JubesX.change_stat("inhibition", 50, 1)
             $ JubesX.change_stat("inhibition", 60, 1)
-            $ JubesX.change_face("_surprised",1,Mouth="_sucking")
+            $ JubesX.change_face("_surprised",1,mouth="_sucking")
             ch_v "No time! We're going!"
             $ JubesX.change_face("_smile")
             show black_screen onlayer black with dissolve
@@ -1028,7 +1028,7 @@ label Jubes_Mall(temp_Girls=[]):
         "Free food court, uh?":
             $ JubesX.change_stat("love", 70, 1)
             $ JubesX.change_stat("inhibition", 60, 1)
-            $ JubesX.change_face("_smile",1,Eyes="_side")
+            $ JubesX.change_face("_smile",1,eyes="_side")
             ch_v "When I could get into a restaurant, yeah. . ."
             $ JubesX.change_stat("love", 70, -2)
             $ JubesX.change_stat("love", 90, -1)
@@ -1037,7 +1037,7 @@ label Jubes_Mall(temp_Girls=[]):
             ch_v ". . ."
 
     ch_v "Yeah, but it was ok. . ."
-    $ JubesX.change_face("_smile",Eyes="_side")
+    $ JubesX.change_face("_smile",eyes="_side")
     ch_v "Anyway, then I bumped into some of the other Xavier's students and found my way to the school."
     $ JubesX.change_face("_smile")
     ch_v "Xavier agreed to take me in there, and it's worked out much better."
@@ -1118,10 +1118,10 @@ label Jubes_BF(temp_Girls=[]):
     call taboo_level
     call clear_the_room (JubesX)
     $ JubesX.daily_history.append("relationship")
-    $ JubesX.change_face("_angry",1,Eyes="_side")
+    $ JubesX.change_face("_angry",1,eyes="_side")
     $ line = 0
     ch_v "Hey. So. [JubesX.player_petname]. . ."
-    $ JubesX.change_face("_confused",1,Mouth="_lipbite")
+    $ JubesX.change_face("_confused",1,mouth="_lipbite")
     ch_v "I don't know- . . . you're pretty fun to hang out with, ya know?"
     menu:
         extend ""
@@ -1132,7 +1132,7 @@ label Jubes_BF(temp_Girls=[]):
             $ JubesX.change_stat("inhibition", 80, 1)
             ch_v ". . ."
             $ JubesX.change_stat("love", 200, 5)
-            $ JubesX.change_face("_bemused",1,Eyes="_side")
+            $ JubesX.change_face("_bemused",1,eyes="_side")
             ch_v "\"Love\" is kind of a strong word, [JubesX.player_petname]."
         "Yeah, sure, it's a lot of fun.":
             $ JubesX.change_stat("love", 200, 10)
@@ -1161,12 +1161,12 @@ label Jubes_BF(temp_Girls=[]):
             $ JubesX.change_stat("love", 200, 7)
             $ JubesX.change_stat("obedience", 80, 2)
             $ JubesX.change_stat("inhibition", 80, 3)
-            $ JubesX.change_face("_sad",1,Mouth="_lipbite")
+            $ JubesX.change_face("_sad",1,mouth="_lipbite")
         "Yeah? I know.":
             $ JubesX.change_stat("love", 200, 3)
             $ JubesX.change_stat("obedience", 80, 4)
             $ JubesX.change_stat("inhibition", 80, 1)
-            $ JubesX.change_face("_confused",1,Mouth="_lipbite")
+            $ JubesX.change_face("_confused",1,mouth="_lipbite")
         "I don't need a lot of backstory drama.":
             $ JubesX.change_stat("love", 200, -5)
             $ JubesX.change_stat("obedience", 80, 10)
@@ -1177,7 +1177,7 @@ label Jubes_BF(temp_Girls=[]):
             ch_v "\"Keep it simple\" it is then."
             ch_v "I don't hate hanging out with you, is all."
     if line != "bad":
-        $ JubesX.change_face("_normal",1,Eyes="_side")
+        $ JubesX.change_face("_normal",1,eyes="_side")
         ch_v "Well, you may have guessed I'm related to Wolverine."
         menu:
             extend ""
@@ -1192,7 +1192,7 @@ label Jubes_BF(temp_Girls=[]):
                 $ JubesX.change_stat("obedience", 80, 2)
                 $ JubesX.change_face("_angry",1)
         ch_v "Well I'm actually his partial clone."
-        $ JubesX.change_face("_angry",1,Eyes="_side")
+        $ JubesX.change_face("_angry",1,eyes="_side")
         ch_v "I was created to be some sort of biological weapon, an assassin."
         ch_v "I did a lot of work for them as a kid, until eventually I escaped."
         $ JubesX.change_face("_sadside",1)
@@ -1200,7 +1200,7 @@ label Jubes_BF(temp_Girls=[]):
         ch_v "Stuff I'm not proud of."
         $ JubesX.change_face("_sad",1)
         ch_v "But I don't know. . . being around you, I think it helps."
-        $ JubesX.change_face("_sad",1,Mouth="_smile")
+        $ JubesX.change_face("_sad",1,mouth="_smile")
         ch_v "I kind of feel. . . better."
     if JubesX.SEXP >= 20:
         $ JubesX.change_stat("obedience", 80, 3)
@@ -1216,7 +1216,7 @@ label Jubes_BF(temp_Girls=[]):
         ch_v ". . . but I'd still like to be a part of your life."
     else:
         ch_v "I'd just like to be a part of your life."
-    $ JubesX.change_face("_sad",1,Mouth="_smile")
+    $ JubesX.change_face("_sad",1,mouth="_smile")
     ch_v "That's it."
     $ JubesX.event_happened[5] += 1
     menu:
@@ -1229,7 +1229,7 @@ label Jubes_BF(temp_Girls=[]):
             ch_v "Whoa!"
             $ JubesX.change_face("_perplexed")
             ch_v "Maybe cool your jets there, [JubesX.player_petname]."
-            $ JubesX.change_face("_smile",Eyes="_side")
+            $ JubesX.change_face("_smile",eyes="_side")
             ch_v "I wasn't. . ."
             ch_v "I don't think we're there. . ."
             $ JubesX.change_face("_perplexed",1)
@@ -1241,26 +1241,26 @@ label Jubes_BF(temp_Girls=[]):
                     $ JubesX.change_stat("obedience", 80, 5)
                     $ JubesX.change_stat("inhibition", 80, 5)
                     $ JubesX.change_stat("lust", 80, 2)
-                    $ JubesX.change_face("_smile",1,Eyes="_side")
+                    $ JubesX.change_face("_smile",1,eyes="_side")
                     ch_v "Hehe. . . um."
                 "I guess, sure.":
                     $ JubesX.change_stat("love", 200, 6)
                     $ JubesX.change_stat("obedience", 80, 3)
                     $ JubesX.change_stat("inhibition", 80, 2)
-                    $ JubesX.change_face("_angry",1,Eyes="_side",Mouth="_lipbite")
+                    $ JubesX.change_face("_angry",1,eyes="_side",mouth="_lipbite")
                     ch_v "Right, so. . ."
         "Yeah, I think that'd be great.":
 
             $ JubesX.change_stat("love", 200, 6)
             $ JubesX.change_stat("obedience", 80, 2)
             $ JubesX.change_stat("inhibition", 80, 3)
-            $ JubesX.change_face("_smile",1,Eyes="_side")
+            $ JubesX.change_face("_smile",1,eyes="_side")
             ch_v "Cool."
         "Hmm? Ok.":
             $ JubesX.change_stat("love", 80, 3)
             $ JubesX.change_stat("obedience", 80, 5)
             $ JubesX.change_stat("inhibition", 80, 3)
-            $ JubesX.change_face("_confused",1,Eyes="_side")
+            $ JubesX.change_face("_confused",1,eyes="_side")
             ch_v "Yeah. . . cool."
         "I'm not really into that.":
             $ JubesX.change_stat("love", 200, -5)
@@ -1278,13 +1278,13 @@ label Jubes_BF(temp_Girls=[]):
                 "Yeah, I don't think she'd understand." if len(Player.Harem) == 1:
                     $ JubesX.change_stat("love", 200, -5)
                     $ JubesX.change_stat("obedience", 80, 7)
-                    $ JubesX.change_face("_angry",1,Eyes="_side")
+                    $ JubesX.change_face("_angry",1,eyes="_side")
                     $ JubesX.check_if_likes(Player.Harem[0],800,-20,1)
                     ch_v "That bitch."
                 "They wouldn't be cool with that." if len(Player.Harem) > 1:
                     $ JubesX.change_stat("love", 200, -5)
                     $ JubesX.change_stat("obedience", 80, 7)
-                    $ JubesX.change_face("_angry",1,Eyes="_side")
+                    $ JubesX.change_face("_angry",1,eyes="_side")
                     call Haremchange_stat (JubesX, 700, -20)
                     ch_v "Bitches."
                 "It's. . . complicated.":
@@ -1293,7 +1293,7 @@ label Jubes_BF(temp_Girls=[]):
                     $ JubesX.change_stat("inhibition", 80, -5)
                     $ JubesX.change_face("_angry",1)
                     ch_v "Complicated. Sure. Whatever."
-                    $ JubesX.change_face("_angry",1,Eyes="_side")
+                    $ JubesX.change_face("_angry",1,eyes="_side")
                     if len(Player.Harem) >= 2:
                         ch_v "Probably those bitches."
                         call Haremchange_stat (JubesX, 700, -10)
@@ -1333,7 +1333,7 @@ label Jubes_BF(temp_Girls=[]):
                     $ JubesX.change_stat("love", 200, 20)
                     $ JubesX.change_stat("obedience", 80, 5)
                     $ JubesX.change_stat("inhibition", 80, 5)
-                    $ JubesX.change_face("_surprised",2,Mouth="_smile")
+                    $ JubesX.change_face("_surprised",2,mouth="_smile")
                     ch_v ". . ."
                     $ JubesX.change_face("_smile",1)
 
@@ -1503,7 +1503,7 @@ label Jubes_Cleanhouse:
         $ JubesX.change_stat("love", 200, 5)
         $ JubesX.change_stat("obedience", 80, 20)
         $ JubesX.change_stat("inhibition", 80, 10)
-        $ JubesX.change_face("_angry",1,Eyes="_side")
+        $ JubesX.change_face("_angry",1,eyes="_side")
         ch_v "Ok, fine, whatever. I'm in too."
         if not simulation:
             $ Player.Harem.append(JubesX)
@@ -1560,7 +1560,7 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
             $ JubesX.change_stat("inhibition", 60, 5)
             ch_v "I. . . know that now."
         "I'm sorry to hear that.":
-            $ JubesX.change_face("_sadside",1,Mouth="_smile")
+            $ JubesX.change_face("_sadside",1,mouth="_smile")
             $ JubesX.change_stat("love", 200, 5)
             $ JubesX.change_stat("obedience", 90, -5)
             $ JubesX.change_stat("inhibition", 60, 10)
@@ -1568,7 +1568,7 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
             $ JubesX.change_face("_smile",1)
             ch_v "Thank you. . ."
         "That must be rough.":
-            $ JubesX.change_face("_sadside",1,Mouth="_normal")
+            $ JubesX.change_face("_sadside",1,mouth="_normal")
             $ JubesX.change_stat("love", 200, 5)
             ch_v ". . ."
             $ JubesX.change_face("_smile",1)
@@ -1579,7 +1579,7 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
             $ JubesX.change_stat("obedience", 90, 10)
             $ JubesX.change_stat("inhibition", 90, -5)
             ch_v ". . ."
-            $ JubesX.change_face("_angry",1,Eyes="_side")
+            $ JubesX.change_face("_angry",1,eyes="_side")
             ch_v "Right, so. . ."
     ch_v "I didn't always have it as easy as I've had it here."
     $ JubesX.eyes = "_normal"
@@ -1592,12 +1592,12 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
             menu:
                 extend ""
                 "How many people did you kill?" if "kills" not in Topics:
-                    $ JubesX.change_face("_angry",0,Eyes="_side")
+                    $ JubesX.change_face("_angry",0,eyes="_side")
                     ch_v "Dozens. Maybe more. At least 13 primary targets."
                     ch_v "Too many \"collaterals.\""
                     $ Topics.append("kills")
                 "Did you ever fail a mission?" if "fail" not in Topics:
-                    $ JubesX.change_face("_angry",0,Eyes="_side",Brows="_normal")
+                    $ JubesX.change_face("_angry",0,eyes="_side",brows="_normal")
                     ch_v "Once or twice."
                     ch_v "Sometimes they managed to get away."
                     ch_v "I'm not proud of who I was back then, but even then. . ."
@@ -1638,7 +1638,7 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
                     $ Topics.append("mother")
                     $ line = "mother"
                 "Why would you kill her?" if "killed" not in Topics and "mother" in Topics:
-                    $ JubesX.change_face("_sad",0,Eyes="_surprised")
+                    $ JubesX.change_face("_sad",0,eyes="_surprised")
                     ch_v "I didn't want to, but the primary_action scent made me. . ."
                     $ JubesX.change_face("_sadside",0)
                     if "trigger" in JubesX.history:
@@ -1680,7 +1680,7 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
                     $ JubesX.change_face("_sadside",0)
                     ch_v "There wasn't much I could do at the time, I mostly just scrounged for food."
                     ch_v "You can get by on some pretty awful stuff if you have a healing factor."
-                    $ JubesX.change_face("_bemused",1,Brows="_sad")
+                    $ JubesX.change_face("_bemused",1,brows="_sad")
                     ch_v "I also did some. . . shady stuff."
                     $ Topics.append("living")
 
@@ -1695,7 +1695,7 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
                     $ Topics.append("work")
 
                 "Did you hurt people?" if "work" not in Topics and "living" in Topics:
-                    $ JubesX.change_face("_surprised",0,Eyes="_normal")
+                    $ JubesX.change_face("_surprised",0,eyes="_normal")
                     ch_v "No, definitely not."
                     ch_v "After the facility, I just couldn't take that sort of work anymore."
                     $ JubesX.change_face("_bemused",0)
@@ -1718,10 +1718,10 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
                     $ line = 0
 
         if line == "work":
-            $ JubesX.change_face("_sadside",0,Mouth="_normal")
+            $ JubesX.change_face("_sadside",0,mouth="_normal")
             ch_v "It was mostly the rougher customers."
             ch_v "The ones who couldn't control their tempers."
-            $ JubesX.change_face("_angry",0,Mouth="_smile")
+            $ JubesX.change_face("_angry",0,mouth="_smile")
             ch_v "Better for the girl who can heal to take the hits, right?"
             menu:
                 extend ""
@@ -1786,7 +1786,7 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
                     ch_v "Thanks for listening to me ramble."
                     $ Topics.append("exit")
                 "I think that's probably enough. [[exit]" if "facility" in Topics and "NYX" in Topics:
-                    $ JubesX.change_face("_sadside",0, Mouth="_smile")
+                    $ JubesX.change_face("_sadside",0, mouth="_smile")
                     $ JubesX.change_stat("obedience", 90, 10)
                     ch_v "Yeah, you get the idea."
                     $ Topics.append("exit")
@@ -1815,7 +1815,7 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
         $ JubesX.location = "hold"
         return
 
-    $ JubesX.change_face("_bemused",0,Eyes="_down")
+    $ JubesX.change_face("_bemused",0,eyes="_down")
     ch_v "I just thought you should know,"
     $ JubesX.change_face("_smile",2)
     ch_v "I love you."
@@ -1923,7 +1923,7 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
             $ JubesX.change_face("_sadside",1)
             ch_v "Yeah, I guess she's great."
         else:
-            $ JubesX.change_face("_angry",Eyes="_side")
+            $ JubesX.change_face("_angry",eyes="_side")
             $ JubesX.change_stat("love", 200, -5)
             $ JubesX.change_stat("obedience", 90, 20)
             ch_v "Bitch."
@@ -1986,7 +1986,7 @@ label Jubes_Love_Redux:
             ch_v "You're still working your way out of the hole, [JubesX.player_petname]."
             $ JubesX.eyes="_side"
             ch_v ". . ."
-            $ JubesX.change_face("_angry",Mouth="_lipbite")
+            $ JubesX.change_face("_angry",mouth="_lipbite")
             ch_v "But let me hear your pitch."
     elif JubesX.event_happened[6] >= 23:
 
@@ -1999,13 +1999,13 @@ label Jubes_Love_Redux:
             ch_v "You're still working your way out of the hole, [JubesX.player_petname]."
             $ JubesX.eyes="_side"
             ch_v ". . ."
-            $ JubesX.change_face("_angry",Mouth="_lipbite")
+            $ JubesX.change_face("_angry",mouth="_lipbite")
             ch_v "But let me hear your pitch."
     else:
         ch_p "Remember when I told you that I didn't love you?"
         $ JubesX.change_face("_perplexed",1)
         ch_v ". . ."
-        $ JubesX.change_face("_angry", Eyes="_side")
+        $ JubesX.change_face("_angry", eyes="_side")
         ch_v "How could I forget?"
 
     if line != "love":
@@ -2086,7 +2086,7 @@ label Jubes_Sub:
         "Yup. Deal with it.":
             pass
     "Before you can speak, she puts her hand over your mouth."
-    $ JubesX.change_face("_sly", 1,Eyes="_side")
+    $ JubesX.change_face("_sly", 1,eyes="_side")
     ch_v "I don't know how I feel about that."
     if JubesX.event_happened[6]:
         $ JubesX.change_face("_sadside", 1)
@@ -2112,7 +2112,7 @@ label Jubes_Sub:
             $ JubesX.change_stat("inhibition", 50, -5)
             ch_v "I told you, I was raised in an underground government lab."
             ch_v "They ordered me to kill people for them."
-            $ JubesX.change_face("_sly", 0, Brows= "_angry")
+            $ JubesX.change_face("_sly", 0, brows= "_angry")
             ch_v ". . . until I got tired of taking orders."
             $ line = "facility"
             jump Jubes_Sub_Question
@@ -2140,7 +2140,7 @@ label Jubes_Sub:
                 menu:
                     extend ""
                     "Sorry. I thought that's what you were into.":
-                        $ JubesX.change_face("_perplexed", 1,Eyes="_side")
+                        $ JubesX.change_face("_perplexed", 1,eyes="_side")
                         $ JubesX.eyes = "_side"
                         $ JubesX.change_stat("love", 75, 10)
                         $ JubesX.change_stat("obedience", 200, 5)
@@ -2161,7 +2161,7 @@ label Jubes_Sub:
         ch_v "Look, it's not like. . ."
         $ JubesX.change_face("_sly", 2)
         ch_v ". . . it's not like I hate it."
-        $ JubesX.change_face("_smile", 1, Eyes="_side")
+        $ JubesX.change_face("_smile", 1, eyes="_side")
         ch_v ". . . I actually think it might make me. . ."
         menu:
             extend ""
@@ -2182,11 +2182,11 @@ label Jubes_Sub:
                 $ JubesX.change_stat("lust", 50, 5)
                 ch_v "but also kind of excited by it."
             "-hungry?":
-                $ JubesX.change_face("_confused", 1,Eyes="_surprised",Mouth="_smile")
+                $ JubesX.change_face("_confused", 1,eyes="_surprised",mouth="_smile")
                 $ JubesX.change_stat("obedience", 200, -5)
                 $ JubesX.change_stat("inhibition", 50, -5)
                 ch_v "?!"
-                $ JubesX.change_face("_confused", 1,Eyes="_normal",Mouth="_smile")
+                $ JubesX.change_face("_confused", 1,eyes="_normal",mouth="_smile")
                 ch_v "Well. . . yeah? But not for-"
                 $ JubesX.change_face("_sly", 1)
                 $ JubesX.change_stat("lust", 50, 5)
@@ -2194,9 +2194,9 @@ label Jubes_Sub:
             "-horny?":
                 $ JubesX.change_stat("obedience", 200, 10)
                 $ JubesX.change_stat("inhibition", 50, 5)
-                $ JubesX.change_face("startled", 2,Mouth="_lipbite")
+                $ JubesX.change_face("startled", 2,mouth="_lipbite")
                 ch_v "!"
-                $ JubesX.change_face("_sly", 1, Eyes="_side")
+                $ JubesX.change_face("_sly", 1, eyes="_side")
                 $ JubesX.change_stat("inhibition", 50, 5)
                 $ JubesX.change_stat("lust", 50, 10)
                 $ JubesX.change_stat("lust", 70, 5)
@@ -2210,7 +2210,7 @@ label Jubes_Sub:
                     $ JubesX.change_stat("inhibition", 50, 10)
                     ch_v "Hmmm. . ."
                 else:
-                    $ JubesX.change_face("_sadside", 1,Mouth="_normal")
+                    $ JubesX.change_face("_sadside", 1,mouth="_normal")
                     $ JubesX.change_stat("love", 200, -5)
                     $ JubesX.change_stat("obedience", 200, 10)
                     ch_v "You might want to slow your roll there, [JubesX.player_petname]."
@@ -2229,7 +2229,7 @@ label Jubes_Sub:
                             ch_v "-but not too much."
             "Yeah? You think it's sexy?":
 
-                $ JubesX.change_face("_bemused", 2,Eyes="_side")
+                $ JubesX.change_face("_bemused", 2,eyes="_side")
                 $ JubesX.change_stat("obedience", 200, 5)
                 $ JubesX.change_stat("inhibition", 50, 10)
                 ch_v ". . ."
@@ -2237,7 +2237,7 @@ label Jubes_Sub:
                 ch_v "Yeah."
             "You sure you don't want me to back off a little?":
 
-                $ JubesX.change_face("startled", 1,Eyes="_squint")
+                $ JubesX.change_face("startled", 1,eyes="_squint")
                 $ JubesX.change_stat("obedience", 200, -5)
                 menu:
                     ch_v "Well if you have to ask. . ."
@@ -2247,7 +2247,7 @@ label Jubes_Sub:
                         $ JubesX.change_stat("inhibition", 50, 10)
                         $ line = 0
                     "Uhm. . .yeah. I think it's weird. Sorry.":
-                        $ JubesX.change_face("_sad", 1, Eyes="_surprised")
+                        $ JubesX.change_face("_sad", 1, eyes="_surprised")
                         $ JubesX.change_stat("love", 200, -15)
                         $ JubesX.change_stat("obedience", 200, -5)
                         $ JubesX.change_stat("inhibition", 50, -10)
@@ -2261,7 +2261,7 @@ label Jubes_Sub:
                 $ line = "rude"
 
     if not line:
-        $ JubesX.change_face("_bemused", 1,Eyes = "_down")
+        $ JubesX.change_face("_bemused", 1,eyes = "_down")
         ch_v "So, I'm willing to give this a shot."
         ch_v "Just a trial period, to see how it goes."
         ch_v "Just tell me what you want, and. . . I'll see about doing it."
@@ -2273,7 +2273,7 @@ label Jubes_Sub:
                 $ JubesX.change_face("_sly", 1)
                 $ line = 0
             "Don't you think that relationship's kinda. . .weird?":
-                $ JubesX.change_face("_sad", 1, Eyes="_surprised")
+                $ JubesX.change_face("_sad", 1, eyes="_surprised")
                 $ JubesX.change_stat("love", 200, -5)
                 $ JubesX.change_stat("inhibition", 50, -15)
                 $ line = "embarrassed"
@@ -2293,7 +2293,7 @@ label Jubes_Sub:
                 $ JubesX.change_face("_perplexed", 1)
                 ch_v "Huh. ok, no problem"
                 $ JubesX.change_stat("inhibition", 50, -5)
-                $ JubesX.change_face("_sly", 1,Eyes="_side")
+                $ JubesX.change_face("_sly", 1,eyes="_side")
                 menu:
                     ch_v "You'll still give me some orders, right?"
                     "Yeah, no problem.":
@@ -2301,7 +2301,7 @@ label Jubes_Sub:
                         $ JubesX.change_face("_smile", 1)
                         ch_v "Good."
                     "I don't feel comfortable with that. . .":
-                        $ JubesX.change_face("_sad", 1, Eyes="_side")
+                        $ JubesX.change_face("_sad", 1, eyes="_side")
                         $ JubesX.change_stat("love", 200, -10)
                         $ JubesX.change_stat("obedience", 200, -30)
                         $ JubesX.change_stat("inhibition", 50, -15)
@@ -2471,7 +2471,7 @@ label Jubes_Master:
                     $ JubesX.change_stat("obedience", 200, -10)
                     $ line = "embarrassed"
         "No.":
-            $ JubesX.change_face("_perplexed", 1,Brows="_confused")
+            $ JubesX.change_face("_perplexed", 1,brows="_confused")
             $ JubesX.change_stat("love", 80, -5)
             $ JubesX.change_stat("obedience", 200, -5)
             $ JubesX.change_stat("inhibition", 50, -5)
@@ -2530,7 +2530,7 @@ label Jubes_Master:
                         $ line = "fail"
                     "Actually, let's stop that. It's creeping me out.":
 
-                        $ JubesX.change_face("_angry", 2, Eyes="_surprised")
+                        $ JubesX.change_face("_angry", 2, eyes="_surprised")
                         $ JubesX.change_stat("love", 200, -10)
                         $ JubesX.change_stat("obedience", 200, -50)
                         $ JubesX.change_stat("inhibition", 50, -15)
@@ -2538,7 +2538,7 @@ label Jubes_Master:
                         $ line = "embarrassed"
             "As if I care what you think, slut.":
 
-                $ JubesX.change_face("_angry", 1, Mouth="_smile")
+                $ JubesX.change_face("_angry", 1, mouth="_smile")
                 $ JubesX.change_stat("love", 90, -20)
                 $ JubesX.change_stat("obedience", 200, 10)
                 $ JubesX.change_stat("inhibition", 50, -10)
@@ -2576,7 +2576,7 @@ label Jubes_Master:
                             $ JubesX.change_stat("love", 200, 5)
                             $ JubesX.change_stat("obedience", 200, -5)
                             $ JubesX.change_stat("inhibition", 50, 5)
-                            $ JubesX.change_face("_angry", 1, Eyes="_side")
+                            $ JubesX.change_face("_angry", 1, eyes="_side")
                             ch_v ". . ."
                             ch_v "We'll work on it. . ."
             "I don't really like it. Too much pressure.":
@@ -2628,7 +2628,7 @@ label Jubes_Sexfriend:
     $ JubesX.daily_history.append("relationship")
     call taboo_level
     $ line = 0
-    $ JubesX.change_face("_sly",2,Eyes="_side")
+    $ JubesX.change_face("_sly",2,eyes="_side")
     "[JubesX.name] approaches you and pulls you aside. She seems to be shivering a little bit."
     "She seems to be squirming around and rubbing her thighs together."
     $ JubesX.player_petnames.append("sex friend")
@@ -2653,7 +2653,7 @@ label Jubes_Sexfriend:
         menu:
             extend ""
             "Sure":
-                $ JubesX.change_face("_sly",2,Mouth="_smile")
+                $ JubesX.change_face("_sly",2,mouth="_smile")
                 $ line = "yes"
             "No thanks":
                 $ JubesX.change_face("_confused",2)
@@ -2667,7 +2667,7 @@ label Jubes_Sexfriend:
             menu:
                 extend ""
                 "Sure":
-                    $ JubesX.change_face("_sly",2,Mouth="_smile")
+                    $ JubesX.change_face("_sly",2,mouth="_smile")
                     $ line = "yes"
                 "No thanks":
                     $ JubesX.change_face("_confused",2)
@@ -2680,7 +2680,7 @@ label Jubes_Sexfriend:
             menu:
                 extend ""
                 "Ok, fine":
-                    $ JubesX.change_face("_confused",2,Mouth="_smile")
+                    $ JubesX.change_face("_confused",2,mouth="_smile")
                     ch_v "Love the enthusiasm."
                     $ line = "yes"
                 "Not interested":
@@ -2711,7 +2711,7 @@ label Jubes_Sexfriend:
         ch_v "Really?"
         ch_v "Bummer."
         ch_v "Well let me know if you change your mind."
-        $ JubesX.change_face("_sadside",2,Mouth="_lipbite",Brows="_angry")
+        $ JubesX.change_face("_sadside",2,mouth="_lipbite",brows="_angry")
         if Player.Harem:
             ch_v "Wonder if [Player.Harem[0].name]'s busy. . ."
             $ JubesX.check_if_likes(Player.Harem[0],500,25,1)
@@ -2722,7 +2722,7 @@ label Jubes_Sexfriend:
         $ JubesX.change_stat("love", 90, 10)
         $ JubesX.change_stat("obedience", 90, 5)
         $ JubesX.change_stat("inhibition", 90, 15)
-        $ JubesX.change_face("_sly",1,Mouth="_smile")
+        $ JubesX.change_face("_sly",1,mouth="_smile")
         if taboo:
             ch_v "Wanna take this party someplace else?"
             menu:
@@ -2767,14 +2767,14 @@ label Jubes_Fuckbuddy:
     $ JubesX.location = bg_current
     call shift_focus (JubesX)
     call set_the_scene (0)
-    $ JubesX.outfit = "casual1"
-    $ JubesX.today_outfit = "casual1"
+    $ JubesX.outfit_name = "casual1"
+    $ JubesX.today_outfit_name = "casual1"
     $ JubesX.change_outfit("casual1")
     call display_girl (JubesX)
     call taboo_level
     $ primary_action = "masturbation"
     $ girl_offhand_action = "fondle_pussy"
-    $ JubesX.change_face("_sly",2,Mouth="_lipbite")
+    $ JubesX.change_face("_sly",2,mouth="_lipbite")
     "[JubesX.name] is standing in the doorway, with her hand down her pants."
     "You can tell she's been masturbating furiously, her scent is overpowering."
     $ primary_action = None

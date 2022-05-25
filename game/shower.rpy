@@ -505,20 +505,20 @@ label showering:
 
         if RogueX in intruding_Girls:
             if RogueX.seen_peen == 1:
-                $ RogueX.change_face("_surprised",2,Eyes="_down")
+                $ RogueX.change_face("_surprised",2,eyes="_down")
 
                 ch_r "Oh!"
 
-                $ RogueX.change_face("_bemused",1,Eyes="_side")
+                $ RogueX.change_face("_bemused",1,eyes="_side")
 
                 ch_r "I am so sorry, I should {i}not{/i} have just barged in like that."
             else:
-                $ RogueX.change_face("_bemused",1,Eyes="_side")
+                $ RogueX.change_face("_bemused",1,eyes="_side")
 
                 ch_r "I simply {i}must{/i} be more careful. . ."
 
         if KittyX in intruding_Girls:
-            $ KittyX.change_face("_bemused",2,Eyes="_side")
+            $ KittyX.change_face("_bemused",2,eyes="_side")
 
             if KittyX.seen_peen == 1:
                 ch_k "Sorry! Sorry! I need to stop just casually phasing into places!"
@@ -531,11 +531,11 @@ label showering:
 
                 ch_e "Oh! Dreadfully sorry."
 
-                $ EmmaX.change_face("_sexy",Eyes="_down")
+                $ EmmaX.change_face("_sexy",eyes="_down")
 
                 ch_e "I hope we can meet again under. . . different circumstances."
             else:
-                $ EmmaX.change_face("_sexy",Eyes="_down")
+                $ EmmaX.change_face("_sexy",eyes="_down")
 
                 ch_e "I really should pay closer attention. . ."
 
@@ -550,11 +550,11 @@ label showering:
 
         if LauraX in intruding_Girls:
             if LauraX.seen_peen == 1:
-                $ LauraX.change_face("_surprised",Eyes="_down")
+                $ LauraX.change_face("_surprised",eyes="_down")
 
                 ch_l "Hey. That's interesting. . ."
             else:
-                $ LauraX.change_face("_normal",Eyes="_down")
+                $ LauraX.change_face("_normal",eyes="_down")
 
                 ch_l ". . ."
 
@@ -564,11 +564,11 @@ label showering:
 
         if JeanX in intruding_Girls:
             if JeanX.seen_peen == 1:
-                $ JeanX.change_face("_surprised",Eyes="_down")
+                $ JeanX.change_face("_surprised",eyes="_down")
 
                 ch_j "Well what do we have here? . ."
             else:
-                $ JeanX.change_face("_normal",Eyes="_down")
+                $ JeanX.change_face("_normal",eyes="_down")
 
                 ch_j ". . ."
 
@@ -582,18 +582,18 @@ label showering:
 
                 ch_s "Oh! Hello there."
 
-                $ StormX.change_face("_sexy",Eyes="_down")
+                $ StormX.change_face("_sexy",eyes="_down")
 
                 ch_s "And hello to you as well. . ."
             else:
-                $ StormX.change_face("_sexy",Eyes="_down")
+                $ StormX.change_face("_sexy",eyes="_down")
 
                 ch_s "I'm sorry to intrude. . ."
 
             $ StormX.change_face("_sexy")
 
         if JubesX in intruding_Girls:
-            $ JubesX.change_face("_bemused",2,Eyes="_side")
+            $ JubesX.change_face("_bemused",2,eyes="_side")
 
             if JubesX.seen_peen == 1:
                 ch_v "Oh, sorry! I wasn't paying attention."
@@ -743,22 +743,22 @@ label showering:
     call Get_Dressed
 
     if RogueX.location == bg_current:
-        $ RogueX.change_outfit("_towel")
+        $ RogueX.change_outfit("shower")
 
     if KittyX.location == bg_current:
-        $ KittyX.change_outfit("_towel")
+        $ KittyX.change_outfit("shower")
 
     if EmmaX.location == bg_current:
-        $ EmmaX.change_outfit("_towel")
+        $ EmmaX.change_outfit("shower")
 
     if LauraX.location == bg_current:
-        $ LauraX.change_outfit("_towel")
+        $ LauraX.change_outfit("shower")
 
     if JeanX.location == bg_current:
-        $ JeanX.change_outfit("_towel")
+        $ JeanX.change_outfit("shower")
 
     if JubesX.location == bg_current:
-        $ JubesX.change_outfit("_towel")
+        $ JubesX.change_outfit("shower")
 
     return
 
@@ -992,7 +992,7 @@ label Shower_Sex(Options=0, line=0):
                 $ Player.change_stat("focus", 80, 3)
                 $ line = 4
             elif approval_check(StayCount[1], 1200) and StayCount[1].likes[StayCount[0].tag] >= 700:
-                $ staying_Girls[1].change_face("_sexy",2,Eyes="_closed")
+                $ staying_Girls[1].change_face("_sexy",2,eyes="_closed")
                 $ staying_Girls[1].change_stat("lust", 50, 10)
                 $ staying_Girls[1].change_stat("lust", 70, 10)
                 $ Player.change_stat("focus", 50, 5)
@@ -1001,7 +1001,7 @@ label Shower_Sex(Options=0, line=0):
                 "[staying_Girls[1].name] seems really into this, and leans into it."
             else:
                 $ staying_Girls[1].change_stat("lust", 50, 10)
-                $ staying_Girls[1].change_face("_sadside",Brows="_confused")
+                $ staying_Girls[1].change_face("_sadside",brows="_confused")
                 "[staying_Girls[1].name] doesn't really seem to appreciate this."
                 "She pulls away."
                 $ line = 3
@@ -1024,12 +1024,12 @@ label Shower_Sex(Options=0, line=0):
                     "[staying_Girls[1].name] seems really into this, and joins her on the other side."
                 $ line = 4
             elif ((approval_check(StayCount[1], 1200) and StayCount[1].likes[StayCount[0].tag] >= 600)) or approval_check(StayCount[1], 1600):
-                $ staying_Girls[1].change_face("_sexy",2,Eyes="_down")
+                $ staying_Girls[1].change_face("_sexy",2,eyes="_down")
                 $ staying_Girls[1].change_stat("lust", 50, 10)
                 $ staying_Girls[1].change_stat("lust", 70, 5)
                 "[staying_Girls[1].name] seems really into this, and watches her do it."
             else:
-                $ staying_Girls[1].change_face("_sadside",Brows="_confused")
+                $ staying_Girls[1].change_face("_sadside",brows="_confused")
                 $ staying_Girls[1].change_stat("lust", 50, 5)
                 "[staying_Girls[1].name] doesn't really seem to appreciate this."
                 $ line = 3
@@ -1099,7 +1099,7 @@ label Shower_Sex(Options=0, line=0):
 
             $ Player.focus = 15
             if Options[0] == 5:
-                $ staying_Girls[0].spunk.append("tits")
+                $ staying_Girls[0].spunk["breasts"] = True
 
             if line == 4:
                 $ staying_Girls[0].change_stat("inhibition", 90, 7)
@@ -1171,7 +1171,7 @@ label change_out_of_towels:
         if "met" in temp_Girls[0].history and temp_Girls[0] not in Party:
             $ temp_Girls[0].location = temp_Girls[0].weekly_schedule[weekday][time_index]
 
-        $ temp_Girls[0].change_outfit(temp_Girls[0].today_outfit)
+        $ temp_Girls[0].change_outfit(temp_Girls[0].today_outfit_name)
         $ temp_Girls.remove(temp_Girls[0])
 
     return

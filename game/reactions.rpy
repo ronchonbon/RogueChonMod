@@ -326,11 +326,11 @@ label girl_initiated_action(Girl, action):
             $ covered_phrase = "head and shoves your face into her chest"
             $ topless_phrase = covered_phrase
 
-        if (Girl.top or Girl.bra) and not Girl.top_pulled_up:
-            if approval_check(Girl, 1250, TabM = 1) or (Girl.seen_breasts and approval_check(Girl, 500) and not taboo):
+        if (Girl.outfit["top"] or Girl.outfit["bra"]) and not Girl.top_pulled_up:
+            if approval_check(Girl, 1250, taboo_modifier = 1) or (Girl.seen_breasts and approval_check(Girl, 500) and not taboo):
                 $ Girl.top_pulled_up = 1
 
-                $ line = Girl.top if Girl.top else Girl.bra
+                $ line = Girl.outfit["top"] if Girl.outfit["top"] else Girl.outfit["bra"]
 
                 "With a mischievous grin, [Girl.name] pulls her [line] up over her breasts."
 
@@ -360,8 +360,8 @@ label girl_initiated_action(Girl, action):
                 "grabs your arm and rubs your hand against her asshole"])
 
 
-        if (Girl.legs and not Girl.upskirt) or (Girl.underwear and not Girl.underwear_pulled_down):
-            if approval_check(Girl, 1250, TabM = 1) or (Girl.seen_pussy and approval_check(Girl, 500) and not taboo):
+        if (Girl.outfit["bottom"] and not Girl.upskirt) or (Girl.outfit["underwear"] and not Girl.underwear_pulled_down):
+            if approval_check(Girl, 1250, taboo_modifier = 1) or (Girl.seen_pussy and approval_check(Girl, 500) and not taboo):
                 $ Girl.upskirt = 1
                 $ Girl.underwear_pulled_down = 1
 
@@ -369,17 +369,17 @@ label girl_initiated_action(Girl, action):
 
                 if Girl.wearing_skirt:
                     $ line = Girl.name + " hikes up her skirt"
-                elif Girl.legs_number() > 6:
-                    $ line = Girl.name + " pulls down her " + Girl.legs
+                elif Girl.bottom_number() > 6:
+                    $ line = Girl.name + " pulls down her " + Girl.outfit["bottom"]
                 else:
                     $ line = 0
 
-                if Girl.underwear:
+                if Girl.outfit["underwear"]:
                     if line:
-                        "[line] and pulls her [Girl.underwear] out of the way."
+                        "[line] and pulls her [Girl.outfit['underwear']] out of the way."
                         "She then [phrase], clearly intending you to get to work."
                     else:
-                        "She pulls her [Girl.underwear] out of the way, and then [phrase]."
+                        "She pulls her [Girl.outfit['underwear']] out of the way, and then [phrase]."
                         "She clearly intends for you to get to work."
                 else:
                     "[line], and then [phrase]."
@@ -407,10 +407,10 @@ label girl_initiated_action(Girl, action):
             "[Girl.name] grabs her dildo, hiking up her skirt as she does."
 
             $ Girl.upskirt = 1
-        elif Girl.legs_number() > 6:
+        elif Girl.bottom_number() > 6:
             "[Girl.name] grabs her dildo, pulling down her pants as she does."
 
-            $ Girl.legs = 0
+            $ Girl.outfit["bottom"] = 0
         else:
             if action == "dildo_pussy":
                 "[Girl.name] grabs her dildo, rubbing it suggestively against her crotch."
@@ -434,16 +434,16 @@ label girl_initiated_action(Girl, action):
                 "[line]"
 
                 $ Girl.upskirt = 1
-            elif Girl.legs_number() > 6:
-                $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock, sliding her [Girl.legs] down as she does so.",
-                    "[Girl.name] rolls back and pulls you against her, sliding her [Girl.legs] off as she does so.",
-                    "[Girl.name] pushes you down and climbs on top of you, sliding her [Girl.legs] down as she does so.",
-                    "[Girl.name] turns around, sliding her [Girl.legs] down as she does so.",
-                    "[Girl.name] lays back, sliding her [Girl.legs] down as she does so."])
+            elif Girl.bottom_number() > 6:
+                $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock, sliding her [Girl.outfit['legs']] down as she does so.",
+                    "[Girl.name] rolls back and pulls you against her, sliding her [Girl.outfit['legs']] off as she does so.",
+                    "[Girl.name] pushes you down and climbs on top of you, sliding her [Girl.outfit['legs']] down as she does so.",
+                    "[Girl.name] turns around, sliding her [Girl.outfit['legs']] down as she does so.",
+                    "[Girl.name] lays back, sliding her [Girl.outfit['legs']] down as she does so."])
                 "[line]"
 
                 $ Girl.upskirt = 1
-            elif Girl.legs_number() == 6:
+            elif Girl.bottom_number() == 6:
                 $ line = renpy.random.choice(["[Girl.name] rolls onto her back and pulls you against her, sliding her shorts off as she does so."])
                 "[line]"
 

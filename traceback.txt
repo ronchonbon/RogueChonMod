@@ -1,31 +1,23 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/cheats.rpy", line 652, in script call
-    call WardrobeEditor (Chr)
-  File "game/cheats.rpy", line 141, in script
-    menu:
-Exception: DynamicImage u'images/Rogue_sprite/Rogue_standing_chest[RogueX.piercings].png': could not find image. (u'images/Rogue_sprite/Rogue_standing_chest_ring.png')
+  File "game/rogue_scenes.rpy", line 49, in script
+    show Rogue_sprite at sprite_location(RogueX.sprite_location) with easeinright
+Exception: DynamicImage u'images/Rogue_sprite/Rogue_standing_dress[RogueX.outfit[dress]][RogueX.arm_pose].png': could not find image. (u'images/Rogue_sprite/Rogue_standing_dress_raven1.png')
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/cheats.rpy", line 652, in script call
-    call WardrobeEditor (Chr)
-  File "game/cheats.rpy", line 141, in script
-    menu:
-  File "renpy/ast.py", line 1688, in execute
-    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
-  File "renpy/exports.py", line 1060, in menu
-    rv = renpy.store.menu(new_items)
-  File "renpy/exports.py", line 1296, in display_menu
-    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
-  File "renpy/ui.py", line 298, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "renpy/display/core.py", line 3325, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "renpy/display/core.py", line 3737, in interact_core
-    root_widget.visit_all(lambda i : i.per_interact())
+  File "game/rogue_scenes.rpy", line 49, in script
+    show Rogue_sprite at sprite_location(RogueX.sprite_location) with easeinright
+  File "renpy/ast.py", line 1197, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "renpy/ast.py", line 1167, in show_imspec
+    atl=atl)
+  File "renpy/exports.py", line 768, in show
+    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
+  File "renpy/display/core.py", line 1147, in add
+    thing.visit_all(lambda d : None)
   File "renpy/display/core.py", line 568, in visit_all
     d.visit_all(callback, seen)
   File "renpy/display/core.py", line 568, in visit_all
@@ -36,21 +28,21 @@ Full traceback:
     d.visit_all(callback, seen)
   File "renpy/display/core.py", line 568, in visit_all
     d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 570, in visit_all
-    callback(self)
-  File "renpy/display/core.py", line 3737, in <lambda>
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "renpy/display/image.py", line 752, in per_interact
+  File "renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "renpy/display/layout.py", line 1443, in update
+    child.visit_all(lambda c : c.per_interact())
+  File "renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "renpy/display/image.py", line 744, in visit
     self.find_target()
   File "renpy/display/image.py", line 652, in find_target
     raise Exception(error)
-Exception: DynamicImage u'images/Rogue_sprite/Rogue_standing_chest[RogueX.piercings].png': could not find image. (u'images/Rogue_sprite/Rogue_standing_chest_ring.png')
+Exception: DynamicImage u'images/Rogue_sprite/Rogue_standing_dress[RogueX.outfit[dress]][RogueX.arm_pose].png': could not find image. (u'images/Rogue_sprite/Rogue_standing_dress_raven1.png')
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like 0.997f2
-Wed May 25 01:13:40 2022
+Wed May 25 16:03:22 2022

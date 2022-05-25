@@ -152,11 +152,11 @@ label who_likes_who(Check = 70, D20 = 0):
                         GA.check_if_likes(GB, Check, D20, 1)
 
                     if GA == EmmaX:
-                        GA.check_if_likes(GB, 1000, int(GB.shame/4), 1)
+                        GA.check_if_likes(GB, 1000, int(GB.outfit["shame"]/4), 1)
                     elif GB in [EmmaX, StormX] and GA != LauraX:
-                        GA.check_if_likes(GB, 1000, int(GB.shame/4), 1)
+                        GA.check_if_likes(GB, 1000, int(GB.outfit["shame"]/4), 1)
                     else:
-                        GA.check_if_likes(GB, 1000, int(GB.shame/5), 1)
+                        GA.check_if_likes(GB, 1000, int(GB.outfit["shame"]/5), 1)
 
     if teacher == 2:
         $ StormX.location = "bg_teacher"
@@ -447,7 +447,7 @@ label vibrator_check(Girl):
 
 init python:
 
-    def approval_check(Chr = 0, T = 1000, Type = "LOI", Spread = 150, TmpM = 1, TabM = 0, C = 1, Bonus = 0, Loc = 0, Check=0, Alt=[[],0]):
+    def approval_check(Chr = 0, T = 1000, Type = "LOI", Spread = 150, TmpM = 1, taboo_modifier = 0, C = 1, Bonus = 0, Loc = 0, Check=0, Alt=[[],0]):
         if Chr not in all_Girls:
             return False
 
@@ -547,20 +547,20 @@ init python:
             Localtaboo = Localtaboo*10
             Localapproval_bonus = approval_bonus*10
 
-        TabM = 0 if TabM <= 0 else TabM
+        taboo_modifier = 0 if taboo_modifier <= 0 else taboo_modifier
 
         if Check:
 
-            Check = (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*Localtaboo))
+            Check = (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (taboo_modifier*Localtaboo))
             return Check
 
-        if (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*Localtaboo)) >= (T + (2*Spread)):
+        if (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (taboo_modifier*Localtaboo)) >= (T + (2*Spread)):
 
             return 3
-        elif (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*Localtaboo)) >= (T + Spread):
+        elif (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (taboo_modifier*Localtaboo)) >= (T + Spread):
 
             return 2
-        elif (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*Localtaboo)) >= T:
+        elif (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (taboo_modifier*Localtaboo)) >= T:
 
             return True
         else:

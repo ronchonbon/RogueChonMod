@@ -369,7 +369,7 @@ label gifts:
 
                                     ch_e "Is this the type of thing you expect from me. . ."
 
-                                    $ Girl.change_face("_sadside", Mouth="_lipbite")
+                                    $ Girl.change_face("_sadside", mouth="_lipbite")
 
                                     ch_e "we'll have to see. . ."
                                 elif Girl == LauraX:
@@ -394,7 +394,7 @@ label gifts:
 
                                     ch_e "I don't exactly read this dime store trash. . ."
 
-                                    $ Girl.change_face("_sadside", Mouth="_lipbite")
+                                    $ Girl.change_face("_sadside", mouth="_lipbite")
 
                                     ch_e "but I will take it. . ."
                                 elif Girl == LauraX:
@@ -544,7 +544,7 @@ label gifts:
             "Clothing":
                 menu:
                     "Give her the green nighty." if Girl.tag + "_nighty" in Player.inventory:
-                        if "nighty" not in Girl.inventory:
+                        if "_nighty" not in Girl.inventory:
                             "You give [Girl.name] the nighty."
 
                             $ Girl.blushing = "_blush1"
@@ -553,7 +553,7 @@ label gifts:
                                 $ Player.inventory.remove(Girl.tag + "_nighty")
 
                                 $ Girl.change_face("_bemused")
-                                $ Girl.inventory.append("nighty")
+                                $ Girl.inventory.append("_nighty")
                                 $ Girl.change_stat("love", 200, 40)
                                 $ Girl.change_stat("obedience", 200, 20)
                                 $ Girl.change_stat("inhibition", 200, 30)
@@ -565,7 +565,7 @@ label gifts:
                                 $ Player.inventory.remove(Girl.tag + "_nighty")
 
                                 $ Girl.change_face("_confused")
-                                $ Girl.inventory.append("nighty")
+                                $ Girl.inventory.append("_nighty")
                                 $ Girl.change_stat("love", 200, 30)
                                 $ Girl.change_stat("obedience", 200, 20)
                                 $ Girl.change_stat("inhibition", 200, 20)

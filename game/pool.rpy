@@ -65,7 +65,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 ch_e "Not with this sort of company. . ."
                 return
 
-    if not Girl.top and not Girl.bra and not Girl.legs and not Girl.underwear and (not Girl.accessory or Girl != JubesX):
+    if not Girl.outfit["top"] and not Girl.outfit["bra"] and not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and (not Girl.outfit["front_outer_accessory"] or Girl != JubesX):
 
         $ Girl.change_face("_sly")
         if Girl == RogueX:
@@ -92,49 +92,49 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
             menu:
                 extend ""
-                "take it all off?" if (Girl.top or Girl.bra) and (Girl.legs or Girl.underwear or Girl.hose):
-                    if Girl.top == "_towel" and not Girl.legs and not Girl.hose and not Girl.underwear:
+                "take it all off?" if (Girl.outfit["top"] or Girl.outfit["bra"]) and (Girl.outfit["bottom"] or Girl.outfit["underwear"] or Girl.outfit["hose"]):
+                    if Girl.outfit["top"] == "_towel" and not Girl.outfit["bottom"] and not Girl.outfit["hose"] and not Girl.outfit["underwear"]:
                         $ Type = "no_panties"
-                    elif (Girl.legs or Girl.hose) and not Girl.underwear:
+                    elif (Girl.outfit["bottom"] or Girl.outfit["hose"]) and not Girl.outfit["underwear"]:
                         $ Type = "no_panties"
-                    elif Girl.top and not Girl.bra:
+                    elif Girl.outfit["top"] and not Girl.outfit["bra"]:
                         $ Type = "no_bra"
                     else:
                         $ Type = "both"
                     $ Mod = 200
 
-                "lose the top?" if Girl.bra and not Girl.top:
+                "lose the top?" if Girl.outfit["bra"] and not Girl.outfit["top"]:
                     $ Type = "_bra"
 
-                "maybe just lose the jacket?" if Girl.accessory and Girl == JubesX:
-                    if Girl.accessory == "shut_jacket" and not Girl.legs and not Girl.hose and not Girl.underwear:
+                "maybe just lose the jacket?" if Girl.outfit["front_outer_accessory"] and Girl == JubesX:
+                    if Girl.outfit["front_outer_accessory"] == "shut_jacket" and not Girl.outfit["bottom"] and not Girl.outfit["hose"] and not Girl.outfit["underwear"]:
                         $ Type = "no_panties"
-                    elif Girl.accessory == "shut_jacket" and not Girl.top and not Girl.bra:
+                    elif Girl.outfit["front_outer_accessory"] == "shut_jacket" and not Girl.outfit["top"] and not Girl.outfit["bra"]:
                         $ Type = "no_bra"
                     else:
                         $ Type = "_jacket"
 
-                "maybe just lose the [Girl.top]?" if Girl.top:
-                    if Girl.top == "_towel" and not Girl.legs and not Girl.hose and not Girl.underwear:
+                "maybe just lose the [Girl.outfit['top']]?" if Girl.outfit["top"]:
+                    if Girl.outfit["top"] == "_towel" and not Girl.outfit["bottom"] and not Girl.outfit["hose"] and not Girl.outfit["underwear"]:
                         $ Type = "no_panties"
-                    elif not Girl.bra:
+                    elif not Girl.outfit["bra"]:
                         $ Type = "no_bra"
                     else:
                         $ Type = "over"
 
-                "maybe just lose the [Girl.legs]?" if Girl.legs:
-                    if not Girl.underwear:
+                "maybe just lose the [Girl.outfit['legs']]?" if Girl.outfit["bottom"]:
+                    if not Girl.outfit["underwear"]:
                         $ Type = "no_panties"
                     else:
                         $ Type = "legs"
 
-                "maybe just lose the [Girl.hose]?" if Girl.hose and not Girl.legs:
-                    if not Girl.underwear:
+                "maybe just lose the [Girl.outfit['hose']]?" if Girl.outfit["hose"] and not Girl.outfit["bottom"]:
+                    if not Girl.outfit["underwear"]:
                         $ Type = "no_panties"
                     else:
                         $ Type = "legs"
 
-                "maybe just lose the [Girl.underwear]?" if Girl.underwear:
+                "maybe just lose the [Girl.outfit['underwear']]?" if Girl.outfit["underwear"]:
                     $ Type = "_panties"
                     $ Mod = 200
                 "never mind.":
@@ -337,11 +337,11 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
             if line == "sure":
 
-                $ Girl.top = ""
+                $ Girl.outfit["top"] = ""
                 call expression Girl.tag + "_First_Topless"
                 if Type == "no_panties":
-                    $ Girl.legs = ""
-                    $ Girl.hose = ""
+                    $ Girl.outfit["bottom"] = ""
+                    $ Girl.outfit["hose"] = ""
                     call expression Girl.tag + "_First_Bottomless"
                 $ Girl.add_word(1,"tan","tan")
             else:
@@ -375,18 +375,18 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
             if Type == "_jacket" or Type == "both":
                 if Girl == JubesX:
-                    $ Girl.accessory = ""
+                    $ Girl.outfit["front_outer_accessory"] = ""
             if Type == "over" or Type == "both":
-                $ Girl.top = ""
+                $ Girl.outfit["top"] = ""
             if Type == "_bra" or Type == "both":
-                $ Girl.bra = ""
+                $ Girl.outfit["bra"] = ""
             call expression Girl.tag + "_First_Topless"
 
             if Type == "legs" or Type == "both":
-                $ Girl.legs = ""
-                $ Girl.hose = ""
+                $ Girl.outfit["bottom"] = ""
+                $ Girl.outfit["hose"] = ""
             if Type == "_panties" or Type == "both":
-                $ Girl.underwear = ""
+                $ Girl.outfit["underwear"] = ""
             call expression Girl.tag + "_First_Bottomless"
 
             $ Girl.add_word(1,"tan","tan")
@@ -415,12 +415,12 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 ch_v "Sure. . ."
 
             if Type == "_jacket":
-                $ Girl.accessory = ""
+                $ Girl.outfit["front_outer_accessory"] = ""
             if Type == "over":
-                $ Girl.top = ""
+                $ Girl.outfit["top"] = ""
             if Type == "legs":
-                $ Girl.legs = ""
-                $ Girl.hose = ""
+                $ Girl.outfit["bottom"] = ""
+                $ Girl.outfit["hose"] = ""
             $ Girl.add_word(1,"tan","tan")
 
         elif line == "sorry":
@@ -470,7 +470,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
             $ Girl.add_word(1,"no_tan","no_tan")
             return
-        if not Girl.bra and not Girl.top and not Girl.underwear and not Girl.legs and Girl.hose_number() < 10:
+        if not Girl.outfit["bra"] and not Girl.outfit["top"] and not Girl.outfit["underwear"] and not Girl.outfit["bottom"] and Girl.hose_number() < 10:
             $ Girl.change_outfit("nude")
         $ Mod = 0
         $ line = 0
@@ -609,13 +609,13 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                 ch_v "Sure!"
 
 
-            $ Girl.top = ""
-            $ Girl.bra = ""
+            $ Girl.outfit["top"] = ""
+            $ Girl.outfit["bra"] = ""
             call expression Girl.tag + "_First_Topless"
 
-            $ Girl.legs = ""
-            $ Girl.hose = ""
-            $ Girl.underwear = ""
+            $ Girl.outfit["bottom"] = ""
+            $ Girl.outfit["hose"] = ""
+            $ Girl.outfit["underwear"] = ""
             call expression Girl.tag + "_First_Bottomless"
             $ Girl.change_outfit("nude")
             $ Girl.add_word(1,"dip","dip")
@@ -711,10 +711,10 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                                 Girl.voice "Thanks."
                                 $ Girl.add_word(1,"no_dip","no_dip")
                                 return
-                        $ Girl.top = ""
+                        $ Girl.outfit["top"] = ""
                         "She starts to strip down."
-                        $ Girl.legs = ""
-                        $ Girl.hose = ""
+                        $ Girl.outfit["bottom"] = ""
+                        $ Girl.outfit["hose"] = ""
                         "And ends up in her underwear."
                         $ Girl.seen_underwear = 1
                 "Never mind then.":
@@ -806,13 +806,13 @@ label Pool_Topless(Girl=focused_Girl, temp_Girls=[]):
                 $ Girl.change_stat("obedience", 60, 2)
                 $ Girl.change_stat("inhibition", 50, -2)
                 Girl.voice ". . ."
-                $ Girl.change_face("_surprised",2,Eyes="_down")
+                $ Girl.change_face("_surprised",2,eyes="_down")
             $ Girl.change_stat("love", 80, 3)
             $ Girl.change_stat("love", 90, 1)
             $ Girl.change_stat("lust", 50, 2)
             $ Count = 100
         "Say nothing":
-            $ Girl.change_face("_surprised",2,Eyes="_down")
+            $ Girl.change_face("_surprised",2,eyes="_down")
             "After a few moments, [Girl.name] seems to notice that her top rode up."
             if approval_check(Girl, 1200):
                 $ Count = 0
@@ -821,8 +821,8 @@ label Pool_Topless(Girl=focused_Girl, temp_Girls=[]):
 
     if approval_check(Girl, 800-Count,"I") or approval_check(Girl, 1600-Count) or (Girl == StormX and StormX in Rules):
         $ Girl.change_face("_sly")
-        $ Girl.bra = ""
-        $ Girl.top = ""
+        $ Girl.outfit["bra"] = ""
+        $ Girl.outfit["top"] = ""
         $ Girl.change_stat("obedience", 60, 2)
         $ Girl.change_stat("inhibition", 50, 4)
         $ Girl.change_stat("inhibition", 90, 2)
@@ -874,10 +874,10 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
     $ temp_Girls = all_Girls[:]
     while temp_Girls:
         if bg_current == temp_Girls[0].location and approval_check(temp_Girls[0], 700):
-            if temp_Girls[0].bra == temp_Girls[0].swimwear[5] and temp_Girls[0].underwear == temp_Girls[0].swimwear[6]:
+            if temp_Girls[0].outfit["bra"] == temp_Girls[0].swimwear[5] and temp_Girls[0].outfit["underwear"] == temp_Girls[0].swimwear[6]:
 
                 $ Swimmers.append(temp_Girls[0])
-            elif not temp_Girls[0].bra_number() and not temp_Girls[0].top_number() and not temp_Girls[0].underwear_number() and not temp_Girls[0].legs_number() and not temp_Girls[0].hose_number():
+            elif not temp_Girls[0].bra_number() and not temp_Girls[0].top_number() and not temp_Girls[0].underwear_number() and not temp_Girls[0].bottom_number() and not temp_Girls[0].hose_number():
 
                 $ Swimmers.append(temp_Girls[0])
             else:

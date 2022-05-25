@@ -168,7 +168,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
     elif Party[0] == EmmaX and Second and ("threesome" not in EmmaX.history or "taboo" not in EmmaX.history):
         "[EmmaX.name] starts to lean close to you, but then notices [Second.name]."
 
-        $ Party[0].change_face("_sly",1,Eyes="_side")
+        $ Party[0].change_face("_sly",1,eyes="_side")
 
         "She stops immediately and looks a bit embarrassed."
     elif D20 > 17 and approval_check(Party[0], 1000) and Party[0].action_counter["blowjob"] > 5:
@@ -224,7 +224,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
                     "After a moment, you can feel a tugging on your zipper as it releases."
                     "You cock floats free of your pants, lifted half under its own power and half due to. . ."
 
-                    $ Party[0].change_face("_sly",Eyes="_leftside")
+                    $ Party[0].change_face("_sly",eyes="_leftside")
 
                     "You glance over at [JeanX.name] and she smiles mischieviously as the pressure builds."
                     "You can feel a strong rubbing sensation along the length of the shaft, up and down."
@@ -245,7 +245,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
             "She pulls your dick out and begins to slowly stroke it."
 
     elif action == "masturbation":
-        $ Party[0].change_face("_sly", Eyes="_side")
+        $ Party[0].change_face("_sly", eyes="_side")
 
         "[Party[0].name] leans back a bit and starts to rub herself."
     elif action == "kiss":

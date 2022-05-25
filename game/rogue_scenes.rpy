@@ -256,7 +256,7 @@ label tour_end:
 
                 ch_r "Heh, You'll have to earn that [RogueX.player_petname]."
 
-                $ RogueX.arms = ""
+                $ RogueX.outfit["gloves"] = ""
                 $ RogueX.arm_pose = 2
                 $ RogueX.change_face("_sexy")
                 $ RogueX.brows = "_sad"
@@ -265,7 +265,7 @@ label tour_end:
         "Ok, be my guest.":
             $ RogueX.change_stat("love", 200, 30)
             $ RogueX.change_face("_smile")
-            $ RogueX.arms = ""
+            $ RogueX.outfit["gloves"] = ""
             $ RogueX.arm_pose = 2
             $ RogueX.change_face("_sexy")
             $ RogueX.brows = "_sad"
@@ -279,7 +279,7 @@ label tour_end:
 
             ch_r "Well I'm just too damned curious, sorry."
 
-            $ RogueX.arms = ""
+            $ RogueX.outfit["gloves"] = ""
             $ RogueX.arm_pose = 2
 
             "She pulls off her glove and touches your face."
@@ -313,7 +313,7 @@ label tour_end:
         if not simulation:
             $ phonebook.append(RogueX)
 
-    $ RogueX.arms = "_gloves"
+    $ RogueX.outfit["gloves"] = "_gloves"
     $ RogueX.arm_pose = 1
     $ RogueX.addiction_rate = 5
 
@@ -665,7 +665,7 @@ label Rogue_Love:
                 $ RogueX.change_stat("love", 200, -50)
                 $ RogueX.change_stat("obedience", 200, 50)
                 jump Rogue_Love_Jerk
-    $ RogueX.change_face("_bemused",1,Eyes="_side")
+    $ RogueX.change_face("_bemused",1,eyes="_side")
     $ RogueX.player_petnames.append("lover")
     call Rogue_AnnaMarie
     ch_r "Anyway, I am glad I've been able to share this with you."
@@ -1201,8 +1201,8 @@ label Rogue_Fuckbuddy:
                 $ RogueX.player_petnames.append("fuck buddy")
                 $ RogueX.arm_pose = 2
                 ch_r "Whoo hoo!"
-                $ RogueX.top = 0
-                $ RogueX.bra = 0
+                $ RogueX.outfit["top"] = 0
+                $ RogueX.outfit["bra"] = 0
                 if simulation:
                     return True
                 call Rogue_First_Topless (1)
@@ -1237,8 +1237,8 @@ label Rogue_Fuckbuddy_Jerk:
     $ RogueX.change_face("_bemused", 1)
     if RogueX.event_happened[10] > 1:
         $ RogueX.arm_pose = 2
-        $ RogueX.top = 0
-        $ RogueX.bra = 0
+        $ RogueX.outfit["top"] = 0
+        $ RogueX.outfit["bra"] = 0
         ch_r "I offer these things on a silver platter, and nothing!"
         $ RogueX.change_outfit()
         ch_r "Look, I don't care what you call it. Just let me know if you want a tumble."
@@ -1427,7 +1427,7 @@ label Rogue_Frisky_Class:
         $ D20 = renpy.random.randint(1, 20)
         $ RogueX.change_face("_sly")
         "You notice one of [RogueX.name]'s shoes slip from her foot beneath the desk. She tosses you a sly grin."
-        if RogueX.hose:
+        if RogueX.outfit["hose"]:
             "You feel the smooth texture of her stockinged foot begin to slowly slide back and forth along the length of your calf."
         else:
             "You feel the smooth skin of her bare foot begin to slowly slide back and forth along the length of your calf."
@@ -1487,16 +1487,16 @@ label Rogue_Frisky_Class:
 
                     if line == "fondle_pussy":
                         $ RogueX.change_face("_sly")
-                        if RogueX.legs == "_skirt":
+                        if RogueX.outfit["bottom"] == "_skirt":
                             "[RogueX.name]'s sly smile turns sultry as she feels your fingers sneak under the hem of her skirt, slowly tracing the soft contours of her mound."
-                        elif RogueX.legs == "_pants":
+                        elif RogueX.outfit["bottom"] == "_pants":
                             "[RogueX.name]'s sly smile turns sultry as she feels your fingers sneak down her pants, slowly tracing the soft contours of her mound."
                         else:
                             "[RogueX.name]'s sly smile turns sultry as she feels your fingers sneak between her legs, slowly tracing the soft contours of her mound."
 
-                        if RogueX.underwear == "_shorts":
+                        if RogueX.outfit["underwear"] == "_shorts":
                             "You think her shorts are becoming damp as you stroke the thin material. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
-                        elif RogueX.underwear:
+                        elif RogueX.outfit["underwear"]:
                             "You think her panties are becoming damp as you stroke the thin material. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
                         elif RogueX.pubes:
                             "You feel her soft fur moisten as you stroke the soft flesh below. Her cheeks are flushed and her breathing's starting to become shallower and quicker."

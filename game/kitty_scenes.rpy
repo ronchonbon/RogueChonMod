@@ -1,8 +1,8 @@
 label meet_Kitty:
     $ bg_current = "bg_campus"
 
-    $ KittyX.outfit = "casual1"
-    $ KittyX.today_outfit = KittyX.outfit
+    $ KittyX.outfit_name = "casual1"
+    $ KittyX.today_outfit_name = KittyX.outfit
     $ KittyX.change_outfit(KittyX.outfit)
 
     call clear_the_room("all", 0, 1)
@@ -91,7 +91,7 @@ label meet_Kitty:
 
             $ KittyX.change_stat("love", 90, 5)
         "Was I too distracting?":
-            $ KittyX.change_face("_angry", 1, Brows = "_normal")
+            $ KittyX.change_face("_angry", 1, brows = "_normal")
             $ KittyX.change_stat("love", 90, -2)
             $ KittyX.change_stat("obedience", 80, 8)
             $ KittyX.change_stat("inhibition", 70, 4)
@@ -119,7 +119,7 @@ label meet_Kitty:
 
             ch_k "I'm definitely curious."
         "I guess so.":
-            $ KittyX.change_face("_sadside", 0, Mouth = "_lipbite")
+            $ KittyX.change_face("_sadside", 0, mouth = "_lipbite")
             $ KittyX.change_stat("obedience", 80, 3)
             $ KittyX.change_stat("inhibition", 70, 7)
 
@@ -143,7 +143,7 @@ label meet_Kitty:
     ch_p "Ok, let's give it a shot."
     "You reach out and grab her wrist."
 
-    $ KittyX.change_face("_angry", 1, Eyes = "_down")
+    $ KittyX.change_face("_angry", 1, eyes = "_down")
     $ KittyX.addiction_rate += 2
 
     "She struggles for a few moments to shake you free, but you hold firm."
@@ -216,7 +216,7 @@ label meet_Kitty:
 
         ch_k "Still though, that was an interesting experience. . ."
     else:
-        $ KittyX.change_face("_bemused", 1, Eyes = "_side")
+        $ KittyX.change_face("_bemused", 1, eyes = "_side")
 
         ch_k "That was an interesting experience. . ."
 
@@ -225,7 +225,7 @@ label meet_Kitty:
 
     ch_k "Kinda tingly. . ."
 
-    $ KittyX.change_face("_surprised", Mouth = "_kiss")
+    $ KittyX.change_face("_surprised", mouth = "_kiss")
 
     ch_k "Oh! I[KittyX.like]totally forgot, I have to get to a briefing!"
 
@@ -1880,7 +1880,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
         $ TempBonus = 400
     elif KittyX.likes[Girl.tag] <= 400:
         $ TempBonus = 200
-    elif KittyX.likes[Girl.tag] >= 800 or approval_check(Girl, 500, "I", TabM=3):
+    elif KittyX.likes[Girl.tag] >= 800 or approval_check(Girl, 500, "I", taboo_modifier=3):
 
         $ TempBonus = 0
     else:
@@ -1889,15 +1889,15 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
 
     menu:
         "Hey [KittyX.name], why don't you snag [Girl.name]'s. . ."
-        ". . . [Girl.top]?" if Girl.top:
-            if Girl.bra:
+        ". . . [Girl.outfit['top']]?" if Girl.outfit["top"]:
+            if Girl.outfit["bra"]:
 
                 $ Shy = 2
-                if approval_check(KittyX, 800, TabM=2, Bonus=TempBonus):
+                if approval_check(KittyX, 800, taboo_modifier=2, Bonus=TempBonus):
 
 
                     $ line = "over"
-                elif approval_check(KittyX, 600, TabM=2, Bonus=TempBonus):
+                elif approval_check(KittyX, 600, taboo_modifier=2, Bonus=TempBonus):
 
                     $ line = "no"
                 else:
@@ -1906,22 +1906,22 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
             else:
 
                 $ Shy = 3
-                if approval_check(KittyX, 800, TabM=2.5, Bonus=(TempBonus*1.5)):
+                if approval_check(KittyX, 800, taboo_modifier=2.5, Bonus=(TempBonus*1.5)):
                     $ line = "over"
-                elif approval_check(KittyX, 600, TabM=1.5, Bonus=TempBonus):
+                elif approval_check(KittyX, 600, taboo_modifier=1.5, Bonus=TempBonus):
                     $ line = "no"
                 else:
                     $ line = "noway"
 
-        ". . . [Girl.bra]?" if Girl.bra:
-            if Girl.top:
+        ". . . [Girl.outfit['bra']]?" if Girl.outfit["bra"]:
+            if Girl.outfit["top"]:
 
                 $ Shy = 1
-                if approval_check(KittyX, 1200, TabM=1, Bonus=TempBonus):
+                if approval_check(KittyX, 1200, taboo_modifier=1, Bonus=TempBonus):
 
 
                     $ line = "chest"
-                elif approval_check(KittyX, 600, TabM=0.5, Bonus=TempBonus):
+                elif approval_check(KittyX, 600, taboo_modifier=0.5, Bonus=TempBonus):
 
                     $ line = "no"
                 else:
@@ -1930,22 +1930,22 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
             else:
 
                 $ Shy = 3
-                if approval_check(KittyX, 800, TabM=2.5, Bonus=(TempBonus*1.5)):
+                if approval_check(KittyX, 800, taboo_modifier=2.5, Bonus=(TempBonus*1.5)):
                     $ line = "chest"
-                elif approval_check(KittyX, 600, TabM=1.5, Bonus=TempBonus):
+                elif approval_check(KittyX, 600, taboo_modifier=1.5, Bonus=TempBonus):
                     $ line = "no"
                 else:
                     $ line = "noway"
 
-        ". . . [Girl.legs]?" if Girl.legs:
-            if Girl.underwear or Girl.hose_number() >= 10:
+        ". . . [Girl.outfit['legs']]?" if Girl.outfit["bottom"]:
+            if Girl.outfit["underwear"] or Girl.hose_number() >= 10:
 
                 $ Shy = 2
-                if approval_check(KittyX, 1000, TabM=2, Bonus=TempBonus):
+                if approval_check(KittyX, 1000, taboo_modifier=2, Bonus=TempBonus):
 
 
                     $ line = "legs"
-                elif approval_check(KittyX, 800, TabM=2, Bonus=TempBonus):
+                elif approval_check(KittyX, 800, taboo_modifier=2, Bonus=TempBonus):
 
                     $ line = "no"
                 else:
@@ -1954,22 +1954,22 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
             else:
 
                 $ Shy = 3
-                if approval_check(KittyX, 1000, TabM=2.5, Bonus=(TempBonus*1.5)):
+                if approval_check(KittyX, 1000, taboo_modifier=2.5, Bonus=(TempBonus*1.5)):
                     $ line = "legs"
-                elif approval_check(KittyX, 800, TabM=1.5, Bonus=TempBonus):
+                elif approval_check(KittyX, 800, taboo_modifier=1.5, Bonus=TempBonus):
                     $ line = "no"
                 else:
                     $ line = "noway"
 
-        ". . . [Girl.underwear]?" if Girl.underwear:
-            if Girl.legs or Girl.hose_number() >= 10:
+        ". . . [Girl.outfit['underwear']]?" if Girl.outfit["underwear"]:
+            if Girl.outfit["bottom"] or Girl.hose_number() >= 10:
 
                 $ Shy = 1
-                if approval_check(KittyX, 1000, TabM=1, Bonus=TempBonus):
+                if approval_check(KittyX, 1000, taboo_modifier=1, Bonus=TempBonus):
 
 
                     $ line = "_panties"
-                elif approval_check(KittyX, 800, TabM=0.5, Bonus=TempBonus):
+                elif approval_check(KittyX, 800, taboo_modifier=0.5, Bonus=TempBonus):
 
                     $ line = "no"
                 else:
@@ -1978,35 +1978,35 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
             else:
 
                 $ Shy = 3
-                if approval_check(KittyX, 1000, TabM=2.5, Bonus=(TempBonus*1.5)):
+                if approval_check(KittyX, 1000, taboo_modifier=2.5, Bonus=(TempBonus*1.5)):
                     $ line = "_panties"
-                elif approval_check(KittyX, 800, TabM=1.5, Bonus=TempBonus):
+                elif approval_check(KittyX, 800, taboo_modifier=1.5, Bonus=TempBonus):
                     $ line = "no"
                 else:
                     $ line = "noway"
 
-        ". . . [Girl.hose]?" if Girl.hose:
-            if Girl.legs:
+        ". . . [Girl.outfit['hose']]?" if Girl.outfit["hose"]:
+            if Girl.outfit["bottom"]:
 
                 $ Shy = 1
-                if approval_check(KittyX, 800, TabM=1, Bonus=TempBonus):
+                if approval_check(KittyX, 800, taboo_modifier=1, Bonus=TempBonus):
 
 
                     $ line = "hose"
-                elif approval_check(KittyX, 800, TabM=0.5, Bonus=TempBonus):
+                elif approval_check(KittyX, 800, taboo_modifier=0.5, Bonus=TempBonus):
 
                     $ line = "no"
                 else:
 
                     $ line = "noway"
-            elif Girl.underwear or Girl.hose_number() < 10:
+            elif Girl.outfit["underwear"] or Girl.hose_number() < 10:
 
                 $ Shy = 2
-                if approval_check(KittyX, 1000, TabM=2, Bonus=TempBonus):
+                if approval_check(KittyX, 1000, taboo_modifier=2, Bonus=TempBonus):
 
 
                     $ line = "hose"
-                elif approval_check(KittyX, 800, TabM=2, Bonus=TempBonus):
+                elif approval_check(KittyX, 800, taboo_modifier=2, Bonus=TempBonus):
 
                     $ line = "no"
                 else:
@@ -2015,9 +2015,9 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
             else:
 
                 $ Shy = 3
-                if approval_check(KittyX, 1000, TabM=2.5, Bonus=(TempBonus*1.5)):
+                if approval_check(KittyX, 1000, taboo_modifier=2.5, Bonus=(TempBonus*1.5)):
                     $ line = "hose"
-                elif approval_check(KittyX, 800, TabM=1.5, Bonus=TempBonus):
+                elif approval_check(KittyX, 800, taboo_modifier=1.5, Bonus=TempBonus):
                     $ line = "no"
                 else:
                     $ line = "noway"
@@ -2044,42 +2044,42 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
 
     $ Girl.change_face("_surprised",2)
     if line == "over":
-        $ line = Girl.top
-        $ Girl.top = ""
+        $ line = Girl.outfit["top"]
+        $ Girl.outfit["top"] = ""
         call expression Girl.tag + "_First_Topless" pass (1)
         "She reaches out and snags [Girl.name]'s [line], tugging it through her body."
 
     elif line == "chest":
-        $ line = Girl.bra
-        $ Girl.bra = ""
+        $ line = Girl.outfit["bra"]
+        $ Girl.outfit["bra"] = ""
         call expression Girl.tag + "_First_Topless" pass (1)
-        if Girl.top:
-            "She reaches through [Girl.name]'s [Girl.top] and snags her [line]."
+        if Girl.outfit["top"]:
+            "She reaches through [Girl.name]'s [Girl.outfit['top']] and snags her [line]."
         else:
             "She reaches out and snags [Girl.name]'s [line], tugging it free."
 
     elif line == "legs":
-        $ line = Girl.legs
-        $ Girl.legs = ""
+        $ line = Girl.outfit["bottom"]
+        $ Girl.outfit["bottom"] = ""
         call expression Girl.tag + "_First_Bottomless" pass (1)
         "She reaches down and snags [Girl.name]'s [line], tugging them through her body."
 
     elif line == "_panties":
-        $ line = Girl.underwear
-        $ Girl.underwear = ""
+        $ line = Girl.outfit["underwear"]
+        $ Girl.outfit["underwear"] = ""
         call expression Girl.tag + "_First_Bottomless" pass (1)
-        if Girl.legs:
-            "She reaches down through [Girl.name]'s [Girl.legs] and snags her [line]."
-        elif Girl.hose:
-            "She reaches down through [Girl.name]'s [Girl.hose] and snags her [line]."
+        if Girl.outfit["bottom"]:
+            "She reaches down through [Girl.name]'s [Girl.outfit['legs']] and snags her [line]."
+        elif Girl.outfit["hose"]:
+            "She reaches down through [Girl.name]'s [Girl.outfit['hose']] and snags her [line]."
         else:
             "She reaches out and snags [Girl.name]'s [line], tugging them free."
     elif line == "hose":
-        $ line = Girl.hose
-        $ Girl.hose = ""
+        $ line = Girl.outfit["hose"]
+        $ Girl.outfit["hose"] = ""
         call expression Girl.tag + "_First_Bottomless" pass (1)
-        if Girl.legs:
-            "She reaches down through [Girl.name]'s [Girl.legs] and snags her [line]."
+        if Girl.outfit["bottom"]:
+            "She reaches down through [Girl.name]'s [Girl.outfit['legs']] and snags her [line]."
         else:
             "She reaches out and snags [Girl.name]'s [line], tugging them free."
 
@@ -2188,7 +2188,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
             "[KittyX.name] smiles triumphantly."
         else:
 
-            $ KittyX.change_face("_angry",Eyes="_side")
+            $ KittyX.change_face("_angry",eyes="_side")
             "[KittyX.name] seems a bit annoyed at [Girl.name]'s attitude."
 
     elif not approval:

@@ -286,7 +286,7 @@ label sleepover(line=0):
                     elif Party[0] == JubesX:
                         ch_v "Yeah, yeah. . ."
                 else:
-                    $ Party[0].change_face("_smile",Brows="_confused")
+                    $ Party[0].change_face("_smile",brows="_confused")
 
                     if Party[0] == RogueX:
                         ch_r "I'm afraid not this time, [RogueX.player_petname]. I'll see you later."
@@ -348,7 +348,7 @@ label sleepover(line=0):
             elif Party[0] == JubesX:
                 ch_v "Well. . . fine. . ."
         else:
-            $ Party[0].change_face("_smile",Brows="_confused")
+            $ Party[0].change_face("_smile",brows="_confused")
             $ line = 0
             if Party[0] == RogueX:
                 ch_r "I'm afraid not, [RogueX.player_petname]. Head home, I'll see you later."
@@ -475,7 +475,7 @@ label sleepover(line=0):
                     $ line = 1
                     $ Party[0].check_if_likes(Party[1],800,3,1)
                 else:
-                    $ Party[1].change_face("_sadside",1,Mouth="_smile")
+                    $ Party[1].change_face("_sadside",1,mouth="_smile")
                     if Party[1] == RogueX:
                         ch_r "I don't want to be a bother."
                     elif Party[1] == KittyX:
@@ -485,7 +485,7 @@ label sleepover(line=0):
                     elif Party[1] == LauraX:
                         ch_l "Nah."
                     elif Party[1] == JeanX:
-                        $ Party[1].change_face("_angry",1,Mouth="_smile")
+                        $ Party[1].change_face("_angry",1,mouth="_smile")
                         ch_j "Oh, so glad I have permission. . ."
                     elif Party[1] == StormX:
                         ch_s "I would not want to intrude."
@@ -515,7 +515,7 @@ label sleepover(line=0):
                         $ Party[1].check_if_likes(Party[0],800,5,1)
                     elif Party[0].likes[Party[1].tag] >= 400 and approval_check(Party[0], 1400):
 
-                        $ Party[0].change_face("_sadside",1,Mouth="_smile")
+                        $ Party[0].change_face("_sadside",1,mouth="_smile")
                         if Party[0] == RogueX:
                             ch_r "Sure, I guess."
                         elif Party[0] == KittyX:
@@ -661,7 +661,7 @@ label sleepover_Morning:
         $ Party[0].change_outfit("nude")
     else:
         $ Party[0].change_outfit("sleep")
-    $ Party[0].today_outfit == Party[0].outfit
+    $ Party[0].today_outfit_name == Party[0].outfit
     if len(Party) >= 2:
 
         if Party[1] == StormX and not StormX.sleepwear[0] and StormX.taboo < 20:
@@ -669,7 +669,7 @@ label sleepover_Morning:
             $ Party[1].change_outfit("nude")
         else:
             $ Party[1].change_outfit("sleep")
-        $ Party[1].today_outfit == Party[1].outfit
+        $ Party[1].today_outfit_name == Party[1].outfit
         "The girls change into their sleepwear."
     else:
         "[Party[0].name] changes into her sleepwear."
@@ -987,12 +987,12 @@ label sleepover_Morning:
         elif Party[0] == EmmaX:
             $ Party[0].change_face("_smile",1)
             ch_e "You're a hopeless romantic, [EmmaX.player_petname]."
-            $ Party[0].change_face("_smile",2,Eyes="_side")
+            $ Party[0].change_face("_smile",2,eyes="_side")
             ch_e "I suppose I can be a bit hopeless too. . ."
         elif Party[0] == LauraX:
             $ Party[0].change_face("_confused",1)
             ch_l "Oh. . ."
-            $ Party[0].change_face("_surprised",2,Brows="_confused")
+            $ Party[0].change_face("_surprised",2,brows="_confused")
             ch_l "Yeah, so did I, now that you mention it. . ."
             $ Party[0].change_face("_confused",1)
             ch_l "Huh."
@@ -1004,7 +1004,7 @@ label sleepover_Morning:
         elif Party[0] == StormX:
             $ Party[0].change_face("_smile",1)
             ch_s "Well, yes, it was nice to sleep next to you as well, [StormX.player_petname]."
-            $ Party[0].change_face("_smile",2,Eyes="_leftside")
+            $ Party[0].change_face("_smile",2,eyes="_leftside")
             ch_s "I think we should make a habit of this. . ."
             $ Party[0].change_face("_smile",1)
         elif Party[0] == JubesX:
@@ -1145,13 +1145,13 @@ label sleepover_Morning:
             elif Party[1] == EmmaX:
                 $ Party[1].change_face("_smile",1)
                 ch_e "You're a hopeless romantic, [EmmaX.player_petname]."
-                $ Party[1].change_face("_smile",2,Eyes="_side")
+                $ Party[1].change_face("_smile",2,eyes="_side")
                 ch_e "I suppose I can be a bit hopeless too. . ."
                 ch_e "You know what I'm talking about, [Party[0].name]."
             elif Party[1] == LauraX:
                 $ LauraX.change_face("_confused",1)
                 ch_l "Oh. . ."
-                $ Party[1].change_face("_surprised",2,Brows="_confused")
+                $ Party[1].change_face("_surprised",2,brows="_confused")
                 ch_l "Yeah, so did I, now that you mention it. . ."
                 $ Party[1].change_face("_confused",1)
                 ch_l "Huh."
@@ -1164,7 +1164,7 @@ label sleepover_Morning:
             elif Party[1] == StormX:
                 $ Party[1].change_face("_smile",1)
                 ch_s "Well, yes, it was nice to sleep next to you as well, [StormX.player_petname]."
-                $ Party[1].change_face("_smile",2,Eyes="_leftside")
+                $ Party[1].change_face("_smile",2,eyes="_leftside")
                 ch_s "I think we should make a habit of this. . ."
                 $ Party[1].change_face("_smile",1)
             elif Party[1] == JubesX:
@@ -1596,7 +1596,7 @@ label sleepover_MorningWood:
 
     $ Party[0].change_face("_closed",1)
     if Partner:
-        $ Partner.change_face("_closed",1,Mouth="_tongue")
+        $ Partner.change_face("_closed",1,mouth="_tongue")
 
     "You feel a pleasant sensation. . ."
     if primary_action == "blowjob":
@@ -1728,7 +1728,7 @@ label sleepover_MorningWood:
         $ Party[0].change_stat("obedience", 50, 2)
         $ Party[0].change_stat("inhibition", 60, -2)
         $ action_speed = 0
-        $ Party[0].change_face("_angry",1,Brows="_confused")
+        $ Party[0].change_face("_angry",1,brows="_confused")
         if Party[0] == RogueX:
             ch_r "Well that's a fine \"how d'ya do,\" when a girl goes to all this trouble!"
         elif Party[0] == KittyX:
@@ -1778,7 +1778,7 @@ label sleepover_MorningWood:
             $ Party[1].change_stat("love", 90, -3)
             $ Party[1].change_stat("obedience", 50, 2)
             $ Party[1].change_stat("inhibition", 60, -2)
-            $ Party[1].change_face("_angry",1,Brows="_confused")
+            $ Party[1].change_face("_angry",1,brows="_confused")
 
         if Partner == RogueX:
             if "blowjob" in RogueX.recent_history:

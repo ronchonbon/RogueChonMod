@@ -5,7 +5,7 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
     if "_angry" in Girl.recent_history:
         return
 
-    $ approval = approval_check(Girl, 500, TabM = 1)
+    $ approval = approval_check(Girl, 500, taboo_modifier = 1)
 
     if Girl == JeanX and not JeanX.taboo:
         $ approval = 2
@@ -151,7 +151,7 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
                     elif Girl == KittyX:
                         ch_k "Heh, sorry, [Girl.player_petname]."
                     else:
-                        $ Girl.change_face("_sly", Brows="_confused")
+                        $ Girl.change_face("_sly", brows="_confused")
                         Girl.voice "No."
 
     if "no_massage" in Girl.daily_history:
@@ -231,7 +231,7 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
 
 label Massage_Prep(Girl=focused_Girl, Current=0, Past=0, MCount=0):
     call Top_Off (Girl, "massage")
-    if not Girl.top and "no_topless" not in Girl.recent_history:
+    if not Girl.outfit["top"] and "no_topless" not in Girl.recent_history:
         $ Girl.change_stat("obedience", 50, 3)
         $ Girl.change_stat("inhibition", 50, 3)
     elif Girl.forced:
@@ -287,8 +287,8 @@ label Massage_Prep(Girl=focused_Girl, Current=0, Past=0, MCount=0):
                 ch_s "So long as I get some skin contact from this. . ."
             elif Girl == JubesX:
                 ch_v "But you know, give me som contact after."
-                if Girl.accessory and Girl.top:
-                    $ Girl.accessory = ""
+                if Girl.outfit["front_outer_accessory"] and Girl.outfit["top"]:
+                    $ Girl.outfit["front_outer_accessory"] = ""
                     "She does take off the jacket though."
     if "_angry" in Girl.recent_history:
         return
@@ -486,7 +486,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if not Girl.top:
+            if not Girl.outfit["top"]:
                 $ Girl.addiction -= 3
         elif Current == "back":
             if Past in ("neck","shoulders","breasts","hips"):
@@ -509,9 +509,9 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if not Girl.top:
+            if not Girl.outfit["top"]:
                 $ Girl.addiction -= 2
-            if not Girl.bra:
+            if not Girl.outfit["bra"]:
                 $ Girl.addiction -= 2
         elif Current == "breasts":
             if Past == "back":
@@ -536,7 +536,7 @@ label Massage_Cycle:
                 $ Girl.change_stat("lust", 200, 2)
                 $ line = "You continue to rub " +Girl.name+ "'s " +Current
 
-            if not Girl.top and not Girl.bra:
+            if not Girl.outfit["top"] and not Girl.outfit["bra"]:
                 $ Girl.addiction -= 5
         elif Current == "arms":
             if Past == "shoulders":
@@ -562,7 +562,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if Girl.top not in ("_mesh_top","_pink_top","_jacket"):
+            if Girl.outfit["top"] not in ("_mesh_top","_pink_top","_jacket"):
                 $ Girl.addiction -= 3
         elif Current == "hands":
             if Past == "arms":
@@ -608,7 +608,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if not Girl.legs and Girl.hose_number() < 10:
+            if not Girl.outfit["bottom"] and Girl.hose_number() < 10:
                 $ Girl.addiction -= 1
         elif Current == "ass":
             if Past in ("back","hips"):
@@ -636,7 +636,7 @@ label Massage_Cycle:
                 $ Girl.change_stat("lust", 90, 2)
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if not Girl.legs and not Girl.underwear and Girl.hose_number() < 10:
+            if not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and Girl.hose_number() < 10:
                 $ Girl.addiction -= 3
         elif Current == "pussy":
             if Past in ("hips","ass"):
@@ -664,7 +664,7 @@ label Massage_Cycle:
                 $ Girl.change_stat("lust", 200, 3)
                 $ line = "You continue to rub " +Girl.name+ "'s " +Current
 
-            if not Girl.legs and not Girl.underwear and Girl.hose_number() < 10:
+            if not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and Girl.hose_number() < 10:
                 $ Girl.addiction -= 5
         elif Current == "thighs":
             if Past == "calves":
@@ -690,7 +690,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if Girl.legs_number() <= 6 and Girl.hose_number() < 10:
+            if Girl.bottom_number() <= 6 and Girl.hose_number() < 10:
                 $ Girl.addiction -= 3
         elif Current == "calves":
             if Past == "feet":
@@ -716,7 +716,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if Girl.legs_number() <= 6 and Girl.hose_number() < 10:
+            if Girl.bottom_number() <= 6 and Girl.hose_number() < 10:
                 $ Girl.addiction -= 2
         elif Current == "feet":
             if Past == "calves":
@@ -739,7 +739,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to rub " +Girl.name+ "'s " +Current
 
-            if Girl.accessory != "boots" and Girl.hose_number() < 10:
+            if Girl.outfit["front_outer_accessory"] != "boots" and Girl.hose_number() < 10:
                 $ Girl.addiction -= 3
 
 
@@ -838,11 +838,11 @@ label Massage_Cycle:
 
             if Girl.lust >= 100:
 
-                if approval_check(Girl, 1000, TabM = 1):
+                if approval_check(Girl, 1000, taboo_modifier = 1):
                     call Girl_Cumming (Girl)
                 else:
                     call Girl_Cumming (Girl, 1)
-                    $ Girl.change_face("_bemused",2,Eyes="_side")
+                    $ Girl.change_face("_bemused",2,eyes="_side")
                     if Girl == RogueX:
                         ch_r "Oh. . . wow. . . um. . ."
                         ch_r "That was nice. . ."

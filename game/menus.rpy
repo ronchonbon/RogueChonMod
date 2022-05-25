@@ -428,7 +428,7 @@ label begging_menu(Girl, action):
 
                     call please_not_good_enough_lines(Girl)
                 elif action in ["blowjob"]:
-                    if approval_check(Girl, 1100, TabM = 3): # 110, 125, 140, taboo -120(230)             Handy instead?
+                    if approval_check(Girl, 1100, taboo_modifier = 3): # 110, 125, 140, taboo -120(230)             Handy instead?
                         $ Girl.change_stat("inhibition", 80, 1)
                         $ Girl.change_stat("inhibition", 60, 3)
                         $ Girl.change_face("_confused", 1)
@@ -463,7 +463,7 @@ label begging_menu(Girl, action):
                                 ch_k "Ok, your loss."
                                 ch_e "Pity."
                                 ch_l "Fine, be that way."
-                                $ JeanX.arms = ""
+                                $ JeanX.outfit["gloves"] = ""
                                 ch_j "Too bad then."
                                 ch_s "That is unfortunate."
 
@@ -536,7 +536,7 @@ label begging_menu(Girl, action):
                 call trying_to_convince_lines(Girl, action)
                 jump before_action
             else:
-                $ approval = approval_check(Girl, 1100, TabM = 3) # 110, 125, 140, taboo -120(230)             Handy instead?
+                $ approval = approval_check(Girl, 1100, taboo_modifier = 3) # 110, 125, 140, taboo -120(230)             Handy instead?
 
                 if approval >= 2:
                     $ Girl.change_stat("inhibition", 80, 1)
@@ -933,7 +933,7 @@ label kiss_menu:
 
             call after_action
             jump main_sex_menu
-        "End Scene":
+        "End scene":
             ch_p "Let's stop for now."
 
             jump after_action
@@ -1570,7 +1570,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
             $ Girl.change_stat("obedience", 70, 3)
             $ Girl.change_stat("inhibition", 50, 3)
 
-            if not approval_check(Girl, 700, "O", TabM=1): #checks if obedience is 700+
+            if not approval_check(Girl, 700, "O", taboo_modifier=1): #checks if obedience is 700+
                 $ Girl.change_face("_angry")
 
                 call were_done_here_lines(Girl)
@@ -1605,7 +1605,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
             $ Girl.change_stat("obedience", 70, 3)
             $ Girl.change_stat("inhibition", 50, 3)
 
-            if not approval_check(Girl, 700, "O", TabM=1):   #checks if obedience is 700+
+            if not approval_check(Girl, 700, "O", taboo_modifier=1):   #checks if obedience is 700+
                 $ Girl.change_face("_angry")
 
                 call were_done_here_lines(Girl)
@@ -1636,7 +1636,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
             $ Girl.change_stat("obedience", 70, 3)
             $ Girl.change_stat("inhibition", 50, 3)
 
-            if not approval_check(Girl, 500, "O", TabM=1): #checks if obedience is 700+
+            if not approval_check(Girl, 500, "O", taboo_modifier=1): #checks if obedience is 700+
                 $ Girl.change_face("_angry")
 
                 call were_done_here_lines(Girl)

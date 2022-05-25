@@ -38,7 +38,7 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
             $ Girl.change_face("_angry", 1)
             ch_e "That really isn't appropriate."
             $ Girl.change_stat("lust", 50, 7)
-            if not approval_check(EmmaX, 1200, TabM = 3):
+            if not approval_check(EmmaX, 1200, taboo_modifier = 3):
                 $ Girl.add_word(0,"_angry","_angry",0,0)
                 $ renpy.pop_call()
                 return
@@ -53,7 +53,7 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
                 "[Girl.name] blushes furiously, shocked at your behavior."
             $ Girl.change_face("_angry", 1)
             $ Girl.change_stat("lust", 50, 5)
-            if not approval_check(Girl, 1200, TabM = 3):
+            if not approval_check(Girl, 1200, taboo_modifier = 3):
                 $ Girl.add_word(0,"_angry","_angry",0,0)
                 $ renpy.pop_call()
                 return
@@ -68,15 +68,15 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
                 "[Girl.name] looks down at your cock with surprise."
             $ Girl.change_face("_perplexed", 1)
             $ Girl.change_stat("lust", 60, 8)
-            if not approval_check(Girl, 1200, TabM = 3) and Girl != JeanX:
+            if not approval_check(Girl, 1200, taboo_modifier = 3) and Girl != JeanX:
                 return
-        elif approval_check(Girl, 1100, TabM = 3):
+        elif approval_check(Girl, 1100, taboo_modifier = 3):
             $ Girl.change_face("_surprised", 1)
             $ Girl.eyes = "_down"
             "[Girl.name] looks down at your cock and smiles."
             $ Girl.change_face("_sly", 1)
             $ Girl.change_stat("lust", 70, 8,Alt=[[EmmaX],60,12])
-        elif approval_check(Girl, 500, "I", TabM=2):
+        elif approval_check(Girl, 500, "I", taboo_modifier=2):
             $ Girl.change_face("_surprised", 1)
             $ Girl.eyes = "_down"
             "[Girl.name] glances at it, but just smiles in amusement."
@@ -93,33 +93,33 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
         if Girl.remaining_actions and Girl.location == bg_current:
             $ temp_Girls = ["none"]
 
-            if Girl.action_counter["handjob"] >= 5 and approval_check(Girl, 1100, TabM = 3):
+            if Girl.action_counter["handjob"] >= 5 and approval_check(Girl, 1100, taboo_modifier = 3):
                 $ counter = Girl.action_counter["handjob"] - 4
                 $ counter = 10 if counter > 10 else counter
                 while counter:
                     $ temp_Girls.append("handjob")
                     $ counter -= 1
-            if Girl.action_counter["blowjob"] >= 5 and approval_check(Girl, 1300, TabM = 3):
+            if Girl.action_counter["blowjob"] >= 5 and approval_check(Girl, 1300, taboo_modifier = 3):
                 $ counter = Girl.action_counter["blowjob"] - 4
                 $ counter = 10 if counter > 10 else counter
                 $ counter += 5 if "hungry" in Girl.traits else 0
                 while counter:
                     $ temp_Girls.append("blowjob")
                     $ counter -= 1
-            if Girl.action_counter["titjob"] >= 5 and approval_check(Girl, 1200, TabM = 5):
+            if Girl.action_counter["titjob"] >= 5 and approval_check(Girl, 1200, taboo_modifier = 5):
                 $ counter = Girl.action_counter["titjob"] - 4
                 $ counter = 10 if counter > 10 else counter
                 while counter:
                     $ temp_Girls.append("Tit")
                     $ counter -= 1
-            if Girl.action_counter["sex"] >= 5 and approval_check(Girl, 1400, TabM = 5):
+            if Girl.action_counter["sex"] >= 5 and approval_check(Girl, 1400, taboo_modifier = 5):
                 $ counter = Girl.action_counter["sex"] - 4
                 $ counter = 10 if counter > 10 else counter
                 $ counter += 5 if Girl.lust >= 70 else 0
                 while counter:
                     $ temp_Girls.append("sex")
                     $ counter -= 1
-            if Girl.action_counter["anal"] >= 5 and approval_check(Girl, 1550, TabM = 5):
+            if Girl.action_counter["anal"] >= 5 and approval_check(Girl, 1550, taboo_modifier = 5):
                 $ counter = Girl.action_counter["anal"] - 4
                 $ counter = 10 if counter > 10 else counter
                 $ counter += 5 if Girl.lust >= 70 and Girl.used_to_anal else 0
@@ -158,7 +158,7 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
                 elif Girl == StormX:
                     ch_s "I could use a taste of that."
                 elif Girl == JubesX:
-                    $ Girl.change_face("_sly", 1,Mouth="_tongue")
+                    $ Girl.change_face("_sly", 1,mouth="_tongue")
                     ch_v "I uh, wouldn't mind giving that my full attention. . ."
                     $ Girl.mouth="_smile"
             elif temp_Girls[0] == "titjob":
@@ -234,7 +234,7 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
                         $ Girl.change_face("_perplexed", 1)
                         ch_e "Oh. . ."
                         ch_e "Carry on then, [Girl.player_petname]."
-                        $ Girl.change_face("_sly", 0,Eyes="_down")
+                        $ Girl.change_face("_sly", 0,eyes="_down")
                     elif Girl == LauraX:
                         ch_l "Can't say I didn't offer."
                     elif Girl == JeanX:
@@ -278,7 +278,7 @@ label Girl_Tag(Girl=0, Forced=0, Gloves=0):
 
     $ Girl = check_girl(Girl)
     call shift_focus (Girl)
-    $ Gloves = Girl.arms
+    $ Gloves = Girl.outfit["gloves"]
     $ Girl.arm_pose = 2
     if not Forced:
         $ Girl.eyes = "_closed"
@@ -286,7 +286,7 @@ label Girl_Tag(Girl=0, Forced=0, Gloves=0):
 
     if Forced and Player.level >= 5:
         if Gloves == "_gloves":
-            $ Girl.arms = ""
+            $ Girl.outfit["gloves"] = ""
             "She pulls off her gloves and reaches for your face."
         else:
             "She reaches out towards your face."
@@ -327,7 +327,7 @@ label Girl_Tag(Girl=0, Forced=0, Gloves=0):
                         $ Girl.change_stat("obedience", 80, 5)
                     $ Girl.recent_history.append("no_tag")
                     $ Girl.daily_history.append("no_tag")
-                    $ Girl.arms = Gloves
+                    $ Girl.outfit["gloves"] = Gloves
                     $ Girl.arm_pose = 1
                     return
             "Let her.":
@@ -337,7 +337,7 @@ label Girl_Tag(Girl=0, Forced=0, Gloves=0):
         $ Girl.addiction_rate += 1 if Girl.addiction_rate < 5 else 0
         $ Girl.change_stat("lust", 90, 5)
         if Gloves == "_gloves":
-            $ Girl.arms = ""
+            $ Girl.outfit["gloves"] = ""
             $ line = "She pulls off her gloves and"
         else:
             $ line = "She reaches out and"
@@ -371,10 +371,10 @@ label Girl_Tag(Girl=0, Forced=0, Gloves=0):
         "She continues to touch you, and a slight shiver passes through her."
     if round <= 15:
         Girl.voice "I suppose we don't have time for any more than that."
-    if Gloves and not Girl.arms:
+    if Gloves and not Girl.outfit["gloves"]:
         "Appearing sated, she puts her gloves back on."
     $ Girl.blushing = "_blush1"
-    $ Girl.arms = Gloves
+    $ Girl.outfit["gloves"] = Gloves
     $ Girl.arm_pose = 1
     $ Girl.change_face()
     if Forced:
@@ -396,7 +396,7 @@ label Slap_Ass(Girl=0):
     $ Girl.event_counter["ass_slapped"] += 1
 
     $ Girl.blushing = "_blush2" if taboo else 1
-    if approval_check(Girl, 200, "O", TabM=1):
+    if approval_check(Girl, 200, "O", taboo_modifier=1):
         $ Girl.change_face("_sexy", 1)
         $ Girl.mouth = "_surprised"
         $ Girl.change_stat("lust", 51, 3, 1)
@@ -420,14 +420,14 @@ label Slap_Ass(Girl=0):
         call Girl_Cumming (Girl)
 
     if taboo:
-        if not approval_check(Girl, 800, TabM=2):
+        if not approval_check(Girl, 800, taboo_modifier=2):
             if Girl.event_counter["ass_slapped"] <= 5:
                 $ Girl.change_stat("obedience", 80, 2)
                 $ Girl.change_stat("obedience", 50, 2)
             $ Girl.change_stat("love", 70, -2)
             $ Girl.change_stat("love", 50, -1)
             "She looks pretty mad though."
-        elif not approval_check(Girl, 1500, TabM=2):
+        elif not approval_check(Girl, 1500, taboo_modifier=2):
             if Girl.event_counter["ass_slapped"] <= 5:
                 $ Girl.change_stat("obedience", 80, 2)
             $ Girl.change_stat("love", 70, -1)
@@ -439,7 +439,7 @@ label Slap_Ass(Girl=0):
                 $ Girl.change_stat("obedience", 80, 1)
             "She gives you a naughty grin."
         $ Girl.blushing = "_blush1"
-    if Girl.legs_number() < 5 and Girl.underwear_number() < 5:
+    if Girl.bottom_number() < 5 and Girl.underwear_number() < 5:
         if approval_check(Girl, 500, "O") and Girl.recent_history.count("slap") < 4:
             $ Girl.change_stat("obedience", 90, 1)
             $ Girl.change_stat("lust", 200, 3)

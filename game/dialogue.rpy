@@ -1565,7 +1565,7 @@ label would_you_like_more_lines(Girl, action):
 
 label caught_masturbating_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["H- how long you been stand'in there, [RogueX.player_petname]?"]
+        $ lines = ["H- how long you been stand'in there, " + Girl.player_petname + "?"]
     elif Girl == KittyX:
         $ lines = ["Eeep!{p}When did you get here?!"]
     elif Girl == EmmaX:
@@ -4031,8 +4031,8 @@ label auto_accepted_lines(Girl, action):
     return
 
 label were_done_here_lines(Girl, action):
-    $ lines = ["[Girl.name] shoves you away and slaps you in the face.",
-        "[Girl.name] shoves you away."]
+    $ lines = ["" + Girl.name + " shoves you away and slaps you in the face.",
+        "" + Girl.name + " shoves you away."]
 
     "[line]"
 
@@ -4251,7 +4251,7 @@ label first_action_approval_mostly_obedience_lines(Girl, action):
         $ lines = ["You don't have to do that.",
             "If you want, " + Girl.player_petname + ". . .",
             "I mean. . .",
-            "Ok by me, [Girl.player_petname]. .",
+            "Ok by me, " + Girl.player_petname + ". .",
             "If you want me to. . .",
             "If that's what you want, " + Girl.player_petname + ". . .",
             "I suppose if it's you, " + Girl.player_petname + ". . .",
@@ -5503,11 +5503,11 @@ label kiss_accepted_lines(Girl, action):
 
 label lend_some_helping_hands_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["Well, [RogueX.player_petname], I suppose I could use some help with these. . .",
-            "Well, [RogueX.player_petname], I suppose you could help me with these. . ."]
+        $ lines = ["Well, " + Girl.player_petname + ", I suppose I could use some help with these. . .",
+            "Well, " + Girl.player_petname + ", I suppose you could help me with these. . ."]
     elif Girl == KittyX:
         $ lines = ["Um, you know, maybe start up top?",
-            "I'd[Girl.like]love it if you could give me a hand. . ."]
+            "I'd" + Girl.like + "love it if you could give me a hand. . ."]
     elif Girl == EmmaX:
         $ lines = ["Hm, well I do have my hands full with these. . .",
             "I suppose I could use some added attention. . ."]
@@ -5553,7 +5553,7 @@ label why_dont_we_take_care_of_each_other_lines(Girl, action):
 
 label well_in_hand_lust_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["Well, [RogueX.player_petname], I suppose I do at that . ."]
+        $ lines = ["Well, " + Girl.player_petname + ", I suppose I do at that . ."]
     elif Girl == KittyX:
         $ lines = ["Well {i}I{/i} think so. . ."]
     elif Girl == EmmaX:
@@ -5619,9 +5619,9 @@ label well_in_hand_disapproved_lines(Girl, action):
 
 label what_did_you_come_over_for_approval_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["So what did you come over for anyway, [RogueX.player_petname]?"]
+        $ lines = ["So what did you come over for anyway, " + Girl.player_petname + "?"]
     elif Girl == KittyX:
-        $ lines = ["So what are you[Girl.like]even doing here?"]
+        $ lines = ["So what are you" + Girl.like + "even doing here?"]
     elif Girl == EmmaX:
         $ lines = ["Why are you even in my room?"]
     elif Girl == LauraX:
@@ -5641,9 +5641,9 @@ label what_did_you_come_over_for_approval_lines(Girl, action):
 
 label fancy_bumping_into_you_approval_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["So . . . fancy bumping into you here, [RogueX.player_petname]. . ."]
+        $ lines = ["So . . . fancy bumping into you here, " + Girl.player_petname + ". . ."]
     elif Girl == KittyX:
-        $ lines = ["I[Girl.like]didn't expect to see you here. . ."]
+        $ lines = ["I" + Girl.like + "didn't expect to see you here. . ."]
     elif Girl == EmmaX:
         $ lines = ["I wasn't expecting visitors. . ."]
     elif Girl == LauraX:
@@ -5709,7 +5709,7 @@ label fancy_bumping_into_you_disapproval_lines(Girl, action):
 
 label masturbation_join_in_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["Yeah, did you want something, [RogueX.player_petname]?"]
+        $ lines = ["Yeah, did you want something, " + Girl.player_petname + "?"]
     elif Girl == KittyX:
         $ lines = ["Like what you see?"]
     elif Girl == EmmaX:
@@ -5865,7 +5865,7 @@ label masturbation_just_got_here_lines(Girl, action):
 
 label masturbation_worn_out_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["I need to take a little break here, [RogueX.player_petname].",
+        $ lines = ["I need to take a little break here, " + Girl.player_petname + ".",
             "I'm kinda worn out, maybe time for a break. . ."]
     elif Girl == KittyX:
         $ lines = ["Gimme a minute, I need to collect myself here. . ."]
@@ -5890,7 +5890,7 @@ label masturbation_worn_out_lines(Girl, action):
 
 label end_of_masturbation_satisfied_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["That really worked for me, [RogueX.player_petname]. How about you?"]
+        $ lines = ["That really worked for me, " + Girl.player_petname + ". How about you?"]
     elif Girl == KittyX:
         $ lines = ["Well that worked for me, how 'bout you?"]
     elif Girl == EmmaX:

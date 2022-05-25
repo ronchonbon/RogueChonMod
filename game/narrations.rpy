@@ -481,13 +481,13 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
 
         $ TempLust2 = 2
-        if GirlA.underwear and not GirlA.underwear_pulled_down:
+        if GirlA.outfit["underwear"] and not GirlA.underwear_pulled_down:
 
             $ TempLust2 -= 1
         if GirlA.hose_number() >= 6:
 
             $ TempLust2 -= 1
-        if GirlA.legs and not GirlA.upskirt:
+        if GirlA.outfit["bottom"] and not GirlA.upskirt:
 
             $ TempLust2 -= 2 if TempLust2 <= 2 else TempLust2
 
@@ -646,7 +646,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
     elif primary_action == "fondle_breasts":
         $ line = "You continue to fondle " + GirlA.name + ". "
-        if not GirlA.top_pulled_up and GirlA.top and GirlA.bra:
+        if not GirlA.top_pulled_up and GirlA.outfit["top"] and GirlA.outfit["bra"]:
 
             $ line = line + renpy.random.choice(["You reach under her layers of clothing and massage her breasts",
                                     "You pass your hands gently over her warm breasts",
@@ -654,20 +654,20 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She gasps as you grasp her under her_top"])
             $ TempFocus += 2 if Player.focus < 40 else 1
             $ TempLust += 4 if GirlA.lust > 50 else 2
-        elif not GirlA.top_pulled_up and GirlA.top:
+        elif not GirlA.top_pulled_up and GirlA.outfit["top"]:
 
             $ line = line + renpy.random.choice(["You reach under her top and massage her breasts",
                                     "You pass your hands gently over her warm breasts",
                                     "Her nipples catch on the fabric of her top as you grasp her warm flesh, you can see them stiffen",
-                                    "She gasps as you grasp her under her " + GirlA.top])
+                                    "She gasps as you grasp her under her " + GirlA.outfit['top']])
             $ TempFocus += 2 if Player.focus < 50 else 1
             $ TempLust += 4 if GirlA.lust > 50 else 2
-        elif not GirlA.top_pulled_up and GirlA.bra:
+        elif not GirlA.top_pulled_up and GirlA.outfit["bra"]:
 
-            $ line = line + renpy.random.choice(["You reach under her " + GirlA.bra + " and massage her breasts",
+            $ line = line + renpy.random.choice(["You reach under her " + GirlA.outfit["bra"] + " and massage her breasts",
                                     "You pass your hands gently over her warm breasts",
-                                    "Her nipples catch on the fabric of her " + GirlA.bra + " as you grasp her warm flesh, you can see them stiffen",
-                                    "She gasps as you grasp her under her " + GirlA.bra])
+                                    "Her nipples catch on the fabric of her " + GirlA.outfit["bra"] + " as you grasp her warm flesh, you can see them stiffen",
+                                    "She gasps as you grasp her under her " + GirlA.outfit['bra']])
             $ TempFocus += 3 if Player.focus < 60 else 2
             $ TempLust += 5 if GirlA.lust > 50 else 2
         elif GirlA.piercings:
@@ -695,31 +695,31 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
     elif primary_action == "suck_breasts":
         $ line = "You continue to suck on " + GirlA.name + "'s breasts. "
-        if not GirlA.top_pulled_up and GirlA.top and GirlA.bra:
+        if not GirlA.top_pulled_up and GirlA.outfit["top"] and GirlA.outfit["bra"]:
 
             $ line = renpy.random.choice(["You bend down and motor-boat her breasts",
                                         "You gently nibble at her nipples as you suck on them through the layered tops",
-                                        "You  place a nipple between your lips, and give it a quick tug through the " + GirlA.top,
+                                        "You  place a nipple between your lips, and give it a quick tug through the " + GirlA.outfit["top"],
                                         "She gasps as you gently nibble her rigid nipples poking through her tops"])
             $ TempFocus += 2 if Player.focus < 50 else 1
             $ TempLust += 2 if GirlA.lust < 30 else 1
-        elif not GirlA.top_pulled_up and GirlA.top:
+        elif not GirlA.top_pulled_up and GirlA.outfit["top"]:
 
             $ line = renpy.random.choice(["You bend down and motor-boat her breasts",
-                                        "You gently nibble at her nipples as you suck on them through the " + GirlA.top,
+                                        "You gently nibble at her nipples as you suck on them through the " + GirlA.outfit["top"],
                                         "You tease her nipples with your tongue through the fabric",
                                         "You slowly lick her nipples through her moist_top",
                                         "You gently place a nipple between your lips, and draw it out until it releases with a *pop*",
                                         "She gasps as you lightly lick her rigid nipples, poking through her_top"])
             $ TempFocus += 2 if Player.focus < 50 else 1
             $ TempLust += 5 if GirlA.lust > 50 else 3
-        elif not GirlA.top_pulled_up and GirlA.bra:
+        elif not GirlA.top_pulled_up and GirlA.outfit["bra"]:
 
             $ line = renpy.random.choice(["You bend down and motor-boat her breasts",
-                                        "You tease her nipples with your tongue through her " + GirlA.bra,
-                                        "You slowly lick her nipples through her moist " + GirlA.bra,
+                                        "You tease her nipples with your tongue through her " + GirlA.outfit["bra"],
+                                        "You slowly lick her nipples through her moist " + GirlA.outfit["bra"],
                                         "You gently place a nipple between your lips, and draw it out until it releases with a *pop*",
-                                        "She gasps as you lightly lick her rigid nipples, poking through her " + GirlA.bra])
+                                        "She gasps as you lightly lick her rigid nipples, poking through her " + GirlA.outfit['bra']])
             $ TempFocus += 4 if Player.focus < 60 else 3
             $ TempLust += 5 if GirlA.lust > 50 else 2
         elif GirlA.piercings:
@@ -749,7 +749,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
     elif primary_action == "fondle_thighs":
         $ line = "You continue to massage " + GirlA.name + "'s thighs. "
 
-        if GirlA.legs_number() > 6 and not GirlA.upskirt:
+        if GirlA.bottom_number() > 6 and not GirlA.upskirt:
 
             $ line = renpy.random.choice(["Her legs twitch a bit in her pants as you caress them",
                                         "She gasps as you stroke her warm thighs through the_pants",
@@ -757,7 +757,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                         "You slide a hand up her inner thigh, to just below her . . ."])
             $ TempFocus += 1 if Player.focus < 50 else 0
             $ TempLust += 1 if GirlA.lust < 50 else 0
-        elif GirlA.legs_number() == 5 and GirlA.hose_number() >= 5:
+        elif GirlA.bottom_number() == 5 and GirlA.hose_number() >= 5:
 
             $ line = renpy.random.choice(["You reach under skirt and stroke her thighs",
                                         "You lift her skirt a bit and feel her firm thighs",
@@ -767,7 +767,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             $ TempFocus += 2 if Player.focus < 40 else 0
             $ TempLust += 2 if GirlA.lust < 40 else 0
             $ GirlA.addiction -= 1 if D20S > 10 else 0
-        elif GirlA.legs_number() == 5 and GirlA.hose:
+        elif GirlA.bottom_number() == 5 and GirlA.outfit["hose"]:
 
             $ line = renpy.random.choice(["You reach under skirt and stroke her thighs",
                                         "You lift her skirt a bit and feel her firm thighs",
@@ -777,7 +777,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             $ TempFocus += 2 if Player.focus < 50 else 0
             $ TempLust += 2 if GirlA.lust < 50 else 0
             $ GirlA.addiction -= 1 if D20S > 10 else 0
-        elif GirlA.legs_number() == 5:
+        elif GirlA.bottom_number() == 5:
 
             $ line = renpy.random.choice(["You reach under skirt and stroke her thighs",
                                         "You lift her skirt a bit and feel her firm thighs",
@@ -799,7 +799,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             $ TempFocus += 2 if Player.focus < 40 else 0
             $ TempLust += 2 if GirlA.lust < 40 else 0
             $ GirlA.addiction -= 1 if D20S > 10 else 0
-        elif GirlA.hose:
+        elif GirlA.outfit["hose"]:
 
             $ line = renpy.random.choice(["You reach out and stroke her thighs",
                                         "You lift her leg a bit and feel her firm thighs",
@@ -830,19 +830,19 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                     "You continue to finger bang " + GirlA.name + "'s pussy. ",
                                                     "You continue to finger blast " + GirlA.name + "'s pussy. "])
 
-            if GirlA.legs_number() > 6 and not GirlA.upskirt:
+            if GirlA.bottom_number() > 6 and not GirlA.upskirt:
 
                 $ line = renpy.random.choice(["You slide a hand down her pants, and slide your fingers into her pussy underneath",
                                                     "You push her panties aside, and slide a finger between her lips",
                                                     "You slide a finger into her pussy and stroke the_top",
                                                     "You pull her pants out a bit and she gasps as you slide two fingers between her lips",
                                                     "You rub her clit with your palm as you dive into her pussy with your middle finger"])
-            elif GirlA.legs_number() == 5:
-                if GirlA.underwear and not GirlA.underwear_pulled_down:
+            elif GirlA.bottom_number() == 5:
+                if GirlA.outfit["underwear"] and not GirlA.underwear_pulled_down:
 
-                    $ line = renpy.random.choice(["You push her skirt and " + GirlA.underwear + " aside, and slide a finger between her lips",
-                                                    "You slide a finger under her " + GirlA.underwear + " and stroke the top or her pussy",
-                                                    "You lift her skirt a bit and she gasps as you pull her " + GirlA.underwear + " aside and slide two fingers between her lips",
+                    $ line = renpy.random.choice(["You push her skirt and " + GirlA.outfit["underwear"] + " aside, and slide a finger between her lips",
+                                                    "You slide a finger under her " + GirlA.outfit["underwear"] + " and stroke the top or her pussy",
+                                                    "You lift her skirt a bit and she gasps as you pull her " + GirlA.outfit["underwear"] + " aside and slide two fingers between her lips",
                                                     "You rub her clit with your thumb as you dive into her pussy with your middle finger"])
                 else:
                     $ line = renpy.random.choice(["You push her skirt aside, and slide a finger between her lips",
@@ -852,14 +852,14 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                     $ TempFocus += 2
                     $ TempLust += 2
 
-            elif (GirlA.legs_number() == 6 or (GirlA == RogueX and GirlA.underwear == "_shorts")) and not GirlA.underwear_pulled_down:
+            elif (GirlA.bottom_number() == 6 or (GirlA == RogueX and GirlA.outfit["underwear"] == "_shorts")) and not GirlA.underwear_pulled_down:
 
                 $ line = renpy.random.choice(["You slide a hand down her shorts, and slide your fingers into her pussy underneath",
                                                 "You push her shorts up, and slide a finger between her lips",
                                                 "You slide a finger along her pussy and stroke to the_top",
                                                 "You pull her shorts out a bit and she gasps as you slide two fingers between her lips",
                                                 "You rub her clit with your palm as you dive into her pussy with your middle finger"])
-            elif GirlA.underwear and not GirlA.underwear_pulled_down:
+            elif GirlA.outfit["underwear"] and not GirlA.underwear_pulled_down:
 
                 $ line = renpy.random.choice(["You push her panties aside, and slide a finger between her lips",
                                                 "You slide a finger along her pussy and stroke to the_top",
@@ -881,7 +881,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                     "You continue to rub " + GirlA.name + "'s pussy. ",
                                                     "You continue to caress " + GirlA.name + "'s pussy. "])
 
-            if GirlA.legs_number() > 6 and not GirlA.upskirt:
+            if GirlA.bottom_number() > 6 and not GirlA.upskirt:
 
                 $ line = renpy.random.choice(["You reach out and brush your hands across her pussy through the_pants",
                                                     "You slide a hand down her pants, and brush your hands across her pussy underneath",
@@ -891,8 +891,8 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                     "She gasps as you reach under her and lightly stroke her ass through the_pants",
                                                     "You slide a hand up her inner thigh, she moans a little as you reach the point where they meet"])
 
-            elif GirlA.legs_number() == 5:
-                if GirlA.underwear == "_shorts" and not GirlA.underwear_pulled_down:
+            elif GirlA.bottom_number() == 5:
+                if GirlA.outfit["underwear"] == "_shorts" and not GirlA.underwear_pulled_down:
 
                     $ line = renpy.random.choice(["You reach under skirt and ran your hands over the thin shorts covering her",
                                                     "You slide a hand up the leg of her shorts, and brush your hands across her pussy underneath",
@@ -901,7 +901,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                     "As you dig your thumb into her, she gasps and raises up a bit",
                                                     "She gasps as you reach under her and lightly stroke her ass through the thin_shorts",
                                                     "You slide a hand up her inner thigh, she moans a little as you reach the point where they meet"])
-                elif GirlA.underwear and not GirlA.underwear_pulled_down:
+                elif GirlA.outfit["underwear"] and not GirlA.underwear_pulled_down:
                     $ line = renpy.random.choice(["You reach under skirt and brush across her_panties",
                                                     "You lift her skirt a bit and grind against her_panties",
                                                     "You lift her skirt a bit and she gasps as you pull her panties aside and stroke her lips",
@@ -933,7 +933,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                         $ TempLust += 1
 
 
-            elif (GirlA.legs_number() == 6 or (GirlA == RogueX and GirlA.underwear == "_shorts")) and not GirlA.underwear_pulled_down:
+            elif (GirlA.bottom_number() == 6 or (GirlA == RogueX and GirlA.outfit["underwear"] == "_shorts")) and not GirlA.underwear_pulled_down:
 
                 $ line = renpy.random.choice(["You reach out and brush your hands across her pussy through the_shorts",
                                                 "You slide a hand down her shorts, and brush your hands across her pussy underneath",
@@ -942,7 +942,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                 "As you dig your thumb into her, she gasps and raises up a bit",
                                                 "She gasps as you reach under her and lightly stroke her ass through the thin_shorts",
                                                 "You slide a hand up her inner thigh, she moans a little as you reach the point where they meet"])
-            elif GirlA.underwear and not GirlA.underwear_pulled_down:
+            elif GirlA.outfit["underwear"] and not GirlA.underwear_pulled_down:
 
                 $ line = renpy.random.choice(["You reach out and brush your hands across her_panties",
                                                 "You grab her panties and pull them taut, elliciting a small gasp",
@@ -994,7 +994,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                     "You continue to suck " + GirlA.name + "'s pussy. ",
                                                     "You continue to tongue " + GirlA.name + "'s pussy. "])
 
-        if GirlA.legs_number() > 6 and not GirlA.upskirt:
+        if GirlA.bottom_number() > 6 and not GirlA.upskirt:
             $ line = renpy.random.choice(["You can feel her twitching as you grind your tongue against her, even through the thick material",
                                                     "She gasps as you press on her clit through the thick fabric",
                                                     "You rub her clit with your nose as you dive into her pussy with your tongue",
@@ -1004,8 +1004,8 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             $ TempFocus += 1 if Player.focus < 70 else 0
             $ TempLust += 3 if GirlA.lust > 60 else 2
         else:
-            if GirlA.legs_number() == 5:
-                if GirlA.underwear == "_shorts" and not GirlA.underwear_pulled_down:
+            if GirlA.bottom_number() == 5:
+                if GirlA.outfit["underwear"] == "_shorts" and not GirlA.underwear_pulled_down:
 
                     $ line = renpy.random.choice(["You push her skirt up and lick at her pussy through her_shorts",
                                                         "You bend down and lick the edges of her lips through the_shorts",
@@ -1017,7 +1017,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                         "With a little nibble, you tug back the fabric",
                                                         "You slowly lick into her gap and she gasps as you press the walls aside",
                                                         "She gasps as you reach under her warm lips and lightly stroke her ass"])
-                elif GirlA.underwear and not GirlA.underwear_pulled_down:
+                elif GirlA.outfit["underwear"] and not GirlA.underwear_pulled_down:
 
                     $ line = renpy.random.choice(["You push her skirt up and lick at her pussy through her_panties",
                                                         "You bend down and stroke the edges of her panties with your tongue",
@@ -1061,7 +1061,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                         $ TempLust += 1
 
 
-            elif (GirlA.legs_number() == 6 or (GirlA == RogueX and GirlA.underwear == "_shorts")) and not GirlA.underwear_pulled_down:
+            elif (GirlA.bottom_number() == 6 or (GirlA == RogueX and GirlA.outfit["underwear"] == "_shorts")) and not GirlA.underwear_pulled_down:
 
                 $ line = renpy.random.choice(["You bend down and lick the edges of her lips through her_shorts",
                                                     "You spread the lips back beneath her shorts, and she gasps as you slide your tongue across them",
@@ -1072,7 +1072,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                     "With a little nibble, you tug back the fabric",
                                                     "You slowly lick into her gap and she gasps as you press the walls aside",
                                                     "She gasps as you reach under her warm lips and lightly stroke her ass"])
-            elif GirlA.underwear and not GirlA.underwear_pulled_down:
+            elif GirlA.outfit["underwear"] and not GirlA.underwear_pulled_down:
 
                 $ line = renpy.random.choice(["You bend down and stroke the edges of her panties with your tongue",
                                                     "You spread the lips back beneath her panties, and she gasps as you slide your tongue across them",
@@ -1130,7 +1130,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                 "You continue to feel up " + GirlA.name + "'s ass. ",
                                                 "You continue to grope " + GirlA.name + "'s ass. "])
 
-        if GirlA.legs_number() > 6 and not GirlA.upskirt:
+        if GirlA.bottom_number() > 6 and not GirlA.upskirt:
             $ line = renpy.random.choice(["You reach out and brush your hands across the back of her_pants",
                                                 "You slide a hand down her pants, and firmly cup her ass",
                                                 "You put your hand against her rear and grind against it",
@@ -1139,9 +1139,9 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                 "She gasps as you reach under her and lightly stroke her ass through the_pants",
                                                 "You slide a hand up her inner thigh, she moans a little as it slides betweek her cheeks"])
 
-        elif GirlA.legs_number() == 5:
+        elif GirlA.bottom_number() == 5:
 
-            if GirlA.underwear == "_shorts" and not GirlA.underwear_pulled_down:
+            if GirlA.outfit["underwear"] == "_shorts" and not GirlA.underwear_pulled_down:
 
                 $ line = renpy.random.choice(["You reach under skirt and brush across her_shorts",
                                                 "You lift her skirt a bit and grind against her_shorts",
@@ -1149,7 +1149,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                 "Her legs twitch a bit beneath her skirt as you give her cheeks a firm squeeze",
                                                 "She gasps as you stroke her asshole through her_shorts",
                                                 "You slide a hand up her inner thigh, she moans a little as it slides betweek her cheeks"])
-            elif GirlA.underwear and not GirlA.underwear_pulled_down:
+            elif GirlA.outfit["underwear"] and not GirlA.underwear_pulled_down:
 
                 $ line = renpy.random.choice(["You reach under skirt and brush across her_panties",
                                                 "You lift her skirt a bit and grind against her_panties",
@@ -1181,7 +1181,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                     $ TempLust += 1
 
 
-        elif (GirlA.legs_number() == 6 or (GirlA == RogueX and GirlA.underwear == "_shorts")) and not GirlA.underwear_pulled_down:
+        elif (GirlA.bottom_number() == 6 or (GirlA == RogueX and GirlA.outfit["underwear"] == "_shorts")) and not GirlA.underwear_pulled_down:
 
             $ line = renpy.random.choice(["You reach out and brush your hands across her lightly covered cheeks",
                                             "You grab her shorts and pull them taut, elliciting a small gasp",
@@ -1189,7 +1189,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                             "Her legs twitch a bit as you grind her puckered hole",
                                             "She gasps as you reach under her shorts and lightly stroke her warm flesh",
                                             "You slide a hand up her inner thigh, she moans a little as it slides betweek her cheeks"])
-        elif GirlA.underwear and not GirlA.underwear_pulled_down:
+        elif GirlA.outfit["underwear"] and not GirlA.underwear_pulled_down:
 
             $ line = renpy.random.choice(["You reach out and brush your hands across her barely covered cheeks",
                                             "You grab her panties and pull them taut, elliciting a small gasp",
@@ -1235,20 +1235,20 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                     "You continue to finger bang " + GirlA.name + "'s asshole. ",
                                                     "You continue to finger " + GirlA.name + "'s rim. "])
 
-        if GirlA.legs_number() > 6 and not GirlA.upskirt:
+        if GirlA.bottom_number() > 6 and not GirlA.upskirt:
             $ line = renpy.random.choice(["You slide a hand down her pants, and slide your fingers into her anus",
                                                     "You push her panties aside, and slide a finger between her cheeks",
                                                     "You slide a finger into her tight anus",
                                                     "You pull her pants out a bit and she gasps as you slide a finger up her hole",
                                                     "You gasps as you rub her asshole with your fingers"])
-        elif GirlA.legs_number() == 5:
-            if GirlA.underwear == "_shorts" and not GirlA.underwear_pulled_down:
+        elif GirlA.bottom_number() == 5:
+            if GirlA.outfit["underwear"] == "_shorts" and not GirlA.underwear_pulled_down:
 
                 $ line = renpy.random.choice(["You push her skirt and shorts up, and slide a finger into her anus",
                                                     "You slide a finger into her tight anus",
                                                     "You lift her skirt a bit and she gasps as you pull her shorts up and slide a finger into her anus",
                                                     "You rub her pussy with your thumb as you dive into her anus with your middle finger"])
-            elif GirlA.underwear and not GirlA.underwear_pulled_down:
+            elif GirlA.outfit["underwear"] and not GirlA.underwear_pulled_down:
 
                 $ line = renpy.random.choice(["You push her skirt and panties aside, and slide a finger into her anus",
                                                     "You slide a finger into her tight anus",
@@ -1260,14 +1260,14 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                     "You lift her skirt a bit and she gasps as you slide a finger into her anus",
                                                     "You rub her pussy with your thumb as you dive into her anus with your middle finger"])
 
-        elif (GirlA.legs_number() == 6 or (GirlA == RogueX and GirlA.underwear == "_shorts")) and not GirlA.underwear_pulled_down:
+        elif (GirlA.bottom_number() == 6 or (GirlA == RogueX and GirlA.outfit["underwear"] == "_shorts")) and not GirlA.underwear_pulled_down:
 
             $ line = renpy.random.choice(["You slide a hand down her shorts, and slide a finger into her anus",
                                                 "You push her shorts up, and slide a finger between her lips",
                                                 "You slide a finger into her tight anus",
                                                 "You pull her shorts out a bit and she gasps as you slide a finger into her anus",
                                                 "You rub her pussy with your palm as you dive into her anus with your middle finger"])
-        elif GirlA.underwear and not GirlA.underwear_pulled_down:
+        elif GirlA.outfit["underwear"] and not GirlA.underwear_pulled_down:
 
             $ line = renpy.random.choice(["You push her panties aside, and slide a finger into her anus",
                                                 "You slide a finger into her tight anus",
@@ -1294,7 +1294,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                     "You continue to suck " + GirlA.name + "'s ass. ",
                                                     "You continue to tongue " + GirlA.name + "'s ass. "])
 
-        if GirlA.legs_number() > 6 and not GirlA.upskirt:
+        if GirlA.bottom_number() > 6 and not GirlA.upskirt:
             $ line = renpy.random.choice(["You can feel her twitching as you grind your tongue against her anus, even through the thick material",
                                                         "She gasps as you press on her asshole through the thick fabric",
                                                         "You put your hand against her mound and lick the surface of her_pants",
@@ -1302,8 +1302,8 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             $ TempFocus += 1 if Player.focus < 70 else 0
             $ TempLust += 1 if GirlA.lust < 60 else 0
         else:
-            if GirlA.legs_number() == 5:
-                if GirlA.underwear == "_shorts" and not GirlA.underwear_pulled_down:
+            if GirlA.bottom_number() == 5:
+                if GirlA.outfit["underwear"] == "_shorts" and not GirlA.underwear_pulled_down:
 
                     $ line = renpy.random.choice(["You push her skirt up and lick at her asshole through her_shorts",
                                                         "You bend down and stroke the edges of her shorts with your tongue",
@@ -1313,7 +1313,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                         "You rub her pussy with your thumb as you dive into her asshole with your tongue",
                                                         "With a little nibble, you tug back the fabric",
                                                         "You slowly lick into her gap and she gasps as you press the rim aside"])
-                elif GirlA.underwear and not GirlA.underwear_pulled_down:
+                elif GirlA.outfit["underwear"] and not GirlA.underwear_pulled_down:
 
                     $ line = renpy.random.choice(["You push her skirt up and lick at her asshole through her_panties",
                                                         "You bend down and stroke the edges of her panties with your tongue",
@@ -1350,7 +1350,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                         $ TempLust += 1
 
 
-            elif (GirlA.legs_number() == 6 or (GirlA == RogueX and GirlA.underwear == "_shorts")) and not GirlA.underwear_pulled_down:
+            elif (GirlA.bottom_number() == 6 or (GirlA == RogueX and GirlA.outfit["underwear"] == "_shorts")) and not GirlA.underwear_pulled_down:
 
                 $ line = renpy.random.choice(["You bend down and stroke the edges of her shorts with your tongue",
                                                     "You spread the cheeks back beneath her shorts, and she gasps as you slide your tongue into it",
@@ -1359,7 +1359,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                     "You rub her pussy with your thumb as you dive into her anus with your tongue",
                                                     "With a little nibble, you tug back the fabric",
                                                     "You slowly lick into her gap and she gasps as you press the rim apart"])
-            elif GirlA.underwear and not GirlA.underwear_pulled_down:
+            elif GirlA.outfit["underwear"] and not GirlA.underwear_pulled_down:
 
                 $ line = renpy.random.choice(["You bend down and stroke the edges of her panties with your tongue",
                                                     "You spread the cheeks back beneath her panties, and she gasps as you slide your tongue into it",
@@ -1409,7 +1409,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
 
     elif primary_action == "dildo_pussy":
-        if GirlA.legs_number() > 6 and not GirlA.upskirt:
+        if GirlA.bottom_number() > 6 and not GirlA.upskirt:
             $ line = renpy.random.choice(["You rub the dildo against the outside of her_pants",
                                         "You slap the dildo lightly against her mound"])
             $ TempFocus += 1 if Player.focus < 50 else 0
@@ -1425,14 +1425,14 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             $ TempFocus += 1 if Player.focus < 50 else 0
             $ TempLust += 3 if GirlA.lust < 50 else 1
         else:
-            if GirlA.legs_number() == 5 and GirlA.underwear:
+            if GirlA.bottom_number() == 5 and GirlA.outfit["underwear"]:
                 $ line = renpy.random.choice(["You push her skirt and panties aside, and slide the dildo into her pussy",
                                             "You slide the toy deep into her pussy",
                                             "She gasps as you rotate the dildo within her tight pussy",
                                             "You rub her clit with your thumb as you dive into her puss with the rubber phallus"])
                 $ TempFocus += 2 if Player.focus < 50 else 1
                 $ TempLust += 8 if GirlA.lust > 70 else 5
-            elif GirlA.legs_number() == 5:
+            elif GirlA.bottom_number() == 5:
                 $ line = renpy.random.choice(["You push her skirt aside, and slide the dildo into her tight hole",
                                             "You slide the toy deep into her pussy",
                                             "You lift her skirt a bit and she gasps as you slide the dildo firmly into her tight puss",
@@ -1440,7 +1440,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                             "You rub her clit with your thumb as you dive into her pussy with the rubber phallus"])
                 $ TempFocus += 2 if Player.focus < 50 else 1
                 $ TempLust += 8 if GirlA.lust > 70 else 5
-            elif GirlA.underwear and not GirlA.underwear_pulled_down:
+            elif GirlA.outfit["underwear"] and not GirlA.underwear_pulled_down:
                 $ line = renpy.random.choice(["You push her panties aside, and slide the dildo into her tight pussy",
                                             "You slide the dildo into her moist slit and stroke it rapidly",
                                             "You lift her panties a bit and she gasps as you slide the dildo between her lower lips",
@@ -1462,7 +1462,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
 
     elif primary_action == "dildo_anal":
-        if GirlA.legs_number() > 6 and not GirlA.upskirt:
+        if GirlA.bottom_number() > 6 and not GirlA.upskirt:
             $ line = renpy.random.choice(["You rub the dildo against the outside of her_pants",
                                         "You slap the dildo lightly against her ass"])
             $ TempFocus += 1 if Player.focus < 50 else 0
@@ -1478,14 +1478,14 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             $ TempFocus += 1 if Player.focus < 50 else 0
             $ TempLust += 3 if GirlA.lust < 50 else 1
         else:
-            if GirlA.legs_number() == 5 and GirlA.underwear:
+            if GirlA.bottom_number() == 5 and GirlA.outfit["underwear"]:
                 $ line = renpy.random.choice(["You push her skirt and panties aside, and slide the dildo into her ass",
                                             "You slide the toy deep into her ass",
                                             "She gasps as you rotate the dildo within her tight asshole",
                                             "You rub her clit with your thumb as you dive into her ass with the rubber phallus"])
                 $ TempFocus += 2 if Player.focus < 50 else 1
                 $ TempLust += 8 if GirlA.lust > 70 else 5
-            elif GirlA.legs_number() == 5:
+            elif GirlA.bottom_number() == 5:
                 $ line = renpy.random.choice(["You push her skirt aside, and slide the dildo into her tight hole",
                                             "You slide the toy deep into her ass",
                                             "You lift her skirt a bit and she gasps as you slide the dildo firmly into her tight anus",
@@ -1493,7 +1493,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                             "You rub her clit with your thumb as you dive into her ass with the rubber phallus"])
                 $ TempFocus += 2 if Player.focus < 50 else 1
                 $ TempLust += 8 if GirlA.lust > 70 else 5
-            elif GirlA.underwear and not GirlA.underwear_pulled_down:
+            elif GirlA.outfit["underwear"] and not GirlA.underwear_pulled_down:
                 $ line = renpy.random.choice(["You push her panties aside, and slide the dildo into her tight ass",
                                             "You slide the dildo into her ass and stroke it rapidly",
                                             "You lift her panties a bit and she gasps as you slide the dildo between her cheeks",
@@ -1797,7 +1797,7 @@ label Offhand_Dialog(Girl=Primary, Templine=0):
         $ TempFocus += 4 if Player.focus < 90 else 0
 
     elif offhand_action == "eat_pussy":
-        if Girl.legs_number() <= 5 and Girl.underwear_number() <= 1:
+        if Girl.bottom_number() <= 5 and Girl.underwear_number() <= 1:
             if Girl.pubes and D20X >= 15:
                 $ line = " You press you nose into her furry bush, dripping with her excitement."
             elif D20X >= 15:
@@ -4483,14 +4483,14 @@ label auto_action_narrations(Girl, action):
 
         call expression focused_Girl.tag + "_Sex_Launch" pass("sex")
 
-        if Girl.legs_number() == 5:
+        if Girl.bottom_number() == 5:
             "You press up against [Girl.name]'s backside, sliding her skirt up as you go."
 
             $ Girl.upskirt = 1
-        elif Girl.legs_number() > 6:
+        elif Girl.bottom_number() > 6:
             "You press up against [Girl.name]'s backside, sliding her pants down as you do."
 
-            $ Girl.legs = 0
+            $ Girl.outfit["bottom"] = 0
         else:
             "You press up against [Girl.name]'s backside."
 
@@ -4504,14 +4504,14 @@ label auto_action_narrations(Girl, action):
 
         call expression focused_Girl.tag + "_Sex_Launch" pass("anal")
 
-        if Girl.legs_number() == 5:
+        if Girl.bottom_number() == 5:
             "You press up against [Girl.name]'s backside, sliding her skirt up as you go."
 
             $ Girl.upskirt = 1
-        elif Girl.legs_number() > 6:
+        elif Girl.bottom_number() > 6:
             "You press up against [Girl.name]'s backside, sliding her pants down as you do."
 
-            $ Girl.legs = 0
+            $ Girl.outfit["bottom"] = 0
         else:
             "You press up against [Girl.name]'s backside."
 

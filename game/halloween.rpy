@@ -256,7 +256,7 @@ label HWchange_stat(Girl=0, HWType=0, HWCheck=0, HWvalue=0, HWStore=0):
     return
 
 
-label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
+label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline=[]):
 
 
 
@@ -278,9 +278,9 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
 
     $ Present.append(RogueX)
     $ RogueX.location = "HW Party"
-    $ RogueX.add_word(1,0,RogueX.hair,0,"halloween")
+    $ RogueX.add_word(1,0,RogueX.outfit["hair"],0,"halloween")
     $ RogueX.outfitday = "costume"
-    $ RogueX.outfit = RogueX.outfitday
+    $ RogueX.outfit_name = RogueX.outfitday
     $ RogueX.change_outfit(outfit_changed=1)
 
     call shift_focus (RogueX)
@@ -293,7 +293,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
 
     $ RogueX.change_face("_smile")
     ch_r "Hey, [RogueX.player_petname], nice to see ya made it."
-    $ RogueX.change_face("_smile",Eyes="_down")
+    $ RogueX.change_face("_smile",eyes="_down")
     ch_r "Looks like you're dressed as. . ."
     $ RogueX.change_face("_smile")
     menu:
@@ -303,16 +303,16 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
             call HWchange_stat (RogueX, "inhibition", 50, 1)
             call HWchange_stat (RogueX, "inhibition", 80, 1)
             call HWchange_stat (RogueX, "lust", 50, 2)
-            $ Costume = 1
+            $ halloween_costume = 1
         "A ninja":
             call HWchange_stat (RogueX, "love", 70, 1)
             call HWchange_stat (RogueX, "love", 80, 1)
-            $ Costume = 2
+            $ halloween_costume = 2
         "A fireman":
             call HWchange_stat (RogueX, "love", 70, 1)
             call HWchange_stat (RogueX, "love", 80, 1)
             call HWchange_stat (RogueX, "lust", 50, 1)
-            $ Costume = 3
+            $ halloween_costume = 3
         "No costume":
             call HWchange_stat (RogueX, "love", 80, -2)
             call HWchange_stat (RogueX, "obedience", 50, 1)
@@ -320,9 +320,9 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
             $ RogueX.change_face("_confused")
 
     $ HWline = ["Oh. . . that's sorta what I figured. . .","Well \"Ahoy\" to you then.","Oooh, dangerous. . .","Well I've certainly got a fire for you to put out. . ."]
-    $ HWline = HWline[Costume]
+    $ HWline = HWline[halloween_costume]
     ch_r "[HWline]"
-    if not Costume:
+    if not halloween_costume:
         $ RogueX.change_face("_smile")
         ch_r "Still, welcome to the party, I suppose. . ."
     ch_r "Can ya guess what I'm going as?"
@@ -340,7 +340,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
             call HWchange_stat (RogueX, "love", 80, 2)
             call HWchange_stat (RogueX, "love", 90, 2)
             call HWchange_stat (RogueX, "inhibition", 50, 1)
-            $ RogueX.change_face("_smile",Eyes="_surprised")
+            $ RogueX.change_face("_smile",eyes="_surprised")
             pause 0.4
             $ RogueX.change_face("_smile")
             ch_r "Sure'nuff, [RogueX.player_petname]. You know your characters."
@@ -356,7 +356,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
                 call HWchange_stat (RogueX, "lust", 50, 2)
                 ch_r "I suppose if that's what you like to see. . ."
             elif approval_check(RogueX, 1300):
-                $ RogueX.change_face("_angry",Eyes="_side")
+                $ RogueX.change_face("_angry",eyes="_side")
                 call HWchange_stat (RogueX, "love", 70, -2)
                 call HWchange_stat (RogueX, "love", 90, -2)
                 call HWchange_stat (RogueX, "obedience", 50, 1)
@@ -408,7 +408,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
             call HWchange_stat (RogueX, "inhibition", 70, 2)
             ch_r "I like it too."
         "Ok, so have you seen [KittyX.name]?" if "met" in KittyX.history:
-            $ RogueX.change_face("_angry",Brows="_confused")
+            $ RogueX.change_face("_angry",brows="_confused")
             call HWchange_stat (RogueX, "love", 80, -2)
             call HWchange_stat (RogueX, "lust", 50, -2)
             ch_r ". . ."
@@ -416,7 +416,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
             call HWchange_stat (RogueX, "obedience", 90, 1)
             call HWchange_stat (RogueX, "inhibition", 70, 2)
             ch_r "Yeah. I seen'er."
-            $ RogueX.change_face("_angry",Eyes="_side")
+            $ RogueX.change_face("_angry",eyes="_side")
             ch_r "You'll find her over there."
     ch_r "Anyway, I gotta get moving, I'll see you later. . ."
     $ RogueX.change_face("_smile")
@@ -439,9 +439,9 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
 
     $ Present.append(KittyX)
     $ KittyX.location = "HW Party"
-    $ KittyX.add_word(1,0,KittyX.hair,0,"halloween")
+    $ KittyX.add_word(1,0,KittyX.outfit["hair"],0,"halloween")
     $ KittyX.outfitday = "costume"
-    $ KittyX.outfit = KittyX.outfitday
+    $ KittyX.outfit_name = KittyX.outfitday
     $ KittyX.change_outfit(outfit_changed=1)
 
     call shift_focus (KittyX)
@@ -452,15 +452,15 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
         ease 0.8 pos (stage_center,50)
     pause 0.8
 
-    $ KittyX.change_face("_confused",Eyes="_down")
+    $ KittyX.change_face("_confused",eyes="_down")
     "Over by the snack table, you find [KittyX.name], looking through the chips."
     $ KittyX.change_face("_smile")
     ch_k "Oh, hey!"
-    $ KittyX.change_face("_smile",Eyes="_down")
+    $ KittyX.change_face("_smile",eyes="_down")
     ch_k "Lemme guess who you are. . ."
     $ KittyX.change_face("_smile")
     $ HWline = [Player.name+" Right?","A mysterious sailor. . .","Oooh, dangerous assassin. . .","A noble hero."]
-    $ HWline = HWline[Costume]
+    $ HWline = HWline[halloween_costume]
     ch_k "[HWline]"
     menu:
         extend ""
@@ -477,7 +477,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
             $ KittyX.change_face("_confused")
             call HWchange_stat (KittyX, "love", 70, -1)
             call HWchange_stat (KittyX, "obedience", 50, -1)
-            if not Costume:
+            if not halloween_costume:
                 ch_k ". . . riiight?"
             else:
                 ch_k "No[KittyX.like]I know what your name is, I meant. . ."
@@ -499,7 +499,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
             call HWchange_stat (KittyX, "love", 200, 2)
             ch_k "You got it!"
         "Little House on the Prarie?":
-            $ KittyX.change_face("_confused",Eyes="_side")
+            $ KittyX.change_face("_confused",eyes="_side")
             call HWchange_stat (KittyX, "love", 70, -1)
             call HWchange_stat (KittyX, "inhibition", 50, -1)
             ch_k "Huh? I guess it is a little. . . \"farmy.\""
@@ -511,7 +511,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
             call HWchange_stat (KittyX, "obedience", 30, -1)
             ch_k "I. . . Yes[KittyX.like]I am Kitty, but this is a costume I'm in."
             ch_k "You know. . . Halloween?"
-            $ KittyX.change_face("_confused",Eyes="_stunned")
+            $ KittyX.change_face("_confused",eyes="_stunned")
             call HWchange_stat (KittyX, "inhibition", 50, 3)
             call HWchange_stat (KittyX, "inhibition", 70, 3)
             ch_k "Geeze."
@@ -540,7 +540,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
             call HWchange_stat (KittyX, "love", 80, 1)
             call HWchange_stat (KittyX, "inhibition", 50, 2)
             ch_k "I thought it might be kinda plain. . ."
-            $ KittyX.change_face("_smile",1,Eyes="_side")
+            $ KittyX.change_face("_smile",1,eyes="_side")
             call HWchange_stat (KittyX, "love", 90, 1)
             call HWchange_stat (KittyX, "obedience", 50, 1)
             ch_k "Next to some of the others, at least. . ."
@@ -580,7 +580,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
             call HWchange_stat (KittyX, "obedience", 50, 1)
             call HWchange_stat (KittyX, "obedience", 60, 1)
             ch_k "Well. . ."
-            $ KittyX.change_face("_normal",Eyes="_leftside")
+            $ KittyX.change_face("_normal",eyes="_leftside")
             if "met" in LauraX.history:
                 ch_k "Yeah, [LauraX.name]'s right over there."
                 ch_k "Hey [LauraX.name]?!"
@@ -608,9 +608,9 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
 
     $ Present.append(LauraX)
     $ LauraX.location = "HW Party"
-    $ LauraX.add_word(1,0,LauraX.hair,0,"halloween")
+    $ LauraX.add_word(1,0,LauraX.outfit["hair"],0,"halloween")
     $ LauraX.outfitday = "costume"
-    $ LauraX.outfit = LauraX.outfitday
+    $ LauraX.outfit_name = LauraX.outfitday
     $ LauraX.change_outfit(outfit_changed=1)
 
     call shift_focus (LauraX)
@@ -627,9 +627,9 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
     $ LauraX.change_face("_normal")
     ch_l "Oh, hey, [KittyX.name], [Player.name]."
     $ HWline = ["Like the look.","Homeless person?","Hand ninja?","Lumberjack?"]
-    $ HWline = HWline[Costume]
+    $ HWline = HWline[halloween_costume]
     ch_l "[HWline]"
-    if Costume:
+    if halloween_costume:
         menu:
             extend ""
             "Yeah.":
@@ -639,7 +639,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
                 $ LauraX.change_face("_confused")
                 call HWchange_stat (LauraX, "obedience", 50, 1)
                 ch_l "Oh."
-                if Costume == 2:
+                if halloween_costume == 2:
                     call HWchange_stat (LauraX, "love", 80, -1)
                     call HWchange_stat (LauraX, "inhibition", 60, 1)
                     ch_l "Definitely looks like a Hand ninja."
@@ -649,20 +649,20 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
                 call HWchange_stat (LauraX, "love", 80, -1)
                 call HWchange_stat (LauraX, "obedience", 70, 2)
                 ch_l "Oh."
-                if Costume == 2:
+                if halloween_costume == 2:
                     call HWchange_stat (LauraX, "love", 80, -2)
                     call HWchange_stat (LauraX, "inhibition", 60, 2)
                     ch_l "It -definitely- looks like a Hand ninja though."
-    $ KittyX.change_face("_smile",Eyes="_side")
+    $ KittyX.change_face("_smile",eyes="_side")
     $ HWline = ["Right?","He's a pirate, silly!","Yeah, I guess he could be. . .","It's a fireman, silly!"]
-    $ HWline = HWline[Costume]
+    $ HWline = HWline[halloween_costume]
     ch_k "[HWline]"
     $ KittyX.change_face("_smile")
     ch_k "Now guess what [LauraX.name]'s going as!"
     menu:
         extend ""
         "A Boxer?":
-            $ LauraX.change_face("_normal",Eyes="_down")
+            $ LauraX.change_face("_normal",eyes="_down")
             ch_l ". . ."
             $ LauraX.change_face("_normal")
             call HWchange_stat (LauraX, "love", 80, 1)
@@ -773,18 +773,18 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
             call HWchange_stat (LauraX, "inhibition", 60, 2)
             ch_l "Yeah, I guess so."
         "Love the suspenders.":
-            $ LauraX.change_face("_normal",Eyes="_down")
+            $ LauraX.change_face("_normal",eyes="_down")
             call HWchange_stat (LauraX, "love", 70, 1)
             call HWchange_stat (LauraX, "love", 90, 1)
             ch_l "Oh?"
             $ LauraX.change_face("_smile")
-            $ LauraX.accessory = "_suspenders2"
+            $ LauraX.outfit["front_outer_accessory"] = "_suspenders2"
             call HWchange_stat (LauraX, "inhibition", 50, 1)
             call HWchange_stat (LauraX, "inhibition", 60, 1)
             ch_l "Yeah. . ."
-            $ LauraX.accessory = "_suspenders"
+            $ LauraX.outfit["front_outer_accessory"] = "_suspenders"
         "How is that different from your normal look?":
-            $ LauraX.change_face("_normal",Eyes="_down")
+            $ LauraX.change_face("_normal",eyes="_down")
             call HWchange_stat (LauraX, "love", 80, -1)
             call HWchange_stat (LauraX, "obedience", 50, 1)
             ch_l ". . ."
@@ -795,7 +795,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
             call HWchange_stat (LauraX, "inhibition", 50, -1)
             ch_l "Also the suspenders."
     ch_k "Anyway, we were[KittyX.like]going to check out the scene over there for a second."
-    $ LauraX.change_face("_normal",Eyes="_leftside")
+    $ LauraX.change_face("_normal",eyes="_leftside")
     ch_l "We were?"
     ch_k "Yes. Come on."
     ch_k "Later, [KittyX.player_petname]!"
@@ -830,9 +830,9 @@ label Halloween_Jean:
 
     $ Present.append(JeanX)
     $ JeanX.location = "HW Party"
-    $ JeanX.add_word(1,0,JeanX.hair,0,"halloween")
+    $ JeanX.add_word(1,0,JeanX.outfit["hair"],0,"halloween")
     $ JeanX.outfitday = "costume"
-    $ JeanX.outfit = JeanX.outfitday
+    $ JeanX.outfit_name = JeanX.outfitday
     $ JeanX.change_outfit(outfit_changed=1)
 
     call shift_focus (JeanX)
@@ -843,9 +843,9 @@ label Halloween_Jean:
         ease 0.8 pos (stage_center,50)
     pause 0.8
 
-    $ JeanX.change_face("_angry",Eyes="_side")
+    $ JeanX.change_face("_angry",eyes="_side")
     ch_j ". . ."
-    $ JeanX.change_face("_normal",Brows="_angry")
+    $ JeanX.change_face("_normal",brows="_angry")
     ch_j "Oh, hey. . . you look familiar."
     $ line = JeanX.player_petname
     menu:
@@ -856,40 +856,40 @@ label Halloween_Jean:
             call HWchange_stat (JeanX, "inhibition", 50, 1)
             ch_j "Oh. Yeah. Hello, [JeanX.player_petname]."
             ch_j "I almost didn't recognize you."
-        "It's me, [Player.name], I'm a pirate." if Costume == 1:
+        "It's me, [Player.name], I'm a pirate." if halloween_costume == 1:
             $ JeanX.change_face("_normal")
             call HWchange_stat (JeanX, "love", 90, 1)
             call HWchange_stat (JeanX, "inhibition", 50, 1)
             ch_j "Oh, ok. Hello \"Pirate.\""
             $ JeanX.player_petname = "Pirate"
-        "A pirate." if Costume == 1:
+        "A pirate." if halloween_costume == 1:
             $ JeanX.change_face("_normal")
             call HWchange_stat (JeanX, "inhibition", 50, 1)
             ch_j "Oh. Yeah. Hello, [JeanX.player_petname]."
             ch_j "I thought you were a drag queen."
-        "It's me, [Player.name], I'm a ninja." if Costume == 2:
+        "It's me, [Player.name], I'm a ninja." if halloween_costume == 2:
             $ JeanX.change_face("_normal")
             call HWchange_stat (JeanX, "love", 90, 1)
             call HWchange_stat (JeanX, "inhibition", 50, 1)
             ch_j "Oh. Yeah. Hello, [JeanX.player_petname]."
             ch_j "I thought you were a stage hand."
-        "A ninja." if Costume == 2:
+        "A ninja." if halloween_costume == 2:
             $ JeanX.change_face("_normal")
             call HWchange_stat (JeanX, "inhibition", 50, 1)
             ch_j "Oh, ok. Hello \"Ninja.\""
             $ JeanX.player_petname = "Ninja"
-        "It's me, [Player.name], I'm a fireman." if Costume == 3:
+        "It's me, [Player.name], I'm a fireman." if halloween_costume == 3:
             $ JeanX.change_face("_normal")
             call HWchange_stat (JeanX, "love", 90, 1)
             call HWchange_stat (JeanX, "inhibition", 50, 1)
             ch_j "Oh. Yeah. Hello, [JeanX.player_petname]."
-            $ JeanX.change_face("_normal",Brows="_angry")
+            $ JeanX.change_face("_normal",brows="_angry")
             ch_j ". . ."
             $ JeanX.change_face("_confused")
             ch_j "I thought you had \"power cancelling\" powers."
             ch_j "It's fire now?"
             $ JeanX.add_word(1,"fire",0)
-        "A fireman." if Costume == 3:
+        "A fireman." if halloween_costume == 3:
             call HWchange_stat (JeanX, "love", 90, 1)
             call HWchange_stat (JeanX, "obedience", 50, 1)
             call HWchange_stat (JeanX, "inhibition", 50, 1)
@@ -926,7 +926,7 @@ label Halloween_Jean:
                 call HWchange_stat (JeanX, "love", 90, 1)
                 call HWchange_stat (JeanX, "lust", 50, 1)
                 ch_j "I had fire powers once."
-                $ JeanX.change_face("_angry",Eyes="_side")
+                $ JeanX.change_face("_angry",eyes="_side")
                 ch_j "It didn't go well."
                 ch_j "Small minded fools."
 
@@ -956,7 +956,7 @@ label Halloween_Jean:
     menu:
         "You look her costume up and down."
         "So what's that look?":
-            $ JeanX.change_face("_smile",Eyes="_side")
+            $ JeanX.change_face("_smile",eyes="_side")
             call HWchange_stat (JeanX, "love", 70, 1)
             ch_j "Oh. . . I whammied some nerd to make me a costume with red hair."
             $ JeanX.change_face("_normal")
@@ -978,9 +978,9 @@ label Halloween_Jean:
             call HWchange_stat (JeanX, "obedience", 30, -1)
             call HWchange_stat (JeanX, "inhibition", 50, 2)
             ch_j "Who's \"Misty?\""
-            $ JeanX.change_face("_angry",Eyes="_side")
+            $ JeanX.change_face("_angry",eyes="_side")
             ch_j "Is that the girl with the water powers?"
-            $ JeanX.change_face("_angry",Mouth="_surprised")
+            $ JeanX.change_face("_angry",mouth="_surprised")
             ch_j "Wait, -do- we have a girl with water powers?"
             $ JeanX.change_face("_normal")
             ch_j "Anyway. . . I whammied some nerd to make me a costume with red hair."
@@ -1018,27 +1018,27 @@ label Halloween_Jean:
             call HWchange_stat (JeanX, "inhibition", 50, 2)
             ch_j "I can even make a side-pony work."
         "Why didn't you go as \"Jessie?\"":
-            $ JeanX.change_face("_normal",Mouth = "_kiss")
+            $ JeanX.change_face("_normal",mouth = "_kiss")
             call HWchange_stat (JeanX, "obedience", 50, 1)
             ch_j ". . ."
             ch_j "Who's \"Jessie?!\""
-            $ JeanX.change_face("_angry",Eyes="_side")
+            $ JeanX.change_face("_angry",eyes="_side")
             "She looks around and locks eyes with one of the other students."
-            $ JeanX.change_face("_angry",Eyes="psychic")
+            $ JeanX.change_face("_angry",eyes="psychic")
             ch_j "Who's \"Jessie?\""
-            $ JeanX.change_face("_normal",Eyes="psychic")
+            $ JeanX.change_face("_normal",eyes="psychic")
             ch_j ". . ."
             $ JeanX.change_face("_surprised")
             call HWchange_stat (JeanX, "inhibition", 50, 1)
             ch_j "Oh. . . she looks pretty bad ass."
-            $ JeanX.change_face("_angry",Eyes="_side")
+            $ JeanX.change_face("_angry",eyes="_side")
             call HWchange_stat (JeanX, "inhibition", 50, 1)
             ch_j "I probably should have gone as her."
-            $ JeanX.change_face("_normal",Eyes="psychic")
+            $ JeanX.change_face("_normal",eyes="psychic")
             call HWchange_stat (JeanX, "obedience", 70, 1)
             call HWchange_stat (JeanX, "inhibition", 70, 1)
             ch_j "Everyone just picture me as \"Jessie\" for the rest of the party."
-            $ JeanX.change_face("_smile",Eyes="_surprised")
+            $ JeanX.change_face("_smile",eyes="_surprised")
             call HWchange_stat (JeanX, "inhibition", 70, 2)
             "You hear mumbles of \"yes, Jessie\". . ."
             $ JeanX.add_word(1,"jessie",0)
@@ -1054,9 +1054,9 @@ label Halloween_Jean:
             call HWchange_stat (JeanX, "obedience", 70, 1)
             $ JeanX.change_face("_confused")
             ch_j "Oh. Yes, you're still here."
-            $ JeanX.change_face("_confused",Eyes="_side")
+            $ JeanX.change_face("_confused",eyes="_side")
             ch_j "I was going to check in on the music situation real quick."
-            $ JeanX.change_face("_smile",Eyes="_side")
+            $ JeanX.change_face("_smile",eyes="_side")
             ch_j "I might be back later."
         "Let her go":
             pass
@@ -1084,9 +1084,9 @@ label Halloween_Jean:
     $ Present.append(StormX)
     $ StormX.change_face("_smile")
     $ StormX.location = "HW Party"
-    $ StormX.add_word(1,0,StormX.hair,0,"halloween")
+    $ StormX.add_word(1,0,StormX.outfit["hair"],0,"halloween")
     $ StormX.outfitday = "costume"
-    $ StormX.outfit = StormX.outfitday
+    $ StormX.outfit_name = StormX.outfitday
     $ StormX.change_outfit(outfit_changed=1)
 
     call shift_focus (StormX)
@@ -1099,32 +1099,32 @@ label Halloween_Jean:
 
     ch_s "Merry Halloween, [Player.name]!"
     ch_s "Permit me to guess. . ."
-    $ StormX.change_face("_smile",Eyes="_down")
+    $ StormX.change_face("_smile",eyes="_down")
     "She looks you up and down."
     $ StormX.change_face("_smile")
     $ HWline = ["Some form of vagabond? Yes?","You are a dashing swashbuckler!","You are a deadly Hand ninja.",". . . Ah! You are a valiant fire fighter!"]
-    $ HWline = HWline[Costume]
+    $ HWline = HWline[halloween_costume]
     ch_s "[HWline]"
     menu:
         extend ""
         "Yeah, you got it.":
             call HWchange_stat (StormX, "love", 90, 1)
             ch_s "Excellent, it is a wonderful costume."
-        "No, I just went casual." if not Costume:
-            $ StormX.change_face("_surprised",Eyes="_normal")
+        "No, I just went casual." if not halloween_costume:
+            $ StormX.change_face("_surprised",eyes="_normal")
             ch_s "Oh."
             $ StormX.change_face("_smile")
             ch_s "Well, I could hardly tell."
             ch_s "We do perhaps need to take you out shopping some time. . ."
             ch_s "I do have a friend that could help us with that. . ."
-        "No, this is just how I dress now." if Costume:
-            $ StormX.change_face("_smile",Eyes="_side")
+        "No, this is just how I dress now." if halloween_costume:
+            $ StormX.change_face("_smile",eyes="_side")
             call HWchange_stat (StormX, "obedience", 40, 1)
             ch_s "Oh."
             $ StormX.change_face("_smile")
             ch_s "Well, you do make some interesting choices."
             call HWchange_stat (StormX, "inhibition", 50, 1)
-            $ StormX.change_face("_normal",Eyes="_down")
+            $ StormX.change_face("_normal",eyes="_down")
             pause 0.4
             $ StormX.change_face("_smile")
             ch_s "I suppose that I do as well."
@@ -1140,33 +1140,33 @@ label Halloween_Jean:
     menu:
         extend ""
         "Is it Elena?":
-            $ StormX.change_face("_surprised",Mouth="_smile")
+            $ StormX.change_face("_surprised",mouth="_smile")
             call HWchange_stat (StormX, "love", 80, 1)
             call HWchange_stat (StormX, "love", 90, 1)
             ch_s "Yes! you guessed it!"
             $ StormX.change_face("_smile")
             ch_s "I was told that she was a popular video game character."
-            $ StormX.change_face("_smile",Eyes="_stunned")
+            $ StormX.change_face("_smile",eyes="_stunned")
             ch_s "And we had similar hair."
             $ StormX.change_face("_smile")
         "Is it clothes from your homeland?":
-            $ StormX.change_face("_surprised",2,Mouth="open")
+            $ StormX.change_face("_surprised",2,mouth="open")
             call HWchange_stat (StormX, "love", 90, 1)
             call HWchange_stat (StormX, "obedience", 50, 1)
             ch_s "Oh, no, that it not the look that I was going for."
             $ StormX.change_face("_normal",1)
             ch_s "But I can understand the error."
-            $ StormX.change_face("_smile",Eyes="_down")
+            $ StormX.change_face("_smile",eyes="_down")
             ch_s "I did wear something like this back in Kenya. . ."
             $ StormX.change_face("_sly")
             call HWchange_stat (StormX, "love", 90, 1)
             ch_s "It did not have the top, however."
         "A ring toss?":
-            $ StormX.change_face("_angry",2,Mouth="open")
+            $ StormX.change_face("_angry",2,mouth="open")
             call HWchange_stat (StormX, "love", 90, -2)
             call HWchange_stat (StormX, "obedience", 50, 1)
             ch_s "How very rude of you!"
-            $ StormX.change_face("_angry",1,Mouth="open")
+            $ StormX.change_face("_angry",1,mouth="open")
             ch_s "I shall have you know that these are the cultural ornaments of my people!"
             menu:
                 extend ""
@@ -1182,7 +1182,7 @@ label Halloween_Jean:
                     call HWchange_stat (StormX, "obedience", 60, 1)
                     call HWchange_stat (StormX, "inhibition", 80, 1)
                 "Oh, ok.":
-                    $ StormX.change_face("_angry",Eyes="_side")
+                    $ StormX.change_face("_angry",eyes="_side")
                     call HWchange_stat (StormX, "love", 90, -1)
                     call HWchange_stat (StormX, "obedience", 60, 1)
                     ch_s ". . ."
@@ -1206,7 +1206,7 @@ label Halloween_Jean:
             ch_s "Yes, it certainly is low maintenance."
             ch_s "I may keep it after."
         "Very sexy.":
-            $ StormX.change_face("_smile",Mouth = "_kiss")
+            $ StormX.change_face("_smile",mouth = "_kiss")
             call HWchange_stat (StormX, "love", 80, 1)
             call HWchange_stat (StormX, "obedience", 50, 1)
             call HWchange_stat (StormX, "inhibition", 50, 1)
@@ -1216,12 +1216,12 @@ label Halloween_Jean:
             call HWchange_stat (StormX, "lust", 60, 1)
             ch_s "Well, I suppose that it is that too. . ."
         "So have you seen [EmmaX.name] around?":
-            $ StormX.change_face("_smile",Brows="_confused")
+            $ StormX.change_face("_smile",brows="_confused")
             call HWchange_stat (StormX, "love", 90, -1)
             call HWchange_stat (StormX, "obedience", 50, 1)
             call HWchange_stat (StormX, "obedience", 70, 1)
             ch_s "Tired of my company so soon?"
-            $ StormX.change_face("_smile",Eyes="_side")
+            $ StormX.change_face("_smile",eyes="_side")
             ch_s "Yes, I believe that I did see her under that tree earlier."
             ch_s "Send her my regards."
     $ StormX.change_face("_smile")
@@ -1251,9 +1251,9 @@ label Halloween_Emma:
     $ Present.append(EmmaX)
     $ EmmaX.location = "HW Party"
     $ EmmaX.change_face("_smile")
-    $ EmmaX.add_word(1,0,EmmaX.hair,0,"halloween")
+    $ EmmaX.add_word(1,0,EmmaX.outfit["hair"],0,"halloween")
     $ EmmaX.outfitday = "costume"
-    $ EmmaX.outfit = EmmaX.outfitday
+    $ EmmaX.outfit_name = EmmaX.outfitday
     $ EmmaX.change_outfit(outfit_changed=1)
 
     call shift_focus (EmmaX)
@@ -1291,7 +1291,7 @@ label Halloween_Emma:
                     call HWchange_stat (EmmaX, "lust", 50, 1)
                     ch_e "I'm sure you did. . ."
                 "I meant the giant vampire lady!":
-                    $ EmmaX.change_face("_confused",2,Eyes="_surprised")
+                    $ EmmaX.change_face("_confused",2,eyes="_surprised")
                     $ EmmaX.add_word(1,"vampire",0)
         "Let me guess, that giant vampire lady?":
             $ EmmaX.change_face("_confused",2)
@@ -1310,7 +1310,7 @@ label Halloween_Emma:
         call HWchange_stat (EmmaX, "love", 90, -1)
         call HWchange_stat (EmmaX, "obedience", 50, 1)
 
-        $ EmmaX.change_face("_angry",1,Eyes="_side")
+        $ EmmaX.change_face("_angry",1,eyes="_side")
         ch_e "Well I'm not sure how offended I'm meant to be by that."
         ch_e "It's not often that someone refers to me as \"giant.\""
         menu:
@@ -1356,20 +1356,20 @@ label Halloween_Emma:
                     call HWchange_stat (EmmaX, "lust", 50, 1)
                     ch_e "And -you- need to remove your mind from the gutter."
             "Sorry, never mind. . .":
-                $ EmmaX.change_face("_angry",Eyes="_side")
+                $ EmmaX.change_face("_angry",eyes="_side")
                 call HWchange_stat (EmmaX, "love", 90, 1)
                 call HWchange_stat (EmmaX, "inhibition", 50, 1)
                 ch_e "Well. . . I suppose I can allow that to slide."
                 $ EmmaX.change_face("_normal")
                 ch_e "Still, a very unusual direction for your mind to wander."
     if "vampire" in EmmaX.recent_history:
-        $ EmmaX.change_face("_normal",Brows="_confused")
+        $ EmmaX.change_face("_normal",brows="_confused")
         ch_e "And why \"vampire?\""
         ch_e "Do you think that I'm spending too much time with Miss Lee?"
         menu:
             extend ""
             "Um, yeah, that must be it.":
-                $ EmmaX.change_face("_normal",Eyes="_side")
+                $ EmmaX.change_face("_normal",eyes="_side")
                 call HWchange_stat (EmmaX, "love", 90, 2)
                 ch_e "Well, certainly not enough to contract her. . . affliction"
             "What? Oh, never mind.":
@@ -1385,21 +1385,21 @@ label Halloween_Emma:
                 $ EmmaX.change_face("_confused")
                 ch_e "What costume?"
                 $ EmmaX.drain_word("vampire",1,0,0)
-    $ EmmaX.change_face("_normal",Eyes="_down")
+    $ EmmaX.change_face("_normal",eyes="_down")
     ch_e "I'd heard this would be a \"fancy dress\" party, so I just dressed for the occasion."
-    $ EmmaX.change_face("_angry",Eyes="_side")
+    $ EmmaX.change_face("_angry",eyes="_side")
     ch_e "Now that you mention it, the other students are a bit. . . flamboyantly attired."
-    $ EmmaX.change_face("_angry",Eyes="_down")
+    $ EmmaX.change_face("_angry",eyes="_down")
     ch_e "Does that explain why you're dressed as some sort of. . ."
     $ HWline = ["Well, I suppose that's how you always look.","Rogue seaman?","Sneakthief?","Fireman?"]
-    $ EmmaX.change_face("_normal",Brows="_confused")
-    $ HWline = HWline[Costume]
+    $ EmmaX.change_face("_normal",brows="_confused")
+    $ HWline = HWline[halloween_costume]
     ch_e "[HWline]"
-    if Costume == 1:
+    if halloween_costume == 1:
         menu:
             extend ""
             "That's me, definitely \"rogue semen.\"":
-                $ EmmaX.change_face("_smile",Brows="_surprised")
+                $ EmmaX.change_face("_smile",brows="_surprised")
                 call HWchange_stat (EmmaX, "obedience", 50, 1)
                 call HWchange_stat (EmmaX, "inhibition", 50, 1)
                 call HWchange_stat (EmmaX, "inhibition", 70, 1)
@@ -1412,11 +1412,11 @@ label Halloween_Emma:
                 call HWchange_stat (EmmaX, "love", 90, 1)
                 call HWchange_stat (EmmaX, "obedience", 50, 1)
                 ch_e "Oh, yes! Quite the marauder you make."
-    elif Costume == 2:
+    elif halloween_costume == 2:
         menu:
             extend ""
             "I guess I could pocket a few things. . .":
-                $ EmmaX.change_face("_smile",Brows="_confused")
+                $ EmmaX.change_face("_smile",brows="_confused")
                 call HWchange_stat (EmmaX, "obedience", 50, 1)
                 call HWchange_stat (EmmaX, "inhibition", 50, 1)
                 ch_e "Probably best that you don't. . ."
@@ -1426,7 +1426,7 @@ label Halloween_Emma:
                 call HWchange_stat (EmmaX, "inhibition", 50, 1)
                 ch_e "Ah!, I thought you looked a bit like a Hand Ninja."
         $ EmmaX.change_face("_smile")
-    elif Costume == 3:
+    elif halloween_costume == 3:
         menu:
             extend ""
             "No, I'm a. . . oh, yeah, a fireman.":
@@ -1458,9 +1458,9 @@ label Halloween_Emma:
                 call HWchange_stat (EmmaX, "obedience", 50, 1)
                 call HWchange_stat (EmmaX, "obedience", 70, 1)
                 ch_e "No, I. . . can see that. . ."
-        $ EmmaX.change_face("_angry", Eyes="_side")
+        $ EmmaX.change_face("_angry", eyes="_side")
         ch_e "We might have to take you shopping at some point though. . ."
-    $ EmmaX.change_face("_normal",Brows="_sad")
+    $ EmmaX.change_face("_normal",brows="_sad")
     ch_e "And do you have anything to say about mine?"
     menu:
         extend ""
@@ -1487,7 +1487,7 @@ label Halloween_Emma:
             call HWchange_stat (EmmaX, "inhibition", 50, 1)
             ch_e "I'm glad you can appreciate fine things."
         "Love the hat.":
-            $ EmmaX.change_face("_smile",Eyes="_stunned")
+            $ EmmaX.change_face("_smile",eyes="_stunned")
             call HWchange_stat (EmmaX, "love", 80, 1)
             call HWchange_stat (EmmaX, "love", 90, 2)
             call HWchange_stat (EmmaX, "obedience", 70, 1)
@@ -1496,7 +1496,7 @@ label Halloween_Emma:
             $ EmmaX.change_face("_smile")
         "Definitely looks like the vampire lady.":
             if "vampire" in EmmaX.recent_history:
-                $ EmmaX.change_face("_angry",2,Eyes="_surprised")
+                $ EmmaX.change_face("_angry",2,eyes="_surprised")
                 call HWchange_stat (EmmaX, "love", 80, -1)
                 call HWchange_stat (EmmaX, "obedience", 50, 1)
                 ch_e "I have no idea what you're talking about!"
@@ -1540,7 +1540,7 @@ label Halloween_Skip:
             $ Nearby.append(Options[0])
         $ Options[0].location = "HW Party"
         $ Options[0].outfitday = "costume"
-        $ Options[0].outfit = EmmaX.outfitday
+        $ Options[0].outfit_name = EmmaX.outfitday
         $ Options[0].change_outfit(outfit_changed=1)
         $ Options[0].add_word(1,0,0,0,"halloween")
 

@@ -59,11 +59,11 @@ image Rogue_Pussy_Static:
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
-            "RogueX.hose == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
-            "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
-            "RogueX.hose == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
+            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
+            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
+            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
+            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
+            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
             "True", Null(),
             ),
     contains:
@@ -129,11 +129,11 @@ image Rogue_Pussy_Heading:
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
-            "RogueX.hose == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
-            "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
-            "RogueX.hose == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
+            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
+            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
+            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
+            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
+            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
             "True", Null(),
             ),
     contains:
@@ -200,11 +200,11 @@ image Rogue_Pussy_Fingering:
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
-            "RogueX.hose == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
-            "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
-            "RogueX.hose == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
+            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
+            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
+            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
+            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
+            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
             "True", Null(),
             ),
     contains:
@@ -240,11 +240,11 @@ image Rogue_Pussy_Fucking2:
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
-            "RogueX.hose == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
-            "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
-            "RogueX.hose == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
+            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
+            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
+            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
+            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
+            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
             "True", Null(),
             ),
     contains:
@@ -269,11 +269,11 @@ image Rogue_Pussy_Fucking3:
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
-            "RogueX.hose == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
-            "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
-            "RogueX.hose == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
+            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
+            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
+            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
+            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
+            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
             "True", Null(),
             ),
     contains:
@@ -306,11 +306,11 @@ image Rogue_Anal:
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
-            "RogueX.hose == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
-            "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
-            "RogueX.hose == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
+            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
+            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
+            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
+            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
+            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
             "True", Null(),
             )
     contains:
@@ -339,11 +339,11 @@ image Rogue_Anal_Fingering:
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
-            "RogueX.hose == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
-            "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
-            "RogueX.hose == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
+            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
+            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
+            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
+            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
+            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
             "True", Null(),
             )
     contains:
@@ -398,11 +398,11 @@ image Rogue_Anal_Heading:
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
-            "RogueX.hose == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
-            "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
-            "RogueX.hose == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
+            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
+            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
+            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
+            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
+            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
             "True", Null(),
             )
     contains:
@@ -499,11 +499,11 @@ image Rogue_Anal_Fucking:
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
-            "RogueX.hose == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
-            "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
-            "RogueX.hose == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
+            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
+            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
+            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
+            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
+            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
             "True", Null(),
             ),
     contains:
@@ -536,11 +536,11 @@ image Rogue_Doggy_Anal_FullMask:
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
-            "RogueX.hose == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
-            "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
-            "RogueX.hose == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
+            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
+            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
+            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
+            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
+            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
             "True", Null(),
             )
 
@@ -592,11 +592,11 @@ image Rogue_Anal_Fucking2:
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
-            "RogueX.hose == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
-            "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
-            "RogueX.hose == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
+            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
+            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
+            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
+            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
+            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
             "True", Null(),
             )
     contains:
@@ -1874,34 +1874,34 @@ label Rogue_TJ_Launch(line=primary_action):
         else:
             "[RogueX.name] looks around to see if anyone can see her."
 
-    if RogueX.bra and RogueX.top:
-        "She throws off her [RogueX.top] and her [RogueX.bra]."
-    elif RogueX.top:
-        "She throws off her [RogueX.top], baring her breasts underneath."
-    elif RogueX.bra:
-        "She tugs off her [RogueX.bra] and throws it aside."
-    $ RogueX.top = 0
-    $ RogueX.bra = 0
-    $ RogueX.arms = ""
+    if RogueX.outfit["bra"] and RogueX.outfit["top"]:
+        "She throws off her [RogueX.outfit['top']] and her [RogueX.outfit['bra']]."
+    elif RogueX.outfit["top"]:
+        "She throws off her [RogueX.outfit['top']], baring her breasts underneath."
+    elif RogueX.outfit["bra"]:
+        "She tugs off her [RogueX.outfit['bra']] and throws it aside."
+    $ RogueX.outfit["top"] = 0
+    $ RogueX.outfit["bra"] = 0
+    $ RogueX.outfit["gloves"] = ""
 
     call Rogue_First_Topless
 
     if not RogueX.action_counter["titjob"] and line == "L":
-        if not RogueX.bra and not RogueX.top:
+        if not RogueX.outfit["bra"] and not RogueX.outfit["top"]:
             "As you pull out your cock, [RogueX.name] hesitantly places it between her breasts and starts to rub them up and down the shaft."
-        elif RogueX.bra and not RogueX.top:
-            "As you pull out your cock, [RogueX.name] hesitantly places it under her [RogueX.bra], between her breasts and starts to rub them up and down the shaft."
-        elif RogueX.bra and RogueX.top:
-            "As you pull out your cock, [RogueX.name] hesitantly places it under her [RogueX.top], between her breasts and starts to rub them up and down the shaft."
+        elif RogueX.outfit["bra"] and not RogueX.outfit["top"]:
+            "As you pull out your cock, [RogueX.name] hesitantly places it under her [RogueX.outfit['bra']], between her breasts and starts to rub them up and down the shaft."
+        elif RogueX.outfit["bra"] and RogueX.outfit["top"]:
+            "As you pull out your cock, [RogueX.name] hesitantly places it under her [RogueX.outfit['top']], between her breasts and starts to rub them up and down the shaft."
         else:
             "As you pull out your cock, [RogueX.name] hesitantly places it under her clothes, between her breasts and starts to rub them up and down the shaft."
     elif line == "L":
-        if not RogueX.bra and not RogueX.top:
+        if not RogueX.outfit["bra"] and not RogueX.outfit["top"]:
             "As you pull out your cock, [RogueX.name] places it between her breasts and starts to rub them up and down the shaft."
-        elif RogueX.bra and not RogueX.top:
-            "As you pull out your cock, [RogueX.name] places it under her [RogueX.bra], between her breasts and starts to rub them up and down the shaft."
-        elif RogueX.bra and RogueX.top:
-            "As you pull out your cock, [RogueX.name] places it under her [RogueX.top], between her breasts and starts to rub them up and down the shaft."
+        elif RogueX.outfit["bra"] and not RogueX.outfit["top"]:
+            "As you pull out your cock, [RogueX.name] places it under her [RogueX.outfit['bra']], between her breasts and starts to rub them up and down the shaft."
+        elif RogueX.outfit["bra"] and RogueX.outfit["top"]:
+            "As you pull out your cock, [RogueX.name] places it under her [RogueX.outfit['top']], between her breasts and starts to rub them up and down the shaft."
         else:
             "As you pull out your cock, [RogueX.name] places it under her clothes, between her breasts and starts to rub them up and down the shaft."
     else:
@@ -1992,7 +1992,7 @@ label Rogue_HJ_Launch(line=primary_action):
         $ primary_action = "handjob"
         return
     call hide_girl(RogueX)
-    $ RogueX.arms = ""
+    $ RogueX.outfit["gloves"] = ""
     $ RogueX.arm_pose = 1
     if not renpy.showing("Rogue_sprite"):
         show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
@@ -2012,12 +2012,12 @@ label Rogue_HJ_Launch(line=primary_action):
                 "[RogueX.name] looks back at [Present[1].name] to see if she's watching."
         else:
             "[RogueX.name] looks around to see if anyone can see her."
-        if not RogueX.action_counter["handjob"] and RogueX.arms:
+        if not RogueX.action_counter["handjob"] and RogueX.outfit["gloves"]:
             "As you pull out your cock, [RogueX.name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
         else:
             "She then leans over and grabs your cock."
     elif line == "L":
-        if not RogueX.action_counter["handjob"] and RogueX.arms:
+        if not RogueX.action_counter["handjob"] and RogueX.outfit["gloves"]:
             "As you pull out your cock, [RogueX.name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
         else:
             "[RogueX.name] bends down and grabs your cock."
