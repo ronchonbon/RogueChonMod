@@ -2986,7 +2986,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
         $ line = line + " before she slides her hand down and firmly grabs your dick"
         $ Action = "handjob"
         if GirlA == RogueX:
-            show Rogue_Sprite zorder GirlA.sprite_layer:
+            show Rogue_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == KittyX:
             show Kitty_Sprite zorder GirlA.sprite_layer:
@@ -3015,7 +3015,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
         call Seen_First_Peen (GirlA, GirlB, React=1)
         $ line = line + " before she slides down and begins to slowly lick your cock"
         if GirlA == RogueX:
-            show Rogue_Sprite zorder GirlA.sprite_layer:
+            show Rogue_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == KittyX:
             show Kitty_Sprite zorder GirlA.sprite_layer:

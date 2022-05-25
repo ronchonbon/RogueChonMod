@@ -2227,7 +2227,7 @@ label Laura_Clothes:
         ch_l "You shouldn't either."
         return
 
-    if Girl != LauraX or line == "Giftstore":
+    if Girl != LauraX or line == "giftstore":
 
         $ renpy.pop_call()
     $ line = 0
@@ -2279,7 +2279,7 @@ label Laura_Wardrobe_Menu:
                 pass
             "Gift for you" if Girl.location == bg_current:
                 ch_p "I'd like to give you something."
-                call Gifts
+                call gifts
             "Switch to. . .":
 
                 if renpy.showing('dress_screen'):
@@ -2599,9 +2599,9 @@ label Laura_Wardrobe_Menu:
                     $ LauraX.blushing = "_blush1"
                     ch_l "-I didn't say that I minded. . ."
                     $ LauraX.blushing = ""
-                elif approval_check(LauraX, 900, TabM=2) and "_lace corset" in LauraX.inventory:
+                elif approval_check(LauraX, 900, TabM=2) and "_lace_corset" in LauraX.inventory:
                     ch_l "I guess I could find something."
-                    $ LauraX.bra  = "_lace corset"
+                    $ LauraX.bra  = "_lace_corset"
                     "She pulls out her lace corset and slips it under her [LauraX.top]."
                 elif approval_check(LauraX, 700, TabM=2) and "_corset" in LauraX.inventory:
                     ch_l "I guess I could find something."
@@ -2834,17 +2834,17 @@ label Laura_Wardrobe_Menu:
                         else:
                             $ LauraX.bra = "_corset"
 
-                "Add lace corset" if LauraX.bra != "_lace corset" and "_lace corset" in LauraX.inventory:
+                "Add lace corset" if LauraX.bra != "_lace_corset" and "_lace_corset" in LauraX.inventory:
                     ch_p "I like that lace corset."
                     if LauraX.seen_breasts or approval_check(LauraX, 1300, TabM=2):
                         ch_l "K."
-                        $ LauraX.bra = "_lace corset"
+                        $ LauraX.bra = "_lace_corset"
                     else:
                         call Display_dress_screen (LauraX)
                         if not _return:
                             ch_l "It's a bit transparent. . ."
                         else:
-                            $ LauraX.bra = "_lace corset"
+                            $ LauraX.bra = "_lace_corset"
 
                 "Add wolverine tanktop" if LauraX.bra != "wolvie_top" and "wolvie_top" in LauraX.inventory:
                     ch_p "I like that wolverine tanktop."

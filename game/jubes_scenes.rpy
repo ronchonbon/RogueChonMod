@@ -1063,7 +1063,7 @@ label Jubes_Mall(temp_Girls=[]):
             $ JubesX.change_stat("love", 90, 1)
             $ JubesX.change_stat("inhibition", 50, 1)
             ch_v "Cool."
-            call Shopping_Mall
+            call shopping_Mall
         "Nah, we can head back now.":
             $ JubesX.change_stat("love", 60, -3)
             $ JubesX.change_stat("love", 80, -2)

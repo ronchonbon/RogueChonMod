@@ -2,7 +2,7 @@
 label Halloween_chat(Girl=0):
 
     show black_screen onlayer black
-    if Girl == RogueX and renpy.showing("Rogue_Sprite"):
+    if Girl == RogueX and renpy.showing("Rogue_sprite"):
         pass
     elif Girl == KittyX and renpy.showing("Kitty_Sprite"):
         pass
@@ -133,7 +133,7 @@ label Halloween_chat_Menu:
                     pass
                 "Date (locked)":
                     pass
-                "Gifts (locked)":
+                "gifts (locked)":
 
                     pass
                 "Back":
@@ -284,7 +284,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
     $ RogueX.change_outfit(outfit_changed=1)
 
     call shift_focus (RogueX)
-    show Rogue_Sprite at sprite_location(1200,50):
+    show Rogue_sprite at sprite_location(1200,50):
         offset (0,0)
         anchor (0.5, 0.0)
         pos (1200,50)
@@ -423,7 +423,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
     $ Present.remove(RogueX)
     $ Nearby.append(RogueX)
     $ RogueX.location = "nearby"
-    show Rogue_Sprite:
+    show Rogue_sprite:
         ease 0.8 pos (-200,50)
     pause 0.8
     "[RogueX.name] heads over to mingle some more."

@@ -133,7 +133,7 @@ label player_room:
             call girls_location
             call event_calls
         "Shop":
-            call Shop
+            call shop
         "Special Options":
             call SpecialMenu
         "Leave":

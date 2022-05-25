@@ -1305,7 +1305,7 @@ label DateNight(Date_Bonus=[0,0], Play_Cost=0, Date_Cost=[0,0], temp_Girls=[]):
         jump Date_Movies
     elif line == "shopping":
         "You wander the mall, checking out some of the nicer boutiques."
-        jump Shopping_Mall
+        jump shopping_Mall
     else:
         jump campus
 

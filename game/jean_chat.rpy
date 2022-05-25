@@ -2269,7 +2269,7 @@ label Jean_Clothes:
         ch_j "Just enjoy, don't advise."
         return
 
-    if Girl != JeanX or line == "Giftstore":
+    if Girl != JeanX or line == "giftstore":
 
         $ renpy.pop_call()
     $ line = 0
@@ -2321,7 +2321,7 @@ label Jean_Wardrobe_Menu:
                 pass
             "Gift for you" if Girl.location == bg_current:
                 ch_p "I'd like to give you something."
-                call Gifts
+                call gifts
             "Switch to. . .":
 
                 if renpy.showing('dress_screen'):
@@ -2864,16 +2864,16 @@ label Jean_Wardrobe_Menu:
                         else:
                             $ JeanX.bra = "_corset"
 
-                "I like that lace corset." if JeanX.bra != "_lace corset" and "_lace corset" in JeanX.inventory:
+                "I like that lace corset." if JeanX.bra != "_lace_corset" and "_lace_corset" in JeanX.inventory:
                     if JeanX.seen_breasts or approval_check(JeanX, 1300, TabM=2):
                         ch_j "Sure."
-                        $ JeanX.bra = "_lace corset"
+                        $ JeanX.bra = "_lace_corset"
                     else:
                         call Display_dress_screen (JeanX)
                         if not _return:
                             ch_j "It's a little transparent. . ."
                         else:
-                            $ JeanX.bra = "_lace corset"
+                            $ JeanX.bra = "_lace_corset"
 
                 "I like that bikini top." if JeanX.bra != "_bikini_top" and "_bikini_top" in JeanX.inventory:
                     if bg_current == "bg_pool":

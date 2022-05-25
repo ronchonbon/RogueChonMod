@@ -2230,7 +2230,7 @@ label Jubes_Clothes:
         ch_v "I don't think I really need your fashion advice."
         return
 
-    if Girl != JubesX or line == "Giftstore":
+    if Girl != JubesX or line == "giftstore":
 
         $ renpy.pop_call()
     $ line = 0
@@ -2282,7 +2282,7 @@ label Jubes_Wardrobe_Menu:
                 pass
             "Gift for you" if Girl.location == bg_current:
                 ch_p "I'd like to give you something."
-                call Gifts
+                call gifts
             "Switch to. . .":
 
                 if renpy.showing('dress_screen'):
@@ -2960,8 +2960,8 @@ label Jubes_Wardrobe_Menu:
                     $ JubesX.hose = "_pantyhose"
                 "The ripped pantyhose would look good with that." if JubesX.hose != "_ripped_pantyhose" and "_ripped_pantyhose" in JubesX.inventory:
                     $ JubesX.hose = "_ripped_pantyhose"
-                "The tall socks would look good with that." if JubesX.hose != "socks" and "socks" in JubesX.inventory:
-                    $ JubesX.hose = "socks"
+                "The tall socks would look good with that." if JubesX.hose != "_socks" and "_socks" in JubesX.inventory:
+                    $ JubesX.hose = "_socks"
                 "The stockings and garterbelt would look good with that." if JubesX.hose != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in JubesX.inventory:
                     $ JubesX.hose = "_stockings_and_garterbelt"
                 "Just the garterbelt would look good with that." if JubesX.hose != "garterbelt" and "_stockings_and_garterbelt" in JubesX.inventory:

@@ -2225,7 +2225,7 @@ label Storm_Clothes:
         ch_s "I don't really need fashion advice, thank you."
         return
 
-    if Girl != StormX or line == "Giftstore":
+    if Girl != StormX or line == "giftstore":
 
         $ renpy.pop_call()
     $ line = 0
@@ -2277,7 +2277,7 @@ label Storm_Wardrobe_Menu:
                 pass
             "Gift for you" if Girl.location == bg_current:
                 ch_p "I'd like to give you something."
-                call Gifts
+                call gifts
             "Switch to. . .":
 
                 if renpy.showing('dress_screen'):

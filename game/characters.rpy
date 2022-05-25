@@ -5,7 +5,7 @@ init python:
             self.name = "Zero"
 
             self.sprite = None
-            self.color = "_green"
+            self.color = "Green"
 
             self.semen = 2
             self.max_semen = 3
@@ -95,13 +95,13 @@ init python:
             return
 
     class GirlClass(object):
-        def __init__(self, name, love = 0, ovedience = 0, inhibition = 0, lust = 0):
+        def __init__(self, name, love = 0, obedience = 0, inhibition = 0, lust = 0):
             self.name = name
             self.tag = name
             self.names = [name]
 
             self.love = love
-            self.obedience = ovedience
+            self.obedience = obedience
             self.inhibition = inhibition
             self.lust = lust
 
@@ -212,12 +212,12 @@ init python:
             if self.tag == "Rogue":
                 self.voice = ch_r
 
-                self.first_casual_outfit = [2,"_gloves", "_skirt", "_mesh_top", "_spiked_collar", "_tank", "_black_panties", "", "", "_tights", 0]
-                self.second_casual_outfit = [2,"_gloves", "_pants", "_pink_top", "", "_buttoned_tank", "_black_panties", "", "", "", 0]
+                self.first_casual_outfit = [2, "_gloves", "_skirt", "_mesh_top", "_spiked_collar", "_tank", "_black_panties", "", "", "_tights", 0]
+                self.second_casual_outfit = [2, "_gloves", "_pants", "_pink_top", "", "_buttoned_tank", "_black_panties", "", "", "", 0]
                 self.gym_clothes = [0, "_gloves", "", "_hoodie", "", "_sports_bra", "_shorts", "", "", "",10]
                 self.sleepwear = [0, "", "", "", "", "_tank", "_green_panties", "", "", "",20]
                 self.swimwear = [0, "", "", "_hoodie", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-                self.halloween_costume = [2,"_gloves", "_skirt", "", "", "_tube_top", "_black_panties", "_sweater", "_cosplay", "", 0]
+                self.halloween_costume = [2, "_gloves", "_skirt", "", "", "_tube_top", "_black_panties", "_sweater", "_cosplay", "", 0]
 
                 self.home = "bg_rogue"
                 self.hair = "_evo"
@@ -246,12 +246,12 @@ init python:
             elif self.tag == "Kitty":
                 self.voice = ch_k
 
-                self.first_casual_outfit = [2,0, "_capris", "_pink_top", "_gold_necklace", "_cami", "_green_panties", "", "", "", 0]
-                self.second_casual_outfit = [2,0, "_black_jeans", "_red_shirt", "_star_necklace", "_bra", "_green_panties", "", "", "", 0]
+                self.first_casual_outfit = [2, 0, "_capris", "_pink_top", "_gold_necklace", "_cami", "_green_panties", "", "", "", 0]
+                self.second_casual_outfit = [2, 0, "_black_jeans", "_red_shirt", "_star_necklace", "_bra", "_green_panties", "", "", "", 0]
                 self.gym_clothes = [0, "", "_shorts", "", "", "_sports_bra", "_green_panties", "", "", "",10]
                 self.sleepwear = [0, "", "_shorts", "", "", "_cami", "_green_panties", "", "", "",20]
                 self.swimwear = [0, "", "_blue_skirt", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-                self.halloween_costume = [2,0, "_dress", "_jacket", "_flower_necklace", "_dress", "_lace_panties", "", "", "", 0]
+                self.halloween_costume = [2, 0, "_dress", "_jacket", "_flower_necklace", "_dress", "_lace_panties", "", "", "", 0]
 
                 self.home = "bg_kitty"
                 self.hair = "_evo"
@@ -281,10 +281,10 @@ init python:
             elif self.tag == "Emma":
                 self.voice = ch_e
 
-                self.first_casual_outfit = [2,0, "_pants", "_jacket", "_choker", "_corset", "_white_panties", "", "", "", 0]
-                self.second_casual_outfit = [2,"_gloves", "_pants", "", "_choker", "_corset", "_white_panties", "", "", "",5]
-                self.gym_clothes = [0, "", "", "", "", "_sports_bra", "sports_panties", "", "", "",10]
-                self.sleepwear = [0, "", "", "", "", "_corset", "_white_panties", "", "", "",25]
+                self.first_casual_outfit = [2, 0, "_pants", "_jacket", "_choker", "_corset", "_white_panties", "", "", "", 0]
+                self.second_casual_outfit = [2, "_gloves", "_pants", "", "_choker", "_corset", "_white_panties", "", "", "", 5]
+                self.gym_clothes = [0, "", "", "", "", "_sports_bra", "sports_panties", "", "", "", 10]
+                self.sleepwear = [0, "", "", "", "", "_corset", "_white_panties", "", "", "", 25]
                 self.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
                 self.halloween_costume =  [2,"_gloves", "_dress", "_dress", "_choker", "", "_lace_panties", "", "_hat", "_stockings_and_garterbelt", 0]
 
@@ -1161,7 +1161,7 @@ init python:
                 return 5
             if self.bra == "_lace_bra":
                 return 2
-            if self.bra == "_lace corset":
+            if self.bra == "_lace_corset":
                 return 2
             if self.bra == "_corset":
                 return 5

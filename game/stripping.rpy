@@ -128,7 +128,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
     while counter:
         $ counter -= 1
         if Present[counter] == RogueX:
-            show Rogue_Sprite at Girl_Dance1(RogueX)
+            show Rogue_sprite at Girl_Dance1(RogueX)
         elif Present[counter] == KittyX:
             show Kitty_Sprite at Girl_Dance1(KittyX)
         elif Present[counter] == EmmaX:
@@ -704,7 +704,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
         call AllReset (Girl)
 
         if Girl == RogueX:
-            show Rogue_Sprite at Girl_Dance1(Girl)
+            show Rogue_sprite at Girl_Dance1(Girl)
         elif Girl == KittyX:
             show Kitty_Sprite at Girl_Dance1(Girl)
         elif Girl == EmmaX:
@@ -975,7 +975,7 @@ label Strip_Ultimatum:
         $ Girl.daily_history.append("ultimatum")
 
     if Girl == RogueX:
-        show Rogue_Sprite at Girl_Dance1(Girl)
+        show Rogue_sprite at Girl_Dance1(Girl)
     elif Girl == KittyX:
         show Kitty_Sprite at Girl_Dance1(Girl)
     elif Girl == EmmaX:

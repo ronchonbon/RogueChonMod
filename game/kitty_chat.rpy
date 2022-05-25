@@ -2294,7 +2294,7 @@ label Kitty_Clothes:
         ch_k "I'll let you know when I care what you think."
         return
 
-    if Girl != KittyX or line == "Giftstore":
+    if Girl != KittyX or line == "giftstore":
 
         $ renpy.pop_call()
     $ line = 0
@@ -2346,7 +2346,7 @@ label Kitty_Wardrobe_Menu:
                 pass
             "Gift for you" if Girl.location == bg_current:
                 ch_p "I'd like to give you something."
-                call Gifts
+                call gifts
             "Switch to. . .":
 
                 if renpy.showing('dress_screen'):
@@ -2970,7 +2970,7 @@ label Kitty_Wardrobe_Menu:
                     $ KittyX.hose = ""
                 "The thigh-high hose would look good with that." if KittyX.hose != "_stockings":
                     $ KittyX.hose = "_stockings"
-                "The knee-high hose would look good with that." if KittyX.hose != "knee stockings" and "knee" in KittyX.inventory:
+                "The knee-high hose would look good with that." if KittyX.hose != "knee stockings" and "_knee_stockings" in KittyX.inventory:
                     $ KittyX.hose = "knee stockings"
                 "The pantyhose would look good with that." if KittyX.hose != "_pantyhose" and "_pantyhose" in KittyX.inventory:
                     $ KittyX.hose = "_pantyhose"

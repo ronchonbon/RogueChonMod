@@ -975,7 +975,7 @@ label ShowPool(temp_Girls=[], PoolLoc=0):
             $ temp_Girls[0].spunk = []
             $ PoolLoc = 500 if len(temp_Girls) > 1 else 650
             if temp_Girls[0] == RogueX:
-                show Rogue_Sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Rogue_sprite zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == KittyX:
                 show Kitty_Sprite zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == EmmaX:

@@ -310,12 +310,12 @@ label chat_menu:
                     ch_p "Do you want to go on a date tonight?"
 
                     call Date_Ask (Girl)
-                "Gifts (locked)" if Girl.location != bg_current:
+                "gifts (locked)" if Girl.location != bg_current:
                     pass
-                "Gifts" if Girl.location == bg_current:
+                "gifts" if Girl.location == bg_current:
                     ch_p "I'd like to give you something."
 
-                    call Gifts
+                    call gifts
                 "Back":
                     pass
         "Talk with her":

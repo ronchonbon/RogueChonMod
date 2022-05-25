@@ -75,7 +75,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
         "Cum inside her" if primary_action == "anal" and action_context != "swap":
             $ action_context = "auto"
             jump Girl_Creampie_A
-        "Cum Outside":
+        "Cum outside":
             menu:
                 "Cum on her face":
                     jump Girl_Facial
@@ -2007,7 +2007,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
     if primary_action == "striptease":
         call AllReset (Girl)
         if Girl == RogueX:
-            show Rogue_Sprite at Girl_Dance1(RogueX)
+            show Rogue_sprite at Girl_Dance1(RogueX)
         elif Girl == KittyX:
             show Kitty_Sprite at Girl_Dance1(KittyX)
         elif Girl == EmmaX:

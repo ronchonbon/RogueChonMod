@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 161: is not terminated with a newline. (Check strings and parenthesis.)
-(Perhaps you left out a ' at the end of the first line.)
-        default below_actions = ["fondle_thighs", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", 'finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"]
+File "game/rogue_chat.rpy", line 3283: expected menuitem
+    return
+    ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Tue May 24 15:12:19 2022
+Wed May 25 01:12:02 2022

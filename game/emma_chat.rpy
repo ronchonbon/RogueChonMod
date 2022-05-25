@@ -32,7 +32,7 @@ label Emma_chat_Minimal:
                 "Date":
                     ch_p "Do you want to go on a date tonight?"
                     ch_e "Well that certainly doesn't seem appropriate."
-                "Gifts" if EmmaX.location == bg_current:
+                "gifts" if EmmaX.location == bg_current:
                     ch_p "I'd like to give you something."
                     ch_e "I'm not sure that would be appropriate at the moment."
                 "Back":
@@ -2389,7 +2389,7 @@ label Emma_Clothes(Public=0, Bonus=0):
         ch_e "I'll let you know when I care what you think."
         return
 
-    if Girl != EmmaX or line == "Giftstore":
+    if Girl != EmmaX or line == "giftstore":
 
         $ renpy.pop_call()
     $ line = 0
@@ -2453,7 +2453,7 @@ label Emma_Wardrobe_Menu:
                 pass
             "Gift for you" if Girl.location == bg_current:
                 ch_p "I'd like to give you something."
-                call Gifts
+                call gifts
             "Switch to. . .":
 
                 if renpy.showing('dress_screen'):

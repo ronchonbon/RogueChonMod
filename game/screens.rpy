@@ -1063,7 +1063,7 @@ screen Inventory_screen:
             text "Jubilees's Bikini Top" size 15
         showif "Jubes bikini_bottoms" in Player.inventory:
             text "Jubilees's Bikini Bottoms" size 15
-        showif "socks" in Player.inventory:
+        showif "_socks" in Player.inventory:
             text "Jubilees's Tall Socks" size 15
 
 

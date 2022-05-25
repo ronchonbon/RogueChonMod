@@ -1569,7 +1569,7 @@ label sleepover_MorningWood:
 
     if Partner:
         if Partner == RogueX:
-            show Rogue_Sprite:
+            show Rogue_sprite:
                 pos (900,250)
         elif Partner == KittyX:
             show Kitty_Sprite:
@@ -2071,9 +2071,9 @@ label sleepover_MorningWood:
 
         if len(Party) >= 2:
             if Party[1] == RogueX:
-                show Rogue_Sprite:
+                show Rogue_sprite:
                     ease 1 pos (700,50)
-                show Rogue_Sprite:
+                show Rogue_sprite:
                     pos (700,50)
             elif Party[1] == KittyX:
                 show Kitty_Sprite:
@@ -2162,9 +2162,9 @@ label Morning_Partner:
         return
     $ Partner.change_face("_sexy")
     if Partner == RogueX:
-        show Rogue_Sprite:
+        show Rogue_sprite:
             ease 1 pos (700,50)
-        show Rogue_Sprite:
+        show Rogue_sprite:
             pos (700,50)
     elif Partner == EmmaX:
         show Emma_Sprite:

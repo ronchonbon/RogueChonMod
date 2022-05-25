@@ -17,7 +17,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
     show Xavier_Sprite at sprite_location(stage_left)
 
     if Girl == RogueX:
-        show Rogue_Sprite at sprite_location(stage_right) with ease
+        show Rogue_sprite at sprite_location(stage_right) with ease
     elif Girl == KittyX:
         show Kitty_Sprite at sprite_location(stage_right) with ease
     elif Girl == EmmaX:
@@ -35,7 +35,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
     $ Count = Girl.event_counter["caught"]
 
     if Partner == RogueX:
-        show Rogue_Sprite at sprite_location(stage_far_right) with ease
+        show Rogue_sprite at sprite_location(stage_far_right) with ease
     elif Partner == KittyX:
         show Kitty_Sprite at sprite_location(stage_far_right) with ease
     elif Partner == EmmaX:
@@ -715,7 +715,7 @@ label Xavier_Plan(GirlX=0):
     if GirlX == RogueX:
         $ RogueX.arms = ""
         $ RogueX.arm_pose = 2
-        show Rogue_Sprite zorder 24 at sprite_location(stage_left+100,85) with ease
+        show Rogue_sprite zorder 24 at sprite_location(stage_left+100,85) with ease
         "[RogueX.name] moves in and also grabs his head, duplicating his powers as he watches helplessly."
         "Now that she posesses his full power, while his are negated, he has no defenses."
         call change_Xavier_face ("hypno")

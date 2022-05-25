@@ -25,7 +25,7 @@ label alternate_clothes(Girl, outfit = 1):
 
 
 
-    
+
 
 label Clothes_Schedule(Girl=0, counter=0):
 
@@ -1734,7 +1734,7 @@ label QuickoutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, outfit_
         $ Count = 20
     elif outfit_holder[5] == "wolvie_top":
         $ Count = 10
-    elif outfit_holder[5] in ("_lace_bra", "_lace corset"):
+    elif outfit_holder[5] in ("_lace_bra", "_lace_corset"):
         $ Count = 5
     elif outfit_holder[5]:
 

@@ -252,7 +252,7 @@ label WardrobeEditor(Chr=0):
                         "Add corset":
                             $ Chr.bra = "_corset"
                         "Add lace corset":
-                            $ Chr.bra = "_lace corset"
+                            $ Chr.bra = "_lace_corset"
                         "Toggle up-top":
                             if Chr.top_pulled_up:
                                 $ Chr.top_pulled_up = 0
@@ -353,7 +353,7 @@ label WardrobeEditor(Chr=0):
                                 "Add knee stockings" if Chr == KittyX:
                                     $ Chr.hose = "knee stockings"
                                 "Add socks" if Chr == JubesX:
-                                    $ Chr.hose = "socks"
+                                    $ Chr.hose = "_socks"
                                 "Add black stockings" if Chr == LauraX:
                                     $ Chr.hose = "_black_stockings"
                                 "Remove hose" if Chr.hose:

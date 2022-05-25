@@ -713,7 +713,7 @@ label hide_girl(Girl, hide_sprite = False):
         hide Rogue_TJ_Animation
 
         if hide_sprite:
-            hide Rogue_Sprite
+            hide Rogue_sprite
     elif Girl == KittyX:
         call Kitty_Sex_Reset
         hide Kitty_SexSprite
@@ -1111,7 +1111,7 @@ label display_girl(Girl, check_if_dressed = True, trigger_reset = True, x_positi
         $ y_position = 250
 
     if Girl == RogueX:
-        show Rogue_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
+        show Rogue_sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
             anchor (0.5, 0.0)
     elif Girl == KittyX:
         show Kitty_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
@@ -1548,7 +1548,7 @@ menu Tutorial:
                 "Wait/Sleep":
                     "You can always just \"Wait\" This causes you to waste time, but who knows, maybe something interesting will happen."
                     "Of course when it's night time, this becomes \"Sleep.\" You can only sleep in your own room at first, but maybe someone else would let you sleep in her room."
-                "Shop":
+                "shop":
                     "You can also access the school's fabricator store, where you can order various items to be delivered to your room."
                 "Class":
                     "You can always attend classes. These are typically not that interesting, but will raise your XP, and various events might occur in class."
@@ -1672,7 +1672,7 @@ label Hanks_Lab(line=0):
                 menu:
                     "What skin color would you like?"
                     "Green":
-                        $ Player.color = "_green"
+                        $ Player.color = "Green"
                     "White":
                         $ Player.color = "pink"
                     "Black":
@@ -2101,7 +2101,7 @@ label clear_the_room(Character=0, Passive=0, Silent=0, Girls=[]):
             $ Girls[0].location = Girls[0].home
 
         if Girls[0] == RogueX:
-            hide Rogue_Sprite with easeoutright
+            hide Rogue_sprite with easeoutright
         elif Girls[0] == KittyX:
             hide Kitty_Sprite with easeoutright
         elif Girls[0] == EmmaX:
@@ -3327,436 +3327,6 @@ label action_speed_Shift(S=0):
 
     return
 
-label Shop:
-    menu:
-        "You are logged into the store. You have [Player.cash] dollars."
-        "Buy dildo for $20.":
-            if Player.inventory.count("_dildo") >= 10:
-                "You already have way more dildos than you need. 2, 4, 6. . . yes, way too many."
-            elif Player.cash >= 20:
-                "You purchase one dildo."
-                $ Player.inventory.append("_dildo")
-                $ Player.cash -= 20
-            else:
-                "You don't have enough for that."
-        "Buy \"Shocker\" vibrator for $25.":
-            if Player.inventory.count("_vibrator") >= 10:
-                "If you bought one more vibrator, you would risk a geological event."
-            elif Player.cash >= 25:
-                "You purchase one vibrator."
-                $ Player.inventory.append("_vibrator")
-                $ Player.cash -= 25
-            else:
-                "You don't have enough for that."
-        "Gifts for [RogueX.name]":
-            menu:
-                "Buy green lace nighty for $75." if "nighty" not in RogueX.inventory and "Rogue nighty" not in Player.inventory:
-                    if Player.cash >= 75:
-                        "You purchase the nighty, this will look nice on [RogueX.name]."
-                        $ Player.inventory.append("Rogue nighty")
-                        $ Player.cash -= 75
-                    else:
-                        "You don't have enough for that."
-                "Buy black lace bra for $90." if "_lace_bra" not in RogueX.inventory and "Rogue lace_bra" not in Player.inventory:
-                    if Player.cash >= 90:
-                        "You purchase the lace bra, this will look nice on [RogueX.name]."
-                        $ Player.inventory.append("Rogue lace_bra")
-                        $ Player.cash -= 90
-                    else:
-                        "You don't have enough for that."
-                "Buy black lace panties for $110." if "_lace_panties" not in RogueX.inventory and "Rogue lace_panties" not in Player.inventory:
-                    if Player.cash >= 110:
-                        "You purchase the lace panties, these will look nice on [RogueX.name]."
-                        $ Player.inventory.append("Rogue lace_panties")
-                        $ Player.cash -= 110
-                    else:
-                        "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "_stockings_and_garterbelt" not in RogueX.inventory and "_stockings_and_garterbelt" not in Player.inventory and approval_check(RogueX, 1500):
-                    if Player.cash >= 100:
-                        "You purchase the stockings, these will look nice on [RogueX.name]."
-                        $ Player.inventory.append("_stockings_and_garterbelt")
-                        $ Player.cash -= 100
-                    else:
-                        "You don't have enough for that."
-                "Buy yellow bikini top for $50." if "_bikini_top" not in RogueX.inventory and "Rogue bikini_top" not in Player.inventory:
-                    if Player.cash >= 50:
-                        "You purchase the bikini top, this will look nice on [RogueX.name]."
-                        $ Player.inventory.append("Rogue bikini_top")
-                        $ Player.cash -= 50
-                    else:
-                        "You don't have enough for that."
-                "Buy green bikini bottoms for $50." if "_bikini_bottoms" not in RogueX.inventory and "Rogue bikini_bottoms" not in Player.inventory:
-                    if Player.cash >= 50:
-                        "You purchase the bikini bottoms, these will look nice on [RogueX.name]."
-                        $ Player.inventory.append("Rogue bikini_bottoms")
-                        $ Player.cash -= 50
-                    else:
-                        "You don't have enough for that."
-                "Never mind.":
-                    pass
-        "Gifts for [KittyX.name]" if "met" in KittyX.history:
-            menu:
-                "Buy white lace bra for $90." if "_lace_bra" not in KittyX.inventory and "Kitty lace_bra" not in Player.inventory:
-                    if Player.cash >= 90:
-                        "You purchase the lace bra, this will look nice on [KittyX.name]."
-                        $ Player.inventory.append("Kitty lace_bra")
-                        $ Player.cash -= 90
-                    else:
-                        "You don't have enough for that."
-                "Buy white lace panties for $110." if "_lace_panties" not in KittyX.inventory and "Kitty lace_panties" not in Player.inventory:
-                    if Player.cash >= 110:
-                        "You purchase the lace panties, these will look nice on [KittyX.name]."
-                        $ Player.inventory.append("Kitty lace_panties")
-                        $ Player.cash -= 110
-                    else:
-                        "You don't have enough for that."
-
-                "Buy pantyhose for $50." if "_pantyhose" not in KittyX.inventory and "Kitty_pantyhose" not in Player.inventory:
-                    if Player.cash >= 50:
-                        "You purchase the hose, these will look nice on [KittyX.name]."
-                        $ Player.inventory.append("Kitty_pantyhose")
-                        $ Player.cash -= 50
-                    else:
-                        "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "_stockings_and_garterbelt" not in KittyX.inventory and "_stockings_and_garterbelt" not in Player.inventory:
-                    if Player.cash >= 100:
-                        "You purchase the stockings, these will look nice on [KittyX.name]."
-                        $ Player.inventory.append("_stockings_and_garterbelt")
-                        $ Player.cash -= 100
-                    else:
-                        "You don't have enough for that."
-                "Buy knee-stockings for $50." if "knee" not in KittyX.inventory and "knee" not in Player.inventory:
-                    if Player.cash >= 50:
-                        "You purchase the stockings, these will look nice on [KittyX.name]."
-                        $ Player.inventory.append("knee")
-                        $ Player.cash -= 50
-                    else:
-                        "You don't have enough for that."
-
-                "Buy blue cat bikini top for $60." if "_bikini_top" not in KittyX.inventory and "Kitty bikini_top" not in Player.inventory:
-                    if Player.cash >= 60:
-                        "You purchase the bikini top, this will look nice on [KittyX.name]."
-                        $ Player.inventory.append("Kitty bikini_top")
-                        $ Player.cash -= 60
-                    else:
-                        "You don't have enough for that."
-                "Buy blue bikini bottoms for $60." if "_bikini_bottoms" not in KittyX.inventory and "Kitty bikini_bottoms" not in Player.inventory:
-                    if Player.cash >= 60:
-                        "You purchase the bikini bottoms, these will look nice on [KittyX.name]."
-                        $ Player.inventory.append("Kitty bikini_bottoms")
-                        $ Player.cash -= 60
-                    else:
-                        "You don't have enough for that."
-                "Buy blue miniskirt for $50." if "_blue_skirt" not in KittyX.inventory and "Kitty blue_skirt" not in Player.inventory:
-                    if Player.cash >= 50:
-                        "You purchase the blue skirt, this will look nice on [KittyX.name]."
-                        $ Player.inventory.append("Kitty blue_skirt")
-                        $ Player.cash -= 50
-                    else:
-                        "You don't have enough for that."
-                "Never mind.":
-                    pass
-        "Gifts for [EmmaX.name]" if "met" in EmmaX.history:
-            menu:
-                "Buy white lace bra for $90." if "_lace_bra" not in EmmaX.inventory and "Emma lace_bra" not in Player.inventory:
-                    if Player.cash >= 90:
-                        "You purchase the lace bra, this will look nice on [EmmaX.name]."
-                        $ Player.inventory.append("Emma lace_bra")
-                        $ Player.cash -= 90
-                    else:
-                        "You don't have enough for that."
-                "Buy white lace panties for $110." if "_lace_panties" not in EmmaX.inventory and "Emma lace_panties" not in Player.inventory:
-                    if Player.cash >= 110:
-                        "You purchase the lace panties, these will look nice on [EmmaX.name]."
-                        $ Player.inventory.append("Emma lace_panties")
-                        $ Player.cash -= 110
-                    else:
-                        "You don't have enough for that."
-                "Buy pantyhose for $50." if "_pantyhose" not in EmmaX.inventory and "Emma_pantyhose" not in Player.inventory:
-                    if Player.cash >= 50:
-                        "You purchase the hose, these will look nice on [EmmaX.name]."
-                        $ Player.inventory.append("Emma_pantyhose")
-                        $ Player.cash -= 50
-                    else:
-                        "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "_stockings_and_garterbelt" not in EmmaX.inventory and "_stockings_and_garterbelt" not in Player.inventory and approval_check(EmmaX, 1500):
-                    if Player.cash >= 100:
-                        "You purchase the stockings, these will look nice on [EmmaX.name]."
-                        $ Player.inventory.append("_stockings_and_garterbelt")
-                        $ Player.cash -= 100
-                    else:
-                        "You don't have enough for that."
-                "Buy white bikini top for $60." if "_bikini_top" not in EmmaX.inventory and "Emma bikini_top" not in Player.inventory:
-                    if Player.cash >= 60:
-                        "You purchase the bikini top, this will look nice on [EmmaX.name]."
-                        $ Player.inventory.append("Emma bikini_top")
-                        $ Player.cash -= 60
-                    else:
-                        "You don't have enough for that."
-                "Buy white bikini bottoms for $60." if "_bikini_bottoms" not in EmmaX.inventory and "Emma bikini_bottoms" not in Player.inventory:
-                    if Player.cash >= 60:
-                        "You purchase the bikini bottoms, these will look nice on [EmmaX.name]."
-                        $ Player.inventory.append("Emma bikini_bottoms")
-                        $ Player.cash -= 60
-                    else:
-                        "You don't have enough for that."
-                "Never mind.":
-                    pass
-        "Gifts for [LauraX.name]" if "met" in LauraX.history:
-            menu:
-                "Buy red corset for $70." if "_corset" not in LauraX.inventory and "Laura corset" not in Player.inventory:
-                    if Player.cash >= 70:
-                        "You purchase the corset, this will look nice on [LauraX.name]."
-                        $ Player.inventory.append("Laura corset")
-                        $ Player.cash -= 70
-                    else:
-                        "You don't have enough for that."
-                "Buy red lace corset for $90." if "_lace corset" not in LauraX.inventory and "Laura lace corset" not in Player.inventory:
-                    if Player.cash >= 90:
-                        "You purchase the lace corset, this will look nice on [LauraX.name]."
-                        $ Player.inventory.append("Laura lace corset")
-                        $ Player.cash -= 90
-                    else:
-                        "You don't have enough for that."
-                "Buy red lace panties for $110." if "_lace_panties" not in LauraX.inventory and "Laura lace_panties" not in Player.inventory:
-                    if Player.cash >= 110:
-                        "You purchase the lace panties, these will look nice on [LauraX.name]."
-                        $ Player.inventory.append("Laura lace_panties")
-                        $ Player.cash -= 110
-                    else:
-                        "You don't have enough for that."
-                "Buy black bikini top for $50." if "_bikini_top" not in LauraX.inventory and "Laura bikini_top" not in Player.inventory:
-                    if Player.cash >= 50:
-                        "You purchase the bikini top, this will look nice on [LauraX.name]."
-                        $ Player.inventory.append("Laura bikini_top")
-                        $ Player.cash -= 50
-                    else:
-                        "You don't have enough for that."
-                "Buy black bikini bottoms for $50." if "_bikini_bottoms" not in LauraX.inventory and "Laura bikini_bottoms" not in Player.inventory:
-                    if Player.cash >= 50:
-                        "You purchase the bikini bottoms, these will look nice on [LauraX.name]."
-                        $ Player.inventory.append("Laura bikini_bottoms")
-                        $ Player.cash -= 50
-                    else:
-                        "You don't have enough for that."
-                "Never mind.":
-                    pass
-
-        "Gifts for [JeanX.name]" if "met" in JeanX.history:
-            menu:
-                "Buy black corset for $70." if "_corset" not in JeanX.inventory and "Jean corset" not in Player.inventory:
-                    if Player.cash >= 70:
-                        "You purchase the corset, this will look nice on [JeanX.name]."
-                        $ Player.inventory.append("Jean corset")
-                        $ Player.cash -= 70
-                    else:
-                        "You don't have enough for that."
-
-
-
-
-
-
-
-                "Buy green lace bra for $90." if "_lace_bra" not in JeanX.inventory and "Jean lace_bra" not in Player.inventory:
-                    if Player.cash >= 90:
-                        "You purchase the lace bra, this will look nice on [JeanX.name]."
-                        $ Player.inventory.append("Jean lace_bra")
-                        $ Player.cash -= 90
-                    else:
-                        "You don't have enough for that."
-                "Buy green lace panties for $110." if "_lace_panties" not in JeanX.inventory and "Jean lace_panties" not in Player.inventory:
-                    if Player.cash >= 110:
-                        "You purchase the lace panties, these will look nice on [JeanX.name]."
-                        $ Player.inventory.append("Jean lace_panties")
-                        $ Player.cash -= 110
-                    else:
-                        "You don't have enough for that."
-                "Buy \"X\" bikini top for $50." if "_bikini_top" not in JeanX.inventory and "Jean bikini_top" not in Player.inventory:
-                    if Player.cash >= 50:
-                        "You purchase the bikini top, this will look nice on [JeanX.name]."
-                        $ Player.inventory.append("Jean bikini_top")
-                        $ Player.cash -= 50
-                    else:
-                        "You don't have enough for that."
-                "Buy black bikini bottoms for $50." if "_bikini_bottoms" not in JeanX.inventory and "Jean bikini_bottoms" not in Player.inventory:
-                    if Player.cash >= 50:
-                        "You purchase the bikini bottoms, these will look nice on [JeanX.name]."
-                        $ Player.inventory.append("Jean bikini_bottoms")
-                        $ Player.cash -= 50
-                    else:
-                        "You don't have enough for that."
-                "Buy pantyhose for $50." if "_pantyhose" not in JeanX.inventory and "Jean_pantyhose" not in Player.inventory:
-                    if Player.cash >= 50:
-                        "You purchase the hose, these will look nice on [JeanX.name]."
-                        $ Player.inventory.append("Jean_pantyhose")
-                        $ Player.cash -= 50
-                    else:
-                        "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "_stockings_and_garterbelt" not in JeanX.inventory and "_stockings_and_garterbelt" not in Player.inventory and approval_check(JeanX, 800):
-                    if Player.cash >= 100:
-                        "You purchase the stockings, these will look nice on [JeanX.name]."
-                        $ Player.inventory.append("_stockings_and_garterbelt")
-                        $ Player.cash -= 100
-                    else:
-                        "You don't have enough for that."
-                "Never mind.":
-                    pass
-        "Gifts for [StormX.name]" if "met" in StormX.history:
-            menu:
-                "Buy black lace bra for $90." if "_lace_bra" not in StormX.inventory and "Storm lace_bra" not in Player.inventory:
-                    if Player.cash >= 90:
-                        "You purchase the lace bra, this will look nice on [StormX.name]."
-                        $ Player.inventory.append("Storm lace_bra")
-                        $ Player.cash -= 90
-                    else:
-                        "You don't have enough for that."
-                "Buy black lace panties for $110." if "_lace_panties" not in StormX.inventory and "Storm lace_panties" not in Player.inventory:
-                    if Player.cash >= 110:
-                        "You purchase the lace panties, these will look nice on [StormX.name]."
-                        $ Player.inventory.append("Storm lace_panties")
-                        $ Player.cash -= 110
-                    else:
-                        "You don't have enough for that."
-                "Buy pantyhose for $50." if "_pantyhose" not in StormX.inventory and "Storm_pantyhose" not in Player.inventory:
-                    if Player.cash >= 50:
-                        "You purchase the hose, these will look nice on [StormX.name]."
-                        $ Player.inventory.append("Storm_pantyhose")
-                        $ Player.cash -= 50
-                    else:
-                        "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "_stockings_and_garterbelt" not in StormX.inventory and "_stockings_and_garterbelt" not in Player.inventory and approval_check(StormX, 1500):
-                    if Player.cash >= 100:
-                        "You purchase the stockings, these will look nice on [StormX.name]."
-                        $ Player.inventory.append("_stockings_and_garterbelt")
-                        $ Player.cash -= 100
-                    else:
-                        "You don't have enough for that."
-                "Buy black bikini top for $60." if "_bikini_top" not in StormX.inventory and "Storm bikini_top" not in Player.inventory:
-                    if Player.cash >= 60:
-                        "You purchase the bikini top, this will look nice on [StormX.name]."
-                        $ Player.inventory.append("Storm bikini_top")
-                        $ Player.cash -= 60
-                    else:
-                        "You don't have enough for that."
-                "Buy black bikini bottoms for $60." if "_bikini_bottoms" not in StormX.inventory and "Storm bikini_bottoms" not in Player.inventory:
-                    if Player.cash >= 60:
-                        "You purchase the bikini bottoms, these will look nice on [StormX.name]."
-                        $ Player.inventory.append("Storm bikini_bottoms")
-                        $ Player.cash -= 60
-                    else:
-                        "You don't have enough for that."
-                "Never mind.":
-                    pass
-        "Buy books":
-
-            menu Shop_Books:
-                "Buy \"Dazzler and Longshot\" for $20.":
-                    "A sappy romantic novel about two starcrossed lovers."
-                    if "DL" not in shop_inventory:
-                        "They seem to be out of stock at the moment."
-                    elif Player.cash >= 20:
-                        "You purchase the book."
-                        $ shop_inventory.remove("DL")
-                        $ Player.inventory.append("Dazzler and Longshot")
-                        $ Player.cash -= 20
-                    else:
-                        "You don't have enough for that."
-                "Buy \"256 Shades of Grey\" for $20.":
-                    "A gripping sexual thriller about a stern red-headed \"goblin queen\" and her subject."
-                    if "G" not in shop_inventory:
-                        "They seem to be out of stock at the moment."
-                    elif Player.cash >= 20:
-                        "You purchase the book."
-                        $ shop_inventory.remove("G")
-                        $ Player.inventory.append("256 Shades of Grey")
-                        $ Player.cash -= 20
-                    else:
-                        "You don't have enough for that."
-                "Buy \"Avengers Tower Penthouse\" for $20.":
-                    "A book filled with nude pictures of various Avengers, sexy."
-                    if "A" not in shop_inventory:
-                        "They seem to be out of stock at the moment."
-                    elif Player.cash >= 20:
-                        "You purchase the book."
-                        $ shop_inventory.remove("A")
-                        $ Player.inventory.append("Avengers Tower Penthouse")
-                        $ Player.cash -= 20
-                    else:
-                        "You don't have enough for that."
-                "Back":
-                    jump Shop
-            jump Shop_Books
-        "Buy Cologne":
-            if day < 50:
-                "These are currently out of stock, check back later."
-                jump Shop
-            menu:
-                "Examine the Mandrill Cologne (\"Nothin says lovin like a shiny red butt\").":
-                    menu:
-                        "This cologne is guaranteed to make women love you more [[+Love]."
-                        "Buy Mandrill Cologne for $150":
-                            pass
-                        "Never mind.":
-                            jump Shop
-                    if "Mandrill Cologne" in Player.inventory:
-                        "They seem to be out of stock, maybe check back later."
-                    elif Player.cash >= 150:
-                        "You purchase one bottle of Mandrill Cologne."
-                        $ Player.inventory.append("Mandrill Cologne")
-                        $ Player.inventory.append("Mandrill Cologne")
-                        $ Player.inventory.append("Mandrill Cologne")
-                        $ Player.inventory.append("Mandrill Cologne")
-                        $ Player.inventory.append("Mandrill Cologne")
-                        $ Player.cash -= 150
-                    else:
-                        "You don't have enough for that."
-                "Examine the Purple Rain Cologne (\"They can't resist your charms\").":
-                    menu:
-                        "This cologne is guaranteed to make women more suggestible to your orders until tomorrow [[+Obedience]."
-                        "Buy Purple Rain Cologne for $200":
-                            pass
-                        "Never mind.":
-                            jump Shop
-                    if "Purple Rain Cologne" in Player.inventory:
-                        "They seem to be out of stock, maybe check back later."
-                    elif Player.cash >= 200:
-                        "You purchase one bottle of Purple Rain Cologne."
-                        $ Player.inventory.append("Purple Rain Cologne")
-                        $ Player.inventory.append("Purple Rain Cologne")
-                        $ Player.inventory.append("Purple Rain Cologne")
-                        $ Player.inventory.append("Purple Rain Cologne")
-                        $ Player.inventory.append("Purple Rain Cologne")
-                        $ Player.inventory.append("Purple Rain Cologne")
-                        $ Player.cash -= 200
-                    else:
-                        "You don't have enough for that."
-                "Examine the Corruption Cologne (\"Let the wild out\").":
-                    menu:
-                        "This cologne is guaranteed to make women let loose their wild side [[-Inhibition]."
-                        "Buy Corruption Cologne for $250":
-                            pass
-                        "Never mind.":
-                            jump Shop
-                    if "Corruption Cologne" in Player.inventory:
-                        "They seem to be out of stock, maybe check back later."
-                    elif Player.cash >= 250:
-                        "You purchase one bottle of Corruption Cologne."
-                        $ Player.inventory.append("Corruption Cologne")
-                        $ Player.inventory.append("Corruption Cologne")
-                        $ Player.inventory.append("Corruption Cologne")
-                        $ Player.inventory.append("Corruption Cologne")
-                        $ Player.inventory.append("Corruption Cologne")
-                        $ Player.cash -= 250
-                    else:
-                        "You don't have enough for that."
-                "Back":
-                    pass
-        "Exit Store":
-            return
-    jump Shop
-    return
-
 
 
 label shift_focus(Girl, Second=0, Return=0):
@@ -3877,12 +3447,12 @@ label AllReset(Girl):
 
         if temp_Girls[0] == RogueX:
             if RogueX.location == bg_current:
-                show Rogue_Sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location,50):
+                show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location,50):
                     ease 0.5 anchor (0.6, 0.0)
-                show Rogue_Sprite:
+                show Rogue_sprite:
                     anchor (0.6, 0.0) pos (RogueX.sprite_location,50)
             else:
-                hide Rogue_Sprite
+                hide Rogue_sprite
         elif temp_Girls[0] == KittyX:
             if KittyX.location == bg_current:
                 show Kitty_Sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location,50):

@@ -319,3 +319,1389 @@ image licking:
         pause 0.3
         easein 0.8 yoffset 0
         repeat
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+image cellphone:
+    "images/cellphone.png"
+    xoffset 0
+    yoffset 100
+
+
+image PhoneSex:
+
+    contains:
+
+        "images/PhoneFrame.png"
+    contains:
+
+        AlphaMask("PhoneScreen", "images/PhoneMask.png")
+    offset (300,50)
+
+image PhoneRG:
+
+    "bg_rogue"
+    xoffset 500
+
+image PhoneScreen:
+    contains:
+        ConditionSwitch(
+            "focused_Girl.location == 'bg_rogue'","PhoneRG",
+            "True", "[focused_Girl.location]")
+
+        offset (-800,-300)
+        zoom 1.5
+
+    contains:
+        "[focused_Girl.Tag]_sprite"
+        pos (0,0)
+        offset (290,50)
+        anchor (0.6,0)
+        zoom 1.1
+
+
+image dress_screen:
+
+    contains:
+
+        "images/dress_screen.png"
+    contains:
+
+        AlphaMask("images/dress_screenShadow.png","DressShadow")
+    zoom 1
+    offset (375,225)
+
+image DressShadow:
+
+    contains:
+
+        ConditionSwitch(
+            "RogueX.sprite_layer == 100", "Rogue_sprite",
+            "KittyX.sprite_layer == 100", "Kitty_sprite",
+            "EmmaX.sprite_layer == 100", "Emma_Sprite",
+            "LauraX.sprite_layer == 100", "Laura_Sprite",
+            "JeanX.sprite_layer == 100", "Jean_Sprite",
+            "StormX.sprite_layer == 100", "Storm_Sprite",
+            "JubesX.sprite_layer == 100", "Jubes_Sprite",
+
+
+
+
+            "True", Null(),
+            )
+        offset (210,-170)
+        zoom 1
+
+
+
+
+
+image Gwen_Sprite:
+    LiveComposite(
+        (574,964),
+
+        (0,0), "images/GS_B.png",
+
+
+        (80,15), "Gwen_Sprite_Head",
+        )
+    anchor (0.6, 0.0)
+    yoffset 15
+    zoom 0.75
+
+
+
+image Gwen_Sprite_Head:
+    LiveComposite(
+        (820,820),
+        (0,0), ConditionSwitch(
+
+                "G_Blush", "images/NPC/Gwen_Sprite_Head_Blush.png",
+                "True", "images/NPC/Gwen_Sprite_Head.png",
+                ),
+        (0,0), ConditionSwitch(
+            "G_Mouth == 'open'", "images/NPC/Gwen_Sprite_Mouth_Open.png",
+            "G_Mouth == 'kiss'", "images/NPC/Gwen_Sprite_Mouth_Kiss.png",
+            "G_Mouth == 'smile'", "images/NPC/Gwen_Sprite_Mouth_Smile.png",
+            "G_Mouth == 'shocked'", "images/NPC/Gwen_Sprite_Mouth_Shocked.png",
+            "True", "images/NPC/Gwen_Sprite_Mouth_Smile.png",
+            ),
+        (0,0), ConditionSwitch(
+
+            "G_Blush", ConditionSwitch(
+                    "G_Brows == 'angry' or G_Eyes == 'angry'", "images/NPC/Gwen_Sprite_Brows_Angry_B.png",
+                    "G_Brows == 'sad'", "images/NPC/Gwen_Sprite_Brows_Sad_B.png",
+                    "True", "images/NPC/Gwen_Sprite_Brows_Normal.png",
+                    ),
+            "True", ConditionSwitch(
+                    "G_Brows == 'angry' or G_Eyes == 'angry'", "images/NPC/Gwen_Sprite_Brows_Angry.png",
+                    "G_Brows == 'sad'", "images/NPC/Gwen_Sprite_Brows_Sad.png",
+                    "True", "images/NPC/Gwen_Sprite_Brows_Normal.png",
+                    ),
+            ),
+        (0,0), "Gwen Blink",
+        )
+    anchor (0.6, 0.0)
+    zoom 0.5
+
+image Gwen Blink:
+    ConditionSwitch(
+    "G_Eyes == 'angry'", "images/NPC/Gwen_Sprite_Eyes_Angry.png",
+    "G_Eyes == 'surprised'", "images/NPC/Gwen_Sprite_Eyes_Surprised.png",
+    "G_Eyes == 'closed'", "images/NPC/Gwen_Sprite_Eyes_Closed.png",
+    "True", "images/NPC/Gwen_Sprite_Eyes_Normal.png",
+    ),
+    choice:
+        3.5
+    choice:
+        3.25
+    choice:
+        3
+    "images/NPC/Gwen_Sprite_Eyes_Closed.png"
+    0.20
+    repeat
+
+default G_Mouth = "normal"
+default G_Brows = "normal"
+default G_Eyes = "normal"
+default G_Blush = 0
+
+label GwenFace(emotion="normal", B=G_Blush, M=0, Mouth=0, Eyes=0, Brows=0):
+
+
+    $ B = G_Blush if B == 5 else B
+
+    if emotion == "normal":
+        $ G_Mouth = "normal"
+        $ G_Brows = "normal"
+        $ G_Eyes = "normal"
+    elif emotion == "angry":
+        $ G_Mouth = "_kiss"
+        $ G_Brows = "angry"
+        $ G_Eyes = "angry"
+    elif emotion == "closed":
+        $ G_Mouth = "normal"
+        $ G_Brows = "_sad"
+        $ G_Eyes = "closed"
+    elif emotion == "_sad":
+        $ G_Mouth = "_kiss"
+        $ G_Brows = "_sad"
+        $ G_Eyes = "normal"
+    elif emotion == "smile":
+        $ G_Mouth = "smile"
+        $ G_Brows = "normal"
+        $ G_Eyes = "normal"
+    elif emotion == "surprised":
+        $ G_Mouth = "open"
+        $ G_Brows = "normal"
+        $ G_Eyes = "surprised"
+    elif emotion == "shocked":
+        $ G_Mouth = "shocked"
+        $ G_Brows = "normal"
+        $ G_Eyes = "surprised"
+
+    if B > 1:
+        $ G_Blush = 2
+    elif B:
+        $ G_Blush = 1
+    else:
+        $ G_Blush = 0
+
+    if Mouth:
+        $ G_Mouth = Mouth
+    if Eyes:
+        $ G_Eyes = Eyes
+    if Brows:
+        $ G_Brows = Brows
+
+    return
+
+label Gwen_FaceEditor:
+    while True:
+        menu:
+            "Brows=[G_Brows], Eyes=[G_Eyes], Mouth=[G_Mouth]"
+            "Toggle Brows":
+                if G_Brows == "normal":
+                    $ G_Brows = "angry"
+                elif G_Brows == "angry":
+                    $ G_Brows = "_confused"
+                elif G_Brows == "_confused":
+                    $ G_Brows = "_sad"
+                elif G_Brows == "_sad":
+                    $ G_Brows = "surprised"
+                else:
+                    $ G_Brows = "normal"
+            "Toggle Eyes Emotions":
+                if G_Eyes == "normal":
+                    $ G_Eyes = "surprised"
+                elif G_Eyes == "surprised":
+                    $ G_Eyes = "sexy"
+                elif G_Eyes == "sexy":
+                    $ G_Eyes = "squint"
+                elif G_Eyes == "squint":
+                    $ G_Eyes = "closed"
+                else:
+                    $ G_Eyes = "normal"
+            "Toggle Eyes Directions":
+                if G_Eyes == "normal":
+                    $ G_Eyes = "side"
+                elif G_Eyes == "side":
+                    $ G_Eyes = "down"
+                elif G_Eyes == "down":
+                    $ G_Eyes = "leftside"
+                elif G_Eyes == "leftside":
+                    $ G_Eyes = "stunned"
+                else:
+                    $ G_Eyes = "normal"
+            "Toggle Mouth Normal":
+                if G_Mouth  == "normal":
+                    $ G_Mouth = "_sad"
+                elif G_Mouth == "_sad":
+                    $ G_Mouth = "smile"
+                elif G_Mouth == "smile":
+                    $ G_Mouth = "surprised"
+                else:
+                    $ G_Mouth = "normal"
+            "Toggle Mouth Sexy":
+                if G_Mouth  == "normal":
+                    $ G_Mouth = "_kiss"
+                elif G_Mouth == "kiss":
+                    $ G_Mouth = "_sucking"
+                elif G_Mouth == "_sucking":
+                    $ G_Mouth = "_tongue"
+                elif G_Mouth == "_tongue":
+                    $ G_Mouth = "_lipbite"
+                else:
+                    $ G_Mouth = "normal"
+            "Toggle Blush":
+                if G_Blush == 1:
+                    $ G_Blush = 2
+                elif G_Blush:
+                    $ G_Blush = 0
+                else:
+                    $ G_Blush = 1
+            "Back":
+
+                return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+label Display_Gwen(GwLoc=350, YLoc=50):
+
+
+
+    show Gwen_Sprite:
+        alpha 1
+        zoom 1
+        offset (0,0)
+        anchor (0.5, 0.0)
+        easeout 0.5 pos (GwLoc,YLoc)
+    show Gwen_Sprite:
+        alpha 1
+        zoom 1
+        offset (0,0)
+        anchor (0.5, 0.0)
+        pos (GwLoc,YLoc)
+    return
+
+
+label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
+
+
+
+    if GirlB:
+        $ temp_Girls = [GirlA,GirlB]
+    elif GirlA:
+        $ temp_Girls = [GirlA]
+    while temp_Girls:
+        if temp_Girls[0] == KittyX or temp_Girls[0] == LauraX:
+            $ temp_Girls[0].arm_pose = 1
+        else:
+            $ temp_Girls[0].arm_pose = 2
+        $ YLoc = 100
+        if GirlA == temp_Girls[0]:
+
+            if temp_Girls[0] == KittyX:
+                $ XLoc = 450
+            elif temp_Girls[0] == RogueX:
+                $ XLoc = 550
+            else:
+                $ XLoc = 500
+            $ temp_Girls[0].sprite_layer = 100
+            $ XZoom = -1.3
+        elif GirlB == temp_Girls[0]:
+
+            if temp_Girls[0] == EmmaX or LauraX:
+                $ XLoc = 700
+            else:
+                $ XLoc = 715
+            $ temp_Girls[0].sprite_layer = 75
+            $ XZoom = 1.3
+
+        if temp_Girls[0] == RogueX:
+            call hide_girl(RogueX)
+            show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(XLoc,YLoc):
+                alpha 1
+                zoom 1
+                xzoom XZoom
+                yzoom 1.3
+                offset (0,0)
+                anchor (0.6, 0.0)
+        elif temp_Girls[0] == KittyX:
+            call hide_girl(KittyX)
+            show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(XLoc,YLoc):
+                alpha 1
+                zoom 1
+                xzoom XZoom
+                yzoom 1.3
+                offset (0,0)
+                anchor (0.5, 0.0)
+        elif temp_Girls[0] == EmmaX:
+            call Emma_Hide
+            show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(XLoc,YLoc):
+                alpha 1
+                zoom 1
+                xzoom XZoom
+                yzoom 1.3
+                offset (0,0)
+                anchor (0.5, 0.0)
+        elif temp_Girls[0] == LauraX:
+            call Laura_Hide
+            show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(XLoc,YLoc):
+                alpha 1
+                zoom 1
+                xzoom XZoom
+                yzoom 1.3
+                offset (0,0)
+                anchor (0.5, 0.0)
+        elif temp_Girls[0] == JeanX:
+            call Jean_Hide
+            show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(XLoc,YLoc):
+                alpha 1
+                zoom 1
+                xzoom XZoom
+                yzoom 1.3
+                offset (0,0)
+                anchor (0.5, 0.0)
+        elif temp_Girls[0] == StormX:
+            call Storm_Hide
+            show Storm_Sprite zorder StormX.sprite_layer at sprite_location(XLoc,YLoc):
+                alpha 1
+                zoom 1
+                xzoom XZoom
+                yzoom 1.3
+                offset (0,0)
+                anchor (0.6, 0.0)
+        elif temp_Girls[0] == JubesX:
+            call Jubes_Hide
+            show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(XLoc,YLoc):
+                alpha 1
+                zoom 1
+                xzoom XZoom
+                yzoom 1.3
+                offset (0,0)
+                anchor (0.6, 0.0)
+        $ temp_Girls.remove(temp_Girls[0])
+    return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, temp_Girls=[]):
+
+
+
+    if Partner not in all_Girls:
+        return
+    $ temp_Girls = [Girl,Partner]
+    while temp_Girls:
+        if "unseen" in temp_Girls[0].recent_history:
+            $ temp_Girls[0].eyes = "closed"
+        elif Girl == temp_Girls[0]:
+            if Girl == RogueX:
+                $ temp_Girls[0].eyes = "side"
+            elif Girl == EmmaX:
+                $ temp_Girls[0].eyes = "_sly"
+            else:
+                $ temp_Girls[0].eyes = "leftside"
+        else:
+            $ temp_Girls[0].eyes = "side"
+
+        if temp_Girls[0] == KittyX or temp_Girls[0] == LauraX:
+            $ temp_Girls[0].arm_pose = 1
+        else:
+            $ temp_Girls[0].arm_pose = 2
+        $ YLoc = 100
+        if Girl == temp_Girls[0]:
+
+            if temp_Girls[0] == KittyX:
+                $ XLoc = 450
+            elif temp_Girls[0] == RogueX:
+                $ XLoc = 550
+            else:
+                $ XLoc = 500
+            $ temp_Girls[0].sprite_layer = 100
+            $ XZoom = -1.3
+        else:
+
+            if temp_Girls[0] == EmmaX or LauraX:
+                $ XLoc = 700
+            else:
+                $ XLoc = 715
+            if temp_Girls[0] == KittyX:
+                if RogueX in (Partner,Girl):
+                    $ KittyX.sprite_layer = 100
+                else:
+                    $ KittyX.sprite_layer = 25
+            else:
+                $ temp_Girls[0].sprite_layer = 75
+            $ XZoom = 1.3
+
+        if temp_Girls[0] == RogueX:
+            call hide_girl(RogueX)
+            show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(XLoc,YLoc):
+                alpha 1
+                zoom 1
+                xzoom XZoom
+                yzoom 1.3
+                offset (0,0)
+                anchor (0.6, 0.0)
+        elif temp_Girls[0] == KittyX:
+            call hide_girl(KittyX)
+            show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(XLoc,YLoc):
+                alpha 1
+                zoom 1
+                xzoom XZoom
+                yzoom 1.3
+                offset (0,0)
+                anchor (0.5, 0.0)
+        elif temp_Girls[0] == EmmaX:
+            call Emma_Hide
+            show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(XLoc,YLoc):
+                alpha 1
+                zoom 1
+                xzoom XZoom
+                yzoom 1.3
+                offset (0,0)
+                anchor (0.5, 0.0)
+        elif temp_Girls[0] == LauraX:
+            call Laura_Hide
+            show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(XLoc,YLoc):
+                alpha 1
+                zoom 1
+                xzoom XZoom
+                yzoom 1.3
+                offset (0,0)
+                anchor (0.5, 0.0)
+        elif temp_Girls[0] == JeanX:
+            call Jean_Hide
+            show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(XLoc,YLoc):
+                alpha 1
+                zoom 1
+                xzoom XZoom
+                yzoom 1.3
+                offset (0,0)
+                anchor (0.5, 0.0)
+        elif temp_Girls[0] == StormX:
+            call Storm_Hide
+            show Storm_Sprite zorder StormX.sprite_layer at sprite_location(XLoc,YLoc):
+                alpha 1
+                zoom 1
+                xzoom XZoom
+                yzoom 1.3
+                offset (0,0)
+                anchor (0.6, 0.0)
+        elif temp_Girls[0] == JubesX:
+            call Jubes_Hide
+            show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(XLoc,YLoc):
+                alpha 1
+                zoom 1
+                xzoom XZoom
+                yzoom 1.3
+                offset (0,0)
+                anchor (0.6, 0.0)
+        $ temp_Girls.remove(temp_Girls[0])
+    return
+
+image CircleTest:
+    contains:
+        subpixel True
+        "images/Clockbase.png"
+        anchor (0.5,0.5)
+
+        yzoom -1
+    contains:
+
+        ConditionSwitch(
+            "round>= 50", "ClockWhite",
+            "True",Null(),
+            ),
+    contains:
+        ConditionSwitch(
+            "round<= 50", "ClockRed",
+            "True",Null(),
+            ),
+    contains:
+        subpixel True
+        "images/Clockface.png"
+        anchor (0.5,0.5)
+
+image ClockWhite:
+    contains:
+        subpixel True
+        "images/Clockwhite.png"
+        anchor (0.5,0.5)
+        rotate -(int(round *3.6))
+
+image ClockRed:
+    contains:
+        subpixel True
+        "images/Clockred.png"
+        anchor (0.5,0.5)
+        rotate -(int(round *3.6-180))
+
+image blue_screen:
+
+    alpha 0.1
+    contains:
+        Solid("#00B3D6", xysize=(1024, 768))
+
+image SilhouetteBase:
+
+    alpha 0.95
+    contains:
+        Solid("#14142d", xysize=(1024, 768))
+
+
+image Silhouettes:
+
+
+
+
+
+    contains:
+
+        AlphaMask("SilhouetteBase","Storm_Sprite")
+
+
+
+
+
+
+
+transform Vibrate():
+    subpixel True
+    block:
+        linear 0.5 xoffset 2
+        linear 0.5 xoffset -2
+        repeat
+
+
+image UI_Vibrator = LiveComposite(
+        (224,224),
+        (0,0), ConditionSwitch(
+            "not Vibration", "UI_VibA",
+            "Vibration", At("UI_VibB", Vibrate()),
+            ),
+        )
+
+image GropeLeftBreast:
+    contains:
+        subpixel True
+        "UI_Hand"
+        zoom 0.7
+        pos (300,420)
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 90
+        block:
+            ease 1 rotate 60
+            ease 1 rotate 90
+            repeat
+
+image GropeRightBreast:
+    contains:
+        subpixel True
+        "UI_Hand"
+        yzoom 0.7
+        xzoom -0.7
+        pos (180,410)
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate -60
+        block:
+            ease 1 rotate -30
+            ease 1 rotate -60
+            repeat
+
+
+image LickRightBreast:
+    contains:
+        subpixel True
+        "UI_Tongue"
+        yzoom 0.5
+        xzoom -0.5
+        pos (160,400)
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 30
+        block:
+            ease 0.5 rotate -45 pos (150,370)
+            pause 0.5
+            ease 1.5 rotate 30 pos (160,400)
+            repeat
+
+image LickLeftBreast:
+    contains:
+        subpixel True
+        "UI_Tongue"
+        yzoom 0.5
+        xzoom -0.5
+        pos (280,410)
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 30
+        block:
+            ease 0.5 rotate -45 pos (260,380)
+            pause 0.5
+            ease 1.5 rotate 30 pos (280,410)
+            repeat
+
+image GropeThigh:
+    contains:
+        subpixel True
+        "UI_Hand"
+        zoom 0.7
+        pos (210,730)
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 100
+        parallel:
+            pause 0.5
+            ease 1 ypos 780
+            ease 1 ypos 730
+            repeat
+        parallel:
+            pause 0.5
+            ease 0.5 xpos 213
+            ease 0.5 xpos 210
+            ease 0.5 xpos 213
+            ease 0.5 xpos 210
+            repeat
+
+image GropePussy:
+    contains:
+        subpixel True
+        "UI_Hand"
+        zoom 0.7
+        pos (220,635)
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 170
+        block:
+            choice:
+                ease 0.5 rotate 190 pos (220,620)
+                ease 0.75 rotate 170 pos (220,635)
+            choice:
+                ease 0.5 rotate 190 pos (220,620)
+                pause 0.25
+                ease 1 rotate 170 pos (220,635)
+            repeat
+
+image FingerPussy:
+    contains:
+        subpixel True
+        "UI_Finger"
+        zoom 0.7
+        pos (230,720)
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 40
+        block:
+            choice:
+                ease 1 rotate 40 pos (240,685)
+                pause 0.5
+                ease 1 rotate 50 pos (230,720)
+            choice:
+                ease 0.5 rotate 40 pos (240,685)
+                pause 0.5
+                ease 1.75 rotate 50 pos (230,720)
+            choice:
+                ease 2 rotate 40 pos (240,685)
+                pause 0.5
+                ease 1 rotate 50 pos (230,720)
+            choice:
+                ease 0.25 rotate 40 pos (240,685)
+                ease 0.25 rotate 50 pos (230,720)
+                ease 0.25 rotate 40 pos (240,685)
+                ease 0.25 rotate 50 pos (230,720)
+            repeat
+
+image Lickpussy:
+    contains:
+        subpixel True
+        "UI_Tongue"
+        yzoom 0.5
+        xzoom -0.5
+        pos (250,670)
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 10
+        block:
+            easeout 0.5 rotate -50 pos (230,650)
+            linear 0.5 rotate -60 pos (220,660)
+            easein 1 rotate 10 pos (250,670)
+            repeat
+
+image VibratorRightBreast:
+    contains:
+        subpixel True
+        "UI_Vibrator"
+        pos (150,380)
+        zoom 0.5
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 55
+        block:
+            ease 1 rotate 35 ypos 370
+            pause 0.25
+            ease 1 rotate 55 ypos 380
+            pause 0.25
+            repeat
+
+image VibratorLeftBreast:
+    contains:
+        subpixel True
+        "UI_Vibrator"
+        pos (270,400)
+        zoom 0.5
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 55
+        block:
+            ease 1 rotate 35 ypos 390
+            pause 0.25
+            ease 1 rotate 55 ypos 400
+            pause 0.25
+            repeat
+
+image VibratorPussy:
+    contains:
+        subpixel True
+        "UI_Vibrator"
+        pos (240,665)
+        zoom 0.5
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 70
+        block:
+            ease 1 rotate 35 xpos 230 ypos 655
+            pause 0.25
+            ease 1 rotate 70 xpos 240 ypos 665
+            pause 0.25
+            repeat
+
+image VibratorAnal:
+    contains:
+        subpixel True
+        "UI_Vibrator"
+        pos (270,640)
+        zoom 0.5
+        anchor (0.5,0.5)
+        alpha 0.3
+        rotate 10
+        block:
+            ease 1 rotate 0 xpos 260 ypos 655
+            pause 0.25
+            ease 1 rotate 10 xpos 270 ypos 665
+            pause 0.25
+            repeat
+
+image VibratorPussyInsert:
+    contains:
+        subpixel True
+        "UI_Vibrator"
+        pos (240,645)
+        zoom 0.5
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 0
+
+image VibratorAnalInsert:
+    contains:
+        subpixel True
+        "UI_Vibrator"
+        pos (250,640)
+        zoom 0.5
+        anchor (0.5,0.5)
+        alpha 0.3
+        rotate 0
+
+image TestUIAnimation:
+    contains:
+        subpixel True
+        "UI_Vibrator"
+        pos (270,640)
+        zoom 0.5
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 10
+        block:
+            ease 1 rotate 0 xpos 260 ypos 655
+            pause 0.25
+            ease 1 rotate 10 xpos 270 ypos 665
+            pause 0.25
+            repeat
+
+
+image GirlGropeLeftBreast:
+    contains:
+        subpixel True
+        "UI_GirlHand"
+        zoom 0.6
+        pos (300,400)
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate -20
+        block:
+            ease 1 rotate -40 pos (280,390)
+            ease 1 rotate -20 pos (300,400)
+            repeat
+
+image GirlGropeRightBreast:
+    contains:
+        subpixel True
+        "UI_GirlHand"
+        yzoom 0.6
+        xzoom -0.6
+        pos (160,380)
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate -10
+        block:
+            ease 1 rotate -30 pos (160,410)
+            ease 1 rotate -10 pos (160,380)
+            repeat
+
+image GirlGropeThigh:
+    contains:
+        subpixel True
+        "UI_GirlHand"
+        zoom 0.6
+        pos (210,730)
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 100
+        parallel:
+            pause 0.5
+            ease 1 ypos 780
+            ease 1 ypos 730
+            repeat
+        parallel:
+            pause 0.5
+            ease 0.5 xpos 213
+            ease 0.5 xpos 210
+            ease 0.5 xpos 213
+            ease 0.5 xpos 210
+            repeat
+
+image GirlGropePussy:
+    contains:
+        subpixel True
+        "UI_GirlHand"
+        zoom 0.6
+        pos (230,615)
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 200
+        block:
+            choice:
+                ease 0.75 rotate 210 pos (225,620)
+                ease 0.5 rotate 195
+                ease 0.75 rotate 210
+                ease 0.5 rotate 195
+            choice:
+                ease 0.5 rotate 210 pos (225,620)
+                ease 1 rotate 195
+                pause 0.25
+                ease 0.5 rotate 210
+                ease 1 rotate 195
+                pause 0.25
+            choice:
+                ease 0.5 rotate 205 pos (225,620)
+                ease 0.75 rotate 200 pos (225,625)
+                ease 0.5 rotate 205 pos (225,620)
+                ease 0.75 rotate 200 pos (225,625)
+            choice:
+                ease 0.3 rotate 205 pos (225,620)
+                ease 0.3 rotate 200 pos (225,630)
+                ease 0.3 rotate 205 pos (225,620)
+                ease 0.3 rotate 200 pos (225,630)
+            repeat
+
+image GirlFingerPussy:
+    contains:
+        subpixel True
+        "UI_GirlFinger"
+        zoom 0.6
+        pos (230,630)
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 200
+        block:
+            choice:
+                ease 0.75 rotate 210 pos (230,635)
+                ease 0.5 rotate 195
+                ease 0.75 rotate 210
+                ease 0.5 rotate 195
+            choice:
+                ease 0.5 rotate 210 pos (230,635)
+                ease 1 rotate 195
+                pause 0.25
+                ease 0.5 rotate 210
+                ease 1 rotate 195
+                pause 0.25
+            choice:
+                ease 0.5 rotate 205 pos (230,635)
+                ease 0.75 rotate 200 pos (230,640)
+                ease 0.5 rotate 205 pos (230,635)
+                ease 0.75 rotate 200 pos (230,640)
+            choice:
+                ease 0.3 rotate 205 pos (230,635)
+                ease 0.3 rotate 200 pos (230,645)
+                ease 0.3 rotate 205 pos (230,635)
+                ease 0.3 rotate 200 pos (230,645)
+            repeat
+
+
+
+
+
+image Spunk_Drip:
+
+    contains:
+        "images/SpermdropB.png"
+        zoom 0.3
+        alpha 0
+        block:
+            choice:
+                pause 1
+            choice:
+                pause 0.5
+            choice:
+                pos (0,0)
+                alpha 1
+                easeout 2.5 ypos 70
+                easeout 0.9 ypos 350
+                alpha 0
+                pause 1
+            choice:
+                pos (9,0)
+                pause 0.2
+                alpha 1
+                easeout 2.5 ypos 75
+                easeout 0.9 ypos 350
+                alpha 0
+                pause 0.4
+            choice:
+                pos (6,0)
+                pause 0.4
+                alpha 1
+                easeout 2.5 ypos 65
+                easeout 0.9 ypos 350
+                alpha 0
+            choice:
+                pos (12,0)
+                pause 0.8
+                alpha 1
+                easeout 2.5 ypos 60
+                easeout 0.9 ypos 350
+                alpha 0
+            repeat
+
+image Spunk_Drip2:
+
+    contains:
+        "images/SpermdropB.png"
+        pos (0,0)
+        zoom 0.3
+        parallel:
+            pos (0,0)
+            alpha 1
+            easeout 2.5 ypos 70
+            easeout 0.9 ypos 350
+            alpha 0
+            pause 1
+            repeat
+    contains:
+        "images/SpermdropB.png"
+        pos (0,0)
+        zoom 0.3
+        parallel:
+            pos (9,0)
+            pause 0.2
+            alpha 1
+            easeout 2.5 ypos 75
+            easeout 0.9 ypos 350
+            alpha 0
+            pause 0.4
+            repeat
+    contains:
+        "images/SpermdropB.png"
+        pos (0,0)
+        zoom 0.3
+        parallel:
+            pos (6,0)
+            pause 0.4
+            alpha 1
+            easeout 2.5 ypos 65
+            easeout 0.9 ypos 350
+            alpha 0
+            repeat
+    contains:
+        "images/SpermdropB.png"
+        pos (0,0)
+        zoom 0.3
+        parallel:
+            pos (12,0)
+            pause 0.8
+            alpha 1
+            easeout 2.5 ypos 60
+            easeout 0.9 ypos 350
+            alpha 0
+            repeat
+
+
+image Spunk_Dripp:
+
+    contains:
+        "images/SpermdropP.png"
+        zoom 0.3
+        alpha 0
+        block:
+            choice:
+                pause 1
+            choice:
+                pause 0.5
+            choice:
+                pos (0,0)
+                alpha 1
+                easeout 2.5 ypos 70
+                easeout 0.9 ypos 350
+                alpha 0
+                pause 1
+            choice:
+                pos (9,0)
+                pause 0.2
+                alpha 1
+                easeout 2.5 ypos 75
+                easeout 0.9 ypos 350
+                alpha 0
+                pause 0.4
+            choice:
+                pos (6,0)
+                pause 0.4
+                alpha 1
+                easeout 2.5 ypos 65
+                easeout 0.9 ypos 350
+                alpha 0
+            choice:
+                pos (12,0)
+                pause 0.8
+                alpha 1
+                easeout 2.5 ypos 60
+                easeout 0.9 ypos 350
+                alpha 0
+            repeat
+
+image Wet_Drip:
+
+    contains:
+        "images/Wetdrop.png"
+        zoom 0.2
+        alpha 0
+        block:
+            choice:
+                pause 1
+            choice:
+                pause 0.5
+            choice:
+                pos (14,0)
+                alpha 0.8
+                easeout 0.9 ypos 70
+                easeout 0.9 ypos 350
+                alpha 0
+                pause 1
+            choice:
+                pos (9,0)
+                pause 0.2
+                alpha 0.8
+                easeout 0.9 ypos 75
+                easeout 0.9 ypos 350
+                alpha 0
+                pause 0.4
+            choice:
+                pos (6,0)
+                pause 0.4
+                alpha 0.8
+                easeout 0.9 ypos 65
+                easeout 0.9 ypos 350
+                alpha 0
+            choice:
+                pos (12,0)
+                pause 0.8
+                alpha 0.8
+                easeout 0.9 ypos 60
+                easeout 0.9 ypos 350
+                alpha 0
+            repeat
+
+image Wet_Drip2:
+
+    contains:
+        "images/Wetdrop.png"
+        pos (0,0)
+        zoom 0.2
+        parallel:
+            pos (14,0)
+            alpha 0.8
+            easeout 0.9 ypos 70
+            easeout 0.9 ypos 350
+            alpha 0
+            pause 1.5
+            repeat
+    contains:
+        "images/Wetdrop.png"
+        pos (0,0)
+        zoom 0.2
+        parallel:
+            pos (9,0)
+            pause 0.3
+            alpha 0.8
+            easeout 0.9 ypos 75
+            easeout 0.9 ypos 350
+            alpha 0
+            pause 0.6
+            repeat
+    contains:
+        "images/Wetdrop.png"
+        pos (0,0)
+        zoom 0.2
+        parallel:
+            pos (6,0)
+            pause 0.6
+            alpha 0.8
+            easeout 0.9 ypos 65
+            easeout 0.9 ypos 350
+            alpha 0
+            repeat
+    contains:
+        "images/Wetdrop.png"
+        pos (0,0)
+        zoom 0.2
+        parallel:
+            pos (12,0)
+            pause 0.8
+            alpha 0.8
+            easeout 0.9 ypos 60
+            easeout 0.9 ypos 350
+            alpha 0
+            pause 0.2
+            repeat
+
+
+image Zero_Chibicock:
+    LiveComposite(
+        (225,350),
+        (0,0), ConditionSwitch(
+            "Player.color == 'pink'", "images/Chibi_Cock_P.png",
+            "Player.color == 'brown'", "images/Chibi_Cock_B.png",
+            "Player.color == 'green'", "images/Chibi_Cock_G.png",
+            "True", Null(),
+            ),
+
+
+
+
+
+
+
+
+        )
+    anchor (0.5,0.5)
+
+
+
+image Chibi_Null:
+
+    contains:
+        "Zero_Chibicock"
+        anchor (0.5,0.5)
+        pos (0,0)
+        rotate 0
+        xzoom 1
+    pos (75,675)
+    zoom 0.5
+
+image Chibi_jerking_off:
+
+    contains:
+        "Zero_Chibicock"
+        anchor (0.5,0.5)
+        pos (0,0)
+        rotate 0
+        xzoom 1
+    contains:
+        subpixel True
+        "images/Chibi_Hand_M.png"
+        pos (-10,-80)
+        anchor (0.5,0.5)
+        rotate 20
+        block:
+            ease 0.3 rotate -10 pos (0,50)
+            ease 0.7 rotate 20 pos (-10,-80)
+            repeat
+    pos (75,675)
+    zoom 0.5
+
+image Chibi_Handy:
+
+    contains:
+        "Zero_Chibicock"
+        anchor (0.5,0.5)
+        pos (0,0)
+        rotate 0
+        xzoom 1
+    contains:
+        subpixel True
+        ConditionSwitch(
+            "(Partner == StormX and second_girl_primary_action == 'hand') or (focused_Girl == StormX and girl_offhand_action == 'hand')", "images/Chibi_Hand_S.png",
+            "True", "images/Chibi_Hand_G.png"
+            )
+
+        pos (0,-110)
+        anchor (0.5,0.5)
+        rotate -10
+        block:
+            ease 0.3 rotate 0 pos (10,10)
+            ease 0.7 rotate -10 pos (0,-130)
+            repeat
+    pos (75,675)
+    zoom 0.5
+
+image Chibi_Mouth_Mask:
+    "images/Chibi_Mouth_Mask.png"
+    anchor (0.5,0.5)
+
+image Chibi_Mouth_Rogue:
+    "images/Chibi_Mouth_R.png"
+    anchor (0.5,0.5)
+image Chibi_Mouth_Kitty:
+    "images/Chibi_Mouth_K.png"
+    anchor (0.5,0.5)
+image Chibi_Mouth_Emma:
+    "images/Chibi_Mouth_E.png"
+    anchor (0.5,0.5)
+image Chibi_Mouth_Storm:
+    "images/Chibi_Mouth_S.png"
+    anchor (0.5,0.5)
+
+image Chibi_Sucking:
+
+    contains:
+        "Chibi_SuckingB"
+    pos (75,675)
+
+image Chibi_SuckingB:
+
+    LiveComposite(
+        (225,350),
+        (0,0), ConditionSwitch(
+            "Partner == RogueX", "Chibi_Mouth_Rogue",
+            "Partner == EmmaX", "Chibi_Mouth_Emma",
+            "Partner == StormX", "Chibi_Mouth_Storm",
+            "True", "Chibi_Mouth_Kitty"
+            ),
+        (0,0), AlphaMask("Chibi_Sucking_Cock", "Chibi_Mouth_Mask")
+        )
+    subpixel True
+    pos (7,0)
+    anchor (0.5,0.5)
+    zoom 0.5
+    xzoom 0.71
+    block:
+        easeout 0.25 rotate 0 pos (2,48) xzoom 1
+        easein 0.25 rotate 0 pos (6,92) xzoom 1
+        easeout 0.5 rotate 0 pos (2,48) xzoom 1
+        easein 0.5 rotate 0 pos (5,0) xzoom 0.71
+        repeat
+
+image Chibi_Sucking_Cock:
+
+    contains:
+        subpixel True
+        "Zero_Chibicock"
+        pos (100,175)
+        xzoom 1.5
+        anchor (0.5,0.5)
+
+        rotate 0
+        block:
+            easeout 0.25 rotate 0 pos (110,80) xzoom 1
+            easein 0.25 rotate 0 pos (100,-10) xzoom 1
+            easeout 0.5 rotate 0 pos (110,80) xzoom 1
+            easein 0.5 rotate 0 pos (100,175) xzoom 1.5
+            repeat
+
+
+
+
+image Chibi_UI:
+
+    contains:
+        ConditionSwitch(
+            "'cockout' not in Player.recent_history", Null(),
+            "offhand_action == 'jerking_off'", "Chibi_jerking_off",
+            "girl_offhand_action == 'hand' or second_girl_primary_action == 'hand'", "Chibi_Handy",
+            "second_girl_primary_action == 'blow'", "Chibi_Sucking",
+            "True", "Chibi_Null",
+            )
