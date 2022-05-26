@@ -263,7 +263,7 @@ label Sex_shop:
                         "You give [Girl.name] the dildo."
                         $ Girl.blushing = "_blush1"
                         $ Girl.arm_pose = 2
-                        $ Girl.held_item = "_dildo"
+                        $ Girl.outfit["held_item"] = "_dildo"
                         if approval_check(Girl, 800):
                             $ Girl.change_face("_bemused")
                             $ Player.inventory.remove("_dildo")
@@ -407,7 +407,7 @@ label Sex_shop:
                             ch_s "I doubt I can find a place for this one."
                         elif Girl == JubesX:
                             ch_v "This is way too many. . ."
-                    $ Girl.held_item = None
+                    $ Girl.outfit["held_item"] = None
                     $ Girl.arm_pose = 2
                     $ Girl = 0
 
@@ -420,7 +420,7 @@ label Sex_shop:
                         "You give [Girl.name] the Shocker Vibrator."
                         $ Girl.blushing = "_blush1"
                         $ Girl.arm_pose = 2
-                        $ Girl.held_item = "_vibrator"
+                        $ Girl.outfit["held_item"] = "_vibrator"
                         if approval_check(Girl, 700):
                             $ Girl.change_face("_bemused")
                             $ Player.inventory.remove("_vibrator")
@@ -530,7 +530,7 @@ label Sex_shop:
                             ch_e "I already have plenty."
                         else:
                             Girl.voice "I already have one of these."
-                    $ Girl.held_item = None
+                    $ Girl.outfit["held_item"] = None
                     $ Girl.arm_pose = 2
                     $ Girl = 0
 
@@ -589,7 +589,7 @@ label Swim_shop:
         if Girl:
 
             $ Girl.change_face("_smile",1)
-            if Girl.swimwear[0]:
+            if Girl.swimwear["outfit_active"]:
 
                 if Girl == RogueX:
                     ch_r "I'm already set on that. . ."
@@ -951,9 +951,9 @@ label Swim_shop:
 
                         $ Player.drain_word("purchased")
                         if Girl == KittyX and ("_blue_skirt" in Girl.inventory or Girl.inhibition >= 400) and "_bikini_top" in Girl.inventory and "_bikini_bottoms" in Girl.inventory:
-                            $ Girl.swimwear[0] = 1
+                            $ Girl.swimwear["outfit_active"] = 1
                         elif "_bikini_top" in Girl.inventory and "_bikini_bottoms" in Girl.inventory:
-                            $ Girl.swimwear[0] = 1
+                            $ Girl.swimwear["outfit_active"] = 1
                         $ Girl = 0
 
 

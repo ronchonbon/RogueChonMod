@@ -18,7 +18,7 @@ label gifts:
 
                             $ Girl.blushing = "_blush1"
                             $ Girl.arm_pose = 2
-                            $ Girl.held_item = "_dildo"
+                            $ Girl.outfit["held_item"] = "_dildo"
 
                             if approval_check(Girl, 800):
                                 $ Player.inventory.remove("_dildo")
@@ -198,7 +198,7 @@ label gifts:
                             elif Girl == JubesX:
                                 ch_v "This is way too many. . ."
 
-                        $ Girl.held_item = None
+                        $ Girl.outfit["held_item"] = None
                         $ Girl.arm_pose = 2
                     "Give her the vibrator." if "_vibrator" in Player.inventory:
                         if "_vibrator" not in Girl.inventory:
@@ -206,7 +206,7 @@ label gifts:
 
                             $ Girl.blushing = "_blush1"
                             $ Girl.arm_pose = 2
-                            $ Girl.held_item = "_vibrator"
+                            $ Girl.outfit["held_item"] = "_vibrator"
 
                             if approval_check(Girl, 700):
                                 $ Player.inventory.remove("_vibrator")
@@ -340,7 +340,7 @@ label gifts:
                             else:
                                 Girl.voice "I already have one of these."
 
-                        $ Girl.held_item = None
+                        $ Girl.outfit["held_item"] = None
                         $ Girl.arm_pose = 2
                     "Give her a butt plug." if "_buttplug" in Player.inventory:
                         if "_buttplug" not in Girl.inventory:
@@ -1065,9 +1065,9 @@ label gifts:
 
                                 if Girl == KittyX:
                                     if Girl.inhibition >= 400 or "_blue_skirt" in Girl.inventory:
-                                        $ Girl.swimwear[0] = 1
+                                        $ Girl.swimwear["outfit_active"] = 1
                                 else:
-                                    $ Girl.swimwear[0] = 1
+                                    $ Girl.swimwear["outfit_active"] = 1
                         else:
                             Girl.voice "I already have one of those."
                     "Give her the bikini bottoms." if Girl.tag + "_bikini_bottoms" in Player.inventory:
@@ -1196,9 +1196,9 @@ label gifts:
 
                                 if Girl == KittyX:
                                     if Girl.inhibition >= 400 or "_blue_skirt" in Girl.inventory:
-                                        $ Girl.swimwear[0] = 1
+                                        $ Girl.swimwear["outfit_active"] = 1
                                 else:
-                                    $ Girl.swimwear[0] = 1
+                                    $ Girl.swimwear["outfit_active"] = 1
                         else:
                             Girl.voice "I already have one of those."
                     "Give her the blue skirt." if Girl.tag + "_blue_skirt" in Player.inventory:
@@ -1264,7 +1264,7 @@ label gifts:
                                 $ Girl.recent_history.append("no_gift_skirt")
                                 $ Girl.daily_history.append("no_gift_skirt")
                             if Girl == KittyX and "_bikini_top" in Girl.inventory and "_bikini_bottoms" in Girl.inventory:
-                                $ Girl.swimwear[0] = 1
+                                $ Girl.swimwear["outfit_active"] = 1
                         else:
                             Girl.voice "I already have one of those."
                     "Give her the stockings and garterbelt." if "_stockings_and_garterbelt" in Player.inventory:

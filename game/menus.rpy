@@ -1100,7 +1100,7 @@ label fondle_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            call expression focused_Girl.tag + "_Pos_Reset"
+            call expression focused_Girl.tag + "_Pos_Reset" pass(primary_action)
 
             $ action_context = "shift"
 
@@ -1109,7 +1109,7 @@ label fondle_menu:
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            call expression focused_Girl.tag + "_Pos_Reset"
+            call expression focused_Girl.tag + "_Pos_Reset" pass(primary_action)
             jump after_action
 
     jump action_menu_return
@@ -1375,7 +1375,7 @@ label handjob_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            call expression focused_Girl.tag + "_HJ_Reset"
+            call expression focused_Girl.tag + "_HJ_Reset" pass(primary_action)
 
             $ action_context = "shift"
 
@@ -1384,7 +1384,7 @@ label handjob_menu:
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            call expression focused_Girl.tag + "_HJ_Reset"
+            call expression focused_Girl.tag + "_HJ_Reset" pass(primary_action)
             jump after_action
 
     jump action_menu_return
@@ -1528,7 +1528,7 @@ label sex_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            call expression focused_Girl.tag + "_Sex_Reset"
+            call expression focused_Girl.tag + "_Sex_Reset" pass(primary_action)
 
             $ action_context = "shift"
 
@@ -1537,7 +1537,7 @@ label sex_menu:
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            call expression focused_Girl.tag + "_Sex_Reset"
+            call expression focused_Girl.tag + "_Sex_Reset" pass(primary_action)
             jump after_action
 
     jump action_menu_return

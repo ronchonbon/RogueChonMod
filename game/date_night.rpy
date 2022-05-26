@@ -407,7 +407,7 @@ label Date_Ask(Girl=0):
                     elif Girl == LauraX:
                         ch_l "Dick."
                     elif Girl == JeanX:
-                        $ Girl.change_face("_angry",1,eyes="psychic")
+                        $ Girl.change_face("_angry",1,eyes="_psychic")
                         ch_j ". . ."
                         $ Girl.change_face("_angry",1)
                     elif Girl == StormX:
@@ -1648,7 +1648,7 @@ label Date_Prep(Girl=0):
         elif Girl.clothing[7] == 3:
             $ Girl.outfit_name = "custom1"
         elif Girl.clothing[7] == 4:
-            $ Girl.outfit_name = "gym"
+            $ Girl.outfit_name = "gym_clothes"
         elif Girl.clothing[7] == 5:
             $ Girl.outfit_name = "custom2"
         elif Girl.clothing[7] == 6:
@@ -1657,9 +1657,9 @@ label Date_Prep(Girl=0):
             $ Girl.outfit_name = "casual1"
     else:
         $ Options = ["casual2", "casual1"]
-        $ Options.append("custom1") if Girl.first_custom_outfit[0] == 2 else Options
-        $ Options.append("custom2") if Girl.second_custom_outfit[0] == 2 else Options
-        $ Options.append("custom3") if Girl.third_custom_outfit[0] == 2 else Options
+        $ Options.append("custom1") if Girl.first_custom_outfit["outfit_active"] == 2 else Options
+        $ Options.append("custom2") if Girl.second_custom_outfit["outfit_active"] == 2 else Options
+        $ Options.append("custom3") if Girl.third_custom_outfit["outfit_active"] == 2 else Options
         $ renpy.random.shuffle(Options)
         $ Girl.outfit_name = Options[0]
         $ del Options[:]
@@ -3898,7 +3898,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
     if JeanX in Party and line in (JeanX,"split","deadbeat"):
 
         ch_j "Waiter?"
-        $ JeanX.change_face("_confused",eyes="psychic")
+        $ JeanX.change_face("_confused",eyes="_psychic")
         ch_j ". . ."
         $ JeanX.change_face("_sly")
         ch_j "There, that should cover it."

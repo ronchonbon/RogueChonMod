@@ -1,20 +1,3 @@
-image title card = "images/titleimage.jpg"
-image night_mask = "images/nightmask.png"
-
-image UI_Backpack = "images/UI_Backpack_idle.png"
-image UI_Dildo = "images/UI_Dildo.png"
-image UI_VibA = "images/UI_VibA.png"
-image UI_VibB = "images/UI_VibB.png"
-image UI_Tongue = "images/UI_Tongue.png"
-image UI_Finger = "images/UI_Finger.png"
-image UI_Hand = "images/UI_Hand.png"
-image UI_GirlFinger = "images/UI_GirlFinger.png"
-image UI_GirlHand = "images/UI_GirlHand.png"
-
-image UI_PartnerHand:
-    ConditionSwitch("Partner == StormX", "images/UI_GirlHandS.png",
-            "True", "images/UI_GirlHand.png")
-
 image black_screen:
     Solid("#000000")
     on show:
@@ -24,27 +7,27 @@ image black_screen:
         alpha 1.0
         linear 0.4 alpha 0.0
 
-define ch_p = Character('[Player.name]', color="#87CEEB", show_two_window = True)
+define ch_p = Character('[Player.name]', color = "#87CEEB", show_two_window = True)
 
-define ch_r = Character('[RogueX.name]', color="#85bb65", image = "arrow", show_two_window = True)
-define ch_k = Character('[KittyX.name]', color="#F5A9D0", image = "arrow", show_two_window = True)
-define ch_e = Character('[EmmaX.name]', color="#98bee7", image = "arrow", show_two_window = True)
-define ch_l = Character('[LauraX.name]', color="#d8b600", image = "arrow", show_two_window = True)
-define ch_j = Character('[JeanX.name]', color="#b2d950", image = "arrow", show_two_window = True)
-define ch_s = Character('[StormX.name]', color="#b2d950", image = "arrow", show_two_window = True)
-define ch_v = Character('[JubesX.name]', color="#b2d950", image = "arrow", show_two_window = True)
+define ch_r = Character('[RogueX.name]', color = "#85bb65", image = "arrow", show_two_window = True)
+define ch_k = Character('[KittyX.name]', color = "#F5A9D0", image = "arrow", show_two_window = True)
+define ch_e = Character('[EmmaX.name]', color = "#98bee7", image = "arrow", show_two_window = True)
+define ch_l = Character('[LauraX.name]', color = "#d8b600", image = "arrow", show_two_window = True)
+define ch_j = Character('[JeanX.name]', color = "#b2d950", image = "arrow", show_two_window = True)
+define ch_s = Character('[StormX.name]', color = "#b2d950", image = "arrow", show_two_window = True)
+define ch_v = Character('[JubesX.name]', color = "#b2d950", image = "arrow", show_two_window = True)
 
-define ch_x = Character('Professor X', color="#a09400", image = "arrow", show_two_window = True)
-define ch_b = Character('Dr. McCoy', color="#1033b2", image = "arrow", show_two_window = True)
+define ch_x = Character('Professor X', color = "#a09400", image = "arrow", show_two_window = True)
+define ch_b = Character('Dr. McCoy', color = "#1033b2", image = "arrow", show_two_window = True)
 
-define ch_u = Character('???', color="#85bb65", image = "arrow", show_two_window = True)
+define ch_u = Character('???', color = "#85bb65", image = "arrow", show_two_window = True)
 
 label splashscreen:
     if not config.developer:
         scene black onlayer backdrop
         with Pause(1)
 
-        show expression "images/Onirating.jpg"
+        show expression "images/Onirating.png"
         show text "This title is for ages 18 and up." with dissolve
         with Pause(2)
 
@@ -119,18 +102,18 @@ init -1:
 
     default always_return_to_room = 1
 
-    default stage_far_left = 150
-    default stage_left = 350
-    default stage_center = 550
-    default stage_right = 715
-    default stage_far_right = 900
+    default stage_far_left = 0.2
+    default stage_left = 0.33
+    default stage_center = 0.5
+    default stage_right = 0.66
+    default stage_far_right = 0.8
 
     default number_of_holders = 1
 
     default Xavier_brows = "_happy"
     default Xavier_eyes = "_happy"
-    default Xavier_mouth = "_happy"
-    default Xavier_psychic = 0
+    default Xavier_mouth = "_smile"
+    default Xavier_psychic = False
     default Xavier_emotion = "_happy"
     default Xavier_Sprite_location = stage_center
 
@@ -189,6 +172,34 @@ label start:
 
     show screen status_screen
     show screen inventory_button
+
+    # $ bg_current = "bg_emma"
+    # $ time_index = 2
+    # $ current_time = "evening"
+    #
+    # scene background onlayer backdrop
+    # scene
+    #
+    # $ JeanX.change_outfit("bondage_outfit")
+    # $ JeanX.change_face("_surprised")
+    # $ JeanX.bound = True
+    # $ JeanX.whipped = True
+    # show Jean_Sprite at sprite_location(stage_center)
+    # $ EmmaX.change_outfit("domme_outfit")
+    # $ EmmaX.change_face("_sexy")
+    # show Emma_Sprite at sprite_location(stage_left)
+    # $ RogueX.change_face("_surprised")
+    # show Rogue_sprite at sprite_location(stage_right)
+    # $ LauraX.change_face("_surprised")
+    # show Laura_Sprite at sprite_location(0.8)
+    # $ KittyX.change_face("_surprised")
+    # show Kitty_sprite at sprite_location(stage_far_left)
+    # $ StormX.change_face("_surprised")
+    # show Storm_Sprite at sprite_location(0.05)
+    # $ JubesX.change_face("_surprised")
+    # show Jubes_Sprite at sprite_location(0.94)
+    #
+    # ""
 
     jump prologue
 

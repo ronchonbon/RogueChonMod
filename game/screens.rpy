@@ -1,34 +1,12 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-screen say(who, what, side_image=None, two_window=False, CountWords=0):
-
-
-
+screen say(who, what, side_image = None, two_window = False, count_words = 0):
     if who == "N":
         $ who = focused_Girl.name
 
     if not two_window:
-
         window:
-
-
-
-            pos (0.0,0.1)
-            anchor (0.0,0.0)
+            pos (0.05, 0.2)
 
             style "textbox"
-
             id "textbox"
 
             has vbox:
@@ -38,21 +16,20 @@ screen say(who, what, side_image=None, two_window=False, CountWords=0):
                 text who id "who"
 
             text what id "what" color "#000000" font "CRIMFBRG.ttf"
-
     else:
+        if who == "Rogue" and RogueX.outfit["gag"]:
+            $ count_words = 1
+        elif who == "Kitty" and KittyX.outfit["gag"]:
+            $ count_words = 1
 
-
-        if who == "Rogue" and RogueX.gag:
-            $ CountWords = 1
-        elif who == "Kitty" and KittyX.gag:
-            $ CountWords = 1
-        if CountWords == 1:
-            $ CountWords = what.count(" ") if what.count(" ") <= 10 else 10
-            $ CountWords = CountWords - what.count(".")
+        if count_words == 1:
+            $ count_words = what.count(" ") if what.count(" ") <= 10 else 10
+            $ count_words = count_words - what.count(".")
             $ what = ""
             python:
-                while CountWords >= 0:
-                    CountWords -= 1
+                while count_words >= 0:
+                    count_words -= 1
+
                     what = what + renpy.random.choice(["Mrph",
                                                     "Hrgaph",
                                                     "Rhgn",
@@ -62,81 +39,71 @@ screen say(who, what, side_image=None, two_window=False, CountWords=0):
                                                     "Grde",
                                                     "Phraph",
                                                     "Ugh"])
-                    if CountWords:
+
+                    if count_words:
                         what = what + " "
                     else:
                         what = what + "."
 
-
         vbox:
-
-            pos (0.0,0.1)
-            anchor (0.0,0.0)
+            pos (0.0, 0.35)
 
             style "say_two_window_vbox"
 
             window:
-                if who == Gwen_name:
-                    style "say_balloon" background Frame("images/WordballoonG.png", 50, 50)
-                else:
-                    style "say_balloon"
-
-
-
+                style "say_balloon"
 
                 text what id "what" color "#000000" font "CRIMFBRG.ttf" text_align 0.5
 
             if who == RogueX.name:
-                if RogueX.location != bg_current or RogueX.sprite_location == stage_far_left:
-                    add "arrow" xalign 0.1
-                elif RogueX.sprite_location == stage_right or RogueX.sprite_location == stage_far_right:
-                    add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
-                else:
+                # if RogueX.location != bg_current or RogueX.sprite_location == stage_far_left:
+                #     add "arrow" xalign 0.1
+                # elif RogueX.sprite_location == stage_right or RogueX.sprite_location == stage_far_right:
+                #     add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
+                # else:
                     add "arrow" xalign 0.8
             elif who == KittyX.name:
-                if KittyX.location != bg_current or KittyX.sprite_location == stage_far_left:
-                    add "arrow" xalign 0.1
-                elif KittyX.sprite_location == stage_right or KittyX.sprite_location == stage_far_right:
-                    add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
-                else:
+                # if KittyX.location != bg_current or KittyX.sprite_location == stage_far_left:
+                #     add "arrow" xalign 0.1
+                # elif KittyX.sprite_location == stage_right or KittyX.sprite_location == stage_far_right:
+                #     add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
+                # else:
                     add "arrow" xalign 0.8
             elif who == EmmaX.name:
-                if EmmaX.location != bg_current or EmmaX.sprite_location == stage_far_left:
-                    add "arrow" xalign 0.1
-                elif EmmaX.sprite_location == stage_right or EmmaX.sprite_location == stage_far_right:
-                    add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
-                else:
+                # if EmmaX.location != bg_current or EmmaX.sprite_location == stage_far_left:
+                #     add "arrow" xalign 0.1
+                # elif EmmaX.sprite_location == stage_right or EmmaX.sprite_location == stage_far_right:
+                #     add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
+                # else:
                     add "arrow" xalign 0.8
             elif who == LauraX.name:
-                if LauraX.location != bg_current or LauraX.sprite_location == stage_far_left:
-                    add "arrow" xalign 0.1
-                elif LauraX.sprite_location == stage_right or LauraX.sprite_location == stage_far_right:
-                    add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
-                else:
+                # if LauraX.location != bg_current or LauraX.sprite_location == stage_far_left:
+                #     add "arrow" xalign 0.1
+                # elif LauraX.sprite_location == stage_right or LauraX.sprite_location == stage_far_right:
+                #     add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
+                # else:
                     add "arrow" xalign 0.8
             elif who == JeanX.name:
-                if JeanX.location != bg_current or JeanX.sprite_location == stage_far_left:
-                    add "arrow" xalign 0.1
-                elif JeanX.sprite_location == stage_right or JeanX.sprite_location == stage_far_right:
-                    add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
-                else:
+                # if JeanX.location != bg_current or JeanX.sprite_location == stage_far_left:
+                #     add "arrow" xalign 0.1
+                # elif JeanX.sprite_location == stage_right or JeanX.sprite_location == stage_far_right:
+                #     add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
+                # else:
                     add "arrow" xalign 0.8
             elif who == StormX.name:
-                if StormX.location != bg_current or StormX.sprite_location == stage_far_left:
-                    add "arrow" xalign 0.1
-                elif StormX.sprite_location == stage_right or StormX.sprite_location == stage_far_right:
-                    add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
-                else:
+                # if StormX.location != bg_current or StormX.sprite_location == stage_far_left:
+                #     add "arrow" xalign 0.1
+                # elif StormX.sprite_location == stage_right or StormX.sprite_location == stage_far_right:
+                #     add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
+                # else:
                     add "arrow" xalign 0.8
             elif who == JubesX.name:
-                if JubesX.location != bg_current or JubesX.sprite_location == stage_far_left:
-                    add "arrow" xalign 0.1
-                elif JubesX.sprite_location == stage_right or JubesX.sprite_location == stage_far_right:
-                    add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
-                else:
+                # if JubesX.location != bg_current or JubesX.sprite_location == stage_far_left:
+                #     add "arrow" xalign 0.1
+                # elif JubesX.sprite_location == stage_right or JubesX.sprite_location == stage_far_right:
+                #     add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
+                # else:
                     add "arrow" xalign 0.8
-            elif who == Gwen_name:
-                add "arrowG" xalign 0.15
             elif who == Player.name or who == "Danger Room":
                 pass
             elif who == "Professor X":
@@ -145,21 +112,17 @@ screen say(who, what, side_image=None, two_window=False, CountWords=0):
                 add "arrow" xalign 0.8
 
         if who:
-
             window:
-                pos (0.1,0.07)
-                anchor (0.5,0)
+                pos (0.1, 0.07)
+                anchor (0.5, 0)
                 style "say_who_window"
-
 
                 text who:
                     size 15
                     id "who"
                     font "CRIMFBRG.ttf"
 
-
     use quick_menu
-
 
 image side arrow = "arrow"
 
@@ -167,24 +130,13 @@ image arrow:
     "images/Arrow.png"
     ypos -17
     xalign 0.5
-    zoom 1
-    rotate 0
 
 image arrowG:
     "images/ArrowG.png"
     ypos -17
     xalign 0.5
-    zoom 1
-    rotate 0
-
-
-
-
-
-
 
 screen choice(items):
-
     window:
         style "menu_window"
         xpos 20
@@ -205,39 +157,26 @@ screen choice(items):
                         style "menu_choice_button"
                         background "#424242"
                         text caption style "menu_choice" color "#6E6E6E"
-
-
-
                 else:
                     button:
                         action action
                         style "menu_choice_button"
-
                         text caption style "menu_choice"
-
             else:
                 text caption style "menu_caption"
 
 init -2:
+
     $ config.narrator_menu = True
     style menu_window is default
 
     style menu_choice is button_text clear
 
-
     style menu_choice_button is button:
         xminimum int(config.screen_width*0.30)
         xmaximum int(config.screen_width*0.30)
 
-
-
-
-
-
-
-
 screen input(prompt):
-
     window style "input_window":
         has vbox
 
@@ -246,20 +185,12 @@ screen input(prompt):
 
     use quick_menu
 
-
-
-
-
-
-
 screen nvl(dialogue, items=None):
-
     window:
         style "nvl_window"
 
         has vbox:
             style "nvl_vbox"
-
 
         for who, what, who_id, what_id, window_id in dialogue:
             window:
@@ -273,41 +204,25 @@ screen nvl(dialogue, items=None):
 
                 text what id what_id
 
-
         if items:
-
             vbox:
                 id "menu"
 
                 for caption, action, chosen in items:
-
                     if action:
-
                         button:
                             style "nvl_menu_choice_button"
                             action action
-
                             text caption style "nvl_menu_choice"
-
                     else:
-
                         text caption style "nvl_dialogue"
 
     add SideImage() xalign 0.0 yalign 1.0
 
     use quick_menu
 
-
-
-
-
-
-
 screen main_menu():
     tag menu
-
-
-
 
     window:
         style "mm_root"
@@ -329,24 +244,12 @@ screen main_menu():
 
 init -2:
 
-
     style mm_button:
         size_group "mm"
 
-
-
-
-
-
-
-
-
 screen navigation():
-
-
     window:
         style "gm_root"
-
 
     frame:
         style_group "gm_nav"
@@ -365,30 +268,14 @@ screen navigation():
 
 init -2:
 
-
     style gm_nav_button:
         size_group "gm_nav"
 
-
-
-
-
-
-
-
-
-
-
-
-
 screen file_picker():
-
     frame:
         style "file_picker_frame"
 
         has vbox
-
-
 
         hbox:
             style_group "file_picker_nav"
@@ -412,22 +299,17 @@ screen file_picker():
         $ columns = 2
         $ rows = 5
 
-
         grid columns rows:
             transpose True
             xfill True
             style_group "file_picker"
 
-
             for i in range(1, columns*rows + 1):
-
-
                 button:
                     action FileAction(i)
                     xfill True
 
                     has hbox
-
 
                     add FileScreenshot(i)
 
@@ -439,11 +321,8 @@ screen file_picker():
 
                     key "save_delete" action FileDelete(i)
 
-
 screen save():
     tag menu
-
-
 
     use navigation
     use file_picker
@@ -451,37 +330,25 @@ screen save():
 screen load():
     tag menu
 
-
-
     use navigation
     use file_picker
 
 init -2:
+
     style file_picker_frame is menu_frame
     style file_picker_nav_button is small_button
     style file_picker_nav_button_text is small_button_text
     style file_picker_button is large_button
     style file_picker_text is large_button_text
 
-
-
-
-
-
-
-
 screen preferences():
     tag menu
 
-
-
     use navigation
-
 
     grid 3 1:
         style_group "prefs"
         xfill True
-
 
         vbox:
             frame:
@@ -504,7 +371,7 @@ screen preferences():
                 style_group "pref"
                 has vbox
 
-                label _("Text action_speed")
+                label _("Text Speed")
                 bar value Preference("text speed")
 
             frame:
@@ -512,7 +379,6 @@ screen preferences():
                 has vbox
 
                 textbutton _("Joystick..") action Preference("joystick")
-
 
         vbox:
             frame:
@@ -553,36 +419,8 @@ screen preferences():
                 has vbox
                 label _("There is no Audio")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 init -2:
+
     style pref_frame:
         xfill True
         xmargin 5
@@ -602,15 +440,7 @@ init -2:
     style soundtest_button:
         xalign 1.0
 
-
-
-
-
-
-
-
 screen yesno_prompt(message, yes_action, no_action):
-
     modal True
 
     window:
@@ -640,10 +470,10 @@ screen yesno_prompt(message, yes_action, no_action):
             textbutton _("Yes") action yes_action
             textbutton _("No") action no_action
 
-
     key "game_menu" action no_action
 
 init -2:
+
     style yesno_button:
         size_group "yesno"
 
@@ -651,14 +481,7 @@ init -2:
         text_align 0.5
         layout "subtitle"
 
-
-
-
-
-
 screen quick_menu():
-
-
     hbox:
         style_group "quick"
 
@@ -675,13 +498,12 @@ screen quick_menu():
         textbutton _("Prefs") action ShowMenu('preferences')
 
 init -2:
-    style quick_button is default:
 
+    style quick_button is default:
         background None
         xpadding 5
 
     style quick_button_text is default:
-
         size 12
         idle_color "#8888"
         hover_color "#ccc"
@@ -689,168 +511,120 @@ init -2:
         selected_hover_color "#cc0"
         insensitive_color "#4448"
 
-
-
-
-
-
-
-
-
-screen roguebutton:
-    imagebutton:
-        auto "images/Button_Rogue_%s.png"
-        action ui.callsinnewcontext("RogueWardrobe")
-        xpos 690
-        ypos 5
-        focus_mask True
-
-
-
-
-screen statbutton:
-
-    imagebutton:
-        auto "images/Button_Rogue_%s.png"
-        action ui.calls("RogueStats")
-        xpos 730
-        ypos 5
-        focus_mask True
-
-
-
-
 screen inventory_button:
     imagebutton:
         auto "images/UI_Backpack_%s.png"
         action Show("Inventory_screen")
-        xpos 780
-        ypos 5
+        pos (0.81, 0.015)
         focus_mask True
 
-
-
-
-
 image Alt_Screen_Mask:
-
     contains:
-        Solid("#159457", xysize=(800,150))
+        Solid("#159457", xysize = (800, 150))
         alpha .5
-        pos (0,-20)
+        pos (0.0, 0.0)
 
 screen status_screen:
-
     default tt = Tooltip(" ")
-
 
     if Partner in all_Girls:
         frame:
             background None
-            pos (-100,30)
+            pos (0.0, 0.3)
 
-            add AlphaMask("images/BarBackdrop_"+Partner.tag+".png", "Alt_Screen_Mask")
+            add AlphaMask("images/BarBackdrop_" + Partner.tag + ".png", "Alt_Screen_Mask")
+
             frame:
                 style_group "stat_bar"
-                pos (100,25)
+                pos (0.0, 0.2)
                 background None
                 has vbox
+
                 hbox:
                     imagebutton idle "images/iconlust.png" hover "images/iconlust.png" action NullAction() hovered tt.Action("Lust: [Partner.lust]")
-                    bar range 100 value Partner.lust xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+                    bar range 100 value Partner.lust xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
 
                     imagebutton idle "images/iconlove.png" hover "images/iconlove.png" action NullAction() hovered tt.Action("Love: [Partner.love]")
-                    bar range 100 value (Partner.love/10) xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+                    bar range 100 value (Partner.love/10) xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
 
                     imagebutton idle "images/iconobed.png" hover "images/iconobed.png" action NullAction() hovered tt.Action("Obedience: [Partner.obedience]")
-                    bar range 100 value (Partner.obedience/10) xmaximum 100 left_bar "images/barfullO.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+                    bar range 100 value (Partner.obedience/10) xmaximum 200 ymaximum 40 left_bar "images/barfullO.png" right_bar "images/barempty.png"
 
                     imagebutton idle "images/iconinbt.png" hover "images/iconinbt.png" action NullAction() hovered tt.Action("Inhibitions: [Partner.inhibition]")
-                    bar range 100 value (Partner.inhibition/10) xmaximum 100 left_bar "images/barfulli.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
-
-
-
-
-
+                    bar range 100 value (Partner.inhibition/10) xmaximum 200 ymaximum 40 left_bar "images/barfulli.png" right_bar "images/barempty.png"
 
     if focused_Girl in all_Girls:
-        add "images/BarBackdrop_"+focused_Girl.tag+".png"
+        add "images/BarBackdrop_" + focused_Girl.tag + ".png"
         frame:
             style_group "stat_bar"
-            xminimum 130
+            pos (0.0, 0.0)
             background None
             has vbox
+
             hbox:
                 imagebutton idle "images/iconlove.png" hover "images/iconlove.png" action NullAction() hovered tt.Action("Love: [focused_Girl.love]")
-                bar range 100 value (focused_Girl.love/10) xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+                bar range 100 value (focused_Girl.love/10) xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
+
             hbox:
                 imagebutton idle "images/iconlust.png" hover "images/iconlust.png" action NullAction() hovered tt.Action("Lust: [focused_Girl.lust]")
-                bar range 100 value focused_Girl.lust xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+                bar range 100 value focused_Girl.lust xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
+
         frame:
-            xminimum 130
-            xpos 130
+            pos (0.15, 0.0)
             background None
             has vbox
+
             hbox:
                 imagebutton idle "images/iconobed.png" hover "images/iconobed.png" action NullAction() hovered tt.Action("Obedience: [focused_Girl.obedience]")
-                bar range 100 value (focused_Girl.obedience/10) xmaximum 100 left_bar "images/barfullO.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+                bar range 100 value (focused_Girl.obedience/10) xmaximum 200 ymaximum 40 left_bar "images/barfullO.png" right_bar "images/barempty.png"
+
             hbox:
                 imagebutton idle "images/iconaddict.png" hover "images/iconaddict.png" action NullAction() hovered tt.Action("Addiction: [focused_Girl.addiction]")
-                bar range 100 value focused_Girl.addiction xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 6 thumb None thumb_offset 0
+                bar range 100 value focused_Girl.addiction xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
+
         frame:
-            xminimum 130
-            xpos 260
+            pos (0.3, 0.0)
             background None
             has vbox
+
             hbox:
                 imagebutton idle "images/iconinbt.png" hover "images/iconinbt.png" action NullAction() hovered tt.Action("Inhibitions: [focused_Girl.inhibition]")
-                bar range 100 value (focused_Girl.inhibition/10) xmaximum 100 left_bar "images/barfulli.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+                bar range 100 value (focused_Girl.inhibition/10) xmaximum 200 ymaximum 40 left_bar "images/barfulli.png" right_bar "images/barempty.png"
+
             hbox:
                 imagebutton idle "images/iconaddictrate.png" hover "images/iconaddictrate.png" action NullAction() hovered tt.Action("Addiction Rate: [focused_Girl.addiction_rate]")
-                bar range 100 value (focused_Girl.addiction_rate*10) xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+                bar range 100 value (focused_Girl.addiction_rate*10) xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
+
         showif not primary_action:
+            imagebutton auto "images/Button_" + focused_Girl.tag + "_%s.png" action ShowTransient("Focus_Map") pos (0.71, 0.016) focus_mask True
 
-            imagebutton auto "images/Button_"+focused_Girl.tag+"_%s.png" action ShowTransient("Focus_Map") xpos 690 ypos 5 focus_mask True
         showif config.developer:
-            imagebutton auto "images/Button_"+focused_Girl.tag+"_%s.png" action ui.callsinnewcontext("StatHacks",focused_Girl) xpos 730 ypos 5 focus
-
-
+            imagebutton auto "images/Button_" + focused_Girl.tag + "_%s.png" action ui.callsinnewcontext("StatHacks",focused_Girl) pos (0.755, 0.016) focus
 
     frame:
+        pos (0.45, 0.0085)
+        background None
+        has vbox
 
-        xminimum 130
-        xpos 390
+        hbox:
+            bar range 100 value Player.focus xmaximum 200 ymaximum 40 left_bar "images/barfullP.png" right_bar "images/baremptyP.png"
+
+        hbox:
+            bar range 100 value (Player.semen*20) xmaximum 200 ymaximum 40 left_bar "images/barfullS.png" right_bar "images/baremptyS.png"
+
+    frame:
+        minimum (200, 0) pos (0.58, 0.015)
         background None
         has vbox
         hbox:
-            bar range 100 value Player.focus xmaximum 100 left_bar "images/barfullP.png" right_bar "images/baremptyP.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+            text "Money: $[Player.cash]" size 18
         hbox:
-            bar range 100 value (Player.semen*20) xmaximum 100 left_bar "images/barfullS.png" right_bar "images/baremptyS.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
-        imagebutton auto "images/Button_Emma_%s.png" action ui.callsinnewcontext("StatHacks",EmmaX) xpos 730 ypos 5 focus
+            text "Level: [Player.level]" size 18
+        hbox:
+            text "[focused_Girl.tag] Level: [focused_Girl.level]" size 18
 
     frame:
-
-        xminimum 75
-        xpos 500
-        background None
-        has vbox
-        hbox:
-            text "Money: $[Player.cash]" size 12
-        hbox:
-            text "Level: [Player.level]" size 12
-        hbox:
-            text "[focused_Girl.tag] Level: [focused_Girl.level]" size 12
-
-        window:
-            pos (90,-40)
-            anchor (0,0)
-            style "say_who_window"
-            text "[focused_Girl.name]" size 12 font "CRIMFBRG.ttf" color "#000000"
-
-    frame:
-
-        xpos 900
-        ypos 20
+        pos (0.905, 0.047)
         background None
 
         add "images/Clockbase.png":
@@ -860,87 +634,51 @@ screen status_screen:
 
         if round < 50:
             add "images/Clockred.png" at rotate_red(round):
-                anchor (0.5,0.5)
+                anchor (0.5, 0.5)
                 subpixel True
         else:
             add "images/Clockwhite.png" at rotate_white(round):
                 anchor (0.5,0.5)
                 subpixel True
 
-
-
-        imagebutton idle "images/Clockface.png" hover "images/Clockface.png" action NullAction() hovered tt.Action("Time Left: [round]%") anchor (0.5,0.5)
+        imagebutton idle "images/Clockface.png" hover "images/Clockface.png" action NullAction() hovered tt.Action("Time Left: [round]%") anchor (0.5, 0.5)
 
     frame:
-
-        xminimum 130
-        xpos 920
+        minimum (200, 0) pos (0.93, 0.018)
         background None
         has vbox
         hbox:
-            text "Day: [day] [day_of_week]" size 12
+            text "Day: [day] [day_of_week]" size 18
         hbox:
-            text "Time: [current_time]" size 12
+            text "Time: [current_time]" size 16
         hbox:
-            text "Stack depth: [stack_depth]" size 8
-    frame:
+            text "Stack depth: [stack_depth]" size 14
 
-        xpos 920
-        ypos 30
+    frame:
+        pos (0.905, 0.1)
         background None
         has vbox
         hbox:
             if RogueX in Nearby:
-                imagebutton auto "images/Button_Rogue_%s.png" action NullAction() hovered tt.Action(RogueX.name) at TinyButtons
+                imagebutton auto "images/Button_Rogue_%s.png" action NullAction() hovered tt.Action(RogueX.name) at tiny_button
             if KittyX in Nearby:
-                imagebutton auto "images/Button_Kitty_%s.png" action NullAction() hovered tt.Action(KittyX.name) at TinyButtons
+                imagebutton auto "images/Button_Kitty_%s.png" action NullAction() hovered tt.Action(KittyX.name) at tiny_button
             if EmmaX in Nearby:
-                imagebutton auto "images/Button_Emma_%s.png" action NullAction() hovered tt.Action(EmmaX.name) at TinyButtons
+                imagebutton auto "images/Button_Emma_%s.png" action NullAction() hovered tt.Action(EmmaX.name) at tiny_button
             if LauraX in Nearby:
-                imagebutton auto "images/Button_Laura_%s.png" action NullAction() hovered tt.Action(LauraX.name) at TinyButtons
+                imagebutton auto "images/Button_Laura_%s.png" action NullAction() hovered tt.Action(LauraX.name) at tiny_button
             if JeanX in Nearby:
-                imagebutton auto "images/Button_Jean_%s.png" action NullAction() hovered tt.Action(JeanX.name) at TinyButtons
+                imagebutton auto "images/Button_Jean_%s.png" action NullAction() hovered tt.Action(JeanX.name) at tiny_button
             if StormX in Nearby:
-                imagebutton auto "images/Button_Storm_%s.png" action NullAction() hovered tt.Action(StormX.name) at TinyButtons
+                imagebutton auto "images/Button_Storm_%s.png" action NullAction() hovered tt.Action(StormX.name) at tiny_button
             if JubesX in Nearby:
-                imagebutton auto "images/Button_Jubes_%s.png" action NullAction() hovered tt.Action(JubesX.name) at TinyButtons
-
+                imagebutton auto "images/Button_Jubes_%s.png" action NullAction() hovered tt.Action(JubesX.name) at tiny_button
 
     if tt.value != " ":
-
         frame:
-            xpos 500 ypos 60
+            pos (0.9, 0.12)
             has vbox
             text tt.value
-
-transform TinyButtons:
-    zoom .5
-
-screen Focus_Map:
-
-    imagebutton auto "images/Button_X_%s.png" action Hide("Focus_Map") xpos 690 ypos 5 focus_mask True
-    frame:
-        xpos 684
-        ypos 44
-        has hbox
-        vbox:
-            imagebutton auto "images/Button_Rogue_%s.png" action ui.callsinnewcontext("shift_focus", RogueX) focus_mask True
-            if "met" in KittyX.history:
-                imagebutton auto "images/Button_Kitty_%s.png" action ui.callsinnewcontext("shift_focus", KittyX) focus_mask True
-
-        vbox:
-            if "met" in EmmaX.history:
-                imagebutton auto "images/Button_Emma_%s.png" action ui.callsinnewcontext("shift_focus", EmmaX) focus_mask True
-            if "met" in LauraX.history:
-                imagebutton auto "images/Button_Laura_%s.png" action ui.callsinnewcontext("shift_focus", LauraX) focus_mask True
-        vbox:
-            if "met" in JeanX.history:
-                imagebutton auto "images/Button_Jean_%s.png" action ui.callsinnewcontext("shift_focus", JeanX) focus_mask True
-            if "met" in StormX.history:
-                imagebutton auto "images/Button_Storm_%s.png" action ui.callsinnewcontext("shift_focus", StormX) focus_mask True
-        vbox:
-            if "met" in JubesX.history:
-                imagebutton auto "images/Button_Jubes_%s.png" action ui.callsinnewcontext("shift_focus", JubesX) focus_mask True
 
 transform rotate_white(x):
     rotate -(int(x *3.6))
@@ -948,17 +686,44 @@ transform rotate_white(x):
 transform rotate_red(x):
     rotate -(int(x *3.6-180))
 
+transform tiny_button:
+    zoom 0.5
 
+screen Focus_Map:
+    imagebutton auto "images/Button_X_%s.png" action Hide("Focus_Map") pos (0.71, 0.016) focus_mask True
 
+    frame:
+        pos (0.71, 0.09)
+        has hbox
 
+        vbox:
+            imagebutton auto "images/Button_Rogue_%s.png" action ui.callsinnewcontext("shift_focus", RogueX) focus_mask True
+
+            if "met" in KittyX.history:
+                imagebutton auto "images/Button_Kitty_%s.png" action ui.callsinnewcontext("shift_focus", KittyX) focus_mask True
+
+        vbox:
+            if "met" in EmmaX.history:
+                imagebutton auto "images/Button_Emma_%s.png" action ui.callsinnewcontext("shift_focus", EmmaX) focus_mask True
+
+            if "met" in LauraX.history:
+                imagebutton auto "images/Button_Laura_%s.png" action ui.callsinnewcontext("shift_focus", LauraX) focus_mask True
+
+        vbox:
+            if "met" in JeanX.history:
+                imagebutton auto "images/Button_Jean_%s.png" action ui.callsinnewcontext("shift_focus", JeanX) focus_mask True
+
+            if "met" in StormX.history:
+                imagebutton auto "images/Button_Storm_%s.png" action ui.callsinnewcontext("shift_focus", StormX) focus_mask True
+
+        vbox:
+            if "met" in JubesX.history:
+                imagebutton auto "images/Button_Jubes_%s.png" action ui.callsinnewcontext("shift_focus", JubesX) focus_mask True
 
 screen Inventory_screen:
     frame:
-        xminimum 200
-        xpos 700
-        ypos 75
+        minimum (300, 0) pos (0.83, 0.125)
         has vbox
-
 
         text "Inventory:" size 20
         showif "_dildo" in Player.inventory:
@@ -991,6 +756,10 @@ screen Inventory_screen:
             text "Rogue's Bikini Top" size 15
         showif "Rogue bikini_bottoms" in Player.inventory:
             text "Rogue's Bikini Bottoms" size 15
+        showif "Rogue harness" in Player.inventory:
+            text "Rogue's Harness" size 15
+        showif "Rogue fetish" in Player.inventory:
+            text "Rogue's Fetish Outfits" size 15
 
         showif "Kitty lace_bra" in Player.inventory:
             text "Kitty's Lace Bra" size 15
@@ -1066,8 +835,6 @@ screen Inventory_screen:
         showif "_socks" in Player.inventory:
             text "Jubilees's Tall Socks" size 15
 
-
-
         showif "Mandrill Cologne" in Player.inventory:
             $ inventory_count = Player.inventory.count("Mandrill Cologne")
             textbutton "Mandrill Cologne: [inventory_count] doses" action ui.callsinnewcontext("MandrillScreen") text_size 15
@@ -1077,6 +844,7 @@ screen Inventory_screen:
         showif "Corruption Cologne" in Player.inventory:
             $ inventory_count = Player.inventory.count("Corruption Cologne")
             textbutton "Corruption Cologne: [inventory_count] doses" action ui.callsinnewcontext("CorruptionScreen") text_size 15
+
         showif "Xavier" in keys:
             text "Xavier's Key" size 15
         showif RogueX in keys:
@@ -1094,27 +862,26 @@ screen Inventory_screen:
         showif JubesX in keys:
             text "Jubes's Key" size 15
 
-
-
     imagebutton:
         auto "images/UI_Backpack_%s.png"
         action Hide("Inventory_screen")
-        xpos 780
-        ypos 5
+        pos (0.81, 0.015)
         focus_mask True
-
 
 label MandrillScreen:
     if "mandrill" in Player.traits:
         "You already have this on."
         return
+
     if "purple" in Player.traits or "corruption" in Player.traits:
         "You'll confuse the scent you already have on."
         return
 
     $ inventory_count = Player.inventory.count("Mandrill Cologne")
+
     "This cologne is guaranteed to make women love you more [[+Love]. You have [inventory_count] doses left."
     "Product warning, any love gained while under the effects may be lost when this wears off, if the limits are reached."
+
     menu:
         "Use it now?"
         "Yes":
@@ -1129,13 +896,16 @@ label PurpleRainScreen:
     if "purple" in Player.traits:
         "You already have this on."
         return
+
     if "mandrill" in Player.traits or "corruption" in Player.traits:
         "You'll confuse the scent you already have on."
         return
 
     $ inventory_count = Player.inventory.count("Purple Rain Cologne")
+
     "This cologne is guaranteed to make women more suggestible to your orders until tomorrow [[+Obedience]. You have [inventory_count] doses left."
     "Product warning, any obedience gained whie under the effects may be lost when this wears off, if the limits are reached."
+
     menu:
         "Use it now?"
         "Yes":
@@ -1143,19 +913,23 @@ label PurpleRainScreen:
             $ Player.inventory.remove("Purple Rain Cologne")
         "No":
             pass
+
     return
 
 label CorruptionScreen:
     if "corruption" in Player.traits:
         "You already have this on."
         return
+
     if "purple" in Player.traits or "mandrill" in Player.traits:
         "You'll confuse the scent you already have on."
         return
 
     $ inventory_count = Player.inventory.count("Corruption Cologne")
+
     "This cologne is guaranteed to make women let loose their wild side [[-Inhibition]. You have [inventory_count] doses left."
     "Product warning, any Inhibition lost whie under the effects may be regained when this wears off, if the limits are reached."
+
     menu:
         "Use it now?"
         "Yes":
@@ -1163,29 +937,5 @@ label CorruptionScreen:
             $ Player.inventory.remove("Corruption Cologne")
         "No":
             pass
+
     return
-
-
-screen Disclaimer_screen:
-    window:
-        style "gm_root"
-    frame:
-        xalign .5
-        ypos 100
-        xmaximum 800
-        has vbox
-        text "This is a work of parody fiction. It is intended to be distributed through Oniartist's Patreon page, please do not redistribute through other sources."
-        text " "
-        text "As is noted in the game, this story takes place several years after the last episode of the TV series it is based on, and all characters involved are over the age of 18.The game references events of the TV series, but is not beholden to the canon of the series, and characters will behave differently or have different backstories."
-        text " "
-        text "I would like to thank Akabur for his help getting started with all this (definitely check out his games too), and the various documentation on the Renpy site for pointing me in the right directions. I've had a lot of fun coding this game, and look forward to continually improving on it. If you'd like to support my efforts, please sign up under my name at Hentai United, or join on to my Patreon page. I have some huge ambitions for where this project will end up."
-        text " "
-        text "{a=http://www.patreon.com/OniArtist}http://www.patreon.com/OniArtist{/a}"
-
-    frame:
-        xalign 0.5
-        yalign 0.95
-        has hbox
-
-        textbutton "Return" action Hide("Disclaimer_screen")
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

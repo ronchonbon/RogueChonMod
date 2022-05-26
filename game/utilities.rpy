@@ -202,8 +202,8 @@ label reset_all_girls_at_end:
         if temp_Girls[0].to_do:
             call to_do(temp_Girls[0])
 
-        $ temp_Girls[0].outfit_name = "sleep"
-        $ temp_Girls[0].change_outfit("sleep")
+        $ temp_Girls[0].outfit_name = "sleepwear"
+        $ temp_Girls[0].change_outfit("sleepwear")
 
         $ temp_Girls[0].addiction += temp_Girls[0].addiction_rate
         $ temp_Girls[0].addiction -= (3*temp_Girls[0].resistance)
@@ -371,7 +371,7 @@ label reset_all_girls_at_beginning:
 
         $ temp_Girls[0].blushing = ""
         $ temp_Girls[0].wet = False
-        $ temp_Girls[0].held_item = None
+        $ temp_Girls[0].outfit["held_item"] = None
 
         $ temp_Girls[0].addiction += temp_Girls[0].addiction_rate
         $ temp_Girls[0].addiction_rate -= temp_Girls[0].resistance if temp_Girls[0].addiction_rate > 3 else 0
@@ -400,10 +400,15 @@ label reset_all_girls_at_beginning:
 
             $ temp_Girls[0].traits.append("stoodup")
 
+        if temp_Girls[0].outfit["buttplug"]:
+            $ bonus = 1
+        else:
+            $ bonus = 0
+
         if temp_Girls[0].used_to_anal < 2:
-            if (temp_Girls[0].action_counter["anal"] + temp_Girls[0].action_counter["dildo_ass"] + temp_Girls[0].buttplug) >= 15:
+            if (temp_Girls[0].action_counter["anal"] + temp_Girls[0].action_counter["dildo_ass"] + bonus) >= 15:
                 $ temp_Girls[0].used_to_anal = 2
-            elif (temp_Girls[0].action_counter["anal"] + temp_Girls[0].action_counter["dildo_ass"] + temp_Girls[0].buttplug) >= 3:
+            elif (temp_Girls[0].action_counter["anal"] + temp_Girls[0].action_counter["dildo_ass"] + bonus) >= 3:
                 $ temp_Girls[0].used_to_anal = 1
 
         $ temp_Girls[0].XP = 3330 if temp_Girls[0].XP > 3330 else temp_Girls[0].XP
@@ -452,22 +457,22 @@ label change_into_scheduled_outfit(Girls = [], clothes = 1, location = 1):
                     $ Girls[0].today_outfit_name = "casual1"
                 elif Girls[0].clothing[weekday] == 2:
                     $ Girls[0].today_outfit_name = "casual2"
-                elif Girls[0].clothing[weekday] == 3 and Girls[0].first_custom_outfit[0]:
-                    $ Girls[0].today_outfit_name = "custom1"
                 elif Girls[0].clothing[weekday] == 4:
-                    $ Girls[0].today_outfit_name = "gym"
-                elif Girls[0].clothing[weekday] == 5 and Girls[0].second_custom_outfit[0]:
+                    $ Girls[0].today_outfit_name = "gym_clothes"
+                elif Girls[0].clothing[weekday] == 3 and Girls[0].first_custom_outfit["outfit_active"]:
+                    $ Girls[0].today_outfit_name = "custom1"
+                elif Girls[0].clothing[weekday] == 5 and Girls[0].second_custom_outfit["outfit_active"]:
                     $ Girls[0].today_outfit_name = "custom2"
-                elif Girls[0].clothing[weekday] == 6 and Girls[0].third_custom_outfit[0]:
+                elif Girls[0].clothing[weekday] == 6 and Girls[0].third_custom_outfit["outfit_active"]:
                     $ Girls[0].today_outfit_name = "custom3"
 
                 if not Girls[0].today_outfit_name:
                     $ outfit_options = ["casual1", "casual2"]
 
                     if not Girls[0].broken_up[0]:
-                        $ outfit_options.append("custom1") if Girls[0].first_custom_outfit[0] == 2 else outfit_options
-                        $ outfit_options.append("custom2") if Girls[0].second_custom_outfit[0] == 2 else outfit_options
-                        $ outfit_options.append("custom3") if Girls[0].third_custom_outfit[0] == 2 else outfit_options
+                        $ outfit_options.append("custom1") if Girls[0].first_custom_outfit["outfit_active"] == 2 else outfit_options
+                        $ outfit_options.append("custom2") if Girls[0].second_custom_outfit["outfit_active"] == 2 else outfit_options
+                        $ outfit_options.append("custom3") if Girls[0].third_custom_outfit["outfit_active"] == 2 else outfit_options
 
                     $ Girls[0].today_outfit_name = renpy.random.choice(outfit_options)
 
@@ -633,11 +638,11 @@ label to_do(Girl):
         $ Girl.to_do.remove("hair")
 
     if "_ring" in Girl.to_do:
-        $ Girl.piercings = "_ring"
+        $ Girl.outfit["front_inner_accessory"] = "_ring"
         $ Girl.to_do.remove("_ring")
 
     if "_barbell" in Girl.to_do:
-        $ Girl.piercings = "_barbell"
+        $ Girl.outfit["front_inner_accessory"] = "_barbell"
         $ Girl.to_do.remove("_barbell")
 
     return
@@ -698,10 +703,10 @@ label change_out_of_gym_clothes(Girls = []):
     python:
         for G in Girls:
             if G not in Party:
-                if G.outfit_name == "gym" and G.location != "bg_dangerroom":
+                if G.outfit_name == "gym_clothes" and G.location != "bg_dangerroom":
                     G.outfit_name = G.today_outfit_name
                 elif G.location == "bg_dangerroom":
-                    G.outfit_name = "gym"
+                    G.outfit_name = "gym_clothes"
 
     return
 
@@ -710,9 +715,9 @@ label hide_girl(Girl, hide_sprite = False):
         call Rogue_Sex_Reset
         hide Rogue_SexSprite
         hide Rogue_Doggy_Animation
-        hide Rogue_HJ_Animation
+        hide Rogue_handjob_animation
         hide Rogue_BJ_Animation
-        hide Rogue_TJ_Animation
+        hide Rogue_titjob_animation
 
         if hide_sprite:
             hide Rogue_sprite
@@ -720,19 +725,19 @@ label hide_girl(Girl, hide_sprite = False):
         call Kitty_Sex_Reset
         hide Kitty_SexSprite
         hide Kitty_Doggy_Animation
-        hide Kitty_HJ_Animation
+        hide Kitty_handjob_animation
         hide Kitty_BJ_Animation
-        hide Kitty_TJ_Animation
+        hide Kitty_titjob_animation
 
         if hide_sprite:
-            hide Kitty_Sprite
+            hide Kitty_sprite
     elif Girl == EmmaX:
         call Emma_Sex_Reset
         hide Emma_SexSprite
         hide Emma_Doggy_Animation
-        hide Emma_HJ_Animation
+        hide Emma_handjob_animation
         hide Emma_BJ_Animation
-        hide Emma_TJ_Animation
+        hide Emma_titjob_animation
         hide Emma_FJ_Animation
 
         if hide_sprite:
@@ -741,9 +746,9 @@ label hide_girl(Girl, hide_sprite = False):
         call Laura_Sex_Reset
         hide Laura_SexSprite
         hide Laura_Doggy_Animation
-        hide Laura_HJ_Animation
+        hide Laura_handjob_animation
         hide Laura_BJ_Animation
-        hide Laura_TJ_Animation
+        hide Laura_titjob_animation
 
         if hide_sprite:
             hide Laura_Sprite
@@ -751,9 +756,9 @@ label hide_girl(Girl, hide_sprite = False):
         call Jean_Sex_Reset
         hide Jean_SexSprite
         hide Jean_Doggy_Animation
-        hide Jean_HJ_Animation
+        hide Jean_handjob_animation
         hide Jean_BJ_Animation
-        hide Jean_TJ_Animation
+        hide Jean_titjob_animation
         hide Jean_PJ_Animation
 
         if hide_sprite:
@@ -761,9 +766,9 @@ label hide_girl(Girl, hide_sprite = False):
     elif Girl == StormX:
         hide Storm_SexSprite
         hide Storm_Doggy_Animation
-        hide Storm_HJ_Animation
+        hide Storm_handjob_animation
         hide Storm_BJ_Animation
-        hide Storm_TJ_Animation
+        hide Storm_titjob_animation
 
         if hide_sprite:
             hide Storm_Sprite
@@ -771,9 +776,9 @@ label hide_girl(Girl, hide_sprite = False):
         call Jubes_Sex_Reset
         hide Jubes_SexSprite
         hide Jubes_Doggy_Animation
-        hide Jubes_HJ_Animation
+        hide Jubes_handjob_animation
         hide Jubes_BJ_Animation
-        hide Jubes_TJ_Animation
+        hide Jubes_titjob_animation
 
         if hide_sprite:
             hide Jubes_Sprite
@@ -1064,7 +1069,7 @@ label event_calls(event_Girls=[]):
 
     return
 
-label display_girl(Girl, check_if_dressed = True, trigger_reset = True, x_position = 0, y_position = 50):
+label display_girl(Girl, check_if_dressed = True, trigger_reset = True, x_position = None, y_position = 0):
     if Girl not in Party and Girl.location != bg_current:
         call hide_girl(Girl, hide_sprite = True)
 
@@ -1081,7 +1086,7 @@ label display_girl(Girl, check_if_dressed = True, trigger_reset = True, x_positi
                 $ Girl.change_outfit(outfit_changed = 1)
         elif taboo:
             $ Girl.change_outfit(outfit_changed = 1)
-        elif Girl.location != "bg_dangerroom" and Girl.today_outfit_name != "gym":
+        elif Girl.location != "bg_dangerroom" and Girl.today_outfit_name != "gym_clothes":
             $ Girl.outfit_name = Girl.today_outfit_name
             $ Girl.change_outfit(outfit_changed = 1)
     elif Girl.location != "bg_showerroom" and Girl.location != "bg_pool":
@@ -1114,27 +1119,22 @@ label display_girl(Girl, check_if_dressed = True, trigger_reset = True, x_positi
 
     if Girl == RogueX:
         show Rogue_sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
-            anchor (0.5, 0.0)
     elif Girl == KittyX:
-        show Kitty_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
-            anchor (0.5, 0.0)
+        show Kitty_sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
     elif Girl == EmmaX:
+        $ Girl.diamond = False
+
         show Emma_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
-            anchor (0.5, 0.0)
     elif Girl == LauraX:
-        $ Girl.claws = 0
+        $ Girl.claws = False
 
         show Laura_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
-            anchor (0.5, 0.0)
     elif Girl == JeanX:
         show Jean_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
-            anchor (0.5, 0.0)
     elif Girl == StormX:
         show Storm_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
-            anchor (0.5, 0.0)
     elif Girl == JubesX:
         show Jubes_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
-            anchor (0.5, 0.0)
 
     return
 
@@ -1171,7 +1171,7 @@ label set_the_scene(character = True, entering = False, check_if_dressed = True,
                 $ temp_Girls[0].sprite_location = stage_right
                 $ temp_Girls[0].sprite_layer = 75
 
-            call display_girl(temp_Girls[0], check_if_dressed, trigger_reset)
+            call display_girl(temp_Girls[0], check_if_dressed = check_if_dressed, trigger_reset = trigger_reset)
 
             $ temp_Girls.remove(temp_Girls[0])
 
@@ -1179,7 +1179,7 @@ label set_the_scene(character = True, entering = False, check_if_dressed = True,
             $ focused_Girl.sprite_location = stage_center
             $ focused_Girl.sprite_layer = 100
 
-            call display_girl(focused_Girl, check_if_dressed, trigger_reset)
+            call display_girl(focused_Girl, check_if_dressed = check_if_dressed, trigger_reset = trigger_reset)
 
         if bg_current == "bg_study" and time_index < 3:
             show Xavier_Sprite zorder 25 at sprite_location(stage_left)
@@ -1420,6 +1420,11 @@ label girls_location(change = False):
         $ temp_Girls.remove(temp_Girls[0])
 
     return
+
+
+
+
+
 
 
 
@@ -1676,9 +1681,9 @@ label Hanks_Lab(line=0):
                     "Green":
                         $ Player.color = "Green"
                     "White":
-                        $ Player.color = "pink"
+                        $ Player.color = "White"
                     "Black":
-                        $ Player.color = "brown"
+                        $ Player.color = "Black"
                     "Never mind":
                         $ line = 1
                 if not line:
@@ -2105,7 +2110,7 @@ label clear_the_room(Character=0, Passive=0, Silent=0, Girls=[]):
         if Girls[0] == RogueX:
             hide Rogue_sprite with easeoutright
         elif Girls[0] == KittyX:
-            hide Kitty_Sprite with easeoutright
+            hide Kitty_sprite with easeoutright
         elif Girls[0] == EmmaX:
             hide Emma_Sprite with easeoutright
         elif Girls[0] == LauraX:
@@ -2188,10 +2193,10 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0):
     if bg_current == "bg_dangerroom":
 
 
-        $ Primary.outfit_name = "gym"
+        $ Primary.outfit_name = "gym_clothes"
         $ Primary.change_outfit()
         if Secondary:
-            $ Secondary.outfit_name = "gym"
+            $ Secondary.outfit_name = "gym_clothes"
             $ Secondary.change_outfit()
 
     call set_the_scene
@@ -2886,7 +2891,7 @@ label exit_gym(temp_Girls = []):
     $ line = None
 
     while temp_Girls:
-        if temp_Girls[0].outfit_name == "gym":
+        if temp_Girls[0].outfit_name == "gym_clothes":
 
             if len(Party) > 1:
                 $ line = "We should change out of these if we're leaving. . ."
@@ -3373,10 +3378,8 @@ label shift_focus(Girl, Second=0, Return=0):
 
     return
 
-transform sprite_location(Loc=stage_right, LocY=50):
-    pos (Loc,LocY)
-
-
+transform sprite_location(x_position = stage_right, y_position = 0):
+    pos (x_position, y_position)
 
 label ViewShift(Girl=0, View=0, ShouldHide=1, ViewTrig=primary_action):
 
@@ -3449,58 +3452,58 @@ label AllReset(Girl):
 
         if temp_Girls[0] == RogueX:
             if RogueX.location == bg_current:
-                show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location,50):
-                    ease 0.5 anchor (0.6, 0.0)
+                show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
+                    ease 0.5
                 show Rogue_sprite:
-                    anchor (0.6, 0.0) pos (RogueX.sprite_location,50)
+                    pos (RogueX.sprite_location, 0)
             else:
                 hide Rogue_sprite
         elif temp_Girls[0] == KittyX:
             if KittyX.location == bg_current:
-                show Kitty_Sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location,50):
-                    ease 0.5 anchor (0.5, 0.0)
-                show Kitty_Sprite:
-                    anchor (0.5, 0.0) pos (KittyX.sprite_location,50)
+                show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
+                    ease 0.5
+                show Kitty_sprite:
+                    pos (KittyX.sprite_location, 0)
             else:
-                hide Kitty_Sprite
+                hide Kitty_sprite
         elif temp_Girls[0] == EmmaX:
             if EmmaX.location == bg_current:
-                show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location,50):
-                    ease 0.5 anchor (0.5, 0.0)
+                show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+                    ease 0.5
                 show Emma_Sprite:
-                    anchor (0.5, 0.0) pos (EmmaX.sprite_location,50)
+                    pos (EmmaX.sprite_location, 0)
             else:
                 hide Emma_Sprite
         elif temp_Girls[0] == LauraX:
             if LauraX.location == bg_current:
-                show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location,50):
-                    ease 0.5 anchor (0.5, 0.0)
+                show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
+                    ease 0.5
                 show Laura_Sprite:
-                    anchor (0.5, 0.0) pos (LauraX.sprite_location,50)
+                    pos (LauraX.sprite_location, 0)
             else:
                 hide Laura_Sprite
         elif temp_Girls[0] == JeanX:
             if JeanX.location == bg_current:
-                show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location,50):
-                    ease 0.5 anchor (0.5, 0.0)
+                show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+                    ease 0.5
                 show Jean_Sprite:
-                    anchor (0.5, 0.0) pos (JeanX.sprite_location,50)
+                    pos (JeanX.sprite_location, 0)
             else:
                 hide Jean_Sprite
         elif temp_Girls[0] == StormX:
             if StormX.location == bg_current:
-                show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location,50):
-                    ease 0.5 anchor (0.5, 0.0)
+                show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
+                    ease 0.5
                 show Storm_Sprite:
-                    anchor (0.5, 0.0) pos (StormX.sprite_location,50)
+                    pos (StormX.sprite_location, 0)
             else:
                 hide Storm_Sprite
         elif temp_Girls[0] == JubesX:
             if JubesX.location == bg_current:
-                show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location,50):
-                    ease 0.5 anchor (0.5, 0.0)
+                show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
+                    ease 0.5
                 show Jubes_Sprite:
-                    anchor (0.5, 0.0) pos (JubesX.sprite_location,50)
+                    pos (JubesX.sprite_location, 0)
             else:
                 hide Jubes_Sprite
 
@@ -6182,25 +6185,7 @@ label Girl_TightsRipped(Girl=0, Count=0):
 
 
 
-label Clothing_Schedule_Check(Girl, outfit_changed = False, value = 0, count = 0):
-    while count < 9:
-        if Girl.clothing[count] == outfit_changed:
-            if value:
-                if Girl.clothing[count] == 3 and Girl.first_custom_outfit[0] == 2:
-                    pass
-                elif Girl.clothing[count] == 5 and Girl.second_custom_outfit[0] == 2:
-                    pass
-                elif Girl.clothing[count] == 6 and Girl.third_custom_outfit[0] == 2:
-                    pass
-                elif Girl.clothing[count] == 4 and Girl.gym_clothes[0] != 1:
-                    pass
-                else:
-                    $ Girl.clothing[count] = 0
-            else:
-                $ Girl.clothing[count] = 0
 
-        $ count += 1
-    return
 
 
 label reset_outfits:
@@ -6208,96 +6193,9 @@ label reset_outfits:
     menu:
         "Do you want to continue?"
         "Yes":
-            $ RogueX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ RogueX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ RogueX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ RogueX.first_casual_outfit = [2,"_gloves", "_skirt", "_mesh_top", "_spiked_collar", "_tank", "_black_panties", "", "", "_tights", 0]
-            $ RogueX.second_casual_outfit = [2,"_gloves", "_pants", "_pink_top", "_spiked_collar", "_buttoned_tank", "_black_panties", "", "", "", 0]
-            $ RogueX.gym_clothes = [0, "_gloves", "", "_hoodie", "", "_sports_bra", "_shorts", "", "", "", 0]
-            $ RogueX.sleepwear = [0, "", "", "", "", "_tank", "_green_panties", "", "", "", 0]
-            $ RogueX.swimwear = [0, "", "", "_hoodie", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ RogueX.halloween_costume = [2,"_gloves", "_skirt", "", "", "_tube_top", "_black_panties", "_sweater", "_cosplay", "", 0]
-            $ RogueX.clothing = [0, "", "", "", "", "", "", "", "", 0]
-            $ RogueX.outfit_name = "casual1"
-            $ RogueX.today_outfit_name = "casual1"
-
-            $ KittyX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ KittyX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ KittyX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ KittyX.first_casual_outfit = [2,0, "_capris", "_pink_top", "_gold_necklace", "_cami", "_green_panties", "", "", "", 0]
-            $ KittyX.second_casual_outfit = [2,0, "_black_jeans", "_red_shirt", "", "_bra", "_green_panties", "", "", "", 0]
-            $ KittyX.gym_clothes = [0, "", "_shorts", "", "", "_sports_bra", "_green_panties", "", "", "", 0]
-            $ KittyX.sleepwear = [0, "", "_shorts", "", "", "_cami", "_green_panties", "", "", "", 0]
-            $ KittyX.swimwear = [0, "", "_blue_skirt", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ KittyX.halloween_costume = [2,0, "_dress", "_jacket", "_flower_necklace", "_dress", "_lace_panties", "", "", "", 0]
-            $ KittyX.clothing = [0, "", "", "", "", "", "", "", "", 0]
-            $ KittyX.outfit_name = "casual1"
-            $ KittyX.today_outfit_name = "casual1"
-
-            $ EmmaX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ EmmaX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ EmmaX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ EmmaX.first_casual_outfit = [2,0, "_pants", "_jacket", "_choker", "_corset", "_white_panties", "", "", "", 0]
-            $ EmmaX.second_casual_outfit = [2,"_gloves", "_pants", "", "_choker", "_corset", "_white_panties", "", "", "", 0]
-            $ EmmaX.gym_clothes = [0, "", "", "", "", "_sports_bra", "sports_panties", "", "", "", 0]
-            $ EmmaX.sleepwear = [0, "", "", "", "", "_corset", "_white_panties", "", "", "", 0]
-            $ EmmaX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ EmmaX.halloween_costume =  [2,"_gloves", "_dress", "_dress", "_choker", "", "_lace_panties", "", "_hat", "_stockings_and_garterbelt", 0]
-            $ EmmaX.clothing = [0, "", "", "", "", "", "", "", "", 0]
-            $ EmmaX.outfit_name = "casual1"
-            $ EmmaX.today_outfit_name = "casual1"
-
-            $ LauraX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ LauraX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ LauraX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ LauraX.first_casual_outfit = [2,"_wrists", "_leather_pants", "", "_leash_choker", "_leather_bra", "_black_panties", "", "", "", 0]
-            $ LauraX.second_casual_outfit = [2,0, "_skirt", "_jacket", "_leash_choker", "_leather_bra", "_black_panties", "", "", "", 0]
-            $ LauraX.gym_clothes = [0, "_wrists", "_leather_pants", "", "", "_leather_bra", "_black_panties", "", "", "", 0]
-            $ LauraX.sleepwear = [0, "", "", "", "", "_leather_bra", "_leather_panties", "", "", "", 0]
-            $ LauraX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ LauraX.halloween_costume = [2,"_gloves", "_other_skirt", "", "", "_white_tank", "_black_panties", "_suspenders", "", "_black_stockings", 0]
-            $ LauraX.clothing = [0, "", "", "", "", "", "", "", "", 0]
-            $ LauraX.outfit_name = "casual1"
-            $ LauraX.today_outfit_name = "casual1"
-
-            $ JeanX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JeanX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JeanX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JeanX.first_casual_outfit = [2,0, "_pants", "_pink_shirt", "", "_green_bra", "_green_panties", "", "", "", 0]
-            $ JeanX.second_casual_outfit = [2,0, "_skirt", "_green_shirt", "", "_green_bra", "_green_panties", "", "", "", 0]
-            $ JeanX.gym_clothes = [0, "", "_yoga_pants", "", "", "_sports_bra", "_green_panties", "", "", "", 0]
-            $ JeanX.sleepwear = [0, "", "", "_pink_shirt", "", "_green_bra", "_green_panties", "", "", "", 0]
-            $ JeanX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ JeanX.halloween_costume =  [2,0, "_shorts", "_yellow_shirt", "", "_green_bra", "_green_panties", "_suspenders", "pony", "", 0]
-            $ JeanX.clothing = [0, "", "", "", "", "", "", "", "", 0]
-            $ JeanX.outfit_name = "casual1"
-            $ JeanX.today_outfit_name = "casual1"
-
-            $ StormX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ StormX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ StormX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ StormX.first_casual_outfit = [2,0, "_skirt", "_white_shirt", "", "_black_bra", "_white_panties", "", "", "", 0]
-            $ StormX.second_casual_outfit = [2,0, "_pants", "_jacket", "", "_tube_top", "_white_panties", "", "", "", 0]
-            $ StormX.gym_clothes = [0, "", "_yoga_pants", "", "", "_sports_bra", "_white_panties", "", "", "",10]
-            $ StormX.sleepwear = [0, "", "", "_white_shirt", "", "", "_white_panties", "", "", "",25]
-            $ StormX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ StormX.halloween_costume = [2,0, "", "", "_ring_necklace", "_cosplay_bra", "_cosplay_panties", "_rings", "_short", "", 0]
-            $ StormX.clothing = [0, "", "", "", "", "", "", "", "", 0]
-            $ StormX.outfit_name = "casual1"
-            $ StormX.today_outfit_name = "casual1"
-
-            $ JubesX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JubesX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JubesX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JubesX.first_casual_outfit = [2,0, "_shorts", "_red_shirt", "", "_sports_bra", "_blue_panties", "_jacket", "", "", 0]
-            $ JubesX.second_casual_outfit = [2,0, "_pants", "_black_shirt", "", "_sports_bra", "_blue_panties", "_jacket", "", "", 0]
-            $ JubesX.gym_clothes = [0, "", "_pants", "", "", "_sports_bra", "_blue_panties", "", "", "",10]
-            $ JubesX.sleepwear = [0, "", "", "", "", "_sports_bra", "_blue_panties", "", "", "",25]
-            $ JubesX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ JubesX.halloween_costume = [0, "", "_pants", "_black_shirt", "", "_sports_bra", "_blue_panties", "_jacket", "", "", 0]
-            $ JubesX.clothing = [0, "", "", "", "", "", "", "", "", 0]
-            $ JubesX.outfit_name = "casual1"
-            $ JubesX.today_outfit_name = "casual1"
+            python:
+                for G in all_Girls:
+                    G.set_default_outfits()
 
             "Done."
             "You will now need to set their custom outfits again."

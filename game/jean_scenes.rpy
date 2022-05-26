@@ -68,7 +68,7 @@ label JeanMeet:
             $ JeanX.change_stat("love", 90, -10)
             $ JeanX.change_stat("obedience", 200, 2)
             ch_j "I'm going to stop you right there, [JeanX.player_petname]."
-            $ JeanX.change_face("_angry",eyes="psychic")
+            $ JeanX.change_face("_angry",eyes="_psychic")
             ch_j "If I say your name is [JeanX.player_petname], it's [JeanX.player_petname]."
             $ JeanX.change_face("_sly")
             ch_j "Right. . . [JeanX.player_petname]?"
@@ -92,7 +92,7 @@ label JeanMeet:
                     $ JeanX.change_stat("inhibition", 200, -10)
                     ch_j "Huh?"
                     ch_j "But I. . ."
-                    $ JeanX.change_face("_angry",1,eyes="psychic")
+                    $ JeanX.change_face("_angry",1,eyes="_psychic")
                     ch_j "Quack like a duck!"
                     menu:
                         extend ""
@@ -116,9 +116,9 @@ label JeanMeet:
                             $ JeanX.change_stat("obedience", 200, 15)
                             $ JeanX.change_stat("inhibition", 200, -5)
                             ch_j "This doesn't make sense. . ."
-                            $ JeanX.change_face("_angry",1,eyes="psychic")
+                            $ JeanX.change_face("_angry",1,eyes="_psychic")
                             ch_j "Could you be too dumb to mind-take? . . "
-                            $ JeanX.change_face("_confused",1,eyes="psychic")
+                            $ JeanX.change_face("_confused",1,eyes="_psychic")
                             ch_j "No, it worked on Logan. . ."
                             $ line = "argued"
 
@@ -159,7 +159,7 @@ label JeanMeet:
         call Jean_First_Topless (0, 1)
         $ JeanX.change_face("_bemused")
         ch_j ". . . not that you'll remember this in five minutes."
-        $ JeanX.change_face("_bemused",eyes="psychic")
+        $ JeanX.change_face("_bemused",eyes="_psychic")
         ch_j "Now, what just happened?"
         $ JeanX.change_face("_bemused")
         menu:
@@ -219,7 +219,7 @@ label JeanMeet:
     if not line:
 
         ch_j "Now, looks like the mirror's all foggy. . ."
-        $ JeanX.change_face("_sly",eyes="psychic")
+        $ JeanX.change_face("_sly",eyes="_psychic")
         ch_j "I'll just use your eyes. . ."
         $ JeanX.change_face("_confused",1)
         ch_j ". . ."
@@ -292,7 +292,7 @@ label JeanMeet:
                 $ JeanX.change_stat("obedience", 200, 20)
                 $ JeanX.change_stat("inhibition", 200, -40)
                 ch_j "Ok, goo- you're just bullshitting me again!"
-    $ JeanX.change_face("_angry",1,eyes="psychic")
+    $ JeanX.change_face("_angry",1,eyes="_psychic")
     ch_j "Argh!"
     "You feel a slight breeze against your cheek."
     $ JeanX.change_face("_angry",1)
@@ -309,7 +309,7 @@ label JeanMeet:
         ". . .":
             $ JeanX.change_stat("love", 90, 3)
     $ JeanX.change_stat("obedience", 200, 10)
-    $ JeanX.change_face("_angry",1,eyes="psychic")
+    $ JeanX.change_face("_angry",1,eyes="_psychic")
     "A locker rips from the wall and heads your way."
     "With a pulse of your power, it loses momentum and falls over."
     $ JeanX.change_face("_angry",1,eyes="_side")

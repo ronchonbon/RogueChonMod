@@ -81,7 +81,7 @@ layeredimage Xavier_Sprite:
     if Xavier_psychic:
         "images/NPC/Xavier_psychic.png"
 
-    size (429, 521) anchor (0.5, 0) offset (0, 150) zoom 1.1
+    anchor (0.5, -0.3) zoom 0.78
 
 layeredimage Xavier_eyes:
     always:
@@ -100,30 +100,31 @@ image Xavier_blinking:
     repeat
 
 label change_Xavier_face(face = Xavier_emotion):
-    if face == "psychic":
-        $ Xavier_mouth = "concentrate"
-        $ Xavier_brows = "concentrate"
-        $ Xavier_eyes = "concentrate"
-        $ Xavier_psychic = 1
-    if face == "hypno":
-        $ Xavier_mouth = "neutral"
-        $ Xavier_brows = "neutral"
-        $ Xavier_eyes = "hypno"
-    if face == "shocked":
-        $ Xavier_mouth = "neutral"
-        $ Xavier_brows = "shocked"
-        $ Xavier_eyes = "shocked"
-        $ Xavier_psychic = 0
+    if face == "_psychic":
+        $ Xavier_mouth = "_concentrate"
+        $ Xavier_brows = "_concentrate"
+        $ Xavier_eyes = "_concentrate"
+        $ Xavier_psychic = True
+    if face == "_hypno":
+        $ Xavier_mouth = "_neutral"
+        $ Xavier_brows = "_neutral"
+        $ Xavier_eyes = "_hypno"
+        $ Xavier_psychic = False
+    if face == "_shocked":
+        $ Xavier_mouth = "_neutral"
+        $ Xavier_brows = "_shocked"
+        $ Xavier_eyes = "_shocked"
+        $ Xavier_psychic = False
     if face == "_happy":
-        $ Xavier_mouth = "_happy"
+        $ Xavier_mouth = "_smile"
         $ Xavier_brows = "_happy"
         $ Xavier_eyes = "_happy"
-        $ Xavier_psychic = 0
+        $ Xavier_psychic = False
     if face == "angry":
-        $ Xavier_mouth = "concentrate"
-        $ Xavier_brows = "concentrate"
+        $ Xavier_mouth = "_concentrate"
+        $ Xavier_brows = "_concentrate"
         $ Xavier_eyes = "_happy"
-        $ Xavier_psychic = 0
+        $ Xavier_psychic = False
 
     return
 
@@ -165,7 +166,7 @@ layeredimage background:
     if not entering and bg_current == "bg_classroom" and time_index < 2 and weekday < 5:
         "images/background/bg_classroom_pupils.png"
 
-    size (1024, 768)
+    zoom 1.34
 
 image grool_dripping:
     contains:
@@ -511,8 +512,8 @@ label GwenFace(emotion="normal", B=G_Blush, M=0, mouth=0, eyes=0, brows=0):
         $ G_mouth = "open"
         $ G_brows = "normal"
         $ G_eyes = "surprised"
-    elif emotion == "shocked":
-        $ G_mouth = "shocked"
+    elif emotion == "_shocked":
+        $ G_mouth = "_shocked"
         $ G_brows = "normal"
         $ G_eyes = "surprised"
 
@@ -1556,20 +1557,9 @@ image Zero_Chibicock:
             "Player.color == 'White'", "images/Chibi_Cock_P.png",
             "Player.color == 'Black'", "images/Chibi_Cock_B.png",
             "Player.color == 'Green'", "images/Chibi_Cock_G.png",
-            "True", Null(),
-            ),
+            "True", Null()))
 
-
-
-
-
-
-
-
-        )
     anchor (0.5,0.5)
-
-
 
 image Chibi_Null:
 
@@ -1705,3 +1695,19 @@ image Chibi_UI:
             "second_girl_primary_action == 'blow'", "Chibi_Sucking",
             "True", "Chibi_Null",
             )
+
+image night_mask = "images/nightmask.png"
+
+image UI_Backpack = "images/UI_Backpack_idle.png"
+image UI_Dildo = "images/UI_Dildo.png"
+image UI_VibA = "images/UI_VibA.png"
+image UI_VibB = "images/UI_VibB.png"
+image UI_Tongue = "images/UI_Tongue.png"
+image UI_Finger = "images/UI_Finger.png"
+image UI_Hand = "images/UI_Hand.png"
+image UI_GirlFinger = "images/UI_GirlFinger.png"
+image UI_GirlHand = "images/UI_GirlHand.png"
+
+image UI_PartnerHand:
+    ConditionSwitch("Partner == StormX", "images/UI_GirlHandS.png",
+            "True", "images/UI_GirlHand.png")

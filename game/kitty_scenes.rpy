@@ -2,8 +2,8 @@ label meet_Kitty:
     $ bg_current = "bg_campus"
 
     $ KittyX.outfit_name = "casual1"
-    $ KittyX.today_outfit_name = KittyX.outfit
-    $ KittyX.change_outfit(KittyX.outfit)
+    $ KittyX.today_outfit_name = "casual1"
+    $ KittyX.change_outfit()
 
     call clear_the_room("all", 0, 1)
 
@@ -20,7 +20,7 @@ label meet_Kitty:
     "She crashes into you at a full jog, and you both fall to the ground."
     "You scramble to your feet and offer the girl a hand up."
 
-    show Kitty_Sprite at sprite_location(KittyX.sprite_location) with vpunch
+    show Kitty_sprite at sprite_location(KittyX.sprite_location) with vpunch
 
     $ KittyX.location = "bg_campus"
     $ KittyX.change_stat("love", 90, -25)
@@ -200,7 +200,7 @@ label meet_Kitty:
 
                 $ KittyX.change_face("_angry", 1)
 
-                show Kitty_Sprite at sprite_location(KittyX.sprite_location) with vpunch
+                show Kitty_sprite at sprite_location(KittyX.sprite_location) with vpunch
 
                 "She elbows you in the ribs and shoves herself back a few steps."
 
@@ -240,7 +240,7 @@ label meet_Kitty:
 
     $ KittyX.location = "bg_kitty"
 
-    hide Kitty_Sprite with easeoutleft
+    hide Kitty_sprite with easeoutleft
 
     "She jogs off down the path, and you continue on to class."
 
@@ -469,7 +469,7 @@ label Kitty_Love:
         $ KittyX.eyes = "_surprised"
         ch_k "Never mind!"
         "Kitty dashes off and phases through the nearest wall."
-        hide Kitty_Sprite with easeoutright
+        hide Kitty_sprite with easeoutright
         call remove_girl (KittyX)
         return
     if KittyX.event_happened[6] == 2:
@@ -554,7 +554,7 @@ label Kitty_Love:
                 $ KittyX.change_stat("inhibition", 80, 10)
                 "You shove her through the nearest wall and then continue on you way."
                 $ KittyX.recent_history.append("_angry")
-                hide Kitty_Sprite with easeoutbottom
+                hide Kitty_sprite with easeoutbottom
                 jump Kitty_Love_End
 
     if "lover" in KittyX.player_petnames:
@@ -682,7 +682,7 @@ label Kitty_Love:
 
 label Kitty_Love_End:
     if line == "awkward" or "lover" not in KittyX.player_petnames:
-        hide Kitty_Sprite with easeoutright
+        hide Kitty_sprite with easeoutright
         call remove_girl (KittyX)
         return
     ch_k "So I was thinking. . . did you want to . . ."
@@ -959,7 +959,7 @@ label Kitty_Sub:
         $ KittyX.player_petnames.append("sir")
 
     elif line == "rude":
-        hide Kitty_Sprite with easeoutbottom
+        hide Kitty_sprite with easeoutbottom
         call remove_girl (KittyX)
         if not simulation:
             $ renpy.pop_call()
@@ -971,7 +971,7 @@ label Kitty_Sub:
         ch_k "I was just kidding. I[KittyX.like]. . yeah. That's kinda weird."
         ch_k "I should go. I think I hear Professor Xavier calling me."
         $ KittyX.blushing = "_blush1"
-        hide Kitty_Sprite with easeoutbottom
+        hide Kitty_sprite with easeoutbottom
         call remove_girl (KittyX)
         if not simulation:
             $ renpy.pop_call()
@@ -1058,7 +1058,7 @@ label Kitty_Sub_Asked:
     $ KittyX.daily_history.append("asked sub")
     if line == "rude":
 
-        hide Kitty_Sprite with easeoutbottom
+        hide Kitty_sprite with easeoutbottom
         call remove_girl (KittyX)
         $ KittyX.recent_history.append("_angry")
         if not simulation:
@@ -1187,13 +1187,13 @@ label Kitty_Master:
     $ KittyX.history.append("master")
     if line == "rude":
         $ KittyX.recent_history.append("_angry")
-        hide Kitty_Sprite with easeoutbottom
+        hide Kitty_sprite with easeoutbottom
         call remove_girl (KittyX)
         if not simulation:
             $ renpy.pop_call()
         "[KittyX.name] phases through the floor in a huff. She might have been crying."
     elif line == "embarrassed":
-        hide Kitty_Sprite with easeoutbottom
+        hide Kitty_sprite with easeoutbottom
         call remove_girl (KittyX)
         if not simulation:
             $ renpy.pop_call()
@@ -1376,7 +1376,7 @@ label Kitty_sexfriend:
         $ KittyX.change_stat("love", 200, -20)
         $ KittyX.change_stat("obedience", 50, 5)
         $ KittyX.change_stat("inhibition", 80, -10)
-        hide Kitty_Sprite with easeoutleft
+        hide Kitty_sprite with easeoutleft
         $ KittyX.recent_history.append("_angry")
         "[KittyX.name] storms off in a huff. She seemed pretty mad at you."
     elif line == "embarrassed":
@@ -1384,10 +1384,10 @@ label Kitty_sexfriend:
         $ KittyX.change_stat("love", 200, -10)
         $ KittyX.change_stat("obedience", 50, 5)
         $ KittyX.change_stat("inhibition", 80, -20)
-        hide Kitty_Sprite with easeoutbottom
+        hide Kitty_sprite with easeoutbottom
         "[KittyX.name] phases through the floor leaving you alone. That was very strange."
     elif line == "_sad":
-        hide Kitty_Sprite with easeoutbottom
+        hide Kitty_sprite with easeoutbottom
         "[KittyX.name] phases through the floor leaving you alone. You think you may have hurt her feelings."
     else:
         $ KittyX.player_petnames.append("sex friend")
@@ -1398,7 +1398,7 @@ label Kitty_sexfriend:
         "As she does so, she phases her hand through your jeans, so her fingers slide along your bare skin."
         $ KittyX.blushing = "_blush1"
         ch_k "I'll definitely be seeing {i}you{/i} later, [KittyX.player_petname]."
-        hide Kitty_Sprite with easeoutright
+        hide Kitty_sprite with easeoutright
         "She passes through a nearby wall. "
     call remove_girl (KittyX)
     return

@@ -1,48 +1,46 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/rogue_scenes.rpy", line 49, in script
-    show Rogue_sprite at sprite_location(RogueX.sprite_location) with easeinright
-Exception: DynamicImage u'images/Rogue_sprite/Rogue_standing_dress[RogueX.outfit[dress]][RogueX.arm_pose].png': could not find image. (u'images/Rogue_sprite/Rogue_standing_dress_raven1.png')
+  File "game/caught.rpy", line 1411, in script call
+    call world_map
+  File "game/locations.rpy", line 128, in script call
+    call event_calls
+  File "game/utilities.rpy", line 986, in script call
+    call expression event_Girls[0].tag + "_BF"
+  File "game/menus.rpy", line 1107, in script call
+    call after_action
+  File "game/actions.rpy", line 425, in script call
+    call action_specific_consequences(focused_Girl, primary_action)
+  File "game/reactions.rpy", line 716, in script
+    $ Girl.action_counter[action] += 1
+  File "game/reactions.rpy", line 716, in <module>
+    $ Girl.action_counter[action] += 1
+KeyError: 0
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/rogue_scenes.rpy", line 49, in script
-    show Rogue_sprite at sprite_location(RogueX.sprite_location) with easeinright
-  File "renpy/ast.py", line 1197, in execute
-    show_imspec(self.imspec, atl=getattr(self, "atl", None))
-  File "renpy/ast.py", line 1167, in show_imspec
-    atl=atl)
-  File "renpy/exports.py", line 768, in show
-    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
-  File "renpy/display/core.py", line 1147, in add
-    thing.visit_all(lambda d : None)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 558, in visit_all
-    for d in self.visit():
-  File "renpy/display/layout.py", line 1415, in visit
-    self.update(self.last_st, self.last_at)
-  File "renpy/display/layout.py", line 1443, in update
-    child.visit_all(lambda c : c.per_interact())
-  File "renpy/display/core.py", line 558, in visit_all
-    for d in self.visit():
-  File "renpy/display/image.py", line 744, in visit
-    self.find_target()
-  File "renpy/display/image.py", line 652, in find_target
-    raise Exception(error)
-Exception: DynamicImage u'images/Rogue_sprite/Rogue_standing_dress[RogueX.outfit[dress]][RogueX.arm_pose].png': could not find image. (u'images/Rogue_sprite/Rogue_standing_dress_raven1.png')
+  File "game/caught.rpy", line 1411, in script call
+    call world_map
+  File "game/locations.rpy", line 128, in script call
+    call event_calls
+  File "game/utilities.rpy", line 986, in script call
+    call expression event_Girls[0].tag + "_BF"
+  File "game/menus.rpy", line 1107, in script call
+    call after_action
+  File "game/actions.rpy", line 425, in script call
+    call action_specific_consequences(focused_Girl, primary_action)
+  File "game/reactions.rpy", line 716, in script
+    $ Girl.action_counter[action] += 1
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 928, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/python.py", line 2245, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/reactions.rpy", line 716, in <module>
+    $ Girl.action_counter[action] += 1
+KeyError: 0
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like 0.997f2
-Wed May 25 16:03:22 2022
+Thu May 26 12:14:57 2022

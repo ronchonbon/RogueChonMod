@@ -221,7 +221,7 @@ label Flirt(Girl=0):
                     elif Girl == LauraX:
                         ch_l "Keep back!"
                     elif Girl == JeanX:
-                        $ Girl.eyes = "psychic"
+                        $ Girl.eyes = "_psychic"
                         ch_j "Back!"
                         $ Girl.eyes = "_sexy"
                     elif Girl == StormX:
@@ -1273,7 +1273,7 @@ label Flirt(Girl=0):
                         "She flips you onto your back."
                         ch_l "What the fuck?!"
                     elif Girl == JeanX:
-                        $ JeanX.eyes = "psychic"
+                        $ JeanX.eyes = "_psychic"
                         "You feel something slam the back of your head."
                         ch_j "Hands!"
                         $ JeanX.eyes = "_squint"
@@ -1480,7 +1480,7 @@ label Flirt(Girl=0):
                             call Punch
                             "She gives you a quick shove."
                         elif Girl == JeanX:
-                            $ JeanX.eyes = "psychic"
+                            $ JeanX.eyes = "_psychic"
                             call Punch
                             "You feel something slam the back of your head."
                             ch_j "Ok, that's good."
@@ -2790,7 +2790,7 @@ label TouchCheek(Girl=0):
         elif Girl == EmmaX:
             ch_e "What are you doing, [Girl.player_petname]?"
         elif Girl == JeanX:
-            $ Girl.eyes = "psychic"
+            $ Girl.eyes = "_psychic"
             ch_j "I told you to keep your distance."
             $ Girl.eyes = "_squint"
         elif Girl == StormX:
@@ -3214,7 +3214,7 @@ label Girl_Headpat(Girl=0):
         elif Girl == LauraX:
             ch_l "Seriously, hands off."
         elif Girl == JeanX:
-            $ Girl.eyes = "psychic"
+            $ Girl.eyes = "_psychic"
             ch_j "I told you to keep your distance."
             $ Girl.eyes = "_squint"
         elif Girl == StormX:
@@ -3287,7 +3287,7 @@ label Girl_Headpat(Girl=0):
             "She flails her arms around, knocking your hand away."
             ch_l "Get away from me."
         elif Girl == JeanX:
-            $ Girl.eyes = "psychic"
+            $ Girl.eyes = "_psychic"
             ch_j "Quit it!."
             $ Girl.eyes = "_squint"
         elif Girl == StormX:
@@ -4109,7 +4109,7 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
         return
     elif Girl == JeanX and Girl.bottom_number() == 5 and not approval_check(Girl, 400, "L"):
         $ Girl.outfit["underwear"] = ""
-        $ Girl.change_face("_bemused",eyes="psychic")
+        $ Girl.change_face("_bemused",eyes="_psychic")
         "You notice some movement as her panties shoot down her legs and she quickly steps out of them."
         "They scoot along near the ground and then up to your hand."
         $ Girl.change_face("_sexy")

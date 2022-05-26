@@ -2065,7 +2065,7 @@ label Gwentro:
     ch_g "Oh, hey you tw-"
     call GwenFace ("_surprised", 1, mouth = "_kiss")
     ch_g "Um. . ."
-    call GwenFace ("shocked", 1)
+    call GwenFace ("_shocked", 1)
     ch_g "Sorry! My bad, I was just. . ."
     $ LauraX.change_face("_confused",2,eyes="_side")
     call GwenFace ("_surprised", 1, mouth = "_kiss")
@@ -2086,7 +2086,7 @@ label Gwentro:
     show Gwen_Sprite:
         ypos 50
     ch_g "So now that we've got that taken care of, what's your name?{w=0.2}{nw}"
-    call GwenFace ("shocked", 0)
+    call GwenFace ("_shocked", 0)
     menu:
         ch_g "So now that we've got that taken care of, what's your name?{nw}"
         "[Player.name]":

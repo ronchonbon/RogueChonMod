@@ -987,7 +987,7 @@ label Storm_Chitchat(O=0, Options=["default","default","default"]):
             $ Options.append("facial")
         if StormX.event_counter["sleepover"]:
 
-            $ Options.append("sleep")
+            $ Options.append("sleepwear")
         if StormX.event_counter["creampied"] or StormX.event_counter["anal_creampied"]:
 
             $ Options.append("creampie")
@@ -2249,7 +2249,7 @@ label Storm_Wardrobe_Menu:
             "outfit Management":
                 call Storm_Clothes_outfits
             "Let's talk about what you wear around.":
-                call Clothes_Schedule (StormX)
+                call set_clothes_schedule (StormX)
 
             "Could I get a look at it?" if StormX.location != bg_current:
 
@@ -2376,26 +2376,26 @@ label Storm_Wardrobe_Menu:
                 "Let's try something else though.":
                     ch_s "Ok."
 
-        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not StormX.first_custom_outfit[0] and not StormX.second_custom_outfit[0] and not StormX.third_custom_outfit[0]:
+        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not StormX.first_custom_outfit["outfit_active"] and not StormX.second_custom_outfit["outfit_active"] and not StormX.third_custom_outfit["outfit_active"]:
             pass
 
-        "Remember that outfit we put together?" if StormX.first_custom_outfit[0] or StormX.second_custom_outfit[0] or StormX.third_custom_outfit[0]:
+        "Remember that outfit we put together?" if StormX.first_custom_outfit["outfit_active"] or StormX.second_custom_outfit["outfit_active"] or StormX.third_custom_outfit["outfit_active"]:
             $ counter = 0
             while 1:
                 menu:
-                    "Throw on Custom 1 (locked)" if not StormX.first_custom_outfit[0]:
+                    "Throw on Custom 1 (locked)" if not StormX.first_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 1" if StormX.first_custom_outfit[0]:
+                    "Throw on Custom 1" if StormX.first_custom_outfit["outfit_active"]:
                         $ StormX.change_outfit("custom1")
                         $ counter = 3
-                    "Throw on Custom 2 (locked)" if not StormX.second_custom_outfit[0]:
+                    "Throw on Custom 2 (locked)" if not StormX.second_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 2" if StormX.second_custom_outfit[0]:
+                    "Throw on Custom 2" if StormX.second_custom_outfit["outfit_active"]:
                         $ StormX.change_outfit("custom2")
                         $ counter = 5
-                    "Throw on Custom 3 (locked)" if not StormX.third_custom_outfit[0]:
+                    "Throw on Custom 3 (locked)" if not StormX.third_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 3" if StormX.third_custom_outfit[0]:
+                    "Throw on Custom 3" if StormX.third_custom_outfit["outfit_active"]:
                         $ StormX.change_outfit("custom3")
                         $ counter = 6
 
@@ -2403,29 +2403,29 @@ label Storm_Wardrobe_Menu:
                         pass
                     "You should wear this one in private." if counter:
                         if counter == 5:
-                            $ StormX.clothing[9] = "custom2"
+                            $ StormX.clothing[9] = 5
                         elif counter == 6:
-                            $ StormX.clothing[9] = "custom3"
+                            $ StormX.clothing[9] = 6
                         else:
-                            $ StormX.clothing[9] = "custom1"
+                            $ StormX.clothing[9] = 3
                         ch_s "That would be fine."
                     "On second thought, forget about that one outfit. . .":
 
                         menu:
-                            "Custom 1 [[clear custom 1]" if StormX.first_custom_outfit[0]:
+                            "Custom 1 [[clear custom 1]" if StormX.first_custom_outfit["outfit_active"]:
                                 ch_s "Fine."
-                                $ StormX.first_custom_outfit[0] = 0
-                            "Custom 1 [[clear custom 1] (locked)" if not StormX.first_custom_outfit[0]:
+                                $ StormX.first_custom_outfit["outfit_active"] = 0
+                            "Custom 1 [[clear custom 1] (locked)" if not StormX.first_custom_outfit["outfit_active"]:
                                 pass
-                            "Custom 2 [[clear custom 2]" if StormX.second_custom_outfit[0]:
+                            "Custom 2 [[clear custom 2]" if StormX.second_custom_outfit["outfit_active"]:
                                 ch_s "Fine."
-                                $ StormX.second_custom_outfit[0] = 0
-                            "Custom 2 [[clear custom 2] (locked)" if not StormX.second_custom_outfit[0]:
+                                $ StormX.second_custom_outfit["outfit_active"] = 0
+                            "Custom 2 [[clear custom 2] (locked)" if not StormX.second_custom_outfit["outfit_active"]:
                                 pass
-                            "Custom 3 [[clear custom 3]" if StormX.third_custom_outfit[0]:
+                            "Custom 3 [[clear custom 3]" if StormX.third_custom_outfit["outfit_active"]:
                                 ch_s "Fine."
-                                $ StormX.third_custom_outfit[0] = 0
-                            "Custom 3 [[clear custom 3] (locked)" if not StormX.third_custom_outfit[0]:
+                                $ StormX.third_custom_outfit["outfit_active"] = 0
+                            "Custom 3 [[clear custom 3] (locked)" if not StormX.third_custom_outfit["outfit_active"]:
                                 pass
                             "Never mind, [[back].":
                                 pass
@@ -2439,19 +2439,19 @@ label Storm_Wardrobe_Menu:
                         return
 
         "Gym Clothes?" if not StormX.taboo or bg_current == "bg_dangerroom":
-            $ StormX.change_outfit("gym")
+            $ StormX.change_outfit("gym_clothes")
 
         "Sleepwear?" if not StormX.taboo:
             if approval_check(StormX, 1200):
-                $ StormX.change_outfit("sleep")
+                $ StormX.change_outfit("sleepwear")
             else:
                 call Display_dress_screen (StormX)
                 if _return:
-                    $ StormX.change_outfit("sleep")
+                    $ StormX.change_outfit("sleepwear")
 
-        "Swimwear? (locked)" if (StormX.taboo and bg_current != "bg_pool") or not StormX.swimwear[0]:
+        "Swimwear? (locked)" if (StormX.taboo and bg_current != "bg_pool") or not StormX.swimwear["outfit_active"]:
             $ StormX.change_outfit("swimwear")
-        "Swimwear?" if (not StormX.taboo or bg_current == "bg_pool") and StormX.swimwear[0]:
+        "Swimwear?" if (not StormX.taboo or bg_current == "bg_pool") and StormX.swimwear["outfit_active"]:
             $ StormX.change_outfit("swimwear")
 
 
@@ -3222,7 +3222,7 @@ label Storm_Wardrobe_Menu:
 
 
 
-        "Add Ring Piercings" if StormX.piercings != "_ring":
+        "Add Ring Piercings" if StormX.outfit["front_inner_accessory"] != "_ring":
             ch_p "You know, you'd look really nice with some ring body piercings."
             if "_ring" in StormX.to_do:
                 ch_s "I know, I will do it."
@@ -3241,7 +3241,7 @@ label Storm_Wardrobe_Menu:
                     return
                 $ StormX.to_do.append("_ring")
 
-        "Add barbell piercings." if StormX.piercings != "_barbell":
+        "Add barbell piercings." if StormX.outfit["front_inner_accessory"] != "_barbell":
             ch_p "You know, you'd look really nice with some barbell body piercings."
             if "_barbell" in StormX.to_do:
                 ch_s "I know, I will do it."
@@ -3260,7 +3260,7 @@ label Storm_Wardrobe_Menu:
                     return
                 $ StormX.to_do.append("_barbell")
 
-        "Remove Piercings" if StormX.piercings:
+        "Remove Piercings" if StormX.outfit["front_inner_accessory"]:
             ch_p "You know, you'd look better without those piercings."
             $ StormX.change_face("_bemused", 1)
             $ approval = approval_check(StormX, 1350, taboo_modifier=0)
@@ -3275,7 +3275,7 @@ label Storm_Wardrobe_Menu:
                 $ StormX.brows = "_angry"
                 ch_s "I grown rather attached."
                 return
-            $ StormX.piercings = ""
+            $ StormX.outfit["front_inner_accessory"] = ""
 
         "Add gold_necklace" if StormX.outfit["neck"] != "_gold_necklace":
             ch_p "Why don't you try on that gold necklace?"

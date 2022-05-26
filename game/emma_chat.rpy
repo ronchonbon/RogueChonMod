@@ -1126,7 +1126,7 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
                 $ Options.append("facial")
             if EmmaX.event_counter["sleepover"]:
 
-                $ Options.append("sleep")
+                $ Options.append("sleepwear")
             if EmmaX.event_counter["creampied"] or EmmaX.event_counter["anal_creampied"]:
 
                 $ Options.append("creampie")
@@ -2424,7 +2424,7 @@ label Emma_Wardrobe_Menu:
             "outfits":
                 call Emma_Clothes_outfits
             "Let's talk about what you wear around.":
-                call Clothes_Schedule (EmmaX)
+                call set_clothes_schedule (EmmaX)
 
             "Could I get a look at it?" if EmmaX.location != bg_current:
 
@@ -2541,26 +2541,26 @@ label Emma_Wardrobe_Menu:
                 "Let's try something else though.":
                     ch_e "Very well."
 
-        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not EmmaX.first_custom_outfit[0] and not EmmaX.second_custom_outfit[0] and not EmmaX.third_custom_outfit[0]:
+        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not EmmaX.first_custom_outfit["outfit_active"] and not EmmaX.second_custom_outfit["outfit_active"] and not EmmaX.third_custom_outfit["outfit_active"]:
             pass
 
-        "Remember that outfit we put together?" if EmmaX.first_custom_outfit[0] or EmmaX.second_custom_outfit[0] or EmmaX.third_custom_outfit[0]:
+        "Remember that outfit we put together?" if EmmaX.first_custom_outfit["outfit_active"] or EmmaX.second_custom_outfit["outfit_active"] or EmmaX.third_custom_outfit["outfit_active"]:
             $ counter = 0
             while 1:
                 menu:
-                    "Throw on Custom 1 (locked)" if not EmmaX.first_custom_outfit[0]:
+                    "Throw on Custom 1 (locked)" if not EmmaX.first_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 1" if EmmaX.first_custom_outfit[0]:
+                    "Throw on Custom 1" if EmmaX.first_custom_outfit["outfit_active"]:
                         $ EmmaX.change_outfit("custom1")
                         $ counter = 3
-                    "Throw on Custom 2 (locked)" if not EmmaX.second_custom_outfit[0]:
+                    "Throw on Custom 2 (locked)" if not EmmaX.second_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 2" if EmmaX.second_custom_outfit[0]:
+                    "Throw on Custom 2" if EmmaX.second_custom_outfit["outfit_active"]:
                         $ EmmaX.change_outfit("custom2")
                         $ counter = 5
-                    "Throw on Custom 3 (locked)" if not EmmaX.third_custom_outfit[0]:
+                    "Throw on Custom 3 (locked)" if not EmmaX.third_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 3" if EmmaX.third_custom_outfit[0]:
+                    "Throw on Custom 3" if EmmaX.third_custom_outfit["outfit_active"]:
                         $ EmmaX.change_outfit("custom3")
                         $ counter = 6
 
@@ -2568,29 +2568,29 @@ label Emma_Wardrobe_Menu:
                         pass
                     "You should wear this one in private." if counter:
                         if counter == 5:
-                            $ EmmaX.clothing[9] = "custom2"
+                            $ EmmaX.clothing[9] = 5
                         elif counter == 6:
-                            $ EmmaX.clothing[9] = "custom3"
+                            $ EmmaX.clothing[9] = 6
                         else:
-                            $ EmmaX.clothing[9] = "custom1"
+                            $ EmmaX.clothing[9] = 3
                         ch_e "Ok, sure."
                     "On second thought, forget about that one outfit. . .":
 
                         menu:
-                            "Custom 1 [[clear custom 1]" if EmmaX.first_custom_outfit[0]:
+                            "Custom 1 [[clear custom 1]" if EmmaX.first_custom_outfit["outfit_active"]:
                                 ch_e "Very well."
-                                $ EmmaX.first_custom_outfit[0] = 0
-                            "Custom 1 [[clear custom 1] (locked)" if not EmmaX.first_custom_outfit[0]:
+                                $ EmmaX.first_custom_outfit["outfit_active"] = 0
+                            "Custom 1 [[clear custom 1] (locked)" if not EmmaX.first_custom_outfit["outfit_active"]:
                                 pass
-                            "Custom 2 [[clear custom 2]" if EmmaX.second_custom_outfit[0]:
+                            "Custom 2 [[clear custom 2]" if EmmaX.second_custom_outfit["outfit_active"]:
                                 ch_e "Very well."
-                                $ EmmaX.second_custom_outfit[0] = 0
-                            "Custom 2 [[clear custom 2] (locked)" if not EmmaX.second_custom_outfit[0]:
+                                $ EmmaX.second_custom_outfit["outfit_active"] = 0
+                            "Custom 2 [[clear custom 2] (locked)" if not EmmaX.second_custom_outfit["outfit_active"]:
                                 pass
-                            "Custom 3 [[clear custom 3]" if EmmaX.third_custom_outfit[0]:
+                            "Custom 3 [[clear custom 3]" if EmmaX.third_custom_outfit["outfit_active"]:
                                 ch_e "Very well."
-                                $ EmmaX.third_custom_outfit[0] = 0
-                            "Custom 3 [[clear custom 3] (locked)" if not EmmaX.third_custom_outfit[0]:
+                                $ EmmaX.third_custom_outfit["outfit_active"] = 0
+                            "Custom 3 [[clear custom 3] (locked)" if not EmmaX.third_custom_outfit["outfit_active"]:
                                 pass
                             "Never mind, [[back].":
                                 pass
@@ -2604,20 +2604,20 @@ label Emma_Wardrobe_Menu:
                         return
 
         "Gym Clothes?" if not EmmaX.taboo or bg_current == "bg_dangerroom":
-            $ EmmaX.change_outfit("gym")
+            $ EmmaX.change_outfit("gym_clothes")
 
 
         "Sleepwear?" if not EmmaX.taboo:
             if approval_check(EmmaX, 1200):
-                $ EmmaX.change_outfit("sleep")
+                $ EmmaX.change_outfit("sleepwear")
             else:
                 call Display_dress_screen (EmmaX)
                 if _return:
-                    $ EmmaX.change_outfit("sleep")
+                    $ EmmaX.change_outfit("sleepwear")
 
-        "Swimwear? (locked)" if (EmmaX.taboo and bg_current != "bg_pool") or not EmmaX.swimwear[0]:
+        "Swimwear? (locked)" if (EmmaX.taboo and bg_current != "bg_pool") or not EmmaX.swimwear["outfit_active"]:
             $ EmmaX.change_outfit("swimwear")
-        "Swimwear?" if (not EmmaX.taboo or bg_current == "bg_pool") and EmmaX.swimwear[0]:
+        "Swimwear?" if (not EmmaX.taboo or bg_current == "bg_pool") and EmmaX.swimwear["outfit_active"]:
             $ EmmaX.change_outfit("swimwear")
 
         "Halloween Costume?" if "halloween" in EmmaX.history:
@@ -3159,16 +3159,16 @@ label Emma_Wardrobe_Menu:
                         else:
                             $ EmmaX.outfit["underwear"] = "_white_panties"
 
-                "Why don't you wear the sporty panties instead?" if EmmaX.outfit["underwear"] and EmmaX.outfit["underwear"] != "sports_panties":
+                "Why don't you wear the sporty panties instead?" if EmmaX.outfit["underwear"] and EmmaX.outfit["underwear"] != "_sports_panties":
                     if approval_check(EmmaX, 1200, taboo_modifier=(4-Public)):
                         ch_e "Fine."
-                        $ EmmaX.outfit["underwear"] = "sports_panties"
+                        $ EmmaX.outfit["underwear"] = "_sports_panties"
                     else:
                         call Display_dress_screen (EmmaX)
                         if not _return:
                             ch_e "I really don't see how that's any of your concern."
                         else:
-                            $ EmmaX.outfit["underwear"] = "sports_panties"
+                            $ EmmaX.outfit["underwear"] = "_sports_panties"
 
                 "Why don't you wear the lace panties instead?" if "_lace_panties" in EmmaX.inventory and EmmaX.outfit["underwear"] and EmmaX.outfit["underwear"] != "_lace_panties":
                     if approval_check(EmmaX, 1300, taboo_modifier=(4-Public)):
@@ -3219,7 +3219,7 @@ label Emma_Wardrobe_Menu:
                             $ EmmaX.outfit["underwear"] = "_white_panties"
                         "How about the sporty ones?":
                             ch_e "Fine."
-                            $ EmmaX.outfit["underwear"] = "sports_panties"
+                            $ EmmaX.outfit["underwear"] = "_sports_panties"
                         "How about the lace ones?" if "_lace_panties" in EmmaX.inventory:
                             ch_e "Fine."
                             $ EmmaX.outfit["underwear"]  = "_lace_panties"
@@ -3313,7 +3313,7 @@ label Emma_Wardrobe_Menu:
         "Piercings. [[See what she looks like without them first] (locked)" if not EmmaX.seen_pussy and not EmmaX.seen_breasts:
             pass
 
-        "Add ring piercings" if EmmaX.piercings != "_ring" and (EmmaX.seen_pussy or EmmaX.seen_breasts):
+        "Add ring piercings" if EmmaX.outfit["front_inner_accessory"] != "_ring" and (EmmaX.seen_pussy or EmmaX.seen_breasts):
             ch_p "You know, you'd look really nice with some ring body piercings."
             if "_ring" in EmmaX.to_do:
                 ch_e "Yes, yes, it's on my schedule."
@@ -3333,7 +3333,7 @@ label Emma_Wardrobe_Menu:
                     return
                 $ EmmaX.to_do.append("_ring")
 
-        "Add barbell piercings." if EmmaX.piercings != "_barbell" and (EmmaX.seen_pussy or EmmaX.seen_breasts):
+        "Add barbell piercings." if EmmaX.outfit["front_inner_accessory"] != "_barbell" and (EmmaX.seen_pussy or EmmaX.seen_breasts):
             ch_p "You know, you'd look really nice with some barbell body piercings."
             if "_barbell" in EmmaX.to_do:
                 ch_e "Yes, yes, it's on my schedule."
@@ -3352,9 +3352,9 @@ label Emma_Wardrobe_Menu:
                     ch_e "Well, I'm just not ready for that sort of thing, [EmmaX.player_petname]."
                     return
                 $ EmmaX.to_do.append("_barbell")
-                $ EmmaX.piercings = "_barbell"
+                $ EmmaX.outfit["front_inner_accessory"] = "_barbell"
 
-        "Remove piercings" if EmmaX.piercings:
+        "Remove piercings" if EmmaX.outfit["front_inner_accessory"]:
             ch_p "You know, you'd look better without those piercings."
             $ EmmaX.change_face("_bemused", 1)
             $ approval = approval_check(EmmaX, 1350, taboo_modifier=0)
@@ -3369,7 +3369,7 @@ label Emma_Wardrobe_Menu:
                 $ EmmaX.brows = "_angry"
                 ch_e "Well {i}I{/i} enjoy them."
                 return
-            $ EmmaX.piercings = ""
+            $ EmmaX.outfit["front_inner_accessory"] = ""
 
         "Add_choker" if EmmaX.outfit["neck"] != "_choker":
             ch_e "Why don't you try on that white choker."

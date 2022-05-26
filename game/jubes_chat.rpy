@@ -978,7 +978,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
             $ Options.append("facial")
         if JubesX.event_counter["sleepover"]:
 
-            $ Options.append("sleep")
+            $ Options.append("sleepwear")
         if JubesX.event_counter["creampied"] or JubesX.event_counter["anal_creampied"]:
 
             $ Options.append("creampie")
@@ -2254,7 +2254,7 @@ label Jubes_Wardrobe_Menu:
             "outfit Management":
                 call Jubes_Clothes_outfits
             "Let's talk about what you wear around.":
-                call Clothes_Schedule (JubesX)
+                call set_clothes_schedule (JubesX)
 
             "Could I get a look at it?" if JubesX.location != bg_current:
 
@@ -2376,26 +2376,26 @@ label Jubes_Wardrobe_Menu:
                 "Let's try something else though.":
                     ch_v "Ok."
 
-        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not JubesX.first_custom_outfit[0] and not JubesX.second_custom_outfit[0] and not JubesX.third_custom_outfit[0]:
+        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not JubesX.first_custom_outfit["outfit_active"] and not JubesX.second_custom_outfit["outfit_active"] and not JubesX.third_custom_outfit["outfit_active"]:
             pass
 
-        "Remember that outfit we put together?" if JubesX.first_custom_outfit[0] or JubesX.second_custom_outfit[0] or JubesX.third_custom_outfit[0]:
+        "Remember that outfit we put together?" if JubesX.first_custom_outfit["outfit_active"] or JubesX.second_custom_outfit["outfit_active"] or JubesX.third_custom_outfit["outfit_active"]:
             $ counter = 0
             while 1:
                 menu:
-                    "Throw on Custom 1 (locked)" if not JubesX.first_custom_outfit[0]:
+                    "Throw on Custom 1 (locked)" if not JubesX.first_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 1" if JubesX.first_custom_outfit[0]:
+                    "Throw on Custom 1" if JubesX.first_custom_outfit["outfit_active"]:
                         $ JubesX.change_outfit("custom1")
                         $ counter = 3
-                    "Throw on Custom 2 (locked)" if not JubesX.second_custom_outfit[0]:
+                    "Throw on Custom 2 (locked)" if not JubesX.second_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 2" if JubesX.second_custom_outfit[0]:
+                    "Throw on Custom 2" if JubesX.second_custom_outfit["outfit_active"]:
                         $ JubesX.change_outfit("custom2")
                         $ counter = 5
-                    "Throw on Custom 3 (locked)" if not JubesX.third_custom_outfit[0]:
+                    "Throw on Custom 3 (locked)" if not JubesX.third_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 3" if JubesX.third_custom_outfit[0]:
+                    "Throw on Custom 3" if JubesX.third_custom_outfit["outfit_active"]:
                         $ JubesX.change_outfit("custom3")
                         $ counter = 6
 
@@ -2403,29 +2403,29 @@ label Jubes_Wardrobe_Menu:
                         pass
                     "You should wear this one in private." if counter:
                         if counter == 5:
-                            $ JubesX.clothing[9] = "custom2"
+                            $ JubesX.clothing[9] = 5
                         elif counter == 6:
-                            $ JubesX.clothing[9] = "custom3"
+                            $ JubesX.clothing[9] = 6
                         else:
-                            $ JubesX.clothing[9] = "custom1"
+                            $ JubesX.clothing[9] = 3
                         ch_v "Ok, sure."
                     "On second thought, forget about that one outfit. . .":
 
                         menu:
-                            "Custom 1 [[clear custom 1]" if JubesX.first_custom_outfit[0]:
+                            "Custom 1 [[clear custom 1]" if JubesX.first_custom_outfit["outfit_active"]:
                                 ch_v "Ok."
-                                $ JubesX.first_custom_outfit[0] = 0
-                            "Custom 1 [[clear custom 1] (locked)" if not JubesX.first_custom_outfit[0]:
+                                $ JubesX.first_custom_outfit["outfit_active"] = 0
+                            "Custom 1 [[clear custom 1] (locked)" if not JubesX.first_custom_outfit["outfit_active"]:
                                 pass
-                            "Custom 2 [[clear custom 2]" if JubesX.second_custom_outfit[0]:
+                            "Custom 2 [[clear custom 2]" if JubesX.second_custom_outfit["outfit_active"]:
                                 ch_v "Ok."
-                                $ JubesX.second_custom_outfit[0] = 0
-                            "Custom 2 [[clear custom 2] (locked)" if not JubesX.second_custom_outfit[0]:
+                                $ JubesX.second_custom_outfit["outfit_active"] = 0
+                            "Custom 2 [[clear custom 2] (locked)" if not JubesX.second_custom_outfit["outfit_active"]:
                                 pass
-                            "Custom 3 [[clear custom 3]" if JubesX.third_custom_outfit[0]:
+                            "Custom 3 [[clear custom 3]" if JubesX.third_custom_outfit["outfit_active"]:
                                 ch_v "Ok."
-                                $ JubesX.third_custom_outfit[0] = 0
-                            "Custom 3 [[clear custom 3] (locked)" if not JubesX.third_custom_outfit[0]:
+                                $ JubesX.third_custom_outfit["outfit_active"] = 0
+                            "Custom 3 [[clear custom 3] (locked)" if not JubesX.third_custom_outfit["outfit_active"]:
                                 pass
                             "Never mind, [[back].":
                                 pass
@@ -2439,19 +2439,19 @@ label Jubes_Wardrobe_Menu:
                         return
 
         "Gym Clothes?" if not JubesX.taboo or bg_current == "bg_dangerroom":
-            $ JubesX.change_outfit("gym")
+            $ JubesX.change_outfit("gym_clothes")
 
         "Sleepwear?" if not JubesX.taboo:
             if approval_check(JubesX, 1200):
-                $ JubesX.change_outfit("sleep")
+                $ JubesX.change_outfit("sleepwear")
             else:
                 call Display_dress_screen (JubesX)
                 if _return:
-                    $ JubesX.change_outfit("sleep")
+                    $ JubesX.change_outfit("sleepwear")
 
-        "Swimwear? (locked)" if (JubesX.taboo and bg_current != "bg_pool") or not JubesX.swimwear[0]:
+        "Swimwear? (locked)" if (JubesX.taboo and bg_current != "bg_pool") or not JubesX.swimwear["outfit_active"]:
             $ JubesX.change_outfit("swimwear")
-        "Swimwear?" if (not JubesX.taboo or bg_current == "bg_pool") and JubesX.swimwear[0]:
+        "Swimwear?" if (not JubesX.taboo or bg_current == "bg_pool") and JubesX.swimwear["outfit_active"]:
             $ JubesX.change_outfit("swimwear")
 
         "Halloween Costume?" if "halloween" in JubesX.history:
@@ -2635,10 +2635,10 @@ label Jubes_Wardrobe_Menu:
             if not renpy.showing('dress_screen'):
                 call Jubes_First_Topless
 
-        "Maybe zip the jacket closed?" if JubesX.outfit["front_outer_accessory"] and JubesX.outfit["front_outer_accessory"] != "shut_jacket":
+        "Maybe zip the jacket closed?" if JubesX.outfit["front_outer_accessory"] and JubesX.outfit["front_outer_accessory"] != "_shut_jacket":
             $ JubesX.change_face("_bemused")
             ch_v "Sure."
-            $ JubesX.outfit["front_outer_accessory"] = "shut_jacket"
+            $ JubesX.outfit["front_outer_accessory"] = "_shut_jacket"
 
         "Try on that red shirt." if JubesX.outfit["top"] != "_red_shirt":
             $ JubesX.change_face("_bemused")
@@ -3187,7 +3187,7 @@ label Jubes_Wardrobe_Menu:
         "Piercings. [[See what she looks like without them first] (locked)" if not JubesX.seen_pussy and not JubesX.seen_breasts:
             pass
 
-        "Add ring piercings" if JubesX.piercings != "_ring" and (JubesX.seen_pussy or JubesX.seen_breasts):
+        "Add ring piercings" if JubesX.outfit["front_inner_accessory"] != "_ring" and (JubesX.seen_pussy or JubesX.seen_breasts):
             ch_p "You know, you'd look really nice with some ring body piercings."
             if "_ring" in JubesX.to_do:
                 ch_v "I heard you, I'll get around to it."
@@ -3207,7 +3207,7 @@ label Jubes_Wardrobe_Menu:
                     return
                 $ JubesX.to_do.append("_ring")
 
-        "Add barbell piercings" if JubesX.piercings != "_barbell" and (JubesX.seen_pussy or JubesX.seen_breasts):
+        "Add barbell piercings" if JubesX.outfit["front_inner_accessory"] != "_barbell" and (JubesX.seen_pussy or JubesX.seen_breasts):
             ch_p "You know, you'd look really nice with some barbell body piercings."
             if "_barbell" in JubesX.to_do:
                 ch_v "I heard you, I'll get around to it."
@@ -3227,7 +3227,7 @@ label Jubes_Wardrobe_Menu:
                     return
                 $ JubesX.to_do.append("_barbell")
 
-        "Remove piercings" if JubesX.piercings:
+        "Remove piercings" if JubesX.outfit["front_inner_accessory"]:
             ch_p "You know, you'd look better without those piercings."
             $ JubesX.change_face("_bemused", 1)
             $ approval = approval_check(JubesX, 1350, taboo_modifier=0)
@@ -3242,7 +3242,7 @@ label Jubes_Wardrobe_Menu:
                 $ JubesX.brows = "_angry"
                 ch_v "I really like them though!"
                 return
-            $ JubesX.piercings = ""
+            $ JubesX.outfit["front_inner_accessory"] = ""
         "Never mind":
 
             pass

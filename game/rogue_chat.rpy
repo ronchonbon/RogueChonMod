@@ -2187,7 +2187,7 @@ label Rogue_Wardrobe_Menu:
             "Outfit Management":
                 call Rogue_Clothes_outfits
             "Let's talk about what you wear around.":
-                call Clothes_Schedule (RogueX)
+                call set_clothes_schedule (RogueX)
             "Could I get a look at it?" if RogueX.location != bg_current:
                 call outfitShame (RogueX, 0, 2)
 
@@ -2318,26 +2318,26 @@ label Rogue_Wardrobe_Menu:
                 "Let's try something else though.":
                     ch_r "Ok."
 
-        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not RogueX.first_custom_outfit[0] and not RogueX.second_custom_outfit[0] and not RogueX.third_custom_outfit[0]:
+        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not RogueX.first_custom_outfit["outfit_active"] and not RogueX.second_custom_outfit["outfit_active"] and not RogueX.third_custom_outfit["outfit_active"]:
             pass
 
-        "Remember that outfit we put together?" if RogueX.first_custom_outfit[0] or RogueX.second_custom_outfit[0] or RogueX.third_custom_outfit[0]:
+        "Remember that outfit we put together?" if RogueX.first_custom_outfit["outfit_active"] or RogueX.second_custom_outfit["outfit_active"] or RogueX.third_custom_outfit["outfit_active"]:
             $ counter = 0
             while 1:
                 menu:
-                    "Throw on Custom 1 (locked)" if not RogueX.first_custom_outfit[0]:
+                    "Throw on Custom 1 (locked)" if not RogueX.first_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 1" if RogueX.first_custom_outfit[0]:
+                    "Throw on Custom 1" if RogueX.first_custom_outfit["outfit_active"]:
                         $ RogueX.change_outfit("custom1")
                         $ counter = 3
-                    "Throw on Custom 2 (locked)" if not RogueX.second_custom_outfit[0]:
+                    "Throw on Custom 2 (locked)" if not RogueX.second_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 2" if RogueX.second_custom_outfit[0]:
+                    "Throw on Custom 2" if RogueX.second_custom_outfit["outfit_active"]:
                         $ RogueX.change_outfit("custom2")
                         $ counter = 5
-                    "Throw on Custom 3 (locked)" if not RogueX.third_custom_outfit[0]:
+                    "Throw on Custom 3 (locked)" if not RogueX.third_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 3" if RogueX.third_custom_outfit[0]:
+                    "Throw on Custom 3" if RogueX.third_custom_outfit["outfit_active"]:
                         $ RogueX.change_outfit("custom3")
                         $ counter = 6
 
@@ -2345,30 +2345,30 @@ label Rogue_Wardrobe_Menu:
                         pass
                     "You should wear this one in private." if counter:
                         if counter == 5:
-                            $ RogueX.clothing[9] = "custom2"
+                            $ RogueX.clothing[9] = 5
                         elif counter == 6:
-                            $ RogueX.clothing[9] = "custom3"
+                            $ RogueX.clothing[9] = 6
                         else:
-                            $ RogueX.clothing[9] = "custom1"
+                            $ RogueX.clothing[9] = 3
                         ch_r "Ok, sure."
                     "On second thought, forget about that one outfit. . .":
 
                         menu:
                             ch_r "Which one did you mean?"
-                            "Custom 1 [[clear custom 1]" if RogueX.first_custom_outfit[0]:
+                            "Custom 1 [[clear custom 1]" if RogueX.first_custom_outfit["outfit_active"]:
                                 ch_r "Ok, no problem."
-                                $ RogueX.first_custom_outfit[0] = 0
-                            "Custom 1 [[clear custom 1] (locked)" if not RogueX.first_custom_outfit[0]:
+                                $ RogueX.first_custom_outfit["outfit_active"] = 0
+                            "Custom 1 [[clear custom 1] (locked)" if not RogueX.first_custom_outfit["outfit_active"]:
                                 pass
-                            "Custom 2 [[clear custom 2]" if RogueX.second_custom_outfit[0]:
+                            "Custom 2 [[clear custom 2]" if RogueX.second_custom_outfit["outfit_active"]:
                                 ch_r "Ok, no problem."
-                                $ RogueX.second_custom_outfit[0] = 0
-                            "Custom 2 [[clear custom 2] (locked)" if not RogueX.second_custom_outfit[0]:
+                                $ RogueX.second_custom_outfit["outfit_active"] = 0
+                            "Custom 2 [[clear custom 2] (locked)" if not RogueX.second_custom_outfit["outfit_active"]:
                                 pass
-                            "Custom 3 [[clear custom 3]" if RogueX.third_custom_outfit[0]:
+                            "Custom 3 [[clear custom 3]" if RogueX.third_custom_outfit["outfit_active"]:
                                 ch_r "Ok, no problem."
-                                $ RogueX.third_custom_outfit[0] = 0
-                            "Custom 3 [[clear custom 3] (locked)" if not RogueX.third_custom_outfit[0]:
+                                $ RogueX.third_custom_outfit["outfit_active"] = 0
+                            "Custom 3 [[clear custom 3] (locked)" if not RogueX.third_custom_outfit["outfit_active"]:
                                 pass
                             "Never mind, [[back].":
                                 pass
@@ -2383,19 +2383,19 @@ label Rogue_Wardrobe_Menu:
 
 
         "Gym Clothes?" if not RogueX.taboo or bg_current == "bg_dangerroom":
-            $ RogueX.change_outfit("gym")
+            $ RogueX.change_outfit("gym_clothes")
 
         "Sleepwear?" if not RogueX.taboo:
             if approval_check(RogueX, 1200):
-                $ RogueX.change_outfit("sleep")
+                $ RogueX.change_outfit("sleepwear")
             else:
                 call Display_dress_screen (RogueX)
                 if _return:
-                    $ RogueX.change_outfit("sleep")
+                    $ RogueX.change_outfit("sleepwear")
 
-        "Swimwear? (locked)" if (RogueX.taboo and bg_current != "bg_pool") or not RogueX.swimwear[0]:
+        "Swimwear? (locked)" if (RogueX.taboo and bg_current != "bg_pool") or not RogueX.swimwear["outfit_active"]:
             $ RogueX.change_outfit("swimwear")
-        "Swimwear?" if (not RogueX.taboo or bg_current == "bg_pool") and RogueX.swimwear[0]:
+        "Swimwear?" if (not RogueX.taboo or bg_current == "bg_pool") and RogueX.swimwear["outfit_active"]:
             $ RogueX.change_outfit("swimwear")
 
         "Halloween Costume?" if "halloween" in RogueX.history:
@@ -3196,7 +3196,7 @@ label Rogue_Wardrobe_Menu:
 
                     return
                 $ RogueX.to_do.append("shave")
-        "Add ring piercings." if RogueX.piercings != "_ring" and (RogueX.seen_pussy or RogueX.seen_breasts):
+        "Add ring piercings." if RogueX.outfit["front_inner_accessory"] != "_ring" and (RogueX.seen_pussy or RogueX.seen_breasts):
             ch_p "You know, you'd look really nice with some ring body piercings."
 
             if "_ring" in RogueX.to_do:
@@ -3221,7 +3221,7 @@ label Rogue_Wardrobe_Menu:
                     return
 
                 $ RogueX.to_do.append("_ring")
-        "Add barbell piercings." if RogueX.piercings != "_barbell" and (RogueX.seen_pussy or RogueX.seen_breasts):
+        "Add barbell piercings." if RogueX.outfit["front_inner_accessory"] != "_barbell" and (RogueX.seen_pussy or RogueX.seen_breasts):
             ch_p "You know, you'd look really nice with some barbell body piercings."
 
             if "_barbell" in RogueX.to_do:
@@ -3246,8 +3246,8 @@ label Rogue_Wardrobe_Menu:
                     return
 
                 $ RogueX.to_do.append("_barbell")
-                $ RogueX.piercings = "_barbell"
-        "Remove piercings." if RogueX.piercings:
+                $ RogueX.outfit["front_inner_accessory"] = "_barbell"
+        "Remove piercings." if RogueX.outfit["front_inner_accessory"]:
             ch_p "You know, you'd look better without those piercings."
 
             $ RogueX.change_face("_bemused", 1)
@@ -3267,7 +3267,7 @@ label Rogue_Wardrobe_Menu:
                 ch_r "I'll keep them, if you don't mind."
 
                 return
-            $ RogueX.piercings = ""
+            $ RogueX.outfit["front_inner_accessory"] = ""
         "Add spiked collar." if RogueX.outfit["neck"] != "_spiked_collar":
             $ RogueX.outfit["neck"] = "_spiked_collar"
         "Remove spiked collar." if RogueX.outfit["neck"] == "_spiked_collar":

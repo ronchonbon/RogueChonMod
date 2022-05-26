@@ -670,7 +670,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She gasps as you grasp her under her " + GirlA.outfit['bra']])
             $ TempFocus += 3 if Player.focus < 60 else 2
             $ TempLust += 5 if GirlA.lust > 50 else 2
-        elif GirlA.piercings:
+        elif GirlA.outfit["front_inner_accessory"]:
 
             $ line = line + renpy.random.choice(["You reach out and massage her glorious breasts",
                                     "You pass your hands gently over her warm breasts, and blow across her pierced nipples",
@@ -722,7 +722,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                         "She gasps as you lightly lick her rigid nipples, poking through her " + GirlA.outfit['bra']])
             $ TempFocus += 4 if Player.focus < 60 else 3
             $ TempLust += 5 if GirlA.lust > 50 else 2
-        elif GirlA.piercings:
+        elif GirlA.outfit["front_inner_accessory"]:
 
             $ line = renpy.random.choice(["You bend down and motor-boat her breasts",
                                     "You gently nibble at her nipples as you suck on them",
@@ -982,7 +982,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             else:
                 $ TempFocus += 2 if Player.focus < 50 else 1
                 $ TempLust += 2 if GirlA.lust > 40 else 1
-            if GirlA.piercings and D20S <= 3:
+            if GirlA.outfit["front_inner_accessory"] and D20S <= 3:
                 "You tug on her piercing with your thumb, then let it snap back"
 
 
@@ -1120,7 +1120,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             else:
                 $ TempFocus += 2 if Player.focus < 50 else 1
                 $ TempLust += 5 if GirlA.lust > 60 else 3
-            if GirlA.piercings and D20S <= 3:
+            if GirlA.outfit["front_inner_accessory"] and D20S <= 3:
                 "You tug on her piercing with your teeth, then let it snap back"
 
 
@@ -2989,7 +2989,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
             show Rogue_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == KittyX:
-            show Kitty_Sprite zorder GirlA.sprite_layer:
+            show Kitty_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == EmmaX:
             show Emma_Sprite zorder GirlA.sprite_layer:
@@ -3018,7 +3018,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
             show Rogue_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == KittyX:
-            show Kitty_Sprite zorder GirlA.sprite_layer:
+            show Kitty_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == EmmaX:
             show Emma_Sprite zorder GirlA.sprite_layer:

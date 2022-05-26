@@ -16,7 +16,7 @@ label prologue:
     if not simulation:
         python:
             Player.name = renpy.input("What is your name?", default = "Zero", length = 10)
-            Player.name = Player.name .strip()
+            Player.name = Player.name.strip()
 
             if not Player.name :
                 Player.name  = "Zero"
@@ -26,9 +26,9 @@ label prologue:
             "Green":
                 $ Player.color = "Green"
             "White":
-                $ Player.color = "pink"
+                $ Player.color = "White"
             "Black":
-                $ Player.color = "brown"
+                $ Player.color = "Black"
 
     show Xavier_Sprite at sprite_location(stage_left) with dissolve
 
@@ -188,7 +188,7 @@ label tour_start:
 
                 ch_r "Well. . . I suppose it could. . . if one were into such things."
 
-                $ RogueX.change_face(B=0)
+                $ RogueX.change_face(blushing = 0)
 
                 $ counter = 3 if counter == 1 else 2
             "Ok, let's move on.":

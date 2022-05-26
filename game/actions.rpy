@@ -393,7 +393,7 @@ label action_cycle:
 
         if (primary_action in ["blowjob"] and action_speed) or primary_action in ["sex", "anal"]:
             $ Player.cock_wet = 1
-            $ Player.spunk = 0 if (Player.spunk and "in" not in focused_Girl.spunk) else Player.spunk #cleans you off after one cycle
+            $ Player.spunk = 0 if (Player.spunk and not focused_Girl.spunk["pussy"]) else Player.spunk #cleans you off after one cycle
 
         call end_of_action_round(focused_Girl, primary_action)
 
@@ -485,6 +485,8 @@ label after_action:
 
     if action_context == "shift":
         call switching_action_lines(focused_Girl, primary_action)
+        
+        $ primary_action = None
     elif primary_action == "kiss":
         call expression focused_Girl.tag + "_Pos_Reset"
     elif primary_action == "handjob":
@@ -790,7 +792,7 @@ label set_approval_bonus(Girl, action):
             $ approval_bonus -= 20
         elif "anal" in Girl.daily_history or "dildo_anal" in Girl.daily_history:
             $ approval_bonus -= 10
-        elif (Girl.action_counter["anal"] + Girl.action_counter["dildo_ass"] + Girl.buttplug) > 0: #You've done it before
+        elif (Girl.action_counter["anal"] + Girl.action_counter["dildo_ass"] + Girl.outfit["buttplug"]) > 0: #You've done it before
             $ approval_bonus += 20
 
         if Girl.bottom_number() > 6: # she's got pants on.

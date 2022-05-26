@@ -130,7 +130,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
         if Present[counter] == RogueX:
             show Rogue_sprite at Girl_Dance1(RogueX)
         elif Present[counter] == KittyX:
-            show Kitty_Sprite at Girl_Dance1(KittyX)
+            show Kitty_sprite at Girl_Dance1(KittyX)
         elif Present[counter] == EmmaX:
             show Emma_Sprite at Girl_Dance1(EmmaX)
         elif Present[counter] == LauraX:
@@ -706,7 +706,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
         if Girl == RogueX:
             show Rogue_sprite at Girl_Dance1(Girl)
         elif Girl == KittyX:
-            show Kitty_Sprite at Girl_Dance1(Girl)
+            show Kitty_sprite at Girl_Dance1(Girl)
         elif Girl == EmmaX:
             show Emma_Sprite at Girl_Dance1(Girl)
         elif Girl == LauraX:
@@ -977,7 +977,7 @@ label Strip_Ultimatum:
     if Girl == RogueX:
         show Rogue_sprite at Girl_Dance1(Girl)
     elif Girl == KittyX:
-        show Kitty_Sprite at Girl_Dance1(Girl)
+        show Kitty_sprite at Girl_Dance1(Girl)
     elif Girl == EmmaX:
         show Emma_Sprite at Girl_Dance1(Girl)
     elif Girl == LauraX:
@@ -2645,10 +2645,10 @@ label Bottoms_Off_Legs(Girl=0):
                 if approval < 2 and not Girl.outfit["underwear"] and Girl.hose_number() >= 10:
                     call NoPantiesOn (Girl)
 
-                if Girl == JubesX and JubesX.outfit["front_outer_accessory"] != "shut_jacket":
+                if Girl == JubesX and JubesX.outfit["front_outer_accessory"] != "_shut_jacket":
 
                     pass
-                elif Girl == JubesX and JubesX.outfit["front_outer_accessory"] == "shut_jacket":
+                elif Girl == JubesX and JubesX.outfit["front_outer_accessory"] == "_shut_jacket":
                     $ Girl.outfit["front_outer_accessory"] = ""
                     "She pulls her [Girl.outfit['front_outer_accessory']] off."
                     call expression Girl.tag + "_First_Bottomless"
@@ -2784,7 +2784,7 @@ label Bottoms_Off_Legs(Girl=0):
                     "She pulls her [Girl.outfit['legs']] off, then removes her [line], before putting them back on."
                 elif Girl.hose_number() >= 6:
                     "She pulls her [Girl.outfit['hose']] off, then removes her [line], before putting them back on."
-                elif Girl == JubesX and JubesX.outfit["front_outer_accessory"] == "shut_jacket":
+                elif Girl == JubesX and JubesX.outfit["front_outer_accessory"] == "_shut_jacket":
                     "She reaches under her jacket and pulls her [line] down."
                 elif Girl.outfit["bottom"]:
                     "She reaches under her [Girl.outfit['legs']] and pulls her [line] down."

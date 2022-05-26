@@ -1,8 +1,8 @@
 init -1 python hide:
     config.developer = True
 
-    config.screen_width = 1024 #1600
-    config.screen_height = 768 #900
+    config.screen_width = 1920 #1600
+    config.screen_height = 1080 #900
 
     config.window_title = u"Rogue-Like"
 
@@ -18,8 +18,8 @@ init -1 python hide:
         disabled_text = "#DFBA14",
         label = "#39435E",
         frame = "#ADB9CC",
-        mm_root = "images/titleimage.jpg",
-        gm_root = "images/menuimage.jpg",
+        mm_root = "images/titleimage.png",
+        gm_root = "images/menuimage.png",
         rounded_window = False)
 
     style.window.background = Frame("images/chatbox.png", 12, 12)

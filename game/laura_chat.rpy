@@ -986,7 +986,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
             $ Options.append("facial")
         if LauraX.event_counter["sleepover"]:
 
-            $ Options.append("sleep")
+            $ Options.append("sleepwear")
         if LauraX.event_counter["creampied"] or LauraX.event_counter["anal_creampied"]:
 
             $ Options.append("creampie")
@@ -2251,7 +2251,7 @@ label Laura_Wardrobe_Menu:
             "outfit Management":
                 call Laura_Clothes_outfits
             "Let's talk about what you wear around.":
-                call Clothes_Schedule (LauraX)
+                call set_clothes_schedule (LauraX)
 
             "Could I get a look at it?" if LauraX.location != bg_current:
 
@@ -2373,26 +2373,26 @@ label Laura_Wardrobe_Menu:
                 "Let's try something else though.":
                     ch_l "Ok."
 
-        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not LauraX.first_custom_outfit[0] and not LauraX.second_custom_outfit[0] and not LauraX.third_custom_outfit[0]:
+        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not LauraX.first_custom_outfit["outfit_active"] and not LauraX.second_custom_outfit["outfit_active"] and not LauraX.third_custom_outfit["outfit_active"]:
             pass
 
-        "Remember that outfit we put together?" if LauraX.first_custom_outfit[0] or LauraX.second_custom_outfit[0] or LauraX.third_custom_outfit[0]:
+        "Remember that outfit we put together?" if LauraX.first_custom_outfit["outfit_active"] or LauraX.second_custom_outfit["outfit_active"] or LauraX.third_custom_outfit["outfit_active"]:
             $ counter = 0
             while 1:
                 menu:
-                    "Throw on Custom 1 (locked)" if not LauraX.first_custom_outfit[0]:
+                    "Throw on Custom 1 (locked)" if not LauraX.first_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 1" if LauraX.first_custom_outfit[0]:
+                    "Throw on Custom 1" if LauraX.first_custom_outfit["outfit_active"]:
                         $ LauraX.change_outfit("custom1")
                         $ counter = 3
-                    "Throw on Custom 2 (locked)" if not LauraX.second_custom_outfit[0]:
+                    "Throw on Custom 2 (locked)" if not LauraX.second_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 2" if LauraX.second_custom_outfit[0]:
+                    "Throw on Custom 2" if LauraX.second_custom_outfit["outfit_active"]:
                         $ LauraX.change_outfit("custom2")
                         $ counter = 5
-                    "Throw on Custom 3 (locked)" if not LauraX.third_custom_outfit[0]:
+                    "Throw on Custom 3 (locked)" if not LauraX.third_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 3" if LauraX.third_custom_outfit[0]:
+                    "Throw on Custom 3" if LauraX.third_custom_outfit["outfit_active"]:
                         $ LauraX.change_outfit("custom3")
                         $ counter = 6
 
@@ -2400,29 +2400,29 @@ label Laura_Wardrobe_Menu:
                         pass
                     "You should wear this one in private." if counter:
                         if counter == 5:
-                            $ LauraX.clothing[9] = "custom2"
+                            $ LauraX.clothing[9] = 5
                         elif counter == 6:
-                            $ LauraX.clothing[9] = "custom3"
+                            $ LauraX.clothing[9] = 6
                         else:
-                            $ LauraX.clothing[9] = "custom1"
+                            $ LauraX.clothing[9] = 3
                         ch_l "Ok, sure."
                     "On second thought, forget about that one outfit. . .":
 
                         menu:
-                            "Custom 1 [[clear custom 1]" if LauraX.first_custom_outfit[0]:
+                            "Custom 1 [[clear custom 1]" if LauraX.first_custom_outfit["outfit_active"]:
                                 ch_l "Ok."
-                                $ LauraX.first_custom_outfit[0] = 0
-                            "Custom 1 [[clear custom 1] (locked)" if not LauraX.first_custom_outfit[0]:
+                                $ LauraX.first_custom_outfit["outfit_active"] = 0
+                            "Custom 1 [[clear custom 1] (locked)" if not LauraX.first_custom_outfit["outfit_active"]:
                                 pass
-                            "Custom 2 [[clear custom 2]" if LauraX.second_custom_outfit[0]:
+                            "Custom 2 [[clear custom 2]" if LauraX.second_custom_outfit["outfit_active"]:
                                 ch_l "Ok."
-                                $ LauraX.second_custom_outfit[0] = 0
-                            "Custom 2 [[clear custom 2] (locked)" if not LauraX.second_custom_outfit[0]:
+                                $ LauraX.second_custom_outfit["outfit_active"] = 0
+                            "Custom 2 [[clear custom 2] (locked)" if not LauraX.second_custom_outfit["outfit_active"]:
                                 pass
-                            "Custom 3 [[clear custom 3]" if LauraX.third_custom_outfit[0]:
+                            "Custom 3 [[clear custom 3]" if LauraX.third_custom_outfit["outfit_active"]:
                                 ch_l "Ok."
-                                $ LauraX.third_custom_outfit[0] = 0
-                            "Custom 3 [[clear custom 3] (locked)" if not LauraX.third_custom_outfit[0]:
+                                $ LauraX.third_custom_outfit["outfit_active"] = 0
+                            "Custom 3 [[clear custom 3] (locked)" if not LauraX.third_custom_outfit["outfit_active"]:
                                 pass
                             "Never mind, [[back].":
                                 pass
@@ -2436,19 +2436,19 @@ label Laura_Wardrobe_Menu:
                         return
 
         "Gym Clothes?" if not LauraX.taboo or bg_current == "bg_dangerroom":
-            $ LauraX.change_outfit("gym")
+            $ LauraX.change_outfit("gym_clothes")
 
         "Sleepwear?" if not LauraX.taboo:
             if approval_check(LauraX, 1200):
-                $ LauraX.change_outfit("sleep")
+                $ LauraX.change_outfit("sleepwear")
             else:
                 call Display_dress_screen (LauraX)
                 if _return:
-                    $ LauraX.change_outfit("sleep")
+                    $ LauraX.change_outfit("sleepwear")
 
-        "Swimwear? (locked)" if (LauraX.taboo and bg_current != "bg_pool") or not LauraX.swimwear[0]:
+        "Swimwear? (locked)" if (LauraX.taboo and bg_current != "bg_pool") or not LauraX.swimwear["outfit_active"]:
             $ LauraX.change_outfit("swimwear")
-        "Swimwear?" if (not LauraX.taboo or bg_current == "bg_pool") and LauraX.swimwear[0]:
+        "Swimwear?" if (not LauraX.taboo or bg_current == "bg_pool") and LauraX.swimwear["outfit_active"]:
             $ LauraX.change_outfit("swimwear")
 
         "Halloween Costume?" if "halloween" in LauraX.history:
@@ -3090,7 +3090,7 @@ label Laura_Wardrobe_Menu:
         "Piercings. [[See what she looks like without them first] (locked)" if not LauraX.seen_pussy and not LauraX.seen_breasts:
             pass
 
-        "Add ring piercings" if LauraX.piercings != "_ring" and (LauraX.seen_pussy or LauraX.seen_breasts):
+        "Add ring piercings" if LauraX.outfit["front_inner_accessory"] != "_ring" and (LauraX.seen_pussy or LauraX.seen_breasts):
             ch_p "You know, you'd look really nice with some ring body piercings."
             if "_ring" in LauraX.to_do:
                 ch_l "Yeah, I know, I'll get to it."
@@ -3110,7 +3110,7 @@ label Laura_Wardrobe_Menu:
                     return
                 $ LauraX.to_do.append("_ring")
 
-        "Add barbell piercings" if LauraX.piercings != "_barbell" and (LauraX.seen_pussy or LauraX.seen_breasts):
+        "Add barbell piercings" if LauraX.outfit["front_inner_accessory"] != "_barbell" and (LauraX.seen_pussy or LauraX.seen_breasts):
             ch_p "You know, you'd look really nice with some barbell body piercings."
             if "_barbell" in LauraX.to_do:
                 ch_l "Yeah, I know, I'll get to it."
@@ -3130,7 +3130,7 @@ label Laura_Wardrobe_Menu:
                     return
                 $ LauraX.to_do.append("_barbell")
 
-        "Remove piercings" if LauraX.piercings:
+        "Remove piercings" if LauraX.outfit["front_inner_accessory"]:
             ch_p "You know, you'd look better without those piercings."
             $ LauraX.change_face("_bemused", 1)
             $ approval = approval_check(LauraX, 1350, taboo_modifier=0)
@@ -3145,7 +3145,7 @@ label Laura_Wardrobe_Menu:
                 $ LauraX.brows = "_angry"
                 ch_l "I've sort of grown attached."
                 return
-            $ LauraX.piercings = ""
+            $ LauraX.outfit["front_inner_accessory"] = ""
 
         "Medallion_choker" if LauraX.outfit["neck"] != "_leash_choker":
             ch_p "Why don't you try on that medallion choker?"

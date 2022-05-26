@@ -26,7 +26,7 @@ image Rogue_squinting:
     0.25
     repeat
 
-image Rogue_HJ_Animation:
+image Rogue_handjob_animation:
     contains:
         ConditionSwitch(
             "not action_speed", "Rogue_handjob_under",
@@ -50,7 +50,7 @@ image Rogue_HJ_Animation:
 
     anchor (0.5,0.5) offset (200,800) zoom 0.6
 
-image Rogue_TJ_Animation:
+image Rogue_titjob_animation:
     contains:
         ConditionSwitch(
             "not action_speed", Transform("Rogue_titjob_under"),
@@ -93,8 +93,8 @@ image Rogue_blowjob_head:
     "Rogue_head"
     zoom 3.45
 
-image Rogue_blowjob_hair_back:
-    "Rogue_hair_back"
+image Rogue_blowjob_back_hair:
+    "Rogue_back_hair"
     zoom 3.45
 
 image Rogue_blowjob_body:
@@ -122,8 +122,8 @@ image Rogue_blowjob_head_animation0:
     "Rogue_blowjob_head"
     blowjob_starting
 
-image Rogue_blowjob_hair_back_animation0:
-    "Rogue_blowjob_hair_back"
+image Rogue_blowjob_back_hair_animation0:
+    "Rogue_blowjob_back_hair"
     blowjob_starting
 
 image Rogue_blowjob_body_animation1:
@@ -134,8 +134,8 @@ image Rogue_blowjob_head_animation1:
     "Rogue_blowjob_head"
     blowjob_licking
 
-image Rogue_blowjob_hair_back_animation1:
-    "Rogue_blowjob_hair_back"
+image Rogue_blowjob_back_hair_animation1:
+    "Rogue_blowjob_back_hair"
     blowjob_licking
 
 image Rogue_blowjob_body_animation2:
@@ -146,8 +146,8 @@ image Rogue_blowjob_head_animation2:
     "Rogue_blowjob_head"
     blowjob_heading
 
-image Rogue_blowjob_hair_back_animation2:
-    "Rogue_blowjob_hair_back"
+image Rogue_blowjob_back_hair_animation2:
+    "Rogue_blowjob_back_hair"
     blowjob_heading
 
 image Rogue_blowjob_face_mask_animation2:
@@ -162,8 +162,8 @@ image Rogue_blowjob_head_animation3:
     "Rogue_blowjob_head"
     blowjob_sucking
 
-image Rogue_blowjob_hair_back_animation3:
-    "Rogue_blowjob_hair_back"
+image Rogue_blowjob_back_hair_animation3:
+    "Rogue_blowjob_back_hair"
     blowjob_sucking
 
 image Rogue_blowjob_face_mask_animation3:
@@ -178,8 +178,8 @@ image Rogue_blowjob_head_animation4:
     "Rogue_blowjob_head"
     blowjob_deepthroat
 
-image Rogue_blowjob_hair_back_animation4:
-    "Rogue_blowjob_hair_back"
+image Rogue_blowjob_back_hair_animation4:
+    "Rogue_blowjob_back_hair"
     blowjob_deepthroat
 
 image Rogue_blowjob_face_mask_animation4:
@@ -197,7 +197,7 @@ image Rogue_blowjob_mouth_sucking_spunk:
 image Rogue_blowjob_animation:
     LiveComposite(
         (787, 913),
-        (0, 0), "Rogue_blowjob_hair_back_animation[action_speed]",
+        (0, 0), "Rogue_blowjob_back_hair_animation[action_speed]",
         (0, 0), "Rogue_blowjob_body_animation[action_speed]",
         (0, 0), "Rogue_blowjob_head_animation[action_speed]",
         (-0.224, 0.15), "Zero_blowjob_cock_animation[action_speed]",
@@ -213,17 +213,17 @@ image Rogue_sex_animation:
         (1120,840),
 
         (0,0), ConditionSwitch(
-            "not Player.sprite", "Rogue_sex_body_Anim0",
-            "Player.cock_position in ['sex', 'anal']", "Rogue_sex_body_Anim[action_speed]",
+            "not Player.sprite", "Rogue_sex_body_animation0",
+            "Player.cock_position in ['sex', 'anal']", "Rogue_sex_body_animation[action_speed]",
             "Player.cock_position == 'footjob'", "Rogue_sex_body_FootAnim[action_speed]",
-            "Player.cock_position == 'out' and action_speed >= 2","Rogue_Hotdog_Body_Anim[action_speed]",
-            "True", "Rogue_sex_body_Anim0"),
+            "Player.cock_position == 'out' and action_speed >= 2","Rogue_Hotdog_Body_animation[action_speed]",
+            "True", "Rogue_sex_body_animation0"),
         (0,0), ConditionSwitch(
-            "not Player.sprite", "Rogue_sex_legs_Anim0",
-            "Player.cock_position in ['sex', 'anal']", "Rogue_sex_legs_Anim[action_speed]",
+            "not Player.sprite", "Rogue_sex_legs_animation0",
+            "Player.cock_position in ['sex', 'anal']", "Rogue_sex_legs_animation[action_speed]",
             "Player.cock_position == 'footjob'", "Rogue_sex_legs_FootAnim[action_speed]",
-            "Player.cock_position == 'out' and action_speed >= 2","Rogue_Hotdog_Legs_Anim[action_speed]",
-            "True", "Rogue_sex_legs_Anim0"))
+            "Player.cock_position == 'out' and action_speed >= 2","Rogue_Hotdog_Legs_animation[action_speed]",
+            "True", "Rogue_sex_legs_animation0"))
 
     align (2.5, 2.5) zoom 0.85
 
@@ -279,6 +279,162 @@ image Rogue_doggy_animation:
             "True", Null()))
 
     align (0.6,0.0)
+
+image Rogue_doggy_pussy_mask:
+    contains:
+        "images/Rogue_doggy/Rogue_doggy_sex_mask.png"
+        pos (217, 518) anchor (0.52, 0.69) xzoom 0.6
+        block:
+            ease 1 xzoom 1
+            pause 1
+            ease 3 xzoom 0.6
+            repeat
+
+image Rogue_doggy_pussy_mask_animation0:
+    contains:
+        "images/Rogue_doggy/Rogue_doggy_sex_mask.png"
+        pos (217, 518) anchor (0.52, 0.69) xzoom 0.6
+        block:
+            ease 1 xzoom 0.65
+            pause 1
+            ease 3 xzoom 0.6
+            repeat
+
+image Rogue_doggy_pussy_animation0:
+    subpixel True
+    contains:
+        "images/Rogue_doggy/Rogue_doggy_pussy_base.png"
+        pos (220, 518) anchor (0.52, 0.69)
+
+    contains:
+        "images/Rogue_doggy/Rogue_doggy_pussy_hole.png"
+        subpixel True
+        pos (217, 518) anchor (0.52, 0.69) xzoom 0.6
+        block:
+            ease 1 xzoom 0.65
+            pause 1
+            ease 3 xzoom 0.6
+            repeat
+
+    contains:
+        ConditionSwitch(
+            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
+            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
+            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
+            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
+            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
+            "True", Null())
+
+    contains:
+        AlphaMask("Zero_doggy_static", "Rogue_doggy_pussy_mask_animation0")
+
+    contains:
+        AlphaMask("Rogue_doggy_pussy_hole_animation0", "Rogue_doggy_pussy_hole_mask_animation0")
+
+image Rogue_doggy_pussy_hole_mask_animation0:
+    contains:
+        AlphaMask("images/Rogue_doggy/Rogue_doggy_pussy_hole.png", "images/Rogue_doggy/Rogue_doggy_sex_mask.png")
+        subpixel True
+        pos (217, 518) anchor (0.52, 0.69) xzoom 0.6
+        block:
+            ease 1 xzoom 0.65
+            pause 1
+            ease 3 xzoom 0.6
+            repeat
+
+image Rogue_doggy_pussy_hole_animation0:
+    contains:
+        "images/Rogue_doggy/Rogue_doggy_pussy_heading.png"
+        pos (217, 515)anchor (0.52, 0.69) alpha 0.9
+        block:
+            ease 1 ypos 512
+            pause 1
+            ease 3 ypos 515
+            repeat
+
+image Rogue_doggy_pussy_heading:
+    subpixel True
+    contains:
+        "images/Rogue_doggy/Rogue_doggy_pussy_base.png"
+        pos (220, 518)anchor (0.52, 0.69)
+
+    contains:
+        "images/Rogue_doggy/Rogue_doggy_pussy_hole.png"
+        subpixel True
+        pos (217, 518) anchor (0.52, 0.69) xzoom 0.6
+        block:
+            ease 1 xzoom 1
+            pause 1
+            ease 3 xzoom 0.6
+            repeat
+
+    contains:
+        ConditionSwitch(
+            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
+            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
+            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
+            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
+            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
+            "True", Null())
+
+    contains:
+        AlphaMask("Zero_doggy_heading", "Rogue_doggy_pussy_mask")
+
+    contains:
+        AlphaMask("Rogue_doggy_pussy_flap_heading", "Rogue_doggy_pussy_hole_mask")
+
+image Rogue_doggy_pussy_hole_mask:
+    contains:
+        AlphaMask("images/Rogue_doggy/Rogue_doggy_pussy_hole.png", "images/Rogue_doggy/Rogue_doggy_sex_mask.png")
+        subpixel True
+        pos (217, 518) anchor (0.52, 0.69) xzoom 0.6
+        block:
+            ease 1 xzoom 1
+            pause 1
+            ease 3 xzoom 0.6
+            repeat
+
+image Rogue_doggy_pussy_flap_heading:
+    contains:
+        "images/Rogue_doggy/Rogue_doggy_pussy_heading.png"
+        pos (217, 515) anchor (0.52, 0.69)
+        alpha 0.9
+        block:
+            ease 1 ypos 505
+            pause 1
+            ease 3 ypos 515
+            repeat
+
+image Rogue_doggy_pussy_fingering:
+    subpixel True
+    contains:
+        "images/Rogue_doggy/Rogue_doggy_pussy_base.png"
+        pos (220,518) anchor (0.52,0.69)
+
+    contains:
+        "images/Rogue_doggy/Rogue_doggy_pussy_hole.png"
+        subpixel True
+        pos (217,518) anchor (0.52, 0.69) xzoom 0.6
+        block:
+            ease 1 xzoom 0.9
+            pause 1
+            ease 3 xzoom 0.6
+            repeat
+
+    contains:
+        ConditionSwitch(
+            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
+            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
+            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
+            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
+            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
+            "True", Null())
+
+    contains:
+        AlphaMask("Zero_Pussy_Finger", "Rogue_doggy_pussy_mask")
+
+    contains:
+        AlphaMask("Rogue_doggy_pussy_flap_heading", "Rogue_doggy_pussy_hole_mask")
 
 image doggy_licking_pussy:
     "licking"

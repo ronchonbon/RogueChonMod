@@ -19,7 +19,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
     if Girl == RogueX:
         show Rogue_sprite at sprite_location(stage_right) with ease
     elif Girl == KittyX:
-        show Kitty_Sprite at sprite_location(stage_right) with ease
+        show Kitty_sprite at sprite_location(stage_right) with ease
     elif Girl == EmmaX:
         show Emma_Sprite at sprite_location(stage_right) with ease
     elif Girl == LauraX:
@@ -37,7 +37,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
     if Partner == RogueX:
         show Rogue_sprite at sprite_location(stage_far_right) with ease
     elif Partner == KittyX:
-        show Kitty_Sprite at sprite_location(stage_far_right) with ease
+        show Kitty_sprite at sprite_location(stage_far_right) with ease
     elif Partner == EmmaX:
         show Emma_Sprite at sprite_location(stage_far_right) with ease
     elif Partner == LauraX:
@@ -49,7 +49,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
     elif Partner == JubesX:
         show Jubes_Sprite at sprite_location(stage_far_right) with ease
 
-    call change_Xavier_face ("shocked")
+    call change_Xavier_face ("_shocked")
     $ Girl.change_face("_sad")
     if (Girl == EmmaX or Partner == EmmaX) and (Girl == StormX or Partner == StormX):
         ch_x "I'm very disappointed in the both of you!."
@@ -119,13 +119,13 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
             ch_x "This is especially true in the school's public spaces!"
             ch_x "What sort of message does that send?"
             ch_x "How appropriate would it be if I were to just wander the halls with Miss Grey on my lap?"
-            call change_Xavier_face ("hypno")
+            call change_Xavier_face ("_hypno")
             ch_x "Just. . . running my hands along her firm little body without a care in the world. . ."
             call change_Xavier_face ("_happy")
             if JeanX.location == bg_current:
                 "You glance over at [JeanX.name], she shrugs."
             ch_x ". . ."
-            call change_Xavier_face ("shocked")
+            call change_Xavier_face ("_shocked")
             ch_x "Yes, well, as I was saying! . ."
         else:
             ch_x "Emma, I don't believe this is the first time we've had this talk."
@@ -139,11 +139,11 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
             ch_x "I'm well aware of your Bohemian tendencies in private, but you must comport yourself while in public."
             ch_x "What sort of message does that send?"
             ch_x "Do you think it would be appropriate for me to engage in such escapades?"
-            call change_Xavier_face ("hypno")
+            call change_Xavier_face ("_hypno")
             ch_x "Just. . . rolling down the halls with my balls flowing freely in the wind. . ."
             call change_Xavier_face ("_happy")
             ch_x ". . ."
-            call change_Xavier_face ("shocked")
+            call change_Xavier_face ("_shocked")
             ch_x "Do not distract me! . ."
         else:
             if EmmaX.location == bg_current and EmmaX not in Rules:
@@ -615,16 +615,16 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
         ch_x "It is a total abuse of your abilities and of those students' autonomy!"
         $ Girl.change_face("_angry",1)
         ch_j "Who cares."
-        call change_Xavier_face ("shocked")
+        call change_Xavier_face ("_shocked")
         ch_x "!!!"
         ch_x "I do!"
         call change_Xavier_face ("_angry")
         ch_x "That is it, young lady. Until further notice, you're forbidden from. . . whammying your fellow students!"
         $ Girl.change_face("_angry",1,mouth="_surprised")
         ch_j "Bullshit!"
-        $ Girl.change_face("_angry",0,eyes="psychic")
+        $ Girl.change_face("_angry",0,eyes="_psychic")
         ch_x "Ugh. . ."
-        call change_Xavier_face ("psychic")
+        call change_Xavier_face ("_psychic")
         ch_x "[Player.name]. . . this may take a while. . ."
         ch_x "You may as well leave. . ."
         $ JeanX.traits.append("nowhammy")
@@ -673,9 +673,9 @@ label Xavier_Plan(GirlX=0):
     $ GirlX.change_face("_sly")
     "As you say this, a sly grin crosses [GirlX.name]'s face."
     "You quickly approach Xavier and place your hands on his head."
-    call change_Xavier_face ("psychic")
+    call change_Xavier_face ("_psychic")
     ch_x ". . ."
-    call change_Xavier_face ("shocked")
+    call change_Xavier_face ("_shocked")
     "Xavier realizes with a shock that with your powers, his telepathy is useless."
 
     if Partner:
@@ -718,7 +718,7 @@ label Xavier_Plan(GirlX=0):
         show Rogue_sprite zorder 24 at sprite_location(stage_left+100,85) with ease
         "[RogueX.name] moves in and also grabs his head, duplicating his powers as he watches helplessly."
         "Now that she posesses his full power, while his are negated, he has no defenses."
-        call change_Xavier_face ("hypno")
+        call change_Xavier_face ("_hypno")
         if "Omega" in Player.traits:
             ch_x "Oh, not again."
             ch_x "What is it you want this time?"
@@ -731,7 +731,7 @@ label Xavier_Plan(GirlX=0):
         ch_r "I think we'll only get three tries at this. . ."
     elif GirlX == KittyX:
         $ KittyX.arm_pose = 2
-        show Kitty_Sprite at sprite_location(stage_left+100,150) with ease
+        show Kitty_sprite at sprite_location(stage_left+100,150) with ease
         $ KittyX.sprite_location = stage_center
         "[KittyX.name] moves in sits on his lap, pinning his arms to the chair."
         if "Kappa" in Player.traits:
@@ -1833,6 +1833,8 @@ label caught_showering(Girl):
             $ bg_current = "bg_showerroom"
 
             call set_the_scene(check_if_dressed = False)
+
+            "[RogueX.sprite_location]"
 
             if Girl == RogueX:
                 ch_r "Sorry about that [Girl.player_petname], I was just wrapping up my shower."

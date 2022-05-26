@@ -812,24 +812,24 @@ label gym_entry(number_of_girls = 0):
 
     python:
         for G in all_Girls:
-            if G.location != "bg_dangerroom" and G.outfit_name == "gym":
+            if G.location != "bg_dangerroom" and G.outfit_name == "gym_clothes":
                 G.outfit_name = G.today_outfit_name
-            elif G.outfit_name == "gym":
+            elif G.outfit_name == "gym_clothes":
                 continue
             elif G.location == "bg_dangerroom" and G not in Party:
-                G.outfit_name = "gym"
+                G.outfit_name = "gym_clothes"
 
     call set_the_scene
 
     $ temp_Girls = Present[:]
 
     while temp_Girls:
-        if temp_Girls[0].outfit != "gym":
+        if temp_Girls[0].outfit != "gym_clothes":
             if approval_check(temp_Girls[0], 1300, "LO") or "passive" in temp_Girls[0].traits:
                 $ approval_passed = True
-            elif approval_check(temp_Girls[0], 800, "LO") and temp_Girls[0].first_custom_outfit[0]:
+            elif approval_check(temp_Girls[0], 800, "LO") and temp_Girls[0].first_custom_outfit["outfit_active"]:
                 $ approval_passed = True
-            elif approval_check(temp_Girls[0], 600, "LO") and temp_Girls[0].gym_clothes[0] != 1:
+            elif approval_check(temp_Girls[0], 600, "LO") and temp_Girls[0].gym_clothes["outfit_active"] != 1:
                 $ approval_passed = True
             else:
                 $ approval_passed = False
@@ -849,7 +849,7 @@ label gym_entry(number_of_girls = 0):
                     else:
                         temp_Girls[0].voice "I'll be back soon, gotta change."
 
-                $ temp_Girls[0].outfit_name = "gym"
+                $ temp_Girls[0].outfit_name = "gym_clothes"
             else:
                 $ temp_Girls[0].daily_history.append("asked gym")
 
@@ -890,9 +890,9 @@ label gym_entry(number_of_girls = 0):
                     elif temp_Girls[0] == JubesX:
                         ch_v "K, be right back."
 
-                    $ temp_Girls[0].outfit_name = "gym"
+                    $ temp_Girls[0].outfit_name = "gym_clothes"
 
-            if temp_Girls[0].outfit_name == "gym":
+            if temp_Girls[0].outfit_name == "gym_clothes":
                 $ number_of_girls += 1
 
         $ temp_Girls.remove(temp_Girls[0])

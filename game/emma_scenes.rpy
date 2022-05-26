@@ -1,9 +1,10 @@
 label meet_Emma:
     $ bg_current = "bg_classroom"
 
-    $ EmmaX.today_outfit_name = "casual1"
     $ EmmaX.outfit_name = "casual1"
-    $ EmmaX.change_outfit("casual1")
+    $ EmmaX.today_outfit_name = "casual1"
+    $ EmmaX.change_outfit()
+    
     $ EmmaX.location = "bg_emma"
 
     call shift_focus(EmmaX)

@@ -656,19 +656,19 @@ label sleepover_Morning:
 
     call shift_focus (Party[0])
 
-    if Party[0] == StormX and not StormX.sleepwear[0] and StormX.taboo < 20:
+    if Party[0] == StormX and not StormX.sleepwear["outfit_active"] and StormX.taboo < 20:
 
         $ Party[0].change_outfit("nude")
     else:
-        $ Party[0].change_outfit("sleep")
+        $ Party[0].change_outfit("sleepwear")
     $ Party[0].today_outfit_name == Party[0].outfit
     if len(Party) >= 2:
 
-        if Party[1] == StormX and not StormX.sleepwear[0] and StormX.taboo < 20:
+        if Party[1] == StormX and not StormX.sleepwear["outfit_active"] and StormX.taboo < 20:
 
             $ Party[1].change_outfit("nude")
         else:
-            $ Party[1].change_outfit("sleep")
+            $ Party[1].change_outfit("sleepwear")
         $ Party[1].today_outfit_name == Party[1].outfit
         "The girls change into their sleepwear."
     else:
@@ -1572,7 +1572,7 @@ label sleepover_MorningWood:
             show Rogue_sprite:
                 pos (900,250)
         elif Partner == KittyX:
-            show Kitty_Sprite:
+            show Kitty_sprite:
                 pos (900,250)
         elif Partner == EmmaX:
             show Emma_Sprite:
@@ -2076,9 +2076,9 @@ label sleepover_MorningWood:
                 show Rogue_sprite:
                     pos (700,50)
             elif Party[1] == KittyX:
-                show Kitty_Sprite:
+                show Kitty_sprite:
                     ease 1 pos (700,50)
-                show Kitty_Sprite:
+                show Kitty_sprite:
                     pos (700,50)
             elif Party[1] == EmmaX:
                 show Emma_Sprite:
@@ -2172,9 +2172,9 @@ label Morning_Partner:
         show Emma_Sprite:
             pos (700,50)
     elif Partner == KittyX:
-        show Kitty_Sprite:
+        show Kitty_sprite:
             ease 1 pos (700,50)
-        show Kitty_Sprite:
+        show Kitty_sprite:
             pos (700,50)
     elif Partner == LauraX:
         show Laura_Sprite:

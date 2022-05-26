@@ -13,208 +13,6 @@ image Rogue_Doggy_GropeBreast:
             ease 1 rotate 0
             repeat
 
-image Rogue_Pussy_Mask:
-    contains:
-        "images/Rogue_doggy/Rogue_doggy_sex_mask.png"
-        anchor (0.52,0.69)
-        pos (217,518)
-        xzoom 0.6
-        block:
-            ease 1 xzoom 1
-            pause 1
-            ease 3 xzoom 0.6
-            repeat
-
-image Rogue_Pussy_Mask_Static:
-    contains:
-        "images/Rogue_doggy/Rogue_doggy_sex_mask.png"
-        anchor (0.52,0.69)
-        pos (217,518)
-        xzoom 0.6
-        block:
-            ease 1 xzoom 0.65
-            pause 1
-            ease 3 xzoom 0.6
-            repeat
-
-image Rogue_Pussy_Static:
-    subpixel True
-    contains:
-        "images/Rogue_doggy/Rogue_doggy_pussy_base.png"
-        anchor (0.52,0.69)
-        pos (220,518)
-        xzoom 1
-    contains:
-
-        "images/Rogue_doggy/Rogue_doggy_pussy_hole.png"
-        subpixel True
-        anchor (0.52,0.69)
-        pos (217,518)
-        xzoom 0.6
-        block:
-            ease 1 xzoom 0.65
-            pause 1
-            ease 3 xzoom 0.6
-            repeat
-    contains:
-        ConditionSwitch(
-
-            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
-            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
-            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
-            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
-            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
-            "True", Null(),
-            ),
-    contains:
-
-        AlphaMask("Zero_doggy_static", "Rogue_Pussy_Mask_Static")
-    contains:
-
-
-        AlphaMask("Rogue_PussyHole_Static", "Rogue_Pussy_Hole_Mask_Static")
-
-image Rogue_Pussy_Hole_Mask_Static:
-
-    contains:
-
-        AlphaMask("images/Rogue_doggy/Rogue_doggy_pussy_hole.png", "images/Rogue_doggy/Rogue_doggy_sex_mask.png")
-        subpixel True
-        anchor (0.52,0.69)
-        pos (217,518)
-        xzoom 0.6
-        block:
-            ease 1 xzoom 0.65
-            pause 1
-            ease 3 xzoom 0.6
-            repeat
-
-image Rogue_PussyHole_Static:
-
-    contains:
-
-        "images/Rogue_doggy/Rogue_doggy_pussy_heading.png"
-        anchor (0.52,0.69)
-        pos (217,515)
-        zoom 1
-        alpha 0.9
-        block:
-            ease 1 ypos 512
-            pause 1
-            ease 3 ypos 515
-            repeat
-
-
-image Rogue_Pussy_Heading:
-
-    subpixel True
-    contains:
-
-        "images/Rogue_doggy/Rogue_doggy_pussy_base.png"
-        anchor (0.52,0.69)
-        pos (220,518)
-        xzoom 1
-    contains:
-
-        "images/Rogue_doggy/Rogue_doggy_pussy_hole.png"
-        subpixel True
-        anchor (0.52,0.69)
-        pos (217,518)
-        xzoom 0.6
-        block:
-            ease 1 xzoom 1
-            pause 1
-            ease 3 xzoom 0.6
-            repeat
-    contains:
-        ConditionSwitch(
-
-            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
-            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
-            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
-            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
-            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
-            "True", Null(),
-            ),
-    contains:
-
-        AlphaMask("Zero_doggy_heading", "Rogue_Pussy_Mask")
-    contains:
-
-
-        AlphaMask("Rogue_Pussy_Heading_Flap", "Rogue_Pussy_Hole_Mask")
-
-
-image Rogue_Pussy_Hole_Mask:
-
-    contains:
-
-        AlphaMask("images/Rogue_doggy/Rogue_doggy_pussy_hole.png", "images/Rogue_doggy/Rogue_doggy_sex_mask.png")
-        subpixel True
-        anchor (0.52,0.69)
-        pos (217,518)
-        xzoom 0.6
-        block:
-            ease 1 xzoom 1
-            pause 1
-            ease 3 xzoom 0.6
-            repeat
-
-image Rogue_Pussy_Heading_Flap:
-
-    contains:
-
-        "images/Rogue_doggy/Rogue_doggy_pussy_heading.png"
-        anchor (0.52,0.69)
-        pos (217,515)
-        zoom 1
-        alpha 0.9
-        block:
-            ease 1 ypos 505
-            pause 1
-            ease 3 ypos 515
-            repeat
-
-
-image Rogue_Pussy_Fingering:
-
-    subpixel True
-    contains:
-
-        "images/Rogue_doggy/Rogue_doggy_pussy_base.png"
-        anchor (0.52,0.69)
-        pos (220,518)
-        xzoom 1
-    contains:
-
-        "images/Rogue_doggy/Rogue_doggy_pussy_hole.png"
-        subpixel True
-        anchor (0.52,0.69)
-        pos (217,518)
-        xzoom 0.6
-        block:
-            ease 1 xzoom 0.9
-            pause 1
-            ease 3 xzoom 0.6
-            repeat
-    contains:
-        ConditionSwitch(
-
-            "RogueX.outfit['hose'] == '_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_garterbelt.png",
-            "RogueX.outfit['hose'] == '_stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_doggy_hose_stockings_and_garterbelt.png",
-            "RogueX.outfit['underwear'] and RogueX.underwear_pulled_down", Null(),
-            "RogueX.outfit['hose'] == '_ripped_pantyhose'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_pantyhose.png",
-            "RogueX.outfit['hose'] == '_ripped_tights'", "images/Rogue_doggy/Rogue_doggy_hose_ripped_tights.png",
-            "True", Null(),
-            ),
-    contains:
-
-        AlphaMask("Zero_Pussy_Finger", "Rogue_Pussy_Mask")
-    contains:
-
-
-        AlphaMask("Rogue_Pussy_Heading_Flap", "Rogue_Pussy_Hole_Mask")
-
 image Zero_Pussy_Finger:
 
     contains:
@@ -809,12 +607,12 @@ label Rogue_Doggy_Reset:
 
 
 
-image Rogue_sex_body_Anim0:
+image Rogue_sex_body_animation0:
     contains:
         "Rogue_sex_body"
     pos (650,230)
 
-image Rogue_sex_legs_Anim0:
+image Rogue_sex_legs_animation0:
     contains:
         "Rogue_sex_legs"
     pos (650,230)
@@ -837,9 +635,9 @@ image Rogue_head_Sex:
     anchor (0.5,0.5)
     rotate -10
 
-image Rogue_hair_back_Sex:
+image Rogue_back_hair_Sex:
 
-    "Rogue_hair_back"
+    "Rogue_back_hair"
     zoom 1.28
     anchor (0.5,0.5)
     rotate -10
@@ -881,7 +679,7 @@ image Rogue_sex_pussy_fucking0:
                 ),
     contains:
 
-        AlphaMask("Rogue_sex_Zero_Anim0", "Rogue_Pussy_Open_Mask")
+        AlphaMask("Rogue_sex_Zero_animation0", "Rogue_Pussy_Open_Mask")
 
 image Rogue_sex_pussy_fucking1:
 
@@ -896,7 +694,7 @@ image Rogue_sex_pussy_fucking1:
                 ),
     contains:
 
-        AlphaMask("Rogue_sex_Zero_Anim1", "Rogue_Pussy_Open_Mask")
+        AlphaMask("Rogue_sex_Zero_animation1", "Rogue_Pussy_Open_Mask")
 
 image Rogue_sex_pussy_fucking2:
 
@@ -911,7 +709,7 @@ image Rogue_sex_pussy_fucking2:
                 ),
     contains:
 
-        AlphaMask("Rogue_sex_Zero_Anim2", "Rogue_Pussy_Fucking_Mask")
+        AlphaMask("Rogue_sex_Zero_animation2", "Rogue_Pussy_Fucking_Mask")
 
 image Rogue_sex_pussy_fucking3:
 
@@ -926,7 +724,7 @@ image Rogue_sex_pussy_fucking3:
                 ),
     contains:
 
-        AlphaMask("Rogue_sex_Zero_Anim3", "Rogue_Pussy_Fucking_Mask")
+        AlphaMask("Rogue_sex_Zero_animation3", "Rogue_Pussy_Fucking_Mask")
 
 image Rogue_Pussy_Fucking_Mask:
     contains:
@@ -945,7 +743,7 @@ image Rogue_sex_pussy_Spunk_Heading:
 
 
 
-image Rogue_sex_FingerP_Anim1:
+image Rogue_sex_FingerP_animation1:
 
     contains:
         subpixel True
@@ -958,7 +756,7 @@ image Rogue_sex_FingerP_Anim1:
             ease 0.6 ypos 520
             repeat
 
-image Rogue_sex_Dildo_Anim2:
+image Rogue_sex_Dildo_animation2:
 
     contains:
         subpixel True
@@ -972,7 +770,7 @@ image Rogue_sex_Dildo_Anim2:
             repeat
 
 
-image Rogue_sex_Zero_Anim0:
+image Rogue_sex_Zero_animation0:
 
     contains:
         subpixel True
@@ -980,7 +778,7 @@ image Rogue_sex_Zero_Anim0:
         pos (503,530)
         zoom 1.3
 
-image Rogue_sex_Zero_Anim1:
+image Rogue_sex_Zero_animation1:
 
     contains:
         subpixel True
@@ -993,7 +791,7 @@ image Rogue_sex_Zero_Anim1:
             ease 3 ypos 525
             repeat
 
-image Rogue_sex_Zero_Anim2:
+image Rogue_sex_Zero_animation2:
 
     contains:
         subpixel True
@@ -1006,7 +804,7 @@ image Rogue_sex_Zero_Anim2:
             ease 3 ypos 490
             repeat
 
-image Rogue_sex_Zero_Anim3:
+image Rogue_sex_Zero_animation3:
 
     contains:
         subpixel True
@@ -1021,7 +819,7 @@ image Rogue_sex_Zero_Anim3:
 
 
 
-image Rogue_sex_legs_Anim1:
+image Rogue_sex_legs_animation1:
 
     contains:
         subpixel True
@@ -1035,7 +833,7 @@ image Rogue_sex_legs_Anim1:
             ease 2.75 pos (0,0)
             repeat
 
-image Rogue_sex_legs_Anim2:
+image Rogue_sex_legs_animation2:
 
     contains:
         subpixel True
@@ -1050,7 +848,7 @@ image Rogue_sex_legs_Anim2:
             ease 2.75 pos (0,0)
             repeat
 
-image Rogue_sex_legs_Anim3:
+image Rogue_sex_legs_animation3:
 
     contains:
         subpixel True
@@ -1067,7 +865,7 @@ image Rogue_sex_legs_Anim3:
 
 
 
-image Rogue_sex_body_Anim1:
+image Rogue_sex_body_animation1:
 
     contains:
         subpixel True
@@ -1081,7 +879,7 @@ image Rogue_sex_body_Anim1:
             ease 2.5 pos (0,0)
             repeat
 
-image Rogue_sex_body_Anim2:
+image Rogue_sex_body_animation2:
 
     contains:
         subpixel True
@@ -1096,7 +894,7 @@ image Rogue_sex_body_Anim2:
             ease 2.75 pos (0,10)
             repeat
 
-image Rogue_sex_body_Anim3:
+image Rogue_sex_body_animation3:
 
     contains:
         subpixel True
@@ -1116,7 +914,7 @@ image Rogue_sex_body_Anim3:
 
 
 
-image Rogue_sex_FingerA_Anim1:
+image Rogue_sex_FingerA_animation1:
 
     contains:
         subpixel True
@@ -1129,7 +927,7 @@ image Rogue_sex_FingerA_Anim1:
             ease 1.2 ypos 600
             repeat
 
-image Rogue_Anal_Dildo_Anim2:
+image Rogue_Anal_Dildo_animation2:
 
     contains:
         subpixel True
@@ -1149,7 +947,7 @@ image Rogue_sex_Anal_Fucking0:
         "Rogue_Anal_Tip"
     contains:
 
-        AlphaMask("Rogue_Anal_Zero_Anim0", "Rogue_Anal_Fucking_Mask")
+        AlphaMask("Rogue_Anal_Zero_animation0", "Rogue_Anal_Fucking_Mask")
 
 image Rogue_sex_Anal_Fucking1:
 
@@ -1158,7 +956,7 @@ image Rogue_sex_Anal_Fucking1:
         "Rogue_Anal_Heading"
     contains:
 
-        AlphaMask("Rogue_Anal_Zero_Anim1", "Rogue_Anal_Fucking_Mask")
+        AlphaMask("Rogue_Anal_Zero_animation1", "Rogue_Anal_Fucking_Mask")
 
 image Rogue_sex_Anal_Fucking2:
 
@@ -1167,7 +965,7 @@ image Rogue_sex_Anal_Fucking2:
         "images/Kitty_sex/Kitty_sex_anus_open.png"
     contains:
 
-        AlphaMask("Rogue_Anal_Zero_Anim2", "Rogue_Anal_Fucking_Mask")
+        AlphaMask("Rogue_Anal_Zero_animation2", "Rogue_Anal_Fucking_Mask")
 
 image Rogue_sex_Anal_Fucking3:
 
@@ -1176,7 +974,7 @@ image Rogue_sex_Anal_Fucking3:
         "images/Kitty_sex/Kitty_sex_anus_open.png"
     contains:
 
-        AlphaMask("Kitty_Anal_Zero_Anim3", "Kitty_Anal_Fucking_Mask")
+        AlphaMask("Kitty_Anal_Zero_animation3", "Kitty_Anal_Fucking_Mask")
 
 image Rogue_Anal_Fucking_Mask:
 
@@ -1239,7 +1037,7 @@ image Rogue_sex_Anal_Tip:
 
 
 
-image Rogue_Anal_Zero_Anim0:
+image Rogue_Anal_Zero_animation0:
 
     contains:
         subpixel True
@@ -1247,7 +1045,7 @@ image Rogue_Anal_Zero_Anim0:
         pos (505,600)
         zoom 1.3
 
-image Rogue_Anal_Zero_Anim1:
+image Rogue_Anal_Zero_animation1:
 
     contains:
         subpixel True
@@ -1260,7 +1058,7 @@ image Rogue_Anal_Zero_Anim1:
             ease 3 ypos 600
             repeat
 
-image Rogue_Anal_Zero_Anim2:
+image Rogue_Anal_Zero_animation2:
 
     contains:
         subpixel True
@@ -1273,7 +1071,7 @@ image Rogue_Anal_Zero_Anim2:
             ease 3 ypos 570
             repeat
 
-image Rogue_Anal_Zero_Anim3:
+image Rogue_Anal_Zero_animation3:
 
     contains:
         subpixel True
@@ -1288,7 +1086,7 @@ image Rogue_Anal_Zero_Anim3:
 
 
 
-image Rogue_Hotdog_Zero_Anim0:
+image Rogue_Hotdog_Zero_animation0:
 
     contains:
         subpixel True
@@ -1296,7 +1094,7 @@ image Rogue_Hotdog_Zero_Anim0:
         pos (503,570)
         zoom 1.3
 
-image Rogue_Hotdog_Zero_Anim1:
+image Rogue_Hotdog_Zero_animation1:
 
     contains:
         subpixel True
@@ -1309,7 +1107,7 @@ image Rogue_Hotdog_Zero_Anim1:
             ease 1.5 ypos 500
             repeat
 
-image Rogue_Hotdog_Zero_Anim2:
+image Rogue_Hotdog_Zero_animation2:
 
     contains:
         subpixel True
@@ -1322,7 +1120,7 @@ image Rogue_Hotdog_Zero_Anim2:
             ease 1 ypos 510
             repeat
 
-image Rogue_Hotdog_Body_Anim2:
+image Rogue_Hotdog_Body_animation2:
 
     contains:
         subpixel True
@@ -1336,7 +1134,7 @@ image Rogue_Hotdog_Body_Anim2:
             ease 1 pos (0,0)
             repeat
 
-image Rogue_Hotdog_Legs_Anim2:
+image Rogue_Hotdog_Legs_animation2:
 
     contains:
         subpixel True
@@ -1365,7 +1163,7 @@ image Rogue_Footcock:
         pos (0,0)
     pos (750,230)
 
-image Rogue_Footcock_Anim0:
+image Rogue_Footcock_animation0:
     contains:
         subpixel True
         "Rogue_Footcock"
@@ -1373,7 +1171,7 @@ image Rogue_Footcock_Anim0:
 
     offset (0,-100)
 
-image Rogue_Footcock_Zero_Anim1:
+image Rogue_Footcock_Zero_animation1:
     contains:
         subpixel True
         "Rogue_Footcock"
@@ -1388,7 +1186,7 @@ image Rogue_Footcock_Zero_Anim1:
             repeat
     offset (0,-100)
 
-image Rogue_Footcock_Zero_Anim2:
+image Rogue_Footcock_Zero_animation2:
     contains:
         subpixel True
         "Rogue_Footcock"
@@ -1403,7 +1201,7 @@ image Rogue_Footcock_Zero_Anim2:
             repeat
     offset (0,-100)
 
-transform Rogue_Footcock_Zero_Anim1A():
+transform Rogue_Footcock_Zero_animation1A():
     subpixel True
     offset (0,0)
     block:
@@ -1415,7 +1213,7 @@ transform Rogue_Footcock_Zero_Anim1A():
         ease 1.50 yoffset -30
         repeat
 
-transform Rogue_Footcock_Zero_Anim2A():
+transform Rogue_Footcock_Zero_animation2A():
     subpixel True
     offset (0,0)
     block:
@@ -1432,7 +1230,7 @@ transform Rogue_Footcock_Zero_Anim2A():
         ease 1.00 yoffset -30
         repeat
 
-transform Rogue_Footcock_Anim0A():
+transform Rogue_Footcock_animation0A():
     subpixel True
     offset (0,-5)
     block:
@@ -1765,14 +1563,14 @@ label Rogue_BJ_Reset:
 
 image Rogue_titjob_under:
     contains:
-        "Rogue_blowjob_hair_back"
+        "Rogue_blowjob_back_hair"
         pos (150, -560)
         zoom 0.95
     contains:
         "images/Rogue_blowjob/Rogue_titjob_body.png"
     contains:
         ConditionSwitch(
-            "'tits' in RogueX.spunk", "images/Rogue_blowjob/Rogue_titjob_spunk_breasts_under.png",
+            "RogueX.spunk['breasts']", "images/Rogue_blowjob/Rogue_titjob_spunk_breasts_under.png",
             "True", Null(),
             ),
     contains:
@@ -1783,10 +1581,10 @@ image Rogue_titjob_under:
 
 image Rogue_titjob_over:
     contains:
-        "images/Rogue_blowjob/Rogue_titjob_chest[RogueX.piercings].png"
+        "images/Rogue_blowjob/Rogue_titjob_chest[RogueX.outfit[front_inner_accessory]].png"
     contains:
         ConditionSwitch(
-            "'tits' in RogueX.spunk", "images/Rogue_blowjob/Rogue_titjob_spunk_breasts.png",
+            "RogueX.spunk['breasts']", "images/Rogue_blowjob/Rogue_titjob_spunk_breasts.png",
             "True", Null(),
             ),
     pos (-60, 200)
@@ -1859,7 +1657,7 @@ transform Zero_TJ_Cock_2():
 
 label Rogue_TJ_Launch(line=primary_action):
 
-    if renpy.showing("Rogue_TJ_Animation"):
+    if renpy.showing("Rogue_titjob_animation"):
         return
     call hide_girl(RogueX)
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
@@ -1912,15 +1710,15 @@ label Rogue_TJ_Launch(line=primary_action):
     $ action_speed = 0
     if line != "cum":
         $ primary_action = "titjob"
-    show Rogue_TJ_Animation zorder 150 at sprite_location(stage_right)
+    show Rogue_titjob_animation zorder 150 at sprite_location(stage_right)
     hide black_screen onlayer black with dissolve
     return
 
 label Rogue_TJ_Reset:
 
-    if not renpy.showing("Rogue_TJ_Animation"):
+    if not renpy.showing("Rogue_titjob_animation"):
         return
-    hide Rogue_TJ_Animation
+    hide Rogue_titjob_animation
     call hide_girl(RogueX)
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
         zoom 2 xpos 550 offset (0,50)
@@ -1941,16 +1739,7 @@ label Rogue_TJ_Reset:
 
 
 
-image Rogue_handjob_under:
-    "images/Rogue_sprite/Rogue_handjob_hand2.png"
-    anchor (0.5,0.5)
-    pos (0,0)
 
-
-image Rogue_handjob_over:
-    "images/Rogue_sprite/Rogue_handjob_hand1.png"
-    anchor (0.5,0.5)
-    pos (0,0)
 
 transform Handcock_1():
     subpixel True
@@ -1988,7 +1777,7 @@ transform Rogue_Hand_2():
 
 
 label Rogue_HJ_Launch(line=primary_action):
-    if renpy.showing("Rogue_HJ_Animation"):
+    if renpy.showing("Rogue_handjob_animation"):
         $ primary_action = "handjob"
         return
     call hide_girl(RogueX)
@@ -2027,14 +1816,14 @@ label Rogue_HJ_Launch(line=primary_action):
     $ action_speed = 0
     if line != "cum":
         $ primary_action = "handjob"
-    show Rogue_HJ_Animation zorder 150 at sprite_location(RogueX.sprite_location) with easeinbottom
+    show Rogue_handjob_animation zorder 150 at sprite_location(RogueX.sprite_location) with easeinbottom
     return
 
 label Rogue_HJ_Reset:
-    if not renpy.showing("Rogue_HJ_Animation"):
+    if not renpy.showing("Rogue_handjob_animation"):
         return
     $ action_speed = 0
-    hide Rogue_HJ_Animation
+    hide Rogue_handjob_animation
     with dissolve
     call hide_girl(RogueX)
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):

@@ -1224,7 +1224,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                     elif Girl == LauraX:
                         ch_l "Hmmph!"
                     elif Girl == JeanX:
-                        $ JeanX.eyes = "psychic"
+                        $ JeanX.eyes = "_psychic"
 
                         ch_j "Rah!"
 
@@ -1462,7 +1462,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
         elif Girl == LauraX:
             ch_l "Hmmph!"
         elif Girl == JeanX:
-            $ JeanX.eyes = "psychic"
+            $ JeanX.eyes = "_psychic"
             $ Girl.change_stat("obedience", 80, 10)
             ch_j "Raaaaaaahhhh!"
         elif Girl == StormX:
@@ -1707,7 +1707,7 @@ label addiction_fix_beg:
         elif Girl == LauraX:
             ch_l "Hmmph!"
         elif Girl == JeanX:
-            $ JeanX.eyes = "psychic"
+            $ JeanX.eyes = "_psychic"
 
             ch_j "Fuck all of this!"
 
@@ -1741,7 +1741,7 @@ label addiction_fix_beg:
         elif Girl == LauraX:
             ch_l "Grrrrrrrrrrr. . ."
         elif Girl == JeanX:
-            $ JeanX.eyes = "psychic"
+            $ JeanX.eyes = "_psychic"
 
             ch_j "Raaaaaaahhhh!"
         elif Girl == StormX:

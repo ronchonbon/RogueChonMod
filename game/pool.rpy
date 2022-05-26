@@ -107,9 +107,9 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                     $ Type = "_bra"
 
                 "maybe just lose the jacket?" if Girl.outfit["front_outer_accessory"] and Girl == JubesX:
-                    if Girl.outfit["front_outer_accessory"] == "shut_jacket" and not Girl.outfit["bottom"] and not Girl.outfit["hose"] and not Girl.outfit["underwear"]:
+                    if Girl.outfit["front_outer_accessory"] == "_shut_jacket" and not Girl.outfit["bottom"] and not Girl.outfit["hose"] and not Girl.outfit["underwear"]:
                         $ Type = "no_panties"
-                    elif Girl.outfit["front_outer_accessory"] == "shut_jacket" and not Girl.outfit["top"] and not Girl.outfit["bra"]:
+                    elif Girl.outfit["front_outer_accessory"] == "_shut_jacket" and not Girl.outfit["top"] and not Girl.outfit["bra"]:
                         $ Type = "no_bra"
                     else:
                         $ Type = "_jacket"
@@ -645,7 +645,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
             menu:
                 extend ""
                 "Ok, we can just use swimsuits.":
-                    if Girl.swimwear[0]:
+                    if Girl.swimwear["outfit_active"]:
 
                         if "dip" not in Girl.recent_history and "no_dip" not in Girl.recent_history:
                             $ Girl.change_stat("love", 80, 2)
@@ -953,7 +953,7 @@ label SwimSuit(temp_Girls=[]):
 
     $ temp_Girls = all_Girls[:]
     while temp_Girls:
-        if temp_Girls[0].location == bg_current and temp_Girls[0].swimwear[0] and temp_Girls[0] not in Party and temp_Girls[0].weekly_schedule[weekday][time_index] == "bg_pool":
+        if temp_Girls[0].location == bg_current and temp_Girls[0].swimwear["outfit_active"] and temp_Girls[0] not in Party and temp_Girls[0].weekly_schedule[weekday][time_index] == "bg_pool":
 
 
             $ temp_Girls[0].change_outfit("swimwear")
@@ -977,7 +977,7 @@ label ShowPool(temp_Girls=[], PoolLoc=0):
             if temp_Girls[0] == RogueX:
                 show Rogue_sprite zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == KittyX:
-                show Kitty_Sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Kitty_sprite zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == EmmaX:
                 show Emma_Sprite zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == LauraX:

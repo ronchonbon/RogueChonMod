@@ -34,13 +34,13 @@ label Microtransactions_Intro:
     menu:
         extend ""
         "What, like -I- give -you- cash?":
-            call change_Xavier_face ("shocked")
+            call change_Xavier_face ("_shocked")
             ch_x "What? How would that make sense? You give me cash so I give you cash?"
         "What a rip-off!":
-            call change_Xavier_face ("shocked")
+            call change_Xavier_face ("_shocked")
             ch_x "I haven't even explained the system yet!"
         "Shill!":
-            call change_Xavier_face ("shocked")
+            call change_Xavier_face ("_shocked")
             ch_x "what are you even talking about?"
     ch_x "I don't understand what the problem is, it's just a form of surprise mechanic!"
     call change_Xavier_face ("_happy")
@@ -64,7 +64,7 @@ label Microtransactions_Intro:
         "Yes, I get it.":
             pass
         "Huh?":
-            call change_Xavier_face ("shocked")
+            call change_Xavier_face ("_shocked")
             ch_x ". . . I don't think I could dumb it down further."
     call change_Xavier_face ("_happy")
     ch_x "Here, a nice starter package, just bring this to Henry in the lab."

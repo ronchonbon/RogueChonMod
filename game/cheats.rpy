@@ -49,20 +49,20 @@ label EmotionEditor(Chr=0):
                         $ Chr.emotion = "_sly"
             "Toggle mouth Spunk":
 
-                if "mouth" in Chr.spunk:
+                if Chr.spunk["mouth"]:
                     $ Chr.spunk["mouth"] = False
                 else:
                     $ Chr.spunk["mouth"] = True
             "Toggle hand Spunk":
-                if "handjob" in Chr.spunk:
+                if Chr.spunk["handjob"]:
                     $ Chr.spunk["hand"] = False
                 else:
                     $ Chr.spunk["hand"] = True
             "Toggle Facial Spunk":
 
-                if "facial" in Chr.spunk and "hair" not in Chr.spunk:
+                if Chr.spunk["face"] and not Chr.spunk["hair"]:
                     $ Chr.spunk["hair"] = True
-                elif "facial" in Chr.spunk:
+                elif Chr.spunk["face"]:
                     $ Chr.spunk["face"] = False
                     $ Chr.spunk["hair"] = False
                 else:
@@ -104,12 +104,12 @@ label WardrobeEditor(Chr=0):
                             else:
                                 call expression Chr.tag + "_BJ_Reset"
                         "HJ":
-                            if not renpy.showing(Chr.tag+"_HJ_Animation"):
+                            if not renpy.showing(Chr.tag+"_handjob_animation"):
                                 call expression Chr.tag + "_HJ_Launch"
                             else:
                                 call expression Chr.tag + "_HJ_Reset"
                         "TJ":
-                            if not renpy.showing(Chr.tag+"_TJ_Animation"):
+                            if not renpy.showing(Chr.tag+"_titjob_animation"):
                                 call expression Chr.tag + "_TJ_Launch"
                             else:
                                 call expression Chr.tag + "_TJ_Reset"
@@ -170,9 +170,9 @@ label WardrobeEditor(Chr=0):
                                 $ Chr.outfit["front_outer_accessory"] = "_jacket"
                             else:
                                 $ Chr.outfit["front_outer_accessory"] = "_jacket"
-                        "Open/shut_jacket" if Chr == JubesX:
+                        "Open/_shut_jacket" if Chr == JubesX:
                             if Chr.outfit["front_outer_accessory"] == "_jacket":
-                                $ Chr.outfit["front_outer_accessory"] = "shut_jacket"
+                                $ Chr.outfit["front_outer_accessory"] = "_shut_jacket"
                             else:
                                 $ Chr.outfit["front_outer_accessory"] = "_jacket"
                         "wide open_jacket" if Chr == JubesX:
@@ -194,12 +194,12 @@ label WardrobeEditor(Chr=0):
                             $ Chr.outfit["top"] = "_towel"
                             $ Chr.outfit["gloves"] = ""
                         "Toggle Pierce":
-                            if Chr.piercings == "_ring":
-                                $ Chr.piercings = "_barbell"
-                            elif Chr.piercings == "_barbell":
-                                $ Chr.piercings = ""
+                            if Chr.outfit["front_inner_accessory"] == "_ring":
+                                $ Chr.outfit["front_inner_accessory"] = "_barbell"
+                            elif Chr.outfit["front_inner_accessory"] == "_barbell":
+                                $ Chr.outfit["front_inner_accessory"] = ""
                             else:
-                                $ Chr.piercings = "_ring"
+                                $ Chr.outfit["front_inner_accessory"] = "_ring"
                         "Toggle up-top":
                             if Chr.top_pulled_up:
                                 $ Chr.top_pulled_up = 0
@@ -259,12 +259,12 @@ label WardrobeEditor(Chr=0):
                             else:
                                 $ Chr.top_pulled_up = 1
                         "Toggle Piercings":
-                            if Chr.piercings == "_ring":
-                                $ Chr.piercings = "_barbell"
-                            elif Chr.piercings == "_barbell":
-                                $ Chr.piercings = ""
+                            if Chr.outfit["front_inner_accessory"] == "_ring":
+                                $ Chr.outfit["front_inner_accessory"] = "_barbell"
+                            elif Chr.outfit["front_inner_accessory"] == "_barbell":
+                                $ Chr.outfit["front_inner_accessory"] = ""
                             else:
-                                $ Chr.piercings = "_ring"
+                                $ Chr.outfit["front_inner_accessory"] = "_ring"
                         "Toggle Arms":
                             if Chr.arm_pose == 1:
                                 $ Chr.arm_pose = 2
@@ -312,12 +312,12 @@ label WardrobeEditor(Chr=0):
                             else:
                                 $ Chr.underwear_pulled_down = 1
                         "Toggle Pierce":
-                            if Chr.piercings == "_ring":
-                                $ Chr.piercings = "_barbell"
-                            elif Chr.piercings == "_barbell":
-                                $ Chr.piercings = ""
+                            if Chr.outfit["front_inner_accessory"] == "_ring":
+                                $ Chr.outfit["front_inner_accessory"] = "_barbell"
+                            elif Chr.outfit["front_inner_accessory"] == "_barbell":
+                                $ Chr.outfit["front_inner_accessory"] = ""
                             else:
-                                $ Chr.piercings = "_ring"
+                                $ Chr.outfit["front_inner_accessory"] = "_ring"
                         "Toggle Wetness":
                             if not Chr.grool:
                                 $ Chr.grool = 1
@@ -376,15 +376,15 @@ label WardrobeEditor(Chr=0):
                             $ Chr.outfit["underwear"] = "_lace_panties"
                         "Add wolvie_panties" if Chr == LauraX:
                             $ Chr.outfit["underwear"] = "wolvie_panties"
-                        "Add sports_panties" if Chr == EmmaX:
-                            $ Chr.outfit["underwear"] = "sports_panties"
+                        "Add _sports_panties" if Chr == EmmaX:
+                            $ Chr.outfit["underwear"] = "_sports_panties"
                         "Toggle Pierce":
-                            if Chr.piercings == "_ring":
-                                $ Chr.piercings = "_barbell"
-                            elif Chr.piercings == "_barbell":
-                                $ Chr.piercings = ""
+                            if Chr.outfit["front_inner_accessory"] == "_ring":
+                                $ Chr.outfit["front_inner_accessory"] = "_barbell"
+                            elif Chr.outfit["front_inner_accessory"] == "_barbell":
+                                $ Chr.outfit["front_inner_accessory"] = ""
                             else:
-                                $ Chr.piercings = "_ring"
+                                $ Chr.outfit["front_inner_accessory"] = "_ring"
                         "pull down-up_panties":
                             if Chr.underwear_pulled_down:
                                 $ Chr.underwear_pulled_down = 0
@@ -468,16 +468,16 @@ label WardrobeEditor(Chr=0):
                             else:
                                 $ Chr.outfit["hair"] = "_pony"
                         "Toggle held":
-                            if not Chr.held_item:
-                                $ Chr.held_item  = "_phone"
-                            elif Chr.held_item == "_phone":
-                                $ Chr.held_item  = "_dildo"
-                            elif Chr.held_item == "_dildo":
-                                $ Chr.held_item  = "_vibrator"
-                            elif Chr.held_item == "_vibrator":
-                                $ Chr.held_item  = "_panties"
+                            if not Chr.outfit["held_item"]:
+                                $ Chr.outfit["held_item"]  = "_phone"
+                            elif Chr.outfit["held_item"] == "_phone":
+                                $ Chr.outfit["held_item"]  = "_dildo"
+                            elif Chr.outfit["held_item"] == "_dildo":
+                                $ Chr.outfit["held_item"]  = "_vibrator"
+                            elif Chr.outfit["held_item"] == "_vibrator":
+                                $ Chr.outfit["held_item"]  = "_panties"
                             else:
-                                $ Chr.held_item  = 0
+                                $ Chr.outfit["held_item"]  = 0
                         "Toggle gold Necklace" if Chr == StormX:
                             if not Chr.outfit["neck"]:
                                 $ Chr.outfit["neck"] = 'gold'
@@ -523,59 +523,59 @@ label WardrobeEditor(Chr=0):
                         "Spunk Level":
                             menu:
                                 "mouth":
-                                    if "mouth" in Chr.spunk:
+                                    if Chr.spunk["mouth"]:
                                         $ Chr.spunk["mouth"] = False
                                     else:
                                         $ Chr.spunk["mouth"] = True
                                 "Chin":
-                                    if "chin" in Chr.spunk:
+                                    if Chr.spunk["chin"]:
                                         $ Chr.spunk["chin"] = False
                                     else:
                                         $ Chr.spunk["chin"] = True
                                 "Facial":
-                                    if "facial" in Chr.spunk:
+                                    if Chr.spunk["face"]:
                                         $ Chr.spunk["face"] = False
                                     else:
                                         $ Chr.spunk["face"] = True
                                 "Hair":
-                                    if "hair" in Chr.spunk:
+                                    if Chr.spunk["hair"]:
                                         $ Chr.spunk["hair"] = False
                                     else:
                                         $ Chr.spunk["hair"] = True
                                 "Tits":
-                                    if "tits" in Chr.spunk:
+                                    if Chr.spunk["breasts"]:
                                         $ Chr.spunk["breasts"] = False
                                     else:
                                         $ Chr.spunk["breasts"] = True
                                 "Belly":
-                                    if "belly" in Chr.spunk:
+                                    if Chr.spunk["belly"]:
                                         $ Chr.spunk["belly"] = False
                                     else:
                                         $ Chr.spunk["belly"] = True
                                 "Back":
-                                    if "back" in Chr.spunk:
+                                    if Chr.spunk["back"]:
                                         $ Chr.spunk["back"] = False
                                     else:
                                         $ Chr.spunk["back"] = True
                                 "Pussy":
-                                    if "in" in Chr.spunk:
+                                    if Chr.spunk["pussy"]:
                                         $ Chr.spunk["pussy"] = False
                                     else:
                                         $ Chr.spunk["pussy"] = True
                                 "Ass":
-                                    if "anal" in Chr.spunk:
+                                    if Chr.spunk["anus"]:
                                         $ Chr.spunk["anus"] = False
                                     else:
                                         $ Chr.spunk["anus"] = True
                                 "Return":
                                     pass
                         "Toggle Pierce":
-                            if Chr.piercings == "_ring":
-                                $ Chr.piercings = "_barbell"
-                            elif Chr.piercings == "_barbell":
-                                $ Chr.piercings = ""
+                            if Chr.outfit["front_inner_accessory"] == "_ring":
+                                $ Chr.outfit["front_inner_accessory"] = "_barbell"
+                            elif Chr.outfit["front_inner_accessory"] == "_barbell":
+                                $ Chr.outfit["front_inner_accessory"] = ""
                             else:
-                                $ Chr.piercings = "_ring"
+                                $ Chr.outfit["front_inner_accessory"] = "_ring"
                         "Add Gloves" if not Chr.outfit["gloves"]:
                             $ Chr.outfit["gloves"] = "_gloves"
                         "Remove Gloves" if Chr.outfit["gloves"]:
@@ -678,7 +678,7 @@ label Cheat_Menu(Girl=0):
             $ Girl.action_counter["fondle_ass"] += 5
             $ Girl.action_counter["dildo_pussy"] += 5
             $ Girl.action_counter["dildo_ass"] += 5
-            $ Girl.buttplug += 5
+            $ Girl.outfit["buttplug"] += 5
             $ Girl.action_counter["suck_breasts"] += 5
             $ Girl.action_counter["finger_pussy"] += 5
             $ Girl.action_counter["finger_ass"] += 5

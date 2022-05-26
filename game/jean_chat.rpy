@@ -1069,7 +1069,7 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
             $ Options.append("facial")
         if JeanX.event_counter["sleepover"]:
 
-            $ Options.append("sleep")
+            $ Options.append("sleepwear")
         if JeanX.event_counter["creampied"] or JeanX.event_counter["anal_creampied"]:
 
             $ Options.append("creampie")
@@ -2293,7 +2293,7 @@ label Jean_Wardrobe_Menu:
             "outfit Management":
                 call Jean_Clothes_outfits
             "Let's talk about what you wear around.":
-                call Clothes_Schedule (JeanX)
+                call set_clothes_schedule (JeanX)
 
             "Could I get a look at it?" if JeanX.location != bg_current:
 
@@ -2415,26 +2415,26 @@ label Jean_Wardrobe_Menu:
                 "Let's try something else though.":
                     ch_j "Sure. . ."
 
-        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not JeanX.first_custom_outfit[0] and not JeanX.second_custom_outfit[0] and not JeanX.third_custom_outfit[0]:
+        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not JeanX.first_custom_outfit["outfit_active"] and not JeanX.second_custom_outfit["outfit_active"] and not JeanX.third_custom_outfit["outfit_active"]:
             pass
 
-        "Remember that outfit we put together?" if JeanX.first_custom_outfit[0] or JeanX.second_custom_outfit[0] or JeanX.third_custom_outfit[0]:
+        "Remember that outfit we put together?" if JeanX.first_custom_outfit["outfit_active"] or JeanX.second_custom_outfit["outfit_active"] or JeanX.third_custom_outfit["outfit_active"]:
             $ counter = 0
             while 1:
                 menu:
-                    "Throw on Custom 1 (locked)" if not JeanX.first_custom_outfit[0]:
+                    "Throw on Custom 1 (locked)" if not JeanX.first_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 1" if JeanX.first_custom_outfit[0]:
+                    "Throw on Custom 1" if JeanX.first_custom_outfit["outfit_active"]:
                         $ JeanX.change_outfit("custom1")
                         $ counter = 3
-                    "Throw on Custom 2 (locked)" if not JeanX.second_custom_outfit[0]:
+                    "Throw on Custom 2 (locked)" if not JeanX.second_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 2" if JeanX.second_custom_outfit[0]:
+                    "Throw on Custom 2" if JeanX.second_custom_outfit["outfit_active"]:
                         $ JeanX.change_outfit("custom2")
                         $ counter = 5
-                    "Throw on Custom 3 (locked)" if not JeanX.third_custom_outfit[0]:
+                    "Throw on Custom 3 (locked)" if not JeanX.third_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 3" if JeanX.third_custom_outfit[0]:
+                    "Throw on Custom 3" if JeanX.third_custom_outfit["outfit_active"]:
                         $ JeanX.change_outfit("custom3")
                         $ counter = 6
 
@@ -2442,29 +2442,29 @@ label Jean_Wardrobe_Menu:
                         pass
                     "You should wear this one in private." if counter:
                         if counter == 5:
-                            $ JeanX.clothing[9] = "custom2"
+                            $ JeanX.clothing[9] = 5
                         elif counter == 6:
-                            $ JeanX.clothing[9] = "custom3"
+                            $ JeanX.clothing[9] = 6
                         else:
-                            $ JeanX.clothing[9] = "custom1"
+                            $ JeanX.clothing[9] = 3
                         ch_j "Ok, sure."
                     "On second thought, forget about that one outfit. . .":
 
                         menu:
-                            "Custom 1 [[clear custom 1]" if JeanX.first_custom_outfit[0]:
+                            "Custom 1 [[clear custom 1]" if JeanX.first_custom_outfit["outfit_active"]:
                                 ch_j "Ok."
-                                $ JeanX.first_custom_outfit[0] = 0
-                            "Custom 1 [[clear custom 1] (locked)" if not JeanX.first_custom_outfit[0]:
+                                $ JeanX.first_custom_outfit["outfit_active"] = 0
+                            "Custom 1 [[clear custom 1] (locked)" if not JeanX.first_custom_outfit["outfit_active"]:
                                 pass
-                            "Custom 2 [[clear custom 2]" if JeanX.second_custom_outfit[0]:
+                            "Custom 2 [[clear custom 2]" if JeanX.second_custom_outfit["outfit_active"]:
                                 ch_j "Ok."
-                                $ JeanX.second_custom_outfit[0] = 0
-                            "Custom 2 [[clear custom 2] (locked)" if not JeanX.second_custom_outfit[0]:
+                                $ JeanX.second_custom_outfit["outfit_active"] = 0
+                            "Custom 2 [[clear custom 2] (locked)" if not JeanX.second_custom_outfit["outfit_active"]:
                                 pass
-                            "Custom 3 [[clear custom 3]" if JeanX.third_custom_outfit[0]:
+                            "Custom 3 [[clear custom 3]" if JeanX.third_custom_outfit["outfit_active"]:
                                 ch_j "Ok."
-                                $ JeanX.third_custom_outfit[0] = 0
-                            "Custom 3 [[clear custom 3] (locked)" if not JeanX.third_custom_outfit[0]:
+                                $ JeanX.third_custom_outfit["outfit_active"] = 0
+                            "Custom 3 [[clear custom 3] (locked)" if not JeanX.third_custom_outfit["outfit_active"]:
                                 pass
                             "Never mind, [[back].":
                                 pass
@@ -2478,19 +2478,19 @@ label Jean_Wardrobe_Menu:
                         return
 
         "Gym Clothes?" if not JeanX.taboo or bg_current == "bg_dangerroom":
-            $ JeanX.change_outfit("gym")
+            $ JeanX.change_outfit("gym_clothes")
 
         "Sleepwear?" if not JeanX.taboo:
             if approval_check(JeanX, 1200):
-                $ JeanX.change_outfit("sleep")
+                $ JeanX.change_outfit("sleepwear")
             else:
                 call Display_dress_screen (JeanX)
                 if _return:
-                    $ JeanX.change_outfit("sleep")
+                    $ JeanX.change_outfit("sleepwear")
 
-        "Swimwear? (locked)" if (JeanX.taboo and bg_current != "bg_pool") or not JeanX.swimwear[0]:
+        "Swimwear? (locked)" if (JeanX.taboo and bg_current != "bg_pool") or not JeanX.swimwear["outfit_active"]:
             $ JeanX.change_outfit("swimwear")
-        "Swimwear?" if (not JeanX.taboo or bg_current == "bg_pool") and JeanX.swimwear[0]:
+        "Swimwear?" if (not JeanX.taboo or bg_current == "bg_pool") and JeanX.swimwear["outfit_active"]:
             $ JeanX.change_outfit("swimwear")
 
         "Halloween Costume?" if "halloween" in JeanX.history:
@@ -3109,7 +3109,7 @@ label Jean_Wardrobe_Menu:
         "Piercings. [[See what she looks like without them first] (locked)" if not JeanX.seen_pussy and not JeanX.seen_breasts:
             pass
 
-        "Add ring piercings" if JeanX.piercings != "_ring" and (JeanX.seen_pussy or JeanX.seen_breasts):
+        "Add ring piercings" if JeanX.outfit["front_inner_accessory"] != "_ring" and (JeanX.seen_pussy or JeanX.seen_breasts):
             ch_p "You know, you'd look really nice with some ring body piercings"
             if "_ring" in JeanX.to_do:
                 ch_j "Yeah, I know, I'll get to it."
@@ -3129,7 +3129,7 @@ label Jean_Wardrobe_Menu:
                     return
                 $ JeanX.to_do.append("_ring")
 
-        "Add barbell piercings" if JeanX.piercings != "_barbell" and (JeanX.seen_pussy or JeanX.seen_breasts):
+        "Add barbell piercings" if JeanX.outfit["front_inner_accessory"] != "_barbell" and (JeanX.seen_pussy or JeanX.seen_breasts):
             ch_p "You know, you'd look really nice with some barbell body piercings"
             if "_barbell" in JeanX.to_do:
                 ch_j "Yeah, I know, I'll get to it."
@@ -3149,7 +3149,7 @@ label Jean_Wardrobe_Menu:
                     return
                 $ JeanX.to_do.append("_barbell")
 
-        "Remove Piercings" if JeanX.piercings:
+        "Remove Piercings" if JeanX.outfit["front_inner_accessory"]:
             ch_p "You know, you'd look better without those piercings."
             $ JeanX.change_face("_bemused", 1)
             $ approval = approval_check(JeanX, 1350, taboo_modifier=0)
@@ -3164,7 +3164,7 @@ label Jean_Wardrobe_Menu:
                 $ JeanX.brows = "_angry"
                 ch_j "I don't know, I kinda like them now. . ."
                 return
-            $ JeanX.piercings = ""
+            $ JeanX.outfit["front_inner_accessory"] = ""
 
         "Add Suspenders" if JeanX.outfit["front_outer_accessory"] != "_suspenders" and JeanX.outfit["front_outer_accessory"] != "_suspenders2" and "halloween" in JeanX.history:
             $ JeanX.outfit["front_outer_accessory"] = "_suspenders"

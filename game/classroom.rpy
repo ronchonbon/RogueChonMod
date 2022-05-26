@@ -199,7 +199,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                 show Rogue_sprite at sprite_location(RogueX.sprite_location,50):
                     ease .5 ypos 250
             elif temp_Girls[0] == KittyX:
-                show Kitty_Sprite at sprite_location(KittyX.sprite_location,50):
+                show Kitty_sprite at sprite_location(KittyX.sprite_location,50):
                     ease .5 ypos 250
             elif temp_Girls[0] == LauraX:
                 show Laura_Sprite at sprite_location(LauraX.sprite_location,50):

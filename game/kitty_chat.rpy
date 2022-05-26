@@ -1054,7 +1054,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
             $ Options.append("facial")
         if KittyX.event_counter["sleepover"]:
 
-            $ Options.append("sleep")
+            $ Options.append("sleepwear")
         if KittyX.event_counter["creampied"] or KittyX.event_counter["anal_creampied"]:
 
             $ Options.append("creampie")
@@ -2091,7 +2091,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                 ch_k "I'm outta here, later!"
         else:
             ch_k "I'm headed out, see you later."
-        hide Kitty_Sprite
+        hide Kitty_sprite
         return
 
 
@@ -2208,7 +2208,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
     $ KittyX.recent_history.append("followed")
     if not line:
 
-        hide Kitty_Sprite
+        hide Kitty_sprite
         call change_out_of_gym_clothes ([KittyX])
         return
 
@@ -2220,7 +2220,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_k "Sorry [KittyX.player_petname], but I[KittyX.like]need the practice?"
         else:
             ch_k "I'm[KittyX.like]sorry, [KittyX.player_petname], I've got things to do."
-        hide Kitty_Sprite
+        hide Kitty_sprite
         call change_out_of_gym_clothes ([KittyX])
         return
 
@@ -2233,7 +2233,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         call drain_all_words ("arriving")
         $ KittyX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
-        hide Kitty_Sprite
+        hide Kitty_sprite
         call change_out_of_gym_clothes ([KittyX])
         if KittyX.location == "bg_classroom":
             ch_k "Cool, study buddy!"
@@ -2318,7 +2318,7 @@ label Kitty_Wardrobe_Menu:
             "outfits":
                 call Kitty_Clothes_outfits
             "Let's talk about what you wear around.":
-                call Clothes_Schedule (KittyX)
+                call set_clothes_schedule (KittyX)
 
             "Could I get a look at it?" if KittyX.location != bg_current:
 
@@ -2442,26 +2442,26 @@ label Kitty_Wardrobe_Menu:
                 "Let's try something else though.":
                     ch_k "K."
 
-        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not KittyX.first_custom_outfit[0] and not KittyX.second_custom_outfit[0] and not KittyX.third_custom_outfit[0]:
+        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not KittyX.first_custom_outfit["outfit_active"] and not KittyX.second_custom_outfit["outfit_active"] and not KittyX.third_custom_outfit["outfit_active"]:
             pass
 
-        "Remember that outfit we put together?" if KittyX.first_custom_outfit[0] or KittyX.second_custom_outfit[0] or KittyX.third_custom_outfit[0]:
+        "Remember that outfit we put together?" if KittyX.first_custom_outfit["outfit_active"] or KittyX.second_custom_outfit["outfit_active"] or KittyX.third_custom_outfit["outfit_active"]:
             $ counter = 0
             while 1:
                 menu:
-                    "Throw on Custom 1 (locked)" if not KittyX.first_custom_outfit[0]:
+                    "Throw on Custom 1 (locked)" if not KittyX.first_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 1" if KittyX.first_custom_outfit[0]:
+                    "Throw on Custom 1" if KittyX.first_custom_outfit["outfit_active"]:
                         $ KittyX.change_outfit("custom1")
                         $ counter = 3
-                    "Throw on Custom 2 (locked)" if not KittyX.second_custom_outfit[0]:
+                    "Throw on Custom 2 (locked)" if not KittyX.second_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 2" if KittyX.second_custom_outfit[0]:
+                    "Throw on Custom 2" if KittyX.second_custom_outfit["outfit_active"]:
                         $ KittyX.change_outfit("custom2")
                         $ counter = 5
-                    "Throw on Custom 3 (locked)" if not KittyX.third_custom_outfit[0]:
+                    "Throw on Custom 3 (locked)" if not KittyX.third_custom_outfit["outfit_active"]:
                         pass
-                    "Throw on Custom 3" if KittyX.third_custom_outfit[0]:
+                    "Throw on Custom 3" if KittyX.third_custom_outfit["outfit_active"]:
                         $ KittyX.change_outfit("custom3")
                         $ counter = 6
 
@@ -2469,29 +2469,29 @@ label Kitty_Wardrobe_Menu:
                         pass
                     "You should wear this one in private." if counter:
                         if counter == 5:
-                            $ KittyX.clothing[9] = "custom2"
+                            $ KittyX.clothing[9] = 5
                         elif counter == 6:
-                            $ KittyX.clothing[9] = "custom3"
+                            $ KittyX.clothing[9] = 6
                         else:
-                            $ KittyX.clothing[9] = "custom1"
+                            $ KittyX.clothing[9] = 3
                         ch_k "Ok, sure."
                     "On second thought, forget about that one outfit. . .":
 
                         menu:
-                            "Custom 1 [[clear custom 1]" if KittyX.first_custom_outfit[0]:
+                            "Custom 1 [[clear custom 1]" if KittyX.first_custom_outfit["outfit_active"]:
                                 ch_k "Ok, no problem."
-                                $ KittyX.first_custom_outfit[0] = 0
-                            "Custom 1 [[clear custom 1] (locked)" if not KittyX.first_custom_outfit[0]:
+                                $ KittyX.first_custom_outfit["outfit_active"] = 0
+                            "Custom 1 [[clear custom 1] (locked)" if not KittyX.first_custom_outfit["outfit_active"]:
                                 pass
-                            "Custom 2 [[clear custom 2]" if KittyX.second_custom_outfit[0]:
+                            "Custom 2 [[clear custom 2]" if KittyX.second_custom_outfit["outfit_active"]:
                                 ch_k "Ok, no problem."
-                                $ KittyX.second_custom_outfit[0] = 0
-                            "Custom 2 [[clear custom 2] (locked)" if not KittyX.second_custom_outfit[0]:
+                                $ KittyX.second_custom_outfit["outfit_active"] = 0
+                            "Custom 2 [[clear custom 2] (locked)" if not KittyX.second_custom_outfit["outfit_active"]:
                                 pass
-                            "Custom 3 [[clear custom 3]" if KittyX.third_custom_outfit[0]:
+                            "Custom 3 [[clear custom 3]" if KittyX.third_custom_outfit["outfit_active"]:
                                 ch_k "Ok, no problem."
-                                $ KittyX.third_custom_outfit[0] = 0
-                            "Custom 3 [[clear custom 3] (locked)" if not KittyX.third_custom_outfit[0]:
+                                $ KittyX.third_custom_outfit["outfit_active"] = 0
+                            "Custom 3 [[clear custom 3] (locked)" if not KittyX.third_custom_outfit["outfit_active"]:
                                 pass
                             "Never mind, [[back].":
                                 pass
@@ -2505,19 +2505,19 @@ label Kitty_Wardrobe_Menu:
                         return
 
         "Gym Clothes?" if not KittyX.taboo or bg_current == "bg_dangerroom":
-            $ KittyX.change_outfit("gym")
+            $ KittyX.change_outfit("gym_clothes")
 
         "Sleepwear?" if not KittyX.taboo:
             if approval_check(KittyX, 1200):
-                $ KittyX.change_outfit("sleep")
+                $ KittyX.change_outfit("sleepwear")
             else:
                 call Display_dress_screen (KittyX)
                 if _return:
-                    $ KittyX.change_outfit("sleep")
+                    $ KittyX.change_outfit("sleepwear")
 
-        "Swimwear? (locked)" if (KittyX.taboo and bg_current != "bg_pool") or not KittyX.swimwear[0]:
+        "Swimwear? (locked)" if (KittyX.taboo and bg_current != "bg_pool") or not KittyX.swimwear["outfit_active"]:
             $ KittyX.change_outfit("swimwear")
-        "Swimwear?" if (not KittyX.taboo or bg_current == "bg_pool") and KittyX.swimwear[0]:
+        "Swimwear?" if (not KittyX.taboo or bg_current == "bg_pool") and KittyX.swimwear["outfit_active"]:
             $ KittyX.change_outfit("swimwear")
 
         "Halloween Costume?" if "halloween" in KittyX.history:
@@ -3173,7 +3173,7 @@ label Kitty_Wardrobe_Menu:
         "Piercings. [[See what she looks like without them first] (locked)" if not KittyX.seen_pussy and not KittyX.seen_breasts:
             pass
 
-        "Add ring piercings" if KittyX.piercings != "_ring" and (KittyX.seen_pussy or KittyX.seen_breasts):
+        "Add ring piercings" if KittyX.outfit["front_inner_accessory"] != "_ring" and (KittyX.seen_pussy or KittyX.seen_breasts):
             ch_p "You know, you'd look really nice with some ring body piercings."
             if "_ring" in KittyX.to_do:
                 ch_k "I know, I know. I'll take care of it later."
@@ -3193,7 +3193,7 @@ label Kitty_Wardrobe_Menu:
                     return
                 $ KittyX.to_do.append("_ring")
 
-        "Add barbell piercings" if KittyX.piercings != "_barbell" and (KittyX.seen_pussy or KittyX.seen_breasts):
+        "Add barbell piercings" if KittyX.outfit["front_inner_accessory"] != "_barbell" and (KittyX.seen_pussy or KittyX.seen_breasts):
             ch_p "You know, you'd look really nice with some barbell body piercings."
             if "_barbell" in KittyX.to_do:
                 ch_k "I know, I know. I'll take care of it later."
@@ -3212,9 +3212,9 @@ label Kitty_Wardrobe_Menu:
                     ch_k "Not that it's any of your business, [KittyX.player_petname]."
                     return
                 $ KittyX.to_do.append("_barbell")
-                $ KittyX.piercings = "_barbell"
+                $ KittyX.outfit["front_inner_accessory"] = "_barbell"
 
-        "Remove Piercings" if KittyX.piercings:
+        "Remove Piercings" if KittyX.outfit["front_inner_accessory"]:
             ch_p "You know, you'd look better without those piercings."
             $ KittyX.change_face("_bemused", 1)
             $ approval = approval_check(KittyX, 1350, taboo_modifier=0)
@@ -3229,7 +3229,7 @@ label Kitty_Wardrobe_Menu:
                 $ KittyX.brows = "_angry"
                 ch_k "Well {i}I{/i} kinda like'em."
                 return
-            $ KittyX.piercings = ""
+            $ KittyX.outfit["front_inner_accessory"] = ""
 
         "Add gold_necklace" if KittyX.outfit["neck"] != "_gold_necklace":
             ch_p "Why don't you try on that gold necklace?"
