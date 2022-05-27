@@ -628,7 +628,7 @@ init python:
                 self.brows = "_normal"
                 self.eyes = "_squint"
                 if self.tag == "Rogue":
-                    self.mouth = "_grimace"
+                    self.mouth = "_smile"
                 if self.tag == "Laura":
                     if self.love >= 700:
                         self.mouth = "_smile"
@@ -658,10 +658,7 @@ init python:
                 self.brows = "_surprised"
                 self.eyes = "_surprised"
             elif emotion == "startled":
-                if self.tag == "Rogue" or self.tag == "Kitty":
-                    self.mouth = "_grimace"
-                else:
-                    self.mouth = "_smile"
+                self.mouth = "_smile"
                 self.brows = "_surprised"
                 self.eyes = "_surprised"
             elif emotion == "_down":
@@ -700,7 +697,7 @@ init python:
                     self.eyes = "_sexy"
             elif emotion == "_manic":
                 if self.tag == "Rogue":
-                    self.mouth = "_grimace"
+                    self.mouth = "_smile"
                 elif self.tag == "Laura":
                     self.mouth = "_lipbite"
                 else:
@@ -988,17 +985,17 @@ init python:
                 "held_item": "",
                 "shame": 0, "outfit_active": False}
 
-            self.first_custom_outfit = self.outfit
-            self.second_custom_outfit = self.outfit
-            self.third_custom_outfit = self.outfit
-            self.temp_outfit = self.outfit
+            self.first_custom_outfit = self.outfit.copy()
+            self.second_custom_outfit = self.outfit.copy()
+            self.third_custom_outfit = self.outfit.copy()
+            self.temp_outfit = self.outfit.copy()
 
             self.clothing = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-            self.nude = self.outfit
+            self.nude = self.outfit.copy()
             self.nude["shame"] = 50
 
-            self.shower = self.outfit
+            self.shower = self.outfit.copy()
             self.shower["top"] = "_towel"
             self.shower["shame"] = 35
 

@@ -1084,7 +1084,7 @@ label Storm_BF:
             $ StormX.change_stat("love", 90, -5)
             $ StormX.change_stat("obedience", 50, 2)
             ch_s "Then I won't take more of your time than is necessary."
-            $ StormX.change_face("_grimace")
+            $ StormX.change_face("_smile")
 
     $ StormX.event_happened[5] = 20
 

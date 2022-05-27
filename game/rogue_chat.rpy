@@ -44,7 +44,7 @@ label Rogue_Relationship:
 
                 if RogueX.love >= 800:
                     $ RogueX.change_face("_surprised", 1)
-                    $ RogueX.mouth = "_grimace"
+                    $ RogueX.mouth = "_smile"
                     $ RogueX.change_stat("love", 200, 40)
                     ch_r "I'd love to!"
                     if "boyfriend" not in RogueX.player_petnames:
@@ -91,7 +91,7 @@ label Rogue_Relationship:
 
                 if RogueX.love >= 800:
                     $ RogueX.change_face("_surprised", 1)
-                    $ RogueX.mouth = "_grimace"
+                    $ RogueX.mouth = "_smile"
                     $ RogueX.change_stat("love", 90, 5)
                     ch_r "If you're in, I'm in!"
                     if "boyfriend" not in RogueX.player_petnames:
@@ -106,7 +106,7 @@ label Rogue_Relationship:
                     $ RogueX.action_counter["kiss"] += 1
                 elif RogueX.love >= 600 and approval_check(RogueX, 1500):
                     $ RogueX.change_face("_smile", 1)
-                    $ RogueX.mouth = "_grimace"
+                    $ RogueX.mouth = "_smile"
                     $ RogueX.change_stat("love", 90, 5)
                     ch_r "We can give this another try."
                     if "boyfriend" not in RogueX.player_petnames:

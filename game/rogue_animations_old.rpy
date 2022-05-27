@@ -225,7 +225,7 @@ image Rogue_Doggy_Anal_Heading_Mask:
             ease 1.5 zoom 0.5
             repeat
 
-image Rogue_Doggy_Anal_Head_Top:
+image Rogue_doggy_body_animation1:
 
     contains:
         subpixel True
@@ -238,7 +238,7 @@ image Rogue_Doggy_Anal_Head_Top:
             pause 0.8
             repeat
 
-image Rogue_Doggy_Anal_Head_Ass:
+image Rogue_doggy_ass_animation1:
 
     contains:
         subpixel True
@@ -342,7 +342,7 @@ image Rogue_Doggy_Anal_FullMask:
             "True", Null(),
             )
 
-image Rogue_Doggy_Fuck_Top:
+image Rogue_doggy_body_animation2:
 
     contains:
         subpixel True
@@ -355,7 +355,7 @@ image Rogue_Doggy_Fuck_Top:
             ease 2 ypos 15
             repeat
 
-image Rogue_Doggy_Fuck_Ass:
+image Rogue_doggy_ass_animation2:
 
     contains:
         subpixel True
@@ -401,7 +401,7 @@ image Rogue_Anal_Fucking2:
 
         AlphaMask("Zero_doggy_anal2", "images/Rogue_doggy/Rogue_doggy_anus_mask.png")
 
-image Rogue_Doggy_Fuck2_Top:
+image Rogue_doggy_body_animation3:
 
     contains:
         subpixel True
@@ -415,7 +415,7 @@ image Rogue_Doggy_Fuck2_Top:
             pause 0.05
             repeat
 
-image Rogue_Doggy_Fuck2_Ass:
+image Rogue_doggy_ass_animation3:
 
     contains:
         subpixel True
@@ -463,7 +463,7 @@ image Rogue_doggy_feet0:
             ease 2 ypos 0
             repeat
 
-image Rogue_doggy_feet1:
+image Rogue_doggy_feet_animation1:
 
     contains:
         "Rogue_doggy_shins"
@@ -491,7 +491,7 @@ image Rogue_doggy_feet1:
             ease 1 ypos 0
             repeat
 
-image Rogue_doggy_feet2:
+image Rogue_doggy_feet_animation2:
 
     contains:
         "Rogue_doggy_shins"
@@ -628,19 +628,7 @@ image Rogue_sex_Fondle_Breasts:
     zoom 1.1
     offset (320,-130)
 
-image Rogue_head_Sex:
 
-    "Rogue_head"
-    zoom 1.28
-    anchor (0.5,0.5)
-    rotate -10
-
-image Rogue_back_hair_Sex:
-
-    "Rogue_back_hair"
-    zoom 1.28
-    anchor (0.5,0.5)
-    rotate -10
 
 image Rogue_sex_Lick_Pussy:
     "licking"
@@ -1201,7 +1189,7 @@ image Rogue_Footcock_Zero_animation2:
             repeat
     offset (0,-100)
 
-transform Rogue_Footcock_Zero_animation1A():
+transform Rogue_Footcock_Zero_animation1A:
     subpixel True
     offset (0,0)
     block:
@@ -1213,7 +1201,7 @@ transform Rogue_Footcock_Zero_animation1A():
         ease 1.50 yoffset -30
         repeat
 
-transform Rogue_Footcock_Zero_animation2A():
+transform Rogue_Footcock_Zero_animation2A:
     subpixel True
     offset (0,0)
     block:
@@ -1230,7 +1218,7 @@ transform Rogue_Footcock_Zero_animation2A():
         ease 1.00 yoffset -30
         repeat
 
-transform Rogue_Footcock_animation0A():
+transform Rogue_Footcock_animation0A:
     subpixel True
     offset (0,-5)
     block:
@@ -1282,7 +1270,7 @@ image Rogue_sex_legs_FootAnim0:
         pos (0,0)
     offset (0,100)
 
-transform Rogue_sex_legs_FootAnim1A():
+transform Rogue_sex_legs_FootAnim1A:
 
     subpixel True
     offset (0,0)
@@ -1295,7 +1283,7 @@ transform Rogue_sex_legs_FootAnim1A():
         ease 1.50 yoffset 25
         repeat
 
-transform Rogue_sex_legs_FootAnim2A():
+transform Rogue_sex_legs_FootAnim2A:
 
     subpixel True
     offset (0,0)
@@ -1313,7 +1301,7 @@ transform Rogue_sex_legs_FootAnim2A():
         ease 1.0 yoffset 25
         repeat
 
-transform Rogue_sex_legs_FootAnim0A():
+transform Rogue_sex_legs_FootAnim0A:
 
     subpixel True
     offset (0,0)
@@ -1370,7 +1358,7 @@ image Rogue_sex_body_FootAnim0:
         pos (0,0)
     offset (0,100)
 
-transform Rogue_sex_body_FootAnim1A():
+transform Rogue_sex_body_FootAnim1A:
 
     subpixel True
     offset (0,0)
@@ -1383,7 +1371,7 @@ transform Rogue_sex_body_FootAnim1A():
         ease 1.50 yoffset 15
         repeat
 
-transform Rogue_sex_body_FootAnim2A():
+transform Rogue_sex_body_FootAnim2A:
 
     subpixel True
     offset (0,0)
@@ -1401,7 +1389,7 @@ transform Rogue_sex_body_FootAnim2A():
         ease 1.0 yoffset 15
         repeat
 
-transform Rogue_sex_body_FootAnim0A():
+transform Rogue_sex_body_FootAnim0A:
 
     subpixel True
     offset (0,0)
@@ -1590,68 +1578,6 @@ image Rogue_titjob_over:
     pos (-60, 200)
 
 
-transform Rogue_titjob_under_1():
-    ypos 200
-    subpixel True
-    block:
-        ease 1 ypos 300
-        easeout 0.2 ypos 300
-        easein 1.3 ypos 120
-        repeat
-
-transform Rogue_titjob_over_1():
-    ypos 200
-    subpixel True
-    block:
-        ease 1.20 ypos 300
-        easeout 0.1 ypos 300
-        easein 1.2 ypos 120
-        repeat
-
-transform Rogue_titjob_under_2():
-    ypos 200
-    subpixel True
-    block:
-        ease 0.25 ypos 200
-        ease 0.4 ypos 120
-        ease 0.1 ypos 125
-        repeat
-
-transform Rogue_titjob_over_2():
-    ypos 200
-    subpixel True
-    block:
-        ease 0.3 ypos 200
-        ease 0.35 ypos 120
-        ease 0.1 ypos 125
-        repeat
-
-
-transform Zero_TJ_Cock():
-
-    anchor (.5,.5)
-    pos (440,1020)
-    rotate 0
-
-transform Zero_TJ_Cock_1():
-    pos (440,1020)
-    subpixel True
-    block:
-        ease 1 ypos 1050
-        easeout 0.2 ypos 1060
-        easein 1.3 ypos 1020
-        repeat
-
-transform Zero_TJ_Cock_2():
-    pos (440,1020)
-    subpixel True
-    block:
-        ease 0.35 ypos 1030
-        ease 0.4 ypos 1020
-
-        repeat
-
-
 
 
 
@@ -1741,38 +1667,7 @@ label Rogue_TJ_Reset:
 
 
 
-transform Handcock_1():
-    subpixel True
-    rotate_pad False
-    ease 0.5 ypos 450 rotate -2
-    pause 0.25
-    ease 1.0 ypos 400 rotate 0
-    pause 0.1
-    repeat
 
-transform Handcock_2():
-    subpixel True
-    rotate_pad False
-    ease 0.2 ypos 430 rotate -3
-    ease 0.5 ypos 400 rotate 0
-    pause 0.1
-    repeat
-
-transform Rogue_Hand_1():
-    subpixel True
-    ease 0.5 ypos 150 rotate 5
-    pause 0.25
-    ease 1.0 ypos -100 rotate -5
-    pause 0.1
-    repeat
-
-transform Rogue_Hand_2():
-    subpixel True
-    ease 0.2 ypos 0 rotate 3
-    pause 0.1
-    ease 0.4 ypos -100 rotate -3
-    pause 0.1
-    repeat
 
 
 

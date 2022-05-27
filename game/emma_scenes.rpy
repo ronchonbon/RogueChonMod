@@ -4,7 +4,7 @@ label meet_Emma:
     $ EmmaX.outfit_name = "casual1"
     $ EmmaX.today_outfit_name = "casual1"
     $ EmmaX.change_outfit()
-    
+
     $ EmmaX.location = "bg_emma"
 
     call shift_focus(EmmaX)
@@ -13,7 +13,7 @@ label meet_Emma:
 
     call get_last_name
 
-    $ Em9maX.player_petnames.append(_return)
+    $ EmmaX.player_petnames.append(_return)
     $ EmmaX.player_petname = _return
 
     "You enter the classroom and have a seat."

@@ -1834,8 +1834,6 @@ label caught_showering(Girl):
 
             call set_the_scene(check_if_dressed = False)
 
-            "[RogueX.sprite_location]"
-
             if Girl == RogueX:
                 ch_r "Sorry about that [Girl.player_petname], I was just wrapping up my shower."
             elif Girl == KittyX:

@@ -694,7 +694,7 @@ image EmmaSprite_Head:
             "EmmaX.mouth == '_smile'", "images/EmmaSprite/EmmaSprite_Head_mouth_Smile.png",
             "EmmaX.mouth == '_surprised'", "images/EmmaSprite/EmmaSprite_Head_mouth_Surprised.png",
             "EmmaX.mouth == '_tongue'", "images/EmmaSprite/EmmaSprite_Head_mouth_Tongue.png",
-            "EmmaX.mouth == '_grimace'", "images/EmmaSprite/EmmaSprite_Head_mouth_Smile.png",
+            "EmmaX.mouth == '_smile'", "images/EmmaSprite/EmmaSprite_Head_mouth_Smile.png",
             "EmmaX.mouth == '_smirk'", "images/EmmaSprite/EmmaSprite_Head_mouth_Smirk.png",
             "True", "images/EmmaSprite/EmmaSprite_Head_mouth_Normal.png",
             ),
@@ -813,7 +813,7 @@ image Emma_SexSprite:
         ConditionSwitch(
 
             "primary_action == 'eat_pussy' or primary_action == 'eat_ass'", "Emma_Sex_Legs_Lick",
-            "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'in'", ConditionSwitch(
 
                     "action_speed == 1", "Emma_Sex_Legs_S1",
                     "action_speed == 2", "Emma_Sex_Legs_S2",
@@ -821,7 +821,7 @@ image Emma_SexSprite:
                     "action_speed >= 4", "Emma_Sex_Legs_S4",
                     "True", "Emma_Sex_Legs_S0",
                     ),
-            "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'anal'", ConditionSwitch(
 
                     "action_speed == 1", "Emma_Sex_Legs_A1",
                     "action_speed == 2", "Emma_Sex_Legs_A2",
@@ -841,7 +841,7 @@ image Emma_SexSprite:
         ConditionSwitch(
 
             "primary_action == 'eat_pussy' or primary_action == 'eat_ass'",  "Emma_Sex_Body_Lick",
-            "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'in'", ConditionSwitch(
 
                     "action_speed == 1", "Emma_Sex_Body_S1",
                     "action_speed == 2", "Emma_Sex_Body_S2",
@@ -849,7 +849,7 @@ image Emma_SexSprite:
                     "action_speed >= 4", "Emma_Sex_Body_S4",
                     "True",       "Emma_Sex_Body_S0",
                     ),
-            "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'anal'", ConditionSwitch(
 
                     "action_speed == 1", "Emma_Sex_Body_A1",
                     "action_speed == 2", "Emma_Sex_Body_A2",
@@ -865,8 +865,7 @@ image Emma_SexSprite:
                     "True",       "Emma_Sex_Body_H0",
                     ),
             )
-    zoom 0.8
-    anchor (.5,.5)
+    anchor (0.5, 0.0) zoom 0.8
 
 image Emma_Sex_HairBack:
 
@@ -975,7 +974,7 @@ image Emma_Sex_Torso:
     contains:
 
         ConditionSwitch(
-                "EmmaX.spunk['breasts']", Null(),
+                "not EmmaX.spunk['breasts']", Null(),
                 "renpy.showing('Emma_TJ_Animation')", "images/EmmaSex/Emma_Spunk_Titjob_Under.png",
                 "True", "images/EmmaSex/Emma_Spunk_Tits.png",
                 )
@@ -1077,7 +1076,7 @@ image Emma_Sex_Legs_S:
         ConditionSwitch(
 
             "(EmmaX.outfit['underwear'] and EmmaX.underwear_pulled_down) and (EmmaX.outfit['hose'] == '_pantyhose' or EmmaX.outfit['hose'] == '_ripped_pantyhose')", "images/EmmaSex/Emma_Sex_Feet.png",
-            "EmmaX.outfit['hose'] == '_pantyhose' and Player.Sprite and Player.Cock == 'in'","images/EmmaSex/Emma_Sex_Feet.png",
+            "EmmaX.outfit['hose'] == '_pantyhose' and Player.sprite and Player.cock_position == 'in'","images/EmmaSex/Emma_Sex_Feet.png",
             "EmmaX.outfit['hose'] == '_garterbelt'", "images/EmmaSex/Emma_Sex_Feet.png",
             "EmmaX.outfit['hose'] == '_ripped_pantyhose'", "images/EmmaSex/Emma_Sex_Feet_Hose_Holed.png",
             "EmmaX.outfit['hose']", "images/EmmaSex/Emma_Sex_Feet_Hose.png",
@@ -1161,7 +1160,7 @@ image Emma_Sex_Legs_S:
         ConditionSwitch(
             "(EmmaX.outfit['underwear'] and EmmaX.underwear_pulled_down)", Null(),
             "EmmaX.outfit['hose'] == '_ripped_pantyhose'", "images/EmmaSex/Emma_Sex_Hose_PantyhoseHoled_S.png",
-            "Player.Sprite and Player.Cock == 'in'", Null(),
+            "Player.sprite and Player.cock_position == 'in'", Null(),
             "EmmaX.outfit['hose'] == '_pantyhose'", "images/EmmaSex/Emma_Sex_Hose_Pantyhose_S.png",
             "True", Null(),
             )
@@ -1177,7 +1176,7 @@ image Emma_Sex_Legs_S:
     contains:
 
         ConditionSwitch(
-            "EmmaX.outfit['bottom'] == '_dress' and (EmmaX.upskirt or Player.Sprite)", "images/EmmaSex/Emma_Sex_Dress_S_Up.png",
+            "EmmaX.outfit['bottom'] == '_dress' and (EmmaX.upskirt or Player.sprite)", "images/EmmaSex/Emma_Sex_Dress_S_Up.png",
             "EmmaX.outfit['bottom'] == '_dress'", "images/EmmaSex/Emma_Sex_Dress_S.png",
             "EmmaX.outfit['bottom'] == '_skirt'", "images/EmmaSex/Emma_Sex_Skirt_Pussy.png",
             "EmmaX.upskirt", Null(),
@@ -1239,7 +1238,7 @@ image Emma_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "Player.Sprite and Player.Cock == 'anal' and action_speed", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'anal' and action_speed", ConditionSwitch(
 
                     "action_speed == 1", "Emma_Sex_Anus_A1",
                     "True", "Emma_Sex_Anus_A2",
@@ -1292,7 +1291,7 @@ image Emma_Sex_Legs_A:
         ConditionSwitch(
             "(EmmaX.outfit['underwear'] and EmmaX.underwear_pulled_down)", Null(),
             "EmmaX.outfit['hose'] == '_ripped_pantyhose'", "images/EmmaSex/Emma_Sex_Hose_PantyhoseHoled_A.png",
-            "Player.Sprite and Player.Cock == 'anal'", Null(),
+            "Player.sprite and Player.cock_position == 'anal'", Null(),
             "EmmaX.outfit['hose'] == '_pantyhose'", "images/EmmaSex/Emma_Sex_Hose_Pantyhose_A.png",
             "True", Null(),
             )
@@ -1308,7 +1307,7 @@ image Emma_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "EmmaX.outfit['bottom'] == '_dress' and (EmmaX.upskirt or Player.Sprite)", "images/EmmaSex/Emma_Sex_Dress_A_Up.png",
+            "EmmaX.outfit['bottom'] == '_dress' and (EmmaX.upskirt or Player.sprite)", "images/EmmaSex/Emma_Sex_Dress_A_Up.png",
             "EmmaX.outfit['bottom'] == '_dress'", "images/EmmaSex/Emma_Sex_Dress_A.png",
             "EmmaX.outfit['bottom'] == '_skirt'", "images/EmmaSex/Emma_Sex_Skirt_Anal.png",
             "EmmaX.upskirt", Null(),
@@ -1350,7 +1349,7 @@ image Emma_Sex_Legs_A:
     contains:
         ConditionSwitch(
 
-            "Player.Sprite and Player.Cock", Null(),
+            "Player.sprite and Player.cock_position", Null(),
             "primary_action == 'eat_pussy'", "Emma_Sex_Lick_Pussy",
             "primary_action == 'eat_ass'", "Emma_Sex_Lick_Ass",
             "True", Null()
@@ -1623,7 +1622,7 @@ image Emma_Sex_Legs_H0:
     contains:
 
         ConditionSwitch(
-                "Player.Sprite", "Zero_Doggy_Insert",
+                "Player.sprite", "Zero_Doggy_Insert",
                 "True", Null(),
                 )
         alpha 1
@@ -1670,7 +1669,7 @@ image Emma_Sex_Legs_H1:
     contains:
 
         ConditionSwitch(
-                "Player.Sprite", "Zero_Doggy_Insert",
+                "Player.sprite", "Zero_Doggy_Insert",
                 "True", Null(),
                 )
         alpha 1
@@ -1717,7 +1716,7 @@ image Emma_Sex_Legs_H2:
     contains:
 
         ConditionSwitch(
-                "Player.Sprite", "Zero_Doggy_Insert",
+                "Player.sprite", "Zero_Doggy_Insert",
                 "True", Null(),
                 )
         alpha 1
@@ -1757,7 +1756,7 @@ image Emma_Sex_Legs_H4:
     contains:
 
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         alpha 1
         zoom 0.5
         pos (680,440)
@@ -1807,7 +1806,7 @@ image Emma_Sex_Legs_S0:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         alpha 1
         zoom 0.5
         pos (680,400)
@@ -1840,7 +1839,7 @@ image Emma_Sex_Legs_S1:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         alpha 1
         zoom 0.5
@@ -1876,7 +1875,7 @@ image Emma_Sex_Legs_S2:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         alpha 1
         zoom 0.5
@@ -1911,7 +1910,7 @@ image Emma_Sex_Legs_S3:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         alpha 1
         zoom 0.5
@@ -1944,7 +1943,7 @@ image Emma_Sex_Legs_S4:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         alpha 1
         zoom 0.5
@@ -1974,7 +1973,7 @@ image Emma_Sex_Legs_A0:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         alpha 1
         zoom 0.5
         pos (681,420)
@@ -1993,7 +1992,7 @@ image Emma_Sex_Legs_A1:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         alpha 1
         zoom 0.5
         pos (681,420)
@@ -2064,7 +2063,7 @@ image Emma_Sex_Legs_A2:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         alpha 1
         zoom 0.5
@@ -2104,7 +2103,7 @@ image Emma_Sex_Legs_A3:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         alpha 1
         zoom 0.5
@@ -2144,7 +2143,7 @@ image Emma_Sex_Legs_A4:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         alpha 1
         zoom 0.5
@@ -2233,27 +2232,27 @@ label Emma_Sex_Launch(Line=primary_action):
 
 
 
-    $ Player.Sprite = 1
+    $ Player.sprite = 1
     $ Line = "solo" if not Line else Line
     if Line == "sex":
-        $ Player.Cock = "in"
+        $ Player.cock_position = "in"
         if offhand_action in ("fondle pussy","dildo pussy","lick pussy"):
             $ offhand_action = 0
     elif Line == "anal":
-        $ Player.Cock = "anal"
+        $ Player.cock_position = "anal"
         if offhand_action in ("insert ass","dildo anal","lick ass"):
             $ offhand_action = 0
     elif Line == "hotdog":
-        $ Player.Cock = "out"
+        $ Player.cock_position = "out"
     elif Line == "footjob":
         $ show_feet = 1
-        $ Player.Cock = "footjob"
+        $ Player.cock_position = "footjob"
     elif Line == "massage":
-        $ Player.Sprite = 0
-        $ Player.Cock = 0
+        $ Player.sprite = 0
+        $ Player.cock_position = 0
     else:
-        $ Player.Sprite = 0
-        $ Player.Cock = "out"
+        $ Player.sprite = 0
+        $ Player.cock_position = "out"
         $ action_speed = 0
 
     $ primary_action = Line
@@ -2301,13 +2300,13 @@ image Emma_Doggy_Animation:
         (420,750),
         (0,0), ConditionSwitch(
 
-            "Player.Cock == 'anal'", ConditionSwitch(
+            "Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Emma_Doggy_Boob_Fuck2",
                     "action_speed > 1", "Emma_Doggy_Boob_Fuck",
                     "action_speed", "Emma_Doggy_Boob",
                     "True", "Emma_Doggy_Boob",
                     ),
-            "Player.Cock == 'in'", ConditionSwitch(
+            "Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Emma_Doggy_Boob_Fuck2",
                     "action_speed > 1", "Emma_Doggy_Boob_Fuck",
                     "True", "Emma_Doggy_Boob",
@@ -2316,14 +2315,14 @@ image Emma_Doggy_Animation:
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite", "Emma_Doggy_Body",
-            "Player.Cock == 'anal'", ConditionSwitch(
+            "not Player.sprite", "Emma_Doggy_Body",
+            "Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Emma_Doggy_Fuck2_Top",
                     "action_speed > 1", "Emma_Doggy_Fuck_Top",
                     "action_speed", "Emma_Doggy_Anal_Head_Top",
                     "True", "Emma_Doggy_Body",
                     ),
-            "Player.Cock == 'in'", ConditionSwitch(
+            "Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Emma_Doggy_Fuck2_Top",
                     "action_speed > 1", "Emma_Doggy_Fuck_Top",
                     "True", "Emma_Doggy_Body",
@@ -2332,14 +2331,14 @@ image Emma_Doggy_Animation:
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite", "Emma_Doggy_Ass",
-            "Player.Cock == 'anal'", ConditionSwitch(
+            "not Player.sprite", "Emma_Doggy_Ass",
+            "Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Emma_Doggy_Fuck2_Ass",
                     "action_speed > 1", "Emma_Doggy_Fuck_Ass",
                     "action_speed", "Emma_Doggy_Anal_Head_Ass",
                     "True", "Emma_Doggy_Ass",
                     ),
-            "Player.Cock == 'in'", ConditionSwitch(
+            "Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Emma_Doggy_Fuck2_Ass",
                     "action_speed > 1", "Emma_Doggy_Fuck_Ass",
                     "True", "Emma_Doggy_Ass",
@@ -2348,12 +2347,12 @@ image Emma_Doggy_Animation:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Cock == 'footjob'", ConditionSwitch(
+            "Player.cock_position == 'footjob'", ConditionSwitch(
                     "action_speed > 1", "Emma_Doggy_Feet2",
                     "action_speed", "Emma_Doggy_Feet1",
                     "True", "Emma_Doggy_Feet0",
                     ),
-            "not Player.Sprite and show_feet", "Emma_Doggy_Feet0",
+            "not Player.sprite and show_feet", "Emma_Doggy_Feet0",
             "True", Null(),
             ),
         )
@@ -2418,7 +2417,7 @@ image Emma_Doggy_Body:
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.spunk[back]", "images/EmmaDoggy/Emma_Doggy_Spunk_Back.png",
+            "EmmaX.spunk['back']", "images/EmmaDoggy/Emma_Doggy_Spunk_Back.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -2459,7 +2458,7 @@ image Emma_Doggy_Head:
             "EmmaX.mouth == '_kiss'", "images/EmmaDoggy/Emma_Doggy_mouth_Kiss.png",
             "EmmaX.mouth == '_sad'", "images/EmmaDoggy/Emma_Doggy_mouth_Sad.png",
             "EmmaX.mouth == '_smile'", "images/EmmaDoggy/Emma_Doggy_mouth_Smile.png",
-            "EmmaX.mouth == '_grimace'", "images/EmmaDoggy/Emma_Doggy_mouth_Smile.png",
+            "EmmaX.mouth == '_smile'", "images/EmmaDoggy/Emma_Doggy_mouth_Smile.png",
             "EmmaX.mouth == '_smirk'", "images/EmmaDoggy/Emma_Doggy_mouth_Smirk.png",
             "EmmaX.mouth == '_surprised'", "images/EmmaDoggy/Emma_Doggy_mouth_Kiss.png",
             "EmmaX.mouth == '_sucking'", "images/EmmaDoggy/Emma_Doggy_mouth_Tongue.png",
@@ -2478,7 +2477,7 @@ image Emma_Doggy_Head:
 
 
             "EmmaX.mouth == '_smile'", "images/EmmaDoggy/Emma_Doggy_Head_Spunk_Smile.png",
-            "EmmaX.mouth == '_grimace'", "images/EmmaDoggy/Emma_Doggy_Head_Spunk_Smile.png",
+            "EmmaX.mouth == '_smile'", "images/EmmaDoggy/Emma_Doggy_Head_Spunk_Smile.png",
             "EmmaX.mouth == '_sucking'", "images/EmmaDoggy/Emma_Doggy_Head_Spunk_Tongue.png",
 
 
@@ -2611,7 +2610,7 @@ image Emma_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'in'", ConditionSwitch(
 
 
                     "action_speed", "images/EmmaDoggy/Emma_Doggy_Ass_Base.png",
@@ -2661,7 +2660,7 @@ image Emma_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Emma_Pussy_Fucking3",
                     "action_speed > 1", "Emma_Pussy_Fucking2",
                     "action_speed", "Emma_Pussy_Heading",
@@ -2678,16 +2677,16 @@ image Emma_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "EmmaX.spunk['pussy'] and Player.Cock == 'in'",Null(),
+            "EmmaX.spunk['pussy'] and Player.cock_position == 'in'",Null(),
             "EmmaX.spunk['pussy'] ", "images/JeanDoggy/Jean_Doggy_SpunkPussyClosed.png",
-            "EmmaX.grool and Player.Cock == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
+            "EmmaX.grool and Player.cock_position == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
             "EmmaX.grool", "images/RogueDoggy/Rogue_Doggy_WetPussyClosed.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not EmmaX.pubes", Null(),
-            "Player.Sprite and Player.Cock == 'in'", Null(),
+            "Player.sprite and Player.cock_position == 'in'", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo pussy'", Null(),
             "(EmmaX.outfit['bottom'] and EmmaX.outfit['bottom'] != '_skirt') and not EmmaX.upskirt", Null(),
@@ -2701,7 +2700,7 @@ image Emma_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite", Null(),
+            "Player.sprite", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo pussy'", Null(),
             "EmmaX.outfit['front_inner_accessory'] == '_barbell'", "images/EmmaDoggy/Emma_Doggy_Pierce_Barbell.png",
@@ -2714,7 +2713,7 @@ image Emma_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Emma_Anal_Fucking2",
                     "action_speed > 1", "Emma_Anal_Fucking",
                     "action_speed", "Emma_Anal_Heading",
@@ -2742,7 +2741,7 @@ image Emma_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "EmmaX.underwear_pulled_down or not EmmaX.outfit['underwear']", Null(),
-            "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
+            "Player.sprite and (Player.cock_position == 'in' or Player.cock_position == 'anal')", Null(),
 
 
             "EmmaX.outfit['underwear'] == '_sports_panties' and EmmaX.grool", "images/EmmaDoggy/Emma_Doggy_Panties_Sport_Wet.png",
@@ -2754,7 +2753,7 @@ image Emma_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
+            "Player.sprite and (Player.cock_position == 'in' or Player.cock_position == 'anal')", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo pussy'", Null(),
 
@@ -2768,7 +2767,7 @@ image Emma_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "Player.Sprite", Null(),
+            "Player.sprite", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo pussy'", Null(),
             "not EmmaX.outfit['underwear'] and EmmaX.outfit['hose'] != '_pantyhose'", Null(),
@@ -2791,12 +2790,12 @@ image Emma_Doggy_Ass:
                     "True", "images/EmmaDoggy/Emma_Doggy_Legs_Yoga.png",
                     ),
             "EmmaX.outfit['bottom'] == '_dress'", ConditionSwitch(
-                    "EmmaX.upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/EmmaDoggy/Emma_Doggy_Legs_Dress_Up.png",
+                    "EmmaX.upskirt and Player.sprite and Player.cock_position == 'anal' and action_speed" , "images/EmmaDoggy/Emma_Doggy_Legs_Dress_Up.png",
                     "EmmaX.upskirt", "images/EmmaDoggy/Emma_Doggy_Legs_Dress_Up.png",
                     "True", "images/EmmaDoggy/Emma_Doggy_Legs_Dress.png",
                     ),
             "EmmaX.outfit['bottom'] == '_skirt'", ConditionSwitch(
-                    "EmmaX.upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/EmmaDoggy/Emma_Doggy_Legs_Skirt_Up.png",
+                    "EmmaX.upskirt and Player.sprite and Player.cock_position == 'anal' and action_speed" , "images/EmmaDoggy/Emma_Doggy_Legs_Skirt_Up.png",
                     "EmmaX.upskirt", "images/EmmaDoggy/Emma_Doggy_Legs_Skirt_Up.png",
                     "True", "images/EmmaDoggy/Emma_Doggy_Legs_Skirt.png",
                     ),
@@ -2805,7 +2804,7 @@ image Emma_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "Player.Sprite", Null(),
+            "Player.sprite", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo pussy'", Null(),
             "not EmmaX.outfit['bottom']", Null(),
@@ -2818,7 +2817,7 @@ image Emma_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "EmmaX.outfit['bottom'] and EmmaX.outfit['bottom'] != '_skirt' and EmmaX.upskirt",Null(),
-            "Player.Cock == 'in' or Player.Cock == 'anal'",Null(),
+            "Player.cock_position == 'in' or Player.cock_position == 'anal'",Null(),
             "EmmaX.outfit['front_outer_accessory'] == 'thigh boots'", "images/EmmaDoggy/Emma_Doggy_Boots.png",
             "True", Null(),
             ),
@@ -2836,25 +2835,25 @@ image Emma_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "EmmaX.spunk[back]", "images/EmmaDoggy/Emma_Doggy_Spunk_Ass.png",
+            "EmmaX.spunk['back']", "images/EmmaDoggy/Emma_Doggy_Spunk_Ass.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock", Null(),
+            "Player.sprite and Player.cock_position", Null(),
             "primary_action == 'eat_pussy'", "Rogue_Doggy_Lick_Pussy",
             "primary_action == 'eat_ass'", "Rogue_Doggy_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite or Player.Cock != 'out'", Null(),
+            "not Player.sprite or Player.cock_position != 'out'", Null(),
 
             "True", "images/KittyDoggy/Kitty_Doggy_HotdogBack.png",
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite or Player.Cock != 'out'", Null(),
+            "not Player.sprite or Player.cock_position != 'out'", Null(),
 
 
             "action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
@@ -3633,7 +3632,7 @@ image Emma_Doggy_Feet0:
             repeat
     contains:
         ConditionSwitch(
-                "Player.Sprite", "Zero_Doggy_Up",
+                "Player.sprite", "Zero_Doggy_Up",
                 "True", Null(),
                 )
         zoom 1.2
@@ -3752,7 +3751,7 @@ image Emma_TJ_Animation:
     contains:
         ConditionSwitch(
 
-            "Player.Sprite", ConditionSwitch(
+            "Player.sprite", ConditionSwitch(
 
                     "action_speed == 1", "Emma_TJ_Body_1",
                     "action_speed == 2", "Emma_TJ_Body_2",
@@ -3890,7 +3889,7 @@ image Emma_TJ_Body_0:
     contains:
 
         ConditionSwitch(
-                "Player.Sprite", "Blowcock",
+                "Player.sprite", "Zero_blowjob_cock",
                 "True", Null(),
                 )
         subpixel True
@@ -3955,7 +3954,7 @@ image Emma_TJ_Body_1:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         pos (640,150)
 
@@ -4029,7 +4028,7 @@ image Emma_TJ_Body_2:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         pos (640,150)
 
@@ -4108,7 +4107,7 @@ image Emma_TJ_Body_3:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         pos (640,130)
         anchor (0.5,0.5)
@@ -4179,7 +4178,7 @@ image Emma_TJ_Body_5:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         pos (640,130)
         anchor (0.5,0.5)
@@ -4264,7 +4263,7 @@ label Emma_TJ_Launch(Line=primary_action):
     if Line != "cum":
         $ primary_action = "titjob"
     show Emma_TJ_Animation zorder 150
-    $ Player.Sprite = 1
+    $ Player.sprite = 1
     hide blackscreen onlayer black with dissolve
     return
 
@@ -4273,7 +4272,7 @@ label Emma_TJ_Reset:
         return
 
     call hide_girl(EmmaX)
-    $ Player.Sprite = 0
+    $ Player.sprite = 0
 
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         zoom 2 xpos 550 yoffset 50
@@ -4338,9 +4337,9 @@ image Emma_BJ_Animation:
             ),
         (0,0), ConditionSwitch(
 
-            "action_speed == 0", At("Blowcock", Emma_BJ_Cock_0()),
-            "action_speed == 1", At("Blowcock", Emma_BJ_Cock_1()),
-            "action_speed >= 2", At("Blowcock", Emma_BJ_Cock_2()),
+            "action_speed == 0", At("Zero_blowjob_cock", Emma_BJ_Cock_0()),
+            "action_speed == 1", At("Zero_blowjob_cock", Emma_BJ_Cock_1()),
+            "action_speed >= 2", At("Zero_blowjob_cock", Emma_BJ_Cock_2()),
 
 
 
@@ -4431,7 +4430,7 @@ image Emma_BJ_Head:
 
 
 
-            "Speed and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
+            "action_speed and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/EmmaBJFace/Emma_BJ_mouth_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -4447,7 +4446,7 @@ image Emma_BJ_Head:
             "EmmaX.mouth == '_sad'", "images/EmmaBJFace/Emma_BJ_mouth_Sad.png",
             "EmmaX.mouth == '_smile'", "images/EmmaBJFace/Emma_BJ_mouth_Smile.png",
             "EmmaX.mouth == '_smirk'", "images/EmmaBJFace/Emma_BJ_mouth_Smirk.png",
-            "EmmaX.mouth == '_grimace'", "images/EmmaBJFace/Emma_BJ_mouth_Smile.png",
+            "EmmaX.mouth == '_smile'", "images/EmmaBJFace/Emma_BJ_mouth_Smile.png",
             "EmmaX.mouth == '_surprised'", "images/EmmaBJFace/Emma_BJ_mouth_Surprised.png",
             "EmmaX.mouth == '_tongue'", "images/EmmaBJFace/Emma_BJ_mouth_Tongue.png",
             "True", "images/EmmaBJFace/Emma_BJ_mouth_Smile.png",
@@ -4464,7 +4463,7 @@ image Emma_BJ_Head:
         (0,0), ConditionSwitch(
 
             "not EmmaX.spunk['mouth']", Null(),
-            "Speed and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
+            "action_speed and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/EmmaBJFace/Emma_BJ_Spunk_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -5559,7 +5558,7 @@ image Zero_Emma_FootCock:
 
     contains:
         ConditionSwitch(
-                "Player.Sprite", "Blowcock",
+                "Player.sprite", "Zero_blowjob_cock",
                 "True", Null(),
                 )
     pos (200,1000)
@@ -5592,7 +5591,7 @@ image Emma_FJ_Calf:
 
 label Emma_FJ_Launch(Line=primary_action):
     $ primary_action = "footjob"
-    $ Player.Sprite = 1
+    $ Player.sprite = 1
     $ show_feet = 1
     if EmmaX.pose == "doggy":
         call Emma_Sex_Launch ("footjob")
@@ -5635,7 +5634,7 @@ label Emma_FJ_Reset:
     if not renpy.showing("Emma_FJ_Animation"):
         return
     call hide_girl(EmmaX)
-    $ Player.Sprite = 0
+    $ Player.sprite = 0
 
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         zoom .8 xpos 580 yoffset 150

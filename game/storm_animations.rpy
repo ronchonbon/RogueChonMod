@@ -270,7 +270,7 @@ image Storm_Sprite:
         (0,0), ConditionSwitch(
 
             "StormX.outfit['bottom'] and not StormX.upskirt", Null(),
-            "StormX.spunk[pussy] or StormX.spunk[anus]", "images/StormSprite/Storm_Sprite_Spunk_Pussy.png",
+            "StormX.spunk['pussy'] or StormX.spunk['anus']", "images/StormSprite/Storm_Sprite_Spunk_Pussy.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -634,7 +634,7 @@ image Storm_Sprite_Head:
                     "StormX.mouth == '_smile'", "images/StormSprite/Storm_Sprite_mouth_Smile.png",
                     "StormX.mouth == '_surprised'", "images/StormSprite/Storm_Sprite_mouth_Kiss.png",
                     "StormX.mouth == '_tongue'", "images/StormSprite/Storm_Sprite_mouth_Tongue.png",
-                    "StormX.mouth == '_grimace'", "images/StormSprite/Storm_Sprite_mouth_Smile.png",
+                    "StormX.mouth == '_smile'", "images/StormSprite/Storm_Sprite_mouth_Smile.png",
                     "StormX.mouth == '_smirk'", "images/StormSprite/Storm_Sprite_mouth_Smirk.png",
                     "True", "images/StormSprite/Storm_Sprite_mouth_Normal.png",
                     ),
@@ -831,23 +831,23 @@ image Storm_SexSprite:
         (0,0), ConditionSwitch(
 
 
-                "Player.Cock == 'in'", ConditionSwitch(
+                "Player.cock_position == 'in'", ConditionSwitch(
 
                         "action_speed >= 3", "Storm_Sex_Fucking_action_speed3",
                         "action_speed >= 2", "Storm_Sex_Fucking_action_speed2",
                         "action_speed", "Storm_Sex_Fucking_action_speed1",
                         "True", "Storm_Sex_Fucking_action_animation0",
                         ),
-                "Player.Cock == 'anal'", ConditionSwitch(
+                "Player.cock_position == 'anal'", ConditionSwitch(
 
                         "action_speed >= 3", "Storm_Sex_Anal_action_speed3",
                         "action_speed >= 2", "Storm_Sex_Anal_action_speed2",
                         "action_speed", "Storm_Sex_Anal_action_speed1",
                         "True", "Storm_Sex_Anal_action_animation0",
                         ),
-                "Player.Sprite and Player.Cock == 'out' and action_speed >= 2","Storm_Sex_Hotdog_action_speed2",
-                "Player.Sprite and Player.Cock == 'out' and action_speed >= 1","Storm_Sex_Hotdog_action_speed1",
-                "Player.Cock == 'footjob'", ConditionSwitch(
+                "Player.sprite and Player.cock_position == 'out' and action_speed >= 2","Storm_Sex_Hotdog_action_speed2",
+                "Player.sprite and Player.cock_position == 'out' and action_speed >= 1","Storm_Sex_Hotdog_action_speed1",
+                "Player.cock_position == 'footjob'", ConditionSwitch(
 
                         "action_speed >= 2", "Storm_Sex_FJ_action_speed2",
                         "action_speed", "Storm_Sex_FJ_action_speed1",
@@ -882,9 +882,7 @@ image Storm_SexSprite:
 
 
         )
-    align (0.6,0.0)
-    pos (650,393)
-    zoom 0.7
+    align (0.6,0.0) zoom 0.7
 
 
 
@@ -1155,14 +1153,14 @@ image Storm_Sex_Legs:
             ),
         (0,0),ConditionSwitch(
 
-            "StormX.spunk[anus]", "images/StormSex/Storm_Sex_Spunk_Anal_Closed.png",
+            "StormX.spunk['anus']", "images/StormSex/Storm_Sex_Spunk_Anal_Closed.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock == 'anal' and show_feet", "images/StormSex/Storm_Sex_Legs_FJ_Anal.png",
+            "Player.sprite and Player.cock_position == 'anal' and show_feet", "images/StormSex/Storm_Sex_Legs_FJ_Anal.png",
             "show_feet", "images/StormSex/Storm_Sex_Legs_FJ.png",
-            "Player.Sprite and Player.Cock == 'anal'", "images/StormSex/Storm_Sex_Legs_Anal.png",
+            "Player.sprite and Player.cock_position == 'anal'", "images/StormSex/Storm_Sex_Legs_Anal.png",
             "True", "images/StormSex/Storm_Sex_Legs.png",
             ),
         (0,0), ConditionSwitch(
@@ -1310,14 +1308,14 @@ image Storm_Sex_Legs:
 
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock", Null(),
+            "Player.sprite and Player.cock_position", Null(),
             "primary_action == 'eat_pussy'", "Storm_Sex_Lick_Pussy",
             "primary_action == 'eat_ass'", "Storm_Sex_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock", Null(),
+            "Player.sprite and Player.cock_position", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'", "Storm_Sex_Fondle_Pussy",
             "True", Null()
             ),
@@ -1387,9 +1385,9 @@ image Storm_Sex_Pussy:
     contains:
 
         ConditionSwitch(
-                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", "images/StormSex/Storm_Sex_Pussy_Fucking.png",
-                "Player.Sprite and Player.Cock == 'in' and action_speed", "Storm_Sex_Heading_Pussy",
-                "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'out')", "images/StormSex/Storm_Sex_Pussy_Open.png",
+                "Player.sprite and Player.cock_position == 'in' and action_speed >= 2", "images/StormSex/Storm_Sex_Pussy_Fucking.png",
+                "Player.sprite and Player.cock_position == 'in' and action_speed", "Storm_Sex_Heading_Pussy",
+                "Player.sprite and (Player.cock_position == 'in' or Player.cock_position == 'out')", "images/StormSex/Storm_Sex_Pussy_Open.png",
                 "primary_action == 'eat_pussy'", "images/StormSex/Storm_Sex_Pussy_Open.png",
                 "True", "images/StormSex/Storm_Sex_Pussy_Closed.png",
                 )
@@ -1405,10 +1403,10 @@ image Storm_Sex_Pussy:
         ConditionSwitch(
                 "not StormX.pubes", Null(),
 
-                "Player.Sprite and Player.Cock == 'in' and action_speed and show_feet", "images/StormSex/Storm_Sex_Pubes_Fucking_FJ.png",
-                "Player.Sprite and Player.Cock == 'in' and action_speed", "images/StormSex/Storm_Sex_Pubes_Fucking.png",
-                "Player.Sprite and Player.Cock == 'in' and show_feet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
-                "Player.Sprite and Player.Cock == 'in'", "images/StormSex/Storm_Sex_Pubes_Open.png",
+                "Player.sprite and Player.cock_position == 'in' and action_speed and show_feet", "images/StormSex/Storm_Sex_Pubes_Fucking_FJ.png",
+                "Player.sprite and Player.cock_position == 'in' and action_speed", "images/StormSex/Storm_Sex_Pubes_Fucking.png",
+                "Player.sprite and Player.cock_position == 'in' and show_feet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
+                "Player.sprite and Player.cock_position == 'in'", "images/StormSex/Storm_Sex_Pubes_Open.png",
                 "primary_action == 'eat_pussy' and show_feet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
                 "primary_action == 'eat_pussy'", "images/StormSex/Storm_Sex_Pubes_Open.png",
                 "show_feet", "images/StormSex/Storm_Sex_Pubes_Closed_FJ.png",
@@ -1417,7 +1415,7 @@ image Storm_Sex_Pussy:
     contains:
         ConditionSwitch(
 
-                "StormX.spunk[pussy]", "images/StormSex/Storm_Sex_Spunk_Pussy.png",
+                "StormX.spunk['pussy']", "images/StormSex/Storm_Sex_Spunk_Pussy.png",
                 "True", Null(),
                 )
     contains:
@@ -1438,17 +1436,17 @@ image Storm_Sex_Pussy:
 
         ConditionSwitch(
 
-                "Player.Sprite and Player.Cock == 'in' and action_speed >= 3", AlphaMask("Storm_Sex_Fucking_Zero_animation3", "Storm_Sex_Fucking_Mask"),
-                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", AlphaMask("Storm_Sex_Fucking_Zero_animation2", "Storm_Sex_Fucking_Mask"),
-                "Player.Sprite and Player.Cock == 'in' and action_speed == 1", AlphaMask("Storm_Sex_Fucking_Zero_animation1", "Storm_Sex_Heading_Mask"),
-                "Player.Sprite and Player.Cock == 'in'", "Storm_Sex_Fucking_Zero_animation0",
+                "Player.sprite and Player.cock_position == 'in' and action_speed >= 3", AlphaMask("Storm_Sex_Fucking_Zero_animation3", "Storm_Sex_Fucking_Mask"),
+                "Player.sprite and Player.cock_position == 'in' and action_speed >= 2", AlphaMask("Storm_Sex_Fucking_Zero_animation2", "Storm_Sex_Fucking_Mask"),
+                "Player.sprite and Player.cock_position == 'in' and action_speed == 1", AlphaMask("Storm_Sex_Fucking_Zero_animation1", "Storm_Sex_Heading_Mask"),
+                "Player.sprite and Player.cock_position == 'in'", "Storm_Sex_Fucking_Zero_animation0",
                 "True", Null(),
                 )
     contains:
 
         ConditionSwitch(
-                "StormX.outfit['front_inner_accessory'] == '_barbell' and Player.Sprite and Player.Cock == 'in' and action_speed", "images/StormSex/Storm_Sex_Pierce_Pussy_BarbellF.png",
-                "StormX.outfit['front_inner_accessory'] == '_ring' and Player.Sprite and Player.Cock == 'in' and action_speed", "images/StormSex/Storm_Sex_Pierce_Pussy_RingF.png",
+                "StormX.outfit['front_inner_accessory'] == '_barbell' and Player.sprite and Player.cock_position == 'in' and action_speed", "images/StormSex/Storm_Sex_Pierce_Pussy_BarbellF.png",
+                "StormX.outfit['front_inner_accessory'] == '_ring' and Player.sprite and Player.cock_position == 'in' and action_speed", "images/StormSex/Storm_Sex_Pierce_Pussy_RingF.png",
                 "StormX.outfit['front_inner_accessory'] == '_barbell'", "images/StormSex/Storm_Sex_Pierce_Pussy_Barbell.png",
                 "StormX.outfit['front_inner_accessory'] == '_ring'", "images/StormSex/Storm_Sex_Pierce_Pussy_Ring.png",
                 "True", Null(),
@@ -1456,14 +1454,14 @@ image Storm_Sex_Pussy:
     contains:
 
         ConditionSwitch(
-                "Player.Sprite and Player.Cock == 'in' and action_speed == 1", "Storm_Pussy_Spunk_Heading",
+                "Player.sprite and Player.cock_position == 'in' and action_speed == 1", "Storm_Pussy_Spunk_Heading",
                 "True", Null(),
                 )
     contains:
 
         ConditionSwitch(
                 "action_speed == 1", Null(),
-                "not StormX.spunk['pussy'] or not Player.Sprite or Player.Cock != 'in' or not action_speed", Null(),
+                "not StormX.spunk['pussy'] or not Player.sprite or Player.cock_position != 'in' or not action_speed", Null(),
 
                 "True", "images/StormSex/Storm_Sex_Spunk_Pussy_Over.png",
                 )
@@ -1500,7 +1498,7 @@ image Storm_Sex_Zero_Cock:
         subpixel True
 
         ConditionSwitch(
-                "Player.Sprite", "Zero_Blowcock" ,
+                "Player.sprite", "Zero_blowjob_cock" ,
                 "True", Null(),
                 )
         subpixel True
@@ -1557,7 +1555,7 @@ image Storm_Sex_animation0:
 
         subpixel True
         ConditionSwitch(
-                "Player.Sprite", "Zero_Blowcock" ,
+                "Player.sprite", "Zero_blowjob_cock" ,
                 "True", Null(),
                 )
         subpixel True
@@ -1749,7 +1747,7 @@ image Storm_Pussy_Spunk_Heading:
 
     contains:
         ConditionSwitch(
-                "StormX.spunk[pussy] and Player.Sprite and Player.Cock == 'in' and action_speed == 1", "images/StormSex/Storm_Sex_Spunk_Pussy_Over.png",
+                "StormX.spunk['pussy'] and Player.sprite and Player.cock_position == 'in' and action_speed == 1", "images/StormSex/Storm_Sex_Spunk_Pussy_Over.png",
                 "True", Null(),
                 )
         anchor (0.5,0)
@@ -1920,7 +1918,7 @@ image Storm_Sex_Anus:
     contains:
 
         ConditionSwitch(
-                "not Player.Sprite or Player.Cock != 'anal'", Null(),
+                "not Player.sprite or Player.cock_position != 'anal'", Null(),
                 "action_speed >= 3",  AlphaMask("Storm_Sex_Anal_Zero_animation3", "Storm_Sex_Anal_Mask"),
                 "action_speed >= 2", AlphaMask("Storm_Sex_Anal_Zero_animation2", "Storm_Sex_Anal_Mask"),
                 "action_speed", AlphaMask("Storm_Sex_Anal_Zero_animation1", "Storm_Sex_Anal_Mask"),
@@ -1929,7 +1927,7 @@ image Storm_Sex_Anus:
     contains:
 
         ConditionSwitch(
-                "not StormX.spunk['anus'] or not Player.Sprite or Player.Cock != 'anal' or not action_speed", Null(),
+                "not StormX.spunk['anus'] or not Player.sprite or Player.cock_position != 'anal' or not action_speed", Null(),
                 "action_speed == 1", "Storm_Sex_Anal_Spunk_Heading_Over",
                 "True", "images/StormSex/Storm_Sex_Spunk_Anal_Over.png",
                 )
@@ -2027,8 +2025,8 @@ image Storm_Sex_Anal_Zero_animation0:
     contains:
         subpixel True
         ConditionSwitch(
-                "not Player.Sprite", Null(),
-                "True", "Zero_Blowcock" ,
+                "not Player.sprite", Null(),
+                "True", "Zero_blowjob_cock" ,
                 )
         subpixel True
         anchor (0.5,1.0)
@@ -2621,29 +2619,29 @@ label Storm_Sex_Launch(Line=primary_action):
     $ StormX.pose = "sex"
 
 
-    $ Player.Sprite = 1
+    $ Player.sprite = 1
     $ Line = "solo" if not Line else Line
     if Line == "sex":
-        $ Player.Cock = "in"
+        $ Player.cock_position = "in"
         if offhand_action in ("fondle pussy","dildo pussy","lick pussy"):
             $ offhand_action = 0
     elif Line == "anal":
-        $ Player.Cock = "anal"
+        $ Player.cock_position = "anal"
         if offhand_action in ("insert ass","dildo anal","lick ass"):
             $ offhand_action = 0
     elif Line == "hotdog":
         if StormX.bottom_number() == 5:
             $ StormX.upskirt = 1
-        $ Player.Cock = "out"
+        $ Player.cock_position = "out"
     elif Line == "footjob":
         $ show_feet = 1
-        $ Player.Cock = "footjob"
+        $ Player.cock_position = "footjob"
     elif Line == "massage":
-        $ Player.Sprite = 0
-        $ Player.Cock = 0
+        $ Player.sprite = 0
+        $ Player.cock_position = 0
     else:
-        $ Player.Sprite = 0
-        $ Player.Cock = "out"
+        $ Player.sprite = 0
+        $ Player.cock_position = "out"
         $ action_speed = 0
     $ primary_action = Line
 
@@ -2966,7 +2964,7 @@ image Storm_BJ_Head:
             "StormX.mouth == '_sad'", "images/StormBJFace/Storm_BJ_mouth_Sad.png",
             "StormX.mouth == '_smile'", "images/StormBJFace/Storm_BJ_mouth_Smile.png",
             "StormX.mouth == '_smirk'", "images/StormBJFace/Storm_BJ_mouth_Smirk.png",
-            "StormX.mouth == '_grimace'", "images/StormBJFace/Storm_BJ_mouth_Smile.png",
+            "StormX.mouth == '_smile'", "images/StormBJFace/Storm_BJ_mouth_Smile.png",
             "StormX.mouth == '_surprised'", "images/StormBJFace/Storm_BJ_mouth_Kiss.png",
             "StormX.mouth == '_tongue'", "images/StormBJFace/Storm_BJ_mouth_Tongue.png",
             "True", "images/StormBJFace/Storm_BJ_mouth_Smile.png",
@@ -3357,7 +3355,7 @@ image Storm_BJ_animation0:
         offset (350,210)
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         anchor (.5,.5)
         rotate -10
         offset (650,370)
@@ -3398,7 +3396,7 @@ image Storm_BJ_animation1:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         anchor (.5,.5)
         offset (650,370)
@@ -3443,7 +3441,7 @@ image Storm_BJ_animation2:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         anchor (.5,.5)
         rotate 0
@@ -3508,7 +3506,7 @@ image Storm_BJ_animation3:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         anchor (.5,.5)
         rotate 0
@@ -3576,7 +3574,7 @@ image Storm_BJ_animation4:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         anchor (.5,.5)
         rotate 0
@@ -3650,7 +3648,7 @@ image Storm_BJ_Anim5:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         anchor (.5,.5)
         rotate 0
@@ -3712,7 +3710,7 @@ image Storm_BJ_Anim6:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_blowjob_cock"
         subpixel True
         anchor (.5,.5)
         rotate 0
@@ -3827,7 +3825,7 @@ image Storm_TJ_Animation:
     contains:
         ConditionSwitch(
 
-                    "not Player.Sprite","Storm_TJ_0",
+                    "not Player.sprite","Storm_TJ_0",
                     "action_speed == 1", "Storm_TJ_1",
                     "action_speed == 3", "Storm_TJ_3",
                     "action_speed == 4", "Storm_TJ_4",
@@ -3892,7 +3890,7 @@ image Storm_TJ_HairTop:
 
 image Storm_TJ_ZeroCock:
 
-    "Zero_Blowcock"
+    "Zero_blowjob_cock"
     transform_anchor True
     zoom .6
     anchor (0.5, 0.5)
@@ -5051,7 +5049,7 @@ label Storm_TJ_Launch(Line=primary_action):
         $ primary_action = "titjob"
     show Storm_TJ_Animation zorder 150:
         pos (1000,1050)
-    $ Player.Sprite = 1
+    $ Player.sprite = 1
     hide blackscreen onlayer black with dissolve
     return
 
@@ -5061,7 +5059,7 @@ label Storm_TJ_Reset:
         return
 
     call hide_girl(StormX)
-    $ Player.Sprite = 0
+    $ Player.sprite = 0
 
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         zoom 2.3 xpos 750 yoffset -100

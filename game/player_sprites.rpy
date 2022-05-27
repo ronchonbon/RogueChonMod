@@ -2,7 +2,7 @@ layeredimage Zero_handjob_cock:
     always:
         "images/Player/Zero_handjob_cock_[Player.color].png"
 
-    pos (200, 400) anchor (0.5, 1.0)
+    anchor (0.5, 0.5)
 
 layeredimage Zero_titjob_cock:
     always:
@@ -14,7 +14,7 @@ layeredimage Zero_titjob_cock:
     if Player.spunk:
         "images/Player/Zero_blowjob_spunk_cock.png"
 
-    anchor (0.5, 0.5) offset (5, 0) zoom 1.2
+    anchor (0.5, 0.5)
 
 layeredimage Zero_blowjob_cock:
     always:
@@ -26,7 +26,7 @@ layeredimage Zero_blowjob_cock:
     if Player.spunk:
         "images/Player/Zero_blowjob_spunk_cock.png"
 
-    anchor (0.5, 0.5) offset (26, 350)
+    anchor (0.5, 0.5)
 
 layeredimage Zero_doggy_cock_out:
     always:

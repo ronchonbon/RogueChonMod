@@ -128,9 +128,6 @@ layeredimage Kitty_sprite:
     if KittyX.wet and KittyX.wet < 3:
         "images/Kitty_sprite/Kitty_standing_water_body[KittyX.arm_pose].png"
 
-    if KittyX.wet == 3:
-        "images/Kitty_sprite/Kitty_standing_water_body3.png"
-
     if KittyX.spunk["hand"] and KittyX.arm_pose == 2:
         "images/Kitty_sprite/Kitty_standing_spunk_hand.png"
 
@@ -143,101 +140,8 @@ layeredimage Kitty_sprite:
     if KittyX.outfit["held_item"] and KittyX.arm_pose == 2:
         "images/Kitty_sprite/Kitty_standing_held[KittyX.outfit[held_item]].png"
 
-    if primary_action == "lesbian" or not girl_offhand_action or focused_Girl != KittyX:
-        Null()
-    elif primary_action != "sex" and girl_offhand_action == "fondle_pussy" and KittyX.lust >= 70:
-        "GirlFingerPussy_Kitty"
-    elif girl_offhand_action == "fondle_pussy":
-        "GirlGropePussy_Kitty"
-    elif girl_offhand_action == "fondle_breasts" and (offhand_action in ["fondle_breasts", "suck breasts"]):
-        "GirlGropeLeftBreast_Kitty"
-    elif girl_offhand_action == "fondle_breasts":
-        "GirlGropeRightBreast_Kitty"
-
-    if second_girl_primary_action != "masturbation" or not second_girl_offhand_action or focused_Girl == KittyX:
-        Null()
-    elif primary_action != "sex" and second_girl_offhand_action == "fondle_pussy" and KittyX.lust >= 70:
-        "GirlFingerPussy_Kitty_Kitty"
-    elif second_girl_offhand_action == "fondle_pussy":
-        "GirlGropePussy_Kitty"
-    elif second_girl_offhand_action == "fondle_breasts" and (offhand_action in ["fondle_breasts", "suck breasts"]):
-        "GirlGropeLeftBreast_Kitty"
-    elif second_girl_offhand_action == "fondle_breasts":
-        "GirlGropeRightBreast_Kitty"
-
-    if not primary_action or focused_Girl != KittyX:
-        Null()
-    elif primary_action == "fondle_thighs":
-        "GropeThigh_Kitty"
-    elif primary_action == "fondle_breasts":
-        "GropeRightBreast_Kitty"
-    elif primary_action == "suck_breasts":
-        "LickRightBreast_Kitty"
-    elif primary_action == "fondle_pussy" and action_speed == 2:
-        "FingerPussy_Kitty"
-    elif primary_action == "fondle_pussy":
-        "GropePussy_Kitty"
-    elif primary_action == "eat_pussy":
-        "Lickpussy_Kitty"
-
-    if not offhand_action or focused_Girl != KittyX:
-        Null()
-    elif primary_action == "fondle_breasts" and not girl_offhand_action and not second_girl_primary_action and not second_girl_offhand_action:
-        "GropeRightBreast_Kitty"
-    elif offhand_action == "fondle_thighs":
-        "GropeThigh_Kitty"
-    elif offhand_action == "fondle_breasts":
-        "GropeLeftBreast_Kitty"
-    elif offhand_action == "suck_breasts":
-        "LickLeftBreast_Kitty"
-    elif offhand_action == "fondle_pussy" and action_speed == 2:
-        "FingerPussy_Kitty"
-    elif offhand_action == "fondle_pussy":
-        "GropePussy_Kitty"
-    elif offhand_action == "eat_pussy":
-        "Lickpussy_Kitty"
-
-    if not second_girl_primary_action or focused_Girl != KittyX:
-        Null()
-    elif second_girl_primary_action == "fondle_breasts" and (primary_action in ["fondle_breasts", "suck_breasts"]):
-        "GirlGropeLeftBreast_Kitty"
-    elif second_girl_primary_action == "fondle_breasts":
-        "GirlGropeRightBreast_Kitty"
-    elif second_girl_primary_action == "suck_breasts" and (primary_action in ["fondle_breasts", "suck_breasts"]):
-        "LickLeftBreast_Kitty"
-    elif second_girl_primary_action == "suck_breasts" and (offhand_action in ["fondle_breasts", "suck_breasts"]):
-        "LickLeftBreast_Kitty"
-    elif second_girl_primary_action == "suck_breasts":
-        "LickRightBreast_Kitty"
-    elif second_girl_primary_action == "fondle_pussy" and primary_action != "sex" and KittyX.lust >= 70:
-        "GirlFingerPussy_Kitty"
-    elif second_girl_primary_action == "fondle_pussy" and offhand_action != "sex" and KittyX.lust >= 70:
-        "GirlFingerPussy_Kitty"
-    elif second_girl_primary_action == "fondle_pussy":
-        "GropePussy_Kitty"
-    elif second_girl_primary_action == "eat_pussy":
-        "Lickpussy_Kitty"
-
-    if primary_action != "lesbian" or not girl_offhand_action or focused_Girl == KittyX:
-        Null()
-    elif girl_offhand_action == "fondle_breasts" and (primary_action in ["fondle_breasts", "suck_breasts"]):
-        "GirlGropeLeftBreast_Kitty"
-    elif girl_offhand_action == "fondle_breasts" and (offhand_action in ["fondle_breasts", "suck_breasts"]):
-        "GirlGropeLeftBreast_Kitty"
-    elif girl_offhand_action == "fondle_breasts":
-        "GirlGropeRightBreast_Kitty"
-    elif girl_offhand_action == "suck_breasts" and (primary_action in ["fondle_breasts", "suck_breasts"]):
-        "LickLeftBreast_Kitty"
-    elif girl_offhand_action == "suck_breasts" and (offhand_action in ["fondle_breasts", "suck_breasts"]):
-        "LickLeftBreast_Kitty"
-    elif girl_offhand_action == "suck_breasts":
-        "LickRightBreast_Kitty"
-    elif girl_offhand_action == "fondle_pussy" and primary_action != "sex" and KittyX.lust >= 70:
-        "GirlFingerPussy_Kitty"
-    elif girl_offhand_action == "fondle_pussy":
-        "GirlGropePussy_Kitty"
-    elif girl_offhand_action == "eat_pussy":
-        "Lickpussy_Kitty"
+    always:
+        "Kitty_standing_fondling"
 
     anchor (0.5, -0.185) zoom 0.95
 
@@ -277,7 +181,7 @@ layeredimage Kitty_head:
         "images/Kitty_sprite/Kitty_standing_face_outer_accessory[KittyX.outfit[face_outer_accessory]].png"
 
     if KittyX.wet:
-        "images/Kitty_sprite/Kitty_standing_head_wet.png"
+        "images/Kitty_sprite/Kitty_standing_water_head.png"
 
     if KittyX.outfit["hair"] != "_wet" and KittyX.spunk["hair"]:
         "images/Kitty_sprite/Kitty_standing_hair[KittyX.outfit[hair]]_spunk.png"
@@ -287,6 +191,10 @@ layeredimage Kitty_head:
 image Kitty_eyes:
     contains:
         "images/Kitty_sprite/Kitty_standing_eyes[KittyX.eyes].png"
+
+
+
+
 
 layeredimage Kitty_sex_body:
     always:

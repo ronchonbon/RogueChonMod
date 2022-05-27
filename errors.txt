@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/rogue_sprites.rpy", line 297: reached end of line when expecting ')'.
-    if renpy.showing(RogueX.spunk["Rogue_blowjob_animation") and action_speed == 2 and "mouth"]:
-                                                                                                ^
+File "game/rogue_animations.rpy", line 370: expected 'comma or end of line' not found.
+    "images/Rogue_blowjob/Rogue_blowjob_mouth_sucking_spunk.png":
+                                                                ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Thu May 26 11:57:06 2022
+Thu May 26 17:16:07 2022

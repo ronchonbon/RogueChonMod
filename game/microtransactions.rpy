@@ -79,7 +79,8 @@ label Microtransactions_Intro:
     show black_screen onlayer black
     scene
     pause 0.1
-    scene empty_class onlayer backdrop
+    $ bg_current = "bg_classroom"
+    #scene empty_class onlayer backdrop
     hide black_screen onlayer black
     $ round -= 5
     "You take a small metal box from the Professor, and head to Professor McCoy's lab."

@@ -2408,7 +2408,7 @@ label Compliment(Girl=0, line0=0, line1=0, line2=0, Options=[], CountList=[], li
             elif Girl == JubesX:
                 ch_v "Oh, it's probably sun tan lotion. . ."
         else:
-            $ Girl.change_face("_angry",2,mouth="_grimace")
+            $ Girl.change_face("_angry",2,mouth="_smile")
             $ Girl.change_stat("love", 60, -1)
             $ Girl.change_stat("obedience", 60, 2)
             $ Girl.change_stat("inhibition", 50, 1)

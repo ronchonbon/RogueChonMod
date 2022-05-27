@@ -543,7 +543,7 @@ image Jean_Sprite_Head:
                     "JeanX.mouth == '_smile'", "images/JeanSprite/Jean_Sprite_mouth_Smile_Spunk.png",
                     "JeanX.mouth == '_surprised'", "images/JeanSprite/Jean_Sprite_mouth_Surprised_Spunk.png",
                     "JeanX.mouth == '_tongue'", "images/JeanSprite/Jean_Sprite_mouth_Tongue_Spunk.png",
-                    "JeanX.mouth == '_grimace'", "images/JeanSprite/Jean_Sprite_mouth_Smile_Spunk.png",
+                    "JeanX.mouth == '_smile'", "images/JeanSprite/Jean_Sprite_mouth_Smile_Spunk.png",
                     "JeanX.mouth == '_smirk'", "images/JeanSprite/Jean_Sprite_mouth_Smirk_Spunk.png",
                     "True", "images/JeanSprite/Jean_Sprite_mouth_Normal_Spunk.png",
                     ),
@@ -556,7 +556,7 @@ image Jean_Sprite_Head:
                     "JeanX.mouth == '_smile'", "images/JeanSprite/Jean_Sprite_mouth_Smile.png",
                     "JeanX.mouth == '_surprised'", "images/JeanSprite/Jean_Sprite_mouth_Surprised.png",
                     "JeanX.mouth == '_tongue'", "images/JeanSprite/Jean_Sprite_mouth_Tongue.png",
-                    "JeanX.mouth == '_grimace'", "images/JeanSprite/Jean_Sprite_mouth_Smile.png",
+                    "JeanX.mouth == '_smile'", "images/JeanSprite/Jean_Sprite_mouth_Smile.png",
                     "JeanX.mouth == '_smirk'", "images/JeanSprite/Jean_Sprite_mouth_Smirk.png",
                     "True", "images/JeanSprite/Jean_Sprite_mouth_Normal.png",
                     ),
@@ -686,14 +686,14 @@ image Jean_Doggy_Animation:
         (420,750),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite", "Jean_Doggy_Body",
-            "Player.Cock == 'anal'", ConditionSwitch(
+            "not Player.sprite", "Jean_Doggy_Body",
+            "Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Jean_Doggy_Fuck2_Top",
                     "action_speed > 1", "Jean_Doggy_Fuck_Top",
                     "action_speed", "Jean_Doggy_Anal_Head_Top",
                     "True", "Jean_Doggy_Body",
                     ),
-            "Player.Cock == 'in'", ConditionSwitch(
+            "Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Jean_Doggy_Fuck2_Top",
                     "action_speed > 1", "Jean_Doggy_Fuck_Top",
                     "True", "Jean_Doggy_Body",
@@ -702,14 +702,14 @@ image Jean_Doggy_Animation:
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite", "Jean_Doggy_Ass",
-            "Player.Cock == 'anal'", ConditionSwitch(
+            "not Player.sprite", "Jean_Doggy_Ass",
+            "Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Jean_Doggy_Fuck2_Ass",
                     "action_speed > 1", "Jean_Doggy_Fuck_Ass",
                     "action_speed", "Jean_Doggy_Anal_Head_Ass",
                     "True", "Jean_Doggy_Ass",
                     ),
-            "Player.Cock == 'in'", ConditionSwitch(
+            "Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Jean_Doggy_Fuck2_Ass",
                     "action_speed > 1", "Jean_Doggy_Fuck_Ass",
                     "True", "Jean_Doggy_Ass",
@@ -718,12 +718,12 @@ image Jean_Doggy_Animation:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Cock == 'footjob'", ConditionSwitch(
+            "Player.cock_position == 'footjob'", ConditionSwitch(
                     "action_speed > 1", "Jean_Doggy_Feet2",
                     "action_speed", "Jean_Doggy_Feet1",
                     "True", "Jean_Doggy_Feet0",
                     ),
-            "not Player.Sprite and show_feet", "Jean_Doggy_Feet0",
+            "not Player.sprite and show_feet", "Jean_Doggy_Feet0",
             "True", Null(),
             ),
         )
@@ -787,7 +787,7 @@ image Jean_Doggy_Body:
             ),
         (0,0), ConditionSwitch(
 
-            "JeanX.spunk[back]", "images/JeanDoggy/Jean_Doggy_Spunk_Back.png",
+            "JeanX.spunk['back']", "images/JeanDoggy/Jean_Doggy_Spunk_Back.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -826,14 +826,14 @@ image Jean_Doggy_Head:
             "JeanX.mouth == '_kiss'", "images/JeanDoggy/Jean_Doggy_mouth_Normal.png",
             "JeanX.mouth == '_sad'", "images/JeanDoggy/Jean_Doggy_mouth_Sad.png",
             "JeanX.mouth == '_smile'", "images/JeanDoggy/Jean_Doggy_mouth_Smile.png",
-            "JeanX.mouth == '_grimace'", "images/JeanDoggy/Jean_Doggy_mouth_Smile.png",
+            "JeanX.mouth == '_smile'", "images/JeanDoggy/Jean_Doggy_mouth_Smile.png",
             "JeanX.mouth == '_surprised'", "images/JeanDoggy/Jean_Doggy_mouth_Open.png",
             "JeanX.mouth == '_tongue'", "images/JeanDoggy/Jean_Doggy_mouth_Tongue.png",
             "True", "images/JeanDoggy/Jean_Doggy_mouth_Smile.png",
             ),
         (0,0), ConditionSwitch(
 
-            "JeanX.spunk[chin]", "images/JeanDoggy/Jean_Doggy_Spunk_Chin.png",
+            "JeanX.spunk['chin']", "images/JeanDoggy/Jean_Doggy_Spunk_Chin.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -843,7 +843,7 @@ image Jean_Doggy_Head:
 
             "JeanX.mouth == '_lipbite'", "images/JeanDoggy/Jean_Doggy_Spunk_Smile.png",
             "JeanX.mouth == '_smile'", "images/JeanDoggy/Jean_Doggy_Spunk_Smile.png",
-            "JeanX.mouth == '_grimace'", "images/JeanDoggy/Jean_Doggy_Spunk_Smile.png",
+            "JeanX.mouth == '_smile'", "images/JeanDoggy/Jean_Doggy_Spunk_Smile.png",
             "JeanX.mouth == '_sucking'", "images/JeanDoggy/Jean_Doggy_Spunk_Open.png",
 
             "JeanX.mouth == '_surprised'", "images/JeanDoggy/Jean_Doggy_Spunk_Open.png",
@@ -991,7 +991,7 @@ image Jean_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Jean_Pussy_Fucking3",
                     "action_speed > 1", "Jean_Pussy_Fucking2",
                     "action_speed", "Jean_Pussy_Heading",
@@ -1008,16 +1008,16 @@ image Jean_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "JeanX.spunk['pussy'] and Player.Cock == 'in'",Null(),
+            "JeanX.spunk['pussy'] and Player.cock_position == 'in'",Null(),
             "JeanX.spunk['pussy'] ", "images/JeanDoggy/Jean_Doggy_SpunkPussyClosed.png",
-            "JeanX.grool and Player.Cock == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
+            "JeanX.grool and Player.cock_position == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
             "JeanX.grool", "images/RogueDoggy/Rogue_Doggy_WetPussyClosed.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not JeanX.pubes", Null(),
-            "Player.Sprite and Player.Cock == 'in'", Null(),
+            "Player.sprite and Player.cock_position == 'in'", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo pussy'", Null(),
             "JeanX.outfit['bottom'] == '_pants' and not JeanX.upskirt", "images/RogueDoggy/Rogue_Doggy_Pubes_Panties.png",
@@ -1030,7 +1030,7 @@ image Jean_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite", Null(),
+            "Player.sprite", Null(),
             "JeanX.outfit['front_inner_accessory'] == '_ring'", "images/JeanDoggy/Jean_Doggy_PussyRing.png",
             "JeanX.outfit['front_inner_accessory'] == '_barbell'", "images/JeanDoggy/Jean_Doggy_PussyBarbell.png",
             "True", Null(),
@@ -1039,7 +1039,7 @@ image Jean_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Jean_Anal_Fucking2",
                     "action_speed > 1", "Jean_Anal_Fucking",
                     "action_speed", "Jean_Anal_Heading",
@@ -1058,15 +1058,15 @@ image Jean_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "not JeanX.spunk['anus'] or Player.Sprite", Null(),
-            "Player.Cock == 'anal'", "images/JeanDoggy/Jean_Doggy_SpunkAnalOpen.png",
+            "not JeanX.spunk['anus'] or Player.sprite", Null(),
+            "Player.cock_position == 'anal'", "images/JeanDoggy/Jean_Doggy_SpunkAnalOpen.png",
             "JeanX.used_to_anal", "images/JeanDoggy/Jean_Doggy_SpunkAnalLoose.png",
             "True", "images/JeanDoggy/Jean_Doggy_SpunkAnalLoose.png",
             ),
         (0,0), ConditionSwitch(
 
             "JeanX.underwear_pulled_down or not JeanX.outfit['underwear']", Null(),
-            "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
+            "Player.sprite and (Player.cock_position == 'in' or Player.cock_position == 'anal')", Null(),
 
 
             "JeanX.outfit['underwear'] == '_green_panties' and JeanX.grool", "images/JeanDoggy/Jean_Doggy_Panties_Green_Wet.png",
@@ -1078,7 +1078,7 @@ image Jean_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
+            "Player.sprite and (Player.cock_position == 'in' or Player.cock_position == 'anal')", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo pussy'", Null(),
 
@@ -1110,7 +1110,7 @@ image Jean_Doggy_Ass:
                     "True", "images/JeanDoggy/Jean_Doggy_Legs_Shorts.png",
                     ),
             "JeanX.outfit['bottom'] == '_skirt'", ConditionSwitch(
-                    "JeanX.upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/JeanDoggy/Jean_Doggy_Legs_Skirt_Up.png",
+                    "JeanX.upskirt and Player.sprite and Player.cock_position == 'anal' and action_speed" , "images/JeanDoggy/Jean_Doggy_Legs_Skirt_Up.png",
                     "JeanX.upskirt", "images/JeanDoggy/Jean_Doggy_Legs_Skirt_Up.png",
                     "True", "images/JeanDoggy/Jean_Doggy_Legs_Skirt.png",
                     ),
@@ -1124,25 +1124,25 @@ image Jean_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "JeanX.spunk[back]", "images/JeanDoggy/Jean_Doggy_SpunkAss.png",
+            "JeanX.spunk['back']", "images/JeanDoggy/Jean_Doggy_SpunkAss.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock", Null(),
+            "Player.sprite and Player.cock_position", Null(),
             "primary_action == 'eat_pussy'", "Rogue_Doggy_Lick_Pussy",
             "primary_action == 'eat_ass'", "Rogue_Doggy_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite or Player.Cock != 'out'", Null(),
+            "not Player.sprite or Player.cock_position != 'out'", Null(),
             "JeanX.outfit['bottom'] == '_skirt' and JeanX.upskirt", "images/JeanDoggy/Jean_Doggy_Hotdog_Upskirt_Back.png",
             "True", "images/JeanDoggy/Jean_Doggy_HotdogBack.png",
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite or Player.Cock != 'out'", Null(),
+            "not Player.sprite or Player.cock_position != 'out'", Null(),
 
 
             "action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
@@ -1945,7 +1945,7 @@ image Jean_Doggy_Feet0:
             repeat
     contains:
         ConditionSwitch(
-                "Player.Sprite", "Zero_Doggy_Up",
+                "Player.sprite", "Zero_Doggy_Up",
                 "True", Null(),
                 )
         zoom 1.2
@@ -2059,23 +2059,23 @@ image Jean_SexSprite:
         (0,0), ConditionSwitch(
 
                 "primary_action == 'eat_pussy'", "Jean_Sex_Lick",
-                "not Player.Sprite", "Jean_Sex_animation0",
-                "Player.Cock == 'in'", ConditionSwitch(
+                "not Player.sprite", "Jean_Sex_animation0",
+                "Player.cock_position == 'in'", ConditionSwitch(
 
                         "action_speed >= 3", "Jean_Sex_Fucking_action_speed3",
                         "action_speed >= 2", "Jean_Sex_Fucking_action_speed2",
                         "action_speed", "Jean_Sex_Fucking_action_speed1",
                         "True", "Jean_Sex_Fucking_action_animation0",
                         ),
-                "Player.Cock == 'anal'", ConditionSwitch(
+                "Player.cock_position == 'anal'", ConditionSwitch(
 
                         "action_speed >= 3", "Jean_Sex_Anal_action_speed3",
                         "action_speed >= 2", "Jean_Sex_Anal_action_speed2",
                         "action_speed", "Jean_Sex_Anal_action_speed1",
                         "True", "Jean_Sex_Anal_action_animation0",
                         ),
-                "Player.Sprite and Player.Cock == 'out' and action_speed >= 2","Jean_Sex_Hotdog_action_speed2",
-                "Player.Sprite and Player.Cock == 'out' and action_speed >= 1","Jean_Sex_Hotdog_action_speed1",
+                "Player.sprite and Player.cock_position == 'out' and action_speed >= 2","Jean_Sex_Hotdog_action_speed2",
+                "Player.sprite and Player.cock_position == 'out' and action_speed >= 1","Jean_Sex_Hotdog_action_speed1",
 
 
 
@@ -2086,9 +2086,7 @@ image Jean_SexSprite:
                 "True", "Jean_Sex_animation0",
                 ),
         )
-    align (0.6,0.0)
-    pos (750,230)
-    zoom 0.8
+    anchor (0.6, 0.0) zoom 0.8
 
 image Jean_Sex_HairBack:
 
@@ -2578,7 +2576,7 @@ image Jean_Sex_Legs_A:
     contains:
         ConditionSwitch(
 
-            "Player.Sprite and Player.Cock", Null(),
+            "Player.sprite and Player.cock_position", Null(),
             "primary_action == 'eat_pussy'", "Jean_Sex_Lick_Pussy",
             "primary_action == 'eat_ass'", "Jean_Sex_Lick_Ass",
             "True", Null()
@@ -2631,7 +2629,7 @@ image Jean_Sex_Zero_Cock:
         subpixel True
 
         ConditionSwitch(
-                "Player.Sprite", "Zero_Blowcock" ,
+                "Player.sprite", "Zero_blowjob_cock" ,
                 "True", Null(),
                 )
         subpixel True
@@ -3204,30 +3202,30 @@ label Jean_Sex_Launch(Line=primary_action):
 
 
 
-    $ Player.Sprite = 1
+    $ Player.sprite = 1
     $ Line = "solo" if not Line else Line
     if Line == "sex":
-        $ Player.Cock = "in"
+        $ Player.cock_position = "in"
         if offhand_action in ("fondle pussy","dildo pussy","lick pussy"):
             $ offhand_action = 0
     elif Line == "anal":
-        $ Player.Cock = "anal"
+        $ Player.cock_position = "anal"
         if offhand_action in ("insert ass","dildo anal","lick ass"):
             $ offhand_action = 0
     elif Line == "hotdog":
         if JeanX.bottom_number() == 5:
             $ JeanX.upskirt = 1
-        $ Player.Cock = "out"
+        $ Player.cock_position = "out"
     elif Line == "footjob":
         $ show_feet = 1
-        $ Player.Cock = "footjob"
+        $ Player.cock_position = "footjob"
         $ JeanX.pose = "doggy"
     elif Line == "massage":
-        $ Player.Sprite = 0
-        $ Player.Cock = 0
+        $ Player.sprite = 0
+        $ Player.cock_position = 0
     else:
-        $ Player.Sprite = 0
-        $ Player.Cock = "out"
+        $ Player.sprite = 0
+        $ Player.cock_position = "out"
         $ action_speed = 0
     $ primary_action = Line
 
@@ -3307,9 +3305,9 @@ image Jean_BJ_Animation:
             ),
         (0,0), ConditionSwitch(
 
-            "action_speed == 0", At("Blowcock", Jean_BJ_Cock_0()),
-            "action_speed == 1", At("Blowcock", Jean_BJ_Cock_1()),
-            "action_speed >= 2", At("Blowcock", Jean_BJ_Cock_2()),
+            "action_speed == 0", At("Zero_blowjob_cock", Jean_BJ_Cock_0()),
+            "action_speed == 1", At("Zero_blowjob_cock", Jean_BJ_Cock_1()),
+            "action_speed >= 2", At("Zero_blowjob_cock", Jean_BJ_Cock_2()),
 
 
 
@@ -3418,7 +3416,7 @@ image Jean_BJ_Head:
 
 
 
-            "Speed and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
+            "action_speed and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/JeanBJFace/Jean_BJ_mouth_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -3434,7 +3432,7 @@ image Jean_BJ_Head:
             "JeanX.mouth == '_sad'", "images/JeanBJFace/Jean_BJ_mouth_Sad.png",
             "JeanX.mouth == '_smile'", "images/JeanBJFace/Jean_BJ_mouth_Smile.png",
             "JeanX.mouth == '_smirk'", "images/JeanBJFace/Jean_BJ_mouth_Smirk.png",
-            "JeanX.mouth == '_grimace'", "images/JeanBJFace/Jean_BJ_mouth_Smile.png",
+            "JeanX.mouth == '_smile'", "images/JeanBJFace/Jean_BJ_mouth_Smile.png",
             "JeanX.mouth == '_surprised'", "images/JeanBJFace/Jean_BJ_mouth_Kiss.png",
             "JeanX.mouth == '_tongue'", "images/JeanBJFace/Jean_BJ_mouth_Tongue.png",
             "True", "images/JeanBJFace/Jean_BJ_mouth_Smile.png",
@@ -3451,7 +3449,7 @@ image Jean_BJ_Head:
         (0,0), ConditionSwitch(
 
             "not JeanX.spunk['mouth']", Null(),
-            "Speed and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
+            "action_speed and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/JeanBJFace/Jean_BJ_Spunk_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -4237,7 +4235,7 @@ image Jean_TJ_Animation:
     contains:
         ConditionSwitch(
 
-                    "not Player.Sprite","Jean_TJ_0",
+                    "not Player.sprite","Jean_TJ_0",
                     "action_speed == 1", "Jean_TJ_1",
                     "action_speed == 4", "Jean_TJ_4",
                     "action_speed == 5", "Jean_TJ_5",
@@ -4292,7 +4290,7 @@ image JeanScreen:
 
 image Jean_TJ_ZeroCock:
 
-    "Zero_Blowcock"
+    "Zero_blowjob_cock"
     transform_anchor True
     zoom .6
     anchor (0.5, 0.5)
@@ -5177,7 +5175,7 @@ label Jean_TJ_Launch(Line=primary_action):
         $ primary_action = "titjob"
     show Jean_TJ_Animation zorder 150:
         pos (1000,1050)
-    $ Player.Sprite = 1
+    $ Player.sprite = 1
     hide blackscreen onlayer black with dissolve
     return
 
@@ -5187,7 +5185,7 @@ label Jean_TJ_Reset:
         return
 
     call hide_girl(JeanX)
-    $ Player.Sprite = 0
+    $ Player.sprite = 0
 
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         zoom 2.3 xpos 750 yoffset -100

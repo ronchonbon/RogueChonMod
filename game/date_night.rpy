@@ -335,7 +335,7 @@ label Date_Ask(Girl=0):
                     return
             "Yeah, so?":
                 if approval_check(Girl, 1400,Alt=[[EmmaX],1500]):
-                    $ Girl.change_face("_angry", mouth = "_grimace")
+                    $ Girl.change_face("_angry", mouth = "_smile")
                     if Girl == RogueX:
                         ch_r "It's a good thing you're so pretty."
                     elif Girl == KittyX:

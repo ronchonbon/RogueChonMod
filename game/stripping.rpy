@@ -1586,7 +1586,7 @@ label Top_Off(Girl=0, Intro=1, line=0, counter=0):
                 $ Girl.change_stat("love", 90, 1)
                 $ Girl.change_stat("inhibition", 50, 3)
             if Girl.forced:
-                $ Girl.mouth = "_grimace"
+                $ Girl.mouth = "_smile"
                 if Girl == RogueX:
                     ch_r "I really appreciate that."
                 elif Girl == KittyX:

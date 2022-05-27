@@ -4,7 +4,7 @@ transform blowjob_starting_cock:
 
 transform blowjob_licking_cock:
     subpixel True
-    anchor (.5,.5)
+    anchor (.5, .5)
     ease 0.5 rotate 0
     block:
         ease 2 rotate -5
@@ -12,9 +12,22 @@ transform blowjob_licking_cock:
         ease 2.5 rotate 0
         repeat
 
-transform blowjob_straight_cock:
-    anchor (.5,.5)
-    rotate 0
+transform Zero_handjob_cock_animation1:
+    subpixel True
+    rotate_pad False
+    ease 0.5 yoffset 0 rotate -2
+    pause 0.25
+    ease 1.0 yoffset 0 rotate 0
+    pause 0.1
+    repeat
+
+transform Zero_handjob_cock_animation2:
+    subpixel True
+    rotate_pad False
+    ease 0.2 yoffset 0 rotate -3
+    ease 0.5 yoffset 0 rotate 0
+    pause 0.1
+    repeat
 
 image Zero_blowjob_cock_animation0:
     "Zero_blowjob_cock"
@@ -26,15 +39,12 @@ image Zero_blowjob_cock_animation1:
 
 image Zero_blowjob_cock_animation2:
     "Zero_blowjob_cock"
-    blowjob_straight_cock
 
 image Zero_blowjob_cock_animation3:
     "Zero_blowjob_cock"
-    blowjob_straight_cock
 
 image Zero_blowjob_cock_animation4:
     "Zero_blowjob_cock"
-    blowjob_straight_cock
 
 image Zero_hotdog_static:
     contains:
