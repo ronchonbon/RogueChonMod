@@ -300,7 +300,7 @@ label WardrobeEditor(Chr=0):
                         "Dress" if Chr == EmmaX or Chr == KittyX:
                             $ Chr.outfit["bottom"] = "_dress"
                         "Boots" if Chr == EmmaX:
-                            $ EmmaX.outfit["front_outer_accessory"] = "thigh boots" if EmmaX.outfit["front_outer_accessory"] != "thigh boots" else 0
+                            $ EmmaX.outfit["front_outer_accessory"] = "_thigh_boots" if EmmaX.outfit["front_outer_accessory"] != "_thigh_boots" else 0
                         "Toggle upskirt":
                             if Chr.upskirt:
                                 $ Chr.upskirt = 0
@@ -504,7 +504,7 @@ label WardrobeEditor(Chr=0):
                             else:
                                 $ Chr.outfit["neck"] = ""
                         "Toggle boots" if Chr == EmmaX:
-                            if Chr.outfit["front_outer_accessory"] != "thigh boots":
+                            if Chr.outfit["front_outer_accessory"] != "_thigh_boots":
                                 $ Chr.outfit["front_outer_accessory"] ='thigh boots'
                             else:
                                 $ Chr.outfit["front_outer_accessory"] = ""

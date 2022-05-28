@@ -979,11 +979,11 @@ label ShowPool(temp_Girls=[], PoolLoc=0):
             elif temp_Girls[0] == KittyX:
                 show Kitty_sprite zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == EmmaX:
-                show Emma_Sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Emma_sprite zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == LauraX:
                 show Laura_Sprite zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == JeanX:
-                show Jean_Sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Jean_sprite zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == StormX:
                 show Storm_Sprite zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == JubesX:

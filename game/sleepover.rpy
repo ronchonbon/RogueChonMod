@@ -1575,13 +1575,13 @@ label sleepover_MorningWood:
             show Kitty_sprite:
                 pos (900,250)
         elif Partner == EmmaX:
-            show Emma_Sprite:
+            show Emma_sprite:
                 pos (900,250)
         elif Partner == LauraX:
             show Laura_Sprite:
                 pos (900,250)
         elif Partner == JeanX:
-            show Jean_Sprite:
+            show Jean_sprite:
                 pos (900,250)
         elif Partner == StormX:
             show Storm_Sprite:
@@ -2081,9 +2081,9 @@ label sleepover_MorningWood:
                 show Kitty_sprite:
                     pos (700,50)
             elif Party[1] == EmmaX:
-                show Emma_Sprite:
+                show Emma_sprite:
                     ease 1 pos (700,50)
-                show Emma_Sprite:
+                show Emma_sprite:
                     pos (700,50)
             elif Party[1] == LauraX:
                 show Laura_Sprite:
@@ -2091,9 +2091,9 @@ label sleepover_MorningWood:
                 show Laura_Sprite:
                     pos (700,50)
             elif Party[1] == JeanX:
-                show Jean_Sprite:
+                show Jean_sprite:
                     ease 1 pos (700,50)
-                show Jean_Sprite:
+                show Jean_sprite:
                     pos (700,50)
             elif Party[1] == StormX:
                 show Storm_Sprite:
@@ -2167,9 +2167,9 @@ label Morning_Partner:
         show Rogue_sprite:
             pos (700,50)
     elif Partner == EmmaX:
-        show Emma_Sprite:
+        show Emma_sprite:
             ease 1 pos (700,50)
-        show Emma_Sprite:
+        show Emma_sprite:
             pos (700,50)
     elif Partner == KittyX:
         show Kitty_sprite:
@@ -2182,9 +2182,9 @@ label Morning_Partner:
         show Laura_Sprite:
             pos (700,50)
     elif Partner == JeanX:
-        show Jean_Sprite:
+        show Jean_sprite:
             ease 1 pos (700,50)
-        show Jean_Sprite:
+        show Jean_sprite:
             pos (700,50)
     elif Partner == StormX:
         show Storm_Sprite:

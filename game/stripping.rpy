@@ -132,11 +132,11 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
         elif Present[counter] == KittyX:
             show Kitty_sprite at Girl_Dance1(KittyX)
         elif Present[counter] == EmmaX:
-            show Emma_Sprite at Girl_Dance1(EmmaX)
+            show Emma_sprite at Girl_Dance1(EmmaX)
         elif Present[counter] == LauraX:
             show Laura_Sprite at Girl_Dance1(LauraX)
         elif Present[counter] == JeanX:
-            show Jean_Sprite at Girl_Dance1(JeanX)
+            show Jean_sprite at Girl_Dance1(JeanX)
         elif Present[counter] == StormX:
             show Storm_Sprite at Girl_Dance1(StormX)
         elif Present[counter] == JubesX:
@@ -663,7 +663,9 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 extend ""
                 "Ok, you can stop":
                     $ Girl.recent_history.append("stopdancing")
-                    call expression Girl.tag + "_Pos_Reset"
+                    $ focused_Girl = Girl
+
+                    call reset_position
                 "Keep on dancing":
                     $ Girl.recent_history.append("keepdancing")
 
@@ -708,11 +710,11 @@ label Girl_Stripping(Girl=0, Nudist=0):
         elif Girl == KittyX:
             show Kitty_sprite at Girl_Dance1(Girl)
         elif Girl == EmmaX:
-            show Emma_Sprite at Girl_Dance1(Girl)
+            show Emma_sprite at Girl_Dance1(Girl)
         elif Girl == LauraX:
             show Laura_Sprite at Girl_Dance1(Girl)
         elif Girl == JeanX:
-            show Jean_Sprite at Girl_Dance1(Girl)
+            show Jean_sprite at Girl_Dance1(Girl)
         elif Girl == StormX:
             show Storm_Sprite at Girl_Dance1(Girl)
         elif Girl == JubesX:
@@ -812,7 +814,9 @@ label Strip_Ultimatum:
     if "keepdancing" in Girl.recent_history:
         return
 
-    call expression Girl.tag + "_Pos_Reset"
+    $ focused_Girl = Girl
+
+    call reset_position
 
     $ Girl.change_face("_bemused", 1)
     if "stripforced" in Girl.recent_history:
@@ -979,11 +983,11 @@ label Strip_Ultimatum:
     elif Girl == KittyX:
         show Kitty_sprite at Girl_Dance1(Girl)
     elif Girl == EmmaX:
-        show Emma_Sprite at Girl_Dance1(Girl)
+        show Emma_sprite at Girl_Dance1(Girl)
     elif Girl == LauraX:
         show Laura_Sprite at Girl_Dance1(Girl)
     elif Girl == JeanX:
-        show Jean_Sprite at Girl_Dance1(Girl)
+        show Jean_sprite at Girl_Dance1(Girl)
     elif Girl == StormX:
         show Storm_Sprite at Girl_Dance1(Girl)
     elif Girl == JubesX:

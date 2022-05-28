@@ -2177,7 +2177,7 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_e "I was heading for a swim."
         else:
             ch_e "I'll see you later."
-        hide Emma_Sprite
+        hide Emma_sprite
         return
 
 
@@ -2299,7 +2299,7 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
     $ EmmaX.recent_history.append("followed")
     if not line:
 
-        hide Emma_Sprite
+        hide Emma_sprite
         call change_out_of_gym_clothes ([EmmaX])
         return
 
@@ -2313,7 +2313,7 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_e "I'm sorry, but how do you think I keep this figure?"
         else:
             ch_e "I'm sorry, I'm just much too busy at the moment."
-        hide Emma_Sprite
+        hide Emma_sprite
         call change_out_of_gym_clothes ([EmmaX])
         return
 
@@ -2326,7 +2326,7 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         call drain_all_words ("arriving")
         $ EmmaX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
-        hide Emma_Sprite
+        hide Emma_sprite
         call change_out_of_gym_clothes ([EmmaX])
         if EmmaX.location == "bg_teacher":
             ch_e "I'll see you there."
@@ -2905,10 +2905,10 @@ label Emma_Wardrobe_Menu:
                     pass
             $ EmmaX.outfit["bottom"] = "_dress"
 
-        "You look great in boots." if EmmaX.outfit["front_outer_accessory"] != "thigh boots":
+        "You look great in boots." if EmmaX.outfit["front_outer_accessory"] != "_thigh_boots":
             ch_e "They do look nice on me."
-            $ EmmaX.outfit["front_outer_accessory"] = "thigh boots"
-        "Maybe lose the boots." if EmmaX.outfit["front_outer_accessory"] == "thigh boots":
+            $ EmmaX.outfit["front_outer_accessory"] = "_thigh_boots"
+        "Maybe lose the boots." if EmmaX.outfit["front_outer_accessory"] == "_thigh_boots":
             ch_e "I suppose."
             $ EmmaX.outfit["front_outer_accessory"] = ""
 

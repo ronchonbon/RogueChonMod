@@ -1916,11 +1916,11 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
         elif Girl == KittyX:
             show Kitty_sprite at Girl_Dance1(KittyX)
         elif Girl == EmmaX:
-            show Emma_Sprite at Girl_Dance1(EmmaX)
+            show Emma_sprite at Girl_Dance1(EmmaX)
         elif Girl == LauraX:
             show Laura_Sprite at Girl_Dance1(LauraX)
         elif Girl == JeanX:
-            show Jean_Sprite at Girl_Dance1(JeanX)
+            show Jean_sprite at Girl_Dance1(JeanX)
         elif Girl == StormX:
             show Storm_Sprite at Girl_Dance1(StormX)
         elif Girl == JubesX:

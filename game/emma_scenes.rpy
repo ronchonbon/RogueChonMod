@@ -22,7 +22,7 @@ label meet_Emma:
 
     $ EmmaX.change_face("_normal")
 
-    show Emma_Sprite at sprite_location(EmmaX.sprite_location) with easeinright
+    show Emma_sprite at sprite_location(EmmaX.sprite_location) with easeinright
 
     $ EmmaX.location = "bg_classroom"
     $ EmmaX.arm_pose = 1
@@ -329,7 +329,7 @@ label meet_Emma:
 
     $ EmmaX.location = "bg_emma"
 
-    hide Emma_Sprite with easeoutright
+    hide Emma_sprite with easeoutright
 
     "She strides out of the room and down the hall."
 
@@ -635,7 +635,7 @@ label Emma_Caught_Classroom:
         $ EmmaX.name = "Emma"
         $ EmmaX.names.append("Emma")
         $ EmmaX.location = "bg_emma"
-        hide Emma_Sprite with easeoutleft
+        hide Emma_sprite with easeoutleft
         $ round = 20 if round > 20 else round
         $ multi_action = True
     return
@@ -1567,7 +1567,7 @@ label Emma_Love(Shipping=[], Shipshape=0, temp_Girls=[]):
 
 label Emma_Love_End:
     if "lover" not in EmmaX.player_petnames:
-        hide Emma_Sprite with easeoutright
+        hide Emma_sprite with easeoutright
         call remove_girl (EmmaX)
         $ EmmaX.location = "hold"
         return
@@ -1838,7 +1838,7 @@ label Emma_Sub:
         $ EmmaX.player_petnames.append("sir")
 
     elif line == "rude":
-        hide Emma_Sprite with easeoutright
+        hide Emma_sprite with easeoutright
         call remove_girl (EmmaX)
         $ renpy.pop_call()
         "[EmmaX.name] marches out the door in a huff, leaving you alone."
@@ -1850,7 +1850,7 @@ label Emma_Sub:
         $ EmmaX.change_face("_sadside", 2)
         ch_e "I should go. I think I see a student over there in need."
         $ EmmaX.blushing = "_blush1"
-        hide Emma_Sprite with easeoutright
+        hide Emma_sprite with easeoutright
         call remove_girl (EmmaX)
         $ renpy.pop_call()
         "[EmmaX.name] dashes out the door, leaving you alone. It didn't look like she could get away fast enough."
@@ -1932,7 +1932,7 @@ label Emma_Sub_Asked:
     $ EmmaX.daily_history.append("asked sub")
     if line == "rude":
 
-        hide Emma_Sprite with easeoutright
+        hide Emma_sprite with easeoutright
         call remove_girl (EmmaX)
         $ EmmaX.recent_history.append("_angry")
         $ renpy.pop_call()
@@ -2228,7 +2228,7 @@ label Emma_Sexfriend:
         $ EmmaX.change_stat("love", 200, -20)
         $ EmmaX.change_stat("obedience", 50, 5)
         $ EmmaX.change_stat("inhibition", 80, -10)
-        hide Emma_Sprite with easeoutright
+        hide Emma_sprite with easeoutright
         $ EmmaX.recent_history.append("_angry")
         "[EmmaX.name] storms off in a huff. She seemed pretty mad at you."
     elif line == "embarrassed":
@@ -2236,10 +2236,10 @@ label Emma_Sexfriend:
         $ EmmaX.change_stat("love", 200, -10)
         $ EmmaX.change_stat("obedience", 50, 5)
         $ EmmaX.change_stat("inhibition", 80, -20)
-        hide Emma_Sprite with easeoutright
+        hide Emma_sprite with easeoutright
         "[EmmaX.name] dashes out of the room, leaving you alone. That was very strange."
     elif line == "_sad":
-        hide Emma_Sprite with easeoutbottom
+        hide Emma_sprite with easeoutbottom
         "[EmmaX.name] wanders into the hall, leaving you alone. You think you may have hurt her feelings."
     else:
         $ EmmaX.player_petnames.append("sex friend")
@@ -2251,7 +2251,7 @@ label Emma_Sexfriend:
         "You look back at her and she winks."
         ch_e "I do have a few tricks up my sleeves, [EmmaX.player_petname]."
         ch_e "I'll see you later, I hope."
-        hide Emma_Sprite with easeoutright
+        hide Emma_sprite with easeoutright
         "She leaves the room, and the phantom \"lips\" give you one final kiss. "
     call remove_girl (EmmaX)
     return

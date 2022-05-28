@@ -2063,7 +2063,7 @@ label Jean_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                 ch_j "I'm headed out."
         else:
             ch_j "I'm headed out."
-        hide Jean_Sprite
+        hide Jean_sprite
         return
 
 
@@ -2189,14 +2189,14 @@ label Jean_Leave(approval_bonus=approval_bonus, GirlsNum=0):
     $ JeanX.recent_history.append("followed")
     if not line:
 
-        hide Jean_Sprite
+        hide Jean_sprite
         call change_out_of_gym_clothes ([JeanX])
         return
 
     if line == "no":
 
         ch_j "I'd rather not."
-        hide Jean_Sprite
+        hide Jean_sprite
         call change_out_of_gym_clothes ([JeanX])
         return
 
@@ -2209,7 +2209,7 @@ label Jean_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         call drain_all_words ("arriving")
         $ JeanX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
-        hide Jean_Sprite
+        hide Jean_sprite
         call change_out_of_gym_clothes ([JeanX])
         if JeanX.location == "bg_classroom":
             ch_j "Ok."

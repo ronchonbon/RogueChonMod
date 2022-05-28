@@ -2,9 +2,8 @@
 errors listed below, and try again.
 
 
-File "game/actions.rpy", line 331: invalid syntax
-    action_speed = -
-    
+File "game/emma_sprites.rpy", line 166: is not terminated with a newline. (Check strings and parenthesis.)
+        elif EmmaX.outfit["top"] and (EmmaX.outfit["bra"] in ["_corset", "_lace_bra", "_sports_bra", "_bikini_top"] or (EmmaX.outfit["top"] == "_towel" and EmmaX.arm_pose == 1):
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Sat May 28 00:19:53 2022
+Sat May 28 09:01:50 2022

@@ -61,9 +61,9 @@ label psychicFlash(Face="_sly", TempLoc=0):
     $ Girl.underwear_pulled_down = 1
     ". . . {w=0.3}{nw}"
     if Girl == EmmaX:
-        hide Emma_Sprite with fade
+        hide Emma_sprite with fade
     elif Girl == JeanX:
-        hide Jean_Sprite with fade
+        hide Jean_sprite with fade
     $ Girl.change_outfit(6,outfit_changed=1)
     scene onlayer black
     $ Girl.arm_pose = 1
@@ -109,9 +109,9 @@ label MindFuck(TempLoc=0):
             $ Girl.change_outfit(6,outfit_changed=1)
             $ Girl.spunk = []
             if Girl == EmmaX:
-                hide Emma_Sprite with fade
+                hide Emma_sprite with fade
             elif Girl == JeanX:
-                hide Jean_Sprite with fade
+                hide Jean_sprite with fade
             scene onlayer black
             jump Misplaced
         "What is that?" if "mfuck?" not in Player.recent_history and "MindFuck" not in Player.history:

@@ -102,8 +102,8 @@ init -1:
 
     default always_return_to_room = 1
 
-    default stage_far_left = 0.2
-    default stage_left = 0.33
+    default stage_far_left = 0.1
+    default stage_left = 0.3
     default stage_center = 0.5
     default stage_right = 0.66
     default stage_far_right = 0.8
@@ -179,6 +179,16 @@ label start:
     #
     # scene background onlayer backdrop
     # scene
+    #
+    # $ RogueX.change_outfit("nude")
+    # $ JeanX.change_outfit("nude")
+    # $ KittyX.change_outfit("nude")
+    # $ EmmaX.change_outfit("nude")
+    # show Rogue_sprite at sprite_location(stage_far_left)
+    # show Jean_sprite at sprite_location(stage_left)
+    # show Emma_sprite at sprite_location(stage_right)
+    # show Kitty_sprite at sprite_location(stage_far_right)
+    # ""
     #
     #
     # $ action_speed = 0

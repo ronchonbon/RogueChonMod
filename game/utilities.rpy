@@ -738,7 +738,7 @@ label hide_girl(Girl, hide_sprite = False):
         hide Emma_FJ_Animation
 
         if hide_sprite:
-            hide Emma_Sprite
+            hide Emma_sprite
     elif Girl == LauraX:
         hide Laura_SexSprite
         hide Laura_Doggy_Animation
@@ -757,7 +757,7 @@ label hide_girl(Girl, hide_sprite = False):
         hide Jean_PJ_Animation
 
         if hide_sprite:
-            hide Jean_Sprite
+            hide Jean_sprite
     elif Girl == StormX:
         hide Storm_SexSprite
         hide Storm_Doggy_Animation
@@ -1118,13 +1118,13 @@ label display_girl(Girl, check_if_dressed = True, trigger_reset = True, x_positi
     elif Girl == EmmaX:
         $ Girl.diamond = False
 
-        show Emma_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
+        show Emma_sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
     elif Girl == LauraX:
         $ Girl.claws = False
 
         show Laura_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
     elif Girl == JeanX:
-        show Jean_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
+        show Jean_sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
     elif Girl == StormX:
         show Storm_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
     elif Girl == JubesX:
@@ -2106,11 +2106,11 @@ label clear_the_room(Character=0, Passive=0, Silent=0, Girls=[]):
         elif Girls[0] == KittyX:
             hide Kitty_sprite with easeoutright
         elif Girls[0] == EmmaX:
-            hide Emma_Sprite with easeoutright
+            hide Emma_sprite with easeoutright
         elif Girls[0] == LauraX:
             hide Laura_Sprite with easeoutright
         elif Girls[0] == JeanX:
-            hide Jean_Sprite with easeoutright
+            hide Jean_sprite with easeoutright
         elif Girls[0] == StormX:
             hide Storm_Sprite with easeoutright
         elif Girls[0] == JubesX:
@@ -3443,56 +3443,42 @@ label AllReset(Girl):
             if RogueX.location == bg_current:
                 show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
                     ease 0.5
-                show Rogue_sprite:
-                    pos (RogueX.sprite_location, 0)
             else:
                 hide Rogue_sprite
         elif temp_Girls[0] == KittyX:
             if KittyX.location == bg_current:
                 show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
                     ease 0.5
-                show Kitty_sprite:
-                    pos (KittyX.sprite_location, 0)
             else:
                 hide Kitty_sprite
         elif temp_Girls[0] == EmmaX:
             if EmmaX.location == bg_current:
-                show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+                show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
                     ease 0.5
-                show Emma_Sprite:
-                    pos (EmmaX.sprite_location, 0)
             else:
-                hide Emma_Sprite
+                hide Emma_sprite
         elif temp_Girls[0] == LauraX:
             if LauraX.location == bg_current:
                 show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
                     ease 0.5
-                show Laura_Sprite:
-                    pos (LauraX.sprite_location, 0)
             else:
                 hide Laura_Sprite
         elif temp_Girls[0] == JeanX:
             if JeanX.location == bg_current:
-                show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+                show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
                     ease 0.5
-                show Jean_Sprite:
-                    pos (JeanX.sprite_location, 0)
             else:
-                hide Jean_Sprite
+                hide Jean_sprite
         elif temp_Girls[0] == StormX:
             if StormX.location == bg_current:
                 show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
                     ease 0.5
-                show Storm_Sprite:
-                    pos (StormX.sprite_location, 0)
             else:
                 hide Storm_Sprite
         elif temp_Girls[0] == JubesX:
             if JubesX.location == bg_current:
                 show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
                     ease 0.5
-                show Jubes_Sprite:
-                    pos (JubesX.sprite_location, 0)
             else:
                 hide Jubes_Sprite
 

@@ -2992,13 +2992,13 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
             show Kitty_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == EmmaX:
-            show Emma_Sprite zorder GirlA.sprite_layer:
+            show Emma_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == LauraX:
             show Laura_Sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == JeanX:
-            show Jean_Sprite zorder GirlA.sprite_layer:
+            show Jean_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == StormX:
             show Storm_Sprite zorder GirlA.sprite_layer:
@@ -3021,13 +3021,13 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
             show Kitty_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == EmmaX:
-            show Emma_Sprite zorder GirlA.sprite_layer:
+            show Emma_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == LauraX:
             show Laura_Sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == JeanX:
-            show Jean_Sprite zorder GirlA.sprite_layer:
+            show Jean_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == StormX:
             show Storm_Sprite zorder GirlA.sprite_layer:

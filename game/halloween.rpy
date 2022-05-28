@@ -6,11 +6,11 @@ label Halloween_chat(Girl=0):
         pass
     elif Girl == KittyX and renpy.showing("Kitty_sprite"):
         pass
-    elif Girl == EmmaX and renpy.showing("Emma_Sprite"):
+    elif Girl == EmmaX and renpy.showing("Emma_sprite"):
         pass
     elif Girl == LauraX and renpy.showing("Laura_Sprite"):
         pass
-    elif Girl == JeanX and renpy.showing("Jean_Sprite"):
+    elif Girl == JeanX and renpy.showing("Jean_sprite"):
         pass
     elif Girl == StormX and renpy.showing("Storm_Sprite"):
         pass
@@ -836,7 +836,7 @@ label Halloween_Jean:
     $ JeanX.change_outfit(outfit_changed=1)
 
     call shift_focus (JeanX)
-    show Jean_Sprite at sprite_location(1200,50):
+    show Jean_sprite at sprite_location(1200,50):
         offset (0,0)
         anchor (0.5, 0.0)
         pos (1200,50)
@@ -1043,7 +1043,7 @@ label Halloween_Jean:
             "You hear mumbles of \"yes, Jessie\". . ."
             $ JeanX.add_word(1,"jessie",0)
     $ JeanX.change_face("_smile")
-    show Jean_Sprite:
+    show Jean_sprite:
         ease 1 pos (300,50)
     pause 1
     "[JeanX.name] starts to wander off."
@@ -1060,7 +1060,7 @@ label Halloween_Jean:
             ch_j "I might be back later."
         "Let her go":
             pass
-    show Jean_Sprite:
+    show Jean_sprite:
         ease 0.8 pos (-200,50)
     pause 0.8
     "She wanders into the crowd."
@@ -1257,7 +1257,7 @@ label Halloween_Emma:
     $ EmmaX.change_outfit(outfit_changed=1)
 
     call shift_focus (EmmaX)
-    show Emma_Sprite at sprite_location(-200,50):
+    show Emma_sprite at sprite_location(-200,50):
         offset (0,0)
         anchor (0.5, 0.0)
         pos (-200,50)
@@ -1511,7 +1511,7 @@ label Halloween_Emma:
     ch_e "In any case. . ."
     ch_e "It is nice to have a little soiree. . . I do hope to see you later in the evening."
     ch_e "For the moment, I'll need to excuse myself."
-    show Emma_Sprite:
+    show Emma_sprite:
         ease 0.8 pos (-200,50)
     pause 0.8
     "[EmmaX.name] heads over to the refreshments."

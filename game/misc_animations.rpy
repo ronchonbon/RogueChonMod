@@ -395,9 +395,9 @@ image DressShadow:
         ConditionSwitch(
             "RogueX.sprite_layer == 100", "Rogue_sprite",
             "KittyX.sprite_layer == 100", "Kitty_sprite",
-            "EmmaX.sprite_layer == 100", "Emma_Sprite",
+            "EmmaX.sprite_layer == 100", "Emma_sprite",
             "LauraX.sprite_layer == 100", "Laura_Sprite",
-            "JeanX.sprite_layer == 100", "Jean_Sprite",
+            "JeanX.sprite_layer == 100", "Jean_sprite",
             "StormX.sprite_layer == 100", "Storm_Sprite",
             "JubesX.sprite_layer == 100", "Jubes_Sprite",
 
@@ -686,7 +686,7 @@ label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
                 anchor (0.5, 0.0)
         elif temp_Girls[0] == EmmaX:
             call Emma_Hide
-            show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(XLoc,YLoc):
+            show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
                 zoom 1
                 xzoom XZoom
@@ -704,7 +704,7 @@ label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
                 anchor (0.5, 0.0)
         elif temp_Girls[0] == JeanX:
             call Jean_Hide
-            show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(XLoc,YLoc):
+            show Jean_sprite zorder JeanX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
                 zoom 1
                 xzoom XZoom
@@ -817,7 +817,7 @@ label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, temp_Girls=[]):
                 anchor (0.5, 0.0)
         elif temp_Girls[0] == EmmaX:
             call Emma_Hide
-            show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(XLoc,YLoc):
+            show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
                 zoom 1
                 xzoom XZoom
@@ -835,7 +835,7 @@ label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, temp_Girls=[]):
                 anchor (0.5, 0.0)
         elif temp_Girls[0] == JeanX:
             call Jean_Hide
-            show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(XLoc,YLoc):
+            show Jean_sprite zorder JeanX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
                 zoom 1
                 xzoom XZoom

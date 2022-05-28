@@ -21,11 +21,11 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
     elif Girl == KittyX:
         show Kitty_sprite at sprite_location(stage_right) with ease
     elif Girl == EmmaX:
-        show Emma_Sprite at sprite_location(stage_right) with ease
+        show Emma_sprite at sprite_location(stage_right) with ease
     elif Girl == LauraX:
         show Laura_Sprite at sprite_location(stage_right) with ease
     elif Girl == JeanX:
-        show Jean_Sprite at sprite_location(stage_right) with ease
+        show Jean_sprite at sprite_location(stage_right) with ease
     elif Girl == StormX:
         show Storm_Sprite at sprite_location(stage_right) with ease
     elif Girl == JubesX:
@@ -39,11 +39,11 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
     elif Partner == KittyX:
         show Kitty_sprite at sprite_location(stage_far_right) with ease
     elif Partner == EmmaX:
-        show Emma_Sprite at sprite_location(stage_far_right) with ease
+        show Emma_sprite at sprite_location(stage_far_right) with ease
     elif Partner == LauraX:
         show Laura_Sprite at sprite_location(stage_far_right) with ease
     elif Partner == JeanX:
-        show Jean_Sprite at sprite_location(stage_far_right) with ease
+        show Jean_sprite at sprite_location(stage_far_right) with ease
     elif Partner == StormX:
         show Storm_Sprite at sprite_location(stage_far_right) with ease
     elif Partner == JubesX:
@@ -756,9 +756,9 @@ label Xavier_Plan(GirlX=0):
         ch_k "Well, [KittyX.player_petname], what should we ask for?"
     elif GirlX == EmmaX or GirlX == JeanX:
         if GirlX == EmmaX:
-            show Emma_Sprite zorder 24 at sprite_location(stage_left+100,85) with ease
+            show Emma_sprite zorder 24 at sprite_location(stage_left+100,85) with ease
         elif GirlX == JeanX:
-            show Jean_Sprite zorder 24 at sprite_location(stage_left+100,85) with ease
+            show Jean_sprite zorder 24 at sprite_location(stage_left+100,85) with ease
         "[GirlX.name] moves behind Xavier and activates her own telepathy."
         call change_Xavier_face ("_angry")
         if (GirlX == EmmaX and "Psi" in Player.traits) or (GirlX == JeanX and "Alpha" in Player.traits):

@@ -26,7 +26,7 @@ image Rogue_squinting:
     0.25
     repeat
 
-layeredimage Rogue_standing_fondling:
+layeredimage Rogue_standing_fondling_animations:
     if primary_action == "lesbian" or not girl_offhand_action or focused_Girl != RogueX:
             Null()
     elif primary_action != "sex" and girl_offhand_action == "fondle_pussy" and RogueX.lust >= 70:
@@ -941,7 +941,7 @@ image Rogue_doggy_feet_animation2:
 
 layeredimage Rogue_doggy_feet_animations:
     always:
-        "Rogue_doggy_feet_animation[action_speed]" pos (-0.1095, -0.347)
+        "Rogue_doggy_feet_animation[action_speed]"
 
 layeredimage Rogue_doggy_animation:
     always:
@@ -954,8 +954,6 @@ layeredimage Rogue_doggy_animation:
         "Rogue_doggy_shin_animations"
     elif not Player.sprite or show_feet:
         "Rogue_doggy_shins"
-    else:
-        "Rogue_doggy_shins" alpha 0.0
 
     if Player.sprite and Player.cock_position == "footjob":
         "Zero_doggy_cock_footjob_animations"
@@ -963,8 +961,6 @@ layeredimage Rogue_doggy_animation:
     if Player.cock_position == "footjob":
         "Rogue_doggy_feet_animations"
     elif not Player.sprite or show_feet:
-        "Rogue_doggy_feet" pos (-0.1095, -0.347)
-    else:
-        "Rogue_doggy_feet" pos (-0.1095, -0.347) alpha 0.0
+        "Rogue_doggy_feet"
 
-    anchor (0.5, 0.0) offset (1050, 650) zoom 1.2
+    anchor (0.5, 0.0) offset (150, 750) zoom 1.2

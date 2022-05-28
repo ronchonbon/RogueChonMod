@@ -1,5 +1,5 @@
 image Kitty_blinking:
-    "Kitty_eyes"
+    "images/Kitty_sprite/Kitty_standing_eyes[KittyX.eyes].png"
     choice:
         3.5
     choice:

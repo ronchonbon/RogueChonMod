@@ -14,7 +14,7 @@ label smooch:
     $ focused_Girl.change_face("_kiss")
 
     show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(focused_Girl.sprite_location):
-        ease 0.5 pos (focused_Girl.sprite_location + 0.05, 0.1) zoom 2
+        ease 0.5 pos (focused_Girl.sprite_location, 0.1) zoom 2
         pause 1
         ease 0.5 pos (focused_Girl.sprite_location, 0.0) zoom 1
 
@@ -30,7 +30,7 @@ label kiss_launch:
     call hide_girl(focused_Girl)
 
     show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(focused_Girl.sprite_location):
-        ease 0.5 pos (focused_Girl.sprite_location + 0.05, 0.1) zoom 2
+        ease 0.5 pos (focused_Girl.sprite_location, 0.1) zoom 2
 
     return
 
@@ -40,7 +40,7 @@ label breasts_launch:
     call hide_girl(focused_Girl)
 
     show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(focused_Girl.sprite_location):
-        ease 0.5 pos (focused_Girl.sprite_location + 0.05, -0.2) zoom 2
+        ease 0.5 pos (focused_Girl.sprite_location, -0.2) zoom 2
 
     return
 
@@ -50,7 +50,7 @@ label middle_launch:
     call hide_girl(focused_Girl)
 
     show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(stage_center):
-        ease 0.5 zoom 1.5
+        ease 0.5 pos (focused_Girl.sprite_location, -0.3) zoom 1.5
 
     return
 
@@ -60,7 +60,7 @@ label pussy_launch:
     call hide_girl(focused_Girl)
 
     show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(focused_Girl.sprite_location):
-        ease 0.5 pos (focused_Girl.sprite_location + 0.05, -0.4) zoom 2
+        ease 0.5 pos (focused_Girl.sprite_location, -0.4) zoom 2
 
     return
 
@@ -69,7 +69,7 @@ label handjob_launch:
         return
 
     show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(focused_Girl.sprite_location):
-        ease 0.5 pos (focused_Girl.sprite_location + 0.05, 0.1) zoom 2
+        ease 0.5 pos (focused_Girl.sprite_location, 0.1) zoom 2
 
     if taboo:
         if len(Present) >= 2:
@@ -100,7 +100,7 @@ label titjob_launch:
         return
 
     show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(focused_Girl.sprite_location):
-        ease 0.5 pos (focused_Girl.sprite_location + 0.05, 0.1) zoom 2
+        ease 0.5 pos (focused_Girl.sprite_location, 0.1) zoom 2
 
     if taboo:
         if len(Present) >= 2:
@@ -156,7 +156,7 @@ label blowjob_launch:
         return
 
     show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(focused_Girl.sprite_location):
-        ease 0.5 pos (focused_Girl.sprite_location + 0.05, 0.1) zoom 2
+        ease 0.5 pos (focused_Girl.sprite_location, 0.1) zoom 2
 
     if taboo:
         if len(Present) >= 2:
