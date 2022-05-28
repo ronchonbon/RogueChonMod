@@ -6420,7 +6420,7 @@ label Jubes_Breasts_Launch(T=primary_action, Set=1):
 label Jubes_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(JubesX)
     $ primary_action = T
-    $ JubesX.pose = "mid" if Set else JubesX.pose
+    $ JubesX.pose = "middle" if Set else JubesX.pose
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1

@@ -30,7 +30,7 @@ label prologue:
             "Black":
                 $ Player.color = "Black"
 
-    show Xavier_Sprite at sprite_location(stage_left) with dissolve
+    show Xavier_sprite at sprite_location(stage_left) with dissolve
 
     ch_x "Welcome to the Xavier Institute for Higher Learning. This is a home for all mutants to learn and grow."
     ch_x "My name is Charles Xavier, and I have dedicated my life to helping other mutants such as yourself."
@@ -66,7 +66,7 @@ label prologue:
     ch_x "This young lady is named [RogueX.name], one of our veteran students."
     ch_x "And [RogueX.name], this young man goes by the name \"[Player.name]\"."
 
-    hide Xavier_Sprite with easeoutright
+    hide Xavier_sprite with easeoutright
 
     $ RogueX.sprite_location = stage_center
 
@@ -245,7 +245,9 @@ label tour_end:
 
                 $ RogueX.change_face("_kiss")
 
-                call Rogue_Kissing_Smooch
+                $ focused_Girl = RogueX
+
+                call smooch
 
                 "She gives you a little peck on the cheek."
 
@@ -339,7 +341,7 @@ label tour_parting:
                 if simulation:
                     return True
 
-                $ Girl = RogueX
+                $ focused_Girl = RogueX
                 $ primary_action = "kiss"
 
                 call action
@@ -402,7 +404,9 @@ label tour_parting:
 label Rogue_first_kiss:
     $ RogueX.change_face("_kiss",2)
 
-    call Rogue_Kissing_Launch
+    $ focused_Girl = RogueX
+
+    call kiss_launch
 
     "She leans in for a kiss."
     "You lean in and your lips meet [RogueX.name]'s."
@@ -425,9 +429,12 @@ label Rogue_first_kiss:
     $ RogueX.change_stat("obedience", 30, 20)
     $ RogueX.change_stat("inhibition", 30, 30)
 
-    call expression RogueX.tag + "_Pos_Reset"
+    call reset_position
 
     return
+
+
+
 
 
 

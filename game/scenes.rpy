@@ -3592,7 +3592,7 @@ label study_Explore:
             if KittyX.location != bg_current and StormX.location != bg_current:
                 "You can't seem to get it open, it would be nice to have someone open the catch from the inside."
             elif D20 >= 15 + counter:
-                $ line = "mid"
+                $ line = "middle"
             else:
                 "As you open the drawer, it makes a loud a squeak."
                 "As you look around, you notice a little light starts blinking on the desk."
@@ -3687,7 +3687,7 @@ label study_Explore:
                 "It would probably take a more thorough search."
         else:
             "There doesn't seem to be anything more of interest in here."
-    elif line == "mid":
+    elif line == "middle":
         if "all" not in keys:
             "Under a few trinkets, you find a small keyring."
             "[[Keyring acquired.]"

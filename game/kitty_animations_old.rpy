@@ -1300,7 +1300,7 @@ label Kitty_sex_Launch(Line=primary_action):
     with dissolve
     return
 
-label Kitty_sex_Reset:
+label Kitty_Sex_Reset:
     if renpy.showing("Kitty_Doggy_Animation"):
         call Kitty_Doggy_Reset
         return
@@ -4295,7 +4295,7 @@ label Kitty_Breasts_Launch(T=primary_action, Set=1):
 label Kitty_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(KittyX)
     $ primary_action = T
-    $ KittyX.pose = "mid" if Set else KittyX.pose
+    $ KittyX.pose = "middle" if Set else KittyX.pose
     show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1

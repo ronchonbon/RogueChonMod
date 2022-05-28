@@ -753,7 +753,9 @@ label try_something_else_menu(Girl, action):
             else:
                 $ Girl.change_face("_angry", 1)
 
-                call expression Girl.tag + "_Pos_Reset"
+                $ focused_Girl = Girl
+
+                call reset_position
 
                 "She scowls at you, drops your cock and pulls back."
 
@@ -784,7 +786,9 @@ label try_something_else_menu(Girl, action):
             else:
                 $ Girl.change_face("_angry", 1)
 
-                call expression Girl.tag + "_Pos_Reset"
+                $ focused_Girl = Girl
+
+                call reset_position
 
                 "She scowls at you and pulls back."
 
@@ -978,7 +982,7 @@ label fondle_menu:
 
             $ Player.focusing = 0
         "View":
-            call ViewShift(focused_Girl, "menu")
+            call shift_view(focused_Girl, "menu")
             jump action_cycle
         "Other options":
             menu:
@@ -1100,7 +1104,9 @@ label fondle_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            call expression focused_Girl.tag + "_Pos_Reset" pass(primary_action)
+            $ focused_Girl = Girl
+
+            call reset_position
 
             $ action_context = "shift"
 
@@ -1109,7 +1115,9 @@ label fondle_menu:
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            call expression focused_Girl.tag + "_Pos_Reset" pass(primary_action)
+            $ focused_Girl = Girl
+
+            call reset_position
             jump after_action
 
     jump action_menu_return
@@ -1209,7 +1217,7 @@ label handjob_menu:
 
             jump action_cycle
         "View" if primary_action in ["dildo_pussy", "dildo_ass"]:
-            call ViewShift(focused_Girl, "menu")
+            call shift_view(focused_Girl, "menu")
             jump action_cycle
         "Other options":
                 menu:
@@ -1375,7 +1383,9 @@ label handjob_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            call expression focused_Girl.tag + "_HJ_Reset" pass(primary_action)
+            $ focused_Girl = Girl
+
+            call reset_position
 
             $ action_context = "shift"
 
@@ -1384,7 +1394,9 @@ label handjob_menu:
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            call expression focused_Girl.tag + "_HJ_Reset" pass(primary_action)
+            $ focused_Girl = Girl
+
+            call reset_position
             jump after_action
 
     jump action_menu_return
@@ -1528,7 +1540,9 @@ label sex_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            call expression focused_Girl.tag + "_Sex_Reset" pass(primary_action)
+            $ focused_Girl = Girl
+
+            call reset_position
 
             $ action_context = "shift"
 
@@ -1537,7 +1551,9 @@ label sex_menu:
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            call expression focused_Girl.tag + "_Sex_Reset" pass(primary_action)
+            $ focused_Girl = Girl
+
+            call reset_position
             jump after_action
 
     jump action_menu_return
@@ -1583,8 +1599,9 @@ label what_do_you_think_youre_doing_menu(Girl, action):
                 if action_context:
                     $ renpy.pop_call()
 
-                if renpy.showing("Rogue_Doggy"):
-                    call expression Girl.tag + "_Doggy_Reset"
+                $ focused_Girl = Girl
+
+                call reset_position
 
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")
@@ -1618,7 +1635,9 @@ label what_do_you_think_youre_doing_menu(Girl, action):
                 if action_context:
                     $ renpy.pop_call()
 
-                call expression Girl.tag + "_Sex_Reset"
+                $ focused_Girl = Girl
+
+                call reset_position
 
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")
@@ -1649,7 +1668,9 @@ label what_do_you_think_youre_doing_menu(Girl, action):
                 if action_context:
                     $ renpy.pop_call()
 
-                call expression Girl.tag + "_Sex_Reset"
+                $ focused_Girl = Girl
+
+                call reset_position
 
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")

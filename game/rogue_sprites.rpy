@@ -1,10 +1,4 @@
 layeredimage Rogue_sprite:
-    # always:
-    #     "images/Rogue_sprite/Rogue_standing_back_hair_reference.png"
-    #
-    # always:
-    #     "images/Rogue_sprite/Rogue_standing_head_reference.png"
-
     if RogueX.outfit["back_outer_accessory"]:
         "images/Rogue_sprite/Rogue_standing_back_outer_accessory[RogueX.outfit[back_outer_accessory]].png"
 
@@ -54,28 +48,28 @@ layeredimage Rogue_sprite:
     else:
         "images/Rogue_sprite/Rogue_standing_hose[RogueX.outfit[hose]].png"
 
-    if not RogueX.grool:
-        Null()
-    elif RogueX.outfit["bottom"] == "_pants" and not RogueX.upskirt:
-        Null()
-    elif RogueX.outfit["underwear"] and not RogueX.underwear_pulled_down and RogueX.grool < 2:
-        Null()
-    elif RogueX.grool == 1 and RogueX.outfit["underwear"] and RogueX.underwear_pulled_down:
-        AlphaMask("grool_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask_underwear.png")
-    elif RogueX.grool == 1 and RogueX.outfit["bottom"] == "_pants":
-        AlphaMask("grool_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask_pants.png")
-    elif RogueX.grool == 1:
-        AlphaMask("grool_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask.png")
-    elif RogueX.outfit["underwear"] and RogueX.underwear_pulled_down:
-        AlphaMask("heavy_grool_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask_underwear.png")
-    elif RogueX.outfit["underwear"] and RogueX.outfit["bottom"] == "_pants":
-        AlphaMask("grool_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask_pants.png")
-    elif RogueX.outfit["bottom"] == "_pants":
-        AlphaMask("heavy_grool_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask_pants.png")
-    elif RogueX.outfit["underwear"]:
-        AlphaMask("grool_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask.png")
-    else:
-        AlphaMask("heavy_grool_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask.png")
+    # if not RogueX.grool:
+    #     Null()
+    # elif RogueX.outfit["bottom"] == "_pants" and not RogueX.upskirt:
+    #     Null()
+    # elif RogueX.outfit["underwear"] and not RogueX.underwear_pulled_down and RogueX.grool < 2:
+    #     Null()
+    # elif RogueX.grool == 1 and RogueX.outfit["underwear"] and RogueX.underwear_pulled_down:
+    #     AlphaMask("grool_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask_underwear.png")
+    # elif RogueX.grool == 1 and RogueX.outfit["bottom"] == "_pants":
+    #     AlphaMask("grool_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask_pants.png")
+    # elif RogueX.grool == 1:
+    #     AlphaMask("grool_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask.png")
+    # elif RogueX.outfit["underwear"] and RogueX.underwear_pulled_down:
+    #     AlphaMask("heavy_grool_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask_underwear.png")
+    # elif RogueX.outfit["underwear"] and RogueX.outfit["bottom"] == "_pants":
+    #     AlphaMask("grool_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask_pants.png")
+    # elif RogueX.outfit["bottom"] == "_pants":
+    #     AlphaMask("heavy_grool_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask_pants.png")
+    # elif RogueX.outfit["underwear"]:
+    #     AlphaMask("grool_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask.png")
+    # else:
+    #     AlphaMask("heavy_grool_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask.png")
 
     if not RogueX.grool:
         Null()
@@ -86,18 +80,18 @@ layeredimage Rogue_sprite:
     else:
         "images/Rogue_sprite/Rogue_standing_grool[RogueX.grool].png"
 
-    if not RogueX.spunk["pussy"] and not RogueX.spunk["anus"]:
-        Null()
-    elif RogueX.outfit["bottom"] == "_pants" and not RogueX.upskirt:
-        Null()
-    elif RogueX.outfit["underwear"] and RogueX.underwear_pulled_down:
-        AlphaMask("heavy_spunk_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask_underwear.png")
-    elif RogueX.outfit["underwear"] and RogueX.outfit["bottom"] == "_pants":
-        AlphaMask("spunk_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask_pants.png")
-    elif RogueX.outfit["bottom"] == "_pants":
-        AlphaMask("heavy_spunk_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask_pants.png")
-    else:
-        AlphaMask("heavy_spunk_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask.png")
+    # if not RogueX.spunk["pussy"] and not RogueX.spunk["anus"]:
+    #     Null()
+    # elif RogueX.outfit["bottom"] == "_pants" and not RogueX.upskirt:
+    #     Null()
+    # elif RogueX.outfit["underwear"] and RogueX.underwear_pulled_down:
+    #     AlphaMask("heavy_spunk_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask_underwear.png")
+    # elif RogueX.outfit["underwear"] and RogueX.outfit["bottom"] == "_pants":
+    #     AlphaMask("spunk_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask_pants.png")
+    # elif RogueX.outfit["bottom"] == "_pants":
+    #     AlphaMask("heavy_spunk_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask_pants.png")
+    # else:
+    #     AlphaMask("heavy_spunk_dripping", "images/Rogue_sprite/Rogue_standing_grool_mask.png")
 
     if not RogueX.outfit["bottom"]:
         Null()
@@ -163,10 +157,10 @@ layeredimage Rogue_sprite:
     if RogueX.outfit["held_item"] and RogueX.arm_pose == 2:
         "images/Rogue_sprite/Rogue_standing_held[RogueX.outfit[held_item]].png"
 
-    always:
-        "Rogue_standing_fondling"
+    # always:
+    #     "Rogue_standing_fondling"
 
-    anchor (0.5, -0.185) zoom 0.95
+    anchor (0.5, 0.0) offset (100, 180) zoom 0.95
 
 image Rogue_back_hair:
     contains:
@@ -191,7 +185,7 @@ layeredimage Rogue_head:
         "images/Rogue_blowjob/Rogue_blowjob_mouth_sucking.png"
     elif renpy.showing("Rogue_blowjob_animation") and action_speed:
         Null()
-    elif RogueX.mouth not == "_smirk":
+    elif RogueX.mouth != "_smirk":
         "images/Rogue_blowjob/Rogue_blowjob_mouth[RogueX.mouth].png"
     else:
         "images/Rogue_blowjob/Rogue_blowjob_mouth_smile.png"
@@ -207,10 +201,8 @@ layeredimage Rogue_head:
     else:
         "images/Rogue_blowjob/Rogue_blowjob_spunk[RogueX.mouth].png"
 
-    if renpy.showing("Rogue_blowjob_animation") and action_speed == 2 and RogueX.spunk["mouth"]:
-        "Rogue_blowjob_mouth_animation[action_speed]_spunk"
-    elif renpy.showing("Rogue_blowjob_animation") and action_speed == 2:
-        "Rogue_blowjob_mouth_animation[action_speed]"
+    if renpy.showing("Rogue_blowjob_animation") and action_speed == 2:
+        "Rogue_blowjob_mouth_animations"
 
     if RogueX.eyes not in ["_closed", "_squint"]:
         "Rogue_blinking"
@@ -238,7 +230,6 @@ layeredimage Rogue_head:
 
     anchor (0.5, 0.5)
 
-
 image Rogue_handjob_under:
     "images/Rogue_handjob/Rogue_handjob_hand_under.png"
 
@@ -249,9 +240,33 @@ image Rogue_handjob_over:
 
     anchor (0.5, 0.5)
 
+layeredimage Rogue_titjob_under:
+    always:
+        "Rogue_back_hair" pos (0.545, -0.02) zoom 0.9
+
+    always:
+        "images/Rogue_blowjob/Rogue_titjob_body.png"
+
+    if RogueX.spunk["breasts"]:
+        "images/Rogue_blowjob/Rogue_titjob_spunk_breasts_under.png"
+
+    always:
+        "Rogue_head" pos (0.28, -0.09) zoom 0.9
+
+    anchor (0.5, 0.5)
+
+layeredimage Rogue_titjob_over:
+    always:
+        "images/Rogue_blowjob/Rogue_titjob_chest[RogueX.outfit[front_inner_accessory]].png"
+
+    if RogueX.spunk["breasts"]:
+        "images/Rogue_blowjob/Rogue_titjob_spunk_breasts.png"
+
+    anchor (0.5, 0.5)
+
 layeredimage Rogue_sex_body:
     always:
-        "Rogue_sex_back_hair" pos (0.48, 0.1)
+        "Rogue_back_hair" pos (0.397, 0.07) rotate -10 zoom 0.37
 
     always:
         "images/Rogue_sex/Rogue_sex_body[RogueX.outfit[front_inner_accessory]].png"
@@ -288,23 +303,15 @@ layeredimage Rogue_sex_body:
         "images/Kitty_sex/Kitty_sex_spunk_breasts.png"
 
     if "suck_breasts" in [primary_action, offhand_action]:
-        "Rogue_sex_Lick_Breasts"
+        "licking" offset (450,270) zoom 0.6
 
     if "fondle_breasts" in [primary_action, offhand_action]:
-        "Rogue_sex_Fondle_Breasts"
+        "GropeLeftBreast" offset (320, -130) zoom 1.1
 
     always:
-        "Rogue_sex_head" pos (0.48, 0.1)
+        "Rogue_head" pos (0.287, 0.075) rotate -10 zoom 0.37
 
-    zoom 0.9
-
-image Rogue_sex_back_hair:
-    "Rogue_back_hair"
-    anchor (0.5, 0.5) rotate -10 zoom 1.28
-
-image Rogue_sex_head:
-    "Rogue_head"
-    anchor (0.5, 0.5) rotate -10 zoom 1.28
+    anchor (0.5, 0.5)
 
 layeredimage Rogue_sex_legs:
     always:
@@ -313,11 +320,92 @@ layeredimage Rogue_sex_legs:
     if RogueX.wet:
         "images/Rogue_sex/Rogue_sex_water_legs.png"
 
-    always:
-        "Rogue_sex_anus"
+    if Player.sprite and Player.cock_position == "anal":
+        "Rogue_sex_anus_animation[action_speed]"
+    elif "finger_ass" in [primary_action, offhand_action]:
+        "Rogue_sex_anus_animation0"
+    elif primary_action == "dildo_anal":
+        "images/Kitty_sex/Kitty_sex_anus_open.png"
+    elif RogueX.used_to_anal:
+        "images/Rogue_sex/Rogue_sex_anus_loose.png"
+    else:
+        "images/Rogue_sex/Rogue_sex_anus_tight.png"
 
-    always:
-        "Rogue_sex_pussy"
+    if not RogueX.spunk["anus"]:
+        Null()
+    elif Player.sprite and Player.cock_position != "anal" and action_speed > 1:
+        "images/Kitty_sex/Kitty_sex_spunk_anus_under.png"
+    elif Player.sprite and Player.cock_position != "anal" and action_speed == 1:
+        "Rogue_sex_spunk_anus_under"
+    else:
+        "images/Kitty_sex/Kitty_sex_spunk_anus_closed.png"
+
+    if Player.sprite and Player.cock_position == "anal":
+        AlphaMask("Zero_sex_cock_anal_animations", "images/Kitty_sex/Kitty_sex_anus_mask.png")
+    elif "finger_ass" in [primary_action, offhand_action]:
+        AlphaMask("Zero_sex_finger_ass_animations", "images/Kitty_sex/Kitty_sex_anus_mask.png")
+    elif primary_action == "dildo_anal":
+        AlphaMask("dildo_anal_animation", "images/Kitty_sex/Kitty_sex_anus_mask.png")
+
+    if Player.sprite and Player.cock_position == "in" and action_speed >= 2:
+        "images/Rogue_sex/Rogue_sex_pussy_fucking.png"
+    elif Player.sprite and Player.cock_position == "in" and action_speed:
+        "images/Rogue_sex/Rogue_sex_pussy_open.png"
+    elif Player.sprite and Player.cock_position == "in":
+        "images/Rogue_sex/Rogue_sex_pussy_closed.png"
+    elif primary_action == "dildo_pussy":
+        "images/Rogue_sex/Rogue_sex_pussy_fucking.png"
+    elif primary_action in ["fondle_pussy", "eat_pussy"] or offhand_action == "fondle_pussy":
+        "images/Rogue_sex/Rogue_sex_pussy_open.png"
+    else:
+        "images/Rogue_sex/Rogue_sex_pussy_closed.png"
+
+    if not RogueX.grool:
+        Null()
+    elif Player.sprite and Player.cock_position == "in" and action_speed >= 2:
+        "images/Kitty_sex/Kitty_sex_pussy_grool_fucking.png"
+    else:
+        "images/Kitty_sex/Kitty_sex_pussy_grool.png"
+
+    if not RogueX.outfit["front_inner_accessory"]:
+        Null()
+    elif Player.sprite or Player.cock_position != "sex" or action_speed <= 1:
+        "images/Rogue_sex/Rogue_sex_piercings[RogueX.outfit[front_inner_accessory]].png"
+    else:
+        "images/Rogue_sex/Rogue_sex_piercings[RogueX.outfit[front_inner_accessory]]_fucking.png"
+
+    if not RogueX.pubes:
+        Null()
+    elif Player.sprite and Player.cock_position == "in" and action_speed >= 2:
+        "images/Rogue_sex/Rogue_sex_pubes_fucking.png"
+    elif Player.sprite and Player.cock_position == "in" and action_speed:
+        "images/Rogue_sex/Rogue_sex_pubes_open.png"
+    elif Player.sprite and Player.cock_position == "in":
+        "images/Rogue_sex/Rogue_sex_pubes_closed.png"
+    elif primary_action == "dildo_pussy":
+        "images/Rogue_sex/Rogue_sex_pubes_fucking.png"
+    elif primary_action in ["fondle_pussy", "eat_pussy"] or offhand_action == "fondle_pussy":
+        "images/Rogue_sex/Rogue_sex_pubes_open.png"
+    else:
+        "images/Rogue_sex/Rogue_sex_pubes_closed.png"
+
+    if RogueX.spunk["pussy"]:
+        "images/Kitty_sex/Kitty_sex_spunk_pussy_under.png"
+
+    if Player.sprite and Player.cock_position == "in":
+        AlphaMask("Zero_sex_cock_animations", "images/Rogue_sex/Rogue_sex_pussy_mask.png")
+    elif "fondle_pussy" in [primary_action, offhand_action]:
+        # AlphaMask("Zero_sex_finger_pussy_animations", "images/Rogue_sex/Rogue_sex_pussy_mask.png")
+        "Zero_sex_finger_pussy_animations"
+    elif primary_action == "dildo_pussy":
+        AlphaMask("dildo_pussy_animation", "images/Rogue_sex/Rogue_sex_pussy_mask.png")
+
+    if not RogueX.spunk["pussy"] or not Player.sprite or Player.cock_position != "sex" or not action_speed:
+        Null()
+    elif action_speed <= 1:
+        "images/Kitty_sex/Kitty_sex_spunk_pussy_over.png" anchor (0.5, 0.5) pos (0.5, 0.5) xzoom 0.8
+    else:
+        "images/Kitty_sex/Kitty_sex_spunk_pussy_over.png"
 
     if not RogueX.outfit["underwear"] or RogueX.underwear_pulled_down:
         Null()
@@ -350,25 +438,23 @@ layeredimage Rogue_sex_legs:
     if RogueX.spunk["belly"]:
         "images/Kitty_sex/Kitty_sex_spunk_belly_legs.png"
 
-    if not Player.sprite or Player.cock_position != "out":
-        Null()
-    else:
-        "Rogue_Hotdog_Zero_animation[action_speed]"
+    if Player.sprite and Player.cock_position == "out":
+        "Zero_sex_cock_hotdog_animations"
 
     if primary_action == "eat_pussy":
-        "Rogue_sex_Lick_Pussy"
+        "licking" offset (530, 510) zoom 0.7
     elif primary_action == "eat_ass":
-        "Rogue_sex_Lick_Ass"
+        "licking" offset (535, 590) zoom 0.7
 
-    if not Player.sprite or Player.cock_position != "footjob":
-        Null()
-    else:
-        "Rogue_Footcock_Zero_animation[animation_speed]"
+    if Player.sprite and Player.cock_position == "footjob":
+        "Zero_sex_cock_footjob_animations"
 
     if not action_speed or Player.cock_position == "footjob" or show_feet:
-        "Rogue_sex_feet"
+        "Rogue_sex_feet" pos (0.291, 0.391)
     else:
-        AlphaMask("Rogue_sex_feet","images/Rogue_sex/Rogue_sex_feet_mask.png")
+        AlphaMask("Rogue_sex_feet", "images/Rogue_sex/Rogue_sex_feet_mask.png")
+
+    anchor (0.5, 0.5)
 
 layeredimage Rogue_sex_feet:
     always:
@@ -396,101 +482,7 @@ layeredimage Rogue_sex_feet:
     elif RogueX.outfit["bottom"] == "pants":
         "images/Rogue_sex/Rogue_sex_bottom[RogueX.outfit[bottom]]_feet.png"
 
-layeredimage Rogue_sex_pussy:
-    if Player.sprite and Player.cock_position == "sex" and action_speed >= 2:
-        "images/Rogue_sex/Rogue_sex_pussy_fucking.png"
-    elif Player.sprite and Player.cock_position == "sex" and action_speed:
-        "images/Rogue_sex/Rogue_sex_pussy_open.png"
-    elif Player.sprite and Player.cock_position == "sex":
-        "images/Rogue_sex/Rogue_sex_pussy_closed.png"
-    elif primary_action == "dildo_pussy":
-        "images/Rogue_sex/Rogue_sex_pussy_fucking.png"
-    elif primary_action in ["fondle_pussy", "eat_pussy"] or offhand_action == "fondle_pussy":
-        "images/Rogue_sex/Rogue_sex_pussy_open.png"
-    else:
-        "images/Rogue_sex/Rogue_sex_pussy_closed.png"
-
-    if not RogueX.grool:
-        Null()
-    elif Player.sprite and Player.cock_position == "sex" and action_speed >= 2:
-        "images/Kitty_sex/Kitty_sex_pussy_grool_fucking.png"
-    else:
-        "images/Kitty_sex/Kitty_sex_pussy_grool.png"
-
-    if not RogueX.outfit["front_inner_accessory"]:
-        Null()
-    elif Player.sprite or Player.cock_position != "sex" or action_speed <= 1:
-        "images/Rogue_sex/Rogue_sex_piercings[RogueX.outfit[front_inner_accessory]].png"
-    else:
-        "images/Rogue_sex/Rogue_sex_piercings[RogueX.outfit[front_inner_accessory]]_fucking.png"
-
-    if not RogueX.pubes:
-        Null()
-    elif Player.sprite and Player.cock_position == "sex" and action_speed >= 2:
-        "images/Rogue_sex/Rogue_sex_pubes_fucking.png"
-    elif Player.sprite and Player.cock_position == "sex" and action_speed:
-        "images/Rogue_sex/Rogue_sex_pubes_open.png"
-    elif Player.sprite and Player.cock_position == "sex":
-        "images/Rogue_sex/Rogue_sex_pubes_closed.png"
-    elif primary_action == "dildo_pussy":
-        "images/Rogue_sex/Rogue_sex_pubes_fucking.png"
-    elif primary_action in ["fondle_pussy", "eat_pussy"] or offhand_action == "fondle_pussy":
-        "images/Rogue_sex/Rogue_sex_pubes_open.png"
-    else:
-        "images/Rogue_sex/Rogue_sex_pubes_closed.png"
-
-    if RogueX.spunk["pussy"]:
-        "images/Kitty_sex/Kitty_sex_spunk_pussy_under.png"
-
-    if Player.sprite and Player.cock_position == "sex" and action_speed >= 2:
-        AlphaMask("Rogue_sex_Zero_animation[action_speed]", "Rogue_Pussy_Fucking_Mask")
-    elif Player.sprite and Player.cock_position == "sex":
-        AlphaMask("Rogue_sex_Zero_animation[action_speed]", "Rogue_Pussy_Open_Mask")
-    elif primary_action == "dildo_pussy":
-        AlphaMask("Rogue_sex_Dildo_animation2", "Rogue_Pussy_Fucking_Mask")
-    elif primary_action == "fondle_pussy" or offhand_action == "fondle_pussy":
-        AlphaMask("Rogue_sex_FingerP_animation1", "Rogue_Pussy_Open_Mask")
-
-    if not RogueX.spunk["pussy"] or not Player.sprite or Player.cock_position != "sex" or not action_speed:
-        Null()
-    elif action_speed <= 1:
-        "Rogue_sex_pussy_Spunk_Heading"
-    else:
-        "images/Kitty_sex/Kitty_sex_spunk_pussy_over.png"
-
-layeredimage Rogue_sex_anus:
-    if Player.sprite and Player.cock_position == "anal" and action_speed >= 2:
-        "images/Kitty_sex/Kitty_sex_anus_open.png"
-    elif Player.sprite and Player.cock_position == "anal" and action_speed:
-        "Rogue_sex_Anal_Heading"
-    elif Player.sprite and Player.cock_position == "anal":
-        "Rogue_sex_Anal_Tip"
-    elif "finger_ass" in [primary_action, offhand_action]:
-        "Rogue_sex_Anal_Tip"
-    elif primary_action == "dildo_anal":
-        "images/Kitty_sex/Kitty_sex_anus_open.png"
-    elif RogueX.used_to_anal:
-        "images/Rogue_sex/Rogue_sex_anus_loose.png"
-    else:
-        "images/Rogue_sex/Rogue_sex_anus_tight.png"
-
-    if not RogueX.spunk["anus"]:
-        Null()
-    elif Player.sprite and Player.cock_position != "anal" and action_speed > 1:
-        "images/Kitty_sex/Kitty_sex_spunk_anus_under.png"
-    elif Player.sprite and Player.cock_position != "anal" and action_speed == 1:
-        "Rogue_Anal_Spunk_Heading_Under"
-    else:
-        "images/Kitty_sex/Kitty_sex_spunk_anus_closed.png"
-
-    if "finger_ass" in [primary_action, offhand_action]:
-        AlphaMask("Rogue_sex_FingerA_animation1", "Rogue_Anal_Fucking_Mask")
-    elif primary_action == "dildo_anal":
-        AlphaMask("Rogue_Anal_Dildo_animation2", "Rogue_Anal_Fucking_Mask")
-    elif not Player.sprite or Player.cock_position != "anal":
-        Null()
-    else:
-        AlphaMask("Rogue_Anal_Zero_animation[action_speed]", "Rogue_Anal_Fucking_Mask")
+    anchor (0.5, 0.5)
 
 layeredimage Rogue_doggy_body:
     if not RogueX.wet and RogueX.outfit["hair"] == "_evo":
@@ -517,7 +509,7 @@ layeredimage Rogue_doggy_body:
     always:
         "images/Rogue_doggy/Rogue_doggy_brows[RogueX.brows].png"
 
-    if RogueX.eyes != "_closed":
+    if RogueX.eyes not in ["_squint", "_closed"]:
         "Rogue_doggy_blinking"
     else:
         "images/Rogue_doggy/Rogue_doggy_eyes_closed.png"
@@ -548,13 +540,9 @@ layeredimage Rogue_doggy_body:
         "images/Rogue_doggy/Rogue_doggy_spunk_face.png"
 
     if primary_action == "fondle_breasts" or offhand_action == "fondle_breasts":
-        "Rogue_Doggy_GropeBreast"
+        "Zero_doggy_grope_breast_animation"
 
-layeredimage Rogue_doggy_eyes:
-    if RogueX.eyes != "_squint":
-        "images/Rogue_doggy/Rogue_doggy_eyes[RogueX.eyes].png"
-    else:
-        "images/Rogue_doggy/Rogue_doggy_eyes_sexy.png"
+    anchor (0.5, 0.5)
 
 layeredimage Rogue_doggy_ass:
     if not RogueX.underwear_pulled_down or (RogueX.outfit["bottom"] == "_pants" and not RogueX.upskirt):
@@ -591,42 +579,63 @@ layeredimage Rogue_doggy_ass:
     else:
         "images/Rogue_doggy/Rogue_doggy_pubes.png"
 
-    if Player.sprite and Player.cock_position == "sex" and action_speed > 2:
-        "Rogue_Pussy_Fucking3"
-    elif (Player.sprite and Player.cock_position == "sex" and action_speed > 1) or primary_action == "dildo_pussy":
-        "Rogue_Pussy_Fucking2"
-    elif Player.sprite and Player.cock_position == "sex" and action_speed:
-        "Rogue_doggy_pussy_heading"
-    elif Player.sprite and Player.cock_position == "sex":
-        "Rogue_doggy_pussy_animation0"
-    elif primary_action == "eat_pussy":
+    if primary_action == "eat_pussy":
         "images/Rogue_doggy/Rogue_doggy_pussy_open.png"
-    elif primary_action == "fondle_pussy" or offhand_action == "fondle_pussy":
-        "images/Rogue_doggy/Rogue_doggy_pussy_closed.png"
     else:
         "images/Rogue_doggy/Rogue_doggy_pussy_closed.png"
+
+    if Player.sprite and Player.cock_position == "in":
+        "images/Rogue_doggy/Rogue_doggy_pussy_base.png"
+    elif "finger_pussy" in [primary_action, offhand_action]:
+        "images/Rogue_doggy/Rogue_doggy_pussy_base.png"
+
+    if Player.sprite and Player.cock_position == "in":
+        "Rogue_doggy_pussy_hole_animations"
+    elif "finger_pussy" in [primary_action, offhand_action]:
+        "Rogue_doggy_pussy_fingering"
+
+    if Player.sprite and Player.cock_position == "in":
+        AlphaMask("Zero_doggy_cock_animations", "Rogue_doggy_pussy_mask_animations")
+    elif "finger_pussy" in [primary_action, offhand_action]:
+        AlphaMask("Zero_doggy_finger_pussy_animations", "Rogue_doggy_pussy_mask_animation1")
+    elif primary_action == "dildo_pussy":
+         AlphaMask("doggy_dildo_pussy_animation", "images/Rogue_doggy/Rogue_doggy_sex_mask.png")
+
+    if Player.sprite and Player.cock_position == "in" and action_speed < 2:
+        AlphaMask("Rogue_doggy_pussy_outer_animations", "Rogue_doggy_pussy_hole_mask_animations")
+    elif "finger_pussy" in [primary_action, offhand_action]:
+        AlphaMask("Rogue_doggy_pussy_outer_animation1", "Rogue_doggy_pussy_hole_mask_animation1")
 
     if RogueX.outfit["front_inner_accessory"]:
         "images/Rogue_doggy/Rogue_doggy_piercings_pussy[RogueX.outfit[front_inner_accessory]].png"
 
-    if Player.sprite and Player.cock_position == "anal" and action_speed > 2:
-        "Rogue_Anal_Fucking2"
-    elif (Player.sprite and Player.cock_position == "anal" and action_speed > 1) or primary_action == "dildo_ass":
-        "Rogue_Anal_Fucking"
-    elif Player.sprite and Player.cock_position == "anal" and action_speed:
-        "Rogue_Anal_Heading"
-    elif Player.sprite and Player.cock_position == "anal":
-        "Rogue_Anal"
-    elif RogueX.outfit["underwear"] and not RogueX.underwear_pulled_down:
-        "images/Rogue_doggy/Rogue_doggy_anus_loose.png"
-    elif primary_action == "finger_ass" or offhand_action == "finger_ass":
-        "Rogue_Anal_Fingering"
-    elif primary_action == "dildo_anal":
-        "Rogue_Anal_Fucking"
-    elif RogueX.used_to_anal:
+    if RogueX.used_to_anal:
         "images/Rogue_doggy/Rogue_doggy_anus_loose.png"
     else:
         "images/Rogue_doggy/Rogue_doggy_anus_tight.png"
+
+    if Player.sprite and Player.cock_position == "anal" and action_speed:
+        "images/Rogue_doggy/Rogue_doggy_anus_full_base.png"
+    elif "finger_ass" in [primary_action, offhand_action]:
+        "images/Rogue_doggy/Rogue_doggy_anus_full_base.png"
+
+    if Player.sprite and Player.cock_position == "anal" and action_speed:
+        "Rogue_doggy_anus_anal_animations"
+    elif "finger_ass" in [primary_action, offhand_action]:
+        "Rogue_doggy_anus_fingering"
+
+    if Player.sprite and Player.cock_position == "anal" and action_speed > 1:
+        "images/Rogue_doggy/Rogue_doggy_anus_full_cheeks.png"
+
+    if RogueX.outfit["hose"] and not RogueX.underwear_pulled_down:
+        "images/Rogue_doggy/Rogue_doggy_hose[RogueX.outfit[hose]].png"
+
+    if Player.sprite and Player.cock_position == "anal":
+        AlphaMask("Zero_doggy_cock_anal_animations", "Rogue_doggy_anus_mask_animations")
+    elif "finger_ass" in [primary_action, offhand_action]:
+        AlphaMask("Zero_doggy_finger_anal_animations", "Rogue_doggy_anus_fingering_mask")
+    elif primary_action == "dildo_anal":
+        AlphaMask("doggy_dildo_anal_animation", "images/Rogue_doggy/Rogue_doggy_anus_mask.png")
 
     if not RogueX.spunk["anus"]:
         Null()
@@ -680,9 +689,9 @@ layeredimage Rogue_doggy_ass:
         "images/Rogue_doggy/Rogue_doggy_spunk_ass.png"
 
     if primary_action == "eat_pussy":
-        "doggy_licking_pussy"
+        "licking" offset (195, 540) zoom 0.5
     elif primary_action == "eat_ass":
-        "doggy_licking_ass"
+        "licking" offset (195, 500) zoom 0.5
 
     if not Player.sprite or Player.cock_position != "out":
         Null()
@@ -691,31 +700,25 @@ layeredimage Rogue_doggy_ass:
     else:
         "images/Rogue_doggy/Rogue_doggy_hotdog_back.png"
 
-    if not Player.sprite or Player.cock_position != "out":
-        Null()
-    elif RogueX.outfit["bottom"] == "_skirt" and RogueX.upskirt and action_speed:
-        AlphaMask("Zero_hotdog_moving", "images/Rogue_doggy/Rogue_doggy_hotdog_mask_up.png")
-    elif RogueX.outfit["bottom"] == "_skirt" and RogueX.upskirt:
-        AlphaMask("Zero_hotdog_static", "images/Rogue_doggy/Rogue_doggy_hotdog_mask_up.png")
-    elif action_speed:
-        AlphaMask("Zero_hotdog_moving", "images/Rogue_doggy/Rogue_doggy_hotdog_mask.png")
-    else:
-        AlphaMask("Zero_hotdog_static", "images/Rogue_doggy/Rogue_doggy_hotdog_mask.png")
+    if Player.sprite and Player.cock_position == "out":
+        AlphaMask("Zero_doggy_cock_hotdog_animations", "images/Rogue_doggy/Rogue_doggy_hotdog_mask_up.png")
+
+    anchor (0.5, 0.5)
 
 layeredimage Rogue_doggy_shins:
     always:
         "images/Rogue_doggy/Rogue_doggy_shins.png"
 
     if RogueX.outfit["bottom"] == "_pants":
-        "images/Rogue_doggy/Rogue_doggy[RogueX.outfit[bottom]]_feet.png"
+        "images/Rogue_doggy/Rogue_doggy_bottom[RogueX.outfit[bottom]]_feet.png"
 
     always:
         "images/Rogue_doggy/Rogue_doggy_feet.png"
 
-    if not RogueX.outfit["hose"]:
-        Null()
-    else:
-        "images/Rogue_doggy/Rogue_doggy[RogueX.outfit[hose]]_feet.png"
+    if RogueX.outfit["hose"]:
+        "images/Rogue_doggy/Rogue_doggy_hose[RogueX.outfit[hose]]_feet.png"
+
+    anchor (0.5, 0.5)
 
 image Rogue_doggy_feet:
     contains:

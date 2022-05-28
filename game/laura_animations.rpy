@@ -6430,7 +6430,7 @@ label Laura_Breasts_Launch(T=primary_action, Set=1):
 label Laura_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(LauraX)
     $ primary_action = T
-    $ LauraX.pose = "mid" if Set else LauraX.pose
+    $ LauraX.pose = "middle" if Set else LauraX.pose
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1

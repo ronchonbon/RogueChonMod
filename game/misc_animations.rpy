@@ -65,7 +65,7 @@ screen stat_holder_10(value, Color, XPOS):
     use stat_graphic(value, Color, 0.9, XPOS-30)
     timer 1.5 action Hide("stat_holder_10")
 
-layeredimage Xavier_Sprite:
+layeredimage Xavier_sprite:
     always:
         "images/NPC/Xavier_body.png"
 
@@ -81,7 +81,7 @@ layeredimage Xavier_Sprite:
     if Xavier_psychic:
         "images/NPC/Xavier_psychic.png"
 
-    anchor (0.5, -0.3) zoom 0.78
+    anchor (0.5, 0.0) offset (0, 355) zoom 0.7
 
 layeredimage Xavier_eyes:
     always:

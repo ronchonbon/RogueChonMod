@@ -222,7 +222,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
         else:
             $ Count += 1
             call Strip_Study_Wrong
-            if between_event_count == 0 and len(Party) >= 2 and not Party[1].clothingCheck:
+            if between_event_count == 0 and len(Party) >= 2 and not Party[1].check_clothing:
 
                 menu:
                     "Well, [Party[1].name], you and I could still have some fun. . .":
@@ -231,7 +231,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
                     "Bummer":
                         pass
 
-        if len(Party) >= 2 and counter != 3 and Party[1].clothingCheck:
+        if len(Party) >= 2 and counter != 3 and Party[1].check_clothing:
 
             $ Party.reverse()
             call shift_focus (Party[0])
@@ -427,7 +427,7 @@ label Strip_Study_Right:
         menu:
             "Well I could think of something else you could do. . .":
                 pass
-            "It looks like [Party[1].name] has some questions for me. . ." if Party[1].clothingCheck:
+            "It looks like [Party[1].name] has some questions for me. . ." if Party[1].check_clothing:
 
                 return
     $ between_event_count = 0

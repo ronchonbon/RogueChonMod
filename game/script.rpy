@@ -115,7 +115,7 @@ init -1:
     default Xavier_mouth = "_smile"
     default Xavier_psychic = False
     default Xavier_emotion = "_happy"
-    default Xavier_Sprite_location = stage_center
+    default Xavier_sprite_location = stage_center
 
     default Gwen_name = "????"
 
@@ -173,18 +173,21 @@ label start:
     show screen status_screen
     show screen inventory_button
 
-    $ bg_current = "bg_emma"
-    $ time_index = 2
-    $ current_time = "evening"
-
-    scene background onlayer backdrop
-    scene
-
-    $ action_speed = 1
-    $ Player.sprite = True
-    $ Player.cock_position = "in"
-    $ primary_action = "sex"
-
+    # $ bg_current = "bg_emma"
+    # $ time_index = 2
+    # $ current_time = "evening"
+    #
+    # scene background onlayer backdrop
+    # scene
+    #
+    #
+    # $ action_speed = 0
+    # $ Player.sprite = True
+    # $ Player.cock_position = "anal"
+    # $ primary_action = "anal"
+    # $ offhand_action = None
+    # $ show_feet = False
+    #
     # $ JeanX.change_outfit("bondage_outfit")
     # $ JeanX.change_face("_sexy")
     # $ JeanX.bound = True
@@ -197,20 +200,18 @@ label start:
     # $ EmmaX.change_outfit("nude")
     # show Emma_SexSprite at sprite_location(stage_left)
     # show Emma_Doggy_Animation at sprite_location(0.4)
-    $ RogueX.change_face("_sexy")
-    $ RogueX.change_outfit("nude")
-    # show Rogue_head at sprite_location(stage_center)
+    # $ RogueX.change_face("_sexy")
+    # $ RogueX.change_outfit("nude")
     # show Rogue_sprite at sprite_location(stage_center)
     # show Rogue_sex_animation at sprite_location(stage_center)
-
+    #
     # show Rogue_blowjob_animation at sprite_location(stage_center)
     #
-    show Rogue_titjob_animation at sprite_location(stage_center)
+    # show Rogue_titjob_animation at sprite_location(stage_center)
     #
     # show Rogue_doggy_animation at sprite_location(stage_center)
     #
     # show Rogue_handjob_animation at sprite_location(stage_center)
-    # show Rogue_doggy_animation at sprite_location(0.85)
     # $ LauraX.change_face("_sexy")
     # $ LauraX.change_outfit("nude")
     # show Laura_SexSprite at sprite_location(0.6)
@@ -225,8 +226,8 @@ label start:
     # show Storm_Doggy_Animation at sprite_location(0.8)
     # $ JubesX.change_face("_sexy")
     # show Jubes_SexSprite at sprite_location(0.94)
-
-    ""
+    #
+    # ""
 
     jump prologue
 

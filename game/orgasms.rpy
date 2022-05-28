@@ -1,5 +1,3 @@
-
-
 label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
     if "phonesex" in Player.recent_history:
         $ Player.semen -= 1
@@ -247,8 +245,6 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
             $ Player.focus = 95
             return
 
-
-
 label Manic_Suck:
     $ Girl.eyes = "_manic"
     $ action_speed = 0
@@ -273,7 +269,6 @@ label Manic_Suck:
     $ Girl.change_stat("obedience", 200, -5,Alt=[[JeanX],800,5])
     $ Girl.change_stat("inhibition", 200, 10)
     jump Girl_Swallowed
-
 
 label Girl_Warn_Her:
     "You let her know that you're going to come."
@@ -434,10 +429,6 @@ label Girl_Warn_Her:
         "She smiles and starts rubbing against you a bit faster."
         jump Girl_Cum_Outside
     jump Girl_Facial
-
-
-
-
 
 label Girl_In_mouth:
     if primary_action == "anal":
@@ -990,10 +981,6 @@ label Girl_In_mouth:
     $ Girl.action_counter["blowjob"] += 1
     jump Girl_Swallowed
 
-
-
-
-
 label Girl_Creampie_P:
     if primary_action == "sex" and action_context == "auto":
         $ Player.cock_position = "sex"
@@ -1095,7 +1082,6 @@ label Girl_Creampie_P:
         elif Girl == JubesX:
             ch_v "It could be nice, but no thanks. . ."
     jump Girl_Cum_Outside
-
 
 label Girl_Creampie_A:
 
@@ -1463,87 +1449,6 @@ label Girl_Cum_Outside:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 label Girl_Handy_Finish:
     if renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
         call expression Girl.tag+"_Doggy_Reset"
@@ -1746,9 +1651,9 @@ label Girl_CleanCock(Girl=0):
     $ Player.spunk = 0
     $ Girl.change_face("_sexy")
     if primary_action in ("fondle_breast","suck breast"):
-        call ViewShift (Girl, "breasts")
+        call shift_view (Girl, "breasts")
     elif primary_action in ("fondle_pussy","eat_pussy","fondle_ass","finger_ass","eat_ass","fondle_thighs"):
-        call ViewShift (Girl, "pussy")
+        call shift_view (Girl, "pussy")
     return
 
 

@@ -5113,7 +5113,7 @@ label Storm_Breasts_Launch(T=primary_action, Set=1):
 label Storm_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(StormX)
     $ primary_action = T
-    $ StormX.pose = "mid" if Set else StormX.pose
+    $ StormX.pose = "middle" if Set else StormX.pose
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1

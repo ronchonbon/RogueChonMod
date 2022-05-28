@@ -307,7 +307,7 @@ label Massage_Cycle:
         call shift_focus (Girl)
         $ Girl.lust_face()
 
-        call ViewShift (Girl, Girl.pose, 0)
+        call shift_view (Girl, Girl.pose, 0)
 
 
 
@@ -419,7 +419,7 @@ label Massage_Cycle:
             "View":
 
 
-                call ViewShift (Girl, "menu")
+                call shift_view (Girl, "menu")
                 jump Massage_Cycle
             "Stop":
 
@@ -444,7 +444,7 @@ label Massage_Cycle:
         elif Current in ("hips","ass","pussy","thighs"):
             $ Girl.pose = "pussy"
 
-        call ViewShift (Girl, Girl.pose, 0)
+        call shift_view (Girl, Girl.pose, 0)
 
         if Current == "neck":
             if Past in ("shoulders","back"):

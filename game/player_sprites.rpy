@@ -35,6 +35,8 @@ layeredimage Zero_doggy_cock_out:
     if Player.cock_wet:
         "images/Player/Zero_doggy_grool_cock.png"
 
+    anchor (0.5, 0.5)
+
 layeredimage Zero_doggy_cock_in:
     always:
         "images/Player/Zero_doggy_cock_[Player.color]_in.png"
@@ -44,3 +46,5 @@ layeredimage Zero_doggy_cock_in:
 
     if Player.spunk:
         "images/Player/Zero_doggy_spunk_cock_in.png"
+
+    anchor (0.5, 0.5)

@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/rogue_animations.rpy", line 370: expected 'comma or end of line' not found.
-    "images/Rogue_blowjob/Rogue_blowjob_mouth_sucking_spunk.png":
-                                                                ^
+File "game/actions.rpy", line 331: invalid syntax
+    action_speed = -
+    
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Thu May 26 17:16:07 2022
+Sat May 28 00:19:53 2022

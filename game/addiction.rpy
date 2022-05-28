@@ -1126,7 +1126,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                         elif Girl == JubesX:
                             ch_v "That had to be plenty."
             "How about you strip for me, and then I let you touch me?":
-                $ stored_count = Girl.clothingCheck()
+                $ stored_count = Girl.check_clothing()
 
                 call Group_Strip(Girl)
 
@@ -1139,7 +1139,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                     "That was pretty weak, I'll need a bit more.":
                         $ Girl.change_face("_angry")
 
-                        if stored_count > Girl.clothingCheck() and Girl.clothingCheck() < 3:
+                        if stored_count > Girl.check_clothing() and Girl.check_clothing() < 3:
                             $ Girl.change_stat("love", 200, -40)
                             $ Girl.change_stat("inhibition", 50, 5)
                             $ Girl.change_stat("obedience", 50, 20)

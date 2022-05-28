@@ -5244,7 +5244,7 @@ label Jean_Breasts_Launch(T=primary_action, Set=1):
 label Jean_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(JeanX)
     $ primary_action = T
-    $ JeanX.pose = "mid" if Set else JeanX.pose
+    $ JeanX.pose = "middle" if Set else JeanX.pose
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1

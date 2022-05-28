@@ -34,7 +34,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
         Girl.voice "A bit late in the day for that. . ."
         $ Girl.change_face("_normal")
         return
-    if not Girl.clothingCheck():
+    if not Girl.check_clothing():
 
         $ Girl.change_face("_sly")
         Girl.voice "Little late for that."
@@ -474,7 +474,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             $ Girl.change_outfit("nude")
         $ Mod = 0
         $ line = 0
-        if Girl.clothingCheck():
+        if Girl.check_clothing():
             "Anything else?"
         else:
             return
@@ -545,7 +545,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                 ch_e "Not with this sort of company. . ."
                 return
 
-    if not Girl.clothingCheck():
+    if not Girl.check_clothing():
 
         $ Girl.change_face("_sly")
         if Girl == RogueX:
@@ -874,7 +874,7 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
     $ temp_Girls = all_Girls[:]
     while temp_Girls:
         if bg_current == temp_Girls[0].location and approval_check(temp_Girls[0], 700):
-            if temp_Girls[0].outfit["bra"] == temp_Girls[0].swimwear[5] and temp_Girls[0].outfit["underwear"] == temp_Girls[0].swimwear[6]:
+            if temp_Girls[0].outfit["bra"] == temp_Girls[0].swimwear["bra"] and temp_Girls[0].outfit["underwear"] == temp_Girls[0].swimwear[6]:
 
                 $ Swimmers.append(temp_Girls[0])
             elif not temp_Girls[0].bra_number() and not temp_Girls[0].top_number() and not temp_Girls[0].underwear_number() and not temp_Girls[0].bottom_number() and not temp_Girls[0].hose_number():

@@ -5756,7 +5756,7 @@ label Emma_Breasts_Launch(T=primary_action, Set=1):
 label Emma_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(EmmaX)
     $ primary_action = T
-    $ EmmaX.pose = "mid" if Set else EmmaX.pose
+    $ EmmaX.pose = "middle" if Set else EmmaX.pose
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1

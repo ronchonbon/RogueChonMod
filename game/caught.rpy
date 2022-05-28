@@ -14,7 +14,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
         $ temp_Girls.remove(temp_Girls[0])
     $ bg_current = "bg_study"
     call set_the_scene (0)
-    show Xavier_Sprite at sprite_location(stage_left)
+    show Xavier_sprite at sprite_location(stage_left)
 
     if Girl == RogueX:
         show Rogue_sprite at sprite_location(stage_right) with ease
@@ -656,7 +656,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
 
     call remove_girl ("all")
     "You return to your room"
-    hide Xavier_Sprite
+    hide Xavier_sprite
     jump player_room
 
 
@@ -1186,7 +1186,7 @@ label Xavier_Plan(GirlX=0):
 
     $ Player.daily_history.append("Xavier")
     call remove_girl ("all")
-    hide Xavier_Sprite
+    hide Xavier_sprite
     call set_the_scene
     "You return to your room"
     jump player_room

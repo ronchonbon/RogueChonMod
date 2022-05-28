@@ -1,46 +1,66 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 208, in script
-    show Rogue_titjob_animation at sprite_location(stage_center)
-  File "renpy/common/00layeredimage.rpy", line 686, in _duplicate
-    d = d._duplicate(None)
-  File "renpy/common/00layeredimage.rpy", line 681, in _duplicate
-    d = i.get_displayable(attributes)
-  File "renpy/common/00layeredimage.rpy", line 432, in get_displayable
-    return ConditionSwitch(predict_all=predict_all, *args)
-SyntaxError: invalid syntax (rogue_sprites.rpy, line 194)
+  File "game/locations.rpy", line 615, in script call
+    call chat
+  File "game/chat.rpy", line 122, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu
+  File "game/menus.rpy", line 61, in script call
+    call girl_sex_menu(focused_Girl)
+  File "game/actions.rpy", line 393, in script call
+    call end_of_action_round
+  File "game/orgasms.rpy", line 1240, in script call
+    call expression Girl.tag+"_HJ_Launch" pass ("cum")
+  File "game/locations.rpy", line 615, in script call
+    call chat
+  File "game/chat.rpy", line 122, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu
+  File "game/menus.rpy", line 61, in script call
+    call girl_sex_menu(focused_Girl)
+  File "game/actions.rpy", line 393, in script call
+    call end_of_action_round
+  File "game/orgasms.rpy", line 1240, in script call
+    call expression Girl.tag+"_HJ_Launch" pass ("cum")
+ScriptError: could not find label 'Rogue_HJ_Launch'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 208, in script
-    show Rogue_titjob_animation at sprite_location(stage_center)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1197, in execute
-    show_imspec(self.imspec, atl=getattr(self, "atl", None))
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1167, in show_imspec
-    atl=atl)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 742, in show
-    if not base.find_target() and renpy.config.missing_show:
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 409, in find_target
-    self.target = target._duplicate(a)
-  File "renpy/common/00layeredimage.rpy", line 686, in _duplicate
-    d = d._duplicate(None)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 447, in _duplicate
-    rv.find_target()
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 409, in find_target
-    self.target = target._duplicate(a)
-  File "renpy/common/00layeredimage.rpy", line 681, in _duplicate
-    d = i.get_displayable(attributes)
-  File "renpy/common/00layeredimage.rpy", line 432, in get_displayable
-    return ConditionSwitch(predict_all=predict_all, *args)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1573, in ConditionSwitch
-    code = renpy.python.py_compile(cond, 'eval')
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/python.py", line 835, in py_compile
-    raise e
-SyntaxError: invalid syntax (rogue_sprites.rpy, line 194)
+  File "game/locations.rpy", line 615, in script call
+    call chat
+  File "game/chat.rpy", line 122, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu
+  File "game/menus.rpy", line 61, in script call
+    call girl_sex_menu(focused_Girl)
+  File "game/actions.rpy", line 393, in script call
+    call end_of_action_round
+  File "game/orgasms.rpy", line 1240, in script call
+    call expression Girl.tag+"_HJ_Launch" pass ("cum")
+  File "renpy/ast.py", line 1490, in execute
+    rv = renpy.game.context().call(label, return_site=self.next.name)
+  File "game/locations.rpy", line 615, in script call
+    call chat
+  File "game/chat.rpy", line 122, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu
+  File "game/menus.rpy", line 61, in script call
+    call girl_sex_menu(focused_Girl)
+  File "game/actions.rpy", line 393, in script call
+    call end_of_action_round
+  File "game/orgasms.rpy", line 1240, in script call
+    call expression Girl.tag+"_HJ_Launch" pass ("cum")
+  File "renpy/script.py", line 918, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'Rogue_HJ_Launch'.
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like 0.997f2
-Thu May 26 21:23:30 2022
+Sat May 28 00:34:42 2022
