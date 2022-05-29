@@ -1,666 +1,643 @@
-
-label EmotionEditor(Chr=0):
+label cheat_editor(Girl):
+    $ counter = 0
 
     while True:
         menu:
-            "Emotions1: Normal Angry Smiling Sexy Surprised Bemused Manic.":
-                menu:
-                    "Normal":
-                        $ Chr.emotion = "_normal"
-                    "Angry":
-                        $ Chr.emotion = "_angry"
-                    "Smiling":
-                        $ Chr.emotion = "_smile"
-                    "Sexy":
-                        $ Chr.emotion = "_sexy"
-                    "Suprised":
-                        $ Chr.emotion = "_surprised"
-                    "Bemused":
-                        $ Chr.emotion = "_bemused"
-                    "Manic":
-                        $ Chr.emotion = "_manic"
-            "Emotions2: Sad Sucking Kiss Tongue Confused Closed Down.":
-
-                menu:
-                    "Sad":
-                        $ Chr.emotion = "_sad"
-                    "Sucking":
-                        $ Chr.emotion = "_sucking"
-                    "kiss":
-                        $ Chr.emotion = "_kiss"
-                    "Tongue":
-                        $ Chr.emotion = "_tongue"
-                    "_confused":
-                        $ Chr.emotion = "_confused"
-                    "Closed":
-                        $ Chr.emotion = "_closed"
-                    "Down":
-                        $ Chr.emotion = "_down"
-            "Emotions3: Sadside Startled Perplexed Sly":
-
-                menu:
-                    "Sadside":
-                        $ Chr.emotion = "_sadside"
-                    "Startled":
-                        $ Chr.emotion = "startled"
-                    "Perplexed":
-                        $ Chr.emotion = "_perplexed"
-                    "Sly":
-                        $ Chr.emotion = "_sly"
-            "Toggle mouth Spunk":
-
-                if Chr.spunk["mouth"]:
-                    $ Chr.spunk["mouth"] = False
-                else:
-                    $ Chr.spunk["mouth"] = True
-            "Toggle hand Spunk":
-                if Chr.spunk["handjob"]:
-                    $ Chr.spunk["hand"] = False
-                else:
-                    $ Chr.spunk["hand"] = True
-            "Toggle Facial Spunk":
-
-                if Chr.spunk["face"] and not Chr.spunk["hair"]:
-                    $ Chr.spunk["hair"] = True
-                elif Chr.spunk["face"]:
-                    $ Chr.spunk["face"] = False
-                    $ Chr.spunk["hair"] = False
-                else:
-                    $ Chr.spunk["face"] = True
-            "Blush":
-
-                if Chr.blushing == "_blush2":
-                    $ Chr.blushing = ""
-                elif Chr.blushing:
-                    $ Chr.blushing = "_blush2"
-                else:
-                    $ Chr.blushing = "_blush1"
-            "Exit.":
-                return
-        $ Chr.change_face()
-
-
-label WardrobeEditor(Chr=0):
-    while True:
-        menu Wardrobe_Menu:
-            "View" if True:
-                while True:
-                    menu:
-                        "Default":
-                            call expression Chr.tag + "_Pos_Reset" pass (0)
-                        "Face":
-                            call expression Chr.tag + "_Kissing_Launch" pass (0)
-                        "Body":
-                            call expression Chr.tag + "_Pussy_Launch" pass (0)
-                        "Face Low":
-                            call hide_girl(StormX)
-                            show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location)
-                            show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_center):
-                                ease 0.5 offset (100,200) zoom 1.5 alpha 1
-                        "BJ":
-
-                            if not renpy.showing(Chr.tag+"_BJ_Animation"):
-                                call expression Chr.tag + "_BJ_Launch"
-                            else:
-                                call expression Chr.tag + "_BJ_Reset"
-                        "HJ":
-                            if not renpy.showing(Chr.tag+"_handjob_animation"):
-                                call expression Chr.tag + "_HJ_Launch"
-                            else:
-                                call expression Chr.tag + "_HJ_Reset"
-                        "TJ":
-                            if not renpy.showing(Chr.tag+"_titjob_animation"):
-                                call expression Chr.tag + "_TJ_Launch"
-                            else:
-                                call expression Chr.tag + "_TJ_Reset"
-                        "Doggy" if Chr == RogueX:
-                            $ Chr.pose = "doggy"
-                            if not renpy.showing(Chr.tag+"_Doggy"):
-                                call expression Chr.tag + "_Sex_Launch"
-                            else:
-                                call expression Chr.tag + "_Sex_Reset"
-                        "Sexpose" if Chr != RogueX:
-                            if not renpy.showing(Chr.tag+"_SexSprite"):
-                                call expression Chr.tag + "_Sex_Launch"
-                            else:
-                                call expression Chr.tag + "_Sex_Reset"
-                        "Back":
-                            jump Wardrobe_Menu
-            "First casual outfit":
-
-
-                $ Chr.change_outfit("casual1")
-            "Second casual outfit":
-
-                $ Chr.change_outfit("casual2")
-            "Nude":
-
-                $ Chr.change_outfit("nude")
-            "Shirts":
-                while True:
-                    menu:
-
-                        "Remove [Chr.outfit['top']]" if Chr.outfit["top"]:
-                            $ Chr.outfit["top"] = ""
-                        "Add mesh_top" if Chr == RogueX:
-                            $ Chr.outfit["top"] = "_mesh_top"
-                            $ Chr.outfit["neck"] = "_spiked_collar"
-                            $ Chr.outfit["gloves"] = "_gloves"
-                            if Chr.outfit["bra"] == "_buttoned_tank":
-                                $ Chr.outfit["bra"] = "_tank"
-                        "Add pink_top" if Chr == RogueX:
-                            $ Chr.outfit["top"] = "_pink_top"
-                            $ Chr.outfit["gloves"] = "_gloves"
-                        "Add pink_top" if Chr == KittyX:
-                            $ Chr.outfit["top"] = "_pink_top"
-                        "Add red_top" if Chr == KittyX or Chr == JubesX:
-                            $ Chr.outfit["top"] = "_red_shirt"
-                        "Add black_top" if Chr == JubesX:
-                            $ Chr.outfit["top"] = "_black_shirt"
-                        "Add tube_top" if Chr == JubesX:
-                            $ Chr.outfit["top"] = "_tube_top"
-                        "Add pink_shirt" if Chr == JeanX:
-                            $ Chr.outfit["top"] = "_pink_shirt"
-                        "Add green_shirt" if Chr == JeanX:
-                            $ Chr.outfit["top"] = "_green_shirt"
-                        "Add yellow_shirt" if Chr == JeanX:
-                            $ Chr.outfit["top"] = "_yellow_shirt"
-                        "Add_jacket":
-                            if Chr == JubesX:
-                                $ Chr.outfit["front_outer_accessory"] = "_jacket"
-                            else:
-                                $ Chr.outfit["front_outer_accessory"] = "_jacket"
-                        "Open/_shut_jacket" if Chr == JubesX:
-                            if Chr.outfit["front_outer_accessory"] == "_jacket":
-                                $ Chr.outfit["front_outer_accessory"] = "_shut_jacket"
-                            else:
-                                $ Chr.outfit["front_outer_accessory"] = "_jacket"
-                        "wide open_jacket" if Chr == JubesX:
-                            if Chr.outfit["front_outer_accessory"] == "_jacket":
-                                $ Chr.outfit["front_outer_accessory"] = "open_jacket"
-                            else:
-                                $ Chr.outfit["front_outer_accessory"] = "_jacket"
-                        "Remove_jacket" if Chr.outfit["front_outer_accessory"] == "_jacket":
-                            $ Chr.outfit["front_outer_accessory"] = ""
-
-                        "Add white_shirt" if Chr == StormX:
-                            $ Chr.outfit["top"] = "_white_shirt"
-                        "Dress" if Chr == EmmaX:
-                            $ Chr.outfit["top"] = "_dress"
-                        "Add nighty":
-                            $ Chr.outfit["top"] = "_nighty"
-                            $ Chr.outfit["gloves"] = ""
-                        "Add towel":
-                            $ Chr.outfit["top"] = "_towel"
-                            $ Chr.outfit["gloves"] = ""
-                        "Toggle Pierce":
-                            if Chr.outfit["front_inner_accessory"] == "_ring":
-                                $ Chr.outfit["front_inner_accessory"] = "_barbell"
-                            elif Chr.outfit["front_inner_accessory"] == "_barbell":
-                                $ Chr.outfit["front_inner_accessory"] = ""
-                            else:
-                                $ Chr.outfit["front_inner_accessory"] = "_ring"
-                        "Toggle up-top":
-                            if Chr.top_pulled_up:
-                                $ Chr.top_pulled_up = 0
-                            else:
-                                $ Chr.top_pulled_up = 1
-                        "Toggle Arms":
-                            if Chr.arm_pose == 1:
-                                $ Chr.arm_pose = 2
-                            else:
-                                $ Chr.arm_pose = 1
-                        "Back":
-                            jump Wardrobe_Menu
-            "Bra":
-                while True:
-                    menu:
-
-                        "Remove [Chr.outfit['bra']]" if Chr.outfit["bra"]:
-                            $ Chr.outfit["bra"] = ""
-                        "Add tank_top" if Chr == RogueX:
-                            $ Chr.outfit["bra"] = "_tank"
-                        "Add sports_bra":
-                            $ Chr.outfit["bra"] = "_sports_bra"
-                        "Add leather_bra" if Chr == LauraX:
-                            $ Chr.outfit["bra"] = "_leather_bra"
-                        "Add white_tank" if Chr == LauraX:
-                            $ Chr.outfit["bra"] = "_white_tank"
-                        "Add buttoned tank_top" if Chr == RogueX:
-                            $ Chr.outfit["bra"] = "_buttoned_tank"
-                        "Add lace_bra":
-                            $ Chr.outfit["bra"] = "_lace_bra"
-                        "Add cami" if Chr == KittyX:
-                            $ Chr.outfit["bra"] = "_cami"
-                        "Add dress" if Chr == KittyX:
-                            $ Chr.outfit["bra"] = "_dress"
-                        "Add wolvie_top" if Chr == LauraX:
-                            $ Chr.outfit["bra"] = "wolvie_top"
-                        "Add green_bra" if Chr == JeanX:
-                            $ Chr.outfit["bra"] = "_green_bra"
-                        "Add tube_top" if Chr == StormX or Chr == RogueX:
-                            $ Chr.outfit["bra"] = "_tube_top"
-                        "Add_bra":
-                            if Chr == StormX:
-                                $ Chr.outfit["bra"] = "_black_bra"
-                            else:
-                                $ Chr.outfit["bra"] = "_bra"
-                        "Add cosplay_bra" if Chr == StormX:
-                            $ Chr.outfit["bra"] = "_cosplay_bra"
-                        "Add bikini":
-                            $ Chr.outfit["bra"] = "_bikini_top"
-                        "Add corset":
-                            $ Chr.outfit["bra"] = "_corset"
-                        "Add lace corset":
-                            $ Chr.outfit["bra"] = "_lace_corset"
-                        "Toggle up-top":
-                            if Chr.top_pulled_up:
-                                $ Chr.top_pulled_up = 0
-                            else:
-                                $ Chr.top_pulled_up = 1
-                        "Toggle Piercings":
-                            if Chr.outfit["front_inner_accessory"] == "_ring":
-                                $ Chr.outfit["front_inner_accessory"] = "_barbell"
-                            elif Chr.outfit["front_inner_accessory"] == "_barbell":
-                                $ Chr.outfit["front_inner_accessory"] = ""
-                            else:
-                                $ Chr.outfit["front_inner_accessory"] = "_ring"
-                        "Toggle Arms":
-                            if Chr.arm_pose == 1:
-                                $ Chr.arm_pose = 2
-                            else:
-                                $ Chr.arm_pose = 1
-                        "Back":
-                            jump Wardrobe_Menu
-            "Pants":
-
-                while True:
-                    menu:
-
-                        "Remove legs" if Chr.outfit["bottom"]:
-                            $ Chr.outfit["bottom"] = ""
-                        "Add Skirt" if Chr != KittyX:
-                            $ Chr.outfit["bottom"] = "_skirt"
-                        "Add cosplay Skirt" if Chr == LauraX:
-                            $ Chr.outfit["bottom"] = "_other_skirt"
-                        "Add blue Skirt" if Chr == KittyX:
-                            $ Chr.outfit["bottom"] = "_blue_skirt"
-                        "Add_pants" if Chr != KittyX:
-                            $ Chr.outfit["bottom"] = "_pants"
-                        "Add black jeans" if Chr == KittyX:
-                            $ Chr.outfit["bottom"] = "_black_jeans"
-                        "Add capri_pants" if Chr == KittyX:
-                            $ Chr.outfit["bottom"] = "_capris"
-                        "Add_shorts" if Chr == KittyX or Chr == JeanX or Chr == JubesX:
-                            $ Chr.outfit["bottom"] = "_shorts"
-                        "Add leather_pants" if Chr == LauraX:
-                            $ Chr.outfit["bottom"] = "_leather_pants"
-                        "Add yoga_pants":
-                            $ Chr.outfit["bottom"] = "_yoga_pants"
-                        "Dress" if Chr == EmmaX or Chr == KittyX:
-                            $ Chr.outfit["bottom"] = "_dress"
-                        "Boots" if Chr == EmmaX:
-                            $ EmmaX.outfit["front_outer_accessory"] = "_thigh_boots" if EmmaX.outfit["front_outer_accessory"] != "_thigh_boots" else 0
-                        "Toggle upskirt":
-                            if Chr.upskirt:
-                                $ Chr.upskirt = 0
-                            else:
-                                $ Chr.upskirt = 1
-                        "pull down-up_panties":
-                            if Chr.underwear_pulled_down:
-                                $ Chr.underwear_pulled_down = 0
-                            else:
-                                $ Chr.underwear_pulled_down = 1
-                        "Toggle Pierce":
-                            if Chr.outfit["front_inner_accessory"] == "_ring":
-                                $ Chr.outfit["front_inner_accessory"] = "_barbell"
-                            elif Chr.outfit["front_inner_accessory"] == "_barbell":
-                                $ Chr.outfit["front_inner_accessory"] = ""
-                            else:
-                                $ Chr.outfit["front_inner_accessory"] = "_ring"
-                        "Toggle Wetness":
-                            if not Chr.grool:
-                                $ Chr.grool = 1
-                            elif Chr.grool == 1:
-                                $ Chr.grool = 2
-                            else:
-                                $ Chr.grool  = 0
-                        "Back":
-                            jump Wardrobe_Menu
-            "Panties & Hose":
-
-                while True:
-                    menu:
-                        "Hose":
-
-                            menu:
-                                "Add hose":
-                                    $ Chr.outfit["hose"] = "_stockings"
-                                "Add garter":
-                                    $ Chr.outfit["hose"] = "garterbelt"
-                                "Add stockings and garter":
-                                    $ Chr.outfit["hose"] = "_stockings_and_garterbelt"
-                                "Add_pantyhose":
-                                    $ Chr.outfit["hose"] = "_pantyhose"
-                                "Add_tights":
-                                    $ Chr.outfit["hose"] = "_tights"
-                                "Add ripped hose":
-                                    $ Chr.outfit["hose"] = "_ripped_pantyhose"
-                                "Add ripped_tights":
-                                    $ Chr.outfit["hose"] = "_ripped_tights"
-                                "Add_tights":
-                                    $ Chr.outfit["hose"] = "_tights"
-                                "Add knee stockings" if Chr == KittyX:
-                                    $ Chr.outfit["hose"] = "knee stockings"
-                                "Add socks" if Chr == JubesX:
-                                    $ Chr.outfit["hose"] = "_socks"
-                                "Add black stockings" if Chr == LauraX:
-                                    $ Chr.outfit["hose"] = "_black_stockings"
-                                "Remove hose" if Chr.outfit["hose"]:
-                                    $ Chr.outfit["hose"] = ""
-                        "Remove_panties" if Chr.outfit["underwear"]:
-                            $ Chr.outfit["underwear"] = ""
-                        "Add black_panties":
-                            $ Chr.outfit["underwear"] = "_black_panties"
-                        "Add white_panties" if Chr == StormX or Chr == EmmaX:
-                            $ Chr.outfit["underwear"] = "_white_panties"
-                        "Add cosplay_panties" if Chr == StormX:
-                            $ Chr.outfit["underwear"] = "_cosplay_panties"
-                        "Add bikini":
-                            $ Chr.outfit["underwear"] = "_bikini_bottoms"
-                        "Add_shorts":
-                            $ Chr.outfit["underwear"] = "_shorts"
-                        "Add green_panties":
-                            $ Chr.outfit["underwear"] = "_green_panties"
-                        "Add lace_panties":
-                            $ Chr.outfit["underwear"] = "_lace_panties"
-                        "Add wolvie_panties" if Chr == LauraX:
-                            $ Chr.outfit["underwear"] = "wolvie_panties"
-                        "Add _sports_panties" if Chr == EmmaX:
-                            $ Chr.outfit["underwear"] = "_sports_panties"
-                        "Toggle Pierce":
-                            if Chr.outfit["front_inner_accessory"] == "_ring":
-                                $ Chr.outfit["front_inner_accessory"] = "_barbell"
-                            elif Chr.outfit["front_inner_accessory"] == "_barbell":
-                                $ Chr.outfit["front_inner_accessory"] = ""
-                            else:
-                                $ Chr.outfit["front_inner_accessory"] = "_ring"
-                        "pull down-up_panties":
-                            if Chr.underwear_pulled_down:
-                                $ Chr.underwear_pulled_down = 0
-                            else:
-                                $ Chr.underwear_pulled_down = 1
-                        "Toggle Wetness":
-                            if not Chr.grool:
-                                $ Chr.grool = 1
-                            elif Chr.grool == 1:
-                                $ Chr.grool = 2
-                            else:
-                                $ Chr.grool  = 0
-                        "Back":
-                            jump Wardrobe_Menu
-            "Misc":
-                while True:
-                    menu:
-                        "Emotions":
-                            call EmotionEditor (Chr)
-                        "Toggle Arms":
-                            if Chr.arm_pose == 1:
-                                $ Chr.arm_pose = 2
-                            else:
-                                $ Chr.arm_pose = 1
-                        "Toggle Wetness":
-                            if not Chr.grool:
-                                $ Chr.grool = 1
-                            elif Chr.grool == 1:
-                                $ Chr.grool = 2
-                            else:
-                                $ Chr.grool  = 0
-                        "Toggle wet look":
-                            if not Chr.wet:
-                                $ Chr.wet = 1
-                            elif Chr.wet == 1:
-                                $ Chr.wet = 3
-                            else:
-                                $ Chr.wet  = 0
-                        "Toggle pubes":
-                            if not Chr.pubes:
-                                $ Chr.pubes = "_hairy"
-                            else:
-                                $ Chr.pubes = "_bare"
-                        "Toggle Short Hair" if Chr == KittyX:
-                            if Chr.outfit["hair"] == "_long":
-                                $ Chr.outfit["hair"] = "_evo"
-                            else:
-                                $ Chr.outfit["hair"] = "_long"
-                        "Toggle Mohawk" if Chr == StormX:
-                            if Chr.outfit["hair"] == "_long":
-                                $ Chr.outfit["hair"] = "_mohawk"
-                            else:
-                                $ Chr.outfit["hair"] = "_long"
-                        "Toggle Short Hair" if Chr == StormX:
-                            if Chr.outfit["hair"] == "_long":
-                                $ Chr.outfit["hair"] = "_short"
-                            else:
-                                $ Chr.outfit["hair"] = "_long"
-                        "Toggle Ponytailr" if Chr == JeanX:
-                            if Chr.outfit["hair"] == "pont":
-                                $ Chr.outfit["hair"] = "_short"
-                            else:
-                                $ Chr.outfit["hair"] = "_pony"
-                        "Toggle Hat" if Chr == EmmaX:
-                            if Chr.outfit["hair"] == "_wavy":
-                                $ Chr.outfit["hair"] = "_hat"
-                            elif Chr.outfit["hair"] == "_wet":
-                                $ Chr.outfit["hair"] = "_wet_hat"
-                            elif Chr.outfit["hair"] == "_wet_hat":
-                                $ Chr.outfit["hair"] = "_wet"
-                            else:
-                                $ Chr.outfit["hair"] = "_wavy"
-                        "Cosplay Hair" if Chr == RogueX:
-                            if Chr.outfit["hair"] == "_cosplay":
-                                $ Chr.outfit["hair"] = "_evo"
-                            else:
-                                $ Chr.outfit["hair"] = "_cosplay"
-                        "Ponytail Hair" if Chr == JeanX:
-                            if Chr.outfit["hair"] == "_pony":
-                                $ Chr.outfit["hair"] = "_short"
-                            else:
-                                $ Chr.outfit["hair"] = "_pony"
-                        "Toggle held":
-                            if not Chr.outfit["held_item"]:
-                                $ Chr.outfit["held_item"]  = "_phone"
-                            elif Chr.outfit["held_item"] == "_phone":
-                                $ Chr.outfit["held_item"]  = "_dildo"
-                            elif Chr.outfit["held_item"] == "_dildo":
-                                $ Chr.outfit["held_item"]  = "_vibrator"
-                            elif Chr.outfit["held_item"] == "_vibrator":
-                                $ Chr.outfit["held_item"]  = "_panties"
-                            else:
-                                $ Chr.outfit["held_item"]  = 0
-                        "Toggle gold Necklace" if Chr == StormX:
-                            if not Chr.outfit["neck"]:
-                                $ Chr.outfit["neck"] = 'gold'
-                            else:
-                                $ Chr.outfit["neck"] = ""
-                        "Toggle flower Necklace":
-                            if not Chr.outfit["neck"]:
-                                $ Chr.outfit["neck"] = '_flower_necklace'
-                            else:
-                                $ Chr.outfit["neck"] = ""
-                        "Toggle ring Necklace" if Chr == StormX:
-                            if not Chr.outfit["neck"]:
-                                $ Chr.outfit["neck"] = '_rings'
-                            else:
-                                $ Chr.outfit["neck"] = ""
-                        "Toggle Rings" if Chr == StormX:
-                            if not Chr.outfit["front_outer_accessory"]:
-                                $ Chr.outfit["front_outer_accessory"] = '_rings'
-                            else:
-                                $ Chr.outfit["front_outer_accessory"] = ""
-                        "Toggle_choker" if Chr == EmmaX or Chr == RogueX:
-                            if Chr.outfit["neck"] != 'choker':
-                                $ Chr.outfit["neck"] ='choker'
-                            else:
-                                $ Chr.outfit["neck"] = ""
-                        "Toggle boots" if Chr == EmmaX:
-                            if Chr.outfit["front_outer_accessory"] != "_thigh_boots":
-                                $ Chr.outfit["front_outer_accessory"] ='thigh boots'
-                            else:
-                                $ Chr.outfit["front_outer_accessory"] = ""
-                        "Toggle sweater" if Chr == RogueX:
-                            if Chr.outfit["front_outer_accessory"] != "_sweater":
-                                $ Chr.outfit["front_outer_accessory"] ='_sweater'
-                            else:
-                                $ Chr.outfit["front_outer_accessory"] = ""
-                        "Toggle suspenders" if Chr == LauraX or Chr == JeanX:
-                            if Chr.outfit["front_outer_accessory"] == "_suspenders":
-                                $ Chr.outfit["front_outer_accessory"] = "_suspenders2"
-                            elif Chr.outfit["front_outer_accessory"] == "_suspenders2":
-                                $ Chr.outfit["front_outer_accessory"] = ""
-                            else:
-                                $ Chr.outfit["front_outer_accessory"] = "_suspenders"
-                        "Spunk Level":
-                            menu:
-                                "mouth":
-                                    if Chr.spunk["mouth"]:
-                                        $ Chr.spunk["mouth"] = False
-                                    else:
-                                        $ Chr.spunk["mouth"] = True
-                                "Chin":
-                                    if Chr.spunk["chin"]:
-                                        $ Chr.spunk["chin"] = False
-                                    else:
-                                        $ Chr.spunk["chin"] = True
-                                "Facial":
-                                    if Chr.spunk["face"]:
-                                        $ Chr.spunk["face"] = False
-                                    else:
-                                        $ Chr.spunk["face"] = True
-                                "Hair":
-                                    if Chr.spunk["hair"]:
-                                        $ Chr.spunk["hair"] = False
-                                    else:
-                                        $ Chr.spunk["hair"] = True
-                                "Tits":
-                                    if Chr.spunk["breasts"]:
-                                        $ Chr.spunk["breasts"] = False
-                                    else:
-                                        $ Chr.spunk["breasts"] = True
-                                "Belly":
-                                    if Chr.spunk["belly"]:
-                                        $ Chr.spunk["belly"] = False
-                                    else:
-                                        $ Chr.spunk["belly"] = True
-                                "Back":
-                                    if Chr.spunk["back"]:
-                                        $ Chr.spunk["back"] = False
-                                    else:
-                                        $ Chr.spunk["back"] = True
-                                "Pussy":
-                                    if Chr.spunk["pussy"]:
-                                        $ Chr.spunk["pussy"] = False
-                                    else:
-                                        $ Chr.spunk["pussy"] = True
-                                "Ass":
-                                    if Chr.spunk["anus"]:
-                                        $ Chr.spunk["anus"] = False
-                                    else:
-                                        $ Chr.spunk["anus"] = True
-                                "Return":
-                                    pass
-                        "Toggle Pierce":
-                            if Chr.outfit["front_inner_accessory"] == "_ring":
-                                $ Chr.outfit["front_inner_accessory"] = "_barbell"
-                            elif Chr.outfit["front_inner_accessory"] == "_barbell":
-                                $ Chr.outfit["front_inner_accessory"] = ""
-                            else:
-                                $ Chr.outfit["front_inner_accessory"] = "_ring"
-                        "Add Gloves" if not Chr.outfit["gloves"]:
-                            $ Chr.outfit["gloves"] = "_gloves"
-                        "Remove Gloves" if Chr.outfit["gloves"]:
-                            $ Chr.outfit["gloves"] = ""
-                        "Back":
-                            jump Wardrobe_Menu
-            "Nothing":
-                return
-return
-
-
-label StatHacks(Chr=0, counter=0):
-    while True:
-        menu:
-            "[Chr.name]: Love: [Chr.love], Obedience: [Chr.obedience], Inhibition:[Chr.inhibition], Lust: [Chr.lust] taboo: [taboo], Location: [Chr.location]"
+            "[Girl.name]: Love: [Girl.love], Obedience: [Girl.obedience], Inhibition: [Girl.inhibition], Lust: [Girl.lust], Taboo: [taboo], Location: [Girl.location]"
             "Activities":
                 menu:
                     "Recent Actions":
-                        "[Chr.recent_history]"
+                        "[Girl.recent_history]"
                     "Daily Actions":
-                        "[Chr.daily_history]"
+                        "[Girl.daily_history]"
                     "Traits":
-                        "[Chr.traits]"
+                        "[Girl.traits]"
                     "History":
-                        "[Chr.history]"
-            "Gwen's face" if False:
-                call Gwen_FaceEditor
-            "Raise Love":
-                $ Chr.love += 100
-            "Lower Love":
-                $ Chr.love -= 100
-            "Raise Obedience":
-                $ Chr.obedience += 100
-            "Lower Obedience":
-                $ Chr.obedience -= 100
-            "Raise Inhibitions":
-                $ Chr.inhibition += 100
-            "Lower Inhibitions":
-                $ Chr.inhibition -= 100
-            "taboo toggle":
+                        "[Girl.history]"
+            "Raise love":
+                $ Girl.love += 100
+            "Lower love":
+                $ Girl.love -= 100
+            "Raise obedience":
+                $ Girl.obedience += 100
+            "Lower obedience":
+                $ Girl.obedience -= 100
+            "Raise inhibition":
+                $ Girl.inhibition += 100
+            "Lower inhibition":
+                $ Girl.inhibition -= 100
+            "Taboo toggle":
                 $ taboo = 40 if taboo != 40 else 0
+
                 "[taboo]"
-            "Small":
+            "Small changes":
                 $ counter = 1
+
                 while counter:
                     menu:
-                        "Raise Love":
-                            $ Chr.love += 10
-                        "Lower Love":
-                            $ Chr.love -= 10
-                        "Raise Obedience":
-                            $ Chr.obedience += 10
-                        "Lower Obedience":
-                            $ Chr.obedience -= 10
-                        "Raise Inhibitions":
-                            $ Chr.inhibition += 10
-                        "Lower Inhibitions":
-                            $ Chr.inhibition -= 10
+                        "Raise love":
+                            $ Girl.love += 10
+                        "Lower love":
+                            $ Girl.love -= 10
+                        "Raise obedience":
+                            $ Girl.obedience += 10
+                        "Lower obedience":
+                            $ Girl.obedience -= 10
+                        "Raise inhibition":
+                            $ Girl.inhibition += 10
+                        "Lower inhibition":
+                            $ Girl.inhibition -= 10
                         "Back":
                             $ counter = 0
             "Other":
                 menu:
-                    "Raise Lust":
-                        $ Chr.lust += 10
-                    "Lower Lust":
-                        $ Chr.lust -= 10
-                    "Raise Addiction":
-                        $ Chr.addiction += 10
-                    "Lower Addiction":
-                        $ Chr.addiction -= 10
+                    "Raise lust":
+                        $ Girl.lust += 10
+                    "Lower lust":
+                        $ Girl.lust -= 10
+                    "Raise addiction":
+                        $ Girl.addiction += 10
+                    "Lower addiction":
+                        $ Girl.addiction -= 10
                     "Back":
                         pass
             "Wardrobe":
-                call WardrobeEditor (Chr)
+                call wardrobe_editor(Girl)
             "Return":
-
                 call checkout
+
                 return
 
+label face_editor(Girl):
+    while True:
+        menu:
+            "First set":
+                menu:
+                    "Normal":
+                        $ Girl.emotion = "_normal"
+                    "Angry":
+                        $ Girl.emotion = "_angry"
+                    "Smiling":
+                        $ Girl.emotion = "_smile"
+                    "Sexy":
+                        $ Girl.emotion = "_sexy"
+                    "Suprised":
+                        $ Girl.emotion = "_surprised"
+                    "Bemused":
+                        $ Girl.emotion = "_bemused"
+                    "Manic":
+                        $ Girl.emotion = "_manic"
+            "Second set":
+                menu:
+                    "Sad":
+                        $ Girl.emotion = "_sad"
+                    "Sucking":
+                        $ Girl.emotion = "_sucking"
+                    "Kiss":
+                        $ Girl.emotion = "_kiss"
+                    "Tongue":
+                        $ Girl.emotion = "_tongue"
+                    "Confused":
+                        $ Girl.emotion = "_confused"
+                    "Closed":
+                        $ Girl.emotion = "_closed"
+                    "Down":
+                        $ Girl.emotion = "_down"
+            "Third set":
+                menu:
+                    "Sadside":
+                        $ Girl.emotion = "_sadside"
+                    "Startled":
+                        $ Girl.emotion = "startled"
+                    "Perplexed":
+                        $ Girl.emotion = "_perplexed"
+                    "Sly":
+                        $ Girl.emotion = "_sly"
+            "Toggle blushing":
+                if Girl.blushing == "":
+                    $ Girl.blushing = "_blush1"
+                elif Girl.blushing == "_blush1":
+                    $ Girl.blushing = "_blush2"
+                else:
+                    $ Girl.blushing = ""
+            "Back":
+                return
 
-label Cheat_Menu(Girl=0):
-    if Girl not in all_Girls:
-        $ Girl = focused_Girl
+        $ Girl.change_face()
+
+label wardrobe_editor(Girl):
+    while True:
+        menu wardrobe_menu:
+            "View":
+                while True:
+                    menu:
+                        "Default":
+                            call reset_position(Girl)
+                        # "Face":
+                        #     call kiss_launch(Girl)
+                        # "Body":
+                        #     call pussy_launch(Girl)
+                        "Handjob":
+                            if not renpy.showing(Girl.tag + " handjob"):
+                                call handjob_launch(Girl)
+                            else:
+                                call reset_position(Girl)
+                        "Titjob":
+                            if not renpy.showing(Girl.tag + " titjob"):
+                                call titjob_launch(Girl)
+                            else:
+                                call reset_position(Girl)
+                        "Blowjob":
+                            if not renpy.showing(Girl.tag + " blowjob"):
+                                call blowjob_launch(Girl)
+                            else:
+                                call reset_position(Girl)
+                        "Missionary":
+                            $ Girl.pose = "sex"
+
+                            if not renpy.showing(Girl.tag + " sex"):
+                                call sex_launch(Girl, "sex")
+                            else:
+                                call reset_position(Girl)
+                        "Doggy":
+                            $ Girl.pose = "doggy"
+
+                            if not renpy.showing(Girl.tag + " doggy"):
+                                call sex_launch(Girl, "anal")
+                            else:
+                                call reset_position(Girl)
+                        "Back":
+                            jump wardrobe_menu
+            "First casual outfit":
+                $ Girl.change_outfit("casual1")
+            "Second casual outfit":
+                $ Girl.change_outfit("casual2")
+            "Halloween costume":
+                $ Girl.change_outfit("costume")
+            "Domme outfit" if Girl == EmmaX:
+                $ Girl.arm_pose = 2
+
+                $ Girl.change_outfit("domme_outfit")
+            "Nude":
+                $ Girl.change_outfit("nude")
+            "Dress/Suit":
+                while True:
+                    menu:
+                        "Remove [Girl.outfit[dress]]" if Girl.outfit["dress"]:
+                            $ Girl.outfit["dress"] = ""
+                        "Add catsuit" if Girl == RogueX:
+                            $ Girl.outfit["dress"] = "_catsuit"
+                        "Add Raven outfit" if Girl == RogueX:
+                            $ Girl.outfit["back_outer_accessory"] = "_raven_cloak"
+                            $ Girl.outfit["dress"] = "_raven"
+                            $ Girl.outfit["cloak"] = "_raven_cloak"
+                        "Add blue dress" if Girl == RogueX:
+                            $ Girl.outfit["dress"] = "_blue_dress"
+                        "Add one-piece swimsuit" if Girl == RogueX:
+                            $ Girl.outfit["dress"] = "_onepiece_swimsuit"
+                        "Add sexy swimsuit" if Girl == RogueX:
+                            $ Girl.outfit["dress"] = "_sexy_swimsuit"
+                        "Add red dress" if Girl == RogueX:
+                            $ Girl.outfit["dress"] = "_red_dress"
+                        "Add Chinese dress" if Girl == KittyX:
+                            $ Girl.outfit["dress"] = "_chinese"
+                        "Back":
+                            jump wardrobe_menu
+            "Top":
+                while True:
+                    menu:
+                        "Remove [Girl.outfit[top]]" if Girl.outfit["top"]:
+                            $ Girl.outfit["top"] = ""
+                        "Remove [Girl.outfit[jacket]]" if Girl.outfit["jacket"]:
+                            $ Girl.outfit["jacket"] = ""
+                        "Add mesh top" if Girl == RogueX:
+                            $ Girl.outfit["top"] = "_mesh_top"
+                        "Add pink top" if Girl in [RogueX, KittyX]:
+                            $ Girl.outfit["top"] = "_pink_top"
+                        "Add red top" if Girl in [KittyX, JubesX]:
+                            $ Girl.outfit["top"] = "_red_shirt"
+                        "Add pink shirt" if Girl == JeanX:
+                            $ Girl.outfit["top"] = "_pink_shirt"
+                        "Add green shirt" if Girl == JeanX:
+                            $ Girl.outfit["top"] = "_green_shirt"
+                        "Add yellow shirt" if Girl == JeanX:
+                            $ Girl.outfit["top"] = "_yellow_shirt"
+                        "Add black top" if Girl == JubesX:
+                            $ Girl.outfit["top"] = "_black_shirt"
+                        "Add tube top" if Girl == JubesX:
+                            $ Girl.outfit["top"] = "_tube_top"
+                        "Add classic jacket" if Girl == RogueX:
+                            $ Girl.outfit["jacket"] = "_classic_jacket"
+                        "Add jacket" if Girl == JubesX:
+                            $ Girl.outfit["jacket"] = "_jacket"
+                        "Open/close jacket" if Girl == JubesX and Girl.outfit["jacket"] in ["_jacket", "_shut_jacket"]:
+                            if Girl.outfit["jacket"] == "_jacket":
+                                $ Girl.outfit["jacket"] = "_shut_jacket"
+                            else:
+                                $ Girl.outfit["jacket"] = "_jacket"
+                        "Wide open jacket" if Girl == JubesX and Girl.outfit["jacket"] in ["_jacket", "_open_jacket"]:
+                            if Girl.outfit["jacket"] == "_jacket":
+                                $ Girl.outfit["jacket"] = "_open_jacket"
+                            else:
+                                $ Girl.outfit["jacket"] = "_jacket"
+                        "Add white_shirt" if Girl == StormX:
+                            $ Girl.outfit["top"] = "_white_shirt"
+                        "Add dress" if Girl == EmmaX:
+                            $ Girl.outfit["top"] = "_dress"
+                        "Add opaque fetish top" if Girl == RogueX:
+                            $ Girl.outfit["top"] = "_opaque_fetish"
+                        "Add sheer fetish top" if Girl == RogueX:
+                            $ Girl.outfit["top"] = "_sheer_fetish"
+                        "Add violet shirt" if Girl == KittyX:
+                            $ Girl.outfit["top"] = "_violet_shirt"
+                        "Add nighty" if Girl == KittyX:
+                            $ Girl.outfit["top"] = "_nighty"
+                        "Add towel":
+                            $ Girl.outfit["top"] = "_towel"
+                        "Back":
+                            jump wardrobe_menu
+            "Bra":
+                while True:
+                    menu:
+                        "Remove [Girl.outfit[bra]]" if Girl.outfit["bra"]:
+                            $ Girl.outfit["bra"] = ""
+                        "Add sports bra":
+                            $ Girl.outfit["bra"] = "_sports_bra"
+                        "Add bikini":
+                            $ Girl.outfit["bra"] = "_bikini_top"
+                        "Add lace bra" if Girl != KittyX:
+                            $ Girl.outfit["bra"] = "_lace_bra"
+                        "Add tank top" if Girl == RogueX:
+                            $ Girl.outfit["bra"] = "_tank"
+                        "Add buttoned tank top" if Girl == RogueX:
+                            $ Girl.outfit["bra"] = "_buttoned_tank"
+                        "Add tube top" if Girl in [RogueX, StormX]:
+                            $ Girl.outfit["bra"] = "_tube_top"
+                        "Add basic bra" if Girl in [RogueX, KittyX, EmmaX, LauraX, JubesX]:
+                            $ Girl.outfit["bra"] = "_bra"
+                        "Add cami" if Girl == KittyX:
+                            $ Girl.outfit["bra"] = "_cami"
+                        "Add dress top" if Girl == KittyX:
+                            $ Girl.outfit["bra"] = "_dress"
+                        "Add leather bra" if Girl == LauraX:
+                            $ Girl.outfit["bra"] = "_leather_bra"
+                        "Add white tank" if Girl == LauraX:
+                            $ Girl.outfit["bra"] = "_white_tank"
+                        "Add wolvie panties" if Girl == LauraX:
+                            $ Girl.outfit["bra"] = "_wolvie_bra"
+                        "Add green bra" if Girl == JeanX:
+                            $ Girl.outfit["bra"] = "_green_bra"
+                        "Add black bra" if Girl == StormX:
+                            $ Girl.outfit["bra"] = "_black_bra"
+                        "Add cosplay bra" if Girl == StormX:
+                            $ Girl.outfit["bra"] = "_cosplay_bra"
+                        "Add corset" if Girl == EmmaX:
+                            $ Girl.outfit["bra"] = "_corset"
+                        "Add lace corset" if Girl == EmmaX:
+                            $ Girl.outfit["bra"] = "_lace_corset"
+                        "Add classic top" if Girl == RogueX:
+                            $ Girl.outfit["bra"] = "_classic"
+                        "Add harness" if Girl == RogueX:
+                            $ Girl.outfit["bra"] = "_harness"
+                        "Add kitty lingerie" if Girl == KittyX:
+                            $ Girl.outfit["bra"] = "_kitty_lingerie"
+                        "Add orange top" if Girl == KittyX:
+                            $ Girl.outfit["bra"] = "_orange_top"
+                        "Toggle up-top":
+                            if Girl.top_pulled_up:
+                                $ Girl.top_pulled_up = False
+                            else:
+                                $ Girl.top_pulled_up = True
+                        "Back":
+                            jump wardrobe_menu
+            "Bottom":
+                while True:
+                    menu:
+                        "Remove [Girl.outfit[bottom]]" if Girl.outfit["bottom"]:
+                            $ Girl.outfit["bottom"] = ""
+                        "Add skirt" if Girl != KittyX:
+                            $ Girl.outfit["bottom"] = "_skirt"
+                        "Add cosplay skirt" if Girl == LauraX:
+                            $ Girl.outfit["bottom"] = "_cosplay_skirt"
+                        "Add blue skirt" if Girl == KittyX:
+                            $ Girl.outfit["bottom"] = "_blue_skirt"
+                        "Add pants" if Girl != KittyX:
+                            $ Girl.outfit["bottom"] = "_pants"
+                        "Add black jeans" if Girl == KittyX:
+                            $ Girl.outfit["bottom"] = "_black_jeans"
+                        "Add capri pants" if Girl == KittyX:
+                            $ Girl.outfit["bottom"] = "_capris"
+                        "Add shorts" if Girl in [KittyX, JeanX, JubesX]:
+                            $ Girl.outfit["bottom"] = "_shorts"
+                        "Add leather pants" if Girl == LauraX:
+                            $ Girl.outfit["bottom"] = "_leather_pants"
+                        "Add yoga pants" if Girl in [EmmaX, JeanX, StormX]:
+                            $ Girl.outfit["bottom"] = "_yoga_pants"
+                        "Add dress" if Girl in [KittyX, EmmaX]:
+                            $ Girl.outfit["bottom"] = "_dress"
+                        "Add cheerleader skirt" if Girl == RogueX:
+                            $ Girl.outfit["bottom"] = "_cheerleader_skirt"
+                        "Add classic outfit bottom" if Girl == RogueX:
+                            $ Girl.outfit["bottom"] = "_classic"
+                        "Add opaque fetish bottom" if Girl == RogueX:
+                            $ Girl.outfit["bottom"] = "_opaque_fetish"
+                        "Add sheer fetish bottom" if Girl == RogueX:
+                            $ Girl.outfit["bottom"] = "_sheer_fetish"
+                        "Add black and blue pants" if Girl == KittyX:
+                            $ Girl.outfit["bottom"] = "_black_and_blue_pants"
+                        "Add boots" if Girl == EmmaX:
+                            $ EmmaX.outfit["boots"] = "_thigh_boots"
+                        "Toggle upskirt":
+                            if Girl.upskirt:
+                                $ Girl.upskirt = False
+                            else:
+                                $ Girl.upskirt = True
+                        "Back":
+                            jump wardrobe_menu
+            "Panties & Hose":
+                while True:
+                    menu:
+                        "Hose":
+                            menu:
+                                "Remove [Girl.outfit[hose]]" if Girl.outfit["hose"]:
+                                    $ Girl.outfit["hose"] = ""
+                                "Add stockings":
+                                    $ Girl.outfit["hose"] = "_stockings"
+                                "Add garterbelt":
+                                    $ Girl.outfit["hose"] = "_garterbelt"
+                                "Add stockings and garterbelt":
+                                    $ Girl.outfit["hose"] = "_stockings_and_garterbelt"
+                                "Add pantyhose":
+                                    $ Girl.outfit["hose"] = "_pantyhose"
+                                "Add tights":
+                                    $ Girl.outfit["hose"] = "_tights"
+                                "Add ripped pantyhose":
+                                    $ Girl.outfit["hose"] = "_ripped_pantyhose"
+                                "Add ripped tights":
+                                    $ Girl.outfit["hose"] = "_ripped_tights"
+                                "Add knee stockings" if Girl == KittyX:
+                                    $ Girl.outfit["hose"] = "_knee_stockings"
+                                "Add socks" if Girl == JubesX:
+                                    $ Girl.outfit["hose"] = "_socks"
+                                "Add black stockings" if Girl == LauraX:
+                                    $ Girl.outfit["hose"] = "_black_stockings"
+                        "Remove [Girl.outfit[underwear]]" if Girl.outfit["underwear"]:
+                            $ Girl.outfit["underwear"] = ""
+                        "Add green panties":
+                            $ Girl.outfit["underwear"] = "_green_panties"
+                        "Add lace panties":
+                            $ Girl.outfit["underwear"] = "_lace_panties"
+                        "Add bikini bottoms":
+                            $ Girl.outfit["underwear"] = "_bikini_bottoms"
+                        "Add black panties" if Girl != JeanX:
+                            $ Girl.outfit["underwear"] = "_black_panties"
+                        "Add shorts" if Girl == RogueX:
+                            $ Girl.outfit["underwear"] = "_shorts"
+                        "Add white panties" if Girl in [EmmaX, StormX]:
+                            $ Girl.outfit["underwear"] = "_white_panties"
+                        "Add sports panties" if Girl == EmmaX:
+                            $ Girl.outfit["underwear"] = "_sports_panties"
+                        "Add wolvie panties" if Girl == LauraX:
+                            $ Girl.outfit["underwear"] = "_wolvie_panties"
+                        "Add cosplay panties" if Girl == StormX:
+                            $ Girl.outfit["underwear"] = "_cosplay_panties"
+                        "Add harness" if Girl == RogueX:
+                            $ Girl.outfit["underwear"] = "_harness"
+                        "Add kitty lingerie" if Girl == KittyX:
+                            $ Girl.outfit["underwear"] = "_kitty_lingerie"
+                        "Add nighty underwear" if Girl == KittyX:
+                            $ Girl.outfit["underwear"] = "_nighty"
+                        "Toggle underwear up/down":
+                            if Girl.underwear_pulled_down:
+                                $ Girl.underwear_pulled_down = 0
+                            else:
+                                $ Girl.underwear_pulled_down = 1
+                        "Toggle grool":
+                            if not Girl.grool:
+                                $ Girl.grool = 1
+                            elif Girl.grool == 1:
+                                $ Girl.grool = 2
+                            else:
+                                $ Girl.grool  = 0
+                        "Back":
+                            jump wardrobe_menu
+            "Misc":
+                while True:
+                    menu:
+                        "Emotions":
+                            call face_editor(Girl)
+                        "Toggle arm pose":
+                            if Girl.arm_pose == 1:
+                                $ Girl.arm_pose = 2
+                            else:
+                                if Girl == EmmaX and Girl.outfit["dress"] == "_domme":
+                                    $ Girl.outfit["dress"] = ""
+                                elif Girl == EmmaX and Girl.outfit["gloves"] == "_spiked_bracelets":
+                                    $ Girl.outfit["gloves"] = ""
+
+                                $ Girl.arm_pose = 1
+                        "Toggle wet look":
+                            if not Girl.wet:
+                                $ Girl.wet = 1
+                            elif Girl.wet == 1:
+                                $ Girl.wet = 3
+                            else:
+                                $ Girl.wet  = 0
+                        "Toggle pubes":
+                            if not Girl.pubes:
+                                $ Girl.pubes = "_hairy"
+                            else:
+                                $ Girl.pubes = ""
+                        "Toggle hair" if Girl == RogueX:
+                            if Girl.outfit["hair"] == "_cosplay":
+                                $ Girl.outfit["hair"] = "_evo"
+                            elif Girl.outfit["hair"] == "_evo":
+                                $ Girl.outfit["hair"] = "_wet"
+                            elif Girl.outfit["hair"] == "_wet":
+                                $ Girl.outfit["hair"] = "_cosplay"
+
+                            $ Girl.outfit["back_hair"] = Girl.outfit["hair"]
+                        "Toggle hair" if Girl == KittyX:
+                            if Girl.outfit["hair"] == "_long":
+                                $ Girl.outfit["hair"] = "_evo"
+                            elif Girl.outfit["hair"] == "_evo":
+                                $ Girl.outfit["hair"] = "_wet"
+                            elif Girl.outfit["hair"] == "_wet":
+                                $ Girl.outfit["hair"] = "_long"
+
+                            $ Girl.outfit["back_hair"] = Girl.outfit["hair"]
+                        "Toggle hair" if Girl == JeanX:
+                            if Girl.outfit["hair"] == "_pony":
+                                $ Girl.outfit["hair"] = "_short"
+                            elif Girl.outfit["hair"] == "_short":
+                                $ Girl.outfit["hair"] = "_wet"
+                            elif Girl.outfit["hair"] == "_wet":
+                                $ Girl.outfit["hair"] = "_pony"
+
+                            $ Girl.outfit["back_hair"] = Girl.outfit["hair"]
+                        "Toggle hair" if Girl == StormX:
+                            if Girl.outfit["hair"] == "_long":
+                                $ Girl.outfit["hair"] = "_mohawk"
+                            elif Girl.outfit["hair"] == "_mohawk":
+                                $ Girl.outfit["hair"] = "_short"
+                            elif Girl.outfit["hair"] == "_short":
+                                $ Girl.outfit["hair"] = "_wet"
+                            elif Girl.outfit["hair"] = "_wet":
+                                $ Girl.outfit["hair"] = "_long"
+
+                            $ Girl.outfit["back_hair"] = Girl.outfit["hair"]
+                        "Toggle hat" if Girl == EmmaX:
+                            if Girl.outfit["hair"] == "_wavy":
+                                $ Girl.outfit["face_outer_accessory"] = "_hat"
+                            elif Girl.outfit["hair"] == "_wet":
+                                $ Girl.outfit["face_outer_accessory"] = "_wet_hat"
+                            elif Girl.outfit["hair"] in ["_hat", "_wet_hat"]:
+                                $ Girl.outfit["face_outer_accessory"] = ""
+                        "Toggle held item":
+                            if not Girl.outfit["held_item"]:
+                                $ Girl.outfit["held_item"]  = "_phone"
+                            elif Girl.outfit["held_item"] == "_phone":
+                                $ Girl.outfit["held_item"]  = "_dildo"
+                            elif Girl.outfit["held_item"] == "_dildo":
+                                $ Girl.outfit["held_item"]  = "_vibrator"
+                            elif Girl.outfit["held_item"] == "_vibrator":
+                                $ Girl.outfit["held_item"]  = "_panties"
+                            else:
+                                $ Girl.outfit["held_item"]  = ""
+                        "Toggle gold necklace" if Girl in [KittyX, StormX]:
+                            if not Girl.outfit["neck"]:
+                                $ Girl.outfit["neck"] = "_gold_necklace"
+                            else:
+                                $ Girl.outfit["neck"] = ""
+                        "Toggle flower necklace" if Girl in [KittyX, StormX]:
+                            if not Girl.outfit["neck"]:
+                                $ Girl.outfit["neck"] = "_flower_necklace"
+                            else:
+                                $ Girl.outfit["neck"] = ""
+                        "Toggle ring necklace" if Girl == StormX:
+                            if not Girl.outfit["neck"]:
+                                $ Girl.outfit["neck"] = "_rings"
+                            else:
+                                $ Girl.outfit["neck"] = ""
+                        "Toggle rings" if Girl == StormX:
+                            if not Girl.outfit["front_outer_accessory"]:
+                                $ Girl.outfit["front_outer_accessory"] = "_rings"
+                            else:
+                                $ Girl.outfit["front_outer_accessory"] = ""
+                        "Toggle sweater" if Girl == RogueX:
+                            if Girl.outfit["scarf"] != "_sweater":
+                                $ Girl.outfit["scarf"] = "_sweater"
+                            else:
+                                $ Girl.outfit["scarf"] = ""
+                        "Toggle spiked collar" if Girl in [RogueX, LauraX]:
+                            if Girl.outfit["neck"] != "_spiked_collar":
+                                $ Girl.outfit["neck"] = "_spiked_collar"
+                            else:
+                                $ Girl.outfit["neck"] = ""
+                        "Toggle choker" if Girl == EmmaX:
+                            if Girl.outfit["neck"] != "_choker":
+                                $ Girl.outfit["neck"] = "_choker"
+                            else:
+                                $ Girl.outfit["neck"] = ""
+                        "Toggle boots" if Girl == EmmaX:
+                            if Girl.outfit["boots"] != "_thigh_boots":
+                                $ Girl.outfit["boots"] = "_thigh_boots"
+                            else:
+                                $ Girl.outfit["boots"] = ""
+                        "Toggle suspenders" if Girl in [LauraX, JeanX]:
+                            if Girl.outfit["suspenders"] == "_suspenders":
+                                $ Girl.outfit["suspenders"] = "_suspenders2"
+                            elif Girl.outfit["suspenders"] == "_suspenders2":
+                                $ Girl.outfit["suspenders"] = ""
+                            else:
+                                $ Girl.outfit["suspenders"] = "_suspenders"
+                        "Toggle claws" if Girl == LauraX:
+                            if Girl.claws:
+                                $ Girl.claws = False
+                            else:
+                                $ Girl.claws = True
+                        "Toggle Raven cloak" if Girl == RogueX:
+                            if Girl.outfit["cloak"] == "_raven_cloak":
+                                $ Girl.outfit["back_outer_accessory"] = ""
+                                $ Girl.outfit["cloak"] = ""
+                            else:
+                                $ Girl.outfit["back_outer_accessory"] = "_raven_cloak"
+                                $ Girl.outfit["cloak"] = "_raven_cloak"
+                        "Toggle diamond mode" if Girl == EmmaX:
+                            if Girl.diamond:
+                                $ Girl.diamond = False
+                            else:
+                                $ Girl.diamond = True
+                        "Spunk locations":
+                            menu:
+                                "Mouth":
+                                    if Girl.spunk["mouth"]:
+                                        $ Girl.spunk["mouth"] = False
+                                    else:
+                                        $ Girl.spunk["mouth"] = True
+                                "Chin":
+                                    if Girl.spunk["chin"]:
+                                        $ Girl.spunk["chin"] = False
+                                    else:
+                                        $ Girl.spunk["chin"] = True
+                                "Face":
+                                    if Girl.spunk["face"]:
+                                        $ Girl.spunk["face"] = False
+                                    else:
+                                        $ Girl.spunk["face"] = True
+                                "Hair":
+                                    if Girl.spunk["hair"]:
+                                        $ Girl.spunk["hair"] = False
+                                    else:
+                                        $ Girl.spunk["hair"] = True
+                                "Tits":
+                                    if Girl.spunk["breasts"]:
+                                        $ Girl.spunk["breasts"] = False
+                                    else:
+                                        $ Girl.spunk["breasts"] = True
+                                "Belly":
+                                    if Girl.spunk["belly"]:
+                                        $ Girl.spunk["belly"] = False
+                                    else:
+                                        $ Girl.spunk["belly"] = True
+                                "Back":
+                                    if Girl.spunk["back"]:
+                                        $ Girl.spunk["back"] = False
+                                    else:
+                                        $ Girl.spunk["back"] = True
+                                "Pussy":
+                                    if Girl.spunk["pussy"]:
+                                        $ Girl.spunk["pussy"] = False
+                                    else:
+                                        $ Girl.spunk["pussy"] = True
+                                "Ass":
+                                    if Girl.spunk["anus"]:
+                                        $ Girl.spunk["anus"] = False
+                                    else:
+                                        $ Girl.spunk["anus"] = True
+                                "Return":
+                                    pass
+                        "Toggle piercings":
+                            if Girl.outfit["piercings"] == "_ring":
+                                $ Girl.outfit["piercings"] = "_barbell"
+                            elif Girl.outfit["piercings"] == "_barbell":
+                                $ Girl.outfit["piercings"] = ""
+                            else:
+                                $ Girl.outfit["piercings"] = "_ring"
+                        "Toggle gloves" if Girl in [RogueX, EmmaX]:
+                            if Girl.outfit["gloves"]:
+                                $ Girl.outfit["gloves"] = ""
+                            else:
+                                $ Girl.outfit["gloves"] = "_gloves"
+                        "Back":
+                            jump wardrobe_menu
+            "Nothing":
+                return
+    return
+
+label cheat_menu(Girl):
     menu:
-        "Level-Up":
+        "Level up":
             $ Girl.action_counter["handjob"] += 5
             $ Girl.action_counter["blowjob"] += 5
             $ Girl.event_counter["swallowed"] += 5
@@ -671,14 +648,13 @@ label Cheat_Menu(Girl=0):
             $ Girl.action_counter["anal"] += 5
             $ Girl.action_counter["hotdog"] += 5
             $ Girl.action_counter["masturbation"] += 5
-            $ Girl.event_counter["orgasmed"]+= 5
-            $ Girl.action_counter["fondle_breasts"]+= 5
-            $ Girl.action_counter["fondle_thighs"]+= 5
+            $ Girl.event_counter["orgasmed"] += 5
+            $ Girl.action_counter["fondle_breasts"] += 5
+            $ Girl.action_counter["fondle_thighs"] += 5
             $ Girl.action_counter["fondle_pussy"] += 5
             $ Girl.action_counter["fondle_ass"] += 5
             $ Girl.action_counter["dildo_pussy"] += 5
             $ Girl.action_counter["dildo_ass"] += 5
-            $ Girl.outfit["buttplug"] += 5
             $ Girl.action_counter["suck_breasts"] += 5
             $ Girl.action_counter["finger_pussy"] += 5
             $ Girl.action_counter["finger_ass"] += 5
@@ -688,10 +664,10 @@ label Cheat_Menu(Girl=0):
             $ Girl.event_counter["swallowed"] += 5
             $ Girl.event_counter["creampied"] += 5
             $ Girl.event_counter["anal_creampied"] += 5
-            $ Girl.seen_breasts = 1
-            $ Girl.seen_underwear = 1
-            $ Girl.seen_pussy = 1
-        "Level Reset":
+            $ Girl.seen_breasts = True
+            $ Girl.seen_underwear = True
+            $ Girl.seen_pussy = True
+        "Level reset":
             $ Girl.action_counter["handjob"] = 0
             $ Girl.action_counter["blowjob"] = 0
             $ Girl.event_counter["swallowed"] = 0
@@ -728,10 +704,11 @@ label Cheat_Menu(Girl=0):
             $ Girl.action_counter["kiss"] = 10
             $ Girl.event_counter["swallowed"] = 0
         "Juice up":
-            $ Player.semen += 5
+            $ Player.semen = Player.max_semen
             $ Girl.remaining_actions = 10
         "Cold Shower":
             $ Player.focus = 0
         "Exit":
             return
-    jump Cheat_Menu
+
+    jump cheat_menu

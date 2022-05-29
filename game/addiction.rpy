@@ -650,7 +650,7 @@ label third_addiction_event:
         $ Girl.change_face("_angry",eyes="_manic")
 
         ch_j "Now look here, fucko!"
-        ch_j "I have had just about enough of your \"not doing what Jean says\" nonsense!"
+        ch_j "I have had just about enough of your \"not doing what Jean_sprite says\" nonsense!"
         ch_j "What is it you want from me?!"
     elif Girl == StormX:
         $ Girl.change_face("_angry",eyes="_white")

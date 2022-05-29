@@ -2,8 +2,13 @@
 errors listed below, and try again.
 
 
-File "game/emma_sprites.rpy", line 166: is not terminated with a newline. (Check strings and parenthesis.)
-        elif EmmaX.outfit["top"] and (EmmaX.outfit["bra"] in ["_corset", "_lace_bra", "_sports_bra", "_bikini_top"] or (EmmaX.outfit["top"] == "_towel" and EmmaX.arm_pose == 1):
+File "game/girl_animations.rpy", line 238: reached end of line when expecting ':'.
+    if True
+           ^
+
+File "game/girl_animations.rpy", line 240: expected statement.
+    else:
+        ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Sat May 28 09:01:50 2022
+Sun May 29 01:28:41 2022

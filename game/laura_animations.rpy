@@ -1,6 +1,6 @@
 
 
-image Laura_Sprite:
+image Laura_sprite standing:
     LiveComposite(
         (402,965),
         (0,0), "Laura_Sprite_HairBack",
@@ -285,7 +285,7 @@ image Laura_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "renpy.showing('Laura_BJ_Animation')", Null(),
+            "renpy.showing('Laura_sprite blowjob')", Null(),
             "True", "Laura_Sprite_Head",
             ),
         (0,0), ConditionSwitch(
@@ -463,7 +463,7 @@ image Laura_Sprite_HairBack:
     ConditionSwitch(
 
             "not LauraX.outfit['hair']", Null(),
-            "renpy.showing('Laura_BJ_Animation')", Null(),
+            "renpy.showing('Laura_sprite blowjob')", Null(),
 
             "LauraX.outfit['hair'] == '_wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Under.png",
             "LauraX.outfit['hair']", "images/LauraSprite/Laura_Sprite_Hair_Long_Under.png",
@@ -477,7 +477,7 @@ image Laura_Sprite_HairMid:
     ConditionSwitch(
 
             "not LauraX.outfit['hair']", Null(),
-            "renpy.showing('Laura_BJ_Animation')", Null(),
+            "renpy.showing('Laura_sprite blowjob')", Null(),
 
             "LauraX.outfit['hair'] == '_wet' or LauraX.wet", Null(),
             "LauraX.outfit['hair']", "images/LauraSprite/Laura_Sprite_Hair_Long_Mid.png",
@@ -490,7 +490,7 @@ image Laura_Sprite_HairTop:
     ConditionSwitch(
 
             "not LauraX.outfit['hair']", Null(),
-            "renpy.showing('Laura_SexSprite')", "images/LauraSex/Laura_Sprite_Hair_Long_OverSex.png",
+            "renpy.showing('Laura_sprite sex')", "images/LauraSex/Laura_Sprite_Hair_Long_OverSex.png",
             "LauraX.outfit['hair'] == '_wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Over.png",
             "LauraX.outfit['hair']", "images/LauraSprite/Laura_Sprite_Hair_Long_Over.png",
             "True", Null(),
@@ -504,7 +504,7 @@ image Laura_Sprite_Head:
         (806,806),
         (0,0), ConditionSwitch(
 
-                "renpy.showing('Laura_SexSprite')", "images/LauraSex/Laura_Sprite_Hair_Long_UnderSex.png",
+                "renpy.showing('Laura_sprite sex')", "images/LauraSex/Laura_Sprite_Hair_Long_UnderSex.png",
                 "True", Null(),
                 ),
         (0,0), ConditionSwitch(
@@ -515,11 +515,11 @@ image Laura_Sprite_Head:
                 ),
         (0,0), ConditionSwitch(
             "not LauraX.spunk['chin']", Null(),
-            "renpy.showing('Laura_BJ_Animation') and action_speed >= 2", Null(),
+            "renpy.showing('Laura_sprite blowjob') and action_speed >= 2", Null(),
             "True", "images/LauraSprite/Laura_Sprite_Spunk_Chin.png",
             ),
         (0,0), ConditionSwitch(
-            "renpy.showing('Laura_BJ_Animation')", "images/LauraSprite/Laura_Sprite_mouth_SuckingBJ.png",
+            "renpy.showing('Laura_sprite blowjob')", "images/LauraSprite/Laura_Sprite_mouth_SuckingBJ.png",
             "LauraX.mouth == '_normal'", "images/LauraSprite/Laura_Sprite_mouth_Normal.png",
             "LauraX.mouth == '_lipbite'", "images/LauraSprite/Laura_Sprite_mouth_Lipbite.png",
             "LauraX.mouth == '_sucking'", "images/LauraSprite/Laura_Sprite_mouth_Sucking.png",
@@ -535,7 +535,7 @@ image Laura_Sprite_Head:
             ),
         (0,0), ConditionSwitch(
             "not LauraX.spunk['mouth']", Null(),
-            "renpy.showing('Laura_BJ_Animation')", "images/LauraSprite/Laura_Sprite_Spunk_mouthSuck.png",
+            "renpy.showing('Laura_sprite blowjob')", "images/LauraSprite/Laura_Sprite_Spunk_mouthSuck.png",
             "LauraX.mouth == '_normal'", "images/LauraSprite/Laura_Sprite_Spunk_mouthNeutral.png",
             "LauraX.mouth == '_lipbite'", "images/LauraSprite/Laura_Sprite_Spunk_mouthSmirk.png",
             "LauraX.mouth == '_sucking'", "images/LauraSprite/Laura_Sprite_Spunk_mouthTongue.png",
@@ -567,11 +567,11 @@ image Laura_Sprite_Head:
                     "True", "images/LauraSprite/Laura_Sprite_brows_Normal.png",
                     ),
             ),
-        (0,0), "Laura Blink",
+        (0,0), "Laura_sprite Blink",
         (0,0), ConditionSwitch(
 
             "LauraX.outfit['top'] == '_jacket'", Null(),
-            "renpy.showing('Laura_TJ_Animation')", Null(),
+            "renpy.showing('Laura_sprite titjob')", Null(),
             "renpy.showing('Laura_Sex_Animation')", Null(),
             "LauraX.outfit['hair'] == '_wet' or LauraX.wet", Null(),
             "LauraX.outfit['hair']", "images/LauraSprite/Laura_Sprite_Hair_Long_Mid.png",
@@ -585,8 +585,8 @@ image Laura_Sprite_Head:
         (0,0), ConditionSwitch(
 
             "not LauraX.outfit['hair']", Null(),
-            "renpy.showing('Laura_TJ_Animation')", Null(),
-            "renpy.showing('Laura_SexSprite')", "images/LauraSex/Laura_Sprite_Hair_Long_OverSex.png",
+            "renpy.showing('Laura_sprite titjob')", Null(),
+            "renpy.showing('Laura_sprite sex')", "images/LauraSex/Laura_Sprite_Hair_Long_OverSex.png",
             "LauraX.outfit['hair'] == '_wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Over.png",
             "LauraX.outfit['hair']", "images/LauraSprite/Laura_Sprite_Hair_Long_Over.png",
             "True", Null(),
@@ -607,7 +607,7 @@ image Laura_Sprite_Head:
     anchor (0.6, 0.0)
     zoom .5
 
-image Laura Blink:
+image Laura_sprite Blink:
     ConditionSwitch(
     "LauraX.eyes == '_sexy'", "images/LauraSprite/Laura_Sprite_eyes_Squint.png",
     "LauraX.eyes == '_side'", "images/LauraSprite/Laura_Sprite_eyes_Side.png",
@@ -667,7 +667,7 @@ image Laura_Drip_MaskP:
 
 
 
-image Laura_Doggy_Animation:
+image Laura_sprite doggy:
     LiveComposite(
 
         (420,750),
@@ -858,7 +858,7 @@ image Laura_Doggy_Head:
 
             "True", "images/LauraDoggy/Laura_Doggy_brows_Normal.png",
             ),
-        (0,0), "Laura Doggy Blink",
+        (0,0), "Laura_sprite Doggy Blink",
 
 
 
@@ -913,7 +913,7 @@ image Laura_Doggy_Head:
 
 
 
-image Laura Doggy Blink:
+image Laura_sprite Doggy Blink:
 
     ConditionSwitch(
         "LauraX.eyes == '_sexy'", "images/LauraDoggy/Laura_Doggy_eyes_Sexy.png",
@@ -2092,23 +2092,23 @@ image Laura_Doggy_Foot2_Ass:
 
 
 label Laura_Doggy_Launch(Line=primary_action):
-    if renpy.showing("Laura_Doggy_Animation"):
+    if renpy.showing("Laura_sprite doggy"):
         return
     $ action_speed = 0
     call hide_girl(LauraX, hide_sprite = True)
-    show Laura_Doggy_Animation zorder 150 at sprite_location(stage_center+150)
+    show Laura_sprite doggy zorder 150 at sprite_location(stage_center+150)
     with dissolve
     return
 
 label Laura_Doggy_Reset:
-    if not renpy.showing("Laura_Doggy_Animation"):
+    if not renpy.showing("Laura_sprite doggy"):
         return
 
     $ LauraX.arm_pose = 2
     $ LauraX.SpriteVer = 0
-    hide Laura_Doggy_Animation
+    hide Laura_sprite doggy
     call hide_girl(LauraX)
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         alpha 1
         zoom 1
         offset (0,0)
@@ -2125,7 +2125,7 @@ label Laura_Doggy_Reset:
 
 
 
-image Laura_SexSprite:
+image Laura_sprite sex:
 
     contains:
         ConditionSwitch(
@@ -3861,7 +3861,7 @@ label Laura_Sex_Launch(Line=primary_action):
     if LauraX.pose == "doggy":
         call Laura_Doggy_Launch (Line)
         return
-    if renpy.showing("Laura_SexSprite"):
+    if renpy.showing("Laura_sprite sex"):
         return
     call hide_girl(LauraX, hide_sprite = True)
     $ action_speed = 0
@@ -3872,21 +3872,21 @@ label Laura_Sex_Launch(Line=primary_action):
         if LauraX.outfit['underwear']:
             $ LauraX.underwear_pulled_down = 1
 
-    show Laura_SexSprite zorder 150:
+    show Laura_sprite sex zorder 150:
         pos (450,500)
     with dissolve
     return
 
 label Laura_Sex_Reset:
-    if renpy.showing("Laura_Doggy_Animation"):
+    if renpy.showing("Laura_sprite doggy"):
         call Laura_Doggy_Reset
         return
-    if not renpy.showing("Laura_SexSprite"):
+    if not renpy.showing("Laura_sprite sex"):
         return
     $ LauraX.arm_pose = 2
-    hide Laura_SexSprite
+    hide Laura_sprite sex
     call hide_girl(LauraX)
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
         anchor (0.5, 0.0)
@@ -3905,7 +3905,7 @@ label Laura_Sex_Reset:
 
 
 
-image Laura_BJ_Animation:
+image Laura_sprite blowjob:
 
     contains:
         ConditionSwitch(
@@ -4024,7 +4024,7 @@ image Laura_Sprite_BJ_Head:
                     "True", "images/LauraSprite/Laura_Sprite_brows_Normal.png",
                     ),
             ),
-        (0,0), "Laura Blink",
+        (0,0), "Laura_sprite Blink",
         (0,0), ConditionSwitch(
 
             "LauraX.outfit['top'] == '_jacket'", Null(),
@@ -4104,7 +4104,7 @@ image Laura_BJ_Body_0:
             repeat
     contains:
 
-        "Laura_Sprite"
+        "Laura_sprite standing"
         subpixel True
         pos (650,800)
         zoom 2.2
@@ -4191,7 +4191,7 @@ image Laura_BJ_Body_1:
             repeat
     contains:
 
-        "Laura_Sprite"
+        "Laura_sprite standing"
         pos (673,740)
         zoom 2.2
         anchor (0.5, 0.5)
@@ -4304,7 +4304,7 @@ image Laura_BJ_Body_2:
             repeat
     contains:
 
-        "Laura_Sprite"
+        "Laura_sprite standing"
         pos (680,755)
         zoom 2.2
         anchor (0.5, 0.5)
@@ -4458,7 +4458,7 @@ image Laura_BJ_Body_3:
             repeat
     contains:
 
-        "Laura_Sprite"
+        "Laura_sprite standing"
         pos (673,780)
         zoom 2.2
         anchor (0.5, 0.5)
@@ -4611,7 +4611,7 @@ image Laura_BJ_Body_4:
             repeat
     contains:
 
-        "Laura_Sprite"
+        "Laura_sprite standing"
         pos (673,780)
         zoom 2.2
         anchor (0.5, 0.5)
@@ -4752,7 +4752,7 @@ image Laura_BJ_Body_5:
             repeat
     contains:
 
-        "Laura_Sprite"
+        "Laura_sprite standing"
         subpixel True
         zoom 2.2
         anchor (0.5, 0.5)
@@ -4908,7 +4908,7 @@ image Laura_BJ_Body_6:
             repeat
     contains:
 
-        "Laura_Sprite"
+        "Laura_sprite standing"
         subpixel True
         zoom 2.2
         anchor (0.5, 0.5)
@@ -5027,17 +5027,17 @@ image Laura_BJ_Body_6:
 label Laura_BJ_Launch(Line=primary_action):
 
     $ LauraX.arm_pose = 1
-    if renpy.showing("Laura_BJ_Animation"):
+    if renpy.showing("Laura_sprite blowjob"):
         return
 
     call hide_girl(LauraX)
     if Line == "L" or Line == "cum":
-        show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(stage_center):
+        show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(stage_center):
             alpha 1
             ease 1 zoom 2.5 offset (150,80)
         with dissolve
     else:
-        show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(stage_center):
+        show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(stage_center):
             alpha 1
             zoom 2.5 offset (150,80)
         with dissolve
@@ -5057,30 +5057,30 @@ label Laura_BJ_Launch(Line=primary_action):
     if Line != "cum":
         $ primary_action = "blowjob"
 
-    show Laura_Sprite zorder LauraX.sprite_layer:
+    show Laura_sprite standing zorder LauraX.sprite_layer:
         alpha 0
-    show Laura_BJ_Animation zorder 150:
+    show Laura_sprite blowjob zorder 150:
         pos (645,510)
     return
 
 label Laura_BJ_Reset:
-    if not renpy.showing("Laura_BJ_Animation"):
+    if not renpy.showing("Laura_sprite blowjob"):
         return
 
     call hide_girl(LauraX)
     $ action_speed = 0
 
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(stage_center):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(stage_center):
         alpha 1
         zoom 2.5 offset (150,80)
     with dissolve
 
-    show Laura_Sprite zorder LauraX.sprite_layer:
+    show Laura_sprite standing zorder LauraX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 offset (-50,50)
         pause .5
         ease .5 zoom 1 offset (0,0)
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
     return
@@ -5171,7 +5171,7 @@ transform Handcock_2L():
         pause 0.1
         repeat
 
-image Laura_HJ_Animation:
+image Laura_sprite handjob:
     contains:
         ConditionSwitch(
 
@@ -5202,16 +5202,16 @@ image Laura_HJ_Animation:
 
 
 label Laura_HJ_Launch(Line=primary_action):
-    if renpy.showing("Laura_HJ_Animation"):
+    if renpy.showing("Laura_sprite handjob"):
         $ primary_action = "handjob"
         return
     call hide_girl(LauraX)
     if Line == "L":
-        show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(stage_right):
+        show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (-150,200)
     else:
-        show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(stage_right):
+        show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (-150,200)
         with dissolve
@@ -5223,27 +5223,27 @@ label Laura_HJ_Launch(Line=primary_action):
         $ action_speed = 1
     pause .5
     $ LauraX.arm_pose = 1
-    show Laura_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
+    show Laura_sprite handjob zorder 150 at sprite_location(stage_center) with easeinbottom:
 
         offset (250,250)
     return
 
 label Laura_HJ_Reset:
-    if not renpy.showing("Laura_HJ_Animation"):
+    if not renpy.showing("Laura_sprite handjob"):
         return
     $ action_speed = 0
     $ LauraX.arm_pose = 1
-    hide Laura_HJ_Animation with easeoutbottom
+    hide Laura_sprite handjob with easeoutbottom
     call hide_girl(LauraX)
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         alpha 1
         zoom 1.7 offset (-50,200)
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         alpha 1
         ease 1 zoom 1.5 offset (-150,50)
         pause .5
         ease .5 zoom 1 offset (0,0)
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
     return
@@ -5257,7 +5257,7 @@ label Laura_HJ_Reset:
 
 
 
-image Laura_TJ_Animation:
+image Laura_sprite titjob:
 
     contains:
         ConditionSwitch(
@@ -6324,10 +6324,10 @@ image Laura_TJ_5:
 
 
 label Laura_TJ_Launch(Line=primary_action):
-    if renpy.showing("Laura_TJ_Animation"):
+    if renpy.showing("Laura_sprite titjob"):
         return
     call hide_girl(LauraX)
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         alpha 1
         ease 1 zoom 2.3 xpos 750 yoffset -100
     if Line == "L":
@@ -6354,12 +6354,12 @@ label Laura_TJ_Launch(Line=primary_action):
     call Laura_First_Topless
 
     show blackscreen onlayer black with dissolve
-    show Laura_Sprite zorder LauraX.sprite_layer:
+    show Laura_sprite standing zorder LauraX.sprite_layer:
         alpha 0
     $ action_speed = 0
     if Line != "cum":
         $ primary_action = "titjob"
-    show Laura_TJ_Animation zorder 150:
+    show Laura_sprite titjob zorder 150:
         pos (700,520)
     $ Player.sprite = 1
     hide blackscreen onlayer black with dissolve
@@ -6367,21 +6367,21 @@ label Laura_TJ_Launch(Line=primary_action):
 
 label Laura_TJ_Reset:
 
-    if not renpy.showing("Laura_TJ_Animation"):
+    if not renpy.showing("Laura_sprite titjob"):
         return
 
     call hide_girl(LauraX)
     $ Player.sprite = 0
 
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         zoom 2.3 xpos 750 yoffset -100
-    show Laura_Sprite zorder LauraX.sprite_layer:
+    show Laura_sprite standing zorder LauraX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 xpos 700 yoffset 50
         pause .5
         ease .5 zoom 1 xpos LauraX.sprite_location yoffset 0
     "[LauraX.name] pulls back"
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         alpha 1
         zoom 1 offset (0,0) xpos LauraX.sprite_location
     return
@@ -6402,18 +6402,18 @@ label Laura_Kissing_Launch(T=primary_action, Set=1):
     call hide_girl(LauraX)
     $ primary_action = T
     $ LauraX.pose = "kiss" if Set else LauraX.pose
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location)
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(stage_center):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location)
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(stage_center):
         ease 0.5 offset (0,0) zoom 2 alpha 1
     return
 
 label Laura_Kissing_Smooch:
     $ LauraX.change_face("kiss")
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(stage_center):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos LauraX.sprite_location zoom 1
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         zoom 1
     $ LauraX.change_face("_sexy")
     return
@@ -6422,7 +6422,7 @@ label Laura_Breasts_Launch(T=primary_action, Set=1):
     call hide_girl(LauraX)
     $ primary_action = T
     $ LauraX.pose = "breasts" if Set else LauraX.pose
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 2 alpha 1
     return
@@ -6431,7 +6431,7 @@ label Laura_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(LauraX)
     $ primary_action = T
     $ LauraX.pose = "middle" if Set else LauraX.pose
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1
     return
@@ -6440,7 +6440,7 @@ label Laura_Pussy_Launch(T=primary_action, Set=1):
     call hide_girl(LauraX)
     $ primary_action = T
     $ LauraX.pose = "pussy" if Set else LauraX.pose
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         ease 0.5 pos (700,-400) offset (0,0) zoom 2 alpha 1
     return
 
@@ -6448,9 +6448,9 @@ label Laura_Pos_Reset(T=0, Set=0):
     if LauraX.location != bg_current:
         return
     call hide_girl(LauraX)
-    show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
+    show Laura_sprite standing zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         ease .5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
-    show Laura_Sprite zorder LauraX.sprite_layer:
+    show Laura_sprite standing zorder LauraX.sprite_layer:
         offset (0,0)
         anchor (0.5, 0.0)
         zoom 1

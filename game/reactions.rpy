@@ -206,7 +206,7 @@ label first_time_asking_reactions(Girl, action):
 
         call first_time_asking_lines(Girl, action)
 
-        $ Girl.blushing = 1
+        $ Girl.blushing = "_blush1"
 
     if action == "titjob":
         if Girl.action_counter["blowjob"]:
@@ -847,9 +847,9 @@ label action_disapproved(Girl, action):
         call otherwise_not_interested_lines(Girl, action)
 
         if Girl in [RogueX, KittyX, EmmaX, StormX]:
-            $ Girl.blushing = 1
+            $ Girl.blushing = "_blush1"
         else:
-            $ Girl.blushing = 0
+            $ Girl.blushing = ""
 
     if action == "masturbation":
         ch_r "That's. . . a little intimate, [RogueX.player_petname]."

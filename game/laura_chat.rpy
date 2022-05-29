@@ -1077,7 +1077,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
 
     elif Options[0] == "laura":
 
-        ch_l "Oh, by the way, I also go by \"Laura.\" Laura Kinney."
+        ch_l "Oh, by the way, I also go by \"Laura.\" Laura_sprite Kinney."
         $ LauraX.names.append("Laura")
         menu:
             "Oh, that's nice, I think I'll call you that.":
@@ -1335,7 +1335,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
             ch_l "I had a good nap. It's nice to be somewhere I can just doze off without worry."
         elif D20 == 6:
             $ LauraX.change_face("_perplexed")
-            ch_l "Oh, [LauraX.player_petname]. I think I just saw Emma Frost staring at Cyclops. That's.. wierd."
+            ch_l "Oh, [LauraX.player_petname]. I think I just saw Emma_sprite Frost staring at Cyclops. That's.. wierd."
         elif D20 == 7:
             $ LauraX.change_face("_smile")
             ch_l "I just got a new personal best time in the Danger Room."
@@ -1348,17 +1348,17 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
             ch_l "I have enhanced senses, this shouldn't be so difficult!"
         elif D20 == 10:
             $ LauraX.change_face("_smile")
-            ch_l "Kitty, Rogue and some of the others asked me if I wanted to go grab some ice cream with them tomorrow."
+            ch_l "Kitty, Rogue_sprite and some of the others asked me if I wanted to go grab some ice cream with them tomorrow."
         elif D20 == 11:
             $ LauraX.change_face("_smile")
-            ch_l "I tried out a dance class like Kitty said. Apparently I'm good at it."
+            ch_l "I tried out a dance class like Kitty_sprite said. Apparently I'm good at it."
         elif D20 == 12:
             $ LauraX.change_face("_sad")
-            ch_l "I like talking to Kitty and the others. It makes me feel, I don't know. . ."
+            ch_l "I like talking to Kitty_sprite and the others. It makes me feel, I don't know. . ."
             ch_l "{i}not{/i} like a really dangerous mutant who could kill everyone around me if I flipped out."
         elif D20 == 13:
             $ LauraX.change_face("_smile")
-            ch_l "Kitty and Rogue dared me to call Logan \"Dad\". I think we might've given him a heart attack."
+            ch_l "Kitty_sprite and Rogue_sprite dared me to call Logan \"Dad\". I think we might've given him a heart attack."
         elif D20 == 14:
             $ LauraX.change_face("_sad")
             ch_l "I like going out on missions, but catching up with what's been going on while I'm gone is always a pain."
@@ -1653,7 +1653,7 @@ label Laura_Rename:
 
 label Laura_Personality(counter=0):
     if not LauraX.had_chat[4] or counter:
-        "Since you're doing well in one area, you can convince Laura to focus on one of the others."
+        "Since you're doing well in one area, you can convince Laura_sprite to focus on one of the others."
         "Any time you go over the limit in a given stat, the excess will spill over into the chosen stat instead."
         "This will also impact which personality trait takes priority in dialog."
     menu:
@@ -2013,7 +2013,7 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                 ch_l "I'm headed out."
         else:
             ch_l "I'm headed out, later."
-        hide Laura_Sprite
+        hide Laura_sprite
         return
 
 
@@ -2141,7 +2141,7 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
     $ LauraX.recent_history.append("followed")
     if not line:
 
-        hide Laura_Sprite
+        hide Laura_sprite
         call change_out_of_gym_clothes ([LauraX])
         return
 
@@ -2153,7 +2153,7 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_l "Sorry [LauraX.player_petname], but I'm going a little stir crazy."
         else:
             ch_l "Sorry, I have stuff to do."
-        hide Laura_Sprite
+        hide Laura_sprite
         call change_out_of_gym_clothes ([LauraX])
         return
 
@@ -2166,7 +2166,7 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         call drain_all_words ("arriving")
         $ LauraX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
-        hide Laura_Sprite
+        hide Laura_sprite
         call change_out_of_gym_clothes ([LauraX])
         if LauraX.location == "bg_classroom":
             ch_l "Ok, get a move on then."
@@ -2234,7 +2234,7 @@ label Laura_Clothes:
     $ Girl = LauraX
     call shift_focus (Girl)
 
-label Laura_Wardrobe_Menu:
+label Laura_wardrobe_menu:
     $ LauraX.change_face()
     $ primary_action = 1
     while True:
@@ -2702,10 +2702,10 @@ label Laura_Wardrobe_Menu:
             ch_l "Sure, why not."
             $ LauraX.outfit["bottom"] = "_skirt"
 
-        "Add leather_skirt" if LauraX.outfit["bottom"] != "_other_skirt" and "halloween" in LauraX.history:
+        "Add leather_skirt" if LauraX.outfit["bottom"] != "_cosplay_skirt"and "halloween" in LauraX.history:
             ch_p "What about wearing your leather skirt?"
             ch_l "Sure, why not."
-            $ LauraX.outfit["bottom"] = "_other_skirt"
+            $ LauraX.outfit["bottom"] = "_cosplay_skirt"
         "Never mind":
 
             pass
@@ -2846,17 +2846,17 @@ label Laura_Wardrobe_Menu:
                         else:
                             $ LauraX.outfit["bra"] = "_lace_corset"
 
-                "Add wolverine tanktop" if LauraX.outfit["bra"] != "wolvie_top" and "wolvie_top" in LauraX.inventory:
+                "Add wolverine tanktop" if LauraX.outfit["bra"] != "_wolvie_bra" and "_wolvie_bra" in LauraX.inventory:
                     ch_p "I like that wolverine tanktop."
                     if LauraX.seen_breasts or approval_check(LauraX, 1000, taboo_modifier=2):
                         ch_l "K."
-                        $ LauraX.outfit["bra"] = "wolvie_top"
+                        $ LauraX.outfit["bra"] = "_wolvie_bra"
                     else:
                         call Display_dress_screen (LauraX)
                         if not _return:
                             ch_l "It's a {i}little{/i} embarrassing. . ."
                         else:
-                            $ LauraX.outfit["bra"] = "wolvie_top"
+                            $ LauraX.outfit["bra"] = "_wolvie_bra"
 
                 "Add bikini_top" if LauraX.outfit["bra"] != "_bikini_top" and "_bikini_top" in LauraX.inventory:
                     ch_p "I like that bikini top."
@@ -2887,8 +2887,8 @@ label Laura_Wardrobe_Menu:
                     $ LauraX.outfit["hose"] = "_black_stockings"
                 "The stockings and garterbelt would look good with that." if LauraX.outfit["hose"] != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in LauraX.inventory:
                     $ LauraX.outfit["hose"] = "_stockings_and_garterbelt"
-                "Just the garterbelt would look good with that." if LauraX.outfit["hose"] != "garterbelt" and "_stockings_and_garterbelt" in LauraX.inventory:
-                    $ LauraX.outfit["hose"] = "garterbelt"
+                "Just the garterbelt would look good with that." if LauraX.outfit["hose"] != "_garterbelt" and "_stockings_and_garterbelt" in LauraX.inventory:
+                    $ LauraX.outfit["hose"] = "_garterbelt"
                 "Never mind":
                     pass
             return
@@ -2960,16 +2960,16 @@ label Laura_Wardrobe_Menu:
                         else:
                             $ LauraX.outfit["underwear"] = "_black_panties"
 
-                "Why don't you wear the wolverine panties instead?" if "wolvie_panties" in LauraX.inventory and LauraX.outfit["underwear"] and LauraX.outfit["underwear"] != "wolvie_panties":
+                "Why don't you wear the wolverine panties instead?" if "_wolvie_panties" in LauraX.inventory and LauraX.outfit["underwear"] and LauraX.outfit["underwear"] != "_wolvie_panties":
                     if approval_check(LauraX, 1000, taboo_modifier=3):
                         ch_l "I guess."
-                        $ LauraX.outfit["underwear"] = "wolvie_panties"
+                        $ LauraX.outfit["underwear"] = "_wolvie_panties"
                     else:
                         call Display_dress_screen (LauraX)
                         if not _return:
                             ch_l "That's none of your busines."
                         else:
-                            $ LauraX.outfit["underwear"] = "wolvie_panties"
+                            $ LauraX.outfit["underwear"] = "_wolvie_panties"
 
                 "Why don't you wear the lace panties instead?" if "_lace_panties" in LauraX.inventory and LauraX.outfit["underwear"] and LauraX.outfit["underwear"] != "_lace_panties":
                     if approval_check(LauraX, 1300, taboo_modifier=3):
@@ -3020,9 +3020,9 @@ label Laura_Wardrobe_Menu:
                         "How about the black ones?":
                             ch_l "Sure, ok."
                             $ LauraX.outfit["underwear"] = "_black_panties"
-                        "How about the wolvie ones?" if "wolvie_panties" in LauraX.inventory:
+                        "How about the wolvie ones?" if "_wolvie_panties" in LauraX.inventory:
                             ch_l "Sure."
-                            $ LauraX.outfit["underwear"]  = "wolvie_panties"
+                            $ LauraX.outfit["underwear"]  = "_wolvie_panties"
                         "How about the lace ones?" if "_lace_panties" in LauraX.inventory:
                             ch_l "Alright."
                             $ LauraX.outfit["underwear"]  = "_lace_panties"

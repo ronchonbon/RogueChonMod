@@ -2986,25 +2986,25 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
         $ line = line + " before she slides her hand down and firmly grabs your dick"
         $ Action = "handjob"
         if GirlA == RogueX:
-            show Rogue_sprite zorder GirlA.sprite_layer:
+            show Rogue_sprite standing zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == KittyX:
-            show Kitty_sprite zorder GirlA.sprite_layer:
+            show Kitty_sprite standing zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == EmmaX:
-            show Emma_sprite zorder GirlA.sprite_layer:
+            show Emma_sprite standing zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == LauraX:
-            show Laura_Sprite zorder GirlA.sprite_layer:
+            show Laura_sprite standing zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == JeanX:
-            show Jean_sprite zorder GirlA.sprite_layer:
+            show Jean_sprite standing zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == StormX:
-            show Storm_Sprite zorder GirlA.sprite_layer:
+            show Storm_sprite standing zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == JubesX:
-            show Jubes_Sprite zorder GirlA.sprite_layer:
+            show Jubes_sprite standing zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         $ approval = 4
         $ TempFocus += 3 if Player.focus > 70 else 2
@@ -3015,25 +3015,25 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
         call Seen_First_Peen (GirlA, GirlB, React=1)
         $ line = line + " before she slides down and begins to slowly lick your cock"
         if GirlA == RogueX:
-            show Rogue_sprite zorder GirlA.sprite_layer:
+            show Rogue_sprite standing zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == KittyX:
-            show Kitty_sprite zorder GirlA.sprite_layer:
+            show Kitty_sprite standing zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == EmmaX:
-            show Emma_sprite zorder GirlA.sprite_layer:
+            show Emma_sprite standing zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == LauraX:
-            show Laura_Sprite zorder GirlA.sprite_layer:
+            show Laura_sprite standing zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == JeanX:
-            show Jean_sprite zorder GirlA.sprite_layer:
+            show Jean_sprite standing zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == StormX:
-            show Storm_Sprite zorder GirlA.sprite_layer:
+            show Storm_sprite standing zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == JubesX:
-            show Jubes_Sprite zorder GirlA.sprite_layer:
+            show Jubes_sprite standing zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         $ Action = "blowjob"
         $ approval = 4
@@ -4481,7 +4481,7 @@ label auto_action_narrations(Girl, action):
     elif action == "sex":
         $ Girl.pose = "doggy"
 
-        call expression focused_Girl.tag + "_Sex_Launch" pass("sex")
+        call sex_launch(Girl, action)
 
         if Girl.bottom_number() == 5:
             "You press up against [Girl.name]'s backside, sliding her skirt up as you go."
@@ -4502,7 +4502,7 @@ label auto_action_narrations(Girl, action):
     elif action == "anal":
         $ Girl.pose = "doggy"
 
-        call expression focused_Girl.tag + "_Sex_Launch" pass("anal")
+        call sex_launch(Girl, action)
 
         if Girl.bottom_number() == 5:
             "You press up against [Girl.name]'s backside, sliding her skirt up as you go."
@@ -4523,7 +4523,7 @@ label auto_action_narrations(Girl, action):
     elif action == "hotdog":
         $ Girl.pose = "doggy"
 
-        call expression focused_Girl.tag + "_Sex_Launch" pass("hotdog")
+        call sex_launch(Girl, action)
 
         "You press up against [Girl.name]'s backside."
 

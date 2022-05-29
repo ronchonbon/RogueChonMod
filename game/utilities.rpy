@@ -712,70 +712,19 @@ label change_out_of_gym_clothes(Girls = []):
 
 label hide_girl(Girl, hide_sprite = False):
     if Girl == RogueX:
-        hide Rogue_handjob_animation
-        hide Rogue_titjob_animation
-        hide Rogue_blowjob_animation
-        hide Rogue_sex_animation
-        hide Rogue_doggy_animation
-
-        if hide_sprite:
-            hide Rogue_sprite
+        hide Rogue
     elif Girl == KittyX:
-        hide Kitty_SexSprite
-        hide Kitty_Doggy_Animation
-        hide Kitty_handjob_animation
-        hide Kitty_BJ_Animation
-        hide Kitty_titjob_animation
-
-        if hide_sprite:
-            hide Kitty_sprite
+        hide Kitty
     elif Girl == EmmaX:
-        hide Emma_SexSprite
-        hide Emma_Doggy_Animation
-        hide Emma_handjob_animation
-        hide Emma_BJ_Animation
-        hide Emma_titjob_animation
-        hide Emma_FJ_Animation
-
-        if hide_sprite:
-            hide Emma_sprite
+        hide Emma
     elif Girl == LauraX:
-        hide Laura_SexSprite
-        hide Laura_Doggy_Animation
-        hide Laura_handjob_animation
-        hide Laura_BJ_Animation
-        hide Laura_titjob_animation
-
-        if hide_sprite:
-            hide Laura_Sprite
+        hide Laura
     elif Girl == JeanX:
-        hide Jean_SexSprite
-        hide Jean_Doggy_Animation
-        hide Jean_handjob_animation
-        hide Jean_BJ_Animation
-        hide Jean_titjob_animation
-        hide Jean_PJ_Animation
-
-        if hide_sprite:
-            hide Jean_sprite
+        hide Jean
     elif Girl == StormX:
-        hide Storm_SexSprite
-        hide Storm_Doggy_Animation
-        hide Storm_handjob_animation
-        hide Storm_BJ_Animation
-        hide Storm_titjob_animation
-
-        if hide_sprite:
-            hide Storm_Sprite
+        hide Storm
     elif Girl == JubesX:
-        #hide Jubes_SexSprite
-        hide Jubes_Doggy_Animation
-        hide Jubes_handjob_animation
-        hide Jubes_BJ_Animation
-        hide Jubes_titjob_animation
-
-        if hide_sprite:
-            hide Jubes_Sprite
+        hide Jubes
 
     return
 
@@ -1112,23 +1061,23 @@ label display_girl(Girl, check_if_dressed = True, trigger_reset = True, x_positi
         $ y_position = 250
 
     if Girl == RogueX:
-        show Rogue_sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
+        show Rogue_sprite standing zorder Girl.sprite_layer at sprite_location(x_position, y_position):
     elif Girl == KittyX:
-        show Kitty_sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
+        show Kitty_sprite standing zorder Girl.sprite_layer at sprite_location(x_position, y_position):
     elif Girl == EmmaX:
         $ Girl.diamond = False
 
-        show Emma_sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
+        show Emma_sprite standing zorder Girl.sprite_layer at sprite_location(x_position, y_position):
     elif Girl == LauraX:
         $ Girl.claws = False
 
-        show Laura_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
+        show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(x_position, y_position):
     elif Girl == JeanX:
-        show Jean_sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
+        show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(x_position, y_position):
     elif Girl == StormX:
-        show Storm_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
+        show Storm_sprite standing zorder Girl.sprite_layer at sprite_location(x_position, y_position):
     elif Girl == JubesX:
-        show Jubes_Sprite zorder Girl.sprite_layer at sprite_location(x_position, y_position):
+        show Jubes_sprite standing zorder Girl.sprite_layer at sprite_location(x_position, y_position):
 
     return
 
@@ -1352,25 +1301,25 @@ label tenth_round:
 
 label hide_all(cull = False):
     if cull or RogueX.location != bg_current:
-        call hide_girl(RogueX, hide_sprite = True)
+        hide Rogue
 
     if cull or KittyX.location != bg_current:
-        call hide_girl(KittyX, hide_sprite = True)
+        hide Kitty
 
     if cull or EmmaX.location != bg_current:
-        call hide_girl(EmmaX, hide_sprite = True)
+        hide Emma
 
     if cull or LauraX.location != bg_current:
-        call hide_girl(LauraX, hide_sprite = True)
+        hide Laura
 
     if cull or JeanX.location != bg_current:
-        call hide_girl(JeanX, hide_sprite = True)
+        hide Jean
 
     if cull or StormX.location != bg_current:
-        call hide_girl(StormX, hide_sprite = True)
+        hide Storm
 
     if cull or JubesX.location != bg_current:
-        call hide_girl(JubesX, hide_sprite = True)
+        hide Jubes
 
     if cull or "bg_study" != bg_current:
         hide Xavier_sprite
@@ -1553,7 +1502,7 @@ menu Tutorial:
                     "You can also access the school's fabricator store, where you can order various items to be delivered to your room."
                 "Class":
                     "You can always attend classes. These are typically not that interesting, but will raise your XP, and various events might occur in class."
-                    "Classes are open during weekday morning and midday periods. You might bump into Rogue there."
+                    "Classes are open during weekday morning and midday periods. You might bump into Rogue_sprite there."
                     "You can access the classroom by using \"Leave [[Go to campus Square].\""
                 "Danger Room":
                     "You can also attend a Danger Room training session. These also raise your XP."
@@ -2108,13 +2057,13 @@ label clear_the_room(Character=0, Passive=0, Silent=0, Girls=[]):
         elif Girls[0] == EmmaX:
             hide Emma_sprite with easeoutright
         elif Girls[0] == LauraX:
-            hide Laura_Sprite with easeoutright
+            hide Laura_sprite with easeoutright
         elif Girls[0] == JeanX:
             hide Jean_sprite with easeoutright
         elif Girls[0] == StormX:
-            hide Storm_Sprite with easeoutright
+            hide Storm_sprite with easeoutright
         elif Girls[0] == JubesX:
-            hide Jubes_Sprite with easeoutright
+            hide Jubes_sprite with easeoutright
 
         $ Girls.remove(Girls[0])
 
@@ -3379,40 +3328,40 @@ label shift_view(Girl, view):
     if view == "menu":
         menu:
             "Full body":
-                call reset_position
+                call reset_position(Girl)
             "Upper half":
-                call breasts_launch
+                call breasts_launch(Girl)
             "Middle view":
-                call middle_launch
+                call middle_launch(Girl)
             "Lower half":
-                call pussy_launch
+                call pussy_launch(Girl)
             "Rear view" if Girl in [RogueX, KittyX, EmmaX, LauraX, JeanX]:
                 $ Girl.pose = "doggy"
 
-                call sex_launch
+                call sex_launch(Girl)
             "On top of you" if Girl in [EmmaX, JeanX, StormX]:
                 $ Girl.pose = "sex"
 
-                call sex_launch
+                call sex_launch(Girl)
             "Laying down" if Girl in [RogueX, KittyX, LauraX]:
                 $ Girl.pose = "sex"
 
-                call sex_launch
+                call sex_launch(Girl)
             "Never mind":
                 pass
     else:
         if view == "full":
-            call reset_position
+            call reset_position(Girl)
         elif view == "breasts":
-            call breasts_launch
+            call breasts_launch(Girl)
         elif view == "middle":
-            call middle_launch
+            call middle_launch(Girl)
         elif view == "pussy":
-            call pussy_launch
+            call pussy_launch(Girl)
         elif view in ["sex", "doggy"]:
-            call sex_launch
+            call sex_launch(Girl)
         elif view == "kiss":
-            call kiss_launch
+            call kiss_launch(Girl)
 
     return
 
@@ -3424,68 +3373,6 @@ label Punch:
     hide Punchout
 
     return
-
-label AllReset(Girl):
-    if Girl in all_Girls:
-        $ temp_Girls = [Girl]
-    else:
-        $ temp_Girls = all_Girls[:]
-
-    while temp_Girls:
-        # call expression temp_Girls[0].tag + "_BJ_Reset"
-        # call expression temp_Girls[0].tag + "_TJ_Reset"
-        # call expression temp_Girls[0].tag + "_HJ_Reset"
-        # call expression temp_Girls[0].tag + "_Sex_Reset"
-        # call expression temp_Girls[0].tag + "_Doggy_Reset"
-        call hide_girl(temp_Girls[0])
-
-        if temp_Girls[0] == RogueX:
-            if RogueX.location == bg_current:
-                show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
-                    ease 0.5
-            else:
-                hide Rogue_sprite
-        elif temp_Girls[0] == KittyX:
-            if KittyX.location == bg_current:
-                show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
-                    ease 0.5
-            else:
-                hide Kitty_sprite
-        elif temp_Girls[0] == EmmaX:
-            if EmmaX.location == bg_current:
-                show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
-                    ease 0.5
-            else:
-                hide Emma_sprite
-        elif temp_Girls[0] == LauraX:
-            if LauraX.location == bg_current:
-                show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
-                    ease 0.5
-            else:
-                hide Laura_Sprite
-        elif temp_Girls[0] == JeanX:
-            if JeanX.location == bg_current:
-                show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
-                    ease 0.5
-            else:
-                hide Jean_sprite
-        elif temp_Girls[0] == StormX:
-            if StormX.location == bg_current:
-                show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
-                    ease 0.5
-            else:
-                hide Storm_Sprite
-        elif temp_Girls[0] == JubesX:
-            if JubesX.location == bg_current:
-                show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
-                    ease 0.5
-            else:
-                hide Jubes_Sprite
-
-        $ temp_Girls.remove(temp_Girls[0])
-
-    return
-
 
 
 label Sex_Menu_Threesome(Girl=0):
@@ -4414,7 +4301,12 @@ label Trig_Reset(Visual=0):
     $ second_girl_offhand_action = None
     $ action_context = None
     if Visual:
-        call AllReset
+        $ temp_Girls = all_Girls[:]
+
+        while temp_Girls:
+            call reset_position(temp_Girls[0])
+
+            $ temp_Girls.remove(temp_Girls[0])
     return
 
 label primary_action_Swap(Active=0, primary_actionX1=primary_action, primary_actionX3=girl_offhand_action, Primary=Partner):
@@ -4501,7 +4393,8 @@ label primary_action_Swap(Active=0, primary_actionX1=primary_action, primary_act
                 "You pull out of [Partner.name] and shift your attention to [Primary.name]."
             else:
                 $ second_girl_offhand_action = None
-    call AllReset (Partner)
+
+    call reset_position(Partner)
 
     if not primary_action:
 
@@ -5350,7 +5243,7 @@ label Girls_taboo(Girl=0, counter=1, Choice=0, D20=0):
                 else:
                     "You feel a slight buzzing in your head and stop what you're doing."
                 ch_x "Cease that behavior at once! Come to my office immediately!"
-                call AllReset (Girl)
+                call reset_position(Girl)
                 call Girls_Caught (Girl)
                 return
             else:
@@ -5631,7 +5524,7 @@ label Girls_taboo(Girl=0, counter=1, Choice=0, D20=0):
             $ Girl.recent_history.append("caught")
             $ Girl.daily_history.append("caught")
             show black_screen onlayer black
-            call AllReset (Girl)
+            call reset_position(Girl)
             call remove_girl (Girl)
             $ Girl.change_outfit(outfit_changed=0)
             hide black_screen onlayer black
@@ -5925,7 +5818,12 @@ label Sex_Over(Clothes = True, Girls = None):
 
     $ Girls = 0
 
-    call AllReset ("all")
+    $ temp_Girls = all_Girls[:]
+
+    while temp_Girls:
+        call reset_position(temp_Girls[0])
+
+        $ temp_Girls.remove(temp_Girls[0])
 
     if Clothes:
         $ line = None

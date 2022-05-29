@@ -1648,7 +1648,7 @@ label Storm_Rename:
 
 label Storm_Personality(counter=0):
     if not StormX.had_chat[4] or counter:
-        "Since you're doing well in one area, you can convince Storm to focus on one of the others."
+        "Since you're doing well in one area, you can convince Storm_sprite to focus on one of the others."
         "Any time you go over the limit in a given stat, the excess will spill over into the chosen stat instead."
         "This will also impact which personality trait takes priority in dialog."
     menu:
@@ -2009,7 +2009,7 @@ label Storm_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                 ch_s "I will see you later."
         else:
             ch_s "I will see you later."
-        hide Storm_Sprite
+        hide Storm_sprite
         return
 
 
@@ -2138,7 +2138,7 @@ label Storm_Leave(approval_bonus=approval_bonus, GirlsNum=0):
     $ StormX.recent_history.append("followed")
     if not line:
 
-        hide Storm_Sprite
+        hide Storm_sprite
         call change_out_of_gym_clothes ([StormX])
         return
 
@@ -2151,7 +2151,7 @@ label Storm_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         else:
             ch_s "I am sorry, [StormX.player_petname], I am occupied."
 
-        hide Storm_Sprite
+        hide Storm_sprite
         call change_out_of_gym_clothes ([StormX])
         return
 
@@ -2164,7 +2164,7 @@ label Storm_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         call drain_all_words ("arriving")
         $ StormX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
-        hide Storm_Sprite
+        hide Storm_sprite
         call change_out_of_gym_clothes ([StormX])
         if StormX.location == "bg_classroom" or StormX.location == "bg_teacher":
             ch_s "I will see you soon then."
@@ -2232,7 +2232,7 @@ label Storm_Clothes:
     $ Girl = StormX
     call shift_focus (Girl)
 
-label Storm_Wardrobe_Menu:
+label Storm_wardrobe_menu:
     $ StormX.change_face()
     $ primary_action = 1
     while True:
@@ -2923,8 +2923,8 @@ label Storm_Wardrobe_Menu:
                     $ StormX.outfit["hose"] = "_ripped_pantyhose"
                 "The stockings and garterbelt would look good with that." if StormX.outfit["hose"] != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in StormX.inventory:
                     $ StormX.outfit["hose"] = "_stockings_and_garterbelt"
-                "Just the garterbelt would look good with that." if StormX.outfit["hose"] != "garterbelt" and "_stockings_and_garterbelt" in StormX.inventory:
-                    $ StormX.outfit["hose"] = "garterbelt"
+                "Just the garterbelt would look good with that." if StormX.outfit["hose"] != "_garterbelt" and "_stockings_and_garterbelt" in StormX.inventory:
+                    $ StormX.outfit["hose"] = "_garterbelt"
                 "Never mind":
                     pass
             return

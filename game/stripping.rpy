@@ -121,26 +121,30 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
     Present[0].voice "[line]"
     $ line = 0
 
-    call AllReset ("all")
+    $ temp_Girls = all_Girls[:]
 
+    while temp_Girls:
+        call reset_position(temp_Girls[0])
+
+        $ temp_Girls.remove(temp_Girls[0])
 
     $ counter = len(Present)
     while counter:
         $ counter -= 1
         if Present[counter] == RogueX:
-            show Rogue_sprite at Girl_Dance1(RogueX)
+            show Rogue_sprite standing at Girl_Dance1(RogueX)
         elif Present[counter] == KittyX:
-            show Kitty_sprite at Girl_Dance1(KittyX)
+            show Kitty_sprite standing at Girl_Dance1(KittyX)
         elif Present[counter] == EmmaX:
-            show Emma_sprite at Girl_Dance1(EmmaX)
+            show Emma_sprite standing at Girl_Dance1(EmmaX)
         elif Present[counter] == LauraX:
-            show Laura_Sprite at Girl_Dance1(LauraX)
+            show Laura_sprite standing at Girl_Dance1(LauraX)
         elif Present[counter] == JeanX:
-            show Jean_sprite at Girl_Dance1(JeanX)
+            show Jean_sprite standing at Girl_Dance1(JeanX)
         elif Present[counter] == StormX:
-            show Storm_Sprite at Girl_Dance1(StormX)
+            show Storm_sprite standing at Girl_Dance1(StormX)
         elif Present[counter] == JubesX:
-            show Jubes_Sprite at Girl_Dance1(JubesX)
+            show Jubes_sprite standing at Girl_Dance1(JubesX)
         $ Present[counter].recent_history.append("stripping")
         $ Present[counter].daily_history.append("stripping")
         $ Present[counter].action_counter["striptease"] += 1
@@ -663,9 +667,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 extend ""
                 "Ok, you can stop":
                     $ Girl.recent_history.append("stopdancing")
-                    $ focused_Girl = Girl
-
-                    call reset_position
+                    call reset_position(Girl)
                 "Keep on dancing":
                     $ Girl.recent_history.append("keepdancing")
 
@@ -703,22 +705,22 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 $ Count = 0
                 jump Group_Strip_End
 
-        call AllReset (Girl)
+        call reset_position(Girl)
 
         if Girl == RogueX:
-            show Rogue_sprite at Girl_Dance1(Girl)
+            show Rogue_sprite standing at Girl_Dance1(Girl)
         elif Girl == KittyX:
-            show Kitty_sprite at Girl_Dance1(Girl)
+            show Kitty_sprite standing at Girl_Dance1(Girl)
         elif Girl == EmmaX:
-            show Emma_sprite at Girl_Dance1(Girl)
+            show Emma_sprite standing at Girl_Dance1(Girl)
         elif Girl == LauraX:
-            show Laura_Sprite at Girl_Dance1(Girl)
+            show Laura_sprite standing at Girl_Dance1(Girl)
         elif Girl == JeanX:
-            show Jean_sprite at Girl_Dance1(Girl)
+            show Jean_sprite standing at Girl_Dance1(Girl)
         elif Girl == StormX:
-            show Storm_Sprite at Girl_Dance1(Girl)
+            show Storm_sprite standing at Girl_Dance1(Girl)
         elif Girl == JubesX:
-            show Jubes_Sprite at Girl_Dance1(Girl)
+            show Jubes_sprite standing at Girl_Dance1(Girl)
 
         "[Girl.name] begins to dance again."
 
@@ -814,9 +816,7 @@ label Strip_Ultimatum:
     if "keepdancing" in Girl.recent_history:
         return
 
-    $ focused_Girl = Girl
-
-    call reset_position
+    call reset_position(Girl)
 
     $ Girl.change_face("_bemused", 1)
     if "stripforced" in Girl.recent_history:
@@ -979,19 +979,19 @@ label Strip_Ultimatum:
         $ Girl.daily_history.append("ultimatum")
 
     if Girl == RogueX:
-        show Rogue_sprite at Girl_Dance1(Girl)
+        show Rogue_sprite standing at Girl_Dance1(Girl)
     elif Girl == KittyX:
-        show Kitty_sprite at Girl_Dance1(Girl)
+        show Kitty_sprite standing at Girl_Dance1(Girl)
     elif Girl == EmmaX:
-        show Emma_sprite at Girl_Dance1(Girl)
+        show Emma_sprite standing at Girl_Dance1(Girl)
     elif Girl == LauraX:
-        show Laura_Sprite at Girl_Dance1(Girl)
+        show Laura_sprite standing at Girl_Dance1(Girl)
     elif Girl == JeanX:
-        show Jean_sprite at Girl_Dance1(Girl)
+        show Jean_sprite standing at Girl_Dance1(Girl)
     elif Girl == StormX:
-        show Storm_Sprite at Girl_Dance1(Girl)
+        show Storm_sprite standing at Girl_Dance1(Girl)
     elif Girl == JubesX:
-        show Jubes_Sprite at Girl_Dance1(Girl)
+        show Jubes_sprite standing at Girl_Dance1(Girl)
     "[Girl.name] begins to dance again."
     return
 
@@ -1612,7 +1612,7 @@ label Top_Off(Girl=0, Intro=1, line=0, counter=0):
 
         "How about just the jacket?" if Girl == JubesX and Girl.outfit["front_outer_accessory"]:
 
-            if Girl.outfit["top"] or Girl.outfit["front_outer_accessory"] == "open_jacket":
+            if Girl.outfit["top"] or Girl.outfit["front_outer_accessory"] == "_open_jacket":
 
                 ch_v "Sure, I guess. . ."
                 $ Girl.outfit["front_outer_accessory"] = ""

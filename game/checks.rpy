@@ -254,21 +254,7 @@ label are_girls_angry(Girls = 0):
 
                 Girls += 1
 
-                if G == RogueX:
-                    renpy.hide(Rogue_sprite)
-                elif G == KittyX:
-                    renpy.hide(Kitty_sprite)
-                elif G == EmmaX:
-                    renpy.hide(Emma_sprite)
-                elif G == LauraX:
-                    renpy.hide(Laura_Sprite)
-                elif G == JeanX:
-                    renpy.hide(Jean_sprite)
-                elif G == StormX:
-                    renpy.hide(Storm_Sprite)
-                elif G == JubesX:
-                    renpy.hide(Jubes_Sprite)
-
+                renpy.hide(G.tag)
                 renpy.with_statement(easeoutleft)
 
     return

@@ -1,39 +1,91 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/locations.rpy", line 110, in script call
-    call chat
-  File "game/chat.rpy", line 164, in script call
-    call chat_menu
-  File "game/chat.rpy", line 263, in script call
-    call enter_main_sex_menu
-  File "game/menus.rpy", line 61, in script call
-    call girl_sex_menu(focused_Girl)
-  File "game/actions.rpy", line 223, in script call
-    call sex_launch
-  File "game/girl_animations.rpy", line 208, in script call
-    call doggy_launch
-  File "game/girl_animations.rpy", line 227, in script
-    show Rogue_doggy_animation zorder 150 at sprite_location(stage_center)
-Exception: In DynamicImage u'images/Rogue_doggy/Rogue_doggy_neckRogueX.outfit[neck].png': Could not find substitution 'neck'.
+  File "game/script.rpy", line 207, in script
+    ""
+  File "game/script.rpy", line 207, in script
+    ""
+  File "game/cheats.rpy", line 65, in script call
+    call wardrobe_editor(Girl)
+  File "game/cheats.rpy", line 159, in script call
+    call sex_launch(Girl, "sex")
+  File "game/girl_animations.rpy", line 445, in script
+    show Jean_sprite sex zorder 150 at sprite_location(stage_center)
+  File "game/cheats.rpy", line 65, in script call
+    call wardrobe_editor(Girl)
+  File "game/cheats.rpy", line 159, in script call
+    call sex_launch(Girl, "sex")
+  File "game/girl_animations.rpy", line 445, in script
+    show Jean_sprite sex zorder 150 at sprite_location(stage_center)
+KeyError: u'front_inner_accessory'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/locations.rpy", line 110, in script call
-    call chat
-  File "game/chat.rpy", line 164, in script call
-    call chat_menu
-  File "game/chat.rpy", line 263, in script call
-    call enter_main_sex_menu
-  File "game/menus.rpy", line 61, in script call
-    call girl_sex_menu(focused_Girl)
-  File "game/actions.rpy", line 223, in script call
-    call sex_launch
-  File "game/girl_animations.rpy", line 208, in script call
-    call doggy_launch
-  File "game/girl_animations.rpy", line 227, in script
-    show Rogue_doggy_animation zorder 150 at sprite_location(stage_center)
+  File "renpy/bootstrap.py", line 331, in bootstrap
+    renpy.main.main()
+  File "renpy/main.py", line 662, in main
+    run(restart)
+  File "renpy/main.py", line 148, in run
+    renpy.execution.run_context(True)
+  File "renpy/execution.py", line 922, in run_context
+    context.run()
+  File "game/script.rpy", line 207, in script
+    ""
+  File "game/script.rpy", line 207, in script
+    ""
+  File "renpy/ast.py", line 721, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "renpy/exports.py", line 1419, in say
+    who(what, *args, **kwargs)
+  File "renpy/character.py", line 1249, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "renpy/character.py", line 901, in do_display
+    **display_args)
+  File "renpy/character.py", line 647, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "renpy/display/core.py", line 4160, in interact_core
+    rv = root_widget.event(ev, x, y, 0)
+  File "renpy/display/layout.py", line 1102, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "renpy/display/layout.py", line 1102, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "renpy/display/layout.py", line 1102, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "renpy/display/screen.py", line 727, in event
+    rv = self.child.event(ev, x, y, st)
+  File "renpy/display/layout.py", line 1102, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "renpy/sl2/sldisplayables.py", line 104, in event
+    return self.child.event(ev, x, y, st)
+  File "renpy/display/behavior.py", line 983, in event
+    return handle_click(self.clicked)
+  File "renpy/display/behavior.py", line 918, in handle_click
+    rv = run(action)
+  File "renpy/display/behavior.py", line 330, in run
+    return action(*args, **kwargs)
+  File "renpy/curry.py", line 48, in __call__
+    return self.callable(*(self.args + args), **merged_kwargs)
+  File "renpy/game.py", line 344, in call_in_new_context
+    return renpy.execution.run_context(False)
+  File "renpy/execution.py", line 922, in run_context
+    context.run()
+  File "game/cheats.rpy", line 65, in script call
+    call wardrobe_editor(Girl)
+  File "game/cheats.rpy", line 159, in script call
+    call sex_launch(Girl, "sex")
+  File "game/girl_animations.rpy", line 445, in script
+    show Jean_sprite sex zorder 150 at sprite_location(stage_center)
+  File "game/cheats.rpy", line 65, in script call
+    call wardrobe_editor(Girl)
+  File "game/cheats.rpy", line 159, in script call
+    call sex_launch(Girl, "sex")
+  File "game/girl_animations.rpy", line 445, in script
+    show Jean_sprite sex zorder 150 at sprite_location(stage_center)
   File "renpy/ast.py", line 1197, in execute
     show_imspec(self.imspec, atl=getattr(self, "atl", None))
   File "renpy/ast.py", line 1167, in show_imspec
@@ -54,6 +106,12 @@ Full traceback:
     d.visit_all(callback, seen)
   File "renpy/display/core.py", line 568, in visit_all
     d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "renpy/display/layout.py", line 1443, in update
+    child.visit_all(lambda c : c.per_interact())
   File "renpy/display/core.py", line 568, in visit_all
     d.visit_all(callback, seen)
   File "renpy/display/core.py", line 558, in visit_all
@@ -72,21 +130,40 @@ Full traceback:
     d.visit_all(callback, seen)
   File "renpy/display/core.py", line 568, in visit_all
     d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
   File "renpy/display/core.py", line 558, in visit_all
     for d in self.visit():
   File "renpy/display/layout.py", line 1415, in visit
     self.update(self.last_st, self.last_at)
-  File "renpy/display/layout.py", line 1443, in update
-    child.visit_all(lambda c : c.per_interact())
-  File "renpy/display/core.py", line 558, in visit_all
-    for d in self.visit():
-  File "renpy/display/image.py", line 744, in visit
-    self.find_target()
-  File "renpy/display/image.py", line 638, in find_target
-    raise Exception("In DynamicImage %r: Could not find substitution '%s'." % (self.name, str(ke.args[0])))
-Exception: In DynamicImage u'images/Rogue_doggy/Rogue_doggy_neckRogueX.outfit[neck].png': Could not find substitution 'neck'.
+  File "renpy/display/layout.py", line 1426, in update
+    raw_child, redraw = self.function(st, at, *self.args, **self.kwargs)
+  File "renpy/display/layout.py", line 1517, in condition_switch_show
+    return condition_switch_pick(switch), None
+  File "renpy/display/layout.py", line 1508, in condition_switch_pick
+    if renpy.python.py_eval_bytecode(code):
+  File "renpy/python.py", line 2269, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "<none>", line 1, in <module>
+KeyError: u'front_inner_accessory'
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like 0.997f2
-Sat May 28 09:21:24 2022
+Sun May 29 02:00:25 2022

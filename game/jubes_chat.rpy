@@ -1651,7 +1651,7 @@ label Jubes_Rename:
 
 label Jubes_Personality(counter=0):
     if not JubesX.had_chat[4] or counter:
-        "Since you're doing well in one area, you can convince Jubes to focus on one of the others."
+        "Since you're doing well in one area, you can convince Jubes_sprite to focus on one of the others."
         "Any time you go over the limit in a given stat, the excess will spill over into the chosen stat instead."
         "This will also impact which personality trait takes priority in dialog."
     menu:
@@ -2017,7 +2017,7 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                 ch_v "I'm headed out."
         else:
             ch_v "I'm headed out, later."
-        hide Jubes_Sprite
+        hide Jubes_sprite
         return
 
 
@@ -2145,7 +2145,7 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
     $ JubesX.recent_history.append("followed")
     if not line:
 
-        hide Jubes_Sprite
+        hide Jubes_sprite
         call change_out_of_gym_clothes ([JubesX])
         return
 
@@ -2157,7 +2157,7 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_v "Sorry [JubesX.player_petname], I need the exercise."
         else:
             ch_v "Sorry, I'm kinda busy."
-        hide Jubes_Sprite
+        hide Jubes_sprite
         call change_out_of_gym_clothes ([JubesX])
         return
 
@@ -2170,7 +2170,7 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         call drain_all_words ("arriving")
         $ JubesX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
-        hide Jubes_Sprite
+        hide Jubes_sprite
         call change_out_of_gym_clothes ([JubesX])
         if JubesX.location == "bg_classroom":
             ch_v "Ok, get a move on then."
@@ -2237,7 +2237,7 @@ label Jubes_Clothes:
     $ Girl = JubesX
     call shift_focus (Girl)
 
-label Jubes_Wardrobe_Menu:
+label Jubes_wardrobe_menu:
     $ JubesX.change_face()
     $ primary_action = 1
     while True:
@@ -2585,7 +2585,7 @@ label Jubes_Wardrobe_Menu:
             ch_v "Sure."
             $ JubesX.outfit["front_outer_accessory"] = "_jacket"
 
-        "Maybe open the jacket more?" if JubesX.outfit["front_outer_accessory"] and JubesX.outfit["front_outer_accessory"] != "open_jacket":
+        "Maybe open the jacket more?" if JubesX.outfit["front_outer_accessory"] and JubesX.outfit["front_outer_accessory"] != "_open_jacket":
             $ JubesX.change_face("_bemused")
             if JubesX.outfit["top"] or (approval_check(JubesX, 800, taboo_modifier=3) and (JubesX.outfit["bra"] or JubesX.seen_breasts)):
 
@@ -2606,7 +2606,7 @@ label Jubes_Wardrobe_Menu:
                     if not JubesX.outfit["bra"]:
                         ch_v "I don't have anything under this. . ."
                     return
-            $ JubesX.outfit["front_outer_accessory"] = "open_jacket"
+            $ JubesX.outfit["front_outer_accessory"] = "_open_jacket"
             if not renpy.showing('dress_screen'):
                 call Jubes_First_Topless
 
@@ -2964,8 +2964,8 @@ label Jubes_Wardrobe_Menu:
                     $ JubesX.outfit["hose"] = "_socks"
                 "The stockings and garterbelt would look good with that." if JubesX.outfit["hose"] != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in JubesX.inventory:
                     $ JubesX.outfit["hose"] = "_stockings_and_garterbelt"
-                "Just the garterbelt would look good with that." if JubesX.outfit["hose"] != "garterbelt" and "_stockings_and_garterbelt" in JubesX.inventory:
-                    $ JubesX.outfit["hose"] = "garterbelt"
+                "Just the garterbelt would look good with that." if JubesX.outfit["hose"] != "_garterbelt" and "_stockings_and_garterbelt" in JubesX.inventory:
+                    $ JubesX.outfit["hose"] = "_garterbelt"
                 "Never mind":
                     pass
             return

@@ -1066,7 +1066,7 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
         ch_r "Can't wait for the next big party."
         ch_r "I love to dance, and I've got the best partner to grind with-"
         $ RogueX.pose = "doggy"
-        call Rogue_Sex_Launch ("massage")
+        call sex_launch(RogueX, "massage")
         if RogueX.outfit["bottom"] == "_skirt":
             $ RogueX.upskirt = 1
             if RogueX.outfit["underwear"] and RogueX.seen_underwear and approval_check(RogueX, 800, taboo_modifier = 3):
@@ -1085,7 +1085,7 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
             $ RogueX.upskirt = 0
         ch_r "Y'know what I'm sayin', [RogueX.player_petname]?"
         $ RogueX.upskirt = 0
-        call Rogue_Doggy_Reset
+        call reset_position(Girl)
 
     elif Options[0] == "seenpeen":
         $ RogueX.change_face("_sly",1)
@@ -2168,7 +2168,7 @@ label Rogue_Clothes:
     $ Girl = RogueX
     call shift_focus(Girl)
 
-label Rogue_Wardrobe_Menu:
+label Rogue_wardrobe_menu:
     while True:
         $ trigger = True
 
@@ -2938,8 +2938,8 @@ label Rogue_Wardrobe_Menu:
                     $ RogueX.outfit["hose"] = "_pantyhose"
                 "The stockings would look good with that." if RogueX.outfit["hose"] != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in RogueX.inventory and RogueX.outfit["bottom"] != "_pants":
                     $ RogueX.outfit["hose"] = "_stockings_and_garterbelt"
-                "Maybe just the garterbelt?" if RogueX.outfit["hose"] != "garterbelt" and "_stockings_and_garterbelt" in RogueX.inventory and RogueX.outfit["bottom"] != "_pants":
-                    $ RogueX.outfit["hose"] = "garterbelt"
+                "Maybe just the garterbelt?" if RogueX.outfit["hose"] != "_garterbelt" and "_stockings_and_garterbelt" in RogueX.inventory and RogueX.outfit["bottom"] != "_pants":
+                    $ RogueX.outfit["hose"] = "_garterbelt"
                 "Your ripped pantyhose would look good with that." if RogueX.outfit["hose"] != "_ripped_pantyhose" and "_ripped_pantyhose" in RogueX.inventory and RogueX.outfit["bottom"] != "_pants":
                     $ RogueX.outfit["hose"] = "_ripped_pantyhose"
                 "Never mind":

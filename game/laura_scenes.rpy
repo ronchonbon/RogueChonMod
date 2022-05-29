@@ -25,7 +25,7 @@ label meet_Laura(Topics=[], Loop=1):
     "Just as you pass through the door, a robotic arm smashes into your face."
     ". . ."
     $ LauraX.change_face("_normal", 0)
-    show Laura_Sprite at sprite_location(LauraX.sprite_location)
+    show Laura_sprite standing at sprite_location(LauraX.sprite_location)
     "When you come to, a girl pulls you up by your arm."
     $ LauraX.change_face("_surprised", 0, eyes="_squint",brows="_sad")
     ch_u "Oh, good, you don't look too damaged."
@@ -46,7 +46,7 @@ label meet_Laura(Topics=[], Loop=1):
             "Is there anything else I could call you?" if "X23" in Topics and LauraX not in Topics:
                 $ LauraX.change_stat("love", 70, 5)
                 $ LauraX.change_face("_normal", 0)
-                ch_l "I also go by Laura. Laura Kinney."
+                ch_l "I also go by Laura. Laura_sprite Kinney."
                 $ LauraX.change_face("_confused", 0, mouth="_normal")
                 $ LauraX.name = "Laura"
                 $ LauraX.names.append("Laura")
@@ -57,7 +57,7 @@ label meet_Laura(Topics=[], Loop=1):
                         $ LauraX.change_stat("love", 70, 5)
                         $ LauraX.change_face("_normal", 0)
                         ch_l "Yeah, ok."
-                    "Hello Laura Laura Kinney.":
+                    "Hello Laura_sprite Laura_sprite Kinney.":
                         $ LauraX.change_face("_confused", 0,mouth="_sucking")
                         ch_l "It's just-"
                         $ LauraX.change_face("_smile", 0,brows="_surprised")
@@ -639,7 +639,7 @@ label Laura_Cleanhouse:
             $ LauraX.change_stat("obedience", 80, 10)
             $ LauraX.change_stat("inhibition", 80, 10)
             $ LauraX.blushing = "_blush2"
-            show Laura_Sprite with vpunch
+            show Laura_sprite standing with vpunch
             "She clocks you one."
             "That was fair."
             $ LauraX.blushing = "_blush1"
@@ -977,7 +977,7 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
         $ LauraX.event_happened[6] = 23
         $ LauraX.recent_history.append("_angry")
         $ LauraX.daily_history.append("_angry")
-        hide Laura_Sprite with easeoutright
+        hide Laura_sprite with easeoutright
         call remove_girl (LauraX)
         $ LauraX.location = "hold"
         return
@@ -1103,7 +1103,7 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
 label Laura_Love_End:
     if "lover" not in LauraX.player_petnames:
         $ LauraX.event_happened[6] = 20
-        hide Laura_Sprite with easeoutright
+        hide Laura_sprite with easeoutright
         call remove_girl (LauraX)
         $ LauraX.location = "hold"
         return
@@ -1487,7 +1487,7 @@ label Laura_Sub:
     elif line == "embarrassed":
         $ LauraX.change_face("_sadside", 2)
         ch_l "Huh, ok, if you're not interested. . ."
-        hide Laura_Sprite with easeoutright
+        hide Laura_sprite with easeoutright
         call remove_girl (LauraX)
         if not simulation:
             $ renpy.pop_call()
@@ -1572,7 +1572,7 @@ label Laura_Sub_Asked:
     $ LauraX.daily_history.append("asked sub")
     if line == "rude":
 
-        hide Laura_Sprite with easeoutright
+        hide Laura_sprite with easeoutright
         call remove_girl (LauraX)
         $ LauraX.recent_history.append("_angry")
         if not simulation:
@@ -1757,7 +1757,7 @@ label Laura_Master:
     $ LauraX.history.append("master")
     if line == "rude":
         $ LauraX.recent_history.append("_angry")
-        hide Laura_Sprite with easeoutright
+        hide Laura_sprite with easeoutright
         call remove_girl (LauraX)
         if not simulation:
             $ renpy.pop_call()
@@ -1765,7 +1765,7 @@ label Laura_Master:
     elif line == "embarrassed":
         ch_l "Ok, fine then."
         ch_l "And here I was, about to \"elevate your clearance.\""
-        hide Laura_Sprite with easeoutright
+        hide Laura_sprite with easeoutright
         call remove_girl (LauraX)
         if not simulation:
             $ renpy.pop_call()
@@ -1942,7 +1942,7 @@ label Laura_Fuckbuddy:
     $ primary_action = "masturbation"
     $ girl_offhand_action = "fondle_pussy"
     $ LauraX.change_face("_sly",2,mouth="_lipbite")
-    "[LauraX.name] is standing in the doorway, with her hand down her pants."
+    "[LauraX.name] is_sprite standing in the doorway, with her hand down her pants."
     "You can tell she's been masturbating furiously, her scent is overpowering."
     $ primary_action = None
     $ girl_offhand_action = None
@@ -2234,7 +2234,7 @@ label Laura_Dressup:
 
     $ LauraX.outfit_name = "casual1"
     $ LauraX.change_outfit("casual1")
-    show Laura_Sprite at sprite_location(LauraX.sprite_location) with vpunch
+    show Laura_sprite standing at sprite_location(LauraX.sprite_location) with vpunch
     $ round -= 10 if round >= 11 else round
     $ LauraX.history.remove("dress0")
     $ LauraX.history.append("dress1")
@@ -2274,7 +2274,7 @@ label Laura_Dressup:
             $ LauraX.change_face("_bemused")
             ch_l "Not really."
 
-    hide Laura_Sprite with easeoutright
+    hide Laura_sprite with easeoutright
     call remove_girl (LauraX)
     "[LauraX.name] walks away, and as you watch her go you feel a tap on your shoulder."
 
@@ -2401,8 +2401,8 @@ label Laura_Dressup3:
     $ LauraX.history.remove("dress1")
     $ LauraX.history.remove("dress2")
     $ LauraX.history.append("dress3")
-    $ LauraX.inventory.append("wolvie_top")
-    $ LauraX.inventory.append("wolvie_panties")
+    $ LauraX.inventory.append("_wolvie_bra")
+    $ LauraX.inventory.append("_wolvie_panties")
 
     "You're walking past [KittyX.name]'s door when you hear her laughing at something."
     "You hear someone else's voice, there's clearly someone else in her room with her."
@@ -2418,8 +2418,8 @@ label Laura_Dressup3:
     $ KittyX.outfit_name = KittyX.today_outfit_name
     $ KittyX.change_outfit()
     $ LauraX.change_outfit("nude")
-    $ LauraX.outfit["bra"] = "wolvie_top"
-    $ LauraX.outfit["underwear"] = "wolvie_panties"
+    $ LauraX.outfit["bra"] = "_wolvie_bra"
+    $ LauraX.outfit["underwear"] = "_wolvie_panties"
     menu:
         extend ""
         "Sneak a peek [[no key] (locked)" if KittyX not in keys:

@@ -252,7 +252,7 @@ label girl_sex_menu(Girl):
         "Hey, [Partner.name]? [[Switch lead]" if Partner:
             call expression Partner.tag + "_SexAct" pass ("switch")
         "Cheat Menu" if config.developer:
-            call Cheat_Menu(Girl)
+            call cheat_menu(Girl)
             jump main_sex_menu
         "Never mind. [[exit]":
             if Girl.lust >= 50 or Girl.addiction >= 50:

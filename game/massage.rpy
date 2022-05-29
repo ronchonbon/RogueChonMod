@@ -299,7 +299,7 @@ label Massage_Cycle:
     $ Girl.add_word(1,"massage","massage",0,0)
 
     if Girl.pose == "doggy" or Girl.pose == "sex":
-        call expression Girl.tag + "_Sex_Launch" pass ("massage")
+        call sex_launch(Girl, "massage")
 
     $ primary_action = "massage"
 
@@ -827,8 +827,8 @@ label Massage_Cycle:
 
                 call Player_Cumming (Girl)
                 if "_angry" in Girl.recent_history:
-                    call expression Girl.tag + "_Pos_Reset" pass (0)
-                    call expression Partner.tag + "_Pos_Reset" pass (0)
+                    call reset_position(Girl)
+                    call reset_position(Partner)
                     return
                 $ Girl.change_stat("lust", 200, 5)
                 if 100 > Girl.lust >= 70 and Girl.session_orgasms < 2:
@@ -885,7 +885,7 @@ label Massage_Cycle:
 
 
 label Massage_After:
-    call expression Girl.tag + "_Pos_Reset" pass (0)
+    call reset_position(Girl)
     if MCount >= 3:
         $ Girl.change_stat("love", 90, 1)
         $ Girl.change_stat("love", 50, 2)

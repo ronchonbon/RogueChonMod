@@ -785,7 +785,7 @@ label Flirt(Girl=0):
                     if Girl == RogueX:
                         ch_r "Ooh! Are you hinting at something there, [Girl.player_petname]?"
                     elif Girl == KittyX:
-                        ch_k "Purrrr, Kitty like."
+                        ch_k "Purrrr, Kitty_sprite like."
                     elif Girl == EmmaX:
                         ch_e "Mmm, what was that for?"
                     elif Girl == LauraX:
@@ -2014,7 +2014,7 @@ label Compliment(Girl=0, line0=0, line1=0, line2=0, Options=[], CountList=[], li
                 $ Girl.change_face("_confused",1)
                 ch_j "Wait . ."
             elif Girl == StormX:
-                ch_s "So you -were- awake. I owe Emma a drink."
+                ch_s "So you -were- awake. I owe Emma_sprite a drink."
             else:
                 Girl.voice "Yeah, it was ok. Got a little dull though."
 

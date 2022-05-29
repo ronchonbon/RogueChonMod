@@ -17,37 +17,37 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
     show Xavier_sprite at sprite_location(stage_left)
 
     if Girl == RogueX:
-        show Rogue_sprite at sprite_location(stage_right) with ease
+        show Rogue_sprite standing at sprite_location(stage_right) with ease
     elif Girl == KittyX:
-        show Kitty_sprite at sprite_location(stage_right) with ease
+        show Kitty_sprite standing at sprite_location(stage_right) with ease
     elif Girl == EmmaX:
-        show Emma_sprite at sprite_location(stage_right) with ease
+        show Emma_sprite standing at sprite_location(stage_right) with ease
     elif Girl == LauraX:
-        show Laura_Sprite at sprite_location(stage_right) with ease
+        show Laura_sprite standing at sprite_location(stage_right) with ease
     elif Girl == JeanX:
-        show Jean_sprite at sprite_location(stage_right) with ease
+        show Jean_sprite standing at sprite_location(stage_right) with ease
     elif Girl == StormX:
-        show Storm_Sprite at sprite_location(stage_right) with ease
+        show Storm_sprite standing at sprite_location(stage_right) with ease
     elif Girl == JubesX:
-        show Jubes_Sprite at sprite_location(stage_right) with ease
+        show Jubes_sprite standing at sprite_location(stage_right) with ease
     call outfitShame (Girl, 20)
 
     $ Count = Girl.event_counter["caught"]
 
     if Partner == RogueX:
-        show Rogue_sprite at sprite_location(stage_far_right) with ease
+        show Rogue_sprite standing at sprite_location(stage_far_right) with ease
     elif Partner == KittyX:
-        show Kitty_sprite at sprite_location(stage_far_right) with ease
+        show Kitty_sprite standing at sprite_location(stage_far_right) with ease
     elif Partner == EmmaX:
-        show Emma_sprite at sprite_location(stage_far_right) with ease
+        show Emma_sprite standing at sprite_location(stage_far_right) with ease
     elif Partner == LauraX:
-        show Laura_Sprite at sprite_location(stage_far_right) with ease
+        show Laura_sprite standing at sprite_location(stage_far_right) with ease
     elif Partner == JeanX:
-        show Jean_sprite at sprite_location(stage_far_right) with ease
+        show Jean_sprite standing at sprite_location(stage_far_right) with ease
     elif Partner == StormX:
-        show Storm_Sprite at sprite_location(stage_far_right) with ease
+        show Storm_sprite standing at sprite_location(stage_far_right) with ease
     elif Partner == JubesX:
-        show Jubes_Sprite at sprite_location(stage_far_right) with ease
+        show Jubes_sprite standing at sprite_location(stage_far_right) with ease
 
     call change_Xavier_face ("_shocked")
     $ Girl.change_face("_sad")
@@ -715,7 +715,7 @@ label Xavier_Plan(GirlX=0):
     if GirlX == RogueX:
         $ RogueX.outfit["gloves"] = ""
         $ RogueX.arm_pose = 2
-        show Rogue_sprite zorder 24 at sprite_location(stage_left+100,85) with ease
+        show Rogue_sprite standing zorder 24 at sprite_location(stage_left+100,85) with ease
         "[RogueX.name] moves in and also grabs his head, duplicating his powers as he watches helplessly."
         "Now that she posesses his full power, while his are negated, he has no defenses."
         call change_Xavier_face ("_hypno")
@@ -731,7 +731,7 @@ label Xavier_Plan(GirlX=0):
         ch_r "I think we'll only get three tries at this. . ."
     elif GirlX == KittyX:
         $ KittyX.arm_pose = 2
-        show Kitty_sprite at sprite_location(stage_left+100,150) with ease
+        show Kitty_sprite standing at sprite_location(stage_left+100,150) with ease
         $ KittyX.sprite_location = stage_center
         "[KittyX.name] moves in sits on his lap, pinning his arms to the chair."
         if "Kappa" in Player.traits:
@@ -756,9 +756,9 @@ label Xavier_Plan(GirlX=0):
         ch_k "Well, [KittyX.player_petname], what should we ask for?"
     elif GirlX == EmmaX or GirlX == JeanX:
         if GirlX == EmmaX:
-            show Emma_sprite zorder 24 at sprite_location(stage_left+100,85) with ease
+            show Emma_sprite standing zorder 24 at sprite_location(stage_left+100,85) with ease
         elif GirlX == JeanX:
-            show Jean_sprite zorder 24 at sprite_location(stage_left+100,85) with ease
+            show Jean_sprite standing zorder 24 at sprite_location(stage_left+100,85) with ease
         "[GirlX.name] moves behind Xavier and activates her own telepathy."
         call change_Xavier_face ("_angry")
         if (GirlX == EmmaX and "Psi" in Player.traits) or (GirlX == JeanX and "Alpha" in Player.traits):
@@ -798,7 +798,7 @@ label Xavier_Plan(GirlX=0):
         ch_l "Well, [LauraX.player_petname], what should we ask for?"
     elif GirlX == StormX:
         $ StormX.arm_pose = 1
-        show Storm_Sprite at sprite_location(stage_left+100,150) with ease
+        show Storm_sprite standing at sprite_location(stage_left+100,150) with ease
         $ StormX.sprite_location = stage_center
         "[StormX.name] moves in sits on his lap, pinning his arms to the chair."
         if "Rho" in Player.traits:
@@ -822,7 +822,7 @@ label Xavier_Plan(GirlX=0):
         ch_s "Well, [StormX.player_petname], what should we ask for?"
     elif GirlX == JubesX:
         $ JubesX.arm_pose = 2
-        show Jubes_Sprite at sprite_location(stage_left+100,150) with ease
+        show Jubes_sprite standing at sprite_location(stage_left+100,150) with ease
         $ JubesX.sprite_location = stage_center
         "[JubesX.name] moves in and sits on his lap, pinning his arms to the chair."
         "She turns to look at him."

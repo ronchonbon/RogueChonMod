@@ -1,28 +1,28 @@
 image Kitty_blinking:
-    "images/Kitty_sprite/Kitty_standing_eyes[KittyX.eyes].png"
+    "images/Kitty_standing/Kitty_standing_eyes[KittyX.eyes].png"
     choice:
         3.5
     choice:
         3.25
     choice:
         3
-    "images/Kitty_sprite/Kitty_standing_eyes_squint.png"
+    "images/Kitty_standing/Kitty_standing_eyes_squint.png"
     0.05
-    "images/Kitty_sprite/Kitty_standing_eyes_closed.png"
+    "images/Kitty_standing/Kitty_standing_eyes_closed.png"
     0.15
-    "images/Kitty_sprite/Kitty_standing_eyes_squint.png"
+    "images/Kitty_standing/Kitty_standing_eyes_squint.png"
     0.05
     repeat
 
 image Kitty_squinting:
-    "images/Kitty_sprite/Kitty_standing_eyes_sexy.png"
+    "images/Kitty_standing/Kitty_standing_eyes_sexy.png"
     choice:
         3.5
     choice:
         3.25
     choice:
         3
-    "images/Kitty_sprite/Kitty_standing_eyes_squint.png"
+    "images/Kitty_standing/Kitty_standing_eyes_squint.png"
     0.25
     repeat
 
@@ -123,7 +123,7 @@ layeredimage Kitty_standing_fondling:
     elif girl_offhand_action == "eat_pussy":
         "Lickpussy_Kitty"
 
-image Kitty_sex_animation:
+image Kitty_sprite sex:
     LiveComposite(
         (1120, 840),
         (0, 0), ConditionSwitch(

@@ -1824,7 +1824,7 @@ label Emma_Rename:
 
 label Emma_Personality(counter=0):
     if not EmmaX.had_chat[4] or counter:
-        "Since you're doing well in one area, you can convince Emma to focus on one of the others."
+        "Since you're doing well in one area, you can convince Emma_sprite to focus on one of the others."
         "Any time you go over the limit in a given stat, the excess will spill over into the chosen stat instead."
         "This will also impact which personality trait takes priority in dialog."
     menu:
@@ -2407,7 +2407,7 @@ label Emma_Clothes(Public=0, Bonus=0):
         $ Public += 2
 
 
-label Emma_Wardrobe_Menu:
+label Emma_wardrobe_menu:
     $ primary_action = 1
     $ EmmaX.change_face()
     while True:
@@ -3084,8 +3084,8 @@ label Emma_Wardrobe_Menu:
                     $ EmmaX.outfit["hose"] = "_ripped_pantyhose"
                 "The stockings and garterbelt would look good with that." if EmmaX.outfit["hose"] != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in EmmaX.inventory:
                     $ EmmaX.outfit["hose"] = "_stockings_and_garterbelt"
-                "Maybe just the garterbelt?" if EmmaX.outfit["hose"] != "garterbelt" and "_stockings_and_garterbelt" in EmmaX.inventory:
-                    $ EmmaX.outfit["hose"] = "garterbelt"
+                "Maybe just the garterbelt?" if EmmaX.outfit["hose"] != "_garterbelt" and "_stockings_and_garterbelt" in EmmaX.inventory:
+                    $ EmmaX.outfit["hose"] = "_garterbelt"
                 "Never mind":
                     pass
             return

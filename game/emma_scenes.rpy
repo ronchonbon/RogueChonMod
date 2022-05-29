@@ -22,12 +22,12 @@ label meet_Emma:
 
     $ EmmaX.change_face("_normal")
 
-    show Emma_sprite at sprite_location(EmmaX.sprite_location) with easeinright
+    show Emma_sprite standing at sprite_location(EmmaX.sprite_location) with easeinright
 
     $ EmmaX.location = "bg_classroom"
     $ EmmaX.arm_pose = 1
 
-    ch_u "Hello students. My name is Emma Frost, and I have been invited to conduct this class."
+    ch_u "Hello students. My name is Emma_sprite Frost, and I have been invited to conduct this class."
     ch_e "I hope that over my tenure here you will demonstrate talents and hard work worthy of my respect."
     "She scans her eyes over the room, passing over each student."
 
@@ -361,7 +361,7 @@ label Emma_Teacher_Caught(Girl=0):
     call checkout(total = True)
 
     $ Girl.change_face("_bemused", 2, eyes="_side")
-    call AllReset (Girl)
+    call reset_position(Girl)
     if approval_check(Girl, 700, "I"):
         $ Girl.change_face("_bemused", 1)
         "[Girl.name] shrugs and returns to her seat."
@@ -1238,8 +1238,7 @@ label Emma_BF:
         "Are you kidding? I'd love to!":
             $ EmmaX.change_stat("love", 200, 25)
             "[EmmaX.name] wraps her arms around you and starts kissing you passionately."
-            $ EmmaX.change_face("_kiss")
-            call Emma_Kissing_Launch ("kiss")
+            call kiss_launch(EmmaX)
             $ EmmaX.action_counter["kiss"] += 1
         "Uhm, okay.":
             $ EmmaX.brows = "_confused"
@@ -1252,8 +1251,7 @@ label Emma_BF:
                 "Yes. Absolutely." if "EmmaYes" in Player.traits:
                     $ EmmaX.change_stat("love", 200, 30)
                     "[EmmaX.name] wraps her arms around you and starts kissing you passionately."
-                    $ EmmaX.change_face("_kiss")
-                    call Emma_Kissing_Launch ("kiss")
+                    call kiss_launch(EmmaX)
                     $ EmmaX.action_counter["kiss"] += 1
                 "She wouldn't understand." if len(Player.Harem) == 1:
                     $ line = "no"

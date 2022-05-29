@@ -9,15 +9,15 @@ image black_screen:
 
 define ch_p = Character('[Player.name]', color = "#87CEEB", show_two_window = True)
 
-define ch_r = Character('[RogueX.name]', color = "#85bb65", image = "arrow", show_two_window = True)
-define ch_k = Character('[KittyX.name]', color = "#F5A9D0", image = "arrow", show_two_window = True)
-define ch_e = Character('[EmmaX.name]', color = "#98bee7", image = "arrow", show_two_window = True)
-define ch_l = Character('[LauraX.name]', color = "#d8b600", image = "arrow", show_two_window = True)
-define ch_j = Character('[JeanX.name]', color = "#b2d950", image = "arrow", show_two_window = True)
-define ch_s = Character('[StormX.name]', color = "#b2d950", image = "arrow", show_two_window = True)
-define ch_v = Character('[JubesX.name]', color = "#b2d950", image = "arrow", show_two_window = True)
+define ch_r = Character('[RogueX.name]', color = "#85bb65", image = "Rogue_sprite", show_two_window = True)
+define ch_k = Character('[KittyX.name]', color = "#F5A9D0", image = "Kitty_sprite", show_two_window = True)
+define ch_e = Character('[EmmaX.name]', color = "#98bee7", image = "Emma_sprite", show_two_window = True)
+define ch_l = Character('[LauraX.name]', color = "#d8b600", image = "Laura_sprite", show_two_window = True)
+define ch_j = Character('[JeanX.name]', color = "#b2d950", image = "Jean_sprite", show_two_window = True)
+define ch_s = Character('[StormX.name]', color = "#b2d950", image = "Storm_sprite", show_two_window = True)
+define ch_v = Character('[JubesX.name]', color = "#b2d950", image = "Jubes_sprite", show_two_window = True)
 
-define ch_x = Character('Professor X', color = "#a09400", image = "arrow", show_two_window = True)
+define ch_x = Character('Professor X', color = "#a09400", image = "Xavier_sprite", show_two_window = True)
 define ch_b = Character('Dr. McCoy', color = "#1033b2", image = "arrow", show_two_window = True)
 
 define ch_u = Character('???', color = "#85bb65", image = "arrow", show_two_window = True)
@@ -103,10 +103,10 @@ init -1:
     default always_return_to_room = 1
 
     default stage_far_left = 0.1
-    default stage_left = 0.3
+    default stage_left = 0.33
     default stage_center = 0.5
-    default stage_right = 0.66
-    default stage_far_right = 0.8
+    default stage_right = 0.65
+    default stage_far_right = 0.87
 
     default number_of_holders = 1
 
@@ -115,7 +115,7 @@ init -1:
     default Xavier_mouth = "_smile"
     default Xavier_psychic = False
     default Xavier_emotion = "_happy"
-    default Xavier_sprite_location = stage_center
+    default Xavier_location = stage_center
 
     default Gwen_name = "????"
 
@@ -173,71 +173,38 @@ label start:
     show screen status_screen
     show screen inventory_button
 
-    # $ bg_current = "bg_emma"
-    # $ time_index = 2
-    # $ current_time = "evening"
-    #
-    # scene background onlayer backdrop
-    # scene
-    #
-    # $ RogueX.change_outfit("nude")
-    # $ JeanX.change_outfit("nude")
-    # $ KittyX.change_outfit("nude")
-    # $ EmmaX.change_outfit("nude")
-    # show Rogue_sprite at sprite_location(stage_far_left)
-    # show Jean_sprite at sprite_location(stage_left)
-    # show Emma_sprite at sprite_location(stage_right)
-    # show Kitty_sprite at sprite_location(stage_far_right)
-    # ""
-    #
-    #
-    # $ action_speed = 0
-    # $ Player.sprite = True
-    # $ Player.cock_position = "anal"
-    # $ primary_action = "anal"
-    # $ offhand_action = None
-    # $ show_feet = False
-    #
-    # $ JeanX.change_outfit("bondage_outfit")
-    # $ JeanX.change_face("_sexy")
-    # $ JeanX.bound = True
-    # $ JeanX.whipped = True
-    # $ JeanX.change_outfit("nude")
-    # show Jean_SexSprite at sprite_location(stage_center)
-    # show Jean_Doggy_Animation at sprite_location(0.7)
-    # $ EmmaX.change_outfit("domme_outfit")
-    # $ EmmaX.change_face("_sexy")
-    # $ EmmaX.change_outfit("nude")
-    # show Emma_SexSprite at sprite_location(stage_left)
-    # show Emma_Doggy_Animation at sprite_location(0.4)
-    # $ RogueX.change_face("_sexy")
-    # $ RogueX.change_outfit("nude")
-    # show Rogue_sprite at sprite_location(stage_center)
-    # show Rogue_sex_animation at sprite_location(stage_center)
-    #
-    # show Rogue_blowjob_animation at sprite_location(stage_center)
-    #
-    # show Rogue_titjob_animation at sprite_location(stage_center)
-    #
-    # show Rogue_doggy_animation at sprite_location(stage_center)
-    #
-    # show Rogue_handjob_animation at sprite_location(stage_center)
-    # $ LauraX.change_face("_sexy")
-    # $ LauraX.change_outfit("nude")
-    # show Laura_SexSprite at sprite_location(0.6)
-    # # show Laura_Doggy_Animation at sprite_location(0.9)
-    # $ KittyX.change_face("_sexy")
-    # $ KittyX.change_outfit("nude")
-    # show Kitty_sex_animation at sprite_location(0.3)
-    # # show Kitty_Doggy_Animation at sprite_location(0.4)
-    # $ StormX.change_face("_sexy")
-    # $ StormX.change_outfit("nude")
-    # show Storm_SexSprite at sprite_location(0.2)
-    # show Storm_Doggy_Animation at sprite_location(0.8)
-    # $ JubesX.change_face("_sexy")
-    # show Jubes_SexSprite at sprite_location(0.94)
-    #
-    # ""
+    $ bg_current = "bg_emma"
+    $ time_index = 2
+    $ current_time = "evening"
+
+    scene background onlayer backdrop
+    scene
+
+    $ RogueX.location = bg_current
+    $ RogueX.sprite_location = 0.2
+    $ active_Girls.append(RogueX)
+
+    $ KittyX.location = bg_current
+    $ KittyX.sprite_location = 0.3
+    $ active_Girls.append(KittyX)
+
+    $ EmmaX.location = bg_current
+    $ EmmaX.sprite_location = 0.4
+    $ active_Girls.append(EmmaX)
+
+    $ JeanX.location = bg_current
+    $ JeanX.sprite_location = 0.6
+    $ active_Girls.append(JeanX)
+
+    show Rogue_sprite standing at sprite_location(RogueX.sprite_location)
+    show Kitty_sprite standing at sprite_location(KittyX.sprite_location)
+    show Emma_sprite standing at sprite_location(EmmaX.sprite_location)
+    # show Laura_sprite standing at sprite_location(0.5)
+    show Jean_sprite standing at sprite_location(JeanX.sprite_location)
+    # show Storm_sprite standing at sprite_location(0.7)
+    # show Jubes_sprite standing at sprite_location(0.8)
+
+    ""
 
     jump prologue
 

@@ -1139,7 +1139,7 @@ label Les_Cycle(Girl=focused_Girl):
     $ Girl = check_girl(Girl)
     while round > 0:
         call shift_focus (Girl)
-        call Les_Launch (Girl)
+        call lesbian_launch(Girl)
         $ Girl.lust_face()
 
         if Player.focus < 100:
@@ -1262,8 +1262,8 @@ label Les_Cycle(Girl=focused_Girl):
                 if "unseen" not in Girl.recent_history:
                     call Player_Cumming (Girl)
                     if "_angry" in Girl.recent_history:
-                        call expression Girl.tag + "_Pos_Reset"
-                        call expression Partner.tag + "_Pos_Reset"
+                        call reset_position(Girl)
+                        call reset_position(Partner)
                         return
                     $ Girl.change_stat("lust", 200, 5)
                     if 100 > Girl.lust >= 70 and Girl.session_orgasms < 2:
@@ -1310,12 +1310,12 @@ label Les_Cycle(Girl=focused_Girl):
 
 
 label Les_After:
-    call expression Girl.tag + "_Pos_Reset"
+    call reset_position(Girl)
     if not Partner:
         $ approval_bonus = 0
         call checkout
         return
-    call expression Partner.tag + "_Pos_Reset"
+    call reset_position(Partner)
     $ Girl.change_face("_sexy")
     if Partner == EmmaX:
         call Partner_Like (Girl, 4)
@@ -2034,7 +2034,7 @@ label Girl_Whammy(Other):
         if Other == JubesX and JubesX.level >= JeanX.level:
             ch_v "Vampire whammy beats mutant whammy!"
             return
-            
+
         $ Other.likes[JeanX.tag] += 500 if Other.likes[JeanX.tag] <= 900 else Other.likes[JeanX.tag]
         $ Other.likes[JeanX.tag] = 900 if Other.likes[JeanX.tag] >= 900 else Other.likes[JeanX.tag]
     return

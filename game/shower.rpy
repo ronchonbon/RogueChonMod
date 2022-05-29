@@ -779,11 +779,11 @@ label Shower_Sex(Options=0, line=0):
     if len(staying_Girls) > 1 and D20 >= 10:
         "As you do so, both girls press their bodies body up against yours."
         $ line = staying_Girls[0].name
-        call Close_Launch (staying_Girls[0], staying_Girls[1])
+        call close_launch(staying_Girls[0], staying_Girls[1])
     elif D20 >= 5:
         "As you do so, [staying_Girls[0].name] presses her body up against you."
         $ line = "She"
-        call Close_Launch (staying_Girls[0])
+        call close_launch(staying_Girls[0])
     else:
         $ line = renpy.random.choice(["It was fairly uneventful.",
                     "A few people came and went as you did so.",
@@ -822,7 +822,7 @@ label Shower_Sex(Options=0, line=0):
                 pass
             "Stop her." if len(staying_Girls) < 2:
                 $ line = 0
-                call expression staying_Girls[0].tag + "_Pos_Reset"
+                call reset_position(staying_Girls[0])
                 "You take a step back, pulling away from her."
                 $ staying_Girls[0].change_stat("love", 80, -1)
                 $ staying_Girls[0].change_stat("obedience", 80, 5)
@@ -831,8 +831,8 @@ label Shower_Sex(Options=0, line=0):
                 "She seems a bit disappointed."
             "Stop them." if len(staying_Girls) > 1:
                 $ line = 0
-                call expression staying_Girls[1].tag + "_Pos_Reset"
-                call expression staying_Girls[0].tag + "_Pos_Reset"
+                call reset_position(staying_Girls[0])
+                call reset_position(staying_Girls[1])
                 "You take a step back, pulling away from them."
                 $ staying_Girls[0].change_stat("love", 80, -1)
                 $ staying_Girls[0].change_stat("obedience", 80, 5)
@@ -986,7 +986,7 @@ label Shower_Sex(Options=0, line=0):
                 $ staying_Girls[0].change_stat("lust", 70, 5)
                 $ staying_Girls[1].change_stat("lust", 50, 12)
                 $ staying_Girls[1].change_stat("lust", 70, 12)
-                call Close_Launch (staying_Girls[0], staying_Girls[1])
+                call close_launch(staying_Girls[0], staying_Girls[1])
                 "[staying_Girls[1].name] seems really into this, and returns the favor."
                 $ Player.change_stat("focus", 50, 7)
                 $ Player.change_stat("focus", 80, 3)
@@ -997,7 +997,7 @@ label Shower_Sex(Options=0, line=0):
                 $ staying_Girls[1].change_stat("lust", 70, 10)
                 $ Player.change_stat("focus", 50, 5)
                 $ Player.change_stat("focus", 80, 3)
-                call Close_Launch (staying_Girls[0], staying_Girls[1])
+                call close_launch(staying_Girls[0], staying_Girls[1])
                 "[staying_Girls[1].name] seems really into this, and leans into it."
             else:
                 $ staying_Girls[1].change_stat("lust", 50, 10)
@@ -1013,14 +1013,14 @@ label Shower_Sex(Options=0, line=0):
                     $ staying_Girls[1].change_stat("lust", 70, 5)
                     $ Player.change_stat("focus", 50, 6)
                     $ Player.change_stat("focus", 80, 3)
-                    call Close_Launch (staying_Girls[0], staying_Girls[1])
+                    call close_launch(staying_Girls[0], staying_Girls[1])
                     "[staying_Girls[1].name] seems really into this, slowly rubbing against you as she watches."
                 else:
                     $ staying_Girls[1].change_stat("lust", 50, 10)
                     $ staying_Girls[1].change_stat("lust", 70, 5)
                     $ Player.change_stat("focus", 50, 5)
                     $ Player.change_stat("focus", 80, 3)
-                    call Close_Launch (staying_Girls[0], staying_Girls[1])
+                    call close_launch(staying_Girls[0], staying_Girls[1])
                     "[staying_Girls[1].name] seems really into this, and joins her on the other side."
                 $ line = 4
             elif ((approval_check(StayCount[1], 1200) and StayCount[1].likes[StayCount[0].tag] >= 600)) or approval_check(StayCount[1], 1600):
@@ -1040,7 +1040,7 @@ label Shower_Sex(Options=0, line=0):
                 pass
             "Stop her." if len(staying_Girls) < 2:
                 $ line = 0
-                call expression staying_Girls[0].tag + "_Pos_Reset"
+                call reset_position(staying_Girls[0])
                 "You take a step back, pulling away from her."
                 $ staying_Girls[0].change_stat("love", 80, -2)
                 $ staying_Girls[0].change_stat("obedience", 80, 5)
@@ -1049,8 +1049,8 @@ label Shower_Sex(Options=0, line=0):
                 "She seems a bit disappointed."
             "Stop them." if len(staying_Girls) > 1:
                 $ line = 0
-                call expression staying_Girls[1].tag + "_Pos_Reset"
-                call expression staying_Girls[0].tag + "_Pos_Reset"
+                call reset_position(staying_Girls[0])
+                call reset_position(staying_Girls[1])
                 "You take a step back, pulling away from them."
                 $ staying_Girls[0].change_face("_sad")
                 $ staying_Girls[0].change_stat("love", 80, -2)
@@ -1090,10 +1090,11 @@ label Shower_Sex(Options=0, line=0):
                 call Girl_Cumming (staying_Girls[0], 1)
             if len(staying_Girls) > 1:
                 "The girls take a step back."
-                call expression staying_Girls[1].tag + "_Pos_Reset"
+                call reset_position(staying_Girls[1])
             else:
                 "[staying_Girls[0].name] takes a step back."
-            call expression staying_Girls[0].tag + "_Pos_Reset"
+
+            call reset_position(staying_Girls[0])
 
         elif 4 <= Options[0] <= 5 and D20 >= 10:
 
@@ -1115,10 +1116,10 @@ label Shower_Sex(Options=0, line=0):
                 $ staying_Girls[0].spunk = []
             if len(staying_Girls) > 1:
                 "The girls take a step back."
-                call expression staying_Girls[1].tag + "_Pos_Reset"
+                call reset_position(staying_Girls[1])
             else:
                 "[staying_Girls[0].name] takes a step back."
-            call expression staying_Girls[0].tag + "_Pos_Reset"
+            call reset_position(staying_Girls[0])
 
         elif 6 <= Options[0] <= 7 and D20 >= 15:
 
@@ -1135,15 +1136,15 @@ label Shower_Sex(Options=0, line=0):
             if len(staying_Girls) > 1:
                 $ staying_Girls[1].check_if_likes(staying_Girls[0],900,3,1)
                 "The girls take a step back."
-                call expression staying_Girls[1].tag + "_Pos_Reset"
+                call reset_position(staying_Girls[1])
             else:
                 "[staying_Girls[0].name] takes a step back."
-            call expression staying_Girls[0].tag + "_Pos_Reset"
+            call reset_position(staying_Girls[0])
         else:
 
             if len(staying_Girls) > 1:
-                call expression staying_Girls[1].tag + "_Pos_Reset"
-            call expression staying_Girls[0].tag + "_Pos_Reset"
+                call reset_position(staying_Girls[1])
+            call reset_position(staying_Girls[0])
             $ Player.change_stat("focus", 50, 15)
             $ Player.change_stat("focus", 80, 5)
             if D20 >= 15:

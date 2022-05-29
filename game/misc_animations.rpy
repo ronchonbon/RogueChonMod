@@ -393,13 +393,13 @@ image DressShadow:
     contains:
 
         ConditionSwitch(
-            "RogueX.sprite_layer == 100", "Rogue_sprite",
-            "KittyX.sprite_layer == 100", "Kitty_sprite",
-            "EmmaX.sprite_layer == 100", "Emma_sprite",
-            "LauraX.sprite_layer == 100", "Laura_Sprite",
-            "JeanX.sprite_layer == 100", "Jean_sprite",
-            "StormX.sprite_layer == 100", "Storm_Sprite",
-            "JubesX.sprite_layer == 100", "Jubes_Sprite",
+            "RogueX.sprite_layer == 100", "Rogue_sprite standing",
+            "KittyX.sprite_layer == 100", "Kitty_sprite standing",
+            "EmmaX.sprite_layer == 100", "Emma_sprite standing",
+            "LauraX.sprite_layer == 100", "Laura_sprite standing",
+            "JeanX.sprite_layer == 100", "Jean_sprite standing",
+            "StormX.sprite_layer == 100", "Storm_sprite standing",
+            "JubesX.sprite_layer == 100", "Jubes_sprite standing",
 
 
 
@@ -633,104 +633,6 @@ label Display_Gwen(GwLoc=350, YLoc=50):
     return
 
 
-label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
-
-
-
-    if GirlB:
-        $ temp_Girls = [GirlA,GirlB]
-    elif GirlA:
-        $ temp_Girls = [GirlA]
-    while temp_Girls:
-        if temp_Girls[0] == KittyX or temp_Girls[0] == LauraX:
-            $ temp_Girls[0].arm_pose = 1
-        else:
-            $ temp_Girls[0].arm_pose = 2
-        $ YLoc = 100
-        if GirlA == temp_Girls[0]:
-
-            if temp_Girls[0] == KittyX:
-                $ XLoc = 450
-            elif temp_Girls[0] == RogueX:
-                $ XLoc = 550
-            else:
-                $ XLoc = 500
-            $ temp_Girls[0].sprite_layer = 100
-            $ XZoom = -1.3
-        elif GirlB == temp_Girls[0]:
-
-            if temp_Girls[0] == EmmaX or LauraX:
-                $ XLoc = 700
-            else:
-                $ XLoc = 715
-            $ temp_Girls[0].sprite_layer = 75
-            $ XZoom = 1.3
-
-        if temp_Girls[0] == RogueX:
-            call hide_girl(RogueX)
-            show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(XLoc,YLoc):
-                alpha 1
-                zoom 1
-                xzoom XZoom
-                yzoom 1.3
-                offset (0,0)
-                anchor (0.6, 0.0)
-        elif temp_Girls[0] == KittyX:
-            call hide_girl(KittyX)
-            show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(XLoc,YLoc):
-                alpha 1
-                zoom 1
-                xzoom XZoom
-                yzoom 1.3
-                offset (0,0)
-                anchor (0.5, 0.0)
-        elif temp_Girls[0] == EmmaX:
-            call Emma_Hide
-            show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(XLoc,YLoc):
-                alpha 1
-                zoom 1
-                xzoom XZoom
-                yzoom 1.3
-                offset (0,0)
-                anchor (0.5, 0.0)
-        elif temp_Girls[0] == LauraX:
-            call Laura_Hide
-            show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(XLoc,YLoc):
-                alpha 1
-                zoom 1
-                xzoom XZoom
-                yzoom 1.3
-                offset (0,0)
-                anchor (0.5, 0.0)
-        elif temp_Girls[0] == JeanX:
-            call Jean_Hide
-            show Jean_sprite zorder JeanX.sprite_layer at sprite_location(XLoc,YLoc):
-                alpha 1
-                zoom 1
-                xzoom XZoom
-                yzoom 1.3
-                offset (0,0)
-                anchor (0.5, 0.0)
-        elif temp_Girls[0] == StormX:
-            call Storm_Hide
-            show Storm_Sprite zorder StormX.sprite_layer at sprite_location(XLoc,YLoc):
-                alpha 1
-                zoom 1
-                xzoom XZoom
-                yzoom 1.3
-                offset (0,0)
-                anchor (0.6, 0.0)
-        elif temp_Girls[0] == JubesX:
-            call Jubes_Hide
-            show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(XLoc,YLoc):
-                alpha 1
-                zoom 1
-                xzoom XZoom
-                yzoom 1.3
-                offset (0,0)
-                anchor (0.6, 0.0)
-        $ temp_Girls.remove(temp_Girls[0])
-    return
 
 
 
@@ -747,121 +649,8 @@ label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
 
 
 
-label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, temp_Girls=[]):
 
 
-
-    if Partner not in all_Girls:
-        return
-    $ temp_Girls = [Girl,Partner]
-    while temp_Girls:
-        if "unseen" in temp_Girls[0].recent_history:
-            $ temp_Girls[0].eyes = "closed"
-        elif Girl == temp_Girls[0]:
-            if Girl == RogueX:
-                $ temp_Girls[0].eyes = "side"
-            elif Girl == EmmaX:
-                $ temp_Girls[0].eyes = "_sly"
-            else:
-                $ temp_Girls[0].eyes = "leftside"
-        else:
-            $ temp_Girls[0].eyes = "side"
-
-        if temp_Girls[0] == KittyX or temp_Girls[0] == LauraX:
-            $ temp_Girls[0].arm_pose = 1
-        else:
-            $ temp_Girls[0].arm_pose = 2
-        $ YLoc = 100
-        if Girl == temp_Girls[0]:
-
-            if temp_Girls[0] == KittyX:
-                $ XLoc = 450
-            elif temp_Girls[0] == RogueX:
-                $ XLoc = 550
-            else:
-                $ XLoc = 500
-            $ temp_Girls[0].sprite_layer = 100
-            $ XZoom = -1.3
-        else:
-
-            if temp_Girls[0] == EmmaX or LauraX:
-                $ XLoc = 700
-            else:
-                $ XLoc = 715
-            if temp_Girls[0] == KittyX:
-                if RogueX in (Partner,Girl):
-                    $ KittyX.sprite_layer = 100
-                else:
-                    $ KittyX.sprite_layer = 25
-            else:
-                $ temp_Girls[0].sprite_layer = 75
-            $ XZoom = 1.3
-
-        if temp_Girls[0] == RogueX:
-            call hide_girl(RogueX)
-            show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(XLoc,YLoc):
-                alpha 1
-                zoom 1
-                xzoom XZoom
-                yzoom 1.3
-                offset (0,0)
-                anchor (0.6, 0.0)
-        elif temp_Girls[0] == KittyX:
-            call hide_girl(KittyX)
-            show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(XLoc,YLoc):
-                alpha 1
-                zoom 1
-                xzoom XZoom
-                yzoom 1.3
-                offset (0,0)
-                anchor (0.5, 0.0)
-        elif temp_Girls[0] == EmmaX:
-            call Emma_Hide
-            show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(XLoc,YLoc):
-                alpha 1
-                zoom 1
-                xzoom XZoom
-                yzoom 1.3
-                offset (0,0)
-                anchor (0.5, 0.0)
-        elif temp_Girls[0] == LauraX:
-            call Laura_Hide
-            show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(XLoc,YLoc):
-                alpha 1
-                zoom 1
-                xzoom XZoom
-                yzoom 1.3
-                offset (0,0)
-                anchor (0.5, 0.0)
-        elif temp_Girls[0] == JeanX:
-            call Jean_Hide
-            show Jean_sprite zorder JeanX.sprite_layer at sprite_location(XLoc,YLoc):
-                alpha 1
-                zoom 1
-                xzoom XZoom
-                yzoom 1.3
-                offset (0,0)
-                anchor (0.5, 0.0)
-        elif temp_Girls[0] == StormX:
-            call Storm_Hide
-            show Storm_Sprite zorder StormX.sprite_layer at sprite_location(XLoc,YLoc):
-                alpha 1
-                zoom 1
-                xzoom XZoom
-                yzoom 1.3
-                offset (0,0)
-                anchor (0.6, 0.0)
-        elif temp_Girls[0] == JubesX:
-            call Jubes_Hide
-            show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(XLoc,YLoc):
-                alpha 1
-                zoom 1
-                xzoom XZoom
-                yzoom 1.3
-                offset (0,0)
-                anchor (0.6, 0.0)
-        $ temp_Girls.remove(temp_Girls[0])
-    return
 
 image CircleTest:
     contains:
@@ -921,7 +710,7 @@ image Silhouettes:
 
     contains:
 
-        AlphaMask("SilhouetteBase","Storm_Sprite")
+        AlphaMask("SilhouetteBase","Storm_sprite standing")
 
 
 

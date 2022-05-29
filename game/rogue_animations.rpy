@@ -179,9 +179,9 @@ layeredimage Rogue_handjob_over_hand_animations:
     always:
         "Rogue_handjob_over_hand_animation[action_speed]" pos (-0.04, 0.455) zoom 0.28
 
-layeredimage Rogue_handjob_animation:
+layeredimage Rogue_sprite handjob:
     always:
-        "Rogue_sprite" pos (0.05, 0.0)
+        "Rogue_sprite standing" pos (0.05, 0.0)
 
     always:
         "Rogue_handjob_under_hand_animations"
@@ -192,7 +192,7 @@ layeredimage Rogue_handjob_animation:
     always:
         "Rogue_handjob_over_hand_animations"
 
-    anchor (0.5, 0.0) offset (550, -200) zoom 2.5
+    anchor (0.5, 0.0) offset (220, -200) zoom 2.5
 
 image Rogue_titjob_under_tits_animation0:
     subpixel True
@@ -218,7 +218,7 @@ image Rogue_titjob_under_tits_animation2:
 
 layeredimage Rogue_titjob_under_tits_animations:
     always:
-        "Rogue_titjob_under_tits_animation[action_speed]" pos (0.2, 0.8)
+        "Rogue_titjob_under_tits_animation[action_speed]" pos (-0.043, 0.8)
 
 image Rogue_titjob_over_tits_animation0:
     subpixel True
@@ -246,7 +246,7 @@ layeredimage Rogue_titjob_over_tits_animations:
     always:
         "Rogue_titjob_over_tits_animation[action_speed]" pos (-0.043, 0.8)
 
-layeredimage Rogue_titjob_animation:
+layeredimage Rogue_sprite titjob:
     always:
         "Rogue_titjob_under_tits_animations"
 
@@ -256,7 +256,7 @@ layeredimage Rogue_titjob_animation:
     always:
         "Rogue_titjob_over_tits_animations"
 
-    anchor (0.5, 0.0) offset (550, 200) zoom 0.72
+    anchor (0.5, 0.0) offset (200, 200) zoom 0.72
 
 image Rogue_blowjob_back_hair_animation0:
     "Rogue_back_hair"
@@ -280,31 +280,31 @@ image Rogue_blowjob_back_hair_animation4:
 
 layeredimage Rogue_blowjob_back_hair_animations:
     always:
-        "Rogue_blowjob_back_hair_animation[action_speed]" pos (0.1105, 0.3272) zoom 0.2755
+        "Rogue_blowjob_back_hair_animation[action_speed]" pos (0.029, 0.305) zoom 0.2755
 
 image Rogue_blowjob_body_animation0:
-    "Rogue_sprite"
+    "Rogue_sprite standing"
     blowjob_starting
 
 image Rogue_blowjob_body_animation1:
-    "Rogue_sprite"
+    "Rogue_sprite standing"
     blowjob_licking_body
 
 image Rogue_blowjob_body_animation2:
-    "Rogue_sprite"
+    "Rogue_sprite standing"
     blowjob_heading
 
 image Rogue_blowjob_body_animation3:
-    "Rogue_sprite"
+    "Rogue_sprite standing"
     blowjob_sucking_body
 
 image Rogue_blowjob_body_animation4:
-    "Rogue_sprite"
+    "Rogue_sprite standing"
     blowjob_deepthroat_body
 
 layeredimage Rogue_blowjob_body_animations:
     always:
-        "Rogue_blowjob_body_animation[action_speed]" pos (-0.051, -0.01)
+        "Rogue_blowjob_body_animation[action_speed]"
 
 image Rogue_blowjob_mask_animation2:
     "images/Rogue_blowjob/Rogue_blowjob_face_mask.png"
@@ -348,7 +348,7 @@ image Rogue_blowjob_face_mask_animation4:
 
 layeredimage Rogue_blowjob_face_mask_animations:
     if action_speed > 1:
-        "Rogue_blowjob_face_mask_animation[action_speed]" pos (-0.0275, 0.1885) zoom 0.2755
+        "Rogue_blowjob_face_mask_animation[action_speed]" pos (0.029, 0.305) zoom 0.2755
 
 image Rogue_blowjob_mouth_animation2:
     "images/Rogue_blowjob/Rogue_blowjob_mouth_sucking.png"
@@ -364,7 +364,7 @@ layeredimage Rogue_blowjob_mouth_animations:
     else:
         "Rogue_blowjob_mouth_animation[action_speed]"
 
-layeredimage Rogue_blowjob_animation:
+layeredimage Rogue_sprite blowjob:
     always:
         "Rogue_blowjob_back_hair_animations"
 
@@ -380,7 +380,7 @@ layeredimage Rogue_blowjob_animation:
     always:
         "Rogue_blowjob_face_mask_animations"
 
-    anchor (0.5, 0.0) offset (550, -150) zoom 2.5
+    anchor (0.5, 0.0) offset (220, -150) zoom 2.5
 
 image Rogue_sex_body_animation0:
     subpixel True
@@ -567,6 +567,7 @@ image Rogue_sex_anus_animation0:
 
 image Rogue_sex_anus_animation1:
     "images/Kitty_sex/Kitty_sex_anus_open.png"
+    anchor (0.5, 0.5) pos (0.292, 0.386)
     block:
         ease 0.75 xzoom 1.0
         ease 0.25 xzoom 0.9
@@ -596,7 +597,7 @@ image Rogue_sex_spunk_anus_under:
         ease 2.25 xzoom 0.6
         repeat
 
-layeredimage Rogue_sex_animation:
+layeredimage Rogue_sprite sex:
     always:
         "Rogue_sex_body_animations"
 
@@ -943,7 +944,7 @@ layeredimage Rogue_doggy_feet_animations:
     always:
         "Rogue_doggy_feet_animation[action_speed]"
 
-layeredimage Rogue_doggy_animation:
+layeredimage Rogue_sprite doggy:
     always:
         "Rogue_doggy_body_animations"
 
@@ -963,4 +964,4 @@ layeredimage Rogue_doggy_animation:
     elif not Player.sprite or show_feet:
         "Rogue_doggy_feet"
 
-    anchor (0.5, 0.0) offset (150, 750) zoom 1.2
+    anchor (0.5, 0.0) offset (150, 700) zoom 1.2

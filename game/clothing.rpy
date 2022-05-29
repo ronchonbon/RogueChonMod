@@ -439,7 +439,7 @@ label quick_outfit_check(Girl, outfit_to_check = 3):
 
     if outfit_holder["bra"] in ["_tank", "_white_tank", "button_tank", "_sports_bra", "_tube_top", "_corset"]:
         $ count = 20
-    elif outfit_holder["bra"] == "wolvie_top":
+    elif outfit_holder["bra"] == "_wolvie_bra":
         $ count = 10
     elif outfit_holder["bra"] in ["_lace_bra", "_lace_corset"]:
         $ count = 5
@@ -473,7 +473,7 @@ label quick_outfit_check(Girl, outfit_to_check = 3):
 
     if outfit_holder["bottom"] and outfit_holder["underwear"]:
         $ count = 30
-    elif outfit_holder["bottom"] in ["_blue_skirt", "_skirt", "_other_skirt"]:
+    elif outfit_holder["bottom"] in ["_blue_skirt", "_skirt", "_cosplay_skirt"]:
         $ count = 20
     elif outfit_holder["bottom"] or outfit_holder["front_outer_accessory"] == "_shut_jacket":
         $ count = 25

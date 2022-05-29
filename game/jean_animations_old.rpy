@@ -1,5 +1,5 @@
 
-image Jean_Doggy_Animation:
+image Jean_sprite doggy:
     LiveComposite(
 
         (420,750),
@@ -178,7 +178,7 @@ image Jean_Doggy_Head:
 
             "True", "images/JeanDoggy/Jean_Doggy_brows_Normal.png",
             ),
-        (0,0), "Jean Doggy Blink",
+        (0,0), "Jean_sprite Doggy Blink",
         (0,0), ConditionSwitch(
 
             "JeanX.wet or JeanX.outfit['hair'] == '_wet'", "images/JeanDoggy/Jean_Doggy_Hair_Wet_Under.png",
@@ -240,7 +240,7 @@ image Jean_Doggy_Hair_Over:
     zoom .9
 
 
-image Jean Doggy Blink:
+image Jean_sprite Doggy Blink:
 
     ConditionSwitch(
         "JeanX.eyes == '_sexy'", "images/JeanDoggy/Jean_Doggy_eyes_Sexy.png",
@@ -1340,23 +1340,23 @@ image Jean_Doggy_Feet2:
 
 
 label Jean_Doggy_Launch(Line=primary_action):
-    if renpy.showing("Jean_Doggy_Animation"):
+    if renpy.showing("Jean_sprite doggy"):
         return
     $ action_speed = 0
     call hide_girl(JeanX, hide_sprite = True)
-    show Jean_Doggy_Animation zorder 150 at sprite_location(stage_center+50)
+    show Jean_sprite doggy zorder 150 at sprite_location(stage_center+50)
     with dissolve
     return
 
 label Jean_Doggy_Reset:
-    if not renpy.showing("Jean_Doggy_Animation"):
+    if not renpy.showing("Jean_sprite doggy"):
         return
 
     $ JeanX.arm_pose = 2
     $ JeanX.SpriteVer = 0
-    hide Jean_Doggy_Animation
+    hide Jean_sprite doggy
     call hide_girl(JeanX)
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         alpha 1
         zoom 1
         offset (0,0)
@@ -1372,7 +1372,7 @@ label Jean_Doggy_Reset:
 
 
 
-image Jean_SexSprite:
+image Jean_sprite sex:
     LiveComposite(
         (1000,1000),
         (0,0), ConditionSwitch(
@@ -2551,24 +2551,24 @@ label Jean_Sex_Launch(Line=primary_action):
     if JeanX.pose == "doggy":
         call Jean_Doggy_Launch (Line)
         return
-    if renpy.showing("Jean_SexSprite"):
+    if renpy.showing("Jean_sprite sex"):
         return
     $ action_speed = 0
     call hide_girl(JeanX, hide_sprite = True)
-    show Jean_SexSprite zorder 150
+    show Jean_sprite sex zorder 150
     with dissolve
     return
 
 label Jean_Sex_Reset:
-    if renpy.showing("Jean_Doggy_Animation"):
+    if renpy.showing("Jean_sprite doggy"):
         call Jean_Doggy_Reset
         return
-    if not renpy.showing("Jean_SexSprite"):
+    if not renpy.showing("Jean_sprite sex"):
         return
     $ JeanX.arm_pose = 2
-    hide Jean_SexSprite
+    hide Jean_sprite sex
     call hide_girl(JeanX)
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
         anchor (0.5, 0.0)
@@ -2586,7 +2586,7 @@ label Jean_Sex_Reset:
 
 
 
-image Jean_BJ_Animation:
+image Jean_sprite blowjob:
     LiveComposite(
         (858,928),
         (-270,-160), ConditionSwitch(
@@ -2708,7 +2708,7 @@ image Jean_BJ_Head:
         (858,928),
         (0,0), ConditionSwitch(
 
-            "(JeanX.wet or JeanX.outfit['hair'] == '_wet') and renpy.showing('Jean_SexSprite')", "images/JeanBJFace/Jean_BJ_Hair_Wet_Mid.png",
+            "(JeanX.wet or JeanX.outfit['hair'] == '_wet') and renpy.showing('Jean_sprite sex')", "images/JeanBJFace/Jean_BJ_Hair_Wet_Mid.png",
             "JeanX.wet or JeanX.outfit['hair'] == '_wet'", Null(),
             "JeanX.outfit['hair'] == 'pony'", Null(),
             "True", "images/JeanBJFace/Jean_BJ_Hair_Short_Under.png",
@@ -2735,7 +2735,7 @@ image Jean_BJ_Head:
 
 
 
-            "action_speed and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
+            "action_speed and renpy.showing('Jean_sprite blowjob')", ConditionSwitch(
 
                     "action_speed == 1", "images/JeanBJFace/Jean_BJ_mouth_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -2743,7 +2743,7 @@ image Jean_BJ_Head:
                     "action_speed == 4", "images/JeanBJFace/Jean_BJ_mouth_Sucking.png",
                     "action_speed == 6", "images/JeanBJFace/Jean_BJ_mouth_Sucking.png",
                     ),
-            "action_speed == 3 and renpy.showing('Jean_TJ_Animation')", "images/JeanBJFace/Jean_BJ_mouth_Tongue.png",
+            "action_speed == 3 and renpy.showing('Jean_sprite titjob')", "images/JeanBJFace/Jean_BJ_mouth_Tongue.png",
             "JeanX.mouth == '_normal'", "images/JeanBJFace/Jean_BJ_mouth_Smile.png",
             "JeanX.mouth == '_lipbite'", "images/JeanBJFace/Jean_BJ_mouth_Lipbite.png",
             "JeanX.mouth == '_sucking'", "images/JeanBJFace/Jean_BJ_mouth_Tongue.png",
@@ -2759,7 +2759,7 @@ image Jean_BJ_Head:
         (428,605), ConditionSwitch(
 
 
-            "not renpy.showing('Jean_BJ_Animation')", Null(),
+            "not renpy.showing('Jean_sprite blowjob')", Null(),
             "action_speed == 2", At("Jean_BJ_mouthHeading", Jean_BJ_mouthAnim()),
             "action_speed == 5", At("Jean_BJ_mouthHeading", Jean_BJ_mouthAnimC()),
             "True", Null(),
@@ -2768,7 +2768,7 @@ image Jean_BJ_Head:
         (0,0), ConditionSwitch(
 
             "not JeanX.spunk['mouth']", Null(),
-            "action_speed and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
+            "action_speed and renpy.showing('Jean_sprite blowjob')", ConditionSwitch(
 
                     "action_speed == 1", "images/JeanBJFace/Jean_BJ_Spunk_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -2796,7 +2796,7 @@ image Jean_BJ_Head:
             "JeanX.brows == '_confused'", "images/JeanBJFace/Jean_BJ_brows_Confused.png",
             "True", "images/JeanBJFace/Jean_BJ_brows_Normal.png",
             ),
-        (0,0), "Jean BJ Blink",
+        (0,0), "Jean_sprite BJ Blink",
 
         (0,0), ConditionSwitch(
 
@@ -2826,7 +2826,7 @@ image Jean_BJ_Head:
     anchor (0.5, 0.5)
 
 
-image Jean BJ Blink:
+image Jean_sprite BJ Blink:
 
     ConditionSwitch(
             "JeanX.eyes == '_normal'", "images/JeanBJFace/Jean_BJ_eyes_Normal.png",
@@ -3224,21 +3224,21 @@ transform Jean_BJ_Body_6():
 
 
 label Jean_BJ_Launch(Line=primary_action):
-    if renpy.showing("Jean_BJ_Animation"):
+    if renpy.showing("Jean_sprite blowjob"):
         return
 
 
-    if renpy.showing("Jean_TJ_Animation"):
-        hide Jean_TJ_Animation
+    if renpy.showing("Jean_sprite titjob"):
+        hide Jean_sprite titjob
     else:
         call hide_girl(JeanX)
         if Line == "L" or Line == "cum":
-            show Jean_sprite zorder JeanX.sprite_layer at sprite_location(stage_center):
+            show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(stage_center):
                 alpha 1
                 ease 1 zoom 2.5 offset (150,80)
             with dissolve
         else:
-            show Jean_sprite zorder JeanX.sprite_layer at sprite_location(stage_center):
+            show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(stage_center):
                 alpha 1
                 zoom 2.5 offset (150,80)
             with dissolve
@@ -3249,7 +3249,7 @@ label Jean_BJ_Launch(Line=primary_action):
     if Line != "cum":
         $ primary_action = "blowjob"
 
-    show Jean_BJ_Animation zorder 150:
+    show Jean_sprite blowjob zorder 150:
         pos (645,510)
     if taboo and Line == "L":
         if len(Present) >= 2:
@@ -3266,24 +3266,24 @@ label Jean_BJ_Launch(Line=primary_action):
     return
 
 label Jean_BJ_Reset:
-    if not renpy.showing("Jean_BJ_Animation"):
+    if not renpy.showing("Jean_sprite blowjob"):
         return
 
     call hide_girl(JeanX)
     $ action_speed = 0
 
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(stage_center):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(stage_center):
         alpha 1
         zoom 2.5 offset (150,80)
     with dissolve
 
-    show Jean_sprite zorder JeanX.sprite_layer:
+    show Jean_sprite standing zorder JeanX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 offset (-50,50)
         pause .2
         ease .3 zoom 1 offset (0,0)
     pause 1.5
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
     return
@@ -3380,7 +3380,7 @@ transform Handcock_2J():
         pause 0.1
         repeat
 
-image Jean_HJ_Animation:
+image Jean_sprite handjob:
     contains:
         ConditionSwitch(
 
@@ -3411,17 +3411,17 @@ image Jean_HJ_Animation:
 
 
 label Jean_HJ_Launch(Line=primary_action):
-    if renpy.showing("Jean_HJ_Animation"):
+    if renpy.showing("Jean_sprite handjob"):
         $ primary_action = "handjob"
         return
     call hide_girl(JeanX)
     $ JeanX.arm_pose = 1
     if Line == "L":
-        show Jean_sprite zorder JeanX.sprite_layer at sprite_location(stage_right):
+        show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (-150,350)
     else:
-        show Jean_sprite zorder JeanX.sprite_layer at sprite_location(stage_right):
+        show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (-150,350)
         with dissolve
@@ -3432,31 +3432,31 @@ label Jean_HJ_Launch(Line=primary_action):
     else:
         $ action_speed = 1
     pause .5
-    show Jean_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
+    show Jean_sprite handjob zorder 150 at sprite_location(stage_center) with easeinbottom:
 
         offset (250,250)
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(stage_right):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(stage_right):
         alpha 1
         ease .5 zoom 1.7 offset (-150,200)
     return
 
 label Jean_HJ_Reset:
-    if not renpy.showing("Jean_HJ_Animation"):
+    if not renpy.showing("Jean_sprite handjob"):
         return
     $ action_speed = 0
     $ JeanX.arm_pose = 1
-    hide Jean_HJ_Animation with easeoutbottom
+    hide Jean_sprite handjob with easeoutbottom
     call hide_girl(JeanX)
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         alpha 1
         zoom 1.7 offset (-150,200)
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         alpha 1
         ease 1 zoom 1.5 offset (-150,50)
         pause .5
         ease .5 zoom 1 offset (0,0)
         pause .5
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
     return
@@ -3525,7 +3525,7 @@ label Jean_PJ_Launch(Line=primary_action):
     call hide_girl(JeanX)
     if JeanX.location == bg_current:
 
-        show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+        show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
             alpha 1
             zoom 1 offset (0,0) xpos JeanX.sprite_location
 
@@ -3549,7 +3549,7 @@ label Jean_PJ_Reset:
 
 
 
-image Jean_TJ_Animation:
+image Jean_sprite titjob:
 
     contains:
         ConditionSwitch(
@@ -3655,7 +3655,7 @@ image Jean_TJ_TitR:
 
         ConditionSwitch(
 
-                    "not renpy.showing('Jean_TJ_Animation')", "images/JeanBJFace/Jean_TJ_TitR.png",
+                    "not renpy.showing('Jean_sprite titjob')", "images/JeanBJFace/Jean_TJ_TitR.png",
                     "True",  "images/JeanBJFace/Jean_TJ_TitRTJ.png",
                     )
     contains:
@@ -3718,7 +3718,7 @@ image Jean_TJ_Tits:
     contains:
         ConditionSwitch(
 
-                    "not renpy.showing('Jean_TJ_Animation')", Null(),
+                    "not renpy.showing('Jean_sprite titjob')", Null(),
                     "True",  "images/JeanBJFace/Jean_TJ_TitRO.png",
                     )
     contains:
@@ -3741,7 +3741,7 @@ image Jean_TJ_Tits:
                         "JeanX.outfit['bra'] == '_lace_bra'","images/JeanBJFace/Jean_TJ_Chest_LaceBra_Top.png",
                         "JeanX.outfit['bra'] == '_sports_bra'","images/JeanBJFace/Jean_TJ_Chest_SportsBra_Top.png",
                         "JeanX.outfit['bra'] == '_bikini_top'","images/JeanBJFace/Jean_TJ_Chest_Bikini_Top.png",
-                        "JeanX.outfit['bra'] == '_corset' and not JeanX.top_pulled_up and not renpy.showing('Jean_TJ_Animation')", "images/JeanBJFace/Jean_TJ_Chest_Corset.png",
+                        "JeanX.outfit['bra'] == '_corset' and not JeanX.top_pulled_up and not renpy.showing('Jean_sprite titjob')", "images/JeanBJFace/Jean_TJ_Chest_Corset.png",
                         "True", Null(),
                         )
     contains:
@@ -3754,7 +3754,7 @@ image Jean_TJ_Tits:
                         "JeanX.outfit['top'] == '_pink_shirt' and JeanX.top_pulled_up","images/JeanBJFace/Jean_TJ_Over_PinkShirt_Up.png",
                         "JeanX.outfit['top'] == '_green_shirt'","images/JeanBJFace/Jean_TJ_Over_GreenShirt_Top.png",
                         "JeanX.outfit['top'] == '_pink_shirt'","images/JeanBJFace/Jean_TJ_Over_PinkShirt_Top.png",
-                        "JeanX.outfit['top'] == '_towel' and not renpy.showing('Jean_TJ_Animation')", "images/JeanBJFace/Jean_TJ_Over_Towel.png",
+                        "JeanX.outfit['top'] == '_towel' and not renpy.showing('Jean_sprite titjob')", "images/JeanBJFace/Jean_TJ_Over_Towel.png",
                         "True", Null(),
                         )
     contains:
@@ -4448,7 +4448,7 @@ image Jean_TJ_5:
 
 
 label Jean_TJ_Launch(Line=primary_action):
-    if renpy.showing("Jean_TJ_Animation"):
+    if renpy.showing("Jean_sprite titjob"):
         return
 
 
@@ -4476,14 +4476,14 @@ label Jean_TJ_Launch(Line=primary_action):
 
     show blackscreen onlayer black with dissolve
 
-    if renpy.showing("Jean_BJ_Animation"):
-        hide Jean_BJ_Animation
+    if renpy.showing("Jean_sprite blowjob"):
+        hide Jean_sprite blowjob
     else:
         call hide_girl(JeanX)
-        show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+        show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
             alpha 1
             ease 1 zoom 2.3 xpos 750 yoffset -100
-        show Jean_sprite zorder JeanX.sprite_layer:
+        show Jean_sprite standing zorder JeanX.sprite_layer:
             alpha 0
 
     if JeanX.outfit['top'] == "towel" or JeanX.outfit['bra'] == "corset":
@@ -4492,7 +4492,7 @@ label Jean_TJ_Launch(Line=primary_action):
     $ action_speed = 0
     if Line != "cum":
         $ primary_action = "titjob"
-    show Jean_TJ_Animation zorder 150:
+    show Jean_sprite titjob zorder 150:
         pos (1000,1050)
     $ Player.sprite = 1
     hide blackscreen onlayer black with dissolve
@@ -4500,21 +4500,21 @@ label Jean_TJ_Launch(Line=primary_action):
 
 label Jean_TJ_Reset:
 
-    if not renpy.showing("Jean_TJ_Animation"):
+    if not renpy.showing("Jean_sprite titjob"):
         return
 
     call hide_girl(JeanX)
     $ Player.sprite = 0
 
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         zoom 2.3 xpos 750 yoffset -100
-    show Jean_sprite zorder JeanX.sprite_layer:
+    show Jean_sprite standing zorder JeanX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 xpos 700 yoffset 50
         pause .5
         ease .5 zoom 1 xpos JeanX.sprite_location yoffset 0
     "[JeanX.name] pulls back"
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         alpha 1
         zoom 1 offset (0,0) xpos JeanX.sprite_location
     return
@@ -4535,18 +4535,18 @@ label Jean_Kissing_Launch(T=primary_action, Set=1):
     call hide_girl(JeanX)
     $ primary_action = T
     $ JeanX.pose = "kiss" if Set else JeanX.pose
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location)
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(stage_center):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location)
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(stage_center):
         ease 0.5 offset (0,0) zoom 2 alpha 1
     return
 
 label Jean_Kissing_Smooch:
     $ JeanX.change_face("kiss")
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(stage_center):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos JeanX.sprite_location zoom 1
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         zoom 1
     $ JeanX.change_face("_sexy")
     return
@@ -4555,7 +4555,7 @@ label Jean_Breasts_Launch(T=primary_action, Set=1):
     call hide_girl(JeanX)
     $ primary_action = T
     $ JeanX.pose = "breasts" if Set else JeanX.pose
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 2 alpha 1
     return
@@ -4564,7 +4564,7 @@ label Jean_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(JeanX)
     $ primary_action = T
     $ JeanX.pose = "middle" if Set else JeanX.pose
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1
     return
@@ -4573,7 +4573,7 @@ label Jean_Pussy_Launch(T=primary_action, Set=1):
     call hide_girl(JeanX)
     $ primary_action = T
     $ JeanX.pose = "pussy" if Set else JeanX.pose
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         ease 0.5 pos (700,-400) offset (0,0) zoom 2 alpha 1
     return
 
@@ -4581,9 +4581,9 @@ label Jean_Pos_Reset(T=0, Set=0):
     if JeanX.location != bg_current:
         return
     call hide_girl(JeanX)
-    show Jean_sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
+    show Jean_sprite standing zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         ease .5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
-    show Jean_sprite zorder JeanX.sprite_layer:
+    show Jean_sprite standing zorder JeanX.sprite_layer:
         offset (0,0)
         anchor (0.5, 0.0)
         zoom 1

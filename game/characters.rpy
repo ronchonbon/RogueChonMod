@@ -969,11 +969,11 @@ init python:
             return 1
 
         def set_default_outfits(self):
-            self.outfit = {"back_outer_accessory": "", "back_inner_accessory": "",
+            self.outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                 "back_hair": "",
                 "face_piercings": "", "makeup": "", "gag": "",
                 "face_inner_accessory": "", "hair": "", "face_outer_accessory": "",
-                "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                 "rope": "", "bra": "", "underwear": "",
                 "hose": "", "bottom": "",
                 "dress": "", "boots": "", "loincloth": "", "top": "",
@@ -1000,11 +1000,11 @@ init python:
             self.today_outfit_name = "casual1"
 
             if self.tag == "Rogue":
-                self.first_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.first_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_evo",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_evo", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_tank", "underwear": "_black_panties",
                     "hose": "_tights", "bottom": "_skirt",
                     "dress": "", "boots": "", "loincloth": "", "top": "_mesh_top",
@@ -1013,11 +1013,11 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 2}
 
-                self.second_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.second_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_evo",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_evo", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_buttoned_tank", "underwear": "_black_panties",
                     "hose": "", "bottom": "_pants",
                     "dress": "", "boots": "", "loincloth": "", "top": "_pink_top",
@@ -1026,11 +1026,11 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 2}
 
-                self.gym_clothes = {"back_outer_accessory": "_hoodie", "back_inner_accessory": "",
+                self.gym_clothes = {"back_outer_accessory": "_hoodie", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_evo",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_evo", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_sports_bra", "underwear": "_shorts",
                     "hose": "", "bottom": "",
                     "dress": "", "boots": "", "loincloth": "", "top": "_hoodie",
@@ -1039,11 +1039,11 @@ init python:
                     "held_item": "",
                     "shame": 10, "outfit_active": 0}
 
-                self.sleepwear = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.sleepwear = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_evo",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_evo", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_tank", "underwear": "_green_panties",
                     "hose": "", "bottom": "",
                     "dress": "", "boots": "", "loincloth": "", "top": "",
@@ -1052,11 +1052,11 @@ init python:
                     "held_item": "",
                     "shame": 20, "outfit_active": 0}
 
-                self.swimwear = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.swimwear = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_evo",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_evo", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_bikini_top", "underwear": "_bikini_bottoms",
                     "hose": "", "bottom": "",
                     "dress": "", "boots": "", "loincloth": "", "top": "",
@@ -1065,11 +1065,11 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 0}
 
-                self.halloween_costume = {"back_outer_accessory": "", "back_inner_accessory": "",
-                    "back_hair": "_evo",
+                self.halloween_costume = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
+                    "back_hair": "_cosplay",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_cosplay", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_tube_top", "underwear": "_black_panties",
                     "hose": "", "bottom": "_skirt",
                     "dress": "", "boots": "", "loincloth": "", "top": "",
@@ -1084,11 +1084,11 @@ init python:
                 self.shower["back_hair"] = "_wet"
                 self.shower["hair"] = "_wet"
             elif self.tag == "Kitty":
-                self.first_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.first_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_evo",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_evo", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_cami", "underwear": "_green_panties",
                     "hose": "", "bottom": "_capris",
                     "dress": "", "boots": "", "loincloth": "", "top": "_pink_top",
@@ -1097,11 +1097,11 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 2}
 
-                self.second_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.second_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_evo",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_evo", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_bra", "underwear": "_green_panties",
                     "hose": "", "bottom": "",
                     "dress": "", "boots": "", "loincloth": "", "top": "_red_shirt",
@@ -1110,11 +1110,11 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 2}
 
-                self.gym_clothes = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.gym_clothes = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_evo",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_evo", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_sports_bra", "underwear": "_green_panties",
                     "hose": "", "bottom": "_shorts",
                     "dress": "", "boots": "", "loincloth": "", "top": "",
@@ -1123,11 +1123,11 @@ init python:
                     "held_item": "",
                     "shame": 10, "outfit_active": 0}
 
-                self.sleepwear = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.sleepwear = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_evo",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_evo", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_cami", "underwear": "_green_panties",
                     "hose": "", "bottom": "",
                     "dress": "", "boots": "", "loincloth": "", "top": "",
@@ -1136,11 +1136,11 @@ init python:
                     "held_item": "",
                     "shame": 20, "outfit_active": 0}
 
-                self.swimwear = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.swimwear = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_evo",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_evo", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_bikini_top", "underwear": "_bikini_bottoms",
                     "hose": "", "bottom": "_blue_skirt",
                     "dress": "", "boots": "", "loincloth": "", "top": "",
@@ -1149,14 +1149,14 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 0}
 
-                self.halloween_costume = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.halloween_costume = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_evo",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_evo", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
-                    "rope": "", "bra": "", "underwear": "_lace_panties",
-                    "hose": "", "bottom": "",
-                    "dress": "_dress", "boots": "", "loincloth": "", "top": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
+                    "rope": "", "bra": "_dress", "underwear": "_lace_panties",
+                    "hose": "", "bottom": "_dress",
+                    "dress": "", "boots": "", "loincloth": "", "top": "",
                     "neck": "_flower_necklace", "gloves": "", "sleeves": "",
                     "suspenders": "", "scarf": "", "jacket": "_jacket", "cloak": "",
                     "held_item": "",
@@ -1168,11 +1168,11 @@ init python:
                 self.shower["back_hair"] = "_wet"
                 self.shower["hair"] = "_wet"
             elif self.tag == "Emma":
-                self.first_casual_outfit = {"back_outer_accessory": "_cape", "back_inner_accessory": "",
+                self.first_casual_outfit = {"back_outer_accessory": "_cape", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_wavy",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_wavy", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_corset", "underwear": "_white_panties",
                     "hose": "", "bottom": "_pants",
                     "dress": "", "boots": "", "loincloth": "", "top": "_jacket",
@@ -1181,11 +1181,11 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 2}
 
-                self.second_casual_outfit = {"back_outer_accessory": "_cape", "back_inner_accessory": "",
+                self.second_casual_outfit = {"back_outer_accessory": "_cape", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_wavy",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_wavy", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_corset", "underwear": "_white_panties",
                     "hose": "", "bottom": "_pants",
                     "dress": "", "boots": "", "loincloth": "", "top": "",
@@ -1194,11 +1194,11 @@ init python:
                     "held_item": "",
                     "shame": 5, "outfit_active": 2}
 
-                self.gym_clothes = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.gym_clothes = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_wavy",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_wavy", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_sports_bra", "underwear": "_sports_panties",
                     "hose": "", "bottom": "",
                     "dress": "", "boots": "", "loincloth": "", "top": "",
@@ -1207,11 +1207,11 @@ init python:
                     "held_item": "",
                     "shame": 10, "outfit_active": 0}
 
-                self.sleepwear = {"back_outer_accessory": "_cape", "back_inner_accessory": "",
+                self.sleepwear = {"back_outer_accessory": "_cape", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_wavy",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_wavy", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_corset", "underwear": "_white_panties",
                     "hose": "", "bottom": "",
                     "dress": "", "boots": "", "loincloth": "", "top": "",
@@ -1220,11 +1220,11 @@ init python:
                     "held_item": "",
                     "shame": 25, "outfit_active": 0}
 
-                self.swimwear = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.swimwear = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_wavy",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_wavy", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_bikini_top", "underwear": "_bikini_bottoms",
                     "hose": "", "bottom": "",
                     "dress": "", "boots": "", "loincloth": "", "top": "",
@@ -1233,11 +1233,11 @@ init python:
                     "held_item": "",
                     "shame": 25, "outfit_active": 0}
 
-                self.halloween_costume = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.halloween_costume = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_wavy",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_wavy", "face_outer_accessory": "_hat",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "", "underwear": "_lace_panties",
                     "hose": "_stockings_and_garterbelt", "bottom": "_dress",
                     "dress": "", "boots": "", "loincloth": "_dress", "top": "_dress",
@@ -1246,15 +1246,15 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 2}
 
-                self.domme_outfit = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.domme_outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_wavy",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_wavy", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "", "underwear": "",
-                    "hose": "_domme", "bottom": "",
-                    "dress": "_domme", "boots": "", "loincloth": "", "top": "",
-                    "neck": "_spiked_collar", "gloves": "", "sleeves": "",
+                    "hose": "", "bottom": "",
+                    "dress": "_domme", "boots": "_domme", "loincloth": "", "top": "",
+                    "neck": "_spiked_collar", "gloves": "_spiked_bracelets", "sleeves": "",
                     "suspenders": "", "scarf": "", "jacket": "", "cloak": "",
                     "held_item": "_whip",
                     "shame": 0, "outfit_active": 2}
@@ -1266,7 +1266,7 @@ init python:
                 self.shower["hair"] = "_wet"
                 self.shower["loincloth"] = "_towel"
             elif self.tag == "Laura":
-                self.first_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.first_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_long",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1282,7 +1282,7 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 2}
 
-                self.second_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.second_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_long",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1298,7 +1298,7 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 2}
 
-                self.gym_clothes = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.gym_clothes = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_long",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1314,7 +1314,7 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 0}
 
-                self.sleepwear = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.sleepwear = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_long",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1330,7 +1330,7 @@ init python:
                     "held_item": "",
                     "shame": 20, "outfit_active": 0}
 
-                self.swimwear = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.swimwear = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_long",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1346,12 +1346,12 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 0}
 
-                self.halloween_costume = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.halloween_costume = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_long",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
                     "bra": "_white_tank", "underwear": "_black_panties",
-                    "hose": "_black_stockings", "bottom": "_other_skirt",
+                    "hose": "_black_stockings", "bottom": "_cosplay_skirt",
                     "neck": "", "dress": "", "top": "",
                     "gloves": "_gloves", "sleeves": "",
                     "front_outer_accessory": "_suspenders",
@@ -1368,11 +1368,11 @@ init python:
                 self.shower["back_hair"] = "_wet"
                 self.shower["hair"] = "_wet"
             elif self.tag == "Jean":
-                self.first_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.first_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_short",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_short", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_green_bra", "underwear": "_green_panties",
                     "hose": "", "bottom": "_pants",
                     "dress": "", "boots": "", "loincloth": "", "top": "_pink_shirt",
@@ -1381,24 +1381,24 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 2}
 
-                self.second_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.second_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_short",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_short", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
-                    "rope": "", "bra": "_tank", "underwear": "_green_panties",
-                    "hose": "", "bottom": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
+                    "rope": "", "bra": "_green_bra", "underwear": "_green_panties",
+                    "hose": "", "bottom": "_skirt",
                     "dress": "", "boots": "", "loincloth": "", "top": "_green_shirt",
                     "neck": "", "gloves": "", "sleeves": "",
                     "suspenders": "", "scarf": "", "jacket": "", "cloak": "",
                     "held_item": "",
                     "shame": 0, "outfit_active": 2}
 
-                self.gym_clothes = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.gym_clothes = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_short",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_short", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_sports_bra", "underwear": "_green_panties",
                     "hose": "", "bottom": "_yoga_pants",
                     "dress": "", "boots": "", "loincloth": "", "top": "",
@@ -1407,11 +1407,11 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 0}
 
-                self.sleepwear = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.sleepwear = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_short",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_short", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_green_bra", "underwear": "_green_panties",
                     "hose": "", "bottom": "",
                     "dress": "", "boots": "", "loincloth": "", "top": "_pink_shirt",
@@ -1420,11 +1420,11 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 0}
 
-                self.swimwear = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.swimwear = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_short",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_short", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
                     "rope": "", "bra": "_bikini_top", "underwear": "_bikini_bottoms",
                     "hose": "", "bottom": "",
                     "dress": "", "boots": "", "loincloth": "", "top": "",
@@ -1433,12 +1433,12 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 0}
 
-                self.halloween_costume = {"back_outer_accessory": "", "back_inner_accessory": "",
-                    "back_hair": "_pony",
+                self.halloween_costume = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
+                    "back_hair": "",
                     "face_piercings": "", "makeup": "", "gag": "",
                     "face_inner_accessory": "", "hair": "_pony", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "", "buttplug": "", "rope": "",
-                    "rope": "", "_green_bra": "_tank", "underwear": "_green_panties",
+                    "tattoos": "", "piercings": "", "clamps": "", "rope": "",
+                    "rope": "", "bra": "_green_bra", "underwear": "_green_panties",
                     "hose": "", "bottom": "_shorts",
                     "dress": "", "boots": "", "loincloth": "", "top": "_yellow_shirt",
                     "neck": "", "gloves": "", "sleeves": "",
@@ -1446,11 +1446,11 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 2}
 
-                self.bondage_outfit = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.bondage_outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_short",
                     "face_piercings": "", "makeup": "_mascara", "gag": "_multiple",
                     "face_inner_accessory": "", "hair": "_short", "face_outer_accessory": "",
-                    "tattoos": "", "piercings": "", "clamps": "_nipple_pegs", "buttplug": "", "rope": "_harness",
+                    "tattoos": "", "piercings": "", "clamps": "_nipple_pegs", "rope": "_harness",
                     "rope": "", "bra": "_tank", "underwear": "_green_panties",
                     "hose": "", "bottom": "",
                     "dress": "", "boots": "", "loincloth": "", "top": "_hoodie",
@@ -1465,7 +1465,7 @@ init python:
                 self.shower["back_hair"] = "_wet"
                 self.shower["hair"] = "_wet"
             elif self.tag == "Storm":
-                self.first_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.first_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_long",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1481,7 +1481,7 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 2}
 
-                self.second_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.second_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_long",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1497,7 +1497,7 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 2}
 
-                self.gym_clothes = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.gym_clothes = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_long",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1513,7 +1513,7 @@ init python:
                     "held_item": "",
                     "shame": 10, "outfit_active": 0}
 
-                self.sleepwear = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.sleepwear = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_long",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1529,7 +1529,7 @@ init python:
                     "held_item": "",
                     "shame": 25, "outfit_active": 0}
 
-                self.sleepwear = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.sleepwear = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_long",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1545,7 +1545,7 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 0}
 
-                self.halloween_costume = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.halloween_costume = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_short",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1567,7 +1567,7 @@ init python:
                 self.shower["back_hair"] = "_wet"
                 self.shower["hair"] = "_wet"
             elif self.tag == "Jubes":
-                self.first_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.first_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_shades",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1583,7 +1583,7 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 2}
 
-                self.second_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.second_casual_outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_shades",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1599,7 +1599,7 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 2}
 
-                self.gym_clothes = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.gym_clothes = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_shades",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1615,7 +1615,7 @@ init python:
                     "held_item": "",
                     "shame": 10, "outfit_active": 0}
 
-                self.sleepwear = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.sleepwear = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_shades",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1631,7 +1631,7 @@ init python:
                     "held_item": "",
                     "shame": 25, "outfit_active": 0}
 
-                self.swimwear = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.swimwear = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_shades",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1647,7 +1647,7 @@ init python:
                     "held_item": "",
                     "shame": 0, "outfit_active": 0}
 
-                self.halloween_costume = {"back_outer_accessory": "", "back_inner_accessory": "",
+                self.halloween_costume = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
                     "back_hair": "_shades",
                     "makeup": "",
                     "front_inner_accessory": "", "buttplug": "",
@@ -1780,7 +1780,7 @@ init python:
             if self.outfit["bra"]:
                 return 3
 
-            if self.outfit["front_outer_accessory"] == "_suspenders" or self.outfit["front_outer_accessory"] == "_suspenders2":
+            if self.outfit["suspenders"] in ["_suspenders", "_suspenders2"]:
                 return 2
 
             return False
@@ -1808,7 +1808,7 @@ init python:
                 if self.outfit["front_outer_accessory"] == "_jacket":
                     return 3
 
-                if self.outfit["front_outer_accessory"] == "open_jacket":
+                if self.outfit["front_outer_accessory"] == "_open_jacket":
                     return True
 
                 if self.outfit["front_outer_accessory"] == "_shut_jacket":
@@ -1848,7 +1848,7 @@ init python:
             if self.outfit["bottom"] == "_shorts":
                 return 6
 
-            if self.outfit["bottom"] in ("_skirt", "_blue_skirt", "_other_skirt", "_dress"):
+            if self.outfit["bottom"] in ("_skirt", "_blue_skirt", "_cosplay_skirt", "_dress"):
                 return 5
 
             if self.outfit["bottom"] == "_yoga_pants":

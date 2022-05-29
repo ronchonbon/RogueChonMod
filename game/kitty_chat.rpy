@@ -2301,7 +2301,7 @@ label Kitty_Clothes:
     $ Girl = KittyX
     call shift_focus (Girl)
 
-label Kitty_Wardrobe_Menu:
+label Kitty_wardrobe_menu:
     $ primary_action = 1
     $ KittyX.change_face()
     while True:
@@ -2970,14 +2970,14 @@ label Kitty_Wardrobe_Menu:
                     $ KittyX.outfit["hose"] = ""
                 "The thigh-high hose would look good with that." if KittyX.outfit["hose"] != "_stockings":
                     $ KittyX.outfit["hose"] = "_stockings"
-                "The knee-high hose would look good with that." if KittyX.outfit["hose"] != "knee stockings" and "_knee_stockings" in KittyX.inventory:
-                    $ KittyX.outfit["hose"] = "knee stockings"
+                "The knee-high hose would look good with that." if KittyX.outfit["hose"] != "_knee_stockings" and "_knee_stockings" in KittyX.inventory:
+                    $ KittyX.outfit["hose"] = "_knee_stockings"
                 "The pantyhose would look good with that." if KittyX.outfit["hose"] != "_pantyhose" and "_pantyhose" in KittyX.inventory:
                     $ KittyX.outfit["hose"] = "_pantyhose"
                 "The stockings would look good with that." if KittyX.outfit["hose"] != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in KittyX.inventory:
                     $ KittyX.outfit["hose"] = "_stockings_and_garterbelt"
-                "Maybe just the garterbelt?" if KittyX.outfit["hose"] != "garterbelt" and "_stockings_and_garterbelt" in KittyX.inventory:
-                    $ KittyX.outfit["hose"] = "garterbelt"
+                "Maybe just the garterbelt?" if KittyX.outfit["hose"] != "_garterbelt" and "_stockings_and_garterbelt" in KittyX.inventory:
+                    $ KittyX.outfit["hose"] = "_garterbelt"
                 "Your ripped pantyhose would look good with that." if KittyX.outfit["hose"] != "_ripped_pantyhose" and "_ripped_pantyhose" in KittyX.inventory:
                     $ KittyX.outfit["hose"] = "_ripped_pantyhose"
                 "Never mind":

@@ -1708,7 +1708,7 @@ label Jean_Rename:
 
 label Jean_Personality(counter=0):
     if not JeanX.had_chat[4] or counter:
-        "Since you're doing well in one area, you can convince Jean to focus on one of the others."
+        "Since you're doing well in one area, you can convince Jean_sprite to focus on one of the others."
         "Any time you go over the limit in a given stat, the excess will spill over into the chosen stat instead."
         "This will also impact which personality trait takes priority in dialog."
     menu:
@@ -2276,7 +2276,7 @@ label Jean_Clothes:
     $ Girl = JeanX
     call shift_focus (Girl)
 
-label Jean_Wardrobe_Menu:
+label Jean_wardrobe_menu:
     $ JeanX.change_face()
     $ primary_action = 1
     while True:
@@ -2905,8 +2905,8 @@ label Jean_Wardrobe_Menu:
                     $ JeanX.outfit["hose"] = "_ripped_pantyhose"
                 "The stockings and garterbelt would look good with that." if JeanX.outfit["hose"] != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in JeanX.inventory:
                     $ JeanX.outfit["hose"] = "_stockings_and_garterbelt"
-                "Just the garterbelt would look good with that." if JeanX.outfit["hose"] != "garterbelt" and "_stockings_and_garterbelt" in JeanX.inventory:
-                    $ JeanX.outfit["hose"] = "garterbelt"
+                "Just the garterbelt would look good with that." if JeanX.outfit["hose"] != "_garterbelt" and "_stockings_and_garterbelt" in JeanX.inventory:
+                    $ JeanX.outfit["hose"] = "_garterbelt"
                 "Never mind":
                     pass
             return

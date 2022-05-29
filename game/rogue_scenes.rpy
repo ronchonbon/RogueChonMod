@@ -46,14 +46,14 @@ label prologue:
     $ RogueX.change_face("_surprised")
     $ RogueX.sprite_location = stage_far_right
 
-    show Rogue_sprite at sprite_location(RogueX.sprite_location) with easeinright
+    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with easeinright
 
     ch_r "What's that Prof? This new kid can negate mutant powers?"
 
     $ RogueX.mouth = "_normal"
     $ RogueX.sprite_location = stage_right
 
-    show Rogue_sprite at sprite_location(RogueX.sprite_location) with ease
+    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with ease
 
     ch_r "Maybe even my own?"
     ch_x "That is correct, [RogueX.name], though currently, his powers are weak and uncontrolled."
@@ -70,9 +70,9 @@ label prologue:
 
     $ RogueX.sprite_location = stage_center
 
-    show Rogue_sprite at sprite_location(RogueX.sprite_location) with ease
+    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with ease
 
-    $ active_Girls.append(RogueX) if RogueX not in active_Girls else active_Girls
+    $ active_Girls.append(RogueX)
 
     menu:
         ch_r "A pleasure ta meet ya, [RogueX.player_petname]. Let me give ya the lay of the place."
@@ -118,7 +118,7 @@ label prologue:
             $ RogueX.change_stat("obedience", 200, 30)
             $ RogueX.change_face("_angry")
 
-            show Rogue_sprite at sprite_location(RogueX.sprite_location) with vpunch
+            show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with vpunch
 
             ch_r "Well I never!"
             ch_r "Hmph, I have to give the tour anyways, so get mov'in. . ."
@@ -243,11 +243,9 @@ label tour_end:
 
                 ch_r "Just this once."
 
-                $ RogueX.change_face("_kiss")
+                call smooch(RogueX)
 
-                $ focused_Girl = RogueX
-
-                call smooch
+                $ RogueX.action_counter["kiss"] += 1
 
                 "She gives you a little peck on the cheek."
 
@@ -387,9 +385,10 @@ label tour_parting:
                     ch_r "Nah, I think you've had enough for today, [RogueX.player_petname]."
                     "You head back to your room."
 
-                    hide Rogue_sprite
-
                     $ RogueX.emotion = "_normal"
+
+    hide Rogue_sprite
+    hide Rogue_sprite
 
     $ RogueX.location = "bg_rogue"
 
@@ -402,11 +401,10 @@ label tour_parting:
     jump player_room
 
 label Rogue_first_kiss:
-    $ RogueX.change_face("_kiss",2)
+    $ RogueX.blushing = "_blush2"
 
-    $ focused_Girl = RogueX
-
-    call kiss_launch
+    call kiss_launch(RogueX)
+    $ RogueX.action_counter["kiss"] += 1
 
     "She leans in for a kiss."
     "You lean in and your lips meet [RogueX.name]'s."
@@ -429,7 +427,7 @@ label Rogue_first_kiss:
     $ RogueX.change_stat("obedience", 30, 20)
     $ RogueX.change_stat("inhibition", 30, 30)
 
-    call reset_position
+    call reset_position(RogueX)
 
     return
 
@@ -508,7 +506,7 @@ label Rogue_BF:
         extend ""
         "I'd love to!":
             $ RogueX.change_stat("love", 200, 30)
-            "Rogue leaps in and kisses you deeply."
+            "Rogue_sprite leaps in and kisses you deeply."
             $ RogueX.change_face("_kiss")
             $ RogueX.action_counter["kiss"] += 1
         "Um, ok.":
@@ -522,7 +520,7 @@ label Rogue_BF:
                 extend ""
                 "Sure":
                     $ RogueX.change_stat("love", 200, 30)
-                    "Rogue leaps in and kisses you deeply."
+                    "Rogue_sprite leaps in and kisses you deeply."
                     $ RogueX.change_face("_kiss")
                     $ RogueX.action_counter["kiss"] += 1
                 "She wouldn't understand." if len(Player.Harem) == 1:
@@ -646,7 +644,7 @@ label Rogue_Love:
         $ RogueX.brows = "_surprised"
         ch_r "I love you too!"
         $ RogueX.change_face("_kiss")
-        "Rogue leaps into your arms and gives you a kiss."
+        "Rogue_sprite leaps into your arms and gives you a kiss."
         $ RogueX.change_face("_sexy",1)
         $ RogueX.action_counter["kiss"] += 1
     else:
@@ -1213,17 +1211,17 @@ label Rogue_Fuckbuddy:
                 if simulation:
                     return True
                 call Rogue_First_Topless (1)
-                call Rogue_Breasts_Launch
+                call breasts_launch(RogueX)
                 "Rogue, throws her top off, grabs you and shoves your head into her cleavage."
-                call Rogue_Pos_Reset
+                call reset_position(RogueX)
             "What do you mean by that?":
                 $ RogueX.brows = "_confused"
                 menu:
                     ch_r "I mean, you know, we'd fuck. And be buddies. Both of those."
                     "Oh, ok, sure.":
-                        call Rogue_Kissing_Launch
-                        "Rogue laughs and tackles you into a hug."
-                        call Rogue_Pos_Reset
+                        call kiss_launch(RogueX)
+                        "Rogue_sprite laughs and tackles you into a hug."
+                        call reset_position(RogueX)
                     "Oh, no, not my style.":
                         jump Rogue_Fuckbuddy_Jerk
             "No thanks.":

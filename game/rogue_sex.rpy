@@ -313,8 +313,8 @@ label masturbation_cycle:
         $ action_context = None
 
     while round > 0:
-        call Rogue_Pos_Reset ("masturbation")
         call shift_focus (Girl)
+        call reset_position(Girl)
         $ Girl.lust_face
         if "unseen" in Girl.recent_history:
             $ Girl.eyes = "_closed"
@@ -414,13 +414,13 @@ label masturbation_cycle:
 
                 "Back to Sex Menu" if multi_action and Girl.location == bg_current:
                     ch_p "Let's try something else."
-                    call Rogue_Pos_Reset
+                    call reset_position(RogueX)
                     $ action_context = "shift"
                     $ line = 0
                     jump Rogue_M_Interupted
                 "End Scene" if not multi_action or Girl.location != bg_current:
                     ch_p "Let's stop for now."
-                    call Rogue_Pos_Reset
+                    call reset_position(RogueX)
                     $ line = 0
                     jump Rogue_M_Interupted
 
@@ -442,7 +442,8 @@ label masturbation_cycle:
 
                     call Player_Cumming (Girl)
                     if "_angry" in Girl.recent_history:
-                        call Rogue_Pos_Reset
+                        $ focused_Girl = RogueX
+                        call reset_position
                         return
                     $ Girl.change_stat("lust", 200, 5)
                     if 100 > Girl.lust >= 70 and Girl.session_orgasms < 2:

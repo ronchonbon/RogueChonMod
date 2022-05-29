@@ -1274,20 +1274,20 @@ label Lingerie_shop:
                             $ Cart.append("_stockings_and_garterbelt")
 
 
-                    "Knee Stockings (locked)" if Girl.outfit["hose"] == "knee stockings":
+                    "Knee Stockings (locked)" if Girl.outfit["hose"] == "_knee_stockings":
                         pass
-                    "Knee Stockings" if Girl.outfit["hose"] != "knee stockings" and Girl == KittyX:
+                    "Knee Stockings" if Girl.outfit["hose"] != "_knee_stockings" and Girl == KittyX:
                         $ Girl.change_face("_sexy")
                         Girl.voice "Sure. . ."
                         $ Girl.outfit["hose"] = ""
                         pause 0.3
-                        $ Girl.outfit["hose"] = "knee stockings"
-                        if "knee stockings" in Cart:
+                        $ Girl.outfit["hose"] = "_knee_stockings"
+                        if "_knee_stockings" in Cart:
                             pass
-                        elif "knee stockings" in Girl.inventory:
+                        elif "_knee_stockings" in Girl.inventory:
                             Girl.voice "I do already have these though."
                         else:
-                            $ Cart.append("knee stockings")
+                            $ Cart.append("_knee_stockings")
 
 
                     "High Socks (locked)" if Girl.outfit["hose"] == "_socks":
@@ -1641,7 +1641,7 @@ label Lingerie_shop:
                                             Girl.voice "These are pretty nice. . ."
 
 
-                                "The knee stockings" if "knee stockings" in Cart:
+                                "The knee stockings" if "_knee_stockings" in Cart:
                                     "You agree to buy [Girl.name] the knee stockings."
                                     if Girl.tag + "_knee stockings" in Player.inventory:
                                         "Wait, you already have some of those."
@@ -1649,14 +1649,14 @@ label Lingerie_shop:
                                         $ Player.inventory.remove(Girl.tag + "_knee stockings")
                                     elif Player.cash < 50:
                                         "You look at the tag, and actually, they're $50, you can't afford them."
-                                        $ Cart.remove("knee stockings")
+                                        $ Cart.remove("_knee_stockings")
                                     else:
                                         $ Player.cash -= 50
-                                    if "knee stockings" in Cart:
+                                    if "_knee_stockings" in Cart:
 
-                                        $ Cart.remove("knee stockings")
+                                        $ Cart.remove("_knee_stockings")
                                         $ Girl.change_face("_bemused",1)
-                                        $ Girl.inventory.append("knee stockings")
+                                        $ Girl.inventory.append("_knee_stockings")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 5)
                                         $ Girl.change_stat("obedience", 200, 5)

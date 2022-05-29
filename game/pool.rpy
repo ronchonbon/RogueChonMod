@@ -975,19 +975,19 @@ label ShowPool(temp_Girls=[], PoolLoc=0):
             $ temp_Girls[0].spunk = []
             $ PoolLoc = 500 if len(temp_Girls) > 1 else 650
             if temp_Girls[0] == RogueX:
-                show Rogue_sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Rogue_sprite standing zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == KittyX:
-                show Kitty_sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Kitty_sprite standing zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == EmmaX:
-                show Emma_sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Emma_sprite standing zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == LauraX:
-                show Laura_Sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Laura_sprite standing zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == JeanX:
-                show Jean_sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Jean_sprite standing zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == StormX:
-                show Storm_Sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Storm_sprite standing zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == JubesX:
-                show Jubes_Sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Jubes_sprite standing zorder 50 at Pool_Bob(PoolLoc)
         $ temp_Girls.remove(temp_Girls[0])
     show FullPool zorder 60
     return

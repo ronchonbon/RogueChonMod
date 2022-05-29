@@ -20,7 +20,7 @@ label meet_Kitty:
     "She crashes into you at a full jog, and you both fall to the ground."
     "You scramble to your feet and offer the girl a hand up."
 
-    show Kitty_sprite at sprite_location(KittyX.sprite_location) with vpunch
+    show Kitty_sprite standing at sprite_location(KittyX.sprite_location) with vpunch
 
     $ KittyX.location = "bg_campus"
     $ KittyX.change_stat("love", 90, -25)
@@ -69,7 +69,7 @@ label meet_Kitty:
     if flag:
         $ KittyX.change_face("_smile", 1)
 
-        ch_k "Mine's Kitty! Kitty Pryde. Nice to meet you!"
+        ch_k "Mine's Kitty! Kitty_sprite Pryde. Nice to meet you!"
     else:
         $ KittyX.change_face("_sadside", 1)
 
@@ -200,7 +200,7 @@ label meet_Kitty:
 
                 $ KittyX.change_face("_angry", 1)
 
-                show Kitty_sprite at sprite_location(KittyX.sprite_location) with vpunch
+                show Kitty_sprite standing at sprite_location(KittyX.sprite_location) with vpunch
 
                 "She elbows you in the ribs and shoves herself back a few steps."
 
@@ -339,8 +339,7 @@ label Kitty_BF:
         "Are you kidding? I'd love to!":
             $ KittyX.change_stat("love", 200, 30)
             "[KittyX.name] wraps her arms around you and starts kissing you passionately."
-            $ KittyX.change_face("_kiss")
-            call Kitty_Kissing_Launch ("kiss")
+            call kiss_launch(KittyX)
             $ KittyX.action_counter["kiss"] += 1
         "Uhm[KittyX.like]okay.":
             $ KittyX.brows = "_confused"
@@ -354,8 +353,7 @@ label Kitty_BF:
                 "Yes. Absolutely." if "KittyYes" in Player.traits:
                     $ KittyX.change_stat("love", 200, 30)
                     "[KittyX.name] wraps her arms around you and starts kissing you passionately."
-                    $ KittyX.change_face("_kiss")
-                    call Kitty_Kissing_Launch ("kiss")
+                    call kiss_launch(KittyX)
                     $ KittyX.action_counter["kiss"] += 1
                 "She wouldn't understand." if len(Player.Harem) == 1:
                     $ line = "no"
@@ -468,7 +466,7 @@ label Kitty_Love:
         $ KittyX.change_face("_perplexed", 2)
         $ KittyX.eyes = "_surprised"
         ch_k "Never mind!"
-        "Kitty dashes off and phases through the nearest wall."
+        "Kitty_sprite dashes off and phases through the nearest wall."
         hide Kitty_sprite with easeoutright
         call remove_girl (KittyX)
         return
@@ -1039,7 +1037,7 @@ label Kitty_Sub_Asked:
                             $ KittyX.change_stat("obedience", 90, -10)
                             $ KittyX.change_stat("obedience", 200, -10)
                             $ KittyX.change_stat("inhibition", 50, -15)
-                            "Kitty sighs and rolls her eyes."
+                            "Kitty_sprite sighs and rolls her eyes."
                             $ KittyX.change_face("_angry", 1)
                             $ KittyX.eyes = "_side"
                             ch_k "You really don't learn, do you?"
@@ -1349,7 +1347,7 @@ label Kitty_sexfriend:
                         $ KittyX.change_stat("obedience", 50, 10)
                         $ KittyX.change_stat("inhibition", 200, 50)
                         $ KittyX.change_stat("lust", 200, 5)
-                        "Kitty leans in and gives you a gentle kiss on the cheek."
+                        "Kitty_sprite leans in and gives you a gentle kiss on the cheek."
                         ch_k "I can't wait to get started, [KittyX.player_petname]."
                     "That may be the sluttiest thing I've ever heard in my life.":
 

@@ -1,6 +1,6 @@
 
 
-image Jubes_Sprite:
+image Jubes_sprite standing:
     LiveComposite(
         (500,950),
 
@@ -486,7 +486,7 @@ image Jubes_Sprite:
     anchor (0.6, -0.15) zoom 1.1
 
 
-image Jubes_Sprite_HairBack:
+image Jubes_sprite standing_HairBack:
     contains:
         ConditionSwitch(
 
@@ -502,7 +502,7 @@ image Jubes_Sprite_HairBack:
     zoom .37
 
 
-image Jubes_Sprite_Head:
+image Jubes_sprite standing_Head:
     LiveComposite(
         (900,900),
 
@@ -557,7 +557,7 @@ image Jubes_Sprite_Head:
             "JubesX.brows == '_confused'", "images/JubesSprite/Jubes_Sprite_brows_Confused.png",
             "True", "images/JubesSprite/Jubes_Sprite_brows_Normal.png",
             ),
-        (0,0), "Jubes Blink",
+        (0,0), "Jubes_sprite Blink",
 
 
 
@@ -587,7 +587,7 @@ image Jubes_Sprite_Head:
     zoom .37
 
 
-image Jubes Blink:
+image Jubes_sprite Blink:
     ConditionSwitch(
     "JubesX.eyes == '_sexy'", "images/JubesSprite/Jubes_Sprite_eyes_Sexy.png",
     "JubesX.eyes == '_side'", "images/JubesSprite/Jubes_Sprite_eyes_Side.png",
@@ -652,7 +652,7 @@ image Jubes_Drip_MaskPants:
 
 
 
-image Jubes_Doggy_Animation:
+image Jubes_sprite doggy:
     LiveComposite(
 
         (420,750),
@@ -843,7 +843,7 @@ image Jubes_Doggy_Head:
 
             "True", "images/JubesDoggy/Jubes_Doggy_brows_Normal.png",
             ),
-        (0,0), "Jubes Doggy Blink",
+        (0,0), "Jubes_sprite Doggy Blink",
 
 
 
@@ -898,7 +898,7 @@ image Jubes_Doggy_Head:
 
 
 
-image Jubes Doggy Blink:
+image Jubes_sprite Doggy Blink:
 
     ConditionSwitch(
         "JubesX.eyes == '_sexy'", "images/JubesDoggy/Jubes_Doggy_eyes_Sexy.png",
@@ -2078,23 +2078,23 @@ image Jubes_Doggy_Foot2_Ass:
 
 label Jubes_Doggy_Launch(Line=primary_action):
     return
-    if renpy.showing("Jubes_Doggy_Animation"):
+    if renpy.showing("Jubes_sprite doggy"):
         return
     $ action_speed = 0
     call hide_girl(JubesX, hide_sprite = True)
-    show Jubes_Doggy_Animation zorder 150 at sprite_location(stage_center+150)
+    show Jubes_sprite doggy zorder 150 at sprite_location(stage_center+150)
     with dissolve
     return
 
 label Jubes_Doggy_Reset:
-    if not renpy.showing("Jubes_Doggy_Animation"):
+    if not renpy.showing("Jubes_sprite doggy"):
         return
 
     $ JubesX.arm_pose = 2
     $ JubesX.SpriteVer = 0
-    hide Jubes_Doggy_Animation
+    hide Jubes_sprite doggy
     call hide_girl(JubesX)
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         zoom 1
         offset (0,0)
@@ -2111,7 +2111,7 @@ label Jubes_Doggy_Reset:
 
 
 
-image Jubes_SexSprite:
+image Jubes_sprite sex:
 
     contains:
         ConditionSwitch(
@@ -3848,7 +3848,7 @@ label Jubes_Sex_Launch(Line=primary_action):
     if JubesX.pose == "doggy":
         call Jubes_Doggy_Launch (Line)
         return
-    if renpy.showing("Jubes_SexSprite"):
+    if renpy.showing("Jubes_sprite sex"):
         return
     call hide_girl(JubesX, hide_sprite = True)
     $ action_speed = 0
@@ -3859,21 +3859,21 @@ label Jubes_Sex_Launch(Line=primary_action):
         if JubesX.outfit['underwear']:
             $ JubesX.underwear_pulled_down = 1
 
-    show Jubes_SexSprite zorder 150:
+    show Jubes_sprite sex zorder 150:
         pos (450,500)
     with dissolve
     return
 
 label Jubes_Sex_Reset:
-    if renpy.showing("Jubes_Doggy_Animation"):
+    if renpy.showing("Jubes_sprite doggy"):
         call Jubes_Doggy_Reset
         return
-    if not renpy.showing("Jubes_SexSprite"):
+    if not renpy.showing("Jubes_sprite sex"):
         return
     $ JubesX.arm_pose = 2
-    hide Jubes_SexSprite
+    hide Jubes_sprite sex
     call hide_girl(JubesX)
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
         anchor (0.5, 0.0)
@@ -3892,7 +3892,7 @@ label Jubes_Sex_Reset:
 
 
 
-image Jubes_BJ_Animation:
+image Jubes_sprite blowjob:
 
     contains:
         ConditionSwitch(
@@ -3926,7 +3926,7 @@ image Jubes_BJ_Animation:
 
 
 
-image Jubes_Sprite_BJ_HairBack:
+image Jubes_sprite standing_BJ_HairBack:
 
 
     ConditionSwitch(
@@ -3937,7 +3937,7 @@ image Jubes_Sprite_BJ_HairBack:
             "True", Null(),
             )
 
-image Jubes_Sprite_BJ_Head:
+image Jubes_sprite standing_BJ_Head:
 
     LiveComposite(
         (806,806),
@@ -4011,7 +4011,7 @@ image Jubes_Sprite_BJ_Head:
                     "True", "images/JubesSprite/Jubes_Sprite_brows_Normal.png",
                     ),
             ),
-        (0,0), "Jubes Blink",
+        (0,0), "Jubes_sprite Blink",
         (0,0), ConditionSwitch(
 
             "JubesX.outfit['top'] == '_jacket'", Null(),
@@ -4091,7 +4091,7 @@ image Jubes_BJ_Body_0:
             repeat
     contains:
 
-        "Jubes_Sprite"
+        "Jubes_sprite standing"
         subpixel True
         pos (650,800)
         zoom 2.2
@@ -4178,7 +4178,7 @@ image Jubes_BJ_Body_1:
             repeat
     contains:
 
-        "Jubes_Sprite"
+        "Jubes_sprite standing"
         pos (673,740)
         zoom 2.2
         anchor (0.5, 0.5)
@@ -4291,7 +4291,7 @@ image Jubes_BJ_Body_2:
             repeat
     contains:
 
-        "Jubes_Sprite"
+        "Jubes_sprite standing"
         pos (680,755)
         zoom 2.2
         anchor (0.5, 0.5)
@@ -4445,7 +4445,7 @@ image Jubes_BJ_Body_3:
             repeat
     contains:
 
-        "Jubes_Sprite"
+        "Jubes_sprite standing"
         pos (673,780)
         zoom 2.2
         anchor (0.5, 0.5)
@@ -4598,7 +4598,7 @@ image Jubes_BJ_Body_4:
             repeat
     contains:
 
-        "Jubes_Sprite"
+        "Jubes_sprite standing"
         pos (673,780)
         zoom 2.2
         anchor (0.5, 0.5)
@@ -4739,7 +4739,7 @@ image Jubes_BJ_Body_5:
             repeat
     contains:
 
-        "Jubes_Sprite"
+        "Jubes_sprite standing"
         subpixel True
         zoom 2.2
         anchor (0.5, 0.5)
@@ -4895,7 +4895,7 @@ image Jubes_BJ_Body_6:
             repeat
     contains:
 
-        "Jubes_Sprite"
+        "Jubes_sprite standing"
         subpixel True
         zoom 2.2
         anchor (0.5, 0.5)
@@ -5015,17 +5015,17 @@ label Jubes_BJ_Launch(Line=primary_action):
     return
 
     $ JubesX.arm_pose = 1
-    if renpy.showing("Jubes_BJ_Animation"):
+    if renpy.showing("Jubes_sprite blowjob"):
         return
 
     call hide_girl(JubesX)
     if Line == "L" or Line == "cum":
-        show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_center):
+        show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(stage_center):
             alpha 1
             ease 1 zoom 2.5 offset (150,80)
         with dissolve
     else:
-        show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_center):
+        show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(stage_center):
             alpha 1
             zoom 2.5 offset (150,80)
         with dissolve
@@ -5045,30 +5045,30 @@ label Jubes_BJ_Launch(Line=primary_action):
     if Line != "cum":
         $ primary_action = "blowjob"
 
-    show Jubes_Sprite zorder JubesX.sprite_layer:
+    show Jubes_sprite standing zorder JubesX.sprite_layer:
         alpha 0
-    show Jubes_BJ_Animation zorder 150:
+    show Jubes_sprite blowjob zorder 150:
         pos (645,510)
     return
 
 label Jubes_BJ_Reset:
-    if not renpy.showing("Jubes_BJ_Animation"):
+    if not renpy.showing("Jubes_sprite blowjob"):
         return
 
     call hide_girl(JubesX)
     $ action_speed = 0
 
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_center):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(stage_center):
         alpha 1
         zoom 2.5 offset (150,80)
     with dissolve
 
-    show Jubes_Sprite zorder JubesX.sprite_layer:
+    show Jubes_sprite standing zorder JubesX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 offset (-50,50)
         pause .5
         ease .5 zoom 1 offset (0,0)
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
     return
@@ -5159,7 +5159,7 @@ transform Handcock_2L():
         pause 0.1
         repeat
 
-image Jubes_HJ_Animation:
+image Jubes_sprite handjob:
     contains:
         ConditionSwitch(
 
@@ -5191,16 +5191,16 @@ image Jubes_HJ_Animation:
 
 label Jubes_HJ_Launch(Line=primary_action):
     return
-    if renpy.showing("Jubes_HJ_Animation"):
+    if renpy.showing("Jubes_sprite handjob"):
         $ primary_action = "handjob"
         return
     call hide_girl(JubesX)
     if Line == "L":
-        show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_right):
+        show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (-150,200)
     else:
-        show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_right):
+        show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (-150,200)
         with dissolve
@@ -5212,27 +5212,27 @@ label Jubes_HJ_Launch(Line=primary_action):
         $ action_speed = 1
     pause .5
     $ JubesX.arm_pose = 1
-    show Jubes_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
+    show Jubes_sprite handjob zorder 150 at sprite_location(stage_center) with easeinbottom:
 
         offset (250,250)
     return
 
 label Jubes_HJ_Reset:
-    if not renpy.showing("Jubes_HJ_Animation"):
+    if not renpy.showing("Jubes_sprite handjob"):
         return
     $ action_speed = 0
     $ JubesX.arm_pose = 1
-    hide Jubes_HJ_Animation with easeoutbottom
+    hide Jubes_sprite handjob with easeoutbottom
     call hide_girl(JubesX)
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         zoom 1.7 offset (-50,200)
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         ease 1 zoom 1.5 offset (-150,50)
         pause .5
         ease .5 zoom 1 offset (0,0)
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
     return
@@ -5246,7 +5246,7 @@ label Jubes_HJ_Reset:
 
 
 
-image Jubes_TJ_Animation:
+image Jubes_sprite titjob:
 
     contains:
         ConditionSwitch(
@@ -6314,10 +6314,10 @@ image Jubes_TJ_5:
 
 label Jubes_TJ_Launch(Line=primary_action):
     return
-    if renpy.showing("Jubes_TJ_Animation"):
+    if renpy.showing("Jubes_sprite titjob"):
         return
     call hide_girl(JubesX)
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         ease 1 zoom 2.3 xpos 750 yoffset -100
     if Line == "L":
@@ -6344,12 +6344,12 @@ label Jubes_TJ_Launch(Line=primary_action):
     call Jubes_First_Topless
 
     show blackscreen onlayer black with dissolve
-    show Jubes_Sprite zorder JubesX.sprite_layer:
+    show Jubes_sprite standing zorder JubesX.sprite_layer:
         alpha 0
     $ action_speed = 0
     if Line != "cum":
         $ primary_action = "titjob"
-    show Jubes_TJ_Animation zorder 150:
+    show Jubes_sprite titjob zorder 150:
         pos (700,520)
     $ Player.sprite = 1
     hide blackscreen onlayer black with dissolve
@@ -6357,21 +6357,21 @@ label Jubes_TJ_Launch(Line=primary_action):
 
 label Jubes_TJ_Reset:
 
-    if not renpy.showing("Jubes_TJ_Animation"):
+    if not renpy.showing("Jubes_sprite titjob"):
         return
 
     call hide_girl(JubesX)
     $ Player.sprite = 0
 
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         zoom 2.3 xpos 750 yoffset -100
-    show Jubes_Sprite zorder JubesX.sprite_layer:
+    show Jubes_sprite standing zorder JubesX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 xpos 700 yoffset 50
         pause .5
         ease .5 zoom 1 xpos JubesX.sprite_location yoffset 0
     "[JubesX.name] pulls back"
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         zoom 1 offset (0,0) xpos JubesX.sprite_location
     return
@@ -6392,18 +6392,18 @@ label Jubes_Kissing_Launch(T=primary_action, Set=1):
     call hide_girl(JubesX)
     $ primary_action = T
     $ JubesX.pose = "kiss" if Set else JubesX.pose
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location)
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_center):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location)
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(stage_center):
         ease 0.5 offset (0,0) zoom 2 alpha 1
     return
 
 label Jubes_Kissing_Smooch:
     $ JubesX.change_face("kiss")
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_center):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos JubesX.sprite_location zoom 1
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         zoom 1
     $ JubesX.change_face("_sexy")
     return
@@ -6412,7 +6412,7 @@ label Jubes_Breasts_Launch(T=primary_action, Set=1):
     call hide_girl(JubesX)
     $ primary_action = T
     $ JubesX.pose = "breasts" if Set else JubesX.pose
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 2 alpha 1
     return
@@ -6421,7 +6421,7 @@ label Jubes_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(JubesX)
     $ primary_action = T
     $ JubesX.pose = "middle" if Set else JubesX.pose
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1
     return
@@ -6430,7 +6430,7 @@ label Jubes_Pussy_Launch(T=primary_action, Set=1):
     call hide_girl(JubesX)
     $ primary_action = T
     $ JubesX.pose = "pussy" if Set else JubesX.pose
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         ease 0.5 pos (700,-400) offset (0,0) zoom 2 alpha 1
     return
 
@@ -6438,9 +6438,9 @@ label Jubes_Pos_Reset(T=0, Set=0):
     if JubesX.location != bg_current:
         return
     call hide_girl(JubesX)
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         ease .5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
-    show Jubes_Sprite zorder JubesX.sprite_layer:
+    show Jubes_sprite standing zorder JubesX.sprite_layer:
         offset (0,0)
         anchor (0.5, 0.0)
         zoom 1

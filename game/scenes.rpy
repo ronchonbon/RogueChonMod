@@ -2522,7 +2522,7 @@ label Kitty_First_Topless(Silent=0, Templine=0):
     $ KittyX.change_stat("inhibition", 70, 15)
     if not Silent:
         $ KittyX.change_face("_bemused", 2)
-        "Kitty looks a bit shy, and slowly lowers her hands from her chest."
+        "Kitty_sprite looks a bit shy, and slowly lowers her hands from her chest."
         ch_k "[KittyX.Like]what do you think?"
         $ KittyX.blushing = "_blush1"
         menu Kitty_First_TMenu:

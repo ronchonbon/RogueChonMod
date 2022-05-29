@@ -930,7 +930,7 @@ label dismiss_girl(Girl=0, Leaving=0):
             $ Girl.location = "bg_campus"
         else:
             $ Girl.location = Girl.home
-        call AllReset (Girl)
+        call reset_position(Girl)
         "[Girl.name] heads out."
     return
 

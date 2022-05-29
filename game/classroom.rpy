@@ -196,19 +196,19 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
 
         if renpy.showing(temp_Girls[0].tag+"_Sprite"):
             if temp_Girls[0] == RogueX:
-                show Rogue_sprite at sprite_location(RogueX.sprite_location,50):
+                show Rogue_sprite standing at sprite_location(RogueX.sprite_location,50):
                     ease .5 ypos 250
             elif temp_Girls[0] == KittyX:
-                show Kitty_sprite at sprite_location(KittyX.sprite_location,50):
+                show Kitty_sprite standing at sprite_location(KittyX.sprite_location,50):
                     ease .5 ypos 250
             elif temp_Girls[0] == LauraX:
-                show Laura_Sprite at sprite_location(LauraX.sprite_location,50):
+                show Laura_sprite standing at sprite_location(LauraX.sprite_location,50):
                     ease .5 ypos 250
             elif temp_Girls[0] == JeanX:
-                show Jean_sprite at sprite_location(JeanX.sprite_location,50):
+                show Jean_sprite standing at sprite_location(JeanX.sprite_location,50):
                     ease .5 ypos 250
             elif temp_Girls[0] == JubesX:
-                show Jubes_Sprite at sprite_location(JubesX.sprite_location,50):
+                show Jubes_sprite standing at sprite_location(JubesX.sprite_location,50):
                     ease .5 ypos 250
         $ temp_Girls.remove(temp_Girls[0])
 

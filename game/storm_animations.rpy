@@ -1,9 +1,9 @@
 
 
-image Storm_Sprite:
+image Storm_sprite standing:
     LiveComposite(
         (450,950),
-        (53,-45), "Storm_Sprite_HairBack",
+        (53,-45), "Storm_sprite standing_HairBack",
         (0,0), ConditionSwitch(
 
             "StormX.outfit['bottom'] == '_skirt'", "images/StormSprite/Storm_Sprite_Legs_SkirtB.png",
@@ -71,7 +71,7 @@ image Storm_Sprite:
             ),
         (165,560), ConditionSwitch(
 
-            "not StormX.spunk['in' not in StormX.spunk and 'anal']", Null(),
+            "not StormX.spunk['pussy'] and not StormX.spunk['anus']", Null(),
             "StormX.outfit['bottom'] and StormX.outfit['bottom'] != '_skirt' and not StormX.upskirt", Null(),
             "StormX.outfit['underwear'] and not StormX.underwear_pulled_down and StormX.grool <= 1", Null(),
             "True", ConditionSwitch(
@@ -359,10 +359,10 @@ image Storm_Sprite:
             "StormX.outfit['top'] == '_jacket'", "images/StormSprite/Storm_Sprite_Over_JacketC.png",
             "True", Null(),
             ),
-        (53,-45), "Storm_Sprite_Head",
+        (53,-45), "Storm_sprite standing_Head",
         (0,0), ConditionSwitch(
 
-            "StormX.arm_pose != 1 and renpy.showing('Storm_HJ_Animation')", Null(),
+            "StormX.arm_pose != 1 and renpy.showing('Storm_sprite handjob')", Null(),
             "StormX.arm_pose != 1", "images/StormSprite/Storm_Sprite_Arms2a.png",
             "True", Null(),
             ),
@@ -373,7 +373,7 @@ image Storm_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "StormX.arm_pose != 1 and StormX.outfit['top'] == '_jacket' and renpy.showing('Storm_HJ_Animation')", "images/StormSprite/Storm_Sprite_Over_Jacket2H.png",
+            "StormX.arm_pose != 1 and StormX.outfit['top'] == '_jacket' and renpy.showing('Storm_sprite handjob')", "images/StormSprite/Storm_Sprite_Over_Jacket2H.png",
             "StormX.arm_pose != 1 and StormX.outfit['top'] == '_jacket'", "images/StormSprite/Storm_Sprite_Over_Jacket2A.png",
             "StormX.arm_pose != 1 and StormX.outfit['front_outer_accessory'] == '_rings'", "images/StormSprite/Storm_Sprite_ArmRings2Top.png",
             "True", Null(),
@@ -525,7 +525,7 @@ image Storm_Sprite:
         )
     anchor (0.5, -0.198) zoom 0.95
 
-image Storm_Sprite_HairBack:
+image Storm_sprite standing_HairBack:
     contains:
         ConditionSwitch(
 
@@ -579,7 +579,7 @@ image Storm_Sprite_HairBack:
 
 
 
-image Storm_Sprite_Head:
+image Storm_sprite standing_Head:
     LiveComposite(
         (900,900),
 
@@ -664,7 +664,7 @@ image Storm_Sprite_Head:
             "StormX.brows == '_confused'", "images/StormSprite/Storm_Sprite_brows_Confused.png",
             "True", "images/StormSprite/Storm_Sprite_brows_Normal.png",
             ),
-        (0,0), "Storm Blink",
+        (0,0), "Storm_sprite Blink",
         (0,0), ConditionSwitch(
 
             "not StormX.wet", Null(),
@@ -681,7 +681,7 @@ image Storm_Sprite_Head:
             "StormX.outfit['hair'] == '_wet'", "images/StormSprite/Storm_Sprite_Hair_Long_Wet.png",
             "StormX.outfit['hair'] and StormX.wet", "images/StormSprite/Storm_Sprite_Hair_Long_Wet.png",
             "StormX.outfit['hair'] == 'short'", "images/StormSprite/Storm_Sprite_Hair_Short.png",
-            "renpy.showing('Storm_SexSprite')", "images/StormSprite/Storm_Sprite_Hair_Long_Sex.png",
+            "renpy.showing('Storm_sprite sex')", "images/StormSprite/Storm_Sprite_Hair_Long_Sex.png",
             "StormX.outfit['hair']", "images/StormSprite/Storm_Sprite_Hair_Long.png",
             "True", Null(),
             ),
@@ -714,7 +714,7 @@ image Storm_Sprite_Head:
     zoom .47
 
 
-image Storm Blink:
+image Storm_sprite Blink:
     ConditionSwitch(
     "StormX.eyes == '_sexy'", "images/StormSprite/Storm_Sprite_eyes_Sexy.png",
     "StormX.eyes == '_side'", "images/StormSprite/Storm_Sprite_eyes_Side.png",
@@ -820,7 +820,7 @@ label Storm_Doggy_Reset:
 
 
 
-image Storm_SexSprite:
+image Storm_sprite sex:
     LiveComposite(
         (1120,960),
 
@@ -993,14 +993,14 @@ image Storm_Sex_Body:
 
 image Storm_Head_Sex:
 
-    "Storm_Sprite_Head"
+    "Storm_sprite standing_Head"
     zoom 1.25
     anchor (0.5,0.5)
     rotate -7
 
 image Storm_HairBack_Sex:
 
-    "Storm_Sprite_HairBack"
+    "Storm_sprite standing_HairBack"
     zoom 1.25
     anchor (0.5,0.5)
     rotate -7
@@ -2648,25 +2648,25 @@ label Storm_Sex_Launch(Line=primary_action):
     if StormX.pose == "doggy":
         call Storm_Doggy_Launch (Line)
         return
-    if renpy.showing("Storm_SexSprite"):
+    if renpy.showing("Storm_sprite sex"):
         return
     $ action_speed = 0
     call hide_girl(StormX, hide_sprite = True)
-    show Storm_SexSprite zorder 150
+    show Storm_sprite sex zorder 150
     with dissolve
     return
 
 label Storm_Sex_Reset:
-    if renpy.showing("Storm_Doggy_Animation"):
+    if renpy.showing("Storm_sprite doggy"):
         call Storm_Doggy_Reset
         return
-    if not renpy.showing("Storm_SexSprite"):
+    if not renpy.showing("Storm_sprite sex"):
         return
     $ StormX.arm_pose = 2
-    hide Storm_SexSprite
+    hide Storm_sprite sex
     call hide_girl(StormX)
 
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
         anchor (0.5, 0.0)
@@ -2761,7 +2761,7 @@ transform Handcock_2J():
         pause 0.1
         repeat
 
-image Storm_HJ_Animation:
+image Storm_sprite handjob:
     contains:
         ConditionSwitch(
 
@@ -2793,16 +2793,16 @@ image Storm_HJ_Animation:
 
 label Storm_HJ_Launch(Line=primary_action):
     $ StormX.arm_pose = 2
-    if renpy.showing("Storm_HJ_Animation"):
+    if renpy.showing("Storm_sprite handjob"):
         $ primary_action = "handjob"
         return
     call hide_girl(StormX)
     if Line == "L":
-        show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_right):
+        show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (-150,350)
     else:
-        show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_right):
+        show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (-150,350)
         with dissolve
@@ -2813,31 +2813,31 @@ label Storm_HJ_Launch(Line=primary_action):
     else:
         $ action_speed = 1
     pause .5
-    show Storm_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
+    show Storm_sprite handjob zorder 150 at sprite_location(stage_center) with easeinbottom:
 
         offset (250,250)
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_right):
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(stage_right):
         alpha 1
         ease .5 zoom 1.7 offset (-150,200)
     return
 
 label Storm_HJ_Reset:
-    if not renpy.showing("Storm_HJ_Animation"):
+    if not renpy.showing("Storm_sprite handjob"):
         return
     $ action_speed = 0
     $ StormX.arm_pose = 1
-    hide Storm_HJ_Animation with easeoutbottom
+    hide Storm_sprite handjob with easeoutbottom
     call hide_girl(StormX)
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
         zoom 1.7 offset (-150,200)
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
         ease 1 zoom 1.5 offset (-150,50)
         pause .5
         ease .5 zoom 1 offset (0,0)
         pause .5
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
     return
@@ -2850,7 +2850,7 @@ label Storm_HJ_Reset:
 
 
 
-image Storm_BJ_Animation:
+image Storm_sprite blowjob:
     LiveComposite(
         (858,928),
         (0,0), ConditionSwitch(
@@ -2948,7 +2948,7 @@ image Storm_BJ_Head:
 
 
 
-            "Speed and renpy.showing('Storm_BJ_Animation')", ConditionSwitch(
+            "Speed and renpy.showing('Storm_sprite blowjob')", ConditionSwitch(
 
                     "action_speed == 1", "images/StormBJFace/Storm_BJ_mouth_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -2956,7 +2956,7 @@ image Storm_BJ_Head:
                     "action_speed == 4", "images/StormBJFace/Storm_BJ_mouth_Sucking.png",
                     "action_speed == 6", "images/StormBJFace/Storm_BJ_mouth_Sucking.png",
                     ),
-            "action_speed == 3 and renpy.showing('Storm_TJ_Animation')", "images/StormBJFace/Storm_BJ_mouth_Tongue.png",
+            "action_speed == 3 and renpy.showing('Storm_sprite titjob')", "images/StormBJFace/Storm_BJ_mouth_Tongue.png",
             "StormX.mouth == '_normal'", "images/StormBJFace/Storm_BJ_mouth_Smile.png",
             "StormX.mouth == '_lipbite'", "images/StormBJFace/Storm_BJ_mouth_Lipbite.png",
             "StormX.mouth == '_sucking'", "images/StormBJFace/Storm_BJ_mouth_Tongue.png",
@@ -2972,7 +2972,7 @@ image Storm_BJ_Head:
         (428,555), ConditionSwitch(
 
 
-            "not renpy.showing('Storm_BJ_Animation')", Null(),
+            "not renpy.showing('Storm_sprite blowjob')", Null(),
             "action_speed == 2", "Storm_BJ_mouthHeading",
             "action_speed == 5", "Storm_BJ_mouthCumHigh",
             "True", Null(),
@@ -2981,7 +2981,7 @@ image Storm_BJ_Head:
         (0,0), ConditionSwitch(
 
             "not StormX.spunk['mouth']", Null(),
-            "Speed and renpy.showing('Storm_BJ_Animation')", ConditionSwitch(
+            "Speed and renpy.showing('Storm_sprite blowjob')", ConditionSwitch(
 
                     "action_speed == 1", "images/StormBJFace/Storm_BJ_Spunk_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -3008,7 +3008,7 @@ image Storm_BJ_Head:
             "StormX.brows == '_confused'", "images/StormBJFace/Storm_BJ_brows_Confused.png",
             "True", "images/StormBJFace/Storm_BJ_brows_Normal.png",
             ),
-        (0,0), "Storm BJ Blink",
+        (0,0), "Storm_sprite BJ Blink",
 
         (0,0), "images/StormBJFace/Storm_BJ_Earring.png",
         (0,0), ConditionSwitch(
@@ -3046,7 +3046,7 @@ image Storm_BJ_Head:
 image Storm_Tester:
     "images/StormBJFace/Storm_BJ_tester.jpg"
     alpha 0.5
-image Storm BJ Blink:
+image Storm_sprite BJ Blink:
 
     ConditionSwitch(
             "StormX.eyes == '_normal'", "images/StormBJFace/Storm_BJ_eyes_Normal.png",
@@ -3749,32 +3749,32 @@ image Storm_BJ_Anim6:
 
 
 label Storm_BJ_Launch(Line=primary_action):
-    if renpy.showing("Storm_BJ_Animation"):
+    if renpy.showing("Storm_sprite blowjob"):
         return
 
 
-    if renpy.showing("Storm_TJ_Animation"):
-        hide Storm_TJ_Animation
+    if renpy.showing("Storm_sprite titjob"):
+        hide Storm_sprite titjob
     else:
         call hide_girl(StormX)
         if Line == "L" or Line == "cum":
-            show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_center):
+            show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(stage_center):
                 alpha 1
                 ease 1 zoom 2.5 offset (150,80)
             with dissolve
         else:
-            show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_center):
+            show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(stage_center):
                 alpha 1
                 zoom 2.5 offset (150,80)
             with dissolve
-        hide Storm_Sprite
+        hide Storm_sprite
 
     $ action_speed = 0
 
     if Line != "cum":
         $ primary_action = "blowjob"
 
-    show Storm_BJ_Animation zorder 150:
+    show Storm_sprite blowjob zorder 150:
         pos (630,650)
     if taboo and Line == "L":
         if len(Present) >= 2:
@@ -3791,24 +3791,24 @@ label Storm_BJ_Launch(Line=primary_action):
     return
 
 label Storm_BJ_Reset:
-    if not renpy.showing("Storm_BJ_Animation"):
+    if not renpy.showing("Storm_sprite blowjob"):
         return
 
     call hide_girl(StormX)
     $ action_speed = 0
 
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_center):
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(stage_center):
         alpha 1
         zoom 2.5 offset (150,80)
     with dissolve
 
-    show Storm_Sprite zorder StormX.sprite_layer:
+    show Storm_sprite standing zorder StormX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 offset (-50,50)
         pause .2
         ease .3 zoom 1 offset (0,0)
     pause 1.5
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
     return
@@ -3820,7 +3820,7 @@ label Storm_BJ_Reset:
 
 
 
-image Storm_TJ_Animation:
+image Storm_sprite titjob:
 
     contains:
         ConditionSwitch(
@@ -3901,7 +3901,7 @@ image Storm_TJ_Body:
 
     contains:
         ConditionSwitch(
-                        "StormX.outfit['top'] or renpy.showing('Storm_TJ_Animation')", Null(),
+                        "StormX.outfit['top'] or renpy.showing('Storm_sprite titjob')", Null(),
                         "StormX.outfit['bra'] == '_black_bra' or StormX.outfit['bra'] == '_lace_bra'","images/StormBJFace/Storm_TJ_Chest_Bra_Back.png",
                         "True", Null(),
                         )
@@ -3967,7 +3967,7 @@ image Storm_TJ_Tit_Under:
         ConditionSwitch(
 
                     "StormX.outfit['bra'] == '_cosplay_bra'",Null(),
-                    "renpy.showing('Storm_TJ_Animation')", "images/StormBJFace/Storm_TJ_TitsUnder.png",
+                    "renpy.showing('Storm_sprite titjob')", "images/StormBJFace/Storm_TJ_TitsUnder.png",
                     "True",  Null(),
                     )
 
@@ -5003,7 +5003,7 @@ image Storm_TJ_5:
 
 
 label Storm_TJ_Launch(Line=primary_action):
-    if renpy.showing("Storm_TJ_Animation"):
+    if renpy.showing("Storm_sprite titjob"):
         return
 
 
@@ -5031,14 +5031,14 @@ label Storm_TJ_Launch(Line=primary_action):
 
     show blackscreen onlayer black with dissolve
 
-    if renpy.showing("Storm_BJ_Animation"):
-        hide Storm_BJ_Animation
+    if renpy.showing("Storm_sprite blowjob"):
+        hide Storm_sprite blowjob
     else:
         call hide_girl(StormX)
-        show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
+        show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
             alpha 1
             ease 1 zoom 2.3 xpos 750 yoffset -100
-        show Storm_Sprite zorder StormX.sprite_layer:
+        show Storm_sprite standing zorder StormX.sprite_layer:
             alpha 0
 
 
@@ -5047,7 +5047,7 @@ label Storm_TJ_Launch(Line=primary_action):
     $ action_speed = 0
     if Line != "cum":
         $ primary_action = "titjob"
-    show Storm_TJ_Animation zorder 150:
+    show Storm_sprite titjob zorder 150:
         pos (1000,1050)
     $ Player.sprite = 1
     hide blackscreen onlayer black with dissolve
@@ -5055,21 +5055,21 @@ label Storm_TJ_Launch(Line=primary_action):
 
 label Storm_TJ_Reset:
 
-    if not renpy.showing("Storm_TJ_Animation"):
+    if not renpy.showing("Storm_sprite titjob"):
         return
 
     call hide_girl(StormX)
     $ Player.sprite = 0
 
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         zoom 2.3 xpos 750 yoffset -100
-    show Storm_Sprite zorder StormX.sprite_layer:
+    show Storm_sprite standing zorder StormX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 xpos 700 yoffset 50
         pause .5
         ease .5 zoom 1 xpos StormX.sprite_location yoffset 0
     "[StormX.name] pulls back"
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
         zoom 1 offset (0,0) xpos StormX.sprite_location
     return
@@ -5085,18 +5085,18 @@ label Storm_Kissing_Launch(T=primary_action, Set=1):
     call hide_girl(StormX)
     $ primary_action = T
     $ StormX.pose = "kiss" if Set else StormX.pose
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location)
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_center):
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(StormX.sprite_location)
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(stage_center):
         ease 0.5 offset (0,0) zoom 2 alpha 1
     return
 
 label Storm_Kissing_Smooch:
     $ StormX.change_face("kiss")
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_center):
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos StormX.sprite_location zoom 1
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         zoom 1
     $ StormX.change_face("_sexy")
     return
@@ -5105,7 +5105,7 @@ label Storm_Breasts_Launch(T=primary_action, Set=1):
     call hide_girl(StormX)
     $ primary_action = T
     $ StormX.pose = "breasts" if Set else StormX.pose
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 2 alpha 1
     return
@@ -5114,7 +5114,7 @@ label Storm_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(StormX)
     $ primary_action = T
     $ StormX.pose = "middle" if Set else StormX.pose
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1
     return
@@ -5123,7 +5123,7 @@ label Storm_Pussy_Launch(T=primary_action, Set=1):
     call hide_girl(StormX)
     $ primary_action = T
     $ StormX.pose = "pussy" if Set else StormX.pose
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         ease 0.5 pos (700,-400) offset (0,0) zoom 2 alpha 1
     return
 
@@ -5131,9 +5131,9 @@ label Storm_Pos_Reset(T=0, Set=0):
     if StormX.location != bg_current:
         return
     call hide_girl(StormX)
-    show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
+    show Storm_sprite standing zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         ease .5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
-    show Storm_Sprite zorder StormX.sprite_layer:
+    show Storm_sprite standing zorder StormX.sprite_layer:
         offset (0,0)
         anchor (0.5, 0.0)
         zoom 1
@@ -5148,21 +5148,21 @@ label Storm_Pos_Reset(T=0, Set=0):
 image Storm_At_Desk:
     contains:
         subpixel True
-        "Storm_Sprite"
+        "Storm_sprite standing"
         zoom 0.29
         pos (450,190)
 
 image Storm_At_Podium:
     contains:
         subpixel True
-        "Storm_Sprite"
+        "Storm_sprite standing"
         zoom 0.29
         pos (670,180)
 
 image Storm_Behind_Podium:
     contains:
         subpixel True
-        "Storm_Sprite"
+        "Storm_sprite standing"
         zoom 0.29
         pos (640,180)
         block:

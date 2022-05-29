@@ -150,7 +150,7 @@ label before_action:
         $ focused_Girl.change_stat("inhibition", 10, 1)
         $ focused_Girl.change_stat("inhibition", 20, 1)
 
-        call kiss_launch
+        call kiss_launch(focused_Girl)
 
         if focused_Girl.action_counter["kiss"] >= 10 and focused_Girl.inhibition >= 300:
             $ focused_Girl.change_face("_sucking")
@@ -160,8 +160,6 @@ label before_action:
             $ focused_Girl.change_face("_kiss",2)
 
         if focused_Girl == RogueX and not focused_Girl.action_counter["kiss"]:
-            $ focused_Girl.action_counter["kiss"] += 1
-
             call Rogue_first_kiss
 
             return
@@ -208,19 +206,19 @@ label before_action:
         call Seen_First_Peen(focused_Girl, Partner, React = action_context)
 
         if primary_action == "handjob":
-            call handjob_launch
+            call handjob_launch(focused_Girl)
         elif primary_action == "titjob":
-            call titjob_launch
+            call titjob_launch(focused_Girl)
         elif primary_action == "blowjob":
-            call blowjob_launch
+            call blowjob_launch(focused_Girl)
         elif primary_action in dildo_actions:
-            call pussy_launch
+            call pussy_launch(focused_Girl)
     elif primary_action in sex_actions:
         call Seen_First_Peen(focused_Girl, Partner, React = action_context)
 
         $ focused_Girl.pose = "doggy"
 
-        call sex_launch
+        call sex_launch(focused_Girl)
 
     if primary_action not in sex_actions:
         if action_context == focused_Girl:
@@ -333,9 +331,9 @@ label before_action:
     if primary_action in fondle_actions:
         call shift_view(focused_Girl, focused_Girl.pose)
     elif primary_action in breast_actions:
-        call breasts_launch
+        call breasts_launch(focused_Girl)
     elif primary_action == "footjob":
-        call sex_launch
+        call sex_launch(focused_Girl)
 
 label action_cycle:
     if primary_action in mouth_actions:
@@ -346,13 +344,13 @@ label action_cycle:
 
     while round > 0:
         if primary_action == "kiss":
-            call kiss_launch
+            call kiss_launch(focused_Girl)
 
             $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
         if primary_action in fondle_actions:
             call shift_view(focused_Girl, focused_Girl.pose)
         elif primary_action in ["footjob", "sex", "anal", "hotdog"]:
-            call sex_launch
+            call sex_launch(focused_Girl)
 
             if primary_action == "sex":
                 $ Player.cock_position = "in"
@@ -378,7 +376,7 @@ label action_cycle:
         label action_menu_return:
 
         if primary_action in inside_panties_actions:
-            if focused_Girl.outfit["underwear"] or focused_Girl.bottom_number() >= 6 or focused_Girl.hose_number() >= 5: #This checks if Rogue wants to strip down.
+            if focused_Girl.outfit["underwear"] or focused_Girl.bottom_number() >= 6 or focused_Girl.hose_number() >= 5: #This checks if Rogue_sprite wants to strip down.
                 call focused_Girl_Undress(focused_Girl, "auto")
 
         call Sex_Dialog(focused_Girl, Partner)
@@ -410,7 +408,7 @@ label after_action:
         $ Player.sprite = False
         $ Player.cock_position = "out"
 
-    call reset_position
+    call reset_position(focused_Girl)
 
     $ focused_Girl.change_face("_sexy")
     $ focused_Girl.remaining_actions -= 1
@@ -482,7 +480,7 @@ label after_action:
         $ primary_action = None
         $ action_speed = 0
     else:
-        call reset_position
+        call reset_position(focused_Girl)
 
     call checkout
 
@@ -896,10 +894,10 @@ label end_of_action_round:
 
     if Player.focus >= 100 or focused_Girl.lust >= 100:
         if Player.focus >= 100:
-            # call Player_Cumming(focused_Girl)
+            call Player_Cumming(focused_Girl)
 
             if "_angry" in focused_Girl.recent_history:
-                call reset_position
+                call reset_position(focused_Girl)
 
                 return True
 
@@ -933,7 +931,7 @@ label end_of_action_round:
                 else:
                     "You're emptied out, you should probably take a break."
 
-            if "unsatisfied" in focused_Girl.recent_history:#And Rogue is unsatisfied,
+            if "unsatisfied" in focused_Girl.recent_history:#And Rogue_sprite is unsatisfied,
                 call girl_unsatisfied_menu(focused_Girl, primary_action)
 
     if Partner and Partner.lust >= 100:

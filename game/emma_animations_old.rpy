@@ -1,5 +1,5 @@
 
-# image Emma_sprite:
+# image Emma_sprite standing:
 #
 #         (0,0), ConditionSwitch(
 #
@@ -289,7 +289,7 @@ image EmmaSprite_Head:
             "True", "images/EmmaSprite/EmmaSprite_Head_Spunk_mouth.png",
             ),
 
-        (0,0), "Emma Blink",
+        (0,0), "Emma_sprite Blink",
 
         (0,0), ConditionSwitch(
 
@@ -354,7 +354,7 @@ image Emma_Drip_MaskP:
 
 
 
-image Emma_SexSprite:
+image Emma_sprite sex:
 
     contains:
         ConditionSwitch(
@@ -446,14 +446,14 @@ image Emma_Sex_Torso:
     contains:
 
         ConditionSwitch(
-            "renpy.showing('Emma_TJ_Animation')", Null(),
+            "renpy.showing('Emma_sprite titjob')", Null(),
             "EmmaX.outfit['bra'] and not EmmaX.top_pulled_up", "images/EmmaSex/Emma_Sex_Tits_Up.png",
             "True", "images/EmmaSex/Emma_Sex_Tits_Down.png",
             )
     contains:
 
         ConditionSwitch(
-            "renpy.showing('Emma_TJ_Animation')", Null(),
+            "renpy.showing('Emma_sprite titjob')", Null(),
             "(EmmaX.outfit['top'] or EmmaX.outfit['bra']) and not EmmaX.top_pulled_up", Null(),
             "EmmaX.outfit['front_inner_accessory'] == '_barbell'", ConditionSwitch(
 
@@ -471,9 +471,9 @@ image Emma_Sex_Torso:
 
         ConditionSwitch(
 
-            "EmmaX.outfit['bra'] == '_sports_bra' and (EmmaX.top_pulled_up or renpy.showing('Emma_TJ_Animation'))", "images/EmmaSex/Emma_Sex_Bra_Sports_Uptop.png",
-            "EmmaX.outfit['bra'] == '_bikini_top' and (EmmaX.top_pulled_up or renpy.showing('Emma_TJ_Animation'))", "images/EmmaSex/Emma_Sex_Bra_Bikini_Uptop.png",
-            "EmmaX.top_pulled_up or renpy.showing('Emma_TJ_Animation')", Null(),
+            "EmmaX.outfit['bra'] == '_sports_bra' and (EmmaX.top_pulled_up or renpy.showing('Emma_sprite titjob'))", "images/EmmaSex/Emma_Sex_Bra_Sports_Uptop.png",
+            "EmmaX.outfit['bra'] == '_bikini_top' and (EmmaX.top_pulled_up or renpy.showing('Emma_sprite titjob'))", "images/EmmaSex/Emma_Sex_Bra_Bikini_Uptop.png",
+            "EmmaX.top_pulled_up or renpy.showing('Emma_sprite titjob')", Null(),
             "EmmaX.outfit['bra'] == '_corset'", "images/EmmaSex/Emma_Sex_Bra_Corset_Up.png",
             "EmmaX.outfit['bra'] == '_sports_bra'", "images/EmmaSex/Emma_Sex_Bra_Sports_Up.png",
             "EmmaX.outfit['bra'] == '_bikini_top'", "images/EmmaSex/Emma_Sex_Bra_Bikini_Up.png",
@@ -486,7 +486,7 @@ image Emma_Sex_Torso:
             "EmmaX.outfit['top'] == '_jacket'", ConditionSwitch(
 
 
-                    "renpy.showing('Emma_TJ_Animation')", "images/EmmaSex/Emma_Sex_Jacket_TJ.png",
+                    "renpy.showing('Emma_sprite titjob')", "images/EmmaSex/Emma_Sex_Jacket_TJ.png",
                     "EmmaX.top_pulled_up", "images/EmmaSex/Emma_Sex_Jacket_Down_Uptop.png",
                     "EmmaX.outfit['bra'] and not EmmaX.top_pulled_up", "images/EmmaSex/Emma_Sex_Jacket_Up.png",
                     "True", "images/EmmaSex/Emma_Sex_Jacket_Down.png",
@@ -495,14 +495,14 @@ image Emma_Sex_Torso:
 
 
                     "EmmaX.top_pulled_up", "images/EmmaSex/Emma_Sex_Nighty_Uptop.png",
-                    "EmmaX.outfit['bra'] and not renpy.showing('Emma_TJ_Animation')", "images/EmmaSex/Emma_Sex_Nighty_Up.png",
+                    "EmmaX.outfit['bra'] and not renpy.showing('Emma_sprite titjob')", "images/EmmaSex/Emma_Sex_Nighty_Up.png",
 
                     "True", "images/EmmaSex/Emma_Sex_Nighty_Down.png",
                     ),
             "EmmaX.outfit['top'] == '_dress'", ConditionSwitch(
 
 
-                    "renpy.showing('Emma_TJ_Animation')", "images/EmmaSex/Emma_Sex_Dress_TJ.png",
+                    "renpy.showing('Emma_sprite titjob')", "images/EmmaSex/Emma_Sex_Dress_TJ.png",
                     "EmmaX.top_pulled_up", "images/EmmaSex/Emma_Sex_Dress_Uptop.png",
                     "EmmaX.outfit['bra'] and not EmmaX.top_pulled_up", "images/EmmaSex/Emma_Sex_Dress_Up.png",
                     "True", "images/EmmaSex/Emma_Sex_Dress_Down.png",
@@ -512,7 +512,7 @@ image Emma_Sex_Torso:
     contains:
 
         ConditionSwitch(
-            "renpy.showing('Emma_TJ_Animation')", Null(),
+            "renpy.showing('Emma_sprite titjob')", Null(),
             "EmmaX.top_pulled_up or not EmmaX.outfit['front_inner_accessory']", Null(),
             "EmmaX.outfit['bra'] and not EmmaX.top_pulled_up", "images/EmmaSex/Emma_Pierce_Barbell_Tits_UC.png",
             "EmmaX.outfit['top'] and not EmmaX.top_pulled_up", "images/EmmaSex/Emma_Pierce_Barbell_Tits_DC.png",
@@ -522,7 +522,7 @@ image Emma_Sex_Torso:
 
         ConditionSwitch(
                 "not EmmaX.spunk['breasts']", Null(),
-                "renpy.showing('Emma_TJ_Animation')", "images/EmmaSex/Emma_Spunk_Titjob_Under.png",
+                "renpy.showing('Emma_sprite titjob')", "images/EmmaSex/Emma_Spunk_Titjob_Under.png",
                 "True", "images/EmmaSex/Emma_Spunk_Tits.png",
                 )
     zoom 1
@@ -1807,26 +1807,26 @@ label Emma_Sex_Launch(Line=primary_action):
     if EmmaX.pose == "doggy":
         call Emma_Doggy_Launch (Line)
         return
-    if renpy.showing("Emma_SexSprite"):
+    if renpy.showing("Emma_sprite sex"):
         return
     $ action_speed = 0
     call hide_girl(EmmaX, hide_sprite = True)
 
-    show Emma_SexSprite zorder 150:
+    show Emma_sprite sex zorder 150:
         pos (575,470)
     with dissolve
     return
 
 label Emma_Sex_Reset:
-    if renpy.showing("Emma_Doggy_Animation"):
+    if renpy.showing("Emma_sprite doggy"):
         call Emma_Doggy_Reset
         return
-    if not renpy.showing("Emma_SexSprite"):
+    if not renpy.showing("Emma_sprite sex"):
         return
     $ EmmaX.arm_pose = 2
-    hide Emma_SexSprite
+    hide Emma_sprite sex
     call hide_girl(EmmaX)
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
         anchor (0.5, 0.0)
@@ -1841,7 +1841,7 @@ label Emma_Sex_Reset:
 
 
 
-image Emma_Doggy_Animation:
+image Emma_sprite doggy:
     LiveComposite(
 
         (420,750),
@@ -2040,7 +2040,7 @@ image Emma_Doggy_Head:
 
             "True", "images/EmmaDoggy/Emma_Doggy_brows_Normal.png",
             ),
-        (0,0), "Emma Doggy Blink",
+        (0,0), "Emma_sprite Doggy Blink",
 
 
 
@@ -2124,7 +2124,7 @@ image Emma_Doggy_Hat:
     rotate 10
 
 
-image Emma Doggy Blink:
+image Emma_sprite Doggy Blink:
 
     ConditionSwitch(
         "EmmaX.eyes == '_sexy'", "images/EmmaDoggy/Emma_Doggy_eyes_Sexy.png",
@@ -3255,23 +3255,23 @@ image Emma_Doggy_Feet2:
 
 
 label Emma_Doggy_Launch(Line=primary_action):
-    if renpy.showing("Emma_Doggy_Animation"):
+    if renpy.showing("Emma_sprite doggy"):
         return
     $ action_speed = 0
     call hide_girl(EmmaX, hide_sprite = True)
-    show Emma_Doggy_Animation zorder 150 at sprite_location(stage_center+50)
+    show Emma_sprite doggy zorder 150 at sprite_location(stage_center+50)
     with dissolve
     return
 
 label Emma_Doggy_Reset:
-    if not renpy.showing("Emma_Doggy_Animation"):
+    if not renpy.showing("Emma_sprite doggy"):
         return
 
     $ EmmaX.arm_pose = 2
     $ EmmaX.SpriteVer = 0
-    hide Emma_Doggy_Animation
+    hide Emma_sprite doggy
     call hide_girl(EmmaX)
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
         zoom 1
         offset (0,0)
@@ -3293,7 +3293,7 @@ label Emma_Doggy_Reset:
 
 
 
-image Emma_TJ_Animation:
+image Emma_sprite titjob:
 
     contains:
         ConditionSwitch(
@@ -3755,10 +3755,10 @@ image Emma_TJ_Body_5:
 
 
 label Emma_TJ_Launch(Line=primary_action):
-    if renpy.showing("Emma_TJ_Animation"):
+    if renpy.showing("Emma_sprite titjob"):
         return
     call hide_girl(EmmaX)
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
         ease 1 zoom 2 xpos 550 yoffset 50
     if taboo:
@@ -3804,31 +3804,31 @@ label Emma_TJ_Launch(Line=primary_action):
         "[EmmaX.name] wraps her tits around your cock."
 
     show blackscreen onlayer black with dissolve
-    show Emma_sprite zorder EmmaX.sprite_layer:
+    show Emma_sprite standing zorder EmmaX.sprite_layer:
         alpha 0
     $ action_speed = 0
     if Line != "cum":
         $ primary_action = "titjob"
-    show Emma_TJ_Animation zorder 150
+    show Emma_sprite titjob zorder 150
     $ Player.sprite = 1
     hide blackscreen onlayer black with dissolve
     return
 
 label Emma_TJ_Reset:
-    if not renpy.showing("Emma_TJ_Animation"):
+    if not renpy.showing("Emma_sprite titjob"):
         return
 
     call hide_girl(EmmaX)
     $ Player.sprite = 0
 
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         zoom 2 xpos 550 yoffset 50
-    show Emma_sprite zorder EmmaX.sprite_layer:
+    show Emma_sprite standing zorder EmmaX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 xpos 500 yoffset 50
         pause .5
         ease .5 zoom 1 xpos EmmaX.sprite_location yoffset 0
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
         zoom 1 offset (0,0) xpos EmmaX.sprite_location
 
@@ -3846,7 +3846,7 @@ label Emma_TJ_Reset:
 
 
 
-image Emma_BJ_Animation:
+image Emma_sprite blowjob:
     LiveComposite(
         (858,928),
         (-270,-160), ConditionSwitch(
@@ -3962,7 +3962,7 @@ image Emma_BJ_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "action_speed <= 2 or action_speed == 5 or not renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
+            "action_speed <= 2 or action_speed == 5 or not renpy.showing('Emma_sprite blowjob')", ConditionSwitch(
 
                     "EmmaX.blushing", "images/EmmaBJFace/Emma_BJ_FaceClosed_Blush.png",
                     "True", "images/EmmaBJFace/Emma_BJ_FaceClosed.png",
@@ -3977,7 +3977,7 @@ image Emma_BJ_Head:
 
 
 
-            "action_speed and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
+            "action_speed and renpy.showing('Emma_sprite blowjob')", ConditionSwitch(
 
                     "action_speed == 1", "images/EmmaBJFace/Emma_BJ_mouth_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -3985,7 +3985,7 @@ image Emma_BJ_Head:
                     "action_speed == 4", "images/EmmaBJFace/Emma_BJ_mouth_Sucking.png",
                     "action_speed == 6", "images/EmmaBJFace/Emma_BJ_mouth_Sucking.png",
                     ),
-            "action_speed == 3 and renpy.showing('Emma_TJ_Animation')", "images/EmmaBJFace/Emma_BJ_mouth_Tongue.png",
+            "action_speed == 3 and renpy.showing('Emma_sprite titjob')", "images/EmmaBJFace/Emma_BJ_mouth_Tongue.png",
             "EmmaX.mouth == '_normal'", "images/EmmaBJFace/Emma_BJ_mouth_Smile.png",
             "EmmaX.mouth == '_lipbite'", "images/EmmaBJFace/Emma_BJ_mouth_Lipbite.png",
             "EmmaX.mouth == '_sucking'", "images/EmmaBJFace/Emma_BJ_mouth_Sucking.png",
@@ -4001,7 +4001,7 @@ image Emma_BJ_Head:
         (428,605), ConditionSwitch(
 
 
-            "not renpy.showing('Emma_BJ_Animation')", Null(),
+            "not renpy.showing('Emma_sprite blowjob')", Null(),
             "action_speed == 2", At("Emma_BJ_mouthHeading", Emma_BJ_mouthAnim()),
             "action_speed == 5", At("Emma_BJ_mouthHeading", Emma_BJ_mouthAnimC()),
             "True", Null(),
@@ -4010,7 +4010,7 @@ image Emma_BJ_Head:
         (0,0), ConditionSwitch(
 
             "not EmmaX.spunk['mouth']", Null(),
-            "action_speed and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
+            "action_speed and renpy.showing('Emma_sprite blowjob')", ConditionSwitch(
 
                     "action_speed == 1", "images/EmmaBJFace/Emma_BJ_Spunk_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -4038,7 +4038,7 @@ image Emma_BJ_Head:
             "EmmaX.brows == '_confused'", "images/EmmaBJFace/Emma_BJ_brows_Confused.png",
             "True", "images/EmmaBJFace/Emma_BJ_brows_Normal.png",
             ),
-        (0,0), "Emma BJ Blink",
+        (0,0), "Emma_sprite BJ Blink",
 
         (0,0), ConditionSwitch(
 
@@ -4070,7 +4070,7 @@ image Emma_BJ_Head:
     zoom 1.4
     anchor (0.5, 0.5)
 
-image Emma BJ Blink:
+image Emma_sprite BJ Blink:
 
     ConditionSwitch(
             "EmmaX.eyes == '_normal'", "images/EmmaBJFace/Emma_BJ_eyes_Sexy.png",
@@ -4400,17 +4400,17 @@ transform Emma_BJ_Body_6():
 
 
 label Emma_BJ_Launch(Line=primary_action):
-    if renpy.showing("Emma_BJ_Animation"):
+    if renpy.showing("Emma_sprite blowjob"):
         return
 
     call hide_girl(EmmaX)
     if Line == "L" or Line == "cum":
-        show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(stage_center):
+        show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(stage_center):
             alpha 1
             ease 1 zoom 2.5 offset (150,80)
         with dissolve
     else:
-        show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(stage_center):
+        show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(stage_center):
             alpha 1
             zoom 2.5 offset (150,80)
         with dissolve
@@ -4432,30 +4432,30 @@ label Emma_BJ_Launch(Line=primary_action):
     if Line != "cum":
         $ primary_action = "blowjob"
 
-    show Emma_sprite zorder EmmaX.sprite_layer:
+    show Emma_sprite standing zorder EmmaX.sprite_layer:
         alpha 0
-    show Emma_BJ_Animation zorder 150:
+    show Emma_sprite blowjob zorder 150:
         pos (645,510)
     return
 
 label Emma_BJ_Reset:
-    if not renpy.showing("Emma_BJ_Animation"):
+    if not renpy.showing("Emma_sprite blowjob"):
         return
 
     call hide_girl(EmmaX)
     $ action_speed = 0
 
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(stage_center):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(stage_center):
         alpha 1
         zoom 2.5 offset (150,80)
     with dissolve
 
-    show Emma_sprite zorder EmmaX.sprite_layer:
+    show Emma_sprite standing zorder EmmaX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 offset (-50,50)
         pause .5
         ease .5 zoom 1 offset (0,0)
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
     return
@@ -4547,7 +4547,7 @@ transform Handcock_2E():
         pause 0.1
         repeat
 
-image Emma_HJ_Animation:
+image Emma_sprite handjob:
     contains:
         ConditionSwitch(
             "not action_speed", Transform("Emma_Hand_Under"),
@@ -4575,16 +4575,16 @@ image Emma_HJ_Animation:
 
 
 label Emma_HJ_Launch(Line=primary_action):
-    if renpy.showing("Emma_HJ_Animation"):
+    if renpy.showing("Emma_sprite handjob"):
         $ primary_action = "handjob"
         return
     call hide_girl(EmmaX)
     if Line == "L":
-        show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(stage_right):
+        show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (0,200)
     else:
-        show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(stage_right):
+        show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (0,200)
         with dissolve
@@ -4609,27 +4609,27 @@ label Emma_HJ_Launch(Line=primary_action):
         $ action_speed = 1
     pause .5
     $ EmmaX.arm_pose = 1
-    show Emma_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
+    show Emma_sprite handjob zorder 150 at sprite_location(stage_center) with easeinbottom:
 
         offset (100,250)
     return
 
 label Emma_HJ_Reset:
-    if not renpy.showing("Emma_HJ_Animation"):
+    if not renpy.showing("Emma_sprite handjob"):
         return
     $ action_speed = 0
     $ EmmaX.arm_pose = 1
-    hide Emma_HJ_Animation with easeoutbottom
+    hide Emma_sprite handjob with easeoutbottom
     call hide_girl(EmmaX)
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
         zoom 1.7 offset (-50,200)
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
         ease 1 zoom 1.5 offset (-150,50)
         pause .5
         ease .5 zoom 1 offset (0,0)
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
     return
@@ -4645,7 +4645,7 @@ image Emma_FJ_Chair:
     contains:
         ConditionSwitch(
 
-            "not renpy.showing('Emma_FJ_Animation')", Null(),
+            "not renpy.showing('Emma_sprite footjob')", Null(),
             "True", "images/EmmaSprite/EmmaSprite_Chair.png"
             )
         anchor (0.6, 0.05)
@@ -4659,7 +4659,7 @@ image Emma_FJ_Mask:
         zoom 0.75
         pos (200,0)
 
-image Emma_FJ_Animation:
+image Emma_sprite footjob:
 
     contains:
 
@@ -4693,7 +4693,7 @@ image Emma_FJ_Animation:
         pos (160,400)
     contains:
 
-        AlphaMask("Emma_sprite", "Emma_FJ_Mask")
+        AlphaMask("Emma_sprite standing", "Emma_FJ_Mask")
     contains:
 
 
@@ -5144,7 +5144,7 @@ label Emma_FJ_Launch(Line=primary_action):
         call Emma_Sex_Launch ("footjob")
         return
 
-    if renpy.showing("Emma_FJ_Animation"):
+    if renpy.showing("Emma_sprite footjob"):
         return
     call hide_girl(EmmaX)
     show Emma_FJ_Chair zorder 10:
@@ -5152,10 +5152,10 @@ label Emma_FJ_Launch(Line=primary_action):
         yoffset 170
         alpha 1
         ease .5 xpos 590
-    show Emma_FJ_Animation zorder 150:
+    show Emma_sprite footjob zorder 150:
         alpha 0
         pos (950,200)
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
         ease 1 zoom .8 xpos 580 yoffset 150
     pause 1
@@ -5163,35 +5163,35 @@ label Emma_FJ_Launch(Line=primary_action):
     show Emma_FJ_Chair zorder 10:
         alpha 1
         xpos 590
-    show Emma_sprite zorder EmmaX.sprite_layer:
+    show Emma_sprite standing zorder EmmaX.sprite_layer:
         alpha 0
     $ action_speed = 0
-    show Emma_FJ_Animation zorder 150:
+    show Emma_sprite footjob zorder 150:
         ease .5 alpha 1
     pause 0.5
-    show Emma_FJ_Animation zorder 150:
+    show Emma_sprite footjob zorder 150:
         alpha 1
     return
 
 label Emma_FJ_Reset:
-    if renpy.showing("Emma_Doggy_Animation"):
+    if renpy.showing("Emma_sprite doggy"):
         call Emma_Doggy_Reset
         return
 
-    if not renpy.showing("Emma_FJ_Animation"):
+    if not renpy.showing("Emma_sprite footjob"):
         return
     call hide_girl(EmmaX)
     $ Player.sprite = 0
 
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         zoom .8 xpos 580 yoffset 150
-    show Emma_sprite zorder EmmaX.sprite_layer:
+    show Emma_sprite standing zorder EmmaX.sprite_layer:
         alpha 1
         ease .5 zoom 1 xpos EmmaX.sprite_location yoffset 0 alpha 1
     pause .5
 
     hide Emma_FJ_Chair zorder 10
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
         zoom 1 offset (0,0) xpos EmmaX.sprite_location
 
@@ -5244,14 +5244,14 @@ label Emma_FJ_Reset:
 image Emma_At_Desk:
     contains:
         subpixel True
-        "Emma_sprite"
+        "Emma_sprite standing"
         zoom 0.29
         pos (450,190)
 
 image Emma_At_Podium:
     contains:
         subpixel True
-        "Emma_sprite"
+        "Emma_sprite standing"
         zoom 0.29
         pos (670,180)
 
@@ -5259,7 +5259,7 @@ image Emma_At_Podium:
 image Emma_Behind_Podium:
     contains:
         subpixel True
-        "Emma_sprite"
+        "Emma_sprite standing"
         zoom 0.29
         pos (640,180)
         block:
@@ -5275,18 +5275,18 @@ label Emma_Kissing_Launch(T=primary_action, Set=1):
     call hide_girl(EmmaX)
     $ primary_action = T
     $ EmmaX.pose = "kiss" if Set else EmmaX.pose
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location)
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(stage_center):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location)
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(stage_center):
         ease 0.5 offset (0,0) zoom 2 alpha 1
     return
 
 label Emma_Kissing_Smooch:
     $ EmmaX.change_face("kiss")
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(stage_center):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos EmmaX.sprite_location zoom 1
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         zoom 1
     $ EmmaX.change_face("_sexy")
     return
@@ -5295,7 +5295,7 @@ label Emma_Breasts_Launch(T=primary_action, Set=1):
     call hide_girl(EmmaX)
     $ primary_action = T
     $ EmmaX.pose = "breasts" if Set else EmmaX.pose
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 2 alpha 1
     return
@@ -5304,7 +5304,7 @@ label Emma_Middle_Launch(T=primary_action, Set=1):
     call hide_girl(EmmaX)
     $ primary_action = T
     $ EmmaX.pose = "middle" if Set else EmmaX.pose
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
 
         ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1
     return
@@ -5313,7 +5313,7 @@ label Emma_Pussy_Launch(T=primary_action, Set=1):
     call hide_girl(EmmaX)
     $ primary_action = T
     $ EmmaX.pose = "pussy" if Set else EmmaX.pose
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         ease 0.5 pos (700,-400) offset (0,0) zoom 2 alpha 1
     return
 
@@ -5321,9 +5321,9 @@ label Emma_Pos_Reset(T=0, Set=0):
     if EmmaX.location != bg_current:
         return
     call hide_girl(EmmaX)
-    show Emma_sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
+    show Emma_sprite standing zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         ease .5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
-    show Emma_sprite zorder EmmaX.sprite_layer:
+    show Emma_sprite standing zorder EmmaX.sprite_layer:
         offset (0,0)
         anchor (0.5, 0.0)
         zoom 1

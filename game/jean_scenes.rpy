@@ -354,10 +354,10 @@ label JeanMeet:
     ". . ."
     hide JeanMFGrey with easeoutleft
     $ EmmaX.change_face("_angry",1,eyes="_leftside")
-    show Emma_sprite zorder 25 at sprite_location(-100)
-    show Emma_sprite zorder 25 at sprite_location(500) with easeinleft
+    show Emma_sprite standing zorder 25 at sprite_location(-100)
+    show Emma_sprite standing zorder 25 at sprite_location(500) with easeinleft
     call shift_focus (EmmaX)
-    ch_e "I mean, that was Jean mother fucking Grey."
+    ch_e "I mean, that was Jean_sprite mother fucking Grey."
     $ JeanX.name = "Jean"
     pause .1
     ch_e "She can be. . . a bit much."
@@ -379,7 +379,7 @@ label JeanMeet:
     ch_e "Anyway, I was just passing through."
     $ EmmaX.change_face("_angry",1,eyes="_side")
     ch_e "Do try to avoid that relentless black hole of drama. . ."
-    show Emma_sprite at sprite_location(-100) with easeinleft
+    show Emma_sprite standing at sprite_location(-100) with easeinleft
     pause 0.2
     call remove_girl (EmmaX)
     call shift_focus (RogueX)

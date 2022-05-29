@@ -145,9 +145,9 @@ label StormMeet:
     $ StormX.change_outfit("nude")
     $ StormX.change_face("_normal",eyes="_side")
 
-    show Storm_Sprite at sprite_location(StormX.sprite_location)
+    show Storm_sprite standing at sprite_location(StormX.sprite_location)
 
-    show expression AlphaMask("SilhouetteBase", At("Storm_Sprite", sprite_location(StormX.sprite_location))) as mask:
+    show expression AlphaMask("SilhouetteBase", At("Storm_sprite standing", sprite_location(StormX.sprite_location))) as mask:
         offset (347,65)
 
 
@@ -658,7 +658,7 @@ label Storm_Peter:
     ch_s "[Player.name]!"
     $ StormX.change_face("_angry")
     ch_s "Yes, I know your name is not \"Peter Parker.\""
-    ch_s "Emma told me when I could not find your name on the roster."
+    ch_s "Emma_sprite told me when I could not find your name on the roster."
     $ StormX.change_stat("love", 50, -5)
     $ StormX.change_stat("love", 60, -20)
     ch_s "I cannot believe you would make a fool of me like that."
@@ -693,7 +693,9 @@ label Storm_Teacher_Caught(Girl=0):
     call checkout(total = True)
 
     $ Girl.change_face("_bemused", 2, eyes="_side")
-    call AllReset (Girl)
+
+    call reset_position(Girl)
+
     if approval_check(Girl, 700, "I"):
         $ Girl.change_face("_bemused", 1)
         "[Girl.name] shrugs and returns to her seat."
@@ -793,7 +795,7 @@ label Storm_Hairtalk:
                 $ StormX.change_stat("inhibition", 80, 2)
                 $ StormX.top_pulled_up = 1
                 $ StormX.upskirt = 1
-                pause 1      
+                pause 1
                 $ StormX.top_pulled_up = 0
                 $ StormX.upskirt = 0
                 ch_s ". . ."
@@ -1600,7 +1602,7 @@ label Storm_Love_Redux:
         "I love you too!":
             $ StormX.change_stat("love", 200, 10)
             $ StormX.eyes = "_surprised"
-            pause .2                    
+            pause .2
             $ StormX.eyes = "_normal"
             ch_s "I am glad to hear that."
         "Cool.":
@@ -1950,7 +1952,7 @@ label Storm_Sub_Asked:
     $ StormX.daily_history.append("asked sub")
     if line == "rude":
 
-        hide Storm_Sprite with easeoutright
+        hide Storm_sprite with easeoutright
         call remove_girl (StormX)
         $ StormX.recent_history.append("_angry")
         $ renpy.pop_call()
@@ -2244,14 +2246,14 @@ label Storm_Poolnight:
     $ StormX.recent_history.append("poolnight")
     if "sexfriend" not in StormX.player_petnames:
 
-        show Storm_Sprite:
+        show Storm_sprite standing:
             yoffset 200
         "As you enter the pool area, it seems fairly empty, aside from a small ripple across the pool's surface."
-        show Storm_Sprite:
+        show Storm_sprite standing:
             ease 1 yoffset 0
         pause 1
-        show Storm_Sprite zorder 50 at Pool_Bob(500)
-        "Storm rises from the pool."
+        show Storm_sprite standing zorder 50 at Pool_Bob(500)
+        "Storm_sprite rises from the pool."
         ch_s "Ah, I was hoping you would join me, [StormX.player_petname]. . ."
         if StormX not in Player.Harem and StormX.player_petname not in ("sir","master"):
             ch_s "I know that this is a no-strings attached situation. . ."
@@ -2290,7 +2292,7 @@ label Storm_Poolnight:
             "You head back to your room."
             $ bg_current = "bg_player"
             jump Misplaced
-    hide Storm_Sprite
+    hide Storm_sprite
     hide FullPool
     call set_the_scene(check_if_dressed = False)
     $ StormX.change_face("_sly", 1,eyes="_leftside")
