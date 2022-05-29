@@ -2,13 +2,21 @@
 errors listed below, and try again.
 
 
-File "game/girl_animations.rpy", line 238: reached end of line when expecting ':'.
-    if True
-           ^
+File "game/cheats.rpy", line 580: expected statement.
+    f Girl.eyes == "_psychic":
+          ^
 
-File "game/girl_animations.rpy", line 240: expected statement.
+File "game/cheats.rpy", line 582: expected statement.
+    else:
+        ^
+
+File "game/cheats.rpy", line 585: expected statement.
+    f Girl.eyes == "_white":
+          ^
+
+File "game/cheats.rpy", line 587: expected statement.
     else:
         ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Sun May 29 01:28:41 2022
+Sun May 29 04:18:27 2022

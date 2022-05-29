@@ -176,7 +176,6 @@ label wardrobe_editor(Girl):
                 $ Girl.change_outfit("costume")
             "Domme outfit" if Girl == EmmaX:
                 $ Girl.arm_pose = 2
-
                 $ Girl.change_outfit("domme_outfit")
             "Nude":
                 $ Girl.change_outfit("nude")
@@ -201,6 +200,10 @@ label wardrobe_editor(Girl):
                             $ Girl.outfit["dress"] = "_red_dress"
                         "Add Chinese dress" if Girl == KittyX:
                             $ Girl.outfit["dress"] = "_chinese"
+                        "Add sci-fi suit" if Girl == JeanX:
+                            $ Girl.arm_pose = 1
+                            $ Girl.outfit["bottom"] = ""
+                            $ Girl.outfit["dress"] = "_sci_fi"
                         "Back":
                             jump wardrobe_menu
             "Top":
@@ -428,9 +431,12 @@ label wardrobe_editor(Girl):
                             call face_editor(Girl)
                         "Toggle arm pose":
                             if Girl.arm_pose == 1:
+                                if Girl == JeanX and Girl.outfit["dress"] == "_sci_fi":
+                                    $ Girl.outfit["dress"] = ""
+
                                 $ Girl.arm_pose = 2
                             else:
-                                if Girl == EmmaX and Girl.outfit["dress"] == "_domme":
+                                if Girl == EmmaX and Girl.outfit["dress"] == "_dommef":
                                     $ Girl.outfit["dress"] = ""
                                 elif Girl == EmmaX and Girl.outfit["gloves"] == "_spiked_bracelets":
                                     $ Girl.outfit["gloves"] = ""
@@ -551,11 +557,6 @@ label wardrobe_editor(Girl):
                                 $ Girl.outfit["suspenders"] = ""
                             else:
                                 $ Girl.outfit["suspenders"] = "_suspenders"
-                        "Toggle claws" if Girl == LauraX:
-                            if Girl.claws:
-                                $ Girl.claws = False
-                            else:
-                                $ Girl.claws = True
                         "Toggle Raven cloak" if Girl == RogueX:
                             if Girl.outfit["cloak"] == "_raven_cloak":
                                 $ Girl.outfit["back_outer_accessory"] = ""
@@ -568,6 +569,23 @@ label wardrobe_editor(Girl):
                                 $ Girl.diamond = False
                             else:
                                 $ Girl.diamond = True
+                        "Toggle claws" if Girl == LauraX:
+                            $ Girl.arm_pose = 2
+
+                            if Girl.claws:
+                                $ Girl.claws = False
+                            else:
+                                $ Girl.claws = True
+                        "Toggle psychic" if Girl == JeanX:
+                            if Girl.eyes == "_psychic":
+                                $ Girl.eyes = "_normal"
+                            else:
+                                $ Girl.eyes = "_psychic"
+                        "Toggle powers" if Girl == StormX:
+                            if Girl.eyes == "_white":
+                                $ Girl.eyes = "_normal"
+                            else:
+                                $ Girl.eyes = "_white"
                         "Spunk locations":
                             menu:
                                 "Mouth":

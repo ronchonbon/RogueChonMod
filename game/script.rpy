@@ -181,30 +181,45 @@ label start:
     scene
 
     $ RogueX.location = bg_current
-    $ RogueX.sprite_location = 0.2
+    $ RogueX.sprite_location = 0.1
     $ active_Girls.append(RogueX)
 
     $ KittyX.location = bg_current
-    $ KittyX.sprite_location = 0.3
+    $ KittyX.sprite_location = 0.25
     $ active_Girls.append(KittyX)
 
     $ EmmaX.location = bg_current
-    $ EmmaX.sprite_location = 0.4
+    $ EmmaX.sprite_location = 0.375
     $ active_Girls.append(EmmaX)
 
+    $ LauraX.location = bg_current
+    $ LauraX.sprite_location = 0.5
+    $ active_Girls.append(LauraX)
+
     $ JeanX.location = bg_current
-    $ JeanX.sprite_location = 0.6
+    $ JeanX.sprite_location = 0.625
     $ active_Girls.append(JeanX)
+
+    $ StormX.location = bg_current
+    $ StormX.sprite_location = 0.75
+    $ active_Girls.append(StormX)
+
+    $ JubesX.location = bg_current
+    $ JubesX.sprite_location = 0.9
+    $ active_Girls.append(JubesX)
 
     show Rogue_sprite standing at sprite_location(RogueX.sprite_location)
     show Kitty_sprite standing at sprite_location(KittyX.sprite_location)
     show Emma_sprite standing at sprite_location(EmmaX.sprite_location)
-    # show Laura_sprite standing at sprite_location(0.5)
+    show Laura_sprite standing at sprite_location(LauraX.sprite_location)
     show Jean_sprite standing at sprite_location(JeanX.sprite_location)
-    # show Storm_sprite standing at sprite_location(0.7)
-    # show Jubes_sprite standing at sprite_location(0.8)
+    show Storm_sprite standing at sprite_location(StormX.sprite_location)
+    show Jubes_sprite standing at sprite_location(JubesX.sprite_location)
 
     ""
+
+    $ focused_Girl = RogueX
+    $ active_Girls = [RogueX]
 
     jump prologue
 

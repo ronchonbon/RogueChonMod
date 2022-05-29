@@ -688,7 +688,7 @@ label remove_girl(Girl, also_hide = True, hold = False):
                 $ Player.drain_word("locked",0,0,1)
 
         if also_hide:
-            call hide_girl(Girls[0], True)
+            call hide_girl(Girls[0])
 
         $ Girls.remove(Girls[0])
 
@@ -710,7 +710,7 @@ label change_out_of_gym_clothes(Girls = []):
 
     return
 
-label hide_girl(Girl, hide_sprite = False):
+label hide_girl(Girl):
     if Girl == RogueX:
         hide Rogue
     elif Girl == KittyX:
@@ -1014,7 +1014,7 @@ label event_calls(event_Girls=[]):
 
 label display_girl(Girl, check_if_dressed = True, trigger_reset = True, x_position = None, y_position = 0):
     if Girl not in Party and Girl.location != bg_current:
-        call hide_girl(Girl, hide_sprite = True)
+        call hide_girl(Girl)
 
         $ Girl.change_outfit(outfit_changed = 1)
 
@@ -1049,8 +1049,6 @@ label display_girl(Girl, check_if_dressed = True, trigger_reset = True, x_positi
         $ Girl.sprite_location = x_position
     else:
         $ x_position = Girl.sprite_location
-
-    call hide_girl(Girl)
 
     $ Girl.location = bg_current
 

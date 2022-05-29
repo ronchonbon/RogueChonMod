@@ -125,13 +125,13 @@ layeredimage Jean_sprite standing:
         "images/Jean_standing/Jean_standing_bottom[JeanX.outfit[bottom]].png"
 
     # if JeanX.outfit["dress"] and JeanX.top_pulled_up and JeanX.upskirt:
-    #     "images/Jean_standing/Jean_standing_dress[JeanX.outfit[dress]]_both.png"
+    #     "images/Jean_standing/Jean_standing_dress[JeanX.outfit[dress]][JeanX.arm_pose]_both.png"
     # elif JeanX.outfit["dress"] and JeanX.top_pulled_up:
-    #     "images/Jean_standing/Jean_standing_dress[JeanX.outfit[dress]]_top.png"
+    #     "images/Jean_standing/Jean_standing_dress[JeanX.outfit[dress]][JeanX.arm_pose]_top.png"
     # elif JeanX.outfit["dress"] and JeanX.upskirt:
-    #     "images/Jean_standing/Jean_standing_dress[JeanX.outfit[dress]]_bottom.png"
-    # elif JeanX.outfit["dress"]:
-    #     "images/Jean_standing/Jean_standing_dress[JeanX.outfit[dress]].png"
+    #     "images/Jean_standing/Jean_standing_dress[JeanX.outfit[dress]][JeanX.arm_pose]_bottom.png"
+    if JeanX.outfit["dress"]:
+        "images/Jean_standing/Jean_standing_dress[JeanX.outfit[dress]][JeanX.arm_pose].png"
 
     # if JeanX.outfit["loincloth"]:
     #     "images/Jean_standing/Jean_standing_loincloth[JeanX.outfit[loincloth]].png"

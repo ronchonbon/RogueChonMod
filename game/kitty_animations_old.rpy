@@ -1255,74 +1255,6 @@ transform Kitty_sex_body_FootAnimStaticA():
 
 
 
-label Kitty_sex_Launch(Line=primary_action):
-    $ girl_offhand_action = 0 if girl_offhand_action == "handjob" else girl_offhand_action
-
-
-
-
-
-    $ Player.sprite = 1
-    $ Line = "solo" if not Line else Line
-    if Line == "sex":
-        $ Player.cock_position = "in"
-        if offhand_action in ("fondle pussy","dildo pussy","lick pussy"):
-            $ offhand_action = 0
-    elif Line == "anal":
-        $ Player.cock_position = "anal"
-        if offhand_action in ("insert ass","dildo anal","lick ass"):
-            $ offhand_action = 0
-    elif Line == "hotdog":
-        $ Player.cock_position = "out"
-    elif Line == "footjob":
-        $ show_feet = 1
-        $ Player.cock_position = "footjob"
-    elif Line == "massage":
-        $ Player.sprite = 0
-        $ Player.cock_position = 0
-    else:
-        $ Player.sprite = 0
-        $ Player.cock_position = "out"
-        $ action_speed = 0
-    $ primary_action = Line
-
-    if KittyX.pose == "doggy":
-        call Kitty_Doggy_Launch (Line)
-        return
-    if renpy.showing("Kitty_sexSprite"):
-        return
-    $ action_speed = 0
-    call hide_girl(KittyX, hide_sprite = True)
-    show Kitty_sexSprite zorder 150
-
-
-
-    with dissolve
-    return
-
-label Kitty_Sex_Reset:
-    if renpy.showing("Kitty_sprite doggy"):
-        call Kitty_Doggy_Reset
-        return
-    if not renpy.showing("Kitty_sexSprite"):
-        return
-    $ KittyX.arm_pose = 2
-    hide Kitty_sexSprite
-    call hide_girl(KittyX)
-
-    show Kitty_sprite standing zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
-        alpha 1
-        zoom 1 offset (0,0)
-        anchor (0.5, 0.0)
-    with dissolve
-    $ action_speed = 0
-    return
-
-
-
-
-
-
 
 
 
@@ -2705,39 +2637,6 @@ image Kitty_Doggy_Feet2:
             ease .6 ypos 110
             ease .3 ypos -20
             repeat
-
-
-
-
-label Kitty_Doggy_Launch(Line=primary_action):
-    if renpy.showing("Kitty_sprite doggy"):
-        return
-    $ action_speed = 0
-    call hide_girl(KittyX, hide_sprite = True)
-    show Kitty_sprite doggy zorder 150 at sprite_location(stage_center+50)
-    with dissolve
-    return
-
-label Kitty_Doggy_Reset:
-    if not renpy.showing("Kitty_sprite doggy"):
-        return
-
-    $ KittyX.arm_pose = 2
-    $ KittyX.SpriteVer = 0
-    hide Kitty_sprite doggy
-    call hide_girl(KittyX)
-    show Kitty_sprite standing zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
-        alpha 1
-        zoom 1
-        offset (0,0)
-        anchor (0.6, 0.0)
-    with dissolve
-    $ action_speed = 0
-    return
-
-
-
-
 
 
 
@@ -4265,67 +4164,6 @@ label Kitty_HJ_Reset:
         zoom 1 offset (0,0)
     return
 
-
-label Kitty_Kissing_Launch(T=primary_action, Set=1):
-    call hide_girl(KittyX)
-    $ primary_action = T
-    $ KittyX.pose = "kiss" if Set else KittyX.pose
-    show Kitty_sprite standing zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location)
-    show Kitty_sprite standing at sprite_location(stage_center):
-        ease 0.5 offset (0,0) zoom 2 alpha 1
-    return
-
-label Kitty_Kissing_Smooch:
-    $ KittyX.change_face("kiss")
-    show Kitty_sprite standing zorder KittyX.sprite_layer at sprite_location(stage_center):
-        ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
-        pause 1
-        ease 0.5 xpos KittyX.sprite_location zoom 1
-    $ KittyX.change_face("_sexy")
-    return
-
-label Kitty_Breasts_Launch(T=primary_action, Set=1):
-    call hide_girl(KittyX)
-    $ primary_action = T
-    $ KittyX.pose = "breasts" if Set else KittyX.pose
-    show Kitty_sprite standing zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
-        ease 0.5 pos (700,-50) offset (0,0) zoom 2 alpha 1
-    return
-
-label Kitty_Middle_Launch(T=primary_action, Set=1):
-    call hide_girl(KittyX)
-    $ primary_action = T
-    $ KittyX.pose = "middle" if Set else KittyX.pose
-    show Kitty_sprite standing zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
-
-        ease 0.5 pos (700,-50) offset (0,0) zoom 1.5 alpha 1
-    return
-
-label Kitty_Pussy_Launch(T=primary_action, Set=1):
-    call hide_girl(KittyX)
-    $ primary_action = T
-    $ KittyX.pose = "pussy" if Set else KittyX.pose
-    show Kitty_sprite standing zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
-        ease 0.5 pos (700,-400) offset (0,0) zoom 2 alpha 1
-    return
-
-label Kitty_Pos_Reset(T=0, Set=0):
-    if KittyX.location != bg_current:
-        return
-    call hide_girl(KittyX)
-    show Kitty_sprite standing zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
-        ease .5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
-    show Kitty_sprite standing zorder KittyX.sprite_layer:
-        offset (0,0)
-        anchor (0.5, 0.0)
-        zoom 1
-        xzoom 1
-        yzoom 1
-        alpha 1
-        pos (KittyX.sprite_location,50)
-    $ KittyX.pose = "full" if Set else 0
-    $ primary_action = T
-    return
 
 label Kitty_ThreewayBreasts_Launch:
     show Kitty_sprite standing zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):

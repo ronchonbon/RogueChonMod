@@ -145,8 +145,8 @@ layeredimage Emma_sprite standing:
     # if EmmaX.outfit["rope"]:
     #     "images/Emma_standing/Emma_standing_rope[EmmaX.outfit[rope]].png"
 
-    if EmmaX.top_pulled_up and EmmaX.outfit["jacket"] == "_jacket":
-        "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose]_up.png"
+    if EmmaX.outfit["sleeves"] and EmmaX.top_pulled_up:
+        "images/Emma_standing/Emma_standing_sleeves[EmmaX.outfit[sleeves]][EmmaX.arm_pose]_up.png"
 
     if EmmaX.outfit["bra"] and EmmaX.top_pulled_up:
         "images/Emma_standing/Emma_standing_bra[EmmaX.outfit[bra]]_up.png"
@@ -156,11 +156,11 @@ layeredimage Emma_sprite standing:
         "images/Emma_standing/Emma_standing_bra[EmmaX.outfit[bra]].png"
 
     # if EmmaX.outfit["dress"] and EmmaX.top_pulled_up and EmmaX.upskirt:
-    #     "images/Emma_standing/Emma_standing_dress[EmmaX.outfit[dress]]_both.png"
+    #     "images/Emma_standing/Emma_standing_dress[EmmaX.outfit[dress]][EmmaX.arm_pose]_both.png"
     # elif EmmaX.outfit["dress"] and EmmaX.top_pulled_up:
-    #     "images/Emma_standing/Emma_standing_dress[EmmaX.outfit[dress]]_top.png"
+    #     "images/Emma_standing/Emma_standing_dress[EmmaX.outfit[dress]][EmmaX.arm_pose]_top.png"
     # elif EmmaX.outfit["dress"] and EmmaX.upskirt:
-    #     "images/Emma_standing/Emma_standing_dress[EmmaX.outfit[dress]]_bottom.png"
+    #     "images/Emma_standing/Emma_standing_dress[EmmaX.outfit[dress]][EmmaX.arm_pose]_bottom.png"
     if EmmaX.outfit["dress"]:
         "images/Emma_standing/Emma_standing_dress[EmmaX.outfit[dress]][EmmaX.arm_pose].png"
 
@@ -200,9 +200,6 @@ layeredimage Emma_sprite standing:
     # always:
     #     "images/Emma_standing/Emma_standing_hand[EmmaX.arm_pose]_right.png"
 
-    # if EmmaX.outfit["sleeves"] and not renpy.showing("Emma_sprite handjob") and EmmaX.arm_pose == 1:
-    #     "images/Emma_standing/Emma_standing_sleeves[EmmaX.outfit[sleeves]][EmmaX.arm_pose].png"
-
     # if (EmmaX.outfit["suspenders"] and EmmaX.outfit["bottom"] and not EmmaX.upskirt and EmmaX.top_pulled_up) or EmmaX.outfit["suspenders"] == "_suspenders2":
     #     "images/Emma_standing/Emma_standing_suspenders[EmmaX.outfit[suspenders]][EmmaX.arm_pose]_up.png"
     # elif EmmaX.outfit["suspenders"] and EmmaX.outfit["bottom"] and not EmmaX.upskirt:
@@ -211,8 +208,18 @@ layeredimage Emma_sprite standing:
     if EmmaX.outfit["scarf"] == "_dress" and EmmaX.upskirt:
         "images/Emma_standing/Emma_standing_scarf[EmmaX.outfit[scarf]][EmmaX.arm_pose].png"
 
-    # if EmmaX.outfit["jacket"]:
-    #     "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]].png"
+    if EmmaX.outfit["jacket"] and EmmaX.top_pulled_up and EmmaX.outfit["bra"] in ["_corset", "_lace_bra", "_sports_bra", "_bikini_top"]:
+        "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose]_up_up.png"
+    if EmmaX.outfit["jacket"] and EmmaX.top_pulled_up and EmmaX.arm_pose == 2:
+        "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose]_down_up.png"
+    elif EmmaX.outfit["jacket"] and EmmaX.top_pulled_up:
+        "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose]_up.png"
+    elif EmmaX.outfit["jacket"] and EmmaX.outfit["bra"] in ["_corset", "_lace_bra", "_sports_bra", "_bikini_top"]:
+        "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose]_up.png"
+    elif EmmaX.outfit["jacket"] and EmmaX.arm_pose == 2:
+        "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose]_down.png"
+    elif EmmaX.outfit["jacket"]:
+        "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose].png"
 
     # if EmmaX.outfit["cloak"]:
     #     "images/Emma_standing/Emma_standing_cloak[EmmaX.outfit[cloak]].png"

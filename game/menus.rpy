@@ -27,7 +27,7 @@ label enter_main_sex_menu:
     $ offhand_action = None
     $ girl_offhand_action = None
 
-    call hide_girl(focused_Girl, hide_sprite = True)
+    call hide_girl(focused_Girl)
 
     $ focused_Girl.arm_pose = 1
 
