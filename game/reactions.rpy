@@ -362,14 +362,13 @@ label girl_initiated_action(Girl, action):
 
         if (Girl.outfit["bottom"] and not Girl.upskirt) or (Girl.outfit["underwear"] and not Girl.underwear_pulled_down):
             if approval_check(Girl, 1250, taboo_modifier = 1) or (Girl.seen_pussy and approval_check(Girl, 500) and not taboo):
-                $ Girl.upskirt = 1
-                $ Girl.underwear_pulled_down = 1
+                call expose_bottom(Girl)
 
                 $ line = 0
 
                 if Girl.wearing_skirt:
                     $ line = Girl.name + " hikes up her skirt"
-                elif Girl.bottom_number() > 6:
+                elif Girl.outfit["bottom"]:
                     $ line = Girl.name + " pulls down her " + Girl.outfit["bottom"]
                 else:
                     $ line = 0
@@ -406,18 +405,18 @@ label girl_initiated_action(Girl, action):
         if Girl.wearing_skirt:
             "[Girl.name] grabs her dildo, hiking up her skirt as she does."
 
-            $ Girl.upskirt = 1
-        elif Girl.bottom_number() > 6:
+            $ Girl.upskirt = True
+        elif Girl.wearing_pants:
             "[Girl.name] grabs her dildo, pulling down her pants as she does."
 
-            $ Girl.outfit["bottom"] = 0
+            $ Girl.outfit["bottom"] = ""
         else:
             if action == "dildo_pussy":
                 "[Girl.name] grabs her dildo, rubbing it suggestively against her crotch."
             elif action == "dildo_ass":
                 "[Girl.name] grabs her dildo, rubbing is suggestively against her ass."
 
-        $ Girl.seen_underwear = 1
+        $ Girl.seen_underwear = True
 
         if action == "dildo_pussy":
             "She slides the tip along her pussy and seems to want you to insert it."
@@ -431,23 +430,26 @@ label girl_initiated_action(Girl, action):
                     "[Girl.name] turns around, sliding her skirt up as she does so.",
                     "[Girl.name] pushes you back and climbs on top of you, sliding her skirt up as she does so.",
                     "[Girl.name] lays back, sliding her skirt up as she does so."])
+
                 "[line]"
 
-                $ Girl.upskirt = 1
-            elif Girl.bottom_number() > 6:
+                $ Girl.upskirt = True
+            elif Girl.wearing_pants:
                 $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock, sliding her [Girl.outfit['legs']] down as she does so.",
                     "[Girl.name] rolls back and pulls you against her, sliding her [Girl.outfit['legs']] off as she does so.",
                     "[Girl.name] pushes you down and climbs on top of you, sliding her [Girl.outfit['legs']] down as she does so.",
                     "[Girl.name] turns around, sliding her [Girl.outfit['legs']] down as she does so.",
                     "[Girl.name] lays back, sliding her [Girl.outfit['legs']] down as she does so."])
+
                 "[line]"
 
-                $ Girl.upskirt = 1
-            elif Girl.bottom_number() == 6:
+                $ Girl.bottom_pulled_down
+            elif Girl.wearing_shorts:
                 $ line = renpy.random.choice(["[Girl.name] rolls onto her back and pulls you against her, sliding her shorts off as she does so."])
+
                 "[line]"
 
-                $ Girl.upskirt = 1
+                $ Girl.bottom_pulled_down
             else:
                 $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock.",
                     "[Girl.name] rolls back and pulls you toward her.",
@@ -455,7 +457,7 @@ label girl_initiated_action(Girl, action):
                     "[Girl.name] turns around and pulls you toward her."])
                 "[line]"
 
-            $ Girl.seen_underwear = 1
+            $ Girl.seen_underwear = True
 
             if action == "sex":
                 $ line = renpy.random.choice(["She slides the tip along her pussy and seems to want you to insert it."])

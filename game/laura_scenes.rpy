@@ -1128,7 +1128,9 @@ label Laura_Love_End:
             $ LauraX.change_stat("inhibition", 30, 20)
             $ LauraX.change_stat("obedience", 70, 10)
             ch_l "Hmm. . ."
-            call Laura_SexAct ("sex")
+            call shift_focus(LauraX)
+            $ primary_action = "sex"
+            call before_action
         "I have something else in mind. . .[[choose another activity]":
             $ LauraX.brows = "_confused"
             $ LauraX.change_stat("obedience", 70, 25)

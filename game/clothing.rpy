@@ -445,7 +445,7 @@ label quick_outfit_check(Girl, outfit_to_check = 3):
         $ count = 5
     elif outfit_holder["bra"]:
         $ count = 10
-    elif outfit_holder["front_outer_accessory"] == "_suspenders" or outfit_holder["front_outer_accessory"] == "_suspenders2":
+    elif outfit_holder["suspenders"] == "_suspenders" or outfit_holder["suspenders"] == "_suspenders2":
         $ count = 5
     else:
         $ count = 0
@@ -459,12 +459,12 @@ label quick_outfit_check(Girl, outfit_to_check = 3):
             pass
         else:
             $ count += 10
-    elif outfit_holder["top"] in ["_jacket", "_dress", "_pink_top"] or outfit_holder["front_outer_accessory"] == "_jacket":
+    elif outfit_holder["top"] in ["_jacket", "_dress", "_pink_top"] or outfit_holder["jacket"] == "_jacket":
         $ count += 15
-    elif outfit_holder["top"] or outfit_holder["front_outer_accessory"] == "_shut_jacket":
+    elif outfit_holder["top"] or outfit_holder["jacket"] == "_shut_jacket":
         $ count += 20
 
-    if Girl.outfit["front_inner_accessory"] and count <= 10:
+    if Girl.outfit["piercings"] and count <= 10:
         $ count = -5
 
     $ count = 20 if count >= 20 else count
@@ -475,7 +475,7 @@ label quick_outfit_check(Girl, outfit_to_check = 3):
         $ count = 30
     elif outfit_holder["bottom"] in ["_blue_skirt", "_skirt", "_cosplay_skirt"]:
         $ count = 20
-    elif outfit_holder["bottom"] or outfit_holder["front_outer_accessory"] == "_shut_jacket":
+    elif outfit_holder["bottom"] or outfit_holder["jacket"] == "_shut_jacket":
         $ count = 25
     elif outfit_holder["underwear"] == "_shorts":
         $ count = 25
@@ -885,7 +885,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
 
 
-    if Girl.outfit["front_inner_accessory"] and Count <= 10:
+    if Girl.outfit["piercings"] and Count <= 10:
         $ Count = -5
 
     $ Girl.change_face("_sexy", 0)
@@ -1027,10 +1027,10 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
         if Girl.bottom_number() > 5:
 
             $ Count = 25
-        elif Girl.bottom_number() == 5:
+        elif Girl.wearing_skirt:
 
             $ Count = 20
-        elif Girl.underwear_number() >= 8:
+        elif Girl.outfit["underwear"] in ["_sports_panties", "_shorts"]:
 
             $ Count = 25
         elif Girl.underwear_number() >= 6:
@@ -1044,7 +1044,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             $ Count = 5
 
 
-        if Girl.hose_number() >= 10:
+        if Girl.outfit["hose"] == "_tights":
 
             $ Count = 25 if Count < 25 else Count
 
@@ -1061,11 +1061,11 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
         pass
     elif Girl == RogueX:
         if Count >= 20:
-            if Girl.bottom_number() > 6:
+            if Girl.wearing_pants:
                 ch_r "Oh, I think these pants will work fine."
-            elif Girl.bottom_number() == 5:
+            elif Girl.wearing_skirt:
                 ch_r "Oh, I think this skirt will work fine."
-            elif Girl.hose_number() >= 10:
+            elif Girl.outfit["hose"] == "_tights":
                 ch_r "Oh, these [Girl.outfit['hose']] will work."
             elif Girl.outfit["underwear"] == "_shorts":
                 ch_r "Oh, I think these shorts will work fine."
@@ -1092,7 +1092,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_k "and these pants look cute on me."
             elif Girl.outfit["bottom"] == "_shorts":
                 ch_k "and these are cute shorts."
-            elif Girl.hose_number() >= 10:
+            elif Girl.outfit["hose"] == "_tights":
                 ch_k "I guess these [Girl.outfit['hose']] will work fine."
             elif Girl.outfit["top"] == "_towel":
                 ch_k "The towel's an odd choice. . ."
@@ -1117,7 +1117,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_e "and these pants always did suit me."
             elif Girl.bottom_number() >= 5:
                 ch_e "and this skirt always did suit me."
-            elif Girl.hose_number() >= 10:
+            elif Girl.outfit["hose"] == "_tights":
                 ch_e "I guess these [Girl.outfit['hose']] will work fine."
             elif Girl.outfit["top"] == "_towel":
                 ch_e "I'm unsure about wearing a towel out, [Girl.player_petname]. . ."
@@ -1144,7 +1144,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_l "and these pants work."
             elif Girl.bottom_number() >= 5:
                 ch_l "and this skirt works."
-            elif Girl.hose_number() >= 10:
+            elif Girl.outfit["hose"] == "_tights":
                 ch_l "and these [Girl.outfit['hose']] will work fine."
             elif Girl.outfit["top"] == "_towel":
                 ch_l "The towel's an odd choice. . ."
@@ -1169,7 +1169,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_j "I do like these pants. . ."
             elif Girl.bottom_number() >= 5:
                 ch_j "I do like this skirt. . ."
-            elif Girl.hose_number() >= 10:
+            elif Girl.outfit["hose"] == "_tights":
                 ch_j "these [Girl.outfit['hose']] will work fine."
             elif Girl.outfit["top"] == "_towel":
                 ch_j "A towel though? . ."
@@ -1196,7 +1196,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             ch_s "and these pants always did suit me."
         elif Girl.bottom_number() >= 5:
             ch_s "and this skirt always did suit me."
-        elif Girl.hose_number() >= 10:
+        elif Girl.outfit["hose"] == "_tights":
             ch_s "I supposed that these [Girl.outfit['hose']] will work fine."
         elif Girl.outfit["top"] == "_towel":
             ch_s "I'm unsure about wearing a towel out, [Girl.player_petname]. . ."
@@ -1216,13 +1216,13 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             ch_s "I doubt Charles would let me roam the halls in such an exposed state."
     elif Girl == JubesX:
         if Count >= 20:
-            if Girl.bottom_number() > 6:
+            if Girl.wearing_pants:
                 ch_v "and these pants work."
-            elif Girl.bottom_number() >= 6:
+            elif Girl.wearing_pants:
                 ch_v "and these shorts work."
             elif Girl.bottom_number() >= 5:
                 ch_v "and this skirt works."
-            elif Girl.hose_number() >= 10:
+            elif Girl.outfit["hose"] == "_tights":
                 ch_v "and these [Girl.outfit['hose']] will work fine."
             elif Girl.outfit["top"] == "_towel":
                 ch_v "The towel's an odd choice. . ."
@@ -1257,7 +1257,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             ch_p "So would you wear that outside?"
 
         $ Girl.change_face("_sexy", 0)
-        if Girl.bottom_number() > 2:
+        if Girl.outfit["bottom"]:
             pass
         elif Girl == StormX and StormX in Rules:
             pass
@@ -1272,7 +1272,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             pass
         elif Girl == StormX and StormX in Rules:
             pass
-        elif Girl.top_number() > 2:
+        elif Girl.outfit["top"]:
             pass
         elif Girl.bra_number() > 2 and (Girl.seen_breasts or approval_check(Girl, 900, taboo_modifier=0)):
             pass

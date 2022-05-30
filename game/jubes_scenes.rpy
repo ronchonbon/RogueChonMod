@@ -1961,7 +1961,9 @@ label Jubes_Love_End:
             $ JubesX.change_stat("inhibition", 30, 20)
             $ JubesX.change_stat("obedience", 70, 10)
             ch_v "Hmm. . ."
-            call Jubes_SexAct ("sex")
+            call shift_focus(JubesX)
+            $ primary_action = "sex"
+            call before_action
         "I have something else in mind. . .[[choose another activity]":
             $ JubesX.brows = "_confused"
             $ JubesX.change_stat("obedience", 70, 25)

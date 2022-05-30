@@ -3589,6 +3589,7 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
     $ girl_offhand_action = "fondle_pussy"
     $ second_girl_primary_action = "fondle_pussy"
     $ Partner = Girl2
-    call expression Girl.tag + "_SexAct" pass ("lesbian")
+    call shift_focus(Girl)
+    call Les_Prep(Girl)
     jump Misplaced
     return

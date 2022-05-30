@@ -120,8 +120,8 @@ image Kitty_sex_body = LiveComposite(
 
         (0,0), ConditionSwitch(
 
-            "KittyX.outfit['front_inner_accessory'] == '_barbell'", "images/KittySex/Kitty_sex_body_Barbell.png",
-            "KittyX.outfit['front_inner_accessory'] == '_ring'", "images/KittySex/Kitty_sex_body_Ring.png",
+            "KittyX.outfit['piercings'] == '_barbell'", "images/KittySex/Kitty_sex_body_Barbell.png",
+            "KittyX.outfit['piercings'] == '_ring'", "images/KittySex/Kitty_sex_body_Ring.png",
             "True", "images/KittySex/Kitty_sex_body.png",
             ),
         (260,-350), "Kitty_Head_Sex",
@@ -541,14 +541,14 @@ image Kitty_sex_Pussy:
     contains:
 
         ConditionSwitch(
-                "KittyX.outfit['front_inner_accessory'] != '_ring'", Null(),
+                "KittyX.outfit['piercings'] != '_ring'", Null(),
                 "not Player.sprite or Player.cock_position != 'in' or action_speed <= 1", "images/KittySex/Kitty_sex_Pussy_Ring.png",
                 "True", "images/KittySex/Kitty_sex_Pussy_RingF.png",
                 )
     contains:
 
         ConditionSwitch(
-                "KittyX.outfit['front_inner_accessory'] != '_barbell'", Null(),
+                "KittyX.outfit['piercings'] != '_barbell'", Null(),
                 "not Player.sprite or Player.cock_position != 'in' or action_speed <= 1", "images/KittySex/Kitty_sex_Pussy_Barbell.png",
                 "True", "images/KittySex/Kitty_sex_Pussy_BarbellF.png",
                 )
@@ -1618,11 +1618,11 @@ image Kitty_Doggy_Ass:
             "Player.sprite", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo pussy'", Null(),
-            "KittyX.outfit['front_inner_accessory'] == '_barbell'", "images/KittyDoggy/Kitty_Doggy_Pierce_Barbell.png",
-            "KittyX.outfit['front_inner_accessory'] == '_ring' and KittyX.outfit['underwear'] and not KittyX.underwear_pulled_down", "images/KittyDoggy/Kitty_Doggy_Pierce_RingC.png",
-            "KittyX.outfit['front_inner_accessory'] == '_ring' and KittyX.outfit['hose'] == '_pantyhose' and not (KittyX.outfit['underwear'] and KittyX.underwear_pulled_down)", "images/KittyDoggy/Kitty_Doggy_Pierce_RingC.png",
-            "KittyX.outfit['front_inner_accessory'] == '_ring' and KittyX.outfit['bottom'] and KittyX.outfit['bottom'] != '_blue_skirt' and not KittyX.upskirt", "images/KittyDoggy/Kitty_Doggy_Pierce_RingC.png",
-            "KittyX.outfit['front_inner_accessory'] == '_ring'", "images/KittyDoggy/Kitty_Doggy_Pierce_Ring.png",
+            "KittyX.outfit['piercings'] == '_barbell'", "images/KittyDoggy/Kitty_Doggy_Pierce_Barbell.png",
+            "KittyX.outfit['piercings'] == '_ring' and KittyX.outfit['underwear'] and not KittyX.underwear_pulled_down", "images/KittyDoggy/Kitty_Doggy_Pierce_RingC.png",
+            "KittyX.outfit['piercings'] == '_ring' and KittyX.outfit['hose'] == '_pantyhose' and not (KittyX.outfit['underwear'] and KittyX.underwear_pulled_down)", "images/KittyDoggy/Kitty_Doggy_Pierce_RingC.png",
+            "KittyX.outfit['piercings'] == '_ring' and KittyX.outfit['bottom'] and KittyX.outfit['bottom'] != '_blue_skirt' and not KittyX.upskirt", "images/KittyDoggy/Kitty_Doggy_Pierce_RingC.png",
+            "KittyX.outfit['piercings'] == '_ring'", "images/KittyDoggy/Kitty_Doggy_Pierce_Ring.png",
             "True", Null(),
             ),
 
@@ -2754,8 +2754,8 @@ image Kitty_BJ_Backdrop:
             ),
         (0,0), ConditionSwitch(
 
-            "not KittyX.outfit['front_inner_accessory']", Null(),
-            "KittyX.outfit['front_inner_accessory'] == '_ring'", "images/KittyBJFace/Kitty_BJ_PierceRing.png",
+            "not KittyX.outfit['piercings']", Null(),
+            "KittyX.outfit['piercings'] == '_ring'", "images/KittyBJFace/Kitty_BJ_PierceRing.png",
             "True", "images/KittyBJFace/Kitty_BJ_PierceBall.png",
             ),
         (0,0), ConditionSwitch(
@@ -2838,7 +2838,7 @@ image Kitty_BJ_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "Speed and renpy.showing('Kitty_sprite blowjob')", ConditionSwitch(
+            "action_speed and renpy.showing('Kitty_sprite blowjob')", ConditionSwitch(
 
                     "action_speed == 1", "images/KittyBJFace/Kitty_BJ_mouth_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -2871,7 +2871,7 @@ image Kitty_BJ_Head:
         (0,0), ConditionSwitch(
 
             "not KittyX.spunk['mouth']", Null(),
-            "Speed and renpy.showing('Kitty_sprite blowjob')", ConditionSwitch(
+            "action_speed and renpy.showing('Kitty_sprite blowjob')", ConditionSwitch(
 
                     "action_speed == 1", "images/KittyBJFace/Kitty_BJ_Spunk_Tongue.png",
                     "(action_speed == 2 or action_speed == 5)", Null(),
@@ -2967,7 +2967,7 @@ image Kitty_BJ_mouthSuckingMask:
     contains:
         ConditionSwitch(
             "not KittyX.spunk['mouth']", Null(),
-            "Speed != 2 and action_speed != 5", Null(),
+            "action_speed != 2 and action_speed != 5", Null(),
             "True", "images/KittyBJFace/Kitty_BJ_Spunk_SuckingU.png",
             )
         zoom 1.4
@@ -3971,11 +3971,11 @@ label Kitty_TJ_Launch(Line=primary_action):
         else:
             "[KittyX.name] casually glances around to see if anyone can see her."
     if KittyX.outfit['bra'] and KittyX.outfit['top']:
-        "She throws off her [KittyX.outfit['top']] and her [KittyX.outfit['bra']]."
+        "She throws off her [KittyX.outfit['top'] and her [KittyX.outfit['bra']."
     elif KittyX.outfit['top']:
-        "She throws off her [KittyX.outfit['top']], baring her breasts underneath."
+        "She throws off her [KittyX.outfit['top'], baring her breasts underneath."
     elif KittyX.outfit['bra']:
-        "She tugs off her [KittyX.outfit['bra']] and throws it aside."
+        "She tugs off her [KittyX.outfit['bra'] and throws it aside."
     $ KittyX.outfit['top'] = 0
     $ KittyX.outfit['bra'] = 0
     $ KittyX.arm_pose = 0

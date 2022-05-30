@@ -264,7 +264,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
 
     $ bg_current = "HW Party"
     call remove_girl ("all")
-    
+
     $ Party = []
     $ Present = []
     $ Nearby = []
@@ -778,11 +778,11 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
             call HWchange_stat (LauraX, "love", 90, 1)
             ch_l "Oh?"
             $ LauraX.change_face("_smile")
-            $ LauraX.outfit["front_outer_accessory"] = "_suspenders2"
+            $ LauraX.outfit["suspenders"] = "_suspenders2"
             call HWchange_stat (LauraX, "inhibition", 50, 1)
             call HWchange_stat (LauraX, "inhibition", 60, 1)
             ch_l "Yeah. . ."
-            $ LauraX.outfit["front_outer_accessory"] = "_suspenders"
+            $ LauraX.outfit["suspenders"] = "_suspenders"
         "How is that different from your normal look?":
             $ LauraX.change_face("_normal",eyes="_down")
             call HWchange_stat (LauraX, "love", 80, -1)

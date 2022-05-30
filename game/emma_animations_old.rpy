@@ -455,12 +455,12 @@ image Emma_Sex_Torso:
         ConditionSwitch(
             "renpy.showing('Emma_sprite titjob')", Null(),
             "(EmmaX.outfit['top'] or EmmaX.outfit['bra']) and not EmmaX.top_pulled_up", Null(),
-            "EmmaX.outfit['front_inner_accessory'] == '_barbell'", ConditionSwitch(
+            "EmmaX.outfit['piercings'] == '_barbell'", ConditionSwitch(
 
                     "not EmmaX.outfit['bra'] or EmmaX.top_pulled_up", "images/EmmaSex/Emma_Pierce_Barbell_Tits_D.png",
                     "True", Null(),
                     ),
-            "EmmaX.outfit['front_inner_accessory'] == '_ring'", ConditionSwitch(
+            "EmmaX.outfit['piercings'] == '_ring'", ConditionSwitch(
 
                     "not EmmaX.outfit['bra'] or EmmaX.top_pulled_up", "images/EmmaSex/Emma_Pierce_Ring_Tits_D.png",
                     "True", Null(),
@@ -513,7 +513,7 @@ image Emma_Sex_Torso:
 
         ConditionSwitch(
             "renpy.showing('Emma_sprite titjob')", Null(),
-            "EmmaX.top_pulled_up or not EmmaX.outfit['front_inner_accessory']", Null(),
+            "EmmaX.top_pulled_up or not EmmaX.outfit['piercings']", Null(),
             "EmmaX.outfit['bra'] and not EmmaX.top_pulled_up", "images/EmmaSex/Emma_Pierce_Barbell_Tits_UC.png",
             "EmmaX.outfit['top'] and not EmmaX.top_pulled_up", "images/EmmaSex/Emma_Pierce_Barbell_Tits_DC.png",
             "True", Null(),
@@ -633,7 +633,7 @@ image Emma_Sex_Legs_S:
 
         ConditionSwitch(
             "(EmmaX.outfit['bottom'] == '_pants' or EmmaX.outfit['bottom'] == '_yoga_pants') and EmmaX.upskirt", "images/EmmaSex/Emma_Sex_Pants_Down.png",
-            "EmmaX.outfit['front_outer_accessory'] == 'thigh boots'", "images/EmmaSex/Emma_Sex_Feet_Boots.png",
+            "EmmaX.outfit['boots'] == 'thigh boots'", "images/EmmaSex/Emma_Sex_Feet_Boots.png",
             "EmmaX.outfit['bottom'] == '_pants'", "images/EmmaSex/Emma_Sex_Feet_Pants.png",
             "EmmaX.outfit['bottom'] == '_yoga_pants'", "images/EmmaSex/Emma_Sex_Feet_YogaPants.png",
             "True", Null(),
@@ -677,11 +677,11 @@ image Emma_Sex_Legs_S:
     contains:
 
         ConditionSwitch(
-            "EmmaX.outfit['front_inner_accessory'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S.png",
+            "EmmaX.outfit['piercings'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S.png",
             "(EmmaX.outfit['bottom'] == '_pants' or EmmaX.outfit['bottom'] == '_yoga_pants') and not EmmaX.upskirt", Null(),
             "EmmaX.outfit['underwear'] and not EmmaX.underwear_pulled_down", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C2.png",
             "EmmaX.outfit['hose'] == '_pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C2.png",
-            "EmmaX.outfit['front_inner_accessory'] == '_ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S.png",
+            "EmmaX.outfit['piercings'] == '_ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S.png",
             "True", Null(),
             )
     contains:
@@ -716,8 +716,8 @@ image Emma_Sex_Legs_S:
         ConditionSwitch(
             "(not EmmaX.outfit['underwear'] and EmmaX.outfit['hose'] != '_pantyhose') or EmmaX.underwear_pulled_down", Null(),
             "EmmaX.outfit['hose'] == '_pantyhose' and EmmaX.underwear_pulled_down", Null(),
-            "EmmaX.outfit['front_inner_accessory'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S_C.png",
-            "EmmaX.outfit['front_inner_accessory'] == '_ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C.png",
+            "EmmaX.outfit['piercings'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S_C.png",
+            "EmmaX.outfit['piercings'] == '_ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C.png",
             "True", Null(),
             )
     contains:
@@ -737,8 +737,8 @@ image Emma_Sex_Legs_S:
 
         ConditionSwitch(
             "(EmmaX.outfit['bottom'] != '_pants' and EmmaX.outfit['bottom'] != '_yoga_pants') or EmmaX.upskirt", Null(),
-            "EmmaX.outfit['front_inner_accessory'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S_C.png",
-            "EmmaX.outfit['front_inner_accessory'] != '_ring'", Null(),
+            "EmmaX.outfit['piercings'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S_C.png",
+            "EmmaX.outfit['piercings'] != '_ring'", Null(),
             "EmmaX.outfit['underwear'] and not EmmaX.underwear_pulled_down", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C.png",
             "EmmaX.outfit['hose'] == '_pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C.png",
             "True", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C.png",
@@ -747,7 +747,7 @@ image Emma_Sex_Legs_S:
 
         ConditionSwitch(
             "(EmmaX.outfit['bottom'] == '_pants' or EmmaX.outfit['bottom'] == '_yoga_pants') and EmmaX.upskirt", Null(),
-            "EmmaX.outfit['front_outer_accessory'] == 'thigh boots'", "images/EmmaSex/Emma_Sex_Boots_Pussy.png",
+            "EmmaX.outfit['boots'] == 'thigh boots'", "images/EmmaSex/Emma_Sex_Boots_Pussy.png",
             "True", Null(),
             )
     contains:
@@ -803,8 +803,8 @@ image Emma_Sex_Legs_A:
         ConditionSwitch(
             "EmmaX.outfit['underwear'] and not EmmaX.underwear_pulled_down", Null(),
             "(EmmaX.outfit['bottom'] == '_pants' or EmmaX.outfit['bottom'] == '_yoga_pants') and not EmmaX.upskirt", Null(),
-            "EmmaX.outfit['front_inner_accessory'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_A.png",
-            "EmmaX.outfit['front_inner_accessory'] == '_ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_A.png",
+            "EmmaX.outfit['piercings'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_A.png",
+            "EmmaX.outfit['piercings'] == '_ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_A.png",
             "True", Null(),
             )
     contains:
@@ -847,8 +847,8 @@ image Emma_Sex_Legs_A:
         ConditionSwitch(
             "(not EmmaX.outfit['underwear'] and EmmaX.outfit['hose'] != '_pantyhose') or EmmaX.underwear_pulled_down", Null(),
             "EmmaX.outfit['hose'] == '_pantyhose' and EmmaX.underwear_pulled_down", Null(),
-            "EmmaX.outfit['front_inner_accessory'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_A_C.png",
-            "EmmaX.outfit['front_inner_accessory'] == '_ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_A_C.png",
+            "EmmaX.outfit['piercings'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_A_C.png",
+            "EmmaX.outfit['piercings'] == '_ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_A_C.png",
             "True", Null(),
             )
     contains:
@@ -868,8 +868,8 @@ image Emma_Sex_Legs_A:
 
         ConditionSwitch(
             "(EmmaX.outfit['bottom'] != '_pants' and EmmaX.outfit['bottom'] != '_yoga_pants') or EmmaX.upskirt", Null(),
-            "EmmaX.outfit['front_inner_accessory'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_A_C.png",
-            "EmmaX.outfit['front_inner_accessory'] != '_ring'", Null(),
+            "EmmaX.outfit['piercings'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_A_C.png",
+            "EmmaX.outfit['piercings'] != '_ring'", Null(),
             "EmmaX.outfit['underwear'] and not EmmaX.underwear_pulled_down", "images/EmmaSex/Emma_Pierce_Ring_Pussy_A_C.png",
             "EmmaX.outfit['hose'] == '_pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSex/Emma_Pierce_Ring_Pussy_A_C.png",
             "True", "images/EmmaSex/Emma_Pierce_Ring_Pussy_A_C.png",
@@ -877,7 +877,7 @@ image Emma_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "EmmaX.outfit['front_outer_accessory'] == 'thigh boots'", "images/EmmaSex/Emma_Sex_Boots_Anal.png",
+            "EmmaX.outfit['boots'] == 'thigh boots'", "images/EmmaSex/Emma_Sex_Boots_Anal.png",
             "True", Null(),
             )
     contains:
@@ -912,8 +912,8 @@ image Emma_Sex_Pussy_Mask:
         ConditionSwitch(
             "EmmaX.outfit['underwear'] and not EmmaX.underwear_pulled_down", Null(),
             "EmmaX.outfit['bottom'] and not EmmaX.upskirt", Null(),
-            "EmmaX.outfit['front_inner_accessory'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S.png",
-            "EmmaX.outfit['front_inner_accessory'] == '_ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S.png",
+            "EmmaX.outfit['piercings'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S.png",
+            "EmmaX.outfit['piercings'] == '_ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S.png",
             "True", Null(),
             )
 
@@ -926,8 +926,8 @@ image Emma_Sex_Hotdog_Mask:
         ConditionSwitch(
             "EmmaX.outfit['underwear'] and not EmmaX.underwear_pulled_down", Null(),
             "EmmaX.outfit['bottom'] and not EmmaX.upskirt", Null(),
-            "EmmaX.outfit['front_inner_accessory'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S.png",
-            "EmmaX.outfit['front_inner_accessory'] == '_ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S.png",
+            "EmmaX.outfit['piercings'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S.png",
+            "EmmaX.outfit['piercings'] == '_ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S.png",
             "True", Null(),
             )
     contains:
@@ -935,8 +935,8 @@ image Emma_Sex_Hotdog_Mask:
         ConditionSwitch(
             "EmmaX.outfit['underwear'] and not EmmaX.underwear_pulled_down", Null(),
             "EmmaX.outfit['bottom'] and not EmmaX.upskirt", Null(),
-            "EmmaX.outfit['front_inner_accessory'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S.png",
-            "EmmaX.outfit['front_inner_accessory'] == '_ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S.png",
+            "EmmaX.outfit['piercings'] == '_barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S.png",
+            "EmmaX.outfit['piercings'] == '_ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S.png",
             "True", Null(),
             )
 
@@ -2202,7 +2202,7 @@ image Emma_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "EmmaX.outfit['bottom'] and EmmaX.outfit['bottom'] != '_skirt' and EmmaX.upskirt",Null(),
-            "EmmaX.outfit['front_outer_accessory'] == 'thigh boots'", "images/EmmaDoggy/Emma_Doggy_Boots.png",
+            "EmmaX.outfit['boots'] == 'thigh boots'", "images/EmmaDoggy/Emma_Doggy_Boots.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -2250,11 +2250,11 @@ image Emma_Doggy_Ass:
             "Player.sprite", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo pussy'", Null(),
-            "EmmaX.outfit['front_inner_accessory'] == '_barbell'", "images/EmmaDoggy/Emma_Doggy_Pierce_Barbell.png",
-            "EmmaX.outfit['front_inner_accessory'] == '_ring' and EmmaX.outfit['underwear'] and not EmmaX.underwear_pulled_down", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC2.png",
-            "EmmaX.outfit['front_inner_accessory'] == '_ring' and EmmaX.outfit['hose'] == '_pantyhose' and not (EmmaX.outfit['underwear'] and EmmaX.underwear_pulled_down)", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC2.png",
-            "EmmaX.outfit['front_inner_accessory'] == '_ring' and EmmaX.outfit['bottom'] and EmmaX.outfit['bottom'] != '_skirt' and not EmmaX.upskirt", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC2.png",
-            "EmmaX.outfit['front_inner_accessory'] == '_ring'", "images/EmmaDoggy/Emma_Doggy_Pierce_Ring.png",
+            "EmmaX.outfit['piercings'] == '_barbell'", "images/EmmaDoggy/Emma_Doggy_Pierce_Barbell.png",
+            "EmmaX.outfit['piercings'] == '_ring' and EmmaX.outfit['underwear'] and not EmmaX.underwear_pulled_down", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC2.png",
+            "EmmaX.outfit['piercings'] == '_ring' and EmmaX.outfit['hose'] == '_pantyhose' and not (EmmaX.outfit['underwear'] and EmmaX.underwear_pulled_down)", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC2.png",
+            "EmmaX.outfit['piercings'] == '_ring' and EmmaX.outfit['bottom'] and EmmaX.outfit['bottom'] != '_skirt' and not EmmaX.upskirt", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC2.png",
+            "EmmaX.outfit['piercings'] == '_ring'", "images/EmmaDoggy/Emma_Doggy_Pierce_Ring.png",
             "True", Null(),
             ),
 
@@ -2320,8 +2320,8 @@ image Emma_Doggy_Ass:
             "not EmmaX.outfit['underwear'] and EmmaX.outfit['hose'] != '_pantyhose'", Null(),
             "((EmmaX.outfit['underwear'] or EmmaX.outfit['hose'] == '_pantyhose') and EmmaX.underwear_pulled_down)", Null(),
 
-            "EmmaX.outfit['front_inner_accessory'] == '_barbell'", "images/EmmaDoggy/Emma_Doggy_Pierce_BarbellC.png",
-            "EmmaX.outfit['front_inner_accessory'] == '_ring'", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC.png",
+            "EmmaX.outfit['piercings'] == '_barbell'", "images/EmmaDoggy/Emma_Doggy_Pierce_BarbellC.png",
+            "EmmaX.outfit['piercings'] == '_ring'", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -2357,15 +2357,15 @@ image Emma_Doggy_Ass:
             "not EmmaX.outfit['bottom']", Null(),
             "EmmaX.outfit['bottom'] and EmmaX.outfit['bottom'] != '_skirt' and EmmaX.upskirt", Null(),
 
-            "EmmaX.outfit['front_inner_accessory'] == '_barbell'", "images/EmmaDoggy/Emma_Doggy_Pierce_BarbellC.png",
-            "EmmaX.outfit['front_inner_accessory'] == '_ring'", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC.png",
+            "EmmaX.outfit['piercings'] == '_barbell'", "images/EmmaDoggy/Emma_Doggy_Pierce_BarbellC.png",
+            "EmmaX.outfit['piercings'] == '_ring'", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "EmmaX.outfit['bottom'] and EmmaX.outfit['bottom'] != '_skirt' and EmmaX.upskirt",Null(),
             "Player.cock_position == 'in' or Player.cock_position == 'anal'",Null(),
-            "EmmaX.outfit['front_outer_accessory'] == 'thigh boots'", "images/EmmaDoggy/Emma_Doggy_Boots.png",
+            "EmmaX.outfit['boots'] == 'thigh boots'", "images/EmmaDoggy/Emma_Doggy_Boots.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -3331,13 +3331,13 @@ image Emma_TJ_Tits:
     contains:
 
         ConditionSwitch(
-            "not EmmaX.outfit['front_inner_accessory']", Null(),
-            "EmmaX.outfit['front_inner_accessory'] == '_barbell'", ConditionSwitch(
+            "not EmmaX.outfit['piercings']", Null(),
+            "EmmaX.outfit['piercings'] == '_barbell'", ConditionSwitch(
 
 
                     "True", "images/EmmaSex/Emma_Pierce_Barbell_Tits_T.png",
                     ),
-            "EmmaX.outfit['front_inner_accessory'] == '_ring'", ConditionSwitch(
+            "EmmaX.outfit['piercings'] == '_ring'", ConditionSwitch(
 
 
                     "True", "images/EmmaSex/Emma_Pierce_Ring_Tits_T.png",
@@ -3361,13 +3361,13 @@ image Emma_TJ_Tits:
     contains:
 
         ConditionSwitch(
-            "not EmmaX.outfit['front_inner_accessory'] or not EmmaX.outfit['bra']", Null(),
-            "EmmaX.outfit['front_inner_accessory'] == '_barbell'", ConditionSwitch(
+            "not EmmaX.outfit['piercings'] or not EmmaX.outfit['bra']", Null(),
+            "EmmaX.outfit['piercings'] == '_barbell'", ConditionSwitch(
 
                     "EmmaX.outfit['bra'] in ('_corset', '_lace_bra', '_sports_bra')", "images/EmmaSex/Emma_Pierce_Barbell_Tits_TC.png",
                     "True", Null(),
                     ),
-            "EmmaX.outfit['front_inner_accessory'] == '_ring'", ConditionSwitch(
+            "EmmaX.outfit['piercings'] == '_ring'", ConditionSwitch(
 
                     "EmmaX.outfit['bra'] in ('_corset', '_lace_bra', '_sports_bra')", "images/EmmaSex/Emma_Pierce_Ring_Tits_TC.png",
                     "True", Null(),
@@ -4749,7 +4749,7 @@ image Emma_sprite footjob:
 
         ConditionSwitch(
             "EmmaX.upskirt and EmmaX.outfit['bottom'] and EmmaX.outfit['bottom'] != '_skirt'", Null(),
-            "EmmaX.outfit['front_outer_accessory']", "images/EmmaSprite/EmmaSprite_FJRight_Boot.png",
+            "EmmaX.outfit['boots']", "images/EmmaSprite/EmmaSprite_FJRight_Boot.png",
             "True", Null(),
             )
         zoom 0.75

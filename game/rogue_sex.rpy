@@ -1,53 +1,3 @@
-label SexAct(Girl, action = 0):
-    if AloneCheck(Girl) and Girl.taboo == 20:
-        $ Girl.taboo = 0
-        $ taboo = 0
-
-    call shift_focus (Girl)
-
-    if action == "SkipTo":
-        $ renpy.pop_call()
-        $ renpy.pop_call()
-
-        call SkipTo (Girl)
-    elif action == "switch":
-        $ renpy.pop_call()
-    elif action == "masturbation":
-        call before_masturbation
-
-        if not action_context:
-            return
-    elif action == "lesbian":
-        call Les_Prep (Girl)
-
-        if not action_context:
-            return
-    elif action == "kiss":
-        call KissPrep (Girl)
-
-        if not action_context:
-            return
-    elif action == "breasts":
-        call Rogue_Fondle_Breasts
-
-        if not action_context:
-            return
-    elif action == "blowjob":
-        call Rogue_BJ_Prep
-
-        if not action_context:
-            return
-    elif action == "handjob":
-        call Rogue_HJ_Prep
-
-        if not action_context:
-            return
-    elif action == "sex":
-        call Rogue_sexPrep
-
-        if not action_context:
-            return
-
 label masturbate(Girl):
     $ round -= 5 if round > 5 else (round-1)
     call shift_focus(Girl)
@@ -164,13 +114,13 @@ label masturbate(Girl):
 
     if action_context == Girl:
         if approval > 2:
-            if Girl.bottom_number() == 5:
+            if Girl.wearing_skirt:
                 "[Girl.name]'s hand snakes down her body, and hikes up her skirt."
 
-                $ Girl.upskirt = 1
-            elif Girl.bottom_number() > 6:
+                $ Girl.upskirt = True
+            elif Girl.wearing_pants:
                 "[Girl.name] slides her hand down her body and into her jeans."
-            elif Girl.hose_number() >= 5:
+            elif Girl.outfit["hose"] in ["_tights", "_pantyhose"]:
                 "[Girl.name]'s hand slides down her body and under her [Girl.outfit['hose']]."
             elif Girl.outfit["underwear"]:
                 "[Girl.name]'s hand slides down her body and under her [Girl.outfit['underwear']]."
@@ -266,9 +216,8 @@ label masturbate(Girl):
     return
 
 label before_masturbation:
-    $ Girl.upskirt = 1
-    $ Girl.underwear_pulled_down = 1
-    call Rogue_First_Bottomless (1)
+    call expose_bottom(Girl)
+
     call set_the_scene(check_if_dressed = False)
 
 
@@ -333,9 +282,9 @@ label masturbation_cycle:
                     call masturbation_join_in_lines(Girl, primary_action)
 
                     $ action_context = "join"
-                    call Rogue_Masturbate
+                    call masturbate(Girl)
                 "\"Ahem. . .\"" if "unseen" in Girl.recent_history:
-                    jump Rogue_M_Interupted
+                    jump masturbation_interrupted
 
                 "Start jack'in it." if offhand_action != "jerking_off":
                     call jerking_off (Girl)
@@ -345,7 +294,7 @@ label masturbation_cycle:
                 "Slap her ass" if Girl.location == bg_current:
                     if "unseen" in Girl.recent_history:
                         "You smack [Girl.name] firmly on the ass!"
-                        jump Rogue_M_Interupted
+                        jump masturbation_interrupted
                     else:
                         call Slap_Ass (Girl)
                         $ counter += 1
@@ -398,7 +347,7 @@ label masturbation_cycle:
 
                             if "unseen" in Girl.recent_history:
                                 ch_p "Oh, yeah, take it off. . ."
-                                jump Rogue_M_Interupted
+                                jump masturbation_interrupted
                             else:
                                 call Girl_Undress (Girl)
                         "Clean up [Girl.name] (locked)" if not Girl.spunk:
@@ -406,7 +355,7 @@ label masturbation_cycle:
                         "Clean up [Girl.name]" if Girl.spunk:
                             if "unseen" in Girl.recent_history:
                                 ch_p "You've got a little something on you. . ."
-                                jump Rogue_M_Interupted
+                                jump masturbation_interrupted
                             else:
                                 call Girl_Cleanup (Girl, "ask")
                         "Never mind":
@@ -414,15 +363,15 @@ label masturbation_cycle:
 
                 "Back to Sex Menu" if multi_action and Girl.location == bg_current:
                     ch_p "Let's try something else."
-                    call reset_position(RogueX)
+                    call reset_position(Girl)
                     $ action_context = "shift"
                     $ line = 0
-                    jump Rogue_M_Interupted
+                    jump masturbation_interrupted
                 "End Scene" if not multi_action or Girl.location != bg_current:
                     ch_p "Let's stop for now."
-                    call reset_position(RogueX)
+                    call reset_position(Girl)
                     $ line = 0
-                    jump Rogue_M_Interupted
+                    jump masturbation_interrupted
 
 
         call shift_focus (Girl)
@@ -442,7 +391,7 @@ label masturbation_cycle:
 
                     call Player_Cumming (Girl)
                     if "_angry" in Girl.recent_history:
-                        $ focused_Girl = RogueX
+                        $ focused_Girl = Girl
                         call reset_position
                         return
                     $ Girl.change_stat("lust", 200, 5)
@@ -454,13 +403,13 @@ label masturbation_cycle:
                     "You grunt and try to hold it in."
                     $ Player.focus = 95
                     if Girl.location == bg_current:
-                        jump Rogue_M_Interupted
+                        jump masturbation_interrupted
 
 
             if Girl.lust >= 100:
                 call Girl_Cumming (Girl)
                 if Girl.location == bg_current:
-                    jump Rogue_M_Interupted
+                    jump masturbation_interrupted
 
             if line == "came":
                 $ line = 0
@@ -506,13 +455,13 @@ label masturbation_cycle:
     if "unseen" not in Girl.recent_history:
         ch_r "Ok, [Girl.player_petname], that's enough of that for now."
 
-label Rogue_M_Interupted:
+label masturbation_interrupted:
 
 
     if "unseen" in Girl.recent_history:
         $ Girl.change_face("_surprised", 1)
         "[Girl.name] stops what she's doing with a start, eyes wide."
-        call Rogue_First_Bottomless (1)
+        call expression Girl.tag + "_First_Bottomless" pass(1)
         $ Girl.change_face("_surprised", 1)
 
 
@@ -583,7 +532,7 @@ label Rogue_M_Interupted:
             call too_late_to_masturbate_lines(Girl)
             return
         $ action_context = "join"
-        call Rogue_Masturbate
+        call masturbate(Girl)
         "error: report this if you see it."
         return
 

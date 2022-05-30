@@ -1227,8 +1227,8 @@ label Storm_Chitchat(O=0, Options=["default","default","default"]):
             $ StormX.blushing = "_blush1"
             $ StormX.had_chat.append("blowjob")
         else:
-            $ line = renpy.random.choice(["You know, I really do enjoy the taste of your cock.", 
-                            "I think I nearly dislocated my jaw last time.", 
+            $ line = renpy.random.choice(["You know, I really do enjoy the taste of your cock.",
+                            "I think I nearly dislocated my jaw last time.",
                             "Let me know if you would enjoy another blowjob.",
                             "Hmmm. . . [she mimes her tongue knocking against her cheek.]"])
             ch_s "[line]"
@@ -1310,8 +1310,8 @@ label Storm_Chitchat(O=0, Options=["default","default","default"]):
 
 
     elif Options[0] == "hate":
-        $ line = renpy.random.choice(["Get away from me.", 
-                "I don't want you in my sight.", 
+        $ line = renpy.random.choice(["Get away from me.",
+                "I don't want you in my sight.",
                 "Stay away.",
                 "Leave me."])
         ch_s "[line]"
@@ -2679,7 +2679,7 @@ label Storm_wardrobe_menu:
 
         "Maybe go without the [StormX.outfit['legs']]." if StormX.outfit["bottom"]:
             $ StormX.change_face("_sexy", 1)
-            if StormX.taboo <= 20 or StormX.hose_number() >= 5 or StormX.underwear_number() >= 5 or StormX in Rules:
+            if StormX.taboo <= 20 or StormX.outfit["hose"] in ["_tights", "_pantyhose"] or StormX.underwear_number() >= 5 or StormX in Rules:
                 ch_s "Fine."
 
 
@@ -2740,7 +2740,7 @@ label Storm_wardrobe_menu:
         menu:
             ch_s "I am not wearing panties today."
             "Then you could slip on a pair of panties. . .":
-                if StormX.taboo <= 20 or StormX.hose_number() >= 5 or StormX in Rules:
+                if StormX.taboo <= 20 or StormX.outfit["hose"] in ["_tights", "_pantyhose"] or StormX in Rules:
                     ch_s "No, it's fine."
                 elif StormX.seen_pussy and approval_check(StormX, 1100, taboo_modifier=4):
                     $ StormX.blushing = "_blush1"
@@ -2774,7 +2774,7 @@ label Storm_wardrobe_menu:
                     return False
             "You could always just wear nothing at all. . .":
 
-                if StormX.taboo <= 20 or StormX.hose_number() >= 5 or StormX in Rules:
+                if StormX.taboo <= 20 or StormX.outfit["hose"] in ["_tights", "_pantyhose"] or StormX in Rules:
                     ch_s "True."
                 elif approval_check(StormX, 1100, "LI", taboo_modifier=3) and StormX.love > StormX.inhibition:
                     ch_s "True. . ."
@@ -2934,7 +2934,7 @@ label Storm_wardrobe_menu:
             menu:
                 "You could lose those panties. . ." if StormX.outfit["underwear"]:
                     $ StormX.change_face("_bemused", 1)
-                    if StormX.taboo <= 20 or StormX.hose_number() >= 5 or StormX.bottom_number() >= 5 or StormX in Rules:
+                    if StormX.taboo <= 20 or StormX.outfit["hose"] in ["_tights", "_pantyhose"] or StormX.bottom_number() >= 5 or StormX in Rules:
                         ch_s "Sure."
                     else:
 
@@ -3222,7 +3222,7 @@ label Storm_wardrobe_menu:
 
 
 
-        "Add Ring Piercings" if StormX.outfit["front_inner_accessory"] != "_ring":
+        "Add Ring Piercings" if StormX.outfit["piercings"] != "_ring":
             ch_p "You know, you'd look really nice with some ring body piercings."
             if "_ring" in StormX.to_do:
                 ch_s "I know, I will do it."
@@ -3241,7 +3241,7 @@ label Storm_wardrobe_menu:
                     return
                 $ StormX.to_do.append("_ring")
 
-        "Add barbell piercings." if StormX.outfit["front_inner_accessory"] != "_barbell":
+        "Add barbell piercings." if StormX.outfit["piercings"] != "_barbell":
             ch_p "You know, you'd look really nice with some barbell body piercings."
             if "_barbell" in StormX.to_do:
                 ch_s "I know, I will do it."
@@ -3260,7 +3260,7 @@ label Storm_wardrobe_menu:
                     return
                 $ StormX.to_do.append("_barbell")
 
-        "Remove Piercings" if StormX.outfit["front_inner_accessory"]:
+        "Remove Piercings" if StormX.outfit["piercings"]:
             ch_p "You know, you'd look better without those piercings."
             $ StormX.change_face("_bemused", 1)
             $ approval = approval_check(StormX, 1350, taboo_modifier=0)
@@ -3275,7 +3275,7 @@ label Storm_wardrobe_menu:
                 $ StormX.brows = "_angry"
                 ch_s "I grown rather attached."
                 return
-            $ StormX.outfit["front_inner_accessory"] = ""
+            $ StormX.outfit["piercings"] = ""
 
         "Add gold_necklace" if StormX.outfit["neck"] != "_gold_necklace":
             ch_p "Why don't you try on that gold necklace?"
@@ -3290,14 +3290,14 @@ label Storm_wardrobe_menu:
             ch_s "Ok. . ."
             $ StormX.outfit["neck"] = ""
 
-        "Add Arm and Leg hoops." if StormX.outfit["front_outer_accessory"] != "_rings" and "halloween" in StormX.history:
+        "Add Arm and Leg hoops." if StormX.outfit["loincloth"] != "_rings" and "halloween" in StormX.history:
             ch_p "Why don't you wear those body hoops?"
             ch_s "Ok. . ."
-            $ StormX.outfit["front_outer_accessory"] = "_rings"
-        "Remove Arm and Leg hoops." if StormX.outfit["front_outer_accessory"] == "_rings":
+            $ StormX.outfit["loincloth"] = "_rings"
+        "Remove Arm and Leg hoops." if StormX.outfit["loincloth"] == "_rings":
             ch_p "Why don't you take off those body hoops?"
             ch_s "Ok. . ."
-            $ StormX.outfit["front_outer_accessory"] = ""
+            $ StormX.outfit["loincloth"] = ""
         "Never mind":
 
 

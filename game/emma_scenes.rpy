@@ -420,9 +420,9 @@ label Emma_Caught_Classroom:
     "You see [EmmaX.name] leaning back against her desk, her hands tracing slow paths across her body."
 
     if simulation:
-        call Emma_M_Interupted
+        call masturbation_interrupted
     else:
-        call Emma_M_Cycle
+        call masturbation_cycle
     if "_angry" in EmmaX.recent_history:
         return
 
@@ -585,7 +585,7 @@ label Emma_Caught_Classroom:
                 "She leans back and runs her fingertips along her breasts."
                 if simulation:
                     return True
-                call Emma_M_Cycle
+                call masturbation_cycle
             "Could I feel you up?":
                 $ EmmaX.change_stat("love", 70, 5)
                 $ EmmaX.change_stat("obedience", 50, 10)
@@ -1587,7 +1587,9 @@ label Emma_Love_End:
             $ EmmaX.change_stat("inhibition", 30, 20)
             $ EmmaX.change_stat("obedience", 70, 10)
             ch_e "Hmm. . ."
-            call Emma_SexAct ("sex")
+            call shift_focus(EmmaX)
+            $ primary_action = "sex"
+            call before_action
         "I have something else in mind. . .[[choose another activity]":
             $ EmmaX.brows = "_confused"
             $ EmmaX.change_stat("obedience", 70, 25)

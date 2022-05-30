@@ -1232,8 +1232,8 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
             $ JubesX.blushing = "_blush1"
             $ JubesX.had_chat.append("blowjob")
         else:
-            $ line = renpy.random.choice(["You know, your dick tastes great.", 
-                            "I think I nearly dislocated my jaw last time.", 
+            $ line = renpy.random.choice(["You know, your dick tastes great.",
+                            "I think I nearly dislocated my jaw last time.",
                             "Lemme know if you want another blowjob sometime.",
                             "Hmmm. . . [she mimes her tongue knocking against her cheek.]"])
             ch_v "[line]"
@@ -1314,8 +1314,8 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
 
 
     elif Options[0] == "hate":
-        $ line = renpy.random.choice(["Get away from me.", 
-                "I don't want you anywhere near me.", 
+        $ line = renpy.random.choice(["Get away from me.",
+                "I don't want you anywhere near me.",
                 "Back off.",
                 "Fuck off."])
         ch_v "[line]"
@@ -2528,7 +2528,7 @@ label Jubes_wardrobe_menu:
 
     menu Jubes_Clothes_Over:
 
-        "Why don't you go with no jacket?" if JubesX.outfit["front_outer_accessory"]:
+        "Why don't you go with no jacket?" if JubesX.outfit["jacket"]:
             $ JubesX.change_face("_bemused", 1)
             if JubesX.outfit["top"] or (approval_check(JubesX, 800, taboo_modifier=3) and (JubesX.outfit["bra"] or JubesX.seen_breasts)):
 
@@ -2549,7 +2549,7 @@ label Jubes_wardrobe_menu:
                     if not JubesX.outfit["bra"]:
                         ch_v "I don't have anything under this. . ."
                     return
-            $ JubesX.outfit["front_outer_accessory"] = ""
+            $ JubesX.outfit["jacket"] = ""
             "She throws her Jacket at her feet."
             if not renpy.showing('dress_screen'):
                 call Jubes_First_Topless
@@ -2580,12 +2580,12 @@ label Jubes_wardrobe_menu:
             if not JubesX.outfit["bra"] and not renpy.showing('dress_screen'):
                 call Jubes_First_Topless
 
-        "Try on that yellow jacket." if not JubesX.outfit["front_outer_accessory"]:
+        "Try on that yellow jacket." if not JubesX.outfit["jacket"]:
             $ JubesX.change_face("_bemused")
             ch_v "Sure."
-            $ JubesX.outfit["front_outer_accessory"] = "_jacket"
+            $ JubesX.outfit["jacket"] = "_jacket"
 
-        "Maybe open the jacket more?" if JubesX.outfit["front_outer_accessory"] and JubesX.outfit["front_outer_accessory"] != "_open_jacket":
+        "Maybe open the jacket more?" if JubesX.outfit["jacket"] and JubesX.outfit["jacket"] != "_open_jacket":
             $ JubesX.change_face("_bemused")
             if JubesX.outfit["top"] or (approval_check(JubesX, 800, taboo_modifier=3) and (JubesX.outfit["bra"] or JubesX.seen_breasts)):
 
@@ -2606,11 +2606,11 @@ label Jubes_wardrobe_menu:
                     if not JubesX.outfit["bra"]:
                         ch_v "I don't have anything under this. . ."
                     return
-            $ JubesX.outfit["front_outer_accessory"] = "_open_jacket"
+            $ JubesX.outfit["jacket"] = "_open_jacket"
             if not renpy.showing('dress_screen'):
                 call Jubes_First_Topless
 
-        "Maybe just leave the jacket loose?" if JubesX.outfit["front_outer_accessory"] and JubesX.outfit["front_outer_accessory"] != "_jacket":
+        "Maybe just leave the jacket loose?" if JubesX.outfit["jacket"] and JubesX.outfit["jacket"] != "_jacket":
             $ JubesX.change_face("_bemused")
             if JubesX.outfit["top"] or (approval_check(JubesX, 800, taboo_modifier=3) and (JubesX.outfit["bra"] or JubesX.seen_breasts)):
 
@@ -2631,14 +2631,14 @@ label Jubes_wardrobe_menu:
                     if not JubesX.outfit["bra"]:
                         ch_v "I don't have anything under this. . ."
                     return
-            $ JubesX.outfit["front_outer_accessory"] = "_jacket"
+            $ JubesX.outfit["jacket"] = "_jacket"
             if not renpy.showing('dress_screen'):
                 call Jubes_First_Topless
 
-        "Maybe zip the jacket closed?" if JubesX.outfit["front_outer_accessory"] and JubesX.outfit["front_outer_accessory"] != "_shut_jacket":
+        "Maybe zip the jacket closed?" if JubesX.outfit["jacket"] and JubesX.outfit["jacket"] != "_shut_jacket":
             $ JubesX.change_face("_bemused")
             ch_v "Sure."
-            $ JubesX.outfit["front_outer_accessory"] = "_shut_jacket"
+            $ JubesX.outfit["jacket"] = "_shut_jacket"
 
         "Try on that red shirt." if JubesX.outfit["top"] != "_red_shirt":
             $ JubesX.change_face("_bemused")
@@ -2889,7 +2889,7 @@ label Jubes_wardrobe_menu:
                             ch_v "I don't know, here. . ."
                         else:
                             ch_v "Maaaybe. . ."
-                    elif JubesX.outfit["front_outer_accessory"] == "_jacket" and approval_check(JubesX, 600, taboo_modifier=2):
+                    elif JubesX.outfit["jacket"] == "_jacket" and approval_check(JubesX, 600, taboo_modifier=2):
                         ch_v "This jacket is a bit revealing. . ."
                     elif JubesX.outfit["top"] and approval_check(JubesX, 500, taboo_modifier=2):
                         ch_v "I guess I could. . ."
@@ -2905,7 +2905,7 @@ label Jubes_wardrobe_menu:
                             return
                     $ line = JubesX.outfit["bra"]
                     $ JubesX.outfit["bra"] = ""
-                    if JubesX.outfit["front_outer_accessory"]:
+                    if JubesX.outfit["jacket"]:
                         "She reaches under her jacket grabs her [line], and pulls it off, dropping it to the ground."
                     elif JubesX.outfit["top"]:
                         "She reaches under her [JubesX.outfit['top']] grabs her [line], and pulls it off, dropping it to the ground."
@@ -3187,7 +3187,7 @@ label Jubes_wardrobe_menu:
         "Piercings. [[See what she looks like without them first] (locked)" if not JubesX.seen_pussy and not JubesX.seen_breasts:
             pass
 
-        "Add ring piercings" if JubesX.outfit["front_inner_accessory"] != "_ring" and (JubesX.seen_pussy or JubesX.seen_breasts):
+        "Add ring piercings" if JubesX.outfit["piercings"] != "_ring" and (JubesX.seen_pussy or JubesX.seen_breasts):
             ch_p "You know, you'd look really nice with some ring body piercings."
             if "_ring" in JubesX.to_do:
                 ch_v "I heard you, I'll get around to it."
@@ -3207,7 +3207,7 @@ label Jubes_wardrobe_menu:
                     return
                 $ JubesX.to_do.append("_ring")
 
-        "Add barbell piercings" if JubesX.outfit["front_inner_accessory"] != "_barbell" and (JubesX.seen_pussy or JubesX.seen_breasts):
+        "Add barbell piercings" if JubesX.outfit["piercings"] != "_barbell" and (JubesX.seen_pussy or JubesX.seen_breasts):
             ch_p "You know, you'd look really nice with some barbell body piercings."
             if "_barbell" in JubesX.to_do:
                 ch_v "I heard you, I'll get around to it."
@@ -3227,7 +3227,7 @@ label Jubes_wardrobe_menu:
                     return
                 $ JubesX.to_do.append("_barbell")
 
-        "Remove piercings" if JubesX.outfit["front_inner_accessory"]:
+        "Remove piercings" if JubesX.outfit["piercings"]:
             ch_p "You know, you'd look better without those piercings."
             $ JubesX.change_face("_bemused", 1)
             $ approval = approval_check(JubesX, 1350, taboo_modifier=0)
@@ -3242,7 +3242,7 @@ label Jubes_wardrobe_menu:
                 $ JubesX.brows = "_angry"
                 ch_v "I really like them though!"
                 return
-            $ JubesX.outfit["front_inner_accessory"] = ""
+            $ JubesX.outfit["piercings"] = ""
         "Never mind":
 
             pass

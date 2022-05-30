@@ -2,21 +2,10 @@
 errors listed below, and try again.
 
 
-File "game/cheats.rpy", line 580: expected statement.
-    f Girl.eyes == "_psychic":
-          ^
-
-File "game/cheats.rpy", line 582: expected statement.
-    else:
-        ^
-
-File "game/cheats.rpy", line 585: expected statement.
-    f Girl.eyes == "_white":
-          ^
-
-File "game/cheats.rpy", line 587: expected statement.
-    else:
-        ^
+File "game/menus.rpy", line 254: invalid syntax
+    renpy.pop_call()expression Partner.tag + "_SexAct" pass ("switch")
+                              ^
+    
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Sun May 29 04:18:27 2022
+Mon May 30 01:39:28 2022

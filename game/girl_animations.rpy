@@ -1,8 +1,10 @@
 label reset_position(Girl):
-    if Girl.location != bg_current:
-        return
-
     $ Girl.pose = "full"
+
+    if Girl.location != bg_current:
+        call hide_girl(Girl)
+
+        return
 
     if Girl == RogueX:
         show Rogue_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):

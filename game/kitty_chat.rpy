@@ -3173,7 +3173,7 @@ label Kitty_wardrobe_menu:
         "Piercings. [[See what she looks like without them first] (locked)" if not KittyX.seen_pussy and not KittyX.seen_breasts:
             pass
 
-        "Add ring piercings" if KittyX.outfit["front_inner_accessory"] != "_ring" and (KittyX.seen_pussy or KittyX.seen_breasts):
+        "Add ring piercings" if KittyX.outfit["piercings"] != "_ring" and (KittyX.seen_pussy or KittyX.seen_breasts):
             ch_p "You know, you'd look really nice with some ring body piercings."
             if "_ring" in KittyX.to_do:
                 ch_k "I know, I know. I'll take care of it later."
@@ -3193,7 +3193,7 @@ label Kitty_wardrobe_menu:
                     return
                 $ KittyX.to_do.append("_ring")
 
-        "Add barbell piercings" if KittyX.outfit["front_inner_accessory"] != "_barbell" and (KittyX.seen_pussy or KittyX.seen_breasts):
+        "Add barbell piercings" if KittyX.outfit["piercings"] != "_barbell" and (KittyX.seen_pussy or KittyX.seen_breasts):
             ch_p "You know, you'd look really nice with some barbell body piercings."
             if "_barbell" in KittyX.to_do:
                 ch_k "I know, I know. I'll take care of it later."
@@ -3212,9 +3212,9 @@ label Kitty_wardrobe_menu:
                     ch_k "Not that it's any of your business, [KittyX.player_petname]."
                     return
                 $ KittyX.to_do.append("_barbell")
-                $ KittyX.outfit["front_inner_accessory"] = "_barbell"
+                $ KittyX.outfit["piercings"] = "_barbell"
 
-        "Remove Piercings" if KittyX.outfit["front_inner_accessory"]:
+        "Remove Piercings" if KittyX.outfit["piercings"]:
             ch_p "You know, you'd look better without those piercings."
             $ KittyX.change_face("_bemused", 1)
             $ approval = approval_check(KittyX, 1350, taboo_modifier=0)
@@ -3229,7 +3229,7 @@ label Kitty_wardrobe_menu:
                 $ KittyX.brows = "_angry"
                 ch_k "Well {i}I{/i} kinda like'em."
                 return
-            $ KittyX.outfit["front_inner_accessory"] = ""
+            $ KittyX.outfit["piercings"] = ""
 
         "Add gold_necklace" if KittyX.outfit["neck"] != "_gold_necklace":
             ch_p "Why don't you try on that gold necklace?"

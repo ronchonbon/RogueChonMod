@@ -1019,7 +1019,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                         $ approval_bonus = stored_count
 
-                        if Girl.bottom_number() > 6 or Girl.hose_number() >= 5:
+                        if Girl.legs_covered:
                             if Girl == RogueX:
                                 ch_r "Ok, but after we do this, I get a little touch too."
                             elif Girl == KittyX:
@@ -1057,7 +1057,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                             elif Girl == JubesX:
                                 ch_v "So, fair trade?"
 
-                            if Girl.bottom_number() > 6 or Girl.hose_number() >= 5:
+                            if Girl.legs_covered:
                                 call Girl_Tag (Girl)
                     "How about you let me touch your pussy?":
                         $ stored_count = approval_bonus

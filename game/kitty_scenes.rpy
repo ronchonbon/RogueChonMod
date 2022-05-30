@@ -1936,7 +1936,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                     $ line = "noway"
 
         ". . . [Girl.outfit['legs']]?" if Girl.outfit["bottom"]:
-            if Girl.outfit["underwear"] or Girl.hose_number() >= 10:
+            if Girl.outfit["underwear"] or Girl.outfit["hose"] == "_tights":
 
                 $ Shy = 2
                 if approval_check(KittyX, 1000, taboo_modifier=2, Bonus=TempBonus):
@@ -1960,7 +1960,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                     $ line = "noway"
 
         ". . . [Girl.outfit['underwear']]?" if Girl.outfit["underwear"]:
-            if Girl.outfit["bottom"] or Girl.hose_number() >= 10:
+            if Girl.outfit["bottom"] or Girl.outfit["hose"] == "_tights":
 
                 $ Shy = 1
                 if approval_check(KittyX, 1000, taboo_modifier=1, Bonus=TempBonus):
@@ -1997,7 +1997,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 else:
 
                     $ line = "noway"
-            elif Girl.outfit["underwear"] or Girl.hose_number() < 10:
+            elif Girl.outfit["underwear"] or Girl.outfit["hose"] != "_pantyhose":
 
                 $ Shy = 2
                 if approval_check(KittyX, 1000, taboo_modifier=2, Bonus=TempBonus):

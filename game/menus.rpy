@@ -250,7 +250,8 @@ label girl_sex_menu(Girl):
         "Hey, do you want in on this? [[Threesome]" if not Partner:
             call Sex_Menu_Threesome(Girl)
         "Hey, [Partner.name]? [[Switch lead]" if Partner:
-            call expression Partner.tag + "_SexAct" pass ("switch")
+            call shift_focus(Partner)
+            $ renpy.pop_call()
         "Cheat Menu" if config.developer:
             call cheat_menu(Girl)
             jump main_sex_menu
@@ -753,9 +754,7 @@ label try_something_else_menu(Girl, action):
             else:
                 $ Girl.change_face("_angry", 1)
 
-                $ focused_Girl = Girl
-
-                call reset_position
+                call reset_position(Girl)
 
                 "She scowls at you, drops your cock and pulls back."
 
@@ -786,9 +785,7 @@ label try_something_else_menu(Girl, action):
             else:
                 $ Girl.change_face("_angry", 1)
 
-                $ focused_Girl = Girl
-
-                call reset_position
+                call reset_position(Girl)
 
                 "She scowls at you and pulls back."
 
@@ -1104,9 +1101,7 @@ label fondle_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            $ focused_Girl = Girl
-
-            call reset_position
+            call reset_position(Girl)
 
             $ action_context = "shift"
 
@@ -1115,9 +1110,7 @@ label fondle_menu:
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            $ focused_Girl = Girl
-
-            call reset_position
+            call reset_position(Girl)
             jump after_action
 
     jump action_menu_return
@@ -1383,9 +1376,7 @@ label handjob_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            $ focused_Girl = Girl
-
-            call reset_position
+            call reset_position(Girl)
 
             $ action_context = "shift"
 
@@ -1394,9 +1385,7 @@ label handjob_menu:
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            $ focused_Girl = Girl
-
-            call reset_position
+            call reset_position(Girl)
             jump after_action
 
     jump action_menu_return
@@ -1540,9 +1529,7 @@ label sex_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            $ focused_Girl = Girl
-
-            call reset_position
+            call reset_position(Girl)
 
             $ action_context = "shift"
 
@@ -1551,9 +1538,7 @@ label sex_menu:
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            $ focused_Girl = Girl
-
-            call reset_position
+            call reset_position(Girl)
             jump after_action
 
     jump action_menu_return
@@ -1599,9 +1584,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
                 if action_context:
                     $ renpy.pop_call()
 
-                $ focused_Girl = Girl
-
-                call reset_position
+                call reset_position(Girl)
 
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")
@@ -1635,9 +1618,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
                 if action_context:
                     $ renpy.pop_call()
 
-                $ focused_Girl = Girl
-
-                call reset_position
+                call reset_position(Girl)
 
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")
@@ -1668,9 +1649,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
                 if action_context:
                     $ renpy.pop_call()
 
-                $ focused_Girl = Girl
-
-                call reset_position
+                call reset_position(Girl)
 
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")

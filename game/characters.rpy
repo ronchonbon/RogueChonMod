@@ -160,13 +160,29 @@ init python:
                 "breasts": False, "back": False, "belly": False, "hand": False,
                 "pussy": False, "anus": False}
 
-            self.wearing_skirt = False
             self.wearing_dress = False
             self.wearing_pants = False
+            self.wearing_skirt = False
             self.wearing_shorts = False
-            self.upskirt = False
+
+            self.jacket_opened = False
             self.top_pulled_up = False
+            self.dress_top_pulled_down = False
+            self.bra_pulled_up = False
+            self.suspenders_aside = False
+
+            self.dress_upskirt = False
+            self.upskirt = False
+            self.bottom_pulled_down = False
             self.underwear_pulled_down = False
+            self.loincloth_aside = False
+
+            self.breasts_supported = False
+            self.breasts_covered = False
+            self.legs_covered = False
+            self.pussy_covered = False
+            self.fully_nude = False
+
             self.bound = False
             self.whipped = False
 
@@ -852,9 +868,7 @@ init python:
             if self.upskirt or self.top_pulled_up or self.underwear_pulled_down:
                 undressed = 1
 
-            self.upskirt = 0
-            self.top_pulled_up = 0
-            self.underwear_pulled_down = 0
+            self.fix_clothing()
 
             if outfit_name == 5:
                 if "yoinked" in self.recent_history:
@@ -962,6 +976,8 @@ init python:
                 elif got_dressed:
                     renpy.say(None, self.name + " throws her clothes back on.")
 
+            self.set_outfit_flags()
+
             if got_dressed:
                 return 2
 
@@ -976,9 +992,15 @@ init python:
             self.outfit = get_base_outfit()
 
             self.nude = get_base_outfit({"shame": 50})
-            self.shower = get_base_outfit(
-                {"back_hair": "_wet", "hair": "_wet",
-                "top": "_towel", "shame": 35})
+
+            if self.tag == "Storm":
+                self.shower = get_base_outfit(
+                    {"hair": "_wet",
+                    "face_outer_accessory": "_towel", "shame": 0})
+            else:
+                self.shower = get_base_outfit(
+                    {"hair": "_wet",
+                    "top": "_towel", "shame": 35})
 
             self.first_custom_outfit = get_base_outfit()
             self.second_custom_outfit = get_base_outfit()
@@ -986,7 +1008,7 @@ init python:
 
             if self.tag == "Rogue":
                 self.first_casual_outfit = get_base_outfit(
-                    {"back_hair": "_evo", "hair": "_evo",
+                    {"hair": "_evo",
                     "bra": "_tank", "underwear": "_black_panties",
                     "hose": "_tights", "bottom": "_skirt",
                     "top": "_mesh_top",
@@ -994,7 +1016,7 @@ init python:
                     "outfit_active": 2})
 
                 self.second_casual_outfit = get_base_outfit(
-                    {"back_hair": "_evo", "hair": "_evo",
+                    {"hair": "_evo",
                     "bra": "_buttoned_tank", "underwear": "_black_panties",
                     "bottom": "_pants",
                     "top": "_pink_top",
@@ -1002,38 +1024,36 @@ init python:
                     "outfit_active": 2})
 
                 self.gym_clothes = get_base_outfit(
-                    {"back_outer_accessory": "_hoodie",
-                    "back_hair": "_evo", "hair": "_evo",
+                    {"hair": "_evo",
                     "bra": "_sports_bra", "underwear": "_shorts",
                     "jacket": "_hoodie",
                     "gloves": "_gloves",
                     "shame": 10})
 
                 self.sleepwear = get_base_outfit(
-                    {"back_hair": "_evo", "hair": "_evo",
+                    {"hair": "_evo",
                     "bra": "_tank", "underwear": "_green_panties",
                     "gloves": "_gloves",
                     "shame": 20})
 
                 self.swimwear = get_base_outfit(
-                    {"back_outer_accessory": "_hoodie",
-                    "back_hair": "_evo", "hair": "_evo",
+                    {"hair": "_evo",
                     "bra": "_bikini_top", "underwear": "_bikini_bottoms",
                     "jacket": "_hoodie"})
 
                 self.halloween_costume = get_base_outfit(
-                    {"back_hair": "_cosplay", "hair": "_cosplay",
-                    "bra": "_tube_top", "underwear": "_black_panties",
+                    {"hair": "_cosplay",
+                    "underwear": "_black_panties",
                     "bottom": "_skirt",
+                    "top": "_tube_top",
                     "gloves": "_gloves",
                     "scarf": "_sweater",
                     "outfit_active": 2})
 
-                self.nude["back_hair"] = "_evo"
                 self.nude["hair"] = "_evo"
             elif self.tag == "Kitty":
                 self.first_casual_outfit = get_base_outfit(
-                    {"back_hair": "_evo", "hair": "_evo",
+                    {"hair": "_evo",
                     "bra": "_cami", "underwear": "_green_panties",
                     "bottom": "_capris",
                     "top": "_pink_top",
@@ -1041,7 +1061,7 @@ init python:
                     "outfit_active": 2})
 
                 self.second_casual_outfit = get_base_outfit(
-                    {"back_hair": "_evo", "hair": "_evo",
+                    {"hair": "_evo",
                     "bra": "_bra", "underwear": "_green_panties",
                     "bottom": "_black_jeans",
                     "top": "_red_shirt",
@@ -1049,68 +1069,64 @@ init python:
                     "outfit_active": 2})
 
                 self.gym_clothes = get_base_outfit(
-                    {"back_hair": "_evo", "hair": "_evo",
+                    {"hair": "_evo",
                     "bra": "_sports_bra", "underwear": "_green_panties",
                     "bottom": "_shorts",
                     "shame": 10})
 
                 self.sleepwear = get_base_outfit(
-                    {"back_hair": "_evo", "hair": "_evo",
+                    {"hair": "_evo",
                     "bra": "_cami", "underwear": "_green_panties",
                     "shame": 20})
 
                 self.swimwear = get_base_outfit(
-                    {"back_hair": "_evo", "hair": "_evo",
+                    {"hair": "_evo",
                     "bra": "_bikini_top", "underwear": "_bikini_bottoms",
                     "bottom": "_blue_skirt"})
 
                 self.halloween_costume = get_base_outfit(
-                    {"back_hair": "_evo", "hair": "_evo",
+                    {"hair": "_evo",
                     "bra": "_dress", "underwear": "_lace_panties",
                     "bottom": "_dress",
                     "neck": "_flower_necklace",
                     "jacket": "_jacket",
                     "outfit_active": 2})
 
-                self.nude["back_hair"] = "_evo"
                 self.nude["hair"] = "_evo"
             elif self.tag == "Emma":
                 self.first_casual_outfit = get_base_outfit(
-                    {"back_outer_accessory": "_cape",
-                    "back_hair": "_wavy", "hair": "_wavy",
+                    {"hair": "_wavy",
                     "bra": "_corset", "underwear": "_white_panties",
                     "bottom": "_pants",
-                    "neck": "_choker", "sleeves": "_jacket",
+                    "neck": "_choker",
                     "jacket": "_jacket",
                     "outfit_active": 2})
 
                 self.second_casual_outfit = get_base_outfit(
-                    {"back_outer_accessory": "_cape",
-                    "back_hair": "_wavy", "hair": "_wavy",
+                    {"hair": "_wavy",
                     "bra": "_corset", "underwear": "_white_panties",
                     "bottom": "_pants",
                     "neck": "_choker",
                     "shame": 5, "outfit_active": 2})
 
                 self.gym_clothes = get_base_outfit(
-                    {"back_hair": "_wavy", "hair": "_wavy",
+                    {"hair": "_wavy",
                     "bra": "_sports_bra", "underwear": "_sports_panties",
                     "bottom": "_pants",
                     "shame": 10})
 
                 self.sleepwear = get_base_outfit(
-                    {"back_outer_accessory": "_cape",
-                    "back_hair": "_wavy", "hair": "_wavy",
+                    {"hair": "_wavy",
                     "bra": "_corset", "underwear": "_white_panties",
                     "shame": 25})
 
                 self.sleepwear = get_base_outfit(
-                    {"back_hair": "_wavy", "hair": "_wavy",
+                    {"hair": "_wavy",
                     "bra": "_bikini_top", "underwear": "_bikini_bottoms",
                     "shame": 25})
 
                 self.halloween_costume = get_base_outfit(
-                    {"back_hair": "_wavy", "hair": "_wavy",
+                    {"hair": "_wavy",
                     "face_outer_accessory": "_hat",
                     "underwear": "_lace_panties",
                     "hose": "_stockings_and_garterbelt", "bottom": "_dress",
@@ -1119,28 +1135,25 @@ init python:
                     "outfit_active": 2})
 
                 self.domme_outfit = get_base_outfit(
-                    {"back_hair": "_wavy", "hair": "_wavy",
+                    {"hair": "_wavy",
                     "dress": "_domme", "boots": "_domme",
                     "neck": "_spiked_collar", "gloves": "_spiked_bracelets",
                     "held_item": "_whip",
                     "outfit_active": 2})
 
-                self.nude["back_hair"] = "_wavy"
                 self.nude["hair"] = "_wavy"
-
-                self.shower["loincloth"] = "_towel"
             elif self.tag == "Laura":
                 self.first_casual_outfit = get_base_outfit(
-                    {"back_hair": "_long", "hair": "_long",
-                    "bra": "_leather_bra", "underwear": "_black_panties",
+                    {"hair": "_long",
+                    "bra": "_leather_bra", "underwear": "_leather_panties",
                     "bottom": "_leather_pants",
                     "neck": "_leash_choker",
                     "gloves": "_wrists",
                     "outfit_active": 2})
 
                 self.second_casual_outfit = get_base_outfit(
-                    {"back_hair": "_long", "hair": "_long",
-                    "bra": "_leather_bra", "underwear": "_black_panties",
+                    {"hair": "_long",
+                    "bra": "_leather_bra", "underwear": "_leather_panties",
                     "bottom": "_skirt",
                     "neck": "_leash_choker",
                     "gloves": "_wrists",
@@ -1148,62 +1161,58 @@ init python:
                     "outfit_active": 2})
 
                 self.gym_clothes = get_base_outfit(
-                    {"back_hair": "_long", "hair": "_long",
-                    "bra": "_leather_bra", "underwear": "_black_panties",
+                    {"hair": "_long",
+                    "bra": "_leather_bra", "underwear": "_leather_panties",
                     "bottom": "_leather_pants",
                     "gloves": "_wrists"})
 
                 self.sleepwear = get_base_outfit(
-                    {"back_hair": "_long", "hair": "_long",
+                    {"hair": "_long",
                     "bra": "_leather_bra", "underwear": "_leather_panties",
                     "bottom": "_leather_pants",
                     "shame": 20})
 
                 self.swimwear = get_base_outfit(
-                    {"back_hair": "_long", "hair": "_long",
+                    {"hair": "_long",
                     "bra": "_bikini_top", "underwear": "_bikini_bottoms"})
 
                 self.halloween_costume = get_base_outfit(
-                    {"back_hair": "_long", "hair": "_long",
-                    "bra": "_white_tank", "underwear": "_black_panties",
+                    {"hair": "_long",
+                    "bra": "_white_tank", "underwear": "_leather_panties",
                     "hose": "_black_stockings", "bottom": "_cosplay_skirt",
                     "neck": "_leash_choker",
                     "gloves": "_gloves",
                     "suspenders": "_suspenders",
                     "outfit_active": 2})
 
-                self.nude["back_hair"] = "_long"
                 self.nude["hair"] = "_long"
             elif self.tag == "Jean":
                 self.first_casual_outfit = get_base_outfit(
-                    {"back_hair": "_short", "hair": "_short",
+                    {"hair": "_short",
                     "bra": "_green_bra", "underwear": "_green_panties",
                     "bottom": "_pants",
                     "top": "_pink_shirt",
-                    "sleeves": "_pink_shirt",
                     "outfit_active": 2})
 
                 self.second_casual_outfit = get_base_outfit(
-                    {"back_hair": "_short", "hair": "_short",
+                    {"hair": "_short",
                     "bra": "_green_bra", "underwear": "_green_panties",
                     "bottom": "_skirt",
                     "top": "_green_shirt",
                     "outfit_active": 2})
 
                 self.gym_clothes = get_base_outfit(
-                    {"back_hair": "_short", "hair": "_short",
+                    {"hair": "_short",
                     "bra": "_sports_bra", "underwear": "_green_panties",
-                    "bottom": "_yoga_pants",
-                    "sleeves": "_sports_bra"})
+                    "bottom": "_yoga_pants"})
 
                 self.sleepwear = get_base_outfit(
-                    {"back_hair": "_short", "hair": "_short",
+                    {"hair": "_short",
                     "bra": "_green_bra", "underwear": "_green_panties",
-                    "top": "_pink_shirt",
-                    "sleeves": "_pink_shirt"})
+                    "top": "_pink_shirt"})
 
                 self.swimwear = get_base_outfit(
-                    {"back_hair": "_short", "hair": "_short",
+                    {"hair": "_short",
                     "bra": "_bikini_top", "underwear": "_bikini_bottoms"})
 
                 self.halloween_costume = get_base_outfit(
@@ -1215,57 +1224,56 @@ init python:
                     "outfit_active": 2})
 
                 self.bondage_outfit = get_base_outfit(
-                    {"back_hair": "_short", "hair": "_short",
+                    {"hair": "_short",
                     "clamps": "_nipple_pegs", "rope": "_harness",
                     "held_item": "_hitachi",
                     "shame": 100, "outfit_active": 2})
 
-                self.nude["back_hair"] = "_short"
                 self.nude["hair"] = "_short"
             elif self.tag == "Storm":
                 self.first_casual_outfit = get_base_outfit(
-                    {"back_hair": "_long", "hair": "_long",
+                    {"hair": "_long",
                     "bra": "_black_bra", "underwear": "_white_panties",
                     "bottom": "_skirt",
                     "top": "_white_shirt",
                     "outfit_active": 2})
 
                 self.second_casual_outfit = get_base_outfit(
-                    {"back_hair": "_long", "hair": "_long",
+                    {"hair": "_long",
                     "bra": "_sports_bra", "underwear": "_white_panties",
                     "bottom": "_pants",
                     "jacket": "_jacket",
                     "outfit_active": 2})
 
                 self.gym_clothes = get_base_outfit(
-                    {"back_hair": "_long", "hair": "_long",
+                    {"hair": "_long",
                     "bra": "_sports_bra", "underwear": "_white_panties",
                     "bottom": "_yoga_pants",
                     "shame": 10})
 
                 self.sleepwear = get_base_outfit(
-                    {"back_hair": "_long", "hair": "_long",
+                    {"hair": "_long",
                     "underwear": "_white_panties",
                     "top": "_white_shirt",
                     "shame": 25})
 
                 self.swimwear = get_base_outfit(
-                    {"back_hair": "_long", "hair": "_long",
+                    {"hair": "_long",
                     "bra": "_bikini_top", "underwear": "_bikini_bottoms",
                     "top": "_white_shirt"})
 
                 self.halloween_costume = get_base_outfit(
-                    {"back_hair": "_short", "hair": "_short",
+                    {"hair": "_short",
                     "bra": "_cosplay_bra", "underwear": "_cosplay_panties",
                     "neck": "_ring_necklace",
-                    "loincloth": "_rings",
+                    "boots": "_rings",
+                    "sleeves": "_rings",
                     "outfit_active": 2})
 
-                self.nude["back_hair"] = "_long"
                 self.nude["hair"] = "_long"
             elif self.tag == "Jubes":
                 self.first_casual_outfit = get_base_outfit(
-                    {"back_hair": "_shades", "hair": "_shades",
+                    {"hair": "_shades",
                     "bra": "_sports_bra", "underwear": "_blue_panties",
                     "bottom": "_shorts",
                     "top": "_red_shirt",
@@ -1273,7 +1281,7 @@ init python:
                     "outfit_active": 2})
 
                 self.second_casual_outfit = get_base_outfit(
-                    {"back_hair": "_shades", "hair": "_shades",
+                    {"hair": "_shades",
                     "bra": "_sports_bra", "underwear": "_blue_panties",
                     "bottom": "_pants",
                     "top": "_black_shirt",
@@ -1281,30 +1289,29 @@ init python:
                     "outfit_active": 2})
 
                 self.gym_clothes = get_base_outfit(
-                    {"back_hair": "_shades", "hair": "_shades",
+                    {"hair": "_shades",
                     "bra": "_sports_bra", "underwear": "_blue_panties",
                     "bottom": "_pants",
                     "top": "_black_shirt",
                     "shame": 10})
 
                 self.sleepwear = get_base_outfit(
-                    {"back_hair": "_short", "hair": "_short",
+                    {"hair": "_short",
                     "bra": "_sports_bra", "underwear": "_blue_panties",
                     "shame": 25})
 
                 self.swimwear = get_base_outfit(
-                    {"back_hair": "_shades", "hair": "_shades",
+                    {"hair": "_shades",
                     "bra": "_bikini_top", "underwear": "_bikini_bottoms"})
 
                 self.halloween_costume = get_base_outfit(
-                    {"back_hair": "_shades", "hair": "_shades",
+                    {"hair": "_shades",
                     "bra": "_sports_bra", "underwear": "_blue_panties",
                     "bottom": "_pants",
                     "top": "_black_shirt",
                     "jacket": "_jacket",
                     "outfit_active": 2})
 
-                self.nude["back_hair"] = "_short"
                 self.nude["hair"] = "_short"
 
             return
@@ -1361,7 +1368,7 @@ init python:
                     self.second_casual_outfit["underwear"] = "_lace_panties"
             elif self.tag == "Storm":
                 if self.inhibition >= 400 and self.second_casual_outfit["bra"] == "_sports_bra":
-                    self.second_casual_outfit["bra"] = "_tube_top"
+                    self.second_casual_outfit["top"] = "_tube_top"
 
                 if self.inhibition >= 400 and self.second_casual_outfit["bra"] == "_white_panties":
                     self.second_casual_outfit["bra"] = "_black_panties"
@@ -1378,6 +1385,69 @@ init python:
 
                 if self.inhibition >= 600 and "_stockings_and_garterbelt" in self.inventory:
                     self.second_casual_outfit["hose"] = "_stockings_and_garterbelt"
+
+            return
+
+        def set_outfit_flags(self):
+            if self.outfit["dress"] in dresses or self.outfit["bottom"] == "_dress":
+                self.wearing_dress = True
+            else:
+                self.wearing_dress = False
+
+            if self.outfit["bottom"] in pants or self.outfit["dress"] in ["_catsuit", "_sci_fi"]:
+                self.wearing_pants = True
+            else:
+                self.wearing_pants = False
+
+            if self.outfit["bottom"] in skirts or self.outfit["jacket"] == "_closed_jacket" or self.outfit["top"] == "_towel":
+                self.wearing_skirt = True
+            else:
+                self.wearing_skirt = False
+
+            if self.outfit["bottom"] in shorts or self.outfit["underwear"] in shorts:
+                self.wearing_shorts = True
+            else:
+                self.wearing_shorts = False
+
+            if self.outfit["bra"] or (self.tag == "Emma" and self.arm_pose == 1):
+                self.breasts_supported = True
+            else:
+                self.breasts_supported = False
+
+            if (not self.outfit["jacket"] or self.jacket_opened) and (not self.outfit["top"] or self.top_pulled_up) and (not self.outfit["dress"] or self.dress_top_pulled_down) and (not self.outfit["bra"] or self.bra_pulled_up) and (not self.outfit["suspenders"] or self.suspenders_aside):
+                self.breasts_covered = False
+            else:
+                self.breasts_covered = True
+
+            if self.wearing_pants and not self.bottom_pulled_down or self.outfit["hose"] in ["_tights", "_pantyhose"]:
+                self.legs_covered = True
+            else:
+                self.legs_covered = False
+
+            if (not self.outfit["dress"] or self.dress_upskirt) and (not self.outfit["bottom"] or self.upskirt or self.bottom_pulled_down) and (not self.outfit["underwear"] or self.underwear_pulled_down) and (not self.outfit["loincloth"] or self.loincloth_aside) and self.outfit["top"] not in ["_towel", "_shut_jacket"]:
+                self.pussy_covered = False
+            else:
+                self.pussy_covered = True
+
+            if self.outfit["jacket"] or self.outfit["top"] or self.outfit["dress"] or self.outfit["bra"] or self.outfit["bottom"] or self.outfit["underwear"]:
+                self.fully_nude = False
+            else:
+                self.fully_nude = True
+
+            return
+
+        def fix_clothing(self):
+            self.jacket_opened = False
+            self.top_pulled_up = False
+            self.dress_top_pulled_down = False
+            self.bra_pulled_up = False
+            self.suspenders_aside = False
+
+            self.dress_upskirt = False
+            self.upskirt = False
+            self.bottom_pulled_down = False
+            self.underwear_pulled_down = False
+            self.loincloth_aside = False
 
             return
 
@@ -1403,7 +1473,7 @@ init python:
                 if self.outfit["bra"] == "_sports_bra":
                     return 5
 
-            if self.outfit["bra"] == "_tube_top":
+            if self.outfit["top"] == "_tube_top":
                 return 5
 
             if self.outfit["bra"] == "_lace_bra":
@@ -1440,16 +1510,16 @@ init python:
                     return False
 
             if self.tag == "Jubes":
-                if Up and self.top_pulled_up and self.outfit["front_outer_accessory"]:
+                if Up and self.top_pulled_up and self.outfit["jacket"]:
                     return True
 
-                if self.outfit["front_outer_accessory"] == "_jacket":
+                if self.outfit["jacket"] == "_jacket":
                     return 3
 
-                if self.outfit["front_outer_accessory"] == "_open_jacket":
+                if self.outfit["jacket"] == "_open_jacket":
                     return True
 
-                if self.outfit["front_outer_accessory"] == "_shut_jacket":
+                if self.outfit["jacket"] == "_shut_jacket":
                     return 5
 
             if self.outfit["top"] == "_towel":
@@ -1473,10 +1543,6 @@ init python:
             return False
 
         def bottom_number(self, Up=1):
-            if self.tag == "Jubes":
-                if self.outfit["front_outer_accessory"] == "_shut_jacket":
-                    return 5
-
             if Up and self.upskirt and self.outfit["bottom"]:
                 return True
 
@@ -1486,14 +1552,8 @@ init python:
             if self.outfit["bottom"] == "_shorts":
                 return 6
 
-            if self.outfit["bottom"] in ("_skirt", "_blue_skirt", "_cosplay_skirt", "_dress"):
-                return 5
-
             if self.outfit["bottom"] == "_yoga_pants":
                 return 8
-
-            if self.outfit["top"] == "_towel" and self not in (EmmaX,StormX):
-                return 5
 
             if self.tag == "Emma" and self.outfit["top"] == "_dress":
                 return 4
@@ -1560,7 +1620,7 @@ init python:
             if self.outfit["bottom"]:
                 count += 1
 
-            if self.hose_number() >= 5:
+            if self.outfit["hose"] in ["_tights", "_pantyhose"]:
                 count += 1
 
             if self.outfit["underwear"]:
@@ -1586,7 +1646,7 @@ init python:
                 pass
             elif self.underwear_number() >= 4:
                 pass
-            elif self.hose_number() >= 5:
+            elif self.outfit["hose"] in ["_tights", "_pantyhose"]:
                 pass
             else:
                 count += 1
@@ -1597,11 +1657,11 @@ init python:
             count = 0
 
             if not self.seen_breasts:
-                if (not self.outfit["top"] and not self.outfit["bra"]) or self.top_pulled_up or check == 1 or check == 2:
+                if (not self.outfit["top"] or self.top_pulled_up) and (not self.outfit["bra"] or self.bra_pulled_up) or check in [1, 2]:
                     count += 1
 
             if not self.seen_pussy:
-                if check == 1 or check == 3:
+                if check in [1, 3]:
                     count += 1
                 elif not self.outfit["bottom"] or self.upskirt:
                     if self.underwear_pulled_down or (self.hose_number() < 5 and not self.outfit["underwear"]):
@@ -1903,7 +1963,6 @@ init python:
 
     def get_base_outfit(*args):
         outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
-            "back_hair": "",
             "face_piercings": "", "makeup": "", "gag": "",
             "face_inner_accessory": "", "hair": "", "face_outer_accessory": "",
             "tattoos": "", "piercings": "", "clamps": "", "rope": "",

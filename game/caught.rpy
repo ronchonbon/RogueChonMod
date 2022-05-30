@@ -1269,9 +1269,7 @@ label Girl_Caught_Changing(Girl=0):
                 $ Girl.change_face("_surprised",brows="_angry")
                 $ Girl.change_stat("love", 80, -50)
 
-                if not Girl.top_number() or (Girl.top_number()+Girl.bra_number() <5) or (Girl.bottom_number() < 5 and Girl.hose_number() < 10):
-
-
+                if not Girl.breasts_covered or not Girl.pussy_covered:
                     call expression Girl.tag + "_First_Bottomless" pass (1)
                     call expression Girl.tag + "_First_Topless" pass (1)
                     $ Girl.outfit["top"] = "_towel"
@@ -1363,13 +1361,10 @@ label Girl_Caught_Changing(Girl=0):
             elif Girl == JubesX:
                 ch_v "You just have to ask. . ."
 
-            $ Girl.top_pulled_up = 1
-            $ Girl.upskirt = 1
+            call fully_expose(Girl)
             pause 1
-            call expression Girl.tag + "_First_Topless" pass (1)
-            call expression Girl.tag + "_First_Bottomless" pass (1)
-            $ Girl.top_pulled_up = 0
-            $ Girl.upskirt = 0
+            $ Girl.fix_clothing()
+
             "She flashes you real quick."
         else:
 
@@ -1568,8 +1563,9 @@ label caught_masturbating(Girl=0):
     elif line == "enter":
         call shift_focus (Girl)
         show black_screen onlayer black
-        $ Girl.upskirt = 1
-        $ Girl.underwear_pulled_down = 1
+
+        call expose_bottom
+
         $ Girl.location = bg_current
 
         call set_the_scene
@@ -1581,7 +1577,8 @@ label caught_masturbating(Girl=0):
         hide black_screen onlayer black
         $ Girl.daily_history.append("unseen")
         $ Girl.recent_history.append("unseen")
-        call expression Girl.tag + "_SexAct" pass ("masturbation")
+        call shift_focus(Girl)
+        call before_masturbation
         if "_angry" in Girl.recent_history:
             return
 
@@ -1741,7 +1738,8 @@ label Girls_Caught_Lesing(Girl=0, Girl2=0, temp_Girls=[]):
                 $ Girl2.add_word(1,"unseen","unseen")
                 $ Partner = Girl2
                 $ line = 0
-                call expression Girl.tag + "_SexAct" pass ("lesbian")
+                call shift_focus(Girl)
+                call Les_Prep(Girl)
             "Leave quietly":
                 "You leave the girls to their business and slip out."
                 $ Girl.thirst -= 30
@@ -1864,7 +1862,8 @@ label caught_showering(Girl):
 
             "You see [Girl.name] under the shower, feeling herself up."
 
-            call expression Girl.tag + "_SexAct" pass ("masturbation")
+            call shift_focus(Girl)
+            call before_masturbation
 
             $ renpy.pop_call()
             jump shower_room

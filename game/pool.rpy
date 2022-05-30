@@ -65,7 +65,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 ch_e "Not with this sort of company. . ."
                 return
 
-    if not Girl.outfit["top"] and not Girl.outfit["bra"] and not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and (not Girl.outfit["front_outer_accessory"] or Girl != JubesX):
+    if not Girl.outfit["top"] and not Girl.outfit["bra"] and not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and (not Girl.outfit["jacket"] or Girl != JubesX):
 
         $ Girl.change_face("_sly")
         if Girl == RogueX:
@@ -106,10 +106,10 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 "lose the top?" if Girl.outfit["bra"] and not Girl.outfit["top"]:
                     $ Type = "_bra"
 
-                "maybe just lose the jacket?" if Girl.outfit["front_outer_accessory"] and Girl == JubesX:
-                    if Girl.outfit["front_outer_accessory"] == "_shut_jacket" and not Girl.outfit["bottom"] and not Girl.outfit["hose"] and not Girl.outfit["underwear"]:
+                "maybe just lose the jacket?" if Girl.outfit["jacket"] and Girl == JubesX:
+                    if Girl.outfit["jacket"] == "_shut_jacket" and not Girl.outfit["bottom"] and not Girl.outfit["hose"] and not Girl.outfit["underwear"]:
                         $ Type = "no_panties"
-                    elif Girl.outfit["front_outer_accessory"] == "_shut_jacket" and not Girl.outfit["top"] and not Girl.outfit["bra"]:
+                    elif Girl.outfit["jacket"] == "_shut_jacket" and not Girl.outfit["top"] and not Girl.outfit["bra"]:
                         $ Type = "no_bra"
                     else:
                         $ Type = "_jacket"
@@ -375,7 +375,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
             if Type == "_jacket" or Type == "both":
                 if Girl == JubesX:
-                    $ Girl.outfit["front_outer_accessory"] = ""
+                    $ Girl.outfit["jacket"] = ""
             if Type == "over" or Type == "both":
                 $ Girl.outfit["top"] = ""
             if Type == "_bra" or Type == "both":
@@ -415,7 +415,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 ch_v "Sure. . ."
 
             if Type == "_jacket":
-                $ Girl.outfit["front_outer_accessory"] = ""
+                $ Girl.outfit["jacket"] = ""
             if Type == "over":
                 $ Girl.outfit["top"] = ""
             if Type == "legs":
@@ -470,7 +470,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
             $ Girl.add_word(1,"no_tan","no_tan")
             return
-        if not Girl.outfit["bra"] and not Girl.outfit["top"] and not Girl.outfit["underwear"] and not Girl.outfit["bottom"] and Girl.hose_number() < 10:
+        if not Girl.outfit["bra"] and not Girl.outfit["top"] and not Girl.outfit["underwear"] and not Girl.outfit["bottom"] and Girl.outfit["hose"] != "_pantyhose":
             $ Girl.change_outfit("nude")
         $ Mod = 0
         $ line = 0
@@ -684,7 +684,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                                 if Girl.bra_number() > 2 and Girl.underwear_number() > 2 and approval_check(Girl, 1000):
 
                                     pass
-                                elif Girl.bra_number() > 1 and Girl.underwear_number() > 1 and approval_check(Girl, 1200):
+                                elif Girl.outfit["bra"] and Girl.outfit["underwear"] and approval_check(Girl, 1200):
 
                                     pass
                                 else:
@@ -877,7 +877,7 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
             if temp_Girls[0].outfit["bra"] == temp_Girls[0].swimwear["bra"] and temp_Girls[0].outfit["underwear"] == temp_Girls[0].swimwear[6]:
 
                 $ Swimmers.append(temp_Girls[0])
-            elif not temp_Girls[0].bra_number() and not temp_Girls[0].top_number() and not temp_Girls[0].underwear_number() and not temp_Girls[0].bottom_number() and not temp_Girls[0].hose_number():
+            elif temp_Girls[0].fully_nude:
 
                 $ Swimmers.append(temp_Girls[0])
             else:

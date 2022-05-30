@@ -169,27 +169,32 @@ label wardrobe_editor(Girl):
                         "Back":
                             jump wardrobe_menu
             "First casual outfit":
-                $ Girl.change_outfit("casual1")
+                $ Girl.outfit = Girl.first_casual_outfit
             "Second casual outfit":
-                $ Girl.change_outfit("casual2")
+                $ Girl.outfit = Girl.second_casual_outfit
             "Halloween costume":
-                $ Girl.change_outfit("costume")
+                $ Girl.outfit = Girl.halloween_costume
             "Domme outfit" if Girl == EmmaX:
                 $ Girl.arm_pose = 2
-                $ Girl.change_outfit("domme_outfit")
+                $ Girl.outfit = Girl.domme_outfit
             "Nude":
-                $ Girl.change_outfit("nude")
+                $ Girl.outfit = Girl.nude
             "Dress/Suit":
                 while True:
                     menu:
                         "Remove [Girl.outfit[dress]]" if Girl.outfit["dress"]:
                             $ Girl.outfit["dress"] = ""
+                            $ Girl.dress_top_pulled_down = False
+                            $ Girl.dress_upskirt = False
                         "Add catsuit" if Girl == RogueX:
                             $ Girl.outfit["dress"] = "_catsuit"
-                        "Add Raven outfit" if Girl == RogueX:
-                            $ Girl.outfit["back_outer_accessory"] = "_raven_cloak"
+                        "Add Raven suit" if Girl == RogueX:
                             $ Girl.outfit["dress"] = "_raven"
-                            $ Girl.outfit["cloak"] = "_raven_cloak"
+                        "Toggle Raven cloak" if Girl == RogueX:
+                            if Girl.outfit["cloak"] == "_raven_cloak":
+                                $ Girl.outfit["cloak"] = ""
+                            else:
+                                $ Girl.outfit["cloak"] = "_raven_cloak"
                         "Add blue dress" if Girl == RogueX:
                             $ Girl.outfit["dress"] = "_blue_dress"
                         "Add one-piece swimsuit" if Girl == RogueX:
@@ -204,19 +209,35 @@ label wardrobe_editor(Girl):
                             $ Girl.arm_pose = 1
                             $ Girl.outfit["bottom"] = ""
                             $ Girl.outfit["dress"] = "_sci_fi"
+                        "Pull top up/down":
+                            if Girl.dress_top_pulled_down:
+                                $ Girl.dress_top_pulled_down = False
+                            else:
+                                $ Girl.dress_top_pulled_down = True
+                        "Pull skirt up/down":
+                            if Girl.dress_upskirt:
+                                $ Girl.dress_upskirt = False
+                            else:
+                                $ Girl.dress_upskirt = True
                         "Back":
                             jump wardrobe_menu
+
+                    $ Girl.set_outfit_flags()
             "Top":
                 while True:
                     menu:
                         "Remove [Girl.outfit[top]]" if Girl.outfit["top"]:
                             $ Girl.outfit["top"] = ""
+                            $ Girl.top_pulled_up = False
                         "Remove [Girl.outfit[jacket]]" if Girl.outfit["jacket"]:
                             $ Girl.outfit["jacket"] = ""
+                            $ Girl.jacket_opened = False
                         "Add mesh top" if Girl == RogueX:
                             $ Girl.outfit["top"] = "_mesh_top"
                         "Add pink top" if Girl in [RogueX, KittyX]:
                             $ Girl.outfit["top"] = "_pink_top"
+                        "Add tube top" if Girl in [RogueX, StormX]:
+                            $ Girl.outfit["top"] = "_tube_top"
                         "Add red top" if Girl in [KittyX, JubesX]:
                             $ Girl.outfit["top"] = "_red_shirt"
                         "Add pink shirt" if Girl == JeanX:
@@ -233,17 +254,17 @@ label wardrobe_editor(Girl):
                             $ Girl.outfit["jacket"] = "_classic_jacket"
                         "Add jacket" if Girl == JubesX:
                             $ Girl.outfit["jacket"] = "_jacket"
-                        "Open/close jacket" if Girl == JubesX and Girl.outfit["jacket"] in ["_jacket", "_shut_jacket"]:
+                        "Close jacket" if Girl == JubesX and Girl.outfit["jacket"] in ["_jacket", "_closed_jacket"]:
                             if Girl.outfit["jacket"] == "_jacket":
-                                $ Girl.outfit["jacket"] = "_shut_jacket"
+                                $ Girl.outfit["jacket"] = "_closed_jacket"
                             else:
                                 $ Girl.outfit["jacket"] = "_jacket"
-                        "Wide open jacket" if Girl == JubesX and Girl.outfit["jacket"] in ["_jacket", "_open_jacket"]:
+                        "Open jacket" if Girl == JubesX and Girl.outfit["jacket"] in ["_jacket", "_open_jacket"]:
                             if Girl.outfit["jacket"] == "_jacket":
                                 $ Girl.outfit["jacket"] = "_open_jacket"
                             else:
                                 $ Girl.outfit["jacket"] = "_jacket"
-                        "Add white_shirt" if Girl == StormX:
+                        "Add white shirt" if Girl == StormX:
                             $ Girl.outfit["top"] = "_white_shirt"
                         "Add dress" if Girl == EmmaX:
                             $ Girl.outfit["top"] = "_dress"
@@ -256,37 +277,50 @@ label wardrobe_editor(Girl):
                         "Add nighty" if Girl == KittyX:
                             $ Girl.outfit["top"] = "_nighty"
                         "Add towel":
-                            $ Girl.outfit["top"] = "_towel"
+                            if Girl == StormX:
+                                $ Girl.outfit["face_outer_accessory"] = "_towel"
+                            else:
+                                $ Girl.outfit["top"] = "_towel"
+                        "Pull top up/down":
+                            if Girl.top_pulled_up:
+                                $ Girl.top_pulled_up = False
+                            else:
+                                $ Girl.top_pulled_up = True
                         "Back":
                             jump wardrobe_menu
+
+                    $ Girl.set_outfit_flags()
             "Bra":
                 while True:
                     menu:
                         "Remove [Girl.outfit[bra]]" if Girl.outfit["bra"]:
                             $ Girl.outfit["bra"] = ""
-                        "Add sports bra":
-                            $ Girl.outfit["bra"] = "_sports_bra"
+                            $ Girl.bra_pulled_up = False
                         "Add bikini":
                             $ Girl.outfit["bra"] = "_bikini_top"
-                        "Add lace bra" if Girl != KittyX:
+                        "Add lace bra" if Girl not in [KittyX, LauraX]:
                             $ Girl.outfit["bra"] = "_lace_bra"
+                        "Add sports bra" if Girl != LauraX:
+                            $ Girl.outfit["bra"] = "_sports_bra"
                         "Add tank top" if Girl == RogueX:
                             $ Girl.outfit["bra"] = "_tank"
                         "Add buttoned tank top" if Girl == RogueX:
                             $ Girl.outfit["bra"] = "_buttoned_tank"
-                        "Add tube top" if Girl in [RogueX, StormX]:
-                            $ Girl.outfit["bra"] = "_tube_top"
-                        "Add basic bra" if Girl in [RogueX, KittyX, EmmaX, LauraX, JubesX]:
+                        "Add basic bra" if Girl in [RogueX, KittyX, EmmaX]:
                             $ Girl.outfit["bra"] = "_bra"
                         "Add cami" if Girl == KittyX:
                             $ Girl.outfit["bra"] = "_cami"
                         "Add dress top" if Girl == KittyX:
                             $ Girl.outfit["bra"] = "_dress"
+                        "Add corset" if Girl in [EmmaX, LauraX]:
+                            $ Girl.outfit["bra"] = "_corset"
+                        "Add lace corset" if Girl == LauraX:
+                            $ Girl.outfit["bra"] = "_lace_corset"
                         "Add leather bra" if Girl == LauraX:
                             $ Girl.outfit["bra"] = "_leather_bra"
                         "Add white tank" if Girl == LauraX:
                             $ Girl.outfit["bra"] = "_white_tank"
-                        "Add wolvie panties" if Girl == LauraX:
+                        "Add wolvie bra" if Girl == LauraX:
                             $ Girl.outfit["bra"] = "_wolvie_bra"
                         "Add green bra" if Girl == JeanX:
                             $ Girl.outfit["bra"] = "_green_bra"
@@ -294,10 +328,6 @@ label wardrobe_editor(Girl):
                             $ Girl.outfit["bra"] = "_black_bra"
                         "Add cosplay bra" if Girl == StormX:
                             $ Girl.outfit["bra"] = "_cosplay_bra"
-                        "Add corset" if Girl == EmmaX:
-                            $ Girl.outfit["bra"] = "_corset"
-                        "Add lace corset" if Girl == EmmaX:
-                            $ Girl.outfit["bra"] = "_lace_corset"
                         "Add classic top" if Girl == RogueX:
                             $ Girl.outfit["bra"] = "_classic"
                         "Add harness" if Girl == RogueX:
@@ -306,19 +336,23 @@ label wardrobe_editor(Girl):
                             $ Girl.outfit["bra"] = "_kitty_lingerie"
                         "Add orange top" if Girl == KittyX:
                             $ Girl.outfit["bra"] = "_orange_top"
-                        "Toggle up-top":
-                            if Girl.top_pulled_up:
-                                $ Girl.top_pulled_up = False
+                        "Pull bra up/down":
+                            if Girl.bra_pulled_up:
+                                $ Girl.bra_pulled_up = False
                             else:
-                                $ Girl.top_pulled_up = True
+                                $ Girl.bra_pulled_up = True
                         "Back":
                             jump wardrobe_menu
+
+                    $ Girl.set_outfit_flags()
             "Bottom":
                 while True:
                     menu:
                         "Remove [Girl.outfit[bottom]]" if Girl.outfit["bottom"]:
                             $ Girl.outfit["bottom"] = ""
-                        "Add skirt" if Girl != KittyX:
+                            $ Girl.bottom_pulled_down = False
+                            $ Girl.upskirt = False
+                        "Add skirt" if Girl not in [KittyX, JubesX]:
                             $ Girl.outfit["bottom"] = "_skirt"
                         "Add cosplay skirt" if Girl == LauraX:
                             $ Girl.outfit["bottom"] = "_cosplay_skirt"
@@ -350,13 +384,27 @@ label wardrobe_editor(Girl):
                             $ Girl.outfit["bottom"] = "_black_and_blue_pants"
                         "Add boots" if Girl == EmmaX:
                             $ EmmaX.outfit["boots"] = "_thigh_boots"
-                        "Toggle upskirt":
+                        "Pull bottom up/down" if not Girl.wearing_skirt:
+                            if Girl.bottom_pulled_down:
+                                $ Girl.bottom_pulled_down = False
+                            else:
+                                $ Girl.bottom_pulled_down = True
+                        "Pull skirt up/down" if Girl.wearing_skirt:
                             if Girl.upskirt:
                                 $ Girl.upskirt = False
                             else:
                                 $ Girl.upskirt = True
+                        "Toggle grool":
+                            if not Girl.grool:
+                                $ Girl.grool = 1
+                            elif Girl.grool == 1:
+                                $ Girl.grool = 2
+                            else:
+                                $ Girl.grool  = 0
                         "Back":
                             jump wardrobe_menu
+
+                    $ Girl.set_outfit_flags()
             "Panties & Hose":
                 while True:
                     menu:
@@ -386,13 +434,14 @@ label wardrobe_editor(Girl):
                                     $ Girl.outfit["hose"] = "_black_stockings"
                         "Remove [Girl.outfit[underwear]]" if Girl.outfit["underwear"]:
                             $ Girl.outfit["underwear"] = ""
-                        "Add green panties":
-                            $ Girl.outfit["underwear"] = "_green_panties"
+                            $ Girl.underwear_pulled_down = False
                         "Add lace panties":
                             $ Girl.outfit["underwear"] = "_lace_panties"
                         "Add bikini bottoms":
                             $ Girl.outfit["underwear"] = "_bikini_bottoms"
-                        "Add black panties" if Girl != JeanX:
+                        "Add green panties" if Girl != JubesX:
+                            $ Girl.outfit["underwear"] = "_green_panties"
+                        "Add black panties" if Girl not in [KittyX, JeanX, JubesX]:
                             $ Girl.outfit["underwear"] = "_black_panties"
                         "Add shorts" if Girl == RogueX:
                             $ Girl.outfit["underwear"] = "_shorts"
@@ -404,17 +453,21 @@ label wardrobe_editor(Girl):
                             $ Girl.outfit["underwear"] = "_wolvie_panties"
                         "Add cosplay panties" if Girl == StormX:
                             $ Girl.outfit["underwear"] = "_cosplay_panties"
+                        "Add blue panties" if Girl == JubesX:
+                            $ Girl.outfit["underwear"] = "_blue_panties"
+                        "Add tiger panties" if Girl == JubesX:
+                            $ Girl.outfit["underwear"] = "_tiger_panties"
                         "Add harness" if Girl == RogueX:
                             $ Girl.outfit["underwear"] = "_harness"
                         "Add kitty lingerie" if Girl == KittyX:
                             $ Girl.outfit["underwear"] = "_kitty_lingerie"
                         "Add nighty underwear" if Girl == KittyX:
                             $ Girl.outfit["underwear"] = "_nighty"
-                        "Toggle underwear up/down":
+                        "Pull underwear up/down" if not Girl.outfit["bottom"]:
                             if Girl.underwear_pulled_down:
-                                $ Girl.underwear_pulled_down = 0
+                                $ Girl.underwear_pulled_down = False
                             else:
-                                $ Girl.underwear_pulled_down = 1
+                                $ Girl.underwear_pulled_down = True
                         "Toggle grool":
                             if not Girl.grool:
                                 $ Girl.grool = 1
@@ -424,6 +477,8 @@ label wardrobe_editor(Girl):
                                 $ Girl.grool  = 0
                         "Back":
                             jump wardrobe_menu
+
+                    $ Girl.set_outfit_flags()
             "Misc":
                 while True:
                     menu:
@@ -488,7 +543,7 @@ label wardrobe_editor(Girl):
                                 $ Girl.outfit["hair"] = "_short"
                             elif Girl.outfit["hair"] == "_short":
                                 $ Girl.outfit["hair"] = "_wet"
-                            elif Girl.outfit["hair"] = "_wet":
+                            elif Girl.outfit["hair"] == "_wet":
                                 $ Girl.outfit["hair"] = "_long"
 
                             $ Girl.outfit["back_hair"] = Girl.outfit["hair"]
@@ -525,17 +580,22 @@ label wardrobe_editor(Girl):
                                 $ Girl.outfit["neck"] = "_rings"
                             else:
                                 $ Girl.outfit["neck"] = ""
-                        "Toggle rings" if Girl == StormX:
-                            if not Girl.outfit["front_outer_accessory"]:
-                                $ Girl.outfit["front_outer_accessory"] = "_rings"
+                        "Toggle arm rings" if Girl == StormX:
+                            if not Girl.outfit["sleeves"]:
+                                $ Girl.outfit["sleeves"] = "_rings"
                             else:
-                                $ Girl.outfit["front_outer_accessory"] = ""
+                                $ Girl.outfit["sleeves"] = ""
+                        "Toggle leg rings" if Girl == StormX:
+                            if not Girl.outfit["boots"]:
+                                $ Girl.outfit["boots"] = "_rings"
+                            else:
+                                $ Girl.outfit["boots"] = ""
                         "Toggle sweater" if Girl == RogueX:
                             if Girl.outfit["scarf"] != "_sweater":
                                 $ Girl.outfit["scarf"] = "_sweater"
                             else:
                                 $ Girl.outfit["scarf"] = ""
-                        "Toggle spiked collar" if Girl in [RogueX, LauraX]:
+                        "Toggle spiked collar" if Girl in [RogueX, EmmaX]:
                             if Girl.outfit["neck"] != "_spiked_collar":
                                 $ Girl.outfit["neck"] = "_spiked_collar"
                             else:
@@ -545,26 +605,24 @@ label wardrobe_editor(Girl):
                                 $ Girl.outfit["neck"] = "_choker"
                             else:
                                 $ Girl.outfit["neck"] = ""
+                        "Toggle leash" if Girl == LauraX:
+                            if Girl.outfit["neck"] != "_leash_choker":
+                                $ Girl.outfit["neck"] = "_leash_choker"
+                            else:
+                                $ Girl.outfit["neck"] = ""
                         "Toggle boots" if Girl == EmmaX:
                             if Girl.outfit["boots"] != "_thigh_boots":
                                 $ Girl.outfit["boots"] = "_thigh_boots"
                             else:
                                 $ Girl.outfit["boots"] = ""
                         "Toggle suspenders" if Girl in [LauraX, JeanX]:
-                            if Girl.outfit["suspenders"] == "_suspenders":
-                                $ Girl.outfit["suspenders"] = "_suspenders2"
-                            elif Girl.outfit["suspenders"] == "_suspenders2":
+                            if Girl.outfit["suspenders"] == "_suspenders" and not Girl.suspenders_aside:
+                                $ Girl.suspenders_aside = True
+                            elif Girl.outfit["suspenders"] == "_suspenders" and Girl.suspenders_aside:
                                 $ Girl.outfit["suspenders"] = ""
                             else:
                                 $ Girl.outfit["suspenders"] = "_suspenders"
-                        "Toggle Raven cloak" if Girl == RogueX:
-                            if Girl.outfit["cloak"] == "_raven_cloak":
-                                $ Girl.outfit["back_outer_accessory"] = ""
-                                $ Girl.outfit["cloak"] = ""
-                            else:
-                                $ Girl.outfit["back_outer_accessory"] = "_raven_cloak"
-                                $ Girl.outfit["cloak"] = "_raven_cloak"
-                        "Toggle diamond mode" if Girl == EmmaX:
+                        "Toggle diamond skin" if Girl == EmmaX:
                             if Girl.diamond:
                                 $ Girl.diamond = False
                             else:
@@ -647,10 +705,23 @@ label wardrobe_editor(Girl):
                                 $ Girl.outfit["gloves"] = ""
                             else:
                                 $ Girl.outfit["gloves"] = "_gloves"
+                        "Toggle spiked bracelets" if Girl == EmmaX:
+                            if Girl.outfit["gloves"]:
+                                $ Girl.outfit["gloves"] = ""
+                            else:
+                                $ Girl.outfit["gloves"] = "_spiked_bracelets"
+                        "Toggle wristbands" if Girl == LauraX:
+                            if Girl.outfit["gloves"]:
+                                $ Girl.outfit["gloves"] = ""
+                            else:
+                                $ Girl.outfit["gloves"] = "_wrists"
                         "Back":
                             jump wardrobe_menu
             "Nothing":
                 return
+
+        $ Girl.set_outfit_flags()
+
     return
 
 label cheat_menu(Girl):

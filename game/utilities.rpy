@@ -638,11 +638,11 @@ label to_do(Girl):
         $ Girl.to_do.remove("hair")
 
     if "_ring" in Girl.to_do:
-        $ Girl.outfit["front_inner_accessory"] = "_ring"
+        $ Girl.outfit["piercings"] = "_ring"
         $ Girl.to_do.remove("_ring")
 
     if "_barbell" in Girl.to_do:
-        $ Girl.outfit["front_inner_accessory"] = "_barbell"
+        $ Girl.outfit["piercings"] = "_barbell"
         $ Girl.to_do.remove("_barbell")
 
     return
@@ -712,19 +712,19 @@ label change_out_of_gym_clothes(Girls = []):
 
 label hide_girl(Girl):
     if Girl == RogueX:
-        hide Rogue
+        hide Rogue_sprite
     elif Girl == KittyX:
-        hide Kitty
+        hide Kitty_sprite
     elif Girl == EmmaX:
-        hide Emma
+        hide Emma_sprite
     elif Girl == LauraX:
-        hide Laura
+        hide Laura_sprite
     elif Girl == JeanX:
-        hide Jean
+        hide Jean_sprite
     elif Girl == StormX:
-        hide Storm
+        hide Storm_sprite
     elif Girl == JubesX:
-        hide Jubes
+        hide Jubes_sprite
 
     return
 
@@ -752,97 +752,97 @@ label event_calls(event_Girls=[]):
     if day < 3 or round <= 10:
         return
 
-    # if KittyX in active_Girls:
-    #     if "Kate" not in KittyX.names and KittyX.inhibition >= 500 and KittyX.location == bg_current:
-    #         call Kitty_Kate
-    #
-    #         return
-    # else:
-    #     if "traveling" in Player.recent_history and "met" not in KittyX.history and bg_current == "bg_classroom":
-    #         jump meet_Kitty
-    #
-    #         return
-    #
-    # if EmmaX in active_Girls:
-    #     if bg_current == "bg_classroom" and time_index == 2 and weekday in (0,2,4):
-    #         if "traveling" in Player.recent_history and not Party:
-    #             if "classcaught" not in EmmaX.history:
-    #                 jump Emma_Caught_Classroom
-    #
-    #                 return
-    #             elif D20 <= 10 and "will_masturbate" in EmmaX.daily_history:
-    #                 jump Emma_Caught_Classroom
-    #
-    #                 return
-    #
-    #         if "detention" in Player.traits and not Party:
-    #             jump Emma_Detention
-    #
-    #         if round >= 70:
-    #             $ EmmaX.location = "bg_classroom"
-    # else:
-    #     if day >= 9 and "met" not in EmmaX.history and "traveling" in Player.recent_history and bg_current == "bg_classroom" and weekday < 5:
-    #         jump meet_Emma
-    #
-    #         return
-    #
-    # if LauraX in active_Girls:
-    #     pass
-    # elif "met" not in LauraX.history and "traveling" in Player.recent_history:
-    #     if bg_current == "bg_dangerroom":
-    #         if day >= 12 and "dress0" not in LauraX.history and "mission" not in LauraX.to_do:
-    #             call meet_Laura
-    #
-    #             return
-    #
-    #     if time_index < 3 and "met" in KittyX.history:
-    #         if "dress0" in LauraX.history:
-    #             call Laura_Dressup
-    #
-    #             return
-    #
-    # if StormX in active_Girls:
-    #     if bg_current == "bg_classroom" and StormX.location == "bg_teacher" and "Peter" in StormX.history and "traveling" in Player.recent_history:
-    #         call Storm_Peter
-    #
-    #         return
-    #
-    #     if bg_current == "bg_classroom" and time_index == 2 and weekday in (1,3):
-    #         if "_mohawk" not in StormX.history and "traveling" not in Player.recent_history and approval_check(StormX, 200, "I"):
-    #             jump Storm_Hairtalk
-    #
-    #             return
-    #         if round >= 70:
-    #             $ StormX.location = "bg_classroom"
-    #
-    #     if time_index == 3 and bg_current == "bg_pool" and "poolnight" in Player.history:
-    #         if "sex friend" not in StormX.player_petnames or (D20 < 5 and "poolnight" not in Player.recent_history):
-    #             call Storm_Poolnight
-    #
-    #             return
-    # elif "met" not in StormX.history and "met" in JeanX.history:
-    #     if bg_current == "bg_player" and "attic" not in Player.history and "noise" not in Player.history:
-    #         call StormMeetPrelude
-    #
-    #         return
-    #     elif bg_current == "bg_classroom" and "noise" in Player.history and "traveling" in Player.recent_history:
-    #         call StormMeetAsk
-    #
-    #         return
-    #     elif bg_current == "bg_player" and time_index < 2 and 0 < StormX.broken_up[0] <= 101 and "traveling" in Player.recent_history:
-    #         call StormMeetWater
-    #         jump Misplaced
-    #
-    # if JubesX in active_Girls:
-    #     if time_index < 3 and "sunshine" not in JubesX.history and "traveling" in Player.recent_history and bg_current in ("bg_classroom","bg_dangerroom","bg_campus","bg_pool"):
-    #         jump Jubes_Sunshine
-    #
-    #         return
-    #     elif "mall" not in Player.history and "sunshine" in JubesX.history and time_index < 3 and JubesX.addiction < 50:
-    #         call Jubes_Mall
-    #         jump Misplaced
-    #     elif not JubesX.event_happened[1] and JubesX.addiction < 50:
-    #         $ JubesX.addiction += 5
+    if KittyX in active_Girls:
+        if "Kate" not in KittyX.names and KittyX.inhibition >= 500 and KittyX.location == bg_current:
+            call Kitty_Kate
+
+            return
+    else:
+        if "traveling" in Player.recent_history and "met" not in KittyX.history and bg_current == "bg_classroom":
+            jump meet_Kitty
+
+            return
+
+    if EmmaX in active_Girls:
+        if bg_current == "bg_classroom" and time_index == 2 and weekday in (0,2,4):
+            if "traveling" in Player.recent_history and not Party:
+                if "classcaught" not in EmmaX.history:
+                    jump Emma_Caught_Classroom
+
+                    return
+                elif D20 <= 10 and "will_masturbate" in EmmaX.daily_history:
+                    jump Emma_Caught_Classroom
+
+                    return
+
+            if "detention" in Player.traits and not Party:
+                jump Emma_Detention
+
+            if round >= 70:
+                $ EmmaX.location = "bg_classroom"
+    else:
+        if day >= 9 and "met" not in EmmaX.history and "traveling" in Player.recent_history and bg_current == "bg_classroom" and weekday < 5:
+            jump meet_Emma
+
+            return
+
+    if LauraX in active_Girls:
+        pass
+    elif "met" not in LauraX.history and "traveling" in Player.recent_history:
+        if bg_current == "bg_dangerroom":
+            if day >= 12 and "dress0" not in LauraX.history and "mission" not in LauraX.to_do:
+                call meet_Laura
+
+                return
+
+        if time_index < 3 and "met" in KittyX.history:
+            if "dress0" in LauraX.history:
+                call Laura_Dressup
+
+                return
+
+    if StormX in active_Girls:
+        if bg_current == "bg_classroom" and StormX.location == "bg_teacher" and "Peter" in StormX.history and "traveling" in Player.recent_history:
+            call Storm_Peter
+
+            return
+
+        if bg_current == "bg_classroom" and time_index == 2 and weekday in (1,3):
+            if "_mohawk" not in StormX.history and "traveling" not in Player.recent_history and approval_check(StormX, 200, "I"):
+                jump Storm_Hairtalk
+
+                return
+            if round >= 70:
+                $ StormX.location = "bg_classroom"
+
+        if time_index == 3 and bg_current == "bg_pool" and "poolnight" in Player.history:
+            if "sex friend" not in StormX.player_petnames or (D20 < 5 and "poolnight" not in Player.recent_history):
+                call Storm_Poolnight
+
+                return
+    elif "met" not in StormX.history and "met" in JeanX.history:
+        if bg_current == "bg_player" and "attic" not in Player.history and "noise" not in Player.history:
+            call StormMeetPrelude
+
+            return
+        elif bg_current == "bg_classroom" and "noise" in Player.history and "traveling" in Player.recent_history:
+            call StormMeetAsk
+
+            return
+        elif bg_current == "bg_player" and time_index < 2 and 0 < StormX.broken_up[0] <= 101 and "traveling" in Player.recent_history:
+            call StormMeetWater
+            jump Misplaced
+
+    if JubesX in active_Girls:
+        if time_index < 3 and "sunshine" not in JubesX.history and "traveling" in Player.recent_history and bg_current in ("bg_classroom","bg_dangerroom","bg_campus","bg_pool"):
+            jump Jubes_Sunshine
+
+            return
+        elif "mall" not in Player.history and "sunshine" in JubesX.history and time_index < 3 and JubesX.addiction < 50:
+            call Jubes_Mall
+            jump Misplaced
+        elif not JubesX.event_happened[1] and JubesX.addiction < 50:
+            $ JubesX.addiction += 5
 
     if "goto" in Player.recent_history:
         $ Player.recent_history.remove("goto")
@@ -1299,25 +1299,25 @@ label tenth_round:
 
 label hide_all(cull = False):
     if cull or RogueX.location != bg_current:
-        hide Rogue
+        hide Rogue_sprite
 
     if cull or KittyX.location != bg_current:
-        hide Kitty
+        hide Kitty_sprite
 
     if cull or EmmaX.location != bg_current:
-        hide Emma
+        hide Emma_sprite
 
     if cull or LauraX.location != bg_current:
-        hide Laura
+        hide Laura_sprite
 
     if cull or JeanX.location != bg_current:
-        hide Jean
+        hide Jean_sprite
 
     if cull or StormX.location != bg_current:
-        hide Storm
+        hide Storm_sprite
 
     if cull or JubesX.location != bg_current:
-        hide Jubes
+        hide Jubes_sprite
 
     if cull or "bg_study" != bg_current:
         hide Xavier_sprite
@@ -3336,15 +3336,15 @@ label shift_view(Girl, view):
             "Rear view" if Girl in [RogueX, KittyX, EmmaX, LauraX, JeanX]:
                 $ Girl.pose = "doggy"
 
-                call sex_launch(Girl)
+                call sex_launch(Girl, "hotdog")
             "On top of you" if Girl in [EmmaX, JeanX, StormX]:
                 $ Girl.pose = "sex"
 
-                call sex_launch(Girl)
+                call sex_launch(Girl, "hotdog")
             "Laying down" if Girl in [RogueX, KittyX, LauraX]:
                 $ Girl.pose = "sex"
 
-                call sex_launch(Girl)
+                call sex_launch(Girl, "hotdog")
             "Never mind":
                 pass
     else:
@@ -3426,7 +3426,8 @@ label Sex_Menu_Threesome(Girl=0):
                 if Girl.location != bg_current:
 
                     ch_e "Pity. . ."
-                    call Emma_SexAct ("switch")
+                    call shift_focus(EmmaX)
+                    $ renpy.pop_call()
                 elif EmmaX.location == bg_current:
                     ch_e "So what did you have in mind for us. . ."
                 else:
@@ -3444,7 +3445,8 @@ label Sex_Menu_Threesome(Girl=0):
                 if Girl.location != bg_current:
 
                     ch_l "Her loss. . ."
-                    call Laura_SexAct ("switch")
+                    call shift_focus(LauraX)
+                    $ renpy.pop_call()
                 elif LauraX.location == bg_current:
                     ch_l "Hm, ok. . ."
                 else:
@@ -3459,7 +3461,8 @@ label Sex_Menu_Threesome(Girl=0):
                 if Girl.location != bg_current:
 
                     ch_j "Huh. Her loss. . ."
-                    call Jean_SexAct ("switch")
+                    call shift_focus(JeanX)
+                    $ renpy.pop_call()
                 elif JeanX.location == bg_current:
                     ch_j "Sure."
                 else:
@@ -3477,7 +3480,9 @@ label Sex_Menu_Threesome(Girl=0):
                 if Girl.location != bg_current:
 
                     ch_s "Oh, that's too bad. . ."
-                    call Storm_SexAct ("switch")
+                    call shift_focus(StormX)
+                    $ renpy.pop_call()
+
                 elif StormX.location == bg_current:
                     ch_s "Delighted. . ."
                 else:
@@ -3495,7 +3500,8 @@ label Sex_Menu_Threesome(Girl=0):
                 if Girl.location != bg_current:
 
                     ch_v "Oh, well. . ."
-                    call Jubes_SexAct ("switch")
+                    call shift_focus(JubesX)
+                    $ renpy.pop_call()
                 elif JubesX.location == bg_current:
                     ch_v "Sure!"
                 else:
@@ -4261,7 +4267,7 @@ label Sex_Dialog(Primary=focused_Girl, Secondary=0, TempFocus=0, PrimaryLust=0, 
         "[line4]"
         if second_girl_primary_action == "suck_breasts" or second_girl_primary_action == "fondle_breasts":
 
-            if approval_check(Primary,500,"I",taboo_modifier=2) and Primary.lust >= 50 and (Primary.bra_number() > 1 or Primary.top_number() > 1):
+            if approval_check(Primary,500,"I",taboo_modifier=2) and Primary.lust >= 50 and (Primary.outfit["bra"] or Primary.top_number() > 1):
 
                 $ Primary.top_pulled_up = 1
                 "[Primary.name] seems frustrated and pulls her top open."
@@ -4427,7 +4433,9 @@ label primary_action_Swap(Active=0, primary_actionX1=primary_action, primary_act
             jump Jubes_SMenu
     else:
         call set_the_scene (Dress=0, trigger_reset=0, silent = True)
-        call expression Primary.tag + "_SexAct" pass ("SkipTo")
+        $ renpy.pop_call()
+        $ renpy.pop_call()
+        call SkipTo(Girl)
     return
 
 label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0, approval=1, Tempshame=0, tabooM=1):

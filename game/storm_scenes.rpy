@@ -793,11 +793,11 @@ label Storm_Hairtalk:
                 $ StormX.change_stat("inhibition", 60, 1)
                 ch_s "I. . . suppose that I might accomodate that. . ."
                 $ StormX.change_stat("inhibition", 80, 2)
-                $ StormX.top_pulled_up = 1
-                $ StormX.upskirt = 1
+                $ StormX.top_pulled_up = True
+                $ StormX.upskirt = True
                 pause 1
-                $ StormX.top_pulled_up = 0
-                $ StormX.upskirt = 0
+                $ StormX.top_pulled_up = False
+                $ StormX.upskirt = False
                 ch_s ". . ."
             else:
                 $ StormX.change_stat("love", 70, -2)
@@ -832,7 +832,9 @@ label Storm_Hairtalk:
                 $ StormX.change_stat("obedience", 80, 1)
                 $ StormX.change_stat("inhibition", 80, 1)
                 ch_s "I. . . suppose that I might accomodate that. . ."
-                call Storm_SexAct ("kiss")
+                call shift_focus(StormX)
+                $ primary_action = "kiss"
+                call before_action
             else:
                 $ StormX.change_stat("obedience", 80, -1)
                 ch_s "I do not think that I should do that. . ."

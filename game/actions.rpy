@@ -169,7 +169,7 @@ label before_action:
         if not focused_Girl.forced and action_context != "auto":
             $ approval_bonus = 0
 
-            if primary_action in ["eat_pussy", "eat_ass"] and focused_Girl.bottom_number() >= 6:
+            if primary_action in ["eat_pussy", "eat_ass"]:
                 $ approval_bonus = 15
 
             if primary_action in inside_panties_actions:
@@ -191,11 +191,6 @@ label before_action:
                 $ focused_Girl.mouth = "_smile"
         else:
             if not focused_Girl.forced and action_context != "auto":
-                if primary_action == "dildo_pussy":
-                    $ approval_bonus = 15 if focused_Girl.bottom_number() > 6 else 0
-                elif primary_action == "dildo_ass":
-                    $ approval_bonus = 20 if focused_Girl.bottom_number() > 6 else 0
-
                 call Bottoms_Off(focused_Girl)
 
                 if "_angry" in focused_Girl.recent_history:
@@ -218,7 +213,7 @@ label before_action:
 
         $ focused_Girl.pose = "doggy"
 
-        call sex_launch(focused_Girl)
+        call sex_launch(focused_Girl, primary_action)
 
     if primary_action not in sex_actions:
         if action_context == focused_Girl:
@@ -237,9 +232,7 @@ label before_action:
             if _return:
                 return
 
-            $ focused_Girl.underwear_pulled_down = 1
-
-            call expression focused_Girl.tag + "_First_Bottomless" pass(1)
+            call expose_bottom(focused_Girl)
         elif action_context != "auto":
             if primary_action in ["sex", "anal"]:
                 call AutoStrip(focused_Girl)
@@ -254,14 +247,20 @@ label before_action:
                 elif primary_action == "anal":
                     $ word = renpy.random.choice(["ass", "back door"])
 
-                if (focused_Girl.bottom_number() > 6 and not focused_Girl.upskirt) and (focused_Girl.outfit["underwear"] and not focused_Girl.underwear_pulled_down):
+                if (focused_Girl.wearing_pants and not focused_Girl.bottom_pulled_down) and (focused_Girl.outfit["underwear"] and not focused_Girl.underwear_pulled_down):
                     "You quickly pull down her pants and her [focused_Girl.outfit['underwear']] and press against her [word]."
+
+                    $ focused_Girl.bottom_pulled_down = True
+                    $ focused_Girl.underwear_pulled_down = True
                 elif (focused_Girl.outfit["underwear"] and not focused_Girl.underwear_pulled_down):
                     "You quickly pull down her [focused_Girl.outfit['underwear']] and press against her [word]."
 
-                $ focused_Girl.upskirt = 1
-                $ focused_Girl.underwear_pulled_down = 1
-                $ focused_Girl.seen_underwear = 1
+                    $ focused_Girl.underwear_pulled_down = True
+
+                if focused_Girl.wearing_skirt:
+                    $ focused_Girl.upskirt = True
+
+                $ focused_Girl.seen_underwear = True
 
                 call expression focused_Girl.tag + "_First_Bottomless" pass(1)
             elif primary_action == "hotdog":
@@ -333,7 +332,7 @@ label before_action:
     elif primary_action in breast_actions:
         call breasts_launch(focused_Girl)
     elif primary_action == "footjob":
-        call sex_launch(focused_Girl)
+        call sex_launch(focused_Girl, primary_action)
 
 label action_cycle:
     if primary_action in mouth_actions:
@@ -350,7 +349,7 @@ label action_cycle:
         if primary_action in fondle_actions:
             call shift_view(focused_Girl, focused_Girl.pose)
         elif primary_action in ["footjob", "sex", "anal", "hotdog"]:
-            call sex_launch(focused_Girl)
+            call sex_launch(focused_Girl, primary_action)
 
             if primary_action == "sex":
                 $ Player.cock_position = "in"
@@ -376,7 +375,7 @@ label action_cycle:
         label action_menu_return:
 
         if primary_action in inside_panties_actions:
-            if focused_Girl.outfit["underwear"] or focused_Girl.bottom_number() >= 6 or focused_Girl.hose_number() >= 5: #This checks if Rogue_sprite wants to strip down.
+            if focused_Girl.outfit["underwear"] or focused_Girl.legs_covered: #This checks if Rogue_sprite wants to strip down.
                 call focused_Girl_Undress(focused_Girl, "auto")
 
         call Sex_Dialog(focused_Girl, Partner)
@@ -421,11 +420,11 @@ label after_action:
         $ focused_Girl.change_stat("love", 70, 1)
 
     if primary_action in ["fondle_thighs", "fondle_ass"]:
-        if RogueX.bottom_number() < 6 or RogueX.upskirt:
-            $ RogueX.addiction_rate += 1
+        if focused_Girl.legs_covered:
+            $ focused_Girl.addiction_rate += 1
 
             if Player.addictive:
-                $ RogueX.addiction_rate += 1
+                $ focused_Girl.addiction_rate += 1
     elif primary_action not in dildo_actions:
         if primary_action == "kiss":
             $ focused_Girl.addiction_rate += 2 if focused_Girl.addiction_rate < 5 else 1
@@ -491,7 +490,7 @@ label set_approval_bonus:
         if focused_Girl.action_counter["fondle_thighs"]:
             $ approval_bonus += 10
 
-        if focused_Girl.bottom_number() >= 6 or focused_Girl.hose_number() >= 5:
+        if focused_Girl.legs_covered:
             $ approval_bonus -= 5
 
         if focused_Girl.lust > 75:
@@ -542,7 +541,7 @@ label set_approval_bonus:
         if focused_Girl.action_counter["fondle_pussy"]: #You've done it before
             $ approval_bonus += 20
 
-        if focused_Girl.bottom_number() >= 6 or focused_Girl.hose_number() >= 5: # she's got pants on.
+        if focused_Girl.legs_covered: # she's got pants on.
             $ approval_bonus -= 10
 
         if focused_Girl.lust > 75: #She's really horny
@@ -562,7 +561,7 @@ label set_approval_bonus:
         if focused_Girl.action_counter["eat_pussy"]: #You've done it before
             $ approval_bonus += 15
 
-        if focused_Girl.bottom_number() >= 6 or focused_Girl.hose_number() >= 5: # she's got pants on.
+        if focused_Girl.legs_covered: # she's got pants on.
             $ approval_bonus -= 15
 
         if focused_Girl.lust > 95:
@@ -587,7 +586,7 @@ label set_approval_bonus:
         if focused_Girl.action_counter["fondle_ass"]: #You've done it before
             $ approval_bonus += 10
 
-        if focused_Girl.bottom_number() >= 6 or focused_Girl.hose_number() >= 5: # she's got pants on.
+        if focused_Girl.legs_covered: # she's got pants on.
             $ approval_bonus -= 5
 
         if focused_Girl.lust > 75: #She's really horny
@@ -604,7 +603,7 @@ label set_approval_bonus:
         if focused_Girl.action_counter["finger_ass"]: #You've done it before
             $ approval_bonus += 25
 
-        if focused_Girl.bottom_number() >= 6 or focused_Girl.hose_number() >= 5: # she's got pants on.
+        if focused_Girl.legs_covered: # she's got pants on.
             $ approval_bonus -= 15
 
         if focused_Girl.lust > 85 and focused_Girl.used_to_anal: #She's really horny
@@ -630,7 +629,7 @@ label set_approval_bonus:
         if focused_Girl.action_counter["eat_ass"]: #You've done it before
             $ approval_bonus += 20
 
-        if focused_Girl.bottom_number() >= 6 or focused_Girl.hose_number() >= 5: # she's got pants on.
+        if focused_Girl.legs_covered: # she's got pants on.
             $ approval_bonus -= 25
 
         if focused_Girl.lust > 95:
@@ -752,7 +751,7 @@ label set_approval_bonus:
     elif primary_action == "dildo_pussy":
         if focused_Girl.action_counter[primary_action]: #You've done it before
             $ approval_bonus += 15
-        if focused_Girl.bottom_number() > 6: # she's got pants on.
+        if focused_Girl.legs_covered: # she's got pants on.
             $ approval_bonus -= 20
 
         if focused_Girl.lust > 95:
@@ -779,7 +778,7 @@ label set_approval_bonus:
         elif (focused_Girl.action_counter["anal"] + focused_Girl.action_counter["dildo_ass"] + focused_Girl.outfit["buttplug"]) > 0: #You've done it before
             $ approval_bonus += 20
 
-        if focused_Girl.bottom_number() > 6: # she's got pants on.
+        if focused_Girl.legs_covered: # she's got pants on.
             $ approval_bonus -= 20
 
         if focused_Girl.lust > 95:

@@ -3357,9 +3357,9 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
         elif OptionsDS[0] == "flash":
             $ Girl.change_face("_sexy")
             "After making out for a few minutes, [Girl.name] gets a sly look on her face, then shifts a bit lower in her seat."
-            if Girl.bottom_number() > 6:
+            if Girl.wearing_pants:
                 "Looking down, you notice she's pulled down her pants enough that you can see her bare pussy, lit by the movie screen."
-            elif Girl.bottom_number() == 6:
+            elif Girl.wearing_shorts:
                 "Looking down, you notice she's pulled down her shorts enough that you can see her bare pussy, lit by the movie screen."
             else:
                 "Looking down, you notice she's hiked up her skirt enough that you can see her bare pussy, lit by the movie screen."

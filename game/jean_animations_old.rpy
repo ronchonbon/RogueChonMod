@@ -101,7 +101,7 @@ image Jean_Doggy_Body:
         (0,0), ConditionSwitch(
 
             "not JeanX.outfit['bottom'] or JeanX.upskirt", Null(),
-            "JeanX.outfit['front_outer_accessory'] == '_suspenders' or JeanX.outfit['front_outer_accessory'] == '_suspenders2'", "images/JeanDoggy/Jean_Doggy_Suspenders.png",
+            "JeanX.outfit['suspenders'] == '_suspenders' or JeanX.outfit['suspenders'] == '_suspenders2'", "images/JeanDoggy/Jean_Doggy_Suspenders.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -350,8 +350,8 @@ image Jean_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "Player.sprite", Null(),
-            "JeanX.outfit['front_inner_accessory'] == '_ring'", "images/JeanDoggy/Jean_Doggy_PussyRing.png",
-            "JeanX.outfit['front_inner_accessory'] == '_barbell'", "images/JeanDoggy/Jean_Doggy_PussyBarbell.png",
+            "JeanX.outfit['piercings'] == '_ring'", "images/JeanDoggy/Jean_Doggy_PussyRing.png",
+            "JeanX.outfit['piercings'] == '_barbell'", "images/JeanDoggy/Jean_Doggy_PussyBarbell.png",
             "True", Null(),
             ),
 
@@ -1470,7 +1470,7 @@ image Jean_Sex_Torso:
 
         ConditionSwitch(
 
-            "JeanX.outfit['front_inner_accessory'] == '_barbell'", ConditionSwitch(
+            "JeanX.outfit['piercings'] == '_barbell'", ConditionSwitch(
 
                     "JeanX.top_pulled_up or (not JeanX.outfit['bra'] and not JeanX.outfit['top'])", "images/JeanSex/Jean_Sex_Pierce_Tits_Barbell.png",
                     "JeanX.outfit['top'] == '_green_shirt'", "images/JeanSex/Jean_Sex_Pierce_Tits_Barbell_Green.png",
@@ -1482,7 +1482,7 @@ image Jean_Sex_Torso:
                     "JeanX.outfit['bra']", "images/JeanSex/Jean_Sex_Pierce_Tits_Barbell_Bra.png",
                     "True", Null(),
                     ),
-            "JeanX.outfit['front_inner_accessory'] == '_ring'", ConditionSwitch(
+            "JeanX.outfit['piercings'] == '_ring'", ConditionSwitch(
 
                     "JeanX.top_pulled_up or (not JeanX.outfit['bra'] and not JeanX.outfit['top'])", "images/JeanSex/Jean_Sex_Pierce_Tits_Ring_Loose.png",
                     "JeanX.outfit['top'] == '_green_shirt'", "images/JeanSex/Jean_Sex_Pierce_Tits_Ring_Green.png",
@@ -1652,12 +1652,12 @@ image Jean_Sex_Legs_S:
 
         ConditionSwitch(
 
-            "JeanX.outfit['bottom'] and not JeanX.upskirt and JeanX.outfit['front_inner_accessory'] == '_ring'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Sex_Clothed.png",
-            "JeanX.outfit['underwear'] and not JeanX.underwear_pulled_down and JeanX.outfit['front_inner_accessory'] == '_ring'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Sex_Clothed.png",
-            "JeanX.outfit['hose'] == '_pantyhose' and not JeanX.underwear_pulled_down and JeanX.outfit['front_inner_accessory'] == '_ring'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Sex_Clothed.png",
+            "JeanX.outfit['bottom'] and not JeanX.upskirt and JeanX.outfit['piercings'] == '_ring'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Sex_Clothed.png",
+            "JeanX.outfit['underwear'] and not JeanX.underwear_pulled_down and JeanX.outfit['piercings'] == '_ring'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Sex_Clothed.png",
+            "JeanX.outfit['hose'] == '_pantyhose' and not JeanX.underwear_pulled_down and JeanX.outfit['piercings'] == '_ring'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Sex_Clothed.png",
 
-            "JeanX.outfit['front_inner_accessory'] == '_barbell'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Sex.png",
-            "JeanX.outfit['front_inner_accessory'] == '_ring'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Sex.png",
+            "JeanX.outfit['piercings'] == '_barbell'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Sex.png",
+            "JeanX.outfit['piercings'] == '_ring'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Sex.png",
             "True", Null(),
             )
     contains:
@@ -1791,7 +1791,7 @@ image Jean_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "JeanX.outfit['front_inner_accessory'] == '_barbell'", ConditionSwitch(
+            "JeanX.outfit['piercings'] == '_barbell'", ConditionSwitch(
 
                     "JeanX.upskirt or (not JeanX.outfit['bottom'] and not JeanX.outfit['underwear'])", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Anal.png",
                     "JeanX.underwear_pulled_down and not JeanX.outfit['bottom']", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Anal.png",
@@ -1800,7 +1800,7 @@ image Jean_Sex_Legs_A:
                     "JeanX.outfit['underwear']", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Green.png",
                     "True", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Anal.png",
                     ),
-            "JeanX.outfit['front_inner_accessory'] == '_ring'", ConditionSwitch(
+            "JeanX.outfit['piercings'] == '_ring'", ConditionSwitch(
 
                     "JeanX.upskirt or (not JeanX.outfit['bottom'] and not JeanX.outfit['underwear'])", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Anal.png",
                     "JeanX.underwear_pulled_down and not JeanX.outfit['bottom']", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Anal.png",
@@ -1840,7 +1840,7 @@ image Jean_Sex_Legs_A:
         ConditionSwitch(
             "JeanX.outfit['hose'] == '_pantyhose' and not JeanX.underwear_pulled_down", Null(),
             "JeanX.outfit['bottom'] and not JeanX.upskirt and JeanX.grool >=2", Null(),
-            "JeanX.outfit['front_inner_accessory'] == '_barbell'", ConditionSwitch(
+            "JeanX.outfit['piercings'] == '_barbell'", ConditionSwitch(
 
                     "JeanX.upskirt or (not JeanX.outfit['bottom'] and not JeanX.outfit['underwear'])", Null(),
                     "JeanX.outfit['bottom'] == '_skirt' and not JeanX.upskirt", Null(),
@@ -1849,7 +1849,7 @@ image Jean_Sex_Legs_A:
                     "JeanX.outfit['bottom'] == '_yoga_pants'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Yoga.png",
                     "True", Null(),
                     ),
-            "JeanX.outfit['front_inner_accessory'] == '_ring'", ConditionSwitch(
+            "JeanX.outfit['piercings'] == '_ring'", ConditionSwitch(
 
                     "JeanX.upskirt or (not JeanX.outfit['bottom'] and not JeanX.outfit['underwear'])", Null(),
                     "JeanX.outfit['bottom'] == '_skirt' and not JeanX.upskirt", Null(),
@@ -3543,8 +3543,8 @@ image Jean_TJ_Tits:
     contains:
 
         ConditionSwitch(
-                        "JeanX.outfit['front_inner_accessory'] == '_ring'","images/JeanBJFace/Jean_TJ_Pierce_Ring.png",
-                        "JeanX.outfit['front_inner_accessory'] == '_barbell'","images/JeanBJFace/Jean_TJ_Pierce_Barbell.png",
+                        "JeanX.outfit['piercings'] == '_ring'","images/JeanBJFace/Jean_TJ_Pierce_Ring.png",
+                        "JeanX.outfit['piercings'] == '_barbell'","images/JeanBJFace/Jean_TJ_Pierce_Barbell.png",
                         "True", Null(),
                         )
     contains:
@@ -3594,8 +3594,8 @@ image Jean_TJ_Tits:
         ConditionSwitch(
                         "JeanX.top_pulled_up", Null(),
                         "(not JeanX.outfit['top'] or JeanX.outfit['top'] == '_towel') and (not JeanX.outfit['bra'] or JeanX.outfit['bra'] == '_corset')", Null(),
-                        "JeanX.outfit['front_inner_accessory'] == '_ring'","images/JeanBJFace/Jean_TJ_Pierce_RingC.png",
-                        "JeanX.outfit['front_inner_accessory'] == '_barbell'","images/JeanBJFace/Jean_TJ_Pierce_BarbellC.png",
+                        "JeanX.outfit['piercings'] == '_ring'","images/JeanBJFace/Jean_TJ_Pierce_RingC.png",
+                        "JeanX.outfit['piercings'] == '_barbell'","images/JeanBJFace/Jean_TJ_Pierce_BarbellC.png",
                         "True", Null(),
                         )
     transform_anchor True

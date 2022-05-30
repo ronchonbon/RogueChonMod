@@ -98,15 +98,17 @@ init -1:
 
     default achievements = []
 
-    default show_feet = 0
+    default show_feet = False
 
     default always_return_to_room = 1
 
-    default stage_far_left = 0.1
-    default stage_left = 0.33
+    default stage_far_far_left = 0.1
+    default stage_far_left = 0.23
+    default stage_left = 0.35
     default stage_center = 0.5
-    default stage_right = 0.65
-    default stage_far_right = 0.87
+    default stage_right = 0.62
+    default stage_far_right = 0.75
+    default stage_far_far_right = 0.875
 
     default number_of_holders = 1
 
@@ -125,6 +127,12 @@ init -1:
     default simulation = False
 
     default menu_context = None
+
+    default dresses = ["_chinese_dress", "_red_dress", "_blue_dress"]
+    default bodysuits = ["_catsuit", "_raven", "_domme", "_sci_fi", "_onepiece_swimsuit", "_sexy_swimsuit"]
+    default pants = ["_pants", "_yoga_pants", "_capris", "_black_jeans", "_leather_pants", "_mesh_pants", "_opaque_fetish", "_sheer_fetish", "_black_and_blue_pants"]
+    default skirts = ["_skirt", "_cosplay_skirt", "_blue_skirt", "_cheerleader_skirt"]
+    default shorts = ["_shorts", "_cheerleader_skirtshort"]
 
     default hand_actions = ["massage", "fondle_thighs", "fondle_breasts", "fondle_pussy", "finger_pussy", "fondle_ass", "finger_ass"]
     default finger_actions = ['finger_pussy", "finger_ass"']
@@ -172,54 +180,48 @@ label start:
 
     show screen status_screen
     show screen inventory_button
-
-    $ bg_current = "bg_emma"
-    $ time_index = 2
-    $ current_time = "evening"
-
-    scene background onlayer backdrop
-    scene
-
-    $ RogueX.location = bg_current
-    $ RogueX.sprite_location = 0.1
-    $ active_Girls.append(RogueX)
-
-    $ KittyX.location = bg_current
-    $ KittyX.sprite_location = 0.25
-    $ active_Girls.append(KittyX)
-
-    $ EmmaX.location = bg_current
-    $ EmmaX.sprite_location = 0.375
-    $ active_Girls.append(EmmaX)
-
-    $ LauraX.location = bg_current
-    $ LauraX.sprite_location = 0.5
-    $ active_Girls.append(LauraX)
-
-    $ JeanX.location = bg_current
-    $ JeanX.sprite_location = 0.625
-    $ active_Girls.append(JeanX)
-
-    $ StormX.location = bg_current
-    $ StormX.sprite_location = 0.75
-    $ active_Girls.append(StormX)
-
-    $ JubesX.location = bg_current
-    $ JubesX.sprite_location = 0.9
-    $ active_Girls.append(JubesX)
-
-    show Rogue_sprite standing at sprite_location(RogueX.sprite_location)
-    show Kitty_sprite standing at sprite_location(KittyX.sprite_location)
-    show Emma_sprite standing at sprite_location(EmmaX.sprite_location)
-    show Laura_sprite standing at sprite_location(LauraX.sprite_location)
-    show Jean_sprite standing at sprite_location(JeanX.sprite_location)
-    show Storm_sprite standing at sprite_location(StormX.sprite_location)
-    show Jubes_sprite standing at sprite_location(JubesX.sprite_location)
-
-    ""
-
-    $ focused_Girl = RogueX
-    $ active_Girls = [RogueX]
+    
+    # $ bg_current = "bg_emma"
+    # $ time_index = 2
+    # $ current_time = "evening"
+    #
+    # scene background onlayer backdrop
+    # scene
+    #
+    # $ RogueX.sprite_location = stage_far_far_left
+    # $ active_Girls.append(RogueX)
+    #
+    # $ KittyX.sprite_location = stage_far_left
+    # $ active_Girls.append(KittyX)
+    #
+    # $ EmmaX.sprite_location = stage_left
+    # $ active_Girls.append(EmmaX)
+    #
+    # $ LauraX.sprite_location = stage_center
+    # $ active_Girls.append(LauraX)
+    #
+    # $ JeanX.sprite_location = stage_right
+    # $ active_Girls.append(JeanX)
+    #
+    # $ StormX.change_outfit("shower")
+    # $ StormX.sprite_location = stage_far_right
+    # $ active_Girls.append(StormX)
+    #
+    # $ JubesX.sprite_location = stage_far_far_right
+    # $ active_Girls.append(JubesX)
+    #
+    # show Rogue_sprite standing at sprite_location(RogueX.sprite_location)
+    # show Kitty_sprite standing at sprite_location(KittyX.sprite_location)
+    # show Emma_sprite standing at sprite_location(EmmaX.sprite_location)
+    # show Laura_sprite standing at sprite_location(LauraX.sprite_location)
+    # show Jean_sprite standing at sprite_location(JeanX.sprite_location)
+    # show Storm_sprite standing at sprite_location(StormX.sprite_location)
+    # show Jubes_sprite standing at sprite_location(JubesX.sprite_location)
+    #
+    # ""
+    #
+    # $ focused_Girl = RogueX
+    # $ active_Girls = [RogueX]
 
     jump prologue
 

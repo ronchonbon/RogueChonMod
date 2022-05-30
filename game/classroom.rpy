@@ -446,7 +446,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                     if line == "fondle_pussy":
                         $ Girl.change_face("_sly")
                         $ Girl.change_stat("lust", 94, 5)
-                        if Girl.bottom_number() == 5:
+                        if Girl.wearing_skirt:
                             "[Girl.name]'s sly smile turns sultry as she feels your fingers sneak under the hem of her skirt, slowly tracing the soft contours of her mound."
                         elif Girl.bottom_number() >= 7:
                             "[Girl.name]'s sly smile turns sultry as she feels your fingers sneak down her pants, slowly tracing the soft contours of her mound."
