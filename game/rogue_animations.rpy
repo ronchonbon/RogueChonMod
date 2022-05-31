@@ -340,6 +340,12 @@ image Rogue_blowjob_mask_animation2:
     "images/Rogue_blowjob/Rogue_blowjob_face_mask.png"
     blowjob_face_mask_animation2
 
+image Rogue_blowjob_mask_animation3:
+    "images/Rogue_blowjob/Rogue_blowjob_face_mask.png"
+
+image Rogue_blowjob_mask_animation4:
+    "images/Rogue_blowjob/Rogue_blowjob_face_mask.png"
+
 image Rogue_blowjob_head_animation0:
     "Rogue_head"
     blowjob_starting
@@ -366,27 +372,48 @@ layeredimage Rogue_blowjob_head_animations:
 
 image Rogue_blowjob_face_mask_animation2:
     AlphaMask("Rogue_head", "Rogue_blowjob_mask_animation2")
+    anchor (0.5, 0.5)
     blowjob_heading
 
 image Rogue_blowjob_face_mask_animation3:
-    AlphaMask("Rogue_head", "images/Rogue_blowjob/Rogue_blowjob_face_mask.png")
+    AlphaMask("Rogue_head", "Rogue_blowjob_mask_animation3")
+    anchor (0.5, 0.5)
     blowjob_sucking
 
 image Rogue_blowjob_face_mask_animation4:
-    AlphaMask("Rogue_head", "images/Rogue_blowjob/Rogue_blowjob_face_mask.png")
+    AlphaMask("Rogue_head", "Rogue_blowjob_mask_animation4")
+    anchor (0.5, 0.5)
     blowjob_deepthroat
 
 layeredimage Rogue_blowjob_face_mask_animations:
     if action_speed > 1:
         "Rogue_blowjob_face_mask_animation[action_speed]" pos (0.029, 0.305) zoom 0.2755
 
+image Rogue_blowjob_mouth_animation1:
+    "images/Rogue_blowjob/Rogue_blowjob_mouth_tongue.png"
+
 image Rogue_blowjob_mouth_animation2:
     "images/Rogue_blowjob/Rogue_blowjob_mouth_sucking.png"
     blowjob_mouth_animation2
 
+image Rogue_blowjob_mouth_animation3:
+    "images/Rogue_blowjob/Rogue_blowjob_mouth_sucking.png"
+
+image Rogue_blowjob_mouth_animation4:
+    "images/Rogue_blowjob/Rogue_blowjob_mouth_sucking.png"
+
+image Rogue_blowjob_mouth_animation1_spunk:
+    "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_tongue.png"
+
 image Rogue_blowjob_mouth_animation2_spunk:
-    "images/Rogue_blowjob/Rogue_blowjob_mouth_sucking_spunk.png"
+    "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_sucking.png"
     blowjob_mouth_animation2
+
+image Rogue_blowjob_mouth_animation3_spunk:
+    "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_sucking.png"
+
+image Rogue_blowjob_mouth_animation4_spunk:
+    "images/Rogue_blowjob/Rogue_blowjob_mouth_sucking_spunk.png"
 
 layeredimage Rogue_blowjob_mouth_animations:
     if RogueX.spunk["mouth"]:

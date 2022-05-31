@@ -570,7 +570,7 @@ label Flirt(Girl=0):
                             else:
                                 call shift_focus(Girl)
                                 $ primary_action = "kiss"
-                                call Trig_Reset (1)
+                                call stop_all_actions (1)
                             return
                         "Just a taste [[no].":
                             $ Girl.change_face("_bemused", 1)
@@ -1677,7 +1677,7 @@ label Flirt(Girl=0):
                             call shift_focus(Girl)
                             $ primary_action = "fondle_breasts"
                             call before_action
-                            call Trig_Reset (1)
+                            call stop_all_actions (1)
                             return
                         "Nah, that was enough.":
                             $ Girl.change_face("_sad", 1)

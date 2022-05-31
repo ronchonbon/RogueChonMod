@@ -124,15 +124,12 @@ layeredimage Rogue_head:
     else:
         "images/Rogue_blowjob/Rogue_blowjob_brows[RogueX.brows].png"
 
-    if RogueX.mouth == "_smirk":
-        "images/Rogue_blowjob/Rogue_blowjob_mouth_smile.png"
-    else:
+    if RogueX.spunk["mouth"] and not renpy.showing("Rogue_sprite blowjob"):
+        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth[RogueX.mouth].png"
+    elif not renpy.showing("Rogue_sprite blowjob"):
         "images/Rogue_blowjob/Rogue_blowjob_mouth[RogueX.mouth].png"
 
-    if RogueX.spunk["mouth"]:
-        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth[RogueX.mouth].png"
-
-    if renpy.showing("Rogue_sprite blowjob") and action_speed == 2:
+    if renpy.showing("Rogue_sprite blowjob"):
         "Rogue_blowjob_mouth_animations"
 
     if RogueX.eyes == "_closed":

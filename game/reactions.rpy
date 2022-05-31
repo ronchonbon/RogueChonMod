@@ -157,7 +157,9 @@ label auto_rejected_reactions(Girl, action):
         call what_do_you_think_youre_doing_lines(Girl, action)
         call what_do_you_think_youre_doing_menu(Girl, action)
 
-    return
+        return _return
+
+    return False
 
 label pullback_reactions(Girl, action):
     $ Girl.change_face("_surprised")
@@ -276,40 +278,6 @@ label end_of_action_reactions(Girl, action):
     $ Girl.change_face("_bemused", 0)
 
     call end_of_action_lines(Girl, action)
-
-label sex_acts(action = 0):
-    if Alonecheck(focused_Girl) and focused_Girl.taboo == 20:
-        $ focused_Girl.taboo = 0
-        $ taboo = 0
-
-    call shift_focus(focused_Girl)
-
-    if action == "SkipTo":
-        $ renpy.pop_call() #causes it to skip past the primary_action Swap
-        $ renpy.pop_call()
-
-        call SkipTo(focused_Girl)
-    elif action == "switch":
-        $ renpy.pop_call()
-    elif action == "masturbation":
-        call before_show
-
-        if not action_context:
-            return
-    elif action == "lesbian":
-        call Les_Prep(focused_Girl)
-
-        if not action_context:
-            return
-    elif action:
-        $ primary_action = action
-
-        call before_action
-
-        if not action_context:
-            return
-
-    return
 
 label girl_initiated_action(Girl, action):
     if action == "kiss":
@@ -667,7 +635,7 @@ label first_action_approval(Girl, action):
 
     return
 
-label first_action_response(Girl, action):
+label first_action_response(Girl, action, context):
     if action == "kiss":
         $ Girl.SEXP += 1
 
@@ -693,7 +661,7 @@ label first_action_response(Girl, action):
     elif action in ["anal"]:
         $ Girl.SEXP += 25
 
-    if not action_context:
+    if not context:
         if Girl.love >= 500 and "unsatisfied" not in Girl.recent_history:
             $ Girl.mouth = "_smile"
             call satisfied_lines(Girl, action)
@@ -860,7 +828,10 @@ label action_disapproved(Girl, action):
 
     call begging_menu(Girl, action)
 
-    return
+    if _return:
+        return _return
+    else:
+        return False
 
 label action_accepted(Girl, action):
     $ Girl.change_face("_bemused", 1)
@@ -935,13 +906,10 @@ label forced_action(Girl, action):
         if approval < 2:
             $ Girl.forced = 1
 
-        if action == "masturbation":
-            jump before_masturbation
-        else:
-            jump before_action
+        return True
     else:
         call forced_rejected_reactions(Girl, action)
 
         $ Girl.add_word(1, "_angry", "_angry")
 
-    return
+    return False

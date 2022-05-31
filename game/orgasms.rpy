@@ -146,7 +146,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
                     extend ""
                     "Ok, if you'll swallow it.":
                         if not renpy.showing(Girl.tag+" blowjob"):
-                            call blowjob_launch(Girl, orgasm = True)
+                            call show_blowjob(Girl, orgasm = True)
                         $ Girl.change_face("_sucking")
                         $ action_speed = 2
                         "She nods and puts the tip into her mouth. As you release she gulps it down hungrily."
@@ -183,7 +183,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
                             $ Girl.change_stat("inhibition", 30, 2)
                             $ Girl.change_stat("inhibition", 70, 3)
                             if not renpy.showing(Girl.tag+" blowjob"):
-                                call blowjob_launch(Girl, orgasm = True)
+                                call show_blowjob(Girl, orgasm = True)
                                 $ action_speed = 4
                             "She dives down on you and you can't resist filling her throat."
                             $ action_speed = 0
@@ -279,7 +279,7 @@ label Girl_Warn_Her:
         $ Girl.change_stat("obedience", 80, 5)
     if ("hungry" in Girl.traits and D20 >= 5):
         if renpy.showing(Girl.tag+" doggy") or renpy.showing(Girl.tag+" sex"):
-            call handjob_launch(Girl, orgasm = True)
+            call show_handjob(Girl, orgasm = True)
             "She grins and pulls out with a pop, and begins to stroke you off."
         $ action_speed = 2
         $ Girl.change_face("_sucking")
@@ -354,7 +354,7 @@ label Girl_Warn_Her:
             "She makes a little humming sound, but keeps sucking."
         else:
             if renpy.showing(Girl.tag+" doggy") or renpy.showing(Girl.tag+" sex"):
-                call blowjob_launch(Girl, orgasm = True)
+                call show_blowjob(Girl, orgasm = True)
                 $ action_speed = 2
             $ Girl.change_face("_sucking")
             $ Girl.spunk["mouth"] = True
@@ -371,7 +371,7 @@ label Girl_Warn_Her:
     elif Girl.event_counter["swallowed"] and D20 >= 10:
 
         if renpy.showing(Girl.tag+" doggy") or renpy.showing(Girl.tag+" sex"):
-            call handjob_launch(Girl, orgasm = True)
+            call show_handjob(Girl, orgasm = True)
             "She grins and pulls out with a pop, and begins to stroke you off."
         $ action_speed = 2
         if renpy.showing(Girl.tag+" blowjob"):
@@ -443,7 +443,7 @@ label Girl_In_mouth:
     if action_context == "auto" or action_context == "warn":
         $ action_context = None
         if not renpy.showing(Girl.tag+" blowjob"):
-            call blowjob_launch(Girl, orgasm = True)
+            call show_blowjob(Girl, orgasm = True)
         $ action_speed = 2
         if action_context == "warn":
             "She doesn't seem sure what to do about that, as you cum in her mouth."
@@ -703,7 +703,7 @@ label Girl_In_mouth:
     if renpy.showing(Girl.tag+"_PJ_Animation"):
         call kiss_launch(Girl)
     elif renpy.showing(Girl.tag+" doggy") or renpy.showing(Girl.tag+" sex"):
-        call handjob_launch(Girl, orgasm = True)
+        call show_handjob(Girl, orgasm = True)
 
     if "full" in Girl.recent_history:
         pass
@@ -712,7 +712,7 @@ label Girl_In_mouth:
 
         $ Girl.change_face("_sucking")
         if not renpy.showing(Girl.tag+" blowjob"):
-            call blowjob_launch(Girl, orgasm = True)
+            call show_blowjob(Girl, orgasm = True)
             $ action_speed = 2
             "She nods and bends down to put the tip between her lips."
         else:
@@ -734,7 +734,7 @@ label Girl_In_mouth:
         $ Girl.brows = "_confused"
         $ Girl.eyes = "_manic"
         if not renpy.showing(Girl.tag+" blowjob"):
-            call blowjob_launch(Girl, orgasm = True)
+            call show_blowjob(Girl, orgasm = True)
             $ action_speed = 2
             "She looks a bit quizzical, but gently puts the tip to her lips, just as you blow."
         else:
@@ -762,7 +762,7 @@ label Girl_In_mouth:
                 $ action_speed = 5
                 "She looks a bit confused, but gently puts the tip to her lips."
             elif not renpy.showing(Girl.tag+" blowjob"):
-                call blowjob_launch(Girl, orgasm = True)
+                call show_blowjob(Girl, orgasm = True)
                 $ action_speed = 2
                 "She looks a bit quizzical, but gently puts the tip to her lips, just as you blow."
             else:
@@ -924,7 +924,7 @@ label Girl_In_mouth:
 
                 $ Girl.change_face("_angry", 1)
                 "She scowls at you, drops you cock and pulls back."
-                call handjob_launch(Girl, orgasm = True)
+                call show_handjob(Girl, orgasm = True)
                 call reset_position(Girl)
                 $ Girl.change_stat("love", 50, -3, 1)
                 $ Girl.change_stat("love", 80, -4, 1)
@@ -952,7 +952,7 @@ label Girl_In_mouth:
             $ Girl.change_stat("obedience", 70, 5)
 
     if not renpy.showing(Girl.tag+" blowjob"):
-        call blowjob_launch(Girl, orgasm = True)
+        call show_blowjob(Girl, orgasm = True)
     $ action_speed = 2
     if approval_check(Girl, 1200):
         "She gently puts the tip to her lips, just as you blow."
@@ -1191,7 +1191,7 @@ label Girl_Facial:
     if renpy.showing(Girl.tag+" blowjob"):
         if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.event_counter["swallowed"]:
             jump Manic_Suck
-        call handjob_launch(Girl, orgasm = True)
+        call show_handjob(Girl, orgasm = True)
         $ action_speed = 2
         if Girl.spunk["hair"]:
             pass
@@ -1238,7 +1238,7 @@ label Girl_Facial:
         "As you're about to finish, you aim squarely at her face, and spray all over it."
         $ action_speed = 0
     else:
-        call handjob_launch(Girl, orgasm = True)
+        call show_handjob(Girl, orgasm = True)
         $ action_speed = 2
         if Girl.spunk["hair"]:
             pass
@@ -1296,7 +1296,7 @@ label Girl_TitSpunk:
     if renpy.showing(Girl.tag+"_PJ_Animation"):
         call breasts_launch(Girl)
     elif not renpy.showing(Girl.tag+" titjob") and not renpy.showing(Girl.tag+" handjob") and not renpy.showing(Girl.tag+" blowjob"):
-        call handjob_launch(Girl, orgasm = True)
+        call show_handjob(Girl, orgasm = True)
     $ Girl.spunk["breasts"] = True
     $ action_speed = 0
     "As you're about to finish, you speed up and spray all over her chest."
@@ -1349,12 +1349,12 @@ label Girl_Cum_Outside:
 
 
 
-            call sex_launch(Girl, "hotdog")
+            call show_sex(Girl, "hotdog")
     $ action_speed = 0
     if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience))  and Girl.event_counter["swallowed"]:
         $ Girl.eyes = "_manic"
         $ Girl.blushing = "_blush1"
-        call blowjob_launch(Girl, orgasm = True)
+        call show_blowjob(Girl, orgasm = True)
         if primary_action == "sex":
             "You pull out of her pussy with a pop, and her eyes widen in surprise. She leaps at your cock and sucks it deep, draining your fluids hungrily."
         elif primary_action == "anal":
@@ -1459,13 +1459,13 @@ label Girl_Handy_Finish:
             "She grins and pulls out with a pop, and begins to stroke you off."
         $ action_speed = 2
     elif renpy.showing(Girl.tag+" blowjob"):
-        call handjob_launch(Girl, orgasm = True)
+        call show_handjob(Girl, orgasm = True)
         $ action_speed = 2
         "She slides her lips off your cock, and begins to stroke you off."
     elif renpy.showing(Girl.tag+"_PJ_Animation"):
         call breasts_launch(Girl)
     else:
-        call handjob_launch(Girl, orgasm = True)
+        call show_handjob(Girl, orgasm = True)
         $ action_speed = 2
     $ Girl.spunk["hand"] = True
     "She grins and speeds up her efforts, placing her left hand over your tip. You burst all over her hands."
@@ -1613,7 +1613,7 @@ label Girl_CleanCock(Girl=0):
             "She wipes your cock clean."
     elif Girl.action_counter["blowjob"] > 3 or Girl.event_counter["swallowed"]:
         if approval_check(Girl, 1200, taboo_modifier=1) or Girl.addiction >= 60:
-            call blowjob_launch(Girl, orgasm = True)
+            call show_blowjob(Girl, orgasm = True)
             $ action_speed = 1
             $ Girl.change_face("_sucking", 1)
             if approval_check(Girl, 1500, taboo_modifier=1):
@@ -1634,7 +1634,7 @@ label Girl_CleanCock(Girl=0):
             $ Girl.change_face("_sexy")
         else:
             if not renpy.showing(Girl.tag+" handjob"):
-                call handjob_launch(Girl, orgasm = True)
+                call show_handjob(Girl, orgasm = True)
             if Partner and approval_check(Partner, 1000, taboo_modifier=1):
                 "Both girls reach down and wipe your cock clean."
             else:
@@ -1643,7 +1643,7 @@ label Girl_CleanCock(Girl=0):
         if renpy.showing(Girl.tag+"_PJ_Animation"):
             pass
         elif not renpy.showing(Girl.tag+" handjob"):
-            call handjob_launch(Girl, orgasm = True)
+            call show_handjob(Girl, orgasm = True)
         if Partner and approval_check(Partner, 1000, taboo_modifier=1):
             "Both girls reach down and wipe your cock clean."
         else:

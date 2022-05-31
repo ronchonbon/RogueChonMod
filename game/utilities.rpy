@@ -1365,7 +1365,21 @@ label girls_location(change = False):
 
     return
 
+label stop_all_actions(visual = False):
+    $ primary_action = None
+    $ offhand_action = None
+    $ girl_offhand_action = None
+    $ second_girl_primary_action = None
+    $ second_girl_offhand_action = None
 
+    $ temp_Girls = all_Girls[:]
+
+    while temp_Girls:
+        call reset_position(temp_Girls[0])
+
+        $ temp_Girls.remove(temp_Girls[0])
+
+    return
 
 
 
@@ -3325,47 +3339,6 @@ label shift_focus(Girl, Second = None):
 transform sprite_location(x_position = stage_right, y_position = 0):
     pos (x_position, y_position)
 
-label shift_view(Girl, view):
-    if view == "menu":
-        menu:
-            "Full body":
-                call reset_position(Girl)
-            "Upper half":
-                call breasts_launch(Girl)
-            "Middle view":
-                call middle_launch(Girl)
-            "Lower half":
-                call pussy_launch(Girl)
-            "Rear view" if Girl in [RogueX, KittyX, EmmaX, LauraX, JeanX]:
-                $ Girl.pose = "doggy"
-
-                call sex_launch(Girl, None)
-            "On top of you" if Girl in [EmmaX, JeanX, StormX]:
-                $ Girl.pose = "sex"
-
-                call sex_launch(Girl, None)
-            "Laying down" if Girl in [RogueX, KittyX, LauraX]:
-                $ Girl.pose = "sex"
-
-                call sex_launch(Girl, None)
-            "Never mind":
-                pass
-    else:
-        if view == "full":
-            call reset_position(Girl)
-        elif view == "breasts":
-            call breasts_launch(Girl)
-        elif view == "middle":
-            call middle_launch(Girl)
-        elif view == "pussy":
-            call pussy_launch(Girl)
-        elif view in ["sex", "doggy"]:
-            call sex_launch(Girl, None)
-        elif view == "kiss":
-            call kiss_launch(Girl)
-
-    return
-
 image Punchout:
     Null(0,0)
 
@@ -4249,29 +4222,14 @@ label Sex_Dialog(Primary=focused_Girl, Secondary=0, TempFocus=0, PrimaryLust=0, 
 
 
 
-            call Trig_Reset
+            call stop_all_actions
         jump Misplaced
 
     call Dirty_Talk
 
     return
 
-label Trig_Reset(Visual=0):
 
-    $ primary_action = None
-    $ offhand_action = None
-    $ girl_offhand_action = None
-    $ second_girl_primary_action = None
-    $ second_girl_offhand_action = None
-    $ action_context = None
-    if Visual:
-        $ temp_Girls = all_Girls[:]
-
-        while temp_Girls:
-            call reset_position(temp_Girls[0])
-
-            $ temp_Girls.remove(temp_Girls[0])
-    return
 
 label primary_action_Swap(Active=0, primary_actionX1=primary_action, primary_actionX3=girl_offhand_action, Primary=Partner):
 
@@ -5740,7 +5698,7 @@ label CloseOut(Girl=focused_Girl):
     return
 
 label Sex_Over(Clothes = True, Girls = None):
-    call Trig_Reset
+    call stop_all_actions
 
     if Girls in all_Girls:
         $ temp_Girls = [Girls]

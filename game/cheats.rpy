@@ -139,31 +139,31 @@ label wardrobe_editor(Girl):
                         #     call pussy_launch(Girl)
                         "Handjob":
                             if not renpy.showing(Girl.tag + " handjob"):
-                                call handjob_launch(Girl)
+                                call show_handjob(Girl)
                             else:
                                 call reset_position(Girl)
                         "Titjob":
                             if not renpy.showing(Girl.tag + " titjob"):
-                                call titjob_launch(Girl)
+                                call show_titjob(Girl)
                             else:
                                 call reset_position(Girl)
                         "Blowjob":
                             if not renpy.showing(Girl.tag + " blowjob"):
-                                call blowjob_launch(Girl)
+                                call show_blowjob(Girl)
                             else:
                                 call reset_position(Girl)
                         "Missionary":
                             $ Girl.pose = "sex"
 
                             if not renpy.showing(Girl.tag + " sex"):
-                                call sex_launch(Girl, "sex")
+                                call show_sex(Girl, "sex")
                             else:
                                 call reset_position(Girl)
                         "Doggy":
                             $ Girl.pose = "doggy"
 
                             if not renpy.showing(Girl.tag + " doggy"):
-                                call sex_launch(Girl, "anal")
+                                call show_sex(Girl, "anal")
                             else:
                                 call reset_position(Girl)
                         "Back":

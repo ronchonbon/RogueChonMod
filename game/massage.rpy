@@ -299,7 +299,7 @@ label Massage_Cycle:
     $ Girl.add_word(1,"massage","massage",0,0)
 
     if Girl.pose == "doggy" or Girl.pose == "sex":
-        call sex_launch(Girl, "massage")
+        call show_sex(Girl, "massage")
 
     $ primary_action = "massage"
 

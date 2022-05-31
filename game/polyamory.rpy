@@ -1169,7 +1169,7 @@ label Les_Cycle(Girl=focused_Girl):
                     menu:
                         "Offhand action":
                             if Girl.remaining_actions and multi_action:
-                                call Offhand_Set
+                                call set_offhand_action
                                 if offhand_action:
                                     $ Girl.remaining_actions -= 1
                             else:

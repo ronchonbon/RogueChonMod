@@ -4,7 +4,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
     call checkout
     Girl.voice "!!!"
     $ line = primary_action
-    call Trig_Reset
+    call stop_all_actions
     $ Girl.change_outfit()
     $ temp_Girls = all_Girls[:]
     while temp_Girls:

@@ -23,6 +23,47 @@ label reset_position(Girl):
 
     return
 
+label shift_view(Girl, view):
+    if view == "menu":
+        menu:
+            "Full body":
+                call reset_position(Girl)
+            "Upper half":
+                call breasts_launch(Girl)
+            "Middle view":
+                call middle_launch(Girl)
+            "Lower half":
+                call pussy_launch(Girl)
+            "Rear view" if Girl in [RogueX, KittyX, EmmaX, LauraX, JeanX]:
+                $ Girl.pose = "doggy"
+
+                call show_sex(Girl, None)
+            "On top of you" if Girl in [EmmaX, JeanX, StormX]:
+                $ Girl.pose = "sex"
+
+                call show_sex(Girl, None)
+            "Laying down" if Girl in [RogueX, KittyX, LauraX]:
+                $ Girl.pose = "sex"
+
+                call show_sex(Girl, None)
+            "Never mind":
+                pass
+    else:
+        if view == "full":
+            call reset_position(Girl)
+        elif view == "breasts":
+            call breasts_launch(Girl)
+        elif view == "middle":
+            call middle_launch(Girl)
+        elif view == "pussy":
+            call pussy_launch(Girl)
+        elif view in ["sex", "doggy"]:
+            call show_sex(Girl, None)
+        elif view == "kiss":
+            call kiss_launch(Girl)
+
+    return
+
 label close_launch(GirlA, GirlB = None):
     if GirlB:
         $ temp_Girls = [GirlA, GirlB]
@@ -205,27 +246,27 @@ label pussy_launch(Girl):
 
     return
 
-transform handjob_launch_animation(location):
+transform show_handjob_animation(location):
     ease 0.5 pos (location, 0.1) xzoom 2.0 yzoom 2.0
 
-label handjob_launch(Girl, orgasm = False):
+label show_handjob(Girl, orgasm = False):
     if renpy.showing(Girl.tag + " handjob"):
         return
 
     # if Girl == RogueX:
-    #     show Rogue_sprite standing zorder Girl.sprite_layer at handjob_launch_animation(Girl.sprite_location)
+    #     show Rogue_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
     # elif Girl == KittyX:
-    #     show Kitty_sprite standing zorder Girl.sprite_layer at handjob_launch_animation(Girl.sprite_location)
+    #     show Kitty_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
     # elif Girl == EmmaX:
-    #     show Emma_sprite standing zorder Girl.sprite_layer at handjob_launch_animation(Girl.sprite_location)
+    #     show Emma_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
     # elif Girl == LauraX:
-    #     show Laura_sprite standing zorder Girl.sprite_layer at handjob_launch_animation(Girl.sprite_location)
+    #     show Laura_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
     # elif Girl == JeanX:
-    #     show Jean_sprite standing zorder Girl.sprite_layer at handjob_launch_animation(Girl.sprite_location)
+    #     show Jean_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
     # elif Girl == StormX:
-    #     show Storm_sprite standing zorder Girl.sprite_layer at handjob_launch_animation(Girl.sprite_location)
+    #     show Storm_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
     # elif Girl == JubesX:
-    #     show Jubes_sprite standing zorder Girl.sprite_layer at handjob_launch_animation(Girl.sprite_location)
+    #     show Jubes_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
 
     if taboo:
         if len(Present) >= 2:
@@ -264,27 +305,27 @@ label handjob_launch(Girl, orgasm = False):
 
     return
 
-transform titjob_launch_animation(location):
+transform show_titjob_animation(location):
     ease 0.5 pos (location, 0.1) xzoom 2.0 yzoom 2.0
 
-label titjob_launch(Girl, orgasm = False):
+label show_titjob(Girl, orgasm = False):
     if renpy.showing(Girl.tag + " titjob"):
         return
 
     # if Girl == RogueX:
-    #     show Rogue_sprite standing zorder Girl.sprite_layer at titjob_launch_animation(Girl.sprite_location)
+    #     show Rogue_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
     # elif Girl == KittyX:
-    #     show Kitty_sprite standing zorder Girl.sprite_layer at titjob_launch_animation(Girl.sprite_location)
+    #     show Kitty_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
     # elif Girl == EmmaX:
-    #     show Emma_sprite standing zorder Girl.sprite_layer at titjob_launch_animation(Girl.sprite_location)
+    #     show Emma_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
     # elif Girl == LauraX:
-    #     show Laura_sprite standing zorder Girl.sprite_layer at titjob_launch_animation(Girl.sprite_location)
+    #     show Laura_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
     # elif Girl == JeanX:
-    #     show Jean_sprite standing zorder Girl.sprite_layer at titjob_launch_animation(Girl.sprite_location)
+    #     show Jean_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
     # elif Girl == StormX:
-    #     show Storm_sprite standing zorder Girl.sprite_layer at titjob_launch_animation(Girl.sprite_location)
+    #     show Storm_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
     # elif Girl == JubesX:
-    #     show Jubes_sprite standing zorder Girl.sprite_layer at titjob_launch_animation(Girl.sprite_location)
+    #     show Jubes_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
 
     if taboo:
         if len(Present) >= 2:
@@ -347,27 +388,27 @@ label titjob_launch(Girl, orgasm = False):
 
     return
 
-transform blowjob_launch_animation(location):
+transform show_blowjob_animation(location):
     ease 0.5 pos (location, 0.1) xzoom 2.0 yzoom 2.0
 
-label blowjob_launch(Girl, orgasm = False):
+label show_blowjob(Girl, orgasm = False):
     if renpy.showing(Girl.tag + " blowjob"):
         return
 
     # if Girl == RogueX:
-    #     show Rogue_sprite standing zorder Girl.sprite_layer at blowjob_launch_animation(Girl.sprite_location)
+    #     show Rogue_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
     # elif Girl == KittyX:
-    #     show Kitty_sprite standing zorder Girl.sprite_layer at blowjob_launch_animation(Girl.sprite_location)
+    #     show Kitty_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
     # elif Girl == EmmaX:
-    #     show Emma_sprite standing zorder Girl.sprite_layer at blowjob_launch_animation(Girl.sprite_location)
+    #     show Emma_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
     # elif Girl == LauraX:
-    #     show Laura_sprite standing zorder Girl.sprite_layer at blowjob_launch_animation(Girl.sprite_location)
+    #     show Laura_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
     # elif Girl == JeanX:
-    #     show Jean_sprite standing zorder Girl.sprite_layer at blowjob_launch_animation(Girl.sprite_location)
+    #     show Jean_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
     # elif Girl == StormX:
-    #     show Storm_sprite standing zorder Girl.sprite_layer at blowjob_launch_animation(Girl.sprite_location)
+    #     show Storm_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
     # elif Girl == JubesX:
-    #     show Jubes_sprite standing zorder Girl.sprite_layer at blowjob_launch_animation(Girl.sprite_location)
+    #     show Jubes_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
 
     if taboo:
         if len(Present) >= 2:
@@ -401,10 +442,16 @@ label blowjob_launch(Girl, orgasm = False):
 
     return
 
-label sex_launch(Girl, action):
-    $ Player.sprite = True
+label show_sex(Girl, action):
+    if action == "massage":
+        $ Player.cock_position = None
+    elif action == "footjob":
+        $ show_feet = True
 
-    if action == "sex":
+        $ Player.cock_position = "footjob"
+    elif action == "hotdog":
+        $ Player.cock_position = "out"
+    elif action == "sex":
         $ Player.cock_position = "in"
 
         if offhand_action in pussy_actions:
@@ -414,21 +461,9 @@ label sex_launch(Girl, action):
 
         if offhand_action in ass_actions:
             $ offhand_action = None
-    elif action == "hotdog":
-        $ Player.cock_position = "out"
-    elif action == "footjob":
-        $ show_feet = True
-
-        $ Player.cock_position = "footjob"
-    elif action == "massage":
-        $ Player.sprite = False
-        $ Player.cock_position = None
-    else:
-        $ Player.sprite = False
-        $ Player.cock_position = None
 
     if Girl.pose == "doggy":
-        call doggy_launch(Girl)
+        call show_doggy(Girl)
 
         return
 
@@ -452,7 +487,7 @@ label sex_launch(Girl, action):
 
     return
 
-label doggy_launch(Girl):
+label show_doggy(Girl):
     if renpy.showing(Girl.tag + " doggy"):
         return
 

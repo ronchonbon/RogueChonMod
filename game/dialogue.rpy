@@ -5970,6 +5970,31 @@ label masturbation_stop_for_now_lines(Girl, action):
 
     return
 
+label maybe_blowjob_instead_lines(Girl):
+    if Girl == RogueX:
+        $ lines = ["I could just. . . blow you instead?",
+            "I could maybe. . . you know, [[she pushes her tongue against the side of her cheek]?"]
+    elif Girl == KittyX:
+        $ lines = ["Could I[Girl.like]. . . blow you instead?"]
+    elif Girl == EmmaX:
+        $ lines = ["You seemed to enjoy blowjobs, would that work instead?",
+            "Would you perhaps prefer a blowjob?"]
+    elif Girl == LauraX:
+        $ lines = ["I could maybe blow you?"]
+    elif Girl == JeanX:
+        $ lines = ["What about a blowjob then?"]
+    elif Girl == StormX:
+        $ lines = ["You seemed to enjoy blowjobs, would that work instead?",
+            "Would you perhaps prefer a blowjob?"]
+    elif Girl == JubesX:
+        $ lines = []
+
+    $ line = renpy.random.choice(lines)
+
+    Girl.voice "[line]"
+
+    return
+
 label template(Girl, action):
     if Girl == RogueX:
         $ lines = []

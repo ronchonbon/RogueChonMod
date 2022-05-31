@@ -1592,7 +1592,7 @@ label sleepover_MorningWood:
         $ Partner.recent_history.append("threesome")
 
     $ Party[0].recent_history.append("blanket")
-    call blowjob_launch(Party[0])
+    call show_blowjob(Party[0])
 
     $ Party[0].change_face("_closed",1)
     if Partner:

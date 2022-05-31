@@ -1066,7 +1066,7 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
         ch_r "Can't wait for the next big party."
         ch_r "I love to dance, and I've got the best partner to grind with-"
         $ RogueX.pose = "doggy"
-        call sex_launch(RogueX, "massage")
+        call show_sex(RogueX, "massage")
         if RogueX.wearing_skirt:
             $ RogueX.upskirt = True
             if RogueX.outfit["underwear"] and RogueX.seen_underwear and approval_check(RogueX, 800, taboo_modifier = 3):

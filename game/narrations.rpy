@@ -1871,72 +1871,7 @@ label Offhand_Dialog(Girl=Primary, Templine=0):
     return
 
 
-label Offhand_Set(action_context=action_context, Tempprimary_action=offhand_action, Chr=0):
 
-
-    $ Chr = check_girl(Chr)
-    if action_context == "shift_focus":
-        if Tempprimary_action:
-            $ offhand_action = primary_action
-            $ primary_action = Tempprimary_action
-
-            if Tempprimary_action == "fondle_breasts":
-                "You shift your attention to her breasts."
-            elif Tempprimary_action == "suck_breasts":
-                "You shift your attention to her breasts."
-            elif Tempprimary_action == "fondle_pussy":
-                "You shift your attention to her pussy."
-            elif Tempprimary_action == "eat_pussy":
-                "You shift your attention to her pussy."
-            elif Tempprimary_action == "fondle_ass":
-                "You shift your attention to her ass."
-            elif Tempprimary_action == "finger_ass":
-                "You shift your attention to her ass."
-            else:
-                "You go back to kissing her deeply."
-
-            jump before_action
-        else:
-            "You aren't doing anything else to shift to."
-        return
-
-
-    if primary_action:
-        menu:
-            "Also kiss her." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "sex", "anal", "hotdog", "dildo_pussy", "dildo_ass"):
-                "You lean in and start kissing her."
-                $ offhand_action = "kiss"
-                $ action_context = "offhand"
-                call action
-            "Also fondle her breasts." if primary_action in ("kiss","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_ass"):
-                $ offhand_action = "fondle_breasts"
-                $ action_context = "offhand"
-                call action
-            "Also suck her breasts." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "sex", "anal", "hotdog", "dildo_pussy", "dildo_ass"):
-                $ offhand_action = "suck_breasts"
-                $ action_context = "offhand"
-                call action
-            "Also fondle her pussy." if primary_action in ("kiss","fondle_breasts","fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_ass"):
-                $ offhand_action = "fondle_pussy"
-                $ action_context = "offhand"
-                call action
-            "Also fondle her ass." if primary_action in ("kiss","fondle_breasts","fondle_pussy", "fondle_thighs", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_ass"):
-                $ offhand_action = "fondle_ass"
-                $ action_context = "offhand"
-                call action
-            "Also finger her ass." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "hotdog", "footjob", "dildo_pussy"):
-                $ offhand_action = "finger_ass"
-                $ action_context = "offhand"
-                call action
-            "Also jack it." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "dildo_pussy", "dildo_ass"):
-                call jerking_off (Chr)
-            "Nevermind":
-                pass
-    else:
-        "There's some kind of bug here, let Oni know."
-
-    $ action_context = None
-    return
 
 
 
@@ -4481,7 +4416,7 @@ label auto_action_narrations(Girl, action):
     elif action == "sex":
         $ Girl.pose = "doggy"
 
-        call sex_launch(Girl, action)
+        call show_sex(Girl, action)
 
         if Girl.wearing_skirt:
             "You press up against [Girl.name]'s backside, sliding her skirt up as you go."
@@ -4502,7 +4437,7 @@ label auto_action_narrations(Girl, action):
     elif action == "anal":
         $ Girl.pose = "doggy"
 
-        call sex_launch(Girl, action)
+        call show_sex(Girl, action)
 
         if Girl.wearing_skirt:
             "You press up against [Girl.name]'s backside, sliding her skirt up as you go."
@@ -4523,7 +4458,7 @@ label auto_action_narrations(Girl, action):
     elif action == "hotdog":
         $ Girl.pose = "doggy"
 
-        call sex_launch(Girl, action)
+        call show_sex(Girl, action)
 
         "You press up against [Girl.name]'s backside."
 
