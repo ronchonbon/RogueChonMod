@@ -460,8 +460,13 @@ label showering:
             if temp_Girls[0].location == bg_current:
                 if temp_Girls[0] in staying_Girls:
                     $ temp_Girls[0].change_outfit("nude")
+                    $ temp_Girls[0].outfit["hair"] = "_wet"
                     $ temp_Girls[0].wet = 1
-                    $ temp_Girls[0].spunk = []
+
+                    python:
+                        for key in temp_Girls[0].spunk.keys():
+                            temp_Girls[0].spunk[key] = False
+
                     $ temp_Girls[0].recent_history.append("showered")
                     $ temp_Girls[0].daily_history.append("showered")
 
@@ -656,8 +661,13 @@ label showering:
 
             while intruding_Girls:
                 $ intruding_Girls[0].change_outfit("nude")
+                $ intruding_Girls[0].outfit["hair"] = "_wet"
                 $ intruding_Girls[0].wet = 1
-                $ intruding_Girls[0].spunk = []
+
+                python:
+                    for key in intruding_Girls[0].spunk.keys():
+                        intruding_Girls[0].spunk[key] = False
+
                 $ intruding_Girls[0].recent_history.append("showered")
                 $ intruding_Girls[0].daily_history.append("showered")
 
@@ -1113,7 +1123,9 @@ label Shower_Sex(Options=0, line=0):
                 "After a few minutes of this, she manages to get you off."
             "A little more work is needed to clean up the mess."
             if Options[0] == 5:
-                $ staying_Girls[0].spunk = []
+                python:
+                    for key in staying_Girls[0].spunk.keys():
+                        staying_Girls[0].spunk[key] = False
             if len(staying_Girls) > 1:
                 "The girls take a step back."
                 call reset_position(staying_Girls[1])

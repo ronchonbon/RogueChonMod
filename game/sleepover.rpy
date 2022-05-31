@@ -2137,7 +2137,7 @@ label sleepover_MorningWood:
 
         elif line == "sex":
             call shift_focus(Party[0])
-            jump enter_main_sex_menu
+            call enter_main_sex_menu(Party[0])
     else:
 
         $ line = 0

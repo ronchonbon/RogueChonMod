@@ -58,20 +58,20 @@ layeredimage Emma_sprite standing:
     elif EmmaX.grool:
         "images/Emma_standing/Emma_standing_grool.png"
 
-    # always:
-    #     "grool_dripping_animations"
+    always:
+        "Emma_grool_animations"
 
     if EmmaX.spunk["pussy"] or EmmaX.spunk["anus"]:
         "images/Emma_standing/Emma_standing_spunk_pussy.png"
 
-    # always:
-    #     "spunk_dripping_animations"
+    always:
+        "Emma_spunk_animations"
 
     if EmmaX.outfit["bottom"] and (EmmaX.bottom_pulled_down or EmmaX.upskirt) and EmmaX.outfit["bottom"] != "_dress":
         "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]]_down.png"
     elif EmmaX.outfit["bottom"] == "_yoga_pants" and EmmaX.grool:
         "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]]_grool.png"
-    elif EmmaX.outfit["bottom"] != "_dress":
+    elif EmmaX.outfit["bottom"] and EmmaX.outfit["bottom"] != "_dress":
         "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]].png"
 
     if EmmaX.outfit["top"] in ["_towel", "_nighty"]:
@@ -127,9 +127,6 @@ layeredimage Emma_sprite standing:
     elif EmmaX.outfit["top"]:
         "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose].png"
 
-    always:
-        "Emma_head" pos (0.1, 0.16) zoom 0.5
-
     if EmmaX.outfit["piercings"] and EmmaX.pussy_covered:
         "images/Emma_standing/Emma_standing_piercings_pussy[EmmaX.outfit[piercings]]_covered.png"
 
@@ -152,6 +149,9 @@ layeredimage Emma_sprite standing:
         "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose]_up.png"
     elif EmmaX.outfit["jacket"]:
         "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose]_down.png"
+
+    always:
+        "Emma_head" pos (0.1, 0.16) zoom 0.5
 
     if EmmaX.spunk["breasts"] and EmmaX.breasts_supported:
         "images/Emma_standing/Emma_standing_spunk_breasts_up.png"
@@ -186,8 +186,8 @@ layeredimage Emma_sprite standing:
     if EmmaX.outfit["held_item"] and EmmaX.arm_pose == 2:
         "images/Emma_standing/Emma_standing_held[EmmaX.outfit[held_item]].png"
 
-    # always:
-    #     "Emma_standing_fondling_animations"
+    always:
+        "Emma_standing_fondling_animations"
 
     anchor (0.5, 0.0) offset (20, 140)
 

@@ -105,16 +105,12 @@ label first_action_approval_reactions(Girl, action):
     return
 
 label auto_approved_reactions(Girl, action):
-    if action in ["fondle_thighs", "fondle_breasts"]:
-        $ Girl.change_face("_sexy")
-
-        call auto_accepted_narrations(Girl, action)
-    else:
+    if action not in ["fondle_thighs", "fondle_breasts"]:
         $ Girl.change_face("_surprised", 1)
 
-        call auto_accepted_narrations(Girl, action)
+    call auto_accepted_narrations(Girl, action)
 
-        $ Girl.change_face("_sexy")
+    $ Girl.change_face("_sexy")
 
     call auto_accepted_lines(Girl, action)
 

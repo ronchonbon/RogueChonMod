@@ -547,12 +547,112 @@ label lesbian_launch(Girl):
 
     return
 
+image Girl_hand:
+    "images/UI_GirlHand.png"
+
+    anchor (0.5, 0.5)
+
+image Girl_finger:
+    "images/UI_GirlFinger.png"
+
+    anchor (0.5, 0.5)
+
+image Girl_fondle_thigh:
+    "Girl_hand"
+    pos (210, 730) alpha 0.5 zoom 0.6
+    rotate 100
+    parallel:
+        pause 0.5
+        ease 1 yoffset 50
+        ease 1 yoffset 0
+        repeat
+    parallel:
+        pause 0.5
+        ease 0.5 xoffset 3
+        ease 0.5 xoffset 0
+        ease 0.5 xoffset 3
+        ease 0.5 xoffset 0
+        repeat
+
+image Girl_fondle_breast_left_animation:
+    alpha 0.5 zoom 0.6
+    rotate -20
+    block:
+        ease 1 rotate -40 offset (-20, -10)
+        ease 1 rotate -20 offset (0, 0)
+        repeat
+
+image Girl_fondle_breast_right_animation:
+    "Girl_hand"
+    alpha 0.5 xzoom -0.6 yzoom 0.6
+    rotate -10
+    block:
+        ease 1 rotate -30 yoffset 30
+        ease 1 rotate -10 yoffset 0
+        repeat
+
+image Girl_fondle_pussy_animation:
+    "Girl_hand"
+    alpha 0.5 zoom 0.6
+    rotate 200
+    block:
+        choice:
+            ease 0.75 rotate 210 offset (-5, 5)
+            ease 0.5 rotate 195
+            ease 0.75 rotate 210
+            ease 0.5 rotate 195
+        choice:
+            ease 0.5 rotate 210 offset (-5, 5)
+            ease 1 rotate 195
+            pause 0.25
+            ease 0.5 rotate 210
+            ease 1 rotate 195
+            pause 0.25
+        choice:
+            ease 0.5 rotate 205 pos (-5, 5)
+            ease 0.75 rotate 200 pos (-5, 10)
+            ease 0.5 rotate 205 pos (-5, 5)
+            ease 0.75 rotate 200 pos (-5, 10)
+        choice:
+            ease 0.3 rotate 205 pos (-5, 5)
+            ease 0.3 rotate 200 pos (-5, 15)
+            ease 0.3 rotate 205 pos (-5, 5)
+            ease 0.3 rotate 200 pos (-5, 15)
+        repeat
+
+image Girl_finger_pussy_animation:
+    "Girl_finger"
+    alpha 0.5 zoom 0.6
+    rotate 200
+    block:
+        choice:
+            ease 0.75 rotate 210 yoffset 5
+            ease 0.5 rotate 195
+            ease 0.75 rotate 210
+            ease 0.5 rotate 195
+        choice:
+            ease 0.5 rotate 210 yoffset 5
+            ease 1 rotate 195
+            pause 0.25
+            ease 0.5 rotate 210
+            ease 1 rotate 195
+            pause 0.25
+        choice:
+            ease 0.5 rotate 205 yoffset 5
+            ease 0.75 rotate 200 yoffset 10
+            ease 0.5 rotate 205 yoffset 5
+            ease 0.75 rotate 200 yoffset 10
+        choice:
+            ease 0.3 rotate 205 yoffset 5
+            ease 0.3 rotate 200 yoffset 15
+            ease 0.3 rotate 205 yoffset 5
+            ease 0.3 rotate 200 yoffset 15
+        repeat
+
 transform blowjob_starting:
-    subpixel True
     ease 1.5 offset (0, 0)
 
 transform blowjob_licking:
-    subpixel True
     ease 0.5 offset (2, -20)
     block:
         ease 2.5 offset (15, 60)
@@ -561,7 +661,6 @@ transform blowjob_licking:
         repeat
 
 transform blowjob_licking_body:
-    subpixel True
     ease 0.5 offset (2, -20)
     block:
         ease 2.5 offset (20, 55)
@@ -570,14 +669,12 @@ transform blowjob_licking_body:
         repeat
 
 transform blowjob_heading:
-    subpixel True
     block:
         ease 1 yoffset 35
         ease 1.5 yoffset 0
         repeat
 
 transform blowjob_sucking:
-    subpixel True
     ease 0.5 offset (0, 30)
     block:
         ease 1 yoffset 80
@@ -585,7 +682,6 @@ transform blowjob_sucking:
         repeat
 
 transform blowjob_sucking_body:
-    subpixel True
     ease 0.5 offset (0, 30)
     block:
         ease 1 yoffset 65
@@ -595,7 +691,6 @@ transform blowjob_sucking_body:
 transform blowjob_deepthroat:
     ease 0.5 offset (0, 40)
     block:
-        subpixel True
         ease 1 yoffset 110
         pause 0.5
         ease 2 yoffset 40
@@ -604,14 +699,12 @@ transform blowjob_deepthroat:
 transform blowjob_deepthroat_body:
     ease 0.5 offset (0, 40)
     block:
-        subpixel True
         ease 1.2 yoffset 90
         pause 0.5
         ease 1.8 yoffset 40
         repeat
 
 transform blowjob_mouth_animation2:
-    subpixel True
     pos (0.165, 0.521) anchor (0.4, 0.6) zoom 0.90
     block:
         pause 0.10
@@ -626,7 +719,6 @@ transform blowjob_mouth_animation2:
         repeat
 
 transform blowjob_face_mask_animation2:
-    subpixel True
     pos (0.445, 0.616) anchor (0.45, 0.6) zoom 0.90
     block:
         pause 0.10

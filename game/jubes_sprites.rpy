@@ -47,13 +47,13 @@ layeredimage Jubes_sprite standing:
         "images/Jubes_standing/Jubes_standing_hose[JubesX.outfit[hose]].png"
 
     # always:
-    #     "grool_dripping_animations"
+    #     "Jubes_grool_animations"
 
     if JubesX.spunk["pussy"] or JubesX.spunk["anus"]:
         "images/Jubes_standing/Jubes_standing_spunk_pussy.png"
 
     # always:
-    #     "spunk_dripping_animations"
+    #     "Jubes_spunk_animations"
 
     if JubesX.outfit["bottom"] and (JubesX.bottom_pulled_down or JubesX.upskirt):
         "images/Jubes_standing/Jubes_standing_bottom[JubesX.outfit[bottom]]_down.png"
@@ -115,8 +115,8 @@ layeredimage Jubes_sprite standing:
     if JubesX.outfit["held_item"] and JubesX.arm_pose == 1:
         "images/Jubes_standing/Jubes_standing_held[JubesX.outfit[held_item]].png"
 
-    # always:
-    #     "Jubes_standing_fondling_animations"
+    always:
+        "Jubes_standing_fondling_animations"
 
     anchor (0.5, 0.0) offset (15, 150) zoom 1.1
 

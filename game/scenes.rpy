@@ -2311,38 +2311,45 @@ label PhoneSex(Girl=0):
     $ primary_action = 1
     if Girl == RogueX:
         ch_r "Ok, I think that should get the video running, right?"
-        call Rogue_M_Prep
+        $ focused_Girl = RogueX
+        call before_masturbation
         ch_r "Hmm, that was a satisfying phone call. . ."
         ch_r "I gotta go."
     elif Girl == KittyX:
         ch_k "Ok, that's got it up."
         ch_k "[KittyX.Like]how do I look?"
-        call Kitty_M_Prep
+        $ focused_Girl = KittyX
+        call before_masturbation
         ch_k "Mmmmm. . . call any time, [KittyX.player_petname]."
         ch_k "[KittyX.Like]ANY time."
     elif Girl == EmmaX:
         ch_e "Now, set it up like so. . ."
         ch_e "There, you should have video up."
-        call Emma_M_Prep
+        $ focused_Girl = EmmaX
+        call before_masturbation
         ch_e "I do enjoy these little chats. . ."
         ch_e "I need to be going though."
     elif Girl == LauraX:
         ch_l "Ok, video up. . ."
-        call Laura_M_Prep
+        $ focused_Girl = LauraX
+        call before_masturbation
         ch_l "That was fun. Call you later?"
     elif Girl == JeanX:
         ch_j "Ooookay. . . There, video on. . ."
-        call Jean_M_Prep
+        $ focused_Girl = JeanX
+        call before_masturbation
         ch_j "Ok, later."
     elif Girl == StormX:
         ch_s ". . ."
         ch_s "I believe I've got the camera set up, [StormX.player_petname]. . ."
-        call Storm_M_Prep
+        $ focused_Girl = StormX
+        call before_masturbation
         ch_s "I enjoyed that, thank you. . ."
     elif Girl == JubesX:
         ch_v "Ok, loaded up. . ."
         ch_v "Looking good?"
-        call Jubes_M_Prep
+        $ focused_Girl = JubesX
+        call before_masturbation
         ch_v "Mmmmm. . . call again, [JubesX.player_petname]."
         ch_v "I'll be waiting. . ."
 

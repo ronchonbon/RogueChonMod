@@ -1419,7 +1419,7 @@ label Jubes_BF(temp_Girls=[]):
         return True
     $ approval_bonus = 10
     $ Player.add_word(1,"interruption")
-    call Jubes_SexMenu
+    call enter_main_sex_menu(JubesX)
     $ approval_bonus = 0
 
     return
@@ -1969,7 +1969,8 @@ label Jubes_Love_End:
             $ JubesX.change_stat("obedience", 70, 25)
             ch_v "Like what? . ."
             $ approval_bonus = 20
-            call Jubes_SexMenu
+            call enter_main_sex_menu(JubesX)
+
     return
 
 label Jubes_Love_Redux:
@@ -2748,8 +2749,10 @@ label Jubes_Sexfriend:
 
         $ action_context = JubesX
         $ Player.add_word(1,"interruption")
-        call Jubes_SexPrep
-        call Jubes_SexMenu
+        $ primary_action = "sex"
+        call before_action
+        call enter_main_sex_menu(JubesX)
+
 
 
     return
@@ -2790,8 +2793,10 @@ label Jubes_Fuckbuddy:
 
     $ action_context = JubesX
     $ Player.add_word(1,"interruption")
-    call Jubes_SexPrep
-    call Jubes_SexMenu
+    $ primary_action = "sex"
+    call before_action
+    call enter_main_sex_menu(JubesX)
+
     return
 
 

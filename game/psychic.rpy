@@ -96,7 +96,7 @@ label MindFuck(TempLoc=0):
 
             $ Player.add_word(1,"MindFuck","MindFuck",0,"MindFuck")
             call shift_focus(Girl)
-            jump enter_main_sex_menu
+            call enter_main_sex_menu(Girl)
 
             $ Girl.location = TempLoc
             if Girl == EmmaX:
@@ -107,7 +107,11 @@ label MindFuck(TempLoc=0):
                 ch_j "Be thinking about me. . ."
 
             $ Girl.change_outfit(6,outfit_changed=1)
-            $ Girl.spunk = []
+
+            python:
+                for key in Girl.spunk.keys():
+                    Girl.spunk[key] = False
+
             if Girl == EmmaX:
                 hide Emma_sprite with fade
             elif Girl == JeanX:

@@ -992,7 +992,8 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                         $ approval_bonus = stored_count
 
                         $ primary_action = "fondle_breasts"
-                        call action(Girl)
+
+                        call action
 
                         if "fondle_breasts" in Girl.recent_history:
                             $ Girl.change_stat("obedience", 80, 10)
@@ -1036,7 +1037,8 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                                 ch_v "Ok, we'll see. . ."
 
                         $ primary_action = "fondle_thighs"
-                        call action(Girl)
+
+                        call action
 
                         if "fondle_thighs" in Girl.recent_history:
                             $ Girl.change_stat("obedience", 50, 5)
@@ -1094,13 +1096,16 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                 menu:
                     "How about you give me a handjob?":
                         $ primary_action = "handjob"
-                        call action(Girl)
+
+                        call action
                     "How about you titfuck me?":
                         $ primary_action = "titjob"
-                        call action(Girl)
+
+                        call action
                     "How about you blow me?":
                         $ primary_action = "blowjob"
-                        call action(Girl)
+
+                        call action
                     "Never mind, something else":
                         jump addiction_ultimatum_menu
 
@@ -1176,9 +1181,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                             elif Girl == JubesX:
                                 ch_v "Cheh."
             "I have some ideas. . ." if Girl.event_happened[1] >= 10:
-                $ focused_Girl = Girl
-
-                call enter_main_sex_menu
+                call enter_main_sex_menu(Girl)
             "Have you considered a . . . chemical solution?" if Girl.event_happened[1] >= 10 and Player.semen and not Girl.had_chat[2]:
                 call addiction_serum
             "Would you like some \"serum?\"" if Girl.event_happened[1] >= 10 and Player.semen and Girl.had_chat[2]:
@@ -2593,7 +2596,8 @@ label addiction_serum:
                         ch_v "Sure, that's fine. . ."
 
                     $ primary_action = "handjob"
-                    call action(Girl)
+
+                    call action
 
                     $ Girl.change_stat("obedience", 70, 1)
                     $ Girl.change_stat("inhibition", 50, 2)
@@ -2647,7 +2651,8 @@ label addiction_serum:
                         ch_v "I guess that wouldn't suck. . ."
 
                     $ primary_action = "blowjob"
-                    call action(Girl)
+
+                    call action
 
                     $ Girl.recent_history.append("has serum")
                     $ Girl.change_stat("obedience", 70, 1)
@@ -2692,9 +2697,7 @@ label addiction_serum:
 
                 $ Girl.remaining_actions = 1
 
-                $ focused_Girl = Girl
-
-                call enter_main_sex_menu
+                call enter_main_sex_menu(Girl)
 
                 if "_angry" not in Girl.recent_history:
                     $ Girl.change_stat("love", 70, 2)

@@ -2,10 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/menus.rpy", line 254: invalid syntax
-    renpy.pop_call()expression Partner.tag + "_SexAct" pass ("switch")
-                              ^
-    
+File "game/locations.rpy", line 10: while statement expects a non-empty block.
+    while True:
+               ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Mon May 30 01:39:28 2022
+Tue May 31 00:02:58 2022

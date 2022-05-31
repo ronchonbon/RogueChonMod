@@ -223,7 +223,7 @@ init python:
                                  ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"],
                                  ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"]]
 
-                self.likes = {"Rogue": None, "Kitty": 600, "Emma": 500, "Laura": 500, "Jean": 200, "Storm": 600, "Jubes": 500}
+                self.likes = {"Kitty": 600, "Emma": 500, "Laura": 500, "Jean": 200, "Storm": 600, "Jubes": 500}
 
                 self.history = ["met"]
 
@@ -252,7 +252,7 @@ init python:
                                  ["bg_campus", "bg_dangerroom", "bg_kitty", "bg_kitty"],
                                  ["bg_campus", "bg_dangerroom", "bg_kitty", "bg_kitty"]]
 
-                self.likes = {"Rogue": 600, "Kitty": None, "Emma": 500, "Laura": 500, "Jean": 300, "Storm": 600, "Jubes": 600}
+                self.likes = {"Rogue": 600, "Emma": 500, "Laura": 500, "Jean": 300, "Storm": 600, "Jubes": 600}
 
                 self.used_to_anal = 0
 
@@ -278,7 +278,7 @@ init python:
                                  ["bg_pool", "bg_pool", "bg_emma", "bg_emma"],
                                  ["bg_pool", "bg_pool", "bg_emma", "bg_emma"]]
 
-                self.likes = {"Rogue": 500, "Kitty": 500, "Emma": None, "Laura": 500, "Jean": 100, "Storm": 500, "Jubes": 500}
+                self.likes = {"Rogue": 500, "Kitty": 500, "Laura": 500, "Jean": 100, "Storm": 500, "Jubes": 500}
 
                 self.used_to_anal = 2
 
@@ -307,7 +307,7 @@ init python:
                                         ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"],
                                         ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"]]
 
-                self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 500, "Laura": None, "Jean": 300, "Storm": 500, "Jubes": 600}
+                self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 500, "Jean": 300, "Storm": 500, "Jubes": 600}
 
                 self.used_to_anal = 2
 
@@ -333,7 +333,7 @@ init python:
                                         ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"],
                                         ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"]]
 
-                self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 300, "Laura": 500, "Jean": None, "Storm": 300, "Jubes": 300}
+                self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 300, "Laura": 500, "Storm": 300, "Jubes": 300}
 
                 self.used_to_anal = 0
 
@@ -357,7 +357,7 @@ init python:
                                         ["bg_storm", "bg_campus", "bg_storm", "bg_pool"],
                                         ["bg_storm", "bg_campus", "bg_storm", "bg_pool"]]
 
-                self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 400, "Laura": 500, "Jean": 300, "Storm": None, "Jubes": 500}
+                self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 400, "Laura": 500, "Jean": 300, "Jubes": 500}
 
                 self.used_to_anal = 0
 
@@ -381,7 +381,7 @@ init python:
                                         ["bg_jubes", "bg_campus", "bg_jubes", "bg_pool"],
                                         ["bg_jubes", "bg_campus", "bg_jubes", "bg_pool"]]
 
-                self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 500, "Laura": 600, "Jean": 300, "Storm": 500, "Jubes": None}
+                self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 500, "Laura": 600, "Jean": 300, "Storm": 500}
 
                 self.used_to_anal = 0
 
@@ -839,7 +839,7 @@ init python:
                 self.mouth = "_tongue"
 
             if not self.used_to_anal:
-                if Partner != self and (primary_action == "anal" or primary_action == "dildo_anal" or girl_offhand_action == "dildo_anal"):
+                if Partner != self and (primary_action == "anal" or primary_action == "dildo_ass" or girl_offhand_action == "dildo_ass"):
                     self.eyes = "_closed"
                     self.brows = "_angry"
 
@@ -889,27 +889,27 @@ init python:
                 outfit_name = self.outfit_name
 
             if outfit_name == "casual1":
-                outfit_holder = self.first_casual_outfit
+                outfit_holder = self.first_casual_outfit.copy()
             elif outfit_name == "casual2":
-                outfit_holder = self.second_casual_outfit
+                outfit_holder = self.second_casual_outfit.copy()
             elif outfit_name == "nude":
-                outfit_holder = self.nude
+                outfit_holder = self.nude.copy()
             elif outfit_name == "shower":
-                outfit_holder = self.shower
+                outfit_holder = self.shower.copy()
             elif outfit_name == "custom1":
-                outfit_holder = self.first_custom_outfit
+                outfit_holder = self.first_custom_outfit.copy()
             elif outfit_name == "custom2":
-                outfit_holder = self.second_custom_outfit
+                outfit_holder = self.second_custom_outfit.copy()
             elif outfit_name == "custom3":
-                outfit_holder = self.third_custom_outfit
+                outfit_holder = self.third_custom_outfit.copy()
             elif outfit_name == "temporary":
-                outfit_holder = self.temp_outfit
+                outfit_holder = self.temp_outfit.copy()
             elif outfit_name == "sleepwear":
-                outfit_holder = self.sleepwear
+                outfit_holder = self.sleepwear.copy()
             elif outfit_name == "gym_clothes":
-                outfit_holder = self.gym_clothes
+                outfit_holder = self.gym_clothes.copy()
             elif outfit_name == "costume":
-                outfit_holder = self.halloween_costume
+                outfit_holder = self.halloween_costume.copy()
             elif outfit_name == "swimwear":
                 if "_bikini_top" not in self.inventory or "_bikini_bottoms" not in self.inventory:
                     self.outfit_name = self.today_outfit_name
@@ -940,11 +940,11 @@ init python:
 
                     return False
 
-                outfit_holder = self.swimwear
+                outfit_holder = self.swimwear.copy()
             elif outfit_name == "bondage_outfit" and self.tag == "Jean":
-                outfit_holder = self.bondage_outfit
+                outfit_holder = self.bondage_outfit.copy()
             elif outfit_name == "domme_outfit" and self.tag == "Emma":
-                outfit_holder = self.domme_outfit
+                outfit_holder = self.domme_outfit.copy()
 
             if not self.outfit["bottom"] and outfit_holder["bottom"]:
                 got_dressed = 1
@@ -957,7 +957,7 @@ init python:
             elif not self.outfit["hose"] and outfit_holder["hose"]:
                 got_dressed = 1
 
-            self.outfit = outfit_holder
+            self.outfit = outfit_holder.copy()
 
             if self.tag == "Emma" and outfit_holder["face_outer_accessory"] in ["_hat", "_wet_hat"]:
                 self.outfit["hair"] = "_wet" if outfit_holder["face_outer_accessory"] == "_wet_hat" else self.outfit["hair"]
@@ -1317,7 +1317,7 @@ init python:
             return
 
         def set_temp_outfit(self):
-            self.temp_outfit = self.outfit
+            self.temp_outfit = self.outfit.copy()
 
             self.outfit_name = "temporary"
             self.today_outfit_name = "temporary"

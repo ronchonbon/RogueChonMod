@@ -91,45 +91,45 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
             return
 
         if Girl.remaining_actions and Girl.location == bg_current:
-            $ temp_Girls = ["none"]
+            $ options = ["none"]
 
             if Girl.action_counter["handjob"] >= 5 and approval_check(Girl, 1100, taboo_modifier = 3):
                 $ counter = Girl.action_counter["handjob"] - 4
                 $ counter = 10 if counter > 10 else counter
                 while counter:
-                    $ temp_Girls.append("handjob")
+                    $ options.append("handjob")
                     $ counter -= 1
             if Girl.action_counter["blowjob"] >= 5 and approval_check(Girl, 1300, taboo_modifier = 3):
                 $ counter = Girl.action_counter["blowjob"] - 4
                 $ counter = 10 if counter > 10 else counter
                 $ counter += 5 if "hungry" in Girl.traits else 0
                 while counter:
-                    $ temp_Girls.append("blowjob")
+                    $ options.append("blowjob")
                     $ counter -= 1
             if Girl.action_counter["titjob"] >= 5 and approval_check(Girl, 1200, taboo_modifier = 5):
                 $ counter = Girl.action_counter["titjob"] - 4
                 $ counter = 10 if counter > 10 else counter
                 while counter:
-                    $ temp_Girls.append("Tit")
+                    $ options.append("Tit")
                     $ counter -= 1
             if Girl.action_counter["sex"] >= 5 and approval_check(Girl, 1400, taboo_modifier = 5):
                 $ counter = Girl.action_counter["sex"] - 4
                 $ counter = 10 if counter > 10 else counter
                 $ counter += 5 if Girl.lust >= 70 else 0
                 while counter:
-                    $ temp_Girls.append("sex")
+                    $ options.append("sex")
                     $ counter -= 1
             if Girl.action_counter["anal"] >= 5 and approval_check(Girl, 1550, taboo_modifier = 5):
                 $ counter = Girl.action_counter["anal"] - 4
                 $ counter = 10 if counter > 10 else counter
                 $ counter += 5 if Girl.lust >= 70 and Girl.used_to_anal else 0
                 while counter:
-                    $ temp_Girls.append("anal")
+                    $ options.append("anal")
                     $ counter -= 1
 
-            $ renpy.random.shuffle(temp_Girls)
+            $ renpy.random.shuffle(options)
 
-            if temp_Girls[0] == "handjob":
+            if options[0] == "handjob":
                 if Girl == RogueX:
                     ch_r "Sure you don't want me to handle that for you?"
                 elif Girl == KittyX:
@@ -144,7 +144,7 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
                     ch_s "Did you want a hand?"
                 elif Girl == JubesX:
                     ch_v "I could, uh, give you a hand there. . ."
-            elif temp_Girls[0] == "blowjob" or (Girl == JubesX and JubesX.action_counter["blowjob"]):
+            elif options[0] == "blowjob" or (Girl == JubesX and JubesX.action_counter["blowjob"]):
                 if Girl == RogueX:
                     ch_r "Sure my mouth wouldn't do better?"
                 elif Girl == KittyX:
@@ -161,7 +161,7 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
                     $ Girl.change_face("_sly", 1,mouth="_tongue")
                     ch_v "I uh, wouldn't mind giving that my full attention. . ."
                     $ Girl.mouth="_smile"
-            elif temp_Girls[0] == "titjob":
+            elif options[0] == "titjob":
                 if Girl == RogueX:
                     ch_r "Sure you wouldn't prefer using these?"
                 elif Girl == KittyX:
@@ -176,7 +176,7 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
                     ch_s "Would you prefer these?"
                 elif Girl == JubesX:
                     ch_v "I could use these. . ."
-            elif temp_Girls[0] == "sex":
+            elif options[0] == "sex":
                 if Girl == RogueX:
                     ch_r "Oh, you're making me pretty wet here. . ."
                 elif Girl == KittyX:
@@ -191,7 +191,7 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
                     ch_s "Well that is one way to get me wet. . ."
                 elif Girl == JubesX:
                     ch_v "I wouldn't mind sticking that in. . ."
-            elif temp_Girls[0] == "anal":
+            elif options[0] == "anal":
                 if Girl == RogueX:
                     ch_r "You've really got my ass tingling. . ."
                 elif Girl == KittyX:
@@ -260,16 +260,9 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
 
             show black_screen onlayer black
             hide black_screen onlayer black
-            if temp_Girls[0] == "handjob":
-                jump expression Girl.tag + "_HJ_Prep"
-            elif temp_Girls[0] == "blowjob":
-                jump expression Girl.tag + "_BJ_Prep"
-            elif temp_Girls[0] == "titjob":
-                jump expression Girl.tag + "_TJ_Prep"
-            elif temp_Girls[0] == "sex":
-                jump expression Girl.tag + "_SexPrep"
-            elif temp_Girls[0] == "anal":
-                jump expression Girl.tag + "_AnalPrep"
+
+            $ primary_action = options[0]
+            call before_action
     return
 
 

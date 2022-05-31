@@ -972,7 +972,11 @@ label ShowPool(temp_Girls=[], PoolLoc=0):
         if temp_Girls[0].location == bg_current:
             $ temp_Girls[0].add_word(0,"swim","swim",0,0)
             $ temp_Girls[0].wet = 1
-            $ temp_Girls[0].spunk = []
+
+            python:
+                for key in temp_Girls[0].spunk.keys():
+                    temp_Girls[0].spunk[key] = False
+
             $ PoolLoc = 500 if len(temp_Girls) > 1 else 650
             if temp_Girls[0] == RogueX:
                 show Rogue_sprite standing zorder 50 at Pool_Bob(PoolLoc)

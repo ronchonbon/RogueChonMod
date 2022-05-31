@@ -1677,7 +1677,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
         return
     $ Girl.eyes = "_surprised"
     $ Girl.brows = "_sad"
-    if Girl in (EmmaX,LauraX):
+    if Girl in [RogueX, EmmaX, LauraX]:
         $ Girl.mouth = "_tongue"
     else:
         $ Girl.mouth = "_sucking"
@@ -3318,6 +3318,12 @@ label Partner_Clean_Girl(Girl=0):
             else:
                 "[Partner.name] wipes her own hands off with a nearby tissue."
         $ counter += 1
-    $ Girl.spunk = []
-    $ Partner.spunk = []
+
+        python:
+            for key in Girl.spunk.keys():
+                Girl.spunk[key] = False
+
+            for key in Partner.spunk.keys():
+                Partner[0].spunk[key] = False
+                
     return

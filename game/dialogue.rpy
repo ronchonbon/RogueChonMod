@@ -1191,7 +1191,7 @@ label action_not_done_yet_lines(Girl, action):
         if action in ["eat_pussy", "eat_ass"]:
             $ lines.append("That's pretty intimate, " + Girl.player_petname + ". . .")
 
-        if action in ["eat_ass", "dildo_anal", "anal"]:
+        if action in ["eat_ass", "dildo_ass", "anal"]:
             $ lines.append("I don't know that I'm. . ." + Girl.like + "that kind of girl?")
 
         if action == "blowjob":

@@ -67,14 +67,14 @@ layeredimage Laura_sprite standing:
     elif LauraX.grool:
         "images/Laura_standing/Laura_standing_grool.png"
 
-    # always:
-    #     "grool_dripping_animations"
+    always:
+        "Laura_grool_animations"
 
     if LauraX.spunk["pussy"] or LauraX.spunk["anus"]:
         "images/Laura_standing/Laura_standing_spunk_pussy.png"
 
-    # always:
-    #     "spunk_dripping_animations"
+    always:
+        "Laura_spunk_animations"
 
     if LauraX.outfit["bottom"] and (LauraX.bottom_pulled_down or LauraX.upskirt):
         "images/Laura_standing/Laura_standing_bottom[LauraX.outfit[bottom]]_down.png"
@@ -130,8 +130,8 @@ layeredimage Laura_sprite standing:
     if LauraX.outfit["held_item"] and LauraX.arm_pose == 2:
         "images/Laura_standing/Laura_standing_held[LauraX.outfit[held_item]].png"
 
-    # always:
-    #     "Laura_standing_fondling_animations"
+    always:
+        "Laura_standing_fondling_animations"
 
     anchor (0.5, 0.0) offset (40, 150)
 

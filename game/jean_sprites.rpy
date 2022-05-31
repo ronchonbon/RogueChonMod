@@ -55,13 +55,13 @@ layeredimage Jean_sprite standing:
         "images/Jean_standing/Jean_standing_grool.png"
 
     # always:
-    #     "grool_dripping_animations"
+    #     "Jean_grool_animations"
 
     if JeanX.spunk["pussy"] or JeanX.spunk["anus"]:
         "images/Jean_standing/Jean_standing_spunk_pussy.png"
 
     # always:
-    #     "spunk_dripping_animations"
+    #     "Jean_spunk_animations"
 
     if JeanX.outfit["dress"]:
         "images/Jean_standing/Jean_standing_dress[JeanX.outfit[dress]][JeanX.arm_pose].png"
@@ -117,8 +117,8 @@ layeredimage Jean_sprite standing:
     if JeanX.outfit["held_item"] and JeanX.arm_pose == 2:
         "images/Jean_standing/Jean_standing_held[JeanX.outfit[held_item]].png"
 
-    # always:
-    #     "Jean_standing_fondling_animations"
+    always:
+        "Jean_standing_fondling_animations"
 
     anchor (0.5, 0.0) offset (20, 180)
 

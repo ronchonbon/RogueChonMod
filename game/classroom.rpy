@@ -55,75 +55,72 @@ label take_class:
 
     return
 
-label classroom_Seating(Girls=[], GirlB=0, GirlLike=0, line=0, D20=0, temp_Girls=[]):
-
-
+label classroom_seating:
+    $ Girls = []
     $ Present = []
-    $ temp_Girls = active_Girls[:]
-    while temp_Girls:
 
-        if temp_Girls[0].location == bg_current:
-            $ Girls.append(temp_Girls[0])
-        $ temp_Girls.remove(temp_Girls[0])
+    python:
+        for G in active_Girls:
+            if G.location == bg_current:
+                Girls.append(G)
+
+        for G in Nearby:
+            if G not in Girls:
+                Girls.append(G)
 
     $ renpy.random.shuffle(Girls)
-
-    $ temp_Girls = Nearby[:]
-    while temp_Girls:
-
-        if temp_Girls[0] not in Girls:
-            $ Girls.append(temp_Girls[0])
-        $ temp_Girls.remove(temp_Girls[0])
-
-
 
     $ Nearby = []
 
     call set_the_scene (0)
-    if len(Girls) == 2:
 
+    if len(Girls) == 2:
         $ D20 = renpy.random.randint(500, 1500)
+
         if (Girls[0].likes[Girls[1].tag] + Girls[1].likes[Girls[0].tag]) >= D20:
             "You see that [Girls[0].name] and [Girls[1].name] are sitting next to each other, which do you sit next to?"
         else:
             "You see that [Girls[0].name] and [Girls[1].name] are in the room, but on opposite sides."
-            $ temp_Girls = Girls[:]
-            while temp_Girls:
 
-                if temp_Girls[0] not in Nearby:
-                    $ Nearby.append(temp_Girls[0])
-                $ temp_Girls.remove(temp_Girls[0])
+            python:
+                for G in Girls:
+                    if G not in Nearby:
+                        Nearby.append(G)
+
         menu:
             extend ""
             "[Girls[0].name]":
                 $ Present = [Girls[0]]
+
                 if Girls[0] in Nearby:
                     $ Nearby.remove(Girls[0])
             "[Girls[1].name]":
                 $ Present = [Girls[1]]
+
                 if Girls[1] in Nearby:
                     $ Nearby.remove(Girls[1])
             "Between them." if not Nearby:
-                $ Present = [Girls[0],Girls[1]]
-                if Girls[1] in Nearby:
-                    $ Nearby.remove(Girls[1])
+                $ Present = [Girls[0], Girls[1]]
+
                 if Girls[0] in Nearby:
                     $ Nearby.remove(Girls[0])
+
+                if Girls[1] in Nearby:
+                    $ Nearby.remove(Girls[1])
             "Neither":
                 "You decide to sit a distance away from either of them."
-                $ temp_Girls = Girls[:]
-                while temp_Girls:
 
-                    if temp_Girls[0] not in Nearby:
-                        $ Nearby.append(temp_Girls[0])
-                    $ temp_Girls.remove(temp_Girls[0])
-
+                python:
+                    for G in Girls:
+                        if G not in Nearby:
+                            Nearby.append(G)
     elif len(Girls) > 2:
-
         "You see several girls are in the room, who would you like to sit near?"
-        while len(Present) < 2:
+
+        $ flag = False
+
+        while not flag:
             menu:
-                "Select up to two."
                 "[RogueX.name]" if RogueX in Girls and RogueX not in Present:
                     $ Present.append(RogueX)
                 "[KittyX.name]" if KittyX in Girls and KittyX not in Present:
@@ -135,29 +132,26 @@ label classroom_Seating(Girls=[], GirlB=0, GirlLike=0, line=0, D20=0, temp_Girls
                 "[JubesX.name]" if JubesX in Girls and JubesX not in Present:
                     $ Present.append(JubesX)
                 "Done":
-                    $ Present.append("junk")
-                    $ Present.append("junk")
-
-
+                    $ flag = True
     elif Girls:
-
         menu:
             "You see [Girls[0].name] is there, do you sit next to her?"
+
             "Yes":
                 $ Present.append(Girls[0])
             "No, I'll sit away from her a bit.":
                 $ Nearby.append(Girls[0])
 
-
-
-    while "junk" in Present:
-        $ Present.remove("junk")
-    if len(Present) == 2:
+    if len(Present) > 2:
+        "You figure out seating arrangements with the girls."
+    elif len(Present) == 2:
         "You look for a seat between [Present[0].name] and [Present[1].name]."
+
         $ Present[0].location = "bg_classroom"
         $ Present[1].location = "bg_classroom"
-    elif Present:
+    elif len(Present) == 1:
         "You look for a seat next to [Present[0].name]."
+
         $ Present[0].location = "bg_classroom"
     else:
         "You look for a seat off to the side."
@@ -165,19 +159,28 @@ label classroom_Seating(Girls=[], GirlB=0, GirlLike=0, line=0, D20=0, temp_Girls
     if len(Girls) > len(Present):
         "The rest are scattered around the room."
 
-    while Girls:
-        if Girls[0] not in Present:
+    python:
+        for G in Girls:
+            if G not in Present:
+                if G not in Nearby:
+                    Nearby.append(G)
 
-            if Girls[0] not in Nearby:
-                $ Nearby.append(Girls[0])
-            $ Girls[0].location = "nearby"
-        $ Girls.remove(Girls[0])
+                G.location = "nearby"
 
     if Present:
-        call shift_focus (Present[0])
-    call set_the_scene (silent = True)
+        call shift_focus(Present[0])
+
+    call set_the_scene(silent = True)
 
     return
+
+
+
+
+
+
+
+    
 
 label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
     if Girl not in all_Girls:

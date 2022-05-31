@@ -1,18 +1,25 @@
-layeredimage Zero_handjob_cock:
-    always:
-        "images/Player/Zero_handjob_cock_[Player.color].png"
+image Zero_hand:
+    "images/UI_Hand.png"
 
     anchor (0.5, 0.5)
 
-layeredimage Zero_titjob_cock:
-    always:
-        "images/Player/Zero_blowjob_cock_[Player.color].png"
+image Zero_hand_under:
+    "images/UI_HandUnder.png"
 
-    if Player.cock_wet:
-        "images/Player/Zero_blowjob_spit_cock.png"
+    anchor (0.5, 0.5)
 
-    if Player.spunk:
-        "images/Player/Zero_blowjob_spunk_cock.png"
+image Zero_finger:
+    "images/UI_Finger.png"
+
+    anchor (0.5, 0.5)
+
+image Zero_tongue:
+    "images/UI_Tongue.png"
+
+    anchor (0.5, 0.5)
+
+image Zero_handjob_cock:
+    "images/Player/Zero_handjob_cock_[Player.color].png"
 
     anchor (0.5, 0.5)
 
@@ -25,6 +32,11 @@ layeredimage Zero_blowjob_cock:
 
     if Player.spunk:
         "images/Player/Zero_blowjob_spunk_cock.png"
+
+    anchor (0.5, 0.5)
+
+image Zero_sex_finger:
+    "images/UI_Fingering.png"
 
     anchor (0.5, 0.5)
 

@@ -850,7 +850,8 @@ label Storm_Hairtalk:
                 ch_s "I. . . suppose that I might accomodate that. . ."
                 $ StormX.change_stat("obedience", 50, 2)
                 $ StormX.change_stat("obedience", 80, 1)
-                call Storm_FB_Prep
+                $ primary_action = "fondle_breasts"
+                call before_action
             else:
                 $ StormX.change_face("_angry", 2)
                 ch_s "[StormX.player_petname]!"
@@ -979,7 +980,7 @@ label Storm_Detention:
                         $ StormX.change_stat("obedience", 60, 5)
                         $ StormX.change_stat("inhibition", 70, 5)
                         ch_s "Why do I put up with you?"
-                        call Storm_SexMenu
+                        call enter_main_sex_menu(StormX)
                     "No, you're right, I take my education too lightly.":
                         $ StormX.change_stat("love", 80, 1)
                         $ StormX.change_stat("inhibition", 70, -2)
@@ -1013,7 +1014,8 @@ label Storm_Detention:
                 $ StormX.change_stat("obedience", 60, 5)
                 $ StormX.change_stat("inhibition", 70, 5)
                 ch_s "I just bet you can. . ."
-                call Storm_SexMenu
+                call enter_main_sex_menu(StormX)
+
             else:
 
                 $ StormX.change_face("_sad", mouth="_smirk")
@@ -2301,7 +2303,8 @@ label Storm_Poolnight:
     ch_s "Now that you have me, [StormX.player_petname]. . ."
     $ StormX.change_face("_sly", 1)
     ch_s "What do you intend to do with me. . ."
-    call Storm_SexMenu
+    call enter_main_sex_menu(StormX)
+
     return
 
 
@@ -2332,7 +2335,8 @@ label Storm_Fuckbuddy:
     $ StormX.change_face("_sly", 1)
     $ StormX.change_stat("inhibition", 200, 10)
     ch_s "Couldn't you help me with that? . . "
-    call Storm_SexMenu
+    call enter_main_sex_menu(StormX)
+
     return
 
 

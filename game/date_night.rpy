@@ -4328,8 +4328,7 @@ label Girl_Date_End(Girl=0):
         ch_v "So. . . what did you wanna do to me?"
     $ Player.daily_history.append("post date")
 
-
-    call enter_main_sex_menu
+    call enter_main_sex_menu(Girl)
 
     if "_angry" in Girl.recent_history:
         if bg_current == "bg_player":

@@ -53,14 +53,14 @@ layeredimage Storm_sprite standing:
     elif StormX.grool:
         "images/Storm_standing/Storm_standing_grool.png"
 
-    # always:
-    #     "grool_dripping_animations"
+    always:
+        "Storm_grool_animations"
 
     if StormX.spunk["pussy"] or StormX.spunk["anus"]:
         "images/Storm_standing/Storm_standing_spunk_pussy.png"
 
-    # always:
-    #     "spunk_dripping_animations"
+    always:
+        "Storm_spunk_animations"
 
     if StormX.outfit["bottom"] and (StormX.bottom_pulled_down or StormX.upskirt):
         "images/Storm_standing/Storm_standing_bottom[StormX.outfit[bottom]]_down.png"
@@ -155,8 +155,8 @@ layeredimage Storm_sprite standing:
     if StormX.outfit["held_item"] and StormX.arm_pose == 2:
         "images/Storm_standing/Storm_standing_held[StormX.outfit[held_item]].png"
 
-    # always:
-    #     "Storm_standing_fondling_animations"
+    always:
+        "Storm_standing_fondling_animations"
 
     anchor (0.5, 0.0) offset (60, 180) zoom 0.95
 

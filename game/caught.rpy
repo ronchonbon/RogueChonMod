@@ -63,7 +63,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
 
     if line == "fondle_thighs" or line == "fondle_breasts" or line == "fondle_pussy" or line == "hotdog" or line == "handjob":
         ch_x "The two of you, feeling each other up like animals!"
-    elif line == "dildo_pussy" or line == "dildo_anal":
+    elif line == "dildo_pussy" or line == "dildo_ass":
         ch_x "Using those. . . devices on each other, unsanitary!"
     elif line == "eat_pussy":
         ch_x "Engaging in. . . cunnilingus. . . dripping everywhere. . ."
@@ -1768,6 +1768,7 @@ label caught_showering(Girl):
     $ Girl.change_face("_smile",1)
 
     $ Girl.location = "bg_showerroom"
+    $ Girl.outfit["hair"] = "_wet"
     $ Girl.wet = 1
     $ Girl.grool = 2
 

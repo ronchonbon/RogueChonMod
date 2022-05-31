@@ -598,7 +598,8 @@ label Emma_Caught_Classroom:
                 $ EmmaX.taboo = 0
                 if simulation:
                     return True
-                call Emma_FB_Prep
+                $ primary_action = "fondle_breasts"
+                call before_action
             "Could you give me a hand? [[point to your cock]":
                 $ EmmaX.change_stat("love", 70, -5)
                 $ EmmaX.change_stat("obedience", 50, 5)

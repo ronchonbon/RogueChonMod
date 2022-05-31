@@ -1,12 +1,6 @@
 label action:
     $ stack_depth = renpy.call_stack_depth()
 
-    if primary_action in dildo_actions:
-        call dildo_check(focused_Girl)
-
-        if not _return:
-            return
-
     $ round -= 5 if round > 5 else (round-1)
 
     call set_approval_bonus
@@ -42,7 +36,7 @@ label action:
     elif action_context == "pullback":
         call pullback_reactions(focused_Girl, primary_action)
         jump before_action
-    elif primary_action in anal_insertion_actions and not focused_Girl.used_to_anal and ("finger_ass" in focused_Girl.daily_history or "dildo_anal" in focused_Girl.daily_history or "anal" in focused_Girl.daily_history):
+    elif primary_action in anal_insertion_actions and not focused_Girl.used_to_anal and ("finger_ass" in focused_Girl.daily_history or "dildo_ass" in focused_Girl.daily_history or "anal" in focused_Girl.daily_history):
         call anal_insertion_reactions(focused_Girl, primary_action)
     elif primary_action in focused_Girl.recent_history:
         call recent_action_reactions(focused_Girl, primary_action)
@@ -376,7 +370,7 @@ label action_cycle:
 
         if primary_action in inside_panties_actions:
             if focused_Girl.outfit["underwear"] or focused_Girl.legs_covered: #This checks if Rogue_sprite wants to strip down.
-                call focused_Girl_Undress(focused_Girl, "auto")
+                call Girl_Undress(focused_Girl, "auto")
 
         call Sex_Dialog(focused_Girl, Partner)
 
@@ -771,11 +765,11 @@ label set_approval_bonus:
     elif primary_action == "dildo_ass":
         if focused_Girl.used_to_anal:
             $ approval_bonus += 30
-        elif "anal" in focused_Girl.recent_history or "dildo_anal" in focused_Girl.recent_history:
+        elif "anal" in focused_Girl.recent_history or "dildo_ass" in focused_Girl.recent_history:
             $ approval_bonus -= 20
-        elif "anal" in focused_Girl.daily_history or "dildo_anal" in focused_Girl.daily_history:
+        elif "anal" in focused_Girl.daily_history or "dildo_ass" in focused_Girl.daily_history:
             $ approval_bonus -= 10
-        elif (focused_Girl.action_counter["anal"] + focused_Girl.action_counter["dildo_ass"] + focused_Girl.outfit["buttplug"]) > 0: #You've done it before
+        elif (focused_Girl.action_counter["anal"] + focused_Girl.action_counter["dildo_ass"]) > 0 or focused_Girl.outfit["buttplug"]: #You've done it before
             $ approval_bonus += 20
 
         if focused_Girl.legs_covered: # she's got pants on.

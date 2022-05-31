@@ -1,20 +1,22 @@
-label enter_main_sex_menu:
-    if focused_Girl == EmmaX:
-        if "classcaught" not in focused_Girl.history:
+label enter_main_sex_menu(Girl):
+    call shift_focus(Girl)
+
+    if Girl == EmmaX:
+        if "classcaught" not in Girl.history:
             ch_e "I can't imagine being a part of something so. . . tawdry."
 
             return
 
-        if "threesome" not in focused_Girl.history and not AloneCheck(focused_Girl):
-            call expression focused_Girl.tag + "_ThreeCheck"
+        if "threesome" not in Girl.history and not AloneCheck(Girl):
+            call expression Girl.tag + "_ThreeCheck"
 
-        if taboo > 20 and "taboo" not in focused_Girl.history:
-            call expression focused_Girl.tag + "_taboo_Talk"
+        if taboo > 20 and "taboo" not in Girl.history:
+            call expression Girl.tag + "_taboo_Talk"
 
-            if bg_current == "bg_classroom" or bg_current in personal_rooms and AloneCheck(focused_Girl):
+            if bg_current == "bg_classroom" or bg_current in personal_rooms and AloneCheck(Girl):
                 ch_p "We could just lock the door, right?"
                 ch_e "We certainly could. . ."
-                "[focused_Girl.name] walks to the door and locks it behind her."
+                "[Girl.name] walks to the door and locks it behind her."
 
                 $ Player.traits.append("locked")
 
@@ -22,57 +24,56 @@ label enter_main_sex_menu:
             else:
                 return
 
-    $ action_context = None
     $ primary_action = None
     $ offhand_action = None
     $ girl_offhand_action = None
+    $ second_girl_primary_action = None
+    $ second_girl_offhand_action = None
 
-    call hide_girl(focused_Girl)
-
-    $ focused_Girl.arm_pose = 1
+    $ Girl.arm_pose = 1
 
     call set_the_scene(1,0,0,0,1)
 
-    if focused_Girl in [EmmaX, StormX]:
-        if "detention" in focused_Girl.recent_history:
+    if Girl in [EmmaX, StormX]:
+        if "detention" in Girl.recent_history:
             $ temp_modifier = 20 if temp_modifier <= 20 else temp_modifier
 
     if not Player.semen:
         "You're a little out of juice at the moment, you might want to wait a bit."
     if Player.focus >= 95:
         "You're practically buzzing, the slightest breeze could set you off."
-    if not focused_Girl.remaining_actions:
-        "[focused_Girl.name]'s looking a bit tired out, maybe let her rest a bit."
+    if not Girl.remaining_actions:
+        "[Girl.name]'s looking a bit tired out, maybe let her rest a bit."
 
-    if "caught" in focused_Girl.recent_history or "_angry" in focused_Girl.recent_history:
-        if focused_Girl.location == bg_current:
-            call sex_menu_caught_or_angry_lines(focused_Girl)
+    if "caught" in Girl.recent_history or "_angry" in Girl.recent_history:
+        if Girl.location == bg_current:
+            call sex_menu_caught_or_angry_lines(Girl)
 
-        $ focused_Girl.change_outfit()
-        $ focused_Girl.drain_word("caught",1,0)
+        $ Girl.change_outfit()
+        $ Girl.drain_word("caught",1,0)
 
         return
 
     if round < 5:
-        call sex_menu_less_than_five_rounds_lines(focused_Girl)
+        call sex_menu_less_than_five_rounds_lines(Girl)
 
         return
 
-    call girl_sex_menu(focused_Girl)
+    call girl_sex_menu(Girl)
 
     if _return:
         return
 
-    if focused_Girl.location != bg_current:
+    if Girl.location != bg_current:
         call set_the_scene
         call Trig_Reset
 
         return
 
     if not multi_action:
-        $ focused_Girl.session_orgasms = 0
+        $ Girl.session_orgasms = 0
 
-        call end_of_sex_menu_not_multiaction_lines(focused_Girl)
+        call end_of_sex_menu_not_multiaction_lines(Girl)
         call set_the_scene
         call Trig_Reset
 
@@ -125,7 +126,7 @@ label girl_sex_menu(Girl):
             if Girl.remaining_actions:
                 $ primary_action = "kiss"
 
-                jump action
+                call action
             else:
                 call out_of_action_lines(Girl)
         "Could I touch you?":
@@ -141,13 +142,13 @@ label girl_sex_menu(Girl):
                         call Massage (Girl)
                     "Your thighs?" if Girl.remaining_actions:
                         $ primary_action = "fondle_thighs"
-                        jump action
+                        call action
                     "Your breasts?":
                         $ primary_action = "fondle_breasts"
-                        jump action
+                        call action
                     "Suck your breasts?" if Girl.remaining_actions and Girl.action_counter["suck_breasts"]:
                         $ primary_action = "suck_breasts"
-                        jump action
+                        call action
                     "Your pussy?" if Girl.remaining_actions:
                         $ primary_action = "fondle_pussy"
                         jump action
@@ -238,11 +239,17 @@ label girl_sex_menu(Girl):
                         else:
                             "The spirit is apparently willing, but the flesh is spongy and bruised."
                     "How about some toys? [[Pussy]":
-                        $ primary_action = "dildo_pussy"
-                        jump action
+                        call dildo_check(Girl)
+
+                        if _return:
+                            $ primary_action = "dildo_pussy"
+                            jump action
                     "How about some toys? [[Anal]":
-                        $ primary_action = "dildo_ass"
-                        jump action
+                        call dildo_check(Girl)
+
+                        if _return:
+                            $ primary_action = "dildo_ass"
+                            jump action
                     "Never mind [[something else]":
                         jump main_sex_menu
             else:
@@ -1019,8 +1026,13 @@ label fondle_menu:
                                 $ action_context = "pullback"
                                 $ primary_action = "fondle_thighs"
                             "I want to stick a dildo in." if primary_action in ["fondle_pussy", "finger_pussy", "eat_pussy"]:
-                                $ action_context = "shift"
-                                $ primary_action = "dildo_pussy"
+                                call dildo_check(focused_Girl)
+
+                                if _return:
+                                    $ action_context = "shift"
+                                    $ primary_action = "dildo_pussy"
+                                else:
+                                    jump action_cycle
                             "Pull out and start rubbing again." if primary_action in ["finger_pussy"]:
                                 $ action_context = "pullback"
                                 $ primary_action = "fondle_pussy"
@@ -1037,8 +1049,13 @@ label fondle_menu:
                                 $ action_context = "auto"
                                 $ primary_action = "eat_ass"
                             "I want to stick a dildo in." if primary_action in ["fondle_ass", "finger_ass", "eat_ass"]:
-                                $ action_context = "shift"
-                                $ primary_action = "dildo_ass"
+                                call dildo_check(focused_Girl)
+
+                                if _return:
+                                    $ action_context = "shift"
+                                    $ primary_action = "dildo_ass"
+                                else:
+                                    jump action_cycle
                             "Pull out and start rubbing again." if primary_action in ["fondle_ass"]:
                                 $ action_context = "pullback"
                                 $ primary_action = "fondle_ass"
@@ -1047,8 +1064,6 @@ label fondle_menu:
                                 $ primary_action = "fondle_ass"
                             "Never Mind":
                                 jump action_cycle
-
-                        $ Girl = focused_Girl
 
                         jump action
                     else:

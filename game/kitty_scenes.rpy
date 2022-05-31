@@ -384,7 +384,7 @@ label Kitty_BF:
         return True
     $ approval_bonus = 10
     $ Player.add_word(1,"interruption")
-    call Kitty_sexMenu
+    call enter_main_sex_menu(KittyX)
     $ approval_bonus = 0
     return
 
@@ -701,7 +701,9 @@ label Kitty_Love_End:
             ch_k "Hmm. . ."
             if simulation:
                 return True
-            call Kitty_sexAct ("sex")
+            call shift_focus(KittyX)
+            $ primary_action = "sex"
+            call action
         "I have something else in mind. . .[[choose another activity]":
             $ KittyX.brows = "_confused"
             $ KittyX.change_stat("obedience", 70, 20)
@@ -709,7 +711,7 @@ label Kitty_Love_End:
             if simulation:
                 return True
             $ approval_bonus = 20
-            call Kitty_sexMenu
+            call enter_main_sex_menu(KittyX)
     return
 
 label Kitty_Love_Redux:

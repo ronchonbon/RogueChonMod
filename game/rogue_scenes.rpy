@@ -550,8 +550,7 @@ label Rogue_BF:
     if simulation:
         return True
     $ approval_bonus = 10
-    call shift_focus(RogueX)
-    call enter_main_sex_menu
+    call enter_main_sex_menu(RogueX)
     $ approval_bonus = 0
     return
 
@@ -686,7 +685,9 @@ label Rogue_Love:
                 ch_r "Hmm. . ."
                 if simulation:
                     return True
-                call Rogue_sexAct ("sex")
+                call shift_focus(RogueX)
+                $ primary_action = "sex"
+                call action
                 return
             "I have something else in mind. . .[[choose another activity]":
                 $ RogueX.brows = "_confused"
@@ -707,8 +708,7 @@ label Rogue_Love:
     if "_stockings_and_garterbelt" not in RogueX.inventory:
         $ RogueX.inventory.append("_stockings_and_garterbelt")
     $ approval_bonus = 20
-    call shift_focus(RogueX)
-    call enter_main_sex_menu
+    call enter_main_sex_menu(RogueX)
     $ approval_bonus = 0
     return
 
@@ -872,8 +872,7 @@ label Rogue_Sub:
     if "_stockings_and_garterbelt" not in RogueX.inventory:
         $ RogueX.inventory.append("_stockings_and_garterbelt")
     $ approval_bonus = 10
-    call shift_focus(RogueX)
-    call enter_main_sex_menu
+    call enter_main_sex_menu(RogueX)
     $ approval_bonus = 0
     return
 
@@ -995,8 +994,7 @@ label Rogue_Master:
     if simulation:
         return True
     $ approval_bonus = 20
-    call shift_focus(RogueX)
-    call enter_main_sex_menu
+    call enter_main_sex_menu(RogueX)
     $ approval_bonus = 0
     return
 
@@ -1117,8 +1115,7 @@ label Rogue_sexfriend:
             return True
     $ Player.add_word(1,"interruption")
     $ approval_bonus = 25
-    call shift_focus(RogueX)
-    call enter_main_sex_menu
+    call enter_main_sex_menu(RogueX)
     $ approval_bonus = 0
     return
 
@@ -1232,8 +1229,7 @@ label Rogue_Fuckbuddy:
         return True
     $ approval_bonus = 30
     $ Player.add_word(1,"interruption")
-    call shift_focus(RogueX)
-    call enter_main_sex_menu
+    call enter_main_sex_menu(RogueX)
     $ approval_bonus = 0
     return
 

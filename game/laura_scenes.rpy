@@ -586,7 +586,7 @@ label Laura_BF(temp_Girls=[]):
         return True
     $ approval_bonus = 10
     $ Player.add_word(1,"interruption")
-    call Laura_SexMenu
+    call enter_main_sex_menu(LauraX)
     $ approval_bonus = 0
 
     return
@@ -1136,7 +1136,8 @@ label Laura_Love_End:
             $ LauraX.change_stat("obedience", 70, 25)
             ch_l "Like what? . ."
             $ approval_bonus = 20
-            call Laura_SexMenu
+            call enter_main_sex_menu(LauraX)
+
     return
 
 label Laura_Love_Redux:
@@ -1916,7 +1917,8 @@ label Laura_Sexfriend:
         $ action_context = LauraX
         $ Player.add_word(1,"interruption")
         call Laura_SexPrep
-        call Laura_SexMenu
+        call enter_main_sex_menu(LauraX)
+
 
 
     return
@@ -1958,7 +1960,8 @@ label Laura_Fuckbuddy:
     $ action_context = LauraX
     $ Player.add_word(1,"interruption")
     call Laura_SexPrep
-    call Laura_SexMenu
+    call enter_main_sex_menu(LauraX)
+
     return
 
 

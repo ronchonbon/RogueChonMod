@@ -645,7 +645,7 @@ label classroom:
         $ Present = []
 
         if time_index < 2 and weekday < 5:
-            call classroom_Seating
+            call classroom_seating
 
         $ Player.drain_word("goto",1,0)
         $ Player.drain_word("traveling",1,0)
@@ -819,12 +819,14 @@ label gym_entry(number_of_girls = 0):
             elif G.location == "bg_dangerroom" and G not in Party:
                 G.outfit_name = "gym_clothes"
 
+            G.change_outfit()
+
     call set_the_scene
 
     $ temp_Girls = Present[:]
 
     while temp_Girls:
-        if temp_Girls[0].outfit != "gym_clothes":
+        if temp_Girls[0].outfit_name != "gym_clothes":
             if approval_check(temp_Girls[0], 1300, "LO") or "passive" in temp_Girls[0].traits:
                 $ approval_passed = True
             elif approval_check(temp_Girls[0], 800, "LO") and temp_Girls[0].first_custom_outfit["outfit_active"]:

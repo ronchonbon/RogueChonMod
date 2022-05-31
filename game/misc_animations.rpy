@@ -83,12 +83,8 @@ layeredimage Xavier_sprite:
 
     anchor (0.5, 0.0) offset (0, 355) zoom 0.7
 
-layeredimage Xavier_eyes:
-    always:
-        "images/NPC/Xavier_eyes[Xavier_eyes].png"
-
 image Xavier_blinking:
-    "Xavier_eyes"
+    "images/NPC/Xavier_eyes[Xavier_eyes].png"
     choice:
         3.5
     choice:
@@ -168,133 +164,55 @@ layeredimage background:
 
     zoom 1.34
 
-image grool_dripping:
-    contains:
-        "images/Wetdrop.png"
-        zoom 0.2 alpha 0
-        block:
-            choice:
-                pause 1
-            choice:
-                pause 0.5
-            choice:
-                grool_drip (254, 560, 70)
-                pause 1
-            choice:
-                pause 0.2
-                grool_drip (249, 560, 75)
-                pause 0.4
-            choice:
-                pause 0.4
-                grool_drip (246, 560, 65)
-            choice:
-                pause 0.8
-                grool_drip (252, 560, 60)
-            repeat
+transform dripping(x_offset = 0, start = 0, transparency = 1.0):
+    offset (x_offset, start) alpha transparency
+    easeout 0.9 yoffset 350 alpha 0.0
 
-image heavy_grool_dripping:
-    contains:
-        "images/Wetdrop.png"
-        zoom 0.2
-        parallel:
-            grool_drip(254, 560, 70)
-            pause 1.5
-            repeat
-
-    contains:
-        "images/Wetdrop.png"
-        zoom 0.2
-        parallel:
-            pause 0.3
-            grool_drip(249, 560, 75)
-            pause 0.6
-            repeat
-
-    contains:
-        "images/Wetdrop.png"
-        zoom 0.2
-        parallel:
-            pause 0.6
-            grool_drip(246, 560, 65)
-            repeat
-
-    contains:
-        "images/Wetdrop.png"
-        zoom 0.2
-        parallel:
-            pause 0.8
-            grool_drip(252, 560, 60)
-            pause 0.2
-            repeat
-
-transform grool_drip(x_position, y_position, start):
-    pos (x_position, x_position)
-    alpha 0.8
-    easeout 0.9 ypos y_position + start
-    easeout 0.9 ypos y_position + 350
-    alpha 0
-
-image spunk_dripping:
-    contains:
-        "images/SpermdropB.png"
-        zoom 0.3 alpha 0
-        block:
-            choice:
-                pause 1
-            choice:
-                pause 0.5
-            choice:
-                spunk_drip(240, 560, 70)
-                pause 1
-            choice:
-                pause 0.2
-                spunk_drip (249, 560, 75)
-                pause 0.4
-            choice:
-                pause 0.4
-                spunk_drip (246, 560, 65)
-            choice:
-                pause 0.8
-                spunk_drip (252, 560, 60)
-            repeat
-
-image heavy_spunk_dripping:
-    contains:
-        "images/SpermdropB.png"
-        zoom 0.3
-        parallel:
-            spunk_drip(240, 560, 70)
+image grool_dripping_animation:
+    "images/Wetdrop.png"
+    anchor (0.5, 0.5) alpha 0.0
+    block:
+        choice:
             pause 1
-            repeat
-    contains:
-        "images/SpermdropB.png"
-        zoom 0.3
-        parallel:
+        choice:
+            pause 0.5
+        choice:
+            dripping(8, 10, 0.8)
+            pause 1
+        choice:
             pause 0.2
-            spunk_drip (249, 560, 75)
+            dripping(3, 15, 0.8)
             pause 0.4
-            repeat
-    contains:
-        "images/SpermdropB.png"
-        zoom 0.3
-        parallel:
+        choice:
             pause 0.4
-            spunk_drip (246, 560, 65)
-            repeat
-    contains:
-        "images/SpermdropB.png"
-        zoom 0.3
-        parallel:
+            dripping(0, 5, 0.8)
+        choice:
             pause 0.8
-            spunk_drip (252, 560, 60)
-            repeat
+            dripping(6, 0, 0.8)
+        repeat
 
-transform spunk_drip(x_position, y_position, start):
-    pos (x_position, x_position)
-    alpha 1
-    easeout 2.5 ypos y_position + start
-    easeout 0.9 ypos y_position + 350
-    alpha 0
+image spunk_dripping_animation:
+    "images/SpermdropB.png"
+    anchor (0.5, 0.5) alpha 0.0
+    block:
+        choice:
+            pause 1
+        choice:
+            pause 0.5
+        choice:
+            dripping(8, 10)
+            pause 1
+        choice:
+            pause 0.2
+            dripping(3, 15)
+            pause 0.4
+        choice:
+            pause 0.4
+            dripping(0, 5)
+        choice:
+            pause 0.8
+            dripping(6, 0)
+        repeat
 
 image licking:
     anchor (0.5, 0.5)
@@ -320,6 +238,59 @@ image licking:
         pause 0.3
         easein 0.8 yoffset 0
         repeat
+
+image Rogue_dildo_pussy_animation:
+    "images/DildoIn.png"
+    anchor (0.5, 0.5)
+    block:
+        ease 1 yoffset -110
+        pause 1
+        ease 3 yoffset 0
+        repeat
+
+layeredimage Rogue_dildo_pussy_animations:
+    always:
+        "Rogue_dildo_pussy_animation" pos (0.29175, 0.65) zoom 1.3
+
+image Rogue_dildo_anal_animation:
+    "images/DildoIn.png"
+    anchor (0.5, 0.5)
+    block:
+        ease 1 yoffset -120
+        pause 1
+        ease 3 yoffset 0
+        repeat
+
+layeredimage Rogue_dildo_anal_animations:
+    always:
+        "Rogue_dildo_anal_animation" pos (0.293, 0.7) zoom 1.3
+
+image Rogue_doggy_dildo_pussy_animation:
+    "images/DildoIn.png"
+    anchor (0.5, 0.5)
+    block:
+        ease 0.5 yoffset -60
+        pause 0.25
+        ease 1.75 yoffset 0
+        repeat
+
+layeredimage Rogue_doggy_dildo_pussy_animations:
+    always:
+        "Rogue_doggy_dildo_pussy_animation" pos (0.112, 0.65)
+
+image Rogue_doggy_dildo_anal_animation:
+    "images/DildoIn.png"
+    anchor (0.5, 0.5)
+    block:
+        ease 0.5 yoffset -65
+        pause 0.25
+        ease 1.75 yoffset 0
+        repeat
+
+layeredimage Rogue_doggy_dildo_anal_animations:
+    always:
+        "Rogue_doggy_dildo_anal_animation" pos (0.112, 0.55)
+
 
 
 
@@ -413,234 +384,6 @@ image DressShadow:
 
 
 
-image Gwen_Sprite:
-    LiveComposite(
-        (574,964),
-
-        (0,0), "images/GS_B.png",
-
-
-        (80,15), "Gwen_Sprite_Head",
-        )
-    anchor (0.6, 0.0)
-    yoffset 15
-    zoom 0.75
-
-
-
-image Gwen_Sprite_Head:
-    LiveComposite(
-        (820,820),
-        (0,0), ConditionSwitch(
-
-                "G_Blush", "images/NPC/Gwen_Sprite_Head_Blush.png",
-                "True", "images/NPC/Gwen_Sprite_Head.png",
-                ),
-        (0,0), ConditionSwitch(
-            "G_mouth == 'open'", "images/NPC/Gwen_Sprite_mouth_Open.png",
-            "G_mouth == 'kiss'", "images/NPC/Gwen_Sprite_mouth_Kiss.png",
-            "G_mouth == 'smile'", "images/NPC/Gwen_Sprite_mouth_Smile.png",
-            "G_mouth == 'shocked'", "images/NPC/Gwen_Sprite_mouth_Shocked.png",
-            "True", "images/NPC/Gwen_Sprite_mouth_Smile.png",
-            ),
-        (0,0), ConditionSwitch(
-
-            "G_Blush", ConditionSwitch(
-                    "G_brows == 'angry' or G_eyes == 'angry'", "images/NPC/Gwen_Sprite_brows_Angry_B.png",
-                    "G_brows == 'sad'", "images/NPC/Gwen_Sprite_brows_Sad_B.png",
-                    "True", "images/NPC/Gwen_Sprite_brows_Normal.png",
-                    ),
-            "True", ConditionSwitch(
-                    "G_brows == 'angry' or G_eyes == 'angry'", "images/NPC/Gwen_Sprite_brows_Angry.png",
-                    "G_brows == 'sad'", "images/NPC/Gwen_Sprite_brows_Sad.png",
-                    "True", "images/NPC/Gwen_Sprite_brows_Normal.png",
-                    ),
-            ),
-        (0,0), "Gwen Blink",
-        )
-    anchor (0.6, 0.0)
-    zoom 0.5
-
-image Gwen Blink:
-    ConditionSwitch(
-    "G_eyes == 'angry'", "images/NPC/Gwen_Sprite_eyes_Angry.png",
-    "G_eyes == 'surprised'", "images/NPC/Gwen_Sprite_eyes_Surprised.png",
-    "G_eyes == 'closed'", "images/NPC/Gwen_Sprite_eyes_Closed.png",
-    "True", "images/NPC/Gwen_Sprite_eyes_Normal.png",
-    ),
-    choice:
-        3.5
-    choice:
-        3.25
-    choice:
-        3
-    "images/NPC/Gwen_Sprite_eyes_Closed.png"
-    0.20
-    repeat
-
-default G_mouth = "normal"
-default G_brows = "normal"
-default G_eyes = "normal"
-default G_Blush = 0
-
-label GwenFace(emotion="normal", B=G_Blush, M=0, mouth=0, eyes=0, brows=0):
-
-
-    $ B = G_Blush if B == 5 else B
-
-    if emotion == "normal":
-        $ G_mouth = "normal"
-        $ G_brows = "normal"
-        $ G_eyes = "normal"
-    elif emotion == "angry":
-        $ G_mouth = "_kiss"
-        $ G_brows = "angry"
-        $ G_eyes = "angry"
-    elif emotion == "closed":
-        $ G_mouth = "normal"
-        $ G_brows = "_sad"
-        $ G_eyes = "closed"
-    elif emotion == "_sad":
-        $ G_mouth = "_kiss"
-        $ G_brows = "_sad"
-        $ G_eyes = "normal"
-    elif emotion == "smile":
-        $ G_mouth = "smile"
-        $ G_brows = "normal"
-        $ G_eyes = "normal"
-    elif emotion == "surprised":
-        $ G_mouth = "open"
-        $ G_brows = "normal"
-        $ G_eyes = "surprised"
-    elif emotion == "_shocked":
-        $ G_mouth = "_shocked"
-        $ G_brows = "normal"
-        $ G_eyes = "surprised"
-
-    if B > 1:
-        $ G_Blush = 2
-    elif B:
-        $ G_Blush = 1
-    else:
-        $ G_Blush = 0
-
-    if mouth:
-        $ G_mouth = mouth
-    if eyes:
-        $ G_eyes = eyes
-    if brows:
-        $ G_brows = brows
-
-    return
-
-label Gwen_FaceEditor:
-    while True:
-        menu:
-            "brows=[G_brows], eyes=[G_eyes], mouth=[G_mouth]"
-            "Toggle brows":
-                if G_brows == "normal":
-                    $ G_brows = "angry"
-                elif G_brows == "angry":
-                    $ G_brows = "_confused"
-                elif G_brows == "_confused":
-                    $ G_brows = "_sad"
-                elif G_brows == "_sad":
-                    $ G_brows = "surprised"
-                else:
-                    $ G_brows = "normal"
-            "Toggle eyes Emotions":
-                if G_eyes == "normal":
-                    $ G_eyes = "surprised"
-                elif G_eyes == "surprised":
-                    $ G_eyes = "sexy"
-                elif G_eyes == "sexy":
-                    $ G_eyes = "squint"
-                elif G_eyes == "squint":
-                    $ G_eyes = "closed"
-                else:
-                    $ G_eyes = "normal"
-            "Toggle eyes Directions":
-                if G_eyes == "normal":
-                    $ G_eyes = "side"
-                elif G_eyes == "side":
-                    $ G_eyes = "down"
-                elif G_eyes == "down":
-                    $ G_eyes = "leftside"
-                elif G_eyes == "leftside":
-                    $ G_eyes = "stunned"
-                else:
-                    $ G_eyes = "normal"
-            "Toggle mouth Normal":
-                if G_mouth  == "normal":
-                    $ G_mouth = "_sad"
-                elif G_mouth == "_sad":
-                    $ G_mouth = "smile"
-                elif G_mouth == "smile":
-                    $ G_mouth = "surprised"
-                else:
-                    $ G_mouth = "normal"
-            "Toggle mouth Sexy":
-                if G_mouth  == "normal":
-                    $ G_mouth = "_kiss"
-                elif G_mouth == "kiss":
-                    $ G_mouth = "_sucking"
-                elif G_mouth == "_sucking":
-                    $ G_mouth = "_tongue"
-                elif G_mouth == "_tongue":
-                    $ G_mouth = "_lipbite"
-                else:
-                    $ G_mouth = "normal"
-            "Toggle Blush":
-                if G_Blush == 1:
-                    $ G_Blush = 2
-                elif G_Blush:
-                    $ G_Blush = 0
-                else:
-                    $ G_Blush = 1
-            "Back":
-
-                return
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-label Display_Gwen(GwLoc=350, YLoc=50):
-
-
-
-    show Gwen_Sprite:
-        alpha 1
-        zoom 1
-        offset (0,0)
-        anchor (0.5, 0.0)
-        easeout 0.5 pos (GwLoc,YLoc)
-    show Gwen_Sprite:
-        alpha 1
-        zoom 1
-        offset (0,0)
-        anchor (0.5, 0.0)
-        pos (GwLoc,YLoc)
-    return
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -654,7 +397,6 @@ label Display_Gwen(GwLoc=350, YLoc=50):
 
 image CircleTest:
     contains:
-        subpixel True
         "images/Clockbase.png"
         anchor (0.5,0.5)
 
@@ -671,20 +413,17 @@ image CircleTest:
             "True",Null(),
             ),
     contains:
-        subpixel True
         "images/Clockface.png"
         anchor (0.5,0.5)
 
 image ClockWhite:
     contains:
-        subpixel True
         "images/Clockwhite.png"
         anchor (0.5,0.5)
         rotate -(int(round *3.6))
 
 image ClockRed:
     contains:
-        subpixel True
         "images/Clockred.png"
         anchor (0.5,0.5)
         rotate -(int(round *3.6-180))
@@ -719,7 +458,6 @@ image Silhouettes:
 
 
 transform Vibrate():
-    subpixel True
     block:
         linear 0.5 xoffset 2
         linear 0.5 xoffset -2
@@ -734,157 +472,17 @@ image UI_Vibrator = LiveComposite(
             ),
         )
 
-image GropeLeftBreast:
-    contains:
-        subpixel True
-        "UI_Hand"
-        zoom 0.7
-        pos (300,420)
-        anchor (0.5,0.5)
-        alpha 0.5
-        rotate 90
-        block:
-            ease 1 rotate 60
-            ease 1 rotate 90
-            repeat
-
-image GropeRightBreast:
-    contains:
-        subpixel True
-        "UI_Hand"
-        yzoom 0.7
-        xzoom -0.7
-        pos (180,410)
-        anchor (0.5,0.5)
-        alpha 0.5
-        rotate -60
-        block:
-            ease 1 rotate -30
-            ease 1 rotate -60
-            repeat
 
 
-image LickRightBreast:
-    contains:
-        subpixel True
-        "UI_Tongue"
-        yzoom 0.5
-        xzoom -0.5
-        pos (160,400)
-        anchor (0.5,0.5)
-        alpha 0.5
-        rotate 30
-        block:
-            ease 0.5 rotate -45 pos (150,370)
-            pause 0.5
-            ease 1.5 rotate 30 pos (160,400)
-            repeat
 
-image LickLeftBreast:
-    contains:
-        subpixel True
-        "UI_Tongue"
-        yzoom 0.5
-        xzoom -0.5
-        pos (280,410)
-        anchor (0.5,0.5)
-        alpha 0.5
-        rotate 30
-        block:
-            ease 0.5 rotate -45 pos (260,380)
-            pause 0.5
-            ease 1.5 rotate 30 pos (280,410)
-            repeat
 
-image GropeThigh:
-    contains:
-        subpixel True
-        "UI_Hand"
-        zoom 0.7
-        pos (210,730)
-        anchor (0.5,0.5)
-        alpha 0.5
-        rotate 100
-        parallel:
-            pause 0.5
-            ease 1 ypos 780
-            ease 1 ypos 730
-            repeat
-        parallel:
-            pause 0.5
-            ease 0.5 xpos 213
-            ease 0.5 xpos 210
-            ease 0.5 xpos 213
-            ease 0.5 xpos 210
-            repeat
 
-image GropePussy:
-    contains:
-        subpixel True
-        "UI_Hand"
-        zoom 0.7
-        pos (220,635)
-        anchor (0.5,0.5)
-        alpha 0.5
-        rotate 170
-        block:
-            choice:
-                ease 0.5 rotate 190 pos (220,620)
-                ease 0.75 rotate 170 pos (220,635)
-            choice:
-                ease 0.5 rotate 190 pos (220,620)
-                pause 0.25
-                ease 1 rotate 170 pos (220,635)
-            repeat
 
-image FingerPussy:
-    contains:
-        subpixel True
-        "UI_Finger"
-        zoom 0.7
-        pos (230,720)
-        anchor (0.5,0.5)
-        alpha 0.5
-        rotate 40
-        block:
-            choice:
-                ease 1 rotate 40 pos (240,685)
-                pause 0.5
-                ease 1 rotate 50 pos (230,720)
-            choice:
-                ease 0.5 rotate 40 pos (240,685)
-                pause 0.5
-                ease 1.75 rotate 50 pos (230,720)
-            choice:
-                ease 2 rotate 40 pos (240,685)
-                pause 0.5
-                ease 1 rotate 50 pos (230,720)
-            choice:
-                ease 0.25 rotate 40 pos (240,685)
-                ease 0.25 rotate 50 pos (230,720)
-                ease 0.25 rotate 40 pos (240,685)
-                ease 0.25 rotate 50 pos (230,720)
-            repeat
 
-image Lickpussy:
-    contains:
-        subpixel True
-        "UI_Tongue"
-        yzoom 0.5
-        xzoom -0.5
-        pos (250,670)
-        anchor (0.5,0.5)
-        alpha 0.5
-        rotate 10
-        block:
-            easeout 0.5 rotate -50 pos (230,650)
-            linear 0.5 rotate -60 pos (220,660)
-            easein 1 rotate 10 pos (250,670)
-            repeat
+
 
 image VibratorRightBreast:
     contains:
-        subpixel True
         "UI_Vibrator"
         pos (150,380)
         zoom 0.5
@@ -900,7 +498,6 @@ image VibratorRightBreast:
 
 image VibratorLeftBreast:
     contains:
-        subpixel True
         "UI_Vibrator"
         pos (270,400)
         zoom 0.5
@@ -916,7 +513,6 @@ image VibratorLeftBreast:
 
 image VibratorPussy:
     contains:
-        subpixel True
         "UI_Vibrator"
         pos (240,665)
         zoom 0.5
@@ -932,7 +528,6 @@ image VibratorPussy:
 
 image VibratorAnal:
     contains:
-        subpixel True
         "UI_Vibrator"
         pos (270,640)
         zoom 0.5
@@ -948,7 +543,6 @@ image VibratorAnal:
 
 image VibratorPussyInsert:
     contains:
-        subpixel True
         "UI_Vibrator"
         pos (240,645)
         zoom 0.5
@@ -958,7 +552,6 @@ image VibratorPussyInsert:
 
 image VibratorAnalInsert:
     contains:
-        subpixel True
         "UI_Vibrator"
         pos (250,640)
         zoom 0.5
@@ -968,7 +561,6 @@ image VibratorAnalInsert:
 
 image TestUIAnimation:
     contains:
-        subpixel True
         "UI_Vibrator"
         pos (270,640)
         zoom 0.5
@@ -983,360 +575,12 @@ image TestUIAnimation:
             repeat
 
 
-image GirlGropeLeftBreast:
-    contains:
-        subpixel True
-        "UI_GirlHand"
-        zoom 0.6
-        pos (300,400)
-        anchor (0.5,0.5)
-        alpha 0.5
-        rotate -20
-        block:
-            ease 1 rotate -40 pos (280,390)
-            ease 1 rotate -20 pos (300,400)
-            repeat
-
-image GirlGropeRightBreast:
-    contains:
-        subpixel True
-        "UI_GirlHand"
-        yzoom 0.6
-        xzoom -0.6
-        pos (160,380)
-        anchor (0.5,0.5)
-        alpha 0.5
-        rotate -10
-        block:
-            ease 1 rotate -30 pos (160,410)
-            ease 1 rotate -10 pos (160,380)
-            repeat
-
-image GirlGropeThigh:
-    contains:
-        subpixel True
-        "UI_GirlHand"
-        zoom 0.6
-        pos (210,730)
-        anchor (0.5,0.5)
-        alpha 0.5
-        rotate 100
-        parallel:
-            pause 0.5
-            ease 1 ypos 780
-            ease 1 ypos 730
-            repeat
-        parallel:
-            pause 0.5
-            ease 0.5 xpos 213
-            ease 0.5 xpos 210
-            ease 0.5 xpos 213
-            ease 0.5 xpos 210
-            repeat
-
-image GirlGropePussy:
-    contains:
-        subpixel True
-        "UI_GirlHand"
-        zoom 0.6
-        pos (230,615)
-        anchor (0.5,0.5)
-        alpha 0.5
-        rotate 200
-        block:
-            choice:
-                ease 0.75 rotate 210 pos (225,620)
-                ease 0.5 rotate 195
-                ease 0.75 rotate 210
-                ease 0.5 rotate 195
-            choice:
-                ease 0.5 rotate 210 pos (225,620)
-                ease 1 rotate 195
-                pause 0.25
-                ease 0.5 rotate 210
-                ease 1 rotate 195
-                pause 0.25
-            choice:
-                ease 0.5 rotate 205 pos (225,620)
-                ease 0.75 rotate 200 pos (225,625)
-                ease 0.5 rotate 205 pos (225,620)
-                ease 0.75 rotate 200 pos (225,625)
-            choice:
-                ease 0.3 rotate 205 pos (225,620)
-                ease 0.3 rotate 200 pos (225,630)
-                ease 0.3 rotate 205 pos (225,620)
-                ease 0.3 rotate 200 pos (225,630)
-            repeat
-
-image GirlFingerPussy:
-    contains:
-        subpixel True
-        "UI_GirlFinger"
-        zoom 0.6
-        pos (230,630)
-        anchor (0.5,0.5)
-        alpha 0.5
-        rotate 200
-        block:
-            choice:
-                ease 0.75 rotate 210 pos (230,635)
-                ease 0.5 rotate 195
-                ease 0.75 rotate 210
-                ease 0.5 rotate 195
-            choice:
-                ease 0.5 rotate 210 pos (230,635)
-                ease 1 rotate 195
-                pause 0.25
-                ease 0.5 rotate 210
-                ease 1 rotate 195
-                pause 0.25
-            choice:
-                ease 0.5 rotate 205 pos (230,635)
-                ease 0.75 rotate 200 pos (230,640)
-                ease 0.5 rotate 205 pos (230,635)
-                ease 0.75 rotate 200 pos (230,640)
-            choice:
-                ease 0.3 rotate 205 pos (230,635)
-                ease 0.3 rotate 200 pos (230,645)
-                ease 0.3 rotate 205 pos (230,635)
-                ease 0.3 rotate 200 pos (230,645)
-            repeat
 
 
 
 
 
-image Spunk_Drip:
 
-    contains:
-        "images/SpermdropB.png"
-        zoom 0.3
-        alpha 0
-        block:
-            choice:
-                pause 1
-            choice:
-                pause 0.5
-            choice:
-                pos (0,0)
-                alpha 1
-                easeout 2.5 ypos 70
-                easeout 0.9 ypos 350
-                alpha 0
-                pause 1
-            choice:
-                pos (9,0)
-                pause 0.2
-                alpha 1
-                easeout 2.5 ypos 75
-                easeout 0.9 ypos 350
-                alpha 0
-                pause 0.4
-            choice:
-                pos (6,0)
-                pause 0.4
-                alpha 1
-                easeout 2.5 ypos 65
-                easeout 0.9 ypos 350
-                alpha 0
-            choice:
-                pos (12,0)
-                pause 0.8
-                alpha 1
-                easeout 2.5 ypos 60
-                easeout 0.9 ypos 350
-                alpha 0
-            repeat
-
-image Spunk_Drip2:
-
-    contains:
-        "images/SpermdropB.png"
-        pos (0,0)
-        zoom 0.3
-        parallel:
-            pos (0,0)
-            alpha 1
-            easeout 2.5 ypos 70
-            easeout 0.9 ypos 350
-            alpha 0
-            pause 1
-            repeat
-    contains:
-        "images/SpermdropB.png"
-        pos (0,0)
-        zoom 0.3
-        parallel:
-            pos (9,0)
-            pause 0.2
-            alpha 1
-            easeout 2.5 ypos 75
-            easeout 0.9 ypos 350
-            alpha 0
-            pause 0.4
-            repeat
-    contains:
-        "images/SpermdropB.png"
-        pos (0,0)
-        zoom 0.3
-        parallel:
-            pos (6,0)
-            pause 0.4
-            alpha 1
-            easeout 2.5 ypos 65
-            easeout 0.9 ypos 350
-            alpha 0
-            repeat
-    contains:
-        "images/SpermdropB.png"
-        pos (0,0)
-        zoom 0.3
-        parallel:
-            pos (12,0)
-            pause 0.8
-            alpha 1
-            easeout 2.5 ypos 60
-            easeout 0.9 ypos 350
-            alpha 0
-            repeat
-
-
-image Spunk_Dripp:
-
-    contains:
-        "images/SpermdropP.png"
-        zoom 0.3
-        alpha 0
-        block:
-            choice:
-                pause 1
-            choice:
-                pause 0.5
-            choice:
-                pos (0,0)
-                alpha 1
-                easeout 2.5 ypos 70
-                easeout 0.9 ypos 350
-                alpha 0
-                pause 1
-            choice:
-                pos (9,0)
-                pause 0.2
-                alpha 1
-                easeout 2.5 ypos 75
-                easeout 0.9 ypos 350
-                alpha 0
-                pause 0.4
-            choice:
-                pos (6,0)
-                pause 0.4
-                alpha 1
-                easeout 2.5 ypos 65
-                easeout 0.9 ypos 350
-                alpha 0
-            choice:
-                pos (12,0)
-                pause 0.8
-                alpha 1
-                easeout 2.5 ypos 60
-                easeout 0.9 ypos 350
-                alpha 0
-            repeat
-
-image Wet_Drip:
-
-    contains:
-        "images/Wetdrop.png"
-        zoom 0.2
-        alpha 0
-        block:
-            choice:
-                pause 1
-            choice:
-                pause 0.5
-            choice:
-                pos (14,0)
-                alpha 0.8
-                easeout 0.9 ypos 70
-                easeout 0.9 ypos 350
-                alpha 0
-                pause 1
-            choice:
-                pos (9,0)
-                pause 0.2
-                alpha 0.8
-                easeout 0.9 ypos 75
-                easeout 0.9 ypos 350
-                alpha 0
-                pause 0.4
-            choice:
-                pos (6,0)
-                pause 0.4
-                alpha 0.8
-                easeout 0.9 ypos 65
-                easeout 0.9 ypos 350
-                alpha 0
-            choice:
-                pos (12,0)
-                pause 0.8
-                alpha 0.8
-                easeout 0.9 ypos 60
-                easeout 0.9 ypos 350
-                alpha 0
-            repeat
-
-image Wet_Drip2:
-
-    contains:
-        "images/Wetdrop.png"
-        pos (0,0)
-        zoom 0.2
-        parallel:
-            pos (14,0)
-            alpha 0.8
-            easeout 0.9 ypos 70
-            easeout 0.9 ypos 350
-            alpha 0
-            pause 1.5
-            repeat
-    contains:
-        "images/Wetdrop.png"
-        pos (0,0)
-        zoom 0.2
-        parallel:
-            pos (9,0)
-            pause 0.3
-            alpha 0.8
-            easeout 0.9 ypos 75
-            easeout 0.9 ypos 350
-            alpha 0
-            pause 0.6
-            repeat
-    contains:
-        "images/Wetdrop.png"
-        pos (0,0)
-        zoom 0.2
-        parallel:
-            pos (6,0)
-            pause 0.6
-            alpha 0.8
-            easeout 0.9 ypos 65
-            easeout 0.9 ypos 350
-            alpha 0
-            repeat
-    contains:
-        "images/Wetdrop.png"
-        pos (0,0)
-        zoom 0.2
-        parallel:
-            pos (12,0)
-            pause 0.8
-            alpha 0.8
-            easeout 0.9 ypos 60
-            easeout 0.9 ypos 350
-            alpha 0
-            pause 0.2
-            repeat
 
 
 image Zero_Chibicock:
@@ -1370,7 +614,6 @@ image Chibi_jerking_off:
         rotate 0
         xzoom 1
     contains:
-        subpixel True
         "images/Chibi_Hand_M.png"
         pos (-10,-80)
         anchor (0.5,0.5)
@@ -1391,7 +634,6 @@ image Chibi_Handy:
         rotate 0
         xzoom 1
     contains:
-        subpixel True
         ConditionSwitch(
             "(Partner == StormX and second_girl_primary_action == 'hand') or (focused_Girl == StormX and girl_offhand_action == 'hand')", "images/Chibi_Hand_S.png",
             "True", "images/Chibi_Hand_G.png"
@@ -1442,7 +684,6 @@ image Chibi_SuckingB:
             ),
         (0,0), AlphaMask("Chibi_Sucking_Cock", "Chibi_mouth_Mask")
         )
-    subpixel True
     pos (7,0)
     anchor (0.5,0.5)
     zoom 0.5
@@ -1457,7 +698,6 @@ image Chibi_SuckingB:
 image Chibi_Sucking_Cock:
 
     contains:
-        subpixel True
         "Zero_Chibicock"
         pos (100,175)
         xzoom 1.5
@@ -1491,11 +731,6 @@ image UI_Backpack = "images/UI_Backpack_idle.png"
 image UI_Dildo = "images/UI_Dildo.png"
 image UI_VibA = "images/UI_VibA.png"
 image UI_VibB = "images/UI_VibB.png"
-image UI_Tongue = "images/UI_Tongue.png"
-image UI_Finger = "images/UI_Finger.png"
-image UI_Hand = "images/UI_Hand.png"
-image UI_GirlFinger = "images/UI_GirlFinger.png"
-image UI_GirlHand = "images/UI_GirlHand.png"
 
 image UI_PartnerHand:
     ConditionSwitch("Partner == StormX", "images/UI_GirlHandS.png",

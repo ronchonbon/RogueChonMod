@@ -1197,7 +1197,10 @@ label quick_event:
                 if event_Girls[0]. == JubesX and JubesX.addiction > 60:
                     $ JubesX.location = JubesX.home
 
-                $ event_Girls[0].spunk = []
+                python:
+                    for key in event_Girls[0].spunk.keys():
+                        event_Girls[0].spunk[key] = False
+
                 $ event_Girls[0].change_outfit()
 
         $ event_Girls.remove(event_Girls[0])
@@ -3336,15 +3339,15 @@ label shift_view(Girl, view):
             "Rear view" if Girl in [RogueX, KittyX, EmmaX, LauraX, JeanX]:
                 $ Girl.pose = "doggy"
 
-                call sex_launch(Girl, "hotdog")
+                call sex_launch(Girl, None)
             "On top of you" if Girl in [EmmaX, JeanX, StormX]:
                 $ Girl.pose = "sex"
 
-                call sex_launch(Girl, "hotdog")
+                call sex_launch(Girl, None)
             "Laying down" if Girl in [RogueX, KittyX, LauraX]:
                 $ Girl.pose = "sex"
 
-                call sex_launch(Girl, "hotdog")
+                call sex_launch(Girl, None)
             "Never mind":
                 pass
     else:
@@ -3357,7 +3360,7 @@ label shift_view(Girl, view):
         elif view == "pussy":
             call pussy_launch(Girl)
         elif view in ["sex", "doggy"]:
-            call sex_launch(Girl)
+            call sex_launch(Girl, None)
         elif view == "kiss":
             call kiss_launch(Girl)
 
@@ -3390,7 +3393,8 @@ label Sex_Menu_Threesome(Girl=0):
                 if Girl.location != bg_current:
 
                     ch_r "Oh, well. . . I'm still game. . ."
-                    call Rogue_sexAct ("switch")
+                    call shift_focus(RogueX)
+                    $ renpy.pop_call()
                 elif RogueX.location == bg_current:
                     ch_r "I s'pose I could lend a hand 0. ."
                 else:
@@ -3408,7 +3412,8 @@ label Sex_Menu_Threesome(Girl=0):
                 if Girl.location != bg_current:
 
                     ch_k "Whoa, drama much? 0. ."
-                    call Kitty_sexAct ("switch")
+                    call shift_focus(KittyX)
+                    $ renpy.pop_call()
                 elif KittyX.location == bg_current:
                     ch_k "I could[KittyX.like]give it a try. . ."
                 else:
@@ -3630,7 +3635,7 @@ label JumperCheck(Girls=[]):
     elif Girls:
 
         if Girls[0].location == bg_current:
-            call expression Girls[0].tag + "_SexMenu"
+            call enter_main_sex_menu(Girls[0])
 
     if bg_current == "bg_player":
 
@@ -3792,34 +3797,8 @@ label Jumped(Act=0):
     if Partner:
         call Girls_Noticed (Girls[0], 1)
 
-
-    if Act == "anal":
-        call expression Girls[0].tag + "_AnalPrep"
-    elif Act == "sex":
-        call expression Girls[0].tag + "_SexPrep"
-    elif Act ==  "eat_pussy":
-        call expression Girls[0].tag + "_LP_Prep"
-    elif Act == "fondle_pussy":
-        call expression Girls[0].tag + "_FP_Prep"
-    elif Act == "blowjob":
-        call expression Girls[0].tag + "_BJ_Prep"
-    elif Act == "titjob":
-        call expression Girls[0].tag + "_TJ_Prep"
-
-
-    elif Act == "handjob":
-        call expression Girls[0].tag + "_HJ_Prep"
-    elif Act == "hotdog":
-        call expression Girls[0].tag + "_HotdogPrep"
-    elif Act == "suck_breasts":
-        call expression Girls[0].tag + "_SB_Prep"
-    elif Act == "fondle_breasts":
-        call expression Girls[0].tag + "_FB_Prep"
-    elif Act == "finger_ass" or Act == "eat_ass":
-        call expression Girls[0].tag + "_IA_Prep"
-    else:
-        call KissPrep (Girls[0])
-    return
+    $ primary_action = Act if Act else "kiss"
+    call before_action
 
 label Quick_Sex(Girl=focused_Girl, Act=0):
 
@@ -3929,7 +3908,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
                                 ch_s "That can be arranged. . ."
                             elif Girl == JubesX:
                                 ch_v "Hmmm. ok. . ."
-                            call expression Girl.tag + "_SexMenu"
+                            call enter_main_sex_menu(Girl)
                             return
                         "Still no.":
 
@@ -4105,32 +4084,8 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
 
     $ action_context = Girl
 
-
-    if Act == "anal":
-        call expression Girl.tag + "_AnalPrep"
-    elif Act == "sex":
-        call expression Girl.tag + "_SexPrep"
-    elif Act ==  "eat_pussy":
-        call expression Girl.tag + "_LP_Prep"
-    elif Act == "fondle_pussy":
-        call expression Girl.tag + "_FP_Prep"
-    elif Act == "blowjob":
-        call expression Girl.tag + "_BJ_Prep"
-    elif Act == "titjob":
-        call expression Girl.tag + "_TJ_Prep"
-    elif Act == "handjob":
-        call expression Girl.tag + "_HJ_Prep"
-    elif Act == "hotdog":
-        call expression Girl.tag + "_HotdogPrep"
-    elif Act == "suck_breasts":
-        call expression Girl.tag + "_SB_Prep"
-    elif Act == "fondle_breasts":
-        call expression Girl.tag + "_FB_Prep"
-    elif Act == "finger_ass" or Act == "eat_ass":
-        call expression Girl.tag + "_IA_Prep"
-    else:
-        call KissPrep (Girl)
-    return
+    $ primary_action = Act if Act else "kiss"
+    call before_action
 
 label Escalation(Girl=0):
 
@@ -4146,7 +4101,8 @@ label Escalation(Girl=0):
         if offhand_action == "suck_breasts":
             $ offhand_action = None
         $ Girl.change_stat("inhibition", 80, 2)
-        call expression Girl.tag + "_SB_Prep"
+        $ primary_action = "suck_breasts"
+        call before_action
         if "suck_breasts" in Girl.recent_history:
 
             $ renpy.pop_call()
@@ -4155,7 +4111,8 @@ label Escalation(Girl=0):
         if offhand_action == "fondle_thighs":
             $ offhand_action = None
         $ Girl.change_stat("inhibition", 80, 4)
-        call expression Girl.tag + "_FP_Prep"
+        $ primary_action = "fondle_pussy"
+        call before_action
         if "fondle_pussy" in Girl.recent_history:
 
             $ renpy.pop_call()
@@ -4165,21 +4122,24 @@ label Escalation(Girl=0):
     elif primary_action == "handjob" and approval_check(Girl,1200,taboo_modifier=4) and Girl.lust >= 30 and Girl.action_counter["blowjob"]:
 
         $ Girl.change_stat("inhibition", 80, 3)
-        call expression Girl.tag + "_BJ_Prep"
+        $ primary_action = "blowjob"
+        call before_action
         if "blowjob" in Girl.recent_history:
 
             $ renpy.pop_call()
     elif primary_action not in ("sex","anal") and approval_check(Girl,1400,taboo_modifier=5,Alt=[[JeanX],1200]) and Girl.lust >= 60 and Girl.action_counter["sex"] >= 3:
 
         $ Girl.change_stat("inhibition", 80, 4)
-        call expression Girl.tag + "_SexPrep"
+        $ primary_action = "sex"
+        call before_action
         if "sex" in Girl.recent_history:
 
             $ renpy.pop_call()
     elif primary_action != "anal" and approval_check(Girl,1400,taboo_modifier=5,Alt=[[JeanX],1200]) and Girl.lust >= 70 and Girl.action_counter["anal"] >= 5:
 
         $ Girl.change_stat("inhibition", 80, 5)
-        call expression Girl.tag + "_AnalPrep"
+        $ primary_action = "anal"
+        call before_action
         if "anal" in Girl.recent_history:
 
             $ renpy.pop_call()
@@ -4380,7 +4340,7 @@ label primary_action_Swap(Active=0, primary_actionX1=primary_action, primary_act
             if primary_actionX1 in ("fondle_thighs","fondle_ass","finger_ass","eat_ass"):
                 $ second_girl_offhand_action = "fondle_ass"
                 "You pull back from [Partner.name]."
-            elif primary_actionX1 in ("dildo_pussy","dildo_anal"):
+            elif primary_actionX1 in ("dildo_pussy","dildo_ass"):
                 $ second_girl_offhand_action = primary_actionX1
                 "You pull back from [Partner.name]."
             elif primary_actionX1 in ("titjob","hotdog","fondle_breasts","suck_breasts"):
@@ -4526,7 +4486,7 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
         $ approval = approval_check(Girl,1100,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
     elif primary_action == "footjob":
         $ approval = approval_check(Girl,1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
-    elif primary_action == "dildo_anal":
+    elif primary_action == "dildo_ass":
         $ approval = approval_check(Girl,1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
     elif primary_action == "dildo_pussy":
         $ approval = approval_check(Girl,1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
@@ -5766,7 +5726,7 @@ label CloseOut(Girl=focused_Girl):
         call expression Girl.tag + "_AnalAfter"
     elif primary_action == "dildo_pussy":
         call expression Girl.tag + "_DP_After"
-    elif primary_action == "dildo_anal":
+    elif primary_action == "dildo_ass":
         call expression Girl.tag + "_DA_After"
     elif primary_action == "striptease":
         call Group_Strip_End
@@ -5890,7 +5850,7 @@ label SkipTo(Girl=focused_Girl):
         call expression Girl.tag + "_AnalCycle"
     elif primary_action == "dildo_pussy":
         call expression Girl.tag + "_DP_Cycle"
-    elif primary_action == "dildo_anal":
+    elif primary_action == "dildo_ass":
         call expression Girl.tag + "_DA_Cycle"
     elif primary_action == "striptease":
         call Group_Strip_End

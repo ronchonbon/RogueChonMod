@@ -1461,7 +1461,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ TempLust += 10 if GirlA.lust > 70 else 8
 
 
-    elif primary_action == "dildo_anal":
+    elif primary_action == "dildo_ass":
         if GirlA.wearing_pants and not GirlA.upskirt:
             $ line = renpy.random.choice(["You rub the dildo against the outside of her_pants",
                                         "You slap the dildo lightly against her ass"])
@@ -1903,24 +1903,24 @@ label Offhand_Set(action_context=action_context, Tempprimary_action=offhand_acti
 
     if primary_action:
         menu:
-            "Also kiss her." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "sex", "anal", "hotdog", "dildo_pussy", "dildo_anal"):
+            "Also kiss her." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "sex", "anal", "hotdog", "dildo_pussy", "dildo_ass"):
                 "You lean in and start kissing her."
                 $ offhand_action = "kiss"
                 $ action_context = "offhand"
                 call action
-            "Also fondle her breasts." if primary_action in ("kiss","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
+            "Also fondle her breasts." if primary_action in ("kiss","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_ass"):
                 $ offhand_action = "fondle_breasts"
                 $ action_context = "offhand"
                 call action
-            "Also suck her breasts." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "sex", "anal", "hotdog", "dildo_pussy", "dildo_anal"):
+            "Also suck her breasts." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "sex", "anal", "hotdog", "dildo_pussy", "dildo_ass"):
                 $ offhand_action = "suck_breasts"
                 $ action_context = "offhand"
                 call action
-            "Also fondle her pussy." if primary_action in ("kiss","fondle_breasts","fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
+            "Also fondle her pussy." if primary_action in ("kiss","fondle_breasts","fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_ass"):
                 $ offhand_action = "fondle_pussy"
                 $ action_context = "offhand"
                 call action
-            "Also fondle her ass." if primary_action in ("kiss","fondle_breasts","fondle_pussy", "fondle_thighs", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
+            "Also fondle her ass." if primary_action in ("kiss","fondle_breasts","fondle_pussy", "fondle_thighs", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_ass"):
                 $ offhand_action = "fondle_ass"
                 $ action_context = "offhand"
                 call action
@@ -1928,7 +1928,7 @@ label Offhand_Set(action_context=action_context, Tempprimary_action=offhand_acti
                 $ offhand_action = "finger_ass"
                 $ action_context = "offhand"
                 call action
-            "Also jack it." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "dildo_pussy", "dildo_anal"):
+            "Also jack it." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "dildo_pussy", "dildo_ass"):
                 call jerking_off (Chr)
             "Nevermind":
                 pass
@@ -2031,7 +2031,7 @@ label Girl_Self_lines(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Temp
                                 "She slides two fingers firmly in and out of her tight hole",
                                 "She rapidly circles her fingers against the sensitive rim",
                                 "She lets out a moan as her fingers brush against her quivering hole"])
-            elif Action == "dildo_anal":
+            elif Action == "dildo_ass":
                 $ line = line + renpy.random.choice(["She moves the dildo in circles across her ass, firmly rubbing into it",
                                 "She hungrily slams the dildo into her tight hole, and pistons it in and out",
                                 "She shoves the dildo firmly in and out of her grasping asshole",
@@ -2077,7 +2077,7 @@ label Girl_Self_lines(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Temp
                                 "She slowly spreads her cheeks and caresses the tight hole within",
                                 "She gently slides a finger up and down the crease of ass",
                                 "She lets out a gasp as her fingers brush against her puckered hole"])
-            elif Action == "dildo_anal":
+            elif Action == "dildo_ass":
                 $ line = line + renpy.random.choice(["She traces the rubber phallus slowly down her body, barely grazing her ass",
                                 "Her dildo slides lightly across her crack, subtly avoiding the hole",
                                 "Her dildo is dragged up and down her inner thighs, slowly building towards their center",
@@ -2116,7 +2116,7 @@ label Girl_Self_lines(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Temp
                                 "Her fingers move lightly across her crack, subtly avoiding her rosebud",
                                 "Her fingers move up and down her inner thighs, slowly building towards their center",
                                 "Her hands move along her sides, carefully caressing them"])
-            elif Action == "dildo_anal":
+            elif Action == "dildo_ass":
                 $ line = line + renpy.random.choice(["She traces the rubber phallus slowly down her body, barely grazing her ass",
                                 "Her dildo slides lightly across her crack, subtly avoiding the hole",
                                 "Her dildo is dragged up and down her inner thighs, slowly building towards their center",
@@ -2195,7 +2195,7 @@ label Girl_Self_Set(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Length
         if "_dildo" in GirlA.inventory:
             $ Options.append("dildo_pussy")
             if GirlA.used_to_anal:
-                $ Options.append("dildo_anal")
+                $ Options.append("dildo_ass")
         if "_vibrator" in GirlA.inventory:
             $ Options.append("vibrator_pussy")
     else:
@@ -2210,10 +2210,10 @@ label Girl_Self_Set(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Length
                 $ Options.append("dildo_pussy")
             $ Options.append("fondle_pussy")
 
-        if primary_action not in ("anal", "fondle_ass", "finger_ass", "eat_ass", "dildo_anal") and GirlA.used_to_anal:
+        if primary_action not in ("anal", "fondle_ass", "finger_ass", "eat_ass", "dildo_ass") and GirlA.used_to_anal:
 
             if "_dildo" in GirlA.inventory:
-                $ Options.append("dildo_anal")
+                $ Options.append("dildo_ass")
             $ Options.append("fondle_ass")
 
         if "_vibrator" in GirlA.inventory:
@@ -2259,7 +2259,7 @@ label Girl_Self_Set(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Length
             $ line = GirlA.name + " pulls out her dildo and draws it toward her pussy. "
         elif Action == "fondle_ass":
             $ line = GirlA.name + "'s hand slides behind her body, reaching toward her ass. "
-        elif Action == "dildo_anal":
+        elif Action == "dildo_ass":
             $ line = GirlA.name + " pulls out her dildo and reaches it behind her. "
         elif Action == "vibrator_pussy":
             $ line = GirlA.name + " pulls out her vibrator and strokes it across her body. "
@@ -2576,7 +2576,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, Templ
                 $ Templine = ", her fingers brush against your cock as it goes in"
             elif primary_action == "finger_ass" or offhand_action == "finger_ass":
                 $ Templine = ", her fingers circling yours"
-            elif primary_action == "dildo_anal" or offhand_action == "dildo_anal":
+            elif primary_action == "dildo_ass" or offhand_action == "dildo_ass":
                 $ Templine = ", her fingers brush against the dildo as it goes in"
             else:
                 $ Templine = ", running fingers gently up her cleft"
@@ -2585,7 +2585,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, Templ
                 $ Templine = ", her fingers brushing up against your balls as you sink in"
             elif primary_action == "finger_ass" or offhand_action == "finger_ass":
                 $ Templine = ", the two of you taking turns in your motions"
-            elif primary_action == "dildo_anal" or offhand_action == "dildo_anal":
+            elif primary_action == "dildo_ass" or offhand_action == "dildo_ass":
                 $ Templine = ", her fingers run along the dildo as it slides by"
             else:
                 $ Templine = ", sliding firmly into it"
@@ -2594,7 +2594,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, Templ
                 $ Templine = ", her fingers brush against your cock as it goes in"
             elif primary_action == "finger_ass" or offhand_action == "finger_ass":
                 $ Templine = ", her fingers intertwine yours"
-            elif primary_action == "dildo_anal" or offhand_action == "dildo_anal":
+            elif primary_action == "dildo_ass" or offhand_action == "dildo_ass":
                 $ Templine = ", her fingers brush against the dildo as it goes in"
             else:
                 $ Templine = ", moving inside it with slow undulating motions"
@@ -2631,7 +2631,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, Templ
                 $ Templine = ", her tongue brushing against yours as you work"
             elif primary_action == "finger_ass" or offhand_action == "finger_ass":
                 $ Templine = ", her tongue slides along your fingers"
-            elif primary_action == "dildo_anal" or offhand_action == "dildo_anal":
+            elif primary_action == "dildo_ass" or offhand_action == "dildo_ass":
                 $ Templine = ", her tongue brushes along the dildo as it goes in"
             else:
                 $ Templine = ", lapping into it vigorously"
@@ -2642,7 +2642,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, Templ
                 $ Templine = ", you briefly kiss as you take turns"
             elif primary_action == "finger_ass" or offhand_action == "finger_ass":
                 $ Templine = ", her tongue slides past your fingers"
-            elif primary_action == "dildo_anal" or offhand_action == "dildo_anal":
+            elif primary_action == "dildo_ass" or offhand_action == "dildo_ass":
                 $ Templine = ", her tongue runs up against the dildo as it slides by"
             else:
                 $ Templine = ", sliding firmly into it"
@@ -2653,7 +2653,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, Templ
                 $ Templine = ", the two of you taking turns in your motions"
             elif primary_action == "finger_ass" or offhand_action == "finger_ass":
                 $ Templine = ", her tongue slides past your fingers"
-            elif primary_action == "dildo_anal" or offhand_action == "dildo_anal":
+            elif primary_action == "dildo_ass" or offhand_action == "dildo_ass":
                 $ Templine = ", her tongue runs up against the dildo as it slides by"
             else:
                 $ Templine = ", moving inside it with slow undulating motions"
@@ -4714,14 +4714,20 @@ label auto_accepted_narrations(Girl, action):
     elif action == "finger_pussy":
         "As you slide a finger in, [Girl.name] seems a bit surprised, but seems into it."
     elif action == "eat_pussy":
-        $ line = renpy.random.choice(["As you crouch down and start to lick her pussy, [Girl.name] startles, but then sinks into the sensation.",
-            "As you crouch down and start to lick her pussy, [Girl.name] jumps, but then softens.",
-            "As you crouch down and start to lick her pussy, [Girl.name] starts, but then softens."])
+        $ lines = ["As you crouch down and start to lick her pussy, " + Girl.name + " startles, but then sinks into the sensation.",
+            "As you crouch down and start to lick her pussy, " + Girl.name + " jumps, but then softens.",
+            "As you crouch down and start to lick her pussy, " + Girl.name + " starts, but then softens."]
+
+        $ line = renpy.random.choice(lines)
+
         "[line]"
     elif action == "fondle_ass":
-        $ line = renpy.random.choice(["As your hand creeps down her backside, [Girl.name] seems a bit surprised, but then nods.",
-            "As your hand creeps down her backside, [Girl.name] jumps a bit, and then relaxes.",
-            "As your hand creeps down her backside, [Girl.name] shivers a bit, and then relaxes."])
+        $ lines = ["As your hand creeps down her backside, " + Girl.name + " seems a bit surprised, but then nods.",
+            "As your hand creeps down her backside, " + Girl.name + " jumps a bit, and then relaxes.",
+            "As your hand creeps down her backside, " + Girl.name + " shivers a bit, and then relaxes."]
+
+        $ line = renpy.random.choice(lines)
+
         "[line]"
     elif action == "finger_ass":
         "As you slide a finger in, [Girl.name] tightens around it in surprise, but seems into it."

@@ -260,7 +260,7 @@ label chat_menu:
                             ch_v "Yeah?"
 
                         call shift_focus(Girl)
-                        call enter_main_sex_menu
+                        call enter_main_sex_menu(Girl)
 
                         return
                     elif approval_check(Girl, 400, "OI"):
@@ -280,7 +280,7 @@ label chat_menu:
                             ch_v "What would you like, [Girl.player_petname]?"
 
                         call shift_focus(Girl)
-                        call enter_main_sex_menu
+                        call enter_main_sex_menu(Girl)
 
                         return
                     else:

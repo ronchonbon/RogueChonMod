@@ -2750,9 +2750,9 @@ label Bottoms_Off_Legs(Girl=0):
                     $ Girl.outfit["jacket"] = ""
                     "She pulls her [Girl.outfit[jacket]] off."
                     call expression Girl.tag + "_First_Bottomless"
-                elif Girl.outfit["front_outer_accessory"]:
-                    $ Girl.outfit["front_outer_accessory"] = ""
-                    "She pulls her [Girl.outfit[front_outer_accessory]] off."
+                elif Girl.outfit["jacket"]:
+                    $ Girl.outfit["jacket"] = ""
+                    "She pulls her [Girl.outfit[jacket]] off."
 
                 if Girl.outfit["hose"]:
                     $ line = Girl.outfit["hose"]

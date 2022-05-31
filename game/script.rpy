@@ -156,12 +156,12 @@ init -1:
     default contact_actions = ["massage", "kiss", "fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_ass", "finger_ass", "eat_ass", "handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"]
 
     default all_actions = ["massage", "kiss",
+        "striptease", "masturbation",
         "fondle_thighs",
         "fondle_breasts", "suck_breasts",
         "fondle_pussy", "finger_pussy", "eat_pussy",
         "fondle_ass", "finger_ass", "eat_ass",
         "handjob", "footjob", "titjob", "blowjob",
-        "striptease", "masturbation",
         "dildo_pussy", "dildo_ass",
         "sex", "anal", "hotdog"]
 
@@ -180,7 +180,7 @@ label start:
 
     show screen status_screen
     show screen inventory_button
-    
+
     # $ bg_current = "bg_emma"
     # $ time_index = 2
     # $ current_time = "evening"
@@ -203,13 +203,25 @@ label start:
     # $ JeanX.sprite_location = stage_right
     # $ active_Girls.append(JeanX)
     #
-    # $ StormX.change_outfit("shower")
     # $ StormX.sprite_location = stage_far_right
     # $ active_Girls.append(StormX)
     #
     # $ JubesX.sprite_location = stage_far_far_right
     # $ active_Girls.append(JubesX)
     #
+    # python:
+    #     for G in active_Girls:
+    #         G.location = bg_current
+    #
+    # $ RogueX.change_outfit("nude")
+    # $ Player.sprite = False
+    # $ Player.cock_position = "in"
+    # $ primary_action = "suck_breasts"
+    # $ offhand_action = "fondle_breasts"
+
+    # show Rogue_sprite sex at sprite_location(stage_center)
+    # show Kitty_sprite titjob at sprite_location(stage_center)
+
     # show Rogue_sprite standing at sprite_location(RogueX.sprite_location)
     # show Kitty_sprite standing at sprite_location(KittyX.sprite_location)
     # show Emma_sprite standing at sprite_location(EmmaX.sprite_location)
@@ -217,11 +229,11 @@ label start:
     # show Jean_sprite standing at sprite_location(JeanX.sprite_location)
     # show Storm_sprite standing at sprite_location(StormX.sprite_location)
     # show Jubes_sprite standing at sprite_location(JubesX.sprite_location)
-    #
+
     # ""
-    #
+
     # $ focused_Girl = RogueX
-    # $ active_Girls = [RogueX]
+    # $ active_Girls = []
 
     jump prologue
 
