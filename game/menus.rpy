@@ -195,10 +195,10 @@ label girl_sex_menu(Girl):
 
                             $ having_sex = False
                     "Could you undress for me?":
-                        call focused_Girl_Undress(focused_Girl)
+                        call Girl_Undress(focused_Girl)
                     "You've got a little something. . . " if focused_Girl.spunk:
                         call sex_menu_cleanup_lines(focused_Girl)
-                        call focused_Girl_Cleanup(focused_Girl,"ask")
+                        call Girl_Cleanup(focused_Girl,"ask")
                     "Could I watch you get yourself off?":
                         if focused_Girl.remaining_actions:
                             call expression focused_Girl.tag + "_Masturbate"
@@ -894,19 +894,19 @@ label kiss_menu(Girl, action):
                             pass
                         "Ask [Partner.name] to do something else":
                             call Three_Change(Girl)
-                        "Don't stop what you're doing. . ." if position_change_timer and second_girl_primary_action:
-                            $ position_change_timer = 0
+                        "Don't stop what you're doing. . ." if position_timer and second_girl_primary_action:
+                            $ position_timer = 0
                         "Swap to [Partner.name]":
                             call shift_focus(Partner)
                         "Undress [Partner.name]":
                             call Girl_Undress(Partner)
-                        "Clean up Partner":
+                        "Clean up Partner" if any(Partner.spunk):
                             call Girl_Cleanup(Partner, "ask")
                         "Never mind":
                             pass
                 "Undress [Girl.name]":
                     call Girl_Undress(Girl)
-                "Clean up [Girl.name]" if Girl.spunk:
+                "Clean up [Girl.name]" if any(Girl.spunk):
                     call Girl_Cleanup(Girl, "ask")
                 "Never mind":
                     pass
@@ -1033,13 +1033,13 @@ label fondle_menu(Girl, action):
                             pass
                         "Ask [Partner.name] to do something else":
                             call Three_Change
-                        "Don't stop what you're doing. . ." if position_change_timer and second_girl_primary_action:
-                            $ position_change_timer = 0
+                        "Don't stop what you're doing. . ." if position_timer and second_girl_primary_action:
+                            $ position_timer = 0
                         "Swap to [Partner.name]":
                             call shift_focus(Partner)
                         "Undress [Partner.name]":
                             call Girl_Undress(Partner)
-                        "Clean up [Partner.name]" if Partner.spunk:
+                        "Clean up [Partner.name]" if any(Partner.spunk):
                             call Girl_Cleanup(Partner,"ask")
                         "Never mind":
                             pass
@@ -1049,7 +1049,7 @@ label fondle_menu(Girl, action):
                     $ show_feet = False
                 "Undress [Girl.name]":
                     call Girl_Undress
-                "Clean up [Girl.name]" if Girl.spunk:
+                "Clean up [Girl.name]" if any(Girl.spunk):
                     call Girl_Cleanup(Girl,"ask")
                 "Never mind":
                     pass
@@ -1251,21 +1251,19 @@ label handjob_menu(Girl, action):
                                 pass
                             "Ask [Partner.name] to do something else":
                                 call Three_Change(Girl)
-                            "Don't stop what you're doing. . ." if position_change_timer and second_girl_primary_action:
-                                $ position_change_timer = 0
+                            "Don't stop what you're doing. . ." if position_timer and second_girl_primary_action:
+                                $ position_timer = 0
                             "Swap to [Partner.name]":
                                 call shift_focus(Partner)
                             "Undress [Partner.name]":
                                 call Girl_Undress(Partner)
-                            "Clean up [Partner.name] (locked)" if not Partner.spunk:
-                                pass
-                            "Clean up [Partner.name]" if Partner.spunk:
+                            "Clean up [Partner.name]" if any(Partner.spunk):
                                 call Girl_Cleanup(Partner,"ask")
                             "Never mind":
                                 pass
                     "Undress [Girl.name]":
                         call Girl_Undress(Girl)
-                    "Clean up [Girl.name]" if Girl.spunk:
+                    "Clean up [Girl.name]" if any(Girl.spunk):
                         call Girl_Cleanup(Girl, "ask")
                     "Never mind":
                         pass
@@ -1359,13 +1357,13 @@ label sex_menu(Girl, action):
                             pass
                         "Ask [Partner.name] to do something else":
                             call Three_Change(Girl)
-                        "Don't stop what you're doing. . ." if position_change_timer and second_girl_primary_action:
-                            $ position_change_timer = 0
+                        "Don't stop what you're doing. . ." if position_timer and second_girl_primary_action:
+                            $ position_timer = 0
                         "Swap to [Partner.name]":
                             call shift_focus(Partner)
                         "Undress [Partner.name]":
                             call Girl_Undress(Partner)
-                        "Clean up [Partner.name]" if Partner.spunk:
+                        "Clean up [Partner.name]" if any(Partner.spunk):
                             call Girl_Cleanup(Partner,"ask")
                         "Never mind":
                             pass
@@ -1377,7 +1375,7 @@ label sex_menu(Girl, action):
                     $ show_feet = False
                 "Undress [Girl.name]":
                     call Girl_Undress(Girl)
-                "Clean up [Girl.name]" if Girl.spunk:
+                "Clean up [Girl.name]" if any(Girl.spunk):
                     call Girl_Cleanup(Girl,"ask")
                 "Never mind":
                     pass

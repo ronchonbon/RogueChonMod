@@ -1664,7 +1664,7 @@ label Date_Prep(Girl=0):
         $ Girl.outfit_name = Options[0]
         $ del Options[:]
     $ Girl.location = "date"
-    $ Girl.change_outfit(outfit_changed=1)
+    $ Girl.change_outfit()
     $ Girl.change_face("_smile")
     return
 
@@ -4164,8 +4164,8 @@ label Girl_Date_End(Girl=0):
                         ch_v "Sure, why not. . ."
                     call check_if_second_minds (Girl, 0, 2)
                     $ multi_action = False
-                    $ primary_action = "kiss"
-                    call before_action
+
+                    call before_action(Girl, "kiss")
                     $ multi_action = True
                 if approval_check(Girl, 900, Bonus=(10*Date_Bonus[0])):
                     $ Girl.change_face("_sexy", 1)

@@ -1311,11 +1311,11 @@ label sleepover_Morning:
 
     if Party:
         $ Party[0].change_face("_normal")
-        $ Party[0].change_outfit(6, outfit_changed = True)
+        $ Party[0].change_outfit("today")
 
         if len(Party) >= 2:
             $ Party[1].change_face("_normal")
-            $ Party[1].change_outfit(6, outfit_changed = True)
+            $ Party[1].change_outfit("today")
 
             "The girls get changed for the day."
         else:
@@ -2147,10 +2147,7 @@ label sleepover_MorningWood:
             $ second_girl_primary_action = "blowjob"
         call Morning_Partner
 
-        $ Girl = Party[0]
-        $ primary_action = "blowjob"
-
-        call action
+        call action(Party[0], "blowjob")
 
     return
 

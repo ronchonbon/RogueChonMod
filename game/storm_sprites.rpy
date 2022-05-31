@@ -185,8 +185,6 @@ layeredimage Storm_head:
 
     if StormX.eyes == "_closed":
         "images/Storm_standing/Storm_standing_eyes_closed.png"
-    elif StormX.eyes == "_squint":
-        "Storm_squinting"
     else:
         "Storm_blinking"
 

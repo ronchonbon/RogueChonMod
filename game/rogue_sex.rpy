@@ -76,7 +76,7 @@ label masturbate(Girl):
                         call well_in_hand_disapproved_lines(Girl, primary_action)
 
         $ Girl.arm_pose = 1
-        $ Girl.change_outfit(outfit_changed=0)
+        $ Girl.change_outfit()
         $ Girl.remaining_actions -= 1
 
         $ Player.change_stat("focus", 50, 30)
@@ -163,7 +163,7 @@ label masturbate(Girl):
 
                     "[Girl.name] pulls her hands away from herself."
 
-                    $ Girl.change_outfit(outfit_changed=0)
+                    $ Girl.change_outfit()
                     $ Girl.change_stat("obedience", 90, 1)
                     $ Girl.change_stat("obedience", 50, 1)
                     $ Girl.change_stat("obedience", 30, 2)
@@ -578,7 +578,7 @@ label masturbation_interrupted:
                 call masturbation_worn_out_lines(Girl, primary_action)
         "I'm good here. [[Stop]":
             if Girl.love < 800 and Girl.inhibition < 500 and Girl.obedience < 500:
-                $ Girl.change_outfit(outfit_changed=0)
+                $ Girl.change_outfit()
             $ Girl.change_face("_normal")
             $ Girl.brows = "_confused"
 

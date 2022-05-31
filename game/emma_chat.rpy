@@ -2110,7 +2110,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
         elif EmmaX.location in personal_rooms:
             ch_e "I'll try to keep occupied."
             $ bg_current = EmmaX.location
-            jump Misplaced
+            jump reset_location
         else:
             ch_e "You know, I'll just meet you in my room."
             $ EmmaX.location = "bg_emma"

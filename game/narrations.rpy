@@ -455,7 +455,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             if action_speed > 1:
 
                 $ line = line + renpy.random.choice(["She bounces rapidly against your cock",
-                        "You thrust into her and she squeeks in pain",
+                        "You thrust into her and she squeaks in pain",
                         "You quickly grind back and forth inside her but she doesn't seem to have the rhythm down",
                         "She bounces rapidly against your cock, occasionally popping out and having to stick it back in",
                         "You pound away at her",
@@ -527,7 +527,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             if action_speed > 1:
 
                 $ line = line + renpy.random.choice(["She bounces rapidly against your cock",
-                        "You thrust against her and she squeeks in surprise",
+                        "You thrust against her and she squeaks in surprise",
                         "You quickly grind back and forth against her but she doesn't seem to have the rhythm down",
                         "She bounces rapidly against your cock",
                         "You pound away at her",
@@ -617,7 +617,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             if action_speed > 1:
 
                 $ line = line + renpy.random.choice(["She bounces rapidly against your cock but seems to be in pain",
-                                "You thrust into her and she squeeks in pain",
+                                "You thrust into her and she squeaks in pain",
                                 "You quickly grind back and forth inside her but she doesn't seem to have the rhythm down",
                                 "She bounces rapidly against your cock, occasionally popping out and having to stick it back in",
                                 "You pound away at her",
@@ -824,8 +824,8 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
 
 
-    elif primary_action == "fondle_pussy":
-        if action_speed == 2 and D20S <= 10:
+    elif primary_action in ["fondle_pussy", "finger_pussy"]:
+        if primary_action == "finger_pussy" and D20S <= 10:
             $ line = renpy.random.choice(["You continue to finger " + GirlA.name + "'s pussy. ",
                                                     "You continue to finger bang " + GirlA.name + "'s pussy. ",
                                                     "You continue to finger blast " + GirlA.name + "'s pussy. "])

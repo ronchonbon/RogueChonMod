@@ -134,8 +134,6 @@ layeredimage Rogue_head:
 
     if RogueX.eyes == "_closed":
         "images/Rogue_blowjob/Rogue_blowjob_eyes_closed.png"
-    elif RogueX.eyes == "_squint":
-        "Rogue_squinting"
     else:
         "Rogue_blinking"
 

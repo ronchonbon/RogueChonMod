@@ -12,7 +12,7 @@ init python:
 transform stat_animation(Timer, XPOS):
     alpha 0
     pause Timer
-    xpos XPOS ypos 0.15 alpha 1
+    xpos XPOS ypos 0.25 alpha 1
     parallel:
         linear 1 ypos 0.0
     parallel:
@@ -26,7 +26,7 @@ screen stat_graphic(value, Color, Timer, XPOS):
         text "[value]" size 30 color Color at stat_animation(Timer, XPOS)
 
 screen stat_holder_1(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.0, XPOS-30)
+    use stat_graphic(value, Color, 0.0, XPOS - 0.015)
     timer 0.6 action Hide("stat_holder_1")
 
 screen stat_holder_2(value, Color, XPOS):
@@ -34,11 +34,11 @@ screen stat_holder_2(value, Color, XPOS):
     timer 0.7 action Hide("stat_holder_2")
 
 screen stat_holder_3(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.2, XPOS+30)
+    use stat_graphic(value, Color, 0.2, XPOS + 0.015)
     timer 0.8 action Hide("stat_holder_3")
 
 screen stat_holder_4(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.3, XPOS-30)
+    use stat_graphic(value, Color, 0.3, XPOS - 0.015)
     timer 0.9 action Hide("stat_holder_4")
 
 screen stat_holder_5(value, Color, XPOS):
@@ -46,11 +46,11 @@ screen stat_holder_5(value, Color, XPOS):
     timer 1.0 action Hide("stat_holder_5")
 
 screen stat_holder_6(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.5, XPOS+30)
+    use stat_graphic(value, Color, 0.5, XPOS + 0.015)
     timer 1.1 action Hide("stat_holder_6")
 
 screen stat_holder_7(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.6, XPOS-30)
+    use stat_graphic(value, Color, 0.6, XPOS - 0.015)
     timer 1.2 action Hide("stat_holder_7")
 
 screen stat_holder_8(value, Color, XPOS):
@@ -58,11 +58,11 @@ screen stat_holder_8(value, Color, XPOS):
     timer 1.3 action Hide("stat_holder_8")
 
 screen stat_holder_9(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.8, XPOS+30)
+    use stat_graphic(value, Color, 0.8, XPOS + 0.015)
     timer 1.4 action Hide("stat_holder_9")
 
 screen stat_holder_10(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.9, XPOS-30)
+    use stat_graphic(value, Color, 0.9, XPOS - 0.015)
     timer 1.5 action Hide("stat_holder_10")
 
 layeredimage Xavier_sprite:
@@ -138,6 +138,9 @@ layeredimage background:
     else:
         "images/background/[bg_current]_[current_time].png"
 
+    if bg_current == "bg_pool":
+        AlphaMask("bg_pool", "images/background/bg_pool_mask.png")
+
     if entering or bg_current != "bg_classroom":
         Null()
     elif EmmaX.location == "bg_teacher" and "frisky" in EmmaX.recent_history:
@@ -156,10 +159,10 @@ layeredimage background:
     elif StormX.location == "bg_desk":
         "Storm_At_Desk"
 
-    if not entering and bg_current == "bg_classroom":
+    if bg_current == "bg_classroom":
         "images/background/bg_classroom_front.png"
 
-    if not entering and bg_current == "bg_classroom" and time_index < 2 and weekday < 5:
+    if bg_current == "bg_classroom" and time_index < 2 and weekday < 5:
         "images/background/bg_classroom_pupils.png"
 
     zoom 1.34

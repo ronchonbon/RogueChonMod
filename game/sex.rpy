@@ -261,8 +261,7 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
             show black_screen onlayer black
             hide black_screen onlayer black
 
-            $ primary_action = options[0]
-            call before_action
+            call before_action(Girl, options[0])
     return
 
 

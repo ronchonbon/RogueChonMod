@@ -159,8 +159,6 @@ layeredimage Laura_head:
 
     if LauraX.eyes == "_closed":
         "images/Laura_standing/Laura_standing_eyes_closed.png"
-    elif LauraX.eyes == "_squint":
-        "Laura_squinting"
     else:
         "Laura_blinking"
 

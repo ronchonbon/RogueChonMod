@@ -13,19 +13,7 @@ image Rogue_blinking:
     "images/Rogue_blowjob/Rogue_blowjob_eyes_squint.png"
     0.05
     repeat
-
-image Rogue_squinting:
-    "images/Rogue_blowjob/Rogue_blowjob_eyes_sexy.png",
-    choice:
-        3.5
-    choice:
-        3.25
-    choice:
-        3
-    "images/Rogue_blowjob/Rogue_blowjob_eyes_squint.png",
-    0.25
-    repeat
-
+    
 layeredimage Rogue_grool_dripping_animations:
     always:
         "grool_dripping_animation" pos (0.129, 0.6) zoom 0.2
@@ -127,13 +115,13 @@ layeredimage Rogue_standing_fondling_animations:
         Null()
     elif second_girl_primary_action == "fondle_breasts" and primary_action in ["fondle_breasts", "suck_breasts"]:
         "Girl_fondle_breast_left_animation" pos (0.156, 0.37)
-    elif second_girl_priamry_action == "fondle_breasts":
+    elif second_girl_primary_action == "fondle_breasts":
         "Girl_fondle_breast_right_animation" pos (0.083, 0.352)
     elif second_girl_primary_action == "suck_breasts" and primary_action in ["fondle_breasts", "suck_breasts"]:
         "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
     elif second_girl_primary_action == "suck_breasts" and offhand_action in ["fondle_breasts", "suck_breasts"]:
         "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
-    elif second_girl_priamry_action == "suck_breasts":
+    elif second_girl_primary_action == "suck_breasts":
         "Zero_suck_breasts_right_animation" pos (0.083, 0.37)
     elif second_girl_primary_action == "fondle_pussy" and primary_action != "sex" and RogueX.lust >= 70:
         "Girl_finger_pussy_animation" pos (0.122, 0.583)
@@ -389,6 +377,9 @@ layeredimage Rogue_blowjob_face_mask_animations:
     if action_speed > 1:
         "Rogue_blowjob_face_mask_animation[action_speed]" pos (0.029, 0.305) zoom 0.2755
 
+image Rogue_blowjob_mouth_animation0:
+    "images/Rogue_blowjob/Rogue_blowjob_mouth[RogueX.mouth].png"
+
 image Rogue_blowjob_mouth_animation1:
     "images/Rogue_blowjob/Rogue_blowjob_mouth_tongue.png"
 
@@ -401,6 +392,9 @@ image Rogue_blowjob_mouth_animation3:
 
 image Rogue_blowjob_mouth_animation4:
     "images/Rogue_blowjob/Rogue_blowjob_mouth_sucking.png"
+
+image Rogue_blowjob_mouth_animation0_spunk:
+    "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth[RogueX.mouth].png"
 
 image Rogue_blowjob_mouth_animation1_spunk:
     "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_tongue.png"

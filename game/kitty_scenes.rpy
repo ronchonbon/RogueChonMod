@@ -5,12 +5,12 @@ label meet_Kitty:
     $ KittyX.today_outfit_name = "casual1"
     $ KittyX.change_outfit()
 
-    call clear_the_room("all", 0, 1)
+    call clear_the_room("all", Passive = False, Silent = True)
 
     $ KittyX.location = "bg_kitty"
 
     call shift_focus(KittyX)
-    call set_the_scene(0)
+    call set_the_scene(False)
 
     $ KittyX.sprite_location = stage_center
     $ KittyX.player_petname = Player.name[:1]
@@ -248,11 +248,19 @@ label meet_Kitty:
 
     $ active_Girls.append(KittyX)
 
-    $ bg_current = "bg_classroom"
-
     $ round -= 10
 
+    $ bg_current = "bg_classroom"
+
     return
+
+
+
+
+
+
+
+
 
 
 
@@ -672,7 +680,7 @@ label Kitty_Love:
 
             "She squeezes you even tighter and makes a little whimper."
         else:
-            "She dives into your arms with a little squeek."
+            "She dives into your arms with a little squeak."
         if "lover" not in KittyX.player_petnames:
             ch_k "I love you too. . ."
             ch_k "I think I have for a while now."
@@ -701,9 +709,7 @@ label Kitty_Love_End:
             ch_k "Hmm. . ."
             if simulation:
                 return True
-            call shift_focus(KittyX)
-            $ primary_action = "sex"
-            call action
+            call action(KittyX, "sex")
         "I have something else in mind. . .[[choose another activity]":
             $ KittyX.brows = "_confused"
             $ KittyX.change_stat("obedience", 70, 20)

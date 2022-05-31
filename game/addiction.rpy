@@ -15,7 +15,7 @@ label addiction_event(Girl):
     $ bg_current = "bg_player"
 
     $ Girl.location = bg_current
-    $ Girl.change_outfit(outfit_changed=1)
+    $ Girl.change_outfit()
 
     call locked_door(Girl, entering = True)
 
@@ -210,10 +210,7 @@ label addiction_event(Girl):
                     ch_v "Well, that's not usually how \"vampire\" works, but we could give it a shot. . ."
                 "She leans in for another kiss."
 
-                $ primary_action = "kiss"
-
-                call shift_focus(Girl)
-                call before_action
+                call before_action(Girl, "kiss", None)
             else:
                 $ Girl.change_face("_sad",2)
 
@@ -255,10 +252,7 @@ label addiction_event(Girl):
                     ch_v "Well, that's not usually how \"vampire\" works, but we could give it a shot. . ."
                 "She leans in for a kiss."
 
-                $ primary_action = "kiss"
-
-                call shift_focus(Girl)
-                call before_action
+                call before_action(Girl, "kiss", None)
             else:
                 $ Girl.change_face("_sad",2)
 
@@ -300,10 +294,7 @@ label addiction_event(Girl):
                     ch_s "Perhaps a kiss then. . ."
                 "She leans in for a kiss."
 
-                $ primary_action = "kiss"
-
-                call shift_focus(Girl)
-                call before_action
+                call before_action(Girl, "kiss", None)
             else:
                 $ Girl.change_stat("lust", 80, 3)
                 $ Girl.change_stat("love", 90, 1)
@@ -342,10 +333,7 @@ label addiction_event(Girl):
                         $ Girl.change_face("_sexy")
                         "She leans in for a kiss."
 
-                        $ primary_action = "kiss"
-
-                        call shift_focus(Girl)
-                        call before_action
+                        call before_action(Girl, "kiss", None)
                     "Only if we can make out a bit." if Girl not in (LauraX,JeanX):
                         $ Girl.change_stat("love", 80, 3)
                         $ Girl.change_stat("obedience", 40, 5)
@@ -360,10 +348,7 @@ label addiction_event(Girl):
                         elif Girl == StormX:
                             ch_s "Oh. I suppose we could. . ."
 
-                        $ primary_action = "kiss"
-
-                        call shift_focus(Girl)
-                        call before_action
+                            call before_action(Girl, "kiss", None)
                     "Not good enough.":
                         $ Girl.change_stat("love", 200, -5)
                         $ Girl.brows = "_angry"
@@ -386,10 +371,7 @@ label addiction_event(Girl):
                 ch_v "Well, we may as well do more than that. . ."
                 "She leans in for a kiss."
 
-                $ primary_action = "kiss"
-
-                call shift_focus(Girl)
-                call before_action
+                call before_action(Girl, "kiss", None)
             else:
                 $ Girl.change_stat("lust", 80, 3)
                 $ Girl.change_stat("love", 90, 1)
@@ -419,10 +401,7 @@ label addiction_event(Girl):
 
                         "She leans in for a kiss."
 
-                        $ primary_action = "kiss"
-
-                        call shift_focus(Girl)
-                        call before_action
+                        call before_action(Girl, "kiss", None)
                     "Only if we can make out a bit.":
                         $ Girl.change_stat("love", 80, 3)
                         $ Girl.change_stat("obedience", 40, 5)
@@ -430,10 +409,7 @@ label addiction_event(Girl):
 
                         ch_v "I think I could manage. . ."
 
-                        $ primary_action = "kiss"
-
-                        call shift_focus(Girl)
-                        call before_action
+                        call before_action(Girl, "kiss", None)
                     "Not good enough.":
                         $ Girl.change_stat("love", 200, -5)
                         $ Girl.brows = "_angry"
@@ -864,10 +840,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                     "She leans in for a kiss."
 
-                    $ primary_action = "kiss"
-
-                    call shift_focus(Girl)
-                    call before_action
+                    call before_action(Girl, "kiss", None)
                 elif approval_check(Girl, 650, "LI",Alt=[[RogueX],600]):
                     $ Girl.change_stat("lust", 80, 3)
                     $ Girl.change_stat("love", 80, 5)
@@ -894,10 +867,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                     "She leans in for a kiss."
 
-                    $ primary_action = "kiss"
-
-                    call shift_focus(Girl)
-                    call before_action
+                    call before_action(Girl, "kiss", None)
                 else:
                     $ Girl.change_stat("lust", 80, 3)
                     $ Girl.change_stat("love", 80, 6)
@@ -935,10 +905,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                     "She leans in for a kiss."
 
-                    $ primary_action = "kiss"
-
-                    call shift_focus(Girl)
-                    call before_action
+                    call before_action(Girl, "kiss", None)
 
                     $ Girl.addiction = 20 if Girl.addiction > 20 else Girl.addiction
                     $ Girl.addiction = 5 if Girl == JubesX else Girl.addiction
@@ -991,9 +958,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                         $ approval_bonus = stored_count
 
-                        $ primary_action = "fondle_breasts"
-
-                        call action
+                        call action(Girl, "fondle_breasts")
 
                         if "fondle_breasts" in Girl.recent_history:
                             $ Girl.change_stat("obedience", 80, 10)
@@ -1036,9 +1001,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                             elif Girl == JubesX:
                                 ch_v "Ok, we'll see. . ."
 
-                        $ primary_action = "fondle_thighs"
-
-                        call action
+                        call action(Girl, "fondle_thighs")
 
                         if "fondle_thighs" in Girl.recent_history:
                             $ Girl.change_stat("obedience", 50, 5)
@@ -1068,7 +1031,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                         $ approval_bonus = stored_count
 
-                        call expression Girl.tag + "_Fondle_Pussy"
+                        call action(Girl, "fondle_pussy")
 
                         if "fondle_pussy" in Girl.recent_history:
                             $ Girl.change_stat("obedience", 50, 10)
@@ -1095,17 +1058,11 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
             "You could touch me.":
                 menu:
                     "How about you give me a handjob?":
-                        $ primary_action = "handjob"
-
-                        call action
+                        call action(Girl, "handjob")
                     "How about you titfuck me?":
-                        $ primary_action = "titjob"
-
-                        call action
+                        call action(Girl, "titjob")
                     "How about you blow me?":
-                        $ primary_action = "blowjob"
-
-                        call action
+                        call action(Girl, "blowjob")
                     "Never mind, something else":
                         jump addiction_ultimatum_menu
 
@@ -1788,7 +1745,7 @@ label addiction_fix(Girl):
     call shift_focus(Girl)
 
     $ Girl.location = bg_current
-    $ Girl.change_outfit(outfit_changed=1)
+    $ Girl.change_outfit()
 
     call locked_door(Girl)
 
@@ -2595,9 +2552,7 @@ label addiction_serum:
                     elif Girl == JubesX:
                         ch_v "Sure, that's fine. . ."
 
-                    $ primary_action = "handjob"
-
-                    call action
+                    call action(Girl, "handjob")
 
                     $ Girl.change_stat("obedience", 70, 1)
                     $ Girl.change_stat("inhibition", 50, 2)
@@ -2650,9 +2605,7 @@ label addiction_serum:
                     elif Girl == JubesX:
                         ch_v "I guess that wouldn't suck. . ."
 
-                    $ primary_action = "blowjob"
-
-                    call action
+                    call action(Girl, "blowjob")
 
                     $ Girl.recent_history.append("has serum")
                     $ Girl.change_stat("obedience", 70, 1)

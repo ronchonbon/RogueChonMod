@@ -1995,7 +1995,7 @@ label Jean_Summon(approval_bonus=approval_bonus):
         elif JeanX.location in personal_rooms:
             ch_j "Yeah, see you."
             $ bg_current = JeanX.location
-            jump Misplaced
+            jump reset_location
         else:
             ch_j "Um, I'll just meet you in my room."
             $ JeanX.location = "bg_jean"

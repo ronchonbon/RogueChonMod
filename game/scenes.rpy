@@ -1451,7 +1451,7 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
     if bg_current == Girl.home:
 
         $ bg_current = "bg_player"
-        jump Misplaced
+        jump reset_location
     else:
         call remove_girl (Girl)
     return
@@ -2270,7 +2270,7 @@ label CalltoFap(Girl=0, Fap=0):
         $ bg_current = Girl.home
         call taboo_level(1)
 
-        jump Misplaced
+        jump reset_location
 
     elif Fap == 2:
 
@@ -2357,7 +2357,7 @@ label PhoneSex(Girl=0):
     hide PhoneSex
 
     call Get_Dressed
-    $ Girl.change_outfit(5)
+    $ Girl.change_outfit(check_if_yoinked = True)
     call checkout(total = True)
     $ Player.recent_history.remove("phonesex")
     return

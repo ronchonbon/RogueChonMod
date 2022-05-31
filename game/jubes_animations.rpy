@@ -14,18 +14,6 @@ image Jubes_blinking:
     0.05
     repeat
 
-image Jubes_squinting:
-    "images/Jubes_standing/Jubes_standing_eyes_sexy.png"
-    choice:
-        3.5
-    choice:
-        3.25
-    choice:
-        3
-    "images/Jubes_standing/Jubes_standing_eyes_squint.png"
-    .25
-    repeat
-
 layeredimage Jubes_grool_dripping_animations:
     always:
         "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
@@ -127,13 +115,13 @@ layeredimage Jubes_standing_fondling_animations:
         Null()
     elif second_girl_primary_action == "fondle_breasts" and primary_action in ["fondle_breasts", "suck_breasts"]:
         "Girl_fondle_breast_left_animation" pos (0.156, 0.37)
-    elif second_girl_priamry_action == "fondle_breasts":
+    elif second_girl_primary_action == "fondle_breasts":
         "Girl_fondle_breast_right_animation" pos (0.083, 0.352)
     elif second_girl_primary_action == "suck_breasts" and primary_action in ["fondle_breasts", "suck_breasts"]:
         "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
     elif second_girl_primary_action == "suck_breasts" and offhand_action in ["fondle_breasts", "suck_breasts"]:
         "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
-    elif second_girl_priamry_action == "suck_breasts":
+    elif second_girl_primary_action == "suck_breasts":
         "Zero_suck_breasts_right_animation" pos (0.083, 0.37)
     elif second_girl_primary_action == "fondle_pussy" and primary_action != "sex" and JubesX.lust >= 70:
         "Girl_finger_pussy_animation" pos (0.122, 0.583)

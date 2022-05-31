@@ -1,48 +1,93 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/locations.rpy", line 112, in script call
-    call study
-  File "game/studying.rpy", line 129, in script call
-    call frisky_study
-  File "game/studying.rpy", line 263, in script call
-    call Group_Strip_Study
-  File "game/quiz.rpy", line 226, in script call
-    call Strip_Study_Right
-  File "game/quiz.rpy", line 440, in script call
-    call enter_main_sex_menu(Party[0])
-  File "game/menus.rpy", line 59, in script call
-    call girl_sex_menu(Girl)
-  File "game/menus.rpy", line 166, in script
-    if Player.semen and focused_Girl.remaining_actions:
-SyntaxError: invalid syntax (menus.rpy, line 179)
+  File "game/rogue_scenes.rpy", line 12, in script
+    "You recently discovered that you were a mutant when a Sentinel attacked your home.\nYou were rescued by a squad of X-Men and given this address."
+  File "game/rogue_scenes.rpy", line 12, in script
+    "You recently discovered that you were a mutant when a Sentinel attacked your home.\nYou were rescued by a squad of X-Men and given this address."
+  File "game/screens.rpy", line 527, in execute
+    screen status_screen:
+  File "game/screens.rpy", line 527, in execute
+    screen status_screen:
+  File "game/screens.rpy", line 615, in execute
+    frame:
+  File "game/screens.rpy", line 618, in execute
+    has vbox
+  File "game/screens.rpy", line 623, in execute
+    hbox:
+  File "game/screens.rpy", line 624, in execute
+    text "[focused_Girl.tag] Level: [focused_Girl.level]" size 18
+AttributeError: 'int' object has no attribute 'tag'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/locations.rpy", line 112, in script call
-    call study
-  File "game/studying.rpy", line 129, in script call
-    call frisky_study
-  File "game/studying.rpy", line 263, in script call
-    call Group_Strip_Study
-  File "game/quiz.rpy", line 226, in script call
-    call Strip_Study_Right
-  File "game/quiz.rpy", line 440, in script call
-    call enter_main_sex_menu(Party[0])
-  File "game/menus.rpy", line 59, in script call
-    call girl_sex_menu(Girl)
-  File "game/menus.rpy", line 166, in script
-    if Player.semen and focused_Girl.remaining_actions:
-  File "renpy/ast.py", line 1898, in execute
-    if renpy.python.py_eval(condition):
-  File "renpy/python.py", line 2274, in py_eval
-    code = py_compile(code, 'eval')
-  File "renpy/python.py", line 835, in py_compile
-    raise e
-SyntaxError: invalid syntax (menus.rpy, line 179)
+  File "renpy/bootstrap.py", line 331, in bootstrap
+    renpy.main.main()
+  File "renpy/main.py", line 662, in main
+    run(restart)
+  File "renpy/main.py", line 148, in run
+    renpy.execution.run_context(True)
+  File "renpy/execution.py", line 922, in run_context
+    context.run()
+  File "game/rogue_scenes.rpy", line 12, in script
+    "You recently discovered that you were a mutant when a Sentinel attacked your home.\nYou were rescued by a squad of X-Men and given this address."
+  File "game/rogue_scenes.rpy", line 12, in script
+    "You recently discovered that you were a mutant when a Sentinel attacked your home.\nYou were rescued by a squad of X-Men and given this address."
+  File "renpy/ast.py", line 721, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "renpy/exports.py", line 1419, in say
+    who(what, *args, **kwargs)
+  File "renpy/character.py", line 1249, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "renpy/character.py", line 901, in do_display
+    **display_args)
+  File "renpy/character.py", line 647, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "renpy/display/core.py", line 3737, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/screen.py", line 436, in visit_all
+    callback(self)
+  File "renpy/display/core.py", line 3737, in <lambda>
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "renpy/display/screen.py", line 447, in per_interact
+    self.update()
+  File "renpy/display/screen.py", line 637, in update
+    self.screen.function(**self.scope)
+  File "game/screens.rpy", line 527, in execute
+    screen status_screen:
+  File "game/screens.rpy", line 527, in execute
+    screen status_screen:
+  File "game/screens.rpy", line 615, in execute
+    frame:
+  File "game/screens.rpy", line 618, in execute
+    has vbox
+  File "game/screens.rpy", line 623, in execute
+    hbox:
+  File "game/screens.rpy", line 624, in execute
+    text "[focused_Girl.tag] Level: [focused_Girl.level]" size 18
+  File "renpy/text/text.py", line 1574, in __init__
+    self.set_text(text, scope, substitute)
+  File "renpy/text/text.py", line 1693, in set_text
+    i, did_sub = renpy.substitutions.substitute(i, scope, substitute)
+  File "renpy/substitutions.py", line 270, in substitute
+    s = formatter.vformat(s, (), kwargs)
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python2.7/string.py", line 563, in vformat
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python2.7/string.py", line 585, in _vformat
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python2.7/string.py", line 652, in get_field
+AttributeError: 'int' object has no attribute 'tag'
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like 0.997f2
-Tue May 31 04:51:26 2022
+Tue May 31 18:08:12 2022

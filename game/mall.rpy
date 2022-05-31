@@ -782,7 +782,7 @@ label Swim_shop:
                                 $ Second.GirlLikeUp(Girl,3)
 
 
-                        $ Girl.change_outfit(outfit_changed=0)
+                        $ Girl.change_outfit()
                         $ round -= 20 if round > 30 else (round-10)
                         $ Player.drain_word("locked",0,0,1)
                         $ bg_current = "bg_shop"
@@ -1445,7 +1445,7 @@ label Lingerie_shop:
                         call taboo_level
                         call set_the_scene
 
-                        $ Girl.change_outfit(outfit_changed=0)
+                        $ Girl.change_outfit()
                         if not Cart:
                             "That was fun, but since there wasn't anything she was interested in, she put it all back."
                         if Player.cash < 50:

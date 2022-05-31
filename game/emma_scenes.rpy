@@ -5,9 +5,12 @@ label meet_Emma:
     $ EmmaX.today_outfit_name = "casual1"
     $ EmmaX.change_outfit()
 
+    call clear_the_room("all", Passive = False, Silent = True)
+
     $ EmmaX.location = "bg_emma"
 
     call shift_focus(EmmaX)
+    call set_the_scene(False)
 
     $ EmmaX.sprite_location = stage_right
 
@@ -20,11 +23,10 @@ label meet_Emma:
     "The bell to class rings, but Professor McCoy seems to be late."
     "A strange woman enters the room and heads to the podium with a regal stride."
 
-    $ EmmaX.change_face("_normal")
-
     show Emma_sprite standing at sprite_location(EmmaX.sprite_location) with easeinright
 
     $ EmmaX.location = "bg_classroom"
+    $ EmmaX.change_face("_normal")
     $ EmmaX.arm_pose = 1
 
     ch_u "Hello students. My name is Emma_sprite Frost, and I have been invited to conduct this class."
@@ -56,10 +58,7 @@ label meet_Emma:
     $ EmmaX.lust += 5
 
     call wait
-    call clear_the_room(EmmaX, 0, 1)
-
-    $ EmmaX.location = "bg_classroom"
-
+    call clear_the_room(EmmaX, False, True)
     call set_the_scene
 
     ch_e "All right students, class dismissed."
@@ -80,11 +79,11 @@ label meet_Emma:
         "For such a sexy teacher? I've got some time.":
             $ EmmaX.change_stat("love", 70, -5)
             $ EmmaX.change_stat("obedience", 80, 5)
-            $ EmmaX.change_face("_angry",1, mouth="_smirk")
+            $ EmmaX.change_face("_angry", 1, mouth = "_smirk")
 
             ch_e "That's rather. . . inappropriate."
 
-            $ EmmaX.change_face("_bemused", mouth="_smile")
+            $ EmmaX.change_face("_bemused", mouth = "_smile")
             $ EmmaX.change_stat("love", 70, 20)
             $ EmmaX.change_stat("lust", 50, 5)
             $ EmmaX.change_stat("inhibition", 25, 15)
@@ -97,7 +96,7 @@ label meet_Emma:
         $ EmmaX.change_stat("obedience", 80, 10)
         $ EmmaX.change_stat("inhibition", 90, 15)
         $ EmmaX.change_stat("lust", 50, 5)
-        $ EmmaX.change_face("_angry", brows="_confused")
+        $ EmmaX.change_face("_angry", brows = "_confused")
 
         ch_e "You seem to be a bit of a scoundrel. . ."
     elif Player.reputation < 600:
@@ -217,7 +216,7 @@ label meet_Emma:
             ch_e "Excellent, I look forward to it."
         "I don't know if you should experiment on your students.":
             $ EmmaX.change_stat("love", 70, -5)
-            $ EmmaX.change_face("_normal", mouth="_sad")
+            $ EmmaX.change_face("_normal", mouth = "_sad")
 
             ch_e "There's nothing for you to worry about."
 
@@ -345,6 +344,13 @@ label meet_Emma:
 
 
 
+
+
+
+
+
+
+
 label Emma_Teacher_Caught(Girl=0):
 
 
@@ -397,7 +403,7 @@ label Emma_Caught_Classroom:
     $ Player.add_word(1,"interruption")
     $ bg_current = "bg_classroom"
     call clear_the_room (EmmaX, 0, 1)
-    $ EmmaX.change_outfit(outfit_changed=1)
+    $ EmmaX.change_outfit()
     $ EmmaX.location = 0
     call set_the_scene
     $ EmmaX.location = "bg_desk"
@@ -598,8 +604,8 @@ label Emma_Caught_Classroom:
                 $ EmmaX.taboo = 0
                 if simulation:
                     return True
-                $ primary_action = "fondle_breasts"
-                call before_action
+
+                call before_action(EmmaX, "fondle_breasts")
             "Could you give me a hand? [[point to your cock]":
                 $ EmmaX.change_stat("love", 70, -5)
                 $ EmmaX.change_stat("obedience", 50, 5)
@@ -1588,9 +1594,8 @@ label Emma_Love_End:
             $ EmmaX.change_stat("inhibition", 30, 20)
             $ EmmaX.change_stat("obedience", 70, 10)
             ch_e "Hmm. . ."
-            call shift_focus(EmmaX)
-            $ primary_action = "sex"
-            call before_action
+
+            call before_action(EmmaX, "sex")
         "I have something else in mind. . .[[choose another activity]":
             $ EmmaX.brows = "_confused"
             $ EmmaX.change_stat("obedience", 70, 25)

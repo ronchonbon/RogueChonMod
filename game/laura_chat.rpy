@@ -1945,7 +1945,7 @@ label Laura_Summon(approval_bonus=approval_bonus):
         elif LauraX.location in personal_rooms:
             ch_l "Yeah, see you."
             $ bg_current = LauraX.location
-            jump Misplaced
+            jump reset_location
         else:
             ch_l "Um, I'll just meet you in my room."
             $ LauraX.location = "bg_laura"

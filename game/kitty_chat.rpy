@@ -2022,7 +2022,7 @@ label Kitty_Summon(approval_bonus=approval_bonus):
         elif KittyX.location in personal_rooms:
             ch_k "See ya' in a bit. . ."
             $ bg_current = KittyX.location
-            jump Misplaced
+            jump reset_location
         else:
             ch_k "You know, I'll just meet you in my room."
             $ KittyX.location = "bg_kitty"
@@ -2098,7 +2098,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
     if bg_current == "bg_dangerroom":
         call exit_gym ([KittyX])
 
-    $ KittyX.change_outfit(outfit_changed=0)
+    $ KittyX.change_outfit()
 
     if "follow" not in KittyX.traits:
 

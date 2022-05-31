@@ -1674,9 +1674,7 @@ label Flirt(Girl=0):
                             $ Girl.change_stat("love", 90, 2)
                             $ Girl.change_stat("obedience", 60, 3)
                             $ Girl.change_stat("inhibition", 60, 3)
-                            call shift_focus(Girl)
-                            $ primary_action = "fondle_breasts"
-                            call before_action
+                            call before_action(Girl, "fondle_breasts")
                             call stop_all_actions (1)
                             return
                         "Nah, that was enough.":
@@ -2708,7 +2706,7 @@ label Love_You(Girl=0):
 
             "[Girl.name] leaves the room."
             call remove_girl (Girl)
-            jump Misplaced
+            jump reset_location
         return
 
 

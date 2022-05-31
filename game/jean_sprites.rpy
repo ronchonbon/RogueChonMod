@@ -141,8 +141,6 @@ layeredimage Jean_head:
 
     if JeanX.eyes == "_closed":
         "images/Jean_standing/Jean_standing_eyes_closed.png"
-    elif JeanX.eyes == "_squint":
-        "Jean_squinting"
     else:
         "Jean_blinking"
 

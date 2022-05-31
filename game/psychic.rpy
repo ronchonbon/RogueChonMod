@@ -64,7 +64,7 @@ label psychicFlash(Face="_sly", TempLoc=0):
         hide Emma_sprite with fade
     elif Girl == JeanX:
         hide Jean_sprite with fade
-    $ Girl.change_outfit(6,outfit_changed=1)
+    $ Girl.change_outfit("today")
     scene onlayer black
     $ Girl.arm_pose = 1
     $ line = 0
@@ -106,7 +106,7 @@ label MindFuck(TempLoc=0):
                 ch_j "Ok, that'll do it. . ."
                 ch_j "Be thinking about me. . ."
 
-            $ Girl.change_outfit(6,outfit_changed=1)
+            $ Girl.change_outfit("today")
 
             python:
                 for key in Girl.spunk.keys():
@@ -117,7 +117,7 @@ label MindFuck(TempLoc=0):
             elif Girl == JeanX:
                 hide Jean_sprite with fade
             scene onlayer black
-            jump Misplaced
+            jump reset_location
         "What is that?" if "mfuck?" not in Player.recent_history and "MindFuck" not in Player.history:
             if Girl == EmmaX:
                 ch_e "Well, if you open your mind a bit, I could project into it."

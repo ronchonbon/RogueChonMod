@@ -3453,7 +3453,7 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 $ Player.recent_history.append("no_les")
                 "She hangs up."
                 hide cellphone
-                jump Misplaced
+                jump reset_location
             "What, are you watching a movie?" if line != "what" and Girl != JeanX:
                 $ Girl.change_stat("love", 80, 2)
                 $ Girl.change_stat("inhibition", 80, 2)
@@ -3564,7 +3564,7 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 $ renpy.pop_call()
                 $ bg_current = "bg_campus"
                 $ line = 0
-                jump Misplaced
+                jump reset_location
 
     $ line = 0
     $ Girl.change_face("_sly",1)
@@ -3591,5 +3591,5 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
     $ Partner = Girl2
     call shift_focus(Girl)
     call Les_Prep(Girl)
-    jump Misplaced
+    jump reset_location
     return

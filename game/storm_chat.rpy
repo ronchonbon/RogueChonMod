@@ -1941,7 +1941,7 @@ label Storm_Summon(approval_bonus=approval_bonus):
         elif StormX.location in personal_rooms:
             ch_s "I will see you then."
             $ bg_current = StormX.location
-            jump Misplaced
+            jump reset_location
         else:
             ch_s "I will just meet you in my room."
             $ StormX.location = "bg_storm"

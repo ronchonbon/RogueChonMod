@@ -696,7 +696,7 @@ label check_on_Jubes_sunshock:
 
                 $ JubesX.add_word(1,"stayed",0,0,0)
 
-                jump Misplaced
+                jump reset_location
             "Oh, too bad, you can stay here then.":
                 $ Party.remove(JubesX)
 
@@ -1081,7 +1081,7 @@ label Jubes_Mall(temp_Girls=[]):
     call set_the_scene
     ch_v "Anyway, it was nice to hang out with you."
     ch_v "I hope we can do it again some time!"
-    jump Misplaced
+    jump reset_location
     return
 
 
@@ -1961,9 +1961,8 @@ label Jubes_Love_End:
             $ JubesX.change_stat("inhibition", 30, 20)
             $ JubesX.change_stat("obedience", 70, 10)
             ch_v "Hmm. . ."
-            call shift_focus(JubesX)
-            $ primary_action = "sex"
-            call before_action
+
+            call before_action(JubesX, "sex")
         "I have something else in mind. . .[[choose another activity]":
             $ JubesX.brows = "_confused"
             $ JubesX.change_stat("obedience", 70, 25)
@@ -2747,10 +2746,8 @@ label Jubes_Sexfriend:
                     $ JubesX.change_stat("inhibition", 90, 15)
                     ch_v "Kinky."
 
-        $ action_context = JubesX
         $ Player.add_word(1,"interruption")
-        $ primary_action = "sex"
-        call before_action
+        call before_action(JubesX, "sex", JubesX)
         call enter_main_sex_menu(JubesX)
 
 
@@ -2791,10 +2788,8 @@ label Jubes_Fuckbuddy:
     $ JubesX.player_petnames.append("fuck buddy")
     $ JubesX.event_happened[10] += 1
 
-    $ action_context = JubesX
     $ Player.add_word(1,"interruption")
-    $ primary_action = "sex"
-    call before_action
+    call before_action(JubesX, "sex", JubesX)
     call enter_main_sex_menu(JubesX)
 
     return

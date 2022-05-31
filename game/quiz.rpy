@@ -79,8 +79,8 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
                         "We should stop.":
                             ch_l "Grr."
                             return
-                $ primary_action = "fondle_breasts"
-                call before_action
+
+                call before_action(LauraX, "fondle_breasts")
                 if action_context:
 
                     call enter_main_sex_menu(LauraX)
@@ -121,8 +121,8 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
                         "We should stop.":
                             ch_j "Fine."
                             return
-                $ primary_action = "fondle_breasts"
-                call before_action
+
+                call before_action(JeanX, "fondle_breasts")
                 if action_context:
                     call enter_main_sex_menu(JeanX)
 

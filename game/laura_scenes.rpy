@@ -57,7 +57,7 @@ label meet_Laura(Topics=[], Loop=1):
                         $ LauraX.change_stat("love", 70, 5)
                         $ LauraX.change_face("_normal", 0)
                         ch_l "Yeah, ok."
-                    "Hello Laura_sprite Laura_sprite Kinney.":
+                    "Hello Laura Kinney.":
                         $ LauraX.change_face("_confused", 0,mouth="_sucking")
                         ch_l "It's just-"
                         $ LauraX.change_face("_smile", 0,brows="_surprised")
@@ -1128,9 +1128,7 @@ label Laura_Love_End:
             $ LauraX.change_stat("inhibition", 30, 20)
             $ LauraX.change_stat("obedience", 70, 10)
             ch_l "Hmm. . ."
-            call shift_focus(LauraX)
-            $ primary_action = "sex"
-            call before_action
+            call before_action(LauraX, "sex")
         "I have something else in mind. . .[[choose another activity]":
             $ LauraX.brows = "_confused"
             $ LauraX.change_stat("obedience", 70, 25)
@@ -2602,7 +2600,7 @@ label Laura_Dressup3:
                 call Laura_First_Topless
                 call Laura_First_Bottomless (1)
                 pause 1
-                $ LauraX.change_outfit(LauraX.today_outfit_name,outfit_changed=1)
+                $ LauraX.change_outfit(LauraX.today_outfit_name,)
                 "And then puts on her usual outfit."
 
                 if approval_check(KittyX,1200):

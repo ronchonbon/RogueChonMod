@@ -1942,7 +1942,7 @@ label Jubes_Summon(approval_bonus=approval_bonus):
         elif JubesX.location in personal_rooms:
             ch_v "Yeah, see you."
             $ bg_current = JubesX.location
-            jump Misplaced
+            jump reset_location
         else:
             ch_v "Um, I'll just meet you in my room."
             $ JubesX.location = "bg_jubes"

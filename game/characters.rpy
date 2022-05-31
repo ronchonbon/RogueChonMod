@@ -393,7 +393,7 @@ init python:
                 self.petnames = ["Jubes", "Jubilee"]
 
             self.set_default_outfits()
-            self.change_outfit(6)
+            self.change_outfit("today")
 
             shop_inventory.extend(["DL", "G", "A"])
             personal_rooms.append(self.home)
@@ -432,15 +432,15 @@ init python:
 
             return
 
-        def change_stat(self, flavor, check, value, greater_than = False, Alt = [[], 0, 0], x_position = 0.75):
+        def change_stat(self, flavor, check, update, greater_than = False, Alt = [[], 0, 0]):
             if self in Alt[0]:
                 check = Alt[1] if Alt[1] else check
-                value = Alt[2] if Alt[2] else value
+                update = Alt[2] if Alt[2] else update
 
-            if flavor == "love" or flavor == "obedience" or flavor == "inhibition":
-                check = check*10
+            if flavor in ["love", "obedience", "inhibition"]:
+                check = 10*check
 
-            stat = getattr(self,flavor)
+            stat = getattr(self, flavor)
 
             Overflow = self.had_chat[4]
             x_position = self.sprite_location
@@ -450,50 +450,50 @@ init python:
 
             if greater_than:
                 if stat >= check:
-                    stat += value
+                    stat += update
                 else:
-                    value = 0
+                    update = 0
             else:
                 if stat <= check:
-                    stat += value
+                    stat += update
                 else:
-                    value = 0
+                    update = 0
 
             if self.tag == "Jean" and flavor == "inhibition" and self.IX > 0:
                 stat += self.IX
 
-            if value:
-                if self.tag == "Jean" and value > 0:
+            if update:
+                if self.tag == "Jean" and update > 0:
                     if flavor == "obedience" and self.obedience <= 800 and check < 800:
-                        value = int(value/2)
-                        stat -= value
+                        update = int(update/2)
+                        stat -= update
                     elif flavor == "inhibition" and self.IX > 0:
                         if self.taboo >= 40:
-                            value += value
-                            stat += value
+                            update += update
+                            stat += update
                         if stat > 1000:
                             self.IX -= (stat - 1000)
 
                             stat = 1000
-                            value = 0
+                            update = 0
                         elif stat > 700:
-                            self.IX -= int(value/2)
+                            self.IX -= int(update/2)
 
                         self.IX = 0 if self.IX < 0 else self.IX
                     elif flavor == "love" and stat >= 500 and self.obedience < 700:
                         if self.love < 500:
                             self.love = 500
 
-                            value = stat - 500
+                            update = stat - 500
 
-                        self.stored_stats += value
+                        self.stored_stats += update
 
                         if check > self.obedience:
                             flavor = "obedience"
-                            value = int(value/5)
-                            stat = self.obedience + value
+                            update = int(update/5)
+                            stat = self.obedience + update
                         else:
-                            value = 0
+                            update = 0
 
                 if flavor == "love":
                     Color = "#c11b17"
@@ -504,7 +504,7 @@ init python:
                 elif flavor == "lust":
                     Color = "#FAAFBE"
 
-                    call_holder(value, Color, x_position)
+                    call_holder(update, Color, x_position)
 
                     if flavor == "lust" and stat >= 100 and not primary_action:
                         renpy.call("Girl_Cumming", self, 1)
@@ -518,12 +518,12 @@ init python:
                     return
 
                 if stat > 1000:
-                    call_holder((-(stat-1000-value)), Color, x_position)
+                    call_holder((-(stat-1000-update)), Color, x_position)
 
                     if not self.had_chat[4]:
-                        value = 0
+                        update = 0
                     else:
-                        value = stat - 1000
+                        update = stat - 1000
 
                         setattr(self, flavor, 1000)
 
@@ -533,24 +533,24 @@ init python:
                             elif self.had_chat[4] == 2:
                                 flavor = "inhibition"
                             else:
-                                value = 0
+                                update = 0
                         elif flavor == "obedience":
                             if self.had_chat[4] == 3:
                                 flavor = "inhibition"
                             elif self.had_chat[4] == 4:
                                 flavor = "love"
                             else:
-                                value = 0
+                                update = 0
                         elif flavor == "inhibition":
                             if self.had_chat[4] == 5:
                                 flavor = "obedience"
                             elif self.had_chat[4] == 6:
                                 flavor = "love"
                             else:
-                                value = 0
+                                update = 0
 
-                        stat = getattr(self,flavor)
-                        stat += value
+                        stat = getattr(self, flavor)
+                        stat += update
 
                         if flavor == "love":
                             Color = "#c11b17"
@@ -561,8 +561,8 @@ init python:
                         else:
                             Color = "#FFFFFF"
 
-                if value:
-                    call_holder(value, Color, x_position)
+                if update:
+                    call_holder(update, Color, x_position)
 
             stat = 1000 if stat > 1000 else stat
 
@@ -851,42 +851,35 @@ init python:
 
             return
 
-        def change_outfit(self, outfit_name = None, got_dressed = 0, outfit_changed = True):
+        def change_outfit(self, outfit_name = None, got_dressed = 0, check_if_yoinked = False):
             outfit_name = outfit_name if outfit_name else self.outfit_name
 
             if self.location == bg_current and renpy.showing("night_mask", layer = 'nightmask') and time_index == 0:
                 return
 
-            if self.location not in ["bg_showerroom", "bg_pool"] or outfit_name not in ["nude", "swimwear", "shower"]:
+            if self.location not in ["bg_showerroom", "bg_pool"]:
                 self.wet = False
 
-            if self.spunk:
-                if "painted" not in self.daily_history or "cleaned" not in self.daily_history:
-                    for key in self.spunk.keys():
-                        self.spunk[key] = False
-
-            if self.upskirt or self.top_pulled_up or self.underwear_pulled_down:
-                undressed = 1
+            if any(self.spunk) and ("painted" not in self.daily_history or "cleaned" not in self.daily_history):
+                for key in self.spunk.keys():
+                    self.spunk[key] = False
 
             self.fix_clothing()
 
-            if outfit_name == 5:
+            if check_if_yoinked:
                 if "yoinked" in self.recent_history:
                     return
 
                 outfit_name = self.outfit_name
-            elif outfit_name == 6:
+            elif outfit_name == "today":
                 outfit_name = self.today_outfit_name
-
-                self.outfit_name = self.today_outfit_name
 
             if outfit_name != self.outfit_name:
                 outfit_changed = True
 
                 self.outfit_name = outfit_name
-
-            if self in Party and outfit_name == self.today_outfit_name:
-                outfit_name = self.outfit_name
+            else:
+                outfit_changed = False
 
             if outfit_name == "casual1":
                 outfit_holder = self.first_casual_outfit.copy()
@@ -911,10 +904,8 @@ init python:
             elif outfit_name == "costume":
                 outfit_holder = self.halloween_costume.copy()
             elif outfit_name == "swimwear":
-                if "_bikini_top" not in self.inventory or "_bikini_bottoms" not in self.inventory:
-                    self.outfit_name = self.today_outfit_name
-
-                    if "swim" not in self.daily_history:
+                if "swim" not in self.daily_history:
+                    if "_bikini_top" not in self.inventory or "_bikini_bottoms" not in self.inventory:
                         if self.tag == "Rogue":
                             ch_r("I don't really have any swimsuit I could wear. . .")
                         elif self.tag == "Kitty":
@@ -930,21 +921,23 @@ init python:
                         elif self.tag == "Jubes":
                             ch_v("I haven't picked out a suit yet. . .")
 
-                    return False
-                elif self.tag == "Kitty" and "_blue_skirt" not in self.inventory and self.inhibition <= 400:
-                    self.outfit_name = self.today_outfit_name
+                        self.outfit_name = self.today_outfit_name
 
-                    if "swim" not in self.daily_history:
+                        return False
+                    elif self.tag == "Kitty" and "_blue_skirt" not in self.inventory and self.inhibition <= 400:
+
                         ch_k("I don't know, I do have a suit, but it's a little daring. . .")
                         ch_k("If only I had a little skirt or something. . .")
 
-                    return False
+                        self.outfit_name = self.today_outfit_name
+
+                        return False
 
                 outfit_holder = self.swimwear.copy()
-            elif outfit_name == "bondage_outfit" and self.tag == "Jean":
-                outfit_holder = self.bondage_outfit.copy()
             elif outfit_name == "domme_outfit" and self.tag == "Emma":
                 outfit_holder = self.domme_outfit.copy()
+            elif outfit_name == "bondage_outfit" and self.tag == "Jean":
+                outfit_holder = self.bondage_outfit.copy()
 
             if not self.outfit["bottom"] and outfit_holder["bottom"]:
                 got_dressed = 1
@@ -959,8 +952,10 @@ init python:
 
             self.outfit = outfit_holder.copy()
 
-            if self.tag == "Emma" and outfit_holder["face_outer_accessory"] in ["_hat", "_wet_hat"]:
-                self.outfit["hair"] = "_wet" if outfit_holder["face_outer_accessory"] == "_wet_hat" else self.outfit["hair"]
+            if self.wet:
+                self.outfit["hair"] = "_wet"
+            elif self.tag == "Emma" and outfit_holder["face_outer_accessory"] == "_wet_hat":
+                self.outfit["hair"] = "_wet"
 
             if "ripped" in self.daily_history and "modesty" not in self.recent_history:
                 self.outfit["hose"] = "_ripped_pantyhose" if self.outfit["hose"] == "_pantyhose" else self.outfit["hose"]
@@ -970,7 +965,7 @@ init python:
                 if outfit_holder != "sleepwear" and outfit_holder != "gym_clothes":
                     self.outfit["underwear"] = ""
 
-            if not outfit_changed and outfit_holder == self.outfit_name and self.location == bg_current:
+            if self.location == bg_current and not outfit_changed:
                 if got_dressed == 2:
                     renpy.say(None, self.name + " throws on a towel.")
                 elif got_dressed:
@@ -978,10 +973,7 @@ init python:
 
             self.set_outfit_flags()
 
-            if got_dressed:
-                return 2
-
-            return 1
+            return True
 
         def set_default_outfits(self):
             self.outfit_name = "casual1"

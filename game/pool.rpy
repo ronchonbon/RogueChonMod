@@ -769,7 +769,6 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
     $ Girl.wet = 1
     $ round -= 20 if round >= 20 else round
     "You both swim around for a bit."
-    hide FullPool
     call set_the_scene (1, 0, 0)
 
     return
@@ -940,7 +939,6 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
     call RoomStatboost ("love", 80, 3)
     call RoomStatboost ("lust", 30, 5)
     $ round -= 20 if round >= 20 else round
-    hide FullPool
     call set_the_scene (1, 0, 0)
     "You all get out of the pool and rest for a bit."
 
@@ -959,10 +957,6 @@ label SwimSuit(temp_Girls=[]):
             $ temp_Girls[0].change_outfit("swimwear")
         $ temp_Girls.remove(temp_Girls[0])
     return
-
-image FullPool:
-
-    AlphaMask("bg_pool", "images/background/bg_pool_mask.png")
 
 label ShowPool(temp_Girls=[], PoolLoc=0):
 
@@ -993,7 +987,7 @@ label ShowPool(temp_Girls=[], PoolLoc=0):
             elif temp_Girls[0] == JubesX:
                 show Jubes_sprite standing zorder 50 at Pool_Bob(PoolLoc)
         $ temp_Girls.remove(temp_Girls[0])
-    show FullPool zorder 60
+
     return
 
 

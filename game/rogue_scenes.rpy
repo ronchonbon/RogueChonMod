@@ -1,7 +1,7 @@
 label prologue:
-    $ bg_current = "bg_study"
     $ time_index = 2
     $ current_time = "evening"
+    $ bg_current = "bg_study"
 
     scene background onlayer backdrop
     scene
@@ -42,11 +42,15 @@ label prologue:
     ch_x "Nonsense, my boy. You have an incredibly useful ability. . ."
     ch_x "the power to negate other powers, even including my own."
 
-    $ RogueX.location = bg_current
-    $ RogueX.change_face("_surprised")
+    $ RogueX.location = "bg_study"
+
+    call shift_focus(RogueX)
+
     $ RogueX.sprite_location = stage_far_right
 
     show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with easeinright
+
+    $ RogueX.change_face("_surprised")
 
     ch_r "What's that Prof? This new kid can negate mutant powers?"
 
@@ -123,16 +127,24 @@ label prologue:
             ch_r "Well I never!"
             ch_r "Hmph, I have to give the tour anyways, so get mov'in. . ."
 
+    hide Rogue_sprite with easeoutright
+
 label tour_start:
     $ bg_current = "bg_campus"
 
-    $ RogueX.location = bg_current
+    $ RogueX.location = "bg_campus"
+
+    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with easeinleft
 
     ch_r "This is the campus square. It links up to all the major locations on campus and you'll probably pass through here a lot."
 
+    hide Rogue_sprite with easeoutright
+
     $ bg_current = "bg_player"
 
-    $ RogueX.location = bg_current
+    $ RogueX.location = "bg_player"
+
+    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with easeinleft
 
     ch_r "This will be your room, we each get private rooms now that the campus has been expanded."
 
@@ -156,17 +168,25 @@ label tour_start:
     else:
         ch_r "You can stop by sometime, but not after curfew."
 
+    hide Rogue_sprite with easeoutright
+
     $ bg_current = "bg_classroom"
 
-    $ RogueX.location = bg_current
+    $ RogueX.location = "bg_classroom"
+
+    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with easeinright
 
     ch_r "And this is one of our state-of-the-art classrooms."
     ch_r "They're multi-purpose so they can teach almost anything in them."
     ch_r "This used to just be an after school training facility, but over the past few years it's grown into a full service university."
 
+    hide Rogue_sprite with easeoutright
+
     $ bg_current = "bg_dangerroom"
 
-    $ RogueX.location = bg_current
+    $ RogueX.location = "bg_dangerroom"
+
+    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with easeinleft
 
     ch_r "This is the Danger Room. It's been upgraded to a fully holographic experience, allowing realistic battlefield simulations."
 
@@ -196,10 +216,14 @@ label tour_start:
 
     ch_r "Moving on then. . ."
 
+    hide Rogue_sprite with easeoutleft
+
 label tour_end:
     $ bg_current = "bg_campus"
 
     $ RogueX.location = bg_current
+
+    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with easeinright
 
     ch_r "Well, that's the nickel tour, now you know where everything is. . ."
 
@@ -258,8 +282,7 @@ label tour_end:
 
                 $ RogueX.outfit["gloves"] = ""
                 $ RogueX.arm_pose = 2
-                $ RogueX.change_face("_sexy")
-                $ RogueX.brows = "_sad"
+                $ RogueX.change_face("_sexy", brows = "_sad")
 
                 "She pulls off her glove and touches your face."
         "Ok, be my guest.":
@@ -267,15 +290,13 @@ label tour_end:
             $ RogueX.change_face("_smile")
             $ RogueX.outfit["gloves"] = ""
             $ RogueX.arm_pose = 2
-            $ RogueX.change_face("_sexy")
-            $ RogueX.brows = "_sad"
+            $ RogueX.change_face("_sexy", brows = "_sad")
 
             "She pulls off her glove and touches your face."
         "No, that's weird.":
             $ RogueX.change_stat("love", 200, -30)
             $ RogueX.change_stat("inhibition", 200, 30)
-            $ RogueX.change_face("_sad")
-            $ RogueX.brows = "_normal"
+            $ RogueX.change_face("_sad", brows = "_normal")
 
             ch_r "Well I'm just too damned curious, sorry."
 
@@ -339,10 +360,7 @@ label tour_parting:
                 if simulation:
                     return True
 
-                $ focused_Girl = RogueX
-                $ primary_action = "kiss"
-
-                call action
+                call action(RogueX, "kiss")
 
                 if "_angry" in RogueX.recent_history:
                     $ RogueX.change_stat("love", 200, -10)
@@ -387,10 +405,9 @@ label tour_parting:
 
                     $ RogueX.emotion = "_normal"
 
-    hide Rogue_sprite
-    hide Rogue_sprite
-
     $ RogueX.location = "bg_rogue"
+
+    hide Rogue_sprite with easeoutright
 
     if simulation:
         return False
@@ -404,6 +421,7 @@ label Rogue_first_kiss:
     $ RogueX.blushing = "_blush2"
 
     call kiss_launch(RogueX)
+
     $ RogueX.action_counter["kiss"] += 1
 
     "She leans in for a kiss."
@@ -589,7 +607,7 @@ label Rogue_BF_Jerk:
     $ bg_current = "bg_player"
     call remove_girl (RogueX)
     call set_the_scene
-    jump Misplaced
+    jump reset_location
 
 
 
@@ -685,9 +703,9 @@ label Rogue_Love:
                 ch_r "Hmm. . ."
                 if simulation:
                     return True
-                call shift_focus(RogueX)
-                $ primary_action = "sex"
-                call action
+
+                call action(RogueX, "sex")
+
                 return
             "I have something else in mind. . .[[choose another activity]":
                 $ RogueX.brows = "_confused"

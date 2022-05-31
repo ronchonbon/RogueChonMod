@@ -223,10 +223,6 @@ layeredimage Emma_head:
         "images/Emma_standing/Emma_standing_eyes_closed_diamond.png"
     elif EmmaX.eyes == "_closed":
         "images/Emma_standing/Emma_standing_eyes_closed.png"
-    elif EmmaX.eyes == "_squint" and EmmaX.diamond:
-        "Emma_squinting_diamond"
-    elif EmmaX.eyes == "_squint":
-        "Emma_squinting"
     elif EmmaX.diamond:
         "Emma_blinking_diamond"
     else:

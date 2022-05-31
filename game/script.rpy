@@ -231,8 +231,6 @@ label start:
     # show Jubes_sprite standing at sprite_location(JubesX.sprite_location)
 
     # ""
-
-    # $ focused_Girl = RogueX
     # $ active_Girls = []
 
     jump prologue

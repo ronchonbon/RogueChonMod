@@ -84,7 +84,7 @@ layeredimage Jubes_sprite standing:
     if JubesX.outfit["piercings"] and JubesX.breasts_covered:
         "images/Jubes_standing/Jubes_standing_piercings_breasts[JubesX.outfit[piercings]]_covered.png"
 
-    if JubesX.outfit["jacket"] and JubesX.arm_pose == 2:
+    if JubesX.outfit["jacket"] == "_closed_jacket" and JubesX.arm_pose == 2:
         "images/Jubes_standing/Jubes_standing_sleeves[JubesX.outfit[jacket]][JubesX.arm_pose].png"
 
     if JubesX.outfit["suspenders"] and JubesX.suspenders_aside:
@@ -139,8 +139,6 @@ layeredimage Jubes_head:
 
     if JubesX.eyes == "_closed":
         "images/Jubes_standing/Jubes_standing_eyes_closed.png"
-    elif JubesX.eyes == "_squint":
-        "Jubes_squinting"
     else:
         "Jubes_blinking"
 

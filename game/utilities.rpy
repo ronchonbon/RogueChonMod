@@ -178,11 +178,7 @@ label checkout(total = False):
 
         $ multi_action = True
 
-        $ primary_action = None
-        $ offhand_action = None
-        $ girl_offhand_action = None
-        $ second_girl_primary_action = None
-        $ second_girl_offhand_action = None
+        call stop_all_actions
 
         $ position_timer = 100
 
@@ -695,10 +691,7 @@ label remove_girl(Girl, also_hide = True, hold = False):
     return
 
 label change_out_of_gym_clothes(Girls = []):
-    if Girls and Girls[0] in all_Girls:
-        pass
-    else:
-        $ Girls = all_Girls[:]
+    $ Girls = all_Girls[:] if not Girls else Girls
 
     python:
         for G in Girls:
@@ -707,6 +700,8 @@ label change_out_of_gym_clothes(Girls = []):
                     G.outfit_name = G.today_outfit_name
                 elif G.location == "bg_dangerroom":
                     G.outfit_name = "gym_clothes"
+
+            G.change_outfit()
 
     return
 
@@ -831,7 +826,7 @@ label event_calls(event_Girls=[]):
             return
         elif bg_current == "bg_player" and time_index < 2 and 0 < StormX.broken_up[0] <= 101 and "traveling" in Player.recent_history:
             call StormMeetWater
-            jump Misplaced
+            jump player_room
 
     if JubesX in active_Girls:
         if time_index < 3 and "sunshine" not in JubesX.history and "traveling" in Player.recent_history and bg_current in ("bg_classroom","bg_dangerroom","bg_campus","bg_pool"):
@@ -840,7 +835,7 @@ label event_calls(event_Girls=[]):
             return
         elif "mall" not in Player.history and "sunshine" in JubesX.history and time_index < 3 and JubesX.addiction < 50:
             call Jubes_Mall
-            jump Misplaced
+            jump reset_location
         elif not JubesX.event_happened[1] and JubesX.addiction < 50:
             $ JubesX.addiction += 5
 
@@ -928,27 +923,27 @@ label event_calls(event_Girls=[]):
                 elif bg_current == event_Girls[0].home or bg_current == "bg_player":
                     call expression event_Girls[0].tag + "_BF"
                 else:
-                    call AskedMeet (event_Girls[0], "_bemused")
+                    call ask_to_meet (event_Girls[0], "_bemused")
 
                 return
             elif "lover" not in event_Girls[0].player_petnames and event_Girls[0].love >= 950 and event_Girls[0].event_happened[6] < 15:
                 if bg_current == event_Girls[0].home or bg_current == "bg_player":
                     call expression event_Girls[0].tag + "_Love"
                 else:
-                    call AskedMeet (event_Girls[0], "_bemused")
+                    call ask_to_meet (event_Girls[0], "_bemused")
 
                 return
             elif "sir" not in event_Girls[0].history and "sir" not in event_Girls[0].player_petnames and event_Girls[0].obedience >= 500:
                 if bg_current == event_Girls[0].home or bg_current == "bg_player":
                     call expression event_Girls[0].tag + "_Sub"
                 else:
-                    call AskedMeet (event_Girls[0], "_bemused")
+                    call ask_to_meet (event_Girls[0], "_bemused")
                 return
             elif "master" not in event_Girls[0].history and "master" not in event_Girls[0].player_petnames and event_Girls[0].obedience >= 850 and event_Girls[0].event_happened[8] < 2:
                 if bg_current == event_Girls[0].home or bg_current == "bg_player":
                     call expression event_Girls[0].tag + "_Master"
                 else:
-                    call AskedMeet (event_Girls[0], "_bemused")
+                    call ask_to_meet (event_Girls[0], "_bemused")
 
                 return
             elif "daddy" not in event_Girls[0].player_petnames and approval_check(event_Girls[0], 750, "L") and approval_check(event_Girls[0], 500, "O") and approval_check(event_Girls[0], 500, "I"):
@@ -1012,48 +1007,35 @@ label event_calls(event_Girls=[]):
 
     return
 
-label display_girl(Girl, check_if_dressed = True, trigger_reset = True, x_position = None, y_position = 0):
-    if Girl not in Party and Girl.location != bg_current:
+label display_girl(Girl, check_if_dressed = True, reset_actions = True, x_position = None, y_position = 0):
+    if Girl.location != bg_current:
         call hide_girl(Girl)
-
-        $ Girl.change_outfit(outfit_changed = 1)
 
         return
 
     if check_if_dressed:
         if Girl.outfit_name == "swimwear":
             if Girl.location == "bg_pool":
-                $ Girl.change_outfit(outfit_changed = 1)
+                $ Girl.change_outfit()
             elif Girl.today_outfit_name != "swimwear":
-                $ Girl.outfit_name = Girl.today_outfit_name
-                $ Girl.change_outfit(outfit_changed = 1)
+                $ Girl.change_outfit(Girl.today_outfit_name)
         elif taboo:
-            $ Girl.change_outfit(outfit_changed = 1)
+            $ Girl.change_outfit()
         elif Girl.location != "bg_dangerroom" and Girl.today_outfit_name != "gym_clothes":
-            $ Girl.outfit_name = Girl.today_outfit_name
-            $ Girl.change_outfit(outfit_changed = 1)
+            $ Girl.change_outfit(Girl.today_outfit_name)
     elif Girl.location != "bg_showerroom" and Girl.location != "bg_pool":
         $ Girl.wet = False
 
-    if trigger_reset:
-        $ primary_action = None
-        $ offhand_action = None if offhand_action != "jerking_off" else "jerking_off"
-        $ girl_offhand_action = None
-        $ second_girl_primary_action = None
-        $ second_girl_offhand_action = None
+    if check_if_dressed:
+        call outfitShame (Girl)
 
-    if Partner == Girl:
-        $ x_position = stage_right
+    if reset_actions:
+        call stop_all_actions
 
     if x_position:
         $ Girl.sprite_location = x_position
     else:
         $ x_position = Girl.sprite_location
-
-    $ Girl.location = bg_current
-
-    if check_if_dressed:
-        call outfitShame (Girl)
 
     if bg_current == "bg_movies" or bg_current == "bg_restaurant":
         $ y_position = 250
@@ -1079,28 +1061,24 @@ label display_girl(Girl, check_if_dressed = True, trigger_reset = True, x_positi
 
     return
 
-label set_the_scene(character = True, entering = False, check_if_dressed = True, trigger_reset = True, silent = False):
+label set_the_scene(character = True, entering = False, check_if_dressed = True, reset_actions = True, silent = False):
     if not silent:
         show black_screen onlayer black
 
     if entering:
-        $ character = 0
+        $ character = False
 
         call hide_all
 
     if time_index >= 3:
         show night_mask onlayer nightmask
     else:
-        hide night_mask onlayer nightmask
+        hide night_mask
 
-    if trigger_reset:
-        $ primary_action = None
-        $ offhand_action = None if offhand_action != "jerking_off" else "jerking_off"
-        $ girl_offhand_action = None
-        $ second_girl_primary_action = None
-        $ second_girl_offhand_action = None
+    if reset_actions:
+        call stop_all_actions
 
-        $ trigger_reset = False
+        $ reset_actions = False
 
     if character:
         call check_who_is_present
@@ -1112,7 +1090,7 @@ label set_the_scene(character = True, entering = False, check_if_dressed = True,
                 $ temp_Girls[0].sprite_location = stage_right
                 $ temp_Girls[0].sprite_layer = 75
 
-            call display_girl(temp_Girls[0], check_if_dressed = check_if_dressed, trigger_reset = trigger_reset)
+            call display_girl(temp_Girls[0], check_if_dressed = check_if_dressed, reset_actions = False)
 
             $ temp_Girls.remove(temp_Girls[0])
 
@@ -1120,7 +1098,7 @@ label set_the_scene(character = True, entering = False, check_if_dressed = True,
             $ focused_Girl.sprite_location = stage_center
             $ focused_Girl.sprite_layer = 100
 
-            call display_girl(focused_Girl, check_if_dressed = check_if_dressed, trigger_reset = trigger_reset)
+            call display_girl(focused_Girl, check_if_dressed = check_if_dressed, reset_actions = False)
 
         if bg_current == "bg_study" and time_index < 3:
             show Xavier_sprite zorder 25 at sprite_location(stage_left)
@@ -1138,11 +1116,6 @@ label set_the_scene(character = True, entering = False, check_if_dressed = True,
         if StormX.location == "bg_teacher":
             $ StormX.change_outfit()
 
-    if bg_current != "bg_pool":
-        hide FullPool
-    if trigger_reset and check_if_dressed:
-        call Get_Dressed
-
     hide dress_screen
 
     if simulation:
@@ -1150,7 +1123,10 @@ label set_the_scene(character = True, entering = False, check_if_dressed = True,
     else:
         hide blue_screen onlayer black
 
-    hide black_screen onlayer black
+    call checkout(total = True)
+
+    if not silent:
+        hide black_screen onlayer black
 
     return
 
@@ -1332,6 +1308,8 @@ label girls_location(change = False):
 
     $ renpy.random.shuffle(temp_Girls)
 
+    call change_out_of_gym_clothes(temp_Girls)
+
     while temp_Girls:
         if "leaving" in temp_Girls[0].recent_history:
             if "sleepover" in temp_Girls[0].traits:
@@ -1381,35 +1359,67 @@ label stop_all_actions(visual = False):
 
     return
 
+label reset_outfits:
+    "This resets all customized clothing to their defaults."
+    menu:
+        "Do you want to continue?"
+        "Yes":
+            python:
+                for G in all_Girls:
+                    G.set_default_outfits()
 
+            "Done."
+            "You will now need to set their custom outfits again."
+        "No":
+            pass
 
+    return
 
+label get_last_name:
+    $ split_name = Player.name.split()
 
+    return "Mr. " + split_name[Player.name.count(" ")]
 
+label drain_all_words(word, recent = True, daily = True, traits = False):
+    $ temp_Girls = all_Girls[:]
 
-label AskedMeet(Girl=0, Emotion="_bemused", Why=0):
+    while temp_Girls:
+        $ temp_Girls[0].drain_word(word, recent, daily, traits)
 
+        $ temp_Girls.remove(temp_Girls[0])
+
+    return
+
+label ask_to_meet(Girl, emotion = "_bemused"):
     if "asked_to_meet" not in Girl.daily_history and Girl.location != bg_current:
-        $ Girl.change_face(Emotion)
+        $ Girl.change_face(emotion)
+
         "[Girl.name] asks if you could meet her in your room later."
-        $ Girl.add_word(1,"asked_to_meet","asked_to_meet",0,0)
-        $ Player.add_word(1,0,"meet girl",0,0)
+
+        $ Girl.add_word(1, "asked_to_meet","asked_to_meet", 0, 0)
+
+        $ Player.add_word(1, 0, "meet girl", 0, 0)
+
         if always_return_to_room:
             call return_to_room
+
     return
 
 label return_to_room:
     menu:
         "Return to your room and deal with that?"
         "Yes":
-            $ renpy.pop_call()
-            $ renpy.pop_call()
-
             jump player_room_entry
         "No":
             pass
 
     return
+
+
+
+
+
+
 
 menu Tutorial:
     "What did you want to know about?"
@@ -2058,7 +2068,9 @@ label clear_the_room(Character=0, Passive=0, Silent=0, Girls=[]):
                 call taboo_level
                 if not Silent:
                     "[Character.name] brings you back to her room. . ."
-                jump Misplaced
+
+                $ Girl = Character
+                jump girls_room
                 return
             else:
                 $ Girls[0].location = "bg_campus"
@@ -2651,7 +2663,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0):
 
             if line != "stay":
                 $ bg_current = "bg_player"
-                jump Misplaced
+                jump player_room
 
         elif Primary == RogueX:
             ch_r "Sorry, I wasn't expecting to bump into you here."
@@ -2983,7 +2995,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
 
         $ KittyX.change_outfit()
 
-        call display_girl (KittyX, trigger_reset=0)
+        call display_girl (KittyX, reset_actions=0)
 
         ch_k "Hi, [KittyX.player_petname]!"
 
@@ -2993,7 +3005,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
         $ Girl.location = bg_current
 
         if entering:
-            call display_girl (Girl, trigger_reset=0)
+            call display_girl (Girl, reset_actions=0)
 
             if bg_current == "bg_campus" or bg_current == "bg_pool":
                 "Suddenly, [Girl.name] rounds a corner."
@@ -3028,7 +3040,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
 
         $ JeanX.change_outfit()
 
-        call display_girl (JeanX, trigger_reset=0)
+        call display_girl (JeanX, reset_actions=0)
 
         ch_j "Hey, [JeanX.player_petname]!"
 
@@ -3064,7 +3076,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
                 $ Girl.location = bg_current
                 $ Girl.change_outfit()
 
-                call display_girl (Girl, trigger_reset=0)
+                call display_girl (Girl, reset_actions=0)
 
                 if Girl == RogueX:
                     ch_r "Hey, got a minute, [Girl.player_petname]?"
@@ -3077,7 +3089,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
                 elif Girl == JubesX:
                     ch_v "Hey, [Girl.player_petname]."
 
-                jump Misplaced
+                jump reset_location
             "Send her away":
                 ch_p "Er, sorry, could you come back later?"
 
@@ -3113,7 +3125,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
 
                             "snickt"
 
-                            call display_girl (Girl, trigger_reset=0)
+                            call display_girl (Girl, reset_actions=0)
 
                             "The door swings open."
 
@@ -3123,7 +3135,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
                         else:
                             "A thin mist passes under the door, and forms into a human shape."
 
-                            call display_girl (Girl, trigger_reset=0)
+                            call display_girl (Girl, reset_actions=0)
 
                             ch_v "Well, I wanted to talk."
 
@@ -3145,7 +3157,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
                         $ Girl.location = bg_current
                         $ Girl.change_outfit()
 
-                        call display_girl (Girl, trigger_reset=0)
+                        call display_girl (Girl, reset_actions=0)
 
                         "You hear some clicking from the door."
                         "The door swings open."
@@ -3185,7 +3197,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
                 "She seems uncomfortable with the situation and leaves the room."
                 "Perhaps you should ask her about it later."
 
-            jump Misplaced
+            jump reset_location
 
         if "poly " + current_Girl.tag in Girl.traits or (current_Girl in Player.Harem and Girl in Player.Harem):
             pass
@@ -3270,7 +3282,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
 
     call taboo_level
 
-    $ Girl.change_outfit(5)
+    $ Girl.change_outfit(check_if_yoinked = True)
     $ Player.drain_word("locked",0,0,1)
 
     call set_the_scene (1, 0, 0, 0)
@@ -3604,7 +3616,7 @@ label JumperCheck(Girls=[]):
         while Girls:
             call remove_girl (Girls[0])
             $ Girls.remove(Girls[0])
-        jump Misplaced
+        jump reset_location
     elif Girls:
 
         if Girls[0].location == bg_current:
@@ -3770,8 +3782,7 @@ label Jumped(Act=0):
     if Partner:
         call Girls_Noticed (Girls[0], 1)
 
-    $ primary_action = Act if Act else "kiss"
-    call before_action
+    call before_action(Girls[0], Act)
 
 label Quick_Sex(Girl=focused_Girl, Act=0):
 
@@ -4055,10 +4066,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
         else:
             call Seen_First_Peen (Girl, Partner, 1)
 
-    $ action_context = Girl
-
-    $ primary_action = Act if Act else "kiss"
-    call before_action
+    call before_action(Girl, Act, context = Girl)
 
 label Escalation(Girl=0):
 
@@ -4067,15 +4075,14 @@ label Escalation(Girl=0):
 
         return
 
-    $ action_context = Girl
-
     if primary_action == "fondle_breast" and approval_check(Girl,1050,taboo_modifier=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.action_counter["suck_breasts"]:
 
         if offhand_action == "suck_breasts":
             $ offhand_action = None
         $ Girl.change_stat("inhibition", 80, 2)
-        $ primary_action = "suck_breasts"
-        call before_action
+
+        call before_action(Girl, "suck_breasts", Girl)
+
         if "suck_breasts" in Girl.recent_history:
 
             $ renpy.pop_call()
@@ -4084,8 +4091,9 @@ label Escalation(Girl=0):
         if offhand_action == "fondle_thighs":
             $ offhand_action = None
         $ Girl.change_stat("inhibition", 80, 4)
-        $ primary_action = "fondle_pussy"
-        call before_action
+
+        call before_action(Girl, "fondle_thighs", Girl)
+
         if "fondle_pussy" in Girl.recent_history:
 
             $ renpy.pop_call()
@@ -4095,24 +4103,24 @@ label Escalation(Girl=0):
     elif primary_action == "handjob" and approval_check(Girl,1200,taboo_modifier=4) and Girl.lust >= 30 and Girl.action_counter["blowjob"]:
 
         $ Girl.change_stat("inhibition", 80, 3)
-        $ primary_action = "blowjob"
-        call before_action
+
+        call before_action(Girl, "blowjob", Girl)
         if "blowjob" in Girl.recent_history:
 
             $ renpy.pop_call()
     elif primary_action not in ("sex","anal") and approval_check(Girl,1400,taboo_modifier=5,Alt=[[JeanX],1200]) and Girl.lust >= 60 and Girl.action_counter["sex"] >= 3:
 
         $ Girl.change_stat("inhibition", 80, 4)
-        $ primary_action = "sex"
-        call before_action
+
+        call before_action(Girl, "sex", Girl)
         if "sex" in Girl.recent_history:
 
             $ renpy.pop_call()
     elif primary_action != "anal" and approval_check(Girl,1400,taboo_modifier=5,Alt=[[JeanX],1200]) and Girl.lust >= 70 and Girl.action_counter["anal"] >= 5:
 
         $ Girl.change_stat("inhibition", 80, 5)
-        $ primary_action = "anal"
-        call before_action
+
+        call before_action(Girl, "anal", Girl)
         if "anal" in Girl.recent_history:
 
             $ renpy.pop_call()
@@ -4223,7 +4231,7 @@ label Sex_Dialog(Primary=focused_Girl, Secondary=0, TempFocus=0, PrimaryLust=0, 
 
 
             call stop_all_actions
-        jump Misplaced
+        jump reset_location
 
     call Dirty_Talk
 
@@ -4350,7 +4358,7 @@ label primary_action_Swap(Active=0, primary_actionX1=primary_action, primary_act
             $ renpy.pop_call()
             jump Jubes_SMenu
     else:
-        call set_the_scene (Dress=0, trigger_reset=0, silent = True)
+        call set_the_scene (Dress=0, reset_actions=0, silent = True)
         $ renpy.pop_call()
         $ renpy.pop_call()
         call SkipTo(Girl)
@@ -5450,10 +5458,10 @@ label Girls_taboo(Girl=0, counter=1, Choice=0, D20=0):
             show black_screen onlayer black
             call reset_position(Girl)
             call remove_girl (Girl)
-            $ Girl.change_outfit(outfit_changed=0)
+            $ Girl.change_outfit()
             hide black_screen onlayer black
             $ bg_current = "bg_player"
-            jump Misplaced
+            jump player_room
     elif "exhibitionist" not in Girl.traits:
         $ Girl.change_face("_sly")
         if Girl == JeanX and "nowhammy" not in JeanX.traits:
@@ -5516,7 +5524,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0):
             ch_e "If the two of you cannot keep your hands off each other, please do so elsewhere. . ."
             "She shoves the two of you out of her room and slams the door."
             $ Girl.location = "bg_player"
-            jump Misplaced
+            jump player_room
         call remove_girl (EmmaX)
         if not Silent:
             "She seems uncomfortable with the situation and leaves the room."
@@ -5755,7 +5763,7 @@ label Sex_Over(Clothes = True, Girls = None):
         python:
             for G in all_Girls:
                 if G.location == bg_current:
-                    if G.change_outfit(outfit_changed=1) == 2:
+                    if G.change_outfit() == 2:
                         if line:
                             line = line + " and " + G.name
                         else:
@@ -5976,43 +5984,5 @@ label Girl_TightsRipped(Girl=0, Count=0):
             $ Girl.blushing = "_blush1"
             call remove_girl (Girl)
             $ Girl.change_outfit()
-
-    return
-
-
-
-
-
-
-
-label reset_outfits:
-    "This resets all customized clothing to their defaults."
-    menu:
-        "Do you want to continue?"
-        "Yes":
-            python:
-                for G in all_Girls:
-                    G.set_default_outfits()
-
-            "Done."
-            "You will now need to set their custom outfits again."
-        "No":
-            pass
-
-    return
-
-
-
-label get_last_name:
-    $ split_name = Player.name.split()
-
-    return "Mr. " + split_name[Player.name.count(" ")]
-
-label drain_all_words(word=0, Recent=1, Daily=1, Traits=0):
-    $ temp_Girls = all_Girls[:]
-
-    while temp_Girls:
-        $ temp_Girls[0].drain_word(word,Recent,Daily,Traits)
-        $ temp_Girls.remove(temp_Girls[0])
 
     return

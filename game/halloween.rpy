@@ -281,7 +281,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
     $ RogueX.add_word(1,0,RogueX.outfit["hair"],0,"halloween")
     $ RogueX.outfitday = "costume"
     $ RogueX.outfit_name = RogueX.outfitday
-    $ RogueX.change_outfit(outfit_changed=1)
+    $ RogueX.change_outfit()
 
     call shift_focus (RogueX)
     show Rogue_sprite standing at sprite_location(1200,50):
@@ -442,7 +442,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
     $ KittyX.add_word(1,0,KittyX.outfit["hair"],0,"halloween")
     $ KittyX.outfitday = "costume"
     $ KittyX.outfit_name = KittyX.outfitday
-    $ KittyX.change_outfit(outfit_changed=1)
+    $ KittyX.change_outfit()
 
     call shift_focus (KittyX)
     show Kitty_sprite standing at sprite_location(1200,50):
@@ -611,7 +611,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
     $ LauraX.add_word(1,0,LauraX.outfit["hair"],0,"halloween")
     $ LauraX.outfitday = "costume"
     $ LauraX.outfit_name = LauraX.outfitday
-    $ LauraX.change_outfit(outfit_changed=1)
+    $ LauraX.change_outfit()
 
     call shift_focus (LauraX)
     show Laura_sprite standing at sprite_location(1200,50):
@@ -833,7 +833,7 @@ label Halloween_Jean:
     $ JeanX.add_word(1,0,JeanX.outfit["hair"],0,"halloween")
     $ JeanX.outfitday = "costume"
     $ JeanX.outfit_name = JeanX.outfitday
-    $ JeanX.change_outfit(outfit_changed=1)
+    $ JeanX.change_outfit()
 
     call shift_focus (JeanX)
     show Jean_sprite standing at sprite_location(1200,50):
@@ -1087,7 +1087,7 @@ label Halloween_Jean:
     $ StormX.add_word(1,0,StormX.outfit["hair"],0,"halloween")
     $ StormX.outfitday = "costume"
     $ StormX.outfit_name = StormX.outfitday
-    $ StormX.change_outfit(outfit_changed=1)
+    $ StormX.change_outfit()
 
     call shift_focus (StormX)
     show Storm_sprite standing at sprite_location(1200,50):
@@ -1254,7 +1254,7 @@ label Halloween_Emma:
     $ EmmaX.add_word(1,0,EmmaX.outfit["hair"],0,"halloween")
     $ EmmaX.outfitday = "costume"
     $ EmmaX.outfit_name = EmmaX.outfitday
-    $ EmmaX.change_outfit(outfit_changed=1)
+    $ EmmaX.change_outfit()
 
     call shift_focus (EmmaX)
     show Emma_sprite standing at sprite_location(-200,50):
@@ -1541,7 +1541,7 @@ label Halloween_Skip:
         $ Options[0].location = "HW Party"
         $ Options[0].outfitday = "costume"
         $ Options[0].outfit_name = EmmaX.outfitday
-        $ Options[0].change_outfit(outfit_changed=1)
+        $ Options[0].change_outfit()
         $ Options[0].add_word(1,0,0,0,"halloween")
 
         $ Options.remove(Options[0])
@@ -1649,6 +1649,6 @@ label Halloween_Ending(Girl=0):
         elif Girl == StormX:
             ch_s "Whew. . . I quite enjoyed that party. . ."
             ch_s "What was it that you wished to discuss?"
-    jump Misplaced
+    jump reset_location
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

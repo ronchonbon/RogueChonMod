@@ -119,7 +119,7 @@ label StormMeet:
         "You return to your room."
         $ bg_current = "bg_player"
         $ Player.add_word(1,0,"noattic",0,0)
-        jump Misplaced
+        jump reset_location
 
     $ Player.history.remove("attic")
     $ bg_current = "bg_storm"
@@ -446,7 +446,7 @@ label StormMeet:
 
     $ round -= 20
     $ bg_current = "bg_player"
-    jump Misplaced
+    jump reset_location
 
     return
 
@@ -712,7 +712,7 @@ label Storm_Teacher_Caught(Girl=0):
     $ Player.reputation -= 1
     ch_s "Thank you."
 
-    jump Misplaced
+    jump reset_location
 
 
 
@@ -832,9 +832,8 @@ label Storm_Hairtalk:
                 $ StormX.change_stat("obedience", 80, 1)
                 $ StormX.change_stat("inhibition", 80, 1)
                 ch_s "I. . . suppose that I might accomodate that. . ."
-                call shift_focus(StormX)
-                $ primary_action = "kiss"
-                call before_action
+
+                call before_action(StormX, "kiss")
             else:
                 $ StormX.change_stat("obedience", 80, -1)
                 ch_s "I do not think that I should do that. . ."
@@ -850,8 +849,8 @@ label Storm_Hairtalk:
                 ch_s "I. . . suppose that I might accomodate that. . ."
                 $ StormX.change_stat("obedience", 50, 2)
                 $ StormX.change_stat("obedience", 80, 1)
-                $ primary_action = "fondle_breasts"
-                call before_action
+
+                call before_action(StormX, "fondle_breasts")
             else:
                 $ StormX.change_face("_angry", 2)
                 ch_s "[StormX.player_petname]!"
@@ -2295,9 +2294,8 @@ label Storm_Poolnight:
             ch_s "Have fun then. . ."
             "You head back to your room."
             $ bg_current = "bg_player"
-            jump Misplaced
+            jump reset_location
     hide Storm_sprite
-    hide FullPool
     call set_the_scene(check_if_dressed = False)
     $ StormX.change_face("_sly", 1,eyes="_leftside")
     ch_s "Now that you have me, [StormX.player_petname]. . ."

@@ -53,7 +53,7 @@ layeredimage Kitty_sprite standing:
     always:
         "Kitty_spunk_animations"
 
-    if KittyX.outfit["bottom"] and (KittyX.bottom_pulled_down or KittyX.upskirt):
+    if KittyX.outfit["bottom"] in ["_dress", "_skirt"] and KittyX.upskirt:
         "images/Kitty_standing/Kitty_standing_bottom[KittyX.outfit[bottom]]_down.png"
     elif KittyX.outfit["bottom"]:
         "images/Kitty_standing/Kitty_standing_bottom[KittyX.outfit[bottom]].png"
@@ -122,8 +122,6 @@ layeredimage Kitty_head:
 
     if KittyX.eyes == "_closed":
         "images/Kitty_standing/Kitty_standing_eyes_closed.png"
-    elif KittyX.eyes == "_squint":
-        "Kitty_squinting"
     else:
         "Kitty_blinking"
 
