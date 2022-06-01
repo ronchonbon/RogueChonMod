@@ -751,7 +751,7 @@ label Flirt(Girl=0):
             "Slap her ass":
 
 
-                call Slap_Ass (Girl)
+                call slap_ass (Girl)
             "Pinch her ass":
 
                 $ Girl.change_face("_surprised", 1)
@@ -1270,7 +1270,7 @@ label Flirt(Girl=0):
                     $ Girl.change_face("_angry")
                     $ Girl.change_stat("love", 90, -5)
                     $ Girl.change_stat("love", 60, -5)
-                    call Punch
+                    call punch
                     if Girl == RogueX:
                         "She slaps your hand away and smacks your face."
                         ch_r "What the fuck, [Girl.player_petname]?"
@@ -1473,32 +1473,32 @@ label Flirt(Girl=0):
                         $ Girl.change_stat("love", 90, -5)
                         if Girl == RogueX:
                             ch_r "Back the hell off, [Girl.player_petname]!"
-                            call Punch
+                            call punch
                             "She slaps your hand away and smacks your face."
                             ch_r "What the fuck, [Girl.player_petname]?"
                         elif Girl == KittyX:
                             ch_k "Back it up, [Girl.player_petname]!"
-                            call Punch
+                            call punch
                             "She elbows you in the ribs."
                             ch_k "WTF, [Girl.player_petname]?"
                         elif Girl == EmmaX:
                             ch_e "Time to stop, [Girl.player_petname]."
-                            call Punch
+                            call punch
                             "She elbows you in the ribs."
                             ch_e "You should learn from social cues. . ."
                         elif Girl == LauraX:
                             ch_l "Take a step back, [Girl.player_petname]!"
-                            call Punch
+                            call punch
                             "She gives you a quick shove."
                         elif Girl == JeanX:
                             $ JeanX.eyes = "_psychic"
-                            call Punch
+                            call punch
                             "You feel something slam the back of your head."
                             ch_j "Ok, that's good."
                             $ JeanX.eyes = "_squint"
                         elif Girl == StormX:
                             ch_s "That is enough, [Girl.player_petname]."
-                            call Punch
+                            call punch
                             "She elbows you in the ribs."
                             ch_s "Everything in moderation. . ."
                         elif Girl == JubesX:
@@ -1674,7 +1674,7 @@ label Flirt(Girl=0):
                             $ Girl.change_stat("love", 90, 2)
                             $ Girl.change_stat("obedience", 60, 3)
                             $ Girl.change_stat("inhibition", 60, 3)
-                            call before_action(Girl, "fondle_breasts")
+                            call before_action(Girl, "fondle_breasts", None)
                             call stop_all_actions (1)
                             return
                         "Nah, that was enough.":
@@ -2247,7 +2247,12 @@ label Compliment(Girl=0, line0=0, line1=0, line2=0, Options=[], CountList=[], li
                 ch_s "You pay too close attention to my body."
             elif Girl == JubesX:
                 ch_v "Ok, weirdo. . ."
-            $ Girl.blushing -= 1
+
+            if Girl.blushing == "_blush2":
+                $ Girl.blushing = "_blush1"
+            else:
+                $ Girl.blushing = ""
+
             $ Girl.mouth = "_normal"
 
     elif line == 6:

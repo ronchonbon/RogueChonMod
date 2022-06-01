@@ -157,9 +157,10 @@ label auto_rejected_reactions(Girl, action):
         call what_do_you_think_youre_doing_lines(Girl, action)
         call what_do_you_think_youre_doing_menu(Girl, action)
 
-        return _return
+        if _return == "accepted":
+            return "accepted"
 
-    return False
+    return "rejected"
 
 label pullback_reactions(Girl, action):
     $ Girl.change_face("_surprised")
@@ -194,7 +195,7 @@ label daily_action_reactions(Girl, action):
     return
 
 label first_time_asking_reactions(Girl, action):
-    if primary_action != "footjob":
+    if primary_action in ["footjob", "masturbation"]:
         $ Girl.change_face("_surprised", 1)
         $ Girl.mouth = "_kiss"
 
@@ -224,7 +225,10 @@ label first_time_asking_reactions(Girl, action):
     if Girl.forced:
         $ Girl.change_face("_sad")
 
-        call first_time_forcing_lines(Girl, action)
+        if action == "masturbation":
+            call action_forcefully_approved_lines(Girl, "masturbation")
+        else:
+            call first_time_forcing_lines(Girl, action)
 
     return
 
@@ -254,7 +258,7 @@ label definitely_bored_now_reactions(Girl, action):
 
     call try_something_else_menu(Girl, action)
 
-    return
+    return _return
 
 label unsatisfied_reactions(Girl, action):
     $ Girl.change_face("_angry")
@@ -617,9 +621,9 @@ label girl_initiated_action(Girl, action):
 
                 $ Girl.add_word(1,"refused","refused")
 
-                return True
+                return "rejected"
 
-    return False
+    return "accepted"
 
 label first_action_approval(Girl, action):
     if Girl.forced:
@@ -762,13 +766,13 @@ label action_approved(Girl, action):
 
         call recent_action_lines(Girl, action)
 
-        return True
+        return "accepted"
     elif action in Girl.daily_history:
         $ Girl.change_face("_sexy", 1)
 
         call daily_action_lines(Girl, action)
 
-        return True
+        return "accepted"
     elif Girl.action_counter[action] < 3:
         $ Girl.change_face("_sexy", 1)
         $ Girl.brows = "_confused"
@@ -781,7 +785,7 @@ label action_approved(Girl, action):
 
         call used_to_action_lines(Girl, action)
 
-    return False
+    return "rejected"
 
 label action_disapproved(Girl, action):
     if action in fondle_actions:
@@ -831,7 +835,7 @@ label action_disapproved(Girl, action):
     if _return:
         return _return
     else:
-        return False
+        return "rejected"
 
 label action_accepted(Girl, action):
     $ Girl.change_face("_bemused", 1)
@@ -906,10 +910,10 @@ label forced_action(Girl, action):
         if approval < 2:
             $ Girl.forced = 1
 
-        return True
+        return "accepted"
     else:
         call forced_rejected_reactions(Girl, action)
 
         $ Girl.add_word(1, "_angry", "_angry")
 
-    return False
+    return "rejected"

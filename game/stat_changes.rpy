@@ -397,7 +397,7 @@ label forced_action_accepted_changes(Girl, action):
         $ Girl.change_stat("love", 20, -2, 1)
         $ Girl.change_stat("obedience", 90, 2)
         $ Girl.change_stat("inhibition", 60, 2)
-    elif action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal"]:
+    elif action in ["masturbation", "handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal"]:
         $ Girl.change_stat("inhibition", 60, 1)
         $ Girl.change_stat("obedience", 90, 1)
     elif action in ["hotdog"]:
@@ -407,7 +407,7 @@ label forced_action_accepted_changes(Girl, action):
     return
 
 label not_forced_action_accepted_changes(Girl, action):
-    if action in ["finger_pussy"]:
+    if action in ["finger_pussy", "masturbation"]:
         $ Girl.change_stat("love", 90, 1)
         $ Girl.change_stat("inhibition", 50, 3)
     elif action in ["eat_pussy", "finger_ass"]:
@@ -433,7 +433,7 @@ label action_accepted_changes(Girl, action):
     if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy"]:
         $ Girl.change_stat("love", 90, 1)
         $ Girl.change_stat("inhibition", 50, 3)
-    elif action in ["finger_pussy", "eat_pussy", "finger_ass"]:
+    elif action in ["masturbation", "finger_pussy", "eat_pussy", "finger_ass"]:
         $ Girl.change_stat("obedience", 20, 1)
         $ Girl.change_stat("obedience", 60, 1)
         $ Girl.change_stat("inhibition", 70, 2)

@@ -405,9 +405,9 @@ label dildo_check(Girl):
     else:
         "You don't have one of those on you."
 
-        return False
+        return "not_found"
 
-    return True
+    return "found"
 
 label vibrator_check(Girl):
     if "_vibrator" in Player.inventory:
@@ -417,9 +417,9 @@ label vibrator_check(Girl):
     else:
         "You don't have one of those on you."
 
-        return False
+        return "not_found"
 
-    return True
+    return "found"
 
 
 

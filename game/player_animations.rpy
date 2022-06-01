@@ -473,7 +473,7 @@ layeredimage Rogue_doggy_finger_anal_animations:
 
 
 
-image Slap_Ass:
+image slap_ass:
     contains:
         "UI_Hand"
         zoom 1
@@ -490,7 +490,7 @@ image Slap_Ass:
                 ease 0.2 ypos 520
                 pause 0.9
 
-image NotSlap_Ass:
+image Notslap_ass:
     contains:
         "UI_Hand"
         zoom 1

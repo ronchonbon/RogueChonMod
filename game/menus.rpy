@@ -201,7 +201,7 @@ label girl_sex_menu(Girl):
                         call Girl_Cleanup(focused_Girl,"ask")
                     "Could I watch you get yourself off?":
                         if focused_Girl.remaining_actions:
-                            call expression focused_Girl.tag + "_Masturbate"
+                            call masturbate(focused_Girl)
                         else:
                             call out_of_action_lines(focused_Girl)
 
@@ -356,7 +356,7 @@ label girl_sex_menu(Girl):
 
                     $ having_sex = False
 
-        if _return:
+        if _return == "stop":
             $ having_sex = False
 
     $ Girl.change_face()
@@ -658,74 +658,74 @@ label begging_menu(Girl, action):
         "Just get at it already." if action == "masturbation":
             call forced_action(Girl, action)
 
-            if _return:
+            if _return == "accepted":
                 return action
         "[[Start caressing her thigh anyway]" if action == "fondle_thighs":
             call forced_action(Girl, action)
 
-            if _return:
+            if _return == "accepted":
                 return action
         "[[Grab her chest anyway]" if action == "fondle_breasts":
             call forced_action(Girl, action)
 
-            if _return:
+            if _return == "accepted":
                 return action
         "[[Start sucking anyway]" if action == "suck_breasts":
             call forced_action(Girl, action)
 
-            if _return:
+            if _return == "accepted":
                 return action
         "[[Start fondling anyway]" if action in ["fondle_pussy", "fondle_ass"]:
             call forced_action(Girl, action)
 
-            if _return:
+            if _return == "accepted":
                 return action
         "[[Get in there anyway]" if action == "eat_pussy":
             call forced_action(Girl, action)
 
-            if _return:
+            if _return == "accepted":
                 return action
         "[[Slide a finger in anyway]" if action == "finger_ass":
             call forced_action(Girl, action)
 
-            if _return:
+            if _return == "accepted":
                 return action
         "[[Start licking anyway]" if action in ["eat_pussy", "eat_ass"]:
             call forced_action(Girl, action)
 
-            if _return:
+            if _return == "accepted":
                 return action
         "Come on, get to work." if action in ["handjob", "footjob"]:                                               # Pressured into it
             call forced_action(Girl, action)
 
-            if _return:
+            if _return == "accepted":
                 return action
         "Come on, let me fuck those titties, [Girl.player_petname]" if action in ["titjob"]:
             $ Girl.name_check() #checks reaction to petname
 
             call forced_action(Girl, action)
 
-            if _return:
+            if _return == "accepted":
                 return action
         "Suck it, [Girl.player_petname]" if action in ["blowjob"]:                                               # Pressured into it
             $ Girl.name_check() #checks reaction to petname
 
             call forced_action(Girl, action)
 
-            if _return:
+            if _return == "accepted":
                 return action
         "[[Press it against her.]]" if action in ["dildo_pussy", "dildo_ass"]:
             call forced_action(Girl, action)
 
-            if _return:
+            if _return == "accepted":
                 return action
         "Bend over." if action in ["sex", "anal", "hotdog"]:
             call forced_action(Girl, action)
 
-            if _return:
+            if _return == "accepted":
                 return action
 
-    return False
+    return "rejected"
 
 label try_something_else_menu(Girl, action):
     menu:
@@ -777,9 +777,9 @@ label try_something_else_menu(Girl, action):
         "Finish up.":
             "You let go. . ."
 
-            return [None, "shift"]
+            return [None, "switch"]
         "Let's try something else." if multi_action:
-            return [None, "shift"]
+            return [None, "switch"]
         "No, this is fun.":
             if approval_check(Girl, 1200) or approval_check(Girl, 500, "O"):
                 $ Girl.change_stat("love", 200, -5)
@@ -804,7 +804,7 @@ label try_something_else_menu(Girl, action):
 
                 return [None, "stop"]
 
-    return
+    return [None, "continue"]
 
 label girl_unsatisfied_menu(Girl, action):
     if action in sex_actions:
@@ -817,32 +817,41 @@ label girl_unsatisfied_menu(Girl, action):
             "No, I'm done." if Player.semen:
                 "You pull back."
 
-                return True
+                return "stop"
             "No, I'm spent." if not Player.semen:
                 "You pull back."
 
-                return True
+                return "stop"
     else:
         "[Girl.name] still seems a bit unsatisfied with the experience."
 
-        "Finish her?"
-        menu:
-            extend ""
-            "Yes, keep going for a bit.":
-                $ line = "You get back into it."
-            "No, I'm done.":
-                "You pull back."
+        if action == "masturbation":
+            menu:
+                "Let her keep going?"
+                "Yes, keep going for a bit.":
+                    $ line = "You let her get back into it"
+                "No, I'm done.":
+                    "You ask her to stop."
 
-                return True
+                    return "stop"
+        else:
+            menu:
+                "Finish her?"
+                "Yes, keep going for a bit.":
+                    $ line = "You get back into it."
+                "No, I'm done.":
+                    "You pull back."
 
-    return
+                    return "stop"
+
+    return "continue"
 
 label kiss_menu(Girl, action):
     menu:
         "Keep going. . .":
             pass
         "Slap her ass":
-            call Slap_Ass(Girl)
+            call slap_ass(Girl)
 
             $ counter += 1
             $ round -= 1
@@ -858,6 +867,9 @@ label kiss_menu(Girl, action):
             $ Player.focusing = 0
         "Start jack'in it." if multi_action and offhand_action != "jerking_off":
             call jerking_off(Girl)
+
+            if _return == "stop":
+                return [None, "stop"]
         "Stop jack'in it." if multi_action and offhand_action == "jerking_off":
             "You stop jack'in it."
 
@@ -868,8 +880,14 @@ label kiss_menu(Girl, action):
                     if Girl.remaining_actions and multi_action:
                         call set_offhand_action(Girl)
 
-                        if _return:
-                            return _return
+                        if _return == "stop":
+                            return [None, "stop"]
+                        elif _return != "continue":
+                            $ action = _return[0]
+
+                            $ context = _return[1]
+
+                            return [action, context]
 
                         if offhand_action:
                              $ Girl.remaining_actions -= 1
@@ -919,7 +937,90 @@ label kiss_menu(Girl, action):
 
             return [None, "stop"]
 
-    return [None, None]
+    return [None, "continue"]
+
+label masturbation_menu(Girl, action):
+    menu:
+        "Keep Watching.":
+            pass
+        "[Girl.name]. . .[[jump in]" if "unseen" not in Girl.recent_history and "join" not in Player.recent_history and Girl.location == bg_current:
+            "[Girl.name] slows what she's doing with a sly grin."
+
+            call masturbation_join_in_lines(Girl, primary_action)
+            call masturbate(Girl, "join")
+        "\"Ahem. . .\"" if "unseen" in Girl.recent_history:
+            return "interrupt"
+        "Start jack'in it." if offhand_action != "jerking_off":
+            call jerking_off(Girl)
+
+            if _return == "stop":
+                return "stop"
+        "Stop jack'in it." if offhand_action == "jerking_off":
+            $ offhand_action = None
+        "Slap her ass" if Girl.location == bg_current:
+            if "unseen" in Girl.recent_history:
+                "You smack [Girl.name] firmly on the ass!"
+
+                return "interrupt"
+            else:
+                call slap_ass (Girl)
+
+                $ counter += 1
+                $ round -= 1
+        "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
+            pass
+        "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
+            "You concentrate on not burning out too quickly."
+
+            $ Player.focusing = 1
+        "Release your focus." if Player.focusing:
+            "You release your concentration. . ."
+
+            $ Player.focusing = 0
+        "Change what I'm doing":
+            menu:
+                "Threesome actions" if Girl.location == bg_current and Partner and "unseen" not in Girl.recent_history:
+                    menu:
+                        "Ask [Partner.name] to do something else":
+                            call Three_Change(Girl)
+                        "Swap to [Partner.name]":
+                            call shift_focus(Partner)
+                        "Undress [Partner.name]":
+                            call Girl_Undress(Partner)
+                        "Clean up [Partner.name]" if any(Partner.spunk):
+                            call Girl_Cleanup (Partner, "ask")
+                        "Never mind":
+                            pass
+                "Show her feet" if not show_feet and Girl.pose in ["sex", "doggy"]:
+                    $ show_feet = True
+                "Hide her feet" if show_feet and Girl.pose in ["sex", "doggy"]:
+                    $ show_feet = False
+                "Undress [Girl.name]":
+                    if "unseen" in Girl.recent_history:
+                        ch_p "Oh, yeah, take it off. . ."
+
+                        return "interrupt"
+                    else:
+                        call Girl_Undress(Girl)
+                "Clean up [Girl.name]" if any(Girl.spunk):
+                    if "unseen" in Girl.recent_history:
+                        ch_p "You've got a little something on you. . ."
+
+                        return "interrupt"
+                    else:
+                        call Girl_Cleanup(Girl, "ask")
+                "Never mind":
+                    pass
+        "Back to Sex Menu" if multi_action and Girl.location == bg_current:
+            ch_p "Let's try something else."
+
+            return "switch"
+        "End Scene" if not multi_action or Girl.location != bg_current:
+            ch_p "Let's stop for now."
+
+            return "stop"
+
+    return "continue"
 
 label fondle_menu(Girl, action):
     menu:
@@ -939,7 +1040,7 @@ label fondle_menu(Girl, action):
         "Pull out. . ." if action == "finger_pussy":
             return ["fondle_pussy", "pullback"]
         "Slap her ass":
-            call Slap_Ass(Girl)
+            call slap_ass(Girl)
 
             $ counter += 1
             $ round -= 1
@@ -961,8 +1062,14 @@ label fondle_menu(Girl, action):
                     if Girl.remaining_actions and multi_action:
                         call set_offhand_action(Girl)
 
-                        if _return:
-                            return _return
+                        if _return == "stop":
+                            return [None, "stop"]
+                        elif _return != "continue":
+                            $ action = _return[0]
+
+                            $ context = _return[1]
+
+                            return [action, context]
 
                         if offhand_action:
                             $ Girl.remaining_actions -= 1
@@ -994,7 +1101,7 @@ label fondle_menu(Girl, action):
                             "I want to stick a dildo in." if action in ["fondle_pussy", "finger_pussy", "eat_pussy"]:
                                 call dildo_check(Girl)
 
-                                if _return:
+                                if _return == "found":
                                     return ["dildo_pussy", "shift"]
                             "Pull out and start rubbing again." if action in ["finger_pussy"]:
                                 return ["fondle_pussy", "pullback"]
@@ -1009,7 +1116,7 @@ label fondle_menu(Girl, action):
                             "I want to stick a dildo in." if action in ["fondle_ass", "finger_ass", "eat_ass"]:
                                 call dildo_check(Girl)
 
-                                if _return:
+                                if _return == "found":
                                     return ["dildo_ass", "shift"]
                             "Pull out and start rubbing again." if action in ["finger_ass"]:
                                 return ["fondle_ass", "pullback"]
@@ -1021,10 +1128,14 @@ label fondle_menu(Girl, action):
                         call tired_lines(Girl, action)
                 "Shift your focus" if offhand_action:
                     call after_action
-                    call set_offhand_action(Girl, shift_focus = True)
+                    call set_offhand_action(Girl, shift = True)
 
-                    if _return:
-                        return _return
+                    if _return == "stop":
+                        return [None, "stop"]
+                    elif _return != "continue":
+                        $ action = _return[0]
+
+                        return [action, "shift"]
                 "Threesome actions" if Partner:
                     menu:
                         "Ask [Girl.name] to do something else with [Partner.name]" if action == "lesbian":
@@ -1048,7 +1159,7 @@ label fondle_menu(Girl, action):
                 "Hide her feet" if show_feet and Girl.pose in ["sex", "doggy"]:
                     $ show_feet = False
                 "Undress [Girl.name]":
-                    call Girl_Undress
+                    call Girl_Undress(Girl)
                 "Clean up [Girl.name]" if any(Girl.spunk):
                     call Girl_Cleanup(Girl,"ask")
                 "Never mind":
@@ -1062,7 +1173,7 @@ label fondle_menu(Girl, action):
 
             return [None, "stop"]
 
-    return [None, None]
+    return [None, "continue"]
 
 label handjob_menu(Girl, action):
     menu:
@@ -1136,7 +1247,7 @@ label handjob_menu(Girl, action):
 
             $ Girl.recent_history.append("setpace")
         "Slap her ass. . ." if action in ["dildo_pussy", "dildo_ass"]:
-            call Slap_Ass(Girl)
+            call slap_ass(Girl)
 
             $ counter += 1
             $ round -= 1
@@ -1171,8 +1282,14 @@ label handjob_menu(Girl, action):
                         if Girl.remaining_actions and multi_action:
                             call set_offhand_action(Girl)
 
-                            if _return:
-                                return _return
+                            if _return == "stop":
+                                return [None, "stop"]
+                            elif _return != "continue":
+                                $ action = _return[0]
+
+                                $ context = _return[1]
+
+                                return [action, context]
 
                             if offhand_action:
                                 $ Girl.remaining_actions -= 1
@@ -1237,10 +1354,14 @@ label handjob_menu(Girl, action):
                             call tired_lines(Girl, action)
                     "Shift your focus." if offhand_action:
                         call after_action
-                        call set_offhand_action(Girl, "shift_focus")
+                        call set_offhand_action(Girl, shift = True)
 
-                        if _return:
-                            return _return
+                        if _return == "stop":
+                            return [None, "stop"]
+                        elif _return != "continue":
+                            $ action = _return[0]
+
+                            return [action, "shift"]
                     "Shift your focus. (locked)" if action in ["dildo_pussy", "dildo_ass"] and not offhand_action:
                         pass
                     "Threesome actions" if Partner:
@@ -1276,7 +1397,7 @@ label handjob_menu(Girl, action):
 
             return [None, "stop"]
 
-    return [None, None]
+    return [None, "continue"]
 
 label sex_menu(Girl, action):
     menu:
@@ -1299,7 +1420,7 @@ label sex_menu(Girl, action):
         "Slow Down. . . (locked)" if not action_speed:
             pass
         "Slap her ass":
-            call Slap_Ass(Girl)
+            call slap_ass(Girl)
 
             $ counter += 1
             $ round -= 1
@@ -1323,8 +1444,14 @@ label sex_menu(Girl, action):
                     if Girl.remaining_actions and multi_action:
                         call set_offhand_action(Girl)
 
-                        if _return:
-                            return _return
+                        if _return == "stop":
+                            return [None, "stop"]
+                        elif _return != "continue":
+                            $ action = _return[0]
+
+                            $ context = _return[1]
+
+                            return [action, context]
 
                         if offhand_action:
                             $ Girl.remaining_actions -= 1
@@ -1388,7 +1515,7 @@ label sex_menu(Girl, action):
 
             return [None, "stop"]
 
-    return [None, None]
+    return [None, "continue"]
 
 label what_do_you_think_youre_doing_menu(Girl, action):
     menu:
@@ -1402,7 +1529,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
 
                 call since_you_are_so_nice_lines(Girl, action)
 
-                return True
+                return "accepted"
 
             "You pull back before you really get it in."
 
@@ -1435,7 +1562,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
 
                 call knows_her_place_lines(Girl, action)
 
-                return True
+                return "accepted"
         "Just fucking." if action in ["sex", "anal"]:
             $ Girl.change_stat("love", 80, -10, 1)
             $ Girl.change_stat("love", 200, -10)
@@ -1465,7 +1592,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
 
                 call knows_her_place_lines(Girl, action)
 
-                return True
+                return "accepted"
         "You'll see." if action == "hotdog":
             $ Girl.change_stat("love", 80, -10, 1)
             $ Girl.change_stat("love", 200, -8)
@@ -1492,6 +1619,6 @@ label what_do_you_think_youre_doing_menu(Girl, action):
 
                 call knows_her_place_lines(Girl, action)
 
-                return True
+                return "accepted"
 
-    return False
+    return "rejected"

@@ -534,7 +534,7 @@ label Jubes_Meet:
 
     $ JubesX.add_word(1,0,0,0,"met")
     $ active_Girls.append(JubesX) if JubesX not in active_Girls else active_Girls
-    hide Jubes_sprite with easeoutright
+    hide Jubes_sprite with easeoutleft
     call remove_girl (JubesX)
     "[JubesX.name] leaves the room, you might as well get some sleep. . ."
     return
@@ -553,7 +553,7 @@ label Jubes_Sunshine:
     call set_the_scene
     $ JubesX.change_face("_smile")
     "On your way across the square, you see a shape charging toward you."
-    call Punch
+    call punch
     "[JubesX.name] crashes into you."
     $ JubesX.change_face("_smile",1,mouth="_sucking")
     ch_v "Hey, [Player.name]!"
@@ -771,7 +771,7 @@ label is_Jubes_sunshocked:
                         $ Girl.change_stat("love", 80, 6)
                         $ Girl.change_face("_smile")
 
-                        call Girl_Tag (Girl)
+                        call girl_touches_you (Girl)
                     "Nope, sorry.":
                         $ JubesX.change_stat("love", 80, -3)
                         $ JubesX.change_stat("obedience", 70, 2)
@@ -1962,7 +1962,7 @@ label Jubes_Love_End:
             $ JubesX.change_stat("obedience", 70, 10)
             ch_v "Hmm. . ."
 
-            call before_action(JubesX, "sex")
+            call before_action(JubesX, "sex", None)
         "I have something else in mind. . .[[choose another activity]":
             $ JubesX.brows = "_confused"
             $ JubesX.change_stat("obedience", 70, 25)

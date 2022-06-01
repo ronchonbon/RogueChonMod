@@ -2,9 +2,10 @@
 errors listed below, and try again.
 
 
-File "game/rogue_scenes.rpy", line 45: is not terminated with a newline. (Check strings and parenthesis.)
-(Perhaps you left out a " at the end of the first line.)
-        $ RogueX.location = "bg_study""
+File "game/characters.rpy", line 290: invalid syntax
+                call get_last_name
+                                  ^
+    
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Tue May 31 17:00:14 2022
+Wed Jun  1 03:50:57 2022

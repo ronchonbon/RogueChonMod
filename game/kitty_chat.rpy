@@ -1271,8 +1271,8 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
             $ KittyX.blushing = "_blush1"
             $ KittyX.had_chat.append("blowjob")
         else:
-            $ line = renpy.random.choice(["You know, I kinda like how you taste.", 
-                            "You're a real jaw-breaker.", 
+            $ line = renpy.random.choice(["You know, I kinda like how you taste.",
+                            "You're a real jaw-breaker.",
                             "Let me know if you want some more lollipop licks.",
                             "Hmmm. . . [she mimes her tongue knocking against her cheek.]"])
             ch_k "[line]"
@@ -1424,8 +1424,8 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
         call Kitty_Daddy
 
     elif Options[0] == "hate":
-        $ line = renpy.random.choice(["Get away from me.", 
-                "I don't want to see your face.", 
+        $ line = renpy.random.choice(["Get away from me.",
+                "I don't want to see your face.",
                 "Stop bothering me.",
                 "Leave me alone."])
         ch_k "[line]"
@@ -2009,7 +2009,8 @@ label Kitty_Summon(approval_bonus=approval_bonus):
             jump danger_room
         elif KittyX.location == "bg_kitty":
             ch_k "I'll clean up a few things."
-            jump Kitty_Room
+            $ Girl = KittyX
+            jump girls_room
         elif KittyX.location == "bg_player":
             ch_k "I'll be here for you."
             jump player_room
@@ -2026,7 +2027,8 @@ label Kitty_Summon(approval_bonus=approval_bonus):
         else:
             ch_k "You know, I'll just meet you in my room."
             $ KittyX.location = "bg_kitty"
-            jump Kitty_Room
+            $ Girl = KittyX
+            jump girls_room
 
 
     elif line == "lonely":
@@ -2243,7 +2245,8 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             jump danger_room_entry
         elif KittyX.location == "bg_kitty":
             ch_k "I'll meet you there."
-            jump Kitty_Room
+            $ Girl = KittyX
+            jump girls_room
         elif KittyX.location == "bg_player":
             ch_k "I'll be waiting."
             jump player_room
@@ -2259,7 +2262,8 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         else:
             ch_k "You know, I'll just meet you in my room."
             $ KittyX.location = "bg_kitty"
-            jump Kitty_Room
+            $ Girl = KittyX
+            jump girls_room
 
 
 

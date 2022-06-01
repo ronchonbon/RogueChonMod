@@ -6,14 +6,11 @@ label meet_Kitty:
     $ KittyX.change_outfit()
 
     call clear_the_room("all", Passive = False, Silent = True)
-
-    $ KittyX.location = "bg_kitty"
-
     call shift_focus(KittyX)
     call set_the_scene(False)
 
+    $ KittyX.location = "bg_kitty"
     $ KittyX.sprite_location = stage_center
-    $ KittyX.player_petname = Player.name[:1]
 
     "As you rush to class, you see another student running straight at you."
     "You try to move aside, but aren't fast enough to get out of her way,"

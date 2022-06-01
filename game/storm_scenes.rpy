@@ -1,35 +1,9 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 label StormMeetPrelude:
     "You hear a creaking noise from above you. You notice this happening more and more often lately."
     "Maybe next time you're in class, you can ask [EmmaX.name] about it."
+
     $ Player.add_word(1,0,0,0,"noise")
+
     return
 
 label StormMeetAsk:
@@ -86,28 +60,35 @@ label StormMeetAsk:
     return
 
 label StormMeetWater:
-
     "As you enter your room, you notice that there is a puddle on the floor."
     "It appears to be dripping from a crack in the ceiling."
     "It seems like the ghost in the attic might be more trouble than [EmmaX.name] let on."
+
     menu:
         "Let's go bust some ghosts!":
             "Hell yeah."
         "Guh-guh-guh-ghosts?!":
             "Stop being a pussy."
+
     if len(Party) > 1:
-        Party[0].voice "I think we'll sit this one out."
-        call remove_girl (Party[0])
+        Party[1].voice "I think we'll sit this one out."
+
+        call remove_girl (Party[1])
+
         Party[0].voice "Have fun though."
+
         call remove_girl (Party[0])
     elif Party:
         Party[0].voice "I think I'll sit this one out."
         Party[0].voice "Have fun though."
-        call remove_girl (Party[0])
-    "You head for the door marked \"Attic. . .\""
-    $ Player.add_word(1,"water",0,0,0)
-    jump StormMeet
 
+        call remove_girl (Party[0])
+
+    "You head for the door marked \"Attic. . .\""
+
+    $ Player.add_word(1,"water",0,0,0)
+
+    jump StormMeet
 
 label StormMeet:
     if time_index > 2:
@@ -116,17 +97,25 @@ label StormMeet:
         else:
             "As you climb the stairs, a gust of chill wind rushes down them."
             "Oh, look at the time, maybe this is something that should wait for earlier in the day. . ."
+
         "You return to your room."
+
         $ bg_current = "bg_player"
+
         $ Player.add_word(1,0,"noattic",0,0)
+
         jump reset_location
 
     $ Player.history.remove("attic")
+
     $ bg_current = "bg_storm"
+
     $ StormX.today_outfit_name = "casual1"
     $ StormX.outfit_name = "casual1"
     $ StormX.change_outfit("casual1")
+
     call clear_the_room ("all", 0, 1)
+
     $ StormX.broken_up[0] = 0
     $ StormX.location = 0
     $ StormX.love = 500
@@ -134,6 +123,7 @@ label StormMeet:
     $ StormX.inhibition = 100
     $ StormX.player_petname = 0
     $ StormX.names = ["Ororo"]
+
     "You climb the stairs up to the attic. Once you reach the top, you hit a wave of humidity."
     call shift_focus (StormX)
     call set_the_scene
@@ -148,7 +138,6 @@ label StormMeet:
     show Storm_sprite standing at sprite_location(StormX.sprite_location)
 
     show expression AlphaMask("SilhouetteBase", At("Storm_sprite standing", sprite_location(StormX.sprite_location))) as mask:
-        offset (347,65)
 
 
 
@@ -363,7 +352,7 @@ label StormMeet:
                 $ StormX.change_stat("love", 70, 3)
                 ch_s "I have the ability to influence the weather around me."
                 $ StormX.change_face("_smile", eyes="_white")
-                call Punch
+                call punch
                 ch_s "I can summon the rain, call lightning, even glide on the winds."
                 $ StormX.change_face("_smile")
                 ch_s "I very much enjoy the freedom my powers bring me, the connection to nature."
@@ -833,7 +822,7 @@ label Storm_Hairtalk:
                 $ StormX.change_stat("inhibition", 80, 1)
                 ch_s "I. . . suppose that I might accomodate that. . ."
 
-                call before_action(StormX, "kiss")
+                call before_action(StormX, "kiss", None)
             else:
                 $ StormX.change_stat("obedience", 80, -1)
                 ch_s "I do not think that I should do that. . ."
@@ -850,7 +839,7 @@ label Storm_Hairtalk:
                 $ StormX.change_stat("obedience", 50, 2)
                 $ StormX.change_stat("obedience", 80, 1)
 
-                call before_action(StormX, "fondle_breasts")
+                call before_action(StormX, "fondle_breasts", None)
             else:
                 $ StormX.change_face("_angry", 2)
                 ch_s "[StormX.player_petname]!"

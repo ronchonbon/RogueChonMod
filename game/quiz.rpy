@@ -80,7 +80,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
                             ch_l "Grr."
                             return
 
-                call before_action(LauraX, "fondle_breasts")
+                call before_action(LauraX, "fondle_breasts", None)
                 if action_context:
 
                     call enter_main_sex_menu(LauraX)
@@ -122,7 +122,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
                             ch_j "Fine."
                             return
 
-                call before_action(JeanX, "fondle_breasts")
+                call before_action(JeanX, "fondle_breasts", None)
                 if action_context:
                     call enter_main_sex_menu(JeanX)
 

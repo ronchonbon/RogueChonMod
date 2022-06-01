@@ -683,7 +683,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
                 call HWchange_stat (LauraX, "obedience", 80, 3)
                 call HWchange_stat (LauraX, "obedience", 200, 1)
             else:
-                call Punch
+                call punch
                 if "partyfix" in LauraX.history:
                     call HWchange_stat (LauraX, "love", 80, -2)
                     call HWchange_stat (LauraX, "love", 90, -3)

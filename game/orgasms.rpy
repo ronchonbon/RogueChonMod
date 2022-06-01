@@ -450,7 +450,7 @@ label Girl_In_mouth:
         else:
             "You grab her head and cum in her mouth"
         $ Girl.eyes = "_closed"
-        call Punch
+        call punch
         $ Player.spunk = 1
         if "full" in Girl.recent_history:
 
@@ -1686,7 +1686,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
     Girl.voice ". . . !"
     $ action_speed = 0
 
-    call Punch
+    call punch
 
     $ action_speed = 1
     $ line = renpy.random.choice([Girl.name + " is suddenly rocked with spasms, holding back a muffled scream.",

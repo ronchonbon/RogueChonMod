@@ -4165,7 +4165,8 @@ label Girl_Date_End(Girl=0):
                     call check_if_second_minds (Girl, 0, 2)
                     $ multi_action = False
 
-                    call before_action(Girl, "kiss")
+                    call before_action(Girl, "kiss", None)
+                    
                     $ multi_action = True
                 if approval_check(Girl, 900, Bonus=(10*Date_Bonus[0])):
                     $ Girl.change_face("_sexy", 1)

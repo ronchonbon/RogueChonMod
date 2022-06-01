@@ -1,3 +1,10 @@
+init python:
+
+    def get_last_name(character):
+        split_name = character.name.split()
+
+        return split_name[character.name.count(" ")]
+
 label wait(outfit = True, lights = True):
     $ stack_depth = renpy.call_stack_depth()
 
@@ -83,7 +90,7 @@ label wait(outfit = True, lights = True):
     $ Player.focus -= 5 if Player.focus >= 10 else 0
 
     $ multi_action = True
-    $ action_context = None
+
     $ current_time = time_options[(time_index)]
 
     $ round = 100
@@ -744,7 +751,9 @@ label event_calls(event_Girls=[]):
                 "No":
                     "Suit yourself. . ."
 
-    if day < 3 or round <= 10:
+    # if day < 3 or round <= 10:
+    #     return
+    if round <= 10:
         return
 
     if KittyX in active_Girls:
@@ -776,7 +785,8 @@ label event_calls(event_Girls=[]):
             if round >= 70:
                 $ EmmaX.location = "bg_classroom"
     else:
-        if day >= 9 and "met" not in EmmaX.history and "traveling" in Player.recent_history and bg_current == "bg_classroom" and weekday < 5:
+        #if day >= 9 and "met" not in EmmaX.history and "traveling" in Player.recent_history and bg_current == "bg_classroom" and weekday < 5:
+        if day >= 1 and "met" not in EmmaX.history and "traveling" in Player.recent_history and bg_current == "bg_classroom" and weekday < 5:
             jump meet_Emma
 
             return
@@ -785,7 +795,8 @@ label event_calls(event_Girls=[]):
         pass
     elif "met" not in LauraX.history and "traveling" in Player.recent_history:
         if bg_current == "bg_dangerroom":
-            if day >= 12 and "dress0" not in LauraX.history and "mission" not in LauraX.to_do:
+            # if day >= 12 and "dress0" not in LauraX.history and "mission" not in LauraX.to_do:
+            if day >= 1 and "dress0" not in LauraX.history and "mission" not in LauraX.to_do:
                 call meet_Laura
 
                 return
@@ -1170,7 +1181,7 @@ label quick_event:
             if event_Girls[0].location == "bg_showerroom" and "showered" in event_Girls[0].daily_history:
                 $ event_Girls[0].location = event_Girls[0].weekly_schedule[weekday][time_index]
 
-                if event_Girls[0]. == JubesX and JubesX.addiction > 60:
+                if event_Girls[0] == JubesX and JubesX.addiction > 60:
                     $ JubesX.location = JubesX.home
 
                 python:
@@ -1374,11 +1385,6 @@ label reset_outfits:
             pass
 
     return
-
-label get_last_name:
-    $ split_name = Player.name.split()
-
-    return "Mr. " + split_name[Player.name.count(" ")]
 
 label drain_all_words(word, recent = True, daily = True, traits = False):
     $ temp_Girls = all_Girls[:]
@@ -3351,12 +3357,12 @@ label shift_focus(Girl, Second = None):
 transform sprite_location(x_position = stage_right, y_position = 0):
     pos (x_position, y_position)
 
-image Punchout:
+image punchout:
     Null(0,0)
 
-label Punch:
-    show Punchout with vpunch
-    hide Punchout
+label punch:
+    show punchout with vpunch
+    hide punchout
 
     return
 
@@ -3766,8 +3772,7 @@ label Jumped(Act=0):
         return
 
     call check_favorite_actions (Girls[0])
-    $ Act = Girls[0].faovorite_aciton
-    $ action_context = Girls[0]
+    $ Act = Girls[0].favorite_action
 
     if Act in ("anal","sex","blowjob","titjob","handjob","hotdog"):
 
@@ -3782,7 +3787,7 @@ label Jumped(Act=0):
     if Partner:
         call Girls_Noticed (Girls[0], 1)
 
-    call before_action(Girls[0], Act)
+    call before_action(Girls[0], Act, Girls[0])
 
 label Quick_Sex(Girl=focused_Girl, Act=0):
 
@@ -4127,7 +4132,7 @@ label Escalation(Girl=0):
 
 
     $ position_timer = 0
-    $ action_context = None
+
     return
 
 label Sex_Dialog(Primary=focused_Girl, Secondary=0, TempFocus=0, PrimaryLust=0, SecondaryLust=0, line1=0, line2=0, line3=0, line4=0, D20S=0):
@@ -5655,54 +5660,6 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0):
 
         "[line]."
         $ line = 0
-    return
-
-label CloseOut(Girl=focused_Girl):
-
-    $ Girl = check_girl(Girl)
-    if primary_action == "blowjob":
-        call expression Girl.tag + "_BJ_After"
-    elif primary_action == "handjob":
-        call expression Girl.tag + "_HJ_After"
-    elif primary_action == "titjob":
-        call expression Girl.tag + "_TJ_After"
-    elif primary_action == "kiss":
-        call Kiss_After
-    elif primary_action == "fondle_breasts":
-        call expression Girl.tag + "_FB_After"
-    elif primary_action == "suck_breasts":
-        call expression Girl.tag + "_SB_After"
-    elif primary_action == "fondle_thighs":
-        call expression Girl.tag + "_FT_After"
-    elif primary_action == "fondle_pussy":
-        call expression Girl.tag + "_FP_After"
-    elif primary_action == "eat_pussy":
-        call expression Girl.tag + "_LP_After"
-    elif primary_action == "fondle_ass":
-        call expression Girl.tag + "_FA_After"
-    elif primary_action == "finger_ass":
-        call expression Girl.tag + "_IA_After"
-    elif primary_action == "eat_ass":
-        call expression Girl.tag + "_LA_After"
-    elif primary_action == "sex":
-        call expression Girl.tag + "_SexAfter"
-    elif primary_action == "hotdog":
-        call expression Girl.tag + "_HotdogAfter"
-    elif primary_action == "anal":
-        call expression Girl.tag + "_AnalAfter"
-    elif primary_action == "dildo_pussy":
-        call expression Girl.tag + "_DP_After"
-    elif primary_action == "dildo_ass":
-        call expression Girl.tag + "_DA_After"
-    elif primary_action == "striptease":
-        call Group_Strip_End
-    elif primary_action == "masturbation":
-        $ Girl.remaining_actions -= 1
-        $ Girl.action_counter["masturbation"] += 1
-    elif primary_action == "lesbian":
-        call Les_After
-    else:
-        "That's odd, tell Oni how you got here, Close [Girl.name] [primary_action]."
     return
 
 label Sex_Over(Clothes = True, Girls = None):

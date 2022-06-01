@@ -1982,7 +1982,8 @@ label Jean_Summon(approval_bonus=approval_bonus):
             jump danger_room
         elif JeanX.location == "bg_jean":
             ch_j "Don't keep me waiting."
-            jump Jean_Room
+            $ Girl = JeanX
+            jump girls_room
         elif JeanX.location == "bg_player":
             ch_j "Don't keep me waiting."
             jump player_room
@@ -1999,7 +2000,8 @@ label Jean_Summon(approval_bonus=approval_bonus):
         else:
             ch_j "Um, I'll just meet you in my room."
             $ JeanX.location = "bg_jean"
-            jump Jean_Room
+            $ Girl = JeanX
+            jump girls_room
 
 
     elif line == "lonely":

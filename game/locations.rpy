@@ -907,8 +907,7 @@ label gym_entry(number_of_girls = 0):
 
         $ temp_Girls.remove(temp_Girls[0])
 
-    if renpy.showing("black_screen"):
-        hide black_screen onlayer black
+    hide black_screen onlayer black
 
     return
 
@@ -926,7 +925,8 @@ label shower_entry:
     if round <= 10 or len(Party) >= 2:
         jump shower_room
 
-    if day >= 15 and "met" not in JeanX.history and "met" in EmmaX.history:
+    #if day >= 15 and "met" not in JeanX.history and "met" in EmmaX.history:
+    if day >= 1 and "met" not in JeanX.history and "met" in EmmaX.history:
         call JeanMeet
         jump shower_room
 

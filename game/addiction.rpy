@@ -302,7 +302,7 @@ label addiction_event(Girl):
                 $ Girl.change_stat("love", 50, 4)
                 $ Girl.change_face("_smile")
 
-                call Girl_Tag (Girl)
+                call girl_touches_you (Girl)
         "What, you just want to touch my face? No thanks." if Girl != JubesX:
             if approval_check(Girl, 500, "L",Alt=[[RogueX,JeanX],400]) or Girl.action_counter["kiss"]:
                 $ Girl.change_stat("love", 200, -3)
@@ -381,7 +381,7 @@ label addiction_event(Girl):
 
                 ch_v "Worth a shot. . ."
 
-                call Girl_Tag (Girl)
+                call girl_touches_you (Girl)
         "You want to drink my blood? No thanks." if Girl == JubesX:
             if approval_check(Girl, 500, "L") or Girl.action_counter["kiss"]:
                 $ Girl.change_stat("love", 200, -3)
@@ -873,7 +873,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                     $ Girl.change_stat("love", 80, 6)
                     $ Girl.change_face("_smile")
 
-                    call Girl_Tag (Girl)
+                    call girl_touches_you (Girl)
 
                 while Girl.addiction > 20 and round > 10:
                     $ Girl.addiction -= 1
@@ -950,7 +950,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                         "[Girl.name] gets back up."
 
                         if Girl.addiction >= 50:
-                            call Girl_Tag (Girl)
+                            call girl_touches_you (Girl)
                     "How about you let me touch your breasts?":
                         $ stored_count = approval_bonus
 
@@ -1023,7 +1023,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                                 ch_v "So, fair trade?"
 
                             if Girl.legs_covered:
-                                call Girl_Tag (Girl)
+                                call girl_touches_you (Girl)
                     "How about you let me touch your pussy?":
                         $ stored_count = approval_bonus
 
@@ -1094,7 +1094,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                 menu:
                     "Ok, that was enough, you can touch me now.":
-                        call Girl_Tag (Girl)
+                        call girl_touches_you (Girl)
 
                         $ Girl.change_stat("obedience", 50, 10)
                         $ Girl.change_stat("inhibition", 50, 10)
@@ -1434,7 +1434,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
             $ Girl.change_face("_angry",mouth="open")
 
-            call Punch
+            call punch
 
             "She opens her jaws and lunges for your throat, but stops herself at the last second."
 
@@ -1446,7 +1446,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
             "-barely."
 
-        call Girl_Tag (Girl, 1)
+        call girl_touches_you (Girl, 1)
 
         $ Girl.addiction_rate += 2
         $ Girl.resistance = 1 if Girl.resistance < 1 else Girl.resistance
@@ -1575,8 +1575,6 @@ label addiction_bad_end:
     $ Girl.drain_word("ultimatum",0)
 
     $ approval_bonus = 0
-    $ line = 0
-    $ action_context = None
 
     $ Girl.forced = 0
 
@@ -1711,7 +1709,7 @@ label addiction_fix_beg:
 
             $ Girl.change_face("_angry",mouth="open")
 
-            call Punch
+            call punch
 
             "She opens her jaws and lunges for your throat, but stops herself at the last second."
 
@@ -1723,7 +1721,7 @@ label addiction_fix_beg:
 
             "-barely."
 
-        call Girl_Tag (Girl, 1)
+        call girl_touches_you (Girl, 1)
 
         $ Girl.change_stat("inhibition", 50, 10)
         $ Girl.change_stat("inhibition", 90, 5)

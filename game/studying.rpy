@@ -266,7 +266,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
             $ Party[0].taboo = 0
             $ taboo = 0
 
-        call before_action(Party[0], action)
+        call before_action(Party[0], action, None)
     elif action:
         if action == "snuggle" and len(Party) == 2:
             call check_if_second_minds(Party[0], Party[1])
@@ -370,7 +370,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
                 $ Party[0].taboo = 0
                 $ taboo = 0
 
-            call before_action(Party[0], action)
+            call before_action(Party[0], action, None)
         if len(Party) >= 2:
             $ Party[0].check_if_likes(Party[1], 900, 10, 1)
             $ Party[1].check_if_likes(Party[0], 900, 10, 1)

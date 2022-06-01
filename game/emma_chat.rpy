@@ -2097,7 +2097,8 @@ label Emma_Summon(approval_bonus=approval_bonus):
             jump danger_room
         elif EmmaX.location == "bg_emma":
             ch_e "I'll tidy up a few things."
-            jump Emma_Room
+            $ Girl = EmmaX
+            jump girls_room
         elif EmmaX.location == "bg_player":
             ch_e "I'll be waiting for you."
             jump player_room
@@ -2114,7 +2115,8 @@ label Emma_Summon(approval_bonus=approval_bonus):
         else:
             ch_e "You know, I'll just meet you in my room."
             $ EmmaX.location = "bg_emma"
-            jump Emma_Room
+            $ Girl = EmmaX
+            jump girls_room
 
 
     elif line == "lonely":
@@ -2339,7 +2341,8 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             jump danger_room_entry
         elif EmmaX.location == "bg_emma":
             ch_e "I'll be waiting."
-            jump Emma_Room
+            $ Girl = EmmaX
+            jump girls_room
         elif EmmaX.location == "bg_player":
             ch_e "I'll be waiting."
             jump player_room
@@ -2355,7 +2358,8 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         else:
             ch_e "You know, I'll just meet you in my room."
             $ EmmaX.location = "bg_emma"
-            jump Emma_Room
+            $ Girl = EmmaX
+            jump girls_room
 
 
 

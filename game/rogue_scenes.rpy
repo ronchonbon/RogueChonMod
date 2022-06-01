@@ -168,7 +168,7 @@ label tour_start:
     else:
         ch_r "You can stop by sometime, but not after curfew."
 
-    hide Rogue_sprite with easeoutright
+    hide Rogue_sprite with easeoutleft
 
     $ bg_current = "bg_classroom"
 

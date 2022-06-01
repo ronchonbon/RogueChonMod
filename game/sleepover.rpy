@@ -2142,7 +2142,6 @@ label sleepover_MorningWood:
 
         $ line = 0
         $ action_speed = 1
-        $ action_context = None
         if Partner:
             $ second_girl_primary_action = "blowjob"
         call Morning_Partner

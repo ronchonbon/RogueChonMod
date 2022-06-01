@@ -1,12 +1,5 @@
 
 label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
-
-
-    if action_context == "skip" and line:
-
-        $ action_context = None
-        return
-
     if primary_action == "handjob":
         $ line = GirlA.name + " continues stroke your cock. "
 

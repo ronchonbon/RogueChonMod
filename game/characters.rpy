@@ -286,8 +286,11 @@ init python:
 
                 self.names = ["Ms. Frost"]
                 self.name = "Ms. Frost"
-                self.player_petname = "young man"
-                self.player_petnames = ["young man", Player.name]
+
+                last_name = get_last_name()
+
+                self.player_petname = "Mr. " + last_name
+                self.player_petnames = ["young man", Player.name, "Mr. " + last_name]
                 self.petname = self.name
                 self.petnames = ["Emma", "Ms. Frost"]
             elif self.tag == "Laura":
@@ -313,7 +316,7 @@ init python:
 
                 self.massage_chart = ["shoulders", "back", "arms", "hips", "thighs", "calves", "ass", "ass", "pussy", "pussy"]
 
-                self.player_petname = "guy"
+                self.player_petname = Player.name
                 self.player_petnames = ["guy", Player.name]
                 self.petname = "Laura"
                 self.petnames = ["Laura", "X-23"]

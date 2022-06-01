@@ -81,7 +81,7 @@ layeredimage Xavier_sprite:
     if Xavier_psychic:
         "images/NPC/Xavier_psychic.png"
 
-    anchor (0.5, 0.0) offset (0, 355) zoom 0.7
+    anchor (0.5, 0.0) offset (60, 355) zoom 0.7
 
 image Xavier_blinking:
     "images/NPC/Xavier_eyes[Xavier_eyes].png"
