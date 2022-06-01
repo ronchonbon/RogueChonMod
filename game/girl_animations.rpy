@@ -1,239 +1,693 @@
-label reset_position:
-    if focused_Girl.location != bg_current:
+label reset_position(Girl):
+    $ Girl.pose = "full"
+
+    if Girl.location != bg_current:
+        call hide_girl(Girl)
+
         return
 
-    $ focused_Girl.pose = "full"
-
-    call hide_girl(focused_Girl, hide_sprite = True)
-
-    show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(focused_Girl.sprite_location):
+    if Girl == RogueX:
+        show Rogue_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
+    elif Girl == KittyX:
+        show Kitty_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
+    elif Girl == EmmaX:
+        show Emma_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
+    elif Girl == LauraX:
+        show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
+    elif Girl == JeanX:
+        show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
+    elif Girl == StormX:
+        show Storm_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
+    elif Girl == JubesX:
+        show Jubes_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
 
     return
 
-label smooch:
-    $ focused_Girl.change_face("_kiss")
+label shift_view(Girl, view):
+    if view == "menu":
+        menu:
+            "Full body":
+                call reset_position(Girl)
+            "Upper half":
+                call breasts_launch(Girl)
+            "Middle view":
+                call middle_launch(Girl)
+            "Lower half":
+                call pussy_launch(Girl)
+            "Rear view" if Girl in [RogueX, KittyX, EmmaX, LauraX, JeanX]:
+                $ Girl.pose = "doggy"
 
-    show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(focused_Girl.sprite_location):
-        ease 0.5 pos (focused_Girl.sprite_location, 0.1) zoom 2
-        pause 1
-        ease 0.5 pos (focused_Girl.sprite_location, 0.0) zoom 1
+                call show_sex(Girl, None)
+            "On top of you" if Girl in [EmmaX, JeanX, StormX]:
+                $ Girl.pose = "sex"
+
+                call show_sex(Girl, None)
+            "Laying down" if Girl in [RogueX, KittyX, LauraX]:
+                $ Girl.pose = "sex"
+
+                call show_sex(Girl, None)
+            "Never mind":
+                pass
+    else:
+        if view == "full":
+            call reset_position(Girl)
+        elif view == "breasts":
+            call breasts_launch(Girl)
+        elif view == "middle":
+            call middle_launch(Girl)
+        elif view == "pussy":
+            call pussy_launch(Girl)
+        elif view in ["sex", "doggy"]:
+            call show_sex(Girl, None)
+        elif view == "kiss":
+            call kiss_launch(Girl)
+
+    return
+
+label close_launch(GirlA, GirlB = None):
+    if GirlB:
+        $ temp_Girls = [GirlA, GirlB]
+    elif GirlA:
+        $ temp_Girls = [GirlA]
+
+    while temp_Girls:
+        if temp_Girls[0] == KittyX or temp_Girls[0] == LauraX:
+            $ temp_Girls[0].arm_pose = 1
+        else:
+            $ temp_Girls[0].arm_pose = 2
+
+        if GirlA == temp_Girls[0]:
+            if temp_Girls[0] == KittyX:
+                $ x_position = 450
+            elif temp_Girls[0] == RogueX:
+                $ x_position = 550
+            else:
+                $ x_position = 500
+
+            $ temp_Girls[0].sprite_layer = 100
+
+            $ x_zoom = -1.3
+        elif GirlB == temp_Girls[0]:
+            if temp_Girls[0] == EmmaX or LauraX:
+                $ x_position = 700
+            else:
+                $ x_position = 715
+
+            $ temp_Girls[0].sprite_layer = 75
+
+            $ x_zoom = 1.3
+
+        # if temp_Girls[0] == RogueX:
+        #     show Rogue_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
+        #         xzoom x_zoom yzoom 1.3
+        # elif temp_Girls[0] == KittyX:
+        #     show Kitty_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
+        #         xzoom x_zoom yzoom 1.3
+        # elif temp_Girls[0] == EmmaX:
+        #     show Emma_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
+        #         xzoom x_zoom yzoom 1.3
+        # elif temp_Girls[0] == LauraX:
+        #     show Laura_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
+        #         xzoom x_zoom yzoom 1.3
+        # elif temp_Girls[0] == JeanX:
+        #     show Jean_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
+        #         xzoom x_zoom yzoom 1.3
+        # elif temp_Girls[0] == StormX:
+        #     show Storm_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
+        #         xzoom x_zoom yzoom 1.3
+        # elif temp_Girls[0] == JubesX:
+        #     show Jubes_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
+        #         xzoom x_zoom yzoom 1.3
+
+        $ temp_Girls.remove(temp_Girls[0])
+
+    return
+
+transform smooch_animation(location):
+    ease 0.5 pos (location, 0.1) xzoom 2.0 yzoom 2.0
+    pause 1
+    ease 0.5 pos (location, 0.0) xzoom 1.0 yzoom 1.0
+
+label smooch(Girl):
+    $ Girl.change_face("_kiss")
+
+    # if Girl == RogueX:
+    #     show Rogue_sprite standing zorder Girl.sprite_layer at smooch_animation(Girl.sprite_location)
+    # elif Girl == KittyX:
+    #     show Kitty_sprite standing zorder Girl.sprite_layer at smooch_animation(Girl.sprite_location)
+    # elif Girl == EmmaX:
+    #     show Emma_sprite standing zorder Girl.sprite_layer at smooch_animation(Girl.sprite_location)
+    # elif Girl == LauraX:
+    #     show Laura_sprite standing zorder Girl.sprite_layer at smooch_animation(Girl.sprite_location)
+    # elif Girl == JeanX:
+    #     show Jean_sprite standing zorder Girl.sprite_layer at smooch_animation(Girl.sprite_location)
+    # elif Girl == StormX:
+    #     show Storm_sprite standing zorder Girl.sprite_layer at smooch_animation(Girl.sprite_location)
+    # elif Girl == JubesX:
+    #     show Jubes_sprite standing zorder Girl.sprite_layer at smooch_animation(Girl.sprite_location)
 
     pause 1
 
-    $ focused_Girl.change_face("_sexy")
+    $ Girl.change_face("_sexy")
 
     return
 
-label kiss_launch:
-    $ focused_Girl.pose = "kiss"
+transform kiss_launch_animation(location):
+    ease 0.5 pos (location, 0.1) xzoom 2.0 yzoom 2.0
 
-    call hide_girl(focused_Girl)
+label kiss_launch(Girl):
+    $ Girl.pose = "kiss"
 
-    show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(focused_Girl.sprite_location):
-        ease 0.5 pos (focused_Girl.sprite_location, 0.1) zoom 2
+    $ Girl.change_face("_kiss")
 
-    return
-
-label breasts_launch:
-    $ focused_Girl.pose = "breasts"
-
-    call hide_girl(focused_Girl)
-
-    show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(focused_Girl.sprite_location):
-        ease 0.5 pos (focused_Girl.sprite_location, -0.2) zoom 2
-
-    return
-
-label middle_launch:
-    $ focused_Girl.pose = "middle"
-
-    call hide_girl(focused_Girl)
-
-    show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(stage_center):
-        ease 0.5 pos (focused_Girl.sprite_location, -0.3) zoom 1.5
+    # if Girl == RogueX:
+    #     show Rogue_sprite standing zorder Girl.sprite_layer at kiss_launch_animation(Girl.sprite_location)
+    # elif Girl == KittyX:
+    #     show Kitty_sprite standing zorder Girl.sprite_layer at kiss_launch_animation(Girl.sprite_location)
+    # elif Girl == EmmaX:
+    #     show Emma_sprite standing zorder Girl.sprite_layer at kiss_launch_animation(Girl.sprite_location)
+    # elif Girl == LauraX:
+    #     show Laura_sprite standing zorder Girl.sprite_layer at kiss_launch_animation(Girl.sprite_location)
+    # elif Girl == JeanX:
+    #     show Jean_sprite standing zorder Girl.sprite_layer at kiss_launch_animation(Girl.sprite_location)
+    # elif Girl == StormX:
+    #     show Storm_sprite standing zorder Girl.sprite_layer at kiss_launch_animation(Girl.sprite_location)
+    # elif Girl == JubesX:
+    #     show Jubes_sprite standing zorder Girl.sprite_layer at kiss_launch_animation(Girl.sprite_location)
 
     return
 
-label pussy_launch:
-    $ focused_Girl.pose = "pussy"
+transform breasts_launch_animation(location):
+    ease 0.5 pos (location, -0.2) xzoom 2.0 yzoom 2.0
 
-    call hide_girl(focused_Girl)
+label breasts_launch(Girl):
+    $ Girl.pose = "breasts"
 
-    show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(focused_Girl.sprite_location):
-        ease 0.5 pos (focused_Girl.sprite_location, -0.4) zoom 2
+    # if Girl == RogueX:
+    #     show Rogue_sprite standing zorder Girl.sprite_layer at breasts_launch_animation(Girl.sprite_location)
+    # elif Girl == KittyX:
+    #     show Kitty_sprite standing zorder Girl.sprite_layer at breasts_launch_animation(Girl.sprite_location)
+    # elif Girl == EmmaX:
+    #     show Emma_sprite standing zorder Girl.sprite_layer at breasts_launch_animation(Girl.sprite_location)
+    # elif Girl == LauraX:
+    #     show Laura_sprite standing zorder Girl.sprite_layer at breasts_launch_animation(Girl.sprite_location)
+    # elif Girl == JeanX:
+    #     show Jean_sprite standing zorder Girl.sprite_layer at breasts_launch_animation(Girl.sprite_location)
+    # elif Girl == StormX:
+    #     show Storm_sprite standing zorder Girl.sprite_layer at breasts_launch_animation(Girl.sprite_location)
+    # elif Girl == JubesX:
+    #     show Jubes_sprite standing zorder Girl.sprite_layer at breasts_launch_animation(Girl.sprite_location)
 
     return
 
-label handjob_launch:
-    if renpy.showing(focused_Girl.tag + "_handjob_animation"):
+transform middle_launch_animation(location):
+    ease 0.5 pos (location, -0.3) xzoom 1.5 yzoom 1.5
+
+label middle_launch(Girl):
+    $ Girl.pose = "middle"
+
+    # if Girl == RogueX:
+    #     show Rogue_sprite standing zorder Girl.sprite_layer at middle_launch_animation(Girl.sprite_location)
+    # elif Girl == KittyX:
+    #     show Kitty_sprite standing zorder Girl.sprite_layer at middle_launch_animation(Girl.sprite_location)
+    # elif Girl == EmmaX:
+    #     show Emma_sprite standing zorder Girl.sprite_layer at middle_launch_animation(Girl.sprite_location)
+    # elif Girl == LauraX:
+    #     show Laura_sprite standing zorder Girl.sprite_layer at middle_launch_animation(Girl.sprite_location)
+    # elif Girl == JeanX:
+    #     show Jean_sprite standing zorder Girl.sprite_layer at middle_launch_animation(Girl.sprite_location)
+    # elif Girl == StormX:
+    #     show Storm_sprite standing zorder Girl.sprite_layer at middle_launch_animation(Girl.sprite_location)
+    # elif Girl == JubesX:
+    #     show Jubes_sprite standing zorder Girl.sprite_layer at middle_launch_animation(Girl.sprite_location)
+
+    return
+
+transform pussy_launch_animation(location):
+    ease 0.5 pos (location, -0.4) xzoom 2.0 yzoom 2.0
+
+label pussy_launch(Girl):
+    $ Girl.pose = "pussy"
+
+    # if Girl == RogueX:
+    #     show Rogue_sprite standing zorder Girl.sprite_layer at pussy_launch_animation(Girl.sprite_location)
+    # elif Girl == KittyX:
+    #     show Kitty_sprite standing zorder Girl.sprite_layer at pussy_launch_animation(Girl.sprite_location)
+    # elif Girl == EmmaX:
+    #     show Emma_sprite standing zorder Girl.sprite_layer at pussy_launch_animation(Girl.sprite_location)
+    # elif Girl == LauraX:
+    #     show Laura_sprite standing zorder Girl.sprite_layer at pussy_launch_animation(Girl.sprite_location)
+    # elif Girl == JeanX:
+    #     show Jean_sprite standing zorder Girl.sprite_layer at pussy_launch_animation(Girl.sprite_location)
+    # elif Girl == StormX:
+    #     show Storm_sprite standing zorder Girl.sprite_layer at pussy_launch_animation(Girl.sprite_location)
+    # elif Girl == JubesX:
+    #     show Jubes_sprite standing zorder Girl.sprite_layer at pussy_launch_animation(Girl.sprite_location)
+
+    return
+
+transform show_handjob_animation(location):
+    ease 0.5 pos (location, 0.1) xzoom 2.0 yzoom 2.0
+
+label show_handjob(Girl, orgasm = False):
+    if renpy.showing(Girl.tag + " handjob"):
         return
 
-    show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(focused_Girl.sprite_location):
-        ease 0.5 pos (focused_Girl.sprite_location, 0.1) zoom 2
+    # if Girl == RogueX:
+    #     show Rogue_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
+    # elif Girl == KittyX:
+    #     show Kitty_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
+    # elif Girl == EmmaX:
+    #     show Emma_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
+    # elif Girl == LauraX:
+    #     show Laura_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
+    # elif Girl == JeanX:
+    #     show Jean_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
+    # elif Girl == StormX:
+    #     show Storm_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
+    # elif Girl == JubesX:
+    #     show Jubes_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
 
     if taboo:
         if len(Present) >= 2:
-            if Present[0] != focused_Girl:
-                "[focused_Girl.name] looks back at [Present[0].name] to see if she's watching."
-            elif Present[1] != focused_Girl:
-                "[focused_Girl.name] looks back at [Present[1].name] to see if she's watching."
+            if Present[0] != Girl:
+                "[Girl.name] looks back at [Present[0].name] to see if she's watching."
+            elif Present[1] != Girl:
+                "[Girl.name] looks back at [Present[1].name] to see if she's watching."
         else:
-            "[focused_Girl.name] looks around to see if anyone can see her."
+            "[Girl.name] looks around to see if anyone can see her."
 
-    if not focused_Girl.action_counter["handjob"] and focused_Girl.outfit["gloves"]:
-        "As you pull out your cock, [focused_Girl.name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
+    if not orgasm:
+        if not Girl.action_counter["handjob"] and Girl.outfit["gloves"]:
+            "As you pull out your cock, [Girl.name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
+        else:
+            "She then leans over and grabs your cock."
     else:
-        "She then leans over and grabs your cock."
-        "[focused_Girl.name] bends down and grabs your cock."
+        "[Girl.name] bends down and grabs your cock."
 
-    $ focused_Girl.outfit["gloves"] = ""
-    $ focused_Girl.arm_pose = 1
+    $ Girl.outfit["gloves"] = ""
+    $ Girl.arm_pose = 1
 
-    call hide_girl(focused_Girl, hide_sprite = True)
-
-    show Rogue_handjob_animation zorder 150 at sprite_location(stage_center) with easeinbottom
+    if Girl == RogueX:
+        show Rogue_sprite handjob zorder 150 at sprite_location(stage_center)
+    elif Girl == KittyX:
+        show Kitty_sprite handjob zorder 150 at sprite_location(stage_center)
+    elif Girl == EmmaX:
+        show Emma_sprite handjob zorder 150 at sprite_location(stage_center)
+    elif Girl == LauraX:
+        show Laura_sprite handjob zorder 150 at sprite_location(stage_center)
+    elif Girl == JeanX:
+        show Jean_sprite handjob zorder 150 at sprite_location(stage_center)
+    elif Girl == StormX:
+        show Storm_sprite handjob zorder 150 at sprite_location(stage_center)
+    elif Girl == JubesX:
+        show Jubes_sprite handjob zorder 150 at sprite_location(stage_center)
 
     return
 
-label titjob_launch:
-    if renpy.showing(focused_Girl.tag + "_titjob_animation"):
+transform show_titjob_animation(location):
+    ease 0.5 pos (location, 0.1) xzoom 2.0 yzoom 2.0
+
+label show_titjob(Girl, orgasm = False):
+    if renpy.showing(Girl.tag + " titjob"):
         return
 
-    show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(focused_Girl.sprite_location):
-        ease 0.5 pos (focused_Girl.sprite_location, 0.1) zoom 2
+    # if Girl == RogueX:
+    #     show Rogue_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
+    # elif Girl == KittyX:
+    #     show Kitty_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
+    # elif Girl == EmmaX:
+    #     show Emma_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
+    # elif Girl == LauraX:
+    #     show Laura_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
+    # elif Girl == JeanX:
+    #     show Jean_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
+    # elif Girl == StormX:
+    #     show Storm_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
+    # elif Girl == JubesX:
+    #     show Jubes_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
 
     if taboo:
         if len(Present) >= 2:
-            if Present[0] != focused_Girl:
-                "[focused_Girl.name] looks back at [Present[0].name] to see if she's watching."
-            elif Present[1] != focused_Girl:
-                "[focused_Girl.name] looks back at [Present[1].name] to see if she's watching."
+            if Present[0] != Girl:
+                "[Girl.name] looks back at [Present[0].name] to see if she's watching."
+            elif Present[1] != Girl:
+                "[Girl.name] looks back at [Present[1].name] to see if she's watching."
         else:
-            "[focused_Girl.name] looks around to see if anyone can see her."
+            "[Girl.name] looks around to see if anyone can see her."
 
-    if focused_Girl.outfit["bra"] and focused_Girl.outfit["top"]:
-        "She throws off her [focused_Girl.outfit[top]] and her [focused_Girl.outfit[bra]]."
-    elif focused_Girl.outfit["top"]:
-        "She throws off her [focused_Girl.outfit[top]], baring her breasts underneath."
-    elif focused_Girl.outfit["bra"]:
-        "She tugs off her [focused_Girl.outfit[bra]] and throws it aside."
+    if Girl.outfit["bra"] and Girl.outfit["top"]:
+        "She throws off her [Girl.outfit[top]] and her [Girl.outfit[bra]]."
+    elif Girl.outfit["top"]:
+        "She throws off her [Girl.outfit[top]], baring her breasts underneath."
+    elif Girl.outfit["bra"]:
+        "She tugs off her [Girl.outfit[bra]] and throws it aside."
 
-    $ focused_Girl.outfit["top"] = ""
-    $ focused_Girl.outfit["bra"] = ""
-    $ focused_Girl.outfit["gloves"] = ""
+    $ Girl.outfit["top"] = ""
+    $ Girl.outfit["bra"] = ""
+    $ Girl.outfit["gloves"] = ""
 
-    call Rogue_First_Topless
+    call expression Girl.tag + "_First_Topless"
 
-    if not focused_Girl.action_counter["titjob"] and "cockout" not in Player.recent_history:
-        if not focused_Girl.outfit["bra"] and not focused_Girl.outfit["top"]:
-            "As you pull out your cock, [focused_Girl.name] hesitantly places it between her breasts and starts to rub them up and down the shaft."
-        elif focused_Girl.outfit["bra"] and not focused_Girl.outfit["top"]:
-            "As you pull out your cock, [focused_Girl.name] hesitantly places it under her [focused_Girl.outfit['bra']], between her breasts and starts to rub them up and down the shaft."
-        elif focused_Girl.outfit["bra"] and focused_Girl.outfit["top"]:
-            "As you pull out your cock, [focused_Girl.name] hesitantly places it under her [focused_Girl.outfit['top']], between her breasts and starts to rub them up and down the shaft."
-        else:
-            "As you pull out your cock, [focused_Girl.name] hesitantly places it under her clothes, between her breasts and starts to rub them up and down the shaft."
-    elif "cockout" not in Player.recent_history:
-        if not focused_Girl.outfit["bra"] and not focused_Girl.outfit["top"]:
-            "As you pull out your cock, [focused_Girl.name] places it between her breasts and starts to rub them up and down the shaft."
-        elif focused_Girl.outfit["bra"] and not focused_Girl.outfit["top"]:
-            "As you pull out your cock, [focused_Girl.name] places it under her [focused_Girl.outfit['bra']], between her breasts and starts to rub them up and down the shaft."
-        elif focused_Girl.outfit["bra"] and focused_Girl.outfit["top"]:
-            "As you pull out your cock, [focused_Girl.name] places it under her [focused_Girl.outfit['top']], between her breasts and starts to rub them up and down the shaft."
-        else:
-            "As you pull out your cock, [focused_Girl.name] places it under her clothes, between her breasts and starts to rub them up and down the shaft."
+    if not orgasm:
+        if not Girl.action_counter["titjob"] and "cockout" not in Player.recent_history:
+            if not Girl.outfit["bra"] and not Girl.outfit["top"]:
+                "As you pull out your cock, [Girl.name] hesitantly places it between her breasts and starts to rub them up and down the shaft."
+            elif Girl.outfit["bra"] and not Girl.outfit["top"]:
+                "As you pull out your cock, [Girl.name] hesitantly places it under her [Girl.outfit['bra']], between her breasts and starts to rub them up and down the shaft."
+            elif Girl.outfit["bra"] and Girl.outfit["top"]:
+                "As you pull out your cock, [Girl.name] hesitantly places it under her [Girl.outfit['top']], between her breasts and starts to rub them up and down the shaft."
+            else:
+                "As you pull out your cock, [Girl.name] hesitantly places it under her clothes, between her breasts and starts to rub them up and down the shaft."
+        elif "cockout" not in Player.recent_history:
+            if not Girl.outfit["bra"] and not Girl.outfit["top"]:
+                "As you pull out your cock, [Girl.name] places it between her breasts and starts to rub them up and down the shaft."
+            elif Girl.outfit["bra"] and not Girl.outfit["top"]:
+                "As you pull out your cock, [Girl.name] places it under her [Girl.outfit['bra']], between her breasts and starts to rub them up and down the shaft."
+            elif Girl.outfit["bra"] and Girl.outfit["top"]:
+                "As you pull out your cock, [Girl.name] places it under her [Girl.outfit['top']], between her breasts and starts to rub them up and down the shaft."
+            else:
+                "As you pull out your cock, [Girl.name] places it under her clothes, between her breasts and starts to rub them up and down the shaft."
     else:
-        "[focused_Girl.name] wraps her tits around your cock."
+        "[Girl.name] wraps her tits around your cock."
 
-    call hide_girl(focused_Girl, hide_sprite = True)
-
-    show Rogue_titjob_animation zorder 150 at sprite_location(stage_center)
+    if Girl == RogueX:
+        show Rogue_sprite titjob zorder 150 at sprite_location(stage_center)
+    elif Girl == KittyX:
+        show Kitty_sprite titjob zorder 150 at sprite_location(stage_center)
+    elif Girl == EmmaX:
+        show Emma_sprite titjob zorder 150 at sprite_location(stage_center)
+    elif Girl == LauraX:
+        show Laura_sprite titjob zorder 150 at sprite_location(stage_center)
+    elif Girl == JeanX:
+        show Jean_sprite titjob zorder 150 at sprite_location(stage_center)
+    elif Girl == StormX:
+        show Storm_sprite titjob zorder 150 at sprite_location(stage_center)
+    elif Girl == JubesX:
+        show Jubes_sprite titjob zorder 150 at sprite_location(stage_center)
 
     return
 
-label blowjob_launch:
-    if renpy.showing(focused_Girl.tag + "_blowjob_animation"):
+transform show_blowjob_animation(location):
+    ease 0.5 pos (location, 0.1) xzoom 2.0 yzoom 2.0
+
+label show_blowjob(Girl, orgasm = False):
+    if renpy.showing(Girl.tag + " blowjob"):
         return
 
-    show Rogue_sprite zorder focused_Girl.sprite_layer at sprite_location(focused_Girl.sprite_location):
-        ease 0.5 pos (focused_Girl.sprite_location, 0.1) zoom 2
+    # if Girl == RogueX:
+    #     show Rogue_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
+    # elif Girl == KittyX:
+    #     show Kitty_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
+    # elif Girl == EmmaX:
+    #     show Emma_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
+    # elif Girl == LauraX:
+    #     show Laura_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
+    # elif Girl == JeanX:
+    #     show Jean_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
+    # elif Girl == StormX:
+    #     show Storm_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
+    # elif Girl == JubesX:
+    #     show Jubes_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
 
     if taboo:
         if len(Present) >= 2:
-            if Present[0] != focused_Girl:
-                "[focused_Girl.name] looks back at [Present[0].name] to see if she's watching."
-            elif Present[1] != focused_Girl:
-                "[focused_Girl.name] looks back at [Present[1].name] to see if she's watching."
+            if Present[0] != Girl:
+                "[Girl.name] looks back at [Present[0].name] to see if she's watching."
+            elif Present[1] != Girl:
+                "[Girl.name] looks back at [Present[1].name] to see if she's watching."
         else:
-            "[focused_Girl.name] looks around to see if anyone can see her."
+            "[Girl.name] looks around to see if anyone can see her."
 
-    if not focused_Girl.action_counter["blowjob"] and "cockout" not in Player.recent_history:
-        "[focused_Girl.name] hesitantly pulls down your pants and touches her mouth to your cock."
+    if not orgasm:
+        if not Girl.action_counter["blowjob"] and "cockout" not in Player.recent_history:
+            "[Girl.name] hesitantly pulls down your pants and touches her mouth to your cock."
     else:
-        "[focused_Girl.name] bends down and begins to suck on your cock."
+        "[Girl.name] bends down and begins to suck on your cock."
 
-    call hide_girl(focused_Girl, hide_sprite = True)
-
-    show Rogue_blowjob_animation zorder 150 at sprite_location(stage_center)
+    if Girl == RogueX:
+        show Rogue_sprite blowjob zorder 150 at sprite_location(stage_center)
+    elif Girl == KittyX:
+        show Kitty_sprite blowjob zorder 150 at sprite_location(stage_center)
+    elif Girl == EmmaX:
+        show Emma_sprite blowjob zorder 150 at sprite_location(stage_center)
+    elif Girl == LauraX:
+        show Laura_sprite blowjob zorder 150 at sprite_location(stage_center)
+    elif Girl == JeanX:
+        show Jean_sprite blowjob zorder 150 at sprite_location(stage_center)
+    elif Girl == StormX:
+        show Storm_sprite blowjob zorder 150 at sprite_location(stage_center)
+    elif Girl == JubesX:
+        show Jubes_sprite blowjob zorder 150 at sprite_location(stage_center)
 
     return
 
-label sex_launch:
-    $ Player.sprite = True
+label show_sex(Girl, action):
+    if action == "massage":
+        $ Player.cock_position = None
+    elif action == "footjob":
+        $ show_feet = True
 
-    if primary_action == "sex":
+        $ Player.cock_position = "footjob"
+    elif action == "hotdog":
+        $ Player.cock_position = "out"
+    elif action == "sex":
         $ Player.cock_position = "in"
 
         if offhand_action in pussy_actions:
             $ offhand_action = None
-    elif primary_action == "anal":
+    elif action == "anal":
         $ Player.cock_position = "anal"
 
         if offhand_action in ass_actions:
             $ offhand_action = None
-    elif primary_action == "hotdog":
-        $ Player.cock_position = "out"
-    elif primary_action == "footjob":
-        $ show_feet = True
 
-        $ Player.cock_position = "footjob"
-    elif primary_action == "massage":
-        $ Player.sprite = False
-        $ Player.cock_position = None
-    else:
-        $ Player.sprite = False
-        $ Player.cock_position = "out"
-
-    if focused_Girl.pose == "doggy":
-        call doggy_launch
+    if Girl.pose == "doggy":
+        call show_doggy(Girl)
 
         return
 
-    if renpy.showing(focused_Girl.tag + "_sex_animation"):
+    if renpy.showing(Girl.tag + " sex"):
         return
 
-    call hide_girl(focused_Girl, hide_sprite = True)
-
-    show Rogue_sex_animation zorder 150 at sprite_location(stage_center)
+    if Girl == RogueX:
+        show Rogue_sprite sex zorder 150 at sprite_location(stage_center)
+    elif Girl == KittyX:
+        show Kitty_sprite sex zorder 150 at sprite_location(stage_center)
+    elif Girl == EmmaX:
+        show Emma_sprite sex zorder 150 at sprite_location(stage_center)
+    elif Girl == LauraX:
+        show Laura_sprite sex zorder 150 at sprite_location(stage_center)
+    elif Girl == JeanX:
+        show Jean_sprite sex zorder 150 at sprite_location(stage_center)
+    elif Girl == StormX:
+        show Storm_sprite sex zorder 150 at sprite_location(stage_center)
+    elif Girl == JubesX:
+        show Jubes_sprite sex zorder 150 at sprite_location(stage_center)
 
     return
 
-label doggy_launch:
-    if renpy.showing(focused_Girl.tag + "_doggy_animation"):
+label show_doggy(Girl):
+    if renpy.showing(Girl.tag + " doggy"):
         return
 
-    call hide_girl(focused_Girl, hide_sprite = True)
-
-    show Rogue_doggy_animation zorder 150 at sprite_location(stage_center)
+    if Girl == RogueX:
+        show Rogue_sprite doggy zorder 150 at sprite_location(stage_center)
+    elif Girl == KittyX:
+        show Kitty_sprite doggy zorder 150 at sprite_location(stage_center)
+    elif Girl == EmmaX:
+        show Emma_sprite doggy zorder 150 at sprite_location(stage_center)
+    elif Girl == LauraX:
+        show Laura_sprite doggy zorder 150 at sprite_location(stage_center)
+    elif Girl == JeanX:
+        show Jean_sprite doggy zorder 150 at sprite_location(stage_center)
+    elif Girl == StormX:
+        show Storm_sprite doggy zorder 150 at sprite_location(stage_center)
+    elif Girl == JubesX:
+        show Jubes_sprite doggy zorder 150 at sprite_location(stage_center)
 
     return
+
+label lesbian_launch(Girl):
+    $ temp_Girls = [Girl, Partner]
+
+    while temp_Girls:
+        if "unseen" in temp_Girls[0].recent_history:
+            $ temp_Girls[0].eyes = "closed"
+        elif Girl == temp_Girls[0]:
+            if Girl == RogueX:
+                $ temp_Girls[0].eyes = "side"
+            elif Girl == EmmaX:
+                $ temp_Girls[0].eyes = "_sly"
+            else:
+                $ temp_Girls[0].eyes = "leftside"
+        else:
+            $ temp_Girls[0].eyes = "side"
+
+        if temp_Girls[0] == KittyX or temp_Girls[0] == LauraX:
+            $ temp_Girls[0].arm_pose = 1
+        else:
+            $ temp_Girls[0].arm_pose = 2
+
+        if Girl == temp_Girls[0]:
+            if temp_Girls[0] == KittyX:
+                $ x_position = 450
+            elif temp_Girls[0] == RogueX:
+                $ x_position = 550
+            else:
+                $ x_position = 500
+
+            $ temp_Girls[0].sprite_layer = 100
+
+            $ x_zoom = -1.3
+        else:
+            if temp_Girls[0] == EmmaX or LauraX:
+                $ x_position = 700
+            else:
+                $ x_position = 715
+
+            if temp_Girls[0] == KittyX:
+                if RogueX in (Partner,Girl):
+                    $ KittyX.sprite_layer = 100
+                else:
+                    $ KittyX.sprite_layer = 25
+            else:
+                $ temp_Girls[0].sprite_layer = 75
+
+            $ x_zoom = 1.3
+
+        # if temp_Girls[0] == RogueX:
+        #     show Rogue_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
+        #         xzoom x_zoom yzoom 1.3
+        # elif temp_Girls[0] == KittyX:
+        #     show Kitty_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
+        #         xzoom x_zoom yzoom 1.3
+        # elif temp_Girls[0] == EmmaX:
+        #     show Emma_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
+        #         xzoom x_zoom yzoom 1.3
+        # elif temp_Girls[0] == LauraX:
+        #     show Laura_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
+        #         xzoom x_zoom yzoom 1.3
+        # elif temp_Girls[0] == JeanX:
+        #     show Jean_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
+        #         xzoom x_zoom yzoom 1.3
+        # elif temp_Girls[0] == StormX:
+        #     show Storm_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
+        #         xzoom x_zoom yzoom 1.3
+        # elif temp_Girls[0] == JubesX:
+        #     show Jubes_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
+        #         xzoom x_zoom yzoom 1.3
+
+        $ temp_Girls.remove(temp_Girls[0])
+
+    return
+
+image Girl_hand:
+    "images/UI_GirlHand.png"
+
+    anchor (0.5, 0.5)
+
+image Girl_finger:
+    "images/UI_GirlFinger.png"
+
+    anchor (0.5, 0.5)
+
+image Girl_fondle_thigh:
+    "Girl_hand"
+    pos (210, 730) alpha 0.5 zoom 0.6
+    rotate 100
+    parallel:
+        pause 0.5
+        ease 1 yoffset 50
+        ease 1 yoffset 0
+        repeat
+    parallel:
+        pause 0.5
+        ease 0.5 xoffset 3
+        ease 0.5 xoffset 0
+        ease 0.5 xoffset 3
+        ease 0.5 xoffset 0
+        repeat
+
+image Girl_fondle_breast_left_animation:
+    alpha 0.5 zoom 0.6
+    rotate -20
+    block:
+        ease 1 rotate -40 offset (-20, -10)
+        ease 1 rotate -20 offset (0, 0)
+        repeat
+
+image Girl_fondle_breast_right_animation:
+    "Girl_hand"
+    alpha 0.5 xzoom -0.6 yzoom 0.6
+    rotate -10
+    block:
+        ease 1 rotate -30 yoffset 30
+        ease 1 rotate -10 yoffset 0
+        repeat
+
+image Girl_fondle_pussy_animation:
+    "Girl_hand"
+    alpha 0.5 zoom 0.6
+    rotate 200
+    block:
+        choice:
+            ease 0.75 rotate 210 offset (-5, 5)
+            ease 0.5 rotate 195
+            ease 0.75 rotate 210
+            ease 0.5 rotate 195
+        choice:
+            ease 0.5 rotate 210 offset (-5, 5)
+            ease 1 rotate 195
+            pause 0.25
+            ease 0.5 rotate 210
+            ease 1 rotate 195
+            pause 0.25
+        choice:
+            ease 0.5 rotate 205 pos (-5, 5)
+            ease 0.75 rotate 200 pos (-5, 10)
+            ease 0.5 rotate 205 pos (-5, 5)
+            ease 0.75 rotate 200 pos (-5, 10)
+        choice:
+            ease 0.3 rotate 205 pos (-5, 5)
+            ease 0.3 rotate 200 pos (-5, 15)
+            ease 0.3 rotate 205 pos (-5, 5)
+            ease 0.3 rotate 200 pos (-5, 15)
+        repeat
+
+image Girl_finger_pussy_animation:
+    "Girl_finger"
+    alpha 0.5 zoom 0.6
+    rotate 200
+    block:
+        choice:
+            ease 0.75 rotate 210 yoffset 5
+            ease 0.5 rotate 195
+            ease 0.75 rotate 210
+            ease 0.5 rotate 195
+        choice:
+            ease 0.5 rotate 210 yoffset 5
+            ease 1 rotate 195
+            pause 0.25
+            ease 0.5 rotate 210
+            ease 1 rotate 195
+            pause 0.25
+        choice:
+            ease 0.5 rotate 205 yoffset 5
+            ease 0.75 rotate 200 yoffset 10
+            ease 0.5 rotate 205 yoffset 5
+            ease 0.75 rotate 200 yoffset 10
+        choice:
+            ease 0.3 rotate 205 yoffset 5
+            ease 0.3 rotate 200 yoffset 15
+            ease 0.3 rotate 205 yoffset 5
+            ease 0.3 rotate 200 yoffset 15
+        repeat
 
 transform blowjob_starting:
-    subpixel True
     ease 1.5 offset (0, 0)
 
 transform blowjob_licking:
-    subpixel True
     ease 0.5 offset (2, -20)
     block:
         ease 2.5 offset (15, 60)
@@ -242,7 +696,6 @@ transform blowjob_licking:
         repeat
 
 transform blowjob_licking_body:
-    subpixel True
     ease 0.5 offset (2, -20)
     block:
         ease 2.5 offset (20, 55)
@@ -251,14 +704,12 @@ transform blowjob_licking_body:
         repeat
 
 transform blowjob_heading:
-    subpixel True
     block:
         ease 1 yoffset 35
         ease 1.5 yoffset 0
         repeat
 
 transform blowjob_sucking:
-    subpixel True
     ease 0.5 offset (0, 30)
     block:
         ease 1 yoffset 80
@@ -266,7 +717,6 @@ transform blowjob_sucking:
         repeat
 
 transform blowjob_sucking_body:
-    subpixel True
     ease 0.5 offset (0, 30)
     block:
         ease 1 yoffset 65
@@ -276,7 +726,6 @@ transform blowjob_sucking_body:
 transform blowjob_deepthroat:
     ease 0.5 offset (0, 40)
     block:
-        subpixel True
         ease 1 yoffset 110
         pause 0.5
         ease 2 yoffset 40
@@ -285,14 +734,12 @@ transform blowjob_deepthroat:
 transform blowjob_deepthroat_body:
     ease 0.5 offset (0, 40)
     block:
-        subpixel True
         ease 1.2 yoffset 90
         pause 0.5
         ease 1.8 yoffset 40
         repeat
 
 transform blowjob_mouth_animation2:
-    subpixel True
     pos (0.165, 0.521) anchor (0.4, 0.6) zoom 0.90
     block:
         pause 0.10
@@ -307,7 +754,6 @@ transform blowjob_mouth_animation2:
         repeat
 
 transform blowjob_face_mask_animation2:
-    subpixel True
     pos (0.445, 0.616) anchor (0.45, 0.6) zoom 0.90
     block:
         pause 0.10

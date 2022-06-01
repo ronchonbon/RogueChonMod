@@ -1139,7 +1139,7 @@ label Les_Cycle(Girl=focused_Girl):
     $ Girl = check_girl(Girl)
     while round > 0:
         call shift_focus (Girl)
-        call Les_Launch (Girl)
+        call lesbian_launch(Girl)
         $ Girl.lust_face()
 
         if Player.focus < 100:
@@ -1169,7 +1169,7 @@ label Les_Cycle(Girl=focused_Girl):
                     menu:
                         "Offhand action":
                             if Girl.remaining_actions and multi_action:
-                                call Offhand_Set
+                                call set_offhand_action
                                 if offhand_action:
                                     $ Girl.remaining_actions -= 1
                             else:
@@ -1262,8 +1262,8 @@ label Les_Cycle(Girl=focused_Girl):
                 if "unseen" not in Girl.recent_history:
                     call Player_Cumming (Girl)
                     if "_angry" in Girl.recent_history:
-                        call expression Girl.tag + "_Pos_Reset"
-                        call expression Partner.tag + "_Pos_Reset"
+                        call reset_position(Girl)
+                        call reset_position(Partner)
                         return
                     $ Girl.change_stat("lust", 200, 5)
                     if 100 > Girl.lust >= 70 and Girl.session_orgasms < 2:
@@ -1310,12 +1310,12 @@ label Les_Cycle(Girl=focused_Girl):
 
 
 label Les_After:
-    call expression Girl.tag + "_Pos_Reset"
+    call reset_position(Girl)
     if not Partner:
         $ approval_bonus = 0
         call checkout
         return
-    call expression Partner.tag + "_Pos_Reset"
+    call reset_position(Partner)
     $ Girl.change_face("_sexy")
     if Partner == EmmaX:
         call Partner_Like (Girl, 4)
@@ -2034,7 +2034,7 @@ label Girl_Whammy(Other):
         if Other == JubesX and JubesX.level >= JeanX.level:
             ch_v "Vampire whammy beats mutant whammy!"
             return
-            
+
         $ Other.likes[JeanX.tag] += 500 if Other.likes[JeanX.tag] <= 900 else Other.likes[JeanX.tag]
         $ Other.likes[JeanX.tag] = 900 if Other.likes[JeanX.tag] >= 900 else Other.likes[JeanX.tag]
     return
@@ -3453,7 +3453,7 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 $ Player.recent_history.append("no_les")
                 "She hangs up."
                 hide cellphone
-                jump Misplaced
+                jump reset_location
             "What, are you watching a movie?" if line != "what" and Girl != JeanX:
                 $ Girl.change_stat("love", 80, 2)
                 $ Girl.change_stat("inhibition", 80, 2)
@@ -3564,7 +3564,7 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 $ renpy.pop_call()
                 $ bg_current = "bg_campus"
                 $ line = 0
-                jump Misplaced
+                jump reset_location
 
     $ line = 0
     $ Girl.change_face("_sly",1)
@@ -3589,6 +3589,7 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
     $ girl_offhand_action = "fondle_pussy"
     $ second_girl_primary_action = "fondle_pussy"
     $ Partner = Girl2
-    call expression Girl.tag + "_SexAct" pass ("lesbian")
-    jump Misplaced
+    call shift_focus(Girl)
+    call Les_Prep(Girl)
+    jump reset_location
     return

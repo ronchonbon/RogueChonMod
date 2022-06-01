@@ -1,92 +1,36 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/locations.rpy", line 110, in script call
-    call chat
-  File "game/chat.rpy", line 164, in script call
-    call chat_menu
-  File "game/chat.rpy", line 263, in script call
-    call enter_main_sex_menu
-  File "game/menus.rpy", line 61, in script call
-    call girl_sex_menu(focused_Girl)
-  File "game/actions.rpy", line 223, in script call
-    call sex_launch
-  File "game/girl_animations.rpy", line 208, in script call
-    call doggy_launch
-  File "game/girl_animations.rpy", line 227, in script
-    show Rogue_doggy_animation zorder 150 at sprite_location(stage_center)
-Exception: In DynamicImage u'images/Rogue_doggy/Rogue_doggy_neckRogueX.outfit[neck].png': Could not find substitution 'neck'.
+  File "game/locations.rpy", line 101, in script call
+    call event_calls
+  File "game/utilities.rpy", line 942, in script call
+    call expression event_Girls[0].tag + "_Love"
+  File "game/emma_scenes.rpy", line 1598, in script call
+    call before_action(EmmaX, "sex", None)
+  File "game/actions.rpy", line 177, in script
+    label before_action(Girl, action, context):
+Exception: Required parameter context has no value.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/locations.rpy", line 110, in script call
-    call chat
-  File "game/chat.rpy", line 164, in script call
-    call chat_menu
-  File "game/chat.rpy", line 263, in script call
-    call enter_main_sex_menu
-  File "game/menus.rpy", line 61, in script call
-    call girl_sex_menu(focused_Girl)
-  File "game/actions.rpy", line 223, in script call
-    call sex_launch
-  File "game/girl_animations.rpy", line 208, in script call
-    call doggy_launch
-  File "game/girl_animations.rpy", line 227, in script
-    show Rogue_doggy_animation zorder 150 at sprite_location(stage_center)
-  File "renpy/ast.py", line 1197, in execute
-    show_imspec(self.imspec, atl=getattr(self, "atl", None))
-  File "renpy/ast.py", line 1167, in show_imspec
-    atl=atl)
-  File "renpy/exports.py", line 768, in show
-    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
-  File "renpy/display/core.py", line 1147, in add
-    thing.visit_all(lambda d : None)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 558, in visit_all
-    for d in self.visit():
-  File "renpy/display/layout.py", line 1415, in visit
-    self.update(self.last_st, self.last_at)
-  File "renpy/display/layout.py", line 1443, in update
-    child.visit_all(lambda c : c.per_interact())
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 558, in visit_all
-    for d in self.visit():
-  File "renpy/display/layout.py", line 1415, in visit
-    self.update(self.last_st, self.last_at)
-  File "renpy/display/layout.py", line 1443, in update
-    child.visit_all(lambda c : c.per_interact())
-  File "renpy/display/core.py", line 558, in visit_all
-    for d in self.visit():
-  File "renpy/display/image.py", line 744, in visit
-    self.find_target()
-  File "renpy/display/image.py", line 638, in find_target
-    raise Exception("In DynamicImage %r: Could not find substitution '%s'." % (self.name, str(ke.args[0])))
-Exception: In DynamicImage u'images/Rogue_doggy/Rogue_doggy_neckRogueX.outfit[neck].png': Could not find substitution 'neck'.
+  File "game/locations.rpy", line 101, in script call
+    call event_calls
+  File "game/utilities.rpy", line 942, in script call
+    call expression event_Girls[0].tag + "_Love"
+  File "game/emma_scenes.rpy", line 1598, in script call
+    call before_action(EmmaX, "sex", None)
+  File "game/actions.rpy", line 177, in script
+    label before_action(Girl, action, context):
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 869, in execute
+    values = apply_arguments(self.parameters, renpy.store._args, renpy.store._kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 159, in apply_arguments
+    return parameters.apply(args, kwargs, ignore_errors)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 123, in apply
+    raise Exception("Required parameter %s has no value." % name)
+Exception: Required parameter context has no value.
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like 0.997f2
-Sat May 28 09:21:24 2022
+Wed Jun  1 04:21:49 2022

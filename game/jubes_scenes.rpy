@@ -46,7 +46,7 @@ label Jubes_Meet:
     call shift_focus (JubesX)
 
     $ JubesX.arm_pose = 2
-    show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_right):
+    show Jubes_sprite standing zorder JubesX.sprite_layer at sprite_location(stage_right):
         ease 0.1 offset (100,50) zoom 2.5 alpha 1
         block:
             ease 1 yoffset 100
@@ -85,14 +85,14 @@ label Jubes_Meet:
                     ". . ."
                     $ JubesX.change_stat("love", 90, 2)
                     $ JubesX.change_face("_surprised",2)
-                    show Jubes_Sprite:
+                    show Jubes_sprite standing:
                         ease 0.2 offset (100,50) zoom 2.5 alpha 1
                     ch_v "Whoa! Um. . . this is bad. . ."
                     ch_v "Wake up! Wake up! Sorry!!!!"
                     "You slowly pull yourself back. . ."
                     hide black_screen onlayer black
                     ch_v "Sorry!"
-                    show Jubes_Sprite:
+                    show Jubes_sprite standing:
                         ease 0.5 offset (100,0) zoom 1.5 alpha 1
                     ch_v "I think I maybe drained a bit too much!"
                     $ JubesX.change_face("_sadside",1)
@@ -101,7 +101,7 @@ label Jubes_Meet:
                 $ JubesX.change_stat("obedience", 90, 5)
                 $ JubesX.change_stat("inhibition", 90, -1)
                 $ JubesX.change_face("_surprised",2)
-                show Jubes_Sprite:
+                show Jubes_sprite standing:
                     ease 0.5 offset (100,0) zoom 1.5 alpha 1
                 ch_v "Ah!"
                 $ JubesX.change_face("_sadside",1,mouth="_normal")
@@ -111,7 +111,7 @@ label Jubes_Meet:
                 $ JubesX.change_stat("love", 90, 2)
                 $ JubesX.change_stat("inhibition", 90, 2)
                 $ JubesX.change_face("_surprised",2)
-                show Jubes_Sprite:
+                show Jubes_sprite standing:
                     ease 0.5 offset (100,0) zoom 1.5 alpha 1
                 ch_v "Oh!"
                 $ JubesX.change_face("_sadside",1,mouth="_smile")
@@ -122,7 +122,7 @@ label Jubes_Meet:
                 $ JubesX.change_stat("obedience", 90, 10)
                 $ JubesX.change_stat("inhibition", 90, -3)
                 $ JubesX.change_face("_surprised",2)
-                show Jubes_Sprite:
+                show Jubes_sprite standing:
                     ease 0.5 offset (100,0) zoom 1.5 alpha 1
                 ch_v "Ah!"
                 $ JubesX.change_face("_sadside",1,mouth="_normal")
@@ -130,7 +130,7 @@ label Jubes_Meet:
                 $ Count = 1
         $ Count -= 1
     $ JubesX.blushing = "_blush1"
-    show Jubes_Sprite at sprite_location(JubesX.sprite_location,50)
+    show Jubes_sprite standing at sprite_location(JubesX.sprite_location,50)
     $ Count = 3
     while Count > 0:
         menu:
@@ -488,10 +488,10 @@ label Jubes_Meet:
             ch_v "I heard you're a charmer."
             ch_v "Well, I guess. . . one. . ."
             $ JubesX.change_face("_kiss")
-            show Jubes_Sprite:
+            show Jubes_sprite standing:
                 ease 0.5 offset (0,0) zoom 2
             pause 1
-            show Jubes_Sprite:
+            show Jubes_sprite standing:
                 ease 0.5 offset (100,0) zoom 1.5
             $ JubesX.change_face("_sly",1)
             ch_v ". . ."
@@ -534,7 +534,7 @@ label Jubes_Meet:
 
     $ JubesX.add_word(1,0,0,0,"met")
     $ active_Girls.append(JubesX) if JubesX not in active_Girls else active_Girls
-    hide Jubes_Sprite with easeoutright
+    hide Jubes_sprite with easeoutleft
     call remove_girl (JubesX)
     "[JubesX.name] leaves the room, you might as well get some sleep. . ."
     return
@@ -553,7 +553,7 @@ label Jubes_Sunshine:
     call set_the_scene
     $ JubesX.change_face("_smile")
     "On your way across the square, you see a shape charging toward you."
-    call Punch
+    call punch
     "[JubesX.name] crashes into you."
     $ JubesX.change_face("_smile",1,mouth="_sucking")
     ch_v "Hey, [Player.name]!"
@@ -639,7 +639,7 @@ label Jubes_Sunshine:
     $ JubesX.change_face("_smile",1)
     ch_v "Anyway, I just wanted to say \"thank you,\" this is great!"
     $ JubesX.add_word(1,0,0,0,"sunshine")
-    hide Jubes_Sprite with easeoutright
+    hide Jubes_sprite with easeoutright
     call remove_girl (JubesX)
     "[JubesX.name] dashes off, and you continue on your way. . ."
     return
@@ -696,7 +696,7 @@ label check_on_Jubes_sunshock:
 
                 $ JubesX.add_word(1,"stayed",0,0,0)
 
-                jump Misplaced
+                jump reset_location
             "Oh, too bad, you can stay here then.":
                 $ Party.remove(JubesX)
 
@@ -771,7 +771,7 @@ label is_Jubes_sunshocked:
                         $ Girl.change_stat("love", 80, 6)
                         $ Girl.change_face("_smile")
 
-                        call Girl_Tag (Girl)
+                        call girl_touches_you (Girl)
                     "Nope, sorry.":
                         $ JubesX.change_stat("love", 80, -3)
                         $ JubesX.change_stat("obedience", 70, 2)
@@ -1081,7 +1081,7 @@ label Jubes_Mall(temp_Girls=[]):
     call set_the_scene
     ch_v "Anyway, it was nice to hang out with you."
     ch_v "I hope we can do it again some time!"
-    jump Misplaced
+    jump reset_location
     return
 
 
@@ -1419,7 +1419,7 @@ label Jubes_BF(temp_Girls=[]):
         return True
     $ approval_bonus = 10
     $ Player.add_word(1,"interruption")
-    call Jubes_SexMenu
+    call enter_main_sex_menu(JubesX)
     $ approval_bonus = 0
 
     return
@@ -1472,7 +1472,7 @@ label Jubes_Cleanhouse:
             $ JubesX.change_stat("obedience", 80, 10)
             $ JubesX.change_stat("inhibition", 80, 10)
             $ JubesX.blushing = "_blush2"
-            show Jubes_Sprite with vpunch
+            show Jubes_sprite standing with vpunch
             "She clocks you one."
             "That was fair."
             $ JubesX.blushing = "_blush1"
@@ -1810,7 +1810,7 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
         $ JubesX.event_happened[6] = 23
         $ JubesX.recent_history.append("_angry")
         $ JubesX.daily_history.append("_angry")
-        hide Jubes_Sprite with easeoutright
+        hide Jubes_sprite with easeoutright
         call remove_girl (JubesX)
         $ JubesX.location = "hold"
         return
@@ -1936,7 +1936,7 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
 label Jubes_Love_End:
     if "lover" not in JubesX.player_petnames:
         $ JubesX.event_happened[6] = 20
-        hide Jubes_Sprite with easeoutright
+        hide Jubes_sprite with easeoutright
         call remove_girl (JubesX)
         $ JubesX.location = "hold"
         return
@@ -1961,13 +1961,15 @@ label Jubes_Love_End:
             $ JubesX.change_stat("inhibition", 30, 20)
             $ JubesX.change_stat("obedience", 70, 10)
             ch_v "Hmm. . ."
-            call Jubes_SexAct ("sex")
+
+            call before_action(JubesX, "sex", None)
         "I have something else in mind. . .[[choose another activity]":
             $ JubesX.brows = "_confused"
             $ JubesX.change_stat("obedience", 70, 25)
             ch_v "Like what? . ."
             $ approval_bonus = 20
-            call Jubes_SexMenu
+            call enter_main_sex_menu(JubesX)
+
     return
 
 label Jubes_Love_Redux:
@@ -2320,7 +2322,7 @@ label Jubes_Sub:
     elif line == "embarrassed":
         $ JubesX.change_face("_sadside", 2)
         ch_v "Huh, ok, if you're not interested. . ."
-        hide Jubes_Sprite with easeoutright
+        hide Jubes_sprite with easeoutright
         call remove_girl (JubesX)
         if not simulation:
             $ renpy.pop_call()
@@ -2405,7 +2407,7 @@ label Jubes_Sub_Asked:
     $ JubesX.daily_history.append("asked sub")
     if line == "rude":
 
-        hide Jubes_Sprite with easeoutright
+        hide Jubes_sprite with easeoutright
         call remove_girl (JubesX)
         $ JubesX.recent_history.append("_angry")
         if not simulation:
@@ -2590,7 +2592,7 @@ label Jubes_Master:
     $ JubesX.history.append("master")
     if line == "rude":
         $ JubesX.recent_history.append("_angry")
-        hide Jubes_Sprite with easeoutright
+        hide Jubes_sprite with easeoutright
         call remove_girl (JubesX)
         if not simulation:
             $ renpy.pop_call()
@@ -2598,7 +2600,7 @@ label Jubes_Master:
     elif line == "embarrassed":
         ch_v "Ok, fine then."
         ch_v "And here I was, about to \"elevate your clearance.\""
-        hide Jubes_Sprite with easeoutright
+        hide Jubes_sprite with easeoutright
         call remove_girl (JubesX)
         if not simulation:
             $ renpy.pop_call()
@@ -2744,10 +2746,10 @@ label Jubes_Sexfriend:
                     $ JubesX.change_stat("inhibition", 90, 15)
                     ch_v "Kinky."
 
-        $ action_context = JubesX
         $ Player.add_word(1,"interruption")
-        call Jubes_SexPrep
-        call Jubes_SexMenu
+        call before_action(JubesX, "sex", JubesX)
+        call enter_main_sex_menu(JubesX)
+
 
 
     return
@@ -2775,7 +2777,7 @@ label Jubes_Fuckbuddy:
     $ primary_action = "masturbation"
     $ girl_offhand_action = "fondle_pussy"
     $ JubesX.change_face("_sly",2,mouth="_lipbite")
-    "[JubesX.name] is standing in the doorway, with her hand down her pants."
+    "[JubesX.name] is_sprite standing in the doorway, with her hand down her pants."
     "You can tell she's been masturbating furiously, her scent is overpowering."
     $ primary_action = None
     $ girl_offhand_action = None
@@ -2786,10 +2788,10 @@ label Jubes_Fuckbuddy:
     $ JubesX.player_petnames.append("fuck buddy")
     $ JubesX.event_happened[10] += 1
 
-    $ action_context = JubesX
     $ Player.add_word(1,"interruption")
-    call Jubes_SexPrep
-    call Jubes_SexMenu
+    call before_action(JubesX, "sex", JubesX)
+    call enter_main_sex_menu(JubesX)
+
     return
 
 

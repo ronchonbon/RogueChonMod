@@ -1292,8 +1292,8 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
             $ JeanX.blushing = "_blush1"
             $ JeanX.had_chat.append("blowjob")
         else:
-            $ line = renpy.random.choice(["I gotta tell you, your dick tastes great.", 
-                            "I think I nearly dislocated my jaw last time.", 
+            $ line = renpy.random.choice(["I gotta tell you, your dick tastes great.",
+                            "I think I nearly dislocated my jaw last time.",
                             "Let me know if you'd like another blowjob sometime.",
                             "Hmmm. . . [she mimes her tongue knocking against her cheek.]"])
             ch_j "[line]"
@@ -1375,8 +1375,8 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
 
 
     elif Options[0] == "hate":
-        $ line = renpy.random.choice(["Get away from me.", 
-                "I don't want to smell you near me.", 
+        $ line = renpy.random.choice(["Get away from me.",
+                "I don't want to smell you near me.",
                 "Back off.",
                 "Buzz off."])
         ch_j "[line]"
@@ -1708,7 +1708,7 @@ label Jean_Rename:
 
 label Jean_Personality(counter=0):
     if not JeanX.had_chat[4] or counter:
-        "Since you're doing well in one area, you can convince Jean to focus on one of the others."
+        "Since you're doing well in one area, you can convince Jean_sprite to focus on one of the others."
         "Any time you go over the limit in a given stat, the excess will spill over into the chosen stat instead."
         "This will also impact which personality trait takes priority in dialog."
     menu:
@@ -1982,7 +1982,8 @@ label Jean_Summon(approval_bonus=approval_bonus):
             jump danger_room
         elif JeanX.location == "bg_jean":
             ch_j "Don't keep me waiting."
-            jump Jean_Room
+            $ Girl = JeanX
+            jump girls_room
         elif JeanX.location == "bg_player":
             ch_j "Don't keep me waiting."
             jump player_room
@@ -1995,11 +1996,12 @@ label Jean_Summon(approval_bonus=approval_bonus):
         elif JeanX.location in personal_rooms:
             ch_j "Yeah, see you."
             $ bg_current = JeanX.location
-            jump Misplaced
+            jump reset_location
         else:
             ch_j "Um, I'll just meet you in my room."
             $ JeanX.location = "bg_jean"
-            jump Jean_Room
+            $ Girl = JeanX
+            jump girls_room
 
 
     elif line == "lonely":
@@ -2276,7 +2278,7 @@ label Jean_Clothes:
     $ Girl = JeanX
     call shift_focus (Girl)
 
-label Jean_Wardrobe_Menu:
+label Jean_wardrobe_menu:
     $ JeanX.change_face()
     $ primary_action = 1
     while True:
@@ -2905,8 +2907,8 @@ label Jean_Wardrobe_Menu:
                     $ JeanX.outfit["hose"] = "_ripped_pantyhose"
                 "The stockings and garterbelt would look good with that." if JeanX.outfit["hose"] != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in JeanX.inventory:
                     $ JeanX.outfit["hose"] = "_stockings_and_garterbelt"
-                "Just the garterbelt would look good with that." if JeanX.outfit["hose"] != "garterbelt" and "_stockings_and_garterbelt" in JeanX.inventory:
-                    $ JeanX.outfit["hose"] = "garterbelt"
+                "Just the garterbelt would look good with that." if JeanX.outfit["hose"] != "_garterbelt" and "_stockings_and_garterbelt" in JeanX.inventory:
+                    $ JeanX.outfit["hose"] = "_garterbelt"
                 "Never mind":
                     pass
             return
@@ -3109,7 +3111,7 @@ label Jean_Wardrobe_Menu:
         "Piercings. [[See what she looks like without them first] (locked)" if not JeanX.seen_pussy and not JeanX.seen_breasts:
             pass
 
-        "Add ring piercings" if JeanX.outfit["front_inner_accessory"] != "_ring" and (JeanX.seen_pussy or JeanX.seen_breasts):
+        "Add ring piercings" if JeanX.outfit["piercings"] != "_ring" and (JeanX.seen_pussy or JeanX.seen_breasts):
             ch_p "You know, you'd look really nice with some ring body piercings"
             if "_ring" in JeanX.to_do:
                 ch_j "Yeah, I know, I'll get to it."
@@ -3129,7 +3131,7 @@ label Jean_Wardrobe_Menu:
                     return
                 $ JeanX.to_do.append("_ring")
 
-        "Add barbell piercings" if JeanX.outfit["front_inner_accessory"] != "_barbell" and (JeanX.seen_pussy or JeanX.seen_breasts):
+        "Add barbell piercings" if JeanX.outfit["piercings"] != "_barbell" and (JeanX.seen_pussy or JeanX.seen_breasts):
             ch_p "You know, you'd look really nice with some barbell body piercings"
             if "_barbell" in JeanX.to_do:
                 ch_j "Yeah, I know, I'll get to it."
@@ -3149,7 +3151,7 @@ label Jean_Wardrobe_Menu:
                     return
                 $ JeanX.to_do.append("_barbell")
 
-        "Remove Piercings" if JeanX.outfit["front_inner_accessory"]:
+        "Remove Piercings" if JeanX.outfit["piercings"]:
             ch_p "You know, you'd look better without those piercings."
             $ JeanX.change_face("_bemused", 1)
             $ approval = approval_check(JeanX, 1350, taboo_modifier=0)
@@ -3164,15 +3166,15 @@ label Jean_Wardrobe_Menu:
                 $ JeanX.brows = "_angry"
                 ch_j "I don't know, I kinda like them now. . ."
                 return
-            $ JeanX.outfit["front_inner_accessory"] = ""
+            $ JeanX.outfit["piercings"] = ""
 
-        "Add Suspenders" if JeanX.outfit["front_outer_accessory"] != "_suspenders" and JeanX.outfit["front_outer_accessory"] != "_suspenders2" and "halloween" in JeanX.history:
-            $ JeanX.outfit["front_outer_accessory"] = "_suspenders"
-        "Remove Suspenders" if JeanX.outfit["front_outer_accessory"] == "_suspenders" or JeanX.outfit["front_outer_accessory"] == "_suspenders2":
-            $ JeanX.outfit["front_outer_accessory"] = ""
+        "Add Suspenders" if JeanX.outfit["suspenders"] != "_suspenders" and JeanX.outfit["suspenders"] != "_suspenders2" and "halloween" in JeanX.history:
+            $ JeanX.outfit["suspenders"] = "_suspenders"
+        "Remove Suspenders" if JeanX.outfit["suspenders"] == "_suspenders" or JeanX.outfit["suspenders"] == "_suspenders2":
+            $ JeanX.outfit["suspenders"] = ""
 
-        "Shift Suspenders" if JeanX.outfit["front_outer_accessory"] == "_suspenders" or JeanX.outfit["front_outer_accessory"] == "_suspenders2":
-            $ JeanX.outfit["front_outer_accessory"] = "_suspenders" if JeanX.outfit["front_outer_accessory"] == "_suspenders2" else "_suspenders2"
+        "Shift Suspenders" if JeanX.outfit["suspenders"] == "_suspenders" or JeanX.outfit["suspenders"] == "_suspenders2":
+            $ JeanX.outfit["suspenders"] = "_suspenders" if JeanX.outfit["suspenders"] == "_suspenders2" else "_suspenders2"
         "Never mind":
 
 

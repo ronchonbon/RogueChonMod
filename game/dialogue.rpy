@@ -1191,7 +1191,7 @@ label action_not_done_yet_lines(Girl, action):
         if action in ["eat_pussy", "eat_ass"]:
             $ lines.append("That's pretty intimate, " + Girl.player_petname + ". . .")
 
-        if action in ["eat_ass", "dildo_anal", "anal"]:
+        if action in ["eat_ass", "dildo_ass", "anal"]:
             $ lines.append("I don't know that I'm. . ." + Girl.like + "that kind of girl?")
 
         if action == "blowjob":
@@ -5963,6 +5963,31 @@ label masturbation_stop_for_now_lines(Girl, action):
         $ lines = ["I . . . fine . ."]
     elif Girl == JubesX:
         $ lines = ["Hrmm."]
+
+    $ line = renpy.random.choice(lines)
+
+    Girl.voice "[line]"
+
+    return
+
+label maybe_blowjob_instead_lines(Girl):
+    if Girl == RogueX:
+        $ lines = ["I could just. . . blow you instead?",
+            "I could maybe. . . you know, [[she pushes her tongue against the side of her cheek]?"]
+    elif Girl == KittyX:
+        $ lines = ["Could I[Girl.like]. . . blow you instead?"]
+    elif Girl == EmmaX:
+        $ lines = ["You seemed to enjoy blowjobs, would that work instead?",
+            "Would you perhaps prefer a blowjob?"]
+    elif Girl == LauraX:
+        $ lines = ["I could maybe blow you?"]
+    elif Girl == JeanX:
+        $ lines = ["What about a blowjob then?"]
+    elif Girl == StormX:
+        $ lines = ["You seemed to enjoy blowjobs, would that work instead?",
+            "Would you perhaps prefer a blowjob?"]
+    elif Girl == JubesX:
+        $ lines = []
 
     $ line = renpy.random.choice(lines)
 

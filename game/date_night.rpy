@@ -1664,7 +1664,7 @@ label Date_Prep(Girl=0):
         $ Girl.outfit_name = Options[0]
         $ del Options[:]
     $ Girl.location = "date"
-    $ Girl.change_outfit(outfit_changed=1)
+    $ Girl.change_outfit()
     $ Girl.change_face("_smile")
     return
 
@@ -3357,9 +3357,9 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
         elif OptionsDS[0] == "flash":
             $ Girl.change_face("_sexy")
             "After making out for a few minutes, [Girl.name] gets a sly look on her face, then shifts a bit lower in her seat."
-            if Girl.bottom_number() > 6:
+            if Girl.wearing_pants:
                 "Looking down, you notice she's pulled down her pants enough that you can see her bare pussy, lit by the movie screen."
-            elif Girl.bottom_number() == 6:
+            elif Girl.wearing_shorts:
                 "Looking down, you notice she's pulled down her shorts enough that you can see her bare pussy, lit by the movie screen."
             else:
                 "Looking down, you notice she's hiked up her skirt enough that you can see her bare pussy, lit by the movie screen."
@@ -4164,8 +4164,9 @@ label Girl_Date_End(Girl=0):
                         ch_v "Sure, why not. . ."
                     call check_if_second_minds (Girl, 0, 2)
                     $ multi_action = False
-                    $ primary_action = "kiss"
-                    call before_action
+
+                    call before_action(Girl, "kiss", None)
+                    
                     $ multi_action = True
                 if approval_check(Girl, 900, Bonus=(10*Date_Bonus[0])):
                     $ Girl.change_face("_sexy", 1)
@@ -4328,8 +4329,7 @@ label Girl_Date_End(Girl=0):
         ch_v "So. . . what did you wanna do to me?"
     $ Player.daily_history.append("post date")
 
-
-    call enter_main_sex_menu
+    call enter_main_sex_menu(Girl)
 
     if "_angry" in Girl.recent_history:
         if bg_current == "bg_player":

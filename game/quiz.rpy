@@ -21,7 +21,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
             ch_r "but it looks like I got ahead of myself. . ."
             $ RogueX.eyes = "_squint"
             ch_r "Did you have anything else in mind?"
-            call Rogue_sexMenu
+            call enter_main_sex_menu(RogueX)
             return
         "[RogueX.name] moves a bit closer to you, and then suggests \"strip studying.\""
         ch_r "Alright, [RogueX.player_petname], I'll make this simple. I'll ask you a quiz question, get it right, I take something off. . ."
@@ -36,7 +36,8 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
             ch_k "but it would be a pretty short game. . ."
             $ KittyX.eyes = "_squint"
             ch_k "Was there something you'd rather do?"
-            call Kitty_sexMenu
+            call enter_main_sex_menu(KittyX)
+
             return
         "She then asks if maybe you want to do some \"strip studying?\""
         $ KittyX.change_face("_perplexed", 2)
@@ -78,10 +79,12 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
                         "We should stop.":
                             ch_l "Grr."
                             return
-                call Laura_FB_Prep
+
+                call before_action(LauraX, "fondle_breasts", None)
                 if action_context:
 
-                    jump Laura_SexMenu
+                    call enter_main_sex_menu(LauraX)
+
             "I really think we should be studying.":
                 $ LauraX.change_face("_perplexed", 1)
                 ch_l "?"
@@ -118,10 +121,11 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
                         "We should stop.":
                             ch_j "Fine."
                             return
-                call Jean_FB_Prep
-                if action_context:
 
-                    jump Jean_SexMenu
+                call before_action(JeanX, "fondle_breasts", None)
+                if action_context:
+                    call enter_main_sex_menu(JeanX)
+
             "I really think we should be studying.":
                 $ JeanX.change_face("_perplexed", 1)
                 ch_j "Seriously?"
@@ -153,7 +157,8 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
             ch_v "but where would be the fun in that? . ."
             $ JubesX.eyes = "_squint"
             ch_v "Was there anything else you'd wanna do instead?"
-            call Jubes_SexMenu
+            call enter_main_sex_menu(JubesX)
+
             return
         "Hey, would you maybe be interested in \"strip studying?\""
         $ JubesX.change_face("_perplexed", 2)
@@ -179,7 +184,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
             elif Party[1] == KittyX:
                 ch_k "So[KittyX.like]I guess we take turns?"
             elif Party[1] == EmmaX:
-                "Let Oni know that Emma was in second please."
+                "Let Oni know that Emma_sprite was in second please."
             elif Party[1] == LauraX:
                 ch_l "I will also take a turn."
             elif Party[1] == JeanX:
@@ -200,7 +205,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
                 elif Party[1] == KittyX:
                     ch_k "Um, I'm not really into this?"
                 elif Party[1] == EmmaX:
-                    "Let Oni know that Emma was in second please."
+                    "Let Oni know that Emma_sprite was in second please."
                 elif Party[1] == LauraX:
                     ch_l "I don't think so."
                 elif Party[1] == StormX:
@@ -227,7 +232,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
                 menu:
                     "Well, [Party[1].name], you and I could still have some fun. . .":
                         $ approval_bonus = 50
-                        call expression Party[0].tag + "_SexMenu"
+                        call enter_main_sex_menu(Party[0])
                     "Bummer":
                         pass
 
@@ -432,7 +437,7 @@ label Strip_Study_Right:
                 return
     $ between_event_count = 0
     $ approval_bonus = 50
-    call expression Party[0].tag + "_SexMenu"
+    call enter_main_sex_menu(Party[0])
     if Party[0] == RogueX:
         ch_r "Well I sure enjoyed that."
     elif Party[0] == KittyX:
@@ -661,7 +666,7 @@ label Kitty_Quiz_Question:
     if QuizOrder[between_event_count] == 7:
         menu:
             ch_k "It seems like it happened so long ago, but do you know who the first mutant I ever met was?"
-            "A. Jean Grey":
+            "A. Jean_sprite Grey":
                 return False
             "B. Lance Alvers":
                 return True

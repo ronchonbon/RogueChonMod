@@ -1311,11 +1311,11 @@ label sleepover_Morning:
 
     if Party:
         $ Party[0].change_face("_normal")
-        $ Party[0].change_outfit(6, outfit_changed = True)
+        $ Party[0].change_outfit("today")
 
         if len(Party) >= 2:
             $ Party[1].change_face("_normal")
-            $ Party[1].change_outfit(6, outfit_changed = True)
+            $ Party[1].change_outfit("today")
 
             "The girls get changed for the day."
         else:
@@ -1569,30 +1569,30 @@ label sleepover_MorningWood:
 
     if Partner:
         if Partner == RogueX:
-            show Rogue_sprite:
+            show Rogue_sprite standing:
                 pos (900,250)
         elif Partner == KittyX:
-            show Kitty_sprite:
+            show Kitty_sprite standing:
                 pos (900,250)
         elif Partner == EmmaX:
-            show Emma_sprite:
+            show Emma_sprite standing:
                 pos (900,250)
         elif Partner == LauraX:
-            show Laura_Sprite:
+            show Laura_sprite standing:
                 pos (900,250)
         elif Partner == JeanX:
-            show Jean_sprite:
+            show Jean_sprite standing:
                 pos (900,250)
         elif Partner == StormX:
-            show Storm_Sprite:
+            show Storm_sprite standing:
                 pos (900,250)
         elif Partner == JubesX:
-            show Jubes_Sprite:
+            show Jubes_sprite standing:
                 pos (900,250)
         $ Partner.recent_history.append("threesome")
 
     $ Party[0].recent_history.append("blanket")
-    # call expression Party[0].tag + "_BJ_Launch"
+    call show_blowjob(Party[0])
 
     $ Party[0].change_face("_closed",1)
     if Partner:
@@ -2067,43 +2067,43 @@ label sleepover_MorningWood:
         if Partner:
             $ Partner.change_face("_sexy")
         $ Party[0].recent_history.remove("blanket")
-        call expression Party[0].tag + "_BJ_Reset"
+        call reset_position(Party[0])
 
         if len(Party) >= 2:
             if Party[1] == RogueX:
-                show Rogue_sprite:
+                show Rogue_sprite standing:
                     ease 1 pos (700,50)
-                show Rogue_sprite:
+                show Rogue_sprite standing:
                     pos (700,50)
             elif Party[1] == KittyX:
-                show Kitty_sprite:
+                show Kitty_sprite standing:
                     ease 1 pos (700,50)
-                show Kitty_sprite:
+                show Kitty_sprite standing:
                     pos (700,50)
             elif Party[1] == EmmaX:
-                show Emma_sprite:
+                show Emma_sprite standing:
                     ease 1 pos (700,50)
-                show Emma_sprite:
+                show Emma_sprite standing:
                     pos (700,50)
             elif Party[1] == LauraX:
-                show Laura_Sprite:
+                show Laura_sprite standing:
                     ease 1 pos (700,50)
-                show Laura_Sprite:
+                show Laura_sprite standing:
                     pos (700,50)
             elif Party[1] == JeanX:
-                show Jean_sprite:
+                show Jean_sprite standing:
                     ease 1 pos (700,50)
-                show Jean_sprite:
+                show Jean_sprite standing:
                     pos (700,50)
             elif Party[1] == StormX:
-                show Storm_Sprite:
+                show Storm_sprite standing:
                     ease 1 pos (700,50)
-                show Storm_Sprite:
+                show Storm_sprite standing:
                     pos (700,50)
             elif Party[1] == JubesX:
-                show Jubes_Sprite:
+                show Jubes_sprite standing:
                     ease 1 pos (700,50)
-                show Jubes_Sprite:
+                show Jubes_sprite standing:
                     pos (700,50)
 
         if line == "no":
@@ -2137,20 +2137,16 @@ label sleepover_MorningWood:
 
         elif line == "sex":
             call shift_focus(Party[0])
-            jump enter_main_sex_menu
+            call enter_main_sex_menu(Party[0])
     else:
 
         $ line = 0
         $ action_speed = 1
-        $ action_context = None
         if Partner:
             $ second_girl_primary_action = "blowjob"
         call Morning_Partner
 
-        $ Girl = Party[0]
-        $ primary_action = "blowjob"
-
-        call action
+        call action(Party[0], "blowjob")
 
     return
 
@@ -2162,38 +2158,38 @@ label Morning_Partner:
         return
     $ Partner.change_face("_sexy")
     if Partner == RogueX:
-        show Rogue_sprite:
+        show Rogue_sprite standing:
             ease 1 pos (700,50)
-        show Rogue_sprite:
+        show Rogue_sprite standing:
             pos (700,50)
     elif Partner == EmmaX:
-        show Emma_sprite:
+        show Emma_sprite standing:
             ease 1 pos (700,50)
-        show Emma_sprite:
+        show Emma_sprite standing:
             pos (700,50)
     elif Partner == KittyX:
-        show Kitty_sprite:
+        show Kitty_sprite standing:
             ease 1 pos (700,50)
-        show Kitty_sprite:
+        show Kitty_sprite standing:
             pos (700,50)
     elif Partner == LauraX:
-        show Laura_Sprite:
+        show Laura_sprite standing:
             ease 1 pos (700,50)
-        show Laura_Sprite:
+        show Laura_sprite standing:
             pos (700,50)
     elif Partner == JeanX:
-        show Jean_sprite:
+        show Jean_sprite standing:
             ease 1 pos (700,50)
-        show Jean_sprite:
+        show Jean_sprite standing:
             pos (700,50)
     elif Partner == StormX:
-        show Storm_Sprite:
+        show Storm_sprite standing:
             ease 1 pos (700,50)
-        show Storm_Sprite:
+        show Storm_sprite standing:
             pos (700,50)
     elif Partner == JubesX:
-        show Jubes_Sprite:
+        show Jubes_sprite standing:
             ease 1 pos (700,50)
-        show Jubes_Sprite:
+        show Jubes_sprite standing:
             pos (700,50)
     return

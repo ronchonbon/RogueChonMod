@@ -1,69 +1,47 @@
-
-label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=[]):
+label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0):
     call shift_focus (Girl)
     call checkout
-    Girl.voice "!!!"
-    $ line = primary_action
-    call Trig_Reset
-    $ Girl.change_outfit()
-    $ temp_Girls = all_Girls[:]
-    while temp_Girls:
-        if temp_Girls[0].location == bg_current:
-            $ temp_Girls[0].location = "bg_study"
-        $ TotalCaught += temp_Girls[0].event_counter["caught"]
-        $ temp_Girls.remove(temp_Girls[0])
-    $ bg_current = "bg_study"
-    call set_the_scene (0)
-    show Xavier_sprite at sprite_location(stage_left)
 
-    if Girl == RogueX:
-        show Rogue_sprite at sprite_location(stage_right) with ease
-    elif Girl == KittyX:
-        show Kitty_sprite at sprite_location(stage_right) with ease
-    elif Girl == EmmaX:
-        show Emma_sprite at sprite_location(stage_right) with ease
-    elif Girl == LauraX:
-        show Laura_Sprite at sprite_location(stage_right) with ease
-    elif Girl == JeanX:
-        show Jean_sprite at sprite_location(stage_right) with ease
-    elif Girl == StormX:
-        show Storm_Sprite at sprite_location(stage_right) with ease
-    elif Girl == JubesX:
-        show Jubes_Sprite at sprite_location(stage_right) with ease
+    Girl.voice "!!!"
+
+    $ line = primary_action
+
+    call stop_all_actions
+
+    $ Girl.change_outfit()
+
+    python:
+        for G in all_Girls:
+            if G.location == bg_current:
+                G.location = "bg_study"
+
+            TotalCaught += G.event_counter["caught"]
+
+    $ bg_current = "bg_study"
+    call set_the_scene(character = True)
+
+    $ Girl.change_face("_sad")
+
     call outfitShame (Girl, 20)
+
+    show Xavier_sprite at sprite_location(stage_left)
+    call change_Xavier_face("_shocked")
 
     $ Count = Girl.event_counter["caught"]
 
-    if Partner == RogueX:
-        show Rogue_sprite at sprite_location(stage_far_right) with ease
-    elif Partner == KittyX:
-        show Kitty_sprite at sprite_location(stage_far_right) with ease
-    elif Partner == EmmaX:
-        show Emma_sprite at sprite_location(stage_far_right) with ease
-    elif Partner == LauraX:
-        show Laura_Sprite at sprite_location(stage_far_right) with ease
-    elif Partner == JeanX:
-        show Jean_sprite at sprite_location(stage_far_right) with ease
-    elif Partner == StormX:
-        show Storm_Sprite at sprite_location(stage_far_right) with ease
-    elif Partner == JubesX:
-        show Jubes_Sprite at sprite_location(stage_far_right) with ease
-
-    call change_Xavier_face ("_shocked")
-    $ Girl.change_face("_sad")
-    if (Girl == EmmaX or Partner == EmmaX) and (Girl == StormX or Partner == StormX):
+    if EmmaX in [Girl, Partner] and StormX in [Girl, Partner]:
         ch_x "I'm very disappointed in the both of you!."
-        ch_x "You should temp_GirlsTH know better than this!"
-    elif Girl == StormX or Partner == StormX:
-        ch_x "I'm very disappointed in your behavior, particularly yours, Ororo."
-    elif Girl == EmmaX or Partner == EmmaX:
+        ch_x "You should BOTH know better than this!"
+    elif EmmaX in [Girl, Partner]:
         ch_x "I'm very disappointed in your behavior, particularly yours, Emma."
+    elif StormX in [Girl, Partner]:
+        ch_x "I'm very disappointed in your behavior, particularly yours, Ororo."
     else:
         ch_x "I'm very disappointed in your behavior, the both of you."
 
     if line == "fondle_thighs" or line == "fondle_breasts" or line == "fondle_pussy" or line == "hotdog" or line == "handjob":
         ch_x "The two of you, feeling each other up like animals!"
-    elif line == "dildo_pussy" or line == "dildo_anal":
+    elif line == "dildo_pussy" or line == "dildo_ass":
         ch_x "Using those. . . devices on each other, unsanitary!"
     elif line == "eat_pussy":
         ch_x "Engaging in. . . cunnilingus. . . dripping everywhere. . ."
@@ -657,7 +635,9 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
     call remove_girl ("all")
     "You return to your room"
     hide Xavier_sprite
-    jump player_room
+
+    $ bg_current = "bg_player"
+    jump reset_location
 
 
 
@@ -666,7 +646,9 @@ label Xavier_Plan(GirlX=0):
         "The Professor seems pretty out of it."
         "You don't think you'll be able to get anything more out of him today."
         "You leave him to it."
-        jump player_room
+
+        $ bg_current = "bg_player"
+        jump reset_location
 
 
     call shift_focus (GirlX)
@@ -715,7 +697,7 @@ label Xavier_Plan(GirlX=0):
     if GirlX == RogueX:
         $ RogueX.outfit["gloves"] = ""
         $ RogueX.arm_pose = 2
-        show Rogue_sprite zorder 24 at sprite_location(stage_left+100,85) with ease
+        show Rogue_sprite standing zorder 24 at sprite_location(stage_left+100,85) with ease
         "[RogueX.name] moves in and also grabs his head, duplicating his powers as he watches helplessly."
         "Now that she posesses his full power, while his are negated, he has no defenses."
         call change_Xavier_face ("_hypno")
@@ -731,7 +713,7 @@ label Xavier_Plan(GirlX=0):
         ch_r "I think we'll only get three tries at this. . ."
     elif GirlX == KittyX:
         $ KittyX.arm_pose = 2
-        show Kitty_sprite at sprite_location(stage_left+100,150) with ease
+        show Kitty_sprite standing at sprite_location(stage_left+100,150) with ease
         $ KittyX.sprite_location = stage_center
         "[KittyX.name] moves in sits on his lap, pinning his arms to the chair."
         if "Kappa" in Player.traits:
@@ -756,9 +738,9 @@ label Xavier_Plan(GirlX=0):
         ch_k "Well, [KittyX.player_petname], what should we ask for?"
     elif GirlX == EmmaX or GirlX == JeanX:
         if GirlX == EmmaX:
-            show Emma_sprite zorder 24 at sprite_location(stage_left+100,85) with ease
+            show Emma_sprite standing zorder 24 at sprite_location(stage_left+100,85) with ease
         elif GirlX == JeanX:
-            show Jean_sprite zorder 24 at sprite_location(stage_left+100,85) with ease
+            show Jean_sprite standing zorder 24 at sprite_location(stage_left+100,85) with ease
         "[GirlX.name] moves behind Xavier and activates her own telepathy."
         call change_Xavier_face ("_angry")
         if (GirlX == EmmaX and "Psi" in Player.traits) or (GirlX == JeanX and "Alpha" in Player.traits):
@@ -798,7 +780,7 @@ label Xavier_Plan(GirlX=0):
         ch_l "Well, [LauraX.player_petname], what should we ask for?"
     elif GirlX == StormX:
         $ StormX.arm_pose = 1
-        show Storm_Sprite at sprite_location(stage_left+100,150) with ease
+        show Storm_sprite standing at sprite_location(stage_left+100,150) with ease
         $ StormX.sprite_location = stage_center
         "[StormX.name] moves in sits on his lap, pinning his arms to the chair."
         if "Rho" in Player.traits:
@@ -822,7 +804,7 @@ label Xavier_Plan(GirlX=0):
         ch_s "Well, [StormX.player_petname], what should we ask for?"
     elif GirlX == JubesX:
         $ JubesX.arm_pose = 2
-        show Jubes_Sprite at sprite_location(stage_left+100,150) with ease
+        show Jubes_sprite standing at sprite_location(stage_left+100,150) with ease
         $ JubesX.sprite_location = stage_center
         "[JubesX.name] moves in and sits on his lap, pinning his arms to the chair."
         "She turns to look at him."
@@ -1189,7 +1171,9 @@ label Xavier_Plan(GirlX=0):
     hide Xavier_sprite
     call set_the_scene
     "You return to your room"
-    jump player_room
+
+    $ bg_current = "bg_player"
+    jump reset_location
 
 
 
@@ -1211,7 +1195,7 @@ label Girl_Caught_Changing(Girl=0):
         $ Girl.change_outfit("nude")
     else:
 
-        $ Girl.change_outfit(6)
+        $ Girl.change_outfit("today")
         if D20 >15:
 
             $ Girl.outfit["bottom"] = ""
@@ -1269,9 +1253,7 @@ label Girl_Caught_Changing(Girl=0):
                 $ Girl.change_face("_surprised",brows="_angry")
                 $ Girl.change_stat("love", 80, -50)
 
-                if not Girl.top_number() or (Girl.top_number()+Girl.bra_number() <5) or (Girl.bottom_number() < 5 and Girl.hose_number() < 10):
-
-
+                if not Girl.breasts_covered or not Girl.pussy_covered:
                     call expression Girl.tag + "_First_Bottomless" pass (1)
                     call expression Girl.tag + "_First_Topless" pass (1)
                     $ Girl.outfit["top"] = "_towel"
@@ -1315,13 +1297,12 @@ label Girl_Caught_Changing(Girl=0):
                     $ Girl.change_stat("obedience", 80, 2)
                     $ Girl.change_stat("inhibition", 60, 1)
         else:
-
-
             if not approval_check(Girl, 800) and (not Girl.seen_pussy or not Girl.seen_breasts):
                 $ Girl.change_face("_angry",brows="_confused")
                 $ Girl.change_stat("love", 80, -5)
             else:
                 $ Girl.change_face("_sexy",brows="_confused")
+
             $ Girl.change_stat("inhibition", 50, 3)
 
             if Girl == RogueX:
@@ -1363,13 +1344,10 @@ label Girl_Caught_Changing(Girl=0):
             elif Girl == JubesX:
                 ch_v "You just have to ask. . ."
 
-            $ Girl.top_pulled_up = 1
-            $ Girl.upskirt = 1
+            call fully_expose(Girl)
             pause 1
-            call expression Girl.tag + "_First_Topless" pass (1)
-            call expression Girl.tag + "_First_Bottomless" pass (1)
-            $ Girl.top_pulled_up = 0
-            $ Girl.upskirt = 0
+            $ Girl.fix_clothing()
+
             "She flashes you real quick."
         else:
 
@@ -1406,9 +1384,9 @@ label Girl_Caught_Changing(Girl=0):
             pass
         "Actually, I should get going. . .":
 
-            $ Girl.change_outfit(6,outfit_changed=0)
-            $ renpy.pop_call()
-            call world_map
+            $ Girl.change_outfit("today")
+
+            jump reset_location
 
     if Girl == StormX and D20 >5:
 
@@ -1416,7 +1394,7 @@ label Girl_Caught_Changing(Girl=0):
         menu:
             "Ok.":
                 "She finishes getting changed."
-                $ Girl.change_outfit(6,outfit_changed=0)
+                $ Girl.change_outfit("today")
             "Actually, you could leave them off.":
                 if approval_check(Girl, 350+(10*D20)):
                     $ Girl.change_stat("love", 70, 3)
@@ -1430,7 +1408,7 @@ label Girl_Caught_Changing(Girl=0):
                     $ Girl.change_stat("inhibition", 60, 2)
                     $ Girl.change_face("_smile")
                     ch_s "Ha! I would not want to be too much of a distraction."
-                    $ Girl.change_outfit(6,outfit_changed=0)
+                    $ Girl.change_outfit("today")
             "Why not lose the rest too?":
                 $ Girl.change_face("_sexy")
                 if approval_check(Girl, 700):
@@ -1454,7 +1432,7 @@ label Girl_Caught_Changing(Girl=0):
                     $ Girl.change_stat("obedience", 50, 2)
                     $ Girl.change_stat("inhibition", 70, 1)
                     ch_s "You are joking, [Girl.player_petname]."
-                    $ Girl.change_outfit(6,outfit_changed=0)
+                    $ Girl.change_outfit("today")
             "Don't, stay like that.":
                 $ Girl.change_stat("obedience", 80, 2)
                 if approval_check(Girl,1100):
@@ -1475,7 +1453,7 @@ label Girl_Caught_Changing(Girl=0):
                     $ Girl.change_stat("obedience", 50, -1)
                     $ Girl.change_face("_angry")
                     ch_s "You do not decide that, [Girl.player_petname]."
-                    $ Girl.change_outfit(6,outfit_changed=0)
+                    $ Girl.change_outfit("today")
             "Lose the rest of it.":
                 $ Girl.change_stat("obedience", 80, 2)
                 if approval_check(Girl,1300):
@@ -1501,7 +1479,7 @@ label Girl_Caught_Changing(Girl=0):
                     $ Girl.change_stat("obedience", 80, 2)
                     $ Girl.change_face("_angry")
                     ch_s "I do not think that I will, [Girl.player_petname]."
-                    $ Girl.change_outfit(6,outfit_changed=0)
+                    $ Girl.change_outfit("today")
     return
 
 
@@ -1541,8 +1519,9 @@ label caught_masturbating(Girl=0):
     if line == "leave":
         $ Girl.change_stat("lust", 80, 20)
         "You leave [Girl.name] to her business and slip out."
-        $ renpy.pop_call()
-        jump campus_Map
+
+        $ bg_current = "bg_campus"
+        jump reset_location
     elif line == "knock":
         "You hear some soft moans, followed by some shuffling around as items tumble to the ground."
         "After several seconds and some more shuffling of clothing, [Girl.name] comes to the door."
@@ -1568,8 +1547,9 @@ label caught_masturbating(Girl=0):
     elif line == "enter":
         call shift_focus (Girl)
         show black_screen onlayer black
-        $ Girl.upskirt = 1
-        $ Girl.underwear_pulled_down = 1
+
+        call expose_bottom
+
         $ Girl.location = bg_current
 
         call set_the_scene
@@ -1581,7 +1561,8 @@ label caught_masturbating(Girl=0):
         hide black_screen onlayer black
         $ Girl.daily_history.append("unseen")
         $ Girl.recent_history.append("unseen")
-        call expression Girl.tag + "_SexAct" pass ("masturbation")
+        call shift_focus(Girl)
+        call before_masturbation
         if "_angry" in Girl.recent_history:
             return
 
@@ -1646,7 +1627,7 @@ label caught_masturbating(Girl=0):
                 ch_v "You stop by alot. . ."
 
         $ Girl.arm_pose = 1
-        $ Girl.change_outfit(outfit_changed=0)
+        $ Girl.change_outfit()
 
     return
 
@@ -1741,15 +1722,17 @@ label Girls_Caught_Lesing(Girl=0, Girl2=0, temp_Girls=[]):
                 $ Girl2.add_word(1,"unseen","unseen")
                 $ Partner = Girl2
                 $ line = 0
-                call expression Girl.tag + "_SexAct" pass ("lesbian")
+                call shift_focus(Girl)
+                call Les_Prep(Girl)
             "Leave quietly":
                 "You leave the girls to their business and slip out."
                 $ Girl.thirst -= 30
                 $ Girl.lust = 20
                 $ Girl2.thirst -= 30
                 $ Girl2lust = 20
-                $ renpy.pop_call()
-                jump campus_Map
+
+                $ bg_current = "bg_campus"
+                jump reset_location
     $ line = 0
     return
 
@@ -1770,6 +1753,7 @@ label caught_showering(Girl):
     $ Girl.change_face("_smile",1)
 
     $ Girl.location = "bg_showerroom"
+    $ Girl.outfit["hair"] = "_wet"
     $ Girl.wet = 1
     $ Girl.grool = 2
 
@@ -1787,12 +1771,13 @@ label caught_showering(Girl):
         "Come back later":
             call remove_girl (Girl)
 
-            $ Girl.change_outfit(6)
+            $ Girl.change_outfit("today")
             $ Girl.drain_word("will_masturbate",0,1)
             $ Girl.lust = 25
             $ Girl.thirst -= int(Girl.thirst/2) if Girl.thirst >= 50 else int(Girl.thirst/4)
 
-            jump campus
+            $ bg_current = "bg_campus"
+            jump reset_location
 
     if knock:
         "You knock on the door. You hear some shuffling inside"
@@ -1864,10 +1849,11 @@ label caught_showering(Girl):
 
             "You see [Girl.name] under the shower, feeling herself up."
 
-            call expression Girl.tag + "_SexAct" pass ("masturbation")
+            call shift_focus(Girl)
+            call before_masturbation
 
-            $ renpy.pop_call()
-            jump shower_room
+            $ bg_current = "bg_showerroom"
+            jump reset_location
         elif D20 >= 15:
             call set_the_scene(check_if_dressed = False)
 
@@ -2170,7 +2156,7 @@ label Share(Girl=0, Other=0):
 
                 if Other.tag+"Yes" not in Player.traits:
                     $ Player.traits.append(Other.tag+"Yes")
-                call AskedMeet (Other, "_bemused")
+                call ask_to_meet (Other, "_bemused")
         else:
 
             "[Girl.name] sends you a text."

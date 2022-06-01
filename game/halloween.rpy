@@ -2,17 +2,17 @@
 label Halloween_chat(Girl=0):
 
     show black_screen onlayer black
-    if Girl == RogueX and renpy.showing("Rogue_sprite"):
+    if Girl == RogueX and renpy.showing("Rogue_sprite standing"):
         pass
-    elif Girl == KittyX and renpy.showing("Kitty_sprite"):
+    elif Girl == KittyX and renpy.showing("Kitty_sprite standing"):
         pass
-    elif Girl == EmmaX and renpy.showing("Emma_sprite"):
+    elif Girl == EmmaX and renpy.showing("Emma_sprite standing"):
         pass
-    elif Girl == LauraX and renpy.showing("Laura_Sprite"):
+    elif Girl == LauraX and renpy.showing("Laura_sprite standing"):
         pass
-    elif Girl == JeanX and renpy.showing("Jean_sprite"):
+    elif Girl == JeanX and renpy.showing("Jean_sprite standing"):
         pass
-    elif Girl == StormX and renpy.showing("Storm_Sprite"):
+    elif Girl == StormX and renpy.showing("Storm_sprite standing"):
         pass
     else:
         "You approach [Girl.name]"
@@ -264,7 +264,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
 
     $ bg_current = "HW Party"
     call remove_girl ("all")
-    
+
     $ Party = []
     $ Present = []
     $ Nearby = []
@@ -281,10 +281,10 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
     $ RogueX.add_word(1,0,RogueX.outfit["hair"],0,"halloween")
     $ RogueX.outfitday = "costume"
     $ RogueX.outfit_name = RogueX.outfitday
-    $ RogueX.change_outfit(outfit_changed=1)
+    $ RogueX.change_outfit()
 
     call shift_focus (RogueX)
-    show Rogue_sprite at sprite_location(1200,50):
+    show Rogue_sprite standing at sprite_location(1200,50):
         offset (0,0)
         anchor (0.5, 0.0)
         pos (1200,50)
@@ -423,7 +423,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
     $ Present.remove(RogueX)
     $ Nearby.append(RogueX)
     $ RogueX.location = "nearby"
-    show Rogue_sprite:
+    show Rogue_sprite standing:
         ease 0.8 pos (-200,50)
     pause 0.8
     "[RogueX.name] heads over to mingle some more."
@@ -442,10 +442,10 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
     $ KittyX.add_word(1,0,KittyX.outfit["hair"],0,"halloween")
     $ KittyX.outfitday = "costume"
     $ KittyX.outfit_name = KittyX.outfitday
-    $ KittyX.change_outfit(outfit_changed=1)
+    $ KittyX.change_outfit()
 
     call shift_focus (KittyX)
-    show Kitty_sprite at sprite_location(1200,50):
+    show Kitty_sprite standing at sprite_location(1200,50):
         offset (0,0)
         anchor (0.5, 0.0)
         pos (1200,50)
@@ -601,7 +601,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
 
 
     "[LauraX.name] looks up from the punch bowl and sees the two of you."
-    show Kitty_sprite:
+    show Kitty_sprite standing:
         ease 0.8 pos (1200,50)
     pause 0.8
 
@@ -611,15 +611,15 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
     $ LauraX.add_word(1,0,LauraX.outfit["hair"],0,"halloween")
     $ LauraX.outfitday = "costume"
     $ LauraX.outfit_name = LauraX.outfitday
-    $ LauraX.change_outfit(outfit_changed=1)
+    $ LauraX.change_outfit()
 
     call shift_focus (LauraX)
-    show Laura_Sprite at sprite_location(1200,50):
+    show Laura_sprite standing at sprite_location(1200,50):
         offset (0,0)
         anchor (0.5, 0.0)
         pos (1200,50)
         ease 0.8 pos (stage_center,50)
-    show Kitty_sprite:
+    show Kitty_sprite standing:
         ease 0.8 pos (stage_far_right,50)
     pause 0.8
     "She wanders over"
@@ -683,7 +683,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
                 call HWchange_stat (LauraX, "obedience", 80, 3)
                 call HWchange_stat (LauraX, "obedience", 200, 1)
             else:
-                call Punch
+                call punch
                 if "partyfix" in LauraX.history:
                     call HWchange_stat (LauraX, "love", 80, -2)
                     call HWchange_stat (LauraX, "love", 90, -3)
@@ -711,7 +711,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
 
 
                 ch_l "I don't have time for this."
-                show Laura_Sprite:
+                show Laura_sprite standing:
                     ease 0.8 pos (1200,50)
                 pause 0.8
                 "[LauraX.name] stalks out of the party for the night."
@@ -722,7 +722,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
                 call HWchange_stat (KittyX, "love", 90, 2)
                 ch_k "Well that was rude!"
                 ch_k "I think I'm[KittyX.like]going to check out the scene over there for a second."
-                show Kitty_sprite:
+                show Kitty_sprite standing:
                     ease 0.8 pos (1200,50)
                 pause 0.8
                 "[KittyX.name] heads off to the side."
@@ -778,11 +778,11 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
             call HWchange_stat (LauraX, "love", 90, 1)
             ch_l "Oh?"
             $ LauraX.change_face("_smile")
-            $ LauraX.outfit["front_outer_accessory"] = "_suspenders2"
+            $ LauraX.outfit["suspenders"] = "_suspenders2"
             call HWchange_stat (LauraX, "inhibition", 50, 1)
             call HWchange_stat (LauraX, "inhibition", 60, 1)
             ch_l "Yeah. . ."
-            $ LauraX.outfit["front_outer_accessory"] = "_suspenders"
+            $ LauraX.outfit["suspenders"] = "_suspenders"
         "How is that different from your normal look?":
             $ LauraX.change_face("_normal",eyes="_down")
             call HWchange_stat (LauraX, "love", 80, -1)
@@ -799,9 +799,9 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
     ch_l "We were?"
     ch_k "Yes. Come on."
     ch_k "Later, [KittyX.player_petname]!"
-    show Kitty_sprite:
+    show Kitty_sprite standing:
         ease 0.8 pos (1200,50)
-    show Laura_Sprite:
+    show Laura_sprite standing:
         ease 0.8 pos (1200,50)
     pause 0.8
     "[KittyX.name] tugs [LauraX.name] off to the side."
@@ -833,10 +833,10 @@ label Halloween_Jean:
     $ JeanX.add_word(1,0,JeanX.outfit["hair"],0,"halloween")
     $ JeanX.outfitday = "costume"
     $ JeanX.outfit_name = JeanX.outfitday
-    $ JeanX.change_outfit(outfit_changed=1)
+    $ JeanX.change_outfit()
 
     call shift_focus (JeanX)
-    show Jean_sprite at sprite_location(1200,50):
+    show Jean_sprite standing at sprite_location(1200,50):
         offset (0,0)
         anchor (0.5, 0.0)
         pos (1200,50)
@@ -1043,7 +1043,7 @@ label Halloween_Jean:
             "You hear mumbles of \"yes, Jessie\". . ."
             $ JeanX.add_word(1,"jessie",0)
     $ JeanX.change_face("_smile")
-    show Jean_sprite:
+    show Jean_sprite standing:
         ease 1 pos (300,50)
     pause 1
     "[JeanX.name] starts to wander off."
@@ -1060,7 +1060,7 @@ label Halloween_Jean:
             ch_j "I might be back later."
         "Let her go":
             pass
-    show Jean_sprite:
+    show Jean_sprite standing:
         ease 0.8 pos (-200,50)
     pause 0.8
     "She wanders into the crowd."
@@ -1087,10 +1087,10 @@ label Halloween_Jean:
     $ StormX.add_word(1,0,StormX.outfit["hair"],0,"halloween")
     $ StormX.outfitday = "costume"
     $ StormX.outfit_name = StormX.outfitday
-    $ StormX.change_outfit(outfit_changed=1)
+    $ StormX.change_outfit()
 
     call shift_focus (StormX)
-    show Storm_Sprite at sprite_location(1200,50):
+    show Storm_sprite standing at sprite_location(1200,50):
         offset (0,0)
         anchor (0.5, 0.0)
         pos (1200,50)
@@ -1227,7 +1227,7 @@ label Halloween_Jean:
     $ StormX.change_face("_smile")
     ch_s "In any case, I still have to \"get my groove on.\""
     ch_s "Perhaps I will see you later."
-    show Storm_Sprite:
+    show Storm_sprite standing:
         ease 0.8 pos (1200,50)
     pause 0.8
     "[StormX.name] glides back onto the dance floor, and you head over toward the treeline."
@@ -1254,10 +1254,10 @@ label Halloween_Emma:
     $ EmmaX.add_word(1,0,EmmaX.outfit["hair"],0,"halloween")
     $ EmmaX.outfitday = "costume"
     $ EmmaX.outfit_name = EmmaX.outfitday
-    $ EmmaX.change_outfit(outfit_changed=1)
+    $ EmmaX.change_outfit()
 
     call shift_focus (EmmaX)
-    show Emma_sprite at sprite_location(-200,50):
+    show Emma_sprite standing at sprite_location(-200,50):
         offset (0,0)
         anchor (0.5, 0.0)
         pos (-200,50)
@@ -1391,7 +1391,7 @@ label Halloween_Emma:
     ch_e "Now that you mention it, the other students are a bit. . . flamboyantly attired."
     $ EmmaX.change_face("_angry",eyes="_down")
     ch_e "Does that explain why you're dressed as some sort of. . ."
-    $ HWline = ["Well, I suppose that's how you always look.","Rogue seaman?","Sneakthief?","Fireman?"]
+    $ HWline = ["Well, I suppose that's how you always look.","Rogue_sprite seaman?","Sneakthief?","Fireman?"]
     $ EmmaX.change_face("_normal",brows="_confused")
     $ HWline = HWline[halloween_costume]
     ch_e "[HWline]"
@@ -1511,7 +1511,7 @@ label Halloween_Emma:
     ch_e "In any case. . ."
     ch_e "It is nice to have a little soiree. . . I do hope to see you later in the evening."
     ch_e "For the moment, I'll need to excuse myself."
-    show Emma_sprite:
+    show Emma_sprite standing:
         ease 0.8 pos (-200,50)
     pause 0.8
     "[EmmaX.name] heads over to the refreshments."
@@ -1541,7 +1541,7 @@ label Halloween_Skip:
         $ Options[0].location = "HW Party"
         $ Options[0].outfitday = "costume"
         $ Options[0].outfit_name = EmmaX.outfitday
-        $ Options[0].change_outfit(outfit_changed=1)
+        $ Options[0].change_outfit()
         $ Options[0].add_word(1,0,0,0,"halloween")
 
         $ Options.remove(Options[0])
@@ -1649,6 +1649,6 @@ label Halloween_Ending(Girl=0):
         elif Girl == StormX:
             ch_s "Whew. . . I quite enjoyed that party. . ."
             ch_s "What was it that you wished to discuss?"
-    jump Misplaced
+    jump reset_location
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

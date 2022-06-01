@@ -9,15 +9,15 @@ image black_screen:
 
 define ch_p = Character('[Player.name]', color = "#87CEEB", show_two_window = True)
 
-define ch_r = Character('[RogueX.name]', color = "#85bb65", image = "arrow", show_two_window = True)
-define ch_k = Character('[KittyX.name]', color = "#F5A9D0", image = "arrow", show_two_window = True)
-define ch_e = Character('[EmmaX.name]', color = "#98bee7", image = "arrow", show_two_window = True)
-define ch_l = Character('[LauraX.name]', color = "#d8b600", image = "arrow", show_two_window = True)
-define ch_j = Character('[JeanX.name]', color = "#b2d950", image = "arrow", show_two_window = True)
-define ch_s = Character('[StormX.name]', color = "#b2d950", image = "arrow", show_two_window = True)
-define ch_v = Character('[JubesX.name]', color = "#b2d950", image = "arrow", show_two_window = True)
+define ch_r = Character('[RogueX.name]', color = "#85bb65", image = "Rogue_sprite", show_two_window = True)
+define ch_k = Character('[KittyX.name]', color = "#F5A9D0", image = "Kitty_sprite", show_two_window = True)
+define ch_e = Character('[EmmaX.name]', color = "#98bee7", image = "Emma_sprite", show_two_window = True)
+define ch_l = Character('[LauraX.name]', color = "#d8b600", image = "Laura_sprite", show_two_window = True)
+define ch_j = Character('[JeanX.name]', color = "#b2d950", image = "Jean_sprite", show_two_window = True)
+define ch_s = Character('[StormX.name]', color = "#b2d950", image = "Storm_sprite", show_two_window = True)
+define ch_v = Character('[JubesX.name]', color = "#b2d950", image = "Jubes_sprite", show_two_window = True)
 
-define ch_x = Character('Professor X', color = "#a09400", image = "arrow", show_two_window = True)
+define ch_x = Character('Professor X', color = "#a09400", image = "Xavier_sprite", show_two_window = True)
 define ch_b = Character('Dr. McCoy', color = "#1033b2", image = "arrow", show_two_window = True)
 
 define ch_u = Character('???', color = "#85bb65", image = "arrow", show_two_window = True)
@@ -98,15 +98,17 @@ init -1:
 
     default achievements = []
 
-    default show_feet = 0
+    default show_feet = False
 
     default always_return_to_room = 1
 
-    default stage_far_left = 0.1
-    default stage_left = 0.3
+    default stage_far_far_left = 0.1
+    default stage_far_left = 0.23
+    default stage_left = 0.35
     default stage_center = 0.5
-    default stage_right = 0.66
-    default stage_far_right = 0.8
+    default stage_right = 0.62
+    default stage_far_right = 0.75
+    default stage_far_far_right = 0.875
 
     default number_of_holders = 1
 
@@ -115,7 +117,7 @@ init -1:
     default Xavier_mouth = "_smile"
     default Xavier_psychic = False
     default Xavier_emotion = "_happy"
-    default Xavier_sprite_location = stage_center
+    default Xavier_location = stage_center
 
     default Gwen_name = "????"
 
@@ -125,6 +127,12 @@ init -1:
     default simulation = False
 
     default menu_context = None
+
+    default dresses = ["_chinese_dress", "_red_dress", "_blue_dress"]
+    default bodysuits = ["_catsuit", "_raven", "_domme", "_sci_fi", "_onepiece_swimsuit", "_sexy_swimsuit"]
+    default pants = ["_pants", "_yoga_pants", "_capris", "_black_jeans", "_leather_pants", "_mesh_pants", "_opaque_fetish", "_sheer_fetish", "_black_and_blue_pants"]
+    default skirts = ["_skirt", "_cosplay_skirt", "_blue_skirt", "_cheerleader_skirt"]
+    default shorts = ["_shorts", "_cheerleader_skirtshort"]
 
     default hand_actions = ["massage", "fondle_thighs", "fondle_breasts", "fondle_pussy", "finger_pussy", "fondle_ass", "finger_ass"]
     default finger_actions = ['finger_pussy", "finger_ass"']
@@ -148,12 +156,12 @@ init -1:
     default contact_actions = ["massage", "kiss", "fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_ass", "finger_ass", "eat_ass", "handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"]
 
     default all_actions = ["massage", "kiss",
+        "striptease", "masturbation",
         "fondle_thighs",
         "fondle_breasts", "suck_breasts",
         "fondle_pussy", "finger_pussy", "eat_pussy",
         "fondle_ass", "finger_ass", "eat_ass",
         "handjob", "footjob", "titjob", "blowjob",
-        "striptease", "masturbation",
         "dildo_pussy", "dildo_ass",
         "sex", "anal", "hotdog"]
 
@@ -180,64 +188,50 @@ label start:
     # scene background onlayer backdrop
     # scene
     #
+    # $ RogueX.sprite_location = stage_far_far_left
+    # $ active_Girls.append(RogueX)
+    #
+    # $ KittyX.sprite_location = stage_far_left
+    # $ active_Girls.append(KittyX)
+    #
+    # $ EmmaX.sprite_location = stage_left
+    # $ active_Girls.append(EmmaX)
+    #
+    # $ LauraX.sprite_location = stage_center
+    # $ active_Girls.append(LauraX)
+    #
+    # $ JeanX.sprite_location = stage_right
+    # $ active_Girls.append(JeanX)
+    #
+    # $ StormX.sprite_location = stage_far_right
+    # $ active_Girls.append(StormX)
+    #
+    # $ JubesX.sprite_location = stage_far_far_right
+    # $ active_Girls.append(JubesX)
+    #
+    # python:
+    #     for G in active_Girls:
+    #         G.location = bg_current
+    #
     # $ RogueX.change_outfit("nude")
-    # $ JeanX.change_outfit("nude")
-    # $ KittyX.change_outfit("nude")
-    # $ EmmaX.change_outfit("nude")
-    # show Rogue_sprite at sprite_location(stage_far_left)
-    # show Jean_sprite at sprite_location(stage_left)
-    # show Emma_sprite at sprite_location(stage_right)
-    # show Kitty_sprite at sprite_location(stage_far_right)
+    # $ Player.sprite = False
+    # $ Player.cock_position = "in"
+    # $ primary_action = "suck_breasts"
+    # $ offhand_action = "fondle_breasts"
+
+    # show Rogue_sprite sex at sprite_location(stage_center)
+    # show Kitty_sprite titjob at sprite_location(stage_center)
+
+    # show Rogue_sprite standing at sprite_location(RogueX.sprite_location)
+    # show Kitty_sprite standing at sprite_location(KittyX.sprite_location)
+    # show Emma_sprite standing at sprite_location(EmmaX.sprite_location)
+    # show Laura_sprite standing at sprite_location(LauraX.sprite_location)
+    # show Jean_sprite standing at sprite_location(JeanX.sprite_location)
+    # show Storm_sprite standing at sprite_location(StormX.sprite_location)
+    # show Jubes_sprite standing at sprite_location(JubesX.sprite_location)
+
     # ""
-    #
-    #
-    # $ action_speed = 0
-    # $ Player.sprite = True
-    # $ Player.cock_position = "anal"
-    # $ primary_action = "anal"
-    # $ offhand_action = None
-    # $ show_feet = False
-    #
-    # $ JeanX.change_outfit("bondage_outfit")
-    # $ JeanX.change_face("_sexy")
-    # $ JeanX.bound = True
-    # $ JeanX.whipped = True
-    # $ JeanX.change_outfit("nude")
-    # show Jean_SexSprite at sprite_location(stage_center)
-    # show Jean_Doggy_Animation at sprite_location(0.7)
-    # $ EmmaX.change_outfit("domme_outfit")
-    # $ EmmaX.change_face("_sexy")
-    # $ EmmaX.change_outfit("nude")
-    # show Emma_SexSprite at sprite_location(stage_left)
-    # show Emma_Doggy_Animation at sprite_location(0.4)
-    # $ RogueX.change_face("_sexy")
-    # $ RogueX.change_outfit("nude")
-    # show Rogue_sprite at sprite_location(stage_center)
-    # show Rogue_sex_animation at sprite_location(stage_center)
-    #
-    # show Rogue_blowjob_animation at sprite_location(stage_center)
-    #
-    # show Rogue_titjob_animation at sprite_location(stage_center)
-    #
-    # show Rogue_doggy_animation at sprite_location(stage_center)
-    #
-    # show Rogue_handjob_animation at sprite_location(stage_center)
-    # $ LauraX.change_face("_sexy")
-    # $ LauraX.change_outfit("nude")
-    # show Laura_SexSprite at sprite_location(0.6)
-    # # show Laura_Doggy_Animation at sprite_location(0.9)
-    # $ KittyX.change_face("_sexy")
-    # $ KittyX.change_outfit("nude")
-    # show Kitty_sex_animation at sprite_location(0.3)
-    # # show Kitty_Doggy_Animation at sprite_location(0.4)
-    # $ StormX.change_face("_sexy")
-    # $ StormX.change_outfit("nude")
-    # show Storm_SexSprite at sprite_location(0.2)
-    # show Storm_Doggy_Animation at sprite_location(0.8)
-    # $ JubesX.change_face("_sexy")
-    # show Jubes_SexSprite at sprite_location(0.94)
-    #
-    # ""
+    # $ active_Girls = []
 
     jump prologue
 

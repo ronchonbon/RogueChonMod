@@ -23,7 +23,6 @@ label JeanMeet:
 
     ch_j "Hmm. . . I don't think I've seen you around before."
     ch_j "[JeanX.player_petname], right?"
-    ch_g "I bet someone named [JeanX.player_petname] is really freaked out right now. . ."
     menu:
         ch_j "[JeanX.player_petname], right?"
         "No, it's [Player.name], actually.":
@@ -130,9 +129,13 @@ label JeanMeet:
         ch_j "I bet you were hoping that you'd catch me naked or something, uh?"
         ch_j "Wanted to see these titties?"
         $ JeanX.arm_pose = 2
-        $ JeanX.top_pulled_up = 1
-        pause 1      
-        $ JeanX.top_pulled_up = 0
+
+        call expose_top(JeanX)
+
+        pause 1
+
+        $ JeanX.fix_clothing()
+
         $ JeanX.change_face("_sly",0,eyes="_side")
         $ JeanX.arm_pose = 1
         ch_j "Can't blame you, everyone does, the pervs."
@@ -337,58 +340,54 @@ label JeanMeet:
 
     "She collects her things and leaves the room."
     ch_p "Who the hell was that? . ."
-    $ EmmaX.change_outfit("casual1")
-    show JeanMFGrey zorder 150:
-        pos (-200,100)
-        rotate 0
-        parallel:
-            ease .5 pos (350,100)
-        parallel:
-            pause .4
-            ease .1 rotate 10
-            ease .1 rotate 0
-        block:
-            ease .1 pos (350,105)
-            ease .1 pos (350,100)
-            repeat 4
-    ". . ."
-    hide JeanMFGrey with easeoutleft
-    $ EmmaX.change_face("_angry",1,eyes="_leftside")
-    show Emma_sprite zorder 25 at sprite_location(-100)
-    show Emma_sprite zorder 25 at sprite_location(500) with easeinleft
-    call shift_focus (EmmaX)
-    ch_e "I mean, that was Jean mother fucking Grey."
+    # $ EmmaX.change_outfit("casual1")
+    # show JeanMFGrey zorder 150:
+    #     pos (-200,100)
+    #     rotate 0
+    #     parallel:
+    #         ease .5 pos (350,100)
+    #     parallel:
+    #         pause .4
+    #         ease .1 rotate 10
+    #         ease .1 rotate 0
+    #     block:
+    #         ease .1 pos (350,105)
+    #         ease .1 pos (350,100)
+    #         repeat 4
+    # ". . ."
+    # hide JeanMFGrey with easeoutleft
+    # $ EmmaX.change_face("_angry",1,eyes="_leftside")
+    # show Emma_sprite standing zorder 25 at sprite_location(-100)
+    # show Emma_sprite standing zorder 25 at sprite_location(500) with easeinleft
+    # call shift_focus (EmmaX)
+    # ch_e "I mean, that was Jean_sprite mother fucking Grey."
     $ JeanX.name = "Jean"
-    pause .1
-    ch_e "She can be. . . a bit much."
-    menu:
-        "You said it.":
-            $ EmmaX.change_face("_sly")
-            $ EmmaX.change_stat("love", 90, 5)
-            $ EmmaX.change_stat("obedience", 60, 3)
-            $ EmmaX.change_stat("inhibition", 60, 2)
-        "I guess.":
-            $ EmmaX.change_face("_sly")
-            $ EmmaX.change_stat("obedience", 70, 5)
-        "Pretty hot though.":
-            $ EmmaX.change_face("_angry",1)
-            $ EmmaX.change_stat("love", 90, -5)
-            $ EmmaX.change_stat("obedience", 40, 3)
-            $ EmmaX.change_stat("obedience", 80, 7)
-            ch_e "You're playing with fire, [EmmaX.player_petname]."
-    ch_e "Anyway, I was just passing through."
-    $ EmmaX.change_face("_angry",1,eyes="_side")
-    ch_e "Do try to avoid that relentless black hole of drama. . ."
-    show Emma_sprite at sprite_location(-100) with easeinleft
-    pause 0.2
-    call remove_girl (EmmaX)
-    call shift_focus (RogueX)
+    # pause .1
+    # ch_e "She can be. . . a bit much."
+    # menu:
+    #     "You said it.":
+    #         $ EmmaX.change_face("_sly")
+    #         $ EmmaX.change_stat("love", 90, 5)
+    #         $ EmmaX.change_stat("obedience", 60, 3)
+    #         $ EmmaX.change_stat("inhibition", 60, 2)
+    #     "I guess.":
+    #         $ EmmaX.change_face("_sly")
+    #         $ EmmaX.change_stat("obedience", 70, 5)
+    #     "Pretty hot though.":
+    #         $ EmmaX.change_face("_angry",1)
+    #         $ EmmaX.change_stat("love", 90, -5)
+    #         $ EmmaX.change_stat("obedience", 40, 3)
+    #         $ EmmaX.change_stat("obedience", 80, 7)
+    #         ch_e "You're playing with fire, [EmmaX.player_petname]."
+    # ch_e "Anyway, I was just passing through."
+    # $ EmmaX.change_face("_angry",1,eyes="_side")
+    # ch_e "Do try to avoid that relentless black hole of drama. . ."
+    # show Emma_sprite standing at sprite_location(-100) with easeinleft
+    # pause 0.2
+    # call remove_girl (EmmaX)
+    # call shift_focus (RogueX)
     call set_the_scene
     return
-
-
-image JeanMFGrey:
-    "images/JeanSprite/JeanMF.png"
 
 
 
@@ -1070,29 +1069,29 @@ label Jeanname(Base=0, JNNum=0, Alpha=0, Jeannames={}):
         $ Base = Player.name[:1]
     $ Jeannames = { "A":"Abe",
                         "B":"Barry",
-                        "C":"Carl",            
+                        "C":"Carl",
                         "D":"Dennis",
                         "E":"Erik",
                         "F":"Foggy",
                         "G":"Gil",
-                        "H":"Hunk",            
+                        "H":"Hunk",
                         "I":"Ike",
                         "J":"Jeff",
                         "K":"Kirk",
                         "L":"Lance",
-                        "M":"Mitch",            
+                        "M":"Mitch",
                         "N":"Norm",
                         "O":"Ollie",
                         "P":"Pete",
                         "Q":"Quince",
-                        "R":"Rory",            
+                        "R":"Rory",
                         "S":"Sonny",
                         "T":"Todd",
                         "U":"Uri",
                         "V":"Vince",
                         "W":"Wally",
                         "X":"Ray",
-                        "Y":"Yuri",            
+                        "Y":"Yuri",
                         "Z":"Zoro"
                         }
     $ Base = Base.upper()

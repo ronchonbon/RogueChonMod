@@ -213,63 +213,50 @@ label taboo_check(Character, location = None):
 label are_girls_angry(Girls = 0):
     $ approval_bonus = 0
 
-    python:
-        for G in all_Girls:
-            if G.location == bg_current and "_angry" in G.recent_history:
-                if bg_current == G.home:
-                    if G == RogueX:
-                        renpy.say(ch_r, "You should get out, I'm fix'in ta throw down.")
-                    elif G == KittyX:
-                        renpy.say(ch_k, "You should get out of here, I can't even look at you right now.")
-                    elif G == EmmaX:
-                        renpy.say(ch_e, "You should leave, or do you want to test me?")
-                    elif G == LauraX:
-                        renpy.say(ch_l, "You should leave.")
-                    elif G == JeanX:
-                        renpy.say(ch_j, "Out, NOW!")
-                    elif G == StormX:
-                        renpy.say(ch_s, "Out!")
-                    elif G == JubesX:
-                        renpy.say(ch_v, "Get out!")
+    $ temp_Girls = all_Girls[:]
 
-                    renpy.say(None, "You head back to your room.")
+    while temp_Girls:
+        if temp_Girls[0].location == bg_current and "_angry" in temp_Girls[0].recent_history:
+            if bg_current == temp_Girls[0].home:
+                if temp_Girls[0] == RogueX:
+                    ch_r "You should get out, I'm fix'in ta throw down."
+                elif temp_Girls[0] == KittyX:
+                    ch_k "You should get out of here, I can't even look at you right now."
+                elif temp_Girls[0] == EmmaX:
+                     ch_e "You should leave, or do you want to test me?"
+                elif temp_Girls[0] == LauraX:
+                    ch_l "You should leave."
+                elif temp_Girls[0] == JeanX:
+                    ch_j "Out, NOW!"
+                elif temp_Girls[0] == StormX:
+                    ch_s "Out!"
+                elif temp_Girls[0] == JubesX:
+                    ch_v "Get out!"
 
-                    Party = []
+                "You head back to your room."
 
-                    renpy.pop_call()
-                    renpy.jump(player_room_entry)
-                else:
-                    G.location = G.home
+                $ Party = []
 
-                if G in Party:
-                    Party.remove(G)
+                call player_room_entry
+            else:
+                $ temp_Girls[0].location = temp_Girls[0].home
 
-                if Girls:
-                    renpy.say(None, ". . . and so does [G.name].")
-                else:
-                    renpy.say(None, "[G.name] storms off.")
+            if temp_Girls[0] in Party:
+                $ Party.remove(temp_Girls[0])
 
-                    if G == StormX:
-                        renpy.say(None, ". . . so to speak.")
+            if Girls:
+                ". . . and so does [temp_Girls[0].name]."
+            else:
+                "[temp_Girls[0].name] storms off."
 
-                Girls += 1
+                if temp_Girls[0] == StormX:
+                    ". . . so to speak."
 
-                if G == RogueX:
-                    renpy.hide(Rogue_sprite)
-                elif G == KittyX:
-                    renpy.hide(Kitty_sprite)
-                elif G == EmmaX:
-                    renpy.hide(Emma_sprite)
-                elif G == LauraX:
-                    renpy.hide(Laura_Sprite)
-                elif G == JeanX:
-                    renpy.hide(Jean_sprite)
-                elif G == StormX:
-                    renpy.hide(Storm_Sprite)
-                elif G == JubesX:
-                    renpy.hide(Jubes_Sprite)
+                $ Girls += 1
 
-                renpy.with_statement(easeoutleft)
+                call hide_girl(temp_Girls[0])
+
+        $ temp_Girls.remove(temp_Girls[0])
 
     return
 
@@ -418,9 +405,9 @@ label dildo_check(Girl):
     else:
         "You don't have one of those on you."
 
-        return False
+        return "not_found"
 
-    return True
+    return "found"
 
 label vibrator_check(Girl):
     if "_vibrator" in Player.inventory:
@@ -430,9 +417,9 @@ label vibrator_check(Girl):
     else:
         "You don't have one of those on you."
 
-        return False
+        return "not_found"
 
-    return True
+    return "found"
 
 
 

@@ -1,35 +1,9 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 label StormMeetPrelude:
     "You hear a creaking noise from above you. You notice this happening more and more often lately."
     "Maybe next time you're in class, you can ask [EmmaX.name] about it."
+
     $ Player.add_word(1,0,0,0,"noise")
+
     return
 
 label StormMeetAsk:
@@ -86,28 +60,35 @@ label StormMeetAsk:
     return
 
 label StormMeetWater:
-
     "As you enter your room, you notice that there is a puddle on the floor."
     "It appears to be dripping from a crack in the ceiling."
     "It seems like the ghost in the attic might be more trouble than [EmmaX.name] let on."
+
     menu:
         "Let's go bust some ghosts!":
             "Hell yeah."
         "Guh-guh-guh-ghosts?!":
             "Stop being a pussy."
+
     if len(Party) > 1:
-        Party[0].voice "I think we'll sit this one out."
-        call remove_girl (Party[0])
+        Party[1].voice "I think we'll sit this one out."
+
+        call remove_girl (Party[1])
+
         Party[0].voice "Have fun though."
+
         call remove_girl (Party[0])
     elif Party:
         Party[0].voice "I think I'll sit this one out."
         Party[0].voice "Have fun though."
-        call remove_girl (Party[0])
-    "You head for the door marked \"Attic. . .\""
-    $ Player.add_word(1,"water",0,0,0)
-    jump StormMeet
 
+        call remove_girl (Party[0])
+
+    "You head for the door marked \"Attic. . .\""
+
+    $ Player.add_word(1,"water",0,0,0)
+
+    jump StormMeet
 
 label StormMeet:
     if time_index > 2:
@@ -116,17 +97,25 @@ label StormMeet:
         else:
             "As you climb the stairs, a gust of chill wind rushes down them."
             "Oh, look at the time, maybe this is something that should wait for earlier in the day. . ."
+
         "You return to your room."
+
         $ bg_current = "bg_player"
+
         $ Player.add_word(1,0,"noattic",0,0)
-        jump Misplaced
+
+        jump reset_location
 
     $ Player.history.remove("attic")
+
     $ bg_current = "bg_storm"
+
     $ StormX.today_outfit_name = "casual1"
     $ StormX.outfit_name = "casual1"
     $ StormX.change_outfit("casual1")
+
     call clear_the_room ("all", 0, 1)
+
     $ StormX.broken_up[0] = 0
     $ StormX.location = 0
     $ StormX.love = 500
@@ -134,6 +123,7 @@ label StormMeet:
     $ StormX.inhibition = 100
     $ StormX.player_petname = 0
     $ StormX.names = ["Ororo"]
+
     "You climb the stairs up to the attic. Once you reach the top, you hit a wave of humidity."
     call shift_focus (StormX)
     call set_the_scene
@@ -145,10 +135,9 @@ label StormMeet:
     $ StormX.change_outfit("nude")
     $ StormX.change_face("_normal",eyes="_side")
 
-    show Storm_Sprite at sprite_location(StormX.sprite_location)
+    show Storm_sprite standing at sprite_location(StormX.sprite_location)
 
-    show expression AlphaMask("SilhouetteBase", At("Storm_Sprite", sprite_location(StormX.sprite_location))) as mask:
-        offset (347,65)
+    show expression AlphaMask("SilhouetteBase", At("Storm_sprite standing", sprite_location(StormX.sprite_location))) as mask:
 
 
 
@@ -363,7 +352,7 @@ label StormMeet:
                 $ StormX.change_stat("love", 70, 3)
                 ch_s "I have the ability to influence the weather around me."
                 $ StormX.change_face("_smile", eyes="_white")
-                call Punch
+                call punch
                 ch_s "I can summon the rain, call lightning, even glide on the winds."
                 $ StormX.change_face("_smile")
                 ch_s "I very much enjoy the freedom my powers bring me, the connection to nature."
@@ -446,7 +435,7 @@ label StormMeet:
 
     $ round -= 20
     $ bg_current = "bg_player"
-    jump Misplaced
+    jump reset_location
 
     return
 
@@ -658,7 +647,7 @@ label Storm_Peter:
     ch_s "[Player.name]!"
     $ StormX.change_face("_angry")
     ch_s "Yes, I know your name is not \"Peter Parker.\""
-    ch_s "Emma told me when I could not find your name on the roster."
+    ch_s "Emma_sprite told me when I could not find your name on the roster."
     $ StormX.change_stat("love", 50, -5)
     $ StormX.change_stat("love", 60, -20)
     ch_s "I cannot believe you would make a fool of me like that."
@@ -693,7 +682,9 @@ label Storm_Teacher_Caught(Girl=0):
     call checkout(total = True)
 
     $ Girl.change_face("_bemused", 2, eyes="_side")
-    call AllReset (Girl)
+
+    call reset_position(Girl)
+
     if approval_check(Girl, 700, "I"):
         $ Girl.change_face("_bemused", 1)
         "[Girl.name] shrugs and returns to her seat."
@@ -710,7 +701,7 @@ label Storm_Teacher_Caught(Girl=0):
     $ Player.reputation -= 1
     ch_s "Thank you."
 
-    jump Misplaced
+    jump reset_location
 
 
 
@@ -791,11 +782,11 @@ label Storm_Hairtalk:
                 $ StormX.change_stat("inhibition", 60, 1)
                 ch_s "I. . . suppose that I might accomodate that. . ."
                 $ StormX.change_stat("inhibition", 80, 2)
-                $ StormX.top_pulled_up = 1
-                $ StormX.upskirt = 1
-                pause 1      
-                $ StormX.top_pulled_up = 0
-                $ StormX.upskirt = 0
+                $ StormX.top_pulled_up = True
+                $ StormX.upskirt = True
+                pause 1
+                $ StormX.top_pulled_up = False
+                $ StormX.upskirt = False
                 ch_s ". . ."
             else:
                 $ StormX.change_stat("love", 70, -2)
@@ -830,7 +821,8 @@ label Storm_Hairtalk:
                 $ StormX.change_stat("obedience", 80, 1)
                 $ StormX.change_stat("inhibition", 80, 1)
                 ch_s "I. . . suppose that I might accomodate that. . ."
-                call Storm_SexAct ("kiss")
+
+                call before_action(StormX, "kiss", None)
             else:
                 $ StormX.change_stat("obedience", 80, -1)
                 ch_s "I do not think that I should do that. . ."
@@ -846,7 +838,8 @@ label Storm_Hairtalk:
                 ch_s "I. . . suppose that I might accomodate that. . ."
                 $ StormX.change_stat("obedience", 50, 2)
                 $ StormX.change_stat("obedience", 80, 1)
-                call Storm_FB_Prep
+
+                call before_action(StormX, "fondle_breasts", None)
             else:
                 $ StormX.change_face("_angry", 2)
                 ch_s "[StormX.player_petname]!"
@@ -975,7 +968,7 @@ label Storm_Detention:
                         $ StormX.change_stat("obedience", 60, 5)
                         $ StormX.change_stat("inhibition", 70, 5)
                         ch_s "Why do I put up with you?"
-                        call Storm_SexMenu
+                        call enter_main_sex_menu(StormX)
                     "No, you're right, I take my education too lightly.":
                         $ StormX.change_stat("love", 80, 1)
                         $ StormX.change_stat("inhibition", 70, -2)
@@ -1009,7 +1002,8 @@ label Storm_Detention:
                 $ StormX.change_stat("obedience", 60, 5)
                 $ StormX.change_stat("inhibition", 70, 5)
                 ch_s "I just bet you can. . ."
-                call Storm_SexMenu
+                call enter_main_sex_menu(StormX)
+
             else:
 
                 $ StormX.change_face("_sad", mouth="_smirk")
@@ -1600,7 +1594,7 @@ label Storm_Love_Redux:
         "I love you too!":
             $ StormX.change_stat("love", 200, 10)
             $ StormX.eyes = "_surprised"
-            pause .2                    
+            pause .2
             $ StormX.eyes = "_normal"
             ch_s "I am glad to hear that."
         "Cool.":
@@ -1950,7 +1944,7 @@ label Storm_Sub_Asked:
     $ StormX.daily_history.append("asked sub")
     if line == "rude":
 
-        hide Storm_Sprite with easeoutright
+        hide Storm_sprite with easeoutright
         call remove_girl (StormX)
         $ StormX.recent_history.append("_angry")
         $ renpy.pop_call()
@@ -2244,14 +2238,14 @@ label Storm_Poolnight:
     $ StormX.recent_history.append("poolnight")
     if "sexfriend" not in StormX.player_petnames:
 
-        show Storm_Sprite:
+        show Storm_sprite standing:
             yoffset 200
         "As you enter the pool area, it seems fairly empty, aside from a small ripple across the pool's surface."
-        show Storm_Sprite:
+        show Storm_sprite standing:
             ease 1 yoffset 0
         pause 1
-        show Storm_Sprite zorder 50 at Pool_Bob(500)
-        "Storm rises from the pool."
+        show Storm_sprite standing zorder 50 at Pool_Bob(500)
+        "Storm_sprite rises from the pool."
         ch_s "Ah, I was hoping you would join me, [StormX.player_petname]. . ."
         if StormX not in Player.Harem and StormX.player_petname not in ("sir","master"):
             ch_s "I know that this is a no-strings attached situation. . ."
@@ -2289,15 +2283,15 @@ label Storm_Poolnight:
             ch_s "Have fun then. . ."
             "You head back to your room."
             $ bg_current = "bg_player"
-            jump Misplaced
-    hide Storm_Sprite
-    hide FullPool
+            jump reset_location
+    hide Storm_sprite
     call set_the_scene(check_if_dressed = False)
     $ StormX.change_face("_sly", 1,eyes="_leftside")
     ch_s "Now that you have me, [StormX.player_petname]. . ."
     $ StormX.change_face("_sly", 1)
     ch_s "What do you intend to do with me. . ."
-    call Storm_SexMenu
+    call enter_main_sex_menu(StormX)
+
     return
 
 
@@ -2328,7 +2322,8 @@ label Storm_Fuckbuddy:
     $ StormX.change_face("_sly", 1)
     $ StormX.change_stat("inhibition", 200, 10)
     ch_s "Couldn't you help me with that? . . "
-    call Storm_SexMenu
+    call enter_main_sex_menu(StormX)
+
     return
 
 

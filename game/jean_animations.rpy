@@ -1,126 +1,154 @@
 image Jean_blinking:
-    "images/Jean_sprite/Jean_standing_eyes[JeanX.eyes].png"
+    "images/Jean_standing/Jean_standing_eyes[JeanX.eyes].png"
     choice:
         3.5
     choice:
         3.25
     choice:
         3
-    "images/Jean_sprite/Jean_standing_eyes_sexy.png"
+    "images/Jean_standing/Jean_standing_eyes_sexy.png"
     0.05
-    "images/Jean_sprite/Jean_standing_eyes_closed.png"
+    "images/Jean_standing/Jean_standing_eyes_closed.png"
     0.15
-    "images/Jean_sprite/Jean_standing_eyes_sexy.png"
+    "images/Jean_standing/Jean_standing_eyes_sexy.png"
     0.05
     repeat
 
-image Jean_squinting:
-    "images/Jean_sprite/Jean_standing_eyes_normal.png",
-    choice:
-        3.5
-    choice:
-        3.25
-    choice:
-        3
-    "images/Jean_sprite/Jean_standing_eyes_sexy.png",
-    0.25
-    repeat
+layeredimage Jean_grool_dripping_animations:
+    always:
+        "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
+
+    if JeanX.grool > 1 and not JeanX.pussy_covered:
+        "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
+
+    if JeanX.grool > 1 and not JeanX.pussy_covered:
+        "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
+
+    if JeanX.grool > 1 and not JeanX.pussy_covered:
+        "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
+
+layeredimage Jean_grool_animations:
+    if JeanX.grool and JeanX.outfit["bottom"] == "_pants" and JeanX.bottom_pulled_down:
+        AlphaMask("Jean_grool_dripping_animations", "images/Jean_standing/Jean_standing_grool_mask_pants.png")
+    elif JeanX.grool and JeanX.outfit["underwear"] and JeanX.underwear_pulled_down:
+        AlphaMask("Jean_grool_dripping_animations", "images/Jean_standing/Jean_standing_grool_mask_underwear.png")
+    elif JeanX.grool and not JeanX.pussy_covered:
+        AlphaMask("Jean_grool_dripping_animations", "images/Jean_standing/Jean_standing_grool_mask.png")
+
+layeredimage Jean_spunk_dripping_animations:
+    always:
+        "spunk_dripping_animation" pos (0.115, 0.55) zoom 0.3
+
+    if not JeanX.pussy_covered:
+        "spunk_dripping_animation" pos (0.115, 0.55) zoom 0.3
+
+    if not JeanX.pussy_covered:
+        "spunk_dripping_animation" pos (0.115, 0.55) zoom 0.3
+
+    if not JeanX.pussy_covered:
+        "spunk_dripping_animation" pos (0.115, 0.55) zoom 0.3
+
+layeredimage Jean_spunk_animations:
+    if (JeanX.spunk["pussy"] or JeanX.spunk["anus"]) and JeanX.outfit["bottom"] == "_pants" and JeanX.bottom_pulled_down:
+        AlphaMask("Jean_spunk_dripping_animations", "images/Jean_standing/Jean_standing_grool_mask_pants.png")
+    elif (JeanX.spunk["pussy"] or JeanX.spunk["anus"]) and JeanX.outfit["underwear"] and JeanX.underwear_pulled_down:
+        AlphaMask("Jean_spunk_dripping_animations", "images/Jean_standing/Jean_standing_grool_mask_underwear.png")
+    elif (JeanX.spunk["pussy"] or JeanX.spunk["anus"]) and not JeanX.pussy_covered:
+        AlphaMask("Jean_spunk_dripping_animations", "images/Jean_standing/Jean_standing_grool_mask.png")
 
 layeredimage Jean_standing_fondling_animations:
     if primary_action == "lesbian" or not girl_offhand_action or focused_Girl != JeanX:
             Null()
-    elif primary_action != "sex" and girl_offhand_action == "fondle_pussy" and JeanX.lust >= 70:
-        "GirlFingerPussy_Jean"
+    elif primary_action != "sex" and girl_offhand_action in "finger_pussy" and JeanX.lust >= 70:
+        "girl_finger_pussy_animation" pos (0.122, 0.583)
     elif girl_offhand_action == "fondle_pussy":
-        "GirlGropePussy_JeanSelf"
-    elif girl_offhand_action == "fondle_breasts" and offhand_action in breast_actions:
-        "GirlGropeLeftBreast_Jean"
-    elif girl_offhand_action == "fondle_breasts" and primary_action in breast_action:
-        "GirlGropeRightBreast_Jean"
+        "girl_fondle_pussy_animation" pos (0.122, 0.569)
+    elif girl_offhand_action == "fondle_breasts" and (offhand_action in ["fondle_breasts", "suck breasts"]):
+        "girl_fondle_breast_left_animation" pos (0.156, 0.37)
     elif girl_offhand_action == "fondle_breasts":
-        "GirlGropeBothBreast_Jean"
+        "girl_fondle_breast_right_animation" pos (0.083, 0.352)
 
     if second_girl_primary_action != "masturbation" or not second_girl_offhand_action or focused_Girl == JeanX:
         Null()
-    elif primary_action != "sex" and second_girl_offhand_action == "fondle_pussy" and JeanX.lust >= 70:
-        "GirlFingerPussy_Jean"
-    elif second_girl_offhand_action == "fondle_pussy":
-        "GirlGropePussy_Jean"
+    elif primary_action != "sex" and second_girl_offhand_action == "finger_pussy" and JeanX.lust >= 70:
+        "girl_finger_pussy_animation" pos (0.122, 0.583)
+    elif second_girl_offhand_action in "fondle_pussy":
+        "girl_fondle_pussy_animation" pos (0.122, 0.569)
     elif second_girl_offhand_action == "fondle_breasts" and (offhand_action in ["fondle_breasts", "suck breasts"]):
-        "GirlGropeLeftBreast_Jean"
+        "girl_fondle_breast_left_animation" pos (0.156, 0.37)
     elif second_girl_offhand_action == "fondle_breasts":
-        "GirlGropeRightBreast_Jean"
+        "girl_fondle_breast_right_animation" pos (0.083, 0.352)
 
     if not primary_action or focused_Girl != JeanX:
         Null()
     elif primary_action == "fondle_thighs":
-        "GropeThigh_Jean"
+        "Zero_fondle_thigh_animation" pos (0.11, 0.68)
     elif primary_action == "fondle_breasts":
-        "GropeRightBreast_Jean"
+        "Zero_fondle_breasts_right_animation" pos (0.094, 0.38)
     elif primary_action == "suck_breasts":
-        "LickRightBreast_Jean"
-    elif primary_action == "fondle_pussy" and action_speed == 2:
-        "FingerPussy_Jean"
+        "Zero_suck_breasts_right_animation" pos (0.083, 0.37)
     elif primary_action == "fondle_pussy":
-        "GropePussy_Jean"
+        "Zero_fondle_pussy_animation" pos (0.115, 0.59)
+    elif primary_action == "finger_pussy":
+        "Zero_finger_pussy_animation" pos (0.12, 0.66)
     elif primary_action == "eat_pussy":
-        "Lickpussy_Jean"
+        "Zero_eat_pussy_animation" pos (0.13, 0.62)
 
     if not offhand_action or focused_Girl != JeanX:
         Null()
-    elif primary_action == "fondle_breasts" and not girl_offhand_action and not second_girl_primary_action and not second_girl_offhand_action:
-        "GropeRightBreast_Jean"
     elif offhand_action == "fondle_thighs":
-        "GropeThigh_Jean"
+        "Zero_fondle_thigh_animation" pos (0.11, 0.68)
+    elif primary_action == "fondle_breasts" and not girl_offhand_action and not second_girl_primary_action and not second_girl_offhand_action:
+        "Zero_fondle_breasts_right_animation" pos (0.094, 0.38)
     elif offhand_action == "fondle_breasts":
-        "GropeLeftBreast_Jean"
+        "Zero_fondle_breasts_left_animation" pos (0.156, 0.39)
     elif offhand_action == "suck_breasts":
-        "LickLeftBreast_Jean"
-    elif offhand_action == "fondle_pussy" and action_speed == 2:
-        "FingerPussy_Jean"
+        "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
     elif offhand_action == "fondle_pussy":
-        "GropePussy_Jean"
+        "Zero_fondle_pussy_animation" pos (0.115, 0.59)
+    elif offhand_action == "finger_pussy":
+        "Zero_finger_pussy_animation" pos (0.12, 0.66)
     elif offhand_action == "eat_pussy":
-        "Lickpussy_Jean"
+        "Zero_eat_pussy_animation" pos (0.13, 0.62)
 
     if not second_girl_primary_action or focused_Girl != JeanX:
         Null()
     elif second_girl_primary_action == "fondle_breasts" and primary_action in ["fondle_breasts", "suck_breasts"]:
-        "GirlGropeLeftBreast_Jean"
-    elif second_girl_priamry_action == "fondle_breasts":
-        "GirlGropeRightBreast_Jean"
+        "girl_fondle_breast_left_animation" pos (0.156, 0.37)
+    elif second_girl_primary_action == "fondle_breasts":
+        "girl_fondle_breast_right_animation" pos (0.083, 0.352)
     elif second_girl_primary_action == "suck_breasts" and primary_action in ["fondle_breasts", "suck_breasts"]:
-        "LickLeftBreast_Jean"
+        "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
     elif second_girl_primary_action == "suck_breasts" and offhand_action in ["fondle_breasts", "suck_breasts"]:
-        "LickLeftBreast_Jean"
-    elif second_girl_priamry_action == "suck_breasts":
-        "LickRightBreast_Jean"
+        "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
+    elif second_girl_primary_action == "suck_breasts":
+        "Zero_suck_breasts_right_animation" pos (0.083, 0.37)
     elif second_girl_primary_action == "fondle_pussy" and primary_action != "sex" and JeanX.lust >= 70:
-        "GirlFingerPussy_Jean"
+        "girl_finger_pussy_animation" pos (0.122, 0.583)
     elif second_girl_primary_action == "fondle_pussy" and offhand_action != "sex" and JeanX.lust >= 70:
-        "GirlFingerPussy_Jean"
+        "girl_finger_pussy_animation" pos (0.122, 0.583)
     elif second_girl_primary_action == "fondle_pussy":
-        "GropePussy_Jean"
+        "girl_fondle_pussy_animation" pos (0.122, 0.569)
     elif second_girl_primary_action == "eat_pussy":
-        "Lickpussy_Jean"
+        "Zero_eat_pussy_animation" pos (0.13, 0.62)
 
     if primary_action != "lesbian" or not girl_offhand_action or focused_Girl == JeanX:
         Null()
     elif girl_offhand_action == "fondle_breasts" and primary_action in ["fondle_breasts", "suck_breasts"]:
-        "GirlGropeLeftBreast_Jean"
+        "girl_fondle_breast_left_animation" pos (0.156, 0.37)
     elif girl_offhand_action == "fondle_breasts" and offhand_action in ["fondle_breasts", "suck_breasts"]:
-        "GirlGropeLeftBreast_Jean"
+        "girl_fondle_breast_left_animation" pos (0.156, 0.37)
     elif girl_offhand_action == "fondle_breasts":
-        "GirlGropeRightBreast_Jean"
+        "girl_fondle_breast_right_animation" pos (0.083, 0.352)
     elif girl_offhand_action == "suck_breasts" and primary_action in ["fondle_breasts", "suck_breasts"]:
-        "LickLeftBreast_Jean"
+        "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
     elif girl_offhand_action == "suck_breasts" and offhand_action in ["fondle_breasts", "suck_breasts"]:
-        "LickLeftBreast_Jean"
+        "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
     elif girl_offhand_action == "suck_breasts":
-        "LickRightBreast_Jean"
+        "Zero_suck_breasts_right_animation" pos (0.083, 0.37)
     elif girl_offhand_action == "fondle_pussy" and primary_action != "sex" and JeanX.lust >= 70:
-        "GirlFingerPussy_Jean"
+        "girl_finger_pussy_animation" pos (0.122, 0.583)
     elif girl_offhand_action == "fondle_pussy":
-        "GirlGropePussy_Jean"
+        "girl_fondle_pussy_animation" pos (0.122, 0.569)
     elif girl_offhand_action == "eat_pussy":
-        "Lickpussy_Jean"
+        "Zero_eat_pussy_animation" pos (0.13, 0.62)

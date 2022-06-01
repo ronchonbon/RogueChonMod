@@ -7,95 +7,98 @@ label world_map:
 
     call set_the_scene(silent = True)
 
-    menu world_map_menu:
-        "Where would you like to go?"
-        "My room":# if bg_current != "bg_player":
-            jump player_room_entry
-        "Girl's rooms":
-            menu:
-                "[RogueX.name]'s room":# if bg_current != "bg_rogue":
-                    $ Girl = RogueX
+    while True:
+        menu world_map_menu:
+            "Where would you like to go?"
+            "My room":# if bg_current != "bg_player":
+                jump player_room_entry
+            "Girl's rooms":
+                menu:
+                    "[RogueX.name]'s room":# if bg_current != "bg_rogue":
+                        $ Girl = RogueX
 
-                    jump girls_room_entry
-                "[KittyX.name]'s room" if "met" in KittyX.history:# and bg_current != "bg_kitty":
-                    $ Girl = KittyX
+                        jump girls_room_entry
+                    "[KittyX.name]'s room" if "met" in KittyX.history:# and bg_current != "bg_kitty":
+                        $ Girl = KittyX
 
-                    jump girls_room_entry
-                "[EmmaX.name]'s room" if "met" in EmmaX.history:# and bg_current != "bg_emma":
-                    $ Girl = EmmaX
+                        jump girls_room_entry
+                    "[EmmaX.name]'s room" if "met" in EmmaX.history:# and bg_current != "bg_emma":
+                        $ Girl = EmmaX
 
-                    jump girls_room_entry
-                "[LauraX.name]'s room" if "met" in LauraX.history:# and bg_current != "bg_laura":
-                    $ Girl = LauraX
+                        jump girls_room_entry
+                    "[LauraX.name]'s room" if "met" in LauraX.history:# and bg_current != "bg_laura":
+                        $ Girl = LauraX
 
-                    jump girls_room_entry
-                "[JeanX.name]'s room" if "met" in JeanX.history:# and bg_current != "bg_jean":
-                    $ Girl = JeanX
+                        jump girls_room_entry
+                    "[JeanX.name]'s room" if "met" in JeanX.history:# and bg_current != "bg_jean":
+                        $ Girl = JeanX
 
-                    jump girls_room_entry
-                "[StormX.name]'s room" if "met" in StormX.history:# and bg_current != "bg_storm":
-                    $ Girl = StormX
+                        jump girls_room_entry
+                    "[StormX.name]'s room" if "met" in StormX.history:# and bg_current != "bg_storm":
+                        $ Girl = StormX
 
-                    jump girls_room_entry
-                "[JubesX.name]'s room" if "met" in JubesX.history:# and bg_current != "bg_jubes":
-                    $ Girl = JubesX
+                        jump girls_room_entry
+                    "[JubesX.name]'s room" if "met" in JubesX.history:# and bg_current != "bg_jubes":
+                        $ Girl = JubesX
 
-                    jump girls_room_entry
-                "Back":
-                    jump world_map_menu
-        "University Square":# if bg_current != "bg_campus":
-            jump campus_entry
-        "Class":# if bg_current != "bg_classroom":
-            if time_index < 3:
-                jump classroom_entry
-            elif "Xavier" in keys:
-                "The door is locked, but you were able to use Xavier's key to get in."
+                        jump girls_room_entry
+                    "Back":
+                        pass
+            "University Square":# if bg_current != "bg_campus":
+                jump campus_entry
+            "Class":# if bg_current != "bg_classroom":
+                if time_index < 3:
+                    jump classroom_entry
+                elif "Xavier" in keys:
+                    "The door is locked, but you were able to use Xavier's key to get in."
 
-                jump classroom_entry
-            else:
-                "It's late for classes and the classrooms are locked down."
+                    jump classroom_entry
+                else:
+                    "It's late for classes and the classrooms are locked down."
 
-                jump world_map
-        "The Danger Room":# if bg_current != "bg_dangerroom":
-            jump danger_room_entry
-        "The showers":# if bg_current != "bg_showerroom":
-            jump shower_entry
-        "The pool":# if bg_current != "bg_pool":
-            jump pool_entry
-        "Xavier's study":# if bg_current != "bg_study":
-            jump study_entry
-        "Go to the mall" if "mall" in Player.history and time_index < 3:# and bg_current != "bg_mall":
-            jump Mall_entry
-        "Attic" if "attic" in Player.history:# and bg_current != "bg_storm":
-            jump StormMeet
-        # "Stay where I am.":
-        #     return
+                    jump world_map
+            "The Danger Room":# if bg_current != "bg_dangerroom":
+                jump danger_room_entry
+            "The showers":# if bg_current != "bg_showerroom":
+                jump shower_entry
+            "The pool":# if bg_current != "bg_pool":
+                jump pool_entry
+            "Xavier's study":# if bg_current != "bg_study":
+                jump study_entry
+            "Go to the mall" if "mall" in Player.history and time_index < 3:# and bg_current != "bg_mall":
+                jump Mall_entry
+            "Attic" if "attic" in Player.history:# and bg_current != "bg_storm":
+                jump StormMeet
+            "Stay where I am.":
+                return
 
 label player_room_entry:
-    $ door_locked = False
+    $ stack_depth = renpy.call_stack_depth()
 
-    $ bg_current = "bg_player"
+    while stack_depth > 0:
+        $ stack_depth -= 1
+
+        $ renpy.pop_call()
 
     $ Player.recent_history.append("traveling")
 
     $ Nearby = []
 
-    call change_out_of_gym_clothes
+    call set_the_scene(character = False)
+    call taboo_level
     call event_calls
-    call set_the_scene
 
 label player_room:
-    $ bg_current = "bg_player"
-
     $ Player.drain_word("traveling", 1, 0)
 
-    call taboo_level
+    $ bg_current = "bg_player"
+
+    $ door_locked = False
+
     call set_the_scene(silent = True)
-
-    label player_room_menu:
-
+    call taboo_level
     call quick_event
-    call checkout(total = True)
+    call event_calls
 
     if round <= 10:
         call tenth_round
@@ -104,57 +107,60 @@ label player_room:
 
     call are_girls_angry
 
-    menu:
-        "You are in your room. What would you like to do?"
-        "Chat":
-            call chat
-        "Study":
-            call study
-        "Lock the door" if not door_locked:
-            "You lock the door."
+    while True:
+        $ bg_current = "bg_player"
 
-            $ door_locked = True
+        menu:
+            "You are in your room. What would you like to do?"
+            "Chat":
+                call chat
+            "Study":
+                call study
+            "Lock the door" if not door_locked:
+                "You lock the door."
 
-            call taboo_level
-        "Unlock the door" if door_locked:
-            "You unlock the door."
+                $ door_locked = True
 
-            $ door_locked = False
+                call taboo_level
+            "Unlock the door" if door_locked:
+                "You unlock the door."
 
-            call taboo_level
-        "Sleep" if time_index >= 3: #night time
-            call tenth_round
-            call girls_location
-            call event_calls
-        "Wait" if time_index < 3: #not night time
-            "You wait around a bit."
+                $ door_locked = False
 
-            call tenth_round
-            call girls_location
-            call event_calls
-        "Shop":
-            call shop
-        "Special Options":
-            call SpecialMenu
-        "Leave":
-            jump world_map
+                call taboo_level
+            "Sleep" if time_index >= 3: #night time
+                call tenth_round
+                call girls_location
+                call event_calls
+            "Wait" if time_index < 3: #not night time
+                "You wait around a bit."
 
-    jump player_room_menu
+                if round > 10:
+                    call wait
+                else:
+                    call tenth_round
+
+                call girls_location
+                call event_calls
+            "Shop":
+                call shop
+            "Special Options":
+                call SpecialMenu
+            "Leave":
+                call world_map
 
 label girls_room_entry:
+    $ Player.recent_history.append("traveling")
+
+    $ Nearby = []
+
     $ bg_current = "bg_entry"
 
     $ door_locked = False
 
     call shift_focus(Girl)
-
-    $ Nearby = []
-
-    call change_out_of_gym_clothes #call Gym_Clothes
-    call set_the_scene(entering = 1)
+    call set_the_scene(entering = True)
     call taboo_level
-
-    $ Player.recent_history.append("traveling")
 
     $ D20 = renpy.random.randint(1, 20)
 
@@ -248,17 +254,15 @@ label girls_room_entry:
     if round >= 10 and Girl.location == bg_current and "will_masturbate" in Girl.daily_history and D20 >= 5:
         call caught_masturbating(Girl)
     else:
+        $ knocking = False
+
         if Girl in keys:
             menu:
                 "You have a key, what do you do?"
                 "Knock politely":
                     $ knocking = True
                 "Use the key to enter.":
-                    $ knocking = False
-
                     call set_the_scene
-        else:
-            $ knocking = False
 
         if not knocking and Girl in keys:
             if Girl.location == bg_current:
@@ -274,12 +278,13 @@ label girls_room_entry:
                     jump girls_room
         else:
             "You knock on [Girl.name]'s door."
+
             if Girl.location == bg_current:
                 if round <= 10:
                     if time_index >= 3: #night time
                         "There's no answer, she's probably asleep."
 
-                        jump campus
+                        jump reset_location
                 if (D20 >=19 and Girl.lust >= 50) or (D20 >=15 and Girl.lust >= 70) or (D20 >=10 and Girl.lust >= 80):
                     "You hear some soft moans, followed by some shuffling around as items tumble to the ground."
                     "After several seconds and some more shuffling of clothing, [Girl.name] comes to the door."
@@ -329,7 +334,7 @@ label girls_room_entry:
                     $ Girl.change_face("_angry")
 
                     call get_out_lines(Girl)
-                    jump campus
+                    jump reset_location
                 else:
                     call set_the_scene
 
@@ -349,7 +354,7 @@ label girls_room_entry:
 
             "You head back."
 
-            jump campus
+            jump reset_location
         elif time_index >= 3 and "no_entry" in Girl.recent_history:
             if Girl == RogueX:
                 ch_r "Hey, I told you you're not welcome. I'll see you tomorrow."
@@ -366,12 +371,12 @@ label girls_room_entry:
             elif Girl == JubesX:
                 ch_v "Don't mess with me at night, [Girl.player_petname]. Out!"
 
-            jump campus
+            jump reset_location
         elif "no_entry" in Girl.recent_history or "_angry" in Girl.recent_history:
             $ Girl.change_face("_angry")
 
             call get_out_lines(Girl)
-            jump campus
+            jump reset_location
         elif time_index >= 3 and (Girl.event_counter["sleepover"] or Girl.SEXP >= 30 or Girl == JubesX):
             if Girl == RogueX:
                 ch_r "It's pretty late, [Girl.player_petname], but it's always nice to see you."
@@ -439,7 +444,7 @@ label girls_room_entry:
             $ Girl.recent_history.append("no_entry")
             $ Girl.daily_history.append("no_entry")
 
-            jump campus
+            jump reset_location
         elif approval_check(Girl, 600, "LI") or approval_check(Girl, 300, "OI"):
             if Girl == RogueX:
                 ch_r "Sure, come on in [Girl.player_petname]."
@@ -474,23 +479,19 @@ label girls_room_entry:
             $ Girl.recent_history.append("no_entry")
             $ Girl.daily_history.append("no_entry")
 
-            jump campus
+            jump reset_location
 
     call event_calls
-    jump girls_room
 
 label girls_room:
-    $ bg_current = Girl.home
-
     $ Player.drain_word("traveling", 1, 0)
 
-    call taboo_level
+    $ bg_current = Girl.home
+
     call set_the_scene(silent = True)
-
-    label girls_room_menu:
-
+    call taboo_level
     call quick_event
-    call checkout(total = True)
+    call event_calls
 
     if round <= 10:
         call tenth_round
@@ -499,94 +500,98 @@ label girls_room:
 
     call are_girls_angry
 
-    if Girl.location == bg_current:
-        "You are in [Girl.name]'s room. What would you like to do?"
-    else:
-        "You are in [Girl.name]'s room, but she isn't here. What would you like to do?"
+    while True:
+        $ bg_current = Girl.home
 
-    menu:
-        extend ""
-        "Chat":
-            call chat
-        "Would you like to study?":
-            call study
-        "Lock the door" if not door_locked:
-            if Girl.location == bg_current and not approval_check(Girl, 1000, Alt = [[LauraX, JeanX], 1200]):
-                if Girl == RogueX:
-                    ch_r "Hey, could you maybe keep that open, [RogueX.player_petname]?"
-                elif Girl == KittyX:
-                    ch_k "Um, I'd[KittyX.like]rather you didn't lock my door, [KittyX.player_petname]?"
-                elif Girl == EmmaX:
-                    ch_e "Do you really think it's appropriate for you to lock the door to my room?"
-                elif Girl == LauraX:
-                    ch_l "I don't want to feel caged up like that, [LauraX.player_petname]."
-                elif Girl == JeanX:
-                    ch_j "Hey, don't lock that."
-                elif Girl == StormX:
-                    ch_s "I would really prefer you didn't lock the door, [StormX.player_petname]."
-                elif Girl == JubesX:
-                    ch_v "You really shouldn't lock -my- door, [JubesX.player_petname]."
-            else:
-                "You lock the door."
+        if Girl.location == bg_current:
+            "You are in [Girl.name]'s room. What would you like to do?"
+        else:
+            "You are in [Girl.name]'s room, but she isn't here. What would you like to do?"
 
-                $ door_locked = True
+        menu:
+            extend ""
+            "Chat":
+                call chat
+            "Would you like to study?":
+                call study
+            "Lock the door" if not door_locked:
+                if Girl.location == bg_current and not approval_check(Girl, 1000, Alt = [[LauraX, JeanX], 1200]):
+                    if Girl == RogueX:
+                        ch_r "Hey, could you maybe keep that open, [RogueX.player_petname]?"
+                    elif Girl == KittyX:
+                        ch_k "Um, I'd[KittyX.like]rather you didn't lock my door, [KittyX.player_petname]?"
+                    elif Girl == EmmaX:
+                        ch_e "Do you really think it's appropriate for you to lock the door to my room?"
+                    elif Girl == LauraX:
+                        ch_l "I don't want to feel caged up like that, [LauraX.player_petname]."
+                    elif Girl == JeanX:
+                        ch_j "Hey, don't lock that."
+                    elif Girl == StormX:
+                        ch_s "I would really prefer you didn't lock the door, [StormX.player_petname]."
+                    elif Girl == JubesX:
+                        ch_v "You really shouldn't lock -my- door, [JubesX.player_petname]."
+                else:
+                    "You lock the door."
+
+                    $ door_locked = True
+
+                    call taboo_level
+            "Unlock the door" if door_locked:
+                "You unlock the door."
+
+                $ door_locked = False
 
                 call taboo_level
-        "Unlock the door" if door_locked:
-            "You unlock the door."
+            "Sleep" if time_index >= 3: #night time
+                call tenth_round
+                call girls_location
+                call event_calls
+            "Wait" if time_index < 3: #not night time
+                "You wait around a bit."
 
-            $ door_locked = False
+                if round > 10:
+                    call wait
+                else:
+                    call tenth_round
 
-            call taboo_level
-        "Sleep" if time_index >= 3: #night time
-            call tenth_round
-            call girls_location
-            call event_calls
-        "Wait" if time_index < 3: #not night time
-            "You wait around a bit."
+                call girls_location
+                call event_calls
+            "Leave":
+                call world_map
 
-            call tenth_round
-            call girls_location
-            call event_calls
-        "Leave":
-            jump world_map
+        if "_angry" in Girl.recent_history:
+            $ Girl.change_face("_angry")
 
-    if "_angry" in Girl.recent_history:
-        $ Girl.change_face("_angry")
+            call get_out_lines(Girl)
 
-        call get_out_lines(Girl)
-        jump player_room
+            $ bg_current = "bg_campus"
 
-    jump girls_room_menu
+            jump reset_location
 
 label campus_entry:
     call check_on_Jubes_sunshock
 
-    $ bg_current = "bg_campus"
-
-    $ Player.drain_word("locked",0,0,1)
     $ Player.recent_history.append("traveling")
 
     $ Nearby = []
 
-    call change_out_of_gym_clothes
-    call taboo_level
-    call event_calls
-    call set_the_scene
-
-label campus:
     $ bg_current = "bg_campus"
 
-    $ Player.drain_word("traveling",1,0)
+    $ door_locked = False
 
+    call set_the_scene
     call taboo_level
+    call event_calls
+
+label campus:
+    $ Player.drain_word("traveling", 1, 0)
+
+    $ bg_current = "bg_campus"
+
     call set_the_scene(silent = True)
-
-    label campus_menu:
-
+    call taboo_level
     call quick_event
-    call checkout(total = True)
-    call are_girls_angry
+    call event_calls
 
     if time_index == 2 and "going_on_date" in Player.daily_history:
         menu:
@@ -605,38 +610,45 @@ label campus:
 
             jump player_room
 
-        call wait
-        call event_calls
+        call tenth_round
         call girls_location
+        call event_calls
 
-    menu:
-        "You are in the university square. What would you like to do?"
-        "Chat":
-            call chat
-        "Wait" if time_index < 3:
-            "You wait around a bit."
+    call are_girls_angry
 
-            call wait
-            call girls_location
-            call event_calls
-        "Leave":
-            jump world_map
+    while True:
+        $ bg_current = "bg_campus"
 
-    jump campus_menu
+        menu:
+            "You are in the university square. What would you like to do?"
+            "Chat":
+                call chat
+            "Wait" if time_index < 3:
+                "You wait around a bit."
+
+                if round > 10:
+                    call wait
+                else:
+                    call tenth_round
+
+                call girls_location
+                call event_calls
+            "Leave":
+                call world_map
 
 label classroom_entry:
-    $ bg_current = "bg_classroom"
-
-    $ Player.drain_word("locked",0,0,1)
     $ Player.recent_history.append("traveling")
 
     $ Present = []
     $ Nearby = []
 
-    call change_out_of_gym_clothes
+    $ bg_current = "bg_classroom"
+
+    $ door_locked = False
+
+    call set_the_scene(character = False)
     call taboo_level
     call event_calls
-    call set_the_scene(0)
 
 label classroom:
     $ bg_current = "bg_classroom"
@@ -645,7 +657,7 @@ label classroom:
         $ Present = []
 
         if time_index < 2 and weekday < 5:
-            call classroom_Seating
+            call classroom_seating
 
         $ Player.drain_word("goto",1,0)
         $ Player.drain_word("traveling",1,0)
@@ -657,13 +669,10 @@ label classroom:
     elif time_index == 2 or weekday > 5:
         "You enter the classroom."
 
-    call taboo_level
     call set_the_scene(silent = True)
-
-    label classroom_menu:
-
+    call taboo_level
     call quick_event
-    call checkout(total = True)
+    call event_calls
 
     if round <= 10:
         if time_index >= 3:
@@ -671,79 +680,84 @@ label classroom:
 
             jump player_room
 
-        call wait
-        call event_calls
+        call tenth_round
         call girls_location
+        call event_calls
 
     call are_girls_angry
 
-    menu:
-        "What would you like to do?"
-        "Take the morning class" if weekday < 5 and time_index == 0:
-            if round >= 30:
-                call take_class
-            else:
-                "Class is already letting out. You can hang out until the next one."
-        "Take the afternoon class" if weekday < 5 and time_index == 1:
-            if round >= 30:
-                call take_class
-            else:
-                "Class is already letting out. You can hang out until they lock up for the night."
-        "Chat":
-            call chat
-        "Lock the door" if "locked" not in Player.traits:
-            if weekday >=5 or time_index >= 2:
-                "You lock the door."
+    while True:
+        $ bg_current = "bg_classroom"
 
-                $ Player.traits.append("locked")
+        menu:
+            extend ""
+            "Take the morning class" if weekday < 5 and time_index == 0:
+                if round >= 30:
+                    call take_class
+                else:
+                    "Class is already letting out. You can hang out until the next one."
+            "Take the afternoon class" if weekday < 5 and time_index == 1:
+                if round >= 30:
+                    call take_class
+                else:
+                    "Class is already letting out. You can hang out until they lock up for the night."
+            "Chat":
+                call chat
+            "Lock the door" if not door_locked:
+                if weekday >=5 or time_index >= 2:
+                    "You lock the door."
+
+                    $ door_locked = True
+
+                    call taboo_level
+                else:
+                    "You can't really do that during class."
+            "Unlock the door" if door_locked:
+                "You unlock the door."
+
+                $ door_locked = False
 
                 call taboo_level
-            else:
-                "You can't really do that during class."
-        "Unlock the door" if "locked" in Player.traits:
-            "You unlock the door."
+            "Wait" if time_index < 3:
+                "You hang out for a bit."
 
-            $ Player.traits.remove("locked")
+                if round > 10:
+                    call wait
+                else:
+                    call tenth_round
 
-            call taboo_level
-        "Wait" if time_index < 3:
-            "You hang out for a bit."
+                call girls_location
+                call event_calls
 
-            call wait
-            call girls_location
-            call event_calls
-
-            if time_index < 2:
-                $ line = "A new class is in session. What would you like to do?"
-            else:
-                $ line = "Classes have let out for the day. What would you like to do?"
-        "Leave":
-            jump world_map
-
-    jump classroom_menu
+                if time_index < 2:
+                    "A new class is in session. What would you like to do?"
+                else:
+                    "Classes have let out for the day. What would you like to do?"
+            "Leave":
+                call world_map
 
 label danger_room_entry:
-    $ bg_current = "bg_dangerroom"
-
-    $ Player.drain_word("locked",0,0,1)
     $ Player.recent_history.append("traveling")
 
     $ Nearby = []
 
+    $ bg_current = "bg_dangerroom"
+
+    $ door_locked = False
+
+    call set_the_scene
     call gym_entry
     call taboo_level
     call event_calls
-    call set_the_scene
 
 label danger_room:
     $ bg_current = "bg_dangerroom"
 
-    $ Player.drain_word("traveling",1,0)
+    $ Player.drain_word("traveling", 1, 0)
 
-    call taboo_level
     call set_the_scene(silent = True)
+    call taboo_level
     call quick_event
-    call checkout(total = True)
 
     if round <= 10:
         "Looks like shifts are changing. . ."
@@ -751,55 +765,60 @@ label danger_room:
         if time_index >=3:
             "You're getting tired, you head back to your room."
 
-            jump player_room
+            $ bg_current = "bg_player"
 
-        call wait
+            jump reset_location
+
+        call tenth_round
         call girls_location
         call event_calls
-        call change_out_of_gym_clothes
 
     call are_girls_angry
 
     "This is the Danger Room. What would you like to do?"
 
-    menu danger_room_menu:
-        extend ""
-        "Train":
-            if time_index >= 3:
-                "The Danger Room has been powered off for the night, maybe take a break."
-            elif round >= 30:
-                call training
-            else:
-                "There really isn't time to do much before the next rotation, maybe wait a bit."
-        "Chat":
-            call chat
-        "Lock the door" if "locked" not in Player.traits:
-            if time_index >= 3:
-                "You lock the door."
+    while True:
+        $ bg_current = "bg_dangerroom"
 
-                $ Player.traits.append("locked")
+        menu:
+            extend ""
+            "Train":
+                if time_index >= 3:
+                    "The Danger Room has been powered off for the night, maybe take a break."
+                elif round >= 30:
+                    call training
+                else:
+                    "There really isn't time to do much before the next rotation, maybe wait a bit."
+            "Chat":
+                call chat
+            "Lock the door" if not door_locked:
+                if time_index >= 3:
+                    "You lock the door."
+
+                    $ door_locked = True
+
+                    call taboo_level
+                else:
+                    "You can't really do that during free hours."
+            "Unlock the door" if door_locked:
+                "You unlock the door."
+
+                $ door_locked = False
 
                 call taboo_level
-            else:
-                "You can't really do that during free hours."
-        "Unlock the door" if "locked" in Player.traits:
-            "You unlock the door."
+            "Wait" if time_index < 3:
+                "You hang out for a bit."
 
-            $ Player.traits.remove("locked")
+                if round > 10:
+                    call wait
+                else:
+                    call tenth_round
 
-            call taboo_level
-        "Wait" if time_index < 3:
-            "You hang out for a bit."
-
-            call wait
-            call girls_location
-            call event_calls
-            call change_out_of_gym_clothes
-        "Leave":
-            call exit_gym
-            jump world_map
-
-    jump danger_room_menu
+                call girls_location
+                call event_calls
+            "Leave":
+                call exit_gym
+                call world_map
 
 label gym_entry(number_of_girls = 0):
     # if taboo == 0:
@@ -810,21 +829,10 @@ label gym_entry(number_of_girls = 0):
     #         "Play [[keep on this outfit]":
     #             return
 
-    python:
-        for G in all_Girls:
-            if G.location != "bg_dangerroom" and G.outfit_name == "gym_clothes":
-                G.outfit_name = G.today_outfit_name
-            elif G.outfit_name == "gym_clothes":
-                continue
-            elif G.location == "bg_dangerroom" and G not in Party:
-                G.outfit_name = "gym_clothes"
-
-    call set_the_scene
-
     $ temp_Girls = Present[:]
 
     while temp_Girls:
-        if temp_Girls[0].outfit != "gym_clothes":
+        if temp_Girls[0].outfit_name != "gym_clothes":
             if approval_check(temp_Girls[0], 1300, "LO") or "passive" in temp_Girls[0].traits:
                 $ approval_passed = True
             elif approval_check(temp_Girls[0], 800, "LO") and temp_Girls[0].first_custom_outfit["outfit_active"]:
@@ -835,8 +843,6 @@ label gym_entry(number_of_girls = 0):
                 $ approval_passed = False
 
             if not approval_passed or "asked gym" in temp_Girls[0].daily_history or "no_ask gym" in temp_Girls[0].traits:
-                show black_screen onlayer black
-
                 if temp_Girls[0] == EmmaX:
                     ch_e "I should change too."
                 elif temp_Girls[0] == LauraX:
@@ -892,36 +898,37 @@ label gym_entry(number_of_girls = 0):
 
                     $ temp_Girls[0].outfit_name = "gym_clothes"
 
+            show black_screen onlayer black
+
+            $ temp_Girls[0].change_outfit()
+
             if temp_Girls[0].outfit_name == "gym_clothes":
                 $ number_of_girls += 1
 
         $ temp_Girls.remove(temp_Girls[0])
-
-    python:
-        for G in all_Girls:
-            G.change_outfit()
 
     hide black_screen onlayer black
 
     return
 
 label shower_entry:
-    $ bg_current = "bg_entry"
-
-    $ Player.drain_word("locked",0,0,1)
-
     $ Nearby = []
     $ Present = []
 
-    call taboo_level
+    $ bg_current = "bg_entry"
+
+    $ door_locked = False
+
     call set_the_scene (0, 1, 0)
+    call taboo_level
 
     if round <= 10 or len(Party) >= 2:
-        call shower_room
+        jump shower_room
 
-    if day >= 15 and "met" not in JeanX.history and "met" in EmmaX.history:
+    #if day >= 15 and "met" not in JeanX.history and "met" in EmmaX.history:
+    if day >= 1 and "met" not in JeanX.history and "met" in EmmaX.history:
         call JeanMeet
-        call shower_room
+        jump shower_room
 
     $ potential_Girls = []
 
@@ -1110,15 +1117,11 @@ label shower_entry:
 label shower_room:
     $ bg_current = "bg_showerroom"
 
-    $ Player.drain_word("traveling",1,0)
+    $ Player.drain_word("traveling", 1, 0)
 
-    call taboo_level
     call set_the_scene(check_if_dressed = False)
-
-    label shower_menu:
-
+    call taboo_level
     call quick_event
-    call checkout(total = True)
 
     if round <= 10:
         if time_index == 3:
@@ -1126,84 +1129,85 @@ label shower_room:
 
             jump player_room
 
-        call wait
+        call tenth_round
         call event_calls
         call girls_location
 
     call are_girls_angry
 
-    menu:
-        "You're in the showers. What would you like to do?"
-        "Chat":
-            call chat
-        "Shower" if round > 30:
-            call showering
-        "Wait" if time_index < 3:
-            "You hang out for a bit."
+    while True:
+        $ bg_current = "bg_showerroom"
 
-            if round > 30:
-                "In the showers."
-                "Not gonna lie, kinda weird."
+        menu:
+            "You're in the showers. What would you like to do?"
+            "Shower" if round > 30:
+                call showering
+            "Chat":
+                call chat
+            "Wait" if time_index < 3:
+                "You hang out for a bit."
 
-            call wait
-            call girls_location
-            call event_calls
+                if round > 30:
+                    "In the showers."
+                    "Not gonna lie, kinda weird."
 
-            if renpy.random.randint(1, 20) < 5:
-                $ Nearby = []
-                $ temp_Girls = active_Girls[:]
+                if round > 10:
+                    call wait
+                else:
+                    call tenth_round
 
-                while temp_Girls:
-                    if temp_Girls[0].location != bg_current and "showered" not in temp_Girls[0].daily_history and (temp_Girls[0].location == temp_Girls[0].home or temp_Girls[0].location == "bg_dangerroom"):
-                        $ Nearby.append(line[0])
+                call girls_location
+                call event_calls
 
-                    $ temp_Girls.remove(line[0])
+                if renpy.random.randint(1, 20) < 5:
+                    $ Nearby = []
+                    $ temp_Girls = active_Girls[:]
 
-                if Nearby:
-                    $ renpy.random.shuffle(Nearby)
+                    while temp_Girls:
+                        if temp_Girls[0].location != bg_current and "showered" not in temp_Girls[0].daily_history and (temp_Girls[0].location == temp_Girls[0].home or temp_Girls[0].location == "bg_dangerroom"):
+                            $ Nearby.append(line[0])
 
-                    while len(Nearby) > 2:
-                        $ Nearby.remove(Nearby[0])
+                        $ temp_Girls.remove(line[0])
 
-                    if len(Nearby) > 1:
-                        $ Nearby[1].location = "nearby"
+                    if Nearby:
+                        $ renpy.random.shuffle(Nearby)
 
-                    $ Nearby[0].location = "nearby"
-        "Leave":
-            call quick_event
-            call change_out_of_towels
-            jump world_map
+                        while len(Nearby) > 2:
+                            $ Nearby.remove(Nearby[0])
 
-    jump shower_menu
+                        if len(Nearby) > 1:
+                            $ Nearby[1].location = "nearby"
+
+                        $ Nearby[0].location = "nearby"
+            "Leave":
+                call quick_event
+                call change_out_of_towels
+                call world_map
 
 label pool_entry:
     call check_on_Jubes_sunshock
 
-    $ bg_current = "bg_pool"
-
-    $ Player.drain_word("locked",0,0,1)
     $ Player.recent_history.append("traveling")
 
     $ Nearby = []
 
-    call change_out_of_gym_clothes
-    call taboo_level
-    call event_calls
-    call SwimSuit
-    call set_the_scene
-
-label pool:
     $ bg_current = "bg_pool"
 
-    $ Player.drain_word("traveling",1,0)
+    $ door_locked = False
 
+    call SwimSuit
+    call set_the_scene
     call taboo_level
+    call event_calls
+
+label pool:
+    $ Player.drain_word("traveling", 1, 0)
+
+    $ bg_current = "bg_pool"
+
     call set_the_scene(silent = True, check_if_dressed = False)
-
-    label pool_menu:
-
+    call taboo_level
     call quick_event
-    call checkout(total = True)
 
     if round <= 10:
         if time_index >= 3:
@@ -1217,191 +1221,195 @@ label pool:
 
     call are_girls_angry
 
-    menu:
-        "You're at the pool. What would you like to do?"
-        "Chat":
-            call chat
-        "Want to sunbathe?" if time_index < 2:
-            call Pool_Sunbathe
+    while True:
+        $ bg_current = "bg_pool"
 
-            $ round -= 20 if round >= 20 else round
+        menu:
+            "You're at the pool. What would you like to do?"
+            "Chat":
+                call chat
+            "Want to sunbathe?" if time_index < 2:
+                call Pool_Sunbathe
 
-            "You just hang out for a little while."
-        "Want to swim?":
-            if time_index >= 3 and AloneCheck():
-                "It's a bit late for a swim."
-            else:
-                call Pool_Swim
-        "Want to skinnydip?":
-            call Pool_Skinnydip
-        "Wait (locked)" if time_index >= 3:
-            pass
-        "Wait" if time_index < 3:
-            "You hang out for a bit."
+                $ round -= 20 if round >= 20 else round
 
-            call wait
-            call girls_location
-            call event_calls
-        "Leave":
-            jump world_map
+                "You just hang out for a little while."
+            "Want to swim?":
+                if time_index >= 3 and AloneCheck():
+                    "It's a bit late for a swim."
+                else:
+                    call Pool_Swim
+            "Want to skinnydip?":
+                call Pool_Skinnydip
+            "Wait" if time_index < 3:
+                "You hang out for a bit."
 
-    jump pool_menu
+                if round > 10:
+                    call wait
+                else:
+                    call tenth_round
+
+                call girls_location
+                call event_calls
+            "Leave":
+                call world_map
 
 label study_entry:
-    $ bg_current = "bg_entry"
-
-    $ Player.drain_word("locked",0,0,1)
+    $ Player.recent_history.append("traveling")
 
     $ Nearby = []
 
-    call change_out_of_gym_clothes
-    call taboo_level
+    $ bg_current = "bg_entry"
+
+    $ door_locked = False
+
     call set_the_scene(entering = True)
+    call taboo_level
 
-    menu study_entry_menu:
-        "You're at the door, what do you do?"
-        "Knock politely":
-            $ decision = "knock"
-        "Enter without knocking":
-            if time_index >= 3:
-                "The door is locked. It's not like you could just walk through it."
+    $ decision = None
 
-                jump study_entry_menu
-        "Use the key to enter" if time_index >= 3 and "Xavier" in keys:
-            "You use your key."
+    while True:
+        $ decision = None
 
-            $ decision = None
-        "Ask [KittyX.name]" if time_index >= 3 and KittyX in Party:
-            $ decision = "kitty"
-        "Ask [StormX.name]" if time_index >= 3 and StormX in Party:
-            $ decision = "storm"
-        "Leave":
-            jump world_map
-
-    if decision == "knock":
-        if time_index >= 3:
-            "There's no answer, he's probably asleep."
-
-            jump study_entry_menu
-        else:
-            ch_x "Yes, enter. . ."
-
-            "You enter the room."
-    elif decision == "kitty":
-        ch_k "Yeah?"
-
-        while True:
-            menu:
-                extend ""
-                "Could you phase through the door and open it for me?":
-                    if "Sneakthief" in KittyX.traits:
-                        ch_k "No problem. . ."
-
-                        jump study_room
-                    elif "no_thief" in KittyX.recent_history:
-                        ch_k "I told you, no."
-                    elif approval_check(KittyX, 400, "I") or approval_check(KittyX, 1400):
-                        $ KittyX.change_stat("love", 90, 3)
-                        $ KittyX.change_stat("obedience", 50, 10)
-                        $ KittyX.change_stat("inhibition", 60, 10)
-
-                        ch_k "Heh, you have a wicked mind. . ."
-
-                        $ KittyX.traits.append("Sneakthief")
-
-                        jump study_room
-                    else:
-                        $ KittyX.change_stat("love", 90, -3)
-                        $ KittyX.change_stat("obedience", 50, 2)
-                        $ KittyX.change_stat("inhibition", 60, 2)
-
-                        ch_k "Um, I don't really feel comfortable doing that. . ."
-
-                        $ KittyX.recent_history.append("no_thief")
-                "Open the door.":
-                    if "Sneakthief" in KittyX.traits:
-                        ch_k "No problem. . ."
-
-                        jump study_room
-                    elif "no_thief" in KittyX.recent_history:
-                        ch_k "I told you, no."
-                    elif approval_check(KittyX, 500, "O") or approval_check(KittyX, 1600):
-                        $ KittyX.change_stat("obedience", 50, 15)
-                        $ KittyX.change_stat("inhibition", 60, 10)
-
-                        ch_k "Heh, if you say so. . ."
-
-                        $ KittyX.traits.append("Sneakthief")
-
-                        jump study_room
-                    else:
-                        $ KittyX.change_stat("love", 90, -5)
-                        $ KittyX.change_stat("obedience", 50, 2)
-                        $ KittyX.change_stat("inhibition", 60, 2)
-
-                        ch_k "Um, no."
-
-                        $ KittyX.recent_history.append("no_thief")
-                "Never mind. [[Leave]":
-                    jump world_map
-
-        jump study_entry_menu
-    elif decision == "storm":
-        ch_s "What is it?"
-
-        while True:
-            menu:
-                extend ""
-                "Do you think you could pick that lock?" if "Sneakthief" not in StormX.traits:
-                    if "no_thief" in StormX.recent_history:
-                        ch_s "I told you, I won't do that."
-                    elif approval_check(StormX, 400, "I") or approval_check(StormX, 1400):
-                        $ StormX.change_stat("love", 90, 3)
-                        $ StormX.change_stat("obedience", 80, 10)
-                        $ StormX.change_stat("inhibition", 60, 10)
-                        $ StormX.change_face("_sly")
-
-                        ch_s "Oh, this should be interesting. . ."
-                        "She pulls some picks from behind her ear."
-                        ch_s "Ok, we've got a click on 1. . . 2 is binding. . ."
-                        ch_s "Click on 3. . . 4. . . click on 5, back to 2. . . and we're in."
-
-                        $ StormX.traits.append("Sneakthief")
-                        $ StormX.change_face("_normal")
-
-                        jump study_room
-                    else:
-                        $ StormX.change_stat("love", 90, -3)
-                        $ StormX.change_stat("obedience", 50, 2)
-                        $ StormX.change_stat("inhibition", 60, 2)
-
-                        ch_s "I don't think that's really appropriate behavior. . ."
-
-                        $ StormX.recent_history.append("no_thief")
-                "Could you pick the lock again?" if "Sneakthief" in StormX.traits:
-                    ch_s "No problem. . ."
+        menu:
+            "You're at the door, what do you do?"
+            "Knock politely":
+                $ decision = "knock"
+            "Enter without knocking":
+                if time_index >= 3:
+                    "The door is locked. It's not like you could just walk through it."
+                else:
+                    ch_x "You know, [Player.name], it is not polite to enter a room unannounced."
 
                     jump study_room
-                "Never mind. [[Leave]":
-                    jump world_map
+            "Use the key to enter" if time_index >= 3 and "Xavier" in keys:
+                "You use your key."
+            "Ask [KittyX.name]" if time_index >= 3 and KittyX in Party:
+                $ decision = "kitty"
+            "Ask [StormX.name]" if time_index >= 3 and StormX in Party:
+                $ decision = "storm"
+            "Leave":
+                jump misplaced
 
-        jump study_entry_menu
+        if decision == "knock":
+            if time_index >= 3:
+                "There's no answer, he's probably asleep."
+            else:
+                ch_x "Yes, enter. . ."
 
-    elif time_index < 3:
-        ch_x "You know, [Player.name], it is not polite to enter a room unannounced."
+                "You enter the room."
+
+                jump study_room
+        elif decision == "kitty":
+            ch_k "Yeah?"
+
+            $ talking_to_Kitty = True
+
+            while talking_to_Kitty:
+                menu:
+                    extend ""
+                    "Could you phase through the door and open it for me?":
+                        if "Sneakthief" in KittyX.traits:
+                            ch_k "No problem. . ."
+
+                            jump study_room
+                        elif "no_thief" in KittyX.recent_history:
+                            ch_k "I told you, no."
+                        elif approval_check(KittyX, 400, "I") or approval_check(KittyX, 1400):
+                            $ KittyX.change_stat("love", 90, 3)
+                            $ KittyX.change_stat("obedience", 50, 10)
+                            $ KittyX.change_stat("inhibition", 60, 10)
+
+                            ch_k "Heh, you have a wicked mind. . ."
+
+                            $ KittyX.traits.append("Sneakthief")
+
+                            jump study_room
+                        else:
+                            $ KittyX.change_stat("love", 90, -3)
+                            $ KittyX.change_stat("obedience", 50, 2)
+                            $ KittyX.change_stat("inhibition", 60, 2)
+
+                            ch_k "Um, I don't really feel comfortable doing that. . ."
+
+                            $ KittyX.recent_history.append("no_thief")
+                    "Open the door.":
+                        if "Sneakthief" in KittyX.traits:
+                            ch_k "No problem. . ."
+
+                            jump study_room
+                        elif "no_thief" in KittyX.recent_history:
+                            ch_k "I told you, no."
+                        elif approval_check(KittyX, 500, "O") or approval_check(KittyX, 1600):
+                            $ KittyX.change_stat("obedience", 50, 15)
+                            $ KittyX.change_stat("inhibition", 60, 10)
+
+                            ch_k "Heh, if you say so. . ."
+
+                            $ KittyX.traits.append("Sneakthief")
+
+                            jump study_room
+                        else:
+                            $ KittyX.change_stat("love", 90, -5)
+                            $ KittyX.change_stat("obedience", 50, 2)
+                            $ KittyX.change_stat("inhibition", 60, 2)
+
+                            ch_k "Um, no."
+
+                            $ KittyX.recent_history.append("no_thief")
+                    "Never mind. [[Leave]":
+                        $ talking_to_Kitty = False
+        elif decision == "storm":
+            ch_s "What is it?"
+
+            $ talking_to_Storm = True
+
+            while talking_to_Storm:
+                menu:
+                    extend ""
+                    "Do you think you could pick that lock?" if "Sneakthief" not in StormX.traits:
+                        if "no_thief" in StormX.recent_history:
+                            ch_s "I told you, I won't do that."
+                        elif approval_check(StormX, 400, "I") or approval_check(StormX, 1400):
+                            $ StormX.change_stat("love", 90, 3)
+                            $ StormX.change_stat("obedience", 80, 10)
+                            $ StormX.change_stat("inhibition", 60, 10)
+                            $ StormX.change_face("_sly")
+
+                            ch_s "Oh, this should be interesting. . ."
+                            "She pulls some picks from behind her ear."
+                            ch_s "Ok, we've got a click on 1. . . 2 is binding. . ."
+                            ch_s "Click on 3. . . 4. . . click on 5, back to 2. . . and we're in."
+
+                            $ StormX.traits.append("Sneakthief")
+                            $ StormX.change_face("_normal")
+
+                            jump study_room
+                        else:
+                            $ StormX.change_stat("love", 90, -3)
+                            $ StormX.change_stat("obedience", 50, 2)
+                            $ StormX.change_stat("inhibition", 60, 2)
+
+                            ch_s "I don't think that's really appropriate behavior. . ."
+
+                            $ StormX.recent_history.append("no_thief")
+                    "Could you pick the lock again?" if "Sneakthief" in StormX.traits:
+                        ch_s "No problem. . ."
+
+                        jump study_room
+                    "Never mind. [[Leave]":
+                        $ talking_to_Storm = False
 
 label study_room:
-    $ bg_current = "bg_study"
-
     $ Player.drain_word("traveling",1,0)
 
-    call taboo_level
+    $ bg_current = "bg_study"
+
+    call change_Xavier_face("_happy")
+
     call set_the_scene(silent = True)
-
-    label study_menu:
-
+    call taboo_level
     call quick_event
-    call checkout(total = True)
 
     if round <= 10:
         if time_index >= 3:
@@ -1409,82 +1417,142 @@ label study_room:
 
             jump player_room
         else:
-            call wait
+            call tenth_round
             call girls_location
 
     call are_girls_angry
-    call change_Xavier_face ("_happy")
 
-    if time_index >= 3:
-        "You are in Xavier's study, but he isn't in at the moment. What would you like to do?"
+    while True:
+        $ bg_current = "bg_study"
+
+        if time_index >= 3:
+            "You are in Xavier's study, but he isn't in at the moment. What would you like to do?"
+        else:
+            "You are in Xavier's study. What would you like to do?"
+
+        menu:
+            extend ""
+            "Chat" if time_index >= 3:
+                call chat
+            "Plan Omega!" if time_index < 3 and RogueX.location == bg_current and Player.level >= 5:
+                if approval_check(RogueX, 1500, taboo_modifier=1, Loc="No"):
+                    call Xavier_Plan(RogueX)
+                else:
+                    ch_r "I don't want to do that. . ."
+            "Plan Kappa!" if time_index < 3 and KittyX.location == bg_current and Player.level >= 5:
+                if "Xavier's photo" in Player.inventory and approval_check(KittyX, 1500, taboo_modifier=1, Loc="No"):
+                    call Xavier_Plan(KittyX)
+                elif "Xavier's photo" in Player.inventory:
+                    ch_k "I don't really want to do that. . ."
+                else:
+                    ch_k "What?"
+            "Plan Psi!" if time_index < 3 and EmmaX.location == bg_current and Player.level >= 5:
+                if approval_check(EmmaX, 1500, taboo_modifier=1, Loc="No"):
+                    call Xavier_Plan(EmmaX)
+                else:
+                    ch_e "I'd rather not. . ."
+            "Plan Chi!" if time_index < 3 and LauraX.location == bg_current and Player.level >= 5:
+                if LauraX.level >= 2 and approval_check(LauraX, 1500, taboo_modifier=1, Loc="No") and approval_check(LauraX, 750, "I"):
+                    call Xavier_Plan(LauraX)
+                elif LauraX.level < 2 or not approval_check(LauraX, 750, "I"):
+                    ch_l "I'm not ready for that."
+                else:
+                    ch_l "Huh?"
+            "Plan Alpha!" if time_index < 3 and JeanX.location == bg_current and Player.level >= 5:
+                if approval_check(JeanX, 1500, taboo_modifier=1, Loc="No"):
+                    call Xavier_Plan(JeanX)
+                else:
+                    ch_j "You're on your own there."
+            "Plan Rho!" if time_index < 3 and StormX.location == bg_current and Player.level >= 5:
+                if "Xavier's files" in Player.inventory and approval_check(StormX, 1500, taboo_modifier=1, Loc="No"):
+                    call Xavier_Plan(StormX)
+                elif "Xavier's files" in Player.inventory:
+                    ch_s "I do not believe that would be approrpriate."
+                else:
+                    ch_s "What is that?"
+            "Plan Zeta!" if time_index < 3 and JubesX.location == bg_current and Player.level >= 5:
+                if approval_check(JubesX, 1500, taboo_modifier=1, Loc="No"):
+                    call Xavier_Plan(JubesX)
+                else:
+                    ch_v "What's a \"Zeta?\""
+            "Explore" if time_index >= 3 and "explore" not in Player.recent_history:
+                $ counter = 0
+
+                $ Player.recent_history.append("explore")
+
+                call study_Explore
+            "Wait":
+                if time_index >= 3:
+                    "You probably don't want to be here when Xavier gets in."
+                elif time_index >=2:
+                    ch_x "If you don't mind, I would like to close up for the evening?"
+
+                    $ bg_current = "bg_campus"
+
+                    jump misplaced
+                else:
+                    if round > 10:
+                        call wait
+                    else:
+                        call tenth_round
+
+                    call girls_location
+
+                    ch_x "Not that I mind the company, but is there something I can do for you?"
+            "Leave":
+                call world_map
+
+label reset_location:
+    $ door_locked = False
+
+    $ stack_depth = renpy.call_stack_depth()
+
+    while stack_depth > 0:
+        $ stack_depth -= 1
+
+        $ renpy.pop_call()
+
+    if bg_current == "bg_player":
+        jump player_room
+    elif bg_current == "bg_rogue":
+        $ Girl = RogueX
+
+        jump girls_room
+    elif bg_current == "bg_kitty":
+        $ Girl = KittyX
+
+        jump girls_room
+    elif bg_current == "bg_emma":
+        $ Girl = EmmaX
+
+        jump girls_room
+    elif bg_current == "bg_laura":
+        $ Girl = LauraX
+
+        jump girls_room
+    elif bg_current == "bg_jean":
+        $ Girl = JeanX
+
+        jump girls_room
+    elif bg_current == "bg_storm":
+        $ Girl = StormX
+
+        jump girls_room
+    elif bg_current == "bg_jubes":
+        $ Girl = JubesX
+
+        jump girls_room
+    elif bg_current == "bg_dangerroom":
+        jump danger_room
+    elif bg_current == "bg_classroom":
+        jump classroom
+    elif bg_current == "bg_showerroom":
+        jump shower_room
+    elif bg_current == "bg_study":
+        jump study_room
+    elif bg_current == "bg_pool":
+        jump pool_entry
+    elif bg_current in ["bg_mall", "bg_shop", "bg_dressing"]:
+        jump mall
     else:
-        "You are in Xavier's study. What would you like to do?"
-
-    menu:
-        extend ""
-        "Chat" if time_index >= 3:
-            call chat
-        "Plan Omega!" if time_index < 3 and RogueX.location == bg_current and Player.level >= 5:
-            if approval_check(RogueX, 1500, taboo_modifier=1, Loc="No"):
-                call Xavier_Plan(RogueX)
-            else:
-                ch_r "I don't want to do that. . ."
-        "Plan Kappa!" if time_index < 3 and KittyX.location == bg_current and Player.level >= 5:
-            if "Xavier's photo" in Player.inventory and approval_check(KittyX, 1500, taboo_modifier=1, Loc="No"):
-                call Xavier_Plan(KittyX)
-            elif "Xavier's photo" in Player.inventory:
-                ch_k "I don't really want to do that. . ."
-            else:
-                ch_k "What?"
-        "Plan Psi!" if time_index < 3 and EmmaX.location == bg_current and Player.level >= 5:
-            if approval_check(EmmaX, 1500, taboo_modifier=1, Loc="No"):
-                call Xavier_Plan(EmmaX)
-            else:
-                ch_e "I'd rather not. . ."
-        "Plan Chi!" if time_index < 3 and LauraX.location == bg_current and Player.level >= 5:
-            if LauraX.level >= 2 and approval_check(LauraX, 1500, taboo_modifier=1, Loc="No") and approval_check(LauraX, 750, "I"):
-                call Xavier_Plan(LauraX)
-            elif LauraX.level < 2 or not approval_check(LauraX, 750, "I"):
-                ch_l "I'm not ready for that."
-            else:
-                ch_l "Huh?"
-        "Plan Alpha!" if time_index < 3 and JeanX.location == bg_current and Player.level >= 5:
-            if approval_check(JeanX, 1500, taboo_modifier=1, Loc="No"):
-                call Xavier_Plan(JeanX)
-            else:
-                ch_j "You're on your own there."
-        "Plan Rho!" if time_index < 3 and StormX.location == bg_current and Player.level >= 5:
-            if "Xavier's files" in Player.inventory and approval_check(StormX, 1500, taboo_modifier=1, Loc="No"):
-                call Xavier_Plan(StormX)
-            elif "Xavier's files" in Player.inventory:
-                ch_s "I do not believe that would be approrpriate."
-            else:
-                ch_s "What is that?"
-        "Plan Zeta!" if time_index < 3 and JubesX.location == bg_current and Player.level >= 5:
-            if approval_check(JubesX, 1500, taboo_modifier=1, Loc="No"):
-                call Xavier_Plan(JubesX)
-            else:
-                ch_v "What's a \"Zeta?\""
-        "Explore" if time_index >= 3 and "explore" not in Player.recent_history:
-            $ counter = 0
-
-            $ Player.recent_history.append("explore")
-
-            call study_Explore
-        "Wait":
-            if time_index >= 3:
-                "You probably don't want to be here when Xavier gets in."
-            elif time_index >=2:
-                ch_x "If you don't mind, I would like to close up for the evening?"
-                "You return to your room."
-
-                jump player_room
-            else:
-                call wait
-                call girls_location
-
-                ch_x "Not that I mind the company, but is there something I can do for you?"
-        "Leave":
-            jump world_map
-
-    jump study_menu
+        jump campus

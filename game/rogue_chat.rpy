@@ -1066,26 +1066,26 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
         ch_r "Can't wait for the next big party."
         ch_r "I love to dance, and I've got the best partner to grind with-"
         $ RogueX.pose = "doggy"
-        call Rogue_Sex_Launch ("massage")
-        if RogueX.outfit["bottom"] == "_skirt":
-            $ RogueX.upskirt = 1
+        call show_sex(RogueX, "massage")
+        if RogueX.wearing_skirt:
+            $ RogueX.upskirt = True
             if RogueX.outfit["underwear"] and RogueX.seen_underwear and approval_check(RogueX, 800, taboo_modifier = 3):
                 pass
             elif RogueX.outfit["underwear"] and approval_check(RogueX, 800, taboo_modifier = 3):
-                $ RogueX.seen_underwear = 1
+                $ RogueX.seen_underwear = True
             elif RogueX.outfit["underwear"]:
-                $ RogueX.upskirt = 0
+                $ RogueX.upskirt = True
             elif RogueX.seen_pussy and approval_check(RogueX, 1000, taboo_modifier = 4):
                 pass
             elif approval_check(RogueX, 1400, taboo_modifier = 3):
                 call Rogue_First_Bottomless (1)
             else:
-                $ RogueX.upskirt = 0
+                $ RogueX.upskirt = False
             pause 0.5
-            $ RogueX.upskirt = 0
+            $ RogueX.upskirt = False
         ch_r "Y'know what I'm sayin', [RogueX.player_petname]?"
-        $ RogueX.upskirt = 0
-        call Rogue_Doggy_Reset
+        $ RogueX.upskirt = False
+        call reset_position(Girl)
 
     elif Options[0] == "seenpeen":
         $ RogueX.change_face("_sly",1)
@@ -1766,7 +1766,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
         elif RogueX.location in personal_rooms:
             ch_r "I'll see you there."
             $ bg_current = RogueX.location
-            jump Misplaced
+            jump reset_location
         else:
             ch_r "You know, I'll just meet you in my room."
             $ RogueX.location = "bg_rogue"
@@ -2168,7 +2168,7 @@ label Rogue_Clothes:
     $ Girl = RogueX
     call shift_focus(Girl)
 
-label Rogue_Wardrobe_Menu:
+label Rogue_wardrobe_menu:
     while True:
         $ trigger = True
 
@@ -2468,7 +2468,7 @@ label Rogue_Wardrobe_Menu:
 
     menu Rogue_Clothes_Over:
 
-        "Why don't you go with no [RogueX.outfit['top']]?" if RogueX.outfit["top"]:
+        "Why don't you go with no [RogueX.outfit[top]]?" if RogueX.outfit["top"]:
             $ RogueX.change_face("_bemused", 1)
             if RogueX.outfit["bra"] or (RogueX.seen_breasts and approval_check(RogueX, 600)):
                 ch_r "Sure."
@@ -2551,7 +2551,7 @@ label Rogue_Wardrobe_Menu:
 
         "How about that green nighty I got you?" if RogueX.outfit["top"] != "_nighty" and "_nighty" in RogueX.inventory:
             if RogueX.outfit["bottom"]:
-                ch_r "I can't really wear that with my [RogueX.outfit['legs']] on."
+                ch_r "I can't really wear that with my [RogueX.outfit[legs]] on."
             elif not approval_check(RogueX, 1100, taboo_modifier=3):
                 call Display_dress_screen (RogueX)
                 if not _return:
@@ -2610,15 +2610,15 @@ label Rogue_Wardrobe_Menu:
                 elif approval_check(RogueX, 900, taboo_modifier=2) and "_lace_bra" in RogueX.inventory:
                     ch_r "I suppose this would work. . ."
                     $ RogueX.outfit["bra"]  = "_lace_bra"
-                    "She pulls out her lace bra and slips it on under her [RogueX.outfit['top']]."
+                    "She pulls out her lace bra and slips it on under her [RogueX.outfit[top]]."
                 elif approval_check(RogueX, 800, taboo_modifier=2):
                     ch_r "Yeah, I guess."
                     $ RogueX.outfit["bra"] = "_bra"
-                    "She pulls out her bra and slips it on under her [RogueX.outfit['top']]."
+                    "She pulls out her bra and slips it on under her [RogueX.outfit[top]]."
                 elif approval_check(RogueX, 600, taboo_modifier=2):
                     ch_r "Yeah, I guess."
                     $ RogueX.outfit["bra"] = "_tank"
-                    "She pulls out her tanktop and slips it on under her [RogueX.outfit['top']]."
+                    "She pulls out her tanktop and slips it on under her [RogueX.outfit[top]]."
                 else:
                     ch_r "Yeah, I don't think so."
                     return False
@@ -2651,7 +2651,7 @@ label Rogue_Wardrobe_Menu:
 
     menu Rogue_Clothes_Legs:
 
-        "Maybe go without the [RogueX.outfit['legs']]." if RogueX.outfit["bottom"]:
+        "Maybe go without the [RogueX.outfit[legs]]." if RogueX.outfit["bottom"]:
             $ RogueX.change_face("_sexy", 1)
             if RogueX.seen_underwear and RogueX.outfit["underwear"] and approval_check(RogueX, 500, taboo_modifier=5):
                 ch_r "Sure."
@@ -2675,7 +2675,7 @@ label Rogue_Wardrobe_Menu:
                     if not RogueX.outfit["underwear"]:
                         ch_r "Maybe if I put some panties on first. . ."
                     return
-            if RogueX.bottom_number() > 6:
+            if RogueX.wearing_pants:
                 $ RogueX.outfit["bottom"] = ""
                 "She tugs her pants off and drops them to the ground."
             else:
@@ -2690,7 +2690,7 @@ label Rogue_Wardrobe_Menu:
 
         "How about that skirt?" if RogueX.outfit["bottom"] != "_skirt":
             $ RogueX.outfit["bottom"] = "_skirt"
-            $ RogueX.upskirt = 0
+            $ RogueX.upskirt = False
 
         "Your ass looks tight in those jeans." if RogueX.outfit["bottom"] != "_pants":
             $ RogueX.outfit["bottom"] = "_pants"
@@ -2747,12 +2747,12 @@ label Rogue_Wardrobe_Menu:
             ch_p "Try on those sheer fetish pants I bought you."
             $ RogueX.outfit["bottom"] = "_sheer_fetish"
 
-        "How about that sweater?" if RogueX.outfit["front_outer_accessory"] != "_sweater" and "halloween" in RogueX.history:
+        "How about that sweater?" if RogueX.outfit["scarf"] != "_sweater" and "halloween" in RogueX.history:
             ch_p "What about that sweater you wore at the party?"
-            $ RogueX.outfit["front_outer_accessory"] = "_sweater"
-        "Lose the sweater?" if RogueX.outfit["front_outer_accessory"] == "_sweater" and "halloween" in RogueX.history:
+            $ RogueX.outfit["scarf"] = "_sweater"
+        "Lose the sweater?" if RogueX.outfit["scarf"] == "_sweater" and "halloween" in RogueX.history:
             ch_p "You can do without the sweater."
-            $ RogueX.outfit["front_outer_accessory"] = ""
+            $ RogueX.outfit["scarf"] = ""
         "Never mind":
 
             pass
@@ -2782,15 +2782,15 @@ label Rogue_Wardrobe_Menu:
                     if approval_check(RogueX, 1200, taboo_modifier=4) and RogueX.outfit["bottom"]:
                         $ line = RogueX.outfit["bottom"]
                         $ RogueX.outfit["bottom"] = ""
-                        "She pulls off her [line] and slips on the [RogueX.outfit['underwear']]."
+                        "She pulls off her [line] and slips on the [RogueX.outfit[underwear]]."
                     elif RogueX.outfit["bottom"] == "_skirt":
-                        "She pulls out her [RogueX.outfit['underwear']] and pulls them up under her skirt."
+                        "She pulls out her [RogueX.outfit[underwear]] and pulls them up under her skirt."
                         $ RogueX.outfit["bottom"] = ""
                         "Then she drops the skirt to the floor."
                     else:
                         $ line = RogueX.outfit["bottom"]
                         $ RogueX.outfit["bottom"] = ""
-                        "She steps away a moment and then comes back wearing only the [RogueX.outfit['underwear']]."
+                        "She steps away a moment and then comes back wearing only the [RogueX.outfit[underwear]]."
                     return
                 else:
                     ch_r "Nope."
@@ -2824,7 +2824,7 @@ label Rogue_Wardrobe_Menu:
     menu Rogue_Clothes_Under:
         "Tops":
             menu:
-                "How about you lose the [RogueX.outfit['bra']]?" if RogueX.outfit["bra"]:
+                "How about you lose the [RogueX.outfit[bra]]?" if RogueX.outfit["bra"]:
                     $ RogueX.change_face("_bemused", 1)
                     if RogueX.seen_breasts and approval_check(RogueX, 1100, taboo_modifier=2):
                         ch_r "Sure."
@@ -2847,7 +2847,7 @@ label Rogue_Wardrobe_Menu:
                     $ line = RogueX.outfit["bra"]
                     $ RogueX.outfit["bra"] = ""
                     if RogueX.outfit["top"]:
-                        "She reaches into her [RogueX.outfit['top']] grabs her [line], and pulls it out, dropping it to the ground."
+                        "She reaches into her [RogueX.outfit[top]] grabs her [line], and pulls it out, dropping it to the ground."
                     else:
                         "She lets her [line] fall to the ground."
                     if (not RogueX.outfit["top"] or RogueX.outfit["top"] == "_mesh_top") and not renpy.showing('dress_screen'):
@@ -2938,8 +2938,8 @@ label Rogue_Wardrobe_Menu:
                     $ RogueX.outfit["hose"] = "_pantyhose"
                 "The stockings would look good with that." if RogueX.outfit["hose"] != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in RogueX.inventory and RogueX.outfit["bottom"] != "_pants":
                     $ RogueX.outfit["hose"] = "_stockings_and_garterbelt"
-                "Maybe just the garterbelt?" if RogueX.outfit["hose"] != "garterbelt" and "_stockings_and_garterbelt" in RogueX.inventory and RogueX.outfit["bottom"] != "_pants":
-                    $ RogueX.outfit["hose"] = "garterbelt"
+                "Maybe just the garterbelt?" if RogueX.outfit["hose"] != "_garterbelt" and "_stockings_and_garterbelt" in RogueX.inventory and RogueX.outfit["bottom"] != "_pants":
+                    $ RogueX.outfit["hose"] = "_garterbelt"
                 "Your ripped pantyhose would look good with that." if RogueX.outfit["hose"] != "_ripped_pantyhose" and "_ripped_pantyhose" in RogueX.inventory and RogueX.outfit["bottom"] != "_pants":
                     $ RogueX.outfit["hose"] = "_ripped_pantyhose"
                 "Never mind":
@@ -2990,7 +2990,7 @@ label Rogue_Wardrobe_Menu:
                         $ RogueX.outfit["bottom"] = ""
                         pause 0.5
                         $ RogueX.outfit["bottom"] = trigger
-                        "She pulls off her [RogueX.outfit['legs']] and [line], then pulls the [RogueX.outfit['legs']] back on."
+                        "She pulls off her [RogueX.outfit[legs]] and [line], then pulls the [RogueX.outfit[legs]] back on."
                         $ trigger = 1
                         call Rogue_First_Bottomless (1)
                     elif RogueX.outfit["bottom"] == "_skirt":
@@ -3196,7 +3196,7 @@ label Rogue_Wardrobe_Menu:
 
                     return
                 $ RogueX.to_do.append("shave")
-        "Add ring piercings." if RogueX.outfit["front_inner_accessory"] != "_ring" and (RogueX.seen_pussy or RogueX.seen_breasts):
+        "Add ring piercings." if RogueX.outfit["piercings"] != "_ring" and (RogueX.seen_pussy or RogueX.seen_breasts):
             ch_p "You know, you'd look really nice with some ring body piercings."
 
             if "_ring" in RogueX.to_do:
@@ -3221,7 +3221,7 @@ label Rogue_Wardrobe_Menu:
                     return
 
                 $ RogueX.to_do.append("_ring")
-        "Add barbell piercings." if RogueX.outfit["front_inner_accessory"] != "_barbell" and (RogueX.seen_pussy or RogueX.seen_breasts):
+        "Add barbell piercings." if RogueX.outfit["piercings"] != "_barbell" and (RogueX.seen_pussy or RogueX.seen_breasts):
             ch_p "You know, you'd look really nice with some barbell body piercings."
 
             if "_barbell" in RogueX.to_do:
@@ -3246,8 +3246,8 @@ label Rogue_Wardrobe_Menu:
                     return
 
                 $ RogueX.to_do.append("_barbell")
-                $ RogueX.outfit["front_inner_accessory"] = "_barbell"
-        "Remove piercings." if RogueX.outfit["front_inner_accessory"]:
+                $ RogueX.outfit["piercings"] = "_barbell"
+        "Remove piercings." if RogueX.outfit["piercings"]:
             ch_p "You know, you'd look better without those piercings."
 
             $ RogueX.change_face("_bemused", 1)
@@ -3267,7 +3267,7 @@ label Rogue_Wardrobe_Menu:
                 ch_r "I'll keep them, if you don't mind."
 
                 return
-            $ RogueX.outfit["front_inner_accessory"] = ""
+            $ RogueX.outfit["piercings"] = ""
         "Add spiked collar." if RogueX.outfit["neck"] != "_spiked_collar":
             $ RogueX.outfit["neck"] = "_spiked_collar"
         "Remove spiked collar." if RogueX.outfit["neck"] == "_spiked_collar":

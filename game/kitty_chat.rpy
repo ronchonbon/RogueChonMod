@@ -1271,8 +1271,8 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
             $ KittyX.blushing = "_blush1"
             $ KittyX.had_chat.append("blowjob")
         else:
-            $ line = renpy.random.choice(["You know, I kinda like how you taste.", 
-                            "You're a real jaw-breaker.", 
+            $ line = renpy.random.choice(["You know, I kinda like how you taste.",
+                            "You're a real jaw-breaker.",
                             "Let me know if you want some more lollipop licks.",
                             "Hmmm. . . [she mimes her tongue knocking against her cheek.]"])
             ch_k "[line]"
@@ -1424,8 +1424,8 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
         call Kitty_Daddy
 
     elif Options[0] == "hate":
-        $ line = renpy.random.choice(["Get away from me.", 
-                "I don't want to see your face.", 
+        $ line = renpy.random.choice(["Get away from me.",
+                "I don't want to see your face.",
                 "Stop bothering me.",
                 "Leave me alone."])
         ch_k "[line]"
@@ -2009,7 +2009,8 @@ label Kitty_Summon(approval_bonus=approval_bonus):
             jump danger_room
         elif KittyX.location == "bg_kitty":
             ch_k "I'll clean up a few things."
-            jump Kitty_Room
+            $ Girl = KittyX
+            jump girls_room
         elif KittyX.location == "bg_player":
             ch_k "I'll be here for you."
             jump player_room
@@ -2022,11 +2023,12 @@ label Kitty_Summon(approval_bonus=approval_bonus):
         elif KittyX.location in personal_rooms:
             ch_k "See ya' in a bit. . ."
             $ bg_current = KittyX.location
-            jump Misplaced
+            jump reset_location
         else:
             ch_k "You know, I'll just meet you in my room."
             $ KittyX.location = "bg_kitty"
-            jump Kitty_Room
+            $ Girl = KittyX
+            jump girls_room
 
 
     elif line == "lonely":
@@ -2098,7 +2100,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
     if bg_current == "bg_dangerroom":
         call exit_gym ([KittyX])
 
-    $ KittyX.change_outfit(outfit_changed=0)
+    $ KittyX.change_outfit()
 
     if "follow" not in KittyX.traits:
 
@@ -2243,7 +2245,8 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             jump danger_room_entry
         elif KittyX.location == "bg_kitty":
             ch_k "I'll meet you there."
-            jump Kitty_Room
+            $ Girl = KittyX
+            jump girls_room
         elif KittyX.location == "bg_player":
             ch_k "I'll be waiting."
             jump player_room
@@ -2259,7 +2262,8 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         else:
             ch_k "You know, I'll just meet you in my room."
             $ KittyX.location = "bg_kitty"
-            jump Kitty_Room
+            $ Girl = KittyX
+            jump girls_room
 
 
 
@@ -2301,7 +2305,7 @@ label Kitty_Clothes:
     $ Girl = KittyX
     call shift_focus (Girl)
 
-label Kitty_Wardrobe_Menu:
+label Kitty_wardrobe_menu:
     $ primary_action = 1
     $ KittyX.change_face()
     while True:
@@ -2970,14 +2974,14 @@ label Kitty_Wardrobe_Menu:
                     $ KittyX.outfit["hose"] = ""
                 "The thigh-high hose would look good with that." if KittyX.outfit["hose"] != "_stockings":
                     $ KittyX.outfit["hose"] = "_stockings"
-                "The knee-high hose would look good with that." if KittyX.outfit["hose"] != "knee stockings" and "_knee_stockings" in KittyX.inventory:
-                    $ KittyX.outfit["hose"] = "knee stockings"
+                "The knee-high hose would look good with that." if KittyX.outfit["hose"] != "_knee_stockings" and "_knee_stockings" in KittyX.inventory:
+                    $ KittyX.outfit["hose"] = "_knee_stockings"
                 "The pantyhose would look good with that." if KittyX.outfit["hose"] != "_pantyhose" and "_pantyhose" in KittyX.inventory:
                     $ KittyX.outfit["hose"] = "_pantyhose"
                 "The stockings would look good with that." if KittyX.outfit["hose"] != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in KittyX.inventory:
                     $ KittyX.outfit["hose"] = "_stockings_and_garterbelt"
-                "Maybe just the garterbelt?" if KittyX.outfit["hose"] != "garterbelt" and "_stockings_and_garterbelt" in KittyX.inventory:
-                    $ KittyX.outfit["hose"] = "garterbelt"
+                "Maybe just the garterbelt?" if KittyX.outfit["hose"] != "_garterbelt" and "_stockings_and_garterbelt" in KittyX.inventory:
+                    $ KittyX.outfit["hose"] = "_garterbelt"
                 "Your ripped pantyhose would look good with that." if KittyX.outfit["hose"] != "_ripped_pantyhose" and "_ripped_pantyhose" in KittyX.inventory:
                     $ KittyX.outfit["hose"] = "_ripped_pantyhose"
                 "Never mind":
@@ -3173,7 +3177,7 @@ label Kitty_Wardrobe_Menu:
         "Piercings. [[See what she looks like without them first] (locked)" if not KittyX.seen_pussy and not KittyX.seen_breasts:
             pass
 
-        "Add ring piercings" if KittyX.outfit["front_inner_accessory"] != "_ring" and (KittyX.seen_pussy or KittyX.seen_breasts):
+        "Add ring piercings" if KittyX.outfit["piercings"] != "_ring" and (KittyX.seen_pussy or KittyX.seen_breasts):
             ch_p "You know, you'd look really nice with some ring body piercings."
             if "_ring" in KittyX.to_do:
                 ch_k "I know, I know. I'll take care of it later."
@@ -3193,7 +3197,7 @@ label Kitty_Wardrobe_Menu:
                     return
                 $ KittyX.to_do.append("_ring")
 
-        "Add barbell piercings" if KittyX.outfit["front_inner_accessory"] != "_barbell" and (KittyX.seen_pussy or KittyX.seen_breasts):
+        "Add barbell piercings" if KittyX.outfit["piercings"] != "_barbell" and (KittyX.seen_pussy or KittyX.seen_breasts):
             ch_p "You know, you'd look really nice with some barbell body piercings."
             if "_barbell" in KittyX.to_do:
                 ch_k "I know, I know. I'll take care of it later."
@@ -3212,9 +3216,9 @@ label Kitty_Wardrobe_Menu:
                     ch_k "Not that it's any of your business, [KittyX.player_petname]."
                     return
                 $ KittyX.to_do.append("_barbell")
-                $ KittyX.outfit["front_inner_accessory"] = "_barbell"
+                $ KittyX.outfit["piercings"] = "_barbell"
 
-        "Remove Piercings" if KittyX.outfit["front_inner_accessory"]:
+        "Remove Piercings" if KittyX.outfit["piercings"]:
             ch_p "You know, you'd look better without those piercings."
             $ KittyX.change_face("_bemused", 1)
             $ approval = approval_check(KittyX, 1350, taboo_modifier=0)
@@ -3229,7 +3233,7 @@ label Kitty_Wardrobe_Menu:
                 $ KittyX.brows = "_angry"
                 ch_k "Well {i}I{/i} kinda like'em."
                 return
-            $ KittyX.outfit["front_inner_accessory"] = ""
+            $ KittyX.outfit["piercings"] = ""
 
         "Add gold_necklace" if KittyX.outfit["neck"] != "_gold_necklace":
             ch_p "Why don't you try on that gold necklace?"

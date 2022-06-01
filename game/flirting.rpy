@@ -568,8 +568,9 @@ label Flirt(Girl=0):
                                 "She shrugs away from you and winks."
                                 Girl.voice "Not now. . ."
                             else:
-                                call expression Girl.tag + "_SexAct" pass ("kiss")
-                                call Trig_Reset (1)
+                                call shift_focus(Girl)
+                                $ primary_action = "kiss"
+                                call stop_all_actions (1)
                             return
                         "Just a taste [[no].":
                             $ Girl.change_face("_bemused", 1)
@@ -750,7 +751,7 @@ label Flirt(Girl=0):
             "Slap her ass":
 
 
-                call Slap_Ass (Girl)
+                call slap_ass (Girl)
             "Pinch her ass":
 
                 $ Girl.change_face("_surprised", 1)
@@ -785,7 +786,7 @@ label Flirt(Girl=0):
                     if Girl == RogueX:
                         ch_r "Ooh! Are you hinting at something there, [Girl.player_petname]?"
                     elif Girl == KittyX:
-                        ch_k "Purrrr, Kitty like."
+                        ch_k "Purrrr, Kitty_sprite like."
                     elif Girl == EmmaX:
                         ch_e "Mmm, what was that for?"
                     elif Girl == LauraX:
@@ -880,13 +881,23 @@ label Flirt(Girl=0):
                         ch_v "Fuck off!"
 
 
-            "Flip her skirt up" if Girl.bottom_number() == 5 and not Girl.upskirt:
+            "Flip her skirt up" if (Girl.wearing_dress and not Girl.dress_upskirt) or (Girl.wearing_skirt and not Girl.upskirt):
                 $ Girl.change_face("_surprised", 1)
-                $ Girl.upskirt = 1
+
+                if Girl.wearing_dress:
+                    $ Girl.dress_upskirt = True
+                elif Girl.wearing_skirt:
+                    $ Girl.upskirt = True
+
                 pause 0.5
-                $ Girl.upskirt = 0
+
                 "You sneak up on [Girl.name] from behind and flip her skirt up quickly!"
-                $ Girl.upskirt = 0
+
+                if Girl.wearing_dress:
+                    $ Girl.dress_upskirt = False
+                elif Girl.wearing_skirt:
+                    $ Girl.upskirt = False
+
                 if Girl.outfit["underwear"] and not Girl.taboo:
 
                     if approval_check(Girl, 750, "L", taboo_modifier=2):
@@ -1259,7 +1270,7 @@ label Flirt(Girl=0):
                     $ Girl.change_face("_angry")
                     $ Girl.change_stat("love", 90, -5)
                     $ Girl.change_stat("love", 60, -5)
-                    call Punch
+                    call punch
                     if Girl == RogueX:
                         "She slaps your hand away and smacks your face."
                         ch_r "What the fuck, [Girl.player_petname]?"
@@ -1462,32 +1473,32 @@ label Flirt(Girl=0):
                         $ Girl.change_stat("love", 90, -5)
                         if Girl == RogueX:
                             ch_r "Back the hell off, [Girl.player_petname]!"
-                            call Punch
+                            call punch
                             "She slaps your hand away and smacks your face."
                             ch_r "What the fuck, [Girl.player_petname]?"
                         elif Girl == KittyX:
                             ch_k "Back it up, [Girl.player_petname]!"
-                            call Punch
+                            call punch
                             "She elbows you in the ribs."
                             ch_k "WTF, [Girl.player_petname]?"
                         elif Girl == EmmaX:
                             ch_e "Time to stop, [Girl.player_petname]."
-                            call Punch
+                            call punch
                             "She elbows you in the ribs."
                             ch_e "You should learn from social cues. . ."
                         elif Girl == LauraX:
                             ch_l "Take a step back, [Girl.player_petname]!"
-                            call Punch
+                            call punch
                             "She gives you a quick shove."
                         elif Girl == JeanX:
                             $ JeanX.eyes = "_psychic"
-                            call Punch
+                            call punch
                             "You feel something slam the back of your head."
                             ch_j "Ok, that's good."
                             $ JeanX.eyes = "_squint"
                         elif Girl == StormX:
                             ch_s "That is enough, [Girl.player_petname]."
-                            call Punch
+                            call punch
                             "She elbows you in the ribs."
                             ch_s "Everything in moderation. . ."
                         elif Girl == JubesX:
@@ -1663,8 +1674,8 @@ label Flirt(Girl=0):
                             $ Girl.change_stat("love", 90, 2)
                             $ Girl.change_stat("obedience", 60, 3)
                             $ Girl.change_stat("inhibition", 60, 3)
-                            call expression Girl.tag + "_SexAct" pass ("breasts")
-                            call Trig_Reset (1)
+                            call before_action(Girl, "fondle_breasts", None)
+                            call stop_all_actions (1)
                             return
                         "Nah, that was enough.":
                             $ Girl.change_face("_sad", 1)
@@ -2014,7 +2025,7 @@ label Compliment(Girl=0, line0=0, line1=0, line2=0, Options=[], CountList=[], li
                 $ Girl.change_face("_confused",1)
                 ch_j "Wait . ."
             elif Girl == StormX:
-                ch_s "So you -were- awake. I owe Emma a drink."
+                ch_s "So you -were- awake. I owe Emma_sprite a drink."
             else:
                 Girl.voice "Yeah, it was ok. Got a little dull though."
 
@@ -2236,7 +2247,12 @@ label Compliment(Girl=0, line0=0, line1=0, line2=0, Options=[], CountList=[], li
                 ch_s "You pay too close attention to my body."
             elif Girl == JubesX:
                 ch_v "Ok, weirdo. . ."
-            $ Girl.blushing -= 1
+
+            if Girl.blushing == "_blush2":
+                $ Girl.blushing = "_blush1"
+            else:
+                $ Girl.blushing = ""
+
             $ Girl.mouth = "_normal"
 
     elif line == 6:
@@ -2372,7 +2388,7 @@ label Compliment(Girl=0, line0=0, line1=0, line2=0, Options=[], CountList=[], li
                 Girl.voice "Rude."
             $ Girl.change_face("_normal",1)
 
-        if Girl == JubesX and Girl.outfit["front_outer_accessory"]:
+        if Girl == JubesX and Girl.outfit["jacket"]:
             ch_v "How could you tell?"
 
     elif line == 8:
@@ -2695,7 +2711,7 @@ label Love_You(Girl=0):
 
             "[Girl.name] leaves the room."
             call remove_girl (Girl)
-            jump Misplaced
+            jump reset_location
         return
 
 
@@ -3781,13 +3797,13 @@ label AskPanties(Girl=0, Store=0):
             $ approval_bonus -= 20
 
         $ line = 0
-        if Girl.bottom_number() >= 6 or Girl.hose_number() >= 10:
+        if Girl.wearing_pants or Girl.outfit["hose"] == "_tights":
 
             if approval_check(Girl, 1000, "OI", taboo_modifier = 5) or "exhibitionist" in Girl.traits:
                 $ line = "here"
             elif approval_check(Girl, 900, taboo_modifier = 5):
                 $ line = "change"
-        elif Girl.bottom_number() == 5:
+        elif Girl.wearing_skirt:
 
             if approval_check(Girl, 600, "OI", taboo_modifier = 5) or "exhibitionist" in Girl.traits:
                 $ line = "here"
@@ -3808,11 +3824,11 @@ label AskPanties(Girl=0, Store=0):
             $ Girl.change_stat("obedience", 60, 4)
             $ Girl.change_stat("inhibition", 60, 4)
             call Remove_Panties (Girl)
-            if Girl.bottom_number() >= 6 or Girl.hose_number() >= 10:
+            if Girl.wearing_pants or Girl.outfit["hose"] == "_tights":
                 $ Girl.change_stat("lust", 60, 5)
                 $ Girl.change_stat("obedience", 60, 5)
                 $ Girl.change_stat("inhibition", 60, 5)
-            elif Girl.bottom_number() == 5:
+            elif Girl.wearing_skirt:
                 $ Girl.change_stat("lust", 60, 5)
                 $ Girl.change_stat("obedience", 60, 4)
                 $ Girl.change_stat("inhibition", 60, 4)
@@ -3827,7 +3843,7 @@ label AskPanties(Girl=0, Store=0):
         if line == "here":
 
             $ Girl.change_face("_sly")
-            if Girl.bottom_number() == 5:
+            if Girl.wearing_skirt:
 
                 $ Girl.change_stat("obedience", 60, 4)
                 $ Girl.change_stat("inhibition", 60, 4)
@@ -3970,11 +3986,11 @@ label AskPanties(Girl=0, Store=0):
                 if line:
 
                     $ Girl.change_face("_sly", 1)
-                    if Girl.bottom_number() >= 6 or Girl.hose_number() >= 10:
+                    if Girl.wearing_pants or Girl.outfit["hose"] == "_tights":
                         $ Girl.change_stat("lust", 60, 5)
                         $ Girl.change_stat("obedience", 60, 5)
                         $ Girl.change_stat("inhibition", 60, 5)
-                    elif Girl.bottom_number() == 5:
+                    elif Girl.wearing_skirt:
                         $ Girl.change_stat("lust", 60, 5)
                         $ Girl.change_stat("obedience", 60, 4)
                         $ Girl.change_stat("inhibition", 60, 4)
@@ -4088,11 +4104,11 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
     if Girl == KittyX:
         $ Girl.outfit["underwear"] = ""
         $ Girl.change_face("_bemused")
-        if Girl.bottom_number() >= 6:
+        if Girl.wearing_pants:
             "[Girl.name] looks around, reaches into her pocket, and tugs her panties out."
-        elif Girl.bottom_number() == 5:
+        elif Girl.wearing_skirt:
             "[Girl.name] looks around, reaches into her skirt, and pulls her panties out."
-        elif Girl.hose_number() >= 5:
+        elif Girl.outfit["hose"] in ["_tights", "_pantyhose"]:
             "[Girl.name] looks around, reaches through her [Girl.outfit['hose']], and pulls her panties out."
         else:
             "[Girl.name] looks around and pulls her panties off."
@@ -4100,21 +4116,21 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
         $ Girl.change_face("_sexy")
         "She hands them to you with a smirk."
 
-        if not Girl.outfit["bottom"] and Girl.hose_number() <= 10:
+        if not Girl.outfit["bottom"] :
             call expression Girl.tag + "_First_Bottomless"
 
         $ Girl.daily_history.append("commando")
         $ Girl.change_outfit()
         call outfitShame (Girl, 20)
         return
-    elif Girl == JeanX and Girl.bottom_number() == 5 and not approval_check(Girl, 400, "L"):
+    elif Girl == JeanX and Girl.wearing_skirt and not approval_check(Girl, 400, "L"):
         $ Girl.outfit["underwear"] = ""
         $ Girl.change_face("_bemused",eyes="_psychic")
         "You notice some movement as her panties shoot down her legs and she quickly steps out of them."
         "They scoot along near the ground and then up to your hand."
         $ Girl.change_face("_sexy")
 
-        if not Girl.outfit["bottom"] and Girl.hose_number() <= 10:
+        if not Girl.outfit["bottom"] :
             call expression Girl.tag + "_First_Bottomless"
 
         $ Girl.daily_history.append("commando")
@@ -4124,15 +4140,21 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
 
     $ Store = Girl.outfit["bottom"]
     $ Store2 = Girl.outfit["hose"]
-    if Girl.bottom_number() >= 6:
+    if Girl.wearing_skirt:
+        $ Girl.dress_upskirt = True
 
-        $ Girl.outfit["bottom"] = ""
-        $ Type = 1
-    elif Girl.bottom_number() == 5:
-
-        $ Girl.upskirt = 1
         $ Type = 2
-    if Girl.hose_number() >= 5:
+
+    if Girl.wearing_pants:
+        $ Girl.outfit["bottom"] = ""
+
+        $ Type = 1
+    elif Girl.wearing_skirt:
+        $ Girl.upskirt = True
+
+        $ Type = 2
+
+    if Girl.outfit["hose"] in ["_tights", "_pantyhose"]:
         $ Girl.outfit["hose"] = ""
         $ Type = 3 if Type == 2 else 4
 
@@ -4163,26 +4185,25 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
 
     $ Girl.outfit["bottom"] = Store
     $ Girl.outfit["hose"] = Store2
-    if Girl.bottom_number() > 6:
-
+    if Girl.wearing_pants:
         "She hands you the panties and then pulls her pants back on."
-    elif Girl.bottom_number() == 6 or Girl.outfit["underwear"] == "_shorts":
-
+    elif Girl.wearing_shorts:
         "She hands you the panties and then pulls her shorts back up."
-        $ Girl.upskirt = 0
-    elif Girl.bottom_number() == 5 and Girl.hose_number() >= 5:
 
+        $ Girl.bottom_pulled_down = False
+    elif Girl.wearing_skirt and Girl.outfit["hose"] in ["_tights", "_pantyhose"]:
         "She hands you the panties and then pulls her [Girl.outfit['hose']] back on and her skirt back down."
-        $ Girl.upskirt = 0
-    elif Girl.bottom_number() == 5:
 
+        $ Girl.upskirt = False
+    elif Girl.wearing_skirt:
         "She hands you the panties and then pulls her skirt back down."
-        $ Girl.upskirt = 0
-    elif Girl.hose_number() >= 5:
 
+        $ Girl.upskirt = False
+    elif Girl.outfit["hose"] in ["_tights", "_pantyhose"]:
         "She hands you the panties and then pulls her [Girl.outfit['hose']] back on."
     else:
         "[Girl.name] hands them to you in a ball."
+
     call expression Girl.tag + "_First_Bottomless" pass (1)
 
     $ Girl.daily_history.append("commando")

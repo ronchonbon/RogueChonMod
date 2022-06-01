@@ -287,8 +287,8 @@ label Massage_Prep(Girl=focused_Girl, Current=0, Past=0, MCount=0):
                 ch_s "So long as I get some skin contact from this. . ."
             elif Girl == JubesX:
                 ch_v "But you know, give me som contact after."
-                if Girl.outfit["front_outer_accessory"] and Girl.outfit["top"]:
-                    $ Girl.outfit["front_outer_accessory"] = ""
+                if Girl.outfit["jacket"] and Girl.outfit["top"]:
+                    $ Girl.outfit["jacket"] = ""
                     "She does take off the jacket though."
     if "_angry" in Girl.recent_history:
         return
@@ -299,7 +299,7 @@ label Massage_Cycle:
     $ Girl.add_word(1,"massage","massage",0,0)
 
     if Girl.pose == "doggy" or Girl.pose == "sex":
-        call expression Girl.tag + "_Sex_Launch" pass ("massage")
+        call show_sex(Girl, "massage")
 
     $ primary_action = "massage"
 
@@ -608,7 +608,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if not Girl.outfit["bottom"] and Girl.hose_number() < 10:
+            if not Girl.outfit["bottom"] and Girl.outfit["hose"] != "_pantyhose":
                 $ Girl.addiction -= 1
         elif Current == "ass":
             if Past in ("back","hips"):
@@ -636,7 +636,7 @@ label Massage_Cycle:
                 $ Girl.change_stat("lust", 90, 2)
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and Girl.hose_number() < 10:
+            if not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and Girl.outfit["hose"] != "_pantyhose":
                 $ Girl.addiction -= 3
         elif Current == "pussy":
             if Past in ("hips","ass"):
@@ -664,7 +664,7 @@ label Massage_Cycle:
                 $ Girl.change_stat("lust", 200, 3)
                 $ line = "You continue to rub " +Girl.name+ "'s " +Current
 
-            if not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and Girl.hose_number() < 10:
+            if not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and Girl.outfit["hose"] != "_pantyhose":
                 $ Girl.addiction -= 5
         elif Current == "thighs":
             if Past == "calves":
@@ -690,7 +690,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if Girl.bottom_number() <= 6 and Girl.hose_number() < 10:
+            if Girl.bottom_number() <= 6 and Girl.outfit["hose"] != "_pantyhose":
                 $ Girl.addiction -= 3
         elif Current == "calves":
             if Past == "feet":
@@ -716,7 +716,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if Girl.bottom_number() <= 6 and Girl.hose_number() < 10:
+            if Girl.bottom_number() <= 6 and Girl.outfit["hose"] != "_pantyhose":
                 $ Girl.addiction -= 2
         elif Current == "feet":
             if Past == "calves":
@@ -739,7 +739,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to rub " +Girl.name+ "'s " +Current
 
-            if Girl.outfit["front_outer_accessory"] != "boots" and Girl.hose_number() < 10:
+            if Girl.outfit["boots"] != "boots" and Girl.outfit["hose"] != "_pantyhose":
                 $ Girl.addiction -= 3
 
 
@@ -827,8 +827,8 @@ label Massage_Cycle:
 
                 call Player_Cumming (Girl)
                 if "_angry" in Girl.recent_history:
-                    call expression Girl.tag + "_Pos_Reset" pass (0)
-                    call expression Partner.tag + "_Pos_Reset" pass (0)
+                    call reset_position(Girl)
+                    call reset_position(Partner)
                     return
                 $ Girl.change_stat("lust", 200, 5)
                 if 100 > Girl.lust >= 70 and Girl.session_orgasms < 2:
@@ -885,7 +885,7 @@ label Massage_Cycle:
 
 
 label Massage_After:
-    call expression Girl.tag + "_Pos_Reset" pass (0)
+    call reset_position(Girl)
     if MCount >= 3:
         $ Girl.change_stat("love", 90, 1)
         $ Girl.change_stat("love", 50, 2)

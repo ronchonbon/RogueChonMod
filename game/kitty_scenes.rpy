@@ -5,22 +5,19 @@ label meet_Kitty:
     $ KittyX.today_outfit_name = "casual1"
     $ KittyX.change_outfit()
 
-    call clear_the_room("all", 0, 1)
+    call clear_the_room("all", Passive = False, Silent = True)
+    call shift_focus(KittyX)
+    call set_the_scene(False)
 
     $ KittyX.location = "bg_kitty"
-
-    call shift_focus(KittyX)
-    call set_the_scene(0)
-
     $ KittyX.sprite_location = stage_center
-    $ KittyX.player_petname = Player.name[:1]
 
     "As you rush to class, you see another student running straight at you."
     "You try to move aside, but aren't fast enough to get out of her way,"
     "She crashes into you at a full jog, and you both fall to the ground."
     "You scramble to your feet and offer the girl a hand up."
 
-    show Kitty_sprite at sprite_location(KittyX.sprite_location) with vpunch
+    show Kitty_sprite standing at sprite_location(KittyX.sprite_location) with vpunch
 
     $ KittyX.location = "bg_campus"
     $ KittyX.change_stat("love", 90, -25)
@@ -69,7 +66,7 @@ label meet_Kitty:
     if flag:
         $ KittyX.change_face("_smile", 1)
 
-        ch_k "Mine's Kitty! Kitty Pryde. Nice to meet you!"
+        ch_k "Mine's Kitty! Kitty_sprite Pryde. Nice to meet you!"
     else:
         $ KittyX.change_face("_sadside", 1)
 
@@ -200,7 +197,7 @@ label meet_Kitty:
 
                 $ KittyX.change_face("_angry", 1)
 
-                show Kitty_sprite at sprite_location(KittyX.sprite_location) with vpunch
+                show Kitty_sprite standing at sprite_location(KittyX.sprite_location) with vpunch
 
                 "She elbows you in the ribs and shoves herself back a few steps."
 
@@ -248,11 +245,19 @@ label meet_Kitty:
 
     $ active_Girls.append(KittyX)
 
-    $ bg_current = "bg_classroom"
-
     $ round -= 10
 
+    $ bg_current = "bg_classroom"
+
     return
+
+
+
+
+
+
+
+
 
 
 
@@ -339,8 +344,7 @@ label Kitty_BF:
         "Are you kidding? I'd love to!":
             $ KittyX.change_stat("love", 200, 30)
             "[KittyX.name] wraps her arms around you and starts kissing you passionately."
-            $ KittyX.change_face("_kiss")
-            call Kitty_Kissing_Launch ("kiss")
+            call kiss_launch(KittyX)
             $ KittyX.action_counter["kiss"] += 1
         "Uhm[KittyX.like]okay.":
             $ KittyX.brows = "_confused"
@@ -354,8 +358,7 @@ label Kitty_BF:
                 "Yes. Absolutely." if "KittyYes" in Player.traits:
                     $ KittyX.change_stat("love", 200, 30)
                     "[KittyX.name] wraps her arms around you and starts kissing you passionately."
-                    $ KittyX.change_face("_kiss")
-                    call Kitty_Kissing_Launch ("kiss")
+                    call kiss_launch(KittyX)
                     $ KittyX.action_counter["kiss"] += 1
                 "She wouldn't understand." if len(Player.Harem) == 1:
                     $ line = "no"
@@ -386,7 +389,7 @@ label Kitty_BF:
         return True
     $ approval_bonus = 10
     $ Player.add_word(1,"interruption")
-    call Kitty_sexMenu
+    call enter_main_sex_menu(KittyX)
     $ approval_bonus = 0
     return
 
@@ -468,7 +471,7 @@ label Kitty_Love:
         $ KittyX.change_face("_perplexed", 2)
         $ KittyX.eyes = "_surprised"
         ch_k "Never mind!"
-        "Kitty dashes off and phases through the nearest wall."
+        "Kitty_sprite dashes off and phases through the nearest wall."
         hide Kitty_sprite with easeoutright
         call remove_girl (KittyX)
         return
@@ -674,7 +677,7 @@ label Kitty_Love:
 
             "She squeezes you even tighter and makes a little whimper."
         else:
-            "She dives into your arms with a little squeek."
+            "She dives into your arms with a little squeak."
         if "lover" not in KittyX.player_petnames:
             ch_k "I love you too. . ."
             ch_k "I think I have for a while now."
@@ -703,7 +706,7 @@ label Kitty_Love_End:
             ch_k "Hmm. . ."
             if simulation:
                 return True
-            call Kitty_sexAct ("sex")
+            call action(KittyX, "sex")
         "I have something else in mind. . .[[choose another activity]":
             $ KittyX.brows = "_confused"
             $ KittyX.change_stat("obedience", 70, 20)
@@ -711,7 +714,7 @@ label Kitty_Love_End:
             if simulation:
                 return True
             $ approval_bonus = 20
-            call Kitty_sexMenu
+            call enter_main_sex_menu(KittyX)
     return
 
 label Kitty_Love_Redux:
@@ -1039,7 +1042,7 @@ label Kitty_Sub_Asked:
                             $ KittyX.change_stat("obedience", 90, -10)
                             $ KittyX.change_stat("obedience", 200, -10)
                             $ KittyX.change_stat("inhibition", 50, -15)
-                            "Kitty sighs and rolls her eyes."
+                            "Kitty_sprite sighs and rolls her eyes."
                             $ KittyX.change_face("_angry", 1)
                             $ KittyX.eyes = "_side"
                             ch_k "You really don't learn, do you?"
@@ -1349,7 +1352,7 @@ label Kitty_sexfriend:
                         $ KittyX.change_stat("obedience", 50, 10)
                         $ KittyX.change_stat("inhibition", 200, 50)
                         $ KittyX.change_stat("lust", 200, 5)
-                        "Kitty leans in and gives you a gentle kiss on the cheek."
+                        "Kitty_sprite leans in and gives you a gentle kiss on the cheek."
                         ch_k "I can't wait to get started, [KittyX.player_petname]."
                     "That may be the sluttiest thing I've ever heard in my life.":
 
@@ -1938,7 +1941,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                     $ line = "noway"
 
         ". . . [Girl.outfit['legs']]?" if Girl.outfit["bottom"]:
-            if Girl.outfit["underwear"] or Girl.hose_number() >= 10:
+            if Girl.outfit["underwear"] or Girl.outfit["hose"] == "_tights":
 
                 $ Shy = 2
                 if approval_check(KittyX, 1000, taboo_modifier=2, Bonus=TempBonus):
@@ -1962,7 +1965,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                     $ line = "noway"
 
         ". . . [Girl.outfit['underwear']]?" if Girl.outfit["underwear"]:
-            if Girl.outfit["bottom"] or Girl.hose_number() >= 10:
+            if Girl.outfit["bottom"] or Girl.outfit["hose"] == "_tights":
 
                 $ Shy = 1
                 if approval_check(KittyX, 1000, taboo_modifier=1, Bonus=TempBonus):
@@ -1999,7 +2002,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 else:
 
                     $ line = "noway"
-            elif Girl.outfit["underwear"] or Girl.hose_number() < 10:
+            elif Girl.outfit["underwear"] or Girl.outfit["hose"] != "_pantyhose":
 
                 $ Shy = 2
                 if approval_check(KittyX, 1000, taboo_modifier=2, Bonus=TempBonus):

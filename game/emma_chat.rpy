@@ -1388,8 +1388,8 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
             $ EmmaX.blushing = "_blush1"
             $ EmmaX.had_chat.append("blowjob")
         else:
-            $ line = renpy.random.choice(["You've a taste that's easy to acquire.", 
-                            "My jaw is a bit sore lately.", 
+            $ line = renpy.random.choice(["You've a taste that's easy to acquire.",
+                            "My jaw is a bit sore lately.",
                             "If you need some. . . attention, let me know.",
                             "Mmmm. . . [she mimes her tongue knocking against her cheek.]"])
             ch_e "[line]"
@@ -1484,8 +1484,8 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
         $ EmmaX.had_chat.append("public")
 
     elif Options[0] == "hate":
-        $ line = renpy.random.choice(["I'd rather keep this professional.", 
-                "If you have something to say, put it in writing.", 
+        $ line = renpy.random.choice(["I'd rather keep this professional.",
+                "If you have something to say, put it in writing.",
                 "Back off.",
                 "Leave me alone."])
         ch_e "[line]"
@@ -1824,7 +1824,7 @@ label Emma_Rename:
 
 label Emma_Personality(counter=0):
     if not EmmaX.had_chat[4] or counter:
-        "Since you're doing well in one area, you can convince Emma to focus on one of the others."
+        "Since you're doing well in one area, you can convince Emma_sprite to focus on one of the others."
         "Any time you go over the limit in a given stat, the excess will spill over into the chosen stat instead."
         "This will also impact which personality trait takes priority in dialog."
     menu:
@@ -2097,7 +2097,8 @@ label Emma_Summon(approval_bonus=approval_bonus):
             jump danger_room
         elif EmmaX.location == "bg_emma":
             ch_e "I'll tidy up a few things."
-            jump Emma_Room
+            $ Girl = EmmaX
+            jump girls_room
         elif EmmaX.location == "bg_player":
             ch_e "I'll be waiting for you."
             jump player_room
@@ -2110,11 +2111,12 @@ label Emma_Summon(approval_bonus=approval_bonus):
         elif EmmaX.location in personal_rooms:
             ch_e "I'll try to keep occupied."
             $ bg_current = EmmaX.location
-            jump Misplaced
+            jump reset_location
         else:
             ch_e "You know, I'll just meet you in my room."
             $ EmmaX.location = "bg_emma"
-            jump Emma_Room
+            $ Girl = EmmaX
+            jump girls_room
 
 
     elif line == "lonely":
@@ -2339,7 +2341,8 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             jump danger_room_entry
         elif EmmaX.location == "bg_emma":
             ch_e "I'll be waiting."
-            jump Emma_Room
+            $ Girl = EmmaX
+            jump girls_room
         elif EmmaX.location == "bg_player":
             ch_e "I'll be waiting."
             jump player_room
@@ -2355,7 +2358,8 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         else:
             ch_e "You know, I'll just meet you in my room."
             $ EmmaX.location = "bg_emma"
-            jump Emma_Room
+            $ Girl = EmmaX
+            jump girls_room
 
 
 
@@ -2407,7 +2411,7 @@ label Emma_Clothes(Public=0, Bonus=0):
         $ Public += 2
 
 
-label Emma_Wardrobe_Menu:
+label Emma_wardrobe_menu:
     $ primary_action = 1
     $ EmmaX.change_face()
     while True:
@@ -2905,12 +2909,12 @@ label Emma_Wardrobe_Menu:
                     pass
             $ EmmaX.outfit["bottom"] = "_dress"
 
-        "You look great in boots." if EmmaX.outfit["front_outer_accessory"] != "_thigh_boots":
+        "You look great in boots." if EmmaX.outfit["boots"] != "_thigh_boots":
             ch_e "They do look nice on me."
-            $ EmmaX.outfit["front_outer_accessory"] = "_thigh_boots"
-        "Maybe lose the boots." if EmmaX.outfit["front_outer_accessory"] == "_thigh_boots":
+            $ EmmaX.outfit["boots"] = "_thigh_boots"
+        "Maybe lose the boots." if EmmaX.outfit["boots"] == "_thigh_boots":
             ch_e "I suppose."
-            $ EmmaX.outfit["front_outer_accessory"] = ""
+            $ EmmaX.outfit["boots"] = ""
 
         "You look great in yoga pants." if EmmaX.outfit["bottom"] != "_yoga_pants":
             ch_e "Yeah, ok."
@@ -3084,8 +3088,8 @@ label Emma_Wardrobe_Menu:
                     $ EmmaX.outfit["hose"] = "_ripped_pantyhose"
                 "The stockings and garterbelt would look good with that." if EmmaX.outfit["hose"] != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in EmmaX.inventory:
                     $ EmmaX.outfit["hose"] = "_stockings_and_garterbelt"
-                "Maybe just the garterbelt?" if EmmaX.outfit["hose"] != "garterbelt" and "_stockings_and_garterbelt" in EmmaX.inventory:
-                    $ EmmaX.outfit["hose"] = "garterbelt"
+                "Maybe just the garterbelt?" if EmmaX.outfit["hose"] != "_garterbelt" and "_stockings_and_garterbelt" in EmmaX.inventory:
+                    $ EmmaX.outfit["hose"] = "_garterbelt"
                 "Never mind":
                     pass
             return
@@ -3313,7 +3317,7 @@ label Emma_Wardrobe_Menu:
         "Piercings. [[See what she looks like without them first] (locked)" if not EmmaX.seen_pussy and not EmmaX.seen_breasts:
             pass
 
-        "Add ring piercings" if EmmaX.outfit["front_inner_accessory"] != "_ring" and (EmmaX.seen_pussy or EmmaX.seen_breasts):
+        "Add ring piercings" if EmmaX.outfit["piercings"] != "_ring" and (EmmaX.seen_pussy or EmmaX.seen_breasts):
             ch_p "You know, you'd look really nice with some ring body piercings."
             if "_ring" in EmmaX.to_do:
                 ch_e "Yes, yes, it's on my schedule."
@@ -3333,7 +3337,7 @@ label Emma_Wardrobe_Menu:
                     return
                 $ EmmaX.to_do.append("_ring")
 
-        "Add barbell piercings." if EmmaX.outfit["front_inner_accessory"] != "_barbell" and (EmmaX.seen_pussy or EmmaX.seen_breasts):
+        "Add barbell piercings." if EmmaX.outfit["piercings"] != "_barbell" and (EmmaX.seen_pussy or EmmaX.seen_breasts):
             ch_p "You know, you'd look really nice with some barbell body piercings."
             if "_barbell" in EmmaX.to_do:
                 ch_e "Yes, yes, it's on my schedule."
@@ -3352,9 +3356,9 @@ label Emma_Wardrobe_Menu:
                     ch_e "Well, I'm just not ready for that sort of thing, [EmmaX.player_petname]."
                     return
                 $ EmmaX.to_do.append("_barbell")
-                $ EmmaX.outfit["front_inner_accessory"] = "_barbell"
+                $ EmmaX.outfit["piercings"] = "_barbell"
 
-        "Remove piercings" if EmmaX.outfit["front_inner_accessory"]:
+        "Remove piercings" if EmmaX.outfit["piercings"]:
             ch_p "You know, you'd look better without those piercings."
             $ EmmaX.change_face("_bemused", 1)
             $ approval = approval_check(EmmaX, 1350, taboo_modifier=0)
@@ -3369,7 +3373,7 @@ label Emma_Wardrobe_Menu:
                 $ EmmaX.brows = "_angry"
                 ch_e "Well {i}I{/i} enjoy them."
                 return
-            $ EmmaX.outfit["front_inner_accessory"] = ""
+            $ EmmaX.outfit["piercings"] = ""
 
         "Add_choker" if EmmaX.outfit["neck"] != "_choker":
             ch_e "Why don't you try on that white choker."

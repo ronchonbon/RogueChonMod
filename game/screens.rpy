@@ -599,7 +599,7 @@ screen status_screen:
             imagebutton auto "images/Button_" + focused_Girl.tag + "_%s.png" action ShowTransient("Focus_Map") pos (0.71, 0.016) focus_mask True
 
         showif config.developer:
-            imagebutton auto "images/Button_" + focused_Girl.tag + "_%s.png" action ui.callsinnewcontext("StatHacks",focused_Girl) pos (0.755, 0.016) focus
+            imagebutton auto "images/Button_" + focused_Girl.tag + "_%s.png" action ui.callsinnewcontext("cheat_editor",focused_Girl) pos (0.755, 0.016) focus
 
     frame:
         pos (0.45, 0.0085)
@@ -699,25 +699,25 @@ screen Focus_Map:
         vbox:
             imagebutton auto "images/Button_Rogue_%s.png" action ui.callsinnewcontext("shift_focus", RogueX) focus_mask True
 
-            if "met" in KittyX.history:
+            if KittyX in active_Girls:
                 imagebutton auto "images/Button_Kitty_%s.png" action ui.callsinnewcontext("shift_focus", KittyX) focus_mask True
 
         vbox:
-            if "met" in EmmaX.history:
+            if EmmaX in active_Girls:
                 imagebutton auto "images/Button_Emma_%s.png" action ui.callsinnewcontext("shift_focus", EmmaX) focus_mask True
 
-            if "met" in LauraX.history:
+            if LauraX in active_Girls:
                 imagebutton auto "images/Button_Laura_%s.png" action ui.callsinnewcontext("shift_focus", LauraX) focus_mask True
 
         vbox:
-            if "met" in JeanX.history:
+            if JeanX in active_Girls:
                 imagebutton auto "images/Button_Jean_%s.png" action ui.callsinnewcontext("shift_focus", JeanX) focus_mask True
 
-            if "met" in StormX.history:
+            if StormX in active_Girls:
                 imagebutton auto "images/Button_Storm_%s.png" action ui.callsinnewcontext("shift_focus", StormX) focus_mask True
 
         vbox:
-            if "met" in JubesX.history:
+            if JubesX in active_Girls:
                 imagebutton auto "images/Button_Jubes_%s.png" action ui.callsinnewcontext("shift_focus", JubesX) focus_mask True
 
 screen Inventory_screen:
@@ -746,91 +746,91 @@ screen Inventory_screen:
         showif "Xavier's files" in Player.inventory:
             text "Xavier's Files" size 15
 
-        showif "Rogue nighty" in Player.inventory:
+        showif "Rogue_sprite nighty" in Player.inventory:
             text "Rogue's Green Nighty" size 15
-        showif "Rogue lace_bra" in Player.inventory:
+        showif "Rogue_sprite lace_bra" in Player.inventory:
             text "Rogue's Lace Bra" size 15
-        showif "Rogue lace_panties" in Player.inventory:
+        showif "Rogue_sprite lace_panties" in Player.inventory:
             text "Rogue's Lace Panties" size 15
-        showif "Rogue bikini_top" in Player.inventory:
+        showif "Rogue_sprite bikini_top" in Player.inventory:
             text "Rogue's Bikini Top" size 15
-        showif "Rogue bikini_bottoms" in Player.inventory:
+        showif "Rogue_sprite bikini_bottoms" in Player.inventory:
             text "Rogue's Bikini Bottoms" size 15
-        showif "Rogue harness" in Player.inventory:
+        showif "Rogue_sprite harness" in Player.inventory:
             text "Rogue's Harness" size 15
-        showif "Rogue fetish" in Player.inventory:
+        showif "Rogue_sprite fetish" in Player.inventory:
             text "Rogue's Fetish Outfits" size 15
 
-        showif "Kitty lace_bra" in Player.inventory:
+        showif "Kitty_sprite lace_bra" in Player.inventory:
             text "Kitty's Lace Bra" size 15
-        showif "Kitty lace_panties" in Player.inventory:
+        showif "Kitty_sprite lace_panties" in Player.inventory:
             text "Kitty's Lace Panties" size 15
-        showif "Kitty knee stockings" in Player.inventory:
+        showif "Kitty_sprite knee stockings" in Player.inventory:
             text "Kitty's knee stockings" size 15
         showif "Kitty_pantyhose" in Player.inventory:
             text "Kitty's Pantyhose" size 15
-        showif "Kitty bikini_top" in Player.inventory:
+        showif "Kitty_sprite bikini_top" in Player.inventory:
             text "Kitty's Bikini Top" size 15
-        showif "Kitty bikini_bottoms" in Player.inventory:
+        showif "Kitty_sprite bikini_bottoms" in Player.inventory:
             text "Kitty's Bikini Bottoms" size 15
-        showif "Kitty blue_skirt" in Player.inventory:
+        showif "Kitty_sprite blue_skirt" in Player.inventory:
             text "Kitty's Blue Skirt" size 15
 
-        showif "Emma lace_bra" in Player.inventory:
+        showif "Emma_sprite lace_bra" in Player.inventory:
             text "Emma's Lace Bra" size 15
-        showif "Emma lace_panties" in Player.inventory:
+        showif "Emma_sprite lace_panties" in Player.inventory:
             text "Emma's Lace Panties" size 15
         showif "Emma_pantyhose" in Player.inventory:
             text "Emma's Pantyhose" size 15
-        showif "Emma bikini_top" in Player.inventory:
+        showif "Emma_sprite bikini_top" in Player.inventory:
             text "Emma's Bikini Top" size 15
-        showif "Emma bikini_bottoms" in Player.inventory:
+        showif "Emma_sprite bikini_bottoms" in Player.inventory:
             text "Emma's Bikini Bottoms" size 15
 
-        showif "Laura corset" in Player.inventory:
+        showif "Laura_sprite corset" in Player.inventory:
             text "Laura's Red Corset" size 15
-        showif "Laura lace corset" in Player.inventory:
+        showif "Laura_sprite lace corset" in Player.inventory:
             text "Laura's Lace Corset" size 15
-        showif "Laura lace_panties" in Player.inventory:
+        showif "Laura_sprite lace_panties" in Player.inventory:
             text "Laura's Lace Panties" size 15
-        showif "Laura bikini_top" in Player.inventory:
+        showif "Laura_sprite bikini_top" in Player.inventory:
             text "Laura's Bikini Top" size 15
-        showif "Laura bikini_bottoms" in Player.inventory:
+        showif "Laura_sprite bikini_bottoms" in Player.inventory:
             text "Laura's Bikini Bottoms" size 15
 
-        showif "Jean corset" in Player.inventory:
+        showif "Jean_sprite corset" in Player.inventory:
             text "Jean's Black Corset" size 15
-        showif "Jean lace corset" in Player.inventory:
+        showif "Jean_sprite lace corset" in Player.inventory:
             text "Jean's Lace Corset" size 15
-        showif "Jean lace_bra" in Player.inventory:
+        showif "Jean_sprite lace_bra" in Player.inventory:
             text "Jean's Lace Bra" size 15
-        showif "Jean lace_panties" in Player.inventory:
+        showif "Jean_sprite lace_panties" in Player.inventory:
             text "Jean's Lace Panties" size 15
-        showif "Jean bikini_top" in Player.inventory:
+        showif "Jean_sprite bikini_top" in Player.inventory:
             text "Jean's Bikini Top" size 15
-        showif "Jean bikini_bottoms" in Player.inventory:
+        showif "Jean_sprite bikini_bottoms" in Player.inventory:
             text "Jean's Bikini Bottoms" size 15
 
-        showif "Storm lace_bra" in Player.inventory:
+        showif "Storm_sprite lace_bra" in Player.inventory:
             text "Storm's Lace Bra" size 15
-        showif "Storm lace_panties" in Player.inventory:
+        showif "Storm_sprite lace_panties" in Player.inventory:
             text "Storm's Lace Panties" size 15
         showif "Storm_pantyhose" in Player.inventory:
             text "Storm's Pantyhose" size 15
-        showif "Storm bikini_top" in Player.inventory:
+        showif "Storm_sprite bikini_top" in Player.inventory:
             text "Storm's Bikini Top" size 15
-        showif "Storm bikini_bottoms" in Player.inventory:
+        showif "Storm_sprite bikini_bottoms" in Player.inventory:
             text "Storm's Bikini Bottoms" size 15
         showif "_stockings_and_garterbelt" in Player.inventory:
             text "_stockings_and_garterbelt" size 15
 
-        showif "Jubes lace_bra" in Player.inventory:
+        showif "Jubes_sprite lace_bra" in Player.inventory:
             text "Jubilees's Lace Bra" size 15
-        showif "Jubes lace_panties" in Player.inventory:
+        showif "Jubes_sprite lace_panties" in Player.inventory:
             text "Jubilees's Lace Panties" size 15
-        showif "Jubes bikini_top" in Player.inventory:
+        showif "Jubes_sprite bikini_top" in Player.inventory:
             text "Jubilees's Bikini Top" size 15
-        showif "Jubes bikini_bottoms" in Player.inventory:
+        showif "Jubes_sprite bikini_bottoms" in Player.inventory:
             text "Jubilees's Bikini Bottoms" size 15
         showif "_socks" in Player.inventory:
             text "Jubilees's Tall Socks" size 15

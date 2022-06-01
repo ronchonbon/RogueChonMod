@@ -65,7 +65,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 ch_e "Not with this sort of company. . ."
                 return
 
-    if not Girl.outfit["top"] and not Girl.outfit["bra"] and not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and (not Girl.outfit["front_outer_accessory"] or Girl != JubesX):
+    if not Girl.outfit["top"] and not Girl.outfit["bra"] and not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and (not Girl.outfit["jacket"] or Girl != JubesX):
 
         $ Girl.change_face("_sly")
         if Girl == RogueX:
@@ -106,10 +106,10 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 "lose the top?" if Girl.outfit["bra"] and not Girl.outfit["top"]:
                     $ Type = "_bra"
 
-                "maybe just lose the jacket?" if Girl.outfit["front_outer_accessory"] and Girl == JubesX:
-                    if Girl.outfit["front_outer_accessory"] == "_shut_jacket" and not Girl.outfit["bottom"] and not Girl.outfit["hose"] and not Girl.outfit["underwear"]:
+                "maybe just lose the jacket?" if Girl.outfit["jacket"] and Girl == JubesX:
+                    if Girl.outfit["jacket"] == "_shut_jacket" and not Girl.outfit["bottom"] and not Girl.outfit["hose"] and not Girl.outfit["underwear"]:
                         $ Type = "no_panties"
-                    elif Girl.outfit["front_outer_accessory"] == "_shut_jacket" and not Girl.outfit["top"] and not Girl.outfit["bra"]:
+                    elif Girl.outfit["jacket"] == "_shut_jacket" and not Girl.outfit["top"] and not Girl.outfit["bra"]:
                         $ Type = "no_bra"
                     else:
                         $ Type = "_jacket"
@@ -375,7 +375,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
             if Type == "_jacket" or Type == "both":
                 if Girl == JubesX:
-                    $ Girl.outfit["front_outer_accessory"] = ""
+                    $ Girl.outfit["jacket"] = ""
             if Type == "over" or Type == "both":
                 $ Girl.outfit["top"] = ""
             if Type == "_bra" or Type == "both":
@@ -415,7 +415,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 ch_v "Sure. . ."
 
             if Type == "_jacket":
-                $ Girl.outfit["front_outer_accessory"] = ""
+                $ Girl.outfit["jacket"] = ""
             if Type == "over":
                 $ Girl.outfit["top"] = ""
             if Type == "legs":
@@ -470,7 +470,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
             $ Girl.add_word(1,"no_tan","no_tan")
             return
-        if not Girl.outfit["bra"] and not Girl.outfit["top"] and not Girl.outfit["underwear"] and not Girl.outfit["bottom"] and Girl.hose_number() < 10:
+        if not Girl.outfit["bra"] and not Girl.outfit["top"] and not Girl.outfit["underwear"] and not Girl.outfit["bottom"] and Girl.outfit["hose"] != "_pantyhose":
             $ Girl.change_outfit("nude")
         $ Mod = 0
         $ line = 0
@@ -684,7 +684,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                                 if Girl.bra_number() > 2 and Girl.underwear_number() > 2 and approval_check(Girl, 1000):
 
                                     pass
-                                elif Girl.bra_number() > 1 and Girl.underwear_number() > 1 and approval_check(Girl, 1200):
+                                elif Girl.outfit["bra"] and Girl.outfit["underwear"] and approval_check(Girl, 1200):
 
                                     pass
                                 else:
@@ -769,7 +769,6 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
     $ Girl.wet = 1
     $ round -= 20 if round >= 20 else round
     "You both swim around for a bit."
-    hide FullPool
     call set_the_scene (1, 0, 0)
 
     return
@@ -877,7 +876,7 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
             if temp_Girls[0].outfit["bra"] == temp_Girls[0].swimwear["bra"] and temp_Girls[0].outfit["underwear"] == temp_Girls[0].swimwear[6]:
 
                 $ Swimmers.append(temp_Girls[0])
-            elif not temp_Girls[0].bra_number() and not temp_Girls[0].top_number() and not temp_Girls[0].underwear_number() and not temp_Girls[0].bottom_number() and not temp_Girls[0].hose_number():
+            elif temp_Girls[0].fully_nude:
 
                 $ Swimmers.append(temp_Girls[0])
             else:
@@ -940,7 +939,6 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
     call RoomStatboost ("love", 80, 3)
     call RoomStatboost ("lust", 30, 5)
     $ round -= 20 if round >= 20 else round
-    hide FullPool
     call set_the_scene (1, 0, 0)
     "You all get out of the pool and rest for a bit."
 
@@ -960,10 +958,6 @@ label SwimSuit(temp_Girls=[]):
         $ temp_Girls.remove(temp_Girls[0])
     return
 
-image FullPool:
-
-    AlphaMask("bg_pool", "images/background/bg_pool_mask.png")
-
 label ShowPool(temp_Girls=[], PoolLoc=0):
 
 
@@ -972,24 +966,28 @@ label ShowPool(temp_Girls=[], PoolLoc=0):
         if temp_Girls[0].location == bg_current:
             $ temp_Girls[0].add_word(0,"swim","swim",0,0)
             $ temp_Girls[0].wet = 1
-            $ temp_Girls[0].spunk = []
+
+            python:
+                for key in temp_Girls[0].spunk.keys():
+                    temp_Girls[0].spunk[key] = False
+
             $ PoolLoc = 500 if len(temp_Girls) > 1 else 650
             if temp_Girls[0] == RogueX:
-                show Rogue_sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Rogue_sprite standing zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == KittyX:
-                show Kitty_sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Kitty_sprite standing zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == EmmaX:
-                show Emma_sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Emma_sprite standing zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == LauraX:
-                show Laura_Sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Laura_sprite standing zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == JeanX:
-                show Jean_sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Jean_sprite standing zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == StormX:
-                show Storm_Sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Storm_sprite standing zorder 50 at Pool_Bob(PoolLoc)
             elif temp_Girls[0] == JubesX:
-                show Jubes_Sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Jubes_sprite standing zorder 50 at Pool_Bob(PoolLoc)
         $ temp_Girls.remove(temp_Girls[0])
-    show FullPool zorder 60
+
     return
 
 
