@@ -16,6 +16,8 @@ label JeanMeet:
 
     $ JeanX.change_outfit("casual1")
     $ JeanX.outfit_name = "casual1"
+
+    $ JeanX.outfit["bottom"] = ""
     $ JeanX.change_face("_sly",0)
     call set_the_scene (0, 1, 0)
     "As you approach the showers, you notice someone getting dressed."
@@ -396,7 +398,7 @@ label Jean_Key:
     $ JeanX.change_face("_bemused")
     ch_j "Oh, here, just in case you wanted to drop by."
     "She tossed a key at you, which you manage to catch."
-    $ keys.append(JeanX)
+    $ Keys.append(JeanX)
     $ JeanX.event_happened[0] = 1
     ch_p "Thanks."
     return

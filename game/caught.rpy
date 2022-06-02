@@ -1087,18 +1087,18 @@ label Xavier_Plan(GirlX=0):
                 $ line = 0
             "In was interested in a key. . . ":
                 menu:
-                    "Give me the key to your study." if "Xavier" not in keys:
+                    "Give me the key to your study." if "Xavier" not in Keys:
                         ch_x "Fine, take it. . ."
-                        $ keys.append("Xavier")
-                    "Give me the key to your study.[[Owned] (locked)" if "Xavier" in keys:
+                        $ Keys.append("Xavier")
+                    "Give me the key to your study.[[Owned] (locked)" if "Xavier" in Keys:
                         pass
 
-                    "Give me the key to [GirlX.name]'s room." if GirlX not in keys:
+                    "Give me the key to [GirlX.name]'s room." if GirlX not in Keys:
                         ch_x "I. . . suppose I could do that. . ."
-                        $ keys.append(GirlX)
-                    "Give me the key to [GirlX.name]'s room.[[Owned] (locked)" if GirlX in keys:
+                        $ Keys.append(GirlX)
+                    "Give me the key to [GirlX.name]'s room.[[Owned] (locked)" if GirlX in Keys:
                         pass
-                    "Never mind the keys.":
+                    "Never mind the Keys.":
 
                         $ Count += 1
             "That should do it.":

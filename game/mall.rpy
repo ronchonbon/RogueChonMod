@@ -778,8 +778,8 @@ label Swim_shop:
                                     ch_s "Oh, thank you. . ."
                                 elif Girl == JubesX:
                                     ch_v "I know, right?"
-                                $ Girl.GirlLikeUp(Second,5)
-                                $ Second.GirlLikeUp(Girl,3)
+                                $ Girl.change_likes(Second,5)
+                                $ Second.change_likes(Girl,3)
 
 
                         $ Girl.change_outfit()
@@ -1258,8 +1258,8 @@ label Lingerie_shop:
                             $ Girl.underwear_pulled_down = 0
                             $ Girl.upskirt = 0
                             if Second and "_stockings_and_garterbelt" not in Cart:
-                                $ Girl.GirlLikeUp(Second,1)
-                                $ Second.GirlLikeUp(Girl,2)
+                                $ Girl.change_likes(Second,1)
+                                $ Second.change_likes(Girl,2)
                         else:
                             Girl.voice "I'll need some privacy here. . ."
                             show black_screen onlayer black
@@ -1323,8 +1323,8 @@ label Lingerie_shop:
                             $ Girl.underwear_pulled_down = 0
                             $ Girl.upskirt = 0
                             if Second and "_pantyhose" not in Cart:
-                                $ Girl.GirlLikeUp(Second,1)
-                                $ Second.GirlLikeUp(Girl,2)
+                                $ Girl.change_likes(Second,1)
+                                $ Second.change_likes(Girl,2)
                         else:
                             Girl.voice "I'll need some privacy here. . ."
                             show black_screen onlayer black
@@ -1383,8 +1383,8 @@ label Lingerie_shop:
                                 pause 0.3
                                 $ Girl.top_pulled_up = 0
                                 if Second and "_nighty" not in Cart:
-                                    $ Girl.GirlLikeUp(Second,1)
-                                    $ Second.GirlLikeUp(Girl,3)
+                                    $ Girl.change_likes(Second,1)
+                                    $ Second.change_likes(Girl,3)
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
                                 show black_screen onlayer black
@@ -1431,8 +1431,8 @@ label Lingerie_shop:
                                     ch_s "Oh, thank you. . ."
                                 elif Girl == JubesX:
                                     ch_v "I know, right?"
-                                $ Girl.GirlLikeUp(Second,5)
-                                $ Second.GirlLikeUp(Girl,3)
+                                $ Girl.change_likes(Second,5)
+                                $ Second.change_likes(Girl,3)
 
                         $ round -= 20 if round > 30 else (round-10)
                         $ Player.drain_word("locked",0,0,1)
@@ -1793,8 +1793,8 @@ label Dressing_Strip_Bra(Item=0):
     pause 0.3
     $ Girl.top_pulled_up = 0
     if Second and Item not in Cart:
-        $ Girl.GirlLikeUp(Second,2)
-        $ Second.GirlLikeUp(Girl,5)
+        $ Girl.change_likes(Second,2)
+        $ Second.change_likes(Girl,5)
     Girl.voice ". . ."
     return
 
@@ -1823,8 +1823,8 @@ label Dressing_Strip_Panties(Item=0):
     $ Girl.underwear_pulled_down = 0
     $ Girl.upskirt = 0
     if Second and Item not in Cart:
-        $ Girl.GirlLikeUp(Second,3)
-        $ Second.GirlLikeUp(Girl,5)
+        $ Girl.change_likes(Second,3)
+        $ Second.change_likes(Girl,5)
     Girl.voice ". . ."
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

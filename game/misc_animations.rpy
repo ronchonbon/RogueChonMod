@@ -358,11 +358,11 @@ image dress_screen:
         "images/dress_screen.png"
     contains:
 
-        AlphaMask("images/dress_screenShadow.png","DressShadow")
+        AlphaMask("images/dress_screen_shadow.png","dress_screen_shadow")
     zoom 1
     offset (375,225)
 
-image DressShadow:
+image dress_screen_shadow:
 
     contains:
 

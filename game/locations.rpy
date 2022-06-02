@@ -49,7 +49,7 @@ label world_map:
             "Class":# if bg_current != "bg_classroom":
                 if time_index < 3:
                     jump classroom_entry
-                elif "Xavier" in keys:
+                elif "Xavier" in Keys:
                     "The door is locked, but you were able to use Xavier's key to get in."
 
                     jump classroom_entry
@@ -256,7 +256,7 @@ label girls_room_entry:
     else:
         $ knocking = False
 
-        if Girl in keys:
+        if Girl in Keys:
             menu:
                 "You have a key, what do you do?"
                 "Knock politely":
@@ -264,7 +264,7 @@ label girls_room_entry:
                 "Use the key to enter.":
                     call set_the_scene
 
-        if not knocking and Girl in keys:
+        if not knocking and Girl in Keys:
             if Girl.location == bg_current:
                 if round <= 10:        #add "no" condtion here
                     if time_index >= 3: #night time
@@ -344,7 +344,7 @@ label girls_room_entry:
         if Girl.location != bg_current:
             "Looks like she's not home right now."
 
-            if Girl in keys:
+            if Girl in Keys:
                 menu:
                     "Go in and wait for her?"
                     "Yes":
@@ -666,7 +666,7 @@ label classroom:
         "As you sit down, you see [EmmaX.name] at the podium."
     elif StormX.location == "bg_teacher":
         "As you sit down, you see [StormX.name] at the podium."
-    elif time_index == 2 or weekday > 5:
+    else:
         "You enter the classroom."
 
     call set_the_scene(silent = True)
@@ -690,7 +690,7 @@ label classroom:
         $ bg_current = "bg_classroom"
 
         menu:
-            extend ""
+            "What would you like to do?"
             "Take the morning class" if weekday < 5 and time_index == 0:
                 if round >= 30:
                     call take_class
@@ -775,13 +775,11 @@ label danger_room:
 
     call are_girls_angry
 
-    "This is the Danger Room. What would you like to do?"
-
     while True:
         $ bg_current = "bg_dangerroom"
 
         menu:
-            extend ""
+            extend "This is the Danger Room. What would you like to do?"
             "Train":
                 if time_index >= 3:
                     "The Danger Room has been powered off for the night, maybe take a break."
@@ -829,7 +827,7 @@ label gym_entry(number_of_girls = 0):
     #         "Play [[keep on this outfit]":
     #             return
 
-    $ temp_Girls = Present[:]
+    $ temp_Girls = Party[:]
 
     while temp_Girls:
         if temp_Girls[0].outfit_name != "gym_clothes":
@@ -1282,7 +1280,7 @@ label study_entry:
                     ch_x "You know, [Player.name], it is not polite to enter a room unannounced."
 
                     jump study_room
-            "Use the key to enter" if time_index >= 3 and "Xavier" in keys:
+            "Use the key to enter" if time_index >= 3 and "Xavier" in Keys:
                 "You use your key."
             "Ask [KittyX.name]" if time_index >= 3 and KittyX in Party:
                 $ decision = "kitty"

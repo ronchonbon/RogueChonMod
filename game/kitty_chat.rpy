@@ -965,14 +965,14 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
         $ Options = [O]
     else:
 
-        if KittyX not in phonebook:
+        if KittyX not in Phonebook:
             if approval_check(KittyX, 500, "L") or approval_check(KittyX, 250, "I"):
                 ch_k "You know, I never got around to giving you my number, here you go."
-                $ phonebook.append(KittyX)
+                $ Phonebook.append(KittyX)
                 return
             elif approval_check(KittyX, 250, "O"):
                 ch_k "You know, you should probably have my number, here you go."
-                $ phonebook.append(KittyX)
+                $ Phonebook.append(KittyX)
                 return
 
         if "hungry" not in KittyX.traits and (KittyX.event_counter["swallowed"] + KittyX.had_chat[2]) >= 10 and KittyX.location == bg_current:
@@ -2361,7 +2361,7 @@ label Kitty_wardrobe_menu:
                         $ KittyX.change_outfit()
                 $ KittyX.set_temp_outfit()
                 $ primary_action = None
-                call Switch_chat
+                call switch_chat
                 if Girl != KittyX:
                     ch_p "I wanted to talk about your clothes."
                     call expression Girl.tag +"_Clothes"
@@ -2737,7 +2737,7 @@ label Kitty_wardrobe_menu:
 
     menu Kitty_Clothes_Legs:
 
-        "Maybe go without the [KittyX.outfit['legs']]." if KittyX.outfit["bottom"]:
+        "Maybe go without the [KittyX.outfit['bottom']]." if KittyX.outfit["bottom"]:
             $ KittyX.change_face("_sexy", 1)
             if KittyX.seen_underwear and KittyX.outfit["underwear"] and approval_check(KittyX, 500, taboo_modifier=5):
                 ch_k "K."
@@ -2826,11 +2826,11 @@ label Kitty_wardrobe_menu:
                 elif approval_check(KittyX, 800, taboo_modifier=4) and "_lace_panties" in KittyX.inventory:
                     ch_k "I like how you think."
                     $ KittyX.outfit["underwear"]  = "_lace_panties"
-                    "She pulls out her lace panties and pulls them up through her [KittyX.outfit['legs']]."
+                    "She pulls out her lace panties and pulls them up through her [KittyX.outfit['bottom']]."
                 elif approval_check(KittyX, 700, taboo_modifier=4):
                     ch_k "Yeah, I guess."
                     $ KittyX.outfit["underwear"] = "_green_panties"
-                    "She pulls out her green panties and pulls them up through her [KittyX.outfit['legs']]."
+                    "She pulls out her green panties and pulls them up through her [KittyX.outfit['bottom']]."
                 else:
                     ch_k "Yeah, I don't think so."
                     return False

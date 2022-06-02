@@ -2453,7 +2453,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
         if _return == 4:
 
             if Girl.outfit["bottom"]:
-                "She takes your hand and pulls it over to her crotch, shoving it under her [Girl.outfit['legs']]."
+                "She takes your hand and pulls it over to her crotch, shoving it under her [Girl.outfit['bottom']]."
             else:
                 "She takes your hand and shoves it into her crotch."
             $ Girl.change_face("_sadside", 2)
@@ -2463,7 +2463,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             call Date_Bonus (Girl, -3)
         else:
             if Girl.outfit["bottom"]:
-                "She takes your hand and pulls it over to her crotch, shoving it under her [Girl.outfit['legs']]."
+                "She takes your hand and pulls it over to her crotch, shoving it under her [Girl.outfit['bottom']]."
             else:
                 "She takes your hand and shoves it into her crotch."
             "You can feel that she's warm as a furnace."
@@ -3221,7 +3221,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                     "You also reach down and begin stroking their pussies."
                 else:
                     if Girl.outfit["bottom"]:
-                        "You also lean over, reach into her [Girl.outfit['legs']], and begin to stroke her pussy."
+                        "You also lean over, reach into her [Girl.outfit['bottom']], and begin to stroke her pussy."
                     elif Girl.outfit["hose"]:
                         "You also lean in, reach under her [Girl.outfit['hose']], and begin to stroke her pussy."
                     elif Girl.outfit["underwear"]:
@@ -3291,7 +3291,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
         elif OptionsDS[0] == "pussy":
             $ Girl.change_face("_sexy")
             if Girl.outfit["bottom"]:
-                "As you make out, [Girl.name] grabs your hand and shoves it down her [Girl.outfit['legs']]."
+                "As you make out, [Girl.name] grabs your hand and shoves it down her [Girl.outfit['bottom']]."
             elif Girl.outfit["hose"]:
                 "As you make out, [Girl.name] grabs your hand and shoves it down her [Girl.outfit['hose']]."
             elif Girl.outfit["underwear"]:

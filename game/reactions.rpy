@@ -403,11 +403,11 @@ label girl_initiated_action(Girl, action):
 
                 $ Girl.upskirt = True
             elif Girl.wearing_pants:
-                $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock, sliding her [Girl.outfit['legs']] down as she does so.",
-                    "[Girl.name] rolls back and pulls you against her, sliding her [Girl.outfit['legs']] off as she does so.",
-                    "[Girl.name] pushes you down and climbs on top of you, sliding her [Girl.outfit['legs']] down as she does so.",
-                    "[Girl.name] turns around, sliding her [Girl.outfit['legs']] down as she does so.",
-                    "[Girl.name] lays back, sliding her [Girl.outfit['legs']] down as she does so."])
+                $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock, sliding her [Girl.outfit['bottom']] down as she does so.",
+                    "[Girl.name] rolls back and pulls you against her, sliding her [Girl.outfit['bottom']] off as she does so.",
+                    "[Girl.name] pushes you down and climbs on top of you, sliding her [Girl.outfit['bottom']] down as she does so.",
+                    "[Girl.name] turns around, sliding her [Girl.outfit['bottom']] down as she does so.",
+                    "[Girl.name] lays back, sliding her [Girl.outfit['bottom']] down as she does so."])
 
                 "[line]"
 

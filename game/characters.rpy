@@ -287,7 +287,9 @@ init python:
                 self.names = ["Ms. Frost"]
                 self.name = "Ms. Frost"
 
-                last_name = get_last_name()
+                global Player
+
+                last_name = get_last_name(Player)
 
                 self.player_petname = "Mr. " + last_name
                 self.player_petnames = ["young man", Player.name, "Mr. " + last_name]
@@ -573,7 +575,7 @@ init python:
 
             return
 
-        def change_face(self, emotion = None, blushing = None, manic = False, mouth = 0, eyes = 0, brows = 0):
+        def change_face(self, emotion = None, blushing = 0, manic = False, mouth = None, eyes = None, brows = None):
             emotion = self.emotion if not emotion else emotion
             blushing = self.blushing if not blushing else blushing
 
@@ -1663,6 +1665,16 @@ init python:
                         count += 1
 
             return count
+
+        def change_likes(self, GirlB, value):
+            if self.likes[GirlB.tag] + value > 1000:
+                self.likes[GirlB.tag] = 1000
+            elif self.likes[GirlB.tag] + value < 0:
+                self.likes[GirlB.tag] = 0
+            else:
+                self.likes[GirlB.tag] += value
+
+            return
 
         def check_if_likes(self, GirlB, check = 200, modifier = 1, auto = False):
             jealousy = 0

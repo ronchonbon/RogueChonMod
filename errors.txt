@@ -2,10 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/characters.rpy", line 290: invalid syntax
-                call get_last_name
-                                  ^
-    
+File "game/locations.rpy", line 778: is not terminated with a newline. (Check strings and parenthesis.)
+(Perhaps you left out a " at the end of the first line.)
+        "This is the Danger Room.
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Wed Jun  1 03:50:57 2022
+Thu Jun  2 14:19:52 2022

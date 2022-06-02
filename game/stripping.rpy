@@ -1252,9 +1252,7 @@ label Girl_Undress(Girl=0, Region="ask", stored_count=0):
 
 
 
-label Top_Off(Girl=0, Intro=1, line=0, counter=0):
-
-    $ Girl = check_girl(Girl)
+label Top_Off(Girl, Intro=1, line=0, counter=0):
     call shift_focus (Girl)
 
     if not Girl.outfit["top"] and not Girl.outfit["bra"]:
@@ -2164,8 +2162,7 @@ label ToplessorNothing(Girl=0):
     return
 
 
-label Bottoms_Off(Girl=0, Intro=1, line=0, counter=0):
-    $ Girl = check_girl(Girl)
+label Bottoms_Off(Girl, Intro=1, line=0, counter=0):
     call shift_focus (Girl)
 
     if not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and not Girl.outfit["hose"]:

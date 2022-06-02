@@ -459,7 +459,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
                         elif Girl == JubesX:
                             ch_v "Nice."
 
-                $ focused_Girl = Girl
+                call shift_focus(Girl)
                 jump Les_Prep
 
             "So maybe I could join you girls?" if Player.semen and Girl.remaining_actions:
@@ -659,7 +659,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
                 ch_s "Very well. . ."
             elif Girl == JubesX:
                 ch_v "I guess we can do that for you. . ."
-            $ focused_Girl = Girl
+            call shift_focus(Girl)
             jump Les_Prep
         elif approval and "lesbian" in Girl.daily_history:
             $ Girl.change_face("_sexy", 1)
@@ -940,7 +940,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
         elif Girl == JubesX:
             ch_v "Ok, fine, if you're into it."
             ch_v "Come on over here."
-        $ focused_Girl = Girl
+        call shift_focus(Girl)
         jump Les_Prep
 
 
@@ -1587,8 +1587,8 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
                 ch_v "Come on, you in, [Subject.tag]? . ."
             if B2 >= 100:
                 $ Result = 1
-                $ Speaker.GirlLikeUp(Subject,(int(B/10)))
-                $ Subject.GirlLikeUp(Speaker,(int(B2/10)))
+                $ Speaker.change_likes(Subject,(int(B/10)))
+                $ Subject.change_likes(Speaker,(int(B2/10)))
         else:
             return Result
 
@@ -1755,9 +1755,9 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
                     $ Speaker.add_word(1,"_angry","_angry")
             "[Subject.name], what do you think?":
                 $ Subject.change_face("_sexy", 1)
-                $ Speaker.GirlLikeUp(Subject,(int(B/10)))
+                $ Speaker.change_likes(Subject,(int(B/10)))
                 if B >= 50:
-                    $ Subject.GirlLikeUp(Speaker,5)
+                    $ Subject.change_likes(Speaker,5)
                 if Subject == RogueX:
                     if Speaker == KittyX:
                         if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:

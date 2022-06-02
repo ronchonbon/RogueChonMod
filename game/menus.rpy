@@ -372,7 +372,7 @@ label begging_menu(Girl, action):
             $ Girl.change_face("_bemused")
 
             call sorry_never_mind_lines(Girl, action)
-        "Maybe later?" if action in ["masturbation", "fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "fondle_ass", "handjob", "footjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"] and "no_" + action not in Girl.daily_history:
+        "Maybe later?" if "no_" + action not in Girl.daily_history:
             if action == "masturbation":
                 $ Girl.change_face("_sexy", 1)
             else:
@@ -387,7 +387,7 @@ label begging_menu(Girl, action):
                 $ Girl.change_stat("love", 80, 1)
                 $ Girl.change_stat("inhibition", 30, 2)
 
-                if action in ["fondle_breasts", "suck_breasts"]:
+                if action in breast_actions:
                     $ Girl.change_stat("love", 50, 1)
             elif action in ["masturbation", "fondle_pussy"]:
                 $ Girl.change_stat("love", 80, 2)
@@ -846,7 +846,7 @@ label girl_unsatisfied_menu(Girl, action):
 
     return "continue"
 
-label kiss_menu(Girl, action):
+label kiss_menu(Girl):
     menu:
         "Keep going. . .":
             pass
@@ -892,7 +892,7 @@ label kiss_menu(Girl, action):
                         if offhand_action:
                              $ Girl.remaining_actions -= 1
                     else:
-                        call tired_lines(Girl, action)
+                        call tired_lines(Girl, "kiss")
                 "Shift primary action":
                     if Girl.remaining_actions and multi_action:
                         menu:
@@ -903,7 +903,7 @@ label kiss_menu(Girl, action):
                             "Never Mind":
                                 pass
                     else:
-                        call tired_lines(Girl, action)
+                        call tired_lines(Girl, "kiss")
                 "Threesome actions" if Partner:
                     menu:
                         "Ask [Girl.name] to do something else with [Partner.name]" if action == "lesbian":
@@ -939,15 +939,16 @@ label kiss_menu(Girl, action):
 
     return [None, "continue"]
 
-label masturbation_menu(Girl, action):
+label masturbation_menu(Girl):
     menu:
         "Keep Watching.":
             pass
-        "[Girl.name]. . .[[jump in]" if "unseen" not in Girl.recent_history and "join" not in Player.recent_history and Girl.location == bg_current:
+        "[Girl.name]. . .[[jump in]" if "unseen" not in Girl.recent_history and Girl.location == bg_current:
             "[Girl.name] slows what she's doing with a sly grin."
 
-            call masturbation_join_in_lines(Girl, primary_action)
-            call masturbate(Girl, "join")
+            call masturbation_join_in_lines(Girl, "masturbation")
+
+            return "join"
         "\"Ahem. . .\"" if "unseen" in Girl.recent_history:
             return "interrupt"
         "Start jack'in it." if offhand_action != "jerking_off":

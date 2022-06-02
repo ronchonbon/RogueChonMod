@@ -44,13 +44,13 @@ label Emma_chat_Minimal:
                 "Relationship status":
                     ch_p "Could we talk about us?"
                     ch_e "I'm not sure that's an appropriate discussion at the moment."
-                "Could I get your number?" if EmmaX not in phonebook:
+                "Could I get your number?" if EmmaX not in Phonebook:
                     if approval_check(EmmaX, 800, "LI"):
                         ch_e "I don't see why not."
-                        $ phonebook.append(EmmaX)
+                        $ Phonebook.append(EmmaX)
                     elif approval_check(EmmaX, 500, "OI"):
                         ch_e "Hmm. . . fine, hand me your phone."
-                        $ phonebook.append(EmmaX)
+                        $ Phonebook.append(EmmaX)
                     else:
                         ch_e "I don't think it's appropriate to give my number out to a student like that."
                 "Back":
@@ -1039,14 +1039,14 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
     if O:
         $ Options = [O]
     else:
-        if EmmaX not in phonebook:
+        if EmmaX not in Phonebook:
             if approval_check(EmmaX, 850, "LI"):
                 ch_e "If you'd like to reach me. . . after hours, here's my number."
-                $ phonebook.append(EmmaX)
+                $ Phonebook.append(EmmaX)
                 return
             elif approval_check(EmmaX, 500, "OI"):
                 ch_e "I should let you know how to contact me."
-                $ phonebook.append(EmmaX)
+                $ Phonebook.append(EmmaX)
                 return
 
         if "hungry" not in EmmaX.traits and (EmmaX.event_counter["swallowed"] + EmmaX.had_chat[2]) >= 10 and EmmaX.location == bg_current:
@@ -1824,7 +1824,7 @@ label Emma_Rename:
 
 label Emma_Personality(counter=0):
     if not EmmaX.had_chat[4] or counter:
-        "Since you're doing well in one area, you can convince Emma_sprite to focus on one of the others."
+        "Since you're doing well in one area, you can convince Emma to focus on one of the others."
         "Any time you go over the limit in a given stat, the excess will spill over into the chosen stat instead."
         "This will also impact which personality trait takes priority in dialog."
     menu:
@@ -2468,7 +2468,7 @@ label Emma_wardrobe_menu:
                         $ EmmaX.change_outfit()
                 $ EmmaX.set_temp_outfit()
                 $ primary_action = None
-                call Switch_chat
+                call switch_chat
                 if Girl != EmmaX:
                     ch_p "I wanted to talk about your clothes."
                     call expression Girl.tag +"_Clothes"
@@ -2856,7 +2856,7 @@ label Emma_wardrobe_menu:
 
     menu Emma_Clothes_Legs:
 
-        "Maybe go without the [EmmaX.outfit['legs']]." if EmmaX.outfit["bottom"]:
+        "Maybe go without the [EmmaX.outfit['bottom']]." if EmmaX.outfit["bottom"]:
             $ EmmaX.change_face("_sexy", 1)
             if EmmaX.seen_underwear and EmmaX.outfit["underwear"] and approval_check(EmmaX, 500, taboo_modifier=(6-Public)):
                 ch_e "Fine."
@@ -3141,7 +3141,7 @@ label Emma_wardrobe_menu:
                         $ EmmaX.outfit["bottom"] = ""
                         pause 0.5
                         $ EmmaX.outfit["bottom"] = primary_action
-                        "She pulls off her [EmmaX.outfit['legs']] and [line], then pulls the [EmmaX.outfit['legs']] back on."
+                        "She pulls off her [EmmaX.outfit['bottom']] and [line], then pulls the [EmmaX.outfit['bottom']] back on."
                         $ primary_action = 1
                         call Emma_First_Bottomless (1)
                     elif EmmaX.outfit["bottom"] == "_skirt":

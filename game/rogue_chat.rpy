@@ -583,7 +583,7 @@ return
 
 
 
-label Rogue_sexchat:
+label Rogue_Sexchat:
     $ line = "Yeah, what did you want to talk about?" if not line else line
     while True:
         menu:
@@ -936,14 +936,14 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
     if O:
         $ Options = [O]
     else:
-        if RogueX not in phonebook:
+        if RogueX not in Phonebook:
             if approval_check(RogueX, 500, "L") or approval_check(RogueX, 250, "I"):
                 ch_r "You know, I never got around to giving you my number, here you go."
-                $ phonebook.append(RogueX)
+                $ Phonebook.append(RogueX)
                 return
             elif approval_check(RogueX, 250, "O"):
                 ch_r "You know, you should probably have my number, here you go."
-                $ phonebook.append(RogueX)
+                $ Phonebook.append(RogueX)
                 return
         if "hungry" not in RogueX.traits and (RogueX.event_counter["swallowed"] + RogueX.had_chat[2]) >= 10 and RogueX.location == bg_current:
             call Rogue_Hungry
@@ -1152,7 +1152,7 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
         call Rogue_Master
         $ RogueX.daily_history.append("nametag chat")
     elif Options[0] == "sexfriend?":
-        call Rogue_sexfriend
+        call Rogue_Sexfriend
         $ RogueX.daily_history.append("nametag chat")
     elif Options[0] == "fuckbuddy?":
         call Rogue_Fuckbuddy
@@ -2229,7 +2229,7 @@ label Rogue_wardrobe_menu:
 
                 $ trigger = None
 
-                call Switch_chat
+                call switch_chat
 
                 if Girl != RogueX:
                     ch_p "I wanted to talk about your clothes."
@@ -2551,7 +2551,7 @@ label Rogue_wardrobe_menu:
 
         "How about that green nighty I got you?" if RogueX.outfit["top"] != "_nighty" and "_nighty" in RogueX.inventory:
             if RogueX.outfit["bottom"]:
-                ch_r "I can't really wear that with my [RogueX.outfit[legs]] on."
+                ch_r "I can't really wear that with my [RogueX.outfit[bottom]] on."
             elif not approval_check(RogueX, 1100, taboo_modifier=3):
                 call Display_dress_screen (RogueX)
                 if not _return:
@@ -2651,7 +2651,7 @@ label Rogue_wardrobe_menu:
 
     menu Rogue_Clothes_Legs:
 
-        "Maybe go without the [RogueX.outfit[legs]]." if RogueX.outfit["bottom"]:
+        "Maybe go without the [RogueX.outfit[bottom]]." if RogueX.outfit["bottom"]:
             $ RogueX.change_face("_sexy", 1)
             if RogueX.seen_underwear and RogueX.outfit["underwear"] and approval_check(RogueX, 500, taboo_modifier=5):
                 ch_r "Sure."
@@ -2990,7 +2990,7 @@ label Rogue_wardrobe_menu:
                         $ RogueX.outfit["bottom"] = ""
                         pause 0.5
                         $ RogueX.outfit["bottom"] = trigger
-                        "She pulls off her [RogueX.outfit[legs]] and [line], then pulls the [RogueX.outfit[legs]] back on."
+                        "She pulls off her [RogueX.outfit[bottom]] and [line], then pulls the [RogueX.outfit[bottom]] back on."
                         $ trigger = 1
                         call Rogue_First_Bottomless (1)
                     elif RogueX.outfit["bottom"] == "_skirt":

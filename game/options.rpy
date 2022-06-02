@@ -1,13 +1,14 @@
 init -1 python hide:
+
     config.developer = True
 
     config.screen_width = 1920 #1600
     config.screen_height = 1080 #900
 
-    config.window_title = u"Rogue-Like"
+    config.window_title = u"Rogue-Like Chonky Mod"
 
-    config.name = "Rogue-Like"
-    config.version = "0.997f2"
+    config.name = "Rogue-Like Chonky Mod"
+    config.version = "0.1c"
 
     theme.tv(
         widget = "#6A7183",
@@ -93,9 +94,11 @@ init -1 python hide:
     config.say_attribute_transition = None
 
 python early:
-    config.save_directory = "Rogue-Like"
+
+    config.save_directory = "Rogue-Like Chonky Mod"
 
 init -1 python hide:
+
     config.default_fullscreen = False
 
     config.default_text_cps = 0
@@ -105,9 +108,10 @@ init -1 python hide:
     config.skip_delay = 75 #I added this, adds delay to skipping to prevent barrelling through
 
 init python:
-    build.directory_name = "Rogue-Like-0.997f2"
 
-    build.executable_name = "Rogue-Like"
+    build.directory_name = "Rogue-Like-Chonky-Mod"
+
+    build.executable_name = "Rogue-Like Chonky Mod"
 
     build.include_update = False
 

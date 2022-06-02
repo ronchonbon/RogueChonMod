@@ -343,7 +343,7 @@ label Laura_Key:
     ch_l "Look, you've been sleeping over a lot and I was thinking. . ."
     ch_l "Just take it already."
     "She takes your hand and practically forces a key onto your palm before making your fingers close on it."
-    $ keys.append(LauraX)
+    $ Keys.append(LauraX)
     $ LauraX.event_happened[0] = 1
     ch_p "Thanks."
     return
@@ -2026,7 +2026,7 @@ label Laura_Fuckbuddy:
     $ primary_action = "masturbation"
     $ girl_offhand_action = "fondle_pussy"
     $ LauraX.change_face("_sly",2,mouth="_lipbite")
-    "[LauraX.name] is_sprite standing in the doorway, with her hand down her pants."
+    "[LauraX.name] is standing in the doorway, with her hand down her pants."
     "You can tell she's been masturbating furiously, her scent is overpowering."
     $ primary_action = None
     $ girl_offhand_action = None
@@ -2506,9 +2506,9 @@ label Laura_Dressup3:
     $ LauraX.outfit["underwear"] = "_wolvie_panties"
     menu:
         extend ""
-        "Sneak a peek [[no key] (locked)" if KittyX not in keys:
+        "Sneak a peek [[no key] (locked)" if KittyX not in Keys:
             pass
-        "Sneak a peek" if KittyX in keys:
+        "Sneak a peek" if KittyX in Keys:
             "You use your key and unlock the door, opening it and sticking your head in."
             ch_p "Hey, [KittyX.name], what's going on?"
             ch_k "Hey, [KittyX.player_petname]! Come on in!"

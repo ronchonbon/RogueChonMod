@@ -626,7 +626,7 @@ label third_addiction_event:
         $ Girl.change_face("_angry",eyes="_manic")
 
         ch_j "Now look here, fucko!"
-        ch_j "I have had just about enough of your \"not doing what Jean_sprite says\" nonsense!"
+        ch_j "I have had just about enough of your \"not doing what Jean says\" nonsense!"
         ch_j "What is it you want from me?!"
     elif Girl == StormX:
         $ Girl.change_face("_angry",eyes="_white")
@@ -1533,7 +1533,7 @@ label addiction_good_end:
 
     call Sex_Over
 
-    if Girl not in phonebook:
+    if Girl not in Phonebook:
         if Girl == RogueX:
             ch_r "I'm going to need to get in touch, you should probably have my number, here you go."
         elif Girl == KittyX:
@@ -1550,7 +1550,7 @@ label addiction_good_end:
         elif Girl == JubesX:
             ch_v "I guess I should give you my number. . ."
 
-        $ phonebook.append(Girl)
+        $ Phonebook.append(Girl)
     if Girl == RogueX:
         ch_r "I may need to do this again sometime. . . I'll see ya later."
     elif Girl == KittyX:

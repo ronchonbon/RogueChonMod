@@ -1,9 +1,5 @@
 label action(Girl, action, context = None):
-    $ context = action_context
-
     while True:
-        $ round -= 5 if round > 5 else round - 1
-
         call set_approval_bonus(Girl, action, context)
         call action_approval_checks(Girl, action)
 
@@ -148,22 +144,22 @@ label action(Girl, action, context = None):
 
             return "back"
 
-        $ primary_action = action
-
         call before_action(Girl, action, context)
+
+        $ primary_action = action
 
         if _return == "continue":
             call action_cycle(Girl, action, context)
 
-            if _return[1] == "shift":
-                call after_action(Girl, action, "shift")
+            if _return[1] == "switch":
+                call after_action(Girl, action, "switch")
 
-                return "shift"
+                return "switch"
             elif _return[1] == "stop":
                 call after_action(Girl, action, "stop")
 
                 return "stop"
-            elif _return[1]:
+            elif _return[1] != "offhand":
                 $ temp_action = action
                 $ temp_context = context
 
@@ -172,6 +168,8 @@ label action(Girl, action, context = None):
 
                 call after_action(Girl, temp_action, temp_context)
         else:
+            call stop_all_actions
+
             return "stop"
 
 label before_action(Girl, action, context):
@@ -208,9 +206,9 @@ label before_action(Girl, action, context):
                 $ approval_bonus = 15
 
             if action in inside_panties_actions:
-                call Bottoms_Off
+                call Bottoms_Off(Girl)
             elif action in breast_actions:
-                call Top_Off
+                call Top_Off(Girl)
 
             if "_angry" in Girl.recent_history:
                 return "stop"
@@ -345,11 +343,10 @@ label before_action(Girl, action, context):
     $ Girl.drain_word("no_" + action)
     $ Girl.add_word(0, action, action)
 
-    if action in mouth_actions:
-        if action != "kiss" and offhand_action == "kiss":
-            $ offhand_action = None
-
-    $ action_speed = 0
+    if action in mouth_actions and offhand_action in mouth_actions:
+        $ offhand_action = None
+    elif action in cock_actions and offhand_action in cock_actions:
+        $ offhand_action = None
 
     $ Player.sprite = True
 
@@ -358,11 +355,13 @@ label before_action(Girl, action, context):
 
         $ Player.sprite = False
     elif action == "eat_pussy":
-        $ Girl.pose = "sex"
+        if Girl.pose != "doggy":
+            $ Girl.pose = "sex"
 
         $ Player.sprite = False
     elif action == "eat_ass":
-        $ Girl.pose = "doggy"
+        if Girl.pose != "sex":
+            $ Girl.pose = "doggy"
 
         $ Player.sprite = False
     elif action in ["handjob", "titjob", "blowjob"]:
@@ -370,13 +369,17 @@ label before_action(Girl, action, context):
     elif action == "footjob" and Girl == EmmaX:
         $ Girl.pose = "footjob"
     elif action == "footjob":
-        $ Girl.pose = "doggy"
+        if Girl.pose != "sex":
+            $ Girl.pose = "doggy"
     elif action == "hotdog":
-        $ Girl.pose = "doggy"
+        if Girl.pose != "sex":
+            $ Girl.pose = "doggy"
     elif action == "sex":
-        $ Girl.pose = "sex"
+        if Girl.pose != "doggy":
+            $ Girl.pose = "sex"
     elif action == "anal":
-        $ Girl.pose = "doggy"
+        if Girl.pose != "sex":
+            $ Girl.pose = "doggy"
     else:
         $ Girl.pose = "full"
 
@@ -401,7 +404,7 @@ label action_cycle(Girl, action, context):
 
         if Player.focus < 100:
             if action == "kiss":
-                call kiss_menu(Girl, action)
+                call kiss_menu(Girl)
             elif action in fondle_actions:
                 call fondle_menu(Girl, action)
             elif action in job_actions:
@@ -417,7 +420,7 @@ label action_cycle(Girl, action, context):
                 return [action, context]
 
         if action in inside_panties_actions:
-            if Girl.outfit["underwear"] or Girl.legs_covered: #This checks if Rogue_sprite wants to strip down.
+            if Girl.outfit["underwear"] or Girl.legs_covered: #This checks if Rogue wants to strip down.
                 call Girl_Undress(Girl, "auto")
 
         call Sex_Dialog(Girl, Partner)
@@ -436,7 +439,7 @@ label action_cycle(Girl, action, context):
 
         if action in breast_actions:
             if Girl.lust >= 50 and not Girl.top_pulled_up and (Girl.outfit["bra"] or Girl.outfit["top"]):
-                call pull_off_top_narration(Girl)
+                call pulls_off_top_narration(Girl)
 
                 $ Girl.top_pulled_up = 1
 
@@ -447,10 +450,11 @@ label action_cycle(Girl, action, context):
     return [None, "stop"]
 
 label after_action(Girl, action, context):
-    $ Player.sprite = False
-    $ Player.cock_position = "out"
+    if context in ["switch", "stop"]:
+        $ Player.sprite = False
+        $ Player.cock_position = "out"
 
-    call reset_position(Girl)
+        call reset_position(Girl)
 
     $ Girl.change_face("_sexy")
     $ Girl.remaining_actions -= 1
@@ -519,9 +523,7 @@ label after_action(Girl, action, context):
 
     if context == "shift":
         call switching_action_lines(Girl, action)
-
-        $ primary_action = None
-        $ action_speed = 0
+        call stop_all_actions
     else:
         call reset_position(Girl)
 

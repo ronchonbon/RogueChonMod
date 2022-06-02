@@ -1391,7 +1391,7 @@ label Halloween_Emma:
     ch_e "Now that you mention it, the other students are a bit. . . flamboyantly attired."
     $ EmmaX.change_face("_angry",eyes="_down")
     ch_e "Does that explain why you're dressed as some sort of. . ."
-    $ HWline = ["Well, I suppose that's how you always look.","Rogue_sprite seaman?","Sneakthief?","Fireman?"]
+    $ HWline = ["Well, I suppose that's how you always look.","Rogue seaman?","Sneakthief?","Fireman?"]
     $ EmmaX.change_face("_normal",brows="_confused")
     $ HWline = HWline[halloween_costume]
     ch_e "[HWline]"

@@ -24,7 +24,6 @@ label meet_Emma:
     show Emma_sprite standing at sprite_location(EmmaX.sprite_location) with easeinright
 
     $ EmmaX.location = "bg_classroom"
-    $ EmmaX.blushing = ""
     $ EmmaX.change_face("_normal")
     $ EmmaX.arm_pose = 1
 
@@ -388,7 +387,7 @@ label Emma_Teacher_Caught(Girl=0):
     $ renpy.pop_call()
     $ Player.traits.append("detention")
     $ Player.daily_history.append("detention")
-    jump Class_Room
+    jump classroom
 
 
 
@@ -790,7 +789,7 @@ label Emma_Key:
     ch_e ". . . you might want a key. . ."
     ch_p "Thanks."
     $ EmmaX.arm_pose = 1
-    $ keys.append(EmmaX)
+    $ Keys.append(EmmaX)
     $ EmmaX.event_happened[0] = 1
     return
 

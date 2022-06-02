@@ -1,164 +1,158 @@
 label masturbate(Girl, context = None):
-    $ context = action_context
+    while True:
+        call set_approval_bonus(Girl, "masturbation", context)
+        call action_approval_checks(Girl, "masturbation")
 
-    $ round -= 5 if round > 5 else round - 1
+        $ Girl.drain_word("unseen", 1, 0)
 
-    call set_approval_bonus(Girl, "masturbation", context)
-    call action_approval_checks(Girl, "masturbation")
+        $ accepted = False
 
-    $ Girl.drain_word("unseen", 1, 0)
+        if context == "join":
+            if approval > 1 or (approval and Girl.lust >= 50):
+                menu:
+                    extend ""
+                    "Would you like some help? I could lend some helping hands. . ." if Girl.remaining_actions:
+                        $ Girl.change_stat("love", 90, 1)
+                        $ Girl.change_stat("obedience", 50, 2)
+                        $ Girl.change_face("_sexy")
 
-    $ accepted = False
+                        call lend_some_helping_hands_lines(Girl, "masturbation")
 
-    if context == "join":
-        if approval > 1 or (approval and Girl.lust >= 50):
-            $ Player.add_word(1, "join")
+                        $ Girl.change_stat("obedience", 70, 2)
+                        $ Girl.change_stat("inhibition", 70, 1)
 
-            menu:
-                extend ""
-                "Would you like some help? I could lend some helping hands. . ." if Girl.remaining_actions:
-                    $ Girl.change_stat("love", 90, 1)
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_face("_sexy")
+                        $ Girl.action_counter["masturbation"] += 1
 
-                    call lend_some_helping_hands_lines(Girl, "masturbation")
+                        call action(Girl, "fondle_breasts", "auto")
 
-                    $ Girl.change_stat("obedience", 70, 2)
-                    $ Girl.change_stat("inhibition", 70, 1)
-
-                    $ primary_action = "fondle_breasts"
-
-                    $ Girl.action_counter["masturbation"] += 1
-
-                    $ accepted = True
-                "Would you like some help? I could. . . up to you, I guess." if Player.semen and Girl.remaining_actions:
-                    $ Girl.change_stat("love", 70, 2)
-                    $ Girl.change_stat("love", 90, 1)
-                    $ Girl.change_face("_sexy")
-
-                    call lend_some_helping_hands_lines(Girl, "masturbation")
-
-                    $ Girl.change_stat("obedience", 70, 2)
-                    $ Girl.change_stat("inhibition", 70, 1)
-
-                    $ D20 = renpy.random.randint(1, 20)
-
-                    if D20 > 10:
-                        $ primary_action = "fondle_breasts"
-                    else:
-                        $ primary_action = "suck_breasts"
-
-                    $ Girl.action_counter["masturbation"] += 1
-
-                    $ accepted = True
-                "Why don't we take care of each other?" if Player.semen and Girl.remaining_actions:
-                    $ Girl.change_face("_sexy")
-
-                    call why_dont_we_take_care_of_each_other_lines(Girl, "masturbation")
-                    call enter_main_sex_menu(Girl)
-
-                    return "stop"
-                "You look like you have things well in hand. . .":
-                    if Girl.lust >= 50:
+                        return _return
+                    "Would you like some help? I could. . . up to you, I guess." if Player.semen and Girl.remaining_actions:
                         $ Girl.change_stat("love", 70, 2)
                         $ Girl.change_stat("love", 90, 1)
                         $ Girl.change_face("_sexy")
 
-                        call well_in_hand_lust_lines(Girl, "masturbation")
+                        call lend_some_helping_hands_lines(Girl, "masturbation")
 
-                        $ Girl.change_stat("obedience", 80, 3)
-                        $ Girl.change_stat("inhibition", 80, 5)
+                        $ Girl.change_stat("obedience", 70, 2)
+                        $ Girl.change_stat("inhibition", 70, 1)
 
-                        $ accepted = True
-                    elif approval_check(Girl, 1000):
-                        $ Girl.change_face("_sly")
+                        $ D20 = renpy.random.randint(1, 20)
 
-                        call well_in_hand_approved_lines(Girl, "masturbation")
+                        $ Girl.action_counter["masturbation"] += 1
+
+                        if D20 > 10:
+                            call action(Girl, "fondle_breasts", "auto")
+                        else:
+                            call action(Girl, "suck_breasts", "auto")
+
+                        return _return
+                    "Why don't we take care of each other?" if Player.semen and Girl.remaining_actions:
+                        $ Girl.change_face("_sexy")
+
+                        call why_dont_we_take_care_of_each_other_lines(Girl, "masturbation")
+                        call enter_main_sex_menu(Girl)
+
+                        return "switch"
+                    "You look like you have things well in hand. . .":
+                        if Girl.lust >= 50:
+                            $ Girl.change_stat("love", 70, 2)
+                            $ Girl.change_stat("love", 90, 1)
+                            $ Girl.change_face("_sexy")
+
+                            call well_in_hand_lust_lines(Girl, "masturbation")
+
+                            $ Girl.change_stat("obedience", 80, 3)
+                            $ Girl.change_stat("inhibition", 80, 5)
+
+                            $ accepted = True
+                        elif approval_check(Girl, 1000):
+                            $ Girl.change_face("_sly")
+
+                            call well_in_hand_approved_lines(Girl, "masturbation")
+                        else:
+                            $ Girl.change_face("_angry")
+
+                            call well_in_hand_disapproved_lines(Girl, "masturbation")
+
+            if not accepted:
+                $ Girl.change_outfit()
+                $ Girl.arm_pose = 1
+                $ Girl.remaining_actions -= 1
+
+                $ Player.change_stat("focus", 50, 30)
+
+                call checkout(total = True)
+
+                if approval:
+                    $ Girl.change_face("_bemused", 2)
+
+                    if bg_current == "bg_rogue":
+                        call what_did_you_come_over_for_approval_lines(Girl, primary_action)
                     else:
-                        $ Girl.change_face("_angry")
+                        call fancy_bumping_into_you_approval_lines(Girl, primary_action)
 
-                        call well_in_hand_disapproved_lines(Girl, "masturbation")
+                    $ Girl.blushing = "_blush1"
+                else:
+                    $ Girl.change_stat("love", 200, -5)
+                    $ Girl.change_face("_angry")
+                    $ Girl.recent_history.append("_angry")
+                    $ Girl.daily_history.append("_angry")
+
+                    if bg_current == "bg_rogue":
+                        call what_did_you_come_over_for_disapproval_lines(Girl, primary_action)
+
+                        jump reset_location
+                    else:
+                        call fancy_bumping_into_you_disapproval_lines(Girl, primary_action)
+                        call remove_girl(Girl)
+
+                return "stop"
 
         if not accepted:
-            $ Girl.change_outfit()
-            $ Girl.arm_pose = 1
-            $ Girl.remaining_actions -= 1
+            if not Girl.action_counter["masturbation"]:
+                call first_time_asking_reactions(Girl, "masturbation")
 
-            $ Player.change_stat("focus", 50, 30)
+            if not Girl.action_counter["masturbation"] and approval:
+                call first_action_approval(Girl, "masturbation")
+            elif approval:
+                call action_approved(Girl, "masturbation")
 
-            call checkout(total = True)
+                if _return == "accepted":
+                    $ accepted = True
 
-            if approval:
-                $ Girl.change_face("_bemused", 2)
+            if approval >= 2:
+                call action_accepted(Girl, "masturbation")
 
-                if bg_current == "bg_rogue":
-                    call what_did_you_come_over_for_approval_lines(Girl, primary_action)
-                else:
-                    call fancy_bumping_into_you_approval_lines(Girl, primary_action)
-
-                $ Girl.blushing = "_blush1"
-            else:
-                $ Girl.change_stat("love", 200, -5)
-                $ Girl.change_face("_angry")
-                $ Girl.recent_history.append("_angry")
-                $ Girl.daily_history.append("_angry")
-
-                if bg_current == "bg_rogue":
-                    call what_did_you_come_over_for_disapproval_lines(Girl, primary_action)
-
-                    jump reset_location
-                else:
-                    call fancy_bumping_into_you_disapproval_lines(Girl, primary_action)
-                    call remove_girl(Girl)
-
-            return "stop"
-
-    if not accepted:
-        if not Girl.action_counter["masturbation"]:
-            call first_time_asking_reactions(Girl, "masturbation")
-
-        if not Girl.action_counter["masturbation"] and approval:
-            call first_action_approval(Girl, "masturbation")
-        elif approval:
-            call action_approved(Girl, "masturbation")
-
-            if _return == "accepted":
                 $ accepted = True
-
-        if approval >= 2:
-            call action_accepted(Girl, "masturbation")
-
-            $ accepted = True
-        else:
-            call action_disapproved(Girl, "masturbation")
+            else:
+                call action_disapproved(Girl, "masturbation")
 
         if not accepted:
             call action_rejected(Girl, "masturbation")
 
             return "back"
 
-        $ girl_offhand_action = "fondle_pussy"
-
         call before_masturbation(Girl)
 
-        while True:
-            call masturbation_cycle(Girl)
+        $ girl_offhand_action = "fondle_pussy"
 
-            if _return == "interrupt":
-                call after_masturbation(Girl, "interrupt")
+        call masturbation_cycle(Girl)
 
-                if _return == "stop":
-                    return "stop"
-            elif _return == "shift":
-                call after_masturbation(Girl, "shift")
+        if _return == "interrupt":
+            call after_masturbation(Girl, "interrupt")
 
-                return "shift"
+            if _return == "switch":
+                return "switch"
             elif _return == "stop":
-                call after_masturbation(Girl, "stop")
-
                 return "stop"
+        elif _return == "switch":
+            call after_masturbation(Girl, "switch")
 
-    return "stop"
+            return "switch"
+        elif _return == "stop":
+            call after_masturbation(Girl, "stop")
+
+            return "stop"
 
 label before_masturbation(Girl):
     call expose_bottom(Girl)
@@ -210,7 +204,12 @@ label masturbation_cycle(Girl):
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
         if Player.focus < 100:
-            call masturbation_menu
+            call masturbation_menu(Girl)
+
+            if _return != "continue":
+                $ context = _return
+
+                return context
 
         call Sex_Dialog(Girl, Partner)
 
@@ -232,7 +231,7 @@ label masturbation_cycle(Girl):
                         return "stop"
 
                     $ Girl.change_stat("lust", 200, 5)
-                    
+
                     if 100 > Girl.lust >= 70 and Girl.session_orgasms < 2:
                         $ Girl.recent_history.append("unsatisfied")
                         $ Girl.daily_history.append("unsatisfied")
@@ -261,7 +260,7 @@ label masturbation_cycle(Girl):
                 if "unsatisfied" in Girl.recent_history:
                     call girl_unsatisfied_menu(Girl, "masturbation")
 
-                    if _return != "continue":
+                    if _return == "stop":
                         return "stop"
 
         if Partner and Partner.lust >= 100:
@@ -290,7 +289,7 @@ label masturbation_cycle(Girl):
     if "unseen" not in Girl.recent_history:
         ch_r "Ok, [Girl.player_petname], that's enough of that for now."
 
-    return "back"
+    return "stop"
 
 label after_masturbation(Girl, context):
     if context == "interrupt":
@@ -377,9 +376,7 @@ label after_masturbation(Girl, context):
 
             return "stop"
 
-        call masturbate(Girl, "join")
-
-        return "stop"
+        return "join"
     else:
         $ Girl.remaining_actions -= 1
         $ Girl.action_counter["masturbation"] += 1
@@ -409,7 +406,7 @@ label after_masturbation(Girl, context):
         menu:
             extend ""
             "Well, I have something you could take care of. . ." if Player.semen and Girl.remaining_actions:
-                return "shift"
+                return "switch"
             "You could just keep going. . ." if Player.semen:
                 $ Girl.change_face("_sly")
 
@@ -419,6 +416,8 @@ label after_masturbation(Girl, context):
                     return "continue"
                 else:
                     call masturbation_worn_out_lines(Girl, primary_action)
+
+                return "continue"
             "I'm good here. [[Stop]":
                 if Girl.love < 800 and Girl.inhibition < 500 and Girl.obedience < 500:
                     $ Girl.change_outfit()

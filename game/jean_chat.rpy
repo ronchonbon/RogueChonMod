@@ -998,14 +998,14 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
         $ Options = [O]
     else:
 
-        if JeanX not in phonebook:
+        if JeanX not in Phonebook:
             if approval_check(JeanX, 500, "L") or approval_check(JeanX, 250, "I"):
                 ch_j "Oh, here's my number, gimme a call some time."
-                $ phonebook.append(JeanX)
+                $ Phonebook.append(JeanX)
                 return
             elif approval_check(JeanX, 250, "O"):
                 ch_j "I guess you should have my number. . ."
-                $ phonebook.append(JeanX)
+                $ Phonebook.append(JeanX)
                 return
 
         if "hungry" not in JeanX.traits and (JeanX.event_counter["swallowed"] + JeanX.had_chat[2]) >= 10 and JeanX.location == bg_current:
@@ -1708,7 +1708,7 @@ label Jean_Rename:
 
 label Jean_Personality(counter=0):
     if not JeanX.had_chat[4] or counter:
-        "Since you're doing well in one area, you can convince Jean_sprite to focus on one of the others."
+        "Since you're doing well in one area, you can convince Jean to focus on one of the others."
         "Any time you go over the limit in a given stat, the excess will spill over into the chosen stat instead."
         "This will also impact which personality trait takes priority in dialog."
     menu:
@@ -2221,7 +2221,8 @@ label Jean_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             jump danger_room_entry
         elif JeanX.location == "bg_jean":
             ch_j "Ok."
-            jump Jean_Room
+            $ Girl = JeanX
+            jump girls_room
         elif JeanX.location == "bg_player":
             ch_j "Good."
             jump player_room
@@ -2334,7 +2335,7 @@ label Jean_wardrobe_menu:
                         $ JeanX.change_outfit()
                 $ JeanX.set_temp_outfit()
                 $ primary_action = None
-                call Switch_chat
+                call switch_chat
                 if Girl != JeanX:
                     ch_p "I wanted to talk about your clothes."
                     call expression Girl.tag +"_Clothes"
@@ -2679,7 +2680,7 @@ label Jean_wardrobe_menu:
 
     menu Jean_Clothes_Legs:
 
-        "Maybe go without the [JeanX.outfit['legs']]." if JeanX.outfit["bottom"]:
+        "Maybe go without the [JeanX.outfit['bottom']]." if JeanX.outfit["bottom"]:
             $ JeanX.change_face("_sexy", 1)
             if JeanX.seen_underwear and JeanX.outfit["underwear"] and approval_check(JeanX, 500, taboo_modifier=5):
                 ch_j "Ok, sure."
@@ -2958,7 +2959,7 @@ label Jean_wardrobe_menu:
                         $ JeanX.outfit["bottom"] = ""
                         pause 0.5
                         $ JeanX.outfit["bottom"] = primary_action
-                        "She pulls off her [JeanX.outfit['legs']] and [line], then pulls the [JeanX.outfit['legs']] back on."
+                        "She pulls off her [JeanX.outfit['bottom']] and [line], then pulls the [JeanX.outfit['bottom']] back on."
                         $ primary_action = 1
                         call Jean_First_Bottomless (1)
                     elif JeanX.outfit["bottom"] == "_skirt":

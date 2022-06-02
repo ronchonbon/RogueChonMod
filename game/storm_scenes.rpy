@@ -647,7 +647,7 @@ label Storm_Peter:
     ch_s "[Player.name]!"
     $ StormX.change_face("_angry")
     ch_s "Yes, I know your name is not \"Peter Parker.\""
-    ch_s "Emma_sprite told me when I could not find your name on the roster."
+    ch_s "Emma told me when I could not find your name on the roster."
     $ StormX.change_stat("love", 50, -5)
     $ StormX.change_stat("love", 60, -20)
     ch_s "I cannot believe you would make a fool of me like that."
@@ -1042,7 +1042,7 @@ label Storm_Key:
     ch_s ". . . you might want a key. . ."
     ch_p "Thanks."
     $ StormX.arm_pose = 1
-    $ keys.append(StormX)
+    $ Keys.append(StormX)
     $ StormX.event_happened[0] = 1
     return
 
@@ -2245,7 +2245,7 @@ label Storm_Poolnight:
             ease 1 yoffset 0
         pause 1
         show Storm_sprite standing zorder 50 at Pool_Bob(500)
-        "Storm_sprite rises from the pool."
+        "Storm rises from the pool."
         ch_s "Ah, I was hoping you would join me, [StormX.player_petname]. . ."
         if StormX not in Player.Harem and StormX.player_petname not in ("sir","master"):
             ch_s "I know that this is a no-strings attached situation. . ."

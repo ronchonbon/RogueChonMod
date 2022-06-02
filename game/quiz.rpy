@@ -184,7 +184,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
             elif Party[1] == KittyX:
                 ch_k "So[KittyX.like]I guess we take turns?"
             elif Party[1] == EmmaX:
-                "Let Oni know that Emma_sprite was in second please."
+                "Let Oni know that Emma was in second please."
             elif Party[1] == LauraX:
                 ch_l "I will also take a turn."
             elif Party[1] == JeanX:
@@ -205,7 +205,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
                 elif Party[1] == KittyX:
                     ch_k "Um, I'm not really into this?"
                 elif Party[1] == EmmaX:
-                    "Let Oni know that Emma_sprite was in second please."
+                    "Let Oni know that Emma was in second please."
                 elif Party[1] == LauraX:
                     ch_l "I don't think so."
                 elif Party[1] == StormX:
@@ -666,7 +666,7 @@ label Kitty_Quiz_Question:
     if QuizOrder[between_event_count] == 7:
         menu:
             ch_k "It seems like it happened so long ago, but do you know who the first mutant I ever met was?"
-            "A. Jean_sprite Grey":
+            "A. Jean Grey":
                 return False
             "B. Lance Alvers":
                 return True

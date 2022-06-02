@@ -1533,7 +1533,7 @@ menu Tutorial:
                     "You can also access the school's fabricator store, where you can order various items to be delivered to your room."
                 "Class":
                     "You can always attend classes. These are typically not that interesting, but will raise your XP, and various events might occur in class."
-                    "Classes are open during weekday morning and midday periods. You might bump into Rogue_sprite there."
+                    "Classes are open during weekday morning and midday periods. You might bump into Rogue there."
                     "You can access the classroom by using \"Leave [[Go to campus Square].\""
                 "Danger Room":
                     "You can also attend a Danger Room training session. These also raise your XP."
@@ -3302,38 +3302,13 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
 
 
 
-label action_speed_Shift(S=0):
-    $ action_speed = S
-    show black_screen onlayer black
-    pause 0.01
-    hide black_screen onlayer black
-
-    return
-
-
-
 label shift_focus(Girl, Second = None):
-    if Girl == focused_Girl == Partner:
-        $ temp_Girls = all_Girls[:]
-        $ temp_Girls.remove(Partner)
-
-        while temp_Girls:
-            if temp_Girls[0].location == bg_current:
-                $ Partner = temp_Girls[0]
-
-            $ temp_Girls.remove(temp_Girls[0])
-
     if Girl.location == bg_current:
-        $ temp_Girls = all_Girls[:]
-        $ temp_Girls.remove(Girl)
-
-        while temp_Girls:
-            if temp_Girls[0].location == bg_current:
-                $ temp_Girls[0].sprite_location = stage_right
-                $ temp_Girls[0].sprite_layer = 75
-                $ temp_Girls = [1]
-
-            $ temp_Girls.remove(temp_Girls[0])
+        python:
+            for G in active_Girls:
+                if G != Girl and G.location == bg_current:
+                    G.sprite_location = stage_right
+                    G.sprite_layer = 75
 
         $ Girl.sprite_location = stage_center
         $ Girl.sprite_layer = 100
@@ -3348,7 +3323,7 @@ label shift_focus(Girl, Second = None):
     $ focused_Girl = Girl
 
     if Partner == Girl:
-        $ Partner = 0
+        $ Partner = None
 
     $ renpy.restart_interaction()
 

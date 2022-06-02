@@ -122,7 +122,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                     else:
                         $ Type = "over"
 
-                "maybe just lose the [Girl.outfit['legs']]?" if Girl.outfit["bottom"]:
+                "maybe just lose the [Girl.outfit['bottom']]?" if Girl.outfit["bottom"]:
                     if not Girl.outfit["underwear"]:
                         $ Type = "no_panties"
                     else:
@@ -777,7 +777,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
 
 
 
-label Pool_Topless(Girl=focused_Girl, temp_Girls=[]):
+label Pool_Topless(Girl, temp_Girls=[]):
 
     if Girl.location != bg_current:
 
@@ -789,7 +789,8 @@ label Pool_Topless(Girl=focused_Girl, temp_Girls=[]):
                 $ temp_Girls = [1]
             $ temp_Girls.remove(temp_Girls[0])
 
-    $ focused_Girl = Girl
+    call shift_focus(Girl)
+
     if (Girl.bra_number() <= 1 and Girl.top_number() <= 1) or Girl.location != bg_current:
 
         $ D20 = renpy.random.randint(1, 14)

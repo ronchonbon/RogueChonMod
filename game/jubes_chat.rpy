@@ -901,14 +901,14 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
         $ Options = [O]
     else:
 
-        if JubesX not in phonebook:
+        if JubesX not in Phonebook:
             if approval_check(JubesX, 500, "L") or approval_check(JubesX, 250, "I"):
                 ch_v "Oh, here's my number, call me maybe."
-                $ phonebook.append(JubesX)
+                $ Phonebook.append(JubesX)
                 return
             elif approval_check(JubesX, 250, "O"):
                 ch_v "If you need to call me, here's my number."
-                $ phonebook.append(JubesX)
+                $ Phonebook.append(JubesX)
                 return
 
         if "hungry" not in JubesX.traits and JubesX.event_counter["swallowed"] >= 3 and JubesX.location == bg_current:
@@ -2296,7 +2296,7 @@ label Jubes_wardrobe_menu:
                         $ JubesX.change_outfit()
                 $ JubesX.set_temp_outfit()
                 $ primary_action = None
-                call Switch_chat
+                call switch_chat
                 if Girl != JubesX:
                     ch_p "I wanted to talk about your clothes."
                     call expression Girl.tag +"_Clothes"
@@ -2760,7 +2760,7 @@ label Jubes_wardrobe_menu:
 
     menu Jubes_Clothes_Legs:
 
-        "Maybe go without the [JubesX.outfit['legs']]." if JubesX.outfit["bottom"]:
+        "Maybe go without the [JubesX.outfit['bottom']]." if JubesX.outfit["bottom"]:
             $ JubesX.change_face("_sexy", 1)
             if JubesX.seen_underwear and JubesX.outfit["underwear"] and approval_check(JubesX, 500, taboo_modifier=5):
                 ch_v "Ok, sure."
@@ -3018,7 +3018,7 @@ label Jubes_wardrobe_menu:
                         $ JubesX.outfit["bottom"] = ""
                         pause 0.5
                         $ JubesX.outfit["bottom"] = primary_action
-                        "She pulls off her [JubesX.outfit['legs']] and [line], then pulls the [JubesX.outfit['legs']] back on."
+                        "She pulls off her [JubesX.outfit['bottom']] and [line], then pulls the [JubesX.outfit['bottom']] back on."
                         $ primary_action = 1
                         call Jubes_First_Bottomless (1)
                     elif JubesX.outfit["bottom"] == "_skirt":

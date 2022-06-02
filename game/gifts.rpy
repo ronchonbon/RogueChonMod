@@ -1474,7 +1474,7 @@ label gifts:
 
                 call expression Girl.tag + "_Clothes"
             "Switch to. . ." if Girl.location == bg_current:
-                call Switch_chat
+                call switch_chat
 
                 ch_p "I'd like to give you something."
 

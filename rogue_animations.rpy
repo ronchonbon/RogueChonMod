@@ -13,7 +13,7 @@ image Rogue_blinking:
     "images/Rogue_blowjob/Rogue_blowjob_eyes_squint.png"
     0.05
     repeat
-    
+
 layeredimage Rogue_grool_dripping_animations:
     always:
         "grool_dripping_animation" pos (0.129, 0.6) zoom 0.2
@@ -326,6 +326,7 @@ layeredimage Rogue_blowjob_body_animations:
 
 image Rogue_blowjob_mask_animation2:
     "images/Rogue_blowjob/Rogue_blowjob_face_mask.png"
+    pos (0.445, 0.616) anchor (0.45, 0.6)
     blowjob_face_mask_animation2
 
 image Rogue_blowjob_mask_animation3:
@@ -385,6 +386,7 @@ image Rogue_blowjob_mouth_animation1:
 
 image Rogue_blowjob_mouth_animation2:
     "images/Rogue_blowjob/Rogue_blowjob_mouth_sucking.png"
+    pos (0.165, 0.521) anchor (0.4, 0.6)
     blowjob_mouth_animation2
 
 image Rogue_blowjob_mouth_animation3:
@@ -401,6 +403,7 @@ image Rogue_blowjob_mouth_animation1_spunk:
 
 image Rogue_blowjob_mouth_animation2_spunk:
     "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_sucking.png"
+    pos (0.165, 0.521) anchor (0.4, 0.6)
     blowjob_mouth_animation2
 
 image Rogue_blowjob_mouth_animation3_spunk:
@@ -597,7 +600,6 @@ layeredimage Rogue_sex_legs_animations:
 
 image Rogue_sex_anus_animation0:
     "images/Kitty_sex/Kitty_sex_anus_open.png"
-
     anchor (0.5, 0.5)
 
 image Rogue_sex_anus_animation1:
@@ -613,12 +615,10 @@ image Rogue_sex_anus_animation1:
 
 image Rogue_sex_anus_animation2:
     "images/Kitty_sex/Kitty_sex_anus_open.png"
-
     anchor (0.5, 0.5)
 
 image Rogue_sex_anus_animation3:
     "images/Kitty_sex/Kitty_sex_anus_open.png"
-
     anchor (0.5, 0.5)
 
 layeredimage Rogue_sex_anus_animations:
@@ -736,7 +736,7 @@ image Rogue_doggy_ass_animation3:
 
 image Rogue_doggy_pussy_hole_animation0:
     "images/Rogue_doggy/Rogue_doggy_pussy_hole.png"
-    anchor (0.52, 0.69) offset (217, 513) xzoom 0.6
+    anchor (0.52, 0.69) xzoom 0.6
     block:
         ease 1 xzoom 0.65
         pause 1
@@ -745,7 +745,7 @@ image Rogue_doggy_pussy_hole_animation0:
 
 image Rogue_doggy_pussy_hole_animation1:
     "images/Rogue_doggy/Rogue_doggy_pussy_hole.png"
-    anchor (0.52, 0.69) offset (217, 513) xzoom 0.6
+    anchor (0.52, 0.69) xzoom 0.6
     block:
         ease 1 xzoom 1
         pause 1
@@ -764,11 +764,11 @@ image Rogue_doggy_pussy_hole_animation3:
 
 layeredimage Rogue_doggy_pussy_hole_animations:
     always:
-        "Rogue_doggy_pussy_hole_animation[action_speed]"
+        "Rogue_doggy_pussy_hole_animation[action_speed]" pos (0.113, 0.475)
 
 image Rogue_doggy_pussy_mask_animation0:
     "images/Rogue_doggy/Rogue_doggy_sex_mask.png"
-    anchor (0.52, 0.69) offset (217, 513) xzoom 0.6
+    anchor (0.52, 0.69) xzoom 0.6
     block:
         ease 1 xzoom 0.65
         pause 1
@@ -777,7 +777,7 @@ image Rogue_doggy_pussy_mask_animation0:
 
 image Rogue_doggy_pussy_mask_animation1:
     "images/Rogue_doggy/Rogue_doggy_sex_mask.png"
-    anchor (0.52, 0.69) offset (217, 513) xzoom 0.6
+    anchor (0.52, 0.69) xzoom 0.6
     block:
         ease 1 xzoom 1
         pause 1
@@ -786,39 +786,19 @@ image Rogue_doggy_pussy_mask_animation1:
 
 image Rogue_doggy_pussy_mask_animation2:
     "images/Rogue_doggy/Rogue_doggy_sex_mask.png"
-
     anchor (0.52, 0.69)
 
 image Rogue_doggy_pussy_mask_animation3:
     "images/Rogue_doggy/Rogue_doggy_sex_mask.png"
-
     anchor (0.52, 0.69)
 
 layeredimage Rogue_doggy_pussy_mask_animations:
     always:
-        "Rogue_doggy_pussy_mask_animation[action_speed]"
-
-image Rogue_doggy_pussy_hole_mask_animation0:
-    AlphaMask("images/Rogue_doggy/Rogue_doggy_pussy_hole.png", "images/Rogue_doggy/Rogue_doggy_sex_mask.png")
-    anchor (0.52, 0.69) xzoom 0.6
-    block:
-        ease 1 xzoom 0.65
-        pause 1
-        ease 3 xzoom 0.6
-        repeat
-
-image Rogue_doggy_pussy_hole_mask_animation1:
-    AlphaMask("images/Rogue_doggy/Rogue_doggy_pussy_hole.png", "images/Rogue_doggy/Rogue_doggy_sex_mask.png")
-    anchor (0.52, 0.69) xzoom 0.6
-    block:
-        ease 1 xzoom 1
-        pause 1
-        ease 3 xzoom 0.6
-        repeat
+        "Rogue_doggy_pussy_mask_animation[action_speed]" pos (0.113, 0.475)
 
 layeredimage Rogue_doggy_pussy_hole_mask_animations:
     always:
-        "Rogue_doggy_pussy_hole_mask_animation[action_speed]"
+        AlphaMask("Rogue_doggy_pussy_hole_animations", "Rogue_doggy_pussy_hole_mask_animations")
 
 image Rogue_doggy_pussy_outer_animation0:
     "images/Rogue_doggy/Rogue_doggy_pussy_heading.png"
@@ -844,7 +824,7 @@ layeredimage Rogue_doggy_pussy_outer_animations:
 
 image Rogue_doggy_pussy_fingering:
     "images/Rogue_doggy/Rogue_doggy_pussy_hole.png"
-    anchor (0.52, 0.69) offset (217, 513) xzoom 0.6
+    anchor (0.52, 0.69) xzoom 0.6
     block:
         ease 1 xzoom 0.9
         pause 1
@@ -853,7 +833,7 @@ image Rogue_doggy_pussy_fingering:
 
 image Rogue_doggy_anus_anal_animation1:
     "images/Rogue_doggy/Rogue_doggy_anus_full_hole.png"
-    anchor (0.52, 0.69) offset (217, 513) zoom 0.5
+    anchor (0.52, 0.69) zoom 0.5
     block:
         ease 0.5 zoom 1
         pause 0.5
@@ -862,26 +842,23 @@ image Rogue_doggy_anus_anal_animation1:
 
 image Rogue_doggy_anus_anal_animation2:
     "images/Rogue_doggy/Rogue_doggy_anus_full_hole.png"
-
     anchor (0.52, 0.69)
 
 image Rogue_doggy_anus_anal_animation3:
     "images/Rogue_doggy/Rogue_doggy_anus_full_hole.png"
-
     anchor (0.52, 0.69)
 
 layeredimage Rogue_doggy_anus_anal_animations:
     always:
-        "Rogue_doggy_anus_anal_animation[action_speed]"
+        "Rogue_doggy_anus_anal_animation[action_speed]" pos (0.113, 0.475)
 
 image Rogue_doggy_anus_mask_animation0:
     "images/Rogue_doggy/Rogue_doggy_anus_mask.png"
-
     anchor (0.52, 0.69)
 
 image Rogue_doggy_anus_mask_animation1:
     "images/Rogue_doggy/Rogue_doggy_anus_mask.png"
-    anchor (0.52, 0.69) offset (217, 513) zoom 0.5
+    anchor (0.52, 0.69) zoom 0.5
     block:
         ease 0.5 zoom 1
         pause 0.5
@@ -890,21 +867,19 @@ image Rogue_doggy_anus_mask_animation1:
 
 image Rogue_doggy_anus_mask_animation2:
     "images/Rogue_doggy/Rogue_doggy_anus_mask.png"
-
     anchor (0.52, 0.69)
 
 image Rogue_doggy_anus_mask_animation3:
     "images/Rogue_doggy/Rogue_doggy_anus_mask.png"
-
     anchor (0.52, 0.69)
 
 layeredimage Rogue_doggy_anus_mask_animations:
     always:
-        "Rogue_doggy_anus_mask_animation[action_speed]"
+        "Rogue_doggy_anus_mask_animation[action_speed]" pos (0.113, 0.475)
 
 image Rogue_doggy_anus_fingering:
     "images/Rogue_doggy/Rogue_doggy_anus_full_hole.png"
-    anchor (0.52, 0.69) offset (217, 513) zoom 0.6
+    anchor (0.52, 0.69) zoom 0.6
     block:
         ease 0.5 zoom 0.75
         pause 0.5
@@ -913,7 +888,7 @@ image Rogue_doggy_anus_fingering:
 
 image Rogue_doggy_anus_fingering_mask:
     "images/Rogue_doggy/Rogue_doggy_anus_mask.png"
-    anchor (0.52, 0.69) offset (217, 513) zoom 0.6
+    pos (0.113, 0.475) anchor (0.52, 0.69) zoom 0.6
     block:
         ease 0.5 zoom 0.75
         pause 0.5

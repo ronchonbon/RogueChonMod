@@ -52,21 +52,23 @@ init -1:
 
     default bg_current = "bg_study"
 
-    default focused_Girl = 0
-    default Partner = 0
+    default focused_Girl = None
+    default Partner = None
     default Party = []
     default Present = []
     default Nearby = []
     default all_Girls = []
     default active_Girls = []
 
+    default Phonebook = []
+    default Keys = []
+    default Rules = []
+
     default total_SEXP = 0
 
     default personal_rooms = ["bg_player"]
 
     default taboo = 0
-    default phonebook = []
-    default keys = []
 
     default action_context = None
     default multi_action = True
@@ -187,6 +189,21 @@ label start:
     #
     # scene background onlayer backdrop
     # scene
+
+    # $ RogueX.change_outfit("nude")
+    #
+    # $ Player.sprite = True
+    # $ action_speed = 3
+    # $ Player.cock_position = "out"
+    # $ primary_action = "hotdog"
+
+    # show Rogue_sprite handjob at sprite_location(0.5)
+    # show Rogue_sprite titjob at sprite_location(0.5)
+    # show Rogue_sprite blowjob at sprite_location(0.5)
+    # show Rogue_sprite sex at sprite_location(0.7)
+    # show Rogue_sprite doggy at sprite_location(0.9)
+
+    # ""
     #
     # $ RogueX.sprite_location = stage_far_far_left
     # $ active_Girls.append(RogueX)

@@ -908,14 +908,14 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
         $ Options = [O]
     else:
 
-        if LauraX not in phonebook:
+        if LauraX not in Phonebook:
             if approval_check(LauraX, 500, "L") or approval_check(LauraX, 250, "I"):
                 ch_l "Oh, here's my number, in case you need back-up."
-                $ phonebook.append(LauraX)
+                $ Phonebook.append(LauraX)
                 return
             elif approval_check(LauraX, 250, "O"):
                 ch_l "If you need to contact me, here's my number."
-                $ phonebook.append(LauraX)
+                $ Phonebook.append(LauraX)
                 return
 
         if "hungry" not in LauraX.traits and (LauraX.event_counter["swallowed"] + LauraX.had_chat[2]) >= 10 and LauraX.location == bg_current:
@@ -1077,7 +1077,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
 
     elif Options[0] == "laura":
 
-        ch_l "Oh, by the way, I also go by \"Laura.\" Laura_sprite Kinney."
+        ch_l "Oh, by the way, I also go by \"Laura.\" Laura Kinney."
         $ LauraX.names.append("Laura")
         menu:
             "Oh, that's nice, I think I'll call you that.":
@@ -1335,7 +1335,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
             ch_l "I had a good nap. It's nice to be somewhere I can just doze off without worry."
         elif D20 == 6:
             $ LauraX.change_face("_perplexed")
-            ch_l "Oh, [LauraX.player_petname]. I think I just saw Emma_sprite Frost staring at Cyclops. That's.. wierd."
+            ch_l "Oh, [LauraX.player_petname]. I think I just saw Emma Frost staring at Cyclops. That's.. wierd."
         elif D20 == 7:
             $ LauraX.change_face("_smile")
             ch_l "I just got a new personal best time in the Danger Room."
@@ -1348,17 +1348,17 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
             ch_l "I have enhanced senses, this shouldn't be so difficult!"
         elif D20 == 10:
             $ LauraX.change_face("_smile")
-            ch_l "Kitty, Rogue_sprite and some of the others asked me if I wanted to go grab some ice cream with them tomorrow."
+            ch_l "Kitty, Rogue and some of the others asked me if I wanted to go grab some ice cream with them tomorrow."
         elif D20 == 11:
             $ LauraX.change_face("_smile")
-            ch_l "I tried out a dance class like Kitty_sprite said. Apparently I'm good at it."
+            ch_l "I tried out a dance class like Kitty said. Apparently I'm good at it."
         elif D20 == 12:
             $ LauraX.change_face("_sad")
-            ch_l "I like talking to Kitty_sprite and the others. It makes me feel, I don't know. . ."
+            ch_l "I like talking to Kitty and the others. It makes me feel, I don't know. . ."
             ch_l "{i}not{/i} like a really dangerous mutant who could kill everyone around me if I flipped out."
         elif D20 == 13:
             $ LauraX.change_face("_smile")
-            ch_l "Kitty_sprite and Rogue_sprite dared me to call Logan \"Dad\". I think we might've given him a heart attack."
+            ch_l "Kitty and Rogue dared me to call Logan \"Dad\". I think we might've given him a heart attack."
         elif D20 == 14:
             $ LauraX.change_face("_sad")
             ch_l "I like going out on missions, but catching up with what's been going on while I'm gone is always a pain."
@@ -1653,7 +1653,7 @@ label Laura_Rename:
 
 label Laura_Personality(counter=0):
     if not LauraX.had_chat[4] or counter:
-        "Since you're doing well in one area, you can convince Laura_sprite to focus on one of the others."
+        "Since you're doing well in one area, you can convince Laura to focus on one of the others."
         "Any time you go over the limit in a given stat, the excess will spill over into the chosen stat instead."
         "This will also impact which personality trait takes priority in dialog."
     menu:
@@ -2293,7 +2293,7 @@ label Laura_wardrobe_menu:
                         $ LauraX.change_outfit()
                 $ LauraX.set_temp_outfit()
                 $ primary_action = None
-                call Switch_chat
+                call switch_chat
                 if Girl != LauraX:
                     ch_p "I wanted to talk about your clothes."
                     call expression Girl.tag +"_Clothes"
@@ -2645,7 +2645,7 @@ label Laura_wardrobe_menu:
 
     menu Laura_Clothes_Legs:
 
-        "Maybe go without the [LauraX.outfit['legs']]." if LauraX.outfit["bottom"]:
+        "Maybe go without the [LauraX.outfit['bottom']]." if LauraX.outfit["bottom"]:
             $ LauraX.change_face("_sexy", 1)
             if LauraX.seen_underwear and LauraX.outfit["underwear"] and approval_check(LauraX, 500, taboo_modifier=5):
                 ch_l "Ok, sure."
@@ -2941,7 +2941,7 @@ label Laura_wardrobe_menu:
                         $ LauraX.outfit["bottom"] = ""
                         pause 0.5
                         $ LauraX.outfit["bottom"] = primary_action
-                        "She pulls off her [LauraX.outfit['legs']] and [line], then pulls the [LauraX.outfit['legs']] back on."
+                        "She pulls off her [LauraX.outfit['bottom']] and [line], then pulls the [LauraX.outfit['bottom']] back on."
                         $ primary_action = 1
                         call Laura_First_Bottomless (1)
                     elif LauraX.outfit["bottom"] == "_skirt":

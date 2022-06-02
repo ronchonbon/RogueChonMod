@@ -915,14 +915,14 @@ label Storm_Chitchat(O=0, Options=["default","default","default"]):
         $ Options = [O]
     else:
 
-        if StormX not in phonebook:
+        if StormX not in Phonebook:
             if approval_check(StormX, 500, "L") or approval_check(StormX, 250, "I"):
                 ch_s "Oh, here's my number, in case you need back-up."
-                $ phonebook.append(StormX)
+                $ Phonebook.append(StormX)
                 return
             elif approval_check(StormX, 250, "O"):
                 ch_s "If you need to contact me, here's my number."
-                $ phonebook.append(StormX)
+                $ Phonebook.append(StormX)
                 return
 
         if "hungry" not in StormX.traits and (StormX.event_counter["swallowed"] + StormX.had_chat[2]) >= 10 and StormX.location == bg_current:
@@ -1648,7 +1648,7 @@ label Storm_Rename:
 
 label Storm_Personality(counter=0):
     if not StormX.had_chat[4] or counter:
-        "Since you're doing well in one area, you can convince Storm_sprite to focus on one of the others."
+        "Since you're doing well in one area, you can convince Storm to focus on one of the others."
         "Any time you go over the limit in a given stat, the excess will spill over into the chosen stat instead."
         "This will also impact which personality trait takes priority in dialog."
     menu:
@@ -2291,7 +2291,7 @@ label Storm_wardrobe_menu:
                         $ StormX.change_outfit()
                 $ StormX.set_temp_outfit()
                 $ primary_action = None
-                call Switch_chat
+                call switch_chat
                 if Girl != StormX:
                     ch_p "I wanted to talk about your clothes."
                     call expression Girl.tag +"_Clothes"
@@ -2680,7 +2680,7 @@ label Storm_wardrobe_menu:
 
     menu Storm_Clothes_Legs:
 
-        "Maybe go without the [StormX.outfit['legs']]." if StormX.outfit["bottom"]:
+        "Maybe go without the [StormX.outfit['bottom']]." if StormX.outfit["bottom"]:
             $ StormX.change_face("_sexy", 1)
             if StormX.taboo <= 20 or StormX.outfit["hose"] in ["_tights", "_pantyhose"] or StormX.underwear_number() >= 5 or StormX in Rules:
                 ch_s "Fine."
@@ -2978,7 +2978,7 @@ label Storm_wardrobe_menu:
                         $ StormX.outfit["bottom"] = ""
                         pause 0.5
                         $ StormX.outfit["bottom"] = primary_action
-                        "She pulls off her [StormX.outfit['legs']] and [line], then pulls the [StormX.outfit['legs']] back on."
+                        "She pulls off her [StormX.outfit['bottom']] and [line], then pulls the [StormX.outfit['bottom']] back on."
                         $ primary_action = 1
                         call Storm_First_Bottomless (1)
                     elif StormX.outfit["bottom"] == "_skirt":

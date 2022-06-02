@@ -2311,45 +2311,38 @@ label PhoneSex(Girl=0):
     $ primary_action = 1
     if Girl == RogueX:
         ch_r "Ok, I think that should get the video running, right?"
-        $ focused_Girl = RogueX
-        call before_masturbation
+        call before_masturbation(RogueX)
         ch_r "Hmm, that was a satisfying phone call. . ."
         ch_r "I gotta go."
     elif Girl == KittyX:
         ch_k "Ok, that's got it up."
         ch_k "[KittyX.Like]how do I look?"
-        $ focused_Girl = KittyX
-        call before_masturbation
+        call before_masturbation(KittyX)
         ch_k "Mmmmm. . . call any time, [KittyX.player_petname]."
         ch_k "[KittyX.Like]ANY time."
     elif Girl == EmmaX:
         ch_e "Now, set it up like so. . ."
         ch_e "There, you should have video up."
-        $ focused_Girl = EmmaX
-        call before_masturbation
+        call before_masturbation(EmmaX)
         ch_e "I do enjoy these little chats. . ."
         ch_e "I need to be going though."
     elif Girl == LauraX:
         ch_l "Ok, video up. . ."
-        $ focused_Girl = LauraX
-        call before_masturbation
+        call before_masturbation(LauraX)
         ch_l "That was fun. Call you later?"
     elif Girl == JeanX:
         ch_j "Ooookay. . . There, video on. . ."
-        $ focused_Girl = JeanX
-        call before_masturbation
+        call before_masturbation(JeanX)
         ch_j "Ok, later."
     elif Girl == StormX:
         ch_s ". . ."
         ch_s "I believe I've got the camera set up, [StormX.player_petname]. . ."
-        $ focused_Girl = StormX
-        call before_masturbation
+        call before_masturbation(StormX)
         ch_s "I enjoyed that, thank you. . ."
     elif Girl == JubesX:
         ch_v "Ok, loaded up. . ."
         ch_v "Looking good?"
-        $ focused_Girl = JubesX
-        call before_masturbation
+        call before_masturbation(JubesX)
         ch_v "Mmmmm. . . call again, [JubesX.player_petname]."
         ch_v "I'll be waiting. . ."
 
@@ -2426,13 +2419,13 @@ label Rogue_First_Topless(Silent=0, Templine=0):
                             $ RogueX.change_face("_sly",2,eyes="_side")
                             $ RogueX.change_stat("obedience", 80, 5)
                             ch_r "Well, I mean they would be quite the handful. . ."
-                            $ RogueX.GirlLikeUp(Templine,20)
+                            $ RogueX.change_likes(Templine,20)
                         elif RogueX.likes[Templine.tag] >= 700:
                             $ RogueX.eyes = "_side"
                             $ RogueX.change_stat("obedience", 80, 5)
                             ch_r "I mean, I guess, if you like that kind of thing. . ."
                         else:
-                            $ RogueX.GirlLikeUp(Templine,-50)
+                            $ RogueX.change_likes(Templine,-50)
                             $ Templine = "bad"
                     elif Templine == KittyX:
                         if RogueX.likes[KittyX.tag] >= 800:
@@ -2529,7 +2522,7 @@ label Kitty_First_Topless(Silent=0, Templine=0):
     $ KittyX.change_stat("inhibition", 70, 15)
     if not Silent:
         $ KittyX.change_face("_bemused", 2)
-        "Kitty_sprite looks a bit shy, and slowly lowers her hands from her chest."
+        "Kitty looks a bit shy, and slowly lowers her hands from her chest."
         ch_k "[KittyX.Like]what do you think?"
         $ KittyX.blushing = "_blush1"
         menu Kitty_First_TMenu:
@@ -2577,26 +2570,26 @@ label Kitty_First_Topless(Silent=0, Templine=0):
                             $ KittyX.change_face("_sly",2,eyes="_side")
                             $ KittyX.change_stat("obedience", 80, 5)
                             ch_k "Yeah, like you just wanna shove your head into there. . ."
-                            $ KittyX.GirlLikeUp(Templine,20)
+                            $ KittyX.change_likes(Templine,20)
                         elif KittyX.likes[Templine.tag] >= 700:
                             $ KittyX.eyes = "_side"
                             $ KittyX.change_stat("obedience", 80, 5)
                             ch_k "I mean, I guess, if you like that kind of thing. . ."
                         else:
-                            $ KittyX.GirlLikeUp(Templine,-50)
+                            $ KittyX.change_likes(Templine,-50)
                             $ Templine = "bad"
                     elif Templine:
                         if KittyX.likes[Templine.tag] >= 800:
                             $ KittyX.change_face("_sly",2,eyes="_side")
                             $ KittyX.change_stat("obedience", 80, 5)
                             ch_k "Yeah, like two ripe apples. . . I mean-"
-                            $ KittyX.GirlLikeUp(Templine,20)
+                            $ KittyX.change_likes(Templine,20)
                         elif KittyX.likes[Templine.tag] >= 700:
                             $ KittyX.eyes = "_side"
                             $ KittyX.change_stat("obedience", 80, 5)
                             ch_k "[KittyX.Like]I guess. . ."
                         else:
-                            $ KittyX.GirlLikeUp(Templine,-50)
+                            $ KittyX.change_likes(Templine,-50)
                             $ Templine = "bad"
 
                     if Templine == "bad":
@@ -2777,26 +2770,26 @@ label Emma_First_Topless(Silent=0, Templine=0):
                             $ EmmaX.change_face("_sly",2,eyes="_side")
                             $ EmmaX.change_stat("obedience", 80, 5)
                             ch_e "They are lovely, but. . ."
-                            $ EmmaX.GirlLikeUp(Templine,20)
+                            $ EmmaX.change_likes(Templine,20)
                         elif EmmaX.likes[Templine.tag] >= 700:
                             $ EmmaX.eyes = "_side"
                             $ EmmaX.change_stat("obedience", 80, 5)
                             ch_e "I don't know about that. . ."
                         else:
-                            $ EmmaX.GirlLikeUp(Templine,-50)
+                            $ EmmaX.change_likes(Templine,-50)
                             $ Templine = "bad"
                     elif Templine:
                         if EmmaX.likes[Templine.tag] >= 800:
                             $ EmmaX.change_face("_sly",2,eyes="_side")
                             $ EmmaX.change_stat("obedience", 80, 5)
                             ch_e "They are rather . . . ripe. . ."
-                            $ EmmaX.GirlLikeUp(Templine,20)
+                            $ EmmaX.change_likes(Templine,20)
                         elif EmmaX.likes[Templine.tag] >= 700:
                             $ EmmaX.eyes = "_side"
                             $ EmmaX.change_stat("obedience", 80, 5)
                             ch_e "I suppose if you prefer that. . ."
                         else:
-                            $ EmmaX.GirlLikeUp(Templine,-50)
+                            $ EmmaX.change_likes(Templine,-50)
                             $ Templine = "bad"
 
 
@@ -2976,13 +2969,13 @@ label Laura_First_Topless(Silent=0, Templine=0):
                             $ LauraX.change_face("_sly",2,eyes="_side")
                             $ LauraX.change_stat("obedience", 80, 5)
                             ch_l "They are kinda huge. . ."
-                            $ LauraX.GirlLikeUp(Templine,20)
+                            $ LauraX.change_likes(Templine,20)
                         elif LauraX.likes[Templine.tag] >= 700:
                             $ LauraX.eyes = "_side"
                             $ LauraX.change_stat("obedience", 80, 5)
                             ch_l "I guess that's true. . ."
                         else:
-                            $ LauraX.GirlLikeUp(Templine,-50)
+                            $ LauraX.change_likes(Templine,-50)
                             $ Templine = "bad"
 
                     elif Templine == KittyX:
@@ -3192,12 +3185,12 @@ label Jean_First_Topless(Silent=0, Templine=0):
                         if JeanX.likes[Templine.tag] >= 700:
                             $ JeanX.change_face("_sly",2,eyes="_side")
                             ch_j "Well, they are. . . heavy. . ."
-                            $ JeanX.GirlLikeUp(Templine,20)
+                            $ JeanX.change_likes(Templine,20)
                         else:
                             $ JeanX.eyes = "_side"
                             ch_j "If you have a thing for udders. . ."
                             $ JeanX.likes[EmmaX.tag] -= 50
-                            $ JeanX.GirlLikeUp(Templine,-50)
+                            $ JeanX.change_likes(Templine,-50)
                             $ Templine = "bad"
 
                     elif Templine == KittyX:
@@ -3214,11 +3207,11 @@ label Jean_First_Topless(Silent=0, Templine=0):
                         if JeanX.likes[Templine.tag] >= 700:
                             $ JeanX.change_face("_sly",2,eyes="_side")
                             ch_j "She is very. . . petite. . ."
-                            $ JeanX.GirlLikeUp(Templine,20)
+                            $ JeanX.change_likes(Templine,20)
                         else:
                             $ JeanX.eyes = "_side"
                             ch_j "they are kinda. . . pointy. . ."
-                            $ JeanX.GirlLikeUp(Templine,-50)
+                            $ JeanX.change_likes(Templine,-50)
                             $ Templine = "bad"
 
 
@@ -3437,13 +3430,13 @@ label Jubes_First_Topless(Silent=0, Templine=0):
                             $ JubesX.change_face("_sly",2,eyes="_side")
                             $ JubesX.change_stat("obedience", 80, 5)
                             ch_v "Well they are really ginormous. . ."
-                            $ JubesX.GirlLikeUp(Templine,20)
+                            $ JubesX.change_likes(Templine,20)
                         elif JubesX.likes[Templine.tag] >= 700:
                             $ JubesX.eyes = "_side"
                             $ JubesX.change_stat("obedience", 80, 5)
                             ch_v "Oh. Well I can't compete there. . ."
                         else:
-                            $ JubesX.GirlLikeUp(Templine,-50)
+                            $ JubesX.change_likes(Templine,-50)
                             $ Templine = "bad"
 
                     elif Templine == KittyX:
@@ -3695,27 +3688,27 @@ label study_Explore:
         else:
             "There doesn't seem to be anything more of interest in here."
     elif line == "middle":
-        if "all" not in keys:
+        if "all" not in Keys:
             "Under a few trinkets, you find a small keyring."
             "[[Keyring acquired.]"
-            if "Xavier" not in keys:
-                $ keys.append("Xavier")
-            if RogueX not in keys:
-                $ keys.append(RogueX)
-            if KittyX not in keys:
-                $ keys.append(KittyX)
-            if EmmaX not in keys:
-                $ keys.append(EmmaX)
-            if LauraX not in keys:
-                $ keys.append(LauraX)
-            if JeanX not in keys:
-                $ keys.append(JeanX)
-            if StormX not in keys:
-                $ keys.append(StormX)
-            if JubesX not in keys:
-                $ keys.append(JubesX)
-            if "all" not in keys:
-                $ keys.append("all")
+            if "Xavier" not in Keys:
+                $ Keys.append("Xavier")
+            if RogueX not in Keys:
+                $ Keys.append(RogueX)
+            if KittyX not in Keys:
+                $ Keys.append(KittyX)
+            if EmmaX not in Keys:
+                $ Keys.append(EmmaX)
+            if LauraX not in Keys:
+                $ Keys.append(LauraX)
+            if JeanX not in Keys:
+                $ Keys.append(JeanX)
+            if StormX not in Keys:
+                $ Keys.append(StormX)
+            if JubesX not in Keys:
+                $ Keys.append(JubesX)
+            if "all" not in Keys:
+                $ Keys.append("all")
         else:
             "There doesn't seem to be anything interesting in here."
     elif line == "right":

@@ -66,7 +66,7 @@ label meet_Kitty:
     if flag:
         $ KittyX.change_face("_smile", 1)
 
-        ch_k "Mine's Kitty! Kitty_sprite Pryde. Nice to meet you!"
+        ch_k "Mine's Kitty! Kitty Pryde. Nice to meet you!"
     else:
         $ KittyX.change_face("_sadside", 1)
 
@@ -273,7 +273,7 @@ label Kitty_Key:
     ch_k "So you've[KittyX.like]been dropping by a lot lately, I figured you might want a key. . ."
     ch_p "Thanks."
     $ KittyX.arm_pose = 1
-    $ keys.append(KittyX)
+    $ Keys.append(KittyX)
     $ KittyX.event_happened[0] = 1
     return
 
@@ -471,7 +471,7 @@ label Kitty_Love:
         $ KittyX.change_face("_perplexed", 2)
         $ KittyX.eyes = "_surprised"
         ch_k "Never mind!"
-        "Kitty_sprite dashes off and phases through the nearest wall."
+        "Kitty dashes off and phases through the nearest wall."
         hide Kitty_sprite with easeoutright
         call remove_girl (KittyX)
         return
@@ -1042,7 +1042,7 @@ label Kitty_Sub_Asked:
                             $ KittyX.change_stat("obedience", 90, -10)
                             $ KittyX.change_stat("obedience", 200, -10)
                             $ KittyX.change_stat("inhibition", 50, -15)
-                            "Kitty_sprite sighs and rolls her eyes."
+                            "Kitty sighs and rolls her eyes."
                             $ KittyX.change_face("_angry", 1)
                             $ KittyX.eyes = "_side"
                             ch_k "You really don't learn, do you?"
@@ -1352,7 +1352,7 @@ label Kitty_sexfriend:
                         $ KittyX.change_stat("obedience", 50, 10)
                         $ KittyX.change_stat("inhibition", 200, 50)
                         $ KittyX.change_stat("lust", 200, 5)
-                        "Kitty_sprite leans in and gives you a gentle kiss on the cheek."
+                        "Kitty leans in and gives you a gentle kiss on the cheek."
                         ch_k "I can't wait to get started, [KittyX.player_petname]."
                     "That may be the sluttiest thing I've ever heard in my life.":
 
@@ -1940,7 +1940,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 else:
                     $ line = "noway"
 
-        ". . . [Girl.outfit['legs']]?" if Girl.outfit["bottom"]:
+        ". . . [Girl.outfit['bottom']]?" if Girl.outfit["bottom"]:
             if Girl.outfit["underwear"] or Girl.outfit["hose"] == "_tights":
 
                 $ Shy = 2
@@ -2072,7 +2072,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
         $ Girl.outfit["underwear"] = ""
         call expression Girl.tag + "_First_Bottomless" pass (1)
         if Girl.outfit["bottom"]:
-            "She reaches down through [Girl.name]'s [Girl.outfit['legs']] and snags her [line]."
+            "She reaches down through [Girl.name]'s [Girl.outfit['bottom']] and snags her [line]."
         elif Girl.outfit["hose"]:
             "She reaches down through [Girl.name]'s [Girl.outfit['hose']] and snags her [line]."
         else:
@@ -2082,7 +2082,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
         $ Girl.outfit["hose"] = ""
         call expression Girl.tag + "_First_Bottomless" pass (1)
         if Girl.outfit["bottom"]:
-            "She reaches down through [Girl.name]'s [Girl.outfit['legs']] and snags her [line]."
+            "She reaches down through [Girl.name]'s [Girl.outfit['bottom']] and snags her [line]."
         else:
             "She reaches out and snags [Girl.name]'s [line], tugging them free."
 

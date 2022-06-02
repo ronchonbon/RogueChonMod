@@ -250,8 +250,10 @@ transform show_handjob_animation(location):
     ease 0.5 pos (location, 0.1) xzoom 2.0 yzoom 2.0
 
 label show_handjob(Girl, orgasm = False):
-    if renpy.showing(Girl.tag + " handjob"):
+    if renpy.showing(Girl.tag + "_sprite handjob"):
         return
+
+    $ action_speed = 0
 
     # if Girl == RogueX:
     #     show Rogue_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
@@ -309,8 +311,10 @@ transform show_titjob_animation(location):
     ease 0.5 pos (location, 0.1) xzoom 2.0 yzoom 2.0
 
 label show_titjob(Girl, orgasm = False):
-    if renpy.showing(Girl.tag + " titjob"):
+    if renpy.showing(Girl.tag + "_sprite titjob"):
         return
+
+    $ action_speed = 0
 
     # if Girl == RogueX:
     #     show Rogue_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
@@ -392,8 +396,10 @@ transform show_blowjob_animation(location):
     ease 0.5 pos (location, 0.1) xzoom 2.0 yzoom 2.0
 
 label show_blowjob(Girl, orgasm = False):
-    if renpy.showing(Girl.tag + " blowjob"):
+    if renpy.showing(Girl.tag + "_sprite blowjob"):
         return
+
+    $ action_speed = 0
 
     # if Girl == RogueX:
     #     show Rogue_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
@@ -467,8 +473,10 @@ label show_sex(Girl, action):
 
         return
 
-    if renpy.showing(Girl.tag + " sex"):
+    if renpy.showing(Girl.tag + "_sprite sex"):
         return
+
+    $ action_speed = 0
 
     if Girl == RogueX:
         show Rogue_sprite sex zorder 150 at sprite_location(stage_center)
@@ -488,8 +496,10 @@ label show_sex(Girl, action):
     return
 
 label show_doggy(Girl):
-    if renpy.showing(Girl.tag + " doggy"):
+    if renpy.showing(Girl.tag + "_sprite doggy"):
         return
+
+    $ action_speed = 0
 
     if Girl == RogueX:
         show Rogue_sprite doggy zorder 150 at sprite_location(stage_center)
@@ -584,17 +594,15 @@ label lesbian_launch(Girl):
 
 image Girl_hand:
     "images/UI_GirlHand.png"
-
     anchor (0.5, 0.5)
 
 image Girl_finger:
     "images/UI_GirlFinger.png"
-
     anchor (0.5, 0.5)
 
 image Girl_fondle_thigh:
     "Girl_hand"
-    pos (210, 730) alpha 0.5 zoom 0.6
+    alpha 0.5 zoom 0.6
     rotate 100
     parallel:
         pause 0.5
@@ -610,6 +618,7 @@ image Girl_fondle_thigh:
         repeat
 
 image Girl_fondle_breast_left_animation:
+    "Girl_hand"
     alpha 0.5 zoom 0.6
     rotate -20
     block:
@@ -644,15 +653,15 @@ image Girl_fondle_pussy_animation:
             ease 1 rotate 195
             pause 0.25
         choice:
-            ease 0.5 rotate 205 pos (-5, 5)
-            ease 0.75 rotate 200 pos (-5, 10)
-            ease 0.5 rotate 205 pos (-5, 5)
-            ease 0.75 rotate 200 pos (-5, 10)
+            ease 0.5 rotate 205 offset (-5, 5)
+            ease 0.75 rotate 200 offset (-5, 10)
+            ease 0.5 rotate 205 offset (-5, 5)
+            ease 0.75 rotate 200 offset (-5, 10)
         choice:
-            ease 0.3 rotate 205 pos (-5, 5)
-            ease 0.3 rotate 200 pos (-5, 15)
-            ease 0.3 rotate 205 pos (-5, 5)
-            ease 0.3 rotate 200 pos (-5, 15)
+            ease 0.3 rotate 205 offset (-5, 5)
+            ease 0.3 rotate 200 offset (-5, 15)
+            ease 0.3 rotate 205 offset (-5, 5)
+            ease 0.3 rotate 200 offset (-5, 15)
         repeat
 
 image Girl_finger_pussy_animation:
@@ -740,7 +749,7 @@ transform blowjob_deepthroat_body:
         repeat
 
 transform blowjob_mouth_animation2:
-    pos (0.165, 0.521) anchor (0.4, 0.6) zoom 0.90
+    zoom 0.90
     block:
         pause 0.10
         easeout 0.55 zoom 0.9
@@ -754,7 +763,7 @@ transform blowjob_mouth_animation2:
         repeat
 
 transform blowjob_face_mask_animation2:
-    pos (0.445, 0.616) anchor (0.45, 0.6) zoom 0.90
+    zoom 0.90
     block:
         pause 0.10
         easeout 0.55 zoom 0.9

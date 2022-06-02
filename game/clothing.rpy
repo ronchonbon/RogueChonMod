@@ -104,7 +104,7 @@ label set_clothes_schedule(Girl):
 
                 menu:
                     "Pick an outfit to wear":
-                        call choose_outfit
+                        call choose_outfit(Girl)
 
                         if counter > 1:
                             $ Girl.clothing[0] = _return
@@ -541,7 +541,7 @@ label Private_outfit(Girl):
     if "comfy" in Girl.recent_history or "comfy" in Girl.traits or Girl.outfit_name == Girl.clothing[9]:
         call alternate_clothes(Girl, 9)
 
-        $ Girl.change_outfit(outfit_changed = True)
+        $ Girl.change_outfit()
     elif "no_comfy" in Girl.recent_history:
         pass
     elif approval_check(Girl, 1200, "LI") and (2*Girl.inhibition) >= (Girl.love + Girl.obedience +100):
@@ -570,7 +570,7 @@ label Private_outfit(Girl):
 
         call alternate_clothes(Girl, 9)
 
-        $ Girl.change_outfit(outfit_changed = True)
+        $ Girl.change_outfit()
         $ Girl.recent_history.append("comfy")
     else:
         call shift_focus (Girl)
@@ -616,7 +616,7 @@ label Private_outfit(Girl):
 
                 call alternate_clothes (Girl, 9)
 
-                $ Girl.change_outfit(outfit_changed = True)
+                $ Girl.change_outfit()
                 $ Girl.recent_history.append("comfy")
             "No thanks.":
                 if Girl == RogueX:
@@ -1321,7 +1321,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             menu:
                 extend ""
                 "Ok then, you can put your normal clothes back on.":
-                    $ Girl.change_outfit(outfit_changed = True)
+                    $ Girl.change_outfit()
                     hide dress_screen
                 "Ok, we can keep tweaking it.":
                     pass
@@ -1655,22 +1655,28 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
 
         if Custom == 5:
-            $ Girl.second_custom_outfit = [2,Girl.outfit["gloves"],Girl.outfit["bottom"],Girl.outfit["top"],Girl.outfit["neck"],Girl.outfit["bra"],Girl.outfit["underwear"],Girl.outfit["front_outer_accessory"],Girl.outfit["hair"],Girl.outfit["hose"],Tempshame]
+            $ Girl.second_custom_outfit = Girl.outfit.copy()
+            $ Girl.second_custom_outfit["shame"] = Tempshame
             $ Girl.second_custom_outfit["outfit_active"] = 2 if Agree else 1
         elif Custom == 6:
-            $ Girl.third_custom_outfit = [2,Girl.outfit["gloves"],Girl.outfit["bottom"],Girl.outfit["top"],Girl.outfit["neck"],Girl.outfit["bra"],Girl.outfit["underwear"],Girl.outfit["front_outer_accessory"],Girl.outfit["hair"],Girl.outfit["hose"],Tempshame]
+            $ Girl.third_custom_outfit = Girl.outfit.copy()
+            $ Girl.third_custom_outfit["shame"] = Tempshame
             $ Girl.third_custom_outfit["outfit_active"] = 2 if Agree else 1
         elif Custom == 4:
             if Agree:
-                $ Girl.gym_clothes = [2,Girl.outfit["gloves"],Girl.outfit["bottom"],Girl.outfit["top"],Girl.outfit["neck"],Girl.outfit["bra"],Girl.outfit["underwear"],Girl.outfit["front_outer_accessory"],Girl.outfit["hair"],Girl.outfit["hose"],Tempshame]
+                $ Girl.gym_clothes = Girl.outfit.copy()
+                $ Girl.gym_clothes["shame"] = Tempshame
         elif Custom == 7:
-            $ Girl.sleepwear = [2,Girl.outfit["gloves"],Girl.outfit["bottom"],Girl.outfit["top"],Girl.outfit["neck"],Girl.outfit["bra"],Girl.outfit["underwear"],Girl.outfit["front_outer_accessory"],Girl.outfit["hair"],Girl.outfit["hose"],Tempshame]
+            $ Girl.sleepwear = Girl.outfit.copy()
+            $ Girl.sleepwear["shame"] = Tempshame
             $ Girl.sleepwear["outfit_active"] = 2 if Agree else 1
         elif Custom == 10:
             if Agree:
-                $ Girl.swimwear = [2,Girl.outfit["gloves"],Girl.outfit["bottom"],Girl.outfit["top"],Girl.outfit["neck"],Girl.outfit["bra"],Girl.outfit["underwear"],Girl.outfit["front_outer_accessory"],Girl.outfit["hair"],Girl.outfit["hose"],Tempshame]
+                $ Girl.swimwear = Girl.outfit.copy()
+                $ Girl.swimwear["shame"] = Tempshame
         elif Custom == 3:
-            $ Girl.first_custom_outfit = [2,Girl.outfit["gloves"],Girl.outfit["bottom"],Girl.outfit["top"],Girl.outfit["neck"],Girl.outfit["bra"],Girl.outfit["underwear"],Girl.outfit["front_outer_accessory"],Girl.outfit["hair"],Girl.outfit["hose"],Tempshame]
+            $ Girl.first_custom_outfit = Girl.outfit.copy()
+            $ Girl.first_custom_outfit["shame"] = Tempshame
             $ Girl.first_custom_outfit["outfit_active"] = 2 if Agree else 1
         else:
             "Tell Oni Custom outfit was [Custom]"
@@ -1717,7 +1723,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
         pass
     elif Girl.location == "bg_dangerroom" and Girl.outfit_name == "gym_clothes":
-        $ Girl.change_outfit("gym_clothes",outfit_changed = 1)
+        $ Girl.change_outfit("gym_clothes")
     elif not Girl.taboo:
         pass
     elif Girl.outfit_name == "swimwear" and bg_current == "bg_pool":
@@ -1752,7 +1758,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
         $ Girl.add_word(1,"modesty", "modesty")
         $ Girl.wet = False
-        $ Girl.change_outfit(outfit_changed = True)
+        $ Girl.change_outfit()
         if Girl == RogueX:
             ch_r "That wasn't really \"outdoor ready\"."
         elif Girl == KittyX:

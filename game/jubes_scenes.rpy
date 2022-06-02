@@ -1093,7 +1093,7 @@ label Jubes_Key:
     ch_v "We've been sleeping together for a bit and. . ."
     ch_v "Here."
     "She takes your hand and hands you her room key."
-    $ keys.append(JubesX)
+    $ Keys.append(JubesX)
     $ JubesX.event_happened[0] = 1
     ch_p "Thanks."
     return

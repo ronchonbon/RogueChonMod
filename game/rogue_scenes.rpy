@@ -332,7 +332,7 @@ label tour_end:
         ch_r "Maybe I'll see you around though. Here's my number, you can give me a call."
 
         if not simulation:
-            $ phonebook.append(RogueX)
+            $ Phonebook.append(RogueX)
 
     $ RogueX.outfit["gloves"] = "_gloves"
     $ RogueX.arm_pose = 1
@@ -466,7 +466,7 @@ label Rogue_Key:
     ch_r "Hey, you've been sleeping over a lot, I figured you might want a key?"
     ch_p "Thanks."
     $ RogueX.arm_pose = 1
-    $ keys.append(RogueX)
+    $ Keys.append(RogueX)
     $ RogueX.event_happened[0] = 1
     return
 
@@ -524,7 +524,7 @@ label Rogue_BF:
         extend ""
         "I'd love to!":
             $ RogueX.change_stat("love", 200, 30)
-            "Rogue_sprite leaps in and kisses you deeply."
+            "Rogue leaps in and kisses you deeply."
             $ RogueX.change_face("_kiss")
             $ RogueX.action_counter["kiss"] += 1
         "Um, ok.":
@@ -538,7 +538,7 @@ label Rogue_BF:
                 extend ""
                 "Sure":
                     $ RogueX.change_stat("love", 200, 30)
-                    "Rogue_sprite leaps in and kisses you deeply."
+                    "Rogue leaps in and kisses you deeply."
                     $ RogueX.change_face("_kiss")
                     $ RogueX.action_counter["kiss"] += 1
                 "She wouldn't understand." if len(Player.Harem) == 1:
@@ -661,7 +661,7 @@ label Rogue_Love:
         $ RogueX.brows = "_surprised"
         ch_r "I love you too!"
         $ RogueX.change_face("_kiss")
-        "Rogue_sprite leaps into your arms and gives you a kiss."
+        "Rogue leaps into your arms and gives you a kiss."
         $ RogueX.change_face("_sexy",1)
         $ RogueX.action_counter["kiss"] += 1
     else:
@@ -1052,7 +1052,7 @@ label Rogue_Obed_Jerk:
 
 
 
-label Rogue_sexfriend:
+label Rogue_Sexfriend:
     call shift_focus (RogueX)
     $ RogueX.daily_history.append("relationship")
     if RogueX in Player.Harem:
@@ -1124,9 +1124,9 @@ label Rogue_sexfriend:
                     "Oh, ok, sure.":
                         "[RogueX.name] is a bit put off, but grabs you in a big hug anyway."
                     "Oh, no thanks. Not interested.":
-                        jump Rogue_sexfriend_Jerk
+                        jump Rogue_Sexfriend_Jerk
             "Nah, you're on your own.":
-                jump Rogue_sexfriend_Jerk
+                jump Rogue_Sexfriend_Jerk
         $ RogueX.change_face("_sexy")
         ch_r "Now, sex friend. . . how would you like to celebrate?"
         if simulation:
@@ -1137,7 +1137,7 @@ label Rogue_sexfriend:
     $ approval_bonus = 0
     return
 
-label Rogue_sexfriend_Jerk:
+label Rogue_Sexfriend_Jerk:
     $ RogueX.change_face("_sad", 1)
     $ RogueX.daily_history.append("relationship")
     ch_r "Your loss."
@@ -1235,7 +1235,7 @@ label Rogue_Fuckbuddy:
                     ch_r "I mean, you know, we'd fuck. And be buddies. Both of those."
                     "Oh, ok, sure.":
                         call kiss_launch(RogueX)
-                        "Rogue_sprite laughs and tackles you into a hug."
+                        "Rogue laughs and tackles you into a hug."
                         call reset_position(RogueX)
                     "Oh, no, not my style.":
                         jump Rogue_Fuckbuddy_Jerk

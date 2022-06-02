@@ -120,7 +120,7 @@ label chat:
                     ch_v "Hey, what can I do for ya, [Girl.player_petname]?"
 
             call chat_menu
-        elif Girl in phonebook:
+        elif Girl in Phonebook:
             if Girl.location == "hold":
                 "She doesn't seem to be picking up."
             else:
@@ -368,11 +368,11 @@ label chat_menu:
                             call expression Girl.tag + "_Monogamy"
                         "Never mind.":
                             pass
-                "Could I get your number?" if Girl not in phonebook:
+                "Could I get your number?" if Girl not in Phonebook:
                     if Girl == EmmaX and approval_check(Girl, 800, "LI"):
                         ch_e "I don't see why not."
 
-                        $ phonebook.append(Girl)
+                        $ Phonebook.append(Girl)
                     elif Girl != EmmaX and (approval_check(Girl, 400, "L") or approval_check(Girl, 200, "I")):
                         if Girl == RogueX:
                             ch_r "Sure, I suppose."
@@ -387,7 +387,7 @@ label chat_menu:
                         elif Girl == JubesX:
                             ch_v "Sure, yeah."
 
-                        $ phonebook.append(Girl)
+                        $ Phonebook.append(Girl)
                     elif approval_check(Girl, 200, "O",Alt=[[EmmaX],500-EmmaX.inhibition]):
                         if Girl == RogueX:
                             ch_r "If you want it, I guess."
@@ -404,7 +404,7 @@ label chat_menu:
                         elif Girl == JubesX:
                             ch_v "I guess?"
 
-                        $ phonebook.append(Girl)
+                        $ Phonebook.append(Girl)
                     else:
                         if Girl == RogueX:
                             ch_r "I don't really want you calling me."
@@ -587,7 +587,7 @@ label switch_chat:
             return
 
     if Girl.location != bg_current:
-        if Girl in phonebook:
+        if Girl in Phonebook:
             "You give [Girl.name] a call."
             if Girl == EmmaX and "classcaught" not in EmmaX.history:
                 ch_e "I don't have time to talk to students right now."
