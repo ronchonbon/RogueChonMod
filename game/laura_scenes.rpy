@@ -9,6 +9,8 @@ label meet_Laura:
 
     call clear_the_room("all", Passive = False, Silent = True)
 
+    "As you approach the Danger Room, you hear a ferocious clanging of metal."
+
     hide black_screen onlayer black
 
     call shift_focus(LauraX)
@@ -19,7 +21,6 @@ label meet_Laura:
     $ LauraX.name = "???"
     $ LauraX.names.remove("Laura")
 
-    "As you approach the Danger Room, you hear a ferocious clanging of metal."
     "Just as you pass through the door, a robotic arm smashes into your face."
 
     show black_screen onlayer black with vpunch
@@ -322,12 +323,10 @@ label meet_Laura:
 
     "She dashes out of the room, headed for the hangar."
 
-    $ LauraX.pubes_counter = 3
+    $ LauraX.history.append("met")
     $ LauraX.to_do.append("mission")
 
     $ round -= 10
-
-    $ bg_current = "bg_dangerroom"
 
     call shift_focus (RogueX)
 

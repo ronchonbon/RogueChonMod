@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/locations.rpy", line 778: is not terminated with a newline. (Check strings and parenthesis.)
-(Perhaps you left out a " at the end of the first line.)
-        "This is the Danger Room.
+File "game/misc_animations.rpy", line 167: Line is indented, but the preceding ATL statement does not expect a block. Please check this line's indentation.
+    Null()
+    ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Thu Jun  2 14:19:52 2022
+Fri Jun  3 00:42:02 2022

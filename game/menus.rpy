@@ -574,7 +574,7 @@ label begging_menu(Girl, action):
                             return "blowjob"
                         "Nah, it's all about dem titties.":
                             $ line = "no_BJ"
-                if approval:
+                elif approval:
                     $ Girl.change_stat("inhibition", 80, 1)
                     $ Girl.change_stat("inhibition", 60, 3)
                     $ Girl.change_face("_confused", 1)
@@ -941,7 +941,7 @@ label kiss_menu(Girl):
 
 label masturbation_menu(Girl):
     menu:
-        "Keep Watching.":
+        "Keep watching.":
             pass
         "[Girl.name]. . .[[jump in]" if "unseen" not in Girl.recent_history and Girl.location == bg_current:
             "[Girl.name] slows what she's doing with a sly grin."
@@ -1265,6 +1265,8 @@ label handjob_menu(Girl, action):
         "Turn her around." if action == "footjob":
             $ Girl.pose = "doggy" if Girl.pose != "doggy" else "sex"
 
+            call show_sex(Girl, action)
+
             "You turn her around. . ."
         "View" if action in ["dildo_pussy", "dildo_ass"]:
             call shift_view(Girl, "menu")
@@ -1427,6 +1429,8 @@ label sex_menu(Girl, action):
             $ round -= 1
         "Turn her around":
             $ Girl.pose = "doggy" if Girl.pose != "doggy" else "sex"
+
+            call show_sex(Girl, action)
 
             "You turn her around. . ."
         "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:

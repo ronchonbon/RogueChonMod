@@ -784,23 +784,10 @@ label event_calls(event_Girls=[]):
 
             if round >= 70:
                 $ EmmaX.location = "bg_classroom"
-    else:
-        #if day >= 9 and "met" not in EmmaX.history and "traveling" in Player.recent_history and bg_current == "bg_classroom" and weekday < 5:
-        if day >= 1 and "met" not in EmmaX.history and "traveling" in Player.recent_history and bg_current == "bg_classroom" and weekday < 5:
-            jump meet_Emma
-
-            return
 
     if LauraX in active_Girls:
         pass
     elif "met" not in LauraX.history and "traveling" in Player.recent_history:
-        if bg_current == "bg_dangerroom":
-            # if day >= 12 and "dress0" not in LauraX.history and "mission" not in LauraX.to_do:
-            if day >= 1 and "dress0" not in LauraX.history and "mission" not in LauraX.to_do:
-                call meet_Laura
-
-                return
-
         if time_index < 3 and "met" in KittyX.history:
             if "dress0" in LauraX.history:
                 call Laura_Dressup
@@ -826,18 +813,6 @@ label event_calls(event_Girls=[]):
                 call Storm_Poolnight
 
                 return
-    elif "met" not in StormX.history and "met" in JeanX.history:
-        if bg_current == "bg_player" and "attic" not in Player.history and "noise" not in Player.history:
-            call StormMeetPrelude
-
-            return
-        elif bg_current == "bg_classroom" and "noise" in Player.history and "traveling" in Player.recent_history:
-            call StormMeetAsk
-
-            return
-        elif bg_current == "bg_player" and time_index < 2 and 0 < StormX.broken_up[0] <= 101 and "traveling" in Player.recent_history:
-            call StormMeetWater
-            jump player_room
 
     if JubesX in active_Girls:
         if time_index < 3 and "sunshine" not in JubesX.history and "traveling" in Player.recent_history and bg_current in ("bg_classroom","bg_dangerroom","bg_campus","bg_pool"):
@@ -1038,7 +1013,7 @@ label display_girl(Girl, check_if_dressed = True, reset_actions = True, x_positi
         $ Girl.wet = False
 
     if check_if_dressed:
-        call outfitShame (Girl)
+        call outfitShame(Girl)
 
     if reset_actions:
         call stop_all_actions
@@ -1094,22 +1069,28 @@ label set_the_scene(character = True, entering = False, check_if_dressed = True,
     if character:
         call check_who_is_present
 
-        $ temp_Girls = all_Girls[:]
+        if Present:
+            $ temp_Girls = Present[:]
 
-        while temp_Girls:
-            if focused_Girl != temp_Girls[0]:
-                $ temp_Girls[0].sprite_location = stage_right
-                $ temp_Girls[0].sprite_layer = 75
+            $ offset = 0.5/(len(Present) + 1)
+            $ total_offset = offset
 
-            call display_girl(temp_Girls[0], check_if_dressed = check_if_dressed, reset_actions = False)
+            while temp_Girls:
+                if temp_Girls[0] != focused_Girl:
+                    $ temp_Girls[0].sprite_location = stage_center + total_offset
+                    $ temp_Girls[0].sprite_layer = 75
 
-            $ temp_Girls.remove(temp_Girls[0])
+                    $ total_offset += offset
 
-        if focused_Girl.location == bg_current:
-            $ focused_Girl.sprite_location = stage_center
-            $ focused_Girl.sprite_layer = 100
+                    call display_girl(temp_Girls[0], check_if_dressed = check_if_dressed, reset_actions = False)
 
-            call display_girl(focused_Girl, check_if_dressed = check_if_dressed, reset_actions = False)
+                $ temp_Girls.remove(temp_Girls[0])
+
+            if focused_Girl.location == bg_current:
+                $ focused_Girl.sprite_location = stage_center
+                $ focused_Girl.sprite_layer = 100
+
+                call display_girl(focused_Girl, check_if_dressed = check_if_dressed, reset_actions = False)
 
         if bg_current == "bg_study" and time_index < 3:
             show Xavier_sprite zorder 25 at sprite_location(stage_left)
@@ -4127,7 +4108,7 @@ label Sex_Dialog(Primary=focused_Girl, Secondary=0, TempFocus=0, PrimaryLust=0, 
 
 
     call Girls_taboo (Primary)
-    if not primary_action:
+    if not primary_action and not girl_offhand_action:
         return
 
     $ Secondary = Partner

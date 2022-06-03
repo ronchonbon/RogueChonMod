@@ -120,17 +120,26 @@ label masturbate(Girl, context = None):
                 if _return == "accepted":
                     $ accepted = True
 
-            if approval >= 2:
-                call action_accepted(Girl, "masturbation")
+            if not accepted:
+                if approval >= 2:
+                    call action_accepted(Girl, "masturbation")
 
-                $ accepted = True
-            else:
-                call action_disapproved(Girl, "masturbation")
+                    $ accepted = True
+                else:
+                    call action_disapproved(Girl, "masturbation")
+
+                    if _return != "rejected":
+                        $ action = _return
+
+                        $ accepted = True
 
         if not accepted:
             call action_rejected(Girl, "masturbation")
 
             return "back"
+
+        if "_angry" in Girl.recent_history:
+            return "stop"
 
         call before_masturbation(Girl)
 
@@ -242,13 +251,13 @@ label masturbation_cycle(Girl):
 
                     $ Player.focus = 95
 
-                    if Girl.location == bg_current:
+                    if Girl.location == bg_current or (bg_current == "bg_classroom" and Girl.location == "bg_teacher"):
                         return "interrupt"
 
             if Girl.lust >= 100:
                 call Girl_Cumming (Girl)
 
-                if Girl.location == bg_current:
+                if Girl.location == bg_current or (bg_current == "bg_classroom" and Girl.location == "bg_teacher"):
                     return "interrupt"
 
             if orgasmed:
@@ -294,6 +303,8 @@ label masturbation_cycle(Girl):
 label after_masturbation(Girl, context):
     if context == "interrupt":
         $ Girl.change_face("_surprised", 1)
+
+        $ girl_offhand_action = None
 
         "[Girl.name] stops what she's doing with a start, eyes wide."
 

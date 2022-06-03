@@ -260,23 +260,13 @@ label are_girls_angry(Girls = 0):
 
     return
 
-label check_who_is_present(hold = True):
-    while len(Party) > 2:
-        $ Party.remove(Party[2])
-
+label check_who_is_present:
     $ Present = Party[:] if Party else []
 
-    $ temp_Girls = all_Girls[:]
-
-    $ renpy.random.shuffle(temp_Girls)
-
     python:
-        for G in temp_Girls:
+        for G in all_Girls:
             if G not in Present and G.location == bg_current:
                 Present.append(G)
-
-    while len(Present) > 2:
-        call remove_girl(Present[2], hold = hold)
 
     if Present and focused_Girl not in Present:
         $ renpy.random.shuffle(Present)

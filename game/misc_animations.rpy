@@ -144,28 +144,26 @@ layeredimage background:
     if entering or bg_current != "bg_classroom":
         Null()
     elif EmmaX.location == "bg_teacher" and "frisky" in EmmaX.recent_history:
-        "Emma_Behind_Podium"
+        "Emma_sprite standing" pos (0.234, 0.176) zoom 0.387
     elif EmmaX.location == "bg_teacher":
-        "Emma_At_Podium"
+        "Emma_sprite standing" pos (0.349, 0.167) zoom 0.387
     elif EmmaX.location == "bg_desk":
-        "Emma_At_Desk"
+        "Emma_sprite standing" pos (0.333, 0.167) zoom 0.387
 
     if entering or bg_current != "bg_classroom":
         Null()
     elif StormX.location == "bg_teacher" and "frisky" in StormX.recent_history:
-        "Storm_Behind_Podium"
+        "Storm_sprite standing" pos (0.234, 0.176) zoom 0.387
     elif StormX.location == "bg_teacher":
-        "Storm_At_Podium"
+        "Storm_sprite standing" pos (0.349, 0.167) zoom 0.387
     elif StormX.location == "bg_desk":
-        "Storm_At_Desk"
+        "Storm_sprite standing" pos (0.333, 0.167) zoom 0.387
 
     if bg_current == "bg_classroom":
         "images/background/bg_classroom_front.png"
 
     if bg_current == "bg_classroom" and time_index < 2 and weekday < 5:
         "images/background/bg_classroom_pupils.png"
-
-    zoom 1.34
 
 transform dripping(x_offset = 0, start = 0, transparency = 1.0):
     offset (x_offset, start) alpha transparency

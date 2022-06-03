@@ -97,7 +97,7 @@ label forced_rejected_changes(Girl, action):
         $ Girl.change_stat("love", 200, -10)
     elif action in ["fondle_pussy", "eat_pussy", "finger_ass", "eat_ass", "handjob", "footjob", "titjob", "blowjob"]:
         $ Girl.change_stat("love", 200, -15)
-    elif action in ["masturbation". "dildo_pussy", "dildo_ass", "sex", "anal"]:
+    elif action in ["masturbation", "dildo_pussy", "dildo_ass", "sex", "anal"]:
         $ Girl.change_stat("love", 200, -20)
 
     return

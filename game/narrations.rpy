@@ -1511,7 +1511,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ TempLust += 1
 
 
-    elif primary_action == "masturbation":
+    elif not primary_action and girl_offhand_action == "fondle_pussy":
         call Girl_Self_lines (GirlA)
         if "unseen" not in GirlA.recent_history:
             if offhand_action == "jerking_off" or "cockout" in Player.recent_history:

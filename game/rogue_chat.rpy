@@ -1822,7 +1822,7 @@ label Rogue_Leave(approval_bonus=approval_bonus):
         elif RogueX.location == "bg_classroom":
             ch_r "I'm headed to class right now, [RogueX.player_petname]."
         elif RogueX.location == "bg_dangerroom":
-            ch_r "I'm hitting the danger room, [RogueX.player_petname]."
+            ch_r "I'm hitting the Danger Room, [RogueX.player_petname]."
         elif RogueX.location == "bg_campus":
             ch_r "I'm going to hang out on campus, [RogueX.player_petname]."
         elif RogueX.location == "bg_rogue":
@@ -1862,7 +1862,7 @@ label Rogue_Leave(approval_bonus=approval_bonus):
     if RogueX.location == "bg_classroom":
         ch_r "I'm headed to class right now, [RogueX.player_petname], you could join me."
     elif RogueX.location == "bg_dangerroom":
-        ch_r "I'm hitting the danger room, [RogueX.player_petname], care to join me?"
+        ch_r "I'm hitting the Danger Room, [RogueX.player_petname], care to join me?"
     elif RogueX.location == "bg_campus":
         ch_r "I'm going to hang out on campus, [RogueX.player_petname], want to hang with me?"
     elif RogueX.location == "bg_rogue":

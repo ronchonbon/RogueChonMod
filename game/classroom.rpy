@@ -1,4 +1,9 @@
 label take_class:
+    #if day >= 9 and "met" not in EmmaX.history and "traveling" in Player.recent_history and bg_current == "bg_classroom" and weekday < 5:
+    if "met" not in EmmaX.history and day >= 1:
+        call meet_Emma
+        jump classroom
+
     call set_the_scene
 
     if "class" in Player.daily_history:
@@ -72,7 +77,7 @@ label classroom_seating:
 
     $ Nearby = []
 
-    call set_the_scene (0)
+    call set_the_scene(character = False)
 
     if len(Girls) == 2:
         $ D20 = renpy.random.randint(500, 1500)
@@ -146,15 +151,14 @@ label classroom_seating:
         "You figure out seating arrangements with the girls."
     elif len(Present) == 2:
         "You look for a seat between [Present[0].name] and [Present[1].name]."
-
-        $ Present[0].location = "bg_classroom"
-        $ Present[1].location = "bg_classroom"
     elif len(Present) == 1:
         "You look for a seat next to [Present[0].name]."
-
-        $ Present[0].location = "bg_classroom"
     else:
         "You look for a seat off to the side."
+
+    python:
+        for G in Present:
+            G.location = "bg_classroom"
 
     if len(Girls) > len(Present):
         "The rest are scattered around the room."
@@ -180,7 +184,7 @@ label classroom_seating:
 
 
 
-    
+
 
 label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
     if Girl not in all_Girls:
@@ -857,7 +861,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
             else:
                 "Dr. McCoy stops his lecture in mid-sentence when he notices that the whole class is looking at you and [Girl.name]."
                 ch_b "Oh, my stars and garters!"
-                ch_b "[Player.name]!?! {b}WHAT ARE YOU DOING? temp_GirlsTH OF YOU, TO THE PROFESSOR'S OFFICE, IMMEDIATELY!{/b}"
+                ch_b "[Player.name]!?! {b}WHAT ARE YOU DOING? BOTH OF YOU, TO THE PROFESSOR'S OFFICE, IMMEDIATELY!{/b}"
             $ Girl.add_word(1,0,0,0,"friskyclass")
             $ line = 0
             $ Girl.change_stat("love", 80, -10)

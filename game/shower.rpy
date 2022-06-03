@@ -4,20 +4,17 @@ label showering:
 
     $ showered = False
 
-    $ temp_Girls = all_Girls[:]
-
-    while temp_Girls:
-        if temp_Girls[0] not in active_Girls:
-            $ temp_Girls[0].location = "hold"
-        if temp_Girls[0].location == "bg_showerroom" and temp_Girls[0] not in showering_Girls:
-            $ showering_Girls.append(temp_Girls[0])
-
-        $ temp_Girls.remove(temp_Girls[0])
+    python:
+        for G in all_Girls:
+            if G.location == "bg_showerroom" and G not in showering_Girls:
+                showering_Girls.append(G)
 
     if showering_Girls:
         ch_p "I'm taking a shower, care to join me?"
 
         $ counter = 0
+
+        $ already_showered = False
 
         while counter < 2:
             if "showered" in showering_Girls[0].recent_history:
@@ -132,7 +129,7 @@ label showering:
                     elif showering_Girls[0] == JubesX:
                         "I finished getting showered, so I'm taking off."
 
-                $ already_showered = 1
+                $ already_showered = True
             else:
                 $ first_approval = approval_check(showering_Girls[0], 1400, Alt = [[RogueX], 1200])
                 $ second_approval = approval_check(showering_Girls[0], 700, Alt = [[RogueX], 600])

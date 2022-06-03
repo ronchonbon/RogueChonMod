@@ -85,7 +85,7 @@ label Microtransactions_Intro:
     $ round -= 5
     "You take a small metal box from the Professor, and head to Professor McCoy's lab."
     "You drop it off in the corner, and it rapidly expands into a large device labeled \"Pym\""
-    ch_b "Oh, my shirnk ray!"
+    ch_b "Oh, my shrink ray!"
     $ bg_current = "bg_study"
     show black_screen onlayer black
     pause 0.1
@@ -119,7 +119,7 @@ label Microtransactions:
     menu:
         "What do you want to do?"
         "Deliver a nearby MT":
-            $ line = renpy.random.choice(["the danger room",
+            $ line = renpy.random.choice(["the Danger Room",
                         "the classroom",
                         "the pool",
                         "Scott's room",

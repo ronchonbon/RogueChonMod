@@ -577,7 +577,6 @@ init python:
 
         def change_face(self, emotion = None, blushing = 0, manic = False, mouth = None, eyes = None, brows = None):
             emotion = self.emotion if not emotion else emotion
-            blushing = self.blushing if not blushing else blushing
 
             if (self.forced or "_angry" in self.recent_history) and emotion in ["_normal", "_bemused", "_sexy", "_sly", "_smile", "startled"]:
                 emotion = "_angry"
@@ -1117,7 +1116,7 @@ init python:
                     "bra": "_corset", "underwear": "_white_panties",
                     "shame": 25})
 
-                self.sleepwear = get_base_outfit(
+                self.swimwear = get_base_outfit(
                     {"hair": "_wavy",
                     "bra": "_bikini_top", "underwear": "_bikini_bottoms",
                     "shame": 25})

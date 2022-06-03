@@ -21,7 +21,7 @@ label sleepover(line=0):
         call clear_the_room ("all", 1)
 
         "It's getting late, so you go to sleep."
-        if "met" in StormX.history and "met" not in JubesX.history:
+        if "met" in StormX.history and "met" not in JubesX.history and day >= 1:
             call Jubes_Meet
         call wait
         return

@@ -338,7 +338,365 @@ label meet_Emma:
 
     return
 
+label Emma_Caught_Classroom:
+    show black_screen onlayer black
 
+    $ bg_current = "bg_classroom"
+
+    $ EmmaX.change_outfit()
+
+    call clear_the_room(EmmaX, Passive = False, Silent = True)
+
+    "As you walk down the halls, you hear some odd noises coming from the classroom."
+
+    call shift_focus(EmmaX)
+    call set_the_scene
+
+    $ EmmaX.location = "bg_teacher"
+    $ EmmaX.change_face("_sexy", eyes = "_closed")
+    $ EmmaX.arm_pose = 1
+
+    $ Player.add_word(1,"interruption")
+
+    $ taboo = 0
+    $ Count = 0
+
+    hide black_screen onlayer black
+
+    $ girl_offhand_action = "fondle_pussy"
+    $ second_girl_offhand_action = "fondle_breasts"
+
+    $ EmmaX.recent_history.append("classcaught")
+    $ EmmaX.daily_history.append("unseen")
+    $ EmmaX.recent_history.append("unseen")
+
+    $ EmmaX.drain_word("no_masturbation")
+    $ EmmaX.recent_history.append("masturbation")
+    $ EmmaX.daily_history.append("masturbation")
+
+    "You see [EmmaX.name] leaning back against her desk, her hands tracing slow paths across her body."
+
+    if simulation:
+        call after_masturbation(EmmaX, "interrupt")
+    else:
+        call masturbation_cycle(EmmaX)
+
+    if "_angry" in EmmaX.recent_history:
+        jump classroom
+
+    $ EmmaX.eyes = "_sexy"
+    $ EmmaX.brows = "_confused"
+    $ EmmaX.mouth = "_normal"
+    $ EmmaX.arm_pose = 1
+    $ EmmaX.change_outfit()
+
+    if "classcaught" in EmmaX.history:
+        ch_e "I notice you make a habit of dropping in."
+    else:
+        $ EmmaX.history.append("classcaught")
+
+        if not simulation:
+            $ approval_bonus = 25
+
+        ch_e "Well."
+
+        call stop_all_actions
+
+        $ EmmaX.location = "bg_classroom"
+
+        call set_the_scene
+
+        $ EmmaX.change_face("_angry", eyes="_side")
+
+        $ caught = False
+
+        ch_e "It appears that you've caught me in a somewhat. . . compromising position. . ."
+
+        menu:
+            extend ""
+            "Yup.":
+                $ EmmaX.change_face("_perplexed", mouth="_normal")
+                $ EmmaX.change_stat("love", 70, -1)
+                $ EmmaX.change_stat("obedience", 50, -2)
+                $ EmmaX.change_stat("lust", 80, -5)
+
+                ch_e "Er, well. . ."
+            "Are you supposed to be shlicking it in class?":
+                $ EmmaX.change_face("_angry", eyes="_side")
+                $ EmmaX.change_stat("obedience", 50, 5)
+                $ EmmaX.change_stat("inhibition", 70, 5)
+
+                ch_e "Hrm."
+
+                $ EmmaX.change_face("_sly", brows="_angry")
+                $ EmmaX.change_stat("lust", 80, 3)
+
+                ch_e "I imagine I shouldn't, but you know how it can be,"
+
+                $ EmmaX.brows = "_normal"
+                $ EmmaX.change_stat("lust", 80, 5)
+
+                ch_e "-surrounded by attractive co-eds all day long. . ."
+
+                $ EmmaX.change_stat("lust", 80, 5)
+
+                ch_e "yourself included. . ."
+            "I think it was pretty hot.":
+                $ EmmaX.change_face("_sly")
+                $ EmmaX.change_stat("love", 70, 5)
+                $ EmmaX.change_stat("obedience", 50, 10)
+                $ EmmaX.change_stat("inhibition", 70, 10)
+                $ EmmaX.change_stat("lust", 80, 5)
+
+                ch_e "Hmm, well I suppose I can't blame you for that. . ."
+            "What do you mean?":
+                $ EmmaX.change_face("_angry")
+                $ EmmaX.change_stat("love", 70, -10)
+                $ EmmaX.change_stat("obedience", 50, -5)
+
+                ch_e "I mean how I was. . ."
+
+                $ EmmaX.change_face("_surprised")
+                $ EmmaX.change_stat("love", 70, 15)
+                $ EmmaX.change_stat("obedience", 50, 15)
+                $ EmmaX.change_stat("inhibition", 70, 5)
+
+                ch_e "Oh!"
+
+                $ EmmaX.change_face("_perplexed")
+
+                ch_e "Yes, obviously it was nothing, just getting some. . ."
+
+                $ EmmaX.eyes = "_side"
+                $ EmmaX.change_stat("lust", 80, 5)
+
+                ch_e "paperwork done. . ."
+
+                $ EmmaX.change_face("_sly")
+
+                $ caught = True
+
+        ch_e "So how did you want to handle this. . . situation?"
+
+        menu:
+            extend ""
+            "I think I can forget all about it.":
+                $ EmmaX.change_face("_smile")
+                $ EmmaX.change_stat("love", 80, 10)
+                $ EmmaX.change_stat("obedience", 60, 10)
+                $ EmmaX.change_stat("inhibition", 70, 15)
+
+                ch_e "Thank you, [EmmaX.player_petname]. I appreciate your discretion."
+
+                $ EmmaX.change_face("_sly")
+
+                ch_e "Are you {i}certain{/i} there's nothing I could do to thank you?"
+            "What solution did you have in mind?":
+                $ EmmaX.change_face("_sly")
+                $ EmmaX.change_stat("love", 70, 5)
+                $ EmmaX.change_stat("obedience", 60, 15)
+                $ EmmaX.change_stat("inhibition", 70, 15)
+                $ EmmaX.change_stat("lust", 80, 5)
+
+                ch_e "Oh, I'm sure I could make it worth your while. . ."
+            "What situation?":
+                if not caught:
+                    $ EmmaX.change_face("_confused")
+                    $ EmmaX.change_stat("love", 70, -10)
+                    $ EmmaX.change_stat("obedience", 50, -5)
+
+                    ch_e "I mean how I was. . ."
+
+                    $ EmmaX.change_face("_surprised")
+                    $ EmmaX.change_stat("love", 70, 15)
+                    $ EmmaX.change_stat("obedience", 50, 15)
+                    $ EmmaX.change_stat("inhibition", 70, 5)
+
+                    ch_e "Oh!"
+
+                    $ EmmaX.change_face("_perplexed")
+
+                    ch_e "Yes, obviously it was nothing, just getting some. . ."
+
+                    $ EmmaX.eyes = "_side"
+                    $ EmmaX.change_stat("lust", 80, 5)
+
+                    ch_e "paperwork done. . ."
+
+                    $ EmmaX.change_face("_sly")
+                else:
+                    $ EmmaX.change_face("_angry")
+                    $ EmmaX.change_stat("love", 70, -5)
+                    $ EmmaX.change_stat("inhibition", 70, 5)
+
+                    ch_e "I do wonder if you're just being dense. . ."
+
+                    $ EmmaX.change_face("_sly")
+
+                    ch_e "Still. . ."
+
+        $ multi_action = False
+
+        menu:
+            extend ""
+            "Could you strip?":
+                $ EmmaX.change_stat("love", 70, 5)
+                $ EmmaX.change_stat("obedience", 50, 10)
+                $ EmmaX.change_stat("inhibition", 70, 15)
+
+                ch_e "So you wanted a better view of the action?"
+
+                $ EmmaX.change_stat("lust", 80, 5)
+
+                ch_e "I suppose I could accomodate that. . ."
+                ch_e "to a point. . ."
+                "[EmmaX.name] walks to the door and locks it behind her."
+
+                $ taboo = 0
+                $ EmmaX.taboo = 0
+
+                if simulation:
+                    return True
+
+                call Group_Strip (EmmaX)
+            "Could you just keep going?":
+                $ EmmaX.change_stat("love", 70, 10)
+                $ EmmaX.change_stat("obedience", 50, 15)
+                $ EmmaX.change_stat("inhibition", 70, 15)
+
+                ch_e "Oh, you wanted to watch some more?"
+                ch_e "I can't exactly blame you."
+
+                $ EmmaX.eyes = "_down"
+                $ EmmaX.change_stat("lust", 80, 5)
+
+                ch_e "Were you going to put on a show as well?"
+
+                menu:
+                    "Yeah!":
+                        $ EmmaX.change_stat("love", 70, 5)
+                        $ EmmaX.change_stat("inhibition", 70, 10)
+                        $ EmmaX.change_stat("lust", 80, 5)
+
+                        ch_e "Excellent."
+
+                        if not simulation:
+                            call Seen_First_Peen (EmmaX)
+
+                        "You begin to stroke your cock."
+
+                        $ offhand_action = "jerking_off"
+                    "No, you go ahead.":
+                        $ EmmaX.change_face("_sad")
+                        $ EmmaX.change_stat("love", 70, -10)
+                        $ EmmaX.change_stat("obedience", 50, 5)
+                        $ EmmaX.change_stat("inhibition", 70, 5)
+
+                        ch_e "Pity."
+
+                $ EmmaX.change_face("_sly")
+
+                "[EmmaX.name] walks to the door and locks it behind her."
+
+                $ taboo = 0
+                $ EmmaX.taboo = 0
+
+                $ offhand_action = "fondle_pussy"
+                $ second_girl_offhand_action = "fondle_breasts"
+
+                "She leans back and runs her fingertips along her breasts."
+
+                if simulation:
+                    return True
+
+                call masturbation_cycle(EmmaX)
+                call after_masturbation(Girl, "stop")
+            "Could I feel you up?":
+                $ EmmaX.change_stat("love", 70, 5)
+                $ EmmaX.change_stat("obedience", 50, 10)
+                $ EmmaX.change_stat("inhibition", 70, 10)
+
+                ch_e "Hmm, I could use some help . . .around the office. . . "
+
+                $ EmmaX.change_stat("lust", 80, 5)
+
+                ch_e "perhaps you have some suggestions?"
+                "[EmmaX.name] walks to the door and locks it behind her."
+
+                $ taboo = 0
+                $ EmmaX.taboo = 0
+
+                if simulation:
+                    return True
+
+                call before_action(EmmaX, "fondle_breasts", None)
+
+                $ primary_action = "fondle_breasts"
+
+                call action_cycle(EmmaX, "fondle_breasts", context)
+                call after_action(EmmaX, "fondle_breasts", "stop")
+                call stop_all_actions
+
+            "Could you give me a hand? [[point to your cock]":
+                $ EmmaX.change_stat("love", 70, -5)
+                $ EmmaX.change_stat("obedience", 50, 5)
+                $ EmmaX.brows = "_surprised"
+
+                ch_e "I appreciate boldness, [EmmaX.player_petname], but be a bit more realistic."
+
+                $ EmmaX.brows = "_normal"
+                $ EmmaX.change_stat("love", 70, 10)
+                $ EmmaX.change_stat("inhibition", 70, 5)
+                $ EmmaX.change_stat("lust", 80, 5)
+
+                ch_e "Perhaps instead I could just offer a little. . . token of my appreciation."
+                "[EmmaX.name] walks to the door and locks it behind her."
+
+                $ taboo = 0
+                $ EmmaX.taboo = 0
+
+                if simulation:
+                    return True
+
+                call Group_Strip (EmmaX)
+            "I should just get going then.":
+                $ EmmaX.change_face("_surprised")
+                $ EmmaX.change_stat("obedience", 50, 5)
+
+                ch_e "Oh."
+
+                $ EmmaX.change_face("_confused")
+                $ EmmaX.change_stat("love", 70, -5)
+                $ EmmaX.change_stat("inhibition", 70, -5)
+
+                ch_e "Well, I suppose. . ."
+
+                $ EmmaX.change_face("_perplexed")
+                $ EmmaX.change_stat("lust", 80, 5)
+
+                ch_e "I'll see you. . . in class then. . ."
+
+        $ multi_action = True
+
+        $ EmmaX.change_outfit()
+
+        "[EmmaX.name] collects her things and strides toward the door."
+        "She turns back with her hand on the door."
+
+        $ EmmaX.change_face("_sly")
+
+        ch_e "Oh, and [EmmaX.player_petname]?"
+        ch_e "You can just call me \"Emma.\""
+
+        $ EmmaX.name = "Emma"
+        $ EmmaX.names.append("Emma")
+        $ EmmaX.location = "bg_emma"
+
+        hide Emma_sprite with easeoutleft
+
+        $ round = 20 if round > 20 else round
+
+    return
 
 
 
@@ -393,258 +751,7 @@ label Emma_Teacher_Caught(Girl=0):
 
 
 
-label Emma_Caught_Classroom:
 
-    call shift_focus (EmmaX)
-    "As you walk down the halls, you hear some odd noises coming from the classroom."
-    show black_screen onlayer black
-    $ Player.add_word(1,"interruption")
-    $ bg_current = "bg_classroom"
-    call clear_the_room (EmmaX, 0, 1)
-    $ EmmaX.change_outfit()
-    $ EmmaX.location = 0
-    call set_the_scene
-    $ EmmaX.location = "bg_desk"
-    $ taboo = 0
-    $ EmmaX.change_face("_sexy")
-    $ EmmaX.eyes = "_closed"
-    $ EmmaX.arm_pose = 1
-    $ Count = 0
-    hide black_screen onlayer black
-    $ primary_action = "masturbation"
-    $ girl_offhand_action = "fondle_pussy"
-    $ second_girl_offhand_action = "fondle_breasts"
-    $ EmmaX.recent_history.append("classcaught")
-    $ EmmaX.daily_history.append("unseen")
-    $ EmmaX.recent_history.append("unseen")
-    $ line = 0
-    $ EmmaX.drain_word("no_masturbation")
-    $ EmmaX.recent_history.append("masturbation")
-    $ EmmaX.daily_history.append("masturbation")
-    "You see [EmmaX.name] leaning back against her desk, her hands tracing slow paths across her body."
-
-    if simulation:
-        call masturbation_interrupted
-    else:
-        call masturbation_cycle(EmmaX)
-    if "_angry" in EmmaX.recent_history:
-        jump classroom
-
-
-    $ EmmaX.eyes = "_sexy"
-    $ EmmaX.brows = "_confused"
-    $ EmmaX.mouth = "_normal"
-    $ EmmaX.arm_pose = 1
-    $ EmmaX.change_outfit()
-    $ bg_current = "bg_classroom"
-    call display_girl (EmmaX)
-    if "classcaught" in EmmaX.history:
-        ch_e "I notice you make a habit of dropping in."
-        $ EmmaX.change_outfit()
-    else:
-
-        $ EmmaX.history.append("classcaught")
-        if not simulation:
-            $ approval_bonus = 25
-        ch_e "Well."
-        $ EmmaX.change_face("_angry", eyes="_side")
-        ch_e "It appears that you've caught me in a somewhat. . . compromising position. . ."
-        menu:
-            extend ""
-            "Yup.":
-                $ EmmaX.change_face("_perplexed", mouth="_normal")
-                $ EmmaX.change_stat("love", 70, -1)
-                $ EmmaX.change_stat("obedience", 50, -2)
-                $ EmmaX.change_stat("lust", 80, -5)
-                ch_e "Er, well. . ."
-            "Are you supposed to be shlicking it in class?":
-                $ EmmaX.change_face("_angry", eyes="_side")
-                $ EmmaX.change_stat("obedience", 50, 5)
-                $ EmmaX.change_stat("inhibition", 70, 5)
-                ch_e "Hrm."
-                $ EmmaX.change_face("_sly", brows="_angry")
-                $ EmmaX.change_stat("lust", 80, 3)
-                ch_e "I imagine I shouldn't, but you know how it can be,"
-                $ EmmaX.brows = "_normal"
-                $ EmmaX.change_stat("lust", 80, 5)
-                ch_e "-surrounded by attractive co-eds all day long. . ."
-                $ EmmaX.change_stat("lust", 80, 5)
-                ch_e "yourself included. . ."
-            "I think it was pretty hot.":
-                $ EmmaX.change_face("_sly")
-                $ EmmaX.change_stat("love", 70, 5)
-                $ EmmaX.change_stat("obedience", 50, 10)
-                $ EmmaX.change_stat("inhibition", 70, 10)
-                $ EmmaX.change_stat("lust", 80, 5)
-                ch_e "Hmm, well I suppose I can't blame you for that. . ."
-            "What do you mean?":
-                $ EmmaX.change_face("_angry")
-                $ EmmaX.change_stat("love", 70, -10)
-                $ EmmaX.change_stat("obedience", 50, -5)
-                ch_e "I mean how I was. . ."
-                $ EmmaX.change_face("_surprised")
-                $ EmmaX.change_stat("love", 70, 15)
-                $ EmmaX.change_stat("obedience", 50, 15)
-                $ EmmaX.change_stat("inhibition", 70, 5)
-                ch_e "Oh!"
-                $ EmmaX.change_face("_perplexed")
-                ch_e "Yes, obviously it was nothing, just getting some. . ."
-                $ EmmaX.eyes = "_side"
-                $ EmmaX.change_stat("lust", 80, 5)
-                ch_e "paperwork done. . ."
-                $ EmmaX.change_face("_sly")
-                $ line = 1
-        ch_e "So how did you want to handle this. . . situation?"
-        menu:
-            extend ""
-            "I think I can forget all about it.":
-                $ EmmaX.change_face("_smile")
-                $ EmmaX.change_stat("love", 80, 10)
-                $ EmmaX.change_stat("obedience", 60, 10)
-                $ EmmaX.change_stat("inhibition", 70, 15)
-                ch_e "Thank you, [EmmaX.player_petname]. I appreciate your discretion."
-                $ EmmaX.change_face("_sly")
-                ch_e "Are you {i}certain{/i} there's nothing I could do to thank you?"
-            "What solution did you have in mind?":
-                $ EmmaX.change_face("_sly")
-                $ EmmaX.change_stat("love", 70, 5)
-                $ EmmaX.change_stat("obedience", 60, 15)
-                $ EmmaX.change_stat("inhibition", 70, 15)
-                $ EmmaX.change_stat("lust", 80, 5)
-                ch_e "Oh, I'm sure I could make it worth your while. . ."
-            "What situation?":
-                if line != 1:
-                    $ EmmaX.change_face("_confused")
-                    $ EmmaX.change_stat("love", 70, -10)
-                    $ EmmaX.change_stat("obedience", 50, -5)
-                    ch_e "I mean how I was. . ."
-                    $ EmmaX.change_face("_surprised")
-                    $ EmmaX.change_stat("love", 70, 15)
-                    $ EmmaX.change_stat("obedience", 50, 15)
-                    $ EmmaX.change_stat("inhibition", 70, 5)
-                    ch_e "Oh!"
-                    $ EmmaX.change_face("_perplexed")
-                    ch_e "Yes, obviously it was nothing, just getting some. . ."
-                    $ EmmaX.eyes = "_side"
-                    $ EmmaX.change_stat("lust", 80, 5)
-                    ch_e "paperwork done. . ."
-                    $ EmmaX.change_face("_sly")
-                else:
-                    $ EmmaX.change_face("_angry")
-                    $ EmmaX.change_stat("love", 70, -5)
-                    $ EmmaX.change_stat("inhibition", 70, 5)
-                    ch_e "I do wonder if you're just being dense. . ."
-                    $ EmmaX.change_face("_sly")
-                    ch_e "Still. . ."
-        $ line = 0
-        $ multi_action = 0
-        $ approval_bonus = 25
-        menu:
-            extend ""
-            "Could you strip?":
-                $ EmmaX.change_stat("love", 70, 5)
-                $ EmmaX.change_stat("obedience", 50, 10)
-                $ EmmaX.change_stat("inhibition", 70, 15)
-                ch_e "So you wanted a better view of the action?"
-                $ EmmaX.change_stat("lust", 80, 5)
-                ch_e "I suppose I could accomodate that. . ."
-                ch_e "to a point. . ."
-                "Ms Frost walks to the door and locks it behind her."
-                $ taboo = 0
-                $ EmmaX.taboo = 0
-                if simulation:
-                    return True
-                call Group_Strip (EmmaX)
-            "Could you just keep going?":
-                $ EmmaX.change_stat("love", 70, 10)
-                $ EmmaX.change_stat("obedience", 50, 15)
-                $ EmmaX.change_stat("inhibition", 70, 15)
-                ch_e "Oh, you wanted to watch some more?"
-                ch_e "I can't exactly blame you."
-                $ EmmaX.eyes = "_down"
-                $ EmmaX.change_stat("lust", 80, 5)
-                ch_e "Were you going to put on a show as well?"
-                menu:
-                    "Yeah!":
-                        $ EmmaX.change_stat("love", 70, 5)
-                        $ EmmaX.change_stat("inhibition", 70, 10)
-                        $ EmmaX.change_stat("lust", 80, 5)
-                        ch_e "Excellent."
-                        if not simulation:
-                            call Seen_First_Peen (EmmaX)
-                        "You begin to stroke your cock."
-                        $ offhand_action = "jerking_off"
-                    "No, you go ahead.":
-                        $ EmmaX.change_face("_sad")
-                        $ EmmaX.change_stat("love", 70, -10)
-                        $ EmmaX.change_stat("obedience", 50, 5)
-                        $ EmmaX.change_stat("inhibition", 70, 5)
-                        ch_e "Pity."
-                $ EmmaX.change_face("_sly")
-                "[EmmaX.name] walks to the door and locks it behind her."
-                $ taboo = 0
-                $ EmmaX.taboo = 0
-                $ primary_action = "masturbation"
-                $ girl_offhand_action = "fondle_breasts"
-                "She leans back and runs her fingertips along her breasts."
-                if simulation:
-                    return True
-
-                call masturbation_cycle(EmmaX)
-            "Could I feel you up?":
-                $ EmmaX.change_stat("love", 70, 5)
-                $ EmmaX.change_stat("obedience", 50, 10)
-                $ EmmaX.change_stat("inhibition", 70, 10)
-                ch_e "Hmm, I could use some help . . .around the office. . . "
-                $ EmmaX.change_stat("lust", 80, 5)
-                ch_e "perhaps you have some suggestions?"
-                "[EmmaX.name] walks to the door and locks it behind her."
-                $ taboo = 0
-                $ EmmaX.taboo = 0
-                if simulation:
-                    return True
-
-                call before_action(EmmaX, "fondle_breasts", None)
-            "Could you give me a hand? [[point to your cock]":
-                $ EmmaX.change_stat("love", 70, -5)
-                $ EmmaX.change_stat("obedience", 50, 5)
-                $ EmmaX.brows = "_surprised"
-                ch_e "I appreciate boldness, [EmmaX.player_petname], but be a bit more realistic."
-                $ EmmaX.brows = "_normal"
-                $ EmmaX.change_stat("love", 70, 10)
-                $ EmmaX.change_stat("inhibition", 70, 5)
-                $ EmmaX.change_stat("lust", 80, 5)
-                ch_e "Perhaps instead I could just offer a little. . . token of my appreciation."
-                "[EmmaX.name] walks to the door and locks it behind her."
-                $ taboo = 0
-                $ EmmaX.taboo = 0
-                if simulation:
-                    return True
-                call Group_Strip (EmmaX)
-            "I should just get going then.":
-                $ EmmaX.change_face("_surprised")
-                $ EmmaX.change_stat("obedience", 50, 5)
-                ch_e "Oh."
-                $ EmmaX.change_face("_confused")
-                $ EmmaX.change_stat("love", 70, -5)
-                $ EmmaX.change_stat("inhibition", 70, -5)
-                ch_e "Well, I suppose. . ."
-                $ EmmaX.change_face("_perplexed")
-                $ EmmaX.change_stat("lust", 80, 5)
-                ch_e "I'll see you. . . in class then. . ."
-        $ EmmaX.change_outfit()
-        "Afterwards, [EmmaX.name] collects her things and strides toward the door."
-        "She turns back with her hand on the door."
-        $ EmmaX.change_face("_sly")
-        ch_e "Oh, and [EmmaX.player_petname]?"
-        ch_e "You can just call me \"Emma.\""
-        $ EmmaX.name = "Emma"
-        $ EmmaX.names.append("Emma")
-        $ EmmaX.location = "bg_emma"
-        hide Emma_sprite with easeoutleft
-        $ round = 20 if round > 20 else round
-        $ multi_action = True
-    return
 
 
 

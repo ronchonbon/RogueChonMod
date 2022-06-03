@@ -2077,7 +2077,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         if KittyX.location == "bg_classroom":
             ch_k "I'm[KittyX.like]headed to class right now."
         elif KittyX.location == "bg_dangerroom":
-            ch_k "I'm[KittyX.like]hitting the danger room."
+            ch_k "I'm[KittyX.like]hitting the Danger Room."
         elif KittyX.location == "bg_campus":
             ch_k "I'm[KittyX.like]going to hang out on campus."
         elif KittyX.location == "bg_kitty":
@@ -2123,7 +2123,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
     if KittyX.location == "bg_classroom":
         ch_k "I'm headed to class right now, you could[KittyX.like]join me."
     elif KittyX.location == "bg_dangerroom":
-        ch_k "I'm hitting the danger room, care to[KittyX.like]join me?"
+        ch_k "I'm hitting the Danger Room, care to[KittyX.like]join me?"
     elif KittyX.location == "bg_campus":
         ch_k "I'm going to[KittyX.like]hang out on campus, want to chill with me?"
     elif KittyX.location == "bg_kitty":

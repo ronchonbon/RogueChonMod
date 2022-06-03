@@ -35,7 +35,7 @@ label prologue:
     ch_x "Welcome to the Xavier Institute for Higher Learning. This is a home for all mutants to learn and grow."
     ch_x "My name is Charles Xavier, and I have dedicated my life to helping other mutants such as yourself."
     ch_x "I know that you've had a difficult time, but you will be safe here."
-    ch_x "You'll have classes in the day to teach you the skills you'll need, and training in the danger room for self defense."
+    ch_x "You'll have classes in the day to teach you the skills you'll need, and training in the Danger Room for self defense."
     ch_x "Since you're on your own, we'll provide a small stipend for your day-to-day needs."
     ch_x "Did you have any questions for me young man?"
     ch_p "Why did you even bring me here, I don't have any \"super powers.\""
@@ -1591,7 +1591,7 @@ label Rogue_Frisky_Class:
             else:
                 "Dr. McCoy stops his lecture in mid-sentence when he notices that the whole class is looking at you and [RogueX.name]."
                 ch_b "Oh, my stars and garters!"
-                ch_b "[Player.name]!?! {b}WHAT ARE YOU DOING? temp_GirlsTH OF YOU, TO THE PROFESSOR'S OFFICE, IMMEDIATELY!{/b}"
+                ch_b "[Player.name]!?! {b}WHAT ARE YOU DOING? BOTH OF YOU, TO THE PROFESSOR'S OFFICE, IMMEDIATELY!{/b}"
             if RogueX not in Rules:
                 call Girls_Caught (RogueX)
             else:

@@ -125,24 +125,26 @@ label action(Girl, action, context = None):
                     if _return == "accepted":
                         $ accepted = True
 
-                if approval >= 2:
-                    call action_accepted(Girl, action)
-
-                    $ accepted = True
-                else:
-                    call action_disapproved(Girl, action)
-
-                    if _return != "rejected":
-                        $ action = _return
+                if not accepted:
+                    if approval >= 2:
+                        call action_accepted(Girl, action)
 
                         $ accepted = True
                     else:
-                        return "back"
+                        call action_disapproved(Girl, action)
+
+                        if _return != "rejected":
+                            $ action = _return
+
+                            $ accepted = True
 
         if not accepted:
             call action_rejected(Girl, action)
 
             return "back"
+
+        if "_angry" in Girl.recent_history:
+            return "stop"
 
         call before_action(Girl, action, context)
 

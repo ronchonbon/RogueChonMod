@@ -1578,7 +1578,7 @@ label Girl_Orgasm_After:
     menu:
         "Want [Girl.name] to clean you off?"
         "Yes":
-            call Girl_CleanCock
+            call Girl_CleanCock(Girl)
         "Actually, let [Partner.name] do it." if Partner in all_Girls:
             call shift_focus (Partner)
             call reset_position(Partner)
@@ -1597,8 +1597,7 @@ label Girl_Orgasm_After:
     $ action_context = None
     return
 
-label Girl_CleanCock(Girl=0):
-    $ Girl = check_girl(Girl)
+label Girl_CleanCock(Girl):
     $ line = "What next?"
     if not renpy.showing(Girl.tag+" handjob"):
         $ Girl.arm_pose = 1
@@ -3325,5 +3324,5 @@ label Partner_Clean_Girl(Girl=0):
 
             for key in Partner.spunk.keys():
                 Partner[0].spunk[key] = False
-                
+
     return

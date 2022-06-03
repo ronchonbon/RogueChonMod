@@ -84,8 +84,18 @@ label player_room_entry:
 
     $ Nearby = []
 
+    $ bg_current = "bg_player"
+
     call set_the_scene(character = False)
     call taboo_level
+
+    if "met" not in StormX.history and "met" in JeanX.history and "noise" not in Player.history and day >= 1:
+        call StormMeetPrelude
+        jump player_room
+    elif "met" not in StormX.history and "met" in JeanX.history and "attic" not in Player.history:
+        call StormMeetWater
+        jump player_room
+
     call event_calls
 
 label player_room:
@@ -648,6 +658,11 @@ label classroom_entry:
 
     call set_the_scene(character = False)
     call taboo_level
+
+    if "noise" in Player.history and EmmaX.location in ["bg_classroom", "bg_teacher"] and time_index < 2 and weekday < 5:
+        call StormMeetAsk
+        jump classroom
+
     call event_calls
 
 label classroom:
@@ -748,6 +763,12 @@ label danger_room_entry:
     call set_the_scene
     call gym_entry
     call taboo_level
+
+    # if day >= 12 and "dress0" not in LauraX.history and "mission" not in LauraX.to_do:
+    if "met" not in LauraX.history and day >= 1:
+        call meet_Laura
+        jump danger_room
+
     call event_calls
 
 label danger_room:
@@ -779,7 +800,7 @@ label danger_room:
         $ bg_current = "bg_dangerroom"
 
         menu:
-            extend "This is the Danger Room. What would you like to do?"
+            "This is the Danger Room. What would you like to do?"
             "Train":
                 if time_index >= 3:
                     "The Danger Room has been powered off for the night, maybe take a break."
@@ -924,7 +945,7 @@ label shower_entry:
         jump shower_room
 
     #if day >= 15 and "met" not in JeanX.history and "met" in EmmaX.history:
-    if day >= 1 and "met" not in JeanX.history and "met" in EmmaX.history:
+    if "met" not in JeanX.history and "met" in EmmaX.history and day >= 1:
         call JeanMeet
         jump shower_room
 
@@ -966,7 +987,7 @@ label shower_entry:
         for G in potential_Girls:
             G.location = bg_current
 
-    call check_who_is_present(0)
+    call check_who_is_present
 
     python:
         for G in potential_Girls:
