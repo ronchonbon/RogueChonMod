@@ -1,7 +1,10 @@
 label masturbate(Girl, context = None):
     while True:
         call set_approval_bonus(Girl, "masturbation", context)
+        $ approval_bonus = _return
+
         call action_approval_checks(Girl, "masturbation")
+        $ approval = _return
 
         $ Girl.drain_word("unseen", 1, 0)
 
@@ -23,7 +26,7 @@ label masturbate(Girl, context = None):
 
                         $ Girl.action_counter["masturbation"] += 1
 
-                        call action(Girl, "fondle_breasts", "auto")
+                        call start_action(Girl, "fondle_breasts", "auto")
 
                         return _return
                     "Would you like some help? I could. . . up to you, I guess." if Player.semen and Girl.remaining_actions:
@@ -41,9 +44,9 @@ label masturbate(Girl, context = None):
                         $ Girl.action_counter["masturbation"] += 1
 
                         if D20 > 10:
-                            call action(Girl, "fondle_breasts", "auto")
+                            call start_action(Girl, "fondle_breasts", "auto")
                         else:
-                            call action(Girl, "suck_breasts", "auto")
+                            call start_action(Girl, "suck_breasts", "auto")
 
                         return _return
                     "Why don't we take care of each other?" if Player.semen and Girl.remaining_actions:
@@ -87,9 +90,9 @@ label masturbate(Girl, context = None):
                     $ Girl.change_face("_bemused", 2)
 
                     if bg_current == "bg_rogue":
-                        call what_did_you_come_over_for_approval_lines(Girl, primary_action)
+                        call what_did_you_come_over_for_approval_lines(Girl, "masturbation")
                     else:
-                        call fancy_bumping_into_you_approval_lines(Girl, primary_action)
+                        call fancy_bumping_into_you_approval_lines(Girl, "masturbation")
 
                     $ Girl.blushing = "_blush1"
                 else:
@@ -99,17 +102,17 @@ label masturbate(Girl, context = None):
                     $ Girl.daily_history.append("_angry")
 
                     if bg_current == "bg_rogue":
-                        call what_did_you_come_over_for_disapproval_lines(Girl, primary_action)
+                        call what_did_you_come_over_for_disapproval_lines(Girl, "masturbation")
 
                         jump reset_location
                     else:
-                        call fancy_bumping_into_you_disapproval_lines(Girl, primary_action)
+                        call fancy_bumping_into_you_disapproval_lines(Girl, "masturbation")
                         call remove_girl(Girl)
 
                 return "stop"
 
         if not accepted:
-            if not Girl.action_counter["masturbation"]:
+            if not Girl.action_counter["masturbation"] and "no_masturbation" not in Girl.recent_history:
                 call first_time_asking_reactions(Girl, "masturbation")
 
             if not Girl.action_counter["masturbation"] and approval:
@@ -117,29 +120,24 @@ label masturbate(Girl, context = None):
             elif approval:
                 call action_approved(Girl, "masturbation")
 
-                if _return == "accepted":
-                    $ accepted = True
+            if approval >= 2:
+                call action_accepted(Girl, "masturbation")
 
-            if not accepted:
-                if approval >= 2:
-                    call action_accepted(Girl, "masturbation")
+                $ accepted = True
+            else:
+                call action_disapproved(Girl, "masturbation")
 
-                    $ accepted = True
+                if _return == "rejected":
+                    return "back"
                 else:
-                    call action_disapproved(Girl, "masturbation")
+                    $ action = _return
 
-                    if _return != "rejected":
-                        $ action = _return
-
-                        $ accepted = True
+                    $ accepted = True
 
         if not accepted:
             call action_rejected(Girl, "masturbation")
 
             return "back"
-
-        if "_angry" in Girl.recent_history:
-            return "stop"
 
         call before_masturbation(Girl)
 
@@ -264,7 +262,7 @@ label masturbation_cycle(Girl):
                 if not Player.semen:
                     "You're emptied out, you should probably take a break."
 
-                    $ offhand_action = None if offhand_action == "jerking_off" else offhand_action
+                    $ Player.offhand_action = None if Player.offhand_action == "jerking_off" else Player.offhand_action
 
                 if "unsatisfied" in Girl.recent_history:
                     call girl_unsatisfied_menu(Girl, "masturbation")
@@ -296,7 +294,7 @@ label masturbation_cycle(Girl):
     $ Girl.change_face("_bemused", 0)
 
     if "unseen" not in Girl.recent_history:
-        ch_r "Ok, [Girl.player_petname], that's enough of that for now."
+        call end_of_action_lines(Girl, "masturbation")
 
     return "stop"
 
@@ -312,7 +310,7 @@ label after_masturbation(Girl, context):
 
         $ Girl.change_face("_surprised", 1)
 
-        if offhand_action == "jerking_off":
+        if Player.offhand_action == "jerking_off":
             call caught_masturbating_lines(Girl, "masturbation")
 
             $ Girl.eyes = "_down"
@@ -368,13 +366,13 @@ label after_masturbation(Girl, context):
                     $ Girl.change_stat("obedience", 50, 3)
                     $ Girl.change_stat("obedience", 70, 2)
 
-                    call masturbation_watching_for_long_enough_lines(Girl, primary_action)
+                    call masturbation_watching_for_long_enough_lines(Girl, "masturbation")
                 "I just got here.":
                     $ Girl.change_face("_bemused", 1)
                     $ Girl.change_stat("love", 70, 2)
                     $ Girl.change_stat("love", 90, 1)
 
-                    call masturbation_just_got_here_lines(Girl, primary_action)
+                    call masturbation_just_got_here_lines(Girl, "masturbation")
 
                     $ Girl.change_stat("obedience", 50, 2)
                     $ Girl.change_stat("obedience", 70, 2)
@@ -403,16 +401,16 @@ label after_masturbation(Girl, context):
             return "stop"
 
         if round <= 10:
-            call masturbation_worn_out_lines(Girl, primary_action)
+            call masturbation_worn_out_lines(Girl, "masturbation")
 
             return "stop"
 
         $ Girl.change_face("_sexy", 1)
 
         if Girl.lust < 20:
-            call end_of_masturbation_satisfied_lines(Girl, primary_action)
+            call end_of_masturbation_satisfied_lines(Girl, "masturbation")
         else:
-            call end_of_masturbation_lines(Girl, primary_action)
+            call end_of_masturbation_lines(Girl, "masturbation")
 
         menu:
             extend ""
@@ -422,11 +420,11 @@ label after_masturbation(Girl, context):
                 $ Girl.change_face("_sly")
 
                 if Girl.remaining_actions and round >= 10:
-                    call masturbation_keep_going_lines(Girl, primary_action)
+                    call masturbation_keep_going_lines(Girl, "masturbation")
 
                     return "continue"
                 else:
-                    call masturbation_worn_out_lines(Girl, primary_action)
+                    call masturbation_worn_out_lines(Girl, "masturbation")
 
                 return "continue"
             "I'm good here. [[Stop]":
@@ -436,12 +434,12 @@ label after_masturbation(Girl, context):
                 $ Girl.change_face("_normal")
                 $ Girl.brows = "_confused"
 
-                call masturbation_good_here_lines(Girl, primary_action)
+                call masturbation_good_here_lines(Girl, "masturbation")
 
                 $ Girl.brows = "_normal"
             "You should probably stop for now." if Girl.lust > 30:
                 $ Girl.change_face("_angry")
 
-                call masturbation_stop_for_now_lines(Girl, primary_action)
+                call masturbation_stop_for_now_lines(Girl, "masturbation")
 
     return "stop"

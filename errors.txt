@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/misc_animations.rpy", line 167: Line is indented, but the preceding ATL statement does not expect a block. Please check this line's indentation.
-    Null()
-    ^
+File "game/utilities.rpy", line 4203: expected ',' not found.
+    label Action_Swap(Active=0, Player.main_actionX1=main_action, Player.main_actionX3=girl_offhand_action, Primary=Partner):
+                                      ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Fri Jun  3 00:42:02 2022
+Sat Jun  4 17:01:02 2022

@@ -958,7 +958,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                         $ approval_bonus = stored_count
 
-                        call action(Girl, "fondle_breasts")
+                        call start_action(Girl, "fondle_breasts")
 
                         if "fondle_breasts" in Girl.recent_history:
                             $ Girl.change_stat("obedience", 80, 10)
@@ -1001,7 +1001,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                             elif Girl == JubesX:
                                 ch_v "Ok, we'll see. . ."
 
-                        call action(Girl, "fondle_thighs")
+                        call start_action(Girl, "fondle_thighs")
 
                         if "fondle_thighs" in Girl.recent_history:
                             $ Girl.change_stat("obedience", 50, 5)
@@ -1031,7 +1031,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                         $ approval_bonus = stored_count
 
-                        call action(Girl, "fondle_pussy")
+                        call start_action(Girl, "fondle_pussy")
 
                         if "fondle_pussy" in Girl.recent_history:
                             $ Girl.change_stat("obedience", 50, 10)
@@ -1058,11 +1058,11 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
             "You could touch me.":
                 menu:
                     "How about you give me a handjob?":
-                        call action(Girl, "handjob")
+                        call start_action(Girl, "handjob")
                     "How about you titfuck me?":
-                        call action(Girl, "titjob")
+                        call start_action(Girl, "titjob")
                     "How about you blow me?":
-                        call action(Girl, "blowjob")
+                        call start_action(Girl, "blowjob")
                     "Never mind, something else":
                         jump addiction_ultimatum_menu
 
@@ -2550,7 +2550,7 @@ label addiction_serum:
                     elif Girl == JubesX:
                         ch_v "Sure, that's fine. . ."
 
-                    call action(Girl, "handjob")
+                    call start_action(Girl, "handjob")
 
                     $ Girl.change_stat("obedience", 70, 1)
                     $ Girl.change_stat("inhibition", 50, 2)
@@ -2603,7 +2603,7 @@ label addiction_serum:
                     elif Girl == JubesX:
                         ch_v "I guess that wouldn't suck. . ."
 
-                    call action(Girl, "blowjob")
+                    call start_action(Girl, "blowjob")
 
                     $ Girl.recent_history.append("has serum")
                     $ Girl.change_stat("obedience", 70, 1)

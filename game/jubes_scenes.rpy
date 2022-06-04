@@ -1639,7 +1639,7 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
                     $ line = "mother"
                 "Why would you kill her?" if "killed" not in Topics and "mother" in Topics:
                     $ JubesX.change_face("_sad",0,eyes="_surprised")
-                    ch_v "I didn't want to, but the primary_action scent made me. . ."
+                    ch_v "I didn't want to, but the main_action scent made me. . ."
                     $ JubesX.change_face("_sadside",0)
                     if "trigger" in JubesX.history:
                         ch_v "I've mentioned that to you before. . ."
@@ -2774,12 +2774,12 @@ label Jubes_Fuckbuddy:
     $ JubesX.change_outfit("casual1")
     call display_girl (JubesX)
     call taboo_level
-    $ primary_action = "masturbation"
+    $ main_action = "masturbation"
     $ girl_offhand_action = "fondle_pussy"
     $ JubesX.change_face("_sly",2,mouth="_lipbite")
     "[JubesX.name] is_sprite standing in the doorway, with her hand down her pants."
     "You can tell she's been masturbating furiously, her scent is overpowering."
-    $ primary_action = None
+    $ main_action = None
     $ girl_offhand_action = None
     $ JubesX.arm_pose = 1
     "She looks you up and down hungrily, and pulls her hand out of her pants."

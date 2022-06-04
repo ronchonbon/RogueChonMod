@@ -1148,6 +1148,7 @@ label action_not_done_yet_lines(Girl, action):
     if Girl == RogueX:
         $ lines = ["I just don't think I'm ready yet, " + Girl.player_petname + ". . .",
             "I. . . don't think that's. . .",
+            "That's. . . a little intimate, " + Girl.player_petname + ".",
             "Not now, " + Girl.player_petname + ".",
             "Let's not, ok " + Girl.player_petname + "?",
             "Not yet, " + Girl.player_petname + ". . .",
@@ -1194,6 +1195,9 @@ label action_not_done_yet_lines(Girl, action):
         if action in ["eat_ass", "dildo_ass", "anal"]:
             $ lines.append("I don't know that I'm. . ." + Girl.like + "that kind of girl?")
 
+        if action == "masturbation":
+            $ lines.append("That's. . . private? You know?")
+
         if action == "blowjob":
             $ lines.append("I don't know about the taste, " + Girl.player_petname + ". . .")
     elif Girl == EmmaX:
@@ -1221,6 +1225,9 @@ label action_not_done_yet_lines(Girl, action):
         if action in sex_actions:
             $ lines.append("I really doubt you understand what you're in for. . .")
 
+        if action == "masturbation":
+            $ lines.append("I don't know that I want to perform.")
+
         if action == "blowjob":
             $ lines.append("I'm not sure you're up to my usual tastes, " + Girl.player_petname + ". . .")
     elif Girl == LauraX:
@@ -1231,6 +1238,7 @@ label action_not_done_yet_lines(Girl, action):
             "Not yet, " + Girl.player_petname + ". . .",
             "Seriously, " + Girl.player_petname + ". . .",
             "Eh, " + Girl.player_petname + ". . .",
+            "I don't know that I want to do that right now.",
             "Hmm, that could be amusing, " + Girl.player_petname + ". . ."]
 
         if action in ass_actions:
@@ -1253,6 +1261,7 @@ label action_not_done_yet_lines(Girl, action):
             "Not yet, " + Girl.player_petname + ". . .",
             "Seriously, " + Girl.player_petname + ". . .",
             "Well. . .",
+            "I don't know, it's kind of a bad time. . .",
             "Hmm, that could be amusing, " + Girl.player_petname + ". . ."]
 
         if action in hand_actions:
@@ -1278,6 +1287,7 @@ label action_not_done_yet_lines(Girl, action):
             "Oh, that would. . .perhaps not, " + Girl.player_petname + ". . .",
             "I would rather not, " + Girl.player_petname + ". . .",
             "I am unsure about that. . .",
+            "I am unsure about this.",
             "Are you certain, " + Girl.player_petname + "? . .",
             "I am not sure I would enjoy this, " + Girl.player_petname + ". . .",
             "I am unsure, " + Girl.player_petname + ". . .",
@@ -1296,6 +1306,7 @@ label action_not_done_yet_lines(Girl, action):
     elif Girl == JubesX:
         $ lines = ["Look, I don't know if we're ready for that, " + Girl.player_petname + ". . .",
             "Let's work up to that maybe. .",
+            "I don't know, I'm not really into it right now.",
             "Kinda forward, " + Girl.player_petname + ".",
             "I don't think we're there yet, " + Girl.player_petname + ". . .",
             "I'm not sure we're there yet, " + Girl.player_petname + ". . .",
@@ -5986,6 +5997,75 @@ label maybe_blowjob_instead_lines(Girl):
     elif Girl == StormX:
         $ lines = ["You seemed to enjoy blowjobs, would that work instead?",
             "Would you perhaps prefer a blowjob?"]
+    elif Girl == JubesX:
+        $ lines = []
+
+    $ line = renpy.random.choice(lines)
+
+    Girl.voice "[line]"
+
+    return
+
+label maybe_handjob_instead_lines(Girl):
+    if Girl.action_counter["handjob"]:
+        if Girl == RogueX:
+            $ lines = ["Maybe you'd settle for a handy?"]
+        elif Girl == KittyX:
+            $ lines = ["Maybe I could just use my hand?",
+                "Maybe you'd[Girl.like]settle for a handy?"]
+        elif Girl == EmmaX:
+            $ lines = ["I could just stroke you off, perhaps?",
+                "Perhaps a handjob?"]
+        elif Girl == LauraX:
+            $ lines = ["Couldn't I just use my hand again?{p}You seemed to like that.",
+                "I could give you a handy?"]
+        elif Girl == JeanX:
+            $ lines = ["I could give you a hand job?"]
+        elif Girl == StormX:
+            $ lines = ["I could just stroke you off, perhaps?",
+                "Perhaps a handjob?"]
+        elif Girl == JubesX:
+            $ lines = []
+    else:
+        if Girl == RogueX:
+            $ lines = ["I could maybe. . . [[she makes a jerking motion with her hand]?"]
+        elif Girl == KittyX:
+            $ lines = ["I could maybe. . . [[she makes a jerking motion with her hand]?"]
+        elif Girl == EmmaX:
+            $ lines = ["Would my hand be an adequate substitute?"]
+        elif Girl == LauraX:
+            $ lines = ["I could maybe use my hand instead, how's that sound?"]
+        elif Girl == JeanX:
+            $ lines = ["I could give you a hand job?"]
+        elif Girl == StormX:
+            $ lines = ["Would my hand be an adequate substitute?"]
+        elif Girl == JubesX:
+            $ lines = []
+
+    $ line = renpy.random.choice(lines)
+
+    Girl.voice "[line]"
+
+    return
+
+label alternative_rejected_lines(Girl):
+    if Girl == RogueX:
+        $ lines = ["Ok, whatever.",
+            "Ok, your loss."]
+    elif Girl == KittyX:
+        $ lines = ["Nah."]
+    elif Girl == EmmaX:
+        $ lines = ["Well, that's too bad.",
+            "Pity."]
+    elif Girl == LauraX:
+        $ lines = ["Nah.",
+            "Fine, be that way."]
+    elif Girl == JeanX:
+        $ lines = ["Well then too bad, I guess.",
+            "Too bad then."]
+    elif Girl == StormX:
+        $ lines = ["Well. That is unfortunate. . .",
+            "That is unfortunate."]
     elif Girl == JubesX:
         $ lines = []
 

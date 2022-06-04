@@ -2306,7 +2306,7 @@ label Kitty_Clothes:
     call shift_focus (Girl)
 
 label Kitty_wardrobe_menu:
-    $ primary_action = 1
+    $ main_action = 1
     $ KittyX.change_face()
     while True:
         menu:
@@ -2360,7 +2360,7 @@ label Kitty_wardrobe_menu:
                     else:
                         $ KittyX.change_outfit()
                 $ KittyX.set_temp_outfit()
-                $ primary_action = None
+                $ main_action = None
                 call switch_chat
                 if Girl != KittyX:
                     ch_p "I wanted to talk about your clothes."
@@ -2395,7 +2395,7 @@ label Kitty_wardrobe_menu:
 
                 $ KittyX.set_temp_outfit()
                 $ KittyX.had_chat[1] += 1
-                $ primary_action = None
+                $ main_action = None
                 return
 
 

@@ -28,7 +28,7 @@ label forced_approval_checks(Girl, action):
     elif action in ["anal"]:
         $ approval = approval_check(Girl, 1250, "OI", taboo_modifier = 3)
 
-    return
+    return approval
 
 label action_approval_checks(Girl, action):
     if action == "kiss":
@@ -79,4 +79,4 @@ label action_approval_checks(Girl, action):
     elif action == "hotdog":
         $ approval = approval_check(Girl, 1000, taboo_modifier = 3) # 100, 115, 130, taboo -120(220)
 
-    return
+    return approval

@@ -301,7 +301,7 @@ label Massage_Cycle:
     if Girl.pose == "doggy" or Girl.pose == "sex":
         call show_sex(Girl, "massage")
 
-    $ primary_action = "massage"
+    $ main_action = "massage"
 
     while round >= 10 and MCount < 10:
         call shift_focus (Girl)
@@ -812,7 +812,7 @@ label Massage_Cycle:
 
         if not Girl.taboo:
 
-            $ primary_action = "massage"
+            $ main_action = "massage"
             $ line = 0
             call Girl_Self_lines (Girl, "T3", girl_offhand_action)
             if line:

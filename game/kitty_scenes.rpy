@@ -706,7 +706,7 @@ label Kitty_Love_End:
             ch_k "Hmm. . ."
             if simulation:
                 return True
-            call action(KittyX, "sex")
+            call start_action(KittyX, "sex")
         "I have something else in mind. . .[[choose another activity]":
             $ KittyX.brows = "_confused"
             $ KittyX.change_stat("obedience", 70, 20)

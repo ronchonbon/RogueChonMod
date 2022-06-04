@@ -2532,8 +2532,8 @@ label Rogue_wardrobe_menu:
             $ RogueX.outfit["top"] = "_pink_top"
             $ RogueX.outfit["neck"] = ""
 
-        "How about that green hoodie?" if RogueX.outfit["top"] != "_hoodie":
-            $ RogueX.outfit["top"] = "_hoodie"
+        "How about that green hoodie?" if RogueX.outfit["jackets"] != "_hoodie":
+            $ RogueX.outfit["jacket"] = "_hoodie"
 
         "Maybe just throw on a towel?" if RogueX.outfit["top"] != "_towel":
             $ RogueX.change_face("_bemused", 1)
@@ -2830,7 +2830,7 @@ label Rogue_wardrobe_menu:
                         ch_r "Sure."
                     elif approval_check(RogueX, 1100, taboo_modifier=2):
                         ch_r "I guess I don't really mind if you see them. . ."
-                    elif RogueX.outfit["top"] == "_hoodie" and approval_check(RogueX, 500, taboo_modifier=2):
+                    elif RogueX.outfit["jacket"] == "_hoodie" and approval_check(RogueX, 500, taboo_modifier=2):
                         ch_r "I guess this covers enough. . ."
                     elif not RogueX.seen_breasts and not approval_check(RogueX, 1100):
                         call Display_dress_screen (RogueX)

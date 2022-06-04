@@ -175,7 +175,7 @@ label set_clothes_schedule(Girl):
                     "On dates you should wear. . . (locked)" if counter < 1:
                         pass
                     "On dates you should wear. . ." if counter >= 1:
-                        call choose_outfit
+                        call choose_outfit(Girl)
 
                         $ Girl.clothing[7] = _return
                     "When teaching you should wear. . . (locked)" if Girl in (EmmaX,StormX) and counter < 3:
@@ -856,7 +856,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
         if Girl.clothing[9] and bg_current in personal_rooms:
 
             if "halloween" not in Player.daily_history:
-                call Private_outfit
+                call Private_outfit(Girl)
         return
 
     if Girl.bra_number() >= 5:

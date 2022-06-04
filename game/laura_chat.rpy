@@ -2239,7 +2239,7 @@ label Laura_Clothes:
 
 label Laura_wardrobe_menu:
     $ LauraX.change_face()
-    $ primary_action = 1
+    $ main_action = 1
     while True:
         menu:
             ch_l "What about my clothes?"
@@ -2292,7 +2292,7 @@ label Laura_wardrobe_menu:
                     else:
                         $ LauraX.change_outfit()
                 $ LauraX.set_temp_outfit()
-                $ primary_action = None
+                $ main_action = None
                 call switch_chat
                 if Girl != LauraX:
                     ch_p "I wanted to talk about your clothes."
@@ -2326,7 +2326,7 @@ label Laura_wardrobe_menu:
                         $ LauraX.change_outfit()
                 $ LauraX.set_temp_outfit()
                 $ LauraX.had_chat[1] += 1
-                $ primary_action = None
+                $ main_action = None
                 return
 
 
@@ -2937,12 +2937,12 @@ label Laura_wardrobe_menu:
                         if not renpy.showing('dress_screen'):
                             call Laura_First_Bottomless
                     elif approval_check(LauraX, 1200, taboo_modifier=4):
-                        $ primary_action = LauraX.outfit["bottom"]
+                        $ main_action = LauraX.outfit["bottom"]
                         $ LauraX.outfit["bottom"] = ""
                         pause 0.5
-                        $ LauraX.outfit["bottom"] = primary_action
+                        $ LauraX.outfit["bottom"] = main_action
                         "She pulls off her [LauraX.outfit['bottom']] and [line], then pulls the [LauraX.outfit['bottom']] back on."
-                        $ primary_action = 1
+                        $ main_action = 1
                         call Laura_First_Bottomless (1)
                     elif LauraX.outfit["bottom"] == "_skirt":
                         "She reaches under her skirt and pulls her [line] off."

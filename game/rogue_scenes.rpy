@@ -269,8 +269,6 @@ label tour_end:
 
                 call smooch(RogueX)
 
-                $ RogueX.action_counter["kiss"] += 1
-
                 "She gives you a little peck on the cheek."
 
                 $ RogueX.change_face("_smile")
@@ -360,7 +358,7 @@ label tour_parting:
                 if simulation:
                     return True
 
-                call action(RogueX, "kiss")
+                call start_action(RogueX, "kiss")
 
                 if "_angry" in RogueX.recent_history:
                     $ RogueX.change_stat("love", 200, -10)
@@ -704,7 +702,7 @@ label Rogue_Love:
                 if simulation:
                     return True
 
-                call action(RogueX, "sex")
+                call start_action(RogueX, "sex")
 
                 return
             "I have something else in mind. . .[[choose another activity]":

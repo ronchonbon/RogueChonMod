@@ -89,7 +89,7 @@ label player_room_entry:
     call set_the_scene(character = False)
     call taboo_level
 
-    if "met" not in StormX.history and "met" in JeanX.history and "noise" not in Player.history and day >= 1:
+    if "met" not in StormX.history and "met" in JeanX.history and "noise" not in Player.history and "attic" not in Player.history and day >= 1:
         call StormMeetPrelude
         jump player_room
     elif "met" not in StormX.history and "met" in JeanX.history and "attic" not in Player.history:
@@ -659,7 +659,7 @@ label classroom_entry:
     call set_the_scene(character = False)
     call taboo_level
 
-    if "noise" in Player.history and EmmaX.location in ["bg_classroom", "bg_teacher"] and time_index < 2 and weekday < 5:
+    if "noise" in Player.history and "attic" not in Player.history and EmmaX.location in ["bg_classroom", "bg_teacher"] and time_index < 2 and weekday < 5:
         call StormMeetAsk
         jump classroom
 

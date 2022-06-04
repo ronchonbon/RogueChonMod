@@ -2242,7 +2242,7 @@ label Jubes_Clothes:
 
 label Jubes_wardrobe_menu:
     $ JubesX.change_face()
-    $ primary_action = 1
+    $ main_action = 1
     while True:
         menu:
             ch_v "What about my clothes?"
@@ -2295,7 +2295,7 @@ label Jubes_wardrobe_menu:
                     else:
                         $ JubesX.change_outfit()
                 $ JubesX.set_temp_outfit()
-                $ primary_action = None
+                $ main_action = None
                 call switch_chat
                 if Girl != JubesX:
                     ch_p "I wanted to talk about your clothes."
@@ -2329,7 +2329,7 @@ label Jubes_wardrobe_menu:
                         $ JubesX.change_outfit()
                 $ JubesX.set_temp_outfit()
                 $ JubesX.had_chat[1] += 1
-                $ primary_action = None
+                $ main_action = None
                 return
 
 
@@ -3014,12 +3014,12 @@ label Jubes_wardrobe_menu:
                         if not renpy.showing('dress_screen'):
                             call Jubes_First_Bottomless
                     elif approval_check(JubesX, 1200, taboo_modifier=4):
-                        $ primary_action = JubesX.outfit["bottom"]
+                        $ main_action = JubesX.outfit["bottom"]
                         $ JubesX.outfit["bottom"] = ""
                         pause 0.5
-                        $ JubesX.outfit["bottom"] = primary_action
+                        $ JubesX.outfit["bottom"] = main_action
                         "She pulls off her [JubesX.outfit['bottom']] and [line], then pulls the [JubesX.outfit['bottom']] back on."
-                        $ primary_action = 1
+                        $ main_action = 1
                         call Jubes_First_Bottomless (1)
                     elif JubesX.outfit["bottom"] == "_skirt":
                         "She reaches under her skirt and pulls her [line] off."

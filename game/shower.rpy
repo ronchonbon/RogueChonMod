@@ -39,7 +39,7 @@ label showering:
 
                     if showering_Girls[1] == EmmaX and not "classcaught" in EmmaX.history or not "threesome" in EmmaX.history:
                         ch_e "I really should be going. . ."
-                    elif first_approval or (second_approval and showering_Girls[1].seen_breasts and showering_Girls[1].seenPussy):
+                    elif first_approval or (second_approval and showering_Girls[1].seen_breasts and showering_Girls[1].seen_pussy):
                         if showering_Girls[1] == RogueX:
                             if staying_Girls:
                                 ch_r "I could stick around too. . ."
@@ -134,7 +134,7 @@ label showering:
                 $ first_approval = approval_check(showering_Girls[0], 1400, Alt = [[RogueX], 1200])
                 $ second_approval = approval_check(showering_Girls[0], 700, Alt = [[RogueX], 600])
 
-                if first_approval or (second_approval and showering_Girls[0].seen_breasts and showering_Girls[0].seenPussy):
+                if first_approval or (second_approval and showering_Girls[0].seen_breasts and showering_Girls[0].seen_pussy):
                     if showering_Girls[0] == RogueX:
                         ch_r "I suppose I could stick around. . ."
 
@@ -689,7 +689,7 @@ label showering:
                 $ intruding_Girls.remove(intruding_Girls[0])
 
     $ round -= 30 if round >= 30 else round
-    $ primary_action = None
+    $ main_action = None
 
     if staying_Girls:
         if len(staying_Girls) > 1 and staying_Girls[0] == staying_Girls[1]:

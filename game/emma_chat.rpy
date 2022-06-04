@@ -2412,7 +2412,7 @@ label Emma_Clothes(Public=0, Bonus=0):
 
 
 label Emma_wardrobe_menu:
-    $ primary_action = 1
+    $ main_action = 1
     $ EmmaX.change_face()
     while True:
         menu:
@@ -2467,7 +2467,7 @@ label Emma_wardrobe_menu:
                     else:
                         $ EmmaX.change_outfit()
                 $ EmmaX.set_temp_outfit()
-                $ primary_action = None
+                $ main_action = None
                 call switch_chat
                 if Girl != EmmaX:
                     ch_p "I wanted to talk about your clothes."
@@ -2497,7 +2497,7 @@ label Emma_wardrobe_menu:
                         $ EmmaX.change_outfit()
                 $ EmmaX.set_temp_outfit()
                 $ EmmaX.had_chat[1] += 1
-                $ primary_action = None
+                $ main_action = None
                 return
 
 
@@ -3137,12 +3137,12 @@ label Emma_wardrobe_menu:
                         if not renpy.showing('dress_screen'):
                             call Emma_First_Bottomless
                     elif approval_check(EmmaX, 1200, taboo_modifier=4):
-                        $ primary_action = EmmaX.outfit["bottom"]
+                        $ main_action = EmmaX.outfit["bottom"]
                         $ EmmaX.outfit["bottom"] = ""
                         pause 0.5
-                        $ EmmaX.outfit["bottom"] = primary_action
+                        $ EmmaX.outfit["bottom"] = main_action
                         "She pulls off her [EmmaX.outfit['bottom']] and [line], then pulls the [EmmaX.outfit['bottom']] back on."
-                        $ primary_action = 1
+                        $ main_action = 1
                         call Emma_First_Bottomless (1)
                     elif EmmaX.outfit["bottom"] == "_skirt":
                         "She reaches under her skirt and pulls her [line] off."

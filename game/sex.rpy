@@ -399,7 +399,7 @@ label set_approval_bonus(Girl, action, context):
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_" + action in Girl.recent_history else 0
 
-    return
+    return approval_bonus
 
 label end_of_action_round(Girl, action):
     $ Player.focus = 50 if not Player.semen and Player.focus >= 50 else Player.focus
@@ -443,7 +443,7 @@ label end_of_action_round(Girl, action):
             if "unsatisfied" in Girl.recent_history:#And Rogue_sprite is unsatisfied,
                 call girl_unsatisfied_menu(Girl, action)
 
-                if _return != "continue":
+                if _return == "stop":
                     return [None, "stop"]
 
     if Partner and Partner.lust >= 100:
@@ -492,69 +492,73 @@ label end_of_action_round(Girl, action):
 
     return [None, "continue"]
 
-label set_offhand_action(Girl, shift = False):
-    if shift:
-        $ temp = offhand_action
+label set_offhand_action(Girl):
+    menu:
+        "Also kiss her." if Player.main_action not in mouth_actions and Player.offhand_action != "kiss":
+            "You lean in and start kissing her."
 
-        $ offhand_action = primary_action
-        $ primary_action = temp
+            $ action = "kiss"
+        "Also fondle her breasts." if "fondle_breasts" not in [Player.main_action, Player.offhand_action]:
+            $ action = "fondle_breasts"
+        "Also suck her breasts." if Player.main_action not in mouth_actions and Player.offhand_action != "suck_breasts":
+            $ action = "suck_breasts"
+        "Also fondle her pussy." if Player.main_action not in ["fondle_pussy", "finger_pussy"] and Player.offhand_action not in ["fondle_pussy", "finger_pussy"]:
+            $ action = "fondle_pussy"
+        "Also finger her pussy." if Player.main_action not in ["fondle_pussy", "finger_pussy"] and Player.offhand_action not in ["fondle_pussy", "finger_pussy"]:
+            $ action = "finger_pussy"
+        "Also fondle her ass." if "fondle_ass" not in [Player.main_action, Player.offhand_action]:
+            $ action = "fondle_ass"
+        "Also finger her ass." if "finger_ass" not in [Player.main_action, Player.offhand_action]:
+            $ action = "finger_ass"
+        "Also jack it." if Player.offhand_action != "jerking_off":
+            call jerking_off(Girl)
 
-        if primary_action == "fondle_breasts":
-            "You shift your attention to her breasts."
-        elif primary_action == "suck_breasts":
-            "You shift your attention to her breasts."
-        elif primary_action == "fondle_pussy":
-            "You shift your attention to her pussy."
-        elif primary_action == "eat_pussy":
-            "You shift your attention to her pussy."
-        elif primary_action == "fondle_ass":
-            "You shift your attention to her ass."
-        elif primary_action == "finger_ass":
-            "You shift your attention to her ass."
-        elif primary_action == "kiss":
-            "You go back to kissing her deeply."
+            if _return == "stop":
+                return "stop"
+            else:
+                return "continue"
+        "Nevermind":
+            return "continue"
 
-        return [primary_action, "shift"]
-    elif primary_action:
-        menu:
-            "Also kiss her." if primary_action not in mouth_actions:
-                "You lean in and start kissing her."
-                $ offhand_action = "kiss"
+    call set_approval_bonus(Girl, action, "offhand")
+    call action_approval_checks(Girl, action)
 
-                return [offhand_action, "offhand"]
-            "Also fondle her breasts." if primary_action != "fondle_breasts":
-                $ offhand_action = "fondle_breasts"
+    if Girl == EmmaX and action == "kiss" and not approval_check(Girl, 1000):
+        $ Girl.change_face("_sadside")
 
-                return [offhand_action, "offhand"]
-            "Also suck her breasts." if primary_action not in mouth_actions:
-                $ offhand_action = "suck_breasts"
+        ch_e "Not when we barely know each other. . ."
 
-                return [offhand_action, "offhand"]
-            "Also fondle her pussy." if primary_action not in ["fondle_pussy", "finger_pussy"]:
-                $ offhand_action = "fondle_pussy"
+        return "continue"
 
-                return [offhand_action, "offhand"]
-            "Also finger her pussy." if primary_action not in ["fondle_pussy", "finger_pussy"]:
-                $ offhand_action = "finger_pussy"
+    call auto_action_narrations(Girl, action)
 
-                return [offhand_action, "offhand"]
-            "Also fondle her ass." if primary_action != "fondle_ass":
-                $ offhand_action = "fondle_ass"
+    if approval >= 2:
+        call auto_approved_reactions(Girl, action)
 
-                return [offhand_action, "offhand"]
-            "Also finger her ass." if primary_action != "finger_ass":
-                $ offhand_action = "finger_ass"
+        $ Player.offhand_action = action
+    else:
+        call auto_rejected_reactions(Girl, action)
 
-                return [offhand_action, "offhand"]
-            "Also jack it." if offhand_action != "jerking_off":
-                call jerking_off(Girl)
-
-                if _return == "stop":
-                    return "stop"
-            "Nevermind":
-                pass
+        if _return == "accepted":
+            $ Player.offhand_action = action
+        else:
+            $ Player.offhand_action = None
 
     return "continue"
+
+label swap_actions(Girl):
+    if Player.offhand_action in breast_actions:
+        "You shift your attention to her breasts."
+    elif Player.offhand_action in pussy_actions:
+        "You shift your attention to her pussy."
+    elif Player.offhand_action in ass_actions:
+        "You shift your attention to her ass."
+    elif Player.offhand_action == "kiss":
+        "You go back to kissing her deeply."
+
+    $ Player.main_action, Player.offhand_action = Player.offhand_action, Player.main_action
+
+    return Player.main_action
 
 label jerking_off(Girl = None):
     if not Girl:
@@ -568,7 +572,7 @@ label jerking_off(Girl = None):
     if "unseen" in Girl.recent_history:
         $ Player.recent_history.append("cockout")
 
-        $ offhand_action = "jerking_off"
+        $ Player.offhand_action = "jerking_off"
 
         "You whip out your cock and start working it."
     else:
@@ -586,10 +590,10 @@ label jerking_off(Girl = None):
 
             call Seen_First_Peen (Girl, Partner)
 
-        $ offhand_action = "jerking_off"
+        $ Player.offhand_action = "jerking_off"
 
         if "jerking_off" in Girl.recent_history:
-            return
+            return "continue"
 
         $ Girl.add_word(0,"jerking_off","jerking_off",0,0)
 
@@ -853,21 +857,21 @@ label jerking_off(Girl = None):
                 "Hmm, sounds like a plan.":
                     $ context = "shift"
 
-                    $ offhand_action = None
+                    $ Player.offhand_action = None
 
-            if primary_action == "striptease":
+            if Player.main_action == "striptease":
                 call Group_Strip_End
-            elif primary_action == "masturbation":
+            elif Player.main_action == "masturbation":
                 $ Girl.remaining_actions -= 1
                 $ Girl.action_counter["masturbation"] += 1
 
                 call checkout
-            elif primary_action:
-                call after_action(Girl, primary_action, "shift")
+            elif Player.main_action:
+                call after_action(Girl, Player.main_action, "shift")
 
             call before_action(Girl, options[0], "shift")
 
-    return
+    return "continue"
 
 label girl_touches_you(Girl, forced = False):
     call shift_focus (Girl)
@@ -1038,7 +1042,7 @@ label slap_ass(Girl):
 
         "You slap her ass and she looks back at you a bit startled."
 
-    if primary_action and Girl.lust >= 100:
+    if Player.main_action and Girl.lust >= 100:
         call Girl_Cumming (Girl)
 
     if taboo:
@@ -1082,3 +1086,615 @@ label slap_ass(Girl):
     $ Girl.daily_history.append("slap") if Girl.daily_history.count("slap") < 10 else Girl.daily_history
 
     return
+
+label girl_initiated_action(Girl, action):
+    if action == "kiss":
+        "[focused_Girl.name] presses her body against yours, and kisses you deeply."
+    elif action in breast_actions:
+        if action == "fondle_breasts":
+            $ covered_phrase = "arm and shoves your hand against her covered breast"
+            $ topless_phrase = "arm and shoves your hand against her breast"
+        elif action == "suck_breasts":
+            $ covered_phrase = "head and shoves your face into her chest"
+            $ topless_phrase = covered_phrase
+
+        if (Girl.outfit["top"] or Girl.outfit["bra"]) and not Girl.top_pulled_up:
+            if approval_check(Girl, 1250, taboo_modifier = 1) or (Girl.seen_breasts and approval_check(Girl, 500) and not taboo):
+                $ Girl.top_pulled_up = 1
+
+                $ line = Girl.outfit["top"] if Girl.outfit["top"] else Girl.outfit["bra"]
+
+                "With a mischievous grin, [Girl.name] pulls her [line] up over her breasts."
+
+                call first_topless(Girl, silent = True)
+
+                $ line = 0
+
+                "She then grabs your [topless_phrase], clearly intending you to get to work."
+            else:
+                "[Girl.name] grabs your [covered_phrase], clearly intending you to get to work."
+        else:
+            "[Girl.name] grabs your [topless_phrase], clearly intending you to get to work."
+    elif action in ["fondle_pussy", "eat_pussy", "finger_ass"]:
+        if action == "fondle_pussy":
+            if Girl in [Jeanx, JubesX]:
+                $ phrase = "grabs your arm and presses your hand into her crotch"
+            elif Girl == StormX:
+                $ phrase = "grabs your arm and strokes your hand across her crotch"
+            else:
+                $ phrase = "grabs your arm and shoves your hand into her crotch"
+        elif action == "eat_pussy":
+            $ phrase = renpy.random.choice(["grabs your head and shoves your face into her crotch",
+                "grabs your head and pulls it to her crotch",
+                "grabs your head and wraps her thighs around it"])
+        elif action == "finger_ass":
+            $ phrase = renpy.random.choice(["grabs your arm and presses your hand against her asshole",
+                "grabs your arm and rubs your hand against her asshole"])
+
+
+        if (Girl.outfit["bottom"] and not Girl.upskirt) or (Girl.outfit["underwear"] and not Girl.underwear_pulled_down):
+            if approval_check(Girl, 1250, taboo_modifier = 1) or (Girl.seen_pussy and approval_check(Girl, 500) and not taboo):
+                call expose_bottom(Girl)
+
+                $ line = 0
+
+                if Girl.wearing_skirt:
+                    $ line = Girl.name + " hikes up her skirt"
+                elif Girl.outfit["bottom"]:
+                    $ line = Girl.name + " pulls down her " + Girl.outfit["bottom"]
+                else:
+                    $ line = 0
+
+                if Girl.outfit["underwear"]:
+                    if line:
+                        "[line] and pulls her [Girl.outfit['underwear']] out of the way."
+                        "She then [phrase], clearly intending you to get to work."
+                    else:
+                        "She pulls her [Girl.outfit['underwear']] out of the way, and then [phrase]."
+                        "She clearly intends for you to get to work."
+                else:
+                    "[line], and then [phrase]."
+                    "She clearly intends for you to get to work."
+
+                call first_bottomless(Girl, 1)
+            else:
+                "[Girl.name] [phrase], clearly intending you to get to work."
+        else:
+            "[Girl.name] [phrase], clearly intending you to get to work."
+    elif action in job_actions:
+        if action == "handjob":
+            if Player.offhand_action == "jerking_off":
+                "[Girl.name] brushes your hand aside and starts stroking your cock."
+            else:
+                "[Girl.name] gives you a mischevious smile, and starts to fondle your cock."
+        elif action == "footjob":
+            "[Girl.name] leans forward and starts rubbing your cock between her feet."
+        elif action == "titjob":
+            "[Girl.name] slides down and sandwiches your dick between her tits."
+        elif action == "blowjob":
+            "[Girl.name] slides down and gives your cock a little lick."
+    elif action in dildo_actions:
+        if Girl.wearing_skirt:
+            "[Girl.name] grabs her dildo, hiking up her skirt as she does."
+
+            $ Girl.upskirt = True
+        elif Girl.wearing_pants:
+            "[Girl.name] grabs her dildo, pulling down her pants as she does."
+
+            $ Girl.outfit["bottom"] = ""
+        else:
+            if action == "dildo_pussy":
+                "[Girl.name] grabs her dildo, rubbing it suggestively against her crotch."
+            elif action == "dildo_ass":
+                "[Girl.name] grabs her dildo, rubbing is suggestively against her ass."
+
+        $ Girl.seen_underwear = True
+
+        if action == "dildo_pussy":
+            "She slides the tip along her pussy and seems to want you to insert it."
+        elif action == "dildo_ass":
+            "She slides the tip against her asshole, and seems to want you to insert it."
+    elif action in sex_actions:
+        if action in ["sex", "anal"]:
+            if Girl.wearing_skirt:
+                $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock, sliding her skirt up as she does so.",
+                    "[Girl.name] rolls back and pulls you toward her, sliding her skirt up as she does so.",
+                    "[Girl.name] turns around, sliding her skirt up as she does so.",
+                    "[Girl.name] pushes you back and climbs on top of you, sliding her skirt up as she does so.",
+                    "[Girl.name] lays back, sliding her skirt up as she does so."])
+
+                "[line]"
+
+                $ Girl.upskirt = True
+            elif Girl.wearing_pants:
+                $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock, sliding her [Girl.outfit['bottom']] down as she does so.",
+                    "[Girl.name] rolls back and pulls you against her, sliding her [Girl.outfit['bottom']] off as she does so.",
+                    "[Girl.name] pushes you down and climbs on top of you, sliding her [Girl.outfit['bottom']] down as she does so.",
+                    "[Girl.name] turns around, sliding her [Girl.outfit['bottom']] down as she does so.",
+                    "[Girl.name] lays back, sliding her [Girl.outfit['bottom']] down as she does so."])
+
+                "[line]"
+
+                $ Girl.bottom_pulled_down
+            elif Girl.wearing_shorts:
+                $ line = renpy.random.choice(["[Girl.name] rolls onto her back and pulls you against her, sliding her shorts off as she does so."])
+
+                "[line]"
+
+                $ Girl.bottom_pulled_down
+            else:
+                $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock.",
+                    "[Girl.name] rolls back and pulls you toward her.",
+                    "[Girl.name] pushes you back and climbs on top of you.",
+                    "[Girl.name] turns around and pulls you toward her."])
+                "[line]"
+
+            $ Girl.seen_underwear = True
+
+            if action == "sex":
+                $ line = renpy.random.choice(["She slides the tip along her pussy and seems to want you to insert it."])
+                "[line]"
+            elif action == "anal":
+                $ line = renpy.random.choice(["She slides the tip up to her anus, and presses against it.",
+                    "She slides the tip along her ass and seems to want you to insert it.",
+                    "She slides the tip against her ass and seems to want you to insert it.",
+                    "She slides the tip along her asshole, and seems to want you to insert it."])
+                "[line]"
+        else:
+            $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock, rubbing it against her ass.",
+                "[Girl.name] rolls back and pulls you toward her, rubbing her pussy against your cock.",
+                "[Girl.name] pushes you back and climbs on top of you, sliding back and forth along your shaft.",
+                "[Girl.name] rolls back and pulls you toward her, grinding against your cock.",
+                "[Girl.name] turns around and pulls you toward her, grinding against your cock."])
+            "[line]"
+
+    if action in == "kiss":
+        $ action_line = "You lean in to the kiss"
+        $ praise_line = "Mmm, this is a nice surprise, " + Girl.player_petname
+        $ no_action_line = "You pull back."
+        $ reject_line = "Let's not do that right now, " + Girl.player_petname
+    elif action in ["fondle_breasts", "suck_breasts", "fondle_pussy", "eat_pussy", "finger_ass", "handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:
+        if action == "fondle_breasts":
+            $ action_line = "You start to fondle them."
+            $ praise_line = "I like the initiative, " + Girl.player_petname
+            $ no_action_line = "You pull your hand back."
+            $ reject_line = "Let's not do that right now, " + Girl.player_petname
+            $ rejection_response_line = Girl.name + " pulls back."
+        elif action == "suck_breasts":
+            $ action_line = "You start to run your tongue along her nipple."
+            $ praise_line = "Mmm, I like this, " + Girl.player_petname
+            $ no_action_line = "You pull your head back."
+            $ reject_line = "Let's not do that right now, " + Girl.player_petname
+            $ rejection_response_line = Girl.name + " pulls away."
+        elif action == "fondle_pussy":
+            $ action_line = "You start to run your fingers along her pussy."
+            $ praise_line = "I like the initiative, " + Girl.player_petname
+            $ no_action_line = "You pull your hand back."
+            $ reject_line = "Let's not do that right now, " + Girl.player_petname
+            $ rejection_response_line = Girl.name + " pulls back."
+        elif action == "eat_pussy":
+            $ action_line = "You start licking her slit."
+            $ praise_line = "Mmm, I like this idea, " + Girl.player_petname
+            $ no_action_line = "You pull your head away."
+            $ reject_line = "Let's not do that right now, " + Girl.player_petname
+            $ rejection_response_line = Girl.name + " pulls back."
+        elif action == "finger_ass":
+            $ action_line = "You press your finger into her tight ass."
+            $ praise_line = "Dirty girl, " + Girl.player_petname
+            $ no_action_line = "You pull your hand back."
+            $ reject_line = "Let's not do that right now, " + Girl.player_petname
+            $ rejection_response_line = Girl.name + " pulls back."
+        elif action == "handjob":
+            $ action_line = "[Girl.name] continues her actions."
+            $ praise_line = "Oooh, that's good, [Girl.player_petname]."
+            $ no_action_line = None
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
+            $ rejection_response_line = "[Girl.name] puts it down."
+        elif action == "footjob":
+            $ action_line = "[Girl.name] continues her actions."
+            $ praise_line = "Oooh, that's good, [Girl.player_petname]."
+            $ no_action_line = None
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
+            $ rejection_response_line = "[Girl.name] puts it down."
+        elif action == "titjob":
+            $ action_line = "[Girl.name] starts to slide them up and down."
+            $ praise_line = "Oh, that sounds like a good idea, [Girl.player_petname]."
+            $ no_action_line = None
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
+            $ rejection_response_line = "[Girl.name] lets it drop out from between her breasts."
+        elif action == "blowjob":
+            $ action_line = "[Girl.name] continues licking at it."
+            $ praise_line = "Hmmm, keep doing that, [Girl.player_petname]."
+            $ no_action_line = None
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
+            $ rejection_response_line = "[Girl.name] puts it down."
+        elif action == "dildo_pussy":
+            $ action_line = "[Girl.name] slides it in."
+            $ praise_line = "Oh yeah, [Girl.player_petname], let's do this."
+            $ no_action_line = None
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
+            $ rejection_response_line = "[Girl.name] sets the dildo down."
+        elif action == "dildo_ass":
+            $ action_line = "[Girl.name] slides it in."
+            $ praise_line = "Hmmm, keep doing that, [Girl.player_petname]."
+            $ no_action_line = None
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
+            $ rejection_response_line = "[Girl.name] sets the dildo down."
+        elif action == "sex":
+            $ action_line = "[Girl.name] slides it in."
+            $ praise_line = "Oh yeah, [Girl.player_petname], let's do this."
+            $ no_action_line = None
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
+            $ rejection_response_line = "[Girl.name] pulls back."
+        elif action == "anal":
+            $ action_line = "[Girl.name] slides it in."
+            $ praise_line = "Ooo, dirty girl, [Girl.player_petname], let's do this."
+            $ no_action_line = None
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
+            $ rejection_response_line = "[Girl.name] pulls back."
+        elif action == "hotdog":
+            $ action_line = renpy.random.choice([Girl.name + " starts to grind against you",
+                Girl.name + " keeps grinding",
+                Girl.name + " continues to grind"])
+            $ praise_line = "Hmmm, that's good, [Girl.player_petname]."
+            $ no_action_line = None
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
+            $ rejection_response_line = "[Girl.name] pulls back."
+
+        menu:
+            "What do you do?"
+            "Get to work." if action in ["fondle_breasts", "suck_breasts", "fondle_pussy", "eat_pussy", "finger_ass"]:
+                $ Girl.change_stat("inhibition", 80, 3)
+                $ Girl.change_stat("inhibition", 50, 2)
+
+                "[action_line]"
+            "Nothing." if action in job_actions:
+                $ Girl.change_stat("inhibition", 70, 3)
+                $ Girl.change_stat("inhibition", 30, 2)
+
+                "[action_line]"
+            "Go with it." if action in sex_actions:
+                if action in ["sex", "anal"]:
+                    $ Girl.change_stat("inhibition", 80, 3)
+                    $ Girl.change_stat("inhibition", 50, 2)
+                elif action in ["hotdog"]:
+                    $ Girl.change_stat("inhibition", 50, 3)
+
+                "[action_line]"
+            "Go for it." if action in dildo_actions:
+                $ Girl.change_face("_sexy", 1)
+                $ Girl.change_stat("inhibition", 80, 3)
+
+                ch_p "[praise_line]"
+
+                $ Girl.name_check() #checks reaction to petname
+
+                "You grab the dildo and slide it in."
+
+                $ Girl.change_stat("love", 85, 1)
+                $ Girl.change_stat("obedience", 90, 1)
+                $ Girl.change_stat("obedience", 50, 2)
+            "Praise her." if action not in dildo_actions:
+                $ Girl.change_face("_sexy", 1)
+
+                if action in ["fondle_breasts", "suck_breasts", "fondle_pussy", "eat_pussy", "finger_ass", "dildo_pussy", "dildo_ass", "sex", "anal"]:
+                    $ Girl.change_stat("inhibition", 80, 3)
+                elif action in job_actions:
+                    $ Girl.change_stat("inhibition", 70, 3)
+                elif action in ["hotdog"]:
+                    $ Girl.change_stat("inhibition", 80, 2)
+
+                ch_p "[praise_line]"
+
+                $ Girl.name_check() #checks reaction to petname
+
+                "[action_line]"
+
+                if action in ["fondle_breasts", "suck_breasts", "fondle_pussy", "eat_pussy", "finger_ass", "dildo_pussy", "dildo_ass", "sex", "anal"]:
+                    $ Girl.change_stat("love", 85, 1)
+                elif action in ["handjob", "footjob", "titjob", "blowjob", "hotdog"]:
+                    $ Girl.change_stat("love", 80, 1)
+
+                $ Girl.change_stat("obedience", 90, 1)
+                $ Girl.change_stat("obedience", 50, 2)
+            "Ask her to stop.":
+                if no_action_line is not None:
+                    "[no_action_line]"
+
+                $ Girl.change_face("_surprised")
+                $ Girl.change_stat("inhibition", 70, 1)
+
+                ch_p "[reject_line]"
+
+                $ Girl.name_check() #checks reaction to petname
+
+                if Girl == JeanX:
+                    $ Girl.change_stat("love", 70, -4)
+
+                "[rejection_response_line]"
+
+                if action not in ["hotdog"]:
+                    $ Girl.change_stat("obedience", 90, 1)
+                    $ Girl.change_stat("obedience", 50, 1)
+                    $ Girl.change_stat("obedience", 30, 2)
+                else:
+                    $ Girl.change_stat("obedience", 80, 1)
+                    $ Girl.change_stat("obedience", 30, 2)
+
+                $ Player.recent_history.append("nope")
+
+                $ Girl.add_word(1,"refused","refused")
+
+                return "rejected"
+
+    return "accepted"
+
+label first_action_approval(Girl, action):
+    if Girl.forced:
+        call first_action_approval_forced_reactions(Girl, action)
+    elif Girl.love >= (Girl.obedience + Girl.inhibition):
+        call first_action_approval_mostly_love_reactions(Girl, action)
+    elif Girl.obedience >= Girl.inhibition:
+        call first_action_approval_mostly_obedience_reactions(Girl, action)
+    elif action in cock_actions and Girl.addiction >= 50:
+        call first_action_approval_addicted_reactions(Girl, action)
+    else:
+        call first_action_approval_reactions(Girl, action)
+
+    return
+
+label first_action_response(Girl, action, context):
+    if action == "kiss":
+        $ Girl.SEXP += 1
+
+        if Girl == JubesX:
+            "[focused_Girl.name] bites your lip as she pulls back, and licks some blood off her lips."
+
+            ch_v "Sorry about that. . ."
+            ch_v "Won't happen again."
+    if action == "fondle_thighs":
+        $ Girl.SEXP += 3
+    elif action in ["fondle_breasts", "suck_breasts", "fondle_ass"]:
+        $ Girl.SEXP += 4
+    elif action in ["fondle_pussy"]:
+        $ Girl.SEXP += 7
+    elif action in ["finger_pussy", "eat_pussy", "handjob", "footjob", "dildo_pussy", "hotdog"]:
+        $ Girl.SEXP += 10
+    elif action in ["finger_ass", "titjob"]:
+        $ Girl.SEXP += 12
+    elif action in ["eat_ass", "blowjob"]:
+        $ Girl.SEXP += 15
+    elif action in ["sex"]:
+        $ Girl.SEXP += 20
+    elif action in ["anal"]:
+        $ Girl.SEXP += 25
+
+    if not context:
+        if Girl.love >= 500 and "unsatisfied" not in Girl.recent_history:
+            $ Girl.mouth = "_smile"
+            call satisfied_lines(Girl, action)
+        elif action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"] and Girl.obedience <= 500 and Player.focus <= 20:
+            $ Girl.change_face("_perplexed", 1)
+
+            call was_that_enough_lines(Girl, action)
+        elif action in cock_actions and Player.focus <= 20:
+            $ Girl.mouth = "_sad"
+
+            call was_that_enough_lines(Girl, action)
+
+    return
+
+label action_specific_consequences(Girl, action):
+    $ achievement = None
+
+    $ Girl.action_counter[action] += 1
+
+    if action == "kiss":
+        call Partner_Like(Girl, 1)
+    if action == "fondle_thighs":
+        call Partner_Like(Girl, 1, 0)
+    elif action in ["fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
+        call Partner_Like(Girl, 2)
+    elif action == "eat_pussy":
+        if Girl == RogueX and Partner == EmmaX:
+            call Partner_Like(Girl,4,3)
+        elif Girl not in [KittyX, StormX] and Partner == RogueX:
+            call Partner_Like(Girl, 3, 3)
+        elif Girl == RogueX:
+            call Partner_Like(Girl,3,2)
+        else:
+            call Partner_Like(Girl, 2)
+    elif action == "handjob":
+        $ achievement = Girl.tag + " Handi-Queen"
+
+        call Partner_Like(Girl, 2)
+    elif action == "footjob":
+        $ achievement = Girl.tag + "pedi"
+
+        call Partner_Like(Girl, 1)
+    elif action == "titjob":
+        call Partner_Like(Girl, 3)
+    elif action == "blowjob":
+        $ achievement = Girl.tag + " Jobber"
+
+        if Girl == RogueX and Partner == EmmaX:
+            call Partner_Like(Girl, 3)
+        else:
+            call Partner_Like(Girl, 2)
+    elif action in dildo_actions:
+        call Partner_Like(Girl, 2)
+    elif action == "sex":
+        $ achievement = Girl.tag + " Sex Addict"
+
+        call Partner_Like(Girl, 3, 2)
+    elif action == "anal":
+        $ achievement = Girl.tag + " Anal Addict"
+
+        if Partner == "Kitty":
+            if Girl == RogueX:
+                call Partner_Like(Girl, 3, 1)
+            elif Girl in [EmmaX, LauraX, JeanX, StormX, JubesX]:
+                call Partner_Like(Girl, 4, 2)
+        else:
+            if Girl == RogueX:
+                call Partner_Like(Girl, 4, 2)
+            elif Girl in [EmmaX, LauraX, JeanX, StormX, JubesX]:
+                call Partner_Like(Girl, 3, 2)
+    elif action == "hotdog":
+        $ achievement = Girl.tag + " Full Buns"
+
+        if Girl == RogueX:
+            call Partner_Like(Girl, 1)
+        elif Girl in [KittyX, EmmaX, LauraX]:
+            call Partner_Like(Girl, 2)
+
+    call action_specific_changes(Girl, action)
+
+    return
+
+label action_approved(Girl, action):
+    $ Girl.change_face("_sexy", 1)
+
+    if Girl.forced:
+        $ Girl.change_face("_sad")
+        $ Girl.change_stat("love", 70, -3, 1)
+        $ Girl.change_stat("love", 20, -2, 1)
+
+        call action_forcefully_approved_lines(Girl, action)
+    elif not taboo and "no_taboo" in Girl.daily_history:
+        call private_enough_lines(Girl, action)
+    elif Girl.action_counter[action] < 3:
+        $ Girl.change_face("_sexy", 1)
+        $ Girl.brows = "_confused"
+        $ Girl.mouth = "_kiss"
+
+        call before_action_less_than_three_times_lines(Girl, action)
+    else:
+        $ Girl.change_face("_sexy", 1)
+        $ Girl.arm_pose = 2
+
+        call used_to_action_lines(Girl, action)
+
+    return
+
+label action_disapproved(Girl, action):
+    if action in fondle_actions:
+        $ Girl.change_face("_angry", 1)
+    elif action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "sex"]:
+        $ Girl.change_face("_angry")
+    elif action in ["finger_pussy"]:
+        $ Girl.change_face("_bemused", 2)
+
+    if "no_" + action in Girl.recent_history:
+        call said_no_recently_lines(Girl, action)
+    elif taboo and "no_taboo" in Girl.daily_history and "no_" + action in Girl.daily_history:
+        call taboo_and_said_no_today_lines(Girl, action)
+    elif "no_" + action in Girl.daily_history:
+        call said_no_today_lines(Girl, action)
+    elif taboo and "no_taboo" in Girl.daily_history:
+        call taboo_lines(Girl, action)
+    elif not Girl.action_counter[action]:
+        $ Girl.change_face("_bemused")
+
+        call action_not_done_yet_lines(Girl, action)
+    elif action in anal_insertion_actions and not Girl.used_to_anal and action not in Girl.daily_history:
+        $ Girl.change_face("_perplexed")
+
+        call anal_insertion_not_loose_lines(Girl, action)
+    else:
+        $ Girl.change_face("_bemused")
+
+        call otherwise_not_interested_lines(Girl, action)
+
+        if Girl in [RogueX, KittyX, EmmaX, StormX]:
+            $ Girl.blushing = "_blush1"
+        else:
+            $ Girl.blushing = ""
+
+    call begging_menu(Girl, action)
+
+    if _return == "rejected":
+        return "rejected"
+    else:
+        return _return
+
+label action_accepted(Girl, action):
+    $ Girl.change_face("_bemused", 1)
+
+    if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy"]:
+        if Girl.forced:
+            $ Girl.change_face("_sad")
+
+            call forced_action_accepted_changes(Girl, action)
+
+        call action_accepted_enthusiastically_lines(Girl, action)
+    else:
+        if Girl.forced:
+            $ Girl.change_face("_sad")
+
+            call forced_action_accepted_changes(Girl, action)
+            call action_forcefully_accepted_lines(Girl, action)
+        elif "no_" + action in Girl.daily_history:
+            call convinced_after_saying_no_lines(Girl, action)
+        else:
+            if action in ["fondle_ass"]:
+                $ Girl.change_face("bemused", 1)
+            else:
+                $ Girl.change_face("_sexy", 1)
+
+            call not_forced_action_accepted_changes(Girl, action)
+            call accepted_without_question_lines(Girl, action)
+
+    call action_accepted_changes(Girl, action)
+
+    return
+
+label action_rejected(Girl, action):
+    $ Girl.arm_pose = 1
+
+    if "no_" + action in Girl.daily_history:
+        $ Girl.change_face("_angry", 1)
+
+        call action_already_rejected_lines(Girl, action)
+
+        $ Girl.add_word(1,"_angry","_angry")
+    elif Girl.forced:
+        call forced_action_rejected_reactions(Girl, action)
+
+        $ Girl.add_word(1, "_angry", "_angry")
+    elif taboo:
+        call taboo_action_rejected_reactions(Girl, action)
+
+        $ Girl.add_word(1, "no_taboo", "no_taboo")
+    elif action in anal_insertion_actions and not Girl.used_to_anal and action in Girl.daily_history:
+        call anal_insertion_not_loose_done_today_reactions(Girl, action)
+    elif Girl.action_counter[action]:
+        $ Girl.change_face("_sad")
+
+        call previous_action_rejected_lines(Girl, action)
+    else:
+        call otherwise_rejected_reactions(Girl, action)
+
+    $ Girl.recent_history.append("no_" + action)
+    $ Girl.daily_history.append("no_" + action)
+
+    return
+
+label forced_action(Girl, action):
+    call forced_approval_checks(Girl, action)
+
+    if approval > 1 or (approval and Girl.forced):
+        call forced_but_not_unwelcome_reactions(Girl, action)
+
+        if approval < 2:
+            $ Girl.forced = True
+
+        return "accepted"
+    else:
+        call forced_rejected_reactions(Girl, action)
+
+        $ Girl.recent_history.append("no_" + action)
+        $ Girl.daily_history.append("no_" + action)
+        $ Girl.add_word(1, "_angry", "_angry")
+
+        return "rejected"

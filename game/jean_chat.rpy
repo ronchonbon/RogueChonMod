@@ -2281,7 +2281,7 @@ label Jean_Clothes:
 
 label Jean_wardrobe_menu:
     $ JeanX.change_face()
-    $ primary_action = 1
+    $ main_action = 1
     while True:
         menu:
             ch_j "What about my clothes?"
@@ -2334,7 +2334,7 @@ label Jean_wardrobe_menu:
                     else:
                         $ JeanX.change_outfit()
                 $ JeanX.set_temp_outfit()
-                $ primary_action = None
+                $ main_action = None
                 call switch_chat
                 if Girl != JeanX:
                     ch_p "I wanted to talk about your clothes."
@@ -2368,7 +2368,7 @@ label Jean_wardrobe_menu:
                         $ JeanX.change_outfit()
                 $ JeanX.set_temp_outfit()
                 $ JeanX.had_chat[1] += 1
-                $ primary_action = None
+                $ main_action = None
                 return
 
 
@@ -2955,12 +2955,12 @@ label Jean_wardrobe_menu:
                         if not renpy.showing('dress_screen'):
                             call Jean_First_Bottomless
                     elif approval_check(JeanX, 1200, taboo_modifier=4):
-                        $ primary_action = JeanX.outfit["bottom"]
+                        $ main_action = JeanX.outfit["bottom"]
                         $ JeanX.outfit["bottom"] = ""
                         pause 0.5
-                        $ JeanX.outfit["bottom"] = primary_action
+                        $ JeanX.outfit["bottom"] = main_action
                         "She pulls off her [JeanX.outfit['bottom']] and [line], then pulls the [JeanX.outfit['bottom']] back on."
-                        $ primary_action = 1
+                        $ main_action = 1
                         call Jean_First_Bottomless (1)
                     elif JeanX.outfit["bottom"] == "_skirt":
                         "She reaches under her skirt and pulls her [line] off."

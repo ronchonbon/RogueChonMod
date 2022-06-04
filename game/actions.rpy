@@ -1,48 +1,45 @@
-label action(Girl, action, context = None):
+label start_action(Girl, action, context = None):
     while True:
         call set_approval_bonus(Girl, action, context)
+        $ approval_bonus = _return
+
         call action_approval_checks(Girl, action)
+        $ approval = _return
 
         if Girl == EmmaX and action == "kiss" and not approval_check(Girl, 1000):
             $ Girl.change_face("_sadside")
 
             ch_e "Not when we barely know each other. . ."
 
-            $ Girl.recent_history.append("no_kiss")
-            $ Girl.daily_history.append("no_kiss")
-
             return "back"
 
         $ accepted = False
 
-        if context in ["auto", "offhand"]:
+        if context == "auto":
             call auto_action_narrations(Girl, action)
 
-            if approval:
+            if approval >= 2:
                 call auto_approved_reactions(Girl, action)
 
-                if context == "auto":
-                    $ accepted = True
-                elif context == "offhand":
-                    $ offhand_action = action
-
-                    return "back"
+                $ accepted = True
             else:
                 call auto_rejected_reactions(Girl, action)
 
                 if _return == "accepted":
                     $ accepted = True
-                else:
-                    $ approval_bonus = 0
-                    $ offhand_action = None
-
+                elif _return == "rejected":
                     return "back"
         elif context == "pullback":
             call pullback_reactions(Girl, action)
 
             $ accepted = True
         elif action in anal_insertion_actions and not Girl.used_to_anal and ("finger_ass" in Girl.daily_history or "dildo_ass" in Girl.daily_history or "anal" in Girl.daily_history):
-            call anal_insertion_reactions(Girl, action)
+            call anal_insertion_not_loose_done_today_reactions(Girl, action)
+
+            $ Girl.recent_history.append("no_" + action)
+            $ Girl.daily_history.append("no_" + action)
+
+            return "back"
         elif action in Girl.recent_history:
             call recent_action_reactions(Girl, action)
 
@@ -59,27 +56,19 @@ label action(Girl, action, context = None):
                     $ Girl.eyes = "_side"
 
                     call excited_for_first_kiss_lines(Girl, action)
-
-                    $ accepted = True
                 elif approval and not Girl.action_counter["kiss"]:
                     $ Girl.change_face("_sexy")
                     $ Girl.eyes = "_side"
 
                     call less_excited_for_first_kiss_lines(Girl, action)
-
-                    $ accepted = True
                 elif approval > 1 and Girl.love > Girl.obedience:
                     $ Girl.change_face("_sexy")
 
                     call excited_for_kiss_love_lines(Girl, action)
-
-                    $ accepted = True
                 elif approval_check(Girl, 500, "O") and Girl.obedience > Girl.love:
                     $ Girl.change_face("_normal")
 
                     call excited_for_kiss_obedience_lines(Girl, action)
-
-                    $ accepted = True
 
                     $ Girl.change_stat("obedience", 60, 1)
                 elif approval_check(Girl, 250, "O",Alt=[[KittyX,LauraX],300]) and approval_check(Girl, 250, "L",Alt=[[KittyX,LauraX],200]):
@@ -88,31 +77,27 @@ label action(Girl, action, context = None):
                     Girl.voice "Ok, fine."
 
                     $ Girl.change_stat("obedience", 50, 3)
-
-                    $ accepted = True
                 elif Girl.addiction >= 50:
                     $ Girl.change_face("_sexy")
                     $ Girl.eyes = "_manic"
 
                     call kiss_addicted_lines(Girl, action)
-
-                    $ accepted = True
                 elif approval:
                     $ Girl.change_face("_bemused")
 
                     call kiss_accepted_lines(Girl, action)
-
-                    $ accepted = True
                 else:
                     $ Girl.change_face("_normal")
                     $ Girl.mouth = "_sad"
 
                     call otherwise_not_interested_lines(Girl, action)
 
-                    $ Girl.recent_history.append("no_kiss")
-                    $ Girl.daily_history.append("no_kiss")
+                    $ Girl.recent_history.append("no_" + action)
+                    $ Girl.daily_history.append("no_" + action)
 
                     return "back"
+
+                $ accepted = True
             else:
                 if not Girl.action_counter[action] and "no_" + action not in Girl.recent_history:
                     call first_time_asking_reactions(Girl, action)
@@ -122,54 +107,46 @@ label action(Girl, action, context = None):
                 elif approval:
                     call action_approved(Girl, action)
 
-                    if _return == "accepted":
-                        $ accepted = True
+                if approval >= 2:
+                    call action_accepted(Girl, action)
 
-                if not accepted:
-                    if approval >= 2:
-                        call action_accepted(Girl, action)
+                    $ accepted = True
+                else:
+                    call action_disapproved(Girl, action)
 
-                        $ accepted = True
+                    if _return == "rejected":
+                        return "back"
                     else:
-                        call action_disapproved(Girl, action)
+                        $ action = _return
 
-                        if _return != "rejected":
-                            $ action = _return
-
-                            $ accepted = True
+                        $ accepted = True
 
         if not accepted:
             call action_rejected(Girl, action)
 
             return "back"
 
-        if "_angry" in Girl.recent_history:
-            return "stop"
-
         call before_action(Girl, action, context)
 
-        $ primary_action = action
+        $ Player.main_action = action
 
         if _return == "continue":
             call action_cycle(Girl, action, context)
 
             if _return[1] == "switch":
                 call after_action(Girl, action, "switch")
+                call stop_all_actions
 
                 return "switch"
             elif _return[1] == "stop":
                 call after_action(Girl, action, "stop")
+                call stop_all_actions
 
                 return "stop"
-            elif _return[1] != "offhand":
-                $ temp_action = action
-                $ temp_context = context
-
+            else:
                 $ action = _return[0]
                 $ context = _return[1]
-
-                call after_action(Girl, temp_action, temp_context)
-        else:
+        elif _return == "stop":
             call stop_all_actions
 
             return "stop"
@@ -327,17 +304,7 @@ label before_action(Girl, action, context):
             $ Girl.lust += int(taboo/5)
 
     if action in inside_panties_actions:
-        if Girl.wearing_skirt:
-            $ Girl.upskirt = True
-            $ Girl.seen_underwear = True
-        elif Girl.wearing_pants or Girl.wearing_shorts:
-            $ Girl.bottom_pulled_down = True
-            $ Girl.seen_underwear = True
-        elif Girl.wearing_dress:
-            $ Girl.dress_upskirt = True
-            $ Girl.seen_underwear = True
-
-        call expression Girl.tag + "_First_Bottomless" pass(1)
+        call expose_bottom(Girl)
 
     if taboo:
         $ Girl.drain_word("no_taboo")
@@ -345,10 +312,10 @@ label before_action(Girl, action, context):
     $ Girl.drain_word("no_" + action)
     $ Girl.add_word(0, action, action)
 
-    if action in mouth_actions and offhand_action in mouth_actions:
-        $ offhand_action = None
-    elif action in cock_actions and offhand_action in cock_actions:
-        $ offhand_action = None
+    if action in mouth_actions and Player.offhand_action in mouth_actions:
+        $ Player.offhand_action = None
+    elif action in cock_actions and Player.offhand_action in cock_actions:
+        $ Player.offhand_action = None
 
     $ Player.sprite = True
 
@@ -414,9 +381,12 @@ label action_cycle(Girl, action, context):
             elif action in sex_actions:
                 call sex_menu(Girl, action)
 
-            if _return[1] != "continue":
+            if _return[1] == "switch":
+                return [None, "switch"]
+            elif _return[1] == "stop":
+                return [None, "stop"]
+            elif _return[1] != "continue":
                 $ action = _return[0]
-
                 $ context = _return[1]
 
                 return [action, context]
@@ -436,8 +406,15 @@ label action_cycle(Girl, action, context):
 
         call end_of_action_round(Girl, action)
 
-        if _return[1] != "continue":
-            return _return
+        if _return[1] == "switch":
+            return [None, "switch"]
+        elif _return[1] == "stop":
+            return [None, "stop"]
+        elif _return[1] != "continue":
+            $ action = _return[0]
+            $ context = _return[1]
+
+            return [action, context]
 
         if action in breast_actions:
             if Girl.lust >= 50 and not Girl.top_pulled_up and (Girl.outfit["bra"] or Girl.outfit["top"]):
@@ -452,12 +429,6 @@ label action_cycle(Girl, action, context):
     return [None, "stop"]
 
 label after_action(Girl, action, context):
-    if context in ["switch", "stop"]:
-        $ Player.sprite = False
-        $ Player.cock_position = "out"
-
-        call reset_position(Girl)
-
     $ Girl.change_face("_sexy")
     $ Girl.remaining_actions -= 1
 
@@ -502,32 +473,28 @@ label after_action(Girl, action, context):
         if achievement is not None:
             $ achievements.append(achievement)
 
-        if action not in ["anal"] and not context:
+        if action not in ["anal"]:
             $ Girl.change_face("_smile", 1)
-        elif action in ["anal"] and not context:
+        elif action in ["anal"]:
             $ Girl.change_face("_bemused", 1)
 
         call achievement_lines(Girl, action)
-    elif action == "blowjob" and context == "shift":
-        pass
     elif Girl.action_counter[action] == 1:
         call first_action_response(Girl, action, context)
     elif (action in cock_actions or action == "kiss") and Girl.action_counter[action] == 5:
         call action_done_five_times_lines(Girl, action)
-    elif action in sex_actions and not context:
+    elif action in sex_actions and context == "stop":
         if "unsatisfied" in Girl.recent_history:
             call unsatisfied_reactions(Girl, action)
 
-    if action == "kiss" and not context and Girl.action_counter["kiss"] > 5 and Girl.lust > 50 and approval_check(Girl, 950):
+    if action == "kiss" and context == "stop" and Girl.action_counter["kiss"] > 5 and Girl.lust > 50 and approval_check(Girl, 950):
         call would_you_like_more_lines(Girl, action)
 
-    $ approval_bonus = 0
-
-    if context == "shift":
+    if context == "switch":
         call switching_action_lines(Girl, action)
-        call stop_all_actions
-    else:
-        call reset_position(Girl)
+
+    $ Player.sprite = False
+    $ Player.cock_position = "out"
 
     call checkout
 

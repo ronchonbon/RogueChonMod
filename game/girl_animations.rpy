@@ -460,13 +460,13 @@ label show_sex(Girl, action):
     elif action == "sex":
         $ Player.cock_position = "in"
 
-        if offhand_action in pussy_actions:
-            $ offhand_action = None
+        if Player.offhand_action in pussy_actions:
+            $ Player.offhand_action = None
     elif action == "anal":
         $ Player.cock_position = "anal"
 
-        if offhand_action in ass_actions:
-            $ offhand_action = None
+        if Player.offhand_action in ass_actions:
+            $ Player.offhand_action = None
 
     if Girl.pose == "doggy":
         call show_doggy(Girl)

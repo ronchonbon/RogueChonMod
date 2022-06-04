@@ -2237,7 +2237,7 @@ label Storm_Clothes:
 
 label Storm_wardrobe_menu:
     $ StormX.change_face()
-    $ primary_action = 1
+    $ main_action = 1
     while True:
         menu:
             ch_s "What about my wardrobe?"
@@ -2290,7 +2290,7 @@ label Storm_wardrobe_menu:
                     else:
                         $ StormX.change_outfit()
                 $ StormX.set_temp_outfit()
-                $ primary_action = None
+                $ main_action = None
                 call switch_chat
                 if Girl != StormX:
                     ch_p "I wanted to talk about your clothes."
@@ -2329,7 +2329,7 @@ label Storm_wardrobe_menu:
                         $ StormX.change_outfit()
                 $ StormX.set_temp_outfit()
                 $ StormX.had_chat[1] += 1
-                $ primary_action = None
+                $ main_action = None
                 return
 
 
@@ -2974,12 +2974,12 @@ label Storm_wardrobe_menu:
                         if not renpy.showing('dress_screen'):
                             call Storm_First_Bottomless
                     elif approval_check(StormX, 1200, taboo_modifier=4):
-                        $ primary_action = StormX.outfit["bottom"]
+                        $ main_action = StormX.outfit["bottom"]
                         $ StormX.outfit["bottom"] = ""
                         pause 0.5
-                        $ StormX.outfit["bottom"] = primary_action
+                        $ StormX.outfit["bottom"] = main_action
                         "She pulls off her [StormX.outfit['bottom']] and [line], then pulls the [StormX.outfit['bottom']] back on."
-                        $ primary_action = 1
+                        $ main_action = 1
                         call Storm_First_Bottomless (1)
                     elif StormX.outfit["bottom"] == "_skirt":
                         "She reaches under her skirt and pulls her [line] off."

@@ -42,6 +42,9 @@ init python:
 
             self.cologne = None
 
+            self.main_action = None
+            self.offhand_action = None
+
         def add_word(self, only = False, recent = None, daily = None, trait = None, history = None):
             if (recent and not only) or (recent and recent not in self.recent_history):
                 self.recent_history.append(recent)
@@ -443,12 +446,11 @@ init python:
                 update = Alt[2] if Alt[2] else update
 
             if flavor in ["love", "obedience", "inhibition"]:
-                check = 10*check
+                check *= 10
 
             stat = getattr(self, flavor)
 
             Overflow = self.had_chat[4]
-            x_position = self.sprite_location
 
             if self.tag == "Jean" and flavor == "inhibition" and self.IX > 0:
                 stat -= self.IX
@@ -509,9 +511,9 @@ init python:
                 elif flavor == "lust":
                     Color = "#FAAFBE"
 
-                    call_holder(update, Color, x_position)
+                    call_holder(update, Color, self.sprite_location)
 
-                    if flavor == "lust" and stat >= 100 and not primary_action:
+                    if flavor == "lust" and stat >= 100 and not main_action:
                         renpy.call("Girl_Cumming", self, 1)
 
                         return
@@ -523,7 +525,7 @@ init python:
                     return
 
                 if stat > 1000:
-                    call_holder((-(stat-1000-update)), Color, x_position)
+                    call_holder((-(stat-1000-update)), Color, self.sprite_location)
 
                     if not self.had_chat[4]:
                         update = 0
@@ -567,7 +569,7 @@ init python:
                             Color = "#FFFFFF"
 
                 if update:
-                    call_holder(update, Color, x_position)
+                    call_holder(update, Color, self.sprite_location)
 
             stat = 1000 if stat > 1000 else stat
 
@@ -782,12 +784,12 @@ init python:
 
             if girl_offhand_action == "kiss both" or girl_offhand_action == "kiss girl":
                 kissing = True
-            elif second_girl_primary_action == "kiss both" or girl_offhand_action == "kiss girl":
+            elif second_girl_main_action == "kiss both" or girl_offhand_action == "kiss girl":
                 kissing = True
             elif Partner != self:
-                if primary_action == "kiss" or offhand_action == "kiss":
+                if main_action == "kiss" or Player.offhand_action == "kiss":
                     kissing = True
-            elif second_girl_primary_action == "kiss":
+            elif second_girl_main_action == "kiss":
                 kissing = True
 
             if kissing:
@@ -833,7 +835,7 @@ init python:
                 if self.tag == "Laura" and self.lust < 50 and not extreme and not approval_check(self, 1000):
                     self.eyes = "_side"
 
-            if Partner == self and second_girl_primary_action in ["suck_breasts", "eat_pussy", "eat_ass", "blowjob"]:
+            if Partner == self and second_girl_main_action in ["suck_breasts", "eat_pussy", "eat_ass", "blowjob"]:
                 self.mouth = "_tongue"
             elif girl_offhand_action in ["suck_breasts", "eat_pussy", "eat_ass"]:
                 self.mouth = "_tongue"
@@ -843,7 +845,7 @@ init python:
                 self.mouth = "_tongue"
 
             if not self.used_to_anal:
-                if Partner != self and (primary_action == "anal" or primary_action == "dildo_ass" or girl_offhand_action == "dildo_ass"):
+                if Partner != self and (main_action == "anal" or main_action == "dildo_ass" or girl_offhand_action == "dildo_ass"):
                     self.eyes = "_closed"
                     self.brows = "_angry"
 

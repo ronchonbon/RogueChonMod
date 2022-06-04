@@ -1521,13 +1521,13 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
                 return
         elif line == "double":
 
-            $ second_girl_primary_action = "blowjob"
+            $ second_girl_main_action = "blowjob"
             $ Party[1].recent_history.append("blowjob")
             $ Party[1].daily_history.append("blowjob")
             $ Party[1].daily_history.append("morningwood")
             $ Party[1].traits.append("morningwood")
 
-        $ primary_action = "blowjob"
+        $ main_action = "blowjob"
         $ Party[0].recent_history.append("blowjob")
         $ Party[0].daily_history.append("blowjob")
         $ Party[0].daily_history.append("morningwood")
@@ -1553,7 +1553,7 @@ label sleepover_MorningWood:
     $ Player.add_word(1,"interruption")
     call shift_focus (Party[0])
     $ Player.focus = 30
-    if primary_action == "blowjob":
+    if main_action == "blowjob":
         ch_u "\"Slurp, slurp, slurp.\""
     else:
         ch_u "\"Squish, squish, squish.\""
@@ -1599,13 +1599,13 @@ label sleepover_MorningWood:
         $ Partner.change_face("_closed",1,mouth="_tongue")
 
     "You feel a pleasant sensation. . ."
-    if primary_action == "blowjob":
-        if second_girl_primary_action:
+    if main_action == "blowjob":
+        if second_girl_main_action:
             ch_u "\"Slurp, slurp, slurp.\" \n \ \"Slurp, slurp, slurp.\""
         else:
             ch_u "\"Slurp, slurp, slurp.\""
     else:
-        if second_girl_primary_action:
+        if second_girl_main_action:
             ch_u "\"Squish, squish, squish.\" \n \ \"Slurp, slurp, slurp.\""
         else:
             ch_u "\"Squish, squish, squish.\""
@@ -1613,13 +1613,13 @@ label sleepover_MorningWood:
     $ Party[0].change_stat("lust", 80, 5)
 
     "It's somewhere below your waist. . ."
-    if primary_action == "blowjob":
-        if second_girl_primary_action:
+    if main_action == "blowjob":
+        if second_girl_main_action:
             ch_u "\"Slurp, slurp, slurp.\" \n \ \"Slurp, slurp, slurp.\""
         else:
             ch_u "\"Slurp, slurp, slurp.\""
     else:
-        if second_girl_primary_action:
+        if second_girl_main_action:
             ch_u "\"Squish, squish, squish.\" \n \ \"Slurp, slurp, slurp.\""
         else:
             ch_u "\"Squish, squish, squish.\""
@@ -1644,22 +1644,22 @@ label sleepover_MorningWood:
         menu:
             "Stay Quiet":
                 if Count >2:
-                    if second_girl_primary_action:
+                    if second_girl_main_action:
                         "You just let them do their thing and pretend to still be asleep."
                     else:
                         "You just let her do her thing and pretend to still be asleep."
                 elif Count>1:
                     "It does feel nice. . ."
                 else:
-                    if second_girl_primary_action:
+                    if second_girl_main_action:
                         "You wouldn't want to disturb them. . ."
                     else:
                         "You wouldn't want to disturb her. . ."
-                if primary_action == "blowjob":
+                if main_action == "blowjob":
                     Party[0].voice "\"Slurp, slurp, slurp.\""
                 else:
                     Party[0].voice "\"Squish, squish, squish.\""
-                if second_girl_primary_action:
+                if second_girl_main_action:
                     Party[1].voice "\"Slurp, slurp, slurp.\""
                 ". . ."
             "Um. . . [Party[0].petname], what're you doing?":
@@ -1674,9 +1674,9 @@ label sleepover_MorningWood:
         $ Count -= 1
     $ action_speed = 1
     $ Party[0].blushing = "_blush1"
-    if second_girl_primary_action:
+    if second_girl_main_action:
         "[Party[0].name] pulls back with a pop and [Party[1].name] sits back."
-        $ second_girl_primary_action = None
+        $ second_girl_main_action = None
     else:
         "[Party[0].name] pulls back with a pop."
     if line == "question":
@@ -2143,10 +2143,10 @@ label sleepover_MorningWood:
         $ line = 0
         $ action_speed = 1
         if Partner:
-            $ second_girl_primary_action = "blowjob"
+            $ second_girl_main_action = "blowjob"
         call Morning_Partner
 
-        call action(Party[0], "blowjob")
+        call start_action(Party[0], "blowjob")
 
     return
 

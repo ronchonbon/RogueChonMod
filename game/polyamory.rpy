@@ -71,7 +71,7 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
     $ line = 0
 
 
-    if offhand_action == "jerking_off":
+    if Player.offhand_action == "jerking_off":
         $ Girl.eyes = "_down"
         if Girl == RogueX:
             ch_r "And why is your cock out like that?!"
@@ -1122,9 +1122,9 @@ label Les_Prep(Girl=focused_Girl, temp_Girls=[]):
                 $ Girl.change_stat("inhibition", 80, 60)
         call Les_FirstKiss
         $ girl_offhand_action == "kiss girl"
-        $ second_girl_primary_action == "kiss girl"
+        $ second_girl_main_action == "kiss girl"
 
-    $ primary_action = "lesbian"
+    $ main_action = "lesbian"
     if action_context:
         $ renpy.pop_call()
         $ action_context = None
@@ -1151,10 +1151,10 @@ label Les_Cycle(Girl=focused_Girl):
                 "\"Ahem. . .\"" if "unseen" in Girl.recent_history:
                     jump Les_Interupted
 
-                "Start jack'in it." if offhand_action != "jerking_off":
+                "Start jack'in it." if Player.offhand_action != "jerking_off":
                     call jerking_off (Girl)
-                "Stop jack'in it." if offhand_action == "jerking_off":
-                    $ offhand_action = None
+                "Stop jack'in it." if Player.offhand_action == "jerking_off":
+                    $ Player.offhand_action = None
 
                 "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
@@ -1170,7 +1170,7 @@ label Les_Cycle(Girl=focused_Girl):
                         "Offhand action":
                             if Girl.remaining_actions and multi_action:
                                 call set_offhand_action
-                                if offhand_action:
+                                if Player.offhand_action:
                                     $ Girl.remaining_actions -= 1
                             else:
                                 call Sex_Basic_Dialog (Girl, "tired")
@@ -1190,9 +1190,9 @@ label Les_Cycle(Girl=focused_Girl):
                                     else:
                                         call Three_Change (Girl)
 
-                                "Don't stop what you're doing. . .(locked)" if not position_timer or not second_girl_primary_action:
+                                "Don't stop what you're doing. . .(locked)" if not position_timer or not second_girl_main_action:
                                     $ position_timer = 0
-                                "Don't stop what you're doing. . ." if position_timer and second_girl_primary_action:
+                                "Don't stop what you're doing. . ." if position_timer and second_girl_main_action:
                                     if "unseen" in Girl.recent_history:
                                         ch_p "Oh, that's good. . ."
                                         jump Les_Interupted
@@ -3546,9 +3546,9 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 call set_the_scene
                 $ Girl.change_face("_kiss",1,eyes = "_closed")
                 $ Girl2.change_face("_kiss",1,eyes = "_closed")
-                $ primary_action = "lesbian"
+                $ main_action = "lesbian"
                 $ girl_offhand_action = "fondle_pussy"
-                $ second_girl_primary_action = "fondle_pussy"
+                $ second_girl_main_action = "fondle_pussy"
                 "You see [Girl.name] and [Girl2.name], eyes closed and stroking each other vigorously."
                 $ line = 1
             "Enter quietly":
@@ -3585,9 +3585,9 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
     elif Girl == JubesX:
         ch_v "Get over here."
 
-    $ primary_action = "lesbian"
+    $ main_action = "lesbian"
     $ girl_offhand_action = "fondle_pussy"
-    $ second_girl_primary_action = "fondle_pussy"
+    $ second_girl_main_action = "fondle_pussy"
     $ Partner = Girl2
     call shift_focus(Girl)
     call Les_Prep(Girl)
