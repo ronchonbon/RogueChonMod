@@ -45,7 +45,7 @@ init -1:
     default round = 100
     default time_options = ["morning", "midday", "evening", "night"]
     default time_index = 2
-    default current_time = time_options[(time_index)]
+    default current_time = time_options[time_index]
     default week = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     default weekday = 6
     default day_of_week = week[weekday]
@@ -74,10 +74,9 @@ init -1:
     default multi_action = True
     default action_speed = 0
 
-    default Player.main_action = None
-    default Girl.offhand_action = None
+    default girl_offhand_action = None
     default second_girl_main_action = None
-    default second_girl_offhand_action = None
+    default second_girl_secondary_action = None
 
     default position_timer = 100
 
@@ -194,7 +193,7 @@ label start:
     # $ Player.sprite = True
     # $ action_speed = 3
     # $ Player.cock_position = "out"
-    # $ Player.main_action = "hotdog"
+    # $ Player.primary_action = "hotdog"
 
     # show Rogue_sprite handjob at sprite_location(0.5)
     # show Rogue_sprite titjob at sprite_location(0.5)
@@ -232,8 +231,8 @@ label start:
     # $ RogueX.change_outfit("nude")
     # $ Player.sprite = False
     # $ Player.cock_position = "in"
-    # $ Player.main_action = "suck_breasts"
-    # $ Player.offhand_action = "fondle_breasts"
+    # $ Player.primary_action = "suck_breasts"
+    # $ Player.secondary_action = "fondle_breasts"
 
     # show Rogue_sprite sex at sprite_location(stage_center)
     # show Kitty_sprite titjob at sprite_location(stage_center)

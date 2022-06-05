@@ -220,10 +220,10 @@ layeredimage Rogue_sex_body:
     if RogueX.spunk["breasts"]:
         "images/Kitty_sex/Kitty_sex_spunk_breasts.png"
 
-    if "suck_breasts" in [Player.main_action, Player.offhand_action]:
+    if "suck_breasts" in [Player.primary_action, Player.secondary_action]:
         "licking" offset (470, 295) zoom 0.6
 
-    if "fondle_breasts" in [Player.main_action, Player.offhand_action]:
+    if "fondle_breasts" in [Player.primary_action, Player.secondary_action]:
         "Zero_fondle_breasts_left_animation" offset (485, 330) zoom 1.1
 
     always:
@@ -240,9 +240,9 @@ layeredimage Rogue_sex_legs:
 
     if Player.sprite and Player.cock_position == "anal":
         "Rogue_sex_anus_animation[action_speed]"
-    elif "finger_ass" in [Player.main_action, Player.offhand_action]:
+    elif "finger_ass" in [Player.primary_action, Player.secondary_action]:
         "Rogue_sex_anus_animation0"
-    elif Player.main_action == "dildo_ass":
+    elif Player.primary_action == "dildo_ass":
         "images/Kitty_sex/Kitty_sex_anus_open.png"
     elif RogueX.used_to_anal:
         "images/Rogue_sex/Rogue_sex_anus_loose.png"
@@ -258,9 +258,9 @@ layeredimage Rogue_sex_legs:
 
     if Player.sprite and Player.cock_position == "anal":
         AlphaMask("Rogue_sex_cock_anal_animations", "images/Kitty_sex/Kitty_sex_anus_mask.png")
-    elif "finger_ass" in [Player.main_action, Player.offhand_action]:
+    elif "finger_ass" in [Player.primary_action, Player.secondary_action]:
         AlphaMask("Rogue_sex_finger_ass_animations", "images/Kitty_sex/Kitty_sex_anus_mask.png")
-    elif Player.main_action == "dildo_ass":
+    elif Player.primary_action == "dildo_ass":
         AlphaMask("Rogue_dildo_anal_animations", "images/Kitty_sex/Kitty_sex_anus_mask.png")
 
     if Player.sprite and Player.cock_position == "in" and action_speed >= 2:
@@ -269,9 +269,9 @@ layeredimage Rogue_sex_legs:
         "images/Rogue_sex/Rogue_sex_pussy_open.png"
     elif Player.sprite and Player.cock_position == "in":
         "images/Rogue_sex/Rogue_sex_pussy_closed.png"
-    elif Player.main_action == "dildo_pussy":
+    elif Player.primary_action == "dildo_pussy":
         "images/Rogue_sex/Rogue_sex_pussy_fucking.png"
-    elif Player.main_action in pussy_actions or Player.offhand_action in pussy_actions:
+    elif Player.primary_action in pussy_actions or Player.secondary_action in pussy_actions:
         "images/Rogue_sex/Rogue_sex_pussy_open.png"
     else:
         "images/Rogue_sex/Rogue_sex_pussy_closed.png"
@@ -292,9 +292,9 @@ layeredimage Rogue_sex_legs:
         "images/Rogue_sex/Rogue_sex_pubes_open.png"
     elif RogueX.pubes and Player.sprite and Player.cock_position == "in":
         "images/Rogue_sex/Rogue_sex_pubes_closed.png"
-    elif RogueX.pubes and Player.main_action == "dildo_pussy":
+    elif RogueX.pubes and Player.primary_action == "dildo_pussy":
         "images/Rogue_sex/Rogue_sex_pubes_fucking.png"
-    elif RogueX.pubes and Player.main_action in pussy_actions or Player.offhand_action in pussy_actions:
+    elif RogueX.pubes and Player.primary_action in pussy_actions or Player.secondary_action in pussy_actions:
         "images/Rogue_sex/Rogue_sex_pubes_open.png"
     elif RogueX.pubes:
         "images/Rogue_sex/Rogue_sex_pubes_closed.png"
@@ -304,9 +304,9 @@ layeredimage Rogue_sex_legs:
 
     if Player.sprite and Player.cock_position == "in":
         AlphaMask("Rogue_sex_cock_animations", "images/Rogue_sex/Rogue_sex_pussy_mask.png")
-    elif "fondle_pussy" in [Player.main_action, Player.offhand_action] or "finger_pussy" in [Player.main_action, Player.offhand_action]:
+    elif "fondle_pussy" in [Player.primary_action, Player.secondary_action] or "finger_pussy" in [Player.primary_action, Player.secondary_action]:
         AlphaMask("Rogue_sex_finger_pussy_animations", "images/Rogue_sex/Rogue_sex_pussy_mask.png")
-    elif Player.main_action == "dildo_pussy":
+    elif Player.primary_action == "dildo_pussy":
         AlphaMask("Rogue_dildo_pussy_animations", "images/Rogue_sex/Rogue_sex_pussy_mask.png")
 
     if RogueX.spunk["pussy"] and Player.sprite and Player.cock_position == "in":
@@ -344,9 +344,9 @@ layeredimage Rogue_sex_legs:
     if Player.sprite and Player.cock_position == "out":
         "Rogue_sex_cock_hotdog_animations"
 
-    if Player.main_action == "eat_pussy":
+    if Player.primary_action == "eat_pussy":
         "licking" offset (560, 510) zoom 0.7
-    elif Player.main_action == "eat_ass":
+    elif Player.primary_action == "eat_ass":
         "licking" offset (560, 590) zoom 0.7
 
     if Player.sprite and Player.cock_position == "footjob":
@@ -434,7 +434,7 @@ layeredimage Rogue_doggy_body:
     if RogueX.spunk["face"]:
         "images/Rogue_doggy/Rogue_doggy_spunk_face.png"
 
-    if Player.main_action == "fondle_breasts" or Player.offhand_action == "fondle_breasts":
+    if Player.primary_action == "fondle_breasts" or Player.secondary_action == "fondle_breasts":
         "Zero_doggy_fondle_breast_animation"
 
     anchor (0.5, 0.5)
@@ -472,31 +472,31 @@ layeredimage Rogue_doggy_ass:
     elif RogueX.pubes:
         "images/Rogue_doggy/Rogue_doggy_pubes.png"
 
-    if Player.main_action == "eat_pussy":
+    if Player.primary_action == "eat_pussy":
         "images/Rogue_doggy/Rogue_doggy_pussy_open.png"
     else:
         "images/Rogue_doggy/Rogue_doggy_pussy_closed.png"
 
     if Player.sprite and Player.cock_position == "in":
         "images/Rogue_doggy/Rogue_doggy_pussy_base.png"
-    elif "finger_pussy" in [Player.main_action, Player.offhand_action]:
+    elif "finger_pussy" in [Player.primary_action, Player.secondary_action]:
         "images/Rogue_doggy/Rogue_doggy_pussy_base.png"
 
     if Player.sprite and Player.cock_position == "in":
         "Rogue_doggy_pussy_hole_animations"
-    elif "finger_pussy" in [Player.main_action, Player.offhand_action]:
+    elif "finger_pussy" in [Player.primary_action, Player.secondary_action]:
         "Rogue_doggy_pussy_fingering"
 
     if Player.sprite and Player.cock_position == "in":
         AlphaMask("Rogue_doggy_cock_animations", "Rogue_doggy_pussy_mask_animations")
-    elif "finger_pussy" in [Player.main_action, Player.offhand_action]:
+    elif "finger_pussy" in [Player.primary_action, Player.secondary_action]:
         AlphaMask("Rogue_doggy_finger_pussy_animations", "Rogue_doggy_pussy_mask_animation1")
-    elif Player.main_action == "dildo_pussy":
+    elif Player.primary_action == "dildo_pussy":
         AlphaMask("Rogue_doggy_dildo_pussy_animations", "Rogue_doggy_pussy_mask_animation2")
 
     if Player.sprite and Player.cock_position == "in" and action_speed < 2:
         AlphaMask("Rogue_doggy_pussy_outer_animations", "Rogue_doggy_pussy_hole_mask_animations")
-    elif "finger_pussy" in [Player.main_action, Player.offhand_action]:
+    elif "finger_pussy" in [Player.primary_action, Player.secondary_action]:
         AlphaMask("Rogue_doggy_pussy_outer_animation1", "Rogue_doggy_pussy_hole_mask_animation1")
 
     if RogueX.outfit["piercings"]:
@@ -509,12 +509,12 @@ layeredimage Rogue_doggy_ass:
 
     if Player.sprite and Player.cock_position == "anal" and action_speed:
         "images/Rogue_doggy/Rogue_doggy_anus_full_base.png"
-    elif "finger_ass" in [Player.main_action, Player.offhand_action]:
+    elif "finger_ass" in [Player.primary_action, Player.secondary_action]:
         "images/Rogue_doggy/Rogue_doggy_anus_full_base.png"
 
     if Player.sprite and Player.cock_position == "anal" and action_speed:
         "Rogue_doggy_anus_anal_animations"
-    elif "finger_ass" in [Player.main_action, Player.offhand_action]:
+    elif "finger_ass" in [Player.primary_action, Player.secondary_action]:
         "Rogue_doggy_anus_fingering" pos (0.113, 0.475)
 
     if Player.sprite and Player.cock_position == "anal" and action_speed > 1:
@@ -525,9 +525,9 @@ layeredimage Rogue_doggy_ass:
 
     if Player.sprite and Player.cock_position == "anal":
         AlphaMask("Rogue_doggy_cock_anal_animations", "Rogue_doggy_anus_mask_animations")
-    elif "finger_ass" in [Player.main_action, Player.offhand_action]:
+    elif "finger_ass" in [Player.primary_action, Player.secondary_action]:
         AlphaMask("Rogue_doggy_finger_anal_animations", "Rogue_doggy_anus_fingering_mask")
-    elif Player.main_action == "dildo_ass":
+    elif Player.primary_action == "dildo_ass":
         AlphaMask("Rogue_doggy_dildo_anal_animations", "Rogue_doggy_anus_mask_animation0")
 
     if RogueX.spunk["anus"] and Player.cock_position == "anal":
@@ -575,9 +575,9 @@ layeredimage Rogue_doggy_ass:
     if RogueX.spunk["back"]:
         "images/Rogue_doggy/Rogue_doggy_spunk_ass.png"
 
-    if Player.main_action == "eat_pussy":
+    if Player.primary_action == "eat_pussy":
         "licking" offset (195, 540) zoom 0.5
-    elif Player.main_action == "eat_ass":
+    elif Player.primary_action == "eat_ass":
         "licking" offset (195, 500) zoom 0.5
 
     if Player.sprite and Player.cock_position == "out" and RogueX.outfit["bottom"] and RogueX.upskirt:

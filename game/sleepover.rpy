@@ -1527,7 +1527,7 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
             $ Party[1].daily_history.append("morningwood")
             $ Party[1].traits.append("morningwood")
 
-        $ Player.main_action = "blowjob"
+        $ Player.primary_action = "blowjob"
         $ Party[0].recent_history.append("blowjob")
         $ Party[0].daily_history.append("blowjob")
         $ Party[0].daily_history.append("morningwood")
@@ -1553,7 +1553,7 @@ label sleepover_MorningWood:
     $ Player.add_word(1,"interruption")
     call shift_focus (Party[0])
     $ Player.focus = 30
-    if Player.main_action == "blowjob":
+    if Player.primary_action == "blowjob":
         ch_u "\"Slurp, slurp, slurp.\""
     else:
         ch_u "\"Squish, squish, squish.\""
@@ -1599,7 +1599,7 @@ label sleepover_MorningWood:
         $ Partner.change_face("_closed",1,mouth="_tongue")
 
     "You feel a pleasant sensation. . ."
-    if Player.main_action == "blowjob":
+    if Player.primary_action == "blowjob":
         if second_girl_main_action:
             ch_u "\"Slurp, slurp, slurp.\" \n \ \"Slurp, slurp, slurp.\""
         else:
@@ -1613,7 +1613,7 @@ label sleepover_MorningWood:
     $ Party[0].change_stat("lust", 80, 5)
 
     "It's somewhere below your waist. . ."
-    if Player.main_action == "blowjob":
+    if Player.primary_action == "blowjob":
         if second_girl_main_action:
             ch_u "\"Slurp, slurp, slurp.\" \n \ \"Slurp, slurp, slurp.\""
         else:
@@ -1655,7 +1655,7 @@ label sleepover_MorningWood:
                         "You wouldn't want to disturb them. . ."
                     else:
                         "You wouldn't want to disturb her. . ."
-                if Player.main_action == "blowjob":
+                if Player.primary_action == "blowjob":
                     Party[0].voice "\"Slurp, slurp, slurp.\""
                 else:
                     Party[0].voice "\"Squish, squish, squish.\""

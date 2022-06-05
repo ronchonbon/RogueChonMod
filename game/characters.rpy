@@ -42,8 +42,8 @@ init python:
 
             self.cologne = None
 
-            self.main_action = None
-            self.offhand_action = None
+            self.primary_action = None
+            self.secondary_action = None
 
         def add_word(self, only = False, recent = None, daily = None, trait = None, history = None):
             if (recent and not only) or (recent and recent not in self.recent_history):
@@ -212,8 +212,8 @@ init python:
 
             self.stored_stats = 0
 
-            self.main_action = None
-            self.offhand_action = None
+            self.primary_action = None
+            self.secondary_action = None
 
             if self.tag == "Rogue":
                 self.voice = ch_r
@@ -780,12 +780,12 @@ init python:
             elif self.lust >= 50:
                 self.grool = 1
 
-            if Girl.offhand_action == "kiss both" or Girl.offhand_action == "kiss girl":
+            if self.secondary_action == "kiss both" or self.secondary_action == "kiss girl":
                 kissing = True
-            elif second_girl_main_action == "kiss both" or Girl.offhand_action == "kiss girl":
+            elif second_girl_main_action == "kiss both" or self.secondary_action == "kiss girl":
                 kissing = True
             elif Partner != self:
-                if Player.main_action == "kiss" or Player.offhand_action == "kiss":
+                if Player.primary_action == "kiss" or Player.secondary_action == "kiss":
                     kissing = True
             elif second_girl_main_action == "kiss":
                 kissing = True
@@ -835,7 +835,7 @@ init python:
 
             if Partner == self and second_girl_main_action in ["suck_breasts", "eat_pussy", "eat_ass", "blowjob"]:
                 self.mouth = "_tongue"
-            elif Girl.offhand_action in ["suck_breasts", "eat_pussy", "eat_ass"]:
+            elif self.secondary_action in ["suck_breasts", "eat_pussy", "eat_ass"]:
                 self.mouth = "_tongue"
 
             if self.session_orgasms >= 10:
@@ -843,7 +843,7 @@ init python:
                 self.mouth = "_tongue"
 
             if not self.used_to_anal:
-                if Partner != self and (Player.main_action == "anal" or Player.main_action == "dildo_ass" or Girl.offhand_action == "dildo_ass"):
+                if Partner != self and (Player.primary_action == "anal" or Player.primary_action == "dildo_ass" or self.secondary_action == "dildo_ass"):
                     self.eyes = "_closed"
                     self.brows = "_angry"
 

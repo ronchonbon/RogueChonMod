@@ -381,25 +381,25 @@ label kiss_menu(Girl):
             "You release your concentration. . ."
 
             $ Player.focusing = 0
-        "Start jack'in it." if multi_action and Player.offhand_action != "jerking_off":
+        "Start jack'in it." if multi_action and Player.secondary_action != "jerking_off":
             call jerking_off(Girl)
 
             if _return == "stop":
                 return [None, "stop"]
-        "Stop jack'in it." if multi_action and Player.offhand_action == "jerking_off":
+        "Stop jack'in it." if multi_action and Player.secondary_action == "jerking_off":
             "You stop jack'in it."
 
-            $ Player.offhand_action = None
+            $ Player.secondary_action = None
         "Other options":
             menu:
                 "Offhand action":
                     if Girl.remaining_actions and multi_action:
-                        call set_offhand_action(Girl)
+                        call set_secondary_action(Girl)
 
                         if _return == "stop":
                             return [None, "stop"]
 
-                        if Player.offhand_action:
+                        if Player.secondary_action:
                              $ Girl.remaining_actions -= 1
                     else:
                         call tired_lines(Girl, "kiss")
@@ -461,13 +461,13 @@ label masturbation_menu(Girl):
             return "join"
         "\"Ahem. . .\"" if "unseen" in Girl.recent_history:
             return "interrupt"
-        "Start jack'in it." if Player.offhand_action != "jerking_off":
+        "Start jack'in it." if Player.secondary_action != "jerking_off":
             call jerking_off(Girl)
 
             if _return == "stop":
                 return "stop"
-        "Stop jack'in it." if Player.offhand_action == "jerking_off":
-            $ Player.offhand_action = None
+        "Stop jack'in it." if Player.secondary_action == "jerking_off":
+            $ Player.secondary_action = None
         "Slap her ass" if Girl.location == bg_current:
             if "unseen" in Girl.recent_history:
                 "You smack [Girl.name] firmly on the ass!"
@@ -571,12 +571,12 @@ label fondle_menu(Girl, action):
             menu:
                 "Offhand action":
                     if Girl.remaining_actions and multi_action:
-                        call set_offhand_action(Girl)
+                        call set_secondary_action(Girl)
 
                         if _return == "stop":
                             return [None, "stop"]
 
-                        if Player.offhand_action:
+                        if Player.secondary_action:
                             $ Girl.remaining_actions -= 1
                     else:
                         call tired_lines(Girl, action)
@@ -631,7 +631,7 @@ label fondle_menu(Girl, action):
                                 pass
                     else:
                         call tired_lines(Girl, action)
-                "Shift your focus" if Player.main_action and Player.offhand_action:
+                "Shift your focus" if Player.primary_action and Player.secondary_action:
                     call swap_actions(Girl)
 
                     $ action = _return
@@ -705,7 +705,7 @@ label handjob_menu(Girl, action):
         "Suck on it." if action == "blowjob" and action_speed != 3:
             $ action_speed = 3
 
-            if Player.offhand_action == "jerking_off":
+            if Player.secondary_action == "jerking_off":
                 "She dips her head a bit lower, and you move your hand out of the way."
         "Suck on it. (locked)" if action == "blowjob" and action_speed == 3:
             pass
@@ -715,7 +715,7 @@ label handjob_menu(Girl, action):
                 $ Girl.change_stat("obedience", 80, 30 - 3*Girl.action_counter["blowjob"])
                 $ Girl.recent_history.append("pushed")
 
-            if Player.offhand_action == "jerking_off" and action_speed != 3:
+            if Player.secondary_action == "jerking_off" and action_speed != 3:
                 "She takes it to the root, and you move your hand out of the way."
 
             $ action_speed = 4
@@ -772,9 +772,9 @@ label handjob_menu(Girl, action):
             call shift_view(Girl, "menu")
         "Other options":
                 menu:
-                    "I also want to fondle her breasts." if Player.offhand_action != "fondle_breasts":
+                    "I also want to fondle her breasts." if Player.secondary_action != "fondle_breasts":
                         if Girl.remaining_actions and multi_action:
-                            $ Player.offhand_action = "fondle_breasts"
+                            $ Player.secondary_action = "fondle_breasts"
 
                             "You start to fondle her breasts."
 
@@ -783,12 +783,12 @@ label handjob_menu(Girl, action):
                             call tired_lines(Girl, action)
                     "Offhand action":
                         if Girl.remaining_actions and multi_action:
-                            call set_offhand_action(Girl)
+                            call set_secondary_action(Girl)
 
                             if _return == "stop":
                                 return [None, "stop"]
 
-                            if Player.offhand_action:
+                            if Player.secondary_action:
                                 $ Girl.remaining_actions -= 1
                         else:
                             call tired_lines(Girl, action)
@@ -849,13 +849,13 @@ label handjob_menu(Girl, action):
                                     pass
                         else:
                             call tired_lines(Girl, action)
-                    "Shift your focus" if Player.main_action and Player.offhand_action:
+                    "Shift your focus" if Player.primary_action and Player.secondary_action:
                         call swap_actions(Girl)
 
                         $ action = _return
 
                         return [action, "auto"]
-                    "Shift your focus. (locked)" if action in ["dildo_pussy", "dildo_ass"] and not Player.offhand_action:
+                    "Shift your focus. (locked)" if action in ["dildo_pussy", "dildo_ass"] and not Player.secondary_action:
                         pass
                     "Threesome actions" if Partner:
                         menu:
@@ -937,12 +937,12 @@ label sex_menu(Girl, action):
             menu:
                 "Offhand action":
                     if Girl.remaining_actions and multi_action:
-                        call set_offhand_action(Girl)
+                        call set_secondary_action(Girl)
 
                         if _return == "stop":
                             return [None, "stop"]
 
-                        if Player.offhand_action:
+                        if Player.secondary_action:
                             $ Girl.remaining_actions -= 1
                     else:
                         call Sex_Basic_Dialog(Girl,"tired")

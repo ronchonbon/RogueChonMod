@@ -2022,13 +2022,13 @@ label Laura_Fuckbuddy:
     $ LauraX.change_outfit("casual1")
     call display_girl (LauraX)
     call taboo_level
-    $ Player.main_action = "masturbation"
-    $ Girl.offhand_action = "fondle_pussy"
+    $ Player.primary_action = "masturbation"
+    $ girl_offhand_action = "fondle_pussy"
     $ LauraX.change_face("_sly",2,mouth="_lipbite")
     "[LauraX.name] is standing in the doorway, with her hand down her pants."
     "You can tell she's been masturbating furiously, her scent is overpowering."
-    $ Player.main_action = None
-    $ Girl.offhand_action = None
+    $ Player.primary_action = None
+    $ girl_offhand_action = None
     $ LauraX.arm_pose = 1
     "She looks you up and down hungrily, and pulls her hand out of her pants."
     "She reaches up to caress your face, smearing her juices along it."

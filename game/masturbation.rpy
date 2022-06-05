@@ -140,9 +140,6 @@ label masturbate(Girl, context = None):
             return "back"
 
         call before_masturbation(Girl)
-
-        $ Girl.offhand_action = "fondle_pussy"
-
         call masturbation_cycle(Girl)
 
         if _return == "interrupt":
@@ -154,10 +151,12 @@ label masturbate(Girl, context = None):
                 return "stop"
         elif _return == "switch":
             call after_masturbation(Girl, "switch")
+            call stop_all_actions
 
             return "switch"
         elif _return == "stop":
             call after_masturbation(Girl, "stop")
+            call stop_all_actions
 
             return "stop"
 
@@ -185,15 +184,14 @@ label before_masturbation(Girl):
                 $ Girl.change_stat("obedience", 70, 35)
                 $ Girl.change_stat("inhibition", 80, 40)
 
-    if not Girl.offhand_action:
-        $ Girl.offhand_action = "fondle_pussy"
-
     if taboo:
         $ Girl.drain_word("no_taboo")
 
     $ Girl.drain_word("no_masturbation")
     $ Girl.recent_history.append("masturbation")
     $ Girl.daily_history.append("masturbation")
+
+    $ girl_offhand_action = "fondle_pussy"
 
     return
 
@@ -262,7 +260,7 @@ label masturbation_cycle(Girl):
                 if not Player.semen:
                     "You're emptied out, you should probably take a break."
 
-                    $ Player.offhand_action = None if Player.offhand_action == "jerking_off" else Player.offhand_action
+                    $ Player.secondary_action = None if Player.secondary_action == "jerking_off" else Player.secondary_action
 
                 if "unsatisfied" in Girl.recent_history:
                     call girl_unsatisfied_menu(Girl, "masturbation")
@@ -302,7 +300,7 @@ label after_masturbation(Girl, context):
     if context == "interrupt":
         $ Girl.change_face("_surprised", 1)
 
-        $ Girl.offhand_action = None
+        $ girl_offhand_action = None
 
         "[Girl.name] stops what she's doing with a start, eyes wide."
 
@@ -310,7 +308,7 @@ label after_masturbation(Girl, context):
 
         $ Girl.change_face("_surprised", 1)
 
-        if Player.offhand_action == "jerking_off":
+        if Player.secondary_action == "jerking_off":
             call caught_masturbating_lines(Girl, "masturbation")
 
             $ Girl.eyes = "_down"

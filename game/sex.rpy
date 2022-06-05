@@ -492,25 +492,25 @@ label end_of_action_round(Girl, action):
 
     return [None, "continue"]
 
-label set_offhand_action(Girl):
+label set_secondary_action(Girl):
     menu:
-        "Also kiss her." if Player.main_action not in mouth_actions and Player.offhand_action != "kiss":
+        "Also kiss her." if Player.primary_action not in mouth_actions and Player.secondary_action != "kiss":
             "You lean in and start kissing her."
 
             $ action = "kiss"
-        "Also fondle her breasts." if "fondle_breasts" not in [Player.main_action, Player.offhand_action]:
+        "Also fondle her breasts." if "fondle_breasts" not in [Player.primary_action, Player.secondary_action]:
             $ action = "fondle_breasts"
-        "Also suck her breasts." if Player.main_action not in mouth_actions and Player.offhand_action != "suck_breasts":
+        "Also suck her breasts." if Player.primary_action not in mouth_actions and Player.secondary_action != "suck_breasts":
             $ action = "suck_breasts"
-        "Also fondle her pussy." if Player.main_action not in ["fondle_pussy", "finger_pussy"] and Player.offhand_action not in ["fondle_pussy", "finger_pussy"]:
+        "Also fondle her pussy." if Player.primary_action not in ["fondle_pussy", "finger_pussy"] and Player.secondary_action not in ["fondle_pussy", "finger_pussy"]:
             $ action = "fondle_pussy"
-        "Also finger her pussy." if Player.main_action not in ["fondle_pussy", "finger_pussy"] and Player.offhand_action not in ["fondle_pussy", "finger_pussy"]:
+        "Also finger her pussy." if Player.primary_action not in ["fondle_pussy", "finger_pussy"] and Player.secondary_action not in ["fondle_pussy", "finger_pussy"]:
             $ action = "finger_pussy"
-        "Also fondle her ass." if "fondle_ass" not in [Player.main_action, Player.offhand_action]:
+        "Also fondle her ass." if "fondle_ass" not in [Player.primary_action, Player.secondary_action]:
             $ action = "fondle_ass"
-        "Also finger her ass." if "finger_ass" not in [Player.main_action, Player.offhand_action]:
+        "Also finger her ass." if "finger_ass" not in [Player.primary_action, Player.secondary_action]:
             $ action = "finger_ass"
-        "Also jack it." if Player.offhand_action != "jerking_off":
+        "Also jack it." if Player.secondary_action != "jerking_off":
             call jerking_off(Girl)
 
             if _return == "stop":
@@ -538,30 +538,30 @@ label set_offhand_action(Girl):
     if approval >= 2:
         call auto_approved_reactions(Girl, action)
 
-        $ Player.offhand_action = action
+        $ Player.secondary_action = action
     else:
         call auto_rejected_reactions(Girl, action)
 
         if _return == "accepted":
-            $ Player.offhand_action = action
+            $ Player.secondary_action = action
         else:
-            $ Player.offhand_action = None
+            $ Player.secondary_action = None
 
     return "continue"
 
 label swap_actions(Girl):
-    if Player.offhand_action in breast_actions:
+    if Player.secondary_action in breast_actions:
         "You shift your attention to her breasts."
-    elif Player.offhand_action in pussy_actions:
+    elif Player.secondary_action in pussy_actions:
         "You shift your attention to her pussy."
-    elif Player.offhand_action in ass_actions:
+    elif Player.secondary_action in ass_actions:
         "You shift your attention to her ass."
-    elif Player.offhand_action == "kiss":
+    elif Player.secondary_action == "kiss":
         "You go back to kissing her deeply."
 
-    $ Player.main_action, Player.offhand_action = Player.offhand_action, Player.main_action
+    $ Player.primary_action, Player.secondary_action = Player.secondary_action, Player.primary_action
 
-    return Player.main_action
+    return Player.primary_action
 
 label jerking_off(Girl = None):
     if not Girl:
@@ -575,7 +575,7 @@ label jerking_off(Girl = None):
     if "unseen" in Girl.recent_history:
         $ Player.recent_history.append("cockout")
 
-        $ Player.offhand_action = "jerking_off"
+        $ Player.secondary_action = "jerking_off"
 
         "You whip out your cock and start working it."
     else:
@@ -593,7 +593,7 @@ label jerking_off(Girl = None):
 
             call Seen_First_Peen (Girl, Partner)
 
-        $ Player.offhand_action = "jerking_off"
+        $ Player.secondary_action = "jerking_off"
 
         if "jerking_off" in Girl.recent_history:
             return "continue"
@@ -860,17 +860,17 @@ label jerking_off(Girl = None):
                 "Hmm, sounds like a plan.":
                     $ context = "shift"
 
-                    $ Player.offhand_action = None
+                    $ Player.secondary_action = None
 
-            if Player.main_action == "striptease":
+            if Player.primary_action == "striptease":
                 call Group_Strip_End
-            elif Player.main_action == "masturbation":
+            elif Player.primary_action == "masturbation":
                 $ Girl.remaining_actions -= 1
                 $ Girl.action_counter["masturbation"] += 1
 
                 call checkout
-            elif Player.main_action:
-                call after_action(Girl, Player.main_action, "shift")
+            elif Player.primary_action:
+                call after_action(Girl, Player.primary_action, "shift")
 
             call before_action(Girl, options[0], "shift")
 
@@ -1045,7 +1045,7 @@ label slap_ass(Girl):
 
         "You slap her ass and she looks back at you a bit startled."
 
-    if Player.main_action and Girl.lust >= 100:
+    if Player.primary_action and Girl.lust >= 100:
         call Girl_Cumming (Girl)
 
     if taboo:
@@ -1166,7 +1166,7 @@ label girl_initiated_action(Girl, action):
             "[Girl.name] [phrase], clearly intending you to get to work."
     elif action in job_actions:
         if action == "handjob":
-            if Player.offhand_action == "jerking_off":
+            if Player.secondary_action == "jerking_off":
                 "[Girl.name] brushes your hand aside and starts stroking your cock."
             else:
                 "[Girl.name] gives you a mischevious smile, and starts to fondle your cock."

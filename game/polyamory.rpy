@@ -71,7 +71,7 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
     $ line = 0
 
 
-    if Player.offhand_action == "jerking_off":
+    if Player.secondary_action == "jerking_off":
         $ Girl.eyes = "_down"
         if Girl == RogueX:
             ch_r "And why is your cock out like that?!"
@@ -1121,10 +1121,10 @@ label Les_Prep(Girl=focused_Girl, temp_Girls=[]):
                 $ Girl.change_stat("obedience", 70, 20)
                 $ Girl.change_stat("inhibition", 80, 60)
         call Les_FirstKiss
-        $ Girl.offhand_action == "kiss girl"
+        $ girl_offhand_action == "kiss girl"
         $ second_girl_main_action == "kiss girl"
 
-    $ Player.main_action = "lesbian"
+    $ Player.primary_action = "lesbian"
     if action_context:
         $ renpy.pop_call()
         $ action_context = None
@@ -1151,10 +1151,10 @@ label Les_Cycle(Girl=focused_Girl):
                 "\"Ahem. . .\"" if "unseen" in Girl.recent_history:
                     jump Les_Interupted
 
-                "Start jack'in it." if Player.offhand_action != "jerking_off":
+                "Start jack'in it." if Player.secondary_action != "jerking_off":
                     call jerking_off (Girl)
-                "Stop jack'in it." if Player.offhand_action == "jerking_off":
-                    $ Player.offhand_action = None
+                "Stop jack'in it." if Player.secondary_action == "jerking_off":
+                    $ Player.secondary_action = None
 
                 "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
@@ -1169,8 +1169,8 @@ label Les_Cycle(Girl=focused_Girl):
                     menu:
                         "Offhand action":
                             if Girl.remaining_actions and multi_action:
-                                call set_offhand_action
-                                if Player.offhand_action:
+                                call set_secondary_action
+                                if Player.secondary_action:
                                     $ Girl.remaining_actions -= 1
                             else:
                                 call Sex_Basic_Dialog (Girl, "tired")
@@ -2051,20 +2051,20 @@ label Les_Change(Primary=0, Secondary=Partner, D20S=0, PrimaryLust=0, SecondaryL
     $ line = 0
     menu:
         "Hey [Primary.name]. . ."
-        "why don't you kiss her?" if second_girl_offhand_action != "kiss girl" and second_girl_offhand_action != "kiss both":
-            call Threeway_Set (Primary, "kiss girl", "lesbian", Girl.offhand_action, Secondary)
-        "why don't you grab her tits?" if Girl.offhand_action != "fondle_breasts":
-            call Threeway_Set (Primary, "fondle_breasts", "lesbian", Girl.offhand_action, Secondary)
-        "why don't you suck her breasts?" if Girl.offhand_action != "suck_breasts":
-            call Threeway_Set (Primary, "suck_breasts", "lesbian", Girl.offhand_action, Secondary)
-        "why don't you finger her?" if Girl.offhand_action != "fondle_pussy":
-            call Threeway_Set (Primary, "fondle_pussy", "lesbian", Girl.offhand_action, Secondary)
-        "why don't you go down on her?" if Girl.offhand_action != "eat_pussy":
-            call Threeway_Set (Primary, "eat_pussy", "lesbian", Girl.offhand_action, Secondary)
-        "why don't you grab her ass?" if Girl.offhand_action != "fondle_ass":
-            call Threeway_Set (Primary, "fondle_ass", "lesbian", Girl.offhand_action, Secondary)
-        "why don't you lick her ass?" if Girl.offhand_action != "eat_ass":
-            call Threeway_Set (Primary, "eat_ass", "lesbian", Girl.offhand_action, Secondary)
+        "why don't you kiss her?" if second_girl_secondary_action != "kiss girl" and second_girl_secondary_action != "kiss both":
+            call Threeway_Set (Primary, "kiss girl", "lesbian", girl_offhand_action, Secondary)
+        "why don't you grab her tits?" if girl_offhand_action != "fondle_breasts":
+            call Threeway_Set (Primary, "fondle_breasts", "lesbian", girl_offhand_action, Secondary)
+        "why don't you suck her breasts?" if girl_offhand_action != "suck_breasts":
+            call Threeway_Set (Primary, "suck_breasts", "lesbian", girl_offhand_action, Secondary)
+        "why don't you finger her?" if girl_offhand_action != "fondle_pussy":
+            call Threeway_Set (Primary, "fondle_pussy", "lesbian", girl_offhand_action, Secondary)
+        "why don't you go down on her?" if girl_offhand_action != "eat_pussy":
+            call Threeway_Set (Primary, "eat_pussy", "lesbian", girl_offhand_action, Secondary)
+        "why don't you grab her ass?" if girl_offhand_action != "fondle_ass":
+            call Threeway_Set (Primary, "fondle_ass", "lesbian", girl_offhand_action, Secondary)
+        "why don't you lick her ass?" if girl_offhand_action != "eat_ass":
+            call Threeway_Set (Primary, "eat_ass", "lesbian", girl_offhand_action, Secondary)
         "never mind.":
             pass
     if not line:
@@ -3546,8 +3546,8 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 call set_the_scene
                 $ Girl.change_face("_kiss",1,eyes = "_closed")
                 $ Girl2.change_face("_kiss",1,eyes = "_closed")
-                $ Player.main_action = "lesbian"
-                $ Girl.offhand_action = "fondle_pussy"
+                $ Player.primary_action = "lesbian"
+                $ girl_offhand_action = "fondle_pussy"
                 $ second_girl_main_action = "fondle_pussy"
                 "You see [Girl.name] and [Girl2.name], eyes closed and stroking each other vigorously."
                 $ line = 1
@@ -3585,8 +3585,8 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
     elif Girl == JubesX:
         ch_v "Get over here."
 
-    $ Player.main_action = "lesbian"
-    $ Girl.offhand_action = "fondle_pussy"
+    $ Player.primary_action = "lesbian"
+    $ girl_offhand_action = "fondle_pussy"
     $ second_girl_main_action = "fondle_pussy"
     $ Partner = Girl2
     call shift_focus(Girl)

@@ -128,8 +128,6 @@ label start_action(Girl, action, context = None):
 
         call before_action(Girl, action, context)
 
-        # $ Player.main_action = action
-
         if _return == "continue":
             call action_cycle(Girl, action, context)
 
@@ -152,10 +150,6 @@ label start_action(Girl, action, context = None):
             return "stop"
 
 label before_action(Girl, action, context):
-    if taboo:
-        $ Girl.inhibition += int(taboo/10)
-        $ Girl.lust += int(taboo/5)
-
     $ Girl.change_face("_sexy")
 
     if action == "kiss":
@@ -312,10 +306,12 @@ label before_action(Girl, action, context):
     $ Girl.drain_word("no_" + action)
     $ Girl.add_word(0, action, action)
 
-    if action in mouth_actions and Player.offhand_action in mouth_actions:
-        $ Player.offhand_action = None
-    elif action in cock_actions and Player.offhand_action in cock_actions:
-        $ Player.offhand_action = None
+    $ Player.primary_action = action
+
+    if action in mouth_actions and Player.secondary_action in mouth_actions:
+        $ Player.secondary_action = None
+    elif action in cock_actions and Player.secondary_action in cock_actions:
+        $ Player.secondary_action = None
 
     $ Player.sprite = True
 
@@ -401,8 +397,8 @@ label action_cycle(Girl, action, context):
         $ round -= 1
 
         if (action in ["blowjob"] and action_speed) or action in ["sex", "anal"]:
-            $ Player.cock_wet = 1
-            $ Player.spunk = 0 if (Player.spunk and not Girl.spunk["pussy"]) else Player.spunk #cleans you off after one cycle
+            $ Player.cock_wet = True
+            $ Player.spunk = False if (Player.spunk and not Girl.spunk["pussy"]) else Player.spunk #cleans you off after one cycle
 
         call end_of_action_round(Girl, action)
 

@@ -301,7 +301,7 @@ label Massage_Cycle:
     if Girl.pose == "doggy" or Girl.pose == "sex":
         call show_sex(Girl, "massage")
 
-    $ Player.main_action = "massage"
+    $ Player.primary_action = "massage"
 
     while round >= 10 and MCount < 10:
         call shift_focus (Girl)
@@ -812,14 +812,14 @@ label Massage_Cycle:
 
         if not Girl.taboo:
 
-            $ Player.main_action = "massage"
+            $ Player.primary_action = "massage"
             $ line = 0
-            call Girl_Self_lines (Girl, "T3", Girl.offhand_action)
+            call Girl_Self_lines (Girl, "T3", girl_offhand_action)
             if line:
                 $ line3 = line + "."
 
         $ Player.focus = 50 if not Player.semen and Player.focus >= 50 else Player.focus
-        $ Player.focus = 80 if Player.focus >= 80 and Girl.offhand_action != "handjob" else Player.focus
+        $ Player.focus = 80 if Player.focus >= 80 and girl_offhand_action != "handjob" else Player.focus
 
         if Player.focus >= 100 or Girl.lust >= 100:
 

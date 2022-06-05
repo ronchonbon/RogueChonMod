@@ -363,8 +363,8 @@ label Emma_Caught_Classroom:
 
     hide black_screen onlayer black
 
-    $ Girl.offhand_action = "fondle_pussy"
-    $ second_girl_offhand_action = "fondle_breasts"
+    $ girl_offhand_action = "fondle_pussy"
+    $ second_girl_secondary_action = "fondle_breasts"
 
     $ EmmaX.recent_history.append("classcaught")
     $ EmmaX.daily_history.append("unseen")
@@ -585,7 +585,7 @@ label Emma_Caught_Classroom:
 
                         "You begin to stroke your cock."
 
-                        $ Player.offhand_action = "jerking_off"
+                        $ Player.secondary_action = "jerking_off"
                     "No, you go ahead.":
                         $ EmmaX.change_face("_sad")
                         $ EmmaX.change_stat("love", 70, -10)
@@ -601,8 +601,8 @@ label Emma_Caught_Classroom:
                 $ taboo = 0
                 $ EmmaX.taboo = 0
 
-                $ Player.offhand_action = "fondle_pussy"
-                $ second_girl_offhand_action = "fondle_breasts"
+                $ Player.secondary_action = "fondle_pussy"
+                $ second_girl_secondary_action = "fondle_breasts"
 
                 "She leans back and runs her fingertips along her breasts."
 
@@ -631,7 +631,7 @@ label Emma_Caught_Classroom:
 
                 call before_action(EmmaX, "fondle_breasts", None)
 
-                $ Player.main_action = "fondle_breasts"
+                $ Player.primary_action = "fondle_breasts"
 
                 call action_cycle(EmmaX, "fondle_breasts", context)
                 call after_action(EmmaX, "fondle_breasts", "stop")

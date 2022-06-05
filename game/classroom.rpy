@@ -15,7 +15,7 @@ label take_class:
     elif round >= 30:
         $ line = "You're pretty late, but catch the tail end of the class."
 
-    $ Player.main_action = None
+    $ Player.primary_action = None
 
     $ D20 = renpy.random.randint(1, 20)
 
@@ -469,7 +469,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                             "You feel her soft fur moisten as you stroke the soft flesh below. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
                         else:
                             "You feel her lips moisten as you stroke the soft flesh. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
-                        $ Player.main_action = "fondle_pussy"
+                        $ Player.primary_action = "fondle_pussy"
                         $ D20 += 5
 
                 "Keep fondling her pussy." if line == "fondle_pussy":
@@ -516,7 +516,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         "[Girl.name]'s sly eyes spakle as your hand cups her breast, giving it a casual caress."
                         "her nipples begin to firm up and she lets out a small moan of pleasure."
                         $ D20 += 7
-                        $ Player.main_action = "fondle_breasts"
+                        $ Player.primary_action = "fondle_breasts"
                 "Keep fondling her tits." if line == "fondle_breasts":
                     $ Girl.change_stat("obedience", 70, 5)
                     $ Girl.change_stat("inhibition", 60, 2)
@@ -525,7 +525,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                     $ D20 += 7
 
 
-                "Try and pull her hand toward your lap." if not Player.offhand_action and Player.semen:
+                "Try and pull her hand toward your lap." if not Player.secondary_action and Player.semen:
                     if "handjob" in Girl.recent_history:
                         "[Girl.name] grins and her hand grasps your cock again."
                     elif approval_check(Girl, 1200) and Girl.action_counter["handjob"] and Girl.SEXP >= 40:
@@ -559,7 +559,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                             $ Player.add_word(1,"cockout")
                             call Seen_First_Peen (Girl, Partner)
                             $ Girl.change_stat("lust", 94, 5)
-                        $ Player.offhand_action = "handjob"
+                        $ Player.secondary_action = "handjob"
                         $ Girl.recent_history.append("handjob")
                         $ Girl.daily_history.append("handjob")
                         "She begins to gently stroke it. . ."
@@ -568,7 +568,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         $ D20 += 5
 
 
-                "Stop her handjob." if Player.offhand_action:
+                "Stop her handjob." if Player.secondary_action:
                     "You put a hand on her wrist and nudge her hand away."
                     if approval_check(Girl, 1800) or approval_check(Girl, 700, "O") or (Girl.love+Girl.obedience) >= (2*Girl.inhibition):
 
@@ -578,7 +578,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         $ Girl.change_stat("obedience", 80, 3)
                         "[Girl.name] allows her hand to be pulled away and goes back to what she'd been doing with it."
                         $ Girl.change_face("_sly")
-                        $ Player.offhand_action = None
+                        $ Player.secondary_action = None
                     else:
                         $ Girl.change_face("_angry")
                         $ Girl.change_stat("love", 80, -3)
@@ -594,7 +594,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
 
 
 
-            if not Player.offhand_action and Player.semen and "stophand" not in Girl.recent_history:
+            if not Player.secondary_action and Player.semen and "stophand" not in Girl.recent_history:
                 if approval_check(Girl, 1200) and approval_check(Girl, 400, "I") and Girl.action_counter["handjob"] and Girl.SEXP >= 40:
                     $ Girl.change_face("_sly")
                     "[Girl.name] gets a mischievous grin and her hand starts to caress your crotch."
@@ -612,7 +612,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                                 $ Player.add_word(1,"cockout")
                                 call Seen_First_Peen (Girl, Partner)
                                 $ Girl.change_stat("lust", 94, 5)
-                            $ Player.offhand_action = "handjob"
+                            $ Player.secondary_action = "handjob"
                             $ Girl.recent_history.append("handjob")
                             $ Girl.daily_history.append("handjob")
                             "She begins to gently stroke it. . ."
@@ -630,7 +630,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                                 $ Girl.change_stat("obedience", 80, 3)
                                 "[Girl.name] allows her hand to be pulled away and goes back to what she'd been doing with it."
                                 $ Girl.change_face("_sly")
-                                $ Player.offhand_action = None
+                                $ Player.secondary_action = None
                             else:
                                 $ Girl.change_face("_angry")
                                 $ Girl.change_stat("love", 80, -3)
@@ -642,7 +642,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                                 $ D20 += 10
 
 
-            if Player.offhand_action:
+            if Player.secondary_action:
 
                 "[Girl.name]'s hand continues to caress your cock. . ."
                 $ Player.focus += 15 if Player.focus < 60 else 10
@@ -663,7 +663,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                     $ D20 += 10
                     if not Player.semen:
                         "She continues to lightly stroke you, but you don't seem up to it for now. . ."
-                        $ Player.offhand_action = None
+                        $ Player.secondary_action = None
                 $ D20 += 5
 
 
@@ -867,7 +867,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
             $ Girl.change_stat("love", 80, -10)
             $ Girl.change_stat("obedience", 70, -5)
             $ Girl.change_stat("inhibition", 50, -10)
-            $ Player.main_action = None
+            $ Player.primary_action = None
             if Girl not in Rules:
                 call Girls_Caught (Girl)
             else:
@@ -879,7 +879,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
 
 
 label Frisky_Class_End:
-    $ Player.main_action = None
+    $ Player.primary_action = None
     $ Partner = 0
     if Teacher:
         $ Teacher.drain_word("frisky",1,0)

@@ -569,7 +569,7 @@ label Flirt(Girl=0):
                                 Girl.voice "Not now. . ."
                             else:
                                 call shift_focus(Girl)
-                                $ Player.main_action = "kiss"
+                                $ Player.primary_action = "kiss"
                                 call stop_all_actions (1)
                             return
                         "Just a taste [[no].":

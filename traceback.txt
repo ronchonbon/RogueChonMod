@@ -3,7 +3,7 @@
 Executing ATL code at game/player_animations.rpy:20
   File "game/locations.rpy", line 126, in script call
     call chat
-  File "game/chat.rpy", line 122, in script call
+  File "game/chat.rpy", line 164, in script call
     call chat_menu
   File "game/chat.rpy", line 263, in script call
     call enter_main_sex_menu(Girl)
@@ -11,14 +11,12 @@ Executing ATL code at game/player_animations.rpy:20
     call girl_sex_menu(Girl)
   File "game/menus.rpy", line 126, in script call
     call start_action(focused_Girl, "kiss")
-  File "game/actions.rpy", line 106, in script call
-    call first_action_approval(Girl, action)
-  File "game/sex.rpy", line 1439, in script call
-    call first_action_approval_mostly_love_reactions(Girl, action)
-  File "game/reactions.rpy", line 70, in script call
-    call first_action_approval_mostly_love_lines(Girl, action)
-  File "game/dialogue.rpy", line 4251, in script
-    Girl.voice "[line]"
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 374, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
 TypeError: zip argument #1 must support iteration
 
 -- Full Traceback ------------------------------------------------------------
@@ -26,7 +24,7 @@ TypeError: zip argument #1 must support iteration
 Full traceback:
   File "game/locations.rpy", line 126, in script call
     call chat
-  File "game/chat.rpy", line 122, in script call
+  File "game/chat.rpy", line 164, in script call
     call chat_menu
   File "game/chat.rpy", line 263, in script call
     call enter_main_sex_menu(Girl)
@@ -34,24 +32,18 @@ Full traceback:
     call girl_sex_menu(Girl)
   File "game/menus.rpy", line 126, in script call
     call start_action(focused_Girl, "kiss")
-  File "game/actions.rpy", line 106, in script call
-    call first_action_approval(Girl, action)
-  File "game/sex.rpy", line 1439, in script call
-    call first_action_approval_mostly_love_reactions(Girl, action)
-  File "game/reactions.rpy", line 70, in script call
-    call first_action_approval_mostly_love_lines(Girl, action)
-  File "game/dialogue.rpy", line 4251, in script
-    Girl.voice "[line]"
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
-    who(what, *args, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
-    **display_args)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 647, in display_say
-    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 374, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1688, in execute
+    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1060, in menu
+    rv = renpy.store.menu(new_items)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1296, in display_menu
+    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
@@ -142,4 +134,4 @@ TypeError: zip argument #1 must support iteration
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like Chonky Mod 0.1e
-Sun Jun  5 02:18:13 2022
+Sun Jun  5 11:39:43 2022

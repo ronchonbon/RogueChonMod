@@ -1,38 +1,38 @@
-Sun Jun  5 02:00:20 2022
+Sun Jun  5 11:15:28 2022
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
  
 
-Bootstrap to the start of init.init took 0.05s
+Bootstrap to the start of init.init took 0.06s
 Early init took 0.00s
-Loader init took 0.05s
-Loading error handling took 0.05s
-Loading script took 3.64s
-Loading save slot metadata. took 0.13s
+Loader init took 0.06s
+Loading error handling took 0.06s
+Loading script took 3.38s
+Loading save slot metadata. took 0.12s
 Loading persistent took 0.01s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
 Set script version to: (6, 99, 13)
-Running init code took 0.16s
+Running init code took 0.15s
 Loading analysis data took 0.02s
-Analyze and compile ATL took 0.03s
+Analyze and compile ATL took 0.04s
 Index archives took 0.00s
 Dump and make backups. took 0.11s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
-Initial gc. took 0.11s
+Initial gc. took 0.16s
 DPI scale factor: 2.500000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.20s
+Creating interface object took 0.22s
 Cleaning stores took 0.00s
-Init translation took 0.09s
+Init translation took 0.10s
 Build styles took 0.00s
-Load screen analysis took 0.02s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
-Prepare screens took 0.05s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.06s
 Save pyanalysis. took 0.00s
-Save bytecode. took 0.26s
+Save bytecode. took 0.29s
 Running _start took 0.00s
 Performance test:
 Interface start took 0.13s
@@ -64,16 +64,120 @@ Root FBO is: 0
 FBO Maximum Texture Size: 2048
 
 Full traceback:
-  File "game/rogue_scenes.rpy", line 51, in script
-    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with easeinright
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1197, in execute
-    show_imspec(self.imspec, atl=getattr(self, "atl", None))
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1167, in show_imspec
-    atl=atl)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 768, in show
-    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 1147, in add
-    thing.visit_all(lambda d : None)
+  File "game/rogue_scenes.rpy", line 415, in script call
+    call wait
+  File "game/utilities.rpy", line 13, in script call
+    call checkout(total = True)
+  File "game/utilities.rpy", line 188, in script call
+    call stop_all_actions
+  File "game/utilities.rpy", line 1341, in script
+    $ Girl.secondary_action = None
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 928, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/python.py", line 2245, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/utilities.rpy", line 1341, in <module>
+    $ Girl.secondary_action = None
+NameError: name 'Girl' is not defined
+
+While running game code:
+  File "game/rogue_scenes.rpy", line 415, in script call
+    call wait
+  File "game/utilities.rpy", line 13, in script call
+    call checkout(total = True)
+  File "game/utilities.rpy", line 188, in script call
+    call stop_all_actions
+  File "game/utilities.rpy", line 1341, in script
+    $ Girl.secondary_action = None
+  File "game/utilities.rpy", line 1341, in <module>
+    $ Girl.secondary_action = None
+NameError: name 'Girl' is not defined
+Resetting cache.
+Bootstrap to the start of init.init took 137.07s
+Early init took 0.00s
+Loader init took 0.05s
+Loading error handling took 0.09s
+Loading script took 1.85s
+Loading save slot metadata. took 0.12s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.12s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.10s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.17s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.20s
+Cleaning stores took 0.00s
+Init translation took 0.11s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.02s
+Prepare screens took 0.05s
+Save pyanalysis. took 0.05s
+Save bytecode. took 0.12s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.11s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/locations.rpy", line 160, in script call
+    call world_map
+  File "game/locations.rpy", line 1163, in script call
+    call showering
+  File "game/shower.rpy", line 480, in script call
+    call Seen_First_Peen (0, 0, 0, 1)
+  File "game/utilities.rpy", line 4529, in script call
+    call Girl_First_Peen (temp_Girls[0], Silent, Undress)
+  File "game/utilities.rpy", line 4837, in script
+    ch_r "Whoa, I didn't know they looked so big up close."
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
+    who(what, *args, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
+    **display_args)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 647, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3737, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
     d.visit_all(callback, seen)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
@@ -100,36 +204,41 @@ Full traceback:
     if renpy.python.py_eval_bytecode(code):
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/python.py", line 2269, in py_eval_bytecode
     return eval(bytecode, globals, locals)
-  File "game/rogue_animations.rpy", line 114, in <module>
-    if not Partner.mainhand_action or focused_Girl != RogueX:
-AttributeError: 'NoneType' object has no attribute 'mainhand_action'
+  File "<none>", line 1, in <module>
+NameError: name 'secondary_action' is not defined
 
 While running game code:
-  File "game/rogue_scenes.rpy", line 51, in script
-    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with easeinright
-  File "game/rogue_animations.rpy", line 114, in <module>
-    if not Partner.mainhand_action or focused_Girl != RogueX:
-AttributeError: 'NoneType' object has no attribute 'mainhand_action'
+  File "game/locations.rpy", line 160, in script call
+    call world_map
+  File "game/locations.rpy", line 1163, in script call
+    call showering
+  File "game/shower.rpy", line 480, in script call
+    call Seen_First_Peen (0, 0, 0, 1)
+  File "game/utilities.rpy", line 4529, in script call
+    call Girl_First_Peen (temp_Girls[0], Silent, Undress)
+  File "game/utilities.rpy", line 4837, in script
+    ch_r "Whoa, I didn't know they looked so big up close."
+NameError: name 'secondary_action' is not defined
 Resetting cache.
-Bootstrap to the start of init.init took 157.87s
+Bootstrap to the start of init.init took 266.94s
 Early init took 0.00s
 Loader init took 0.04s
-Loading error handling took 0.09s
+Loading error handling took 0.04s
 game/characters.rpy:296: SyntaxWarning: name 'Player' is used prior to global declaration
   global Player
-Loading script took 4.09s
+Loading script took 1.33s
 Loading save slot metadata. took 0.12s
 Loading persistent took 0.01s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
 Set script version to: (6, 99, 13)
-Running init code took 0.13s
+Running init code took 0.12s
 Loading analysis data took 0.04s
-Analyze and compile ATL took 0.03s
+Analyze and compile ATL took 0.04s
 Index archives took 0.00s
 Dump and make backups. took 0.10s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
-Initial gc. took 0.21s
+Initial gc. took 0.19s
 DPI scale factor: 2.500000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
@@ -139,13 +248,13 @@ Init translation took 0.11s
 Build styles took 0.00s
 Load screen analysis took 0.00s
 Analyze screens took 0.01s
-Save screen analysis took 0.02s
-Prepare screens took 0.05s
-Save pyanalysis. took 0.05s
-Save bytecode. took 0.12s
-Running _start took 0.02s
+Save screen analysis took 0.03s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.11s
+Running _start took 0.00s
 Performance test:
-Interface start took 0.11s
+Interface start took 0.12s
 
 Initializing gl renderer:
 primary display bounds: (0, 0, 3840, 2160)
@@ -168,24 +277,16 @@ Root FBO is: 0
 FBO Maximum Texture Size: 2048
 
 Full traceback:
-  File "game/locations.rpy", line 126, in script call
-    call chat
-  File "game/chat.rpy", line 122, in script call
-    call chat_menu
-  File "game/chat.rpy", line 263, in script call
-    call enter_main_sex_menu(Girl)
-  File "game/menus.rpy", line 59, in script call
-    call girl_sex_menu(Girl)
-  File "game/menus.rpy", line 126, in script call
-    call start_action(focused_Girl, "kiss")
-  File "game/actions.rpy", line 106, in script call
-    call first_action_approval(Girl, action)
-  File "game/sex.rpy", line 1439, in script call
-    call first_action_approval_mostly_love_reactions(Girl, action)
-  File "game/reactions.rpy", line 70, in script call
-    call first_action_approval_mostly_love_lines(Girl, action)
-  File "game/dialogue.rpy", line 4251, in script
-    Girl.voice "[line]"
+  File "game/locations.rpy", line 160, in script call
+    call world_map
+  File "game/locations.rpy", line 1163, in script call
+    call showering
+  File "game/shower.rpy", line 480, in script call
+    call Seen_First_Peen (0, 0, 0, 1)
+  File "game/utilities.rpy", line 4529, in script call
+    call Girl_First_Peen (temp_Girls[0], Silent, Undress)
+  File "game/utilities.rpy", line 4837, in script
+    ch_r "Whoa, I didn't know they looked so big up close."
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
     renpy.exports.say(who, what, *args, **kwargs)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
@@ -200,129 +301,65 @@ Full traceback:
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
     repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3839, in interact_core
-    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 2565, in draw_screen
-    renpy.config.screen_height,
-  File "render.pyx", line 492, in renpy.display.render.render_screen
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
-    surf = render(self.child, width, height, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
-    cr = renpy.display.render.render(self.child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 148, in renpy.display.accelerator.transform_render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 908, in update_state
-    fr = self.execute(self, self.st, self.at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 585, in execute
-    action, arg, pause = block.execute(trans, timebase, self.atl_state, events)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 792, in execute
-    action, arg, pause = stmt.execute(trans, target - start, child_state, events)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 1270, in execute
-    value = interpolate(complete, old, new, PROPERTIES[k])
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 143, in interpolate
-    return tuple(interpolate(t, i, j, ty) for i, j, ty in zip(a, b, type))
-TypeError: zip argument #1 must support iteration
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3737, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1426, in update
+    raw_child, redraw = self.function(st, at, *self.args, **self.kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1517, in condition_switch_show
+    return condition_switch_pick(switch), None
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1508, in condition_switch_pick
+    if renpy.python.py_eval_bytecode(code):
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/python.py", line 2269, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "<none>", line 1, in <module>
+NameError: name 'secondary_action' is not defined
 
-Executing ATL code at game/player_animations.rpy:20
-  File "game/locations.rpy", line 126, in script call
-    call chat
-  File "game/chat.rpy", line 122, in script call
-    call chat_menu
-  File "game/chat.rpy", line 263, in script call
-    call enter_main_sex_menu(Girl)
-  File "game/menus.rpy", line 59, in script call
-    call girl_sex_menu(Girl)
-  File "game/menus.rpy", line 126, in script call
-    call start_action(focused_Girl, "kiss")
-  File "game/actions.rpy", line 106, in script call
-    call first_action_approval(Girl, action)
-  File "game/sex.rpy", line 1439, in script call
-    call first_action_approval_mostly_love_reactions(Girl, action)
-  File "game/reactions.rpy", line 70, in script call
-    call first_action_approval_mostly_love_lines(Girl, action)
-  File "game/dialogue.rpy", line 4251, in script
-    Girl.voice "[line]"
-TypeError: zip argument #1 must support iteration
+While running game code:
+  File "game/locations.rpy", line 160, in script call
+    call world_map
+  File "game/locations.rpy", line 1163, in script call
+    call showering
+  File "game/shower.rpy", line 480, in script call
+    call Seen_First_Peen (0, 0, 0, 1)
+  File "game/utilities.rpy", line 4529, in script call
+    call Girl_First_Peen (temp_Girls[0], Silent, Undress)
+  File "game/utilities.rpy", line 4837, in script
+    ch_r "Whoa, I didn't know they looked so big up close."
+NameError: name 'secondary_action' is not defined
 
 Full traceback:
-  File "game/locations.rpy", line 126, in script call
-    call chat
-  File "game/chat.rpy", line 122, in script call
-    call chat_menu
-  File "game/chat.rpy", line 263, in script call
-    call enter_main_sex_menu(Girl)
-  File "game/menus.rpy", line 59, in script call
-    call girl_sex_menu(Girl)
-  File "game/menus.rpy", line 126, in script call
-    call start_action(focused_Girl, "kiss")
-  File "game/actions.rpy", line 106, in script call
-    call first_action_approval(Girl, action)
-  File "game/sex.rpy", line 1439, in script call
-    call first_action_approval_mostly_love_reactions(Girl, action)
-  File "game/reactions.rpy", line 70, in script call
-    call first_action_approval_mostly_love_lines(Girl, action)
-  File "game/dialogue.rpy", line 4251, in script
-    Girl.voice "[line]"
+  File "game/locations.rpy", line 160, in script call
+    call world_map
+  File "game/locations.rpy", line 1163, in script call
+    call showering
+  File "game/shower.rpy", line 480, in script call
+    call Seen_First_Peen (0, 0, 0, 1)
+  File "game/utilities.rpy", line 4529, in script call
+    call Girl_First_Peen (temp_Girls[0], Silent, Undress)
+  File "game/utilities.rpy", line 4837, in script
+    ch_r "Whoa, I didn't know they looked so big up close."
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
     renpy.exports.say(who, what, *args, **kwargs)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
@@ -337,287 +374,85 @@ Full traceback:
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
     repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3839, in interact_core
-    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 2565, in draw_screen
-    renpy.config.screen_height,
-  File "render.pyx", line 492, in renpy.display.render.render_screen
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
-    surf = render(self.child, width, height, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
-    cr = renpy.display.render.render(self.child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 148, in renpy.display.accelerator.transform_render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 908, in update_state
-    fr = self.execute(self, self.st, self.at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 585, in execute
-    action, arg, pause = block.execute(trans, timebase, self.atl_state, events)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 792, in execute
-    action, arg, pause = stmt.execute(trans, target - start, child_state, events)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 1270, in execute
-    value = interpolate(complete, old, new, PROPERTIES[k])
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 143, in interpolate
-    return tuple(interpolate(t, i, j, ty) for i, j, ty in zip(a, b, type))
-TypeError: zip argument #1 must support iteration
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3737, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1426, in update
+    raw_child, redraw = self.function(st, at, *self.args, **self.kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1517, in condition_switch_show
+    return condition_switch_pick(switch), None
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1508, in condition_switch_pick
+    if renpy.python.py_eval_bytecode(code):
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/python.py", line 2269, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "<none>", line 1, in <module>
+NameError: name 'secondary_action' is not defined
 
-Executing ATL code at game/player_animations.rpy:20
-  File "game/locations.rpy", line 126, in script call
-    call chat
-  File "game/chat.rpy", line 122, in script call
-    call chat_menu
-  File "game/chat.rpy", line 263, in script call
-    call enter_main_sex_menu(Girl)
-  File "game/menus.rpy", line 59, in script call
-    call girl_sex_menu(Girl)
-  File "game/menus.rpy", line 126, in script call
-    call start_action(focused_Girl, "kiss")
-  File "game/actions.rpy", line 106, in script call
-    call first_action_approval(Girl, action)
-  File "game/sex.rpy", line 1439, in script call
-    call first_action_approval_mostly_love_reactions(Girl, action)
-  File "game/reactions.rpy", line 70, in script call
-    call first_action_approval_mostly_love_lines(Girl, action)
-  File "game/dialogue.rpy", line 4251, in script
-    Girl.voice "[line]"
-TypeError: zip argument #1 must support iteration
-
-Full traceback:
-  File "game/locations.rpy", line 126, in script call
-    call chat
-  File "game/chat.rpy", line 122, in script call
-    call chat_menu
-  File "game/chat.rpy", line 263, in script call
-    call enter_main_sex_menu(Girl)
-  File "game/menus.rpy", line 59, in script call
-    call girl_sex_menu(Girl)
-  File "game/menus.rpy", line 126, in script call
-    call start_action(focused_Girl, "kiss")
-  File "game/actions.rpy", line 106, in script call
-    call first_action_approval(Girl, action)
-  File "game/sex.rpy", line 1439, in script call
-    call first_action_approval_mostly_love_reactions(Girl, action)
-  File "game/reactions.rpy", line 70, in script call
-    call first_action_approval_mostly_love_lines(Girl, action)
-  File "game/dialogue.rpy", line 4251, in script
-    Girl.voice "[line]"
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
-    who(what, *args, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
-    **display_args)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 647, in display_say
-    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3839, in interact_core
-    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 2565, in draw_screen
-    renpy.config.screen_height,
-  File "render.pyx", line 492, in renpy.display.render.render_screen
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
-    surf = render(self.child, width, height, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
-    cr = renpy.display.render.render(self.child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 148, in renpy.display.accelerator.transform_render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 908, in update_state
-    fr = self.execute(self, self.st, self.at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 585, in execute
-    action, arg, pause = block.execute(trans, timebase, self.atl_state, events)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 792, in execute
-    action, arg, pause = stmt.execute(trans, target - start, child_state, events)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 1270, in execute
-    value = interpolate(complete, old, new, PROPERTIES[k])
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 143, in interpolate
-    return tuple(interpolate(t, i, j, ty) for i, j, ty in zip(a, b, type))
-TypeError: zip argument #1 must support iteration
-
-Executing ATL code at game/player_animations.rpy:20
-  File "game/locations.rpy", line 126, in script call
-    call chat
-  File "game/chat.rpy", line 122, in script call
-    call chat_menu
-  File "game/chat.rpy", line 263, in script call
-    call enter_main_sex_menu(Girl)
-  File "game/menus.rpy", line 59, in script call
-    call girl_sex_menu(Girl)
-  File "game/menus.rpy", line 126, in script call
-    call start_action(focused_Girl, "kiss")
-  File "game/actions.rpy", line 106, in script call
-    call first_action_approval(Girl, action)
-  File "game/sex.rpy", line 1439, in script call
-    call first_action_approval_mostly_love_reactions(Girl, action)
-  File "game/reactions.rpy", line 70, in script call
-    call first_action_approval_mostly_love_lines(Girl, action)
-  File "game/dialogue.rpy", line 4251, in script
-    Girl.voice "[line]"
-TypeError: zip argument #1 must support iteration
-Cleaning stores took 0.00s
-Init translation took 0.00s
-Build styles took 0.00s
-Load screen analysis took 0.02s
-Analyze screens took 0.00s
-Prepare screens took 0.00s
-Running _start took 0.00s
+While running game code:
+  File "game/locations.rpy", line 160, in script call
+    call world_map
+  File "game/locations.rpy", line 1163, in script call
+    call showering
+  File "game/shower.rpy", line 480, in script call
+    call Seen_First_Peen (0, 0, 0, 1)
+  File "game/utilities.rpy", line 4529, in script call
+    call Girl_First_Peen (temp_Girls[0], Silent, Undress)
+  File "game/utilities.rpy", line 4837, in script
+    ch_r "Whoa, I didn't know they looked so big up close."
+NameError: name 'secondary_action' is not defined
 Resetting cache.
-Bootstrap to the start of init.init took 1081.40s
+Bootstrap to the start of init.init took 710.99s
 Early init took 0.00s
-Loader init took 0.05s
-Loading error handling took 0.05s
-game/characters.rpy:296: SyntaxWarning: name 'Player' is used prior to global declaration
-  global Player
-Loading script took 7.17s
-Loading save slot metadata. took 0.14s
+Loader init took 0.04s
+Loading error handling took 0.04s
+Loading script took 4.20s
+Loading save slot metadata. took 0.12s
 Loading persistent took 0.01s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
 Set script version to: (6, 99, 13)
-Running init code took 0.13s
-Loading analysis data took 0.03s
+Running init code took 0.12s
+Loading analysis data took 0.02s
 Analyze and compile ATL took 0.04s
 Index archives took 0.00s
-Dump and make backups. took 0.10s
+Dump and make backups. took 0.09s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
 Initial gc. took 0.21s
 DPI scale factor: 2.500000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.19s
+Creating interface object took 0.18s
 Cleaning stores took 0.00s
 Init translation took 0.13s
 Build styles took 0.00s
 Load screen analysis took 0.00s
 Analyze screens took 0.01s
-Save screen analysis took 0.03s
+Save screen analysis took 0.02s
 Prepare screens took 0.06s
 Save pyanalysis. took 0.05s
-Save bytecode. took 0.12s
-Running _start took 0.04s
+Save bytecode. took 0.13s
+Running _start took 0.02s
 Performance test:
 Interface start took 0.13s
 
@@ -640,17 +475,1289 @@ Texture testing:
 Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
 Root FBO is: 0
 FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/locations.rpy", line 160, in script call
+    call world_map
+  File "game/locations.rpy", line 1163, in script call
+    call showering
+  File "game/shower.rpy", line 480, in script call
+    call Seen_First_Peen (0, 0, 0, 1)
+  File "game/utilities.rpy", line 4404, in script call
+    call Girl_First_Peen (temp_Girls[0], Silent, Undress)
+  File "game/utilities.rpy", line 4712, in script
+    ch_r "Whoa, I didn't know they looked so big up close."
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
+    who(what, *args, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
+    **display_args)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 647, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3737, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1426, in update
+    raw_child, redraw = self.function(st, at, *self.args, **self.kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1517, in condition_switch_show
+    return condition_switch_pick(switch), None
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1508, in condition_switch_pick
+    if renpy.python.py_eval_bytecode(code):
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/python.py", line 2269, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "<none>", line 1, in <module>
+NameError: name 'secondary_action' is not defined
+
+While running game code:
+  File "game/locations.rpy", line 160, in script call
+    call world_map
+  File "game/locations.rpy", line 1163, in script call
+    call showering
+  File "game/shower.rpy", line 480, in script call
+    call Seen_First_Peen (0, 0, 0, 1)
+  File "game/utilities.rpy", line 4404, in script call
+    call Girl_First_Peen (temp_Girls[0], Silent, Undress)
+  File "game/utilities.rpy", line 4712, in script
+    ch_r "Whoa, I didn't know they looked so big up close."
+NameError: name 'secondary_action' is not defined
+Cleaning stores took 0.00s
+Init translation took 0.00s
+Build styles took 0.00s
+Load screen analysis took 0.02s
+Analyze screens took 0.00s
+Prepare screens took 0.00s
+Running _start took 0.00s
+
+Full traceback:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 22, in script call
+    call auto_approved_reactions(Girl, action)
+  File "game/reactions.rpy", line 106, in script call
+    call auto_accepted_narrations(Girl, action)
+  File "game/narrations.rpy", line 4637, in script
+    "As you cup her breast, [Girl.name] gently nods."
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
+    who(what, *args, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
+    **display_args)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 647, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3839, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 2565, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 492, in renpy.display.render.render_screen
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
+    surf = render(self.child, width, height, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
+    cr = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 148, in renpy.display.accelerator.transform_render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 908, in update_state
+    fr = self.execute(self, self.st, self.at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 585, in execute
+    action, arg, pause = block.execute(trans, timebase, self.atl_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 792, in execute
+    action, arg, pause = stmt.execute(trans, target - start, child_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 1270, in execute
+    value = interpolate(complete, old, new, PROPERTIES[k])
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 143, in interpolate
+    return tuple(interpolate(t, i, j, ty) for i, j, ty in zip(a, b, type))
+TypeError: zip argument #1 must support iteration
+
+Executing ATL code at game/player_animations.rpy:20
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 22, in script call
+    call auto_approved_reactions(Girl, action)
+  File "game/reactions.rpy", line 106, in script call
+    call auto_accepted_narrations(Girl, action)
+  File "game/narrations.rpy", line 4637, in script
+    "As you cup her breast, [Girl.name] gently nods."
+TypeError: zip argument #1 must support iteration
+
+Full traceback:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 22, in script call
+    call auto_approved_reactions(Girl, action)
+  File "game/reactions.rpy", line 106, in script call
+    call auto_accepted_narrations(Girl, action)
+  File "game/narrations.rpy", line 4637, in script
+    "As you cup her breast, [Girl.name] gently nods."
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
+    who(what, *args, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
+    **display_args)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 647, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3839, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 2565, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 492, in renpy.display.render.render_screen
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
+    surf = render(self.child, width, height, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
+    cr = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 148, in renpy.display.accelerator.transform_render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 908, in update_state
+    fr = self.execute(self, self.st, self.at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 585, in execute
+    action, arg, pause = block.execute(trans, timebase, self.atl_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 792, in execute
+    action, arg, pause = stmt.execute(trans, target - start, child_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 1270, in execute
+    value = interpolate(complete, old, new, PROPERTIES[k])
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 143, in interpolate
+    return tuple(interpolate(t, i, j, ty) for i, j, ty in zip(a, b, type))
+TypeError: zip argument #1 must support iteration
+
+Executing ATL code at game/player_animations.rpy:20
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 22, in script call
+    call auto_approved_reactions(Girl, action)
+  File "game/reactions.rpy", line 106, in script call
+    call auto_accepted_narrations(Girl, action)
+  File "game/narrations.rpy", line 4637, in script
+    "As you cup her breast, [Girl.name] gently nods."
+TypeError: zip argument #1 must support iteration
+
+Full traceback:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 22, in script call
+    call auto_approved_reactions(Girl, action)
+  File "game/reactions.rpy", line 106, in script call
+    call auto_accepted_narrations(Girl, action)
+  File "game/narrations.rpy", line 4637, in script
+    "As you cup her breast, [Girl.name] gently nods."
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
+    who(what, *args, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
+    **display_args)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 647, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3839, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 2565, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 492, in renpy.display.render.render_screen
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
+    surf = render(self.child, width, height, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
+    cr = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 148, in renpy.display.accelerator.transform_render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 908, in update_state
+    fr = self.execute(self, self.st, self.at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 585, in execute
+    action, arg, pause = block.execute(trans, timebase, self.atl_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 792, in execute
+    action, arg, pause = stmt.execute(trans, target - start, child_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 1270, in execute
+    value = interpolate(complete, old, new, PROPERTIES[k])
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 143, in interpolate
+    return tuple(interpolate(t, i, j, ty) for i, j, ty in zip(a, b, type))
+TypeError: zip argument #1 must support iteration
+
+Executing ATL code at game/player_animations.rpy:20
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 22, in script call
+    call auto_approved_reactions(Girl, action)
+  File "game/reactions.rpy", line 106, in script call
+    call auto_accepted_narrations(Girl, action)
+  File "game/narrations.rpy", line 4637, in script
+    "As you cup her breast, [Girl.name] gently nods."
+TypeError: zip argument #1 must support iteration
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
 Resetting cache.
-Bootstrap to the start of init.init took 1090.68s
+Bootstrap to the start of init.init took 820.21s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.04s
+Loading script took 1.36s
+Loading save slot metadata. took 0.13s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.15s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.10s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.22s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.22s
+Cleaning stores took 0.00s
+Init translation took 0.11s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.02s
+Prepare screens took 0.05s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.11s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.14s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 374, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1688, in execute
+    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1060, in menu
+    rv = renpy.store.menu(new_items)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1296, in display_menu
+    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3839, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 2565, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 492, in renpy.display.render.render_screen
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
+    surf = render(self.child, width, height, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
+    cr = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 148, in renpy.display.accelerator.transform_render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 908, in update_state
+    fr = self.execute(self, self.st, self.at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 585, in execute
+    action, arg, pause = block.execute(trans, timebase, self.atl_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 792, in execute
+    action, arg, pause = stmt.execute(trans, target - start, child_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 1270, in execute
+    value = interpolate(complete, old, new, PROPERTIES[k])
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 143, in interpolate
+    return tuple(interpolate(t, i, j, ty) for i, j, ty in zip(a, b, type))
+TypeError: zip argument #1 must support iteration
+
+Executing ATL code at game/player_animations.rpy:38
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 374, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+TypeError: zip argument #1 must support iteration
+
+Full traceback:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 135, in script call
+    call after_action(Girl, action, "switch")
+  File "game/actions.rpy", line 431, in script call
+    call action_specific_consequences(Girl, action)
+  File "game/sex.rpy", line 1496, in script call
+    call Partner_Like(Girl, 1)
+  File "game/utilities.rpy", line 3487, in script
+    $ Partner.check_if_likes(Girl,Measure,value,1)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 928, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/python.py", line 2245, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/utilities.rpy", line 3487, in <module>
+    $ Partner.check_if_likes(Girl,Measure,value,1)
+AttributeError: 'NoneType' object has no attribute 'check_if_likes'
+
+While running game code:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 135, in script call
+    call after_action(Girl, action, "switch")
+  File "game/actions.rpy", line 431, in script call
+    call action_specific_consequences(Girl, action)
+  File "game/sex.rpy", line 1496, in script call
+    call Partner_Like(Girl, 1)
+  File "game/utilities.rpy", line 3487, in script
+    $ Partner.check_if_likes(Girl,Measure,value,1)
+  File "game/utilities.rpy", line 3487, in <module>
+    $ Partner.check_if_likes(Girl,Measure,value,1)
+AttributeError: 'NoneType' object has no attribute 'check_if_likes'
+Resetting cache.
+Bootstrap to the start of init.init took 965.48s
 Early init took 0.00s
 Loader init took 0.05s
-Loading error handling took 0.04s
-Loading script took 1.46s
-Loading save slot metadata. took 0.14s
+Loading error handling took 0.06s
+Loading script took 1.35s
+Loading save slot metadata. took 0.13s
 Loading persistent took 0.01s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
 Set script version to: (6, 99, 13)
 Running init code took 0.12s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.09s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.22s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.18s
+Cleaning stores took 0.00s
+Init translation took 0.12s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.11s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.13s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 135, in script call
+    call after_action(Girl, action, "switch")
+  File "game/actions.rpy", line 431, in script call
+    call action_specific_consequences(Girl, action)
+  File "game/sex.rpy", line 1496, in script call
+    call Partner_Like(Girl, 1)
+  File "game/utilities.rpy", line 3487, in script
+    $ Partner.check_if_likes(Girl,Measure,value,1)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 928, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/python.py", line 2245, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/utilities.rpy", line 3487, in <module>
+    $ Partner.check_if_likes(Girl,Measure,value,1)
+AttributeError: 'NoneType' object has no attribute 'check_if_likes'
+
+While running game code:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 135, in script call
+    call after_action(Girl, action, "switch")
+  File "game/actions.rpy", line 431, in script call
+    call action_specific_consequences(Girl, action)
+  File "game/sex.rpy", line 1496, in script call
+    call Partner_Like(Girl, 1)
+  File "game/utilities.rpy", line 3487, in script
+    $ Partner.check_if_likes(Girl,Measure,value,1)
+  File "game/utilities.rpy", line 3487, in <module>
+    $ Partner.check_if_likes(Girl,Measure,value,1)
+AttributeError: 'NoneType' object has no attribute 'check_if_likes'
+Resetting cache.
+Bootstrap to the start of init.init took 1039.88s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.04s
+Loading script took 1.48s
+Loading save slot metadata. took 0.12s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.15s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.10s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.23s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.21s
+Cleaning stores took 0.00s
+Init translation took 0.11s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.05s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.12s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.14s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Resetting cache.
+Bootstrap to the start of init.init took 1117.32s
+Early init took 0.00s
+Loader init took 0.05s
+Loading error handling took 0.04s
+Loading script took 1.39s
+Loading save slot metadata. took 0.13s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.13s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.10s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.23s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.21s
+Cleaning stores took 0.00s
+Init translation took 0.14s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.05s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.11s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.15s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Resetting cache.
+Bootstrap to the start of init.init took 1131.99s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.04s
+Loading script took 1.30s
+Loading save slot metadata. took 0.13s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.14s
+Loading analysis data took 0.07s
+Analyze and compile ATL took 0.05s
+Index archives took 0.00s
+Dump and make backups. took 0.11s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.23s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.19s
+Cleaning stores took 0.00s
+Init translation took 0.11s
+Build styles took 0.00s
+Load screen analysis took 0.02s
+Analyze screens took 0.00s
+Save screen analysis took 0.00s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.00s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.15s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Resetting cache.
+Bootstrap to the start of init.init took 1196.40s
+Early init took 0.00s
+Loader init took 0.05s
+Loading error handling took 0.04s
+Loading script took 1.34s
+Loading save slot metadata. took 0.12s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.13s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.10s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.24s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.20s
+Cleaning stores took 0.00s
+Init translation took 0.12s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.11s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.14s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Resetting cache.
+Bootstrap to the start of init.init took 1224.27s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.04s
+Loading script took 1.30s
+Loading save slot metadata. took 0.12s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.13s
+Loading analysis data took 0.06s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.09s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.22s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.20s
+Cleaning stores took 0.00s
+Init translation took 0.11s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.02s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.11s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.14s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Resetting cache.
+Bootstrap to the start of init.init took 1241.47s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.04s
+Loading script took 1.28s
+Loading save slot metadata. took 0.13s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.13s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.10s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.22s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.21s
+Cleaning stores took 0.00s
+Init translation took 0.13s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.05s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.11s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.13s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 374, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1688, in execute
+    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1060, in menu
+    rv = renpy.store.menu(new_items)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1296, in display_menu
+    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3839, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 2565, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 492, in renpy.display.render.render_screen
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
+    surf = render(self.child, width, height, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
+    cr = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 148, in renpy.display.accelerator.transform_render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 908, in update_state
+    fr = self.execute(self, self.st, self.at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 585, in execute
+    action, arg, pause = block.execute(trans, timebase, self.atl_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 792, in execute
+    action, arg, pause = stmt.execute(trans, target - start, child_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 1270, in execute
+    value = interpolate(complete, old, new, PROPERTIES[k])
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 143, in interpolate
+    return tuple(interpolate(t, i, j, ty) for i, j, ty in zip(a, b, type))
+TypeError: zip argument #1 must support iteration
+
+Executing ATL code at game/player_animations.rpy:20
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 374, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+TypeError: zip argument #1 must support iteration
+Resetting cache.
+Bootstrap to the start of init.init took 1257.33s
+Early init took 0.00s
+Loader init took 0.05s
+Loading error handling took 0.04s
+Loading script took 1.25s
+Loading save slot metadata. took 0.12s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.13s
 Loading analysis data took 0.05s
 Analyze and compile ATL took 0.04s
 Index archives took 0.00s
@@ -665,10 +1772,430 @@ Creating interface object took 0.22s
 Cleaning stores took 0.00s
 Init translation took 0.13s
 Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.02s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.11s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.14s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 374, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1688, in execute
+    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1060, in menu
+    rv = renpy.store.menu(new_items)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1296, in display_menu
+    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3839, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 2565, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 492, in renpy.display.render.render_screen
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
+    surf = render(self.child, width, height, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
+    cr = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 148, in renpy.display.accelerator.transform_render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 908, in update_state
+    fr = self.execute(self, self.st, self.at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 585, in execute
+    action, arg, pause = block.execute(trans, timebase, self.atl_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 792, in execute
+    action, arg, pause = stmt.execute(trans, target - start, child_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 1270, in execute
+    value = interpolate(complete, old, new, PROPERTIES[k])
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 143, in interpolate
+    return tuple(interpolate(t, i, j, ty) for i, j, ty in zip(a, b, type))
+TypeError: zip argument #1 must support iteration
+
+Executing ATL code at game/player_animations.rpy:20
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 374, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+TypeError: zip argument #1 must support iteration
+Resetting cache.
+Bootstrap to the start of init.init took 1325.67s
+Early init took 0.00s
+Loader init took 0.05s
+Loading error handling took 0.04s
+Loading script took 1.41s
+Loading save slot metadata. took 0.12s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.12s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.10s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.24s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.22s
+Cleaning stores took 0.00s
+Init translation took 0.12s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.02s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.11s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.13s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 376, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1688, in execute
+    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1060, in menu
+    rv = renpy.store.menu(new_items)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1296, in display_menu
+    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3839, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 2565, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 492, in renpy.display.render.render_screen
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
+    surf = render(self.child, width, height, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
+    cr = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 148, in renpy.display.accelerator.transform_render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 908, in update_state
+    fr = self.execute(self, self.st, self.at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 585, in execute
+    action, arg, pause = block.execute(trans, timebase, self.atl_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 792, in execute
+    action, arg, pause = stmt.execute(trans, target - start, child_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 1270, in execute
+    value = interpolate(complete, old, new, PROPERTIES[k])
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 143, in interpolate
+    return tuple(interpolate(t, i, j, ty) for i, j, ty in zip(a, b, type))
+TypeError: zip argument #1 must support iteration
+
+Executing ATL code at game/player_animations.rpy:20
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 376, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+TypeError: zip argument #1 must support iteration
+Resetting cache.
+Bootstrap to the start of init.init took 1332.32s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.04s
+Loading script took 1.44s
+Loading save slot metadata. took 0.13s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.13s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.10s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.33s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.21s
+Cleaning stores took 0.00s
+Init translation took 0.14s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.11s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.13s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Resetting cache.
+Bootstrap to the start of init.init took 1335.61s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.04s
+Loading script took 1.29s
+Loading save slot metadata. took 0.13s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.13s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.09s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.22s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.20s
+Cleaning stores took 0.00s
+Init translation took 0.13s
+Build styles took 0.00s
 Load screen analysis took 0.02s
 Analyze screens took 0.00s
 Save screen analysis took 0.00s
-Prepare screens took 0.06s
+Prepare screens took 0.05s
 Save pyanalysis. took 0.00s
 Save bytecode. took 0.00s
 Running _start took 0.00s
@@ -691,6 +2218,888 @@ FBO Maximum Texture Size: 2048
 Using gl renderer.
 Texture testing:
 - Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
 Root FBO is: 0
 FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 377, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1688, in execute
+    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1060, in menu
+    rv = renpy.store.menu(new_items)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1296, in display_menu
+    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3839, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 2565, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 492, in renpy.display.render.render_screen
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
+    surf = render(self.child, width, height, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
+    cr = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 148, in renpy.display.accelerator.transform_render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 908, in update_state
+    fr = self.execute(self, self.st, self.at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 585, in execute
+    action, arg, pause = block.execute(trans, timebase, self.atl_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 792, in execute
+    action, arg, pause = stmt.execute(trans, target - start, child_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 1270, in execute
+    value = interpolate(complete, old, new, PROPERTIES[k])
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 143, in interpolate
+    return tuple(interpolate(t, i, j, ty) for i, j, ty in zip(a, b, type))
+TypeError: zip argument #1 must support iteration
+
+Executing ATL code at game/player_animations.rpy:20
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 377, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+TypeError: zip argument #1 must support iteration
+Resetting cache.
+Bootstrap to the start of init.init took 1352.91s
+Early init took 0.00s
+Loader init took 0.05s
+Loading error handling took 0.04s
+Loading script took 1.29s
+Loading save slot metadata. took 0.12s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.12s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.10s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.22s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.21s
+Cleaning stores took 0.00s
+Init translation took 0.11s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.02s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.11s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.15s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Resetting cache.
+Bootstrap to the start of init.init took 1386.78s
+Early init took 0.00s
+Loader init took 0.05s
+Loading error handling took 0.04s
+Loading script took 1.33s
+Loading save slot metadata. took 0.14s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.12s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.10s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.33s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.22s
+Cleaning stores took 0.00s
+Init translation took 0.13s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.11s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.14s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 129, in script call
+    call before_action(Girl, action, context)
+  File "game/actions.rpy", line 309, in script
+    $ Player.primary_action = copy(action)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 928, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/python.py", line 2245, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/actions.rpy", line 309, in <module>
+    $ Player.primary_action = copy(action)
+NameError: name 'copy' is not defined
+
+While running game code:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 129, in script call
+    call before_action(Girl, action, context)
+  File "game/actions.rpy", line 309, in script
+    $ Player.primary_action = copy(action)
+  File "game/actions.rpy", line 309, in <module>
+    $ Player.primary_action = copy(action)
+NameError: name 'copy' is not defined
+Resetting cache.
+Bootstrap to the start of init.init took 1399.54s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.04s
+Loading script took 1.28s
+Loading save slot metadata. took 0.12s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.13s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.10s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.23s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.19s
+Cleaning stores took 0.00s
+Init translation took 0.12s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.02s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.11s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.14s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Resetting cache.
+Bootstrap to the start of init.init took 1416.79s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.05s
+Loading script took 1.29s
+Loading save slot metadata. took 0.12s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.12s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.10s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.22s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.20s
+Cleaning stores took 0.00s
+Init translation took 0.11s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.02s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.11s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.13s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 374, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1688, in execute
+    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1060, in menu
+    rv = renpy.store.menu(new_items)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1296, in display_menu
+    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3839, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 2565, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 492, in renpy.display.render.render_screen
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
+    surf = render(self.child, width, height, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
+    cr = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 148, in renpy.display.accelerator.transform_render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 908, in update_state
+    fr = self.execute(self, self.st, self.at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 585, in execute
+    action, arg, pause = block.execute(trans, timebase, self.atl_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 792, in execute
+    action, arg, pause = stmt.execute(trans, target - start, child_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 1270, in execute
+    value = interpolate(complete, old, new, PROPERTIES[k])
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 143, in interpolate
+    return tuple(interpolate(t, i, j, ty) for i, j, ty in zip(a, b, type))
+TypeError: zip argument #1 must support iteration
+
+Executing ATL code at game/player_animations.rpy:20
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 374, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+TypeError: zip argument #1 must support iteration
+Resetting cache.
+Bootstrap to the start of init.init took 1435.75s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.04s
+Loading script took 1.30s
+Loading save slot metadata. took 0.12s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.13s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.10s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.23s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.20s
+Cleaning stores took 0.00s
+Init translation took 0.13s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.02s
+Prepare screens took 0.05s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.11s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.14s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 374, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1688, in execute
+    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1060, in menu
+    rv = renpy.store.menu(new_items)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1296, in display_menu
+    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3839, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 2565, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 492, in renpy.display.render.render_screen
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
+    surf = render(self.child, width, height, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
+    cr = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 148, in renpy.display.accelerator.transform_render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 908, in update_state
+    fr = self.execute(self, self.st, self.at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 585, in execute
+    action, arg, pause = block.execute(trans, timebase, self.atl_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 792, in execute
+    action, arg, pause = stmt.execute(trans, target - start, child_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 1270, in execute
+    value = interpolate(complete, old, new, PROPERTIES[k])
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 143, in interpolate
+    return tuple(interpolate(t, i, j, ty) for i, j, ty in zip(a, b, type))
+TypeError: zip argument #1 must support iteration
+
+Executing ATL code at game/player_animations.rpy:20
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 374, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+TypeError: zip argument #1 must support iteration
+Resetting cache.
+Bootstrap to the start of init.init took 1451.40s
+Early init took 0.00s
+Loader init took 0.04s
+Loading error handling took 0.04s
+Loading script took 1.36s
+Loading save slot metadata. took 0.12s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.13s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.04s
+Index archives took 0.00s
+Dump and make backups. took 0.10s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.24s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.21s
+Cleaning stores took 0.00s
+Init translation took 0.12s
+Build styles took 0.00s
+Load screen analysis took 0.02s
+Analyze screens took 0.00s
+Save screen analysis took 0.00s
+Prepare screens took 0.05s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.00s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.12s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 374, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1688, in execute
+    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1060, in menu
+    rv = renpy.store.menu(new_items)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1296, in display_menu
+    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3839, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 2565, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 492, in renpy.display.render.render_screen
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
+    surf = render(self.child, width, height, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
+    cr = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 148, in renpy.display.accelerator.transform_render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 908, in update_state
+    fr = self.execute(self, self.st, self.at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 585, in execute
+    action, arg, pause = block.execute(trans, timebase, self.atl_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 792, in execute
+    action, arg, pause = stmt.execute(trans, target - start, child_state, events)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 1270, in execute
+    value = interpolate(complete, old, new, PROPERTIES[k])
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/atl.py", line 143, in interpolate
+    return tuple(interpolate(t, i, j, ty) for i, j, ty in zip(a, b, type))
+TypeError: zip argument #1 must support iteration
+
+Executing ATL code at game/player_animations.rpy:20
+  File "game/locations.rpy", line 126, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/menus.rpy", line 126, in script call
+    call start_action(focused_Girl, "kiss")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action, context)
+  File "game/actions.rpy", line 374, in script call
+    call fondle_menu(Girl, action)
+  File "game/menus.rpy", line 537, in script
+    menu:
+TypeError: zip argument #1 must support iteration

@@ -8,7 +8,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
     $ Girl = check_girl(Girl)
 
     call shift_focus (Girl)
-    if Player.main_action == "blowjob":
+    if Player.primary_action == "blowjob":
         $ approval_bonus += 5
 
     if Girl.addiction > 75:
@@ -32,15 +32,15 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
     if action_context == "swap":
 
         $ line = "So what would you like " + Girl.name + " to do?"
-    elif Player.main_action == "handjob":
+    elif Player.primary_action == "handjob":
         $ line = "As she strokes, you're about ready to come. . ."
-    elif Player.main_action == "blowjob":
+    elif Player.primary_action == "blowjob":
         $ line = "As she sucks at you, you start to feel about to come. . ."
-    elif Player.main_action == "titjob":
+    elif Player.primary_action == "titjob":
         $ line = "As you rub into her cleavage, you start to feel about to come. . ."
-    elif Player.main_action == "sex" or Player.main_action == "anal":
+    elif Player.primary_action == "sex" or Player.primary_action == "anal":
         $ line = "As you thrust into her, you feel about to blow. . ."
-    elif Player.main_action == "hotdog":
+    elif Player.primary_action == "hotdog":
         $ line = "As you grind into her, you feel about to blow. . ."
     else:
         $ line = "You start to feel about to come. . ."
@@ -56,21 +56,21 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
 
             $ action_context = "asked"
             jump Girl_In_mouth
-        "Cum in her mouth without asking" if Player.main_action == "blowjob" or Player.main_action == "handjob" or Player.main_action == "titjob" and action_context != "swap":
+        "Cum in her mouth without asking" if Player.primary_action == "blowjob" or Player.primary_action == "handjob" or Player.primary_action == "titjob" and action_context != "swap":
             $ action_context = "auto"
             jump Girl_In_mouth
 
-        "Ask to cum inside her" if Player.main_action == "sex" and action_context != "swap":
+        "Ask to cum inside her" if Player.primary_action == "sex" and action_context != "swap":
             $ action_context = "asked"
             jump Girl_Creampie_P
-        "Ask to cum inside her" if Player.main_action == "anal" and action_context != "swap":
+        "Ask to cum inside her" if Player.primary_action == "anal" and action_context != "swap":
             $ action_context = "asked"
             jump Girl_Creampie_A
 
-        "Cum inside her" if Player.main_action == "sex" and action_context != "swap":
+        "Cum inside her" if Player.primary_action == "sex" and action_context != "swap":
             $ action_context = "auto"
             jump Girl_Creampie_P
-        "Cum inside her" if Player.main_action == "anal" and action_context != "swap":
+        "Cum inside her" if Player.primary_action == "anal" and action_context != "swap":
             $ action_context = "auto"
             jump Girl_Creampie_A
         "Cum outside":
@@ -103,14 +103,14 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
 
             return
 
-        "Just fire away" if Player.offhand_action == "jerking_off":
+        "Just fire away" if Player.secondary_action == "jerking_off":
             if "cockout" not in Player.recent_history:
                 $ Player.spunk = "in"
                 "You cum in your pants."
             else:
                 "You spray jizz across the room."
             jump Girl_Orgasm_After
-        "Pull back" if Player.main_action != "psy" and Girl.location == bg_current and action_context != "swap":
+        "Pull back" if Player.primary_action != "psy" and Girl.location == bg_current and action_context != "swap":
             if renpy.showing(Girl.tag+" blowjob"):
                 if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.event_counter["swallowed"]:
                     jump Manic_Suck
@@ -298,7 +298,7 @@ label Girl_Warn_Her:
         jump Girl_Swallowed
 
 
-    if Player.main_action == "sex" and Girl.event_counter["creampied"] >= 5:
+    if Player.primary_action == "sex" and Girl.event_counter["creampied"] >= 5:
 
         $ Girl.change_face("_sexy")
         $ Player.cock_position = "sex"
@@ -310,7 +310,7 @@ label Girl_Warn_Her:
             call Girl_Cumming (Girl)
         jump Girl_Creampied
 
-    elif Player.main_action == "sex" and Girl.event_counter["creampied"] and D20 >= 10:
+    elif Player.primary_action == "sex" and Girl.event_counter["creampied"] and D20 >= 10:
 
         $ Girl.change_face("_sexy")
         $ Player.cock_position = "sex"
@@ -322,7 +322,7 @@ label Girl_Warn_Her:
             call Girl_Cumming (Girl)
         jump Girl_Creampied
 
-    elif Player.main_action == "anal" and Girl.event_counter["anal_creampied"] >= 5:
+    elif Player.primary_action == "anal" and Girl.event_counter["anal_creampied"] >= 5:
 
         $ Girl.change_face("_sexy")
         $ Player.cock_position = "anal"
@@ -334,7 +334,7 @@ label Girl_Warn_Her:
             call Girl_Cumming (Girl)
         jump Girl_Creampied
 
-    elif Player.main_action == "anal" and Girl.event_counter["anal_creampied"] and D20 >= 10:
+    elif Player.primary_action == "anal" and Girl.event_counter["anal_creampied"] and D20 >= 10:
 
         $ Girl.change_face("_sexy")
         $ Player.cock_position = "anal"
@@ -346,7 +346,7 @@ label Girl_Warn_Her:
             call Girl_Cumming (Girl)
         jump Girl_Creampied
 
-    elif Player.main_action != "anal" and Girl.event_counter["swallowed"] >= 5:
+    elif Player.primary_action != "anal" and Girl.event_counter["swallowed"] >= 5:
 
         if renpy.showing(Girl.tag+" blowjob"):
             $ Girl.change_face("_sucking")
@@ -411,10 +411,10 @@ label Girl_Warn_Her:
             jump Girl_Handy_Finish
         elif renpy.showing(Girl.tag+" titjob") and Girl.action_counter["titjob"]:
             jump Girl_Facial
-        elif (renpy.showing(Girl.tag+" doggy") or renpy.showing(Girl.tag+" sex")) and Girl.action_counter["sex"] and Player.main_action == "sex":
+        elif (renpy.showing(Girl.tag+" doggy") or renpy.showing(Girl.tag+" sex")) and Girl.action_counter["sex"] and Player.primary_action == "sex":
             "She gently pushes you back off of her."
             jump Girl_Cum_Outside
-        elif (renpy.showing(Girl.tag+" doggy") or renpy.showing(Girl.tag+" sex")) and Girl.action_counter["anal"] and Player.main_action == "anal":
+        elif (renpy.showing(Girl.tag+" doggy") or renpy.showing(Girl.tag+" sex")) and Girl.action_counter["anal"] and Player.primary_action == "anal":
             "She gently pushes you back off of her."
             jump Girl_Cum_Outside
 
@@ -422,7 +422,7 @@ label Girl_Warn_Her:
 
     if renpy.showing(Girl.tag+" blowjob"):
         jump Girl_In_mouth
-    elif Player.main_action == "sex" or Player.main_action == "anal":
+    elif Player.primary_action == "sex" or Player.primary_action == "anal":
         call reset_position(Girl)
         "She pulls off of you and grabs your cock in her hand."
         jump Girl_Handy_Finish
@@ -432,7 +432,7 @@ label Girl_Warn_Her:
     jump Girl_Facial
 
 label Girl_In_mouth:
-    if Player.main_action == "anal":
+    if Player.primary_action == "anal":
         $ approval_bonus -= 15
     if "hungry" not in Girl.traits and Girl.addiction <= 50 and "full" in Girl.recent_history:
         $ approval_bonus -= 15
@@ -983,7 +983,7 @@ label Girl_In_mouth:
     jump Girl_Swallowed
 
 label Girl_Creampie_P:
-    if Player.main_action == "sex" and action_context == "auto":
+    if Player.primary_action == "sex" and action_context == "auto":
         $ Player.cock_position = "sex"
         $ Girl.spunk["pussy"] = True
         $ Player.spunk = "in"
@@ -1086,7 +1086,7 @@ label Girl_Creampie_P:
 
 label Girl_Creampie_A:
 
-    if Player.main_action == "anal" and action_context == "auto":
+    if Player.primary_action == "anal" and action_context == "auto":
         $ Player.cock_position = "anal"
         $ Girl.spunk["anus"] = True
         $ Player.spunk = "anal"
@@ -1339,7 +1339,7 @@ label Girl_TitSpunk:
 
 
 label Girl_Cum_Outside:
-    if Player.main_action != "footjob":
+    if Player.primary_action != "footjob":
         if renpy.showing(Girl.tag+"_PJ_Animation"):
             call middle_launch(Girl)
 
@@ -1355,9 +1355,9 @@ label Girl_Cum_Outside:
         $ Girl.eyes = "_manic"
         $ Girl.blushing = "_blush1"
         call show_blowjob(Girl, orgasm = True)
-        if Player.main_action == "sex":
+        if Player.primary_action == "sex":
             "You pull out of her pussy with a pop, and her eyes widen in surprise. She leaps at your cock and sucks it deep, draining your fluids hungrily."
-        elif Player.main_action == "anal":
+        elif Player.primary_action == "anal":
             "You pull out of her ass with a pop, and her eyes widen in surprise. She leaps at your cock and sucks it deep, draining your fluids hungrily."
         $ Girl.mouth = "_lipbite"
         $ Girl.spunk["mouth"] = True
@@ -1381,21 +1381,21 @@ label Girl_Cum_Outside:
         $ Girl.change_stat("obedience", 80, -5)
         $ Girl.change_stat("inhibition", 200, 10)
         jump Girl_Swallowed
-    if Player.main_action != "footjob":
+    if Player.primary_action != "footjob":
         $ Player.cock_position = "out"
     if Girl.pose == "doggy":
         $ Girl.spunk["back"] = True
-        if Player.main_action == "sex":
+        if Player.primary_action == "sex":
             "You pull out of her pussy with a pop and spray all over her backside."
-        elif Player.main_action == "anal":
+        elif Player.primary_action == "anal":
             "You pull out of her ass with a pop and spray all over her backside."
         else:
             "You pick up the pace and with a grunt you spray all over her backside."
     else:
         $ Girl.spunk["belly"] = True
-        if Player.main_action == "sex":
+        if Player.primary_action == "sex":
             "You pull out of her pussy with a pop and spray all over her stomach."
-        elif Player.main_action == "anal":
+        elif Player.primary_action == "anal":
             "You pull out of her ass with a pop and spray all over her stomach."
         else:
             "You pick up the pace and with a grunt you spray all over her stomach."
@@ -1453,7 +1453,7 @@ label Girl_Cum_Outside:
 label Girl_Handy_Finish:
     if renpy.showing(Girl.tag+" doggy") or renpy.showing(Girl.tag+" sex"):
         call reset_position(Girl)
-        if Player.main_action == "hotdog":
+        if Player.primary_action == "hotdog":
             "She bends down and begins to stroke you off."
         else:
             "She grins and pulls out with a pop, and begins to stroke you off."
@@ -1536,7 +1536,7 @@ label Girl_Swallowed:
     $ Girl.addiction_rate += 2
     if "addictive" in Player.traits:
         $ Girl.addiction_rate += 2
-    if Player.main_action == "anal":
+    if Player.primary_action == "anal":
         $ Girl.change_stat("obedience", 50, 2)
         $ Girl.change_stat("obedience", 200, 2)
     if Girl.event_counter["swallowed"] == 1:
@@ -1546,12 +1546,12 @@ label Girl_Swallowed:
 
 
 label Girl_Creampied:
-    if Player.main_action == "sex":
+    if Player.primary_action == "sex":
         $ Girl.event_counter["creampied"] += 1
         $ Girl.change_stat("lust", 200, 10)
         $ Girl.recent_history.append("creampie sex")
         $ Girl.daily_history.append("creampie sex")
-    elif Player.main_action == "anal":
+    elif Player.primary_action == "anal":
         $ Girl.event_counter["anal_creampied"] += 1
         $ Girl.change_stat("lust", 200, 5)
         $ Girl.recent_history.append("creampie anal")
@@ -1603,7 +1603,7 @@ label Girl_CleanCock(Girl):
         $ Girl.arm_pose = 1
     $ Player.cock_position = "out"
     $ action_speed = 0
-    if Player.main_action == "anal" and not approval_check(Girl, 1600, taboo_modifier=1) and not Girl.addiction >= 80:
+    if Player.primary_action == "anal" and not approval_check(Girl, 1600, taboo_modifier=1) and not Girl.addiction >= 80:
         if Girl == JeanX:
             $ Girl.change_face("_sly", 1,eyes="_psychic")
             "You feel a slight breeze and the juices swirl off your cock and onto the floor."
@@ -1649,9 +1649,9 @@ label Girl_CleanCock(Girl):
             "She wipes your cock clean."
     $ Player.spunk = 0
     $ Girl.change_face("_sexy")
-    if Player.main_action in ("fondle_breast","suck breast"):
+    if Player.primary_action in ("fondle_breast","suck breast"):
         call shift_view (Girl, "breasts")
-    elif Player.main_action in ("fondle_pussy","eat_pussy","fondle_ass","finger_ass","eat_ass","fondle_thighs"):
+    elif Player.primary_action in ("fondle_pussy","eat_pussy","fondle_ass","finger_ass","eat_ass","fondle_thighs"):
         call shift_view (Girl, "pussy")
     return
 
@@ -1772,7 +1772,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
         $ Girl.drain_word("unsatisfied")
     $ line = 0
 
-    if Player.main_action != "masturbation":
+    if Player.primary_action != "masturbation":
         if Girl.session_orgasms == 1:
 
             $ Girl.event_counter["forced"] -= 1 if 5 > Girl.event_counter["forced"] > 0 else 0
@@ -1794,7 +1794,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
             $ temp_Girls.remove(temp_Girls[0])
 
 
-        if (Player.main_action == "blowjob" or Player.main_action == "handjob") and not Player.offhand_action:
+        if (Player.primary_action == "blowjob" or Player.primary_action == "handjob") and not Player.secondary_action:
             pass
         elif Partner != Girl:
             if Girl.session_orgasms == 2:
@@ -1871,7 +1871,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
                     "Let's try something else." if multi_action:
                         $ action_context = "shift"
                     "No, I'm not done yet.":
-                        if Player.main_action == "sex" or Player.main_action == "anal":
+                        if Player.primary_action == "sex" or Player.primary_action == "anal":
                             if approval_check(Girl, 1000, taboo_modifier=1) or approval_check(Girl, 400, "O", taboo_modifier=1):
                                 $ Girl.change_stat("love", 200, -5)
                                 $ Girl.change_stat("obedience", 50, 2,Alt=[[JeanX],900,5])
@@ -1908,7 +1908,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
                             $ Girl.eyes = "_stunned"
                             "She drifts off into incoherent moans."
 
-    if Player.main_action == "striptease":
+    if Player.primary_action == "striptease":
         call reset_position(Girl)
 
         if Girl == RogueX:
