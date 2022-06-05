@@ -363,7 +363,7 @@ label Emma_Caught_Classroom:
 
     hide black_screen onlayer black
 
-    $ girl_offhand_action = "fondle_pussy"
+    $ Girl.offhand_action = "fondle_pussy"
     $ second_girl_offhand_action = "fondle_breasts"
 
     $ EmmaX.recent_history.append("classcaught")
@@ -631,7 +631,7 @@ label Emma_Caught_Classroom:
 
                 call before_action(EmmaX, "fondle_breasts", None)
 
-                $ main_action = "fondle_breasts"
+                $ Player.main_action = "fondle_breasts"
 
                 call action_cycle(EmmaX, "fondle_breasts", context)
                 call after_action(EmmaX, "fondle_breasts", "stop")

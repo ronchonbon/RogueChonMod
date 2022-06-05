@@ -888,7 +888,7 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
                     $ line = "mother"
                 "Why would you kill her?" if "killed" not in Topics and "mother" in Topics:
                     $ LauraX.change_face("_sad",0,eyes="_surprised")
-                    ch_l "I didn't want to, but the main_action scent made me. . ."
+                    ch_l "I didn't want to, but the trigger scent made me. . ."
                     $ LauraX.change_face("_sadside",0)
                     if "trigger" in LauraX.history:
                         ch_l "I've mentioned that to you before. . ."
@@ -2022,13 +2022,13 @@ label Laura_Fuckbuddy:
     $ LauraX.change_outfit("casual1")
     call display_girl (LauraX)
     call taboo_level
-    $ main_action = "masturbation"
-    $ girl_offhand_action = "fondle_pussy"
+    $ Player.main_action = "masturbation"
+    $ Girl.offhand_action = "fondle_pussy"
     $ LauraX.change_face("_sly",2,mouth="_lipbite")
     "[LauraX.name] is standing in the doorway, with her hand down her pants."
     "You can tell she's been masturbating furiously, her scent is overpowering."
-    $ main_action = None
-    $ girl_offhand_action = None
+    $ Player.main_action = None
+    $ Girl.offhand_action = None
     $ LauraX.arm_pose = 1
     "She looks you up and down hungrily, and pulls her hand out of her pants."
     "She reaches up to caress your face, smearing her juices along it."

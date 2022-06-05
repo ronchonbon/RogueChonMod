@@ -4,7 +4,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0):
 
     Girl.voice "!!!"
 
-    $ line = main_action
+    $ line = Player.main_action
 
     call stop_all_actions
 
@@ -1499,8 +1499,8 @@ label caught_masturbating(Girl=0):
         "Peek inside":
             call set_the_scene
             $ Girl.change_face("_kiss",1,eyes = "_closed")
-            $ main_action = "masturbation"
-            $ girl_offhand_action = "fondle_pussy"
+            $ Player.main_action = "masturbation"
+            $ Girl.offhand_action = "fondle_pussy"
             "You see [Girl.name], eyes closed and stroking herself vigorously."
             menu:
                 extend ""
@@ -1526,8 +1526,8 @@ label caught_masturbating(Girl=0):
         "You hear some soft moans, followed by some shuffling around as items tumble to the ground."
         "After several seconds and some more shuffling of clothing, [Girl.name] comes to the door."
         $ Girl.change_face("_confused",1,eyes = "_surprised",mouth = "_smile")
-        $ main_action = None
-        $ girl_offhand_action = None
+        $ Player.main_action = None
+        $ Girl.offhand_action = None
         call set_the_scene
         if Girl == RogueX:
             ch_r "Sorry about that [RogueX.player_petname], I was. . . working out."
@@ -1557,7 +1557,7 @@ label caught_masturbating(Girl=0):
         $ Girl.eyes = "_closed"
         $ Girl.arm_pose = 2
         $ Count = 0
-        $ main_action = "masturbation"
+        $ Player.main_action = "masturbation"
         hide black_screen onlayer black
         $ Girl.daily_history.append("unseen")
         $ Girl.recent_history.append("unseen")
@@ -1679,8 +1679,8 @@ label Girls_Caught_Lesing(Girl=0, Girl2=0, temp_Girls=[]):
                 "After several seconds and some more shuffling of clothing, [Girl.name] comes to the door."
                 $ Girl.change_face("_confused",2,eyes = "_surprised",mouth = "_smile")
                 $ Girl2.change_face("_confused",2,eyes = "_surprised",mouth = "_smile")
-                $ main_action = None
-                $ girl_offhand_action = None
+                $ Player.main_action = None
+                $ Girl.offhand_action = None
                 $ second_girl_main_action = None
                 $ second_girl_offhand_action = None
                 call set_the_scene
@@ -1707,16 +1707,16 @@ label Girls_Caught_Lesing(Girl=0, Girl2=0, temp_Girls=[]):
                 call set_the_scene
                 $ Girl.change_face("_kiss",1,eyes = "_closed")
                 $ Girl2.change_face("_kiss",1,eyes = "_closed")
-                $ main_action = "lesbian"
-                $ girl_offhand_action = "fondle_pussy"
+                $ Player.main_action = "lesbian"
+                $ Girl.offhand_action = "fondle_pussy"
                 $ second_girl_main_action = "fondle_pussy"
                 "You see [Girl.name] and [Girl2.name], eyes closed and stroking each other vigorously."
             "Enter quietly":
                 call set_the_scene (silent = True)
                 $ Girl.change_face("_kiss",1,eyes = "_closed")
                 $ Girl2.change_face("_kiss",1,eyes = "_closed")
-                $ main_action = "lesbian"
-                $ girl_offhand_action = "fondle_pussy"
+                $ Player.main_action = "lesbian"
+                $ Girl.offhand_action = "fondle_pussy"
                 $ second_girl_main_action = "fondle_pussy"
                 $ Girl.add_word(1,"unseen","unseen")
                 $ Girl2.add_word(1,"unseen","unseen")
@@ -1844,8 +1844,8 @@ label caught_showering(Girl):
             call set_the_scene(check_if_dressed = False)
 
             $ Count = 0
-            $ main_action = "masturbation"
-            $ girl_offhand_action = "fondle_pussy"
+            $ Player.main_action = "masturbation"
+            $ Girl.offhand_action = "fondle_pussy"
 
             "You see [Girl.name] under the shower, feeling herself up."
 

@@ -2412,7 +2412,6 @@ label Emma_Clothes(Public=0, Bonus=0):
 
 
 label Emma_wardrobe_menu:
-    $ main_action = 1
     $ EmmaX.change_face()
     while True:
         menu:
@@ -2467,7 +2466,6 @@ label Emma_wardrobe_menu:
                     else:
                         $ EmmaX.change_outfit()
                 $ EmmaX.set_temp_outfit()
-                $ main_action = None
                 call switch_chat
                 if Girl != EmmaX:
                     ch_p "I wanted to talk about your clothes."
@@ -2497,7 +2495,6 @@ label Emma_wardrobe_menu:
                         $ EmmaX.change_outfit()
                 $ EmmaX.set_temp_outfit()
                 $ EmmaX.had_chat[1] += 1
-                $ main_action = None
                 return
 
 
@@ -2708,7 +2705,7 @@ label Emma_wardrobe_menu:
 
     menu Emma_Clothes_Over:
 
-        "Why don't you go with no [EmmaX.outfit['top']]?" if EmmaX.outfit["top"]:
+        "Why don't you go with no [EmmaX.outfit[top]]?" if EmmaX.outfit["top"]:
             $ EmmaX.change_face("_bemused", 1)
             if approval_check(EmmaX, 800, taboo_modifier=(3-Public)) and (EmmaX.outfit["bra"] or EmmaX.seen_breasts):
                 ch_e "Certainly."
@@ -2811,7 +2808,7 @@ label Emma_wardrobe_menu:
                 elif approval_check(EmmaX, 900, taboo_modifier=(3-Public)) and "_lace_bra" in EmmaX.inventory:
                     ch_e "I suppose I could."
                     $ EmmaX.outfit["bra"]  = "_lace_bra"
-                    "She pulls out her lace bra and slips it on under her [EmmaX.outfit['top']]."
+                    "She pulls out her lace bra and slips it on under her [EmmaX.outfit[top]]."
 
 
 
@@ -2819,11 +2816,11 @@ label Emma_wardrobe_menu:
                 elif approval_check(EmmaX, 700, taboo_modifier=(3-Public)):
                     ch_e "I suppose I could."
                     $ EmmaX.outfit["bra"] = "_corset"
-                    "She pulls out her corset and slips it on under her [EmmaX.outfit['top']]."
+                    "She pulls out her corset and slips it on under her [EmmaX.outfit[top]]."
                 elif approval_check(EmmaX, 600, taboo_modifier=(3-Public)):
                     ch_e "I suppose I could."
                     $ EmmaX.outfit["bra"] = "_sports_bra"
-                    "She pulls out her sports bra and slips it on under her [EmmaX.outfit['top']]."
+                    "She pulls out her sports bra and slips it on under her [EmmaX.outfit[top]]."
                 else:
                     ch_e "Yes, but I'd rather not."
                     return False
@@ -2856,7 +2853,7 @@ label Emma_wardrobe_menu:
 
     menu Emma_Clothes_Legs:
 
-        "Maybe go without the [EmmaX.outfit['bottom']]." if EmmaX.outfit["bottom"]:
+        "Maybe go without the [EmmaX.outfit[bottom]]." if EmmaX.outfit["bottom"]:
             $ EmmaX.change_face("_sexy", 1)
             if EmmaX.seen_underwear and EmmaX.outfit["underwear"] and approval_check(EmmaX, 500, taboo_modifier=(6-Public)):
                 ch_e "Fine."
@@ -2947,15 +2944,15 @@ label Emma_wardrobe_menu:
                     if approval_check(EmmaX, 1200, taboo_modifier=4):
                         $ line = EmmaX.outfit["bottom"]
                         $ EmmaX.outfit["bottom"] = ""
-                        "She pulls off her [line] and slips on the [EmmaX.outfit['underwear']]."
+                        "She pulls off her [line] and slips on the [EmmaX.outfit[underwear]]."
                     elif EmmaX.outfit["bottom"] == "_skirt":
-                        "She pulls out her [EmmaX.outfit['underwear']] and pulls them up under her skirt."
+                        "She pulls out her [EmmaX.outfit[underwear]] and pulls them up under her skirt."
                         $ EmmaX.outfit["bottom"] = ""
                         "Then she drops the skirt to the floor."
                     else:
                         $ line = EmmaX.outfit["bottom"]
                         $ EmmaX.outfit["bottom"] = ""
-                        "She steps away a moment and then comes back wearing only the [EmmaX.outfit['underwear']]."
+                        "She steps away a moment and then comes back wearing only the [EmmaX.outfit[underwear]]."
                     return
                 elif EmmaX.taboo and approval_check(EmmaX, 800, taboo_modifier=0):
                     ch_e "I like how you think, but not in public like this."
@@ -2993,7 +2990,7 @@ label Emma_wardrobe_menu:
     menu Emma_Clothes_Under:
         "Tops":
             menu:
-                "How about you lose the [EmmaX.outfit['bra']]?" if EmmaX.outfit["bra"]:
+                "How about you lose the [EmmaX.outfit[bra]]?" if EmmaX.outfit["bra"]:
                     $ EmmaX.change_face("_bemused", 1)
                     if EmmaX.seen_breasts and approval_check(EmmaX, 900, taboo_modifier=(4-Public)):
                         ch_e "Of course."
@@ -3017,7 +3014,7 @@ label Emma_wardrobe_menu:
                     $ line = EmmaX.outfit["bra"]
                     $ EmmaX.outfit["bra"] = ""
                     if EmmaX.outfit["top"]:
-                        "She reaches under her [EmmaX.outfit['top']] grabs her [line], and pulls it out, dropping it to the ground."
+                        "She reaches under her [EmmaX.outfit[top]] grabs her [line], and pulls it out, dropping it to the ground."
                     else:
                         "She lets her [line] fall to the ground."
                         if not renpy.showing('dress_screen'):
@@ -3137,12 +3134,11 @@ label Emma_wardrobe_menu:
                         if not renpy.showing('dress_screen'):
                             call Emma_First_Bottomless
                     elif approval_check(EmmaX, 1200, taboo_modifier=4):
-                        $ main_action = EmmaX.outfit["bottom"]
+                        $ temp_bottom = EmmaX.outfit["bottom"]
                         $ EmmaX.outfit["bottom"] = ""
                         pause 0.5
-                        $ EmmaX.outfit["bottom"] = main_action
-                        "She pulls off her [EmmaX.outfit['bottom']] and [line], then pulls the [EmmaX.outfit['bottom']] back on."
-                        $ main_action = 1
+                        $ EmmaX.outfit["bottom"] = temp_bottom
+                        "She pulls off her [EmmaX.outfit[bottom]] and [line], then pulls the [EmmaX.outfit[bottom]] back on."
                         call Emma_First_Bottomless (1)
                     elif EmmaX.outfit["bottom"] == "_skirt":
                         "She reaches under her skirt and pulls her [line] off."

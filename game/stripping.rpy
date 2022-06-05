@@ -286,7 +286,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
         $ temp_Girls.remove(temp_Girls[0])
 
     $ approval_bonus = approval_bonusP[0]
-    $ main_action = "striptease"
+    $ Player.main_action = "striptease"
     $ Count = 1
 
     while Count and round >=10:
@@ -336,7 +336,7 @@ label Group_Stripping:
             if len(Present) >= 2 and "stopdancing" in Present[0].recent_history and "stopdancing" in Present[1].recent_history:
                 jump Group_Strip_End
 
-        $ main_action = "striptease"
+        $ Player.main_action = "striptease"
 
         if not Present:
 

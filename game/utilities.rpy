@@ -1336,9 +1336,9 @@ label girls_location(change = False):
     return
 
 label stop_all_actions(visual = False):
-    $ main_action = None
+    $ Player.main_action = None
     $ Player.offhand_action = None
-    $ girl_offhand_action = None
+    $ Girl.offhand_action = None
     $ second_girl_main_action = None
     $ second_girl_offhand_action = None
 
@@ -2967,7 +2967,7 @@ label dismiss_menu:
 label locked_door(Girl=0, entering=0, current_Girl=0):
     $ Player.add_word(1,"interruption")
 
-    if not main_action:
+    if not Player.main_action:
         call set_the_scene
 
     if Girl == KittyX:
@@ -3054,7 +3054,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
 
                 $ Girl.location = bg_current
                 $ Girl.change_outfit()
-            "Open door [[but stop fucking first]" if main_action:
+            "Open door [[but stop fucking first]" if Player.main_action:
                 ch_p "Hold on, [Girl.name]!"
 
                 call Sex_Over (1, Primary)
@@ -4036,7 +4036,7 @@ label Escalation(Girl=0):
 
         return
 
-    if main_action == "fondle_breast" and approval_check(Girl,1050,taboo_modifier=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.action_counter["suck_breasts"]:
+    if Player.main_action == "fondle_breast" and approval_check(Girl,1050,taboo_modifier=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.action_counter["suck_breasts"]:
 
         if Player.offhand_action == "suck_breasts":
             $ Player.offhand_action = None
@@ -4047,7 +4047,7 @@ label Escalation(Girl=0):
         if "suck_breasts" in Girl.recent_history:
 
             $ renpy.pop_call()
-    elif main_action == "fondle_thighs" and approval_check(Girl,1050,taboo_modifier=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.action_counter["fondle_pussy"]:
+    elif Player.main_action == "fondle_thighs" and approval_check(Girl,1050,taboo_modifier=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.action_counter["fondle_pussy"]:
 
         if Player.offhand_action == "fondle_thighs":
             $ Player.offhand_action = None
@@ -4061,7 +4061,7 @@ label Escalation(Girl=0):
     elif not Player.semen:
 
         pass
-    elif main_action == "handjob" and approval_check(Girl,1200,taboo_modifier=4) and Girl.lust >= 30 and Girl.action_counter["blowjob"]:
+    elif Player.main_action == "handjob" and approval_check(Girl,1200,taboo_modifier=4) and Girl.lust >= 30 and Girl.action_counter["blowjob"]:
 
         $ Girl.change_stat("inhibition", 80, 3)
 
@@ -4069,7 +4069,7 @@ label Escalation(Girl=0):
         if "blowjob" in Girl.recent_history:
 
             $ renpy.pop_call()
-    elif main_action not in ("sex","anal") and approval_check(Girl,1400,taboo_modifier=5,Alt=[[JeanX],1200]) and Girl.lust >= 60 and Girl.action_counter["sex"] >= 3:
+    elif Player.main_action not in ("sex","anal") and approval_check(Girl,1400,taboo_modifier=5,Alt=[[JeanX],1200]) and Girl.lust >= 60 and Girl.action_counter["sex"] >= 3:
 
         $ Girl.change_stat("inhibition", 80, 4)
 
@@ -4077,7 +4077,7 @@ label Escalation(Girl=0):
         if "sex" in Girl.recent_history:
 
             $ renpy.pop_call()
-    elif main_action != "anal" and approval_check(Girl,1400,taboo_modifier=5,Alt=[[JeanX],1200]) and Girl.lust >= 70 and Girl.action_counter["anal"] >= 5:
+    elif Player.main_action != "anal" and approval_check(Girl,1400,taboo_modifier=5,Alt=[[JeanX],1200]) and Girl.lust >= 70 and Girl.action_counter["anal"] >= 5:
 
         $ Girl.change_stat("inhibition", 80, 5)
 
@@ -4108,7 +4108,7 @@ label Sex_Dialog(Primary=focused_Girl, Secondary=0, TempFocus=0, PrimaryLust=0, 
 
 
     call Girls_taboo (Primary)
-    if not main_action and not girl_offhand_action:
+    if not Player.main_action and not Girl.offhand_action:
         return
 
     $ Secondary = Partner
@@ -4126,10 +4126,10 @@ label Sex_Dialog(Primary=focused_Girl, Secondary=0, TempFocus=0, PrimaryLust=0, 
 
 
 
-    if D20S >= 7 and main_action not in ("masturbation", "lesbian"):
+    if D20S >= 7 and Player.main_action not in ("masturbation", "lesbian"):
 
         $ line = 0
-        call Girl_Self_lines (Primary, "T3", girl_offhand_action, D20X=D20S)
+        call Girl_Self_lines (Primary, "T3", Girl.offhand_action, D20X=D20S)
         if line:
             $ line3 = line + "."
 
@@ -4182,9 +4182,7 @@ label Sex_Dialog(Primary=focused_Girl, Secondary=0, TempFocus=0, PrimaryLust=0, 
 
             return
         if Secondary and Secondary.location == bg_current:
-
-            $ main_action = Secondary
-            $ Partner = 0
+            $ Partner = None
             $ second_girl_main_action = None
             $ second_girl_offhand_action = None
         else:
@@ -4200,7 +4198,7 @@ label Sex_Dialog(Primary=focused_Girl, Secondary=0, TempFocus=0, PrimaryLust=0, 
 
 
 
-label Action_Swap(Active=0, action1=main_action, action3=girl_offhand_action, Primary=Partner):
+label Action_Swap(Active=0, action1=Player.main_action, action3=Girl.offhand_action, Primary=Partner):
 
 
 
@@ -4213,29 +4211,29 @@ label Action_Swap(Active=0, action1=main_action, action3=girl_offhand_action, Pr
     if second_girl_main_action:
 
         if second_girl_main_action == "masturbation":
-            $ main_action = "masturbation"
-            $ girl_offhand_action = second_girl_offhand_action
+            $ Player.main_action = "masturbation"
+            $ Girl.offhand_action = second_girl_offhand_action
             $ second_girl_main_action = None
 
 
         elif action1 == "lesbian":
-            $ main_action = "lesbian"
-            $ girl_offhand_action = second_girl_main_action
+            $ Player.main_action = "lesbian"
+            $ Girl.offhand_action = second_girl_main_action
             $ second_girl_main_action = None
         elif second_girl_main_action in ("handjob","blowjob","kiss"):
-            $ main_action = second_girl_main_action
-            $ girl_offhand_action = None
+            $ Player.main_action = second_girl_main_action
+            $ Girl.offhand_action = None
             $ second_girl_main_action = None
         else:
-            $ main_action = None
-            $ girl_offhand_action = None
+            $ Player.main_action = None
+            $ Girl.offhand_action = None
             $ second_girl_main_action = None
     else:
 
 
 
-        $ main_action = None
-        $ girl_offhand_action = None
+        $ Player.main_action = None
+        $ Girl.offhand_action = None
 
     call shift_focus (Primary)
     if not Active:
@@ -4287,7 +4285,7 @@ label Action_Swap(Active=0, action1=main_action, action3=girl_offhand_action, Pr
 
     call reset_position(Partner)
 
-    if not main_action:
+    if not Player.main_action:
 
 
         if Primary == RogueX:
@@ -4333,7 +4331,7 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
 
 
     if Girl == Girl2:
-        "Tell oni that the activity check failed after [main_action]."
+        "Tell oni that the activity check failed after [Player.main_action]."
         $ Girl.NotAStat = 5
 
 
@@ -4389,54 +4387,54 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
     if not approval:
 
         pass
-    elif main_action == "striptease" and Player.offhand_action != "jerking_off":
+    elif Player.main_action == "striptease" and Player.offhand_action != "jerking_off":
         pass
-    elif not main_action:
+    elif not Player.main_action:
         pass
-    elif main_action == "eat_ass":
+    elif Player.main_action == "eat_ass":
         $ approval = approval_check(Girl,1550,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
-    elif main_action == "anal":
+    elif Player.main_action == "anal":
         $ approval = approval_check(Girl,1550,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
-    elif main_action == "sex":
+    elif Player.main_action == "sex":
         $ approval = approval_check(Girl,1400,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
-    elif main_action == "eat_pussy":
+    elif Player.main_action == "eat_pussy":
         $ approval = approval_check(Girl,1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
     elif Player.offhand_action == "jerking_off":
         $ approval = approval_check(Girl,1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
-    elif main_action == "blowjob":
+    elif Player.main_action == "blowjob":
         $ approval = approval_check(Girl,1300,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
-    elif main_action == "titjob":
+    elif Player.main_action == "titjob":
         $ approval = approval_check(Girl,1200,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
-    elif main_action == "hotdog":
+    elif Player.main_action == "hotdog":
         $ approval = approval_check(Girl,1000,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
-    elif main_action == "handjob" or girl_offhand_action == "handjob":
+    elif Player.main_action == "handjob" or Girl.offhand_action == "handjob":
         $ approval = approval_check(Girl,1100,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
-    elif main_action == "footjob":
+    elif Player.main_action == "footjob":
         $ approval = approval_check(Girl,1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
-    elif main_action == "dildo_ass":
+    elif Player.main_action == "dildo_ass":
         $ approval = approval_check(Girl,1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
-    elif main_action == "dildo_pussy":
+    elif Player.main_action == "dildo_pussy":
         $ approval = approval_check(Girl,1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
-    elif main_action == "finger_ass":
+    elif Player.main_action == "finger_ass":
         $ approval = approval_check(Girl,1300,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
-    elif main_action == "fondle_pussy" or main_action == "finger_pussy":
+    elif Player.main_action == "fondle_pussy" or Player.main_action == "finger_pussy":
         $ approval = approval_check(Girl,1050,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
-    elif main_action == "suck_breasts":
+    elif Player.main_action == "suck_breasts":
         $ approval = approval_check(Girl,1050,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
-    elif main_action == "fondle_breasts":
+    elif Player.main_action == "fondle_breasts":
         $ approval = approval_check(Girl,950,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
-    elif main_action == "fondle_ass":
+    elif Player.main_action == "fondle_ass":
         $ approval = approval_check(Girl,850,Bonus=Mod, taboo_modifier = (tabooM* 1 ))
 
-    elif main_action == "masturbation":
+    elif Player.main_action == "masturbation":
         $ approval = approval_check(Girl,1200,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
 
-    elif main_action == "kiss":
+    elif Player.main_action == "kiss":
         $ approval = approval_check(Girl,500,Bonus=Mod, taboo_modifier = 0)
-    elif main_action == "fondle_thighs":
+    elif Player.main_action == "fondle_thighs":
         $ approval = approval_check(Girl,750,Bonus=Mod, taboo_modifier = 0)
 
-    elif main_action == "lesbian":
+    elif Player.main_action == "lesbian":
         $ approval = approval_check(Girl,1350,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
 
 
@@ -5125,13 +5123,13 @@ label Girls_taboo(Girl=0, counter=1, Choice=0, D20=0):
     if D20 < 10:
 
         if taboo > 20:
-            if (main_action == "kiss" and not Player.offhand_action and not girl_offhand_action):
+            if (Player.main_action == "kiss" and not Player.offhand_action and not Girl.offhand_action):
 
                 pass
             elif Girl not in Rules:
 
                 $ Girl.change_face("_surprised", 1)
-                if main_action == "blowjob" or main_action == "handjob" or main_action == "titjob":
+                if Player.main_action == "blowjob" or Player.main_action == "handjob" or Player.main_action == "titjob":
                     "[Girl.name] stops what she's doing with a startled look."
                 else:
                     "You feel a slight buzzing in your head and stop what you're doing."
@@ -5177,7 +5175,7 @@ label Girls_taboo(Girl=0, counter=1, Choice=0, D20=0):
 
         call Girls_Noticed (Girl)
         return
-    elif (main_action == "kiss" and not Player.offhand_action and not girl_offhand_action):
+    elif (Player.main_action == "kiss" and not Player.offhand_action and not Girl.offhand_action):
 
         pass
     elif counter < 4:
@@ -5585,7 +5583,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0):
         $ Other.change_face("_surprised", 2)
         $ Other.change_stat("inhibition", 90, 2)
         $ Other.change_stat("lust", 40, 20)
-        if main_action != "kiss":
+        if Player.main_action != "kiss":
             $ Other.change_stat("love", 90, -10)
             $ Other.change_stat("obedience", 90, -5)
             $ Other.change_stat("lust", 80, 10)
@@ -5596,7 +5594,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0):
                 "She looks uncomfortable with this, and shoves you both out of the room."
             else:
                 "She looks embarrassed, and shoves you both out of the room."
-        elif main_action != "kiss":
+        elif Player.main_action != "kiss":
             if Other in (LauraX,JeanX):
                 "She looks uncomfortable with this, and stalks out of the room."
             else:
@@ -5697,49 +5695,49 @@ label Sex_Over(Clothes = True, Girls = None):
 label SkipTo(Girl=focused_Girl):
 
     $ Girl = check_girl(Girl)
-    if main_action == "blowjob":
+    if Player.main_action == "blowjob":
         call expression Girl.tag + "_BJ_Cycle"
-    elif main_action == "handjob":
+    elif Player.main_action == "handjob":
         call expression Girl.tag + "_HJ_Cycle"
-    elif main_action == "titjob":
+    elif Player.main_action == "titjob":
         call expression Girl.tag + "_TJ_Cycle"
-    elif main_action == "kiss":
+    elif Player.main_action == "kiss":
         call KissCycle (Girl)
-    elif main_action == "fondle_breasts":
+    elif Player.main_action == "fondle_breasts":
         call expression Girl.tag + "_FB_Cycle"
-    elif main_action == "suck_breasts":
+    elif Player.main_action == "suck_breasts":
         call expression Girl.tag + "_SB_Cycle"
-    elif main_action == "fondle_thighs":
+    elif Player.main_action == "fondle_thighs":
         call expression Girl.tag + "_FT_Cycle"
-    elif main_action == "fondle_pussy":
+    elif Player.main_action == "fondle_pussy":
         call expression Girl.tag + "_FP_Cycle"
-    elif main_action == "eat_pussy":
+    elif Player.main_action == "eat_pussy":
         call expression Girl.tag + "_LP_Cycle"
-    elif main_action == "fondle_ass":
+    elif Player.main_action == "fondle_ass":
         call expression Girl.tag + "_FA_Cycle"
-    elif main_action == "finger_ass":
+    elif Player.main_action == "finger_ass":
         call expression Girl.tag + "_IA_Cycle"
-    elif main_action == "eat_ass":
+    elif Player.main_action == "eat_ass":
         call expression Girl.tag + "_LA_Cycle"
-    elif main_action == "sex":
+    elif Player.main_action == "sex":
         call expression Girl.tag + "_SexCycle"
-    elif main_action == "hotdog":
+    elif Player.main_action == "hotdog":
         call expression Girl.tag + "_HotdogCycle"
-    elif main_action == "anal":
+    elif Player.main_action == "anal":
         call expression Girl.tag + "_AnalCycle"
-    elif main_action == "dildo_pussy":
+    elif Player.main_action == "dildo_pussy":
         call expression Girl.tag + "_DP_Cycle"
-    elif main_action == "dildo_ass":
+    elif Player.main_action == "dildo_ass":
         call expression Girl.tag + "_DA_Cycle"
-    elif main_action == "striptease":
+    elif Player.main_action == "striptease":
         call Group_Strip_End
-    elif main_action == "masturbation":
+    elif Player.main_action == "masturbation":
         $ Girl.remaining_actions -= 1
         $ Girl.action_counter["masturbation"] += 1
-    elif main_action == "lesbian":
+    elif Player.main_action == "lesbian":
         call Les_Cycle (Girl)
     else:
-        "That's odd, tell Oni how you got here, Close [Girl.name] [main_action]."
+        "That's odd, tell Oni how you got here, Close [Girl.name] [Player.main_action]."
     return
 
 label clear_stack:

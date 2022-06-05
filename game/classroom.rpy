@@ -15,7 +15,7 @@ label take_class:
     elif round >= 30:
         $ line = "You're pretty late, but catch the tail end of the class."
 
-    $ main_action = None
+    $ Player.main_action = None
 
     $ D20 = renpy.random.randint(1, 20)
 
@@ -469,7 +469,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                             "You feel her soft fur moisten as you stroke the soft flesh below. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
                         else:
                             "You feel her lips moisten as you stroke the soft flesh. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
-                        $ main_action = "fondle_pussy"
+                        $ Player.main_action = "fondle_pussy"
                         $ D20 += 5
 
                 "Keep fondling her pussy." if line == "fondle_pussy":
@@ -516,7 +516,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         "[Girl.name]'s sly eyes spakle as your hand cups her breast, giving it a casual caress."
                         "her nipples begin to firm up and she lets out a small moan of pleasure."
                         $ D20 += 7
-                        $ main_action = "fondle_breasts"
+                        $ Player.main_action = "fondle_breasts"
                 "Keep fondling her tits." if line == "fondle_breasts":
                     $ Girl.change_stat("obedience", 70, 5)
                     $ Girl.change_stat("inhibition", 60, 2)
@@ -867,7 +867,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
             $ Girl.change_stat("love", 80, -10)
             $ Girl.change_stat("obedience", 70, -5)
             $ Girl.change_stat("inhibition", 50, -10)
-            $ main_action = None
+            $ Player.main_action = None
             if Girl not in Rules:
                 call Girls_Caught (Girl)
             else:
@@ -879,7 +879,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
 
 
 label Frisky_Class_End:
-    $ main_action = None
+    $ Player.main_action = None
     $ Partner = 0
     if Teacher:
         $ Teacher.drain_word("frisky",1,0)

@@ -689,7 +689,6 @@ label showering:
                 $ intruding_Girls.remove(intruding_Girls[0])
 
     $ round -= 30 if round >= 30 else round
-    $ main_action = None
 
     if staying_Girls:
         if len(staying_Girls) > 1 and staying_Girls[0] == staying_Girls[1]:

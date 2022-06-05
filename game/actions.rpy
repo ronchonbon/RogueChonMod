@@ -128,7 +128,7 @@ label start_action(Girl, action, context = None):
 
         call before_action(Girl, action, context)
 
-        $ Player.main_action = action
+        # $ Player.main_action = action
 
         if _return == "continue":
             call action_cycle(Girl, action, context)

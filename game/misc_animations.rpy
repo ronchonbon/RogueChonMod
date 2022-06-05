@@ -636,7 +636,7 @@ image Chibi_Handy:
         xzoom 1
     contains:
         ConditionSwitch(
-            "(Partner == StormX and second_girl_main_action == 'hand') or (focused_Girl == StormX and girl_offhand_action == 'hand')", "images/Chibi_Hand_S.png",
+            "(Partner == StormX and second_girl_main_action == 'hand') or (focused_Girl == StormX and Girl.offhand_action == 'hand')", "images/Chibi_Hand_S.png",
             "True", "images/Chibi_Hand_G.png"
             )
 
@@ -721,7 +721,7 @@ image Chibi_UI:
         ConditionSwitch(
             "'cockout' not in Player.recent_history", Null(),
             "offhand_action == 'jerking_off'", "Chibi_jerking_off",
-            "girl_offhand_action == 'hand' or second_girl_main_action == 'hand'", "Chibi_Handy",
+            "Girl.offhand_action == 'hand' or second_girl_main_action == 'hand'", "Chibi_Handy",
             "second_girl_main_action == 'blow'", "Chibi_Sucking",
             "True", "Chibi_Null",
             )

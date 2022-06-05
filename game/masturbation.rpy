@@ -141,7 +141,7 @@ label masturbate(Girl, context = None):
 
         call before_masturbation(Girl)
 
-        $ girl_offhand_action = "fondle_pussy"
+        $ Girl.offhand_action = "fondle_pussy"
 
         call masturbation_cycle(Girl)
 
@@ -185,8 +185,8 @@ label before_masturbation(Girl):
                 $ Girl.change_stat("obedience", 70, 35)
                 $ Girl.change_stat("inhibition", 80, 40)
 
-    if not girl_offhand_action:
-        $ girl_offhand_action = "fondle_pussy"
+    if not Girl.offhand_action:
+        $ Girl.offhand_action = "fondle_pussy"
 
     if taboo:
         $ Girl.drain_word("no_taboo")
@@ -302,7 +302,7 @@ label after_masturbation(Girl, context):
     if context == "interrupt":
         $ Girl.change_face("_surprised", 1)
 
-        $ girl_offhand_action = None
+        $ Girl.offhand_action = None
 
         "[Girl.name] stops what she's doing with a start, eyes wide."
 

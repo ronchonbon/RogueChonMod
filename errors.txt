@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/utilities.rpy", line 4203: expected ',' not found.
-    label Action_Swap(Active=0, Player.main_actionX1=main_action, Player.main_actionX3=girl_offhand_action, Primary=Partner):
-                                      ^
+File "game/narrations.rpy", line 3137: expected ',' not found.
+    label Dirty_Talk(Girl=Primary, D20=0, TempCheck=0, Templine=0, TempPlayer.main_action=second_girl_main_action, ActiveGirl=0):
+                                                                             ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Sat Jun  4 17:01:02 2022
+Sat Jun  4 22:43:17 2022

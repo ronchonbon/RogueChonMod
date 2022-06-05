@@ -595,7 +595,7 @@ screen status_screen:
                 imagebutton idle "images/iconaddictrate.png" hover "images/iconaddictrate.png" action NullAction() hovered tt.Action("Addiction Rate: [focused_Girl.addiction_rate]")
                 bar range 100 value (focused_Girl.addiction_rate*10) xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
 
-        showif not main_action:
+        showif not Player.main_action:
             imagebutton auto "images/Button_" + focused_Girl.tag + "_%s.png" action ShowTransient("Focus_Map") pos (0.71, 0.016) focus_mask True
 
         showif config.developer:

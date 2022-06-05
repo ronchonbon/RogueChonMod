@@ -2242,7 +2242,6 @@ label Jubes_Clothes:
 
 label Jubes_wardrobe_menu:
     $ JubesX.change_face()
-    $ main_action = 1
     while True:
         menu:
             ch_v "What about my clothes?"
@@ -2295,7 +2294,6 @@ label Jubes_wardrobe_menu:
                     else:
                         $ JubesX.change_outfit()
                 $ JubesX.set_temp_outfit()
-                $ main_action = None
                 call switch_chat
                 if Girl != JubesX:
                     ch_p "I wanted to talk about your clothes."
@@ -2329,7 +2327,6 @@ label Jubes_wardrobe_menu:
                         $ JubesX.change_outfit()
                 $ JubesX.set_temp_outfit()
                 $ JubesX.had_chat[1] += 1
-                $ main_action = None
                 return
 
 
@@ -2557,7 +2554,7 @@ label Jubes_wardrobe_menu:
             if not renpy.showing('dress_screen'):
                 call Jubes_First_Topless
 
-        "Why don't you go with no [JubesX.outfit['top']]?" if JubesX.outfit["top"]:
+        "Why don't you go with no [JubesX.outfit[top]]?" if JubesX.outfit["top"]:
             $ JubesX.change_face("_bemused", 1)
             if approval_check(JubesX, 800, taboo_modifier=3) and (JubesX.outfit["bra"] or JubesX.seen_breasts):
                 ch_v "Sure."
@@ -2654,7 +2651,7 @@ label Jubes_wardrobe_menu:
                 call Display_dress_screen (JubesX)
                 if not _return:
                     $ JubesX.change_face("_bemused", 1)
-                    ch_v "I don't really want to take this [JubesX.outfit['top']] off at the moment."
+                    ch_v "I don't really want to take this [JubesX.outfit[top]] off at the moment."
                     return
             $ JubesX.outfit["top"] = "_red_shirt"
 
@@ -2669,7 +2666,7 @@ label Jubes_wardrobe_menu:
                 call Display_dress_screen (JubesX)
                 if not _return:
                     $ JubesX.change_face("_bemused", 1)
-                    ch_v "I don't really want to take this [JubesX.outfit['top']] off at the moment."
+                    ch_v "I don't really want to take this [JubesX.outfit[top]] off at the moment."
                     return
             $ JubesX.outfit["top"] = "_black_shirt"
 
@@ -2684,7 +2681,7 @@ label Jubes_wardrobe_menu:
                 call Display_dress_screen (JubesX)
                 if not _return:
                     $ JubesX.change_face("_bemused", 1)
-                    ch_v "I don't really want to take this [JubesX.outfit['top']] off at the moment."
+                    ch_v "I don't really want to take this [JubesX.outfit[top]] off at the moment."
                     return
             $ JubesX.outfit["top"] = "_tube_top"
 
@@ -2724,11 +2721,11 @@ label Jubes_wardrobe_menu:
                 elif approval_check(JubesX, 900, taboo_modifier=2) and "_lace_bra" in JubesX.inventory:
                     ch_v "Well, I do have something I could throw on. . ."
                     $ JubesX.outfit["bra"]  = "_lace_bra"
-                    "She pulls out her lace bra and slips it under her [JubesX.outfit['top']]."
+                    "She pulls out her lace bra and slips it under her [JubesX.outfit[top]]."
                 elif approval_check(JubesX, 600, taboo_modifier=2):
                     ch_v "Well, I do have something I could throw on. . ."
                     $ JubesX.outfit["bra"] = "_sports_bra"
-                    "She pulls out her sports bra and slips it on under her [JubesX.outfit['top']]."
+                    "She pulls out her sports bra and slips it on under her [JubesX.outfit[top]]."
                 else:
                     ch_v "Yeah, that wouldn't help."
                     return False
@@ -2760,7 +2757,7 @@ label Jubes_wardrobe_menu:
 
     menu Jubes_Clothes_Legs:
 
-        "Maybe go without the [JubesX.outfit['bottom']]." if JubesX.outfit["bottom"]:
+        "Maybe go without the [JubesX.outfit[bottom]]." if JubesX.outfit["bottom"]:
             $ JubesX.change_face("_sexy", 1)
             if JubesX.seen_underwear and JubesX.outfit["underwear"] and approval_check(JubesX, 500, taboo_modifier=5):
                 ch_v "Ok, sure."
@@ -2840,15 +2837,15 @@ label Jubes_wardrobe_menu:
                     if approval_check(JubesX, 1200, taboo_modifier=4):
                         $ line = JubesX.outfit["bottom"]
                         $ JubesX.outfit["bottom"] = ""
-                        "She pulls off her [line] and slips on the [JubesX.outfit['underwear']]."
+                        "She pulls off her [line] and slips on the [JubesX.outfit[underwear]]."
                     elif JubesX.outfit["bottom"] == "_skirt":
-                        "She pulls out her [JubesX.outfit['underwear']] and pulls them up under her skirt."
+                        "She pulls out her [JubesX.outfit[underwear]] and pulls them up under her skirt."
                         $ JubesX.outfit["bottom"] = ""
                         "Then she drops the skirt to the floor."
                     else:
                         $ line = JubesX.outfit["bottom"]
                         $ JubesX.outfit["bottom"] = ""
-                        "She steps away a moment and then comes back wearing only the [JubesX.outfit['underwear']]."
+                        "She steps away a moment and then comes back wearing only the [JubesX.outfit[underwear]]."
                     return
                 else:
                     ch_v "Nope."
@@ -2883,7 +2880,7 @@ label Jubes_wardrobe_menu:
     menu Jubes_Clothes_Under:
         "Tops":
             menu:
-                "How about you lose the [JubesX.outfit['bra']]?" if JubesX.outfit["bra"]:
+                "How about you lose the [JubesX.outfit[bra]]?" if JubesX.outfit["bra"]:
                     $ JubesX.change_face("_bemused", 1)
                     if JubesX.seen_breasts and approval_check(JubesX, 900, taboo_modifier=2.7):
                         ch_v "Sure."
@@ -2911,7 +2908,7 @@ label Jubes_wardrobe_menu:
                     if JubesX.outfit["jacket"]:
                         "She reaches under her jacket grabs her [line], and pulls it off, dropping it to the ground."
                     elif JubesX.outfit["top"]:
-                        "She reaches under her [JubesX.outfit['top']] grabs her [line], and pulls it off, dropping it to the ground."
+                        "She reaches under her [JubesX.outfit[top]] grabs her [line], and pulls it off, dropping it to the ground."
                     else:
                         "She pulls off her [line] and drops it to the ground."
                         if not renpy.showing('dress_screen'):
@@ -3014,12 +3011,11 @@ label Jubes_wardrobe_menu:
                         if not renpy.showing('dress_screen'):
                             call Jubes_First_Bottomless
                     elif approval_check(JubesX, 1200, taboo_modifier=4):
-                        $ main_action = JubesX.outfit["bottom"]
+                        $ temp_bottom = JubesX.outfit["bottom"]
                         $ JubesX.outfit["bottom"] = ""
                         pause 0.5
-                        $ JubesX.outfit["bottom"] = main_action
-                        "She pulls off her [JubesX.outfit['bottom']] and [line], then pulls the [JubesX.outfit['bottom']] back on."
-                        $ main_action = 1
+                        $ JubesX.outfit["bottom"] = temp_bottom
+                        "She pulls off her [JubesX.outfit[bottom]] and [line], then pulls the [JubesX.outfit[bottom]] back on."
                         call Jubes_First_Bottomless (1)
                     elif JubesX.outfit["bottom"] == "_skirt":
                         "She reaches under her skirt and pulls her [line] off."

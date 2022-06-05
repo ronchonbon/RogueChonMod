@@ -2589,160 +2589,160 @@ label Date_Movies:
             $ Player.recent_history.append("drama")
         "Let [RogueX.name] pick." if RogueX in Party:
             $ line = "pick"
-            $ main_action = RogueX
+            $ Girl = RogueX
         "Let [KittyX.name] pick." if KittyX in Party:
             $ line = "pick"
-            $ main_action = KittyX
+            $ Girl = KittyX
         "Let [EmmaX.name] pick." if EmmaX in Party:
             $ line = "pick"
-            $ main_action = EmmaX
+            $ Girl = EmmaX
         "Let [LauraX.name] pick." if LauraX in Party:
             $ line = "pick"
-            $ main_action = LauraX
+            $ Girl = LauraX
         "Let [JeanX.name] pick." if JeanX in Party:
             $ line = "pick"
-            $ main_action = JeanX
+            $ Girl = JeanX
         "Let [StormX.name] pick." if StormX in Party:
             $ line = "pick"
-            $ main_action = StormX
+            $ Girl = StormX
         "Let [JubesX.name] pick." if JubesX in Party:
             $ line = "pick"
-            $ main_action = JubesX
+            $ Girl = JubesX
 
 
     if line == "pick":
 
-        $ main_action.change_face("_smile")
-        if main_action == RogueX:
+        $ Girl.change_face("_smile")
+        if Girl == RogueX:
             $ RogueX.change_stat("love", 80, 4)
             $ RogueX.change_stat("obedience", 50, -2)
             $ RogueX.change_stat("inhibition", 50, 2)
             ch_r "How sweet, [RogueX.player_petname]. Let's see the romantic comedy."
             $ line = "romcom"
-        elif main_action == KittyX:
+        elif Girl == KittyX:
             $ KittyX.change_stat("love", 80, 4)
             $ KittyX.change_stat("obedience", 50, -2)
             $ KittyX.change_stat("inhibition", 50, 2)
             ch_k "Aw, [KittyX.player_petname]. Let's see the drama."
             $ line = "drama"
-        elif main_action == EmmaX:
+        elif Girl == EmmaX:
             $ EmmaX.change_stat("love", 80, 5)
             $ EmmaX.change_stat("obedience", 50, -3)
             $ EmmaX.change_stat("inhibition", 50, 3)
             ch_e "Oh, lovely. Let's see the horror film."
             $ line = "horror"
-        elif main_action == LauraX:
+        elif Girl == LauraX:
             $ LauraX.change_stat("love", 90, 5)
             $ LauraX.change_stat("obedience", 50, 2)
             $ LauraX.change_stat("inhibition", 50, 2)
             ch_l "Cool. Let's go with some action."
             $ line = "action"
-        elif main_action == JeanX:
+        elif Girl == JeanX:
             $ JeanX.change_stat("love", 60, 2)
             $ JeanX.change_stat("love", 90, 3)
             $ JeanX.change_stat("obedience", 50, 2)
             $ JeanX.change_stat("inhibition", 70, 2)
             ch_j "I guess that romcom looks fun."
             $ line = "romcom"
-        elif main_action == StormX:
+        elif Girl == StormX:
             $ StormX.change_stat("love", 80, 5)
             $ StormX.change_stat("inhibition", 50, 3)
             $ StormX.change_stat("inhibition", 80, 1)
             ch_s "Then, let us watch the drama. I have heard it is excellent."
             $ line = "drama"
-        elif main_action == JubesX:
+        elif Girl == JubesX:
             $ JubesX.change_stat("love", 80, 4)
             $ JubesX.change_stat("obedience", 50, 2)
             $ JubesX.change_stat("inhibition", 50, 2)
             ch_v "Oh, definitely \"action.\""
             $ line = "drama"
         $ Player.recent_history.append(line)
-        call Date_Bonus (main_action, 20)
+        call Date_Bonus (Girl, 20)
 
     if line == "romcom":
-        if RogueX in Party and main_action != RogueX:
+        if RogueX in Party and Girl != RogueX:
             $ RogueX.change_face("_smile", eyes="_surprised")
             $ RogueX.change_stat("love", 50, 2)
             $ RogueX.change_stat("love", 95, 4)
             $ RogueX.change_stat("inhibition", 50, 2)
             ch_r "Oooh, I love a good rom-com, [RogueX.player_petname]. This should be great!"
             call Date_Bonus (RogueX, 15)
-        if KittyX in Party and main_action != KittyX:
+        if KittyX in Party and Girl != KittyX:
             $ KittyX.change_face("_smile", eyes="_surprised")
             $ KittyX.change_stat("love", 50, 2)
             $ KittyX.change_stat("love", 95, 3)
             ch_k "Aw, how cuuuute!"
             call Date_Bonus (KittyX, 5)
-        if EmmaX in Party and main_action != EmmaX:
+        if EmmaX in Party and Girl != EmmaX:
             $ EmmaX.change_face("_confused", mouth="_sad")
             $ EmmaX.change_stat("love", 70, 2)
             $ EmmaX.change_stat("obedience", 50, 5)
             $ EmmaX.change_stat("inhibition", 70, -3)
             ch_e "How. . . pedestrian."
             call Date_Bonus (EmmaX, -5)
-        if LauraX in Party and main_action != LauraX:
+        if LauraX in Party and Girl != LauraX:
             $ LauraX.change_face("_smile", 2)
             $ LauraX.change_stat("love", 80, 3)
             $ LauraX.change_stat("obedience", 50, 3)
             $ LauraX.change_stat("inhibition", 60, 3)
             ch_l "This one looks. . . ok."
             call Date_Bonus (LauraX, 10)
-        if JeanX in Party and main_action != JeanX:
+        if JeanX in Party and Girl != JeanX:
             $ JeanX.change_face("_smile")
             $ JeanX.change_stat("love", 80, 3)
             $ JeanX.change_stat("obedience", 50, 3)
             $ JeanX.change_stat("inhibition", 60, 3)
             ch_j "Oh, excellent tastes."
             call Date_Bonus (JeanX, 10)
-        if StormX in Party and main_action != StormX:
+        if StormX in Party and Girl != StormX:
             $ StormX.change_face("_smile")
             $ StormX.change_stat("love", 70, 2)
             $ StormX.change_stat("obedience", 50, 1)
             ch_s "A true romantic at heart."
             call Date_Bonus (StormX, 10)
-        if JubesX in Party and main_action != JubesX:
+        if JubesX in Party and Girl != JubesX:
             $ JubesX.change_face("_smile")
             $ JubesX.change_stat("love", 50, 2)
             $ JubesX.change_stat("love", 95, 3)
             ch_v "Yeah, ok."
             call Date_Bonus (JubesX, 5)
     elif line == "action":
-        if RogueX in Party and main_action != RogueX:
+        if RogueX in Party and Girl != RogueX:
             $ RogueX.change_face("_sexy")
             ch_r "Hmm, you know I'm always up for some action."
             $ RogueX.change_stat("love", 95, 3)
             call Date_Bonus (RogueX, 5)
-        if KittyX in Party and main_action != KittyX:
+        if KittyX in Party and Girl != KittyX:
             $ KittyX.change_face("_sexy")
             $ KittyX.change_stat("love", 95, 4)
             $ KittyX.change_stat("inhibition", 50, 2)
             ch_k "Action movies are kind of fun."
             call Date_Bonus (KittyX, 5)
-        if EmmaX in Party and main_action != EmmaX:
+        if EmmaX in Party and Girl != EmmaX:
             $ EmmaX.change_face("_sadside", brows="_angry")
             $ EmmaX.change_stat("love", 70, -2)
             $ EmmaX.change_stat("obedience", 50, 5)
             ch_e "I suppose it will at least keep me occupied."
 
-        if LauraX in Party and main_action != LauraX:
+        if LauraX in Party and Girl != LauraX:
             $ LauraX.change_face("_smile")
             $ LauraX.change_stat("love", 70, 5)
             $ LauraX.change_stat("obedience", 50, 5)
             ch_l "This one sounds exciting!"
             call Date_Bonus (LauraX, 10)
-        if JeanX in Party and main_action != JeanX:
+        if JeanX in Party and Girl != JeanX:
             $ JeanX.change_face("_smile")
             $ JeanX.change_stat("obedience", 50, 3)
             $ JeanX.change_stat("inhibition", 60, 2)
             ch_j "I guess that's fine."
             call Date_Bonus (JeanX, 5)
-        if StormX in Party and main_action != StormX:
+        if StormX in Party and Girl != StormX:
             $ StormX.change_face("_smile")
             $ StormX.change_stat("love", 70, 2)
             $ StormX.change_stat("obedience", 50, 1)
             ch_s "That does get the pulse racing."
             call Date_Bonus (StormX, 5)
-        if JubesX in Party and main_action != JubesX:
+        if JubesX in Party and Girl != JubesX:
             $ JubesX.change_face("_smile")
             $ JubesX.change_stat("love", 95, 5)
             $ JubesX.change_stat("obedience", 50, 2)
@@ -2750,21 +2750,21 @@ label Date_Movies:
             ch_v "I love to see some action!"
             call Date_Bonus (JubesX, 15)
     elif line == "horror":
-        if RogueX in Party and main_action != RogueX:
+        if RogueX in Party and Girl != RogueX:
             $ RogueX.change_face("_sad", eyes="_surprised")
             $ RogueX.change_stat("love", 90, -3)
             $ RogueX.change_stat("obedience", 50, 3)
             $ RogueX.change_stat("obedience", 80, 2)
             ch_r "I'm not really into the spooky stuff, [RogueX.player_petname]."
 
-        if KittyX in Party and main_action != KittyX:
+        if KittyX in Party and Girl != KittyX:
             $ KittyX.change_face("_sad", eyes="_surprised")
             $ KittyX.change_stat("love", 90, -5)
             $ KittyX.change_stat("obedience", 50, 4)
             $ KittyX.change_stat("obedience", 80, 2)
             ch_k "It won't be {i}too{/i} scary, right?"
             call Date_Bonus (KittyX, -5)
-        if EmmaX in Party and main_action != EmmaX:
+        if EmmaX in Party and Girl != EmmaX:
             $ EmmaX.change_face("_sly")
             $ EmmaX.change_stat("love", 70, 3)
             $ EmmaX.change_stat("obedience", 50, 3)
@@ -2772,26 +2772,26 @@ label Date_Movies:
             $ EmmaX.change_stat("lust", 60, 5)
             ch_e "I do love to get a good chill up the spine."
             call Date_Bonus (EmmaX, 15)
-        if LauraX in Party and main_action != LauraX:
+        if LauraX in Party and Girl != LauraX:
             $ LauraX.change_face("_normal")
             $ LauraX.change_stat("obedience", 50, 3)
             ch_l "I'm sure it'll be terrifying."
 
-        if JeanX in Party and main_action != JeanX:
+        if JeanX in Party and Girl != JeanX:
             $ JeanX.change_face("_sadside")
             $ JeanX.change_stat("love", 70, -1)
             $ JeanX.change_stat("obedience", 70, 3)
             $ JeanX.change_stat("inhibition", 60, 1)
             ch_j "Kinda boring."
 
-        if StormX in Party and main_action != StormX:
+        if StormX in Party and Girl != StormX:
             $ StormX.change_face("_sad")
             $ StormX.change_stat("love", 70, 1)
             $ StormX.change_stat("obedience", 50, 1)
             $ StormX.change_stat("inhibition", 50, 1)
             ch_s "I. . . do not prefer terror."
 
-        if JubesX in Party and main_action != JubesX:
+        if JubesX in Party and Girl != JubesX:
             $ JubesX.change_face("_sad")
             $ JubesX.change_stat("love", 90, -5)
             $ JubesX.change_stat("obedience", 50, 2)
@@ -2799,30 +2799,30 @@ label Date_Movies:
             ch_v "I get enough of this back home. . ."
             call Date_Bonus (JubesX, -5)
     elif line == "drama":
-        if RogueX in Party and main_action != RogueX:
+        if RogueX in Party and Girl != RogueX:
             $ RogueX.change_face("_bemused")
             $ RogueX.change_stat("love", 95, 1)
             $ RogueX.change_stat("obedience", 50, 3)
             ch_r "Hmmm, I have heard some good things about this one, could be interesting."
             call Date_Bonus (RogueX, 5)
-        if KittyX in Party and main_action != KittyX:
+        if KittyX in Party and Girl != KittyX:
             $ KittyX.change_face("_bemused")
             $ KittyX.change_stat("love", 95, 3)
             $ KittyX.change_stat("obedience", 50, 2)
             ch_k "I heard this was a good one!"
             call Date_Bonus (KittyX, 15)
-        if EmmaX in Party and main_action != EmmaX:
+        if EmmaX in Party and Girl != EmmaX:
             $ EmmaX.change_face("_normal")
             $ EmmaX.change_stat("love", 70, 2)
             $ EmmaX.change_stat("obedience", 50, 3)
             ch_e "Ah, this does sound like an interesting one."
             call Date_Bonus (EmmaX, 5)
-        if LauraX in Party and main_action != LauraX:
+        if LauraX in Party and Girl != LauraX:
             $ LauraX.change_face("_normal")
             $ LauraX.change_stat("obedience", 50, 3)
             ch_l "Meh."
 
-        if JeanX in Party and main_action != JeanX:
+        if JeanX in Party and Girl != JeanX:
             $ JeanX.change_face("_sad")
             $ JeanX.change_stat("love", 60, -3)
             $ JeanX.change_stat("love", 80, -2)
@@ -2831,7 +2831,7 @@ label Date_Movies:
             $ JeanX.change_stat("inhibition", 60, 3)
             ch_j "Booooring."
             call Date_Bonus (JeanX, 10)
-        if StormX in Party and main_action != StormX:
+        if StormX in Party and Girl != StormX:
             $ StormX.change_face("_smile")
             $ StormX.change_stat("love", 50, 3)
             $ StormX.change_stat("love", 80, 3)
@@ -2840,13 +2840,13 @@ label Date_Movies:
             $ StormX.change_stat("inhibition", 50, 3)
             ch_s "Ah, an wonderful choice. I have heard it is excellent."
             call Date_Bonus (StormX, 15)
-        if JubesX in Party and main_action != JubesX:
+        if JubesX in Party and Girl != JubesX:
             $ JubesX.change_face("_bemused")
             $ JubesX.change_stat("love", 95, 1)
             $ JubesX.change_stat("obedience", 50, 2)
             ch_v "Yeah, ok. . ."
             call Date_Bonus (JubesX, 5)
-    $ main_action = None
+    $ Girl = None
 
     call Date_Paying ("movie")
 
@@ -4166,7 +4166,7 @@ label Girl_Date_End(Girl=0):
                     $ multi_action = False
 
                     call before_action(Girl, "kiss", None)
-                    
+
                     $ multi_action = True
                 if approval_check(Girl, 900, Bonus=(10*Date_Bonus[0])):
                     $ Girl.change_face("_sexy", 1)

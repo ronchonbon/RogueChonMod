@@ -636,7 +636,7 @@ label fondle_menu(Girl, action):
 
                     $ action = _return
 
-                    return [action, "shift"]
+                    return [action, "auto"]
                 "Threesome actions" if Partner:
                     menu:
                         "Ask [Girl.name] to do something else with [Partner.name]" if action == "lesbian":
@@ -854,7 +854,7 @@ label handjob_menu(Girl, action):
 
                         $ action = _return
 
-                        return [action, "shift"]
+                        return [action, "auto"]
                     "Shift your focus. (locked)" if action in ["dildo_pussy", "dildo_ass"] and not Player.offhand_action:
                         pass
                     "Threesome actions" if Partner:

@@ -521,7 +521,10 @@ label set_offhand_action(Girl):
             return "continue"
 
     call set_approval_bonus(Girl, action, "offhand")
+    $ approval_bonus = _return
+
     call action_approval_checks(Girl, action)
+    $ approval = _return
 
     if Girl == EmmaX and action == "kiss" and not approval_check(Girl, 1000):
         $ Girl.change_face("_sadside")
@@ -1682,6 +1685,7 @@ label action_rejected(Girl, action):
 
 label forced_action(Girl, action):
     call forced_approval_checks(Girl, action)
+    $ approval = _return
 
     if approval > 1 or (approval and Girl.forced):
         call forced_but_not_unwelcome_reactions(Girl, action)

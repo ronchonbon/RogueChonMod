@@ -2237,7 +2237,6 @@ label Storm_Clothes:
 
 label Storm_wardrobe_menu:
     $ StormX.change_face()
-    $ main_action = 1
     while True:
         menu:
             ch_s "What about my wardrobe?"
@@ -2290,7 +2289,6 @@ label Storm_wardrobe_menu:
                     else:
                         $ StormX.change_outfit()
                 $ StormX.set_temp_outfit()
-                $ main_action = None
                 call switch_chat
                 if Girl != StormX:
                     ch_p "I wanted to talk about your clothes."
@@ -2329,7 +2327,6 @@ label Storm_wardrobe_menu:
                         $ StormX.change_outfit()
                 $ StormX.set_temp_outfit()
                 $ StormX.had_chat[1] += 1
-                $ main_action = None
                 return
 
 
@@ -2545,7 +2542,7 @@ label Storm_wardrobe_menu:
 
     menu Storm_Clothes_Over:
 
-        "Why don't you go with no [StormX.outfit['top']]?" if StormX.outfit["top"]:
+        "Why don't you go with no [StormX.outfit[top]]?" if StormX.outfit["top"]:
             $ StormX.change_face("_bemused", 1)
             if approval_check(StormX, 800, taboo_modifier=3):
                 ch_s "Fine."
@@ -2582,7 +2579,7 @@ label Storm_wardrobe_menu:
                 call Display_dress_screen (StormX)
                 if not _return:
                     $ StormX.change_face("_bemused", 1)
-                    ch_s "I cannot really take this [StormX.outfit['top']] off at the moment."
+                    ch_s "I cannot really take this [StormX.outfit[top]] off at the moment."
                     return
             $ StormX.outfit["top"] = "_white_shirt"
 
@@ -2597,7 +2594,7 @@ label Storm_wardrobe_menu:
                 call Display_dress_screen (StormX)
                 if not _return:
                     $ StormX.change_face("_bemused", 1)
-                    ch_s "I cannot really take this [StormX.outfit['top']] off at the moment."
+                    ch_s "I cannot really take this [StormX.outfit[top]] off at the moment."
                     return
             $ StormX.outfit["top"] = "_jacket"
 
@@ -2639,15 +2636,15 @@ label Storm_wardrobe_menu:
                 elif approval_check(StormX, 900, taboo_modifier=2) and "_lace_bra" in StormX.inventory:
                     ch_s "Fine."
                     $ StormX.outfit["bra"]  = "_lace_bra"
-                    "She pulls out her lace bra and slips it under her [StormX.outfit['top']]."
+                    "She pulls out her lace bra and slips it under her [StormX.outfit[top]]."
                 elif approval_check(StormX, 700, taboo_modifier=2) and "_corset" in StormX.inventory:
                     ch_s "Fine."
                     $ StormX.outfit["bra"]  = "_black_bra"
-                    "She pulls out her black bra and slips it under her [StormX.outfit['top']]."
+                    "She pulls out her black bra and slips it under her [StormX.outfit[top]]."
                 elif approval_check(StormX, 600, taboo_modifier=2):
                     ch_s "Fine."
                     $ StormX.outfit["bra"] = "_tube_top"
-                    "She pulls out her tube top and slips it on under her [StormX.outfit['top']]."
+                    "She pulls out her tube top and slips it on under her [StormX.outfit[top]]."
                 else:
                     ch_s "I don't think it would be appropriate."
                     return False
@@ -2680,7 +2677,7 @@ label Storm_wardrobe_menu:
 
     menu Storm_Clothes_Legs:
 
-        "Maybe go without the [StormX.outfit['bottom']]." if StormX.outfit["bottom"]:
+        "Maybe go without the [StormX.outfit[bottom]]." if StormX.outfit["bottom"]:
             $ StormX.change_face("_sexy", 1)
             if StormX.taboo <= 20 or StormX.outfit["hose"] in ["_tights", "_pantyhose"] or StormX.underwear_number() >= 5 or StormX in Rules:
                 ch_s "Fine."
@@ -2762,15 +2759,15 @@ label Storm_wardrobe_menu:
                     if approval_check(StormX, 1200, taboo_modifier=4):
                         $ line = StormX.outfit["bottom"]
                         $ StormX.outfit["bottom"] = ""
-                        "She pulls off her [line] and slips on the [StormX.outfit['underwear']]."
+                        "She pulls off her [line] and slips on the [StormX.outfit[underwear]]."
                     elif StormX.outfit["bottom"] == "_skirt":
-                        "She pulls out her [StormX.outfit['underwear']] and pulls them up under her skirt."
+                        "She pulls out her [StormX.outfit[underwear]] and pulls them up under her skirt."
                         $ StormX.outfit["bottom"] = ""
                         "Then she drops the skirt to the floor."
                     else:
                         $ line = StormX.outfit["bottom"]
                         $ StormX.outfit["bottom"] = ""
-                        "She steps away a moment and then comes back wearing only the [StormX.outfit['underwear']]."
+                        "She steps away a moment and then comes back wearing only the [StormX.outfit[underwear]]."
                     return
                 else:
                     ch_s "No, thank you."
@@ -2806,7 +2803,7 @@ label Storm_wardrobe_menu:
     menu Storm_Clothes_Under:
         "Tops":
             menu:
-                "How about you lose the [StormX.outfit['bra']]?" if StormX.outfit["bra"]:
+                "How about you lose the [StormX.outfit[bra]]?" if StormX.outfit["bra"]:
                     $ StormX.change_face("_bemused", 1)
 
                     if StormX.taboo <= 20 or StormX in Rules or StormX.top_number() >= 5:
@@ -2835,7 +2832,7 @@ label Storm_wardrobe_menu:
                     $ line = StormX.outfit["bra"]
                     $ StormX.outfit["bra"] = ""
                     if StormX.outfit["top"]:
-                        "She reaches under her [StormX.outfit['top']] grabs her [line], and pulls it off, dropping it to the ground."
+                        "She reaches under her [StormX.outfit[top]] grabs her [line], and pulls it off, dropping it to the ground."
                     else:
                         "She pulls off her [line] and drops it to the ground."
                         if not renpy.showing('dress_screen'):
@@ -2974,12 +2971,11 @@ label Storm_wardrobe_menu:
                         if not renpy.showing('dress_screen'):
                             call Storm_First_Bottomless
                     elif approval_check(StormX, 1200, taboo_modifier=4):
-                        $ main_action = StormX.outfit["bottom"]
+                        $ temp_bottom = StormX.outfit["bottom"]
                         $ StormX.outfit["bottom"] = ""
                         pause 0.5
-                        $ StormX.outfit["bottom"] = main_action
-                        "She pulls off her [StormX.outfit['bottom']] and [line], then pulls the [StormX.outfit['bottom']] back on."
-                        $ main_action = 1
+                        $ StormX.outfit["bottom"] = temp_bottom
+                        "She pulls off her [StormX.outfit[bottom]] and [line], then pulls the [StormX.outfit[bottom]] back on."
                         call Storm_First_Bottomless (1)
                     elif StormX.outfit["bottom"] == "_skirt":
                         "She reaches under her skirt and pulls her [line] off."

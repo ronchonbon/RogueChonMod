@@ -2281,7 +2281,6 @@ label Jean_Clothes:
 
 label Jean_wardrobe_menu:
     $ JeanX.change_face()
-    $ main_action = 1
     while True:
         menu:
             ch_j "What about my clothes?"
@@ -2334,7 +2333,6 @@ label Jean_wardrobe_menu:
                     else:
                         $ JeanX.change_outfit()
                 $ JeanX.set_temp_outfit()
-                $ main_action = None
                 call switch_chat
                 if Girl != JeanX:
                     ch_p "I wanted to talk about your clothes."
@@ -2368,7 +2366,6 @@ label Jean_wardrobe_menu:
                         $ JeanX.change_outfit()
                 $ JeanX.set_temp_outfit()
                 $ JeanX.had_chat[1] += 1
-                $ main_action = None
                 return
 
 
@@ -2571,7 +2568,7 @@ label Jean_wardrobe_menu:
 
     menu Jean_Clothes_Over:
 
-        "Why don't you go with no [JeanX.outfit['top']]?" if JeanX.outfit["top"]:
+        "Why don't you go with no [JeanX.outfit[top]]?" if JeanX.outfit["top"]:
             $ JeanX.change_face("_bemused", 1)
             if approval_check(JeanX, 800, taboo_modifier=3) and (JeanX.outfit["bra"] or JeanX.seen_breasts):
                 ch_j "Ok."
@@ -2644,11 +2641,11 @@ label Jean_wardrobe_menu:
                 elif approval_check(JeanX, 900, taboo_modifier=2) and "_lace_bra" in JeanX.inventory:
                     ch_j "I guess I could find something."
                     $ JeanX.outfit["bra"]  = "_lace_bra"
-                    "She pulls out her lace bra and slips it under her [JeanX.outfit['top']]."
+                    "She pulls out her lace bra and slips it under her [JeanX.outfit[top]]."
                 elif approval_check(JeanX, 700, taboo_modifier=2):
                     ch_j "I guess I could find something."
                     $ JeanX.outfit["bra"]  = "_green_bra"
-                    "She pulls out her green bra and slips it under her [JeanX.outfit['top']]."
+                    "She pulls out her green bra and slips it under her [JeanX.outfit[top]]."
                 else:
                     ch_j "Yeah, I don't think so."
                     return False
@@ -2680,7 +2677,7 @@ label Jean_wardrobe_menu:
 
     menu Jean_Clothes_Legs:
 
-        "Maybe go without the [JeanX.outfit['bottom']]." if JeanX.outfit["bottom"]:
+        "Maybe go without the [JeanX.outfit[bottom]]." if JeanX.outfit["bottom"]:
             $ JeanX.change_face("_sexy", 1)
             if JeanX.seen_underwear and JeanX.outfit["underwear"] and approval_check(JeanX, 500, taboo_modifier=5):
                 ch_j "Ok, sure."
@@ -2763,15 +2760,15 @@ label Jean_wardrobe_menu:
                     if approval_check(JeanX, 1200, taboo_modifier=4):
                         $ line = JeanX.outfit["bottom"]
                         $ JeanX.outfit["bottom"] = ""
-                        "She pulls off her [line] and slips on the [JeanX.outfit['underwear']]."
+                        "She pulls off her [line] and slips on the [JeanX.outfit[underwear]]."
                     elif JeanX.outfit["bottom"] == "_skirt":
-                        "She pulls out her [JeanX.outfit['underwear']] and pulls them up under her skirt."
+                        "She pulls out her [JeanX.outfit[underwear]] and pulls them up under her skirt."
                         $ JeanX.outfit["bottom"] = ""
                         "Then she drops the skirt to the floor."
                     else:
                         $ line = JeanX.outfit["bottom"]
                         $ JeanX.outfit["bottom"] = ""
-                        "She steps away a moment and then comes back wearing only the [JeanX.outfit['underwear']]."
+                        "She steps away a moment and then comes back wearing only the [JeanX.outfit[underwear]]."
                     return
                 else:
                     ch_j "Nope."
@@ -2806,7 +2803,7 @@ label Jean_wardrobe_menu:
     menu Jean_Clothes_Under:
         "Tops":
             menu:
-                "How about you lose the [JeanX.outfit['bra']]?" if JeanX.outfit["bra"]:
+                "How about you lose the [JeanX.outfit[bra]]?" if JeanX.outfit["bra"]:
                     $ JeanX.change_face("_bemused", 1)
                     if JeanX.seen_breasts and approval_check(JeanX, 900, taboo_modifier=2.7):
                         ch_j "Ok."
@@ -2830,7 +2827,7 @@ label Jean_wardrobe_menu:
                     $ line = JeanX.outfit["bra"]
                     $ JeanX.outfit["bra"] = ""
                     if JeanX.outfit["top"]:
-                        "She reaches under her [JeanX.outfit['top']] grabs her [line], and pulls it off, dropping it to the ground."
+                        "She reaches under her [JeanX.outfit[top]] grabs her [line], and pulls it off, dropping it to the ground."
                     else:
                         "She pulls off her [line] and drops it to the ground."
                         if not renpy.showing('dress_screen'):
@@ -2955,12 +2952,11 @@ label Jean_wardrobe_menu:
                         if not renpy.showing('dress_screen'):
                             call Jean_First_Bottomless
                     elif approval_check(JeanX, 1200, taboo_modifier=4):
-                        $ main_action = JeanX.outfit["bottom"]
+                        $ temp_bottom = JeanX.outfit["bottom"]
                         $ JeanX.outfit["bottom"] = ""
                         pause 0.5
-                        $ JeanX.outfit["bottom"] = main_action
-                        "She pulls off her [JeanX.outfit['bottom']] and [line], then pulls the [JeanX.outfit['bottom']] back on."
-                        $ main_action = 1
+                        $ JeanX.outfit["bottom"] = temp_bottom
+                        "She pulls off her [JeanX.outfit[bottom]] and [line], then pulls the [JeanX.outfit[bottom]] back on."
                         call Jean_First_Bottomless (1)
                     elif JeanX.outfit["bottom"] == "_skirt":
                         "She reaches under her skirt and pulls her [line] off."

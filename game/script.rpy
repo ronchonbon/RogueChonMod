@@ -74,8 +74,8 @@ init -1:
     default multi_action = True
     default action_speed = 0
 
-    default main_action = None
-    default girl_offhand_action = None
+    default Player.main_action = None
+    default Girl.offhand_action = None
     default second_girl_main_action = None
     default second_girl_offhand_action = None
 
@@ -194,7 +194,7 @@ label start:
     # $ Player.sprite = True
     # $ action_speed = 3
     # $ Player.cock_position = "out"
-    # $ main_action = "hotdog"
+    # $ Player.main_action = "hotdog"
 
     # show Rogue_sprite handjob at sprite_location(0.5)
     # show Rogue_sprite titjob at sprite_location(0.5)
@@ -232,7 +232,7 @@ label start:
     # $ RogueX.change_outfit("nude")
     # $ Player.sprite = False
     # $ Player.cock_position = "in"
-    # $ main_action = "suck_breasts"
+    # $ Player.main_action = "suck_breasts"
     # $ Player.offhand_action = "fondle_breasts"
 
     # show Rogue_sprite sex at sprite_location(stage_center)

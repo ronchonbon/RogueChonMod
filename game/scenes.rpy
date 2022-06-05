@@ -13,8 +13,6 @@ label training:
     else:
         $ line = "You squeeze in a quick session in the Danger Room."
 
-    $ main_action = None
-
     if D20 >= 18:
         "[line] During the exercise, Cyclops accidentally shoots you."
         "Luckily you're immune to the beams, but your clothes weren't so lucky."
@@ -2308,7 +2306,6 @@ label PhoneSex(Girl=0):
     show PhoneSex zorder 150
 
     $ Girl.add_word(1,"phonesex","phonesex",0,"phonesex")
-    $ main_action = 1
     if Girl == RogueX:
         ch_r "Ok, I think that should get the video running, right?"
         call before_masturbation(RogueX)

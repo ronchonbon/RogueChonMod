@@ -212,6 +212,9 @@ init python:
 
             self.stored_stats = 0
 
+            self.main_action = None
+            self.offhand_action = None
+
             if self.tag == "Rogue":
                 self.voice = ch_r
 
@@ -513,11 +516,6 @@ init python:
 
                     call_holder(update, Color, self.sprite_location)
 
-                    if flavor == "lust" and stat >= 100 and not main_action:
-                        renpy.call("Girl_Cumming", self, 1)
-
-                        return
-
                     stat = 100 if stat > 100 else stat
 
                     setattr(self, flavor, stat)
@@ -782,12 +780,12 @@ init python:
             elif self.lust >= 50:
                 self.grool = 1
 
-            if girl_offhand_action == "kiss both" or girl_offhand_action == "kiss girl":
+            if Girl.offhand_action == "kiss both" or Girl.offhand_action == "kiss girl":
                 kissing = True
-            elif second_girl_main_action == "kiss both" or girl_offhand_action == "kiss girl":
+            elif second_girl_main_action == "kiss both" or Girl.offhand_action == "kiss girl":
                 kissing = True
             elif Partner != self:
-                if main_action == "kiss" or Player.offhand_action == "kiss":
+                if Player.main_action == "kiss" or Player.offhand_action == "kiss":
                     kissing = True
             elif second_girl_main_action == "kiss":
                 kissing = True
@@ -837,7 +835,7 @@ init python:
 
             if Partner == self and second_girl_main_action in ["suck_breasts", "eat_pussy", "eat_ass", "blowjob"]:
                 self.mouth = "_tongue"
-            elif girl_offhand_action in ["suck_breasts", "eat_pussy", "eat_ass"]:
+            elif Girl.offhand_action in ["suck_breasts", "eat_pussy", "eat_ass"]:
                 self.mouth = "_tongue"
 
             if self.session_orgasms >= 10:
@@ -845,7 +843,7 @@ init python:
                 self.mouth = "_tongue"
 
             if not self.used_to_anal:
-                if Partner != self and (main_action == "anal" or main_action == "dildo_ass" or girl_offhand_action == "dildo_ass"):
+                if Partner != self and (Player.main_action == "anal" or Player.main_action == "dildo_ass" or Girl.offhand_action == "dildo_ass"):
                     self.eyes = "_closed"
                     self.brows = "_angry"
 

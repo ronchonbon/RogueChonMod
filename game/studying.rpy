@@ -98,8 +98,6 @@ label study:
     $ Player.recent_history.append("study")
     $ Player.XP += 5
 
-    $ main_action = None
-
     $ line = renpy.random.choice(["you run you through some basic routines, it's fairly uneventful.",
         "You study up for the mutant biology test.",
         "You study for the math quiz.",
