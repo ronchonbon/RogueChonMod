@@ -155,8 +155,8 @@ layeredimage Storm_sprite standing:
     if StormX.outfit["held_item"] and StormX.arm_pose == 2:
         "images/Storm_standing/Storm_standing_held[StormX.outfit[held_item]].png"
 
-    always:
-        "Storm_standing_fondling_animations"
+    # always:
+    #     "Storm_standing_fondling_animations"
 
     anchor (0.5, 0.0) offset (60, 180) zoom 0.95
 

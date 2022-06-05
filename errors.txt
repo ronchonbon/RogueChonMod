@@ -2,9 +2,13 @@
 errors listed below, and try again.
 
 
-File "game/narrations.rpy", line 3137: expected ',' not found.
-    label Dirty_Talk(Girl=Primary, D20=0, TempCheck=0, Templine=0, TempPlayer.main_action=second_girl_main_action, ActiveGirl=0):
-                                                                             ^
+File "game/script.rpy", line 189: expected statement.
+    Player.primary_action = all_actions[counter]
+                          ^
+
+File "game/script.rpy", line 191: expected statement.
+    counter -= 1
+             ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Sat Jun  4 22:43:17 2022
+Sun Jun  5 12:12:22 2022

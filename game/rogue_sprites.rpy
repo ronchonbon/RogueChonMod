@@ -103,8 +103,8 @@ layeredimage Rogue_sprite standing:
     if RogueX.outfit["held_item"] and RogueX.arm_pose == 2:
         "images/Rogue_standing/Rogue_standing_held[RogueX.outfit[held_item]].png"
 
-    always:
-        "Rogue_standing_fondling_animations"
+    # always:
+    #     "Rogue_standing_fondling_animations"
 
     anchor (0.5, 0.0) offset (5, 180) zoom 0.95
 

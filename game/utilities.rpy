@@ -3470,22 +3470,22 @@ label Sex_Menu_Threesome(Girl=0):
 
 label Partner_Like(Girl=0, value=1, Altvalue=1, Measure=800, Partner=Partner):
 
+    if Partner:
+        if second_girl_main_action:
+
+            if second_girl_main_action == "watch":
+                pass
+            elif second_girl_main_action in ("handjob","blowjob"):
+                $ value += 1
+            elif second_girl_main_action in ("eat_pussy","eat_ass"):
+                $ value += 3
+            else:
+                $ value += 2
 
 
-    if second_girl_main_action:
+        $ Partner.check_if_likes(Girl,Measure,value,1)
+        $ Girl.check_if_likes(Partner,Measure,value,1)
 
-        if second_girl_main_action == "watch":
-            pass
-        elif second_girl_main_action in ("handjob","blowjob"):
-            $ value += 1
-        elif second_girl_main_action in ("eat_pussy","eat_ass"):
-            $ value += 3
-        else:
-            $ value += 2
-
-
-    $ Partner.check_if_likes(Girl,Measure,value,1)
-    $ Girl.check_if_likes(Partner,Measure,value,1)
     return
 
 label RoomStatboost(Type=0, Check=0, Amount=0):

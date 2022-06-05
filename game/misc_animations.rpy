@@ -720,7 +720,7 @@ image Chibi_UI:
     contains:
         ConditionSwitch(
             "'cockout' not in Player.recent_history", Null(),
-            "secondary_action == 'jerking_off'", "Chibi_jerking_off",
+            "Player.secondary_action == 'jerking_off'", "Chibi_jerking_off",
             "girl_offhand_action == 'hand' or second_girl_main_action == 'hand'", "Chibi_Handy",
             "second_girl_main_action == 'blow'", "Chibi_Sucking",
             "True", "Chibi_Null",

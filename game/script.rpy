@@ -180,7 +180,7 @@ label start:
 
     show screen status_screen
     show screen inventory_button
-
+    
     # $ bg_current = "bg_emma"
     # $ time_index = 2
     # $ current_time = "evening"

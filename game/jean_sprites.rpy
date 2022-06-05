@@ -113,8 +113,8 @@ layeredimage Jean_sprite standing:
     if JeanX.outfit["held_item"] and JeanX.arm_pose == 2:
         "images/Jean_standing/Jean_standing_held[JeanX.outfit[held_item]].png"
 
-    always:
-        "Jean_standing_fondling_animations"
+    # always:
+    #     "Jean_standing_fondling_animations"
 
     anchor (0.5, 0.0) offset (20, 180)
 
@@ -157,49 +157,49 @@ layeredimage Jean_head:
 
     anchor (0.5, 0.5)
 
-layeredimage Jean_kneeling:
-    # always:
-    #     "images/Jean_kneeling/Jean_kneeling_head_reference.png"
-
-    always:
-        "images/Jean_kneeling/Jean_kneeling_back_hair[JeanX.outfit[hair]].png"
-
-    if JeanX.outfit["rope"]:
-        "images/Jean_kneeling/Jean_kneeling_right_arm_bound.png"
-    else:
-        "images/Jean_kneeling/Jean_kneeling_right_arm.png"
-
-    if JeanX.whipped:
-        "images/Jean_kneeling/Jean_kneeling_body_whipped.png"
-    else:
-        "images/Jean_kneeling/Jean_kneeling_body.png"
-
-    if JeanX.whipped:
-        "images/Jean_kneeling/Jean_kneeling_legs_whipped.png"
-    else:
-        "images/Jean_kneeling/Jean_kneeling_legs.png"
-
-    if JeanX.outfit["rope"]:
-        "images/Jean_kneeling/Jean_kneeling_left_arm_bound.png"
-    else:
-        "images/Jean_kneeling/Jean_kneeling_left_arm.png"
-
-    always:
-        "Jean_head" pos (0.31, 0.4) rotate -18.0 zoom 0.6304
-
-    if JeanX.outfit["makeup"]:
-        "images/Jean_kneeling/Jean_kneeling_makeup[JeanX.outfit[makeup]].png"
-
-    if JeanX.outfit["gag"]:
-        "images/Jean_kneeling/Jean_kneeling_gag[JeanX.outfit[gag]].png"
-
-    if JeanX.outfit["clamps"]:
-        "images/Jean_kneeling/Jean_kneeling_clamps[JeanX.outfit[clamps]].png"
-
-    if JeanX.outfit["rope"]:
-        "images/Jean_kneeling/Jean_kneeling_rope[JeanX.outfit[rope]].png"
-
-    if JeanX.outfit["held_item"]:
-        "images/Jean_kneeling/Jean_kneeling_held_item[JeanX.outfit[held_item]].png"
-
-    anchor (0.5, 0.0) offset (0, 320) zoom 0.45
+# layeredimage Jean_kneeling:
+#     # always:
+#     #     "images/Jean_kneeling/Jean_kneeling_head_reference.png"
+#
+#     always:
+#         "images/Jean_kneeling/Jean_kneeling_back_hair[JeanX.outfit[hair]].png"
+#
+#     if JeanX.outfit["rope"]:
+#         "images/Jean_kneeling/Jean_kneeling_right_arm_bound.png"
+#     else:
+#         "images/Jean_kneeling/Jean_kneeling_right_arm.png"
+#
+#     if JeanX.whipped:
+#         "images/Jean_kneeling/Jean_kneeling_body_whipped.png"
+#     else:
+#         "images/Jean_kneeling/Jean_kneeling_body.png"
+#
+#     if JeanX.whipped:
+#         "images/Jean_kneeling/Jean_kneeling_legs_whipped.png"
+#     else:
+#         "images/Jean_kneeling/Jean_kneeling_legs.png"
+#
+#     if JeanX.outfit["rope"]:
+#         "images/Jean_kneeling/Jean_kneeling_left_arm_bound.png"
+#     else:
+#         "images/Jean_kneeling/Jean_kneeling_left_arm.png"
+#
+#     always:
+#         "Jean_head" pos (0.31, 0.4) rotate -18.0 zoom 0.6304
+#
+#     if JeanX.outfit["makeup"]:
+#         "images/Jean_kneeling/Jean_kneeling_makeup[JeanX.outfit[makeup]].png"
+#
+#     if JeanX.outfit["gag"]:
+#         "images/Jean_kneeling/Jean_kneeling_gag[JeanX.outfit[gag]].png"
+#
+#     if JeanX.outfit["clamps"]:
+#         "images/Jean_kneeling/Jean_kneeling_clamps[JeanX.outfit[clamps]].png"
+#
+#     if JeanX.outfit["rope"]:
+#         "images/Jean_kneeling/Jean_kneeling_rope[JeanX.outfit[rope]].png"
+#
+#     if JeanX.outfit["held_item"]:
+#         "images/Jean_kneeling/Jean_kneeling_held_item[JeanX.outfit[held_item]].png"
+#
+#     anchor (0.5, 0.0) offset (0, 320) zoom 0.45

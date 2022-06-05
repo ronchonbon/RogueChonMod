@@ -2670,7 +2670,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, Templ
     else:
 
 
-        "Nothing triggered. 1:[Player.primary_action], 2:[secondary_action], 3:[girl_offhand_action], 4:[second_girl_main_action], 5:[second_girl_secondary_action]"
+        "Nothing triggered. 1:[Player.primary_action], 2:[Player.secondary_action], 3:[girl_offhand_action], 4:[second_girl_main_action], 5:[second_girl_secondary_action]"
 
 
     $ TempLust2 += 2

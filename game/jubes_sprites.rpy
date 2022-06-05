@@ -115,8 +115,8 @@ layeredimage Jubes_sprite standing:
     if JubesX.outfit["held_item"] and JubesX.arm_pose == 1:
         "images/Jubes_standing/Jubes_standing_held[JubesX.outfit[held_item]].png"
 
-    always:
-        "Jubes_standing_fondling_animations"
+    # always:
+    #     "Jubes_standing_fondling_animations"
 
     anchor (0.5, 0.0) offset (15, 150) zoom 1.1
 
