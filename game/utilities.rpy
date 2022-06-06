@@ -81,8 +81,8 @@ label wait(outfit = True, lights = True):
                     $ StormX.outfit["hair"] = "_mohawk"
                 elif "_wet" in StormX.daily_history:
                     $ StormX.outfit["hair"] = "_wet"
-                elif "_wet_mohawk" in StormX.daily_history:
-                    $ StormX.outfit["hair"] = "_wet_mohawk"
+                elif "_wethawk" in StormX.daily_history:
+                    $ StormX.outfit["hair"] = "_wethawk"
 
         call reset_all_girls_at_end
 
@@ -631,10 +631,10 @@ label to_do(Girl):
     if "hair" in Girl.to_do:
         if StormX.outfit["hair"] == "_long":
             $ StormX.outfit["hair"] = "_mohawk"
-        elif StormX.outfit["hair"] == "_wet_mohawk":
+        elif StormX.outfit["hair"] == "_wethawk":
             $ StormX.outfit["hair"] = "_wet"
         elif StormX.outfit["hair"] == "_wet":
-            $ StormX.outfit["hair"] = "_wet_mohawk"
+            $ StormX.outfit["hair"] = "_wethawk"
         else:
             $ StormX.outfit["hair"] = "_long"
 
@@ -1303,11 +1303,12 @@ label girls_location(change = False):
     call change_out_of_gym_clothes(temp_Girls)
 
     while temp_Girls:
+        if temp_Girls[0] in Nearby and temp_Girls[0].location != "nearby":
+            $ Nearby.remove(temp_Girls[0])
+
         if "leaving" in temp_Girls[0].recent_history:
             if "sleepover" in temp_Girls[0].traits:
                 $ temp_Girls[0].drain_word("sleepover",0,0,1)
-
-            call expression temp_Girls[0].tag + "_Leave"
 
             if temp_Girls[0].location != bg_current:
                 if temp_Girls[0] in Present:
@@ -1315,10 +1316,10 @@ label girls_location(change = False):
 
                 $ change = True
 
-        if temp_Girls[0] in Nearby and temp_Girls[0].location != "nearby":
-            $ Nearby.remove(temp_Girls[0])
+            call expression temp_Girls[0].tag + "_Leave"
 
-        $ temp_Girls.remove(temp_Girls[0])
+        if temp_Girls:
+            $ temp_Girls.remove(temp_Girls[0])
 
     if change:
         call set_the_scene(check_if_dressed = False)

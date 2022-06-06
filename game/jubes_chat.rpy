@@ -2233,7 +2233,7 @@ label Jubes_Clothes:
         ch_v "I don't think I really need your fashion advice."
         return
 
-    if Girl != JubesX or line == "giftstore":
+    if Girl != JubesX or line == "Giftstore":
 
         $ renpy.pop_call()
     $ line = 0
@@ -2253,7 +2253,7 @@ label Jubes_wardrobe_menu:
                 call Jubes_Clothes_Under
             "Accessories":
                 call Jubes_Clothes_Misc
-            "outfit Management":
+            "Outfit Management":
                 call Jubes_Clothes_outfits
             "Let's talk about what you wear around.":
                 call set_clothes_schedule (JubesX)
@@ -2635,10 +2635,10 @@ label Jubes_wardrobe_menu:
             if not renpy.showing('dress_screen'):
                 call Jubes_First_Topless
 
-        "Maybe zip the jacket closed?" if JubesX.outfit["jacket"] and JubesX.outfit["jacket"] != "_shut_jacket":
+        "Maybe zip the jacket closed?" if JubesX.outfit["jacket"] and JubesX.outfit["jacket"] != "_closed_jacket":
             $ JubesX.change_face("_bemused")
             ch_v "Sure."
-            $ JubesX.outfit["jacket"] = "_shut_jacket"
+            $ JubesX.outfit["jacket"] = "_closed_jacket"
 
         "Try on that red shirt." if JubesX.outfit["top"] != "_red_shirt":
             $ JubesX.change_face("_bemused")
@@ -3047,16 +3047,16 @@ label Jubes_wardrobe_menu:
                         else:
                             $ JubesX.outfit["underwear"] = "_lace_panties"
 
-                "Why don't you wear the tiger panties instead?" if "tiger_panties" in JubesX.inventory and JubesX.outfit["underwear"] and JubesX.outfit["underwear"] != "tiger_panties":
+                "Why don't you wear the tiger panties instead?" if "_tiger_panties" in JubesX.inventory and JubesX.outfit["underwear"] and JubesX.outfit["underwear"] != "_tiger_panties":
                     if approval_check(JubesX, 1300, taboo_modifier=3):
                         ch_v "I guess."
-                        $ JubesX.outfit["underwear"] = "tiger_panties"
+                        $ JubesX.outfit["underwear"] = "_tiger_panties"
                     else:
                         call Display_dress_screen (JubesX)
                         if not _return:
                             ch_v "That's none of your busines."
                         else:
-                            $ JubesX.outfit["underwear"] = "tiger_panties"
+                            $ JubesX.outfit["underwear"] = "_tiger_panties"
 
                 "I like those bikini bottoms." if "_bikini_bottoms" in JubesX.inventory and JubesX.outfit["underwear"] != "_bikini_bottoms":
                     if bg_current == "bg_pool":
@@ -3099,9 +3099,9 @@ label Jubes_wardrobe_menu:
                         "How about the lace ones?" if "_lace_panties" in JubesX.inventory:
                             ch_v "Alright."
                             $ JubesX.outfit["underwear"]  = "_lace_panties"
-                        "How about the tiger ones?" if "tiger_panties" in JubesX.inventory:
+                        "How about the tiger ones?" if "_tiger_panties" in JubesX.inventory:
                             ch_v "Alright."
-                            $ JubesX.outfit["underwear"]  = "tiger_panties"
+                            $ JubesX.outfit["underwear"]  = "_tiger_panties"
                         "How about the bikini bottoms?" if "_bikini_bottoms" in JubesX.inventory:
                             ch_v "Alright."
                             $ JubesX.outfit["underwear"]  = "_bikini_bottoms"

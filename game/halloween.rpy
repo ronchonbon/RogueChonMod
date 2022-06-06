@@ -25,7 +25,7 @@ label Halloween_chat(Girl=0):
 
         $ Nearby.remove(Girl)
         $ Present.append(Girl)
-        $ Girl.location = "HW Party"
+        $ Girl.location = "bg_halloween"
 
         call display_girl (Girl)
     hide black_screen onlayer black
@@ -133,7 +133,7 @@ label Halloween_chat_Menu:
                     pass
                 "Date (locked)":
                     pass
-                "gifts (locked)":
+                "Gifts (locked)":
 
                     pass
                 "Back":
@@ -262,7 +262,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
 
 
 
-    $ bg_current = "HW Party"
+    $ bg_current = "bg_halloween"
     call remove_girl ("all")
 
     $ Party = []
@@ -277,7 +277,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
 
 
     $ Present.append(RogueX)
-    $ RogueX.location = "HW Party"
+    $ RogueX.location = "bg_halloween"
     $ RogueX.add_word(1,0,RogueX.outfit["hair"],0,"halloween")
     $ RogueX.outfitday = "costume"
     $ RogueX.outfit_name = RogueX.outfitday
@@ -438,7 +438,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
 
 
     $ Present.append(KittyX)
-    $ KittyX.location = "HW Party"
+    $ KittyX.location = "bg_halloween"
     $ KittyX.add_word(1,0,KittyX.outfit["hair"],0,"halloween")
     $ KittyX.outfitday = "costume"
     $ KittyX.outfit_name = KittyX.outfitday
@@ -607,7 +607,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
 
 
     $ Present.append(LauraX)
-    $ LauraX.location = "HW Party"
+    $ LauraX.location = "bg_halloween"
     $ LauraX.add_word(1,0,LauraX.outfit["hair"],0,"halloween")
     $ LauraX.outfitday = "costume"
     $ LauraX.outfit_name = LauraX.outfitday
@@ -829,7 +829,7 @@ label Halloween_Jean:
 
 
     $ Present.append(JeanX)
-    $ JeanX.location = "HW Party"
+    $ JeanX.location = "bg_halloween"
     $ JeanX.add_word(1,0,JeanX.outfit["hair"],0,"halloween")
     $ JeanX.outfitday = "costume"
     $ JeanX.outfit_name = JeanX.outfitday
@@ -1083,7 +1083,7 @@ label Halloween_Jean:
 
     $ Present.append(StormX)
     $ StormX.change_face("_smile")
-    $ StormX.location = "HW Party"
+    $ StormX.location = "bg_halloween"
     $ StormX.add_word(1,0,StormX.outfit["hair"],0,"halloween")
     $ StormX.outfitday = "costume"
     $ StormX.outfit_name = StormX.outfitday
@@ -1249,7 +1249,7 @@ label Halloween_Emma:
 
 
     $ Present.append(EmmaX)
-    $ EmmaX.location = "HW Party"
+    $ EmmaX.location = "bg_halloween"
     $ EmmaX.change_face("_smile")
     $ EmmaX.add_word(1,0,EmmaX.outfit["hair"],0,"halloween")
     $ EmmaX.outfitday = "costume"
@@ -1538,7 +1538,7 @@ label Halloween_Skip:
             $ Present.remove(Options[0])
         if Options[0] not in Nearby:
             $ Nearby.append(Options[0])
-        $ Options[0].location = "HW Party"
+        $ Options[0].location = "bg_halloween"
         $ Options[0].outfitday = "costume"
         $ Options[0].outfit_name = EmmaX.outfitday
         $ Options[0].change_outfit()
@@ -1554,17 +1554,17 @@ label Halloween_Party:
         call Halloween_Ending
     menu:
         "You are at the Halloween Party. What would you like to do?"
-        "Talk to [RogueX.name]." if RogueX.location == "HW Party" or RogueX.location == "nearby":
+        "Talk to [RogueX.name]." if RogueX.location == "bg_halloween" or RogueX.location == "nearby":
             call Halloween_chat (RogueX)
-        "Talk to [KittyX.name]." if KittyX.location == "HW Party" or KittyX.location == "nearby":
+        "Talk to [KittyX.name]." if KittyX.location == "bg_halloween" or KittyX.location == "nearby":
             call Halloween_chat (KittyX)
-        "Talk to [EmmaX.name]." if EmmaX.location == "HW Party" or EmmaX.location == "nearby":
+        "Talk to [EmmaX.name]." if EmmaX.location == "bg_halloween" or EmmaX.location == "nearby":
             call Halloween_chat (EmmaX)
-        "Talk to [LauraX.name]." if LauraX.location == "HW Party" or LauraX.location == "nearby":
+        "Talk to [LauraX.name]." if LauraX.location == "bg_halloween" or LauraX.location == "nearby":
             call Halloween_chat (LauraX)
-        "Talk to [JeanX.name]." if JeanX.location == "HW Party" or JeanX.location == "nearby":
+        "Talk to [JeanX.name]." if JeanX.location == "bg_halloween" or JeanX.location == "nearby":
             call Halloween_chat (JeanX)
-        "Talk to [StormX.name]." if StormX.location == "HW Party" or StormX.location == "nearby":
+        "Talk to [StormX.name]." if StormX.location == "bg_halloween" or StormX.location == "nearby":
             call Halloween_chat (StormX)
         "Leave the party":
             call Halloween_Ending
@@ -1605,11 +1605,11 @@ label Halloween_Events:
 label Halloween_Ending(Girl=0):
     "As the evening comes to a close, did you want to meet up with anyone in particular?"
     menu:
-        "Talk to [RogueX.name]." if RogueX.location == "HW Party" or RogueX.location == "nearby":
+        "Talk to [RogueX.name]." if RogueX.location == "bg_halloween" or RogueX.location == "nearby":
             $ Girl = RogueX
-        "Talk to [KittyX.name]." if KittyX.location == "HW Party" or KittyX.location == "nearby":
+        "Talk to [KittyX.name]." if KittyX.location == "bg_halloween" or KittyX.location == "nearby":
             $ Girl = KittyX
-        "Talk to [EmmaX.name]." if EmmaX.location == "HW Party" or EmmaX.location == "nearby":
+        "Talk to [EmmaX.name]." if EmmaX.location == "bg_halloween" or EmmaX.location == "nearby":
             if "classcaught" in EmmaX.history:
                 $ Girl = EmmaX
             else:
@@ -1617,11 +1617,11 @@ label Halloween_Ending(Girl=0):
                 ch_e "I hope to see you tomorrow. . ."
                 $ EmmaX.location = "bg_emma"
                 call Halloween_Ending
-        "Talk to [LauraX.name]." if LauraX.location == "HW Party" or LauraX.location == "nearby":
+        "Talk to [LauraX.name]." if LauraX.location == "bg_halloween" or LauraX.location == "nearby":
             $ Girl = LauraX
-        "Talk to [JeanX.name]." if JeanX.location == "HW Party" or JeanX.location == "nearby":
+        "Talk to [JeanX.name]." if JeanX.location == "bg_halloween" or JeanX.location == "nearby":
             $ Girl = JeanX
-        "Talk to [StormX.name]." if StormX.location == "HW Party" or StormX.location == "nearby":
+        "Talk to [StormX.name]." if StormX.location == "bg_halloween" or StormX.location == "nearby":
             $ Girl = StormX
         "No thanks.":
             $ Girl = 0

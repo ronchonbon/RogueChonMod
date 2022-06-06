@@ -74,6 +74,11 @@ layeredimage Emma_sprite standing:
     elif EmmaX.outfit["bottom"] and EmmaX.outfit["bottom"] != "_dress":
         "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]].png"
 
+    if EmmaX.outfit["bottom"] == "_dress" and (EmmaX.bottom_pulled_down or EmmaX.upskirt):
+        "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]]_down.png"
+    elif EmmaX.outfit["bottom"] == "_dress":
+        "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]].png"
+
     if EmmaX.outfit["top"] in ["_towel", "_nighty"]:
         "images/Emma_standing/Emma_standing_loincloth[EmmaX.outfit[top]].png"
     elif EmmaX.outfit["loincloth"] and not EmmaX.loincloth_aside:
@@ -109,18 +114,13 @@ layeredimage Emma_sprite standing:
     if EmmaX.outfit["boots"]:
         "images/Emma_standing/Emma_standing_boots[EmmaX.outfit[boots]].png"
 
-    if EmmaX.outfit["bottom"] == "_dress" and (EmmaX.bottom_pulled_down or EmmaX.upskirt):
-        "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]]_down.png"
-    elif EmmaX.outfit["bottom"] == "_dress":
-        "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]].png"
-
     if EmmaX.outfit["top"] and EmmaX.top_pulled_up and EmmaX.breasts_supported:
         "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_up_up.png"
     if EmmaX.outfit["top"] and EmmaX.top_pulled_up and EmmaX.arm_pose == 2:
         "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_down_up.png"
     elif EmmaX.outfit["top"] and EmmaX.top_pulled_up:
         "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_up.png"
-    elif EmmaX.outfit["top"] and (EmmaX.breasts_supported or (EmmaX.outfit["top"] == "_towel" and EmmaX.arm_pose == 1)):
+    elif EmmaX.outfit["top"] and ((EmmaX.breasts_supported and EmmaX.arm_pose == 2) or (EmmaX.outfit["top"] == "_towel" and EmmaX.arm_pose == 1)):
         "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_up.png"
     elif EmmaX.outfit["top"] and EmmaX.arm_pose == 2:
         "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_down.png"

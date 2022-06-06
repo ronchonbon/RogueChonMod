@@ -1562,7 +1562,7 @@ label caught_masturbating(Girl=0):
         $ Girl.daily_history.append("unseen")
         $ Girl.recent_history.append("unseen")
         call shift_focus(Girl)
-        call before_masturbation
+        call before_masturbation(Girl)
         if "_angry" in Girl.recent_history:
             return
 
@@ -1850,7 +1850,7 @@ label caught_showering(Girl):
             "You see [Girl.name] under the shower, feeling herself up."
 
             call shift_focus(Girl)
-            call before_masturbation
+            call before_masturbation(Girl)
 
             $ bg_current = "bg_showerroom"
             jump reset_location

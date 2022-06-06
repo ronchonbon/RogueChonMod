@@ -1,41 +1,33 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/locations.rpy", line 142, in script call
-    call tenth_round
-  File "game/utilities.rpy", line 1180, in script call
-    call sleepover
-  File "game/locations.rpy", line 160, in script call
-    call world_map
-  File "game/locations.rpy", line 1163, in script call
-    call showering
-  File "game/shower.rpy", line 741, in script
-    "[line]"
-NameError: name 'secondary_action' is not defined
+  File "game/locations.rpy", line 158, in script call
+    call SpecialMenu
+  File "game/utilities.rpy", line 1571, in script call
+    call Halloween_Party_entry
+  File "game/halloween.rpy", line 1268, in script
+    menu:
+  File "renpy/common/00layeredimage.rpy", line 681, in _duplicate
+    d = i.get_displayable(attributes)
+  File "renpy/common/00layeredimage.rpy", line 432, in get_displayable
+    return ConditionSwitch(predict_all=predict_all, *args)
+SyntaxError: unexpected EOF while parsing (emma_sprites.rpy, line 123)
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/locations.rpy", line 142, in script call
-    call tenth_round
-  File "game/utilities.rpy", line 1180, in script call
-    call sleepover
-  File "game/locations.rpy", line 160, in script call
-    call world_map
-  File "game/locations.rpy", line 1163, in script call
-    call showering
-  File "game/shower.rpy", line 741, in script
-    "[line]"
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
-    who(what, *args, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
-    **display_args)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 647, in display_say
-    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "game/locations.rpy", line 158, in script call
+    call SpecialMenu
+  File "game/utilities.rpy", line 1571, in script call
+    call Halloween_Party_entry
+  File "game/halloween.rpy", line 1268, in script
+    menu:
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1688, in execute
+    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1060, in menu
+    rv = renpy.store.menu(new_items)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1296, in display_menu
+    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
@@ -52,30 +44,23 @@ Full traceback:
     d.visit_all(callback, seen)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
     d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
     for d in self.visit():
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
-    self.update(self.last_st, self.last_at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1426, in update
-    raw_child, redraw = self.function(st, at, *self.args, **self.kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1517, in condition_switch_show
-    return condition_switch_pick(switch), None
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1508, in condition_switch_pick
-    if renpy.python.py_eval_bytecode(code):
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/python.py", line 2269, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "<none>", line 1, in <module>
-NameError: name 'secondary_action' is not defined
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 528, in visit
+    self.find_target()
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 409, in find_target
+    self.target = target._duplicate(a)
+  File "renpy/common/00layeredimage.rpy", line 681, in _duplicate
+    d = i.get_displayable(attributes)
+  File "renpy/common/00layeredimage.rpy", line 432, in get_displayable
+    return ConditionSwitch(predict_all=predict_all, *args)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1573, in ConditionSwitch
+    code = renpy.python.py_compile(cond, 'eval')
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/python.py", line 835, in py_compile
+    raise e
+SyntaxError: unexpected EOF while parsing (emma_sprites.rpy, line 123)
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like Chonky Mod 0.1e
-Sun Jun  5 12:38:03 2022
+Sun Jun  5 22:39:41 2022

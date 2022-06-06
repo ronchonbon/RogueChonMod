@@ -2160,7 +2160,7 @@ label Rogue_Clothes:
         ch_r "I'm not really interested in your fashion opinions."
 
         return
-    if Girl != RogueX or line == "giftstore":
+    if Girl != RogueX or line == "Giftstore":
         $ renpy.pop_call()
 
     $ line = 0
@@ -2532,7 +2532,7 @@ label Rogue_wardrobe_menu:
             $ RogueX.outfit["top"] = "_pink_top"
             $ RogueX.outfit["neck"] = ""
 
-        "How about that green hoodie?" if RogueX.outfit["jackets"] != "_hoodie":
+        "How about that green hoodie?" if RogueX.outfit["jacket"] != "_hoodie":
             $ RogueX.outfit["jacket"] = "_hoodie"
 
         "Maybe just throw on a towel?" if RogueX.outfit["top"] != "_towel":

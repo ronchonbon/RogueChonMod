@@ -2,13 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 189: expected statement.
-    Player.primary_action = all_actions[counter]
-                          ^
-
-File "game/script.rpy", line 191: expected statement.
-    counter -= 1
-             ^
+File "game/kitty_sprites.rpy", line 83: reached end of line when expecting ':'.
+    elif
+        ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Sun Jun  5 12:12:22 2022
+Sun Jun  5 22:32:43 2022

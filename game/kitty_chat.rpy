@@ -1417,7 +1417,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
     elif Options[0] == "master?":
         call Kitty_Master
     elif Options[0] == "sexfriend?":
-        call Kitty_sexfriend
+        call Kitty_Sexfriend
     elif Options[0] == "fuckbuddy?":
         call Kitty_Fuckbuddy
     elif Options[0] == "daddy?":
@@ -2298,7 +2298,7 @@ label Kitty_Clothes:
         ch_k "I'll let you know when I care what you think."
         return
 
-    if Girl != KittyX or line == "giftstore":
+    if Girl != KittyX or line == "Giftstore":
 
         $ renpy.pop_call()
     $ line = 0
@@ -2318,7 +2318,7 @@ label Kitty_wardrobe_menu:
                 call Kitty_Clothes_Under
             "Accessories":
                 call Kitty_Clothes_Misc
-            "outfits":
+            "Outfits":
                 call Kitty_Clothes_outfits
             "Let's talk about what you wear around.":
                 call set_clothes_schedule (KittyX)

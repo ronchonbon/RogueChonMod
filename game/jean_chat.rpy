@@ -2272,7 +2272,7 @@ label Jean_Clothes:
         ch_j "Just enjoy, don't advise."
         return
 
-    if Girl != JeanX or line == "giftstore":
+    if Girl != JeanX or line == "Giftstore":
 
         $ renpy.pop_call()
     $ line = 0
@@ -2292,7 +2292,7 @@ label Jean_wardrobe_menu:
                 call Jean_Clothes_Under
             "Accessories":
                 call Jean_Clothes_Misc
-            "outfit Management":
+            "Outfit Management":
                 call Jean_Clothes_outfits
             "Let's talk about what you wear around.":
                 call set_clothes_schedule (JeanX)

@@ -36,7 +36,7 @@ layeredimage Laura_sprite standing:
     elif LauraX.outfit["gloves"]:
         "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose].png"
 
-    if LauraX.outfit["gloves"] == "_gloves":
+    if LauraX.outfit["gloves"] == "_gloves" and LauraX.arm_pose == 2:
         "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose]_left.png"
 
     if LauraX.outfit["piercings"]:
@@ -59,8 +59,13 @@ layeredimage Laura_sprite standing:
     elif LauraX.outfit["underwear"]:
         "images/Laura_standing/Laura_standing_underwear[LauraX.outfit[underwear]].png"
 
-    if LauraX.outfit["hose"]:
+    if LauraX.outfit["hose"] == "_stockings_and_garterbelt":
+        "images/Laura_standing/Laura_standing_hose_stockings.png"
+    elif LauraX.outfit["hose"]:
         "images/Laura_standing/Laura_standing_hose[LauraX.outfit[hose]].png"
+
+    if LauraX.outfit["hose"] == "_stockings_and_garterbelt":
+        "images/Laura_standing/Laura_standing_hose_garterbelt.png"
 
     if LauraX.outfit["bottom"] and LauraX.grool > 1:
         "images/Laura_standing/Laura_standing_grool.png"

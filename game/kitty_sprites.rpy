@@ -78,8 +78,10 @@ layeredimage Kitty_sprite standing:
     if KittyX.outfit["piercings"] and KittyX.breasts_covered:
         "images/Kitty_standing/Kitty_standing_piercings_breasts[KittyX.outfit[piercings]]_covered.png"
 
-    if KittyX.outfit["jacket"]:
-        "images/Kitty_standing/Kitty_standing_jacket[KittyX.outfit[jacket]].png"
+    if KittyX.outfit["jacket"] and KittyX.jacket_opened:
+        "images/Kitty_standing/Kitty_standing_jacket[KittyX.outfit[jacket]][KittyX.arm_pose]_up.png"
+    elif KittyX.outfit["jacket"]:
+        "images/Kitty_standing/Kitty_standing_jacket[KittyX.outfit[jacket]][KittyX.arm_pose].png"
 
     always:
         "Kitty_head" pos (0.12, 0.152) zoom 0.5

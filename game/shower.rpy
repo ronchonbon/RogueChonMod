@@ -852,9 +852,9 @@ label Shower_Sex(Options=0, line=0):
 
         $ Options = [1]
         if len(staying_Girls) > 1:
-            if approval_check(StayCount[0], 1300) and StayCount[0].likes[StayCount[1].tag] >= 800:
+            if approval_check(staying_Girls[0], 1300) and staying_Girls[0].likes[staying_Girls[1].tag] >= 800:
                 $ Options.append(2)
-            if approval_check(StayCount[0], 1200) and StayCount[0].likes[StayCount[1].tag] >= 700:
+            if approval_check(staying_Girls[0], 1200) and staying_Girls[0].likes[staying_Girls[1].tag] >= 700:
                 $ Options.append(3)
 
         if approval_check(staying_Girls[0], 1300):
@@ -979,14 +979,14 @@ label Shower_Sex(Options=0, line=0):
     if line and len(staying_Girls) > 1:
 
         $ D20 += 5 if approval_check(staying_Girls[1], 1800) else 0
-        if StayCount[1].likes[StayCount[0].tag] <= 800 and 2 <= Options[0] <=3:
+        if staying_Girls[1].likes[staying_Girls[0].tag] <= 800 and 2 <= Options[0] <=3:
             $ D20 -= 5
-        if StayCount[1].likes[StayCount[0].tag] <= 600:
+        if staying_Girls[1].likes[staying_Girls[0].tag] <= 600:
             $ D20 -= 5
 
         if 2 <= Options[0] <= 3:
 
-            if approval_check(StayCount[1], 1300) and StayCount[1].likes[StayCount[0].tag] >= 800:
+            if approval_check(staying_Girls[1], 1300) and staying_Girls[1].likes[staying_Girls[0].tag] >= 800:
                 $ staying_Girls[1].change_face("_sexy",1)
                 $ staying_Girls[0].change_stat("lust", 50, 5)
                 $ staying_Girls[0].change_stat("lust", 70, 5)
@@ -997,7 +997,7 @@ label Shower_Sex(Options=0, line=0):
                 $ Player.change_stat("focus", 50, 7)
                 $ Player.change_stat("focus", 80, 3)
                 $ line = 4
-            elif approval_check(StayCount[1], 1200) and StayCount[1].likes[StayCount[0].tag] >= 700:
+            elif approval_check(staying_Girls[1], 1200) and staying_Girls[1].likes[staying_Girls[0].tag] >= 700:
                 $ staying_Girls[1].change_face("_sexy",2,eyes="_closed")
                 $ staying_Girls[1].change_stat("lust", 50, 10)
                 $ staying_Girls[1].change_stat("lust", 70, 10)
@@ -1013,7 +1013,7 @@ label Shower_Sex(Options=0, line=0):
                 $ line = 3
         else:
 
-            if (approval_check(StayCount[1], 1300) and StayCount[1].likes[StayCount[0].tag] >= 700) or approval_check(StayCount[1], 2000):
+            if (approval_check(staying_Girls[1], 1300) and staying_Girls[1].likes[staying_Girls[0].tag] >= 700) or approval_check(staying_Girls[1], 2000):
                 if Options[0] == 5:
                     $ staying_Girls[1].change_stat("lust", 50, 10)
                     $ staying_Girls[1].change_stat("lust", 70, 5)
@@ -1029,7 +1029,7 @@ label Shower_Sex(Options=0, line=0):
                     call close_launch(staying_Girls[0], staying_Girls[1])
                     "[staying_Girls[1].name] seems really into this, and joins her on the other side."
                 $ line = 4
-            elif ((approval_check(StayCount[1], 1200) and StayCount[1].likes[StayCount[0].tag] >= 600)) or approval_check(StayCount[1], 1600):
+            elif ((approval_check(staying_Girls[1], 1200) and staying_Girls[1].likes[staying_Girls[0].tag] >= 600)) or approval_check(staying_Girls[1], 1600):
                 $ staying_Girls[1].change_face("_sexy",2,eyes="_down")
                 $ staying_Girls[1].change_stat("lust", 50, 10)
                 $ staying_Girls[1].change_stat("lust", 70, 5)

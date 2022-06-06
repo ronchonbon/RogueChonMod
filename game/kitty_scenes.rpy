@@ -1213,7 +1213,7 @@ label Kitty_Master:
 
 
 
-label Kitty_sexfriend:
+label Kitty_Sexfriend:
     $ KittyX.location = bg_current
     call set_the_scene (0)
     call display_girl (KittyX)

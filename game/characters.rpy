@@ -1420,7 +1420,7 @@ init python:
             else:
                 self.legs_covered = False
 
-            if (not self.outfit["dress"] or self.dress_upskirt) and (not self.outfit["bottom"] or self.upskirt or self.bottom_pulled_down) and (not self.outfit["underwear"] or self.underwear_pulled_down) and (not self.outfit["loincloth"] or self.loincloth_aside) and self.outfit["top"] not in ["_towel", "_shut_jacket"]:
+            if (not self.outfit["dress"] or self.dress_upskirt) and (not self.outfit["bottom"] or self.upskirt or self.bottom_pulled_down) and (not self.outfit["underwear"] or self.underwear_pulled_down) and (not self.outfit["loincloth"] or self.loincloth_aside) and self.outfit["top"] not in ["_towel", "_closed_jacket"]:
                 self.pussy_covered = False
             else:
                 self.pussy_covered = True
@@ -1515,7 +1515,7 @@ init python:
                 if self.outfit["jacket"] == "_open_jacket":
                     return True
 
-                if self.outfit["jacket"] == "_shut_jacket":
+                if self.outfit["jacket"] == "_closed_jacket":
                     return 5
 
             if self.outfit["top"] == "_towel":

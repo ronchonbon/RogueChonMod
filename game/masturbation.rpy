@@ -191,6 +191,7 @@ label before_masturbation(Girl):
     $ Girl.recent_history.append("masturbation")
     $ Girl.daily_history.append("masturbation")
 
+    $ Player.primary_action = "masturbation"
     $ girl_offhand_action = "fondle_pussy"
 
     return

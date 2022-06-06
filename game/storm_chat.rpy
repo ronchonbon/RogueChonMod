@@ -2228,7 +2228,7 @@ label Storm_Clothes:
         ch_s "I don't really need fashion advice, thank you."
         return
 
-    if Girl != StormX or line == "giftstore":
+    if Girl != StormX or line == "Giftstore":
 
         $ renpy.pop_call()
     $ line = 0
@@ -2248,7 +2248,7 @@ label Storm_wardrobe_menu:
                 call Storm_Clothes_Under
             "Accessories":
                 call Storm_Clothes_Misc
-            "outfit Management":
+            "Outfit Management":
                 call Storm_Clothes_outfits
             "Let's talk about what you wear around.":
                 call set_clothes_schedule (StormX)
@@ -2583,9 +2583,9 @@ label Storm_wardrobe_menu:
                     return
             $ StormX.outfit["top"] = "_white_shirt"
 
-        "Try on that leather jacket." if StormX.outfit["top"] != "_jacket":
+        "Try on that leather jacket." if StormX.outfit["jacket"] != "_jacket":
             $ StormX.change_face("_bemused")
-            if not StormX.outfit["top"] or StormX.bra_number() >= 5:
+            if not StormX.outfit["jacket"] or StormX.bra_number() >= 5:
 
                 ch_s "Very well."
             elif approval_check(StormX, 800, taboo_modifier=3):
@@ -2594,9 +2594,9 @@ label Storm_wardrobe_menu:
                 call Display_dress_screen (StormX)
                 if not _return:
                     $ StormX.change_face("_bemused", 1)
-                    ch_s "I cannot really take this [StormX.outfit[top]] off at the moment."
+                    ch_s "I cannot really take this [StormX.outfit[jacket]] off at the moment."
                     return
-            $ StormX.outfit["top"] = "_jacket"
+            $ StormX.outfit["jacket"] = "_jacket"
 
         "Maybe just throw on a towel?" if StormX.outfit["top"] != "_towel":
             $ StormX.change_face("_bemused", 1)
@@ -2815,7 +2815,7 @@ label Storm_wardrobe_menu:
 
 
 
-                    elif StormX.outfit["top"] == "_jacket" and approval_check(StormX, 600, taboo_modifier=2):
+                    elif StormX.outfit["jacket"] == "_jacket" and approval_check(StormX, 600, taboo_modifier=2):
                         ch_s "This jacket is a bit revealing. . ."
 
 
@@ -3117,7 +3117,7 @@ label Storm_wardrobe_menu:
                 $ round -5 if round >= 10 else 0
                 "She steps away for a few minutes."
                 hide black_screen onlayer black
-                if StormX.outfit["hair"] == "_wet_mohawk":
+                if StormX.outfit["hair"] == "_wethawk":
                     $ StormX.outfit["hair"] = "_wet"
                 else:
                     $ StormX.outfit["hair"] = "_long"
@@ -3126,7 +3126,7 @@ label Storm_wardrobe_menu:
             else:
                 ch_s "Thank you, but I'm not interested in that style right now."
 
-        "Mohawk hair style" if "_mohawk" in StormX.history and (StormX.outfit["hair"] != "_mohawk" and StormX.outfit["hair"] != "_wet_mohawk"):
+        "Mohawk hair style" if "_mohawk" in StormX.history and (StormX.outfit["hair"] != "_mohawk" and StormX.outfit["hair"] != "_wethawk"):
             ch_p "You looked good with a mohawk."
             if "hair" in StormX.recent_history:
                 ch_s "I have already messed with it too much today."
@@ -3137,7 +3137,7 @@ label Storm_wardrobe_menu:
                 "She steps away for a few minutes."
                 hide black_screen onlayer black
                 if StormX.outfit["hair"] == "_wet":
-                    $ StormX.outfit["hair"] = "_wet_mohawk"
+                    $ StormX.outfit["hair"] = "_wethawk"
                 else:
                     $ StormX.outfit["hair"] = "_mohawk"
                 $ StormX.add_word(1,"hair","hair",0,0)
@@ -3162,12 +3162,12 @@ label Storm_wardrobe_menu:
             else:
                 ch_s "Thank you, but I'm not interested in that style right now."
 
-        "Wet look hairstyle" if StormX.outfit["hair"] != "_wet" and StormX.outfit["hair"] != "_wet_mohawk":
+        "Wet look hairstyle" if StormX.outfit["hair"] != "_wet" and StormX.outfit["hair"] != "_wethawk":
             ch_p "You should go for that wet look with your hair."
             if approval_check(StormX, 800):
                 ch_s "Really?"
                 if StormX.outfit["hair"] == "_mohawk":
-                    $ StormX.outfit["hair"] = "_wet_mohawk"
+                    $ StormX.outfit["hair"] = "_wethawk"
                 else:
                     $ StormX.outfit["hair"] = "_wet"
                 "A concentrated hurricane swirls around her head for a moment, leaving her hair limp."
@@ -3175,12 +3175,12 @@ label Storm_wardrobe_menu:
             else:
                 ch_s "I'd rather not."
 
-        "Dry out hair" if StormX.outfit["hair"] == "_wet" or StormX.outfit["hair"] == "_wet_mohawk":
+        "Dry out hair" if StormX.outfit["hair"] == "_wet" or StormX.outfit["hair"] == "_wethawk":
             ch_p "Maybe dry out your hair."
             if approval_check(StormX, 600):
                 ch_s "Fine."
                 "A gust of wind swirls around her hair."
-                if StormX.outfit["hair"] == "_wet_mohawk":
+                if StormX.outfit["hair"] == "_wethawk":
                     $ StormX.outfit["hair"] = "_mohawk"
                 else:
                     $ StormX.outfit["hair"] = "_long"

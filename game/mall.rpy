@@ -1212,9 +1212,9 @@ label Lingerie_shop:
                                 $ Cart.append("_lace_panties")
 
 
-                    "Tiger-Striped Panties (locked)" if Girl.outfit["underwear"] == "tiger_panties":
+                    "Tiger-Striped Panties (locked)" if Girl.outfit["underwear"] == "_tiger_panties":
                         pass
-                    "Tiger-Striped Panties" if Girl.outfit["underwear"] != "tiger_panties" and Girl == JubesX:
+                    "Tiger-Striped Panties" if Girl.outfit["underwear"] != "_tiger_panties" and Girl == JubesX:
                         if "no_gift_panties" in Girl.recent_history:
                             Girl.voice "I said no. . ."
                         elif not Girl.seen_pussy and not approval_check(Girl, 1000):
@@ -1224,21 +1224,21 @@ label Lingerie_shop:
                             $ Girl.recent_history.append("no_gift_panties")
                         else:
                             if Girl.seen_pussy or approval_check(Girl, 1200, taboo_modifier=2):
-                                call Dressing_Strip_Panties ("tiger_panties")
+                                call Dressing_Strip_Panties ("_tiger_panties")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
                                 show black_screen onlayer black
                                 $ Girl.outfit["bottom"] = ""
                                 $ Girl.outfit["hose"] = ""
-                                $ Girl.outfit["underwear"] = "tiger_panties"
+                                $ Girl.outfit["underwear"] = "_tiger_panties"
                                 "You back out of the room for a moment. . ."
                                 hide black_screen onlayer black
-                            if "tiger_panties" in Cart:
+                            if "_tiger_panties" in Cart:
                                 pass
-                            elif "tiger_panties" in Girl.inventory:
+                            elif "_tiger_panties" in Girl.inventory:
                                 Girl.voice "I do already have these though."
                             else:
-                                $ Cart.append("tiger_panties")
+                                $ Cart.append("_tiger_panties")
 
 
                     "Stockings and Garterbelt (locked)" if Girl.outfit["hose"] == "_stockings_and_garterbelt":
@@ -1339,7 +1339,7 @@ label Lingerie_shop:
                             $ Cart.append("_pantyhose")
 
 
-                    "Lose the [Girl.outfit['hose']]" if Girl.outfit["hose"]:
+                    "Lose the [Girl.outfit[hose]]" if Girl.outfit["hose"]:
                         if Girl.outfit["hose"] != "_pantyhose" or approval_check(Girl, 900, taboo_modifier=2):
                             if Girl in (EmmaX,StormX):
                                 Girl.voice "I suppose. . ."
@@ -1589,7 +1589,7 @@ label Lingerie_shop:
                                             ch_v "A little. . . intimate. . ."
 
 
-                                "The tiger-striped_panties" if "tiger_panties" in Cart:
+                                "The tiger-striped_panties" if "_tiger_panties" in Cart:
                                     "You agree to buy [Girl.name] the tiger panties."
                                     if Girl.tag + "_tiger_panties" in Player.inventory:
                                         "Wait, you already have one of those."
@@ -1597,14 +1597,14 @@ label Lingerie_shop:
                                         $ Player.inventory.remove(Girl.tag + "_tiger_panties")
                                     elif Player.cash < 100:
                                         "You look at the tag, and actually, they're $100, you can't afford them."
-                                        $ Cart.remove("tiger_panties")
+                                        $ Cart.remove("_tiger_panties")
                                     else:
                                         $ Player.cash -= 100
-                                    if "tiger_panties" in Cart:
+                                    if "_tiger_panties" in Cart:
 
-                                        $ Cart.remove("tiger_panties")
+                                        $ Cart.remove("_tiger_panties")
                                         $ Girl.change_face("_bemused",1)
-                                        $ Girl.inventory.append("tiger_panties")
+                                        $ Girl.inventory.append("_tiger_panties")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 25)
                                         $ Girl.change_stat("obedience", 200, 20)

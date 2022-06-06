@@ -1531,7 +1531,7 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
         elif "no_topless" in Girl.daily_history:
             ch_r "I wasn't into it earlier, [Girl.player_petname], what's changed?"
         elif "ask topless" in Girl.recent_history:
-            ch_r "outfit_changed your mind, [Girl.player_petname]?"
+            ch_r "Outfit_changed your mind, [Girl.player_petname]?"
         elif taboo:
             ch_r "It's a bit exposed here. . ."
         elif approval:
@@ -2740,10 +2740,10 @@ label Bottoms_Off_Legs(Girl=0):
                 if approval < 2 and not Girl.outfit["underwear"] and Girl.outfit["hose"] == "_tights":
                     call NoPantiesOn (Girl)
 
-                if Girl == JubesX and JubesX.outfit["jacket"] != "_shut_jacket":
+                if Girl == JubesX and JubesX.outfit["jacket"] != "_closed_jacket":
 
                     pass
-                elif Girl == JubesX and JubesX.outfit["jacket"] == "_shut_jacket":
+                elif Girl == JubesX and JubesX.outfit["jacket"] == "_closed_jacket":
                     $ Girl.outfit["jacket"] = ""
                     "She pulls her [Girl.outfit[jacket]] off."
                     call expression Girl.tag + "_First_Bottomless"
@@ -2879,7 +2879,7 @@ label Bottoms_Off_Legs(Girl=0):
                     "She pulls her [Girl.outfit[bottom]] off, then removes her [line], before putting them back on."
                 elif Girl.hose_number() >= 6:
                     "She pulls her [Girl.outfit[hose]] off, then removes her [line], before putting them back on."
-                elif Girl == JubesX and JubesX.outfit["jacket"] == "_shut_jacket":
+                elif Girl == JubesX and JubesX.outfit["jacket"] == "_closed_jacket":
                     "She reaches under her jacket and pulls her [line] down."
                 elif Girl.outfit["bottom"]:
                     "She reaches under her [Girl.outfit[bottom]] and pulls her [line] down."

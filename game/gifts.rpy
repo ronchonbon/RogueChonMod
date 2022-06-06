@@ -1470,7 +1470,7 @@ label gifts:
 
                 call taboo_level
 
-                $ line = "giftstore"
+                $ line = "Giftstore"
 
                 call expression Girl.tag + "_Clothes"
             "Switch to. . ." if Girl.location == bg_current:

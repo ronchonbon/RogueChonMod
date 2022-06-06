@@ -461,7 +461,7 @@ label quick_outfit_check(Girl, outfit_to_check = 3):
             $ count += 10
     elif outfit_holder["top"] in ["_jacket", "_dress", "_pink_top"] or outfit_holder["jacket"] == "_jacket":
         $ count += 15
-    elif outfit_holder["top"] or outfit_holder["jacket"] == "_shut_jacket":
+    elif outfit_holder["top"] or outfit_holder["jacket"] == "_closed_jacket":
         $ count += 20
 
     if Girl.outfit["piercings"] and count <= 10:
@@ -475,7 +475,7 @@ label quick_outfit_check(Girl, outfit_to_check = 3):
         $ count = 30
     elif outfit_holder["bottom"] in ["_blue_skirt", "_skirt", "_cosplay_skirt"]:
         $ count = 20
-    elif outfit_holder["bottom"] or outfit_holder["jacket"] == "_shut_jacket":
+    elif outfit_holder["bottom"] or outfit_holder["jacket"] == "_closed_jacket":
         $ count = 25
     elif outfit_holder["underwear"] == "_shorts":
         $ count = 25

@@ -2230,7 +2230,7 @@ label Laura_Clothes:
         ch_l "You shouldn't either."
         return
 
-    if Girl != LauraX or line == "giftstore":
+    if Girl != LauraX or line == "Giftstore":
 
         $ renpy.pop_call()
     $ line = 0
@@ -2250,7 +2250,7 @@ label Laura_wardrobe_menu:
                 call Laura_Clothes_Under
             "Accessories":
                 call Laura_Clothes_Misc
-            "outfit Management":
+            "Outfit Management":
                 call Laura_Clothes_outfits
             "Let's talk about what you wear around.":
                 call set_clothes_schedule (LauraX)

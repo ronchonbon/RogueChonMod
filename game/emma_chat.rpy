@@ -32,7 +32,7 @@ label Emma_chat_Minimal:
                 "Date":
                     ch_p "Do you want to go on a date tonight?"
                     ch_e "Well that certainly doesn't seem appropriate."
-                "gifts" if EmmaX.location == bg_current:
+                "Gifts" if EmmaX.location == bg_current:
                     ch_p "I'd like to give you something."
                     ch_e "I'm not sure that would be appropriate at the moment."
                 "Back":
@@ -2393,7 +2393,7 @@ label Emma_Clothes(Public=0, Bonus=0):
         ch_e "I'll let you know when I care what you think."
         return
 
-    if Girl != EmmaX or line == "giftstore":
+    if Girl != EmmaX or line == "Giftstore":
 
         $ renpy.pop_call()
     $ line = 0
@@ -2424,7 +2424,7 @@ label Emma_wardrobe_menu:
                 call Emma_Clothes_Under
             "Accessories":
                 call Emma_Clothes_Misc
-            "outfits":
+            "Outfits":
                 call Emma_Clothes_outfits
             "Let's talk about what you wear around.":
                 call set_clothes_schedule (EmmaX)
@@ -2731,7 +2731,7 @@ label Emma_wardrobe_menu:
             if not EmmaX.outfit["bra"] and not renpy.showing('dress_screen'):
                 call Emma_First_Topless
 
-        "Try on that white jacket you have." if EmmaX.outfit["top"] != "_jacket":
+        "Try on that white jacket you have." if EmmaX.outfit["jacket"] != "_jacket":
             $ EmmaX.change_face("_bemused")
             if EmmaX.outfit["bra"] or EmmaX.seen_breasts or approval_check(EmmaX, 500, taboo_modifier=(3-Public)):
                 ch_e "Yeah, ok."
@@ -2741,7 +2741,7 @@ label Emma_wardrobe_menu:
                     $ EmmaX.change_face("_bemused", 1)
                     ch_e "I'm not sure this is appropriate without something more substantial underneath."
                     return
-            $ EmmaX.outfit["top"] = "_jacket"
+            $ EmmaX.outfit["jacket"] = "_jacket"
 
         "Try on that white dress you have." if EmmaX.outfit["top"] != "_dress" and "halloween" in EmmaX.history:
             $ EmmaX.change_face("_bemused")
@@ -2999,7 +2999,7 @@ label Emma_wardrobe_menu:
                             ch_e "I'd rather not out here. . ."
                         else:
                             ch_e "I suppose for you. . ."
-                    elif EmmaX.outfit["top"] == "_jacket" and approval_check(EmmaX, 700, taboo_modifier=(3-Public)):
+                    elif EmmaX.outfit["jacket"] == "_jacket" and approval_check(EmmaX, 700, taboo_modifier=(3-Public)):
                         ch_e "This is a bit daring without anything under it. . ."
                     elif not EmmaX.outfit["top"]:
                         call Display_dress_screen (EmmaX)

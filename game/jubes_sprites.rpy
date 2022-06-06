@@ -160,7 +160,4 @@ layeredimage Jubes_head:
     if JubesX.wet:
         "images/Jubes_standing/Jubes_standing_water_head.png"
 
-    if JubesX.wet:
-        "images/Jubes_standing/Jubes_standing_water_hair.png"
-
     anchor (0.5, 0.5)

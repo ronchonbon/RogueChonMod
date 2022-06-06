@@ -107,9 +107,9 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                     $ Type = "_bra"
 
                 "maybe just lose the jacket?" if Girl.outfit["jacket"] and Girl == JubesX:
-                    if Girl.outfit["jacket"] == "_shut_jacket" and not Girl.outfit["bottom"] and not Girl.outfit["hose"] and not Girl.outfit["underwear"]:
+                    if Girl.outfit["jacket"] == "_closed_jacket" and not Girl.outfit["bottom"] and not Girl.outfit["hose"] and not Girl.outfit["underwear"]:
                         $ Type = "no_panties"
-                    elif Girl.outfit["jacket"] == "_shut_jacket" and not Girl.outfit["top"] and not Girl.outfit["bra"]:
+                    elif Girl.outfit["jacket"] == "_closed_jacket" and not Girl.outfit["top"] and not Girl.outfit["bra"]:
                         $ Type = "no_bra"
                     else:
                         $ Type = "_jacket"
@@ -874,7 +874,7 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
     $ temp_Girls = all_Girls[:]
     while temp_Girls:
         if bg_current == temp_Girls[0].location and approval_check(temp_Girls[0], 700):
-            if temp_Girls[0].outfit["bra"] == temp_Girls[0].swimwear["bra"] and temp_Girls[0].outfit["underwear"] == temp_Girls[0].swimwear[6]:
+            if temp_Girls[0].outfit["bra"] == temp_Girls[0].swimwear["bra"] and temp_Girls[0].outfit["underwear"] == temp_Girls[0].swimwear["underwear"]:
 
                 $ Swimmers.append(temp_Girls[0])
             elif temp_Girls[0].fully_nude:
