@@ -978,7 +978,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
         if "hungry" not in KittyX.traits and (KittyX.event_counter["swallowed"] + KittyX.had_chat[2]) >= 10 and KittyX.location == bg_current:
             call Kitty_Hungry
             return
-        if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not taboo or approval_check(KittyX, 800, "I")):
+        if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(KittyX, 800, "I")):
             if KittyX.location == bg_current and KittyX.thirst >= 30 and "refused" not in KittyX.daily_history and "quicksex" not in KittyX.daily_history:
                 $ Girl.change_face("_smile",2,brows="_sad")
                 ch_k "Hey, um . . . did you want to. . ."

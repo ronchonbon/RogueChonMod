@@ -174,8 +174,8 @@ layeredimage Emma_sprite standing:
     elif EmmaX.wet:
         "images/Emma_standing/Emma_standing_water_breasts_down.png"
 
-    if EmmaX.wet and EmmaX.arm_pose == 1:
-        "images/Emma_standing/Emma_standing_water_arm[EmmaX.arm_pose].png"
+    if EmmaX.wet:
+        "images/Emma_standing/Emma_standing_water_arms[EmmaX.arm_pose].png"
 
     if EmmaX.wet:
         "images/Emma_standing/Emma_standing_water_legs.png"

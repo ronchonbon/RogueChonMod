@@ -1954,14 +1954,14 @@ label Storm_Sub_Asked:
         $ StormX.change_stat("obedience", 200, 30)
         $ StormX.player_petnames.append("master")
         $ StormX.player_petname = "master"
-        $ StormX.eyes = "_sly"
+        $ StormX.eyes = "_squint"
         ch_s ". . . master. . ."
     else:
 
         $ StormX.change_stat("obedience", 200, 30)
         $ StormX.player_petnames.append("sir")
         $ StormX.player_petname = "sir"
-        $ StormX.eyes = "_sly"
+        $ StormX.eyes = "_squint"
         ch_s ". . . sir."
     return
 

@@ -434,7 +434,7 @@ label reset_all_girls_at_beginning:
             if "sunshine" not in JubesX.history:
                 $ temp_Girls[0].addiction = 40 if temp_Girls[0].addiction > 40 else temp_Girls[0].addiction
 
-        $ temp_Girls[0].default_faces()
+        $ temp_Girls[0].set_default_faces()
         $ temp_Girls[0].change_face(5)
 
         $ temp_Girls.remove(temp_Girls[0])
@@ -761,11 +761,6 @@ label event_calls(event_Girls=[]):
             call Kitty_Kate
 
             return
-    else:
-        if "traveling" in Player.recent_history and "met" not in KittyX.history and bg_current == "bg_classroom":
-            jump meet_Kitty
-
-            return
 
     if EmmaX in active_Girls:
         if bg_current == "bg_classroom" and time_index == 2 and weekday in (0,2,4):
@@ -785,14 +780,6 @@ label event_calls(event_Girls=[]):
             if round >= 70:
                 $ EmmaX.location = "bg_classroom"
 
-    if LauraX in active_Girls:
-        pass
-    elif "met" not in LauraX.history and "traveling" in Player.recent_history:
-        if time_index < 3 and "met" in KittyX.history:
-            if "dress0" in LauraX.history:
-                call Laura_Dressup
-
-                return
 
     if StormX in active_Girls:
         if bg_current == "bg_classroom" and StormX.location == "bg_teacher" and "Peter" in StormX.history and "traveling" in Player.recent_history:
@@ -849,8 +836,8 @@ label event_calls(event_Girls=[]):
             $ event_Girls.remove(event_Girls[0])
 
     if not event_Girls:
-        call ShareCheck
-        call CheatCheck
+        call check_if_shared
+        call check_if_cheated
         call JumperCheck
 
         if time_index >= 2 and "fapcall" not in Player.daily_history:
@@ -4281,7 +4268,7 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
         $ approval = approval_check(Girl,1200,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
     elif Player.primary_action == "hotdog":
         $ approval = approval_check(Girl,1000,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
-    elif Player.primary_action == "handjob" or girl_offhand_action == "handjob":
+    elif Player.primary_action == "handjob" or girl_secondary_action == "handjob":
         $ approval = approval_check(Girl,1100,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
     elif Player.primary_action == "footjob":
         $ approval = approval_check(Girl,1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
@@ -4997,7 +4984,7 @@ label Girls_taboo(Girl=0, counter=1, Choice=0, D20=0):
     if D20 < 10:
 
         if taboo > 20:
-            if (Player.primary_action == "kiss" and not Player.secondary_action and not girl_offhand_action):
+            if (Player.primary_action == "kiss" and not Player.secondary_action and not girl_secondary_action):
 
                 pass
             elif Girl not in Rules:
@@ -5009,7 +4996,7 @@ label Girls_taboo(Girl=0, counter=1, Choice=0, D20=0):
                     "You feel a slight buzzing in your head and stop what you're doing."
                 ch_x "Cease that behavior at once! Come to my office immediately!"
                 call reset_position(Girl)
-                call Girls_Caught (Girl)
+                call caught_having_sex(Girl)
                 return
             else:
 
@@ -5049,7 +5036,7 @@ label Girls_taboo(Girl=0, counter=1, Choice=0, D20=0):
 
         call Girls_Noticed (Girl)
         return
-    elif (Player.primary_action == "kiss" and not Player.secondary_action and not girl_offhand_action):
+    elif (Player.primary_action == "kiss" and not Player.secondary_action and not girl_secondary_action):
 
         pass
     elif counter < 4:
@@ -5612,16 +5599,6 @@ label SkipTo(Girl=focused_Girl):
         call Les_Cycle (Girl)
     else:
         "That's odd, tell Oni how you got here, Close [Girl.name] [Player.primary_action]."
-    return
-
-label clear_stack:
-    $ stack_depth = renpy.call_stack_depth()
-
-    while stack_depth > 0:
-        $ stack_depth -= 1
-
-        $ renpy.pop_call()
-
     return
 
 label Girl_TightsRipped(Girl=0, Count=0):

@@ -14,6 +14,136 @@ init python:
 
                     return Girl
 
+    def approval_check(Girl, T = 1000, flavor = "LOI", spread = 150, temp_modifier = 1, taboo_modifier = 0, cologne = True, Bonus = 0, Loc = 0, Check=0, Alt=[[], 0]):
+        while Alt[0]:
+            if Girl in Alt[0]:
+                T = Alt[1] if Alt[1] else T
+
+            Alt[0].remove(Alt[0][0])
+
+        L = Girl.love
+        O = Girl.obedience
+        I = Girl.inhibition
+
+        local_taboo = Girl.taboo
+        Loc = Girl.location if not Loc else Loc
+
+        if Girl == JeanX and (O <= 800 or JeanX.taboo):
+
+            I = (I - JeanX.IX)
+
+        if Loc == bg_current and cologne:
+            if Girl == LauraX:
+                if "mandrill" in Player.traits:
+                    if L <= 400:
+                        L += 600
+                    else:
+                        L = 1200
+                    if "drugged" not in Girl.traits:
+                        Girl.traits.append("drugged")
+                elif "purple" in Player.traits:
+                    if O <= 400:
+                        O += 600
+                    else:
+                        O = 1200
+                    if "drugged" not in Girl.traits:
+                        Girl.traits.append("drugged")
+                elif "corruption" in Player.traits:
+                    if I <= 400:
+                        I += 600
+                    else:
+                        I = 1200
+                    if "drugged" not in Girl.traits:
+                        Girl.traits.append("drugged")
+            else:
+                if "mandrill" in Player.traits:
+                    if L <= 500:
+                        L += 500
+                    else:
+                        L = 1000
+                elif "purple" in Player.traits:
+                    if O <= 500:
+                        O += 500
+                    else:
+                        O = 1000
+                elif "corruption" in Player.traits:
+                    if I <= 500:
+                        I += 500
+                    else:
+                        I = 1000
+
+        if flavor == "LOI":
+            local_taboo *= 10
+            Localapproval_bonus = approval_bonus*10
+        elif flavor == "LO":
+            I = 0
+            local_taboo = local_taboo*6
+            Localapproval_bonus = approval_bonus*6
+        elif flavor == "OI":
+            L = 0
+            local_taboo = local_taboo*6
+            Localapproval_bonus = approval_bonus*6
+        elif flavor == "LI":
+            O = 0
+            local_taboo = local_taboo*6
+            Localapproval_bonus = approval_bonus*6
+        elif flavor == "L":
+            O = 0
+            I = 0
+            local_taboo = local_taboo*3
+            Localapproval_bonus = approval_bonus*3
+        elif flavor == "O":
+            L = 0
+            I = 0
+            local_taboo = local_taboo*3
+            Localapproval_bonus = approval_bonus*3
+        elif flavor == "I":
+            O = 0
+            L = 0
+            local_taboo = local_taboo*3
+            Localapproval_bonus = approval_bonus*3
+        else:
+            local_taboo = local_taboo*10
+            Localapproval_bonus = approval_bonus*10
+
+        taboo_modifier = 0 if taboo_modifier <= 0 else taboo_modifier
+
+        if Check:
+            return (L + O + I + Bonus + (temp_modifier*Localapproval_bonus) - (taboo_modifier*local_taboo))
+
+        if (L + O + I + Bonus + (temp_modifier*Localapproval_bonus) - (taboo_modifier*local_taboo)) >= (T + (2*spread)):
+            return 3
+        elif (L + O + I + Bonus + (temp_modifier*Localapproval_bonus) - (taboo_modifier*local_taboo)) >= (T + spread):
+            return 2
+        elif (L + O + I + Bonus + (temp_modifier*Localapproval_bonus) - (taboo_modifier*local_taboo)) >= T:
+            return True
+        else:
+            return False
+
+    def Room_Full():
+        global Party
+
+        while len(Party) > 2:
+            Party.remove(Party[2])
+
+        Here = []
+
+        for G in all_Girls:
+            if G.location == bg_current and G not in Party:
+                Here.append(G)
+
+        if len(Party) + len(Here) >= 2:
+            return True
+        else:
+            return False
+
+    def AloneCheck(Girl):
+        for G in all_Girls:
+            if G != Girl and G.location == bg_current:
+                return False
+
+        return True
+
 label check_favorite_actions(Girl = None):
     if Girl:
         $ temp_Girls = [Girl]
@@ -170,7 +300,7 @@ label taboo_check(Character, location = None):
         $ Character.taboo = 0
     elif "locked" in Player.traits and location == bg_current:
         $ Character.taboo = 0
-    elif location in ("bg_classroom", "bg_study"):
+    elif location in ["bg_classroom", "bg_study"]:
         if time_index >= 3:
             $ Character.taboo = 10
         elif time_index == 2 or weekday >= 5:
@@ -182,7 +312,7 @@ label taboo_check(Character, location = None):
             $ Character.taboo = 20
         else:
             $ Character.taboo = 40
-    elif location == "bg_campus" or location == "bg_pool":
+    elif location in ["bg_campus", "bg_pool"]:
         if time_index >= 3:
             $ Character.taboo = 20
         else:
@@ -192,21 +322,18 @@ label taboo_check(Character, location = None):
     else:
         $ Character.taboo = 40
 
-    if Character == Player:
-        $ taboo = Character.taboo
-
-        return
-
     if Character.taboo >= 20:
         return
 
     python:
-        for G in all_Girls:
-            if G != Character:
-                if Character.location == G.location and Character.likes[G.tag] <= 700 and not (Character in Player.Harem and G in Player.Harem):
+        if Character != Player:
+            for G in all_Girls:
+                if G != Character and Character.location == G.location and Character.likes[G.tag] <= 700 and not (Character in Player.Harem and G in Player.Harem):
                     Character.taboo = 20
 
-    $ taboo = Character.taboo if (Character.taboo > taboo and bg_current == Character.location) else taboo
+    if Character != Player:
+        if (Character.taboo > taboo and bg_current == Character.location):
+            $ taboo = Character.taboo
 
     return
 
@@ -411,242 +538,61 @@ label vibrator_check(Girl):
 
     return "found"
 
-
-
-
-
-
-
-
-
-
-
-
-init python:
-
-    def approval_check(Chr = 0, T = 1000, Type = "LOI", Spread = 150, TmpM = 1, taboo_modifier = 0, C = 1, Bonus = 0, Loc = 0, Check=0, Alt=[[],0]):
-        if Chr not in all_Girls:
-            return False
-
-        while Alt[0]:
-
-            if Chr in Alt[0]:
-                T = Alt[1] if Alt[1] else T
-            Alt[0].remove(Alt[0][0])
-
-        L = Chr.love
-        O = Chr.obedience
-        I = Chr.inhibition
-        Localtaboo = Chr.taboo
-        Loc = Chr.location if not Loc else Loc
-
-        if Chr == JeanX and (O <= 800 or JeanX.taboo):
-
-            I = (I - JeanX.IX)
-
-        if Loc == bg_current and C:
-
-            if Chr == LauraX:
-                if "mandrill" in Player.traits:
-                    if L <= 400:
-                        L += 600
-                    else:
-                        L = 1200
-                    if "drugged" not in Chr.traits:
-                        Chr.traits.append("drugged")
-                elif "purple" in Player.traits:
-                    if O <= 400:
-                        O += 600
-                    else:
-                        O = 1200
-                    if "drugged" not in Chr.traits:
-                        Chr.traits.append("drugged")
-                elif "corruption" in Player.traits:
-                    if I <= 400:
-                        I += 600
-                    else:
-                        I = 1200
-                    if "drugged" not in Chr.traits:
-                        Chr.traits.append("drugged")
-            else:
-                if "mandrill" in Player.traits:
-                    if L <= 500:
-                        L += 500
-                    else:
-                        L = 1000
-                elif "purple" in Player.traits:
-                    if O <= 500:
-                        O += 500
-                    else:
-                        O = 1000
-                elif "corruption" in Player.traits:
-                    if I <= 500:
-                        I += 500
-                    else:
-                        I = 1000
-
-        if Type == "LOI":
-            Localtaboo = Localtaboo*10
-            Localapproval_bonus = approval_bonus*10
-
-        elif Type == "LO":
-
-
-            I = 0
-            Localtaboo = Localtaboo*6
-            Localapproval_bonus = approval_bonus*6
-        elif Type == "OI":
-            L = 0
-            Localtaboo = Localtaboo*6
-            Localapproval_bonus = approval_bonus*6
-        elif Type == "LI":
-            O = 0
-            Localtaboo = Localtaboo*6
-            Localapproval_bonus = approval_bonus*6
-
-        elif Type == "L":
-            O = 0
-            I = 0
-            Localtaboo = Localtaboo*3
-            Localapproval_bonus = approval_bonus*3
-        elif Type == "O":
-            L = 0
-            I = 0
-            Localtaboo = Localtaboo*3
-            Localapproval_bonus = approval_bonus*3
-        elif Type == "I":
-            O = 0
-            L = 0
-            Localtaboo = Localtaboo*3
-            Localapproval_bonus = approval_bonus*3
-
-        else:
-            Localtaboo = Localtaboo*10
-            Localapproval_bonus = approval_bonus*10
-
-        taboo_modifier = 0 if taboo_modifier <= 0 else taboo_modifier
-
-        if Check:
-
-            Check = (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (taboo_modifier*Localtaboo))
-            return Check
-
-        if (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (taboo_modifier*Localtaboo)) >= (T + (2*Spread)):
-
-            return 3
-        elif (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (taboo_modifier*Localtaboo)) >= (T + Spread):
-
-            return 2
-        elif (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (taboo_modifier*Localtaboo)) >= T:
-
-            return True
-        else:
-            return False
-
-
-
-
-    def Room_Full(Here = [],temp_Girls=[]):
-
-
-        global Party
-        Here = []
-        while len(Party) > 2:
-
-
-            Party.remove(Party[2])
-
-
-
-
-        temp_Girls = all_Girls[:]
-        while temp_Girls:
-            if temp_Girls[0].location == bg_current and temp_Girls[0] not in Party:
-                Here.append(temp_Girls[0])
-            temp_Girls.remove(temp_Girls[0])
-        if len(Party) + len(Here) >= 2:
-            return True
-        else:
-            return False
-
-
-
-    def AloneCheck(Girl=0,temp_Girls=[]):
-
-
-        temp_Girls = all_Girls[:]
-        if Girl and Girl in all_Girls:
-            temp_Girls.remove(Girl)
-        while temp_Girls:
-            if temp_Girls[0].location == bg_current:
-                return False
-            temp_Girls.remove(temp_Girls[0])
-        return True
-
-
-
-
-
-label CheatCheck(temp_Girls=[], temp_Girls2=[]):
-
-
-
-
-
-
-
+label check_if_cheated:
     $ temp_Girls = all_Girls[:]
+
     $ renpy.random.shuffle(temp_Girls)
+
     while temp_Girls:
         if "locked" in Player.traits and temp_Girls[0].location != bg_current:
-
             pass
         else:
             $ temp_Girls2 = all_Girls[:]
+
             while temp_Girls2:
                 if "meet girl" in Player.daily_history:
-
                     return
                 elif temp_Girls[0] in Player.Harem:
-
                     if "saw with " + temp_Girls2[0].tag in temp_Girls[0].traits:
-
                         if temp_Girls[0] in Player.Harem and temp_Girls2[0] in Player.Harem:
-
                             $ temp_Girls[0].drain_word("saw with "+temp_Girls2[0].tag,0,0,1)
                         elif temp_Girls[0] in Player.Harem and temp_Girls2[0].tag + "Yes" in Player.traits:
                             $ temp_Girls[0].drain_word("saw with "+temp_Girls2[0].tag,0,0,1)
                         elif bg_current == "bg_player" or bg_current == temp_Girls[0].home:
                             call Cheated (temp_Girls[0], temp_Girls2[0])
+
                             $ renpy.pop_call()
+
                             return
+
                 $ temp_Girls2.remove(temp_Girls2[0])
+
         $ temp_Girls.remove(temp_Girls[0])
+
     return
 
-label ShareCheck(temp_Girls=[], temp_Girls2=[]):
-
-
-
-
-
+label check_if_shared:
     $ temp_Girls = all_Girls[:]
     $ temp_Girls.remove(StormX)
+
     while temp_Girls:
         if temp_Girls[0] in Player.Harem:
-
             $ temp_Girls2 = all_Girls[:]
             $ temp_Girls2.remove(StormX)
+
             while temp_Girls2:
                 if "ask " + temp_Girls2[0].tag in temp_Girls[0].traits:
-
                     if temp_Girls[0] in Player.Harem and temp_Girls2[0] in Player.Harem:
-
                         $ temp_Girls[0].drain_word("ask "+temp_Girls2[0].tag,0,0,1)
                     else:
-                        call Share (temp_Girls[0], temp_Girls2[0])
+                        call Share(temp_Girls[0], temp_Girls2[0])
+
                         $ renpy.pop_call()
+
                         return
+
                 $ temp_Girls2.remove(temp_Girls2[0])
+
         $ temp_Girls.remove(temp_Girls[0])
+
     return

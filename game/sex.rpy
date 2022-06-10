@@ -910,7 +910,7 @@ label girl_touches_you(Girl, forced = False):
 
                     "She lashes out and leaps at you, grabbing you by the chin."
 
-                    $ Girl.eyes = "_sly"
+                    $ Girl.eyes = "_squint"
 
                     if "no_tag" not in Girl.recent_history:
                         $ Girl.change_stat("obedience", 50, -5)
@@ -1120,7 +1120,7 @@ label girl_initiated_action(Girl, action):
             "[Girl.name] grabs your [topless_phrase], clearly intending you to get to work."
     elif action in ["fondle_pussy", "eat_pussy", "finger_ass"]:
         if action == "fondle_pussy":
-            if Girl in [Jeanx, JubesX]:
+            if Girl in [JeanX, JubesX]:
                 $ phrase = "grabs your arm and presses your hand into her crotch"
             elif Girl == StormX:
                 $ phrase = "grabs your arm and strokes your hand across her crotch"
@@ -1251,7 +1251,7 @@ label girl_initiated_action(Girl, action):
                 "[Girl.name] turns around and pulls you toward her, grinding against your cock."])
             "[line]"
 
-    if action in == "kiss":
+    if action == "kiss":
         $ action_line = "You lean in to the kiss"
         $ praise_line = "Mmm, this is a nice surprise, " + Girl.player_petname
         $ no_action_line = "You pull back."

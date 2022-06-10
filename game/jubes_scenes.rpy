@@ -1876,7 +1876,7 @@ label Jubes_Sub_Asked:
         $ JubesX.change_stat("obedience", 200, 50)
         $ JubesX.player_petnames.append("master")
         $ JubesX.player_petname = "master"
-        $ JubesX.eyes = "_sly"
+        $ JubesX.eyes = "_squint"
         ch_v ". . . master. . ."
     else:
 
@@ -2233,12 +2233,12 @@ label Jubes_Fuckbuddy:
     call display_girl (JubesX)
     call taboo_level
     $ Player.primary_action = "masturbation"
-    $ girl_offhand_action = "fondle_pussy"
+    $ girl_secondary_action = "fondle_pussy"
     $ JubesX.change_face("_sly",2,mouth="_lipbite")
     "[JubesX.name] is_sprite standing in the doorway, with her hand down her pants."
     "You can tell she's been masturbating furiously, her scent is overpowering."
     $ Player.primary_action = None
-    $ girl_offhand_action = None
+    $ girl_secondary_action = None
     $ JubesX.arm_pose = 1
     "She looks you up and down hungrily, and pulls her hand out of her pants."
     "She reaches up to caress your face, smearing her juices along it."

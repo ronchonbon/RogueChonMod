@@ -926,7 +926,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
             call Laura_Foul
             return
 
-        if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not taboo or approval_check(LauraX, 800, "I")):
+        if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(LauraX, 800, "I")):
             if LauraX.location == bg_current and LauraX.thirst >= 30 and "refused" not in LauraX.daily_history and "quicksex" not in LauraX.daily_history:
                 $ LauraX.change_face("_sly",1)
                 ch_l "Hey, wanna bone?"

@@ -173,7 +173,7 @@ layeredimage Laura_head:
     if LauraX.spunk["face"]:
         "images/Laura_standing/Laura_standing_spunk_face.png"
 
-    if not renpy.showing("Laura_sprite titjob") and not renpy.showing("Laura_sprite sex"):
+    if LauraX.outfit["hair"] == "_long" and not renpy.showing("Laura_sprite titjob") and not renpy.showing("Laura_sprite sex"):
         "images/Laura_standing/Laura_standing_mid_hair[LauraX.outfit[hair]].png"
 
     if renpy.showing("Laura_sprite sex"):

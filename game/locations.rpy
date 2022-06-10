@@ -92,7 +92,7 @@ label player_room_entry:
     if "met" not in StormX.history and "met" in JeanX.history and "noise" not in Player.history and "attic" not in Player.history and day >= 1:
         call StormMeetPrelude
         jump player_room
-    elif "met" not in StormX.history and "met" in JeanX.history and "attic" not in Player.history:
+    elif "met" not in StormX.history and "met" in JeanX.history and "attic" in Player.history and day >= 5:
         call StormMeetWater
         jump player_room
 
@@ -251,10 +251,19 @@ label girls_room_entry:
         jump girls_room
 
     if round >= 10 and Girl.location == bg_current and "lesbian" in Girl.recent_history:
-        call Girls_Caught_Lesing(Girl)
+        $ GirlB = None
 
-        if not _return:
-            jump girls_room
+        python:
+            for G in active_Girls:
+                if G.location == bg_current and "lesbian" in G.recent_history:
+                    GirlB = G
+
+                    break
+
+        if GirlB:
+            call caught_lesbian(Girl, GirlB)
+
+        jump girls_room
 
     if bg_current == KittyX.home and "dress2" in LauraX.history and not Party:
         call Laura_Dressup3
@@ -284,7 +293,7 @@ label girls_room_entry:
                 elif "will_masturbate" in Girl.daily_history and D20 >= 5:
                     call caught_masturbating(Girl)
                 elif D20 >=15 and (time_index >= 3 or time_index == 0):
-                    call Girl_Caught_Changing(Girl)
+                    call caught_changing(Girl)
                     jump girls_room
         else:
             "You knock on [Girl.name]'s door."
@@ -591,6 +600,11 @@ label campus_entry:
 
     call set_the_scene
     call taboo_level
+
+    if "met" in LauraX.history and "met" in KittyX.history and time_index < 3:
+        if "dress0" in LauraX.history:
+            call Laura_Dressup
+
     call event_calls
 
 label campus:
@@ -649,6 +663,9 @@ label campus:
 label classroom_entry:
     $ Player.recent_history.append("traveling")
 
+    if "met" not in KittyX.history:
+        call meet_Kitty
+
     $ Present = []
     $ Nearby = []
 
@@ -661,7 +678,6 @@ label classroom_entry:
 
     if "noise" in Player.history and "attic" not in Player.history and EmmaX.location in ["bg_classroom", "bg_teacher"] and time_index < 2 and weekday < 5:
         call StormMeetAsk
-        jump classroom
 
     call event_calls
 
@@ -767,7 +783,6 @@ label danger_room_entry:
     # if day >= 12 and "dress0" not in LauraX.history and "mission" not in LauraX.to_do:
     if "met" not in LauraX.history and day >= 1:
         call meet_Laura
-        jump danger_room
 
     call event_calls
 
@@ -978,7 +993,7 @@ label shower_entry:
 
             $ bg_current = "bg_showerroom"
 
-            call Girl_Caught_Changing(potential_Girls[0])
+            call caught_changing(potential_Girls[0])
             jump shower_room
 
     $ bg_current = "bg_showerroom"
@@ -1159,7 +1174,9 @@ label shower_room:
 
         menu:
             "You're in the showers. What would you like to do?"
-            "Shower" if round > 30:
+            "Shower" if round >= 30:
+                call showering
+            "Shower (locked)" if round < 30:
                 call showering
             "Chat":
                 call chat
@@ -1247,19 +1264,25 @@ label pool:
             "You're at the pool. What would you like to do?"
             "Chat":
                 call chat
-            "Want to sunbathe?" if time_index < 2:
+            "Want to sunbathe?" if time_index < 2 and round >= 30:
                 call Pool_Sunbathe
 
                 $ round -= 20 if round >= 20 else round
 
                 "You just hang out for a little while."
-            "Want to swim?":
+            "Want to sunbathe? (locked)" if round < 30:
+                pass
+            "Want to swim?" if round >= 30:
                 if time_index >= 3 and AloneCheck():
                     "It's a bit late for a swim."
                 else:
                     call Pool_Swim
-            "Want to skinnydip?":
+            "Want to swim? (locked)" if round < 30:
+                pass
+            "Want to skinnydip?" if round >= 30:
                 call Pool_Skinnydip
+            "Want to skinnydip? (locked)" if round < 30:
+                pass
             "Wait" if time_index < 3:
                 "You hang out for a bit."
 
@@ -1455,43 +1478,43 @@ label study_room:
                 call chat
             "Plan Omega!" if time_index < 3 and RogueX.location == bg_current and Player.level >= 5:
                 if approval_check(RogueX, 1500, taboo_modifier=1, Loc="No"):
-                    call Xavier_Plan(RogueX)
+                    call execute_plan(RogueX)
                 else:
                     ch_r "I don't want to do that. . ."
             "Plan Kappa!" if time_index < 3 and KittyX.location == bg_current and Player.level >= 5:
                 if "Xavier's photo" in Player.inventory and approval_check(KittyX, 1500, taboo_modifier=1, Loc="No"):
-                    call Xavier_Plan(KittyX)
+                    call execute_plan(KittyX)
                 elif "Xavier's photo" in Player.inventory:
                     ch_k "I don't really want to do that. . ."
                 else:
                     ch_k "What?"
             "Plan Psi!" if time_index < 3 and EmmaX.location == bg_current and Player.level >= 5:
                 if approval_check(EmmaX, 1500, taboo_modifier=1, Loc="No"):
-                    call Xavier_Plan(EmmaX)
+                    call execute_plan(EmmaX)
                 else:
                     ch_e "I'd rather not. . ."
             "Plan Chi!" if time_index < 3 and LauraX.location == bg_current and Player.level >= 5:
                 if LauraX.level >= 2 and approval_check(LauraX, 1500, taboo_modifier=1, Loc="No") and approval_check(LauraX, 750, "I"):
-                    call Xavier_Plan(LauraX)
+                    call execute_plan(LauraX)
                 elif LauraX.level < 2 or not approval_check(LauraX, 750, "I"):
                     ch_l "I'm not ready for that."
                 else:
                     ch_l "Huh?"
             "Plan Alpha!" if time_index < 3 and JeanX.location == bg_current and Player.level >= 5:
                 if approval_check(JeanX, 1500, taboo_modifier=1, Loc="No"):
-                    call Xavier_Plan(JeanX)
+                    call execute_plan(JeanX)
                 else:
                     ch_j "You're on your own there."
             "Plan Rho!" if time_index < 3 and StormX.location == bg_current and Player.level >= 5:
                 if "Xavier's files" in Player.inventory and approval_check(StormX, 1500, taboo_modifier=1, Loc="No"):
-                    call Xavier_Plan(StormX)
+                    call execute_plan(StormX)
                 elif "Xavier's files" in Player.inventory:
                     ch_s "I do not believe that would be approrpriate."
                 else:
                     ch_s "What is that?"
             "Plan Zeta!" if time_index < 3 and JubesX.location == bg_current and Player.level >= 5:
                 if approval_check(JubesX, 1500, taboo_modifier=1, Loc="No"):
-                    call Xavier_Plan(JubesX)
+                    call execute_plan(JubesX)
                 else:
                     ch_v "What's a \"Zeta?\""
             "Explore" if time_index >= 3 and "explore" not in Player.recent_history:

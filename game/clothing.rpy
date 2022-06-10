@@ -1693,7 +1693,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
     if Check:
         pass
-    elif bg_current == "HW Party" or (bg_current == "bg_player" and "halloween" in Player.daily_history):
+    elif bg_current == "bg_halloween" or (bg_current == "bg_player" and "halloween" in Player.daily_history):
 
         pass
     elif "exhibitionist" in Girl.traits and Tempshame <= 20:
@@ -1786,8 +1786,6 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
 
 label Display_dress_screen(Girl=focused_Girl):
-
-
     if renpy.showing('dress_screen'):
         return True
 

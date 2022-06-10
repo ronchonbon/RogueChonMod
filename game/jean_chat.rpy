@@ -1012,7 +1012,7 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
             call Jean_Hungry
             return
 
-        if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not taboo or approval_check(JeanX, 800, "I")):
+        if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(JeanX, 800, "I")):
             if JeanX.location == bg_current and JeanX.thirst >= 30 and "refused" not in JeanX.daily_history and "quicksex" not in JeanX.daily_history:
                 $ JeanX.change_face("_sly",1)
                 ch_j "I could use some stress relief, you busy?"

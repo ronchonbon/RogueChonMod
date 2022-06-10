@@ -188,7 +188,7 @@ label Halloween_chat_Menu:
                     pass
         "Change her":
 
-            call Girl_Settings
+            call change_girl(Girl)
         "Never mind.":
 
             if Girl == RogueX:

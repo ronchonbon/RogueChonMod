@@ -83,7 +83,7 @@ label meet_Laura:
                         $ LauraX.change_face("_normal", 0)
 
                         ch_l "Yeah, ok."
-                    "Hello Laura Kinney.":
+                    "Hello Laura Laura Kinney.":
                         $ LauraX.change_face("_confused", 0,mouth="_sucking")
 
                         ch_l "It's just-"
@@ -92,7 +92,7 @@ label meet_Laura:
                         $ LauraX.change_stat("love", 70, 3)
                         $ LauraX.change_stat("inhibition", 70, 2)
 
-                        ch_l "Oh, get it."
+                        ch_l "Oh, I get it."
                     "Ok, how did you get that name?":
                         $ LauraX.change_face("_angry", 1,eyes="_side")
                         $ LauraX.change_stat("love", 70, -2)
@@ -328,7 +328,7 @@ label meet_Laura:
 
     $ round -= 10
 
-    call shift_focus (RogueX)
+    call shift_focus(RogueX)
 
     return
 
@@ -1666,7 +1666,7 @@ label Laura_Sub_Asked:
         $ LauraX.change_stat("obedience", 200, 50)
         $ LauraX.player_petnames.append("master")
         $ LauraX.player_petname = "master"
-        $ LauraX.eyes = "_sly"
+        $ LauraX.eyes = "_squint"
         ch_l ". . . master. . ."
     else:
 
@@ -2023,12 +2023,12 @@ label Laura_Fuckbuddy:
     call display_girl (LauraX)
     call taboo_level
     $ Player.primary_action = "masturbation"
-    $ girl_offhand_action = "fondle_pussy"
+    $ girl_secondary_action = "fondle_pussy"
     $ LauraX.change_face("_sly",2,mouth="_lipbite")
     "[LauraX.name] is standing in the doorway, with her hand down her pants."
     "You can tell she's been masturbating furiously, her scent is overpowering."
     $ Player.primary_action = None
-    $ girl_offhand_action = None
+    $ girl_secondary_action = None
     $ LauraX.arm_pose = 1
     "She looks you up and down hungrily, and pulls her hand out of her pants."
     "She reaches up to caress your face, smearing her juices along it."

@@ -726,7 +726,10 @@ label Rogue_Love:
     $ approval_bonus = 20
     call enter_main_sex_menu(RogueX)
     $ approval_bonus = 0
-    return
+
+    $ bg_current = "bg_rogue"
+
+    jump misplaced
 
 label Rogue_Love_Jerk:
     if not simulation:
@@ -1591,7 +1594,7 @@ label Rogue_Frisky_Class:
                 ch_b "Oh, my stars and garters!"
                 ch_b "[Player.name]!?! {b}WHAT ARE YOU DOING? BOTH OF YOU, TO THE PROFESSOR'S OFFICE, IMMEDIATELY!{/b}"
             if RogueX not in Rules:
-                call Girls_Caught (RogueX)
+                call caught_having_sex(RogueX)
             else:
                 "Since Xavier isn't concerned with your activities, you both head back to your room instead."
 

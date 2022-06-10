@@ -915,7 +915,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
             call Jubes_Hungry
             return
 
-        if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not taboo or approval_check(JubesX, 800, "I")):
+        if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(JubesX, 800, "I")):
             if JubesX.location == bg_current and JubesX.thirst >= 30 and "refused" not in JubesX.daily_history and "quicksex" not in JubesX.daily_history:
                 $ JubesX.change_face("_sly",1)
                 ch_v "Hey, did you. . . wanna do something?"

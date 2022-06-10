@@ -1121,7 +1121,7 @@ label Les_Prep(Girl=focused_Girl, temp_Girls=[]):
                 $ Girl.change_stat("obedience", 70, 20)
                 $ Girl.change_stat("inhibition", 80, 60)
         call Les_FirstKiss
-        $ girl_offhand_action == "kiss girl"
+        $ girl_secondary_action == "kiss girl"
         $ second_girl_main_action == "kiss girl"
 
     $ Player.primary_action = "lesbian"
@@ -2052,19 +2052,19 @@ label Les_Change(Primary=0, Secondary=Partner, D20S=0, PrimaryLust=0, SecondaryL
     menu:
         "Hey [Primary.name]. . ."
         "why don't you kiss her?" if second_girl_secondary_action != "kiss girl" and second_girl_secondary_action != "kiss both":
-            call Threeway_Set (Primary, "kiss girl", "lesbian", girl_offhand_action, Secondary)
-        "why don't you grab her tits?" if girl_offhand_action != "fondle_breasts":
-            call Threeway_Set (Primary, "fondle_breasts", "lesbian", girl_offhand_action, Secondary)
-        "why don't you suck her breasts?" if girl_offhand_action != "suck_breasts":
-            call Threeway_Set (Primary, "suck_breasts", "lesbian", girl_offhand_action, Secondary)
-        "why don't you finger her?" if girl_offhand_action != "fondle_pussy":
-            call Threeway_Set (Primary, "fondle_pussy", "lesbian", girl_offhand_action, Secondary)
-        "why don't you go down on her?" if girl_offhand_action != "eat_pussy":
-            call Threeway_Set (Primary, "eat_pussy", "lesbian", girl_offhand_action, Secondary)
-        "why don't you grab her ass?" if girl_offhand_action != "fondle_ass":
-            call Threeway_Set (Primary, "fondle_ass", "lesbian", girl_offhand_action, Secondary)
-        "why don't you lick her ass?" if girl_offhand_action != "eat_ass":
-            call Threeway_Set (Primary, "eat_ass", "lesbian", girl_offhand_action, Secondary)
+            call Threeway_Set (Primary, "kiss girl", "lesbian", girl_secondary_action, Secondary)
+        "why don't you grab her tits?" if girl_secondary_action != "fondle_breasts":
+            call Threeway_Set (Primary, "fondle_breasts", "lesbian", girl_secondary_action, Secondary)
+        "why don't you suck her breasts?" if girl_secondary_action != "suck_breasts":
+            call Threeway_Set (Primary, "suck_breasts", "lesbian", girl_secondary_action, Secondary)
+        "why don't you finger her?" if girl_secondary_action != "fondle_pussy":
+            call Threeway_Set (Primary, "fondle_pussy", "lesbian", girl_secondary_action, Secondary)
+        "why don't you go down on her?" if girl_secondary_action != "eat_pussy":
+            call Threeway_Set (Primary, "eat_pussy", "lesbian", girl_secondary_action, Secondary)
+        "why don't you grab her ass?" if girl_secondary_action != "fondle_ass":
+            call Threeway_Set (Primary, "fondle_ass", "lesbian", girl_secondary_action, Secondary)
+        "why don't you lick her ass?" if girl_secondary_action != "eat_ass":
+            call Threeway_Set (Primary, "eat_ass", "lesbian", girl_secondary_action, Secondary)
         "never mind.":
             pass
     if not line:
@@ -2635,7 +2635,7 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
             elif Party[0] == JubesX:
                 ch_v "Well, I'm out then."
             $ Party[0].traits.append("ex")
-            $ Party[0].broken_up[0] = 5 + Party[0].broken_up[1] + Party[0].Cheated
+            $ Party[0].broken_up[0] = 5 + Party[0].broken_up[1] + Party[0].cheated_on
             $ Player.Harem.remove(Party[0])
             call remove_girl (Party[0])
 
@@ -3303,7 +3303,7 @@ label Harem_Start(Newbie=0, round2=0):
                     elif Party[0] == JubesX:
                         ch_v "Well, I'm out then."
                     $ Party[Count].traits.append("ex")
-                    $ Party[Count].broken_up[0] = 5 + Party[Count].broken_up[1] + Party[Count].Cheated
+                    $ Party[Count].broken_up[0] = 5 + Party[Count].broken_up[1] + Party[Count].cheated_on
 
                     $ Player.Harem.remove(Party[Count])
                     call remove_girl (Party[Count])
@@ -3547,7 +3547,7 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 $ Girl.change_face("_kiss",1,eyes = "_closed")
                 $ Girl2.change_face("_kiss",1,eyes = "_closed")
                 $ Player.primary_action = "lesbian"
-                $ girl_offhand_action = "fondle_pussy"
+                $ girl_secondary_action = "fondle_pussy"
                 $ second_girl_main_action = "fondle_pussy"
                 "You see [Girl.name] and [Girl2.name], eyes closed and stroking each other vigorously."
                 $ line = 1
@@ -3586,10 +3586,85 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
         ch_v "Get over here."
 
     $ Player.primary_action = "lesbian"
-    $ girl_offhand_action = "fondle_pussy"
+    $ girl_secondary_action = "fondle_pussy"
     $ second_girl_main_action = "fondle_pussy"
     $ Partner = Girl2
     call shift_focus(Girl)
     call Les_Prep(Girl)
     jump reset_location
+    return
+
+label Share(Girl=0, Other=0):
+
+
+
+    $ Girl.drain_word("ask "+Other.tag,0,0,1)
+
+    if Girl.broken_up[0]:
+
+        "[Girl.name] sends you a text."
+        $ Other.change_stat("love", 90, -10)
+        $ Other.change_stat("obedience", 80, 10)
+        $ Other.change_stat("inhibition", 80, 5)
+
+        if Other == RogueX:
+            Girl.voice "She said to \"stop bother'in her?\""
+        elif Other == KittyX:
+            Girl.voice "She said to \"give it a rest?\""
+        elif Other == EmmaX:
+            Girl.voice "She said \"when hell freezes over?\""
+        elif Other == LauraX:
+            Girl.voice "She said to \"fuck off?\""
+        elif Other == JeanX:
+            Girl.voice "She didn't seem to know who I was talking about."
+        elif Other == StormX:
+            Girl.voice "She said \"I would rather not?\""
+        elif Other == JubesX:
+            Girl.voice "She said to \"give it a rest?\""
+        Girl.voice "I guess we can see if she comes around on the idea."
+    else:
+
+        if Other == JeanX or Other.likes[Girl.tag] >= 800 or approval_check(Other, 1800) or (approval_check(Other, 1500) and Other.likes[Girl.tag] >= 500):
+
+            $ Other.add_word(1,0,0,"poly "+Girl.tag,0)
+
+
+            $ Other.change_stat("obedience", 80, 10)
+            $ Other.change_stat("inhibition", 80, 15)
+
+            $ temp_Girls = Player.Harem[:]
+            while temp_Girls:
+                $ temp_Girls[0].drain_word("saw with "+Other.tag,0,0,1)
+                $ temp_Girls.remove(temp_Girls[0])
+            if Girl.event_happened[5]:
+
+                $ Player.Harem.append(Other)
+
+            elif bg_current in personal_rooms:
+
+                if Other.tag+"Yes" not in Player.traits:
+                    $ Player.traits.append(Other.tag+"Yes")
+                call expression Other.tag + "_BF"
+                $ renpy.pop_call()
+                $ renpy.pop_call()
+            else:
+
+                if Other.tag+"Yes" not in Player.traits:
+                    $ Player.traits.append(Other.tag+"Yes")
+                call ask_to_meet(Other, "_bemused")
+        else:
+
+            "[Girl.name] sends you a text."
+            Girl.voice "I talked to [Other.name] about sharing you, and she said she wasn't into that sort of thing,"
+            if not approval_check(Other, 2000):
+                $ Other.change_stat("love", 200, -15)
+                $ Other.change_stat("obedience", 50, -5)
+                $ Other.change_stat("inhibition", 50, 5)
+                Girl.voice "She's just not into you like that."
+            else:
+                $ Other.change_stat("love", 200, -5)
+                Girl.voice "She doesn't really like me that much. . ."
+
+
+            $ Other.broken_up[0] = 7
     return

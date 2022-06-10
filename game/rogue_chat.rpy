@@ -948,7 +948,7 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
         if "hungry" not in RogueX.traits and (RogueX.event_counter["swallowed"] + RogueX.had_chat[2]) >= 10 and RogueX.location == bg_current:
             call Rogue_Hungry
             return
-        if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not taboo or approval_check(RogueX, 800, "I")):
+        if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(RogueX, 800, "I")):
             if RogueX.location == bg_current and RogueX.thirst >= 30 and "refused" not in RogueX.daily_history and "quicksex" not in RogueX.daily_history:
                 $ RogueX.change_face("_sly",1)
                 ch_r "Hey, do you want to get a little frisky?"

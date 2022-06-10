@@ -192,7 +192,7 @@ label before_masturbation(Girl):
     $ Girl.daily_history.append("masturbation")
 
     $ Player.primary_action = "masturbation"
-    $ girl_offhand_action = "fondle_pussy"
+    $ girl_secondary_action = "fondle_pussy"
 
     return
 
@@ -301,7 +301,7 @@ label after_masturbation(Girl, context):
     if context == "interrupt":
         $ Girl.change_face("_surprised", 1)
 
-        $ girl_offhand_action = None
+        $ girl_secondary_action = None
 
         "[Girl.name] stops what she's doing with a start, eyes wide."
 

@@ -564,7 +564,7 @@ label Flirt(Girl=0):
                             $ Girl.change_stat("love", 90, 1)
                             $ Girl.change_stat("love", 60, 3)
                             $ Girl.change_stat("inhibition", 50, 2)
-                            if bg_current == "HW Party":
+                            if bg_current == "bg_halloween":
                                 "She shrugs away from you and winks."
                                 Girl.voice "Not now. . ."
                             else:
@@ -1645,7 +1645,7 @@ label Flirt(Girl=0):
                     $ LauraX.claws = 0
                 if Girl == EmmaX and taboo and "taboo" not in EmmaX.history:
                     ch_e "Show some respect when in public, [EmmaX.player_petname]."
-                elif bg_current == "HW Party":
+                elif bg_current == "bg_halloween":
                     "She shrugs away from you and winks."
                     Girl.voice "Not now. . ."
                 elif Girl.action_counter["fondle_breasts"]and approval_check(Girl, 1100, taboo_modifier = 3):
@@ -2551,7 +2551,7 @@ label Love_You(Girl=0):
 
 
     ch_p "[Girl.name], I love you."
-    if bg_current == "HW Party":
+    if bg_current == "bg_halloween":
         Girl.voice ". . . we should talk after the party. . ."
         return
 

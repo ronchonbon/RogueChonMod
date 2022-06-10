@@ -747,7 +747,7 @@ init python:
 
             return
 
-        def default_faces(self):
+        def set_default_faces(self):
             if self.lust >= 50 and approval_check(self, 1200):
                 self.emotion = "_sexy"
             elif self.addiction > 75:
@@ -1500,10 +1500,6 @@ init python:
             if self.tag == "Emma":
                 if self.outfit["top"] == "_towel":
                     return 2
-
-            if self.tag == "Storm":
-                if self.outfit["top"] == "_towel":
-                    return False
 
             if self.tag == "Jubes":
                 if Up and self.top_pulled_up and self.outfit["jacket"]:

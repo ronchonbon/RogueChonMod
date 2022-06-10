@@ -69,6 +69,14 @@ layeredimage Storm_sprite standing:
     elif StormX.outfit["bottom"]:
         "images/Storm_standing/Storm_standing_bottom[StormX.outfit[bottom]].png"
 
+    if StormX.arm_pose == 1:
+        "images/Storm_standing/Storm_standing_hands[StormX.arm_pose].png"
+    elif StormX.arm_pose == 2:
+        "images/Storm_standing/Storm_standing_hand[StormX.arm_pose]_right.png"
+
+    if StormX.arm_pose == 2:
+        "images/Storm_standing/Storm_standing_hand[StormX.arm_pose]_left.png"
+
     if StormX.breasts_supported:
         "images/Storm_standing/Storm_standing_breasts_up.png"
     else:
@@ -124,14 +132,6 @@ layeredimage Storm_sprite standing:
         "images/Storm_standing/Storm_standing_sleeves[StormX.outfit[jacket]][StormX.arm_pose].png"
     elif StormX.outfit["sleeves"] == "_rings" and StormX.arm_pose == 2:
         "images/Storm_standing/Storm_standing_sleeves[StormX.outfit[sleeves]][StormX.arm_pose]_top.png"
-
-    if StormX.arm_pose == 1:
-        "images/Storm_standing/Storm_standing_hands[StormX.arm_pose].png"
-    elif StormX.arm_pose == 2:
-        "images/Storm_standing/Storm_standing_hand[StormX.arm_pose]_right.png"
-
-    if StormX.arm_pose == 2:
-        "images/Storm_standing/Storm_standing_hand[StormX.arm_pose]_left.png"
 
     if StormX.spunk["breasts"] and StormX.breasts_supported:
         "images/Storm_standing/Storm_standing_spunk_breasts_up.png"

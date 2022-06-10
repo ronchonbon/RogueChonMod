@@ -74,7 +74,7 @@ init -1:
     default multi_action = True
     default action_speed = 0
 
-    default girl_offhand_action = None
+    default girl_secondary_action = None
     default second_girl_main_action = None
     default second_girl_secondary_action = None
 
@@ -180,28 +180,37 @@ label start:
 
     show screen status_screen
     show screen inventory_button
-    
-    # $ bg_current = "bg_emma"
-    # $ time_index = 2
-    # $ current_time = "evening"
-    #
-    # scene background onlayer backdrop
-    # scene
 
-    # $ RogueX.change_outfit("nude")
-    #
-    # $ Player.sprite = True
-    # $ action_speed = 3
-    # $ Player.cock_position = "out"
-    # $ Player.primary_action = "hotdog"
+    $ bg_current = "bg_emma"
+    $ time_index = 2
+    $ current_time = "evening"
 
-    # show Rogue_sprite handjob at sprite_location(0.5)
-    # show Rogue_sprite titjob at sprite_location(0.5)
-    # show Rogue_sprite blowjob at sprite_location(0.5)
-    # show Rogue_sprite sex at sprite_location(0.7)
-    # show Rogue_sprite doggy at sprite_location(0.9)
+    scene background onlayer backdrop
+    scene
 
-    # ""
+    $ RogueX.change_outfit("nude")
+
+    $ Player.sprite = True
+    $ show_feet = False
+    $ action_speed = 1
+    $ Player.cock_position = "in"
+    $ Player.primary_action = "blowjob"
+    $ Player.secondary_action = "finger_ass"
+    $ RogueX.spunk["anus"] = True
+    $ RogueX.spunk["pussy"] = True
+
+    show Rogue_sprite handjob at sprite_location(0.2) as handjob
+    show Rogue_sprite titjob at sprite_location(0.4) as titjob
+    show Rogue_sprite blowjob at sprite_location(0.5) as blowjob
+    show Rogue_sprite sex at sprite_location(0.6) as sex
+    show Rogue_sprite doggy at sprite_location(0.8) as anal
+
+    ""
+
+    $ Player.sprite = False
+    call stop_all_actions
+    $ RogueX.change_outfit("casual1")
+
     #
     # $ RogueX.sprite_location = stage_far_far_left
     # $ active_Girls.append(RogueX)

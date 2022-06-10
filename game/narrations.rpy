@@ -1511,7 +1511,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ TempLust += 1
 
 
-    elif not Player.primary_action and girl_offhand_action == "fondle_pussy":
+    elif not Player.primary_action and girl_secondary_action == "fondle_pussy":
         call Girl_Self_lines (GirlA)
         if "unseen" not in GirlA.recent_history:
             if Player.secondary_action == "jerking_off" or "cockout" in Player.recent_history:
@@ -1873,7 +1873,7 @@ label Offhand_Dialog(Girl=Primary, Templine=0):
 
 
 
-label Girl_Self_lines(GirlA=Primary, Mode="T3", Action=girl_offhand_action, TempLustX=0, TempFocusX=0, D20X=0):
+label Girl_Self_lines(GirlA=Primary, Mode="T3", Action=girl_secondary_action, TempLustX=0, TempFocusX=0, D20X=0):
 
 
 
@@ -1892,7 +1892,7 @@ label Girl_Self_lines(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Temp
 
         if Mode == "T3":
 
-            $ Action = girl_offhand_action
+            $ Action = girl_secondary_action
         else:
 
             $ Action = second_girl_secondary_action
@@ -2098,7 +2098,7 @@ label Girl_Self_lines(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Temp
 
 
 
-label Girl_Self_Set(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Length=0, between_event_count=0, Options=[]):
+label Girl_Self_Set(GirlA=Primary, Mode="T3", Action=girl_secondary_action, Length=0, between_event_count=0, Options=[]):
 
 
 
@@ -2199,7 +2199,7 @@ label Girl_Self_Set(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Length
         $ line = "Also, " + GirlA.name + " continues to masturbate. "
 
     if Mode == "T3":
-        $ girl_offhand_action = Action
+        $ girl_secondary_action = Action
     else:
         $ second_girl_secondary_action = Action
 
@@ -2222,7 +2222,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, Templ
     call Threeway_Set (GirlA, Mode=Mode, GirlB=GirlB)
 
     if Mode == "lesbian":
-        $ Action = girl_offhand_action
+        $ Action = girl_secondary_action
         $ GirlB = Secondary
     else:
         $ Action = second_girl_main_action
@@ -2670,7 +2670,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, Templ
     else:
 
 
-        "Nothing triggered. 1:[Player.primary_action], 2:[Player.secondary_action], 3:[girl_offhand_action], 4:[second_girl_main_action], 5:[second_girl_secondary_action]"
+        "Nothing triggered. 1:[Player.primary_action], 2:[Player.secondary_action], 3:[girl_secondary_action], 4:[second_girl_main_action], 5:[second_girl_secondary_action]"
 
 
     $ TempLust2 += 2
@@ -2760,10 +2760,10 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
 
         if Mode == "lesbian":
 
-            if girl_offhand_action == "kiss girl" and GirlA.lust <= 20 and GirlA.event_counter["orgasmed"]< 1:
+            if girl_secondary_action == "kiss girl" and GirlA.lust <= 20 and GirlA.event_counter["orgasmed"]< 1:
 
                 return
-            elif girl_offhand_action and position_timer <= round:
+            elif girl_secondary_action and position_timer <= round:
 
                 return
         elif second_girl_main_action and D20 < 15 and second_girl_main_action != "watch":
@@ -2799,7 +2799,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
             if Action != "kiss girl":
                 $ line = GirlA.name + " gives " + GirlB.name + " a passionate kiss"
                 $ Action = "kiss girl"
-                $ girl_offhand_action = "kiss girl"
+                $ girl_secondary_action = "kiss girl"
                 if "lesbian" not in GirlA.recent_history:
                     $ GirlA.event_counter["been_with_girl"] += 1
                     $ GirlA.recent_history.append("lesbian")
@@ -3056,7 +3056,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
         if Mode != "lesbian" and "kiss" in Options:
             if Player.primary_action == "kiss":
                 $ Action = "kiss both"
-            elif girl_offhand_action == "kiss":
+            elif girl_secondary_action == "kiss":
                 $ Action = "kiss both"
             elif second_girl_main_action == "kiss":
                 $ Action = "kiss both"
@@ -3067,7 +3067,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
         if "kiss girl" in Options:
             if Player.primary_action == "kiss":
                 $ Action = "kiss both"
-            elif girl_offhand_action == "kiss":
+            elif girl_secondary_action == "kiss":
                 $ Action = "kiss both"
             elif second_girl_main_action == "kiss":
                 $ Action = "kiss both"
@@ -3109,7 +3109,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
     $ TempLust2 += 2
     if Mode == "lesbian":
 
-        $ girl_offhand_action = Action
+        $ girl_secondary_action = Action
         $ PrimaryLust += (TempLust*3)
         $ SecondaryLust += (TempLust2*3)
     elif Mode == "start":
@@ -3180,7 +3180,7 @@ label Dirty_Talk(Girl=Primary, D20=0, TempCheck=0, Templine=0, Temp_action=secon
         $ Girl = Primary
         $ ActiveGirl = Secondary
         $ TempCheck = Player.primary_action
-        $ Temp_action = girl_offhand_action
+        $ Temp_action = girl_secondary_action
 
     $ D20 = renpy.random.randint(1, 20)
 

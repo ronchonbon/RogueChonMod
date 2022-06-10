@@ -1,22 +1,27 @@
 image Zero_fondle_thigh_animation:
     "Zero_hand"
+
+    subpixel True
     alpha 0.5 zoom 0.7
     rotate 100
-    parallel:
-        pause 0.5
-        ease 1 yoffset 50
-        ease 1 yoffset 0
-        repeat
-    parallel:
-        pause 0.5
-        ease 0.5 xoffset 3
-        ease 0.5 xoffset 0
-        ease 0.5 xoffset 3
-        ease 0.5 xoffset 0
-        repeat
+    block:
+        parallel:
+            pause 0.5
+            ease 1 yoffset 50
+            ease 1 yoffset 0
+            repeat
+        parallel:
+            pause 0.5
+            ease 0.5 xoffset 3
+            ease 0.5 xoffset 0
+            ease 0.5 xoffset 3
+            ease 0.5 xoffset 0
+            repeat
 
 image Zero_fondle_breasts_right_animation:
     "Zero_hand"
+
+    subpixel True
     alpha 0.5 zoom (-0.7, 0.7)
     rotate -60
     block:
@@ -26,6 +31,8 @@ image Zero_fondle_breasts_right_animation:
 
 image Zero_fondle_breasts_left_animation:
     "Zero_hand"
+
+    subpixel True
     alpha 0.5 zoom 0.7
     rotate 90
     block:
@@ -35,6 +42,8 @@ image Zero_fondle_breasts_left_animation:
 
 image Zero_suck_breasts_right_animation:
     "Zero_tongue"
+
+    subpixel True
     alpha 0.5 zoom (-0.5, 0.5)
     rotate 30
     block:
@@ -45,6 +54,8 @@ image Zero_suck_breasts_right_animation:
 
 image Zero_suck_breasts_left_animation:
     "Zero_tongue"
+
+    subpixel True
     alpha 0.5 zoom (-0.5, 0.5)
     rotate 30
     block:
@@ -55,6 +66,8 @@ image Zero_suck_breasts_left_animation:
 
 image Zero_fondle_pussy_animation:
     "Zero_hand"
+
+    subpixel True
     alpha 0.5 zoom 0.7
     rotate 170
     block:
@@ -69,6 +82,8 @@ image Zero_fondle_pussy_animation:
 
 image Zero_finger_pussy_animation:
     "Zero_finger"
+
+    subpixel True
     alpha 0.5 zoom 0.7
     rotate 40
     block:
@@ -93,6 +108,8 @@ image Zero_finger_pussy_animation:
 
 image Zero_eat_pussy_animation:
     "Zero_tongue"
+
+    subpixel True
     alpha 0.5 zoom (-0.5, 0.5)
     rotate 10
     block:
@@ -103,6 +120,8 @@ image Zero_eat_pussy_animation:
 
 image Zero_doggy_fondle_breast_animation:
     "Zero_hand_under"
+
+    subpixel True
     block:
         ease 1 rotate 10
         ease 1 rotate 0
@@ -113,30 +132,32 @@ image Rogue_handjob_cock_animation0:
 
 image Rogue_handjob_cock_animation1:
     "Zero_handjob_cock"
-    rotate_pad False
-    ease 0.5 yoffset 0 rotate -2
-    pause 0.25
-    ease 1.0 yoffset 0 rotate 0
-    pause 0.1
-    repeat
+
+    subpixel True
+    block:
+        ease 0.5 rotate -2
+        pause 0.25
+        ease 1.0 rotate 0
+        pause 0.1
+        repeat
 
 image Rogue_handjob_cock_animation2:
     "Zero_handjob_cock"
-    rotate_pad False
-    ease 0.2 yoffset 0 rotate -3
-    ease 0.5 yoffset 0 rotate 0
-    pause 0.1
-    repeat
 
-layeredimage Rogue_handjob_cock_animations:
-    always:
-        "Rogue_handjob_cock_animation[action_speed]" pos (-0.04, 0.455) zoom 0.28
+    subpixel True
+    block:
+        ease 0.2 rotate -3
+        ease 0.5 rotate 0
+        pause 0.1
+        repeat
 
 image Rogue_titjob_cock_animation0:
     "Zero_handjob_cock"
 
 image Rogue_titjob_cock_animation1:
     "Zero_handjob_cock"
+
+    subpixel True
     block:
         ease 1 yoffset -60
         easeout 0.2 yoffset -70
@@ -145,14 +166,12 @@ image Rogue_titjob_cock_animation1:
 
 image Rogue_titjob_cock_animation2:
     "Zero_handjob_cock"
+
+    subpixel True
     block:
         ease 0.35 yoffset -50
         ease 0.4 yoffset -30
         repeat
-
-layeredimage Rogue_titjob_cock_animations:
-    always:
-        "Rogue_titjob_cock_animation[action_speed]" pos (-0.05, 1.0) zoom 0.65
 
 image Rogue_blowjob_cock_animation0:
     "Zero_blowjob_cock"
@@ -160,6 +179,8 @@ image Rogue_blowjob_cock_animation0:
 
 image Rogue_blowjob_cock_animation1:
     "Zero_blowjob_cock"
+
+    subpixel True
     ease 0.5 rotate 0
     block:
         ease 2 rotate -5
@@ -176,46 +197,53 @@ image Rogue_blowjob_cock_animation3:
 image Rogue_blowjob_cock_animation4:
     "Zero_blowjob_cock"
 
-layeredimage Rogue_blowjob_cock_animations:
-    always:
-        "Rogue_blowjob_cock_animation[action_speed]" pos (0.021, 0.455) zoom 0.28
-
 image Rogue_sex_cock_animation0:
     "Zero_doggy_cock_in"
 
 image Rogue_sex_cock_animation1:
     "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (0, -5)
     block:
         ease 1 yoffset -20
         pause 1
-        ease 3 yoffset 0
+        ease 3 yoffset -5
         repeat
 
 image Rogue_sex_cock_animation2:
     "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (0.75, -40)
     block:
-        ease 1 yoffset -90
+        ease 1 offset (1, -110)
         pause 1
-        ease 3 yoffset -40
+        ease 3 offset (0.75, -40)
         repeat
 
 image Rogue_sex_cock_animation3:
     "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (0.75, -40)
     block:
-        ease 0.25 yoffset -90
+        ease 0.25 offset (1, -110)
         pause 0.25
-        ease 1.5 yoffset -40
+        ease 1.5 offset (0.75, -40)
         repeat
 
 layeredimage Rogue_sex_cock_animations:
     always:
-        "Rogue_sex_cock_animation[action_speed]" pos (0.29175, 0.65) zoom 1.18
+        "Rogue_sex_cock_animation[action_speed]" pos (0.29175, 0.635) zoom 1.25
 
 image Rogue_sex_cock_anal_animation0:
     "Zero_doggy_cock_in"
 
 image Rogue_sex_cock_anal_animation1:
     "Zero_doggy_cock_in"
+
+    subpixel True
     block:
         ease 1 yoffset -30
         pause 1
@@ -224,18 +252,24 @@ image Rogue_sex_cock_anal_animation1:
 
 image Rogue_sex_cock_anal_animation2:
     "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (0, -40)
     block:
         ease 1 yoffset -120
         pause 1
-        ease 3 yoffset 0
+        ease 3 yoffset -40
         repeat
 
 image Rogue_sex_cock_anal_animation3:
     "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (0, -40)
     block:
         ease 0.25 yoffset -120
         pause 0.25
-        ease 1.5 yoffset 0
+        ease 1.5 yoffset -40
         repeat
 
 layeredimage Rogue_sex_cock_anal_animations:
@@ -247,61 +281,69 @@ image Rogue_sex_cock_footjob_animation0:
 
 image Rogue_sex_cock_footjob_animation1:
     "Zero_blowjob_cock"
+
+    subpixel True
     block:
         pause 0.5
-        easein 0.75 yoffset -90
-        ease 0.25 yoffset -85
+        easein 0.75 yoffset 65
+        ease 0.25 yoffset 60
         pause 1
-        ease 2.50 yoffset 0
+        ease 2.50 yoffset -25
         repeat
 
 image Rogue_sex_cock_footjob_animation2:
     "Zero_blowjob_cock"
+
+    subpixel True
     block:
         pause 0.2
-        easein 0.4 yoffset -90
-        ease 0.2 yoffset -85
+        easein 0.4 yoffset 65
+        ease 0.2 yoffset 60
         pause 0.2
-        ease 1.00 yoffset 0
+        ease 1.0 yoffset -25
         repeat
-
-layeredimage Rogue_sex_cock_footjob_animations:
-    always:
-        "Rogue_sex_cock_footjob_animation[action_speed]" pos (0.28, 0.6) alpha 0.8 zoom 0.6
 
 image Rogue_sex_cock_hotdog_animation0:
     "Zero_doggy_cock_in"
 
 image Rogue_sex_cock_hotdog_animation1:
     "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (0, -70)
     block:
-        ease 1 yoffset -60
+        ease 1 yoffset -10
         pause 0.5
-        ease 1.5 yoffset 0
+        ease 1.5 yoffset -70
         repeat
 
 image Rogue_sex_cock_hotdog_animation2:
     "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (0, -60)
     block:
-        ease 0.5 yoffset -110
+        ease 0.5 yoffset -120
         pause 0.5
-        ease 1 yoffset 0
+        ease 1 yoffset -60
         repeat
 
 image Rogue_sex_cock_hotdog_animation3:
     "Zero_doggy_cock_in"
-    block:
-        ease 0.5 yoffset -110
-        pause 0.5
-        ease 1 yoffset 0
-        repeat
 
-layeredimage Rogue_sex_cock_hotdog_animations:
-    always:
-        "Rogue_sex_cock_hotdog_animation[action_speed]" pos (0.29175, 0.65) zoom 1.18
+    subpixel True
+    offset (0, -60)
+    block:
+        ease 0.5 yoffset -120
+        pause 0.5
+        ease 1 yoffset -60
+        repeat
 
 image Rogue_sex_finger_pussy_animation:
     "Zero_sex_finger"
+
+    subpixel True
+    zoom 1.2
     block:
         ease 0.2 yoffset -40
         pause 0.2
@@ -310,10 +352,13 @@ image Rogue_sex_finger_pussy_animation:
 
 layeredimage Rogue_sex_finger_pussy_animations:
     always:
-        "Rogue_sex_finger_pussy_animation" pos (0.28, 0.6) zoom 1.2
+        "Rogue_sex_finger_pussy_animation" pos (0.292, 0.64)
 
 image Rogue_sex_finger_ass_animation:
     "Zero_sex_finger"
+
+    subpixel True
+    zoom 1.2
     block:
         ease 0.4 yoffset -50
         pause 0.4
@@ -322,10 +367,12 @@ image Rogue_sex_finger_ass_animation:
 
 layeredimage Rogue_sex_finger_ass_animations:
     always:
-        "Rogue_sex_finger_ass_animation" zoom 1.2
+        "Rogue_sex_finger_ass_animation" pos (0.2923, 0.7)
 
 image Rogue_doggy_cock_animation0:
     "Zero_doggy_cock_in"
+
+    subpixel True
     block:
         ease 1 yoffset -5
         pause 1
@@ -334,37 +381,47 @@ image Rogue_doggy_cock_animation0:
 
 image Rogue_doggy_cock_animation1:
     "Zero_doggy_cock_in"
+
+    subpixel True
     block:
         ease 1 xoffset -3 yoffset -45
         pause 1
-        ease 3 xoffset 0 yoffset 0
+        ease 3 xoffset 0 yoffset -5
         repeat
 
 image Rogue_doggy_cock_animation2:
     "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (-3, -45)
     block:
-        ease 0.5 yoffset -60
+        ease 0.5 offset (-3, -105)
         pause 0.25
-        ease 1.75 yoffset 0
+        ease 1.75 offset (-3, -45)
         repeat
 
 image Rogue_doggy_cock_animation3:
     "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (-3, -45)
     block:
-        ease 0.2 yoffset -60
+        ease 0.2 offset (-3, -105)
         pause 0.1
-        ease 0.6 yoffset 0
+        ease 0.6 offset (-3, -45)
         repeat
 
 layeredimage Rogue_doggy_cock_animations:
     always:
-        "Rogue_doggy_cock_animation[action_speed]" pos (0.112, 0.65)
+        "Rogue_doggy_cock_animation[action_speed]" pos (0.112, 0.62)
 
 image Rogue_doggy_cock_anal_animation0:
     "Zero_doggy_cock_in"
 
 image Rogue_doggy_cock_anal_animation1:
     "Zero_doggy_cock_in"
+
+    subpixel True
     block:
         ease 0.5 yoffset -50
         pause 0.25
@@ -373,57 +430,71 @@ image Rogue_doggy_cock_anal_animation1:
 
 image Rogue_doggy_cock_anal_animation2:
     "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (-2, -35)
     block:
-        ease 0.5 yoffset -65
+        ease 0.5 offset (-2, -105)
         pause 0.25
-        ease 1.75 yoffset 0
+        ease 1.75 offset (-2, -40)
         repeat
 
 image Rogue_doggy_cock_anal_animation3:
     "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (-2, -35)
     block:
-        ease 0.2 yoffset -70
+        ease 0.2 offset (-2, -105)
         pause 0.1
-        ease 0.6 yoffset 0
+        ease 0.6 offset (-2, -35)
         repeat
 
 layeredimage Rogue_doggy_cock_anal_animations:
     always:
-        "Rogue_doggy_cock_anal_animation[action_speed]" pos (0.112, 0.55)
+        "Rogue_doggy_cock_anal_animation[action_speed]" pos (0.1125, 0.58)
 
 image Rogue_doggy_cock_hotdog_animation0:
     "Zero_doggy_cock_out"
 
 image Rogue_doggy_cock_hotdog_animation1:
     "Zero_doggy_cock_out"
+
+    subpixel True
     block:
-        ease 1 yoffset -90
-        ease 1 yoffset 0
+        ease 1 yoffset -60
+        ease 1 yoffset 50
         repeat
 
 image Rogue_doggy_cock_hotdog_animation2:
     "Zero_doggy_cock_out"
+
+    subpixel True
     block:
-        ease 1 yoffset -90
-        ease 1 yoffset 0
+        ease 1 yoffset -60
+        ease 1 yoffset 50
         repeat
 
 image Rogue_doggy_cock_hotdog_animation3:
     "Zero_doggy_cock_out"
+
+    subpixel True
     block:
-        ease 1 yoffset -90
-        ease 1 yoffset 0
+        ease 1 yoffset -60
+        ease 1 yoffset 50
         repeat
 
 layeredimage Rogue_doggy_cock_hotdog_animations:
     always:
-        "Rogue_doggy_cock_hotdog_animation[action_speed]" pos (0.112, 0.65)
+        "Rogue_doggy_cock_hotdog_animation[action_speed]" pos (0.1135, 0.52)
 
 image Rogue_doggy_cock_footjob_animation0:
     "Zero_doggy_cock_out"
 
 image Rogue_doggy_cock_footjob_animation1:
     "Zero_doggy_cock_out"
+
+    subpixel True
     block:
         pause 0.4
         ease 1.7 yoffset 20
@@ -432,18 +503,18 @@ image Rogue_doggy_cock_footjob_animation1:
 
 image Rogue_doggy_cock_footjob_animation2:
     "Zero_doggy_cock_out"
+
+    subpixel True
     block:
         pause 0.07
         ease 0.6 yoffset 20
         ease 0.28 yoffset 0
         repeat
 
-layeredimage Rogue_doggy_cock_footjob_animations:
-    always:
-        "Rogue_doggy_cock_footjob_animation[action_speed]" pos (-0.005, 0.24) zoom 1.1
-
 image Rogue_doggy_finger_pussy_animation:
     "Zero_sex_finger"
+
+    subpixel True
     block:
         ease 1 offset (-3, -45)
         pause 1
@@ -452,10 +523,12 @@ image Rogue_doggy_finger_pussy_animation:
 
 layeredimage Rogue_doggy_finger_pussy_animations:
     always:
-        "Rogue_doggy_finger_pussy_animation" pos (0.1, 0.47)
+        "Rogue_doggy_finger_pussy_animation" pos (0.112, 0.625)
 
 image Rogue_doggy_finger_anal_animation:
     "Zero_sex_finger"
+
+    subpixel True
     block:
         ease 0.5 yoffset -20
         pause 0.25
@@ -464,31 +537,32 @@ image Rogue_doggy_finger_anal_animation:
 
 layeredimage Rogue_doggy_finger_anal_animations:
     always:
-        "Rogue_doggy_finger_anal_animation" pos (0.1, 0.47)
-
-
-
-
-
-
-
+        "Rogue_doggy_finger_anal_animation" pos (0.112, 0.57)
 
 image slap_ass:
-    contains:
-        "UI_Hand"
-        zoom 1
-        alpha 0.5
-        anchor (0.5,0.5)
-        pos (600,380)
-        rotate 40
-        block:
-            parallel:
-                ease 0.5 xpos 300 rotate 80
-                ease 0.1 xpos 310 rotate 80
-                pause 0.5
-            parallel:
-                ease 0.2 ypos 520
-                pause 0.9
+    "UI_Hand"
+
+    subpixel True
+    alpha 0.5
+    rotate 40
+    block:
+        parallel:
+            ease 0.5 xoffset -300 rotate 80
+            ease 0.1 xoffset -290 rotate 80
+            pause 0.5
+        parallel:
+            ease 0.2 yoffset 140
+            pause 0.9
+
+
+
+
+
+
+
+
+
+
 
 image Notslap_ass:
     contains:

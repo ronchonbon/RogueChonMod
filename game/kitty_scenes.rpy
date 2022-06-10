@@ -247,8 +247,6 @@ label meet_Kitty:
 
     $ round -= 10
 
-    $ bg_current = "bg_classroom"
-
     return
 
 
@@ -464,7 +462,7 @@ label Kitty_Love:
         ch_k "It's been[KittyX.like]kinda hard for me to really get invested in anyone. . ."
         $ KittyX.eyes = "_down"
         ch_k ". . . to[KittyX.like]be comfortable with who they are and be myself. . ."
-        $ KittyX.eyes = "_sly"
+        $ KittyX.eyes = "_squint"
         ch_k "I just feel like sometimes you. . ."
         $ KittyX.eyes = "_side"
         ch_k "and me[KittyX.like] . ."
@@ -480,7 +478,7 @@ label Kitty_Love:
         ch_k ". . . but I was kind of thinking-"
     elif KittyX.event_happened[6] >= 5:
         ch_k "Um. . ."
-        $ KittyX.eyes = "_sly"
+        $ KittyX.eyes = "_squint"
         ch_k "You know, it's time to stop running. I think I love you."
         $ KittyX.eyes = "_side"
         ch_k "You don't have to say it back, but I do."
@@ -1072,14 +1070,14 @@ label Kitty_Sub_Asked:
         $ KittyX.change_stat("obedience", 200, 50)
         $ KittyX.player_petnames.append("master")
         $ KittyX.player_petname = "master"
-        $ KittyX.eyes = "_sly"
+        $ KittyX.eyes = "_squint"
         ch_k ". . . master. . ."
     else:
 
         $ KittyX.change_stat("obedience", 200, 30)
         $ KittyX.player_petnames.append("sir")
         $ KittyX.player_petname = "sir"
-        $ KittyX.eyes = "_sly"
+        $ KittyX.eyes = "_squint"
         ch_k ". . . sir."
     return
 
@@ -1892,7 +1890,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
 
     menu:
         "Hey [KittyX.name], why don't you snag [Girl.name]'s. . ."
-        ". . . [Girl.outfit['top']]?" if Girl.outfit["top"]:
+        ". . . [Girl.outfit[top]]?" if Girl.outfit["top"]:
             if Girl.outfit["bra"]:
 
                 $ Shy = 2
@@ -1916,7 +1914,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 else:
                     $ line = "noway"
 
-        ". . . [Girl.outfit['bra']]?" if Girl.outfit["bra"]:
+        ". . . [Girl.outfit[bra]]?" if Girl.outfit["bra"]:
             if Girl.outfit["top"]:
 
                 $ Shy = 1
@@ -1940,7 +1938,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 else:
                     $ line = "noway"
 
-        ". . . [Girl.outfit['bottom']]?" if Girl.outfit["bottom"]:
+        ". . . [Girl.outfit[bottom]]?" if Girl.outfit["bottom"]:
             if Girl.outfit["underwear"] or Girl.outfit["hose"] == "_tights":
 
                 $ Shy = 2
@@ -1964,7 +1962,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 else:
                     $ line = "noway"
 
-        ". . . [Girl.outfit['underwear']]?" if Girl.outfit["underwear"]:
+        ". . . [Girl.outfit[underwear]]?" if Girl.outfit["underwear"]:
             if Girl.outfit["bottom"] or Girl.outfit["hose"] == "_tights":
 
                 $ Shy = 1
@@ -1988,7 +1986,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 else:
                     $ line = "noway"
 
-        ". . . [Girl.outfit['hose']]?" if Girl.outfit["hose"]:
+        ". . . [Girl.outfit[hose]]?" if Girl.outfit["hose"]:
             if Girl.outfit["bottom"]:
 
                 $ Shy = 1
@@ -2057,7 +2055,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
         $ Girl.outfit["bra"] = ""
         call expression Girl.tag + "_First_Topless" pass (1)
         if Girl.outfit["top"]:
-            "She reaches through [Girl.name]'s [Girl.outfit['top']] and snags her [line]."
+            "She reaches through [Girl.name]'s [Girl.outfit[top]] and snags her [line]."
         else:
             "She reaches out and snags [Girl.name]'s [line], tugging it free."
 
@@ -2072,9 +2070,9 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
         $ Girl.outfit["underwear"] = ""
         call expression Girl.tag + "_First_Bottomless" pass (1)
         if Girl.outfit["bottom"]:
-            "She reaches down through [Girl.name]'s [Girl.outfit['bottom']] and snags her [line]."
+            "She reaches down through [Girl.name]'s [Girl.outfit[bottom]] and snags her [line]."
         elif Girl.outfit["hose"]:
-            "She reaches down through [Girl.name]'s [Girl.outfit['hose']] and snags her [line]."
+            "She reaches down through [Girl.name]'s [Girl.outfit[hose]] and snags her [line]."
         else:
             "She reaches out and snags [Girl.name]'s [line], tugging them free."
     elif line == "hose":
@@ -2082,7 +2080,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
         $ Girl.outfit["hose"] = ""
         call expression Girl.tag + "_First_Bottomless" pass (1)
         if Girl.outfit["bottom"]:
-            "She reaches down through [Girl.name]'s [Girl.outfit['bottom']] and snags her [line]."
+            "She reaches down through [Girl.name]'s [Girl.outfit[bottom]] and snags her [line]."
         else:
             "She reaches out and snags [Girl.name]'s [line], tugging them free."
 

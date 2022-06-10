@@ -363,7 +363,7 @@ label Emma_Caught_Classroom:
 
     hide black_screen onlayer black
 
-    $ girl_offhand_action = "fondle_pussy"
+    $ girl_secondary_action = "fondle_pussy"
     $ second_girl_secondary_action = "fondle_breasts"
 
     $ EmmaX.recent_history.append("classcaught")
@@ -692,7 +692,7 @@ label Emma_Caught_Classroom:
         $ EmmaX.names.append("Emma")
         $ EmmaX.location = "bg_emma"
 
-        hide Emma_sprite with easeoutleft
+        hide Emma_sprite with easeoutright
 
         $ round = 20 if round > 20 else round
 
@@ -2054,14 +2054,14 @@ label Emma_Sub_Asked:
         $ EmmaX.change_stat("obedience", 200, 50)
         $ EmmaX.player_petnames.append("master")
         $ EmmaX.player_petname = "master"
-        $ EmmaX.eyes = "_sly"
+        $ EmmaX.eyes = "_squint"
         ch_e ". . . master. . ."
     else:
 
         $ EmmaX.change_stat("obedience", 200, 30)
         $ EmmaX.player_petnames.append("sir")
         $ EmmaX.player_petname = "sir"
-        $ EmmaX.eyes = "_sly"
+        $ EmmaX.eyes = "_squint"
         ch_e ". . . sir."
     return
 

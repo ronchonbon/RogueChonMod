@@ -785,9 +785,9 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
         $ Resolution += 1
     $ B = int((Girl.likes[Other.tag] - 500)/2)
 
-    $ Resolution -= Girl.Cheated if Girl.Cheated <= 3 else 3
+    $ Resolution -= Girl.cheated_on if Girl.cheated_on <= 3 else 3
 
-    if Girl.Cheated:
+    if Girl.cheated_on:
         $ Girl.change_stat("love", 200, -50)
         $ Girl.change_stat("obedience", 80, -20)
         $ Girl.change_stat("inhibition", 50, -50)

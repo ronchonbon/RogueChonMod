@@ -171,6 +171,8 @@ transform dripping(x_offset = 0, start = 0, transparency = 1.0):
 
 image grool_dripping_animation:
     "images/Wetdrop.png"
+
+    subpixel True
     anchor (0.5, 0.5) alpha 0.0
     block:
         choice:
@@ -194,6 +196,8 @@ image grool_dripping_animation:
 
 image spunk_dripping_animation:
     "images/SpermdropB.png"
+
+    subpixel True
     anchor (0.5, 0.5) alpha 0.0
     block:
         choice:
@@ -216,6 +220,7 @@ image spunk_dripping_animation:
         repeat
 
 image licking:
+    subpixel True
     anchor (0.5, 0.5)
     parallel:
         "images/Lick1.png"
@@ -240,57 +245,66 @@ image licking:
         easein 0.8 yoffset 0
         repeat
 
-image Rogue_dildo_pussy_animation:
+image dildo:
     "images/DildoIn.png"
+
     anchor (0.5, 0.5)
+
+image Rogue_dildo_pussy_animation:
+    "dildo"
+
+    subpixel True
     block:
-        ease 1 yoffset -110
+        ease 1 yoffset -60
         pause 1
         ease 3 yoffset 0
         repeat
 
 layeredimage Rogue_dildo_pussy_animations:
     always:
-        "Rogue_dildo_pussy_animation" pos (0.29175, 0.65) zoom 1.3
+        "Rogue_dildo_pussy_animation" pos (0.2923, 0.595) zoom 1.22
 
 image Rogue_dildo_anal_animation:
-    "images/DildoIn.png"
-    anchor (0.5, 0.5)
+    "dildo"
+
+    subpixel True
     block:
-        ease 1 yoffset -120
+        ease 1 yoffset -60
         pause 1
         ease 3 yoffset 0
         repeat
 
 layeredimage Rogue_dildo_anal_animations:
     always:
-        "Rogue_dildo_anal_animation" pos (0.293, 0.7) zoom 1.3
+        "Rogue_dildo_anal_animation" pos (0.2925, 0.64)
 
 image Rogue_doggy_dildo_pussy_animation:
-    "images/DildoIn.png"
-    anchor (0.5, 0.5)
+    "dildo"
+
+    subpixel True
     block:
-        ease 0.5 yoffset -60
-        pause 0.25
-        ease 1.75 yoffset 0
+        ease 1 xoffset -3 yoffset -45
+        pause 1
+        ease 3 xoffset 0 yoffset 0
         repeat
 
 layeredimage Rogue_doggy_dildo_pussy_animations:
     always:
-        "Rogue_doggy_dildo_pussy_animation" pos (0.112, 0.65)
+        "Rogue_doggy_dildo_pussy_animation" pos (0.1117, 0.62)
 
 image Rogue_doggy_dildo_anal_animation:
-    "images/DildoIn.png"
-    anchor (0.5, 0.5)
+    "dildo"
+
+    subpixel True
     block:
         ease 0.5 yoffset -65
         pause 0.25
-        ease 1.75 yoffset 0
+        ease 1.75 yoffset 5
         repeat
 
 layeredimage Rogue_doggy_dildo_anal_animations:
     always:
-        "Rogue_doggy_dildo_anal_animation" pos (0.112, 0.55)
+        "Rogue_doggy_dildo_anal_animation" pos (0.112, 0.58)
 
 
 
@@ -636,7 +650,7 @@ image Chibi_Handy:
         xzoom 1
     contains:
         ConditionSwitch(
-            "(Partner == StormX and second_girl_main_action == 'hand') or (focused_Girl == StormX and girl_offhand_action == 'hand')", "images/Chibi_Hand_S.png",
+            "(Partner == StormX and second_girl_main_action == 'hand') or (focused_Girl == StormX and girl_secondary_action == 'hand')", "images/Chibi_Hand_S.png",
             "True", "images/Chibi_Hand_G.png"
             )
 
@@ -721,7 +735,7 @@ image Chibi_UI:
         ConditionSwitch(
             "'cockout' not in Player.recent_history", Null(),
             "Player.secondary_action == 'jerking_off'", "Chibi_jerking_off",
-            "girl_offhand_action == 'hand' or second_girl_main_action == 'hand'", "Chibi_Handy",
+            "girl_secondary_action == 'hand' or second_girl_main_action == 'hand'", "Chibi_Handy",
             "second_girl_main_action == 'blow'", "Chibi_Sucking",
             "True", "Chibi_Null",
             )

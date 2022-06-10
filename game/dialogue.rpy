@@ -4374,72 +4374,120 @@ label first_action_approval_addicted_lines(Girl, action):
 label action_forcefully_approved_lines(Girl, action):
     if Girl == RogueX:
         $ lines = ["That's really what you want?",
-            "That's it?",
             "This isn't going to become a habit, will it?",
-            "You want me to do that again?",
-            "The toys again?",
-            "So you just want to watch then?",
-            "You want to watch me again?",
-            "That's all you want?"]
+            "You want me to do that again?"]
+
+        if action in dildo_actions:
+            $ lines.append("The toys again?")
+
+        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+            $ lines.append("That's it?",
+                "That's all you want?")
+
+        if action == "masturbation":
+            $ lines.append("So you just want to watch then?",
+                "You want to watch me again?")
     elif Girl == KittyX:
-        $ lines = ["That's it, right?",
-            "This isn't going to become a habit, will it?",
-            "You want me to do that again?",
-            "The toys again?",
-            "That's all?",
-            "So you {i}just{/i} want to watch. . .",
+        $ lines = ["This isn't going to become a habit, will it?",
             "Again? Why do you do this to me?",
-            "Again? Just looking?",
-            "You really ask a lot here. . .",
-            "That's {i}all{/i} you want?"]
+            "You really ask a lot here. . ."]
+
+        if action in job_actions:
+            $ lines.append("You want me to do that again?")
+
+        if action in dildo_actions:
+            $ lines.append("The toys again?")
+
+        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+            $ lines.append("That's it, right?",
+                "That's all?",
+                "That's {i}all{/i} you want?")
+
+        if action == "masturbation":
+            $ lines.append("So you {i}just{/i} want to watch. . .",
+                "Again? Just looking?",)
     elif Girl == EmmaX:
-        $ lines = ["No more than that?",
-            "You aren't getting used to this service, are you?",
-            "Ugh, that again?",
-            "The toys again?",
-            "But. . . {i}only{/i} a show?",
-            "That's it?",
-            "Again? Just you only want to watch?",
+        $ lines = ["Ugh, that again?",
             "Again? You're really wearing out your welcome.",
             "You don't hold back. . .",
             "Maybe that's going a bit too far. . ."]
+
+        if action in job_actions:
+            $ lines.append("You aren't getting used to this service, are you?")
+
+        if action in dildo_actions:
+            $ lines.append("The toys again?")
+
+        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+            $ lines.append("No more than that?",
+                "That's it?")
+
+        if action == "masturbation":
+            $ lines.append("But. . . {i}only{/i} a show?",
+                "Again? Just you only want to watch?")
     elif Girl == LauraX:
-        $ lines = ["Nothing more than that?",
-            "You're kinda pushing it.",
+        $ lines = ["You're kinda pushing it.",
             "Again?",
-            "The toys again?",
-            "That's it?",
-            "And you {i}just{/i} want to watch. . .",
             "I hope I don't wear you out.",
             "Hmm, again?",
             "You don't hold back. . .",
             "That's pushing it. . ."]
+
+        if action in dildo_actions:
+            $ lines.append("The toys again?")
+
+        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+            $ lines.append("Nothing more than that?",
+                "That's it?")
+
+        if action == "masturbation":
+            $ lines.append("And you {i}just{/i} want to watch. . .")
     elif Girl == JeanX:
-        $ lines = ["And that's it?",
-            "Well that's a big ask. . .",
+        $ lines = ["Well that's a big ask. . .",
             "Again?",
-            "The toys again?",
             "Hmm, again?",
-            "That's it?",
-            "But -just- watch, right? . .",
             "You'll pay for this eventually. . .",
-            "Well you're optimistic. . .",
-            "Odd. . ."]
+            "Well you're optimistic. . ."]
+
+        if action in dildo_actions:
+            $ lines.append("The toys again?")
+
+        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+            $ lines.append("And that's it?",
+                "That's it?")
+
+        if action in ["footjob", "hotdog"]:
+            $ lines.append("Odd. . .")
+
+        if action == "masturbation":
+            $ lines.append("But -just- watch, right? . .")
     elif Girl == StormX:
-        $ lines = ["Nothing more than that?",
-            "You enjoy making use of these?",
-            "Tsk, again?",
-            "The toys again?",
-            "That is all you want?",
-            "And that is -all- that you expect?",
-            "You only like to watch?",
+        $ lines = ["Tsk, again?",
             "Oh, again?",
             "You do not restrain yourself. . .",
             "Perhaps that is going a bit too far. . ."]
+
+        if action in dildo_actions:
+            $ lines.append("The toys again?")
+
+        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+            $ lines.append("Nothing more than that?",
+                "That is all you want?",
+                "And that is -all- that you expect?")
+
+        if action in ["footjob", "titjob"]:
+            $ lines.append("You enjoy making use of these?")
+
+        if action == "masturbation":
+            $ lines.append("You only like to watch?")
     elif Girl == JubesX:
-        $ lines = ["Nothing more than that?",
-            "Nothing more than watching? . .",
-            "Hmm, again?"]
+        $ lines = ["Hmm, again?"]
+
+        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+            $ lines.append("Nothing more than that?")
+
+        if action == "masturbation":
+            $ lines.append("Nothing more than watching? . .")
 
     $ line = renpy.random.choice(lines)
 
@@ -4605,58 +4653,120 @@ label switching_action_lines(Girl, action):
 
 label before_action_less_than_three_times_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["So you'd like another handy?",
-            "Again?",
-            "So you'd like another titjob?",
-            "So you'd like another blowjob?",
-            "You like to watch, huh?",
-            "You want to stick it in my pussy again?",
-            "You want to stick it in my ass again?",
+        $ lines = ["Again?",
             "So you'd like another go?"]
+
+        if action == "handjob":
+            $ lines.append("So you'd like another handy?")
+
+        if action == "titjob":
+            $ lines.append("So you'd like another titjob?")
+
+        if action == "blowjob":
+            $ lines.append("So you'd like another blowjob?")
+
+        if action == "masturbation":
+            $ lines.append("You like to watch, huh?")
+
+        if action in ["dildo_pussy", "sex"]:
+            $ lines.append("You want to stick it in my pussy again?")
+
+        if action in ["dildo_ass", "anal"]:
+            $ lines.append("You want to stick it in my ass again?")
     elif Girl == KittyX:
-        $ lines = ["Hmm, magic fingers. . .",
-            "So you'd like another titjob?",
-            "So you'd like another blowjob?",
-            "You want to stick it in my pussy again?",
-            "You want to stick it in my ass again?",
-            "Did you. . . like it last time?",
-            "Hmm, magic toes. . .",
+        $ lines = ["Did you. . . like it last time?",
             "So you'd like another round?"]
+
+        if action == "handjob":
+            $ lines.append("Hmm, magic fingers. . .")
+
+        if action == "footjob":
+            $ lines.append("Hmm, magic toes. . .")
+
+        if action == "titjob":
+            $ lines.append("So you'd like another titjob?")
+
+        if action == "blowjob":
+            $ lines.append("So you'd like another blowjob?")
+
+        if action in ["dildo_pussy", "sex"]:
+            $ lines.append("You want to stick it in my pussy again?")
+
+        if action in ["dildo_ass", "anal"]:
+            $ lines.append("You want to stick it in my ass again?")
     elif Girl == EmmaX:
         $ lines = ["Enjoyed last time?. . .",
-            "Hmm, another titjob?",
-            "Another blowjob?",
-            "You want to stick it in my pussy again?",
-            "You want to stick it in my ass again?",
-            "You enjoyed the show?",
             "Oh, very well. . .",
             "Oh? Another round?"]
+
+        if action == "titjob":
+            $ lines.append("Hmm, another titjob?")
+
+        if action == "blowjob":
+            $ lines.append("Another blowjob?")
+
+        if action == "masturbation":
+            $ lines.append("You enjoyed the show?")
+
+        if action in ["dildo_pussy", "sex"]:
+            $ lines.append("You want to stick it in my pussy again?")
+
+        if action in ["dildo_ass", "anal"]:
+            $ lines.append("You want to stick it in my ass again?")
     elif Girl == LauraX:
         $ lines = ["You seem to like this one. . .",
-            "Another titjob??",
-            "You'd like another blowjob?",
-            "You want to stick it in my pussy again?",
-            "You want to stick it in my ass again?",
-            "Hmm, magic toes. . .",
             "Did you. . . like it last time?",
             "Oh? Another round?"]
+
+        if action == "footjob":
+            $ lines.append("Hmm, magic toes. . .")
+
+        if action == "titjob":
+            $ lines.append("Another titjob??")
+
+        if action == "blowjob":
+            $ lines.append("You'd like another blowjob?")
+
+        if action in ["dildo_pussy", "sex"]:
+            $ lines.append("You want to stick it in my pussy again?")
+
+        if action in ["dildo_ass", "anal"]:
+            $ lines.append("You want to stick it in my ass again?")
     elif Girl == JeanX:
-        $ lines = ["I guess you're getting used to these. . .",
-            "Again with the tits, uh?",
-            "You'd like another blowjob?",
-            "You want to stick it in my pussy again?",
-            "You enjoyed that, huh.",
+        $ lines = ["You enjoyed that, huh.",
             "Hmm, it is kinda fun. . .",
             "Oh? Another round?"]
+
+        if action == job_actions:
+            $ lines.append("I guess you're getting used to these. . .")
+
+        if action == "titjob":
+            $ lines.append("Again with the tits, uh?")
+
+        if action == "blowjob":
+            $ lines.append("You'd like another blowjob?")
+
+        if action in ["dildo_pussy", "sex"]:
+            $ lines.append("You want to stick it in my pussy again?")
     elif Girl == StormX:
         $ lines = ["You enjoyed it last time?. . .",
-            "Hmm, another titjob?",
-            "Another blowjob?",
-            "You want to stick it in my pussy again?",
-            "You want to stick it in my ass again?",
-            "You enjoyed the show?",
             "Oh, very well. . .",
             "Oh? Another round?"]
+
+        if action == "titjob":
+            $ lines.append("Hmm, another titjob?")
+
+        if action == "blowjob":
+            $ lines.append("Another blowjob?")
+
+        if action == "masturbation":
+            $ lines.append("You enjoyed the show?")
+
+        if action in ["dildo_pussy", "sex"]:
+            $ lines.append("You want to stick it in my pussy again?")
+
+        if action in ["dildo_ass", "anal"]:
+            $ lines.append("You want to stick it in my ass again?")
     elif Girl == JubesX:
         $ lines = ["You seem to like this one. . .",
             "Was last time fun?"]
@@ -4882,38 +4992,76 @@ label first_time_asking_lines(Girl, action):
 label first_time_forcing_lines(Girl, action):
     if Girl == RogueX:
         $ lines = ["I suppose there are worst things you could ask for.",
-            "You had to go for the butt, uh?",
-            "You'd really take it that far?",
-            "Seriously?",
-            ". . . That's all?"]
+            "Seriously?"]
+
+        if action in anal_insertion_actions:
+            $ lines.append("You had to go for the butt, uh?")
+
+        if action in ["sex", "anal"]:
+            $ lines.append("You'd really take it that far?")
+
+        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+            $ lines.append(". . . That's all?")
     elif Girl == KittyX:
-        $ lines = ["You'd really do this when you have me over a barrel?",
-            "Anal? Really?",
-            ". . . That's it?",
-            "I suppose there are worst things you could ask for.",
-            "Always about the butt, huh?"]
+        $ lines = ["I suppose there are worst things you could ask for."]
+
+        if action in ass_actions:
+            $ lines.append("Always about the butt, huh?")
+
+        if action in ["sex", "anal"]:
+            $ lines.append("You'd really do this when you have me over a barrel?")
+
+        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+            $ lines.append(". . . That's it?")
+
+        if action == "anal":
+            $ lines.append("Anal? Really?")
     elif Girl == EmmaX:
-        $ lines = ["Are you sure this is how you'd like to use your.",
-            "Anal? That's your goto?",
-            ". . . nothing more than that?",
-            "I suppose there are worst things you could ask for.",
-            "They always go for the butt. . ."]
+        $ lines = ["I suppose there are worst things you could ask for."]
+
+        if action in ass_actions:
+            $ lines.append("They always go for the butt. . .")
+
+        if action in ["sex", "anal"]:
+            $ lines.append("Are you sure this is how you'd like to use your power?")
+
+        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+            $ lines.append(". . . nothing more than that?")
+
+        if action == "anal":
+            $ lines.append("Anal? That's your goto?")
     elif Girl == LauraX:
-        $ lines = ["Anal? That's what you're pushing for?",
-            ". . . nothing more?",
-            "I suppose there are worst things you could ask for.",
-            "Always about the butt, huh?"]
+        $ lines = ["I suppose there are worst things you could ask for."]
+
+        if action in ass_actions:
+            $ lines.append("Always about the butt, huh?")
+
+        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+            $ lines.append(". . . nothing more?")
+
+        if action == "anal":
+            $ lines.append("Anal? That's what you're pushing for?")
     elif Girl == JeanX:
-        $ lines = ["Pretty bold of you. . .",
-            "That's the card you're going to play?",
-            ". . . nothing more?{p}Which of us has a pussy here?",
+        $ lines = ["That's the card you're going to play?",
             "I suppose there are worst things you could ask for."]
+
+        if action in ["sex", "anal"]:
+            $ lines.append("Pretty bold of you. . .")
+
+        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+            $ lines.append(". . . nothing more?{p}Which of us has a pussy here?")
     elif Girl == StormX:
         $ lines = ["This is what you would have me do?",
-            "Oh. Of course it would be anal.",
-            ". . . and no more than that?",
-            "I suppose there are worst things you could ask for.",
-            "They always go for the butt. . ."]
+            "I suppose there are worst things you could ask for."]
+
+        if action in ass_actions:
+            $ lines.append("They always go for the butt. . .")
+
+        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+            $ lines.append(". . . and no more than that?")
+
+        if action == "anal":
+            $ lines.append("Oh. Of course it would be anal.")
 
     $ line = renpy.random.choice(lines)
 
@@ -4957,7 +5105,6 @@ label achievement_lines(Girl, action):
         $ lines = ["I guess you can call me \"Handi-Queen\".",
             "I guess I've gotten used to this foot thing.",
             "I'm really starting to enjoy this.",
-            "I think I'm getting addicted to this.",
             "I think I'm getting addicted to this.",
             "I. . . really think I enjoy this. . ."]
     elif Girl == KittyX:

@@ -929,7 +929,7 @@ label Storm_Chitchat(O=0, Options=["default","default","default"]):
             call Storm_Hungry
             return
 
-        if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not taboo or approval_check(StormX, 800, "I")):
+        if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(StormX, 800, "I")):
             if StormX.location == bg_current and StormX.thirst >= 30 and "refused" not in StormX.daily_history and "quicksex" not in StormX.daily_history:
                 $ StormX.change_face("_sly",1)
                 ch_s "I was wondering if you wanted to. . ."
@@ -2598,7 +2598,7 @@ label Storm_wardrobe_menu:
                     return
             $ StormX.outfit["jacket"] = "_jacket"
 
-        "Maybe just throw on a towel?" if StormX.outfit["top"] != "_towel":
+        "Maybe just throw on a towel?" if StormX.outfit["face_outer_accessory"] != "_towel":
             $ StormX.change_face("_bemused", 1)
             if StormX.bra_number() >= 5:
                 ch_s "If that's what you want. . ."
@@ -2610,7 +2610,7 @@ label Storm_wardrobe_menu:
                 if not _return:
                     ch_s "I'm afraid I couldn't."
                     return
-            $ StormX.outfit["top"] = "_towel"
+            $ StormX.outfit["face_outer_accessory"] = "_towel"
         "Never mind":
 
             pass

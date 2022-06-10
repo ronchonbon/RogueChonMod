@@ -869,7 +869,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
             $ Girl.change_stat("inhibition", 50, -10)
             $ Player.primary_action = None
             if Girl not in Rules:
-                call Girls_Caught (Girl)
+                call caught_having_sex(Girl)
             else:
                 "Since Xavier isn't concerned with your activities, you both head back to your room instead."
                 $ Girl.location = "bg_player"

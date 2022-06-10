@@ -28,7 +28,7 @@ layeredimage Zero_blowjob_cock:
         "images/Player/Zero_blowjob_cock_[Player.color].png"
 
     if Player.cock_wet:
-        "images/Player/Zero_blowjob_spit_cock.png"
+        "images/Player/Zero_blowjob_wet_cock.png"
 
     if Player.spunk:
         "images/Player/Zero_blowjob_spunk_cock.png"
@@ -45,7 +45,7 @@ layeredimage Zero_doggy_cock_out:
         "images/Player/Zero_doggy_cock_[Player.color].png"
 
     if Player.cock_wet:
-        "images/Player/Zero_doggy_grool_cock.png"
+        "images/Player/Zero_doggy_wet_cock.png"
 
     anchor (0.5, 0.5)
 
@@ -54,7 +54,7 @@ layeredimage Zero_doggy_cock_in:
         "images/Player/Zero_doggy_cock_[Player.color]_in.png"
 
     if Player.cock_wet:
-        "images/Player/Zero_doggy_grool_cock_in.png"
+        "images/Player/Zero_doggy_wet_cock_in.png"
 
     if Player.spunk:
         "images/Player/Zero_doggy_spunk_cock_in.png"

@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/kitty_sprites.rpy", line 83: reached end of line when expecting ':'.
-    elif
-        ^
+File "game/player_animations.rpy", line 20: ATL statement contains two expressions in a row; is one of them a misspelled property? If not, separate them with pass.
+    repeatimage Rogue_handjob_cock_animation0:
+                                             ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Sun Jun  5 22:32:43 2022
+Fri Jun 10 16:01:35 2022

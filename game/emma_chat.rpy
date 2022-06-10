@@ -1052,7 +1052,7 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
         if "hungry" not in EmmaX.traits and (EmmaX.event_counter["swallowed"] + EmmaX.had_chat[2]) >= 10 and EmmaX.location == bg_current:
             call Emma_Hungry
             return
-        if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not taboo or approval_check(EmmaX, 800, "I")):
+        if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(EmmaX, 800, "I")):
             if EmmaX.location == bg_current and EmmaX.thirst >= 30 and "refused" not in EmmaX.daily_history and "quicksex" not in EmmaX.daily_history:
                 $ Girl.change_face("_sly",1,eyes="_down")
                 ch_e "I've got an itch. . . "
