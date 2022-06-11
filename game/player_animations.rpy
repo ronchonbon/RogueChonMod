@@ -127,29 +127,60 @@ image Zero_doggy_fondle_breast_animation:
         ease 1 rotate 0
         repeat
 
-image Rogue_handjob_cock_animation0:
+image Zero_handjob_cock_animation0:
     "Zero_handjob_cock"
 
-image Rogue_handjob_cock_animation1:
+image Zero_handjob_cock_animation1:
     "Zero_handjob_cock"
 
     subpixel True
     block:
-        ease 0.5 rotate -2
+        ease 0.75 rotate -2
         pause 0.25
         ease 1.0 rotate 0
         pause 0.1
         repeat
 
-image Rogue_handjob_cock_animation2:
+image Zero_handjob_cock_animation2:
     "Zero_handjob_cock"
 
     subpixel True
     block:
-        ease 0.2 rotate -3
+        ease 0.4 rotate -3
         ease 0.5 rotate 0
         pause 0.1
         repeat
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 image Rogue_titjob_cock_animation0:
     "Zero_handjob_cock"
@@ -538,6 +569,361 @@ image Rogue_doggy_finger_anal_animation:
 layeredimage Rogue_doggy_finger_anal_animations:
     always:
         "Rogue_doggy_finger_anal_animation" pos (0.112, 0.57)
+
+image Kitty_sex_cock_anal_animation0:
+    "Zero_doggy_cock_in"
+
+image Kitty_sex_cock_animation1:
+    "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (0, -5)
+    block:
+        ease 1 yoffset -20
+        pause 1
+        ease 3 yoffset -5
+        repeat
+
+image Kitty_sex_cock_animation2:
+    "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (0.75, -40)
+    block:
+        ease 1 offset (1, -110)
+        pause 1
+        ease 3 offset (0.75, -40)
+        repeat
+
+image Kitty_sex_cock_animation3:
+    "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (0.75, -40)
+    block:
+        ease 0.25 offset (1, -110)
+        pause 0.25
+        ease 1.5 offset (0.75, -40)
+        repeat
+
+layeredimage Kitty_sex_cock_animations:
+    always:
+        "Kitty_sex_cock_animation[action_speed]" pos (0.29175, 0.637) zoom 1.25
+
+image Kitty_sex_cock_anal_animation0:
+    "Zero_doggy_cock_in"
+
+image Kitty_sex_cock_anal_animation1:
+    "Zero_doggy_cock_in"
+
+    subpixel True
+    block:
+        ease 1 yoffset -30
+        pause 1
+        ease 3 yoffset 0
+        repeat
+
+image Kitty_sex_cock_anal_animation2:
+    "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (0, -40)
+    block:
+        ease 1 yoffset -120
+        pause 1
+        ease 3 yoffset -40
+        repeat
+
+image Kitty_sex_cock_anal_animation3:
+    "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (0, -40)
+    block:
+        ease 0.25 yoffset -120
+        pause 0.25
+        ease 1.5 yoffset -40
+        repeat
+
+layeredimage Kitty_sex_cock_anal_animations:
+    always:
+        "Kitty_sex_cock_anal_animation[action_speed]" pos (0.293, 0.71) zoom 1.25
+
+image Kitty_sex_cock_footjob_animation0:
+    "Zero_blowjob_cock"
+
+image Kitty_sex_cock_footjob_animation1:
+    "Zero_blowjob_cock"
+
+    subpixel True
+    block:
+        pause 0.5
+        easein 0.75 yoffset 65
+        ease 0.25 yoffset 60
+        pause 1
+        ease 2.50 yoffset -25
+        repeat
+
+image Kitty_sex_cock_footjob_animation2:
+    "Zero_blowjob_cock"
+
+    subpixel True
+    block:
+        pause 0.2
+        easein 0.4 yoffset 65
+        ease 0.2 yoffset 60
+        pause 0.2
+        ease 1.0 yoffset -25
+        repeat
+
+image Kitty_sex_cock_hotdog_animation0:
+    "Zero_doggy_cock_in"
+
+image Kitty_sex_cock_hotdog_animation1:
+    "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (0, -70)
+    block:
+        ease 1 yoffset -10
+        pause 0.5
+        ease 1.5 yoffset -70
+        repeat
+
+image Kitty_sex_cock_hotdog_animation2:
+    "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (0, -60)
+    block:
+        ease 0.5 yoffset -120
+        pause 0.5
+        ease 1 yoffset -60
+        repeat
+
+image Kitty_sex_cock_hotdog_animation3:
+    "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (0, -60)
+    block:
+        ease 0.5 yoffset -120
+        pause 0.5
+        ease 1 yoffset -60
+        repeat
+
+image Kitty_sex_finger_pussy_animation:
+    "Zero_sex_finger"
+
+    subpixel True
+    zoom 1.2
+    block:
+        ease 0.2 yoffset -40
+        pause 0.2
+        ease 0.6 yoffset 0
+        repeat
+
+layeredimage Kitty_sex_finger_pussy_animations:
+    always:
+        "Kitty_sex_finger_pussy_animation" pos (0.2918, 0.615) zoom 0.9
+
+image Kitty_sex_finger_ass_animation:
+    "Zero_sex_finger"
+
+    subpixel True
+    zoom 1.2
+    block:
+        ease 0.4 yoffset -40
+        pause 0.4
+        ease 1.2 yoffset 0
+        repeat
+
+layeredimage Kitty_sex_finger_ass_animations:
+    always:
+        "Kitty_sex_finger_ass_animation" pos (0.2923, 0.687) zoom 0.9
+
+image Kitty_doggy_cock_animation0:
+    "Zero_doggy_cock_in"
+
+    subpixel True
+    block:
+        ease 1 yoffset -5
+        pause 1
+        ease 3 yoffset 0
+        repeat
+
+image Kitty_doggy_cock_animation1:
+    "Zero_doggy_cock_in"
+
+    subpixel True
+    block:
+        ease 1 xoffset -3 yoffset -45
+        pause 1
+        ease 3 xoffset 0 yoffset -5
+        repeat
+
+image Kitty_doggy_cock_animation2:
+    "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (-3, -45)
+    block:
+        ease 0.5 offset (-3, -105)
+        pause 0.25
+        ease 1.75 offset (-3, -45)
+        repeat
+
+image Kitty_doggy_cock_animation3:
+    "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (-3, -45)
+    block:
+        ease 0.2 offset (-3, -105)
+        pause 0.1
+        ease 0.6 offset (-3, -45)
+        repeat
+
+layeredimage Kitty_doggy_cock_animations:
+    always:
+        "Kitty_doggy_cock_animation[action_speed]" pos (0.112, 0.62)
+
+image Kitty_doggy_cock_anal_animation0:
+    "Zero_doggy_cock_in"
+
+image Kitty_doggy_cock_anal_animation1:
+    "Zero_doggy_cock_in"
+
+    subpixel True
+    block:
+        ease 0.5 yoffset -50
+        pause 0.25
+        ease 1.75 yoffset 0
+        repeat
+
+image Kitty_doggy_cock_anal_animation2:
+    "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (-2, -35)
+    block:
+        ease 0.5 offset (-2, -105)
+        pause 0.25
+        ease 1.75 offset (-2, -40)
+        repeat
+
+image Kitty_doggy_cock_anal_animation3:
+    "Zero_doggy_cock_in"
+
+    subpixel True
+    offset (-2, -35)
+    block:
+        ease 0.2 offset (-2, -105)
+        pause 0.1
+        ease 0.6 offset (-2, -35)
+        repeat
+
+layeredimage Kitty_doggy_cock_anal_animations:
+    always:
+        "Kitty_doggy_cock_anal_animation[action_speed]" pos (0.1125, 0.58)
+
+image Kitty_doggy_cock_hotdog_animation0:
+    "Zero_doggy_cock_out"
+
+image Kitty_doggy_cock_hotdog_animation1:
+    "Zero_doggy_cock_out"
+
+    subpixel True
+    block:
+        ease 1 yoffset -75
+        ease 1 yoffset 15
+        repeat
+
+image Kitty_doggy_cock_hotdog_animation2:
+    "Zero_doggy_cock_out"
+
+    subpixel True
+    block:
+        ease 1 yoffset -75
+        ease 1 yoffset 15
+        repeat
+
+image Kitty_doggy_cock_hotdog_animation3:
+    "Zero_doggy_cock_out"
+
+    subpixel True
+    block:
+        ease 1 yoffset -75
+        ease 1 yoffset 15
+        repeat
+
+layeredimage Kitty_doggy_cock_hotdog_animations:
+    always:
+        "Kitty_doggy_cock_hotdog_animation[action_speed]" pos (0.1135, 0.52)
+
+image Kitty_doggy_cock_footjob_animation0:
+    "Zero_doggy_cock_out"
+
+image Kitty_doggy_cock_footjob_animation1:
+    "Zero_doggy_cock_out"
+
+    subpixel True
+    block:
+        pause 0.4
+        ease 1.7 yoffset 20
+        ease 0.9 yoffset 0
+        repeat
+
+image Kitty_doggy_cock_footjob_animation2:
+    "Zero_doggy_cock_out"
+
+    subpixel True
+    block:
+        pause 0.07
+        ease 0.6 yoffset 20
+        ease 0.28 yoffset 0
+        repeat
+
+image Kitty_doggy_finger_pussy_animation:
+    "Zero_sex_finger"
+
+    subpixel True
+    block:
+        ease 1 offset (-3, -45)
+        pause 1
+        ease 3 offset (0, 0)
+        repeat
+
+layeredimage Kitty_doggy_finger_pussy_animations:
+    always:
+        "Kitty_doggy_finger_pussy_animation" pos (0.112, 0.625)
+
+image Kitty_doggy_finger_anal_animation:
+    "Zero_sex_finger"
+
+    subpixel True
+    block:
+        ease 0.5 yoffset -20
+        pause 0.25
+        ease 1.75 yoffset 0
+        repeat
+
+layeredimage Kitty_doggy_finger_anal_animations:
+    always:
+        "Kitty_doggy_finger_anal_animation" pos (0.112, 0.57)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 image slap_ass:
     "UI_Hand"

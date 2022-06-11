@@ -14,7 +14,7 @@ image Jubes_blinking:
     0.05
     repeat
 
-layeredimage Jubes_grool_dripping_animations:
+layeredimage Jubes_grool_dripping_animation:
     always:
         "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
 
@@ -29,13 +29,13 @@ layeredimage Jubes_grool_dripping_animations:
 
 layeredimage Jubes_grool_animations:
     if JubesX.grool and JubesX.outfit["bottom"] == "_pants" and JubesX.bottom_pulled_down:
-        AlphaMask("Jubes_grool_dripping_animations", "images/Jubes_standing/Jubes_standing_grool_mask_pants.png")
+        AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_pants.png")
     elif JubesX.grool and JubesX.outfit["underwear"] and JubesX.underwear_pulled_down:
-        AlphaMask("Jubes_grool_dripping_animations", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
+        AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
     elif JubesX.grool and not JubesX.pussy_covered:
-        AlphaMask("Jubes_grool_dripping_animations", "images/Jubes_standing/Jubes_standing_grool_mask.png")
+        AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask.png")
 
-layeredimage Jubes_spunk_dripping_animations:
+layeredimage Jubes_spunk_dripping_animation:
     always:
         "spunk_dripping_animation" pos (0.115, 0.55) zoom 0.3
 
@@ -50,11 +50,11 @@ layeredimage Jubes_spunk_dripping_animations:
 
 layeredimage Jubes_spunk_animations:
     if (JubesX.spunk["pussy"] or JubesX.spunk["anus"]) and JubesX.outfit["bottom"] == "_pants" and JubesX.bottom_pulled_down:
-        AlphaMask("Jubes_spunk_dripping_animations", "images/Jubes_standing/Jubes_standing_grool_mask_pants.png")
+        AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_pants.png")
     elif (JubesX.spunk["pussy"] or JubesX.spunk["anus"]) and JubesX.outfit["underwear"] and JubesX.underwear_pulled_down:
-        AlphaMask("Jubes_spunk_dripping_animations", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
+        AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
     elif (JubesX.spunk["pussy"] or JubesX.spunk["anus"]) and not JubesX.pussy_covered:
-        AlphaMask("Jubes_spunk_dripping_animations", "images/Jubes_standing/Jubes_standing_grool_mask.png")
+        AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask.png")
 
 # layeredimage Jubes_standing_fondling_animations:
 #     if Player.primary_action == "lesbian" or not JubesX.secondary_action or focused_Girl != JubesX:
@@ -152,3 +152,72 @@ layeredimage Jubes_spunk_animations:
 #         "Girl_fondle_pussy_animation" pos (0.122, 0.569)
 #     elif JubesX.secondary_action == "eat_pussy":
 #         "Zero_eat_pussy_animation" pos (0.13, 0.62)
+
+image Jubes_handjob_under_hand_animation0:
+    "Jubes_handjob_under"
+
+image Jubes_handjob_under_hand_animation1:
+    "Jubes_handjob_under"
+
+    subpixel True
+    rotate -5
+    block:
+        ease 0.75 yoffset 40 rotate -10
+        pause 0.25
+        ease 1.0 yoffset -10 rotate -5
+        pause 0.1
+        repeat
+
+image Jubes_handjob_under_hand_animation2:
+    "Jubes_handjob_under"
+
+    subpixel True
+    rotate -3
+    block:
+        ease 0.4 yoffset 30 rotate -7
+        pause 0.1
+        ease 0.4 yoffset -10 rotate -3
+        pause 0.1
+        repeat
+
+image Jubes_handjob_over_hand_animation0:
+    "Jubes_handjob_over"
+
+image Jubes_handjob_over_hand_animation1:
+    "Jubes_handjob_over"
+
+    subpixel True
+    rotate -5
+    block:
+        ease 0.75 yoffset 40 rotate -10
+        pause 0.25
+        ease 1.0 yoffset -10 rotate -5
+        pause 0.1
+        repeat
+
+image Jubes_handjob_over_hand_animation2:
+    "Jubes_handjob_over"
+
+    subpixel True
+    rotate -3
+    block:
+        ease 0.4 yoffset 30 rotate -7
+        pause 0.1
+        ease 0.4 yoffset -10 rotate -3
+        pause 0.1
+        repeat
+
+layeredimage Jubes_sprite handjob:
+    always:
+        "Jubes_sprite standing" pos (0.05, 0.0)
+
+    always:
+        "Jubes_handjob_under_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+
+    always:
+        "Zero_handjob_cock_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+
+    always:
+        "Jubes_handjob_over_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+
+    anchor (0.5, 0.0) offset (220, -220) zoom 2.5

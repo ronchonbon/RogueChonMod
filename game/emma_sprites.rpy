@@ -246,3 +246,13 @@ layeredimage Emma_head:
         "images/Emma_standing/Emma_standing_water_head.png"
 
     anchor (0.5, 0.5)
+
+image Emma_handjob_under:
+    "images/Emma_handjob/Emma_handjob_hand_under.png"
+
+    anchor (0.5, 0.5)
+
+image Emma_handjob_over:
+    "images/Emma_handjob/Emma_handjob_hand_over.png"
+
+    anchor (0.5, 0.5)

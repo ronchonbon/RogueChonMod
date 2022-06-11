@@ -30,7 +30,7 @@ image Emma_blinking_diamond:
     0.05
     repeat
 
-layeredimage Emma_grool_dripping_animations:
+layeredimage Emma_grool_dripping_animation:
     always:
         "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
 
@@ -45,13 +45,13 @@ layeredimage Emma_grool_dripping_animations:
 
 layeredimage Emma_grool_animations:
     if EmmaX.grool and EmmaX.outfit["bottom"] == "_pants" and EmmaX.bottom_pulled_down:
-        AlphaMask("Emma_grool_dripping_animations", "images/Emma_standing/Emma_standing_grool_mask_pants.png")
+        AlphaMask("Emma_grool_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask_pants.png")
     elif EmmaX.grool and EmmaX.outfit["underwear"] and EmmaX.underwear_pulled_down:
-        AlphaMask("Emma_grool_dripping_animations", "images/Emma_standing/Emma_standing_grool_mask_underwear.png")
+        AlphaMask("Emma_grool_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask_underwear.png")
     elif EmmaX.grool and not EmmaX.pussy_covered:
-        AlphaMask("Emma_grool_dripping_animations", "images/Emma_standing/Emma_standing_grool_mask.png")
+        AlphaMask("Emma_grool_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask.png")
 
-layeredimage Emma_spunk_dripping_animations:
+layeredimage Emma_spunk_dripping_animation:
     always:
         "spunk_dripping_animation" pos (0.115, 0.55) zoom 0.3
 
@@ -66,11 +66,11 @@ layeredimage Emma_spunk_dripping_animations:
 
 layeredimage Emma_spunk_animations:
     if (EmmaX.spunk["pussy"] or EmmaX.spunk["anus"]) and EmmaX.outfit["bottom"] == "_pants" and EmmaX.bottom_pulled_down:
-        AlphaMask("Emma_spunk_dripping_animations", "images/Emma_standing/Emma_standing_grool_mask_pants.png")
+        AlphaMask("Emma_spunk_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask_pants.png")
     elif (EmmaX.spunk["pussy"] or EmmaX.spunk["anus"]) and EmmaX.outfit["underwear"] and EmmaX.underwear_pulled_down:
-        AlphaMask("Emma_spunk_dripping_animations", "images/Emma_standing/Emma_standing_grool_mask_underwear.png")
+        AlphaMask("Emma_spunk_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask_underwear.png")
     elif (EmmaX.spunk["pussy"] or EmmaX.spunk["anus"]) and not EmmaX.pussy_covered:
-        AlphaMask("Emma_spunk_dripping_animations", "images/Emma_standing/Emma_standing_grool_mask.png")
+        AlphaMask("Emma_spunk_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask.png")
 
 # layeredimage Emma_standing_fondling_animations:
 #     if Player.primary_action == "lesbian" or not EmmaX.secondary_action or focused_Girl != EmmaX:
@@ -168,3 +168,72 @@ layeredimage Emma_spunk_animations:
 #         "Girl_fondle_pussy_animation" pos (0.122, 0.569)
 #     elif EmmaX.secondary_action == "eat_pussy":
 #         "Zero_eat_pussy_animation" pos (0.13, 0.62)
+
+image Emma_handjob_under_hand_animation0:
+    "Emma_handjob_under"
+
+image Emma_handjob_under_hand_animation1:
+    "Emma_handjob_under"
+
+    subpixel True
+    rotate 8
+    block:
+        ease 0.75 yoffset 40 rotate 3
+        pause 0.25
+        ease 1.0 yoffset -10 rotate 8
+        pause 0.1
+        repeat
+
+image Emma_handjob_under_hand_animation2:
+    "Emma_handjob_under"
+
+    subpixel True
+    rotate 5
+    block:
+        ease 0.4 yoffset 30 rotate 3
+        pause 0.1
+        ease 0.4 yoffset -10 rotate 5
+        pause 0.1
+        repeat
+
+image Emma_handjob_over_hand_animation0:
+    "Emma_handjob_over"
+
+image Emma_handjob_over_hand_animation1:
+    "Emma_handjob_over"
+
+    subpixel True
+    rotate 8
+    block:
+        ease 0.75 yoffset 40 rotate 3
+        pause 0.25
+        ease 1.0 yoffset -10 rotate 8
+        pause 0.1
+        repeat
+
+image Emma_handjob_over_hand_animation2:
+    "Emma_handjob_over"
+
+    subpixel True
+    rotate 5
+    block:
+        ease 0.4 yoffset 30 rotate 3
+        pause 0.1
+        ease 0.4 yoffset -10 rotate 5
+        pause 0.1
+        repeat
+
+layeredimage Emma_sprite handjob:
+    always:
+        "Emma_sprite standing" pos (0.05, 0.0)
+
+    always:
+        "Emma_handjob_under_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+
+    always:
+        "Zero_handjob_cock_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+
+    always:
+        "Emma_handjob_over_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+
+    anchor (0.5, 0.0) offset (220, -220) zoom 2.5

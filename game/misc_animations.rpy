@@ -306,6 +306,34 @@ layeredimage Rogue_doggy_dildo_anal_animations:
     always:
         "Rogue_doggy_dildo_anal_animation" pos (0.112, 0.58)
 
+image Kitty_dildo_pussy_animation:
+    "dildo"
+
+    subpixel True
+    block:
+        ease 1 yoffset -60
+        pause 1
+        ease 3 yoffset 0
+        repeat
+
+layeredimage Kitty_dildo_pussy_animations:
+    always:
+        "Kitty_dildo_pussy_animation" pos (0.2923, 0.595) zoom 1.22
+
+image Kitty_dildo_anal_animation:
+    "dildo"
+
+    subpixel True
+    block:
+        ease 1 yoffset -60
+        pause 1
+        ease 3 yoffset 0
+        repeat
+
+layeredimage Kitty_dildo_anal_animations:
+    always:
+        "Kitty_dildo_anal_animation" pos (0.2925, 0.64)
+
 
 
 

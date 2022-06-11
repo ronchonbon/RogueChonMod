@@ -209,3 +209,13 @@ layeredimage Storm_head:
         "images/Storm_standing/Storm_standing_water_head.png"
 
     anchor (0.5, 0.5)
+
+image Storm_handjob_under:
+    "images/Storm_handjob/Storm_handjob_hand_under.png"
+
+    anchor (0.5, 0.5)
+
+image Storm_handjob_over:
+    "images/Storm_handjob/Storm_handjob_hand_over.png"
+
+    anchor (0.5, 0.5)

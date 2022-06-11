@@ -188,28 +188,34 @@ label start:
     scene background onlayer backdrop
     scene
 
-    $ RogueX.change_outfit("nude")
+    python:
+        for G in all_Girls:
+            G.change_face("_sexy")
 
-    $ Player.sprite = True
-    $ show_feet = False
-    $ action_speed = 1
-    $ Player.cock_position = "in"
-    $ Player.primary_action = "blowjob"
-    $ Player.secondary_action = "finger_ass"
-    $ RogueX.spunk["anus"] = True
-    $ RogueX.spunk["pussy"] = True
+    # $ KittyX.change_outfit("nude")
+    #
+    # $ Player.sprite = True
+    # # $ show_feet = True
+    $ action_speed = 2
+    # $ Player.cock_position = "out"
+    # $ Player.primary_action = "hotdog"
+    # # $ Player.secondary_action = "dildo_ass"
+    # $ KittyX.spunk["anus"] = True
+    # $ KittyX.spunk["pussy"] = True
 
-    show Rogue_sprite handjob at sprite_location(0.2) as handjob
-    show Rogue_sprite titjob at sprite_location(0.4) as titjob
-    show Rogue_sprite blowjob at sprite_location(0.5) as blowjob
-    show Rogue_sprite sex at sprite_location(0.6) as sex
-    show Rogue_sprite doggy at sprite_location(0.8) as anal
+    show Rogue_sprite handjob at sprite_location(0.5)
+    # show Kitty_sprite handjob at sprite_location(0.5)
+    # show Emma_sprite handjob at sprite_location(0.5)
+    # show Laura_sprite handjob at sprite_location(0.5)
+    # show Jean_sprite handjob at sprite_location(0.5)
+    # show Storm_sprite handjob at sprite_location(0.5)
+    # show Jubes_sprite handjob at sprite_location(0.5)
 
     ""
 
-    $ Player.sprite = False
-    call stop_all_actions
-    $ RogueX.change_outfit("casual1")
+    # $ Player.sprite = False
+    # call stop_all_actions
+    # $ RogueX.change_outfit("casual1")
 
     #
     # $ RogueX.sprite_location = stage_far_far_left

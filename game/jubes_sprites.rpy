@@ -161,3 +161,13 @@ layeredimage Jubes_head:
         "images/Jubes_standing/Jubes_standing_water_head.png"
 
     anchor (0.5, 0.5)
+
+image Jubes_handjob_under:
+    "images/Jubes_handjob/Jubes_handjob_hand_under.png"
+
+    anchor (0.5, 0.5)
+
+image Jubes_handjob_over:
+    "images/Jubes_handjob/Jubes_handjob_hand_over.png"
+
+    anchor (0.5, 0.5)

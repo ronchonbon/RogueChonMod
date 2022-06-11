@@ -14,7 +14,7 @@ image Laura_blinking:
     0.05
     repeat
 
-layeredimage Laura_grool_dripping_animations:
+layeredimage Laura_grool_dripping_animation:
     always:
         "grool_dripping_animation" pos (0.078, 0.58) zoom 0.2
 
@@ -29,13 +29,13 @@ layeredimage Laura_grool_dripping_animations:
 
 layeredimage Laura_grool_animations:
     if LauraX.grool and LauraX.outfit["bottom"] == "_pants" and LauraX.bottom_pulled_down:
-        AlphaMask("Laura_grool_dripping_animations", "images/Laura_standing/Laura_standing_grool_mask_pants.png")
+        AlphaMask("Laura_grool_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask_pants.png")
     elif LauraX.grool and LauraX.outfit["underwear"] and LauraX.underwear_pulled_down:
-        AlphaMask("Laura_grool_dripping_animations", "images/Laura_standing/Laura_standing_grool_mask_underwear.png")
+        AlphaMask("Laura_grool_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask_underwear.png")
     elif LauraX.grool and not LauraX.pussy_covered:
-        AlphaMask("Laura_grool_dripping_animations", "images/Laura_standing/Laura_standing_grool_mask.png")
+        AlphaMask("Laura_grool_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask.png")
 
-layeredimage Laura_spunk_dripping_animations:
+layeredimage Laura_spunk_dripping_animation:
     always:
         "spunk_dripping_animation" pos (0.078, 0.58) zoom 0.3
 
@@ -50,11 +50,11 @@ layeredimage Laura_spunk_dripping_animations:
 
 layeredimage Laura_spunk_animations:
     if (LauraX.spunk["pussy"] or LauraX.spunk["anus"]) and LauraX.outfit["bottom"] == "_pants" and LauraX.bottom_pulled_down:
-        AlphaMask("Laura_spunk_dripping_animations", "images/Laura_standing/Laura_standing_grool_mask_pants.png")
+        AlphaMask("Laura_spunk_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask_pants.png")
     elif (LauraX.spunk["pussy"] or LauraX.spunk["anus"]) and LauraX.outfit["underwear"] and LauraX.underwear_pulled_down:
-        AlphaMask("Laura_spunk_dripping_animations", "images/Laura_standing/Laura_standing_grool_mask_underwear.png")
+        AlphaMask("Laura_spunk_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask_underwear.png")
     elif (LauraX.spunk["pussy"] or LauraX.spunk["anus"]) and not LauraX.pussy_covered:
-        AlphaMask("Laura_spunk_dripping_animations", "images/Laura_standing/Laura_standing_grool_mask.png")
+        AlphaMask("Laura_spunk_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask.png")
 
 # layeredimage Laura_standing_fondling_animations:
 #     if Player.primary_action == "lesbian" or not LauraX.secondary_action or focused_Girl != LauraX:
@@ -152,3 +152,72 @@ layeredimage Laura_spunk_animations:
 #         "girl_fondle_pussy_animation" pos (0.122, 0.569)
 #     elif LauraX.secondary_action == "eat_pussy":
 #         "Zero_eat_pussy_animation" pos (0.13, 0.62)
+
+image Laura_handjob_under_hand_animation0:
+    "Laura_handjob_under"
+
+image Laura_handjob_under_hand_animation1:
+    "Laura_handjob_under"
+
+    subpixel True
+    rotate -5
+    block:
+        ease 0.75 yoffset 40 rotate 1
+        pause 0.25
+        ease 1.0 yoffset -10 rotate -5
+        pause 0.1
+        repeat
+
+image Laura_handjob_under_hand_animation2:
+    "Laura_handjob_under"
+
+    subpixel True
+    rotate -3
+    block:
+        ease 0.4 yoffset 30 rotate 0
+        pause 0.1
+        ease 0.4 yoffset -10 rotate -3
+        pause 0.1
+        repeat
+
+image Laura_handjob_over_hand_animation0:
+    "Laura_handjob_over"
+
+image Laura_handjob_over_hand_animation1:
+    "Laura_handjob_over"
+
+    subpixel True
+    rotate -5
+    block:
+        ease 0.75 yoffset 40 rotate 1
+        pause 0.25
+        ease 1.0 yoffset -10 rotate -5
+        pause 0.1
+        repeat
+
+image Laura_handjob_over_hand_animation2:
+    "Laura_handjob_over"
+
+    subpixel True
+    rotate -3
+    block:
+        ease 0.4 yoffset 30 rotate 0
+        pause 0.1
+        ease 0.4 yoffset -10 rotate -3
+        pause 0.1
+        repeat
+
+layeredimage Laura_sprite handjob:
+    always:
+        "Laura_sprite standing"
+
+    always:
+        "Laura_handjob_under_hand_animation[action_speed]" pos (0.035, 0.455) zoom 0.28
+
+    always:
+        "Zero_handjob_cock_animation[action_speed]" pos (0.035, 0.455) zoom 0.28
+
+    always:
+        "Laura_handjob_over_hand_animation[action_speed]" pos (0.035, 0.455) zoom 0.28
+
+    anchor (0.5, 0.0) offset (220, -220) zoom 2.5

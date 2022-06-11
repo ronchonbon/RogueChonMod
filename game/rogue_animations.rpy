@@ -160,8 +160,9 @@ image Rogue_handjob_under_hand_animation1:
     "Rogue_handjob_under"
 
     subpixel True
+    rotate -5
     block:
-        ease 0.5 yoffset 40 rotate 5
+        ease 0.75 yoffset 40 rotate 5
         pause 0.25
         ease 1.0 yoffset -10 rotate -5
         pause 0.1
@@ -171,8 +172,9 @@ image Rogue_handjob_under_hand_animation2:
     "Rogue_handjob_under"
 
     subpixel True
+    rotate -3
     block:
-        ease 0.2 yoffset 30 rotate 3
+        ease 0.4 yoffset 30 rotate 3
         pause 0.1
         ease 0.4 yoffset -10 rotate -3
         pause 0.1
@@ -185,8 +187,9 @@ image Rogue_handjob_over_hand_animation1:
     "Rogue_handjob_over"
 
     subpixel True
+    rotate -5
     block:
-        ease 0.5 yoffset 40 rotate 5
+        ease 0.75 yoffset 40 rotate 5
         pause 0.25
         ease 1.0 yoffset -10 rotate -5
         pause 0.1
@@ -196,8 +199,9 @@ image Rogue_handjob_over_hand_animation2:
     "Rogue_handjob_over"
 
     subpixel True
+    rotate -3
     block:
-        ease 0.2 yoffset 30 rotate 3
+        ease 0.4 yoffset 30 rotate 3
         pause 0.1
         ease 0.4 yoffset -10 rotate -3
         pause 0.1
@@ -211,12 +215,20 @@ layeredimage Rogue_sprite handjob:
         "Rogue_handjob_under_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
 
     always:
-        "Rogue_handjob_cock_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+        "Zero_handjob_cock_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
 
     always:
         "Rogue_handjob_over_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
 
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
+
+
+
+
+
+
+
+
 
 image Rogue_titjob_under_tits_animation0:
     "Rogue_titjob_under"
@@ -763,7 +775,7 @@ image Rogue_sex_anus_animation3:
     "Rogue_sex_anus"
 
 image Rogue_sex_spunk_anus_under_animation:
-    "Rogue_sex_spunk_anus"
+    "Rogue_sex_spunk_anus_under"
 
     subpixel True
     xzoom 0.6
@@ -775,13 +787,25 @@ image Rogue_sex_spunk_anus_under_animation:
         ease 2.25 xzoom 0.6
         repeat
 
-layeredimage Rogue_sex_spunk_anus_animations:
+layeredimage Rogue_sex_spunk_anus_under_animations:
     if Player.sprite and Player.cock_position == "anal" and action_speed > 1:
-        "Rogue_sex_spunk_anus" pos (0.292, 0.386)
+        "Rogue_sex_spunk_anus_under" pos (0.292, 0.386)
     elif Player.sprite and Player.cock_position == "anal" and action_speed == 1:
         "Rogue_sex_spunk_anus_under_animation" pos (0.292, 0.386)
     else:
         "images/Kitty_sex/Kitty_sex_spunk_anus_closed.png"
+
+image Rogue_sex_spunk_anus_over_animation:
+    "Rogue_sex_spunk_anus_over"
+
+    subpixel True
+    xzoom 0.8
+    block:
+        ease 0.75 xzoom 1.0
+        pause 1.75
+        ease 0.25 xzoom 1.0
+        ease 2.25 xzoom 0.8
+        repeat
 
 layeredimage Rogue_sprite sex:
     if Player.cock_position in ["in", "anal"]:

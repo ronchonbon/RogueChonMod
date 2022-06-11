@@ -14,7 +14,7 @@ image Storm_blinking:
     0.05
     repeat
 
-layeredimage Storm_grool_dripping_animations:
+layeredimage Storm_grool_dripping_animation:
     always:
         "grool_dripping_animation" pos (0.092, 0.5) zoom 0.2
 
@@ -29,13 +29,13 @@ layeredimage Storm_grool_dripping_animations:
 
 layeredimage Storm_grool_animations:
     if StormX.grool and StormX.outfit["bottom"] == "_pants" and StormX.bottom_pulled_down:
-        AlphaMask("Storm_grool_dripping_animations", "images/Storm_standing/Storm_standing_grool_mask_pants.png")
+        AlphaMask("Storm_grool_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask_pants.png")
     elif StormX.grool and StormX.outfit["underwear"] and StormX.underwear_pulled_down:
-        AlphaMask("Storm_grool_dripping_animations", "images/Storm_standing/Storm_standing_grool_mask_underwear.png")
+        AlphaMask("Storm_grool_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask_underwear.png")
     elif StormX.grool and not StormX.pussy_covered:
-        AlphaMask("Storm_grool_dripping_animations", "images/Storm_standing/Storm_standing_grool_mask.png")
+        AlphaMask("Storm_grool_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask.png")
 
-layeredimage Storm_spunk_dripping_animations:
+layeredimage Storm_spunk_dripping_animation:
     always:
         "spunk_dripping_animation" pos (0.092, 0.5) zoom 0.3
 
@@ -52,9 +52,9 @@ layeredimage Storm_spunk_animations:
     if (StormX.spunk["pussy"] or StormX.spunk["anus"]) and StormX.outfit["bottom"] == "_pants" and StormX.bottom_pulled_down:
         AlphaMask("Storm_spunk_drippsing_animations", "images/Storm_standing/Storm_standing_grool_mask_pants.png")
     elif (StormX.spunk["pussy"] or StormX.spunk["anus"]) and StormX.outfit["underwear"] and StormX.underwear_pulled_down:
-        AlphaMask("Storm_spunk_dripping_animations", "images/Storm_standing/Storm_standing_grool_mask_underwear.png")
+        AlphaMask("Storm_spunk_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask_underwear.png")
     elif (StormX.spunk["pussy"] or StormX.spunk["anus"]) and not StormX.pussy_covered:
-        AlphaMask("Storm_spunk_dripping_animations", "images/Storm_standing/Storm_standing_grool_mask.png")
+        AlphaMask("Storm_spunk_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask.png")
 
 # layeredimage Storm_standing_fondling_animations:
 #     if Player.primary_action == "lesbian" or not StormX.secondary_action or focused_Girl != StormX:
@@ -152,3 +152,72 @@ layeredimage Storm_spunk_animations:
 #         "girl_fondle_pussy_animation" pos (0.122, 0.569)
 #     elif StormX.secondary_action == "eat_pussy":
 #         "Zero_eat_pussy_animation" pos (0.13, 0.62)
+
+image Storm_handjob_under_hand_animation0:
+    "Storm_handjob_under"
+
+image Storm_handjob_under_hand_animation1:
+    "Storm_handjob_under"
+
+    subpixel True
+    rotate -2
+    block:
+        ease 0.75 yoffset 20 rotate 5
+        pause 0.25
+        ease 1.0 yoffset -30 rotate -2
+        pause 0.1
+        repeat
+
+image Storm_handjob_under_hand_animation2:
+    "Storm_handjob_under"
+
+    subpixel True
+    rotate 0
+    block:
+        ease 0.4 yoffset 10 rotate 3
+        pause 0.1
+        ease 0.4 yoffset -30 rotate 0
+        pause 0.1
+        repeat
+
+image Storm_handjob_over_hand_animation0:
+    "Storm_handjob_over"
+
+image Storm_handjob_over_hand_animation1:
+    "Storm_handjob_over"
+
+    subpixel True
+    rotate -2
+    block:
+        ease 0.75 yoffset 20 rotate 5
+        pause 0.25
+        ease 1.0 yoffset -30 rotate -2
+        pause 0.1
+        repeat
+
+image Storm_handjob_over_hand_animation2:
+    "Storm_handjob_over"
+
+    subpixel True
+    rotate 0
+    block:
+        ease 0.4 yoffset 10 rotate 3
+        pause 0.1
+        ease 0.4 yoffset -30 rotate 0
+        pause 0.1
+        repeat
+
+layeredimage Storm_sprite handjob:
+    always:
+        "Storm_sprite standing"
+
+    always:
+        "Storm_handjob_under_hand_animation[action_speed]" pos (0.08, 0.455) zoom 0.28
+
+    always:
+        "Zero_handjob_cock_animation[action_speed]" pos (0.08, 0.455) zoom 0.28
+
+    always:
+        "Storm_handjob_over_hand_animation[action_speed]" pos (0.08, 0.455) zoom 0.28
+
+    anchor (0.5, 0.0) offset (220, -220) zoom 2.5

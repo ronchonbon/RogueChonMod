@@ -10,6 +10,9 @@ layeredimage Laura_sprite standing:
     if LauraX.outfit["underwear"] and LauraX.underwear_pulled_down:
         "images/Laura_standing/Laura_standing_back_inner_accessory[LauraX.outfit[underwear]]_down.png"
 
+    always:
+        "images/Laura_standing/Laura_standing_arm[LauraX.arm_pose]_right.png"
+
     if not renpy.showing("Laura_sprite blowjob"):
         "Laura_back_hair" pos (0.102, 0.19) zoom 0.5
 
@@ -21,9 +24,6 @@ layeredimage Laura_sprite standing:
 
     if LauraX.pubes:
         "images/Laura_standing/Laura_standing_pubes.png"
-
-    always:
-        "images/Laura_standing/Laura_standing_arm[LauraX.arm_pose]_right.png"
 
     always:
         "images/Laura_standing/Laura_standing_breasts.png"
@@ -189,5 +189,15 @@ layeredimage Laura_head:
 
     if LauraX.wet:
         "images/Laura_standing/Laura_standing_water_hair.png"
+
+    anchor (0.5, 0.5)
+
+image Laura_handjob_under:
+    "images/Laura_handjob/Laura_handjob_hand_under.png"
+
+    anchor (0.5, 0.5)
+
+image Laura_handjob_over:
+    "images/Laura_handjob/Laura_handjob_hand_over.png"
 
     anchor (0.5, 0.5)

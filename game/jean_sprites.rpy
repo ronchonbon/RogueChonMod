@@ -157,6 +157,27 @@ layeredimage Jean_head:
 
     anchor (0.5, 0.5)
 
+image Jean_handjob_under:
+    "images/Jean_handjob/Jean_handjob_hand_under.png"
+
+    anchor (0.5, 0.5)
+
+image Jean_handjob_over:
+    "images/Jean_handjob/Jean_handjob_hand_over.png"
+
+    anchor (0.5, 0.5)
+
+
+
+
+
+
+
+
+
+
+    
+
 # layeredimage Jean_kneeling:
 #     # always:
 #     #     "images/Jean_kneeling/Jean_kneeling_head_reference.png"

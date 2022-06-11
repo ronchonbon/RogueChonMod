@@ -14,7 +14,7 @@ image Jean_blinking:
     0.05
     repeat
 
-layeredimage Jean_grool_dripping_animations:
+layeredimage Jean_grool_dripping_animation:
     always:
         "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
 
@@ -29,13 +29,13 @@ layeredimage Jean_grool_dripping_animations:
 
 layeredimage Jean_grool_animations:
     if JeanX.grool and JeanX.outfit["bottom"] == "_pants" and JeanX.bottom_pulled_down:
-        AlphaMask("Jean_grool_dripping_animations", "images/Jean_standing/Jean_standing_grool_mask_pants.png")
+        AlphaMask("Jean_grool_dripping_animation", "images/Jean_standing/Jean_standing_grool_mask_pants.png")
     elif JeanX.grool and JeanX.outfit["underwear"] and JeanX.underwear_pulled_down:
-        AlphaMask("Jean_grool_dripping_animations", "images/Jean_standing/Jean_standing_grool_mask_underwear.png")
+        AlphaMask("Jean_grool_dripping_animation", "images/Jean_standing/Jean_standing_grool_mask_underwear.png")
     elif JeanX.grool and not JeanX.pussy_covered:
-        AlphaMask("Jean_grool_dripping_animations", "images/Jean_standing/Jean_standing_grool_mask.png")
+        AlphaMask("Jean_grool_dripping_animation", "images/Jean_standing/Jean_standing_grool_mask.png")
 
-layeredimage Jean_spunk_dripping_animations:
+layeredimage Jean_spunk_dripping_animation:
     always:
         "spunk_dripping_animation" pos (0.115, 0.55) zoom 0.3
 
@@ -50,11 +50,11 @@ layeredimage Jean_spunk_dripping_animations:
 
 layeredimage Jean_spunk_animations:
     if (JeanX.spunk["pussy"] or JeanX.spunk["anus"]) and JeanX.outfit["bottom"] == "_pants" and JeanX.bottom_pulled_down:
-        AlphaMask("Jean_spunk_dripping_animations", "images/Jean_standing/Jean_standing_grool_mask_pants.png")
+        AlphaMask("Jean_spunk_dripping_animation", "images/Jean_standing/Jean_standing_grool_mask_pants.png")
     elif (JeanX.spunk["pussy"] or JeanX.spunk["anus"]) and JeanX.outfit["underwear"] and JeanX.underwear_pulled_down:
-        AlphaMask("Jean_spunk_dripping_animations", "images/Jean_standing/Jean_standing_grool_mask_underwear.png")
+        AlphaMask("Jean_spunk_dripping_animation", "images/Jean_standing/Jean_standing_grool_mask_underwear.png")
     elif (JeanX.spunk["pussy"] or JeanX.spunk["anus"]) and not JeanX.pussy_covered:
-        AlphaMask("Jean_spunk_dripping_animations", "images/Jean_standing/Jean_standing_grool_mask.png")
+        AlphaMask("Jean_spunk_dripping_animation", "images/Jean_standing/Jean_standing_grool_mask.png")
 
 # layeredimage Jean_standing_fondling_animations:
 #     if Player.primary_action == "lesbian" or not JeanX.secondary_action or focused_Girl != JeanX:
@@ -152,3 +152,72 @@ layeredimage Jean_spunk_animations:
 #         "girl_fondle_pussy_animation" pos (0.122, 0.569)
 #     elif JeanX.secondary_action == "eat_pussy":
 #         "Zero_eat_pussy_animation" pos (0.13, 0.62)
+
+image Jean_handjob_under_hand_animation0:
+    "Jean_handjob_under"
+
+image Jean_handjob_under_hand_animation1:
+    "Jean_handjob_under"
+
+    subpixel True
+    rotate 10
+    block:
+        ease 0.75 yoffset 40 rotate 5
+        pause 0.25
+        ease 1.0 yoffset 0 rotate 10
+        pause 0.1
+        repeat
+
+image Jean_handjob_under_hand_animation2:
+    "Jean_handjob_under"
+
+    subpixel True
+    rotate 8
+    block:
+        ease 0.4 yoffset 30 rotate 3
+        pause 0.1
+        ease 0.4 yoffset 0 rotate 8
+        pause 0.1
+        repeat
+
+image Jean_handjob_over_hand_animation0:
+    "Jean_handjob_over"
+
+image Jean_handjob_over_hand_animation1:
+    "Jean_handjob_over"
+
+    subpixel True
+    rotate 10
+    block:
+        ease 0.75 yoffset 40 rotate 5
+        pause 0.25
+        ease 1.0 yoffset 0 rotate 10
+        pause 0.1
+        repeat
+
+image Jean_handjob_over_hand_animation2:
+    "Jean_handjob_over"
+
+    subpixel True
+    rotate 8
+    block:
+        ease 0.4 yoffset 30 rotate 3
+        pause 0.1
+        ease 0.4 yoffset 0 rotate 8
+        pause 0.1
+        repeat
+
+layeredimage Jean_sprite handjob:
+    always:
+        "Jean_sprite standing"
+
+    always:
+        "Jean_handjob_under_hand_animation[action_speed]" pos (0.035, 0.455) zoom 0.28
+
+    always:
+        "Zero_handjob_cock_animation[action_speed]" pos (0.035, 0.455) zoom 0.28
+
+    always:
+        "Jean_handjob_over_hand_animation[action_speed]" pos (0.035, 0.455) zoom 0.28
+
+    anchor (0.5, 0.0) offset (220, -220) zoom 2.5
