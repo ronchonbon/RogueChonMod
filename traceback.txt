@@ -1,14 +1,14 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While loading <'Image' u'images/Jubes_handjob/Jubes_handjob_hand_over.png'>:
-  File "game/script.rpy", line 210, in script
+While loading <'Image' u'images/Jubes_standing/Jubes_standing_spunk_pussy.png'>:
+  File "game/script.rpy", line 205, in script
     ""
-IOError: Couldn't find file 'images/Jubes_handjob/Jubes_handjob_hand_over.png'.
+IOError: Couldn't find file 'images/Jubes_standing/Jubes_standing_spunk_pussy.png'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 210, in script
+  File "game/script.rpy", line 205, in script
     ""
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
     renpy.exports.say(who, what, *args, **kwargs)
@@ -64,12 +64,6 @@ Full traceback:
     return transform_render(self, width, height, st, at)
   File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
   File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 733, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
     return wrap_render(self.target, width, height, st, at)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
@@ -80,15 +74,17 @@ Full traceback:
     return transform_render(self, width, height, st, at)
   File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
   File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
   File "render.pyx", line 170, in renpy.display.render.render
   File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
+    surf = render(self.child, width, height, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
+    cr = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
   File "render.pyx", line 263, in renpy.display.render.render
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/im.py", line 625, in render
     return cache.get(self, render=True)
@@ -96,9 +92,9 @@ Full traceback:
     surf = image.load()
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/im.py", line 706, in load
     raise e
-IOError: Couldn't find file 'images/Jubes_handjob/Jubes_handjob_hand_over.png'.
+IOError: Couldn't find file 'images/Jubes_standing/Jubes_standing_spunk_pussy.png'.
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like Chonky Mod 0.2a
-Sat Jun 11 15:10:02 2022
+Sun Jun 12 17:04:59 2022

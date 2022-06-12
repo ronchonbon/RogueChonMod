@@ -16,16 +16,16 @@ image Jubes_blinking:
 
 layeredimage Jubes_grool_dripping_animation:
     always:
-        "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
+        "grool_dripping_animation" pos (0.145, 0.57) zoom 0.2
 
     if JubesX.grool > 1 and not JubesX.pussy_covered:
-        "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
+        "grool_dripping_animation" pos (0.145, 0.57) zoom 0.2
 
     if JubesX.grool > 1 and not JubesX.pussy_covered:
-        "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
+        "grool_dripping_animation" pos (0.145, 0.57) zoom 0.2
 
     if JubesX.grool > 1 and not JubesX.pussy_covered:
-        "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
+        "grool_dripping_animation" pos (0.145, 0.57) zoom 0.2
 
 layeredimage Jubes_grool_animations:
     if JubesX.grool and JubesX.outfit["bottom"] == "_pants" and JubesX.bottom_pulled_down:
@@ -33,20 +33,20 @@ layeredimage Jubes_grool_animations:
     elif JubesX.grool and JubesX.outfit["underwear"] and JubesX.underwear_pulled_down:
         AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
     elif JubesX.grool and not JubesX.pussy_covered:
-        AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask.png")
+        AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
 
 layeredimage Jubes_spunk_dripping_animation:
     always:
-        "spunk_dripping_animation" pos (0.115, 0.55) zoom 0.3
+        "spunk_dripping_animation" pos (0.145, 0.57) zoom 0.3
 
     if not JubesX.pussy_covered:
-        "spunk_dripping_animation" pos (0.115, 0.55) zoom 0.3
+        "spunk_dripping_animation" pos (0.145, 0.57) zoom 0.3
 
     if not JubesX.pussy_covered:
-        "spunk_dripping_animation" pos (0.115, 0.55) zoom 0.3
+        "spunk_dripping_animation" pos (0.145, 0.57) zoom 0.3
 
     if not JubesX.pussy_covered:
-        "spunk_dripping_animation" pos (0.115, 0.55) zoom 0.3
+        "spunk_dripping_animation" pos (0.145, 0.57) zoom 0.3
 
 layeredimage Jubes_spunk_animations:
     if (JubesX.spunk["pussy"] or JubesX.spunk["anus"]) and JubesX.outfit["bottom"] == "_pants" and JubesX.bottom_pulled_down:
@@ -54,7 +54,7 @@ layeredimage Jubes_spunk_animations:
     elif (JubesX.spunk["pussy"] or JubesX.spunk["anus"]) and JubesX.outfit["underwear"] and JubesX.underwear_pulled_down:
         AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
     elif (JubesX.spunk["pussy"] or JubesX.spunk["anus"]) and not JubesX.pussy_covered:
-        AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask.png")
+        AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
 
 # layeredimage Jubes_standing_fondling_animations:
 #     if Player.primary_action == "lesbian" or not JubesX.secondary_action or focused_Girl != JubesX:
@@ -215,7 +215,7 @@ layeredimage Jubes_sprite handjob:
         "Jubes_handjob_under_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
 
     always:
-        "Zero_handjob_cock_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+        "Zero_cock_Jubes"
 
     always:
         "Jubes_handjob_over_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28

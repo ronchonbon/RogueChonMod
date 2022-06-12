@@ -127,6 +127,141 @@ image Zero_doggy_fondle_breast_animation:
         ease 1 rotate 0
         repeat
 
+image Rogue_sex_finger_pussy_animation:
+    "Zero_sex_finger"
+
+    subpixel True
+    zoom 1.2
+    block:
+        ease 0.2 yoffset -40
+        pause 0.2
+        ease 0.6 yoffset 0
+        repeat
+
+image Rogue_sex_finger_ass_animation:
+    "Zero_sex_finger"
+
+    subpixel True
+    zoom 1.2
+    block:
+        ease 0.4 yoffset -50
+        pause 0.4
+        ease 1.2 yoffset 0
+        repeat
+
+image Rogue_doggy_finger_pussy_animation:
+    "Zero_sex_finger"
+
+    subpixel True
+    block:
+        ease 1 offset (-3, -45)
+        pause 1
+        ease 3 offset (0, 0)
+        repeat
+
+image Rogue_doggy_finger_ass_animation:
+    "Zero_sex_finger"
+
+    subpixel True
+    block:
+        ease 0.5 yoffset -20
+        pause 0.25
+        ease 1.75 yoffset 0
+        repeat
+
+layeredimage Zero_finger_Rogue:
+    if renpy.showing("Rogue_sprite sex") and "finger_pussy" in [Player.primary_action, Player.secondary_action]:
+        "Rogue_sex_finger_pussy_animation" pos (0.292, 0.64)
+
+    if renpy.showing("Rogue_sprite sex") and "finger_ass" in [Player.primary_action, Player.secondary_action]:
+        "Rogue_sex_finger_ass_animation" pos (0.2923, 0.7)
+
+    if renpy.showing("Rogue_sprite doggy") and "finger_pussy" in [Player.primary_action, Player.secondary_action]:
+        "Rogue_doggy_finger_pussy_animation" pos (0.112, 0.625)
+
+    if renpy.showing("Rogue_sprite doggy") and "finger_ass" in [Player.primary_action, Player.secondary_action]:
+        "Rogue_doggy_finger_ass_animation" pos (0.112, 0.57)
+
+image Rogue_doggy_anus_fingering_mask_animation:
+    "images/Rogue_doggy/Rogue_doggy_anus_mask.png"
+
+    subpixel True
+    anchor (0.52, 0.69) zoom 0.6
+    block:
+        ease 0.5 zoom 0.75
+        pause 0.5
+        ease 1.5 zoom 0.6
+        repeat
+
+layeredimage Zero_finger_Rogue_mask:
+    if not renpy.showing("Rogue_sprite doggy"):
+        Null()
+    elif "finger_pussy" in [Player.primary_action, Player.secondary_action]:
+        "Rogue_doggy_pussy_mask_animation1" offset (217, 514)
+    elif "finger_ass" in [Player.primary_action, Player.secondary_action]:
+        "Rogue_doggy_anus_fingering_mask_animation" offset (217, 514)
+
+image dildo_pussy_animation:
+    "dildo"
+
+    subpixel True
+    block:
+        ease 1 yoffset -60
+        pause 1
+        ease 3 yoffset 0
+        repeat
+
+image dildo_ass_animation:
+    "dildo"
+
+    subpixel True
+    block:
+        ease 1 yoffset -60
+        pause 1
+        ease 3 yoffset 0
+        repeat
+
+image doggy_dildo_pussy_animation:
+    "dildo"
+
+    subpixel True
+    block:
+        ease 1 xoffset -3 yoffset -45
+        pause 1
+        ease 3 xoffset 0 yoffset 0
+        repeat
+
+image doggy_dildo_ass_animation:
+    "dildo"
+
+    subpixel True
+    block:
+        ease 0.5 yoffset -65
+        pause 0.25
+        ease 1.75 yoffset 5
+        repeat
+
+layeredimage dildo_Rogue:
+    if renpy.showing("Rogue_sprite sex") and "dildo_pussy" in [Player.primary_action, Player.secondary_action]:
+        "dildo_pussy_animation" pos (0.2923, 0.595) zoom 1.22
+
+    if renpy.showing("Rogue_sprite sex") and "dildo_ass" in [Player.primary_action, Player.secondary_action]:
+        "dildo_ass_animation" pos (0.2925, 0.64)
+
+    if renpy.showing("Rogue_sprite doggy") and "dildo_pussy" in [Player.primary_action, Player.secondary_action]:
+        "doggy_dildo_pussy_animation" pos (0.1117, 0.62)
+
+    if renpy.showing("Rogue_sprite doggy") and "dildo_ass" in [Player.primary_action, Player.secondary_action]:
+        "doggy_dildo_ass_animation" pos (0.112, 0.58)
+
+layeredimage dildo_Rogue_mask:
+    if not renpy.showing("Rogue_sprite doggy"):
+        Null()
+    elif "dildo_pussy" in [Player.primary_action, Player.secondary_action]:
+        "Rogue_doggy_pussy_mask_animation1" offset (217, 514)
+    elif "dildo_ass" in [Player.primary_action, Player.secondary_action]:
+        "Rogue_doggy_anus_mask_animation1" offset (217, 514)
+
 image Zero_handjob_cock_animation0:
     "Zero_handjob_cock"
 
@@ -151,41 +286,10 @@ image Zero_handjob_cock_animation2:
         pause 0.1
         repeat
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-image Rogue_titjob_cock_animation0:
+image Zero_titjob_cock_animation0:
     "Zero_handjob_cock"
 
-image Rogue_titjob_cock_animation1:
+image Zero_titjob_cock_animation1:
     "Zero_handjob_cock"
 
     subpixel True
@@ -195,7 +299,7 @@ image Rogue_titjob_cock_animation1:
         easein 1.3 yoffset -20
         repeat
 
-image Rogue_titjob_cock_animation2:
+image Zero_titjob_cock_animation2:
     "Zero_handjob_cock"
 
     subpixel True
@@ -206,6 +310,7 @@ image Rogue_titjob_cock_animation2:
 
 image Rogue_blowjob_cock_animation0:
     "Zero_blowjob_cock"
+
     rotate -10
 
 image Rogue_blowjob_cock_animation1:
@@ -264,10 +369,6 @@ image Rogue_sex_cock_animation3:
         ease 1.5 offset (0.75, -40)
         repeat
 
-layeredimage Rogue_sex_cock_animations:
-    always:
-        "Rogue_sex_cock_animation[action_speed]" pos (0.29175, 0.635) zoom 1.25
-
 image Rogue_sex_cock_anal_animation0:
     "Zero_doggy_cock_in"
 
@@ -302,10 +403,6 @@ image Rogue_sex_cock_anal_animation3:
         pause 0.25
         ease 1.5 yoffset -40
         repeat
-
-layeredimage Rogue_sex_cock_anal_animations:
-    always:
-        "Rogue_sex_cock_anal_animation[action_speed]" pos (0.293, 0.7) zoom 1.18
 
 image Rogue_sex_cock_footjob_animation0:
     "Zero_blowjob_cock"
@@ -370,36 +467,6 @@ image Rogue_sex_cock_hotdog_animation3:
         ease 1 yoffset -60
         repeat
 
-image Rogue_sex_finger_pussy_animation:
-    "Zero_sex_finger"
-
-    subpixel True
-    zoom 1.2
-    block:
-        ease 0.2 yoffset -40
-        pause 0.2
-        ease 0.6 yoffset 0
-        repeat
-
-layeredimage Rogue_sex_finger_pussy_animations:
-    always:
-        "Rogue_sex_finger_pussy_animation" pos (0.292, 0.64)
-
-image Rogue_sex_finger_ass_animation:
-    "Zero_sex_finger"
-
-    subpixel True
-    zoom 1.2
-    block:
-        ease 0.4 yoffset -50
-        pause 0.4
-        ease 1.2 yoffset 0
-        repeat
-
-layeredimage Rogue_sex_finger_ass_animations:
-    always:
-        "Rogue_sex_finger_ass_animation" pos (0.2923, 0.7)
-
 image Rogue_doggy_cock_animation0:
     "Zero_doggy_cock_in"
 
@@ -442,10 +509,6 @@ image Rogue_doggy_cock_animation3:
         ease 0.6 offset (-3, -45)
         repeat
 
-layeredimage Rogue_doggy_cock_animations:
-    always:
-        "Rogue_doggy_cock_animation[action_speed]" pos (0.112, 0.62)
-
 image Rogue_doggy_cock_anal_animation0:
     "Zero_doggy_cock_in"
 
@@ -481,10 +544,6 @@ image Rogue_doggy_cock_anal_animation3:
         ease 0.6 offset (-2, -35)
         repeat
 
-layeredimage Rogue_doggy_cock_anal_animations:
-    always:
-        "Rogue_doggy_cock_anal_animation[action_speed]" pos (0.1125, 0.58)
-
 image Rogue_doggy_cock_hotdog_animation0:
     "Zero_doggy_cock_out"
 
@@ -515,10 +574,6 @@ image Rogue_doggy_cock_hotdog_animation3:
         ease 1 yoffset 50
         repeat
 
-layeredimage Rogue_doggy_cock_hotdog_animations:
-    always:
-        "Rogue_doggy_cock_hotdog_animation[action_speed]" pos (0.1135, 0.52)
-
 image Rogue_doggy_cock_footjob_animation0:
     "Zero_doggy_cock_out"
 
@@ -542,33 +597,132 @@ image Rogue_doggy_cock_footjob_animation2:
         ease 0.28 yoffset 0
         repeat
 
-image Rogue_doggy_finger_pussy_animation:
-    "Zero_sex_finger"
+layeredimage Zero_cock_Rogue:
+    if renpy.showing("Rogue_sprite handjob"):
+        "Zero_handjob_cock_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+
+    if renpy.showing("Rogue_sprite titjob"):
+        "Zero_titjob_cock_animation[action_speed]" pos (-0.007, 0.2) zoom 0.65
+
+    if renpy.showing("Rogue_sprite blowjob"):
+        "Rogue_blowjob_cock_animation[action_speed]" pos (0.02272, 0.462) zoom 0.2755
+
+    if not renpy.showing("Rogue_sprite sex"):
+        Null()
+    elif Player.cock_position == "in":
+        "Rogue_sex_cock_animation[action_speed]" pos (0.29175, 0.635) zoom 1.25
+    elif Player.cock_position == "anal":
+        "Rogue_sex_cock_anal_animation[action_speed]" pos (0.293, 0.7) zoom 1.18
+    elif Player.cock_position == "out":
+        "Rogue_sex_cock_hotdog_animation[action_speed]" pos (0.29175, 0.65) zoom 1.18
+    elif Player.cock_position == "footjob":
+        "Rogue_sex_cock_footjob_animation[action_speed]" pos (0.28, 0.53) alpha 0.8 zoom 0.6
+
+    if not renpy.showing("Rogue_sprite doggy"):
+        Null()
+    elif Player.cock_position == "in":
+        "Rogue_doggy_cock_animation[action_speed]" pos (0.112, 0.62)
+    elif Player.cock_position == "anal":
+        "Rogue_doggy_cock_anal_animation[action_speed]" pos (0.1125, 0.58)
+    elif Player.cock_position == "out":
+        "Rogue_doggy_cock_hotdog_animation[action_speed]" pos (0.1135, 0.52)
+
+image Rogue_doggy_pussy_mask_animation0:
+    "Rogue_doggy_pussy_mask"
 
     subpixel True
+    xzoom 0.6
     block:
-        ease 1 offset (-3, -45)
+        ease 1 xzoom 0.65
         pause 1
-        ease 3 offset (0, 0)
+        ease 3 xzoom 0.6
         repeat
 
-layeredimage Rogue_doggy_finger_pussy_animations:
-    always:
-        "Rogue_doggy_finger_pussy_animation" pos (0.112, 0.625)
-
-image Rogue_doggy_finger_anal_animation:
-    "Zero_sex_finger"
+image Rogue_doggy_pussy_mask_animation1:
+    "Rogue_doggy_pussy_mask"
 
     subpixel True
+    xzoom 0.6
     block:
-        ease 0.5 yoffset -20
-        pause 0.25
-        ease 1.75 yoffset 0
+        ease 1 xzoom 1
+        pause 1
+        ease 3 xzoom 0.6
         repeat
 
-layeredimage Rogue_doggy_finger_anal_animations:
-    always:
-        "Rogue_doggy_finger_anal_animation" pos (0.112, 0.57)
+image Rogue_doggy_pussy_mask_animation2:
+    "Rogue_doggy_pussy_mask"
+
+image Rogue_doggy_pussy_mask_animation3:
+    "Rogue_doggy_pussy_mask"
+
+image Rogue_doggy_anus_mask_animation0:
+    "Rogue_doggy_anus_mask"
+
+image Rogue_doggy_anus_mask_animation1:
+    "Rogue_doggy_anus_mask"
+
+    subpixel True
+    zoom 0.5
+    block:
+        ease 0.5 zoom 1
+        pause 0.5
+        ease 1.5 zoom 0.5
+        repeat
+
+image Rogue_doggy_anus_mask_animation2:
+    "Rogue_doggy_anus_mask"
+
+    zoom 0.9
+
+image Rogue_doggy_anus_mask_animation3:
+    "Rogue_doggy_anus_mask"
+
+    zoom 0.9
+
+layeredimage Zero_cock_Rogue_mask:
+    if not renpy.showing("Rogue_sprite doggy"):
+        Null()
+    elif Player.cock_position == "in":
+        "Rogue_doggy_pussy_mask_animation[action_speed]" offset (217, 514)
+    elif Player.cock_position == "anal":
+        "Rogue_doggy_anus_mask_animation[action_speed]" offset (217, 514)
+
+layeredimage Zero_cock_Kitty:
+    if renpy.showing("Kitty_sprite handjob"):
+        "Zero_handjob_cock_animation[action_speed]" pos (-0.01, 0.455) zoom 0.28
+
+    if renpy.showing("Kitty_sprite titjob"):
+        "Zero_blowjob_cock" pos (0.05, 0.3) zoom 0.7
+
+layeredimage Zero_cock_Kitty_mask:
+    if renpy.showing("Kitty_sprite titjob"):
+        "Kitty_titjob_mask_animation[action_speed]" offset (100, 100)
+
+layeredimage Zero_cock_Emma:
+    if renpy.showing("Emma_sprite handjob"):
+        "Zero_handjob_cock_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+
+layeredimage Zero_cock_Laura:
+    if renpy.showing("Laura_sprite handjob"):
+        "Zero_handjob_cock_animation[action_speed]" pos (0.035, 0.455) zoom 0.28
+
+layeredimage Zero_cock_Jean:
+    if renpy.showing("Jean_sprite handjob"):
+        "Zero_handjob_cock_animation[action_speed]" pos (0.035, 0.455) zoom 0.28
+
+layeredimage Zero_cock_Storm:
+    if renpy.showing("Storm_sprite handjob"):
+        "Zero_handjob_cock_animation[action_speed]" pos (0.08, 0.455) zoom 0.28
+
+layeredimage Zero_cock_Jubes:
+    if renpy.showing("Jubes_sprite handjob"):
+        "Zero_handjob_cock_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+
+
+
+
+
+
 
 image Kitty_sex_cock_anal_animation0:
     "Zero_doggy_cock_in"

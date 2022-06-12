@@ -215,25 +215,17 @@ layeredimage Rogue_sprite handjob:
         "Rogue_handjob_under_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
 
     always:
-        "Zero_handjob_cock_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+        "Zero_cock_Rogue"
 
     always:
         "Rogue_handjob_over_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
 
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
 
-
-
-
-
-
-
-
-
-image Rogue_titjob_under_tits_animation0:
+image Rogue_titjob_under_animation0:
     "Rogue_titjob_under"
 
-image Rogue_titjob_under_tits_animation1:
+image Rogue_titjob_under_animation1:
     "Rogue_titjob_under"
 
     subpixel True
@@ -243,7 +235,7 @@ image Rogue_titjob_under_tits_animation1:
         ease 1.3 yoffset -80
         repeat
 
-image Rogue_titjob_under_tits_animation2:
+image Rogue_titjob_under_animation2:
     "Rogue_titjob_under"
 
     subpixel True
@@ -253,10 +245,10 @@ image Rogue_titjob_under_tits_animation2:
         ease 0.1 yoffset -75
         repeat
 
-image Rogue_titjob_over_tits_animation0:
+image Rogue_titjob_over_animation0:
     "Rogue_titjob_over"
 
-image Rogue_titjob_over_tits_animation1:
+image Rogue_titjob_over_animation1:
     "Rogue_titjob_over"
 
     subpixel True
@@ -266,7 +258,7 @@ image Rogue_titjob_over_tits_animation1:
         ease 1.2 yoffset -80
         repeat
 
-image Rogue_titjob_over_tits_animation2:
+image Rogue_titjob_over_animation2:
     "Rogue_titjob_over"
 
     subpixel True
@@ -278,15 +270,15 @@ image Rogue_titjob_over_tits_animation2:
 
 layeredimage Rogue_sprite titjob:
     always:
-        "Rogue_titjob_under_tits_animation[action_speed]" pos (-0.043, 0.8)
+        "Rogue_titjob_under_animation[action_speed]"
 
     always:
-        "Rogue_titjob_cock_animation[action_speed]" pos (-0.05, 1.0) zoom 0.65
+        "Zero_cock_Rogue"
 
     always:
-        "Rogue_titjob_over_tits_animation[action_speed]" pos (-0.043, 0.8)
+        "Rogue_titjob_over_animation[action_speed]"
 
-    anchor (0.5, 0.0) offset (200, 250) zoom 0.72
+    anchor (0.5, 0.0) offset (200, 850) zoom 0.72
 
 image Rogue_blowjob_back_hair_animation0:
     "Rogue_back_hair"
@@ -557,7 +549,7 @@ layeredimage Rogue_sprite blowjob:
         "Rogue_blowjob_head_animation[action_speed]" pos (0.031, 0.317) zoom 0.2755
 
     always:
-        "Rogue_blowjob_cock_animation[action_speed]" pos (0.02272, 0.462) zoom 0.2755
+        "Zero_cock_Rogue"
 
     if action_speed > 1:
         "Rogue_blowjob_face_mask_animation[action_speed]" anchor (0.5, 0.5) pos (0.031, 0.317) zoom 0.2755
@@ -787,14 +779,6 @@ image Rogue_sex_spunk_anus_under_animation:
         ease 2.25 xzoom 0.6
         repeat
 
-layeredimage Rogue_sex_spunk_anus_under_animations:
-    if Player.sprite and Player.cock_position == "anal" and action_speed > 1:
-        "Rogue_sex_spunk_anus_under" pos (0.292, 0.386)
-    elif Player.sprite and Player.cock_position == "anal" and action_speed == 1:
-        "Rogue_sex_spunk_anus_under_animation" pos (0.292, 0.386)
-    else:
-        "images/Kitty_sex/Kitty_sex_spunk_anus_closed.png"
-
 image Rogue_sex_spunk_anus_over_animation:
     "Rogue_sex_spunk_anus_over"
 
@@ -948,39 +932,7 @@ image Rogue_doggy_pussy_hole_animation2:
 image Rogue_doggy_pussy_hole_animation3:
     "Rogue_doggy_pussy_hole"
 
-image Rogue_doggy_pussy_mask_animation0:
-    "Rogue_doggy_pussy_mask"
-
-    subpixel True
-    xzoom 0.6
-    block:
-        ease 1 xzoom 0.65
-        pause 1
-        ease 3 xzoom 0.6
-        repeat
-
-image Rogue_doggy_pussy_mask_animation1:
-    "Rogue_doggy_pussy_mask"
-
-    subpixel True
-    xzoom 0.6
-    block:
-        ease 1 xzoom 1
-        pause 1
-        ease 3 xzoom 0.6
-        repeat
-
-image Rogue_doggy_pussy_mask_animation2:
-    "Rogue_doggy_pussy_mask"
-
-image Rogue_doggy_pussy_mask_animation3:
-    "Rogue_doggy_pussy_mask"
-
-layeredimage Rogue_doggy_pussy_mask_animations:
-    always:
-        "Rogue_doggy_pussy_mask_animation[action_speed]" offset (217, 514)
-
-image Rogue_doggy_pussy_fingering:
+image Rogue_doggy_pussy_hole_fingering:
     "Rogue_doggy_pussy_hole"
 
     subpixel True
@@ -1012,37 +964,7 @@ image Rogue_doggy_anus_anal_animation3:
 
     zoom 0.9
 
-image Rogue_doggy_anus_mask_animation0:
-    "Rogue_doggy_anus_mask"
-
-image Rogue_doggy_anus_mask_animation1:
-    "Rogue_doggy_anus_mask"
-
-    subpixel True
-    zoom 0.5
-    block:
-        ease 0.5 zoom 1
-        pause 0.5
-        ease 1.5 zoom 0.5
-        repeat
-
-image Rogue_doggy_anus_mask_animation2:
-    "Rogue_doggy_anus_mask"
-
-    zoom 0.9
-
-image Rogue_doggy_anus_mask_animation3:
-    "Rogue_doggy_anus_mask"
-
-    zoom 0.9
-
-layeredimage Rogue_doggy_anus_mask_animations:
-    if Player.sprite and Player.cock_position == "anal":
-        "Rogue_doggy_anus_mask_animation[action_speed]" offset (217, 514)
-    elif Player.primary_action == "dildo_ass":
-        "Rogue_doggy_anus_mask_animation1" offset (217, 514)
-
-image Rogue_doggy_anus_fingering:
+image Rogue_doggy_anus_fingering_animation:
     "images/Rogue_doggy/Rogue_doggy_anus_full_hole.png"
 
     subpixel True
@@ -1052,21 +974,6 @@ image Rogue_doggy_anus_fingering:
         pause 0.5
         ease 1.5 zoom 0.6
         repeat
-
-image Rogue_doggy_anus_fingering_mask_animation:
-    "images/Rogue_doggy/Rogue_doggy_anus_mask.png"
-
-    subpixel True
-    anchor (0.52, 0.69) zoom 0.6
-    block:
-        ease 0.5 zoom 0.75
-        pause 0.5
-        ease 1.5 zoom 0.6
-        repeat
-
-layeredimage Rogue_doggy_anus_fingering_mask_animations:
-    always:
-        "Rogue_doggy_anus_fingering_mask_animation" offset (217, 514)
 
 image Rogue_doggy_shin_animation0:
     "Rogue_doggy_shins"
@@ -1099,10 +1006,6 @@ image Rogue_doggy_shin_animation2:
         ease 0.3 yoffset 0
         repeat
 
-layeredimage Rogue_doggy_shin_animations:
-    always:
-        "Rogue_doggy_shin_animation[action_speed]"
-
 image Rogue_doggy_feet_animation0:
     "Rogue_doggy_feet"
 
@@ -1133,10 +1036,6 @@ image Rogue_doggy_feet_animation2:
         ease 0.6 yoffset 110
         ease 0.3 yoffset 0
         repeat
-
-layeredimage Rogue_doggy_feet_animations:
-    always:
-        "Rogue_doggy_feet_animation[action_speed]"
 
 layeredimage Rogue_sprite doggy:
     if Player.cock_position == "anal":

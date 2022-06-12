@@ -231,7 +231,7 @@ layeredimage Emma_sprite handjob:
         "Emma_handjob_under_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
 
     always:
-        "Zero_handjob_cock_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+        "Zero_cock_Emma"
 
     always:
         "Emma_handjob_over_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28

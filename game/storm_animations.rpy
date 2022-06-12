@@ -215,7 +215,7 @@ layeredimage Storm_sprite handjob:
         "Storm_handjob_under_hand_animation[action_speed]" pos (0.08, 0.455) zoom 0.28
 
     always:
-        "Zero_handjob_cock_animation[action_speed]" pos (0.08, 0.455) zoom 0.28
+        "Zero_cock_Storm"
 
     always:
         "Storm_handjob_over_hand_animation[action_speed]" pos (0.08, 0.455) zoom 0.28

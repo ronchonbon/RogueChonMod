@@ -124,6 +124,16 @@ label change_Xavier_face(face = Xavier_emotion):
 
     return
 
+image black_screen:
+    Solid("#000000")
+
+    on show:
+        alpha 1.0
+        linear 0.4 alpha 1.0
+    on hide:
+        alpha 1.0
+        linear 0.4 alpha 0.0
+
 layeredimage background:
     always:
         "images/background/sky_[current_time].png"
@@ -249,62 +259,6 @@ image dildo:
     "images/DildoIn.png"
 
     anchor (0.5, 0.5)
-
-image Rogue_dildo_pussy_animation:
-    "dildo"
-
-    subpixel True
-    block:
-        ease 1 yoffset -60
-        pause 1
-        ease 3 yoffset 0
-        repeat
-
-layeredimage Rogue_dildo_pussy_animations:
-    always:
-        "Rogue_dildo_pussy_animation" pos (0.2923, 0.595) zoom 1.22
-
-image Rogue_dildo_anal_animation:
-    "dildo"
-
-    subpixel True
-    block:
-        ease 1 yoffset -60
-        pause 1
-        ease 3 yoffset 0
-        repeat
-
-layeredimage Rogue_dildo_anal_animations:
-    always:
-        "Rogue_dildo_anal_animation" pos (0.2925, 0.64)
-
-image Rogue_doggy_dildo_pussy_animation:
-    "dildo"
-
-    subpixel True
-    block:
-        ease 1 xoffset -3 yoffset -45
-        pause 1
-        ease 3 xoffset 0 yoffset 0
-        repeat
-
-layeredimage Rogue_doggy_dildo_pussy_animations:
-    always:
-        "Rogue_doggy_dildo_pussy_animation" pos (0.1117, 0.62)
-
-image Rogue_doggy_dildo_anal_animation:
-    "dildo"
-
-    subpixel True
-    block:
-        ease 0.5 yoffset -65
-        pause 0.25
-        ease 1.75 yoffset 5
-        repeat
-
-layeredimage Rogue_doggy_dildo_anal_animations:
-    always:
-        "Rogue_doggy_dildo_anal_animation" pos (0.112, 0.58)
 
 image Kitty_dildo_pussy_animation:
     "dildo"

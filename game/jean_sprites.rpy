@@ -50,14 +50,8 @@ layeredimage Jean_sprite standing:
     elif JeanX.grool:
         "images/Jean_standing/Jean_standing_grool.png"
 
-    # always:
-    #     "Jean_grool_animations"
-
     if JeanX.spunk["pussy"] or JeanX.spunk["anus"]:
         "images/Jean_standing/Jean_standing_spunk_pussy.png"
-
-    # always:
-    #     "Jean_spunk_animations"
 
     if JeanX.outfit["dress"]:
         "images/Jean_standing/Jean_standing_dress[JeanX.outfit[dress]][JeanX.arm_pose].png"
@@ -176,7 +170,7 @@ image Jean_handjob_over:
 
 
 
-    
+
 
 # layeredimage Jean_kneeling:
 #     # always:

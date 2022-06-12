@@ -1,12 +1,3 @@
-image black_screen:
-    Solid("#000000")
-    on show:
-        alpha 1.0
-        linear 0.4 alpha 1.0
-    on hide:
-        alpha 1.0
-        linear 0.4 alpha 0.0
-
 define ch_p = Character('[Player.name]', color = "#87CEEB", show_two_window = True)
 
 define ch_r = Character('[RogueX.name]', color = "#85bb65", image = "Rogue_sprite", show_two_window = True)
@@ -191,25 +182,25 @@ label start:
     python:
         for G in all_Girls:
             G.change_face("_sexy")
+            G.change_outfit("nude")
+            G.grool = 2
+            G.spunk["pussy"] = True
+            G.spunk["anus"] = True
 
-    # $ KittyX.change_outfit("nude")
-    #
-    # $ Player.sprite = True
-    # # $ show_feet = True
-    $ action_speed = 2
-    # $ Player.cock_position = "out"
-    # $ Player.primary_action = "hotdog"
-    # # $ Player.secondary_action = "dildo_ass"
-    # $ KittyX.spunk["anus"] = True
-    # $ KittyX.spunk["pussy"] = True
+    $ Player.sprite = True
+    $ show_feet = False
+    $ action_speed = 1
+    $ Player.cock_position = "in"
+    $ Player.primary_action = "sex"
+    $ Player.secondary_action = "finger_ass"
 
-    show Rogue_sprite handjob at sprite_location(0.5)
+    # show Rogue_sprite handjob at sprite_location(0.5)
     # show Kitty_sprite handjob at sprite_location(0.5)
     # show Emma_sprite handjob at sprite_location(0.5)
     # show Laura_sprite handjob at sprite_location(0.5)
     # show Jean_sprite handjob at sprite_location(0.5)
     # show Storm_sprite handjob at sprite_location(0.5)
-    # show Jubes_sprite handjob at sprite_location(0.5)
+    show Jubes_sprite handjob at sprite_location(0.5)
 
     ""
 

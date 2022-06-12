@@ -14,48 +14,6 @@ image Jean_blinking:
     0.05
     repeat
 
-layeredimage Jean_grool_dripping_animation:
-    always:
-        "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
-
-    if JeanX.grool > 1 and not JeanX.pussy_covered:
-        "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
-
-    if JeanX.grool > 1 and not JeanX.pussy_covered:
-        "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
-
-    if JeanX.grool > 1 and not JeanX.pussy_covered:
-        "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
-
-layeredimage Jean_grool_animations:
-    if JeanX.grool and JeanX.outfit["bottom"] == "_pants" and JeanX.bottom_pulled_down:
-        AlphaMask("Jean_grool_dripping_animation", "images/Jean_standing/Jean_standing_grool_mask_pants.png")
-    elif JeanX.grool and JeanX.outfit["underwear"] and JeanX.underwear_pulled_down:
-        AlphaMask("Jean_grool_dripping_animation", "images/Jean_standing/Jean_standing_grool_mask_underwear.png")
-    elif JeanX.grool and not JeanX.pussy_covered:
-        AlphaMask("Jean_grool_dripping_animation", "images/Jean_standing/Jean_standing_grool_mask.png")
-
-layeredimage Jean_spunk_dripping_animation:
-    always:
-        "spunk_dripping_animation" pos (0.115, 0.55) zoom 0.3
-
-    if not JeanX.pussy_covered:
-        "spunk_dripping_animation" pos (0.115, 0.55) zoom 0.3
-
-    if not JeanX.pussy_covered:
-        "spunk_dripping_animation" pos (0.115, 0.55) zoom 0.3
-
-    if not JeanX.pussy_covered:
-        "spunk_dripping_animation" pos (0.115, 0.55) zoom 0.3
-
-layeredimage Jean_spunk_animations:
-    if (JeanX.spunk["pussy"] or JeanX.spunk["anus"]) and JeanX.outfit["bottom"] == "_pants" and JeanX.bottom_pulled_down:
-        AlphaMask("Jean_spunk_dripping_animation", "images/Jean_standing/Jean_standing_grool_mask_pants.png")
-    elif (JeanX.spunk["pussy"] or JeanX.spunk["anus"]) and JeanX.outfit["underwear"] and JeanX.underwear_pulled_down:
-        AlphaMask("Jean_spunk_dripping_animation", "images/Jean_standing/Jean_standing_grool_mask_underwear.png")
-    elif (JeanX.spunk["pussy"] or JeanX.spunk["anus"]) and not JeanX.pussy_covered:
-        AlphaMask("Jean_spunk_dripping_animation", "images/Jean_standing/Jean_standing_grool_mask.png")
-
 # layeredimage Jean_standing_fondling_animations:
 #     if Player.primary_action == "lesbian" or not JeanX.secondary_action or focused_Girl != JeanX:
 #             Null()
@@ -215,7 +173,7 @@ layeredimage Jean_sprite handjob:
         "Jean_handjob_under_hand_animation[action_speed]" pos (0.035, 0.455) zoom 0.28
 
     always:
-        "Zero_handjob_cock_animation[action_speed]" pos (0.035, 0.455) zoom 0.28
+        "Zero_cock_Jean"
 
     always:
         "Jean_handjob_over_hand_animation[action_speed]" pos (0.035, 0.455) zoom 0.28

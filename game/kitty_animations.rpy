@@ -215,16 +215,345 @@ layeredimage Kitty_sprite handjob:
         "Kitty_handjob_under_hand_animation[action_speed]" pos (-0.01, 0.455) zoom 0.28
 
     always:
-        "Zero_handjob_cock_animation[action_speed]" pos (-0.01, 0.455) zoom 0.28
+        "Zero_cock_Kitty"
 
     always:
         "Kitty_handjob_over_hand_animation[action_speed]" pos (-0.01, 0.455) zoom 0.28
 
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
 
+image Kitty_titjob_back_hair_animation0:
+    "Kitty_titjob_back_hair"
 
+    subpixel True
+    block:
+        ease 2.4 yoffset -10
+        ease 1.6 yoffset 0
+        repeat
 
+image Kitty_titjob_back_hair_animation1:
+    "Kitty_titjob_back_hair"
 
+    subpixel True
+    block:
+        ease 3.0 yoffset -50
+        ease 1.0 yoffset 0
+        repeat
+
+image Kitty_titjob_back_hair_animation2:
+    "Kitty_titjob_back_hair"
+
+    subpixel True
+    block:
+        ease 0.7 yoffset -45
+        ease 0.25 yoffset 0
+        pause 0.05
+        repeat
+
+image Kitty_titjob_back_hair_animation3:
+    "Kitty_titjob_back_hair"
+
+    subpixel True
+    parallel:
+        block:
+            ease 2 offset (-5, 30)
+            ease 0.6 offset (-5, 55)
+            pause 0.4
+            repeat 2
+        block:
+            ease 2.2 offset (-5, 30)
+            ease 0.8 offset (15, 60)
+            ease 2.2 offset (5, 30)
+            ease 0.8 offset (15, 60)
+        block:
+            ease 2 offset (-5, 30)
+            ease 0.6 offset (-5, 55)
+            pause 0.4
+            repeat 2
+        block:
+            ease 2.2 offset (-5, 30)
+            ease 0.8 offset (-30, 60)
+            ease 2.2 offset (-15, 30)
+            ease 0.8 offset (-30, 60)
+        repeat
+    parallel:
+        block:
+            ease 2.2 rotate 0
+            pause 3.8
+        block:
+            ease 2.2 rotate 0
+            ease 0.8 rotate 10
+            ease 2.2 rotate 0
+            ease 0.8 rotate 5
+        block:
+            ease 2.2 rotate 0
+            pause 3.8
+        block:
+            ease 2.2 rotate 0
+            ease 0.8 rotate -10
+            ease 2.2 rotate 0
+            ease 0.8 rotate -5
+        repeat
+
+image Kitty_titjob_body_animation0:
+    "Kitty_titjob_body"
+
+    subpixel True
+    block:
+        ease 2.4 yoffset -5
+        ease 1.6 yoffset 0
+        repeat
+
+image Kitty_titjob_body_animation1:
+    "Kitty_titjob_body"
+
+    subpixel True
+    block:
+        ease 2.8 yoffset -50
+        ease 1.0 yoffset 0
+        pause 0.2
+        repeat
+
+image Kitty_titjob_body_animation2:
+    "Kitty_titjob_body"
+
+    subpixel True
+    block:
+        ease 0.65 yoffset -45
+        ease 0.25 yoffset 0
+        pause 0.1
+        repeat
+
+image Kitty_titjob_body_animation3:
+    "Kitty_titjob_body"
+
+    subpixel True
+    block:
+        ease 2.2 yoffset -20
+        ease 0.6 yoffset 0
+        pause 0.2
+        repeat
+
+image Kitty_titjob_arms_animation0:
+    "Kitty_titjob_arms"
+
+    subpixel True
+    block:
+        ease 2.4 yoffset -5
+        ease 1.6 yoffset 0
+        repeat
+
+image Kitty_titjob_arms_animation1:
+    "Kitty_titjob_arms"
+
+    subpixel True
+    block:
+        ease 2.85 yoffset -50
+        ease 1.0 yoffset 0
+        pause 0.15
+        repeat
+
+image Kitty_titjob_arms_animation2:
+    "Kitty_titjob_arms"
+
+    subpixel True
+    block:
+        ease 0.68 yoffset -45
+        ease 0.25 yoffset 0
+        pause 0.07
+        repeat
+
+image Kitty_titjob_arms_animation3:
+    "Kitty_titjob_arms"
+
+    subpixel True
+    block:
+        ease 2.2 yoffset -20
+        ease 0.6 yoffset 0
+        pause 0.2
+        repeat
+
+image Kitty_titjob_head_animation0:
+    "Kitty_blowjob_head"
+
+    subpixel True
+    block:
+        ease 2.4 yoffset -10
+        ease 1.6 yoffset 0
+        repeat
+
+image Kitty_titjob_head_animation1:
+    "Kitty_blowjob_head"
+
+    subpixel True
+    block:
+        ease 2.9 yoffset -50
+        ease 1.0 yoffset 0
+        pause 0.1
+        repeat
+
+image Kitty_titjob_head_animation2:
+    "Kitty_blowjob_head"
+
+    subpixel True
+    block:
+        ease 0.68 yoffset -45
+        ease 0.25 yoffset 0
+        pause 0.07
+        repeat
+
+image Kitty_titjob_head_animation3:
+    "Kitty_blowjob_head"
+
+    subpixel True
+    parallel:
+        block:
+            ease 2 offset (-5, 30)
+            ease 0.6 offset (-5, 55)
+            pause 0.4
+            repeat 2
+        block:
+            ease 2.2 offset (-5, 30)
+            ease 0.8 offset (15, 60)
+            ease 2.2 offset (5, 30)
+            ease 0.8 offset (15, 60)
+        block:
+            ease 2 offset (-5, 30)
+            ease 0.6 offset (-5, 55)
+            pause 0.4
+            repeat 2
+        block:
+            ease 2.2 offset (-5, 30)
+            ease 0.8 offset (-30, 60)
+            ease 2.2 offset (-15, 30)
+            ease 0.8 offset (-30, 60)
+        repeat
+    parallel:
+        block:
+            ease 2.2 rotate 0
+            pause 3.8
+        block:
+            ease 2.2 rotate 0
+            ease 0.8 rotate 10
+            ease 2.2 rotate 0
+            ease 0.8 rotate 5
+        block:
+            ease 2.2 rotate 0
+            pause 3.8
+        block:
+            ease 2.2 rotate 0
+            ease 0.8 rotate -10
+            ease 2.2 rotate 0
+            ease 0.8 rotate -5
+        repeat
+
+image Kitty_titjob_breasts_animation0:
+    "Kitty_titjob_breasts"
+
+    subpixel True
+    block:
+        ease 2.4 yoffset -5
+        ease 1.6 yoffset 0
+        repeat
+
+image Kitty_titjob_breasts_animation1:
+    "Kitty_titjob_breasts"
+
+    subpixel True
+    block:
+        ease 2.9 yoffset -50
+        ease 1.0 yoffset 0
+        pause 0.1
+        repeat
+
+image Kitty_titjob_breasts_animation2:
+    "Kitty_titjob_breasts"
+
+    subpixel True
+    block:
+        ease 0.71 yoffset -40
+        ease 0.27 yoffset 0
+        pause 0.02
+        repeat
+
+image Kitty_titjob_breasts_animation3:
+    "Kitty_titjob_breasts"
+
+    subpixel True
+    block:
+        ease 2.2 yoffset -20
+        ease 0.6 yoffset 0
+        pause 0.2
+        repeat
+
+image Kitty_titjob_mask_animation1:
+    "Kitty_titjob_mask"
+
+    subpixel True
+    block:
+        ease 2.9 yoffset -50
+        ease 1.0 yoffset 0
+        pause 0.1
+        repeat
+
+image Kitty_titjob_mask_animation2:
+    "Kitty_titjob_mask"
+
+    subpixel True
+    block:
+        ease 0.71 yoffset -40
+        ease 0.27 yoffset 0
+        pause 0.02
+        repeat
+
+image Kitty_titjob_mask_animation3:
+    "Kitty_titjob_mask"
+
+    subpixel True
+    block:
+        ease 2.2 yoffset -20
+        ease 0.6 yoffset 0
+        pause 0.2
+        repeat
+
+layeredimage Kitty_sprite titjob:
+    if KittyX.wet or KittyX.outfit["hair"] == "_wet":
+        "Kitty_titjob_back_hair_animation[action_speed]" pos (0.0, -0.2) zoom 0.9
+
+    always:
+        "Kitty_titjob_body_animation[action_speed]"
+
+    always:
+        "Kitty_titjob_arms_animation[action_speed]"
+
+    always:
+        "Kitty_titjob_head_animation[action_speed]" pos (0.0, -0.2) zoom 0.9
+
+    always:
+        "Kitty_titjob_breasts_animation[action_speed]"
+
+    if action_speed:
+        AlphaMask("Zero_cock_Kitty", "Zero_cock_Kitty_masks") offset (-100, -100)
+    else:
+        "Zero_cock_Kitty" offset (-100, -100)
+
+    anchor (0.5, 0.0) offset (280, 800)
+
+image Kitty_blowjob_blinking:
+    "images/Kitty_blowjob/Kitty_blowjob_eyes[KittyX.eyes].png"
+    choice:
+        3.5
+    choice:
+        3.25
+    choice:
+        3
+    "images/Kitty_blowjob/Kitty_blowjob_eyes_squint.png"
+    0.05
+    "images/Kitty_blowjob/Kitty_blowjob_eyes_closed.png"
+    0.15
+    "images/Kitty_blowjob/Kitty_blowjob_eyes_squint.png"
+    0.05
+    repeat
 
 
 

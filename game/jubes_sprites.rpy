@@ -46,14 +46,14 @@ layeredimage Jubes_sprite standing:
     if JubesX.outfit["hose"]:
         "images/Jubes_standing/Jubes_standing_hose[JubesX.outfit[hose]].png"
 
-    # always:
-    #     "Jubes_grool_animations"
+    always:
+        "Jubes_grool_animations"
 
-    if JubesX.spunk["pussy"] or JubesX.spunk["anus"]:
-        "images/Jubes_standing/Jubes_standing_spunk_pussy.png"
+    # if JubesX.spunk["pussy"] or JubesX.spunk["anus"]:
+    #     "images/Jubes_standing/Jubes_standing_spunk_pussy.png"
 
-    # always:
-    #     "Jubes_spunk_animations"
+    always:
+        "Jubes_spunk_animations"
 
     if JubesX.outfit["bottom"] and (JubesX.bottom_pulled_down or JubesX.upskirt):
         "images/Jubes_standing/Jubes_standing_bottom[JubesX.outfit[bottom]]_down.png"

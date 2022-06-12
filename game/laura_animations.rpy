@@ -215,7 +215,7 @@ layeredimage Laura_sprite handjob:
         "Laura_handjob_under_hand_animation[action_speed]" pos (0.035, 0.455) zoom 0.28
 
     always:
-        "Zero_handjob_cock_animation[action_speed]" pos (0.035, 0.455) zoom 0.28
+        "Zero_cock_Laura"
 
     always:
         "Laura_handjob_over_hand_animation[action_speed]" pos (0.035, 0.455) zoom 0.28
