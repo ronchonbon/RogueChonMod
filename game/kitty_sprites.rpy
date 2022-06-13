@@ -4,7 +4,7 @@ layeredimage Kitty_sprite standing:
     elif KittyX.outfit["bottom"] == "_dress":
         "images/Kitty_standing/Kitty_standing_back_outer_accessory[KittyX.outfit[bottom]].png"
 
-    always:
+    if KittyX.outfit["hair"] != "_evo":
         "Kitty_back_hair" pos (0.12, 0.152) zoom 0.5
 
     if KittyX.outfit["buttplug"]:
@@ -25,24 +25,28 @@ layeredimage Kitty_sprite standing:
     if KittyX.outfit["piercings"]:
         "images/Kitty_standing/Kitty_standing_piercings_pussy[KittyX.outfit[piercings]].png"
 
-    if KittyX.outfit["bra"] and KittyX.bra_pulled_up:
+    if not KittyX.outfit["bra"]:
+        Null()
+    elif KittyX.bra_pulled_up:
         "images/Kitty_standing/Kitty_standing_bra[KittyX.outfit[bra]][KittyX.arm_pose]_up.png"
-    elif KittyX.outfit["bra"]:
+    else:
         "images/Kitty_standing/Kitty_standing_bra[KittyX.outfit[bra]][KittyX.arm_pose].png"
 
-    if KittyX.outfit["underwear"] and KittyX.underwear_pulled_down and (not KittyX.outfit["bottom"] or KittyX.wearing_skirt) and KittyX.grool > 1:
+    if not KittyX.outfit["underwear"]:
+        Null()
+    elif KittyX.underwear_pulled_down and KittyX.grool > 1:
         "images/Kitty_standing/Kitty_standing_underwear[KittyX.outfit[underwear]]_down_grool.png"
-    elif KittyX.outfit["underwear"] and KittyX.underwear_pulled_down and (not KittyX.outfit["bottom"] or KittyX.wearing_skirt):
+    elif KittyX.underwear_pulled_down:
         "images/Kitty_standing/Kitty_standing_underwear[KittyX.outfit[underwear]]_down.png"
-    elif KittyX.outfit["underwear"] and KittyX.grool > 1:
+    elif KittyX.grool > 1:
         "images/Kitty_standing/Kitty_standing_underwear[KittyX.outfit[underwear]]_grool.png"
-    elif KittyX.outfit["underwear"]:
+    else:
         "images/Kitty_standing/Kitty_standing_underwear[KittyX.outfit[underwear]].png"
 
-    if KittyX.outfit["hose"]:
+    if KittyX.outfit["hose"] and not KittyX.underwear_pulled_down:
         "images/Kitty_standing/Kitty_standing_hose[KittyX.outfit[hose]].png"
 
-    elif KittyX.grool > 1 and KittyX.outfit["bottom"]:
+    if KittyX.outfit["bottom"] and KittyX.grool > 1:
         "images/Kitty_standing/Kitty_standing_grool1.png"
     elif KittyX.grool:
         "images/Kitty_standing/Kitty_standing_grool[KittyX.grool].png"
@@ -50,37 +54,48 @@ layeredimage Kitty_sprite standing:
     always:
         "Kitty_grool_animations"
 
+    if KittyX.spunk["pussy"] or KittyX.spunk["anus"]:
+        "images/Kitty_standing/Kitty_standing_spunk_pussy.png"
+
     always:
         "Kitty_spunk_animations"
 
-    if KittyX.outfit["bottom"] in ["_dress", "_skirt"] and KittyX.upskirt:
+    if not KittyX.outfit["bottom"]:
+        Null()
+    elif KittyX.bottom_pulled_down or KittyX.dress_upskirt or KittyX.upskirt:
         "images/Kitty_standing/Kitty_standing_bottom[KittyX.outfit[bottom]]_down.png"
-    elif KittyX.outfit["bottom"]:
+    else:
         "images/Kitty_standing/Kitty_standing_bottom[KittyX.outfit[bottom]].png"
 
     if KittyX.outfit["neck"]:
         "images/Kitty_standing/Kitty_standing_neck[KittyX.outfit[neck]].png"
 
-    if KittyX.outfit["dress"] and KittyX.dress_top_pulled_down and KittyX.dress_upskirt:
+    if not KittyX.outfit["dress"]:
+        Null()
+    elif KittyX.dress_top_pulled_down and KittyX.dress_upskirt:
         "images/Kitty_standing/Kitty_standing_dress[KittyX.outfit[dress]][KittyX.arm_pose]_both.png"
-    elif KittyX.outfit["dress"] and KittyX.dress_top_pulled_down:
+    elif KittyX.dress_top_pulled_down:
         "images/Kitty_standing/Kitty_standing_dress[KittyX.outfit[dress]][KittyX.arm_pose]_top.png"
-    elif KittyX.outfit["dress"] and KittyX.dress_upskirt:
+    elif KittyX.dress_upskirt:
         "images/Kitty_standing/Kitty_standing_dress[KittyX.outfit[dress]][KittyX.arm_pose]_bottom.png"
-    elif KittyX.outfit["dress"]:
+    else:
         "images/Kitty_standing/Kitty_standing_dress[KittyX.outfit[dress]][KittyX.arm_pose].png"
 
-    if KittyX.outfit["top"] and KittyX.top_pulled_up:
+    if not KittyX.outfit["top"]:
+        Null()
+    elif KittyX.top_pulled_up:
         "images/Kitty_standing/Kitty_standing_top[KittyX.outfit[top]][KittyX.arm_pose]_up.png"
-    elif KittyX.outfit["top"]:
+    else:
         "images/Kitty_standing/Kitty_standing_top[KittyX.outfit[top]][KittyX.arm_pose].png"
 
     if KittyX.outfit["piercings"] and KittyX.breasts_covered:
         "images/Kitty_standing/Kitty_standing_piercings_breasts[KittyX.outfit[piercings]]_covered.png"
 
-    if KittyX.outfit["jacket"] and KittyX.jacket_opened:
+    if not KittyX.outfit["jacket"]:
+        Null()
+    elif KittyX.jacket_opened:
         "images/Kitty_standing/Kitty_standing_jacket[KittyX.outfit[jacket]][KittyX.arm_pose]_up.png"
-    elif KittyX.outfit["jacket"]:
+    else:
         "images/Kitty_standing/Kitty_standing_jacket[KittyX.outfit[jacket]][KittyX.arm_pose].png"
 
     always:
@@ -106,9 +121,8 @@ layeredimage Kitty_sprite standing:
 
     anchor (0.5, 0.0) offset (40, 170) zoom 0.95
 
-layeredimage Kitty_back_hair:
-    if KittyX.outfit["hair"] != "_evo":
-        "images/Kitty_standing/Kitty_standing_back_hair[KittyX.outfit[hair]].png"
+image Kitty_back_hair:
+    "images/Kitty_standing/Kitty_standing_back_hair[KittyX.outfit[hair]].png"
 
     anchor (0.5, 0.5)
 
@@ -189,44 +203,44 @@ layeredimage Kitty_blowjob_head:
     if KittyX.wet or KittyX.outfit["hair"] == "_wet":
         "images/Kitty_blowjob/Kitty_blowjob_back_hair_wet.png"
 
-    if action_speed in [0, 1, 2, 5] or not renpy.showing("Kitty_sprite blowjob") and KittyX.wet and KittyX.blushing:
-        "images/Kitty_blowjob/Kitty_blowjob_face_closed_wet_blush.png"
-    elif action_speed in [0, 1, 2, 5] or not renpy.showing("Kitty_sprite blowjob") and KittyX.wet:
-        "images/Kitty_blowjob/Kitty_blowjob_face_closed_wet.png"
-    elif action_speed in [0, 1, 2, 5] or not renpy.showing("Kitty_sprite blowjob") and KittyX.blushing:
-        "images/Kitty_blowjob/Kitty_blowjob_face_closed_blush.png"
-    elif action_speed in [0, 1, 2, 5] or not renpy.showing("Kitty_sprite blowjob"):
-        "images/Kitty_blowjob/Kitty_blowjob_face_closed.png"
-    elif KittyX.wet and KittyX.blushing:
+    if renpy.showing("Kitty_sprite_blowjob") and action_speed > 2 and KittyX.wet and KittyX.blushing:
         "images/Kitty_blowjob/Kitty_blowjob_face_open_wet_blush.png"
-    elif KittyX.wet:
+    elif renpy.showing("Kitty_sprite_blowjob") and action_speed > 2 and KittyX.wet:
         "images/Kitty_blowjob/Kitty_blowjob_face_open_wet.png"
-    elif KittyX.blushing:
+    elif renpy.showing("Kitty_sprite_blowjob") and action_speed > 2 and KittyX.blushing:
         "images/Kitty_blowjob/Kitty_blowjob_face_open_blush.png"
-    else:
+    elif renpy.showing("Kitty_sprite_blowjob") and action_speed > 2:
         "images/Kitty_blowjob/Kitty_blowjob_face_open.png"
+    elif KittyX.wet and KittyX.blushing:
+        "images/Kitty_blowjob/Kitty_blowjob_face_closed_wet_blush.png"
+    elif KittyX.wet:
+        "images/Kitty_blowjob/Kitty_blowjob_face_closed_wet.png"
+    elif KittyX.blushing:
+        "images/Kitty_blowjob/Kitty_blowjob_face_closed_blush.png"
+    else:
+        "images/Kitty_blowjob/Kitty_blowjob_face_closed.png"
 
-    if action_speed == 1 and renpy.showing("Kitty_sprite blowjob"):
+    if renpy.showing("Kitty_sprite titjob") and action_speed == 3:
         "images/Kitty_blowjob/Kitty_blowjob_mouth_tongue.png"
-    elif action_speed not in [2, 5] and renpy.showing("Kitty_sprite blowjob"):
+    elif renpy.showing("Kitty_sprite blowjob") and action_speed == 1:
+        "images/Kitty_blowjob/Kitty_blowjob_mouth_tongue.png"
+    elif renpy.showing("Kitty_sprite blowjob") and action_speed != 2:
         "images/Kitty_blowjob/Kitty_blowjob_mouth_sucking.png"
-    elif action_speed == 3 and renpy.showing("Kitty_sprite titjob"):
-        "images/Kitty_blowjob/Kitty_blowjob_mouth_tongue.png"
-    elif action_speed in [4, 5] and renpy.showing("Kitty_sprite titjob"):
-        "images/Kitty_blowjob/Kitty_blowjob_mouth_kiss.png"
     else:
         "images/Kitty_blowjob/Kitty_blowjob_mouth[KittyX.mouth].png"
 
-    if renpy.showing("Kitty_sprite blowjob") and action_speed in [2, 5]:
+    if renpy.showing("Kitty_sprite blowjob") and action_speed == 2:
         "Kitty_blowjob_mouth_animations"
 
-    if KittyX.spunk["mouth"] and action_speed == 1 and renpy.showing("Kitty_sprite blowjob"):
+    if not KittyX.spunk["mouth"]:
+        Null()
+    elif renpy.showing("Kitty_sprite blowjob") and action_speed == 1:
         "images/Kitty_blowjob/Kitty_blowjob_spunk_mouth_tongue.png"
-    elif KittyX.spunk["mouth"] and action_speed not in [2, 5] and renpy.showing("Kitty_sprite blowjob"):
+    elif renpy.showing("Kitty_sprite blowjob") and action_speed != 2:
         "images/Kitty_blowjob/Kitty_blowjob_spunk_mouth_sucking_under.png"
-    elif KittyX.spunk["mouth"] and action_speed in [4, 5] and renpy.showing("Kitty_sprite titjob"):
-        "images/Kitty_blowjob/Kitty_blowjob_spunk_mouth_kiss.png"
-    elif KittyX.spunk["mouth"]:
+    elif KittyX.mouth == "_sucking":
+        "images/Kitty_blowjob/Kitty_blowjob_spunk_mouth[KittyX.mouth]_under.png"
+    else:
         "images/Kitty_blowjob/Kitty_blowjob_spunk_mouth[KittyX.mouth].png"
 
     always:
@@ -248,9 +262,11 @@ layeredimage Kitty_blowjob_head:
     if KittyX.spunk["hair"]:
         "images/Kitty_blowjob/Kitty_blowjob_spunk_hair.png"
 
-    if KittyX.wet and action_speed > 2:
+    if not KittyX.wet:
+        Null()
+    elif action_speed > 2:
         "images/Kitty_blowjob/Kitty_blowjob_head_open_wet.png"
-    elif KittyX.wet:
+    else:
         "images/Kitty_blowjob/Kitty_blowjob_head_closed_wet.png"
 
     anchor (0.5, 0.5)
@@ -306,7 +322,7 @@ layeredimage Kitty_blowjob_body:
     anchor (0.5, 0.5)
 
 layeredimage Kitty_sex_body:
-    always:
+    if KittyX.outfit["hair"] != "_evo":
         "Kitty_back_hair" pos (0.28, -0.065) rotate -10 zoom 0.75
 
     always:
@@ -331,7 +347,7 @@ layeredimage Kitty_sex_body:
     elif KittyX.outfit["top"]:
         "images/Kitty_sex/Kitty_sex_top[KittyX.outfit[top]].png"
 
-    if KittyX.outfit["jacket"] and KittyX.jacket_pulled_aside:
+    if KittyX.outfit["jacket"] and KittyX.jacket_opened:
         "images/Kitty_sex/Kitty_sex_jacket[KittyX.outfit[jacket]]_up.png"
     elif KittyX.outfit["jacket"]:
         "images/Kitty_sex/Kitty_sex_jacket[KittyX.outfit[jacket]].png"

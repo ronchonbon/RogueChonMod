@@ -286,10 +286,10 @@ image Zero_handjob_cock_animation2:
         pause 0.1
         repeat
 
-image Zero_titjob_cock_animation0:
+image Rogue_titjob_cock_animation0:
     "Zero_handjob_cock"
 
-image Zero_titjob_cock_animation1:
+image Rogue_titjob_cock_animation1:
     "Zero_handjob_cock"
 
     subpixel True
@@ -299,7 +299,7 @@ image Zero_titjob_cock_animation1:
         easein 1.3 yoffset -20
         repeat
 
-image Zero_titjob_cock_animation2:
+image Rogue_titjob_cock_animation2:
     "Zero_handjob_cock"
 
     subpixel True
@@ -602,7 +602,7 @@ layeredimage Zero_cock_Rogue:
         "Zero_handjob_cock_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
 
     if renpy.showing("Rogue_sprite titjob"):
-        "Zero_titjob_cock_animation[action_speed]" pos (-0.007, 0.2) zoom 0.65
+        "Rogue_titjob_cock_animation[action_speed]" pos (-0.007, 0.2) zoom 0.65
 
     if renpy.showing("Rogue_sprite blowjob"):
         "Rogue_blowjob_cock_animation[action_speed]" pos (0.02272, 0.462) zoom 0.2755
@@ -698,9 +698,64 @@ layeredimage Zero_cock_Kitty_mask:
     if renpy.showing("Kitty_sprite titjob"):
         "Kitty_titjob_mask_animation[action_speed]" offset (100, 100)
 
+image Emma_titjob_cock_animation0:
+    "Zero_blowjob_cock"
+
+    subpixel True
+    rotate -3
+    parallel:
+        pause 0.1
+        ease 1.6 yoffset 20
+        pause 0.1
+        ease 1.4 yoffset 0
+        repeat
+    parallel:
+        pause 0.1
+        ease 1.6 rotate 4
+        pause 0.1
+        ease 1.4 rotate -3
+        repeat
+
+image Emma_titjob_cock_animation1:
+    "Zero_blowjob_cock"
+
+    subpixel True
+    block:
+        pause 0.2
+        ease 1.4 yoffset -10
+        pause 0.3
+        ease 0.6 yoffset 0
+        repeat
+
+image Emma_titjob_cock_animation2:
+    "Zero_blowjob_cock"
+
+    subpixel True
+    block:
+        pause 0.05
+        ease 0.65 yoffset -10
+        ease 0.3 yoffset 0
+        repeat
+
+image Emma_titjob_cock_animation3:
+    "Zero_blowjob_cock"
+
+    subpixel True
+    offset (0, -20)
+    block:
+        pause 0.2
+        ease 1.6 yoffset -30
+        pause 0.4
+        ease 0.3 yoffset -20
+        pause 0.5
+        repeat
+
 layeredimage Zero_cock_Emma:
     if renpy.showing("Emma_sprite handjob"):
         "Zero_handjob_cock_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+
+    if renpy.showing("Emma_sprite titjob"):
+        "Emma_titjob_cock_animation[action_speed]" pos (0.0, 0.035) zoom 0.45
 
 layeredimage Zero_cock_Laura:
     if renpy.showing("Laura_sprite handjob"):
@@ -1120,6 +1175,6 @@ image Notslap_ass:
                 ease 0.1 xpos 310 rotate 80
                 pause 0.5
             parallel:
-                ease 0.2 ypos 520
+                ease 0.2 yoffset 520
                 pause 0.9
             repeat

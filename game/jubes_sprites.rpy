@@ -34,13 +34,15 @@ layeredimage Jubes_sprite standing:
     elif JubesX.outfit["bra"]:
         "images/Jubes_standing/Jubes_standing_bra[JubesX.outfit[bra]].png"
 
-    if JubesX.outfit["underwear"] and JubesX.underwear_pulled_down and (not JubesX.outfit["bottom"] or JubesX.wearing_skirt) and JubesX.grool > 1:
+    if not JubesX.outfit["underwear"]:
+        Null()
+    elif JubesX.underwear_pulled_down and JubesX.grool > 1:
         "images/Jubes_standing/Jubes_standing_underwear[JubesX.outfit[underwear]]_down_grool.png"
-    elif JubesX.outfit["underwear"] and JubesX.underwear_pulled_down and (not JubesX.outfit["bottom"] or JubesX.wearing_skirt):
+    elif JubesX.underwear_pulled_down:
         "images/Jubes_standing/Jubes_standing_underwear[JubesX.outfit[underwear]]_down.png"
-    elif JubesX.outfit["underwear"] and JubesX.grool > 1:
+    elif JubesX.grool > 1:
         "images/Jubes_standing/Jubes_standing_underwear[JubesX.outfit[underwear]]_grool.png"
-    elif JubesX.outfit["underwear"]:
+    elif:
         "images/Jubes_standing/Jubes_standing_underwear[JubesX.outfit[underwear]].png"
 
     if JubesX.outfit["hose"]:
@@ -55,9 +57,11 @@ layeredimage Jubes_sprite standing:
     always:
         "Jubes_spunk_animations"
 
-    if JubesX.outfit["bottom"] and (JubesX.bottom_pulled_down or JubesX.upskirt):
+    if not JubesX.outfit["bottom"]:
+        Null()
+    elif JubesX.bottom_pulled_down or JubesX.upskirt:
         "images/Jubes_standing/Jubes_standing_bottom[JubesX.outfit[bottom]]_down.png"
-    elif JubesX.outfit["bottom"]:
+    else:
         "images/Jubes_standing/Jubes_standing_bottom[JubesX.outfit[bottom]].png"
 
     if JubesX.outfit["bottom"] and not JubesX.bottom_pulled_down and JubesX.grool > 1:
@@ -65,11 +69,13 @@ layeredimage Jubes_sprite standing:
     elif JubesX.grool:
         "images/Jubes_standing/Jubes_standing_grool.png"
 
-    if JubesX.outfit["top"] == "_towel":
+    if not JubesX.outfit["top"]:
+        Null()
+    elif JubesX.outfit["top"] == "_towel":
         "images/Jubes_standing/Jubes_standing_top[JubesX.outfit[top]][JubesX.arm_pose].png"
-    elif JubesX.outfit["top"] and JubesX.top_pulled_up:
+    elif JubesX.top_pulled_up:
         "images/Jubes_standing/Jubes_standing_top[JubesX.outfit[top]]_up.png"
-    elif JubesX.outfit["top"]:
+    else:
         "images/Jubes_standing/Jubes_standing_top[JubesX.outfit[top]].png"
 
     if JubesX.outfit["neck"]:
@@ -87,14 +93,18 @@ layeredimage Jubes_sprite standing:
     if JubesX.outfit["jacket"] == "_closed_jacket" and JubesX.arm_pose == 2:
         "images/Jubes_standing/Jubes_standing_sleeves[JubesX.outfit[jacket]][JubesX.arm_pose].png"
 
-    if JubesX.outfit["suspenders"] and JubesX.suspenders_aside:
+    if not JubesX.outfit["suspenders"]:
+        Null()
+    elif JubesX.suspenders_aside:
         "images/Jubes_standing/Jubes_standing_suspenders[JubesX.outfit[suspenders]]_aside.png"
-    elif JubesX.outfit["suspenders"]:
+    else:
         "images/Jubes_standing/Jubes_standing_suspenders[JubesX.outfit[suspenders]].png"
 
-    if JubesX.outfit["jacket"] and JubesX.upskirt:
+    if not JubesX.outfit["jacket"]:
+        Null()
+    elif JubesX.upskirt:
         "images/Jubes_standing/Jubes_standing_jacket[JubesX.outfit[jacket]][JubesX.arm_pose]_up.png"
-    elif JubesX.outfit["jacket"]:
+    else:
         "images/Jubes_standing/Jubes_standing_jacket[JubesX.outfit[jacket]][JubesX.arm_pose].png"
 
     always:

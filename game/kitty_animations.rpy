@@ -533,7 +533,7 @@ layeredimage Kitty_sprite titjob:
         "Kitty_titjob_breasts_animation[action_speed]"
 
     if action_speed:
-        AlphaMask("Zero_cock_Kitty", "Zero_cock_Kitty_masks") offset (-100, -100)
+        AlphaMask("Zero_cock_Kitty", "Zero_cock_Kitty_mask") offset (-100, -100)
     else:
         "Zero_cock_Kitty" offset (-100, -100)
 

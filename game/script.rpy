@@ -195,12 +195,12 @@ label start:
     $ Player.secondary_action = "finger_ass"
 
     # show Rogue_sprite handjob at sprite_location(0.5)
-    # show Kitty_sprite handjob at sprite_location(0.5)
-    # show Emma_sprite handjob at sprite_location(0.5)
+    # show Kitty_sprite titjob at sprite_location(0.5)
+    show Emma_sprite titjob at sprite_location(0.5)
     # show Laura_sprite handjob at sprite_location(0.5)
     # show Jean_sprite handjob at sprite_location(0.5)
     # show Storm_sprite handjob at sprite_location(0.5)
-    show Jubes_sprite handjob at sprite_location(0.5)
+    # show Jubes_sprite handjob at sprite_location(0.5)
 
     ""
 

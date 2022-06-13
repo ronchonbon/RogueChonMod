@@ -31,15 +31,17 @@ layeredimage Storm_sprite standing:
     if StormX.outfit["piercings"]:
         "images/Storm_standing/Storm_standing_piercings_pussy[StormX.outfit[piercings]].png"
 
-    if StormX.outfit["underwear"] == "_bikini_bottoms" and (StormX.outfit["bra"] != "_bikini_top" or StormX.bra_pulled_up):
+    if not StormX.outfit["underwear"]:
+        Null()
+    elif StormX.outfit["underwear"] == "_bikini_bottoms" and (StormX.outfit["bra"] != "_bikini_top" or StormX.bra_pulled_up):
         "images/Storm_standing/Storm_standing_underwear_bikini_bottoms_unclipped.png"
-    if StormX.outfit["underwear"] and StormX.underwear_pulled_down and StormX.grool > 1:
+    elif StormX.underwear_pulled_down and StormX.grool > 1:
         "images/Storm_standing/Storm_standing_underwear[StormX.outfit[underwear]]_down_grool.png"
-    elif StormX.outfit["underwear"] and StormX.underwear_pulled_down:
+    elif StormX.underwear_pulled_down:
         "images/Storm_standing/Storm_standing_underwear[StormX.outfit[underwear]]_down.png"
-    elif StormX.outfit["underwear"] and StormX.grool > 1:
+    elif StormX.grool > 1:
         "images/Storm_standing/Storm_standing_underwear[StormX.outfit[underwear]]_grool.png"
-    elif StormX.outfit["underwear"]:
+    else:
         "images/Storm_standing/Storm_standing_underwear[StormX.outfit[underwear]].png"
 
     if StormX.outfit["hose"]:
@@ -62,11 +64,13 @@ layeredimage Storm_sprite standing:
     always:
         "Storm_spunk_animations"
 
-    if StormX.outfit["bottom"] and (StormX.bottom_pulled_down or StormX.upskirt):
+    if not StormX.outfit["bottom"]:
+        Null()
+    elif StormX.bottom_pulled_down or StormX.upskirt:
         "images/Storm_standing/Storm_standing_bottom[StormX.outfit[bottom]]_down.png"
-    elif StormX.outfit["bottom"] in ["_pants", "_yoga_pants"] and StormX.grool:
+    elif StormX.outfit["bottom"] in ["_pants", "_yoga_pants"] and StormX.grool > 1:
         "images/Storm_standing/Storm_standing_bottom[StormX.outfit[bottom]]_grool.png"
-    elif StormX.outfit["bottom"]:
+    else:
         "images/Storm_standing/Storm_standing_bottom[StormX.outfit[bottom]].png"
 
     if StormX.arm_pose == 1:
@@ -82,24 +86,30 @@ layeredimage Storm_sprite standing:
     else:
         "images/Storm_standing/Storm_standing_breasts_down.png"
 
-    if StormX.outfit["piercings"] and StormX.breasts_supported:
+    if not StormX.outfit["piercings"]:
+        Null()
+    elif StormX.breasts_supported:
         "images/Storm_standing/Storm_standing_piercings_breasts[StormX.outfit[piercings]]_up.png"
-    elif StormX.outfit["piercings"]:
+    else:
         "images/Storm_standing/Storm_standing_piercings_breasts[StormX.outfit[piercings]]_down.png"
 
-    if StormX.outfit["bra"] and StormX.bra_pulled_up:
+    if not StormX.outfit["bra"]:
+        Null()
+    elif StormX.bra_pulled_up:
         "images/Storm_standing/Storm_standing_bra[StormX.outfit[bra]]_up.png"
-    elif StormX.outfit["bra"]:
+    else:
         "images/Storm_standing/Storm_standing_bra[StormX.outfit[bra]].png"
 
     if StormX.outfit["dress"]:
         "images/Storm_standing/Storm_standing_dress[StormX.outfit[dress]][StormX.arm_pose].png"
 
-    if StormX.outfit["top"] and StormX.top_pulled_up:
+    if not StormX.outfit["top"]:
+        Null()
+    elif StormX.top_pulled_up:
         "images/Storm_standing/Storm_standing_top[StormX.outfit[top]]_up_up.png"
-    elif StormX.outfit["top"] and StormX.breasts_supported:
+    elif StormX.breasts_supported:
         "images/Storm_standing/Storm_standing_top[StormX.outfit[top]]_up.png"
-    elif StormX.outfit["top"]:
+    else:
         "images/Storm_standing/Storm_standing_top[StormX.outfit[top]]_down.png"
 
     if StormX.outfit["neck"]:
@@ -111,16 +121,20 @@ layeredimage Storm_sprite standing:
     if StormX.outfit["piercings"] and StormX.pussy_covered:
         "images/Storm_standing/Storm_standing_piercings_pussy[StormX.outfit[piercings]]_covered.png"
 
-    if StormX.outfit["piercings"] and StormX.breasts_supported and StormX.breasts_covered:
+    ifnot  StormX.outfit["piercings"]:
+        Null()
+    elif StormX.breasts_supported and StormX.breasts_covered:
         "images/Storm_standing/Storm_standing_piercings_breasts[StormX.outfit[piercings]]_up_covered.png"
-    elif StormX.outfit["piercings"] and StormX.breasts_covered:
+    elif StormX.breasts_covered:
         "images/Storm_standing/Storm_standing_piercings_breasts[StormX.outfit[piercings]]_down_covered.png"
 
-    if StormX.outfit["jacket"] and StormX.jacket_opened:
+    if not StormX.outfit["jacket"]:
+        Null()
+    elif StormX.jacket_opened:
         "images/Storm_standing/Storm_standing_jacket[StormX.outfit[jacket]][StormX.arm_pose]_up_up.png"
-    elif StormX.outfit["jacket"] and StormX.breasts_supported:
+    elif StormX.breasts_supported:
         "images/Storm_standing/Storm_standing_jacket[StormX.outfit[jacket]][StormX.arm_pose]_up.png"
-    elif StormX.outfit["jacket"]:
+    else:
         "images/Storm_standing/Storm_standing_jacket[StormX.outfit[jacket]][StormX.arm_pose]_down.png"
 
     always:
@@ -133,17 +147,21 @@ layeredimage Storm_sprite standing:
     elif StormX.outfit["sleeves"] == "_rings" and StormX.arm_pose == 2:
         "images/Storm_standing/Storm_standing_sleeves[StormX.outfit[sleeves]][StormX.arm_pose]_top.png"
 
-    if StormX.spunk["breasts"] and StormX.breasts_supported:
+    if not StormX.spunk["breasts"]:
+        Null()
+    elif StormX.breasts_supported:
         "images/Storm_standing/Storm_standing_spunk_breasts_up.png"
-    elif StormX.spunk["breasts"]:
+    else:
         "images/Storm_standing/Storm_standing_spunk_breasts_down.png"
 
     if StormX.spunk["belly"]:
         "images/Storm_standing/Storm_standing_spunk_belly.png"
 
-    if StormX.wet and StormX.breasts_supported:
+    if not StormX.wet:
+        Null()
+    elif StormX.breasts_supported:
         "images/Storm_standing/Storm_standing_water_body[StormX.arm_pose]_up.png"
-    elif StormX.wet:
+    else:
         "images/Storm_standing/Storm_standing_water_body[StormX.arm_pose]_down.png"
 
     if StormX.wet and StormX.arm_pose == 2:
@@ -197,7 +215,7 @@ layeredimage Storm_head:
     if StormX.spunk["face"]:
         "images/Storm_standing/Storm_standing_spunk_face.png"
 
-    if StormX.outfit["face_outer_accessory"] != "_towel" and StormX.outfit["hair"] == "_long" and renpy.showing("Storm_sprite sex"):
+    if StormX.outfit["face_outer_accessory"] != "_towel" and renpy.showing("Storm_sprite sex") and StormX.outfit["hair"] == "_long":
         "images/Storm_sex/Storm_sex_hair[StormX.outfit[hair]].png"
     elif StormX.outfit["face_outer_accessory"] != "_towel":
         "images/Storm_standing/Storm_standing_hair[StormX.outfit[hair]].png"

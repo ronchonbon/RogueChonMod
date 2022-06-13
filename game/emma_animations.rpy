@@ -237,3 +237,206 @@ layeredimage Emma_sprite handjob:
         "Emma_handjob_over_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
 
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
+
+image Emma_titjob_back_hair_animation0:
+    "Emma_blowjob_back_hair"
+
+    subpixel True
+    block:
+        ease 2.4 yoffset -10
+        ease 1.6 yoffset 0
+        repeat
+
+image Emma_titjob_back_hair_animation1:
+    "Emma_blowjob_back_hair"
+
+    subpixel True
+    block:
+        pause 0.2
+        ease 1.4 yoffset -10
+        pause 0.3
+        ease 0.6 yoffset 0
+        repeat
+
+image Emma_titjob_back_hair_animation2:
+    "Emma_blowjob_back_hair"
+
+    subpixel True
+    block:
+        pause 0.1
+        ease 0.6 yoffset 0
+        ease 0.3 yoffset 20
+        repeat
+
+image Emma_titjob_back_hair_animation3:
+    "Emma_blowjob_back_hair"
+
+    subpixel True
+    block:
+        ease 1.5 yoffset 10
+        pause 0.7
+        ease 0.3 yoffset 40
+        pause 0.5
+        repeat
+
+image Emma_titjob_body_animation0:
+    "Emma_sex_body"
+
+    subpixel True
+    block:
+        ease 2 yoffset -5
+        ease 2 yoffset 5
+        repeat
+
+image Emma_titjob_body_animation1:
+    "Emma_sex_body"
+
+    subpixel True
+    block:
+        pause 0.2
+        ease 1.4 yoffset -20
+        pause 0.3
+        ease 0.6 yoffset 0
+        repeat
+
+image Emma_titjob_body_animation2:
+    "Emma_sex_body"
+
+    subpixel True
+    block:
+        pause 0.1
+        ease 0.5 yoffset -20
+        ease 0.3 yoffset 15
+        pause 0.1
+        repeat
+
+image Emma_titjob_body_animation3:
+    "Emma_sex_body"
+
+    subpixel True
+    block:
+        ease 1.6 yoffset -20
+        pause 0.7
+        ease 0.2 yoffset 0
+        pause 0.5
+        repeat
+
+image Emma_titjob_head_animation0:
+    "Emma_blowjob_head"
+
+    subpixel True
+    block:
+        ease 2.4 yoffset -10
+        ease 1.6 yoffset 0
+        repeat
+
+image Emma_titjob_head_animation1:
+    "Emma_blowjob_head"
+
+    subpixel True
+    block:
+        pause 0.2
+        ease 1.4 yoffset -10
+        pause 0.3
+        ease 0.6 yoffset 0
+        repeat
+
+image Emma_titjob_head_animation2:
+    "Emma_blowjob_head"
+
+    subpixel True
+    block:
+        pause 0.1
+        ease 0.6 yoffset 0
+        ease 0.3 yoffset 20
+        repeat
+
+image Emma_titjob_head_animation3:
+    "Emma_blowjob_head"
+
+    subpixel True
+    block:
+        ease 1.5 yoffset 10
+        pause 0.7
+        ease 0.3 yoffset 40
+        pause 0.5
+        repeat
+
+image Emma_titjob_breasts_animation0:
+    "Emma_titjob_breasts"
+
+    subpixel True
+    rotate -3
+    block:
+        ease 1.5 rotate 4
+        pause 0.1
+        ease 1.5 rotate -3
+        pause 0.1
+        repeat
+
+image Emma_titjob_breasts_animation1:
+    "Emma_titjob_breasts"
+
+    subpixel True
+    block:
+        ease 1.5 yoffset -40
+        pause 0.3
+        ease 0.7 yoffset 20
+        repeat
+
+image Emma_titjob_breasts_animation2:
+    "Emma_titjob_breasts"
+
+    subpixel True
+    block:
+        ease 0.6 yoffset -50
+        ease 0.3 yoffset 10
+        pause 0.1
+        repeat
+
+image Emma_titjob_breasts_animation3:
+    "Emma_titjob_breasts"
+
+    subpixel True
+    block:
+        ease 1.8 yoffset -30
+        pause 0.3
+        ease 0.4 yoffset 20
+        pause 0.5
+        repeat
+
+layeredimage Emma_sprite titjob:
+    if EmmaX.wet or EmmaX.outfit["hair"] == "_wet" or EmmaX.outfit["face_outer_accessory"] == "_wet_hat":
+        Null()
+    else:
+        "Emma_titjob_back_hair_animation[action_speed]" pos (0.0, -0.25) zoom 0.6
+
+    always:
+        "Emma_titjob_body_animation[action_speed]"
+
+    always:
+        "Emma_titjob_head_animation[action_speed]" pos (0.0, -0.25) zoom 0.6
+
+    always:
+        "Zero_cock_Emma"
+
+    always:
+        "Emma_titjob_breasts_animation[action_speed]" pos (0.0, -0.02)
+
+    anchor (0.5, 0.0) offset (470, 1080) zoom 1.8
+
+image Emma_blowjob_blinking:
+    "images/Emma_blowjob/Emma_blowjob_eyes[EmmaX.eyes].png"
+    choice:
+        3.5
+    choice:
+        3.25
+    choice:
+        3
+    "images/Emma_blowjob/Emma_blowjob_eyes_squint.png"
+    0.05
+    "images/Emma_blowjob/Emma_blowjob_eyes_closed.png"
+    0.15
+    "images/Emma_blowjob/Emma_blowjob_eyes_squint.png"
+    0.05
+    repeat

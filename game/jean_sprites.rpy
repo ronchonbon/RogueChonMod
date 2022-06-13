@@ -32,14 +32,18 @@ layeredimage Jean_sprite standing:
     if JeanX.outfit["rope"]:
         "images/Jean_standing/Jean_standing_rope[JeanX.outfit[rope]].png"
 
-    if JeanX.outfit["bra"] and JeanX.bra_pulled_up:
+    if not JeanX.outfit["bra"]:
+        Null()
+    elif JeanX.bra_pulled_up:
         "images/Jean_standing/Jean_standing_bra[JeanX.outfit[bra]][JeanX.arm_pose]_up.png"
-    elif JeanX.outfit["bra"]:
+    else:
         "images/Jean_standing/Jean_standing_bra[JeanX.outfit[bra]][JeanX.arm_pose].png"
 
-    if JeanX.outfit["underwear"] and JeanX.underwear_pulled_down and (not JeanX.outfit["bottom"] or JeanX.wearing_skirt):
+    if not JeanX.outfit["underwear"]:
+        Null()
+    elif JeanX.underwear_pulled_down:
         "images/Jean_standing/Jean_standing_underwear[JeanX.outfit[underwear]]_down.png"
-    elif JeanX.outfit["underwear"]:
+    else:
         "images/Jean_standing/Jean_standing_underwear[JeanX.outfit[underwear]].png"
 
     if JeanX.outfit["hose"]:
@@ -56,14 +60,18 @@ layeredimage Jean_sprite standing:
     if JeanX.outfit["dress"]:
         "images/Jean_standing/Jean_standing_dress[JeanX.outfit[dress]][JeanX.arm_pose].png"
 
-    if JeanX.outfit["bottom"] and JeanX.bottom_pulled_down:
+    if not JeanX.outfit["bottom"]:
+        Null()
+    elif JeanX.bottom_pulled_down:
         "images/Jean_standing/Jean_standing_bottom[JeanX.outfit[bottom]]_down.png"
-    elif JeanX.outfit["bottom"]:
+    else:
         "images/Jean_standing/Jean_standing_bottom[JeanX.outfit[bottom]].png"
 
-    if JeanX.outfit["top"] and JeanX.top_pulled_up:
+    if not JeanX.outfit["top"]:
+        Null()
+    elif JeanX.top_pulled_up:
         "images/Jean_standing/Jean_standing_top[JeanX.outfit[top]][JeanX.arm_pose]_up.png"
-    elif JeanX.outfit["top"]:
+    else:
         "images/Jean_standing/Jean_standing_top[JeanX.outfit[top]][JeanX.arm_pose].png"
 
     always:
@@ -87,9 +95,11 @@ layeredimage Jean_sprite standing:
     if JeanX.outfit["top"] == "_pink_shirt" and not renpy.showing("Jean_sprite handjob") and JeanX.arm_pose == 1:
         "images/Jean_standing/Jean_standing_sleeves[JeanX.outfit[top]][JeanX.arm_pose].png"
 
-    if JeanX.outfit["suspenders"] and JeanX.suspenders_aside:
+    if not JeanX.outfit["suspenders"]:
+        Null()
+    elif JeanX.suspenders_aside:
         "images/Jean_standing/Jean_standing_suspenders[JeanX.outfit[suspenders]]_aside.png"
-    elif JeanX.outfit["suspenders"]:
+    else:
         "images/Jean_standing/Jean_standing_suspenders[JeanX.outfit[suspenders]].png"
 
     if JeanX.spunk["breasts"]:
