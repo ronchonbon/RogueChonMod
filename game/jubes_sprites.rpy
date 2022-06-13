@@ -29,9 +29,11 @@ layeredimage Jubes_sprite standing:
     if JubesX.outfit["piercings"]:
         "images/Jubes_standing/Jubes_standing_piercings_pussy[JubesX.outfit[piercings]].png"
 
-    if JubesX.outfit["bra"] and JubesX.bra_pulled_up:
+    if not JubesX.outfit["bra"]:
+        Null()
+    elif JubesX.bra_pulled_up:
         "images/Jubes_standing/Jubes_standing_bra[JubesX.outfit[bra]]_up.png"
-    elif JubesX.outfit["bra"]:
+    else:
         "images/Jubes_standing/Jubes_standing_bra[JubesX.outfit[bra]].png"
 
     if not JubesX.outfit["underwear"]:
@@ -42,7 +44,7 @@ layeredimage Jubes_sprite standing:
         "images/Jubes_standing/Jubes_standing_underwear[JubesX.outfit[underwear]]_down.png"
     elif JubesX.grool > 1:
         "images/Jubes_standing/Jubes_standing_underwear[JubesX.outfit[underwear]]_grool.png"
-    elif:
+    else:
         "images/Jubes_standing/Jubes_standing_underwear[JubesX.outfit[underwear]].png"
 
     if JubesX.outfit["hose"]:

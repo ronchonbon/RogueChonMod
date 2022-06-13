@@ -148,6 +148,9 @@ layeredimage background:
     else:
         "images/background/[bg_current]_[current_time].png"
 
+    if bg_current == "bg_restaurant":
+        "images/background/bg_restaurant_table.png"
+
     if bg_current == "bg_pool":
         AlphaMask("bg_pool", "images/background/bg_pool_mask.png")
 

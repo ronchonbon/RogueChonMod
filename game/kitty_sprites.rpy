@@ -224,7 +224,7 @@ layeredimage Kitty_blowjob_head:
         "images/Kitty_blowjob/Kitty_blowjob_mouth_tongue.png"
     elif renpy.showing("Kitty_sprite blowjob") and action_speed == 1:
         "images/Kitty_blowjob/Kitty_blowjob_mouth_tongue.png"
-    elif renpy.showing("Kitty_sprite blowjob") and action_speed != 2:
+    elif renpy.showing("Kitty_sprite blowjob") and action_speed > 2:
         "images/Kitty_blowjob/Kitty_blowjob_mouth_sucking.png"
     else:
         "images/Kitty_blowjob/Kitty_blowjob_mouth[KittyX.mouth].png"
@@ -236,7 +236,7 @@ layeredimage Kitty_blowjob_head:
         Null()
     elif renpy.showing("Kitty_sprite blowjob") and action_speed == 1:
         "images/Kitty_blowjob/Kitty_blowjob_spunk_mouth_tongue.png"
-    elif renpy.showing("Kitty_sprite blowjob") and action_speed != 2:
+    elif renpy.showing("Kitty_sprite blowjob") and action_speed > 2:
         "images/Kitty_blowjob/Kitty_blowjob_spunk_mouth_sucking_under.png"
     elif KittyX.mouth == "_sucking":
         "images/Kitty_blowjob/Kitty_blowjob_spunk_mouth[KittyX.mouth]_under.png"

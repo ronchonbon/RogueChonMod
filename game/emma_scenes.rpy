@@ -610,7 +610,7 @@ label Emma_Caught_Classroom:
                     return True
 
                 call masturbation_cycle(EmmaX)
-                call after_masturbation(Girl, "stop")
+                call after_masturbation(EmmaX, "stop")
             "Could I feel you up?":
                 $ EmmaX.change_stat("love", 70, 5)
                 $ EmmaX.change_stat("obedience", 50, 10)
@@ -636,7 +636,6 @@ label Emma_Caught_Classroom:
                 call action_cycle(EmmaX, "fondle_breasts", context)
                 call after_action(EmmaX, "fondle_breasts", "stop")
                 call stop_all_actions
-
             "Could you give me a hand? [[point to your cock]":
                 $ EmmaX.change_stat("love", 70, -5)
                 $ EmmaX.change_stat("obedience", 50, 5)

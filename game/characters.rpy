@@ -634,7 +634,10 @@ init python:
                 self.brows = "_sad"
                 self.eyes = "_side"
             elif emotion == "_sexy":
-                self.mouth = "_lipbite"
+                if self.tag == "Jean":
+                    self.mouth = "_smirk"
+                else:
+                    self.mouth = "_lipbite"
                 if self.tag == "Emma":
                     self.brows = "_normal"
                     self.eyes = "_squint"

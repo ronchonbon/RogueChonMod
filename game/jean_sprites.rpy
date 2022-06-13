@@ -171,16 +171,135 @@ image Jean_handjob_over:
 
     anchor (0.5, 0.5)
 
+image Jean_titjob_bra_back:
+    "images/Jean_titjob/Jean_titjob_bra_back.png"
 
+    anchor (0.5, 0.5)
 
+layeredimage Jean_titjob_body:
+    always:
+        "images/Jean_titjob/Jean_titjob_body.png"
 
+    if JeanX.outfit["bra"] in ["_sports_bra", "_bikini_top"]:
+        "images/Jean_titjob/Jean_titjob_bra[JeanX.outfit[bra]]_base.png"
 
+    if JeanX.outfit["top"]:
+        "images/Jean_titjob/Jean_titjob_top[JeanX.outfit[top]]_base.png"
 
+    anchor (0.5, 0.5)
 
+layeredimage Jean_titjob_right_breast:
+    if renpy.showing("Jean_sprite titjob"):
+        "images/Jean_titjob/Jean_titjob_right_breast.png"
+    else:
+        "images/Jean_blowjob/Jean_blowjob_right_breast.png"
 
+    if JeanX.spunk["breasts"]:
+        "images/Jean_titjob/Jean_titjob_spunk_breasts_under.png"
 
+    anchor (0.5, 0.5)
 
+image Jean_titjob_bra_stretch:
+    "images/Jean_titjob/Jean_titjob_bra_stretch.png"
 
+    anchor (0.5, 0.5)
+
+layeredimage Jean_titjob_breasts:
+    always:
+        "images/Jean_titjob/Jean_titjob_left_breast.png"
+
+    if JeanX.outfit["piercings"]:
+        "images/Jean_titjob/Jean_titjob_piercings[JeanX.outfit[piercings]].png"
+
+    if renpy.showing("Jean_sprite titjob"):
+        "images/Jean_titjob/Jean_titjob_right_breast_over.png"
+
+    if JeanX.spunk["breasts"]:
+        "images/Jean_titjob/Jean_titjob_spunk_breasts.png"
+
+    if not JeanX.outfit["bra"]:
+        Null()
+    elif JeanX.bra_pulled_up:
+        "images/Jean_titjob/Jean_titjob_bra[JeanX.outfit[bra]]_up.png"
+    elif JeanX.outfit["bra"] == "_corset" and not renpy.showing("Jean_sprite titjob"):
+        "images/Jean_titjob/Jean_titjob_bra[JeanX.outfit[bra]].png"
+    else:
+        "images/Jean_titjob/Jean_titjob_bra[JeanX.outfit[bra]].png"
+
+    if not JeanX.outfit["top"]:
+        Null()
+    elif JeanX.outfit["top"] == "_towel" and not renpy.showing("Jean_sprite titjob"):
+        "images/Jean_titjob/Jean_titjob_top[JeanX.outfit[top]].png"
+    elif JeanX.top_pulled_up:
+        "images/Jean_titjob/Jean_titjob_top[JeanX.outfit[top]]_up.png"
+    else:
+        "images/Jean_titjob/Jean_titjob_top[JeanX.outfit[top]].png"
+
+    if JeanX.outfit["piercings"] and JeanX.breasts_covered:
+        "images/Jean_titjob/Jean_titjob_piercings[JeanX.outfit[piercings]]_covered.png"
+
+    anchor (0.5, 0.5)
+
+image Jean_titjob_hair:
+    "images/Jean_blowjob/Jean_blowjob_hair[JeanX.outfit[hair]].png"
+
+    anchor (0.5, 0.5)
+
+image Jean_blowjob_back_hair:
+    "images/Jean_blowjob/Jean_blowjob_back_hair[JeanX.outfit[hair]].png"
+
+    anchor (0.5, 0.5)
+
+layeredimage Jean_blowjob_head:
+    if renpy.showing("Jean_sprite sex") and JeanX.wet or JeanX.outfit["hair"] == "_wet":
+        "images/Jean_blowjob/Jean_blowjob_mid_hair_wet.png"
+    elif JeanX.outfit["hair"] == "_short":
+        "images/Jean_blowjob/Jean_blowjob_back_hair_short.png"
+
+    always:
+        "images/Jean_blowjob/Jean_blowjob_head[JeanX.blushing].png"
+
+    if renpy.showing("Jean_sprite titjob") and action_speed == 3:
+        "images/Jean_blowjob/Jean_blowjob_mouth_tongue.png"
+    elif renpy.showing("Jean_sprite blowjob") and action_speed == 1:
+        "images/Jean_blowjob/Jean_blowjob_mouth_tongue.png"
+    elif renpy.showing("Jean_sprite blowjob") and action_speed > 2:
+        "images/Jean_blowjob/Jean_blowjob_mouth_sucking.png"
+    else:
+        "images/Jean_blowjob/Jean_blowjob_mouth[JeanX.mouth].png"
+
+    if renpy.showing("Jean_sprite blowjob") and action_speed == 2:
+        "Jean_blowjob_mouth_animations"
+
+    if not JeanX.spunk["mouth"]:
+        Null()
+    elif renpy.showing("Jean_sprite blowjob") and action_speed == 1:
+        "images/Jean_blowjob/Jean_blowjob_spunk_mouth_tongue.png"
+    elif renpy.showing("Jean_sprite blowjob") and action_speed > 2:
+        "images/Jean_blowjob/Jean_blowjob_spunk_mouth_sucking_under.png"
+    elif JeanX.mouth == "_sucking":
+        "images/Jean_blowjob/Jean_blowjob_spunk_mouth[JeanX.mouth]_under.png"
+    else:
+        "images/Jean_blowjob/Jean_blowjob_spunk_mouth[JeanX.mouth].png"
+
+    always:
+        "images/Jean_blowjob/Jean_blowjob_brows[JeanX.brows].png"
+
+    if JeanX.eyes == "_closed":
+        "images/Jean_blowjob/Jean_blowjob_eyes_closed.png"
+    else:
+        "Jean_blowjob_blinking"
+
+    if JeanX.spunk["face"]:
+        "images/Jean_blowjob/Jean_blowjob_spunk_face.png"
+
+    always:
+        "images/Jean_blowjob/Jean_blowjob_hair[JeanX.outfit[hair]].png"
+
+    if JeanX.spunk["hair"]:
+        "images/Jean_blowjob/Jean_blowjob_spunk_hair.png"
+
+    anchor (0.5, 0.5)
 
 # layeredimage Jean_kneeling:
 #     # always:

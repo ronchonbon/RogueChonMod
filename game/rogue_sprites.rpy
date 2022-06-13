@@ -10,7 +10,9 @@ layeredimage Rogue_sprite standing:
     if RogueX.outfit["bottom"] == "_pants":
         "images/Rogue_standing/Rogue_standing_back_outer_accessory[RogueX.outfit[bottom]].png"
 
-    if not renpy.showing("Rogue_sprite blowjob"):
+    if renpy.showing("Rogue_sprite titjob") or renpy.showing("Rogue_sprite blowjob"):
+        Null()
+    else:
         "Rogue_back_hair" pos (0.156, 0.158) zoom 0.29
 
     always:
@@ -36,7 +38,7 @@ layeredimage Rogue_sprite standing:
 
     if not RogueX.outfit["underwear"]:
         Null()
-    elif RogueX.underwear_pulled_down and RogueX.grool > 1and RogueX.outfit["underwear"] not in ["_black_panties", "_harness"]:
+    elif RogueX.underwear_pulled_down and RogueX.grool > 1 and RogueX.outfit["underwear"] not in ["_black_panties", "_harness"]:
         "images/Rogue_standing/Rogue_standing_underwear[RogueX.outfit[underwear]]_down_grool.png"
     elif RogueX.underwear_pulled_down:
         "images/Rogue_standing/Rogue_standing_underwear[RogueX.outfit[underwear]]_down.png"
@@ -597,7 +599,7 @@ layeredimage Rogue_doggy_ass:
     elif "dildo_ass" in [Player.primary_action, Player.secondary_action]:
         AlphaMask("dildo_Rogue", "dildo_Rogue_mask")
 
-    if not RogueX.spunk["anal"]:
+    if not RogueX.spunk["anus"]:
         Null()
     elif Player.cock_position == "anal":
         "images/Rogue_doggy/Rogue_doggy_spunk_anus_open.png"

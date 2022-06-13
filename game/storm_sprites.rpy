@@ -121,11 +121,11 @@ layeredimage Storm_sprite standing:
     if StormX.outfit["piercings"] and StormX.pussy_covered:
         "images/Storm_standing/Storm_standing_piercings_pussy[StormX.outfit[piercings]]_covered.png"
 
-    ifnot  StormX.outfit["piercings"]:
+    if not StormX.outfit["piercings"] or not StormX.breasts_covered:
         Null()
-    elif StormX.breasts_supported and StormX.breasts_covered:
+    elif StormX.breasts_supported:
         "images/Storm_standing/Storm_standing_piercings_breasts[StormX.outfit[piercings]]_up_covered.png"
-    elif StormX.breasts_covered:
+    else:
         "images/Storm_standing/Storm_standing_piercings_breasts[StormX.outfit[piercings]]_down_covered.png"
 
     if not StormX.outfit["jacket"]:

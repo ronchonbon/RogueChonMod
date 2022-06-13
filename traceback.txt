@@ -1,60 +1,50 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 199, in script
-    show Emma_sprite titjob at sprite_location(0.5)
-Exception: DynamicImage u'images/Emma_blowjob/Emma_blowjob_hair[EmmaX.outfit[hair]].png': could not find image. (u'images/Emma_blowjob/Emma_blowjob_hair_wavy.png')
+  File "game/script.rpy", line 203, in script
+    show Jubes_sprite handjob at sprite_location(0.5)
+  File "renpy/common/00layeredimage.rpy", line 686, in _duplicate
+    d = d._duplicate(None)
+  File "renpy/common/00layeredimage.rpy", line 681, in _duplicate
+    d = i.get_displayable(attributes)
+  File "renpy/common/00layeredimage.rpy", line 432, in get_displayable
+    return ConditionSwitch(predict_all=predict_all, *args)
+SyntaxError: unexpected EOF while parsing (jubes_sprites.rpy, line 46)
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 199, in script
-    show Emma_sprite titjob at sprite_location(0.5)
+  File "game/script.rpy", line 203, in script
+    show Jubes_sprite handjob at sprite_location(0.5)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1197, in execute
     show_imspec(self.imspec, atl=getattr(self, "atl", None))
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1167, in show_imspec
     atl=atl)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 768, in show
-    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 1147, in add
-    thing.visit_all(lambda d : None)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
-    for d in self.visit():
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
-    self.update(self.last_st, self.last_at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1443, in update
-    child.visit_all(lambda c : c.per_interact())
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
-    for d in self.visit():
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 744, in visit
-    self.find_target()
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 652, in find_target
-    raise Exception(error)
-Exception: DynamicImage u'images/Emma_blowjob/Emma_blowjob_hair[EmmaX.outfit[hair]].png': could not find image. (u'images/Emma_blowjob/Emma_blowjob_hair_wavy.png')
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 742, in show
+    if not base.find_target() and renpy.config.missing_show:
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 409, in find_target
+    self.target = target._duplicate(a)
+  File "renpy/common/00layeredimage.rpy", line 686, in _duplicate
+    d = d._duplicate(None)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 870, in _duplicate
+    rv = self(_args=args)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 772, in __call__
+    child = child._duplicate(_args)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 447, in _duplicate
+    rv.find_target()
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 409, in find_target
+    self.target = target._duplicate(a)
+  File "renpy/common/00layeredimage.rpy", line 681, in _duplicate
+    d = i.get_displayable(attributes)
+  File "renpy/common/00layeredimage.rpy", line 432, in get_displayable
+    return ConditionSwitch(predict_all=predict_all, *args)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1573, in ConditionSwitch
+    code = renpy.python.py_compile(cond, 'eval')
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/python.py", line 835, in py_compile
+    raise e
+SyntaxError: unexpected EOF while parsing (jubes_sprites.rpy, line 46)
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
-Rogue-Like Chonky Mod 0.2a
-Mon Jun 13 01:03:15 2022
+Rogue-Like Chonky Mod 0.2b
+Mon Jun 13 03:21:39 2022

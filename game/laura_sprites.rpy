@@ -187,8 +187,10 @@ layeredimage Laura_head:
     if LauraX.spunk["face"]:
         "images/Laura_standing/Laura_standing_spunk_face.png"
 
-    if LauraX.outfit["hair"] == "_long" and not renpy.showing("Laura_sprite titjob") and not renpy.showing("Laura_sprite sex"):
-        "images/Laura_standing/Laura_standing_mid_hair[LauraX.outfit[hair]].png"
+    if renpy.showing("Laura_sprite titjob") or renpy.showing("Laura_sprite sex"):
+        Null()
+    else:
+        "images/Laura_standing/Laura_standing_mid_hair.png"
 
     if renpy.showing("Laura_sprite sex"):
         "images/Laura_sex/Laura_sex_hair[LauraX.outfit[hair]].png"
@@ -213,5 +215,78 @@ image Laura_handjob_under:
 
 image Laura_handjob_over:
     "images/Laura_handjob/Laura_handjob_hand_over.png"
+
+    anchor (0.5, 0.5)
+
+image Laura_titjob_mid_hair:
+    "images/Laura_standing/Laura_standing_mid_hair.png"
+
+    anchor (0.5, 0.5)
+
+image Laura_titjob_hair:
+    "images/Laura_standing/Laura_standing_hair[LauraX.outfit[hair]].png"
+
+    anchor (0.5, 0.5)
+
+layeredimage Laura_titjob_body:
+    always:
+        "images/Laura_titjob/Laura_titjob_body.png"
+
+    if LauraX.outfit["neck"]:
+        "images/Laura_titjob/Laura_titjob_neck[LauraX.outfit[neck]].png"
+
+    if LauraX.spunk["breasts"]:
+        "images/Laura_titjob/Laura_titjob_spunk_breasts.png"
+
+    anchor (0.5, 0.5)
+
+layeredimage Laura_titjob_left_arm:
+    always:
+        "images/Laura_titjob/Laura_titjob_left_hand.png"
+
+    if LauraX.outfit["gloves"]:
+        "images/Laura_titjob/Laura_titjob_gloves[LauraX.outfit[gloves]]_left.png"
+
+    if LauraX.outfit["piercings"]:
+        "images/Laura_titjob/Laura_titjob_piercings[LauraX.outfit[piercings]]_left.png"
+
+    anchor (0.5, 0.5)
+
+layeredimage Laura_titjob_right_arm:
+    always:
+        "images/Laura_titjob/Laura_titjob_right_hand.png"
+
+    if LauraX.outfit["gloves"] == "_gloves":
+        "images/Laura_titjob/Laura_titjob_gloves[LauraX.outfit[gloves]]_right.png"
+
+    if LauraX.outfit["piercings"]:
+        "images/Laura_titjob/Laura_titjob_piercings[LauraX.outfit[piercings]]_right.png"
+
+    anchor (0.5, 0.5)
+
+layeredimage Laura_titjob_right_arm_back:
+    always:
+        "images/Laura_titjob/Laura_titjob_right_hand_back.png"
+
+    if LauraX.outfit["gloves"] == "_gloves":
+        "images/Laura_titjob/Laura_titjob_gloves[LauraX.outfit[gloves]]_right_back.png"
+
+    anchor (0.5, 0.5)
+
+layeredimage Laura_titjob_left_breast:
+    always:
+        "images/Laura_titjob/Laura_titjob_left_breast.png"
+
+    if LauraX.spunk["breasts"]:
+        "images/Laura_titjob/Laura_titjob_spunk_left_breast.png"
+
+    anchor (0.5, 0.5)
+
+layeredimage Laura_titjob_right_breast:
+    always:
+        "images/Laura_titjob/Laura_titjob_right_breast.png"
+
+    if LauraX.spunk["breasts"]:
+        "images/Laura_titjob/Laura_titjob_spunk_right_breast.png"
 
     anchor (0.5, 0.5)

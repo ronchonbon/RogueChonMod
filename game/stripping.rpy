@@ -1127,9 +1127,7 @@ transform Girl_Dance1(Chr=focused_Girl):
             ease 3.5 yoffset 0
     repeat
 
-label AutoStrip(Girl=0):
-
-    $ Girl = check_girl(Girl)
+label AutoStrip(Girl):
     if (Girl.outfit["underwear"] and not Girl.underwear_pulled_down) or Girl.wearing_pants or Girl.hose_number() >= 6:
         if Girl == RogueX:
             ch_r "Well, I guess some things are necessary, [RogueX.player_petname]."
@@ -1146,20 +1144,18 @@ label AutoStrip(Girl=0):
         elif Girl == JubesX:
             ch_v "Let's get these out of the way. . ."
 
-        if (Girl.outfit["underwear"] and not Girl.underwear_pulled_down) and (Girl.wearing_pants and not Girl.upskirt):
+        if (Girl.outfit["underwear"] and not Girl.underwear_pulled_down) and (Girl.wearing_pants and not Girl.bottom_pulled_down):
             "She quickly drops her pants and her [Girl.outfit[underwear]]."
-        elif (Girl.outfit["underwear"] and not Girl.underwear_pulled_down) and (Girl.wearing_shorts and not Girl.upskirt):
+        elif (Girl.outfit["underwear"] and not Girl.underwear_pulled_down) and (Girl.wearing_shorts and not Girl.bottom_pulled_down):
             "She quickly drops her shorts and her [Girl.outfit[underwear]]."
-        elif Girl.wearing_pants and not Girl.upskirt:
+        elif Girl.wearing_pants and not Girl.bottom_pulled_down:
             "She tugs her pants down, exposing her bare pussy."
-        elif Girl.wearing_shorts and not Girl.upskirt:
+        elif Girl.wearing_shorts and not Girl.bottom_pulled_down:
             "She tugs her shorts down, exposing her bare pussy."
         elif Girl.hose_number() >= 6 and (Girl.outfit["underwear"] and not Girl.underwear_pulled_down):
             "She tugs her [Girl.outfit[hose]] and [Girl.outfit[underwear]] off."
-
         elif Girl.hose_number() >= 6:
             "She tugs her [Girl.outfit[hose]] off and drops them to the ground."
-
         elif (Girl.outfit["underwear"] and not Girl.underwear_pulled_down):
             "She tugs her [Girl.outfit[underwear]] off and drops them to the ground."
 

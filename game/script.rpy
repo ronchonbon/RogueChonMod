@@ -172,37 +172,37 @@ label start:
     show screen status_screen
     show screen inventory_button
 
-    $ bg_current = "bg_emma"
-    $ time_index = 2
-    $ current_time = "evening"
+    # $ bg_current = "bg_emma"
+    # $ time_index = 2
+    # $ current_time = "evening"
+    #
+    # scene background onlayer backdrop
+    # scene
+    #
+    # python:
+    #     for G in all_Girls:
+    #         G.change_face("_sexy")
+    #         G.change_outfit("nude")
+    #         G.grool = 2
+    #         G.spunk["pussy"] = True
+    #         G.spunk["anus"] = True
+    #
+    # $ Player.sprite = True
+    # $ show_feet = True
+    # $ action_speed = 2
+    # $ Player.cock_position = "in"
+    # $ Player.primary_action = "sex"
+    # $ Player.secondary_action = "finger_ass"
 
-    scene background onlayer backdrop
-    scene
-
-    python:
-        for G in all_Girls:
-            G.change_face("_sexy")
-            G.change_outfit("nude")
-            G.grool = 2
-            G.spunk["pussy"] = True
-            G.spunk["anus"] = True
-
-    $ Player.sprite = True
-    $ show_feet = False
-    $ action_speed = 1
-    $ Player.cock_position = "in"
-    $ Player.primary_action = "sex"
-    $ Player.secondary_action = "finger_ass"
-
-    # show Rogue_sprite handjob at sprite_location(0.5)
+    # show Rogue_sprite sex at sprite_location(0.5)
     # show Kitty_sprite titjob at sprite_location(0.5)
-    show Emma_sprite titjob at sprite_location(0.5)
-    # show Laura_sprite handjob at sprite_location(0.5)
-    # show Jean_sprite handjob at sprite_location(0.5)
+    # show Emma_sprite titjob at sprite_location(0.5)
+    # show Laura_sprite titjob at sprite_location(0.5)
+    # show Jean_sprite titjob at sprite_location(0.5)
     # show Storm_sprite handjob at sprite_location(0.5)
     # show Jubes_sprite handjob at sprite_location(0.5)
 
-    ""
+    # ""
 
     # $ Player.sprite = False
     # call stop_all_actions

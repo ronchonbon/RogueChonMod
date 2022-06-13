@@ -179,9 +179,6 @@ layeredimage Emma_sprite standing:
     else:
         "images/Emma_standing/Emma_standing_spunk_hand.png"
 
-    if EmmaX.wet:
-        "images/Emma_standing/Emma_standing_water_body[EmmaX.arm_pose].png"
-
     if not EmmaX.wet:
         Null()
     elif EmmaX.breasts_supported:
@@ -323,7 +320,7 @@ layeredimage Emma_blowjob_head:
         "images/Emma_blowjob/Emma_blowjob_mouth_tongue.png"
     elif renpy.showing("Emma_sprite blowjob") and action_speed == 1:
         "images/Emma_blowjob/Emma_blowjob_mouth_tongue.png"
-    elif renpy.showing("Emma_sprite blowjob") and action_speed > 3:
+    elif renpy.showing("Emma_sprite blowjob") and action_speed > 2:
         "images/Emma_blowjob/Emma_blowjob_mouth_sucking.png"
     else:
         "images/Emma_blowjob/Emma_blowjob_mouth[EmmaX.mouth].png"
@@ -335,7 +332,7 @@ layeredimage Emma_blowjob_head:
         Null()
     elif renpy.showing("Emma_sprite blowjob") and action_speed == 1:
         "images/Emma_blowjob/Emma_blowjob_spunk_mouth_tongue.png"
-    elif renpy.showing("Emma_sprite blowjob") and action_speed != 2:
+    elif renpy.showing("Emma_sprite blowjob") and action_speed > 2:
         "images/Emma_blowjob/Emma_blowjob_spunk_mouth_sucking_under.png"
     elif EmmaX.mouth == "_sucking":
         "images/Emma_blowjob/Emma_blowjob_spunk_mouth[EmmaX.mouth]_under.png"
