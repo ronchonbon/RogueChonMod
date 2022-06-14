@@ -427,13 +427,13 @@ image Emma_titjob_breasts_animation3:
 
 layeredimage Emma_sprite titjob:
     always:
-        "Emma_titjob_back_hair_animation[action_speed]" pos (0.0, -0.25) zoom 0.6
+        "Emma_titjob_back_hair_animation[action_speed]" pos (0.0, -0.24) zoom 0.56
 
     always:
         "Emma_titjob_body_animation[action_speed]"
 
     always:
-        "Emma_titjob_head_animation[action_speed]" pos (0.0, -0.25) zoom 0.6
+        "Emma_titjob_head_animation[action_speed]" pos (0.0, -0.24) zoom 0.56
 
     always:
         "Zero_cock_Emma"
@@ -441,7 +441,7 @@ layeredimage Emma_sprite titjob:
     always:
         "Emma_titjob_breasts_animation[action_speed]" pos (0.0, -0.02)
 
-    anchor (0.5, 0.0) offset (470, 1080) zoom 1.8
+    anchor (0.5, 0.0) offset (640, 980) zoom 1.7
 
 image Emma_blowjob_blinking:
     "images/Emma_blowjob/Emma_blowjob_eyes[EmmaX.eyes].png"

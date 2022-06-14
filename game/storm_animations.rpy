@@ -229,3 +229,540 @@ layeredimage Storm_sprite handjob:
         "Storm_handjob_over_hand_animation[action_speed]" pos (0.08, 0.455) zoom 0.28
 
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
+
+image Storm_titjob_bra_back_animation0:
+    animation
+    "Storm_titjob_bra_back"
+
+    subpixel True
+    block:
+        ease 2 yoffset -20
+        pause 0.1
+        ease 2 yoffset 0
+        pause 0.1
+        repeat
+
+image Storm_titjob_bra_back_animation1:
+    animation
+    "Storm_titjob_bra_back"
+
+    subpixel True
+    block:
+        pause 0.1
+        ease 1.9 yoffset -60
+        pause 0.4
+        ease 1.8 yoffset 60
+        ease 0.5 yoffset 50
+        repeat
+
+image Storm_titjob_bra_back_animation2:
+    animation
+    "Storm_titjob_bra_back"
+
+    subpixel True
+    block:
+        ease 0.3 yoffset 40
+        ease 0.7 yoffset -40
+        pause 0.2
+        ease 0.4 yoffset 80
+        repeat
+
+image Storm_titjob_bra_back_animation3:
+    animation
+    "Storm_titjob_bra_back"
+
+    subpixel True
+    block:
+        ease 0.3 yoffset 100
+        ease 0.7 yoffset 60
+        pause 0.2
+        ease 0.4 yoffset 110
+        repeat
+
+image Storm_titjob_back_hair_animation0:
+    animation
+    "Storm_blowjob_back_hair"
+
+    subpixel True
+    parallel:
+        ease 2 yoffset -20
+        pause 0.1
+        ease 2 yoffset 0
+        pause 0.1
+        repeat
+    parallel:
+        pause 0.1
+        ease 2 rotate -5
+        pause 0.1
+        ease 2 rotate 0
+        repeat
+
+image Storm_titjob_back_hair_animation1:
+    animation
+    "Storm_blowjob_back_hair"
+
+    subpixel True
+    rotate -5
+    parallel:
+        ease 2 yoffset -40
+        pause 0.2
+        ease 2 yoffset 60
+        pause 0.5
+        repeat
+    parallel:
+        ease 2 rotate 0
+        pause 0.2
+        ease 2 rotate -5
+        pause 0.5
+        repeat
+
+image Storm_titjob_back_hair_animation2:
+    animation
+    "Storm_blowjob_back_hair"
+
+    subpixel True
+    rotate -5
+    parallel:
+        ease 1 yoffset -20
+        pause 0.1
+        ease 0.5 yoffset 80
+        repeat
+    parallel:
+        ease 1 rotate 0
+        pause 0.1
+        ease 0.5 rotate -5
+        repeat
+
+image Storm_titjob_back_hair_animation3:
+    animation
+    "Storm_blowjob_back_hair"
+
+    subpixel True
+    rotate -5
+    parallel:
+        ease 1 yoffset 70
+        pause 0.1
+        ease 0.5 yoffset 140
+        repeat
+    parallel:
+        ease 1 rotate 0
+        pause 0.1
+        ease 0.5 rotate -5
+        repeat
+
+image Storm_titjob_body_animation0:
+    animation
+    "Storm_titjob_body"
+
+    subpixel True
+    block:
+        ease 2 yoffset -20
+        pause 0.1
+        ease 2 yoffset 0
+        pause 0.1
+        repeat
+
+image Storm_titjob_body_animation1:
+    animation
+    "Storm_titjob_body"
+
+    subpixel True
+    block:
+        ease 2 ypos -40
+        pause 0.2
+        ease 2 ypos 60
+        pause 0.5
+        repeat
+
+image Storm_titjob_body_animation2:
+    animation
+    "Storm_titjob_body"
+
+    subpixel True
+    block:
+        ease 1 yoffset -20
+        pause 0.1
+        ease 0.5 yoffset 80
+        repeat
+
+image Storm_titjob_body_animation3:
+    animation
+    "Storm_titjob_body"
+
+    subpixel True
+    block:
+        ease 1 yoffset 100
+        pause 0.1
+        ease 0.5 yoffset 130
+        repeat
+
+image Storm_titjob_head_animation0:
+    animation
+    "Storm_blowjob_head"
+
+    subpixel True
+    parallel:
+        ease 2 yoffset -20
+        pause 0.1
+        ease 2 yoffset 0
+        pause 0.1
+        repeat
+    parallel:
+        pause 0.1
+        ease 2 rotate -5
+        pause 0.1
+        ease 2 rotate 0
+        repeat
+
+image Storm_titjob_head_animation1:
+    animation
+    "Storm_blowjob_head"
+
+    subpixel True
+    rotate -5
+    parallel:
+        ease 2 yoffset -40
+        pause 0.2
+        ease 2 yoffset 60
+        pause 0.5
+        repeat
+    parallel:
+        ease 2 rotate 0
+        pause 0.2
+        ease 2 rotate -5
+        pause 0.5
+        repeat
+
+image Storm_titjob_head_animation2:
+    animation
+    "Storm_blowjob_head"
+
+    subpixel True
+    rotate -5
+    parallel:
+        ease 1 yoffset -20
+        pause 0.1
+        ease 0.5 yoffset 80
+        repeat
+    parallel:
+        ease 1 rotate 0
+        pause 0.1
+        ease 0.5 rotate -5
+        repeat
+
+image Storm_titjob_head_animation3:
+    animation
+    "Storm_blowjob_head"
+
+    subpixel True
+    rotate -5
+    parallel:
+        ease 1 yoffset 70
+        pause 0.1
+        ease 0.5 yoffset 140
+        repeat
+    parallel:
+        ease 1 rotate 0
+        pause 0.1
+        ease 0.5 rotate -5
+        repeat
+
+image Storm_titjob_breasts_under_animation0:
+    animation
+    "Storm_titjob_breasts_under"
+
+    subpixel True
+    block:
+        ease 2 yoffset -20
+        pause 0.1
+        ease 2 yoffset 0
+        pause 0.1
+        repeat
+
+image Storm_titjob_breasts_under_animation1:
+    animation
+    "Storm_titjob_breasts_under"
+
+    subpixel True
+    block:
+        pause 0.1
+        ease 1.9 yoffset -60
+        pause 0.4
+        ease 1.8 yoffset 60
+        ease 0.5 yoffset 50
+        repeat
+
+image Storm_titjob_breasts_under_animation2:
+    animation
+    "Storm_titjob_breasts_under"
+
+    subpixel True
+    block:
+        ease 0.3 yoffset 40
+        ease 0.7 yoffset -40
+        pause 0.2
+        ease 0.4 yoffset 80
+        repeat
+
+image Storm_titjob_breasts_under_animation3:
+    animation
+    "Storm_titjob_breasts_under"
+
+    subpixel True
+    block:
+        ease 0.3 yoffset 100
+        ease 0.7 yoffset 60
+        pause 0.2
+        ease 0.4 yoffset 110
+        repeat
+
+image Storm_titjob_bra_stretch_animation0:
+    animation
+    "Storm_titjob_bra_stretch"
+
+    subpixel True
+    zoom (0.75, 0.85)
+    parallel:
+        ease 2 yzoom 0.5
+        pause 0.1
+        ease 2 yzoom 0.85
+        pause 0.1
+        repeat
+    parallel:
+        ease 2 offset (-60, -230)
+        pause 0.1
+        ease 2 offset (-70, -210)
+        pause 0.1
+        repeat
+
+image Storm_titjob_bra_stretch_animation1:
+    animation
+    "Storm_titjob_bra_stretch"
+
+    subpixel True
+    zoom (0.9, 1.3)
+    parallel:
+        pause 0.1
+        ease 1.6 yzoom 0.3
+        pause 0.9
+        ease 1.6 yzoom 1.5
+        ease 0.5 yzoom 1.3
+        repeat
+    parallel:
+        pause 0.1
+        ease 1.9 xzoom 0.6
+        pause 0.4
+        ease 1.8 xzoom 0.9
+        pause 0.5
+        repeat
+    parallel:
+        pause 0.1
+        ease 1.9 offset (-50, -260)
+        pause 0.4
+        ease 1.8 offset (-100, -140)
+        ease 0.5 offset (-100, -150)
+        repeat
+
+image Storm_titjob_bra_stretch_animation2:
+    animation
+    "Storm_titjob_bra_stretch"
+
+    subpixel True
+    zoom (1, 1.7)
+    parallel:
+        ease 0.3 yzoom 1.3
+        ease 0.7 yzoom 0.3
+        pause 0.2
+        ease 0.4 yzoom 1.7
+        repeat
+    parallel:
+        ease 0.3 offset (-100, -160)
+        ease 0.7 offset (-80, -240)
+        pause 0.2
+        ease 0.4 offset (-100, -120)
+        repeat
+
+image Storm_titjob_bra_stretch_animation3:
+    animation
+    "Storm_titjob_bra_stretch"
+
+    subpixel True
+    zoom (1, 2)
+    parallel:
+        ease 0.3 yzoom 1.95
+        ease 0.7 yzoom 1.7
+        pause 0.2
+        ease 0.4 yzoom 2
+        repeat
+    parallel:
+        ease 0.3 offset (-100,-115)
+        ease 0.7 offset (-90,-155)
+        pause 0.2
+        ease 0.4 offset (-100,-105)
+        repeat
+
+image Storm_titjob_breasts_animation0:
+    animation
+    "Storm_titjob_breasts"
+
+    subpixel True
+    block:
+        ease 2 yoffset -20
+        pause 0.1
+        ease 2 yoffset 0
+        pause 0.1
+        repeat
+
+image Storm_titjob_breasts_animation1:
+    animation
+    "Storm_titjob_breasts"
+
+    subpixel True
+    block:
+        pause 0.1
+        ease 1.9 yoffset -60
+        pause 0.4
+        ease 1.8 yoffset 60
+        ease 0.5 yoffset 50
+        repeat
+
+image Storm_titjob_breasts_animation2:
+    animation
+    "Storm_titjob_breasts"
+
+    subpixel True
+    block:
+        ease 0.3 yoffset 40
+        ease 0.7 yoffset -40
+        pause 0.2
+        ease 0.4 yoffset 80
+        repeat
+
+image Storm_titjob_breasts_animation3:
+    animation
+    "Storm_titjob_breasts"
+
+    subpixel True
+    block:
+        ease 0.3 yoffset 100
+        ease 0.7 yoffset 60
+        pause 0.2
+        ease 0.4 yoffset 110
+        repeat
+
+image Storm_titjob_hair_animation0:
+    animation
+    "Storm_titjob_hair"
+
+    subpixel True
+    parallel:
+        ease 2 yoffset -20
+        pause 0.1
+        ease 2 yoffset 0
+        pause 0.1
+        repeat
+    parallel:
+        pause 0.1
+        ease 2 rotate -5
+        pause 0.1
+        ease 2 rotate 0
+        repeat
+
+image Storm_titjob_hair_animation1:
+    animation
+    "Storm_titjob_hair"
+
+    subpixel True
+    rotate -5
+    parallel:
+        ease 2 yoffset -40
+        pause 0.2
+        ease 2 yoffset 60
+        pause 0.5
+        repeat
+    parallel:
+        ease 2 rotate 0
+        pause 0.2
+        ease 2 rotate -5
+        pause 0.5
+        repeat
+
+image Storm_titjob_hair_animation2:
+    animation
+    "Storm_titjob_hair"
+
+    subpixel True
+    rotate -5
+    parallel:
+        ease 1 yoffset -20
+        pause 0.1
+        ease 0.5 yoffset 80
+        repeat
+    parallel:
+        ease 1 rotate 0
+        pause 0.1
+        ease 0.5 rotate -5
+        repeat
+
+image Storm_titjob_hair_animation3:
+    animation
+    "Storm_titjob_hair"
+
+    subpixel True
+    rotate -5
+    parallel:
+        ease 1 yoffset 70
+        pause 0.1
+        ease 0.5 yoffset 140
+        repeat
+    parallel:
+        ease 1 rotate 0
+        pause 0.1
+        ease 0.5 rotate -5
+        repeat
+
+layeredimage Storm_sprite titjob:
+    if StormX.outfit["bra"] in ["_black_bra", "_lace_bra"]:
+        "Storm_titjob_bra_back_animation[action_speed]"
+
+    always:
+        "Storm_titjob_back_hair_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
+
+    always:
+        "Storm_titjob_body_animation[action_speed]"
+
+    always:
+        "Storm_titjob_head_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
+
+    if not StormX.outfit["bra"] == "_cosplay_bra":
+        "Storm_titjob_breasts_under_animation[action_speed]"
+
+    always:
+        "Zero_cock_Storm"
+
+    if StormX.outfit["bra"] in ["_sports_bra", "_bikini_top"]:
+        "Storm_titjob_bra_stretch_animation[action_speed]"
+
+    always:
+        "Storm_titjob_breasts_animation[action_speed]"
+
+    always:
+        "Storm_titjob_hair_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
+
+    anchor (0.5, 0.0) offset (320, 670)
+
+image Storm_blowjob_blinking:
+    "images/Storm_blowjob/Storm_blowjob_eyes[StormX.eyes].png"
+    choice:
+        3.5
+    choice:
+        3.25
+    choice:
+        3
+    "images/Storm_blowjob/Storm_blowjob_eyes_sexy.png"
+    0.05
+    "images/Storm_blowjob/Storm_blowjob_eyes_closed.png"
+    0.15
+    "images/Storm_blowjob/Storm_blowjob_eyes_sexy.png"
+    0.05
+    repeat

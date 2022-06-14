@@ -339,7 +339,6 @@ image Rogue_blowjob_cock_animation1:
     "Zero_blowjob_cock"
 
     subpixel True
-    ease 0.5 rotate 0
     block:
         ease 2 rotate -5
         pause 0.5
@@ -365,7 +364,6 @@ image Rogue_sex_cock_animation1:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (0, -5)
     block:
         ease 1 yoffset -20
         pause 1
@@ -377,7 +375,6 @@ image Rogue_sex_cock_animation2:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (0.75, -40)
     block:
         ease 1 offset (1, -110)
         pause 1
@@ -389,7 +386,6 @@ image Rogue_sex_cock_animation3:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (0.75, -40)
     block:
         ease 0.25 offset (1, -110)
         pause 0.25
@@ -415,7 +411,6 @@ image Rogue_sex_cock_anal_animation2:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (0, -40)
     block:
         ease 1 yoffset -120
         pause 1
@@ -427,7 +422,6 @@ image Rogue_sex_cock_anal_animation3:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (0, -40)
     block:
         ease 0.25 yoffset -120
         pause 0.25
@@ -471,7 +465,6 @@ image Rogue_sex_cock_hotdog_animation1:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (0, -70)
     block:
         ease 1 yoffset -10
         pause 0.5
@@ -483,7 +476,6 @@ image Rogue_sex_cock_hotdog_animation2:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (0, -60)
     block:
         ease 0.5 yoffset -120
         pause 0.5
@@ -495,7 +487,6 @@ image Rogue_sex_cock_hotdog_animation3:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (0, -60)
     block:
         ease 0.5 yoffset -120
         pause 0.5
@@ -529,7 +520,6 @@ image Rogue_doggy_cock_animation2:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (-3, -45)
     block:
         ease 0.5 offset (-3, -105)
         pause 0.25
@@ -541,7 +531,6 @@ image Rogue_doggy_cock_animation3:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (-3, -45)
     block:
         ease 0.2 offset (-3, -105)
         pause 0.1
@@ -567,7 +556,6 @@ image Rogue_doggy_cock_anal_animation2:
     "Zero_doggy_cock_in"
 
     subpixel True
-    yoffset -60
     block:
         ease 0.5 yoffset -130
         pause 0.25
@@ -579,7 +567,6 @@ image Rogue_doggy_cock_anal_animation3:
     "Zero_doggy_cock_in"
 
     subpixel True
-    yoffset -60
     block:
         ease 0.2 yoffset -130
         pause 0.1
@@ -795,7 +782,6 @@ image Emma_titjob_cock_animation3:
     "Zero_blowjob_cock"
 
     subpixel True
-    offset (0, -20)
     block:
         pause 0.2
         ease 1.6 yoffset -30
@@ -917,13 +903,121 @@ layeredimage Zero_cock_Jean:
     if renpy.showing("Jean_sprite titjob"):
         "Jean_titjob_cock_animation[action_speed]" pos (0.032, 0.35) zoom 0.65
 
+image Storm_titjob_cock_animation0:
+    animation
+    "Zero_blowjob_cock"
+
+    subpixel True
+    rotate -3
+    block:
+        ease 2 rotate -1
+        pause 0.1
+        ease 2 rotate -3
+        pause 0.1
+        repeat
+
+image Storm_titjob_cock_animation1:
+    animation
+    "Zero_blowjob_cock"
+
+    subpixel True
+    rotate -3
+    block:
+        ease 2 yoffset 0
+        pause 0.4
+        ease 1.8 yoffset 25
+        pause 0.5
+        repeat
+
+image Storm_titjob_cock_animation2:
+    animation
+    "Zero_blowjob_cock"
+
+    subpixel True
+    rotate -2
+    parallel:
+        ease 1 yoffset 0
+        pause 0.2
+        ease 0.4 yoffset 30
+        repeat
+    parallel:
+        ease 1 rotate 0
+        pause 0.1
+        ease 0.5 rotate -2
+        repeat
+
+image Storm_titjob_cock_animation3:
+    animation
+    "Zero_blowjob_cock"
+
+    subpixel True
+    rotate -2
+    parallel:
+        ease 1 yoffset 0
+        pause 0.2
+        ease 0.4 yoffset 30
+        repeat
+    parallel:
+        ease 1 rotate 0
+        pause 0.1
+        ease 0.5 rotate -2
+        repeat
+
 layeredimage Zero_cock_Storm:
     if renpy.showing("Storm_sprite handjob"):
         "Zero_handjob_cock_animation[action_speed]" pos (0.08, 0.455) zoom 0.28
 
+    if renpy.showing("Storm_sprite titjob"):
+        "Storm_titjob_cock_animation[action_speed]" pos (0.01, 0.3) zoom 0.7
+
+image Jubes_titjob_cock_animation0:
+    "Zero_blowjob_cock"
+
+image Jubes_titjob_cock_animation1:
+    animation
+    "Zero_blowjob_cock"
+
+    subpixel True
+    rotate -2
+    block:
+        ease 2 yoffset 0
+        pause 0.4
+        ease 1.8 yoffset 25
+        pause 0.5
+        repeat
+
+image Jubes_titjob_cock_animation2:
+    animation
+    "Zero_blowjob_cock"
+
+    subpixel True
+    block:
+        ease 1 yoffset 0
+        pause 0.2
+        ease 0.4 yoffset 30
+        repeat
+
+image Jubes_titjob_cock_animation3:
+    animation
+    "Zero_blowjob_cock"
+
+    subpixel True
+    block:
+        ease 1 yoffset 0
+        pause 0.2
+        ease 0.4 yoffset 30
+        repeat
+
 layeredimage Zero_cock_Jubes:
     if renpy.showing("Jubes_sprite handjob"):
         "Zero_handjob_cock_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+
+    if renpy.showing("Jubes_sprite titjob"):
+        "Jubes_titjob_cock_animation[action_speed]" pos (0.0, 0.25) zoom 0.7
+
+
+
+
 
 
 
@@ -939,7 +1033,6 @@ image Kitty_sex_cock_animation1:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (0, -5)
     block:
         ease 1 yoffset -20
         pause 1
@@ -951,7 +1044,6 @@ image Kitty_sex_cock_animation2:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (0.75, -40)
     block:
         ease 1 offset (1, -110)
         pause 1
@@ -963,7 +1055,6 @@ image Kitty_sex_cock_animation3:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (0.75, -40)
     block:
         ease 0.25 offset (1, -110)
         pause 0.25
@@ -993,7 +1084,6 @@ image Kitty_sex_cock_anal_animation2:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (0, -40)
     block:
         ease 1 yoffset -120
         pause 1
@@ -1005,7 +1095,6 @@ image Kitty_sex_cock_anal_animation3:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (0, -40)
     block:
         ease 0.25 yoffset -120
         pause 0.25
@@ -1053,7 +1142,6 @@ image Kitty_sex_cock_hotdog_animation1:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (0, -70)
     block:
         ease 1 yoffset -10
         pause 0.5
@@ -1065,7 +1153,6 @@ image Kitty_sex_cock_hotdog_animation2:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (0, -60)
     block:
         ease 0.5 yoffset -120
         pause 0.5
@@ -1077,7 +1164,6 @@ image Kitty_sex_cock_hotdog_animation3:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (0, -60)
     block:
         ease 0.5 yoffset -120
         pause 0.5
@@ -1143,7 +1229,6 @@ image Kitty_doggy_cock_animation2:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (-3, -45)
     block:
         ease 0.5 offset (-3, -105)
         pause 0.25
@@ -1155,7 +1240,6 @@ image Kitty_doggy_cock_animation3:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (-3, -45)
     block:
         ease 0.2 offset (-3, -105)
         pause 0.1
@@ -1185,7 +1269,6 @@ image Kitty_doggy_cock_anal_animation2:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (-2, -35)
     block:
         ease 0.5 offset (-2, -105)
         pause 0.25
@@ -1197,7 +1280,6 @@ image Kitty_doggy_cock_anal_animation3:
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (-2, -35)
     block:
         ease 0.2 offset (-2, -105)
         pause 0.1

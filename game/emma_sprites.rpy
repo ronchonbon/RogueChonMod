@@ -263,11 +263,11 @@ layeredimage Emma_head:
     if EmmaX.spunk["hair"]:
         "images/Emma_standing/Emma_standing_spunk_hair[EmmaX.outfit[hair]].png"
 
-    if EmmaX.outfit["face_outer_accessory"] == "_wet_hat":
+    if EmmaX.outfit["face_outer_accessory"] != "_hat":
+        Null()
+    elif EmmaX.wet:
         "images/Emma_standing/Emma_standing_shadow_head_wet.png"
-    elif EmmaX.wet and EmmaX.outfit["face_outer_accessory"] == "_hat":
-        "images/Emma_standing/Emma_standing_shadow_head_wet.png"
-    elif EmmaX.outfit["face_outer_accessory"] == "_hat":
+    else:
         "images/Emma_standing/Emma_standing_shadow_head[EmmaX.outfit[hair]].png"
 
     if EmmaX.wet:
@@ -299,9 +299,11 @@ layeredimage Emma_titjob_breasts:
     if EmmaX.outfit["piercings"]:
         "images/Emma_titjob/Emma_titjob_piercings[EmmaX.outfit[piercings]].png"
 
-    if EmmaX.outfit["bra"] == "_sports_bra" and EmmaX.bra_pulled_up:
+    if not EmmaX.outfit["bra"]:
+        Null()
+    elif EmmaX.outfit["bra"] == "_sports_bra" and EmmaX.bra_pulled_up:
         "images/Emma_titjob/Emma_titjob_bra[EmmaX.outfit[bra]]_up.png"
-    elif EmmaX.outfit["bra"]:
+    elif EmmaX.outfit["bra"] != "_corset":
         "images/Emma_titjob/Emma_titjob_bra[EmmaX.outfit[bra]].png"
 
     if EmmaX.outfit["piercings"] and EmmaX.breasts_covered:
@@ -313,7 +315,7 @@ layeredimage Emma_titjob_breasts:
     anchor (0.5, 0.5)
 
 layeredimage Emma_blowjob_back_hair:
-    if EmmaX.wet or EmmaX.outfit["hair"] == "_wavy" or EmmaX.outfit["face_outer_accessory"] == "_wet_hat":
+    if EmmaX.wet or EmmaX.outfit["hair"] == "_wavy":
         Null()
     else:
         "images/Emma_blowjob/Emma_blowjob_back_hair.png"
@@ -321,7 +323,7 @@ layeredimage Emma_blowjob_back_hair:
     anchor (0.5, 0.5)
 
 layeredimage Emma_blowjob_head:
-    if EmmaX.wet or EmmaX.outfit["face_outer_accessory"] == "_wet_hat":
+    if EmmaX.wet:
         "images/Emma_blowjob/Emma_blowjob_mid_hair_wet.png"
     else:
         "images/Emma_blowjob/Emma_blowjob_mid_hair[EmmaX.outfit[hair]].png"
@@ -369,7 +371,7 @@ layeredimage Emma_blowjob_head:
     if EmmaX.spunk["face"]:
         "images/Emma_blowjob/Emma_blowjob_spunk_face.png"
 
-    if EmmaX.wet or EmmaX.outfit["face_outer_accessory"] == "_wet_hat":
+    if EmmaX.wet:
         "images/Emma_blowjob/Emma_blowjob_hair_wet.png"
     else:
         "images/Emma_blowjob/Emma_blowjob_hair[EmmaX.outfit[hair]].png"
@@ -377,8 +379,8 @@ layeredimage Emma_blowjob_head:
     # always:
     #     "images/Emma_blowjob/Emma_blowjob_hat_reference.png"
 
-    if EmmaX.outfit["face_outer_accessory"]:
-        "images/Emma_standing/Emma_standing_face_outer_accessory[EmmaX.outfit[face_outer_accessory]].png" pos (-0.044, -0.095) zoom 1.3
+    # if EmmaX.outfit["face_outer_accessory"]:
+    #     "images/Emma_standing/Emma_standing_face_outer_accessory[EmmaX.outfit[face_outer_accessory]].png" pos (-0.044, -0.095) zoom 1.3
 
     anchor (0.5, 0.5)
 

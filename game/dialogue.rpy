@@ -3278,7 +3278,7 @@ label was_that_enough_lines(Girl, action):
 
     return
 
-label get_out_lines(Girl, action):
+label get_out_lines(Girl):
     if Girl == RogueX:
         $ lines = ["I don't want to deal with you right now.",
             "Buzz off already.",

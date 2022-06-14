@@ -1492,8 +1492,8 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                     $ Girl.outfit["loincloth"] = ""
                     "[Girl.name] pulls her hoops off."
 
-                "Why don't you lose the hat?" if Girl.outfit["hair"] == "_hat" or Girl.outfit["hair"] == "_wet_hat":
-                    $ Girl.outfit["hair"] == "_wet" if Girl.outfit["hair"] == "_wet_hat" else "_wavy"
+                "Why don't you lose the hat?" if Girl.outfit["face_outer_accessory"] == "_hat":
+                    $ Girl.outfit["face_outer_accessory"] = ""
                     "[Girl.name] tosses her hat aside."
                 "That's enough. [[exit]":
 

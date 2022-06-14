@@ -3235,38 +3235,29 @@ label Emma_wardrobe_menu:
 
     menu Emma_Clothes_Misc:
 
-        "You look good with your hair flowing." if EmmaX.outfit["hair"] != "_wavy" and EmmaX.outfit["hair"] != "_hat":
+        "You look good with your hair flowing." if EmmaX.outfit["hair"] != "_wavy":
             if approval_check(EmmaX, 600):
-                if EmmaX.outfit["hair"] == "_wet_hat":
-                    $ EmmaX.outfit["hair"] = "_hat"
-                else:
-                    $ EmmaX.outfit["hair"] = "_wavy"
+                $ EmmaX.outfit["hair"] = "_wavy"
+
                 ch_e "Like this?"
             else:
                 ch_e "Yes, I do."
 
-        "Maybe keep your hair straight." if EmmaX.outfit["hair"] != "_wet"and EmmaX.outfit["hair"] != "_wet_hat":
+        "Maybe keep your hair straight." if EmmaX.outfit["hair"] != "_wet":
             if approval_check(EmmaX, 600):
-                if EmmaX.outfit["hair"] == "_hat":
-                    $ EmmaX.outfit["hair"] = "_wet_hat"
-                else:
-                    $ EmmaX.outfit["hair"] = "_wet"
+                $ EmmaX.outfit["hair"] = "_wet"
                 ch_e "You think?"
             else:
                 ch_e "I tend to prefer it a bit more loose."
 
-        "Add hat" if EmmaX.outfit["hair"] != "_hat" and EmmaX.outfit["hair"] != "_wet_hat" and "halloween" in EmmaX.history:
+        "Add hat" if EmmaX.outfit["face_outer_accessory"] != "_hat" and "halloween" in EmmaX.history:
             ch_p "That hat you wore to the party was nice."
-            if EmmaX.outfit["hair"] == "_wet":
-                $ EmmaX.outfit["hair"] = "_wet_hat"
-            else:
-                $ EmmaX.outfit["hair"] = "_hat"
-        "Remove hat" if EmmaX.outfit["hair"] == "_hat" or EmmaX.outfit["hair"] == "_wet_hat":
+
+            $ EmmaX.outfit["face_outer_accessory"] = "_hat"
+        "Remove hat" if EmmaX.outfit["face_outer_accessory"] == "_hat":
             ch_p "You could probably lose the hat."
-            if EmmaX.outfit["hair"] == "_wet_hat":
-                $ EmmaX.outfit["hair"] = "_wet"
-            else:
-                $ EmmaX.outfit["hair"] = "_wavy"
+
+            $ EmmaX.outfit["face_outer_accessory"] = ""
 
         "Grow Pubes." if not EmmaX.pubes and "pubes" not in EmmaX.to_do:
             ch_p "You know, I like some nice hair down there. Maybe grow it out."

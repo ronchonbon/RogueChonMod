@@ -307,7 +307,7 @@ label Massage_Cycle:
         call shift_focus (Girl)
         $ Girl.lust_face()
 
-        call shift_view (Girl, Girl.pose, 0)
+        call shift_view (Girl, Girl.pose)
 
 
 

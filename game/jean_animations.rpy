@@ -212,6 +212,7 @@ image Jean_titjob_bra_back_animation1:
 image Jean_titjob_bra_back_animation2:
     animation
     "Jean_titjob_bra_back"
+
     subpixel True
     block:
         ease 0.3 yoffset 40
@@ -371,7 +372,7 @@ image Jean_titjob_right_breast_animation0:
     block:
         ease 2 yoffset -20
         pause 0.1
-        ease 2 yoffset -0
+        ease 2 yoffset 0
         pause 0.1
         repeat
 
@@ -556,7 +557,7 @@ layeredimage Jean_sprite titjob:
     always:
         "Jean_titjob_hair_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
 
-    anchor (0.5, 0.0) offset (320, 700) zoom 1.2
+    anchor (0.5, 0.0) offset (300, 750)
 
 image Jean_blowjob_blinking:
     "images/Jean_blowjob/Jean_blowjob_eyes[JeanX.eyes].png"

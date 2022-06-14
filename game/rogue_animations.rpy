@@ -893,7 +893,6 @@ image Rogue_doggy_body_animation2:
     "Rogue_doggy_body"
 
     subpixel True
-    yoffset 15
     block:
         ease 0.5 yoffset 5
         pause 0.25
@@ -905,7 +904,6 @@ image Rogue_doggy_body_animation3:
     "Rogue_doggy_body"
 
     subpixel True
-    offset (0, 20)
     block:
         pause 0.15
         ease 0.1 yoffset 0
@@ -935,7 +933,6 @@ image Rogue_doggy_ass_animation2:
     "Rogue_doggy_ass"
 
     subpixel True
-    pause 0.2
     block:
         ease 0.3 yoffset -15
         ease 0.2 yoffset -5
@@ -948,7 +945,6 @@ image Rogue_doggy_ass_animation3:
     "Rogue_doggy_ass"
 
     subpixel True
-    offset (0, 5)
     block:
         pause 0.15
         ease 0.1 yoffset -25

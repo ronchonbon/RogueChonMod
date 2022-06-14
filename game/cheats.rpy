@@ -548,11 +548,9 @@ label wardrobe_editor(Girl):
 
                             $ Girl.outfit["back_hair"] = Girl.outfit["hair"]
                         "Toggle hat" if Girl == EmmaX:
-                            if Girl.outfit["hair"] == "_wavy":
+                            if Girl.outfit["face_outer_accessory"] == "_hat":
                                 $ Girl.outfit["face_outer_accessory"] = "_hat"
-                            elif Girl.outfit["hair"] == "_wet":
-                                $ Girl.outfit["face_outer_accessory"] = "_wet_hat"
-                            elif Girl.outfit["hair"] in ["_hat", "_wet_hat"]:
+                            else:
                                 $ Girl.outfit["face_outer_accessory"] = ""
                         "Toggle held item":
                             if not Girl.outfit["held_item"]:

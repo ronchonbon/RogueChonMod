@@ -235,7 +235,6 @@ image Laura_titjob_back_hair_animation0:
     "Laura_back_hair"
 
     subpixel True
-    rotate 0
     parallel:
         ease 2 yoffset -20
         pause 0.1
@@ -432,7 +431,6 @@ image Laura_titjob_head_animation0:
     "Laura_head"
 
     subpixel True
-    rotate 0
     parallel:
         ease 2 yoffset -20
         pause 0.1
@@ -559,7 +557,6 @@ image Laura_titjob_mid_hair_animation0:
     "Laura_titjob_mid_hair"
 
     subpixel True
-    rotate 0
     parallel:
         ease 2 yoffset -20
         pause 0.1
@@ -614,7 +611,6 @@ image Laura_titjob_hair_animation0:
     "Laura_titjob_hair"
 
     subpixel True
-    rotate 0
     parallel:
         ease 2 yoffset -20
         pause 0.1

@@ -1273,7 +1273,7 @@ label pool:
             "Want to sunbathe? (locked)" if round < 30:
                 pass
             "Want to swim?" if round >= 30:
-                if time_index >= 3 and AloneCheck():
+                if time_index >= 3 and AloneCheck(focused_Girl):
                     "It's a bit late for a swim."
                 else:
                     call Pool_Swim

@@ -182,28 +182,40 @@ label start:
     #
     # python:
     #     for G in all_Girls:
-    #         G.change_face("_sexy")
-    #         G.change_outfit("nude")
-    #         G.grool = 2
-    #         G.spunk["pussy"] = True
-    #         G.spunk["anus"] = True
+    #         active_Girls.append(G)
+    # #         G.change_face("_sexy")
+    #         # G.change_outfit("nude")
+    #         # G.grool = 2
+    #         # G.spunk["pussy"] = True
+    #         # G.spunk["anus"] = True
     #
     # $ Player.sprite = True
     # $ show_feet = True
-    # $ action_speed = 3
+    # $ action_speed = 0
     # $ Player.cock_position = "in"
-    # $ Player.primary_action = "sex"
+    # # $ Player.primary_action = "sex"
     # $ Player.secondary_action = "finger_ass"
     #
-    # show Rogue_sprite sex at sprite_location(0.5)
-    # show Kitty_sprite titjob at sprite_location(0.5)
-    # show Emma_sprite titjob at sprite_location(0.5)
-    # show Laura_sprite titjob at sprite_location(0.5)
-    # show Jean_sprite titjob at sprite_location(0.5)
-    # show Storm_sprite handjob at sprite_location(0.5)
-    # show Jubes_sprite handjob at sprite_location(0.5)
+    # # show Rogue_sprite titjob at sprite_location(0.5)
+    # # show Kitty_sprite titjob at sprite_location(0.5)
+    # # show Emma_sprite titjob at sprite_location(0.5)
+    # # show Laura_sprite titjob at sprite_location(0.5)
+    # # show Jean_sprite titjob at sprite_location(0.5)
+    # # show Storm_sprite titjob at sprite_location(0.5)
+    # # show Jubes_sprite titjob at sprite_location(0.5)
+    #
+    # show Rogue_sprite standing at sprite_location(stage_far_far_left)
+    # show Kitty_sprite standing at sprite_location(stage_far_left)
+    # show Emma_sprite standing at sprite_location(stage_left)
+    # show Laura_sprite standing at sprite_location(stage_center)
+    # show Jean_sprite standing at sprite_location(stage_right)
+    # show Storm_sprite standing at sprite_location(stage_far_right)
+    # show Jubes_sprite standing at sprite_location(stage_far_far_right)
     #
     # ""
+    #
+    # $ active_Girls = []
+    # $ focused_Girl = RogueX
 
     jump prologue
 

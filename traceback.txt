@@ -1,30 +1,60 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/rogue_chat.rpy", line 1981, in script
-    $ renpy.pop_call()
-  File "game/rogue_chat.rpy", line 1981, in <module>
-    $ renpy.pop_call()
-Exception: No call on call stack.
+  File "game/script.rpy", line 210, in script
+    show Storm_sprite titjob at sprite_location(stage_far_right):
+Exception: DynamicImage u'images/Storm_titjob/Storm_titjob_bra[StormX.outfit[bra]]_base.png': could not find image. (u'images/Storm_titjob/Storm_titjob_bra_black_bra_base.png')
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/rogue_chat.rpy", line 1981, in script
-    $ renpy.pop_call()
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 928, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/python.py", line 2245, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "game/rogue_chat.rpy", line 1981, in <module>
-    $ renpy.pop_call()
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 2817, in pop_call
-    renpy.game.context().pop_call()
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/execution.py", line 669, in pop_call
-    raise Exception("No call on call stack.")
-Exception: No call on call stack.
+  File "game/script.rpy", line 210, in script
+    show Storm_sprite titjob at sprite_location(stage_far_right):
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1197, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1167, in show_imspec
+    atl=atl)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 768, in show
+    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 1147, in add
+    thing.visit_all(lambda d : None)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1443, in update
+    child.visit_all(lambda c : c.per_interact())
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 744, in visit
+    self.find_target()
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 652, in find_target
+    raise Exception(error)
+Exception: DynamicImage u'images/Storm_titjob/Storm_titjob_bra[StormX.outfit[bra]]_base.png': could not find image. (u'images/Storm_titjob/Storm_titjob_bra_black_bra_base.png')
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
-Rogue-Like Chonky Mod 0.2b
-Mon Jun 13 20:11:18 2022
+Rogue-Like Chonky Mod 0.2c
+Tue Jun 14 03:10:04 2022

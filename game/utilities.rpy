@@ -69,11 +69,6 @@ label wait(outfit = True, lights = True):
                 elif "_wet" in JeanX.daily_history:
                     $ JeanX.outfit["hair"] = "_wet"
 
-            if EmmaX.outfit["hair"] == "_hat":
-                $ EmmaX.outfit["hair"] = "_wavy"
-            elif EmmaX.outfit["hair"] == "_wet_hat":
-                $ EmmaX.outfit["hair"] = "_wet"
-
             if StormX.outfit["hair"] == "_short":
                 if "_long" in StormX.daily_history:
                     $ StormX.outfit["hair"] = "_long"

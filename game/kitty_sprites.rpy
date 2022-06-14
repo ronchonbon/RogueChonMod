@@ -726,12 +726,12 @@ layeredimage Kitty_doggy_ass:
     elif KittyX.outfit["hose"]:
         "images/Kitty_doggy/Kitty_doggy_hose[KittyX.outfit[hose]].png"
 
-    if KittyX.outfit["bottom"] in ["_skirt", "_dress"] and KittyX.upskirt and Player.sprite and Player.cock_position == "anal" and action_speed:
-        "images/Kitty_doggy/Kitty_doggy_bottom_skirt_down.png"
-    elif KittyX.outfit["bottom"] in ["_skirt", "_dress"] and KittyX.upskirt:
-        "images/Kitty_doggy/Kitty_doggy_bottom_skirt_down.png"
-    elif KittyX.outfit["bottom"] in ["_skirt", "_dress"]:
-        "images/Kitty_doggy/Kitty_doggy_bottom_skirt.png"
+    if KittyX.outfit["bottom"] in ["_blue_skirt", "_dress"] and KittyX.upskirt and Player.sprite and Player.cock_position == "anal" and action_speed:
+        "images/Kitty_doggy/Kitty_doggy_bottom[KittyX.outfit[bottom]]_down.png"
+    elif KittyX.outfit["bottom"] in ["_blue_skirt", "_dress"] and KittyX.upskirt:
+        "images/Kitty_doggy/Kitty_doggy_bottom[KittyX.outfit[bottom]]_down.png"
+    elif KittyX.outfit["bottom"] in ["_blue_skirt", "_dress"]:
+        "images/Kitty_doggy/Kitty_doggy_bottom[KittyX.outfit[bottom]].png"
     elif KittyX.outfit["bottom"] and KittyX.grool > 1:
         "images/Kitty_doggy/Kitty_doggy_bottom[KittyX.outfit[bottom]]_grool.png"
     elif KittyX.outfit["bottom"]:

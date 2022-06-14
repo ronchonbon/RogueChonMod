@@ -906,7 +906,6 @@ image Kitty_doggy_body_animation2:
     "Kitty_doggy_body"
 
     subpixel True
-    offset (0, 0)
     pause 0.4
     block:
         ease 0.2 yoffset -10
@@ -919,7 +918,6 @@ image Kitty_doggy_body_animation3:
     "Kitty_doggy_body"
 
     subpixel True
-    offset (0, 20)
     block:
         pause 0.15
         ease 0.1 yoffset 0
@@ -962,7 +960,6 @@ image Kitty_doggy_ass_animation3:
     "Kitty_doggy_ass"
 
     subpixel True
-    offset (0, 5)
     block:
         pause 0.15
         ease 0.1 yoffset -25

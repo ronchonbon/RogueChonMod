@@ -961,8 +961,6 @@ init python:
 
             if self.wet:
                 self.outfit["hair"] = "_wet"
-            elif self.tag == "Emma" and outfit_holder["face_outer_accessory"] == "_wet_hat":
-                self.outfit["hair"] = "_wet"
 
             if "ripped" in self.daily_history and "modesty" not in self.recent_history:
                 self.outfit["hose"] = "_ripped_pantyhose" if self.outfit["hose"] == "_pantyhose" else self.outfit["hose"]

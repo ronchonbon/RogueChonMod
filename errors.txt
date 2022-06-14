@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/rogue_sprites.rpy", line 428: condition expects a non-empty block.
-    if show_feet:
-                 ^
+File "game/emma_chat.rpy", line 3260: expected statement.
+    EmmaX.outfit["face_outer_accessory"] = ""
+                                         ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Mon Jun 13 20:01:33 2022
+Tue Jun 14 03:00:54 2022
