@@ -108,7 +108,7 @@ layeredimage Rogue_sprite standing:
     if RogueX.spunk["hand"] and RogueX.arm_pose == 2:
         "images/Rogue_standing/Rogue_standing_spunk_hand.png"
 
-    if RogueX.wet and RogueX.wet < 3:
+    if RogueX.wet:
         "images/Rogue_standing/Rogue_standing_water_body[RogueX.arm_pose].png"
 
     if RogueX.wet == 3:
@@ -122,8 +122,11 @@ layeredimage Rogue_sprite standing:
 
     anchor (0.5, 0.0) offset (5, 180) zoom 0.95
 
-image Rogue_back_hair:
-    "images/Rogue_blowjob/Rogue_blowjob_back_hair[RogueX.outfit[hair]].png"
+layeredimage Rogue_back_hair:
+    if RogueX.wet:
+        "images/Rogue_blowjob/Rogue_blowjob_back_hair_wet.png"
+    else:
+        "images/Rogue_blowjob/Rogue_blowjob_back_hair[RogueX.outfit[hair]].png"
 
     anchor (0.5, 0.5)
 
@@ -133,34 +136,55 @@ layeredimage Rogue_head:
     else:
         "images/Rogue_blowjob/Rogue_blowjob_face[RogueX.blushing].png"
 
+    if renpy.showing("Rogue_sprite blowjob") and action_speed == 1:
+        "images/Rogue_blowjob/Rogue_blowjob_mouth_tongue.png"
+    elif renpy.showing("Rogue_sprite blowjob") and not action_speed:
+        "images/Rogue_blowjob/Rogue_blowjob_mouth[RogueX.mouth].png"
+    elif renpy.showing("Rogue_sprite blowjob"):
+        Null()
+    elif RogueX.mouth == "_sucking":
+        "images/Rogue_blowjob/Rogue_blowjob_mouth_tongue.png"
+    else:
+        "images/Rogue_blowjob/Rogue_blowjob_mouth[RogueX.mouth].png"
+
+    if not RogueX.spunk["mouth"]:
+        Null()
+    elif renpy.showing("Rogue_sprite blowjob") and action_speed == 1:
+        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_tongue.png"
+    elif renpy.showing("Rogue_sprite blowjob") and not action_speed:
+        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth[RogueX.mouth].png"
+    elif renpy.showing("Rogue_sprite blowjob"):
+        Null()
+    elif RogueX.mouth == "_sucking":
+        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_tongue.png"
+    else:
+        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth[RogueX.mouth].png"
+
+    if renpy.showing("Rogue_sprite blowjob") and action_speed > 1:
+        "Rogue_blowjob_mouth_animation[action_speed]" pos (0.164, 0.55)
+
+    if RogueX.spunk["chin"]:
+        "images/Rogue_blowjob/Rogue_blowjob_spunk_chin.png"
+
     if RogueX.blushing:
         "images/Rogue_blowjob/Rogue_blowjob_brows[RogueX.brows]_blush.png"
     else:
         "images/Rogue_blowjob/Rogue_blowjob_brows[RogueX.brows].png"
-
-    if RogueX.spunk["mouth"]:
-        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth[RogueX.mouth].png"
-    else:
-        "images/Rogue_blowjob/Rogue_blowjob_mouth[RogueX.mouth].png"
-
-    if renpy.showing("Rogue_sprite blowjob"):
-        "Rogue_blowjob_mouth_animation[action_speed]" pos (0.164, 0.55)
 
     if RogueX.eyes == "_closed":
         "images/Rogue_blowjob/Rogue_blowjob_eyes_closed.png"
     else:
         "Rogue_blinking"
 
-    if RogueX.spunk["chin"]:
-        "images/Rogue_blowjob/Rogue_blowjob_spunk_chin.png"
-
-    if RogueX.spunk["mouth"] and renpy.showing("Rogue_sprite blowjob") and action_speed >= 3:
-        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_blowing_over.png"
+    if RogueX.spunk["mouth"] and renpy.showing("Rogue_sprite blowjob") and action_speed > 2:
+        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_sucking_over.png"
 
     if RogueX.spunk["face"]:
         "images/Rogue_blowjob/Rogue_blowjob_spunk_face.png"
 
-    always:
+    if RogueX.wet:
+        "images/Rogue_blowjob/Rogue_blowjob_hair_wet.png"
+    else:
         "images/Rogue_blowjob/Rogue_blowjob_hair[RogueX.outfit[hair]].png"
 
     if RogueX.spunk["hair"]:
@@ -206,18 +230,10 @@ layeredimage Rogue_titjob_over:
     anchor (0.5, 0.5)
 
 layeredimage Rogue_blowjob_mouth:
-    if RogueX.spunk["mouth"] and not action_speed:
-        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth[RogueX.mouth].png"
-    elif not action_speed:
-        "images/Rogue_blowjob/Rogue_blowjob_mouth[RogueX.mouth].png"
-    elif RogueX.spunk["mouth"] and action_speed == 1:
-        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_tongue.png"
-    elif action_speed == 1:
-        "images/Rogue_blowjob/Rogue_blowjob_mouth_tongue.png"
-    elif RogueX.spunk["mouth"]:
-        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_blowing.png"
+    if RogueX.spunk["mouth"]:
+        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_sucking.png"
     else:
-        "images/Rogue_blowjob/Rogue_blowjob_mouth_blowing.png"
+        "images/Rogue_blowjob/Rogue_blowjob_mouth_sucking.png"
 
     anchor (0.4, 0.65)
 
@@ -309,9 +325,11 @@ layeredimage Rogue_sex_legs:
 
     if not RogueX.spunk["anus"]:
         Null()
-    elif RogueX.spunk["anus"] and Player.sprite and Player.cock_position == "anal" and action_speed == 1:
+    elif not Player.sprite or Player.cock_position != "anal":
+        Null()
+    elif action_speed == 1:
         "Rogue_sex_spunk_anus_over_animation" pos (0.292, 0.386)
-    elif RogueX.spunk["anus"] and Player.sprite and Player.cock_position == "anal":
+    else:
         "Rogue_sex_spunk_anus_over" pos (0.292, 0.386)
 
     if Player.sprite and Player.cock_position == "in" and action_speed >= 2:
@@ -413,10 +431,10 @@ layeredimage Rogue_sex_legs:
     if Player.sprite and Player.cock_position == "footjob":
         "Zero_cock_Rogue"
 
-    if Player.cock_position == "footjob":
-        AlphaMask("Rogue_sex_feet", "images/Rogue_sex/Rogue_sex_feet_mask.png")
-    elif show_feet or not action_speed:
+    if show_feet:
         "Rogue_sex_feet" pos (0.291, 0.391)
+    else:
+        AlphaMask("Rogue_sex_feet", "images/Rogue_sex/Rogue_sex_feet_mask.png")
 
     anchor (0.5, 0.5)
 
@@ -454,8 +472,8 @@ image Rogue_sex_spunk_anus_over:
     anchor (0.5, 0.5)
 
 layeredimage Rogue_doggy_body:
-    if not RogueX.wet and RogueX.outfit["hair"] == "_evo":
-        "images/Rogue_doggy/Rogue_doggy_hair_evo_back.png"
+    if RogueX.outfit["hair"] == "_evo":
+        "images/Rogue_doggy/Rogue_doggy_back_hair.png"
 
     always:
         "images/Rogue_doggy/Rogue_doggy_body.png"
@@ -601,7 +619,7 @@ layeredimage Rogue_doggy_ass:
 
     if not RogueX.spunk["anus"]:
         Null()
-    elif Player.cock_position == "anal":
+    elif Player.cock_position == "anal" and action_speed:
         "images/Rogue_doggy/Rogue_doggy_spunk_anus_open.png"
     elif "finger_ass" in [Player.primary_action, Player.secondary_action]:
         "images/Rogue_doggy/Rogue_doggy_spunk_anus_open.png"
@@ -681,7 +699,7 @@ image Rogue_doggy_pussy_hole:
 image Rogue_doggy_anus_hole:
     "images/Rogue_doggy/Rogue_doggy_anus_full_hole.png"
 
-    anchor (0.52, 0.69)
+    anchor (0.515, 0.69)
 
 image Rogue_doggy_pussy_mask:
     "images/Rogue_doggy/Rogue_doggy_sex_mask.png"
@@ -703,7 +721,7 @@ layeredimage Rogue_doggy_shins:
     always:
         "images/Rogue_doggy/Rogue_doggy_feet.png"
 
-    if RogueX.outfit["hose"] != "_garterbelt":
+    if RogueX.outfit["hose"] and RogueX.outfit["hose"] != "_garterbelt":
         "images/Rogue_doggy/Rogue_doggy_hose[RogueX.outfit[hose]]_feet.png"
 
     anchor (0.5, 0.5)

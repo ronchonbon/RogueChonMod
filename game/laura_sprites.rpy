@@ -154,13 +154,20 @@ layeredimage Laura_sprite standing:
 
     anchor (0.5, 0.0) offset (40, 150)
 
-image Laura_back_hair:
-    "images/Laura_standing/Laura_standing_back_hair[LauraX.outfit[hair]].png"
+layeredimage Laura_back_hair:
+    if LauraX.wet:
+        "images/Laura_standing/Laura_standing_back_hair_wet.png"
+    else:
+        "images/Laura_standing/Laura_standing_back_hair[LauraX.outfit[hair]].png"
 
     anchor (0.5, 0.5)
 
 layeredimage Laura_head:
-    if renpy.showing("Laura_sprite sex"):
+    if not renpy.showing("Laura_sprite sex"):
+        Null()
+    elif LauraX.wet:
+        "images/Laura_sex/Laura_sex_back_hair_wet.png"
+    else:
         "images/Laura_sex/Laura_sex_back_hair[LauraX.outfit[hair]].png"
 
     always:
@@ -192,8 +199,12 @@ layeredimage Laura_head:
     else:
         "images/Laura_standing/Laura_standing_mid_hair.png"
 
-    if renpy.showing("Laura_sprite sex"):
+    if renpy.showing("Laura_sprite sex") and LauraX.wet:
+        "images/Laura_sex/Laura_sex_hair_wet.png"
+    elif renpy.showing("Laura_sprite sex"):
         "images/Laura_sex/Laura_sex_hair[LauraX.outfit[hair]].png"
+    elif LauraX.wet:
+        "images/Laura_standing/Laura_standing_hair_wet.png"
     else:
         "images/Laura_standing/Laura_standing_hair[LauraX.outfit[hair]].png"
 
@@ -223,8 +234,11 @@ image Laura_titjob_mid_hair:
 
     anchor (0.5, 0.5)
 
-image Laura_titjob_hair:
-    "images/Laura_standing/Laura_standing_hair[LauraX.outfit[hair]].png"
+layeredimage Laura_titjob_hair:
+    if LauraX.wet:
+        "images/Laura_standing/Laura_standing_hair_wet.png"
+    else:
+        "images/Laura_standing/Laura_standing_hair[LauraX.outfit[hair]].png"
 
     anchor (0.5, 0.5)
 

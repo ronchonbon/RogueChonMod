@@ -1,4 +1,5 @@
 image Zero_fondle_thigh_animation:
+    animation
     "Zero_hand"
 
     subpixel True
@@ -19,6 +20,7 @@ image Zero_fondle_thigh_animation:
             repeat
 
 image Zero_fondle_breasts_right_animation:
+    animation
     "Zero_hand"
 
     subpixel True
@@ -30,6 +32,7 @@ image Zero_fondle_breasts_right_animation:
         repeat
 
 image Zero_fondle_breasts_left_animation:
+    animation
     "Zero_hand"
 
     subpixel True
@@ -41,6 +44,7 @@ image Zero_fondle_breasts_left_animation:
         repeat
 
 image Zero_suck_breasts_right_animation:
+    animation
     "Zero_tongue"
 
     subpixel True
@@ -53,6 +57,7 @@ image Zero_suck_breasts_right_animation:
         repeat
 
 image Zero_suck_breasts_left_animation:
+    animation
     "Zero_tongue"
 
     subpixel True
@@ -65,6 +70,7 @@ image Zero_suck_breasts_left_animation:
         repeat
 
 image Zero_fondle_pussy_animation:
+    animation
     "Zero_hand"
 
     subpixel True
@@ -81,6 +87,7 @@ image Zero_fondle_pussy_animation:
         repeat
 
 image Zero_finger_pussy_animation:
+    animation
     "Zero_finger"
 
     subpixel True
@@ -107,6 +114,7 @@ image Zero_finger_pussy_animation:
         repeat
 
 image Zero_eat_pussy_animation:
+    animation
     "Zero_tongue"
 
     subpixel True
@@ -119,6 +127,7 @@ image Zero_eat_pussy_animation:
         repeat
 
 image Zero_doggy_fondle_breast_animation:
+    animation
     "Zero_hand_under"
 
     subpixel True
@@ -128,6 +137,7 @@ image Zero_doggy_fondle_breast_animation:
         repeat
 
 image Rogue_sex_finger_pussy_animation:
+    animation
     "Zero_sex_finger"
 
     subpixel True
@@ -139,6 +149,7 @@ image Rogue_sex_finger_pussy_animation:
         repeat
 
 image Rogue_sex_finger_ass_animation:
+    animation
     "Zero_sex_finger"
 
     subpixel True
@@ -150,6 +161,7 @@ image Rogue_sex_finger_ass_animation:
         repeat
 
 image Rogue_doggy_finger_pussy_animation:
+    animation
     "Zero_sex_finger"
 
     subpixel True
@@ -160,6 +172,7 @@ image Rogue_doggy_finger_pussy_animation:
         repeat
 
 image Rogue_doggy_finger_ass_animation:
+    animation
     "Zero_sex_finger"
 
     subpixel True
@@ -183,6 +196,7 @@ layeredimage Zero_finger_Rogue:
         "Rogue_doggy_finger_ass_animation" pos (0.112, 0.57)
 
 image Rogue_doggy_anus_fingering_mask_animation:
+    animation
     "images/Rogue_doggy/Rogue_doggy_anus_mask.png"
 
     subpixel True
@@ -202,6 +216,7 @@ layeredimage Zero_finger_Rogue_mask:
         "Rogue_doggy_anus_fingering_mask_animation" offset (217, 514)
 
 image dildo_pussy_animation:
+    animation
     "dildo"
 
     subpixel True
@@ -212,6 +227,7 @@ image dildo_pussy_animation:
         repeat
 
 image dildo_ass_animation:
+    animation
     "dildo"
 
     subpixel True
@@ -222,6 +238,7 @@ image dildo_ass_animation:
         repeat
 
 image doggy_dildo_pussy_animation:
+    animation
     "dildo"
 
     subpixel True
@@ -232,6 +249,7 @@ image doggy_dildo_pussy_animation:
         repeat
 
 image doggy_dildo_ass_animation:
+    animation
     "dildo"
 
     subpixel True
@@ -266,6 +284,7 @@ image Zero_handjob_cock_animation0:
     "Zero_handjob_cock"
 
 image Zero_handjob_cock_animation1:
+    animation
     "Zero_handjob_cock"
 
     subpixel True
@@ -277,6 +296,7 @@ image Zero_handjob_cock_animation1:
         repeat
 
 image Zero_handjob_cock_animation2:
+    animation
     "Zero_handjob_cock"
 
     subpixel True
@@ -290,21 +310,22 @@ image Rogue_titjob_cock_animation0:
     "Zero_handjob_cock"
 
 image Rogue_titjob_cock_animation1:
+    animation
     "Zero_handjob_cock"
 
     subpixel True
     block:
-        ease 1 yoffset -60
-        easeout 0.2 yoffset -70
+        ease 1.2 yoffset -60
         easein 1.3 yoffset -20
         repeat
 
 image Rogue_titjob_cock_animation2:
+    animation
     "Zero_handjob_cock"
 
     subpixel True
     block:
-        ease 0.35 yoffset -50
+        ease 0.35 yoffset -70
         ease 0.4 yoffset -30
         repeat
 
@@ -314,6 +335,7 @@ image Rogue_blowjob_cock_animation0:
     rotate -10
 
 image Rogue_blowjob_cock_animation1:
+    animation
     "Zero_blowjob_cock"
 
     subpixel True
@@ -327,6 +349,8 @@ image Rogue_blowjob_cock_animation1:
 image Rogue_blowjob_cock_animation2:
     "Zero_blowjob_cock"
 
+    offset (1, 0) rotate -1
+
 image Rogue_blowjob_cock_animation3:
     "Zero_blowjob_cock"
 
@@ -337,6 +361,7 @@ image Rogue_sex_cock_animation0:
     "Zero_doggy_cock_in"
 
 image Rogue_sex_cock_animation1:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -348,6 +373,7 @@ image Rogue_sex_cock_animation1:
         repeat
 
 image Rogue_sex_cock_animation2:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -359,6 +385,7 @@ image Rogue_sex_cock_animation2:
         repeat
 
 image Rogue_sex_cock_animation3:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -373,6 +400,7 @@ image Rogue_sex_cock_anal_animation0:
     "Zero_doggy_cock_in"
 
 image Rogue_sex_cock_anal_animation1:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -383,6 +411,7 @@ image Rogue_sex_cock_anal_animation1:
         repeat
 
 image Rogue_sex_cock_anal_animation2:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -394,6 +423,7 @@ image Rogue_sex_cock_anal_animation2:
         repeat
 
 image Rogue_sex_cock_anal_animation3:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -408,6 +438,7 @@ image Rogue_sex_cock_footjob_animation0:
     "Zero_blowjob_cock"
 
 image Rogue_sex_cock_footjob_animation1:
+    animation
     "Zero_blowjob_cock"
 
     subpixel True
@@ -420,6 +451,7 @@ image Rogue_sex_cock_footjob_animation1:
         repeat
 
 image Rogue_sex_cock_footjob_animation2:
+    animation
     "Zero_blowjob_cock"
 
     subpixel True
@@ -435,6 +467,7 @@ image Rogue_sex_cock_hotdog_animation0:
     "Zero_doggy_cock_in"
 
 image Rogue_sex_cock_hotdog_animation1:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -446,6 +479,7 @@ image Rogue_sex_cock_hotdog_animation1:
         repeat
 
 image Rogue_sex_cock_hotdog_animation2:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -457,6 +491,7 @@ image Rogue_sex_cock_hotdog_animation2:
         repeat
 
 image Rogue_sex_cock_hotdog_animation3:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -468,6 +503,7 @@ image Rogue_sex_cock_hotdog_animation3:
         repeat
 
 image Rogue_doggy_cock_animation0:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -478,6 +514,7 @@ image Rogue_doggy_cock_animation0:
         repeat
 
 image Rogue_doggy_cock_animation1:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -488,6 +525,7 @@ image Rogue_doggy_cock_animation1:
         repeat
 
 image Rogue_doggy_cock_animation2:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -499,6 +537,7 @@ image Rogue_doggy_cock_animation2:
         repeat
 
 image Rogue_doggy_cock_animation3:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -513,41 +552,45 @@ image Rogue_doggy_cock_anal_animation0:
     "Zero_doggy_cock_in"
 
 image Rogue_doggy_cock_anal_animation1:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
     block:
-        ease 0.5 yoffset -50
+        ease 0.5 yoffset -75
         pause 0.25
-        ease 1.75 yoffset 0
+        ease 1.75 yoffset -25
         repeat
 
 image Rogue_doggy_cock_anal_animation2:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (-2, -35)
+    yoffset -60
     block:
-        ease 0.5 offset (-2, -105)
+        ease 0.5 yoffset -130
         pause 0.25
-        ease 1.75 offset (-2, -40)
+        ease 1.75 yoffset -65
         repeat
 
 image Rogue_doggy_cock_anal_animation3:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
-    offset (-2, -35)
+    yoffset -60
     block:
-        ease 0.2 offset (-2, -105)
+        ease 0.2 yoffset -130
         pause 0.1
-        ease 0.6 offset (-2, -35)
+        ease 0.6 yoffset -60
         repeat
 
 image Rogue_doggy_cock_hotdog_animation0:
     "Zero_doggy_cock_out"
 
 image Rogue_doggy_cock_hotdog_animation1:
+    animation
     "Zero_doggy_cock_out"
 
     subpixel True
@@ -557,6 +600,7 @@ image Rogue_doggy_cock_hotdog_animation1:
         repeat
 
 image Rogue_doggy_cock_hotdog_animation2:
+    animation
     "Zero_doggy_cock_out"
 
     subpixel True
@@ -566,6 +610,7 @@ image Rogue_doggy_cock_hotdog_animation2:
         repeat
 
 image Rogue_doggy_cock_hotdog_animation3:
+    animation
     "Zero_doggy_cock_out"
 
     subpixel True
@@ -578,6 +623,7 @@ image Rogue_doggy_cock_footjob_animation0:
     "Zero_doggy_cock_out"
 
 image Rogue_doggy_cock_footjob_animation1:
+    animation
     "Zero_doggy_cock_out"
 
     subpixel True
@@ -588,6 +634,7 @@ image Rogue_doggy_cock_footjob_animation1:
         repeat
 
 image Rogue_doggy_cock_footjob_animation2:
+    animation
     "Zero_doggy_cock_out"
 
     subpixel True
@@ -623,11 +670,12 @@ layeredimage Zero_cock_Rogue:
     elif Player.cock_position == "in":
         "Rogue_doggy_cock_animation[action_speed]" pos (0.112, 0.62)
     elif Player.cock_position == "anal":
-        "Rogue_doggy_cock_anal_animation[action_speed]" pos (0.1125, 0.58)
+        "Rogue_doggy_cock_anal_animation[action_speed]" pos (0.1125, 0.605)
     elif Player.cock_position == "out":
         "Rogue_doggy_cock_hotdog_animation[action_speed]" pos (0.1135, 0.52)
 
 image Rogue_doggy_pussy_mask_animation0:
+    animation
     "Rogue_doggy_pussy_mask"
 
     subpixel True
@@ -639,6 +687,7 @@ image Rogue_doggy_pussy_mask_animation0:
         repeat
 
 image Rogue_doggy_pussy_mask_animation1:
+    animation
     "Rogue_doggy_pussy_mask"
 
     subpixel True
@@ -659,6 +708,7 @@ image Rogue_doggy_anus_mask_animation0:
     "Rogue_doggy_anus_mask"
 
 image Rogue_doggy_anus_mask_animation1:
+    animation
     "Rogue_doggy_anus_mask"
 
     subpixel True
@@ -699,6 +749,7 @@ layeredimage Zero_cock_Kitty_mask:
         "Kitty_titjob_mask_animation[action_speed]" offset (100, 100)
 
 image Emma_titjob_cock_animation0:
+    animation
     "Zero_blowjob_cock"
 
     subpixel True
@@ -717,6 +768,7 @@ image Emma_titjob_cock_animation0:
         repeat
 
 image Emma_titjob_cock_animation1:
+    animation
     "Zero_blowjob_cock"
 
     subpixel True
@@ -728,6 +780,7 @@ image Emma_titjob_cock_animation1:
         repeat
 
 image Emma_titjob_cock_animation2:
+    animation
     "Zero_blowjob_cock"
 
     subpixel True
@@ -738,6 +791,7 @@ image Emma_titjob_cock_animation2:
         repeat
 
 image Emma_titjob_cock_animation3:
+    animation
     "Zero_blowjob_cock"
 
     subpixel True
@@ -758,6 +812,7 @@ layeredimage Zero_cock_Emma:
         "Emma_titjob_cock_animation[action_speed]" pos (0.0, 0.035) zoom 0.45
 
 image Laura_titjob_cock_animation0:
+    animation
     "Zero_blowjob_cock"
 
     subpixel True
@@ -770,6 +825,7 @@ image Laura_titjob_cock_animation0:
         repeat
 
 image Laura_titjob_cock_animation1:
+    animation
     "Zero_blowjob_cock"
 
     subpixel True
@@ -788,6 +844,7 @@ image Laura_titjob_cock_animation1:
         repeat
 
 image Laura_titjob_cock_animation2:
+    animation
     "Zero_blowjob_cock"
 
     subpixel True
@@ -811,6 +868,7 @@ layeredimage Zero_cock_Laura:
         "Laura_titjob_cock_animation[action_speed]" pos (-0.08, 0.2) zoom 0.65
 
 image Jean_titjob_cock_animation0:
+    animation
     "Zero_blowjob_cock"
 
     subpixel True
@@ -823,6 +881,7 @@ image Jean_titjob_cock_animation0:
         repeat
 
 image Jean_titjob_cock_animation1:
+    animation
     "Zero_blowjob_cock"
 
     subpixel True
@@ -835,6 +894,7 @@ image Jean_titjob_cock_animation1:
         repeat
 
 image Jean_titjob_cock_animation2:
+    animation
     "Zero_blowjob_cock"
 
     subpixel True
@@ -875,6 +935,7 @@ image Kitty_sex_cock_anal_animation0:
     "Zero_doggy_cock_in"
 
 image Kitty_sex_cock_animation1:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -886,6 +947,7 @@ image Kitty_sex_cock_animation1:
         repeat
 
 image Kitty_sex_cock_animation2:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -897,6 +959,7 @@ image Kitty_sex_cock_animation2:
         repeat
 
 image Kitty_sex_cock_animation3:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -915,6 +978,7 @@ image Kitty_sex_cock_anal_animation0:
     "Zero_doggy_cock_in"
 
 image Kitty_sex_cock_anal_animation1:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -925,6 +989,7 @@ image Kitty_sex_cock_anal_animation1:
         repeat
 
 image Kitty_sex_cock_anal_animation2:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -936,6 +1001,7 @@ image Kitty_sex_cock_anal_animation2:
         repeat
 
 image Kitty_sex_cock_anal_animation3:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -954,6 +1020,7 @@ image Kitty_sex_cock_footjob_animation0:
     "Zero_blowjob_cock"
 
 image Kitty_sex_cock_footjob_animation1:
+    animation
     "Zero_blowjob_cock"
 
     subpixel True
@@ -966,6 +1033,7 @@ image Kitty_sex_cock_footjob_animation1:
         repeat
 
 image Kitty_sex_cock_footjob_animation2:
+    animation
     "Zero_blowjob_cock"
 
     subpixel True
@@ -981,6 +1049,7 @@ image Kitty_sex_cock_hotdog_animation0:
     "Zero_doggy_cock_in"
 
 image Kitty_sex_cock_hotdog_animation1:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -992,6 +1061,7 @@ image Kitty_sex_cock_hotdog_animation1:
         repeat
 
 image Kitty_sex_cock_hotdog_animation2:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -1003,6 +1073,7 @@ image Kitty_sex_cock_hotdog_animation2:
         repeat
 
 image Kitty_sex_cock_hotdog_animation3:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -1014,6 +1085,7 @@ image Kitty_sex_cock_hotdog_animation3:
         repeat
 
 image Kitty_sex_finger_pussy_animation:
+    animation
     "Zero_sex_finger"
 
     subpixel True
@@ -1029,6 +1101,7 @@ layeredimage Kitty_sex_finger_pussy_animations:
         "Kitty_sex_finger_pussy_animation" pos (0.2918, 0.615) zoom 0.9
 
 image Kitty_sex_finger_ass_animation:
+    animation
     "Zero_sex_finger"
 
     subpixel True
@@ -1044,6 +1117,7 @@ layeredimage Kitty_sex_finger_ass_animations:
         "Kitty_sex_finger_ass_animation" pos (0.2923, 0.687) zoom 0.9
 
 image Kitty_doggy_cock_animation0:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -1054,6 +1128,7 @@ image Kitty_doggy_cock_animation0:
         repeat
 
 image Kitty_doggy_cock_animation1:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -1064,6 +1139,7 @@ image Kitty_doggy_cock_animation1:
         repeat
 
 image Kitty_doggy_cock_animation2:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -1075,6 +1151,7 @@ image Kitty_doggy_cock_animation2:
         repeat
 
 image Kitty_doggy_cock_animation3:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -1093,6 +1170,7 @@ image Kitty_doggy_cock_anal_animation0:
     "Zero_doggy_cock_in"
 
 image Kitty_doggy_cock_anal_animation1:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -1103,6 +1181,7 @@ image Kitty_doggy_cock_anal_animation1:
         repeat
 
 image Kitty_doggy_cock_anal_animation2:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -1114,6 +1193,7 @@ image Kitty_doggy_cock_anal_animation2:
         repeat
 
 image Kitty_doggy_cock_anal_animation3:
+    animation
     "Zero_doggy_cock_in"
 
     subpixel True
@@ -1132,6 +1212,7 @@ image Kitty_doggy_cock_hotdog_animation0:
     "Zero_doggy_cock_out"
 
 image Kitty_doggy_cock_hotdog_animation1:
+    animation
     "Zero_doggy_cock_out"
 
     subpixel True
@@ -1141,6 +1222,7 @@ image Kitty_doggy_cock_hotdog_animation1:
         repeat
 
 image Kitty_doggy_cock_hotdog_animation2:
+    animation
     "Zero_doggy_cock_out"
 
     subpixel True
@@ -1150,6 +1232,7 @@ image Kitty_doggy_cock_hotdog_animation2:
         repeat
 
 image Kitty_doggy_cock_hotdog_animation3:
+    animation
     "Zero_doggy_cock_out"
 
     subpixel True
@@ -1166,6 +1249,7 @@ image Kitty_doggy_cock_footjob_animation0:
     "Zero_doggy_cock_out"
 
 image Kitty_doggy_cock_footjob_animation1:
+    animation
     "Zero_doggy_cock_out"
 
     subpixel True
@@ -1176,6 +1260,7 @@ image Kitty_doggy_cock_footjob_animation1:
         repeat
 
 image Kitty_doggy_cock_footjob_animation2:
+    animation
     "Zero_doggy_cock_out"
 
     subpixel True
@@ -1186,6 +1271,7 @@ image Kitty_doggy_cock_footjob_animation2:
         repeat
 
 image Kitty_doggy_finger_pussy_animation:
+    animation
     "Zero_sex_finger"
 
     subpixel True
@@ -1200,6 +1286,7 @@ layeredimage Kitty_doggy_finger_pussy_animations:
         "Kitty_doggy_finger_pussy_animation" pos (0.112, 0.625)
 
 image Kitty_doggy_finger_anal_animation:
+    animation
     "Zero_sex_finger"
 
     subpixel True
@@ -1227,6 +1314,7 @@ layeredimage Kitty_doggy_finger_anal_animations:
 
 
 image slap_ass:
+    animation
     "UI_Hand"
 
     subpixel True

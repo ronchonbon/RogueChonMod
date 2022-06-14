@@ -4095,12 +4095,18 @@ label first_action_approval_lines(Girl, action):
         $ lines = ["Hmm, could be fun. . .",
             "Sure. . .",
             "Heh, might be fun.",
-            "I guess it could be fun with you watching. . .",
             "I guess. . .",
-            "I guess it could be fun with a partner. . .",
             "Hmm, I've always wanted to try it. . .",
-            "Hmm, it has been on my list. . .",
-            "Hmm, you look ready for it, at least. . ."]
+            "Hmm, it has been on my list. . ."]
+
+        if action == "masturbation":
+            $ lines.append("I guess it could be fun with you watching. . .")
+
+        if action in dildo_actions:
+            $ lines.append("I guess it could be fun with a partner. . .")
+
+        if action in cock_actions:
+            $ lines.append("Hmm, you look ready for it, at least. . .")
     elif Girl == KittyX:
         $ lines = ["That's kinda gross. . .",
             "I guess. . .",
@@ -4172,16 +4178,30 @@ label first_action_approval_lines(Girl, action):
 
 label first_action_approval_mostly_love_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["Well, I've never really been able to touch people without draining them, this could be an interesting experience. . .",
-            "If that's what you like. . .",
-            "Huh, well that's certainly one way to get off.",
-            "I've never really put something like that in my mouth. . . might be interesting.",
-            "I've had a reasonable amount of experience with these, you know. . .",
-            "Since my love life's been a bit. . . limited, I've gotten pretty good at this.",
-            "I haven't actually used one of these, back there before. . .",
-            "Well, I've never been able to do this before now, so this might be fun.",
-            "I guess if you really want to try it. . .",
-            "It looks like you need some relief. . ."]
+        $ lines = ["If that's what you like. . ."]
+
+        if action in dildo_actions:
+            $ lines.append("I've had a reasonable amount of experience with these, you know. . .")
+
+        if action in cock_actions:
+            $ lines.append("It looks like you need some relief. . .",
+                "Huh, well that's certainly one way to get off.")
+
+        if action in contact_actions:
+            $ lines.append("Well, I've never really been able to touch people without draining them, this could be an interesting experience. . .",
+                "Well, I've never been able to do this before now, so this might be fun.")
+
+        if action in kinky_actions:
+            $ lines.append("I guess if you really want to try it. . .")
+
+        if action == "masturbation":
+            $ lines.append("Since my love life's been a bit. . . limited, I've gotten pretty good at this.")
+
+        if action == "blowjob":
+            $ lines.append("I've never really put something like that in my mouth. . . might be interesting.")
+
+        if action == "dildo_ass":
+            $ lines.append("I haven't actually used one of these, back there before. . .")
     elif Girl == KittyX:
         $ lines = ["That's, I don't know. . .",
             "I guess it could be interesting. . .",

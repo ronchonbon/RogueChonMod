@@ -145,9 +145,11 @@ label meet_Kitty:
 
     "She struggles for a few moments to shake you free, but you hold firm."
 
+    $ holding = True
+    $ hugged = False
     $ counter = 0
 
-    while counter < 3:
+    while holding:
         menu:
             extend ""
             "Let her go.":
@@ -161,7 +163,7 @@ label meet_Kitty:
 
                 "You release her arm and step back."
 
-                $ counter = 4
+                $ holding = False
             "Hold on.":
                 "You continue to hold onto her arm and she fidgets uncomfortably."
 
@@ -169,7 +171,10 @@ label meet_Kitty:
                     $ KittyX.eyes = "_sexy"
 
                     ch_k "Are you[KittyX.like]going to let go of my arm any time soon?"
-                elif counter == 2:
+                elif counter == 1:
+                    $ KittyX.change_stat("love", 90, -1)
+                    $ KittyX.change_stat("obedience", 80, 2)
+                else:
                     ch_k "Ok, that's enough!"
 
                     $ KittyX.eyes = "_sexy"
@@ -179,10 +184,7 @@ label meet_Kitty:
 
                     "She reaches over and pries your hand loose."
 
-                    $ counter = 4
-                else:
-                    $ KittyX.change_stat("love", 90, -1)
-                    $ KittyX.change_stat("obedience", 80, 2)
+                    $ holding = False
 
                     "Um. . ."
 
@@ -206,9 +208,9 @@ label meet_Kitty:
                 ch_k "My powers may not work on you, but I have[KittyX.like]a few years of combat experience on you."
                 ch_k "And don't you forget it!"
 
-                $ counter = 10
+                $ hugged = True
 
-    if counter > 3:
+    if counter or hugged:
         $ KittyX.eyes = "_side"
 
         ch_k "Still though, that was an interesting experience. . ."
@@ -226,7 +228,7 @@ label meet_Kitty:
 
     ch_k "Oh! I[KittyX.like]totally forgot, I have to get to a briefing!"
 
-    if counter < 5:
+    if not hugged:
         $ KittyX.change_face("_smile")
 
         ch_k "I'll see you later though! Like, bye!"
@@ -439,7 +441,7 @@ label Kitty_Love:
         if KittyX.location == bg_current or KittyX in Party:
             "Suddenly, [KittyX.name] says she wants to talk to you in her room and drags you over there."
         else:
-            "[KittyX.name] shows up, hurridly says she wants to talk to you in her room and drags you over there."
+            "[KittyX.name] shows up, hurriedly says she wants to talk to you in her room and drags you over there."
         $ bg_current = "bg_kitty"
     else:
         "[KittyX.name] suddenly stares at you very intently."

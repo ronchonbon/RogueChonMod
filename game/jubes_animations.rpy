@@ -28,11 +28,13 @@ layeredimage Jubes_grool_dripping_animation:
         "grool_dripping_animation" pos (0.145, 0.57) zoom 0.2
 
 layeredimage Jubes_grool_animations:
-    if JubesX.grool and JubesX.outfit["bottom"] == "_pants" and JubesX.bottom_pulled_down:
+    if not JubesX.grool:
+        Null()
+    elif JubesX.outfit["bottom"] == "_pants" and JubesX.bottom_pulled_down:
         AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_pants.png")
-    elif JubesX.grool and JubesX.outfit["underwear"] and JubesX.underwear_pulled_down:
+    elif JubesX.outfit["underwear"] and JubesX.underwear_pulled_down:
         AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
-    elif JubesX.grool and not JubesX.pussy_covered:
+    elif not JubesX.pussy_covered:
         AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
 
 layeredimage Jubes_spunk_dripping_animation:
@@ -49,11 +51,13 @@ layeredimage Jubes_spunk_dripping_animation:
         "spunk_dripping_animation" pos (0.145, 0.57) zoom 0.3
 
 layeredimage Jubes_spunk_animations:
-    if (JubesX.spunk["pussy"] or JubesX.spunk["anus"]) and JubesX.outfit["bottom"] == "_pants" and JubesX.bottom_pulled_down:
+    if not JubesX.spunk["pussy"] and not JubesX.spunk["anus"]:
+        Null()
+    elif JubesX.outfit["bottom"] == "_pants" and JubesX.bottom_pulled_down:
         AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_pants.png")
-    elif (JubesX.spunk["pussy"] or JubesX.spunk["anus"]) and JubesX.outfit["underwear"] and JubesX.underwear_pulled_down:
+    elif JubesX.outfit["underwear"] and JubesX.underwear_pulled_down:
         AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
-    elif (JubesX.spunk["pussy"] or JubesX.spunk["anus"]) and not JubesX.pussy_covered:
+    elif not JubesX.pussy_covered:
         AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
 
 # layeredimage Jubes_standing_fondling_animations:
@@ -157,6 +161,7 @@ image Jubes_handjob_under_hand_animation0:
     "Jubes_handjob_under"
 
 image Jubes_handjob_under_hand_animation1:
+    animation
     "Jubes_handjob_under"
 
     subpixel True
@@ -169,6 +174,7 @@ image Jubes_handjob_under_hand_animation1:
         repeat
 
 image Jubes_handjob_under_hand_animation2:
+    animation
     "Jubes_handjob_under"
 
     subpixel True
@@ -184,6 +190,7 @@ image Jubes_handjob_over_hand_animation0:
     "Jubes_handjob_over"
 
 image Jubes_handjob_over_hand_animation1:
+    animation
     "Jubes_handjob_over"
 
     subpixel True
@@ -196,6 +203,7 @@ image Jubes_handjob_over_hand_animation1:
         repeat
 
 image Jubes_handjob_over_hand_animation2:
+    animation
     "Jubes_handjob_over"
 
     subpixel True

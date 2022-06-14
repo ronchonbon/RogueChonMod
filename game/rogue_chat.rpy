@@ -1978,7 +1978,6 @@ label Rogue_Leave(approval_bonus=approval_bonus):
 
         $ renpy.pop_call()
         $ renpy.pop_call()
-        $ renpy.pop_call()
 
         if RogueX.location == "bg_classroom":
             ch_r "See you then!"

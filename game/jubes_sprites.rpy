@@ -132,8 +132,11 @@ layeredimage Jubes_sprite standing:
 
     anchor (0.5, 0.0) offset (15, 150) zoom 1.1
 
-image Jubes_back_hair:
-    "images/Jubes_standing/Jubes_standing_back_hair[JubesX.outfit[hair]].png"
+layeredimage Jubes_back_hair:
+    if JubesX.wet:
+        "images/Jubes_standing/Jubes_standing_back_hair_wet.png"
+    else:
+        "images/Jubes_standing/Jubes_standing_back_hair[JubesX.outfit[hair]].png"
 
     anchor (0.5, 0.5)
 
@@ -163,11 +166,13 @@ layeredimage Jubes_head:
     if JubesX.spunk["face"]:
         "images/Jubes_standing/Jubes_standing_spunk_face.png"
 
-    always:
+    if JubesX.wet:
+        "images/Jubes_standing/Jubes_standing_hair_wet.png"
+    else:
         "images/Jubes_standing/Jubes_standing_hair[JubesX.outfit[hair]].png"
 
     if JubesX.spunk["hair"]:
-        "images/Jubes_standing/Jubes_standing_spunk_hair.png"
+        "images/Jubes_standing/Jubes_standing_spunk_hair[JubesX.outfit[hair]].png"
 
     if JubesX.wet:
         "images/Jubes_standing/Jubes_standing_water_head.png"

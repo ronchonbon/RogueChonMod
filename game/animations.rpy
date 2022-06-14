@@ -148,11 +148,11 @@ layeredimage background:
     else:
         "images/background/[bg_current]_[current_time].png"
 
-    if bg_current == "bg_restaurant":
-        "images/background/bg_restaurant_table.png"
-
     if bg_current == "bg_pool":
         AlphaMask("bg_pool", "images/background/bg_pool_mask.png")
+
+    if bg_current == "bg_restaurant":
+        "images/background/bg_restaurant_table.png"
 
     if entering or bg_current != "bg_classroom":
         Null()
@@ -183,6 +183,7 @@ transform dripping(x_offset = 0, start = 0, transparency = 1.0):
     easeout 0.9 yoffset 350 alpha 0.0
 
 image grool_dripping_animation:
+    animation
     "images/Wetdrop.png"
 
     subpixel True
@@ -208,6 +209,7 @@ image grool_dripping_animation:
         repeat
 
 image spunk_dripping_animation:
+    animation
     "images/SpermdropB.png"
 
     subpixel True
@@ -233,6 +235,7 @@ image spunk_dripping_animation:
         repeat
 
 image licking:
+    animation
     subpixel True
     anchor (0.5, 0.5)
     parallel:
@@ -264,6 +267,7 @@ image dildo:
     anchor (0.5, 0.5)
 
 image Kitty_dildo_pussy_animation:
+    animation
     "dildo"
 
     subpixel True
@@ -278,6 +282,7 @@ layeredimage Kitty_dildo_pussy_animations:
         "Kitty_dildo_pussy_animation" pos (0.2923, 0.595) zoom 1.22
 
 image Kitty_dildo_anal_animation:
+    animation
     "dildo"
 
     subpixel True

@@ -618,7 +618,7 @@ label Rogue_Love:
         if RogueX.location == bg_current or RogueX in Party:
             "Suddenly, [RogueX.name] says she wants to talk to you in her room and drags you over there."
         else:
-            "[RogueX.name] shows up, hurridly says she wants to talk to you in her room and drags you over there."
+            "[RogueX.name] shows up, hurriedly says she wants to talk to you in her room and drags you over there."
     else:
         "[RogueX.name] suddenly stares at you very intently."
 

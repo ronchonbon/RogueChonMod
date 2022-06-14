@@ -28,11 +28,13 @@ layeredimage Rogue_grool_dripping_animation:
         "grool_dripping_animation" pos (0.129, 0.6) zoom 0.2
 
 layeredimage Rogue_grool_animations:
-    if RogueX.grool and RogueX.outfit["bottom"] == "_pants" and RogueX.bottom_pulled_down:
+    if not RogueX.grool:
+        Null()
+    elif RogueX.outfit["bottom"] == "_pants" and RogueX.bottom_pulled_down:
         AlphaMask("Rogue_grool_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_pants.png")
-    elif RogueX.grool and RogueX.outfit["underwear"] and RogueX.underwear_pulled_down:
+    elif RogueX.outfit["underwear"] and RogueX.underwear_pulled_down:
         AlphaMask("Rogue_grool_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_underwear.png")
-    elif RogueX.grool and not RogueX.pussy_covered:
+    elif not RogueX.pussy_covered:
         AlphaMask("Rogue_grool_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask.png")
 
 layeredimage Rogue_spunk_dripping_animation:
@@ -49,11 +51,13 @@ layeredimage Rogue_spunk_dripping_animation:
         "spunk_dripping_animation" pos (0.129, 0.6) zoom 0.3
 
 layeredimage Rogue_spunk_animations:
-    if (RogueX.spunk["pussy"] or RogueX.spunk["anus"]) and RogueX.outfit["bottom"] == "_pants" and RogueX.bottom_pulled_down:
+    if not RogueX.spunk["pussy"] and not RogueX.spunk["anus"]:
+        Null()
+    elif RogueX.outfit["bottom"] == "_pants" and RogueX.bottom_pulled_down:
         AlphaMask("Rogue_spunk_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_pants.png")
-    elif (RogueX.spunk["pussy"] or RogueX.spunk["anus"]) and RogueX.outfit["underwear"] and RogueX.underwear_pulled_down:
+    elif RogueX.outfit["underwear"] and RogueX.underwear_pulled_down:
         AlphaMask("Rogue_spunk_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_underwear.png")
-    elif (RogueX.spunk["pussy"] or RogueX.spunk["anus"]) and not RogueX.pussy_covered:
+    elif not RogueX.pussy_covered:
         AlphaMask("Rogue_spunk_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask.png")
 
 # layeredimage Rogue_standing_fondling_animations:
@@ -157,6 +161,7 @@ image Rogue_handjob_under_hand_animation0:
     "Rogue_handjob_under"
 
 image Rogue_handjob_under_hand_animation1:
+    animation
     "Rogue_handjob_under"
 
     subpixel True
@@ -169,6 +174,7 @@ image Rogue_handjob_under_hand_animation1:
         repeat
 
 image Rogue_handjob_under_hand_animation2:
+    animation
     "Rogue_handjob_under"
 
     subpixel True
@@ -184,6 +190,7 @@ image Rogue_handjob_over_hand_animation0:
     "Rogue_handjob_over"
 
 image Rogue_handjob_over_hand_animation1:
+    animation
     "Rogue_handjob_over"
 
     subpixel True
@@ -196,6 +203,7 @@ image Rogue_handjob_over_hand_animation1:
         repeat
 
 image Rogue_handjob_over_hand_animation2:
+    animation
     "Rogue_handjob_over"
 
     subpixel True
@@ -226,6 +234,7 @@ image Rogue_titjob_under_animation0:
     "Rogue_titjob_under"
 
 image Rogue_titjob_under_animation1:
+    animation
     "Rogue_titjob_under"
 
     subpixel True
@@ -240,15 +249,16 @@ image Rogue_titjob_under_animation2:
 
     subpixel True
     block:
-        ease 0.25 yoffset 0
-        ease 0.4 yoffset -80
-        ease 0.1 yoffset -75
+        ease 0.28 yoffset 0
+        ease 0.37 yoffset -55
+        ease 0.1 yoffset -50
         repeat
 
 image Rogue_titjob_over_animation0:
     "Rogue_titjob_over"
 
 image Rogue_titjob_over_animation1:
+    animation
     "Rogue_titjob_over"
 
     subpixel True
@@ -259,13 +269,14 @@ image Rogue_titjob_over_animation1:
         repeat
 
 image Rogue_titjob_over_animation2:
+    animation
     "Rogue_titjob_over"
 
     subpixel True
     block:
         ease 0.3 yoffset 0
-        ease 0.35 yoffset -80
-        ease 0.1 yoffset -75
+        ease 0.35 yoffset -55
+        ease 0.1 yoffset -50
         repeat
 
 layeredimage Rogue_sprite titjob:
@@ -286,6 +297,7 @@ image Rogue_blowjob_back_hair_animation0:
     ease 1.5 offset (0, 0)
 
 image Rogue_blowjob_back_hair_animation1:
+    animation
     "Rogue_back_hair"
 
     subpixel True
@@ -297,6 +309,7 @@ image Rogue_blowjob_back_hair_animation1:
         repeat
 
 image Rogue_blowjob_back_hair_animation2:
+    animation
     "Rogue_back_hair"
 
     subpixel True
@@ -306,6 +319,7 @@ image Rogue_blowjob_back_hair_animation2:
         repeat
 
 image Rogue_blowjob_back_hair_animation3:
+    animation
     "Rogue_back_hair"
 
     subpixel True
@@ -316,6 +330,7 @@ image Rogue_blowjob_back_hair_animation3:
         repeat
 
 image Rogue_blowjob_back_hair_animation4:
+    animation
     "Rogue_back_hair"
 
     subpixel True
@@ -332,6 +347,7 @@ image Rogue_blowjob_body_animation0:
     ease 1.5 offset (0, 0)
 
 image Rogue_blowjob_body_animation1:
+    animation
     "Rogue_sprite standing"
 
     subpixel True
@@ -343,6 +359,7 @@ image Rogue_blowjob_body_animation1:
         repeat
 
 image Rogue_blowjob_body_animation2:
+    animation
     "Rogue_sprite standing"
 
     subpixel True
@@ -352,6 +369,7 @@ image Rogue_blowjob_body_animation2:
         repeat
 
 image Rogue_blowjob_body_animation3:
+    animation
     "Rogue_sprite standing"
 
     subpixel True
@@ -362,6 +380,7 @@ image Rogue_blowjob_body_animation3:
         repeat
 
 image Rogue_blowjob_body_animation4:
+    animation
     "Rogue_sprite standing"
 
     subpixel True
@@ -378,6 +397,7 @@ image Rogue_blowjob_head_animation0:
     ease 1.5 offset (0, 0)
 
 image Rogue_blowjob_head_animation1:
+    animation
     "Rogue_head"
 
     subpixel True
@@ -389,6 +409,7 @@ image Rogue_blowjob_head_animation1:
         repeat
 
 image Rogue_blowjob_head_animation2:
+    animation
     "Rogue_head"
 
     subpixel True
@@ -398,6 +419,7 @@ image Rogue_blowjob_head_animation2:
         repeat
 
 image Rogue_blowjob_head_animation3:
+    animation
     "Rogue_head"
 
     subpixel True
@@ -408,6 +430,7 @@ image Rogue_blowjob_head_animation3:
         repeat
 
 image Rogue_blowjob_head_animation4:
+    animation
     "Rogue_head"
 
     subpixel True
@@ -425,6 +448,7 @@ image Rogue_blowjob_mouth_animation1:
     "Rogue_blowjob_mouth"
 
 image Rogue_blowjob_mouth_animation2:
+    animation
     "Rogue_blowjob_mouth"
 
     subpixel True
@@ -442,6 +466,7 @@ image Rogue_blowjob_mouth_animation2:
         repeat
 
 image Rogue_blowjob_mouth_animation3:
+    animation
     "Rogue_blowjob_mouth"
 
     subpixel True
@@ -454,6 +479,7 @@ image Rogue_blowjob_mouth_animation3:
         repeat
 
 image Rogue_blowjob_mouth_animation4:
+    animation
     "Rogue_blowjob_mouth"
 
     subpixel True
@@ -467,6 +493,7 @@ image Rogue_blowjob_mouth_animation4:
         repeat
 
 image Rogue_blowjob_mask_animation2:
+    animation
     "Rogue_blowjob_mask"
 
     subpixel True
@@ -484,6 +511,7 @@ image Rogue_blowjob_mask_animation2:
         repeat
 
 image Rogue_blowjob_mask_animation3:
+    animation
     "Rogue_blowjob_mask"
 
     subpixel True
@@ -496,6 +524,7 @@ image Rogue_blowjob_mask_animation3:
         repeat
 
 image Rogue_blowjob_mask_animation4:
+    animation
     "Rogue_blowjob_mask"
 
     subpixel True
@@ -509,6 +538,7 @@ image Rogue_blowjob_mask_animation4:
         repeat
 
 image Rogue_blowjob_face_mask_animation2:
+    animation
     AlphaMask("Rogue_head", "Rogue_blowjob_mask_animation2")
 
     subpixel True
@@ -518,6 +548,7 @@ image Rogue_blowjob_face_mask_animation2:
         repeat
 
 image Rogue_blowjob_face_mask_animation3:
+    animation
     AlphaMask("Rogue_head", "Rogue_blowjob_mask_animation3")
 
     subpixel True
@@ -528,6 +559,7 @@ image Rogue_blowjob_face_mask_animation3:
         repeat
 
 image Rogue_blowjob_face_mask_animation4:
+    animation
     AlphaMask("Rogue_head", "Rogue_blowjob_mask_animation4")
 
     subpixel True
@@ -560,6 +592,7 @@ image Rogue_sex_body_animation0:
     "Rogue_sex_body"
 
 image Rogue_sex_body_animation1:
+    animation
     "Rogue_sex_body"
 
     subpixel True
@@ -571,6 +604,7 @@ image Rogue_sex_body_animation1:
         repeat
 
 image Rogue_sex_body_animation2:
+    animation
     "Rogue_sex_body"
 
     subpixel True
@@ -583,6 +617,7 @@ image Rogue_sex_body_animation2:
         repeat
 
 image Rogue_sex_body_animation3:
+    animation
     "Rogue_sex_body"
 
     subpixel True
@@ -598,6 +633,7 @@ image Rogue_sex_body_footjob_animation0:
     "Rogue_sex_body"
 
 image Rogue_sex_body_footjob_animation1:
+    animation
     "Rogue_sex_body"
 
     subpixel True
@@ -610,6 +646,7 @@ image Rogue_sex_body_footjob_animation1:
         repeat
 
 image Rogue_sex_body_footjob_animation2:
+    animation
     "Rogue_sex_body"
 
     subpixel True
@@ -628,6 +665,7 @@ image Rogue_sex_body_hotdog_animation1:
     "Rogue_sex_body"
 
 image Rogue_sex_body_hotdog_animation2:
+    animation
     "Rogue_sex_body"
 
     subpixel True
@@ -639,6 +677,7 @@ image Rogue_sex_body_hotdog_animation2:
         repeat
 
 image Rogue_sex_body_hotdog_animation3:
+    animation
     "Rogue_sex_body"
 
     subpixel True
@@ -653,6 +692,7 @@ image Rogue_sex_legs_animation0:
     "Rogue_sex_legs"
 
 image Rogue_sex_legs_animation1:
+    animation
     "Rogue_sex_legs"
 
     subpixel True
@@ -664,6 +704,7 @@ image Rogue_sex_legs_animation1:
         repeat
 
 image Rogue_sex_legs_animation2:
+    animation
     "Rogue_sex_legs"
 
     subpixel True
@@ -676,6 +717,7 @@ image Rogue_sex_legs_animation2:
         repeat
 
 image Rogue_sex_legs_animation3:
+    animation
     "Rogue_sex_legs"
 
     subpixel True
@@ -691,6 +733,7 @@ image Rogue_sex_legs_footjob_animation0:
     "Rogue_sex_legs"
 
 image Rogue_sex_legs_footjob_animation1:
+    animation
     "Rogue_sex_legs"
 
     subpixel True
@@ -703,6 +746,7 @@ image Rogue_sex_legs_footjob_animation1:
         repeat
 
 image Rogue_sex_legs_footjob_animation2:
+    animation
     "Rogue_sex_legs"
 
     subpixel True
@@ -721,6 +765,7 @@ image Rogue_sex_legs_hotdog_animation1:
     "Rogue_sex_legs"
 
 image Rogue_sex_legs_hotdog_animation2:
+    animation
     "Rogue_sex_legs"
 
     subpixel True
@@ -732,6 +777,7 @@ image Rogue_sex_legs_hotdog_animation2:
         repeat
 
 image Rogue_sex_legs_hotdog_animation3:
+    animation
     "Rogue_sex_legs"
 
     subpixel True
@@ -748,6 +794,7 @@ image Rogue_sex_anus_animation0:
     xzoom 0.6
 
 image Rogue_sex_anus_animation1:
+    animation
     "Rogue_sex_anus"
 
     subpixel True
@@ -767,6 +814,7 @@ image Rogue_sex_anus_animation3:
     "Rogue_sex_anus"
 
 image Rogue_sex_spunk_anus_under_animation:
+    animation
     "Rogue_sex_spunk_anus_under"
 
     subpixel True
@@ -780,6 +828,7 @@ image Rogue_sex_spunk_anus_under_animation:
         repeat
 
 image Rogue_sex_spunk_anus_over_animation:
+    animation
     "Rogue_sex_spunk_anus_over"
 
     subpixel True
@@ -828,6 +877,7 @@ image Rogue_doggy_body_animation0:
     "Rogue_doggy_body"
 
 image Rogue_doggy_body_animation1:
+    animation
     "Rogue_doggy_body"
 
     subpixel True
@@ -839,18 +889,19 @@ image Rogue_doggy_body_animation1:
         repeat
 
 image Rogue_doggy_body_animation2:
+    animation
     "Rogue_doggy_body"
 
     subpixel True
-    offset (0, 15)
+    yoffset 15
     block:
-        pause 0.4
-        ease 0.2 yoffset 5
-        pause 0.3
-        ease 2 yoffset 15
+        ease 0.5 yoffset 5
+        pause 0.25
+        ease 1.75 yoffset 15
         repeat
 
 image Rogue_doggy_body_animation3:
+    animation
     "Rogue_doggy_body"
 
     subpixel True
@@ -867,6 +918,7 @@ image Rogue_doggy_ass_animation0:
     "Rogue_doggy_ass"
 
 image Rogue_doggy_ass_animation1:
+    animation
     "Rogue_doggy_ass"
 
     subpixel True
@@ -879,18 +931,20 @@ image Rogue_doggy_ass_animation1:
         repeat
 
 image Rogue_doggy_ass_animation2:
+    animation
     "Rogue_doggy_ass"
 
     subpixel True
+    pause 0.2
     block:
-        pause 0.4
-        ease 0.2 yoffset -15
-        ease 0.1 yoffset -5
-        pause 0.2
-        ease 1.6 yoffset 0
+        ease 0.3 yoffset -15
+        ease 0.2 yoffset -5
+        pause 0.25
+        ease 1.75 yoffset 0
         repeat
 
 image Rogue_doggy_ass_animation3:
+    animation
     "Rogue_doggy_ass"
 
     subpixel True
@@ -905,6 +959,7 @@ image Rogue_doggy_ass_animation3:
         repeat
 
 image Rogue_doggy_pussy_hole_animation0:
+    animation
     "Rogue_doggy_pussy_hole"
 
     subpixel True
@@ -916,6 +971,7 @@ image Rogue_doggy_pussy_hole_animation0:
         repeat
 
 image Rogue_doggy_pussy_hole_animation1:
+    animation
     "Rogue_doggy_pussy_hole"
 
     subpixel True
@@ -933,6 +989,7 @@ image Rogue_doggy_pussy_hole_animation3:
     "Rogue_doggy_pussy_hole"
 
 image Rogue_doggy_pussy_hole_fingering:
+    animation
     "Rogue_doggy_pussy_hole"
 
     subpixel True
@@ -944,6 +1001,7 @@ image Rogue_doggy_pussy_hole_fingering:
         repeat
 
 image Rogue_doggy_anus_anal_animation1:
+    animation
     "Rogue_doggy_anus_hole"
 
     subpixel True
@@ -965,6 +1023,7 @@ image Rogue_doggy_anus_anal_animation3:
     zoom 0.9
 
 image Rogue_doggy_anus_fingering_animation:
+    animation
     "images/Rogue_doggy/Rogue_doggy_anus_full_hole.png"
 
     subpixel True
@@ -976,6 +1035,7 @@ image Rogue_doggy_anus_fingering_animation:
         repeat
 
 image Rogue_doggy_shin_animation0:
+    animation
     "Rogue_doggy_shins"
 
     subpixel True
@@ -987,6 +1047,7 @@ image Rogue_doggy_shin_animation0:
         repeat
 
 image Rogue_doggy_shin_animation1:
+    animation
     "Rogue_doggy_shins"
 
     subpixel True
@@ -997,6 +1058,7 @@ image Rogue_doggy_shin_animation1:
         repeat
 
 image Rogue_doggy_shin_animation2:
+    animation
     "Rogue_doggy_shins"
 
     subpixel True
@@ -1007,6 +1069,7 @@ image Rogue_doggy_shin_animation2:
         repeat
 
 image Rogue_doggy_feet_animation0:
+    animation
     "Rogue_doggy_feet"
 
     subpixel True
@@ -1018,6 +1081,7 @@ image Rogue_doggy_feet_animation0:
         repeat
 
 image Rogue_doggy_feet_animation1:
+    animation
     "Rogue_doggy_feet"
 
     subpixel True
@@ -1028,6 +1092,7 @@ image Rogue_doggy_feet_animation1:
         repeat
 
 image Rogue_doggy_feet_animation2:
+    animation
     "Rogue_doggy_feet"
 
     subpixel True

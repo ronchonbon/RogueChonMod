@@ -122,8 +122,11 @@ layeredimage Jean_sprite standing:
 
     anchor (0.5, 0.0) offset (20, 180)
 
-image Jean_back_hair:
-    "images/Jean_standing/Jean_standing_back_hair[JeanX.outfit[hair]].png"
+layeredimage Jean_back_hair:
+    if JeanX.wet:
+        "images/Jean_standing/Jean_standing_back_hair_wet.png"
+    else:
+        "images/Jean_standing/Jean_standing_back_hair[JeanX.outfit[hair]].png"
 
     anchor (0.5, 0.5)
 
@@ -150,7 +153,9 @@ layeredimage Jean_head:
     if JeanX.spunk["face"]:
         "images/Jean_standing/Jean_standing_spunk_face.png"
 
-    always:
+    if JeanX.wet:
+        "images/Jean_standing/Jean_standing_hair_wet.png"
+    else:
         "images/Jean_standing/Jean_standing_hair[JeanX.outfit[hair]].png"
 
     if JeanX.spunk["hair"]:
@@ -240,21 +245,27 @@ layeredimage Jean_titjob_breasts:
 
     anchor (0.5, 0.5)
 
-image Jean_titjob_hair:
-    "images/Jean_blowjob/Jean_blowjob_hair[JeanX.outfit[hair]].png"
+layeredimage Jean_titjob_hair:
+    if JeanX.wet:
+        "images/Jean_blowjob/Jean_blowjob_hair_wet.png"
+    else:
+        "images/Jean_blowjob/Jean_blowjob_hair[JeanX.outfit[hair]].png"
 
     anchor (0.5, 0.5)
 
-image Jean_blowjob_back_hair:
-    "images/Jean_blowjob/Jean_blowjob_back_hair[JeanX.outfit[hair]].png"
+layeredimage Jean_blowjob_back_hair:
+    if JeanX.wet:
+        "images/Jean_blowjob/Jean_blowjob_back_hair_wet.png"
+    elif JeanX.outfit["hair"] != "_pony":
+        "images/Jean_blowjob/Jean_blowjob_back_hair[JeanX.outfit[hair]].png"
 
     anchor (0.5, 0.5)
 
 layeredimage Jean_blowjob_head:
-    if renpy.showing("Jean_sprite sex") and JeanX.wet or JeanX.outfit["hair"] == "_wet":
-        "images/Jean_blowjob/Jean_blowjob_mid_hair_wet.png"
-    elif JeanX.outfit["hair"] == "_short":
-        "images/Jean_blowjob/Jean_blowjob_back_hair_short.png"
+    if renpy.showing("Jean_sprite sex") and (JeanX.wet or JeanX.outfit["hair"] == "_wet"):
+        "images/Jean_blowjob/Jean_blowjob_mid_hair.png"
+    elif JeanX.outfit["hair"] != "_pony":
+        "images/Jean_blowjob/Jean_blowjob_back_hair[JeanX.outfit[hair]].png"
 
     always:
         "images/Jean_blowjob/Jean_blowjob_head[JeanX.blushing].png"
@@ -293,7 +304,9 @@ layeredimage Jean_blowjob_head:
     if JeanX.spunk["face"]:
         "images/Jean_blowjob/Jean_blowjob_spunk_face.png"
 
-    always:
+    if JeanX.wet:
+        "images/Jean_blowjob/Jean_blowjob_hair_wet.png"
+    else:
         "images/Jean_blowjob/Jean_blowjob_hair[JeanX.outfit[hair]].png"
 
     if JeanX.spunk["hair"]:

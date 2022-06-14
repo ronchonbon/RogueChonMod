@@ -28,11 +28,13 @@ layeredimage Kitty_grool_dripping_animation:
         "grool_dripping_animation" pos (0.122, 0.6) zoom 0.2
 
 layeredimage Kitty_grool_animations:
-    if KittyX.grool and KittyX.outfit["bottom"] == "_pants" and KittyX.bottom_pulled_down:
+    if not KittyX.grool:
+        Null()
+    elif KittyX.outfit["bottom"] == "_pants" and KittyX.bottom_pulled_down:
         AlphaMask("Kitty_grool_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask_pants.png")
-    elif KittyX.grool and KittyX.outfit["underwear"] and KittyX.underwear_pulled_down:
+    elif KittyX.outfit["underwear"] and KittyX.underwear_pulled_down:
         AlphaMask("Kitty_grool_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask_underwear.png")
-    elif KittyX.grool and not KittyX.pussy_covered:
+    elif not KittyX.pussy_covered:
         AlphaMask("Kitty_grool_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask.png")
 
 layeredimage Kitty_spunk_dripping_animation:
@@ -49,11 +51,13 @@ layeredimage Kitty_spunk_dripping_animation:
         "spunk_dripping_animation" pos (0.122, 0.6) zoom 0.3
 
 layeredimage Kitty_spunk_animations:
-    if (KittyX.spunk["pussy"] or KittyX.spunk["anus"]) and KittyX.outfit["bottom"] == "_pants" and KittyX.bottom_pulled_down:
+    if not KittyX.spunk["pussy"] and not KittyX.spunk["anus"]:
+        Null()
+    elif KittyX.outfit["bottom"] == "_pants" and KittyX.bottom_pulled_down:
         AlphaMask("Kitty_spunk_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask_pants.png")
-    elif (KittyX.spunk["pussy"] or KittyX.spunk["anus"]) and KittyX.outfit["underwear"] and KittyX.underwear_pulled_down:
+    elif KittyX.outfit["underwear"] and KittyX.underwear_pulled_down:
         AlphaMask("Kitty_spunk_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask_underwear.png")
-    elif (KittyX.spunk["pussy"] or KittyX.spunk["anus"]) and not KittyX.pussy_covered:
+    elif not KittyX.pussy_covered:
         AlphaMask("Kitty_spunk_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask.png")
 
 # layeredimage Kitty_standing_fondling_animations:
@@ -157,6 +161,7 @@ image Kitty_handjob_under_hand_animation0:
     "Kitty_handjob_under"
 
 image Kitty_handjob_under_hand_animation1:
+    animation
     "Kitty_handjob_under"
 
     subpixel True
@@ -169,6 +174,7 @@ image Kitty_handjob_under_hand_animation1:
         repeat
 
 image Kitty_handjob_under_hand_animation2:
+    animation
     "Kitty_handjob_under"
 
     subpixel True
@@ -184,6 +190,7 @@ image Kitty_handjob_over_hand_animation0:
     "Kitty_handjob_over"
 
 image Kitty_handjob_over_hand_animation1:
+    animation
     "Kitty_handjob_over"
 
     subpixel True
@@ -196,6 +203,7 @@ image Kitty_handjob_over_hand_animation1:
         repeat
 
 image Kitty_handjob_over_hand_animation2:
+    animation
     "Kitty_handjob_over"
 
     subpixel True
@@ -223,6 +231,7 @@ layeredimage Kitty_sprite handjob:
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
 
 image Kitty_titjob_back_hair_animation0:
+    animation
     "Kitty_titjob_back_hair"
 
     subpixel True
@@ -232,6 +241,7 @@ image Kitty_titjob_back_hair_animation0:
         repeat
 
 image Kitty_titjob_back_hair_animation1:
+    animation
     "Kitty_titjob_back_hair"
 
     subpixel True
@@ -241,6 +251,7 @@ image Kitty_titjob_back_hair_animation1:
         repeat
 
 image Kitty_titjob_back_hair_animation2:
+    animation
     "Kitty_titjob_back_hair"
 
     subpixel True
@@ -251,6 +262,7 @@ image Kitty_titjob_back_hair_animation2:
         repeat
 
 image Kitty_titjob_back_hair_animation3:
+    animation
     "Kitty_titjob_back_hair"
 
     subpixel True
@@ -296,6 +308,7 @@ image Kitty_titjob_back_hair_animation3:
         repeat
 
 image Kitty_titjob_body_animation0:
+    animation
     "Kitty_titjob_body"
 
     subpixel True
@@ -305,6 +318,7 @@ image Kitty_titjob_body_animation0:
         repeat
 
 image Kitty_titjob_body_animation1:
+    animation
     "Kitty_titjob_body"
 
     subpixel True
@@ -315,6 +329,7 @@ image Kitty_titjob_body_animation1:
         repeat
 
 image Kitty_titjob_body_animation2:
+    animation
     "Kitty_titjob_body"
 
     subpixel True
@@ -325,6 +340,7 @@ image Kitty_titjob_body_animation2:
         repeat
 
 image Kitty_titjob_body_animation3:
+    animation
     "Kitty_titjob_body"
 
     subpixel True
@@ -335,6 +351,7 @@ image Kitty_titjob_body_animation3:
         repeat
 
 image Kitty_titjob_arms_animation0:
+    animation
     "Kitty_titjob_arms"
 
     subpixel True
@@ -344,6 +361,7 @@ image Kitty_titjob_arms_animation0:
         repeat
 
 image Kitty_titjob_arms_animation1:
+    animation
     "Kitty_titjob_arms"
 
     subpixel True
@@ -354,6 +372,7 @@ image Kitty_titjob_arms_animation1:
         repeat
 
 image Kitty_titjob_arms_animation2:
+    animation
     "Kitty_titjob_arms"
 
     subpixel True
@@ -364,6 +383,7 @@ image Kitty_titjob_arms_animation2:
         repeat
 
 image Kitty_titjob_arms_animation3:
+    animation
     "Kitty_titjob_arms"
 
     subpixel True
@@ -374,6 +394,7 @@ image Kitty_titjob_arms_animation3:
         repeat
 
 image Kitty_titjob_head_animation0:
+    animation
     "Kitty_blowjob_head"
 
     subpixel True
@@ -383,6 +404,7 @@ image Kitty_titjob_head_animation0:
         repeat
 
 image Kitty_titjob_head_animation1:
+    animation
     "Kitty_blowjob_head"
 
     subpixel True
@@ -393,6 +415,7 @@ image Kitty_titjob_head_animation1:
         repeat
 
 image Kitty_titjob_head_animation2:
+    animation
     "Kitty_blowjob_head"
 
     subpixel True
@@ -403,6 +426,7 @@ image Kitty_titjob_head_animation2:
         repeat
 
 image Kitty_titjob_head_animation3:
+    animation
     "Kitty_blowjob_head"
 
     subpixel True
@@ -448,6 +472,7 @@ image Kitty_titjob_head_animation3:
         repeat
 
 image Kitty_titjob_breasts_animation0:
+    animation
     "Kitty_titjob_breasts"
 
     subpixel True
@@ -457,6 +482,7 @@ image Kitty_titjob_breasts_animation0:
         repeat
 
 image Kitty_titjob_breasts_animation1:
+    animation
     "Kitty_titjob_breasts"
 
     subpixel True
@@ -467,6 +493,7 @@ image Kitty_titjob_breasts_animation1:
         repeat
 
 image Kitty_titjob_breasts_animation2:
+    animation
     "Kitty_titjob_breasts"
 
     subpixel True
@@ -477,6 +504,7 @@ image Kitty_titjob_breasts_animation2:
         repeat
 
 image Kitty_titjob_breasts_animation3:
+    animation
     "Kitty_titjob_breasts"
 
     subpixel True
@@ -487,6 +515,7 @@ image Kitty_titjob_breasts_animation3:
         repeat
 
 image Kitty_titjob_mask_animation1:
+    animation
     "Kitty_titjob_mask"
 
     subpixel True
@@ -497,6 +526,7 @@ image Kitty_titjob_mask_animation1:
         repeat
 
 image Kitty_titjob_mask_animation2:
+    animation
     "Kitty_titjob_mask"
 
     subpixel True
@@ -507,6 +537,7 @@ image Kitty_titjob_mask_animation2:
         repeat
 
 image Kitty_titjob_mask_animation3:
+    animation
     "Kitty_titjob_mask"
 
     subpixel True
@@ -517,7 +548,7 @@ image Kitty_titjob_mask_animation3:
         repeat
 
 layeredimage Kitty_sprite titjob:
-    if KittyX.wet or KittyX.outfit["hair"] == "_wet":
+    always:
         "Kitty_titjob_back_hair_animation[action_speed]" pos (0.0, -0.2) zoom 0.9
 
     always:
@@ -566,6 +597,7 @@ image Kitty_sex_body_animation0:
     "Kitty_sex_body"
 
 image Kitty_sex_body_animation1:
+    animation
     "Kitty_sex_body"
 
     subpixel True
@@ -577,6 +609,7 @@ image Kitty_sex_body_animation1:
         repeat
 
 image Kitty_sex_body_animation2:
+    animation
     "Kitty_sex_body"
 
     subpixel True
@@ -589,6 +622,7 @@ image Kitty_sex_body_animation2:
         repeat
 
 image Kitty_sex_body_animation3:
+    animation
     "Kitty_sex_body"
 
     subpixel True
@@ -604,6 +638,7 @@ image Kitty_sex_body_footjob_animation0:
     "Kitty_sex_body"
 
 image Kitty_sex_body_footjob_animation1:
+    animation
     "Kitty_sex_body"
 
     subpixel True
@@ -616,6 +651,7 @@ image Kitty_sex_body_footjob_animation1:
         repeat
 
 image Kitty_sex_body_footjob_animation2:
+    animation
     "Kitty_sex_body"
 
     subpixel True
@@ -634,6 +670,7 @@ image Kitty_sex_body_hotdog_animation1:
     "Kitty_sex_body"
 
 image Kitty_sex_body_hotdog_animation2:
+    animation
     "Kitty_sex_body"
 
     subpixel True
@@ -645,6 +682,7 @@ image Kitty_sex_body_hotdog_animation2:
         repeat
 
 image Kitty_sex_body_hotdog_animation3:
+    animation
     "Kitty_sex_body"
 
     subpixel True
@@ -659,6 +697,7 @@ image Kitty_sex_legs_animation0:
     "Kitty_sex_legs"
 
 image Kitty_sex_legs_animation1:
+    animation
     "Kitty_sex_legs"
 
     subpixel True
@@ -670,6 +709,7 @@ image Kitty_sex_legs_animation1:
         repeat
 
 image Kitty_sex_legs_animation2:
+    animation
     "Kitty_sex_legs"
 
     subpixel True
@@ -682,6 +722,7 @@ image Kitty_sex_legs_animation2:
         repeat
 
 image Kitty_sex_legs_animation3:
+    animation
     "Kitty_sex_legs"
 
     subpixel True
@@ -697,6 +738,7 @@ image Kitty_sex_legs_footjob_animation0:
     "Kitty_sex_legs"
 
 image Kitty_sex_legs_footjob_animation1:
+    animation
     "Kitty_sex_legs"
 
     subpixel True
@@ -709,6 +751,7 @@ image Kitty_sex_legs_footjob_animation1:
         repeat
 
 image Kitty_sex_legs_footjob_animation2:
+    animation
     "Kitty_sex_legs"
 
     subpixel True
@@ -727,6 +770,7 @@ image Kitty_sex_legs_hotdog_animation1:
     "Kitty_sex_legs"
 
 image Kitty_sex_legs_hotdog_animation2:
+    animation
     "Kitty_sex_legs"
 
     subpixel True
@@ -738,6 +782,7 @@ image Kitty_sex_legs_hotdog_animation2:
         repeat
 
 image Kitty_sex_legs_hotdog_animation3:
+    animation
     "Kitty_sex_legs"
 
     subpixel True
@@ -754,6 +799,7 @@ image Kitty_sex_anus_animation0:
     xzoom 0.6
 
 image Kitty_sex_anus_animation1:
+    animation
     "Kitty_sex_anus"
 
     subpixel True
@@ -773,6 +819,7 @@ image Kitty_sex_anus_animation3:
     "Kitty_sex_anus"
 
 image Kitty_sex_spunk_anus_under_animation:
+    animation
     "Kitty_sex_spunk_anus_under"
 
     subpixel True
@@ -794,6 +841,7 @@ layeredimage Kitty_sex_spunk_anus_under_animations:
         "images/Kitty_sex/Kitty_sex_spunk_anus_closed.png"
 
 image Kitty_sex_spunk_anus_over_animation:
+    animation
     "Kitty_sex_spunk_anus_over"
 
     subpixel True
@@ -842,6 +890,7 @@ image Kitty_doggy_body_animation0:
     "Kitty_doggy_body"
 
 image Kitty_doggy_body_animation1:
+    animation
     "Kitty_doggy_body"
 
     subpixel True
@@ -853,6 +902,7 @@ image Kitty_doggy_body_animation1:
         repeat
 
 image Kitty_doggy_body_animation2:
+    animation
     "Kitty_doggy_body"
 
     subpixel True
@@ -865,6 +915,7 @@ image Kitty_doggy_body_animation2:
         repeat
 
 image Kitty_doggy_body_animation3:
+    animation
     "Kitty_doggy_body"
 
     subpixel True
@@ -881,6 +932,7 @@ image Kitty_doggy_ass_animation0:
     "Kitty_doggy_ass"
 
 image Kitty_doggy_ass_animation1:
+    animation
     "Kitty_doggy_ass"
 
     subpixel True
@@ -893,6 +945,7 @@ image Kitty_doggy_ass_animation1:
         repeat
 
 image Kitty_doggy_ass_animation2:
+    animation
     "Kitty_doggy_ass"
 
     subpixel True
@@ -905,6 +958,7 @@ image Kitty_doggy_ass_animation2:
         repeat
 
 image Kitty_doggy_ass_animation3:
+    animation
     "Kitty_doggy_ass"
 
     subpixel True
@@ -919,6 +973,7 @@ image Kitty_doggy_ass_animation3:
         repeat
 
 image Kitty_doggy_pussy_hole_animation0:
+    animation
     "Kitty_doggy_pussy_hole"
 
     subpixel True
@@ -930,6 +985,7 @@ image Kitty_doggy_pussy_hole_animation0:
         repeat
 
 image Kitty_doggy_pussy_hole_animation1:
+    animation
     "Kitty_doggy_pussy_hole"
 
     subpixel True
@@ -947,6 +1003,7 @@ image Kitty_doggy_pussy_hole_animation3:
     "Kitty_doggy_pussy_hole"
 
 image Kitty_doggy_pussy_mask_animation0:
+    animation
     "Kitty_doggy_pussy_mask"
 
     subpixel True
@@ -958,6 +1015,7 @@ image Kitty_doggy_pussy_mask_animation0:
         repeat
 
 image Kitty_doggy_pussy_mask_animation1:
+    animation
     "Kitty_doggy_pussy_mask"
 
     subpixel True
@@ -979,6 +1037,7 @@ layeredimage Kitty_doggy_pussy_mask_animations:
         "Kitty_doggy_pussy_mask_animation[action_speed]" offset (217, 514)
 
 image Kitty_doggy_pussy_fingering:
+    animation
     "Kitty_doggy_pussy_hole"
 
     subpixel True
@@ -990,6 +1049,7 @@ image Kitty_doggy_pussy_fingering:
         repeat
 
 image Kitty_doggy_anus_anal_animation1:
+    animation
     "Kitty_doggy_anus_hole"
 
     subpixel True
@@ -1014,6 +1074,7 @@ image Kitty_doggy_anus_mask_animation0:
     "Kitty_doggy_anus_mask"
 
 image Kitty_doggy_anus_mask_animation1:
+    animation
     "Kitty_doggy_anus_mask"
 
     subpixel True
@@ -1041,6 +1102,7 @@ layeredimage Kitty_doggy_anus_mask_animations:
         "Kitty_doggy_anus_mask_animation1" offset (217, 514)
 
 image Kitty_doggy_anus_fingering:
+    animation
     "images/Kitty_doggy/Kitty_doggy_anus_full_hole.png"
 
     subpixel True
@@ -1052,6 +1114,7 @@ image Kitty_doggy_anus_fingering:
         repeat
 
 image Kitty_doggy_anus_fingering_mask_animation:
+    animation
     "images/Kitty_doggy/Kitty_doggy_anus_mask.png"
 
     subpixel True
@@ -1067,6 +1130,7 @@ layeredimage Kitty_doggy_anus_fingering_mask_animations:
         "Kitty_doggy_anus_fingering_mask_animation" offset (217, 514)
 
 image Kitty_doggy_shin_animation0:
+    animation
     "Kitty_doggy_shins"
 
     subpixel True
@@ -1078,6 +1142,7 @@ image Kitty_doggy_shin_animation0:
         repeat
 
 image Kitty_doggy_shin_animation1:
+    animation
     "Kitty_doggy_shins"
 
     subpixel True
@@ -1088,6 +1153,7 @@ image Kitty_doggy_shin_animation1:
         repeat
 
 image Kitty_doggy_shin_animation2:
+    animation
     "Kitty_doggy_shins"
 
     subpixel True
@@ -1102,6 +1168,7 @@ layeredimage Kitty_doggy_shin_animations:
         "Kitty_doggy_shin_animation[action_speed]"
 
 image Kitty_doggy_feet_animation0:
+    animation
     "Kitty_doggy_feet"
 
     subpixel True
@@ -1113,6 +1180,7 @@ image Kitty_doggy_feet_animation0:
         repeat
 
 image Kitty_doggy_feet_animation1:
+    animation
     "Kitty_doggy_feet"
 
     subpixel True
@@ -1123,6 +1191,7 @@ image Kitty_doggy_feet_animation1:
         repeat
 
 image Kitty_doggy_feet_animation2:
+    animation
     "Kitty_doggy_feet"
 
     subpixel True

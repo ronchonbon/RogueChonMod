@@ -114,7 +114,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                     else:
                         $ Type = "_jacket"
 
-                "maybe just lose the [Girl.outfit['top']]?" if Girl.outfit["top"]:
+                "maybe just lose the [Girl.outfit[top]]?" if Girl.outfit["top"]:
                     if Girl.outfit["top"] == "_towel" and not Girl.outfit["bottom"] and not Girl.outfit["hose"] and not Girl.outfit["underwear"]:
                         $ Type = "no_panties"
                     elif not Girl.outfit["bra"]:
@@ -122,19 +122,19 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                     else:
                         $ Type = "over"
 
-                "maybe just lose the [Girl.outfit['bottom']]?" if Girl.outfit["bottom"]:
+                "maybe just lose the [Girl.outfit[bottom]]?" if Girl.outfit["bottom"]:
                     if not Girl.outfit["underwear"]:
                         $ Type = "no_panties"
                     else:
                         $ Type = "legs"
 
-                "maybe just lose the [Girl.outfit['hose']]?" if Girl.outfit["hose"] and not Girl.outfit["bottom"]:
+                "maybe just lose the [Girl.outfit[hose]]?" if Girl.outfit["hose"] and not Girl.outfit["bottom"]:
                     if not Girl.outfit["underwear"]:
                         $ Type = "no_panties"
                     else:
                         $ Type = "legs"
 
-                "maybe just lose the [Girl.outfit['underwear']]?" if Girl.outfit["underwear"]:
+                "maybe just lose the [Girl.outfit[underwear]]?" if Girl.outfit["underwear"]:
                     $ Type = "_panties"
                     $ Mod = 200
                 "never mind.":
@@ -150,7 +150,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             $ Girl.change_face("_bemused",1)
             Girl.voice "I don't have a top on under this. . ."
 
-        if (Girl.seen_pussy and Girl.seen_breasts) and AloneCheck():
+        if (Girl.seen_pussy and Girl.seen_breasts) and AloneCheck(Girl):
             $ Mod -= 100
 
 

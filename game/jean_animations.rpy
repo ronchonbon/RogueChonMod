@@ -115,6 +115,7 @@ image Jean_handjob_under_hand_animation0:
     "Jean_handjob_under"
 
 image Jean_handjob_under_hand_animation1:
+    animation
     "Jean_handjob_under"
 
     subpixel True
@@ -127,6 +128,7 @@ image Jean_handjob_under_hand_animation1:
         repeat
 
 image Jean_handjob_under_hand_animation2:
+    animation
     "Jean_handjob_under"
 
     subpixel True
@@ -142,6 +144,7 @@ image Jean_handjob_over_hand_animation0:
     "Jean_handjob_over"
 
 image Jean_handjob_over_hand_animation1:
+    animation
     "Jean_handjob_over"
 
     subpixel True
@@ -154,6 +157,7 @@ image Jean_handjob_over_hand_animation1:
         repeat
 
 image Jean_handjob_over_hand_animation2:
+    animation
     "Jean_handjob_over"
 
     subpixel True
@@ -178,9 +182,10 @@ layeredimage Jean_sprite handjob:
     always:
         "Jean_handjob_over_hand_animation[action_speed]" pos (0.035, 0.455) zoom 0.28
 
-    anchor (0.5, 0.0) offset (220, -220) zoom 2.5
+    anchor (0.5, 0.0) offset (240, -220) zoom 2.5
 
 image Jean_titjob_bra_back_animation0:
+    animation
     "Jean_titjob_bra_back"
 
     subpixel True
@@ -192,6 +197,7 @@ image Jean_titjob_bra_back_animation0:
         repeat
 
 image Jean_titjob_bra_back_animation1:
+    animation
     "Jean_titjob_bra_back"
 
     subpixel True
@@ -204,6 +210,7 @@ image Jean_titjob_bra_back_animation1:
         repeat
 
 image Jean_titjob_bra_back_animation2:
+    animation
     "Jean_titjob_bra_back"
     subpixel True
     block:
@@ -214,6 +221,7 @@ image Jean_titjob_bra_back_animation2:
         repeat
 
 image Jean_titjob_back_hair_animation0:
+    animation
     "Jean_blowjob_back_hair"
 
     subpixel True
@@ -231,6 +239,7 @@ image Jean_titjob_back_hair_animation0:
         repeat
 
 image Jean_titjob_back_hair_animation1:
+    animation
     "Jean_blowjob_back_hair"
 
     subpixel True
@@ -249,6 +258,7 @@ image Jean_titjob_back_hair_animation1:
         repeat
 
 image Jean_titjob_back_hair_animation2:
+    animation
     "Jean_blowjob_back_hair"
 
     subpixel True
@@ -265,6 +275,7 @@ image Jean_titjob_back_hair_animation2:
         repeat
 
 image Jean_titjob_body_animation0:
+    animation
     "Jean_titjob_body"
 
     subpixel True
@@ -276,6 +287,7 @@ image Jean_titjob_body_animation0:
         repeat
 
 image Jean_titjob_body_animation1:
+    animation
     "Jean_titjob_body"
 
     subpixel True
@@ -287,6 +299,7 @@ image Jean_titjob_body_animation1:
         repeat
 
 image Jean_titjob_body_animation2:
+    animation
     "Jean_titjob_body"
 
     subpixel True
@@ -297,6 +310,7 @@ image Jean_titjob_body_animation2:
         repeat
 
 image Jean_titjob_head_animation0:
+    animation
     "Jean_blowjob_head"
 
     subpixel True
@@ -314,6 +328,7 @@ image Jean_titjob_head_animation0:
         repeat
 
 image Jean_titjob_head_animation1:
+    animation
     "Jean_blowjob_head"
 
     subpixel True
@@ -332,6 +347,7 @@ image Jean_titjob_head_animation1:
         repeat
 
 image Jean_titjob_head_animation2:
+    animation
     "Jean_blowjob_head"
 
     subpixel True
@@ -348,6 +364,7 @@ image Jean_titjob_head_animation2:
         repeat
 
 image Jean_titjob_right_breast_animation0:
+    animation
     "Jean_titjob_right_breast"
 
     subpixel True
@@ -359,6 +376,7 @@ image Jean_titjob_right_breast_animation0:
         repeat
 
 image Jean_titjob_right_breast_animation1:
+    animation
     "Jean_titjob_right_breast"
 
     subpixel True
@@ -371,6 +389,7 @@ image Jean_titjob_right_breast_animation1:
         repeat
 
 image Jean_titjob_right_breast_animation2:
+    animation
     "Jean_titjob_right_breast"
 
     subpixel True
@@ -387,6 +406,7 @@ image Jean_titjob_bra_stretch_animation0:
     yzoom 0.75
 
 image Jean_titjob_bra_stretch_animation1:
+    animation
     "Jean_titjob_bra_stretch"
 
     subpixel True
@@ -405,6 +425,7 @@ image Jean_titjob_bra_stretch_animation1:
         repeat
 
 image Jean_titjob_bra_stretch_animation2:
+    animation
     "Jean_titjob_bra_stretch"
 
     subpixel True
@@ -417,6 +438,7 @@ image Jean_titjob_bra_stretch_animation2:
         repeat
 
 image Jean_titjob_breasts_animation0:
+    animation
     "Jean_titjob_breasts"
 
     subpixel True
@@ -428,6 +450,7 @@ image Jean_titjob_breasts_animation0:
         repeat
 
 image Jean_titjob_breasts_animation1:
+    animation
     "Jean_titjob_breasts"
 
     subpixel True
@@ -440,6 +463,7 @@ image Jean_titjob_breasts_animation1:
         repeat
 
 image Jean_titjob_breasts_animation2:
+    animation
     "Jean_titjob_breasts"
 
     subpixel True
@@ -451,6 +475,7 @@ image Jean_titjob_breasts_animation2:
         repeat
 
 image Jean_titjob_hair_animation0:
+    animation
     "Jean_titjob_hair"
 
     subpixel True
@@ -468,6 +493,7 @@ image Jean_titjob_hair_animation0:
         repeat
 
 image Jean_titjob_hair_animation1:
+    animation
     "Jean_titjob_hair"
 
     subpixel True
@@ -486,6 +512,7 @@ image Jean_titjob_hair_animation1:
         repeat
 
 image Jean_titjob_hair_animation2:
+    animation
     "Jean_titjob_hair"
 
     subpixel True

@@ -4,7 +4,7 @@ layeredimage Kitty_sprite standing:
     elif KittyX.outfit["bottom"] == "_dress":
         "images/Kitty_standing/Kitty_standing_back_outer_accessory[KittyX.outfit[bottom]].png"
 
-    if KittyX.outfit["hair"] != "_evo":
+    always:
         "Kitty_back_hair" pos (0.12, 0.152) zoom 0.5
 
     if KittyX.outfit["buttplug"]:
@@ -121,13 +121,18 @@ layeredimage Kitty_sprite standing:
 
     anchor (0.5, 0.0) offset (40, 170) zoom 0.95
 
-image Kitty_back_hair:
-    "images/Kitty_standing/Kitty_standing_back_hair[KittyX.outfit[hair]].png"
+layeredimage Kitty_back_hair:
+    if KittyX.wet:
+        "images/Kitty_standing/Kitty_standing_back_hair_wet.png"
+    elif KittyX.outfit["hair"] != "_evo":
+        "images/Kitty_standing/Kitty_standing_back_hair[KittyX.outfit[hair]].png"
 
     anchor (0.5, 0.5)
 
 layeredimage Kitty_head:
-    always:
+    if KittyX.wet:
+        "images/Kitty_standing/Kitty_standing_face_wet[KittyX.blushing].png"
+    else:
         "images/Kitty_standing/Kitty_standing_face[KittyX.outfit[hair]][KittyX.blushing].png"
 
     always:
@@ -147,11 +152,15 @@ layeredimage Kitty_head:
     if KittyX.spunk["face"]:
         "images/Kitty_standing/Kitty_standing_face_spunk.png"
 
-    always:
+    if KittyX.wet:
+        "images/Kitty_standing/Kitty_standing_hair_wet.png"
+    else:
         "images/Kitty_standing/Kitty_standing_hair[KittyX.outfit[hair]].png"
 
-    if KittyX.spunk["hair"] and KittyX.outfit["hair"] != "_wet":
-        "images/Kitty_standing/Kitty_standing_hair[KittyX.outfit[hair]]_spunk.png"
+    if KittyX.wet or KittyX.outfit["hair"] == "_wet":
+        Null()
+    elif KittyX.spunk["hair"]:
+        "images/Kitty_standing/Kitty_standing_spunk_hair[KittyX.outfit[hair]].png"
 
     if KittyX.outfit["face_outer_accessory"]:
         "images/Kitty_standing/Kitty_standing_face_outer_accessory[KittyX.outfit[face_outer_accessory]].png"
@@ -171,8 +180,9 @@ image Kitty_handjob_over:
 
     anchor (0.5, 0.5)
 
-image Kitty_titjob_back_hair:
-    "images/Kitty_blowjob/Kitty_blowjob_back_hair_wet.png"
+layeredimage Kitty_titjob_back_hair:
+    if KittyX.wet or KittyX.outfit["hair"] == "_wet":
+        "images/Kitty_blowjob/Kitty_blowjob_back_hair.png"
 
     anchor (0.5, 0.5)
 
@@ -201,7 +211,7 @@ image Kitty_titjob_mask:
 
 layeredimage Kitty_blowjob_head:
     if KittyX.wet or KittyX.outfit["hair"] == "_wet":
-        "images/Kitty_blowjob/Kitty_blowjob_back_hair_wet.png"
+        "images/Kitty_blowjob/Kitty_blowjob_back_hair.png"
 
     if renpy.showing("Kitty_sprite_blowjob") and action_speed > 2 and KittyX.wet and KittyX.blushing:
         "images/Kitty_blowjob/Kitty_blowjob_face_open_wet_blush.png"
@@ -322,7 +332,7 @@ layeredimage Kitty_blowjob_body:
     anchor (0.5, 0.5)
 
 layeredimage Kitty_sex_body:
-    if KittyX.outfit["hair"] != "_evo":
+    always:
         "Kitty_back_hair" pos (0.28, -0.065) rotate -10 zoom 0.75
 
     always:

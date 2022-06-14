@@ -28,11 +28,13 @@ layeredimage Laura_grool_dripping_animation:
         "grool_dripping_animation" pos (0.078, 0.58) zoom 0.2
 
 layeredimage Laura_grool_animations:
-    if LauraX.grool and LauraX.outfit["bottom"] == "_pants" and LauraX.bottom_pulled_down:
+    if not LauraX.grool:
+        Null()
+    elif LauraX.outfit["bottom"] == "_pants" and LauraX.bottom_pulled_down:
         AlphaMask("Laura_grool_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask_pants.png")
-    elif LauraX.grool and LauraX.outfit["underwear"] and LauraX.underwear_pulled_down:
+    elif LauraX.outfit["underwear"] and LauraX.underwear_pulled_down:
         AlphaMask("Laura_grool_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask_underwear.png")
-    elif LauraX.grool and not LauraX.pussy_covered:
+    elif not LauraX.pussy_covered:
         AlphaMask("Laura_grool_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask.png")
 
 layeredimage Laura_spunk_dripping_animation:
@@ -49,11 +51,13 @@ layeredimage Laura_spunk_dripping_animation:
         "spunk_dripping_animation" pos (0.078, 0.58) zoom 0.3
 
 layeredimage Laura_spunk_animations:
-    if (LauraX.spunk["pussy"] or LauraX.spunk["anus"]) and LauraX.outfit["bottom"] == "_pants" and LauraX.bottom_pulled_down:
+    if not LauraX.spunk["pussy"] and not LauraX.spunk["anus"]:
+        Null()
+    elif LauraX.outfit["bottom"] == "_pants" and LauraX.bottom_pulled_down:
         AlphaMask("Laura_spunk_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask_pants.png")
-    elif (LauraX.spunk["pussy"] or LauraX.spunk["anus"]) and LauraX.outfit["underwear"] and LauraX.underwear_pulled_down:
+    elif LauraX.outfit["underwear"] and LauraX.underwear_pulled_down:
         AlphaMask("Laura_spunk_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask_underwear.png")
-    elif (LauraX.spunk["pussy"] or LauraX.spunk["anus"]) and not LauraX.pussy_covered:
+    elif not LauraX.pussy_covered:
         AlphaMask("Laura_spunk_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask.png")
 
 # layeredimage Laura_standing_fondling_animations:
@@ -157,6 +161,7 @@ image Laura_handjob_under_hand_animation0:
     "Laura_handjob_under"
 
 image Laura_handjob_under_hand_animation1:
+    animation
     "Laura_handjob_under"
 
     subpixel True
@@ -169,6 +174,7 @@ image Laura_handjob_under_hand_animation1:
         repeat
 
 image Laura_handjob_under_hand_animation2:
+    animation
     "Laura_handjob_under"
 
     subpixel True
@@ -184,6 +190,7 @@ image Laura_handjob_over_hand_animation0:
     "Laura_handjob_over"
 
 image Laura_handjob_over_hand_animation1:
+    animation
     "Laura_handjob_over"
 
     subpixel True
@@ -196,6 +203,7 @@ image Laura_handjob_over_hand_animation1:
         repeat
 
 image Laura_handjob_over_hand_animation2:
+    animation
     "Laura_handjob_over"
 
     subpixel True
@@ -223,6 +231,7 @@ layeredimage Laura_sprite handjob:
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
 
 image Laura_titjob_back_hair_animation0:
+    animation
     "Laura_back_hair"
 
     subpixel True
@@ -241,6 +250,7 @@ image Laura_titjob_back_hair_animation0:
         repeat
 
 image Laura_titjob_back_hair_animation1:
+    animation
     "Laura_back_hair"
 
     subpixel True
@@ -259,6 +269,7 @@ image Laura_titjob_back_hair_animation1:
         repeat
 
 image Laura_titjob_back_hair_animation2:
+    animation
     "Laura_back_hair"
 
     subpixel True
@@ -275,6 +286,7 @@ image Laura_titjob_back_hair_animation2:
         repeat
 
 image Laura_titjob_body_animation0:
+    animation
     "Laura_titjob_body"
 
     subpixel True
@@ -286,6 +298,7 @@ image Laura_titjob_body_animation0:
         repeat
 
 image Laura_titjob_body_animation1:
+    animation
     "Laura_titjob_body"
 
     subpixel True
@@ -297,6 +310,7 @@ image Laura_titjob_body_animation1:
         repeat
 
 image Laura_titjob_body_animation2:
+    animation
     "Laura_titjob_body"
 
     subpixel True
@@ -307,6 +321,7 @@ image Laura_titjob_body_animation2:
         repeat
 
 image Laura_titjob_right_arm_back_animation0:
+    animation
     "Laura_titjob_right_arm_back"
 
     subpixel True
@@ -318,6 +333,7 @@ image Laura_titjob_right_arm_back_animation0:
         repeat
 
 image Laura_titjob_right_arm_back_animation1:
+    animation
     "Laura_titjob_right_arm_back"
 
     subpixel True
@@ -329,6 +345,7 @@ image Laura_titjob_right_arm_back_animation1:
         repeat
 
 image Laura_titjob_right_arm_back_animation2:
+    animation
     "Laura_titjob_right_arm_back"
 
     subpixel True
@@ -339,6 +356,7 @@ image Laura_titjob_right_arm_back_animation2:
         repeat
 
 image Laura_titjob_right_breast_animation0:
+    animation
     "Laura_titjob_right_breast"
 
     subpixel True
@@ -350,6 +368,7 @@ image Laura_titjob_right_breast_animation0:
         repeat
 
 image Laura_titjob_right_breast_animation1:
+    animation
     "Laura_titjob_right_breast"
 
     subpixel True
@@ -362,6 +381,7 @@ image Laura_titjob_right_breast_animation1:
         repeat
 
 image Laura_titjob_right_breast_animation2:
+    animation
     "Laura_titjob_right_breast"
 
     subpixel True
@@ -373,6 +393,7 @@ image Laura_titjob_right_breast_animation2:
         repeat
 
 image Laura_titjob_right_arm_animation0:
+    animation
     "Laura_titjob_right_arm"
 
     subpixel True
@@ -384,6 +405,7 @@ image Laura_titjob_right_arm_animation0:
         repeat
 
 image Laura_titjob_right_arm_animation1:
+    animation
     "Laura_titjob_right_arm"
 
     subpixel True
@@ -395,6 +417,7 @@ image Laura_titjob_right_arm_animation1:
         repeat
 
 image Laura_titjob_right_arm_animation2:
+    animation
     "Laura_titjob_right_arm"
 
     subpixel True
@@ -405,6 +428,7 @@ image Laura_titjob_right_arm_animation2:
         repeat
 
 image Laura_titjob_head_animation0:
+    animation
     "Laura_head"
 
     subpixel True
@@ -423,6 +447,7 @@ image Laura_titjob_head_animation0:
         repeat
 
 image Laura_titjob_head_animation1:
+    animation
     "Laura_head"
 
     subpixel True
@@ -441,6 +466,7 @@ image Laura_titjob_head_animation1:
         repeat
 
 image Laura_titjob_head_animation2:
+    animation
     "Laura_head"
 
     subpixel True
@@ -457,6 +483,7 @@ image Laura_titjob_head_animation2:
         repeat
 
 image Laura_titjob_left_breast_animation0:
+    animation
     "Laura_titjob_left_breast"
 
     subpixel True
@@ -468,6 +495,7 @@ image Laura_titjob_left_breast_animation0:
         repeat
 
 image Laura_titjob_left_breast_animation1:
+    animation
     "Laura_titjob_left_breast"
 
     subpixel True
@@ -480,6 +508,7 @@ image Laura_titjob_left_breast_animation1:
         repeat
 
 image Laura_titjob_left_breast_animation2:
+    animation
     "Laura_titjob_left_breast"
 
     subpixel True
@@ -491,6 +520,7 @@ image Laura_titjob_left_breast_animation2:
         repeat
 
 image Laura_titjob_left_arm_animation0:
+    animation
     "Laura_titjob_left_arm"
 
     subpixel True
@@ -502,6 +532,7 @@ image Laura_titjob_left_arm_animation0:
         repeat
 
 image Laura_titjob_left_arm_animation1:
+    animation
     "Laura_titjob_left_arm"
 
     subpixel True
@@ -513,6 +544,7 @@ image Laura_titjob_left_arm_animation1:
         repeat
 
 image Laura_titjob_left_arm_animation2:
+    animation
     "Laura_titjob_left_arm"
 
     subpixel True
@@ -523,6 +555,7 @@ image Laura_titjob_left_arm_animation2:
         repeat
 
 image Laura_titjob_mid_hair_animation0:
+    animation
     "Laura_titjob_mid_hair"
 
     subpixel True
@@ -541,6 +574,7 @@ image Laura_titjob_mid_hair_animation0:
         repeat
 
 image Laura_titjob_mid_hair_animation1:
+    animation
     "Laura_titjob_mid_hair"
 
     subpixel True
@@ -559,6 +593,7 @@ image Laura_titjob_mid_hair_animation1:
         repeat
 
 image Laura_titjob_mid_hair_animation2:
+    animation
     "Laura_titjob_mid_hair"
 
     subpixel True
@@ -575,6 +610,7 @@ image Laura_titjob_mid_hair_animation2:
         repeat
 
 image Laura_titjob_hair_animation0:
+    animation
     "Laura_titjob_hair"
 
     subpixel True
@@ -593,6 +629,7 @@ image Laura_titjob_hair_animation0:
         repeat
 
 image Laura_titjob_hair_animation1:
+    animation
     "Laura_titjob_hair"
 
     subpixel True
@@ -611,6 +648,7 @@ image Laura_titjob_hair_animation1:
         repeat
 
 image Laura_titjob_hair_animation2:
+    animation
     "Laura_titjob_hair"
 
     subpixel True

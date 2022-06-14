@@ -2209,7 +2209,7 @@ label CalltoFap(Girl=0, Fap=0):
             else:
                 Girl.voice "Oh, you would, would you. . ."
             $ Fap = 3
-        "Only if I can watch." if AloneCheck():
+        "Only if I can watch." if AloneCheck(Girl):
             if approval_check(Girl, 1200):
 
                 $ Girl.change_stat("love", 80, 4)

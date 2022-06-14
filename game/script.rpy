@@ -145,6 +145,7 @@ init -1:
     default insertion_actions = ["finger_pussy", "finger_ass", "dildo_pussy", "dildo_ass"]
     default anal_insertion_actions = ["finger_ass", "dildo_ass", "anal"]
     default contact_actions = ["massage", "kiss", "fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_ass", "finger_ass", "eat_ass", "handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"]
+    default kinky_actions = ["masturbation", "finger_ass", "eat_ass", "titjob", "footjob", "dildo_pussy", "dildo_ass", "anal", "hotdog"]
 
     default all_actions = ["massage", "kiss",
         "striptease", "masturbation",
@@ -189,11 +190,11 @@ label start:
     #
     # $ Player.sprite = True
     # $ show_feet = True
-    # $ action_speed = 2
+    # $ action_speed = 3
     # $ Player.cock_position = "in"
     # $ Player.primary_action = "sex"
     # $ Player.secondary_action = "finger_ass"
-
+    #
     # show Rogue_sprite sex at sprite_location(0.5)
     # show Kitty_sprite titjob at sprite_location(0.5)
     # show Emma_sprite titjob at sprite_location(0.5)
@@ -201,58 +202,8 @@ label start:
     # show Jean_sprite titjob at sprite_location(0.5)
     # show Storm_sprite handjob at sprite_location(0.5)
     # show Jubes_sprite handjob at sprite_location(0.5)
-
+    #
     # ""
-
-    # $ Player.sprite = False
-    # call stop_all_actions
-    # $ RogueX.change_outfit("casual1")
-
-    #
-    # $ RogueX.sprite_location = stage_far_far_left
-    # $ active_Girls.append(RogueX)
-    #
-    # $ KittyX.sprite_location = stage_far_left
-    # $ active_Girls.append(KittyX)
-    #
-    # $ EmmaX.sprite_location = stage_left
-    # $ active_Girls.append(EmmaX)
-    #
-    # $ LauraX.sprite_location = stage_center
-    # $ active_Girls.append(LauraX)
-    #
-    # $ JeanX.sprite_location = stage_right
-    # $ active_Girls.append(JeanX)
-    #
-    # $ StormX.sprite_location = stage_far_right
-    # $ active_Girls.append(StormX)
-    #
-    # $ JubesX.sprite_location = stage_far_far_right
-    # $ active_Girls.append(JubesX)
-    #
-    # python:
-    #     for G in active_Girls:
-    #         G.location = bg_current
-    #
-    # $ RogueX.change_outfit("nude")
-    # $ Player.sprite = False
-    # $ Player.cock_position = "in"
-    # $ Player.primary_action = "suck_breasts"
-    # $ Player.secondary_action = "fondle_breasts"
-
-    # show Rogue_sprite sex at sprite_location(stage_center)
-    # show Kitty_sprite titjob at sprite_location(stage_center)
-
-    # show Rogue_sprite standing at sprite_location(RogueX.sprite_location)
-    # show Kitty_sprite standing at sprite_location(KittyX.sprite_location)
-    # show Emma_sprite standing at sprite_location(EmmaX.sprite_location)
-    # show Laura_sprite standing at sprite_location(LauraX.sprite_location)
-    # show Jean_sprite standing at sprite_location(JeanX.sprite_location)
-    # show Storm_sprite standing at sprite_location(StormX.sprite_location)
-    # show Jubes_sprite standing at sprite_location(JubesX.sprite_location)
-
-    # ""
-    # $ active_Girls = []
 
     jump prologue
 

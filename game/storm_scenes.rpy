@@ -7,56 +7,84 @@ label StormMeetPrelude:
     return
 
 label StormMeetAsk:
+    show black_screen onlayer black
+
     $ bg_current = "bg_classroom"
+
     $ EmmaX.location = "bg_classroom"
-    call clear_the_room (EmmaX, 0, 1)
-    call shift_focus (EmmaX)
+
+    call clear_the_room(EmmaX, Passive = False, Silent = True)
+    call shift_focus(EmmaX)
     call set_the_scene
+
     "Before class, you approach [EmmaX.name]."
     ch_p "I've been hearing creaking noises above me, do you have any idea what that could be?"
+
     $ EmmaX.change_face("_confused")
+
     ch_e "Oh. . ."
+
     $ EmmaX.change_face("_sly")
+
     ch_e "That's just the resident ghost."
+
     menu:
-        ch_e "That's just the resident ghost."
+        extend ""
         "Ghost?":
             pass
         "What?!":
             pass
         "Are you joking with me?":
             $ EmmaX.change_face("_angry")
+
             ch_e "I don't joke."
+
             $ EmmaX.change_face("_sly")
+
     ch_e "Yes, the ghost in the attic, [EmmaX.player_petname]."
+
     menu:
         extend ""
         "Is it dangerous?":
             pass
         "Oh, ok.":
             $ EmmaX.change_face("_confused")
+
             ch_e "Ok?"
-            $ EmmaX.change_face("_angry",eyes="_side")
+
+            $ EmmaX.change_face("_angry", eyes = "_side")
+
             ch_e ". . ."
+
             $ EmmaX.change_stat("love", 70, -2)
             $ EmmaX.change_stat("obedience", 50, 1)
+
             ch_e "I suppose I expected you would be a bit more concerned. . ."
+
     $ EmmaX.change_face("_normal")
+
     ch_e "Well no, it probably isn't dangerous, but you might want to see for yourself. . ."
+
     menu:
         extend ""
         "Thanks for the heads up.":
             $ EmmaX.change_face("_smile")
             $ EmmaX.change_stat("love", 70, 3)
             $ EmmaX.change_stat("obedience", 50, 1)
+
             ch_e "Glad to be of help."
         "Ok.":
             ch_e "Right. . ."
+
     ch_e "Ok, now sit down, the lesson is about to begin."
+
     $ Player.add_word(1,0,0,0,"attic")
-    $ StormX.broken_up[0] = 104
     $ Player.history.remove("noise")
+
     $ EmmaX.location = "bg_teacher"
+
+    call set_the_scene(silent = True)
+
     return
 
 label StormMeetWater:
@@ -116,7 +144,6 @@ label StormMeet:
 
     call clear_the_room ("all", 0, 1)
 
-    $ StormX.broken_up[0] = 0
     $ StormX.location = 0
     $ StormX.love = 500
     $ StormX.obedience = 0

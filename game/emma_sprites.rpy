@@ -204,16 +204,24 @@ layeredimage Emma_sprite standing:
     anchor (0.5, 0.0) offset (20, 140)
 
 layeredimage Emma_back_hair:
-    if EmmaX.diamond:
+    if EmmaX.wet and EmmaX.diamond:
+        "images/Emma_standing/Emma_standing_back_hair_wet_diamond.png"
+    elif EmmaX.diamond:
         "images/Emma_standing/Emma_standing_back_hair[EmmaX.outfit[hair]]_diamond.png"
+    elif EmmaX.wet:
+        "images/Emma_standing/Emma_standing_back_hair_wet.png"
     else:
         "images/Emma_standing/Emma_standing_back_hair[EmmaX.outfit[hair]].png"
 
     anchor (0.5, 0.5)
 
 layeredimage Emma_head:
-    if EmmaX.diamond:
+    if EmmaX.wet and EmmaX.diamond:
+        "images/Emma_standing/Emma_standing_head[EmmaX.brows]_wet[EmmaX.blushing]_diamond.png"
+    elif EmmaX.diamond:
         "images/Emma_standing/Emma_standing_head[EmmaX.brows][EmmaX.outfit[hair]][EmmaX.blushing]_diamond.png"
+    elif EmmaX.wet:
+        "images/Emma_standing/Emma_standing_head[EmmaX.brows]_wet[EmmaX.blushing].png"
     else:
         "images/Emma_standing/Emma_standing_head[EmmaX.brows][EmmaX.outfit[hair]][EmmaX.blushing].png"
 
@@ -243,15 +251,23 @@ layeredimage Emma_head:
     if EmmaX.spunk["face"]:
         "images/Emma_standing/Emma_standing_spunk_face.png"
 
+    if EmmaX.wet and EmmaX.diamond:
+        "images/Emma_standing/Emma_standing_hair_wet_diamond.png"
     if EmmaX.diamond:
         "images/Emma_standing/Emma_standing_hair[EmmaX.outfit[hair]]_diamond.png"
+    elif EmmaX.wet:
+        "images/Emma_standing/Emma_standing_hair_wet.png"
     else:
         "images/Emma_standing/Emma_standing_hair[EmmaX.outfit[hair]].png"
 
     if EmmaX.spunk["hair"]:
         "images/Emma_standing/Emma_standing_spunk_hair[EmmaX.outfit[hair]].png"
 
-    if EmmaX.outfit["face_outer_accessory"] in ["_hat", "_wet_hat"]:
+    if EmmaX.outfit["face_outer_accessory"] == "_wet_hat":
+        "images/Emma_standing/Emma_standing_shadow_head_wet.png"
+    elif EmmaX.wet and EmmaX.outfit["face_outer_accessory"] == "_hat":
+        "images/Emma_standing/Emma_standing_shadow_head_wet.png"
+    elif EmmaX.outfit["face_outer_accessory"] == "_hat":
         "images/Emma_standing/Emma_standing_shadow_head[EmmaX.outfit[hair]].png"
 
     if EmmaX.wet:
@@ -296,8 +312,11 @@ layeredimage Emma_titjob_breasts:
 
     anchor (0.5, 0.5)
 
-image Emma_blowjob_back_hair:
-    "images/Emma_blowjob/Emma_blowjob_back_hair_wavy.png"
+layeredimage Emma_blowjob_back_hair:
+    if EmmaX.wet or EmmaX.outfit["hair"] == "_wavy" or EmmaX.outfit["face_outer_accessory"] == "_wet_hat":
+        Null()
+    else:
+        "images/Emma_blowjob/Emma_blowjob_back_hair.png"
 
     anchor (0.5, 0.5)
 
@@ -387,26 +406,26 @@ layeredimage Emma_sex_body:
     if not EmmaX.outfit["jacket"]:
         Null()
     elif renpy.showing("Emma_sprite titjob"):
-        "images/Emma_titjob/Emma_titjob_jacket[EmmaX.outfit[jacket].png"
+        "images/Emma_titjob/Emma_titjob_jacket[EmmaX.outfit[jacket]].png"
     elif EmmaX.breasts_supported and EmmaX.jacket_opened:
-        "images/Emma_sex/Emma_sex_jacket[EmmaX.outfit[jacket]_up_aside.png"
+        "images/Emma_sex/Emma_sex_jacket[EmmaX.outfit[jacket]]_up_aside.png"
     elif EmmaX.jacket_opened:
-        "images/Emma_sex/Emma_sex_jacket[EmmaX.outfit[jacket]_down_aside.png"
+        "images/Emma_sex/Emma_sex_jacket[EmmaX.outfit[jacket]]_down_aside.png"
     elif EmmaX.breasts_supported:
-        "images/Emma_sex/Emma_sex_jacket[EmmaX.outfit[jacket]_up.png"
+        "images/Emma_sex/Emma_sex_jacket[EmmaX.outfit[jacket]]_up.png"
     else:
-        "images/Emma_sex/Emma_sex_jacket[EmmaX.outfit[jacket]_down.png"
+        "images/Emma_sex/Emma_sex_jacket[EmmaX.outfit[jacket]]_down.png"
 
     if not EmmaX.outfit["top"]:
         Null()
     elif EmmaX.outfit["top"] == "_dress" and renpy.showing("Emma_sprite titjob"):
-        "images/Emma_titjob/Emma_titjob_top[EmmaX.outfit[top].png"
+        "images/Emma_titjob/Emma_titjob_top[EmmaX.outfit[top]].png"
     elif EmmaX.top_pulled_up:
-        "images/Emma_sex/Emma_sex_top[EmmaX.outfit[top]_up_up.png"
+        "images/Emma_sex/Emma_sex_top[EmmaX.outfit[top]]_up_up.png"
     elif EmmaX.breasts_supported:
-        "images/Emma_sex/Emma_sex_top[EmmaX.outfit[top]_up.png"
+        "images/Emma_sex/Emma_sex_top[EmmaX.outfit[top]]_up.png"
     else:
-        "images/Emma_sex/Emma_sex_top[EmmaX.outfit[top]_down.png"
+        "images/Emma_sex/Emma_sex_top[EmmaX.outfit[top]]_down.png"
 
     if renpy.showing("Emma_sprite titjob"):
         Null()

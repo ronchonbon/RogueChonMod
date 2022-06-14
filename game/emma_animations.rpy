@@ -44,11 +44,11 @@ layeredimage Emma_grool_dripping_animation:
         "grool_dripping_animation" pos (0.115, 0.55) zoom 0.2
 
 layeredimage Emma_grool_animations:
-    if EmmaX.grool and EmmaX.outfit["bottom"] == "_pants" and EmmaX.bottom_pulled_down:
-        AlphaMask("Emma_grool_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask_pants.png")
-    elif EmmaX.grool and EmmaX.outfit["underwear"] and EmmaX.underwear_pulled_down:
+    if not EmmaX.grool:
+        Null()
+    elif EmmaX.outfit["underwear"] and EmmaX.underwear_pulled_down:
         AlphaMask("Emma_grool_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask_underwear.png")
-    elif EmmaX.grool and not EmmaX.pussy_covered:
+    elif EmmaX.pussy_covered:
         AlphaMask("Emma_grool_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask.png")
 
 layeredimage Emma_spunk_dripping_animation:
@@ -65,11 +65,11 @@ layeredimage Emma_spunk_dripping_animation:
         "spunk_dripping_animation" pos (0.115, 0.55) zoom 0.3
 
 layeredimage Emma_spunk_animations:
-    if (EmmaX.spunk["pussy"] or EmmaX.spunk["anus"]) and EmmaX.outfit["bottom"] == "_pants" and EmmaX.bottom_pulled_down:
-        AlphaMask("Emma_spunk_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask_pants.png")
-    elif (EmmaX.spunk["pussy"] or EmmaX.spunk["anus"]) and EmmaX.outfit["underwear"] and EmmaX.underwear_pulled_down:
+    if not EmmaX.spunk["pussy"] and not EmmaX.spunk["anus"]:
+        Null()
+    elif EmmaX.outfit["underwear"] and EmmaX.underwear_pulled_down:
         AlphaMask("Emma_spunk_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask_underwear.png")
-    elif (EmmaX.spunk["pussy"] or EmmaX.spunk["anus"]) and not EmmaX.pussy_covered:
+    elif not EmmaX.pussy_covered:
         AlphaMask("Emma_spunk_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask.png")
 
 # layeredimage Emma_standing_fondling_animations:
@@ -173,6 +173,7 @@ image Emma_handjob_under_hand_animation0:
     "Emma_handjob_under"
 
 image Emma_handjob_under_hand_animation1:
+    animation
     "Emma_handjob_under"
 
     subpixel True
@@ -185,6 +186,7 @@ image Emma_handjob_under_hand_animation1:
         repeat
 
 image Emma_handjob_under_hand_animation2:
+    animation
     "Emma_handjob_under"
 
     subpixel True
@@ -200,6 +202,7 @@ image Emma_handjob_over_hand_animation0:
     "Emma_handjob_over"
 
 image Emma_handjob_over_hand_animation1:
+    animation
     "Emma_handjob_over"
 
     subpixel True
@@ -212,6 +215,7 @@ image Emma_handjob_over_hand_animation1:
         repeat
 
 image Emma_handjob_over_hand_animation2:
+    animation
     "Emma_handjob_over"
 
     subpixel True
@@ -239,6 +243,7 @@ layeredimage Emma_sprite handjob:
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
 
 image Emma_titjob_back_hair_animation0:
+    animation
     "Emma_blowjob_back_hair"
 
     subpixel True
@@ -248,6 +253,7 @@ image Emma_titjob_back_hair_animation0:
         repeat
 
 image Emma_titjob_back_hair_animation1:
+    animation
     "Emma_blowjob_back_hair"
 
     subpixel True
@@ -259,6 +265,7 @@ image Emma_titjob_back_hair_animation1:
         repeat
 
 image Emma_titjob_back_hair_animation2:
+    animation
     "Emma_blowjob_back_hair"
 
     subpixel True
@@ -269,6 +276,7 @@ image Emma_titjob_back_hair_animation2:
         repeat
 
 image Emma_titjob_back_hair_animation3:
+    animation
     "Emma_blowjob_back_hair"
 
     subpixel True
@@ -280,6 +288,7 @@ image Emma_titjob_back_hair_animation3:
         repeat
 
 image Emma_titjob_body_animation0:
+    animation
     "Emma_sex_body"
 
     subpixel True
@@ -289,6 +298,7 @@ image Emma_titjob_body_animation0:
         repeat
 
 image Emma_titjob_body_animation1:
+    animation
     "Emma_sex_body"
 
     subpixel True
@@ -300,6 +310,7 @@ image Emma_titjob_body_animation1:
         repeat
 
 image Emma_titjob_body_animation2:
+    animation
     "Emma_sex_body"
 
     subpixel True
@@ -311,6 +322,7 @@ image Emma_titjob_body_animation2:
         repeat
 
 image Emma_titjob_body_animation3:
+    animation
     "Emma_sex_body"
 
     subpixel True
@@ -322,6 +334,7 @@ image Emma_titjob_body_animation3:
         repeat
 
 image Emma_titjob_head_animation0:
+    animation
     "Emma_blowjob_head"
 
     subpixel True
@@ -331,6 +344,7 @@ image Emma_titjob_head_animation0:
         repeat
 
 image Emma_titjob_head_animation1:
+    animation
     "Emma_blowjob_head"
 
     subpixel True
@@ -342,6 +356,7 @@ image Emma_titjob_head_animation1:
         repeat
 
 image Emma_titjob_head_animation2:
+    animation
     "Emma_blowjob_head"
 
     subpixel True
@@ -352,6 +367,7 @@ image Emma_titjob_head_animation2:
         repeat
 
 image Emma_titjob_head_animation3:
+    animation
     "Emma_blowjob_head"
 
     subpixel True
@@ -363,6 +379,7 @@ image Emma_titjob_head_animation3:
         repeat
 
 image Emma_titjob_breasts_animation0:
+    animation
     "Emma_titjob_breasts"
 
     subpixel True
@@ -375,6 +392,7 @@ image Emma_titjob_breasts_animation0:
         repeat
 
 image Emma_titjob_breasts_animation1:
+    animation
     "Emma_titjob_breasts"
 
     subpixel True
@@ -385,6 +403,7 @@ image Emma_titjob_breasts_animation1:
         repeat
 
 image Emma_titjob_breasts_animation2:
+    animation
     "Emma_titjob_breasts"
 
     subpixel True
@@ -395,6 +414,7 @@ image Emma_titjob_breasts_animation2:
         repeat
 
 image Emma_titjob_breasts_animation3:
+    animation
     "Emma_titjob_breasts"
 
     subpixel True
@@ -406,9 +426,7 @@ image Emma_titjob_breasts_animation3:
         repeat
 
 layeredimage Emma_sprite titjob:
-    if EmmaX.wet or EmmaX.outfit["hair"] == "_wet" or EmmaX.outfit["face_outer_accessory"] == "_wet_hat":
-        Null()
-    else:
+    always:
         "Emma_titjob_back_hair_animation[action_speed]" pos (0.0, -0.25) zoom 0.6
 
     always:

@@ -28,11 +28,13 @@ layeredimage Storm_grool_dripping_animation:
         "grool_dripping_animation" pos (0.092, 0.5) zoom 0.2
 
 layeredimage Storm_grool_animations:
-    if StormX.grool and StormX.outfit["bottom"] == "_pants" and StormX.bottom_pulled_down:
+    if not StormX.grool:
+        Null()
+    elif StormX.outfit["bottom"] == "_pants" and StormX.bottom_pulled_down:
         AlphaMask("Storm_grool_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask_pants.png")
-    elif StormX.grool and StormX.outfit["underwear"] and StormX.underwear_pulled_down:
+    elif StormX.outfit["underwear"] and StormX.underwear_pulled_down:
         AlphaMask("Storm_grool_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask_underwear.png")
-    elif StormX.grool and not StormX.pussy_covered:
+    elif not StormX.pussy_covered:
         AlphaMask("Storm_grool_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask.png")
 
 layeredimage Storm_spunk_dripping_animation:
@@ -49,11 +51,13 @@ layeredimage Storm_spunk_dripping_animation:
         "spunk_dripping_animation" pos (0.092, 0.5) zoom 0.3
 
 layeredimage Storm_spunk_animations:
-    if (StormX.spunk["pussy"] or StormX.spunk["anus"]) and StormX.outfit["bottom"] == "_pants" and StormX.bottom_pulled_down:
+    if not StormX.spunk["pussy"] and not StormX.spunk["anus"]:
+        Null()
+    elif StormX.outfit["bottom"] == "_pants" and StormX.bottom_pulled_down:
         AlphaMask("Storm_spunk_drippsing_animations", "images/Storm_standing/Storm_standing_grool_mask_pants.png")
-    elif (StormX.spunk["pussy"] or StormX.spunk["anus"]) and StormX.outfit["underwear"] and StormX.underwear_pulled_down:
+    elif StormX.outfit["underwear"] and StormX.underwear_pulled_down:
         AlphaMask("Storm_spunk_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask_underwear.png")
-    elif (StormX.spunk["pussy"] or StormX.spunk["anus"]) and not StormX.pussy_covered:
+    elif not StormX.pussy_covered:
         AlphaMask("Storm_spunk_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask.png")
 
 # layeredimage Storm_standing_fondling_animations:
@@ -157,6 +161,7 @@ image Storm_handjob_under_hand_animation0:
     "Storm_handjob_under"
 
 image Storm_handjob_under_hand_animation1:
+    animation
     "Storm_handjob_under"
 
     subpixel True
@@ -169,6 +174,7 @@ image Storm_handjob_under_hand_animation1:
         repeat
 
 image Storm_handjob_under_hand_animation2:
+    animation
     "Storm_handjob_under"
 
     subpixel True
@@ -184,6 +190,7 @@ image Storm_handjob_over_hand_animation0:
     "Storm_handjob_over"
 
 image Storm_handjob_over_hand_animation1:
+    animation
     "Storm_handjob_over"
 
     subpixel True
@@ -196,6 +203,7 @@ image Storm_handjob_over_hand_animation1:
         repeat
 
 image Storm_handjob_over_hand_animation2:
+    animation
     "Storm_handjob_over"
 
     subpixel True

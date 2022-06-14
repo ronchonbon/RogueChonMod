@@ -81,8 +81,8 @@ label wait(outfit = True, lights = True):
                     $ StormX.outfit["hair"] = "_mohawk"
                 elif "_wet" in StormX.daily_history:
                     $ StormX.outfit["hair"] = "_wet"
-                elif "_wethawk" in StormX.daily_history:
-                    $ StormX.outfit["hair"] = "_wethawk"
+                elif "_wet_mohawk" in StormX.daily_history:
+                    $ StormX.outfit["hair"] = "_wet_mohawk"
 
         call reset_all_girls_at_end
 
@@ -631,10 +631,10 @@ label to_do(Girl):
     if "hair" in Girl.to_do:
         if StormX.outfit["hair"] == "_long":
             $ StormX.outfit["hair"] = "_mohawk"
-        elif StormX.outfit["hair"] == "_wethawk":
+        elif StormX.outfit["hair"] == "_wet_mohawk":
             $ StormX.outfit["hair"] = "_wet"
         elif StormX.outfit["hair"] == "_wet":
-            $ StormX.outfit["hair"] = "_wethawk"
+            $ StormX.outfit["hair"] = "_wet_mohawk"
         else:
             $ StormX.outfit["hair"] = "_long"
 

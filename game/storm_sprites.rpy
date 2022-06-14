@@ -16,7 +16,7 @@ layeredimage Storm_sprite standing:
     if StormX.outfit["underwear"] and StormX.underwear_pulled_down:
         "images/Storm_standing/Storm_standing_back_inner_accessory[StormX.outfit[underwear]]_down.png"
 
-    if StormX.outfit["hair"] != "_short":
+    always:
         "Storm_back_hair" pos (0.1395, 0.158) zoom 0.47
 
     always:
@@ -181,8 +181,11 @@ layeredimage Storm_sprite standing:
 layeredimage Storm_back_hair:
     if StormX.outfit["face_outer_accessory"] == "_towel":
         "images/Storm_standing/Storm_standing_face_outer_accessory[StormX.outfit[face_outer_accessory]]_under.png"
-
-    if StormX.outfit["face_outer_accessory"] != "_towel":
+    elif StormX.outfit["hair"] in ["_wet_long", "_wet_short", "_wet_mohawk"]:
+        "images/Storm_standing/Storm_standing_back_hair[StormX.outfit[hair]].png"
+    elif StormX.wet:
+        "images/Storm_standing/Storm_standing_back_hair_wet[StormX.outfit[hair]].png"
+    else:
         "images/Storm_standing/Storm_standing_back_hair[StormX.outfit[hair]].png"
 
     anchor (0.5, 0.5)
@@ -215,9 +218,15 @@ layeredimage Storm_head:
     if StormX.spunk["face"]:
         "images/Storm_standing/Storm_standing_spunk_face.png"
 
-    if StormX.outfit["face_outer_accessory"] != "_towel" and renpy.showing("Storm_sprite sex") and StormX.outfit["hair"] == "_long":
-        "images/Storm_sex/Storm_sex_hair[StormX.outfit[hair]].png"
-    elif StormX.outfit["face_outer_accessory"] != "_towel":
+    if StormX.outfit["face_outer_accessory"] == "_towel":
+        Null()
+    elif renpy.showing("Storm_sprite sex") and StormX.outfit["hair"] == "_long":
+        "images/Storm_sex/Storm_sex_hair.png"
+    elif StormX.outfit["hair"] in ["_wet_long", "_wet_short", "_wet_mohawk"]:
+        "images/Storm_standing/Storm_standing_hair[StormX.outfit[hair]].png"
+    elif StormX.wet:
+        "images/Storm_standing/Storm_standing_hair_wet[StormX.outfit[hair]].png"
+    else:
         "images/Storm_standing/Storm_standing_hair[StormX.outfit[hair]].png"
 
     if StormX.spunk["hair"]:
