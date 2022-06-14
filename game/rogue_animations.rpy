@@ -1020,10 +1020,10 @@ image Rogue_doggy_anus_anal_animation3:
 
 image Rogue_doggy_anus_fingering_animation:
     animation
-    "images/Rogue_doggy/Rogue_doggy_anus_full_hole.png"
+    "Rogue_doggy_anus_hole"
 
     subpixel True
-    anchor (0.52, 0.69) zoom 0.6
+    zoom 0.6
     block:
         ease 0.5 zoom 0.75
         pause 0.5

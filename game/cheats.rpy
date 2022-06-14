@@ -384,7 +384,7 @@ label wardrobe_editor(Girl):
                             $ Girl.outfit["bottom"] = "_black_and_blue_pants"
                         "Add boots" if Girl == EmmaX:
                             $ EmmaX.outfit["boots"] = "_thigh_boots"
-                        "Pull bottom up/down" if not Girl.wearing_skirt:
+                        "Pull bottom up/down" if Girl.wearing_pants or Girl.wearing_shorts:
                             if Girl.bottom_pulled_down:
                                 $ Girl.bottom_pulled_down = False
                             else:
@@ -394,6 +394,11 @@ label wardrobe_editor(Girl):
                                 $ Girl.upskirt = False
                             else:
                                 $ Girl.upskirt = True
+                        "Pull dress up/down" if Girl.wearing_dress:
+                            if Girl.dress_upskirt:
+                                $ Girl.dress_upskirt = False
+                            else:
+                                $ Girl.dress_upskirt = True
                         "Toggle grool":
                             if not Girl.grool:
                                 $ Girl.grool = 1

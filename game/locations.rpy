@@ -250,12 +250,12 @@ label girls_room_entry:
         call event_calls
         jump girls_room
 
-    if round >= 10 and Girl.location == bg_current and "lesbian" in Girl.recent_history:
+    if round >= 10 and Girl.location == Girl.home and "lesbian" in Girl.recent_history:
         $ GirlB = None
 
         python:
             for G in active_Girls:
-                if G.location == bg_current and "lesbian" in G.recent_history:
+                if G.location == Girl.home and "lesbian" in G.recent_history:
                     GirlB = G
 
                     break
@@ -265,12 +265,12 @@ label girls_room_entry:
 
         jump girls_room
 
-    if bg_current == KittyX.home and "dress2" in LauraX.history and not Party:
+    if Girl == KittyX and "dress2" in LauraX.history and not Party:
         call Laura_Dressup3
 
         return
 
-    if round >= 10 and Girl.location == bg_current and "will_masturbate" in Girl.daily_history and D20 >= 5:
+    if round >= 10 and Girl.location == Girl.home and "will_masturbate" in Girl.daily_history and D20 >= 5:
         call caught_masturbating(Girl)
     else:
         $ knocking = False
@@ -284,7 +284,7 @@ label girls_room_entry:
                     call set_the_scene
 
         if not knocking and Girl in Keys:
-            if Girl.location == bg_current:
+            if Girl.location == Girl.home:
                 if round <= 10:        #add "no" condtion here
                     if time_index >= 3: #night time
                         "She's asleep in bed. You slip out quietly." #fix add options here.
@@ -298,7 +298,7 @@ label girls_room_entry:
         else:
             "You knock on [Girl.name]'s door."
 
-            if Girl.location == bg_current:
+            if Girl.location == Girl.home:
                 if round <= 10:
                     if time_index >= 3: #night time
                         "There's no answer, she's probably asleep."
@@ -360,7 +360,7 @@ label girls_room_entry:
                     "[Girl.name] opens the door and leans out."
                     "You ask if you can come inside."
 
-        if Girl.location != bg_current:
+        if Girl.location != Girl.home:
             "Looks like she's not home right now."
 
             if Girl in Keys:

@@ -208,6 +208,7 @@ label meet_Kitty:
                 ch_k "My powers may not work on you, but I have[KittyX.like]a few years of combat experience on you."
                 ch_k "And don't you forget it!"
 
+                $ holding = False
                 $ hugged = True
 
     if counter or hugged:

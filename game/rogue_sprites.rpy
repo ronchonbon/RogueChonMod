@@ -409,9 +409,11 @@ layeredimage Rogue_sex_legs:
 
     if not RogueX.spunk["pussy"]:
         Null()
-    elif Player.sprite and Player.cock_position == "in" and action_speed <= 1:
+    elif not Player.sprite or Player.cock_position != "in":
+        Null()
+    elif action_speed <= 1:
         "images/Kitty_sex/Kitty_sex_spunk_pussy_over.png" offset (111, 0) xzoom 0.8
-    elif Player.sprite and Player.cock_position == "in":
+    else:
         "images/Kitty_sex/Kitty_sex_spunk_pussy_over.png"
 
     if RogueX.spunk["belly"]:
@@ -428,7 +430,7 @@ layeredimage Rogue_sex_legs:
     if Player.sprite and Player.cock_position == "footjob":
         "Zero_cock_Rogue"
 
-    if show_feet:
+    if Player.cock_position == "footjob" or show_feet:
         "Rogue_sex_feet" pos (0.291, 0.391)
     else:
         AlphaMask("Rogue_sex_feet", "images/Rogue_sex/Rogue_sex_feet_mask.png")
@@ -618,7 +620,7 @@ layeredimage Rogue_doggy_ass:
         Null()
     elif RogueX.outfit["hose"] == "_tights" and RogueX.grool > 1:
         "images/Rogue_doggy/Rogue_doggy_hose[RogueX.outfit[hose]]_grool.png"
-    elif RogueX.outfit["hose"]:
+    else:
         "images/Rogue_doggy/Rogue_doggy_hose[RogueX.outfit[hose]].png"
 
     if RogueX.outfit["bottom"] not in ["_pants", "_skirt"]:

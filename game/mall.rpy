@@ -145,7 +145,7 @@ label Sex_shop:
                     $ Player.inventory.append("_dildo")
                     $ Player.cash -= 20
                     if First:
-                        if approval_check(Girl, 800):
+                        if approval_check(First, 800):
                             $ First.change_face("_sly")
                             $ First.change_stat("love", 80, 1)
                             $ First.change_stat("obedience", 50, 3)

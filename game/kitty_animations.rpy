@@ -514,39 +514,6 @@ image Kitty_titjob_breasts_animation3:
         pause 0.2
         repeat
 
-image Kitty_titjob_mask_animation1:
-    animation
-    "Kitty_titjob_mask"
-
-    subpixel True
-    block:
-        ease 2.9 yoffset -50
-        ease 1.0 yoffset 0
-        pause 0.1
-        repeat
-
-image Kitty_titjob_mask_animation2:
-    animation
-    "Kitty_titjob_mask"
-
-    subpixel True
-    block:
-        ease 0.71 yoffset -40
-        ease 0.27 yoffset 0
-        pause 0.02
-        repeat
-
-image Kitty_titjob_mask_animation3:
-    animation
-    "Kitty_titjob_mask"
-
-    subpixel True
-    block:
-        ease 2.2 yoffset -20
-        ease 0.6 yoffset 0
-        pause 0.2
-        repeat
-
 layeredimage Kitty_sprite titjob:
     always:
         "Kitty_titjob_back_hair_animation[action_speed]" pos (0.0, -0.2) zoom 0.9
@@ -832,14 +799,6 @@ image Kitty_sex_spunk_anus_under_animation:
         ease 2.25 xzoom 0.6
         repeat
 
-layeredimage Kitty_sex_spunk_anus_under_animations:
-    if Player.sprite and Player.cock_position == "anal" and action_speed > 1:
-        "Kitty_sex_spunk_anus_under" pos (0.292, 0.386)
-    elif Player.sprite and Player.cock_position == "anal" and action_speed == 1:
-        "Kitty_sex_spunk_anus_under_animation" pos (0.292, 0.386)
-    else:
-        "images/Kitty_sex/Kitty_sex_spunk_anus_closed.png"
-
 image Kitty_sex_spunk_anus_over_animation:
     animation
     "Kitty_sex_spunk_anus_over"
@@ -999,40 +958,6 @@ image Kitty_doggy_pussy_hole_animation2:
 image Kitty_doggy_pussy_hole_animation3:
     "Kitty_doggy_pussy_hole"
 
-image Kitty_doggy_pussy_mask_animation0:
-    animation
-    "Kitty_doggy_pussy_mask"
-
-    subpixel True
-    xzoom 0.6
-    block:
-        ease 1 xzoom 0.65
-        pause 1
-        ease 3 xzoom 0.6
-        repeat
-
-image Kitty_doggy_pussy_mask_animation1:
-    animation
-    "Kitty_doggy_pussy_mask"
-
-    subpixel True
-    xzoom 0.6
-    block:
-        ease 1 xzoom 1
-        pause 1
-        ease 3 xzoom 0.6
-        repeat
-
-image Kitty_doggy_pussy_mask_animation2:
-    "Kitty_doggy_pussy_mask"
-
-image Kitty_doggy_pussy_mask_animation3:
-    "Kitty_doggy_pussy_mask"
-
-layeredimage Kitty_doggy_pussy_mask_animations:
-    always:
-        "Kitty_doggy_pussy_mask_animation[action_speed]" offset (217, 514)
-
 image Kitty_doggy_pussy_fingering:
     animation
     "Kitty_doggy_pussy_hole"
@@ -1067,64 +992,17 @@ image Kitty_doggy_anus_anal_animation3:
 
     zoom 0.9
 
-image Kitty_doggy_anus_mask_animation0:
-    "Kitty_doggy_anus_mask"
-
-image Kitty_doggy_anus_mask_animation1:
-    animation
-    "Kitty_doggy_anus_mask"
-
-    subpixel True
-    zoom 0.5
-    block:
-        ease 0.5 zoom 1
-        pause 0.5
-        ease 1.5 zoom 0.5
-        repeat
-
-image Kitty_doggy_anus_mask_animation2:
-    "Kitty_doggy_anus_mask"
-
-    zoom 0.9
-
-image Kitty_doggy_anus_mask_animation3:
-    "Kitty_doggy_anus_mask"
-
-    zoom 0.9
-
-layeredimage Kitty_doggy_anus_mask_animations:
-    if Player.sprite and Player.cock_position == "anal":
-        "Kitty_doggy_anus_mask_animation[action_speed]" offset (217, 514)
-    elif Player.primary_action == "dildo_ass":
-        "Kitty_doggy_anus_mask_animation1" offset (217, 514)
-
 image Kitty_doggy_anus_fingering:
     animation
-    "images/Kitty_doggy/Kitty_doggy_anus_full_hole.png"
+    "Kitty_doggy_anus_hole"
 
     subpixel True
-    anchor (0.52, 0.69) zoom 0.6
+    zoom 0.6
     block:
         ease 0.5 zoom 0.75
         pause 0.5
         ease 1.5 zoom 0.6
         repeat
-
-image Kitty_doggy_anus_fingering_mask_animation:
-    animation
-    "images/Kitty_doggy/Kitty_doggy_anus_mask.png"
-
-    subpixel True
-    anchor (0.52, 0.69) zoom 0.6
-    block:
-        ease 0.5 zoom 0.75
-        pause 0.5
-        ease 1.5 zoom 0.6
-        repeat
-
-layeredimage Kitty_doggy_anus_fingering_mask_animations:
-    always:
-        "Kitty_doggy_anus_fingering_mask_animation" offset (217, 514)
 
 image Kitty_doggy_shin_animation0:
     animation
@@ -1160,10 +1038,6 @@ image Kitty_doggy_shin_animation2:
         ease 0.3 yoffset 0
         repeat
 
-layeredimage Kitty_doggy_shin_animations:
-    always:
-        "Kitty_doggy_shin_animation[action_speed]"
-
 image Kitty_doggy_feet_animation0:
     animation
     "Kitty_doggy_feet"
@@ -1198,10 +1072,6 @@ image Kitty_doggy_feet_animation2:
         ease 0.3 yoffset 0
         repeat
 
-layeredimage Kitty_doggy_feet_animations:
-    always:
-        "Kitty_doggy_feet_animation[action_speed]"
-
 layeredimage Kitty_sprite doggy:
     if Player.cock_position == "anal":
         "Kitty_doggy_body_animation[action_speed]"
@@ -1230,4 +1100,4 @@ layeredimage Kitty_sprite doggy:
     elif not Player.sprite or show_feet:
         "Kitty_doggy_feet"
 
-    anchor (0.5, 0.0) offset (190, 650) zoom 1.2
+    anchor (0.5, 0.0) offset (190, 650) zoom 1.25

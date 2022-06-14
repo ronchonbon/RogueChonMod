@@ -444,7 +444,7 @@ label Massage_Cycle:
         elif Current in ("hips","ass","pussy","thighs"):
             $ Girl.pose = "pussy"
 
-        call shift_view (Girl, Girl.pose, 0)
+        call shift_view (Girl, Girl.pose)
 
         if Current == "neck":
             if Past in ("shoulders","back"):
