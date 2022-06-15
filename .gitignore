@@ -13,3 +13,7 @@
 *.save
 
 /saves
+
+game/saves/persistent
+
+log.txt

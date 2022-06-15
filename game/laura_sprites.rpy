@@ -58,11 +58,11 @@ layeredimage Laura_sprite standing:
 
     if not LauraX.outfit["underwear"]:
         Null()
-    elif LauraX.underwear_pulled_down and LauraX.grool > 1:
+    elif LauraX.underwear_pulled_down and LauraX.grool > 1 and LauraX.outfit["underwear"] not in ["_leather_panties", "_bikini_bottoms"]:
         "images/Laura_standing/Laura_standing_underwear[LauraX.outfit[underwear]]_down_grool.png"
     elif LauraX.underwear_pulled_down:
         "images/Laura_standing/Laura_standing_underwear[LauraX.outfit[underwear]]_down.png"
-    elif LauraX.grool > 1:
+    elif LauraX.grool > 1 and LauraX.outfit["underwear"] not in ["_leather_panties", "_bikini_bottoms"]:
         "images/Laura_standing/Laura_standing_underwear[LauraX.outfit[underwear]]_grool.png"
     else:
         "images/Laura_standing/Laura_standing_underwear[LauraX.outfit[underwear]].png"
@@ -95,6 +95,9 @@ layeredimage Laura_sprite standing:
         "images/Laura_standing/Laura_standing_bottom[LauraX.outfit[bottom]]_down.png"
     else:
         "images/Laura_standing/Laura_standing_bottom[LauraX.outfit[bottom]].png"
+
+    if LauraX.outfit["dress"]:
+        "images/Laura_standing/Laura_standing_dress[LauraX.outfit[dress]].png"
 
     if LauraX.outfit["top"]:
         "images/Laura_standing/Laura_standing_top[LauraX.outfit[top]].png"
@@ -178,10 +181,17 @@ layeredimage Laura_head:
     else:
         "images/Laura_standing/Laura_standing_brows[LauraX.brows].png"
 
-    if LauraX.spunk["mouth"]:
-        "images/Laura_standing/Laura_standing_spunk_mouth[LauraX.mouth].png"
+    if renpy.showing("Laura_sprite titjob") and action_speed in [3, 5]:
+        "images/Laura_standing/Laura_standing_mouth_tongue.png"
     else:
         "images/Laura_standing/Laura_standing_mouth[LauraX.mouth].png"
+
+    if not LauraX.spunk["mouth"]:
+        Null()
+    elif renpy.showing("Laura_sprite titjob") and action_speed in [3, 5]:
+        "images/Laura_standing/Laura_standing_spunk_mouth_tongue.png"
+    else:
+        "images/Laura_standing/Laura_standing_spunk_mouth[LauraX.mouth].png"
 
     if LauraX.eyes == "_closed":
         "images/Laura_standing/Laura_standing_eyes_closed.png"
@@ -216,6 +226,9 @@ layeredimage Laura_head:
 
     if LauraX.wet:
         "images/Laura_standing/Laura_standing_water_hair.png"
+
+    if LauraX.outfit["face_outer_accessory"]:
+        "images/Laura_standing/Laura_standing_face_outer_accessory[LauraX.outfit[face_outer_accessory]].png"
 
     anchor (0.5, 0.5)
 

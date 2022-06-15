@@ -836,7 +836,6 @@ label recent_action_lines(Girl, action):
         if action == "footjob":
             $ lines.append("I'm getting foot cramps. . .")
 
-
         if action == "blowjob":
             $ lines.append("Mmm, again? [[stretches her jaw]")
 
@@ -4184,12 +4183,12 @@ label first_action_approval_mostly_love_lines(Girl, action):
             $ lines.append("I've had a reasonable amount of experience with these, you know. . .")
 
         if action in cock_actions:
-            $ lines.append("It looks like you need some relief. . .",
-                "Huh, well that's certainly one way to get off.")
+            $ lines.append("It looks like you need some relief. . .")
+            $ lines.append("Huh, well that's certainly one way to get off.")
 
         if action in contact_actions:
-            $ lines.append("Well, I've never really been able to touch people without draining them, this could be an interesting experience. . .",
-                "Well, I've never been able to do this before now, so this might be fun.")
+            $ lines.append("Well, I've never really been able to touch people without draining them, this could be an interesting experience. . .")
+            $ lines.append("Well, I've never been able to do this before now, so this might be fun.")
 
         if action in kinky_actions:
             $ lines.append("I guess if you really want to try it. . .")
@@ -4401,12 +4400,12 @@ label action_forcefully_approved_lines(Girl, action):
             $ lines.append("The toys again?")
 
         if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
-            $ lines.append("That's it?",
-                "That's all you want?")
+            $ lines.append("That's it?")
+            $ lines.append("That's all you want?")
 
         if action == "masturbation":
-            $ lines.append("So you just want to watch then?",
-                "You want to watch me again?")
+            $ lines.append("So you just want to watch then?")
+            $ lines.append("You want to watch me again?")
     elif Girl == KittyX:
         $ lines = ["This isn't going to become a habit, will it?",
             "Again? Why do you do this to me?",
@@ -4419,13 +4418,13 @@ label action_forcefully_approved_lines(Girl, action):
             $ lines.append("The toys again?")
 
         if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
-            $ lines.append("That's it, right?",
-                "That's all?",
-                "That's {i}all{/i} you want?")
+            $ lines.append("That's it, right?")
+            $ lines.append("That's all?")
+            $ lines.append("That's {i}all{/i} you want?")
 
         if action == "masturbation":
-            $ lines.append("So you {i}just{/i} want to watch. . .",
-                "Again? Just looking?",)
+            $ lines.append("So you {i}just{/i} want to watch. . .")
+            $ lines.append("Again? Just looking?",)
     elif Girl == EmmaX:
         $ lines = ["Ugh, that again?",
             "Again? You're really wearing out your welcome.",
@@ -4439,12 +4438,12 @@ label action_forcefully_approved_lines(Girl, action):
             $ lines.append("The toys again?")
 
         if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
-            $ lines.append("No more than that?",
-                "That's it?")
+            $ lines.append("No more than that?")
+            $ lines.append("That's it?")
 
         if action == "masturbation":
-            $ lines.append("But. . . {i}only{/i} a show?",
-                "Again? Just you only want to watch?")
+            $ lines.append("But. . . {i}only{/i} a show?")
+            $ lines.append("Again? Just you only want to watch?")
     elif Girl == LauraX:
         $ lines = ["You're kinda pushing it.",
             "Again?",
@@ -4457,8 +4456,8 @@ label action_forcefully_approved_lines(Girl, action):
             $ lines.append("The toys again?")
 
         if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
-            $ lines.append("Nothing more than that?",
-                "That's it?")
+            $ lines.append("Nothing more than that?")
+            $ lines.append("That's it?")
 
         if action == "masturbation":
             $ lines.append("And you {i}just{/i} want to watch. . .")
@@ -4473,8 +4472,8 @@ label action_forcefully_approved_lines(Girl, action):
             $ lines.append("The toys again?")
 
         if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
-            $ lines.append("And that's it?",
-                "That's it?")
+            $ lines.append("And that's it?")
+            $ lines.append("That's it?")
 
         if action in ["footjob", "hotdog"]:
             $ lines.append("Odd. . .")
@@ -4491,9 +4490,9 @@ label action_forcefully_approved_lines(Girl, action):
             $ lines.append("The toys again?")
 
         if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
-            $ lines.append("Nothing more than that?",
-                "That is all you want?",
-                "And that is -all- that you expect?")
+            $ lines.append("Nothing more than that?")
+            $ lines.append("That is all you want?")
+            $ lines.append("And that is -all- that you expect?")
 
         if action in ["footjob", "titjob"]:
             $ lines.append("You enjoy making use of these?")

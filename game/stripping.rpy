@@ -3001,8 +3001,8 @@ label Bottoms_Off_Legs(Girl=0):
                         ch_v "Hey! You'd better replace those. . ."
                     $ Girl.change_face("_bemused", 1)
 
-            "Why don't you lose the sweater?" if Girl.outfit["scarf"] == "_sweater":
-                $ Girl.outfit["scarf"] = ""
+            "Why don't you lose the sweater?" if Girl.outfit["belt"] == "_sweater":
+                $ Girl.outfit["belt"] = ""
                 "[Girl.name] tosses her sweater off."
 
             "Keep it all on for now." if counter == 1:

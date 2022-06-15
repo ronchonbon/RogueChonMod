@@ -765,11 +765,11 @@ label Massage_Cycle:
                 call Massage_After
                 $ Girl.remaining_actions += 1
                 if Current == "breasts":
-                    call expression Girl.tag + "_FB_Prep"
+                    call action(Girl, "fondle_breasts")
                 elif Current == "ass":
-                    call expression Girl.tag + "_FA_Prep"
+                    call action(Girl, "fondle_ass")
                 elif Current == "pussy":
-                    call expression Girl.tag + "_FP_Prep"
+                    call action(Girl, "fondle_pussy")
                 return
         elif approval_check(Girl, Check-200) or "massagefail" in Girl.recent_history:
 

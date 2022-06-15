@@ -57,15 +57,15 @@ layeredimage Jean_sprite standing:
     if JeanX.spunk["pussy"] or JeanX.spunk["anus"]:
         "images/Jean_standing/Jean_standing_spunk_pussy.png"
 
-    if JeanX.outfit["dress"]:
-        "images/Jean_standing/Jean_standing_dress[JeanX.outfit[dress]][JeanX.arm_pose].png"
-
     if not JeanX.outfit["bottom"]:
         Null()
     elif JeanX.bottom_pulled_down:
         "images/Jean_standing/Jean_standing_bottom[JeanX.outfit[bottom]]_down.png"
     else:
         "images/Jean_standing/Jean_standing_bottom[JeanX.outfit[bottom]].png"
+
+    if JeanX.outfit["dress"]:
+        "images/Jean_standing/Jean_standing_dress[JeanX.outfit[dress]][JeanX.arm_pose].png"
 
     if not JeanX.outfit["top"]:
         Null()
@@ -270,26 +270,27 @@ layeredimage Jean_blowjob_head:
     always:
         "images/Jean_blowjob/Jean_blowjob_head[JeanX.blushing].png"
 
-    if renpy.showing("Jean_sprite titjob") and action_speed == 3:
+    if renpy.showing("Jean_sprite titjob") and action_speed > 2:
         "images/Jean_blowjob/Jean_blowjob_mouth_tongue.png"
     elif renpy.showing("Jean_sprite blowjob") and action_speed == 1:
         "images/Jean_blowjob/Jean_blowjob_mouth_tongue.png"
+    elif renpy.showing("Jean_sprite blowjob") and action_speed == 2:
+        "Jean_blowjob_mouth_animations"
     elif renpy.showing("Jean_sprite blowjob") and action_speed > 2:
         "images/Jean_blowjob/Jean_blowjob_mouth_sucking.png"
     else:
         "images/Jean_blowjob/Jean_blowjob_mouth[JeanX.mouth].png"
 
-    if renpy.showing("Jean_sprite blowjob") and action_speed == 2:
-        "Jean_blowjob_mouth_animations"
-
     if not JeanX.spunk["mouth"]:
         Null()
+    elif renpy.showing("Jean_sprite titjob") and action_speed > 2:
+        "images/Jean_blowjob/Jean_blowjob_spunk_mouth_tongue.png"
     elif renpy.showing("Jean_sprite blowjob") and action_speed == 1:
         "images/Jean_blowjob/Jean_blowjob_spunk_mouth_tongue.png"
     elif renpy.showing("Jean_sprite blowjob") and action_speed > 2:
         "images/Jean_blowjob/Jean_blowjob_spunk_mouth_sucking_under.png"
     elif JeanX.mouth == "_sucking":
-        "images/Jean_blowjob/Jean_blowjob_spunk_mouth[JeanX.mouth]_under.png"
+        "images/Jean_blowjob/Jean_blowjob_spunk_mouth_sucking_under.png"
     else:
         "images/Jean_blowjob/Jean_blowjob_spunk_mouth[JeanX.mouth].png"
 

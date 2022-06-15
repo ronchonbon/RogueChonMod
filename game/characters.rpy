@@ -233,7 +233,7 @@ init python:
 
                 self.history = ["met"]
 
-                self.used_to_anal = 0
+                self.used_to_anal = False
 
                 self.massage_chart = ["shoulders", "arms", "arms", "hands", "hands", "back", "hips", "back", "breasts", "breasts"]
 
@@ -260,7 +260,7 @@ init python:
 
                 self.likes = {"Rogue": 600, "Emma": 500, "Laura": 500, "Jean": 300, "Storm": 600, "Jubes": 600}
 
-                self.used_to_anal = 0
+                self.used_to_anal = False
 
                 self.massage_chart = ["shoulders", "back", "hips", "thighs", "calves", "feet", "feet", "hips", "ass", "pussy"]
 
@@ -286,19 +286,14 @@ init python:
 
                 self.likes = {"Rogue": 500, "Kitty": 500, "Laura": 500, "Jean": 100, "Storm": 500, "Jubes": 500}
 
-                self.used_to_anal = 2
+                self.used_to_anal = True
 
                 self.massage_chart = ["shoulders", "neck", "neck", "back", "hips", "ass", "ass", "back", "breasts", "breasts"]
 
                 self.names = ["Ms. Frost"]
                 self.name = "Ms. Frost"
 
-                global Player
-
-                last_name = get_last_name(Player)
-
-                self.player_petname = "Mr. " + last_name
-                self.player_petnames = ["young man", Player.name, "Mr. " + last_name]
+                self.player_petnames = ["young man", Player.name]
                 self.petname = self.name
                 self.petnames = ["Emma", "Ms. Frost"]
             elif self.tag == "Laura":
@@ -307,7 +302,7 @@ init python:
                 self.home = "bg_laura"
                 self.pubes = "_hairy"
 
-                self.scent_timer = 0
+                self.scent_timer = False
                 self.claws = False
 
                 self.weekly_schedule = [["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
@@ -346,7 +341,7 @@ init python:
 
                 self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 300, "Laura": 500, "Storm": 300, "Jubes": 300}
 
-                self.used_to_anal = 0
+                self.used_to_anal = False
 
                 self.massage_chart = ["back", "shoulders", "neck", "neck", "back", "hips", "ass", "ass", "pussy", "pussy"]
 
@@ -370,7 +365,7 @@ init python:
 
                 self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 400, "Laura": 500, "Jean": 300, "Jubes": 500}
 
-                self.used_to_anal = 0
+                self.used_to_anal = False
 
                 self.massage_chart = ["feet", "calves", "thighs", "hips", "ass", "ass", "pussy", "ass", "pussy", "pussy"]
 
@@ -394,7 +389,7 @@ init python:
 
                 self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 500, "Laura": 600, "Jean": 300, "Storm": 500}
 
-                self.used_to_anal = 0
+                self.used_to_anal = False
 
                 self.massage_chart = ["neck", "shoulders", "calves", "feet", "neck", "shoulders", "calves", "feet", "pussy", "pussy"]
 
@@ -402,6 +397,37 @@ init python:
                 self.player_petnames = ["Bro", Player.name]
                 self.petname = self.name
                 self.petnames = ["Jubes", "Jubilee"]
+            elif self.tag == "Mystique":
+                self.voice = ch_m
+
+                self.home = "bg_mystique"
+                self.pubes = "_bare"
+
+                self.weekly_schedule = [["bg_teacher", "bg_teacher", "bg_classroom", "bg_mystique"],
+                                 ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_mystique"],
+                                 ["bg_teacher", "bg_teacher", "bg_classroom", "bg_mystique"],
+                                 ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_mystique"],
+                                 ["bg_teacher", "bg_teacher", "bg_classroom", "bg_mystique"],
+                                 ["bg_pool", "bg_pool", "bg_mystique", "bg_mystique"],
+                                 ["bg_pool", "bg_pool", "bg_mystique", "bg_mystique"]]
+
+                self.likes = {"Rogue": 500, "Kitty": 500, "Laura": 500, "Jean": 100, "Storm": 500, "Jubes": 500}
+
+                self.used_to_anal = True
+
+                self.massage_chart = ["shoulders", "neck", "neck", "back", "hips", "ass", "ass", "back", "breasts", "breasts"]
+
+                self.names = ["Ms. Darkholme"]
+                self.name = "Ms. Darkholme"
+
+                global Player
+
+                last_name = get_last_name(Player)
+
+                self.player_petname = "Mr. " + last_name
+                self.player_petnames = ["young man", Player.name, "Mr. " + last_name]
+                self.petname = self.name
+                self.petnames = ["Raven", "Ms. Darkholme"]
 
             self.set_default_outfits()
             self.change_outfit("today")
@@ -945,6 +971,10 @@ init python:
                 outfit_holder = self.domme_outfit.copy()
             elif outfit_name == "bondage_outfit" and self.tag == "Jean":
                 outfit_holder = self.bondage_outfit.copy()
+            elif outfit_name == "disguise" and self.tag == "Mystique":
+                outfit_holder = self.disguise.copy()
+            elif outfit_name == "true_self" and self.tag == "Mystique":
+                outfit_holder = self.true_self.copy()
 
             if not self.outfit["bottom"] and outfit_holder["bottom"]:
                 got_dressed = 1
@@ -958,9 +988,6 @@ init python:
                 got_dressed = 1
 
             self.outfit = outfit_holder.copy()
-
-            if self.wet:
-                self.outfit["hair"] = "_wet"
 
             if "ripped" in self.daily_history and "modesty" not in self.recent_history:
                 self.outfit["hose"] = "_ripped_pantyhose" if self.outfit["hose"] == "_pantyhose" else self.outfit["hose"]
@@ -992,7 +1019,7 @@ init python:
 
             if self.tag == "Storm":
                 self.shower = get_base_outfit(
-                    {"hair": "_wet",
+                    {"hair": "_wet_long",
                     "face_outer_accessory": "_towel", "shame": 0})
             else:
                 self.shower = get_base_outfit(
@@ -1044,7 +1071,7 @@ init python:
                     "bottom": "_skirt",
                     "top": "_tube_top",
                     "gloves": "_gloves",
-                    "scarf": "_sweater",
+                    "belt": "_sweater",
                     "outfit_active": 2})
 
                 self.nude["hair"] = "_evo"
@@ -1308,6 +1335,62 @@ init python:
                     "top": "_black_shirt",
                     "jacket": "_jacket",
                     "outfit_active": 2})
+
+                self.nude["hair"] = "_short"
+            elif self.tag == "Mystique":
+                self.first_casual_outfit = get_base_outfit(
+                    {"face_inner_accessory": "_glasses", "hair": "_short",
+                    "bra": "_black_bra", "underwear": "_black_panties",
+                    "bottom": "_skirt",
+                    "top": "_purple_shirt",
+                    "jacket": "_jacket",
+                    "outfit_active": 2})
+
+                self.second_casual_outfit = get_base_outfit(
+                    {"face_inner_accessory": "_glasses", "hair": "_short",
+                    "bra": "_black_bra", "underwear": "_black_panties",
+                    "bottom": "_skirt",
+                    "top": "_purple_shirt",
+                    "jacket": "_jacket",
+                    "outfit_active": 2})
+
+                self.gym_clothes = get_base_outfit(
+                    {"face_inner_accessory": "_glasses", "hair": "_short",
+                    "bra": "_black_bra", "underwear": "_black_panties",
+                    "bottom": "_skirt",
+                    "top": "_purple_shirt",
+                    "jacket": "_jacket",
+                    "outfit_active": 2})
+
+                self.sleepwear = get_base_outfit(
+                    {"hair": "_short",
+                    "bra": "_black_bra", "underwear": "_black_panties",
+                    "shame": 25})
+
+                self.swimwear = get_base_outfit(
+                    {"hair": "_short",
+                    "bra": "_black_bra", "underwear": "_black_panties"})
+
+                self.halloween_costume = get_base_outfit(
+                    {"face_inner_accessory": "_glasses", "hair": "_short",
+                    "bra": "_black_bra", "underwear": "_black_panties",
+                    "bottom": "_skirt",
+                    "top": "_purple_shirt",
+                    "jacket": "_jacket",
+                    "outfit_active": 2})
+
+                self.disguise = get_base_outfit(
+                    {"face_inner_accessory": "_glasses", "hair": "_short",
+                    "bra": "_black_bra", "underwear": "_black_panties",
+                    "bottom": "_skirt",
+                    "top": "_purple_shirt",
+                    "jacket": "_jacket",
+                    "outfit_active": 2})
+
+                self.true_self = get_base_outfit(
+                    {"hair": "_long", "face_outer_accessory": "_skull",
+                    "dress": "_white_dress", "boots": "_boots",
+                    "belt": "_skull_belt", "gloves": "_gloves"})
 
                 self.nude["hair"] = "_short"
 
@@ -1969,11 +2052,11 @@ init python:
             "face_piercings": "", "makeup": "", "gag": "",
             "face_inner_accessory": "", "hair": "", "face_outer_accessory": "",
             "tattoos": "", "piercings": "", "clamps": "", "rope": "",
-            "rope": "", "bra": "", "underwear": "",
+            "bra": "", "underwear": "",
             "hose": "", "bottom": "",
             "dress": "", "boots": "", "loincloth": "", "top": "",
             "neck": "", "gloves": "", "sleeves": "",
-            "suspenders": "", "scarf": "", "jacket": "", "cloak": "",
+            "suspenders": "", "belt": "", "jacket": "", "cloak": "",
             "held_item": "",
             "shame": 0, "outfit_active": False}
 

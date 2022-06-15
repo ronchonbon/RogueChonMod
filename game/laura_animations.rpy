@@ -284,6 +284,36 @@ image Laura_titjob_back_hair_animation2:
         ease 0.5 rotate -5
         repeat
 
+image Laura_titjob_back_hair_animation3:
+    animation
+    "Laura_back_hair"
+
+    subpixel True
+    parallel:
+        ease 2 yoffset 80
+        pause 0.1
+        ease 2 yoffset 100
+        pause 0.1
+        repeat
+    parallel:
+        pause 0.1
+        ease 2 rotate -5
+        pause 0.1
+        ease 2 rotate 0
+        repeat
+
+image Laura_titjob_back_hair_animation5:
+    animation
+    "Laura_back_hair"
+
+    subpixel True
+    parallel:
+        ease 2 yoffset 20
+        pause 0.1
+        ease 2 yoffset 40
+        pause 0.1
+        repeat
+
 image Laura_titjob_body_animation0:
     animation
     "Laura_titjob_body"
@@ -319,6 +349,30 @@ image Laura_titjob_body_animation2:
         ease 0.5 yoffset 80
         repeat
 
+image Laura_titjob_body_animation3:
+    animation
+    "Laura_titjob_body"
+
+    subpixel True
+    block:
+        ease 2 yoffset 60
+        pause 0.1
+        ease 2 yoffset 100
+        pause 0.1
+        repeat
+
+image Laura_titjob_body_animation5:
+    animation
+    "Laura_titjob_body"
+
+    subpixel True
+    block:
+        ease 2 yoffset 20
+        pause 0.1
+        ease 2 yoffset 40
+        pause 0.1
+        repeat
+
 image Laura_titjob_right_arm_back_animation0:
     animation
     "Laura_titjob_right_arm_back"
@@ -352,6 +406,30 @@ image Laura_titjob_right_arm_back_animation2:
         ease 1 yoffset 0
         pause 0.2
         ease 0.4 yoffset 80
+        repeat
+
+image Laura_titjob_right_arm_back_animation3:
+    animation
+    "Laura_titjob_right_arm_back"
+
+    subpixel True
+    block:
+        ease 2 yoffset 70
+        pause 0.1
+        ease 2 yoffset 100
+        pause 0.1
+        repeat
+
+image Laura_titjob_right_arm_back_animation5:
+    animation
+    "Laura_titjob_right_arm_back"
+
+    subpixel True
+    block:
+        ease 2 yoffset 10
+        pause 0.1
+        ease 2 yoffset 40
+        pause 0.1
         repeat
 
 image Laura_titjob_right_breast_animation0:
@@ -391,6 +469,30 @@ image Laura_titjob_right_breast_animation2:
         ease 0.4 yoffset 80
         repeat
 
+image Laura_titjob_right_breast_animation3:
+    animation
+    "Laura_titjob_right_breast"
+
+    subpixel True
+    block:
+        pause 0.2
+        ease 1.9 yoffset 70
+        pause 0.2
+        ease 1.9 yoffset 105
+        repeat
+
+image Laura_titjob_right_breast_animation5:
+    animation
+    "Laura_titjob_right_breast"
+
+    subpixel True
+    block:
+        pause 0.2
+        ease 1.9 yoffset 10
+        pause 0.2
+        ease 1.9 yoffset 45
+        repeat
+
 image Laura_titjob_right_arm_animation0:
     animation
     "Laura_titjob_right_arm"
@@ -424,6 +526,30 @@ image Laura_titjob_right_arm_animation2:
         ease 1 yoffset 0
         pause 0.2
         ease 0.4 yoffset 80
+        repeat
+
+image Laura_titjob_right_arm_animation3:
+    animation
+    "Laura_titjob_right_arm"
+
+    subpixel True
+    block:
+        ease 2 yoffset 70
+        pause 0.1
+        ease 2 yoffset 100
+        pause 0.1
+        repeat
+
+image Laura_titjob_right_arm_animation5:
+    animation
+    "Laura_titjob_right_arm"
+
+    subpixel True
+    block:
+        ease 2 yoffset 10
+        pause 0.1
+        ease 2 yoffset 40
+        pause 0.1
         repeat
 
 image Laura_titjob_head_animation0:
@@ -480,6 +606,36 @@ image Laura_titjob_head_animation2:
         ease 0.5 rotate -5
         repeat
 
+image Laura_titjob_head_animation3:
+    animation
+    "Laura_head"
+
+    subpixel True
+    parallel:
+        ease 2 yoffset 80
+        pause 0.1
+        ease 2 yoffset 100
+        pause 0.1
+        repeat
+    parallel:
+        pause 0.1
+        ease 2 rotate -5
+        pause 0.1
+        ease 2 rotate 0
+        repeat
+
+image Laura_titjob_head_animation5:
+    animation
+    "Laura_head"
+
+    subpixel True
+    block:
+        ease 2 yoffset 20
+        pause 0.1
+        ease 2 yoffset 40
+        pause 0.1
+        repeat
+
 image Laura_titjob_left_breast_animation0:
     animation
     "Laura_titjob_left_breast"
@@ -517,6 +673,31 @@ image Laura_titjob_left_breast_animation2:
         ease 0.4 yoffset 80
         repeat
 
+image Laura_titjob_left_breast_animation3:
+    animation
+    "Laura_titjob_left_breast"
+
+    subpixel True
+    block:
+        pause 0.2
+        ease 1.9 yoffset 70
+        pause 0.2
+        ease 1.9 yoffset 105
+        repeat
+
+image Laura_titjob_left_breast_animation5:
+    animation
+    "Laura_titjob_left_breast"
+
+    subpixel True
+    rotate -10
+    block:
+        pause 0.2
+        ease 1.9 yoffset 10
+        pause 0.2
+        ease 1.9 yoffset 45
+        repeat
+
 image Laura_titjob_left_arm_animation0:
     animation
     "Laura_titjob_left_arm"
@@ -547,9 +728,34 @@ image Laura_titjob_left_arm_animation2:
 
     subpixel True
     block:
-        ease 1 yoffset 0
-        pause 0.2
-        ease 0.4 yoffset 80
+        ease 1 yoffset -20
+        pause 0.1
+        ease 0.5 yoffset 80
+        repeat
+
+image Laura_titjob_left_arm_animation3:
+    animation
+    "Laura_titjob_left_arm"
+
+    subpixel True
+    block:
+        ease 2 yoffset 60
+        pause 0.1
+        ease 2 yoffset 90
+        pause 0.1
+        repeat
+
+image Laura_titjob_left_arm_animation5:
+    animation
+    "Laura_titjob_left_arm"
+
+    subpixel True
+    rotate -10
+    block:
+        ease 2 yoffset 0
+        pause 0.1
+        ease 2 yoffset 30
+        pause 0.1
         repeat
 
 image Laura_titjob_mid_hair_animation0:
@@ -606,6 +812,36 @@ image Laura_titjob_mid_hair_animation2:
         ease 0.4 rotate -5
         repeat
 
+image Laura_titjob_mid_hair_animation3:
+    animation
+    "Laura_titjob_mid_hair"
+
+    subpixel True
+    parallel:
+        ease 2 yoffset 85
+        pause 0.1
+        ease 2 yoffset 100
+        pause 0.1
+        repeat
+    parallel:
+        pause 0.1
+        ease 2 rotate -5
+        pause 0.1
+        ease 2 rotate 0
+        repeat
+
+image Laura_titjob_mid_hair_animation5:
+    animation
+    "Laura_titjob_mid_hair"
+
+    subpixel True
+    block:
+        ease 2 yoffset 25
+        pause 0.1
+        ease 2 yoffset 40
+        pause 0.1
+        repeat
+
 image Laura_titjob_hair_animation0:
     animation
     "Laura_titjob_hair"
@@ -658,6 +894,37 @@ image Laura_titjob_hair_animation2:
         ease 1 rotate 0
         pause 0.1
         ease 0.5 rotate -5
+        repeat
+
+image Laura_titjob_hair_animation3:
+    animation
+    "Laura_titjob_hair"
+
+    subpixel True
+    rotate 0
+    parallel:
+        ease 2 yoffset 80
+        pause 0.1
+        ease 2 yoffset 100
+        pause 0.1
+        repeat
+    parallel:
+        pause 0.1
+        ease 2 rotate -5
+        pause 0.1
+        ease 2 rotate 0
+        repeat
+
+image Laura_titjob_hair_animation5:
+    animation
+    "Laura_titjob_hair"
+
+    subpixel True
+    block:
+        ease 2 yoffset 20
+        pause 0.1
+        ease 2 yoffset 40
+        pause 0.1
         repeat
 
 layeredimage Laura_sprite titjob:

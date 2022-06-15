@@ -7,6 +7,7 @@ define ch_l = Character('[LauraX.name]', color = "#d8b600", image = "Laura_sprit
 define ch_j = Character('[JeanX.name]', color = "#b2d950", image = "Jean_sprite", show_two_window = True)
 define ch_s = Character('[StormX.name]', color = "#b2d950", image = "Storm_sprite", show_two_window = True)
 define ch_v = Character('[JubesX.name]', color = "#b2d950", image = "Jubes_sprite", show_two_window = True)
+# define ch_m = Character('[MystiqueX.name]', color = "b2d950", image = "Mystique_sprite", show_two_window = True)
 
 define ch_x = Character('Professor X', color = "#a09400", image = "Xavier_sprite", show_two_window = True)
 define ch_b = Character('Dr. McCoy', color = "#1033b2", image = "arrow", show_two_window = True)
@@ -119,7 +120,7 @@ init -1:
 
     default menu_context = None
 
-    default dresses = ["_chinese_dress", "_red_dress", "_blue_dress"]
+    default dresses = ["_chinese", "_red_dress", "_blue_dress", "_white_dress"]
     default bodysuits = ["_catsuit", "_raven", "_domme", "_sci_fi", "_onepiece_swimsuit", "_sexy_swimsuit"]
     default pants = ["_pants", "_yoga_pants", "_capris", "_black_jeans", "_leather_pants", "_mesh_pants", "_opaque_fetish", "_sheer_fetish", "_black_and_blue_pants"]
     default skirts = ["_skirt", "_cosplay_skirt", "_blue_skirt", "_cheerleader_skirt"]
@@ -157,6 +158,9 @@ init -1:
         "dildo_pussy", "dildo_ass",
         "sex", "anal", "hotdog"]
 
+    define Emma_harden = ImageDissolve("images/wipes/Emma_harden.jpg", 0.5, 8)
+    define Mystique_dissolve = ImageDissolve("images/wipes/Mystique_dissolve.jpg", 1.0, 8)
+
 label start:
     $ Player = PlayerClass()
 
@@ -167,55 +171,74 @@ label start:
     $ JeanX = GirlClass("Jean", 0, 0, 1000, 10)
     $ StormX = GirlClass("Storm", 500, 0, 100, 10)
     $ JubesX = GirlClass("Jubes", 500, 50, 50, 10)
+    # $ MystiqueX = GirlClass("Mystique", 0, 0, 0, 15)
 
     $ focused_Girl = RogueX
 
     show screen status_screen
     show screen inventory_button
 
-    # $ bg_current = "bg_emma"
-    # $ time_index = 2
-    # $ current_time = "evening"
+    $ bg_current = "bg_emma"
+    $ time_index = 2
+    $ current_time = "evening"
+
+    scene background onlayer backdrop
+    scene
+
+    python:
+        for G in all_Girls:
+            active_Girls.append(G)
+            G.change_face("_sexy")
+            G.change_outfit("nude")
+            G.grool = 2
+            G.spunk["mouth"] = True
+            G.spunk["pussy"] = True
+            G.spunk["anus"] = True
+
+    $ Player.sprite = True
+    $ show_feet = True
+    $ action_speed = 4
+    $ Player.cock_position = "in"
+    $ Player.primary_action = "sex"
+    $ Player.secondary_action = "finger_ass"
     #
-    # scene background onlayer backdrop
-    # scene
+    # $ RogueX.change_outfit("nude")
+    # $ RogueX.outfit["dress"] = "_raven"
+    # $ RogueX.outfit["cloak"] = "_raven_cloak"
+    # $ KittyX.change_outfit("nude")
+    # $ KittyX.outfit["dress"] = "_chinese"
+    # $ EmmaX.change_outfit("domme_outfit")
+    # $ EmmaX.arm_pose = 2
+    # $ LauraX.change_outfit("nude")
+    # $ LauraX.outfit["dress"] = "_bunny_suit"
+    # $ LauraX.outfit["hose"] = "_pantyhose"
+    # $ LauraX.outfit["gloves"] = "_bunny"
+    # $ LauraX.outfit["face_outer_accessory"] = "_bunny_ears"
+    # $ JeanX.change_outfit("nude")
+    # $ JeanX.outfit["dress"] = "_sci_fi"
+    # $ MystiqueX.change_outfit("true_self")
     #
-    # python:
-    #     for G in all_Girls:
-    #         active_Girls.append(G)
-    # #         G.change_face("_sexy")
-    #         # G.change_outfit("nude")
-    #         # G.grool = 2
-    #         # G.spunk["pussy"] = True
-    #         # G.spunk["anus"] = True
-    #
-    # $ Player.sprite = True
-    # $ show_feet = True
-    # $ action_speed = 0
-    # $ Player.cock_position = "in"
-    # # $ Player.primary_action = "sex"
-    # $ Player.secondary_action = "finger_ass"
-    #
-    # # show Rogue_sprite titjob at sprite_location(0.5)
-    # # show Kitty_sprite titjob at sprite_location(0.5)
-    # # show Emma_sprite titjob at sprite_location(0.5)
-    # # show Laura_sprite titjob at sprite_location(0.5)
-    # # show Jean_sprite titjob at sprite_location(0.5)
-    # # show Storm_sprite titjob at sprite_location(0.5)
-    # # show Jubes_sprite titjob at sprite_location(0.5)
-    #
-    # show Rogue_sprite standing at sprite_location(stage_far_far_left)
-    # show Kitty_sprite standing at sprite_location(stage_far_left)
-    # show Emma_sprite standing at sprite_location(stage_left)
-    # show Laura_sprite standing at sprite_location(stage_center)
-    # show Jean_sprite standing at sprite_location(stage_right)
-    # show Storm_sprite standing at sprite_location(stage_far_right)
-    # show Jubes_sprite standing at sprite_location(stage_far_far_right)
-    #
-    # ""
-    #
-    # $ active_Girls = []
-    # $ focused_Girl = RogueX
+    # show Rogue_sprite titjob at sprite_location(0.5)
+    show Kitty_sprite blowjob at sprite_location(0.5)
+    # show Emma_sprite titjob at sprite_location(0.5)
+    # show Laura_sprite titjob at sprite_location(0.5)
+    # show Jean_sprite titjob at sprite_location(0.5)
+    # show Storm_sprite titjob at sprite_location(0.5)
+    # show Jubes_sprite titjob at sprite_location(0.5)
+
+    # show Rogue_sprite standing at sprite_location(0.15)
+    # show Kitty_sprite standing at sprite_location(0.25)
+    # show Emma_sprite standing normal at sprite_location(0.35)
+    # show Laura_sprite standing at sprite_location(0.45)
+    # show Jean_sprite standing at sprite_location(0.55)
+    # show Storm_sprite standing at sprite_location(0.65)
+    # show Jubes_sprite standing at sprite_location(0.75)
+    # show Mystique_sprite standing normal at sprite_location(0.85)
+
+    ""
+
+    $ active_Girls = []
+    $ focused_Girl = RogueX
 
     jump prologue
 

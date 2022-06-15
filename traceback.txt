@@ -1,31 +1,23 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/cheats.rpy", line 65, in script call
-    call wardrobe_editor(Girl)
-  File "game/cheats.rpy", line 130, in script
-    menu wardrobe_menu:
-Exception: DynamicImage u'images/Kitty_doggy/Kitty_doggy_bra[KittyX.outfit[bra]].png': could not find image. (u'images/Kitty_doggy/Kitty_doggy_bra_bra.png')
+  File "game/script.rpy", line 222, in script
+    show Kitty_sprite doggy at sprite_location(0.5)
+Exception: DynamicImage u'Kitty_doggy_ass_animation[action_speed]': could not find image. (u'Kitty_doggy_ass_animation4')
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/cheats.rpy", line 65, in script call
-    call wardrobe_editor(Girl)
-  File "game/cheats.rpy", line 130, in script
-    menu wardrobe_menu:
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1688, in execute
-    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1060, in menu
-    rv = renpy.store.menu(new_items)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1296, in display_menu
-    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3737, in interact_core
-    root_widget.visit_all(lambda i : i.per_interact())
+  File "game/script.rpy", line 222, in script
+    show Kitty_sprite doggy at sprite_location(0.5)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1197, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1167, in show_imspec
+    atl=atl)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 768, in show
+    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 1147, in add
+    thing.visit_all(lambda d : None)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
     d.visit_all(callback, seen)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
@@ -36,39 +28,21 @@ Full traceback:
     d.visit_all(callback, seen)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
     d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 570, in visit_all
-    callback(self)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3737, in <lambda>
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 752, in per_interact
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1443, in update
+    child.visit_all(lambda c : c.per_interact())
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 744, in visit
     self.find_target()
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 652, in find_target
     raise Exception(error)
-Exception: DynamicImage u'images/Kitty_doggy/Kitty_doggy_bra[KittyX.outfit[bra]].png': could not find image. (u'images/Kitty_doggy/Kitty_doggy_bra_bra.png')
+Exception: DynamicImage u'Kitty_doggy_ass_animation[action_speed]': could not find image. (u'Kitty_doggy_ass_animation4')
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like Chonky Mod 0.2d
-Tue Jun 14 04:44:02 2022
+Wed Jun 15 02:32:28 2022

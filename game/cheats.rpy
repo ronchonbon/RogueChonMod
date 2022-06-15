@@ -306,7 +306,7 @@ label wardrobe_editor(Girl):
                             $ Girl.outfit["bra"] = "_tank"
                         "Add buttoned tank top" if Girl == RogueX:
                             $ Girl.outfit["bra"] = "_buttoned_tank"
-                        "Add basic bra" if Girl in [RogueX, KittyX, EmmaX]:
+                        "Add basic bra" if Girl in [RogueX, KittyX]:
                             $ Girl.outfit["bra"] = "_bra"
                         "Add cami" if Girl == KittyX:
                             $ Girl.outfit["bra"] = "_cami"
@@ -547,8 +547,12 @@ label wardrobe_editor(Girl):
                             elif Girl.outfit["hair"] == "_mohawk":
                                 $ Girl.outfit["hair"] = "_short"
                             elif Girl.outfit["hair"] == "_short":
-                                $ Girl.outfit["hair"] = "_wet"
-                            elif Girl.outfit["hair"] == "_wet":
+                                $ Girl.outfit["hair"] = "_wet_long"
+                            elif Girl.outfit["hair"] == "_wet_long":
+                                $ Girl.outfit["hair"] = "_wet_mohawk"
+                            elif Girl.outfit["hair"] == "_wet_mohawk":
+                                $ Girl.outfit["hair"] = "_wet_short"
+                            elif Girl.outfit["hair"] == "_wet_short":
                                 $ Girl.outfit["hair"] = "_long"
 
                             $ Girl.outfit["back_hair"] = Girl.outfit["hair"]
@@ -594,10 +598,10 @@ label wardrobe_editor(Girl):
                             else:
                                 $ Girl.outfit["boots"] = ""
                         "Toggle sweater" if Girl == RogueX:
-                            if Girl.outfit["scarf"] != "_sweater":
-                                $ Girl.outfit["scarf"] = "_sweater"
+                            if Girl.outfit["belt"] != "_sweater":
+                                $ Girl.outfit["belt"] = "_sweater"
                             else:
-                                $ Girl.outfit["scarf"] = ""
+                                $ Girl.outfit["belt"] = ""
                         "Toggle spiked collar" if Girl in [RogueX, EmmaX]:
                             if Girl.outfit["neck"] != "_spiked_collar":
                                 $ Girl.outfit["neck"] = "_spiked_collar"

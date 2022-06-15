@@ -1,7 +1,5 @@
 layeredimage Kitty_sprite standing:
-    if KittyX.outfit["dress"]:
-        "images/Kitty_standing/Kitty_standing_back_outer_accessory[KittyX.outfit[dress]].png"
-    elif KittyX.outfit["bottom"] == "_dress":
+    if KittyX.outfit["bottom"] == "_dress":
         "images/Kitty_standing/Kitty_standing_back_outer_accessory[KittyX.outfit[bottom]].png"
 
     always:
@@ -147,10 +145,10 @@ layeredimage Kitty_head:
         "Kitty_blinking"
 
     if KittyX.spunk["mouth"]:
-        "images/Kitty_standing/Kitty_spunk_standing[KittyX.mouth].png"
+        "images/Kitty_standing/Kitty_standing_spunk_mouth[KittyX.mouth].png"
 
     if KittyX.spunk["face"]:
-        "images/Kitty_standing/Kitty_standing_face_spunk.png"
+        "images/Kitty_standing/Kitty_standing_spunk_face.png"
 
     if KittyX.wet:
         "images/Kitty_standing/Kitty_standing_hair_wet.png"
@@ -213,14 +211,19 @@ layeredimage Kitty_blowjob_head:
     if KittyX.wet or KittyX.outfit["hair"] == "_wet":
         "images/Kitty_blowjob/Kitty_blowjob_back_hair.png"
 
-    if renpy.showing("Kitty_sprite_blowjob") and action_speed > 2 and KittyX.wet and KittyX.blushing:
+    if not renpy.showing("Kitty_sprite blowjob"):
+        Null()
+    elif action_speed > 1 and KittyX.wet and KittyX.blushing:
         "images/Kitty_blowjob/Kitty_blowjob_face_open_wet_blush.png"
-    elif renpy.showing("Kitty_sprite_blowjob") and action_speed > 2 and KittyX.wet:
+    elif action_speed > 1 and KittyX.wet:
         "images/Kitty_blowjob/Kitty_blowjob_face_open_wet.png"
-    elif renpy.showing("Kitty_sprite_blowjob") and action_speed > 2 and KittyX.blushing:
+    elif action_speed > 1 and KittyX.blushing:
         "images/Kitty_blowjob/Kitty_blowjob_face_open_blush.png"
-    elif renpy.showing("Kitty_sprite_blowjob") and action_speed > 2:
+    elif action_speed > 1:
         "images/Kitty_blowjob/Kitty_blowjob_face_open.png"
+
+    if renpy.showing("Kitty_sprite blowjob") and action_speed > 1:
+        Null()
     elif KittyX.wet and KittyX.blushing:
         "images/Kitty_blowjob/Kitty_blowjob_face_closed_wet_blush.png"
     elif KittyX.wet:
@@ -230,20 +233,21 @@ layeredimage Kitty_blowjob_head:
     else:
         "images/Kitty_blowjob/Kitty_blowjob_face_closed.png"
 
-    if renpy.showing("Kitty_sprite titjob") and action_speed == 3:
+    if renpy.showing("Kitty_sprite titjob") and action_speed > 2:
         "images/Kitty_blowjob/Kitty_blowjob_mouth_tongue.png"
     elif renpy.showing("Kitty_sprite blowjob") and action_speed == 1:
         "images/Kitty_blowjob/Kitty_blowjob_mouth_tongue.png"
+    elif renpy.showing("Kitty_sprite blowjob") and action_speed == 2:
+        "Kitty_blowjob_mouth_animation[action_speed]"
     elif renpy.showing("Kitty_sprite blowjob") and action_speed > 2:
         "images/Kitty_blowjob/Kitty_blowjob_mouth_sucking.png"
     else:
         "images/Kitty_blowjob/Kitty_blowjob_mouth[KittyX.mouth].png"
 
-    if renpy.showing("Kitty_sprite blowjob") and action_speed == 2:
-        "Kitty_blowjob_mouth_animations"
-
     if not KittyX.spunk["mouth"]:
         Null()
+    elif renpy.showing("Kitty_sprite titjob") and action_speed > 2:
+        "images/Kitty_blowjob/Kitty_blowjob_spunk_mouth_tongue.png"
     elif renpy.showing("Kitty_sprite blowjob") and action_speed == 1:
         "images/Kitty_blowjob/Kitty_blowjob_spunk_mouth_tongue.png"
     elif renpy.showing("Kitty_sprite blowjob") and action_speed > 2:
@@ -281,22 +285,27 @@ layeredimage Kitty_blowjob_head:
 
     anchor (0.5, 0.5)
 
+layeredimage Kitty_blowjob_mouth:
+    if KittyX.spunk["mouth"]:
+        "images/Kitty_blowjob/Kitty_blowjob_spunk_mouth_sucking_under.png"
+    else:
+        "images/Kitty_blowjob/Kitty_blowjob_mouth_sucking.png"
 
+    anchor (0.5, 0.65)
 
+layeredimage Kitty_blowjob_mask:
+    always:
+        "images/Kitty_blowjob/Kitty_blowjob_face_mask.png"
 
+    if KittyX.spunk["mouth"] and action_speed == 2:
+        "images/Kitty_blowjob/Kitty_blowjob_spunk_mouth_sucking_under.png"
 
+    anchor (0.5, 0.5) pos (0.5, 0.5)
 
+image Kitty_blowjob_spunk_mouth_over:
+    "images/Kitty_blowjob/Kitty_blowjob_spunk_mouth_sucking_over.png"
 
-
-
-
-
-
-
-
-
-
-
+    anchor (0.5, 0.5)
 
 layeredimage Kitty_blowjob_body:
     if "blanket" in KittyX.recent_history:

@@ -1331,7 +1331,7 @@ label study_entry:
             "Ask [StormX.name]" if time_index >= 3 and StormX in Party:
                 $ decision = "storm"
             "Leave":
-                jump misplaced
+                jump reset_location
 
         if decision == "knock":
             if time_index >= 3:
@@ -1531,7 +1531,7 @@ label study_room:
 
                     $ bg_current = "bg_campus"
 
-                    jump misplaced
+                    jump reset_location
                 else:
                     if round > 10:
                         call wait

@@ -2746,12 +2746,12 @@ label Rogue_wardrobe_menu:
             ch_p "Try on those sheer fetish pants I bought you."
             $ RogueX.outfit["bottom"] = "_sheer_fetish"
 
-        "How about that sweater?" if RogueX.outfit["scarf"] != "_sweater" and "halloween" in RogueX.history:
+        "How about that sweater?" if RogueX.outfit["belt"] != "_sweater" and "halloween" in RogueX.history:
             ch_p "What about that sweater you wore at the party?"
-            $ RogueX.outfit["scarf"] = "_sweater"
-        "Lose the sweater?" if RogueX.outfit["scarf"] == "_sweater" and "halloween" in RogueX.history:
+            $ RogueX.outfit["belt"] = "_sweater"
+        "Lose the sweater?" if RogueX.outfit["belt"] == "_sweater" and "halloween" in RogueX.history:
             ch_p "You can do without the sweater."
-            $ RogueX.outfit["scarf"] = ""
+            $ RogueX.outfit["belt"] = ""
         "Never mind":
 
             pass

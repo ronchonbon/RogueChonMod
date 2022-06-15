@@ -90,8 +90,8 @@ layeredimage Rogue_sprite standing:
     else:
         "images/Rogue_standing/Rogue_standing_top[RogueX.outfit[top]][RogueX.arm_pose].png"
 
-    if RogueX.outfit["scarf"]:
-        "images/Rogue_standing/Rogue_standing_scarf[RogueX.outfit[scarf]][RogueX.arm_pose].png"
+    if RogueX.outfit["belt"]:
+        "images/Rogue_standing/Rogue_standing_belt[RogueX.outfit[belt]][RogueX.arm_pose].png"
 
     if RogueX.outfit["jacket"]:
         "images/Rogue_standing/Rogue_standing_jacket[RogueX.outfit[jacket]][RogueX.arm_pose].png"
@@ -136,12 +136,12 @@ layeredimage Rogue_head:
     else:
         "images/Rogue_blowjob/Rogue_blowjob_face[RogueX.blushing].png"
 
-    if renpy.showing("Rogue_sprite blowjob") and action_speed == 1:
+    if renpy.showing("Rogue_sprite titjob") and action_speed > 2:
         "images/Rogue_blowjob/Rogue_blowjob_mouth_tongue.png"
-    elif renpy.showing("Rogue_sprite blowjob") and not action_speed:
-        "images/Rogue_blowjob/Rogue_blowjob_mouth[RogueX.mouth].png"
-    elif renpy.showing("Rogue_sprite blowjob"):
-        Null()
+    elif renpy.showing("Rogue_sprite blowjob") and action_speed == 1:
+        "images/Rogue_blowjob/Rogue_blowjob_mouth_tongue.png"
+    elif renpy.showing("Rogue_sprite blowjob") and action_speed > 1:
+        "Rogue_blowjob_mouth_animation[action_speed]" pos (0.164, 0.55)
     elif RogueX.mouth == "_sucking":
         "images/Rogue_blowjob/Rogue_blowjob_mouth_tongue.png"
     else:
@@ -149,19 +149,16 @@ layeredimage Rogue_head:
 
     if not RogueX.spunk["mouth"]:
         Null()
+    elif renpy.showing("Rogue_sprite titjob") and action_speed > 2:
+        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_tongue.png"
     elif renpy.showing("Rogue_sprite blowjob") and action_speed == 1:
         "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_tongue.png"
-    elif renpy.showing("Rogue_sprite blowjob") and not action_speed:
-        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth[RogueX.mouth].png"
-    elif renpy.showing("Rogue_sprite blowjob"):
-        Null()
+    elif renpy.showing("Rogue_sprite blowjob") and action_speed > 2:
+        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_sucking_under.png"
     elif RogueX.mouth == "_sucking":
         "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_tongue.png"
     else:
         "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth[RogueX.mouth].png"
-
-    if renpy.showing("Rogue_sprite blowjob") and action_speed > 1:
-        "Rogue_blowjob_mouth_animation[action_speed]" pos (0.164, 0.55)
 
     if RogueX.spunk["chin"]:
         "images/Rogue_blowjob/Rogue_blowjob_spunk_chin.png"
@@ -205,22 +202,16 @@ image Rogue_handjob_over:
 
     anchor (0.5, 0.5)
 
-layeredimage Rogue_titjob_under:
-    always:
-        "Rogue_back_hair" pos (0.28, -0.09) zoom 0.9
-
+layeredimage Rogue_titjob_body:
     always:
         "images/Rogue_titjob/Rogue_titjob_body.png"
 
     if RogueX.spunk["breasts"]:
         "images/Rogue_titjob/Rogue_titjob_spunk_breasts_under.png"
 
-    always:
-        "Rogue_head" pos (0.28, -0.09) zoom 0.9
-
     anchor (0.5, 0.5)
 
-layeredimage Rogue_titjob_over:
+layeredimage Rogue_titjob_breasts:
     always:
         "images/Rogue_titjob/Rogue_titjob_breasts[RogueX.outfit[piercings]].png"
 
@@ -231,7 +222,7 @@ layeredimage Rogue_titjob_over:
 
 layeredimage Rogue_blowjob_mouth:
     if RogueX.spunk["mouth"]:
-        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_sucking.png"
+        "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_sucking_under.png"
     else:
         "images/Rogue_blowjob/Rogue_blowjob_mouth_sucking.png"
 
@@ -645,12 +636,12 @@ layeredimage Rogue_doggy_ass:
     else:
         "images/Rogue_doggy/Rogue_doggy_top[RogueX.outfit[top]]_ass.png"
 
-    if not RogueX.outfit["scarf"]:
+    if not RogueX.outfit["belt"]:
         Null()
     elif RogueX.upskirt or (Player.sprite and Player.cock_position == "out"):
-        "images/Rogue_doggy/Rogue_doggy_scarf[RogueX.outfit[scarf]]_up.png"
+        "images/Rogue_doggy/Rogue_doggy_belt[RogueX.outfit[belt]]_up.png"
     else:
-        "images/Rogue_doggy/Rogue_doggy_scarf[RogueX.outfit[scarf]].png"
+        "images/Rogue_doggy/Rogue_doggy_belt[RogueX.outfit[belt]].png"
 
     if Player.sprite and Player.cock_position == "in":
         AlphaMask("Zero_cock_Rogue", "Zero_cock_Rogue_mask")

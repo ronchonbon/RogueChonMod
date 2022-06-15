@@ -35,11 +35,11 @@ layeredimage Storm_sprite standing:
         Null()
     elif StormX.outfit["underwear"] == "_bikini_bottoms" and (StormX.outfit["bra"] != "_bikini_top" or StormX.bra_pulled_up):
         "images/Storm_standing/Storm_standing_underwear_bikini_bottoms_unclipped.png"
-    elif StormX.underwear_pulled_down and StormX.grool > 1:
+    elif StormX.underwear_pulled_down and StormX.grool > 1 and StormX.outfit["underwear"] != "_cosplay_panties":
         "images/Storm_standing/Storm_standing_underwear[StormX.outfit[underwear]]_down_grool.png"
     elif StormX.underwear_pulled_down:
         "images/Storm_standing/Storm_standing_underwear[StormX.outfit[underwear]]_down.png"
-    elif StormX.grool > 1:
+    elif StormX.grool > 1 and StormX.outfit["underwear"] != "_cosplay_panties":
         "images/Storm_standing/Storm_standing_underwear[StormX.outfit[underwear]]_grool.png"
     else:
         "images/Storm_standing/Storm_standing_underwear[StormX.outfit[underwear]].png"

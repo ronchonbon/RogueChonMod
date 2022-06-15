@@ -1,4 +1,4 @@
-Tue Jun 14 04:30:03 2022
+Wed Jun 15 02:26:44 2022
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
  
@@ -6,33 +6,33 @@ Ren'Py 7.4.11.2266
 Bootstrap to the start of init.init took 0.06s
 Early init took 0.00s
 Loader init took 0.05s
-Loading error handling took 0.07s
-Loading script took 6.23s
-Loading save slot metadata. took 0.19s
+Loading error handling took 0.05s
+Loading script took 3.44s
+Loading save slot metadata. took 0.13s
 Loading persistent took 0.01s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
 Set script version to: (6, 99, 13)
-Running init code took 0.23s
-Loading analysis data took 0.20s
-Analyze and compile ATL took 0.12s
+Running init code took 0.20s
+Loading analysis data took 0.04s
+Analyze and compile ATL took 0.16s
 Index archives took 0.00s
-Dump and make backups. took 0.10s
+Dump and make backups. took 0.11s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
-Initial gc. took 0.11s
+Initial gc. took 0.12s
 DPI scale factor: 2.500000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.23s
+Creating interface object took 0.24s
 Cleaning stores took 0.00s
-Init translation took 0.10s
+Init translation took 0.11s
 Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.06s
-Save pyanalysis. took 0.08s
-Save bytecode. took 0.32s
+Load screen analysis took 0.03s
+Analyze screens took 0.00s
+Save screen analysis took 0.00s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.31s
 Running _start took 0.00s
 Performance test:
 Interface start took 0.12s
@@ -62,155 +62,37 @@ Texture testing:
 Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
 Root FBO is: 0
 FBO Maximum Texture Size: 2048
-Cleaning stores took 0.00s
-Init translation took 0.00s
-Build styles took 0.00s
-Load screen analysis took 0.03s
-Analyze screens took 0.00s
-Prepare screens took 0.00s
-Running _start took 0.00s
 Resetting cache.
-Bootstrap to the start of init.init took 29.21s
+Bootstrap to the start of init.init took 61.60s
 Early init took 0.00s
 Loader init took 0.05s
 Loading error handling took 0.10s
-Loading script took 1.39s
-Loading save slot metadata. took 0.19s
+Loading script took 1.38s
+Loading save slot metadata. took 0.20s
 Loading persistent took 0.01s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
 Set script version to: (6, 99, 13)
-Running init code took 0.15s
+Running init code took 0.17s
 Loading analysis data took 0.04s
-Analyze and compile ATL took 0.11s
+Analyze and compile ATL took 0.13s
 Index archives took 0.00s
-Dump and make backups. took 0.09s
+Dump and make backups. took 0.11s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
 Initial gc. took 0.19s
 DPI scale factor: 2.500000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.21s
+Creating interface object took 0.24s
 Cleaning stores took 0.00s
-Init translation took 0.15s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.02s
-Save screen analysis took 0.04s
-Prepare screens took 0.06s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.14s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.13s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 32.90s
-Early init took 0.00s
-Loader init took 0.05s
-Loading error handling took 0.04s
-Loading script took 1.29s
-Loading save slot metadata. took 0.15s
-Loading persistent took 0.01s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.17s
-Loading analysis data took 0.04s
-Analyze and compile ATL took 0.10s
-Index archives took 0.00s
-Dump and make backups. took 0.10s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.20s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.20s
-Cleaning stores took 0.00s
-Init translation took 0.12s
-Build styles took 0.00s
-Load screen analysis took 0.03s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
-Prepare screens took 0.05s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.13s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 91.06s
-Early init took 0.00s
-Loader init took 0.05s
-Loading error handling took 0.04s
-Loading script took 1.41s
-Loading save slot metadata. took 0.16s
-Loading persistent took 0.01s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.18s
-Loading analysis data took 0.04s
-Analyze and compile ATL took 0.11s
-Index archives took 0.00s
-Dump and make backups. took 0.11s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.22s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.22s
-Cleaning stores took 0.00s
-Init translation took 0.14s
+Init translation took 0.13s
 Build styles took 0.00s
 Load screen analysis took 0.00s
 Analyze screens took 0.01s
 Save screen analysis took 0.03s
-Prepare screens took 0.07s
+Prepare screens took 0.06s
 Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
+Save bytecode. took 0.12s
 Running _start took 0.00s
 Performance test:
 Interface start took 0.14s
@@ -234,37 +116,226 @@ Texture testing:
 Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
 Root FBO is: 0
 FBO Maximum Texture Size: 2048
-Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/script.rpy", line 225, in script
+    show Jean_sprite titjob at sprite_location(0.5)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1197, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1167, in show_imspec
+    atl=atl)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 768, in show
+    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 1147, in add
+    thing.visit_all(lambda d : None)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 744, in visit
+    self.find_target()
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 652, in find_target
+    raise Exception(error)
+Exception: DynamicImage u'Jean_titjob_hair_animation[action_speed]': could not find image. (u'Jean_titjob_hair_animation3')
+
+While running game code:
+  File "game/script.rpy", line 225, in script
+    show Jean_sprite titjob at sprite_location(0.5)
+Exception: DynamicImage u'Jean_titjob_hair_animation[action_speed]': could not find image. (u'Jean_titjob_hair_animation3')
 Resetting cache.
-Bootstrap to the start of init.init took 99.08s
+Bootstrap to the start of init.init took 92.23s
 Early init took 0.00s
-Loader init took 0.05s
-Loading error handling took 0.05s
-Loading script took 1.45s
-Loading save slot metadata. took 0.16s
-Loading persistent took 0.02s
+Loader init took 0.06s
+Loading error handling took 0.04s
+Loading script took 1.48s
+Loading save slot metadata. took 0.21s
+Loading persistent took 0.01s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
 Set script version to: (6, 99, 13)
-Running init code took 0.21s
+Running init code took 0.18s
 Loading analysis data took 0.04s
-Analyze and compile ATL took 0.10s
+Analyze and compile ATL took 0.13s
 Index archives took 0.00s
-Dump and make backups. took 0.10s
+Dump and make backups. took 0.11s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.23s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.25s
+Cleaning stores took 0.00s
+Init translation took 0.15s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.03s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.12s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.16s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/script.rpy", line 224, in script
+    show Laura_sprite titjob at sprite_location(0.5)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1197, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1167, in show_imspec
+    atl=atl)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 768, in show
+    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 1147, in add
+    thing.visit_all(lambda d : None)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1443, in update
+    child.visit_all(lambda c : c.per_interact())
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 744, in visit
+    self.find_target()
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 652, in find_target
+    raise Exception(error)
+Exception: DynamicImage u'images/Laura_standing/Laura_standing_spunk_mouth[LauraX.mouth].png': could not find image. (u'images/Laura_standing/Laura_standing_spunk_mouth_lipbite.png')
+
+While running game code:
+  File "game/script.rpy", line 224, in script
+    show Laura_sprite titjob at sprite_location(0.5)
+Exception: DynamicImage u'images/Laura_standing/Laura_standing_spunk_mouth[LauraX.mouth].png': could not find image. (u'images/Laura_standing/Laura_standing_spunk_mouth_lipbite.png')
+Resetting cache.
+Bootstrap to the start of init.init took 97.38s
+Early init took 0.00s
+Loader init took 0.05s
+Loading error handling took 0.04s
+Loading script took 1.49s
+Loading save slot metadata. took 0.20s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.18s
+Loading analysis data took 0.04s
+Analyze and compile ATL took 0.13s
+Index archives took 0.00s
+Dump and make backups. took 0.11s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
 Initial gc. took 0.24s
 DPI scale factor: 2.500000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.19s
+Creating interface object took 0.23s
 Cleaning stores took 0.00s
-Init translation took 0.16s
+Init translation took 0.15s
 Build styles took 0.00s
 Load screen analysis took 0.00s
 Analyze screens took 0.01s
 Save screen analysis took 0.03s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.13s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.16s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Resetting cache.
+Bootstrap to the start of init.init took 101.07s
+Early init took 0.00s
+Loader init took 0.06s
+Loading error handling took 0.04s
+Loading script took 1.46s
+Loading save slot metadata. took 0.20s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.18s
+Loading analysis data took 0.04s
+Analyze and compile ATL took 0.13s
+Index archives took 0.00s
+Dump and make backups. took 0.11s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.23s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.24s
+Cleaning stores took 0.00s
+Init translation took 0.14s
+Build styles took 0.00s
+Load screen analysis took 0.03s
+Analyze screens took 0.00s
+Save screen analysis took 0.00s
 Prepare screens took 0.06s
 Save pyanalysis. took 0.00s
 Save bytecode. took 0.00s
@@ -292,39 +363,39 @@ Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
 Root FBO is: 0
 FBO Maximum Texture Size: 2048
 Resetting cache.
-Bootstrap to the start of init.init took 104.10s
+Bootstrap to the start of init.init took 117.00s
 Early init took 0.00s
-Loader init took 0.06s
+Loader init took 0.05s
 Loading error handling took 0.04s
-Loading script took 1.47s
-Loading save slot metadata. took 0.18s
+Loading script took 1.44s
+Loading save slot metadata. took 0.21s
 Loading persistent took 0.01s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
 Set script version to: (6, 99, 13)
-Running init code took 0.20s
-Loading analysis data took 0.04s
-Analyze and compile ATL took 0.12s
+Running init code took 0.19s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.14s
 Index archives took 0.00s
-Dump and make backups. took 0.10s
+Dump and make backups. took 0.11s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
-Initial gc. took 0.24s
+Initial gc. took 0.26s
 DPI scale factor: 2.500000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.22s
+Creating interface object took 0.24s
 Cleaning stores took 0.00s
 Init translation took 0.15s
 Build styles took 0.00s
-Load screen analysis took 0.03s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
-Prepare screens took 0.06s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
 Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
+Save bytecode. took 0.13s
 Running _start took 0.00s
 Performance test:
-Interface start took 0.17s
+Interface start took 0.16s
 
 Initializing gl renderer:
 primary display bounds: (0, 0, 3840, 2160)
@@ -346,18 +417,72 @@ Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
 Root FBO is: 0
 FBO Maximum Texture Size: 2048
 Resetting cache.
-Bootstrap to the start of init.init took 107.58s
+Bootstrap to the start of init.init took 135.72s
 Early init took 0.00s
-Loader init took 0.05s
-Loading error handling took 0.04s
-Loading script took 1.57s
-Loading save slot metadata. took 0.19s
-Loading persistent took 0.02s
+Loader init took 0.06s
+Loading error handling took 0.05s
+Loading script took 1.63s
+Loading save slot metadata. took 0.26s
+Loading persistent took 0.01s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
 Set script version to: (6, 99, 13)
-Running init code took 0.25s
-Loading analysis data took 0.05s
-Analyze and compile ATL took 0.11s
+Running init code took 0.18s
+Loading analysis data took 0.06s
+Analyze and compile ATL took 0.16s
+Index archives took 0.00s
+Dump and make backups. took 0.13s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.29s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.24s
+Cleaning stores took 0.00s
+Init translation took 0.18s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.04s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.15s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.18s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Resetting cache.
+Bootstrap to the start of init.init took 139.90s
+Early init took 0.00s
+Loader init took 0.07s
+Loading error handling took 0.04s
+Loading script took 1.53s
+Loading save slot metadata. took 0.19s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.18s
+Loading analysis data took 0.04s
+Analyze and compile ATL took 0.14s
 Index archives took 0.00s
 Dump and make backups. took 0.11s
 Cleaning cache took 0.00s
@@ -366,125 +491,14 @@ Initial gc. took 0.27s
 DPI scale factor: 2.500000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.20s
+Creating interface object took 0.23s
 Cleaning stores took 0.00s
-Init translation took 0.14s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.02s
-Prepare screens took 0.06s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.17s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 117.14s
-Early init took 0.00s
-Loader init took 0.06s
-Loading error handling took 0.04s
-Loading script took 1.62s
-Loading save slot metadata. took 0.17s
-Loading persistent took 0.01s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.19s
-Loading analysis data took 0.06s
-Analyze and compile ATL took 0.12s
-Index archives took 0.00s
-Dump and make backups. took 0.12s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.35s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.27s
-Cleaning stores took 0.00s
-Init translation took 0.18s
+Init translation took 0.17s
 Build styles took 0.00s
 Load screen analysis took 0.00s
 Analyze screens took 0.01s
 Save screen analysis took 0.03s
-Prepare screens took 0.06s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.21s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 151.18s
-Early init took 0.00s
-Loader init took 0.05s
-Loading error handling took 0.04s
-Loading script took 1.48s
-Loading save slot metadata. took 0.16s
-Loading persistent took 0.01s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.18s
-Loading analysis data took 0.04s
-Analyze and compile ATL took 0.11s
-Index archives took 0.00s
-Dump and make backups. took 0.10s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.30s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.20s
-Cleaning stores took 0.00s
-Init translation took 0.15s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.06s
+Prepare screens took 0.07s
 Save pyanalysis. took 0.00s
 Save bytecode. took 0.12s
 Running _start took 0.00s
@@ -510,502 +524,10 @@ Texture testing:
 Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
 Root FBO is: 0
 FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 162.26s
-Early init took 0.00s
-Loader init took 0.05s
-Loading error handling took 0.04s
-Loading script took 1.62s
-Loading save slot metadata. took 0.18s
-Loading persistent took 0.02s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.19s
-Loading analysis data took 0.04s
-Analyze and compile ATL took 0.10s
-Index archives took 0.00s
-Dump and make backups. took 0.11s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.26s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.20s
-Cleaning stores took 0.00s
-Init translation took 0.15s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.11s
-Save bytecode. took 0.13s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.16s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 170.42s
-Early init took 0.00s
-Loader init took 0.06s
-Loading error handling took 0.04s
-Loading script took 1.51s
-Loading save slot metadata. took 0.17s
-Loading persistent took 0.02s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.24s
-Loading analysis data took 0.05s
-Analyze and compile ATL took 0.13s
-Index archives took 0.00s
-Dump and make backups. took 0.11s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.28s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.20s
-Cleaning stores took 0.00s
-Init translation took 0.16s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.06s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.13s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.19s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 178.63s
-Early init took 0.00s
-Loader init took 0.07s
-Loading error handling took 0.06s
-Loading script took 1.69s
-Loading save slot metadata. took 0.21s
-Loading persistent took 0.01s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.16s
-Loading analysis data took 0.04s
-Analyze and compile ATL took 0.11s
-Index archives took 0.00s
-Dump and make backups. took 0.11s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.27s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.23s
-Cleaning stores took 0.00s
-Init translation took 0.15s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.06s
-Save pyanalysis. took 0.09s
-Save bytecode. took 0.12s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.17s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 253.34s
-Early init took 0.00s
-Loader init took 0.05s
-Loading error handling took 0.04s
-Loading script took 1.51s
-Loading save slot metadata. took 0.20s
-Loading persistent took 0.02s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.21s
-Loading analysis data took 0.04s
-Analyze and compile ATL took 0.11s
-Index archives took 0.00s
-Dump and make backups. took 0.11s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.30s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.22s
-Cleaning stores took 0.00s
-Init translation took 0.14s
-Build styles took 0.00s
-Load screen analysis took 0.04s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
-Prepare screens took 0.06s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.31s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 260.25s
-Early init took 0.00s
-Loader init took 0.05s
-Loading error handling took 0.04s
-Loading script took 1.53s
-Loading save slot metadata. took 0.19s
-Loading persistent took 0.02s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.20s
-Loading analysis data took 0.04s
-Analyze and compile ATL took 0.11s
-Index archives took 0.00s
-Dump and make backups. took 0.11s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.41s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.24s
-Cleaning stores took 0.00s
-Init translation took 0.16s
-Build styles took 0.00s
-Load screen analysis took 0.03s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
-Prepare screens took 0.06s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.16s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 289.71s
-Early init took 0.00s
-Loader init took 0.07s
-Loading error handling took 0.06s
-Loading script took 1.75s
-Loading save slot metadata. took 0.23s
-Loading persistent took 0.01s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.18s
-Loading analysis data took 0.05s
-Analyze and compile ATL took 0.13s
-Index archives took 0.00s
-Dump and make backups. took 0.11s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.45s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.21s
-Cleaning stores took 0.00s
-Init translation took 0.17s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.15s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.17s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 316.15s
-Early init took 0.00s
-Loader init took 0.07s
-Loading error handling took 0.05s
-Loading script took 1.61s
-Loading save slot metadata. took 0.19s
-Loading persistent took 0.01s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.22s
-Loading analysis data took 0.05s
-Analyze and compile ATL took 0.12s
-Index archives took 0.00s
-Dump and make backups. took 0.11s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.26s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.23s
-Cleaning stores took 0.00s
-Init translation took 0.15s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.02s
-Save screen analysis took 0.03s
-Prepare screens took 0.06s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.13s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.16s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 328.88s
-Early init took 0.00s
-Loader init took 0.06s
-Loading error handling took 0.05s
-Loading script took 1.55s
-Loading save slot metadata. took 0.17s
-Loading persistent took 0.01s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.21s
-Loading analysis data took 0.04s
-Analyze and compile ATL took 0.11s
-Index archives took 0.00s
-Dump and make backups. took 0.11s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.26s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.22s
-Cleaning stores took 0.00s
-Init translation took 0.15s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.15s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.17s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 346.18s
-Early init took 0.00s
-Loader init took 0.08s
-Loading error handling took 0.05s
-Loading script took 1.72s
-Loading save slot metadata. took 0.20s
-Loading persistent took 0.02s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.23s
-Loading analysis data took 0.06s
-Analyze and compile ATL took 0.13s
-Index archives took 0.00s
-Dump and make backups. took 0.11s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.28s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.25s
-Cleaning stores took 0.00s
-Init translation took 0.16s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.15s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.17s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
 
 Full traceback:
-  File "game/script.rpy", line 200, in script
-    show Kitty_sprite doggy at sprite_location(0.5)
+  File "game/script.rpy", line 222, in script
+    show Kitty_sprite sex at sprite_location(0.5)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1197, in execute
     show_imspec(self.imspec, atl=getattr(self, "atl", None))
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1167, in show_imspec
@@ -1046,308 +568,60 @@ Full traceback:
     d.visit_all(callback, seen)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
     d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1443, in update
+    child.visit_all(lambda c : c.per_interact())
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
     for d in self.visit():
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 744, in visit
     self.find_target()
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 652, in find_target
     raise Exception(error)
-Exception: DynamicImage u'images/Kitty_doggy/Kitty_doggy_mouth[KittyX.mouth].png': could not find image. (u'images/Kitty_doggy/Kitty_doggy_mouth_lipbite.png')
+Exception: DynamicImage u'images/Kitty_standing/Kitty_spunk_standing[KittyX.mouth].png': could not find image. (u'images/Kitty_standing/Kitty_spunk_standing_lipbite.png')
 
 While running game code:
-  File "game/script.rpy", line 200, in script
-    show Kitty_sprite doggy at sprite_location(0.5)
-Exception: DynamicImage u'images/Kitty_doggy/Kitty_doggy_mouth[KittyX.mouth].png': could not find image. (u'images/Kitty_doggy/Kitty_doggy_mouth_lipbite.png')
-Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
+  File "game/script.rpy", line 222, in script
+    show Kitty_sprite sex at sprite_location(0.5)
+Exception: DynamicImage u'images/Kitty_standing/Kitty_spunk_standing[KittyX.mouth].png': could not find image. (u'images/Kitty_standing/Kitty_spunk_standing_lipbite.png')
 Resetting cache.
-Bootstrap to the start of init.init took 418.39s
-Early init took 0.00s
-Loader init took 0.08s
-Loading error handling took 0.05s
-Loading script took 1.52s
-Loading save slot metadata. took 0.21s
-Loading persistent took 0.02s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.19s
-Loading analysis data took 0.04s
-Analyze and compile ATL took 0.10s
-Index archives took 0.00s
-Dump and make backups. took 0.10s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.34s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.22s
-Cleaning stores took 0.00s
-Init translation took 0.15s
-Build styles took 0.00s
-Load screen analysis took 0.03s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
-Prepare screens took 0.06s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.15s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-
-Full traceback:
-  File "game/script.rpy", line 215, in script
-    ""
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
-    who(what, *args, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
-    **display_args)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/character.py", line 647, in display_say
-    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3839, in interact_core
-    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 2565, in draw_screen
-    renpy.config.screen_height,
-  File "render.pyx", line 492, in renpy.display.render.render_screen
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
-    surf = render(self.child, width, height, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
-    cr = renpy.display.render.render(self.child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 733, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
-    surf = render(self.child, width, height, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
-    cr = renpy.display.render.render(self.child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 2135, in render
-    mr.place(self.mask, main=False)
-  File "render.pyx", line 1532, in renpy.display.render.Render.place
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 826, in render
-    surf = render(child, width, height, cst, cat)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 367, in render
-    surf = render(self.child, width, height, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1456, in render
-    cr = renpy.display.render.render(self.child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 501, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "render.pyx", line 170, in renpy.display.render.render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/transform.py", line 733, in render
-    return transform_render(self, width, height, st, at)
-  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
-  File "render.pyx", line 263, in renpy.display.render.render
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/im.py", line 625, in render
-    return cache.get(self, render=True)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/im.py", line 287, in get
-    surf = image.load()
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/im.py", line 706, in load
-    raise e
-IOError: Couldn't find file 'images/Kitty_doggy/Kitty_doggy_anus_mask.png'.
-
-While loading <'Image' u'images/Kitty_doggy/Kitty_doggy_anus_mask.png'>:
-  File "game/script.rpy", line 215, in script
-    ""
-IOError: Couldn't find file 'images/Kitty_doggy/Kitty_doggy_anus_mask.png'.
-Resetting cache.
-Bootstrap to the start of init.init took 562.08s
+Bootstrap to the start of init.init took 167.64s
 Early init took 0.00s
 Loader init took 0.06s
 Loading error handling took 0.05s
-Loading script took 1.69s
-Loading save slot metadata. took 0.22s
+Loading script took 1.76s
+Loading save slot metadata. took 0.23s
 Loading persistent took 0.01s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
 Set script version to: (6, 99, 13)
-Running init code took 0.17s
-Loading analysis data took 0.04s
-Analyze and compile ATL took 0.11s
+Running init code took 0.19s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.17s
 Index archives took 0.00s
-Dump and make backups. took 0.11s
+Dump and make backups. took 0.13s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
-Initial gc. took 0.32s
+Initial gc. took 0.33s
 DPI scale factor: 2.500000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
 Creating interface object took 0.28s
 Cleaning stores took 0.00s
-Init translation took 0.22s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.04s
-Prepare screens took 0.08s
-Save pyanalysis. took 0.10s
-Save bytecode. took 0.14s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.16s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 571.88s
-Early init took 0.00s
-Loader init took 0.05s
-Loading error handling took 0.04s
-Loading script took 1.61s
-Loading save slot metadata. took 0.21s
-Loading persistent took 0.01s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.16s
-Loading analysis data took 0.04s
-Analyze and compile ATL took 0.11s
-Index archives took 0.00s
-Dump and make backups. took 0.11s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.27s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.25s
-Cleaning stores took 0.00s
-Init translation took 0.16s
+Init translation took 0.21s
 Build styles took 0.00s
 Load screen analysis took 0.00s
 Analyze screens took 0.01s
 Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.12s
-Save bytecode. took 0.16s
+Prepare screens took 0.06s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.13s
 Running _start took 0.00s
 Performance test:
-Interface start took 0.25s
+Interface start took 0.18s
 
 Initializing gl renderer:
 primary display bounds: (0, 0, 3840, 2160)
@@ -1368,148 +642,104 @@ Texture testing:
 Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
 Root FBO is: 0
 FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/script.rpy", line 222, in script
+    show Kitty_sprite sex at sprite_location(0.5)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1197, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1167, in show_imspec
+    atl=atl)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 768, in show
+    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 1147, in add
+    thing.visit_all(lambda d : None)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1443, in update
+    child.visit_all(lambda c : c.per_interact())
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1443, in update
+    child.visit_all(lambda c : c.per_interact())
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 744, in visit
+    self.find_target()
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 652, in find_target
+    raise Exception(error)
+Exception: DynamicImage u'images/Kitty_standing/Kitty_standing_spunk_mouth[KittyX.mouth].png': could not find image. (u'images/Kitty_standing/Kitty_standing_spunk_mouth_lipbite.png')
+
+While running game code:
+  File "game/script.rpy", line 222, in script
+    show Kitty_sprite sex at sprite_location(0.5)
+Exception: DynamicImage u'images/Kitty_standing/Kitty_standing_spunk_mouth[KittyX.mouth].png': could not find image. (u'images/Kitty_standing/Kitty_standing_spunk_mouth_lipbite.png')
 Resetting cache.
-Bootstrap to the start of init.init took 607.37s
+Bootstrap to the start of init.init took 178.40s
 Early init took 0.00s
-Loader init took 0.07s
-Loading error handling took 0.06s
-Loading script took 1.91s
-Loading save slot metadata. took 0.25s
+Loader init took 0.06s
+Loading error handling took 0.04s
+Loading script took 1.44s
+Loading save slot metadata. took 0.21s
 Loading persistent took 0.01s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
 Set script version to: (6, 99, 13)
-Running init code took 0.18s
-Loading analysis data took 0.05s
-Analyze and compile ATL took 0.12s
+Running init code took 0.17s
+Loading analysis data took 0.04s
+Analyze and compile ATL took 0.14s
 Index archives took 0.00s
-Dump and make backups. took 0.11s
+Dump and make backups. took 0.12s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
 Initial gc. took 0.28s
 DPI scale factor: 2.500000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.24s
+Creating interface object took 0.26s
 Cleaning stores took 0.00s
-Init translation took 0.26s
+Init translation took 0.17s
 Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.02s
-Save screen analysis took 0.04s
-Prepare screens took 0.08s
-Save pyanalysis. took 0.13s
-Save bytecode. took 0.16s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.33s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 623.15s
-Early init took 0.00s
-Loader init took 0.06s
-Loading error handling took 0.05s
-Loading script took 1.80s
-Loading save slot metadata. took 0.22s
-Loading persistent took 0.02s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.24s
-Loading analysis data took 0.05s
-Analyze and compile ATL took 0.13s
-Index archives took 0.00s
-Dump and make backups. took 0.13s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.49s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.25s
-Cleaning stores took 0.00s
-Init translation took 0.26s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.02s
-Save screen analysis took 0.03s
-Prepare screens took 0.08s
-Save pyanalysis. took 0.13s
-Save bytecode. took 0.15s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.25s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 630.01s
-Early init took 0.00s
-Loader init took 0.06s
-Loading error handling took 0.05s
-Loading script took 1.75s
-Loading save slot metadata. took 0.20s
-Loading persistent took 0.02s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.29s
-Loading analysis data took 0.06s
-Analyze and compile ATL took 0.13s
-Index archives took 0.00s
-Dump and make backups. took 0.13s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.51s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.28s
-Cleaning stores took 0.00s
-Init translation took 0.24s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.02s
-Save screen analysis took 0.04s
-Prepare screens took 0.08s
+Load screen analysis took 0.03s
+Analyze screens took 0.00s
+Save screen analysis took 0.00s
+Prepare screens took 0.07s
 Save pyanalysis. took 0.00s
 Save bytecode. took 0.00s
 Running _start took 0.00s
 Performance test:
-Interface start took 0.28s
+Interface start took 0.17s
 
 Initializing gl renderer:
 primary display bounds: (0, 0, 3840, 2160)
@@ -1530,73 +760,83 @@ Texture testing:
 Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
 Root FBO is: 0
 FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 655.02s
-Early init took 0.00s
-Loader init took 0.06s
-Loading error handling took 0.05s
-Loading script took 1.67s
-Loading save slot metadata. took 0.23s
-Loading persistent took 0.01s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.18s
-Loading analysis data took 0.05s
-Analyze and compile ATL took 0.12s
-Index archives took 0.00s
-Dump and make backups. took 0.15s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.44s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.30s
-Cleaning stores took 0.00s
-Init translation took 0.18s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.10s
-Save bytecode. took 0.14s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.19s
 
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
+Full traceback:
+  File "game/script.rpy", line 222, in script
+    show Kitty_sprite sex at sprite_location(0.5)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1197, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1167, in show_imspec
+    atl=atl)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 768, in show
+    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 1147, in add
+    thing.visit_all(lambda d : None)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1443, in update
+    child.visit_all(lambda c : c.per_interact())
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1443, in update
+    child.visit_all(lambda c : c.per_interact())
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 744, in visit
+    self.find_target()
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 652, in find_target
+    raise Exception(error)
+Exception: DynamicImage u'images/Kitty_standing/Kitty_standing_spunk_mouth[KittyX.mouth].png': could not find image. (u'images/Kitty_standing/Kitty_standing_spunk_mouth_lipbite.png')
+
+While running game code:
+  File "game/script.rpy", line 222, in script
+    show Kitty_sprite sex at sprite_location(0.5)
+Exception: DynamicImage u'images/Kitty_standing/Kitty_standing_spunk_mouth[KittyX.mouth].png': could not find image. (u'images/Kitty_standing/Kitty_standing_spunk_mouth_lipbite.png')
 Resetting cache.
-Bootstrap to the start of init.init took 682.89s
+Bootstrap to the start of init.init took 262.45s
 Early init took 0.00s
-Loader init took 0.06s
-Loading error handling took 0.05s
-Loading script took 1.77s
+Loader init took 0.05s
+Loading error handling took 0.04s
+Loading script took 1.31s
 Loading save slot metadata. took 0.18s
 Loading persistent took 0.01s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
 Set script version to: (6, 99, 13)
-Running init code took 0.19s
-Loading analysis data took 0.04s
-Analyze and compile ATL took 0.12s
+Running init code took 0.17s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.13s
 Index archives took 0.00s
 Dump and make backups. took 0.10s
 Cleaning cache took 0.00s
@@ -1605,296 +845,14 @@ Initial gc. took 0.25s
 DPI scale factor: 2.500000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.21s
-Cleaning stores took 0.00s
-Init translation took 0.15s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.06s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.15s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.19s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 717.01s
-Early init took 0.00s
-Loader init took 0.06s
-Loading error handling took 0.05s
-Loading script took 1.78s
-Loading save slot metadata. took 0.18s
-Loading persistent took 0.01s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.22s
-Loading analysis data took 0.04s
-Analyze and compile ATL took 0.11s
-Index archives took 0.00s
-Dump and make backups. took 0.12s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.47s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
 Creating interface object took 0.23s
 Cleaning stores took 0.00s
-Init translation took 0.21s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.02s
-Save screen analysis took 0.05s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.15s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.17s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 735.96s
-Early init took 0.00s
-Loader init took 0.06s
-Loading error handling took 0.05s
-Loading script took 1.70s
-Loading save slot metadata. took 0.19s
-Loading persistent took 0.01s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.21s
-Loading analysis data took 0.04s
-Analyze and compile ATL took 0.15s
-Index archives took 0.00s
-Dump and make backups. took 0.12s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.27s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.24s
-Cleaning stores took 0.00s
-Init translation took 0.15s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.02s
-Save screen analysis took 0.03s
-Prepare screens took 0.06s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.14s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.17s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 826.60s
-Early init took 0.00s
-Loader init took 0.07s
-Loading error handling took 0.05s
-Loading script took 1.81s
-Loading save slot metadata. took 0.18s
-Loading persistent took 0.01s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.23s
-Loading analysis data took 0.05s
-Analyze and compile ATL took 0.13s
-Index archives took 0.00s
-Dump and make backups. took 0.12s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.30s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.25s
-Cleaning stores took 0.00s
-Init translation took 0.15s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.04s
-Prepare screens took 0.09s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.15s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.21s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-
-Full traceback:
-  File "game/cheats.rpy", line 65, in script call
-    call wardrobe_editor(Girl)
-  File "game/cheats.rpy", line 130, in script
-    menu wardrobe_menu:
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1688, in execute
-    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1060, in menu
-    rv = renpy.store.menu(new_items)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 1296, in display_menu
-    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ui.py", line 298, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3737, in interact_core
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 570, in visit_all
-    callback(self)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 3737, in <lambda>
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 752, in per_interact
-    self.find_target()
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 652, in find_target
-    raise Exception(error)
-Exception: DynamicImage u'images/Kitty_doggy/Kitty_doggy_bra[KittyX.outfit[bra]].png': could not find image. (u'images/Kitty_doggy/Kitty_doggy_bra_bra.png')
-
-While running game code:
-  File "game/cheats.rpy", line 65, in script call
-    call wardrobe_editor(Girl)
-  File "game/cheats.rpy", line 130, in script
-    menu wardrobe_menu:
-Exception: DynamicImage u'images/Kitty_doggy/Kitty_doggy_bra[KittyX.outfit[bra]].png': could not find image. (u'images/Kitty_doggy/Kitty_doggy_bra_bra.png')
-Resetting cache.
-Bootstrap to the start of init.init took 864.03s
-Early init took 0.00s
-Loader init took 0.07s
-Loading error handling took 0.05s
-Loading script took 1.56s
-Loading save slot metadata. took 0.19s
-Loading persistent took 0.01s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.22s
-Loading analysis data took 0.05s
-Analyze and compile ATL took 0.13s
-Index archives took 0.00s
-Dump and make backups. took 0.12s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.26s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.27s
-Cleaning stores took 0.00s
-Init translation took 0.15s
+Init translation took 0.16s
 Build styles took 0.00s
 Load screen analysis took 0.03s
 Analyze screens took 0.00s
 Save screen analysis took 0.00s
-Prepare screens took 0.07s
+Prepare screens took 0.06s
 Save pyanalysis. took 0.00s
 Save bytecode. took 0.00s
 Running _start took 0.00s
@@ -1920,37 +878,246 @@ Texture testing:
 Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
 Root FBO is: 0
 FBO Maximum Texture Size: 2048
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
 Resetting cache.
-Bootstrap to the start of init.init took 949.02s
+Bootstrap to the start of init.init took 294.84s
 Early init took 0.00s
-Loader init took 0.07s
-Loading error handling took 0.06s
-Loading script took 2.15s
-Loading save slot metadata. took 0.20s
+Loader init took 0.05s
+Loading error handling took 0.04s
+Loading script took 1.66s
+Loading save slot metadata. took 0.25s
 Loading persistent took 0.02s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
 Set script version to: (6, 99, 13)
-Running init code took 0.24s
+Running init code took 0.19s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.13s
+Index archives took 0.00s
+Dump and make backups. took 0.12s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.35s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.27s
+Cleaning stores took 0.00s
+Init translation took 0.19s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.04s
+Prepare screens took 0.08s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.18s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.17s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Resetting cache.
+Bootstrap to the start of init.init took 299.03s
+Early init took 0.00s
+Loader init took 0.06s
+Loading error handling took 0.04s
+Loading script took 1.60s
+Loading save slot metadata. took 0.22s
+Loading persistent took 0.02s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.18s
 Loading analysis data took 0.05s
 Analyze and compile ATL took 0.15s
 Index archives took 0.00s
-Dump and make backups. took 0.14s
+Dump and make backups. took 0.12s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
 Initial gc. took 0.29s
 DPI scale factor: 2.500000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.28s
+Creating interface object took 0.24s
 Cleaning stores took 0.00s
-Init translation took 0.15s
+Init translation took 0.19s
 Build styles took 0.00s
 Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
+Analyze screens took 0.02s
+Save screen analysis took 0.04s
 Prepare screens took 0.08s
 Save pyanalysis. took 0.00s
-Save bytecode. took 0.14s
+Save bytecode. took 0.17s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.38s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Resetting cache.
+Bootstrap to the start of init.init took 305.86s
+Early init took 0.00s
+Loader init took 0.05s
+Loading error handling took 0.04s
+Loading script took 1.52s
+Loading save slot metadata. took 0.23s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.18s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.14s
+Index archives took 0.00s
+Dump and make backups. took 0.12s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.29s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.23s
+Cleaning stores took 0.00s
+Init translation took 0.16s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.13s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.17s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/script.rpy", line 231, in script
+    show Emma_sprite standing normal at sprite_location(0.35)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1197, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1167, in show_imspec
+    atl=atl)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 768, in show
+    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 1147, in add
+    thing.visit_all(lambda d : None)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1443, in update
+    child.visit_all(lambda c : c.per_interact())
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 744, in visit
+    self.find_target()
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 652, in find_target
+    raise Exception(error)
+Exception: DynamicImage u'images/Emma_standing/Emma_standing_spunk_mouth[EmmaX.mouth].png': could not find image. (u'images/Emma_standing/Emma_standing_spunk_mouth_lipbite.png')
+
+While running game code:
+  File "game/script.rpy", line 231, in script
+    show Emma_sprite standing normal at sprite_location(0.35)
+Exception: DynamicImage u'images/Emma_standing/Emma_standing_spunk_mouth[EmmaX.mouth].png': could not find image. (u'images/Emma_standing/Emma_standing_spunk_mouth_lipbite.png')
+Resetting cache.
+Bootstrap to the start of init.init took 313.95s
+Early init took 0.00s
+Loader init took 0.05s
+Loading error handling took 0.04s
+Loading script took 1.69s
+Loading save slot metadata. took 0.24s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.20s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.14s
+Index archives took 0.00s
+Dump and make backups. took 0.14s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.41s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.25s
+Cleaning stores took 0.00s
+Init translation took 0.20s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.04s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.16s
 Running _start took 0.00s
 Performance test:
 Interface start took 0.20s
@@ -1971,40 +1138,434 @@ FBO Maximum Texture Size: 2048
 Using gl renderer.
 Texture testing:
 - Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
 Root FBO is: 0
 FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/script.rpy", line 231, in script
+    show Emma_sprite standing normal at sprite_location(0.35)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1197, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1167, in show_imspec
+    atl=atl)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 768, in show
+    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 1147, in add
+    thing.visit_all(lambda d : None)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1443, in update
+    child.visit_all(lambda c : c.per_interact())
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 744, in visit
+    self.find_target()
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 652, in find_target
+    raise Exception(error)
+Exception: DynamicImage u'images/Emma_standing/Emma_standing_spunk_mouth[EmmaX.mouth].png': could not find image. (u'images/Emma_standing/Emma_standing_spunk_mouth_lipbite.png')
+
+While running game code:
+  File "game/script.rpy", line 231, in script
+    show Emma_sprite standing normal at sprite_location(0.35)
+Exception: DynamicImage u'images/Emma_standing/Emma_standing_spunk_mouth[EmmaX.mouth].png': could not find image. (u'images/Emma_standing/Emma_standing_spunk_mouth_lipbite.png')
 Resetting cache.
-Bootstrap to the start of init.init took 992.61s
+Bootstrap to the start of init.init took 323.56s
 Early init took 0.00s
-Loader init took 0.06s
-Loading error handling took 0.05s
-Loading script took 1.86s
-Loading save slot metadata. took 0.24s
-Loading persistent took 0.01s
+Loader init took 0.05s
+Loading error handling took 0.03s
+Loading script took 1.58s
+Loading save slot metadata. took 0.25s
+Loading persistent took 0.02s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
 Set script version to: (6, 99, 13)
-Running init code took 0.26s
-Loading analysis data took 0.06s
-Analyze and compile ATL took 0.16s
+Running init code took 0.18s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.14s
 Index archives took 0.00s
-Dump and make backups. took 0.11s
+Dump and make backups. took 0.13s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
-Initial gc. took 0.31s
+Initial gc. took 0.41s
 DPI scale factor: 2.500000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
 Creating interface object took 0.26s
 Cleaning stores took 0.00s
-Init translation took 0.16s
+Init translation took 0.18s
 Build styles took 0.00s
-Load screen analysis took 0.03s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.03s
 Prepare screens took 0.07s
 Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
+Save bytecode. took 0.14s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.18s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Resetting cache.
+Bootstrap to the start of init.init took 327.72s
+Early init took 0.00s
+Loader init took 0.06s
+Loading error handling took 0.04s
+Loading script took 1.57s
+Loading save slot metadata. took 0.20s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.18s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.13s
+Index archives took 0.00s
+Dump and make backups. took 0.11s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.28s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.25s
+Cleaning stores took 0.00s
+Init translation took 0.18s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.12s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.17s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/script.rpy", line 222, in script
+    show Kitty_sprite doggy at sprite_location(0.5)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1197, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1167, in show_imspec
+    atl=atl)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 768, in show
+    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 1147, in add
+    thing.visit_all(lambda d : None)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1443, in update
+    child.visit_all(lambda c : c.per_interact())
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 744, in visit
+    self.find_target()
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 652, in find_target
+    raise Exception(error)
+Exception: DynamicImage u'Kitty_doggy_ass_animation[action_speed]': could not find image. (u'Kitty_doggy_ass_animation5')
+
+While running game code:
+  File "game/script.rpy", line 222, in script
+    show Kitty_sprite doggy at sprite_location(0.5)
+Exception: DynamicImage u'Kitty_doggy_ass_animation[action_speed]': could not find image. (u'Kitty_doggy_ass_animation5')
+Resetting cache.
+Bootstrap to the start of init.init took 340.29s
+Early init took 0.00s
+Loader init took 0.05s
+Loading error handling took 0.04s
+Loading script took 1.69s
+Loading save slot metadata. took 0.22s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.17s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.14s
+Index archives took 0.00s
+Dump and make backups. took 0.12s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.29s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.25s
+Cleaning stores took 0.00s
+Init translation took 0.16s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.13s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.18s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+
+Full traceback:
+  File "game/script.rpy", line 222, in script
+    show Kitty_sprite doggy at sprite_location(0.5)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1197, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1167, in show_imspec
+    atl=atl)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/exports.py", line 768, in show
+    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 1147, in add
+    thing.visit_all(lambda d : None)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
+    self.update(self.last_st, self.last_at)
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1443, in update
+    child.visit_all(lambda c : c.per_interact())
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 744, in visit
+    self.find_target()
+  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 652, in find_target
+    raise Exception(error)
+Exception: DynamicImage u'Kitty_doggy_ass_animation[action_speed]': could not find image. (u'Kitty_doggy_ass_animation4')
+
+While running game code:
+  File "game/script.rpy", line 222, in script
+    show Kitty_sprite doggy at sprite_location(0.5)
+Exception: DynamicImage u'Kitty_doggy_ass_animation[action_speed]': could not find image. (u'Kitty_doggy_ass_animation4')
+Resetting cache.
+Bootstrap to the start of init.init took 359.18s
+Early init took 0.00s
+Loader init took 0.07s
+Loading error handling took 0.05s
+Loading script took 1.61s
+Loading save slot metadata. took 0.21s
+Loading persistent took 0.02s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.18s
+Loading analysis data took 0.06s
+Analyze and compile ATL took 0.14s
+Index archives took 0.00s
+Dump and make backups. took 0.11s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.30s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.22s
+Cleaning stores took 0.00s
+Init translation took 0.18s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.04s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.13s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.18s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Resetting cache.
+Bootstrap to the start of init.init took 399.22s
+Early init took 0.00s
+Loader init took 0.06s
+Loading error handling took 0.04s
+Loading script took 1.57s
+Loading save slot metadata. took 0.21s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.19s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.14s
+Index archives took 0.00s
+Dump and make backups. took 0.12s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.28s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.25s
+Cleaning stores took 0.00s
+Init translation took 0.16s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.01s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.13s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.17s
+
+Initializing gl renderer:
+primary display bounds: (0, 0, 3840, 2160)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'NVIDIA Corporation'
+Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
+Version: '4.6.0 NVIDIA 512.15'
+Display Info: None
+Number of texture units: 32
+Using shader environment.
+Using FBO RTT.
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Using gl renderer.
+Texture testing:
+- Hardware max texture size: 32768
+Screen sizes: virtual=(1920, 1080) physical=(3840, 2004) drawable=(3840, 2004)
+Root FBO is: 0
+FBO Maximum Texture Size: 2048
+Resetting cache.
+Bootstrap to the start of init.init took 427.09s
+Early init took 0.00s
+Loader init took 0.08s
+Loading error handling took 0.04s
+Loading script took 1.89s
+Loading save slot metadata. took 0.23s
+Loading persistent took 0.01s
+Importing _renpysteam: ImportError('No module named _renpysteam',)
+Set script version to: (6, 99, 13)
+Running init code took 0.19s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.14s
+Index archives took 0.00s
+Dump and make backups. took 0.13s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.29s
+DPI scale factor: 2.500000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: Disabled thread optimizations.
+Creating interface object took 0.27s
+Cleaning stores took 0.00s
+Init translation took 0.20s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.03s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.15s
 Running _start took 0.00s
 Performance test:
 Interface start took 0.18s
@@ -2029,363 +1590,39 @@ Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
 Root FBO is: 0
 FBO Maximum Texture Size: 2048
 Resetting cache.
-Bootstrap to the start of init.init took 996.89s
+Bootstrap to the start of init.init took 464.06s
 Early init took 0.00s
-Loader init took 0.07s
-Loading error handling took 0.05s
-Loading script took 1.82s
-Loading save slot metadata. took 0.21s
+Loader init took 0.08s
+Loading error handling took 0.06s
+Loading script took 1.81s
+Loading save slot metadata. took 0.22s
 Loading persistent took 0.01s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
 Set script version to: (6, 99, 13)
-Running init code took 0.25s
+Running init code took 0.19s
 Loading analysis data took 0.05s
-Analyze and compile ATL took 0.16s
-Index archives took 0.00s
-Dump and make backups. took 0.14s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.33s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.22s
-Cleaning stores took 0.00s
-Init translation took 0.15s
-Build styles took 0.00s
-Load screen analysis took 0.04s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
-Prepare screens took 0.08s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.26s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 1002.22s
-Early init took 0.00s
-Loader init took 0.07s
-Loading error handling took 0.05s
-Loading script took 1.85s
-Loading save slot metadata. took 0.22s
-Loading persistent took 0.02s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.24s
-Loading analysis data took 0.06s
-Analyze and compile ATL took 0.14s
-Index archives took 0.00s
-Dump and make backups. took 0.12s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.30s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.24s
-Cleaning stores took 0.00s
-Init translation took 0.18s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.02s
-Save screen analysis took 0.04s
-Prepare screens took 0.08s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.17s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.21s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 1013.59s
-Early init took 0.00s
-Loader init took 0.06s
-Loading error handling took 0.05s
-Loading script took 1.98s
-Loading save slot metadata. took 0.22s
-Loading persistent took 0.01s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.26s
-Loading analysis data took 0.06s
-Analyze and compile ATL took 0.17s
+Analyze and compile ATL took 0.15s
 Index archives took 0.00s
 Dump and make backups. took 0.13s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.31s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.23s
-Cleaning stores took 0.00s
-Init translation took 0.16s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.04s
-Prepare screens took 0.09s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.17s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.23s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 1020.55s
-Early init took 0.00s
-Loader init took 0.06s
-Loading error handling took 0.05s
-Loading script took 2.07s
-Loading save slot metadata. took 0.19s
-Loading persistent took 0.01s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.26s
-Loading analysis data took 0.05s
-Analyze and compile ATL took 0.14s
-Index archives took 0.00s
-Dump and make backups. took 0.14s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
 Initial gc. took 0.29s
 DPI scale factor: 2.500000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.23s
+Creating interface object took 0.26s
 Cleaning stores took 0.00s
-Init translation took 0.17s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.08s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.16s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.23s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 1025.17s
-Early init took 0.00s
-Loader init took 0.06s
-Loading error handling took 0.05s
-Loading script took 1.96s
-Loading save slot metadata. took 0.21s
-Loading persistent took 0.02s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.26s
-Loading analysis data took 0.06s
-Analyze and compile ATL took 0.16s
-Index archives took 0.00s
-Dump and make backups. took 0.13s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.37s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.35s
-Cleaning stores took 0.00s
-Init translation took 0.19s
+Init translation took 0.18s
 Build styles took 0.00s
 Load screen analysis took 0.00s
 Analyze screens took 0.01s
 Save screen analysis took 0.04s
-Prepare screens took 0.10s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.17s
+Prepare screens took 0.07s
+Save pyanalysis. took 0.10s
+Save bytecode. took 0.14s
 Running _start took 0.00s
 Performance test:
 Interface start took 0.19s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 1030.04s
-Early init took 0.00s
-Loader init took 0.08s
-Loading error handling took 0.06s
-Loading script took 2.08s
-Loading save slot metadata. took 0.21s
-Loading persistent took 0.02s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.29s
-Loading analysis data took 0.05s
-Analyze and compile ATL took 0.13s
-Index archives took 0.00s
-Dump and make backups. took 0.12s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.33s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.29s
-Cleaning stores took 0.00s
-Init translation took 0.19s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.01s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.16s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.22s
-
-Initializing gl renderer:
-primary display bounds: (0, 0, 3840, 2160)
-swap interval: 1 frames
-Windowed mode.
-Vendor: 'NVIDIA Corporation'
-Renderer: 'NVIDIA GeForce RTX 3070 Laptop GPU/PCIe/SSE2'
-Version: '4.6.0 NVIDIA 512.15'
-Display Info: None
-Number of texture units: 32
-Using shader environment.
-Using FBO RTT.
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Using gl renderer.
-Texture testing:
-- Hardware max texture size: 32768
-Screen sizes: virtual=(1920, 1080) physical=(3560, 2003) drawable=(3560, 2003)
-Root FBO is: 0
-FBO Maximum Texture Size: 2048
-Resetting cache.
-Bootstrap to the start of init.init took 1104.52s
-Early init took 0.00s
-Loader init took 0.08s
-Loading error handling took 0.06s
-Loading script took 2.03s
-Loading save slot metadata. took 0.25s
-Loading persistent took 0.02s
-Importing _renpysteam: ImportError('No module named _renpysteam',)
-Set script version to: (6, 99, 13)
-Running init code took 0.27s
-Loading analysis data took 0.06s
-Analyze and compile ATL took 0.18s
-Index archives took 0.00s
-Dump and make backups. took 0.18s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.37s
-DPI scale factor: 2.500000
-nvdrs: Loaded, about to disable thread optimizations.
-nvdrs: Disabled thread optimizations.
-Creating interface object took 0.30s
-Cleaning stores took 0.00s
-Init translation took 0.20s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.02s
-Save screen analysis took 0.04s
-Prepare screens took 0.09s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.21s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.21s
 
 Initializing gl renderer:
 primary display bounds: (0, 0, 3840, 2160)

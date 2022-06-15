@@ -307,6 +307,17 @@ image Kitty_titjob_back_hair_animation3:
             ease 0.8 rotate -5
         repeat
 
+image Kitty_titjob_back_hair_animation5:
+    animation
+    "Kitty_titjob_back_hair"
+
+    subpixel True
+    block:
+        ease 2 yoffset 4
+        ease 1.6 yoffset 7
+        pause 0.4
+        repeat
+
 image Kitty_titjob_body_animation0:
     animation
     "Kitty_titjob_body"
@@ -350,6 +361,17 @@ image Kitty_titjob_body_animation3:
         pause 0.2
         repeat
 
+image Kitty_titjob_body_animation5:
+    animation
+    "Kitty_titjob_body"
+
+    subpixel True
+    block:
+        ease 2.2 yoffset -20
+        ease 1.6 yoffset 0
+        pause 0.2
+        repeat
+
 image Kitty_titjob_arms_animation0:
     animation
     "Kitty_titjob_arms"
@@ -390,6 +412,17 @@ image Kitty_titjob_arms_animation3:
     block:
         ease 2.2 yoffset -20
         ease 0.6 yoffset 0
+        pause 0.2
+        repeat
+
+image Kitty_titjob_arms_animation5:
+    animation
+    "Kitty_titjob_arms"
+
+    subpixel True
+    block:
+        ease 2.2 yoffset -20
+        ease 1.6 yoffset 0
         pause 0.2
         repeat
 
@@ -471,6 +504,17 @@ image Kitty_titjob_head_animation3:
             ease 0.8 rotate -5
         repeat
 
+image Kitty_titjob_head_animation5:
+    animation
+    "Kitty_blowjob_head"
+
+    subpixel True
+    block:
+        ease 2 offset (-5, 0)
+        ease 1.6 offset (-5, 3)
+        pause 0.4
+        repeat
+
 image Kitty_titjob_breasts_animation0:
     animation
     "Kitty_titjob_breasts"
@@ -514,6 +558,17 @@ image Kitty_titjob_breasts_animation3:
         pause 0.2
         repeat
 
+image Kitty_titjob_breasts_animation5:
+    animation
+    "Kitty_titjob_breasts"
+
+    subpixel True
+    block:
+        ease 2.2 yoffset -20
+        ease 1.6 yoffset 0
+        pause 0.2
+        repeat
+
 layeredimage Kitty_sprite titjob:
     always:
         "Kitty_titjob_back_hair_animation[action_speed]" pos (0.0, -0.2) zoom 0.9
@@ -553,12 +608,239 @@ image Kitty_blowjob_blinking:
     0.05
     repeat
 
+image Kitty_blowjob_body_animation0:
+    "Kitty_blowjob_body"
 
+image Kitty_blowjob_body_animation1:
+    animation
+    "Kitty_blowjob_body"
 
+    subpixel True
+    ease 0.5 offset (0, -35)
+    block:
+        ease 2.5 offset (30, 90)
+        ease 2 offset (0, -35)
+        pause 0.5
+        repeat
 
+image Kitty_blowjob_body_animation2:
+    animation
+    "Kitty_blowjob_body"
 
+    subpixel True
+    block:
+        ease 1 yoffset 15
+        ease 1.5 yoffset -40
+        repeat
 
+image Kitty_blowjob_body_animation3:
+    animation
+    "Kitty_blowjob_body"
 
+    subpixel True
+    ease 0.5 yoffset 50
+    block:
+        ease 1 yoffset 100
+        ease 1.5 yoffset 50
+        repeat
+
+image Kitty_blowjob_body_animation4:
+    animation
+    "Kitty_blowjob_body"
+
+    subpixel True
+    ease 0.5 yoffset 100
+    block:
+        ease 1.2 yoffset 160
+        pause 0.5
+        ease 1.8 yoffset 80
+        repeat
+
+image Kitty_blowjob_head_animation0:
+    "Kitty_blowjob_head"
+
+image Kitty_blowjob_head_animation1:
+    animation
+    "Kitty_blowjob_head"
+
+    subpixel True
+    ease 0.5 offset (0, -35)
+    block:
+        ease 2.5 offset (25, 100)
+        ease 2 offset (0, -35)
+        pause 0.5
+        repeat
+
+image Kitty_blowjob_head_animation2:
+    animation
+    "Kitty_blowjob_head"
+
+    subpixel True
+    block:
+        ease 1 yoffset 35
+        ease 1.5 yoffset -40
+        repeat
+
+image Kitty_blowjob_head_animation3:
+    animation
+    "Kitty_blowjob_head"
+
+    subpixel True
+    ease 0.5 yoffset 50
+    block:
+        ease 1 yoffset 120
+        ease 1.5 yoffset 50
+        repeat
+
+image Kitty_blowjob_head_animation4:
+    animation
+    "Kitty_blowjob_head"
+
+    subpixel True
+    ease 0.5 yoffset 100
+    block:
+        ease 1 yoffset 210
+        pause 0.5
+        ease 2 yoffset 80
+        repeat
+
+image Kitty_blowjob_mouth_animation2:
+    animation
+    "Kitty_blowjob_mouth"
+
+    subpixel True
+    zoom 0.7
+    block:
+        pause 0.40
+        easeout 0.40 zoom 0.69
+        linear 0.10 zoom 0.7
+        easein 0.45 zoom 0.65
+        pause 0.15
+        easeout 0.25 zoom 0.7
+        linear 0.10 zoom 0.69
+        easein 0.30 zoom 0.7
+        pause 0.35
+        repeat
+
+image Kitty_blowjob_mask_animation2:
+    animation
+    "Kitty_blowjob_mask"
+
+    subpixel True
+    zoom 0.7
+    block:
+        pause 0.40
+        easeout 0.40 zoom 0.69
+        linear 0.10 zoom 0.7
+        easein 0.45 zoom 0.65
+        pause 0.15
+        easeout 0.25 zoom 0.7
+        linear 0.10 zoom 0.69
+        easein 0.30 zoom 0.7
+        pause 0.35
+        repeat
+
+image Kitty_blowjob_face_mask_animation2:
+    animation
+    AlphaMask("Kitty_blowjob_head", "Kitty_blowjob_mask_animation2")
+
+    subpixel True
+    block:
+        ease 1 yoffset 35
+        ease 1.5 yoffset -40
+        repeat
+
+image Kitty_blowjob_face_mask_animation3:
+    animation
+    AlphaMask("Kitty_blowjob_head", "Kitty_blowjob_mask")
+
+    subpixel True
+    ease 0.5 yoffset 50
+    block:
+        ease 1 yoffset 120
+        ease 1.5 yoffset 50
+        repeat
+
+image Kitty_blowjob_face_mask_animation4:
+    animation
+    AlphaMask("Kitty_blowjob_head", "Kitty_blowjob_mask")
+
+    subpixel True
+    ease 0.5 yoffset 100
+    block:
+        ease 1 yoffset 210
+        pause 0.5
+        ease 2 yoffset 80
+        repeat
+
+image Kitty_blowjob_spunk_mouth_animation2:
+    animation
+    "Kitty_blowjob_spunk_mouth_over"
+
+    subpixel True
+    zoom 0.7
+    block:
+        pause 0.40
+        easeout 0.40 zoom 0.69
+        linear 0.10 zoom 0.7
+        easein 0.45 zoom 0.65
+        pause 0.15
+        easeout 0.25 zoom 0.7
+        linear 0.10 zoom 0.69
+        easein 0.30 zoom 0.7
+        pause 0.35
+        repeat
+
+image Kitty_blowjob_spunk_mouth_over_animation2:
+    animation
+    "Kitty_blowjob_spunk_mouth_animation2"
+
+    subpixel True
+    block:
+        ease 1 yoffset 35
+        ease 1.5 yoffset -40
+        repeat
+
+image Kitty_blowjob_spunk_mouth_over_animation3:
+    animation
+    "Kitty_blowjob_spunk_mouth_over"
+
+    subpixel True
+    ease 0.5 yoffset 50
+    block:
+        ease 1 yoffset 120
+        ease 1.5 yoffset 50
+        repeat
+
+image Kitty_blowjob_spunk_mouth_over_animation4:
+    animation
+    "Kitty_blowjob_spunk_mouth_over"
+
+    subpixel True
+    ease 0.5 yoffset 100
+    block:
+        ease 1 yoffset 210
+        pause 0.5
+        ease 2 yoffset 80
+        repeat
+
+layeredimage Kitty_sprite blowjob:
+    always:
+        "Kitty_blowjob_body_animation[action_speed]"
+
+    always:
+        "Kitty_blowjob_head_animation[action_speed]" pos (0.0, -0.05) zoom 0.9
+
+    always:
+        "Zero_cock_Kitty"
+
+    if action_speed > 1:
+        "Kitty_blowjob_face_mask_animation[action_speed]" anchor (0.5, 0.5) pos (0.0, -0.05) zoom 0.9
+
+    if KittyX.spunk["mouth"] and action_speed > 1:
+        "Kitty_blowjob_spunk_mouth_over_animation[action_speed]" pos (0.0, -0.05) zoom 0.9
+
+    anchor (0.5, 0.0) offset (250, 750) zoom 1.1
 
 image Kitty_sex_body_animation0:
     "Kitty_sex_body"

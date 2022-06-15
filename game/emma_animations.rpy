@@ -287,6 +287,18 @@ image Emma_titjob_back_hair_animation3:
         pause 0.5
         repeat
 
+image Emma_titjob_back_hair_animation5:
+    animation
+    "Emma_blowjob_back_hair"
+
+    subpixel True
+    block:
+        ease 1.5 yoffset 38
+        pause 0.7
+        ease 0.3 yoffset 40
+        pause 0.5
+        repeat
+
 image Emma_titjob_body_animation0:
     animation
     "Emma_sex_body"
@@ -333,6 +345,18 @@ image Emma_titjob_body_animation3:
         pause 0.5
         repeat
 
+image Emma_titjob_body_animation5:
+    animation
+    "Emma_sex_body"
+
+    subpixel True
+    block:
+        ease 1.3 yoffset -5
+        pause 0.7
+        ease 0.5 yoffset 0
+        pause 0.5
+        repeat
+
 image Emma_titjob_head_animation0:
     animation
     "Emma_blowjob_head"
@@ -373,6 +397,18 @@ image Emma_titjob_head_animation3:
     subpixel True
     block:
         ease 1.5 yoffset 10
+        pause 0.7
+        ease 0.3 yoffset 40
+        pause 0.5
+        repeat
+
+image Emma_titjob_head_animation5:
+    animation
+    "Emma_blowjob_head"
+
+    subpixel True
+    block:
+        ease 1.5 yoffset 38
         pause 0.7
         ease 0.3 yoffset 40
         pause 0.5
@@ -425,6 +461,18 @@ image Emma_titjob_breasts_animation3:
         pause 0.5
         repeat
 
+image Emma_titjob_breasts_animation5:
+    animation
+    "Emma_titjob_breasts"
+
+    subpixel True
+    block:
+        ease 1.5 yoffset 0
+        pause 0.3
+        ease 0.9 yoffset 20
+        pause 0.5
+        repeat
+
 layeredimage Emma_sprite titjob:
     always:
         "Emma_titjob_back_hair_animation[action_speed]" pos (0.0, -0.24) zoom 0.56
@@ -439,9 +487,9 @@ layeredimage Emma_sprite titjob:
         "Zero_cock_Emma"
 
     always:
-        "Emma_titjob_breasts_animation[action_speed]" pos (0.0, -0.02)
+        "Emma_titjob_breasts_animation[action_speed]" pos (0.0, -0.04) zoom 0.9
 
-    anchor (0.5, 0.0) offset (640, 980) zoom 1.7
+    anchor (0.5, 0.0) offset (440, 1050) zoom 1.7
 
 image Emma_blowjob_blinking:
     "images/Emma_blowjob/Emma_blowjob_eyes[EmmaX.eyes].png"

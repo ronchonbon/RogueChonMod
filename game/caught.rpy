@@ -332,8 +332,7 @@ label caught_showering(Girl):
     $ Girl.change_face("_smile",1)
 
     $ Girl.location = "bg_showerroom"
-    $ Girl.outfit["hair"] = "_wet"
-    $ Girl.wet = 1
+    $ Girl.wet = True
     $ Girl.grool = 2
 
     if "will_masturbate" in Girl.daily_history:

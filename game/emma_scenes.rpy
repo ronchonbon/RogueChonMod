@@ -1,6 +1,11 @@
 label meet_Emma:
     show black_screen onlayer black
 
+    $ last_name = get_last_name(Player)
+
+    $ EmmaX.player_petname = "Mr. " + last_name
+    $ EmmaX.player_petnames.append("Mr. " + last_name)
+
     $ bg_current = "bg_classroom"
 
     $ EmmaX.outfit_name = "casual1"

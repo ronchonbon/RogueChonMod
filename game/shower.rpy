@@ -457,8 +457,7 @@ label showering:
             if temp_Girls[0].location == bg_current:
                 if temp_Girls[0] in staying_Girls:
                     $ temp_Girls[0].change_outfit("nude")
-                    $ temp_Girls[0].outfit["hair"] = "_wet"
-                    $ temp_Girls[0].wet = 1
+                    $ temp_Girls[0].wet = True
 
                     python:
                         for key in temp_Girls[0].spunk.keys():
@@ -658,8 +657,7 @@ label showering:
 
             while intruding_Girls:
                 $ intruding_Girls[0].change_outfit("nude")
-                $ intruding_Girls[0].outfit["hair"] = "_wet"
-                $ intruding_Girls[0].wet = 1
+                $ intruding_Girls[0].wet = True
 
                 python:
                     for key in intruding_Girls[0].spunk.keys():

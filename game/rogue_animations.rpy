@@ -230,12 +230,12 @@ layeredimage Rogue_sprite handjob:
 
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
 
-image Rogue_titjob_under_animation0:
-    "Rogue_titjob_under"
+image Rogue_titjob_back_hair_animation0:
+    "Rogue_back_hair"
 
-image Rogue_titjob_under_animation1:
+image Rogue_titjob_back_hair_animation1:
     animation
-    "Rogue_titjob_under"
+    "Rogue_back_hair"
 
     subpixel True
     block:
@@ -244,8 +244,9 @@ image Rogue_titjob_under_animation1:
         ease 1.3 yoffset -80
         repeat
 
-image Rogue_titjob_under_animation2:
-    "Rogue_titjob_under"
+image Rogue_titjob_back_hair_animation2:
+    animation
+    "Rogue_back_hair"
 
     subpixel True
     block:
@@ -254,12 +255,131 @@ image Rogue_titjob_under_animation2:
         ease 0.1 yoffset -50
         repeat
 
-image Rogue_titjob_over_animation0:
-    "Rogue_titjob_over"
-
-image Rogue_titjob_over_animation1:
+image Rogue_titjob_back_hair_animation3:
     animation
-    "Rogue_titjob_over"
+    "Rogue_back_hair"
+
+    subpixel True
+    ease 0.5 offset (2, 150)
+    block:
+        ease 2.5 offset (15, 250)
+        ease 2 offset (2, 150)
+        pause 0.5
+        repeat
+
+image Rogue_titjob_back_hair_animation5:
+    animation
+    "Rogue_back_hair"
+
+    subpixel True
+    block:
+        ease 2 yoffset 174
+        ease 1.6 yoffset 177
+        pause 0.4
+        repeat
+
+image Rogue_titjob_body_animation0:
+    "Rogue_titjob_body"
+
+image Rogue_titjob_body_animation1:
+    animation
+    "Rogue_titjob_body"
+
+    subpixel True
+    block:
+        ease 1.0 yoffset 100
+        ease 0.2 yoffset 100
+        ease 1.3 yoffset -80
+        repeat
+
+image Rogue_titjob_body_animation2:
+    animation
+    "Rogue_titjob_body"
+
+    subpixel True
+    block:
+        ease 0.28 yoffset 0
+        ease 0.37 yoffset -55
+        ease 0.1 yoffset -50
+        repeat
+
+image Rogue_titjob_body_animation3:
+    animation
+    "Rogue_titjob_body"
+
+    subpixel True
+    ease 0.5 yoffset 90
+    block:
+        ease 2.5 yoffset 170
+        ease 2 yoffset 90
+        pause 0.5
+        repeat
+
+image Rogue_titjob_body_animation5:
+    animation
+    "Rogue_titjob_body"
+
+    subpixel True
+    block:
+        ease 2.2 yoffset 120
+        ease 1.6 yoffset 140
+        pause 0.2
+        repeat
+
+image Rogue_titjob_head_animation0:
+    "Rogue_head"
+
+image Rogue_titjob_head_animation1:
+    animation
+    "Rogue_head"
+
+    subpixel True
+    block:
+        ease 1.0 yoffset 100
+        ease 0.2 yoffset 100
+        ease 1.3 yoffset -80
+        repeat
+
+image Rogue_titjob_head_animation2:
+    animation
+    "Rogue_head"
+
+    subpixel True
+    block:
+        ease 0.28 yoffset 0
+        ease 0.37 yoffset -55
+        ease 0.1 yoffset -50
+        repeat
+
+image Rogue_titjob_head_animation3:
+    animation
+    "Rogue_head"
+
+    subpixel True
+    ease 0.5 offset (2, 150)
+    block:
+        ease 2.5 offset (15, 250)
+        ease 2 offset (2, 150)
+        pause 0.5
+        repeat
+
+image Rogue_titjob_head_animation5:
+    animation
+    "Rogue_head"
+
+    subpixel True
+    block:
+        ease 2 yoffset 174
+        ease 1.6 yoffset 177
+        pause 0.4
+        repeat
+
+image Rogue_titjob_breasts_animation0:
+    "Rogue_titjob_breasts"
+
+image Rogue_titjob_breasts_animation1:
+    animation
+    "Rogue_titjob_breasts"
 
     subpixel True
     block:
@@ -268,9 +388,9 @@ image Rogue_titjob_over_animation1:
         ease 1.2 yoffset -80
         repeat
 
-image Rogue_titjob_over_animation2:
+image Rogue_titjob_breasts_animation2:
     animation
-    "Rogue_titjob_over"
+    "Rogue_titjob_breasts"
 
     subpixel True
     block:
@@ -279,15 +399,44 @@ image Rogue_titjob_over_animation2:
         ease 0.1 yoffset -50
         repeat
 
+image Rogue_titjob_breasts_animation3:
+    animation
+    "Rogue_titjob_breasts"
+
+    subpixel True
+    ease 0.5 yoffset 90
+    block:
+        ease 2.6 yoffset 170
+        ease 2.1 yoffset 90
+        pause 0.3
+        repeat
+
+image Rogue_titjob_breasts_animation5:
+    animation
+    "Rogue_titjob_breasts"
+
+    subpixel True
+    block:
+        ease 2.2 yoffset 120
+        ease 1.6 yoffset 140
+        pause 0.2
+        repeat
+
 layeredimage Rogue_sprite titjob:
     always:
-        "Rogue_titjob_under_animation[action_speed]"
+        "Rogue_titjob_back_hair_animation[action_speed]" pos (0.025, -0.48) zoom 0.9
+
+    always:
+        "Rogue_titjob_body_animation[action_speed]"
+
+    always:
+        "Rogue_titjob_head_animation[action_speed]" pos (0.025, -0.48) zoom 0.9
 
     always:
         "Zero_cock_Rogue"
 
     always:
-        "Rogue_titjob_over_animation[action_speed]"
+        "Rogue_titjob_breasts_animation[action_speed]"
 
     anchor (0.5, 0.0) offset (200, 850) zoom 0.72
 
