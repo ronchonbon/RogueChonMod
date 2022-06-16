@@ -75,7 +75,9 @@ layeredimage Xavier_sprite:
     always:
         "images/NPC/Xavier_mouth[Xavier_mouth].png"
 
-    always:
+    if Xavier_eyes == "_closed":
+        "images/NPC/Xavier_eyes[Xavier_eyes].png"
+    else:
         "Xavier_blinking"
 
     if Xavier_psychic:
@@ -91,13 +93,17 @@ image Xavier_blinking:
         3.25
     choice:
         3
+    "images/NPC/Xavier_eyes_squint.png"
+    0.05
     "images/NPC/Xavier_eyes_closed.png"
-    0.25
+    0.15
+    "images/NPC/Xavier_eyes_squint.png"
+    0.05
     repeat
 
 label change_Xavier_face(face = Xavier_emotion):
     if face == "_psychic":
-        $ Xavier_mouth = "_concentrate"
+        $ Xavier_mouth = "_stern"
         $ Xavier_brows = "_concentrate"
         $ Xavier_eyes = "_concentrate"
         $ Xavier_psychic = True
@@ -117,7 +123,7 @@ label change_Xavier_face(face = Xavier_emotion):
         $ Xavier_eyes = "_happy"
         $ Xavier_psychic = False
     if face == "angry":
-        $ Xavier_mouth = "_concentrate"
+        $ Xavier_mouth = "_stern"
         $ Xavier_brows = "_concentrate"
         $ Xavier_eyes = "_happy"
         $ Xavier_psychic = False

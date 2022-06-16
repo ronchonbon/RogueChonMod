@@ -432,12 +432,12 @@ image Rogue_titjob_cock_animation2:
 image Rogue_titjob_cock_animation3:
     "Zero_handjob_cock"
 
-    offset (0, -40)
+    offset (-10, -30)
     subpixel True
     block:
-        ease 2 rotate -5
+        ease 2 rotate -10
         pause 0.5
-        ease 2.5 rotate 0
+        ease 2.5 rotate -9
         repeat
 
 image Rogue_titjob_cock_animation5:
@@ -1283,23 +1283,7 @@ layeredimage Zero_cock_Kitty_mask:
         "Kitty_doggy_anus_mask_animation[action_speed]" offset (217, 514)
 
 image Emma_titjob_cock_animation0:
-    animation
     "Zero_blowjob_cock"
-
-    subpixel True
-    rotate -3
-    parallel:
-        pause 0.1
-        ease 1.6 yoffset 20
-        pause 0.1
-        ease 1.4 yoffset 0
-        repeat
-    parallel:
-        pause 0.1
-        ease 1.6 rotate 4
-        pause 0.1
-        ease 1.4 rotate -3
-        repeat
 
 image Emma_titjob_cock_animation1:
     animation
@@ -1331,9 +1315,9 @@ image Emma_titjob_cock_animation3:
     subpixel True
     block:
         pause 0.2
-        ease 1.6 yoffset -30
+        ease 1.6 yoffset -15
         pause 0.4
-        ease 0.3 yoffset -20
+        ease 0.9 yoffset -5
         pause 0.5
         repeat
 
@@ -1413,9 +1397,9 @@ image Laura_titjob_cock_animation3:
     subpixel True
     rotate 2
     block:
-        ease 2 yoffset -60
+        ease 2 yoffset -5
         pause 0.1
-        ease 2 yoffset -35
+        ease 2 yoffset 5
         pause 0.1
         repeat
 
@@ -1437,18 +1421,17 @@ layeredimage Zero_cock_Laura:
         "Zero_handjob_cock_animation[action_speed]" pos (0.035, 0.455) zoom 0.28
 
     if renpy.showing("Laura_sprite titjob"):
-        "Laura_titjob_cock_animation[action_speed]" pos (-0.07, 0.2) zoom 0.65
+        "Laura_titjob_cock_animation[action_speed]" pos (-0.07, 0.15) zoom 0.65
 
 image Jean_titjob_cock_animation0:
     animation
     "Zero_blowjob_cock"
 
     subpixel True
-    rotate -5
     block:
-        ease 2 rotate -3
+        ease 2 rotate -9
         pause 0.1
-        ease 2 rotate -5
+        ease 2 rotate -11
         pause 0.1
         repeat
 
@@ -1487,25 +1470,25 @@ image Jean_titjob_cock_animation3:
     "Zero_blowjob_cock"
 
     subpixel True
-    rotate -5
+    rotate -15
     parallel:
-        ease 2 yoffset 0
+        ease 2 yoffset -15
         pause 0.1
-        ease 2 yoffset 20
+        ease 2 yoffset 0
         pause 0.1
         repeat
 
 image Jean_titjob_cock_animation5:
     "Zero_blowjob_cock"
 
-    offset (0, 25) rotate -10
+    offset (-5, 10) rotate -14
 
 layeredimage Zero_cock_Jean:
     if renpy.showing("Jean_sprite handjob"):
         "Zero_handjob_cock_animation[action_speed]" pos (0.035, 0.455) zoom 0.28
 
     if renpy.showing("Jean_sprite titjob"):
-        "Jean_titjob_cock_animation[action_speed]" pos (0.032, 0.35) zoom 0.65
+        "Jean_titjob_cock_animation[action_speed]" pos (0.038, 0.3) zoom 0.65
 
 image Storm_titjob_cock_animation0:
     animation
@@ -1562,15 +1545,15 @@ image Storm_titjob_cock_animation3:
         ease 0.4 yoffset 30
         repeat
     parallel:
-        ease 1 rotate 0
+        ease 1 rotate -4
         pause 0.1
-        ease 0.5 rotate -2
+        ease 0.5 rotate -6
         repeat
 
 image Storm_titjob_cock_animation5:
     "Zero_blowjob_cock"
 
-    offset (0, 25) rotate -5
+    offset (0, 55) rotate -3
 
 layeredimage Zero_cock_Storm:
     if renpy.showing("Storm_sprite handjob"):
@@ -1612,7 +1595,7 @@ image Jubes_titjob_cock_animation3:
 
     subpixel True
     block:
-        ease 2 yoffset 0
+        ease 2 yoffset 10
         pause 0.1
         ease 2 yoffset 20
         pause 0.1
@@ -1621,7 +1604,7 @@ image Jubes_titjob_cock_animation3:
 image Jubes_titjob_cock_animation5:
     "Zero_blowjob_cock"
 
-    offset (0, 25)
+    offset (0, 50)
 
 layeredimage Zero_cock_Jubes:
     if renpy.showing("Jubes_sprite handjob"):

@@ -1,15 +1,15 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 222, in script
-    show Kitty_sprite doggy at sprite_location(0.5)
-Exception: DynamicImage u'Kitty_doggy_ass_animation[action_speed]': could not find image. (u'Kitty_doggy_ass_animation4')
+  File "game/script.rpy", line 227, in script
+    show Jubes_sprite titjob at sprite_location(0.5)
+Exception: DynamicImage u'Jubes_titjob_breasts_animation[action_speed]': could not find image. (u'Jubes_titjob_breasts_animation4')
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 222, in script
-    show Kitty_sprite doggy at sprite_location(0.5)
+  File "game/script.rpy", line 227, in script
+    show Jubes_sprite titjob at sprite_location(0.5)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1197, in execute
     show_imspec(self.imspec, atl=getattr(self, "atl", None))
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1167, in show_imspec
@@ -30,19 +30,13 @@ Full traceback:
     d.visit_all(callback, seen)
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
     for d in self.visit():
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1415, in visit
-    self.update(self.last_st, self.last_at)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/layout.py", line 1443, in update
-    child.visit_all(lambda c : c.per_interact())
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/core.py", line 558, in visit_all
-    for d in self.visit():
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 744, in visit
     self.find_target()
   File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/display/image.py", line 652, in find_target
     raise Exception(error)
-Exception: DynamicImage u'Kitty_doggy_ass_animation[action_speed]': could not find image. (u'Kitty_doggy_ass_animation4')
+Exception: DynamicImage u'Jubes_titjob_breasts_animation[action_speed]': could not find image. (u'Jubes_titjob_breasts_animation4')
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
-Rogue-Like Chonky Mod 0.2d
-Wed Jun 15 02:32:28 2022
+Rogue-Like Chonky Mod 0.2e
+Wed Jun 15 23:28:25 2022

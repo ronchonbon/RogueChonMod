@@ -276,6 +276,18 @@ image Jubes_titjob_jacket_back_animation3:
         ease 0.45 yoffset 110
         repeat
 
+image Jubes_titjob_jacket_back_animation5:
+    animation
+    "Jubes_titjob_jacket_back"
+
+    subpixel True
+    block:
+        ease 2 yoffset 130
+        pause 0.2
+        ease 2 yoffset 140
+        pause 0.5
+        repeat
+
 image Jubes_titjob_bra_back_animation0:
     animation
     "Jubes_titjob_bra_back"
@@ -325,6 +337,19 @@ image Jubes_titjob_bra_back_animation3:
         ease 0.4 yoffset 110
         repeat
 
+image Jubes_titjob_bra_back_animation5:
+    animation
+    "Jubes_titjob_bra_back"
+
+    subpixel True
+    block:
+        pause 0.1
+        ease 2 yoffset 100
+        pause 0.2
+        ease 2 yoffset 110
+        pause 0.4
+        repeat
+
 image Jubes_titjob_body_animation0:
     animation
     "Jubes_titjob_body"
@@ -371,6 +396,18 @@ image Jubes_titjob_body_animation3:
         ease 0.45 yoffset 110
         repeat
 
+image Jubes_titjob_body_animation5:
+    animation
+    "Jubes_titjob_body"
+
+    subpixel True
+    block:
+        ease 2 yoffset 130
+        pause 0.2
+        ease 2 yoffset 140
+        pause 0.5
+        repeat
+
 image Jubes_titjob_head_animation0:
     animation
     "Jubes_blowjob_head"
@@ -384,7 +421,7 @@ image Jubes_titjob_head_animation0:
         repeat
     parallel:
         pause 0.1
-        ease 2 rotate -5
+        ease 2 rotate -0.5
         pause 0.1
         ease 2 rotate 0
         repeat
@@ -432,7 +469,7 @@ image Jubes_titjob_head_animation3:
     subpixel True
     rotate -5
     parallel:
-        ease 1 yoffset 70
+        ease 1 yoffset 80
         pause 0.1
         ease 0.5 yoffset 140
         repeat
@@ -440,6 +477,23 @@ image Jubes_titjob_head_animation3:
         ease 1 rotate 0
         pause 0.1
         ease 0.5 rotate -5
+        repeat
+
+image Jubes_titjob_head_animation5:
+    animation
+    "Jubes_blowjob_head"
+
+    subpixel True
+    rotate -5
+    parallel:
+        ease 2 yoffset 125
+        pause 0.2
+        ease 2 yoffset 130
+        pause 0.5
+        repeat
+    parallel:
+        ease 2 rotate -5
+        pause 0.5
         repeat
 
 image Jubes_titjob_breasts_under_animation0:
@@ -491,6 +545,19 @@ image Jubes_titjob_breasts_under_animation3:
         ease 0.4 yoffset 110
         repeat
 
+image Jubes_titjob_breasts_under_animation5:
+    animation
+    "Jubes_titjob_breasts_under"
+
+    subpixel True
+    block:
+        pause 0.1
+        ease 2 yoffset 100
+        pause 0.2
+        ease 2 yoffset 110
+        pause 0.4
+        repeat
+
 image Jubes_titjob_breasts_animation0:
     animation
     "Jubes_titjob_breasts"
@@ -538,6 +605,19 @@ image Jubes_titjob_breasts_animation3:
         ease 0.7 yoffset 60
         pause 0.2
         ease 0.4 yoffset 110
+        repeat
+
+image Jubes_titjob_breasts_animation5:
+    animation
+    "Jubes_titjob_breasts"
+
+    subpixel True
+    block:
+        pause 0.1
+        ease 2 yoffset 100
+        pause 0.2
+        ease 2 yoffset 110
+        pause 0.4
         repeat
 
 layeredimage Jubes_sprite titjob:

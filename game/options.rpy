@@ -2,13 +2,15 @@ init -1 python hide:
 
     config.developer = True
 
-    config.screen_width = 1920 #1600
-    config.screen_height = 1080 #900
+    config.image_cache_size_mb = 1024
+
+    config.screen_width = 1920
+    config.screen_height = 1080
 
     config.window_title = u"Rogue-Like Chonky Mod"
 
     config.name = "Rogue-Like Chonky Mod"
-    config.version = "0.2d"
+    config.version = "0.2e"
 
     theme.tv(
         widget = "#6A7183",
@@ -35,9 +37,8 @@ init -1 python hide:
     style.window.top_padding = 25
     style.window.bottom_padding = 25
     style.window.xminimum = 5
-    style.window.yminimum = 5
-
     style.window.xmaximum = 500 #mine
+    style.window.yminimum = 5
 
     style.say_who_window.background = Frame("images/Nametag.png", 20,20) #namebox.png
     style.say_who_window.xalign = 0.05
@@ -62,7 +63,7 @@ init -1 python hide:
 
     style.textbox = Style(style.default)
     style.textbox.background = Frame("images/chatbox.png", 12, 12)
-    style.textbox.padding = (25,25)
+    style.textbox.padding = (25, 25)
     style.textbox.xminimum = 100
     style.textbox.xmaximum = 450
 

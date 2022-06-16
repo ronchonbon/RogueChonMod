@@ -32,7 +32,7 @@ layeredimage Rogue_grool_animations:
         Null()
     elif RogueX.outfit["bottom"] == "_pants" and RogueX.bottom_pulled_down:
         AlphaMask("Rogue_grool_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_pants.png")
-    elif RogueX.outfit["underwear"] and RogueX.underwear_pulled_down:
+    elif RogueX.underwear_pulled_down:
         AlphaMask("Rogue_grool_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_underwear.png")
     elif not RogueX.pussy_covered:
         AlphaMask("Rogue_grool_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask.png")
@@ -55,7 +55,7 @@ layeredimage Rogue_spunk_animations:
         Null()
     elif RogueX.outfit["bottom"] == "_pants" and RogueX.bottom_pulled_down:
         AlphaMask("Rogue_spunk_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_pants.png")
-    elif RogueX.outfit["underwear"] and RogueX.underwear_pulled_down:
+    elif RogueX.underwear_pulled_down:
         AlphaMask("Rogue_spunk_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_underwear.png")
     elif not RogueX.pussy_covered:
         AlphaMask("Rogue_spunk_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask.png")
@@ -260,10 +260,16 @@ image Rogue_titjob_back_hair_animation3:
     "Rogue_back_hair"
 
     subpixel True
-    ease 0.5 offset (2, 150)
-    block:
-        ease 2.5 offset (15, 250)
-        ease 2 offset (2, 150)
+    rotate -10
+    ease 0.5 offset (-30, 150)
+    parallel:
+        ease 2.5 offset (-30, 250)
+        ease 2 offset (-30, 150)
+        pause 0.5
+        repeat
+    parallel:
+        ease 2.5 rotate -10
+        ease 2 rotate -5
         pause 0.5
         repeat
 
@@ -356,10 +362,16 @@ image Rogue_titjob_head_animation3:
     "Rogue_head"
 
     subpixel True
-    ease 0.5 offset (2, 150)
-    block:
-        ease 2.5 offset (15, 250)
-        ease 2 offset (2, 150)
+    rotate -10
+    ease 0.5 offset (-30, 150)
+    parallel:
+        ease 2.5 offset (-30, 250)
+        ease 2 offset (-30, 150)
+        pause 0.5
+        repeat
+    parallel:
+        ease 2.5 rotate -10
+        ease 2 rotate -5
         pause 0.5
         repeat
 
@@ -443,8 +455,6 @@ layeredimage Rogue_sprite titjob:
 image Rogue_blowjob_back_hair_animation0:
     "Rogue_back_hair"
 
-    ease 1.5 offset (0, 0)
-
 image Rogue_blowjob_back_hair_animation1:
     animation
     "Rogue_back_hair"
@@ -492,8 +502,6 @@ image Rogue_blowjob_back_hair_animation4:
 
 image Rogue_blowjob_body_animation0:
     "Rogue_sprite standing"
-
-    ease 1.5 offset (0, 0)
 
 image Rogue_blowjob_body_animation1:
     animation
@@ -589,12 +597,6 @@ image Rogue_blowjob_head_animation4:
         pause 0.5
         ease 2 offset (0, 40)
         repeat
-
-image Rogue_blowjob_mouth_animation0:
-    "Rogue_blowjob_mouth"
-
-image Rogue_blowjob_mouth_animation1:
-    "Rogue_blowjob_mouth"
 
 image Rogue_blowjob_mouth_animation2:
     animation
@@ -1014,11 +1016,11 @@ image Rogue_doggy_blinking:
         3.25
     choice:
         3
-    "images/Rogue_doggy/Rogue_doggy_eyes_sexy.png"
+    "images/Rogue_doggy/Rogue_doggy_eyes_squint.png"
     0.05
     "images/Rogue_doggy/Rogue_doggy_eyes_closed.png"
     0.15
-    "images/Rogue_doggy/Rogue_doggy_eyes_sexy.png"
+    "images/Rogue_doggy/Rogue_doggy_eyes_squint.png"
     0.05
     repeat
 

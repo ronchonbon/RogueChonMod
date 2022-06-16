@@ -961,4 +961,4 @@ layeredimage Laura_sprite titjob:
     always:
         "Laura_titjob_hair_animation[action_speed]" pos (-0.035, -0.26) zoom 1.1
 
-    anchor (0.5, 0.0) offset (400, 850) zoom 1.05
+    anchor (0.5, 0.0) offset (400, 900) zoom 1.05

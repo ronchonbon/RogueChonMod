@@ -4,15 +4,14 @@ layeredimage Rogue_sprite standing:
 
     if RogueX.outfit["jacket"] == "_hoodie":
         "images/Rogue_standing/Rogue_standing_back_outer_accessory[RogueX.outfit[jacket]].png"
-    elif RogueX.outfit["cloak"]:
+
+    if RogueX.outfit["cloak"]:
         "images/Rogue_standing/Rogue_standing_back_outer_accessory[RogueX.outfit[cloak]].png"
 
     if RogueX.outfit["bottom"] == "_pants":
         "images/Rogue_standing/Rogue_standing_back_outer_accessory[RogueX.outfit[bottom]].png"
 
-    if renpy.showing("Rogue_sprite titjob") or renpy.showing("Rogue_sprite blowjob"):
-        Null()
-    else:
+    if not renpy.showing("Rogue_sprite blowjob"):
         "Rogue_back_hair" pos (0.156, 0.158) zoom 0.29
 
     always:
@@ -38,11 +37,11 @@ layeredimage Rogue_sprite standing:
 
     if not RogueX.outfit["underwear"]:
         Null()
-    elif RogueX.underwear_pulled_down and RogueX.grool > 1 and RogueX.outfit["underwear"] not in ["_black_panties", "_harness"]:
+    elif RogueX.underwear_pulled_down and RogueX.grool > 1 and RogueX.outfit["underwear"] not in ["_black_panties", "_lace_panties", "_harness"]:
         "images/Rogue_standing/Rogue_standing_underwear[RogueX.outfit[underwear]]_down_grool.png"
     elif RogueX.underwear_pulled_down:
         "images/Rogue_standing/Rogue_standing_underwear[RogueX.outfit[underwear]]_down.png"
-    elif RogueX.grool > 1 and RogueX.outfit["underwear"] not in ["_black_panties", "_harness"]:
+    elif RogueX.grool and RogueX.outfit["underwear"] not in ["_black_panties", "_lace_panties", "_harness"]:
         "images/Rogue_standing/Rogue_standing_underwear[RogueX.outfit[underwear]]_grool.png"
     else:
         "images/Rogue_standing/Rogue_standing_underwear[RogueX.outfit[underwear]].png"
@@ -153,7 +152,7 @@ layeredimage Rogue_head:
         "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_tongue.png"
     elif renpy.showing("Rogue_sprite blowjob") and action_speed == 1:
         "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_tongue.png"
-    elif renpy.showing("Rogue_sprite blowjob") and action_speed > 2:
+    elif renpy.showing("Rogue_sprite blowjob") and action_speed > 1:
         "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_sucking_under.png"
     elif RogueX.mouth == "_sucking":
         "images/Rogue_blowjob/Rogue_blowjob_spunk_mouth_tongue.png"
@@ -263,11 +262,11 @@ layeredimage Rogue_sex_body:
     if RogueX.outfit["neck"]:
         "images/Rogue_sex/Rogue_sex_neck[RogueX.outfit[neck]].png"
 
-    if RogueX.spunk["belly"]:
-        "images/Kitty_sex/Kitty_sex_spunk_belly.png"
-
     if RogueX.spunk["breasts"]:
         "images/Kitty_sex/Kitty_sex_spunk_breasts.png"
+
+    if RogueX.spunk["belly"]:
+        "images/Kitty_sex/Kitty_sex_spunk_belly.png"
 
     if "suck_breasts" in [Player.primary_action, Player.secondary_action]:
         "licking" offset (0.245, 0.273) zoom 0.6
@@ -356,7 +355,7 @@ layeredimage Rogue_sex_legs:
 
     if not RogueX.outfit["underwear"] or RogueX.underwear_pulled_down:
         Null()
-    elif RogueX.grool and RogueX.outfit["underwear"] not in ["_lace_panties", "_bikini_bottoms", "_harness"]:
+    elif RogueX.grool and RogueX.outfit["underwear"] in ["_shorts", "_green_panties", "_black_panties"]:
         "images/Rogue_sex/Rogue_sex_underwear[RogueX.outfit[underwear]]_grool.png"
     else:
         "images/Rogue_sex/Rogue_sex_underwear[RogueX.outfit[underwear]].png"
@@ -374,6 +373,9 @@ layeredimage Rogue_sex_legs:
         "images/Rogue_sex/Rogue_sex_bottom[RogueX.outfit[bottom]]_grool.png"
     else:
         "images/Rogue_sex/Rogue_sex_bottom[RogueX.outfit[bottom]].png"
+
+    if RogueX.outfit["belt"]:
+        "images/Rogue_sex/Rogue_sex_belt[RogueX.outfit[belt]].png"
 
     if Player.sprite and Player.cock_position == "anal":
         AlphaMask("Zero_cock_Rogue", "images/Kitty_sex/Kitty_sex_anus_mask.png")
@@ -441,7 +443,11 @@ layeredimage Rogue_sex_feet:
     if RogueX.outfit["underwear"] and RogueX.underwear_pulled_down:
         "images/Rogue_sex/Rogue_sex_underwear[RogueX.outfit[underwear]]_down.png"
 
-    if RogueX.outfit["bottom"] == "_pants":
+    if not RogueX.outfit["bottom"] == "_pants":
+        Null()
+    elif RogueX.bottom_pulled_down:
+        "images/Rogue_sex/Rogue_sex_bottom[RogueX.outfit[bottom]]_down.png"
+    else:
         "images/Rogue_sex/Rogue_sex_bottom[RogueX.outfit[bottom]]_feet.png"
 
     anchor (0.5, 0.5)
@@ -487,19 +493,14 @@ layeredimage Rogue_doggy_body:
     else:
         "Rogue_doggy_blinking"
 
+    if RogueX.spunk["face"]:
+        "images/Rogue_doggy/Rogue_doggy_spunk_face.png"
+
     if RogueX.outfit["bra"]:
         "images/Rogue_doggy/Rogue_doggy_bra[RogueX.outfit[bra]].png"
 
-    if RogueX.wet:
-        "images/Rogue_doggy/Rogue_doggy_water_top.png"
-
     if RogueX.outfit["top"]:
         "images/Rogue_doggy/Rogue_doggy_top[RogueX.outfit[top]].png"
-
-    if RogueX.wet:
-        "images/Rogue_doggy/Rogue_doggy_hair_wet.png"
-    else:
-        "images/Rogue_doggy/Rogue_doggy_hair[RogueX.outfit[hair]].png"
 
     if RogueX.outfit["jacket"] == "_hoodie":
         "images/Rogue_doggy/Rogue_doggy_jacket_hood.png"
@@ -507,8 +508,13 @@ layeredimage Rogue_doggy_body:
     if RogueX.spunk["hair"]:
         "images/Rogue_doggy/Rogue_doggy_spunk_hair.png"
 
-    if RogueX.spunk["face"]:
-        "images/Rogue_doggy/Rogue_doggy_spunk_face.png"
+    if RogueX.wet:
+        "images/Rogue_doggy/Rogue_doggy_water_top.png"
+
+    if RogueX.wet:
+        "images/Rogue_doggy/Rogue_doggy_hair_wet.png"
+    else:
+        "images/Rogue_doggy/Rogue_doggy_hair[RogueX.outfit[hair]].png"
 
     if "fondle_breasts" in [Player.primary_action, Player.secondary_action]:
         "Zero_doggy_fondle_breast_animation"
@@ -516,21 +522,15 @@ layeredimage Rogue_doggy_body:
     anchor (0.5, 0.5)
 
 layeredimage Rogue_doggy_ass:
-    if RogueX.outfit["underwear"] and RogueX.underwear_pulled_down and RogueX.outfit["underwear"] != "_harness":
+    if RogueX.outfit["underwear"] and RogueX.underwear_pulled_down:
         "images/Rogue_doggy/Rogue_doggy_underwear[RogueX.outfit[underwear]]_back.png"
 
     always:
         "images/Rogue_doggy/Rogue_doggy_ass.png"
 
-    if RogueX.wet:
-        "images/Rogue_doggy/Rogue_doggy_water_ass.png"
-
-    if RogueX.outfit["hose"] == "_stockings":
-        "images/Rogue_doggy/Rogue_doggy_hose[RogueX.outfit[hose]].png"
-
     if not RogueX.outfit["underwear"] or not RogueX.underwear_pulled_down:
         Null()
-    elif RogueX.grool > 1 and RogueX.outfit["underwear"] == "_green_panties":
+    elif RogueX.grool and RogueX.outfit["underwear"] in ["_shorts", "_green_panties"]:
         "images/Rogue_doggy/Rogue_doggy_underwear[RogueX.outfit[underwear]]_down_grool.png"
     else:
         "images/Rogue_doggy/Rogue_doggy_underwear[RogueX.outfit[underwear]]_down.png"
@@ -541,7 +541,7 @@ layeredimage Rogue_doggy_ass:
         "images/Rogue_doggy/Rogue_doggy_pubes_underwear.png"
     elif RogueX.outfit["underwear"]:
         "images/Rogue_doggy/Rogue_doggy_pubes_underwear.png"
-    elif RogueX.outfit["hose"] and RogueX.outfit["hose"] != "_stockings":
+    elif RogueX.outfit["hose"] and not RogueX.underwear_pulled_down and RogueX.outfit["hose"] not in ["_stockings", "_stockings_and_garterbelt"]:
         "images/Rogue_doggy/Rogue_doggy_pubes_underwear.png"
     else:
         "images/Rogue_doggy/Rogue_doggy_pubes.png"
@@ -590,9 +590,6 @@ layeredimage Rogue_doggy_ass:
     if Player.sprite and Player.cock_position == "anal" and action_speed > 1:
         "images/Rogue_doggy/Rogue_doggy_anus_full_cheeks.png"
 
-    if RogueX.outfit["hose"] and not RogueX.underwear_pulled_down:
-        "images/Rogue_doggy/Rogue_doggy_hose[RogueX.outfit[hose]].png"
-
     if not RogueX.spunk["anus"]:
         Null()
     elif Player.cock_position == "anal" and action_speed:
@@ -604,7 +601,11 @@ layeredimage Rogue_doggy_ass:
     else:
         "images/Rogue_doggy/Rogue_doggy_spunk_anus_loose.png"
 
-    if RogueX.outfit["underwear"] and not RogueX.underwear_pulled_down:
+    if not RogueX.outfit["underwear"] or RogueX.underwear_pulled_down:
+        Null()
+    elif RogueX.grool and RogueX.outfit["underwear"] in ["_shorts", "_green_panties"]:
+        "images/Rogue_doggy/Rogue_doggy_underwear[RogueX.outfit[underwear]]_grool.png"
+    else:
         "images/Rogue_doggy/Rogue_doggy_underwear[RogueX.outfit[underwear]].png"
 
     if not RogueX.outfit["hose"] or RogueX.underwear_pulled_down:
@@ -614,20 +615,16 @@ layeredimage Rogue_doggy_ass:
     else:
         "images/Rogue_doggy/Rogue_doggy_hose[RogueX.outfit[hose]].png"
 
-    if RogueX.outfit["bottom"] not in ["_pants", "_skirt"]:
+    if not RogueX.outfit["bottom"]:
         Null()
-    elif RogueX.outfit["bottom"] == "_pants" and RogueX.bottom_pulled_down:
-        "images/Rogue_doggy/Rogue_doggy_bottom_pants_down.png"
     elif RogueX.outfit["bottom"] == "_pants" and RogueX.grool > 1:
         "images/Rogue_doggy/Rogue_doggy_bottom_pants_grool.png"
-    elif RogueX.outfit["bottom"] == "_pants":
-        "images/Rogue_doggy/Rogue_doggy_bottom_pants.png"
-    elif RogueX.upskirt and Player.sprite and Player.cock_position == "anal" and action_speed:
+    elif RogueX.outfit["bottom"] == "_skirt" and RogueX.upskirt and Player.sprite and Player.cock_position == "anal" and action_speed:
         "images/Rogue_doggy/Rogue_doggy_bottom_skirt_anal_down.png"
-    elif RogueX.upskirt:
-        "images/Rogue_doggy/Rogue_doggy_bottom_skirt_down.png"
+    elif RogueX.bottom_pulled_down or RogueX.upskirt:
+        "images/Rogue_doggy/Rogue_doggy_bottom[RogueX.outfit[bottom]]_down.png"
     else:
-        "images/Rogue_doggy/Rogue_doggy_bottom_skirt.png"
+        "images/Rogue_doggy/Rogue_doggy_bottom[RogueX.outfit[bottom]]t.png"
 
     if RogueX.outfit["top"] not in ["_nighty", "_towel"]:
         Null()
@@ -642,6 +639,9 @@ layeredimage Rogue_doggy_ass:
         "images/Rogue_doggy/Rogue_doggy_belt[RogueX.outfit[belt]]_up.png"
     else:
         "images/Rogue_doggy/Rogue_doggy_belt[RogueX.outfit[belt]].png"
+
+    if RogueX.wet:
+        "images/Rogue_doggy/Rogue_doggy_water_ass.png"
 
     if Player.sprite and Player.cock_position == "in":
         AlphaMask("Zero_cock_Rogue", "Zero_cock_Rogue_mask")
@@ -711,7 +711,7 @@ layeredimage Rogue_doggy_shins:
     always:
         "images/Rogue_doggy/Rogue_doggy_feet.png"
 
-    if RogueX.outfit["hose"] and RogueX.outfit["hose"] != "_garterbelt":
+    if RogueX.outfit["hose"] and not RogueX.underwear_pulled_down and RogueX.outfit["hose"] != "_garterbelt":
         "images/Rogue_doggy/Rogue_doggy_hose[RogueX.outfit[hose]]_feet.png"
 
     anchor (0.5, 0.5)

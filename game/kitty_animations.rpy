@@ -6,11 +6,11 @@ image Kitty_blinking:
         3.25
     choice:
         3
-    "images/Kitty_standing/Kitty_standing_eyes_sexy.png"
+    "images/Kitty_standing/Kitty_standing_eyes_squint.png"
     0.05
     "images/Kitty_standing/Kitty_standing_eyes_closed.png"
     0.15
-    "images/Kitty_standing/Kitty_standing_eyes_sexy.png"
+    "images/Kitty_standing/Kitty_standing_eyes_squint.png"
     0.05
     repeat
 

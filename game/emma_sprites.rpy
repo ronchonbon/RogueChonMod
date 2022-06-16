@@ -1,4 +1,4 @@
-layeredimage Emma_sprite standing normal:
+layeredimage Emma_sprite standing:
     # always:
     #     "images/Emma_standing/Emma_standing_head_reference.png"
 
@@ -528,10 +528,19 @@ layeredimage Emma_titjob_breasts:
     anchor (0.5, 0.5)
 
 layeredimage Emma_blowjob_back_hair:
-    if EmmaX.wet or EmmaX.outfit["hair"] == "_wavy":
+    if EmmaX.wet or EmmaX.outfit["hair"] != "_wavy":
         Null()
     else:
         "images/Emma_blowjob/Emma_blowjob_back_hair.png"
+
+    anchor (0.5, 0.5)
+
+layeredimage Emma_blowjob_body:
+    if "blanket" in EmmaX.recent_history:
+        "images/Kitty_blowjob/Kitty_blowjob_blanket.png" pos (0.0, 0.0) zoom 0.8
+
+    always:
+        "Emma_sex_body"
 
     anchor (0.5, 0.5)
 
@@ -624,9 +633,9 @@ layeredimage Emma_sex_body:
     elif renpy.showing("Emma_sprite titjob"):
         "images/Emma_titjob/Emma_titjob_jacket[EmmaX.outfit[jacket]].png"
     elif EmmaX.breasts_supported and EmmaX.jacket_opened:
-        "images/Emma_sex/Emma_sex_jacket[EmmaX.outfit[jacket]]_up_aside.png"
+        "images/Emma_sex/Emma_sex_jacket[EmmaX.outfit[jacket]]_up_open.png"
     elif EmmaX.jacket_opened:
-        "images/Emma_sex/Emma_sex_jacket[EmmaX.outfit[jacket]]_down_aside.png"
+        "images/Emma_sex/Emma_sex_jacket[EmmaX.outfit[jacket]]_down_open.png"
     elif EmmaX.breasts_supported:
         "images/Emma_sex/Emma_sex_jacket[EmmaX.outfit[jacket]]_up.png"
     else:

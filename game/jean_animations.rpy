@@ -221,6 +221,31 @@ image Jean_titjob_bra_back_animation2:
         ease 0.4 yoffset 80
         repeat
 
+image Jean_titjob_bra_back_animation3:
+    animation
+    "Jean_titjob_bra_back"
+
+    subpixel True
+    block:
+        pause 0.2
+        ease 1.9 yoffset 80
+        pause 0.2
+        ease 1.9 yoffset 90
+        repeat
+
+image Jean_titjob_bra_back_animation5:
+    animation
+    "Jean_titjob_bra_back"
+
+    subpixel True
+    block:
+        pause 0.1
+        ease 2 yoffset 80
+        pause 0.2
+        ease 2 yoffset 90
+        pause 0.4
+        repeat
+
 image Jean_titjob_back_hair_animation0:
     animation
     "Jean_blowjob_back_hair"
@@ -275,6 +300,42 @@ image Jean_titjob_back_hair_animation2:
         ease 0.5 rotate -5
         repeat
 
+image Jean_titjob_back_hair_animation3:
+    animation
+    "Jean_blowjob_back_hair"
+
+    subpixel True
+    rotate 0
+    parallel:
+        ease 2 yoffset 125
+        pause 0.1
+        ease 2 yoffset 130
+        pause 0.1
+        repeat
+    parallel:
+        pause 0.1
+        ease 2 rotate -5
+        pause 0.1
+        ease 2 rotate 0
+        repeat
+
+image Jean_titjob_back_hair_animation5:
+    animation
+    "Jean_blowjob_back_hair"
+
+    subpixel True
+    rotate -5
+    parallel:
+        ease 2 yoffset 125
+        pause 0.2
+        ease 2 yoffset 130
+        pause 0.5
+        repeat
+    parallel:
+        ease 2 rotate -5
+        pause 0.5
+        repeat
+
 image Jean_titjob_body_animation0:
     animation
     "Jean_titjob_body"
@@ -308,6 +369,30 @@ image Jean_titjob_body_animation2:
         ease 1 yoffset -20
         pause 0.1
         ease 0.5 yoffset 80
+        repeat
+
+image Jean_titjob_body_animation3:
+    animation
+    "Jean_titjob_body"
+
+    subpixel True
+    block:
+        ease 2 yoffset 130
+        pause 0.1
+        ease 2 yoffset 140
+        pause 0.1
+        repeat
+
+image Jean_titjob_body_animation5:
+    animation
+    "Jean_titjob_body"
+
+    subpixel True
+    block:
+        ease 2 yoffset 130
+        pause 0.2
+        ease 2 yoffset 140
+        pause 0.5
         repeat
 
 image Jean_titjob_head_animation0:
@@ -364,6 +449,41 @@ image Jean_titjob_head_animation2:
         ease 0.5 rotate -5
         repeat
 
+image Jean_titjob_head_animation3:
+    animation
+    "Jean_blowjob_head"
+
+    subpixel True
+    parallel:
+        ease 2 yoffset 125
+        pause 0.1
+        ease 2 yoffset 130
+        pause 0.1
+        repeat
+    parallel:
+        pause 0.1
+        ease 2 rotate -5
+        pause 0.1
+        ease 2 rotate 0
+        repeat
+
+image Jean_titjob_head_animation5:
+    animation
+    "Jean_blowjob_head"
+
+    subpixel True
+    rotate -5
+    parallel:
+        ease 2 yoffset 125
+        pause 0.2
+        ease 2 yoffset 130
+        pause 0.5
+        repeat
+    parallel:
+        ease 2 rotate -5
+        pause 0.5
+        repeat
+
 image Jean_titjob_right_breast_animation0:
     animation
     "Jean_titjob_right_breast"
@@ -399,6 +519,31 @@ image Jean_titjob_right_breast_animation2:
         ease 0.7 yoffset -40
         pause 0.2
         ease 0.4 yoffset 80
+        repeat
+
+image Jean_titjob_right_breast_animation3:
+    animation
+    "Jean_titjob_right_breast"
+
+    subpixel True
+    block:
+        pause 0.2
+        ease 1.9 yoffset 80
+        pause 0.2
+        ease 1.9 yoffset 90
+        repeat
+
+image Jean_titjob_right_breast_animation5:
+    animation
+    "Jean_titjob_right_breast"
+
+    subpixel True
+    block:
+        pause 0.1
+        ease 2 yoffset 80
+        pause 0.2
+        ease 2 yoffset 90
+        pause 0.4
         repeat
 
 image Jean_titjob_bra_stretch_animation0:
@@ -438,6 +583,17 @@ image Jean_titjob_bra_stretch_animation2:
         ease 0.3 yoffset 50
         repeat
 
+image Jean_titjob_bra_stretch_animation3:
+    animation
+    "Jean_titjob_bra_stretch"
+
+    offset (-20, 145)
+
+image Jean_titjob_bra_stretch_animation5:
+    "Jean_titjob_bra_stretch"
+
+    offset (-20, 145)
+
 image Jean_titjob_breasts_animation0:
     animation
     "Jean_titjob_breasts"
@@ -473,6 +629,31 @@ image Jean_titjob_breasts_animation2:
         ease 0.7 yoffset -40
         pause 0.2
         ease 0.4 yoffset 80
+        repeat
+
+image Jean_titjob_breasts_animation3:
+    animation
+    "Jean_titjob_breasts"
+
+    subpixel True
+    block:
+        pause 0.2
+        ease 1.9 yoffset 80
+        pause 0.2
+        ease 1.9 yoffset 90
+        repeat
+
+image Jean_titjob_breasts_animation5:
+    animation
+    "Jean_titjob_breasts"
+
+    subpixel True
+    block:
+        pause 0.1
+        ease 2 yoffset 80
+        pause 0.2
+        ease 2 yoffset 90
+        pause 0.4
         repeat
 
 image Jean_titjob_hair_animation0:
@@ -529,9 +710,44 @@ image Jean_titjob_hair_animation2:
         ease 0.5 rotate -5
         repeat
 
+image Jean_titjob_hair_animation3:
+    animation
+    "Jean_titjob_hair"
+
+    subpixel True
+    parallel:
+        ease 2 yoffset 125
+        pause 0.1
+        ease 2 yoffset 130
+        pause 0.1
+        repeat
+    parallel:
+        pause 0.1
+        ease 2 rotate -5
+        pause 0.1
+        ease 2 rotate 0
+        repeat
+
+image Jean_titjob_hair_animation5:
+    animation
+    "Jean_titjob_hair"
+
+    subpixel True
+    rotate -5
+    parallel:
+        ease 2 yoffset 125
+        pause 0.2
+        ease 2 yoffset 130
+        pause 0.5
+        repeat
+    parallel:
+        ease 2 rotate -5
+        pause 0.5
+        repeat
+
 layeredimage Jean_sprite titjob:
     if JeanX.outfit["bra"] in ["_green_bra", "_lace_bra"]:
-        "Jean_titjob_bra_back_animation[action_speed]"
+        "Jean_titjob_bra_back_animation[action_speed]" pos (0.0, -0.025)
 
     always:
         "Jean_titjob_back_hair_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
@@ -543,7 +759,7 @@ layeredimage Jean_sprite titjob:
         "Jean_titjob_head_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
 
     always:
-        "Jean_titjob_right_breast_animation[action_speed]"
+        "Jean_titjob_right_breast_animation[action_speed]" pos (0.0, -0.025)
 
     always:
         "Zero_cock_Jean"
@@ -552,12 +768,12 @@ layeredimage Jean_sprite titjob:
         "Jean_titjob_bra_stretch_animation[action_speed]"
 
     always:
-        "Jean_titjob_breasts_animation[action_speed]"
+        "Jean_titjob_breasts_animation[action_speed]" pos (0.0, -0.025)
 
     always:
         "Jean_titjob_hair_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
 
-    anchor (0.5, 0.0) offset (300, 750)
+    anchor (0.5, 0.0) offset (300, 750) zoom 1.1
 
 image Jean_blowjob_blinking:
     "images/Jean_blowjob/Jean_blowjob_eyes[JeanX.eyes].png"

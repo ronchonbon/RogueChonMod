@@ -253,9 +253,6 @@ image Storm_titjob_bra_back:
     anchor (0.5, 0.5)
 
 layeredimage Storm_titjob_body:
-    if StormX.outfit["bra"] in ["_black_bra", "_lace_bra"]:
-        "images/Storm_titjob/Storm_titjob_bra_back.png"
-
     always:
         "images/Storm_titjob/Storm_titjob_body.png"
 
@@ -370,7 +367,7 @@ layeredimage Storm_blowjob_head:
     else:
         "images/Storm_blowjob/Storm_blowjob_head.png"
 
-    if renpy.showing("Storm_sprite titjob") and action_speed == 3:
+    if renpy.showing("Storm_sprite titjob") and action_speed > 2:
         "images/Storm_blowjob/Storm_blowjob_mouth_tongue.png"
     elif renpy.showing("Storm_sprite blowjob") and action_speed == 1:
         "images/Storm_blowjob/Storm_blowjob_mouth_tongue.png"

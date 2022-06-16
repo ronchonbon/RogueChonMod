@@ -263,7 +263,7 @@ layeredimage Jubes_blowjob_head:
     else:
         "images/Jubes_blowjob/Jubes_blowjob_head.png"
 
-    if renpy.showing("Jubes_sprite titjob") and action_speed == 3:
+    if renpy.showing("Jubes_sprite titjob") and action_speed > 2:
         "images/Jubes_blowjob/Jubes_blowjob_mouth_tongue.png"
     elif renpy.showing("Jubes_sprite blowjob") and action_speed == 1:
         "images/Jubes_blowjob/Jubes_blowjob_mouth_tongue.png"

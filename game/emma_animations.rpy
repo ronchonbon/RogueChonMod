@@ -283,7 +283,7 @@ image Emma_titjob_back_hair_animation3:
     block:
         ease 1.5 yoffset 10
         pause 0.7
-        ease 0.3 yoffset 40
+        ease 0.9 yoffset 40
         pause 0.5
         repeat
 
@@ -341,7 +341,7 @@ image Emma_titjob_body_animation3:
     block:
         ease 1.6 yoffset -20
         pause 0.7
-        ease 0.2 yoffset 0
+        ease 0.8 yoffset 0
         pause 0.5
         repeat
 
@@ -353,7 +353,7 @@ image Emma_titjob_body_animation5:
     block:
         ease 1.3 yoffset -5
         pause 0.7
-        ease 0.5 yoffset 0
+        ease 1.1 yoffset 0
         pause 0.5
         repeat
 
@@ -398,7 +398,7 @@ image Emma_titjob_head_animation3:
     block:
         ease 1.5 yoffset 10
         pause 0.7
-        ease 0.3 yoffset 40
+        ease 0.9 yoffset 40
         pause 0.5
         repeat
 
@@ -419,12 +419,9 @@ image Emma_titjob_breasts_animation0:
     "Emma_titjob_breasts"
 
     subpixel True
-    rotate -3
     block:
-        ease 1.5 rotate 4
-        pause 0.1
-        ease 1.5 rotate -3
-        pause 0.1
+        ease 2.2 yoffset -5
+        ease 1.8 yoffset 0
         repeat
 
 image Emma_titjob_breasts_animation1:
@@ -433,7 +430,7 @@ image Emma_titjob_breasts_animation1:
 
     subpixel True
     block:
-        ease 1.5 yoffset -40
+        ease 1.5 yoffset -30
         pause 0.3
         ease 0.7 yoffset 20
         repeat
@@ -444,7 +441,7 @@ image Emma_titjob_breasts_animation2:
 
     subpixel True
     block:
-        ease 0.6 yoffset -50
+        ease 0.6 yoffset -30
         ease 0.3 yoffset 10
         pause 0.1
         repeat
@@ -457,7 +454,7 @@ image Emma_titjob_breasts_animation3:
     block:
         ease 1.8 yoffset -30
         pause 0.3
-        ease 0.4 yoffset 20
+        ease 1.0 yoffset 20
         pause 0.5
         repeat
 
@@ -489,7 +486,7 @@ layeredimage Emma_sprite titjob:
     always:
         "Emma_titjob_breasts_animation[action_speed]" pos (0.0, -0.04) zoom 0.9
 
-    anchor (0.5, 0.0) offset (440, 1050) zoom 1.7
+    anchor (0.5, 0.0) offset (440, 1050) zoom 1.72
 
 image Emma_blowjob_blinking:
     "images/Emma_blowjob/Emma_blowjob_eyes[EmmaX.eyes].png"

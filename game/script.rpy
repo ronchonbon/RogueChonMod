@@ -188,36 +188,37 @@ label start:
     python:
         for G in all_Girls:
             active_Girls.append(G)
-            G.change_face("_sexy")
-            G.change_outfit("nude")
-            G.grool = 2
-            G.spunk["mouth"] = True
-            G.spunk["pussy"] = True
-            G.spunk["anus"] = True
-
+            G.recent_history.append("blanket")
+    #         # G.change_face("_sexy")
+            # G.change_outfit("nude")
+    #         # G.grool = 2
+    #         # G.spunk["mouth"] = True
+    #         # G.spunk["pussy"] = True
+    #         # G.spunk["anus"] = True
+    #
     $ Player.sprite = True
     $ show_feet = True
     $ action_speed = 4
     $ Player.cock_position = "in"
     $ Player.primary_action = "sex"
     $ Player.secondary_action = "finger_ass"
-    #
-    # $ RogueX.change_outfit("nude")
-    # $ RogueX.outfit["dress"] = "_raven"
-    # $ RogueX.outfit["cloak"] = "_raven_cloak"
-    # $ KittyX.change_outfit("nude")
-    # $ KittyX.outfit["dress"] = "_chinese"
-    # $ EmmaX.change_outfit("domme_outfit")
-    # $ EmmaX.arm_pose = 2
-    # $ LauraX.change_outfit("nude")
-    # $ LauraX.outfit["dress"] = "_bunny_suit"
-    # $ LauraX.outfit["hose"] = "_pantyhose"
-    # $ LauraX.outfit["gloves"] = "_bunny"
-    # $ LauraX.outfit["face_outer_accessory"] = "_bunny_ears"
-    # $ JeanX.change_outfit("nude")
-    # $ JeanX.outfit["dress"] = "_sci_fi"
+    # #
+    # # $ RogueX.change_outfit("nude")
+    # # $ RogueX.outfit["dress"] = "_raven"
+    # # $ RogueX.outfit["cloak"] = "_raven_cloak"
+    # # $ KittyX.change_outfit("nude")
+    # # $ KittyX.outfit["dress"] = "_chinese"
+    # # $ EmmaX.change_outfit("domme_outfit")
+    # # $ EmmaX.arm_pose = 2
+    # # $ LauraX.change_outfit("nude")
+    # # $ LauraX.outfit["dress"] = "_bunny_suit"
+    # # $ LauraX.outfit["hose"] = "_pantyhose"
+    # # $ LauraX.outfit["gloves"] = "_bunny"
+    # # $ LauraX.outfit["face_outer_accessory"] = "_bunny_ears"
+    # # $ JeanX.change_outfit("nude")
+    # # $ JeanX.outfit["dress"] = "_sci_fi"
     # $ MystiqueX.change_outfit("true_self")
-    #
+    # #
     # show Rogue_sprite titjob at sprite_location(0.5)
     show Kitty_sprite blowjob at sprite_location(0.5)
     # show Emma_sprite titjob at sprite_location(0.5)
@@ -225,7 +226,7 @@ label start:
     # show Jean_sprite titjob at sprite_location(0.5)
     # show Storm_sprite titjob at sprite_location(0.5)
     # show Jubes_sprite titjob at sprite_location(0.5)
-
+    #
     # show Rogue_sprite standing at sprite_location(0.15)
     # show Kitty_sprite standing at sprite_location(0.25)
     # show Emma_sprite standing normal at sprite_location(0.35)
@@ -234,11 +235,11 @@ label start:
     # show Storm_sprite standing at sprite_location(0.65)
     # show Jubes_sprite standing at sprite_location(0.75)
     # show Mystique_sprite standing normal at sprite_location(0.85)
-
+    #
     ""
-
-    $ active_Girls = []
-    $ focused_Girl = RogueX
+    #
+    # $ active_Girls = []
+    # $ focused_Girl = RogueX
 
     jump prologue
 

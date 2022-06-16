@@ -279,6 +279,19 @@ image Storm_titjob_bra_back_animation3:
         ease 0.4 yoffset 110
         repeat
 
+image Storm_titjob_bra_back_animation5:
+    animation
+    "Storm_titjob_bra_back"
+
+    subpixel True
+    block:
+        pause 0.1
+        ease 2 yoffset 100
+        pause 0.2
+        ease 2 yoffset 110
+        pause 0.4
+        repeat
+
 image Storm_titjob_back_hair_animation0:
     animation
     "Storm_blowjob_back_hair"
@@ -350,6 +363,23 @@ image Storm_titjob_back_hair_animation3:
         ease 0.5 rotate -5
         repeat
 
+image Storm_titjob_back_hair_animation5:
+    animation
+    "Storm_blowjob_back_hair"
+
+    subpixel True
+    rotate -5
+    parallel:
+        ease 2 yoffset 125
+        pause 0.2
+        ease 2 yoffset 130
+        pause 0.5
+        repeat
+    parallel:
+        ease 2 rotate -5
+        pause 0.5
+        repeat
+
 image Storm_titjob_body_animation0:
     animation
     "Storm_titjob_body"
@@ -394,6 +424,18 @@ image Storm_titjob_body_animation3:
         ease 1 yoffset 100
         pause 0.1
         ease 0.5 yoffset 130
+        repeat
+
+image Storm_titjob_body_animation5:
+    animation
+    "Storm_titjob_body"
+
+    subpixel True
+    block:
+        ease 2 yoffset 130
+        pause 0.2
+        ease 2 yoffset 140
+        pause 0.5
         repeat
 
 image Storm_titjob_head_animation0:
@@ -467,6 +509,23 @@ image Storm_titjob_head_animation3:
         ease 0.5 rotate -5
         repeat
 
+image Storm_titjob_head_animation5:
+    animation
+    "Storm_blowjob_head"
+
+    subpixel True
+    rotate -5
+    parallel:
+        ease 2 yoffset 125
+        pause 0.2
+        ease 2 yoffset 130
+        pause 0.5
+        repeat
+    parallel:
+        ease 2 rotate -5
+        pause 0.5
+        repeat
+
 image Storm_titjob_breasts_under_animation0:
     animation
     "Storm_titjob_breasts_under"
@@ -514,6 +573,19 @@ image Storm_titjob_breasts_under_animation3:
         ease 0.7 yoffset 60
         pause 0.2
         ease 0.4 yoffset 110
+        repeat
+
+image Storm_titjob_breasts_under_animation5:
+    animation
+    "Storm_titjob_breasts_under"
+
+    subpixel True
+    block:
+        pause 0.1
+        ease 2 yoffset 100
+        pause 0.2
+        ease 2 yoffset 110
+        pause 0.4
         repeat
 
 image Storm_titjob_bra_stretch_animation0:
@@ -601,6 +673,27 @@ image Storm_titjob_bra_stretch_animation3:
         ease 0.4 offset (-100,-105)
         repeat
 
+image Storm_titjob_bra_stretch_animation5:
+    animation
+    "Storm_titjob_bra_stretch"
+
+    subpixel True
+    zoom (1, 2)
+    parallel:
+        pause 0.1
+        ease 2 yzoom 1.8
+        pause 0.2
+        ease 2 yzoom 2
+        pause 0.4
+        repeat
+    parallel:
+        pause 0.1
+        ease 2 offset (-100, -115)
+        pause 0.2
+        ease 2 offset (-100, -105)
+        pause 0.4
+        repeat
+
 image Storm_titjob_breasts_animation0:
     animation
     "Storm_titjob_breasts"
@@ -648,6 +741,19 @@ image Storm_titjob_breasts_animation3:
         ease 0.7 yoffset 60
         pause 0.2
         ease 0.4 yoffset 110
+        repeat
+
+image Storm_titjob_breasts_animation5:
+    animation
+    "Storm_titjob_breasts"
+
+    subpixel True
+    block:
+        pause 0.1
+        ease 2 yoffset 100
+        pause 0.2
+        ease 2 yoffset 110
+        pause 0.4
         repeat
 
 image Storm_titjob_hair_animation0:
@@ -721,6 +827,23 @@ image Storm_titjob_hair_animation3:
         ease 0.5 rotate -5
         repeat
 
+image Storm_titjob_hair_animation5:
+    animation
+    "Storm_titjob_hair"
+
+    subpixel True
+    rotate -5
+    parallel:
+        ease 2 yoffset 125
+        pause 0.2
+        ease 2 yoffset 130
+        pause 0.5
+        repeat
+    parallel:
+        ease 2 rotate -5
+        pause 0.5
+        repeat
+
 layeredimage Storm_sprite titjob:
     if StormX.outfit["bra"] in ["_black_bra", "_lace_bra"]:
         "Storm_titjob_bra_back_animation[action_speed]"
@@ -749,7 +872,7 @@ layeredimage Storm_sprite titjob:
     always:
         "Storm_titjob_hair_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
 
-    anchor (0.5, 0.0) offset (320, 670)
+    anchor (0.5, 0.0) offset (320, 700)
 
 image Storm_blowjob_blinking:
     "images/Storm_blowjob/Storm_blowjob_eyes[StormX.eyes].png"

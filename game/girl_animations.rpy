@@ -523,16 +523,16 @@ label lesbian_launch(Girl):
 
     while temp_Girls:
         if "unseen" in temp_Girls[0].recent_history:
-            $ temp_Girls[0].eyes = "closed"
+            $ temp_Girls[0].eyes = "_closed"
         elif Girl == temp_Girls[0]:
             if Girl == RogueX:
-                $ temp_Girls[0].eyes = "side"
+                $ temp_Girls[0].eyes = "_side"
             elif Girl == EmmaX:
                 $ temp_Girls[0].eyes = "_squint"
             else:
-                $ temp_Girls[0].eyes = "leftside"
+                $ temp_Girls[0].eyes = "_leftside"
         else:
-            $ temp_Girls[0].eyes = "side"
+            $ temp_Girls[0].eyes = "_side"
 
         if temp_Girls[0] == KittyX or temp_Girls[0] == LauraX:
             $ temp_Girls[0].arm_pose = 1
