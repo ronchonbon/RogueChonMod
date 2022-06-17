@@ -132,7 +132,7 @@ label JeanMeet:
         ch_j "Wanted to see these titties?"
         $ JeanX.arm_pose = 2
 
-        call expose_top(JeanX)
+        call expose_breasts(JeanX)
 
         pause 1
 

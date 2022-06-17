@@ -2,9 +2,10 @@
 errors listed below, and try again.
 
 
-File "game/rogue_animations.rpy", line 372: expected ':' not found.
-    parallel
-            ^
+File "game/shower.rpy", line 219: invalid syntax
+                $ staying_Girls.append(G)
+                 ^
+    
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Wed Jun 15 23:24:44 2022
+Fri Jun 17 00:33:03 2022

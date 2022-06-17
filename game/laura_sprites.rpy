@@ -37,6 +37,8 @@ layeredimage Laura_sprite standing:
         Null()
     elif LauraX.outfit["gloves"] == "_gloves":
         "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose]_right.png"
+    elif LauraX.outfit["gloves"] == "_bunny_wrists" and LauraX.arm_pose == 1:
+        "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose].png"
     else:
         "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose].png"
 
@@ -271,7 +273,7 @@ layeredimage Laura_titjob_left_arm:
     always:
         "images/Laura_titjob/Laura_titjob_left_hand.png"
 
-    if LauraX.outfit["gloves"]:
+    if LauraX.outfit["gloves"] == "_gloves":
         "images/Laura_titjob/Laura_titjob_gloves[LauraX.outfit[gloves]]_left.png"
 
     if LauraX.outfit["piercings"]:

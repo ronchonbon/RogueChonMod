@@ -6,7 +6,7 @@ layeredimage Rogue_sprite standing:
         "images/Rogue_standing/Rogue_standing_back_outer_accessory[RogueX.outfit[jacket]].png"
 
     if RogueX.outfit["cloak"]:
-        "images/Rogue_standing/Rogue_standing_back_outer_accessory[RogueX.outfit[cloak]].png"
+        "images/Rogue_standing/Rogue_standing_cloak[RogueX.outfit[cloak]]_back.png"
 
     if RogueX.outfit["bottom"] == "_pants":
         "images/Rogue_standing/Rogue_standing_back_outer_accessory[RogueX.outfit[bottom]].png"
@@ -96,7 +96,7 @@ layeredimage Rogue_sprite standing:
         "images/Rogue_standing/Rogue_standing_jacket[RogueX.outfit[jacket]][RogueX.arm_pose].png"
 
     if RogueX.outfit["cloak"]:
-        "images/Rogue_standing/Rogue_standing_cloak[RogueX.outfit[cloak]][RogueX.arm_pose].png"
+        "images/Rogue_standing/Rogue_standing_cloak[RogueX.outfit[cloak]].png"
 
     if RogueX.spunk["breasts"]:
         "images/Rogue_standing/Rogue_standing_spunk_breasts.png"
@@ -502,6 +502,9 @@ layeredimage Rogue_doggy_body:
     if RogueX.outfit["top"]:
         "images/Rogue_doggy/Rogue_doggy_top[RogueX.outfit[top]].png"
 
+    if RogueX.outfit["jacket"]:
+        "images/Rogue_doggy/Rogue_doggy_jacket[RogueX.outfit[jacket]].png"
+
     if RogueX.outfit["jacket"] == "_hoodie":
         "images/Rogue_doggy/Rogue_doggy_jacket_hood.png"
 
@@ -624,7 +627,7 @@ layeredimage Rogue_doggy_ass:
     elif RogueX.bottom_pulled_down or RogueX.upskirt:
         "images/Rogue_doggy/Rogue_doggy_bottom[RogueX.outfit[bottom]]_down.png"
     else:
-        "images/Rogue_doggy/Rogue_doggy_bottom[RogueX.outfit[bottom]]t.png"
+        "images/Rogue_doggy/Rogue_doggy_bottom[RogueX.outfit[bottom]].png"
 
     if RogueX.outfit["top"] not in ["_nighty", "_towel"]:
         Null()

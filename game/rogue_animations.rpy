@@ -1270,7 +1270,7 @@ layeredimage Rogue_sprite doggy:
         "Rogue_doggy_shins"
 
     if Player.sprite and Player.cock_position == "footjob":
-        "Rogue_doggy_cock_footjob_animation[action_speed]" pos (-0.005, 0.24) zoom 1.1
+        "Zero_cock_Rogue"
 
     if Player.cock_position == "footjob":
         "Rogue_doggy_feet_animation[action_speed]"

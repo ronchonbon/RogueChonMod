@@ -758,7 +758,7 @@ label caught_masturbating(Girl):
         call shift_focus(Girl)
         show black_screen onlayer black
 
-        call expose_bottom
+        call expose_pussy
         call set_the_scene
 
         $ Girl.change_face("_sexy")

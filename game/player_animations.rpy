@@ -776,6 +776,8 @@ layeredimage Zero_cock_Rogue:
         "Rogue_doggy_cock_anal_animation[action_speed]" pos (0.1125, 0.605)
     elif Player.cock_position == "out":
         "Rogue_doggy_cock_hotdog_animation[action_speed]" pos (0.1135, 0.52)
+    elif Player.cock_position == "footjob":
+        "Rogue_doggy_cock_footjob_animation[action_speed]" pos (-0.005, 0.24) zoom 1.1
 
 image Rogue_doggy_pussy_mask_animation0:
     animation

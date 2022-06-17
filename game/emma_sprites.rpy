@@ -74,8 +74,8 @@ layeredimage Emma_sprite standing:
 
     if EmmaX.outfit["top"] in ["_towel", "_nighty"]:
         "images/Emma_standing/Emma_standing_loincloth[EmmaX.outfit[top]].png"
-    elif EmmaX.outfit["loincloth"] and not EmmaX.loincloth_aside:
-        "images/Emma_standing/Emma_standing_loincloth[EmmaX.outfit[loincloth]].png"
+    elif EmmaX.outfit["bottom"] == "_dress" and not EmmaX.loincloth_aside:
+        "images/Emma_standing/Emma_standing_loincloth[EmmaX.outfit[bottom]].png"
 
     if EmmaX.arm_pose == 1 or EmmaX.breasts_supported:
         "images/Emma_standing/Emma_standing_breasts_up.png"
@@ -319,8 +319,8 @@ layeredimage Emma_sprite standing diamond:
 
     if EmmaX.outfit["top"] in ["_towel", "_nighty"]:
         "images/Emma_standing/Emma_standing_loincloth[EmmaX.outfit[top]].png"
-    elif EmmaX.outfit["loincloth"] and not EmmaX.loincloth_aside:
-        "images/Emma_standing/Emma_standing_loincloth[EmmaX.outfit[loincloth]].png"
+    elif EmmaX.outfit["bottom"] == "_dress" and not EmmaX.loincloth_aside:
+        "images/Emma_standing/Emma_standing_loincloth[EmmaX.outfit[bottom]].png"
 
     if EmmaX.arm_pose == 1 or EmmaX.breasts_supported:
         "images/Emma_standing/Emma_standing_breasts_up_diamond.png"
@@ -536,8 +536,8 @@ layeredimage Emma_blowjob_back_hair:
     anchor (0.5, 0.5)
 
 layeredimage Emma_blowjob_body:
-    if "blanket" in EmmaX.recent_history:
-        "images/Kitty_blowjob/Kitty_blowjob_blanket.png" pos (0.0, 0.0) zoom 0.8
+    # if "blanket" in EmmaX.recent_history:
+    #     "images/Kitty_blowjob/Kitty_blowjob_blanket.png" pos (0.0, 0.0) zoom 0.8
 
     always:
         "Emma_sex_body"

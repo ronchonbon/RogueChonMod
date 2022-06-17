@@ -17,9 +17,6 @@ layeredimage Jean_sprite standing:
     always:
         "images/Jean_standing/Jean_standing_breasts.png"
 
-    always:
-        "images/Jean_standing/Jean_standing_arm[JeanX.arm_pose]_left.png"
-
     if JeanX.outfit["piercings"]:
         "images/Jean_standing/Jean_standing_piercings_breasts[JeanX.outfit[piercings]].png"
 
@@ -66,6 +63,9 @@ layeredimage Jean_sprite standing:
 
     if JeanX.outfit["dress"]:
         "images/Jean_standing/Jean_standing_dress[JeanX.outfit[dress]][JeanX.arm_pose].png"
+
+    always:
+        "images/Jean_standing/Jean_standing_arm[JeanX.arm_pose]_left.png"
 
     if not JeanX.outfit["top"]:
         Null()

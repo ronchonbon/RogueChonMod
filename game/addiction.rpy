@@ -730,7 +730,7 @@ label third_addiction_event:
     call addiction_ultimatum
     jump addiction_good_end
 
-label addiction_ultimatum(stored_addiction = Girl.addiction):
+label addiction_ultimatum:
     $ Girl.add_word(1,"ultimatum","ultimatum")
 
     $ approval_bonus = int(Girl.addiction/2)
@@ -1292,7 +1292,8 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                 jump addiction_bad_end
         if not between_event_count and approval_check(Girl, 1200, "LO"):
             $ between_event_count += 1
-        if between_event_count and Girl.addiction <= stored_addiction:
+            
+        if between_event_count:
             if Girl == RogueX:
                 ch_r "I'll still need a bit more than that. . ."
             elif Girl == KittyX:

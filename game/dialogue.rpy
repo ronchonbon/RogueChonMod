@@ -6241,6 +6241,115 @@ label alternative_rejected_lines(Girl):
 
     return
 
+label meeting_in_shower_lines(Girl, approval, first, someone_left):
+    if Girl == RogueX:
+        if first:
+            ch_r "Hey, [Girl.player_petname]."
+
+            if "showered" in Girl.recent_history:
+                ch_r "I was just getting ready to head out."
+
+            if not approval:
+                ch_r "See ya later."
+        elif not approval and someone_left:
+            ch_r "Yeah, I'll see you too."
+        elif not approval:
+            ch_r "Yeah, I should get going though."
+        else:
+            ch_r "Yeah, hey."
+    elif Girl == KittyX:
+        if first:
+            ch_k "Hey, [KittyX.player_petname]."
+
+            if "showered" in Girl.recent_history:
+                ch_k "I just got finished."
+
+            if not approval:
+                ch_k "Oh, um, I should get out of your way. . ."
+        elif not approval and someone_left:
+            ch_k "Yeah, see ya."
+        elif not approval:
+            ch_k "Oh, well. . . I should get going."
+        else:
+            ch_k "Yeah, hi."
+    elif Girl == EmmaX:
+        if first:
+            ch_e "Oh, hello, [Girl.player_petname]."
+
+            if "showered" in Girl.recent_history:
+                ch_e "I was about finished here."
+
+            if not approval:
+                ch_e "I should get going."
+        elif not approval and someone_left:
+            ch_e "Yes, I should also get going."
+        elif not approval:
+            ch_e "You two look like you have some business. . ."
+        else:
+            ch_e "Yes, hello."
+    elif Girl == LauraX:
+        if first:
+            ch_l "Oh, hey."
+
+            if "showered" in Girl.recent_history:
+                ch_l "I'm done here."
+
+            if not approval:
+                ch_l "See you later."
+        elif not approval and someone_left:
+            ch_l "Yeah, I'm heading out too."
+        elif not approval:
+            ch_l "I'll get out of your way."
+        else:
+            ch_l "Hey."
+    elif Girl == JeanX:
+        if first:
+            ch_j "Oh, hey. . . you."
+
+            if "showered" in Girl.recent_history:
+                ch_j "I'm wrapping up here."
+
+            if not approval:
+                ch_j "Later."
+        elif not approval and someone_left:
+            ch_j "Yeah, I'm done too."
+        elif not approval:
+            ch_j "I'm headed out."
+        else:
+            ch_j "Hey."
+    elif Girl == StormX:
+        if first:
+            ch_s "Oh, hello, [Girl.player_petname]."
+
+            if "showered" in Girl.recent_history:
+                ch_s "I was finishing up here."
+
+            if not approval:
+                ch_s "I am heading out at the moment."
+        elif not approval and someone_left:
+            ch_s "Yes, I am also leaving."
+        elif not approval:
+            ch_s "I wouldn't want to be a bother. . ."
+        else:
+            ch_s "Yes, hello."
+    elif Girl == JubesX:
+        if first:
+            ch_v "Yo, [Girl.player_petname]."
+
+            if "showered" in Girl.recent_history:
+                ch_v "I just finished up here."
+
+            if not approval:
+                ch_v "I should, uh, get going. . ."
+        elif not approval and someone_left:
+            ch_v "Yeah, see ya."
+        elif not approval:
+            ch_v "Oh, so. . . I should head out."
+        else:
+            ch_v "Yeah, hey."
+
+    return
+
 label template(Girl, action):
     if Girl == RogueX:
         $ lines = []

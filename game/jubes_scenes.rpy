@@ -1063,7 +1063,7 @@ label Jubes_Mall(temp_Girls=[]):
             $ JubesX.change_stat("love", 90, 1)
             $ JubesX.change_stat("inhibition", 50, 1)
             ch_v "Cool."
-            call shopping_Mall
+            call mall
         "Nah, we can head back now.":
             $ JubesX.change_stat("love", 60, -3)
             $ JubesX.change_stat("love", 80, -2)
@@ -1081,6 +1081,7 @@ label Jubes_Mall(temp_Girls=[]):
     call set_the_scene
     ch_v "Anyway, it was nice to hang out with you."
     ch_v "I hope we can do it again some time!"
+    $ Party = []
     jump reset_location
     return
 

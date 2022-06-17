@@ -1,93 +1,525 @@
-label expose_top(Girl):
+label remove_jacket(Girl):
+    $ Girl.jacket_opened = True
+
+    pause 0.2
+
+    $ Girl.outfit["jacket"] = ""
+
+    pause 0.2
+
+    $ Girl.set_outfit_flags()
+
+    call expression Girl.tag + "_First_Topless"
+
+    return
+
+label remove_suspenders(Girl):
+    $ Girl.suspenders_aside = True
+
+    pause 0.2
+
+    $ Girl.outfit["suspenders"] = ""
+
+    pause 0.2
+
+    $ Girl.set_outfit_flags()
+
+    call expression Girl.tag + "_First_Topless"
+
+    return
+
+label remove_top(Girl):
+    $ Girl.top_pulled_up = True
+
+    pause 0.2
+
+    $ Girl.outfit["top"] = ""
+
+    pause 0.2
+
+    $ Girl.set_outfit_flags()
+
+    call expression Girl.tag + "_First_Topless"
+
+    return
+
+label change_top(Girl, item):
+    if Girl.outfit["cloak"]:
+        $ Girl.outfit["cloak"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["jacket"]:
+        call remove_jacket(Girl)
+
+    if Girl.outfit["suspenders"]:
+        call remove_suspenders(Girl)
+
+    if Girl.outfit["belt"]:
+        $ Girl.outfit["belt"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["top"]:
+        call remove_top(Girl)
+
+    if item:
+        $ Girl.top_pulled_up = True
+
+        $ Girl.outfit["top"] = item
+
+        pause 0.2
+
+    $ Girl.fix_clothing()
+
+    return
+
+label remove_dress(Girl):
+    if Girl.outfit["dress"] in dresses:
+        $ Girl.dress_upskirt = True
+
+        pause 0.2
+    elif Girl.outfit["dress"] in bodysuits:
+        $ Girl.dress_top_pulled_down = True
+        $ Girl.dress_upskirt = True
+
+        pause 0.2
+
+    $ Girl.outfit["dress"] = ""
+
+    pause 0.2
+
+    $ Girl.set_outfit_flags()
+
+    call expression Girl.tag + "_First_Topless"
+    call expression Girl.tag + "_First_Bottomless"
+
+    return
+
+label change_dress(Girl, item):
+    if Girl.outfit["cloak"]:
+        $ Girl.outfit["cloak"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["jacket"]:
+        call remove_jacket(Girl)
+
+    if Girl.outfit["suspenders"]:
+        call remove_suspenders(Girl)
+
+    if Girl.outfit["top"]:
+        call remove_top(Girl)
+
+    if Girl.outfit["belt"]:
+        $ Girl.outfit["belt"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["dress"]:
+        call remove_dress(Girl)
+
+    if item:
+        $ Girl.dress_upskirt = True
+
+        $ Girl.outfit["dress"] = item
+
+        pause 0.2
+
+    $ Girl.fix_clothing()
+
+    return
+
+label remove_bra(Girl):
+    $ Girl.bra_pulled_up = True
+
+    pause 0.2
+
+    $ Girl.outfit["bra"] = ""
+
+    pause 0.2
+
+    $ Girl.set_outfit_flags()
+
+    call expression Girl.tag + "_First_Topless"
+
+    return
+
+label expose_breasts(Girl):
     if Girl.outfit["jacket"]:
         $ Girl.jacket_opened = True
 
-    if Girl.outfit["top"]:
-        $ Girl.top_pulled_up = True
-
-    if Girl.wearing_dress:
-        $ Girl.dress_top_pulled_down = True
-
-    if Girl.outfit["bra"]:
-        $ Girl.bra_pulled_up = True
+        pause 0.2
 
     if Girl.outfit["suspenders"]:
         $ Girl.suspenders_aside = True
 
+        pause 0.2
+
+    if Girl.outfit["top"]:
+        $ Girl.top_pulled_up = True
+
+        pause 0.2
+
+    if Girl.wearing_dress:
+        $ Girl.dress_top_pulled_down = True
+
+        pause 0.2
+
+    if Girl.outfit["bra"]:
+        $ Girl.bra_pulled_up = True
+
+        pause 0.2
+
     $ Girl.set_outfit_flags()
 
-    if not Girl.seen_pussy:
-        call expression Girl.tag + "_First_Topless" pass(1)
-
-    $ Girl.seen_breasts = True
+    call expression Girl.tag + "_First_Topless" pass(1)
 
     return
 
-label expose_bottom(Girl):
-    if Girl.wearing_dress:
-        $ Girl.dress_upskirt = True
+label change_bra(Girl, item):
+    if Girl.outfit["cloak"]:
+        $ Girl.outfit["cloak"] = ""
 
-    if Girl.wearing_skirt:
-        $ Girl.upskirt = True
+        pause 0.2
+
+    if Girl.outfit["jacket"]:
+        call remove_jacket(Girl)
+
+    if Girl.outfit["suspenders"]:
+        call remove_suspenders(Girl)
+
+    if Girl.outfit["belt"]:
+        $ Girl.outfit["belt"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["top"]:
+        call remove_top(Girl)
+
+    if Girl.outfit["dress"] in dresses:
+        call remove_dress(Girl)
+    elif Girl.outfit["dress"] in bodysuits:
+        if Girl.outfit["boots"]:
+            $ Girl.outfit["boots"] = ""
+
+            pause 0.2
+
+        if Girl.outfit["belt"]:
+            $ Girl.outfit["belt"] = ""
+
+            pause 0.2
+            
+        if Girl.outfit["bottom"]:
+            call remove_bottom(Girl)
+
+        call remove_bodysuit(Girl)
+
+    if Girl.outfit["bra"]:
+        call remove_bra(Girl)
+
+    if item:
+        $ Girl.bra_pulled_up = True
+
+        $ Girl.outfit["bra"] = item
+
+        pause 0.2
+
+    $ Girl.fix_clothing()
+
+    return
+
+label remove_bottom(Girl):
+    if Girl.outfit["bottom"] not in dresses and Girl.outfit["bottom"] not in skirts:
+        $ Girl.bottom_pulled_down = True
+
+        pause 0.2
+
+    $ Girl.outfit["bottom"] = ""
+
+    pause 0.2
+
+    $ Girl.set_outfit_flags()
+
+    call expression Girl.tag + "_First_Bottomless" pass(1)
+
+    return
+
+label change_bottom(Girl, item):
+    if Girl.outfit["boots"]:
+        $ Girl.outfit["boots"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["belt"]:
+        $ Girl.outfit["belt"] = ""
+
+        pause 0.2
 
     if Girl.outfit["bottom"]:
+        call remove_bottom(Girl)
+
+    if item:
         $ Girl.bottom_pulled_down = True
+
+        $ Girl.outfit["bottom"] = item
+
+        pause 0.2
+
+    $ Girl.fix_clothing()
+
+    return
+
+label change_bodysuit(Girl, item):
+    if Girl.outfit["cloak"]:
+        $ Girl.outfit["cloak"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["jacket"]:
+        call remove_jacket(Girl)
+
+    if Girl.outfit["suspenders"]:
+        call remove_suspenders(Girl)
+
+    if Girl.outfit["top"]:
+        call remove_top(Girl)
+
+    if Girl.outfit["belt"]:
+        $ Girl.outfit["belt"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["boots"]:
+        $ Girl.outfit["boots"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["belt"]:
+        $ Girl.outfit["belt"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["bottom"]:
+        call remove_bottom(Girl)
+
+    if Girl.outfit["dress"]:
+        call remove_dress(Girl)
+
+    if item:
+        $ Girl.dress_top_pulled_down = True
+        $ Girl.dress_upskirt = True
+
+        $ Girl.outfit["dress"] = item
+
+        pause 0.2
+
+    $ Girl.fix_clothing()
+
+    return
+
+label expose_underwear(Girl):
+    if Girl.outfit["bottom"] == "_dress":
+        $ Girl.loincloth_aside = True
+
+        pause 0.2
+
+    if Girl.outfit["dress"] or Girl.outfit["bottom"] in dresses:
+        $ Girl.dress_upskirt = True
+
+        pause 0.2
+
+    if not Girl.outfit["bottom"]:
+        pass
+    elif Girl.outfit["bottom"] in skirts:
+        $ Girl.upskirt = True
+
+        pause 0.2
+    else:
+        $ Girl.bottom_pulled_down = True
+
+        pause 0.2
+
+    if Girl.outfit["hose"] in hoses:
+        $ Girl.outfit["hose"] = ""
+
+        pause 0.2
+
+    $ Girl.set_outfit_flags()
+
+    call expression Girl.tag + "_First_Bottomless" pass(1)
+
+    return
+
+label change_hose(Girl, item):
+    if Girl.outfit["boots"]:
+        $ Girl.outfit["boots"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["belt"]:
+        $ Girl.outfit["belt"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["dress"] or Girl.outfit["bottom"] in dresses:
+        $ Girl.dress_upskirt = True
+
+        pause 0.2
+
+    if not Girl.outfit["bottom"]:
+        pass
+    elif Girl.outfit["bottom"] in skirts:
+        $ Girl.upskirt = True
+
+        pause 0.2
+    else:
+        call remove_bottom(Girl)
+
+    if Girl.outfit["hose"]:
+        $ Girl.outfit["hose"] = ""
+
+        pause 0.2
+
+    if item:
+        $ Girl.outfit["hose"] = item
+
+        pause 0.2
+
+    $ Girl.fix_clothing()
+
+    return
+
+label remove_underwear(Girl):
+    $ Girl.underwear_pulled_down = True
+
+    pause 0.2
+
+    $ Girl.outfit["underwear"] = ""
+
+    pause 0.2
+
+    $ Girl.set_outfit_flags()
+
+    call expression Girl.tag + "_First_Bottomless"
+
+    return
+
+label change_underwear(Girl, item):
+    if Girl.outfit["boots"]:
+        $ Girl.outfit["boots"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["belt"]:
+        $ Girl.outfit["belt"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["dress"] in dresses:
+        call remove_dress(Girl)
+
+    if Girl.outfit["bottom"]:
+        call remove_bottom(Girl)
+
+    if Girl.outfit["dress"] in bodysuits:
+        call remove_bodysuit(Girl)
+
+    if Girl.outfit["hose"]:
+        $ Girl.outfit["hose"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["underwear"]:
+        call remove_underwear(Girl)
+
+    if item:
+        $ Girl.underwear_pulled_down = True
+
+        $ Girl.outfit["underwear"] = item
+
+        pause 0.2
+
+    $ Girl.fix_clothing()
+
+    return
+
+label expose_pussy(Girl):
+    call expose_underwear(Girl)
 
     if Girl.outfit["underwear"]:
         $ Girl.underwear_pulled_down = True
 
-    if Girl.outfit["loincloth"]:
-        $ Girl.loincloth_aside = True
+        pause 0.2
 
     $ Girl.set_outfit_flags()
 
-    if not Girl.seen_pussy:
-        call expression Girl.tag + "_First_Bottomless" pass(1)
-
-    $ Girl.seen_underwear = True
-    $ Girl.seen_pussy = True
+    call expression Girl.tag + "_First_Bottomless" pass(1)
 
     return
 
 label fully_expose(Girl):
+    call expose_breasts(Girl)
+    call expose_pussy(Girl)
+
+    return
+
+label fully_undress(Girl):
+    if Girl.outfit["cloak"]:
+        $ Girl.outfit["cloak"] = ""
+
+        pause 0.2
+
     if Girl.outfit["jacket"]:
-        $ Girl.jacket_opened = True
-
-    if Girl.outfit["top"]:
-        $ Girl.top_pulled_up = True
-
-    if Girl.outfit["bra"]:
-        $ Girl.bra_pulled_up = True
+        call remove_jacket(Girl)
 
     if Girl.outfit["suspenders"]:
-        $ Girl.suspenders_aside = True
+        call remove_suspenders(Girl)
 
-    if Girl.wearing_dress:
-        $ Girl.dress_top_pulled_down = True
-        $ Girl.dress_upskirt = True
+    if Girl.outfit["belt"]:
+        $ Girl.outfit["belt"] = ""
 
-    if Girl.wearing_skirt:
-        $ Girl.upskirt = True
+        pause 0.2
 
-    if Girl.outfit["bottom"]:
-        $ Girl.bottom_pulled_down = True
+    if Girl.outfit["top"]:
+        call remove_top(Girl)
 
-    if Girl.outfit["underwear"]:
-        $ Girl.underwear_pulled_down = True
+    if Girl.outfit["dress"] in dresses:
+        call remove_dress(Girl)
 
-    if Girl.outfit["loincloth"]:
-        $ Girl.loincloth_aside = True
+    if Girl.outfit["bra"]:
+        call remove_bra(Girl)
 
     $ Girl.set_outfit_flags()
 
-    if not Girl.seen_pussy:
-        call expression Girl.tag + "_First_Topless" pass(1)
-        call expression Girl.tag + "_First_Bottomless" pass(1)
+    call expression Girl.tag + "_First_Topless" pass(1)
 
-    $ Girl.seen_underwear = True
-    $ Girl.seen_pussy = True
+    if Girl.outfit["boots"]:
+        $ Girl.outfit["boots"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["bottom"]:
+        call remove_bottom(Girl)
+
+    if Girl.outfit["dress"] in bodysuits:
+        call remove_bodysuit(Girl)
+
+    if Girl.outfit["hose"]:
+        $ Girl.outfit["hose"] = ""
+
+        pause 0.2
+
+    if Girl.outfit["underwear"]:
+        call remove_underwear(Girl)
+
+    $ Girl.set_outfit_flags()
+
+    call expression Girl.tag + "_First_Bottomless" pass(1)
 
     return
+
+
 
 
 
@@ -1159,7 +1591,7 @@ label AutoStrip(Girl):
         elif (Girl.outfit["underwear"] and not Girl.underwear_pulled_down):
             "She tugs her [Girl.outfit[underwear]] off and drops them to the ground."
 
-    call expose_bottom(Girl)
+    call expose_pussy(Girl)
 
     $ Girl.outfit["hose"] = "" if Girl.hose_number() >= 6 else Girl.outfit["hose"]
 
@@ -1455,7 +1887,7 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                         "[Girl.name] throws off her [line]."
                 "Just pull it up." if (Girl.outfit["top"] or Girl.outfit["bra"]) and not Girl.top_pulled_up:
                     $ Girl.change_face("_bemused", 1)
-                    call expose_top(Girl)
+                    call expose_breasts(Girl)
                     if Girl == EmmaX:
                         "[Girl.name] smiles and pulls out her tits. . ."
                     elif Girl.outfit["top"] and Girl.outfit["bra"]:
@@ -2289,7 +2721,7 @@ label Bottoms_Off(Girl, Intro=1, line=0, counter=0):
                 if taboo:
                     $ Girl.change_stat("inhibition", 90, (int(taboo/10)))
 
-                call expose_bottom(Girl)
+                call expose_pussy(Girl)
 
                 if Girl == KittyX:
                     if counter:
@@ -2890,7 +3322,7 @@ label Bottoms_Off_Legs(Girl=0):
                     else:
                         Girl.voice "Fine."
 
-                    call expose_bottom(Girl)
+                    call expose_pussy(Girl)
 
                     if Girl.outfit["bottom"]:
                         "She shifts her [Girl.outfit[bottom]] out of the way."

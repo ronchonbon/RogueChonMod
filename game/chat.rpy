@@ -202,10 +202,6 @@ label chat_menu:
         "Come on over." if Girl.location != bg_current:
             if Girl in Nearby and bg_current != "bg_showerrroom":
                 call Swap_Nearby(Girl)
-            elif Room_Full():
-                "It's already pretty crowded here."
-
-                call dismiss_menu
             else:
                 call expression Girl.tag + "_Summon"
         "Ask [Girl.name] to leave" if Girl.location == bg_current:
@@ -310,12 +306,12 @@ label chat_menu:
                     ch_p "Do you want to go on a date tonight?"
 
                     call Date_Ask(Girl)
-                "Gifts (locked)" if Girl.location != bg_current:
-                    pass
-                "Gifts" if Girl.location == bg_current:
-                    ch_p "I'd like to give you something."
-
-                    call gifts
+                # "Gifts (locked)" if Girl.location != bg_current:
+                #     pass
+                # "Gifts" if Girl.location == bg_current:
+                #     ch_p "I'd like to give you something."
+                #
+                #     call gifts
                 "Back":
                     pass
         "Talk with her":

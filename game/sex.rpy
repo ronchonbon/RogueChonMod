@@ -1137,7 +1137,7 @@ label girl_initiated_action(Girl, action):
 
         if (Girl.outfit["bottom"] and not Girl.upskirt) or (Girl.outfit["underwear"] and not Girl.underwear_pulled_down):
             if approval_check(Girl, 1250, taboo_modifier = 1) or (Girl.seen_pussy and approval_check(Girl, 500) and not taboo):
-                call expose_bottom(Girl)
+                call expose_pussy(Girl)
 
                 $ line = 0
 

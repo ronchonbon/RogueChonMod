@@ -620,7 +620,7 @@ label to_do(Girl):
                 $ Girl.to_do.remove("pubes")
 
     if "shave" in Girl.to_do:
-        $ Girl.pubes = "_bare"
+        $ Girl.pubes = ""
         $ Girl.to_do.remove("shave")
 
     if "hair" in Girl.to_do:
@@ -2795,34 +2795,6 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0):
     return
 
 
-
-label gym_clothes_menu:
-    menu:
-        extend ""
-        "Yeah, they look great.":
-            $ G.change_face("_smile")
-            $ G.change_stat("love", 80, 2)
-            $ G.change_stat("obedience", 40, 1)
-            $ G.change_stat("inhibition", 30, 1)
-
-            return 1
-        "No, stay in that.":
-            $ G.change_face("_confused")
-            $ G.change_stat("obedience", 50, 5)
-
-            return 0
-        "Whichever you like.":
-            $ G.change_face("_confused")
-            $ G.change_stat("inhibition", 50, 1)
-
-            return renpy.random.randint(0, 3)
-        "I don't care.":
-            $ G.change_face("_angry")
-            $ G.change_stat("love", 50, -3, 1)
-            $ G.change_stat("obedience", 50, 4)
-            $ G.change_stat("inhibition", 50, 2)
-
-            return renpy.random.randint(0, 1)
 
 label exit_gym(temp_Girls = []):
     if temp_Girls and temp_Girls[0] in all_Girls:

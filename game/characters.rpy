@@ -272,7 +272,7 @@ init python:
                 self.voice = ch_e
 
                 self.home = "bg_emma"
-                self.pubes = "_bare"
+                self.pubes = ""
 
                 self.diamond = False
 
@@ -401,7 +401,7 @@ init python:
                 self.voice = ch_m
 
                 self.home = "bg_mystique"
-                self.pubes = "_bare"
+                self.pubes = ""
 
                 self.weekly_schedule = [["bg_teacher", "bg_teacher", "bg_classroom", "bg_mystique"],
                                  ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_mystique"],
@@ -1154,7 +1154,7 @@ init python:
                     "face_outer_accessory": "_hat",
                     "underwear": "_lace_panties",
                     "hose": "_stockings_and_garterbelt", "bottom": "_dress",
-                    "loincloth": "_dress", "top": "_dress",
+                    "top": "_dress",
                     "neck": "_choker",
                     "outfit_active": 2})
 
@@ -1528,6 +1528,8 @@ init python:
             self.bottom_pulled_down = False
             self.underwear_pulled_down = False
             self.loincloth_aside = False
+
+            self.set_outfit_flags()
 
             return
 
@@ -2047,7 +2049,7 @@ init python:
 
             return False
 
-    def get_base_outfit(*args):
+    def get_base_outfit(*items):
         outfit = {"back_outer_accessory": "", "back_inner_accessory": "", "buttplug": "",
             "face_piercings": "", "makeup": "", "gag": "",
             "face_inner_accessory": "", "hair": "", "face_outer_accessory": "",
@@ -2060,7 +2062,7 @@ init python:
             "held_item": "",
             "shame": 0, "outfit_active": False}
 
-        for arg in args:
-            outfit.update(arg)
+        for item in items:
+            outfit.update(item)
 
         return outfit

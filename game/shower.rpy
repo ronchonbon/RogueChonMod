@@ -6,7 +6,7 @@ label showering:
 
     python:
         for G in all_Girls:
-            if G.location == "bg_showerroom" and G not in showering_Girls:
+            if G.location == "bg_showerroom":
                 showering_Girls.append(G)
 
     if showering_Girls:
@@ -16,28 +16,28 @@ label showering:
 
         $ already_showered = False
 
-        while counter < 2:
-            if "showered" in showering_Girls[0].recent_history:
+        while counter < len(showering_Girls):
+            if "showered" in showering_Girls[counter].recent_history:
                 if len(showering_Girls) > 1 and counter == 0:
-                    if showering_Girls[0] == RogueX:
+                    if showering_Girls[counter] == RogueX:
                         ch_r "We actually just finished up, so we'll head out."
-                    elif showering_Girls[0] == KittyX:
+                    elif showering_Girls[counter] == KittyX:
                         ch_k "We actually just showered, so we're heading out."
-                    elif showering_Girls[0] == EmmaX:
+                    elif showering_Girls[counter] == EmmaX:
                         ch_e "We were actually finishing up, so we're heading out."
-                    elif showering_Girls[0] == LauraX:
+                    elif showering_Girls[counter] == LauraX:
                         ch_l "We were done, actually."
-                    elif showering_Girls[0] == JeanX:
+                    elif showering_Girls[counter] == JeanX:
                         ch_j "We were done."
-                    elif showering_Girls[0] == StormX:
+                    elif showering_Girls[counter] == StormX:
                         "I think we're about finished and heading out now."
-                    elif showering_Girls[0] == JubesX:
+                    elif showering_Girls[counter] == JubesX:
                         ch_v "We finished getting showered, so we're taking off."
                 elif len(showering_Girls) > 1 and counter == 1:
-                    $ first_approval = approval_check(showering_Girls[1], 1400, Alt = [[RogueX, JeanX], 1200])
-                    $ second_approval = approval_check(showering_Girls[1], 700, Alt = [[RogueX, JeanX], 600])
+                    $ first_approval = approval_check(showering_Girls[counter], 1400, Alt = [[RogueX, JeanX], 1200])
+                    $ second_approval = approval_check(showering_Girls[counter], 700, Alt = [[RogueX, JeanX], 600])
 
-                    if showering_Girls[1] == EmmaX and not "classcaught" in EmmaX.history or not "threesome" in EmmaX.history:
+                    if showering_Girls[counter] == EmmaX and not "classcaught" in EmmaX.history or not "threesome" in EmmaX.history:
                         ch_e "I really should be going. . ."
                     elif first_approval or (second_approval and showering_Girls[1].seen_breasts and showering_Girls[1].seen_pussy):
                         if showering_Girls[1] == RogueX:
@@ -114,72 +114,72 @@ label showering:
                             else:
                                 ch_k "Oh, yeah, I gotta go too. . ."
                 else:
-                    if showering_Girls[0] == RogueX:
+                    if showering_Girls[counter] == RogueX:
                         ch_r "I actually just finished up, so I'll head out."
-                    elif showering_Girls[0] == KittyX:
+                    elif showering_Girls[counter] == KittyX:
                         ch_k "I actually just showered, so I'm heading out."
-                    elif showering_Girls[0] == EmmaX:
+                    elif showering_Girls[counter] == EmmaX:
                         ch_e "I was actually finishing up, so I'm heading out."
-                    elif showering_Girls[0] == LauraX:
+                    elif showering_Girls[counter] == LauraX:
                         ch_l "I'm heading out now."
-                    elif showering_Girls[0] == JeanX:
+                    elif showering_Girls[counter] == JeanX:
                         ch_j "I'm heading out."
-                    elif showering_Girls[0] == StormX:
+                    elif showering_Girls[counter] == StormX:
                         "I was about finished and heading out now."
-                    elif showering_Girls[0] == JubesX:
+                    elif showering_Girls[counter] == JubesX:
                         "I finished getting showered, so I'm taking off."
 
                 $ already_showered = True
             else:
-                $ first_approval = approval_check(showering_Girls[0], 1400, Alt = [[RogueX], 1200])
-                $ second_approval = approval_check(showering_Girls[0], 700, Alt = [[RogueX], 600])
+                $ first_approval = approval_check(showering_Girls[counter], 1400, Alt = [[RogueX], 1200])
+                $ second_approval = approval_check(showering_Girls[counter], 700, Alt = [[RogueX], 600])
 
-                if first_approval or (second_approval and showering_Girls[0].seen_breasts and showering_Girls[0].seen_pussy):
-                    if showering_Girls[0] == RogueX:
+                if first_approval or (second_approval and showering_Girls[counter].seen_breasts and showering_Girls[counter].seen_pussy):
+                    if showering_Girls[counter] == RogueX:
                         ch_r "I suppose I could stick around. . ."
 
-                        $ staying_Girls.append(showering_Girls[0])
-                    elif showering_Girls[0] == KittyX:
+                        $ staying_Girls.append(showering_Girls[counter])
+                    elif showering_Girls[counter] == KittyX:
                         "Yeah, I could stick around."
 
-                        $ staying_Girls.append(showering_Girls[0])
-                    elif showering_Girls[0] == EmmaX:
+                        $ staying_Girls.append(showering_Girls[counter])
+                    elif showering_Girls[counter] == EmmaX:
                         if not "classcaught" in EmmaX.history or "threesome" not in EmmaX.history:
                             ch_e "I really should be going. . ."
                         else:
                             ch_e "I suppose I could stay, for a bit."
 
-                            $ staying_Girls.append(showering_Girls[0])
-                    elif showering_Girls[0] == LauraX:
+                            $ staying_Girls.append(showering_Girls[counter])
+                    elif showering_Girls[counter] == LauraX:
                         ch_l "I got nothing better to do."
 
-                        $ staying_Girls.append(showering_Girls[0])
-                    elif showering_Girls[0] == JeanX:
+                        $ staying_Girls.append(showering_Girls[counter])
+                    elif showering_Girls[counter] == JeanX:
                         ch_j "Sure, why not."
 
-                        $ staying_Girls.append(showering_Girls[0])
-                    elif showering_Girls[0] == StormX:
+                        $ staying_Girls.append(showering_Girls[counter])
+                    elif showering_Girls[counter] == StormX:
                         ch_s "I could stay, I suppose."
 
-                        $ staying_Girls.append(showering_Girls[0])
-                    elif showering_Girls[0] == JubesX:
+                        $ staying_Girls.append(showering_Girls[counter])
+                    elif showering_Girls[counter] == JubesX:
                         ch_v "I guess I could stay a minute. . ."
 
-                        $ staying_Girls.append(showering_Girls[0])
+                        $ staying_Girls.append(showering_Girls[counter])
                 else:
-                    if showering_Girls[0] == RogueX:
+                    if showering_Girls[counter] == RogueX:
                         ch_r "Nah, I should probably get going."
-                    elif showering_Girls[0] == KittyX:
+                    elif showering_Girls[counter] == KittyX:
                         ch_k "I've got to get going."
-                    elif showering_Girls[0] == EmmaX:
+                    elif showering_Girls[counter] == EmmaX:
                         ch_e "I'm afraid I really must be going."
-                    elif showering_Girls[0] == LauraX:
+                    elif showering_Girls[counter] == LauraX:
                         ch_l "I gotta get going."
-                    elif showering_Girls[0] == JeanX:
+                    elif showering_Girls[counter] == JeanX:
                         ch_j "Nah, lol."
-                    elif showering_Girls[0] == StormX:
+                    elif showering_Girls[counter] == StormX:
                         ch_s "I really do have things to do, [StormX.player_petname]."
-                    elif showering_Girls[0] == JubesX:
+                    elif showering_Girls[counter] == JubesX:
                         ch_v "I'm kinda busy, [JubesX.player_petname]."
 
             $ counter += 1
@@ -210,26 +210,22 @@ label showering:
                     $ line = "watch you"
 
             if line:
-                $ temp_Girls = showering_Girls[:]
-
-                while temp_Girls:
-                    if temp_Girls[0].location == bg_current and temp_Girls[0] not in staying_Girls:
-                        if temp_Girls[0] == EmmaX and (not "classcaught" in EmmaX.history or (staying_Girls and "threesome" not in EmmaX.history)):
-
-                            pass
-                        elif temp_Girls[0] == JeanX and approval_check(temp_Girls[0], 600):
-                            $ staying_Girls.append(temp_Girls[0])
-                        elif temp_Girls[0] == StormX:
-                            if approval_check(temp_Girls[0], 700, "LO"):
-                                $ staying_Girls.append(temp_Girls[0])
-                        elif approval_check(temp_Girls[0], 1200,Alt=[[KittyX],1400]) or (approval_check(temp_Girls[0], 600,Alt=[[KittyX],700]) and temp_Girls[0].seen_breasts and temp_Girls[0].seen_pussy):
-                            $ staying_Girls.append(temp_Girls[0])
-                        elif line == "spot" and approval_check(temp_Girls[0], 1000, "LI",Alt=[[KittyX],1200]):
-                            $ staying_Girls.append(temp_Girls[0])
-                        elif line == "watch you" and approval_check(temp_Girls[0], 600, "O",Alt=[[EmmaX],500]):
-                            $ staying_Girls.append(temp_Girls[0])
-
-                    $ temp_Girls.remove(temp_Girls[0])
+                python:
+                    for G in showering_Girls:
+                        if G.location == bg_current and G not in staying_Girls:
+                            if G == EmmaX and (not "classcaught" in EmmaX.history or (staying_Girls and "threesome" not in EmmaX.history)):
+                                pass
+                            elif G == JeanX and approval_check(G, 600):
+                                staying_Girls.append(G)
+                            elif G == StormX:
+                                if approval_check(G, 700, "LO"):
+                                    staying_Girls.append(G)
+                            elif approval_check(G, 1200,Alt=[[KittyX],1400]) or (approval_check(G, 600,Alt=[[KittyX],700]) and G.seen_breasts and G.seen_pussy):
+                                staying_Girls.append(G)
+                            elif line == "spot" and approval_check(G, 1000, "LI",Alt=[[KittyX],1200]):
+                                staying_Girls.append(G)
+                            elif line == "watch you" and approval_check(G, 600, "O",Alt=[[EmmaX],500]):
+                                staying_Girls.append(G)
 
                 if line == "spot":
                     if staying_Girls:
