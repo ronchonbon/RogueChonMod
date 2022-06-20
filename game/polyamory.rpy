@@ -1326,7 +1326,7 @@ label Les_After:
     $ Partner.event_counter["seen_with_girl"] += 1
     if Girl.event_counter["seen_with_girl"] == 1:
         $ Girl.SEXP += 15
-        if Girl.love >= 500 and Girl.Org:
+        if Girl.love >= 500 and Girl.session_orgasms:
             if Girl == RogueX:
                 ch_r "I have to say, I really enjoyed that one. . ."
             elif Girl == KittyX:
@@ -1345,7 +1345,7 @@ label Les_After:
                 ch_v "It was cool to have an audience. . ."
     if Partner.event_counter["seen_with_girl"] == 1:
         $ Partner.SEXP += 15
-        if Partner.love >= 500 and Partner.Org:
+        if Partner.love >= 500 and Partner.session_orgasms:
             if Partner == RogueX:
                 ch_r "I have to say, I really enjoyed that one. . ."
             elif Partner == KittyX:

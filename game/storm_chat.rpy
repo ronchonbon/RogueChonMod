@@ -2212,526 +2212,7 @@ label Storm_Leave(approval_bonus=approval_bonus, GirlsNum=0):
 
 
 
-label Storm_Clothes:
-    if StormX.taboo and StormX not in Rules:
-        if "exhibitionist" in StormX.traits:
-            ch_s "Oh, here? . ."
-        elif approval_check(StormX, 900, taboo_modifier=4) or approval_check(StormX, 400, "I", taboo_modifier=3):
-            ch_s "I'm not supposed to undress here. . ."
-        else:
-            ch_s "I'm not supposed to undress here. . ."
-            ch_s "Can we talk about this in our rooms?"
-            return
-    elif approval_check(StormX, 900, taboo_modifier=4) or approval_check(StormX, 600, "L") or approval_check(StormX, 300, "O"):
-        ch_s "Oh? What about them?"
-    else:
-        ch_s "I don't really need fashion advice, thank you."
-        return
 
-    if Girl != StormX or line == "Giftstore":
-
-        $ renpy.pop_call()
-    $ line = 0
-    $ Girl = StormX
-    call shift_focus (Girl)
-
-label Storm_wardrobe_menu:
-    $ StormX.change_face()
-    while True:
-        menu:
-            ch_s "What about my wardrobe?"
-            "Overshirts":
-                call Storm_Clothes_Over
-            "Legwear":
-                call Storm_Clothes_Legs
-            "Underwear":
-                call Storm_Clothes_Under
-            "Accessories":
-                call Storm_Clothes_Misc
-            "Outfit Management":
-                call Storm_Clothes_outfits
-            "Let's talk about what you wear around.":
-                call set_clothes_schedule (StormX)
-
-            "Could I get a look at it?" if StormX.location != bg_current:
-
-                call outfitShame (StormX, 0, 2)
-                if _return:
-                    show PhoneSex zorder 150
-                    ch_s "What do you think?"
-                hide PhoneSex
-            "Could I get a look at it?" if renpy.showing('dress_screen'):
-
-                call outfitShame (StormX, 0, 2)
-                if _return:
-                    hide dress_screen
-            "Would you be more comfortable behind a screen? (locked)" if StormX.taboo:
-                pass
-            "Would you be more comfortable behind a screen?" if StormX.location == bg_current and not StormX.taboo and not renpy.showing('dress_screen'):
-
-
-                ch_s "I won't need it, but I appreciate the offer."
-
-
-
-
-            "Gift for you (locked)" if Girl.location != bg_current:
-                pass
-            "Gift for you" if Girl.location == bg_current:
-                ch_p "I'd like to give you something."
-                call gifts
-            "Switch to. . .":
-
-                if renpy.showing('dress_screen'):
-                    call outfitShame (StormX, 0, 2)
-                    if _return:
-                        hide dress_screen
-                    else:
-                        $ StormX.change_outfit()
-                $ StormX.set_temp_outfit()
-                call switch_chat
-                if Girl != StormX:
-                    ch_p "I wanted to talk about your clothes."
-                    call expression Girl.tag +"_Clothes"
-                $ Girl = StormX
-                call shift_focus (Girl)
-            "Never mind, you look good like that.":
-
-                if "wardrobe" not in StormX.recent_history:
-
-                    if (StormX.top_number()+StormX.bra_number()<4) or (StormX.underwear_number()+StormX.bottom_number() < 5):
-
-                        $ StormX.change_face("_sly",eyes="_down")
-                        ch_s "I understand why -you- would think so. . ."
-                        $ StormX.change_face("_sly")
-                    elif StormX.had_chat[1] <= 1:
-                        $ StormX.change_stat("love", 70, 15)
-                        $ StormX.change_stat("obedience", 40, 20)
-                        ch_s "Oh, how sweet of you to say so."
-                    elif StormX.had_chat[1] <= 10:
-                        $ StormX.change_stat("love", 70, 5)
-                        $ StormX.change_stat("obedience", 40, 7)
-                        ch_s "I do enjoy this look."
-                    elif StormX.had_chat[1] <= 50:
-                        $ StormX.change_stat("love", 70, 1)
-                        $ StormX.change_stat("obedience", 40, 1)
-                        ch_s "Thank you. . ."
-                    else:
-                        ch_s "Certainly."
-                    $ StormX.recent_history.append("wardrobe")
-                if renpy.showing('dress_screen'):
-                    call outfitShame (StormX, 0, 2)
-                    if _return:
-                        hide dress_screen
-                    else:
-                        $ StormX.change_outfit()
-                $ StormX.set_temp_outfit()
-                $ StormX.had_chat[1] += 1
-                return
-
-
-
-
-
-
-
-    menu Storm_Clothes_outfits:
-        "You should remember that one. [[Set Custom]":
-
-            menu:
-                "Which slot would you like this saved in?"
-                "Custom 1":
-                    call outfitShame (StormX, 3, 1)
-                "Custom 2":
-                    call outfitShame (StormX, 5, 1)
-                "Custom 3":
-                    call outfitShame (StormX, 6, 1)
-                "Gym Clothes":
-                    call outfitShame (StormX, 4, 1)
-                "Sleepwear":
-                    call outfitShame (StormX, 7, 1)
-                "Swimwear":
-                    call outfitShame (StormX, 10, 1)
-                "Never mind":
-
-                    pass
-        "That skirt combo":
-
-            $ StormX.change_outfit("casual1")
-            menu:
-                "You should wear this one out. [[set current outfit]":
-                    $ StormX.outfit_name = "casual1"
-                    $ StormX.outfit["shame"] = 0
-                    ch_s "Yes, this is my preferred casual outfit."
-                "Let's try something else though.":
-                    ch_s "Ok."
-        "Leather jacket and pants combo":
-
-            $ StormX.change_outfit("casual2")
-            menu:
-                "You should wear this one out. [[set current outfit]":
-                    $ StormX.outfit_name = "casual2"
-                    $ StormX.outfit["shame"] = 0
-                    ch_s "Yes, I find this one more stylish."
-                "Let's try something else though.":
-                    ch_s "Ok."
-
-        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not StormX.first_custom_outfit["outfit_active"] and not StormX.second_custom_outfit["outfit_active"] and not StormX.third_custom_outfit["outfit_active"]:
-            pass
-
-        "Remember that outfit we put together?" if StormX.first_custom_outfit["outfit_active"] or StormX.second_custom_outfit["outfit_active"] or StormX.third_custom_outfit["outfit_active"]:
-            $ counter = 0
-            while 1:
-                menu:
-                    "Throw on Custom 1 (locked)" if not StormX.first_custom_outfit["outfit_active"]:
-                        pass
-                    "Throw on Custom 1" if StormX.first_custom_outfit["outfit_active"]:
-                        $ StormX.change_outfit("custom1")
-                        $ counter = 3
-                    "Throw on Custom 2 (locked)" if not StormX.second_custom_outfit["outfit_active"]:
-                        pass
-                    "Throw on Custom 2" if StormX.second_custom_outfit["outfit_active"]:
-                        $ StormX.change_outfit("custom2")
-                        $ counter = 5
-                    "Throw on Custom 3 (locked)" if not StormX.third_custom_outfit["outfit_active"]:
-                        pass
-                    "Throw on Custom 3" if StormX.third_custom_outfit["outfit_active"]:
-                        $ StormX.change_outfit("custom3")
-                        $ counter = 6
-
-                    "You should wear this one in private. (locked)" if not counter:
-                        pass
-                    "You should wear this one in private." if counter:
-                        if counter == 5:
-                            $ StormX.clothing[9] = 5
-                        elif counter == 6:
-                            $ StormX.clothing[9] = 6
-                        else:
-                            $ StormX.clothing[9] = 3
-                        ch_s "That would be fine."
-                    "On second thought, forget about that one outfit. . .":
-
-                        menu:
-                            "Custom 1 [[clear custom 1]" if StormX.first_custom_outfit["outfit_active"]:
-                                ch_s "Fine."
-                                $ StormX.first_custom_outfit["outfit_active"] = 0
-                            "Custom 1 [[clear custom 1] (locked)" if not StormX.first_custom_outfit["outfit_active"]:
-                                pass
-                            "Custom 2 [[clear custom 2]" if StormX.second_custom_outfit["outfit_active"]:
-                                ch_s "Fine."
-                                $ StormX.second_custom_outfit["outfit_active"] = 0
-                            "Custom 2 [[clear custom 2] (locked)" if not StormX.second_custom_outfit["outfit_active"]:
-                                pass
-                            "Custom 3 [[clear custom 3]" if StormX.third_custom_outfit["outfit_active"]:
-                                ch_s "Fine."
-                                $ StormX.third_custom_outfit["outfit_active"] = 0
-                            "Custom 3 [[clear custom 3] (locked)" if not StormX.third_custom_outfit["outfit_active"]:
-                                pass
-                            "Never mind, [[back].":
-                                pass
-
-                    "You should wear this one out. [[choose outfit first](locked)" if not counter:
-                        pass
-                    "You should wear this one out." if counter:
-                        call Custom_Out (StormX, counter)
-                    "Ok, back to what we were talking about. . .":
-                        $ counter = 0
-                        return
-
-        "Gym Clothes?" if not StormX.taboo or bg_current == "bg_dangerroom":
-            $ StormX.change_outfit("gym_clothes")
-
-        "Sleepwear?" if not StormX.taboo:
-            if approval_check(StormX, 1200):
-                $ StormX.change_outfit("sleepwear")
-            else:
-                call Display_dress_screen (StormX)
-                if _return:
-                    $ StormX.change_outfit("sleepwear")
-
-        "Swimwear? (locked)" if (StormX.taboo and bg_current != "bg_pool") or not StormX.swimwear["outfit_active"]:
-            $ StormX.change_outfit("swimwear")
-        "Swimwear?" if (not StormX.taboo or bg_current == "bg_pool") and StormX.swimwear["outfit_active"]:
-            $ StormX.change_outfit("swimwear")
-
-
-        "Halloween Costume?" if "halloween" in StormX.history:
-            if StormX.taboo <= 20 or StormX in Rules or StormX.bottom_number() >= 5:
-                ch_s "Fine."
-                $ StormX.change_outfit("costume")
-            elif approval_check(StormX, 1100, taboo_modifier=3):
-                ch_s "Ok."
-                $ StormX.change_outfit("costume")
-            else:
-                call Display_dress_screen (StormX)
-                if not _return:
-                    ch_s "I would really rather not. . ."
-                else:
-                    $ StormX.change_outfit("costume")
-        "Your birthday suit looks really great. . .":
-
-
-
-            $ StormX.change_face("_sexy", 1)
-            $ line = 0
-            if not StormX.outfit["bra"] and not StormX.outfit["underwear"] and not StormX.outfit["top"] and not StormX.outfit["bottom"] and not StormX.outfit["hose"]:
-                ch_s "Thank you."
-            elif approval_check(StormX, 1200, taboo_modifier=4):
-                ch_s "Certainly. . ."
-                $ line = 1
-            elif approval_check(StormX, 2000, taboo_modifier=4):
-                ch_s "No foreplay?"
-                $ line = 1
-            elif not approval_check(StormX, 500, taboo_modifier=0):
-                $ StormX.change_face("_confused", 1,mouth="_smirk")
-                ch_s "I don't exactly get nude on command, you know. . ."
-                $ StormX.change_face("_bemused", 0)
-            elif StormX.taboo and StormX not in Rules:
-                ch_s "Maybe, but not here. . ."
-            elif approval_check(StormX, 1000, taboo_modifier=0):
-                $ StormX.change_face("_confused", 1,mouth="_smirk")
-                ch_s "Yeah, but I'm not exactly showing it off."
-                $ StormX.change_face("_bemused", 0)
-            else:
-                $ StormX.change_face("_angry", 1)
-                ch_s "I would rather not."
-
-            if line:
-
-                $ StormX.change_outfit("nude")
-                "She throws her clothes off at her feet."
-                call Storm_First_Topless
-                call Storm_First_Bottomless (1)
-                $ StormX.change_face("_sexy")
-                menu:
-                    "You know, you should wear this one out. [[set current outfit]":
-                        if "exhibitionist" in StormX.traits:
-                            ch_s "mmmm. . ."
-                            $ StormX.outfit_name = "nude"
-                            $ StormX.change_stat("lust", 50, 10)
-                            $ StormX.change_stat("lust", 70, 5)
-                            $ StormX.outfit["shame"] = 50
-                        elif approval_check(StormX, 800, "I") or approval_check(StormX, 2800, taboo_modifier=0) or StormX in Rules:
-                            ch_s "You know, I might. . ."
-                            $ StormX.outfit_name = "nude"
-                            $ StormX.outfit["shame"] = 50
-                        else:
-                            $ StormX.change_face("_sexy", 1)
-                            $ StormX.eyes = "_surprised"
-                            ch_s "I probably shouldn't. I am sorry."
-                    "Let's try something else though.":
-
-                        if "exhibitionist" in StormX.traits:
-                            ch_s "Are you certain?"
-                        elif approval_check(StormX, 800, "I") or approval_check(StormX, 2800, taboo_modifier=0) or StormX in Rules:
-                            $ StormX.change_face("_bemused", 1)
-                            ch_s "I expected that you wanted me to go out like this."
-                            ch_s ". . ."
-                        else:
-                            $ StormX.change_face("_confused", 1)
-                            ch_s "I don't mind you seeing my body, but Charles does have his rules. . ."
-            $ line = 0
-        "Never mind":
-
-            return
-
-    return
-
-
-
-
-    menu Storm_Clothes_Over:
-
-        "Why don't you go with no [StormX.outfit[top]]?" if StormX.outfit["top"]:
-            $ StormX.change_face("_bemused", 1)
-            if approval_check(StormX, 800, taboo_modifier=3):
-                ch_s "Fine."
-            elif approval_check(StormX, 600, taboo_modifier=0):
-                call Storm_NoBra
-                if not _return:
-                    if not approval_check(StormX, 1200):
-                        call Display_dress_screen (StormX)
-                        if not _return:
-                            return
-                    else:
-                        return
-            else:
-                call Display_dress_screen (StormX)
-                if not _return:
-                    ch_s "I would rather not."
-                    if not StormX.outfit["bra"]:
-                        ch_s "I don't have anything under this. . ."
-                    return
-            $ line = StormX.outfit["top"]
-            $ StormX.outfit["top"] = ""
-            "She throws her [line] at her feet."
-            if not StormX.outfit["bra"] and not renpy.showing('dress_screen'):
-                call Storm_First_Topless
-
-        "Try on that white shirt." if StormX.outfit["top"] != "_white_shirt":
-            $ StormX.change_face("_bemused")
-            if not StormX.outfit["top"] or StormX.bra_number() >= 5:
-
-                ch_s "Very well."
-            elif approval_check(StormX, 800, taboo_modifier=3):
-                ch_s "Very well."
-            else:
-                call Display_dress_screen (StormX)
-                if not _return:
-                    $ StormX.change_face("_bemused", 1)
-                    ch_s "I cannot really take this [StormX.outfit[top]] off at the moment."
-                    return
-            $ StormX.outfit["top"] = "_white_shirt"
-
-        "Try on that leather jacket." if StormX.outfit["jacket"] != "_jacket":
-            $ StormX.change_face("_bemused")
-            if not StormX.outfit["jacket"] or StormX.bra_number() >= 5:
-
-                ch_s "Very well."
-            elif approval_check(StormX, 800, taboo_modifier=3):
-                ch_s "Very well."
-            else:
-                call Display_dress_screen (StormX)
-                if not _return:
-                    $ StormX.change_face("_bemused", 1)
-                    ch_s "I cannot really take this [StormX.outfit[jacket]] off at the moment."
-                    return
-            $ StormX.outfit["jacket"] = "_jacket"
-
-        "Maybe just throw on a towel?" if StormX.outfit["face_outer_accessory"] != "_towel":
-            $ StormX.change_face("_bemused", 1)
-            if StormX.bra_number() >= 5:
-                ch_s "If that's what you want. . ."
-            elif approval_check(StormX, 1000, taboo_modifier=3):
-                $ StormX.change_face("_perplexed", 1)
-                ch_s "If that's what you want. . ."
-            else:
-                call Display_dress_screen (StormX)
-                if not _return:
-                    ch_s "I'm afraid I couldn't."
-                    return
-            $ StormX.outfit["face_outer_accessory"] = "_towel"
-        "Never mind":
-
-            pass
-    return
-
-
-
-
-    label Storm_NoBra:
-        menu:
-            ch_s "I don't have much on under this. . ."
-            "Then you could slip something on under it. . .":
-                if StormX in Rules or StormX.taboo < 20:
-                    ch_s "No, I suppose it's fine, for now at least."
-                elif StormX.seen_breasts and approval_check(StormX, 1000, taboo_modifier=3):
-                    $ StormX.blushing = "_blush2"
-                    ch_s "I truly don't mind though. . ."
-                    $ StormX.blushing = ""
-
-
-
-
-                elif approval_check(StormX, 900, taboo_modifier=2) and "_lace_bra" in StormX.inventory:
-                    ch_s "Fine."
-                    $ StormX.outfit["bra"]  = "_lace_bra"
-                    "She pulls out her lace bra and slips it under her [StormX.outfit[top]]."
-                elif approval_check(StormX, 700, taboo_modifier=2) and "_corset" in StormX.inventory:
-                    ch_s "Fine."
-                    $ StormX.outfit["bra"]  = "_black_bra"
-                    "She pulls out her black bra and slips it under her [StormX.outfit[top]]."
-                elif approval_check(StormX, 600, taboo_modifier=2):
-                    ch_s "Fine."
-                    $ StormX.outfit["bra"] = "_tube_top"
-                    "She pulls out her tube top and slips it on under her [StormX.outfit[top]]."
-                else:
-                    ch_s "I don't think it would be appropriate."
-                    return False
-            "You could always just wear nothing at all. . .":
-
-                if StormX in Rules or not StormX.taboo:
-                    ch_s "I suppose it's fine, for now at least."
-                elif approval_check(StormX, 1100, "LI", taboo_modifier=2) and StormX.love > StormX.inhibition:
-                    ch_s "For you? I suppose. . ."
-                elif approval_check(StormX, 700, "OI", taboo_modifier=2) and StormX.obedience > StormX.inhibition:
-                    ch_s "Fine. . ."
-                elif approval_check(StormX, 600, "I", taboo_modifier=2):
-                    ch_s "Yes. . ."
-                elif approval_check(StormX, 1300, taboo_modifier=2):
-                    ch_s "Okay, fine."
-                else:
-                    $ StormX.change_face("_sadside")
-                    if StormX.taboo > 20:
-                        ch_s "Not in public, I'm afraid"
-                    else:
-                        ch_s "I'm afraid not, [StormX.player_petname]!"
-                    return False
-            "Never mind.":
-                ch_s "Ok. . ."
-                return False
-        return True
-
-
-
-
-    menu Storm_Clothes_Legs:
-
-        "Maybe go without the [StormX.outfit[bottom]]." if StormX.outfit["bottom"]:
-            $ StormX.change_face("_sexy", 1)
-            if StormX.taboo <= 20 or StormX.outfit["hose"] in ["_tights", "_pantyhose"] or StormX.underwear_number() >= 5 or StormX in Rules:
-                ch_s "Fine."
-
-
-
-
-            elif approval_check(StormX, 1300, taboo_modifier=2) and StormX.outfit["underwear"]:
-                ch_s "For you, fine. . ."
-            elif approval_check(StormX, 700) and not StormX.outfit["underwear"]:
-                call Storm_NoPantiesOn
-                if not _return and not StormX.outfit["underwear"]:
-                    if not approval_check(StormX, 1500):
-                        call Display_dress_screen (StormX)
-                        if not _return:
-                            return
-                    else:
-                        return
-            else:
-                call Display_dress_screen (StormX)
-                if not _return:
-
-                    if not StormX.outfit["underwear"]:
-                        ch_s "I'm not wearing panties today. . ."
-                    return
-
-            if StormX.outfit["bottom"] == "_pants" or StormX.outfit["bottom"] == "_yoga_pants":
-                $ StormX.outfit["bottom"] = ""
-                "She tugs her pants off and drops them to the ground."
-            else:
-                $ StormX.outfit["bottom"] = ""
-                "She tugs her skirt off and drops it to the ground."
-            if renpy.showing('dress_screen'):
-                pass
-            elif StormX.outfit["underwear"]:
-                $ StormX.seen_underwear = 1
-            else:
-                call Storm_First_Bottomless
-
-        "You look great in those black pants." if StormX.outfit["bottom"] != "_pants":
-            ch_s "Ok, one moment. . ."
-            $ StormX.outfit["bottom"] = "_pants"
-
-        "You look great in those yoga pants." if StormX.outfit["bottom"] != "_yoga_pants":
-            ch_s "Ok, one moment. . ."
-            $ StormX.outfit["bottom"] = "_yoga_pants"
-
-        "What about wearing your purple skirt?" if StormX.outfit["bottom"] != "_skirt":
-            ch_s "Ok, one moment. . ."
-            $ StormX.outfit["bottom"] = "_skirt"
-        "Never mind":
-
-            pass
-    return
 
 
 
@@ -2820,12 +2301,12 @@ label Storm_wardrobe_menu:
 
 
                     elif not StormX.outfit["top"]:
-                        call Display_dress_screen (StormX)
+                        call ask_for_dress_screen (StormX)
                         if not _return:
                             ch_s "I'd have to wear something else over it."
                             return
                     else:
-                        call Display_dress_screen (StormX)
+                        call ask_for_dress_screen (StormX)
                         if not _return:
                             ch_s "I'm afraid not."
                             return
@@ -2855,7 +2336,7 @@ label Storm_wardrobe_menu:
                         ch_s "Fine."
                         $ StormX.outfit["bra"] = "_black_bra"
                     else:
-                        call Display_dress_screen (StormX)
+                        call ask_for_dress_screen (StormX)
                         if not _return:
                             ch_s "It's a bit minimal. . ."
                         else:
@@ -2869,7 +2350,7 @@ label Storm_wardrobe_menu:
                         ch_s "Fine."
                         $ StormX.outfit["bra"] = "_lace_bra"
                     else:
-                        call Display_dress_screen (StormX)
+                        call ask_for_dress_screen (StormX)
                         if not _return:
                             ch_s "It's a bit sheer. . ."
                         else:
@@ -2887,7 +2368,7 @@ label Storm_wardrobe_menu:
                             ch_s "Fine."
                             $ StormX.outfit["bra"] = "_bikini_top"
                         else:
-                            call Display_dress_screen (StormX)
+                            call ask_for_dress_screen (StormX)
                             if not _return:
                                 ch_s "This is not really a \"bikini\" sort of place. . ."
                             else:
@@ -2901,7 +2382,7 @@ label Storm_wardrobe_menu:
                         ch_s "Fine."
                         $ StormX.outfit["bra"] = "_cosplay_bra"
                     else:
-                        call Display_dress_screen (StormX)
+                        call ask_for_dress_screen (StormX)
                         if not _return:
                             ch_s "It's a bit minimal. . ."
                         else:
@@ -2956,7 +2437,7 @@ label Storm_wardrobe_menu:
                         elif approval_check(StormX, 1300, taboo_modifier=3):
                             ch_s "Okay, okay."
                         else:
-                            call Display_dress_screen (StormX)
+                            call ask_for_dress_screen (StormX)
                             if not _return:
                                 $ StormX.change_face("_bemused")
                                 if StormX.taboo >= 20:
@@ -2993,7 +2474,7 @@ label Storm_wardrobe_menu:
                         ch_s "Ok."
                         $ StormX.outfit["underwear"] = "_white_panties"
                     else:
-                        call Display_dress_screen (StormX)
+                        call ask_for_dress_screen (StormX)
                         if not _return:
                             ch_s "That's really none of your busines."
                         else:
@@ -3007,7 +2488,7 @@ label Storm_wardrobe_menu:
                         ch_s "Ok."
                         $ StormX.outfit["underwear"] = "_black_panties"
                     else:
-                        call Display_dress_screen (StormX)
+                        call ask_for_dress_screen (StormX)
                         if not _return:
                             ch_s "That's really none of your busines."
                         else:
@@ -3021,7 +2502,7 @@ label Storm_wardrobe_menu:
                         ch_s "I guess."
                         $ StormX.outfit["underwear"] = "_lace_panties"
                     else:
-                        call Display_dress_screen (StormX)
+                        call ask_for_dress_screen (StormX)
                         if not _return:
                             ch_s "That's really none of your busines."
                         else:
@@ -3039,7 +2520,7 @@ label Storm_wardrobe_menu:
                             ch_s "Fine."
                             $ StormX.outfit["underwear"] = "_bikini_bottoms"
                         else:
-                            call Display_dress_screen (StormX)
+                            call ask_for_dress_screen (StormX)
                             if not _return:
                                 ch_s "This is not really a \"bikini\" sort of place. . ."
                             else:
@@ -3053,7 +2534,7 @@ label Storm_wardrobe_menu:
                         ch_s "Ok."
                         $ StormX.outfit["underwear"] = "_cosplay_panties"
                     else:
-                        call Display_dress_screen (StormX)
+                        call ask_for_dress_screen (StormX)
                         if not _return:
                             ch_s "That's really none of your busines."
                         else:

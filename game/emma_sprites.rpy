@@ -3,19 +3,19 @@ layeredimage Emma_sprite standing:
     #     "images/Emma_standing/Emma_standing_head_reference.png"
 
     if EmmaX.outfit["jacket"]:
-        "images/Emma_standing/Emma_standing_back_outer_accessory[EmmaX.outfit[jacket]].png"
+        "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]]_back.png"
 
-    if EmmaX.outfit["bottom"] == "_dress":
-        "images/Emma_standing/Emma_standing_back_outer_accessory[EmmaX.outfit[bottom]].png"
+    if EmmaX.outfit["bottom"] == "_dress_skirt":
+        "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]]_back.png"
 
     if EmmaX.outfit["bra"] == "_corset" and not EmmaX.bra_pulled_up:
-        "images/Emma_standing/Emma_standing_back_inner_accessory[EmmaX.outfit[bra]][EmmaX.arm_pose].png"
+        "images/Emma_standing/Emma_standing_bra[EmmaX.outfit[bra]][EmmaX.arm_pose]_back.png"
 
     if EmmaX.outfit["underwear"] and EmmaX.underwear_pulled_down:
-        "images/Emma_standing/Emma_standing_back_inner_accessory[EmmaX.outfit[underwear]]_down.png"
+        "images/Emma_standing/Emma_standing_underwear[EmmaX.outfit[underwear]]_back_down.png"
 
     always:
-        "Emma_back_hair" pos (0.1, 0.16) zoom 0.5
+        "Emma_hair_back" pos (0.201, 0.31) zoom 0.5
 
     always:
         "images/Emma_standing/Emma_standing_legs[EmmaX.arm_pose].png"
@@ -25,15 +25,6 @@ layeredimage Emma_sprite standing:
 
     if EmmaX.outfit["bra"] in ["_corset", "_sports_bra", "_bikini_top"] and not EmmaX.bra_pulled_up:
         "images/Emma_standing/Emma_standing_bra[EmmaX.outfit[bra]]_under.png"
-
-    always:
-        "images/Emma_standing/Emma_standing_arms[EmmaX.arm_pose].png"
-
-    if EmmaX.outfit["gloves"]:
-        "images/Emma_standing/Emma_standing_gloves[EmmaX.outfit[gloves]][EmmaX.arm_pose].png"
-
-    if EmmaX.outfit["piercings"]:
-        "images/Emma_standing/Emma_standing_piercings_pussy[EmmaX.outfit[piercings]].png"
 
     if not EmmaX.outfit["underwear"]:
         Null()
@@ -46,7 +37,7 @@ layeredimage Emma_sprite standing:
     else:
         "images/Emma_standing/Emma_standing_underwear[EmmaX.outfit[underwear]].png"
 
-    if EmmaX.outfit["hose"] and not EmmaX.underwear_pulled_down:
+    if EmmaX.outfit["hose"] and not EmmaX.hose_pulled_down:
         "images/Emma_standing/Emma_standing_hose[EmmaX.outfit[hose]].png"
 
     if EmmaX.outfit["bottom"] and EmmaX.grool > 1:
@@ -63,19 +54,35 @@ layeredimage Emma_sprite standing:
     always:
         "Emma_spunk_animations"
 
+    if EmmaX.outfit["bodysuit"]:
+        "images/Emma_standing/Emma_standing_bodysuit[EmmaX.outfit[bodysuit]][EmmaX.arm_pose].png"
+
     if not EmmaX.outfit["bottom"]:
         Null()
-    elif EmmaX.bottom_pulled_down or EmmaX.dress_upskirt or EmmaX.upskirt:
+    elif EmmaX.bottom_pulled_down or EmmaX.upskirt:
         "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]]_down.png"
     elif EmmaX.outfit["bottom"] == "_yoga_pants" and EmmaX.grool:
         "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]]_grool.png"
     else:
         "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]].png"
 
-    if EmmaX.outfit["top"] in ["_towel", "_nighty"]:
-        "images/Emma_standing/Emma_standing_loincloth[EmmaX.outfit[top]].png"
-    elif EmmaX.outfit["bottom"] == "_dress" and not EmmaX.loincloth_aside:
-        "images/Emma_standing/Emma_standing_loincloth[EmmaX.outfit[bottom]].png"
+    if EmmaX.outfit["top"] in ["_nighty", "_towel"]:
+        "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]]_waist.png"
+
+    always:
+        "images/Emma_standing/Emma_standing_arms[EmmaX.arm_pose].png"
+
+    if EmmaX.outfit["gloves"]:
+        "images/Emma_standing/Emma_standing_gloves[EmmaX.outfit[gloves]][EmmaX.arm_pose].png"
+
+    if EmmaX.outfit["piercings"]:
+        "images/Emma_standing/Emma_standing_piercings_pussy[EmmaX.outfit[piercings]].png"
+
+    if EmmaX.outfit["boots"]:
+        "images/Emma_standing/Emma_standing_boots[EmmaX.outfit[boots]].png"
+
+    if EmmaX.outfit["bottom"] == "_dress_skirt" and not EmmaX.upskirt:
+        "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]]_front.png"
 
     if EmmaX.arm_pose == 1 or EmmaX.breasts_supported:
         "images/Emma_standing/Emma_standing_breasts_up.png"
@@ -90,37 +97,27 @@ layeredimage Emma_sprite standing:
         "images/Emma_standing/Emma_standing_piercings_breasts[EmmaX.outfit[piercings]]_down.png"
 
     if EmmaX.outfit["jacket"] and EmmaX.jacket_opened:
-        "images/Emma_standing/Emma_standing_sleeves[EmmaX.outfit[jacket]][EmmaX.arm_pose]_up.png"
+        "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose]_sleeves_up.png"
 
     if not EmmaX.outfit["bra"]:
         Null()
     elif EmmaX.bra_pulled_up:
         "images/Emma_standing/Emma_standing_bra[EmmaX.outfit[bra]]_up.png"
-    elif EmmaX.outfit["bra"] == "_corset" and EmmaX.outfit["top"]:
-        "images/Emma_standing/Emma_standing_bra[EmmaX.outfit[bra]]_top.png"
+    # elif EmmaX.outfit["bra"] == "_corset" and EmmaX.outfit["top"]:
+    #     "images/Emma_standing/Emma_standing_bra[EmmaX.outfit[bra]]_top.png"
     else:
         "images/Emma_standing/Emma_standing_bra[EmmaX.outfit[bra]].png"
-
-    if EmmaX.outfit["dress"]:
-        "images/Emma_standing/Emma_standing_dress[EmmaX.outfit[dress]][EmmaX.arm_pose].png"
-
-    if EmmaX.outfit["boots"]:
-        "images/Emma_standing/Emma_standing_boots[EmmaX.outfit[boots]].png"
 
     if not EmmaX.outfit["top"]:
         Null()
     elif EmmaX.top_pulled_up and EmmaX.breasts_supported:
         "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_up_up.png"
-    elif EmmaX.top_pulled_up and EmmaX.arm_pose == 2:
-        "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_down_up.png"
     elif EmmaX.top_pulled_up:
+        "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_down_up.png"
+    elif EmmaX.breasts_supported:
         "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_up.png"
-    elif ((EmmaX.breasts_supported and EmmaX.arm_pose == 2) or (EmmaX.outfit["top"] == "_towel" and EmmaX.arm_pose == 1)):
-        "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_up.png"
-    elif EmmaX.arm_pose == 2:
-        "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_down.png"
     else:
-        "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose].png"
+        "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_down.png"
 
     if EmmaX.outfit["piercings"] and EmmaX.pussy_covered:
         "images/Emma_standing/Emma_standing_piercings_pussy[EmmaX.outfit[piercings]]_covered.png"
@@ -135,22 +132,22 @@ layeredimage Emma_sprite standing:
     if EmmaX.outfit["neck"]:
         "images/Emma_standing/Emma_standing_neck[EmmaX.outfit[neck]].png"
 
-    if EmmaX.outfit["belt"]:
-        "images/Emma_standing/Emma_standing_belt[EmmaX.outfit[belt]][EmmaX.arm_pose].png"
+    if EmmaX.outfit["top"] == "_dress_top":
+        "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_shawl.png"
 
     if not EmmaX.outfit["jacket"]:
         Null()
     elif EmmaX.jacket_opened and EmmaX.breasts_supported:
-        "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose]_up_up.png"
+        "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose]_up_open.png"
     elif EmmaX.jacket_opened:
-        "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose]_down_up.png"
-    elif EmmaX.jacket_opened or EmmaX.breasts_supported:
+        "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose]_down_open.png"
+    elif EmmaX.breasts_supported:
         "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose]_up.png"
     else:
         "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose]_down.png"
 
     always:
-        "Emma_head" pos (0.1, 0.16) zoom 0.5
+        "Emma_head" pos (0.201, 0.31) zoom 0.5
 
     if not EmmaX.spunk["breasts"]:
         Null()
@@ -183,7 +180,7 @@ layeredimage Emma_sprite standing:
         "images/Emma_standing/Emma_standing_water_legs.png"
 
     if EmmaX.outfit["face_outer_accessory"]:
-        "images/Emma_standing/Emma_standing_face_outer_accessory[EmmaX.outfit[face_outer_accessory]].png" pos (0.0, -0.043) zoom 0.5
+        "images/Emma_standing/Emma_standing_face_outer_accessory[EmmaX.outfit[face_outer_accessory]].png" pos (0.0, -0.09) zoom 0.5
 
     if EmmaX.outfit["held_item"] and EmmaX.arm_pose == 2:
         "images/Emma_standing/Emma_standing_held[EmmaX.outfit[held_item]].png"
@@ -191,13 +188,13 @@ layeredimage Emma_sprite standing:
     # always:
     #     "Emma_standing_fondling_animations"
 
-    anchor (0.5, 0.0) offset (20, 140)
+    anchor (0.5, 0.0) offset (20, 140) zoom 0.5
 
-layeredimage Emma_back_hair:
+layeredimage Emma_hair_back:
     if EmmaX.wet:
-        "images/Emma_standing/Emma_standing_back_hair_wet.png"
+        "images/Emma_standing/Emma_standing_hair_wet_back.png"
     else:
-        "images/Emma_standing/Emma_standing_back_hair[EmmaX.outfit[hair]].png"
+        "images/Emma_standing/Emma_standing_hair[EmmaX.outfit[hair]]_back.png"
 
     anchor (0.5, 0.5)
 
@@ -248,19 +245,19 @@ layeredimage Emma_sprite standing diamond:
     #     "images/Emma_standing/Emma_standing_head_reference.png"
 
     if EmmaX.outfit["jacket"]:
-        "images/Emma_standing/Emma_standing_back_outer_accessory[EmmaX.outfit[jacket]].png"
+        "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]]_back.png"
 
-    if EmmaX.outfit["bottom"] == "_dress":
-        "images/Emma_standing/Emma_standing_back_outer_accessory[EmmaX.outfit[bottom]].png"
+    if EmmaX.outfit["bottom"] == "_dress_skirt":
+        "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]]_back.png"
 
     if EmmaX.outfit["bra"] == "_corset" and not EmmaX.bra_pulled_up:
-        "images/Emma_standing/Emma_standing_back_inner_accessory[EmmaX.outfit[bra]][EmmaX.arm_pose].png"
+        "images/Emma_standing/Emma_standing_bra[EmmaX.outfit[bra]][EmmaX.arm_pose]_back.png"
 
     if EmmaX.outfit["underwear"] and EmmaX.underwear_pulled_down:
-        "images/Emma_standing/Emma_standing_back_inner_accessory[EmmaX.outfit[underwear]]_down.png"
+        "images/Emma_standing/Emma_standing_underwear[EmmaX.outfit[underwear]]_back_down.png"
 
     always:
-        "Emma_diamond_back_hair" pos (0.1, 0.16) zoom 0.5
+        "Emma_hair_back_diamond" pos (0.201, 0.31) zoom 0.5
 
     always:
         "images/Emma_standing/Emma_standing_legs[EmmaX.arm_pose]_diamond.png"
@@ -291,7 +288,7 @@ layeredimage Emma_sprite standing diamond:
     else:
         "images/Emma_standing/Emma_standing_underwear[EmmaX.outfit[underwear]].png"
 
-    if EmmaX.outfit["hose"] and not EmmaX.underwear_pulled_down:
+    if EmmaX.outfit["hose"] and not EmmaX.hose_pulled_down:
         "images/Emma_standing/Emma_standing_hose[EmmaX.outfit[hose]].png"
 
     if EmmaX.outfit["bottom"] and EmmaX.grool > 1:
@@ -308,19 +305,23 @@ layeredimage Emma_sprite standing diamond:
     always:
         "Emma_spunk_animations"
 
+    if EmmaX.outfit["bodysuit"]:
+        "images/Emma_standing/Emma_standing_bodysuit[EmmaX.outfit[bodysuit]][EmmaX.arm_pose].png"
+
     if not EmmaX.outfit["bottom"]:
         Null()
-    elif EmmaX.bottom_pulled_down or EmmaX.dress_upskirt or EmmaX.upskirt:
+    elif EmmaX.bottom_pulled_down or EmmaX.upskirt:
         "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]]_down.png"
     elif EmmaX.outfit["bottom"] == "_yoga_pants" and EmmaX.grool:
         "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]]_grool.png"
     else:
         "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]].png"
 
-    if EmmaX.outfit["top"] in ["_towel", "_nighty"]:
-        "images/Emma_standing/Emma_standing_loincloth[EmmaX.outfit[top]].png"
-    elif EmmaX.outfit["bottom"] == "_dress" and not EmmaX.loincloth_aside:
-        "images/Emma_standing/Emma_standing_loincloth[EmmaX.outfit[bottom]].png"
+    if EmmaX.outfit["top"] in ["_nighty", "_towel"]:
+        "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]]_waist.png"
+
+    if EmmaX.outfit["bottom"] == "_dress_skirt" and not EmmaX.upskirt:
+        "images/Emma_standing/Emma_standing_bottom[EmmaX.outfit[bottom]]_front.png"
 
     if EmmaX.arm_pose == 1 or EmmaX.breasts_supported:
         "images/Emma_standing/Emma_standing_breasts_up_diamond.png"
@@ -341,13 +342,10 @@ layeredimage Emma_sprite standing diamond:
         Null()
     elif EmmaX.bra_pulled_up:
         "images/Emma_standing/Emma_standing_bra[EmmaX.outfit[bra]]_up.png"
-    elif EmmaX.outfit["bra"] == "_corset" and EmmaX.outfit["top"]:
-        "images/Emma_standing/Emma_standing_bra[EmmaX.outfit[bra]]_top.png"
+    # elif EmmaX.outfit["bra"] == "_corset" and EmmaX.outfit["top"]:
+    #     "images/Emma_standing/Emma_standing_bra[EmmaX.outfit[bra]]_top.png"
     else:
         "images/Emma_standing/Emma_standing_bra[EmmaX.outfit[bra]].png"
-
-    if EmmaX.outfit["dress"]:
-        "images/Emma_standing/Emma_standing_dress[EmmaX.outfit[dress]][EmmaX.arm_pose].png"
 
     if EmmaX.outfit["boots"]:
         "images/Emma_standing/Emma_standing_boots[EmmaX.outfit[boots]].png"
@@ -360,7 +358,7 @@ layeredimage Emma_sprite standing diamond:
         "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_down_up.png"
     elif EmmaX.top_pulled_up:
         "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_up.png"
-    elif ((EmmaX.breasts_supported and EmmaX.arm_pose == 2) or (EmmaX.outfit["top"] == "_towel" and EmmaX.arm_pose == 1)):
+    elif EmmaX.breasts_supported or EmmaX.arm_pose == 2:
         "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_up.png"
     elif EmmaX.arm_pose == 2:
         "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_down.png"
@@ -380,8 +378,8 @@ layeredimage Emma_sprite standing diamond:
     if EmmaX.outfit["neck"]:
         "images/Emma_standing/Emma_standing_neck[EmmaX.outfit[neck]].png"
 
-    if EmmaX.outfit["belt"]:
-        "images/Emma_standing/Emma_standing_belt[EmmaX.outfit[belt]][EmmaX.arm_pose].png"
+    if EmmaX.outfit["top"] == "_dress_top":
+        "images/Emma_standing/Emma_standing_top[EmmaX.outfit[top]][EmmaX.arm_pose]_shawl.png"
 
     if not EmmaX.outfit["jacket"]:
         Null()
@@ -395,7 +393,7 @@ layeredimage Emma_sprite standing diamond:
         "images/Emma_standing/Emma_standing_jacket[EmmaX.outfit[jacket]][EmmaX.arm_pose]_down.png"
 
     always:
-        "Emma_diamond_head" pos (0.1, 0.16) zoom 0.5
+        "Emma_head_diamond" pos (0.201, 0.31) zoom 0.5
 
     if not EmmaX.spunk["breasts"]:
         Null()
@@ -428,7 +426,7 @@ layeredimage Emma_sprite standing diamond:
         "images/Emma_standing/Emma_standing_water_legs.png"
 
     if EmmaX.outfit["face_outer_accessory"]:
-        "images/Emma_standing/Emma_standing_face_outer_accessory[EmmaX.outfit[face_outer_accessory]].png" pos (0.0, -0.043) zoom 0.5
+        "images/Emma_standing/Emma_standing_face_outer_accessory[EmmaX.outfit[face_outer_accessory]].png" pos (0.0, -0.09) zoom 0.5
 
     if EmmaX.outfit["held_item"] and EmmaX.arm_pose == 2:
         "images/Emma_standing/Emma_standing_held[EmmaX.outfit[held_item]].png"
@@ -436,17 +434,17 @@ layeredimage Emma_sprite standing diamond:
     # always:
     #     "Emma_standing_fondling_animations"
 
-    anchor (0.5, 0.0) offset (20, 140)
+    anchor (0.5, 0.0) offset (20, 140) zoom 0.5
 
-layeredimage Emma_diamond_back_hair:
+layeredimage Emma_hair_back_diamond:
     if EmmaX.wet:
-        "images/Emma_standing/Emma_standing_back_hair_wet_diamond.png"
+        "images/Emma_standing/Emma_standing_hair_wet_back_diamond.png"
     else:
-        "images/Emma_standing/Emma_standing_back_hair[EmmaX.outfit[hair]]_diamond.png"
+        "images/Emma_standing/Emma_standing_hair[EmmaX.outfit[hair]]_back_diamond.png"
 
     anchor (0.5, 0.5)
 
-layeredimage Emma_diamond_head:
+layeredimage Emma_head_diamond:
     if EmmaX.wet:
         "images/Emma_standing/Emma_standing_head[EmmaX.brows]_wet[EmmaX.blushing]_diamond.png"
     else:
@@ -499,7 +497,7 @@ image Emma_handjob_over:
     anchor (0.5, 0.5)
 
 layeredimage Emma_titjob_breasts:
-    if EmmaX.outfit["gloves"] or EmmaX.outfit["top"] == "_dress" or EmmaX.outfit["jacket"] == "_jacket":
+    if EmmaX.outfit["gloves"] or EmmaX.outfit["top"] == "_dress_top" or EmmaX.outfit["jacket"] == "_jacket":
         "images/Emma_titjob/Emma_titjob_forearms_covered.png"
     else:
         "images/Emma_titjob/Emma_titjob_forearms.png"
@@ -527,11 +525,11 @@ layeredimage Emma_titjob_breasts:
 
     anchor (0.5, 0.5)
 
-layeredimage Emma_blowjob_back_hair:
+layeredimage Emma_blowjob_hair_back:
     if EmmaX.wet or EmmaX.outfit["hair"] != "_wavy":
         Null()
     else:
-        "images/Emma_blowjob/Emma_blowjob_back_hair.png"
+        "images/Emma_blowjob/Emma_blowjob_hair_back.png"
 
     anchor (0.5, 0.5)
 
@@ -546,9 +544,9 @@ layeredimage Emma_blowjob_body:
 
 layeredimage Emma_blowjob_head:
     if EmmaX.wet:
-        "images/Emma_blowjob/Emma_blowjob_mid_hair_wet.png"
+        "images/Emma_blowjob/Emma_blowjob_hair_mid_wet.png"
     else:
-        "images/Emma_blowjob/Emma_blowjob_mid_hair[EmmaX.outfit[hair]].png"
+        "images/Emma_blowjob/Emma_blowjob_hair_mid[EmmaX.outfit[hair]].png"
 
     if renpy.showing("Emma_sprite blowjob") and action_speed > 2 and EmmaX.blushing:
         "images/Emma_blowjob/Emma_blowjob_face_open_blush.png"
@@ -643,7 +641,7 @@ layeredimage Emma_sex_body:
 
     if not EmmaX.outfit["top"]:
         Null()
-    elif EmmaX.outfit["top"] == "_dress" and renpy.showing("Emma_sprite titjob"):
+    elif EmmaX.outfit["top"] == "_dress_top" and renpy.showing("Emma_sprite titjob"):
         "images/Emma_titjob/Emma_titjob_top[EmmaX.outfit[top]].png"
     elif EmmaX.top_pulled_up:
         "images/Emma_sex/Emma_sex_top[EmmaX.outfit[top]]_up_up.png"

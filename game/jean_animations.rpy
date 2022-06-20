@@ -246,9 +246,9 @@ image Jean_titjob_bra_back_animation5:
         pause 0.4
         repeat
 
-image Jean_titjob_back_hair_animation0:
+image Jean_titjob_hair_back_animation0:
     animation
-    "Jean_blowjob_back_hair"
+    "Jean_blowjob_hair_back"
 
     subpixel True
     parallel:
@@ -264,9 +264,9 @@ image Jean_titjob_back_hair_animation0:
         ease 2 rotate 0
         repeat
 
-image Jean_titjob_back_hair_animation1:
+image Jean_titjob_hair_back_animation1:
     animation
-    "Jean_blowjob_back_hair"
+    "Jean_blowjob_hair_back"
 
     subpixel True
     rotate -5
@@ -283,9 +283,9 @@ image Jean_titjob_back_hair_animation1:
         pause 0.5
         repeat
 
-image Jean_titjob_back_hair_animation2:
+image Jean_titjob_hair_back_animation2:
     animation
-    "Jean_blowjob_back_hair"
+    "Jean_blowjob_hair_back"
 
     subpixel True
     rotate -5
@@ -300,9 +300,9 @@ image Jean_titjob_back_hair_animation2:
         ease 0.5 rotate -5
         repeat
 
-image Jean_titjob_back_hair_animation3:
+image Jean_titjob_hair_back_animation3:
     animation
-    "Jean_blowjob_back_hair"
+    "Jean_blowjob_hair_back"
 
     subpixel True
     rotate 0
@@ -319,9 +319,9 @@ image Jean_titjob_back_hair_animation3:
         ease 2 rotate 0
         repeat
 
-image Jean_titjob_back_hair_animation5:
+image Jean_titjob_hair_back_animation5:
     animation
-    "Jean_blowjob_back_hair"
+    "Jean_blowjob_hair_back"
 
     subpixel True
     rotate -5
@@ -750,7 +750,7 @@ layeredimage Jean_sprite titjob:
         "Jean_titjob_bra_back_animation[action_speed]" pos (0.0, -0.025)
 
     always:
-        "Jean_titjob_back_hair_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
+        "Jean_titjob_hair_back_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
 
     always:
         "Jean_titjob_body_animation[action_speed]"

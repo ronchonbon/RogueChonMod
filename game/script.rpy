@@ -7,7 +7,7 @@ define ch_l = Character('[LauraX.name]', color = "#d8b600", image = "Laura_sprit
 define ch_j = Character('[JeanX.name]', color = "#b2d950", image = "Jean_sprite", show_two_window = True)
 define ch_s = Character('[StormX.name]', color = "#b2d950", image = "Storm_sprite", show_two_window = True)
 define ch_v = Character('[JubesX.name]', color = "#b2d950", image = "Jubes_sprite", show_two_window = True)
-# define ch_m = Character('[MystiqueX.name]', color = "b2d950", image = "Mystique_sprite", show_two_window = True)
+define ch_m = Character('[MystiqueX.name]', color = "b2d950", image = "Mystique_sprite", show_two_window = True)
 
 define ch_x = Character('Professor X', color = "#a09400", image = "Xavier_sprite", show_two_window = True)
 define ch_b = Character('Dr. McCoy', color = "#1033b2", image = "arrow", show_two_window = True)
@@ -120,44 +120,51 @@ init -1:
 
     default menu_context = None
 
-    default dresses = ["_chinese", "_red_dress", "_blue_dress", "_white_dress"]
-    default bodysuits = ["_catsuit", "_raven", "_domme", "_sci_fi", "_onepiece_swimsuit", "_sexy_swimsuit", "_bunny_suit"]
-    default tops = ["_nighty", "_opaque_fetish_top", "_sheer_fetish_top"]
-    default pants = ["_pants", "_yoga_pants", "_capris", "_black_jeans", "_leather_pants", "_mesh_pants", "_opaque_fetish_pants", "_sheer_fetish_pants", "_black_and_blue_pants"]
-    default skirts = ["_skirt", "_cosplay_skirt", "_blue_skirt", "_cheerleader_skirt"]
-    default shorts = ["_shorts", "_cheerleader_skirtshort"]
-    default bras = ["_bikini_top", "_lace_bra", "_corset", "_lace_corset", "_harness_bra"]
-    default underwears = ["_bikini_bottoms", "_lace_panties", "_tiger_panties", "_harness_panties"]
-    default lingerie = ["_nighty"]
-    default hoses = ["_pantyhose", "_stockings_and_garterbelt", "_garterbelt"]
-    default socks = ["_stockings", "_knee_stockings", "_socks"]
-    default cloaks = ["_raven_cloak"]
-    default gloves = ["_bunny_gloves"]
-    default face_outer_accessories = ["_bunny_ears"]
+    define face_inner_accessories = ["_earrings"]
+    define face_outer_accessories = ["_towel", "_shades", "_bunny_ears"]
+    define bras = ["_tank", "_buttoned_tank", "_sports_bra", "_cami", "_bikini_top", "_black_bra", "_lace_bra", "_strapless_bra", "_leather_bra", "_white_tank", "_wolvie_bra", "_green_bra", "_corset", "_lace_corset", "_tube_top", "_dress_corset", "_cosplay_bra", "_harness_bra", "_classic_bra", "_kitty_bra", "_orange_top"]
+    define underwears = ["_shorts", "_bikini_bottoms", "_black_panties", "_green_panties", "_lace_panties", "_sports_panties", "_white_panties", "_leather_panties", "_wolvie_panties", "_cosplay_panties", "_tiger_panties", "_blue_panties", "_harness_panties", "_kitty_panties", "_nighty_panties"]
+    define hoses = ["_tights", "_ripped_tights", "_pantyhose", "_ripped_pantyhose", "_stockings_and_garterbelt", "_garterbelt"]
+    define socks = ["_stockings", "_knee_stockings", "_socks"]
+    define bodysuits = ["_raven_suit", "_swimsuit", "_sexy_swimsuit", "_catsuit", "_domme_suit", "_bunny_suit", "_sci_fi_suit"]
+    define pants = ["_jeans", "_yoga_pants", "_capris", "_black_jeans", "_white_pants", "_leather_pants", "_mesh_pants", "_khaki_pants", "_opaque_fetish_pants", "_sheer_fetish_pants", "_classic_pants", "_black_and_blue_pants"]
+    define skirts = ["_skirt", "_cosplay_skirt", "_blue_skirt", "_dress_skirt"]
+    define shorts = ["_shorts"]
+    define dresses = ["_blue_dress", "_red_dress", "_chinese_dress"]
+    define boots = ["_thigh_boots", "_ring_anklets", "_domme_boots"]
+    define tops = ["_mesh_top", "_pink_top", "_red_shirt", "_dress_top", "_green_shirt", "_pink_shirt", "_yellow_shirt", "_white_shirt", "_black_shirt", "_nighty", "_towel", "_opaque_fetish_top", "_sheer_fetish_top", "_violet_shirt"]
+    define necks = ["_spiked_collar", "_gold_necklace", "_star_necklace", "_flower_necklace", "_choker", "_ring_necklace"]
+    define gloves = ["_gloves", "_wrists", "_bunny_gloves"]
+    define sleeves = ["_ring_armlets"]
+    define suspenders = ["_suspenders"]
+    define belts = ["_sweater"]
+    define jackets = ["_hoodie", "_jacket", "_classic_jacket"]
+    define cloaks = ["_raven_cloak"]
 
-    default hand_actions = ["massage", "fondle_thighs", "fondle_breasts", "fondle_pussy", "finger_pussy", "fondle_ass", "finger_ass"]
-    default finger_actions = ['finger_pussy", "finger_ass"']
-    default mouth_actions = ["kiss", "suck_breasts", "eat_pussy", "eat_ass"]
-    default cock_actions = ["handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"]
-    default dildo_actions = ["dildo_pussy", "dildo_ass"]
-    default breast_actions = ["fondle_breasts", "suck_breasts"]
-    default pussy_actions = ["fondle_pussy", "finger_pussy", "eat_pussy", "dildo_pussy"]
-    default ass_actions = ["fondle_ass", "finger_ass", "eat_ass", "dildo_ass"]
+    define hand_actions = ["massage", "fondle_thighs", "fondle_breasts", "fondle_pussy", "finger_pussy", "fondle_ass", "finger_ass"]
+    define finger_actions = ['finger_pussy", "finger_ass"']
+    define mouth_actions = ["kiss", "suck_breasts", "eat_pussy", "eat_ass"]
+    define cock_actions = ["handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"]
+    define dildo_actions = ["dildo_pussy", "dildo_ass"]
+    define breast_actions = ["fondle_breasts", "suck_breasts"]
+    define pussy_actions = ["fondle_pussy", "finger_pussy", "eat_pussy", "dildo_pussy"]
+    define ass_actions = ["fondle_ass", "finger_ass", "eat_ass", "dildo_ass"]
 
-    default active_actions = ["massage", "kiss", "fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]
-    default passive_actions = ["striptease", "masturbation", "handjob", "footjob", "titjob", "blowjob"]
-    default fondle_actions = ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]
-    default job_actions = ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]
-    default sex_actions = ["sex", "anal", "hotdog"]
+    define active_actions = ["massage", "kiss", "fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]
+    define passive_actions = ["striptease", "masturbation", "handjob", "footjob", "titjob", "blowjob"]
+    define fondle_actions = ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]
+    define job_actions = ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]
+    define sex_actions = ["sex", "anal", "hotdog"]
 
-    default below_actions = ["fondle_thighs", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"]
-    default inside_panties_actions = ["finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"]
-    default insertion_actions = ["finger_pussy", "finger_ass", "dildo_pussy", "dildo_ass"]
-    default anal_insertion_actions = ["finger_ass", "dildo_ass", "anal"]
-    default contact_actions = ["massage", "kiss", "fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_ass", "finger_ass", "eat_ass", "handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"]
-    default kinky_actions = ["masturbation", "finger_ass", "eat_ass", "titjob", "footjob", "dildo_pussy", "dildo_ass", "anal", "hotdog"]
+    define below_actions = ["fondle_thighs", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"]
+    define inside_panties_actions = ["finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"]
+    define insertion_actions = ["finger_pussy", "finger_ass", "dildo_pussy", "dildo_ass", "sex", "anal"]
+    define pussy_insertion_actions = ["finger_pussy", "dildo_pussy", "sex"]
+    define anal_insertion_actions = ["finger_ass", "dildo_ass", "anal"]
+    define contact_actions = ["massage", "kiss", "fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_ass", "finger_ass", "eat_ass", "handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"]
+    define kinky_actions = ["masturbation", "finger_ass", "eat_ass", "titjob", "footjob", "dildo_pussy", "dildo_ass", "anal", "hotdog"]
 
-    default all_actions = ["massage", "kiss",
+    define all_actions = ["massage", "kiss",
         "striptease", "masturbation",
         "fondle_thighs",
         "fondle_breasts", "suck_breasts",
@@ -180,7 +187,7 @@ label start:
     $ JeanX = GirlClass("Jean", 0, 0, 1000, 10)
     $ StormX = GirlClass("Storm", 500, 0, 100, 10)
     $ JubesX = GirlClass("Jubes", 500, 50, 50, 10)
-    # $ MystiqueX = GirlClass("Mystique", 0, 0, 0, 15)
+    $ MystiqueX = GirlClass("Mystique", 0, 0, 0, 15)
 
     $ focused_Girl = RogueX
 
@@ -189,69 +196,70 @@ label start:
 
     $ Player.cash = 100000
 
-    # $ bg_current = "bg_emma"
-    # $ time_index = 2
-    # $ current_time = "evening"
-    #
-    # scene background onlayer backdrop
-    # scene
-    #
-    # python:
-    #     for G in all_Girls:
-    #         active_Girls.append(G)
-    #         # G.recent_history.append("blanket")
-    # #         # G.change_face("_sexy")
-    #         G.change_outfit("nude")
-    #         G.mouth = "_smirk"
-    # #         # G.grool = 2
-    # #         # G.spunk["mouth"] = True
-    # #         # G.spunk["pussy"] = True
-    # #         # G.spunk["anus"] = True
-    # #
-    # $ Player.sprite = True
-    # # $ show_feet = True
-    # $ action_speed = 2
-    # $ Player.cock_position = "anal"
-    # $ Player.primary_action = "anal"
-    # # $ Player.secondary_action = "finger_ass"
+    $ bg_current = "bg_emma"
+    $ time_index = 2
+    $ current_time = "evening"
+
+    scene background onlayer backdrop
+    scene
+
+    python:
+        for G in all_Girls:
+            active_Girls.append(G)
+    # #         # G.recent_history.append("blanket")
+    # # #         # G.change_face("_sexy")
+    # #         G.change_outfit("nude")
+    # #         G.mouth = "_smirk"
+    # # #         # G.grool = 2
+    # # #         # G.spunk["mouth"] = True
+    # # #         # G.spunk["pussy"] = True
+    # # #         # G.spunk["anus"] = True
     # # #
-    # # # $ RogueX.change_outfit("nude")
-    # # # $ RogueX.outfit["dress"] = "_raven"
-    # # # $ RogueX.outfit["cloak"] = "_raven_cloak"
-    # # # $ KittyX.change_outfit("nude")
-    # # # $ KittyX.outfit["dress"] = "_chinese"
-    # # # $ EmmaX.change_outfit("domme_outfit")
-    # # # $ EmmaX.arm_pose = 2
-    # # # $ LauraX.change_outfit("nude")
-    # # # $ LauraX.outfit["dress"] = "_bunny_suit"
-    # # # $ LauraX.outfit["hose"] = "_pantyhose"
-    # # # $ LauraX.outfit["gloves"] = "_bunny"
-    # # # $ LauraX.outfit["face_outer_accessory"] = "_bunny_ears"
-    # # # $ JeanX.change_outfit("nude")
-    # # # $ JeanX.outfit["dress"] = "_sci_fi"
-    # # $ MystiqueX.change_outfit("true_self")
+    # # $ Player.sprite = True
+    # # # $ show_feet = True
+    # # $ action_speed = 2
+    # # $ Player.cock_position = "anal"
+    # # $ Player.primary_action = "anal"
+    # # # $ Player.secondary_action = "finger_ass"
+    # # # #
+    # # # # $ RogueX.change_outfit("nude")
+    # # # # $ RogueX.outfit["dress"] = "_raven_suit"
+    # # # # $ RogueX.outfit["cloak"] = "_raven_cloak"
+    # # # # $ KittyX.change_outfit("nude")
+    # # # # $ KittyX.outfit["dress"] = "_chinese_dress"
+    # # # # $ EmmaX.change_outfit("domme_outfit")
+    # # # # $ EmmaX.arm_pose = 2
+    # # # # $ LauraX.change_outfit("nude")
+    # # # # $ LauraX.outfit["dress"] = "_bunny_suit"
+    # # # # $ LauraX.outfit["hose"] = "_pantyhose"
+    # # # # $ LauraX.outfit["gloves"] = "_bunny"
+    # # # # $ LauraX.outfit["face_outer_accessory"] = "_bunny_ears"
+    # # # # $ JeanX.change_outfit("nude")
+    # # # # $ JeanX.outfit["dress"] = "_sci_fi"
+    $ MystiqueX.change_outfit("true_self")
+    # # # #
+    # # show Rogue_sprite doggy at sprite_location(0.5)
+    # # # show Kitty_sprite blowjob at sprite_location(0.5)
+    # # # show Emma_sprite titjob at sprite_location(0.5)
+    # # # show Laura_sprite titjob at sprite_location(0.5)
+    # # # show Jean_sprite titjob at sprite_location(0.5)
+    # # # show Storm_sprite titjob at sprite_location(0.5)
+    # # # show Jubes_sprite titjob at sprite_location(0.5)
     # # #
-    # show Rogue_sprite doggy at sprite_location(0.5)
-    # # show Kitty_sprite blowjob at sprite_location(0.5)
-    # # show Emma_sprite titjob at sprite_location(0.5)
-    # # show Laura_sprite titjob at sprite_location(0.5)
-    # # show Jean_sprite titjob at sprite_location(0.5)
-    # # show Storm_sprite titjob at sprite_location(0.5)
-    # # show Jubes_sprite titjob at sprite_location(0.5)
-    # #
-    # # show Rogue_sprite standing at sprite_location(0.15)
-    # # show Kitty_sprite standing at sprite_location(0.25)
-    # # show Emma_sprite standing normal at sprite_location(0.35)
-    # # show Laura_sprite standing at sprite_location(0.45)
-    # # show Jean_sprite standing at sprite_location(0.55)
-    # # show Storm_sprite standing at sprite_location(0.65)
-    # # show Jubes_sprite standing at sprite_location(0.75)
-    # # show Mystique_sprite standing normal at sprite_location(0.85)
-    # #
-    # ""
-    # #
-    # $ active_Girls = []
-    # $ focused_Girl = RogueX
+    show Rogue_sprite standing at sprite_location(0.15)
+    show Kitty_sprite standing at sprite_location(0.25)
+    show Emma_sprite standing at sprite_location(0.35)
+    show Laura_sprite standing at sprite_location(0.45)
+    show Jean_sprite standing at sprite_location(0.55)
+    show Storm_sprite standing at sprite_location(0.65)
+    show Jubes_sprite standing at sprite_location(0.75)
+    show Mystique_sprite standing normal at sprite_location(0.85)
+
+    ""
+
+    $ all_Girls.remove(MystiqueX)
+    $ active_Girls = []
+    $ focused_Girl = RogueX
 
     jump prologue
 

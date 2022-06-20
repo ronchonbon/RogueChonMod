@@ -230,9 +230,9 @@ layeredimage Laura_sprite handjob:
 
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
 
-image Laura_titjob_back_hair_animation0:
+image Laura_titjob_hair_back_animation0:
     animation
-    "Laura_back_hair"
+    "Laura_hair_back"
 
     subpixel True
     parallel:
@@ -248,9 +248,9 @@ image Laura_titjob_back_hair_animation0:
         ease 2 rotate 0
         repeat
 
-image Laura_titjob_back_hair_animation1:
+image Laura_titjob_hair_back_animation1:
     animation
-    "Laura_back_hair"
+    "Laura_hair_back"
 
     subpixel True
     rotate -5
@@ -267,9 +267,9 @@ image Laura_titjob_back_hair_animation1:
         pause 0.5
         repeat
 
-image Laura_titjob_back_hair_animation2:
+image Laura_titjob_hair_back_animation2:
     animation
-    "Laura_back_hair"
+    "Laura_hair_back"
 
     subpixel True
     rotate -5
@@ -284,9 +284,9 @@ image Laura_titjob_back_hair_animation2:
         ease 0.5 rotate -5
         repeat
 
-image Laura_titjob_back_hair_animation3:
+image Laura_titjob_hair_back_animation3:
     animation
-    "Laura_back_hair"
+    "Laura_hair_back"
 
     subpixel True
     parallel:
@@ -302,9 +302,9 @@ image Laura_titjob_back_hair_animation3:
         ease 2 rotate 0
         repeat
 
-image Laura_titjob_back_hair_animation5:
+image Laura_titjob_hair_back_animation5:
     animation
-    "Laura_back_hair"
+    "Laura_hair_back"
 
     subpixel True
     parallel:
@@ -758,9 +758,9 @@ image Laura_titjob_left_arm_animation5:
         pause 0.1
         repeat
 
-image Laura_titjob_mid_hair_animation0:
+image Laura_titjob_hair_mid_animation0:
     animation
-    "Laura_titjob_mid_hair"
+    "Laura_titjob_hair_mid"
 
     subpixel True
     parallel:
@@ -776,9 +776,9 @@ image Laura_titjob_mid_hair_animation0:
         ease 2 rotate 0
         repeat
 
-image Laura_titjob_mid_hair_animation1:
+image Laura_titjob_hair_mid_animation1:
     animation
-    "Laura_titjob_mid_hair"
+    "Laura_titjob_hair_mid"
 
     subpixel True
     rotate -5
@@ -795,9 +795,9 @@ image Laura_titjob_mid_hair_animation1:
         pause 0.5
         repeat
 
-image Laura_titjob_mid_hair_animation2:
+image Laura_titjob_hair_mid_animation2:
     animation
-    "Laura_titjob_mid_hair"
+    "Laura_titjob_hair_mid"
 
     subpixel True
     rotate -5
@@ -812,9 +812,9 @@ image Laura_titjob_mid_hair_animation2:
         ease 0.4 rotate -5
         repeat
 
-image Laura_titjob_mid_hair_animation3:
+image Laura_titjob_hair_mid_animation3:
     animation
-    "Laura_titjob_mid_hair"
+    "Laura_titjob_hair_mid"
 
     subpixel True
     parallel:
@@ -830,9 +830,9 @@ image Laura_titjob_mid_hair_animation3:
         ease 2 rotate 0
         repeat
 
-image Laura_titjob_mid_hair_animation5:
+image Laura_titjob_hair_mid_animation5:
     animation
-    "Laura_titjob_mid_hair"
+    "Laura_titjob_hair_mid"
 
     subpixel True
     block:
@@ -929,7 +929,7 @@ image Laura_titjob_hair_animation5:
 
 layeredimage Laura_sprite titjob:
     always:
-        "Laura_titjob_back_hair_animation[action_speed]" pos (-0.035, -0.26) zoom 1.1
+        "Laura_titjob_hair_back_animation[action_speed]" pos (-0.035, -0.26) zoom 1.1
 
     always:
         "Laura_titjob_body_animation[action_speed]"
@@ -956,7 +956,7 @@ layeredimage Laura_sprite titjob:
         "Laura_titjob_left_arm_animation[action_speed]" pos (0.0, 0.01)
 
     always:
-        "Laura_titjob_mid_hair_animation[action_speed]" pos (-0.035, -0.26) zoom 1.1
+        "Laura_titjob_hair_mid_animation[action_speed]" pos (-0.035, -0.26) zoom 1.1
 
     always:
         "Laura_titjob_hair_animation[action_speed]" pos (-0.035, -0.26) zoom 1.1

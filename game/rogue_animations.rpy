@@ -6,11 +6,11 @@ image Rogue_blinking:
         3.25
     choice:
         3
-    "images/Rogue_blowjob/Rogue_blowjob_eyes_squint.png"
+    "images/Rogue_blowjob/Rogue_blowjob_eyes_half.png"
     0.05
     "images/Rogue_blowjob/Rogue_blowjob_eyes_closed.png"
     0.15
-    "images/Rogue_blowjob/Rogue_blowjob_eyes_squint.png"
+    "images/Rogue_blowjob/Rogue_blowjob_eyes_half.png"
     0.05
     repeat
 
@@ -230,12 +230,12 @@ layeredimage Rogue_sprite handjob:
 
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
 
-image Rogue_titjob_back_hair_animation0:
-    "Rogue_back_hair"
+image Rogue_titjob_hair_back_animation0:
+    "Rogue_hair_back"
 
-image Rogue_titjob_back_hair_animation1:
+image Rogue_titjob_hair_back_animation1:
     animation
-    "Rogue_back_hair"
+    "Rogue_hair_back"
 
     subpixel True
     block:
@@ -244,9 +244,9 @@ image Rogue_titjob_back_hair_animation1:
         ease 1.3 yoffset -80
         repeat
 
-image Rogue_titjob_back_hair_animation2:
+image Rogue_titjob_hair_back_animation2:
     animation
-    "Rogue_back_hair"
+    "Rogue_hair_back"
 
     subpixel True
     block:
@@ -255,9 +255,9 @@ image Rogue_titjob_back_hair_animation2:
         ease 0.1 yoffset -50
         repeat
 
-image Rogue_titjob_back_hair_animation3:
+image Rogue_titjob_hair_back_animation3:
     animation
-    "Rogue_back_hair"
+    "Rogue_hair_back"
 
     subpixel True
     rotate -10
@@ -273,9 +273,9 @@ image Rogue_titjob_back_hair_animation3:
         pause 0.5
         repeat
 
-image Rogue_titjob_back_hair_animation5:
+image Rogue_titjob_hair_back_animation5:
     animation
-    "Rogue_back_hair"
+    "Rogue_hair_back"
 
     subpixel True
     block:
@@ -436,7 +436,7 @@ image Rogue_titjob_breasts_animation5:
 
 layeredimage Rogue_sprite titjob:
     always:
-        "Rogue_titjob_back_hair_animation[action_speed]" pos (0.025, -0.48) zoom 0.9
+        "Rogue_titjob_hair_back_animation[action_speed]" pos (0.025, -0.48) zoom 0.9
 
     always:
         "Rogue_titjob_body_animation[action_speed]"
@@ -452,12 +452,12 @@ layeredimage Rogue_sprite titjob:
 
     anchor (0.5, 0.0) offset (200, 850) zoom 0.72
 
-image Rogue_blowjob_back_hair_animation0:
-    "Rogue_back_hair"
+image Rogue_blowjob_hair_back_animation0:
+    "Rogue_hair_back"
 
-image Rogue_blowjob_back_hair_animation1:
+image Rogue_blowjob_hair_back_animation1:
     animation
-    "Rogue_back_hair"
+    "Rogue_hair_back"
 
     subpixel True
     ease 0.5 offset (2, -20)
@@ -467,9 +467,9 @@ image Rogue_blowjob_back_hair_animation1:
         pause 0.5
         repeat
 
-image Rogue_blowjob_back_hair_animation2:
+image Rogue_blowjob_hair_back_animation2:
     animation
-    "Rogue_back_hair"
+    "Rogue_hair_back"
 
     subpixel True
     block:
@@ -477,9 +477,9 @@ image Rogue_blowjob_back_hair_animation2:
         ease 1.5 yoffset 0
         repeat
 
-image Rogue_blowjob_back_hair_animation3:
+image Rogue_blowjob_hair_back_animation3:
     animation
-    "Rogue_back_hair"
+    "Rogue_hair_back"
 
     subpixel True
     ease 0.5 offset (0, 30)
@@ -488,9 +488,9 @@ image Rogue_blowjob_back_hair_animation3:
         ease 1.5 offset (0, 30)
         repeat
 
-image Rogue_blowjob_back_hair_animation4:
+image Rogue_blowjob_hair_back_animation4:
     animation
-    "Rogue_back_hair"
+    "Rogue_hair_back"
 
     subpixel True
     ease 0.5 offset (0, 40)
@@ -723,7 +723,7 @@ image Rogue_blowjob_face_mask_animation4:
 
 layeredimage Rogue_sprite blowjob:
     always:
-        "Rogue_blowjob_back_hair_animation[action_speed]" pos (0.031, 0.317) zoom 0.2755
+        "Rogue_blowjob_hair_back_animation[action_speed]" pos (0.031, 0.317) zoom 0.2755
 
     always:
         "Rogue_blowjob_body_animation[action_speed]"

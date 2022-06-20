@@ -1619,7 +1619,7 @@ label mall:
 
                             jump Date_End
 
-        if time_index >= 3 or round < 20:
+        if time_index >= 3:
             if "date" in Player.recent_history:
                 show black_screen onlayer black with dissolve
 

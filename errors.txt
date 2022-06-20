@@ -2,10 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/shower.rpy", line 219: invalid syntax
-                $ staying_Girls.append(G)
-                 ^
-    
+File "game/rogue_sprites.rpy", line 695: reached end of line when expecting ':'.
+    elif RogueX.outfit["bodysuit"] == "_catsuit"
+                                                ^
 
-Ren'Py Version: Ren'Py 7.4.11.2266
-Fri Jun 17 00:33:03 2022
+Ren'Py Version: Ren'Py 8.0.0.22061701n
+Mon Jun 20 04:48:27 2022

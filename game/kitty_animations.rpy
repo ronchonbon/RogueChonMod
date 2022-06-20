@@ -6,11 +6,11 @@ image Kitty_blinking:
         3.25
     choice:
         3
-    "images/Kitty_standing/Kitty_standing_eyes_squint.png"
+    "images/Kitty_standing/Kitty_standing_eyes_half.png"
     0.05
     "images/Kitty_standing/Kitty_standing_eyes_closed.png"
     0.15
-    "images/Kitty_standing/Kitty_standing_eyes_squint.png"
+    "images/Kitty_standing/Kitty_standing_eyes_half.png"
     0.05
     repeat
 
@@ -230,9 +230,9 @@ layeredimage Kitty_sprite handjob:
 
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
 
-image Kitty_titjob_back_hair_animation0:
+image Kitty_titjob_hair_back_animation0:
     animation
-    "Kitty_titjob_back_hair"
+    "Kitty_titjob_hair_back"
 
     subpixel True
     block:
@@ -240,9 +240,9 @@ image Kitty_titjob_back_hair_animation0:
         ease 1.6 yoffset 0
         repeat
 
-image Kitty_titjob_back_hair_animation1:
+image Kitty_titjob_hair_back_animation1:
     animation
-    "Kitty_titjob_back_hair"
+    "Kitty_titjob_hair_back"
 
     subpixel True
     block:
@@ -250,9 +250,9 @@ image Kitty_titjob_back_hair_animation1:
         ease 1.0 yoffset 0
         repeat
 
-image Kitty_titjob_back_hair_animation2:
+image Kitty_titjob_hair_back_animation2:
     animation
-    "Kitty_titjob_back_hair"
+    "Kitty_titjob_hair_back"
 
     subpixel True
     block:
@@ -261,9 +261,9 @@ image Kitty_titjob_back_hair_animation2:
         pause 0.05
         repeat
 
-image Kitty_titjob_back_hair_animation3:
+image Kitty_titjob_hair_back_animation3:
     animation
-    "Kitty_titjob_back_hair"
+    "Kitty_titjob_hair_back"
 
     subpixel True
     parallel:
@@ -307,9 +307,9 @@ image Kitty_titjob_back_hair_animation3:
             ease 0.8 rotate -5
         repeat
 
-image Kitty_titjob_back_hair_animation5:
+image Kitty_titjob_hair_back_animation5:
     animation
-    "Kitty_titjob_back_hair"
+    "Kitty_titjob_hair_back"
 
     subpixel True
     block:
@@ -571,7 +571,7 @@ image Kitty_titjob_breasts_animation5:
 
 layeredimage Kitty_sprite titjob:
     always:
-        "Kitty_titjob_back_hair_animation[action_speed]" pos (0.0, -0.2) zoom 0.9
+        "Kitty_titjob_hair_back_animation[action_speed]" pos (0.0, -0.2) zoom 0.9
 
     always:
         "Kitty_titjob_body_animation[action_speed]"

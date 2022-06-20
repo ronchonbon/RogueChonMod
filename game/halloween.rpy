@@ -1078,6 +1078,7 @@ label Halloween_Jean:
 
     if "met" not in StormX.history:
         jump Halloween_Party
+
     "You see a form out on the dance floor, and she notices you watching."
     "She dances her way over."
 

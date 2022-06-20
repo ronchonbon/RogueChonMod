@@ -3,66 +3,63 @@
 While running game code:
   File "game/locations.rpy", line 156, in script call
     call world_map
-  File "game/locations.rpy", line 1182, in script call
-    call world_map
-  File "game/locations.rpy", line 583, in script call
-    call world_map
-  File "game/locations.rpy", line 1588, in script call
-    call world_map
-  File "game/locations.rpy", line 1182, in script call
-    call world_map
-  File "game/locations.rpy", line 1588, in script call
-    call world_map
-  File "game/locations.rpy", line 583, in script call
-    call world_map
-  File "game/locations.rpy", line 1505, in script call
-    call check_on_Jubes_sunshock
-  File "game/jubes_scenes.rpy", line 655, in script call
-    call is_Jubes_sunshocked
-  File "game/jubes_scenes.rpy", line 759, in script call
-    call addiction_ultimatum_menu
-  File "game/addiction.rpy", line 1295, in script
-    if between_event_count and Girl.addiction <= stored_addiction:
-  File "game/addiction.rpy", line 1295, in <module>
-    if between_event_count and Girl.addiction <= stored_addiction:
-NameError: name 'stored_addiction' is not defined
+  File "game/locations.rpy", line 1150, in script call
+    call showering
+  File "game/shower.rpy", line 500, in script call
+    call set_the_scene(check_if_dressed = False)
+  File "game/utilities.rpy", line 1047, in script call
+    call stop_all_actions
+  File "game/utilities.rpy", line 1333, in script call
+    call reset_position(temp_Girls[0])
+  File "game/girl_animations.rpy", line 22, in script
+    show Jubes_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
+Exception: DynamicImage 'images/Jubes_standing/Jubes_standing_jacket[JubesX.outfit[jacket]]_neck.png': could not find image. ('images/Jubes_standing/Jubes_standing_jacket_jacket_neck.png')
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
   File "game/locations.rpy", line 156, in script call
     call world_map
-  File "game/locations.rpy", line 1182, in script call
-    call world_map
-  File "game/locations.rpy", line 583, in script call
-    call world_map
-  File "game/locations.rpy", line 1588, in script call
-    call world_map
-  File "game/locations.rpy", line 1182, in script call
-    call world_map
-  File "game/locations.rpy", line 1588, in script call
-    call world_map
-  File "game/locations.rpy", line 583, in script call
-    call world_map
-  File "game/locations.rpy", line 1505, in script call
-    call check_on_Jubes_sunshock
-  File "game/jubes_scenes.rpy", line 655, in script call
-    call is_Jubes_sunshocked
-  File "game/jubes_scenes.rpy", line 759, in script call
-    call addiction_ultimatum_menu
-  File "game/addiction.rpy", line 1295, in script
-    if between_event_count and Girl.addiction <= stored_addiction:
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/ast.py", line 1898, in execute
-    if renpy.python.py_eval(condition):
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/python.py", line 2276, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-  File "C:\Users\Quique\Downloads\renpy-7.4.11-sdk/renpy/python.py", line 2269, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "game/addiction.rpy", line 1295, in <module>
-    if between_event_count and Girl.addiction <= stored_addiction:
-NameError: name 'stored_addiction' is not defined
+  File "game/locations.rpy", line 1150, in script call
+    call showering
+  File "game/shower.rpy", line 500, in script call
+    call set_the_scene(check_if_dressed = False)
+  File "game/utilities.rpy", line 1047, in script call
+    call stop_all_actions
+  File "game/utilities.rpy", line 1333, in script call
+    call reset_position(temp_Girls[0])
+  File "game/girl_animations.rpy", line 22, in script
+    show Jubes_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
+  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\ast.py", line 1388, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\ast.py", line 1351, in show_imspec
+    renpy.config.show(name,
+  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\exports.py", line 712, in show
+    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
+  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\core.py", line 1164, in add
+    thing.visit_all(lambda d : None)
+  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\core.py", line 582, in visit_all
+    d.visit_all(callback, seen)
+  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\core.py", line 582, in visit_all
+    d.visit_all(callback, seen)
+  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\core.py", line 582, in visit_all
+    d.visit_all(callback, seen)
+  [Previous line repeated 3 more times]
+  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\core.py", line 572, in visit_all
+    for d in self.visit():
+  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\layout.py", line 1494, in visit
+    self.update(self.last_st, self.last_at)
+  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\layout.py", line 1522, in update
+    child.visit_all(lambda c : c.per_interact())
+  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\core.py", line 572, in visit_all
+    for d in self.visit():
+  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\image.py", line 777, in visit
+    self.find_target()
+  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\image.py", line 675, in find_target
+    raise Exception(error)
+Exception: DynamicImage 'images/Jubes_standing/Jubes_standing_jacket[JubesX.outfit[jacket]]_neck.png': could not find image. ('images/Jubes_standing/Jubes_standing_jacket_jacket_neck.png')
 
-Windows-10-10.0.19041
-Ren'Py 7.4.11.2266
-Rogue-Like Chonky Mod 0.2e
-Fri Jun 17 00:57:08 2022
+Windows-10-10.0.19042
+Ren'Py 8.0.0.22061701n
+Rogue-Like Chonky Mod 0.2g
+Mon Jun 20 05:02:37 2022

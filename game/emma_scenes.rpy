@@ -625,7 +625,7 @@ label Emma_Caught_Classroom:
 
                 $ EmmaX.change_stat("lust", 80, 5)
 
-                ch_e "perhaps you have some suggestions?"
+                ch_e "Perhaps you have some suggestions?"
                 "[EmmaX.name] walks to the door and locks it behind her."
 
                 $ taboo = 0
@@ -638,7 +638,7 @@ label Emma_Caught_Classroom:
 
                 $ Player.primary_action = "fondle_breasts"
 
-                call action_cycle(EmmaX, "fondle_breasts", context)
+                call action_cycle(EmmaX, "fondle_breasts")
                 call after_action(EmmaX, "fondle_breasts", "stop")
                 call stop_all_actions
             "Could you give me a hand? [[point to your cock]":

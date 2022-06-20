@@ -161,7 +161,7 @@ label caught_changing(Girl):
 
             pause 1
 
-            $ Girl.fix_clothing()
+            call fix_clothing(Girl)
 
             "She flashes you real quick."
         else:
@@ -758,7 +758,7 @@ label caught_masturbating(Girl):
         call shift_focus(Girl)
         show black_screen onlayer black
 
-        call expose_pussy
+        call expose_pussy(Girl)
         call set_the_scene
 
         $ Girl.change_face("_sexy")

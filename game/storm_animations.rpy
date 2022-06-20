@@ -292,9 +292,9 @@ image Storm_titjob_bra_back_animation5:
         pause 0.4
         repeat
 
-image Storm_titjob_back_hair_animation0:
+image Storm_titjob_hair_back_animation0:
     animation
-    "Storm_blowjob_back_hair"
+    "Storm_blowjob_hair_back"
 
     subpixel True
     parallel:
@@ -310,9 +310,9 @@ image Storm_titjob_back_hair_animation0:
         ease 2 rotate 0
         repeat
 
-image Storm_titjob_back_hair_animation1:
+image Storm_titjob_hair_back_animation1:
     animation
-    "Storm_blowjob_back_hair"
+    "Storm_blowjob_hair_back"
 
     subpixel True
     rotate -5
@@ -329,9 +329,9 @@ image Storm_titjob_back_hair_animation1:
         pause 0.5
         repeat
 
-image Storm_titjob_back_hair_animation2:
+image Storm_titjob_hair_back_animation2:
     animation
-    "Storm_blowjob_back_hair"
+    "Storm_blowjob_hair_back"
 
     subpixel True
     rotate -5
@@ -346,9 +346,9 @@ image Storm_titjob_back_hair_animation2:
         ease 0.5 rotate -5
         repeat
 
-image Storm_titjob_back_hair_animation3:
+image Storm_titjob_hair_back_animation3:
     animation
-    "Storm_blowjob_back_hair"
+    "Storm_blowjob_hair_back"
 
     subpixel True
     rotate -5
@@ -363,9 +363,9 @@ image Storm_titjob_back_hair_animation3:
         ease 0.5 rotate -5
         repeat
 
-image Storm_titjob_back_hair_animation5:
+image Storm_titjob_hair_back_animation5:
     animation
-    "Storm_blowjob_back_hair"
+    "Storm_blowjob_hair_back"
 
     subpixel True
     rotate -5
@@ -849,7 +849,7 @@ layeredimage Storm_sprite titjob:
         "Storm_titjob_bra_back_animation[action_speed]"
 
     always:
-        "Storm_titjob_back_hair_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
+        "Storm_titjob_hair_back_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
 
     always:
         "Storm_titjob_body_animation[action_speed]"

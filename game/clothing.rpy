@@ -1,3 +1,2806 @@
+label change_wardrobe(Girl):
+    if Girl.taboo:
+        if "exhibitionist" in Girl.traits:
+            if Girl == RogueX:
+                ch_r "Oooh, naughty. . ."
+            elif Girl == KittyX:
+                ch_k "Mmmmm. . ."
+            elif Girl == EmmaX:
+                ch_e "Mmmmm. . ."
+            elif Girl == LauraX:
+                ch_l "Yes? . ."
+            elif Girl == JeanX:
+                ch_j "Yeah? . ."
+            elif Girl == StormX:
+                ch_s "Oh, here? . ."
+            elif Girl == JubesX:
+                ch_v "Yes? . ."
+        elif approval_check(Girl, 900, taboo_modifier = 4) or approval_check(Girl, 400, "I", taboo_modifier = 3):
+            if Girl == RogueX:
+                ch_r "Well, I mean, it's pretty public here, but I guess I could. . ."
+            elif Girl == KittyX:
+                ch_k "This is[Girl.like]pretty. . . exposed. . ."
+            elif Girl == EmmaX:
+                ch_e "This isn't really the appropriate place for it, however. . ."
+            elif Girl == LauraX:
+                ch_l "I don't think I'm supposed to undress around here. . ."
+            elif Girl == JeanX:
+                ch_j "Oh, I guess we could. . ."
+            elif Girl == StormX:
+                ch_s "I'm not supposed to undress here. . ."
+            elif Girl == JubesX:
+                ch_v "It's pretty public here, I don't think so. . ."
+        else:
+            if Girl == RogueX:
+                ch_r "This is a pretty public place for that, don't you think?"
+                ch_r "We can talk about that back in our rooms."
+            elif Girl == KittyX:
+                ch_k "This is[Girl.like]pretty exposed, right?"
+                ch_k "Can't we talk about this in our rooms?"
+            elif Girl == EmmaX:
+                ch_e "I'd rather discuss that in private."
+            elif Girl == LauraX:
+                ch_l "I don't think I'm supposed to undress around here. . ."
+                ch_l "Can we talk about this in our rooms?"
+            elif Girl == JeanX:
+                ch_j "I think this is kind of exposed. . ."
+                ch_j "Can we talk about this in our rooms?"
+            elif Girl == StormX:
+                ch_s "I'm not supposed to undress here. . ."
+                ch_s "Can we talk about this in our rooms?"
+            elif Girl == JubesX:
+                ch_v "It's pretty public here, I don't think so. . ."
+                ch_v "Can't we talk about this in our rooms?"
+
+            return
+    elif approval_check(Girl, 900, taboo_modifier = 4) or approval_check(Girl, 600, "L") or approval_check(Girl, 300, "O"):
+        if Girl == RogueX:
+            ch_r "Ok, what did you want to tell me about my clothes?"
+        elif Girl == KittyX:
+            ch_k "[Girl.Like]what were you thinking here?"
+        elif Girl == EmmaX:
+            ch_e "What about my style?"
+        elif Girl == LauraX:
+            ch_l "Oh? What about them?"
+        elif Girl == JeanX:
+            ch_j "Oh? What about them?"
+        elif Girl == StormX:
+            ch_s "Oh? What about them?"
+        elif Girl == JubesX:
+            ch_v "Oh, what were you thinking? . ."
+    else:
+        if Girl == RogueX:
+            ch_r "I'm not really interested in your fashion opinions."
+        elif Girl == KittyX:
+            ch_k "I'll let you know when I care what you think."
+        elif Girl == EmmaX:
+            ch_e "I'll let you know when I care what you think."
+        elif Girl == LauraX:
+            ch_l "I don't think about my clothes much."
+            ch_l "You shouldn't either."
+        elif Girl == JeanX:
+            ch_j "Just enjoy, don't advise."
+        elif Girl == StormX:
+            ch_s "I don't really need fashion advice, thank you."
+        elif Girl == JubesX:
+            ch_v "I don't think I really need your fashion advice."
+
+        return
+
+    call shift_focus(Girl)
+
+    $ public = 0
+
+    if "exhibitionist" in Girl.traits:
+        $ public += 1
+
+    if Girl.reputation <= 200:
+        $ public += 2
+    elif Girl.reputation <= 400:
+        $ public += 1
+
+    if "public" in Girl.history:
+        $ public += 2
+
+    while True:
+        $ Girl.change_face()
+
+        menu:
+            extend ""
+            "Let's talk about your outfits.":
+                call outfits_menu(Girl)
+            "Let's talk about your outfit schedule.":
+                call set_outfit_schedule(Girl)
+            "About your tops. . .":
+                call tops_menu(Girl)
+            "About your legwear. . .":
+                call bottoms_menu(Girl)
+            "About your underwear. . .":
+                call lingerie_menu(Girl)
+            "About your special clothing. . .":
+                call special_menu(Girl)
+            "About your accessories. . .":
+                call accessories_menu(Girl)
+            "Would you be more comfortable behind a screen?(locked)" if Girl.location == bg_current and (Girl.taboo or renpy.showing("dress_screen")):
+                pass
+            "Would you be more comfortable behind a screen?" if Girl.location == bg_current and (not Girl.taboo and not renpy.showing('dress_screen')):
+                if Girl == StormX:
+                    ch_s "I won't need it, but I appreciate the offer."
+                elif approval_check(Girl, 1500) or (Girl.seen_breasts and Girl.seen_pussy):
+                    if Girl == RogueX:
+                        ch_r "Don't really need that, thanks."
+                    elif Girl == KittyX:
+                        ch_k "Probably won't need it, thanks."
+                    elif Girl == EmmaX:
+                        ch_e "Oh, I think we can handle this."
+                    elif Girl == LauraX:
+                        ch_l "Probably won't need it, thanks."
+                    elif Girl == JeanX:
+                        ch_j "I don't see why."
+                    elif Girl == JubesX:
+                        ch_v "I think I'm fine. . ."
+
+                else:
+                    show dress_screen zorder 150
+
+                    if Girl == RogueX:
+                        ch_r "This is more comfortable, thanks."
+                    elif Girl == KittyX:
+                        ch_k "Yeah, this is a bit more comfortable, thanks."
+                    elif Girl == EmmaX:
+                        ch_e "Yes, this will be more comfortable."
+                    elif Girl == LauraX:
+                        ch_l "Yeah, this is better, thanks."
+                    elif Girl == JeanX:
+                        ch_j "Yeah, this'll work."
+                    elif Girl == JubesX:
+                        ch_v "Yeah, this is better, thanks."
+
+            "Could I get a look?" if renpy.showing('dress_screen'):
+                call outfitShame(Girl, 0, 2)
+
+                if _return:
+                    hide dress_screen
+            "Could I get a look?" if Girl.location != bg_current:
+                call outfitShame(Girl, 0, 2)
+
+                if _return:
+                    show PhoneSex zorder 150
+
+                    if Girl == RogueX:
+                        ch_r "How's that? . ."
+                    elif Girl == KittyX:
+                        ch_k "Cute? . ."
+                    elif Girl == EmmaX:
+                        ch_e "Ok, a quick shot for you. . ."
+                    elif Girl == LauraX:
+                        ch_l "Ok, that good?"
+                    elif Girl == JeanX:
+                        ch_j "Nice, right?"
+                    elif Girl == StormX:
+                        ch_s "What do you think?"
+                    elif Girl == JubesX:
+                        ch_v "Ok, that good?"
+
+                    hide PhoneSex
+            # "Gift for you(locked)" if Girl.location != bg_current:
+            #     pass
+            # "Gift for you" if Girl.location == bg_current:
+            #     ch_p "I'd like to give you something."
+            #
+            #     call gifts
+            "Switch to. . .":
+                if renpy.showing('dress_screen'):
+                    call outfitShame(Girl, 0, 2)
+
+                    if _return:
+                        hide dress_screen
+                    else:
+                        $ Girl.change_outfit()
+
+                $ Girl.set_temp_outfit()
+
+                $ stored_Girl = Girl
+
+                call switch_chat
+                call change_wardrobe(Girl)
+
+                $ Girl = stored_Girl
+
+                call shift_focus(Girl)
+            "You look good like that.":
+                if "wardrobe" not in Girl.recent_history:
+                    if Girl == StormX and (Girl.top_number() + Girl.bra_number()<4) or (Girl.underwear_number() + Girl.bottom_number() < 5):
+                        $ Girl.change_face("_sly",eyes="_down")
+
+                        ch_s "I understand why -you- would think so. . ."
+
+                        $ Girl.change_face("_sly")
+                    elif Girl.had_chat[1] <= 1:
+                        $ Girl.change_stat("love", 70, 15)
+                        $ Girl.change_stat("obedience", 40, 20)
+
+                        if Girl == RogueX:
+                            ch_r "Aw, that's sweet."
+                        elif Girl == KittyX:
+                            ch_k "That's[Girl.like]really nice of you to say."
+                        elif Girl == EmmaX:
+                            ch_e "I thought so as well."
+                        elif Girl == LauraX:
+                            ch_l "Oh! Thank you."
+                        elif Girl == JeanX:
+                            ch_j "Of course?"
+                        elif Girl == StormX:
+                            ch_s "Oh, how sweet of you to say so."
+                        elif Girl == JubesX:
+                            ch_v "Oh! Thank you."
+                    elif Girl.had_chat[1] <= 10:
+                        $ Girl.change_stat("love", 70, 5)
+                        $ Girl.change_stat("obedience", 40, 7)
+
+                        if Girl == RogueX:
+                            ch_r "Thanks."
+                        elif Girl == KittyX:
+                            ch_k "I like it too."
+                        elif Girl == EmmaX:
+                            ch_e "Isn't it?"
+                        elif Girl == LauraX:
+                            ch_l "Right?"
+                        elif Girl == JeanX:
+                            ch_j "Right?"
+                        elif Girl == StormX:
+                            ch_s "I do enjoy this look."
+                        elif Girl == JubesX:
+                            ch_v "Right?"
+                    elif Girl.had_chat[1] <= 50:
+                        $ Girl.change_stat("love", 70, 1)
+                        $ Girl.change_stat("obedience", 40, 1)
+
+                        if Girl == RogueX:
+                            ch_r "Ok."
+                        elif Girl == KittyX:
+                            ch_k "Yeah."
+                        elif Girl == LauraX:
+                            ch_l "Uh-huh."
+                        elif Girl == JeanX:
+                            ch_j "Uh-huh."
+                        elif Girl == StormX:
+                            ch_s "Thank you. . ."
+                        elif Girl == JubesX:
+                            ch_v "Uh-huh."
+                    else:
+                        if Girl == RogueX:
+                            ch_r "Ok."
+                        elif Girl == KittyX:
+                            ch_k "Sure."
+                        elif Girl == LauraX:
+                            ch_l "Sure."
+                        elif Girl == JeanX:
+                            ch_j "Sure."
+                        elif Girl == StormX:
+                            ch_s "Certainly."
+                        elif Girl == JubesX:
+                            ch_v "Sure."
+
+                    $ Girl.recent_history.append("wardrobe")
+
+                if renpy.showing('dress_screen'):
+                    call outfitShame(Girl, 0, 2)
+
+                    if _return:
+                        hide dress_screen
+                    else:
+                        $ Girl.change_outfit()
+
+                $ Girl.set_temp_outfit()
+                $ Girl.had_chat[1] += 1
+
+                return
+
+label outfits_menu(Girl):
+    while True:
+        menu:
+            "That looks really good on you, you should remember that one.":
+                menu:
+                    "Which slot would you like this saved in?"
+                    "First custom outfit":
+                        call outfitShame(Girl, 3, 1)
+                    "Second custom outfit":
+                        call outfitShame(Girl, 5, 1)
+                    "Third custom outfit":
+                        call outfitShame(Girl, 6, 1)
+                    "Gym clothes":
+                        call outfitShame(Girl, 4, 1)
+                    "Sleepwear":
+                        call outfitShame(Girl, 7, 1)
+                    "Swimwear":
+                        call outfitShame(Girl, 10, 1)
+                    "Never mind":
+                        pass
+            "I really like that green top and skirt outfit you have." if Girl == RogueX:
+                $ Girl.change_outfit("casual1")
+
+                menu:
+                    "You should wear this one for now.":
+                        $ Girl.outfit_name = "casual1"
+
+                        ch_r "Ok, [Girl.player_petname], I like this one too."
+                    "Let's try something else though.":
+                        ch_r "Sure."
+            "That pink top and pants look really nice on you." if Girl == RogueX:
+                $ Girl.change_outfit("casual2")
+
+                menu:
+                    "You should wear this one for now.":
+                        $ Girl.outfit_name = "casual2"
+
+                        ch_r "Sure, [Girl.player_petname], that one's nice."
+                    "Let's try something else though.":
+                        ch_r "Ok."
+            "I really like that pink shirt and capris outfit you wear." if Girl == KittyX:
+                $ Girl.change_outfit("casual1")
+
+                menu:
+                    "You should wear this one out. [[set current outfit]":
+                        $ Girl.outfit_name = "casual1"
+
+                        ch_k "I used to wear that one[Girl.like]every day!"
+                    "Let's try something else though.":
+                        ch_k "K."
+            "That red shirt and black jeans look really nice on you." if Girl == KittyX:
+                $ Girl.change_outfit("casual2")
+
+                menu:
+                    "You should wear this one out. [[set current outfit]":
+                        $ Girl.outfit_name = "casual2"
+
+                        ch_k "That one[Girl.like]used to be my favorite too!"
+                    "Let's try something else though.":
+                        ch_k "K."
+            "I really like that teacher's look you wear." if Girl == EmmaX:
+                $ Girl.change_outfit("casual1")
+
+                menu:
+                    "You should wear this one out. [[set current outfit]":
+                        $ Girl.outfit_name = "casual1"
+
+                        ch_e "Yes, a very tasteful look."
+                    "Let's try something else though.":
+                        ch_e "Very well."
+            "That combat uniform you have looks really nice on you." if Girl == EmmaX:
+                $ Girl.change_outfit("casual2")
+
+                menu:
+                    "You should wear this one out. [[set current outfit]":
+                        $ Girl.outfit_name = "casual2"
+
+                        ch_e "I really enjoyed wearing that one."
+                    "Let's try something else though.":
+                        ch_e "Very well."
+            "Your leather combat outfit looks awesome." if Girl == LauraX:
+                $ Girl.change_outfit("casual1")
+
+                menu:
+                    "You should wear this one out. [[set current outfit]":
+                        $ Girl.outfit_name = "casual1"
+
+                        ch_l "Yeah, I love wearing this one in the field."
+                    "Let's try something else though.":
+                        ch_l "Ok."
+            "I like your leather jacket and skirt combo." if Girl == LauraX:
+                $ Girl.change_outfit("casual2")
+                menu:
+                    "You should wear this one out. [[set current outfit]":
+                        $ Girl.outfit_name = "casual2"
+
+                        ch_l "Yeah, I mean, my cousin got it for me."
+                    "Let's try something else though.":
+                        ch_l "Ok."
+            "Your pink shirt and pants outfit is cute." if Girl == JeanX:
+                $ Girl.change_outfit("casual1")
+
+                menu:
+                    "You should wear this one out. [[set current outfit]":
+                        $ Girl.outfit_name = "casual1"
+
+                        ch_j "Yeah, I've worn this one a long time."
+                    "Let's try something else though.":
+                        ch_j "Sure. . ."
+            "What about your green t-shirt and skirt outfit?" if Girl == JeanX:
+                $ Girl.change_outfit("casual2")
+                menu:
+                    "You should wear this one out. [[set current outfit]":
+                        $ Girl.outfit_name = "casual2"
+
+                        ch_j "Ok, this one has a real \"classic\" feel. . ."
+                    "Let's try something else though.":
+                        ch_j "Sure. . ."
+            "Try on that skirt combo." if Girl == StormX:
+                $ Girl.change_outfit("casual1")
+
+                menu:
+                    "You should wear this one out. [[set current outfit]":
+                        $ Girl.outfit_name = "casual1"
+
+                        ch_s "Yes, this is my preferred casual outfit."
+                    "Let's try something else though.":
+                        ch_s "Ok."
+            "Can I see your leather jacket and pants combo?" if Girl == StormX:
+                $ Girl.change_outfit("casual2")
+
+                menu:
+                    "You should wear this one out. [[set current outfit]":
+                        $ Girl.outfit_name = "casual2"
+
+                        ch_s "Yes, I find this one more stylish."
+                    "Let's try something else though.":
+                        ch_s "Ok."
+            "You look great in your red and blue outfit." if Girl == JubesX:
+                $ Girl.change_outfit("casual1")
+
+                menu:
+                    "You should wear this one out. [[set current outfit]":
+                        $ Girl.outfit_name = "casual1"
+
+                        ch_v "Yeah, this one's a classic, right?"
+                    "Let's try something else though.":
+                        ch_v "Ok."
+            "Can I see your black leather combo?" if Girl == JubesX:
+                $ Girl.change_outfit("casual2")
+
+                menu:
+                    "You should wear this one out. [[set current outfit]":
+                        $ Girl.outfit_name = "casual2"
+
+                        ch_v "I know it's a little edgy and all, but I like it!"
+                    "Let's try something else though.":
+                        ch_v "Ok."
+            "Remember that outfit we put together?" if Girl.first_custom_outfit["outfit_active"] or Girl.second_custom_outfit["outfit_active"] or Girl.third_custom_outfit["outfit_active"]:
+                $ counter = 0
+
+                while 1:
+                    menu:
+                        "Throw on first custom outfit." if Girl.first_custom_outfit["outfit_active"]:
+                            $ Girl.change_outfit("custom1")
+
+                            $ counter = 3
+                        "Throw on first custom outfit.(locked)" if not Girl.first_custom_outfit["outfit_active"]:
+                            pass
+                        "Throw on second custom outfit." if Girl.second_custom_outfit["outfit_active"]:
+                            $ Girl.change_outfit("custom2")
+
+                            $ counter = 5
+                        "Throw on second custom outfit.(locked)" if not Girl.second_custom_outfit["outfit_active"]:
+                            pass
+                        "Throw on third custom outfit." if Girl.third_custom_outfit["outfit_active"]:
+                            $ Girl.change_outfit("custom3")
+
+                            $ counter = 6
+                        "Throw on third custom outfit.(locked)" if not Girl.third_custom_outfit["outfit_active"]:
+                            pass
+                        "You should wear this one in private.(locked)" if not counter:
+                            pass
+                        "You should wear this one in private." if counter:
+                            if counter == 5:
+                                $ Girl.clothing[9] = 5
+                            elif counter == 6:
+                                $ Girl.clothing[9] = 6
+                            else:
+                                $ Girl.clothing[9] = 3
+
+                            if Girl == StormX:
+                                ch_s "That would be fine."
+                            else:
+                                Girl.voice "Ok, sure."
+                        "On second thought, forget about that one outfit. . .":
+                            if Girl == RogueX:
+                                $ forget_line = "Ok, no problem."
+                            elif Girl == KittyX:
+                                $ forget_line = "Ok, no problem."
+                            elif Girl == EmmaX:
+                                $ forget_line = "Very well."
+                            elif Girl == LauraX:
+                                $ forget_line = "Ok."
+                            elif Girl == JeanX:
+                                $ forget_line = "Ok."
+                            elif Girl == StormX:
+                                $ forget_line = "Fine."
+                            elif Girl == JubesX:
+                                $ forget_line = "Ok."
+
+                            menu:
+                                extend "Which one did you mean?"
+                                "Forget first custom outfit." if Girl.first_custom_outfit["outfit_active"]:
+                                    Girl.voice "[forget_line]"
+
+                                    $ Girl.first_custom_outfit["outfit_active"] = 0
+                                "Forget first custom outfit.(locked)" if not Girl.first_custom_outfit["outfit_active"]:
+                                    pass
+                                "Forget second custom outfit." if Girl.second_custom_outfit["outfit_active"]:
+                                    Girl.voice "[forget_line]"
+
+                                    $ Girl.second_custom_outfit["outfit_active"] = 0
+                                "Forget second custom outfit.(locked)" if not Girl.second_custom_outfit["outfit_active"]:
+                                    pass
+                                "Forget third custom outfit." if Girl.third_custom_outfit["outfit_active"]:
+                                    Girl.voice "[forget_line]"
+
+                                    $ Girl.third_custom_outfit["outfit_active"] = 0
+                                "Forget third custom outfit(locked)" if not Girl.third_custom_outfit["outfit_active"]:
+                                    pass
+                                "Back to the other outfits.":
+                                    pass
+                        "You should wear this one out." if counter:
+                            call Custom_Out(Girl, counter)
+                        "You should wear this one out. [[choose outfit first](locked)" if not counter:
+                            pass
+                        "Ok, back to what we were talking about. . .":
+                            $ counter = 0
+
+                            return
+            "Remember that outfit we put together?(locked)" if not Girl.first_custom_outfit["outfit_active"] and not Girl.second_custom_outfit["outfit_active"] and not Girl.third_custom_outfit["outfit_active"]:
+                pass
+            "Could you put on your gym clothes?" if not Girl.taboo or bg_current == "bg_dangerroom":
+                $ Girl.change_outfit("gym_clothes")
+            "Could you try on your sleep outfit?" if not Girl.taboo:
+                if approval_check(Girl, 1200):
+                    $ Girl.change_outfit("sleepwear")
+                else:
+                    call ask_for_dress_screen(Girl)
+
+                    if _return:
+                        $ Girl.change_outfit("sleepwear")
+            "Can I see your swimsuit?" if (not Girl.taboo or bg_current == "bg_pool") and Girl.swimwear["outfit_active"]:
+                $ Girl.change_outfit("swimwear")
+            "Can I see your swimsuit?(locked)" if (Girl.taboo and bg_current != "bg_pool") or not Girl.swimwear["outfit_active"]:
+                $ Girl.change_outfit("swimwear")
+            "Could you put on your Halloween costume again?" if "halloween" in Girl.history:
+                if Girl == RogueX:
+                    ch_r "Sure."
+                elif Girl == KittyX:
+                    ch_k "Sure."
+                elif Girl == EmmaX:
+                    ch_e "Very well. . ."
+                elif Girl == LauraX:
+                    ch_l "Ok."
+                elif Girl == JeanX:
+                    ch_j "Ok."
+                elif Girl == StormX:
+                    ch_s "Fine."
+                elif Girl == JubesX:
+                    ch_v "Ok."
+
+                $ Girl.change_outfit("costume")
+            "Your birthday suit looks really great. . .":
+                $ Girl.change_face("_sexy", 1)
+
+                $ agreed = False
+
+                if Girl.fully_nude:
+                    if Girl == RogueX:
+                        ch_r "Can't get much more naked than this."
+                    elif Girl == KittyX:
+                        ch_k "You're kidding, right?"
+                    elif Girl == EmmaX:
+                        ch_e "Apparently so. . ."
+                    elif Girl == LauraX:
+                        ch_l "Yeah. . . wait, how would you know?"
+                    elif Girl == JeanX:
+                        ch_j "Duh."
+                    elif Girl == StormX:
+                        ch_s "Thank you."
+                    elif Girl == JubesX:
+                        ch_v "Uh-huh. . . wait, how would you know?!"
+                elif Girl.seen_breasts and Girl.seen_pussy and approval_check(Girl, 1200, taboo_modifier=(5-public)):
+                    if Girl == RogueX:
+                        ch_r "Naughty boy. . ."
+                    elif Girl == KittyX:
+                        ch_k "[Girl.Like]Reow. . ."
+                    elif Girl == EmmaX:
+                        ch_e "I'll take that as an invitation. . ."
+                    elif Girl == LauraX:
+                        ch_l "You know it. . ."
+                    elif Girl == JeanX:
+                        ch_j "You know it. . ."
+                    elif Girl == StormX:
+                        ch_s "Certainly. . ."
+                    elif Girl == JubesX:
+                        ch_v ". . . yeah?"
+
+                    $ agreed = True
+                elif approval_check(Girl, 2000, taboo_modifier=(5-public)):
+                    if Girl == RogueX:
+                        ch_r "Hmm. . . you move fast, but I suppose for you. . ."
+                    elif Girl == KittyX:
+                        ch_k "You don't[Girl.like]mess around, huh."
+                    elif Girl == EmmaX:
+                        ch_e "I suppose you've earned it. . ."
+                    elif Girl == LauraX:
+                        ch_l "Skipping straight to that?"
+                    elif Girl == JeanX:
+                        ch_j "Oh, going right for it, huh?"
+                    elif Girl == StormX:
+                        ch_s "No foreplay?"
+                    elif Girl == JubesX:
+                        ch_v "Well you get to the point!"
+
+                    $ agreed = True
+                elif Girl == StormX and not approval_check(Girl, 500, taboo_modifier=0):
+                    $ Girl.change_face("_confused", 1,mouth="_smirk")
+
+                    ch_s "I don't exactly get nude on command, you know. . ."
+
+                    $ Girl.change_face("_bemused", 0)
+                elif Girl == StormX and Girl.taboo and StormX not in Rules:
+                    ch_s "Maybe, but not here. . ."
+                elif Girl.seen_breasts and Girl.seen_pussy and approval_check(Girl, 1200, taboo_modifier=0):
+                    if Girl == RogueX:
+                        ch_r "Well, maybe if it weren't quite so. . . public here."
+                    elif Girl == KittyX:
+                        ch_k "[Girl.Like]this is a little exposed. . ."
+                    elif Girl == EmmaX:
+                        ch_e "As you're well aware, but this isn't the appropriate venue. . ."
+                    elif Girl == LauraX:
+                        ch_l "Maybe, but not here. . ."
+                    elif Girl == JeanX:
+                        ch_j "You know it, but maybe not right here. . ."
+                    elif Girl == JubesX:
+                        ch_v "Maaaybe, but not here. . ."
+                elif approval_check(Girl, 2000, taboo_modifier=0):
+                    if Girl == RogueX:
+                        ch_r "I might consider it if we had some privacy. . ."
+                    elif Girl == KittyX:
+                        ch_k "Maybe if we were alone?"
+                    elif Girl == EmmaX:
+                        ch_e "I assure you it is, but this isn't the appropriate venue. . ."
+                    elif Girl == LauraX:
+                        ch_l "Maybe, but not here. . ."
+                    elif Girl == JeanX:
+                        ch_j "Maybe, but not here. . ."
+                    elif Girl == JubesX:
+                        ch_v "Maaaybe, but not here. . ."
+                elif approval_check(Girl, 1000, taboo_modifier=0):
+                    if Girl == RogueX:
+                        $ Girl.change_face("_surprised", 1)
+
+                        ch_r "Hmm. . . you're getting a bit ahead of yourself, [Girl.player_petname]."
+                    elif Girl == KittyX:
+                        $ Girl.change_face("_surprised", 1)
+
+                        ch_k "[Girl.Like]get to know a girl first, [Girl.player_petname]."
+                    elif Girl == EmmaX:
+                        $ Girl.change_face("_surprised", 1)
+
+                        ch_e "I assure you that it is, but that's not the way to ask."
+                    elif Girl == LauraX:
+                        $ Girl.change_face("_confused", 1,mouth="_smirk")
+
+                        ch_l "Yeah, but I'm not exactly showing it off."
+
+                        $ Girl.change_face("_bemused", 0)
+                    elif Girl == JeanX:
+                        $ Girl.change_face("_confused", 1,mouth="_smirk")
+
+                        ch_j "Yeah, but I'm not sharing."
+
+                        $ Girl.change_face("_bemused", 0)
+                    elif Girl == StormX:
+                        $ Girl.change_face("_confused", 1,mouth="_smirk")
+
+                        ch_s "Yeah, but I'm not exactly showing it off."
+
+                        $ Girl.change_face("_bemused", 0)
+                    elif Girl == JubesX:
+                        $ Girl.change_face("_confused", 1,mouth="_smirk")
+
+                        ch_v "Yeah, but you'll just have to keep guessing. . ."
+
+                        $ Girl.change_face("_bemused", 0)
+                else:
+                    $ Girl.change_face("_angry", 1)
+
+                    if Girl == RogueX:
+                        ch_r "What sort of common strumpet do you take me for?"
+                    elif Girl == KittyX:
+                        ch_k "Yeah[Girl.like]it does."
+                    elif Girl == EmmaX:
+                        ch_e "Not the worst line I've heard."
+                        ch_e ". . . but close."
+                    elif Girl == LauraX:
+                        ch_l "What's it to you?"
+                    elif Girl == JeanX:
+                        ch_j "Of course it is."
+                        ch_j "Oh, you wanted to see it?"
+                    elif Girl == StormX:
+                        ch_s "I would rather not."
+                    elif Girl == JubesX:
+                        ch_v "That's not really any of your business!"
+
+                if agreed:
+                    call fully_undress(Girl)
+
+                    $ lines = ["She lets all her clothes drop into a pile at her feet.",
+                        "She pulls all her clothes off and throws them in a heap on the floor.",
+                        "She strips down.",
+                        "She throws her clothes off at her feet."]
+
+                    $ line = renpy.random.choice(lines)
+
+                    "[line]"
+
+                    $ Girl.change_face("_sexy")
+
+                    menu:
+                        "You know, you should stay like this for now.":
+                            if "exhibitionist" in Girl.traits:
+                                if Girl == RogueX:
+                                    ch_r "You sure know how to rev my engines. . ."
+                                elif Girl == KittyX:
+                                    ch_k "I'm[Girl.like]getting a little wet just thinking about it."
+                                elif Girl == EmmaX:
+                                    ch_e "Mmmmm. . ."
+                                elif Girl == LauraX:
+                                    ch_l "Mmmmm. . ."
+                                elif Girl == JeanX:
+                                    ch_l "Mmmmm. . ."
+                                elif Girl == StormX:
+                                    ch_l "Mmmmm. . ."
+                                elif Girl == JubesX:
+                                    ch_l "Mmmmm. . ."
+
+                                $ Girl.outfit_name = "nude"
+                                $ Girl.outfit["shame"] = 50
+                                $ Girl.change_stat("lust", 50, 10)
+                                $ Girl.change_stat("lust", 70, 5)
+                                $ Girl.change_face("_sexy",1)
+                            elif (Girl == JeanX and "nowhammy" not in Girl.traits) or approval_check(Girl, 800, "I") or approval_check(Girl, 2800, taboo_modifier=0):
+                                if Girl == RogueX:
+                                    ch_r "Heh, all right [Girl.player_petname]."
+                                elif Girl == KittyX:
+                                    ch_k "I guess we could. . ."
+                                elif Girl == EmmaX:
+                                    ch_e "Oooh, that would cause quite a stir. . ."
+                                elif Girl == LauraX:
+                                    ch_l "Exciting. . ."
+                                elif Girl == JeanX:
+                                    ch_j "Sure, ok. . ."
+                                elif Girl == StormX:
+                                    ch_s "You know, I might. . ."
+                                elif Girl == JubesX:
+                                    ch_v "Fun. . ."
+
+                                $ Girl.outfit_name = "nude"
+                                $ Girl.outfit["shame"] = 50
+                            elif Girl == EmmaX and approval_check(Girl, 400, "I") and approval_check(Girl, 1200, taboo_modifier=0):
+                                $ Girl.change_face("_bemused", 1,eyes="_side")
+
+                                ch_e "You shouldn't suggest such things. . ."
+                            else:
+                                $ Girl.change_face("_sexy", 1, eyes = "_surprised")
+
+                                if Girl == RogueX:
+                                    ch_r "I'm afraid not, [Girl.player_petname], this is just for between you and me."
+                                elif Girl == KittyX:
+                                    ch_k "No way! That'd be[Girl.like]totally embarrassing!"
+                                elif Girl == EmmaX:
+                                    ch_e "Impossible."
+                                elif Girl == LauraX:
+                                    ch_l "I probably shouldn't. Sorry."
+                                elif Girl == JeanX:
+                                    ch_j "Yeah, um, I'm not into that right now. . ."
+                                elif Girl == StormX:
+                                    ch_s "I probably shouldn't. I am sorry."
+                                elif Girl == JubesX:
+                                    ch_v "I really won't."
+                        "Let's try something else though.":
+                            if "exhibitionist" in Girl.traits:
+                                if Girl == RogueX:
+                                    ch_r "Hmm, too bad you didn't want me to wear this out. . ."
+                                elif Girl == KittyX:
+                                    ch_k "Aw, do I have to?"
+                                elif Girl == EmmaX:
+                                    ch_e "Too much for you to handle?"
+                                elif Girl == LauraX:
+                                    ch_l "Are you sure?"
+                                elif Girl == JeanX:
+                                    ch_j "Oh, ok. . ."
+                                elif Girl == StormX:
+                                    ch_s "Are you certain?"
+                                elif Girl == JubesX:
+                                    ch_v "Really?"
+                            elif (Girl == JeanX and "nowhammy" not in Girl.traits) or approval_check(Girl, 800, "I") or approval_check(Girl, 2800, taboo_modifier=0):
+                                $ Girl.change_face("_bemused", 1)
+
+                                if Girl == RogueX:
+                                    ch_r "You know, for a second there I thought you might want me to wear this out. . ."
+                                    ch_r "Hehe, um. . ."
+                                elif Girl == KittyX:
+                                    ch_k "It's a good thing you didn't[Girl.like]ask me to wear this outside."
+                                    ch_k "A good thing. . ."
+                                elif Girl == EmmaX:
+                                    ch_e "Because obviously I couldn't go around like this. . ."
+                                elif Girl == LauraX:
+                                    ch_l "I was worried you expected me to go out like this."
+                                    ch_l ". . ."
+                                elif Girl == JeanX:
+                                    ch_j "I thought you might want me to go out like this. . ."
+                                    ch_j ". . ."
+                                elif Girl == StormX:
+                                    ch_s "I expected that you wanted me to go out like this."
+                                    ch_s ". . ."
+                                elif Girl == JubesX:
+                                    ch_v "Oh! i thought you wanted me to wear this out. . ."
+                                    ch_v ". . ."
+                            else:
+                                $ Girl.change_face("_confused", 1)
+
+                                if Girl == RogueX:
+                                    ch_r "Well obviously. It's not like I'd ever go out like this."
+                                elif Girl == KittyX:
+                                    ch_k "I[Girl.like]don't mind this around the room, but definitely not outside."
+                                elif Girl == EmmaX:
+                                    ch_e "So long as it's just the two of us, I don't mind this."
+                                elif Girl == LauraX:
+                                    ch_l "I don't mind you seeing my body, but. . ."
+                                elif Girl == JeanX:
+                                    ch_j "Yeah, I'm not into that right now. . ."
+                                elif Girl == StormX:
+                                    ch_s "I don't mind you seeing my body, but Charles does have his rules. . ."
+                                elif Girl == JubesX:
+                                    ch_v "Yeah, I mean, I wouldn't. . ."
+            "Let's talk about something else.":
+                return
+
+label tops_menu(Girl):
+    while True:
+        $ Girl.change_face("_bemused", 1)
+
+        menu:
+            "Why don't you take off the [Girl.outfit[jacket]]?" if Girl.outfit["jacket"]:
+                $ item = "_no_jacket"
+            "Why don't you go with no [Girl.outfit[top]]?" if Girl.outfit["top"]:
+                $ item = "_no_top"
+            "How about that green hoodie?" if Girl == RogueX and Girl.outfit["jacket"] != "_hoodie":
+                $ item = "_hoodie"
+            "Put on your red jacket." if Girl == KittyX and Girl.outfit["jacket"] != "_jacket" and "halloween" in Girl.history:
+                $ item = "_jacket"
+            "Put on that white jacket you have." if Girl == EmmaX and Girl.outfit["jacket"] != "_jacket":
+                $ item = "_jacket"
+            "Try on that leather jacket." if Girl == LauraX and Girl.outfit["jacket"] != "_jacket":
+                $ item = "_jacket"
+            "You look great in that leather jacket." if Girl == StormX and Girl.outfit["jacket"] != "_jacket":
+                $ item = "_jacket"
+            "Throw on your yellow jacket." if Girl == JubesX and Girl.outfit["jacket"] != "_jacket":
+                $ item = "_jacket"
+            "Try on the green mesh top." if Girl == RogueX and Girl.outfit["top"] != "_mesh_top":
+                $ item = "_mesh_top"
+            "How about that pink top?" if Girl == RogueX and Girl.outfit["top"] != "_pink_top":
+                $ item = "_pink_top"
+            "Try on that pink shirt you have." if Girl == KittyX and Girl.outfit["top"] != "_pink_top":
+                $ item = "_pink_top"
+            "Try on that red T-shirt you have." if Girl == KittyX and Girl.outfit["top"] != "_red_shirt":
+                $ item = "_red_shirt"
+            "Try on that white dress top." if Girl == EmmaX and Girl.outfit["top"] != "_dress_top" and "halloween" in Girl.history:
+                $ item = "_dress_top"
+            "Try on that pink shirt." if Girl == JeanX and Girl.outfit["top"] != "_pink_shirt":
+                $ item = "_pink_shirt"
+            "How about that green shirt?" if Girl == JeanX and Girl.outfit["top"] != "_pink_shirt":
+                $ item = "_green_shirt"
+            "Try on that white shirt." if Girl == StormX and Girl.outfit["top"] != "_white_shirt":
+                $ item = "_white_shirt"
+            "Try on that red shirt." if Girl == JubesX and Girl.outfit["top"] != "_red_shirt":
+                $ item = "_red_shirt"
+            "How about your leather shirt?" if Girl == JubesX and Girl.outfit["top"] != "_black_shirt":
+                $ item = "_black_shirt"
+            "Could you try on that yellow tanktop?" if Girl == JeanX and Girl.outfit["top"] != "_yellow_shirt" and "halloween" in Girl.history:
+                $ item = "_yellow_shirt"
+            "How about that green nighty I got you?" if Girl == RogueX and Girl.outfit["top"] != "_nighty" and "_nighty" in Girl.inventory:
+                $ item = "_nighty"
+            "Try on that lace nighty." if Girl in [KittyX, EmmaX] and Girl.outfit["top"] != "_nighty":
+                $ item = "_nighty"
+            "Maybe just throw on a towel?" if Girl != StormX and Girl.outfit["top"] != "_towel":
+                $ item = "_towel"
+            "What about the opaque fetish top?" if Girl == RogueX and Girl.outfit["top"] != "_opaque_fetish_top" and "_opaque_fetish_top" in Girl.inventory:
+                $ item = "_opaque_fetish_top"
+            "What about the sheer fetish top?" if Girl == RogueX and Girl.outfit["top"] != "_sheer_fetish_top" and "_sheer_fetish_top" in Girl.inventory:
+                $ item = "_sheer_fetish_top"
+            "How about your violet shirt?" if Girl == KittyX and Girl.outfit["top"] != "_violet_shirt" and "_violet_shirt" in Girl.inventory:
+                $ item = "_violet_shirt"
+            "Try on your classic jacket?" if Girl == RogueX and Girl.outfit["jacket"] != "_classic_jacket" and "_classic_jacket" in Girl.inventory:
+                $ item = "_classic_jacket"
+            "I want to see something else.":
+                return
+
+        # if (item == "_no_jacket" and not Girl.outfit["top"]) or item in ["_no_top", "_mesh_top", "_sheer_fetish_top"]:
+        #     if (Girl.outfit["bra"] or Girl.seen_breasts) and approval_check(Girl, 800, taboo_modifier=(3-public)):
+        #         if Girl == RogueX:
+        #             ch_r "Sure."
+        #         elif Girl == KittyX:
+        #             ch_k "Why not?"
+        #         elif Girl == EmmaX:
+        #             ch_e "Certainly."
+        #         elif Girl == LauraX:
+        #             ch_l "Ok."
+        #         elif Girl == JeanX:
+        #             ch_j "Ok."
+        #         elif Girl == StormX:
+        #             ch_s "Fine."
+        #         elif Girl == JubesX:
+        #             ch_v "Sure."
+        #     elif approval_check(Girl, 600, taboo_modifier=0):
+        #         if Girl == RogueX:
+        #             ch_r "I don't have anything under this. . ."
+        #         elif Girl == KittyX:
+        #             ch_k "I don't exactly have anything on under this. . ."
+        #         elif Girl == EmmaX:
+        #             ch_e "I'm not wearing much of anything under this. . ."
+        #         elif Girl == LauraX:
+        #             ch_l "I don't have anything under this. . ."
+        #         elif Girl == JeanX:
+        #             ch_j "I'm not wearing a bra right now."
+        #         elif Girl == StormX:
+        #             ch_s "I don't have much on under this. . ."
+        #         elif Girl == JubesX:
+        #             ch_v "I don't exactly have anything on under this. . ."
+        #
+        #         menu:
+        #             extend ""
+        #             "Then you could slip something on under it. . .":
+        #                 if Girl == StormX and (StormX in Rules or Girl.taboo < 20):
+        #                     ch_s "No, I suppose it's fine, for now at least."
+        #                 elif Girl.seen_breasts and approval_check(Girl, 1000, taboo_modifier= 4 - public) or approval_check(Girl, 1200, taboo_modifier= 5 - public):
+        #                     $ Girl.blushing = "_blush2"
+        #
+        #                     if Girl == RogueX:
+        #                         ch_r "'course, I don't exactly need something under it either. . ."
+        #                     elif Girl == KittyX:
+        #                         ch_k "-not that that's a problem. . ."
+        #                     elif Girl == EmmaX:
+        #                         ch_e "-not that I'm overly concerned about it. . ."
+        #                     elif Girl == LauraX:
+        #                         ch_l "-I didn't say that I minded. . ."
+        #                     elif Girl == JeanX:
+        #                         ch_j "Well, it's not like I needed one. . ."
+        #                     elif Girl == StormX:
+        #                         ch_s "I truly don't mind though. . ."
+        #                     elif Girl == JubesX:
+        #                         ch_v "Oh, I was just warning -you-. . ."
+        #
+        #                     $ Girl.blushing = "_blush1"
+        #                 elif approval_check(Girl, 900, taboo_modifier=3 - public) and "_lace_bra" in Girl.inventory:
+        #                     if Girl == RogueX:
+        #                         ch_r "I suppose this would work. . ."
+        #                     elif Girl == KittyX:
+        #                         ch_k "I could find {i}something{/i} to wear."
+        #                     elif Girl == EmmaX:
+        #                         ch_e "I suppose I could."
+        #                     elif Girl == JeanX:
+        #                         ch_j "I guess I could find something."
+        #                     elif Girl == StormX:
+        #                         ch_s "Fine."
+        #                     elif Girl == JubesX:
+        #                         ch_v "Well, I do have something I could throw on. . ."
+        #
+        #                     call add_bra(Girl, "_lace_bra")
+        #
+        #                     if Girl == KittyX:
+        #                         "She pulls out her [Girl.outfit[bra]] and passes it through her [Girl.outfit[top]]."
+        #                     else:
+        #                         "She pulls out her [Girl.outfit[bra]] and slips it on under her [Girl.outfit[top]]."
+        #                 elif Girl in [RogueX, KittyX] and approval_check(Girl, 800, taboo_modifier=3 - public):
+        #                     if Girl == RogueX:
+        #                         ch_r "Yeah, I guess."
+        #                     elif Girl == KittyX:
+        #                         ch_k "Yeah, I guess."
+        #
+        #                     call add_bra(Girl, "_bra")
+        #
+        #                     if Girl == KittyX:
+        #                         "She pulls out her [Girl.outfit[bra]] and passes it through her [Girl.outfit[top]]."
+        #                     else:
+        #                         "She pulls out her [Girl.outfit[bra]] and slips it on under her [Girl.outfit[top]]."
+        #                 elif Girl == RogueX and approval_check(Girl, 600, taboo_modifier=3 - public):
+        #                     ch_r "Yeah, I guess."
+        #
+        #                     call add_bra(Girl, "_tank")
+        #
+        #                     "She pulls out her [Girl.outfit[bra]] and slips it on under her [Girl.outfit[top]]."
+        #                 elif Girl == KittyX and approval_check(Girl, 700, taboo_modifier=3 - public):
+        #                     ch_k "Yeah, I guess."
+        #
+        #                     call add_bra(Girl, "_cami")
+        #
+        #                     "She pulls out her camisole and passes it through her [Girl.outfit[top]]."
+        #                 elif Girl in [EmmaX, LauraX] and approval_check(Girl, 700, taboo_modifier=(3-public)):
+        #                     if Girl == EmmaX:
+        #                         ch_e "I suppose I could."
+        #                     elif Girl == LauraX:
+        #                         ch_l "I guess I could find something."
+        #
+        #                     call add_bra(Girl, "_corset")
+        #
+        #                     "She pulls out her corset and slips it on under her [Girl.outfit[top]]."
+        #                 elif Girl in [EmmaX, JubesX] and approval_check(Girl, 600, taboo_modifier=(3-public)):
+        #                     if Girl == EmmaX:
+        #                         ch_e "I suppose I could."
+        #                     elif Girl == JubesX:
+        #                         ch_v "Well, I do have something I could throw on. . ."
+        #
+        #                     call add_bra(Girl, "_sports_bra")
+        #
+        #                     "She pulls out her sports bra and slips it on under her [Girl.outfit[top]]."
+        #                 elif Girl == LauraX and approval_check(Girl, 900, taboo_modifier = 3 - public) and "_lace_corset" in Girl.inventory:
+        #                     ch_l "I guess I could find something."
+        #
+        #                     call add_bra(Girl, "_lace_corset")
+        #
+        #                     "She pulls out her lace corset and slips it under her [Girl.outfit[top]]."
+        #                 elif Girl == LauraX and approval_check(Girl, 600, taboo_modifier = 3 - public):
+        #                     ch_l "Yeah, I guess."
+        #
+        #                     call add_bra(Girl, "_leather_bra")
+        #
+        #                     "She pulls out her leather bra and slips it on under her [Girl.outfit[top]]."
+        #                 elif Girl == JeanX and approval_check(Girl, 700, taboo_modifier = 3 - public):
+        #                     ch_j "I guess I could find something."
+        #
+        #                     call add_bra(Girl, "_green_bra")
+        #
+        #                     "She pulls out her green bra and slips it under her [Girl.outfit[top]]."
+        #                 elif Girl == StormX and approval_check(Girl, 700, taboo_modifier = 3 - public) and "_black_bra" in Girl.inventory:
+        #                     ch_s "Fine."
+        #
+        #                     call add_bra(Girl, "_black_bra")
+        #
+        #                     "She pulls out her black bra and slips it under her [Girl.outfit[top]]."
+        #                 elif Girl == StormX and approval_check(Girl, 600, taboo_modifier = 3 - public):
+        #                     ch_s "Fine."
+        #
+        #                     call add_bra(Girl, "_tube_top")
+        #
+        #                     "She pulls out her tube top and slips it on under her [Girl.outfit[top]]."
+        #                 else:
+        #                     if Girl == RogueX:
+        #                         ch_r "Yeah, I don't think so."
+        #                     elif Girl == KittyX:
+        #                         ch_k "Yeah, I don't think so."
+        #                     elif Girl == EmmaX:
+        #                         ch_e "Yes, but I'd rather not."
+        #                     elif Girl == LauraX:
+        #                         ch_l "Yeah, I don't think so."
+        #                     elif Girl == JeanX:
+        #                         ch_l "Yeah, I don't think so."
+        #                     elif Girl == StormX:
+        #                         ch_s "I don't think it would be appropriate."
+        #                     elif Girl == JubesX:
+        #                         ch_v "Yeah, that wouldn't help."
+        #
+        #                     $ item = ""
+        #             "You could always just wear nothing at all. . .":
+        #                 if Girl == StormX and (StormX in Rules or not Girl.taboo):
+        #                     ch_s "I suppose it's fine, for now at least."
+        #                 elif approval_check(Girl, 1100, "LI", taboo_modifier=3 - public) and Girl.love > Girl.inhibition:
+        #                     if Girl == RogueX:
+        #                         ch_r "I suppose I could. . ."
+        #                     elif Girl == KittyX:
+        #                         ch_k "I guess for you. . ."
+        #                     elif Girl == EmmaX:
+        #                         ch_e "The things I do for you. . ."
+        #                     elif Girl == LauraX:
+        #                         ch_l "For you? I guess. . ."
+        #                     elif Girl == JeanX:
+        #                         ch_j "I guess. . ."
+        #                     elif Girl == StormX:
+        #                         ch_s "For you? I suppose. . ."
+        #                     elif Girl == JubesX:
+        #                         ch_v "For you? sure. . ."
+        #                 elif approval_check(Girl, 700, "OI", taboo_modifier=3 - public) and Girl.obedience > Girl.inhibition:
+        #                     if Girl == RogueX:
+        #                         ch_r "Sure. . ."
+        #                     elif Girl == KittyX:
+        #                         ch_k "Sure. . ."
+        #                     elif Girl == EmmaX:
+        #                         ch_e "If that's what you insist. . ."
+        #                     elif Girl == LauraX:
+        #                         ch_l "Sure. . ."
+        #                     elif Girl == JeanX:
+        #                         ch_j "Sure. . ."
+        #                     elif Girl == StormX:
+        #                         ch_s "Fine. . ."
+        #                     elif Girl == JubesX:
+        #                         ch_v "Sure. . ."
+        #                 elif approval_check(Girl, 600, "I", taboo_modifier=3 - public):
+        #                     if Girl == RogueX:
+        #                         ch_r "Yeah. . ."
+        #                     elif Girl == KittyX:
+        #                         ch_k "Yeah. . ."
+        #                     elif Girl == EmmaX:
+        #                         ch_e "I suppose I could. . ."
+        #                     elif Girl == LauraX:
+        #                         ch_l "Yeah. . ."
+        #                     elif Girl == JeanX:
+        #                         ch_j "Yeah. . ."
+        #                     elif Girl == StormX:
+        #                         ch_s "Yes. . ."
+        #                     elif Girl == JubesX:
+        #                         ch_v "Yeah. . ."
+        #                 elif approval_check(Girl, 1300, taboo_modifier=3 - public):
+        #                     if Girl == RogueX:
+        #                         ch_r "Okay, fine."
+        #                     elif Girl == KittyX:
+        #                         ch_k "Okay, fine."
+        #                     elif Girl == EmmaX:
+        #                         ch_e "Very well."
+        #                     elif Girl == LauraX:
+        #                         ch_l "Okay, fine."
+        #                     elif Girl == JeanX:
+        #                         ch_j "Okay, fine."
+        #                     elif Girl == StormX:
+        #                         ch_s "Okay, fine."
+        #                     elif Girl == JubesX:
+        #                         ch_v "Okay, fine."
+        #                 else:
+        #                     $ Girl.change_face("_surprised", brows = "_angry")
+        #
+        #                     if Girl.taboo > 20:
+        #                         if Girl == RogueX:
+        #                             ch_r "Not in public, [Girl.player_petname]!"
+        #                         elif Girl == KittyX:
+        #                             ch_k "Not in public, [Girl.player_petname]!"
+        #                         elif Girl == EmmaX:
+        #                             ch_e "I'm afraid I couldn't do that in public."
+        #                         elif Girl == LauraX:
+        #                             ch_l "Not in public, I won't!"
+        #                         elif Girl == JeanX:
+        #                             ch_j ". . . not right now. . ."
+        #                         elif Girl == StormX:
+        #                             ch_s "Not in public, I'm afraid"
+        #                         elif Girl == JubesX:
+        #                             ch_v "Not in public, I won't!"
+        #                     else:
+        #                         if Girl == RogueX:
+        #                             ch_r "Don't push it, [Girl.player_petname]."
+        #                         elif Girl == KittyX:
+        #                             ch_k "I don't like you {i}that{/i} much, [Girl.player_petname]!"
+        #                         elif Girl == EmmaX:
+        #                             ch_e "I could, but I wouldn't."
+        #                         elif Girl == LauraX:
+        #                             ch_l "You're not that cute, [Girl.player_petname]!"
+        #                         elif Girl == JeanX:
+        #                             ch_j "Ha! Not for you, [Girl.player_petname]."
+        #                         elif Girl == StormX:
+        #                             ch_s "I'm afraid not, [Girl.player_petname]!"
+        #                         elif Girl == JubesX:
+        #                             ch_v "Nah."
+        #
+        #                     $ item = ""
+        #             "Never mind.":
+        #                 Girl.voice "Ok. . ."
+        #
+        #                 $ item = ""
+        #
+        #         if item and not approval_check(Girl, 1200):
+        #             call ask_for_dress_screen(Girl)
+        #
+        #             if not _return:
+        #                 $ item = ""
+        #     else:
+        #         call ask_for_dress_screen(Girl)
+        #
+        #         if not _return:
+        #             if item in ["_no_top", "_no_jacket"]:
+        #                 if Girl == RogueX:
+        #                     ch_r "I'd rather not. . ."
+        #
+        #                     if not Girl.outfit["bra"]:
+        #                         ch_r "I'm afraid I don't have anything on under this."
+        #                         ch_r "I don't have anything on under this."
+        #                 elif Girl == KittyX:
+        #                     ch_k "Lol, not around you."
+        #
+        #                     if not Girl.outfit["bra"]:
+        #                         ch_k "I don't have anything under this. . ."
+        #                 elif Girl == EmmaX:
+        #                     ch_e "I'm afraid not."
+        #
+        #                     if not Girl.outfit["bra"]:
+        #                         ch_e "I'm indecent under this. . ."
+        #                 elif Girl == LauraX:
+        #                     ch_l "Not right now."
+        #
+        #                     if not Girl.outfit["bra"]:
+        #                         ch_l "I don't have anything under this. . ."
+        #                 elif Girl == JeanX:
+        #                     ch_j "Not right now."
+        #
+        #                     if not Girl.outfit["bra"]:
+        #                         ch_j "I'm not wearing a bra right now."
+        #                 elif Girl == StormX:
+        #                     ch_s "I would rather not."
+        #
+        #                     if not Girl.outfit["bra"]:
+        #                         ch_s "I don't have anything under this. . ."
+        #                 elif Girl == JubesX:
+        #                     ch_v "Not right now."
+        #
+        #                     if not Girl.outfit["bra"]:
+        #                         ch_v "I don't have anything under this. . ."
+        #             elif item in ["_mesh_top", "_sheer_fetish_top"]:
+        #                 if Girl == RogueX:
+        #                     ch_r "I'm afraid that top is a bit sheer to have nothing under it."
+        #
+        #             $ item = ""
+        # elif item in ["_pink_top", "_jacket", "_dress"]:
+        #     $ Girl.change_face("_bemused")
+        #
+        #     if Girl.outfit["bra"] or Girl.seen_breasts:
+        #         if Girl == KittyX:
+        #             ch_k "K."
+        #         elif Girl == EmmaX:
+        #             ch_e "Yeah, ok."
+        #         elif Girl == LauraX:
+        #             ch_l "Sure."
+        #         elif Girl == StormX:
+        #             ch_s "Very well."
+        #     elif approval_check(Girl, 900, taboo_modifier=0):
+        #         if Girl == KittyX:
+        #             ch_k "Yeah, ok."
+        #         elif Girl == EmmaX:
+        #             ch_e "Yeah, ok."
+        #         elif Girl == LauraX:
+        #             ch_l "Yeah, ok."
+        #         elif Girl == StormX:
+        #             ch_s "Very well."
+        #     else:
+        #         call ask_for_dress_screen(Girl)
+        #
+        #         if not _return:
+        #             $ Girl.change_face("_bemused", 1)
+        #
+        #             if Girl == KittyX:
+        #                 ch_k "This is a little skimpy for what I have on under it."
+        #             elif Girl == EmmaX:
+        #                 ch_e "I'm not sure this is appropriate without something more substantial underneath."
+        #             elif Girl == LauraX:
+        #                 ch_l "I don't really want to take this [Girl.outfit[top]] off at the moment."
+        #             elif Girl == StormX:
+        #                 ch_s "I cannot really take this [Girl.outfit[jacket]] off at the moment."
+        #
+        #             $ item = ""
+        # elif item == "_nighty":
+        #     if not approval_check(Girl, 1100, taboo_modifier=(3-public)):
+        #         call ask_for_dress_screen(Girl)
+        #
+        #         if not _return:
+        #             if Girl == RogueX:
+        #                 ch_r "That's a bit . . . revealing."
+        #             elif Girl == EmmaX:
+        #                 ch_e "This is a bit shear."
+        #
+        #             $ item = ""
+        #     else:
+        #         if Girl == RogueX:
+        #             ch_r "Sure. . ."
+        #         elif Girl == EmmaX:
+        #             ch_e "Yeah, ok."
+        # elif item == "_towel":
+        #     $ Girl.change_face("_bemused", 1)
+        #
+        #     $ bonus = 5 if bg_current == "bg_showerroom" else 0
+        #
+        #     if Girl.outfit["bra"] or (Girl.seen_breasts and approval_check(Girl, 500, taboo_modifier=(3-public-bonus))):
+        #         if Girl == RogueX:
+        #             ch_r "Fresh."
+        #         elif Girl == KittyX:
+        #             ch_k "Weirdo."
+        #         elif Girl == EmmaX:
+        #             ch_e "Oh, you like this?"
+        #         elif Girl == LauraX:
+        #             ch_l "Weird."
+        #         elif Girl == JeanX:
+        #             ch_j "Um, ok. . ."
+        #         elif Girl == StormX:
+        #             ch_s "If that's what you want. . ."
+        #         elif Girl == JubesX:
+        #             ch_v "Odd."
+        #     elif approval_check(Girl, 1000, taboo_modifier=(3-public-bonus)):
+        #         $ Girl.change_face("_perplexed", 1)
+        #
+        #         if Girl == RogueX:
+        #             ch_r "I suppose? . ."
+        #         elif Girl == KittyX:
+        #             ch_k "I guess? . ."
+        #         elif Girl == EmmaX:
+        #             ch_e "Fine."
+        #         elif Girl == LauraX:
+        #             ch_l "Huh, ok . ."
+        #         elif Girl == JeanX:
+        #             ch_j "Huh, ok . ."
+        #         elif Girl == StormX:
+        #             ch_s "If that's what you want. . ."
+        #         elif Girl == JubesX:
+        #             ch_v "Huh, sure . ."
+        #     else:
+        #         call ask_for_dress_screen(Girl)
+        #
+        #         if not _return:
+        #             if Girl == RogueX:
+        #                 ch_r "That doesn't leave much to the imagination. . ."
+        #             elif Girl == KittyX:
+        #                 ch_k "I don't think so with what I have on under it."
+        #             elif Girl == EmmaX:
+        #                 ch_e "This wouldn't leave much to the imagination."
+        #             elif Girl == LauraX:
+        #                 ch_l "That wouldn't look right."
+        #             elif Girl == JeanX:
+        #                 ch_j "That wouldn't look right."
+        #             elif Girl == StormX:
+        #                 ch_s "I'm afraid I couldn't."
+        #             elif Girl == JubesX:
+        #                 ch_v "Nah."
+        #
+        #             $ item = ""
+
+        if item == "_no_jacket":
+            call change_jacket(Girl, "")
+        elif item == "_no_top":
+            call change_top(Girl, "")
+        elif item in jackets:
+            call change_jacket(Girl, item)
+        elif item in tops:
+            call change_top(Girl, item)
+
+        # if item in ["_nighty", "_towel"] and (Girl.outfit["jacket"] or Girl.outfit["dress"] or Girl.outfit["bodysuit"] or Girl.outfit["bra"] or Girl.outfit["underwear"]):
+        #     menu:
+        #         extend ""
+        #         "Nice.":
+        #             pass
+        #         "I meant {i}just{/i} the [item].":
+        #             if approval_check(Girl, 1400, taboo_modifier=3):
+        #                 if Girl == RogueX:
+        #                     ch_r "Hmmm, alright. . ."
+        #                 elif Girl == KittyX:
+        #                     ch_r "Hmmm, alright. . ."
+        #                 elif Girl == EmmaX:
+        #                     ch_r "Hmmm, alright. . ."
+        #                 elif Girl == LauraX:
+        #                     ch_r "Hmmm, alright. . ."
+        #                 elif Girl == JeanX:
+        #                     ch_r "Hmmm, alright. . ."
+        #                 elif Girl == StormX:
+        #                     ch_r "Hmmm, alright. . ."
+        #                 elif Girl == JubesX:
+        #                     ch_r "Hmmm, alright. . ."
+        #
+        #                 call fully_undress(Girl)
+        #                 call change_top(Girl, item)
+        #             elif approval_check(Girl, 1200, taboo_modifier=3):
+        #                 call remove_bra(Girl)
+        #
+        #                 if Girl == RogueX:
+        #                     ch_r "I'll keep my panties on, thanks."
+        #                 elif Girl == KittyX:
+        #                     ch_r "I'll keep my panties on, thanks."
+        #                 elif Girl == EmmaX:
+        #                     ch_r "I'll keep my panties on, thanks."
+        #                 elif Girl == LauraX:
+        #                     ch_r "I'll keep my panties on, thanks."
+        #                 elif Girl == JeanX:
+        #                     ch_r "I'll keep my panties on, thanks."
+        #                 elif Girl == StormX:
+        #                     ch_r "I'll keep my panties on, thanks."
+        #                 elif Girl == JubesX:
+        #                     ch_r "I'll keep my panties on, thanks."
+        #
+        #                 call change_top(Girl, item, redress = False)
+        #             else:
+        #                 if Girl == RogueX:
+        #                     ch_r "Be happy with what you get."
+        #                 elif Girl == KittyX:
+        #                     ch_r "Be happy with what you get."
+        #                 elif Girl == EmmaX:
+        #                     ch_r "Be happy with what you get."
+        #                 elif Girl == LauraX:
+        #                     ch_r "Be happy with what you get."
+        #                 elif Girl == JeanX:
+        #                     ch_r "Be happy with what you get."
+        #                 elif Girl == StormX:
+        #                     ch_r "Be happy with what you get."
+        #                 elif Girl == JubesX:
+        #                     ch_r "Be happy with what you get."
+
+label bottoms_menu(Girl):
+    while True:
+        $ Girl.change_face("_sexy", 1)
+
+        menu:
+            "Maybe go without the [Girl.outfit[bottom]]." if Girl.outfit["bottom"]:
+                $ item = "_no_bottom"
+            "Take off the [Girl.outfit[boots]]?" if Girl.outfit["boots"]:
+                $ item = "_no_boots"
+            "Your ass looks tight in those jeans." if Girl == RogueX and Girl.outfit["bottom"] != "_jeans":
+                $ item = "_jeans"
+            "You look great in those capris." if Girl == KittyX and Girl.outfit["bottom"] != "_capris":
+                $ item = "_capris"
+            "I really like those black jeans." if Girl in [KittyX, StormX] and Girl.outfit["bottom"] != "_black_jeans":
+                $ item = "_black_jeans"
+            "How about your yoga pants?" if Girl in [KittyX, EmmaX, JeanX, StormX] and Girl.outfit["bottom"] != "_yoga_pants":
+                $ item = "_yoga_pants"
+            "Try on that pink dress skirt you have." if Girl == KittyX and Girl.outfit["bottom"] != "_dress_skirt" and "halloween" in Girl.history:
+                $ item = "_dress_skirt"
+            "You look great in those white pants." if Girl == EmmaX and Girl.outfit["bottom"] != "_white_pants":
+                $ item = "_white_pants"
+            "Could I see you in your leather pants?" if Girl in [LauraX, JubesX] and Girl.outfit["bottom"] != "_leather_pants":
+                $ item = "_leather_pants"
+            "How about your mesh pants?" if Girl == LauraX and Girl.outfit["bottom"] != "_mesh_pants" and "_mesh_pants" in Girl.inventory:
+                $ item = "_mesh_pants"
+            "You look great in those khaki pants." if Girl == JeanX and Girl.outfit["bottom"] != "_khaki_pants":
+                $ item = "_khaki_pants"
+            "Try on that white dress skirt you have." if Girl == EmmaX and Girl.outfit["bottom"] != "_dress_skirt" and "halloween" in Girl.history:
+                $ item = "_dress_skirt"
+            "How about that skirt?" if Girl == RogueX and Girl.outfit["bottom"] != "_skirt":
+                $ item = "_skirt"
+            "I really like your belty skirt." if Girl == LauraX and Girl.outfit["bottom"] != "_skirt":
+                $ item = "_skirt"
+            "You could wear your leather skirt." if Girl == LauraX and Girl.outfit["bottom"] != "_cosplay_skirt"and "halloween" in Girl.history:
+                $ item = "_cosplay_skirt"
+            "What about wearing your green skirt?" if Girl == JeanX and Girl.outfit["bottom"] != "_skirt":
+                $ item = "_skirt"
+            "What about wearing your purple skirt?" if Girl == StormX and Girl.outfit["bottom"] != "_skirt":
+                $ item = "_skirt"
+            "I like you in that little skirt." if Girl == EmmaX and Girl.outfit["bottom"] != "_skirt":
+                $ item = "_skirt"
+            "How about the blue skirt?" if Girl == KittyX and Girl.outfit["bottom"] != "_blue_skirt" and "_blue_skirt" in Girl.inventory:
+                $ item = "_blue_skirt"
+            "What about wearing your yellow shorts?" if Girl == KittyX and Girl.outfit["bottom"] != "_shorts":
+                $ item = "_shorts"
+            "Could you wear those shorts?" if Girl == JeanX and Girl.outfit["bottom"] != "_shorts" and "halloween" in Girl.history:
+                $ item = "_shorts"
+            "Could you wear those jean shorts?" if Girl == JubesX and Girl.outfit["bottom"] != "_shorts":
+                $ item = "_shorts"
+            "Try on your boots for me." if Girl == EmmaX and Girl.outfit["boots"] != "_thigh_boots":
+                $ item = "_thigh_boots"
+            "Could you wear your ring anklets for me?" if Girl == StormX and Girl.outfit["boots"] != "_ring_anklets" and "halloween" in Girl.history:
+                $ item = "_ring_anklets"
+            "What about those opaque fetish pants?" if Girl == RogueX and Girl.outfit["bottom"] != "_opaque_fetish_pants" and "_opaque_fetish_pants" in Girl.inventory:
+                $ item = "_opaque_fetish_pants"
+            "What about those sheer fetish pants?" if Girl == RogueX and Girl.outfit["bottom"] != "_sheer_fetish_pants" and "_sheer_fetish_pants" in Girl.inventory:
+                $ item = "_sheer_fetish_pants"
+            "You could always wear your classic outfit pants." if Girl == RogueX and Girl.outfit["bottom"] != "_classic_pants" and "_classic_pants" in Girl.inventory:
+                $ item = "_classic_pants"
+            "You could always wear your black and blue pants." if Girl == KittyX and Girl.outfit["bottom"] != "_black_and_blue_pants" and "_black_and_blue_pants" in Girl.inventory:
+                $ item = "_black_and_blue_pants"
+            "What about your leather boots?." if Girl == EmmaX and Girl.outfit["boots"] != "_domme_boots" and "_domme_boots" in Girl.inventory:
+                $ item = "_domme_boots"
+            "I want to see something else.":
+                return
+
+#         if item == "_no_bottom":
+#             if Girl.seen_underwear and Girl.outfit["underwear"] and approval_check(Girl, 500, taboo_modifier=5):
+#                 if Girl == RogueX:
+#                     ch_r "Sure."
+#                 elif Girl == KittyX:
+#                 elif Girl == EmmaX:
+#                 elif Girl == LauraX:
+#                 elif Girl == JeanX:
+#                 elif Girl == StormX:
+#                 elif Girl == JubesX:
+#
+#             elif Girl.seen_pussy and approval_check(Girl, 900, taboo_modifier=4):
+#                 if Girl == RogueX:
+#                     ch_r "Sure, why not?"
+#                 elif Girl == KittyX:
+#                 elif Girl == EmmaX:
+#                 elif Girl == LauraX:
+#                 elif Girl == JeanX:
+#                 elif Girl == StormX:
+#                 elif Girl == JubesX:
+#
+#             elif approval_check(Girl, 1300, taboo_modifier=2) and Girl.outfit["underwear"]:
+#                 if Girl == RogueX:
+#                     ch_r "Well, I suppose if it's for you. . ."
+#                 elif Girl == KittyX:
+#                 elif Girl == EmmaX:
+#                 elif Girl == LauraX:
+#                 elif Girl == JeanX:
+#                 elif Girl == StormX:
+#                 elif Girl == JubesX:
+#
+#             elif approval_check(Girl, 700) and not Girl.outfit["underwear"]:
+#                 if Girl == RogueX:
+#                     ch_r "I'm not wearing anything under these, you know. . ."
+#                 elif Girl == KittyX:
+#                 elif Girl == EmmaX:
+#                 elif Girl == LauraX:
+#                 elif Girl == JeanX:
+#                 elif Girl == StormX:
+#                 elif Girl == JubesX:
+#
+#
+#                 menu:
+#                     extend ""
+#                     "Then you could slip on a pair of panties. . .":
+#                         if (Girl.seen_pussy and approval_check(Girl, 1100, taboo_modifier=4)) or approval_check(Girl, 1500, taboo_modifier=4):
+#                             $ Girl.blushing = "_blush1"
+#
+#                             if Girl == RogueX:
+#                                 ch_r "Alright, I guess it's fine."
+#                             elif Girl == KittyX:
+#                             elif Girl == EmmaX:
+#                             elif Girl == LauraX:
+#                             elif Girl == JeanX:
+#                             elif Girl == StormX:
+#                             elif Girl == JubesX:
+#
+#
+#                             $ Girl.blushing = ""
+#                         elif approval_check(Girl, 700, taboo_modifier=4):
+#                             if Girl == RogueX:
+#                                 ch_r "I like how you think."
+#                             elif Girl == KittyX:
+#                             elif Girl == EmmaX:
+#                             elif Girl == LauraX:
+#                             elif Girl == JeanX:
+#                             elif Girl == StormX:
+#                             elif Girl == JubesX:
+#
+#
+#                             if "_lace_panties" in Girl.inventory:
+#                                 $ item = "_lace_panties"
+#                             else:
+#                                 $ item = "_black_panties"
+#
+#                             if approval_check(Girl, 1200, taboo_modifier=4) and Girl.outfit["bottom"]:
+#                                 $ line = Girl.outfit["bottom"]
+#
+#                                 call change_underwear(Girl, item, redress = False)
+#
+#                                 "She pulls off her [line] and slips on the [item]."
+#                             elif Girl.outfit["bottom"] in skirts:
+#                                 call add_underwear(Girl, item)
+#
+#                                 "She pulls out her [item] and pulls them up under her skirt."
+#                                 "Then she drops the skirt to the floor."
+#
+#                                 call remove_bottom(Girl)
+#                             else:
+#                                 show black_screen onlayer black
+#
+#                                 $ Girl.outfit["bottom"] = ""
+#
+#                                 hide black_screen onlayer black
+#
+#                                 "She steps away a moment and then comes back wearing only the [item]."
+#
+#                             $ item = ""
+#                         else:
+#                             ch_r "Nope."
+#
+#                             $ item = ""
+#                     "You could always just wear nothing at all. . .":
+#                         if approval_check(Girl, 1100, "LI", taboo_modifier=3) and Girl.love > Girl.inhibition:
+#                             if Girl == RogueX:
+#                                 ch_r "Well aren't you cheeky. . . I suppose I could give you a show. . ."
+#                             elif Girl == KittyX:
+#                             elif Girl == EmmaX:
+#                             elif Girl == LauraX:
+#                             elif Girl == JeanX:
+#                             elif Girl == StormX:
+#                             elif Girl == JubesX:
+#
+#                         elif approval_check(Girl, 750, "OI", taboo_modifier=3) and Girl.obedience > Girl.inhibition:
+#                             if Girl == RogueX:
+#                                 ch_r "If that's what you want."
+#                             elif Girl == KittyX:
+#                             elif Girl == EmmaX:
+#                             elif Girl == LauraX:
+#                             elif Girl == JeanX:
+#                             elif Girl == StormX:
+#                             elif Girl == JubesX:
+#
+#                         elif approval_check(Girl, 500, "I", taboo_modifier=3):
+#                             if Girl == RogueX:
+#                                 ch_r "Oooh, naughty."
+#                             elif Girl == KittyX:
+#                             elif Girl == EmmaX:
+#                             elif Girl == LauraX:
+#                             elif Girl == JeanX:
+#                             elif Girl == StormX:
+#                             elif Girl == JubesX:
+#
+#                         elif approval_check(Girl, 1400, taboo_modifier=3):
+#                             if Girl == RogueX:
+#                                 ch_r "Oh, fine. You've been a good boy."
+#                             elif Girl == KittyX:
+#                             elif Girl == EmmaX:
+#                             elif Girl == LauraX:
+#                             elif Girl == JeanX:
+#                             elif Girl == StormX:
+#                             elif Girl == JubesX:
+#
+#                         else:
+#                             $ Girl.change_face("_surprised", brows = "_angry")
+#
+#                             if Girl.taboo:
+#                                 if Girl == RogueX:
+#                                     ch_r "Not here,[Girl.player_petname]!"
+#                                 elif Girl == KittyX:
+#                                 elif Girl == EmmaX:
+#                                 elif Girl == LauraX:
+#                                 elif Girl == JeanX:
+#                                 elif Girl == StormX:
+#                                 elif Girl == JubesX:
+#
+#                             else:
+#                                 if Girl == RogueX:
+#                                     ch_r "Not with you around,[Girl.player_petname]!"
+#                                 elif Girl == KittyX:
+#                                 elif Girl == EmmaX:
+#                                 elif Girl == LauraX:
+#                                 elif Girl == JeanX:
+#                                 elif Girl == StormX:
+#                                 elif Girl == JubesX:
+#
+#
+#                             $ item = ""
+#                     "Never mind.":
+#                         if Girl == RogueX:
+#                             ch_r "Ok. . ."
+#                         elif Girl == KittyX:
+#                         elif Girl == EmmaX:
+#                         elif Girl == LauraX:
+#                         elif Girl == JeanX:
+#                         elif Girl == StormX:
+#                         elif Girl == JubesX:
+#
+#
+#                         $ item = ""
+#
+#                 if item and not Girl.outfit["underwear"] and not approval_check(Girl, 1500):
+#                     call ask_for_dress_screen(Girl)
+#
+#                     if not _return:
+#                         $ item = ""
+#             else:
+#                 call ask_for_dress_screen(Girl)
+#
+#                 if not _return:
+#                     if Girl == RogueX:
+#                         ch_r "Not in front of you, [Girl.player_petname]."
+#
+#                         if not Girl.outfit["underwear"]:
+#                             ch_r "Maybe if I put some panties on first. . ."
+#                     elif Girl == KittyX:
+#                     elif Girl == EmmaX:
+#                     elif Girl == LauraX:
+#                     elif Girl == JeanX:
+#                     elif Girl == StormX:
+#                     elif Girl == JubesX:
+#
+#
+#                     $ item = ""
+
+        if item == "_no_bottom":
+            call change_bottom(Girl, "")
+        elif item == "_no_boots":
+            $ Girl.outfit["boots"] = ""
+        elif item == "_no_socks":
+            call change_hose(Girl, "")
+        elif item in pants or item in skirts or item in shorts:
+            call change_bottom(Girl, item)
+        elif item in socks:
+            call change_socks(Girl, item)
+        elif item in boots:
+            $ Girl.outfit["boots"] = item
+
+label lingerie_menu(Girl):
+    while True:
+        menu:
+            "Let me see your bras.":
+                call bras_menu(Girl)
+            "What about your underwear?":
+                call underwears_menu(Girl)
+            "Try on some hosiery for me.":
+                call hoses_menu(Girl)
+            "I want to see something else.":
+                return
+
+label bras_menu(Girl):
+    while True:
+        $ Girl.change_face("_bemused", 1)
+
+        menu:
+            "How about you lose the [Girl.outfit[bra]]?" if Girl.outfit["bra"]:
+                $ item = "_no_bra"
+            "What about your pink dress corset?" if Girl == KittyX and Girl.outfit["bra"] != "_dress_corset" and "halloween" in Girl.history:
+                $ item = "_dress_corset"
+            "Try on that black tank top." if Girl == RogueX and Girl.outfit["bra"] != "_tank":
+                $ item = "_tank"
+            "I like that buttoned tank top." if Girl == RogueX and Girl.outfit["bra"] != "_buttoned_tank":
+                $ item = "_buttoned_tank"
+            "I liked that white tank top." if Girl == LauraX and Girl.outfit["bra"] != "_white_tank" and "halloween" in Girl.history:
+                $ item = "_white_tank"
+            "Could you try on your wolverine tanktop?" if Girl == LauraX and Girl.outfit["bra"] != "_wolvie_bra" and "_wolvie_bra" in Girl.inventory:
+                $ item = "_wolvie_bra"
+            "I like that blue tube top." if Girl == RogueX and Girl.outfit["bra"] != "_tube_top" and "halloween" in Girl.history:
+                $ item = "_tube_top"
+            "Try on your tube top." if Girl == StormX and Girl.outfit["bra"] != "_tube_top":
+                $ item = "_tube top"
+            "Can you wear on your pink tubetop?" if Girl == JubesX and Girl.outfit["bra"] != "_tube_top":
+                $ item = "_tube_top"
+            "What about your sports bra?" if Girl in [RogueX, KittyX, EmmaX, JeanX, StormX, JubesX] and Girl.outfit["bra"] != "_sports_bra":
+                $ item = "_sports_bra"
+            "Try on that yellow camisole." if Girl == KittyX and Girl.outfit["bra"] != "_cami":
+                $ item = "_cami"
+            "Try on your bikini top?" if Girl.outfit["bra"] != "_bikini_top" and "_bikini_top" in Girl.inventory:
+                $ item = "_bikini_top"
+            "I like that top you had on at the party." if Girl == StormX and Girl.outfit["bra"] != "_cosplay_bra" and "halloween" in Girl.history:
+                $ item = "_cosplay_bra"
+            "I like your leather bra." if Girl == LauraX and Girl.outfit["bra"] != "_leather_bra":
+                $ item = "_leather_bra"
+            "I like that corset you have." if Girl == EmmaX and Girl.outfit["bra"] != "_corset":
+                $ item = "_corset"
+            "Try on that corset I got you." if Girl in [LauraX, JeanX] and Girl.outfit["bra"] != "_corset" and "_corset" in Girl.inventory:
+                $ item = "_corset"
+            "You look amazing in your lace corset." if Girl in [LauraX, JeanX] and Girl.outfit["bra"] != "_lace_corset" and "_lace_corset" in Girl.inventory:
+                $ item = "_lace_corset"
+            "I like your black bra." if Girl in [RogueX, StormX] and Girl.outfit["bra"] != "_black_bra":
+                $ item = "_black_bra"
+            "I like that strapless bra." if Girl == KittyX and Girl.outfit["bra"] != "_strapless_bra":
+                $ item = "_strapless_bra"
+            "Try on that green bra." if Girl == JeanX and Girl.outfit["bra"] != "_green_bra":
+                $ item = "_green_bra"
+            "You look great in your lace bra." if Girl.outfit["bra"] != "_lace_bra" and "_lace_bra" in Girl.inventory:
+                $ item = "_lace_bra"
+            "Try on your harness bra." if Girl == RogueX and Girl.outfit["bra"] != "_harness_bra" and "_harness_bra" in Girl.inventory:
+                $ item = "_harness_bra"
+            "You could always wear your classic outfit top." if Girl == RogueX and Girl.outfit["bra"] != "_classic_bra" and "_classic_bra" in Girl.inventory:
+                $ item = "_classic_bra"
+            "Try on that kitty bra." if Girl == KittyX and Girl.outfit["bra"] != "_kitty_bra" and "_kitty_bra" in Girl.inventory:
+                $ item = "_kitty_bra"
+            "What about your orange top?" if Girl == KittyX and Girl.outfit["bra"] != "_orange_top" and "_orange_top" in Girl.inventory:
+                $ item = "_orange_top"
+            "Never mind.":
+                return
+
+#         if item == "_no_bra":
+#             if Girl.seen_breasts and approval_check(Girl, 1100, taboo_modifier=2):
+#                 if Girl == RogueX:
+#                     ch_r "Sure."
+#                 elif Girl == KittyX:
+#                 elif Girl == EmmaX:
+#                 elif Girl == LauraX:
+#                 elif Girl == JeanX:
+#                 elif Girl == StormX:
+#                 elif Girl == JubesX:
+#
+#             elif approval_check(Girl, 1100, taboo_modifier=2):
+#                 if Girl == RogueX:
+#                     ch_r "I guess I don't really mind if you see them. . ."
+#                 elif Girl == KittyX:
+#                 elif Girl == EmmaX:
+#                 elif Girl == LauraX:
+#                 elif Girl == JeanX:
+#                 elif Girl == StormX:
+#                 elif Girl == JubesX:
+#
+#             elif Girl.outfit["jacket"] == "_hoodie" and approval_check(Girl, 500, taboo_modifier=2):
+#                 if Girl == RogueX:
+#                     ch_r "I guess this covers enough. . ."
+#                 elif Girl == KittyX:
+#                 elif Girl == EmmaX:
+#                 elif Girl == LauraX:
+#                 elif Girl == JeanX:
+#                 elif Girl == StormX:
+#                 elif Girl == JubesX:
+#
+#             else:
+#                 call ask_for_dress_screen(Girl)
+#
+#                 if not _return:
+#                     if Girl.outfit["top"] == "_pink_top" and approval_check(Girl, 950, taboo_modifier=2):
+#                         if Girl == RogueX:
+#                             ch_r "This look is a bit revealing. . ."
+#                     elif Girl.outfit["top"] == "_mesh_top":
+#                         if Girl == RogueX:
+#                             ch_r "In this top? That would leave nothing to the imagination!"
+#                     elif not Girl.outfit["top"]:
+#                         if Girl == RogueX:
+#                             ch_r "Not without a little coverage, for modesty."
+#                         elif Girl == KittyX:
+#                         elif Girl == EmmaX:
+#                         elif Girl == LauraX:
+#                         elif Girl == JeanX:
+#                         elif Girl == StormX:
+#                         elif Girl == JubesX:
+#
+#                     else:
+#                         if Girl == RogueX:
+#                             ch_r "I don't think so, [Girl.player_petname]."
+#                         elif Girl == KittyX:
+#                         elif Girl == EmmaX:
+#                         elif Girl == LauraX:
+#                         elif Girl == JeanX:
+#                         elif Girl == StormX:
+#                         elif Girl == JubesX:
+#
+#
+#                     $ item = ""
+#         elif item == "_bikini_top":
+#             if bg_current == "bg_pool":
+#                 if Girl == RogueX:
+#                     ch_r "Sure."
+#                 elif Girl == KittyX:
+#                 elif Girl == EmmaX:
+#                 elif Girl == LauraX:
+#                 elif Girl == JeanX:
+#                 elif Girl == StormX:
+#                 elif Girl == JubesX:
+#
+#             else:
+#                 if Girl.seen_breasts or approval_check(Girl, 1000, taboo_modifier=2):
+#                     if Girl == RogueX:
+#                         ch_r "Sure."
+#                     elif Girl == KittyX:
+#                     elif Girl == EmmaX:
+#                     elif Girl == LauraX:
+#                     elif Girl == JeanX:
+#                     elif Girl == StormX:
+#                     elif Girl == JubesX:
+#
+#                 else:
+#                     call ask_for_dress_screen(Girl)
+#
+#                     if not _return:
+#                         if Girl == RogueX:
+#                             ch_r "I kinda don't feel right about that. . ."
+#                         elif Girl == KittyX:
+#                         elif Girl == EmmaX:
+#                         elif Girl == LauraX:
+#                         elif Girl == JeanX:
+#                         elif Girl == StormX:
+#                         elif Girl == JubesX:
+#
+#
+#                         $ item = ""
+#         elif item in ["_bra", "_lace_bra", "_harness_bra"]:
+#             if (Girl.seen_breasts and approval) or approval_check(Girl, 1100, taboo_modifier=2):
+#                 if Girl == RogueX:
+#                     ch_r "Sure."
+#                 elif Girl == KittyX:
+#                 elif Girl == EmmaX:
+#                 elif Girl == LauraX:
+#                 elif Girl == JeanX:
+#                 elif Girl == StormX:
+#                 elif Girl == JubesX:
+#
+#             else:
+#                 call ask_for_dress_screen(Girl)
+#
+#                 if not _return:
+#                     if Girl == RogueX:
+#                         ch_r "That's a bit too revealing. . ."
+#                     elif Girl == KittyX:
+#                     elif Girl == EmmaX:
+#                     elif Girl == LauraX:
+#                     elif Girl == JeanX:
+#                     elif Girl == StormX:
+#                     elif Girl == JubesX:
+#
+#
+#                     $ item = ""
+#
+
+        if item == "_no_bra":
+            $ line = Girl.outfit["bra"]
+
+            if Girl.outfit["top"] or Girl.outfit["jacket"] or Girl.outfit["dress"] or Girl.outfit["bodysuit"]:
+                $ Girl.outfit["bra"] = ""
+
+                if Girl.outfit["dress"]:
+                    "She reaches into her [Girl.outfit[dress]] grabs her [line], and pulls it out, dropping it to the ground."
+                elif Girl.outfit["bodysuit"]:
+                    "She reaches into her [Girl.outfit[dress]] grabs her [line], and pulls it out, dropping it to the ground."
+                elif Girl.outfit["top"]:
+                    "She reaches into her [Girl.outfit[top]] grabs her [line], and pulls it out, dropping it to the ground."
+                elif Girl.outfit["jacket"]:
+                    "She reaches into her [Girl.outfit[jacket]] grabs her [line], and pulls it out, dropping it to the ground."
+
+                if not renpy.showing('dress_screen'):
+                    call expression Girl.tag + "_First_Topless"
+            else:
+                call change_bra(Girl, "", redress = False)
+
+                "She lets her [line] fall to the ground."
+        elif item in bras:
+            call change_bra(Girl, item)
+
+label underwears_menu(Girl):
+    while True:
+        $ Girl.change_face("_bemused", 1)
+
+        menu:
+            "You could lose those [Girl.outfit[underwear]]. . ." if Girl.outfit["underwear"]:
+                $ item = "_no_underwear"
+            "What about wearing your shorts?" if Girl == RogueX and Girl.outfit["underwear"] != "_shorts":
+                $ item = "_shorts"
+            "I like those bikini bottoms." if Girl.outfit["underwear"] != "_bikini_bottoms" and "_bikini_bottoms" in Girl.inventory:
+                $ item = "_bikini_bottoms"
+            "Can you try on those panties from the Halloween party?" if Girl == StormX and Girl.outfit["underwear"] != "_cosplay_panties" and "halloween" in Girl.history:
+                $ item = "_cosplay_panties"
+            "How about your sporty panties?" if Girl == EmmaX and Girl.outfit["underwear"] != "_sports_panties":
+                $ item = "_sports_panties"
+            "Why don't you wear the green panties?" if Girl in [RogueX, KittyX, JeanX] and Girl.outfit["underwear"] != "_green_panties":
+                $ item = "_green_panties"
+            "How about the black panties?" if Girl in [RogueX, StormX] and Girl.outfit["underwear"] != "_black_panties":
+                $ item = "_black_panties"
+            "Try on the lace panties." if Girl.outfit["underwear"] != "_lace_panties" and "_lace_panties" in Girl.inventory:
+                $ item = "_lace_panties"
+            "Why don't you wear the white panties?" if Girl in [EmmaX, StormX] and Girl.outfit["underwear"] != "_white_panties":
+                $ item = "_white_panties"
+            "What about your leather panties?" if Girl == LauraX and Girl.outfit["underwear"] != "_leather_panties":
+                $ item = "_leather_panties"
+            "Could you try on your wolverine panties?" if Girl == LauraX and Girl.outfit["underwear"] != "_wolvie_panties" and "_wolvie_panties" in Girl.inventory:
+                $ item = "_wolvie_panties"
+            "Why don't you wear your blue panties?" if Girl == JubesX and Girl.outfit["underwear"] != "_blue_panties":
+                $ item = "_blue_panties"
+            "Your tiger-striped panties are hot." if Girl == JubesX and Girl.outfit["underwear"] != "_tiger_panties" and "_tiger_panties" in Girl.inventory:
+                $ item = "_tiger_panties"
+            "What about those harness panties I bought you?" if Girl == RogueX and Girl.outfit["underwear"] != "_harness_panties" and "_harness_panties" in Girl.inventory:
+                $ item = "_harness_panties"
+            "How about those kitty panties I got you?" if Girl == KittyX and Girl.outfit["underwear"] != "_kitty_panties" and "_kitty_panties" in Girl.inventory:
+                $ item = "_kitty_panties"
+            "You look nice in those nighty panties." if Girl == KittyX and Girl.outfit["underwear"] != "_nighty_panties" and "_nighty_panties" in Girl.inventory:
+                $ item = "_nighty_panties"
+            "Never mind.":
+                return
+
+#         if item == "_no_underwear":
+#             if (Girl.seen_pussy and approval_check(Girl, 900)) and not Girl.taboo:
+#                 if approval_check(Girl, 850, "L", taboo_modifier=2):
+#                     if Girl == RogueX:
+#                         ch_r "Well aren't you cheeky. . ."
+#                     elif Girl == KittyX:
+#                     elif Girl == EmmaX:
+#                     elif Girl == LauraX:
+#                     elif Girl == JeanX:
+#                     elif Girl == StormX:
+#                     elif Girl == JubesX:
+#
+#                 elif approval_check(Girl, 500, "O", taboo_modifier=2):
+#                     if Girl == RogueX:
+#                         ch_r "Fine by me."
+#                     elif Girl == KittyX:
+#                     elif Girl == EmmaX:
+#                     elif Girl == LauraX:
+#                     elif Girl == JeanX:
+#                     elif Girl == StormX:
+#                     elif Girl == JubesX:
+#
+#                 elif approval_check(Girl, 350, "I", taboo_modifier=2):
+#                     if Girl == RogueX:
+#                         ch_r "Oooh, naughty."
+#                     elif Girl == KittyX:
+#                     elif Girl == EmmaX:
+#                     elif Girl == LauraX:
+#                     elif Girl == JeanX:
+#                     elif Girl == StormX:
+#                     elif Girl == JubesX:
+#
+#                 else:
+#                     if Girl == RogueX:
+#                         ch_r "Oh, I guess I could."
+#                     elif Girl == KittyX:
+#                     elif Girl == EmmaX:
+#                     elif Girl == LauraX:
+#                     elif Girl == JeanX:
+#                     elif Girl == StormX:
+#                     elif Girl == JubesX:
+#
+#             else:
+#                 if approval_check(Girl, 1100, "LI", taboo_modifier=2):
+#                     if Girl == RogueX:
+#                         ch_r "Well aren't you cheeky. . . I suppose I could give you a show. . ."
+#                     elif Girl == KittyX:
+#                     elif Girl == EmmaX:
+#                     elif Girl == LauraX:
+#                     elif Girl == JeanX:
+#                     elif Girl == StormX:
+#                     elif Girl == JubesX:
+#
+#                 elif approval_check(Girl, 750, "OI", taboo_modifier=2):
+#                     if Girl == RogueX:
+#                         ch_r "If that's what you want."
+#                     elif Girl == KittyX:
+#                     elif Girl == EmmaX:
+#                     elif Girl == LauraX:
+#                     elif Girl == JeanX:
+#                     elif Girl == StormX:
+#                     elif Girl == JubesX:
+#
+#                 elif approval_check(Girl, 500, "I", taboo_modifier=2):
+#                     if Girl == RogueX:
+#                         ch_r "Oooh, naughty."
+#                     elif Girl == KittyX:
+#                     elif Girl == EmmaX:
+#                     elif Girl == LauraX:
+#                     elif Girl == JeanX:
+#                     elif Girl == StormX:
+#                     elif Girl == JubesX:
+#
+#                 elif approval_check(Girl, 1400, taboo_modifier=3):
+#                     if Girl == RogueX:
+#                         ch_r "Oh, fine. You've been a good boy."
+#                     elif Girl == KittyX:
+#                     elif Girl == EmmaX:
+#                     elif Girl == LauraX:
+#                     elif Girl == JeanX:
+#                     elif Girl == StormX:
+#                     elif Girl == JubesX:
+#
+#                 else:
+#                     call ask_for_dress_screen(Girl)
+#
+#                     if not _return:
+#                         $ Girl.change_face("_surprised", brows = "_angry")
+#
+#                         if Girl.taboo > 20:
+#                             if Girl == RogueX:
+#                                 ch_r "Not in public, [Girl.player_petname]!"
+#                             elif Girl == KittyX:
+#                             elif Girl == EmmaX:
+#                             elif Girl == LauraX:
+#                             elif Girl == JeanX:
+#                             elif Girl == StormX:
+#                             elif Girl == JubesX:
+#
+#                         else:
+#                             if Girl == RogueX:
+#                                 ch_r "Not with you around,[Girl.player_petname]!"
+#                             elif Girl == KittyX:
+#                             elif Girl == EmmaX:
+#                             elif Girl == LauraX:
+#                             elif Girl == JeanX:
+#                             elif Girl == StormX:
+#                             elif Girl == JubesX:
+#
+#
+#                         $ item = ""
+#         elif item == "_bikini_bottoms":
+#             if bg_current == "bg_pool":
+#                 if Girl == RogueX:
+#                     ch_r "Sure."
+#                 elif Girl == KittyX:
+#                 elif Girl == EmmaX:
+#                 elif Girl == LauraX:
+#                 elif Girl == JeanX:
+#                 elif Girl == StormX:
+#                 elif Girl == JubesX:
+#
+#             else:
+#                 if approval_check(Girl, 1000, taboo_modifier=2):
+#                     if Girl == RogueX:
+#                         ch_r "Sure."
+#                     elif Girl == KittyX:
+#                     elif Girl == EmmaX:
+#                     elif Girl == LauraX:
+#                     elif Girl == JeanX:
+#                     elif Girl == StormX:
+#                     elif Girl == JubesX:
+#
+#                 else:
+#                     call ask_for_dress_screen(Girl)
+#
+#                     if not _return:
+#                         if Girl == RogueX:
+#                             ch_r "I kinda don't feel right about that. . ."
+#                         elif Girl == KittyX:
+#                         elif Girl == EmmaX:
+#                         elif Girl == LauraX:
+#                         elif Girl == JeanX:
+#                         elif Girl == StormX:
+#                         elif Girl == JubesX:
+#
+#
+#                         $ item = ""
+#         elif item in ["_green_panties", "_black_panties", "_lace_panties", "_harness_panties"]:
+#             if approval:
+#                 if Girl == RogueX:
+#                     ch_r "Sure, ok."
+#                 elif Girl == KittyX:
+#                 elif Girl == EmmaX:
+#                 elif Girl == LauraX:
+#                 elif Girl == JeanX:
+#                 elif Girl == StormX:
+#                 elif Girl == JubesX:
+#
+#             elif Girl.outfit["underwear"]:
+#                 if Girl == RogueX:
+#                     ch_r "Heh, no, I think I'll stick with these, thanks."
+#                 elif Girl == KittyX:
+#                 elif Girl == EmmaX:
+#                 elif Girl == LauraX:
+#                 elif Girl == JeanX:
+#                 elif Girl == StormX:
+#                 elif Girl == JubesX:
+#
+#             else:
+#                 call ask_for_dress_screen(Girl)
+#
+#                 if not _return:
+#                     if Girl == RogueX:
+#                         ch_r "I think I'll choose my own underwear, thank you."
+#                         ch_r "I don't see how that's any business of yours, [Girl.player_petname]."
+#                     elif Girl == KittyX:
+#                     elif Girl == EmmaX:
+#                     elif Girl == LauraX:
+#                     elif Girl == JeanX:
+#                     elif Girl == StormX:
+#                     elif Girl == JubesX:
+#
+#
+#                     $ item = ""
+
+        if item == "_no_underwear":
+            $ line = Girl.outfit["underwear"]
+
+            if not Girl.outfit["bottom"] and not Girl.outfit["dress"] and not Girl.outfit["bodysuit"]:
+                call change_underwear(Girl, "", redress = False)
+
+                "She pulls off her [line], then drops them to the ground."
+            elif approval_check(Girl, 1200, taboo_modifier = 4):
+                call change_underwear(Girl, "")
+
+                "She pulls off her [Girl.outfit[bottom]] and [line], then pulls the [Girl.outfit[bottom]] back on."
+            elif not Girl.outfit["bodysuit"] and ((Girl.outfit["dress"] and not Girl.outfit["bottom"]) or Girl.outfit["bottom"] in skirts or Girl.outfit["bottom"] in dresses):
+                call remove_underwear(Girl)
+
+                "She reaches under her skirt and pulls her [line] off."
+            else:
+                $ Girl.blushing = "_blush1"
+
+                show black_screen onlayer black
+
+                $ Girl.outfit["underwear"] = ""
+
+                hide black_screen onlayer black
+
+                "She steps away a moment and then comes back."
+
+                $ Girl.blushing = ""
+        elif item in underwears:
+            call change_underwear(Girl, item)
+
+label hoses_menu(Girl):
+    while True:
+        menu:
+            "You could lose the [Girl.outfit[hose]]." if Girl.outfit["hose"]:
+                $ item = "_no_hose"
+            "I like you in tights." if Girl == RogueX and Girl.outfit["hose"] != '_tights':
+                $ item = "_tights"
+            "Your ripped tights are a good look." if Girl == RogueX and Girl.outfit["hose"] != 'ripped_tights' and "_ripped_tights" in Girl.inventory:
+                $ item = "_ripped_tights"
+            "The knee-high hose look good with that." if Girl == KittyX and Girl.outfit["hose"] != "_knee_stockings" and "_knee_stockings" in Girl.inventory:
+                $ item = "_knee_stockings"
+            "The tall socks would look good with that." if Girl == JubesX and Girl.outfit["hose"] != "_socks" and "_socks" in Girl.inventory:
+                $ item = "_socks"
+            "You look great in pantyhose." if Girl.outfit["hose"] != "_pantyhose":
+                $ item = "_pantyhose"
+            "Your ripped pantyhose would look good with that." if Girl.outfit["hose"] != "_ripped_pantyhose" and "_ripped_pantyhose" in Girl.inventory:
+                $ item = "_ripped_pantyhose"
+            "I like your thigh-high stockings." if Girl.outfit["hose"] != "_stockings":
+                $ item = "_stockings"
+            "What about your black stockings?" if Girl == LauraX and Girl.outfit["hose"] != "_black_stockings" and "_black_stockings" in Girl.inventory:
+                $ item = "_black_stockings"
+            "The stockings and garterbelt would look good with that." if Girl.outfit["hose"] != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in Girl.inventory:
+                $ item = "_stockings_and_garterbelt"
+            "Maybe just the garterbelt?" if Girl.outfit["hose"] != "_garterbelt" and "_stockings_and_garterbelt" in Girl.inventory:
+                $ item = "_garterbelt"
+            "Never mind.":
+                return
+
+        if item == "_no_hose":
+            if Girl.outfit["hose"] in hoses:
+                call change_hose(Girl, "")
+            elif Girl.outfit["hose"] in socks:
+                call change_socks(Girl, "")
+        elif item in hoses:
+            call change_hose(Girl, item)
+        elif item in socks:
+            call change_socks(Girl, item)
+
+label special_menu(Girl):
+    while True:
+        menu:
+            "Can you take off the [Girl.outfit[cloak]]?" if Girl.outfit["cloak"]:
+                $ item = "_no_cloak"
+            "Maybe take off the [Girl.outfit[dress]]." if Girl.outfit["dress"]:
+                $ item = "_no_dress"
+            "Try without the [Girl.outfit[bodysuit]]." if Girl.outfit["bodysuit"]:
+                $ item = "_no_bodysuit"
+            "How about the Raven cloak?" if Girl == RogueX and Girl.outfit["cloak"] != "_raven_cloak" and "_raven_cloak" in Girl.inventory:
+                $ item = "_raven_cloak"
+            "What about your blue dress?" if Girl == RogueX and Girl.outfit["dress"] != "_blue_dress" and "_blue_dress" in Girl.inventory:
+                $ item = "_blue_dress"
+            "I like your red dress." if Girl == RogueX and Girl.outfit["dress"] != "_red_dress" and "_red_dress" in Girl.inventory:
+                $ item = "_red_dress"
+            "Try on that Chinese dress." if Girl == KittyX and Girl.outfit["dress"] != "_chinese" and "_chinese" in Girl.inventory:
+                $ item = "_chinese"
+            "You know I love your Raven suit." if Girl == RogueX and Girl.outfit["bodysuit"] != "_raven_suit" and "_raven_suit" in Girl.inventory:
+                $ item = "_raven_suit"
+            "Try on your one-piece swimsuit." if Girl == RogueX and Girl.outfit["bodysuit"] != "_swimsuit" and "_swimsuit" in Girl.inventory:
+                $ item = "_swimsuit"
+            "What about your sexy one-piece swimsuit?" if Girl == RogueX and Girl.outfit["bodysuit"] != "_sexy_swimsuit" and "_sexy_swimsuit" in Girl.inventory:
+                $ item = "_sexy_swimsuit"
+            "You could wear your classic catsuit." if Girl == RogueX and Girl.outfit["bodysuit"] != "_catsuit" and "_catsuit" in Girl.inventory:
+                $ item = "_catsuit"
+            "Can you wear that domme outfit?" if Girl == EmmaX and Girl.outfit["bodysuit"] != "_domme_suit" and "_domme_suit" in Girl.inventory:
+                $ item = "_domme_suit"
+            "Throw on that bunny outfit." if Girl == LauraX and Girl.outfit["bodysuit"] != "_bunny_suit" and "_bunny_suit" in Girl.inventory:
+                $ item = "_bunny_suit"
+            "Try on that sci-fi suit." if Girl == JeanX and Girl.outfit["bodysuit"] != "_sci_fi_suit" and "_sci_fi_suit" in Girl.inventory:
+                $ item = "_sci_fi_suit"
+            "I want to see something else.":
+                return
+
+        if item == "_no_cloak":
+            $ Girl.outfit["cloak"] = ""
+        elif item == "_no_dress":
+            call change_dress(Girl, "")
+        elif item == "_no_bodysuit":
+            call change_bodysuit(Girl, "")
+        elif item in cloaks:
+            $ Girl.outfit["cloak"] = item
+        elif item in dresses:
+            call change_dress(Girl, item)
+        elif item in bodysuits:
+            call change_bodysuit(Girl, item)
+
+label accessories_menu(Girl):
+    while True:
+        menu:
+            "I liked your original hair style." if Girl == RogueX and Girl.outfit["hair"] != "_evo":
+                $ approval = approval_check(Girl, 600)
+
+                if approval:
+                    ch_r "Oh, ok."
+
+                    $ Girl.outfit["hair"] = "_evo"
+                else:
+                    ch_r "I kinda prefer this look."
+            "Can you put your hair up in a ponytail?" if Girl == KittyX and Girl.outfit["hair"] != "_evo":
+                $ approval = approval_check(Girl, 600)
+
+                if approval:
+                    ch_k "Like this?"
+
+                    $ Girl.outfit["hair"] = "_evo"
+                else:
+                    ch_k "Yeah, I know that."
+            "I like your loose hair style." if Girl == KittyX and Girl.outfit["hair"] != "_long":
+                $ approval = approval_check(Girl, 600)
+
+                if approval:
+                    ch_k "You think?"
+
+                    $ Girl.outfit["hair"] = "_long"
+                else:
+                    ch_k "I[Girl.like]kinda prefer to keep it up."
+            "You look good with your hair flowing." if Girl == EmmaX and Girl.outfit["hair"] != "_wavy":
+                $ approval = approval_check(Girl, 600)
+
+                if approval:
+                    ch_e "Like this?"
+
+                    $ Girl.outfit["hair"] = "_wavy"
+                else:
+                    ch_e "Yes, I do."
+            "Maybe keep your hair straight." if Girl == EmmaX and Girl.outfit["hair"] != "_wet":
+                $ approval = approval_check(Girl, 600)
+
+                if approval:
+                    ch_e "You think?"
+
+                    $ Girl.outfit["hair"] = "_wet"
+                else:
+                    ch_e "I tend to prefer it a bit more loose."
+            "You look good with your hair loose." if Girl == LauraX and Girl.outfit["hair"] != "_long":
+                $ approval = approval_check(Girl, 600)
+
+                if approval:
+                    ch_l "Ok."
+
+                    $ Girl.outfit["hair"] = "_long"
+                else:
+                    ch_l "I don't know, it's fine like this."
+            "I like your loose hair style." if Girl == JeanX and Girl.outfit["hair"] != "_short":
+                $ approval = approval_check(Girl, 600)
+
+                if approval:
+                    ch_j "Ok."
+
+                    $ Girl.outfit["hair"] = "_short"
+                else:
+                    ch_j "I don't know, it's fine like this."
+            "Can you grow out your hair for me?" if Girl == StormX and Girl.outfit["hair"] not in ["_long", "_wet_long"]:
+                if "hair" in Girl.recent_history:
+                    ch_s "I have already messed with it too much today."
+                elif approval_check(StormX, 900):
+                    ch_s "Oh, you did?"
+                    ch_s "I suppose I could speak to Hank about that. . ."
+
+                    show black_screen onlayer black
+
+                    "She steps away for a few minutes."
+
+                    hide black_screen onlayer black
+
+                    if Girl.outfit["hair"] == "_wet_mohawk":
+                        $ Girl.outfit["hair"] = "_wet_long"
+                    else:
+                        $ Girl.outfit["hair"] = "_long"
+
+                    $ Girl.add_word(1,"hair","hair",0,0)
+
+                    ch_s "Like this?"
+                else:
+                    ch_s "Thank you, but I'm not interested in that style right now."
+            "What about a mohawk?" if Girl == StormX and Girl.outfit["hair"] not in ["_mohawk", "_wet_mohawk"]:
+                if "hair" in Girl.recent_history:
+                    ch_s "I have already messed with it too much today."
+                elif approval_check(StormX, 900):
+                    ch_s "You liked it?"
+
+                    show black_screen onlayer black
+
+                    "She steps away for a few minutes."
+
+                    hide black_screen onlayer black
+
+                    if Girl.outfit["hair"] == "_wet_long":
+                        $ Girl.outfit["hair"] = "_wet_mohawk"
+                    else:
+                        $ Girl.outfit["hair"] = "_mohawk"
+
+                    $ Girl.add_word(1,"hair","hair",0,0)
+
+                    ch_s "Like this?"
+                else:
+                    ch_s "Thank you, but I'm not interested in that style right now."
+            "I like your normal hair best." if Girl == JubesX and Girl.outfit["hair"] != "_short":
+                $ approval = approval_check(Girl, 600)
+
+                if approval:
+                    ch_v "Ok."
+
+                    $ Girl.outfit["hair"] = "_short"
+                else:
+                    ch_v "I don't know, it's fine like this."
+            "Try that wet look with your hair." if Girl in [RogueX, KittyX, LauraX, StormX, JubesX] and Girl.outfit["hair"] not in ["_wet", "_wet_long", "_wet_mohawk"]:
+                $ approval = approval_check(Girl, 800)
+
+                if Girl == RogueX:
+                    if approval:
+                        ch_r "Hmm?"
+
+                        $ Girl.outfit["hair"] = "_wet"
+
+                        "She wanders off for a minute and comes back."
+
+                        ch_r "Like this?"
+                    else:
+                        ch_r "Not really into that."
+                elif Girl == KittyX:
+                    if approval:
+                        ch_k "You think so?"
+
+                        $ Girl.outfit["hair"] = "_wet"
+
+                        "She rummages in her bag and grabs some gel, running it through her hair."
+
+                        ch_k "Like this?"
+                    else:
+                        ch_k "It's too high maintenance."
+                elif Girl == LauraX:
+                    if approval:
+                        ch_l "Hmm?"
+
+                        $ Girl.outfit["hair"] = "_wet"
+
+                        "She wanders off for a minute and comes back."
+
+                        ch_l "Like this?"
+                    else:
+                        ch_l "Ugh, too much work."
+                elif Girl == JeanX:
+                    if approval:
+                        ch_j "Hmm?"
+
+                        $ Girl.outfit["hair"] = "_wet"
+
+                        "She wanders off for a minute and comes back."
+
+                        ch_j "Like this?"
+                    else:
+                        ch_j "Ugh, too much work."
+                elif Girl == StormX:
+                    if approval:
+                        ch_s "Really?"
+
+                        if Girl.outfit["hair"] == "_mohawk":
+                            $ Girl.outfit["hair"] = "_wet_mohawk"
+                        else:
+                            $ Girl.outfit["hair"] = "_wet_long"
+
+                        "A concentrated hurricane swirls around her head for a moment, leaving her hair limp."
+
+                        ch_s "Like this?"
+                    else:
+                        ch_s "I'd rather not."
+                elif Girl == JubesX:
+                    if approval:
+                        ch_v "Hmm?"
+
+                        $ Girl.outfit["hair"] = "_wet"
+
+                        "She wanders off for a minute and comes back."
+
+                        ch_v "Like this?"
+                    else:
+                        ch_v "Ugh, too much work."
+            "Can you dry out your hair?" if Girl == StormX and Girl.outfit["hair"] in ["_wet_long", "_wet_mohawk"]:
+                $ approval = approval_check(Girl, 600)
+
+                if approval:
+                    ch_s "Fine."
+
+                    "A gust of wind swirls around her hair."
+
+                    if Girl.outfit["hair"] == "_wet_mohawk":
+                        $ Girl.outfit["hair"] = "_mohawk"
+                    else:
+                        $ Girl.outfit["hair"] = "_long"
+                else:
+                    ch_s "I'm unsure, I think this is fine."
+            "Try the hair you had at the Halloween party." if Girl == RogueX and Girl.outfit["hair"] != "_cosplay" and "halloween" in Girl.history:
+                $ approval = approval_check(Girl, 600)
+
+                if Girl == RogueX:
+                    if approval:
+                        ch_r "Oh, ok."
+
+                        $ Girl.outfit["hair"] = "_cosplay"
+                    else:
+                        ch_r "I kinda prefer this look."
+            "Can you put your hair up in a side ponytail?" if Girl == JeanX and Girl.outfit["hair"] != "_pony" and "halloween" in Girl.history:
+                $ approval = approval_check(Girl, 600)
+
+                if approval:
+                    ch_j "Ok."
+
+                    $ Girl.outfit["hair"] = "_pony"
+                else:
+                    ch_j "I don't know, it's fine like this."
+            "That hair style you had at the Halloween party was great." if Girl == StormX and Girl.outfit["hair"] != "_short" and "halloween" in Girl.history:
+                if "hair" in Girl.recent_history:
+                    ch_s "I have already messed with it too much today."
+                elif approval_check(StormX, 900):
+                    ch_s "Oh, you did?"
+                    ch_s "I suppose I could speak to Hank about that. . ."
+
+                    show black_screen onlayer black
+
+                    "She steps away for a few minutes."
+
+                    hide black_screen onlayer black
+
+                    $ Girl.outfit["hair"] = "_short"
+
+                    $ Girl.add_word(1,"hair","hair",0,0)
+
+                    ch_s "Like this?"
+                else:
+                    ch_s "Thank you, but I'm not interested in that style right now."
+            "Grow out your pubic hair." if not Girl.pubes:
+                if "pubes" in Girl.to_do:
+                    $ Girl.change_face("_bemused", 1)
+
+                    if Girl == RogueX:
+                        ch_r "Yeah, I know, [Girl.player_petname]. It doesn't grow out overnight!"
+                    elif Girl == KittyX:
+                        ch_k "[[snort] You've got to give it some time!"
+                else:
+                    $ Girl.change_face("_bemused", 1)
+
+                    $ approval = approval_check(Girl, 1150, taboo_modifier=0)
+
+                    if approval_check(Girl, 850, "L", taboo_modifier=0) or (approval and Girl.love > Girl.obedience):
+                        if Girl == RogueX:
+                            ch_r "Well. . . if that's how you like it. . ."
+                        elif Girl == KittyX:
+                            ch_k "I guess I could. . ."
+
+                        $ Girl.to_do.append("pubes")
+                        $ Girl.pubes_counter = 6
+                    elif approval_check(Girl, 500, "O", taboo_modifier=0) or (approval and Girl.obedience > Girl.inhibition):
+                        if Girl == RogueX:
+                            ch_r "If that's what you want."
+                        elif Girl == KittyX:
+                            ch_k "You want a furry kitty to pet?"
+
+                        $ Girl.to_do.append("pubes")
+                        $ Girl.pubes_counter = 6
+                    elif approval_check(Girl, 500, "I", taboo_modifier=0) or approval:
+                        if Girl == RogueX:
+                            ch_r "Heh, I like a man knows what he wants, [Girl.player_petname]."
+                        elif Girl == KittyX:
+                            ch_k "If you want me to. . ."
+
+                        $ Girl.to_do.append("pubes")
+                        $ Girl.pubes_counter = 6
+                    else:
+                        $ Girl.change_face("_surprised", brows = "_angry")
+
+                        if Girl == RogueX:
+                            ch_r "Well I don't see how that's any of your business, [Girl.player_petname]."
+                        elif Girl == KittyX:
+                            ch_k "Not that it's any of your business, [Girl.player_petname]."
+            "I like it waxed clean down there." if Girl.pubes == "_hairy":
+                $ Girl.change_face("_bemused", 1)
+
+                if "shave" in Girl.to_do:
+                    if Girl == RogueX:
+                        ch_r "I know, I'll get on that. Not right this second, obviously."
+                    elif Girl == KittyX:
+                        ch_k "I know, I know. I'll take care of it later."
+                else:
+                    $ approval = approval_check(Girl, 1150, taboo_modifier=0)
+
+                    if approval_check(Girl, 850, "L", taboo_modifier=0) or (approval and Girl.love > Girl.obedience):
+                        if Girl == RogueX:
+                            ch_r "I can keep it tidy if you like. . ."
+                        elif Girl == KittyX:
+                            ch_k "I guess I could tidy up a bit. . ."
+
+                        $ Girl.to_do.append("shave")
+                    elif approval_check(Girl, 500, "O", taboo_modifier=0) or (approval and Girl.obedience > Girl.inhibition):
+                        if Girl == RogueX:
+                            ch_r "I'll take care of it."
+                        elif Girl == KittyX:
+                            ch_k "I'll keep it smooth."
+
+                        $ Girl.to_do.append("shave")
+                    elif approval_check(Girl, 500, "I", taboo_modifier=0) or approval:
+                        if Girl == RogueX:
+                            ch_r "You better earn it, [Girl.player_petname]."
+                        elif Girl == KittyX:
+                            ch_k "I'll get it done."
+
+                        $ Girl.to_do.append("shave")
+                    else:
+                        $ Girl.change_face("_surprised", brows = "_angry")
+
+                        if Girl == RogueX:
+                            ch_r "I don't see how that's any of your beeswax, [Girl.player_petname]."
+                        elif Girl == KittyX:
+                            ch_k "Not that it's any of your business, [Girl.player_petname]."
+            "You'd look nice with ring body piercings." if Girl.outfit["piercings"] != "_ring" and (Girl.seen_pussy or Girl.seen_breasts):
+                $ Girl.change_face("_bemused", 1)
+
+                if "_ring" in Girl.to_do:
+                    if Girl == RogueX:
+                        ch_r "Yeah, I know, I'll get to it."
+                    elif Girl == KittyX:
+                        ch_k "I know, I know. I'll take care of it later."
+                else:
+                    $ approval = approval_check(Girl, 1350, taboo_modifier=0)
+
+                    if approval_check(Girl, 950, "L", taboo_modifier=0) or (approval and Girl.love > Girl.obedience):
+                        if Girl == RogueX:
+                            ch_r "You really like those? Well, I suppose. . ."
+                        elif Girl == KittyX:
+                            ch_k "If you think they'd look good on me. . ."
+
+                        $ Girl.to_do.append("_ring")
+                    elif approval_check(Girl, 600, "O", taboo_modifier=0) or (approval and Girl.obedience > Girl.inhibition):
+                        if Girl == RogueX:
+                            ch_r "I'll go get that taken care of."
+
+                        $ Girl.to_do.append("_ring")
+                    elif approval_check(Girl, 600, "I", taboo_modifier=0) or approval:
+                        if Girl == RogueX:
+                            ch_r "I've always kind of liked the look of those. . ."
+                        elif Girl == KittyX:
+                            ch_k "I think they'd look great too!"
+
+                        $ Girl.to_do.append("_ring")
+                    else:
+                        $ Girl.change_face("_surprised", brows = "_angry")
+
+                        if Girl == RogueX:
+                            ch_r "I don't see how that's any of your beeswax, [Girl.player_petname]."
+                        elif Girl == KittyX:
+                            ch_k "Not that it's any of your business, [Girl.player_petname]."
+            "You'd look nice with barbell body piercings." if Girl.outfit["piercings"] != "_barbell" and (Girl.seen_pussy or Girl.seen_breasts):
+                $ Girl.change_face("_bemused", 1)
+
+                if "_barbell" in Girl.to_do:
+                    if Girl == RogueX:
+                        ch_r "Yeah, I know, I'll get to it."
+                    elif Girl == KittyX:
+                        ch_k "I know, I know. I'll take care of it later."
+                else:
+                    $ approval = approval_check(Girl, 1350, taboo_modifier=0)
+
+                    if approval_check(Girl, 950, "L", taboo_modifier=0) or (approval and Girl.love > Girl.obedience):
+                        if Girl == RogueX:
+                            ch_r "You really like those? Well, I suppose. . ."
+                        elif Girl == KittyX:
+                            ch_k "If you think they'd look good on me. . ."
+
+                        $ Girl.to_do.append("_barbell")
+                    elif approval_check(Girl, 600, "O", taboo_modifier=0) or (approval and Girl.obedience > Girl.inhibition):
+                        if Girl == RogueX:
+                            ch_r "I'll go get that taken care of."
+                        elif Girl == KittyX:
+                            ch_k "I think they'd look great too!"
+
+                        $ Girl.to_do.append("_barbell")
+                    elif approval_check(Girl, 600, "I", taboo_modifier=0) or approval:
+                        if Girl == RogueX:
+                            ch_r "I've always kind of liked the look of those. . ."
+                        elif Girl == KittyX:
+                            ch_k "K, I'll take care of it."
+
+                        $ Girl.to_do.append("_barbell")
+                    else:
+                        $ Girl.change_face("_surprised", brows = "_angry")
+
+                        if Girl == RogueX:
+                            ch_r "I don't see how that's any of your beeswax, [Girl.player_petname]."
+                        elif Girl == KittyX:
+                            ch_k "Not that it's any of your business, [Girl.player_petname]."
+
+            "You'd look better without those piercings." if Girl.outfit["piercings"]:
+                $ Girl.change_face("_bemused", 1)
+
+                $ approval = approval_check(Girl, 1350, taboo_modifier=0)
+
+                if approval_check(Girl, 950, "L", taboo_modifier=0) or (approval and Girl.love > Girl.obedience):
+                    if Girl == RogueX:
+                        ch_r "You really think so? I guess I could lose them. . ."
+                    elif Girl == KittyX:
+                        ch_k "I guess if they're getting in the way . ."
+
+                    $ Girl.outfit["piercings"] = ""
+                elif approval_check(Girl, 600, "O", taboo_modifier=0) or (approval and Girl.obedience > Girl.inhibition):
+                    if Girl == RogueX:
+                        ch_r "I'll take them out then."
+                    elif Girl == KittyX:
+                        ch_k "I'll take them out then."
+
+                    $ Girl.outfit["piercings"] = ""
+                elif approval_check(Girl, 600, "I", taboo_modifier=0) or approval:
+                    if Girl == RogueX:
+                        ch_r "I guess I prefered not having them in. . ."
+                    elif Girl == KittyX:
+                        ch_k "They were getting a little annoying."
+
+                    $ Girl.outfit["piercings"] = ""
+                else:
+                    $ Girl.change_face("_surprised", brows = "_angry")
+
+                    if Girl == RogueX:
+                        ch_r "I'll keep them, if you don't mind."
+                    elif Girl == KittyX:
+                        ch_k "Well {i}I{/i} kinda like'em."
+            "Toggle hat." if Girl == EmmaX and "halloween" in Girl.history:
+                if Girl.outfit["face_outer_accessory"] == "_hat":
+                    $ Girl.outfit["face_outer_accessory"] = ""
+                else:
+                    $ Girl.outfit["face_outer_accessory"] = "_hat"
+            "Toggle shades." if Girl == JubesX:
+                if Girl.outfit["face_outer_accessory"] == "_shades":
+                    $ Girl.outfit["face_outer_accessory"] = ""
+                else:
+                    $ Girl.outfit["face_outer_accessory"] = "_shades"
+            "Toggle earrings." if Girl in [StormX, JubesX]:
+                if Girl.outfit["face_inner_accessory"] == "_earrings":
+                    $ Girl.outfit["face_inner_accessory"] = ""
+                else:
+                    $ Girl.outfit["face_inner_accessory"] = "_earrings"
+            "Toggle spiked collar." if Girl == RogueX:
+                if Girl.outfit["neck"] == "_spiked_collar":
+                    $ Girl.outfit["neck"] = ""
+                else:
+                    $ Girl.outfit["neck"] = "_spiked_collar"
+            "Toggle spiked collar." if Girl == EmmaX and "_spiked_collar" in Girl.inventory:
+                if Girl.outfit["neck"] == "_spiked_collar":
+                    $ Girl.outfit["neck"] = ""
+                else:
+                    $ Girl.outfit["neck"] = "_spiked_collar"
+            "Toggle necklace." if Girl == KittyX:
+                if Girl.outfit["neck"] == "":
+                    $ Girl.outfit["neck"] = "_gold_necklace"
+                elif Girl.outfit["neck"] == "_gold_necklace":
+                    $ Girl.outfit["neck"] = "_star_necklace"
+                elif Girl.outfit["neck"] == "_star_necklace":
+                    $ Girl.outfit["neck"] = "_flower_necklace"
+                elif Girl.outfit["neck"] == "_flower_necklace":
+                    $ Girl.outfit["neck"] = ""
+            "Toggle choker." if Girl == EmmaX:
+                if Girl.outfit["neck"] == "_choker":
+                    $ Girl.outfit["neck"] = ""
+                else:
+                    $ Girl.outfit["neck"] = "_choker"
+            "Toggle medallion choker." if Girl == LauraX:
+                if Girl.outfit["neck"] == "_leash_choker":
+                    $ Girl.outfit["neck"] = ""
+                else:
+                    $ Girl.outfit["neck"] = "_leash_choker"
+            "Toggle necklace." if Girl == StormX:
+                if Girl.outfit["neck"] == "":
+                    $ Girl.outfit["neck"] = "_gold_necklace"
+                elif Girl.outfit["neck"] == "_gold_necklace":
+                    if "halloween" in Girl.history:
+                        $ Girl.outfit["neck"] = "_ring_necklace"
+                    else:
+                        $ Girl.outfit["neck"] = ""
+                elif Girl.outfit["neck"] == "_ring_necklace":
+                    $ Girl.outfit["neck"] = ""
+            "Open/close jacket." if Girl.outfit["jacket"] and not Girl.jacket_closed:
+                if Girl.jacket_opened:
+                    $ Girl.jacket_opened = False
+                else:
+                    $ Girl.jacket_opened = True
+            "Zip the jacket up/down?" if Girl == JubesX and Girl.outfit["jacket"] and not Girl.jacket_opened:
+                if Girl.jacket_closed:
+                    $ Girl.jacket_closed = False
+                else:
+                    $ Girl.jacket_closed = True
+            "Toggle suspenders." if Girl in [LauraX, JeanX]:
+                if Girl.outfit["suspenders"] == "_suspenders":
+                    $ Girl.outfit["suspenders"] = ""
+                else:
+                    $ Girl.outfit["suspenders"] = "_suspenders"
+            "Shift suspenders." if Girl.outfit["suspenders"]:
+                if Girl.suspenders_aside:
+                    $ Girl.suspenders_aside = False
+                else:
+                    $ Girl.suspenders_aside = True
+            "Toggle ring armlets." if Girl == StormX and "halloween" in Girl.history:
+                if Girl.outfit["sleeves"] == "_ring_armlets":
+                    $ Girl.outfit["sleeves"] = ""
+                else:
+                    $ Girl.outfit["sleeves"] = "_ring_armlets"
+            "Toggle gloves." if Girl in [RogueX, EmmaX]:
+                if Girl.outfit["gloves"] == "_gloves":
+                    $ Girl.outfit["gloves"] = ""
+                else:
+                    $ Girl.outfit["gloves"] = "_gloves"
+            "Toggle wristbands." if Girl == LauraX:
+                if Girl.outfit["gloves"] == "_wrists":
+                    $ Girl.outfit["gloves"] = ""
+                else:
+                    $ Girl.outfit["gloves"] = "_wrists"
+            "Toggle gloves." if Girl == LauraX and "halloween" in Girl.history:
+                if Girl.outfit["gloves"] == "_gloves":
+                    $ Girl.outfit["gloves"] = ""
+                else:
+                    $ Girl.outfit["gloves"] = "_gloves"
+            "Toggle bunny cuffs." if Girl == LauraX and "_bunny_gloves" in Girl.inventory:
+                if Girl.outfit["gloves"] == "_bunny_gloves":
+                    $ Girl.outfit["gloves"] = ""
+                else:
+                    $ Girl.outfit["gloves"] = "_bunny_gloves"
+            "Toggle sweater." if Girl == RogueX and "halloween" in Girl.history:
+                if Girl.outfit["belt"] == "_sweater":
+                    $ Girl.outfit["belt"] = ""
+                else:
+                    $ Girl.outfit["belt"] = "_sweater"
+            "Never mind":
+                return
+
 label alternate_clothes(Girl, outfit = 1):
     if Girl.clothing[outfit] == 1 or not Girl.clothing[outfit]:
         $ Girl.outfit_name = "casual1"
@@ -20,209 +2823,204 @@ label alternate_clothes(Girl, outfit = 1):
 
     return
 
-label set_clothes_schedule(Girl):
+label set_outfit_schedule(Girl):
     call shift_focus(Girl)
 
-    $ counter = 0
-
-    if approval_check(Girl, 1500, "LO"):
-        if Girl == RogueX:
-            ch_r "So, you'd like to choose what I wear for the week? Ok, shoot."
-        elif Girl == KittyX:
-            ch_k "Let me know what you like."
-        elif Girl == EmmaX:
-            ch_e "I'm open to suggestions."
-        elif Girl == LauraX:
-            ch_l "Fine, you pick, whatever."
-        elif Girl == JeanX:
-            ch_j "Ok, I'm tired of having to pick outfits. . ."
-        elif Girl == StormX:
-            ch_s "I'm willing to listen."
-        elif Girl == JubesX:
-            ch_v "What're you thinking?"
-
-        $ counter = 3
-    elif approval_check(Girl, 1200, "LO"):
-        if Girl == RogueX:
-            ch_r "I guess I could set aside a few schooldays for you."
-        elif Girl == KittyX:
-            ch_k "I could let you pick a few days. . ."
-        elif Girl == EmmaX:
-            ch_e "I could let you choose a few days. . ."
-        elif Girl == LauraX:
-            ch_l "I don't know, you could pick a few days. . ."
-        elif Girl == JeanX:
-            ch_j "I guess you do have some taste. . ."
-        elif Girl == StormX:
-            ch_s "I suppose you could choose a few days. . ."
-        elif Girl == JubesX:
-            ch_v "You could help with a few days?"
-
-        $ counter = 2
-    elif approval_check(Girl, 1000, "LO"):
-        if Girl == RogueX:
-            ch_r "We can talk about what I wear outside of classes."
-        elif Girl == KittyX:
-            ch_k "We could talk about weekends, maybe. . ."
-        elif Girl == EmmaX:
-            ch_e "Perhaps when I'm off the clock. . ."
-        elif Girl == LauraX:
-            ch_l "Maybe on weekends. . ."
-        elif Girl == JeanX:
-            ch_j "I guess my weekends are free. . ."
-        elif Girl == StormX:
-            ch_s "Perhaps when I'm not working. . ."
-        elif Girl == JubesX:
-            ch_v "I don't know, weekends maybe?"
-
-        $ counter = 1
-    else:
-        if Girl == RogueX:
-            ch_r "You know, I don't really need fashion advice from you."
-        elif Girl == KittyX:
-            ch_k "I think I'll[Girl.like]figure out my own outfits."
-        elif Girl == EmmaX:
-            ch_e "I'd prefer to handle my own wardrobe."
-        elif Girl == LauraX:
-            ch_l "Nah, I got it covered."
-        elif Girl == JeanX:
-            ch_j "Huh? No."
-        elif Girl == StormX:
-            ch_s "I think I'd rather choose my own clothing."
-        elif Girl == JubesX:
-            ch_v "Nah, I'll figure it out myself."
-
-        return
-
     while True:
-        menu:
-            extend ""
-            "Every day":
-                "This sets her outfit for every day of the week in one go."
-                "This overwrites the default schedule, and any scheduling you've already made."
-                "Any choices you make later will overwrite this choice."
+        $ counter = 0
 
-                menu:
-                    "Pick an outfit to wear":
-                        call choose_outfit(Girl)
+        if approval_check(Girl, 1500, "LO"):
+            if Girl == RogueX:
+                ch_r "So, you'd like to choose what I wear for the week? Ok, shoot."
+            elif Girl == KittyX:
+                ch_k "Let me know what you like."
+            elif Girl == EmmaX:
+                ch_e "I'm open to suggestions."
+            elif Girl == LauraX:
+                ch_l "Fine, you pick, whatever."
+            elif Girl == JeanX:
+                ch_j "Ok, I'm tired of having to pick outfits. . ."
+            elif Girl == StormX:
+                ch_s "I'm willing to listen."
+            elif Girl == JubesX:
+                ch_v "What're you thinking?"
 
-                        if counter > 1:
+            $ counter = 3
+        elif approval_check(Girl, 1200, "LO"):
+            if Girl == RogueX:
+                ch_r "I guess I could set aside a few schooldays for you."
+            elif Girl == KittyX:
+                ch_k "I could let you pick a few days. . ."
+            elif Girl == EmmaX:
+                ch_e "I could let you choose a few days. . ."
+            elif Girl == LauraX:
+                ch_l "I don't know, you could pick a few days. . ."
+            elif Girl == JeanX:
+                ch_j "I guess you do have some taste. . ."
+            elif Girl == StormX:
+                ch_s "I suppose you could choose a few days. . ."
+            elif Girl == JubesX:
+                ch_v "You could help with a few days?"
+
+            $ counter = 2
+        elif approval_check(Girl, 1000, "LO"):
+            if Girl == RogueX:
+                ch_r "We can talk about what I wear outside of classes."
+            elif Girl == KittyX:
+                ch_k "We could talk about weekends, maybe. . ."
+            elif Girl == EmmaX:
+                ch_e "Perhaps when I'm off the clock. . ."
+            elif Girl == LauraX:
+                ch_l "Maybe on weekends. . ."
+            elif Girl == JeanX:
+                ch_j "I guess my weekends are free. . ."
+            elif Girl == StormX:
+                ch_s "Perhaps when I'm not working. . ."
+            elif Girl == JubesX:
+                ch_v "I don't know, weekends maybe?"
+
+            $ counter = 1
+        else:
+            if Girl == RogueX:
+                ch_r "You know, I don't really need fashion advice from you."
+            elif Girl == KittyX:
+                ch_k "I think I'll[Girl.like]figure out my own outfits."
+            elif Girl == EmmaX:
+                ch_e "I'd prefer to handle my own wardrobe."
+            elif Girl == LauraX:
+                ch_l "Nah, I got it covered."
+            elif Girl == JeanX:
+                ch_j "Huh? No."
+            elif Girl == StormX:
+                ch_s "I think I'd rather choose my own clothing."
+            elif Girl == JubesX:
+                ch_v "Nah, I'll figure it out myself."
+
+            return
+
+        while True:
+            menu:
+                extend ""
+                "Everyday":
+                    menu:
+                        "Pick an outfit for [Girl.name] to wear everyday.":
+                            call choose_outfit(Girl)
+
+                            if counter > 1:
+                                $ Girl.clothing[0] = _return
+                                $ Girl.clothing[2] = _return
+                                $ Girl.clothing[4] = _return
+                            if counter > 2:
+                                $ Girl.clothing[1] = _return
+                                $ Girl.clothing[3] = _return
+
+                            $ Girl.clothing[5] = _return
+                            $ Girl.clothing[6] = _return
+                        "Never mind.":
+                            pass
+                "Days":
+                    menu:
+                        "On Monday you should wear. . ." if counter > 1:
+                            call choose_outfit(Girl)
+
                             $ Girl.clothing[0] = _return
-                            $ Girl.clothing[2] = _return
-                            $ Girl.clothing[4] = _return
-                        if counter > 2:
+                        "On Monday you should wear. . .(locked)" if counter <= 1:
+                            pass
+                        "On Tuesday you should wear. . ." if counter > 2:
+                            call choose_outfit(Girl)
+
                             $ Girl.clothing[1] = _return
+                        "On Tuesday you should wear. . .(locked)" if counter <= 2:
+                            pass
+                        "On Wednesday you should wear. . ." if counter > 1:
+                            call choose_outfit(Girl)
+
+                            $ Girl.clothing[2] = _return
+                        "On Wednesday you should wear. . .(locked)" if counter <= 1:
+                            pass
+                        "On Thursday you should wear. . ." if counter > 2:
+                            call choose_outfit(Girl)
+
                             $ Girl.clothing[3] = _return
+                        "On Thursday you should wear. . .(locked)" if counter <= 2:
+                            pass
+                        "On Friday you should wear. . ." if counter > 1:
+                            call choose_outfit(Girl)
 
-                        $ Girl.clothing[5] = _return
-                        $ Girl.clothing[6] = _return
-                    "Never mind.":
-                        pass
-            "Days":
-                menu:
-                    "On Monday you should wear. . ." if counter > 1:
-                        call choose_outfit
+                            $ Girl.clothing[4] = _return
+                        "On Friday you should wear. . .(locked)" if counter <= 1:
+                            pass
+                        "On Saturday you should wear. . .(locked)" if counter < 1:
+                            pass
+                        "On Saturday you should wear. . ." if counter >= 1:
+                            call choose_outfit(Girl)
 
-                        $ Girl.clothing[0] = _return
-                    "On Monday you should wear. . . (locked)" if counter <= 1:
-                        pass
-                    "On Tuesday you should wear. . ." if counter > 2:
-                        call choose_outfit
+                            $ Girl.clothing[5] = _return
+                        "On Sunday you should wear. . .(locked)" if counter < 1:
+                            pass
+                        "On Sunday you should wear. . ." if counter >= 1:
+                            call choose_outfit(Girl)
 
-                        $ Girl.clothing[1] = _return
-                    "On Tuesday you should wear. . . (locked)" if counter <= 2:
-                        pass
-                    "On Wednesday you should wear. . ." if counter > 1:
-                        call choose_outfit
+                            $ Girl.clothing[6] = _return
+                        "Back":
+                            pass
+                "Other":
+                    menu:
+                        "In our rooms you should wear. . ." if counter >= 1:
+                            call choose_outfit(Girl, 99)
 
-                        $ Girl.clothing[2] = _return
-                    "On Wednesday you should wear. . . (locked)" if counter <= 1:
-                        pass
-                    "On Thursday you should wear. . ." if counter > 2:
-                        call choose_outfit
+                            $ Girl.clothing[9] = _return
+                        "In our rooms you should wear. . .(locked)" if counter < 1:
+                            pass
+                        "On dates you should wear. . ." if counter >= 1:
+                            call choose_outfit(Girl)
 
-                        $ Girl.clothing[3] = _return
-                    "On Thursday you should wear. . . (locked)" if counter <= 2:
-                        pass
-                    "On Friday you should wear. . ." if counter > 1:
-                        call choose_outfit
+                            $ Girl.clothing[7] = _return
+                        "On dates you should wear. . .(locked)" if counter < 1:
+                            pass
+                        "When teaching you should wear. . ." if Girl in(EmmaX,StormX) and counter >= 3:
+                            call choose_outfit(Girl, 90)
 
-                        $ Girl.clothing[4] = _return
-                    "On Friday you should wear. . . (locked)" if counter <= 1:
-                        pass
-                    "On Saturday you should wear. . . (locked)" if counter < 1:
-                        pass
-                    "On Saturday you should wear. . ." if counter >= 1:
-                        call choose_outfit
+                            $ Girl.clothing[8] = _return
+                        "When teaching you should wear. . .(locked)" if Girl in(EmmaX,StormX) and counter < 3:
+                            pass
+                        "Back":
+                            pass
+                "About gym clothes":
+                    menu:
+                        ch_p "You asked me before about your gym clothes?"
+                        "Don't ask before changing into gym clothes." if "no_ask gym" not in Girl.traits:
+                            Girl.voice "Sure."
 
-                        $ Girl.clothing[5] = _return
-                    "On Sunday you should wear. . . (locked)" if counter < 1:
-                        pass
-                    "On Sunday you should wear. . ." if counter >= 1:
-                        call choose_outfit
+                            $ Girl.traits.append("no_ask gym")
+                        "Ask me before changing into gym clothes." if "no_ask gym" in Girl.traits:
+                            Girl.voice "Sure."
 
-                        $ Girl.clothing[6] = _return
-                    "Back":
-                        pass
-            "Other":
-                menu:
-                    "In our rooms you should wear. . . (locked)" if counter < 1:
-                        pass
-                    "In our rooms you should wear. . ." if counter >= 1:
-                        call choose_outfit (Girl, 99)
+                            $ Girl.traits.remove("no_ask gym")
+                        "Never mind.":
+                            pass
+                "Private" if Girl.clothing[9]:
+                    ch_p "You know that outfit you wear in private?"
 
-                        $ Girl.clothing[9] = _return
-                    "On dates you should wear. . . (locked)" if counter < 1:
-                        pass
-                    "On dates you should wear. . ." if counter >= 1:
-                        call choose_outfit(Girl)
+                    if Girl in [EmmaX, StormX]:
+                        Girl.voice "Yes?"
+                    else:
+                        Girl.voice "Yeah?"
 
-                        $ Girl.clothing[7] = _return
-                    "When teaching you should wear. . . (locked)" if Girl in (EmmaX,StormX) and counter < 3:
-                        pass
-                    "When teaching you should wear. . ." if Girl in (EmmaX,StormX) and counter >= 3:
-                        call choose_outfit (Girl, 90)
+                    menu:
+                        extend ""
+                        "Just put it on without asking me about it." if "comfy" not in Girl.traits:
+                            Girl.voice "Sure."
 
-                        $ Girl.clothing[8] = _return
-                    "Back":
-                        pass
-            "About gym clothes":
-                menu:
-                    ch_p "You asked me before about your gym clothes?"
-                    "Don't ask before changing into gym clothes" if "no_ask gym" not in Girl.traits:
-                        Girl.voice "Sure."
+                            $ Girl.traits.append("comfy")
+                        "Ask before changing into that." if "comfy" in Girl.traits:
+                            Girl.voice "Sure."
 
-                        $ Girl.traits.append("no_ask gym")
-                    "Ask me before changing into gym clothes" if "no_ask gym" in Girl.traits:
-                        Girl.voice "Sure."
-
-                        $ Girl.traits.remove("no_ask gym")
-                    "Never Mind":
-                        pass
-            "Private outfit" if Girl.clothing[9]:
-                ch_p "You know that outfit you wear in private?"
-
-                if Girl in [EmmaX, StormX]:
-                    Girl.voice "Yes?"
-                else:
-                    Girl.voice "Yeah?"
-
-                menu:
-                    extend ""
-                    "Just put them on without asking me about it." if "comfy" not in Girl.traits:
-                        Girl.voice "Sure."
-
-                        $ Girl.traits.append("comfy")
-                    "Ask before changing into that." if "comfy" in Girl.traits:
-                        Girl.voice "Sure."
-
-                        $ Girl.traits.remove("comfy")
-                    "Never Mind":
-                        pass
-            "Never mind [[Done]":
-                return
-
-    jump set_clothes_schedule
+                            $ Girl.traits.remove("comfy")
+                        "Never mind.":
+                            pass
+                "Never mind.":
+                    return
 
 label choose_outfit(Girl, count = 0):
     menu:
@@ -230,37 +3028,30 @@ label choose_outfit(Girl, count = 0):
             $ count = 1
         "That pink outfit, with the jeans." if Girl == RogueX:
             $ count = 2
-
         "That pink outfit, with the jeans." if Girl == KittyX:
             $ count = 1
         "Your red shirt outfit." if Girl == KittyX:
             $ count = 2
-
         "That teacher outfit." if Girl == EmmaX:
             $ count = 1
         "Your superhero outfit." if Girl == EmmaX:
             $ count = 2
-
         "That leather combat look." if Girl == LauraX:
             $ count = 1
         "Your jacket and skirt." if Girl == LauraX:
             $ count = 2
-
         "That pink shirt and khakis look." if Girl == JeanX:
             $ count = 1
         "Your green shirt and skirt." if Girl == JeanX:
             $ count = 2
-
         "That white top and skirt look." if Girl == StormX:
             $ count = 1
         "Your black jacket and pants look." if Girl == StormX:
             $ count = 2
-
         "That red and blue look." if Girl == JubesX:
             $ count = 1
         "Your black top and pants look." if Girl == JubesX:
             $ count = 2
-
         "That outfit we put together [[custom]":
             if Girl == RogueX:
                 ch_r "Which one again?"
@@ -279,21 +3070,19 @@ label choose_outfit(Girl, count = 0):
 
             menu:
                 extend ""
-                "The first one. (locked)" if not Girl.first_custom_outfit["outfit_active"]:
-                    pass
                 "The first one." if Girl.first_custom_outfit["outfit_active"]:
                     if Girl.first_custom_outfit["outfit_active"] == 2 or count == 99:
                         $ count = 3
                     else:
                         Girl.voice "Well. . ."
 
-                        call quick_outfit_check (Girl, 3)
+                        call quick_outfit_check(Girl, 3)
 
                         if Girl.first_custom_outfit["outfit_active"] == 2:
                             $ count = 3
                         else:
                             $ line = "no"
-                "The second one. (locked)" if not Girl.second_custom_outfit["outfit_active"]:
+                "The first one.(locked)" if not Girl.first_custom_outfit["outfit_active"]:
                     pass
                 "The second one." if Girl.second_custom_outfit["outfit_active"]:
                     if Girl.second_custom_outfit["outfit_active"] == 2 or count == 99:
@@ -301,13 +3090,13 @@ label choose_outfit(Girl, count = 0):
                     else:
                         Girl.voice "Well. . ."
 
-                        call quick_outfit_check (Girl, 5)
+                        call quick_outfit_check(Girl, 5)
 
                         if Girl.second_custom_outfit["outfit_active"] == 2:
                             $ count = 5
                         else:
                             $ line = "no"
-                "The third one. (locked)" if not Girl.third_custom_outfit["outfit_active"]:
+                "The second one.(locked)" if not Girl.second_custom_outfit["outfit_active"]:
                     pass
                 "The third one." if Girl.third_custom_outfit["outfit_active"]:
                     if Girl.third_custom_outfit["outfit_active"] == 2 or count == 99:
@@ -315,14 +3104,17 @@ label choose_outfit(Girl, count = 0):
                     else:
                         Girl.voice "Well. . ."
 
-                        call quick_outfit_check (Girl, 6)
+                        call quick_outfit_check(Girl, 6)
 
                         if Girl.third_custom_outfit["outfit_active"] == 2:
                             $ count = 6
                         else:
                             $ line = "no"
+                "The third one.(locked)" if not Girl.third_custom_outfit["outfit_active"]:
+                    pass
                 "Never mind":
                     pass
+
             if line == "no":
                 if Girl == RogueX:
                     ch_r "No, I'm not wearing that outside, [Girl.player_petname]."
@@ -355,7 +3147,7 @@ label choose_outfit(Girl, count = 0):
             else:
                 Girl.voice "Well. . ."
 
-                call quick_outfit_check (Girl, 7)
+                call quick_outfit_check(Girl, 7)
 
                 if Girl.first_custom_outfit["outfit_active"] == 2:
                     $ count = 7
@@ -420,7 +3212,6 @@ label choose_outfit(Girl, count = 0):
     return count
 
 label quick_outfit_check(Girl, outfit_to_check = 3):
-
     $ count = 0
     $ shame = 50
 
@@ -498,7 +3289,7 @@ label quick_outfit_check(Girl, outfit_to_check = 3):
         $ agree = True
     elif shame <= 5:
         $ agree = True
-    elif shame <= 15 and (approval_check(Girl, 1700, taboo_modifier = 0, C = 0) or approval_check(Girl, 400, "I", taboo_modifier = 0, C = 0)):
+    elif shame <= 15 and (approval_check(Girl, 1700, taboo_modifier = 0, cologne = 0) or approval_check(Girl, 400, "I", taboo_modifier = 0, cologne = 0)):
         $ agree = True
     elif outfit_to_check == 10 and shame <= 20:
         $ agree = True
@@ -507,11 +3298,11 @@ label quick_outfit_check(Girl, outfit_to_check = 3):
     elif Girl == StormX and StormX in Rules:
         $ agree = True
     elif shame <= 25:
-        if approval_check(Girl, 2300, taboo_modifier = 0, C = 0) or approval_check(Girl, 700, "I", taboo_modifier = 0, C = 0):
+        if approval_check(Girl, 2300, taboo_modifier = 0, cologne = 0) or approval_check(Girl, 700, "I", taboo_modifier = 0, cologne = 0):
             $ agree = True
         else:
             $ agree = False
-    elif (approval_check(Girl, 2500, taboo_modifier = 0, C = 0) or approval_check(Girl, 800, "I", taboo_modifier = 0, C = 0)):
+    elif (approval_check(Girl, 2500, taboo_modifier = 0, cologne = 0) or approval_check(Girl, 800, "I", taboo_modifier = 0, cologne = 0)):
         $ agree = True
     else:
         $ agree = False
@@ -531,6 +3322,81 @@ label quick_outfit_check(Girl, outfit_to_check = 3):
 
     return
 
+label ask_for_dress_screen(Girl):
+    if renpy.showing('dress_screen'):
+        return True
+
+    if Girl == StormX:
+        if not Girl.taboo or StormX in Rules:
+            return True
+        else:
+            ch_s "I'm afraid rules are rules."
+
+    if Girl.taboo:
+        return False
+
+    $ Girl.change_face("_bemused", 1, eyes = "_side")
+
+    if "screen" in Girl.daily_history:
+        pass
+    elif Girl == RogueX:
+        ch_r "I'm not really comfortable like this."
+    elif Girl == KittyX:
+        ch_k "I'm getting kinda exposed here."
+    elif Girl == EmmaX:
+        ch_e "I'm feeling a bit exposed here. . ."
+    elif Girl == LauraX:
+        ch_l "I don't know about showing this much skin."
+    elif Girl == JeanX:
+        ch_j "I don't think you're ready for this. . ."
+    elif Girl == JeanX:
+        ch_j "I don't think you're ready for this. . ."
+    elif Girl == JubesX:
+        ch_v "I don't know, this is moving a little fast. . ."
+
+    $ Girl.add_word(1,0, "screen")
+    $ Girl.change_face("_bemused",1)
+
+    menu:
+        Girl.voice "Mind if I get behind a dressing screen?"
+        "Go ahead.":
+            show dress_screen zorder 150
+
+            if Girl == RogueX:
+                ch_r "Thanks."
+            elif Girl == KittyX:
+                ch_k "Great."
+            elif Girl == EmmaX:
+                ch_e "Thank you."
+            elif Girl == LauraX:
+                ch_l "K."
+            elif Girl == JeanX:
+                ch_j "Good."
+            elif Girl == JubesX:
+                ch_v "Oh, thanks. . ."
+
+            return True
+        "No, don't":
+            if Girl == RogueX:
+                ch_r "Fine then. . ."
+            elif Girl == KittyX:
+                ch_k "Ok then. . ."
+            elif Girl == EmmaX:
+                ch_e "Fair enough. . ."
+            elif Girl == LauraX:
+                ch_l "Ok. . ."
+            elif Girl == JeanX:
+                ch_j "Ok then."
+            elif Girl == JubesX:
+                ch_v "Well, fine. . ."
+
+            return False
+
+
+
+
+
+
 label Private_outfit(Girl):
     if Girl.broken_up[0] or "_angry" in Girl.daily_history:
         return
@@ -544,8 +3410,8 @@ label Private_outfit(Girl):
         $ Girl.change_outfit()
     elif "no_comfy" in Girl.recent_history:
         pass
-    elif approval_check(Girl, 1200, "LI") and (2*Girl.inhibition) >= (Girl.love + Girl.obedience +100):
-        call shift_focus (Girl)
+    elif approval_check(Girl, 1200, "LI") and (2*Girl.inhibition) >=(Girl.love + Girl.obedience +100):
+        call shift_focus(Girl)
 
         if Girl == RogueX:
             ch_r "Be right there [Girl.player_petname]. . ."
@@ -573,7 +3439,7 @@ label Private_outfit(Girl):
         $ Girl.change_outfit()
         $ Girl.recent_history.append("comfy")
     else:
-        call shift_focus (Girl)
+        call shift_focus(Girl)
 
         if Girl == RogueX:
             ch_r "Be right there [Girl.player_petname]. . ."
@@ -614,7 +3480,7 @@ label Private_outfit(Girl):
                 elif Girl == JubesX:
                     ch_v "Cool. . ."
 
-                call alternate_clothes (Girl, 9)
+                call alternate_clothes(Girl, 9)
 
                 $ Girl.change_outfit()
                 $ Girl.recent_history.append("comfy")
@@ -644,7 +3510,7 @@ label Private_outfit(Girl):
 label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
 
     $ Girl = check_girl(Girl)
-    call shift_focus (Girl)
+    call shift_focus(Girl)
     $ Girl.change_face("_sexy", 1)
 
     if Custom == 3:
@@ -653,7 +3519,7 @@ label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
             $ Girl.outfit_name = "custom1"
             $ Agree = 1
         else:
-            call quick_outfit_check (Girl, 3)
+            call quick_outfit_check(Girl, 3)
             if Girl.first_custom_outfit["outfit_active"] == 2:
                 $ Girl.outfit_name = "custom1"
                 $ Agree = 1
@@ -663,7 +3529,7 @@ label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
             $ Girl.outfit_name = "custom2"
             $ Agree = 1
         else:
-            call quick_outfit_check (Girl, 5)
+            call quick_outfit_check(Girl, 5)
             if Girl.second_custom_outfit["outfit_active"] == 2:
                 $ Girl.outfit_name = "custom2"
                 $ Agree = 1
@@ -673,7 +3539,7 @@ label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
             $ Girl.outfit_name = "custom3"
             $ Agree = 1
         else:
-            call quick_outfit_check (Girl, 6)
+            call quick_outfit_check(Girl, 6)
             if Girl.third_custom_outfit["outfit_active"] == 2:
                 $ Girl.outfit_name = "custom3"
                 $ Agree = 1
@@ -1362,7 +4228,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Girl.change_face("_smile")
                 ch_r "Yeah, I think I like this style, I'd wear this."
             elif Tempshame <= 15:
-                if approval_check(Girl, 1700, taboo_modifier=0, C = 0) or approval_check(Girl, 400, "I", taboo_modifier=0, C = 0):
+                if approval_check(Girl, 1700, taboo_modifier=0, cologne = 0) or approval_check(Girl, 400, "I", taboo_modifier=0, cologne = 0):
                     ch_r "It's pretty skimpy, but I can make it work."
                 else:
                     $ Girl.change_face("_bemused", 1)
@@ -1373,13 +4239,13 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Girl.change_face("_bemused", 1)
                 ch_r "Sure, I can swim in this. . ."
             elif Tempshame <= 25:
-                if approval_check(Girl, 2300, taboo_modifier=0, C = 0) or approval_check(Girl, 700, "I", taboo_modifier=0, C = 0):
+                if approval_check(Girl, 2300, taboo_modifier=0, cologne = 0) or approval_check(Girl, 700, "I", taboo_modifier=0, cologne = 0):
                     ch_r "Kinky, but I can rock this."
                 else:
                     $ Girl.change_face("_angry", 1)
                     ch_r "I'm definitely not going out in this."
                     $ Agree = 0
-            elif approval_check(Girl, 2500, taboo_modifier=0, C = 0) or approval_check(Girl, 800, "I", taboo_modifier=0, C = 0):
+            elif approval_check(Girl, 2500, taboo_modifier=0, cologne = 0) or approval_check(Girl, 800, "I", taboo_modifier=0, cologne = 0):
                 $ Girl.change_face("_bemused", 1)
                 ch_r "I can't believe it. . . but yeah."
             else:
@@ -1397,7 +4263,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             elif Tempshame <= 5:
                 $ Girl.change_face("_smile")
                 ch_k "Sure, it's a cute look!"
-            elif Tempshame <= 15 and (approval_check(Girl, 1700, taboo_modifier=0, C = 0) or approval_check(Girl, 400, "I", taboo_modifier=0, C = 0)):
+            elif Tempshame <= 15 and (approval_check(Girl, 1700, taboo_modifier=0, cologne = 0) or approval_check(Girl, 400, "I", taboo_modifier=0, cologne = 0)):
                 ch_k "It's pretty hot, right?"
             elif Custom == 7:
 
@@ -1416,13 +4282,13 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
                 $ Girl.change_face("_bemused", 1)
                 ch_k "This is a cute swimsuit. . ."
-            elif Tempshame <= 25 and (approval_check(Girl, 2300, taboo_modifier=0, C = 0) or approval_check(Girl, 700, "I", taboo_modifier=0, C = 0)):
+            elif Tempshame <= 25 and (approval_check(Girl, 2300, taboo_modifier=0, cologne = 0) or approval_check(Girl, 700, "I", taboo_modifier=0, cologne = 0)):
                 ch_k "So sexy, but I can handle it."
             elif Tempshame <= 25:
                 $ Girl.change_face("_angry", 1)
                 ch_k "{i}Way{/i} too sexy for outside."
                 $ Agree = 0
-            elif (approval_check(Girl, 2500, taboo_modifier=0, C = 0) or approval_check(Girl, 800, "I", taboo_modifier=0, C = 0)):
+            elif (approval_check(Girl, 2500, taboo_modifier=0, cologne = 0) or approval_check(Girl, 800, "I", taboo_modifier=0, cologne = 0)):
                 $ Girl.change_face("_bemused", 1)
                 ch_k "OMG, I can't believe I'm doing this."
             else:
@@ -1441,7 +4307,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             elif Tempshame <= 5:
                 $ Girl.change_face("_smile")
                 ch_e "Yes, it's a fine choice."
-            elif Tempshame <= 15 and (approval_check(Girl, 1700, taboo_modifier=0, C = 0) or approval_check(Girl, 400, "I", taboo_modifier=0, C = 0)):
+            elif Tempshame <= 15 and (approval_check(Girl, 1700, taboo_modifier=0, cologne = 0) or approval_check(Girl, 400, "I", taboo_modifier=0, cologne = 0)):
                 ch_e "Rather daring, how could I resist?"
             elif Custom == 7:
 
@@ -1461,13 +4327,13 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             elif Tempshame >= 15 and "public" not in Girl.history:
                 ch_e "I doubt I could get away with this in public, [Girl.player_petname]."
                 $ Agree = 0
-            elif Tempshame <= 25 and (approval_check(Girl, 2300, taboo_modifier=0, C = 0) or approval_check(Girl, 700, "I", taboo_modifier=0, C = 0)):
+            elif Tempshame <= 25 and (approval_check(Girl, 2300, taboo_modifier=0, cologne = 0) or approval_check(Girl, 700, "I", taboo_modifier=0, cologne = 0)):
                 ch_e "This is particularly inappropriate. . . in the best ways."
             elif Tempshame <= 25:
                 $ Girl.change_face("_angry", 1)
                 ch_e "I don't believe even I could pull off this look, [Girl.player_petname]."
                 $ Agree = 0
-            elif (approval_check(Girl, 2500, taboo_modifier=0, C = 0) or approval_check(Girl, 800, "I", taboo_modifier=0, C = 0)):
+            elif (approval_check(Girl, 2500, taboo_modifier=0, cologne = 0) or approval_check(Girl, 800, "I", taboo_modifier=0, cologne = 0)):
                 $ Girl.change_face("_bemused", 1)
                 ch_e "This look certainly pushes the boundaries."
             else:
@@ -1487,7 +4353,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             elif Tempshame <= 5:
                 $ Girl.change_face("_smile")
                 ch_l "I don't see why not."
-            elif Tempshame <= 15 and (approval_check(Girl, 1700, taboo_modifier=0, C = 0) or approval_check(Girl, 400, "I", taboo_modifier=0, C = 0)):
+            elif Tempshame <= 15 and (approval_check(Girl, 1700, taboo_modifier=0, cologne = 0) or approval_check(Girl, 400, "I", taboo_modifier=0, cologne = 0)):
                 ch_l "It looks good, right?"
             elif Custom == 7:
 
@@ -1506,13 +4372,13 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
                 $ Girl.change_face("_bemused", 1)
                 ch_l "Yeah, I can swim in this. . ."
-            elif Tempshame <= 25 and (approval_check(Girl, 2300, taboo_modifier=0, C = 0) or approval_check(Girl, 700, "I", taboo_modifier=0, C = 0)):
+            elif Tempshame <= 25 and (approval_check(Girl, 2300, taboo_modifier=0, cologne = 0) or approval_check(Girl, 700, "I", taboo_modifier=0, cologne = 0)):
                 ch_l "I can handle this."
             elif Tempshame <= 25:
                 $ Girl.change_face("_angry", 1)
                 ch_l "Nah, too slutty."
                 $ Agree = 0
-            elif (approval_check(Girl, 2500, taboo_modifier=0, C = 0) or approval_check(Girl, 800, "I", taboo_modifier=0, C = 0)):
+            elif (approval_check(Girl, 2500, taboo_modifier=0, cologne = 0) or approval_check(Girl, 800, "I", taboo_modifier=0, cologne = 0)):
                 $ Girl.change_face("_bemused", 1)
                 ch_l "Pretty daring, eh?"
             else:
@@ -1532,7 +4398,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             elif Tempshame <= 5:
                 $ Girl.change_face("_smile")
                 ch_j "Sure, whatever."
-            elif Tempshame <= 15 and (approval_check(Girl, 1700, taboo_modifier=0, C = 0) or approval_check(Girl, 400, "I", taboo_modifier=0, C = 0)):
+            elif Tempshame <= 15 and (approval_check(Girl, 1700, taboo_modifier=0, cologne = 0) or approval_check(Girl, 400, "I", taboo_modifier=0, cologne = 0)):
                 ch_j "I almost have to. . ."
             elif Custom == 7:
 
@@ -1551,13 +4417,13 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
                 $ Girl.change_face("_bemused", 1)
                 ch_j "Yeah, sure."
-            elif Tempshame <= 25 and (approval_check(Girl, 2300, taboo_modifier=0, C = 0) or approval_check(Girl, 700, "I", taboo_modifier=0, C = 0)):
+            elif Tempshame <= 25 and (approval_check(Girl, 2300, taboo_modifier=0, cologne = 0) or approval_check(Girl, 700, "I", taboo_modifier=0, cologne = 0)):
                 ch_j "This'll turn some heads. . ."
             elif Tempshame <= 25:
                 $ Girl.change_face("_angry", 1)
                 ch_j "I wouldn't want to break anyone. . ."
                 $ Agree = 0
-            elif (approval_check(Girl, 2500, taboo_modifier=0, C = 0) or approval_check(Girl, 800, "I", taboo_modifier=0, C = 0)):
+            elif (approval_check(Girl, 2500, taboo_modifier=0, cologne = 0) or approval_check(Girl, 800, "I", taboo_modifier=0, cologne = 0)):
                 $ Girl.change_face("_bemused", 1)
                 ch_j "Kinky, but sure."
             else:
@@ -1590,16 +4456,16 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
                 $ Girl.change_face("_bemused", 1)
                 ch_s "I suppose I could swim well like this. . ."
-            elif Tempshame <= 20 and (approval_check(Girl, 1700, taboo_modifier=0, C = 0) or approval_check(Girl, 400, "I", taboo_modifier=0, C = 0)):
+            elif Tempshame <= 20 and (approval_check(Girl, 1700, taboo_modifier=0, cologne = 0) or approval_check(Girl, 400, "I", taboo_modifier=0, cologne = 0)):
                 ch_s "This certainly does push the limits of good taste. . ."
-            elif Tempshame <= 25 and (approval_check(Girl, 2300, taboo_modifier=0, C = 0) or approval_check(Girl, 700, "I", taboo_modifier=0, C = 0)):
+            elif Tempshame <= 25 and (approval_check(Girl, 2300, taboo_modifier=0, cologne = 0) or approval_check(Girl, 700, "I", taboo_modifier=0, cologne = 0)):
                 $ Girl.change_face("_bemused", 1)
                 ch_s "I doubt Charles would approve, but so what?"
             elif Tempshame <= 25:
                 $ Girl.change_face("_bemused", 1)
                 ch_s "I'm afraid that Charles would never approve."
                 $ Agree = 0
-            elif (approval_check(Girl, 2500, taboo_modifier=0, C = 0) or approval_check(Girl, 800, "I", taboo_modifier=0, C = 0)):
+            elif (approval_check(Girl, 2500, taboo_modifier=0, cologne = 0) or approval_check(Girl, 800, "I", taboo_modifier=0, cologne = 0)):
                 $ Girl.change_face("_bemused", 1)
                 ch_s "I doubt Charles would approve, but so what?"
             else:
@@ -1619,7 +4485,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             elif Tempshame <= 5:
                 $ Girl.change_face("_smile")
                 ch_v "I guess?"
-            elif Tempshame <= 15 and (approval_check(Girl, 1700, taboo_modifier=0, C = 0) or approval_check(Girl, 400, "I", taboo_modifier=0, C = 0)):
+            elif Tempshame <= 15 and (approval_check(Girl, 1700, taboo_modifier=0, cologne = 0) or approval_check(Girl, 400, "I", taboo_modifier=0, cologne = 0)):
                 ch_v "It looks totally hot, right?"
             elif Custom == 7:
 
@@ -1638,13 +4504,13 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
                 $ Girl.change_face("_bemused", 1)
                 ch_v "I could swim in this. . ."
-            elif Tempshame <= 25 and (approval_check(Girl, 2300, taboo_modifier=0, C = 0) or approval_check(Girl, 700, "I", taboo_modifier=0, C = 0)):
+            elif Tempshame <= 25 and (approval_check(Girl, 2300, taboo_modifier=0, cologne = 0) or approval_check(Girl, 700, "I", taboo_modifier=0, cologne = 0)):
                 ch_v "I guess this is fine. . ."
             elif Tempshame <= 25:
                 $ Girl.change_face("_angry", 1)
                 ch_v "I really couldn't wear this out."
                 $ Agree = 0
-            elif (approval_check(Girl, 2500, taboo_modifier=0, C = 0) or approval_check(Girl, 800, "I", taboo_modifier=0, C = 0)):
+            elif (approval_check(Girl, 2500, taboo_modifier=0, cologne = 0) or approval_check(Girl, 800, "I", taboo_modifier=0, cologne = 0)):
                 $ Girl.change_face("_bemused", 1)
                 ch_v "It's pretty hot, right?"
             else:
@@ -1774,79 +4640,3 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
         elif Girl == JubesX:
             ch_v "That was kinda. . . private. . ."
     return
-
-
-
-
-
-
-
-
-
-
-
-label Display_dress_screen(Girl=focused_Girl):
-    if renpy.showing('dress_screen'):
-        return True
-
-    if Girl == StormX:
-        if not Girl.taboo or StormX in Rules:
-            return True
-        else:
-            ch_s "I'm afraid rules are rules."
-
-    if Girl.taboo:
-        return False
-
-    $ Girl.change_face("_bemused",1,eyes="_side")
-    if "screen" in Girl.daily_history:
-        pass
-    elif Girl == RogueX:
-        ch_r "I'm not really comfortable like this."
-    elif Girl == KittyX:
-        ch_k "I'm getting kinda exposed here."
-    elif Girl == EmmaX:
-        ch_e "I'm feeling a bit exposed here. . ."
-    elif Girl == LauraX:
-        ch_l "I don't know about showing this much skin."
-    elif Girl == JeanX:
-        ch_j "I don't think you're ready for this. . ."
-    elif Girl == JeanX:
-        ch_j "I don't think you're ready for this. . ."
-    elif Girl == JubesX:
-        ch_v "I don't know, this is moving a little fast. . ."
-    $ Girl.add_word(1,0, "screen")
-    $ Girl.change_face("_bemused",1)
-    Girl.voice "Mind if I get behind a dressing screen?"
-    menu:
-        extend ""
-        "Go ahead":
-            show dress_screen zorder 150
-            if Girl == RogueX:
-                ch_r "Thanks."
-            elif Girl == KittyX:
-                ch_k "Great."
-            elif Girl == EmmaX:
-                ch_e "Thank you."
-            elif Girl == LauraX:
-                ch_l "K."
-            elif Girl == JeanX:
-                ch_j "Good."
-            elif Girl == JubesX:
-                ch_v "Oh, thanks. . ."
-            return True
-        "No, don't":
-            if Girl == RogueX:
-                ch_r "Fine then. . ."
-            elif Girl == KittyX:
-                ch_k "Ok then. . ."
-            elif Girl == EmmaX:
-                ch_e "Fair enough. . ."
-            elif Girl == LauraX:
-                ch_l "Ok. . ."
-            elif Girl == JeanX:
-                ch_j "Ok then."
-            elif Girl == JubesX:
-                ch_v "Well, fine. . ."
-
-    return False

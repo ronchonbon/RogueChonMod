@@ -1292,7 +1292,7 @@ label addiction_ultimatum:
                 jump addiction_bad_end
         if not between_event_count and approval_check(Girl, 1200, "LO"):
             $ between_event_count += 1
-            
+
         if between_event_count:
             if Girl == RogueX:
                 ch_r "I'll still need a bit more than that. . ."
@@ -1595,6 +1595,9 @@ label addiction_bad_end:
             "[Girl.name] heads out."
 
         call remove_girl (Girl)
+
+    $ renpy.pop_call()
+    $ renpy.pop_call()
 
     return
 

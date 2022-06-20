@@ -419,7 +419,7 @@ label chat_menu:
                 "Back":
                     pass
         "Change her":
-            call change_girl(Girl)
+            call change_attributes(Girl)
         "Add her to party" if Girl not in Party and Girl.location == bg_current:
             ch_p "Could you follow me for a bit?"
 
@@ -599,6 +599,7 @@ label switch_chat:
         return
 
     $ Girl = temp_Girl
+
     call shift_focus(Girl)
 
     if "_angry" not in Girl.recent_history:
@@ -619,20 +620,20 @@ label switch_chat:
 
     return
 
-label change_girl(Girl):
+label change_attributes(Girl):
     call shift_focus(Girl)
 
     while True:
         menu:
             ch_p "Let's talk about you."
-            "Wardrobe":
+            "Your wardrobe.":
                 ch_p "I wanted to talk about your style."
 
                 if bg_current == "bg_halloween":
                     Girl.voice "Not at the party. . ."
                 else:
                     call taboo_level
-                    call expression Girl.tag + "_Clothes"
+                    call change_wardrobe(Girl)
             "Shift her personality" if approval_check(Girl, 900, "L", taboo_modifier=0) or approval_check(Girl, 900, "O", taboo_modifier=0) or approval_check(Girl, 900, "I", taboo_modifier=0):
                 ch_p "Could we talk about us?"
 

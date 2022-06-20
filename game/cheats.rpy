@@ -61,8 +61,8 @@ label cheat_editor(Girl):
                         $ Girl.addiction -= 10
                     "Back":
                         pass
-            "Wardrobe":
-                call wardrobe_editor(Girl)
+            # "Wardrobe":
+            #     call wardrobe_editor(Girl)
             "Return":
                 call checkout
 
@@ -186,10 +186,14 @@ label wardrobe_editor(Girl):
                             $ Girl.outfit["dress"] = ""
                             $ Girl.dress_top_pulled_down = False
                             $ Girl.dress_upskirt = False
+                        "Remove [Girl.outfit[bodysuit]]" if Girl.outfit["bodysuit"]:
+                            $ Girl.outfit["bodysuit"] = ""
+                            $ Girl.bodysuit_top_pulled_aside = False
+                            $ Girl.bodysuit_bottom_pulled_aside = False
                         "Add catsuit" if Girl == RogueX:
-                            $ Girl.outfit["dress"] = "_catsuit"
+                            $ Girl.outfit["bodysuit"] = "_catsuit"
                         "Add Raven suit" if Girl == RogueX:
-                            $ Girl.outfit["dress"] = "_raven"
+                            $ Girl.outfit["bodysuit"] = "_raven_suit"
                         "Toggle Raven cloak" if Girl == RogueX:
                             if Girl.outfit["cloak"] == "_raven_cloak":
                                 $ Girl.outfit["cloak"] = ""
@@ -198,27 +202,36 @@ label wardrobe_editor(Girl):
                         "Add blue dress" if Girl == RogueX:
                             $ Girl.outfit["dress"] = "_blue_dress"
                         "Add one-piece swimsuit" if Girl == RogueX:
-                            $ Girl.outfit["dress"] = "_onepiece_swimsuit"
+                            $ Girl.outfit["bodysuit"] = "_swimsuit"
                         "Add sexy swimsuit" if Girl == RogueX:
-                            $ Girl.outfit["dress"] = "_sexy_swimsuit"
+                            $ Girl.outfit["bodysuit"] = "_sexy_swimsuit"
                         "Add red dress" if Girl == RogueX:
                             $ Girl.outfit["dress"] = "_red_dress"
                         "Add Chinese dress" if Girl == KittyX:
-                            $ Girl.outfit["dress"] = "_chinese"
+                            $ Girl.outfit["dress"] = "_chinese_dress"
                         "Add sci-fi suit" if Girl == JeanX:
                             $ Girl.arm_pose = 1
-                            $ Girl.outfit["bottom"] = ""
-                            $ Girl.outfit["dress"] = "_sci_fi"
-                        "Pull top up/down":
+                            $ Girl.outfit["bodysuit"] = "_sci_fi"
+                        "Pull top up/down" if Girl.outfit["dress"]:
                             if Girl.dress_top_pulled_down:
                                 $ Girl.dress_top_pulled_down = False
                             else:
                                 $ Girl.dress_top_pulled_down = True
-                        "Pull skirt up/down":
+                        "Pull skirt up/down" if Girl.outfit["dress"]:
                             if Girl.dress_upskirt:
                                 $ Girl.dress_upskirt = False
                             else:
                                 $ Girl.dress_upskirt = True
+                        "Pull top aside" if Girl.outfit["bodysuit"]:
+                            if Girl.bodysuit_top_pulled_aside:
+                                $ Girl.bodysuit_top_pulled_aside = False
+                            else:
+                                $ Girl.bodysuit_top_pulled_aside = True
+                        "Pull bottom aside" if Girl.outfit["bodysuit"]:
+                            if Girl.bodysuit_bottom_pulled_aside:
+                                $ Girl.bodysuit_bottom_pulled_aside = False
+                            else:
+                                $ Girl.bodysuit_bottom_pulled_aside = True
                         "Back":
                             jump wardrobe_menu
 
@@ -399,6 +412,11 @@ label wardrobe_editor(Girl):
                                 $ Girl.dress_upskirt = False
                             else:
                                 $ Girl.dress_upskirt = True
+                        "Pull bottom aside" if Girl.wearing_bodysuit:
+                            if Girl.bodysuit_bottom_pulled_aside:
+                                $ Girl.bodysuit_bottom_pulled_aside = False
+                            else:
+                                $ Girl.bodysuit_bottom_pulled_aside = True
                         "Toggle grool":
                             if not Girl.grool:
                                 $ Girl.grool = 1
@@ -425,11 +443,11 @@ label wardrobe_editor(Girl):
                                     $ Girl.outfit["hose"] = "_stockings_and_garterbelt"
                                 "Add pantyhose":
                                     $ Girl.outfit["hose"] = "_pantyhose"
-                                "Add tights":
-                                    $ Girl.outfit["hose"] = "_tights"
                                 "Add ripped pantyhose":
                                     $ Girl.outfit["hose"] = "_ripped_pantyhose"
-                                "Add ripped tights":
+                                "Add tights" if Girl == RogueX:
+                                    $ Girl.outfit["hose"] = "_tights"
+                                "Add ripped tights" if Girl == RogueX:
                                     $ Girl.outfit["hose"] = "_ripped_tights"
                                 "Add knee stockings" if Girl == KittyX:
                                     $ Girl.outfit["hose"] = "_knee_stockings"
@@ -491,13 +509,13 @@ label wardrobe_editor(Girl):
                             call face_editor(Girl)
                         "Toggle arm pose":
                             if Girl.arm_pose == 1:
-                                if Girl == JeanX and Girl.outfit["dress"] == "_sci_fi":
-                                    $ Girl.outfit["dress"] = ""
+                                if Girl == JeanX and Girl.outfit["bodysuit"] == "_sci_fi":
+                                    $ Girl.outfit["bodysuit"] = ""
 
                                 $ Girl.arm_pose = 2
                             else:
-                                if Girl == EmmaX and Girl.outfit["dress"] == "_dommef":
-                                    $ Girl.outfit["dress"] = ""
+                                if Girl == EmmaX and Girl.outfit["bodysuit"] == "_domme_suit":
+                                    $ Girl.outfit["bodysuit"] = ""
                                 elif Girl == EmmaX and Girl.outfit["gloves"] == "_spiked_bracelets":
                                     $ Girl.outfit["gloves"] = ""
 
@@ -522,7 +540,7 @@ label wardrobe_editor(Girl):
                             elif Girl.outfit["hair"] == "_wet":
                                 $ Girl.outfit["hair"] = "_cosplay"
 
-                            $ Girl.outfit["back_hair"] = Girl.outfit["hair"]
+                            $ Girl.outfit["hair_back"] = Girl.outfit["hair"]
                         "Toggle hair" if Girl == KittyX:
                             if Girl.outfit["hair"] == "_long":
                                 $ Girl.outfit["hair"] = "_evo"
@@ -531,7 +549,7 @@ label wardrobe_editor(Girl):
                             elif Girl.outfit["hair"] == "_wet":
                                 $ Girl.outfit["hair"] = "_long"
 
-                            $ Girl.outfit["back_hair"] = Girl.outfit["hair"]
+                            $ Girl.outfit["hair_back"] = Girl.outfit["hair"]
                         "Toggle hair" if Girl == JeanX:
                             if Girl.outfit["hair"] == "_pony":
                                 $ Girl.outfit["hair"] = "_short"
@@ -540,7 +558,7 @@ label wardrobe_editor(Girl):
                             elif Girl.outfit["hair"] == "_wet":
                                 $ Girl.outfit["hair"] = "_pony"
 
-                            $ Girl.outfit["back_hair"] = Girl.outfit["hair"]
+                            $ Girl.outfit["hair_back"] = Girl.outfit["hair"]
                         "Toggle hair" if Girl == StormX:
                             if Girl.outfit["hair"] == "_long":
                                 $ Girl.outfit["hair"] = "_mohawk"
@@ -555,7 +573,7 @@ label wardrobe_editor(Girl):
                             elif Girl.outfit["hair"] == "_wet_short":
                                 $ Girl.outfit["hair"] = "_long"
 
-                            $ Girl.outfit["back_hair"] = Girl.outfit["hair"]
+                            $ Girl.outfit["hair_back"] = Girl.outfit["hair"]
                         "Toggle hat" if Girl == EmmaX:
                             if Girl.outfit["face_outer_accessory"] == "_hat":
                                 $ Girl.outfit["face_outer_accessory"] = "_hat"

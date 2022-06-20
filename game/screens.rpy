@@ -237,9 +237,6 @@ screen main_menu():
         textbutton _("Start Game") action Start()
         textbutton _("Load Game") action ShowMenu("load")
         textbutton _("Preferences") action ShowMenu("preferences")
-        textbutton _("Help") action Help()
-        textbutton _("Disclaimer") action Show("Disclaimer_screen")
-        textbutton _("Patreon") action OpenURL("http://www.patreon.com/OniArtist")
         textbutton _("Quit") action Quit(confirm=False)
 
 init -2:
@@ -263,7 +260,6 @@ screen navigation():
         textbutton _("Save Game") action ShowMenu("save")
         textbutton _("Load Game") action ShowMenu("load")
         textbutton _("Main Menu") action MainMenu()
-        textbutton _("Help") action Help()
         textbutton _("Quit") action Quit()
 
 init -2:

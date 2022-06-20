@@ -1979,7 +1979,7 @@ label otherwise_not_interested_lines(Girl, action):
         $ lines = ["You wish.",
             "Hmmm, no."
             "No. Thank you.",
-            "I don't think so, [EmmaX.player_petname].",
+            "I don't think so, " + Girl.player_petname + ".",
             "I'm really not comfortable with that. . .",
             "Let's not, ok " + Girl.player_petname + "?",
             "I'd rather not today. . .",
@@ -2074,7 +2074,7 @@ label otherwise_not_interested_lines(Girl, action):
             "I would rather not right now though.",
             "Perhaps later, " + Girl.player_petname + ". . .",
             "Perhaps later, " + Girl.player_petname + ".",
-            "I do not think so, [StormX.player_petname].",
+            "I do not think so, " + Girl.player_petname + ".",
             "We don't need any toys, do we, " + Girl.player_petname + "?",
             "I don't think we need any toys, " + Girl.player_petname + ".",
             "Not now, " + Girl.player_petname + ". . .",
@@ -4294,7 +4294,7 @@ label first_action_approval_mostly_obedience_lines(Girl, action):
             "If that's what you want, " + Girl.player_petname + ". . .",
             "If you enjoy that, " + Girl.player_petname + ". . .",
             "If you insist, " + Girl.player_petname + ". . .",
-            "If that's what you're into, [EmmaX.player_petname]. . .",
+            "If that's what you're into, " + Girl.player_petname + ". . .",
             "I expected we'd get here at some point. . .",
             "If that's what works for you. . ."]
     elif Girl == LauraX:
@@ -4323,7 +4323,7 @@ label first_action_approval_mostly_obedience_lines(Girl, action):
             "If that is what you want. . .",
             "If you enjoy that, " + Girl.player_petname + ". . .",
             "If that is what you wish, " + Girl.player_petname + ". . .",
-            "If you enjoy watching, [StormX.player_petname]. . .",
+            "If you enjoy watching, " + Girl.player_petname + ". . .",
             "I expected we would get here at some point. . .",
             "If that is what works for you. . ."]
     elif Girl == JubesX:
@@ -5956,7 +5956,7 @@ label masturbation_just_got_here_cock_out_lines(Girl, action):
     elif Girl == KittyX:
         $ lines = ["Long enough to whip that out?"]
     elif Girl == EmmaX:
-        $ EmmaX.eyes = "_squint"
+        $ Girl.eyes = "_squint"
 
         $ lines = ["Long enough to raise your sails?"]
     elif Girl == LauraX:
@@ -6259,7 +6259,7 @@ label meeting_in_shower_lines(Girl, approval, first, someone_left):
             ch_r "Yeah, hey."
     elif Girl == KittyX:
         if first:
-            ch_k "Hey, [KittyX.player_petname]."
+            ch_k "Hey, [Girl.player_petname]."
 
             if "showered" in Girl.recent_history:
                 ch_k "I just got finished."

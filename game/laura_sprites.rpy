@@ -5,18 +5,18 @@ layeredimage Laura_sprite standing:
     if not LauraX.outfit["jacket"]:
         Null()
     elif LauraX.jacket_opened:
-        "images/Laura_standing/Laura_standing_back_outer_accessory[LauraX.outfit[jacket]]_up.png"
+        "images/Laura_standing/Laura_standing_jacket[LauraX.outfit[jacket]]_back_up.png"
     else:
-        "images/Laura_standing/Laura_standing_back_outer_accessory[LauraX.outfit[jacket]].png"
+        "images/Laura_standing/Laura_standing_jacket[LauraX.outfit[jacket]]_back.png"
 
     if LauraX.outfit["underwear"] and LauraX.underwear_pulled_down:
-        "images/Laura_standing/Laura_standing_back_inner_accessory[LauraX.outfit[underwear]]_down.png"
+        "images/Laura_standing/Laura_standing_underwear[LauraX.outfit[underwear]]_back_down.png"
 
     always:
         "images/Laura_standing/Laura_standing_arm[LauraX.arm_pose]_right.png"
 
     if not renpy.showing("Laura_sprite blowjob"):
-        "Laura_back_hair" pos (0.102, 0.19) zoom 0.5
+        "Laura_hair_back" pos (0.209, 0.371) zoom 0.5
 
     always:
         "images/Laura_standing/Laura_standing_body.png"
@@ -37,7 +37,7 @@ layeredimage Laura_sprite standing:
         Null()
     elif LauraX.outfit["gloves"] == "_gloves":
         "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose]_right.png"
-    elif LauraX.outfit["gloves"] == "_bunny_wrists" and LauraX.arm_pose == 1:
+    elif LauraX.outfit["gloves"] == "_bunny_gloves" and LauraX.arm_pose == 1:
         "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose].png"
     else:
         "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose].png"
@@ -69,12 +69,14 @@ layeredimage Laura_sprite standing:
     else:
         "images/Laura_standing/Laura_standing_underwear[LauraX.outfit[underwear]].png"
 
-    if LauraX.outfit["hose"] == "_stockings_and_garterbelt":
+    if LauraX.hose_pulled_down:
+        Null()
+    elif LauraX.outfit["hose"] == "_stockings_and_garterbelt":
         "images/Laura_standing/Laura_standing_hose_stockings.png"
     elif LauraX.outfit["hose"]:
         "images/Laura_standing/Laura_standing_hose[LauraX.outfit[hose]].png"
 
-    if LauraX.outfit["hose"] == "_stockings_and_garterbelt":
+    if not LauraX.hose_pulled_down and LauraX.outfit["hose"] == "_stockings_and_garterbelt":
         "images/Laura_standing/Laura_standing_hose_garterbelt.png"
 
     if LauraX.outfit["bottom"] and LauraX.grool > 1:
@@ -91,15 +93,15 @@ layeredimage Laura_sprite standing:
     always:
         "Laura_spunk_animations"
 
+    if LauraX.outfit["bodysuit"]:
+        "images/Laura_standing/Laura_standing_bodysuit[LauraX.outfit[bodysuit]].png"
+
     if not LauraX.outfit["bottom"]:
         Null()
     elif LauraX.bottom_pulled_down or LauraX.upskirt:
         "images/Laura_standing/Laura_standing_bottom[LauraX.outfit[bottom]]_down.png"
     else:
         "images/Laura_standing/Laura_standing_bottom[LauraX.outfit[bottom]].png"
-
-    if LauraX.outfit["dress"]:
-        "images/Laura_standing/Laura_standing_dress[LauraX.outfit[dress]].png"
 
     if LauraX.outfit["top"]:
         "images/Laura_standing/Laura_standing_top[LauraX.outfit[top]].png"
@@ -108,7 +110,7 @@ layeredimage Laura_sprite standing:
         "images/Laura_standing/Laura_standing_neck[LauraX.outfit[neck]].png"
 
     if not renpy.showing("Laura_sprite blowjob"):
-        "Laura_head" pos (0.102, 0.19) zoom 0.5
+        "Laura_head" pos (0.209, 0.371) zoom 0.5
 
     if LauraX.outfit["piercings"] and LauraX.pussy_covered:
         "images/Laura_standing/Laura_standing_piercings_pussy[LauraX.outfit[piercings]]_covered.png"
@@ -157,13 +159,13 @@ layeredimage Laura_sprite standing:
     # always:
     #     "Laura_standing_fondling_animations"
 
-    anchor (0.5, 0.0) offset (40, 150)
+    anchor (0.5, 0.0) offset (40, 170) zoom 0.5
 
-layeredimage Laura_back_hair:
+layeredimage Laura_hair_back:
     if LauraX.wet:
-        "images/Laura_standing/Laura_standing_back_hair_wet.png"
+        "images/Laura_standing/Laura_standing_hair_wet_back.png"
     else:
-        "images/Laura_standing/Laura_standing_back_hair[LauraX.outfit[hair]].png"
+        "images/Laura_standing/Laura_standing_hair[LauraX.outfit[hair]]_back.png"
 
     anchor (0.5, 0.5)
 
@@ -171,9 +173,9 @@ layeredimage Laura_head:
     if not renpy.showing("Laura_sprite sex"):
         Null()
     elif LauraX.wet:
-        "images/Laura_sex/Laura_sex_back_hair_wet.png"
+        "images/Laura_sex/Laura_sex_hair_wet_back.png"
     else:
-        "images/Laura_sex/Laura_sex_back_hair[LauraX.outfit[hair]].png"
+        "images/Laura_sex/Laura_sex_hair[LauraX.outfit[hair]]_back.png"
 
     always:
         "images/Laura_standing/Laura_standing_head[LauraX.blushing].png"
@@ -209,7 +211,7 @@ layeredimage Laura_head:
     if renpy.showing("Laura_sprite titjob") or renpy.showing("Laura_sprite sex"):
         Null()
     else:
-        "images/Laura_standing/Laura_standing_mid_hair.png"
+        "images/Laura_standing/Laura_standing_hair_mid.png"
 
     if renpy.showing("Laura_sprite sex") and LauraX.wet:
         "images/Laura_sex/Laura_sex_hair_wet.png"
@@ -244,8 +246,8 @@ image Laura_handjob_over:
 
     anchor (0.5, 0.5)
 
-image Laura_titjob_mid_hair:
-    "images/Laura_standing/Laura_standing_mid_hair.png"
+image Laura_titjob_hair_mid:
+    "images/Laura_standing/Laura_standing_hair_mid.png"
 
     anchor (0.5, 0.5)
 

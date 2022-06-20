@@ -136,7 +136,7 @@ label JeanMeet:
 
         pause 1
 
-        $ JeanX.fix_clothing()
+        call fix_clothing(JeanX)
 
         $ JeanX.change_face("_sly",0,eyes="_side")
         $ JeanX.arm_pose = 1

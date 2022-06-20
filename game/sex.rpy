@@ -502,14 +502,18 @@ label set_secondary_action(Girl):
             $ action = "fondle_breasts"
         "Also suck her breasts." if Player.primary_action not in mouth_actions and Player.secondary_action != "suck_breasts":
             $ action = "suck_breasts"
-        "Also fondle her pussy." if Player.primary_action not in ["fondle_pussy", "finger_pussy"] and Player.secondary_action not in ["fondle_pussy", "finger_pussy"]:
+        "Also fondle her pussy." if "fondle_pussy" not in [Player.primary_action, Player.secondary_action]:
             $ action = "fondle_pussy"
-        "Also finger her pussy." if Player.primary_action not in ["fondle_pussy", "finger_pussy"] and Player.secondary_action not in ["fondle_pussy", "finger_pussy"]:
+        "Also finger her pussy." if Player.primary_action not in pussy_insertion_actions and Player.secondary_action not in pussy_insertion_actions:
             $ action = "finger_pussy"
+        "Also put a dildo in her pussy." if Player.primary_action not in pussy_insertion_actions and Player.secondary_action not in pussy_insertion_actions:
+            $ action = "dildo_pussy"
         "Also fondle her ass." if "fondle_ass" not in [Player.primary_action, Player.secondary_action]:
             $ action = "fondle_ass"
-        "Also finger her ass." if "finger_ass" not in [Player.primary_action, Player.secondary_action]:
+        "Also finger her ass." if Player.primary_action not in anal_insertion_actions and Player.secondary_action not in anal_insertion_actions:
             $ action = "finger_ass"
+        "Also put a dildo in her ass." if Player.primary_action not in anal_insertion_actions and Player.secondary_action not in anal_insertion_actions:
+            $ action = "dildo_ass"
         "Also jack it." if Player.secondary_action != "jerking_off":
             call jerking_off(Girl)
 

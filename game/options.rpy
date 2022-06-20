@@ -2,7 +2,7 @@ init -1 python hide:
 
     config.developer = True
 
-    config.image_cache_size_mb = 1024
+    # config.image_cache_size_mb = 8192
 
     config.screen_width = 1920
     config.screen_height = 1080
@@ -10,7 +10,7 @@ init -1 python hide:
     config.window_title = u"Rogue-Like Chonky Mod"
 
     config.name = "Rogue-Like Chonky Mod"
-    config.version = "0.2e"
+    config.version = "0.2g"
 
     theme.tv(
         widget = "#6A7183",
@@ -21,8 +21,8 @@ init -1 python hide:
         disabled_text = "#DFBA14",
         label = "#39435E",
         frame = "#ADB9CC",
-        mm_root = "images/titleimage.png",
-        gm_root = "images/menuimage.png",
+        mm_root = "images/titleimage.jpg",
+        gm_root = "images/menuimage.jpg",
         rounded_window = False)
 
     style.window.background = Frame("images/chatbox.png", 12, 12)

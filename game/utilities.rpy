@@ -551,7 +551,7 @@ label lesbian_check(Girls = []):
             $ Partner = Girls[1]
         elif Girls[1].likes[Girls[0].tag] >= 800 and Girls[0].likes[Girls[1].tag] >= 800:
             $ Partner = Girls[1]
-        elif Girls[1].thirst >= 90 and Girls[0]..likes[Girls[1].tag] >= 600:
+        elif Girls[1].thirst >= 90 and Girls[0].likes[Girls[1].tag] >= 600:
             $ Partner = Girls[1]
         else:
             $ Girls.remove(Girls[1])

@@ -1,6 +1,6 @@
 layeredimage Mystique_sprite standing normal:
     always:
-        "Mystique_back_hair" pos (0.275, 0.165) zoom 0.43
+        "Mystique_hair_back" pos (0.54, 0.32) zoom 0.43
 
     always:
         "images/Mystique_standing/Mystique_standing_body.png"
@@ -51,12 +51,12 @@ layeredimage Mystique_sprite standing normal:
         "images/Mystique_standing/Mystique_standing_gloves[MystiqueX.outfit[gloves]]1.png"
 
     always:
-        "Mystique_head" pos (0.275, 0.165) zoom 0.43
+        "Mystique_head" pos (0.54, 0.32) zoom 0.43
 
-    anchor (0.5, 0.0) offset (0, 180) zoom 1.1
+    anchor (0.5, 0.0) offset (0, 180) zoom 0.5
 
-image Mystique_back_hair:
-    "images/Mystique_standing/Mystique_standing_back_hair_long.png"
+image Mystique_hair_back:
+    "images/Mystique_standing/Mystique_standing_hair_long_back.png"
 
     anchor (0.5, 0.5)
 
@@ -135,7 +135,7 @@ layeredimage Mystique_sprite standing disguise:
     always:
         "Raven_head" pos (0.275, 0.165) zoom 0.43
 
-    anchor (0.5, 0.0) offset (0, 180) zoom 1.1
+    anchor (0.5, 0.0) offset (0, 180) zoom 0.5
 
 layeredimage Raven_head:
     always:

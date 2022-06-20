@@ -242,9 +242,9 @@ layeredimage Emma_sprite handjob:
 
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
 
-image Emma_titjob_back_hair_animation0:
+image Emma_titjob_hair_back_animation0:
     animation
-    "Emma_blowjob_back_hair"
+    "Emma_blowjob_hair_back"
 
     subpixel True
     block:
@@ -252,9 +252,9 @@ image Emma_titjob_back_hair_animation0:
         ease 1.6 yoffset 0
         repeat
 
-image Emma_titjob_back_hair_animation1:
+image Emma_titjob_hair_back_animation1:
     animation
-    "Emma_blowjob_back_hair"
+    "Emma_blowjob_hair_back"
 
     subpixel True
     block:
@@ -264,9 +264,9 @@ image Emma_titjob_back_hair_animation1:
         ease 0.6 yoffset 0
         repeat
 
-image Emma_titjob_back_hair_animation2:
+image Emma_titjob_hair_back_animation2:
     animation
-    "Emma_blowjob_back_hair"
+    "Emma_blowjob_hair_back"
 
     subpixel True
     block:
@@ -275,9 +275,9 @@ image Emma_titjob_back_hair_animation2:
         ease 0.3 yoffset 20
         repeat
 
-image Emma_titjob_back_hair_animation3:
+image Emma_titjob_hair_back_animation3:
     animation
-    "Emma_blowjob_back_hair"
+    "Emma_blowjob_hair_back"
 
     subpixel True
     block:
@@ -287,9 +287,9 @@ image Emma_titjob_back_hair_animation3:
         pause 0.5
         repeat
 
-image Emma_titjob_back_hair_animation5:
+image Emma_titjob_hair_back_animation5:
     animation
-    "Emma_blowjob_back_hair"
+    "Emma_blowjob_hair_back"
 
     subpixel True
     block:
@@ -472,7 +472,7 @@ image Emma_titjob_breasts_animation5:
 
 layeredimage Emma_sprite titjob:
     always:
-        "Emma_titjob_back_hair_animation[action_speed]" pos (0.0, -0.24) zoom 0.56
+        "Emma_titjob_hair_back_animation[action_speed]" pos (0.0, -0.24) zoom 0.56
 
     always:
         "Emma_titjob_body_animation[action_speed]"

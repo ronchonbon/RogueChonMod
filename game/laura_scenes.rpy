@@ -2512,6 +2512,8 @@ label Laura_Dressup3:
             ch_p "Hey, [KittyX.name], what's going on?"
             ch_k "Hey, [KittyX.player_petname]! Come on in!"
 
+            $ bg_current = "bg_kitty"
+
             call clear_the_room ("all", 0, 1)
             call shift_focus (LauraX)
             $ KittyX.location = "bg_kitty"
@@ -2556,6 +2558,8 @@ label Laura_Dressup3:
                 return
             ch_k "Sure, [KittyX.player_petname]! Gimme a sec!"
             "[KittyX.name] unlocks the door and it swings open."
+
+            $ bg_current = "bg_kitty"
 
             call clear_the_room ("all", 0, 1)
             call shift_focus (LauraX)
@@ -2696,6 +2700,10 @@ label Laura_Dressup3:
             ch_l "See ya."
 
     $ round -= 20 if round >= 21 else round
+
+    $ bg_current = "bg_campus"
+
+    jump reset_location
     return
 
 

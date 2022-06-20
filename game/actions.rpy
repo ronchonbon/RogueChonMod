@@ -350,7 +350,7 @@ label before_action(Girl, action, context):
 
     return "continue"
 
-label action_cycle(Girl, action, context):
+label action_cycle(Girl, action):
     while round > 0:
         $ stack_depth = renpy.call_stack_depth()
 
