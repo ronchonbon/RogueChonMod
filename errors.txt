@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/jean_animations.rpy", line 54: expected statement.
-    5
-     ^
+File "game/player_sprites.rpy", line 122: layeredimage statement expects a non-empty block.
+    layeredimage Chibi_animations:
+                ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Mon Jun 20 21:02:06 2022
+Tue Jun 21 18:06:28 2022

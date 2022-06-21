@@ -1674,7 +1674,7 @@ label Flirt(Girl=0):
                             $ Girl.change_stat("love", 90, 2)
                             $ Girl.change_stat("obedience", 60, 3)
                             $ Girl.change_stat("inhibition", 60, 3)
-                            call before_action(Girl, "fondle_breasts", None)
+                            call before_action(Girl, "fondle_breasts")
                             call stop_all_actions (1)
                             return
                         "Nah, that was enough.":

@@ -1,12 +1,10 @@
 label study:
     $ Party = []
-    $ temp_Girls = all_Girls[:]
 
-    while temp_Girls:
-        if temp_Girls[0].location == bg_current:
-            $ Party.append(temp_Girls[0])
-
-        $ temp_Girls.remove(temp_Girls[0])
+    python:
+        for G in all_Girls:
+            if G.location == bg_current:
+                Party.append(G)
 
     if not Party:
         "There's nobody here to study with."
@@ -264,7 +262,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
             $ Party[0].taboo = 0
             $ taboo = 0
 
-        call before_action(Party[0], action, None)
+        call before_action(Party[0], action)
     elif action:
         if action == "snuggle" and len(Party) == 2:
             call check_if_second_minds(Party[0], Party[1])
@@ -368,7 +366,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
                 $ Party[0].taboo = 0
                 $ taboo = 0
 
-            call before_action(Party[0], action, None)
+            call before_action(Party[0], action)
         if len(Party) >= 2:
             $ Party[0].check_if_likes(Party[1], 900, 10, 1)
             $ Party[1].check_if_likes(Party[0], 900, 10, 1)

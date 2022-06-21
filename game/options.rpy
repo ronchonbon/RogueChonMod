@@ -2,7 +2,8 @@ init -1 python hide:
 
     config.developer = True
 
-    # config.image_cache_size_mb = 8192
+    config.cache_surfaces = True
+    config.image_cache_size_mb = 2048
 
     config.screen_width = 1920
     config.screen_height = 1080
@@ -10,7 +11,7 @@ init -1 python hide:
     config.window_title = u"Rogue-Like Chonky Mod"
 
     config.name = "Rogue-Like Chonky Mod"
-    config.version = "0.2h"
+    config.version = "0.2i"
 
     theme.tv(
         widget = "#6A7183",
@@ -134,4 +135,4 @@ init python:
 
     config.rollback_length = 500
 
-    config.layers = ['backdrop', 'master', 'nightmask', 'black', 'transient', 'screens', 'overlay']
+    config.layers = ['backdrop', 'master', 'black', 'transient', 'screens', 'overlay']

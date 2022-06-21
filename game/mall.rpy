@@ -36,7 +36,7 @@ label sex_shop:
                             $ Party[0].change_stat("inhibition", 50, 3)
 
                             if Party[0] == RogueX:
-                                ch_r "Oh, what's that for, [Girl.player_petname]?"
+                                ch_r "Oh, what's that for, [Party[0].player_petname]?"
                             elif Party[0] == KittyX:
                                 ch_k "Is that for. . ."
                             elif Party[0] == EmmaX:
@@ -1114,10 +1114,6 @@ label lingerie_shop:
                         $ item = "_harness_bra"
                     "Harness bra (locked)" if Girl.outfit["bra"] == "_harness_bra":
                         pass
-                    "Classic outfit bra" if Girl == RogueX and Girl.outfit["bra"] != "_classic_bra":
-                        $ item = "_classic_bra"
-                    "Classic outfit bra (locked)" if Girl.outfit["bra"] == "_classic_bra":
-                        pass
                     "Kitty bra" if Girl == KittyX and Girl.outfit["bra"] != "_kitty_bra":
                         $ item = "_kitty_bra"
                     "Kitty bra (locked)" if Girl.outfit["bra"] == "_kitty_bra":
@@ -1386,8 +1382,6 @@ label lingerie_shop:
                                 $ item = "_nighty"
                             "The harness bra." if "_harness_bra" in cart:
                                 $ item = "_harness_bra"
-                            "Rogue's classic outfit top." if "_classic_bra" in cart:
-                                $ item = "_classic_bra"
                             "The kitty bra." if "_kitty_bra" in cart:
                                 $ item = "_kitty_bra"
                             "The orange top." if "_orange_top" in cart:
@@ -1436,7 +1430,7 @@ label lingerie_shop:
                                     $ cost = 90
                                 elif item == ["_corset", "_kitty_panties"]:
                                     $ cost = 70
-                                elif item in ["_lace_panties", "_classic_bra"]:
+                                elif item in ["_lace_panties"]:
                                     $ cost = 110
                                 elif item in ["_tiger_panties", "_stockings_and_garterbelt"]:
                                     $ cost = 100
@@ -1732,6 +1726,10 @@ label clothing_shop:
                         $ item = "_blue_dress"
                     "Blue dress (locked)" if Girl.outfit["dress"] == "_blue_dress":
                         pass
+                    "Classic outfit bra" if Girl == RogueX and Girl.outfit["bra"] != "_classic_bra":
+                        $ item = "_classic_bra"
+                    "Classic outfit bra (locked)" if Girl.outfit["bra"] == "_classic_bra":
+                        pass
                     "Raven suit" if Girl == RogueX and Girl.outfit["bodysuit"] != "_raven_suit":
                         $ item = "_raven_suit"
                     "Raven suit (locked)" if Girl.outfit["bodysuit"] == "_raven_suit":
@@ -1923,6 +1921,29 @@ label clothing_shop:
                                 $ Girl.outfit["bodysuit"] = item
 
                             hide black_screen onlayer black
+                    elif item in bras:
+                        if Girl.seen_breasts or approval_check(Girl, 1000, taboo_modifier=2):
+                            $ Girl.change_face("_sexy")
+
+                            Girl.voice "Sure. . ."
+
+                            call change_bra(Girl, item, redress = False)
+
+                            Girl.voice ". . ."
+                        else:
+                            Girl.voice "I'll need some privacy here. . ."
+
+                            show black_screen onlayer black
+
+                            "You back out of the room for a moment. . ."
+
+                            $ Girl.outfit["jacket"] = ""
+                            $ Girl.outfit["top"] = ""
+                            $ Girl.outfit["dress"] = ""
+                            $ Girl.outfit["bodysuit"] = ""
+                            $ Girl.outfit["bra"] = item
+
+                            hide black_screen onlayer black
                     elif item in pants or item in skirts or item in shorts:
                         if Girl.seen_underwear or approval_check(Girl, 500, taboo_modifier=2):
                             $ Girl.change_face("_sexy")
@@ -2070,6 +2091,8 @@ label clothing_shop:
                                 $ item = "_red_dress"
                             "The blue dress." if "_blue_dress" in cart:
                                 $ item = "_blue_dress"
+                            "Rogue's classic outfit top." if "_classic_bra" in cart:
+                                $ item = "_classic_bra"
                             "The Raven suit." if "_raven_suit" in cart:
                                 $ item = "_raven_suit"
                             "The swimsuit." if "_swimsuit" in cart:
@@ -2134,7 +2157,7 @@ label clothing_shop:
                             else:
                                 if item in ["_raven_suit", "_catsuit", "_domme_suit"]:
                                     $ cost = 200
-                                elif item in ["_raven_cloak", "_opaque_fetish_top", "_sheer_fetish_top", "_opaque_fetish_pants", "_sheer_fetish_pants", "_red_dress", "_blue_dress"]:
+                                elif item in ["_raven_cloak", "_opaque_fetish_top", "_sheer_fetish_top", "_opaque_fetish_pants", "_sheer_fetish_pants", "_red_dress", "_blue_dress", "_classic_bra"]:
                                     $ cost = 100
                                 elif item in ["_classic_jacket", "_classic_pants", "_swimsuit", "_sexy_swimsuit", "_violet_shirt", "_black_and_blue_pants", "_domme_boots"]:
                                     $ cost = 75

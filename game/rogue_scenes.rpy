@@ -6,29 +6,14 @@ label prologue:
     scene background onlayer backdrop
     scene
 
+    show Chibi_cock
+
     if simulation:
         show blue_screen onlayer black
 
     "You recently discovered that you were a mutant when a Sentinel attacked your home.\nYou were rescued by a squad of X-Men and given this address."
     "You've arrived in the early evening at the Xavier Institute, where you've been promised a new home."
     "Things have been tough for mutants in the years since Apocalypse's fall, but this sounds like it might be a good deal."
-
-    if not simulation:
-        python:
-            Player.name = renpy.input("What is your name?", default = "Zero", length = 10)
-            Player.name = Player.name.strip()
-
-            if not Player.name :
-                Player.name  = "Zero"
-
-        menu:
-            "What is your skin color?"
-            "Green":
-                $ Player.color = "Green"
-            "White":
-                $ Player.color = "White"
-            "Black":
-                $ Player.color = "Black"
 
     show Xavier_sprite at sprite_location(stage_left) with dissolve
 

@@ -849,7 +849,7 @@ label Storm_Hairtalk:
                 $ StormX.change_stat("inhibition", 80, 1)
                 ch_s "I. . . suppose that I might accomodate that. . ."
 
-                call before_action(StormX, "kiss", None)
+                call before_action(StormX, "kiss")
             else:
                 $ StormX.change_stat("obedience", 80, -1)
                 ch_s "I do not think that I should do that. . ."
@@ -866,7 +866,7 @@ label Storm_Hairtalk:
                 $ StormX.change_stat("obedience", 50, 2)
                 $ StormX.change_stat("obedience", 80, 1)
 
-                call before_action(StormX, "fondle_breasts", None)
+                call before_action(StormX, "fondle_breasts")
             else:
                 $ StormX.change_face("_angry", 2)
                 ch_s "[StormX.player_petname]!"

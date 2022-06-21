@@ -1,11 +1,6 @@
 label meet_Emma:
     show black_screen onlayer black
 
-    $ last_name = get_last_name(Player)
-
-    $ EmmaX.player_petname = "Mr. " + last_name
-    $ EmmaX.player_petnames.append("Mr. " + last_name)
-
     $ bg_current = "bg_classroom"
 
     $ EmmaX.outfit_name = "casual1"
@@ -634,7 +629,7 @@ label Emma_Caught_Classroom:
                 if simulation:
                     return True
 
-                call before_action(EmmaX, "fondle_breasts", None)
+                call before_action(EmmaX, "fondle_breasts")
 
                 $ Player.primary_action = "fondle_breasts"
 
@@ -1705,7 +1700,7 @@ label Emma_Love_End:
             $ EmmaX.change_stat("obedience", 70, 10)
             ch_e "Hmm. . ."
 
-            call before_action(EmmaX, "sex", None)
+            call before_action(EmmaX, "sex")
         "I have something else in mind. . .[[choose another activity]":
             $ EmmaX.brows = "_confused"
             $ EmmaX.change_stat("obedience", 70, 25)

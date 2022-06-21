@@ -133,7 +133,7 @@ layeredimage Kitty_hair_back:
     if KittyX.wet:
         "images/Kitty_standing/Kitty_standing_hair_wet_back.png"
     elif KittyX.outfit["hair"] != "_evo":
-        "images/Kitty_standing/Kitty_standing_hair[KittyX.outfit[hair]]_hair.png"
+        "images/Kitty_standing/Kitty_standing_hair[KittyX.outfit[hair]]_back.png"
 
     anchor (0.5, 0.5)
 

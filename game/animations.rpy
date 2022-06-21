@@ -142,23 +142,23 @@ image black_screen:
 
 layeredimage background:
     always:
-        "images/background/sky_[current_time].png"
+        "images/backgrounds/sky_[current_time].png"
 
     if entering:
-        "images/background/bg_entry.png"
+        "images/backgrounds/bg_entry.png"
 
     if entering:
         Null()
     elif bg_current not in ["bg_campus", "bg_study", "bg_storm",  "bg_pool", "bg_mall"]:
-        "images/background/[bg_current].png"
+        "images/backgrounds/[bg_current].png"
     else:
-        "images/background/[bg_current]_[current_time].png"
+        "images/backgrounds/[bg_current]_[current_time].png"
 
     if bg_current == "bg_pool":
-        AlphaMask("bg_pool", "images/background/bg_pool_mask.png")
+        AlphaMask("bg_pool", "images/backgrounds/bg_pool_mask.png")
 
     if bg_current == "bg_restaurant":
-        "images/background/bg_restaurant_table.png"
+        "images/backgrounds/bg_restaurant_table.png"
 
     if entering or bg_current != "bg_classroom":
         Null()
@@ -179,10 +179,10 @@ layeredimage background:
         "Storm_sprite standing" pos (0.333, 0.167) zoom 0.387
 
     if bg_current == "bg_classroom":
-        "images/background/bg_classroom_front.png"
+        "images/backgrounds/bg_classroom_front.png"
 
     if bg_current == "bg_classroom" and time_index < 2 and weekday < 5:
-        "images/background/bg_classroom_pupils.png"
+        "images/backgrounds/bg_classroom_pupils.png"
 
 transform dripping(x_offset = 0, start = 0, transparency = 1.0):
     offset (x_offset, start) alpha transparency
@@ -271,38 +271,6 @@ image dildo:
     "images/DildoIn.png"
 
     anchor (0.5, 0.5)
-
-image Kitty_dildo_pussy_animation:
-    animation
-    "dildo"
-
-    subpixel True
-    block:
-        ease 1 yoffset -60
-        pause 1
-        ease 3 yoffset 0
-        repeat
-
-layeredimage Kitty_dildo_pussy_animations:
-    always:
-        "Kitty_dildo_pussy_animation" pos (0.2923, 0.595) zoom 1.22
-
-image Kitty_dildo_anal_animation:
-    animation
-    "dildo"
-
-    subpixel True
-    block:
-        ease 1 yoffset -60
-        pause 1
-        ease 3 yoffset 0
-        repeat
-
-layeredimage Kitty_dildo_anal_animations:
-    always:
-        "Kitty_dildo_anal_animation" pos (0.2925, 0.64)
-
-
 
 
 
@@ -591,152 +559,6 @@ image TestUIAnimation:
 
 
 
-
-
-
-image Zero_Chibicock:
-    LiveComposite(
-        (225,350),
-        (0, 0), ConditionSwitch(
-            "Player.color == 'White'", "images/Chibi_Cock_P.png",
-            "Player.color == 'Black'", "images/Chibi_Cock_B.png",
-            "Player.color == 'Green'", "images/Chibi_Cock_G.png",
-            "True", Null()))
-
-    anchor (0.5, 0.5)
-
-image Chibi_Null:
-
-    contains:
-        "Zero_Chibicock"
-        anchor (0.5, 0.5)
-        pos (0, 0)
-        rotate 0
-        xzoom 1
-    pos (75,675)
-    zoom 0.5
-
-image Chibi_jerking_off:
-
-    contains:
-        "Zero_Chibicock"
-        anchor (0.5, 0.5)
-        pos (0, 0)
-        rotate 0
-        xzoom 1
-    contains:
-        "images/Chibi_Hand_M.png"
-        pos (-10,-80)
-        anchor (0.5, 0.5)
-        rotate 20
-        block:
-            ease 0.3 rotate -10 pos (0,50)
-            ease 0.7 rotate 20 pos (-10,-80)
-            repeat
-    pos (75,675)
-    zoom 0.5
-
-image Chibi_Handy:
-
-    contains:
-        "Zero_Chibicock"
-        anchor (0.5, 0.5)
-        pos (0, 0)
-        rotate 0
-        xzoom 1
-    contains:
-        ConditionSwitch(
-            "(Partner == StormX and second_girl_main_action == 'hand') or (focused_Girl == StormX and girl_secondary_action == 'hand')", "images/Chibi_Hand_S.png",
-            "True", "images/Chibi_Hand_G.png"
-            )
-
-        pos (0,-110)
-        anchor (0.5, 0.5)
-        rotate -10
-        block:
-            ease 0.3 rotate 0 pos (10, 10)
-            ease 0.7 rotate -10 pos (0,-130)
-            repeat
-    pos (75,675)
-    zoom 0.5
-
-image Chibi_mouth_Mask:
-    "images/Chibi_mouth_Mask.png"
-    anchor (0.5, 0.5)
-
-image Chibi_mouth_Rogue:
-    "images/Chibi_mouth_R.png"
-    anchor (0.5, 0.5)
-image Chibi_mouth_Kitty:
-    "images/Chibi_mouth_K.png"
-    anchor (0.5, 0.5)
-image Chibi_mouth_Emma:
-    "images/Chibi_mouth_E.png"
-    anchor (0.5, 0.5)
-image Chibi_mouth_Storm:
-    "images/Chibi_mouth_S.png"
-    anchor (0.5, 0.5)
-
-image Chibi_Sucking:
-
-    contains:
-        "Chibi_SuckingB"
-    pos (75,675)
-
-image Chibi_SuckingB:
-
-    LiveComposite(
-        (225,350),
-        (0, 0), ConditionSwitch(
-            "Partner == RogueX", "Chibi_mouth_Rogue",
-            "Partner == EmmaX", "Chibi_mouth_Emma",
-            "Partner == StormX", "Chibi_mouth_Storm",
-            "True", "Chibi_mouth_Kitty"
-            ),
-        (0, 0), AlphaMask("Chibi_Sucking_Cock", "Chibi_mouth_Mask")
-        )
-    pos (7, 0)
-    anchor (0.5, 0.5)
-    zoom 0.5
-    xzoom 0.71
-    block:
-        easeout 0.25 rotate 0 pos (2,48) xzoom 1
-        easein 0.25 rotate 0 pos (6,92) xzoom 1
-        easeout 0.5 rotate 0 pos (2,48) xzoom 1
-        easein 0.5 rotate 0 pos (5, 0) xzoom 0.71
-        repeat
-
-image Chibi_Sucking_Cock:
-
-    contains:
-        "Zero_Chibicock"
-        pos (100, 175)
-        xzoom 1.5
-        anchor (0.5, 0.5)
-
-        rotate 0
-        block:
-            easeout 0.25 rotate 0 pos (110,80) xzoom 1
-            easein 0.25 rotate 0 pos (100,-10) xzoom 1
-            easeout 0.5 rotate 0 pos (110,80) xzoom 1
-            easein 0.5 rotate 0 pos (100, 175) xzoom 1.5
-            repeat
-
-
-
-
-image Chibi_UI:
-
-    contains:
-        ConditionSwitch(
-            "'cockout' not in Player.recent_history", Null(),
-            "Player.secondary_action == 'jerking_off'", "Chibi_jerking_off",
-            "girl_secondary_action == 'hand' or second_girl_main_action == 'hand'", "Chibi_Handy",
-            "second_girl_main_action == 'blow'", "Chibi_Sucking",
-            "True", "Chibi_Null",
-            )
-
-image night_mask = "images/nightmask.png"
 
 image UI_Backpack = "images/UI_Backpack_idle.png"
 image UI_Dildo = "images/UI_Dildo.png"

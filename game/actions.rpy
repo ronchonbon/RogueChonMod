@@ -149,7 +149,7 @@ label start_action(Girl, action, context = None):
 
             return "stop"
 
-label before_action(Girl, action, context):
+label before_action(Girl, action, context = None):
     $ Girl.change_face("_sexy")
 
     if action == "kiss":
@@ -422,7 +422,7 @@ label action_cycle(Girl, action):
 
     return [None, "stop"]
 
-label after_action(Girl, action, context):
+label after_action(Girl, action, context = None):
     $ Girl.change_face("_sexy")
     $ Girl.remaining_actions -= 1
 

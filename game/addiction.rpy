@@ -210,7 +210,7 @@ label addiction_event(Girl):
                     ch_v "Well, that's not usually how \"vampire\" works, but we could give it a shot. . ."
                 "She leans in for another kiss."
 
-                call before_action(Girl, "kiss", None)
+                call before_action(Girl, "kiss")
             else:
                 $ Girl.change_face("_sad",2)
 
@@ -252,7 +252,7 @@ label addiction_event(Girl):
                     ch_v "Well, that's not usually how \"vampire\" works, but we could give it a shot. . ."
                 "She leans in for a kiss."
 
-                call before_action(Girl, "kiss", None)
+                call before_action(Girl, "kiss")
             else:
                 $ Girl.change_face("_sad",2)
 
@@ -294,7 +294,7 @@ label addiction_event(Girl):
                     ch_s "Perhaps a kiss then. . ."
                 "She leans in for a kiss."
 
-                call before_action(Girl, "kiss", None)
+                call before_action(Girl, "kiss")
             else:
                 $ Girl.change_stat("lust", 80, 3)
                 $ Girl.change_stat("love", 90, 1)
@@ -333,7 +333,7 @@ label addiction_event(Girl):
                         $ Girl.change_face("_sexy")
                         "She leans in for a kiss."
 
-                        call before_action(Girl, "kiss", None)
+                        call before_action(Girl, "kiss")
                     "Only if we can make out a bit." if Girl not in (LauraX,JeanX):
                         $ Girl.change_stat("love", 80, 3)
                         $ Girl.change_stat("obedience", 40, 5)
@@ -348,7 +348,7 @@ label addiction_event(Girl):
                         elif Girl == StormX:
                             ch_s "Oh. I suppose we could. . ."
 
-                            call before_action(Girl, "kiss", None)
+                            call before_action(Girl, "kiss")
                     "Not good enough.":
                         $ Girl.change_stat("love", 200, -5)
                         $ Girl.brows = "_angry"
@@ -371,7 +371,7 @@ label addiction_event(Girl):
                 ch_v "Well, we may as well do more than that. . ."
                 "She leans in for a kiss."
 
-                call before_action(Girl, "kiss", None)
+                call before_action(Girl, "kiss")
             else:
                 $ Girl.change_stat("lust", 80, 3)
                 $ Girl.change_stat("love", 90, 1)
@@ -401,7 +401,7 @@ label addiction_event(Girl):
 
                         "She leans in for a kiss."
 
-                        call before_action(Girl, "kiss", None)
+                        call before_action(Girl, "kiss")
                     "Only if we can make out a bit.":
                         $ Girl.change_stat("love", 80, 3)
                         $ Girl.change_stat("obedience", 40, 5)
@@ -409,7 +409,7 @@ label addiction_event(Girl):
 
                         ch_v "I think I could manage. . ."
 
-                        call before_action(Girl, "kiss", None)
+                        call before_action(Girl, "kiss")
                     "Not good enough.":
                         $ Girl.change_stat("love", 200, -5)
                         $ Girl.brows = "_angry"
@@ -840,7 +840,7 @@ label addiction_ultimatum:
 
                     "She leans in for a kiss."
 
-                    call before_action(Girl, "kiss", None)
+                    call before_action(Girl, "kiss")
                 elif approval_check(Girl, 650, "LI",Alt=[[RogueX],600]):
                     $ Girl.change_stat("lust", 80, 3)
                     $ Girl.change_stat("love", 80, 5)
@@ -867,7 +867,7 @@ label addiction_ultimatum:
 
                     "She leans in for a kiss."
 
-                    call before_action(Girl, "kiss", None)
+                    call before_action(Girl, "kiss")
                 else:
                     $ Girl.change_stat("lust", 80, 3)
                     $ Girl.change_stat("love", 80, 6)
@@ -905,7 +905,7 @@ label addiction_ultimatum:
 
                     "She leans in for a kiss."
 
-                    call before_action(Girl, "kiss", None)
+                    call before_action(Girl, "kiss")
 
                     $ Girl.addiction = 20 if Girl.addiction > 20 else Girl.addiction
                     $ Girl.addiction = 5 if Girl == JubesX else Girl.addiction

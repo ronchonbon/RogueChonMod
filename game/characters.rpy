@@ -295,7 +295,10 @@ init python:
                 self.names = ["Ms. Frost"]
                 self.name = "Ms. Frost"
 
-                self.player_petnames = ["young man", Player.name]
+                last_name = get_last_name(Player)
+
+                self.player_petname = "Mr. " + last_name
+                self.player_petnames = ["young man", Player.name, "Mr. " + last_name]
                 self.petname = self.name
                 self.petnames = ["Emma", "Ms. Frost"]
             elif self.tag == "Laura":
@@ -888,9 +891,6 @@ init python:
 
         def change_outfit(self, outfit_name = None, got_dressed = 0, check_if_yoinked = False):
             outfit_name = outfit_name if outfit_name else self.outfit_name
-
-            if self.location == bg_current and renpy.showing("night_mask", layer = 'nightmask') and time_index == 0:
-                return
 
             if self.location not in ["bg_showerroom", "bg_pool"]:
                 self.wet = False

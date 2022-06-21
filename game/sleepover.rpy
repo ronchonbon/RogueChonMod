@@ -745,7 +745,7 @@ label sleepover_Morning:
 
 
     $ day_of_week = week[weekday]
-    hide night_mask onlayer nightmask
+
     $ Player.semen = Player.max_semen
     $ Player.spunk = 0
     $ round = 50
@@ -773,7 +773,7 @@ label sleepover_Morning:
     $ Party[0].change_face("_smile")
     if len(Party) >= 2:
         $ Party[1].change_face("_smile")
-    hide night_mask onlayer nightmask
+
     hide black_screen onlayer black
 
     if "morningwood" in Player.daily_history:
@@ -1628,7 +1628,6 @@ label sleepover_MorningWood:
 
     "You open your eyes. . ."
 
-    hide night_mask onlayer nightmask
     hide black_screen onlayer black
 
     $ action_speed = 3

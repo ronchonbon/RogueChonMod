@@ -132,9 +132,6 @@ label wait(outfit = True, lights = True):
     call lesbian_check
     call checkout
 
-    if time_index < 3:
-        hide night_mask onlayer nightmask
-
     if lights:
         hide black_screen onlayer black
 
@@ -1038,11 +1035,6 @@ label set_the_scene(character = True, entering = False, check_if_dressed = True,
 
         call hide_all
 
-    if time_index >= 3:
-        show night_mask onlayer nightmask
-    else:
-        hide night_mask
-
     if reset_actions:
         call stop_all_actions
 
@@ -1081,7 +1073,6 @@ label set_the_scene(character = True, entering = False, check_if_dressed = True,
     else:
         call hide_all(cull = True)
 
-    show Chibi_UI
     hide cellphone
 
     if bg_current == "bg_classroom":
@@ -1645,17 +1636,6 @@ label Hanks_Lab(line=0):
                     call get_last_name
                     $ EmmaX.player_petnames.append(_return)
                 "That should do it, your name has been updated and an email has been sent out to everyone on campus about the change."
-            "Red Button" if False:
-                if not Player.Harem:
-                    "No harem"
-                elif len(Player.Harem) == 4:
-                    "[Player.Harem[0].tag],[Player.Harem[1].tag],[Player.Harem[2].tag],[Player.Harem[3].tag]"
-                elif len(Player.Harem) == 3:
-                    "[Player.Harem[0].tag],[Player.Harem[1].tag],[Player.Harem[2].tag]"
-                elif len(Player.Harem) == 2:
-                    "[Player.Harem[0].tag],[Player.Harem[1].tag]"
-                else:
-                    "[Player.Harem[0].tag]"
             "Blue Button":
                 $ Count = len(active_Girls)
                 "[Count]"

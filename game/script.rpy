@@ -10,25 +10,11 @@ define ch_v = Character('[JubesX.name]', color = "#b2d950", image = "Jubes_sprit
 define ch_m = Character('[MystiqueX.name]', color = "b2d950", image = "Mystique_sprite", show_two_window = True)
 
 define ch_x = Character('Professor X', color = "#a09400", image = "Xavier_sprite", show_two_window = True)
-define ch_b = Character('Dr. McCoy', color = "#1033b2", image = "arrow", show_two_window = True)
+define ch_b = Character('Dr. McCoy', color = "#1033b2", show_two_window = True)
 
-define ch_u = Character('???', color = "#85bb65", image = "arrow", show_two_window = True)
+define ch_u = Character('???', color = "#85bb65", show_two_window = True)
 
 label splashscreen:
-    if not config.developer:
-        scene black onlayer backdrop
-        with Pause(1)
-
-        show expression "images/Onirating.png"
-        show text "This title is for ages 18 and up." with dissolve
-        with Pause(2)
-
-        show text "This is a very rough beta version of the game. It has limited function and has not been thoroughly tested. Please report any bugs you find." with dissolve
-        with Pause(2)
-
-        hide text with dissolve
-        with Pause(1)
-
     return
 
 init -1:
@@ -179,6 +165,22 @@ init -1:
 
 label start:
     $ Player = PlayerClass()
+
+    python:
+        Player.name = renpy.input("What is your name?", default = "Zero", length = 10)
+        Player.name = Player.name.strip()
+
+        if not Player.name :
+            Player.name  = "Zero"
+
+    menu:
+        "What is your skin color?"
+        "Green":
+            $ Player.color = "green"
+        "White":
+            $ Player.color = "white"
+        "Black":
+            $ Player.color = "black"
 
     $ RogueX = GirlClass("Rogue", 500, 0, 0, 10)
     $ KittyX = GirlClass("Kitty", 400, 100, 0, 10)
