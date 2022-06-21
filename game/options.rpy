@@ -11,7 +11,7 @@ init -1 python hide:
     config.window_title = u"Rogue-Like Chonky Mod"
 
     config.name = "Rogue-Like Chonky Mod"
-    config.version = "0.2i"
+    config.version = "0.2h"
 
     theme.tv(
         widget = "#6A7183",

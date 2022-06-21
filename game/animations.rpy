@@ -16,8 +16,7 @@ transform stat_animation(Timer, XPOS):
     parallel:
         linear 2.0 ypos 0.0
     parallel:
-        pause 0.5
-        linear 0.5 alpha 0
+        linear 2.0 alpha 0
 
 screen stat_graphic(value, Color, Timer, XPOS):
     showif value > 0:

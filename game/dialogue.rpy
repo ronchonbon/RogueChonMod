@@ -5528,7 +5528,7 @@ label accepted_without_question_lines(Girl, action):
 
         if action in cock_actions:
             $ lines.append("Very well, give it here.")
-    elif Girl = JubesX:
+    elif Girl == JubesX:
         $ lines = ["Sure, I guess.",
             "O-kay.",
             "Fine.",

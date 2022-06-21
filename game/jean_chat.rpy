@@ -169,7 +169,7 @@ label Jean_Relationship:
 
 
                         pass
-            "Never Mind":
+            "Never mind":
 
                 return
 
@@ -981,7 +981,7 @@ label Jean_SexChat:
 
                 call NoFap (JeanX)
 
-            "Never Mind" if line == "Yeah, what did you want to talk about?":
+            "Never mind" if line == "Yeah, what did you want to talk about?":
                 return
             "That's all." if line != "Yeah, what did you want to talk about?":
                 return

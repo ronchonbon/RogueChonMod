@@ -410,7 +410,7 @@ label kiss_menu(Girl):
                                 return ["fondle_thighs", "auto"]
                             "Move a hand to her breasts. . ." if Girl.action_counter["kiss"] >= 1:
                                 return ["fondle_breasts", "auto"]
-                            "Never Mind":
+                            "Never mind":
                                 pass
                     else:
                         call tired_lines(Girl, "kiss")
@@ -627,7 +627,7 @@ label fondle_menu(Girl, action):
                                 return ["fondle_ass", "pullback"]
                             "Switch to fondling." if action =="eat_ass":
                                 return ["fondle_ass", "pullback"]
-                            "Never Mind":
+                            "Never mind":
                                 pass
                     else:
                         call tired_lines(Girl, action)
@@ -845,7 +845,7 @@ label handjob_menu(Girl, action):
                                         return ["dildo_pussy", "shift"]
                                     else:
                                         call tired_lines(Girl, action)
-                                "Never Mind":
+                                "Never mind":
                                     pass
                         else:
                             call tired_lines(Girl, action)
@@ -959,7 +959,7 @@ label sex_menu(Girl, action):
                                 return ["anal", "auto"]
                             "Pull back to hotdog her." if action != "hotdog":
                                 return ["hotdog", "pullback"]
-                            "Never Mind":
+                            "Never mind":
                                 pass
                     else:
                         call tired_lines(Girl, action)

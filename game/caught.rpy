@@ -708,7 +708,7 @@ label caught_masturbating(Girl):
             "You see [Girl.name], eyes closed and stroking herself vigorously."
             menu:
                 extend ""
-                "Enter Quietly":
+                "Enter quietly":
                     $ line = "enter"
                 "Pull back and knock":
                     $ line = "knock"
@@ -863,10 +863,12 @@ label caught_masturbating(Girl):
             elif Girl == StormX:
                 ch_s "You come up here fairly often. . ."
             elif Girl == JubesX:
-                ch_v "You stop by alot. . ."
+                ch_v "You stop by a lot. . ."
 
         $ Girl.arm_pose = 1
         $ Girl.change_outfit()
+
+    $ Girl.location = Girl.home
 
     return
 

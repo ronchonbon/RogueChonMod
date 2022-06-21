@@ -168,7 +168,7 @@ label Laura_Relationship:
                             call Laura_Sub_Asked
                     "Never mind":
                         pass
-            "Never Mind":
+            "Never mind":
 
                 return
 
@@ -891,7 +891,7 @@ label Laura_SexChat:
             "About when you masturbate":
                 call NoFap (LauraX)
 
-            "Never Mind" if line == "Yeah, what did you want to talk about?":
+            "Never mind" if line == "Yeah, what did you want to talk about?":
                 return
             "That's all." if line != "Yeah, what did you want to talk about?":
                 return

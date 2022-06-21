@@ -270,9 +270,9 @@ label Emma_Relationship:
                             ch_e "I seem to recall something about that. . ."
                         else:
                             call Emma_Sub_Asked
-                    "Never Mind":
+                    "Never mind":
                         pass
-            "Never Mind":
+            "Never mind":
                 return
 
     return
@@ -1024,7 +1024,7 @@ label Emma_SexChat:
             "We talked about maybe having a threesome?" if "threecheck" in EmmaX.history and "threesome" not in EmmaX.history:
                 call Emma_ThreeCheck
 
-            "Never Mind" if line == "Hmm? What did you want to talk about?":
+            "Never mind" if line == "Hmm? What did you want to talk about?":
                 return
             "That's all." if line != "Hmm? What did you want to talk about?":
                 return

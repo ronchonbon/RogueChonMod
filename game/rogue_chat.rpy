@@ -166,9 +166,9 @@ label Rogue_Relationship:
                                 ch_r "Oh."
                                 $ RogueX.change_stat("obedience", 200, -5)
                                 $ RogueX.change_stat("love", 90, -5)
-                    "Never Mind":
+                    "Never mind":
                         pass
-            "Never Mind":
+            "Never mind":
                 return
         return
 
@@ -919,7 +919,7 @@ label Rogue_SexChat:
             "About when you masturbate":
                 call NoFap (RogueX)
 
-            "Never Mind" if line == "Yeah, what did you want to talk about?":
+            "Never mind" if line == "Yeah, what did you want to talk about?":
                 return
             "That's all." if line != "Yeah, what did you want to talk about?":
                 return

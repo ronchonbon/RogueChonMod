@@ -170,7 +170,7 @@ label Kitty_Relationship:
                     "Never mind":
 
                         pass
-            "Never Mind":
+            "Never mind":
                 return
     return
 
@@ -254,7 +254,7 @@ label KittyLike:
         "Like":
             $ KittyX.like = ", like, "
             $ KittyX.Like = "Like, "
-            ch_k "I guess I do[KittyX.like]say that alot, huh?"
+            ch_k "I guess I do[KittyX.like]say that a lot, huh?"
         "Um":
             $ KittyX.like = ", um, "
             $ KittyX.Like = "Um, "
@@ -948,7 +948,7 @@ label Kitty_SexChat:
             "About when you masturbate":
                 call NoFap (KittyX)
 
-            "Never Mind" if line == "Yeah, what did you want to talk about?":
+            "Never mind" if line == "Yeah, what did you want to talk about?":
                 return
             "That's all." if line != "Yeah, what did you want to talk about?":
                 return

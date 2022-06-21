@@ -1811,7 +1811,7 @@ label Level_Up(Chr=Player):
                                 "You're already at the max level."
                         "Cancel.":
                             pass
-                "Never Mind, I'll come back later.":
+                "Never mind, I'll come back later.":
 
                     return
     else:
@@ -1880,7 +1880,7 @@ label Level_Up(Chr=Player):
                                 "You don't have enough points for that."
                         "Cancel.":
                             pass
-                "Never Mind, I'll come back later.":
+                "Never mind, I'll come back later.":
 
 
 

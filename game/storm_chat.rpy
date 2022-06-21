@@ -175,7 +175,7 @@ label Storm_Relationship:
                             call Storm_Sub_Asked
                     "Never mind":
                         pass
-            "Never Mind":
+            "Never mind":
 
                 return
 
@@ -898,7 +898,7 @@ label Storm_SexChat:
             "About when you masturbate":
                 call NoFap (StormX)
 
-            "Never Mind" if line == "Yes? What did you want to discuss?":
+            "Never mind" if line == "Yes? What did you want to discuss?":
                 return
             "That's all." if line != "Yes? What did you want to discuss?":
                 return
