@@ -1,54 +1,58 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 228, in script
-    show Kitty_sprite standing at sprite_location(0.25)
-Exception: DynamicImage u'images/Kitty_standing/Kitty_standing_spunk_mouth[KittyX.mouth].png': could not find image. (u'images/Kitty_standing/Kitty_standing_spunk_mouth_smirk.png')
+  File "game/locations.rpy", line 122, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 259, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/sex_menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/sex_menus.rpy", line 173, in script call
+    call start_action(focused_Girl, "blowjob")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action)
+  File "game/actions.rpy", line 376, in script call
+    call handjob_menu(Girl, action)
+  File "game/sex_menus.rpy", line 774, in script
+    menu:
+  File "game/sex_menus.rpy", line 880, in <module>
+    "Clean up [Girl.name]" if Girl.spunk.any():
+AttributeError: 'RevertableDict' object has no attribute 'any'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 228, in script
-    show Kitty_sprite standing at sprite_location(0.25)
-  File "renpy/ast.py", line 1197, in execute
-    show_imspec(self.imspec, atl=getattr(self, "atl", None))
-  File "renpy/ast.py", line 1167, in show_imspec
-    atl=atl)
-  File "renpy/exports.py", line 768, in show
-    sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
-  File "renpy/display/core.py", line 1147, in add
-    thing.visit_all(lambda d : None)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 558, in visit_all
-    for d in self.visit():
-  File "renpy/display/layout.py", line 1415, in visit
-    self.update(self.last_st, self.last_at)
-  File "renpy/display/layout.py", line 1443, in update
-    child.visit_all(lambda c : c.per_interact())
-  File "renpy/display/core.py", line 558, in visit_all
-    for d in self.visit():
-  File "renpy/display/image.py", line 744, in visit
-    self.find_target()
-  File "renpy/display/image.py", line 652, in find_target
-    raise Exception(error)
-Exception: DynamicImage u'images/Kitty_standing/Kitty_standing_spunk_mouth[KittyX.mouth].png': could not find image. (u'images/Kitty_standing/Kitty_standing_spunk_mouth_smirk.png')
+  File "game/locations.rpy", line 122, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/chat.rpy", line 259, in script call
+    call enter_main_sex_menu(Girl)
+  File "game/sex_menus.rpy", line 59, in script call
+    call girl_sex_menu(Girl)
+  File "game/sex_menus.rpy", line 173, in script call
+    call start_action(focused_Girl, "blowjob")
+  File "game/actions.rpy", line 132, in script call
+    call action_cycle(Girl, action)
+  File "game/actions.rpy", line 376, in script call
+    call handjob_menu(Girl, action)
+  File "game/sex_menus.rpy", line 774, in script
+    menu:
+  File "renpy/ast.py", line 1688, in execute
+    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
+  File "renpy/exports.py", line 1040, in menu
+    if renpy.python.py_eval(condition) ]
+  File "renpy/python.py", line 2276, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "renpy/python.py", line 2269, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/sex_menus.rpy", line 880, in <module>
+    "Clean up [Girl.name]" if Girl.spunk.any():
+AttributeError: 'RevertableDict' object has no attribute 'any'
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like Chonky Mod 0.2h
-Mon Jun 20 21:42:54 2022
+Mon Jun 20 22:39:19 2022

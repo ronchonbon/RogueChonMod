@@ -458,8 +458,8 @@ image Rogue_titjob_cock_animation2:
 
     subpixel True
     block:
-        ease 0.35 yoffset -70
-        ease 0.4 yoffset -30
+        ease 0.35 yoffset -60
+        ease 0.4 yoffset -20
         repeat
 
 image Rogue_titjob_cock_animation3:

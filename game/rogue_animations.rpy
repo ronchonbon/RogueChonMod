@@ -248,7 +248,7 @@ image Rogue_titjob_hair_back_animation2:
 
     subpixel True
     block:
-        ease 0.28 yoffset 0
+        ease 0.28 yoffset 10
         ease 0.37 yoffset -55
         ease 0.1 yoffset -50
         repeat
@@ -302,7 +302,7 @@ image Rogue_titjob_body_animation2:
 
     subpixel True
     block:
-        ease 0.28 yoffset 0
+        ease 0.28 yoffset 10
         ease 0.37 yoffset -55
         ease 0.1 yoffset -50
         repeat
@@ -350,7 +350,7 @@ image Rogue_titjob_head_animation2:
 
     subpixel True
     block:
-        ease 0.28 yoffset 0
+        ease 0.28 yoffset 10
         ease 0.37 yoffset -55
         ease 0.1 yoffset -50
         repeat
@@ -404,7 +404,7 @@ image Rogue_titjob_breasts_animation2:
 
     subpixel True
     block:
-        ease 0.3 yoffset 0
+        ease 0.3 yoffset 10
         ease 0.35 yoffset -55
         ease 0.1 yoffset -50
         repeat

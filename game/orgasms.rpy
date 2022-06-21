@@ -2524,7 +2524,7 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
     if Choice == "leave":
         $ Girl.change_stat("inhibition", 80, 2)
         $ Girl.change_stat("inhibition", 200, 1)
-        "She leaves the jiz right where it is and gives you a wink."
+        "She leaves the jizz right where it is and gives you a wink."
         if Girl.spunk["hand"]:
             $ Girl.spunk["hand"] = False
             if Girl.event_counter["swallowed"]:
@@ -3131,7 +3131,7 @@ label Partner_Clean_Girl(Girl=0):
         $ counter += 1
     if Girl.spunk["mouth"] and counter:
         $ Girl.spunk["mouth"] = False
-        "you can see a line of jiz stretching between their mouths."
+        "you can see a line of jizz stretching between their mouths."
         $ counter += 1
     if Girl.spunk["hair"]:
         $ Girl.spunk["hair"] = False

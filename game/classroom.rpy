@@ -649,7 +649,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                 if Player.focus >= 100:
 
                     "As you start to reach your limits, [Girl.name] places a hand over your cock."
-                    "You jiz all over her hand."
+                    "You jizz all over her hand."
                     $ Player.semen -= 1
                     if (Girl.action_counter["blowjob"] and approval_check(Girl, 1200)) or Girl == JubesX:
                         "She quickly licks it all up."

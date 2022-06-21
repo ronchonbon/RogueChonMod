@@ -14,16 +14,16 @@ transform stat_animation(Timer, XPOS):
     pause Timer
     xpos XPOS ypos 0.25 alpha 1
     parallel:
-        linear 1 ypos 0.0
+        linear 2.0 ypos 0.0
     parallel:
-        pause 0.3
-        linear 0.3 alpha 0
+        pause 0.5
+        linear 0.5 alpha 0
 
 screen stat_graphic(value, Color, Timer, XPOS):
     showif value > 0:
-        text "+[value]" size 30 color Color at stat_animation(Timer, XPOS)
+        text "+[value]" size 40 color Color at stat_animation(Timer, XPOS)
     else:
-        text "[value]" size 30 color Color at stat_animation(Timer, XPOS)
+        text "[value]" size 40 color Color at stat_animation(Timer, XPOS)
 
 screen stat_holder_1(value, Color, XPOS):
     use stat_graphic(value, Color, 0.0, XPOS - 0.015)
@@ -107,22 +107,22 @@ label change_Xavier_face(face = Xavier_emotion):
         $ Xavier_brows = "_concentrate"
         $ Xavier_eyes = "_concentrate"
         $ Xavier_psychic = True
-    if face == "_hypno":
+    elif face == "_hypno":
         $ Xavier_mouth = "_neutral"
         $ Xavier_brows = "_neutral"
         $ Xavier_eyes = "_hypno"
         $ Xavier_psychic = False
-    if face == "_shocked":
+    elif face == "_shocked":
         $ Xavier_mouth = "_neutral"
         $ Xavier_brows = "_shocked"
         $ Xavier_eyes = "_shocked"
         $ Xavier_psychic = False
-    if face == "_happy":
+    elif face == "_happy":
         $ Xavier_mouth = "_smile"
         $ Xavier_brows = "_happy"
         $ Xavier_eyes = "_happy"
         $ Xavier_psychic = False
-    if face == "angry":
+    elif face == "angry":
         $ Xavier_mouth = "_stern"
         $ Xavier_brows = "_concentrate"
         $ Xavier_eyes = "_happy"

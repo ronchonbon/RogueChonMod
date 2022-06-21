@@ -1304,7 +1304,7 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
             ch_j "Hey, I wouldn't mind another taste. . ."
         else:
             ch_j "Hey. . . the other day. . ."
-            ch_j "Your jiz tasted really good."
+            ch_j "Your jizz tasted really good."
             ch_j "Like -really- good."
             $ JeanX.change_face("_sly", 1)
             ch_j "Weird."

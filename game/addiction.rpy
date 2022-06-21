@@ -1523,7 +1523,7 @@ label addiction_good_end:
             $ Girl.change_stat("love", 50, 3)
             $ Girl.change_stat("obedience", 80, 2)
 
-            ch_j "I think your jiz might be magic or something."
+            ch_j "I think your jizz might be magic or something."
         elif Girl == StormX:
             ch_s "I must admit, I did not expect your. . . semen to have such an impact."
         elif Girl == JubesX:
@@ -2496,7 +2496,7 @@ label addiction_serum:
         elif Girl == EmmaX:
             ch_e "Yes. . . it certain was. . . interesting. . ."
         elif Girl == LauraX:
-            ch_l "Yeah, ok. Kinda tasted like jiz though. . ."
+            ch_l "Yeah, ok. Kinda tasted like jizz though. . ."
         elif Girl == JeanX:
             ch_j "Right, the \"serum\" -wink-."
         elif Girl == StormX:
@@ -3137,7 +3137,7 @@ label addiction_serum:
             elif Girl == LauraX:
                 ch_l "Ah, that's better."
             elif Girl == JeanX:
-                ch_j "I have to say this, your jiz does hit the spot. . ."
+                ch_j "I have to say this, your jizz does hit the spot. . ."
             elif Girl == StormX:
                 ch_s "You do have a unique flavor. . ."
             elif Girl == JubesX:

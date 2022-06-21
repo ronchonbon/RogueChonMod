@@ -3234,7 +3234,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                     "After several minutes of this, [Girl.name] and [Previous.name] shudder in orgasm, which sets you off as well."
                 else:
                     "After several minutes of this, she shudders in orgasm, which sets you off as well."
-                "[Girl.name] catches the jiz in the popcorn bucket."
+                "[Girl.name] catches the jizz in the popcorn bucket."
             $ Girl.eyes = "_sexy"
             if Girl.event_counter["swallowed"]:
                 if 0 < _return < 3:

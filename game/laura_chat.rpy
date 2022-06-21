@@ -1250,7 +1250,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
 
         ch_l "Hey. . .I know this is kind of odd. . ."
         $ LauraX.change_face("_sexy",2)
-        ch_l "I feel so {i}good{/i} with your jiz on my face."
+        ch_l "I feel so {i}good{/i} with your jizz on my face."
         $ LauraX.blushing = "_blush1"
 
     elif Options[0] == "sleepover":
