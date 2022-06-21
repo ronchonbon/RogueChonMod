@@ -42,15 +42,15 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
             else:
                 Girl.voice "Ok, that's probably enough of that. . ."
         jump Les_After
-    $ Girl.drain_word("unseen",1,0)
-    $ Partner.drain_word("unseen",1,0)
+    $ Girl.drain_word("unseen", 1, 0)
+    $ Partner.drain_word("unseen", 1, 0)
 
     $ Girl.change_face("_surprised", 1)
     $ Partner.change_face("_surprised",2)
 
     "Suddenly, [Girl.name] jerks up from what she was doing with a start, and gives [Partner.name] a nudge."
     $ Girl.change_face("_bemused", 0)
-    $ Partner.change_face("_perplexed",1)
+    $ Partner.change_face("_perplexed", 1)
 
     if Girl == RogueX:
         ch_r "Um, [Player.name], how long have you been watchin?"
@@ -325,7 +325,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
         $ Bonus -= 200
     elif line <= 500:
         $ Bonus -= 100
-    $ Partner.drain_word("unseen",1,0)
+    $ Partner.drain_word("unseen", 1, 0)
     $ line = 0
 
     $ Girl.add_word(1,"noticed "+Partner.tag,"noticed "+Partner.tag)
@@ -340,7 +340,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
 
     $ approval = approval_check(Girl, 1350, taboo_modifier = 2, Bonus = Bonus)
 
-    $ Girl.drain_word("unseen",1,0)
+    $ Girl.drain_word("unseen", 1, 0)
 
     if action_context == "interrupted":
         menu:
@@ -555,7 +555,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
             $ Girl.change_stat("love", 70, -3, 1)
             $ Girl.change_stat("love", 20, -2, 1)
         elif Bonus >= 100:
-            $ Girl.change_face("_sly", eyes="_side")
+            $ Girl.change_face("_sly", eyes = "_side")
             if Girl == RogueX:
                 ch_r "Hmm, actually I might enjoy this more than you think. . ."
             elif Girl == KittyX:
@@ -800,7 +800,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
                     elif Girl == JubesX:
                         ch_v "Sure, maybe."
                 elif Bonus >= 0:
-                    $ Girl.check_if_likes(Partner,800,3,1)
+                    $ Girl.check_if_likes(Partner,800,3, 1)
                     if Girl == RogueX:
                         ch_r "Um, I don't know. . . maybe?"
                     elif Girl == KittyX:
@@ -816,7 +816,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
                     elif Girl == JubesX:
                         ch_v "Sure maybe."
                 else:
-                    $ Girl.change_face("_angry", 1, eyes="_side")
+                    $ Girl.change_face("_angry", 1, eyes = "_side")
                     if Girl == RogueX:
                         ch_r "Yeah, I really don't see that happening. . ."
                     elif Girl == KittyX:
@@ -1333,7 +1333,7 @@ label Les_After:
                 ch_k "Hmm, that's kinda fun with an audience. . ."
             elif Girl == EmmaX:
                 ch_e "I do enjoy an audience. . ."
-                $ Girl.change_face("_sly",1)
+                $ Girl.change_face("_sly", 1)
                 ch_e "something to keep in mind?"
             elif Girl == LauraX:
                 ch_l "I enjoyed the audience. . ."
@@ -1352,7 +1352,7 @@ label Les_After:
                 ch_k "Hmm, that's kinda fun with an audience. . ."
             elif Partner == EmmaX:
                 ch_e "I do enjoy an audience. . ."
-                $ Partner.change_face("_sly",1)
+                $ Partner.change_face("_sly", 1)
                 ch_e "something to keep in mind?"
             elif Partner == LauraX:
                 ch_l "I enjoyed the audience. . ."
@@ -1364,8 +1364,8 @@ label Les_After:
                 ch_v "It was cool to have an audience. . ."
     if not action_context:
         call Post_Les_Dialog
-    $ Girl.add_word(1,0,0,0,"les "+Partner.tag)
-    $ Partner.add_word(1,0,0,0,"les "+Girl.tag)
+    $ Girl.add_word(1, 0, 0, 0,"les "+Partner.tag)
+    $ Partner.add_word(1, 0, 0, 0,"les "+Girl.tag)
     $ approval_bonus = 0
     call checkout
     return
@@ -1859,7 +1859,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
                     $ Result = 1
                 else:
 
-                    $ Speaker.change_face("_angry", 1, eyes="_side")
+                    $ Speaker.change_face("_angry", 1, eyes = "_side")
                     if Speaker == RogueX:
                         ch_r "Sorry [Subject.tag], nothin personal."
                     elif Speaker == KittyX:
@@ -2027,7 +2027,7 @@ label Girl_Whammy(Other):
 
     if "nowhammy" not in JeanX.traits and Other.likes[JeanX.tag] < 800:
 
-        $ Player.add_word(1,0,0,0,"whammied")
+        $ Player.add_word(1, 0, 0, 0,"whammied")
         if Other == EmmaX and EmmaX.level >= JeanX.level:
             ch_e "Oh, don't even try that nonsense with me, Ms. Grey."
             return
@@ -2165,7 +2165,7 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
         pass
     else:
 
-        $ Party[0].change_face("_angry",mouth="_normal")
+        $ Party[0].change_face("_angry", mouth = "_normal")
 
 
     if Party[0] == RogueX:
@@ -2611,7 +2611,7 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
                 ch_v "Whatever. Fine."
             $ line = "yy"
         else:
-            $ Party[0].change_face("_angry",eyes="_side")
+            $ Party[0].change_face("_angry", eyes = "_side")
             $ Party[0].change_stat("love", 90, -25)
             $ Party[0].change_stat("inhibition", 90, 10)
             if Party[0] == RogueX:
@@ -2644,7 +2644,7 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
     if line == "yy":
         if Newbie.tag + "No" in Player.traits:
             $ Player.traits.remove(Newbie.tag + "No")
-        $ Player.drain_word(Newbie.tag + "No",0,0,1)
+        $ Player.drain_word(Newbie.tag + "No", 0, 0, 1)
         $ Player.traits.append(Newbie.tag + "Yes")
         "You should give [Newbie.name] a call."
     else:
@@ -2722,14 +2722,14 @@ label Harem_Start(Newbie=0, round2=0):
         pass
     elif Party[0].likes[Newbie.tag] >= 700:
 
-        $ Party[1].change_face("_angry",mouth="_normal")
+        $ Party[1].change_face("_angry", mouth = "_normal")
     elif Party[1].likes[Newbie.tag] >= 700:
 
-        $ Party[0].change_face("_angry",mouth="_normal")
+        $ Party[0].change_face("_angry", mouth = "_normal")
     else:
 
-        $ Party[0].change_face("_angry",mouth="_normal")
-        $ Party[1].change_face("_angry",mouth="_normal")
+        $ Party[0].change_face("_angry", mouth = "_normal")
+        $ Party[1].change_face("_angry", mouth = "_normal")
 
     if Party[0] == RogueX:
         if Party[0].likes[Newbie.tag] >= 800 and Party[1].likes[Newbie.tag] >= 800:
@@ -3233,8 +3233,8 @@ label Harem_Start(Newbie=0, round2=0):
         if line == "yy" or line == "nn":
             pass
         elif len(Player.Harem) >= 3:
-            $ Party[0].change_face("_smile",eyes="_side")
-            $ Party[1].change_face("_smile",eyes="_side")
+            $ Party[0].change_face("_smile", eyes = "_side")
+            $ Party[1].change_face("_smile", eyes = "_side")
             $ Party[0].change_stat("obedience", 90, 5)
             $ Party[0].change_stat("inhibition", 90, 5)
             if Party[0] == RogueX:
@@ -3280,7 +3280,7 @@ label Harem_Start(Newbie=0, round2=0):
                     $ line = "yy"
                 else:
 
-                    $ Party[Count].change_face("_angry",eyes="_side")
+                    $ Party[Count].change_face("_angry", eyes = "_side")
                     $ Party[Count].change_stat("love", 90, -25)
                     $ Party[Count].change_stat("inhibition", 90, 10)
                     if Party[Count] == RogueX:
@@ -3314,12 +3314,12 @@ label Harem_Start(Newbie=0, round2=0):
     if line == "yy":
         if Newbie.tag + "No" in Player.traits:
             $ Player.traits.remove(Newbie.tag + "No")
-        $ Player.drain_word(Newbie.tag + "No",0,0,1)
+        $ Player.drain_word(Newbie.tag + "No", 0, 0, 1)
         $ Player.traits.append(Newbie.tag + "Yes")
         $ Count = len(Player.Harem)
         while Count:
             $ Count -= 1
-            $ Player.Harem[Count].drain_word("saw with "+Newbie.tag,0,0,1)
+            $ Player.Harem[Count].drain_word("saw with "+Newbie.tag, 0, 0, 1)
         "You should give [Newbie.name] a call."
     else:
         $ Player.traits.append(Newbie.tag + "No")
@@ -3338,7 +3338,7 @@ label Harem_Initiation(temp_Girls=[], temp_Girls2=[]):
             if temp_Girls[0] != temp_Girls2[0] and "poly " + temp_Girls2[0].tag not in temp_Girls[0].traits:
                 $ temp_Girls[0].traits.append("poly " + temp_Girls2[0].tag)
             if temp_Girls[0] != temp_Girls2[0] and "saw with " + temp_Girls2[0].tag in temp_Girls[0].traits:
-                $ temp_Girls[0].drain_word("saw with " + temp_Girls2[0].tag,0,0,1)
+                $ temp_Girls[0].drain_word("saw with " + temp_Girls2[0].tag, 0, 0, 1)
             $ temp_Girls2.remove(temp_Girls2[0])
         $ temp_Girls.remove(temp_Girls[0])
     return
@@ -3513,13 +3513,13 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
     $ Girl2.taboo = 0
     $ line = 0
 
-    $ Girl.drain_word("lesbian",1,0)
-    $ Girl2.drain_word("lesbian",1,0)
+    $ Girl.drain_word("lesbian", 1, 0)
+    $ Girl2.drain_word("lesbian", 1, 0)
 
     $ Girl.add_word(0,"lesbian","lesbian")
     $ Girl2.add_word(0,"lesbian","lesbian")
-    $ Girl.add_word(1,0,0,0,"les "+Girl2.tag)
-    $ Girl2.add_word(1,0,0,0,"les "+Girl.tag)
+    $ Girl.add_word(1, 0, 0, 0,"les "+Girl2.tag)
+    $ Girl2.add_word(1, 0, 0, 0,"les "+Girl.tag)
 
     call set_the_scene (0, 1, 0, 0)
     "As you approach her room, you hear soft moans from inside, and notice that the door is slightly ajar."
@@ -3544,8 +3544,8 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 $ line = 2
             "Peek inside" if line != 1:
                 call set_the_scene
-                $ Girl.change_face("_kiss",1,eyes = "_closed")
-                $ Girl2.change_face("_kiss",1,eyes = "_closed")
+                $ Girl.change_face("_kiss", 1,eyes = "_closed")
+                $ Girl2.change_face("_kiss", 1,eyes = "_closed")
                 $ Player.primary_action = "lesbian"
                 $ girl_secondary_action = "fondle_pussy"
                 $ second_girl_main_action = "fondle_pussy"
@@ -3567,8 +3567,8 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 jump reset_location
 
     $ line = 0
-    $ Girl.change_face("_sly",1)
-    $ Girl2.change_face("_sly",1)
+    $ Girl.change_face("_sly", 1)
+    $ Girl2.change_face("_sly", 1)
     call set_the_scene (1, 0, 0, 0)
     if Girl == RogueX:
         ch_r "Sorry we got started without you."
@@ -3598,7 +3598,7 @@ label Share(Girl=0, Other=0):
 
 
 
-    $ Girl.drain_word("ask "+Other.tag,0,0,1)
+    $ Girl.drain_word("ask "+Other.tag, 0, 0, 1)
 
     if Girl.broken_up[0]:
 
@@ -3626,7 +3626,7 @@ label Share(Girl=0, Other=0):
 
         if Other == JeanX or Other.likes[Girl.tag] >= 800 or approval_check(Other, 1800) or (approval_check(Other, 1500) and Other.likes[Girl.tag] >= 500):
 
-            $ Other.add_word(1,0,0,"poly "+Girl.tag,0)
+            $ Other.add_word(1, 0, 0,"poly "+Girl.tag, 0)
 
 
             $ Other.change_stat("obedience", 80, 10)
@@ -3634,7 +3634,7 @@ label Share(Girl=0, Other=0):
 
             $ temp_Girls = Player.Harem[:]
             while temp_Girls:
-                $ temp_Girls[0].drain_word("saw with "+Other.tag,0,0,1)
+                $ temp_Girls[0].drain_word("saw with "+Other.tag, 0, 0, 1)
                 $ temp_Girls.remove(temp_Girls[0])
             if Girl.event_happened[5]:
 

@@ -4,7 +4,6 @@ image Zero_fondle_thigh_animation:
 
     subpixel True
     alpha 0.5 zoom 0.7
-    rotate 100
     block:
         parallel:
             pause 0.5
@@ -24,11 +23,10 @@ image Zero_fondle_breasts_right_animation:
     "Zero_hand"
 
     subpixel True
-    alpha 0.5 zoom (-0.7, 0.7)
-    rotate -60
+    alpha 0.5 xzoom -0.7 yzoom 0.7
     block:
+        ease 1 rotate 0
         ease 1 rotate -30
-        ease 1 rotate -60
         repeat
 
 image Zero_fondle_breasts_left_animation:
@@ -37,10 +35,9 @@ image Zero_fondle_breasts_left_animation:
 
     subpixel True
     alpha 0.5 zoom 0.7
-    rotate 90
     block:
-        ease 1 rotate 60
-        ease 1 rotate 90
+        ease 1 rotate 10
+        ease 1 rotate 40
         repeat
 
 image Zero_suck_breasts_right_animation:
@@ -48,12 +45,11 @@ image Zero_suck_breasts_right_animation:
     "Zero_tongue"
 
     subpixel True
-    alpha 0.5 zoom (-0.5, 0.5)
-    rotate 30
+    alpha 0.5 xzoom -0.5 yzoom 0.5
     block:
-        ease 0.5 rotate -45 offset (10, -30)
-        pause 0.5
-        ease 1.5 rotate 30 offset (0, 0)
+        ease 0.8 rotate -35 offset (5, -20)
+        pause 0.2
+        ease 0.8 rotate 5 offset (0, 0)
         repeat
 
 image Zero_suck_breasts_left_animation:
@@ -61,12 +57,11 @@ image Zero_suck_breasts_left_animation:
     "Zero_tongue"
 
     subpixel True
-    alpha 0.5 zoom (-0.5, 0.5)
-    rotate 30
+    alpha 0.5 zoom 0.5
     block:
-        ease 0.5 rotate -45 offset (40, -30)
-        pause 0.5
-        ease 1.5 rotate 30 offset (0, 0)
+        ease 0.8 rotate 35 offset (-5, -20)
+        pause 0.2
+        ease 0.8 rotate -5 offset (0, 0)
         repeat
 
 image Zero_fondle_pussy_animation:
@@ -75,15 +70,14 @@ image Zero_fondle_pussy_animation:
 
     subpixel True
     alpha 0.5 zoom 0.7
-    rotate 170
     block:
         choice:
-            ease 0.5 rotate 190 offset (0, -15)
-            ease 0.75 rotate 170 offset (0, 0)
+            ease 0.5 rotate 140 offset (0, -15)
+            ease 0.75 rotate 120 offset (0, 0)
         choice:
-            ease 0.5 rotate 190 offset (0, -15)
+            ease 0.5 rotate 140 offset (0, -15)
             pause 0.25
-            ease 1 rotate 170 offset (0, 0)
+            ease 1 rotate 120 offset (0, 0)
         repeat
 
 image Zero_finger_pussy_animation:
@@ -92,25 +86,24 @@ image Zero_finger_pussy_animation:
 
     subpixel True
     alpha 0.5 zoom 0.7
-    rotate 40
     block:
         choice:
-            ease 1 rotate 40 offset (10, -35)
-            pause 0.5
-            ease 1 rotate 50 offset (0, 0)
+            ease 0.75 rotate 30 offset (10, -35)
+            pause 0.4
+            ease 0.75 rotate 40 offset (0, 0)
         choice:
-            ease 0.5 rotate 40 offset (10, -35)
-            pause 0.5
-            ease 1.75 rotate 50 offset (0, 0)
+            ease 0.5 rotate 30 offset (10, -35)
+            pause 0.4
+            ease 1.5 rotate 40 offset (0, 0)
         choice:
-            ease 2 rotate 40 offset (10, -35)
-            pause 0.5
-            ease 1 rotate 50 offset (0, 0)
+            ease 1.5 rotate 30 offset (10, -35)
+            pause 0.4
+            ease 0.75 rotate 40 offset (0, 0)
         choice:
-            ease 0.25 rotate 40 offset (10, -35)
-            ease 0.25 rotate 50 offset (0, 0)
-            ease 0.25 rotate 40 offset (10, -35)
-            ease 0.25 rotate 50 offset (0, 0)
+            ease 0.75 rotate 30 offset (10, -35)
+            ease 0.75 rotate 40 offset (0, 0)
+            ease 0.75 rotate 30 offset (10, -35)
+            ease 0.75 rotate 40 offset (0, 0)
         repeat
 
 image Zero_eat_pussy_animation:
@@ -118,12 +111,11 @@ image Zero_eat_pussy_animation:
     "Zero_tongue"
 
     subpixel True
-    alpha 0.5 zoom (-0.5, 0.5)
-    rotate 10
+    alpha 0.5 xzoom -0.5 yzoom 0.5
     block:
         easeout 0.5 rotate -50 offset (-20, -20)
         linear 0.5 rotate -60 offset (-30, -10)
-        easein 1 rotate 10 offset (0, 0)
+        easein 0.75 rotate 10 offset (0, 0)
         repeat
 
 image Zero_doggy_fondle_breast_animation:
@@ -131,9 +123,10 @@ image Zero_doggy_fondle_breast_animation:
     "Zero_hand_under"
 
     subpixel True
+    alpha 0.5 zoom 0.34
     block:
-        ease 1 rotate 10
-        ease 1 rotate 0
+        ease 1 rotate -20
+        ease 1 rotate -40
         repeat
 
 image Rogue_sex_finger_pussy_animation:
@@ -141,11 +134,12 @@ image Rogue_sex_finger_pussy_animation:
     "Zero_sex_finger"
 
     subpixel True
-    zoom 1.2
+    zoom 0.45
+    rotate -20
     block:
-        ease 0.2 yoffset -40
-        pause 0.2
-        ease 0.6 yoffset 0
+        ease 0.66 yoffset -25
+        pause 0.4
+        ease 1.0 yoffset 0
         repeat
 
 image Rogue_sex_finger_ass_animation:
@@ -153,11 +147,12 @@ image Rogue_sex_finger_ass_animation:
     "Zero_sex_finger"
 
     subpixel True
-    zoom 1.2
+    zoom 0.45
+    rotate -20
     block:
-        ease 0.4 yoffset -50
+        ease 0.65 yoffset -25
         pause 0.4
-        ease 1.2 yoffset 0
+        ease 1.0 yoffset 0
         repeat
 
 image Rogue_doggy_finger_pussy_animation:
@@ -165,8 +160,10 @@ image Rogue_doggy_finger_pussy_animation:
     "Zero_sex_finger"
 
     subpixel True
+    zoom 0.4
+    rotate -20
     block:
-        ease 1 offset (-3, -45)
+        ease 1 offset (-3, -20)
         pause 1
         ease 3 offset (0, 0)
         repeat
@@ -176,24 +173,40 @@ image Rogue_doggy_finger_ass_animation:
     "Zero_sex_finger"
 
     subpixel True
+    zoom 0.4
+    rotate -20
     block:
-        ease 0.5 yoffset -20
+        ease 0.5 offset (-2, -15)
         pause 0.25
-        ease 1.75 yoffset 0
+        ease 1.75 offset (0, 0)
         repeat
 
 layeredimage Zero_finger_Rogue:
-    if renpy.showing("Rogue_sprite sex") and "finger_pussy" in [Player.primary_action, Player.secondary_action]:
-        "Rogue_sex_finger_pussy_animation" pos (0.292, 0.64)
+    if not renpy.showing("Rogue_sprite sex"):
+        Null()
+    elif "finger_pussy" in [Player.primary_action, Player.secondary_action]:
+        "Rogue_sex_finger_pussy_animation" pos (0.2955, 0.555)
+    elif "finger_ass" in [Player.primary_action, Player.secondary_action]:
+        "Rogue_sex_finger_ass_animation" pos (0.2965, 0.63)
 
-    if renpy.showing("Rogue_sprite sex") and "finger_ass" in [Player.primary_action, Player.secondary_action]:
-        "Rogue_sex_finger_ass_animation" pos (0.2923, 0.7)
+    if not renpy.showing("Rogue_sprite doggy"):
+        Null()
+    elif "finger_pussy" in [Player.primary_action, Player.secondary_action]:
+        "Rogue_doggy_finger_pussy_animation" pos (0.1155, 0.565)
+    elif "finger_ass" in [Player.primary_action, Player.secondary_action]:
+        "Rogue_doggy_finger_ass_animation" pos (0.1165, 0.518)
 
-    if renpy.showing("Rogue_sprite doggy") and "finger_pussy" in [Player.primary_action, Player.secondary_action]:
-        "Rogue_doggy_finger_pussy_animation" pos (0.112, 0.625)
+image Rogue_doggy_pussy_fingering_mask_animation:
+    animation
+    "Rogue_doggy_pussy_mask"
 
-    if renpy.showing("Rogue_sprite doggy") and "finger_ass" in [Player.primary_action, Player.secondary_action]:
-        "Rogue_doggy_finger_ass_animation" pos (0.112, 0.57)
+    subpixel True
+    xzoom 0.6
+    block:
+        ease 1 xzoom 0.67
+        pause 1
+        ease 3 xzoom 0.6
+        repeat
 
 image Rogue_doggy_anus_fingering_mask_animation:
     animation
@@ -202,7 +215,7 @@ image Rogue_doggy_anus_fingering_mask_animation:
     subpixel True
     zoom 0.6
     block:
-        ease 0.5 zoom 0.75
+        ease 0.5 zoom 0.67
         pause 0.5
         ease 1.5 zoom 0.6
         repeat
@@ -211,7 +224,7 @@ layeredimage Zero_finger_Rogue_mask:
     if not renpy.showing("Rogue_sprite doggy"):
         Null()
     elif "finger_pussy" in [Player.primary_action, Player.secondary_action]:
-        "Rogue_doggy_pussy_mask_animation1" offset (217, 514)
+        "Rogue_doggy_pussy_fingering_mask_animation" offset (217, 514)
     elif "finger_ass" in [Player.primary_action, Player.secondary_action]:
         "Rogue_doggy_anus_fingering_mask_animation" offset (217, 514)
 
@@ -220,11 +233,12 @@ image Kitty_sex_finger_pussy_animation:
     "Zero_sex_finger"
 
     subpixel True
-    zoom 1.2
+    zoom 0.5
+    rotate -20
     block:
-        ease 0.2 yoffset -40
-        pause 0.2
-        ease 0.6 yoffset 0
+        ease 0.66 yoffset -25
+        pause 0.4
+        ease 1.0 yoffset 0
         repeat
 
 image Kitty_sex_finger_ass_animation:
@@ -232,11 +246,12 @@ image Kitty_sex_finger_ass_animation:
     "Zero_sex_finger"
 
     subpixel True
-    zoom 1.2
+    zoom 0.47
+    rotate -20
     block:
-        ease 0.4 yoffset -40
+        ease 0.65 yoffset -25
         pause 0.4
-        ease 1.2 yoffset 0
+        ease 1.0 yoffset 0
         repeat
 
 image Kitty_doggy_finger_pussy_animation:
@@ -244,8 +259,10 @@ image Kitty_doggy_finger_pussy_animation:
     "Zero_sex_finger"
 
     subpixel True
+    zoom 0.4
+    rotate -20
     block:
-        ease 1 offset (-3, -45)
+        ease 1 offset (-3, -20)
         pause 1
         ease 3 offset (0, 0)
         repeat
@@ -255,24 +272,40 @@ image Kitty_doggy_finger_ass_animation:
     "Zero_sex_finger"
 
     subpixel True
+    zoom 0.4
+    rotate -20
     block:
-        ease 0.5 yoffset -20
+        ease 0.5 offset (-2, -15)
         pause 0.25
-        ease 1.75 yoffset 0
+        ease 1.75 offset (0, 0)
         repeat
 
 layeredimage Zero_finger_Kitty:
-    if renpy.showing("Kitty_sprite sex") and "finger_pussy" in [Player.primary_action, Player.secondary_action]:
-        "Kitty_sex_finger_pussy_animation" pos (0.2918, 0.615) zoom 0.9
+    if not renpy.showing("Kitty_sprite sex"):
+        Null()
+    elif "finger_pussy" in [Player.primary_action, Player.secondary_action]:
+        "Kitty_sex_finger_pussy_animation" pos (0.2955, 0.565)
+    elif "finger_ass" in [Player.primary_action, Player.secondary_action]:
+        "Kitty_sex_finger_ass_animation" pos (0.2965, 0.63)
 
-    if renpy.showing("Kitty_sprite sex") and "finger_ass" in [Player.primary_action, Player.secondary_action]:
-        "Kitty_sex_finger_ass_animation" pos (0.2923, 0.687) zoom 0.9
+    if not renpy.showing("Kitty_sprite doggy"):
+        Null()
+    elif "finger_pussy" in [Player.primary_action, Player.secondary_action]:
+        "Kitty_doggy_finger_pussy_animation" pos (0.1155, 0.57)
+    elif "finger_ass" in [Player.primary_action, Player.secondary_action]:
+        "Kitty_doggy_finger_ass_animation" pos (0.1165, 0.518)
 
-    if renpy.showing("Kitty_sprite doggy") and "finger_pussy" in [Player.primary_action, Player.secondary_action]:
-        "Kitty_doggy_finger_pussy_animation" pos (0.112, 0.625)
+image Kitty_doggy_pussy_fingering_mask_animation:
+    animation
+    "Kitty_doggy_pussy_mask"
 
-    if renpy.showing("Kitty_sprite doggy") and "finger_ass" in [Player.primary_action, Player.secondary_action]:
-        "Kitty_doggy_finger_ass_animation" pos (0.112, 0.57)
+    subpixel True
+    xzoom 0.6
+    block:
+        ease 1 xzoom 0.67
+        pause 1
+        ease 3 xzoom 0.6
+        repeat
 
 image Kitty_doggy_anus_fingering_mask_animation:
     animation
@@ -281,7 +314,7 @@ image Kitty_doggy_anus_fingering_mask_animation:
     subpixel True
     zoom 0.6
     block:
-        ease 0.5 zoom 0.75
+        ease 0.5 zoom 0.67
         pause 0.5
         ease 1.5 zoom 0.6
         repeat
@@ -290,7 +323,7 @@ layeredimage Zero_finger_Kitty_mask:
     if not renpy.showing("Kitty_sprite doggy"):
         Null()
     elif "finger_pussy" in [Player.primary_action, Player.secondary_action]:
-        "Kitty_doggy_pussy_mask_animation1" offset (217, 514)
+        "Kitty_doggy_pussy_fingering_mask_animation" offset (217, 514)
     elif "finger_ass" in [Player.primary_action, Player.secondary_action]:
         "Kitty_doggy_anus_fingering_mask_animation" offset (217, 514)
 
@@ -1667,7 +1700,7 @@ image Notslap_ass:
         "UI_Hand"
         zoom 1
         pos (600,380)
-        anchor (0.5,0.5)
+        anchor (0.5, 0.5)
         alpha 0.5
         rotate 40
         block:

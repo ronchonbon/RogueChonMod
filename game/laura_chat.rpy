@@ -376,69 +376,69 @@ label Laura_Monogamy:
         "Could you not hook up with other girls?" if "monogamous" not in LauraX.traits:
             if LauraX.thirst >= 60 and not approval_check(LauraX, 1700, "LO", taboo_modifier=0):
 
-                $ LauraX.change_face("_sly",1)
+                $ LauraX.change_face("_sly", 1)
                 if "monogamous" not in LauraX.daily_history:
                     $ LauraX.change_stat("obedience", 90, -2)
                 ch_l "I would, but you aren't around enough. . ."
                 return
             elif approval_check(LauraX, 1200, "LO", taboo_modifier=0) and LauraX.love >= LauraX.obedience:
 
-                $ LauraX.change_face("_sly",1)
+                $ LauraX.change_face("_sly", 1)
                 if "monogamous" not in LauraX.daily_history:
                     $ LauraX.change_stat("love", 90, 1)
                 ch_l "I didn't take you for the jealous type."
                 ch_l "Fine, no side pussy. . ."
             elif approval_check(LauraX, 700, "O", taboo_modifier=0):
 
-                $ LauraX.change_face("_sly",1,eyes="_side")
+                $ LauraX.change_face("_sly", 1,eyes = "_side")
                 ch_l "Affirmative."
             else:
 
-                $ LauraX.change_face("_sly",1)
+                $ LauraX.change_face("_sly", 1)
                 ch_l "Oh, you wouldn't want to see me when I'm thirsty."
                 return
             if "monogamous" not in LauraX.daily_history:
                 $ LauraX.change_stat("obedience", 90, 3)
-            $ LauraX.add_word(1,0,"monogamous")
+            $ LauraX.add_word(1, 0,"monogamous")
             $ LauraX.traits.append("monogamous")
         "Don't hook up with other girls." if "monogamous" not in LauraX.traits:
             if approval_check(LauraX, 900, "O", taboo_modifier=0):
 
-                $ LauraX.change_face("_sly",1,eyes="_side")
+                $ LauraX.change_face("_sly", 1,eyes = "_side")
                 ch_l "Ok."
             elif LauraX.thirst >= 60 and not approval_check(LauraX, 1700, "LO", taboo_modifier=0):
 
-                $ LauraX.change_face("_sly",1)
+                $ LauraX.change_face("_sly", 1)
                 if "monogamous" not in LauraX.daily_history:
                     $ LauraX.change_stat("obedience", 90, -2)
                 ch_l "I would, but you aren't around enough. . ."
                 return
             elif approval_check(LauraX, 600, "O", taboo_modifier=0):
 
-                $ LauraX.change_face("_sly",1,eyes="_side")
+                $ LauraX.change_face("_sly", 1,eyes = "_side")
                 ch_l "Hey, fine, your call."
             elif approval_check(LauraX, 1400, "LO", taboo_modifier=0):
 
-                $ LauraX.change_face("_sly",1)
+                $ LauraX.change_face("_sly", 1)
                 ch_l "I wouldn't come at me like that, but fine."
             else:
 
-                $ LauraX.change_face("_sly",1,brows="_confused")
+                $ LauraX.change_face("_sly", 1,brows = "_confused")
                 ch_l "Oh, you wouldn't want to see me when I'm thirsty."
                 return
             if "monogamous" not in LauraX.daily_history:
                 $ LauraX.change_stat("obedience", 90, 3)
-            $ LauraX.add_word(1,0,"monogamous")
+            $ LauraX.add_word(1, 0,"monogamous")
             $ LauraX.traits.append("monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in LauraX.traits:
             if approval_check(LauraX, 700, "O", taboo_modifier=0):
-                $ LauraX.change_face("_sly",1,eyes="_side")
+                $ LauraX.change_face("_sly", 1,eyes = "_side")
                 ch_l "Affirmative."
             elif approval_check(LauraX, 800, "L", taboo_modifier=0):
-                $ LauraX.change_face("_sly",1)
+                $ LauraX.change_face("_sly", 1)
                 ch_l "You'd better not leave me hangin. . ."
             else:
-                $ LauraX.change_face("_sly",1,brows="_confused")
+                $ LauraX.change_face("_sly", 1,brows = "_confused")
                 if "monogamous" not in LauraX.daily_history:
                     $ LauraX.change_stat("love", 90, -2)
                 ch_l "Well call out the ladies, I've just been given permission!"
@@ -446,7 +446,7 @@ label Laura_Monogamy:
                 $ LauraX.change_stat("obedience", 90, 3)
             if "monogamous" in LauraX.traits:
                 $ LauraX.traits.remove("monogamous")
-            $ LauraX.add_word(1,0,"monogamous")
+            $ LauraX.add_word(1, 0,"monogamous")
         "Never mind.":
             pass
     return
@@ -456,77 +456,77 @@ label Laura_Monogamy:
 label Laura_Jumped:
 
     ch_p "Hey, Remember that time you threw yourself at me?"
-    $ LauraX.change_face("_sly",1,brows="_confused")
+    $ LauraX.change_face("_sly", 1,brows = "_confused")
     menu:
         ch_l "Yeah?"
         "Could you maybe just ask instead?" if "chill" not in LauraX.traits:
             if LauraX.thirst >= 60 and not approval_check(LauraX, 1500, "LO", taboo_modifier=0):
 
-                $ LauraX.change_face("_sly",1)
+                $ LauraX.change_face("_sly", 1)
                 if "chill" not in LauraX.daily_history:
                     $ LauraX.change_stat("obedience", 90, -2)
                 ch_l "Not if you're going to keep dodging me. . ."
                 return
             elif approval_check(LauraX, 1000, "LO", taboo_modifier=0) and LauraX.love >= LauraX.obedience:
 
-                $ LauraX.change_face("_surprised",1)
+                $ LauraX.change_face("_surprised", 1)
                 if "chill" not in LauraX.daily_history:
                     $ LauraX.change_stat("love", 90, 1)
                 ch_l "Sorry, I was just horny. . ."
-                $ LauraX.change_face("_sly",1,eyes="_side")
+                $ LauraX.change_face("_sly", 1,eyes = "_side")
                 ch_l "I'll try to hold back. . ."
             elif approval_check(LauraX, 500, "O", taboo_modifier=0):
 
-                $ LauraX.change_face("_sly",1,eyes="_side")
+                $ LauraX.change_face("_sly", 1,eyes = "_side")
                 ch_l "Sorry. . ."
             else:
 
-                $ LauraX.change_face("_sly",1)
+                $ LauraX.change_face("_sly", 1)
                 ch_l "Only if I can't find you."
                 return
             if "chill" not in LauraX.daily_history:
                 $ LauraX.change_stat("obedience", 90, 3)
-            $ LauraX.add_word(1,0,"chill")
+            $ LauraX.add_word(1, 0,"chill")
             $ LauraX.traits.append("chill")
         "Don't bother me like that." if "chill" not in LauraX.traits:
             if approval_check(LauraX, 800, "O", taboo_modifier=0):
 
-                $ LauraX.change_face("_sly",1,eyes="_side")
+                $ LauraX.change_face("_sly", 1,eyes = "_side")
                 ch_l "Ok."
             elif LauraX.thirst >= 60 and not approval_check(LauraX, 500, "O", taboo_modifier=0):
 
-                $ LauraX.change_face("_sly",1)
+                $ LauraX.change_face("_sly", 1)
                 if "chill" not in LauraX.daily_history:
                     $ LauraX.change_stat("obedience", 90, -2)
                 ch_l "Then don't keep dodging me. . ."
                 return
             elif approval_check(LauraX, 400, "O", taboo_modifier=0):
 
-                $ LauraX.change_face("_sly",1,eyes="_side")
+                $ LauraX.change_face("_sly", 1,eyes = "_side")
                 ch_l "Affirmative. . ."
             elif approval_check(LauraX, 500, "LO", taboo_modifier=0) and not approval_check(LauraX, 500, "I", taboo_modifier=0):
 
-                $ LauraX.change_face("_sly",1)
+                $ LauraX.change_face("_sly", 1)
                 ch_l "Don't boss me around like that."
                 ch_l "Still, I'll try to control myself. . ."
             else:
 
-                $ LauraX.change_face("_sly",1)
+                $ LauraX.change_face("_sly", 1)
                 ch_l "Only if I can't find you."
                 return
             if "chill" not in LauraX.daily_history:
                 $ LauraX.change_stat("obedience", 90, 3)
-            $ LauraX.add_word(1,0,"chill")
+            $ LauraX.add_word(1, 0,"chill")
             $ LauraX.traits.append("chill")
         "Knock yourself out.":
             if approval_check(LauraX, 800, "L", taboo_modifier=0):
-                $ LauraX.change_face("_sly",1)
+                $ LauraX.change_face("_sly", 1)
                 ch_l "Oh, I think we'll both enjoy that. . ."
             elif approval_check(LauraX, 700, "O", taboo_modifier=0):
-                $ LauraX.change_face("_sly",1,eyes="_side")
+                $ LauraX.change_face("_sly", 1,eyes = "_side")
                 ch_l "Oh yes sir."
             else:
-                $ LauraX.change_face("_sly",1,brows="_confused")
+                $ LauraX.change_face("_sly", 1,brows = "_confused")
                 if "chill" not in LauraX.daily_history:
                     $ LauraX.change_stat("love", 90, -2)
                 ch_l "If I'm horny, sure."
@@ -534,7 +534,7 @@ label Laura_Jumped:
                 $ LauraX.change_stat("obedience", 90, 3)
             if "chill" in LauraX.traits:
                 $ LauraX.traits.remove("chill")
-            $ LauraX.add_word(1,0,"chill")
+            $ LauraX.add_word(1, 0,"chill")
         "Um, never mind.":
             pass
     return
@@ -556,7 +556,7 @@ return
 
 
 
-label Laura_Sexchat:
+label Laura_SexChat:
     $ line = "Yeah, what did you want to talk about?" if not line else line
     while True:
         menu:
@@ -600,7 +600,7 @@ label Laura_Sexchat:
                                 $ LauraX.change_face("_perplexed")
                                 ch_l "Who's fucking you?"
                             else:
-                                $ LauraX.change_face("_bemused",eyes="_side")
+                                $ LauraX.change_face("_bemused", eyes = "_side")
                                 ch_l "Heh, heh, yeah, um, it's ok. . ."
                             $ LauraX.player_favorite_action = "anal"
                         "Blowjobs.":
@@ -928,7 +928,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
 
         if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(LauraX, 800, "I")):
             if LauraX.location == bg_current and LauraX.thirst >= 30 and "refused" not in LauraX.daily_history and "quicksex" not in LauraX.daily_history:
-                $ LauraX.change_face("_sly",1)
+                $ LauraX.change_face("_sly", 1)
                 ch_l "Hey, wanna bone?"
                 call Quick_Sex (LauraX)
                 return
@@ -1035,9 +1035,9 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
         ch_l ". . . did you want to do something later?"
     elif Options[0] == "purple":
         $ LauraX.daily_history.append("cologne chat")
-        $ LauraX.change_face("_sly",1)
+        $ LauraX.change_face("_sly", 1)
         ch_l "(sniff, sniff). . . what is that? . ."
-        $ LauraX.change_face("_normal",0)
+        $ LauraX.change_face("_normal", 0)
         ch_l ". . . what was it you wanted?"
     elif Options[0] == "corruption":
         $ LauraX.daily_history.append("cologne chat")
@@ -1094,19 +1094,19 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
 
     elif Options[0] == "kissed":
 
-        $ LauraX.change_face("_normal",1)
+        $ LauraX.change_face("_normal", 1)
         ch_l "You're pretty good at kissing, [LauraX.player_petname]."
         menu:
             extend ""
             "Hey. . .I'm the best there is at what I do.":
-                $ LauraX.change_face("_smile",1)
+                $ LauraX.change_face("_smile", 1)
                 ch_l "You'll have to back that claim up."
             "No. You think?":
                 ch_l "Do I look like a kidder?"
 
     elif Options[0] == "dangerroom":
 
-        $ LauraX.change_face("_sly",1)
+        $ LauraX.change_face("_sly", 1)
         ch_l "Hey,[LauraX.player_petname]. I saw you in the Danger Room, earlier."
         ch_l "You should probably keep your left up, you were taking too many shots to the head."
 
@@ -1123,7 +1123,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
                     $ LauraX.change_stat("love", 50, 5)
                     $ LauraX.change_stat("love", 90, 2)
                     if approval_check(LauraX, 1200):
-                        $ LauraX.change_face("_sly",1)
+                        $ LauraX.change_face("_sly", 1)
                         ch_l "I didn't mind."
                     $ LauraX.change_face("_smile")
                     ch_l "We all make mistakes."
@@ -1131,7 +1131,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
                     $ LauraX.change_stat("obedience", 40, 5)
                     if approval_check(LauraX, 1000) or approval_check(LauraX, 700, "L"):
                         $ LauraX.change_stat("love", 90, 3)
-                        $ LauraX.change_face("_sly",1)
+                        $ LauraX.change_face("_sly", 1)
                         ch_l "Hmm, I guess that's a compliment."
                     else:
                         $ LauraX.change_stat("love", 70, -5)
@@ -1142,7 +1142,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
                         $ LauraX.change_stat("love", 90, 3)
                         $ LauraX.change_stat("obedience", 70, 10)
                         $ LauraX.change_stat("inhibition", 50, 5)
-                        $ LauraX.change_face("_sly",1)
+                        $ LauraX.change_face("_sly", 1)
                         ch_l "You seem to know what you want."
                     elif approval_check(LauraX, 800):
                         $ LauraX.change_stat("obedience", 60, 5)
@@ -1190,7 +1190,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
 
     elif Options[0] == "handy":
 
-        $ LauraX.change_face("_sly",1)
+        $ LauraX.change_face("_sly", 1)
         ch_l "I was thinking about having your cock in my hand the other day. . ."
         ch_l "You seemed to enjoy it."
         $ LauraX.blushing = ""
@@ -1205,21 +1205,21 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
                 "You were totally amazing.":
                     $ LauraX.change_stat("love", 90, 5)
                     $ LauraX.change_stat("inhibition", 60, 10)
-                    $ LauraX.change_face("_normal",1)
+                    $ LauraX.change_face("_normal", 1)
                     ch_l "Cool. Cool. . . "
-                    $ LauraX.change_face("_sexy",1)
+                    $ LauraX.change_face("_sexy", 1)
                     ch_l "I'd like another taste sometime."
                 "Honestly? It was good. . .but you could use a little practice, I think.":
                     if approval_check(LauraX, 300, "I") or not approval_check(LauraX, 800):
                         $ LauraX.change_stat("love", 90, -5)
                         $ LauraX.change_stat("obedience", 60, 10)
                         $ LauraX.change_stat("inhibition", 50, 10)
-                        $ LauraX.change_face("_perplexed",1)
+                        $ LauraX.change_face("_perplexed", 1)
                         ch_l "Yeah? Sorry to disappoint."
                     else:
                         $ LauraX.change_stat("obedience", 70, 15)
                         $ LauraX.change_stat("inhibition", 50, 5)
-                        $ LauraX.change_face("_sexy",1)
+                        $ LauraX.change_face("_sexy", 1)
                         ch_l "Yeah? I suppose we could keep trying until I get it right."
                 "I guess. If you're into weird sounds and too much teeth. Spoiler, I'm not.":
                     $ LauraX.change_stat("love", 90, -10)
@@ -1242,7 +1242,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
         else:
             ch_l "So. . . the other day. . ."
             ch_l "That was the first time I'd really enjoyed the taste of jiz."
-            $ LauraX.change_face("_sly",1)
+            $ LauraX.change_face("_sly", 1)
             ch_l "Good job!"
             $ LauraX.had_chat.append("swallow")
 
@@ -1275,13 +1275,13 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
 
         $ LauraX.change_face("_sly")
         ch_l "I did't really enjoy anal much."
-        $ LauraX.change_face("_sexy",1)
+        $ LauraX.change_face("_sexy", 1)
         ch_l "Until you, at least."
 
     elif Options[0] == "seenpeen":
-        $ LauraX.change_face("_sly",1, eyes="_down")
+        $ LauraX.change_face("_sly", 1, eyes = "_down")
         ch_l "I forgot to tell you, you've got a pretty nice cock down there. . ."
-        $ LauraX.change_face("_bemused",1)
+        $ LauraX.change_face("_bemused", 1)
         $ LauraX.change_stat("love", 50, 5)
         $ LauraX.history.remove("seenpeen")
     elif Options[0] == "topless":
@@ -1624,7 +1624,7 @@ label Laura_Rename:
                 ch_l "I've put that name behind me, I'd rather not. . ."
             else:
                 if not approval_check(LauraX, 500, "O"):
-                    $ LauraX.change_face("_sadside", 0,brows="_normal")
+                    $ LauraX.change_face("_sadside", 0,brows = "_normal")
                 if "namechange" not in LauraX.daily_history:
                     $ LauraX.change_stat("love", 70, -2)
                     $ LauraX.change_stat("obedience", 70, 5)
@@ -1645,7 +1645,7 @@ label Laura_Rename:
             $ LauraX.change_face()
         "Nevermind.":
             pass
-    $ LauraX.add_word(1,0,"namechange")
+    $ LauraX.add_word(1, 0,"namechange")
     return
 
 
@@ -2507,7 +2507,7 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                                 return
                             "I insist, put some on.":
                                 if (LauraX.love+LauraX.obedience) <= (1.5*LauraX.inhibition):
-                                    $ LauraX.change_face("_angry", eyes="_side")
+                                    $ LauraX.change_face("_angry", eyes = "_side")
                                     ch_l "Well I insist otherwise."
                                     return
                                 else:

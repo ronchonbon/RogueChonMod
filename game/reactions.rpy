@@ -75,7 +75,7 @@ label first_action_approval_mostly_obedience_reactions(Girl, action):
     if action in ["masturbation", "handjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:
         $ Girl.change_face("_normal")
     elif action in ["footjob"]:
-        $ Girl.change_face("_normal",1)
+        $ Girl.change_face("_normal", 1)
 
     call first_action_approval_mostly_obedience_lines(Girl, action)
 
@@ -93,7 +93,7 @@ label first_action_approval_reactions(Girl, action):
         $ Girl.change_face("_sad")
         $ Girl.mouth = "_smile"
     elif action in ["footjob"]:
-        $ Girl.change_face("_lipbite",1)
+        $ Girl.change_face("_lipbite", 1)
 
     call first_action_approval_lines(Girl, action)
 
@@ -137,7 +137,7 @@ label auto_rejected_reactions(Girl, action):
 
         call auto_rejected_lines(Girl, action)
 
-        $ Girl.change_face("_perplexed",1)
+        $ Girl.change_face("_perplexed", 1)
 
         "She pushes your head back away from her."
     elif action == "fondle_ass":

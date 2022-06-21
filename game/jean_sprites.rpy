@@ -6,13 +6,13 @@ layeredimage Jean_sprite standing:
         "Jean_hair_back" pos (0.32, 0.27) zoom 0.32
 
     always:
+        "images/Jean_standing/Jean_standing_arm[JeanX.arm_pose]_right.png"
+
+    always:
         "images/Jean_standing/Jean_standing_body.png"
 
     if JeanX.pubes:
         "images/Jean_standing/Jean_standing_pubes.png"
-
-    always:
-        "images/Jean_standing/Jean_standing_arm[JeanX.arm_pose]_right.png"
 
     always:
         "images/Jean_standing/Jean_standing_breasts.png"
@@ -117,10 +117,10 @@ layeredimage Jean_sprite standing:
     if JeanX.outfit["held_item"] and JeanX.arm_pose == 2:
         "images/Jean_standing/Jean_standing_held[JeanX.outfit[held_item]].png"
 
-    # always:
-    #     "Jean_standing_fondling_animations"
+    always:
+        "Jean_standing_fondling_animations"
 
-    anchor (0.5, 0.0) offset (20, 180) zoom 0.5
+    anchor (0.5, 0.0) offset (10, 180) zoom 0.52
 
 layeredimage Jean_hair_back:
     if JeanX.wet:

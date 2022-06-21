@@ -232,7 +232,7 @@ label Rogue_OtherWoman(counter=0):
                     ch_r "If you insist."
                 else:
                     ch_r "Don't see why not."
-                $ RogueX.add_word(1,0,0,"downlow")
+                $ RogueX.add_word(1, 0, 0,"downlow")
         "I can break it off with her.":
 
             $ RogueX.change_face("_sad")
@@ -375,68 +375,68 @@ label Rogue_Monogamy:
         "Could you not hook up with other girls?" if "monogamous" not in RogueX.traits:
             if RogueX.thirst >= 60 and not approval_check(RogueX, 1700, "LO", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly",1)
+                $ RogueX.change_face("_sly", 1)
                 if "monogamous" not in RogueX.daily_history:
                     $ RogueX.change_stat("obedience", 90, -2)
                 ch_r "I might consider that, but you don't exactly make yourself available. . ."
                 return
             elif approval_check(RogueX, 1200, "LO", taboo_modifier=0) and RogueX.love >= RogueX.obedience:
 
-                $ RogueX.change_face("_sly",1)
+                $ RogueX.change_face("_sly", 1)
                 if "monogamous" not in RogueX.daily_history:
                     $ RogueX.change_stat("love", 90, 1)
                 ch_r "Aw, would that make you jealous?"
                 ch_r "I suppose I could restain myself. . ."
             elif approval_check(RogueX, 700, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly",1,eyes="_side")
+                $ RogueX.change_face("_sly", 1,eyes = "_side")
                 ch_r "If that's what you really want. . ."
             else:
 
-                $ RogueX.change_face("_sly",1,brows="_confused")
+                $ RogueX.change_face("_sly", 1,brows = "_confused")
                 ch_r "Who I \"hook up\" with is my own damned business."
                 return
             if "monogamous" not in RogueX.daily_history:
                 $ RogueX.change_stat("obedience", 90, 3)
-            $ RogueX.add_word(1,0,"monogamous","monogamous")
+            $ RogueX.add_word(1, 0,"monogamous","monogamous")
         "Don't hook up with other girls." if "monogamous" not in RogueX.traits:
             if approval_check(RogueX, 900, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly",1,eyes="_side")
+                $ RogueX.change_face("_sly", 1,eyes = "_side")
                 ch_r "Ok."
             elif RogueX.thirst >= 60 and not approval_check(RogueX, 1700, "LO", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly",1)
+                $ RogueX.change_face("_sly", 1)
                 if "monogamous" not in RogueX.daily_history:
                     $ RogueX.change_stat("obedience", 90, -2)
                 ch_r "I might consider that, but you don't exactly make yourself available. . ."
                 return
             elif approval_check(RogueX, 550, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly",1,eyes="_side")
+                $ RogueX.change_face("_sly", 1,eyes = "_side")
                 ch_r "If that's what you really want. . ."
             elif approval_check(RogueX, 1400, "LO", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly",1)
+                $ RogueX.change_face("_sly", 1)
                 ch_r "Is that any way to ask a girl?"
                 ch_r "Still, I'll do it for you. . ."
             else:
 
-                $ RogueX.change_face("_sly",1,brows="_confused")
+                $ RogueX.change_face("_sly", 1,brows = "_confused")
                 ch_r "Who I \"hook up\" with is my own damned business."
                 return
             if "monogamous" not in RogueX.daily_history:
                 $ RogueX.change_stat("obedience", 90, 3)
-            $ RogueX.add_word(1,0,"monogamous","monogamous")
+            $ RogueX.add_word(1, 0,"monogamous","monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in RogueX.traits:
             if approval_check(RogueX, 700, "O", taboo_modifier=0):
-                $ RogueX.change_face("_sly",1,eyes="_side")
+                $ RogueX.change_face("_sly", 1,eyes = "_side")
                 ch_r "As you wish."
             elif approval_check(RogueX, 800, "L", taboo_modifier=0):
-                $ RogueX.change_face("_sly",1)
+                $ RogueX.change_face("_sly", 1)
                 ch_r "I hope you don't give me any reasons to want to. . ."
             else:
-                $ RogueX.change_face("_sly",1,brows="_confused")
+                $ RogueX.change_face("_sly", 1,brows = "_confused")
                 if "monogamous" not in RogueX.daily_history:
                     $ RogueX.change_stat("love", 90, -2)
                 ch_r "Oh? Well, glad I got your permission there."
@@ -444,7 +444,7 @@ label Rogue_Monogamy:
                 $ RogueX.change_stat("obedience", 90, 3)
             if "monogamous" in RogueX.traits:
                 $ RogueX.traits.remove("monogamous")
-            $ RogueX.add_word(1,0,"monogamous")
+            $ RogueX.add_word(1, 0,"monogamous")
         "Never mind.":
             pass
     return
@@ -455,74 +455,74 @@ label Rogue_Monogamy:
 label Rogue_Jumped:
 
     ch_p "Hey, Remember that time you threw yourself at me?"
-    $ RogueX.change_face("_sly",1,brows="_confused")
+    $ RogueX.change_face("_sly", 1,brows = "_confused")
     menu:
         ch_r "Yeah?"
         "Could you maybe just ask instead?" if "chill" not in RogueX.traits:
             if RogueX.thirst >= 60 and not approval_check(RogueX, 1500, "LO", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly",1)
+                $ RogueX.change_face("_sly", 1)
                 if "chill" not in RogueX.daily_history:
                     $ RogueX.change_stat("obedience", 90, -2)
                 ch_r "Maybe don't keep me waiting then. . ."
                 return
             elif approval_check(RogueX, 1000, "LO", taboo_modifier=0) and RogueX.love >= RogueX.obedience:
 
-                $ RogueX.change_face("_sly",1)
+                $ RogueX.change_face("_sly", 1)
                 if "chill" not in RogueX.daily_history:
                     $ RogueX.change_stat("love", 90, 1)
                 ch_r "Sorry, [RogueX.player_petname], I just got a little lonely. . ."
                 ch_r "I'll be good. . ."
             elif approval_check(RogueX, 500, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly",1,eyes="_side")
+                $ RogueX.change_face("_sly", 1,eyes = "_side")
                 ch_r "If that's what you really want. . ."
             else:
 
-                $ RogueX.change_face("_sly",1,brows="_confused")
+                $ RogueX.change_face("_sly", 1,brows = "_confused")
                 ch_r "I can't make any promises."
                 return
             if "chill" not in RogueX.daily_history:
                 $ RogueX.change_stat("obedience", 90, 3)
-            $ RogueX.add_word(1,0,"chill","chill")
+            $ RogueX.add_word(1, 0,"chill","chill")
         "Don't bother me like that." if "chill" not in RogueX.traits:
             if approval_check(RogueX, 900, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly",1,eyes="_side")
+                $ RogueX.change_face("_sly", 1,eyes = "_side")
                 ch_r "Ok."
             elif RogueX.thirst >= 60 and not approval_check(RogueX, 600, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly",1)
+                $ RogueX.change_face("_sly", 1)
                 if "chill" not in RogueX.daily_history:
                     $ RogueX.change_stat("obedience", 90, -2)
                 ch_r "Maybe don't keep me waiting then. . ."
                 return
             elif approval_check(RogueX, 450, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly",1,eyes="_side")
+                $ RogueX.change_face("_sly", 1,eyes = "_side")
                 ch_r "If that's what you really want. . ."
             elif approval_check(RogueX, 500, "LO", taboo_modifier=0) and not approval_check(RogueX, 500, "I", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly",1)
+                $ RogueX.change_face("_sly", 1)
                 ch_r "You might want to watch your mouth."
                 ch_r "Still, I'll try to keep to myself. . ."
             else:
 
-                $ RogueX.change_face("_sly",1,brows="_confused")
+                $ RogueX.change_face("_sly", 1,brows = "_confused")
                 ch_r "No promises."
                 return
             if "chill" not in RogueX.daily_history:
                 $ RogueX.change_stat("obedience", 90, 3)
-            $ RogueX.add_word(1,0,"chill","chill")
+            $ RogueX.add_word(1, 0,"chill","chill")
         "Knock yourself out.":
             if approval_check(RogueX, 800, "L", taboo_modifier=0):
-                $ RogueX.change_face("_sly",1)
+                $ RogueX.change_face("_sly", 1)
                 ch_r "Will do. . ."
             elif approval_check(RogueX, 700, "O", taboo_modifier=0):
-                $ RogueX.change_face("_sly",1,eyes="_side")
+                $ RogueX.change_face("_sly", 1,eyes = "_side")
                 ch_r "Yes sir."
             else:
-                $ RogueX.change_face("_sly",1,brows="_confused")
+                $ RogueX.change_face("_sly", 1,brows = "_confused")
                 if "chill" not in RogueX.daily_history:
                     $ RogueX.change_stat("love", 90, -2)
                 ch_r "Maybe. If I've got nothing better to do."
@@ -530,7 +530,7 @@ label Rogue_Jumped:
                 $ RogueX.change_stat("obedience", 90, 3)
             if "chill" in RogueX.traits:
                 $ RogueX.traits.remove("chill")
-            $ RogueX.add_word(1,0,"chill")
+            $ RogueX.add_word(1, 0,"chill")
         "Um, never mind.":
             pass
     return
@@ -583,7 +583,7 @@ return
 
 
 
-label Rogue_Sexchat:
+label Rogue_SexChat:
     $ line = "Yeah, what did you want to talk about?" if not line else line
     while True:
         menu:
@@ -950,7 +950,7 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
             return
         if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(RogueX, 800, "I")):
             if RogueX.location == bg_current and RogueX.thirst >= 30 and "refused" not in RogueX.daily_history and "quicksex" not in RogueX.daily_history:
-                $ RogueX.change_face("_sly",1)
+                $ RogueX.change_face("_sly", 1)
                 ch_r "Hey, do you want to get a little frisky?"
                 call Quick_Sex (RogueX)
                 return
@@ -1022,7 +1022,7 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
         ch_r ". . . but you're looking pretty handsome today, [RogueX.player_petname]."
     elif Options[0] == "purple":
         $ RogueX.daily_history.append("cologne chat")
-        $ RogueX.change_face("_sly",1)
+        $ RogueX.change_face("_sly", 1)
         ch_r "(sniff, sniff). . . hmm, you're smelling good today. . ."
         ch_r ". . . was there anything I could do to make you happy?"
     elif Options[0] == "corruption":
@@ -1088,10 +1088,10 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
         call reset_position(Girl)
 
     elif Options[0] == "seenpeen":
-        $ RogueX.change_face("_sly",1)
+        $ RogueX.change_face("_sly", 1)
         ch_r "You really did surprise me when you whipped that cock out."
         ch_r "I didn't know they looked so big up close."
-        $ RogueX.change_face("_bemused",1)
+        $ RogueX.change_face("_bemused", 1)
         $ RogueX.change_stat("love", 90, 5)
         $ RogueX.history.remove("seenpeen")
     elif Options[0] == "topless":

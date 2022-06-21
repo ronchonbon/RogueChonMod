@@ -70,7 +70,7 @@ label sex_shop:
                             elif Party[0] == JubesX:
                                 ch_v "What're you gonna do with that. . ."
 
-                            $ Party[0].change_face("_confused",1)
+                            $ Party[0].change_face("_confused", 1)
 
                         $ Party[0].change_stat("lust", 60, 5)
                 else:
@@ -127,7 +127,7 @@ label sex_shop:
                             elif Party[0] == JubesX:
                                 ch_v "What're you gonna do with that. . ."
 
-                            $ Party[0].change_face("_confused",1)
+                            $ Party[0].change_face("_confused", 1)
                 else:
                     "You don't have enough for that."
             "Give a gift to [RogueX.name]." if RogueX in Party:
@@ -218,7 +218,7 @@ label sex_shop:
 
                                 $ Girl.change_stat("lust", 89, 5)
                                 $ Girl.change_stat("lust", 89, 10)
-                                $ Girl.change_face("_sadside",1)
+                                $ Girl.change_face("_sadside", 1)
 
                                 ch_e "Hm. . ."
 
@@ -247,7 +247,7 @@ label sex_shop:
                                 ch_j "I guess I should be flattered. . ."
                             elif Girl == StormX:
                                 if StormX not in Rules:
-                                    $ Girl.change_face("_sadside",1)
+                                    $ Girl.change_face("_sadside", 1)
 
                                     ch_s "I don't know that I should accept this from a student. . ."
 
@@ -554,7 +554,7 @@ label swimsuit_shop:
         if Girl:
             call shift_focus(Girl)
 
-            $ Girl.change_face("_smile",1)
+            $ Girl.change_face("_smile", 1)
 
             if Girl.swimwear["outfit_active"]:
                 if Girl == RogueX:
@@ -881,7 +881,7 @@ label swimsuit_shop:
                                 $ Player.add_word(1,"purchased")
 
                                 $ Girl.inventory.append(item)
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
                                 $ Girl.change_stat("love", 200, 20)
                                 $ Girl.change_stat("obedience", 200, 10)
                                 $ Girl.change_stat("inhibition", 200, 5)
@@ -983,7 +983,7 @@ label lingerie_shop:
         if Girl:
             call shift_focus(Girl)
 
-            $ Girl.change_face("_smile",1)
+            $ Girl.change_face("_smile", 1)
 
             if approval_check(Girl, 800) or approval_check(Girl, 600, "L") or approval_check(Girl, 300, "O"):
                 if Girl == RogueX:
@@ -1174,7 +1174,7 @@ label lingerie_shop:
                                 Girl.voice "Um, no, definitely not. . ."
 
                             $ Girl.recent_history.append("no_gift_bra")
-                            $ Girl.change_face("_angry",1)
+                            $ Girl.change_face("_angry", 1)
 
                             $ item = None
                     elif item in underwears or item in hoses:
@@ -1197,7 +1197,7 @@ label lingerie_shop:
                                 Girl.voice "Um, no, not really interested. . ."
 
                             $ Girl.recent_history.append("no_gift_panties")
-                            $ Girl.change_face("_angry",1)
+                            $ Girl.change_face("_angry", 1)
 
                 if item:
                     if item in bras:
@@ -1458,7 +1458,7 @@ label lingerie_shop:
                                 $ Player.add_word(1,"purchased")
 
                                 $ Girl.inventory.append(item)
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
 
                                 if item == "_lace_bra":
                                     $ Girl.change_stat("love", 200, 25)
@@ -1514,7 +1514,7 @@ label lingerie_shop:
                                     elif Girl == EmmaX:
                                         ch_e "This is an. . . unsual gift."
 
-                                        $ EmmaX.change_face("_sly",1)
+                                        $ EmmaX.change_face("_sly", 1)
 
                                         ch_e "But I'll hold on to them. . ."
                                     elif Girl == LauraX:
@@ -1639,7 +1639,7 @@ label clothing_shop:
         if Girl:
             call shift_focus(Girl)
 
-            $ Girl.change_face("_smile",1)
+            $ Girl.change_face("_smile", 1)
 
             # if approval_check(Girl, 800) or approval_check(Girl, 600, "L") or approval_check(Girl, 300, "O"):
             "This is placeholder dialogue."
@@ -2160,7 +2160,7 @@ label clothing_shop:
                                 $ Player.add_word(1,"purchased")
 
                                 $ Girl.inventory.append(item)
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
 
                                 if item == "_raven_suit":
                                     $ Girl.change_stat("love", 200, 25)

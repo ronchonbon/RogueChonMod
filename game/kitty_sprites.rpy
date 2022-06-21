@@ -124,10 +124,10 @@ layeredimage Kitty_sprite standing:
     if KittyX.outfit["held_item"] and KittyX.arm_pose == 2:
         "images/Kitty_standing/Kitty_standing_held[KittyX.outfit[held_item]].png"
 
-    # always:
-    #     "Kitty_standing_fondling_animations"
+    always:
+        "Kitty_standing_fondling_animations"
 
-    anchor (0.5, 0.0) offset (40, 185) zoom 0.47
+    anchor (0.5, 0.0) offset (40, 175) zoom 0.485
 
 layeredimage Kitty_hair_back:
     if KittyX.wet:
@@ -402,13 +402,13 @@ layeredimage Kitty_sex_body:
         "images/Kitty_sex/Kitty_sex_water_body.png"
 
     if "suck_breasts" in [Player.primary_action, Player.secondary_action]:
-        "licking" offset (0.245, 0.273) zoom 0.6
+        "licking" pos (0.245, 0.22) zoom 0.33
 
     if "fondle_breasts" in [Player.primary_action, Player.secondary_action]:
-        "Zero_fondle_breasts_left_animation" offset (0.245, 306) zoom 1.1
+        "Zero_fondle_breasts_left_animation" pos (0.245, 0.25) zoom 0.61
 
     always:
-        "Kitty_head" pos (0.28, -0.065) rotate -10 zoom 0.75
+        "Kitty_head" pos (0.28, -0.065) rotate -10 zoom 0.375
 
     anchor (0.5, 0.5)
 
@@ -533,7 +533,7 @@ layeredimage Kitty_sex_legs:
 
     if Player.sprite and Player.cock_position == "in":
         AlphaMask("Zero_cock_Kitty", "images/Kitty_sex/Kitty_sex_pussy_mask.png")
-    elif "fondle_pussy" in [Player.primary_action, Player.secondary_action] or "finger_pussy" in [Player.primary_action, Player.secondary_action]:
+    elif "finger_pussy" in [Player.primary_action, Player.secondary_action]:
         AlphaMask("Zero_finger_Kitty", "images/Kitty_sex/Kitty_sex_pussy_mask.png")
     elif "dildo_pussy" in [Player.primary_action, Player.secondary_action]:
         AlphaMask("dildo_Kitty", "images/Kitty_sex/Kitty_sex_pussy_mask.png")
@@ -554,9 +554,9 @@ layeredimage Kitty_sex_legs:
         "Zero_cock_Kitty"
 
     if Player.primary_action == "eat_pussy":
-        "licking" pos (0.292, 0.474) zoom 0.7
+        "licking" pos (0.292, 0.474) zoom 0.39
     elif Player.primary_action == "eat_ass":
-        "licking" pos (0.292, 0.548) zoom 0.7
+        "licking" pos (0.292, 0.548) zoom 0.39
 
     if Player.sprite and Player.cock_position == "footjob":
         "Zero_cock_Kitty"
@@ -628,7 +628,7 @@ layeredimage Kitty_doggy_body:
         "images/Kitty_doggy/Kitty_doggy_water_body.png"
 
     if "fondle_breasts" in [Player.primary_action, Player.secondary_action]:
-        "Zero_doggy_fondle_breast_animation"
+        "Zero_doggy_fondle_breast_animation" pos (0.1, 0.36)
 
     anchor (0.5, 0.5)
 
@@ -713,7 +713,7 @@ layeredimage Kitty_doggy_ass:
     if Player.sprite and Player.cock_position == "in":
         "Kitty_doggy_pussy_hole_animation[action_speed]" pos (0.113, 0.475)
     elif "finger_pussy" in [Player.primary_action, Player.secondary_action]:
-        "Kitty_doggy_pussy_fingering" pos (0.113, 0.475)
+        "Kitty_doggy_pussy_fingering_animation" pos (0.113, 0.475)
     elif "dildo_pussy" in [Player.primary_action, Player.secondary_action]:
         "Kitty_doggy_pussy_hole_animation1" pos (0.113, 0.475)
 
@@ -760,7 +760,7 @@ layeredimage Kitty_doggy_ass:
     if Player.sprite and Player.cock_position == "anal" and action_speed:
         "Kitty_doggy_anus_anal_animation[action_speed]" pos (0.113, 0.475)
     elif "finger_ass" in [Player.primary_action, Player.secondary_action]:
-        "Kitty_doggy_anus_fingering" pos (0.113, 0.475)
+        "Kitty_doggy_anus_fingering_animation" pos (0.113, 0.475)
     elif "dildo_ass" in [Player.primary_action, Player.secondary_action]:
         "Kitty_doggy_anus_anal_animation1" pos (0.113, 0.475)
 
@@ -812,7 +812,7 @@ layeredimage Kitty_doggy_ass:
     if Player.sprite and Player.cock_position == "in":
         AlphaMask("Zero_cock_Kitty", "Zero_cock_Kitty_mask")
     elif "finger_pussy" in [Player.primary_action, Player.secondary_action]:
-        AlphaMask("Zero_finger_Kitty", "Zero_cock_Kitty_mask")
+        AlphaMask("Zero_finger_Kitty", "Zero_finger_Kitty_mask")
     elif "dildo_pussy" in [Player.primary_action, Player.secondary_action]:
         AlphaMask("dildo_Kitty", "dildo_Kitty_mask")
 
@@ -827,9 +827,9 @@ layeredimage Kitty_doggy_ass:
         "images/Kitty_doggy/Kitty_doggy_spunk_back.png"
 
     if Player.primary_action == "eat_pussy":
-        "licking" offset (195, 540) zoom 0.5
+        "licking" pos (0.112, 0.53) zoom 0.28
     elif Player.primary_action == "eat_ass":
-        "licking" offset (195, 500) zoom 0.5
+        "licking" pos (0.112, 0.48) zoom 0.28
 
     if Player.sprite and Player.cock_position == "out":
         "images/Kitty_doggy/Kitty_doggy_hotdog_back.png"
@@ -840,7 +840,7 @@ layeredimage Kitty_doggy_ass:
     anchor (0.5, 0.5)
 
 image Kitty_doggy_pussy_hole:
-    "images/Jean_doggy/Jean_doggy_pussy_hole.png"
+    "images/Kitty_doggy/Kitty_doggy_pussy_hole.png"
 
     anchor (0.52, 0.69)
 

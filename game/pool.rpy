@@ -144,10 +144,10 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
         if Type == "no_panties":
             $ Mod = 200
-            $ Girl.change_face("_bemused",1)
+            $ Girl.change_face("_bemused", 1)
             Girl.voice "I don't have bottoms on under this. . ."
         elif Type == "no_bra":
-            $ Girl.change_face("_bemused",1)
+            $ Girl.change_face("_bemused", 1)
             Girl.voice "I don't have a top on under this. . ."
 
         if (Girl.seen_pussy and Girl.seen_breasts) and AloneCheck(Girl):
@@ -179,7 +179,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                         if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
                             $ Girl.change_stat("inhibition", 70, 1)
 
-                        $ Girl.change_face("_sly",1)
+                        $ Girl.change_face("_sly", 1)
                         if Girl == RogueX:
                             ch_r "Hmm, good point. . ."
                         elif Girl == KittyX:
@@ -209,7 +209,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                         elif Girl == LauraX:
                             ch_l "\"And\" that's all you get."
                         elif Girl == JeanX:
-                            $ Girl.change_face("_bemused",1)
+                            $ Girl.change_face("_bemused", 1)
                             ch_j "\"And\" I'd rather not."
                         elif Girl == StormX:
                             ch_s "\"And\" I would prefer to keep it on."
@@ -223,7 +223,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                         if line != "sure":
                             $ Girl.change_face("_sad",2)
                         else:
-                            $ Girl.change_face("_normal",1)
+                            $ Girl.change_face("_normal", 1)
                         if Girl == RogueX:
                             ch_r "Oh, ok. . ."
                         elif Girl == KittyX:
@@ -247,7 +247,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                             $ Girl.change_stat("obedience", 80, -1)
                             $ Girl.change_stat("inhibition", 60, 1)
 
-                        $ Girl.change_face("_angry",1)
+                        $ Girl.change_face("_angry", 1)
                         if Girl == RogueX:
                             ch_r "I don't like that tone on you. . ."
                         elif Girl == KittyX:
@@ -257,7 +257,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                         elif Girl == LauraX:
                             ch_l "Don't push me."
                         elif Girl == JeanX:
-                            $ Girl.change_face("_bemused",1)
+                            $ Girl.change_face("_bemused", 1)
                             ch_j "Ha! no."
                         elif Girl == StormX:
                             $ Girl.change_stat("love", 80, -2)
@@ -274,7 +274,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                         $ Girl.change_stat("inhibition", 60, 1)
                         $ Girl.change_stat("inhibition", 80, 1)
 
-                    $ Girl.change_face("_sly",1)
+                    $ Girl.change_face("_sly", 1)
                     if Girl == RogueX:
                         ch_r "Heh, you're a sweetie. . ."
                     elif Girl == KittyX:
@@ -298,7 +298,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                             $ Girl.change_stat("inhibition", 60, 1)
                             $ Girl.change_stat("inhibition", 80, 1)
 
-                        $ Girl.change_face("_sly",1)
+                        $ Girl.change_face("_sly", 1)
                         if Girl == RogueX:
                             ch_r "Ready for a nice surprise? . ."
                         elif Girl == KittyX:
@@ -357,7 +357,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 $ Girl.change_stat("obedience", 90, 1)
                 $ Girl.change_stat("inhibition", 70, 2)
                 $ Girl.change_stat("inhibition", 90, 1)
-            $ Girl.change_face("_sly",1)
+            $ Girl.change_face("_sly", 1)
             if Girl == RogueX:
                 ch_r "I suppose I could. . ."
             elif Girl == KittyX:
@@ -398,7 +398,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 $ Girl.change_stat("obedience", 80, 1)
                 $ Girl.change_stat("inhibition", 60, 1)
                 $ Girl.change_stat("inhibition", 80, 1)
-            $ Girl.change_face("_bemused",1)
+            $ Girl.change_face("_bemused", 1)
             if Girl == RogueX:
                 ch_r "I suppose I could. . ."
             elif Girl == KittyX:
@@ -430,7 +430,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 $ Girl.change_stat("obedience", 80, 2)
                 $ Girl.change_stat("inhibition", 60, 1)
                 $ Girl.change_stat("inhibition", 90, 2)
-            $ Girl.change_face("_sadside",1)
+            $ Girl.change_face("_sadside", 1)
             if Girl == RogueX:
                 ch_r "Sorry, I think I can live with the tan lines. . ."
             elif Girl == KittyX:
@@ -452,7 +452,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             $ Girl.change_stat("love", 50, -5)
             $ Girl.change_stat("obedience", 50, 2)
             $ Girl.change_stat("inhibition", 60, 1)
-            $ Girl.change_face("_angry",1)
+            $ Girl.change_face("_angry", 1)
             if Girl == RogueX:
                 ch_r "Not interested, [RogueX.player_petname]. . ."
             elif Girl == KittyX:
@@ -592,7 +592,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                 $ Girl.change_stat("obedience", 90, 1)
                 $ Girl.change_stat("inhibition", 70, 2)
                 $ Girl.change_stat("inhibition", 90, 1)
-            $ Girl.change_face("_sly",1)
+            $ Girl.change_face("_sly", 1)
             if Girl == RogueX:
                 ch_r "Sounds fun. . ."
             elif Girl == KittyX:
@@ -627,7 +627,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                 $ Girl.change_stat("obedience", 80, 2)
                 $ Girl.change_stat("inhibition", 60, 1)
                 $ Girl.change_stat("inhibition", 90, 2)
-            $ Girl.change_face("_sadside",1)
+            $ Girl.change_face("_sadside", 1)
             if Girl == RogueX:
                 ch_r "Couldn't we just take a normal swim?"
             elif Girl == KittyX:
@@ -688,11 +688,11 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
 
                                     pass
                                 else:
-                                    $ Girl.change_face("_sly",1)
+                                    $ Girl.change_face("_sly", 1)
                                     Girl.voice "That's not going to work either."
                                     $ Girl.add_word(1,"no_dip","no_dip")
                                     return
-                                $ Girl.change_face("_smile",1)
+                                $ Girl.change_face("_smile", 1)
                                 if Girl == RogueX:
                                     ch_r "Ok, fine. . ."
                                 elif Girl == KittyX:
@@ -745,7 +745,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
             if "dip" not in Girl.recent_history and "no_dip" not in Girl.recent_history:
                 $ Girl.change_stat("obedience", 50, 2)
                 $ Girl.change_stat("inhibition", 60, 1)
-            $ Girl.change_face("_angry",1)
+            $ Girl.change_face("_angry", 1)
             if Girl == RogueX:
                 ch_r "Not interested, [RogueX.player_petname]. . ."
             elif Girl == KittyX:
@@ -755,7 +755,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
             elif Girl == LauraX:
                 ch_l "Nope. . ."
             elif Girl == JeanX:
-                $ Girl.change_face("_bemused",1)
+                $ Girl.change_face("_bemused", 1)
                 ch_j "Ha!"
             elif Girl == StormX:
                 ch_s "I am afraid not, [Girl.player_petname]."
@@ -806,13 +806,13 @@ label Pool_Topless(Girl, temp_Girls=[]):
                 $ Girl.change_stat("obedience", 60, 2)
                 $ Girl.change_stat("inhibition", 50, -2)
                 Girl.voice ". . ."
-                $ Girl.change_face("_surprised",2,eyes="_down")
+                $ Girl.change_face("_surprised",2,eyes = "_down")
             $ Girl.change_stat("love", 80, 3)
             $ Girl.change_stat("love", 90, 1)
             $ Girl.change_stat("lust", 50, 2)
             $ Count = 100
         "Say nothing":
-            $ Girl.change_face("_surprised",2,eyes="_down")
+            $ Girl.change_face("_surprised",2,eyes = "_down")
             "After a few moments, [Girl.name] seems to notice that her top rode up."
             if approval_check(Girl, 1200):
                 $ Count = 0
@@ -830,7 +830,7 @@ label Pool_Topless(Girl, temp_Girls=[]):
         "She smiles and tosses her top over her head."
         call expression Girl.tag + "_First_Topless"
     elif approval_check(Girl, 500-Count,"I") or approval_check(Girl, 1200-Count):
-        $ Girl.change_face("_sly",1)
+        $ Girl.change_face("_sly", 1)
         $ Girl.change_stat("obedience", 60, 2)
         $ Girl.change_stat("inhibition", 50, 3)
         $ Girl.change_stat("inhibition", 80, 2)
@@ -965,7 +965,7 @@ label ShowPool(temp_Girls=[], PoolLoc=0):
 
     while temp_Girls:
         if temp_Girls[0].location == bg_current:
-            $ temp_Girls[0].add_word(0,"swim","swim",0,0)
+            $ temp_Girls[0].add_word(0,"swim","swim", 0, 0)
             $ temp_Girls[0].wet = 1
 
             python:
@@ -1005,7 +1005,7 @@ transform Pool_Bob(PoolLoc=500):
     pos (PoolLoc,450)
     alpha 1
     zoom .45
-    offset (0,0)
+    offset (0, 0)
     anchor (0.5, 0.0)
     xoffset 0
     yoffset 0

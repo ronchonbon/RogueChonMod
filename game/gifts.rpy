@@ -546,7 +546,7 @@ label gifts:
 
                                     $ Girl.change_stat("lust", 89, 5)
                                     $ Girl.change_stat("lust", 89, 10)
-                                    $ Girl.change_face("_sadside",1)
+                                    $ Girl.change_face("_sadside", 1)
 
                                     ch_e "Hm. . ."
 
@@ -575,7 +575,7 @@ label gifts:
                                     ch_j "I guess I should be flattered. . ."
                                 elif Girl == StormX:
                                     if StormX not in Rules:
-                                        $ Girl.change_face("_sadside",1)
+                                        $ Girl.change_face("_sadside", 1)
 
                                         ch_s "I don't know that I should accept this from a student. . ."
 
@@ -846,7 +846,7 @@ label gifts:
 
                                     ch_e "Is this the type of thing you expect from me. . ."
 
-                                    $ Girl.change_face("_sadside", mouth="_lipbite")
+                                    $ Girl.change_face("_sadside", mouth = "_lipbite")
 
                                     ch_e "we'll have to see. . ."
                                 elif Girl == LauraX:
@@ -871,7 +871,7 @@ label gifts:
 
                                     ch_e "I don't exactly read this dime store trash. . ."
 
-                                    $ Girl.change_face("_sadside", mouth="_lipbite")
+                                    $ Girl.change_face("_sadside", mouth = "_lipbite")
 
                                     ch_e "but I will take it. . ."
                                 elif Girl == LauraX:
@@ -956,7 +956,7 @@ label gifts:
                             $ Player.inventory.remove("256 Shades of Grey")
 
                             $ Girl.inventory.append("256 Shades of Grey")
-                            $ Girl.change_stat("obedience", 200, 50,Alt=[[JeanX],200,10])
+                            $ Girl.change_stat("obedience", 200, 50,Alt=[[JeanX],200, 10])
                         else:
                             if Girl == EmmaX:
                                 ch_e "You're repeating yourself."
@@ -1074,7 +1074,7 @@ label gifts:
                             elif approval_check(Girl, 700) or Girl == JeanX:
                                 $ Player.inventory.remove(Girl.tag + "_corset")
 
-                                $ Girl.change_face("_confused",1)
+                                $ Girl.change_face("_confused", 1)
                                 $ Girl.inventory.append("_corset")
                                 $ Girl.change_stat("love", 200, 15)
                                 $ Girl.change_stat("obedience", 200, 20)
@@ -1085,7 +1085,7 @@ label gifts:
                                 elif Girl == JeanX:
                                     ch_j "Thanks?"
 
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
                             elif approval_check(Girl, 600):
                                 $ Player.inventory.remove(Girl.tag + "_corset")
 
@@ -1098,7 +1098,7 @@ label gifts:
                                 if Girl == LauraX:
                                     ch_l "I don't know why you'd give me this, it's not like I'd wear it. . ."
 
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
                             elif "no_gift_bra" in Girl.daily_history:
                                 $ Girl.change_face("_angry",2)
 
@@ -1145,7 +1145,7 @@ label gifts:
                             elif approval_check(Girl, 1000):
                                 $ Player.inventory.remove(Girl.tag + "_lace_corset")
 
-                                $ Girl.change_face("_confused",1)
+                                $ Girl.change_face("_confused", 1)
                                 $ Girl.inventory.append("_lace_corset")
                                 $ Girl.change_stat("love", 200, 20)
                                 $ Girl.change_stat("obedience", 200, 30)
@@ -1153,7 +1153,7 @@ label gifts:
 
                                 ch_l "This is. . . kinda flimsy. . ."
 
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
                             elif approval_check(Girl, 800):
                                 $ Player.inventory.remove(Girl.tag + "_lace_corset")
 
@@ -1165,7 +1165,7 @@ label gifts:
 
                                 ch_l "I don't know why you'd give me this, it's not like I'd wear it. . ."
 
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
                             elif "no_gift_bra" in Girl.daily_history:
                                 $ Girl.change_face("_angry",2)
 
@@ -1336,19 +1336,19 @@ label gifts:
                                 elif Girl == KittyX:
                                     ch_k "I- I wouldn't wear something like these. . ."
 
-                                    $ KittyX.change_face("_bemused",1)
+                                    $ KittyX.change_face("_bemused", 1)
 
                                     ch_k "But I'll hold on to them. . ."
                                 elif Girl == EmmaX:
                                     ch_e "This is an. . . unsual gift."
 
-                                    $ EmmaX.change_face("_sly",1)
+                                    $ EmmaX.change_face("_sly", 1)
 
                                     ch_e "But I'll hold on to them. . ."
                                 elif Girl == LauraX:
                                     ch_l "I don't think I'd wear these. . ."
 
-                                    $ Girl.change_face("_bemused",1)
+                                    $ Girl.change_face("_bemused", 1)
 
                                     ch_l "But I might need to do laundry. . ."
                                 elif Girl == StormX:
@@ -1448,7 +1448,7 @@ label gifts:
                             elif approval_check(Girl, 900) or Girl == JeanX:
                                 $ Player.inventory.remove(Girl.tag + "_bikini_top")
 
-                                $ Girl.change_face("_confused",1)
+                                $ Girl.change_face("_confused", 1)
                                 $ Girl.inventory.append("_bikini_top")
                                 $ Girl.change_stat("love", 200, 20)
                                 $ Girl.change_stat("obedience", 200, 10)
@@ -1469,7 +1469,7 @@ label gifts:
                                 elif Girl == JubesX:
                                     ch_v "Not a bad choice. . ."
 
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
                             elif approval_check(Girl, 700):
                                 $ Player.inventory.remove(Girl.tag + "_bikini_top")
 
@@ -1492,7 +1492,7 @@ label gifts:
                                 elif Girl == JubesX:
                                     ch_v "I guess that works for me. . ."
 
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
                             elif "no_gift_bra" in Girl.daily_history:
                                 $ Girl.change_face("_angry",2)
 
@@ -1579,7 +1579,7 @@ label gifts:
                             elif approval_check(Girl, 900) or Girl == JeanX:
                                 $ Player.inventory.remove(Girl.tag + "_bikini_bottoms")
 
-                                $ Girl.change_face("_confused",1)
+                                $ Girl.change_face("_confused", 1)
                                 $ Girl.inventory.append("_bikini_bottoms")
                                 $ Girl.change_stat("love", 200, 20)
                                 $ Girl.change_stat("obedience", 200, 10)
@@ -1600,7 +1600,7 @@ label gifts:
                                 elif Girl == JubesX:
                                     ch_v "Maybe a little small. . ."
 
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
                             elif approval_check(Girl, 700):
                                 $ Player.inventory.remove(Girl.tag + "_bikini_bottoms")
 
@@ -1623,7 +1623,7 @@ label gifts:
                                 elif Girl == JubesX:
                                     ch_v "I'm not sure I can wear these. . ."
 
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
                             elif "no_gift_panties" in Girl.daily_history:
                                 $ Girl.change_face("_angry",2)
 
@@ -1697,7 +1697,7 @@ label gifts:
                             elif approval_check(Girl, 800):
                                 $ Player.inventory.remove(Girl.tag + "_blue_skirt")
 
-                                $ Girl.change_face("_confused",1)
+                                $ Girl.change_face("_confused", 1)
                                 $ Girl.inventory.append("_blue_skirt")
                                 $ Girl.change_stat("love", 200, 20)
                                 $ Girl.change_stat("obedience", 200, 10)
@@ -1705,7 +1705,7 @@ label gifts:
 
                                 ch_k "This is kinda daring. . ."
 
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
                             elif approval_check(Girl, 600):
                                 $ Player.inventory.remove(Girl.tag + "_blue_skirt")
 
@@ -1717,7 +1717,7 @@ label gifts:
 
                                 ch_k "It'd go well with a swimsuit. . ."
 
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
                             elif "no_gift_skirt" in Girl.recent_history:
                                 $ Girl.change_face("_angry",2)
 
@@ -1836,7 +1836,7 @@ label gifts:
                             elif approval_check(Girl, 1000):
                                 $ Player.inventory.remove(Girl.tag + "_harness")
 
-                                $ Girl.change_face("_confused",1)
+                                $ Girl.change_face("_confused", 1)
                                 $ Girl.inventory.append("_harness")
                                 $ Girl.change_stat("love", 200, 20)
                                 $ Girl.change_stat("obedience", 200, 30)
@@ -1844,7 +1844,7 @@ label gifts:
 
                                 ch_r "Not exactly my usual gear, [Girl.player_petname]. . ."
 
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
                             elif approval_check(Girl, 800):
                                 $ Player.inventory.remove(Girl.tag + "_harness")
 
@@ -1857,7 +1857,7 @@ label gifts:
                                 ch_r "You, ah, shouldn't have [Girl.player_petname]."
                                 ch_r "Really."
 
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
                             elif "no_gift_bra" in Girl.daily_history or "no_gift_panties" in Girl.daily_history:
                                 $ Girl.change_face("_angry",2)
 
@@ -1904,7 +1904,7 @@ label gifts:
                             elif approval_check(Girl, 1000):
                                 $ Player.inventory.remove(Girl.tag + "_fetish")
 
-                                $ Girl.change_face("_confused",1)
+                                $ Girl.change_face("_confused", 1)
                                 $ Girl.inventory.append("_fetish")
                                 $ Girl.change_stat("love", 200, 20)
                                 $ Girl.change_stat("obedience", 200, 30)
@@ -1912,7 +1912,7 @@ label gifts:
 
                                 ch_r "Always did like mesh."
 
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
                             elif approval_check(Girl, 800):
                                 $ Player.inventory.remove(Girl.tag + "_fetish")
 
@@ -1925,7 +1925,7 @@ label gifts:
                                 ch_r "You, ah, shouldn't have [Girl.player_petname]."
                                 ch_r "Really."
 
-                                $ Girl.change_face("_bemused",1)
+                                $ Girl.change_face("_bemused", 1)
                             else:
                                 $ Girl.change_face("_angry",2)
                                 $ Girl.change_stat("love", 50, -10)

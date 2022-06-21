@@ -206,46 +206,24 @@ label start:
     python:
         for G in all_Girls:
             active_Girls.append(G)
-    # #         # G.recent_history.append("blanket")
-    # # #         # G.change_face("_sexy")
-    # #         G.change_outfit("nude")
-    # #         G.mouth = "_smirk"
-    # # #         # G.grool = 2
-    # # #         # G.spunk["mouth"] = True
-    # # #         # G.spunk["pussy"] = True
-    # # #         # G.spunk["anus"] = True
-    # # #
-    # # $ Player.sprite = True
-    # # # $ show_feet = True
-    # # $ action_speed = 2
-    # # $ Player.cock_position = "anal"
-    # # $ Player.primary_action = "anal"
-    # # # $ Player.secondary_action = "finger_ass"
-    # # # #
-    # # # # $ RogueX.change_outfit("nude")
-    # # # # $ RogueX.outfit["dress"] = "_raven_suit"
-    # # # # $ RogueX.outfit["cloak"] = "_raven_cloak"
-    # # # # $ KittyX.change_outfit("nude")
-    # # # # $ KittyX.outfit["dress"] = "_chinese_dress"
-    # # # # $ EmmaX.change_outfit("domme_outfit")
-    # # # # $ EmmaX.arm_pose = 2
-    # # # # $ LauraX.change_outfit("nude")
-    # # # # $ LauraX.outfit["dress"] = "_bunny_suit"
-    # # # # $ LauraX.outfit["hose"] = "_pantyhose"
-    # # # # $ LauraX.outfit["gloves"] = "_bunny"
-    # # # # $ LauraX.outfit["face_outer_accessory"] = "_bunny_ears"
-    # # # # $ JeanX.change_outfit("nude")
-    # # # # $ JeanX.outfit["dress"] = "_sci_fi"
-    $ MystiqueX.change_outfit("true_self")
-    # # # #
-    # # show Rogue_sprite doggy at sprite_location(0.5)
-    # # # show Kitty_sprite blowjob at sprite_location(0.5)
-    # # # show Emma_sprite titjob at sprite_location(0.5)
-    # # # show Laura_sprite titjob at sprite_location(0.5)
-    # # # show Jean_sprite titjob at sprite_location(0.5)
-    # # # show Storm_sprite titjob at sprite_location(0.5)
-    # # # show Jubes_sprite titjob at sprite_location(0.5)
-    # # #
+
+    #         G.change_face("_sexy")
+    #         G.change_outfit("nude")
+    #         G.mouth = "_smirk"
+    #         G.grool = 2
+    #         G.spunk["mouth"] = True
+    #         G.spunk["pussy"] = True
+    #         G.spunk["anus"] = True
+    #
+    # $ Player.sprite = True
+    # $ show_feet = False
+    # $ action_speed = 2
+    # $ Player.cock_position = "anal"
+    # $ Player.primary_action = "fondle_breasts"
+    # $ Player.secondary_action = "fondle_breasts"
+
+    $ MystiqueX.change_outfit("supervillain")
+
     show Rogue_sprite standing at sprite_location(0.15)
     show Kitty_sprite standing at sprite_location(0.25)
     show Emma_sprite standing at sprite_location(0.35)

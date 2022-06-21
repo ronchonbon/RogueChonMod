@@ -129,7 +129,7 @@ label start_action(Girl, action, context = None):
         call before_action(Girl, action, context)
 
         if _return == "continue":
-            call action_cycle(Girl, action, context)
+            call action_cycle(Girl, action)
 
             if _return[1] == "switch":
                 call after_action(Girl, action, "switch")

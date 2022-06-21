@@ -193,7 +193,7 @@ image grool_dripping_animation:
     "images/Wetdrop.png"
 
     subpixel True
-    anchor (0.5, 0.5) alpha 0.0
+    anchor (0.5, 0.5) alpha 0.0 zoom 0.2
     block:
         choice:
             pause 1
@@ -219,7 +219,7 @@ image spunk_dripping_animation:
     "images/SpermdropB.png"
 
     subpixel True
-    anchor (0.5, 0.5) alpha 0.0
+    anchor (0.5, 0.5) alpha 0.0 zoom 0.3
     block:
         choice:
             pause 1
@@ -246,25 +246,25 @@ image licking:
     anchor (0.5, 0.5)
     parallel:
         "images/Lick1.png"
-        0.8
+        0.6
         "images/Lick6.png"
-        0.2
+        0.15
         "images/Lick2.png"
-        0.2
+        0.15
         "images/Lick3.png"
-        0.2
+        0.15
         "images/Lick4.png"
-        0.8
+        0.6
         "images/Lick3.png"
-        0.1
+        0.075
         "images/Lick2.png"
-        0.1
+        0.075
         repeat
     parallel:
-        pause 0.6
-        easein 0.7 yoffset -15
-        pause 0.3
-        easein 0.8 yoffset 0
+        pause 0.45
+        easein 0.525 yoffset -15
+        pause 0.225
+        easein 0.6 yoffset 0
         repeat
 
 image dildo:
@@ -353,9 +353,9 @@ image PhoneScreen:
 
     contains:
         "[focused_Girl.Tag]_sprite"
-        pos (0,0)
+        pos (0, 0)
         offset (290,50)
-        anchor (0.6,0)
+        anchor (0.6, 0)
         zoom 1.1
 
 
@@ -409,7 +409,7 @@ image dress_screen_shadow:
 image CircleTest:
     contains:
         "images/Clockbase.png"
-        anchor (0.5,0.5)
+        anchor (0.5, 0.5)
 
         yzoom -1
     contains:
@@ -425,18 +425,18 @@ image CircleTest:
             ),
     contains:
         "images/Clockface.png"
-        anchor (0.5,0.5)
+        anchor (0.5, 0.5)
 
 image ClockWhite:
     contains:
         "images/Clockwhite.png"
-        anchor (0.5,0.5)
+        anchor (0.5, 0.5)
         rotate -(int(round *3.6))
 
 image ClockRed:
     contains:
         "images/Clockred.png"
-        anchor (0.5,0.5)
+        anchor (0.5, 0.5)
         rotate -(int(round *3.6-180))
 
 image blue_screen:
@@ -477,7 +477,7 @@ transform Vibrate():
 
 image UI_Vibrator = LiveComposite(
         (224,224),
-        (0,0), ConditionSwitch(
+        (0, 0), ConditionSwitch(
             "not Vibration", "UI_VibA",
             "Vibration", At("UI_VibB", Vibrate()),
             ),
@@ -497,7 +497,7 @@ image VibratorRightBreast:
         "UI_Vibrator"
         pos (150,380)
         zoom 0.5
-        anchor (0.5,0.5)
+        anchor (0.5, 0.5)
         alpha 0.5
         rotate 55
         block:
@@ -512,7 +512,7 @@ image VibratorLeftBreast:
         "UI_Vibrator"
         pos (270,400)
         zoom 0.5
-        anchor (0.5,0.5)
+        anchor (0.5, 0.5)
         alpha 0.5
         rotate 55
         block:
@@ -527,7 +527,7 @@ image VibratorPussy:
         "UI_Vibrator"
         pos (240,665)
         zoom 0.5
-        anchor (0.5,0.5)
+        anchor (0.5, 0.5)
         alpha 0.5
         rotate 70
         block:
@@ -542,7 +542,7 @@ image VibratorAnal:
         "UI_Vibrator"
         pos (270,640)
         zoom 0.5
-        anchor (0.5,0.5)
+        anchor (0.5, 0.5)
         alpha 0.3
         rotate 10
         block:
@@ -557,7 +557,7 @@ image VibratorPussyInsert:
         "UI_Vibrator"
         pos (240,645)
         zoom 0.5
-        anchor (0.5,0.5)
+        anchor (0.5, 0.5)
         alpha 0.5
         rotate 0
 
@@ -566,7 +566,7 @@ image VibratorAnalInsert:
         "UI_Vibrator"
         pos (250,640)
         zoom 0.5
-        anchor (0.5,0.5)
+        anchor (0.5, 0.5)
         alpha 0.3
         rotate 0
 
@@ -575,7 +575,7 @@ image TestUIAnimation:
         "UI_Vibrator"
         pos (270,640)
         zoom 0.5
-        anchor (0.5,0.5)
+        anchor (0.5, 0.5)
         alpha 0.5
         rotate 10
         block:
@@ -597,20 +597,20 @@ image TestUIAnimation:
 image Zero_Chibicock:
     LiveComposite(
         (225,350),
-        (0,0), ConditionSwitch(
+        (0, 0), ConditionSwitch(
             "Player.color == 'White'", "images/Chibi_Cock_P.png",
             "Player.color == 'Black'", "images/Chibi_Cock_B.png",
             "Player.color == 'Green'", "images/Chibi_Cock_G.png",
             "True", Null()))
 
-    anchor (0.5,0.5)
+    anchor (0.5, 0.5)
 
 image Chibi_Null:
 
     contains:
         "Zero_Chibicock"
-        anchor (0.5,0.5)
-        pos (0,0)
+        anchor (0.5, 0.5)
+        pos (0, 0)
         rotate 0
         xzoom 1
     pos (75,675)
@@ -620,14 +620,14 @@ image Chibi_jerking_off:
 
     contains:
         "Zero_Chibicock"
-        anchor (0.5,0.5)
-        pos (0,0)
+        anchor (0.5, 0.5)
+        pos (0, 0)
         rotate 0
         xzoom 1
     contains:
         "images/Chibi_Hand_M.png"
         pos (-10,-80)
-        anchor (0.5,0.5)
+        anchor (0.5, 0.5)
         rotate 20
         block:
             ease 0.3 rotate -10 pos (0,50)
@@ -640,8 +640,8 @@ image Chibi_Handy:
 
     contains:
         "Zero_Chibicock"
-        anchor (0.5,0.5)
-        pos (0,0)
+        anchor (0.5, 0.5)
+        pos (0, 0)
         rotate 0
         xzoom 1
     contains:
@@ -651,10 +651,10 @@ image Chibi_Handy:
             )
 
         pos (0,-110)
-        anchor (0.5,0.5)
+        anchor (0.5, 0.5)
         rotate -10
         block:
-            ease 0.3 rotate 0 pos (10,10)
+            ease 0.3 rotate 0 pos (10, 10)
             ease 0.7 rotate -10 pos (0,-130)
             repeat
     pos (75,675)
@@ -662,20 +662,20 @@ image Chibi_Handy:
 
 image Chibi_mouth_Mask:
     "images/Chibi_mouth_Mask.png"
-    anchor (0.5,0.5)
+    anchor (0.5, 0.5)
 
 image Chibi_mouth_Rogue:
     "images/Chibi_mouth_R.png"
-    anchor (0.5,0.5)
+    anchor (0.5, 0.5)
 image Chibi_mouth_Kitty:
     "images/Chibi_mouth_K.png"
-    anchor (0.5,0.5)
+    anchor (0.5, 0.5)
 image Chibi_mouth_Emma:
     "images/Chibi_mouth_E.png"
-    anchor (0.5,0.5)
+    anchor (0.5, 0.5)
 image Chibi_mouth_Storm:
     "images/Chibi_mouth_S.png"
-    anchor (0.5,0.5)
+    anchor (0.5, 0.5)
 
 image Chibi_Sucking:
 
@@ -687,39 +687,39 @@ image Chibi_SuckingB:
 
     LiveComposite(
         (225,350),
-        (0,0), ConditionSwitch(
+        (0, 0), ConditionSwitch(
             "Partner == RogueX", "Chibi_mouth_Rogue",
             "Partner == EmmaX", "Chibi_mouth_Emma",
             "Partner == StormX", "Chibi_mouth_Storm",
             "True", "Chibi_mouth_Kitty"
             ),
-        (0,0), AlphaMask("Chibi_Sucking_Cock", "Chibi_mouth_Mask")
+        (0, 0), AlphaMask("Chibi_Sucking_Cock", "Chibi_mouth_Mask")
         )
-    pos (7,0)
-    anchor (0.5,0.5)
+    pos (7, 0)
+    anchor (0.5, 0.5)
     zoom 0.5
     xzoom 0.71
     block:
         easeout 0.25 rotate 0 pos (2,48) xzoom 1
         easein 0.25 rotate 0 pos (6,92) xzoom 1
         easeout 0.5 rotate 0 pos (2,48) xzoom 1
-        easein 0.5 rotate 0 pos (5,0) xzoom 0.71
+        easein 0.5 rotate 0 pos (5, 0) xzoom 0.71
         repeat
 
 image Chibi_Sucking_Cock:
 
     contains:
         "Zero_Chibicock"
-        pos (100,175)
+        pos (100, 175)
         xzoom 1.5
-        anchor (0.5,0.5)
+        anchor (0.5, 0.5)
 
         rotate 0
         block:
             easeout 0.25 rotate 0 pos (110,80) xzoom 1
             easein 0.25 rotate 0 pos (100,-10) xzoom 1
             easeout 0.5 rotate 0 pos (110,80) xzoom 1
-            easein 0.5 rotate 0 pos (100,175) xzoom 1.5
+            easein 0.5 rotate 0 pos (100, 175) xzoom 1.5
             repeat
 
 

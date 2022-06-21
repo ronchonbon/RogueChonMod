@@ -6,7 +6,7 @@ label addiction_event(Girl):
 
     $ Girl.event_happened[1] += 1
 
-    $ Player.add_word(1,0,"fix")
+    $ Player.add_word(1, 0,"fix")
 
     $ taboo = 0
 
@@ -78,7 +78,7 @@ label addiction_event(Girl):
             ch_e "You've been doing well in your studies, it seems. . ."
             ch_e "Look, since the other day when we first. . . came into contact. . ."
 
-            $ Girl.change_face("_sadside",1,brows="_angry")
+            $ Girl.change_face("_sadside", 1,brows = "_angry")
 
             ch_e "I've been. . . struggling with something."
             ch_e "A feeling. . ."
@@ -100,7 +100,7 @@ label addiction_event(Girl):
                     ch_l "Oh. . . no reason."
                     ch_l "I just sort of feel a little jumpy, and wanted to try something."
         elif Girl == JeanX:
-            $ Girl.change_face("_confused",1)
+            $ Girl.change_face("_confused", 1)
 
             ch_j "Oh. . ."
             ch_j "Hey there. . . [Girl.player_petname]."
@@ -109,7 +109,7 @@ label addiction_event(Girl):
 
             ch_j "I'm just going to touch you for a second."
 
-            $ Girl.change_face("_bemused",1)
+            $ Girl.change_face("_bemused", 1)
 
             ch_j "Didn't want to freak you out. . ."
 
@@ -127,12 +127,12 @@ label addiction_event(Girl):
 
                     ch_j "None of your business!"
 
-                    $ Girl.change_face("_bemused",1,eyes="_side")
+                    $ Girl.change_face("_bemused", 1,eyes = "_side")
 
                     ch_j "I was just thinking about the last time we touched and. . ."
                     ch_j "I don't know. Whatever."
 
-                    $ Girl.change_face("_bemused",1)
+                    $ Girl.change_face("_bemused", 1)
         elif Girl == StormX:
             $ Girl.change_face("_sad")
 
@@ -234,7 +234,7 @@ label addiction_event(Girl):
             if approval_check(Girl, 660, "LI",Alt=[[RogueX,JeanX],560]):
                 $ Girl.change_stat("lust", 80, 3)
                 $ Girl.change_stat("love", 80, 6)
-                $ Girl.change_face("_bemused",1)
+                $ Girl.change_face("_bemused", 1)
 
                 if Girl == RogueX:
                     ch_r "Yeah, sure, let's do that."
@@ -557,7 +557,7 @@ label second_addiction_event:
 
                 ch_j "Really?"
 
-                $ Girl.change_face("_angry",eyes="_side")
+                $ Girl.change_face("_angry", eyes = "_side")
 
                 ch_j "Well that'd explain it, I guess. . ."
 
@@ -580,13 +580,13 @@ label second_addiction_event:
         ch_l "Yeah, so I've been off my game, missing a lot of easy hits."
         ch_l "Could you throw me a bone here?"
     elif Girl == JeanX:
-        $ Girl.change_face("_angry",eyes="_side")
+        $ Girl.change_face("_angry", eyes = "_side")
 
         ch_j "Anyway, I don't like this. . ."
         ch_j "I don't like feeling somehow. . ."
         ch_j "-Less- than -perfect.-"
 
-        $ Girl.change_face("_normal",brows="_sad")
+        $ Girl.change_face("_normal", brows = "_sad")
 
         ch_j "I mean, you must be used to it, but try to see it from my perspective!"
         ch_j ". . ."
@@ -618,23 +618,23 @@ label third_addiction_event:
         ch_e "You have to understand, [Girl.player_petname], this is incredibly uncomfortable."
         ch_e "I haven't had a full night's sleep in a while now, it's quite unbearable."
     elif Girl == LauraX:
-        $ Girl.change_face("_angry",eyes="_manic")
+        $ Girl.change_face("_angry", eyes = "_manic")
 
         ch_l "Hey, I don't know what the deal is here, but I don't like it."
         ch_l "Cut me some slack here, or I'll cut it myself."
     elif Girl == JeanX:
-        $ Girl.change_face("_angry",eyes="_manic")
+        $ Girl.change_face("_angry", eyes = "_manic")
 
         ch_j "Now look here, fucko!"
         ch_j "I have had just about enough of your \"not doing what Jean says\" nonsense!"
         ch_j "What is it you want from me?!"
     elif Girl == StormX:
-        $ Girl.change_face("_angry",eyes="_white")
+        $ Girl.change_face("_angry", eyes = "_white")
 
         ch_s "[Player.name]!"
         ch_s "This has gone on long enough!"
 
-        $ Girl.change_face("_angry",eyes="_manic")
+        $ Girl.change_face("_angry", eyes = "_manic")
 
         ch_s "I am finding this. . . urge within me intollerable, and we simply must resolve it!"
     elif Girl == JubesX:
@@ -1209,7 +1209,7 @@ label addiction_ultimatum:
                 $ JubesX.change_stat("love", 90, -2)
                 $ JubesX.change_stat("obedience", 70, 1)
                 $ JubesX.change_stat("obedience", 90, 2)
-                $ JubesX.change_face("_angry",1)
+                $ JubesX.change_face("_angry", 1)
 
         if "_angry" in Girl.recent_history:
             if Girl.addiction >= 80:
@@ -1433,13 +1433,13 @@ label addiction_ultimatum:
         elif Girl == JubesX:
             ch_v "Oh, suck you!"
 
-            $ Girl.change_face("_angry",mouth="open")
+            $ Girl.change_face("_angry", mouth = "open")
 
             call punch
 
             "She opens her jaws and lunges for your throat, but stops herself at the last second."
 
-            $ Girl.change_face("_angry", eyes="_side")
+            $ Girl.change_face("_angry", eyes = "_side")
 
             "She shakes it off and approaches more calmly."
 
@@ -1573,7 +1573,7 @@ label addiction_bad_end:
     $ Girl.event_happened[3] = 5
     $ Girl.recent_history.append("addiction")
     $ Girl.daily_history.append("addiction")
-    $ Girl.drain_word("ultimatum",0)
+    $ Girl.drain_word("ultimatum", 0)
 
     $ approval_bonus = 0
 
@@ -1711,13 +1711,13 @@ label addiction_fix_beg:
         elif Girl == JubesX:
             ch_v "Oh, suck you!"
 
-            $ Girl.change_face("_angry",mouth="open")
+            $ Girl.change_face("_angry", mouth = "open")
 
             call punch
 
             "She opens her jaws and lunges for your throat, but stops herself at the last second."
 
-            $ Girl.change_face("_angry", eyes="_side")
+            $ Girl.change_face("_angry", eyes = "_side")
 
             "She shakes it off and approaches more calmly."
 
@@ -1872,7 +1872,7 @@ label addiction_fix(Girl):
                 elif Girl == LauraX:
                     ch_l "Not cool."
                 elif Girl == JeanX:
-                    $ Girl.change_face("_bemused",1)
+                    $ Girl.change_face("_bemused", 1)
                     $ Girl.change_stat("obedience", 50, 1)
 
                     ch_j "Yeah, but I'd like to avoid that, you know?"
@@ -2137,7 +2137,7 @@ label addiction_fix_end:
                 pass
             "See you next time. . .":
                 if not Girl.forced and approval_check(Girl, 800):
-                    $ Girl.change_face("_bemused",1,eyes="_side")
+                    $ Girl.change_face("_bemused", 1,eyes = "_side")
 
                     if Girl == RogueX:
                         ch_r "Yeah, later."
@@ -2154,7 +2154,7 @@ label addiction_fix_end:
                     elif Girl == JubesX:
                         ch_v "Yeah, sure."
                 else:
-                    $ Girl.change_face("_angry",1)
+                    $ Girl.change_face("_angry", 1)
                     $ Girl.change_stat("love", 60, -2)
                     $ Girl.change_stat("love", 80, -2)
                     $ Girl.change_stat("obedience", 50, 1)
@@ -2163,7 +2163,7 @@ label addiction_fix_end:
                     "She scowls"
             "Did you want to stick around?":
                 if not Girl.forced and approval_check(Girl, 800, "LI"):
-                    $ Girl.change_face("_smile",1)
+                    $ Girl.change_face("_smile", 1)
                     $ Party.append(Girl)
 
                     if Girl == RogueX:
@@ -2181,7 +2181,7 @@ label addiction_fix_end:
                     elif Girl == JubesX:
                         ch_v "Sure, I guess."
                 else:
-                    $ Girl.change_face("_angry",1)
+                    $ Girl.change_face("_angry", 1)
                     $ Girl.change_stat("love", 80, -2)
                     $ Girl.change_stat("obedience", 50, 1)
                     $ Girl.change_stat("obedience", 70, 1)
@@ -2989,7 +2989,7 @@ label addiction_serum:
         if not Player.semen:
             ch_p "I'm kind of. . . out of stock at the moment, sorry. . ."
 
-            $ Girl.change_face("_angry",1)
+            $ Girl.change_face("_angry", 1)
             $ Girl.change_stat("love", 80, -5)
             $ Girl.change_stat("obedience", 50, -5)
             $ Girl.change_stat("obedience", 80, 2)

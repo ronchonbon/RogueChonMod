@@ -815,7 +815,7 @@ label recent_action_lines(Girl, action):
             $ lines.append("Mmm, again? Ok, let me get the girls ready.")
 
         if action == "blowjob":
-            $ lines.append("Mmm, again? [[stretches her jaw]")
+            $ lines.append("Mmm, again? [stretches her jaw]")
 
         if action in sex_actions:
             $ lines.append("You want to go again? Ok.")
@@ -837,7 +837,7 @@ label recent_action_lines(Girl, action):
             $ lines.append("I'm getting foot cramps. . .")
 
         if action == "blowjob":
-            $ lines.append("Mmm, again? [[stretches her jaw]")
+            $ lines.append("Mmm, again? [stretches her jaw]")
 
         if action in sex_actions:
             $ lines.append("Another round? {i}Fine.{/i}")
@@ -860,7 +860,7 @@ label recent_action_lines(Girl, action):
             $ lines.append("You know, heels are nightmare on the arches. . .")
 
         if action == "blowjob":
-            $ lines.append("Mmm, again? [[yawns]")
+            $ lines.append("Mmm, again? [yawns]")
 
         if action in sex_actions:
             $ lines.append("Again? " + Girl.player_petname + ", you're insatiable!")
@@ -880,7 +880,7 @@ label recent_action_lines(Girl, action):
             $ lines.append("Hmm, another handy then. . .")
 
         if action == "blowjob":
-            $ lines.append("Mmm, again? [[yawns]")
+            $ lines.append("Mmm, again? [yawns]")
 
         if action in sex_actions:
             $ lines.append("Again? Your funeral.")
@@ -1646,7 +1646,7 @@ label begging_lines(Girl, action):
             "Sure, I guess.",
             "Okay.",
             "I guess. . .",
-            "Ok, [[She gestures for you to come over].",
+            "Ok, [She gestures for you to come over].",
             "Heh, ok.",
             "Well. . . ok.",
             "Sure!",
@@ -1679,7 +1679,7 @@ label begging_lines(Girl, action):
             "Heh, ok, fine.",
             "Sure, I guess.",
             "Ooooookay.",
-            "Ok. . . [[She gestures for you to come over].",
+            "Ok. . . [She gestures for you to come over].",
             "Heh, ok, ok."]
 
         if action in cock_actions:
@@ -1690,7 +1690,7 @@ label begging_lines(Girl, action):
             $ lines.append("I guess I could. . .")
 
         if action == "blowjob":
-            $ lines.append("Fiiine. . . [[She licks her lips].")
+            $ lines.append("Fiiine. . . [She licks her lips].")
     elif Girl == EmmaX:
         $ lines = ["Politeness can be rewarded. . .",
             "Oh, if you insist. . .",
@@ -1699,13 +1699,13 @@ label begging_lines(Girl, action):
             "Well. . . ok.",
             "I could perhaps give it a try.",
             "I suppose I could. . .",
-            "Fine. . . [[She licks her lips].",
+            "Fine. . . [She licks her lips].",
             "Hmph, ok, fine.",
             "Oh, I suppose.",
             "I'll do it.",
             "Well, give it here.",
             "I suppose I could. . .",
-            "Fine. . . [[She gestures for you to come over].",
+            "Fine. . . [She gestures for you to come over].",
             "Ok, ok.",
             "Sure, I suppose.",
             "Fine.",
@@ -1725,12 +1725,12 @@ label begging_lines(Girl, action):
             "Well. . . alright.",
             "Yum.",
             "Sure, whip it out.",
-            "Ok. . . [[She licks her lips].",
+            "Ok. . . [She licks her lips].",
             "Alright, let's see it.",
             "O-kay.",
             "Fine.",
             "I suppose I could. . .",
-            "Ok. . . [[She gestures for you to come over].",
+            "Ok. . . [She gestures for you to come over].",
             "Ok, ok.",
             "Sure, I guess.",
             "OK.",
@@ -1741,7 +1741,7 @@ label begging_lines(Girl, action):
             "It couldn't hurt having you around. . .",
             "Very well.",
             "Sure, why not?",
-            "[[chuckles]. . . ok.",
+            "[chuckles]. . . ok.",
             "Huh. Ok.",
             "Couldn't hurt. . .",
             "Alright.",
@@ -1755,7 +1755,7 @@ label begging_lines(Girl, action):
             "Well. . . alright.",
             "Yum.",
             "Sure, whip it out.",
-            "Ok. . . [[She licks her lips].",
+            "Ok. . . [She licks her lips].",
             "Alright, let's see it.",
             "Sure, I guess.",
             "Okay. . . ",
@@ -1766,7 +1766,7 @@ label begging_lines(Girl, action):
             "OK.",
             "Fine, lemme see it.",
             "I guess I could. . .",
-            "Ok. . . [[She gestures for you to come over].",
+            "Ok. . . [She gestures for you to come over].",
             "Heh, ok, ok.",
             "Sure. Ok.",
             "Couldn't hurt. . .",
@@ -1786,19 +1786,19 @@ label begging_lines(Girl, action):
             "Well. . . ok.",
             "I could perhaps give it a try.",
             "I suppose that I could. . .",
-            "Fine. . . [[She licks her lips].",
+            "Fine. . . [She licks her lips].",
             "Hmph, ok, fine.",
             "Oh, I suppose we might.",
             "I would do this.",
             "Very well, give it here.",
             "I suppose that I could. . .",
-            ". . . Fine. [[She gestures for you to come over]",
+            ". . . Fine. [She gestures for you to come over]",
             "Ok, ok.",
             "Hmm, I suppose.",
             "Fine.",
             "Very well, bring it out.",
             "I suppose that I could. . .",
-            "Fine. . . [[She gestures for you to come over].",
+            "Fine. . . [She gestures for you to come over].",
             "Hmm, ok.",
             "You really do like to watch.",
             "Once more?",
@@ -3351,7 +3351,7 @@ label trying_to_convince_lines(Girl, action):
             "Well. . . ok.",
             "I guess.",
             "I guess, whip it out.",
-            "Fine. . . [[She drools a bit into her cleavage].",
+            "Fine. . . [She drools a bit into her cleavage].",
             "Heh, ok, alright.",
             "Well, sure, stick it in.",
             "I suppose. . .",
@@ -3372,7 +3372,7 @@ label trying_to_convince_lines(Girl, action):
             "Well. . . ok.",
             "I guess.",
             "I guess, whip it out.",
-            "Fine. . . [[She drools a bit into her cleavage].",
+            "Fine. . . [She drools a bit into her cleavage].",
             "Heh, ok."]
     elif Girl == EmmaX:
         $ lines = ["You present a compelling case. . .",
@@ -3388,7 +3388,7 @@ label trying_to_convince_lines(Girl, action):
             "Oh, very well.",
             "Mmmmm.",
             "Fine, whip it out.",
-            "Fine. . . [[She drools a bit into her cleavage].",
+            "Fine. . . [She drools a bit into her cleavage].",
             "Oh, all right."]
     elif Girl == LauraX:
         $ lines = ["You make a good point. . .",
@@ -3404,7 +3404,7 @@ label trying_to_convince_lines(Girl, action):
             "Well. . . ok.",
             "I guess.",
             "I guess, whip it out.",
-            "Fine. . . [[She drools a bit into her cleavage].",
+            "Fine. . . [She drools a bit into her cleavage].",
             "Heh, ok."]
     elif Girl == JeanX:
         $ lines = ["You make a good point. . .",
@@ -3440,7 +3440,7 @@ label trying_to_convince_lines(Girl, action):
             "Oh, very well.",
             "Mmmmm.",
             "Fine, show me.",
-            "Fine. . . [[She drools a bit into her cleavage].",
+            "Fine. . . [She drools a bit into her cleavage].",
             "Oh, all right."]
     elif Girl == JubesX:
         $ lines = ["You make a good point. . .",
@@ -4361,7 +4361,7 @@ label first_action_approval_addicted_lines(Girl, action):
             "Hrmm. . ."]
     elif Girl == LauraX:
         $ lines = ["Hmmmm. . . .",
-            "[[wipes away a little drool]"
+            "[wipes away a little drool]"
             "Okay. . .",
             "Sounds fun. . .",
             "Hmm, sounds fun. . .",
@@ -5241,7 +5241,7 @@ label accepted_without_question_lines(Girl, action):
             "Okay.",
             "Hells yeah.",
             "I guess. . .",
-            "Fine. . . [[She gestures for you to come over].",
+            "Fine. . . [She gestures for you to come over].",
             "Heh, ok, ok.",
             "Well. . . ok.",
             "I suppose it would help to have something nice to look at. . .",
@@ -5254,10 +5254,10 @@ label accepted_without_question_lines(Girl, action):
             $ lines.append("Well, sure, give it a rub.")
 
         if action == "titjob":
-            $ lines.append("Fine. . . [[She drools a bit into her cleavage].")
+            $ lines.append("Fine. . . [She drools a bit into her cleavage].")
 
         if action == "blowjob":
-            $ lines.append("Fine. . . [[She licks her lips].")
+            $ lines.append("Fine. . . [She licks her lips].")
             $ lines.append("Well, sure, ahhhhhh.")
             $ lines.append("Yum.")
 
@@ -5279,7 +5279,7 @@ label accepted_without_question_lines(Girl, action):
     elif Girl == KittyX:
         $ lines = ["Sure, I guess.",
             "Ooooookay  .",
-            "Ok. . . [[She gestures for you to come over].",
+            "Ok. . . [She gestures for you to come over].",
             "Heh, ok, ok.",
             "Well. . . ok.",
             "Heh, ok.",
@@ -5297,12 +5297,15 @@ label accepted_without_question_lines(Girl, action):
             "Lol, ok."]
 
         if action == "titjob":
-            $ lines.append("Fine. . . [[She drools a bit into her cleavage].")
+            $ lines.append("Fine. . . [She drools a bit into her cleavage].")
 
         if action == "blowjob":
             $ lines.append("Yum.")
-            $ lines.append("Ok. . . [[She licks her lips].")
+            $ lines.append("Ok. . . [She licks her lips].")
             $ lines.append("Well, sure, ahhhhhh.")
+
+        if action in ["sex", "anal"]:
+            $ lines.append("Well, sure, stick it in.")
 
         if action in hand_actions:
             $ lines.append("Well, sure, give it a rub.")
@@ -5323,23 +5326,23 @@ label accepted_without_question_lines(Girl, action):
             $ lines.append("Cool, lemme see it.")
             $ lines.append("Well, sure, put it here.")
 
-        if action in [dildo_actions, "sex", "anal"]:
+        if action in dildo_actions:
             $ lines.append("Well, sure, stick it in.")
     elif Girl == EmmaX:
         $ lines = ["Oh, I suppose.",
-            "Fine. . . [[She gestures for you to come over].",
+            "Fine. . . [She gestures for you to come over].",
             "Ok, ok.",
             "Well, sure, come over here.",
             "Oh, very well.",
             "Mmmmm.",
             "Fine, whip it out.",
-            "Fine. . . [[She drools a bit into her cleavage].",
+            "Fine. . . [She drools a bit into her cleavage].",
             "Oh, all right.",
             "Well, ok.",
             "Well. . . ok.",
             "Mmmm.",
             "Sure, let me have it.",
-            "Mmmm. . . [[She licks her lips].",
+            "Mmmm. . . [She licks her lips].",
             "Ok, fine.",
             "Well, sure, stick it in.",
             "Hmm. . . ok.",
@@ -5351,7 +5354,7 @@ label accepted_without_question_lines(Girl, action):
             "Fine.",
             "Very well, bring it out.",
             "I suppose I could. . .",
-            "Fine. . . [[She gestures for you to come over].",
+            "Fine. . . [She gestures for you to come over].",
             "Hmm, ok.",
             "Well. . . fine, I accept.",
             "Sure!",
@@ -5370,7 +5373,7 @@ label accepted_without_question_lines(Girl, action):
             "It couldn't hurt having you around. . .",
             "Very well.",
             "Sure, why not?",
-            "[[chuckles]. . . ok."]
+            "[chuckles]. . . ok."]
 
         if action in passive_actions:
             $ lines.append("I suppose I could. . .")
@@ -5382,17 +5385,17 @@ label accepted_without_question_lines(Girl, action):
         $ lines = ["Sure, I guess.",
             "O-kay.",
             "Fine.",
-            "Ok. . . [[She gestures for you to come over].",
+            "Ok. . . [She gestures for you to come over].",
             "Ok, ok.",
             "Well, sure, put it here.",
             "Well. . . ok.",
             "Yum.",
             "Sure, whip it out.",
-            "Fine. . . [[She drools a bit into her cleavage].",
+            "Fine. . . [She drools a bit into her cleavage].",
             "Heh, ok.",
             "Sure. Ahhhhhh.",
             "Well. . . alright.",
-            "Ok. . . [[She licks her lips].",
+            "Ok. . . [She licks her lips].",
             "Alright, let's see it.",
             "Well. . . ok.",
             "Sure!",
@@ -5404,7 +5407,7 @@ label accepted_without_question_lines(Girl, action):
             "OK.",
             "Fine, lemme see it.",
             "I guess I could. . .",
-            "Ok. . . [[She gestures for you to come over].",
+            "Ok. . . [She gestures for you to come over].",
             "Well. . . fine, let's do it.",
             "Sure.",
             "We could, I guess.",
@@ -5441,7 +5444,7 @@ label accepted_without_question_lines(Girl, action):
             "Well. . . alright.",
             "Yum.",
             "Sure, whip it out.",
-            "Ok. . . [[She licks her lips].",
+            "Ok. . . [She licks her lips].",
             "Alright, let's see it.",
             "Well, sure, stick it in.",
             "Sure!",
@@ -5451,7 +5454,7 @@ label accepted_without_question_lines(Girl, action):
             "OK.",
             "Fine, lemme see it.",
             "I guess I could. . .",
-            "Ok. . . [[She gestures for you to come over].",
+            "Ok. . . [She gestures for you to come over].",
             "Well. . . fine, let's do it.",
             "We could, I guess.",
             "Hmmm, sure.",
@@ -5476,19 +5479,19 @@ label accepted_without_question_lines(Girl, action):
             $ lines.append("I suppose I could. . .")
     elif Girl == StormX:
         $ lines = ["Oh, I suppose we might.",
-            ". . . Fine. [[She gestures for you to come over]",
+            ". . . Fine. [She gestures for you to come over]",
             "Ok, ok.",
             "Fine, come over here.",
             "Oh, very well.",
             "Mmmmm.",
             "Fine, show me.",
-            "Fine. . . [[She drools a bit into her cleavage].",
+            "Fine. . . [She drools a bit into her cleavage].",
             "Oh, all right.",
             ". . . ok.",
             "Well. . . ok.",
             "Mmmm.",
             "Sure, let me have it.",
-            "Mmmm. . . [[She licks her lips].",
+            "Mmmm. . . [She licks her lips].",
             "Ok, fine.",
             "Well, sure, stick it in.",
             "Sure!",
@@ -5499,7 +5502,7 @@ label accepted_without_question_lines(Girl, action):
             "Fine.",
             "Very well, bring it out.",
             "I suppose that I could. . .",
-            "Fine. . . [[She gestures for you to come over].",
+            "Fine. . . [She gestures for you to come over].",
             "Hmm, ok.",
             "Well. . . fine, I accept.",
             "Of course!",
@@ -5517,7 +5520,7 @@ label accepted_without_question_lines(Girl, action):
             "It could not hurt having you around. . .",
             "Very well.",
             "Sure, why not?",
-            "[[chuckles]. . . Fine."]
+            "[chuckles]. . . Fine."]
 
         if action in passive_actions:
             $ lines.append("I would do this.")
@@ -5529,7 +5532,7 @@ label accepted_without_question_lines(Girl, action):
         $ lines = ["Sure, I guess.",
             "O-kay.",
             "Fine.",
-            "Ok. . . [[She gestures for you to come over].",
+            "Ok. . . [She gestures for you to come over].",
             "Ok, ok.",
             "Huh. Ok.",
             "Couldn't hurt. . .",
@@ -6150,7 +6153,7 @@ label masturbation_stop_for_now_lines(Girl, action):
 label maybe_blowjob_instead_lines(Girl):
     if Girl == RogueX:
         $ lines = ["I could just. . . blow you instead?",
-            "I could maybe. . . you know, [[she pushes her tongue against the side of her cheek]?"]
+            "I could maybe. . . you know, [she pushes her tongue against the side of her cheek]?"]
     elif Girl == KittyX:
         $ lines = ["Could I[Girl.like]. . . blow you instead?"]
     elif Girl == EmmaX:
@@ -6194,9 +6197,9 @@ label maybe_handjob_instead_lines(Girl):
             $ lines = []
     else:
         if Girl == RogueX:
-            $ lines = ["I could maybe. . . [[she makes a jerking motion with her hand]?"]
+            $ lines = ["I could maybe. . . [she makes a jerking motion with her hand]?"]
         elif Girl == KittyX:
-            $ lines = ["I could maybe. . . [[she makes a jerking motion with her hand]?"]
+            $ lines = ["I could maybe. . . [she makes a jerking motion with her hand]?"]
         elif Girl == EmmaX:
             $ lines = ["Would my hand be an adequate substitute?"]
         elif Girl == LauraX:

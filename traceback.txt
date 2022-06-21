@@ -1,65 +1,54 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/locations.rpy", line 156, in script call
-    call world_map
-  File "game/locations.rpy", line 1150, in script call
-    call showering
-  File "game/shower.rpy", line 500, in script call
-    call set_the_scene(check_if_dressed = False)
-  File "game/utilities.rpy", line 1047, in script call
-    call stop_all_actions
-  File "game/utilities.rpy", line 1333, in script call
-    call reset_position(temp_Girls[0])
-  File "game/girl_animations.rpy", line 22, in script
-    show Jubes_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
-Exception: DynamicImage 'images/Jubes_standing/Jubes_standing_jacket[JubesX.outfit[jacket]]_neck.png': could not find image. ('images/Jubes_standing/Jubes_standing_jacket_jacket_neck.png')
+  File "game/script.rpy", line 228, in script
+    show Kitty_sprite standing at sprite_location(0.25)
+Exception: DynamicImage u'images/Kitty_standing/Kitty_standing_spunk_mouth[KittyX.mouth].png': could not find image. (u'images/Kitty_standing/Kitty_standing_spunk_mouth_smirk.png')
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/locations.rpy", line 156, in script call
-    call world_map
-  File "game/locations.rpy", line 1150, in script call
-    call showering
-  File "game/shower.rpy", line 500, in script call
-    call set_the_scene(check_if_dressed = False)
-  File "game/utilities.rpy", line 1047, in script call
-    call stop_all_actions
-  File "game/utilities.rpy", line 1333, in script call
-    call reset_position(temp_Girls[0])
-  File "game/girl_animations.rpy", line 22, in script
-    show Jubes_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
-  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\ast.py", line 1388, in execute
+  File "game/script.rpy", line 228, in script
+    show Kitty_sprite standing at sprite_location(0.25)
+  File "renpy/ast.py", line 1197, in execute
     show_imspec(self.imspec, atl=getattr(self, "atl", None))
-  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\ast.py", line 1351, in show_imspec
-    renpy.config.show(name,
-  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\exports.py", line 712, in show
+  File "renpy/ast.py", line 1167, in show_imspec
+    atl=atl)
+  File "renpy/exports.py", line 768, in show
     sls.add(layer, img, key, zorder, behind, at_list=at_list, name=name, atl=atl, default_transform=default_transform, transient=transient)
-  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\core.py", line 1164, in add
+  File "renpy/display/core.py", line 1147, in add
     thing.visit_all(lambda d : None)
-  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\core.py", line 582, in visit_all
+  File "renpy/display/core.py", line 568, in visit_all
     d.visit_all(callback, seen)
-  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\core.py", line 582, in visit_all
+  File "renpy/display/core.py", line 568, in visit_all
     d.visit_all(callback, seen)
-  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\core.py", line 582, in visit_all
+  File "renpy/display/core.py", line 568, in visit_all
     d.visit_all(callback, seen)
-  [Previous line repeated 3 more times]
-  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\core.py", line 572, in visit_all
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 558, in visit_all
     for d in self.visit():
-  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\layout.py", line 1494, in visit
+  File "renpy/display/layout.py", line 1415, in visit
     self.update(self.last_st, self.last_at)
-  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\layout.py", line 1522, in update
+  File "renpy/display/layout.py", line 1443, in update
     child.visit_all(lambda c : c.per_interact())
-  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\core.py", line 572, in visit_all
+  File "renpy/display/core.py", line 558, in visit_all
     for d in self.visit():
-  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\image.py", line 777, in visit
+  File "renpy/display/image.py", line 744, in visit
     self.find_target()
-  File "D:\Fun\STEMS\renpy-8-nightly-2022-06-18-dc9d32e35-sdk.7z\renpy-8-nightly-2022-06-18-dc9d32e35-sdk\renpy\display\image.py", line 675, in find_target
+  File "renpy/display/image.py", line 652, in find_target
     raise Exception(error)
-Exception: DynamicImage 'images/Jubes_standing/Jubes_standing_jacket[JubesX.outfit[jacket]]_neck.png': could not find image. ('images/Jubes_standing/Jubes_standing_jacket_jacket_neck.png')
+Exception: DynamicImage u'images/Kitty_standing/Kitty_standing_spunk_mouth[KittyX.mouth].png': could not find image. (u'images/Kitty_standing/Kitty_standing_spunk_mouth_smirk.png')
 
-Windows-10-10.0.19042
-Ren'Py 8.0.0.22061701n
-Rogue-Like Chonky Mod 0.2g
-Mon Jun 20 05:02:37 2022
+Windows-10-10.0.19041
+Ren'Py 7.4.11.2266
+Rogue-Like Chonky Mod 0.2h
+Mon Jun 20 21:42:54 2022

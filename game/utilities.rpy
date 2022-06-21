@@ -331,8 +331,8 @@ label offscreen_studying(Studiers = []):
 
     $ renpy.random.shuffle(Studiers)
 
-    $ Studiers[0].check_if_likes(Studiers[1],800,5,1)
-    $ Studiers[1].check_if_likes(Studiers[0],800,5,1)
+    $ Studiers[0].check_if_likes(Studiers[1],800,5, 1)
+    $ Studiers[1].check_if_likes(Studiers[0],800,5, 1)
 
     $ Studiers[0].XP += 5
     $ Studiers[1].XP += 5
@@ -348,9 +348,9 @@ label reset_all_girls_at_beginning:
 
         if temp_Girls[0].lust >= 70 or temp_Girls[0].thirst >= 30 or (renpy.random.randint(1, 40) + temp_Girls[0].lust)>= 70:
             if "no_masturbating" in temp_Girls[0].traits:
-                $ temp_Girls[0].add_word(1,0,"wants_to_masturbate",0,0)
+                $ temp_Girls[0].add_word(1, 0,"wants_to_masturbate", 0, 0)
             else:
-                $ temp_Girls[0].add_word(1,0,"will_masturbate",0,0)
+                $ temp_Girls[0].add_word(1, 0,"will_masturbate", 0, 0)
 
         if "lesbian" in temp_Girls[0].recent_history:
             $ temp_Girls[0].thirst -= int(temp_Girls[0].thirst/2)
@@ -394,7 +394,7 @@ label reset_all_girls_at_beginning:
         if time_index == 0:
             $ del temp_Girls[0].daily_history[:]
         elif time_index == 3 and "going_on_date" in temp_Girls[0].daily_history and "stoodup" not in temp_Girls[0].traits:
-            $ Player.drain_word("going_on_date",0,1)
+            $ Player.drain_word("going_on_date", 0, 1)
 
             $ temp_Girls[0].traits.append("stoodup")
 
@@ -679,11 +679,11 @@ label remove_girl(Girl, also_hide = True, hold = False):
 
                 $ Girls[0].location = "bg_campus"
 
-                $ Player.drain_word("locked",0,0,1)
+                $ Player.drain_word("locked", 0, 0, 1)
             else:
                 $ Girls[0].location = Girls[0].home
 
-                $ Player.drain_word("locked",0,0,1)
+                $ Player.drain_word("locked", 0, 0, 1)
 
         if also_hide:
             call hide_girl(Girls[0])
@@ -735,7 +735,7 @@ label event_calls(event_Girls=[]):
         if bg_current == "bg_campus":
             call DateNight
 
-            $ Player.drain_word("going_on_date",0,1)
+            $ Player.drain_word("going_on_date", 0, 1)
 
             return
         else:
@@ -1135,11 +1135,11 @@ label quick_event:
                     $ event_Girls[0].location = event_Girls[0].home if bg_current != event_Girls[0].home else "bg_campus"
 
                     if "no_masturbating" in event_Girls[0].traits:
-                        $ event_Girls[0].add_word(1,0,"wants_to_masturbate",0,0)
+                        $ event_Girls[0].add_word(1, 0,"wants_to_masturbate", 0, 0)
 
                         call CalltoFap(event_Girls[0])
                     else:
-                        $ event_Girls[0].add_word(1,0,"will_masturbate",0,0)
+                        $ event_Girls[0].add_word(1, 0,"will_masturbate", 0, 0)
         else:
             if event_Girls[0].location == "bg_showerroom" and "showered" in event_Girls[0].daily_history:
                 $ event_Girls[0].location = event_Girls[0].weekly_schedule[weekday][time_index]
@@ -1290,7 +1290,7 @@ label girls_location(change = False):
 
         if "leaving" in temp_Girls[0].recent_history:
             if "sleepover" in temp_Girls[0].traits:
-                $ temp_Girls[0].drain_word("sleepover",0,0,1)
+                $ temp_Girls[0].drain_word("sleepover", 0, 0, 1)
 
             if temp_Girls[0].location != bg_current:
                 if temp_Girls[0] in Present:
@@ -1993,8 +1993,8 @@ label clear_the_room(Character=0, Passive=0, Silent=0, Girls=[]):
     while Girls:
         if Girls[0] in Party:
             $ Party.remove(Girls[0])
-        $ Girls[0].drain_word("leaving",1,0,0)
-        $ Girls[0].drain_word("arriving",1,0,0)
+        $ Girls[0].drain_word("leaving", 1, 0, 0)
+        $ Girls[0].drain_word("arriving", 1, 0, 0)
 
         if Silent:
             pass
@@ -2374,7 +2374,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0):
         if bg_current == Primary.home:
             if "_angry" in Primary.daily_history:
 
-                $ Primary.change_face("_bemused", 1,brows="_angry")
+                $ Primary.change_face("_bemused", 1,brows = "_angry")
                 if Primary == RogueX:
                     ch_r "I'm kinda pissed at you right now, get out of here."
                 elif Primary == KittyX:
@@ -2510,9 +2510,9 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0):
                                 ch_s "Quite certain."
                             elif Primary == JubesX:
                                 ch_v "Oh, let me check. . ."
-                                $ Primary.change_face("_angry",eyes="_side")
+                                $ Primary.change_face("_angry", eyes = "_side")
                                 ch_v ". . ."
-                                $ Primary.change_face("_angry",mouth="open")
+                                $ Primary.change_face("_angry", mouth = "open")
                                 ch_v "-YES.-"
                                 $ Primary.change_face("_angry")
                         elif time_index >= 3 and approval_check(Primary, 800, "LI") and approval_check(Primary, 400, "OI"):
@@ -3124,7 +3124,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
     if current_Girl:
         if current_Girl == EmmaX and ("threesome" not in EmmaX.history or "classcaught" not in EmmaX.history):
 
-            $ Girl.add_word(1,0,0,"saw with " + current_Girl.tag)
+            $ Girl.add_word(1, 0, 0,"saw with " + current_Girl.tag)
 
             if bg_current == EmmaX.home:
                 ch_e "I. . . This isn't what it looks like. . ."
@@ -3170,7 +3170,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
                 elif current_Girl == JubesX:
                     ch_v "Yeah, we were. . . busy."
 
-                $ Girl.add_word(1,0,0,"saw with " + current_Girl.tag)
+                $ Girl.add_word(1, 0, 0,"saw with " + current_Girl.tag)
 
                 if Girl == RogueX:
                     $ Girl.change_face("_perplexed", 2)
@@ -3227,7 +3227,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
     call taboo_level
 
     $ Girl.change_outfit(check_if_yoinked = True)
-    $ Player.drain_word("locked",0,0,1)
+    $ Player.drain_word("locked", 0, 0, 1)
 
     call set_the_scene (1, 0, 0, 0)
 
@@ -3271,7 +3271,7 @@ transform sprite_location(x_position = stage_right, y_position = 0):
     pos (x_position, y_position)
 
 image punchout:
-    Null(0,0)
+    Null(0, 0)
 
 label punch:
     show punchout with vpunch
@@ -3438,8 +3438,8 @@ label Partner_Like(Girl=0, value=1, Altvalue=1, Measure=800, Partner=Partner):
                 $ value += 2
 
 
-        $ Partner.check_if_likes(Girl,Measure,value,1)
-        $ Girl.check_if_likes(Partner,Measure,value,1)
+        $ Partner.check_if_likes(Girl,Measure,value, 1)
+        $ Girl.check_if_likes(Partner,Measure,value, 1)
 
     return
 
@@ -3475,7 +3475,7 @@ label Haremchange_stat(Girl=0, Check=1000, value=0, Greater=0, temp_GirlsA=[], t
             $ temp_GirlsB.remove(temp_GirlsA[0])
         while temp_GirlsB:
 
-            $ temp_GirlsA[0].check_if_likes(temp_GirlsB[0],Check,value,1)
+            $ temp_GirlsA[0].check_if_likes(temp_GirlsB[0],Check,value, 1)
             $ temp_GirlsB.remove(temp_GirlsB[0])
         $ temp_GirlsA.remove(temp_GirlsA[0])
     return
@@ -3595,7 +3595,7 @@ label Jumped(Act=0):
     call set_the_scene
 
     $ Player.recent_history.append("jumped")
-    $ Girls[0].change_face("_sly",1)
+    $ Girls[0].change_face("_sly", 1)
     if Act == "leave":
 
         "Suddenly, [Girls[0].name] grabs your arm with a miscevious smile, and starts to lead you back towards your room."
@@ -3608,7 +3608,7 @@ label Jumped(Act=0):
                 $ Girls[0].change_stat("obedience", 50, 10)
                 $ Girls[0].change_stat("obedience", 95, 5)
                 $ Girls[0].change_stat("inhibition", 95, -5)
-                $ Girls[0].change_face("_sad",1)
+                $ Girls[0].change_face("_sad", 1)
                 "You tell her to cut it out, and head back to what you were doing."
                 $ Player.recent_history.append("nope")
                 $ Girls[0].add_word(1,"refused","refused")
@@ -3625,7 +3625,7 @@ label Jumped(Act=0):
 
 
         if Partner in all_Girls:
-            $ Girls[1].change_face("_sly",1)
+            $ Girls[1].change_face("_sly", 1)
             "Suddenly, [Girls[0].name] pulls you aside and [Partner.name] follows along."
         else:
             "Suddenly, [Girls[0].name] pulls you aside."
@@ -3642,7 +3642,7 @@ label Jumped(Act=0):
                 $ Girls[0].change_stat("obedience", 50, 10)
                 $ Girls[0].change_stat("obedience", 95, 5)
                 $ Girls[0].change_stat("inhibition", 95, -5)
-                $ Girls[0].change_face("_sad",1)
+                $ Girls[0].change_face("_sad", 1)
                 "You tell her to cut it out, and head back to what you were doing."
                 $ Player.recent_history.append("nope")
                 $ Girls[0].add_word(1,"refused","refused")
@@ -3658,7 +3658,7 @@ label Jumped(Act=0):
     call taboo_level
     call set_the_scene(check_if_dressed = False)
 
-    $ Girls[0].add_word(1,"jumped","jumped",0,"jumped")
+    $ Girls[0].add_word(1,"jumped","jumped", 0,"jumped")
 
     if Girls[0] == RogueX:
         ch_r "You've been dodge'in me lately."
@@ -3701,7 +3701,7 @@ label Jumped(Act=0):
 label Quick_Sex(Girl=focused_Girl, Act=0):
 
 
-    $ Girl.change_face("_sly",1)
+    $ Girl.change_face("_sly", 1)
     $ Girl.add_word(1,"quicksex","quicksex")
     menu:
         extend ""
@@ -3715,7 +3715,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
             $ Girl.change_stat("love", 80, -2)
             if (2*Girl.obedience) >= (Girl.love + Girl.inhibition + (5*Girl.thirst)):
 
-                $ Girl.change_face("_sadside",1)
+                $ Girl.change_face("_sadside", 1)
                 $ Girl.change_stat("obedience", 90, 7)
                 if Girl == RogueX:
                     ch_r "Ok, fine. . ."
@@ -3740,7 +3740,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
                         pass
             elif (approval_check(Girl, 600, "I") and Girl.thirst >= 30) or Girl.thirst >= 50:
 
-                $ Girl.change_face("_confused",1,eyes="_surprised")
+                $ Girl.change_face("_confused", 1,eyes = "_surprised")
                 $ Girl.change_stat("love", 80, -1)
                 $ Girl.change_stat("obedience", 70, 4)
                 $ Girl.change_stat("inhibition", 60, 5)
@@ -3773,7 +3773,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
                         "Ok, fine.":
                             $ Act = 1
                             $ Count = 0
-                            $ Girl.change_face("_sly",1)
+                            $ Girl.change_face("_sly", 1)
                             $ Girl.change_stat("love", 80, 2)
                             $ Girl.change_stat("love", 95, 3)
                             $ Girl.change_stat("obedience", 70, 2)
@@ -3787,7 +3787,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
                             $ line = "beg"
                         "Only if I get to choose.":
 
-                            $ Girl.change_face("_smile",1,brows="_confused")
+                            $ Girl.change_face("_smile", 1,brows = "_confused")
                             $ Girl.change_stat("love", 90, 2)
                             $ Girl.change_stat("obedience", 80, 3)
                             $ Girl.change_stat("obedience", 95, 3)
@@ -3821,7 +3821,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
                                 pause 1
                                 call expression Girl.tag + "_First_Topless" pass (1)
                                 $ Girl.top_pulled_up = 0
-                                $ Girl.change_face("_confused",1,mouth="_smile")
+                                $ Girl.change_face("_confused", 1,mouth = "_smile")
                                 $ Girl.change_stat("inhibition", 70, 3)
                                 $ Girl.change_stat("inhibition", 95, 3)
                                 if Girl == RogueX:
@@ -3870,7 +3870,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
                                     ch_v "Ya'sure?"
                             else:
 
-                                $ Girl.change_face("_sad",2,eyes="_surprised")
+                                $ Girl.change_face("_sad",2,eyes = "_surprised")
                                 $ Girl.change_stat("love", 90, -4)
                                 $ Girl.change_stat("obedience", 70, 6)
                                 $ Girl.change_stat("obedience", 200, 3)
@@ -3899,7 +3899,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
                             $ counter += 100
                         elif counter > 50:
 
-                            $ Girl.change_face("_angry",1)
+                            $ Girl.change_face("_angry", 1)
                             $ Girl.change_stat("love", 70, -3)
                             $ Girl.change_stat("love", 85, -5)
                             $ Girl.change_stat("obedience", 80, -2)
@@ -3924,7 +3924,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
                                 ch_v "Boooo."
                         else:
 
-                            $ Girl.change_face("_sad",2,brows="_confused")
+                            $ Girl.change_face("_sad",2,brows = "_confused")
                             $ Girl.change_stat("love", 95, -2)
                             $ Girl.change_stat("obedience", 50, -2)
                             $ Girl.change_stat("obedience", 90, -2)
@@ -3989,7 +3989,7 @@ label Escalation(Girl=0):
 
         return
 
-    if Player.primary_action == "fondle_breast" and approval_check(Girl,1050,taboo_modifier=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.action_counter["suck_breasts"]:
+    if Player.primary_action == "fondle_breast" and approval_check(Girl, 1050,taboo_modifier=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.action_counter["suck_breasts"]:
 
         if Player.secondary_action == "suck_breasts":
             $ Player.secondary_action = None
@@ -4000,7 +4000,7 @@ label Escalation(Girl=0):
         if "suck_breasts" in Girl.recent_history:
 
             $ renpy.pop_call()
-    elif Player.primary_action == "fondle_thighs" and approval_check(Girl,1050,taboo_modifier=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.action_counter["fondle_pussy"]:
+    elif Player.primary_action == "fondle_thighs" and approval_check(Girl, 1050,taboo_modifier=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.action_counter["fondle_pussy"]:
 
         if Player.secondary_action == "fondle_thighs":
             $ Player.secondary_action = None
@@ -4014,7 +4014,7 @@ label Escalation(Girl=0):
     elif not Player.semen:
 
         pass
-    elif Player.primary_action == "handjob" and approval_check(Girl,1200,taboo_modifier=4) and Girl.lust >= 30 and Girl.action_counter["blowjob"]:
+    elif Player.primary_action == "handjob" and approval_check(Girl, 1200,taboo_modifier=4) and Girl.lust >= 30 and Girl.action_counter["blowjob"]:
 
         $ Girl.change_stat("inhibition", 80, 3)
 
@@ -4022,7 +4022,7 @@ label Escalation(Girl=0):
         if "blowjob" in Girl.recent_history:
 
             $ renpy.pop_call()
-    elif Player.primary_action not in ("sex","anal") and approval_check(Girl,1400,taboo_modifier=5,Alt=[[JeanX],1200]) and Girl.lust >= 60 and Girl.action_counter["sex"] >= 3:
+    elif Player.primary_action not in ("sex","anal") and approval_check(Girl, 1400,taboo_modifier=5,Alt=[[JeanX], 1200]) and Girl.lust >= 60 and Girl.action_counter["sex"] >= 3:
 
         $ Girl.change_stat("inhibition", 80, 4)
 
@@ -4030,7 +4030,7 @@ label Escalation(Girl=0):
         if "sex" in Girl.recent_history:
 
             $ renpy.pop_call()
-    elif Player.primary_action != "anal" and approval_check(Girl,1400,taboo_modifier=5,Alt=[[JeanX],1200]) and Girl.lust >= 70 and Girl.action_counter["anal"] >= 5:
+    elif Player.primary_action != "anal" and approval_check(Girl, 1400,taboo_modifier=5,Alt=[[JeanX], 1200]) and Girl.lust >= 70 and Girl.action_counter["anal"] >= 5:
 
         $ Girl.change_stat("inhibition", 80, 5)
 
@@ -4220,42 +4220,42 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
     elif not Player.primary_action:
         pass
     elif Player.primary_action == "eat_ass":
-        $ approval = approval_check(Girl,1550,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
+        $ approval = approval_check(Girl, 1550,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
     elif Player.primary_action == "anal":
-        $ approval = approval_check(Girl,1550,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
+        $ approval = approval_check(Girl, 1550,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
     elif Player.primary_action == "sex":
-        $ approval = approval_check(Girl,1400,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
+        $ approval = approval_check(Girl, 1400,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
     elif Player.primary_action == "eat_pussy":
-        $ approval = approval_check(Girl,1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
     elif Player.secondary_action == "jerking_off":
-        $ approval = approval_check(Girl,1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
     elif Player.primary_action == "blowjob":
-        $ approval = approval_check(Girl,1300,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1300,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
     elif Player.primary_action == "titjob":
-        $ approval = approval_check(Girl,1200,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
+        $ approval = approval_check(Girl, 1200,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
     elif Player.primary_action == "hotdog":
-        $ approval = approval_check(Girl,1000,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
+        $ approval = approval_check(Girl, 1000,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
     elif Player.primary_action == "handjob" or girl_secondary_action == "handjob":
-        $ approval = approval_check(Girl,1100,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1100,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
     elif Player.primary_action == "footjob":
-        $ approval = approval_check(Girl,1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
     elif Player.primary_action == "dildo_ass":
-        $ approval = approval_check(Girl,1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
     elif Player.primary_action == "dildo_pussy":
-        $ approval = approval_check(Girl,1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1250,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
     elif Player.primary_action == "finger_ass":
-        $ approval = approval_check(Girl,1300,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1300,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
     elif Player.primary_action == "fondle_pussy" or Player.primary_action == "finger_pussy":
-        $ approval = approval_check(Girl,1050,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1050,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
     elif Player.primary_action == "suck_breasts":
-        $ approval = approval_check(Girl,1050,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
+        $ approval = approval_check(Girl, 1050,Bonus=Mod, taboo_modifier = (tabooM* 3 ))
     elif Player.primary_action == "fondle_breasts":
         $ approval = approval_check(Girl,950,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
     elif Player.primary_action == "fondle_ass":
         $ approval = approval_check(Girl,850,Bonus=Mod, taboo_modifier = (tabooM* 1 ))
 
     elif Player.primary_action == "masturbation":
-        $ approval = approval_check(Girl,1200,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1200,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
 
     elif Player.primary_action == "kiss":
         $ approval = approval_check(Girl,500,Bonus=Mod, taboo_modifier = 0)
@@ -4263,7 +4263,7 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
         $ approval = approval_check(Girl,750,Bonus=Mod, taboo_modifier = 0)
 
     elif Player.primary_action == "lesbian":
-        $ approval = approval_check(Girl,1350,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1350,Bonus=Mod, taboo_modifier = (tabooM* 2 ))
 
 
     if not approval:
@@ -4272,36 +4272,36 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
     elif not second_girl_main_action:
         pass
     elif second_girl_main_action == "eat_ass":
-        $ approval = approval_check(Girl,1750,Bonus=(Mod+200), taboo_modifier = (tabooM* 3 ))
+        $ approval = approval_check(Girl, 1750,Bonus=(Mod+200), taboo_modifier = (tabooM* 3 ))
     elif second_girl_main_action == "eat_pussy":
-        $ approval = approval_check(Girl,1450,Bonus=(Mod+200), taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1450,Bonus=(Mod+200), taboo_modifier = (tabooM* 2 ))
     elif second_girl_main_action == "blowjob":
-        $ approval = approval_check(Girl,1300,Bonus=(Mod+200), taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1300,Bonus=(Mod+200), taboo_modifier = (tabooM* 2 ))
     elif second_girl_main_action == "handjob":
-        $ approval = approval_check(Girl,1200,Bonus=(Mod+200), taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1200,Bonus=(Mod+200), taboo_modifier = (tabooM* 2 ))
     elif second_girl_main_action == "finger_ass":
-        $ approval = approval_check(Girl,1500,Bonus=(Mod+200), taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1500,Bonus=(Mod+200), taboo_modifier = (tabooM* 2 ))
     elif second_girl_main_action == "fondle_pussy":
-        $ approval = approval_check(Girl,1250,Bonus=(Mod+200), taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1250,Bonus=(Mod+200), taboo_modifier = (tabooM* 2 ))
     elif second_girl_main_action == "suck_breasts":
-        $ approval = approval_check(Girl,1250,Bonus=(Mod+200), taboo_modifier = (tabooM* 3 ))
+        $ approval = approval_check(Girl, 1250,Bonus=(Mod+200), taboo_modifier = (tabooM* 3 ))
     elif second_girl_main_action == "fondle_breasts":
-        $ approval = approval_check(Girl,1150,Bonus=(Mod+200), taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1150,Bonus=(Mod+200), taboo_modifier = (tabooM* 2 ))
     elif second_girl_main_action == "kiss girl":
-        $ approval = approval_check(Girl,1050,Bonus=(Mod+200), taboo_modifier = 0)
+        $ approval = approval_check(Girl, 1050,Bonus=(Mod+200), taboo_modifier = 0)
     elif second_girl_main_action == "kiss both":
-        $ approval = approval_check(Girl,1050,Bonus=(Mod+200), taboo_modifier = 0)
+        $ approval = approval_check(Girl, 1050,Bonus=(Mod+200), taboo_modifier = 0)
     elif second_girl_main_action == "fondle_ass":
-        $ approval = approval_check(Girl,1050,Bonus=(Mod+200), taboo_modifier = (tabooM* 1 ))
+        $ approval = approval_check(Girl, 1050,Bonus=(Mod+200), taboo_modifier = (tabooM* 1 ))
     elif second_girl_main_action == "masturbation":
-        $ approval = approval_check(Girl,1400,Bonus=(Mod+200), taboo_modifier = (tabooM* 2 ))
+        $ approval = approval_check(Girl, 1400,Bonus=(Mod+200), taboo_modifier = (tabooM* 2 ))
     elif second_girl_main_action == "watch":
-        $ approval = approval_check(Girl,1000,Bonus=(Mod+200), taboo_modifier = 0)
+        $ approval = approval_check(Girl, 1000,Bonus=(Mod+200), taboo_modifier = 0)
     elif second_girl_main_action == "kiss":
         $ approval = approval_check(Girl,600,Bonus=Mod, taboo_modifier = 0)
 
     if not Silent and not approval and not Girl.forced:
-        $ Girl.change_face("_sadside",1)
+        $ Girl.change_face("_sadside", 1)
         if Girl == RogueX:
             if Girl2:
                 ch_r "I don't know, with [Girl2.name] here and all."
@@ -4364,13 +4364,13 @@ label Seen_First_Peen(Primary=0, Secondary=0, Silent=0, Undress=0, Passive=0, Gi
 
             if "naked" not in Player.recent_history and Undress:
                 "You strip nude."
-                $ Player.add_word(1,"naked",0,0,0)
+                $ Player.add_word(1,"naked", 0, 0, 0)
             elif "cockout" in Player.recent_history:
                 return
             else:
                 "You whip your cock out."
 
-            $ Player.add_word(1,"cockout",0,0,0)
+            $ Player.add_word(1,"cockout", 0, 0, 0)
     else:
 
 
@@ -4526,19 +4526,19 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                     $ Girl.change_face("_smile", 1)
                 elif Girl == EmmaX:
                     ch_e "You just don't appreciate the finer things. . ."
-                    $ Girl.change_face("_sly",0)
+                    $ Girl.change_face("_sly", 0)
                 elif Girl == LauraX:
                     ch_l "Aw, come on, it's not that bad. . ."
-                    $ Girl.change_face("_sly",0)
+                    $ Girl.change_face("_sly", 0)
                 elif Girl == JeanX:
                     ch_j "I mean, I've seen worse. . ."
-                    $ Girl.change_face("_sly",0)
+                    $ Girl.change_face("_sly", 0)
                 elif Girl == StormX:
                     ch_s "It's far from the worst I've seen. . ."
-                    $ Girl.change_face("_sly",0)
+                    $ Girl.change_face("_sly", 0)
                 elif Girl == JubesX:
                     ch_v "More for me, I guess. . ."
-                    $ Girl.change_face("_sly",0)
+                    $ Girl.change_face("_sly", 0)
         $ Silent = 1
 
     if Undress:
@@ -4561,9 +4561,9 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
 
                 if Girl == EmmaX and ("detention" in Girl.recent_history or "classcaught" in Girl.recent_history):
 
-                    $ Girl.change_face("_confused", eyes="_down")
+                    $ Girl.change_face("_confused", eyes = "_down")
                     ch_e "Mmm?"
-                    $ Girl.change_face("_surprised", eyes="_squint")
+                    $ Girl.change_face("_surprised", eyes = "_squint")
                     if Girl.seen_peen == 1:
                         $ Girl.change_stat("love", 30, 10)
                         $ Girl.change_stat("love", 90, 5)
@@ -4660,49 +4660,49 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
             return False
         elif approval_check(Girl, 1200) or approval_check(Girl, 500, "L"):
 
-            $ Girl.change_face("_sly",1)
+            $ Girl.change_face("_sly", 1)
             if Girl.seen_peen == 1:
                 $ Girl.change_face("_surprised",2)
                 if Girl == RogueX:
                     ch_r "Whoa, I didn't know they looked so big up close."
-                    $ Girl.change_face("_bemused",1)
+                    $ Girl.change_face("_bemused", 1)
                     $ Girl.change_stat("love", 90, 5)
                 elif Girl == KittyX:
                     $ Girl.change_face("_surprised",2)
                     ch_k "That's. . . impressive."
-                    $ Girl.change_face("_bemused",1)
+                    $ Girl.change_face("_bemused", 1)
                     $ Girl.change_stat("love", 90, 3)
                 elif Girl == EmmaX:
-                    $ Girl.change_face("_surprised",1, eyes="_down")
+                    $ Girl.change_face("_surprised", 1, eyes = "_down")
                     ch_e "Well that's certainly an interesting specimen."
-                    $ Girl.change_face("_bemused",1)
+                    $ Girl.change_face("_bemused", 1)
                     $ Girl.change_stat("love", 50, 5)
                     $ Girl.change_stat("love", 90, 10)
                 elif Girl == LauraX:
-                    $ Girl.change_face("_surprised",1, eyes="_down")
+                    $ Girl.change_face("_surprised", 1, eyes = "_down")
                     ch_l "Huh, that's a pretty good one you got there. . ."
-                    $ Girl.change_face("_bemused",1)
+                    $ Girl.change_face("_bemused", 1)
                     $ Girl.change_stat("love", 50, 5)
                     $ Girl.change_stat("love", 90, 10)
                 elif Girl == JeanX:
-                    $ Girl.change_face("_confused",1, eyes="_down",mouth="_smile")
+                    $ Girl.change_face("_confused", 1, eyes = "_down", mouth = "_smile")
                     ch_j "Well, what do we have here. . ."
-                    $ Girl.change_face("_bemused",1)
+                    $ Girl.change_face("_bemused", 1)
                     ch_j "Preeety nice there, [Girl.player_petname]."
                     $ Girl.change_stat("love", 50, 5)
                     $ Girl.change_stat("love", 90, 10)
                     $ Girl.change_stat("obedience", 80, 3)
                 elif Girl == StormX:
-                    $ Girl.change_face("_confused",1, eyes="_down")
+                    $ Girl.change_face("_confused", 1, eyes = "_down")
                     ch_s "Hmm. . . that is a lovely one."
-                    $ Girl.change_face("_bemused",1)
+                    $ Girl.change_face("_bemused", 1)
                     $ Girl.change_stat("love", 50, 5)
                     $ Girl.change_stat("love", 90, 5)
                     $ Girl.change_stat("inhibition", 60, 2)
                 elif Girl == JubesX:
-                    $ Girl.change_face("_surprised",2, eyes="_down")
+                    $ Girl.change_face("_surprised",2, eyes = "_down")
                     ch_v "Oh. . . nice."
-                    $ Girl.change_face("_sly",1)
+                    $ Girl.change_face("_sly", 1)
                     $ Girl.change_stat("love", 80, 3)
                     $ Girl.change_stat("obedience", 80, 1)
                     $ Girl.change_stat("inhibition", 60, 4)
@@ -4732,9 +4732,9 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                     ch_s "Hmm. . ."
                     $ Girl.change_stat("inhibition", 50, 2)
                 elif Girl == JubesX:
-                    $ Girl.change_face("_sly",1, eyes="_down")
+                    $ Girl.change_face("_sly", 1, eyes = "_down")
                     ch_v "Hello again."
-                    $ Girl.change_face("_sly",1)
+                    $ Girl.change_face("_sly", 1)
                     $ Girl.change_stat("obedience", 80, 1)
                     $ Girl.change_stat("inhibition", 60, 1)
             elif Girl.seen_peen == 5:
@@ -4760,9 +4760,9 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                     ch_s ". . ."
                     $ Girl.change_stat("inhibition", 60, 5)
                 elif Girl == JubesX:
-                    $ Girl.change_face("_sly",1, eyes="_down")
+                    $ Girl.change_face("_sly", 1, eyes = "_down")
                     ch_v "Hey there. . ."
-                    $ Girl.change_face("_sly",1)
+                    $ Girl.change_face("_sly", 1)
                     $ Girl.change_stat("love", 80, 1)
                     $ Girl.change_stat("obedience", 80, 2)
                     $ Girl.change_stat("inhibition", 60, 2)
@@ -4792,22 +4792,22 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                 elif Girl == StormX:
                     $ Girl.eyes = "_down"
                     ch_s "Well, I do enjoy that one."
-                    $ Girl.change_face("_bemused",1)
+                    $ Girl.change_face("_bemused", 1)
                     $ Girl.change_stat("love", 90, 5)
                     $ Girl.change_stat("inhibition", 60, 2)
                 elif Girl == JubesX:
-                    $ Girl.change_face("_confused",1, eyes="_down")
+                    $ Girl.change_face("_confused", 1, eyes = "_down")
                     ch_v "Kinda. . . hypnotic. . ."
-                    $ Girl.change_face("_sly",1)
+                    $ Girl.change_face("_sly", 1)
                     $ Girl.change_stat("love", 80, 1)
                     $ Girl.change_stat("obedience", 80, 3)
                     $ Girl.change_stat("inhibition", 60, 2)
             $ React = 1
         else:
 
-            $ Girl.change_face("_sad",1)
+            $ Girl.change_face("_sad", 1)
             if Girl.seen_peen == 1:
-                $ Girl.change_face("_perplexed",1 )
+                $ Girl.change_face("_perplexed", 1 )
                 $ Girl.eyes = "_down"
                 if Girl == RogueX:
                     ch_r "Well, I guess that's impressive. What do you plan to do with it?"
@@ -4827,7 +4827,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                     $ Girl.change_stat("inhibition", 70, 4)
                 elif Girl == StormX:
                     ch_s "Apparently you enjoy a nice breeze as well. . ."
-                    $ Girl.change_face("_bemused",1)
+                    $ Girl.change_face("_bemused", 1)
                     $ Girl.change_stat("inhibition", 60, 5)
                 elif Girl == JubesX:
                     ch_v "Hmm, ok. . ."
@@ -4836,7 +4836,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                 $ Girl.change_stat("obedience", 50, 5)
                 $ Girl.change_stat("inhibition", 60, 5)
             elif Girl.seen_peen < 5:
-                $ Girl.change_face("_sad",0)
+                $ Girl.change_face("_sad", 0)
                 if Girl == RogueX:
                     ch_r "Yeah, I've seen it."
                 elif Girl == KittyX:
@@ -4877,7 +4877,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                     $ Girl.change_stat("inhibition", 60, 4)
                 elif Girl == StormX:
                     ch_s ". . ."
-                    $ Girl.change_face("_bemused",1)
+                    $ Girl.change_face("_bemused", 1)
                     $ Girl.change_stat("obedience", 50, 2)
                     $ Girl.change_stat("inhibition", 60, 4)
                 elif Girl == JubesX:
@@ -4903,7 +4903,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
             if Girl.seen_peen == 1:
                 $ Girl.change_stat("obedience", 50, 5)
                 $ Girl.change_stat("inhibition", 60, 5)
-                $ Girl.add_word(1,0,0,0,"seenpeen")
+                $ Girl.add_word(1, 0, 0, 0,"seenpeen")
             elif Girl.seen_peen < 5:
                 $ Girl.change_stat("inhibition", 60, 2)
             elif Girl.seen_peen == 10:
@@ -4920,10 +4920,10 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
         elif Girl == JubesX:
             $ Girl.change_stat("obedience", 80, 3)
         $ Girl.change_stat("love", 90, 15)
-        $ Girl.change_stat("obedience", 90, 20,Alt=[[StormX],900,0])
+        $ Girl.change_stat("obedience", 90, 20,Alt=[[StormX],900, 0])
         $ Girl.change_stat("inhibition", 60, 20)
         $ Girl.change_stat("lust", 200, 5)
-    $ Girl.change_face("_sly",1)
+    $ Girl.change_face("_sly", 1)
     return React
 
 label Girls_taboo(Girl=0, counter=1, Choice=0, D20=0):
@@ -4933,8 +4933,8 @@ label Girls_taboo(Girl=0, counter=1, Choice=0, D20=0):
 
     if Girl not in all_Girls:
         $ Girl = focused_Girl
-    $ Player.add_word(1,0,Girl.tag)
-    $ Player.add_word(1,0,"scent")
+    $ Player.add_word(1, 0,Girl.tag)
+    $ Player.add_word(1, 0,"scent")
 
     if "uninterrupted" in Girl.recent_history:
         return
@@ -5052,7 +5052,7 @@ label Girls_taboo(Girl=0, counter=1, Choice=0, D20=0):
             $ Choice = "A"
         elif approval_check(Girl, 650, "I", taboo_modifier=counter):
 
-            $ Girl.change_face("_sexy", 1, brows="_sad")
+            $ Girl.change_face("_sexy", 1, brows = "_sad")
             if "spotted" not in Girl.recent_history:
                 if Girl == RogueX:
                     ch_r "Hmm, what should we do about this, [Girl.player_petname]?"
@@ -5128,7 +5128,7 @@ label Girls_taboo(Girl=0, counter=1, Choice=0, D20=0):
                             ch_v "Let's move it!"
                     elif Choice == "B":
 
-                        $ Girl.change_face("_sexy", 1,brows="_sad")
+                        $ Girl.change_face("_sexy", 1,brows = "_sad")
                         if Girl == RogueX:
                             ch_r "Uh, ok."
                         elif Girl == KittyX:
@@ -5305,7 +5305,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0):
     $ Other.recent_history.append("noticed " + Girl.tag)
     if Other == EmmaX and ("threesome" not in EmmaX.history or "classcaught" not in EmmaX.history):
 
-        $ Other.add_word(1,0,0,"saw with " + Girl.tag)
+        $ Other.add_word(1, 0, 0,"saw with " + Girl.tag)
         if bg_current == EmmaX.home:
 
             ch_e "If the two of you cannot keep your hands off each other, please do so elsewhere. . ."
@@ -5343,7 +5343,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0):
         $ Other.change_stat("obedience", 90, 5)
         $ Other.change_stat("inhibition", 90, 5)
         $ Other.change_stat("lust", 90, 3)
-        $ Other.add_word(1,0,0,"poly " + Girl.tag)
+        $ Other.add_word(1, 0, 0,"poly " + Girl.tag)
         call Threeway_Set (Other, Mode="start", GirlB=Girl)
     elif approval_check(Other, 650, "O", taboo_modifier=2) and approval_check(Other, 450, "L", taboo_modifier=1) or approval_check(Other, 800, "O", taboo_modifier=2, Bonus = (B/3)):
 
@@ -5353,7 +5353,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0):
         $ Other.change_stat("love", 90, 5)
         $ Other.change_stat("inhibition", 90, 5)
         $ Other.change_stat("lust", 90, 2)
-        $ Other.add_word(1,0,0,"poly " + Girl.tag)
+        $ Other.add_word(1, 0, 0,"poly " + Girl.tag)
         call Threeway_Set (Other, "watch", Mode="start", GirlB=Girl)
     elif approval_check(Other, 650, "I", taboo_modifier=2) and approval_check(Other, 450, "L", taboo_modifier=1) or approval_check(Other, 800, "I", taboo_modifier=2, Bonus = (B/3)):
 
@@ -5364,7 +5364,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0):
         $ Other.change_stat("obedience", 90, 2)
         $ Other.change_stat("inhibition", 90, 2)
         $ Other.change_stat("lust", 90, 5)
-        $ Other.add_word(1,0,0,"poly " + Girl.tag)
+        $ Other.add_word(1, 0, 0,"poly " + Girl.tag)
         call Threeway_Set (Other, "watch", Mode="start", GirlB=Girl)
     elif approval_check(Other, 1500, taboo_modifier=2, Bonus = B):
         $ Other.change_face("_perplexed", 1)
@@ -5401,7 +5401,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0):
         $ Other.change_stat("obedience", 90, -5)
         $ Other.change_stat("lust", 89, 10)
         $ Partner = 0
-        $ Other.add_word(1,0,0,"saw with " + Girl.tag)
+        $ Other.add_word(1, 0, 0,"saw with " + Girl.tag)
         if bg_current == Other.home:
             $ Other.recent_history.append("_angry")
             call are_girls_angry

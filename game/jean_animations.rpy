@@ -14,67 +14,65 @@ image Jean_blinking:
     0.05
     repeat
 
-# layeredimage Jean_standing_fondling_animations:
-#     if Player.primary_action == "lesbian" or not JeanX.secondary_action or focused_Girl != JeanX:
-#             Null()
-#     elif Player.primary_action != "sex" and JeanX.secondary_action in "finger_pussy" and JeanX.lust >= 70:
-#         "girl_finger_pussy_animation" pos (0.122, 0.583)
-#     elif JeanX.secondary_action == "fondle_pussy":
-#         "girl_fondle_pussy_animation" pos (0.122, 0.569)
-#     elif JeanX.secondary_action == "fondle_breasts" and (Player.secondary_action in ["fondle_breasts", "suck breasts"]):
-#         "girl_fondle_breast_left_animation" pos (0.156, 0.37)
-#     elif JeanX.secondary_action == "fondle_breasts":
-#         "girl_fondle_breast_right_animation" pos (0.083, 0.352)
+layeredimage Jean_standing_fondling_animations:
+    # if Player.primary_action == "lesbian" or not girl_secondary_action or focused_Girl != JeanX:
+    #     Null()
+    # elif Player.primary_action != "sex" and girl_secondary_action in "finger_pussy" and JeanX.lust >= 70:
+    #     "Girl_finger_pussy_animation" pos (0.122, 0.583)
+    # elif girl_secondary_action == "fondle_pussy":
+    #     "Girl_fondle_pussy_animation" pos (0.122, 0.569)
+    # elif girl_secondary_action == "fondle_breasts" and (Player.secondary_action in ["fondle_breasts", "suck breasts"]):
+    #     "Girl_fondle_breast_left_animation" pos (0.156, 0.37)
+    # elif girl_secondary_action == "fondle_breasts":
+    #     "Girl_fondle_breast_right_animation" pos (0.083, 0.352)
 #
 #     if second_girl_main_action != "masturbation" or not second_girl_secondary_action or focused_Girl == JeanX:
 #         Null()
 #     elif Player.primary_action != "sex" and second_girl_secondary_action == "finger_pussy" and JeanX.lust >= 70:
-#         "girl_finger_pussy_animation" pos (0.122, 0.583)
-#     elif second_girl_secondary_action in "fondle_pussy":
-#         "girl_fondle_pussy_animation" pos (0.122, 0.569)
+#         "Girl_finger_pussy_animation" pos (0.122, 0.583)
+#     elif second_girl_secondary_action == "fondle_pussy":
+#         "Girl_fondle_pussy_animation" pos (0.122, 0.569)
 #     elif second_girl_secondary_action == "fondle_breasts" and (Player.secondary_action in ["fondle_breasts", "suck breasts"]):
-#         "girl_fondle_breast_left_animation" pos (0.156, 0.37)
+#         "Girl_fondle_breast_left_animation" pos (0.156, 0.37)
 #     elif second_girl_secondary_action == "fondle_breasts":
-#         "girl_fondle_breast_right_animation" pos (0.083, 0.352)
+#         "Girl_fondle_breast_right_animation" pos (0.083, 0.352)
 #
-#     if not Player.primary_action or focused_Girl != JeanX:
-#         Null()
-#     elif Player.primary_action == "fondle_thighs":
-#         "Zero_fondle_thigh_animation" pos (0.11, 0.68)
-#     elif Player.primary_action == "fondle_breasts":
-#         "Zero_fondle_breasts_right_animation" pos (0.094, 0.38)
-#     elif Player.primary_action == "suck_breasts":
-#         "Zero_suck_breasts_right_animation" pos (0.083, 0.37)
-#     elif Player.primary_action == "fondle_pussy":
-#         "Zero_fondle_pussy_animation" pos (0.115, 0.59)
-#     elif Player.primary_action == "finger_pussy":
-#         "Zero_finger_pussy_animation" pos (0.12, 0.66)
-#     elif Player.primary_action == "eat_pussy":
-#         "Zero_eat_pussy_animation" pos (0.13, 0.62)
-#
-#     if not Player.secondary_action or focused_Girl != JeanX:
-#         Null()
-#     elif Player.secondary_action == "fondle_thighs":
-#         "Zero_fondle_thigh_animation" pos (0.11, 0.68)
-#     elif Player.primary_action == "fondle_breasts" and not JeanX.secondary_action and not second_girl_main_action and not second_girl_secondary_action:
-#         "Zero_fondle_breasts_right_animation" pos (0.094, 0.38)
-#     elif Player.secondary_action == "fondle_breasts":
-#         "Zero_fondle_breasts_left_animation" pos (0.156, 0.39)
-#     elif Player.secondary_action == "suck_breasts":
-#         "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
-#     elif Player.secondary_action == "fondle_pussy":
-#         "Zero_fondle_pussy_animation" pos (0.115, 0.59)
-#     elif Player.secondary_action == "finger_pussy":
-#         "Zero_finger_pussy_animation" pos (0.12, 0.66)
-#     elif Player.secondary_action == "eat_pussy":
-#         "Zero_eat_pussy_animation" pos (0.13, 0.62)
+    if not Player.primary_action or focused_Girl != JeanX:
+        Null()
+    elif Player.primary_action == "fondle_thighs":
+        "Zero_fondle_thigh_animation" pos (0.225, 1.22)
+    elif Player.primary_action == "fondle_breasts":
+        "Zero_fondle_breasts_right_animation" pos (0.23, 0.625)
+    elif Player.primary_action == "suck_breasts":
+        "Zero_suck_breasts_right_animation" pos (0.17, 0.57)
+    elif Player.primary_action == "fondle_pussy":
+        "Zero_fondle_pussy_animation" pos (0.26, 0.98)
+    elif Player.primary_action == "finger_pussy":
+        "Zero_finger_pussy_animation" pos (0.245, 1.15)
+    elif Player.primary_action == "eat_pussy":
+        "Zero_eat_pussy_animation" pos (0.275, 1.07)
+
+    if not Player.secondary_action or focused_Girl != JeanX:
+        Null()
+    elif Player.secondary_action == "fondle_thighs":
+        "Zero_fondle_thigh_animation" pos (0.225, 1.22)
+    elif Player.secondary_action == "fondle_breasts":
+        "Zero_fondle_breasts_left_animation" pos (0.282, 0.61)
+    elif Player.secondary_action == "suck_breasts":
+        "Zero_suck_breasts_left_animation" pos (0.295, 0.565)
+    elif Player.secondary_action == "fondle_pussy":
+        "Zero_fondle_pussy_animation" pos (0.26, 0.98)
+    elif Player.secondary_action == "finger_pussy":
+        "Zero_finger_pussy_animation" pos (0.245, 1.15)
+    elif Player.secondary_action == "eat_pussy":
+        "Zero_eat_pussy_animation" pos (0.275, 1.07)
 #
 #     if not second_girl_main_action or focused_Girl != JeanX:
 #         Null()
 #     elif second_girl_main_action == "fondle_breasts" and Player.primary_action in ["fondle_breasts", "suck_breasts"]:
-#         "girl_fondle_breast_left_animation" pos (0.156, 0.37)
+#         "Girl_fondle_breast_left_animation" pos (0.156, 0.37)
 #     elif second_girl_main_action == "fondle_breasts":
-#         "girl_fondle_breast_right_animation" pos (0.083, 0.352)
+#         "Girl_fondle_breast_right_animation" pos (0.083, 0.352)
 #     elif second_girl_main_action == "suck_breasts" and Player.primary_action in ["fondle_breasts", "suck_breasts"]:
 #         "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
 #     elif second_girl_main_action == "suck_breasts" and Player.secondary_action in ["fondle_breasts", "suck_breasts"]:
@@ -82,33 +80,33 @@ image Jean_blinking:
 #     elif second_girl_main_action == "suck_breasts":
 #         "Zero_suck_breasts_right_animation" pos (0.083, 0.37)
 #     elif second_girl_main_action == "fondle_pussy" and Player.primary_action != "sex" and JeanX.lust >= 70:
-#         "girl_finger_pussy_animation" pos (0.122, 0.583)
+#         "Girl_finger_pussy_animation" pos (0.122, 0.583)
 #     elif second_girl_main_action == "fondle_pussy" and Player.secondary_action != "sex" and JeanX.lust >= 70:
-#         "girl_finger_pussy_animation" pos (0.122, 0.583)
+#         "Girl_finger_pussy_animation" pos (0.122, 0.583)
 #     elif second_girl_main_action == "fondle_pussy":
-#         "girl_fondle_pussy_animation" pos (0.122, 0.569)
+#         "Girl_fondle_pussy_animation" pos (0.122, 0.569)
 #     elif second_girl_main_action == "eat_pussy":
 #         "Zero_eat_pussy_animation" pos (0.13, 0.62)
 #
-#     if Player.primary_action != "lesbian" or not JeanX.secondary_action or focused_Girl == JeanX:
+#     if Player.primary_action != "lesbian" or not second_girl_secondary_action or focused_Girl == JeanX:
 #         Null()
-#     elif JeanX.secondary_action == "fondle_breasts" and Player.primary_action in ["fondle_breasts", "suck_breasts"]:
-#         "girl_fondle_breast_left_animation" pos (0.156, 0.37)
-#     elif JeanX.secondary_action == "fondle_breasts" and Player.secondary_action in ["fondle_breasts", "suck_breasts"]:
-#         "girl_fondle_breast_left_animation" pos (0.156, 0.37)
-#     elif JeanX.secondary_action == "fondle_breasts":
-#         "girl_fondle_breast_right_animation" pos (0.083, 0.352)
-#     elif JeanX.secondary_action == "suck_breasts" and Player.primary_action in ["fondle_breasts", "suck_breasts"]:
+#     elif second_girl_secondary_action == "fondle_breasts" and Player.primary_action in ["fondle_breasts", "suck_breasts"]:
+#         "Girl_fondle_breast_left_animation" pos (0.156, 0.37)
+#     elif second_girl_secondary_action == "fondle_breasts" and Player.secondary_action in ["fondle_breasts", "suck_breasts"]:
+#         "Girl_fondle_breast_left_animation" pos (0.156, 0.37)
+#     elif second_girl_secondary_action == "fondle_breasts":
+#         "Girl_fondle_breast_right_animation" pos (0.083, 0.352)
+#     elif second_girl_secondary_action == "suck_breasts" and Player.primary_action in ["fondle_breasts", "suck_breasts"]:
 #         "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
-#     elif JeanX.secondary_action == "suck_breasts" and Player.secondary_action in ["fondle_breasts", "suck_breasts"]:
+#     elif second_girl_secondary_action == "suck_breasts" and Player.secondary_action in ["fondle_breasts", "suck_breasts"]:
 #         "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
-#     elif JeanX.secondary_action == "suck_breasts":
+#     elif second_girl_secondary_action == "suck_breasts":
 #         "Zero_suck_breasts_right_animation" pos (0.083, 0.37)
-#     elif JeanX.secondary_action == "fondle_pussy" and Player.primary_action != "sex" and JeanX.lust >= 70:
-#         "girl_finger_pussy_animation" pos (0.122, 0.583)
-#     elif JeanX.secondary_action == "fondle_pussy":
-#         "girl_fondle_pussy_animation" pos (0.122, 0.569)
-#     elif JeanX.secondary_action == "eat_pussy":
+#     elif second_girl_secondary_action == "fondle_pussy" and Player.primary_action != "sex" and JeanX.lust >= 70:
+#         "Girl_finger_pussy_animation" pos (0.122, 0.583)
+#     elif second_girl_secondary_action == "fondle_pussy":
+#         "Girl_fondle_pussy_animation" pos (0.122, 0.569)
+#     elif second_girl_secondary_action == "eat_pussy":
 #         "Zero_eat_pussy_animation" pos (0.13, 0.62)
 
 image Jean_handjob_under_hand_animation0:

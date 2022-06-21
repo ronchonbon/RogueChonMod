@@ -973,10 +973,8 @@ init python:
                 outfit_holder = self.domme_outfit.copy()
             elif outfit_name == "bondage_outfit" and self.tag == "Jean":
                 outfit_holder = self.bondage_outfit.copy()
-            elif outfit_name == "disguise" and self.tag == "Mystique":
-                outfit_holder = self.disguise.copy()
-            elif outfit_name == "true_self" and self.tag == "Mystique":
-                outfit_holder = self.true_self.copy()
+            elif outfit_name == "supervillain" and self.tag == "Mystique":
+                outfit_holder = self.supervillain.copy()
 
             if not self.outfit["bottom"] and outfit_holder["bottom"]:
                 got_dressed = 1
@@ -1130,7 +1128,8 @@ init python:
                 self.second_casual_outfit = get_base_outfit(
                     {"hair": "_wavy",
                     "bra": "_corset", "underwear": "_white_panties",
-                    "bottom": "_white_pants",
+                    "bottom": "_skirt",
+                    "boots": "_thigh_boots",
                     "neck": "_choker",
                     "shame": 5, "outfit_active": 2})
 
@@ -1356,11 +1355,11 @@ init python:
                     "outfit_active": 2})
 
                 self.gym_clothes = get_base_outfit(
-                    {"face_inner_accessory": "_glasses", "hair": "_short",
+                    {"face_inner_accessory": "", "hair": "_short",
                     "bra": "_black_bra", "underwear": "_black_panties",
                     "bottom": "_skirt",
                     "top": "_purple_shirt",
-                    "jacket": "_jacket",
+                    "jacket": "",
                     "outfit_active": 2})
 
                 self.sleepwear = get_base_outfit(
@@ -1380,15 +1379,7 @@ init python:
                     "jacket": "_jacket",
                     "outfit_active": 2})
 
-                self.disguise = get_base_outfit(
-                    {"face_inner_accessory": "_glasses", "hair": "_short",
-                    "bra": "_black_bra", "underwear": "_black_panties",
-                    "bottom": "_skirt",
-                    "top": "_purple_shirt",
-                    "jacket": "_jacket",
-                    "outfit_active": 2})
-
-                self.true_self = get_base_outfit(
+                self.supervillain = get_base_outfit(
                     {"hair": "_long", "face_outer_accessory": "_skull",
                     "dress": "_white_dress", "boots": "_thigh_boots",
                     "belt": "_skull_belt", "gloves": "_gloves"})
@@ -1879,7 +1870,7 @@ init python:
 
                     return True
             elif self.petname in ("_sexy", "lover", "beloved"):
-                if approval_check(self, 900, taboo_modifier=1,Alt=[[LauraX],1100]):
+                if approval_check(self, 900, taboo_modifier=1,Alt=[[LauraX], 1100]):
                     self.change_stat("love", 80, 2)
                     self.change_stat("obedience", 80, 1)
                     self.change_stat("inhibition", 70, 1)
@@ -1961,7 +1952,7 @@ init python:
 
                     return True
             elif self.petname == "sugartits":
-                if approval_check(self, 1500, taboo_modifier=1,Alt=[[EmmaX],1300]):
+                if approval_check(self, 1500, taboo_modifier=1,Alt=[[EmmaX], 1300]):
                     self.change_stat("obedience", 80, 1)
                     self.change_stat("obedience", 50, 2)
                     self.change_stat("inhibition", 70, 1,Alt=[[EmmaX],70,2])

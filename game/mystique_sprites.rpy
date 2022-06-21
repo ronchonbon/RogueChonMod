@@ -5,6 +5,12 @@ layeredimage Mystique_sprite standing normal:
     always:
         "images/Mystique_standing/Mystique_standing_body.png"
 
+    # always:
+    #     "Mystique_grool_animations"
+    #
+    # always:
+    #     "Mystique_spunk_animations"
+
     if not MystiqueX.outfit["underwear"]:
         Null()
     elif MystiqueX.underwear_pulled_down:
@@ -53,7 +59,10 @@ layeredimage Mystique_sprite standing normal:
     always:
         "Mystique_head" pos (0.54, 0.32) zoom 0.43
 
-    anchor (0.5, 0.0) offset (0, 180) zoom 0.5
+    # always:
+    #     "Mystique_standing_fondling_animations"
+
+    anchor (0.5, 0.0) offset (0, 180) zoom 0.55
 
 image Mystique_hair_back:
     "images/Mystique_standing/Mystique_standing_hair_long_back.png"

@@ -61,8 +61,8 @@ label cheat_editor(Girl):
                         $ Girl.addiction -= 10
                     "Back":
                         pass
-            # "Wardrobe":
-            #     call wardrobe_editor(Girl)
+            "Wardrobe":
+                call wardrobe_editor(Girl)
             "Return":
                 call checkout
 

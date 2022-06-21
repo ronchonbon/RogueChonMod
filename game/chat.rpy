@@ -299,7 +299,7 @@ label chat_menu:
                 "Dirty Talk" if Girl.SEXP >= 10:
                     ch_p "About when we get together. . ."
 
-                    call expression Girl.tag + "_Sexchat"
+                    call expression Girl.tag + "_SexChat"
                 "Date (locked)" if time_index > 2:
                     pass
                 "Date" if time_index <= 2:
@@ -723,11 +723,11 @@ label change_attributes(Girl):
                             elif Girl == KittyX:
                                 ch_k "Aw, you miss me when I'm not around!"
                             elif Girl == EmmaX:
-                                $ Girl.change_face("_angry", eyes="_side")
+                                $ Girl.change_face("_angry", eyes = "_side")
 
                                 ch_e "I don't know why I put up with your nonsense."
 
-                                $ Girl.change_face("_sexy",1)
+                                $ Girl.change_face("_sexy", 1)
 
                                 ch_e "But {i}fine.{/i}"
                             elif Girl == LauraX:
@@ -828,7 +828,7 @@ label change_attributes(Girl):
                         elif Girl == JubesX:
                             ch_v "Ok, I'll see you sometime then. . ."
 
-                        $ Girl.drain_word("lockedout",0,0,1)
+                        $ Girl.drain_word("lockedout", 0, 0, 1)
                     "No":
                         ch_p "Could you please not just drop by unannounced?"
 
@@ -850,7 +850,7 @@ label change_attributes(Girl):
                             ch_v "Sure, I can give you space. . ."
 
                         $ Girl.change_face("_smile")
-                        $ Girl.add_word(1,0,0,"lockedout")
+                        $ Girl.add_word(1, 0, 0,"lockedout")
             "Switch to. . .":
                 call switch_chat
             "Never mind.":

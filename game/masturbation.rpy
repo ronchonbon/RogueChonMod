@@ -376,7 +376,7 @@ label after_masturbation(Girl, context):
                     $ Girl.change_stat("obedience", 50, 2)
                     $ Girl.change_stat("obedience", 70, 2)
 
-        $ Girl.drain_word("unseen",1,0)
+        $ Girl.drain_word("unseen", 1, 0)
         $ Girl.action_counter["masturbation"] += 1
 
         if round <= 10:

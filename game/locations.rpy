@@ -326,7 +326,7 @@ label girls_room_entry:
                     elif Girl == JubesX:
                         ch_v "Oh, um, [Girl.player_petname]. I was just. . . taking care of something."
 
-                    $ Girl.change_face("perplexed",1)
+                    $ Girl.change_face("perplexed", 1)
 
                     $ approval_bonus += 10
                 elif D20 >=15 and (time_index >= 3 or time_index == 0):
@@ -692,8 +692,8 @@ label classroom:
         if time_index < 2 and weekday < 5:
             call classroom_seating
 
-        $ Player.drain_word("goto",1,0)
-        $ Player.drain_word("traveling",1,0)
+        $ Player.drain_word("goto", 1, 0)
+        $ Player.drain_word("traveling", 1, 0)
 
     if EmmaX.location == "bg_teacher":
         "As you sit down, you see [EmmaX.name] at the podium."
@@ -1020,7 +1020,7 @@ label shower_entry:
             call caught_showering(showering_Girls[0])
             jump shower_room
         elif D20 > 13:
-            $ showering_Girls[0].add_word(1,"showered","showered",0,0)
+            $ showering_Girls[0].add_word(1,"showered","showered", 0, 0)
 
             $ bg_current = "bg_showerroom"
 
@@ -1033,7 +1033,7 @@ label shower_entry:
         for G in showering_Girls:
             if G not in Party:
                 if D20 >= 10:
-                    G.add_word(1,"showered","showered",0,0)
+                    G.add_word(1,"showered","showered", 0, 0)
 
                 G.change_outfit("shower")
 
@@ -1402,7 +1402,7 @@ label study_entry:
                         $ talking_to_Storm = False
 
 label study_room:
-    $ Player.drain_word("traveling",1,0)
+    $ Player.drain_word("traveling", 1, 0)
 
     $ bg_current = "bg_study"
 

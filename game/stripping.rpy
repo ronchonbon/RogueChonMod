@@ -1419,7 +1419,7 @@ label fix_clothing(Girl):
 
 
 
-label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], temp_Girls=[]):
+label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0, 0], temp_Girls=[]):
 
     $ Present = []
     $ temp_Girls = all_Girls[:]
@@ -1451,10 +1451,10 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
     $ round -= 5 if round > 5 else (round-1)
     call set_the_scene (1, 0, 0, 0)
 
-    $ Present[0].change_face("_sexy",1)
+    $ Present[0].change_face("_sexy", 1)
     if len(Present) >= 2:
         if Present[1] in all_Girls:
-            $ Present[1].change_face("_sexy",1)
+            $ Present[1].change_face("_sexy", 1)
         else:
             $ Present.remove(Present[1])
 
@@ -1618,8 +1618,8 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
 
         $ round -= 2 if round > 2 else round
         if len(Present) >= 2:
-            $ Present[0].check_if_likes(Present[1],600,1,1)
-            $ Present[1].check_if_likes(Present[0],600,1,1)
+            $ Present[0].check_if_likes(Present[1],600, 1, 1)
+            $ Present[1].check_if_likes(Present[0],600, 1, 1)
         menu:
             "Continue":
                 pass
@@ -1668,8 +1668,8 @@ label Group_Stripping:
             jump Group_Strip_End
 
         if len(Present) >= 2 and Count != between_event_count:
-            $ Present[Count].check_if_likes(Present[between_event_count],800,2,1)
-            $ Present[between_event_count].check_if_likes(Present[Count],800,2,1)
+            $ Present[Count].check_if_likes(Present[between_event_count],800,2, 1)
+            $ Present[between_event_count].check_if_likes(Present[Count],800,2, 1)
 
         if len(Present) >= 2:
 
@@ -1707,11 +1707,11 @@ label Group_Stripping:
 label Group_Strip_End:
 
     if Present:
-        $ Present[0].drain_word("stopdancing",1,0,0)
-        $ Present[0].drain_word("keepdancing",1,0,0)
+        $ Present[0].drain_word("stopdancing", 1, 0, 0)
+        $ Present[0].drain_word("keepdancing", 1, 0, 0)
     if len(Present) >= 2:
-        $ Present[1].drain_word("stopdancing",1,0,0)
-        $ Present[1].drain_word("keepdancing",1,0,0)
+        $ Present[1].drain_word("stopdancing", 1, 0, 0)
+        $ Present[1].drain_word("keepdancing", 1, 0, 0)
 
     call set_the_scene (1, 0, 0, 0)
     $ Count = 0
@@ -4310,7 +4310,7 @@ label Bottoms_Off_Legs(Girl=0):
                 $ Girl.add_word(1,"ripped", "ripped")
                 "You tear holes in her [line]."
                 if not approval_check(Girl, 1200, taboo_modifier=0):
-                    $ Girl.change_face("_angry", 1,eyes="_down")
+                    $ Girl.change_face("_angry", 1,eyes = "_down")
                     if Girl == RogueX:
                         ch_r "Dammit, [Girl.player_petname], those are gettin expensive!"
                     elif Girl == KittyX:

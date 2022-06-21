@@ -16,21 +16,21 @@ image Kitty_blinking:
 
 layeredimage Kitty_grool_dripping_animation:
     always:
-        "grool_dripping_animation" pos (0.122, 0.6) zoom 0.2
+        "grool_dripping_animation" pos (0.25, 1.2)
 
     if KittyX.grool > 1 and not KittyX.pussy_covered:
-        "grool_dripping_animation" pos (0.122, 0.6) zoom 0.2
+        "grool_dripping_animation" pos (0.25, 1.2)
 
     if KittyX.grool > 1 and not KittyX.pussy_covered:
-        "grool_dripping_animation" pos (0.122, 0.6) zoom 0.2
+        "grool_dripping_animation" pos (0.25, 1.2)
 
     if KittyX.grool > 1 and not KittyX.pussy_covered:
-        "grool_dripping_animation" pos (0.122, 0.6) zoom 0.2
+        "grool_dripping_animation" pos (0.25, 1.2)
 
 layeredimage Kitty_grool_animations:
     if not KittyX.grool:
         Null()
-    elif KittyX.outfit["bottom"] == "_pants" and KittyX.bottom_pulled_down:
+    elif KittyX.bottom_pulled_down:
         AlphaMask("Kitty_grool_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask_pants.png")
     elif KittyX.outfit["underwear"] and KittyX.underwear_pulled_down:
         AlphaMask("Kitty_grool_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask_underwear.png")
@@ -39,28 +39,28 @@ layeredimage Kitty_grool_animations:
 
 layeredimage Kitty_spunk_dripping_animation:
     always:
-        "spunk_dripping_animation" pos (0.122, 0.6) zoom 0.3
+        "spunk_dripping_animation" pos (0.25, 1.2)
 
     if not KittyX.pussy_covered:
-        "spunk_dripping_animation" pos (0.122, 0.6) zoom 0.3
+        "spunk_dripping_animation" pos (0.25, 1.2)
 
     if not KittyX.pussy_covered:
-        "spunk_dripping_animation" pos (0.122, 0.6) zoom 0.3
+        "spunk_dripping_animation" pos (0.25, 1.2)
 
     if not KittyX.pussy_covered:
-        "spunk_dripping_animation" pos (0.122, 0.6) zoom 0.3
+        "spunk_dripping_animation" pos (0.25, 1.2)
 
 layeredimage Kitty_spunk_animations:
     if not KittyX.spunk["pussy"] and not KittyX.spunk["anus"]:
         Null()
-    elif KittyX.outfit["bottom"] == "_pants" and KittyX.bottom_pulled_down:
+    elif KittyX.bottom_pulled_down:
         AlphaMask("Kitty_spunk_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask_pants.png")
     elif KittyX.outfit["underwear"] and KittyX.underwear_pulled_down:
         AlphaMask("Kitty_spunk_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask_underwear.png")
     elif not KittyX.pussy_covered:
         AlphaMask("Kitty_spunk_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask.png")
 
-# layeredimage Kitty_standing_fondling_animations:
+layeredimage Kitty_standing_fondling_animations:
 #     if Player.primary_action == "lesbian" or not KittyX.secondary_action or focused_Girl != KittyX:
 #             Null()
 #     elif Player.primary_action != "sex" and KittyX.secondary_action in "finger_pussy" and KittyX.lust >= 70:
@@ -83,37 +83,37 @@ layeredimage Kitty_spunk_animations:
 #     elif second_girl_secondary_action == "fondle_breasts":
 #         "Girl_fondle_breast_right_animation" pos (0.083, 0.352)
 #
-#     if not Player.primary_action or focused_Girl != KittyX:
-#         Null()
-#     elif Player.primary_action == "fondle_thighs":
-#         "Zero_fondle_thigh_animation" pos (0.11, 0.68)
-#     elif Player.primary_action == "fondle_breasts":
-#         "Zero_fondle_breasts_right_animation" pos (0.094, 0.38)
-#     elif Player.primary_action == "suck_breasts":
-#         "Zero_suck_breasts_right_animation" pos (0.083, 0.37)
-#     elif Player.primary_action == "fondle_pussy":
-#         "Zero_fondle_pussy_animation" pos (0.115, 0.59)
-#     elif Player.primary_action == "finger_pussy":
-#         "Zero_finger_pussy_animation" pos (0.12, 0.66)
-#     elif Player.primary_action == "eat_pussy":
-#         "Zero_eat_pussy_animation" pos (0.13, 0.62)
-#
-#     if not Player.secondary_action or focused_Girl != KittyX:
-#         Null()
-#     elif Player.secondary_action == "fondle_thighs":
-#         "Zero_fondle_thigh_animation" pos (0.11, 0.68)
-#     elif Player.primary_action == "fondle_breasts" and not KittyX.secondary_action and not second_girl_main_action and not second_girl_secondary_action:
-#         "Zero_fondle_breasts_right_animation" pos (0.094, 0.38)
-#     elif Player.secondary_action == "fondle_breasts":
-#         "Zero_fondle_breasts_left_animation" pos (0.156, 0.39)
-#     elif Player.secondary_action == "suck_breasts":
-#         "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
-#     elif Player.secondary_action == "fondle_pussy":
-#         "Zero_fondle_pussy_animation" pos (0.115, 0.59)
-#     elif Player.secondary_action == "finger_pussy":
-#         "Zero_finger_pussy_animation" pos (0.12, 0.66)
-#     elif Player.secondary_action == "eat_pussy":
-#         "Zero_eat_pussy_animation" pos (0.13, 0.62)
+    if not Player.primary_action or focused_Girl != KittyX:
+        Null()
+    elif Player.primary_action == "fondle_thighs":
+        "Zero_fondle_thigh_animation" pos (0.18, 1.38)
+    elif Player.primary_action == "fondle_breasts":
+        "Zero_fondle_breasts_right_animation" pos (0.17, 0.765)
+    elif Player.primary_action == "suck_breasts":
+        "Zero_suck_breasts_right_animation" pos (0.11, 0.7)
+    elif Player.primary_action == "fondle_pussy":
+        "Zero_fondle_pussy_animation" pos (0.23, 1.12)
+    elif Player.primary_action == "finger_pussy":
+        "Zero_finger_pussy_animation" pos (0.21, 1.32)
+    elif Player.primary_action == "eat_pussy":
+        "Zero_eat_pussy_animation" pos (0.24, 1.22)
+
+    if not Player.secondary_action or focused_Girl != KittyX:
+        Null()
+    elif Player.secondary_action == "fondle_thighs":
+        "Zero_fondle_thigh_animation" pos (0.18, 1.38)
+    elif Player.secondary_action == "fondle_breasts" and not girl_secondary_action and not second_girl_main_action and not second_girl_secondary_action:
+        "Zero_fondle_breasts_right_animation" pos (0.17, 0.765)
+    elif Player.secondary_action == "fondle_breasts":
+        "Zero_fondle_breasts_left_animation" pos (0.212, 0.765)
+    elif Player.secondary_action == "suck_breasts":
+        "Zero_suck_breasts_left_animation" pos (0.225, 0.735)
+    elif Player.secondary_action == "fondle_pussy":
+        "Zero_fondle_pussy_animation" pos (0.23, 1.12)
+    elif Player.secondary_action == "finger_pussy":
+        "Zero_finger_pussy_animation" pos (0.21, 1.32)
+    elif Player.secondary_action == "eat_pussy":
+        "Zero_eat_pussy_animation" pos (0.24, 1.22)
 #
 #     if not second_girl_main_action or focused_Girl != KittyX:
 #         Null()
@@ -1109,7 +1109,7 @@ layeredimage Kitty_sprite sex:
     elif Player.cock_position == "out":
         "Kitty_sex_legs_hotdog_animation[action_speed]"
 
-    anchor (0.5, 0.0) offset (230, 750) zoom 0.85
+    anchor (0.5, 0.0) offset (230, 785) zoom 0.9
 
 image Kitty_doggy_blinking:
     "images/Kitty_doggy/Kitty_doggy_eyes[KittyX.eyes].png"
@@ -1240,14 +1240,14 @@ image Kitty_doggy_pussy_hole_animation2:
 image Kitty_doggy_pussy_hole_animation3:
     "Kitty_doggy_pussy_hole"
 
-image Kitty_doggy_pussy_fingering:
+image Kitty_doggy_pussy_fingering_animation:
     animation
     "Kitty_doggy_pussy_hole"
 
     subpixel True
     xzoom 0.6
     block:
-        ease 1 xzoom 0.9
+        ease 1 xzoom 0.67
         pause 1
         ease 3 xzoom 0.6
         repeat
@@ -1274,14 +1274,14 @@ image Kitty_doggy_anus_anal_animation3:
 
     zoom 0.9
 
-image Kitty_doggy_anus_fingering:
+image Kitty_doggy_anus_fingering_animation:
     animation
     "Kitty_doggy_anus_hole"
 
     subpixel True
     zoom 0.6
     block:
-        ease 0.5 zoom 0.75
+        ease 0.5 zoom 0.67
         pause 0.5
         ease 1.5 zoom 0.6
         repeat
@@ -1371,7 +1371,7 @@ layeredimage Kitty_sprite doggy:
 
     if Player.sprite and Player.cock_position == "footjob":
         "Kitty_doggy_shin_animation[action_speed]"
-    elif not Player.sprite or show_feet:
+    elif not Player.sprite and show_feet:
         "Kitty_doggy_shins"
 
     if Player.sprite and Player.cock_position == "footjob":
@@ -1379,7 +1379,7 @@ layeredimage Kitty_sprite doggy:
 
     if Player.cock_position == "footjob":
         "Kitty_doggy_feet_animation[action_speed]"
-    elif not Player.sprite or show_feet:
+    elif not Player.sprite and show_feet:
         "Kitty_doggy_feet"
 
-    anchor (0.5, 0.0) offset (190, 650) zoom 1.25
+    anchor (0.5, 0.0) offset (190, 650) zoom 1.15

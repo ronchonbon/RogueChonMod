@@ -34,11 +34,11 @@ label meet_Laura:
 
     "When you come to, a girl pulls you up by your arm."
 
-    $ LauraX.change_face("_surprised", 0, eyes="_squint",brows="_sad")
+    $ LauraX.change_face("_surprised", 0, eyes = "_squint", brows = "_sad")
 
     ch_u "Oh, good, you don't look too damaged."
 
-    $ LauraX.change_face("_smile", 0, brows="_sad")
+    $ LauraX.change_face("_smile", 0, brows = "_sad")
 
     ch_u "Sorry about that, I was getting a work-out in, and must have forgotten to lock the door."
 
@@ -69,7 +69,7 @@ label meet_Laura:
 
                 ch_l "I also go by Laura. Laura Kinney."
 
-                $ LauraX.change_face("_confused", 0, mouth="_normal")
+                $ LauraX.change_face("_confused", 0, mouth = "_normal")
 
                 $ LauraX.name = "Laura"
                 $ LauraX.names.append("Laura")
@@ -84,17 +84,17 @@ label meet_Laura:
 
                         ch_l "Yeah, ok."
                     "Hello Laura Laura Kinney.":
-                        $ LauraX.change_face("_confused", 0,mouth="_sucking")
+                        $ LauraX.change_face("_confused", 0,mouth = "_sucking")
 
                         ch_l "It's just-"
 
-                        $ LauraX.change_face("_smile", 0,brows="_surprised")
+                        $ LauraX.change_face("_smile", 0,brows = "_surprised")
                         $ LauraX.change_stat("love", 70, 3)
                         $ LauraX.change_stat("inhibition", 70, 2)
 
                         ch_l "Oh, I get it."
                     "Ok, how did you get that name?":
-                        $ LauraX.change_face("_angry", 1,eyes="_side")
+                        $ LauraX.change_face("_angry", 1,eyes = "_side")
                         $ LauraX.change_stat("love", 70, -2)
                         $ LauraX.change_stat("obedience", 70, 2)
 
@@ -102,7 +102,7 @@ label meet_Laura:
             "I think I'd prefer calling you X-23." if LauraX.name == "Laura" and "LauraX" in topics:
                 $ LauraX.change_stat("love", 70, -2)
                 $ LauraX.change_stat("obedience", 70, 5)
-                $ LauraX.change_face("_sadside", 0,brows="_normal")
+                $ LauraX.change_face("_sadside", 0,brows = "_normal")
 
                 ch_l "Suit yourself."
 
@@ -118,7 +118,7 @@ label meet_Laura:
                     extend ""
                     ". . .and it's nice to meet you?":
                         $ LauraX.change_stat("love", 70, 1)
-                        $ LauraX.change_face("_confused", 0,mouth="_normal")
+                        $ LauraX.change_face("_confused", 0,mouth = "_normal")
 
                         ch_l "Yeah, you too."
                     "So. . .[[moving on]":
@@ -148,7 +148,7 @@ label meet_Laura:
                 ch_l "Mostly out in the field though."
             "So you don't stay here long?" if "training" in topics and "Stay" not in topics:
                 $ LauraX.change_stat("love", 70, 2)
-                $ LauraX.change_face("_normal", 0,eyes="_side")
+                $ LauraX.change_face("_normal", 0,eyes = "_side")
 
                 ch_l "I'll be heading out again soon."
 
@@ -164,13 +164,13 @@ label meet_Laura:
 
                 ch_l "It was a robot arm."
 
-                $ LauraX.change_face("_sad", 1,eyes="_leftside")
+                $ LauraX.change_face("_sad", 1,eyes = "_leftside")
 
                 ch_l "Like I said, sorry."
 
                 $ LauraX.change_stat("obedience", 70, -3)
                 $ LauraX.change_stat("inhibition", 70, 3)
-                $ LauraX.change_face("_smile", 0,brows="_confused")
+                $ LauraX.change_face("_smile", 0,brows = "_confused")
 
                 ch_l "You probably should have ducked though."
 
@@ -187,7 +187,7 @@ label meet_Laura:
                 ch_l "Also I have claws."
 
                 $ LauraX.claws = 1
-                $ LauraX.change_face("_smile", 0,brows="_confused")
+                $ LauraX.change_face("_smile", 0,brows = "_confused")
 
                 "snikt"
 
@@ -202,7 +202,7 @@ label meet_Laura:
                         $ LauraX.change_stat("love", 70, 3)
                         $ LauraX.change_stat("obedience", 70, 2)
                         $ LauraX.change_stat("inhibition", 70, 1)
-                        $ LauraX.change_face("_smile", 0,brows="_surprised")
+                        $ LauraX.change_face("_smile", 0,brows = "_surprised")
 
                         ch_l "Yeah, indestructible too."
                     "Ouch.":
@@ -213,7 +213,7 @@ label meet_Laura:
 
                         ch_l "Don't worry, I won't stab you."
 
-                        $ LauraX.change_face("_confused", 0,mouth="_normal")
+                        $ LauraX.change_face("_confused", 0,mouth = "_normal")
                         $ LauraX.change_stat("inhibition", 70, 7)
 
                         ch_l "Probably."
@@ -222,7 +222,7 @@ label meet_Laura:
                 $ LauraX.arm_pose = 1
             "Don't you want to know my power?" if "claws" in topics and "powers" not in topics:
                 if LauraX.love >= 405:
-                    $ LauraX.change_face("_smile", 0,brows="_confused")
+                    $ LauraX.change_face("_smile", 0,brows = "_confused")
 
                     ch_l "Yeah, I guess."
                 else:
@@ -235,7 +235,7 @@ label meet_Laura:
 
                 ch_p "I'm immune to mutant powers and can shut them off."
 
-                $ LauraX.change_face("_smile", 0,brows="_confused")
+                $ LauraX.change_face("_smile", 0,brows = "_confused")
                 $ LauraX.change_stat("love", 70, 3)
                 $ LauraX.change_stat("obedience", 70, 3)
 
@@ -255,7 +255,7 @@ label meet_Laura:
 
                 ch_l "Huh."
 
-                $ LauraX.change_face("_sexy", 1,eyes="_closed")
+                $ LauraX.change_face("_sexy", 1,eyes = "_closed")
                 $ LauraX.addiction_rate += 1
 
                 "You can feel her shudder a little."
@@ -268,7 +268,7 @@ label meet_Laura:
 
                 ch_l "That feels weird."
 
-                $ LauraX.change_face("_sexy", 1,eyes="_leftside")
+                $ LauraX.change_face("_sexy", 1,eyes = "_leftside")
                 $ LauraX.change_stat("obedience", 70, 1)
                 $ LauraX.change_stat("lust", 70, 3)
                 $ LauraX.addiction_rate += 1
@@ -277,7 +277,7 @@ label meet_Laura:
 
                 $ LauraX.change_stat("inhibition", 70, 5)
                 $ LauraX.change_stat("lust", 70, 5)
-                $ LauraX.change_face("_sexy", 1,brows="_confused")
+                $ LauraX.change_face("_sexy", 1,brows = "_confused")
                 $ LauraX.addiction_rate += 1
 
                 ch_l "Almost. . . dangerous."
@@ -301,7 +301,7 @@ label meet_Laura:
     if "player" in topics:
         $ LauraX.change_stat("love", 70, 2)
         $ LauraX.change_stat("lust", 70, 1)
-        $ LauraX.change_face("_smile",0)
+        $ LauraX.change_face("_smile", 0)
 
         ch_l "Maybe I'll see you when I get back, [Player.name]."
     else:
@@ -313,7 +313,7 @@ label meet_Laura:
         $ LauraX.change_stat("obedience", 70, 2)
         $ LauraX.change_stat("inhibition", 70, 2)
         $ LauraX.change_stat("lust", 70, 3)
-        $ LauraX.change_face("_smile", 1, brows="_confused")
+        $ LauraX.change_face("_smile", 1, brows = "_confused")
 
         ch_l "We should. . . spar."
 
@@ -367,10 +367,10 @@ label Laura_BF(temp_Girls=[]):
     call taboo_level
     call clear_the_room (LauraX)
     $ LauraX.daily_history.append("relationship")
-    $ LauraX.change_face("_angry",1,eyes="_side")
+    $ LauraX.change_face("_angry", 1,eyes = "_side")
     $ line = 0
     ch_l "Hey. So. [LauraX.player_petname]. . ."
-    $ LauraX.change_face("_confused",1,mouth="_lipbite")
+    $ LauraX.change_face("_confused", 1,mouth = "_lipbite")
     ch_l "I don't know- . . . you're pretty fun to hang out with, ya know?"
     menu:
         extend ""
@@ -381,27 +381,27 @@ label Laura_BF(temp_Girls=[]):
             $ LauraX.change_stat("inhibition", 80, 1)
             ch_l ". . ."
             $ LauraX.change_stat("love", 200, 5)
-            $ LauraX.change_face("_bemused",1,eyes="_side")
+            $ LauraX.change_face("_bemused", 1,eyes = "_side")
             ch_l "\"Love\" is kind of a strong word, [LauraX.player_petname]."
         "Yeah, sure, it's a lot of fun.":
             $ LauraX.change_stat("love", 200, 10)
             $ LauraX.change_stat("inhibition", 80, 2)
-            $ LauraX.change_face("_smile",0)
+            $ LauraX.change_face("_smile", 0)
             ch_l "Right?"
         "I mean, it beats math class. . .":
             $ LauraX.change_stat("love", 200, 3)
             $ LauraX.change_stat("obedience", 80, 3)
             $ LauraX.change_stat("inhibition", 80, -3)
-            $ LauraX.change_face("_angry",1)
+            $ LauraX.change_face("_angry", 1)
             ch_l "Um, less enthusiasm than I was expecting. . ."
         "If you say so.":
             $ LauraX.change_stat("obedience", 80, 6)
             $ LauraX.change_stat("inhibition", 80, -8)
-            $ LauraX.change_face("_confused",1)
+            $ LauraX.change_face("_confused", 1)
             ch_l ". . ."
 
     ch_l "So like I was saying, I don't exactly have a ton of friends."
-    $ LauraX.change_face("_sadside",1)
+    $ LauraX.change_face("_sadside", 1)
     ch_l "I kind of grew up in a rough place, and then spent a lot of time on the road."
     ch_l "I had a life before coming here."
     menu:
@@ -410,23 +410,23 @@ label Laura_BF(temp_Girls=[]):
             $ LauraX.change_stat("love", 200, 7)
             $ LauraX.change_stat("obedience", 80, 2)
             $ LauraX.change_stat("inhibition", 80, 3)
-            $ LauraX.change_face("_sad",1,mouth="_lipbite")
+            $ LauraX.change_face("_sad", 1,mouth = "_lipbite")
         "Yeah? I know.":
             $ LauraX.change_stat("love", 200, 3)
             $ LauraX.change_stat("obedience", 80, 4)
             $ LauraX.change_stat("inhibition", 80, 1)
-            $ LauraX.change_face("_confused",1,mouth="_lipbite")
+            $ LauraX.change_face("_confused", 1,mouth = "_lipbite")
         "I don't need a lot of backstory drama.":
             $ LauraX.change_stat("love", 200, -5)
             $ LauraX.change_stat("obedience", 80, 10)
             $ LauraX.change_stat("inhibition", 80, -5)
-            $ LauraX.change_face("_angry",1)
+            $ LauraX.change_face("_angry", 1)
             $ line = "bad"
             ch_l "Fine!"
             ch_l "\"Keep it simple\" it is then."
             ch_l "I don't hate hanging out with you, is all."
     if line != "bad":
-        $ LauraX.change_face("_normal",1,eyes="_side")
+        $ LauraX.change_face("_normal", 1,eyes = "_side")
         ch_l "Well, you may have guessed I'm related to Wolverine."
         menu:
             extend ""
@@ -435,27 +435,27 @@ label Laura_BF(temp_Girls=[]):
             "I had no idea!":
                 $ LauraX.change_stat("love", 200, 3)
                 $ LauraX.change_stat("inhibition", 80, 1)
-                $ LauraX.change_face("_confused",1)
+                $ LauraX.change_face("_confused", 1)
             "Duh.":
                 $ LauraX.change_stat("love", 200, 1)
                 $ LauraX.change_stat("obedience", 80, 2)
-                $ LauraX.change_face("_angry",1)
+                $ LauraX.change_face("_angry", 1)
         ch_l "Well I'm actually his partial clone."
-        $ LauraX.change_face("_angry",1,eyes="_side")
+        $ LauraX.change_face("_angry", 1,eyes = "_side")
         ch_l "I was created to be some sort of biological weapon, an assassin."
         ch_l "I did a lot of work for them as a kid, until eventually I escaped."
-        $ LauraX.change_face("_sadside",1)
+        $ LauraX.change_face("_sadside", 1)
         ch_l "After that, I had to do a lot of stuff. . . to stay alive."
         ch_l "Stuff I'm not proud of."
-        $ LauraX.change_face("_sad",1)
+        $ LauraX.change_face("_sad", 1)
         ch_l "But I don't know. . . being around you, I think it helps."
-        $ LauraX.change_face("_sad",1,mouth="_smile")
+        $ LauraX.change_face("_sad", 1,mouth = "_smile")
         ch_l "I kind of feel. . . better."
     if LauraX.SEXP >= 20:
         $ LauraX.change_stat("obedience", 80, 3)
         $ LauraX.change_stat("inhibition", 80, 2)
         $ LauraX.change_stat("lust", 80, 5)
-        $ LauraX.change_face("_sly",1)
+        $ LauraX.change_face("_sly", 1)
         ch_l "You really are good in bed, after all."
     if len(Player.Harem) >= 2:
         ch_l "And I know that you have your share of other girls. . ."
@@ -465,7 +465,7 @@ label Laura_BF(temp_Girls=[]):
         ch_l ". . . but I'd still like to be a part of your life."
     else:
         ch_l "I'd just like to be a part of your life."
-    $ LauraX.change_face("_sad",1,mouth="_smile")
+    $ LauraX.change_face("_sad", 1,mouth = "_smile")
     ch_l "That's it."
     $ LauraX.event_happened[5] += 1
     menu:
@@ -474,14 +474,14 @@ label Laura_BF(temp_Girls=[]):
             $ LauraX.change_stat("love", 200, -3)
             $ LauraX.change_stat("obedience", 80, -3)
             $ LauraX.change_stat("inhibition", 80, 3)
-            $ LauraX.change_face("_surprised",1)
+            $ LauraX.change_face("_surprised", 1)
             ch_l "Whoa!"
             $ LauraX.change_face("_perplexed")
             ch_l "Maybe cool your jets there, [LauraX.player_petname]."
-            $ LauraX.change_face("_smile",eyes="_side")
+            $ LauraX.change_face("_smile", eyes = "_side")
             ch_l "I wasn't. . ."
             ch_l "I don't think we're there. . ."
-            $ LauraX.change_face("_perplexed",1)
+            $ LauraX.change_face("_perplexed", 1)
             ch_l "Right?"
             menu:
                 extend ""
@@ -490,32 +490,32 @@ label Laura_BF(temp_Girls=[]):
                     $ LauraX.change_stat("obedience", 80, 5)
                     $ LauraX.change_stat("inhibition", 80, 5)
                     $ LauraX.change_stat("lust", 80, 2)
-                    $ LauraX.change_face("_smile",1,eyes="_side")
+                    $ LauraX.change_face("_smile", 1,eyes = "_side")
                     ch_l "Hehe. . . um."
                 "I guess, sure.":
                     $ LauraX.change_stat("love", 200, 6)
                     $ LauraX.change_stat("obedience", 80, 3)
                     $ LauraX.change_stat("inhibition", 80, 2)
-                    $ LauraX.change_face("_angry",1,eyes="_side",mouth="_lipbite")
+                    $ LauraX.change_face("_angry", 1,eyes = "_side", mouth = "_lipbite")
                     ch_l "Right, so. . ."
         "Yeah, I think that'd be great.":
 
             $ LauraX.change_stat("love", 200, 6)
             $ LauraX.change_stat("obedience", 80, 2)
             $ LauraX.change_stat("inhibition", 80, 3)
-            $ LauraX.change_face("_smile",1,eyes="_side")
+            $ LauraX.change_face("_smile", 1,eyes = "_side")
             ch_l "Cool."
         "Hmm? Ok.":
             $ LauraX.change_stat("love", 80, 3)
             $ LauraX.change_stat("obedience", 80, 5)
             $ LauraX.change_stat("inhibition", 80, 3)
-            $ LauraX.change_face("_confused",1,eyes="_side")
+            $ LauraX.change_face("_confused", 1,eyes = "_side")
             ch_l "Yeah. . . cool."
         "I'm not really into that.":
             $ LauraX.change_stat("love", 200, -5)
             $ LauraX.change_stat("obedience", 80, 5)
             $ LauraX.change_stat("inhibition", 80, -5)
-            $ LauraX.change_face("_sad",1)
+            $ LauraX.change_face("_sad", 1)
             if len(Player.Harem) >= 2:
                 ch_l "Is it because of [Player.Harem[0].name] and the rest?"
             elif Player.Harem:
@@ -527,40 +527,40 @@ label Laura_BF(temp_Girls=[]):
                 "Yeah, I don't think she'd understand." if len(Player.Harem) == 1:
                     $ LauraX.change_stat("love", 200, -5)
                     $ LauraX.change_stat("obedience", 80, 7)
-                    $ LauraX.change_face("_angry",1,eyes="_side")
-                    $ LauraX.check_if_likes(Player.Harem[0],800,-20,1)
+                    $ LauraX.change_face("_angry", 1,eyes = "_side")
+                    $ LauraX.check_if_likes(Player.Harem[0],800,-20, 1)
                     ch_l "That bitch."
                 "They wouldn't be cool with that." if len(Player.Harem) > 1:
                     $ LauraX.change_stat("love", 200, -5)
                     $ LauraX.change_stat("obedience", 80, 7)
-                    $ LauraX.change_face("_angry",1,eyes="_side")
+                    $ LauraX.change_face("_angry", 1,eyes = "_side")
                     call Haremchange_stat (LauraX, 700, -20)
                     ch_l "Bitches."
                 "It's. . . complicated.":
                     $ LauraX.change_stat("love", 200, -20)
                     $ LauraX.change_stat("obedience", 80, 8)
                     $ LauraX.change_stat("inhibition", 80, -5)
-                    $ LauraX.change_face("_angry",1)
+                    $ LauraX.change_face("_angry", 1)
                     ch_l "Complicated. Sure. Whatever."
-                    $ LauraX.change_face("_angry",1,eyes="_side")
+                    $ LauraX.change_face("_angry", 1,eyes = "_side")
                     if len(Player.Harem) >= 2:
                         ch_l "Probably those bitches."
                         call Haremchange_stat (LauraX, 700, -10)
                     elif Player.Harem:
                         ch_l "Probably because of her."
-                        $ LauraX.check_if_likes(Player.Harem[0],800,-20,1)
+                        $ LauraX.check_if_likes(Player.Harem[0],800,-20, 1)
                     $ line = "no"
                 "I'm just not into you like that.":
                     $ LauraX.change_stat("love", 200, -10)
-                    $ LauraX.change_face("_surprised",1)
+                    $ LauraX.change_face("_surprised", 1)
                     ch_l "Oh."
                     $ LauraX.change_stat("obedience", 80, 10)
                     $ LauraX.change_stat("inhibition", 80, 5)
-                    $ LauraX.change_face("_sadside",1)
+                    $ LauraX.change_face("_sadside", 1)
                     ch_l "Ok, I guess I can respect that."
 
 
-            $ LauraX.change_face("_sad",1)
+            $ LauraX.change_face("_sad", 1)
             if line != "no":
                 ch_l "We're still cool though."
             ch_l "I should. . . leave."
@@ -582,9 +582,9 @@ label Laura_BF(temp_Girls=[]):
                     $ LauraX.change_stat("love", 200, 20)
                     $ LauraX.change_stat("obedience", 80, 5)
                     $ LauraX.change_stat("inhibition", 80, 5)
-                    $ LauraX.change_face("_surprised",2,mouth="_smile")
+                    $ LauraX.change_face("_surprised",2,mouth = "_smile")
                     ch_l ". . ."
-                    $ LauraX.change_face("_smile",1)
+                    $ LauraX.change_face("_smile", 1)
 
                     $ LauraX.event_happened[5] = 10
                 "I'd rather you join us.":
@@ -602,20 +602,20 @@ label Laura_BF(temp_Girls=[]):
                     if line == "no":
                         $ LauraX.change_stat("love", 200, -10)
                         $ LauraX.change_stat("obedience", 80, 10)
-                        $ LauraX.change_face("_angry",1)
+                        $ LauraX.change_face("_angry", 1)
                         call Haremchange_stat (LauraX, 700, -10)
                         ch_l "Eh, I'll pass."
                     else:
                         $ LauraX.change_stat("love", 200,5)
                         $ LauraX.change_stat("obedience", 80, 15)
                         $ LauraX.change_stat("inhibition", 80, 10)
-                        $ LauraX.change_face("_bemused",1)
+                        $ LauraX.change_face("_bemused", 1)
                         ch_l "Well, I s'pose that wouldn't be so terrible."
                 "What? Of course not.":
                     $ LauraX.change_stat("love", 200, -25)
                     $ LauraX.change_stat("obedience", 80, 5)
                     call Haremchange_stat (LauraX, 700, -20)
-                    $ LauraX.change_face("_angry",1)
+                    $ LauraX.change_face("_angry", 1)
                     ch_l "Well, fine then."
                     $ line = "no"
             if line == "no":
@@ -636,14 +636,14 @@ label Laura_BF(temp_Girls=[]):
                 $ LauraX.change_stat("love", 200, 5)
                 $ LauraX.change_stat("obedience", 80, 10)
                 $ LauraX.change_stat("inhibition", 80, 5)
-                $ LauraX.change_face("_surprised",1)
+                $ LauraX.change_face("_surprised", 1)
                 ch_l "Oh, cool."
             "Actually. . . I guess we'll need to work on that one." if "LauraYes" not in Player.traits:
                 $ LauraX.change_stat("love", 200, 3)
                 $ LauraX.change_stat("obedience", 80, 3)
                 $ LauraX.change_stat("inhibition", 80, 1)
                 $ LauraX.change_stat("lust", 80, 1)
-                $ LauraX.change_face("_confused",1)
+                $ LauraX.change_face("_confused", 1)
                 ch_l "Hmm, get back to me, I guess?"
                 $ LauraX.event_happened[5] = 20
                 call remove_girl (LauraX)
@@ -662,7 +662,7 @@ label Laura_BF(temp_Girls=[]):
     $ LauraX.change_stat("obedience", 80, 3)
     $ LauraX.change_stat("inhibition", 80, 1)
     $ LauraX.change_stat("lust", 80, 1)
-    $ LauraX.change_face("_sly",1)
+    $ LauraX.change_face("_sly", 1)
     ch_l "So, did you have any plans for the next few minutes? . ."
     if simulation:
         return True
@@ -696,7 +696,7 @@ label Laura_Cleanhouse:
     call taboo_level
     $ LauraX.daily_history.append("relationship")
     $ LauraX.change_stat("love", 200, -20)
-    $ LauraX.change_face("_angry",1)
+    $ LauraX.change_face("_angry", 1)
     ch_l "What's the deal, [Player.player_petname]?"
     ch_l "It's been a week already, and you're still dating [Player.Harem[0].name]!"
     if len(Player.Harem) >= 2:
@@ -709,7 +709,7 @@ label Laura_Cleanhouse:
             $ LauraX.change_stat("inhibition", 80, 5)
             $ LauraX.change_face("_angry",2)
             ch_l "You asshole."
-            $ LauraX.change_face("_sadside",1)
+            $ LauraX.change_face("_sadside", 1)
             ch_l "You could have at least been honest about it."
         "Must have slipped my mind":
             $ LauraX.change_stat("love", 200, -10)
@@ -745,14 +745,14 @@ label Laura_Cleanhouse:
     if line == "no":
         $ LauraX.change_stat("love", 200, -10)
         $ LauraX.change_stat("obedience", 80, 10)
-        $ LauraX.change_face("_angry",1)
+        $ LauraX.change_face("_angry", 1)
         call Haremchange_stat (LauraX, 700, -15)
         ch_l "No, this is bullshit, never mind."
     else:
         $ LauraX.change_stat("love", 200, 5)
         $ LauraX.change_stat("obedience", 80, 20)
         $ LauraX.change_stat("inhibition", 80, 10)
-        $ LauraX.change_face("_angry",1,eyes="_side")
+        $ LauraX.change_face("_angry", 1,eyes = "_side")
         ch_l "Ok, fine, whatever. I'm in too."
         if not simulation:
             $ Player.Harem.append(LauraX)
@@ -794,41 +794,41 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
     call set_the_scene
     call taboo_level
     $ LauraX.daily_history.append("relationship")
-    $ LauraX.change_face("_sad",1)
+    $ LauraX.change_face("_sad", 1)
     ch_l "Hey, so, I like what this is. . ."
     ch_l "-what we have. . ."
-    $ LauraX.change_face("_sadside",1)
+    $ LauraX.change_face("_sadside", 1)
     ch_l "It's been kind of hard for me to open up to people. . ."
     ch_l "I've been betrayed a lot out there."
     menu:
         extend ""
         "I would never betray you.":
-            $ LauraX.change_face("_bemused",1)
+            $ LauraX.change_face("_bemused", 1)
             $ LauraX.change_stat("love", 200, 10)
             $ LauraX.change_stat("obedience", 70, 5)
             $ LauraX.change_stat("inhibition", 60, 5)
             ch_l "I. . . know that now."
         "I'm sorry to hear that.":
-            $ LauraX.change_face("_sadside",1,mouth="_smile")
+            $ LauraX.change_face("_sadside", 1,mouth = "_smile")
             $ LauraX.change_stat("love", 200, 5)
             $ LauraX.change_stat("obedience", 90, -5)
             $ LauraX.change_stat("inhibition", 60, 10)
             ch_l ". . ."
-            $ LauraX.change_face("_smile",1)
+            $ LauraX.change_face("_smile", 1)
             ch_l "Thank you. . ."
         "That must be rough.":
-            $ LauraX.change_face("_sadside",1,mouth="_normal")
+            $ LauraX.change_face("_sadside", 1,mouth = "_normal")
             $ LauraX.change_stat("love", 200, 5)
             ch_l ". . ."
-            $ LauraX.change_face("_smile",1)
+            $ LauraX.change_face("_smile", 1)
             ch_l "It was. . ."
         "Wow, that sucks.":
-            $ LauraX.change_face("_confused",1)
+            $ LauraX.change_face("_confused", 1)
             $ LauraX.change_stat("love", 200, -5)
             $ LauraX.change_stat("obedience", 90, 10)
             $ LauraX.change_stat("inhibition", 90, -5)
             ch_l ". . ."
-            $ LauraX.change_face("_angry",1,eyes="_side")
+            $ LauraX.change_face("_angry", 1,eyes = "_side")
             ch_l "Right, so. . ."
     ch_l "I didn't always have it as easy as I've had it here."
     $ LauraX.eyes = "_normal"
@@ -841,12 +841,12 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
             menu:
                 extend ""
                 "How many people did you kill?" if "kills" not in Topics:
-                    $ LauraX.change_face("_angry",0,eyes="_side")
+                    $ LauraX.change_face("_angry", 0,eyes = "_side")
                     ch_l "Dozens. Maybe more. At least 13 primary targets."
                     ch_l "Too many \"collaterals.\""
                     $ Topics.append("kills")
                 "Did you ever fail a mission?" if "fail" not in Topics:
-                    $ LauraX.change_face("_angry",0,eyes="_side",brows="_normal")
+                    $ LauraX.change_face("_angry", 0,eyes = "_side", brows = "_normal")
                     ch_l "Once or twice."
                     ch_l "Sometimes they managed to get away."
                     ch_l "I'm not proud of who I was back then, but even then. . ."
@@ -854,15 +854,15 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
                     ch_l ". . . a part of me was happy when they did."
                     $ Topics.append("fail")
                 "Did anyone take care of you?" if "mother" not in Topics:
-                    $ LauraX.change_face("_smile",0)
+                    $ LauraX.change_face("_smile", 0)
                     ch_l "My mother, Sarah Kinney."
                     ch_l "She's the one who birthed me, and was also one of the scientists that helped create me."
-                    $ LauraX.change_face("_sadside",0)
+                    $ LauraX.change_face("_sadside", 0)
                     ch_l "She tried to help me, until I killed her."
                     $ Topics.append("mother")
                     $ line = "mother"
                 "How did you escape?" if "escape" not in Topics:
-                    $ LauraX.change_face("_sadside",0)
+                    $ LauraX.change_face("_sadside", 0)
                     ch_l "Mother."
                     ch_l "She got me out, found me an escape route."
                     ch_l "It was the last thing she did."
@@ -879,17 +879,17 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
             menu:
                 extend ""
                 "Who was your mother?" if "mother" not in Topics:
-                    $ LauraX.change_face("_smile",0)
+                    $ LauraX.change_face("_smile", 0)
                     ch_l "Her name was Sarah Kinney."
                     ch_l "She's the one who birthed me, and was also one of the scientists that helped create me."
-                    $ LauraX.change_face("_sadside",0)
+                    $ LauraX.change_face("_sadside", 0)
                     ch_l "She tried to help me, until I killed her."
                     $ Topics.append("mother")
                     $ line = "mother"
                 "Why would you kill her?" if "killed" not in Topics and "mother" in Topics:
-                    $ LauraX.change_face("_sad",0,eyes="_surprised")
+                    $ LauraX.change_face("_sad", 0,eyes = "_surprised")
                     ch_l "I didn't want to, but the trigger scent made me. . ."
-                    $ LauraX.change_face("_sadside",0)
+                    $ LauraX.change_face("_sadside", 0)
                     if "trigger" in LauraX.history:
                         ch_l "I've mentioned that to you before. . ."
                     else:
@@ -900,21 +900,21 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
                     $ LauraX.change_stat("love", 200, 5)
                     $ LauraX.change_stat("obedience", 70, 5)
                     $ LauraX.change_stat("inhibition", 70, 5)
-                    $ LauraX.change_face("_sad",0)
+                    $ LauraX.change_face("_sad", 0)
                     ch_l "Not completely, no."
-                    $ LauraX.change_face("_sadside",0)
+                    $ LauraX.change_face("_sadside", 0)
                     ch_l "But my hands aren't clean."
                     $ line = "facility"
                 "That must have been horrible." if "killed" in Topics:
-                    $ LauraX.change_face("_sadside",0)
+                    $ LauraX.change_face("_sadside", 0)
                     $ LauraX.change_stat("love", 200, 5)
                     $ LauraX.change_stat("obedience", 90, 5)
                     ch_l "It's taken me some time. . ."
-                    $ LauraX.change_face("_normal",0)
+                    $ LauraX.change_face("_normal", 0)
                     ch_l "but I think I'm ok with it now."
                     $ line = "facility"
                 "Bummer." if "killed" in Topics:
-                    $ LauraX.change_face("_angry",1)
+                    $ LauraX.change_face("_angry", 1)
                     $ LauraX.change_stat("love", 200, -10)
                     $ LauraX.change_stat("obedience", 90, 5)
                     ch_l "Are you seriously making fun of my mother's death?!"
@@ -926,10 +926,10 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
             menu:
                 extend ""
                 "What did you do for a living?" if "living" not in Topics:
-                    $ LauraX.change_face("_sadside",0)
+                    $ LauraX.change_face("_sadside", 0)
                     ch_l "There wasn't much I could do at the time, I mostly just scrounged for food."
                     ch_l "You can get by on some pretty awful stuff if you have a healing factor."
-                    $ LauraX.change_face("_bemused",1,brows="_sad")
+                    $ LauraX.change_face("_bemused", 1,brows = "_sad")
                     ch_l "I also did some. . . shady stuff."
                     $ Topics.append("living")
 
@@ -944,10 +944,10 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
                     $ Topics.append("work")
 
                 "Did you hurt people?" if "work" not in Topics and "living" in Topics:
-                    $ LauraX.change_face("_surprised",0,eyes="_normal")
+                    $ LauraX.change_face("_surprised", 0,eyes = "_normal")
                     ch_l "No, definitely not."
                     ch_l "After the facility, I just couldn't take that sort of work anymore."
-                    $ LauraX.change_face("_bemused",0)
+                    $ LauraX.change_face("_bemused", 0)
                     ch_l "I avoided hurting anyone."
                     $ LauraX.change_face("_sadside",2)
                     ch_l "It tended to be more. . . sexual work."
@@ -955,50 +955,50 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
                     $ Topics.append("work")
 
                 "And then you eventually made it here? [[exit]" if "xaviers" not in Topics:
-                    $ LauraX.change_face("_bemused",0)
+                    $ LauraX.change_face("_bemused", 0)
                     ch_l "Yeah, eventually."
                     ch_l "I'd seen Wolverine on the news, and thought maybe he had some answers."
                     ch_l "He's not around much though."
                     $ Topics.append("xaviers")
                     $ line = 0
                 "Good thing you made it here. [[exit]" if "xaviers" in Topics:
-                    $ LauraX.change_face("_smile",0)
+                    $ LauraX.change_face("_smile", 0)
                     ch_l "Yeah."
                     $ line = 0
 
         if line == "work":
-            $ LauraX.change_face("_sadside",0,mouth="_normal")
+            $ LauraX.change_face("_sadside", 0,mouth = "_normal")
             ch_l "It was mostly the rougher customers."
             ch_l "The ones who couldn't control their tempers."
-            $ LauraX.change_face("_angry",0,mouth="_smile")
+            $ LauraX.change_face("_angry", 0,mouth = "_smile")
             ch_l "Better for the girl who can heal to take the hits, right?"
             menu:
                 extend ""
                 "That's terrible. I wish I could have protected you.":
-                    $ LauraX.change_face("_smile",1)
+                    $ LauraX.change_face("_smile", 1)
                     $ LauraX.change_stat("love", 200, 5)
                     $ LauraX.change_stat("obedience", 90, 5)
                     $ LauraX.change_stat("inhibition", 90, -5)
                     ch_l "Thanks, but I was ok."
-                    $ LauraX.change_face("_sadside",0)
+                    $ LauraX.change_face("_sadside", 0)
                     ch_l "I didn't deserve it, but I felt like I did at the time."
                 "You're strong to have made it out of there.":
-                    $ LauraX.change_face("_smile",0)
+                    $ LauraX.change_face("_smile", 0)
                     $ LauraX.change_stat("love", 200, 5)
                     $ LauraX.change_stat("obedience", 90, 10)
                     $ LauraX.change_stat("inhibition", 90, 5)
                     ch_l "Thanks."
                     ch_l "I didn't really think of it like that. . ."
-                    $ LauraX.change_face("_sadside",0)
+                    $ LauraX.change_face("_sadside", 0)
                     ch_l "I just felt like I'd deserved it."
                     ch_l "But I realized how wrong that was."
                 "Yeah, that makes sense.":
-                    $ LauraX.change_face("_confused",1)
+                    $ LauraX.change_face("_confused", 1)
                     $ LauraX.change_stat("love", 200, -5)
                     $ LauraX.change_stat("obedience", 90, 15)
                     $ LauraX.change_stat("inhibition", 90, -5)
                     ch_l "Don't think before you speak, do you?"
-                    $ LauraX.change_face("_sadside",0)
+                    $ LauraX.change_face("_sadside", 0)
                     ch_l "It wasn't right, I just didn't realize it at the time."
             ch_l "Eventually I got past it and decided to get out of there."
             ch_l "Not like they could stop me."
@@ -1009,7 +1009,7 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
             menu:
                 extend ""
                 "What did you do back at the facility?" if "facility" not in Topics:
-                    $ LauraX.change_face("_sadside",0)
+                    $ LauraX.change_face("_sadside", 0)
                     ch_l "After they tested what I could do, they put me to work."
                     ch_l "Mainly, I killed people for them."
                     $ Topics.append("facility")
@@ -1018,7 +1018,7 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
                     $ line = "facility"
 
                 "Where did you go after you escaped?" if "NYX" not in Topics:
-                    $ LauraX.change_face("_sadside",0)
+                    $ LauraX.change_face("_sadside", 0)
                     ch_l "I wandered in the wilderness for weeks."
                     ch_l "Eventually I found my way to New York."
                     ch_l "I lived on the streets for a few years."
@@ -1028,19 +1028,19 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
                     $ line = "NYX"
 
                 "I'm glad you shared that with me. [[exit]" if len(Topics) >= 5:
-                    $ LauraX.change_face("_smile",0)
+                    $ LauraX.change_face("_smile", 0)
                     $ LauraX.change_stat("love", 200, 10)
                     $ LauraX.change_stat("obedience", 90, 3)
                     $ LauraX.change_stat("inhibition", 90, 3)
                     ch_l "Thanks for listening to me ramble."
                     $ Topics.append("exit")
                 "I think that's probably enough. [[exit]" if "facility" in Topics and "NYX" in Topics:
-                    $ LauraX.change_face("_sadside",0, mouth="_smile")
+                    $ LauraX.change_face("_sadside", 0, mouth = "_smile")
                     $ LauraX.change_stat("obedience", 90, 10)
                     ch_l "Yeah, you get the idea."
                     $ Topics.append("exit")
                 "I don't really care about that. [[exit]":
-                    $ LauraX.change_face("_angry",0)
+                    $ LauraX.change_face("_angry", 0)
                     $ LauraX.change_stat("love", 200, -15)
                     $ LauraX.change_stat("obedience", 50, 5)
                     $ LauraX.change_stat("obedience", 90, 10)
@@ -1052,7 +1052,7 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
 
 
     if line == "_angry":
-        $ LauraX.change_face("_angry",0)
+        $ LauraX.change_face("_angry", 0)
         ch_l "And here I was thinking that I meant something to you."
         ch_l "Well forget that!"
         $ line = 0
@@ -1064,32 +1064,32 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
         $ LauraX.location = "hold"
         return
 
-    $ LauraX.change_face("_bemused",0,eyes="_down")
+    $ LauraX.change_face("_bemused", 0,eyes = "_down")
     ch_l "I just thought you should know,"
     $ LauraX.change_face("_smile",2)
     ch_l "I love you."
     menu:
         extend ""
         "I love you too!":
-            $ LauraX.change_face("_smile",1)
+            $ LauraX.change_face("_smile", 1)
             $ LauraX.change_stat("love", 200, 20)
             $ LauraX.change_stat("inhibition", 90, 5)
             ch_l "For a second there you had me worried."
             $ LauraX.player_petnames.append("lover")
             jump Laura_Love_End
         "I know.":
-            $ LauraX.change_face("_smile",1)
+            $ LauraX.change_face("_smile", 1)
             $ LauraX.change_stat("love", 200, 10)
             $ LauraX.change_stat("obedience", 90, 5)
             $ LauraX.change_stat("inhibition", 90, 10)
             $ LauraX.change_stat("lust", 90, 5)
             ch_l "Smooth one. Seriously though, how about you?"
         "Neat?":
-            $ LauraX.change_face("_confused",1)
+            $ LauraX.change_face("_confused", 1)
             $ LauraX.change_stat("obedience", 90, 5)
             ch_l "I'm gonna need a bit more there, [LauraX.player_petname]."
         "Huh.":
-            $ LauraX.change_face("_confused",1)
+            $ LauraX.change_face("_confused", 1)
             $ LauraX.change_stat("love", 200, -5)
             $ LauraX.change_stat("obedience", 90, 10)
             ch_l "I'm not sure how to take that one."
@@ -1098,7 +1098,7 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
     menu:
         extend ""
         "Oh, I love you too!":
-            $ LauraX.change_face("_smile",1)
+            $ LauraX.change_face("_smile", 1)
             $ LauraX.change_stat("love", 200, 15)
             $ LauraX.change_stat("obedience", 90, 5)
             $ LauraX.change_stat("inhibition", 90, 5)
@@ -1106,20 +1106,20 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
             $ LauraX.player_petnames.append("lover")
             jump Laura_Love_End
         "I. . . love you back?":
-            $ LauraX.change_face("_confused",1)
+            $ LauraX.change_face("_confused", 1)
             $ LauraX.change_stat("love", 200, 5)
             $ LauraX.change_stat("obedience", 90, 10)
             ch_l "Ok, I'll take it."
             $ LauraX.player_petnames.append("lover")
             jump Laura_Love_End
         "I mean, that's cool and all. . .":
-            $ LauraX.change_face("_sadside",1)
+            $ LauraX.change_face("_sadside", 1)
             $ LauraX.change_stat("love", 200, -5)
             $ LauraX.change_stat("obedience", 90, 10)
             $ LauraX.change_stat("inhibition", 90, -5)
             ch_l ". . . but you don't love me back. Got it."
         "That's. . . uncomfortable.":
-            $ LauraX.change_face("_angry",1)
+            $ LauraX.change_face("_angry", 1)
             $ LauraX.change_stat("love", 200, -10)
             $ LauraX.change_stat("obedience", 90, 15)
             $ LauraX.change_stat("inhibition", 90, -5)
@@ -1140,13 +1140,13 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
             $ LauraX.change_stat("obedience", 90, 15)
             $ LauraX.change_stat("inhibition", 90, 5)
             $ LauraX.change_stat("lust", 90, 5)
-            $ LauraX.change_face("_sadside",1)
+            $ LauraX.change_face("_sadside", 1)
             ch_l "Well, you do have your pick."
         "There's nobody else.":
             $ LauraX.change_stat("love", 200, -15)
             $ LauraX.change_stat("obedience", 90, 15)
             $ LauraX.change_stat("inhibition", 90, 5)
-            $ LauraX.change_face("_sad",1)
+            $ LauraX.change_face("_sad", 1)
             if approval_check(LauraX, 1000, "OI"):
                 ch_l "I guess that's something."
             else:
@@ -1169,15 +1169,15 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
             $ LauraX.change_stat("obedience", 90, 20)
             $ LauraX.change_stat("inhibition", 90, 5)
             $ LauraX.change_stat("lust", 90, 5)
-            $ LauraX.change_face("_sadside",1)
+            $ LauraX.change_face("_sadside", 1)
             ch_l "Yeah, I guess she's great."
         else:
-            $ LauraX.change_face("_angry",eyes="_side")
+            $ LauraX.change_face("_angry", eyes = "_side")
             $ LauraX.change_stat("love", 200, -5)
             $ LauraX.change_stat("obedience", 90, 20)
             ch_l "Bitch."
             $ LauraX.recent_history.append("_angry")
-            $ LauraX.check_if_likes(line,800,-50,1)
+            $ LauraX.check_if_likes(line,800,-50, 1)
     ch_l "Well, if that's the way you feel about it. . ."
     ch_l "I'll. . . see you later."
     ch_l "This. . . hurt."
@@ -1194,7 +1194,7 @@ label Laura_Love_End:
     "[LauraX.name] grabs you in a crushing hug."
     $ LauraX.change_stat("love", 200, 25)
     $ LauraX.change_stat("lust", 90, 5)
-    $ LauraX.change_face("_sly",1)
+    $ LauraX.change_face("_sly", 1)
     ch_l "So. . . now that we have some free time. . ."
     $ LauraX.change_stat("lust", 90, 10)
 
@@ -1234,9 +1234,9 @@ label Laura_Love_Redux:
         else:
             $ LauraX.change_face("_angry")
             ch_l "You're still working your way out of the hole, [LauraX.player_petname]."
-            $ LauraX.eyes="_side"
+            $ LauraX.eyes = "_side"
             ch_l ". . ."
-            $ LauraX.change_face("_angry",mouth="_lipbite")
+            $ LauraX.change_face("_angry", mouth = "_lipbite")
             ch_l "But let me hear your pitch."
     elif LauraX.event_happened[6] >= 23:
 
@@ -1247,15 +1247,15 @@ label Laura_Love_Redux:
         else:
             $ LauraX.change_face("_angry")
             ch_l "You're still working your way out of the hole, [LauraX.player_petname]."
-            $ LauraX.eyes="_side"
+            $ LauraX.eyes = "_side"
             ch_l ". . ."
-            $ LauraX.change_face("_angry",mouth="_lipbite")
+            $ LauraX.change_face("_angry", mouth = "_lipbite")
             ch_l "But let me hear your pitch."
     else:
         ch_p "Remember when I told you that I didn't love you?"
-        $ LauraX.change_face("_perplexed",1)
+        $ LauraX.change_face("_perplexed", 1)
         ch_l ". . ."
-        $ LauraX.change_face("_angry", eyes="_side")
+        $ LauraX.change_face("_angry", eyes = "_side")
         ch_l "How could I forget?"
 
     if line != "love":
@@ -1336,7 +1336,7 @@ label Laura_Sub:
         "Yup. Deal with it.":
             pass
     "Before you can speak, she puts her hand over your mouth."
-    $ LauraX.change_face("_sly", 1,eyes="_side")
+    $ LauraX.change_face("_sly", 1,eyes = "_side")
     ch_l "I don't know how I feel about that."
     if LauraX.event_happened[6]:
         $ LauraX.change_face("_sadside", 1)
@@ -1385,12 +1385,12 @@ label Laura_Sub:
             else:
                 $ LauraX.change_stat("love", 200, -10)
                 $ LauraX.change_stat("inhibition", 50, -5)
-                $ LauraX.change_face("_angry",0)
+                $ LauraX.change_face("_angry", 0)
                 ch_l "You're not off to a good start here. You might want to rethink your attitude."
                 menu:
                     extend ""
                     "Sorry. I thought that's what you were into.":
-                        $ LauraX.change_face("_perplexed", 1,eyes="_side")
+                        $ LauraX.change_face("_perplexed", 1,eyes = "_side")
                         $ LauraX.eyes = "_side"
                         $ LauraX.change_stat("love", 75, 10)
                         $ LauraX.change_stat("obedience", 200, 5)
@@ -1411,7 +1411,7 @@ label Laura_Sub:
         ch_l "Look, it's not like. . ."
         $ LauraX.change_face("_sly", 2)
         ch_l ". . . it's not like I hate it."
-        $ LauraX.change_face("_smile", 1, eyes="_side")
+        $ LauraX.change_face("_smile", 1, eyes = "_side")
         ch_l ". . . I actually think it might make me. . ."
         menu:
             extend ""
@@ -1432,11 +1432,11 @@ label Laura_Sub:
                 $ LauraX.change_stat("lust", 50, 5)
                 ch_l "but also kind of excited by it."
             "-hungry?":
-                $ LauraX.change_face("_confused", 1,eyes="_surprised",mouth="_smile")
+                $ LauraX.change_face("_confused", 1,eyes = "_surprised", mouth = "_smile")
                 $ LauraX.change_stat("obedience", 200, -5)
                 $ LauraX.change_stat("inhibition", 50, -5)
                 ch_l "?!"
-                $ LauraX.change_face("_confused", 1,eyes="_normal",mouth="_smile")
+                $ LauraX.change_face("_confused", 1,eyes = "_normal", mouth = "_smile")
                 ch_l "Well. . . yeah? But not for-"
                 $ LauraX.change_face("_sly", 1)
                 $ LauraX.change_stat("lust", 50, 5)
@@ -1444,9 +1444,9 @@ label Laura_Sub:
             "-horny?":
                 $ LauraX.change_stat("obedience", 200, 10)
                 $ LauraX.change_stat("inhibition", 50, 5)
-                $ LauraX.change_face("startled", 2,mouth="_lipbite")
+                $ LauraX.change_face("startled", 2,mouth = "_lipbite")
                 ch_l "!"
-                $ LauraX.change_face("_sly", 1, eyes="_side")
+                $ LauraX.change_face("_sly", 1, eyes = "_side")
                 $ LauraX.change_stat("inhibition", 50, 5)
                 $ LauraX.change_stat("lust", 50, 10)
                 $ LauraX.change_stat("lust", 70, 5)
@@ -1460,7 +1460,7 @@ label Laura_Sub:
                     $ LauraX.change_stat("inhibition", 50, 10)
                     ch_l "Hmmm. . ."
                 else:
-                    $ LauraX.change_face("_sadside", 1,mouth="_normal")
+                    $ LauraX.change_face("_sadside", 1,mouth = "_normal")
                     $ LauraX.change_stat("love", 200, -5)
                     $ LauraX.change_stat("obedience", 200, 10)
                     ch_l "You might want to slow your roll there, [LauraX.player_petname]."
@@ -1479,7 +1479,7 @@ label Laura_Sub:
                             ch_l "-but not too much."
             "Yeah? You think it's sexy?":
 
-                $ LauraX.change_face("_bemused", 2,eyes="_side")
+                $ LauraX.change_face("_bemused", 2,eyes = "_side")
                 $ LauraX.change_stat("obedience", 200, 5)
                 $ LauraX.change_stat("inhibition", 50, 10)
                 ch_l ". . ."
@@ -1487,7 +1487,7 @@ label Laura_Sub:
                 ch_l "Yeah."
             "You sure you don't want me to back off a little?":
 
-                $ LauraX.change_face("startled", 1,eyes="_squint")
+                $ LauraX.change_face("startled", 1,eyes = "_squint")
                 $ LauraX.change_stat("obedience", 200, -5)
                 menu:
                     ch_l "Well if you have to ask. . ."
@@ -1497,7 +1497,7 @@ label Laura_Sub:
                         $ LauraX.change_stat("inhibition", 50, 10)
                         $ line = 0
                     "Uhm. . .yeah. I think it's weird. Sorry.":
-                        $ LauraX.change_face("_sad", 1, eyes="_surprised")
+                        $ LauraX.change_face("_sad", 1, eyes = "_surprised")
                         $ LauraX.change_stat("love", 200, -15)
                         $ LauraX.change_stat("obedience", 200, -5)
                         $ LauraX.change_stat("inhibition", 50, -10)
@@ -1523,7 +1523,7 @@ label Laura_Sub:
                 $ LauraX.change_face("_sly", 1)
                 $ line = 0
             "Don't you think that relationship's kinda. . .weird?":
-                $ LauraX.change_face("_sad", 1, eyes="_surprised")
+                $ LauraX.change_face("_sad", 1, eyes = "_surprised")
                 $ LauraX.change_stat("love", 200, -5)
                 $ LauraX.change_stat("inhibition", 50, -15)
                 $ line = "embarrassed"
@@ -1543,7 +1543,7 @@ label Laura_Sub:
                 $ LauraX.change_face("_perplexed", 1)
                 ch_l "Huh. ok, no problem"
                 $ LauraX.change_stat("inhibition", 50, -5)
-                $ LauraX.change_face("_sly", 1,eyes="_side")
+                $ LauraX.change_face("_sly", 1,eyes = "_side")
                 menu:
                     ch_l "You'll still give me some orders, right?"
                     "Yeah, no problem.":
@@ -1551,7 +1551,7 @@ label Laura_Sub:
                         $ LauraX.change_face("_smile", 1)
                         ch_l "Good."
                     "I don't feel comfortable with that. . .":
-                        $ LauraX.change_face("_sad", 1, eyes="_side")
+                        $ LauraX.change_face("_sad", 1, eyes = "_side")
                         $ LauraX.change_stat("love", 200, -10)
                         $ LauraX.change_stat("obedience", 200, -30)
                         $ LauraX.change_stat("inhibition", 50, -15)
@@ -1721,7 +1721,7 @@ label Laura_Master:
                     $ LauraX.change_stat("obedience", 200, -10)
                     $ line = "embarrassed"
         "No.":
-            $ LauraX.change_face("_perplexed", 1,brows="_confused")
+            $ LauraX.change_face("_perplexed", 1,brows = "_confused")
             $ LauraX.change_stat("love", 80, -5)
             $ LauraX.change_stat("obedience", 200, -5)
             $ LauraX.change_stat("inhibition", 50, -5)
@@ -1780,7 +1780,7 @@ label Laura_Master:
                         $ line = "fail"
                     "Actually, let's stop that. It's creeping me out.":
 
-                        $ LauraX.change_face("_angry", 2, eyes="_surprised")
+                        $ LauraX.change_face("_angry", 2, eyes = "_surprised")
                         $ LauraX.change_stat("love", 200, -10)
                         $ LauraX.change_stat("obedience", 200, -50)
                         $ LauraX.change_stat("inhibition", 50, -15)
@@ -1788,7 +1788,7 @@ label Laura_Master:
                         $ line = "embarrassed"
             "As if I care what you think, slut.":
 
-                $ LauraX.change_face("_angry", 1, mouth="_smile")
+                $ LauraX.change_face("_angry", 1, mouth = "_smile")
                 $ LauraX.change_stat("love", 90, -20)
                 $ LauraX.change_stat("obedience", 200, 10)
                 $ LauraX.change_stat("inhibition", 50, -10)
@@ -1826,7 +1826,7 @@ label Laura_Master:
                             $ LauraX.change_stat("love", 200, 5)
                             $ LauraX.change_stat("obedience", 200, -5)
                             $ LauraX.change_stat("inhibition", 50, 5)
-                            $ LauraX.change_face("_angry", 1, eyes="_side")
+                            $ LauraX.change_face("_angry", 1, eyes = "_side")
                             ch_l ". . ."
                             ch_l "We'll work on it. . ."
             "I don't really like it. Too much pressure.":
@@ -1878,7 +1878,7 @@ label Laura_Sexfriend:
     $ LauraX.daily_history.append("relationship")
     call taboo_level
     $ line = 0
-    $ LauraX.change_face("_sly",2,eyes="_side")
+    $ LauraX.change_face("_sly",2,eyes = "_side")
     "[LauraX.name] approaches you and pulls you aside. She seems to be shivering a little bit."
     "She seems to be squirming around and rubbing her thighs together."
     $ LauraX.player_petnames.append("sex friend")
@@ -1903,7 +1903,7 @@ label Laura_Sexfriend:
         menu:
             extend ""
             "Sure":
-                $ LauraX.change_face("_sly",2,mouth="_smile")
+                $ LauraX.change_face("_sly",2,mouth = "_smile")
                 $ line = "yes"
             "No thanks":
                 $ LauraX.change_face("_confused",2)
@@ -1917,7 +1917,7 @@ label Laura_Sexfriend:
             menu:
                 extend ""
                 "Sure":
-                    $ LauraX.change_face("_sly",2,mouth="_smile")
+                    $ LauraX.change_face("_sly",2,mouth = "_smile")
                     $ line = "yes"
                 "No thanks":
                     $ LauraX.change_face("_confused",2)
@@ -1930,7 +1930,7 @@ label Laura_Sexfriend:
             menu:
                 extend ""
                 "Ok, fine":
-                    $ LauraX.change_face("_confused",2,mouth="_smile")
+                    $ LauraX.change_face("_confused",2,mouth = "_smile")
                     ch_l "Love the enthusiasm."
                     $ line = "yes"
                 "Not interested":
@@ -1942,7 +1942,7 @@ label Laura_Sexfriend:
                     if Player.Harem:
                         $ LauraX.change_face("_surprised",2)
                         ch_l "Oh, [Player.Harem[0].name]?"
-                        $ LauraX.check_if_likes(Player.Harem[0],600,-25,1)
+                        $ LauraX.check_if_likes(Player.Harem[0],600,-25, 1)
                     $ LauraX.change_face("_sly",2)
                     ch_l "Well, she doesn't need to know about it. . ."
                     menu:
@@ -1961,18 +1961,18 @@ label Laura_Sexfriend:
         ch_l "Really?"
         ch_l "Bummer."
         ch_l "Well let me know if you change your mind."
-        $ LauraX.change_face("_sadside",2,mouth="_lipbite",brows="_angry")
+        $ LauraX.change_face("_sadside",2,mouth = "_lipbite", brows = "_angry")
         if Player.Harem:
             ch_l "Wonder if [Player.Harem[0].name]'s busy. . ."
-            $ LauraX.check_if_likes(Player.Harem[0],500,25,1)
+            $ LauraX.check_if_likes(Player.Harem[0],500,25, 1)
         else:
             ch_l "Wonder if Kitty's busy. . ."
-            $ LauraX.check_if_likes("Kitty",500,25,1)
+            $ LauraX.check_if_likes("Kitty",500,25, 1)
     else:
         $ LauraX.change_stat("love", 90, 10)
         $ LauraX.change_stat("obedience", 90, 5)
         $ LauraX.change_stat("inhibition", 90, 15)
-        $ LauraX.change_face("_sly",1,mouth="_smile")
+        $ LauraX.change_face("_sly", 1,mouth = "_smile")
         if taboo:
             ch_l "Wanna take this party someplace else?"
             menu:
@@ -2024,7 +2024,7 @@ label Laura_Fuckbuddy:
     call taboo_level
     $ Player.primary_action = "masturbation"
     $ girl_secondary_action = "fondle_pussy"
-    $ LauraX.change_face("_sly",2,mouth="_lipbite")
+    $ LauraX.change_face("_sly",2,mouth = "_lipbite")
     "[LauraX.name] is standing in the doorway, with her hand down her pants."
     "You can tell she's been masturbating furiously, her scent is overpowering."
     $ Player.primary_action = None
@@ -2094,7 +2094,7 @@ label Laura_Daddy:
                     ch_l "Great!"
                     $ LauraX.change_face("_sly",2)
                     ch_l " . . . daddy."
-                    $ LauraX.change_face("_sly",1)
+                    $ LauraX.change_face("_sly", 1)
                     $ LauraX.player_petname = "daddy"
                 "Could you not, please?":
                     $ LauraX.change_stat("love", 90, 5)
@@ -2139,7 +2139,7 @@ label Gwentro:
     pause .1
     call GwenFace ("_surprised")
     $ action_speed = 0
-    $ LauraX.change_face("_surprised",2,eyes="_side")
+    $ LauraX.change_face("_surprised",2,eyes = "_side")
     show Gwen_Sprite zorder 25 at sprite_location(200) with vpunch
     ch_g "Ouch!"
     call GwenFace ("_angry")
@@ -2150,7 +2150,7 @@ label Gwentro:
     ch_g "Um. . ."
     call GwenFace ("_shocked", 1)
     ch_g "Sorry! My bad, I was just. . ."
-    $ LauraX.change_face("_confused",2,eyes="_side")
+    $ LauraX.change_face("_confused",2,eyes = "_side")
     call GwenFace ("_surprised", 1, mouth = "_kiss")
     extend "\n looking for an exit. . ."
     call GwenFace ("_smile", 1)
@@ -2165,7 +2165,7 @@ label Gwentro:
     show Gwen_Sprite:
         ease 1 ypos 50
     ch_g "So now that we've got that taken care of, what's your name?"
-    $ LauraX.change_face("_angry",1,eyes="_side")
+    $ LauraX.change_face("_angry", 1,eyes = "_side")
     show Gwen_Sprite:
         ypos 50
     ch_g "So now that we've got that taken care of, what's your name?{w=0.2}{nw}"
@@ -2228,9 +2228,9 @@ label Gwentro:
         xzoom 1
         easein .5 xpos 900
     ch_g "Ah, yes, room to breathe!"
-    $ LauraX.change_face("_angry",eyes="_leftside")
+    $ LauraX.change_face("_angry", eyes = "_leftside")
     ch_g "Sorry, I should have said hello earlier, hey Laura!"
-    $ LauraX.change_face("_confused",eyes="_leftside")
+    $ LauraX.change_face("_confused", eyes = "_leftside")
     ch_l "How do you know my name!"
     ch_g "I've read all about you! Or do you prefer \"X-23?\""
     ch_g "Or \"Wolverine?\""
@@ -2247,7 +2247,7 @@ label Gwentro:
         "Some other irrelvant option.":
             ch_p "What are you doing here?"
             ch_g "Man, determinism, am I right?"
-    $ LauraX.change_face("_confused",eyes="_leftside")
+    $ LauraX.change_face("_confused", eyes = "_leftside")
     ch_g "Why are any of us here, really?"
     ch_g "Oh! You mean \"why am I {i}here{/i}\" in this game?"
     call GwenFace ("_sad")
@@ -2271,9 +2271,9 @@ label Gwentro:
     ch_g "Apparently I can't get my clothes off here."
     call GwenFace ("_sad", 1)
     ch_g "That's unfortunate."
-    call GwenFace ("_angry", 1, mouth="_smile")
+    call GwenFace ("_angry", 1, mouth = "_smile")
     ch_g "I could just stay and watch for a bit. . ."
-    $ LauraX.change_face("_angry",eyes="_leftside")
+    $ LauraX.change_face("_angry", eyes = "_leftside")
     call GwenFace ("_surprised", 1)
     ch_l "NO!"
     ch_g "Right, right. Don't poke the wolverine. . ."
@@ -2291,7 +2291,7 @@ label Gwentro:
     ch_g "If ever. . ."
     show Gwen_Sprite:
         ease .5 xpos 1000
-    call GwenFace ("_sad", 1, eyes="_surprised")
+    call GwenFace ("_sad", 1, eyes = "_surprised")
     ch_g "Maybe never, we won't know."
     show Gwen_Sprite:
         ease .2 xpos 1500
@@ -2299,7 +2299,7 @@ label Gwentro:
     ch_l "Get out!"
     ch_g "Right! I'm gone, sorry!"
     hide Gwen_Sprite
-    $ LauraX.change_face("_bemused",eyes="_sexy")
+    $ LauraX.change_face("_bemused", eyes = "_sexy")
     ch_l "Now, what were were doing. . ."
 
     return
@@ -2380,10 +2380,10 @@ label Laura_Dressup:
             ch_k "Oh, I see, [LauraX.name]."
             ch_k "She's back?"
         "I was checking out that fine piece over there.":
-            if approval_check(KittyX,1200,"LO") or KittyX.event_counter["been_with_girl"] >= 10:
+            if approval_check(KittyX, 1200,"LO") or KittyX.event_counter["been_with_girl"] >= 10:
                 $ KittyX.change_stat("obedience", 80, 5)
                 $ KittyX.change_stat("inhibition", 80, 5)
-                $ KittyX.change_face("_bemused",1)
+                $ KittyX.change_face("_bemused", 1)
                 ch_k "I guess I can't blame you. . ."
             else:
                 $ KittyX.change_stat("love", 70, -5)
@@ -2392,7 +2392,7 @@ label Laura_Dressup:
                 $ KittyX.change_face("_angry")
                 ch_k "Rude much?"
 
-    $ KittyX.change_face("_smile",eyes="_side")
+    $ KittyX.change_face("_smile", eyes = "_side")
     ch_k "She's never around very much, you know."
     ch_k "Must get it from Logan."
 
@@ -2429,7 +2429,7 @@ label Laura_Dressup:
         "You're really stylish, so you'll probably pick out something great.":
             $ KittyX.change_stat("love", 80, 5)
             $ KittyX.change_stat("inhibition", 40, 3)
-            $ KittyX.change_face("_smile",1)
+            $ KittyX.change_face("_smile", 1)
             ch_k "Sweet talker."
         "That sounds good.":
             $ KittyX.change_stat("love", 60, 2)
@@ -2451,13 +2451,13 @@ label Laura_Dressup:
         "I don't have enough. . ." if Player.cash < 10:
             $ KittyX.change_stat("love", 70, 1)
             $ KittyX.change_stat("obedience", 40, 2)
-            $ KittyX.change_face("_normal",1,brows="_surprised",mouth="_sad")
+            $ KittyX.change_face("_normal", 1,brows = "_surprised", mouth = "_sad")
             ch_k "Oh."
             ch_k "We aren't in a rush or anything. If you still want to, just hit me up."
         "You know what, never mind.":
             $ KittyX.change_stat("love", 70, -2)
             $ KittyX.change_stat("obedience", 40, -1)
-            $ KittyX.change_face("_normal",1,brows="_surprised",mouth="_sad")
+            $ KittyX.change_face("_normal", 1,brows = "_surprised", mouth = "_sad")
             ch_k "Oh, ok."
     return
 
@@ -2520,30 +2520,30 @@ label Laura_Dressup3:
             $ LauraX.location = "bg_kitty"
             call set_the_scene(check_if_dressed = False)
 
-            $ LauraX.change_face("_sad",2,eyes="_squint",brows="_confused")
+            $ LauraX.change_face("_sad",2,eyes = "_squint", brows = "_confused")
             "[LauraX.name] stares at you, her eyes narrowed. She's clearly on edge."
-            $ LauraX.change_face("_sad",2,brows="_confused",eyes="_leftside")
+            $ LauraX.change_face("_sad",2,brows = "_confused", eyes = "_leftside")
             ch_l "Didn't you lock the door?"
             if KittyX.event_counter["sleepover"] < 5:
-                $ KittyX.change_face("_smile",eyes="_side")
+                $ KittyX.change_face("_smile", eyes = "_side")
                 ch_k "Yeah, but I gave him a key."
-                $ LauraX.change_face("_sad",1,brows="_confused",eyes="_leftside")
+                $ LauraX.change_face("_sad", 1,brows = "_confused", eyes = "_leftside")
                 ch_l "You. . . gave him a key?"
             else:
 
-                $ KittyX.change_face("_confused",eyes="_side")
+                $ KittyX.change_face("_confused", eyes = "_side")
                 ch_k "Yeah, I'm not really sure how he got a key. . ."
-                if not approval_check(KittyX,1200):
+                if not approval_check(KittyX, 1200):
 
-                    $ KittyX.change_face("_angry",1)
+                    $ KittyX.change_face("_angry", 1)
                     ch_k "Ok, that's enough, out, out!"
                     "You head back out."
                     return
                 $ KittyX.change_face("_smile")
                 ch_k "I guess it's fine though. . ."
-                $ LauraX.change_face("_sad",1,brows="_confused",eyes="_leftside")
+                $ LauraX.change_face("_sad", 1,brows = "_confused", eyes = "_leftside")
                 ch_l "It's fine that he got a mystery key?"
-            $ KittyX.change_face("_smile",1)
+            $ KittyX.change_face("_smile", 1)
             ch_k "Uh-huh. I mean, he's my [KittyX.player_petname]."
             ch_l "Your. . . [KittyX.player_petname]."
         "Knock":
@@ -2567,11 +2567,11 @@ label Laura_Dressup3:
             $ LauraX.location = "bg_kitty"
             call set_the_scene(check_if_dressed = False)
 
-            $ LauraX.change_face("_sad",2,brows="_surprised")
+            $ LauraX.change_face("_sad",2,brows = "_surprised")
             "[LauraX.name] stares at you, as if she's not sure what she's seeing."
-            $ LauraX.change_face("_sad",2,brows="_confused",eyes="_leftside")
+            $ LauraX.change_face("_sad",2,brows = "_confused", eyes = "_leftside")
             ch_l "So you just let him come into your room whenever?"
-            $ KittyX.change_face("_smile",1)
+            $ KittyX.change_face("_smile", 1)
             ch_k "Uh-huh. I mean, he's my [KittyX.player_petname]."
             ch_l "Your. . . [KittyX.player_petname]."
         "Walk away":
@@ -2579,13 +2579,13 @@ label Laura_Dressup3:
             "Nah, I should let them have their girl time."
             return
     $ LauraX.seen_underwear = 1
-    $ LauraX.change_face("_angry",1,eyes="_closed")
+    $ LauraX.change_face("_angry", 1,eyes = "_closed")
     "She shakes her head, trying to absorb all this new information."
     "She mutters to herself."
     ch_l "I've been gone longer than I thought. . ."
-    $ LauraX.change_face("_sad",1,brows="_confused",eyes="_leftside")
+    $ LauraX.change_face("_sad", 1,brows = "_confused", eyes = "_leftside")
     ch_l "So why's he here?"
-    $ KittyX.change_face("_smile",eyes="_side")
+    $ KittyX.change_face("_smile", eyes = "_side")
     ch_k "Well, he kind of pitched in to get you this stuff, so why not see what he thinks?"
     "[KittyX.name] walks over and poses like she's presenting [LauraX.name] as a model."
     $ KittyX.arm_pose = 2
@@ -2596,19 +2596,19 @@ label Laura_Dressup3:
         extend ""
         "Her outfit looks familiar. . .":
             ch_k "I call it the Logan Look."
-            $ LauraX.change_face("_sad",2,eyes="_stunned")
+            $ LauraX.change_face("_sad",2,eyes = "_stunned")
             $ LauraX.change_stat("inhibition", 40, -2)
             ch_l "Please don't call it that."
         "Looking good, [LauraX.name]!":
             $ LauraX.change_stat("love", 70, 5)
             $ LauraX.change_stat("obedience", 40, 3)
             $ LauraX.change_stat("inhibition", 40, 5)
-            $ LauraX.check_if_likes(KittyX,700,5,1)
-            $ LauraX.change_face("_sadside",1)
+            $ LauraX.check_if_likes(KittyX,700,5, 1)
+            $ LauraX.change_face("_sadside", 1)
             ch_l "Yeah, well. . . [KittyX.name] knows her stuff."
             $ KittyX.change_stat("love", 70, 1)
             $ KittyX.change_stat("obedience", 40, 3)
-            $ KittyX.check_if_likes(LauraX,700,3,1)
+            $ KittyX.check_if_likes(LauraX,700,3, 1)
             ch_k "Heh, thanks."
         "Great ensemble, [KittyX.name]! It looks great on her!":
             $ KittyX.change_stat("love", 70, 5)
@@ -2617,8 +2617,8 @@ label Laura_Dressup3:
             $ LauraX.change_stat("love", 70, 3)
             $ LauraX.change_stat("obedience", 40, 2)
             $ LauraX.change_stat("inhibition", 40, 5)
-            $ LauraX.change_face("_bemused",1)
-            $ LauraX.check_if_likes(KittyX,700,3,1)
+            $ LauraX.change_face("_bemused", 1)
+            $ LauraX.check_if_likes(KittyX,700,3, 1)
             ch_l "Yeah, I guess she does. . ."
         "Can I get a refund?":
             $ KittyX.change_stat("love", 70, -5)
@@ -2631,26 +2631,26 @@ label Laura_Dressup3:
             $ LauraX.change_face("_angry")
             ch_l "Seriously."
 
-    $ LauraX.change_face("_smile",0,eyes="_leftside")
-    $ LauraX.check_if_likes(KittyX,700,5,1)
-    $ KittyX.check_if_likes(LauraX,700,5,1)
+    $ LauraX.change_face("_smile", 0,eyes = "_leftside")
+    $ LauraX.check_if_likes(KittyX,700,5, 1)
+    $ KittyX.check_if_likes(LauraX,700,5, 1)
     ch_l "But really, [KittyX.name], thanks for this."
-    $ KittyX.change_face("_smile",eyes="_side")
+    $ KittyX.change_face("_smile", eyes = "_side")
     ch_k "No problem! Like, what're friends for?"
     ch_l "Pretty sure friends don't normally use their friends as dressup dolls."
     ch_k "Oh, [LauraX.name], you have sooooo much to learn."
-    $ LauraX.change_face("_smile",eyes="_down")
+    $ LauraX.change_face("_smile", eyes = "_down")
     "[LauraX.name] smiles just a little bit and looks down at herself."
     ch_l "I think wearing the whole outfit is a bit much."
-    $ LauraX.change_face("_smile",eyes="_leftside")
+    $ LauraX.change_face("_smile", eyes = "_leftside")
     ch_l "You know that Logan's going to have a few words if he sees me like this."
-    $ KittyX.change_face("_smile",eyes="_side")
+    $ KittyX.change_face("_smile", eyes = "_side")
     ch_k "Hey, it's your outfit now. Mix-and-match, girl!"
     ch_l "Yeah. Yeah, I think I'll do that."
     $ LauraX.names.append("Wolverine")
 
     $ KittyX.change_face("_smile")
-    $ LauraX.change_face("_sly",1)
+    $ LauraX.change_face("_sly", 1)
     "[LauraX.name] fixes you with a steely gaze."
 
     ch_l "So. . . I'd like to change now."
@@ -2660,9 +2660,9 @@ label Laura_Dressup3:
         "Go right ahead!":
             $ LauraX.change_stat("obedience", 40, 3)
             $ LauraX.change_stat("inhibition", 40, 3)
-            if (not LauraX.seen_breasts or not LauraX.seen_pussy) and not approval_check(LauraX,1400):
+            if (not LauraX.seen_breasts or not LauraX.seen_pussy) and not approval_check(LauraX, 1400):
                 $ LauraX.change_stat("love", 70, -5)
-                $ LauraX.change_face("_angry",1)
+                $ LauraX.change_face("_angry", 1)
                 ch_l "I don't think so."
                 ch_k "Yeah, I think you'd better get going, [KittyX.player_petname]. . ."
                 ch_k ". . .Before she does to you what Logan does to people who make him mad."
@@ -2670,15 +2670,15 @@ label Laura_Dressup3:
             else:
                 if LauraX.seen_breasts and LauraX.seen_pussy:
                     ch_l "Fair enough. . ."
-                elif approval_check(LauraX,1400):
+                elif approval_check(LauraX, 1400):
                     ch_l "Bold choice. . ."
-                $ KittyX.change_face("_surprised",2,eyes="_side")
+                $ KittyX.change_face("_surprised",2,eyes = "_side")
                 $ LauraX.outfit["bra"] = ""
                 "[LauraX.name] starts stripping out of the new clothes. . ."
-                if approval_check(KittyX,1200):
-                    $ KittyX.change_face("_sly",1)
+                if approval_check(KittyX, 1200):
+                    $ KittyX.change_face("_sly", 1)
                 else:
-                    $ KittyX.change_face("_angry",1,eyes="_side")
+                    $ KittyX.change_face("_angry", 1,eyes = "_side")
 
                 $ LauraX.outfit["underwear"] = ""
                 call Laura_First_Topless
@@ -2687,10 +2687,10 @@ label Laura_Dressup3:
                 $ LauraX.change_outfit(LauraX.today_outfit_name,)
                 "And then puts on her usual outfit."
 
-                if approval_check(KittyX,1200):
-                    $ KittyX.change_face("_sly",1)
+                if approval_check(KittyX, 1200):
+                    $ KittyX.change_face("_sly", 1)
                 else:
-                    $ KittyX.change_face("_angry",1)
+                    $ KittyX.change_face("_angry", 1)
                 ch_k "Well, I guess you got your show for the day."
                 ch_k "Now give us some girl time."
                 "[KittyX.name] shoos you out of the room and you head to the campus square."
@@ -2714,8 +2714,8 @@ label Laura_Foul:
     $ LauraX.history.remove("partyfoul")
     if "partysolved" in LauraX.history:
         $ LauraX.history.remove("partysolved")
-    $ LauraX.add_word(1,0,0,0,"partyfix")
-    $ LauraX.change_face("_sad",1)
+    $ LauraX.add_word(1, 0, 0, 0,"partyfix")
+    $ LauraX.change_face("_sad", 1)
     if LauraX.location == bg_current or LauraX in Party:
         "[LauraX.name] glances over at you with a distressed look."
     else:
@@ -2742,43 +2742,43 @@ label Laura_Foul:
             $ LauraX.change_stat("love", 80, 5)
             $ LauraX.change_stat("love", 200, 5)
             $ LauraX.change_face("_surprised",2)
-            $ LauraX.add_word(1,"sorry",0,0,0)
-            $ LauraX.change_face("_smile",1)
+            $ LauraX.add_word(1,"sorry", 0, 0, 0)
+            $ LauraX.change_face("_smile", 1)
         "Yeah?":
             $ LauraX.change_stat("obedience", 50, 1)
             $ LauraX.change_stat("inhibition", 60, 1)
-            $ LauraX.change_face("_sad",1)
+            $ LauraX.change_face("_sad", 1)
         ". . .":
             $ LauraX.change_stat("love", 80, -1)
             $ LauraX.change_stat("obedience", 50, 2)
-            $ LauraX.change_face("_sad",1)
+            $ LauraX.change_face("_sad", 1)
 
     if "sorry" not in LauraX.recent_history:
 
-        $ LauraX.change_face("_sadside",1)
+        $ LauraX.change_face("_sadside", 1)
         ch_l "We were at the Halloween Party. . ."
-        $ LauraX.change_face("_sad",1)
+        $ LauraX.change_face("_sad", 1)
         ch_l "And you said something about my costume. . ."
         menu:
             extend ""
             "I don't remember, what did I say?":
                 $ LauraX.change_stat("love", 99, -3)
-                $ LauraX.change_face("_surprised",1)
+                $ LauraX.change_face("_surprised", 1)
             "Oh, yeah. I'm sorry about that.":
-                $ LauraX.change_face("_smile",1)
+                $ LauraX.change_face("_smile", 1)
                 $ LauraX.change_stat("love", 80, 5)
                 $ LauraX.change_stat("love", 200, 5)
-                $ LauraX.add_word(1,"sorry",0,0,0)
+                $ LauraX.add_word(1,"sorry", 0, 0, 0)
             "Did I?":
-                $ LauraX.change_face("_surprised",1)
+                $ LauraX.change_face("_surprised", 1)
                 ch_l ". . ."
                 $ LauraX.change_stat("love", 99, -5)
                 $ LauraX.change_stat("obedience", 70, 3)
                 $ LauraX.change_stat("obedience", 90, 2)
-                $ LauraX.change_face("_angry",1)
+                $ LauraX.change_face("_angry", 1)
             ". . .":
                 $ LauraX.change_stat("love", 99, -1)
-                $ LauraX.change_face("_angry",1)
+                $ LauraX.change_face("_angry", 1)
 
     if "sorry" not in LauraX.recent_history:
 
@@ -2787,19 +2787,19 @@ label Laura_Foul:
         menu:
             extend ""
             "Oooh. Ouch. Yeah.":
-                $ LauraX.change_face("_sly",1)
+                $ LauraX.change_face("_sly", 1)
                 $ LauraX.change_stat("love", 80, 2)
                 $ LauraX.change_stat("love", 200, 2)
                 $ LauraX.change_stat("inhibition", 60, 2)
             "Oh, yeah. I'm sorry about that.":
-                $ LauraX.change_face("_smile",1)
+                $ LauraX.change_face("_smile", 1)
                 $ LauraX.change_stat("love", 80, 2)
                 $ LauraX.change_stat("love", 200, 5)
-                $ LauraX.add_word(1,"sorry",0,0,0)
+                $ LauraX.add_word(1,"sorry", 0, 0, 0)
             "Is that a problem?":
-                $ LauraX.change_face("_surprised",1)
+                $ LauraX.change_face("_surprised", 1)
                 pause 0.5
-                $ LauraX.change_face("_angry",1)
+                $ LauraX.change_face("_angry", 1)
                 $ LauraX.change_stat("love", 80, -5)
                 $ LauraX.change_stat("love", 200, -5)
                 $ LauraX.change_stat("obedience", 70, 5)
@@ -2807,110 +2807,110 @@ label Laura_Foul:
             "Huh.":
                 $ LauraX.change_stat("love", 99, -3)
                 $ LauraX.change_stat("obedience", 70, 5)
-                $ LauraX.change_face("_surprised",1)
+                $ LauraX.change_face("_surprised", 1)
             ". . .":
                 $ LauraX.change_stat("love", 80, -2)
                 $ LauraX.change_stat("love", 200, -2)
-                $ LauraX.change_face("_angry",1)
+                $ LauraX.change_face("_angry", 1)
 
     if "lover" in LauraX.player_petnames:
         ch_l "You understand why this would.. bother me. . ."
         menu:
             extend ""
             "Oh. . . yeah.":
-                $ LauraX.change_face("_normal",1,eyes="_side")
+                $ LauraX.change_face("_normal", 1,eyes = "_side")
                 $ LauraX.change_stat("love", 90, 1)
                 $ LauraX.change_stat("inhibition", 60, 2)
-                $ LauraX.add_word(1,"nyx",0,0,0)
+                $ LauraX.add_word(1,"nyx", 0, 0, 0)
             "I'm sorry, I must have missed it.":
                 $ LauraX.change_face("_confused",2)
                 $ LauraX.change_stat("love", 200, -3)
                 ch_l "Seriously?"
-                $ LauraX.change_face("_angry",1)
+                $ LauraX.change_face("_angry", 1)
             "What? Why?":
                 $ LauraX.change_face("_confused",2)
                 $ LauraX.change_stat("love", 200, -5)
                 ch_l "Seriously?"
-                $ LauraX.change_face("_angry",1)
+                $ LauraX.change_face("_angry", 1)
 
     if "nyx" not in LauraX.recent_history:
         ch_l "Maybe you don't understand why this cuts deep. . ."
         ch_l ". . ."
-        $ LauraX.change_face("_sadside",1)
+        $ LauraX.change_face("_sadside", 1)
         ch_l "When I was younger, on my own. . ."
         $ LauraX.change_stat("inhibition", 60, 1)
         ch_l "I had to do some things. . ."
         $ LauraX.blushing = "_blush2"
         $ LauraX.change_stat("inhibition", 60, 1)
         ch_l "On the streets."
-        $ LauraX.change_face("_sad",1)
+        $ LauraX.change_face("_sad", 1)
         ch_l "So I don't want to be called. . . that."
 
     menu:
         extend ""
         "Oh, I'm so sorry.":
             $ LauraX.change_stat("love", 200, 5)
-            $ LauraX.change_face("_smile",1,eyes="_side")
+            $ LauraX.change_face("_smile", 1,eyes = "_side")
             ch_l "Thanks. . ."
-            $ LauraX.change_face("_smile",1)
-            $ LauraX.add_word(1,"sorry",0,0,0)
+            $ LauraX.change_face("_smile", 1)
+            $ LauraX.add_word(1,"sorry", 0, 0, 0)
         "Yeah, I get it.":
             $ LauraX.change_stat("love", 80, 2)
             $ LauraX.change_stat("love", 200, 3)
             $ LauraX.change_stat("obedience", 80, 1)
             $ LauraX.change_stat("inhibition", 60, 1)
-            $ LauraX.change_face("_smile",1)
+            $ LauraX.change_face("_smile", 1)
             ch_l "Thanks."
-            $ LauraX.add_word(1,"sorry",0,0,0)
+            $ LauraX.add_word(1,"sorry", 0, 0, 0)
         "Oh, ok.":
             if approval_check(LauraX, 1200) or approval_check(LauraX, 400, "O"):
                 $ LauraX.change_stat("obedience", 60, 3)
                 $ LauraX.change_stat("obedience", 90, 2)
                 $ LauraX.change_stat("inhibition", 60, 3)
-                $ LauraX.change_face("_sly",1)
+                $ LauraX.change_face("_sly", 1)
             else:
                 $ LauraX.change_stat("love", 200, -5)
                 $ LauraX.change_stat("obedience", 90, 5)
-                $ LauraX.change_face("_angry",1)
+                $ LauraX.change_face("_angry", 1)
             ch_l ". . ."
         "Ha! Get over it.":
-            $ LauraX.change_face("_angry",1)
+            $ LauraX.change_face("_angry", 1)
             $ LauraX.change_stat("love", 80, -5)
             $ LauraX.change_stat("love", 200, -5)
             $ LauraX.change_stat("obedience", 80, 5)
             $ LauraX.change_stat("inhibition", 60, 5)
             ch_l "Asshole."
-            $ LauraX.drain_word("sorry",1,0,0)
+            $ LauraX.drain_word("sorry", 1, 0, 0)
     menu:
         extend ""
         "Won't happen again.":
             if "sorry" not in LauraX.recent_history:
-                $ LauraX.change_face("_confused",1)
+                $ LauraX.change_face("_confused", 1)
                 ch_l "So you're sorry then?"
                 menu:
                     "Yeah, of course!":
-                        $ LauraX.change_face("_smile",1)
+                        $ LauraX.change_face("_smile", 1)
                         $ LauraX.change_stat("love", 200, 3)
                         ch_l "Good."
-                        $ LauraX.add_word(1,"sorry",0,0,0)
+                        $ LauraX.add_word(1,"sorry", 0, 0, 0)
                     "Eh, I guess?":
                         ch_l ". . ."
                         if approval_check(LauraX, 1200) or approval_check(LauraX, 400, "O"):
-                            $ LauraX.change_face("_normal",1)
+                            $ LauraX.change_face("_normal", 1)
                             $ LauraX.change_stat("love", 80, 2)
                             $ LauraX.change_stat("love", 200, 2)
                             $ LauraX.change_stat("obedience", 90, 2)
                             $ LauraX.change_stat("inhibition", 60, 1)
                             ch_l "Good enough."
-                            $ LauraX.add_word(1,"sorry",0,0,0)
+                            $ LauraX.add_word(1,"sorry", 0, 0, 0)
                         else:
                             $ LauraX.change_stat("love", 90, -5)
                             $ LauraX.change_stat("obedience", 90, 3)
                             $ LauraX.change_stat("inhibition", 60, 1)
-                            $ LauraX.change_face("_angry",1)
+                            $ LauraX.change_face("_angry", 1)
                             ch_l "Not good enough."
                     "For what?":
-                        $ LauraX.change_face("_angry",1)
+                        $ LauraX.change_face("_angry", 1)
                         $ LauraX.change_stat("love", 80, -5)
                         $ LauraX.change_stat("love", 99, -5)
                         $ LauraX.change_stat("obedience", 90, 5)
@@ -2918,24 +2918,24 @@ label Laura_Foul:
                         $ LauraX.change_stat("inhibition", 70, 5)
                         ch_l "Grrrrrr."
             else:
-                $ LauraX.change_face("_angry",1,mouth="_smile")
+                $ LauraX.change_face("_angry", 1,mouth = "_smile")
                 $ LauraX.change_stat("obedience", 80, 2)
                 $ LauraX.change_stat("inhibition", 60, 3)
                 ch_l "It'd better not."
         "That all?":
 
-            $ LauraX.change_face("_angry",1)
+            $ LauraX.change_face("_angry", 1)
             $ LauraX.change_stat("love", 80, -5)
             $ LauraX.change_stat("love", 99, -5)
             $ LauraX.change_stat("inhibition", 60, 10)
             ch_l "Seriously?!"
 
     if "sorry" in LauraX.recent_history:
-        $ LauraX.change_face("_smile",1)
+        $ LauraX.change_face("_smile", 1)
         ch_l "I'm glad that you care, at least."
     else:
-        $ LauraX.change_face("_angry",1)
-        $ LauraX.add_word(1,"_angry","_angry",0,0)
+        $ LauraX.change_face("_angry", 1)
+        $ LauraX.add_word(1,"_angry","_angry", 0, 0)
         ch_l "Well if that's how you feel about it, you can fuck right off!"
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

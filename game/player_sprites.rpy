@@ -1,20 +1,20 @@
 image Zero_hand:
-    "images/UI_Hand.png"
+    "images/Player/Zero_hand.png"
 
     anchor (0.5, 0.5)
 
 image Zero_hand_under:
-    "images/UI_HandUnder.png"
+    "images/Player/Zero_hand_under.png"
 
     anchor (0.5, 0.5)
 
 image Zero_finger:
-    "images/UI_Finger.png"
+    "images/Player/Zero_finger.png"
 
     anchor (0.5, 0.5)
 
 image Zero_tongue:
-    "images/UI_Tongue.png"
+    "images/Player/Zero_tongue.png"
 
     anchor (0.5, 0.5)
 
@@ -36,7 +36,7 @@ layeredimage Zero_blowjob_cock:
     anchor (0.5, 0.5)
 
 image Zero_sex_finger:
-    "images/UI_Fingering.png"
+    "images/Player/Zero_sex_finger.png"
 
     anchor (0.5, 0.5)
 

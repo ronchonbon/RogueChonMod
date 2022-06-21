@@ -16,21 +16,21 @@ image Rogue_blinking:
 
 layeredimage Rogue_grool_dripping_animation:
     always:
-        "grool_dripping_animation" pos (0.129, 0.6) zoom 0.2
+        "grool_dripping_animation" pos (0.26, 1.2)
 
     if RogueX.grool > 1 and not RogueX.pussy_covered:
-        "grool_dripping_animation" pos (0.129, 0.6) zoom 0.2
+        "grool_dripping_animation" pos (0.26, 1.2)
 
     if RogueX.grool > 1 and not RogueX.pussy_covered:
-        "grool_dripping_animation" pos (0.129, 0.6) zoom 0.2
+        "grool_dripping_animation" pos (0.26, 1.2)
 
     if RogueX.grool > 1 and not RogueX.pussy_covered:
-        "grool_dripping_animation" pos (0.129, 0.6) zoom 0.2
+        "grool_dripping_animation" pos (0.26, 1.2)
 
 layeredimage Rogue_grool_animations:
     if not RogueX.grool:
         Null()
-    elif RogueX.outfit["bottom"] == "_pants" and RogueX.bottom_pulled_down:
+    elif RogueX.bottom_pulled_down:
         AlphaMask("Rogue_grool_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_pants.png")
     elif RogueX.underwear_pulled_down:
         AlphaMask("Rogue_grool_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_underwear.png")
@@ -39,38 +39,38 @@ layeredimage Rogue_grool_animations:
 
 layeredimage Rogue_spunk_dripping_animation:
     always:
-        "spunk_dripping_animation" pos (0.129, 0.6) zoom 0.3
+        "spunk_dripping_animation" pos (0.26, 1.2)
 
     if not RogueX.pussy_covered:
-        "spunk_dripping_animation" pos (0.129, 0.6) zoom 0.3
+        "spunk_dripping_animation" pos (0.26, 1.2)
 
     if not RogueX.pussy_covered:
-        "spunk_dripping_animation" pos (0.129, 0.6) zoom 0.3
+        "spunk_dripping_animation" pos (0.26, 1.2)
 
     if not RogueX.pussy_covered:
-        "spunk_dripping_animation" pos (0.129, 0.6) zoom 0.3
+        "spunk_dripping_animation" pos (0.26, 1.2)
 
 layeredimage Rogue_spunk_animations:
     if not RogueX.spunk["pussy"] and not RogueX.spunk["anus"]:
         Null()
-    elif RogueX.outfit["bottom"] == "_pants" and RogueX.bottom_pulled_down:
+    elif RogueX.bottom_pulled_down:
         AlphaMask("Rogue_spunk_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_pants.png")
     elif RogueX.underwear_pulled_down:
         AlphaMask("Rogue_spunk_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_underwear.png")
     elif not RogueX.pussy_covered:
         AlphaMask("Rogue_spunk_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask.png")
 
-# layeredimage Rogue_standing_fondling_animations:
-#     if Player.primary_action == "lesbian" or not girl_secondary_action or focused_Girl != RogueX:
-#         Null()
-#     elif Player.primary_action != "sex" and girl_secondary_action in "finger_pussy" and RogueX.lust >= 70:
-#         "Girl_finger_pussy_animation" pos (0.122, 0.583)
-#     elif girl_secondary_action == "fondle_pussy":
-#         "Girl_fondle_pussy_animation" pos (0.122, 0.569)
-#     elif girl_secondary_action == "fondle_breasts" and (Player.secondary_action in ["fondle_breasts", "suck breasts"]):
-#         "Girl_fondle_breast_left_animation" pos (0.156, 0.37)
-#     elif girl_secondary_action == "fondle_breasts":
-#         "Girl_fondle_breast_right_animation" pos (0.083, 0.352)
+layeredimage Rogue_standing_fondling_animations:
+    # if Player.primary_action == "lesbian" or not girl_secondary_action or focused_Girl != RogueX:
+    #     Null()
+    # elif Player.primary_action != "sex" and girl_secondary_action in "finger_pussy" and RogueX.lust >= 70:
+    #     "Girl_finger_pussy_animation" pos (0.122, 0.583)
+    # elif girl_secondary_action == "fondle_pussy":
+    #     "Girl_fondle_pussy_animation" pos (0.122, 0.569)
+    # elif girl_secondary_action == "fondle_breasts" and (Player.secondary_action in ["fondle_breasts", "suck breasts"]):
+    #     "Girl_fondle_breast_left_animation" pos (0.156, 0.37)
+    # elif girl_secondary_action == "fondle_breasts":
+    #     "Girl_fondle_breast_right_animation" pos (0.083, 0.352)
 #
 #     if second_girl_main_action != "masturbation" or not second_girl_secondary_action or focused_Girl == RogueX:
 #         Null()
@@ -83,37 +83,35 @@ layeredimage Rogue_spunk_animations:
 #     elif second_girl_secondary_action == "fondle_breasts":
 #         "Girl_fondle_breast_right_animation" pos (0.083, 0.352)
 #
-#     if not Player.primary_action or focused_Girl != RogueX:
-#         Null()
-#     elif Player.primary_action == "fondle_thighs":
-#         "Zero_fondle_thigh_animation" pos (0.11, 0.68)
-#     elif Player.primary_action == "fondle_breasts":
-#         "Zero_fondle_breasts_right_animation" pos (0.094, 0.38)
-#     elif Player.primary_action == "suck_breasts":
-#         "Zero_suck_breasts_right_animation" pos (0.083, 0.37)
-#     elif Player.primary_action == "fondle_pussy":
-#         "Zero_fondle_pussy_animation" pos (0.115, 0.59)
-#     elif Player.primary_action == "finger_pussy":
-#         "Zero_finger_pussy_animation" pos (0.12, 0.66)
-#     elif Player.primary_action == "eat_pussy":
-#         "Zero_eat_pussy_animation" pos (0.13, 0.62)
-#
-#     if not Player.secondary_action or focused_Girl != RogueX:
-#         Null()
-#     elif Player.secondary_action == "fondle_thighs":
-#         "Zero_fondle_thigh_animation" pos (0.11, 0.68)
-#     elif Player.primary_action == "fondle_breasts" and not girl_secondary_action and not second_girl_main_action and not second_girl_secondary_action:
-#         "Zero_fondle_breasts_right_animation" pos (0.094, 0.38)
-#     elif Player.secondary_action == "fondle_breasts":
-#         "Zero_fondle_breasts_left_animation" pos (0.156, 0.39)
-#     elif Player.secondary_action == "suck_breasts":
-#         "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
-#     elif Player.secondary_action == "fondle_pussy":
-#         "Zero_fondle_pussy_animation" pos (0.115, 0.59)
-#     elif Player.secondary_action == "finger_pussy":
-#         "Zero_finger_pussy_animation" pos (0.12, 0.66)
-#     elif Player.secondary_action == "eat_pussy":
-#         "Zero_eat_pussy_animation" pos (0.13, 0.62)
+    if not Player.primary_action or focused_Girl != RogueX:
+        Null()
+    elif Player.primary_action == "fondle_thighs":
+        "Zero_fondle_thigh_animation" pos (0.18, 1.35)
+    elif Player.primary_action == "fondle_breasts":
+        "Zero_fondle_breasts_right_animation" pos (0.22, 0.765)
+    elif Player.primary_action == "suck_breasts":
+        "Zero_suck_breasts_right_animation" pos (0.155, 0.71)
+    elif Player.primary_action == "fondle_pussy":
+        "Zero_fondle_pussy_animation" pos (0.25, 1.1)
+    elif Player.primary_action == "finger_pussy":
+        "Zero_finger_pussy_animation" pos (0.22, 1.3)
+    elif Player.primary_action == "eat_pussy":
+        "Zero_eat_pussy_animation" pos (0.255, 1.22)
+
+    if not Player.secondary_action or focused_Girl != RogueX:
+        Null()
+    elif Player.secondary_action == "fondle_thighs":
+        "Zero_fondle_thigh_animation" pos (0.18, 1.35)
+    elif Player.secondary_action == "fondle_breasts":
+        "Zero_fondle_breasts_left_animation" pos (0.282, 0.765)
+    elif Player.secondary_action == "suck_breasts":
+        "Zero_suck_breasts_left_animation" pos (0.31, 0.735)
+    elif Player.secondary_action == "fondle_pussy":
+        "Zero_fondle_pussy_animation" pos (0.25, 1.1)
+    elif Player.secondary_action == "finger_pussy":
+        "Zero_finger_pussy_animation" pos (0.22, 1.3)
+    elif Player.secondary_action == "eat_pussy":
+        "Zero_eat_pussy_animation" pos (0.255, 1.22)
 #
 #     if not second_girl_main_action or focused_Girl != RogueX:
 #         Null()
@@ -1006,7 +1004,7 @@ layeredimage Rogue_sprite sex:
     elif Player.cock_position == "out":
         "Rogue_sex_legs_hotdog_animation[action_speed]"
 
-    anchor (0.5, 0.0) offset (370, 770) zoom 1.1
+    anchor (0.5, 0.0) offset (370, 770)
 
 image Rogue_doggy_blinking:
     "images/Rogue_doggy/Rogue_doggy_eyes[RogueX.eyes].png"
@@ -1142,7 +1140,7 @@ image Rogue_doggy_pussy_hole_fingering:
     subpixel True
     xzoom 0.6
     block:
-        ease 1 xzoom 0.9
+        ease 1 xzoom 0.67
         pause 1
         ease 3 xzoom 0.6
         repeat
@@ -1176,7 +1174,7 @@ image Rogue_doggy_anus_fingering_animation:
     subpixel True
     zoom 0.6
     block:
-        ease 0.5 zoom 0.75
+        ease 0.5 zoom 0.67
         pause 0.5
         ease 1.5 zoom 0.6
         repeat
@@ -1266,7 +1264,7 @@ layeredimage Rogue_sprite doggy:
 
     if Player.sprite and Player.cock_position == "footjob":
         "Rogue_doggy_shin_animation[action_speed]"
-    elif not Player.sprite or show_feet:
+    elif not Player.sprite and show_feet:
         "Rogue_doggy_shins"
 
     if Player.sprite and Player.cock_position == "footjob":
@@ -1274,7 +1272,7 @@ layeredimage Rogue_sprite doggy:
 
     if Player.cock_position == "footjob":
         "Rogue_doggy_feet_animation[action_speed]"
-    elif not Player.sprite or show_feet:
+    elif not Player.sprite and show_feet:
         "Rogue_doggy_feet"
 
     anchor (0.5, 0.0) offset (150, 700) zoom 1.2

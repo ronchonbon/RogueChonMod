@@ -500,7 +500,7 @@ init -2:
         xpadding 5
 
     style quick_button_text is default:
-        size 12
+        size 20
         idle_color "#8888"
         hover_color "#ccc"
         selected_idle_color "#cc08"
@@ -624,7 +624,7 @@ screen status_screen:
         background None
 
         add "images/Clockbase.png":
-            anchor (0.5,0.5)
+            anchor (0.5, 0.5)
             yzoom -1
             subpixel True
 
@@ -634,7 +634,7 @@ screen status_screen:
                 subpixel True
         else:
             add "images/Clockwhite.png" at rotate_white(round):
-                anchor (0.5,0.5)
+                anchor (0.5, 0.5)
                 subpixel True
 
         imagebutton idle "images/Clockface.png" hover "images/Clockface.png" action NullAction() hovered tt.Action("Time Left: [round]%") anchor (0.5, 0.5)

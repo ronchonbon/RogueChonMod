@@ -602,7 +602,7 @@ label jerking_off(Girl = None):
         if "jerking_off" in Girl.recent_history:
             return "continue"
 
-        $ Girl.add_word(0,"jerking_off","jerking_off",0,0)
+        $ Girl.add_word(0,"jerking_off","jerking_off", 0, 0)
 
         if Girl == EmmaX and "classcaught" not in Girl.history:
             $ Girl.change_face("_surprised", 1)
@@ -617,7 +617,7 @@ label jerking_off(Girl = None):
             $ Girl.change_stat("lust", 50, 7)
 
             if not approval_check(EmmaX, 1200, taboo_modifier = 3):
-                $ Girl.add_word(0,"_angry","_angry",0,0)
+                $ Girl.add_word(0,"_angry","_angry", 0, 0)
 
                 return "stop"
 
@@ -636,7 +636,7 @@ label jerking_off(Girl = None):
             $ Girl.change_stat("lust", 50, 5)
 
             if not approval_check(Girl, 1200, taboo_modifier = 3):
-                $ Girl.add_word(0,"_angry","_angry",0,0)
+                $ Girl.add_word(0,"_angry","_angry", 0, 0)
 
                 return "stop"
         elif Girl.SEXP <= 15:
@@ -664,7 +664,7 @@ label jerking_off(Girl = None):
             "[Girl.name] looks down at your cock and smiles."
 
             $ Girl.change_face("_sly", 1)
-            $ Girl.change_stat("lust", 70, 8,Alt=[[EmmaX],60,12])
+            $ Girl.change_stat("lust", 70, 8,Alt=[[EmmaX],60, 12])
         elif approval_check(Girl, 500, "I", taboo_modifier=2):
             $ Girl.change_face("_surprised", 1)
             $ Girl.eyes = "_down"
@@ -672,7 +672,7 @@ label jerking_off(Girl = None):
             "[Girl.name] glances at it, but just smiles in amusement."
 
             $ Girl.change_face("_sly", 1)
-            $ Girl.change_stat("lust", 70, 10,Alt=[[EmmaX],60,15])
+            $ Girl.change_stat("lust", 70, 10,Alt=[[EmmaX],60, 15])
         else:
             $ Girl.change_face("_angry", 1)
             $ Girl.eyes = "_down"
@@ -680,7 +680,7 @@ label jerking_off(Girl = None):
             "[Girl.name] glances down at your cock with a scowl."
 
             $ Girl.eyes = "_sexy"
-            $ Girl.add_word(0,"_angry","_angry",0,0)
+            $ Girl.add_word(0,"_angry","_angry", 0, 0)
 
             return "stop"
 
@@ -850,7 +850,7 @@ label jerking_off(Girl = None):
                         ch_e "Oh. . ."
                         ch_e "Carry on then, [Girl.player_petname]."
 
-                        $ Girl.change_face("_sly", 0,eyes="_down")
+                        $ Girl.change_face("_sly", 0,eyes = "_down")
                     elif Girl == LauraX:
                         ch_l "Can't say I didn't offer."
                     elif Girl == JeanX:

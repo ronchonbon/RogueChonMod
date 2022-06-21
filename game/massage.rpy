@@ -151,7 +151,7 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
                     elif Girl == KittyX:
                         ch_k "Heh, sorry, [Girl.player_petname]."
                     else:
-                        $ Girl.change_face("_sly", brows="_confused")
+                        $ Girl.change_face("_sly", brows = "_confused")
                         Girl.voice "No."
 
     if "no_massage" in Girl.daily_history:
@@ -296,7 +296,7 @@ label Massage_Prep(Girl=focused_Girl, Current=0, Past=0, MCount=0):
 label Massage_Cycle:
 
 
-    $ Girl.add_word(1,"massage","massage",0,0)
+    $ Girl.add_word(1,"massage","massage", 0, 0)
 
     if Girl.pose == "doggy" or Girl.pose == "sex":
         call show_sex(Girl, "massage")
@@ -842,7 +842,7 @@ label Massage_Cycle:
                     call Girl_Cumming (Girl)
                 else:
                     call Girl_Cumming (Girl, 1)
-                    $ Girl.change_face("_bemused",2,eyes="_side")
+                    $ Girl.change_face("_bemused",2,eyes = "_side")
                     if Girl == RogueX:
                         ch_r "Oh. . . wow. . . um. . ."
                         ch_r "That was nice. . ."
@@ -855,7 +855,7 @@ label Massage_Cycle:
                         ch_e "I'm not sure what you think just happened, but don't let it get to your head."
                     elif Girl == LauraX:
                         ch_l "Huh. . ."
-                        $ Girl.change_face("_sexy",1)
+                        $ Girl.change_face("_sexy", 1)
                         ch_l "Good job."
                     elif Girl == JeanX:
                         ch_j "Wow, you really know what you're doing there. . ."
@@ -870,7 +870,7 @@ label Massage_Cycle:
                         ch_v "Oh!"
                         ch_v "Um. . ."
                         ch_v "Yes, that was fantastic."
-                    $ Girl.change_face("_sexy",1)
+                    $ Girl.change_face("_sexy", 1)
 
                 jump Massage_After
 
@@ -897,7 +897,7 @@ label Massage_After:
     if "addictive" in Player.traits:
         $ Girl.addiction_rate += 1
 
-    $ Girl.change_face("_smile",1)
+    $ Girl.change_face("_smile", 1)
     if MCount == 10 and not Girl.forced:
 
         if Girl == RogueX:
@@ -964,7 +964,7 @@ label Massage_After:
 
 label Massage_BadEnd:
 
-    $ Girl.change_face("_angry",1)
+    $ Girl.change_face("_angry", 1)
     if "massagefail" in Girl.recent_history:
 
         $ Girl.action_counter["massage"] += 1

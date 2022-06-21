@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/rogue_sprites.rpy", line 695: reached end of line when expecting ':'.
-    elif RogueX.outfit["bodysuit"] == "_catsuit"
-                                                ^
+File "game/jean_animations.rpy", line 54: expected statement.
+    5
+     ^
 
-Ren'Py Version: Ren'Py 8.0.0.22061701n
-Mon Jun 20 04:48:27 2022
+Ren'Py Version: Ren'Py 7.4.11.2266
+Mon Jun 20 21:02:06 2022

@@ -27,7 +27,7 @@ label enter_main_sex_menu(Girl):
 
     $ Girl.arm_pose = 1
 
-    call set_the_scene(1,0,0,0,1)
+    call set_the_scene(1, 0, 0, 0, 1)
 
     if Girl in [EmmaX, StormX]:
         if "detention" in Girl.recent_history:
@@ -47,7 +47,7 @@ label enter_main_sex_menu(Girl):
             call sex_menu_caught_or_angry_lines(Girl)
 
         $ Girl.change_outfit()
-        $ Girl.drain_word("caught",1,0)
+        $ Girl.drain_word("caught", 1, 0)
 
         return
 

@@ -156,10 +156,10 @@ layeredimage Laura_sprite standing:
     if LauraX.outfit["held_item"] and LauraX.arm_pose == 2:
         "images/Laura_standing/Laura_standing_held[LauraX.outfit[held_item]].png"
 
-    # always:
-    #     "Laura_standing_fondling_animations"
+    always:
+        "Laura_standing_fondling_animations"
 
-    anchor (0.5, 0.0) offset (40, 170) zoom 0.5
+    anchor (0.5, 0.0) offset (45, 170) zoom 0.5
 
 layeredimage Laura_hair_back:
     if LauraX.wet:

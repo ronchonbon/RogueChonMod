@@ -211,7 +211,7 @@ label change_wardrobe(Girl):
             "You look good like that.":
                 if "wardrobe" not in Girl.recent_history:
                     if Girl == StormX and (Girl.top_number() + Girl.bra_number()<4) or (Girl.underwear_number() + Girl.bottom_number() < 5):
-                        $ Girl.change_face("_sly",eyes="_down")
+                        $ Girl.change_face("_sly", eyes = "_down")
 
                         ch_s "I understand why -you- would think so. . ."
 
@@ -626,7 +626,7 @@ label outfits_menu(Girl):
 
                     $ agreed = True
                 elif Girl == StormX and not approval_check(Girl, 500, taboo_modifier=0):
-                    $ Girl.change_face("_confused", 1,mouth="_smirk")
+                    $ Girl.change_face("_confused", 1,mouth = "_smirk")
 
                     ch_s "I don't exactly get nude on command, you know. . ."
 
@@ -673,25 +673,25 @@ label outfits_menu(Girl):
 
                         ch_e "I assure you that it is, but that's not the way to ask."
                     elif Girl == LauraX:
-                        $ Girl.change_face("_confused", 1,mouth="_smirk")
+                        $ Girl.change_face("_confused", 1,mouth = "_smirk")
 
                         ch_l "Yeah, but I'm not exactly showing it off."
 
                         $ Girl.change_face("_bemused", 0)
                     elif Girl == JeanX:
-                        $ Girl.change_face("_confused", 1,mouth="_smirk")
+                        $ Girl.change_face("_confused", 1,mouth = "_smirk")
 
                         ch_j "Yeah, but I'm not sharing."
 
                         $ Girl.change_face("_bemused", 0)
                     elif Girl == StormX:
-                        $ Girl.change_face("_confused", 1,mouth="_smirk")
+                        $ Girl.change_face("_confused", 1,mouth = "_smirk")
 
                         ch_s "Yeah, but I'm not exactly showing it off."
 
                         $ Girl.change_face("_bemused", 0)
                     elif Girl == JubesX:
-                        $ Girl.change_face("_confused", 1,mouth="_smirk")
+                        $ Girl.change_face("_confused", 1,mouth = "_smirk")
 
                         ch_v "Yeah, but you'll just have to keep guessing. . ."
 
@@ -752,7 +752,7 @@ label outfits_menu(Girl):
                                 $ Girl.outfit["shame"] = 50
                                 $ Girl.change_stat("lust", 50, 10)
                                 $ Girl.change_stat("lust", 70, 5)
-                                $ Girl.change_face("_sexy",1)
+                                $ Girl.change_face("_sexy", 1)
                             elif (Girl == JeanX and "nowhammy" not in Girl.traits) or approval_check(Girl, 800, "I") or approval_check(Girl, 2800, taboo_modifier=0):
                                 if Girl == RogueX:
                                     ch_r "Heh, all right [Girl.player_petname]."
@@ -772,7 +772,7 @@ label outfits_menu(Girl):
                                 $ Girl.outfit_name = "nude"
                                 $ Girl.outfit["shame"] = 50
                             elif Girl == EmmaX and approval_check(Girl, 400, "I") and approval_check(Girl, 1200, taboo_modifier=0):
-                                $ Girl.change_face("_bemused", 1,eyes="_side")
+                                $ Girl.change_face("_bemused", 1,eyes = "_side")
 
                                 ch_e "You shouldn't suggest such things. . ."
                             else:
@@ -2340,7 +2340,7 @@ label accessories_menu(Girl):
                     else:
                         $ Girl.outfit["hair"] = "_long"
 
-                    $ Girl.add_word(1,"hair","hair",0,0)
+                    $ Girl.add_word(1,"hair","hair", 0, 0)
 
                     ch_s "Like this?"
                 else:
@@ -2362,7 +2362,7 @@ label accessories_menu(Girl):
                     else:
                         $ Girl.outfit["hair"] = "_mohawk"
 
-                    $ Girl.add_word(1,"hair","hair",0,0)
+                    $ Girl.add_word(1,"hair","hair", 0, 0)
 
                     ch_s "Like this?"
                 else:
@@ -2496,7 +2496,7 @@ label accessories_menu(Girl):
 
                     $ Girl.outfit["hair"] = "_short"
 
-                    $ Girl.add_word(1,"hair","hair",0,0)
+                    $ Girl.add_word(1,"hair","hair", 0, 0)
 
                     ch_s "Like this?"
                 else:
@@ -3354,8 +3354,8 @@ label ask_for_dress_screen(Girl):
     elif Girl == JubesX:
         ch_v "I don't know, this is moving a little fast. . ."
 
-    $ Girl.add_word(1,0, "screen")
-    $ Girl.change_face("_bemused",1)
+    $ Girl.add_word(1, 0, "screen")
+    $ Girl.change_face("_bemused", 1)
 
     menu:
         Girl.voice "Mind if I get behind a dressing screen?"
@@ -4169,7 +4169,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             return True
         if not Agree:
 
-            $ Girl.change_face("_bemused", 2,eyes="_side")
+            $ Girl.change_face("_bemused", 2,eyes = "_side")
             if Girl == RogueX:
                 ch_r "I don't really feel comfortable in this. . ."
             elif Girl == KittyX:
@@ -4209,7 +4209,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             return
         if Girl == RogueX:
             if Girl.taboo >= 40:
-                $ Girl.change_face("_confused",1)
+                $ Girl.change_face("_confused", 1)
                 $ Girl.mouth = "_smile"
                 ch_r "It's a little late to worry about that, right?"
             if "exhibitionist" in Girl.traits and Tempshame >= 20:
@@ -4254,7 +4254,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Agree = 0
         elif Girl == KittyX:
             if Girl.taboo >= 40:
-                $ Girl.change_face("_confused",1)
+                $ Girl.change_face("_confused", 1)
                 $ Girl.mouth = "_smile"
                 ch_k "Kinda late to ask, right?"
             if "exhibitionist" in Girl.traits and Tempshame >= 20:
@@ -4297,7 +4297,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Agree = 0
         elif Girl == EmmaX:
             if Girl.taboo >= 40:
-                $ Girl.change_face("_confused",1)
+                $ Girl.change_face("_confused", 1)
                 $ Girl.mouth = "_smile"
                 "She glances around."
                 ch_e "Is that a trick question?"
@@ -4342,7 +4342,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Agree = 0
         elif Girl == LauraX:
             if Girl.taboo >= 40:
-                $ Girl.change_face("_confused",1)
+                $ Girl.change_face("_confused", 1)
                 $ Girl.mouth = "_smile"
                 ch_l "Well a bit late for that, I guess."
             if "exhibitionist" in Girl.traits and Tempshame >= 20:
@@ -4387,7 +4387,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Agree = 0
         elif Girl == JeanX:
             if Girl.taboo >= 40:
-                $ Girl.change_face("_confused",1)
+                $ Girl.change_face("_confused", 1)
                 $ Girl.mouth = "_smile"
                 ch_j "Well, I guess so, right?"
             if "exhibitionist" in Girl.traits and Tempshame >= 20:
@@ -4433,7 +4433,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
         elif Girl == StormX:
 
             if Girl.taboo >= 40:
-                $ Girl.change_face("_confused",1)
+                $ Girl.change_face("_confused", 1)
                 $ Girl.mouth = "_smile"
                 "She glances around."
                 ch_s "It seems a bit late for that question. . ."
@@ -4474,7 +4474,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Agree = 0
         elif Girl == JubesX:
             if Girl.taboo >= 40:
-                $ Girl.change_face("_confused",1)
+                $ Girl.change_face("_confused", 1)
                 $ Girl.mouth = "_smile"
                 ch_v "I guess that ship has sailed. . ."
             if "exhibitionist" in Girl.traits and Tempshame >= 20:

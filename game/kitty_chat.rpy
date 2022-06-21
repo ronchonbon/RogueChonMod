@@ -425,71 +425,71 @@ label Kitty_Monogamy:
         "Could you not hook up with other girls?" if "monogamous" not in KittyX.traits:
             if KittyX.thirst >= 60 and not approval_check(KittyX, 1700, "LO", taboo_modifier=0):
 
-                $ KittyX.change_face("_sly",1)
+                $ KittyX.change_face("_sly", 1)
                 if "monogamous" not in KittyX.daily_history:
                     $ KittyX.change_stat("obedience", 90, -2)
                 ch_k "I[KittyX.like]appreciate the interest, but you aren't around enough. . ."
                 return
             elif approval_check(KittyX, 1100, "LO", taboo_modifier=0) and KittyX.love >= KittyX.obedience:
 
-                $ KittyX.change_face("_sly",1)
+                $ KittyX.change_face("_sly", 1)
                 if "monogamous" not in KittyX.daily_history:
                     $ KittyX.change_stat("love", 90, 1)
                 ch_k "Aw, is someone jellie?"
                 ch_k "I guess I could take care of myself. . ."
             elif approval_check(KittyX, 600, "O", taboo_modifier=0):
 
-                $ KittyX.change_face("_sly",1,eyes="_side")
+                $ KittyX.change_face("_sly", 1,eyes = "_side")
                 ch_k "If you want. . ."
             else:
 
-                $ KittyX.change_face("_sly",1,brows="_confused")
+                $ KittyX.change_face("_sly", 1,brows = "_confused")
                 ch_k "I'll hook up with who I want!"
                 return
             if "monogamous" not in KittyX.daily_history:
                 $ KittyX.change_stat("obedience", 90, 3)
-            $ KittyX.add_word(1,0,"monogamous")
+            $ KittyX.add_word(1, 0,"monogamous")
             $ KittyX.traits.append("monogamous")
         "Don't hook up with other girls." if "monogamous" not in KittyX.traits:
             if approval_check(KittyX, 800, "O", taboo_modifier=0):
 
-                $ KittyX.change_face("_sly",1,eyes="_side")
+                $ KittyX.change_face("_sly", 1,eyes = "_side")
                 ch_k "Ok."
             elif KittyX.thirst >= 60 and not approval_check(KittyX, 1700, "LO", taboo_modifier=0):
 
-                $ KittyX.change_face("_sly",1)
+                $ KittyX.change_face("_sly", 1)
                 if "monogamous" not in KittyX.daily_history:
                     $ KittyX.change_stat("obedience", 90, -2)
                 ch_k "I[KittyX.like]appreciate the interest, but you aren't around enough. . ."
                 return
             elif approval_check(KittyX, 500, "O", taboo_modifier=0):
 
-                $ KittyX.change_face("_sly",1,eyes="_side")
+                $ KittyX.change_face("_sly", 1,eyes = "_side")
                 ch_k "If you want. . ."
             elif approval_check(KittyX, 1200, "LO", taboo_modifier=0):
 
-                $ KittyX.change_face("_sly",1)
+                $ KittyX.change_face("_sly", 1)
                 ch_k "Rude much?"
                 ch_k "Fine, I'll do it for you. . ."
             else:
 
-                $ KittyX.change_face("_sly",1,brows="_confused")
+                $ KittyX.change_face("_sly", 1,brows = "_confused")
                 ch_k "I'll hook up with who I want!"
                 return
             if "monogamous" not in KittyX.daily_history:
                 $ KittyX.change_stat("obedience", 90, 3)
-            $ KittyX.add_word(1,0,"monogamous")
+            $ KittyX.add_word(1, 0,"monogamous")
             $ KittyX.traits.append("monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in KittyX.traits:
             if approval_check(KittyX, 650, "O", taboo_modifier=0):
-                $ KittyX.change_face("_sly",1,eyes="_side")
+                $ KittyX.change_face("_sly", 1,eyes = "_side")
                 ch_k "Right, gotcha."
             elif approval_check(KittyX, 800, "L", taboo_modifier=0):
-                $ KittyX.change_face("_sly",1)
+                $ KittyX.change_face("_sly", 1)
                 ch_k "Not like you'd give me the time to do that. . ."
                 ch_k "right?"
             else:
-                $ KittyX.change_face("_sly",1,brows="_confused")
+                $ KittyX.change_face("_sly", 1,brows = "_confused")
                 if "monogamous" not in KittyX.daily_history:
                     $ KittyX.change_stat("love", 90, -2)
                 ch_k "You're not the boss of my pussy!"
@@ -497,7 +497,7 @@ label Kitty_Monogamy:
                 $ KittyX.change_stat("obedience", 90, 3)
             if "monogamous" in KittyX.traits:
                 $ KittyX.traits.remove("monogamous")
-            $ KittyX.add_word(1,0,"monogamous")
+            $ KittyX.add_word(1, 0,"monogamous")
         "Never mind.":
             pass
     return
@@ -507,7 +507,7 @@ label Kitty_Monogamy:
 label Kitty_Jumped:
 
     ch_p "Hey, Remember that time you threw yourself at me?"
-    $ KittyX.change_face("_sly",1,brows="_confused")
+    $ KittyX.change_face("_sly", 1,brows = "_confused")
     menu:
         ch_k "Um. . . I guess?"
         "Could you maybe just ask instead?" if "chill" not in KittyX.traits:
@@ -517,11 +517,11 @@ label Kitty_Jumped:
                 if "chill" not in KittyX.daily_history:
                     $ KittyX.change_stat("obedience", 90, -2)
                 ch_k "Well- Well maybe spend some more time with me!"
-                $ KittyX.change_face("_angry",1,eyes="_side")
+                $ KittyX.change_face("_angry", 1,eyes = "_side")
                 return
             elif approval_check(KittyX, 900, "LO", taboo_modifier=0) and KittyX.love >= KittyX.obedience:
 
-                $ KittyX.change_face("_sadside",1)
+                $ KittyX.change_face("_sadside", 1)
                 if "chill" not in KittyX.daily_history:
                     $ KittyX.change_stat("love", 90, 1)
                 ch_k "Sorry, [KittyX.player_petname]. . ."
@@ -529,56 +529,56 @@ label Kitty_Jumped:
                 ch_k "I'll try though. . ."
             elif approval_check(KittyX, 400, "O", taboo_modifier=0):
 
-                $ KittyX.change_face("_sly",1,eyes="_side")
+                $ KittyX.change_face("_sly", 1,eyes = "_side")
                 ch_k "I guess. . ."
             else:
 
-                $ KittyX.change_face("_sly",1)
+                $ KittyX.change_face("_sly", 1)
                 ch_k "I can't keep my hands to myself. . ."
                 return
             if "chill" not in KittyX.daily_history:
                 $ KittyX.change_stat("obedience", 90, 3)
-            $ KittyX.add_word(1,0,"chill")
+            $ KittyX.add_word(1, 0,"chill")
             $ KittyX.traits.append("chill")
         "Don't bother me like that." if "chill" not in KittyX.traits:
             if approval_check(KittyX, 900, "O", taboo_modifier=0):
 
-                $ KittyX.change_face("_sly",1,eyes="_side")
+                $ KittyX.change_face("_sly", 1,eyes = "_side")
                 ch_k "Ok."
             elif KittyX.thirst >= 60 and not approval_check(KittyX, 600, "O", taboo_modifier=0):
 
-                $ KittyX.change_face("_angry",1)
+                $ KittyX.change_face("_angry", 1)
                 if "chill" not in KittyX.daily_history:
                     $ KittyX.change_stat("obedience", 90, -2)
                 ch_k "Don't keep me waiting then!"
                 return
             elif approval_check(KittyX, 400, "O", taboo_modifier=0):
 
-                $ KittyX.change_face("_sly",1,eyes="_side")
+                $ KittyX.change_face("_sly", 1,eyes = "_side")
                 ch_k "Fine. . ."
             elif approval_check(KittyX, 500, "LO", taboo_modifier=0) and not approval_check(KittyX, 500, "I", taboo_modifier=0):
 
-                $ KittyX.change_face("_sly",1)
+                $ KittyX.change_face("_sly", 1)
                 ch_k "Rude."
                 ch_k ". . . I'll try though. . ."
             else:
 
-                $ KittyX.change_face("_sly",1,brows="_confused")
+                $ KittyX.change_face("_sly", 1,brows = "_confused")
                 ch_k "I don't know. I guess we'll see. . ."
                 return
             if "chill" not in KittyX.daily_history:
                 $ KittyX.change_stat("obedience", 90, 3)
-            $ KittyX.add_word(1,0,"chill")
+            $ KittyX.add_word(1, 0,"chill")
             $ KittyX.traits.append("chill")
         "Knock yourself out.":
             if approval_check(KittyX, 800, "L", taboo_modifier=0):
-                $ KittyX.change_face("_sly",1)
+                $ KittyX.change_face("_sly", 1)
                 ch_k "Roger, roger. . ."
             elif approval_check(KittyX, 700, "O", taboo_modifier=0):
-                $ KittyX.change_face("_sly",1,eyes="_side")
+                $ KittyX.change_face("_sly", 1,eyes = "_side")
                 ch_k "You bet!"
             else:
-                $ KittyX.change_face("_sly",1,brows="_confused")
+                $ KittyX.change_face("_sly", 1,brows = "_confused")
                 if "chill" not in KittyX.daily_history:
                     $ KittyX.change_stat("love", 90, -2)
                 ch_k "I don't know."
@@ -588,7 +588,7 @@ label Kitty_Jumped:
                 $ KittyX.change_stat("obedience", 90, 3)
             if "chill" in KittyX.traits:
                 $ KittyX.traits.remove("chill")
-            $ KittyX.add_word(1,0,"chill")
+            $ KittyX.add_word(1, 0,"chill")
         "Um, never mind.":
             pass
     return
@@ -610,7 +610,7 @@ return
 
 
 
-label Kitty_sexchat:
+label Kitty_SexChat:
     $ line = "Yeah, what did you want to talk about?" if not line else line
     while True:
         menu:
@@ -654,7 +654,7 @@ label Kitty_sexchat:
                                 $ KittyX.change_face("_perplexed")
                                 ch_k "Who's fucking you? Is it Ms. Frost?!"
                             else:
-                                $ KittyX.change_face("_bemused",eyes="_side")
+                                $ KittyX.change_face("_bemused", eyes = "_side")
                                 ch_k "Heh, heh, yeah, um, it's ok. . ."
                             $ KittyX.player_favorite_action = "anal"
                         "Blowjobs.":
@@ -980,7 +980,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
             return
         if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(KittyX, 800, "I")):
             if KittyX.location == bg_current and KittyX.thirst >= 30 and "refused" not in KittyX.daily_history and "quicksex" not in KittyX.daily_history:
-                $ Girl.change_face("_smile",2,brows="_sad")
+                $ Girl.change_face("_smile",2,brows = "_sad")
                 ch_k "Hey, um . . . did you want to. . ."
                 ch_k ". . . sex?"
                 call Quick_Sex (KittyX)
@@ -1094,7 +1094,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
         ch_k ". . . but it's[KittyX.like]. . . {i}sexy{/i} chimp?"
     elif Options[0] == "purple":
         $ KittyX.daily_history.append("cologne chat")
-        $ KittyX.change_face("_sly",1)
+        $ KittyX.change_face("_sly", 1)
         ch_k "(sniff, sniff). . . huh, what's that smell? . ."
         ch_k ". . . could I get you something?"
     elif Options[0] == "corruption":
@@ -1127,7 +1127,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
 
         ch_k "So,[KittyX.player_petname]. . .y'know how you[KittyX.like]kinda just brushed my cheek before?"
         ch_p "Yeah? Was that okay?"
-        $ KittyX.change_face("_smile",1)
+        $ KittyX.change_face("_smile", 1)
         ch_k "More than just {i}okay{/i}."
         $ KittyX.had_chat.append("cheek")
 
@@ -1137,19 +1137,19 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
 
     elif Options[0] == "kissed":
 
-        $ KittyX.change_face("_sly",1)
+        $ KittyX.change_face("_sly", 1)
         ch_k "[KittyX.Like]. . .anybody ever tell you how good a kisser you are, [KittyX.player_petname]?"
         menu:
             extend ""
             "Hey. . .when you're good, you're good.":
-                $ KittyX.change_face("_smile",1)
+                $ KittyX.change_face("_smile", 1)
                 ch_k "I think maybe you can show me {i}how{/i} good[KittyX.like]whenever you want."
             "No. You think?":
                 ch_k "Yeah. I do. [KittyX.Like]a {i}lot{/i}."
 
     elif Options[0] == "dangerroom":
 
-        $ KittyX.change_face("_sly",1)
+        $ KittyX.change_face("_sly", 1)
         ch_k "Hey,[KittyX.player_petname]. I watched you working out in the Danger Room, earlier. You looked[KittyX.like]{i}so{/i} cute in your X-Men uniform!"
 
     elif Options[0] == "showercaught":
@@ -1165,7 +1165,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
                     $ KittyX.change_stat("love", 50, 5)
                     $ KittyX.change_stat("love", 90, 2)
                     if approval_check(KittyX, 1200):
-                        $ KittyX.change_face("_sly",1)
+                        $ KittyX.change_face("_sly", 1)
                         ch_k "Yeah? {i}Maybe{/i} you should[KittyX.like]have accidents like that more often."
                     $ KittyX.change_face("_smile")
                     ch_k "It's cool, [KittyX.player_petname]. Eveybody makes mistakes. . . sometimes."
@@ -1173,7 +1173,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
                     $ KittyX.change_stat("obedience", 40, 5)
                     if approval_check(KittyX, 1000) or approval_check(KittyX, 700, "L"):
                         $ KittyX.change_stat("love", 90, 3)
-                        $ KittyX.change_face("_sly",1)
+                        $ KittyX.change_face("_sly", 1)
                         ch_k "You know how to make a girl feel special, [KittyX.player_petname]."
                     else:
                         $ KittyX.change_stat("love", 70, -5)
@@ -1184,7 +1184,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
                         $ KittyX.change_stat("love", 90, 3)
                         $ KittyX.change_stat("obedience", 70, 10)
                         $ KittyX.change_stat("inhibition", 50, 5)
-                        $ KittyX.change_face("_sly",1)
+                        $ KittyX.change_face("_sly", 1)
                         ch_k "Hmm. . .next time, we'll have to[KittyX.like]take advantage of the moment."
                     elif approval_check(KittyX, 800):
                         $ KittyX.change_stat("obedience", 60, 5)
@@ -1249,19 +1249,19 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
                 "You were totally amazing.":
                     $ KittyX.change_stat("love", 90, 5)
                     $ KittyX.change_stat("inhibition", 60, 10)
-                    $ KittyX.change_face("_sexy",1)
+                    $ KittyX.change_face("_sexy", 1)
                     ch_k "Awesome. 'Cause I can't wait to try again."
                 "Honestly? It was good. . .but you could use a little practice, I think.":
                     if approval_check(KittyX, 300, "I") or not approval_check(KittyX, 800):
                         $ KittyX.change_stat("love", 90, -5)
                         $ KittyX.change_stat("obedience", 60, 10)
                         $ KittyX.change_stat("inhibition", 50, 10)
-                        $ KittyX.change_face("_perplexed",1)
+                        $ KittyX.change_face("_perplexed", 1)
                         ch_k "Yeah? Well then maybe I'll get some practice in before we do it again."
                     else:
                         $ KittyX.change_stat("obedience", 70, 15)
                         $ KittyX.change_stat("inhibition", 50, 5)
-                        $ KittyX.change_face("_sexy",1)
+                        $ KittyX.change_face("_sexy", 1)
                         ch_k "Yeah? Well, I'm[KittyX.player_petname]looking forward our next training session, then."
                 "I guess. If you're into weird sounds and too much teeth. Spoiler, I'm not.":
                     $ KittyX.change_stat("love", 90, -10)
@@ -1284,7 +1284,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
         else:
             ch_k "So. . .I was[KittyX.like]just thinking about the other day."
             ch_k "Y'know, that was the first time I[KittyX.like]swallowed."
-            $ KittyX.change_face("_sly",1)
+            $ KittyX.change_face("_sly", 1)
             ch_k "Not bad. . ."
             $ KittyX.had_chat.append("swallow")
 
@@ -1391,17 +1391,17 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
         $ KittyX.change_face("_sly",2)
         ch_k "Maybe I didn't mention it before, but. . ."
         ch_k "That cock of yours is. . . impressive."
-        $ KittyX.change_face("_bemused",1)
+        $ KittyX.change_face("_bemused", 1)
         $ KittyX.change_stat("love", 90, 3)
         $ KittyX.history.remove("seenpeen")
     elif Options[0] == "topless":
-        $ KittyX.change_face("_bemused",2,eyes="_side")
+        $ KittyX.change_face("_bemused",2,eyes = "_side")
         ch_k "Hey, when you saw me. . . topless earlier, you didn't have much to say. . ."
         ch_k "What'd you think?"
         call Kitty_First_TMenu
         $ KittyX.history.remove("topless")
     elif Options[0] == "bottomless":
-        $ KittyX.change_face("_bemused",2,eyes="_side")
+        $ KittyX.change_face("_bemused",2,eyes = "_side")
         ch_k "Hey, when you saw my. . . pussy earlier. . ."
         ch_k "You didn't say much. . . "
         ch_k "What'd you think?"
@@ -1731,7 +1731,7 @@ label Kitty_Rename:
             $ KittyX.change_face()
         "Nevermind.":
             pass
-    $ KittyX.add_word(1,0,"namechange")
+    $ KittyX.add_word(1, 0,"namechange")
     return
 
 

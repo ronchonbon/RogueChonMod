@@ -10,7 +10,7 @@ init -1 python hide:
     config.window_title = u"Rogue-Like Chonky Mod"
 
     config.name = "Rogue-Like Chonky Mod"
-    config.version = "0.2g"
+    config.version = "0.2h"
 
     theme.tv(
         widget = "#6A7183",
@@ -132,6 +132,6 @@ init python:
     build.documentation('*.html')
     build.documentation('*.txt')
 
-    config.rollback_length = 500 #allows rollbacks to cover longer distances. Default is around 128
+    config.rollback_length = 500
 
     config.layers = ['backdrop', 'master', 'nightmask', 'black', 'transient', 'screens', 'overlay']

@@ -369,69 +369,69 @@ label Jubes_Monogamy:
         "Could you not hook up with other girls?" if "monogamous" not in JubesX.traits:
             if JubesX.thirst >= 60 and not approval_check(JubesX, 1700, "LO", taboo_modifier=0):
 
-                $ JubesX.change_face("_sly",1)
+                $ JubesX.change_face("_sly", 1)
                 if "monogamous" not in JubesX.daily_history:
                     $ JubesX.change_stat("obedience", 90, -2)
                 ch_v "I could, but where would the fun in that be?"
                 return
             elif approval_check(JubesX, 1200, "LO", taboo_modifier=0) and JubesX.love >= JubesX.obedience:
 
-                $ JubesX.change_face("_sly",1)
+                $ JubesX.change_face("_sly", 1)
                 if "monogamous" not in JubesX.daily_history:
                     $ JubesX.change_stat("love", 90, 1)
                 ch_v "Oh. . . want me for yourself?."
                 ch_v "Fine, I'll be more careful. . ."
             elif approval_check(JubesX, 700, "O", taboo_modifier=0):
 
-                $ JubesX.change_face("_sly",1,eyes="_side")
+                $ JubesX.change_face("_sly", 1,eyes = "_side")
                 ch_v "Sure."
             else:
 
-                $ JubesX.change_face("_sly",1)
+                $ JubesX.change_face("_sly", 1)
                 ch_v "Nah."
                 return
             if "monogamous" not in JubesX.daily_history:
                 $ JubesX.change_stat("obedience", 90, 3)
-            $ JubesX.add_word(1,0,"monogamous")
+            $ JubesX.add_word(1, 0,"monogamous")
             $ JubesX.traits.append("monogamous")
         "Don't hook up with other girls." if "monogamous" not in JubesX.traits:
             if approval_check(JubesX, 900, "O", taboo_modifier=0):
 
-                $ JubesX.change_face("_sly",1,eyes="_side")
+                $ JubesX.change_face("_sly", 1,eyes = "_side")
                 ch_v "Fine."
             elif JubesX.thirst >= 60 and not approval_check(JubesX, 1700, "LO", taboo_modifier=0):
 
-                $ JubesX.change_face("_sly",1)
+                $ JubesX.change_face("_sly", 1)
                 if "monogamous" not in JubesX.daily_history:
                     $ JubesX.change_stat("obedience", 90, -2)
                 ch_v "I could, but where would the fun in that be?"
                 return
             elif approval_check(JubesX, 600, "O", taboo_modifier=0):
 
-                $ JubesX.change_face("_sly",1,eyes="_side")
+                $ JubesX.change_face("_sly", 1,eyes = "_side")
                 ch_v "If you insist."
             elif approval_check(JubesX, 1400, "LO", taboo_modifier=0):
 
-                $ JubesX.change_face("_sly",1)
+                $ JubesX.change_face("_sly", 1)
                 ch_v "Yeah, ok, but ask nicely next time."
             else:
 
-                $ JubesX.change_face("_sly",1,brows="_confused")
+                $ JubesX.change_face("_sly", 1,brows = "_confused")
                 ch_v "Nah."
                 return
             if "monogamous" not in JubesX.daily_history:
                 $ JubesX.change_stat("obedience", 90, 3)
-            $ JubesX.add_word(1,0,"monogamous")
+            $ JubesX.add_word(1, 0,"monogamous")
             $ JubesX.traits.append("monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in JubesX.traits:
             if approval_check(JubesX, 700, "O", taboo_modifier=0):
-                $ JubesX.change_face("_sly",1,eyes="_side")
+                $ JubesX.change_face("_sly", 1,eyes = "_side")
                 ch_v "Cool, cool."
             elif approval_check(JubesX, 800, "L", taboo_modifier=0):
-                $ JubesX.change_face("_sly",1)
+                $ JubesX.change_face("_sly", 1)
                 ch_v "Ok, but make sure you make it up to me. . ."
             else:
-                $ JubesX.change_face("_sly",1,brows="_confused")
+                $ JubesX.change_face("_sly", 1,brows = "_confused")
                 if "monogamous" not in JubesX.daily_history:
                     $ JubesX.change_stat("love", 90, -2)
                 ch_v "Nice. . ."
@@ -439,7 +439,7 @@ label Jubes_Monogamy:
                 $ JubesX.change_stat("obedience", 90, 3)
             if "monogamous" in JubesX.traits:
                 $ JubesX.traits.remove("monogamous")
-            $ JubesX.add_word(1,0,"monogamous")
+            $ JubesX.add_word(1, 0,"monogamous")
         "Never mind.":
             pass
     return
@@ -449,77 +449,77 @@ label Jubes_Monogamy:
 label Jubes_Jumped:
 
     ch_p "Hey, Remember that time you threw yourself at me?"
-    $ JubesX.change_face("_sly",1,brows="_confused")
+    $ JubesX.change_face("_sly", 1,brows = "_confused")
     menu:
         ch_v "Yeah?"
         "Could you maybe just ask instead?" if "chill" not in JubesX.traits:
             if JubesX.thirst >= 60 and not approval_check(JubesX, 1500, "LO", taboo_modifier=0):
 
-                $ JubesX.change_face("_sly",1)
+                $ JubesX.change_face("_sly", 1)
                 if "chill" not in JubesX.daily_history:
                     $ JubesX.change_stat("obedience", 90, -2)
                 ch_v "Hey, better you than one of these other bloodbags. . ."
                 return
             elif approval_check(JubesX, 1000, "LO", taboo_modifier=0) and JubesX.love >= JubesX.obedience:
 
-                $ JubesX.change_face("_surprised",1)
+                $ JubesX.change_face("_surprised", 1)
                 if "chill" not in JubesX.daily_history:
                     $ JubesX.change_stat("love", 90, 1)
                 ch_v "Sorry, I. . . have needs. . ."
-                $ JubesX.change_face("_sly",1,eyes="_side")
+                $ JubesX.change_face("_sly", 1,eyes = "_side")
                 ch_v "I'll do better. . ."
             elif approval_check(JubesX, 500, "O", taboo_modifier=0):
 
-                $ JubesX.change_face("_sly",1,eyes="_side")
+                $ JubesX.change_face("_sly", 1,eyes = "_side")
                 ch_v "Sorry. . ."
             else:
 
-                $ JubesX.change_face("_sly",1)
+                $ JubesX.change_face("_sly", 1)
                 ch_v "We'll see. . ."
                 return
             if "chill" not in JubesX.daily_history:
                 $ JubesX.change_stat("obedience", 90, 3)
-            $ JubesX.add_word(1,0,"chill")
+            $ JubesX.add_word(1, 0,"chill")
             $ JubesX.traits.append("chill")
         "Don't bother me like that." if "chill" not in JubesX.traits:
             if approval_check(JubesX, 800, "O", taboo_modifier=0):
 
-                $ JubesX.change_face("_sly",1,eyes="_side")
+                $ JubesX.change_face("_sly", 1,eyes = "_side")
                 ch_v "Fine."
             elif JubesX.thirst >= 60 and not approval_check(JubesX, 500, "O", taboo_modifier=0):
 
-                $ JubesX.change_face("_sly",1)
+                $ JubesX.change_face("_sly", 1)
                 if "chill" not in JubesX.daily_history:
                     $ JubesX.change_stat("obedience", 90, -2)
                 ch_v "Sorry, I. . . have needs. . ."
                 return
             elif approval_check(JubesX, 400, "O", taboo_modifier=0):
 
-                $ JubesX.change_face("_sly",1,eyes="_side")
+                $ JubesX.change_face("_sly", 1,eyes = "_side")
                 ch_v "Sure. . ."
             elif approval_check(JubesX, 500, "LO", taboo_modifier=0) and not approval_check(JubesX, 500, "I", taboo_modifier=0):
 
-                $ JubesX.change_face("_sly",1)
+                $ JubesX.change_face("_sly", 1)
                 ch_v "Hey, don't come at me like that."
                 ch_v "I can try though. . ."
             else:
 
-                $ JubesX.change_face("_sly",1)
+                $ JubesX.change_face("_sly", 1)
                 ch_v "We'll see. . ."
                 return
             if "chill" not in JubesX.daily_history:
                 $ JubesX.change_stat("obedience", 90, 3)
-            $ JubesX.add_word(1,0,"chill")
+            $ JubesX.add_word(1, 0,"chill")
             $ JubesX.traits.append("chill")
         "Knock yourself out.":
             if approval_check(JubesX, 800, "L", taboo_modifier=0):
-                $ JubesX.change_face("_sly",1)
+                $ JubesX.change_face("_sly", 1)
                 ch_v "Game on. . ."
             elif approval_check(JubesX, 700, "O", taboo_modifier=0):
-                $ JubesX.change_face("_sly",1,eyes="_side")
+                $ JubesX.change_face("_sly", 1,eyes = "_side")
                 ch_v "You got it!"
             else:
-                $ JubesX.change_face("_sly",1,brows="_confused")
+                $ JubesX.change_face("_sly", 1,brows = "_confused")
                 if "chill" not in JubesX.daily_history:
                     $ JubesX.change_stat("love", 90, -2)
                 ch_v "Yeah, we'll see. . ."
@@ -527,7 +527,7 @@ label Jubes_Jumped:
                 $ JubesX.change_stat("obedience", 90, 3)
             if "chill" in JubesX.traits:
                 $ JubesX.traits.remove("chill")
-            $ JubesX.add_word(1,0,"chill")
+            $ JubesX.add_word(1, 0,"chill")
         "Um, never mind.":
             pass
     return
@@ -549,7 +549,7 @@ return
 
 
 
-label Jubes_Sexchat:
+label Jubes_SexChat:
     $ line = "Yeah, what did you want to talk about?" if not line else line
     while True:
         menu:
@@ -593,7 +593,7 @@ label Jubes_Sexchat:
                                 $ JubesX.change_face("_perplexed")
                                 ch_v "Who's fucking you?"
                             else:
-                                $ JubesX.change_face("_bemused",eyes="_side")
+                                $ JubesX.change_face("_bemused", eyes = "_side")
                                 ch_v "Heh, heh, yeah, um, it's ok. . ."
                             $ JubesX.player_favorite_action = "anal"
                         "Blowjobs.":
@@ -917,7 +917,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
 
         if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(JubesX, 800, "I")):
             if JubesX.location == bg_current and JubesX.thirst >= 30 and "refused" not in JubesX.daily_history and "quicksex" not in JubesX.daily_history:
-                $ JubesX.change_face("_sly",1)
+                $ JubesX.change_face("_sly", 1)
                 ch_v "Hey, did you. . . wanna do something?"
                 call Quick_Sex (JubesX)
                 return
@@ -1027,9 +1027,9 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
         $ JubesX.change_face("_sexy", 2)
     elif Options[0] == "purple":
         $ JubesX.daily_history.append("cologne chat")
-        $ JubesX.change_face("_sly",1)
+        $ JubesX.change_face("_sly", 1)
         ch_v "(sniff, sniff). . . that's an unusual scent. . ."
-        $ JubesX.change_face("_normal",0)
+        $ JubesX.change_face("_normal", 0)
         ch_v ". . . did you want something?"
     elif Options[0] == "corruption":
         $ JubesX.daily_history.append("cologne chat")
@@ -1071,11 +1071,11 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
         $ JubesX.change_face("_sadside",2)
         ch_v "Just so you know, the vampire thing. . ."
         ch_v "It's not contagious. . ."
-        $ JubesX.change_face("_sadside",1)
+        $ JubesX.change_face("_sadside", 1)
         ch_v "It was, but Dr. Strange was able to cast a spell or something."
         ch_v "So you don't need to worry about it spreading to you or anything."
-        $ JubesX.change_face("_sad",1)
-        $ JubesX.add_word(1,0,0,0,"contagious")
+        $ JubesX.change_face("_sad", 1)
+        $ JubesX.add_word(1, 0, 0, 0,"contagious")
 
     elif Options[0] == "jubes":
 
@@ -1090,7 +1090,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
             "Ok, but I like [JubesX.name].":
                 $ JubesX.change_stat("love", 70, 2)
                 $ JubesX.change_stat("obedience", 70, 2)
-                $ JubesX.change_face("_smile",1)
+                $ JubesX.change_face("_smile", 1)
                 ch_v "Oh, ok."
 
     elif Options[0] == "dated":
@@ -1099,12 +1099,12 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
 
     elif Options[0] == "kissed":
 
-        $ JubesX.change_face("_sly",1)
+        $ JubesX.change_face("_sly", 1)
         ch_v "You're a great kisser, [JubesX.player_petname]."
         menu:
             extend ""
             "Hey. . .I'm the best there is at what I do.":
-                $ JubesX.change_face("_smile",1)
+                $ JubesX.change_face("_smile", 1)
                 ch_v "Well. . . maybe."
                 ch_v "We'll have to test that one out."
             "No. You think?":
@@ -1112,7 +1112,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
 
     elif Options[0] == "dangerroom":
 
-        $ JubesX.change_face("_sly",1)
+        $ JubesX.change_face("_sly", 1)
         ch_v "Hey,[JubesX.player_petname]. I saw you in the Danger Room, earlier."
         ch_v "You're surprisingly good at this, considering you lack the ability to pewpew."
 
@@ -1129,7 +1129,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
                     $ JubesX.change_stat("love", 50, 5)
                     $ JubesX.change_stat("love", 90, 2)
                     if approval_check(JubesX, 1200):
-                        $ JubesX.change_face("_sly",1)
+                        $ JubesX.change_face("_sly", 1)
                         ch_v "I didn't say I minded. . ."
                     $ JubesX.change_face("_smile")
                     ch_v "Ok, sure, it's cool."
@@ -1137,7 +1137,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
                     $ JubesX.change_stat("obedience", 40, 5)
                     if approval_check(JubesX, 1000) or approval_check(JubesX, 700, "L"):
                         $ JubesX.change_stat("love", 90, 3)
-                        $ JubesX.change_face("_sly",1)
+                        $ JubesX.change_face("_sly", 1)
                         ch_v "Well I guess that's kinda sweet. . ."
                     else:
                         $ JubesX.change_stat("love", 70, -5)
@@ -1148,7 +1148,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
                         $ JubesX.change_stat("love", 90, 3)
                         $ JubesX.change_stat("obedience", 70, 10)
                         $ JubesX.change_stat("inhibition", 50, 5)
-                        $ JubesX.change_face("_sly",1)
+                        $ JubesX.change_face("_sly", 1)
                         ch_v "Fair."
                     elif approval_check(JubesX, 800):
                         $ JubesX.change_stat("obedience", 60, 5)
@@ -1193,7 +1193,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
 
     elif Options[0] == "handy":
 
-        $ JubesX.change_face("_sly",1)
+        $ JubesX.change_face("_sly", 1)
         ch_v "I was daydreaming about having your cock in my hand. . ."
         ch_v "Maybe I should take it out of the dream. . ."
         $ JubesX.blushing = ""
@@ -1208,21 +1208,21 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
                 "You were totally amazing.":
                     $ JubesX.change_stat("love", 90, 5)
                     $ JubesX.change_stat("inhibition", 60, 10)
-                    $ JubesX.change_face("_normal",1)
+                    $ JubesX.change_face("_normal", 1)
                     ch_v "Cool. Cool. . . "
-                    $ JubesX.change_face("_sexy",1)
+                    $ JubesX.change_face("_sexy", 1)
                     ch_v "I'd like another taste sometime."
                 "Honestly? It was good. . .but you could use a little practice, I think.":
                     if approval_check(JubesX, 300, "I") or not approval_check(JubesX, 800):
                         $ JubesX.change_stat("love", 90, -5)
                         $ JubesX.change_stat("obedience", 60, 10)
                         $ JubesX.change_stat("inhibition", 50, 10)
-                        $ JubesX.change_face("_perplexed",1)
+                        $ JubesX.change_face("_perplexed", 1)
                         ch_v "Oh! Sorry!."
                     else:
                         $ JubesX.change_stat("obedience", 70, 15)
                         $ JubesX.change_stat("inhibition", 50, 5)
-                        $ JubesX.change_face("_sexy",1)
+                        $ JubesX.change_face("_sexy", 1)
                         ch_v "Yeah? Well, practice makes perfect. . ."
                 "I guess. If you're into weird sounds and too much teeth. Spoiler, I'm not.":
                     $ JubesX.change_stat("love", 90, -5)
@@ -1245,7 +1245,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
         else:
             ch_v "So. . . the other day. . ."
             ch_v "I really got a charge out of drinking your. . ."
-            $ JubesX.change_face("_sly",1)
+            $ JubesX.change_face("_sly", 1)
             ch_v "I wouldn't mind that again some time."
             $ JubesX.had_chat.append("swallow")
 
@@ -1279,13 +1279,13 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
 
         $ JubesX.change_face("_sly")
         ch_v "I hadn't really done much anal before. . ."
-        $ JubesX.change_face("_sexy",1)
+        $ JubesX.change_face("_sexy", 1)
         ch_v "Until you, at least."
 
     elif Options[0] == "seenpeen":
-        $ JubesX.change_face("_sly",1, eyes="_down")
+        $ JubesX.change_face("_sly", 1, eyes = "_down")
         ch_v "Oh, hey, you're swinging some real meat down there, huh?"
-        $ JubesX.change_face("_bemused",1)
+        $ JubesX.change_face("_bemused", 1)
         $ JubesX.change_stat("love", 50, 5)
         $ JubesX.history.remove("seenpeen")
     elif Options[0] == "topless":
@@ -1643,7 +1643,7 @@ label Jubes_Rename:
                 ch_v "That's kinda. . . formal, [JubesX.player_petname]."
         "Nevermind.":
             pass
-    $ JubesX.add_word(1,0,"namechange")
+    $ JubesX.add_word(1, 0,"namechange")
     return
 
 
@@ -2486,7 +2486,7 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                                 return
                             "I insist, put some on.":
                                 if (JubesX.love+JubesX.obedience) <= (1.5*JubesX.inhibition):
-                                    $ JubesX.change_face("_angry", eyes="_side")
+                                    $ JubesX.change_face("_angry", eyes = "_side")
                                     ch_v "Well too bad."
                                     return
                                 else:
