@@ -1,25 +1,174 @@
+label show_Girl(Girl, x_position = None, y_position = 0, sprite_layer = None, transition = None, transformation = None):
+    if x_position:
+        $ Girl.sprite_location = x_position
+
+    if sprite_layer:
+        $ Girl.sprite_layer = sprite_layer
+
+    if transition and transformation:
+        if Girl == RogueX:
+            show Rogue_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+        elif Girl == KittyX:
+            show Kitty_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+        elif Girl == EmmaX:
+            if Girl.diamond:
+                show Emma_sprite standing diamond zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+            else:
+                show Emma_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+        elif Girl == LauraX:
+            $ Girl.claws = False
+
+            show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+        elif Girl == JeanX:
+            show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+        elif Girl == StormX:
+            show Storm_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+        elif Girl == JubesX:
+            show Jubes_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+        elif Girl == MystiqueX:
+            if Girl.disguise:
+                show expression "Mystique_sprite standing " + Girl.disguise zorder Girl.sprite_layer as Mystique_sprite at sprite_location(Girl.sprite_location, y_position), transformation with transition
+            else:
+                show Mystique_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+    elif transition:
+        if Girl == RogueX:
+            show Rogue_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+        elif Girl == KittyX:
+            show Kitty_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+        elif Girl == EmmaX:
+            if Girl.diamond:
+                show Emma_sprite standing diamond zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+            else:
+                show Emma_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+        elif Girl == LauraX:
+            $ Girl.claws = False
+
+            show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+        elif Girl == JeanX:
+            show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+        elif Girl == StormX:
+            show Storm_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+        elif Girl == JubesX:
+            show Jubes_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+        elif Girl == MystiqueX:
+            if Girl.disguise:
+                show expression "Mystique_sprite standing " + Girl.disguise zorder Girl.sprite_layer as Mystique_sprite at sprite_location(Girl.sprite_location, y_position) with transition
+            else:
+                show Mystique_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+    elif transformation:
+        if Girl == RogueX:
+            show Rogue_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+        elif Girl == KittyX:
+            show Kitty_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+        elif Girl == EmmaX:
+            if Girl.diamond:
+                show Emma_sprite standing diamond zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+            else:
+                show Emma_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+        elif Girl == LauraX:
+            $ Girl.claws = False
+
+            show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+        elif Girl == JeanX:
+            show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+        elif Girl == StormX:
+            show Storm_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+        elif Girl == JubesX:
+            show Jubes_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+        elif Girl == MystiqueX:
+            if Girl.disguise:
+                show expression "Mystique_sprite standing " + Girl.disguise zorder Girl.sprite_layer as Mystique_sprite at sprite_location(Girl.sprite_location, y_position), transformation
+            else:
+                show Mystique_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+    else:
+        if Girl == RogueX:
+            show Rogue_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+        elif Girl == KittyX:
+            show Kitty_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+        elif Girl == EmmaX:
+            if Girl.diamond:
+                show Emma_sprite standing diamond zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+            else:
+                show Emma_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+        elif Girl == LauraX:
+            $ Girl.claws = False
+
+            show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+        elif Girl == JeanX:
+            show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+        elif Girl == StormX:
+            show Storm_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+        elif Girl == JubesX:
+            show Jubes_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+        elif Girl == MystiqueX:
+            if Girl.disguise:
+                show expression "Mystique_sprite standing " + Girl.disguise zorder Girl.sprite_layer as Mystique_sprite at sprite_location(Girl.sprite_location, y_position)
+            else:
+                show Mystique_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+
+    return
+
+label hide_Girl(Girl, transition = None):
+    if transition:
+        if Girl == RogueX:
+            hide Rogue_sprite with transition
+        elif Girl == KittyX:
+            hide Kitty_sprite with transition
+        elif Girl == EmmaX:
+            hide Emma_sprite with transition
+        elif Girl == LauraX:
+            hide Laura_sprite with transition
+        elif Girl == JeanX:
+            hide Jean_sprite with transition
+        elif Girl == StormX:
+            hide Storm_sprite with transition
+        elif Girl == JubesX:
+            hide Jubes_sprite with transition
+        elif Girl == MystiqueX:
+            hide Mystique_sprite with transition
+    else:
+        if Girl == RogueX:
+            hide Rogue_sprite
+        elif Girl == KittyX:
+            hide Kitty_sprite
+        elif Girl == EmmaX:
+            hide Emma_sprite
+        elif Girl == LauraX:
+            hide Laura_sprite
+        elif Girl == JeanX:
+            hide Jean_sprite
+        elif Girl == StormX:
+            hide Storm_sprite
+        elif Girl == JubesX:
+            hide Jubes_sprite
+        elif Girl == MystiqueX:
+            hide Mystique_sprite
+
+    return
+
+label hide_all:
+    hide Rogue_sprite
+    hide Kitty_sprite
+    hide Emma_sprite
+    hide Laura_sprite
+    hide Jean_sprite
+    hide Storm_sprite
+    hide Jubes_sprite
+
+    hide Xavier_sprite
+
+    return
+
+transform reset_zoom:
+    ease 0.75 zoom 1.0
+
+transform instant_reset:
+    zoom 1.0
+
 label reset_position(Girl):
     $ Girl.pose = "full"
 
-    if Girl.location != bg_current:
-        call hide_girl(Girl)
-
-        return
-
-    if Girl == RogueX:
-        show Rogue_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
-    elif Girl == KittyX:
-        show Kitty_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
-    elif Girl == EmmaX:
-        show Emma_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
-    elif Girl == LauraX:
-        show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
-    elif Girl == JeanX:
-        show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
-    elif Girl == StormX:
-        show Storm_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
-    elif Girl == JubesX:
-        show Jubes_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location):
+    call show_Girl(Girl, transformation = reset_zoom)
 
     return
 
@@ -34,15 +183,15 @@ label shift_view(Girl, view):
                 call middle_launch(Girl)
             "Lower half":
                 call pussy_launch(Girl)
-            "Rear view" if Girl in [RogueX, KittyX, EmmaX, LauraX, JeanX]:
+            "Doggy" if Girl in [RogueX, KittyX, EmmaX, LauraX, JeanX]:
                 $ Girl.pose = "doggy"
 
                 call show_sex(Girl, None)
-            "On top of you" if Girl in [EmmaX, JeanX, StormX]:
+            "Cowgirl" if Girl in [EmmaX, JeanX, StormX]:
                 $ Girl.pose = "sex"
 
                 call show_sex(Girl, None)
-            "Laying down" if Girl in [RogueX, KittyX, LauraX]:
+            "Missionary" if Girl in [RogueX, KittyX, LauraX]:
                 $ Girl.pose = "sex"
 
                 call show_sex(Girl, None)
@@ -64,6 +213,9 @@ label shift_view(Girl, view):
 
     return
 
+transform close_launch_animation(x_zoom):
+    ease 0.75 xzoom x_zoom yzoom 1.3
+
 label close_launch(GirlA, GirlB = None):
     if GirlB:
         $ temp_Girls = [GirlA, GirlB]
@@ -84,7 +236,7 @@ label close_launch(GirlA, GirlB = None):
             else:
                 $ x_position = 500
 
-            $ temp_Girls[0].sprite_layer = 100
+            $ temp_Girls[0].sprite_layer = 4
 
             $ x_zoom = -1.3
         elif GirlB == temp_Girls[0]:
@@ -93,161 +245,75 @@ label close_launch(GirlA, GirlB = None):
             else:
                 $ x_position = 715
 
-            $ temp_Girls[0].sprite_layer = 75
+            $ temp_Girls[0].sprite_layer = 3
 
             $ x_zoom = 1.3
 
-        # if temp_Girls[0] == RogueX:
-        #     show Rogue_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
-        #         xzoom x_zoom yzoom 1.3
-        # elif temp_Girls[0] == KittyX:
-        #     show Kitty_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
-        #         xzoom x_zoom yzoom 1.3
-        # elif temp_Girls[0] == EmmaX:
-        #     show Emma_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
-        #         xzoom x_zoom yzoom 1.3
-        # elif temp_Girls[0] == LauraX:
-        #     show Laura_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
-        #         xzoom x_zoom yzoom 1.3
-        # elif temp_Girls[0] == JeanX:
-        #     show Jean_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
-        #         xzoom x_zoom yzoom 1.3
-        # elif temp_Girls[0] == StormX:
-        #     show Storm_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
-        #         xzoom x_zoom yzoom 1.3
-        # elif temp_Girls[0] == JubesX:
-        #     show Jubes_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
-        #         xzoom x_zoom yzoom 1.3
+        call display_Girl(temp_Girls[0], x_position = x_position, y_position = 0.15, transformation = close_launch_animation(x_zoom))
 
         $ temp_Girls.remove(temp_Girls[0])
 
     return
 
-transform smooch_animation(location):
-    ease 0.5 pos (location, 0.1) xzoom 2.0 yzoom 2.0
-    pause 1
-    ease 0.5 pos (location, 0.0) xzoom 1.0 yzoom 1.0
+transform smooch_animation:
+    ease 0.6 ypos 0.1 zoom 2.0
+    pause 1.0
+    ease 0.6 ypos 0.0 zoom 1.0
 
 label smooch(Girl):
     $ Girl.change_face("_kiss")
 
-    # if Girl == RogueX:
-    #     show Rogue_sprite standing zorder Girl.sprite_layer at smooch_animation(Girl.sprite_location)
-    # elif Girl == KittyX:
-    #     show Kitty_sprite standing zorder Girl.sprite_layer at smooch_animation(Girl.sprite_location)
-    # elif Girl == EmmaX:
-    #     show Emma_sprite standing zorder Girl.sprite_layer at smooch_animation(Girl.sprite_location)
-    # elif Girl == LauraX:
-    #     show Laura_sprite standing zorder Girl.sprite_layer at smooch_animation(Girl.sprite_location)
-    # elif Girl == JeanX:
-    #     show Jean_sprite standing zorder Girl.sprite_layer at smooch_animation(Girl.sprite_location)
-    # elif Girl == StormX:
-    #     show Storm_sprite standing zorder Girl.sprite_layer at smooch_animation(Girl.sprite_location)
-    # elif Girl == JubesX:
-    #     show Jubes_sprite standing zorder Girl.sprite_layer at smooch_animation(Girl.sprite_location)
+    call show_Girl(Girl, transformation = smooch_animation)
 
-    pause 1
+    pause 1.0
 
     $ Girl.change_face("_sexy")
 
     return
 
-transform kiss_launch_animation(location):
-    ease 0.5 pos (location, 0.1) xzoom 2.0 yzoom 2.0
+transform kiss_launch_animation:
+    ease 0.75 ypos 0.1 zoom 2.0
 
 label kiss_launch(Girl):
     $ Girl.pose = "kiss"
-
     $ Girl.change_face("_kiss")
 
-    # if Girl == RogueX:
-    #     show Rogue_sprite standing zorder Girl.sprite_layer at kiss_launch_animation(Girl.sprite_location)
-    # elif Girl == KittyX:
-    #     show Kitty_sprite standing zorder Girl.sprite_layer at kiss_launch_animation(Girl.sprite_location)
-    # elif Girl == EmmaX:
-    #     show Emma_sprite standing zorder Girl.sprite_layer at kiss_launch_animation(Girl.sprite_location)
-    # elif Girl == LauraX:
-    #     show Laura_sprite standing zorder Girl.sprite_layer at kiss_launch_animation(Girl.sprite_location)
-    # elif Girl == JeanX:
-    #     show Jean_sprite standing zorder Girl.sprite_layer at kiss_launch_animation(Girl.sprite_location)
-    # elif Girl == StormX:
-    #     show Storm_sprite standing zorder Girl.sprite_layer at kiss_launch_animation(Girl.sprite_location)
-    # elif Girl == JubesX:
-    #     show Jubes_sprite standing zorder Girl.sprite_layer at kiss_launch_animation(Girl.sprite_location)
+    call show_Girl(Girl, transformation = kiss_launch_animation)
 
     return
 
-transform breasts_launch_animation(location):
-    ease 0.5 pos (location, -0.2) xzoom 2.0 yzoom 2.0
+transform breasts_launch_animation:
+    ease 0.75 ypos -0.2 zoom 2.0
 
 label breasts_launch(Girl):
     $ Girl.pose = "breasts"
 
-    # if Girl == RogueX:
-    #     show Rogue_sprite standing zorder Girl.sprite_layer at breasts_launch_animation(Girl.sprite_location)
-    # elif Girl == KittyX:
-    #     show Kitty_sprite standing zorder Girl.sprite_layer at breasts_launch_animation(Girl.sprite_location)
-    # elif Girl == EmmaX:
-    #     show Emma_sprite standing zorder Girl.sprite_layer at breasts_launch_animation(Girl.sprite_location)
-    # elif Girl == LauraX:
-    #     show Laura_sprite standing zorder Girl.sprite_layer at breasts_launch_animation(Girl.sprite_location)
-    # elif Girl == JeanX:
-    #     show Jean_sprite standing zorder Girl.sprite_layer at breasts_launch_animation(Girl.sprite_location)
-    # elif Girl == StormX:
-    #     show Storm_sprite standing zorder Girl.sprite_layer at breasts_launch_animation(Girl.sprite_location)
-    # elif Girl == JubesX:
-    #     show Jubes_sprite standing zorder Girl.sprite_layer at breasts_launch_animation(Girl.sprite_location)
+    call show_Girl(Girl, transformation = breasts_launch_animation)
 
     return
 
-transform middle_launch_animation(location):
-    ease 0.5 pos (location, -0.3) xzoom 1.5 yzoom 1.5
+transform middle_launch_animation:
+    ease 0.75 ypos -0.3 zoom 1.5
 
 label middle_launch(Girl):
     $ Girl.pose = "middle"
 
-    # if Girl == RogueX:
-    #     show Rogue_sprite standing zorder Girl.sprite_layer at middle_launch_animation(Girl.sprite_location)
-    # elif Girl == KittyX:
-    #     show Kitty_sprite standing zorder Girl.sprite_layer at middle_launch_animation(Girl.sprite_location)
-    # elif Girl == EmmaX:
-    #     show Emma_sprite standing zorder Girl.sprite_layer at middle_launch_animation(Girl.sprite_location)
-    # elif Girl == LauraX:
-    #     show Laura_sprite standing zorder Girl.sprite_layer at middle_launch_animation(Girl.sprite_location)
-    # elif Girl == JeanX:
-    #     show Jean_sprite standing zorder Girl.sprite_layer at middle_launch_animation(Girl.sprite_location)
-    # elif Girl == StormX:
-    #     show Storm_sprite standing zorder Girl.sprite_layer at middle_launch_animation(Girl.sprite_location)
-    # elif Girl == JubesX:
-    #     show Jubes_sprite standing zorder Girl.sprite_layer at middle_launch_animation(Girl.sprite_location)
+    call show_Girl(Girl, transformation = middle_launch_animation)
 
     return
 
-transform pussy_launch_animation(location):
-    ease 0.5 pos (location, -0.4) xzoom 2.0 yzoom 2.0
+transform pussy_launch_animation:
+    ease 0.75 ypos -0.4 zoom 2.0
 
 label pussy_launch(Girl):
     $ Girl.pose = "pussy"
 
-    # if Girl == RogueX:
-    #     show Rogue_sprite standing zorder Girl.sprite_layer at pussy_launch_animation(Girl.sprite_location)
-    # elif Girl == KittyX:
-    #     show Kitty_sprite standing zorder Girl.sprite_layer at pussy_launch_animation(Girl.sprite_location)
-    # elif Girl == EmmaX:
-    #     show Emma_sprite standing zorder Girl.sprite_layer at pussy_launch_animation(Girl.sprite_location)
-    # elif Girl == LauraX:
-    #     show Laura_sprite standing zorder Girl.sprite_layer at pussy_launch_animation(Girl.sprite_location)
-    # elif Girl == JeanX:
-    #     show Jean_sprite standing zorder Girl.sprite_layer at pussy_launch_animation(Girl.sprite_location)
-    # elif Girl == StormX:
-    #     show Storm_sprite standing zorder Girl.sprite_layer at pussy_launch_animation(Girl.sprite_location)
-    # elif Girl == JubesX:
-    #     show Jubes_sprite standing zorder Girl.sprite_layer at pussy_launch_animation(Girl.sprite_location)
+    call show_Girl(Girl, transformation = pussy_launch_animation)
 
     return
 
-transform show_handjob_animation(location):
-    ease 0.5 pos (location, 0.1) xzoom 2.0 yzoom 2.0
+transform show_handjob_animation:
+    ease 0.75 ypos 0.1 zoom 2.0
 
 label show_handjob(Girl, orgasm = False):
     if renpy.showing(Girl.tag + "_sprite handjob"):
@@ -255,20 +321,7 @@ label show_handjob(Girl, orgasm = False):
 
     $ action_speed = 0
 
-    # if Girl == RogueX:
-    #     show Rogue_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
-    # elif Girl == KittyX:
-    #     show Kitty_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
-    # elif Girl == EmmaX:
-    #     show Emma_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
-    # elif Girl == LauraX:
-    #     show Laura_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
-    # elif Girl == JeanX:
-    #     show Jean_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
-    # elif Girl == StormX:
-    #     show Storm_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
-    # elif Girl == JubesX:
-    #     show Jubes_sprite standing zorder Girl.sprite_layer at show_handjob_animation(Girl.sprite_location)
+    call show_Girl(Girl, transformation = show_handjob_animation)
 
     if taboo:
         if len(Present) >= 2:
@@ -291,24 +344,31 @@ label show_handjob(Girl, orgasm = False):
     $ Girl.arm_pose = 1
 
     if Girl == RogueX:
-        show Rogue_sprite handjob zorder 150 at sprite_location(stage_center)
+        show Rogue_sprite handjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == KittyX:
-        show Kitty_sprite handjob zorder 150 at sprite_location(stage_center)
+        show Kitty_sprite handjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == EmmaX:
-        show Emma_sprite handjob zorder 150 at sprite_location(stage_center)
+        show Emma_sprite handjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == LauraX:
-        show Laura_sprite handjob zorder 150 at sprite_location(stage_center)
+        show Laura_sprite handjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == JeanX:
-        show Jean_sprite handjob zorder 150 at sprite_location(stage_center)
+        show Jean_sprite handjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == StormX:
-        show Storm_sprite handjob zorder 150 at sprite_location(stage_center)
+        show Storm_sprite handjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == JubesX:
-        show Jubes_sprite handjob zorder 150 at sprite_location(stage_center)
+        show Jubes_sprite handjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
 
     return
 
-transform show_titjob_animation(location):
-    ease 0.5 pos (location, 0.1) xzoom 2.0 yzoom 2.0
+transform show_titjob_animation:
+    ease 0.5 ypos 0.05 zoom 2.0
 
 label show_titjob(Girl, orgasm = False):
     if renpy.showing(Girl.tag + "_sprite titjob"):
@@ -316,20 +376,7 @@ label show_titjob(Girl, orgasm = False):
 
     $ action_speed = 0
 
-    # if Girl == RogueX:
-    #     show Rogue_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
-    # elif Girl == KittyX:
-    #     show Kitty_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
-    # elif Girl == EmmaX:
-    #     show Emma_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
-    # elif Girl == LauraX:
-    #     show Laura_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
-    # elif Girl == JeanX:
-    #     show Jean_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
-    # elif Girl == StormX:
-    #     show Storm_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
-    # elif Girl == JubesX:
-    #     show Jubes_sprite standing zorder Girl.sprite_layer at show_titjob_animation(Girl.sprite_location)
+    call show_Girl(Girl, transformation = show_titjob_animation)
 
     if taboo:
         if len(Present) >= 2:
@@ -376,24 +423,31 @@ label show_titjob(Girl, orgasm = False):
         "[Girl.name] wraps her tits around your cock."
 
     if Girl == RogueX:
-        show Rogue_sprite titjob zorder 150 at sprite_location(stage_center)
+        show Rogue_sprite titjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == KittyX:
-        show Kitty_sprite titjob zorder 150 at sprite_location(stage_center)
+        show Kitty_sprite titjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == EmmaX:
-        show Emma_sprite titjob zorder 150 at sprite_location(stage_center)
+        show Emma_sprite titjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == LauraX:
-        show Laura_sprite titjob zorder 150 at sprite_location(stage_center)
+        show Laura_sprite titjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == JeanX:
-        show Jean_sprite titjob zorder 150 at sprite_location(stage_center)
+        show Jean_sprite titjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == StormX:
-        show Storm_sprite titjob zorder 150 at sprite_location(stage_center)
+        show Storm_sprite titjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == JubesX:
-        show Jubes_sprite titjob zorder 150 at sprite_location(stage_center)
+        show Jubes_sprite titjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
 
     return
 
-transform show_blowjob_animation(location):
-    ease 0.5 pos (location, 0.1) zoom 2.0
+transform show_blowjob_animation:
+    ease 0.5 ypos 0.1 zoom 2.0
 
 label show_blowjob(Girl, orgasm = False):
     if renpy.showing(Girl.tag + "_sprite blowjob"):
@@ -401,20 +455,7 @@ label show_blowjob(Girl, orgasm = False):
 
     $ action_speed = 0
 
-    # if Girl == RogueX:
-    #     show Rogue_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
-    # elif Girl == KittyX:
-    #     show Kitty_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
-    # elif Girl == EmmaX:
-    #     show Emma_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
-    # elif Girl == LauraX:
-    #     show Laura_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
-    # elif Girl == JeanX:
-    #     show Jean_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
-    # elif Girl == StormX:
-    #     show Storm_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
-    # elif Girl == JubesX:
-    #     show Jubes_sprite standing zorder Girl.sprite_layer at show_blowjob_animation(Girl.sprite_location)
+    call show_Girl(Girl, transformation = show_blowjob_animation)
 
     if taboo:
         if len(Present) >= 2:
@@ -432,19 +473,26 @@ label show_blowjob(Girl, orgasm = False):
         "[Girl.name] bends down and begins to suck on your cock."
 
     if Girl == RogueX:
-        show Rogue_sprite blowjob zorder 150 at sprite_location(stage_center)
+        show Rogue_sprite blowjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == KittyX:
-        show Kitty_sprite blowjob zorder 150 at sprite_location(stage_center)
+        show Kitty_sprite blowjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == EmmaX:
-        show Emma_sprite blowjob zorder 150 at sprite_location(stage_center)
+        show Emma_sprite blowjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == LauraX:
-        show Laura_sprite blowjob zorder 150 at sprite_location(stage_center)
+        show Laura_sprite blowjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == JeanX:
-        show Jean_sprite blowjob zorder 150 at sprite_location(stage_center)
+        show Jean_sprite blowjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == StormX:
-        show Storm_sprite blowjob zorder 150 at sprite_location(stage_center)
+        show Storm_sprite blowjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
     elif Girl == JubesX:
-        show Jubes_sprite blowjob zorder 150 at sprite_location(stage_center)
+        show Jubes_sprite blowjob zorder 150 at sprite_location(stage_center):
+            zoom 1.0
 
     return
 
@@ -547,7 +595,7 @@ label lesbian_launch(Girl):
             else:
                 $ x_position = 500
 
-            $ temp_Girls[0].sprite_layer = 100
+            $ temp_Girls[0].sprite_layer = 4
 
             $ x_zoom = -1.3
         else:
@@ -558,93 +606,62 @@ label lesbian_launch(Girl):
 
             if temp_Girls[0] == KittyX:
                 if RogueX in (Partner,Girl):
-                    $ KittyX.sprite_layer = 100
+                    $ KittyX.sprite_layer = 3
                 else:
-                    $ KittyX.sprite_layer = 25
+                    $ KittyX.sprite_layer = 1
             else:
-                $ temp_Girls[0].sprite_layer = 75
+                $ temp_Girls[0].sprite_layer = 3
 
             $ x_zoom = 1.3
 
-        # if temp_Girls[0] == RogueX:
-        #     show Rogue_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
-        #         xzoom x_zoom yzoom 1.3
-        # elif temp_Girls[0] == KittyX:
-        #     show Kitty_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
-        #         xzoom x_zoom yzoom 1.3
-        # elif temp_Girls[0] == EmmaX:
-        #     show Emma_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
-        #         xzoom x_zoom yzoom 1.3
-        # elif temp_Girls[0] == LauraX:
-        #     show Laura_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
-        #         xzoom x_zoom yzoom 1.3
-        # elif temp_Girls[0] == JeanX:
-        #     show Jean_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
-        #         xzoom x_zoom yzoom 1.3
-        # elif temp_Girls[0] == StormX:
-        #     show Storm_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
-        #         xzoom x_zoom yzoom 1.3
-        # elif temp_Girls[0] == JubesX:
-        #     show Jubes_sprite standing zorder temp_Girls[0].sprite_layer at sprite_location(x_position, 100):
-        #         xzoom x_zoom yzoom 1.3
+        call show_Girl(temp_Girls[0], x_position = x_position, y_position = 0.15, transformation = close_launch_animation(x_zoom))
 
         $ temp_Girls.remove(temp_Girls[0])
 
     return
 
-image Girl_hand:
-    "images/UI_GirlHand.png"
+image Girl_hand_white:
+    "images/misc/Girl_hand_white.png"
 
     anchor (0.5, 0.5)
 
-image Girl_finger:
-    "images/UI_GirlFinger.png"
+image Girl_fingering_white:
+    "images/misc/Girl_fingering_white.png"
 
     anchor (0.5, 0.5)
 
-image Girl_fondle_thigh:
-    "Girl_hand"
+image Girl_hand_black:
+    "images/misc/Girl_hand_black.png"
 
-    alpha 0.5 zoom 0.6
-    rotate 100
-    parallel:
-        pause 0.5
-        ease 1 yoffset 50
-        ease 1 yoffset 0
-        repeat
-    parallel:
-        pause 0.5
-        ease 0.5 xoffset 3
-        ease 0.5 xoffset 0
-        ease 0.5 xoffset 3
-        ease 0.5 xoffset 0
-        repeat
+    anchor (0.5, 0.5)
+
+image Girl_fingering_black:
+    "images/misc/Girl_fingering_black.png"
+
+    anchor (0.5, 0.5)
 
 image Girl_fondle_breast_left_animation:
-    "Girl_hand"
+    "Girl_hand_white"
 
     alpha 0.5 zoom 0.6
-    rotate -20
     block:
         ease 1 rotate -40 offset (-20, -10)
         ease 1 rotate -20 offset (0, 0)
         repeat
 
 image Girl_fondle_breast_right_animation:
-    "Girl_hand"
+    "Girl_hand_white"
 
     alpha 0.5 xzoom -0.6 yzoom 0.6
-    rotate -10
     block:
         ease 1 rotate -30 yoffset 30
         ease 1 rotate -10 yoffset 0
         repeat
 
 image Girl_fondle_pussy_animation:
-    "Girl_hand"
+    "Girl_hand_white"
 
     alpha 0.5 zoom 0.6
-    rotate 200
     block:
         choice:
             ease 0.75 rotate 210 offset (-5, 5)
@@ -671,10 +688,9 @@ image Girl_fondle_pussy_animation:
         repeat
 
 image Girl_finger_pussy_animation:
-    "Girl_finger"
+    "Girl_fingering_white"
 
     alpha 0.5 zoom 0.6
-    rotate 200
     block:
         choice:
             ease 0.75 rotate 210 yoffset 5
@@ -694,8 +710,84 @@ image Girl_finger_pussy_animation:
             ease 0.5 rotate 205 yoffset 5
             ease 0.75 rotate 200 yoffset 10
         choice:
-            ease 0.3 rotate 205 yoffset 5
-            ease 0.3 rotate 200 yoffset 15
-            ease 0.3 rotate 205 yoffset 5
-            ease 0.3 rotate 200 yoffset 15
+            ease 0.75 rotate 205 yoffset 5
+            ease 0.75 rotate 200 yoffset 15
+            ease 0.75 rotate 205 yoffset 5
+            ease 0.75 rotate 200 yoffset 15
+        repeat
+
+image Storm_fondle_breast_left_animation:
+    "Girl_hand_black"
+
+    alpha 0.5 zoom 0.6
+    block:
+        ease 1 rotate -40 offset (-20, -10)
+        ease 1 rotate -20 offset (0, 0)
+        repeat
+
+image Storm_fondle_breast_right_animation:
+    "Girl_hand_black"
+
+    alpha 0.5 xzoom -0.6 yzoom 0.6
+    block:
+        ease 1 rotate -30 yoffset 30
+        ease 1 rotate -10 yoffset 0
+        repeat
+
+image Storm_fondle_pussy_animation:
+    "Girl_hand_black"
+
+    alpha 0.5 zoom 0.6
+    block:
+        choice:
+            ease 0.75 rotate 210 offset (-5, 5)
+            ease 0.5 rotate 195
+            ease 0.75 rotate 210
+            ease 0.5 rotate 195
+        choice:
+            ease 0.5 rotate 210 offset (-5, 5)
+            ease 1 rotate 195
+            pause 0.25
+            ease 0.5 rotate 210
+            ease 1 rotate 195
+            pause 0.25
+        choice:
+            ease 0.5 rotate 205 offset (-5, 5)
+            ease 0.75 rotate 200 offset (-5, 10)
+            ease 0.5 rotate 205 offset (-5, 5)
+            ease 0.75 rotate 200 offset (-5, 10)
+        choice:
+            ease 0.3 rotate 205 offset (-5, 5)
+            ease 0.3 rotate 200 offset (-5, 15)
+            ease 0.3 rotate 205 offset (-5, 5)
+            ease 0.3 rotate 200 offset (-5, 15)
+        repeat
+
+image Storm_finger_pussy_animation:
+    "Girl_fingering_black"
+
+    alpha 0.5 zoom 0.6
+    block:
+        choice:
+            ease 0.75 rotate 210 yoffset 5
+            ease 0.5 rotate 195
+            ease 0.75 rotate 210
+            ease 0.5 rotate 195
+        choice:
+            ease 0.5 rotate 210 yoffset 5
+            ease 1 rotate 195
+            pause 0.25
+            ease 0.5 rotate 210
+            ease 1 rotate 195
+            pause 0.25
+        choice:
+            ease 0.5 rotate 205 yoffset 5
+            ease 0.75 rotate 200 yoffset 10
+            ease 0.5 rotate 205 yoffset 5
+            ease 0.75 rotate 200 yoffset 10
+        choice:
+            ease 0.75 rotate 205 yoffset 5
+            ease 0.75 rotate 200 yoffset 15
+            ease 0.75 rotate 205 yoffset 5
+            ease 0.75 rotate 200 yoffset 15
         repeat

@@ -119,8 +119,9 @@ init python:
             self.XP_goal = 100
             self.level = 1
 
+            # sprite_layer = [background_characters, foreground, foreground_characters, focused_characters]
             self.sprite_location = stage_center
-            self.sprite_layer = 50
+            self.sprite_layer = 4
 
             self.remaining_actions = 3
             self.max_actions = 3
@@ -407,6 +408,8 @@ init python:
 
                 self.home = "bg_mystique"
                 self.pubes = ""
+
+                self.disguise = None
 
                 self.weekly_schedule = [["bg_teacher", "bg_teacher", "bg_classroom", "bg_mystique"],
                                  ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_mystique"],

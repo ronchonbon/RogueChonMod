@@ -2,9 +2,6 @@ init -1 python hide:
 
     config.developer = True
 
-    config.cache_surfaces = True
-    config.image_cache_size_mb = 2048
-
     config.screen_width = 1920
     config.screen_height = 1080
 
@@ -12,6 +9,10 @@ init -1 python hide:
 
     config.name = "Rogue-Like Chonky Mod"
     config.version = "0.2h"
+
+    config.gl2 = True
+    config.cache_surfaces = True
+    config.image_cache_size_mb = 2048
 
     theme.tv(
         widget = "#6A7183",
@@ -38,7 +39,7 @@ init -1 python hide:
     style.window.top_padding = 25
     style.window.bottom_padding = 25
     style.window.xminimum = 5
-    style.window.xmaximum = 500 #mine
+    style.window.xmaximum = 500
     style.window.yminimum = 5
 
     style.say_who_window.background = Frame("images/Nametag.png", 20,20) #namebox.png
@@ -57,9 +58,9 @@ init -1 python hide:
     style.say_balloon.right_padding = 25
     style.say_balloon.top_padding = 25
     style.say_balloon.bottom_padding = 25
-    style.say_balloon.yminimum = 0              #50
+    style.say_balloon.yminimum = 0
     style.say_balloon.xminimum = 100
-    style.say_balloon.xmaximum = 450 #mine
+    style.say_balloon.xmaximum = 450
     style.say_balloon.font = "ltromatic.ttf"
 
     style.textbox = Style(style.default)
@@ -107,7 +108,7 @@ init -1 python hide:
 
     config.default_afm_time = 10
 
-    config.skip_delay = 75 #I added this, adds delay to skipping to prevent barrelling through
+    config.skip_delay = 75
 
 init python:
 
@@ -117,12 +118,12 @@ init python:
 
     build.include_update = False
 
-    build.classify('**~', None)
-    build.classify('**.bak', None)
-    build.classify('**/.**', None)
-    build.classify('**/#**', None)
-    build.classify('**/thumbs.db', None)
-    build.classify('**/script Remove from Launch.*', None)
+    build.classify("**~", None)
+    build.classify("**.bak", None)
+    build.classify("**/.**", None)
+    build.classify("**/#**", None)
+    build.classify("**/thumbs.db", None)
+    build.classify("**/script Remove from Launch.*", None)
 
     build.classify("**.png", "archive")
     build.classify("**.jpg", "archive")
@@ -130,9 +131,9 @@ init python:
     build.classify("**.rpyc", "archive")
     build.classify("**.TTF", "archive")
 
-    build.documentation('*.html')
-    build.documentation('*.txt')
+    build.documentation("*.html")
+    build.documentation("*.txt")
 
     config.rollback_length = 500
 
-    config.layers = ['backdrop', 'master', 'black', 'transient', 'screens', 'overlay']
+    config.layers = ["background", "master", "black", "transient", "screens", "overlay"]

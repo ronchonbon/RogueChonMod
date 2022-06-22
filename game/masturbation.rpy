@@ -107,7 +107,7 @@ label masturbate(Girl, context = None):
                         jump reset_location
                     else:
                         call fancy_bumping_into_you_disapproval_lines(Girl, "masturbation")
-                        call remove_girl(Girl)
+                        call remove_Girl(Girl)
 
                 return "stop"
 

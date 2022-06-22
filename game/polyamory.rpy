@@ -1504,7 +1504,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
                 ch_s "Oh, yes, Ms. Frost. We would not wish to give the wrong impression."
             else:
                 ch_e "I can't imagine why you would think I would engage in such behavior with a student!"
-            call remove_girl (EmmaX)
+            call remove_Girl (EmmaX)
             "She quickly leaves the room."
             return False
 
@@ -2637,7 +2637,7 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
             $ Party[0].traits.append("ex")
             $ Party[0].broken_up[0] = 5 + Party[0].broken_up[1] + Party[0].cheated_on
             $ Player.Harem.remove(Party[0])
-            call remove_girl (Party[0])
+            call remove_Girl (Party[0])
 
 
     $ Party = []
@@ -3306,7 +3306,7 @@ label Harem_Start(Newbie=0, round2=0):
                     $ Party[Count].broken_up[0] = 5 + Party[Count].broken_up[1] + Party[Count].cheated_on
 
                     $ Player.Harem.remove(Party[Count])
-                    call remove_girl (Party[Count])
+                    call remove_Girl (Party[Count])
                 $ Count += 1
 
 

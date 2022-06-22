@@ -605,11 +605,10 @@ label Date_Ask(Girl=0):
     return
 
 label Date_Stood_Up(Girl=0):
-
     if Girl.location != bg_current:
         "[Girl.name] storms into the room."
         $ Girl.location = bg_current
-        call display_girl (Girl)
+        call show_Girl(Girl)
     else:
         "[Girl.name] turns to you."
     $ Girl.change_face("_confused")
@@ -1161,7 +1160,7 @@ label DateNight(Date_Bonus=[0, 0], Play_Cost=0, Date_Cost=[0, 0], temp_Girls=[])
             "The girls storm off."
         else:
             "[Party[0].tag] storms off."
-        call remove_girl ("all")
+        call remove_Girl ("all")
         $ bg_current = "bg_campus"
         $ Player.Drainword("date")
         $ Player.Drainword("going_on_date")
@@ -4342,7 +4341,7 @@ label Girl_Date_End(Girl=0):
         else:
             "[Girl.name] shoves you out into the hall. You head back to your room."
             $ bg_current = "bg_player"
-        call remove_girl ("all")
+        call remove_Girl ("all")
         $ Player.daily_history.append("post date")
         jump player_room
 
@@ -4486,7 +4485,7 @@ label Girl_Date_Over(Girl=0, Angry=1):
             ch_v "Well, I'm out. . ."
         "[Girl.name] storms out."
     if "study" in Player.recent_history:
-        call remove_girl (Girl)
+        call remove_Girl (Girl)
         return
     if Party[0] == Girl:
         $ Date_Bonus[0] = Date_Bonus[1]
@@ -4499,7 +4498,7 @@ label Girl_Date_Over(Girl=0, Angry=1):
 
     $ Date_Bonus[1] = 0
     $ Date_Cost[1] = 0
-    call remove_girl (Girl)
+    call remove_Girl (Girl)
     if not Party:
 
         jump Date_End

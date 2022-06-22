@@ -59,8 +59,8 @@ layeredimage Mystique_sprite standing normal:
     always:
         "Mystique_head" pos (0.54, 0.32) zoom 0.43
 
-    # always:
-    #     "Mystique_standing_fondling_animations"
+    always:
+        "Mystique_standing_fondling_animations"
 
     anchor (0.5, 0.0) offset (0, 180) zoom 0.55
 
@@ -79,6 +79,9 @@ layeredimage Mystique_head:
     always:
         "images/Mystique_standing/Mystique_standing_mouth[MystiqueX.mouth].png"
 
+    if MystiqueX.spunk["mouth"]:
+        "images/Mystique_standing/Mystique_standing_spunk_mouth[MystiqueX.mouth].png"
+
     if MystiqueX.eyes == "_closed":
         "images/Mystique_standing/Mystique_standing_eyes_closed.png"
     else:
@@ -92,7 +95,7 @@ layeredimage Mystique_head:
 
     anchor (0.5, 0.5)
 
-layeredimage Mystique_sprite standing disguise:
+layeredimage Mystique_sprite standing Raven:
     always:
         "images/Raven_standing/Raven_standing_body.png"
 
@@ -142,9 +145,9 @@ layeredimage Mystique_sprite standing disguise:
         "images/Mystique_standing/Mystique_standing_gloves[MystiqueX.outfit[gloves]]1.png"
 
     always:
-        "Raven_head" pos (0.275, 0.165) zoom 0.43
+        "Raven_head" pos (0.54, 0.32) zoom 0.43
 
-    anchor (0.5, 0.0) offset (0, 180) zoom 0.5
+    anchor (0.5, 0.0) offset (0, 180) zoom 0.55
 
 layeredimage Raven_head:
     always:

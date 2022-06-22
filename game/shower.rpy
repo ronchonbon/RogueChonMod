@@ -465,7 +465,7 @@ label showering:
                     call expression temp_Girls[0].tag + "_First_Bottomless" pass (1)
                     call expression temp_Girls[0].tag + "_First_Topless" pass (1)
                 else:
-                    call remove_girl(temp_Girls[0])
+                    call remove_Girl(temp_Girls[0])
 
                 while temp_Girls[0] in Nearby:
                     $ Nearby.remove(temp_Girls[0])
@@ -539,7 +539,7 @@ label showering:
             if "classcaught" not in EmmaX.history or ((staying_Girls or len(Nearby) >= 2) and "threesome" not in EmmaX.history):
                 "[EmmaX.name] decides to leave immediately."
 
-                call remove_girl(EmmaX)
+                call remove_Girl(EmmaX)
 
                 $ intruding_Girls.remove(EmmaX)
 
@@ -613,7 +613,7 @@ label showering:
 
             $ staying_Girls.remove(EmmaX)
 
-            call remove_girl(EmmaX)
+            call remove_Girl(EmmaX)
 
             $ EmmaX.change_outfit()
 
@@ -628,26 +628,26 @@ label showering:
                 if intruding_Girls[0] not in staying_Girls and intruding_Girls[1] not in staying_Girls:
                     "They both turn right back around."
 
-                    call remove_girl(intruding_Girls[0])
-                    call remove_girl(intruding_Girls[1])
+                    call remove_Girl(intruding_Girls[0])
+                    call remove_Girl(intruding_Girls[1])
 
                     $ intruding_Girls = []
                 elif intruding_Girls[0] not in staying_Girls:
                     "[intruding_Girls[0].name] turns right back around, but [intruding_Girls[1].name] stays."
 
-                    call remove_girl(intruding_Girls[0])
+                    call remove_Girl(intruding_Girls[0])
 
                     $ intruding_Girls.remove(intruding_Girls[0])
                 elif intruding_Girls[1] not in staying_Girls:
                     "[intruding_Girls[1].name] turns right back around, but [intruding_Girls[0].name] stays."
 
-                    call remove_girl(intruding_Girls[1])
+                    call remove_Girl(intruding_Girls[1])
 
                     $ intruding_Girls.remove(intruding_Girls[1])
             elif intruding_Girls[0] not in staying_Girls:
                 "[intruding_Girls[0].name] turns right back around."
 
-                call remove_girl(intruding_Girls[0])
+                call remove_Girl(intruding_Girls[0])
 
                 $ intruding_Girls.remove(intruding_Girls[0])
 

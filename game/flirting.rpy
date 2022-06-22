@@ -2710,7 +2710,7 @@ label Love_You(Girl=0):
                 ch_v "I. . . not now. . ."
 
             "[Girl.name] leaves the room."
-            call remove_girl (Girl)
+            call remove_Girl (Girl)
             jump reset_location
         return
 

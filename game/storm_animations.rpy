@@ -61,29 +61,18 @@ layeredimage Storm_spunk_animations:
         AlphaMask("Storm_spunk_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask.png")
 
 layeredimage Storm_standing_fondling_animations:
-    # if Player.primary_action == "lesbian" or not girl_secondary_action or focused_Girl != StormX:
-    #     Null()
-    # elif Player.primary_action != "sex" and girl_secondary_action in "finger_pussy" and StormX.lust >= 70:
-    #     "Girl_finger_pussy_animation" pos (0.122, 0.583)
-    # elif girl_secondary_action == "fondle_pussy":
-    #     "Girl_fondle_pussy_animation" pos (0.122, 0.569)
-    # elif girl_secondary_action == "fondle_breasts" and (Player.secondary_action in ["fondle_breasts", "suck breasts"]):
-    #     "Girl_fondle_breast_left_animation" pos (0.156, 0.37)
-    # elif girl_secondary_action == "fondle_breasts":
-    #     "Girl_fondle_breast_right_animation" pos (0.083, 0.352)
-#
-#     if second_girl_main_action != "masturbation" or not second_girl_secondary_action or focused_Girl == StormX:
-#         Null()
-#     elif Player.primary_action != "sex" and second_girl_secondary_action == "finger_pussy" and StormX.lust >= 70:
-#         "Girl_finger_pussy_animation" pos (0.122, 0.583)
-#     elif second_girl_secondary_action == "fondle_pussy":
-#         "Girl_fondle_pussy_animation" pos (0.122, 0.569)
-#     elif second_girl_secondary_action == "fondle_breasts" and (Player.secondary_action in ["fondle_breasts", "suck breasts"]):
-#         "Girl_fondle_breast_left_animation" pos (0.156, 0.37)
-#     elif second_girl_secondary_action == "fondle_breasts":
-#         "Girl_fondle_breast_right_animation" pos (0.083, 0.352)
-#
-    if not Player.primary_action or focused_Girl != StormX:
+    if not girl_secondary_action:
+        Null()
+    elif girl_secondary_action == "fondle_breasts":
+        "Storm_fondle_breast_left_animation" pos (0.24, 0.72)
+    elif girl_secondary_action == "fondle_breasts":
+        "Storm_fondle_breast_right_animation" pos (0.078, 0.675)
+    elif girl_secondary_action == "fondle_pussy":
+        "Storm_fondle_pussy_animation" pos (0.17, 0.994)
+    elif girl_secondary_action in "finger_pussy":
+        "Storm_finger_pussy_animation" pos (0.175, 1.05)
+
+    if not Player.primary_action:
         Null()
     elif Player.primary_action == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.12, 1.2)
@@ -98,7 +87,7 @@ layeredimage Storm_standing_fondling_animations:
     elif Player.primary_action == "eat_pussy":
         "Zero_eat_pussy_animation" pos (0.185, 1.07)
 
-    if not Player.secondary_action or focused_Girl != StormX:
+    if not Player.secondary_action:
         Null()
     elif Player.secondary_action == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.12, 1.2)
@@ -112,48 +101,6 @@ layeredimage Storm_standing_fondling_animations:
         "Zero_finger_pussy_animation" pos (0.155, 1.17)
     elif Player.secondary_action == "eat_pussy":
         "Zero_eat_pussy_animation" pos (0.185, 1.07)
-#
-#     if not second_girl_main_action or focused_Girl != StormX:
-#         Null()
-#     elif second_girl_main_action == "fondle_breasts" and Player.primary_action in ["fondle_breasts", "suck_breasts"]:
-#         "Girl_fondle_breast_left_animation" pos (0.156, 0.37)
-#     elif second_girl_main_action == "fondle_breasts":
-#         "Girl_fondle_breast_right_animation" pos (0.083, 0.352)
-#     elif second_girl_main_action == "suck_breasts" and Player.primary_action in ["fondle_breasts", "suck_breasts"]:
-#         "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
-#     elif second_girl_main_action == "suck_breasts" and Player.secondary_action in ["fondle_breasts", "suck_breasts"]:
-#         "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
-#     elif second_girl_main_action == "suck_breasts":
-#         "Zero_suck_breasts_right_animation" pos (0.083, 0.37)
-#     elif second_girl_main_action == "fondle_pussy" and Player.primary_action != "sex" and StormX.lust >= 70:
-#         "Girl_finger_pussy_animation" pos (0.122, 0.583)
-#     elif second_girl_main_action == "fondle_pussy" and Player.secondary_action != "sex" and StormX.lust >= 70:
-#         "Girl_finger_pussy_animation" pos (0.122, 0.583)
-#     elif second_girl_main_action == "fondle_pussy":
-#         "Girl_fondle_pussy_animation" pos (0.122, 0.569)
-#     elif second_girl_main_action == "eat_pussy":
-#         "Zero_eat_pussy_animation" pos (0.13, 0.62)
-#
-#     if Player.primary_action != "lesbian" or not second_girl_secondary_action or focused_Girl == StormX:
-#         Null()
-#     elif second_girl_secondary_action == "fondle_breasts" and Player.primary_action in ["fondle_breasts", "suck_breasts"]:
-#         "Girl_fondle_breast_left_animation" pos (0.156, 0.37)
-#     elif second_girl_secondary_action == "fondle_breasts" and Player.secondary_action in ["fondle_breasts", "suck_breasts"]:
-#         "Girl_fondle_breast_left_animation" pos (0.156, 0.37)
-#     elif second_girl_secondary_action == "fondle_breasts":
-#         "Girl_fondle_breast_right_animation" pos (0.083, 0.352)
-#     elif second_girl_secondary_action == "suck_breasts" and Player.primary_action in ["fondle_breasts", "suck_breasts"]:
-#         "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
-#     elif second_girl_secondary_action == "suck_breasts" and Player.secondary_action in ["fondle_breasts", "suck_breasts"]:
-#         "Zero_suck_breasts_left_animation" pos (0.146, 0.38)
-#     elif second_girl_secondary_action == "suck_breasts":
-#         "Zero_suck_breasts_right_animation" pos (0.083, 0.37)
-#     elif second_girl_secondary_action == "fondle_pussy" and Player.primary_action != "sex" and StormX.lust >= 70:
-#         "Girl_finger_pussy_animation" pos (0.122, 0.583)
-#     elif second_girl_secondary_action == "fondle_pussy":
-#         "Girl_fondle_pussy_animation" pos (0.122, 0.569)
-#     elif second_girl_secondary_action == "eat_pussy":
-#         "Zero_eat_pussy_animation" pos (0.13, 0.62)
 
 image Storm_handjob_under_hand_animation0:
     "Storm_handjob_under"

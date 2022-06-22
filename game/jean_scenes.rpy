@@ -5,7 +5,7 @@ label JeanMeet:
 
     $ JeanX.name = "???"
     $ JeanX.add_word(1,"showered","showered", 0, 0)
-    call remove_girl ("all")
+    call remove_Girl ("all")
     call Jeanname (1)
 
 
@@ -335,59 +335,15 @@ label JeanMeet:
     $ round -= 10
     call shift_focus (RogueX)
     $ JeanX.location = "hold"
-    call set_the_scene
-    $ JeanX.outfit_name = "casual1"
-    $ JeanX.today_outfit_name = "casual1"
+    call remove_Girl(JeanX, transition = easeoutleft)
+    
     $ JeanX.change_outfit("casual1")
 
     "She collects her things and leaves the room."
     ch_p "Who the hell was that? . ."
-    # $ EmmaX.change_outfit("casual1")
-    # show JeanMFGrey zorder 150:
-    #     pos (-200, 100)
-    #     rotate 0
-    #     parallel:
-    #         ease .5 pos (350, 100)
-    #     parallel:
-    #         pause .4
-    #         ease .1 rotate 10
-    #         ease .1 rotate 0
-    #     block:
-    #         ease .1 pos (350, 105)
-    #         ease .1 pos (350, 100)
-    #         repeat 4
-    # ". . ."
-    # hide JeanMFGrey with easeoutleft
-    # $ EmmaX.change_face("_angry", 1,eyes = "_leftside")
-    # show Emma_sprite standing zorder 25 at sprite_location(-100)
-    # show Emma_sprite standing zorder 25 at sprite_location(500) with easeinleft
-    # call shift_focus (EmmaX)
-    # ch_e "I mean, that was Jean_sprite mother fucking Grey."
+
     $ JeanX.name = "Jean"
-    # pause .1
-    # ch_e "She can be. . . a bit much."
-    # menu:
-    #     "You said it.":
-    #         $ EmmaX.change_face("_sly")
-    #         $ EmmaX.change_stat("love", 90, 5)
-    #         $ EmmaX.change_stat("obedience", 60, 3)
-    #         $ EmmaX.change_stat("inhibition", 60, 2)
-    #     "I guess.":
-    #         $ EmmaX.change_face("_sly")
-    #         $ EmmaX.change_stat("obedience", 70, 5)
-    #     "Pretty hot though.":
-    #         $ EmmaX.change_face("_angry", 1)
-    #         $ EmmaX.change_stat("love", 90, -5)
-    #         $ EmmaX.change_stat("obedience", 40, 3)
-    #         $ EmmaX.change_stat("obedience", 80, 7)
-    #         ch_e "You're playing with fire, [EmmaX.player_petname]."
-    # ch_e "Anyway, I was just passing through."
-    # $ EmmaX.change_face("_angry", 1,eyes = "_side")
-    # ch_e "Do try to avoid that relentless black hole of drama. . ."
-    # show Emma_sprite standing at sprite_location(-100) with easeinleft
-    # pause 0.2
-    # call remove_girl (EmmaX)
-    # call shift_focus (RogueX)
+
     call set_the_scene
     return
 
@@ -412,7 +368,7 @@ label Jean_Like:
         $ JeanX.location = bg_current
         "[JeanX.name] walks up to you."
     call set_the_scene (0)
-    call display_girl (JeanX)
+    call show_Girl (JeanX)
     call clear_the_room (JeanX)
     call set_the_scene
     $ JeanX.daily_history.append("relationship")
@@ -537,7 +493,7 @@ label Jean_Love:
         $ JeanX.location = bg_current
         "[JeanX.name] walks up to you."
     call set_the_scene (0)
-    call display_girl (JeanX)
+    call show_Girl (JeanX)
     call clear_the_room (JeanX)
     call set_the_scene
     $ JeanX.daily_history.append("relationship")
@@ -756,7 +712,7 @@ label Jean_Sub:
         $ JeanX.location = bg_current
         "[JeanX.name] walks up to you."
     call set_the_scene (0)
-    call display_girl (JeanX)
+    call show_Girl (JeanX)
     call clear_the_room (JeanX)
     call set_the_scene
     $ JeanX.daily_history.append("relationship")
@@ -897,7 +853,7 @@ label Jean_Master:
         $ JeanX.location = bg_current
         "[JeanX.name] walks up to you."
     call set_the_scene (0)
-    call display_girl (JeanX)
+    call show_Girl (JeanX)
     call clear_the_room (JeanX)
     call set_the_scene
     $ JeanX.daily_history.append("relationship")

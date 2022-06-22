@@ -883,9 +883,9 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
             else:
                 if line or Passline:
 
-                    call display_girl (temp_Girls[0], 0, 0, 950, 150)
+                    call show_Girl(temp_Girls[0])
                 else:
-                    call display_girl (temp_Girls[0], 0, 0, 800, 150)
+                    call show_Girl(temp_Girls[0])
                 if temp_Girls[0].change_outfit("swimwear"):
 
                     $ line = "" if Swimmers and not Passline else "s"
@@ -940,7 +940,14 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
     call RoomStatboost ("love", 80, 3)
     call RoomStatboost ("lust", 30, 5)
     $ round -= 20 if round >= 20 else round
-    call set_the_scene (1, 0, 0)
+
+    $ temp_Girls = Swimmers[:]
+
+    while temp_Girls:
+        call show_Girl(temp_Girls[0], sprite_layer = 4, transformation = instant_reset, transition = dissolve)
+
+        $ temp_Girls.remove(temp_Girls[0])
+
     "You all get out of the pool and rest for a bit."
 
     return
@@ -959,63 +966,22 @@ label SwimSuit(temp_Girls=[]):
         $ temp_Girls.remove(temp_Girls[0])
     return
 
-label ShowPool(temp_Girls=[], PoolLoc=0):
-
-
-
-    while temp_Girls:
-        if temp_Girls[0].location == bg_current:
-            $ temp_Girls[0].add_word(0,"swim","swim", 0, 0)
-            $ temp_Girls[0].wet = 1
+label ShowPool(Girls):
+    while Girls:
+        if Girls[0].location == bg_current:
+            $ Girls[0].add_word(0,"swim","swim", 0, 0)
+            $ Girls[0].wet = 1
 
             python:
-                for key in temp_Girls[0].spunk.keys():
-                    temp_Girls[0].spunk[key] = False
+                for key in Girls[0].spunk.keys():
+                    Girls[0].spunk[key] = False
 
-            $ PoolLoc = 500 if len(temp_Girls) > 1 else 650
-            if temp_Girls[0] == RogueX:
-                show Rogue_sprite standing zorder 50 at Pool_Bob(PoolLoc)
-            elif temp_Girls[0] == KittyX:
-                show Kitty_sprite standing zorder 50 at Pool_Bob(PoolLoc)
-            elif temp_Girls[0] == EmmaX:
-                show Emma_sprite standing zorder 50 at Pool_Bob(PoolLoc)
-            elif temp_Girls[0] == LauraX:
-                show Laura_sprite standing zorder 50 at Pool_Bob(PoolLoc)
-            elif temp_Girls[0] == JeanX:
-                show Jean_sprite standing zorder 50 at Pool_Bob(PoolLoc)
-            elif temp_Girls[0] == StormX:
-                show Storm_sprite standing zorder 50 at Pool_Bob(PoolLoc)
-            elif temp_Girls[0] == JubesX:
-                show Jubes_sprite standing zorder 50 at Pool_Bob(PoolLoc)
-        $ temp_Girls.remove(temp_Girls[0])
+            $ x_position = 0.4 if len(Girls) > 1 else 0.5
+
+            show foreground zorder 2
+
+            call show_Girl(Girls[0], sprite_layer = 1, transformation = swimming(x_position), transition = dissolve)
+
+        $ Girls.remove(Girls[0])
 
     return
-
-
-
-
-
-
-
-
-
-
-transform Pool_Bob(PoolLoc=500):
-    subpixel True
-    pos (PoolLoc,450)
-    alpha 1
-    zoom .45
-    offset (0, 0)
-    anchor (0.5, 0.0)
-    xoffset 0
-    yoffset 0
-    choice:
-        yoffset 0
-    choice:
-        pause .3
-    choice:
-        pause .5
-    block:
-        ease 1 yoffset 10
-        ease 1.5 yoffset 0
-        repeat

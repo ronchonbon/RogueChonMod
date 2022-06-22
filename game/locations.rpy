@@ -1070,7 +1070,7 @@ label shower_entry:
             $ first = False
 
         if not approval:
-            call remove_girl(temp_Girls[0])
+            call remove_Girl(temp_Girls[0])
 
             if not someone_left:
                 $ someone_left = True

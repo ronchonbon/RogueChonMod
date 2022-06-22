@@ -1,4 +1,4 @@
-layeredimage Emma_sprite standing:
+layeredimage Emma_sprite standing normal:
     # always:
     #     "images/Emma_standing/Emma_standing_head_reference.png"
 
@@ -207,10 +207,11 @@ layeredimage Emma_head:
     always:
         "images/Emma_standing/Emma_standing_brows[EmmaX.brows].png"
 
+    always:
+        "images/Emma_standing/Emma_standing_mouth[EmmaX.mouth].png"
+
     if EmmaX.spunk["mouth"]:
         "images/Emma_standing/Emma_standing_spunk_mouth[EmmaX.mouth].png"
-    else:
-        "images/Emma_standing/Emma_standing_mouth[EmmaX.mouth].png"
 
     if EmmaX.eyes == "_closed":
         "images/Emma_standing/Emma_standing_eyes_closed.png"

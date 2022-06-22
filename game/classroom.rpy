@@ -2,7 +2,8 @@ label take_class:
     #if day >= 9 and "met" not in EmmaX.history and "traveling" in Player.recent_history and bg_current == "bg_classroom" and weekday < 5:
     if "met" not in EmmaX.history and day >= 1:
         call meet_Emma
-        jump classroom
+
+        return
 
     call set_the_scene
 
@@ -24,7 +25,6 @@ label take_class:
 
         call Frisky_Class (Present[0])
     else:
-
         $ line = line + renpy.random.choice([" It was fairly boring.",
                 " It was a lesson in mutant biology.",
                 " You took a math course.",
@@ -731,7 +731,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         Present[1].voice "Well!"
                         $ Present[1].change_likes(Girl,-4)
                         $ Girl.change_likes(Present[1],-2)
-                        call remove_girl (Present[1])
+                        call remove_Girl (Present[1])
                     elif approval_check(Present[1], 1500) and Present[1].likes[Girl.tag] >= 600:
 
                         $ Present[1].eyes = "_leftside"

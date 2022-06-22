@@ -2,9 +2,165 @@
 errors listed below, and try again.
 
 
-File "game/player_sprites.rpy", line 122: layeredimage statement expects a non-empty block.
-    layeredimage Chibi_animations:
-                ^
+File "game/girl_animations.rpy", line 14: end of line expected.
+    show Rogue_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+                                           ^
+
+File "game/girl_animations.rpy", line 16: end of line expected.
+    show Kitty_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+                                           ^
+
+File "game/girl_animations.rpy", line 19: end of line expected.
+    show Emma_sprite standing diamond onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+                                                  ^
+
+File "game/girl_animations.rpy", line 21: end of line expected.
+    show Emma_sprite standing normal onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+                                                 ^
+
+File "game/girl_animations.rpy", line 25: end of line expected.
+    show Laura_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+                                           ^
+
+File "game/girl_animations.rpy", line 27: end of line expected.
+    show Jean_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+                                          ^
+
+File "game/girl_animations.rpy", line 29: end of line expected.
+    show Storm_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+                                           ^
+
+File "game/girl_animations.rpy", line 31: end of line expected.
+    show Jubes_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+                                           ^
+
+File "game/girl_animations.rpy", line 34: end of line expected.
+    show expression "Mystique_sprite standing " + Girl.disguise onlayer Girl.sprite_layer as Mystique_sprite at sprite_location(Girl.sprite_location, y_position), transformation with transition
+                                                                            ^
+
+File "game/girl_animations.rpy", line 36: end of line expected.
+    show Mystique_sprite standing normal onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation with transition
+                                                     ^
+
+File "game/girl_animations.rpy", line 39: end of line expected.
+    show Rogue_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+                                           ^
+
+File "game/girl_animations.rpy", line 41: end of line expected.
+    show Kitty_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+                                           ^
+
+File "game/girl_animations.rpy", line 44: end of line expected.
+    show Emma_sprite standing diamond onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+                                                  ^
+
+File "game/girl_animations.rpy", line 46: end of line expected.
+    show Emma_sprite standing normal onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+                                                 ^
+
+File "game/girl_animations.rpy", line 50: end of line expected.
+    show Laura_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+                                           ^
+
+File "game/girl_animations.rpy", line 52: end of line expected.
+    show Jean_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+                                          ^
+
+File "game/girl_animations.rpy", line 54: end of line expected.
+    show Storm_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+                                           ^
+
+File "game/girl_animations.rpy", line 56: end of line expected.
+    show Jubes_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+                                           ^
+
+File "game/girl_animations.rpy", line 59: end of line expected.
+    show expression "Mystique_sprite standing " + Girl.disguise onlayer Girl.sprite_layer as Mystique_sprite at sprite_location(Girl.sprite_location, y_position) with transition
+                                                                            ^
+
+File "game/girl_animations.rpy", line 61: end of line expected.
+    show Mystique_sprite standing normal onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+                                                     ^
+
+File "game/girl_animations.rpy", line 64: end of line expected.
+    show Rogue_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+                                           ^
+
+File "game/girl_animations.rpy", line 66: end of line expected.
+    show Kitty_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+                                           ^
+
+File "game/girl_animations.rpy", line 69: end of line expected.
+    show Emma_sprite standing diamond onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+                                                  ^
+
+File "game/girl_animations.rpy", line 71: end of line expected.
+    show Emma_sprite standing normal onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+                                                 ^
+
+File "game/girl_animations.rpy", line 75: end of line expected.
+    show Laura_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+                                           ^
+
+File "game/girl_animations.rpy", line 77: end of line expected.
+    show Jean_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+                                          ^
+
+File "game/girl_animations.rpy", line 79: end of line expected.
+    show Storm_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+                                           ^
+
+File "game/girl_animations.rpy", line 81: end of line expected.
+    show Jubes_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+                                           ^
+
+File "game/girl_animations.rpy", line 84: end of line expected.
+    show expression "Mystique_sprite standing " + Girl.disguise onlayer Girl.sprite_layer as Mystique_sprite at sprite_location(Girl.sprite_location, y_position), transformation
+                                                                            ^
+
+File "game/girl_animations.rpy", line 86: end of line expected.
+    show Mystique_sprite standing normal onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), transformation
+                                                     ^
+
+File "game/girl_animations.rpy", line 89: end of line expected.
+    show Rogue_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+                                           ^
+
+File "game/girl_animations.rpy", line 91: end of line expected.
+    show Kitty_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+                                           ^
+
+File "game/girl_animations.rpy", line 94: end of line expected.
+    show Emma_sprite standing diamond onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+                                                  ^
+
+File "game/girl_animations.rpy", line 96: end of line expected.
+    show Emma_sprite standing normal onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+                                                 ^
+
+File "game/girl_animations.rpy", line 100: end of line expected.
+    show Laura_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+                                           ^
+
+File "game/girl_animations.rpy", line 102: end of line expected.
+    show Jean_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+                                          ^
+
+File "game/girl_animations.rpy", line 104: end of line expected.
+    show Storm_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+                                           ^
+
+File "game/girl_animations.rpy", line 106: end of line expected.
+    show Jubes_sprite standing onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+                                           ^
+
+File "game/girl_animations.rpy", line 109: end of line expected.
+    show expression "Mystique_sprite standing " + Girl.disguise onlayer Girl.sprite_layer as Mystique_sprite at sprite_location(Girl.sprite_location, y_position)
+                                                                            ^
+
+File "game/girl_animations.rpy", line 111: end of line expected.
+    show Mystique_sprite standing normal onlayer Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+                                                     ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Tue Jun 21 18:06:28 2022
+Wed Jun 22 04:02:17 2022

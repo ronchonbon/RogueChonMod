@@ -3,10 +3,11 @@ label prologue:
     $ current_time = "evening"
     $ bg_current = "bg_study"
 
-    scene background onlayer backdrop
+    scene background onlayer background
     scene
 
-    show Chibi_cock
+    show foreground zorder 2
+    show Chibi_cock onlayer screens
 
     if simulation:
         show blue_screen onlayer black
@@ -15,7 +16,7 @@ label prologue:
     "You've arrived in the early evening at the Xavier Institute, where you've been promised a new home."
     "Things have been tough for mutants in the years since Apocalypse's fall, but this sounds like it might be a good deal."
 
-    show Xavier_sprite at sprite_location(stage_left) with dissolve
+    show Xavier_sprite at sprite_location(stage_left) with easeinleft
 
     ch_x "Welcome to the Xavier Institute for Higher Learning. This is a home for all mutants to learn and grow."
     ch_x "My name is Charles Xavier, and I have dedicated my life to helping other mutants such as yourself."
@@ -30,19 +31,15 @@ label prologue:
     $ RogueX.location = "bg_study"
 
     call shift_focus(RogueX)
-
-    $ RogueX.sprite_location = stage_far_right
-
-    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with easeinright
+    call show_Girl(RogueX, x_position = stage_far_right, transition = easeinright)
 
     $ RogueX.change_face("_surprised")
 
     ch_r "What's that Prof? This new kid can negate mutant powers?"
 
     $ RogueX.mouth = "_normal"
-    $ RogueX.sprite_location = stage_right
 
-    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with ease
+    call show_Girl(RogueX, x_position = stage_right, transition = ease)
 
     ch_r "Maybe even my own?"
     ch_x "That is correct, [RogueX.name], though currently, his powers are weak and uncontrolled."
@@ -57,9 +54,7 @@ label prologue:
 
     hide Xavier_sprite with easeoutright
 
-    $ RogueX.sprite_location = stage_center
-
-    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with ease
+    call show_Girl(RogueX, x_position = stage_center, transition = ease)
 
     $ active_Girls.append(RogueX)
 
@@ -107,7 +102,7 @@ label prologue:
             $ RogueX.change_stat("obedience", 200, 30)
             $ RogueX.change_face("_angry")
 
-            show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with vpunch
+            call show_Girl(RogueX, transition = vpunch)
 
             ch_r "Well I never!"
             ch_r "Hmph, I have to give the tour anyways, so get mov'in. . ."
@@ -119,7 +114,7 @@ label tour_start:
 
     $ RogueX.location = "bg_campus"
 
-    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with easeinleft
+    call show_Girl(RogueX, transformation = sunset, transition = easeinleft)
 
     ch_r "This is the campus square. It links up to all the major locations on campus and you'll probably pass through here a lot."
 
@@ -129,7 +124,7 @@ label tour_start:
 
     $ RogueX.location = "bg_player"
 
-    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with easeinleft
+    call show_Girl(RogueX, transition = easeinleft)
 
     ch_r "This will be your room, we each get private rooms now that the campus has been expanded."
 
@@ -159,7 +154,7 @@ label tour_start:
 
     $ RogueX.location = "bg_classroom"
 
-    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with easeinright
+    call show_Girl(RogueX, transition = easeinright)
 
     ch_r "And this is one of our state-of-the-art classrooms."
     ch_r "They're multi-purpose so they can teach almost anything in them."
@@ -171,7 +166,7 @@ label tour_start:
 
     $ RogueX.location = "bg_dangerroom"
 
-    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with easeinleft
+    call show_Girl(RogueX, transition = easeinleft)
 
     ch_r "This is the Danger Room. It's been upgraded to a fully holographic experience, allowing realistic battlefield simulations."
 
@@ -208,7 +203,7 @@ label tour_end:
 
     $ RogueX.location = bg_current
 
-    show Rogue_sprite standing at sprite_location(RogueX.sprite_location) with easeinright
+    call show_Girl(RogueX, transformation = sunset, transition = easeinright)
 
     ch_r "Well, that's the nickel tour, now you know where everything is. . ."
 
@@ -390,7 +385,7 @@ label tour_parting:
 
     $ RogueX.location = "bg_rogue"
 
-    hide Rogue_sprite with easeoutright
+    call hide_Girl(RogueX, transition = easeoutright)
 
     if simulation:
         return False
@@ -465,7 +460,7 @@ label Rogue_BF:
 
     $ RogueX.location = bg_current
     call set_the_scene (0)
-    call display_girl (RogueX)
+    call show_Girl (RogueX)
     call clear_the_room (RogueX)
     call taboo_level
     $ RogueX.daily_history.append("relationship")
@@ -536,7 +531,7 @@ label Rogue_BF:
                 $ RogueX.change_stat("love", 200, -10)
                 ch_r "I get it. That's fine."
                 $ RogueX.event_happened[5] = 20
-                call remove_girl (RogueX)
+                call remove_Girl (RogueX)
                 $ line = 0
                 return
         "Not really.":
@@ -571,7 +566,7 @@ label Rogue_BF_Jerk:
         $ RogueX.player_petnames.append("boyfriend")
         $ achievements.append("I am not your Boyfriend!")
         $ bg_current = "bg_player"
-        call remove_girl (RogueX)
+        call remove_Girl (RogueX)
         call set_the_scene
         return
     if 1 <  RogueX.event_happened[5] < 20:
@@ -588,7 +583,7 @@ label Rogue_BF_Jerk:
         return True
     $ RogueX.location = "bg_rogue"
     $ bg_current = "bg_player"
-    call remove_girl (RogueX)
+    call remove_Girl (RogueX)
     call set_the_scene
     jump reset_location
 
@@ -611,7 +606,7 @@ label Rogue_Love:
     $ bg_current = "bg_rogue"
     $ RogueX.location = bg_current
     call set_the_scene (0)
-    call display_girl (RogueX)
+    call show_Girl (RogueX)
     call clear_the_room (RogueX)
     call taboo_level
     $ RogueX.daily_history.append("relationship")
@@ -734,7 +729,7 @@ label Rogue_Love_Jerk:
         $ achievements.append("One Sided Love")
         $ RogueX.location = "bg_rogue"
         $ bg_current = "bg_player"
-        call remove_girl (RogueX)
+        call remove_Girl (RogueX)
         jump player_room
     if RogueX.event_happened[6] > 1:
         ch_r "Fool me once, shame on you. . . I thought you'd grown."
@@ -745,7 +740,7 @@ label Rogue_Love_Jerk:
         return False
     $ RogueX.location = "bg_rogue"
     $ bg_current = "bg_player"
-    call remove_girl (RogueX)
+    call remove_Girl (RogueX)
     jump player_room
 
 label Rogue_AnnaMarie:
@@ -806,7 +801,7 @@ label Rogue_Sub:
     $ Player.add_word(1,"interruption")
     $ RogueX.location = bg_current
     call set_the_scene (0)
-    call display_girl (RogueX)
+    call show_Girl (RogueX)
     call clear_the_room (RogueX)
     call taboo_level
     $ RogueX.daily_history.append("relationship")
@@ -897,7 +892,7 @@ label Rogue_Sub_Jerk:
         $ achievements.append("Nosiree")
         $ bg_current = "bg_player"
         $ RogueX.location = "bg_rogue"
-        call remove_girl (RogueX)
+        call remove_Girl (RogueX)
         jump player_room
     if RogueX.event_happened[7] > 1:
         ch_r "I thought you may have learned to respect my needs by now."
@@ -908,7 +903,7 @@ label Rogue_Sub_Jerk:
         return
     $ RogueX.location = "bg_rogue"
     $ bg_current = "bg_player"
-    call remove_girl (RogueX)
+    call remove_Girl (RogueX)
     jump player_room
 
 
@@ -924,7 +919,7 @@ label Rogue_Master:
     $ Player.add_word(1,"interruption")
     $ RogueX.location = bg_current
     call set_the_scene (0)
-    call display_girl (RogueX)
+    call show_Girl (RogueX)
     call clear_the_room (RogueX)
     call taboo_level
     $ RogueX.daily_history.append("relationship")
@@ -1020,7 +1015,7 @@ label Rogue_Obed_Jerk:
         $ achievements.append("Heavy is the Head")
         $ bg_current = "bg_player"
         $ RogueX.location = "bg_rogue"
-        call remove_girl (RogueX)
+        call remove_Girl (RogueX)
         jump player_room
     if RogueX.event_happened[8] > 1:
         ch_r "I thought you may have learned to respect my needs by now."
@@ -1031,7 +1026,7 @@ label Rogue_Obed_Jerk:
         return
     $ RogueX.location = "bg_rogue"
     $ bg_current = "bg_player"
-    call remove_girl (RogueX)
+    call remove_Girl (RogueX)
     jump player_room
 
 
@@ -1061,7 +1056,7 @@ label Rogue_Sexfriend:
     $ RogueX.player_petnames.append("sex friend")
     $ RogueX.location = bg_current
     call set_the_scene (0)
-    call display_girl (RogueX)
+    call show_Girl (RogueX)
     call clear_the_room (RogueX)
     call taboo_level
     $ RogueX.change_face("_smile", 1)
@@ -1140,7 +1135,7 @@ label Rogue_Sexfriend_Jerk:
         $ achievements.append("Man of Virtue")
         $ bg_current = "bg_player"
         $ RogueX.location = "bg_rogue"
-        call remove_girl (RogueX)
+        call remove_Girl (RogueX)
         jump player_room
     $ Count = (10*RogueX.event_happened[9])
     $ RogueX.change_stat("inhibition", 200, -Count)
@@ -1152,7 +1147,7 @@ label Rogue_Sexfriend_Jerk:
         $ RogueX.location = "bg_rogue"
     if simulation:
         return
-    call remove_girl (RogueX)
+    call remove_Girl (RogueX)
     jump player_room
 
 
@@ -1175,7 +1170,7 @@ label Rogue_Fuckbuddy:
 
     $ RogueX.location = bg_current
     call set_the_scene (0)
-    call display_girl (RogueX)
+    call show_Girl (RogueX)
     call clear_the_room (RogueX)
     call taboo_level
     $ RogueX.change_face("_bemused", 1)
@@ -1266,7 +1261,7 @@ label Rogue_Fuckbuddy_Jerk:
     else:
         ch_r "Ok, I'm out."
         $ RogueX.location = "bg_rogue"
-    call remove_girl (RogueX)
+    call remove_Girl (RogueX)
     jump player_room
 
 

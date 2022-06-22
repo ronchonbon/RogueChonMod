@@ -371,7 +371,7 @@ label Emma_About(Check=0):
         elif EmmaX.likes[RogueX.tag] >= 400:
             ch_e "She can be a bit of a handful."
         elif EmmaX.likes[RogueX.tag] >= 300:
-            ch_e "I can barely tollerate her disrespectful nature."
+            ch_e "I can barely tolerate her disrespectful nature."
         else:
             ch_e "That swamp rat? What about her?"
     elif Check == KittyX:
@@ -2179,7 +2179,9 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_e "I was heading for a swim."
         else:
             ch_e "I'll see you later."
-        hide Emma_sprite
+
+        call hide_Girl(EmmaX)
+
         return
 
 
@@ -2301,7 +2303,7 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
     $ EmmaX.recent_history.append("followed")
     if not line:
 
-        hide Emma_sprite
+        call hide_Girl(EmmaX)
         call change_out_of_gym_clothes ([EmmaX])
         return
 
@@ -2315,7 +2317,7 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_e "I'm sorry, but how do you think I keep this figure?"
         else:
             ch_e "I'm sorry, I'm just much too busy at the moment."
-        hide Emma_sprite
+        call hide_Girl(EmmaX)
         call change_out_of_gym_clothes ([EmmaX])
         return
 
@@ -2328,7 +2330,7 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         call drain_all_words ("arriving")
         $ EmmaX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
-        hide Emma_sprite
+        call hide_Girl(EmmaX)
         call change_out_of_gym_clothes ([EmmaX])
         if EmmaX.location == "bg_teacher":
             ch_e "I'll see you there."

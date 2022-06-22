@@ -100,7 +100,6 @@ init -1:
     default Gwen_name = "????"
 
     default door_locked = False
-    default entering = False
 
     default simulation = False
 
@@ -198,45 +197,52 @@ label start:
 
     $ Player.cash = 100000
 
-    $ bg_current = "bg_emma"
-    $ time_index = 2
-    $ current_time = "evening"
-
-    scene background onlayer backdrop
-    scene
-
-    python:
-        for G in all_Girls:
-            active_Girls.append(G)
-
-    #         G.change_face("_sexy")
-    #         G.change_outfit("nude")
-    #         G.mouth = "_smirk"
-    #         G.grool = 2
-    #         G.spunk["mouth"] = True
-    #         G.spunk["pussy"] = True
-    #         G.spunk["anus"] = True
+    # $ bg_current = "bg_campus"
+    # $ time_index = 1
+    # $ current_time = "midday"
     #
-    # $ Player.sprite = True
-    # $ show_feet = False
-    # $ action_speed = 2
-    # $ Player.cock_position = "anal"
-    # $ Player.primary_action = "fondle_breasts"
-    # $ Player.secondary_action = "fondle_breasts"
-
-    $ MystiqueX.change_outfit("supervillain")
-
-    show Rogue_sprite standing at sprite_location(0.15)
-    show Kitty_sprite standing at sprite_location(0.25)
-    show Emma_sprite standing at sprite_location(0.35)
-    show Laura_sprite standing at sprite_location(0.45)
-    show Jean_sprite standing at sprite_location(0.55)
-    show Storm_sprite standing at sprite_location(0.65)
-    show Jubes_sprite standing at sprite_location(0.75)
-    show Mystique_sprite standing normal at sprite_location(0.85)
-
-    ""
-
+    # scene background onlayer background
+    # scene
+    #
+    # show foreground zorder 50
+    # show Chibi_cock onlayer screens
+    #
+    # $ MystiqueX.change_outfit("supervillain")
+    #
+    # python:
+    #     for G in all_Girls:
+    #         active_Girls.append(G)
+    #
+    #         # G.change_face("_surprised", blushing = 2)
+    #         # G.change_outfit("nude")
+    #         # G.mouth = "_smirk"
+    #         # G.grool = 2
+    #         # G.spunk["mouth"] = True
+    #         # G.spunk["pussy"] = True
+    #         # G.spunk["anus"] = True
+    #
+    # # $ Player.sprite = True
+    # # $ show_feet = False
+    # # $ action_speed = 2
+    # # $ Player.cock_position = "anal"
+    # # $ Player.primary_action = "fondle_breasts"
+    # # $ Player.secondary_action = "fondle_thighs"
+    #
+    # # $ girl_secondary_action = "finger_pussy"
+    #
+    # $ offset = 0.15
+    #
+    # $ temp_Girls = all_Girls[:]
+    #
+    # while temp_Girls:
+    #     call show_Girl(temp_Girls[0], offset)
+    #
+    #     $ offset += 0.1
+    #
+    #     $ temp_Girls.remove(temp_Girls[0])
+    #
+    # ""
+    
     $ all_Girls.remove(MystiqueX)
     $ active_Girls = []
     $ focused_Girl = RogueX

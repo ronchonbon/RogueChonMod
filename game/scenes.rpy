@@ -1451,7 +1451,7 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
         $ bg_current = "bg_player"
         jump reset_location
     else:
-        call remove_girl (Girl)
+        call remove_Girl (Girl)
     return
 
 label NoFap(Girl=0, TabStore=taboo, counter=0):

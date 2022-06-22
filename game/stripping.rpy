@@ -1435,7 +1435,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0, 0],
 
     while len(Present) > 2:
 
-        call remove_girl (Present[2])
+        call remove_Girl (Present[2])
 
 
     if len(Present) == 2:
@@ -1528,7 +1528,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0, 0],
                 return
             else:
                 ch_e "I should really be going."
-                call remove_girl (EmmaX)
+                call remove_Girl (EmmaX)
 
     if "stripping" in Present[0].daily_history and approval_check(Present[0], 500, taboo_modifier = 3):
         $ line = renpy.random.choice(["You liked the show earlier?",
@@ -1552,20 +1552,9 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0, 0],
     $ counter = len(Present)
     while counter:
         $ counter -= 1
-        if Present[counter] == RogueX:
-            show Rogue_sprite standing at Girl_Dance1(RogueX)
-        elif Present[counter] == KittyX:
-            show Kitty_sprite standing at Girl_Dance1(KittyX)
-        elif Present[counter] == EmmaX:
-            show Emma_sprite standing at Girl_Dance1(EmmaX)
-        elif Present[counter] == LauraX:
-            show Laura_sprite standing at Girl_Dance1(LauraX)
-        elif Present[counter] == JeanX:
-            show Jean_sprite standing at Girl_Dance1(JeanX)
-        elif Present[counter] == StormX:
-            show Storm_sprite standing at Girl_Dance1(StormX)
-        elif Present[counter] == JubesX:
-            show Jubes_sprite standing at Girl_Dance1(JubesX)
+
+        call show_Girl(Present[counter], transformation = Girl_Dance1(Present[counter]))
+
         $ Present[counter].recent_history.append("stripping")
         $ Present[counter].daily_history.append("stripping")
         $ Present[counter].action_counter["striptease"] += 1
@@ -1641,7 +1630,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0, 0],
                 return
             else:
                 ch_e "I should really be going."
-                call remove_girl (EmmaX)
+                call remove_Girl (EmmaX)
 
 label Group_Stripping:
     while round >= 10 and Present:
@@ -2127,21 +2116,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 jump Group_Strip_End
 
         call reset_position(Girl)
-
-        if Girl == RogueX:
-            show Rogue_sprite standing at Girl_Dance1(Girl)
-        elif Girl == KittyX:
-            show Kitty_sprite standing at Girl_Dance1(Girl)
-        elif Girl == EmmaX:
-            show Emma_sprite standing at Girl_Dance1(Girl)
-        elif Girl == LauraX:
-            show Laura_sprite standing at Girl_Dance1(Girl)
-        elif Girl == JeanX:
-            show Jean_sprite standing at Girl_Dance1(Girl)
-        elif Girl == StormX:
-            show Storm_sprite standing at Girl_Dance1(Girl)
-        elif Girl == JubesX:
-            show Jubes_sprite standing at Girl_Dance1(Girl)
+        call display_Girl(Girl, transformation = Girl_Dance1(Girl))
 
         "[Girl.name] begins to dance again."
 
@@ -2327,7 +2302,7 @@ label Strip_Ultimatum:
                     ch_v "I'd better not break your face either. . ."
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")
-                call remove_girl (Girl)
+                call remove_Girl (Girl)
                 return
             $ approval_bonus += 20
             $ Girl.forced += 1
@@ -2374,7 +2349,7 @@ label Strip_Ultimatum:
                     ch_v "Oh, I can, but you're not goinna see it. . ."
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")
-                call remove_girl (Girl)
+                call remove_Girl (Girl)
                 return
             $ Girl.change_stat("love", 200, -10)
             $ Girl.change_stat("obedience", 50, 3)
@@ -2399,20 +2374,8 @@ label Strip_Ultimatum:
     if "ultimatum" not in Girl.daily_history:
         $ Girl.daily_history.append("ultimatum")
 
-    if Girl == RogueX:
-        show Rogue_sprite standing at Girl_Dance1(Girl)
-    elif Girl == KittyX:
-        show Kitty_sprite standing at Girl_Dance1(Girl)
-    elif Girl == EmmaX:
-        show Emma_sprite standing at Girl_Dance1(Girl)
-    elif Girl == LauraX:
-        show Laura_sprite standing at Girl_Dance1(Girl)
-    elif Girl == JeanX:
-        show Jean_sprite standing at Girl_Dance1(Girl)
-    elif Girl == StormX:
-        show Storm_sprite standing at Girl_Dance1(Girl)
-    elif Girl == JubesX:
-        show Jubes_sprite standing at Girl_Dance1(Girl)
+    call show_Girl(Girl, transformation = Girl_Dance1(Girl))
+    
     "[Girl.name] begins to dance again."
     return
 

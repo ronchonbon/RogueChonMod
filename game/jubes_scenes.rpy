@@ -130,7 +130,9 @@ label Jubes_Meet:
                 $ Count = 1
         $ Count -= 1
     $ JubesX.blushing = "_blush1"
-    show Jubes_sprite standing at sprite_location(JubesX.sprite_location,50)
+
+    call show_Girl(JubesX)
+
     $ Count = 3
     while Count > 0:
         menu:
@@ -534,8 +536,8 @@ label Jubes_Meet:
 
     $ JubesX.add_word(1, 0, 0, 0,"met")
     $ active_Girls.append(JubesX) if JubesX not in active_Girls else active_Girls
-    hide Jubes_sprite with easeoutleft
-    call remove_girl (JubesX)
+    call hide_Girl(JubesX, transition = easeoutleft)
+    call remove_Girl (JubesX)
     "[JubesX.name] leaves the room, you might as well get some sleep. . ."
     return
 
@@ -639,8 +641,8 @@ label Jubes_Sunshine:
     $ JubesX.change_face("_smile", 1)
     ch_v "Anyway, I just wanted to say \"thank you,\" this is great!"
     $ JubesX.add_word(1, 0, 0, 0,"sunshine")
-    hide Jubes_sprite with easeoutright
-    call remove_girl (JubesX)
+    call hide_Girl(JubesX, transition = easeoutright)
+    call remove_Girl (JubesX)
     "[JubesX.name] dashes off, and you continue on your way. . ."
     return
 
@@ -1114,7 +1116,7 @@ label Jubes_BF(temp_Girls=[]):
             "[JubesX.name] turns towards you and motions that she wants to speak to you alone."
     $ JubesX.drain_word("asked_to_meet")
     call set_the_scene (0)
-    call display_girl (JubesX)
+    call show_Girl (JubesX)
     "She looks a bit concerned and you can tell she's a bit anxious about whatever she has to say."
     call taboo_level
     call clear_the_room (JubesX)
@@ -1318,7 +1320,7 @@ label Jubes_BF(temp_Girls=[]):
             ch_v "I should. . . leave."
             "[JubesX.name] wanders off in a bit of a daze."
             $ JubesX.event_happened[5] = 20
-            call remove_girl (JubesX)
+            call remove_Girl (JubesX)
             $ line = 0
             return
 
@@ -1372,7 +1374,7 @@ label Jubes_BF(temp_Girls=[]):
                     $ line = "no"
             if line == "no":
                 $ JubesX.event_happened[5] = 20
-                call remove_girl (JubesX)
+                call remove_Girl (JubesX)
                 $ line = 0
                 return
 
@@ -1398,7 +1400,7 @@ label Jubes_BF(temp_Girls=[]):
                 $ JubesX.change_face("_confused", 1)
                 ch_v "Hmm, get back to me, I guess?"
                 $ JubesX.event_happened[5] = 20
-                call remove_girl (JubesX)
+                call remove_Girl (JubesX)
                 $ line = 0
                 return
         call Haremchange_stat (JubesX, 900, 20)
@@ -1473,7 +1475,9 @@ label Jubes_Cleanhouse:
             $ JubesX.change_stat("obedience", 80, 10)
             $ JubesX.change_stat("inhibition", 80, 10)
             $ JubesX.blushing = "_blush2"
-            show Jubes_sprite standing with vpunch
+
+            call show_Girl(JubesX, transition = vpunch)
+
             "She clocks you one."
             "That was fair."
             $ JubesX.blushing = "_blush1"
@@ -1528,7 +1532,7 @@ label Jubes_Sub:
 
     $ JubesX.location = bg_current
     call set_the_scene (0)
-    call display_girl (JubesX)
+    call show_Girl (JubesX)
     call clear_the_room (JubesX)
     call set_the_scene
     call taboo_level
@@ -1774,15 +1778,15 @@ label Jubes_Sub:
         $ JubesX.player_petnames.append("sir")
 
     elif line == "rude":
-        call remove_girl (JubesX)
+        call remove_Girl (JubesX)
         if not simulation:
             $ renpy.pop_call()
         "[JubesX.name] knocks her way past you and storms off."
     elif line == "embarrassed":
         $ JubesX.change_face("_sadside", 2)
         ch_v "Huh, ok, if you're not interested. . ."
-        hide Jubes_sprite with easeoutright
-        call remove_girl (JubesX)
+        call hide_Girl(JubesX, transition = easeoutright)
+        call remove_Girl (JubesX)
         if not simulation:
             $ renpy.pop_call()
         "[JubesX.name] heads out of the room."
@@ -1866,8 +1870,8 @@ label Jubes_Sub_Asked:
     $ JubesX.daily_history.append("asked sub")
     if line == "rude":
 
-        hide Jubes_sprite with easeoutright
-        call remove_girl (JubesX)
+        call hide_Girl(JubesX, transition = easeoutright)
+        call remove_Girl (JubesX)
         $ JubesX.recent_history.append("_angry")
         if not simulation:
             $ renpy.pop_call()
@@ -1901,7 +1905,7 @@ label Jubes_Master:
 
     $ JubesX.location = bg_current
     call set_the_scene (0)
-    call display_girl (JubesX)
+    call show_Girl (JubesX)
     call clear_the_room (JubesX)
     call set_the_scene
     $ JubesX.daily_history.append("relationship")
@@ -2051,16 +2055,16 @@ label Jubes_Master:
     $ JubesX.history.append("master")
     if line == "rude":
         $ JubesX.recent_history.append("_angry")
-        hide Jubes_sprite with easeoutright
-        call remove_girl (JubesX)
+        call hide_Girl(JubesX, transition = easeoutright)
+        call remove_Girl (JubesX)
         if not simulation:
             $ renpy.pop_call()
         "[JubesX.name] stomps out of the room."
     elif line == "embarrassed":
         ch_v "Ok, fine then."
         ch_v "And here I was, about to \"elevate your clearance.\""
-        hide Jubes_sprite with easeoutright
-        call remove_girl (JubesX)
+        call hide_Girl(JubesX, transition = easeoutright)
+        call remove_Girl (JubesX)
         if not simulation:
             $ renpy.pop_call()
         "[JubesX.name] brushes past you on her way out."
@@ -2231,12 +2235,12 @@ label Jubes_Fuckbuddy:
     $ JubesX.outfit_name = "casual1"
     $ JubesX.today_outfit_name = "casual1"
     $ JubesX.change_outfit("casual1")
-    call display_girl (JubesX)
+    call show_Girl (JubesX)
     call taboo_level
     $ Player.primary_action = "masturbation"
     $ girl_secondary_action = "fondle_pussy"
     $ JubesX.change_face("_sly",2,mouth = "_lipbite")
-    "[JubesX.name] is_sprite standing in the doorway, with her hand down her pants."
+    "[JubesX.name] is standing in the doorway, with her hand down her pants."
     "You can tell she's been masturbating furiously, her scent is overpowering."
     $ Player.primary_action = None
     $ girl_secondary_action = None

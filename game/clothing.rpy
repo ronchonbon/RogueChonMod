@@ -3708,19 +3708,9 @@ label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
 
 
 
-label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
-
-
-
-
-
-
-    $ Girl = check_girl(Girl)
-
+label outfitShame(Girl, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
     if not Check and not taboo and not Girl.taboo and Custom != 20:
-
         if Girl.clothing[9] and bg_current in personal_rooms:
-
             if "halloween" not in Player.daily_history:
                 call Private_outfit(Girl)
         return
@@ -3736,8 +3726,6 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
     else:
         $ Count = 0
 
-
-
     if Custom == 20 and Girl.top_pulled_up:
         $ Count = 0
     elif Girl.top_number() >= 5:
@@ -3748,8 +3736,6 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
         $ Count += 10
     elif Girl.top_number() >= 2:
         $ Count += 5
-
-
 
     if Girl.outfit["piercings"] and Count <= 10:
         $ Count = -5
@@ -3841,13 +3827,8 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
     elif Girl == JeanX:
         if Count >= 10:
             ch_j "You must really enjoy these tits. . ."
-
-
         elif Count >= 5:
             ch_j "I've kinda got my tits out here. . ."
-
-
-
         elif (approval_check(Girl, 2700, taboo_modifier=0) or approval_check(Girl, 950, "I", taboo_modifier=0)):
             ch_j ". . ."
         else:
@@ -3882,7 +3863,6 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
         else:
             $ Girl.change_face("_bemused", 1)
             ch_v "Well, I wouldn't go anywhere with my tits out like this. . ."
-
 
     $ Tempshame -= Count
     $ Count = 0

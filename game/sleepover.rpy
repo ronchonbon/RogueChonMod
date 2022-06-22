@@ -44,7 +44,7 @@ label sleepover(line=0):
                 if temp_Girls[0] not in Party:
 
                     "[temp_Girls[0].name] probably wouldn't appreciate you staying over, you head back to your own room."
-                    call remove_girl ("all")
+                    call remove_Girl ("all")
                     jump return_player_to_room
                 if temp_Girls[0] != Party[0]:
                     $ Party.reverse()
@@ -107,7 +107,7 @@ label sleepover(line=0):
                 jump return_player_to_room
             else:
                 ch_e "I should probably get going, we wouldn't want any rumors to spread."
-                call remove_girl (EmmaX)
+                call remove_Girl (EmmaX)
         elif len(Party) >= 2 and "threesome" not in EmmaX.history:
 
             if (bg_current == EmmaX.home or bg_current == "bg_player") and approval_check(EmmaX, 1100, "LI"):
@@ -116,12 +116,12 @@ label sleepover(line=0):
                 ch_e "[Party[1].name] dear, I need a moment with [Player.name], but you can leave."
                 $ Party[1].change_face("_confused", 1)
                 Party[1].voice "Oh, ok. . ."
-                call remove_girl (Party[1])
+                call remove_Girl (Party[1])
                 ch_e "Sorry about that, but I had to discuss something with you in private."
             else:
 
                 ch_e "Yes, I really should be leaving, don't let me bother you two."
-                call remove_girl (EmmaX)
+                call remove_Girl (EmmaX)
             if "sleeptime" not in EmmaX.history:
                 $ EmmaX.history.append("sleeptime")
         if not Party or (EmmaX not in Party and bg_current == EmmaX.home):
@@ -373,7 +373,7 @@ label sleepover(line=0):
             jump return_player_to_room
         else:
 
-            call remove_girl (Party[0])
+            call remove_Girl (Party[0])
             call sleepover
             return
 
@@ -616,7 +616,7 @@ label sleepover(line=0):
     if bg_current != "bg_player" and bg_current != Party[0].home:
 
         "You probably shouldn't sleep here, you head back to your own room."
-        call remove_girl ("all")
+        call remove_Girl ("all")
         $ renpy.pop_call()
         jump player_room
 
@@ -634,7 +634,7 @@ label return_player_to_room:
         if bg_current != temp_Girls[0].home and temp_Girls[0].location == bg_current:
             "[temp_Girls[0].name] heads out."
 
-            $ temp_Girls[0].location = temp_Girls[0].home
+            call remove_Girl(temp_Girls[0])
 
         $ temp_Girls.remove(temp_Girls[0])
 
@@ -651,7 +651,7 @@ label sleepover_Morning:
     $ temp_Girls = all_Girls[:]
     while temp_Girls:
         if temp_Girls[0].location == bg_current and temp_Girls[0] not in Party:
-            call remove_girl (temp_Girls[0])
+            call remove_Girl (temp_Girls[0])
         $ temp_Girls.remove(temp_Girls[0])
 
     call shift_focus (Party[0])
@@ -1568,27 +1568,8 @@ label sleepover_MorningWood:
     $ Player.recent_history.append("cockout")
 
     if Partner:
-        if Partner == RogueX:
-            show Rogue_sprite standing:
-                pos (900,250)
-        elif Partner == KittyX:
-            show Kitty_sprite standing:
-                pos (900,250)
-        elif Partner == EmmaX:
-            show Emma_sprite standing:
-                pos (900,250)
-        elif Partner == LauraX:
-            show Laura_sprite standing:
-                pos (900,250)
-        elif Partner == JeanX:
-            show Jean_sprite standing:
-                pos (900,250)
-        elif Partner == StormX:
-            show Storm_sprite standing:
-                pos (900,250)
-        elif Partner == JubesX:
-            show Jubes_sprite standing:
-                pos (900,250)
+        call show_Girl(Partner, x_position = 0.85, y_position = 0.33)
+
         $ Partner.recent_history.append("threesome")
 
     $ Party[0].recent_history.append("blanket")

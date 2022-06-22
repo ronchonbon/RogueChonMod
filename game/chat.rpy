@@ -1011,7 +1011,7 @@ label dismiss_girl(Girl):
             return
 
     if not leaving and bg_current in ["bg_campus", "bg_classroom", "bg_dangerroom"]:
-        call remove_girl(Girl, 1, 1)
+        call remove_Girl(Girl, 1, 1)
     elif not leaving:
         menu:
             extend ""
@@ -1155,7 +1155,7 @@ label dismiss_girl(Girl):
         else:
             $ Girl.location = Girl.home
 
-        call reset_position(Girl)
+        call remove_Girl(Girl)
 
         "[Girl.name] heads out."
 

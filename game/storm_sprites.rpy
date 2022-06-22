@@ -202,10 +202,11 @@ layeredimage Storm_head:
     always:
         "images/Storm_standing/Storm_standing_brows[StormX.brows].png"
 
+    always:
+        "images/Storm_standing/Storm_standing_mouth[StormX.mouth].png"
+
     if StormX.spunk["mouth"]:
         "images/Storm_standing/Storm_standing_spunk_mouth[StormX.mouth].png"
-    else:
-        "images/Storm_standing/Storm_standing_mouth[StormX.mouth].png"
 
     if StormX.eyes == "_closed":
         "images/Storm_standing/Storm_standing_eyes_closed.png"

@@ -2019,7 +2019,7 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                 ch_v "I'm headed out."
         else:
             ch_v "I'm headed out, later."
-        hide Jubes_sprite
+        call hide_Girl(JubesX)
         return
 
 
@@ -2147,7 +2147,7 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
     $ JubesX.recent_history.append("followed")
     if not line:
 
-        hide Jubes_sprite
+        call hide_Girl(JubesX)
         call change_out_of_gym_clothes ([JubesX])
         return
 
@@ -2159,7 +2159,7 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_v "Sorry [JubesX.player_petname], I need the exercise."
         else:
             ch_v "Sorry, I'm kinda busy."
-        hide Jubes_sprite
+        call hide_Girl(JubesX)
         call change_out_of_gym_clothes ([JubesX])
         return
 
@@ -2172,7 +2172,7 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         call drain_all_words ("arriving")
         $ JubesX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
-        hide Jubes_sprite
+        call hide_Girl(JubesX)
         call change_out_of_gym_clothes ([JubesX])
         if JubesX.location == "bg_classroom":
             ch_v "Ok, get a move on then."

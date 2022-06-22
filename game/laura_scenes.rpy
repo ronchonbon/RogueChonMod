@@ -17,7 +17,6 @@ label meet_Laura:
     call set_the_scene(False)
 
     $ LauraX.location = "bg_dangerroom"
-    $ LauraX.sprite_location = stage_center
     $ LauraX.name = "???"
     $ LauraX.names.remove("Laura")
 
@@ -29,7 +28,8 @@ label meet_Laura:
 
     $ LauraX.change_face("_normal", 0)
 
-    show Laura_sprite standing at sprite_location(LauraX.sprite_location)
+    call show_Girl(LauraX, x_position = stage_center)
+
     hide black_screen onlayer black with dissolve
 
     "When you come to, a girl pulls you up by your arm."
@@ -319,7 +319,7 @@ label meet_Laura:
 
     $ LauraX.location = "hold"
 
-    call set_the_scene
+    call remove_Girl(LauraX, transition = easeoutleft)
 
     "She dashes out of the room, headed for the hangar."
 
@@ -362,7 +362,7 @@ label Laura_BF(temp_Girls=[]):
             "[LauraX.name] turns towards you and motions that she wants to speak to you alone."
     $ LauraX.drain_word("asked_to_meet")
     call set_the_scene (0)
-    call display_girl (LauraX)
+    call show_Girl (LauraX)
     "She looks a bit concerned and you can tell she's a bit anxious about whatever she has to say."
     call taboo_level
     call clear_the_room (LauraX)
@@ -566,7 +566,7 @@ label Laura_BF(temp_Girls=[]):
             ch_l "I should. . . leave."
             "[LauraX.name] wanders off in a bit of a daze."
             $ LauraX.event_happened[5] = 20
-            call remove_girl (LauraX)
+            call remove_Girl (LauraX)
             $ line = 0
             return
 
@@ -620,7 +620,7 @@ label Laura_BF(temp_Girls=[]):
                     $ line = "no"
             if line == "no":
                 $ LauraX.event_happened[5] = 20
-                call remove_girl (LauraX)
+                call remove_Girl (LauraX)
                 $ line = 0
                 return
 
@@ -646,7 +646,7 @@ label Laura_BF(temp_Girls=[]):
                 $ LauraX.change_face("_confused", 1)
                 ch_l "Hmm, get back to me, I guess?"
                 $ LauraX.event_happened[5] = 20
-                call remove_girl (LauraX)
+                call remove_Girl (LauraX)
                 $ line = 0
                 return
         call Haremchange_stat (LauraX, 900, 20)
@@ -721,7 +721,9 @@ label Laura_Cleanhouse:
             $ LauraX.change_stat("obedience", 80, 10)
             $ LauraX.change_stat("inhibition", 80, 10)
             $ LauraX.blushing = "_blush2"
-            show Laura_sprite standing with vpunch
+
+            call show_Girl(LauraX, transition = vpunch)
+
             "She clocks you one."
             "That was fair."
             $ LauraX.blushing = "_blush1"
@@ -1060,7 +1062,7 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
         $ LauraX.recent_history.append("_angry")
         $ LauraX.daily_history.append("_angry")
         hide Laura_sprite with easeoutright
-        call remove_girl (LauraX)
+        call remove_Girl (LauraX)
         $ LauraX.location = "hold"
         return
 
@@ -1186,7 +1188,7 @@ label Laura_Love_End:
     if "lover" not in LauraX.player_petnames:
         $ LauraX.event_happened[6] = 20
         hide Laura_sprite with easeoutright
-        call remove_girl (LauraX)
+        call remove_Girl (LauraX)
         $ LauraX.location = "hold"
         return
 
@@ -1317,7 +1319,7 @@ label Laura_Sub:
 
     $ LauraX.location = bg_current
     call set_the_scene (0)
-    call display_girl (LauraX)
+    call show_Girl (LauraX)
     call clear_the_room (LauraX)
     call set_the_scene
     call taboo_level
@@ -1563,7 +1565,7 @@ label Laura_Sub:
         $ LauraX.player_petnames.append("sir")
 
     elif line == "rude":
-        call remove_girl (LauraX)
+        call remove_Girl (LauraX)
         if not simulation:
             $ renpy.pop_call()
         "[LauraX.name] knocks her way past you and storms off."
@@ -1571,7 +1573,7 @@ label Laura_Sub:
         $ LauraX.change_face("_sadside", 2)
         ch_l "Huh, ok, if you're not interested. . ."
         hide Laura_sprite with easeoutright
-        call remove_girl (LauraX)
+        call remove_Girl (LauraX)
         if not simulation:
             $ renpy.pop_call()
         "[LauraX.name] heads out of the room."
@@ -1656,7 +1658,7 @@ label Laura_Sub_Asked:
     if line == "rude":
 
         hide Laura_sprite with easeoutright
-        call remove_girl (LauraX)
+        call remove_Girl (LauraX)
         $ LauraX.recent_history.append("_angry")
         if not simulation:
             $ renpy.pop_call()
@@ -1690,7 +1692,7 @@ label Laura_Master:
 
     $ LauraX.location = bg_current
     call set_the_scene (0)
-    call display_girl (LauraX)
+    call show_Girl (LauraX)
     call clear_the_room (LauraX)
     call set_the_scene
     $ LauraX.daily_history.append("relationship")
@@ -1841,7 +1843,7 @@ label Laura_Master:
     if line == "rude":
         $ LauraX.recent_history.append("_angry")
         hide Laura_sprite with easeoutright
-        call remove_girl (LauraX)
+        call remove_Girl (LauraX)
         if not simulation:
             $ renpy.pop_call()
         "[LauraX.name] stomps out of the room."
@@ -1849,7 +1851,7 @@ label Laura_Master:
         ch_l "Ok, fine then."
         ch_l "And here I was, about to \"elevate your clearance.\""
         hide Laura_sprite with easeoutright
-        call remove_girl (LauraX)
+        call remove_Girl (LauraX)
         if not simulation:
             $ renpy.pop_call()
         "[LauraX.name] brushes past you on her way out."
@@ -2020,7 +2022,7 @@ label Laura_Fuckbuddy:
     $ LauraX.outfit_name = "casual1"
     $ LauraX.today_outfit_name = "casual1"
     $ LauraX.change_outfit("casual1")
-    call display_girl (LauraX)
+    call show_Girl (LauraX)
     call taboo_level
     $ Player.primary_action = "masturbation"
     $ girl_secondary_action = "fondle_pussy"
@@ -2311,13 +2313,15 @@ label Laura_Dressup:
     $ active_Girls.append(LauraX) if LauraX not in active_Girls else active_Girls
     call shift_focus (LauraX)
     $ bg_current = "bg_campus"
-    call remove_girl ("all")
+    call remove_Girl ("all")
     $ LauraX.location = bg_current
     call set_the_scene (0)
 
     $ LauraX.outfit_name = "casual1"
     $ LauraX.change_outfit("casual1")
-    show Laura_sprite standing at sprite_location(LauraX.sprite_location) with vpunch
+
+    call show_Girl(LauraX, transition = vpunch)
+
     $ round -= 10 if round >= 11 else round
     $ LauraX.history.remove("dress0")
     $ LauraX.history.append("dress1")
@@ -2358,7 +2362,7 @@ label Laura_Dressup:
             ch_l "Not really."
 
     hide Laura_sprite with easeoutright
-    call remove_girl (LauraX)
+    call remove_Girl (LauraX)
     "[LauraX.name] walks away, and as you watch her go you feel a tap on your shoulder."
 
     call shift_focus (KittyX)
@@ -2366,7 +2370,7 @@ label Laura_Dressup:
     call set_the_scene (0)
     $ KittyX.outfit_name = KittyX.today_outfit_name
     $ KittyX.change_outfit()
-    call display_girl (KittyX)
+    call show_Girl (KittyX)
 
     $ KittyX.change_face("_smile")
     ch_k "Hey, [KittyX.player_petname], what're you staring at?"

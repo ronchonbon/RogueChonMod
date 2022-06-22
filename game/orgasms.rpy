@@ -1910,21 +1910,8 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
 
     if Player.primary_action == "striptease":
         call reset_position(Girl)
-
-        if Girl == RogueX:
-            show Rogue_sprite standing at Girl_Dance1(RogueX)
-        elif Girl == KittyX:
-            show Kitty_sprite standing at Girl_Dance1(KittyX)
-        elif Girl == EmmaX:
-            show Emma_sprite standing at Girl_Dance1(EmmaX)
-        elif Girl == LauraX:
-            show Laura_sprite standing at Girl_Dance1(LauraX)
-        elif Girl == JeanX:
-            show Jean_sprite standing at Girl_Dance1(JeanX)
-        elif Girl == StormX:
-            show Storm_sprite standing at Girl_Dance1(StormX)
-        elif Girl == JubesX:
-            show Jubes_sprite standing at Girl_Dance1(JubesX)
+        call show_Girl(Girl, transformation = Girl_Dance1(Girl))
+        
         "[Girl.name] begins to dance again."
     return
 

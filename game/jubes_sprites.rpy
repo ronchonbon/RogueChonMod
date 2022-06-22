@@ -153,10 +153,11 @@ layeredimage Jubes_head:
     always:
         "images/Jubes_standing/Jubes_standing_brows[JubesX.brows].png"
 
+    always:
+        "images/Jubes_standing/Jubes_standing_mouth[JubesX.mouth].png"
+
     if JubesX.spunk["mouth"]:
         "images/Jubes_standing/Jubes_standing_spunk_mouth[JubesX.mouth].png"
-    else:
-        "images/Jubes_standing/Jubes_standing_mouth[JubesX.mouth].png"
 
     if JubesX.eyes == "_closed":
         "images/Jubes_standing/Jubes_standing_eyes_closed.png"

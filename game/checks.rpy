@@ -337,10 +337,12 @@ label taboo_check(Character, location = None):
 
     return
 
-label are_girls_angry(Girls = 0):
+label are_girls_angry:
     $ approval_bonus = 0
 
     $ temp_Girls = all_Girls[:]
+
+    $ multiple = False
 
     while temp_Girls:
         if temp_Girls[0].location == bg_current and "_angry" in temp_Girls[0].recent_history:
@@ -360,29 +362,22 @@ label are_girls_angry(Girls = 0):
                 elif temp_Girls[0] == JubesX:
                     ch_v "Get out!"
 
-                "You head back to your room."
+                $ bg_current = "bg_campus"
 
-                $ Party = []
-
-                call player_room_entry
+                jump reset_location
             else:
-                $ temp_Girls[0].location = temp_Girls[0].home
+                if multiple:
+                    ". . . and so does [temp_Girls[0].name]."
+                else:
+                    "[temp_Girls[0].name] storms off."
 
-            if temp_Girls[0] in Party:
-                $ Party.remove(temp_Girls[0])
+                    if temp_Girls[0] == StormX:
+                        ". . . so to speak."
 
-            if Girls:
-                ". . . and so does [temp_Girls[0].name]."
-            else:
-                "[temp_Girls[0].name] storms off."
+                    call remove_Girl(temp_Girls[0])
 
-                if temp_Girls[0] == StormX:
-                    ". . . so to speak."
-
-                $ Girls += 1
-
-                call hide_girl(temp_Girls[0])
-
+                    $ multiple = True
+                    
         $ temp_Girls.remove(temp_Girls[0])
 
     return

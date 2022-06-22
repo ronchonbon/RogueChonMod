@@ -18,6 +18,42 @@ transform stat_animation(Timer, XPOS):
     parallel:
         linear 2.0 alpha 0
 
+transform dripping(x_offset = 0, start = 0, transparency = 1.0):
+    offset (x_offset, start) alpha transparency
+    easeout 0.9 yoffset 350 alpha 0.0
+
+transform swimming(x_position):
+    subpixel True
+    pos (x_position, 0.4) zoom 0.5
+    choice:
+        yoffset 0
+    choice:
+        pause 0.3
+    choice:
+        pause 0.5
+    block:
+        ease 1 yoffset 10
+        ease 1.5 yoffset 0
+        repeat
+
+transform teaching:
+    pos (0.5, 0.15) zoom 0.4
+
+transform silhouette:
+    matrixcolor TintMatrix(Color(rgb = (0.44, 0.54, 0.75)))*BrightnessMatrix(-0.2)
+
+transform sunset:
+    matrixcolor TintMatrix(Color(rgb = (1.0, 0.8, 0.65)))*BrightnessMatrix(0.05)
+
+transform night:
+    matrixcolor TintMatrix(Color(rgb = (0.45, 0.45, 0.65)))*BrightnessMatrix(-0.07)
+
+transform candlelit:
+    matrixcolor TintMatrix(Color(rgb = (1.0, 0.95, 0.95)))*BrightnessMatrix(-0.1)
+
+transform theater:
+    matrixcolor TintMatrix(Color(rgb = (0.45, 0.45, 0.65)))*BrightnessMatrix(-0.05)
+
 screen stat_graphic(value, Color, Timer, XPOS):
     showif value > 0:
         text "+[value]" size 40 color Color at stat_animation(Timer, XPOS)
@@ -143,39 +179,17 @@ layeredimage background:
     always:
         "images/backgrounds/sky_[current_time].png"
 
-    if entering:
-        "images/backgrounds/bg_entry.png"
-
-    if entering:
-        Null()
-    elif bg_current not in ["bg_campus", "bg_study", "bg_storm",  "bg_pool", "bg_mall"]:
+    if bg_current not in ["bg_campus", "bg_study", "bg_storm",  "bg_pool", "bg_mall"]:
         "images/backgrounds/[bg_current].png"
     else:
         "images/backgrounds/[bg_current]_[current_time].png"
 
+layeredimage foreground:
     if bg_current == "bg_pool":
-        AlphaMask("bg_pool", "images/backgrounds/bg_pool_mask.png")
+        AlphaMask("images/backgrounds/[bg_current]_[current_time].png", "images/backgrounds/bg_pool_mask.png")
 
     if bg_current == "bg_restaurant":
         "images/backgrounds/bg_restaurant_table.png"
-
-    if entering or bg_current != "bg_classroom":
-        Null()
-    elif EmmaX.location == "bg_teacher" and "frisky" in EmmaX.recent_history:
-        "Emma_sprite standing" pos (0.234, 0.176) zoom 0.387
-    elif EmmaX.location == "bg_teacher":
-        "Emma_sprite standing" pos (0.349, 0.167) zoom 0.387
-    elif EmmaX.location == "bg_desk":
-        "Emma_sprite standing" pos (0.333, 0.167) zoom 0.387
-
-    if entering or bg_current != "bg_classroom":
-        Null()
-    elif StormX.location == "bg_teacher" and "frisky" in StormX.recent_history:
-        "Storm_sprite standing" pos (0.234, 0.176) zoom 0.387
-    elif StormX.location == "bg_teacher":
-        "Storm_sprite standing" pos (0.349, 0.167) zoom 0.387
-    elif StormX.location == "bg_desk":
-        "Storm_sprite standing" pos (0.333, 0.167) zoom 0.387
 
     if bg_current == "bg_classroom":
         "images/backgrounds/bg_classroom_front.png"
@@ -183,13 +197,9 @@ layeredimage background:
     if bg_current == "bg_classroom" and time_index < 2 and weekday < 5:
         "images/backgrounds/bg_classroom_pupils.png"
 
-transform dripping(x_offset = 0, start = 0, transparency = 1.0):
-    offset (x_offset, start) alpha transparency
-    easeout 0.9 yoffset 350 alpha 0.0
-
 image grool_dripping_animation:
     animation
-    "images/Wetdrop.png"
+    "images/misc/grool.png"
 
     subpixel True
     anchor (0.5, 0.5) alpha 0.0 zoom 0.2
@@ -215,7 +225,7 @@ image grool_dripping_animation:
 
 image spunk_dripping_animation:
     animation
-    "images/SpermdropB.png"
+    "images/misc/sperm.png"
 
     subpixel True
     anchor (0.5, 0.5) alpha 0.0 zoom 0.3
@@ -244,19 +254,19 @@ image licking:
     subpixel True
     anchor (0.5, 0.5)
     parallel:
-        "images/Lick1.png"
+        "images/misc/licking1.png"
         0.6
-        "images/Lick6.png"
+        "images/misc/licking6.png"
         0.15
-        "images/Lick2.png"
+        "images/misc/licking2.png"
         0.15
-        "images/Lick3.png"
+        "images/misc/licking3.png"
         0.15
-        "images/Lick4.png"
+        "images/misc/licking4.png"
         0.6
-        "images/Lick3.png"
+        "images/misc/licking3.png"
         0.075
-        "images/Lick2.png"
+        "images/misc/licking2.png"
         0.075
         repeat
     parallel:
@@ -267,7 +277,7 @@ image licking:
         repeat
 
 image dildo:
-    "images/DildoIn.png"
+    "images/misc/dildo.png"
 
     anchor (0.5, 0.5)
 
@@ -412,25 +422,6 @@ image blue_screen:
     contains:
         Solid("#00B3D6", xysize=(1024, 768))
 
-image SilhouetteBase:
-
-    alpha 0.95
-    contains:
-        Solid("#14142d", xysize=(1024, 768))
-
-
-image Silhouettes:
-
-
-
-
-
-    contains:
-
-        AlphaMask("SilhouetteBase","Storm_sprite standing")
-
-
-
 
 
 
@@ -537,21 +528,6 @@ image VibratorAnalInsert:
         alpha 0.3
         rotate 0
 
-image TestUIAnimation:
-    contains:
-        "UI_Vibrator"
-        pos (270,640)
-        zoom 0.5
-        anchor (0.5, 0.5)
-        alpha 0.5
-        rotate 10
-        block:
-            ease 1 rotate 0 xpos 260 ypos 655
-            pause 0.25
-            ease 1 rotate 10 xpos 270 ypos 665
-            pause 0.25
-            repeat
-
 
 
 
@@ -560,10 +536,3 @@ image TestUIAnimation:
 
 
 image UI_Backpack = "images/UI_Backpack_idle.png"
-image UI_Dildo = "images/UI_Dildo.png"
-image UI_VibA = "images/UI_VibA.png"
-image UI_VibB = "images/UI_VibB.png"
-
-image UI_PartnerHand:
-    ConditionSwitch("Partner == StormX", "images/UI_GirlHandS.png",
-            "True", "images/UI_GirlHand.png")

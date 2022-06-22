@@ -30,7 +30,7 @@ label wait(outfit = True, lights = True):
         $ day_of_week = week[weekday]
 
         if being_punished:
-            $ Player.cash += int(Player.income / 2)
+            $ Player.cash += int(Player.income/2)
 
             if being_punished == 1:
                 "Your punishment from Xavier has expired."
@@ -362,7 +362,7 @@ label reset_all_girls_at_beginning:
         elif (bg_current == "bg_classroom" or bg_current == "bg_dangerroom") and temp_Girls[0].location == "nearby":
             $ temp_Girls[0].XP += 10
         elif temp_Girls[0].location == "bg_showerroom":
-            call remove_girl(temp_Girls[0])
+            call remove_Girl(temp_Girls[0])
 
         $ temp_Girls[0].blushing = ""
         $ temp_Girls[0].wet = False
@@ -642,50 +642,53 @@ label to_do(Girl):
 
     return
 
-label remove_girl(Girl, also_hide = True, hold = False):
+label remove_Girl(Girl, transition = None):
     if Girl == "all":
         $ Party = []
+
         $ Nearby = []
+
         $ Partner = None
-        $ Girls = all_Girls[:]
+
+        $ Girls_to_remove = all_Girls[:]
     else:
-        while Girl in Party:
+        if Girl in Party:
             $ Party.remove(Girl)
-        while Girl in Present:
+
+        if Girl in Present:
             $ Present.remove(Girl)
-        while Girl in Nearby:
+
+        if Girl in Nearby:
             $ Nearby.remove(Girl)
+
         if Partner == Girl:
             $ Partner = None
 
-        $ Girls = [Girl]
+        $ Girls_to_remove = [Girl]
 
-    while Girls:
-        $ Girls[0].drain_word("leaving", 1, 0, 0)
-        $ Girls[0].drain_word("arriving", 1, 0, 0)
+    while Girls_to_remove:
+        $ Girls_to_remove[0].drain_word("leaving", 1, 0, 0)
+        $ Girls_to_remove[0].drain_word("arriving", 1, 0, 0)
 
-        if Girls[0].location == bg_current or (bg_current == "bg_classroom" and Girls[0].location == "bg_teacher"):
-            if hold and bg_current in ("bg_campus","bg_classroom","bg_dangerroom","bg_pool"):
-                if Girls[0] not in Nearby:
-                    $ Nearby.append(Girls[0])
+        if Girls_to_remove[0].location == bg_current or (bg_current == "bg_classroom" and Girls_to_remove[0].location == "bg_teacher"):
+            if bg_current in ["bg_campus", "bg_classroom", "bg_dangerroom", "bg_pool"]:
+                if Girls_to_remove[0] not in Nearby:
+                    $ Nearby.append(Girls_to_remove[0])
 
-                $ Girls[0].location = "nearby"
-            elif bg_current == Girls[0].home:
-                if Girls[0] == JubesX and JubesX.addiction >= 60:
-                    $ Girls[0].location = "bg_showerroom"
-
-                $ Girls[0].location = "bg_campus"
-
-                $ Player.drain_word("locked", 0, 0, 1)
+                $ Girls_to_remove[0].location = "nearby"
+            elif bg_current == Girls_to_remove[0].home:
+                if Girls_to_remove[0] == JubesX and JubesX.addiction >= 60:
+                    $ Girls_to_remove[0].location = "bg_showerroom"
+                else:
+                    $ Girls_to_remove[0].location = "bg_campus"
             else:
-                $ Girls[0].location = Girls[0].home
+                $ Girls_to_remove[0].location = Girls_to_remove[0].home
 
-                $ Player.drain_word("locked", 0, 0, 1)
+            $ door_locked = False
 
-        if also_hide:
-            call hide_girl(Girls[0])
+        call hide_Girl(Girls_to_remove[0], transition = transition)
 
-        $ Girls.remove(Girls[0])
+        $ Girls_to_remove.remove(Girls_to_remove[0])
 
     return
 
@@ -701,24 +704,6 @@ label change_out_of_gym_clothes(Girls = []):
                     G.outfit_name = "gym_clothes"
 
             G.change_outfit()
-
-    return
-
-label hide_girl(Girl):
-    if Girl == RogueX:
-        hide Rogue_sprite
-    elif Girl == KittyX:
-        hide Kitty_sprite
-    elif Girl == EmmaX:
-        hide Emma_sprite
-    elif Girl == LauraX:
-        hide Laura_sprite
-    elif Girl == JeanX:
-        hide Jean_sprite
-    elif Girl == StormX:
-        hide Storm_sprite
-    elif Girl == JubesX:
-        hide Jubes_sprite
 
     return
 
@@ -972,121 +957,60 @@ label event_calls(event_Girls=[]):
 
     return
 
-label display_girl(Girl, check_if_dressed = True, reset_actions = True, x_position = None, y_position = 0):
-    if Girl.location != bg_current:
-        call hide_girl(Girl)
-
-        return
-
-    if check_if_dressed:
-        if Girl.outfit_name == "swimwear":
-            if Girl.location == "bg_pool":
-                $ Girl.change_outfit()
-            elif Girl.today_outfit_name != "swimwear":
-                $ Girl.change_outfit(Girl.today_outfit_name)
-        elif taboo:
-            $ Girl.change_outfit()
-        elif Girl.location != "bg_dangerroom" and Girl.today_outfit_name != "gym_clothes":
-            $ Girl.change_outfit(Girl.today_outfit_name)
-    elif Girl.location != "bg_showerroom" and Girl.location != "bg_pool":
-        $ Girl.wet = False
-
-    if check_if_dressed:
-        call outfitShame(Girl)
-
-    if reset_actions:
-        call stop_all_actions
-
-    if x_position:
-        $ Girl.sprite_location = x_position
-    else:
-        $ x_position = Girl.sprite_location
-
-    if bg_current == "bg_movies" or bg_current == "bg_restaurant":
-        $ y_position = 250
-
-    if Girl == RogueX:
-        show Rogue_sprite standing zorder Girl.sprite_layer at sprite_location(x_position, y_position):
-    elif Girl == KittyX:
-        show Kitty_sprite standing zorder Girl.sprite_layer at sprite_location(x_position, y_position):
-    elif Girl == EmmaX:
-        $ Girl.diamond = False
-
-        show Emma_sprite standing zorder Girl.sprite_layer at sprite_location(x_position, y_position):
-    elif Girl == LauraX:
-        $ Girl.claws = False
-
-        show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(x_position, y_position):
-    elif Girl == JeanX:
-        show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(x_position, y_position):
-    elif Girl == StormX:
-        show Storm_sprite standing zorder Girl.sprite_layer at sprite_location(x_position, y_position):
-    elif Girl == JubesX:
-        show Jubes_sprite standing zorder Girl.sprite_layer at sprite_location(x_position, y_position):
-
-    return
-
 label set_the_scene(character = True, entering = False, check_if_dressed = True, reset_actions = True, silent = False):
     if not silent:
         show black_screen onlayer black
 
-    if entering:
-        $ character = False
-
-        call hide_all
-
     if reset_actions:
         call stop_all_actions
 
-        $ reset_actions = False
-
-    if character:
+    if entering:
+        call hide_all
+    elif character:
         call check_who_is_present
 
         if Present:
-            $ temp_Girls = Present[:]
-
             $ offset = 0.5/(len(Present) + 1)
             $ total_offset = offset
 
+            if bg_current in ["bg_pool", "bg_storm"] and time_index == 2:
+                $ transformation = sunset
+            elif bg_current in ["bg_campus", "bg_pool", "bg_storm", "bg_dangerroom"] and time_index == 3:
+                $ transformation = night
+            elif bg_current == "bg_restaurant":
+                $ transformation = candelit
+            elif bg_current == "bg_movies":
+                $ transformation = theater
+            else:
+                $ transformation = None
+
+            $ temp_Girls = Present[:]
+
             while temp_Girls:
                 if temp_Girls[0] != focused_Girl:
-                    $ temp_Girls[0].sprite_location = stage_center + total_offset
-                    $ temp_Girls[0].sprite_layer = 75
+                    $ temp_Girls[0].sprite_layer = 3
+
+                    call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, transformation = transformation)
 
                     $ total_offset += offset
-
-                    call display_girl(temp_Girls[0], check_if_dressed = check_if_dressed, reset_actions = False)
 
                 $ temp_Girls.remove(temp_Girls[0])
 
             if focused_Girl.location == bg_current:
-                $ focused_Girl.sprite_location = stage_center
-                $ focused_Girl.sprite_layer = 100
+                $ focused_Girl.sprite_layer = 4
 
-                call display_girl(focused_Girl, check_if_dressed = check_if_dressed, reset_actions = False)
+                call show_Girl(focused_Girl, x_position = stage_center, transformation = transformation)
 
         if bg_current == "bg_study" and time_index < 3:
-            show Xavier_sprite zorder 25 at sprite_location(stage_left)
-        else:
-            hide Xavier_sprite
+            show Xavier_sprite zorder 3 at sprite_location(stage_left)
     else:
-        call hide_all(cull = True)
-
-    hide cellphone
+        call hide_all
 
     if bg_current == "bg_classroom":
         if EmmaX.location == "bg_teacher":
             $ EmmaX.change_outfit()
         if StormX.location == "bg_teacher":
             $ StormX.change_outfit()
-
-    hide dress_screen
-
-    if simulation:
-        show blue_screen onlayer black
-    else:
-        hide blue_screen onlayer black
 
     call checkout(total = True)
 
@@ -1120,7 +1044,7 @@ label quick_event:
                 elif bg_current != "bg_showerroom":
                     "[event_Girls[0].name] gets an embarrassed look on her face and suddenly leaves the room."
 
-                    call remove_girl(event_Girls[0])
+                    call remove_Girl(event_Girls[0])
                     call set_the_scene
 
                     $ event_Girls[0].location = event_Girls[0].home if bg_current != event_Girls[0].home else "bg_campus"
@@ -1241,33 +1165,6 @@ label tenth_round:
 
     return
 
-label hide_all(cull = False):
-    if cull or RogueX.location != bg_current:
-        hide Rogue_sprite
-
-    if cull or KittyX.location != bg_current:
-        hide Kitty_sprite
-
-    if cull or EmmaX.location != bg_current:
-        hide Emma_sprite
-
-    if cull or LauraX.location != bg_current:
-        hide Laura_sprite
-
-    if cull or JeanX.location != bg_current:
-        hide Jean_sprite
-
-    if cull or StormX.location != bg_current:
-        hide Storm_sprite
-
-    if cull or JubesX.location != bg_current:
-        hide Jubes_sprite
-
-    if cull or "bg_study" != bg_current:
-        hide Xavier_sprite
-
-    return
-
 label girls_location(change = False):
     $ temp_Girls = all_Girls[:]
 
@@ -1321,7 +1218,8 @@ label stop_all_actions(visual = False):
         $ temp_Girls[0].main_action = None
         $ temp_Girls[0].secondary_action = None
 
-        call reset_position(temp_Girls[0])
+        if visual:
+            call reset_position(temp_Girls[0])
 
         $ temp_Girls.remove(temp_Girls[0])
 
@@ -1904,38 +1802,35 @@ label Level_Up(Chr=Player):
 
 
 
-label clear_the_room(Character=0, Passive=0, Silent=0, Girls=[]):
-    $ temp_Girls = all_Girls[:]
-    $ temp_Girls.remove(Character) if Character in all_Girls else temp_Girls
-    while temp_Girls:
-        if temp_Girls[0].location == bg_current or temp_Girls[0] in Party:
+label clear_the_room(Character=0, Passive=0, Silent=0):
+    $ Girls = []
 
-            $ Girls.append(temp_Girls[0])
-        elif temp_Girls[0].location == "bg_teacher" and bg_current == "bg_classroom":
-
-            $ Girls.append(temp_Girls[0])
-
-        $ temp_Girls.remove(temp_Girls[0])
+    python:
+        for G in all_Girls:
+            if G != Character:
+                if G.location == bg_current or G in Party:
+                    Girls.append(G)
+                elif G.location == "bg_teacher" and bg_current == "bg_classroom":
+                    Girls.append(G)
 
     $ Nearby = []
 
     if not Silent and not Passive:
-
         if Character.location != bg_current:
             "[Character.name] enters the room."
+
             $ Character.location = bg_current
+
         if not Girls:
-
             if Character in all_Girls:
-                call display_girl (Character)
+                call show_Girl(Character)
+
             return
+
         if Character == RogueX:
-
             if len(Girls) > 1:
-
                 ch_r "Ladies, could I talk to [Player.name] alone for a minute?"
             elif Girls:
-
                 ch_r "[Girls[0].name], could I talk to [Player.name] alone for a minute?"
         elif Character == KittyX:
             if len(Girls) > 1:
@@ -1973,13 +1868,13 @@ label clear_the_room(Character=0, Passive=0, Silent=0, Girls=[]):
     while Girls:
         if Girls[0] in Party:
             $ Party.remove(Girls[0])
+
         $ Girls[0].drain_word("leaving", 1, 0, 0)
         $ Girls[0].drain_word("arriving", 1, 0, 0)
 
         if Silent:
             pass
         elif not Passive and Character != "all":
-
             if Girls[0] == RogueX:
                 ch_r "No problem, I'll see you later then."
             elif Girls[0] == KittyX:
@@ -2012,43 +1907,34 @@ label clear_the_room(Character=0, Passive=0, Silent=0, Girls=[]):
 
         if bg_current == Girls[0].home:
             if Character != "all":
-
                 $ bg_current = Character.home
+
                 $ Character.location = Character.home
+
                 call set_the_scene
-                call clear_the_room (Character)
+                call clear_the_room(Character)
                 call taboo_level
+
                 if not Silent:
                     "[Character.name] brings you back to her room. . ."
 
                 $ Girl = Character
+
                 jump girls_room
-                return
             else:
                 $ Girls[0].location = "bg_campus"
         else:
             $ Girls[0].location = Girls[0].home
 
-        if Girls[0] == RogueX:
-            hide Rogue_sprite with easeoutright
-        elif Girls[0] == KittyX:
-            hide Kitty_sprite with easeoutright
-        elif Girls[0] == EmmaX:
-            hide Emma_sprite with easeoutright
-        elif Girls[0] == LauraX:
-            hide Laura_sprite with easeoutright
-        elif Girls[0] == JeanX:
-            hide Jean_sprite with easeoutright
-        elif Girls[0] == StormX:
-            hide Storm_sprite with easeoutright
-        elif Girls[0] == JubesX:
-            hide Jubes_sprite with easeoutright
+        call hide_Girl(Girls[0], transition = easeoutright)
 
         $ Girls.remove(Girls[0])
 
     if Character in all_Girls:
-        call display_girl (Character)
+        call show_Girl(Character)
+
     call taboo_level
+
     return
 
 
@@ -2222,7 +2108,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0):
                     ch_s "Ah, then we'll leave you to it."
                 elif Primary == JubesX:
                     ch_v "Oh. Ok. . ."
-                call remove_girl (Secondary)
+                call remove_Girl (Secondary)
             elif Primary == RogueX:
                 ch_r "Um, ok."
             elif Primary == KittyX:
@@ -2245,7 +2131,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0):
                 ch_j "Uh-huh."
                 "She doesn't leave."
             if Primary != JeanX:
-                call remove_girl (Primary)
+                call remove_Girl (Primary)
 
         if line == "no":
             $ Primary.change_stat("obedience", 50, 5)
@@ -2292,7 +2178,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0):
                 ch_j "Uh-huh."
                 "She doesn't leave."
             if Primary != JeanX:
-                call remove_girl (Primary)
+                call remove_Girl (Primary)
             if Secondary and Secondary != JeanX:
                 $ Secondary.change_stat("obedience", 50, 5)
                 if approval_check(Secondary, 1800) or approval_check(Secondary, 500, "O"):
@@ -2333,7 +2219,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0):
                         ch_s ". . . I see. . ."
                     elif Primary == JubesX:
                         ch_v "Oh, so you're going to be like -that-. . ."
-                call remove_girl (Secondary)
+                call remove_Girl (Secondary)
                 if Primary == JeanX:
                     "[Secondary.name] storms out."
                 else:
@@ -2848,25 +2734,25 @@ label Swap_Nearby(Girl=0):
             "Move away from an adjacent girl?"
             "[RogueX.name]" if RogueX.location == bg_current:
                 "You shift away from [RogueX.name]"
-                call remove_girl (RogueX, 1, 1)
+                call remove_Girl (RogueX, 1, 1)
             "[KittyX.name]" if KittyX.location == bg_current:
                 "You shift away from [KittyX.name]"
-                call remove_girl (KittyX, 1, 1)
+                call remove_Girl (KittyX, 1, 1)
             "[EmmaX.name]" if EmmaX.location == bg_current:
                 "You shift away from [EmmaX.name]"
-                call remove_girl (EmmaX, 1, 1)
+                call remove_Girl (EmmaX, 1, 1)
             "[LauraX.name]" if LauraX.location == bg_current:
                 "You shift away from [LauraX.name]"
-                call remove_girl (LauraX, 1, 1)
+                call remove_Girl (LauraX, 1, 1)
             "[JeanX.name]" if JeanX.location == bg_current:
                 "You shift away from [JeanX.name]"
-                call remove_girl (JeanX, 1, 1)
+                call remove_Girl (JeanX, 1, 1)
             "[StormX.name]" if StormX.location == bg_current:
                 "You shift away from [StormX.name]"
-                call remove_girl (StormX, 1, 1)
+                call remove_Girl (StormX, 1, 1)
             "[JubesX.name]" if JubesX.location == bg_current:
                 "You shift away from [JubesX.name]"
-                call remove_girl (JubesX, 1, 1)
+                call remove_Girl (JubesX, 1, 1)
             "No, never mind.":
                 return
     "[Girl.name] comes over and joins you."
@@ -2901,7 +2787,7 @@ label dismiss_menu:
 
     return
 
-label locked_door(Girl=0, entering=0, current_Girl=0):
+label locked_door(Girl, entering = False, current_Girl = None):
     $ Player.add_word(1,"interruption")
 
     if not Player.primary_action:
@@ -2913,23 +2799,23 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
         else:
             "You look to the door just as [KittyX.name] phases into the room."
 
-        $ KittyX.location = bg_current
+        $ Girl.location = bg_current
 
         call taboo_level
 
-        $ KittyX.change_outfit()
+        $ Girl.change_outfit()
 
-        call display_girl (KittyX, reset_actions=0)
+        call show_Girl(Girl)
 
         ch_k "Hi, [KittyX.player_petname]!"
 
         return True
 
-    if "locked" not in Player.traits:
+    if not door_locked:
         $ Girl.location = bg_current
 
         if entering:
-            call display_girl (Girl, reset_actions=0)
+            call show_Girl(Girl)
 
             if bg_current == "bg_campus" or bg_current == "bg_pool":
                 "Suddenly, [Girl.name] rounds a corner."
@@ -2956,17 +2842,17 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
     elif Girl == JeanX:
         "You hear a rattle at the door."
         "After a moment, and some clicking in the lock, the door pops open."
-        "[JeanX.name] walks into the room."
+        "[Girl.name] walks into the room."
 
-        $ JeanX.location = bg_current
+        $ Girl.location = bg_current
 
         call taboo_level
 
-        $ JeanX.change_outfit()
+        $ Girl.change_outfit()
 
-        call display_girl (JeanX, reset_actions=0)
+        call show_Girl(Girl)
 
-        ch_j "Hey, [JeanX.player_petname]!"
+        ch_j "Hey, [Girl.player_petname]!"
 
         return True
     else:
@@ -3000,7 +2886,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
                 $ Girl.location = bg_current
                 $ Girl.change_outfit()
 
-                call display_girl (Girl, reset_actions=0)
+                call show_Girl(Girl)
 
                 if Girl == RogueX:
                     ch_r "Hey, got a minute, [Girl.player_petname]?"
@@ -3023,7 +2909,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
                     ch_r "C'mon, [Girl.player_petname], don't yank my chain like this!"
 
                     if Girl.location == bg_current:
-                        call remove_girl (Girl)
+                        call remove_Girl (Girl)
 
                     return False
                 elif Girl == EmmaX:
@@ -3033,7 +2919,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
                     ch_e "but I don't appreciate being on the receiving end!"
 
                     if Girl.location == bg_current:
-                        call remove_girl (Girl)
+                        call remove_Girl (Girl)
 
                     return False
                 elif Girl in [LauraX, JubesX]:
@@ -3049,7 +2935,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
 
                             "snickt"
 
-                            call display_girl (Girl, reset_actions=0)
+                            call show_Girl(Girl)
 
                             "The door swings open."
 
@@ -3059,7 +2945,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
                         else:
                             "A thin mist passes under the door, and forms into a human shape."
 
-                            call display_girl (Girl, reset_actions=0)
+                            call show_Girl(Girl)
 
                             ch_v "Well, I wanted to talk."
 
@@ -3073,7 +2959,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
                         "You hear her shuffling off."
 
                         if Girl.location == bg_current:
-                            call remove_girl (Girl)
+                            call remove_Girl (Girl)
 
                         return False
                 elif Girl == StormX:
@@ -3081,7 +2967,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
                         $ Girl.location = bg_current
                         $ Girl.change_outfit()
 
-                        call display_girl (Girl, reset_actions=0)
+                        call show_Girl(Girl)
 
                         "You hear some clicking from the door."
                         "The door swings open."
@@ -3097,7 +2983,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
                         ch_s "Very well, I can respect that."
 
                         if Girl.location == bg_current:
-                            call remove_girl (Girl)
+                            call remove_Girl (Girl)
 
                         return False
 
@@ -3112,11 +2998,11 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
 
                 $ Girl.location = "bg_player"
 
-                call remove_girl (EmmaX)
+                call remove_Girl (EmmaX)
             else:
                 ch_e "I. . . This isn't what it looks like. . ."
 
-                call remove_girl (EmmaX)
+                call remove_Girl (EmmaX)
 
                 "She seems uncomfortable with the situation and leaves the room."
                 "Perhaps you should ask her about it later."
@@ -3183,7 +3069,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
                 $ current_Girl.change_face("_sexy", 1)
 
                 if Girl.location == bg_current:
-                    call remove_girl (Girl)
+                    call remove_Girl (Girl)
 
                 return False
 
@@ -3226,10 +3112,10 @@ label shift_focus(Girl, Second = None):
             for G in active_Girls:
                 if G != Girl and G.location == bg_current:
                     G.sprite_location = stage_right
-                    G.sprite_layer = 75
+                    G.sprite_layer = 3
 
         $ Girl.sprite_location = stage_center
-        $ Girl.sprite_layer = 100
+        $ Girl.sprite_layer = 4
 
     if focused_Girl == Girl:
         pass
@@ -3509,7 +3395,7 @@ label JumperCheck(Girls=[]):
     if "nope" in Player.recent_history:
 
         while Girls:
-            call remove_girl (Girls[0])
+            call remove_Girl (Girls[0])
             $ Girls.remove(Girls[0])
         jump reset_location
     elif Girls:
@@ -4314,7 +4200,7 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
             ch_v "This is totally not cool. Sorry."
 
     if Removal and not approval and not Girl.forced:
-        call remove_girl (Girl, 2)
+        call remove_Girl (Girl, 2)
         "[Girl.name] takes off."
 
     return approval
@@ -5224,7 +5110,7 @@ label Girls_taboo(Girl=0, counter=1, Choice=0, D20=0):
             $ Girl.daily_history.append("caught")
             show black_screen onlayer black
             call reset_position(Girl)
-            call remove_girl (Girl)
+            call remove_Girl (Girl)
             $ Girl.change_outfit()
             hide black_screen onlayer black
             $ bg_current = "bg_player"
@@ -5292,7 +5178,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0):
             "She shoves the two of you out of her room and slams the door."
             $ Girl.location = "bg_player"
             jump player_room
-        call remove_girl (EmmaX)
+        call remove_Girl (EmmaX)
         if not Silent:
             "She seems uncomfortable with the situation and leaves the room."
             "Perhaps you should ask her about it later."
@@ -5309,7 +5195,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0):
             $ B -= 200
 
     $ Other.sprite_location = stage_far_right
-    call display_girl (Other, 0, 0)
+    call show_Girl(Other)
     if Partner == Other:
 
         $ Silent = 1
@@ -5385,7 +5271,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0):
         if bg_current == Other.home:
             $ Other.recent_history.append("_angry")
             call are_girls_angry
-        call remove_girl (Other)
+        call remove_Girl (Other)
     else:
 
         $ Other.change_face("_surprised", 2)
@@ -5413,7 +5299,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0):
         if bg_current == Other.home:
             $ Other.recent_history.append("_angry")
             call are_girls_angry
-        call remove_girl (Other)
+        call remove_Girl (Other)
     if AloneCheck(Girl) and Girl.taboo == 20:
 
         $ Girl.taboo = 0
@@ -5472,7 +5358,8 @@ label Sex_Over(Clothes = True, Girls = None):
     $ temp_Girls = all_Girls[:]
 
     while temp_Girls:
-        call reset_position(temp_Girls[0])
+        if temp_Girls[0].location == bg_current:
+            call reset_position(temp_Girls[0])
 
         $ temp_Girls.remove(temp_Girls[0])
 
@@ -5691,7 +5578,7 @@ label Girl_TightsRipped(Girl=0, Count=0):
                 $ Girl.change_face("_bemused", 0)
                 ch_s "I really probably should change."
             $ Girl.blushing = "_blush1"
-            call remove_girl (Girl)
+            call remove_Girl (Girl)
             $ Girl.change_outfit()
 
     return

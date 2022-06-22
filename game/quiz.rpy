@@ -213,7 +213,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
                 elif Party[1] == JubesX:
                     ch_v "Sorry, guys, this is -your- party. . ."
                 "[Party[1].name] leaves the room"
-                call remove_girl (Party[1])
+                call remove_Girl (Party[1])
 
 
     while between_event_count:

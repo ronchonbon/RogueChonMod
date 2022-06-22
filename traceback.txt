@@ -1,60 +1,40 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/locations.rpy", line 651, in script call
-    call chat
-  File "game/chat.rpy", line 164, in script call
-    call chat_menu
-  File "game/locations.rpy", line 537, in script call
-    call chat
-  File "game/chat.rpy", line 122, in script call
-    call chat_menu
-  File "game/chat.rpy", line 259, in script call
-    call enter_main_sex_menu(Girl)
-  File "game/sex_menus.rpy", line 59, in script call
-    call girl_sex_menu(Girl)
-  File "game/sex_menus.rpy", line 173, in script call
-    call start_action(focused_Girl, "blowjob")
-  File "game/actions.rpy", line 111, in script call
-    call action_accepted(Girl, action)
-  File "game/sex.rpy", line 1653, in script call
-    call accepted_without_question_lines(Girl, action)
-  File "game/dialogue.rpy", line 5236, in script
-    if Girl == RogueX:
-SyntaxError: invalid syntax (dialogue.rpy, line 5531)
+  File "game/locations.rpy", line 138, in script call
+    call tenth_round
+  File "game/utilities.rpy", line 1077, in script call
+    call sleepover
+  File "game/sleepover.rpy", line 637, in script call
+    call remove_Girl(temp_Girls[0])
+  File "game/utilities.rpy", line 669, in script
+    while Girls_to_remove:
+  File "game/utilities.rpy", line 669, in <module>
+    while Girls_to_remove:
+NameError: name 'Girls_to_remove' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/locations.rpy", line 651, in script call
-    call chat
-  File "game/chat.rpy", line 164, in script call
-    call chat_menu
-  File "game/locations.rpy", line 537, in script call
-    call chat
-  File "game/chat.rpy", line 122, in script call
-    call chat_menu
-  File "game/chat.rpy", line 259, in script call
-    call enter_main_sex_menu(Girl)
-  File "game/sex_menus.rpy", line 59, in script call
-    call girl_sex_menu(Girl)
-  File "game/sex_menus.rpy", line 173, in script call
-    call start_action(focused_Girl, "blowjob")
-  File "game/actions.rpy", line 111, in script call
-    call action_accepted(Girl, action)
-  File "game/sex.rpy", line 1653, in script call
-    call accepted_without_question_lines(Girl, action)
-  File "game/dialogue.rpy", line 5236, in script
-    if Girl == RogueX:
-  File "renpy/ast.py", line 1898, in execute
-    if renpy.python.py_eval(condition):
-  File "renpy/python.py", line 2274, in py_eval
-    code = py_compile(code, 'eval')
-  File "renpy/python.py", line 835, in py_compile
-    raise e
-SyntaxError: invalid syntax (dialogue.rpy, line 5531)
+  File "game/locations.rpy", line 138, in script call
+    call tenth_round
+  File "game/utilities.rpy", line 1077, in script call
+    call sleepover
+  File "game/sleepover.rpy", line 637, in script call
+    call remove_Girl(temp_Girls[0])
+  File "game/utilities.rpy", line 669, in script
+    while Girls_to_remove:
+  File "renpy/ast.py", line 1841, in execute
+    if renpy.python.py_eval(self.condition):
+  File "renpy/python.py", line 2276, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "renpy/python.py", line 2269, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/utilities.rpy", line 669, in <module>
+    while Girls_to_remove:
+NameError: name 'Girls_to_remove' is not defined
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
-Rogue-Like Chonky Mod 0.2i
-Tue Jun 21 19:22:58 2022
+Rogue-Like Chonky Mod 0.2h
+Wed Jun 22 04:46:53 2022

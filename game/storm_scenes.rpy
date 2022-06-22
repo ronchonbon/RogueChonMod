@@ -101,16 +101,16 @@ label StormMeetWater:
     if len(Party) > 1:
         Party[1].voice "I think we'll sit this one out."
 
-        call remove_girl (Party[1])
+        call remove_Girl (Party[1])
 
         Party[0].voice "Have fun though."
 
-        call remove_girl (Party[0])
+        call remove_Girl (Party[0])
     elif Party:
         Party[0].voice "I think I'll sit this one out."
         Party[0].voice "Have fun though."
 
-        call remove_girl (Party[0])
+        call remove_Girl (Party[0])
 
     "You head for the door marked \"Attic. . .\""
 
@@ -155,23 +155,17 @@ label StormMeet:
     call shift_focus (StormX)
     call set_the_scene
     $ StormX.location = "bg_storm"
-    $ StormX.sprite_location = stage_center
     "Greeting you at the top is what appears to be an indoor garden. Bright sunlight streams through the windows."
 
 
     $ StormX.change_outfit("nude")
     $ StormX.change_face("_normal", eyes = "_side")
 
-    show Storm_sprite standing at sprite_location(StormX.sprite_location)
-
-    show expression AlphaMask("SilhouetteBase", At("Storm_sprite standing", sprite_location(StormX.sprite_location))) as mask:
-
-
-
+    call show_Girl(StormX, x_position = stage_center, transformation = silhouette)
 
     "Standing in the middle of the room appears to be a woman. . ."
-    hide mask with fade
 
+    call show_Girl(StormX, transformation = dissolve)
 
     "And she's naked."
     $ StormX.seen_breasts += 1
@@ -719,7 +713,7 @@ label Storm_Teacher_Caught(Girl=0):
     else:
         "[Girl.name] jumps and dashes out of the room."
         call Partner_Like (StormX, -2, -3, 500, Girl)
-        call remove_girl (Girl)
+        call remove_Girl (Girl)
 
     $ Girl.reputation -= 1
     call Partner_Like (Girl, 3, 2, 800, StormX)
@@ -1089,7 +1083,7 @@ label Storm_BF:
     $ StormX.drain_word("asked_to_meet")
 
     call set_the_scene (0)
-    call display_girl (StormX)
+    call show_Girl (StormX)
     call taboo_level
     call clear_the_room (StormX)
     $ StormX.daily_history.append("relationship")
@@ -1132,7 +1126,7 @@ label Storm_BF:
             $ StormX.change_stat("inhibition", 70, -2)
             ch_s "Then I won't take more of your time."
             ch_s "Let me know when your. . . schedule clears up."
-            call remove_girl (StormX)
+            call remove_Girl (StormX)
             $ Player.history.append("story")
             return
 
@@ -1222,7 +1216,7 @@ label Storm_BF_Story:
                     ch_s "Well that is a disappointment."
                     if not approval_check(StormX, 1000):
                         ch_s "I suppose that will be all then."
-                        call remove_girl (StormX)
+                        call remove_Girl (StormX)
                         return
                     else:
                         $ StormX.change_stat("obedience", 80, 5)
@@ -1703,7 +1697,7 @@ label Storm_Love_Badend:
     ch_s "You know, I do not think you're ready to have this conversation."
     $ StormX.recent_history.append("_angry")
     $ StormX.daily_history.append("_angry")
-    call remove_girl (StormX)
+    call remove_Girl (StormX)
     return
 
 
@@ -1844,7 +1838,7 @@ label Storm_Sub:
             ch_s ". . .fine."
             $ StormX.change_stat("obedience", 90, -10)
             ch_s "Perhaps some other time. . ."
-            call remove_girl (StormX)
+            call remove_Girl (StormX)
             $ StormX.change_face("_normal", 1)
             $ StormX.history.append("sir")
             return
@@ -1972,7 +1966,7 @@ label Storm_Sub_Asked:
     if line == "rude":
 
         hide Storm_sprite with easeoutright
-        call remove_girl (StormX)
+        call remove_Girl (StormX)
         $ StormX.recent_history.append("_angry")
         $ renpy.pop_call()
         "[StormX.name] marches out the door, leaving you alone. She looked pretty upset."
@@ -2271,7 +2265,9 @@ label Storm_Poolnight:
         show Storm_sprite standing:
             ease 1 yoffset 0
         pause 1
-        show Storm_sprite standing zorder 50 at Pool_Bob(500)
+
+        call show_Girl(StormX, sprite_layer = 1, transformation = swimming(500))
+
         "Storm rises from the pool."
         ch_s "Ah, I was hoping you would join me, [StormX.player_petname]. . ."
         if StormX not in Player.Harem and StormX.player_petname not in ("sir","master"):
@@ -2434,7 +2430,7 @@ label Storm_Daddy:
                 ch_s "Oh. . . "
                 ch_s ". . . I suppose that it is."
                 ch_s "Never mind. . ."
-                call remove_girl (StormX)
+                call remove_Girl (StormX)
                 $ line = 0
             "I'd rather not." if "callyouthat" in StormX.recent_history or "whycare" in StormX.recent_history:
                 $ StormX.change_stat("love", 90, -2)
@@ -2443,7 +2439,7 @@ label Storm_Daddy:
                 ch_s "Oh. . . "
                 ch_s ". . . I suppose that it fine."
                 ch_s "Never mind. . ."
-                call remove_girl (StormX)
+                call remove_Girl (StormX)
                 $ line = 0
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

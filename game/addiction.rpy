@@ -1201,7 +1201,7 @@ label addiction_ultimatum:
 
                     "[Girl.name] gives one last look over her shoulder before slamming the door and storming out."
 
-                    call remove_girl (Girl)
+                    call remove_Girl (Girl)
 
                     jump addiction_bad_end
             "Oh, never mind." if menu_context == "sunshock":
@@ -1594,7 +1594,7 @@ label addiction_bad_end:
         elif bg_current == "bg_player" and Girl.location == bg_current:
             "[Girl.name] heads out."
 
-        call remove_girl (Girl)
+        call remove_Girl (Girl)
 
     $ renpy.pop_call()
     $ renpy.pop_call()

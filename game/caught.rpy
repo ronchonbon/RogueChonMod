@@ -5,7 +5,7 @@ label caught_changing(Girl):
 
     $ Girl.change_face("_surprised", 1, mouth = "_kiss")
 
-    call remove_girl("all")
+    call remove_Girl("all")
 
     if D20 > 17:
         $ Girl.change_outfit("nude")
@@ -326,7 +326,7 @@ label caught_showering(Girl):
 
     $ Girl.add_word(1,"showered","showered", 0, 0)
 
-    call remove_girl("all")
+    call remove_Girl("all")
 
     $ Girl.change_outfit("nude")
     $ Girl.change_face("_smile", 1)
@@ -347,7 +347,7 @@ label caught_showering(Girl):
         "Knock":
             $ knock = True
         "Come back later":
-            call remove_girl(Girl)
+            call remove_Girl(Girl)
 
             $ Girl.change_outfit("today")
             $ Girl.drain_word("will_masturbate", 0, 1)
@@ -646,7 +646,7 @@ label caught_showering(Girl):
     menu:
         extend ""
         "Sure, see you later then.":
-            call remove_girl(Girl)
+            call remove_Girl(Girl)
         "Actually, could you stick around a minute?":
             if approval_check(Girl, 900) or Girl == StormX:
                 if Girl == RogueX:
@@ -681,14 +681,14 @@ label caught_showering(Girl):
                 elif Girl == JubesX:
                     ch_v "Um. . . nah. . ."
 
-                call remove_girl(Girl)
+                call remove_Girl(Girl)
 
     return
 
 label caught_masturbating(Girl):
     $ Girl.drain_word("will_masturbate")
 
-    call remove_girl("all")
+    call remove_Girl("all")
 
     $ Girl.location = bg_current
 
@@ -1653,7 +1653,7 @@ label caught_having_sex(Girl):
             if StormX.event_counter["caught"] > 3:
                 "I bet there's something in that righthand drawer. . ."
 
-    call remove_girl("all")
+    call remove_Girl("all")
 
     "You return to your room"
 
@@ -1718,7 +1718,7 @@ label execute_plan(Girl):
 
                 "[Partner.name] looks a bit uncomfortable with what's happening and takes off."
 
-                call remove_girl(Partner)
+                call remove_Girl(Partner)
         else:
             $ Partner.change_face("_sly")
 
@@ -1730,7 +1730,7 @@ label execute_plan(Girl):
         $ RogueX.outfit["gloves"] = ""
         $ RogueX.arm_pose = 2
 
-        show Rogue_sprite standing zorder 24 at sprite_location(stage_left+100,85) with ease
+        call show_Girl(RogueX, x_position = stage_left + 0.1, y_position = 0.1, sprite_layer = 1, transition = ease)
 
         "[RogueX.name] moves in and also grabs his head, duplicating his powers as he watches helplessly."
         "Now that she posesses his full power, while his are negated, he has no defenses."
@@ -1752,7 +1752,7 @@ label execute_plan(Girl):
     elif Girl == KittyX:
         $ KittyX.arm_pose = 2
 
-        show Kitty_sprite standing at sprite_location(stage_left+100, 150) with ease
+        call show_Girl(KittyX, x_position = stage_left + 0.1, y_position = 0.2, transition = ease)
 
         $ KittyX.sprite_location = stage_center
 
@@ -1784,10 +1784,7 @@ label execute_plan(Girl):
 
         ch_k "Well, [KittyX.player_petname], what should we ask for?"
     elif Girl in [EmmaX, JeanX]:
-        if Girl == EmmaX:
-            show Emma_sprite standing zorder 24 at sprite_location(stage_left+100,85) with ease
-        elif Girl == JeanX:
-            show Jean_sprite standing zorder 24 at sprite_location(stage_left+100,85) with ease
+        call show_Girl(Girl, x_position = stage_left + 0.1, y_position = 0.1, sprite_layer = 1, transition = ease)
 
         "[Girl.name] moves behind Xavier and activates her own telepathy."
 
@@ -1841,7 +1838,7 @@ label execute_plan(Girl):
     elif Girl == StormX:
         $ StormX.arm_pose = 1
 
-        show Storm_sprite standing at sprite_location(stage_left+100, 150) with ease
+        call show_Girl(StormX, x_position = stage_left + 0.1, y_position = 0.2, transition = ease)
 
         $ StormX.sprite_location = stage_center
 
@@ -1874,7 +1871,7 @@ label execute_plan(Girl):
     elif Girl == JubesX:
         $ JubesX.arm_pose = 2
 
-        show Jubes_sprite standing at sprite_location(stage_left+100, 150) with ease
+        call show_Girl(KittyX, x_position = stage_left + 0.1, y_position = 0.2, transition = ease)
 
         $ JubesX.sprite_location = stage_center
 
@@ -2084,7 +2081,7 @@ label execute_plan(Girl):
 
     $ Player.daily_history.append("Xavier")
 
-    call remove_girl("all")
+    call remove_Girl("all")
     hide Xavier_sprite
     call set_the_scene
 
