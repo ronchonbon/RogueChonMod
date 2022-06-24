@@ -5,8 +5,6 @@ label take_class:
 
         return
 
-    call set_the_scene
-
     if "class" in Player.daily_history:
         $ line = "The session begins."
     elif round >= 80:
@@ -51,17 +49,16 @@ label take_class:
     $ Player.daily_history.append("class")
     $ Player.XP += (5 + (int(round / 10)))
 
-    call wait
-    call girls_location
-    call set_the_scene
-    call event_calls
-
-    "What would you like to do next?"
-
     return
 
 label classroom_seating:
     $ Girls = Present[:]
+
+    python:
+        for G in Girls:
+            if G.teaching:
+                Girls.remove(G)
+
     $ Present = []
 
     $ renpy.random.shuffle(Girls)
@@ -168,15 +165,15 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
 
     while temp_Girls:
         if renpy.showing(temp_Girls[0].tag + "_sprite"):
-            call move_Girl(temp_Girls[0], y_position = 0.33, transition = ease)
+            call show_Girl(temp_Girls[0], y_position = 0.33, transition = ease)
 
         $ temp_Girls.remove(temp_Girls[0])
 
     call shift_focus (Girl)
-    if EmmaX.location == "bg_teacher":
+    if EmmaX.teaching:
         "[EmmaX.name] is giving a lecture on mutant relations. Sitting next to you, you notice [Girl.name] shifting uncomfortably in her seat."
         $ Teacher = EmmaX
-    elif StormX.location == "bg_teacher":
+    elif StormX.teaching:
         "[StormX.name] is giving a lecture on geography and politics. Sitting next to you, you notice [Girl.name] shifting uncomfortably in her seat."
         $ Teacher = StormX
     else:
@@ -827,7 +824,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                 "Since Xavier isn't concerned with your activities, you both head back to your room instead."
 
                 $ Party = [Girl]
-                
+
                 jump player_room
 
 

@@ -201,7 +201,8 @@ label masturbation_cycle(Girl):
     while round > 0:
         $ stack_depth = renpy.call_stack_depth()
 
-        call show_full_body(Girl)
+        if not Girl.teaching:
+            call show_full_body(Girl)
 
         $ Girl.lust_face()
 
@@ -249,13 +250,13 @@ label masturbation_cycle(Girl):
 
                     $ Player.focus = 95
 
-                    if Girl.location == Player.location or (Player.location == "bg_classroom" and Girl.location == "bg_teacher"):
+                    if Girl.location == Player.location or (Player.location == "bg_classroom" and Girl.teaching):
                         return "interrupt"
 
             if Girl.lust >= 100:
                 call Girl_Cumming (Girl)
 
-                if Girl.location == Player.location or (Player.location == "bg_classroom" and Girl.location == "bg_teacher"):
+                if Girl.location == Player.location or (Player.location == "bg_classroom" and Girl.teaching):
                     return "interrupt"
 
             if orgasmed:

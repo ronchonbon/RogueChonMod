@@ -1728,7 +1728,7 @@ label execute_plan(Girl):
         $ RogueX.outfit["gloves"] = ""
         $ RogueX.arm_pose = 2
 
-        call move_Girl(RogueX, x_position = stage_left + 0.1, y_position = 0.1, sprite_layer = 1, transition = ease)
+        call show_Girl(RogueX, x_position = stage_left + 0.1, y_position = 0.1, sprite_layer = 1, transition = ease)
 
         "[RogueX.name] moves in and also grabs his head, duplicating his powers as he watches helplessly."
         "Now that she posesses his full power, while his are negated, he has no defenses."
@@ -1750,7 +1750,7 @@ label execute_plan(Girl):
     elif Girl == KittyX:
         $ KittyX.arm_pose = 2
 
-        call move_Girl(KittyX, x_position = stage_left + 0.1, y_position = 0.2, transition = ease)
+        call show_Girl(KittyX, x_position = stage_left + 0.1, y_position = 0.2, transition = ease)
 
         $ KittyX.sprite_location = stage_center
 
@@ -1782,7 +1782,7 @@ label execute_plan(Girl):
 
         ch_k "Well, [KittyX.player_petname], what should we ask for?"
     elif Girl in [EmmaX, JeanX]:
-        call move_Girl(Girl, x_position = stage_left + 0.1, y_position = 0.1, sprite_layer = 1, transition = ease)
+        call show_Girl(Girl, x_position = stage_left + 0.1, y_position = 0.1, sprite_layer = 1, transition = ease)
 
         "[Girl.name] moves behind Xavier and activates her own telepathy."
 
@@ -1836,7 +1836,7 @@ label execute_plan(Girl):
     elif Girl == StormX:
         $ StormX.arm_pose = 1
 
-        call move_Girl(StormX, x_position = stage_left + 0.1, y_position = 0.2, transition = ease)
+        call show_Girl(StormX, x_position = stage_left + 0.1, y_position = 0.2, transition = ease)
 
         $ StormX.sprite_location = stage_center
 
@@ -1869,7 +1869,7 @@ label execute_plan(Girl):
     elif Girl == JubesX:
         $ JubesX.arm_pose = 2
 
-        call move_Girl(KittyX, x_position = stage_left + 0.1, y_position = 0.2, transition = ease)
+        call show_Girl(KittyX, x_position = stage_left + 0.1, y_position = 0.2, transition = ease)
 
         $ JubesX.sprite_location = stage_center
 

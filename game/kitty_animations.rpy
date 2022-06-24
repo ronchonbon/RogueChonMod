@@ -64,43 +64,43 @@ layeredimage Kitty_standing_fondling_animations:
     if not girl_secondary_action:
         Null()
     elif girl_secondary_action == "fondle_breasts":
-        "Girl_fondle_breast_left_animation" pos (0.245, 0.782)
+        "Girl_fondle_breast_left_animation" pos (0.243, 0.747)
     elif girl_secondary_action == "fondle_breasts":
-        "Girl_fondle_breast_right_animation" pos (0.13, 0.755)
+        "Girl_fondle_breast_right_animation" pos (0.128, 0.72)
     elif girl_secondary_action == "fondle_pussy":
-        "Girl_fondle_pussy_animation" pos (0.225, 1.14)
+        "Girl_fondle_pussy_animation" pos (0.223, 1.105)
     elif girl_secondary_action in "finger_pussy":
-        "Girl_finger_pussy_animation" pos (0.226, 1.195)
+        "Girl_finger_pussy_animation" pos (0.224, 1.16)
 
     if not Player.primary_action:
         Null()
     elif Player.primary_action == "fondle_thighs":
-        "Zero_fondle_thigh_animation" pos (0.18, 1.38)
+        "Zero_fondle_thigh_animation" pos (0.178, 1.345)
     elif Player.primary_action == "fondle_breasts":
-        "Zero_fondle_breasts_right_animation" pos (0.17, 0.765)
+        "Zero_fondle_breasts_right_animation" pos (0.168, 0.73)
     elif Player.primary_action == "suck_breasts":
-        "Zero_suck_breasts_right_animation" pos (0.11, 0.7)
+        "Zero_suck_breasts_right_animation" pos (0.108, 0.665)
     elif Player.primary_action == "fondle_pussy":
-        "Zero_fondle_pussy_animation" pos (0.23, 1.12)
+        "Zero_fondle_pussy_animation" pos (0.228, 1.085)
     elif Player.primary_action == "finger_pussy":
-        "Zero_finger_pussy_animation" pos (0.21, 1.32)
+        "Zero_finger_pussy_animation" pos (0.208, 1.34)
     elif Player.primary_action == "eat_pussy":
-        "Zero_eat_pussy_animation" pos (0.24, 1.22)
+        "Zero_eat_pussy_animation" pos (0.238, 1.185)
 
     if not Player.secondary_action:
         Null()
     elif Player.secondary_action == "fondle_thighs":
-        "Zero_fondle_thigh_animation" pos (0.18, 1.38)
+        "Zero_fondle_thigh_animation" pos (0.178, 1.345)
     elif Player.secondary_action == "fondle_breasts":
-        "Zero_fondle_breasts_left_animation" pos (0.212, 0.765)
+        "Zero_fondle_breasts_left_animation" pos (0.21, 0.73)
     elif Player.secondary_action == "suck_breasts":
-        "Zero_suck_breasts_left_animation" pos (0.225, 0.735)
+        "Zero_suck_breasts_left_animation" pos (0.223, 0.7)
     elif Player.secondary_action == "fondle_pussy":
-        "Zero_fondle_pussy_animation" pos (0.23, 1.12)
+        "Zero_fondle_pussy_animation" pos (0.228, 1.085)
     elif Player.secondary_action == "finger_pussy":
-        "Zero_finger_pussy_animation" pos (0.21, 1.32)
+        "Zero_finger_pussy_animation" pos (0.208, 1.34)
     elif Player.secondary_action == "eat_pussy":
-        "Zero_eat_pussy_animation" pos (0.24, 1.22)
+        "Zero_eat_pussy_animation" pos (0.238, 1.185)
 
 image Kitty_handjob_under_hand_animation0:
     "Kitty_handjob_under"

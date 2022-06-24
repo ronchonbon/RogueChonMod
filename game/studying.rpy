@@ -18,7 +18,7 @@ label study:
                 return
 
         call wait
-        call girls_location
+        call set_Girls_locations
 
         return
 
@@ -142,7 +142,7 @@ label study:
         return
 
     call wait
-    call girls_location
+    call set_Girls_locations
 
     return
 

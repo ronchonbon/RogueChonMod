@@ -37,7 +37,7 @@ label meet_Jubes:
 
     $ JubesX.location = Player.location
     
-    call move_Girl(JubesX, x_position = stage_right, animation_transform = vampire)
+    call show_Girl(JubesX, x_position = stage_right, animation_transform = vampire)
 
     hide black_screen onlayer black
 
@@ -78,7 +78,7 @@ label meet_Jubes:
                     $ JubesX.change_stat("love", 90, 2)
                     $ JubesX.change_face("_surprised",2)
 
-                    call move_Girl(JubesX)
+                    call show_Girl(JubesX)
 
                     ch_v "Whoa! Um. . . this is bad. . ."
                     ch_v "Wake up! Wake up! Sorry!!!!"
@@ -88,7 +88,7 @@ label meet_Jubes:
 
                     ch_v "Sorry!"
 
-                    call move_Girl(JubesX, animation_transform = close_launch_animation)
+                    call show_Girl(JubesX, animation_transform = close_launch_animation)
 
                     ch_v "I think I maybe drained a bit too much!"
 
@@ -100,7 +100,7 @@ label meet_Jubes:
                 $ JubesX.change_stat("inhibition", 90, -1)
                 $ JubesX.change_face("_surprised",2)
 
-                call move_Girl(JubesX, animation_transform = close_launch_animation)
+                call show_Girl(JubesX, animation_transform = close_launch_animation)
 
                 ch_v "Ah!"
 
@@ -114,7 +114,7 @@ label meet_Jubes:
                 $ JubesX.change_stat("inhibition", 90, 2)
                 $ JubesX.change_face("_surprised",2)
 
-                call move_Girl(JubesX, animation_transform = close_launch_animation)
+                call show_Girl(JubesX, animation_transform = close_launch_animation)
 
                 ch_v "Oh!"
 
@@ -130,7 +130,7 @@ label meet_Jubes:
                 $ JubesX.change_stat("inhibition", 90, -3)
                 $ JubesX.change_face("_surprised",2)
 
-                call move_Girl(JubesX, animation_transform = close_launch_animation)
+                call show_Girl(JubesX, animation_transform = close_launch_animation)
 
                 ch_v "Ah!"
 
@@ -144,7 +144,7 @@ label meet_Jubes:
 
     $ JubesX.blushing = "_blush1"
 
-    call move_Girl(JubesX, animation_transform = reset_zoom)
+    call show_Girl(JubesX, animation_transform = reset_zoom)
 
     $ counter = 3
 
@@ -1510,7 +1510,7 @@ label Jubes_Cleanhouse:
             $ JubesX.change_stat("inhibition", 80, 10)
             $ JubesX.blushing = "_blush2"
 
-            call move_Girl(JubesX, transition = vpunch)
+            call show_Girl(JubesX, transition = vpunch)
 
             "She clocks you one."
             "That was fair."

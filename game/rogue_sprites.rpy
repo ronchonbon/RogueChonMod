@@ -132,7 +132,7 @@ layeredimage Rogue_sprite standing:
         "images/Rogue_standing/Rogue_standing_held_item[RogueX.outfit[held_item]].png"
 
     always:
-        "Rogue_standing_fondling_animations"
+        "Rogue_standing_fondling_animations" zoom 1.04
 
     anchor (0.5, 0.0) offset (5, 180) zoom 0.48
 

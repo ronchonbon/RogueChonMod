@@ -136,7 +136,7 @@ layeredimage Jubes_sprite standing:
         "images/Jubes_standing/Jubes_standing_held[JubesX.outfit[held_item]].png"
 
     always:
-        "Jubes_standing_fondling_animations"
+        "Jubes_standing_fondling_animations" zoom 0.91
 
     anchor (0.5, 0.0) offset (15, 150) zoom 0.55
 

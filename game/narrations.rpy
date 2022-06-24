@@ -1511,7 +1511,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ TempLust += 1
 
 
-    elif not Player.primary_action and girl_secondary_action == "fondle_pussy":
+    elif girl_secondary_action == "fondle_pussy":
         call Girl_Self_lines (GirlA)
         if "unseen" not in GirlA.recent_history:
             if Player.secondary_action == "jerking_off" or "cockout" in Player.recent_history:
@@ -2914,7 +2914,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
         $ line = line + " before she slides her hand down and firmly grabs your dick"
         $ Action = "handjob"
 
-        call move_Girl(GirlA, y_position = 0.25, transition = ease)
+        call show_Girl(GirlA, y_position = 0.25, transition = ease)
 
         $ approval = 4
         $ TempFocus += 3 if Player.focus > 70 else 2
@@ -2925,7 +2925,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
         call Seen_First_Peen (GirlA, GirlB, React=1)
         $ line = line + " before she slides down and begins to slowly lick your cock"
 
-        call move_Girl(GirlA, y_position = 0.25, transition = ease)
+        call show_Girl(GirlA, y_position = 0.25, transition = ease)
 
         $ Action = "blowjob"
         $ approval = 4

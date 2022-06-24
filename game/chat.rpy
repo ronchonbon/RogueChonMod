@@ -125,7 +125,7 @@ label chat:
                 "She doesn't seem to be picking up."
             else:
                 if Girl == EmmaX:
-                    if EmmaX.location == "bg_teacher" and Player.location == "bg_classroom":
+                    if EmmaX.teaching and Player.location == "bg_classroom":
                         "She texts back, \"We can speak after class, [EmmaX.player_petname].\""
 
                         return
@@ -133,15 +133,15 @@ label chat:
                         jump Emma_chat_Minimal
 
                 if Girl == StormX:
-                    if StormX.location == "bg_teacher" and Player.location == "bg_classroom":
+                    if StormX.teaching and Player.location == "bg_classroom":
                         "She texts back, \"This can wait until after class, [StormX.player_petname].\""
 
                         return
 
-                if Girl.location != Player.location:
-                    show cellphone at sprite_location(stage_left)
-                else:
-                    hide cellphone
+                # if Girl.location != Player.location:
+                #     show cellphone at sprite_location(stage_left)
+                # else:
+                #     hide cellphone
 
                 "You send [Girl.name] a text."
 
@@ -175,10 +175,8 @@ label chat_menu:
     if time_index == 2 and "going_on_date" in Girl.daily_history:
         call Readytogo(Girl)
 
-    if Girl.location != Player.location:
-        show cellphone at sprite_location(stage_left)
-    else:
-        hide cellphone
+    # if Girl.location != Player.location:
+    #     show cellphone
 
     if "_angry" in Girl.recent_history:
         if Girl == RogueX:
@@ -511,7 +509,7 @@ label chat_menu:
                 elif temp_Girls[0] == EmmaX:
                     if temp_Girls[0].location == Player.location:
                         ch_e "I'm glad I have your \"permission\" to leave, but I'd rather be here."
-                    elif temp_Girls[0].location == "bg_teacher" and Player.location == "bg_classroom":
+                    elif temp_Girls[0].teaching and Player.location == "bg_classroom":
                         ch_e "I'm glad I have your \"permission\" to leave, but I {i}do{/i} have a class to teach."
                     else:
                         ch_e "If that's all then, I'll see you later."
@@ -525,7 +523,7 @@ label chat_menu:
                 elif temp_Girls[0] == StormX:
                     if temp_Girls[0].location == Player.location:
                         ch_s "I would rather stay, thank you."
-                    elif temp_Girls[0].location == "bg_teacher" and Player.location == "bg_classroom":
+                    elif temp_Girls[0].teaching and Player.location == "bg_classroom":
                         ch_s "I do have a class to teach. I think that I'll stay."
                     else:
                         ch_s "Ah, fine, I'll see you later."

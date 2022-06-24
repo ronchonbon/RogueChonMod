@@ -118,7 +118,7 @@ layeredimage Jean_sprite standing:
         "images/Jean_standing/Jean_standing_held[JeanX.outfit[held_item]].png"
 
     always:
-        "Jean_standing_fondling_animations"
+        "Jean_standing_fondling_animations" zoom 0.96
 
     anchor (0.5, 0.0) offset (10, 180) zoom 0.52
 

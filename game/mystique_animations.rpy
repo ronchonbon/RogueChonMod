@@ -28,16 +28,16 @@ image Raven_blinking:
 
 layeredimage Mystique_grool_dripping_animation:
     always:
-        "grool_dripping_animation" pos (0.295, 1.05)
+        "grool_dripping_animation" pos (0.495, 1.05)
 
     if MystiqueX.grool > 1 and not MystiqueX.pussy_covered:
-        "grool_dripping_animation" pos (0.295, 1.05)
+        "grool_dripping_animation" pos (0.495, 1.05)
 
     if MystiqueX.grool > 1 and not MystiqueX.pussy_covered:
-        "grool_dripping_animation" pos (0.295, 1.05)
+        "grool_dripping_animation" pos (0.495, 1.05)
 
     if MystiqueX.grool > 1 and not MystiqueX.pussy_covered:
-        "grool_dripping_animation" pos (0.295, 1.05)
+        "grool_dripping_animation" pos (0.495, 1.05)
 
 layeredimage Mystique_grool_animations:
     if not MystiqueX.grool:
@@ -49,16 +49,16 @@ layeredimage Mystique_grool_animations:
 
 layeredimage Mystique_spunk_dripping_animation:
     always:
-        "spunk_dripping_animation" pos (0.295, 1.05)
+        "spunk_dripping_animation" pos (0.495, 1.05)
 
     if not MystiqueX.pussy_covered:
-        "spunk_dripping_animation" pos (0.295, 1.05)
+        "spunk_dripping_animation" pos (0.495, 1.05)
 
     if not MystiqueX.pussy_covered:
-        "spunk_dripping_animation" pos (0.295, 1.05)
+        "spunk_dripping_animation" pos (0.495, 1.05)
 
     if not MystiqueX.pussy_covered:
-        "spunk_dripping_animation" pos (0.295, 1.05)
+        "spunk_dripping_animation" pos (0.495, 1.05)
 
 layeredimage Mystique_spunk_animations:
     if not MystiqueX.spunk["pussy"] and not MystiqueX.spunk["anus"]:

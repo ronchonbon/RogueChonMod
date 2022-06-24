@@ -20,7 +20,7 @@ label set_Character_taboos:
 
     return
 
-label set_the_scene(show_Characters = True, fade = False):
+label set_the_scene(show_Characters = True, fade = False, static = False):
     if fade:
         show black_screen onlayer black
 
@@ -32,40 +32,63 @@ label set_the_scene(show_Characters = True, fade = False):
             call get_color_transform
             $ color_transform = _return
 
-            if not fade:
+            if not fade and not static:
                 call get_transition
                 $ transition = _return[0]
             else:
-                $ transition = None
+                $ transition = False
 
-            $ temp_Girls = Present[:]
+            $ number_of_Girls = len(Present)
+
+            $ temp_Girls = all_Girls[:]
             $ temp_Girls.remove(focused_Girl)
             $ renpy.random.shuffle(temp_Girls)
 
             while temp_Girls:
-                if temp_Girls[0].location == "bg_teacher":
-                    if renpy.showing(temp_Girls[0].tag + "_sprite"):
+                if temp_Girls[0].teaching and Player.location == "bg_classroom":
+                    if renpy.showing(temp_Girls[0].tag + "_sprite") and transition is not False:
                         call show_Girl(temp_Girls[0], sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = dissolve)
                     else:
                         call show_Girl(temp_Girls[0], sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = transition)
-                else:
-                    if renpy.showing(temp_Girls[0].tag + "_sprite"):
+
+                    $ number_of_Girls -= 1
+                elif temp_Girls[0].location == Player.location:
+                    if Player.location == "bg_restaurant" and renpy.showing(temp_Girls[0].tag + "_sprite") and transition is not False:
+                        call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 1, color_transform = color_transform, transition = ease)
+                    elif Player.location == "bg_restaurant":
+                        call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 1, color_transform = color_transform, transition = transition)
+                    elif renpy.showing(temp_Girls[0].tag + "_sprite") and transition is not False:
                         call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 3, color_transform = color_transform, transition = ease)
                     else:
                         call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 3, color_transform = color_transform, transition = transition)
 
+                    $ number_of_Girls -= 1
+
                     if stage_center + total_offset + offset >= stage_far_far_right:
-                        $ total_offset = -offset*(len(temp_Girls) - 1)
+                        $ total_offset = -offset*(number_of_Girls - 1)
                     else:
                         $ total_offset += offset
+                elif renpy.showing(temp_Girls[0].tag + "_sprite"):
+                    call hide_Girl(temp_Girls[0])
 
                 $ temp_Girls.remove(temp_Girls[0])
 
-            if focused_Girl.location == Player.location:
-                if renpy.showing(focused_Girl.tag + "_sprite"):
+            if focused_Girl.teaching and Player.location == "bg_classroom":
+                if renpy.showing(focused_Girl.tag + "_sprite") and transition is not False:
+                    call show_Girl(focused_Girl, sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = dissolve)
+                else:
+                    call show_Girl(focused_Girl, sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = transition)
+            elif focused_Girl.location == Player.location:
+                if Player.location == "bg_restaurant" and renpy.showing(focused_Girl.tag + "_sprite") and transition is not False:
+                    call show_Girl(focused_Girl, x_position = stage_center, sprite_layer = 1, color_transform = color_transform, transition = ease)
+                elif Player.location == "bg_restaurant":
+                    call show_Girl(focused_Girl, x_position = stage_center, sprite_layer = 1, color_transform = color_transform, transition = transition)
+                elif renpy.showing(focused_Girl.tag + "_sprite") and transition is not False:
                     call show_Girl(focused_Girl, x_position = stage_center, sprite_layer = 4, color_transform = color_transform, transition = ease)
                 else:
                     call show_Girl(focused_Girl, x_position = stage_center, sprite_layer = 4, color_transform = color_transform, transition = transition)
+            elif renpy.showing(focused_Girl.tag + "_sprite"):
+                call hide_Girl(focused_Girl)
 
         if Player.location == "bg_study" and time_index < 3:
             show Xavier_sprite zorder 3 at sprite_location(stage_left)
@@ -73,8 +96,6 @@ label set_the_scene(show_Characters = True, fade = False):
         call hide_all
 
     if fade:
-        pause 1.0
-
         hide black_screen onlayer black
 
     return
@@ -203,7 +224,7 @@ label event_calls:
                 return
             elif "sex friend" not in event_Girls[0].player_petnames and event_Girls[0].inhibition >= 500:
                 if event_Girls[0] == EmmaX:
-                    if Player.location == "bg_classroom" and (EmmaX.location == "bg_teacher" or EmmaX.location == "bg_classroom") and time_index == 2:
+                    if Player.location == "bg_classroom" and (EmmaX.teaching or EmmaX.location == "bg_classroom") and time_index == 2:
                         call Emma_Sexfriend
                         return
                 elif event_Girls[0] == StormX:
@@ -317,13 +338,13 @@ label traveling_event_calls:
                 call meet_Storm_prelude
 
                 return
-            elif "attic" in Player.history and day >= 5:
+            elif "attic" in Player.history and "water" not in Player.history and day >= 5:
                 call meet_StormWater
 
                 return
     else:
         if Player.location == "bg_classroom":
-            if StormX.location == "bg_teacher" and "Peter" in StormX.history:
+            if StormX.teaching and "Peter" in StormX.history:
                 call Storm_Peter
 
                 return
@@ -447,7 +468,7 @@ label tenth_round:
         "You wait for [Occupant.name] to return."
 
     call wait
-    call girls_location
+    call set_Girls_locations
 
     if time_index < 3 or Occupant.location != Player.location:
         return
@@ -500,7 +521,7 @@ label tenth_round:
 
     return
 
-label girls_location:
+label set_Girls_locations:
     $ Nearby = []
 
     $ temp_Girls = active_Girls[:]
@@ -535,7 +556,7 @@ label girls_location:
         $ temp_Girls.remove(temp_Girls[0])
 
     while leaving_Girls:
-        call expression temp_Girls[0].tag + "_Leave"
+        call expression leaving_Girls[0].tag + "_Leave"
 
         $ leaving_Girls.remove(leaving_Girls[0])
 
@@ -556,7 +577,7 @@ label change_clothes:
                     G.outfit_name = "swimwear"
                 elif G.location == "bg_showerroom":
                     G.outfit_name = "shower"
-                elif G.location == "bg_teacher":
+                elif G.teaching:
                     G.outfit_name = "casual1"
                 else:
                     G.outfit_name = G.today_outfit_name
@@ -684,6 +705,8 @@ label wait:
 
     call lesbian_check
     call checkout
+
+    pause 0.5
 
     hide black_screen onlayer black
 
@@ -923,7 +946,7 @@ label reset_all_girls_at_beginning:
             G.event_happened[3] -= 1 if G.event_happened[3] else 0
             G.forced = False
 
-            if G.location == "bg_classroom" or G.location == "bg_dangerroom" or G.location == "bg_teacher":
+            if G.location == "bg_classroom" or G.location == "bg_dangerroom" or G.teaching:
                 G.XP += 10
 
             G.blushing = ""
@@ -1129,8 +1152,6 @@ label clear_the_room(Girl, passive = False, silent = False):
 
                     if Player.location == G.home:
                         hosted = True
-                elif Player.location == "bg_classroom" and G.location == "bg_teacher":
-                    Girls.append(G)
 
     if Girl.location != Player.location:
         call add_Girls(Girl)
@@ -1339,9 +1360,10 @@ label return_to_room:
     menu:
         "Return to your room and deal with that?"
         "Yes":
+            $ Player.location = "bg_player"
             $ Player.traveling = True
 
-            jump player_room
+            jump reset_location
         "No":
             pass
 
@@ -1890,7 +1912,7 @@ label coitus_interruptus(Partners, Interrupters):
         ch_e "I. . . This isn't what it looks like. . ."
 
         if Player.location == EmmaX.home:
-            $ Player.location = "bg_entry"
+            $ Player.location = "bg_door"
 
             call hide_Girl(EmmaX, transition == False)
 
@@ -2181,6 +2203,9 @@ label Girls_arrive(arriving_Girls):
     if arriving_Girls in all_Girls:
         $ arriving_Girls = [arriving_Girls]
 
+    while len(arriving_Girls) > 2:
+        $ arriving_Girls.remove(arriving_Girls[-1])
+
     $ Primary = None
 
     while temp_Girls:
@@ -2220,13 +2245,18 @@ label Girls_arrive(arriving_Girls):
         call locked_door(arriving_Girls)
 
         if not _return:
-            return
+            return False
     else:
         if Player.location == "bg_campus" or Player.location == "bg_pool":
             if len(arriving_Girls) > 1:
                 "Suddenly, [line] round a corner."
             else:
                 "Suddenly, [line] rounds a corner."
+        elif Player.location == "bg_classroom":
+            if len(arriving_Girls) > 1:
+                "[line] walk into the room."
+            else:
+                "[line] walks into the room."
         else:
             if Primary == KittyX:
                 "You look to the door just as [Primary.name] phases into the room."
@@ -2249,7 +2279,7 @@ label Girls_arrive(arriving_Girls):
             call coitus_interruptus(Partners, arriving_Girls)
 
             if not _return:
-                return
+                return False
 
         if Player.location == "bg_player":
             if Primary == RogueX:
@@ -2286,11 +2316,11 @@ label Girls_arrive(arriving_Girls):
 
             menu:
                 extend ""
-                "Come on in.":
+                "Sure.":
                     $ line = "sure"
                 "Not right now, maybe later.":
                     $ line = "later"
-                "Yeah, actually.":
+                "No.":
                     $ line = "no"
 
             if line == "sure":
@@ -2824,6 +2854,8 @@ label Girls_arrive(arriving_Girls):
                 else:
                     $ Primary = None
 
+            $ line = None
+
             if Primary:
                 if approval_check(Primary, 1000):
                     if D20 >= 10:
@@ -2866,9 +2898,9 @@ label Girls_arrive(arriving_Girls):
             if line:
                 "[line]."
 
-            if EmmaX.location == "bg_teacher":
+            if EmmaX.teaching:
                 "[EmmaX.name] takes her position behind the podium."
-            elif StormX.location == "bg_teacher":
+            elif StormX.teaching:
                 "[StormX.name] takes her position behind the podium."
         elif Player.location in ["bg_campus", "bg_dangerroom", "bg_pool"]:
             if Primary == RogueX or Secondary == RogueX:
@@ -2897,7 +2929,7 @@ label Girls_arrive(arriving_Girls):
     if Nearby:
         "There were some others as well, but they kept their distance."
 
-    return
+    return True
 
 
 
@@ -3471,7 +3503,7 @@ label JumperCheck(Girls=[]):
 
             pass
         elif temp_Girls[0].remaining_actions and temp_Girls[0].thirst >= 30 and approval_check(temp_Girls[0], 500, "I") and "refused" not in temp_Girls[0].daily_history and "met" in temp_Girls[0].history:
-            if "chill" not in temp_Girls[0].traits and temp_Girls[0].tag not in Player.daily_history and "jumped" not in temp_Girls[0].daily_history and temp_Girls[0].location != "bg_teacher":
+            if "chill" not in temp_Girls[0].traits and temp_Girls[0].tag not in Player.daily_history and "jumped" not in temp_Girls[0].daily_history and not temp_Girls[0].teaching:
 
                 if renpy.random.randint(0,3) > 1:
                     $ Girls.append(temp_Girls[0])
@@ -3660,7 +3692,7 @@ label Jumped(Act=0):
             call Seen_First_Peen (Girls[0], Partner, 1)
 
     if Partner:
-        call Girls_Noticed (Girls[0], 1)
+        call Girls_Noticed (Girls[0], Partner, 1)
 
     call before_action(Girls[0], Act, Girls[0])
 
@@ -4010,9 +4042,14 @@ label Escalation(Girl=0):
 
     return
 
-label Sex_Dialog(Primary=focused_Girl, Secondary=0, TempFocus=0, PrimaryLust=0, SecondaryLust=0, line1=0, line2=0, line3=0, line4=0, D20S=0):
-
-
+label Sex_Dialog(Primary, Secondary):
+    $ TempFocus=0
+    $ PrimaryLust=0
+    $ SecondaryLust=0
+    $ line2=0
+    $ line3=0
+    $ line4=0
+    $ D20S=0
 
 
 
@@ -4027,10 +4064,6 @@ label Sex_Dialog(Primary=focused_Girl, Secondary=0, TempFocus=0, PrimaryLust=0, 
 
 
     call Girls_taboo (Primary)
-    if not Player.primary_action and not Primary.secondary_action:
-        return
-
-    $ Secondary = Partner
 
     call Primary_SexDialog
     $ line1 = line
@@ -4931,10 +4964,10 @@ label Girls_taboo(Girl, Choice=0):
                 ch_x "Hmmm. . ."
                 $ Girl.change_stat("inhibition", 90, 2)
                 $ Girl.change_stat("lust", 200, 3)
-        if Player.location == "bg_classroom" and EmmaX.location == "bg_teacher" and Girl != EmmaX:
+        if Player.location == "bg_classroom" and EmmaX.teaching and Girl != EmmaX:
 
             call Emma_Teacher_Caught (Girl)
-        elif Player.location == "bg_classroom" and StormX.location == "bg_teacher" and Girl != StormX:
+        elif Player.location == "bg_classroom" and StormX.teaching and Girl != StormX:
 
             call Storm_Teacher_Caught (Girl)
         elif "interruption" in Player.recent_history:
@@ -4957,11 +4990,30 @@ label Girls_taboo(Girl, Choice=0):
             if interrupting_Girl:
                 call Girls_arrive(interrupting_Girl)
 
-        call Girls_Noticed (Girl)
+        python:
+            Other = None
+
+            for G in all_Girls:
+                if G != Girl and G.location == Player.location:
+                    Other = G
+
+                    break
+
+        if Other:
+            call Girls_Noticed(Girl, Other)
 
     if taboo <= 20:
+        python:
+            Other = None
 
-        call Girls_Noticed (Girl)
+            for G in all_Girls:
+                if G != Girl and G.location == Player.location:
+                    Other = G
+
+                    break
+
+        if Other:
+            call Girls_Noticed (Girl, Other)
         return
     elif (Player.primary_action == "kiss" and not Player.secondary_action and not girl_secondary_action):
 
@@ -5225,14 +5277,7 @@ label Girls_taboo(Girl, Choice=0):
     $ Girl.daily_history.append("spotted")  if "spotted" not in Girl.daily_history else Girl.daily_history
     return
 
-label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0):
-    python:
-        for temp_Girl in all_Girls:
-            if temp_Girl != Girl and temp_Girl.location == Player.location:
-                Other = temp_Girl
-
-                break
-
+label Girls_Noticed(Girl, Other, Silent=0):
     if "threesome" in Other.recent_history:
         return
     if Partner == Other and "noticed " + Girl.tag in Other.recent_history:

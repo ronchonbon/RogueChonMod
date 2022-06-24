@@ -53,7 +53,7 @@ label training:
         $ temp_Girls.remove(temp_Girls[0])
 
     call wait
-    call girls_location
+    call set_Girls_locations
     call set_the_scene
 
     "The training session has ended, what would you like to do next?"

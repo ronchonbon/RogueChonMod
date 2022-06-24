@@ -2160,12 +2160,14 @@ label Laura_Leave:
             $ Girl = LauraX
 
             jump girls_room
+        elif destination == "bg_campus":
+            jump campus
         elif destination == "bg_classroom":
             jump classroom
         elif destination == "bg_dangerroom":
             jump danger_room
         elif destination == "bg_showerroom":
-            jump shower
+            jump shower_room
         elif destination == "bg_pool":
             jump pool
         elif destination == "bg_study":

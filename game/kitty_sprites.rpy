@@ -125,7 +125,7 @@ layeredimage Kitty_sprite standing:
         "images/Kitty_standing/Kitty_standing_held[KittyX.outfit[held_item]].png"
 
     always:
-        "Kitty_standing_fondling_animations"
+        "Kitty_standing_fondling_animations" pos (-0.002, -0.035) zoom 1.03
 
     anchor (0.5, 0.0) offset (40, 175) zoom 0.485
 

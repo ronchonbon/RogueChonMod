@@ -4109,7 +4109,7 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
         elif Girl.wearing_skirt:
             "[Girl.name] looks around, reaches into her skirt, and pulls her panties out."
         elif Girl.outfit["hose"] in ["_tights", "_pantyhose"]:
-            "[Girl.name] looks around, reaches through her [Girl.outfit['hose']], and pulls her panties out."
+            "[Girl.name] looks around, reaches through her [Girl.outfit[hose]], and pulls her panties out."
         else:
             "[Girl.name] looks around and pulls her panties off."
 
@@ -4192,7 +4192,7 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
 
         $ Girl.bottom_pulled_down = False
     elif Girl.wearing_skirt and Girl.outfit["hose"] in ["_tights", "_pantyhose"]:
-        "She hands you the panties and then pulls her [Girl.outfit['hose']] back on and her skirt back down."
+        "She hands you the panties and then pulls her [Girl.outfit[hose]] back on and her skirt back down."
 
         $ Girl.upskirt = False
     elif Girl.wearing_skirt:
@@ -4200,7 +4200,7 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
 
         $ Girl.upskirt = False
     elif Girl.outfit["hose"] in ["_tights", "_pantyhose"]:
-        "She hands you the panties and then pulls her [Girl.outfit['hose']] back on."
+        "She hands you the panties and then pulls her [Girl.outfit[hose]] back on."
     else:
         "[Girl.name] hands them to you in a ball."
 

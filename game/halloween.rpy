@@ -1628,7 +1628,7 @@ label Halloween_Ending(Girl=0):
 
     $ Player.location = "bg_player"
     call wait
-    call girls_location
+    call set_Girls_locations
     if Girl:
         $ Girl.location = "bg_player"
 

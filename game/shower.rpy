@@ -497,6 +497,7 @@ label showering:
 
         $ intruding_Girls = Nearby[:]
 
+        call check_who_is_present
         call set_the_scene
         call Seen_First_Peen (0, 0, 1, 1)
 

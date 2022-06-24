@@ -1,7 +1,6 @@
 label meet_Emma:
     $ Player.location = "bg_classroom"
 
-    "You enter the classroom and have a seat."
     "The bell to class rings, but Professor McCoy seems to be late."
     "A strange woman enters the room and heads to the podium with a regal stride."
 
@@ -10,7 +9,9 @@ label meet_Emma:
     $ EmmaX.arm_pose = 1
     $ EmmaX.change_face("_normal")
 
-    call add_Girls(EmmaX)
+    call shift_focus(EmmaX)
+    call check_who_is_present
+    call set_the_scene
 
     ch_e "Hello students. My name is Emma Frost, and I have been invited to conduct this class."
 
@@ -48,7 +49,8 @@ label meet_Emma:
     ch_e "All right students, class dismissed."
     ch_e "[EmmaX.player_petname], could you wait a moment, I have something to discuss with you."
 
-    call move_Girl(EmmaX, x_position = stage_center, sprite_layer = 4, animation_transform = reset_zoom_instantly, transition = dissolve)
+    call clear_the_room(EmmaX, passive = True, silent = True)
+    call show_Girl(EmmaX, x_position = stage_center, sprite_layer = 4, animation_transform = reset_zoom_instantly, transition = dissolve)
 
     menu:
         extend ""
@@ -329,18 +331,16 @@ label Emma_Caught_Classroom:
 
     $ Player.location = "bg_classroom"
 
-    $ EmmaX.change_outfit()
-
-    call clear_the_room(EmmaX, silent = True)
-
-    "As you walk down the halls, you hear some odd noises coming from the classroom."
-
-    call shift_focus(EmmaX)
-    call set_the_scene
+    call clear_the_room(EmmaX, passive = True, silent = True)
 
     $ EmmaX.location = "bg_teacher"
-    $ EmmaX.change_face("_sexy", eyes = "_closed")
     $ EmmaX.arm_pose = 1
+    $ EmmaX.change_face("_sexy", eyes = "_closed")
+
+    call check_who_is_present
+    call set_the_scene
+
+    "As you walk down the halls, you hear some odd noises coming from the classroom."
 
     $ Player.add_word(1,"interruption")
 
@@ -348,6 +348,8 @@ label Emma_Caught_Classroom:
     $ Count = 0
 
     hide black_screen onlayer black
+
+    call shift_focus(EmmaX)
 
     $ girl_secondary_action = "fondle_pussy"
     $ second_girl_secondary_action = "fondle_breasts"
@@ -368,13 +370,16 @@ label Emma_Caught_Classroom:
         call masturbation_cycle(EmmaX)
 
     if "_angry" in EmmaX.recent_history:
-        jump classroom
+        return
 
+    $ EmmaX.teaching = False
     $ EmmaX.eyes = "_sexy"
     $ EmmaX.brows = "_confused"
     $ EmmaX.mouth = "_normal"
     $ EmmaX.arm_pose = 1
-    $ EmmaX.change_outfit()
+
+    call stop_all_actions
+    call set_the_scene
 
     if "classcaught" in EmmaX.history:
         ch_e "I notice you make a habit of dropping in."

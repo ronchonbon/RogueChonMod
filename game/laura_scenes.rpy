@@ -13,7 +13,7 @@ label meet_Laura:
     $ LauraX.location = Player.location
     $ LauraX.change_face("_normal")
 
-    call move_Girl(LauraX, x_position = stage_center, animation_transform = close_launch_animation(1.3), transition = False)
+    call show_Girl(LauraX, x_position = stage_center, animation_transform = close_launch_animation(1.3), transition = False)
 
     pause 1.0
 
@@ -21,7 +21,7 @@ label meet_Laura:
 
     "When you come to, a girl pulls you up by your arm."
 
-    call move_Girl(LauraX, animation_transform = reset_zoom)
+    call show_Girl(LauraX, animation_transform = reset_zoom)
     call shift_focus(LauraX)
 
     $ LauraX.change_face("_surprised", eyes = "_squint", brows = "_sad")

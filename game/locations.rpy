@@ -2,6 +2,8 @@ label world_map:
     $ stack_depth = renpy.call_stack_depth()
 
     while True:
+        $ destination = None
+
         menu:
             "Where would you like to go?"
             "My room" if Player.location != "bg_player":
@@ -72,12 +74,14 @@ label world_map:
                 $ Girl = destination
 
                 jump girls_room
+            elif destination == "bg_campus":
+                jump campus
             elif destination == "bg_classroom":
                 jump classroom
             elif destination == "bg_dangerroom":
                 jump danger_room
             elif destination == "bg_showerroom":
-                jump shower
+                jump shower_room
             elif destination == "bg_pool":
                 jump pool
             elif destination == "bg_study":
@@ -104,7 +108,7 @@ label player_room:
 
     if round <= 10:
         call tenth_round
-        call girls_location
+        call set_Girls_locations
 
     call event_calls
 
@@ -128,13 +132,13 @@ label player_room:
                 $ door_locked = False
             "Sleep" if time_index > 2:
                 call tenth_round
-                call girls_location
+                call set_Girls_locations
                 call event_calls
             "Wait" if time_index < 3:
                 "You wait around a bit."
 
                 call tenth_round
-                call girls_location
+                call set_Girls_locations
                 call event_calls
             "Special options":
                 call SpecialMenu
@@ -479,14 +483,14 @@ label girls_room_entry:
 
             jump reset_location
 
-    if Girl.location == "bg_entry":
+    if Girl.location == "bg_door":
         $ Girl.location = Girl.home
 
     return
 
 label girls_room:
     if Player.traveling:
-        $ Player.location = "bg_entry"
+        $ Player.location = "bg_door"
 
         $ door_locked = False
 
@@ -513,7 +517,7 @@ label girls_room:
 
     if round <= 10:
         call tenth_round
-        call girls_location
+        call set_Girls_locations
 
     call event_calls
 
@@ -558,13 +562,13 @@ label girls_room:
                 $ door_locked = False
             "Sleep" if time_index > 2:
                 call tenth_round
-                call girls_location
+                call set_Girls_locations
                 call event_calls
             "Wait" if time_index < 3:
                 "You wait around a bit."
 
                 call tenth_round
-                call girls_location
+                call set_Girls_locations
                 call event_calls
             "Leave":
                 call world_map
@@ -593,7 +597,7 @@ label campus:
             jump player_room
 
         call tenth_round
-        call girls_location
+        call set_Girls_locations
 
     call event_calls
 
@@ -609,7 +613,7 @@ label campus:
                 "You wait around a bit."
 
                 call tenth_round
-                call girls_location
+                call set_Girls_locations
                 call event_calls
             "Leave":
                 call world_map
@@ -652,7 +656,7 @@ label classroom:
             jump reset_location
 
         call tenth_round
-        call girls_location
+        call set_Girls_locations
 
     call event_calls
 
@@ -665,11 +669,17 @@ label classroom:
             "Take the morning class" if weekday < 5 and time_index == 0:
                 if round >= 30:
                     call take_class
+                    call tenth_round
+                    call set_Girls_locations
+                    call event_calls
                 else:
                     "Class is already letting out. You can hang out until the next one."
             "Take the afternoon class" if weekday < 5 and time_index == 1:
                 if round >= 30:
                     call take_class
+                    call tenth_round
+                    call set_Girls_locations
+                    call event_calls
                 else:
                     "Class is already letting out. You can hang out until they lock up for the night."
             "Chat":
@@ -689,7 +699,7 @@ label classroom:
                 "You hang out for a bit."
 
                 call tenth_round
-                call girls_location
+                call set_Girls_locations
                 call event_calls
 
                 if time_index < 2:
@@ -844,7 +854,7 @@ label danger_room:
             jump reset_location
 
         call tenth_round
-        call girls_location
+        call set_Girls_locations
 
     call event_calls
 
@@ -878,7 +888,7 @@ label danger_room:
                 "You hang out for a bit."
 
                 call tenth_round
-                call girls_location
+                call set_Girls_locations
                 call event_calls
             "Leave":
                 call world_map
@@ -910,10 +920,10 @@ label shower_entry:
 
             $ Player.location = "bg_showerroom"
 
+            call traveling_event_calls
             call check_who_is_present
             call set_Character_taboos
             call set_the_scene(fade = True)
-
             call caught_changing(showering_Girls[0])
 
     python:
@@ -928,6 +938,8 @@ label shower_entry:
 
     $ Player.location = "bg_showerroom"
 
+    call traveling_event_calls
+    call check_who_is_present
     call set_the_scene(fade = True)
 
     if len(Player.Party) > 2:
@@ -1010,9 +1022,11 @@ label shower_entry:
         if JubesX in Player.Party:
             ch_v "Hey, [showering_Girls[0].name]."
 
+    return
+
 label shower_room:
     if Player.traveling:
-        $ Player.location = "bg_entry"
+        $ Player.location = "bg_door"
 
         $ door_locked = False
 
@@ -1045,7 +1059,7 @@ label shower_room:
             jump player_room
 
         call tenth_round
-        call girls_location
+        call set_Girls_locations
 
     call event_calls
 
@@ -1069,7 +1083,7 @@ label shower_room:
                     "Not gonna lie, kinda weird."
 
                 call tenth_round
-                call girls_location
+                call set_Girls_locations
                 call event_calls
 
                 python:
@@ -1108,7 +1122,7 @@ label pool:
             jump player_room
 
         call tenth_round
-        call girls_location
+        call set_Girls_locations
 
     call event_calls
 
@@ -1141,7 +1155,7 @@ label pool:
                 "You hang out for a bit."
 
                 call tenth_round
-                call girls_location
+                call set_Girls_locations
                 call event_calls
             "Leave":
                 call world_map
@@ -1283,7 +1297,7 @@ label study_entry:
 
 label study_room:
     if Player.traveling:
-        $ Player.location = "bg_entry"
+        $ Player.location = "bg_door"
 
         $ door_locked = False
 
@@ -1317,7 +1331,7 @@ label study_room:
             jump player_room
 
         call tenth_round
-        call girls_location
+        call set_Girls_locations
 
     call event_calls
 
@@ -1392,25 +1406,12 @@ label study_room:
                     jump reset_location
                 else:
                     call tenth_round
-                    call girls_location
+                    call set_Girls_locations
                     call event_calls
 
                     ch_x "Not that I mind the company, but is there something I can do for you?"
             "Leave":
                 call world_map
-
-label mall_entry:
-    call check_sunshock
-
-    $ Nearby = []
-
-    $ Player.location = "bg_mall"
-
-    $ door_locked = False
-
-    call set_the_scene
-    call set_Character_taboos
-    call event_calls
 
 label mall:
     $ Player.location = "bg_mall"
@@ -1436,7 +1437,7 @@ label mall:
             jump player_room
 
         call tenth_round
-        call girls_location
+        call set_Girls_locations
 
     call event_calls
 
@@ -1479,7 +1480,7 @@ label mall:
                 "You wait around a bit."
 
                 call tenth_round
-                call girls_location
+                call set_Girls_locations
                 call event_calls
             "Just wander and window shop" if Player.Party and round > 20:
                 python:
@@ -1495,7 +1496,7 @@ label mall:
                     "You wander around with [Player.Party[0].name]and see what they have available."
 
                 call tenth_round
-                call girls_location
+                call set_Girls_locations
                 call event_calls
             "Do something else" if "date" in Player.recent_history and round > 20:
                 jump Date_Location
@@ -1537,6 +1538,10 @@ label reset_location:
         $ stack_depth -= 1
 
         $ renpy.pop_call()
+
+    call hide_all
+
+    $ Player.traveling = True
 
     if Player.location == "bg_player":
         jump player_room

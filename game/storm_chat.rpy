@@ -1715,7 +1715,7 @@ label Storm_Summon(approval_bonus=approval_bonus):
 
     $ D20 = renpy.random.randint(1, 20)
     $ line = 0
-    if StormX.location == "bg_teacher":
+    if StormX.teaching:
         $ approval_bonus = -30
     elif StormX.location == "bg_classroom":
         $ approval_bonus = -30
@@ -1766,7 +1766,7 @@ label Storm_Summon(approval_bonus=approval_bonus):
             pass
         elif "goto" in StormX.recent_history:
             ch_s "You were just over here."
-        elif StormX.location == "bg_classroom"or StormX.location == "bg_teacher":
+        elif StormX.location == "bg_classroom"or StormX.teaching:
             ch_s "You can find me in the classroom."
         elif StormX.location == "bg_dangerroom":
             ch_s "I am in the Danger Room, [StormX.player_petname], care to join me?"
@@ -1905,7 +1905,7 @@ label Storm_Summon(approval_bonus=approval_bonus):
 
     if line == "no":
 
-        if StormX.location == "bg_classroom" or StormX.location == "bg_teacher":
+        if StormX.location == "bg_classroom" or StormX.teaching:
             ch_s "I cannot leave class like this."
         elif StormX.location == "bg_dangerroom":
             ch_s "I have work to put in here."
@@ -1920,7 +1920,7 @@ label Storm_Summon(approval_bonus=approval_bonus):
         $ StormX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
         $ line = 0
-        if StormX.location == "bg_classroom" or StormX.location == "bg_teacher":
+        if StormX.location == "bg_classroom" or StormX.teaching:
             ch_s "I will see you soon then."
             jump classroom
         elif StormX.location == "bg_dangerroom":
@@ -1973,7 +1973,7 @@ label Storm_Leave:
     $ StormX.change_outfit()
 
     if "freetravels" in StormX.traits or not approval_check(StormX, 700):
-        if StormX.location == "bg_classroom" or StormX.location == "bg_teacher":
+        if StormX.location == "bg_classroom" or StormX.teaching:
             ch_s "I've got class to teach."
         elif StormX.location == "bg_dangerroom":
             ch_s "I am heading for the Danger Room."
@@ -2000,7 +2000,7 @@ label Storm_Leave:
     if "follow" not in StormX.traits:
         $ StormX.traits.append("follow")
 
-    if StormX.location == "bg_classroom" or StormX.location == "bg_teacher":
+    if StormX.location == "bg_classroom" or StormX.teaching:
         $ approval_bonus = 30
     elif StormX.location == "bg_dangerroom":
         $ approval_bonus = 20
@@ -2009,7 +2009,7 @@ label Storm_Leave:
     else:
         $ approval_bonus = 0
 
-    if StormX.location == "bg_classroom" or StormX.location == "bg_teacher":
+    if StormX.location == "bg_classroom" or StormX.teaching:
         ch_s "I've got class to teach, are you attending?"
     elif StormX.location == "bg_dangerroom":
         ch_s "I am heading for the Danger Room, care to join me?"
@@ -2115,7 +2115,7 @@ label Storm_Leave:
         return
 
     if line == "no":
-        if StormX.location == "bg_classroom" or StormX.location == "bg_teacher":
+        if StormX.location == "bg_classroom" or StormX.teaching:
             ch_s "I cannot skip class like this."
         elif StormX.location == "bg_dangerroom":
             ch_s "I have work to put in here."
@@ -2129,7 +2129,7 @@ label Storm_Leave:
     elif line == "go to":
         call hide_Girl(StormX)
 
-        if StormX.location == "bg_classroom" or StormX.location == "bg_teacher":
+        if StormX.location == "bg_classroom" or StormX.teaching:
             ch_s "I will see you soon then."
         elif StormX.location == "bg_dangerroom":
             ch_s "I will see you soon then."
@@ -2156,12 +2156,14 @@ label Storm_Leave:
             $ Girl = StormX
 
             jump girls_room
+        elif destination == "bg_campus":
+            jump campus
         elif destination == "bg_classroom":
             jump classroom
         elif destination == "bg_dangerroom":
             jump danger_room
         elif destination == "bg_showerroom":
-            jump shower
+            jump shower_room
         elif destination == "bg_pool":
             jump pool
         elif destination == "bg_study":

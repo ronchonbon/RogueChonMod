@@ -1888,7 +1888,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
 
     $ D20 = renpy.random.randint(1, 20)
     $ line = 0
-    if EmmaX.location == "bg_teacher":
+    if EmmaX.teaching:
         $ approval_bonus = -30
     elif EmmaX.location == "bg_classroom":
         $ approval_bonus = -10
@@ -1940,7 +1940,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
             pass
         elif "goto" in EmmaX.recent_history:
             ch_e "You only just left, why not return?"
-        elif EmmaX.location == "bg_classroom" or EmmaX.location == "bg_teacher":
+        elif EmmaX.location == "bg_classroom" or EmmaX.teaching:
             ch_e "You can find me in the class room, [EmmaX.player_petname]."
         elif EmmaX.location == "bg_dangerroom":
             ch_e "I'm getting some training in, [EmmaX.player_petname], care to join me?"
@@ -2069,7 +2069,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
 
     if line == "no":
 
-        if EmmaX.location == "bg_teacher":
+        if EmmaX.teaching:
             ch_e "I can't exactly leave class, [EmmaX.player_petname]."
         elif EmmaX.location == "bg_classroom":
             ch_e "I have a lot of paperwork, [EmmaX.player_petname]."
@@ -2087,7 +2087,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
         $ line = 0
         $ EmmaX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
-        if EmmaX.location == "bg_classroom" or EmmaX.location == "bg_teacher":
+        if EmmaX.location == "bg_classroom" or EmmaX.teaching:
             ch_e "You don't want to miss too much."
             jump classroom
         elif EmmaX.location == "bg_dangerroom":
@@ -2140,7 +2140,7 @@ label Emma_Leave:
     $ EmmaX.change_outfit()
 
     if "freetravels" in EmmaX.traits or not approval_check(EmmaX, 700):
-        if EmmaX.location == "bg_teacher":
+        if EmmaX.teaching:
             ch_e "I have a class to teach."
         elif EmmaX.location == "bg_classroom":
             ch_e "I have some paperwork to take care of."
@@ -2166,7 +2166,7 @@ label Emma_Leave:
     if "follow" not in EmmaX.traits:
         $ EmmaX.traits.append("follow")
 
-    if EmmaX.location == "bg_teacher":
+    if EmmaX.teaching:
         $ approval_bonus = -40
     elif EmmaX.location == "bg_classroom":
         $ approval_bonus = -10
@@ -2177,7 +2177,7 @@ label Emma_Leave:
     else:
         $ approval_bonus = 0
 
-    if EmmaX.location == "bg_teacher":
+    if EmmaX.teaching:
         ch_e "I've got a class to teach, but you could probably learn a thing or two from it."
     elif EmmaX.location == "bg_classroom":
         ch_e "I have some paperwork to take care of, but you could keep me company."
@@ -2276,7 +2276,7 @@ label Emma_Leave:
         return
 
     if line == "no":
-        if EmmaX.location == "bg_teacher":
+        if EmmaX.teaching:
             ch_e "I'm not \"cutting class,\" [EmmaX.player_petname]."
         elif EmmaX.location == "bg_classroom":
             ch_e "I'm afraid not, [EmmaX.player_petname], I need to get this work done."
@@ -2292,7 +2292,7 @@ label Emma_Leave:
     elif line == "go to":
         call hide_Girl(EmmaX)
 
-        if EmmaX.location == "bg_teacher":
+        if EmmaX.teaching:
             ch_e "I'll see you there."
         elif EmmaX.location == "bg_classroom":
             ch_e "Excellent, that should pass the time."
@@ -2321,12 +2321,14 @@ label Emma_Leave:
             $ Girl = EmmaX
 
             jump girls_room
+        elif destination == "bg_campus":
+            jump campus
         elif destination == "bg_classroom":
             jump classroom
         elif destination == "bg_dangerroom":
             jump danger_room
         elif destination == "bg_showerroom":
-            jump shower
+            jump shower_room
         elif destination == "bg_pool":
             jump pool
         elif destination == "bg_study":

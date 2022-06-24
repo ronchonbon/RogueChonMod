@@ -27,6 +27,8 @@ label addiction_event(Girl):
 
             if not _return:
                 return
+                
+            "[Girl.name] turns to you with a bit of a dazed look."
 
     call clear_the_room(Girl)
     call shift_focus(Girl)

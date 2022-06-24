@@ -1668,7 +1668,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
     $ Girl.drain_word("will_masturbate", 1, 1, 0)
     $ Girl.drain_word("wants_to_masturbate", 1, 1, 0)
 
-    if Girl.location == "bg_teacher" and Player.location == "bg_classroom":
+    if Girl.teaching and Player.location == "bg_classroom":
         pass
     elif Girl.location != Player.location and "phonesex" not in Player.recent_history:
 

@@ -21,7 +21,7 @@ init -1:
 
     default day = 1
     default round = 100
-    default time_options = ["morning", "midday", "evening", "night"]
+    default time_options = ["morning", "midday", "evening", "night", "night"]
     default time_index = 2
     default current_time = time_options[time_index]
     default week = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
@@ -158,6 +158,15 @@ init -1:
     define Mystique_dissolve = ImageDissolve("images/wipes/Mystique_dissolve.jpg", 1.0, 8)
 
 label start:
+    $ renpy.start_predict("images/backgrounds/*.*")
+
+    $ temp_Girls = all_Girls[:]
+
+    while temp_Girls:
+        $ renpy.start_predict("images/" + temp_Girls[0].tag + "_standing/*.*")
+
+        $ temp_Girls.remove(temp_Girls[0])
+
     $ Player = PlayerClass()
 
     python:
@@ -209,13 +218,13 @@ label start:
         for G in all_Girls:
             active_Girls.append(G)
 
-    #         # G.change_face("_surprised", blushing = 2)
-    #         # G.change_outfit("nude")
-    #         # G.mouth = "_smirk"
-    #         # G.grool = 2
-    #         # G.spunk["mouth"] = True
-    #         # G.spunk["pussy"] = True
-    #         # G.spunk["anus"] = True
+    #         G.change_face("_surprised", blushing = 2)
+    #         G.change_outfit("nude")
+    #         G.mouth = "_smirk"
+    #         G.grool = 2
+    #         G.spunk["mouth"] = True
+    #         G.spunk["pussy"] = True
+    #         G.spunk["anus"] = True
     #
     # $ Player.sprite = True
     # $ show_feet = False
@@ -227,37 +236,55 @@ label start:
     #
     # $ girl_secondary_action = "finger_pussy"
 
+    $ location = "bg_campus"
+    $ time_index = 0
     $ exit = False
 
     while not exit:
+        call add_Girls([RogueX, LauraX, MystiqueX], static = True)
+
         menu:
-            "Campus":
-                $ Player.location = "bg_campus"
-            "Pool":
-                $ Player.location = "bg_pool"
-            "My room":
-                $ Player.location = "bg_player"
+            "Location":
+                menu:
+                    "Player's room":
+                        $ Player.location = "bg_player"
+                    "Campus":
+                        $ Player.location = "bg_campus"
+                    "Classroom":
+                        $ Player.location = "bg_classroom"
+                    "Danger Room":
+                        $ Player.location = "bg_dangerroom"
+                    "Pool":
+                        $ Player.location = "bg_pool"
+                    "Restaurant":
+                        $ Player.location = "bg_restaurant"
+                    "Movie theater":
+                        $ Player.location = "bg_movies"
+                    "Back":
+                        pass
+            "Time":
+                menu:
+                    "Morning":
+                        $ time_index = 0
+                        $ current_time = time_options[time_index]
+                    "Midday":
+                        $ time_index = 1
+                        $ current_time = time_options[time_index]
+                    "Evening":
+                        $ time_index = 2
+                        $ current_time = time_options[time_index]
+                    "Night":
+                        $ time_index = 3
+                        $ current_time = time_options[time_index]
+                    "Lights off":
+                        $ time_index = 4
+                        $ current_time = time_options[time_index]
+                    "Back":
+                        pass
             "Exit":
                 $ exit = True
 
-        menu:
-            "Morning":
-                $ time_index = 0
-            "Midday":
-                $ time_index = 1
-            "Evening":
-                $ time_index = 2
-            "Night":
-                $ time_index = 3
-            "Exit":
-                $ exit = True
-
-        $ current_time = time_options[time_index]
-
-        call hide_all
-        call add_Girls(all_Girls, fade = True)
-
-    ""
+    call hide_all
 
     python:
         for G in all_Girls:

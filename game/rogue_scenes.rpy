@@ -2,7 +2,7 @@ label prologue:
     $ time_index = 2
     $ current_time = time_options[time_index]
 
-    $ Player.location = "bg_study"
+    $ Player.location = "bg_entrance"
 
     scene background onlayer background
     scene
@@ -33,14 +33,14 @@ label prologue:
     $ RogueX.location = Player.location
     $ RogueX.change_face("_surprised")
 
-    call move_Girl(RogueX, x_position = stage_far_far_right, transition = easeinright)
+    call show_Girl(RogueX, x_position = stage_far_far_right, transition = easeinright)
     call shift_focus(RogueX)
 
     ch_r "What's that Prof? This new kid can negate mutant powers?"
 
     $ RogueX.mouth = "_normal"
 
-    call move_Girl(RogueX, x_position = stage_right, transition = ease)
+    call show_Girl(RogueX, x_position = stage_right, transition = ease)
 
     ch_r "Maybe even my own?"
     ch_x "That is correct, Rogue, though currently, his powers are weak and uncontrolled."
@@ -58,7 +58,7 @@ label prologue:
 
     hide Xavier_sprite with easeoutright
 
-    call move_Girl(RogueX, x_position = stage_center, transition = ease)
+    call show_Girl(RogueX, x_position = stage_center, transition = ease)
 
     menu:
         ch_r "A pleasure ta meet ya, [RogueX.player_petname]. Let me give ya the lay of the place."
@@ -104,7 +104,7 @@ label prologue:
             $ RogueX.change_stat("obedience", 200, 30)
             $ RogueX.change_face("_angry")
 
-            call move_Girl(RogueX, transition = vpunch)
+            call show_Girl(RogueX, transition = vpunch)
 
             ch_r "Well I never!"
             ch_r "Hmph, I have to give the tour anyways, so get mov'in. . ."
@@ -1324,9 +1324,9 @@ label Rogue_Daddy:
 
 label Rogue_Frisky_Class:
     $ line = 0
-    if EmmaX.location == "bg_teacher":
+    if EmmaX.teaching:
         "[EmmaX.name] is giving a lecture on mutant relations. In her seat next to you, you notice [RogueX.name] shifting uncomfortably in her seat."
-    elif StormX.location == "bg_teacher":
+    elif StormX.teaching:
         "[StormX.name] is giving a lecture on geography and politics. In her seat next to you, you notice [RogueX.name] shifting uncomfortably in her seat."
     else:
         "Professor McCoy is giving a lecture on the X-Gene. In her seat next to you, you notice [RogueX.name] shifting uncomfortably in her seat."
@@ -1553,11 +1553,11 @@ label Rogue_Frisky_Class:
             $ RogueX.change_stat("obedience", 70, -5)
             $ RogueX.change_stat("inhibition", 50, -10)
             $ RogueX.change_face("_surprised")
-            if EmmaX.location == "bg_teacher":
+            if EmmaX.teaching:
                 "[EmmaX.name] stops her lecture in mid-sentence when she notices that the whole class is looking at you and [RogueX.name]."
                 ch_e "[EmmaX.player_petname], [RogueX.name], if you could perhaps pay more attention to the lecture, and less to each other's bodies?"
                 ch_e "Perhaps it would be best if you visited the headmaster's office and cool off?"
-            elif StormX.location == "bg_teacher":
+            elif StormX.teaching:
                 "[StormX.name] stops her lecture in mid-sentence when she notices that the whole class is looking at you and [RogueX.name]."
                 ch_s "[StormX.player_petname], [RogueX.name], I can appreciate your enthusaism, but perhaps not on my time?"
                 ch_s "I think perhaps you should visit Charles and cool off?"

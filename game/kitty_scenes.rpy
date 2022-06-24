@@ -9,7 +9,7 @@ label meet_Kitty:
     $ KittyX.arm_pose = 1
     $ KittyX.change_face("_surprised")
 
-    call move_Girl(KittyX, x_position = stage_center, transition = vpunch)
+    call show_Girl(KittyX, x_position = stage_center, transition = vpunch)
     call shift_focus(KittyX)
 
     "She crashes into you at a full jog, and you both fall to the ground."
@@ -190,7 +190,7 @@ label meet_Kitty:
 
                 $ KittyX.change_face("_angry", 1)
 
-                call move_Girl(KittX, transition = vpunch)
+                call show_Girl(KittyX, transition = vpunch)
 
                 "She elbows you in the ribs and shoves herself back a few steps."
 
@@ -1853,15 +1853,15 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
     elif JubesX.location == Player.location:
         $ Girl = JubesX
 
-    if (EmmaX.location == "bg_teacher" or StormX.location == "bg_teacher") and Player.location == "bg_classroom":
+    if (EmmaX.teaching or StormX.teaching) and Player.location == "bg_classroom":
 
         menu:
             "About who?"
             "[Girl.name]?" if Girl:
                 pass
-            "[EmmaX.name]" if EmmaX.location == "bg_teacher":
+            "[EmmaX.name]" if EmmaX.teaching:
                 $ Girl = EmmaX
-            "[StormX.name]" if StormX.location == "bg_teacher":
+            "[StormX.name]" if StormX.teaching:
                 $ Girl = StormX
             "Never mind":
                 return

@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 262: expected statement.
-    for G in all_Girls:
-          ^
+File "game/utilities.rpy", line 4047: expected statement.
+    , TempFocus=0, PrimaryLust=0, SecondaryLust=0, line2=0, line3=0, line4=0, D20S=0
+    ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Fri Jun 24 04:27:18 2022
+Fri Jun 24 17:54:57 2022

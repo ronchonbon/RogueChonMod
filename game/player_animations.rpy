@@ -3,7 +3,7 @@ image Zero_fondle_thigh_animation:
     "Zero_hand"
 
     subpixel True
-    zoom 0.6
+    zoom 0.67
     block:
         parallel:
             pause 0.5
@@ -23,7 +23,7 @@ image Zero_fondle_breasts_right_animation:
     "Zero_hand"
 
     subpixel True
-    xzoom -0.6 yzoom 0.6
+    xzoom -0.67 yzoom 0.67
     block:
         ease 1 rotate 0
         ease 1 rotate -30
@@ -34,7 +34,7 @@ image Zero_fondle_breasts_left_animation:
     "Zero_hand"
 
     subpixel True
-    zoom 0.6
+    zoom 0.67
     block:
         ease 1 rotate 10
         ease 1 rotate 40
@@ -85,7 +85,7 @@ image Zero_finger_pussy_animation:
     "Zero_finger"
 
     subpixel True
-    zoom 0.6
+    zoom 0.67
     block:
         choice:
             ease 0.75 rotate 30 offset (10, -35)

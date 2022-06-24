@@ -60,7 +60,7 @@ layeredimage Mystique_sprite standing normal:
         "Mystique_head" pos (0.54, 0.32) zoom 0.43
 
     always:
-        "Mystique_standing_fondling_animations"
+        "Mystique_standing_fondling_animations" zoom 0.91
 
     anchor (0.5, 0.0) offset (0, 180) zoom 0.55
 

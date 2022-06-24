@@ -11,12 +11,7 @@ label meet_Storm_prelude:
 label meet_Storm_ask_Emma:
     $ Player.location = "bg_classroom"
 
-    show black_screen onlayer black
-
-    call clear_the_room(EmmaX, passive = False, silent = True)
-    call shift_focus(EmmaX)
-
-    hide black_screen onlayer black
+    call add_Girls(EmmaX, fade = True)
 
     "Before class, you approach [EmmaX.name]."
     ch_p "I've been hearing creaking noises above me, do you have any idea what that could be?"
@@ -140,14 +135,19 @@ label meet_Storm:
     "You climb the stairs up to the attic. Once you reach the top, you hit a wave of humidity."
     "Greeting you at the top is what appears to be an indoor garden. Bright sunlight streams through the windows."
 
+    $ StormX.location = "bg_storm"
     $ StormX.change_outfit("nude")
     $ StormX.change_face("_normal", eyes = "_side")
 
-    call add_Girls(StormX, x_position = stage_center, color_transform = silhouette)
+    call show_Girl(StormX, x_position = stage_center, color_transform = silhouette, transition = False)
 
     "Standing in the middle of the room appears to be a woman. . ."
 
-    call move_Girl(StormX, transition = dissolve)
+    call get_color_transform
+    $ color_transform = _return
+
+    call show_Girl(StormX, color_transform = color_transform, transition = dissolve)
+    call shift_focus(StormX)
 
     "And she's naked."
 
@@ -449,8 +449,6 @@ label meet_Storm:
 
     jump reset_location
 
-    return
-
 label Storm_Nudity:
 
     ch_s "I am not bothered. I do not value modesty so highly."
@@ -645,16 +643,22 @@ label Storm_Touching:
     return
 
 label Storm_Peter:
-
     $ StormX.history.remove("Peter")
+
     if Player.name == "Peter Parker":
         return
+
     $ Player.location = "bg_classroom"
+
     call clear_the_room (StormX, 0, 1)
+
     "Before class begins, [StormX.name] rushes up to you."
+
     $ StormX.location = "bg_classroom"
+
     call shift_focus (StormX)
     call set_the_scene
+
     $ StormX.change_face("_angry",2,eyes = "_surprised")
     ch_s "[Player.name]!"
     $ StormX.change_face("_angry")
@@ -667,7 +671,7 @@ label Storm_Peter:
     $ StormX.change_stat("obedience", 80, 5)
     ch_s "I will not forget that."
     $ StormX.player_petname = Player.name
-    $ Player.location = "bg_teacher"
+    $ Player.location = "bg_classroom"
     call set_the_scene
     return
 

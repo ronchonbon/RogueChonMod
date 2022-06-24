@@ -129,7 +129,16 @@ label check_who_is_present:
     $ Present = Player.Party[:] if Player.Party else []
 
     python:
+        for G in Player.Party:
+            G.location = Player.location
+
         for G in all_Girls:
+            if G.location == "bg_teacher":
+                G.location = "bg_classroom"
+                G.teaching = True
+            elif G.teaching:
+                G.teaching = False
+
             if G not in Present and G.location == Player.location:
                 Present.append(G)
             elif G in Present and G.location != Player.location:
@@ -138,8 +147,6 @@ label check_who_is_present:
         for G in Present:
             if G in Nearby:
                 Nearby.remove(G)
-
-            G.location = Player.location
 
     if Present and focused_Girl not in Present:
         $ renpy.random.shuffle(Present)
@@ -180,7 +187,7 @@ label check_taboo(Character):
         if Character != Player:
             for G in all_Girls:
                 if G != Character and Character.location == G.location and Character.likes[G.tag] <= 700 and not (Character in Player.Harem and G in Player.Harem):
-                    Character.taboo = 20 if Character.taboo < 20 else Charcter.taboo
+                    Character.taboo = 20 if Character.taboo < 20 else Character.taboo
 
             if Character.taboo > taboo and Character.location == Player.location:
                 taboo = Character.taboo
@@ -338,17 +345,6 @@ label check_favorite_actions(Girl = None):
 label who_likes_who(Check = 70, D20 = 0):
     $ D20 = renpy.random.randint(0, 1) if not D20 else D20
 
-    $ teacher = 0
-
-    if EmmaX.location == "bg_teacher":
-        $ EmmaX.location = "bg_classroom"
-
-        $ teacher = 1
-    elif StormX.location == "bg_teacher":
-        $ StormX.location = "bg_classroom"
-
-        $ teacher = 2
-
     python:
         for GA in all_Girls:
             for GB in all_Girls:
@@ -374,11 +370,6 @@ label who_likes_who(Check = 70, D20 = 0):
                     else:
                         GA.check_if_likes(GB, 1000, int(GB.outfit["shame"]/5), 1)
 
-    if teacher == 2:
-        $ StormX.location = "bg_teacher"
-    elif teacher:
-        $ EmmaX.location = "bg_teacher"
-
     return
 
 label check_addiction:
@@ -396,7 +387,7 @@ label check_addiction:
             else:
                 call addiction_fix(JubesX)
         else:
-            if "asked_to_meet" in JubesX.daily_history:
+            if "asked_to_meet" in JubesX.daily_history or JubesX not in Player.Phonebook:
                 pass
             elif "asked_to_meet" in JubesX.daily_history and JubesX.addiction >= 60:
                 "[JubesX.name] texts you. . ."
@@ -430,7 +421,7 @@ label check_addiction:
                 if Player.location == addicted_Girls[0].home or Player.location == "bg_player":
                     call addiction_fix(addicted_Girls[0])
                 else:
-                    if "asked_to_meet" in addicted_Girls[0].recent_history:
+                    if "asked_to_meet" in addicted_Girls[0].recent_history or addicted_Girls[0] not in Player.Phonebook:
                         pass
                     elif "asked_to_meet" in addicted_Girls[0].daily_history and addicted_Girls[0].addiction >= 80:
                         "[addicted_Girls[0].name] texts you. . ."
@@ -459,7 +450,7 @@ label check_addiction:
                 if Player.location == addicted_Girls[0].home or Player.location == "bg_player":
                     call addiction_event(addicted_Girls[0])
                 else:
-                    if "asked_to_meet" in addicted_Girls[0].recent_history:
+                    if "asked_to_meet" in addicted_Girls[0].recent_history or addicted_Girls[0] not in Player.Phonebook:
                         pass
                     elif "asked_to_meet" in addicted_Girls[0].daily_history and addicted_Girls[0].addiction >= 80:
                         "[addicted_Girls[0].name] texts you. . ."

@@ -150,6 +150,7 @@ init python:
             self.forced = 0
 
             self.location = "hold"
+            self.teaching = False
 
             self.seen_peen = False
             self.seen_breasts = False

@@ -27,7 +27,7 @@ label enter_main_sex_menu(Girl):
 
     $ Girl.arm_pose = 1
 
-    call set_the_scene(1, 0, 0, 0, 1)
+    call set_the_scene
 
     if Girl in [EmmaX, StormX]:
         if "detention" in Girl.recent_history:

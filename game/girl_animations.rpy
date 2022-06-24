@@ -2,15 +2,21 @@ transform sprite_location(x_position = stage_right, y_position = 0):
     pos (x_position, y_position)
 
 transform silhouette:
-    matrixcolor TintMatrix(Color(rgb = (0.44, 0.54, 0.75)))*BrightnessMatrix(-0.2)
+    matrixcolor TintMatrix(Color(rgb = (0.3, 0.4, 0.4)))*BrightnessMatrix(-0.5)
 
 transform morning:
-    matrixcolor TintMatrix(Color(rgb = (1.0, 0.95, 0.8)))*BrightnessMatrix(-0.05)
+    matrixcolor TintMatrix(Color(rgb = (1.0, 0.95, 0.9)))*BrightnessMatrix(0.02)
+
+transform daylight:
+    matrixcolor TintMatrix(Color(rgb = (1.0, 1.0, 1.0)))*BrightnessMatrix(0.0)
 
 transform sunset:
     matrixcolor TintMatrix(Color(rgb = (1.0, 0.8, 0.65)))*BrightnessMatrix(0.05)
 
-transform night:
+transform moonlight:
+    matrixcolor TintMatrix(Color(rgb = (0.5, 0.6, 1.0)))*BrightnessMatrix(0.0)
+
+transform lights_off:
     matrixcolor TintMatrix(Color(rgb = (0.45, 0.45, 0.65)))*BrightnessMatrix(-0.07)
 
 transform candlelit:
@@ -23,10 +29,10 @@ transform teaching:
     pos (0.5, 0.15) zoom 0.4
 
 transform reset_zoom:
-    ease 0.75 offset (0, 0) zoom 1.0
+    ease 0.75 offset (0, 0) xzoom 1.0 yzoom 1.0 zoom 1.0
 
 transform reset_zoom_instantly:
-    offset (0, 0) zoom 1.0
+    offset (0, 0) xzoom 1.0 yzoom 1.0 zoom 1.0
 
 transform smooch_animation:
     ease 0.6 ypos 0.1 zoom 2.0
@@ -80,6 +86,13 @@ transform vampire:
         repeat
 
 label show_Girl(Girl, x_position = None, y_position = None, sprite_layer = None, color_transform = None, animation_transform = None, transition = None):
+    $ renpy.start_predict("images/" + Girl.tag + "_standing/*.*")
+
+    if Girl == RogueX:
+        $ renpy.start_predict("images/" + Girl.tag + "_blowjob/*.*")
+    elif Girl == MystiqueX:
+        $ renpy.start_predict("images/Raven_standing/*.*")
+
     if x_position:
         $ Girl.sprite_location = x_position
 
@@ -332,6 +345,14 @@ label hide_Girl(Girl, transition = None):
         elif Girl == MystiqueX:
             hide Mystique_sprite
 
+    $ renpy.stop_predict("images/" + Girl.tag + "_standing/*.*")
+    $ renpy.stop_predict("images/" + Girl.tag + "_handjob/*.*")
+    $ renpy.stop_predict("images/" + Girl.tag + "_titjob/*.*")
+    $ renpy.stop_predict("images/" + Girl.tag + "_footjob/*.*")
+    $ renpy.stop_predict("images/" + Girl.tag + "_blowjob/*.*")
+    $ renpy.stop_predict("images/" + Girl.tag + "_sex/*.*")
+    $ renpy.stop_predict("images/" + Girl.tag + "_doggy/*.*")
+
     return
 
 label hide_all:
@@ -349,16 +370,20 @@ label hide_all:
     return
 
 label get_color_transform:
-    if Player.location in ["bg_campus", "bg_pool", "bg_storm"] and time_index == 2:
+    if Player.location in ["bg_campus", "bg_pool", "bg_storm"] and time_index == 0:
+        $ color_transform = morning
+    elif Player.location in ["bg_campus", "bg_pool", "bg_storm"] and time_index == 2:
         $ color_transform = sunset
-    elif Player.location in ["bg_campus", "bg_pool", "bg_storm", "bg_dangerroom"] and time_index == 3:
-        $ color_transform = night
+    elif Player.location in ["bg_campus", "bg_pool", "bg_storm"] and time_index > 2:
+        $ color_transform = moonlight
+    elif (Player.location in bedrooms or Player.location in ["bg_classroom", "bg_dangerroom"]) and time_index == 4:
+        $ color_transform = lights_off
     elif Player.location == "bg_restaurant":
-        $ color_transform = candelit
+        $ color_transform = candlelit
     elif Player.location == "bg_movies":
         $ color_transform = theater
     else:
-        $ color_transform = None
+        $ color_transform = daylight
 
     return color_transform
 
@@ -379,26 +404,17 @@ label get_transition:
 
     return entrance_transition, exit_transition
 
-label add_Girls(Girls, fade = False):
+label add_Girls(Girls, fade = False, static = False):
     if Girls in all_Girls:
         $ Girls = [Girls]
 
     python:
         for G in Girls:
-            if G.location != "bg_teacher":
-                G.location = Player.location
+            G.location = Player.location
 
     call shift_focus(Girls[0])
     call check_who_is_present
-    call set_the_scene(fade = fade)
-
-    return
-
-label move_Girl(Girl, x_position = None, y_position = None, sprite_layer = None, animation_transform = None, transition = None):
-    call get_color_transform
-    $ color_transform = _return
-
-    call show_Girl(Girl, x_position = x_position, y_position = y_position, sprite_layer = sprite_layer, color_transform = color_transform, animation_transform = animation_transform, transition = transition)
+    call set_the_scene(fade = fade, static = static)
 
     return
 
@@ -498,14 +514,14 @@ label shift_view(Girl, view):
 label show_full_body(Girl):
     $ Girl.pose = "full"
 
-    call move_Girl(Girl, animation_transform = reset_zoom)
+    call show_Girl(Girl, animation_transform = reset_zoom)
 
     return
 
 label smooch(Girl):
     $ Girl.change_face("_kiss")
 
-    call move_Girl(Girl, animation_transform = smooch_animation)
+    call show_Girl(Girl, animation_transform = smooch_animation)
 
     pause 1.0
 
@@ -517,28 +533,28 @@ label kiss_launch(Girl):
     $ Girl.pose = "kiss"
     $ Girl.change_face("_kiss")
 
-    call move_Girl(Girl, animation_transform = kiss_launch_animation)
+    call show_Girl(Girl, animation_transform = kiss_launch_animation)
 
     return
 
 label breasts_launch(Girl):
     $ Girl.pose = "breasts"
 
-    call move_Girl(Girl, animation_transform = breasts_launch_animation)
+    call show_Girl(Girl, animation_transform = breasts_launch_animation)
 
     return
 
 label middle_launch(Girl):
     $ Girl.pose = "middle"
 
-    call move_Girl(Girl, animation_transform = middle_launch_animation)
+    call show_Girl(Girl, animation_transform = middle_launch_animation)
 
     return
 
 label pussy_launch(Girl):
     $ Girl.pose = "pussy"
 
-    call move_Girl(Girl, animation_transform = pussy_launch_animation)
+    call show_Girl(Girl, animation_transform = pussy_launch_animation)
 
     return
 
@@ -548,7 +564,7 @@ label show_handjob(Girl, orgasm = False):
 
     $ action_speed = 0
 
-    call move_Girl(Girl, animation_transform = show_handjob_animation)
+    call show_Girl(Girl, animation_transform = show_handjob_animation)
 
     if taboo:
         if len(Present) >= 2:
@@ -569,6 +585,8 @@ label show_handjob(Girl, orgasm = False):
 
     $ Girl.outfit["gloves"] = ""
     $ Girl.arm_pose = 1
+
+    $ renpy.start_predict("images/" + Girl.tag + "_handjob/*.*")
 
     if Girl == RogueX:
         show Rogue_sprite handjob zorder 150 at sprite_location(stage_center):
@@ -600,7 +618,7 @@ label show_titjob(Girl, orgasm = False):
 
     $ action_speed = 0
 
-    call move_Girl(Girl, animation_transform = show_titjob_animation)
+    call show_Girl(Girl, animation_transform = show_titjob_animation)
 
     if taboo:
         if len(Present) >= 2:
@@ -646,6 +664,8 @@ label show_titjob(Girl, orgasm = False):
     else:
         "[Girl.name] wraps her tits around your cock."
 
+    $ renpy.start_predict("images/" + Girl.tag + "_titjob/*.*")
+
     if Girl == RogueX:
         show Rogue_sprite titjob zorder 150 at sprite_location(stage_center):
             zoom 1.0
@@ -676,7 +696,7 @@ label show_blowjob(Girl, orgasm = False):
 
     $ action_speed = 0
 
-    call move_Girl(Girl, animation_transform = show_blowjob_animation)
+    call show_Girl(Girl, animation_transform = show_blowjob_animation)
 
     if taboo:
         if len(Present) >= 2:
@@ -692,6 +712,8 @@ label show_blowjob(Girl, orgasm = False):
             "[Girl.name] hesitantly pulls down your pants and touches her mouth to your cock."
     else:
         "[Girl.name] bends down and begins to suck on your cock."
+
+    $ renpy.start_predict("images/" + Girl.tag + "_blowjob/*.*")
 
     if Girl == RogueX:
         show Rogue_sprite blowjob zorder 150 at sprite_location(stage_center):
@@ -747,6 +769,8 @@ label show_sex(Girl, action):
 
     $ action_speed = 0
 
+    $ renpy.start_predict("images/" + Girl.tag + "_sex/*.*")
+
     if Girl == RogueX:
         show Rogue_sprite sex zorder 150 at sprite_location(stage_center)
     elif Girl == KittyX:
@@ -769,6 +793,8 @@ label show_doggy(Girl):
         return
 
     $ action_speed = 0
+
+    $ renpy.start_predict("images/" + Girl.tag + "_doggy/*.*")
 
     if Girl == RogueX:
         show Rogue_sprite doggy zorder 150 at sprite_location(stage_center)

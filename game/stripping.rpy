@@ -1449,7 +1449,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0, 0],
     call shift_focus (Present[0])
 
     $ round -= 5 if round > 5 else (round-1)
-    call set_the_scene (1, 0, 0, 0)
+    call set_the_scene
 
     $ Present[0].change_face("_sexy", 1)
     if len(Present) >= 2:
@@ -2375,7 +2375,7 @@ label Strip_Ultimatum:
         $ Girl.daily_history.append("ultimatum")
 
     call show_Girl(Girl, color_transform = Girl_Dance1(Girl))
-    
+
     "[Girl.name] begins to dance again."
     return
 

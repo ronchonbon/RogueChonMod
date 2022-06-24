@@ -12,6 +12,8 @@ label sleepover:
         "It's getting late, so you go to sleep."
 
         if "met" in StormX.history and "met" not in JubesX.history and day >= 1:
+            $ time_index = 4
+            
             call meet_Jubes
 
         call wait
@@ -1315,7 +1317,7 @@ label sleepover_Morning:
 
 
 
-    call girls_location
+    call set_Girls_locations
     return
 
 
@@ -2036,7 +2038,7 @@ label sleepover_MorningWood:
         call show_full_body(Player.Party[0])
 
         if len(Player.Party) >= 2:
-            call move_Girl(Player.Party[1], x_position = 0.7, transition = ease)
+            call show_Girl(Player.Party[1], x_position = 0.7, transition = ease)
 
         if line == "no":
             if Player.location == "bg_player":
@@ -2089,6 +2091,6 @@ label Morning_Partner:
     if not Partner:
         return
     $ Partner.change_face("_sexy")
-    call move_Girl(Partner, x_position = 0.7, transition = ease)
+    call show_Girl(Partner, x_position = 0.7, transition = ease)
 
     return
