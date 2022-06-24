@@ -2,14 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/checks.rpy", line 124: invalid syntax
-        global Player.Party
-                      ^
-    
-
-File "game/halloween.rpy", line 258: expected ',' not found.
-    label Halloween_Party_entry(HWEvents=[], HWPlayer.Party=[], halloween_costume=0, HWline=[]):
-                                                     ^
+File "game/script.rpy", line 262: expected statement.
+    for G in all_Girls:
+          ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Thu Jun 23 23:43:55 2022
+Fri Jun 24 04:27:18 2022

@@ -35,7 +35,9 @@ label meet_Jubes:
 
     "You open your eyes. . ."
 
-    call add_Girl(JubesX, x_position = stage_right, animation_transform = vampire)
+    $ JubesX.location = Player.location
+    
+    call move_Girl(JubesX, x_position = stage_right, animation_transform = vampire)
 
     hide black_screen onlayer black
 

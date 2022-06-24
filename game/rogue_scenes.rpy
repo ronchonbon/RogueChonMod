@@ -1,6 +1,7 @@
 label prologue:
     $ time_index = 2
-    $ current_time = "evening"
+    $ current_time = time_options[time_index]
+
     $ Player.location = "bg_study"
 
     scene background onlayer background
@@ -28,10 +29,12 @@ label prologue:
     ch_x "Nonsense, my boy. You have an incredibly useful ability. . ."
     ch_x "the power to negate other powers, even including my own."
 
-    call add_Girl(RogueX, x_position = stage_far_right)
-
     $ RogueX.name = "???"
+    $ RogueX.location = Player.location
     $ RogueX.change_face("_surprised")
+
+    call move_Girl(RogueX, x_position = stage_far_far_right, transition = easeinright)
+    call shift_focus(RogueX)
 
     ch_r "What's that Prof? This new kid can negate mutant powers?"
 
@@ -43,7 +46,7 @@ label prologue:
     ch_x "That is correct, Rogue, though currently, his powers are weak and uncontrolled."
 
     $ RogueX.name = "Rogue"
-    
+
     ch_x "One day, however, he may even be able to help you turn your powers off permanently."
     ch_r "! . . ."
 
@@ -111,7 +114,7 @@ label prologue:
 label tour_start:
     $ Player.location = "bg_campus"
 
-    call add_Girl(RogueX)
+    call add_Girls(RogueX)
 
     ch_r "This is the campus square. It links up to all the major locations on campus and you'll probably pass through here a lot."
 
@@ -119,7 +122,7 @@ label tour_start:
 
     $ Player.location = "bg_player"
 
-    call add_Girl(RogueX)
+    call add_Girls(RogueX)
 
     ch_r "This will be your room, we each get private rooms now that the campus has been expanded."
 
@@ -147,7 +150,7 @@ label tour_start:
 
     $ Player.location = "bg_classroom"
 
-    call add_Girl(RogueX)
+    call add_Girls(RogueX)
 
     ch_r "And this is one of our state-of-the-art classrooms."
     ch_r "They're multi-purpose so they can teach almost anything in them."
@@ -157,7 +160,7 @@ label tour_start:
 
     $ Player.location = "bg_dangerroom"
 
-    call add_Girl(RogueX)
+    call add_Girls(RogueX)
 
     ch_r "This is the Danger Room. It's been upgraded to a fully holographic experience, allowing realistic battlefield simulations."
 
@@ -193,7 +196,7 @@ label tour_start:
 label tour_end:
     $ Player.location = "bg_campus"
 
-    call add_Girl(RogueX)
+    call add_Girls(RogueX)
 
     ch_r "Well, that's the nickel tour, now you know where everything is. . ."
 

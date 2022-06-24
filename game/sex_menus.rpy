@@ -358,7 +358,7 @@ label girl_sex_menu(Girl):
 
     $ Girl.change_face()
 
-    call Sex_Over
+    call sex_over
 
     return
 

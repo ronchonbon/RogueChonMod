@@ -607,7 +607,7 @@ label Date_Ask(Girl=0):
 label Date_Stood_Up(Girl=0):
     if Girl.location != Player.location:
         "[Girl.name] storms into the room."
-        call add_Girl(Girl)
+        call add_Girls(Girl)
     else:
         "[Girl.name] turns to you."
     $ Girl.change_face("_confused")
@@ -992,11 +992,11 @@ label Readytogo(Girl):
                 $ Girl.recent_history.append("summoned")
 
                 if door_locked:
-                    call locked_door(Girl)
+                    call Girls_arrive(Girl)
 
                     return
 
-                call add_Girl(Girl)
+                call add_Girls(Girl)
                 
     return
 

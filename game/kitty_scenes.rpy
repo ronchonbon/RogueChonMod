@@ -3,20 +3,21 @@ label meet_Kitty:
 
     "As you rush to class, you see another student running straight at you."
     "You try to move aside, but aren't fast enough to get out of her way,"
-    "She crashes into you at a full jog, and you both fall to the ground."
-    "You scramble to your feet and offer the girl a hand up."
-
-    call add_Girl(KittyX, x_position = stage_center, transition = vpunch)
-    call shift_focus(KittyX)
 
     $ KittyX.name = "???"
+    $ KittyX.location = Player.location
     $ KittyX.arm_pose = 1
     $ KittyX.change_face("_surprised")
-    $ KittyX.change_stat("love", 90, -25)
 
+    call move_Girl(KittyX, x_position = stage_center, transition = vpunch)
+    call shift_focus(KittyX)
+
+    "She crashes into you at a full jog, and you both fall to the ground."
+    "You scramble to your feet and offer the girl a hand up."
     ch_k "Hey!"
 
     $ KittyX.brows = "_angry"
+    $ KittyX.change_stat("love", 90, -25)
 
     ch_k "What the hell was that?"
 
@@ -236,7 +237,7 @@ label meet_Kitty:
 
     $ active_Girls.append(KittyX)
 
-    $ round -= 10
+    $ Player.location = "bg_classroom"
 
     return
 

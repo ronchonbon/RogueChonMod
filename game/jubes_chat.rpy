@@ -1966,7 +1966,7 @@ label Jubes_Summon(approval_bonus=approval_bonus):
     $ JubesX.recent_history.append("summoned")
     $ line = 0
     if "locked" in Player.traits:
-        call locked_door (JubesX)
+        call Girls_arrive (JubesX)
         return
     $ JubesX.location = Player.location
     call set_Character_taboos(taboo_location = False)

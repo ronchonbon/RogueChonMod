@@ -5,12 +5,12 @@ label meet_Emma:
     "The bell to class rings, but Professor McCoy seems to be late."
     "A strange woman enters the room and heads to the podium with a regal stride."
 
-    call add_Girl(EmmaX, x_position = stage_right, sprite_layer = 1, animation_transform = teaching, transition = easeinright)
-    call shift_focus(EmmaX)
-
     $ EmmaX.name = "???"
+    $ EmmaX.location = "bg_teacher"
     $ EmmaX.arm_pose = 1
     $ EmmaX.change_face("_normal")
+
+    call add_Girls(EmmaX)
 
     ch_e "Hello students. My name is Emma Frost, and I have been invited to conduct this class."
 
@@ -1299,7 +1299,7 @@ label Emma_BF:
     if EmmaX not in Player.Party:
         "[EmmaX.name] approaches you and asks if the two of you can talk."
 
-        call add_Girl(EmmaX)
+        call add_Girls(EmmaX)
     else:
         "[EmmaX.name] turns towards you and asks if the two of you can talk."
 

@@ -2012,7 +2012,7 @@ label Jean_Summon(approval_bonus=approval_bonus):
     $ JeanX.recent_history.append("summoned")
     $ line = 0
     if "locked" in Player.traits:
-        call locked_door (JeanX)
+        call Girls_arrive (JeanX)
         return
     $ JeanX.location = Player.location
     call set_Character_taboos(taboo_location = False)

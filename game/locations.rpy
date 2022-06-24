@@ -90,10 +90,6 @@ label player_room:
 
     $ door_locked = False
 
-    call check_who_is_present
-    call set_Character_taboos
-    call set_the_scene(fade = True)
-
     if Player.traveling:
         $ Nearby = []
 
@@ -101,6 +97,9 @@ label player_room:
 
         $ Player.traveling = False
 
+    call check_who_is_present
+    call set_Character_taboos
+    call set_the_scene(fade = True)
     call quick_event_calls
 
     if round <= 10:
@@ -292,7 +291,7 @@ label girls_room_entry:
 
                     $ Girl.change_face("perplexed",2)
 
-                    call add_Girl(Girl)
+                    call add_Girls(Girl)
 
                     if Girl == RogueX:
                         ch_r "Sorry about that [Girl.player_petname], I was. . . working out."
@@ -315,7 +314,7 @@ label girls_room_entry:
                 elif D20 >= 15 and (time_index > 2 or time_index == 0):
                     "You hear the rustling of fabric and some knocking around, but after a few seconds [Girl.name] comes to the door."
 
-                    call add_Girl(Girl)
+                    call add_Girls(Girl)
 
                     if Girl == RogueX:
                         ch_r "Sorry about that [Girl.player_petname], I was just getting changed."
@@ -337,7 +336,7 @@ label girls_room_entry:
                     call get_out_lines(Girl)
                     jump reset_location
                 else:
-                    call add_Girl(Girl)
+                    call add_Girls(Girl)
 
                     "[Girl.name] opens the door and leans out."
                     "You ask if you can come inside."
@@ -491,14 +490,13 @@ label girls_room:
 
         $ door_locked = False
 
+        $ Nearby = []
+
+        call traveling_event_calls
         call check_who_is_present
         call set_Character_taboos
         call set_the_scene(fade = True)
-
-        $ Nearby = []
-
         call girls_room_entry
-        call traveling_event_calls
 
         $ Player.traveling = False
 
@@ -576,10 +574,6 @@ label campus:
 
     $ door_locked = False
 
-    call check_who_is_present
-    call set_Character_taboos
-    call set_the_scene(fade = True)
-
     if Player.traveling:
         $ Nearby = []
 
@@ -587,6 +581,9 @@ label campus:
 
         $ Player.traveling = False
 
+    call check_who_is_present
+    call set_Character_taboos
+    call set_the_scene(fade = True)
     call quick_event_calls
 
     if round <= 10:
@@ -623,15 +620,16 @@ label classroom:
 
         $ door_locked = False
 
-        call check_who_is_present
-        call set_Character_taboos
-
         $ Nearby = []
 
         call traveling_event_calls
+        call check_who_is_present
+        call set_Character_taboos
 
         if time_index < 2 and weekday < 5:
             call classroom_seating
+        else:
+            call set_the_scene(fade = True)
 
         $ Player.traveling = False
     else:
@@ -824,18 +822,17 @@ label danger_room:
 
     $ door_locked = False
 
-    call check_who_is_present
-    call set_Character_taboos
-    call set_the_scene(fade = True)
-
     if Player.traveling:
         $ Nearby = []
 
-        call danger_room_entry
         call traveling_event_calls
+        call danger_room_entry
 
         $ Player.traveling = False
 
+    call check_who_is_present
+    call set_Character_taboos
+    call set_the_scene(fade = True)
     call quick_event_calls
 
     if round <= 10:
@@ -1019,17 +1016,14 @@ label shower_room:
 
         $ door_locked = False
 
-        call check_who_is_present
-        call set_Character_taboos
-        call set_the_scene(fade = True)
-
         $ Present = []
         $ Nearby = []
 
         call traveling_event_calls
-
-        if round > 10:
-            call shower_entry
+        call check_who_is_present
+        call set_Character_taboos
+        call set_the_scene(fade = True)
+        call shower_entry
 
         $ Player.traveling = False
 
@@ -1095,10 +1089,6 @@ label pool:
 
     $ door_locked = False
 
-    call check_who_is_present
-    call set_Character_taboos
-    call set_the_scene(fade = True)
-
     if Player.traveling:
         $ Nearby = []
 
@@ -1106,6 +1096,9 @@ label pool:
 
         $ Player.traveling = False
 
+    call check_who_is_present
+    call set_Character_taboos
+    call set_the_scene(fade = True)
     call quick_event_calls
 
     if round <= 10:
@@ -1294,14 +1287,14 @@ label study_room:
 
         $ door_locked = False
 
+        $ Nearby = []
+
+        call traveling_event_calls
+
         call check_who_is_present
         call set_Character_taboos
         call set_the_scene(fade = True)
-
-        $ Nearby = []
-
         call study_entry
-        call traveling_event_calls
 
         $ Player.traveling = False
 
@@ -1424,10 +1417,6 @@ label mall:
 
     $ door_locked = False
 
-    call check_who_is_present
-    call set_Character_taboos
-    call set_the_scene(fade = True)
-
     if Player.traveling:
         $ Nearby = []
 
@@ -1435,6 +1424,9 @@ label mall:
 
         $ Player.traveling = False
 
+    call check_who_is_present
+    call set_Character_taboos
+    call set_the_scene(fade = True)
     call quick_event_calls
 
     if round <= 10:

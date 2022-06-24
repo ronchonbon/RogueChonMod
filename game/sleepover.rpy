@@ -1282,22 +1282,16 @@ label sleepover_Morning:
 
     call wait
 
-    $ temp_Girls = all_Girls[:]
-    while temp_Girls:
-        if "leaving" in temp_Girls[0].recent_history or temp_Girls[0].location == Player.location:
+    python:
+        for G in all_Girls:
+            if G.location == Player.location:
+                Player.Party.append(G)
 
-
-            $ Player.Party.append(temp_Girls[0])
-            $ temp_Girls[0].location = Player.location
-            if "leaving" in temp_Girls[0].recent_history:
-                $ temp_Girls[0].recent_history.remove("leaving")
-        if "morningwood" in temp_Girls[0].traits:
-
-            $ temp_Girls[0].recent_history.append("blowjob")
-            $ temp_Girls[0].daily_history.append("blowjob")
-            $ temp_Girls[0].daily_history.append("morningwood")
-            $ temp_Girls[0].traits.remove("morningwood")
-        $ temp_Girls.remove(temp_Girls[0])
+            if "morningwood" in G.traits:
+                G.recent_history.append("blowjob")
+                G.daily_history.append("blowjob")
+                G.daily_history.append("morningwood")
+                G.traits.remove("morningwood")
 
 
 
@@ -1526,7 +1520,7 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
         $ Player.Party[0].traits.append("morningwood")
         call sleepover_MorningWood
 
-        call Sex_Over (0)
+        call sex_over(put_clothes_on = False)
     else:
 
 

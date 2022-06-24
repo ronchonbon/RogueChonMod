@@ -2039,7 +2039,7 @@ label Kitty_Summon(approval_bonus=approval_bonus):
     $ KittyX.recent_history.append("summoned")
     $ line = 0
     if "locked" in Player.traits:
-        call locked_door (KittyX)
+        call Girls_arrive (KittyX)
         return
     call set_Character_taboos(taboo_location = False)
     $ KittyX.location = Player.location

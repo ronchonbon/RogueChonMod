@@ -143,7 +143,7 @@ label meet_Storm:
     $ StormX.change_outfit("nude")
     $ StormX.change_face("_normal", eyes = "_side")
 
-    call add_Girl(StormX, x_position = stage_center, color_transform = silhouette)
+    call add_Girls(StormX, x_position = stage_center, color_transform = silhouette)
 
     "Standing in the middle of the room appears to be a woman. . ."
 

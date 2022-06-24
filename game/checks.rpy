@@ -1,8 +1,6 @@
 init python:
 
     def check_girl(Girl, local = False):
-        global focused_Girl
-
         if Girl in all_Girls and (not local or Player.location == Check.location):
             return Girl
         elif Player.location == focused_Girl.location:
@@ -116,23 +114,6 @@ init python:
         elif (L + O + I + Bonus + (temp_modifier*Localapproval_bonus) - (taboo_modifier*local_taboo)) >= (T + spread):
             return 2
         elif (L + O + I + Bonus + (temp_modifier*Localapproval_bonus) - (taboo_modifier*local_taboo)) >= T:
-            return True
-        else:
-            return False
-
-    def Room_Full():
-        global Player.Party
-
-        while len(Player.Party) > 2:
-            Player.Party.remove(Player.Party[2])
-
-        Here = []
-
-        for G in all_Girls:
-            if G.location == Player.location and G not in Player.Party:
-                Here.append(G)
-
-        if len(Player.Party) + len(Here) >= 2:
             return True
         else:
             return False

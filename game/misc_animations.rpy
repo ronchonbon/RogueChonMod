@@ -14,8 +14,19 @@ layeredimage background:
 
     if Player.location not in ["bg_campus", "bg_study", "bg_storm",  "bg_pool", "bg_mall"]:
         "images/backgrounds/[Player.location].png"
-    else:
+    elif Player.location in ["bg_study", "bg_storm", "bg_mall"]:
         "images/backgrounds/[Player.location]_[current_time].png"
+
+    if Player.location not in ["bg_campus",  "bg_pool"]:
+        Null()
+    elif time_index == 0:
+        At("images/backgrounds/[Player.location].png", morning)
+    elif time_index == 1:
+        "images/backgrounds/[Player.location].png"
+    elif time_index == 2:
+        At("images/backgrounds/[Player.location].png", sunset)
+    elif time_index == 3:
+        At("images/backgrounds/[Player.location].png", night)
 
 layeredimage foreground:
     if Player.location == "bg_pool":

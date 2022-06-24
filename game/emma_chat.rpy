@@ -2125,7 +2125,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
     $ EmmaX.recent_history.append("summoned")
     $ line = 0
     if "locked" in Player.traits:
-        call locked_door (EmmaX)
+        call Girls_arrive (EmmaX)
         return
     $ EmmaX.location = Player.location
     call set_Character_taboos(taboo_location = False)

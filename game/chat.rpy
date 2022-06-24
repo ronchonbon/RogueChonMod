@@ -498,8 +498,6 @@ label chat_menu:
 
                 call change_into_scheduled_outfit([temp_Girls[0]], 0)
 
-                if "leaving" in temp_Girls[0].recent_history:
-                    $ temp_Girls[0].drain_word("leaving")
                 if temp_Girls[0] == RogueX:
                     if temp_Girls[0].location == Player.location:
                         ch_r "Ok, I'll probably stick around for a bit anyway."
@@ -870,9 +868,6 @@ label dismiss_girl(Girl):
         $ Player.Party.remove(Girl)
 
     call change_into_scheduled_outfit([Girl], 0)
-
-    if "leaving" in Girl.recent_history:
-        $ Girl.drain_word("leaving")
 
     $ leaving = False
 

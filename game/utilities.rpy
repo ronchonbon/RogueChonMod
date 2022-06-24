@@ -26,7 +26,7 @@ label set_the_scene(show_Characters = True, fade = False):
 
     if show_Characters:
         if Present:
-            $ offset = 0.5/(len(Present) + 1)
+            $ offset = (stage_far_far_right - stage_far_left)/len(Present)
             $ total_offset = offset
 
             call get_color_transform
@@ -39,21 +39,24 @@ label set_the_scene(show_Characters = True, fade = False):
                 $ transition = None
 
             $ temp_Girls = Present[:]
+            $ temp_Girls.remove(focused_Girl)
             $ renpy.random.shuffle(temp_Girls)
 
             while temp_Girls:
-                if temp_Girls[0] != focused_Girl:
-                    if temp_Girls[0].location == "bg_teacher":
-                        if renpy.showing(temp_Girls[0].tag + "_sprite"):
-                            call show_Girl(temp_Girls[0], sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = dissolve)
-                        else:
-                            call show_Girl(temp_Girls[0], sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = transition)
+                if temp_Girls[0].location == "bg_teacher":
+                    if renpy.showing(temp_Girls[0].tag + "_sprite"):
+                        call show_Girl(temp_Girls[0], sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = dissolve)
                     else:
-                        if renpy.showing(temp_Girls[0].tag + "_sprite"):
-                            call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 3, color_transform = color_transform, transition = ease)
-                        else:
-                            call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 3, color_transform = color_transform, transition = transition)
+                        call show_Girl(temp_Girls[0], sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = transition)
+                else:
+                    if renpy.showing(temp_Girls[0].tag + "_sprite"):
+                        call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 3, color_transform = color_transform, transition = ease)
+                    else:
+                        call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 3, color_transform = color_transform, transition = transition)
 
+                    if stage_center + total_offset + offset >= stage_far_far_right:
+                        $ total_offset = -offset*(len(temp_Girls) - 1)
+                    else:
                         $ total_offset += offset
 
                 $ temp_Girls.remove(temp_Girls[0])
@@ -70,6 +73,8 @@ label set_the_scene(show_Characters = True, fade = False):
         call hide_all
 
     if fade:
+        pause 1.0
+
         hide black_screen onlayer black
 
     return
@@ -134,6 +139,7 @@ label event_calls:
         if "relationship" not in event_Girls[0].daily_history:
             if "stoodup" in event_Girls[0].traits:
                 call Date_Stood_Up (event_Girls[0])
+
                 return
 
             if event_Girls[0].broken_up[0] or "_angry" in event_Girls[0].daily_history:
@@ -258,58 +264,93 @@ label traveling_event_calls:
 
             call DateNight
 
-    if "met" not in KittyX.history:
+            return
+
+    if Player.location == "bg_classroom" and "met" not in KittyX.history:
         call meet_Kitty
 
+        return
+
     if EmmaX in active_Girls:
-        if "noise" in Player.history and "attic" not in Player.history and EmmaX.location in ["bg_classroom", "bg_teacher"] and time_index < 2 and weekday < 5:
-            call meet_Storm_ask_Emma
+        if Player.location == "bg_classroom":
+            if "noise" in Player.history and "attic" not in Player.history and EmmaX.location in ["bg_classroom", "bg_teacher"] and time_index < 2 and weekday < 5:
+                call meet_Storm_ask_Emma
 
-        if time_index == 2 and weekday in [0, 2, 4]:
-            if not Player.Party:
-                if "classcaught" not in EmmaX.history:
-                    call Emma_Caught_Classroom
-                elif D20 <= 10 and "will_masturbate" in EmmaX.daily_history:
-                    call Emma_Caught_Classroom
+                return
 
-            if "detention" in Player.traits and not Player.Party:
-                call Emma_Detention
+            if time_index == 2 and weekday in [0, 2, 4]:
+                if not Player.Party:
+                    if "classcaught" not in EmmaX.history:
+                        call Emma_Caught_Classroom
+
+                        return
+                    elif D20 <= 10 and "will_masturbate" in EmmaX.daily_history:
+                        call Emma_Caught_Classroom
+
+                        return
+
+                if "detention" in Player.traits and not Player.Party:
+                    call Emma_Detention
+
+                    return
 
     if "met" not in LauraX.history:
         if Player.location == "bg_dangerroom":
             call meet_Laura
+
+            return
     elif LauraX in active_Girls:
         if Player.location == "bg_campus" and KittyX in active_Girls and time_index < 3 and "dress0" in LauraX.history:
             call Laura_Dressup
 
+            return
+
     if "met" not in JeanX.history:
-        call meet_Jean
+        if Player.location == "bg_showerroom":
+            call meet_Jean
+
+            return
 
     if "met" not in StormX.history:
-        if "noise" not in Player.history and "attic" not in Player.history and day >= 1:
-            call meet_Storm_prelude
-        elif "attic" in Player.history and day >= 5:
-            call meet_StormWater
+        if Player.location == "bg_player":
+            if "noise" not in Player.history and "attic" not in Player.history and day >= 1:
+                call meet_Storm_prelude
+
+                return
+            elif "attic" in Player.history and day >= 5:
+                call meet_StormWater
+
+                return
     else:
         if Player.location == "bg_classroom":
             if StormX.location == "bg_teacher" and "Peter" in StormX.history:
                 call Storm_Peter
 
+                return
+
             if StormX.location == "bg_classroom" and time_index == 2 and "_mohawk" not in StormX.history and approval_check(StormX, 200, "I"):
                 call Storm_Hairtalk
+
+                return
 
         if Player.location == "bg_pool":
             if time_index == 3 and "poolnight" in Player.history:
                 if "sex friend" not in StormX.player_petnames or (D20 < 5 and "poolnight" not in Player.recent_history):
                     call Storm_Poolnight
 
+                    return
+
     if JubesX in active_Girls:
         if Player.location in ["bg_classroom", "bg_dangerroom", "bg_campus", "bg_pool"]:
             if time_index < 3 and "sunshine" not in JubesX.history:
                 call Jubes_Sunshine
 
+                return
+
             if "sunshine" in JubesX.history and "mall" not in Player.history and time_index < 3 and JubesX.addiction < 50:
                 call Jubes_Mall
+
+                return
 
     return
 
@@ -465,28 +506,41 @@ label girls_location:
     $ temp_Girls = active_Girls[:]
     $ renpy.random.shuffle(temp_Girls)
 
+    $ leaving_Girls = []
+    $ arriving_Girls = []
+
     while temp_Girls:
         if temp_Girls[0] not in Player.Party:
-            if temp_Girls[0].location != Player.location or "lockedtravels" not in temp_Girls[0].traits:
+            $ previous_location = temp_Girls[0].location
+
+            if temp_Girls[0] == JubesX and temp_Girls[0].addiction > 60:
+                $ temp_Girls[0].location = temp_Girls[0].home
+            elif temp_Girls[0].location != Player.location or "lockedtravels" not in temp_Girls[0].traits:
                 $ temp_Girls[0].location = temp_Girls[0].weekly_schedule[weekday][time_index]
+
+            call check_who_is_present
 
             if temp_Girls[0].location == "bg_showerroom":
                 $ temp_Girls[0].add_word(1, "showered", "showered")
 
-            if "leaving" in temp_Girls[0].recent_history:
+            if previous_location == Player.location and temp_Girls[0].location != previous_location:
                 if "sleepover" in temp_Girls[0].traits:
                     $ temp_Girls[0].drain_word("sleepover", 0, 0, 1)
 
-                $ temp_Girls[0].drain_word("leaving")
+                $ leaving_Girls.append(temp_Girls[0])
 
-                call expression temp_Girls[0].tag + "_Leave"
-
-            if "arriving" in temp_Girls[0].recent_history:
-                call Girls_Arrive
-
-                return
+            if temp_Girls[0].location == Player.location and temp_Girls[0].location != previous_location:
+                $ arriving_Girls.append(temp_Girls[0])
 
         $ temp_Girls.remove(temp_Girls[0])
+
+    while leaving_Girls:
+        call expression temp_Girls[0].tag + "_Leave"
+
+        $ leaving_Girls.remove(leaving_Girls[0])
+
+    if arriving_Girls:
+        call Girls_arrive(arriving_Girls)
 
     call change_clothes
 
@@ -502,6 +556,8 @@ label change_clothes:
                     G.outfit_name = "swimwear"
                 elif G.location == "bg_showerroom":
                     G.outfit_name = "shower"
+                elif G.location == "bg_teacher":
+                    G.outfit_name = "casual1"
                 else:
                     G.outfit_name = G.today_outfit_name
 
@@ -937,12 +993,12 @@ label reset_all_girls_at_beginning:
 
     return
 
-label change_into_scheduled_outfit(Girls = [], clothes = 1, location = 1):
+label change_into_scheduled_outfit(Girls = [], clothes = 1):
     if not Girls:
         $ Girls = active_Girls[:]
 
     while Girls:
-        if Girls[0] in Player.Party and clothes != 2 or not location:
+        if Girls[0] in Player.Party and clothes != 2:
             pass
         elif clothes != 2 and "sleepover" in Girls[0].traits and time_index == 0:
             pass
@@ -976,37 +1032,6 @@ label change_into_scheduled_outfit(Girls = [], clothes = 1, location = 1):
                     $ Girls[0].today_outfit_name = renpy.random.choice(outfit_options)
 
                 $ Girls[0].outfit_name = Girls[0].today_outfit_name
-
-            $ temp_location = Girls[0].location
-
-            if Girls[0] not in active_Girls:
-                $ temp_location = "hold"
-
-                $ Girls[0].location = "hold"
-            elif Girls[0] in Player.Party or Girls[0].location == "hold":
-                pass
-            else:
-                $ Girls[0].location = Girls[0].weekly_schedule[weekday][time_index]
-
-                if Girls[0] == JubesX and JubesX.addiction > 60:
-                    $ JubesX.location = JubesX.home
-
-            if Girls[0].location != temp_location and Girls[0] not in Player.Party:
-                if temp_location == Player.location:
-                    if approval_check(Girls[0], 1200) and Girls[0].location not in ["bg_classroom","bg_teacher","bg_dangerroom"]:
-                        $ Girls[0].location = temp_location
-                    else:
-                        $ Girls[0].recent_history.append("leaving")
-                elif Girls[0].location == Player.location:
-                    $ Girls[0].recent_history.append("arriving")
-
-            if Girls[0] in Nearby:
-                $ Nearby.remove(Girls[0])
-
-        if Girls[0].location == "bg_teacher":
-            call alternate_clothes(Girls[0], 8)
-
-            $ Girls[0].change_outfit()
 
         $ Girls.remove(Girls[0])
 
@@ -1083,7 +1108,6 @@ label lesbian_check(Girls = []):
                     GA.check_if_likes(GB, 900, 10, 1)
                     GA.check_if_likes(GB, 1000, 5, 1)
 
-            GA.drain_word("arriving", 1, 0)
             GA.change_stat("lust", 60, 20)
             GA.thirst -= 5
 
@@ -1109,7 +1133,7 @@ label clear_the_room(Girl, passive = False, silent = False):
                     Girls.append(G)
 
     if Girl.location != Player.location:
-        call add_Girl(Girl, x_position = stage_left)
+        call add_Girls(Girl)
 
     if not passive and not silent:
         if hosted:
@@ -1851,648 +1875,986 @@ label Level_Up(Chr=Player):
 
 
 
+label coitus_interruptus(Partners, Interrupters):
+    if Partners in all_Girls:
+        $ Partners = [Partners]
 
+    if Interrupters in all_Girls:
+        $ Interrupters = [Interrupters]
 
-label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0):
-    $ Options = []
+    if EmmaX in Partners and "threesome" not in EmmaX.history:
+        python:
+            for G in Interrupters:
+                G.add_word(1, 0, 0, "saw with " + EmmaX.tag)
 
-    call check_who_is_present
-    $ temp_Girls = Present[:]
+        ch_e "I. . . This isn't what it looks like. . ."
+
+        if Player.location == EmmaX.home:
+            $ Player.location = "bg_entry"
+
+            call hide_Girl(EmmaX, transition == False)
+
+            $ number = len(Partners) + len(Interrupters)
+
+            "She shoves the [number] of you out of her room and slams the door."
+
+            jump reset_location
+        else:
+            call remove_Girl(EmmaX)
+
+            "She seems uncomfortable with the situation and leaves the room."
+            "Perhaps you should ask her about it later."
+
+            $ door_locked = False
+
+            return True
+
+    $ Partner = Partners[0]
+    $ Interrupter = Interrupters[0]
+
+    if len(Partners) + len(Interrupters) == 2:
+        if "poly " + Partner.tag in Interrupter.traits or (Partner in Player.Harem and Interrupter in Player.Harem):
+            pass
+        else:
+            if approval_check(Partner, 1500, taboo_modifier=2, Bonus = (Interrupter.likes[Partner.tag] - 500)):
+                $ Partner.change_face("_sexy", 1)
+                $ Partner.change_stat("obedience", 90, 5)
+                $ Partner.change_stat("inhibition", 90, 5)
+                $ Partner.change_stat("lust", 90, 3)
+            else:
+                $ Partner.change_face("_angry", 1)
+
+                if Partner == RogueX:
+                    ch_r "Hey, [Interrupter.tag], we're a little busy here?"
+                elif Partner == KittyX:
+                    ch_k "Um, [Interrupter.tag]? Read the room?"
+                elif Partner == EmmaX:
+                    ch_e "[Interrupter.tag], could you please leave?"
+                elif Partner == LauraX:
+                    ch_l "Scram, [Interrupter.tag]."
+                elif Partner == JeanX:
+                    ch_j "Leave, [Interrupter.tag]."
+                elif Partner == StormX:
+                    ch_s "Would you mind give us some space?"
+                elif Partner == JubesX:
+                    ch_v "Yeah, we were. . . busy."
+
+                $ Interrupter.add_word(1, 0, 0,"saw with " + Partner.tag)
+
+                if Interrupter == RogueX:
+                    $ Interrupter.change_face("_perplexed", 2)
+
+                    ch_r "Oh, sorry about that! I'll head out."
+                elif Interrupter == KittyX:
+                    $ Interrupter.change_face("_perplexed", 2)
+
+                    ch_k "Oh! Sorrysorrysorry!"
+                elif Interrupter == EmmaX:
+                    $ Interrupter.change_face("_bemused", 2)
+
+                    ch_e "I wouldn't want to spoil the mood. . ."
+                elif Interrupter == LauraX:
+                    ch_l "Oh, sure. Whatever."
+                elif Interrupter == JeanX:
+                    $ Interrupter.change_face("_bemused", 1)
+
+                    ch_j "Fine."
+                elif Interrupter == StormX:
+                    $ Interrupter.change_face("_bemused", 1)
+
+                    ch_s "Yes. . ."
+                elif Interrupter == JubesX:
+                    $ Interrupter.change_face("_perplexed", 2)
+
+                    ch_v "Oh, yes! Sorry!"
+
+                $ Partner.change_face("_sexy", 1)
+
+                $ Interrupter.change_face("_sad", 1)
+
+                call remove_Girl(Interrupter)
+
+                return False
+
+        if Partner == RogueX:
+            ch_r "Oh, [Interrupter.tag], did you want to join in?"
+        elif Partner == KittyX:
+            ch_k "Um, [Interrupter.tag]? Did you want something?"
+        elif Partner == EmmaX:
+            ch_e "Oh, [Interrupter.tag]. . . care to join us?"
+        elif Partner == LauraX:
+            ch_l "Oh, hey, [Interrupter.tag]."
+        elif Partner == JeanX:
+            ch_j "Hey."
+        elif Partner == StormX:
+            ch_s "Oh, hello [Interrupter.tag], did you want to join in?"
+        elif Partner == JubesX:
+            ch_v "Hey, [Interrupter.tag], did you need something?"
+    elif len(Partners) > 1 and len(Interrupters) == 1:
+        $ temp_Girls = Partners[:]
+
+        while temp_Girls:
+            if "poly " + temp_Girls[0].tag in Interrupter.traits or (temp_Girls[0] in Player.Harem and Interrupter in Player.Harem):
+                pass
+            else:
+                if approval_check(temp_Girls[0], 1500, taboo_modifier=2, Bonus = (Interrupter.likes[temp_Girls[0].tag] - 500)):
+                    $ temp_Girls[0].change_face("_sexy", 1)
+                    $ temp_Girls[0].change_stat("obedience", 90, 5)
+                    $ temp_Girls[0].change_stat("inhibition", 90, 5)
+                    $ temp_Girls[0].change_stat("lust", 90, 3)
+                else:
+                    $ temp_Girls[0].change_face("_angry", 1)
+
+                    if temp_Girls[0] == RogueX:
+                        ch_r "Hey, [Interrupter.tag], we're a little busy here?"
+                    elif temp_Girls[0] == KittyX:
+                        ch_k "Um, [Interrupter.tag]? Read the room?"
+                    elif temp_Girls[0] == EmmaX:
+                        ch_e "[Interrupter.tag], could you please leave?"
+                    elif temp_Girls[0] == LauraX:
+                        ch_l "Scram, [Interrupter.tag]."
+                    elif temp_Girls[0] == JeanX:
+                        ch_j "Leave, [Interrupter.tag]."
+                    elif temp_Girls[0] == StormX:
+                        ch_s "Would you mind give us some space?"
+                    elif temp_Girls[0] == JubesX:
+                        ch_v "Yeah, we were. . . busy."
+
+                    $ Interrupter.add_word(1, 0, 0,"saw with " + temp_Girls[0].tag)
+
+                    if Interrupter == RogueX:
+                        $ Interrupter.change_face("_perplexed", 2)
+
+                        ch_r "Oh, sorry about that! I'll head out."
+                    elif Interrupter == KittyX:
+                        $ Interrupter.change_face("_perplexed", 2)
+
+                        ch_k "Oh! Sorrysorrysorry!"
+                    elif Interrupter == EmmaX:
+                        $ Interrupter.change_face("_bemused", 2)
+
+                        ch_e "I wouldn't want to spoil the mood. . ."
+                    elif Interrupter == LauraX:
+                        ch_l "Oh, sure. Whatever."
+                    elif Interrupter == JeanX:
+                        $ Interrupter.change_face("_bemused", 1)
+
+                        ch_j "Fine."
+                    elif Interrupter == StormX:
+                        $ Interrupter.change_face("_bemused", 1)
+
+                        ch_s "Yes. . ."
+                    elif Interrupter == JubesX:
+                        $ Interrupter.change_face("_perplexed", 2)
+
+                        ch_v "Oh, yes! Sorry!"
+
+                    $ temp_Girls[0].change_face("_sexy", 1)
+
+                    $ Interrupter.change_face("_sad", 1)
+
+                    call remove_Girl(Interrupter)
+
+                    return False
+
+            if temp_Girls[0] == RogueX:
+                ch_r "Oh, [Interrupter.tag], did you want to join in?"
+            elif temp_Girls[0] == KittyX:
+                ch_k "Um, [Interrupter.tag]? Did you want something?"
+            elif temp_Girls[0] == EmmaX:
+                ch_e "Oh, [Interrupter.tag]. . . care to join us?"
+            elif temp_Girls[0] == LauraX:
+                ch_l "Oh, hey, [Interrupter.tag]."
+            elif temp_Girls[0] == JeanX:
+                ch_j "Hey."
+            elif temp_Girls[0] == StormX:
+                ch_s "Oh, hello [Interrupter.tag], did you want to join in?"
+            elif temp_Girls[0] == JubesX:
+                ch_v "Hey, [Interrupter.tag], did you need something?"
+
+            $ temp_Girls.remove(temp_Girls[0])
+    elif len(Partners) == 1 and len(Interrupters) > 1:
+        $ temp_Girls = Interrupters[:]
+
+        while temp_Girls:
+            if "poly " + Partner.tag in temp_Girls[0].traits or (Partner in Player.Harem and temp_Girls[0] in Player.Harem):
+                if Partner == RogueX:
+                    ch_r "Oh, [temp_Girls[0].tag], did you want to join in?"
+                elif Partner == KittyX:
+                    ch_k "Um, [temp_Girls[0].tag]? Did you want something?"
+                elif Partner == EmmaX:
+                    ch_e "Oh, [temp_Girls[0].tag]. . . care to join us?"
+                elif Partner == LauraX:
+                    ch_l "Oh, hey, [temp_Girls[0].tag]."
+                elif Partner == JeanX:
+                    ch_j "Hey."
+                elif Partner == StormX:
+                    ch_s "Oh, hello [temp_Girls[0].tag], did you want to join in?"
+                elif Partner == JubesX:
+                    ch_v "Hey, [temp_Girls[0].tag], did you need something?"
+
+                $ temp_Girls.remove(temp_Girls[0])
+            else:
+                if approval_check(Partner, 1500, taboo_modifier=2, Bonus = (temp_Girls[0].likes[Partner.tag] - 500)):
+                    $ Partner.change_face("_sexy", 1)
+                    $ Partner.change_stat("obedience", 90, 5)
+                    $ Partner.change_stat("inhibition", 90, 5)
+                    $ Partner.change_stat("lust", 90, 3)
+
+                    if Partner == RogueX:
+                        ch_r "Oh, [temp_Girls[0].tag], did you want to join in?"
+                    elif Partner == KittyX:
+                        ch_k "Um, [temp_Girls[0].tag]? Did you want something?"
+                    elif Partner == EmmaX:
+                        ch_e "Oh, [temp_Girls[0].tag]. . . care to join us?"
+                    elif Partner == LauraX:
+                        ch_l "Oh, hey, [temp_Girls[0].tag]."
+                    elif Partner == JeanX:
+                        ch_j "Hey."
+                    elif Partner == StormX:
+                        ch_s "Oh, hello [temp_Girls[0].tag], did you want to join in?"
+                    elif Partner == JubesX:
+                        ch_v "Hey, [temp_Girls[0].tag], did you need something?"
+
+                    $ temp_Girls.remove(temp_Girls[0])
+                else:
+                    $ Partner.change_face("_angry", 1)
+
+                    if Partner == RogueX:
+                        ch_r "Hey, [temp_Girls[0].tag], we're a little busy here?"
+                    elif Partner == KittyX:
+                        ch_k "Um, [temp_Girls[0].tag]? Read the room?"
+                    elif Partner == EmmaX:
+                        ch_e "[temp_Girls[0].tag], could you please leave?"
+                    elif Partner == LauraX:
+                        ch_l "Scram, [temp_Girls[0].tag]."
+                    elif Partner == JeanX:
+                        ch_j "Leave, [temp_Girls[0].tag]."
+                    elif Partner == StormX:
+                        ch_s "Would you mind give us some space, [temp_Girls[0].tag]?"
+                    elif Partner == JubesX:
+                        ch_v "Yeah, we were. . . busy."
+
+                    $ temp_Girls[0].add_word(1, 0, 0,"saw with " + Partner.tag)
+
+                    if temp_Girls[0] == RogueX:
+                        $ temp_Girls[0].change_face("_perplexed", 2)
+
+                        ch_r "Oh, sorry about that! I'll head out."
+                    elif temp_Girls[0] == KittyX:
+                        $ temp_Girls[0].change_face("_perplexed", 2)
+
+                        ch_k "Oh! Sorrysorrysorry!"
+                    elif temp_Girls[0] == EmmaX:
+                        $ temp_Girls[0].change_face("_bemused", 2)
+
+                        ch_e "I wouldn't want to spoil the mood. . ."
+                    elif temp_Girls[0] == LauraX:
+                        ch_l "Oh, sure. Whatever."
+                    elif temp_Girls[0] == JeanX:
+                        $ temp_Girls[0].change_face("_bemused", 1)
+
+                        ch_j "Fine."
+                    elif temp_Girls[0] == StormX:
+                        $ temp_Girls[0].change_face("_bemused", 1)
+
+                        ch_s "Yes. . ."
+                    elif temp_Girls[0] == JubesX:
+                        $ temp_Girls[0].change_face("_perplexed", 2)
+
+                        ch_v "Oh, yes! Sorry!"
+
+                    $ Partner.change_face("_sexy", 1)
+
+                    $ temp_Girls[0].change_face("_sad", 1)
+
+                    call remove_Girl(temp_Girls[0])
+
+                    $ temp_Girls.remove(temp_Girls[0])
+
+                    if not temp_Girls:
+                        return False
+
+    return
+
+label Girls_arrive(arriving_Girls):
+    if arriving_Girls in all_Girls:
+        $ arriving_Girls = [arriving_Girls]
+
+    $ Primary = None
+
     while temp_Girls:
+        if Player.location == temp_Girls[0].home:
+            $ Primary = temp_Girls[0]
 
-        if "arriving" in temp_Girls[0].recent_history and temp_Girls[0] not in Player.Party:
-            $ GirlsNum += 1
-            $ Options.append(temp_Girls[0])
-        $ temp_Girls[0].drain_word("arriving")
-        $ temp_Girls.remove(temp_Girls[0])
+            $ temp_Girls = []
+        elif temp_Girls[0] == JeanX:
+            $ Primary = JeanX
 
-    if not Options:
-
-        return
-
-    $ renpy.random.shuffle(Options)
-    $ Primary = Options[0]
-    if len(Options) >= 2:
-
-        if Player.location == Options[1].home:
-            $ Primary = Options[1]
-            $ Secondary = Options[0]
-        else:
-            $ Secondary = Options[1]
-
-    if Secondary not in all_Girls:
-        $ Secondary = 0
-    $ Options = []
-
-    if "locked" in Player.traits:
-        if Primary == KittyX:
-            call locked_door (KittyX)
-            if KittyX.location != Player.location:
-                $ Primary = 0
-            elif Secondary:
-
-                "You hear a \"thump\" as if someone was trying to follow Kitty."
-                call locked_door (Secondary)
-                if Secondary.location != Player.location:
-                    $ Secondary = 0
-        elif Primary.home == Player.location:
-
-            "You hear a key jiggling in the lock."
-        else:
-            call locked_door (Primary)
-            if Primary.location != Player.location:
-                $ Primary = 0
-
+        if temp_Girls:
+            $ temp_Girls.remove(temp_Girls[0])
 
     if not Primary:
-        return
+        $ Primary = arriving_Girls[0]
 
+    if len(arriving_Girls) > 1:
+        $ Secondary = arriving_Girls[0] if Primary != arriving_Girls[0] else arriving_Girls[1]
 
-
-
-
-    call shift_focus (Primary)
-    if Player.location == "bg_dangerroom":
-
-
-        $ Primary.outfit_name = "gym_clothes"
-        $ Primary.change_outfit()
-        if Secondary:
-            $ Secondary.outfit_name = "gym_clothes"
-            $ Secondary.change_outfit()
-
-    call set_the_scene
-    if Player.location == "bg_player":
-        if Secondary:
-
-            "[Primary.name] and [Secondary.name] just entered your room."
+        if len(arriving_Girls) > 3:
+            $ line = Primary.name + " and a few others"
+        elif len(arriving_Girls) > 2:
+            $ line = Primary.name + " and a couple others"
         else:
+            $ line = Primary.name + " and " + Secondary.name
+    else:
+        $ Secondary = None
 
-            "[Primary.name] just entered your room."
+        $ line = Primary.name
 
-        if Primary == RogueX:
-            if Secondary:
-                ch_r "Hey, [RogueX.player_petname], can we come in?"
-            else:
-                ch_r "Hey, [RogueX.player_petname], can I come in?"
-        elif Primary == KittyX:
-            if Secondary:
-                ch_k "Hey[KittyX.like]can we come in?"
-            else:
-                ch_k "Hey[KittyX.like]can I come in?"
-        elif Primary == EmmaX:
-            if Secondary:
-                ch_e "Ah, good, you're here. May we come in?"
-            else:
-                ch_e "Ah, good, you're here. May I come in?"
-        elif Primary == LauraX:
-            ch_l "Hey."
-            ch_p ". . . [[She seems to want to stay]."
-        elif Primary == JeanX:
-            ch_j "Hey, [JeanX.player_petname]."
-            ch_p ". . . [[Ok, she's here now]."
-        elif Primary == StormX:
-            if Secondary:
-                ch_s "Excellent, you're in. May we come in?"
-            else:
-                ch_s "Excellent, you're in. May I come in?"
-        elif Primary == JubesX:
-            if Secondary:
-                ch_v "Oh, hey, mind us coming in?"
-            else:
-                ch_v "Oh, hey, mind me coming in?"
-        menu:
-            extend ""
-            "Sure.":
-                $ line = "sure"
-            "Not right now, maybe later.":
-                $ line = "later"
-            "Nope.":
-                $ line = "no"
+    if Player.primary_action:
+        $ Partners = focused_Girl
 
-        if line == "sure":
-            $ Primary.change_stat("love", 80, 1)
-            $ Primary.change_stat("obedience", 50, 2)
-            $ Primary.change_stat("inhibition", 50, 2)
+    if door_locked and KittyX not in arriving_Girls:
+        $ Player.add_word(1, "interruption")
+
+        call locked_door(arriving_Girls)
+
+        if not _return:
+            return
+    else:
+        if Player.location == "bg_campus" or Player.location == "bg_pool":
+            if len(arriving_Girls) > 1:
+                "Suddenly, [line] round a corner."
+            else:
+                "Suddenly, [line] rounds a corner."
+        else:
+            if Primary == KittyX:
+                "You look to the door just as [Primary.name] phases into the room."
+
+                if Secondary and door_locked:
+                    "You hear a \"thump\" as if someone was trying to follow her."
+                    ch_k "Oops!"
+                    "[Primary.name] turns back and unlocks the door."
+
+                    $ door_locked = False
+            else:
+                if len(arriving_Girls) > 1:
+                    "Suddenly, [line] enter the room, apparently without knocking."
+                else:
+                    "Suddenly, [line] enters the room, apparently without knocking."
+
+        call add_Girls(arriving_Girls)
+
+        if Player.primary_action:
+            call coitus_interruptus(Partners, arriving_Girls)
+
+            if not _return:
+                return
+
+        if Player.location == "bg_player":
             if Primary == RogueX:
-                ch_r "Thanks."
+                if Secondary:
+                    ch_r "Hey, [RogueX.player_petname], can we come in?"
+                else:
+                    ch_r "Hey, [RogueX.player_petname], can I come in?"
             elif Primary == KittyX:
-                $ KittyX.change_stat("inhibition", 50, 1)
-                ch_k "Cool."
+                if Secondary:
+                    ch_k "Hey[KittyX.like]can we come in?"
+                else:
+                    ch_k "Hey[KittyX.like]can I come in?"
             elif Primary == EmmaX:
-                ch_e "Good."
+                if Secondary:
+                    ch_e "Ah, good, you're here. May we come in?"
+                else:
+                    ch_e "Ah, good, you're here. May I come in?"
             elif Primary == LauraX:
-                $ LauraX.change_stat("love", 50, 1)
-                $ LauraX.change_stat("obedience", 60, 1)
-                "She doesn't leave."
+                ch_l "Hey."
+                ch_p ". . . [[She seems to want to stay]."
             elif Primary == JeanX:
-                "She doesn't leave."
+                ch_j "Hey, [JeanX.player_petname]."
+                ch_p ". . . [[Ok, she's here now]."
             elif Primary == StormX:
-                ch_s "Good."
+                if Secondary:
+                    ch_s "Excellent, you're in. May we come in?"
+                else:
+                    ch_s "Excellent, you're in. May I come in?"
             elif Primary == JubesX:
-                ch_v "Nice."
-            if Secondary:
-                $ Secondary.change_stat("love", 80, 1)
-                $ Secondary.change_stat("obedience", 50, 2)
-                $ Secondary.change_stat("inhibition", 50, 2)
+                if Secondary:
+                    ch_v "Oh, hey, mind us coming in?"
+                else:
+                    ch_v "Oh, hey, mind me coming in?"
 
-        if line == "later":
-            $ Primary.change_stat("love", 60, -1, 1)
-            $ Primary.change_stat("obedience", 70, 5)
-            $ Primary.change_face("_confused")
-            if Secondary and Secondary != JeanX:
-                $ Secondary.change_stat("love", 60, -1, 1)
-                $ Secondary.change_stat("obedience", 70, 5)
-                $ Secondary.change_face("_confused")
+            menu:
+                extend ""
+                "Come on in.":
+                    $ line = "sure"
+                "Not right now, maybe later.":
+                    $ line = "later"
+                "Yeah, actually.":
+                    $ line = "no"
+
+            if line == "sure":
+                $ Primary.change_stat("love", 80, 1)
+                $ Primary.change_stat("obedience", 50, 2)
+                $ Primary.change_stat("inhibition", 50, 2)
+
                 if Primary == RogueX:
-                    ch_r "Um, ok, we'll go then."
+                    ch_r "Thanks."
+                elif Primary == KittyX:
+                    $ Primary.change_stat("inhibition", 50, 1)
+
+                    ch_k "Cool."
+                elif Primary == EmmaX:
+                    ch_e "Good."
+                elif Primary == LauraX:
+                    $ Primary.change_stat("love", 50, 1)
+                    $ Primary.change_stat("obedience", 60, 1)
+                elif Primary == StormX:
+                    ch_s "Good."
+                elif Primary == JubesX:
+                    ch_v "Nice."
+
+                if Secondary:
+                    $ Secondary.change_stat("love", 80, 1)
+                    $ Secondary.change_stat("obedience", 50, 2)
+                    $ Secondary.change_stat("inhibition", 50, 2)
+            elif line == "later":
+                $ Primary.change_face("_confused")
+                $ Primary.change_stat("love", 60, -1, 1)
+                $ Primary.change_stat("obedience", 70, 5)
+
+                if Secondary and Secondary != JeanX:
+                    $ Secondary.change_face("_confused")
+                    $ Secondary.change_stat("love", 60, -1, 1)
+                    $ Secondary.change_stat("obedience", 70, 5)
+
+                    if Primary == RogueX:
+                        ch_r "Um, ok, we'll go then."
+                    elif Primary == KittyX:
+                        $ KittyX.change_stat("love", 60, -1, 1)
+                        $ KittyX.change_stat("obedience", 70, 2)
+
+                        ch_k "Oh[KittyX.like]we'll get going then."
+                    elif Primary == EmmaX:
+                        $ EmmaX.change_stat("love", 90, -2)
+                        $ EmmaX.change_stat("obedience", 30, -7)
+
+                        ch_e "If that's how you wish to play it. . ."
+                    elif Primary == LauraX:
+                        $ LauraX.change_stat("love", 90, -2)
+                        $ LauraX.change_stat("obedience", 30, -7)
+
+                        ch_l "Ok, later."
+                    elif Primary == StormX:
+                        ch_s "Ah, then we'll leave you to it."
+                    elif Primary == JubesX:
+                        ch_v "Oh. Ok. . ."
+                elif Primary == RogueX:
+                    ch_r "Um, ok."
                 elif Primary == KittyX:
                     $ KittyX.change_stat("love", 60, -1, 1)
                     $ KittyX.change_stat("obedience", 70, 2)
-                    ch_k "Oh[KittyX.like]we'll get going then."
+
+                    ch_k "Oh[KittyX.like]I'll get going then."
                 elif Primary == EmmaX:
                     $ EmmaX.change_stat("love", 90, -2)
                     $ EmmaX.change_stat("obedience", 30, -7)
+
                     ch_e "If that's how you wish to play it. . ."
                 elif Primary == LauraX:
                     $ LauraX.change_stat("love", 90, -2)
                     $ LauraX.change_stat("obedience", 30, -7)
+
                     ch_l "Ok, later."
                 elif Primary == StormX:
-                    ch_s "Ah, then we'll leave you to it."
+                    ch_s "Ah, then I'll leave you to it."
                 elif Primary == JubesX:
                     ch_v "Oh. Ok. . ."
-                call remove_Girl(Secondary)
-            elif Primary == RogueX:
-                ch_r "Um, ok."
-            elif Primary == KittyX:
-                $ KittyX.change_stat("love", 60, -1, 1)
-                $ KittyX.change_stat("obedience", 70, 2)
-                ch_k "Oh[KittyX.like]I'll get going then."
-            elif Primary == EmmaX:
-                $ EmmaX.change_stat("love", 90, -2)
-                $ EmmaX.change_stat("obedience", 30, -7)
-                ch_e "If that's how you wish to play it. . ."
-            elif Primary == LauraX:
-                $ LauraX.change_stat("love", 90, -2)
-                $ LauraX.change_stat("obedience", 30, -7)
-                ch_l "Ok, later."
-            elif Primary == StormX:
-                ch_s "Ah, then I'll leave you to it."
-            elif Primary == JubesX:
-                ch_v "Oh. Ok. . ."
-            if Primary == JeanX or Secondary == JeanX:
-                ch_j "Uh-huh."
-                "She doesn't leave."
-            if Primary != JeanX:
-                call remove_Girl(Primary)
 
-        if line == "no":
-            $ Primary.change_stat("obedience", 50, 5)
-            if approval_check(Primary, 1800) or approval_check(Primary, 500, "O"):
+                if JeanX in arriving_Girls:
+                    $ arriving_Girls.remove(JeanX)
 
-                $ Primary.change_stat("obedience", 80, 2)
-                if Primary == RogueX:
-                    ch_r "I guess that's ok. See you later then."
-                elif Primary == KittyX:
-                    ch_k "If you want some alone time. . ."
-                elif Primary == EmmaX:
-                    $ EmmaX.change_stat("obedience", 50, 2)
-                    ch_e "I suppose you can have your personal space. . ."
-                elif Primary == LauraX:
-                    ch_l "Not a problem."
-                elif Primary == StormX:
-                    ch_s ". . . very well. . ."
-                elif Primary == JubesX:
-                    ch_v "Oh. Ok. . ."
-            else:
-                $ Primary.change_face("_angry")
-                $ Primary.change_stat("love", 60, -5, 1)
-                $ Primary.change_stat("love", 80, -2)
-                $ Primary.change_stat("obedience", 80, 3)
-                $ Primary.change_stat("inhibition", 50, 1)
-                if Primary == RogueX:
-                    ch_r "Well fine!"
-                elif Primary == KittyX:
-                    $ KittyX.change_stat("love", 80, -2)
-                    $ KittyX.change_stat("obedience", 80, 2)
-                    ch_k "Jerk!"
-                elif Primary == EmmaX:
-                    $ EmmaX.change_stat("love", 90, -2)
-                    $ EmmaX.change_stat("obedience", 80, 3)
-                    ch_e "We'll see how long that attitude lasts. . ."
-                elif Primary == LauraX:
-                    $ LauraX.change_stat("love", 90, -2)
-                    "She seems upset."
-                elif Primary == StormX:
-                    ch_s ". . . I see. . ."
-                elif Primary == JubesX:
-                    ch_v "Oh, so you're going to be like -that-. . ."
-            if Primary == JeanX or Secondary == JeanX:
-                ch_j "Uh-huh."
-                "She doesn't leave."
-            if Primary != JeanX:
-                call remove_Girl(Primary)
-            if Secondary and Secondary != JeanX:
-                $ Secondary.change_stat("obedience", 50, 5)
-                if approval_check(Secondary, 1800) or approval_check(Secondary, 500, "O"):
-                    $ Secondary.change_stat("obedience", 80, 2)
-                    if Secondary == RogueX:
+                    $ Primary = JeanX
+                    $ Secondary = None
+
+                call remove_Girl(arriving_Girls)
+
+                if JeanX == Primary:
+                    ch_j "Uh-huh."
+
+                    "She doesn't leave."
+            elif line == "no":
+                $ Primary.change_stat("obedience", 50, 5)
+
+                if approval_check(Primary, 1800) or approval_check(Primary, 500, "O"):
+                    $ Primary.change_stat("obedience", 80, 2)
+
+                    if Primary == RogueX:
                         ch_r "I guess that's ok. See you later then."
-                    elif Secondary == KittyX:
+                    elif Primary == KittyX:
                         ch_k "If you want some alone time. . ."
-                    elif Secondary == EmmaX:
+                    elif Primary == EmmaX:
                         $ EmmaX.change_stat("obedience", 50, 2)
+
                         ch_e "I suppose you can have your personal space. . ."
-                    elif Secondary == LauraX:
+                    elif Primary == LauraX:
                         ch_l "Not a problem."
                     elif Primary == StormX:
                         ch_s ". . . very well. . ."
                     elif Primary == JubesX:
                         ch_v "Oh. Ok. . ."
                 else:
-                    $ Secondary.change_face("_angry")
-                    $ Secondary.change_stat("love", 60, -5, 1)
-                    $ Secondary.change_stat("love", 80, -2)
-                    $ Secondary.change_stat("obedience", 80, 3)
-                    $ Secondary.change_stat("inhibition", 50, 1)
-                    if Secondary == RogueX:
+                    $ Primary.change_face("_angry")
+                    $ Primary.change_stat("love", 60, -5, 1)
+                    $ Primary.change_stat("love", 80, -2)
+                    $ Primary.change_stat("obedience", 80, 3)
+                    $ Primary.change_stat("inhibition", 50, 1)
+
+                    if Primary == RogueX:
                         ch_r "Well fine!"
-                    elif Secondary == KittyX:
+                    elif Primary == KittyX:
                         $ KittyX.change_stat("love", 80, -2)
                         $ KittyX.change_stat("obedience", 80, 2)
+
                         ch_k "Jerk!"
-                    elif Secondary == EmmaX:
+                    elif Primary == EmmaX:
                         $ EmmaX.change_stat("love", 90, -2)
                         $ EmmaX.change_stat("obedience", 80, 3)
+
                         ch_e "We'll see how long that attitude lasts. . ."
-                    elif Secondary == LauraX:
+                    elif Primary == LauraX:
                         $ LauraX.change_stat("love", 90, -2)
+
                         "She seems upset."
                     elif Primary == StormX:
                         ch_s ". . . I see. . ."
                     elif Primary == JubesX:
                         ch_v "Oh, so you're going to be like -that-. . ."
-                call remove_Girl(Secondary)
-                if Primary == JeanX:
-                    "[Secondary.name] storms out."
+
+                if Secondary and Secondary != JeanX:
+                    $ Secondary.change_stat("obedience", 50, 5)
+
+                    if approval_check(Secondary, 1800) or approval_check(Secondary, 500, "O"):
+                        $ Secondary.change_stat("obedience", 80, 2)
+
+                        if Secondary == RogueX:
+                            ch_r "I guess that's ok. See you later then."
+                        elif Secondary == KittyX:
+                            ch_k "If you want some alone time. . ."
+                        elif Secondary == EmmaX:
+                            $ EmmaX.change_stat("obedience", 50, 2)
+
+                            ch_e "I suppose you can have your personal space. . ."
+                        elif Secondary == LauraX:
+                            ch_l "Not a problem."
+                        elif Primary == StormX:
+                            ch_s ". . . very well. . ."
+                        elif Primary == JubesX:
+                            ch_v "Oh. Ok. . ."
+                    else:
+                        $ Secondary.change_face("_angry")
+                        $ Secondary.change_stat("love", 60, -5, 1)
+                        $ Secondary.change_stat("love", 80, -2)
+                        $ Secondary.change_stat("obedience", 80, 3)
+                        $ Secondary.change_stat("inhibition", 50, 1)
+
+                        if Secondary == RogueX:
+                            ch_r "Well fine!"
+                        elif Secondary == KittyX:
+                            $ KittyX.change_stat("love", 80, -2)
+                            $ KittyX.change_stat("obedience", 80, 2)
+
+                            ch_k "Jerk!"
+                        elif Secondary == EmmaX:
+                            $ EmmaX.change_stat("love", 90, -2)
+                            $ EmmaX.change_stat("obedience", 80, 3)
+
+                            ch_e "We'll see how long that attitude lasts. . ."
+                        elif Secondary == LauraX:
+                            $ LauraX.change_stat("love", 90, -2)
+
+                            "She seems upset."
+                        elif Primary == StormX:
+                            ch_s ". . . I see. . ."
+                        elif Primary == JubesX:
+                            ch_v "Oh, so you're going to be like -that-. . ."
+
+                if JeanX in arriving_Girls:
+                    $ arriving_Girls.remove(JeanX)
+
+                    $ Primary = JeanX
+                    $ Secondary = None
+
+                if len(arriving_Girls) == 1:
+                    "[arriving_Girls[0].name] storms out."
                 else:
                     "The girls storm out."
-                    if Primary == StormX or Secondary == StormX:
+
+                    if StormX in arriving_Girls:
                         "-so to speak."
 
+                    if Primary == JeanX:
+                        ch_j "Uh-huh."
 
+                        "[Primary.name] doesn't leave."
+        elif Player.location in bedrooms:
+            if Player.location == Primary.home:
+                if "_angry" in Primary.daily_history:
+                    $ Primary.change_face("_bemused", 1,brows = "_angry")
 
-    elif Player.location in bedrooms:
+                    if Primary == RogueX:
+                        ch_r "I'm kinda pissed at you right now, get out of here."
+                    elif Primary == KittyX:
+                        ch_k "You shouldn't be here right now."
+                    elif Primary == EmmaX:
+                        ch_e "I don't think you should be here."
+                    elif Primary == LauraX:
+                        ch_l "You should get away while you can."
+                    elif Primary == JeanX:
+                        ch_j "I'm not in the mood."
+                    elif Primary == StormX:
+                        ch_s "This would not be a safe place for you to be. . ."
+                    elif Primary == JubesX:
+                        ch_v "\"Tread not into my lair\". . ."
+                elif time_index > 2 and approval_check(Primary, 1000, "LI") and approval_check(Primary, 600, "OI"):
+                    if Primary == RogueX:
+                        ch_r "Oh, hey, [RogueX.player_petname], it's pretty late, but I guess you can stick around for a bit."
+                    elif Primary == KittyX:
+                        ch_k "Oh, hey, it's kinds late, but you can stay for a bit."
+                    elif Primary == EmmaX:
+                        ch_e "Oh, it's a bit late, but you're welcome."
+                    elif Primary == LauraX:
+                        ch_l "It's late."
+                    elif Primary == JeanX:
+                        ch_j "Oh, you know what time it is, right?"
+                    elif Primary == StormX:
+                        ch_s "Delightful to see you, but the hour is late. . ."
+                    elif Primary == JubesX:
+                        ch_v "Kinda late, [JubesX.player_petname], s'up?"
 
-        if Secondary:
+                    $ line = "stay"
+                elif approval_check(Primary, 1300) or approval_check(Primary, 500, "O") or Primary == JubesX:
+                    if Primary == RogueX:
+                        ch_r "Oh, hey, [RogueX.player_petname], nice to see you here."
+                    elif Primary == KittyX:
+                        ch_k "Oh, hey, nice to see you."
+                    elif Primary == EmmaX:
+                        ch_e "Oh, nice to see you."
+                    elif Primary == LauraX:
+                        ch_l "Oh, hey."
+                    elif Primary == JeanX:
+                        ch_j "Oh, hello?"
+                    elif Primary == StormX:
+                        ch_s "It is good to see you."
+                    elif Primary == JubesX:
+                        ch_v "Hey, [JubesX.player_petname], s'up?"
 
-            "[Primary.name] and [Secondary.name] just entered the room."
-        else:
+                    $ line = "stay"
+                elif time_index > 2:
+                    if Primary == RogueX:
+                        ch_r "Oh, hey, [RogueX.player_petname], it's kind late, could you head out of here?"
+                    elif Primary == KittyX:
+                        ch_k "Oh, hey, [KittyX.player_petname]. It's kind of late, could you come back tomorrow?"
+                    elif Primary == EmmaX:
+                        ch_e "Oh, hello, [EmmaX.player_petname]. It's a bit late, could you come back tomorrow?"
+                    elif Primary == LauraX:
+                        ch_l "Oh, hey, it's late."
+                    elif Primary == JeanX:
+                        ch_j "You -can- tell time, right?"
+                    elif Primary == StormX:
+                        ch_s "I'm afraid that the hour is a bit late for visits. . ."
+                elif approval_check(Primary, 600, "LI") or approval_check(Primary, 300, "OI"):
+                    if Primary == RogueX:
+                        ch_r "Oh, hey, [RogueX.player_petname]. You can stick around, I guess."
+                    elif Primary == KittyX:
+                        ch_k "Oh, hey, [KittyX.player_petname], what's up?"
+                    elif Primary == EmmaX:
+                        ch_e "Oh, hello, [EmmaX.player_petname], can I help you with anything?"
+                    elif Primary == LauraX:
+                        ch_l "Oh, hey, [LauraX.player_petname]."
+                    elif Primary == JeanX:
+                        ch_j "Um, hello?"
+                    elif Primary == StormX:
+                        ch_s "Oh, yes? Did you need something?"
+                    elif Primary == JubesX:
+                        ch_v "Hey, [JubesX.player_petname], s'up?"
 
-            "[Primary.name] just entered the room."
-        if Player.location == Primary.home:
-            if "_angry" in Primary.daily_history:
+                    $ line = "stay"
+                else:
+                    if Primary == RogueX:
+                        ch_r "Hey, [RogueX.player_petname], I'm not sure why you're here, but I'd rather you leave."
+                    elif Primary == KittyX:
+                        ch_k "Hey, [KittyX.player_petname], what are you even doing here?"
+                        ch_k "Could you[KittyX.like]get out?"
+                    elif Primary == EmmaX:
+                        ch_e "Oh, hello, [EmmaX.player_petname]?"
+                        ch_e "Did you have a reason to be visiting me?"
+                    elif Primary == LauraX:
+                        $ Primary.change_face("_confused")
 
-                $ Primary.change_face("_bemused", 1,brows = "_angry")
-                if Primary == RogueX:
-                    ch_r "I'm kinda pissed at you right now, get out of here."
-                elif Primary == KittyX:
-                    ch_k "You shouldn't be here right now."
-                elif Primary == EmmaX:
-                    ch_e "I don't think you should be here."
-                elif Primary == LauraX:
-                    ch_l "You should get away while you can."
-                elif Primary == JeanX:
-                    ch_j "I'm not in the mood."
-                elif Primary == StormX:
-                    ch_s "This would not be a safe place for you to be. . ."
-                elif Primary == JubesX:
-                    ch_v "\"Tread not into my lair\". . ."
+                        ch_l "Hey, [LauraX.player_petname], why are you here?"
+                    elif Primary == JeanX:
+                        $ Primary.change_face("_confused")
 
-            elif time_index > 2 and approval_check(Primary, 1000, "LI") and approval_check(Primary, 600, "OI"):
+                        ch_j "I didn't invite you here."
+                    elif Primary == StormX:
+                        ch_s "I'm afraid that this is not a good time."
+                    elif Primary == JubesX:
+                        ch_v "Hey, [JubesX.player_petname]? Not a good time."
 
-                if Primary == RogueX:
-                    ch_r "Oh, hey, [RogueX.player_petname], it's pretty late, but I guess you can stick around for a bit."
-                elif Primary == KittyX:
-                    ch_k "Oh, hey, it's kinds late, but you can stay for a bit."
-                elif Primary == EmmaX:
-                    ch_e "Oh, it's a bit late, but you're welcome."
-                elif Primary == LauraX:
-                    ch_l "It's late."
-                elif Primary == JeanX:
-                    ch_j "Oh, you know what time it is, right?"
-                elif Primary == StormX:
-                    ch_s "Delightful to see you, but the hour is late. . ."
-                elif Primary == JubesX:
-                    ch_v "Kinda late, [JubesX.player_petname], s'up?"
-                $ line = "stay"
-            elif approval_check(Primary, 1300) or approval_check(Primary, 500, "O") or Primary == JubesX:
-
-                if Primary == RogueX:
-                    ch_r "Oh, hey, [RogueX.player_petname], nice to see you here."
-                elif Primary == KittyX:
-                    ch_k "Oh, hey, nice to see you."
-                elif Primary == EmmaX:
-                    ch_e "Oh, nice to see you."
-                elif Primary == LauraX:
-                    ch_l "Oh, hey."
-                elif Primary == JeanX:
-                    ch_j "Oh, hello?"
-                elif Primary == StormX:
-                    ch_s "It is good to see you."
-                elif Primary == JubesX:
-                    ch_v "Hey, [JubesX.player_petname], s'up?"
-                $ line = "stay"
-            elif time_index > 2:
-
-                if Primary == RogueX:
-                    ch_r "Oh, hey, [RogueX.player_petname], it's kind late, could you head out of here?"
-                elif Primary == KittyX:
-                    ch_k "Oh, hey, [KittyX.player_petname]. It's kind of late, could you come back tomorrow?"
-                elif Primary == EmmaX:
-                    ch_e "Oh, hello, [EmmaX.player_petname]. It's a bit late, could you come back tomorrow?"
-                elif Primary == LauraX:
-                    ch_l "Oh, hey, it's late."
-                elif Primary == JeanX:
-                    ch_j "You -can- tell time, right?"
-                elif Primary == StormX:
-                    ch_s "I'm afraid that the hour is a bit late for visits. . ."
-
-
-            elif approval_check(Primary, 600, "LI") or approval_check(Primary, 300, "OI"):
-
-                if Primary == RogueX:
-                    ch_r "Oh, hey, [RogueX.player_petname]. You can stick around, I guess."
-                elif Primary == KittyX:
-                    ch_k "Oh, hey, [KittyX.player_petname], what's up?"
-                elif Primary == EmmaX:
-                    ch_e "Oh, hello, [EmmaX.player_petname], can I help you with anything?"
-                elif Primary == LauraX:
-                    ch_l "Oh, hey, [LauraX.player_petname]."
-                elif Primary == JeanX:
-                    ch_j "Um, hello?"
-                elif Primary == StormX:
-                    ch_s "Oh, yes? Did you need something?"
-                elif Primary == JubesX:
-                    ch_v "Hey, [JubesX.player_petname], s'up?"
-                $ line = "stay"
-            else:
-
-                if Primary == RogueX:
-                    ch_r "Hey, [RogueX.player_petname], I'm not sure why you're here, but I'd rather you leave."
-                elif Primary == KittyX:
-                    ch_k "Hey, [KittyX.player_petname], what are you even doing here?"
-                    ch_k "Could you[KittyX.like]get out?"
-                elif Primary == EmmaX:
-                    ch_e "Oh, hello, [EmmaX.player_petname]?"
-                    ch_e "Did you have a reason to be visiting me?"
-                elif Primary == LauraX:
-                    $ Primary.change_face("_confused")
-                    ch_l "Hey, [LauraX.player_petname], why are you here?"
-                elif Primary == JeanX:
-                    $ Primary.change_face("_confused")
-                    ch_j "I didn't invite you here."
-                elif Primary == StormX:
-                    ch_s "I'm afraid that this is not a good time."
-                elif Primary == JubesX:
-                    ch_v "Hey, [JubesX.player_petname]? Not a good time."
-            if line != "stay":
-
-                menu:
-                    extend ""
-                    "Sure, ok. [[you go]":
-                        $ Primary.change_stat("love", 80, 1)
-                        $ Primary.change_stat("obedience", 50, 2)
-                        $ Primary.change_stat("inhibition", 50, 2)
-                        Primary.voice "Thanks."
-                        "You head back to your room."
-                    "Sorry, I'll go.":
-                        $ Primary.change_stat("love", 90, 2)
-                        $ Primary.change_stat("obedience", 50, 3)
-                        $ Primary.change_face("_smile")
-                        Primary.voice "Thanks."
-                        "You head back to your room."
-                    "Are you sure I can't stay?":
-                        if "_angry" in Primary.daily_history:
-                            $ Primary.change_face("_angry")
-                            if Primary == RogueX:
-                                ch_r "What part of \"no\" don't ya get?"
-                            elif Primary == KittyX:
-                                ch_k "I think I said {i}NO!{/i}"
-                            elif Primary == EmmaX:
-                                ch_e "I believe I said {i}no.{/i}"
-                            elif Primary == LauraX:
-                                ch_l "[[growls] 0. . .You probably shouldn't."
-                            elif Primary == JeanX:
-                                ch_j "Oh, bad call, [Primary.player_petname]"
-                            elif Primary == StormX:
-                                ch_s "Quite certain."
-                            elif Primary == JubesX:
-                                ch_v "Oh, let me check. . ."
-                                $ Primary.change_face("_angry", eyes = "_side")
-                                ch_v ". . ."
-                                $ Primary.change_face("_angry", mouth = "open")
-                                ch_v "-YES.-"
-                                $ Primary.change_face("_angry")
-                        elif time_index > 2 and approval_check(Primary, 800, "LI") and approval_check(Primary, 400, "OI"):
-                            $ Primary.change_face("_sadside")
-                            if Primary == RogueX:
-                                ch_r "I suppose I can make an exception this once."
-                            elif Primary == KittyX:
-                                ch_k "Maybe just this once. . ."
-                            elif Primary == EmmaX:
-                                ch_e "Perhaps just this once. . ."
-                            elif Primary == LauraX:
-                                ch_l "I guess. . ."
-                            elif Primary == JeanX:
-                                ch_j "Oh, whatever, make it quick."
-                            elif Primary == StormX:
-                                ch_s "If it is really so important. . ."
-                            elif Primary == JubesX:
-                                ch_v "Sure."
-                            $ line = "stay"
-                        elif time_index > 2:
-                            if Primary == RogueX:
-                                ch_r "No way, [RogueX.player_petname]. Try again tomorrow."
-                            elif Primary == KittyX:
-                                ch_k "Noooope. Try again tomorrow."
-                            elif Primary == EmmaX:
-                                ch_e "I'm afraid not. Try again tomorrow."
-                            elif Primary == LauraX:
-                                ch_l "No. Maybe tomorrow."
-                            elif Primary == JeanX:
-                                ch_j "Um, no? Get out."
-                            elif Primary == StormX:
-                                ch_s "Not tonight, perhaps during class."
-                            elif Primary == JubesX:
-                                ch_v "Sure."
-                                $ line = "stay"
-                        elif approval_check(Primary, 750):
-                            if Primary == RogueX:
-                                ch_r "Oh, fine. For a little bit."
-                            elif Primary == KittyX:
-                                ch_k "Oh, fiiiine."
-                                ch_k "Just for a little bit."
-                            elif Primary == EmmaX:
-                                ch_e "Oh, very well. . ."
-                                ch_e "Just for a little bit."
-                            elif Primary == LauraX:
-                                ch_l "Ok."
-                                ch_l "Just for a minute."
-                            elif Primary == JeanX:
-                                ch_j "I guess? Whatever."
-                            elif Primary == StormX:
-                                ch_s "If it is really so important. . ."
-                            elif Primary == JubesX:
-                                ch_v "Sure."
-                            $ line = "stay"
-                        else:
-                            $ Primary.change_face("_angry")
-                            if Primary == RogueX:
-                                ch_r "No, seriously, get."
-                            elif Primary == KittyX:
-                                ch_k "Noooope."
-                            elif Primary == EmmaX:
-                                ch_e "Definitely not."
-                            elif Primary == LauraX:
-                                ch_l "No."
-                            elif Primary == JeanX:
-                                ch_j "Um, no?"
-                            elif Primary == StormX:
-                                ch_s "Definitely not."
-                            elif Primary == JubesX:
-                                ch_v "Nope."
-                        if line != "stay":
-                            $ Primary.change_stat("love", 80, -1)
-                            $ Primary.change_stat("inhibition", 50, 3)
-                            "[Primary.name] kicks you out of the room."
-                    "I'm sticking around, thanks.":
-
-                        if "_angry" in Primary.daily_history or (not approval_check(Primary, 1800) and not approval_check(Primary, 500, "O")):
-                            $ Primary.change_face("_angry")
-                            if Primary == RogueX:
-                                ch_r "No way, buster! Out!"
-                            elif Primary == KittyX:
-                                ch_k "Nooope, out!"
-                            elif Primary == EmmaX:
-                                ch_e "You must be joking."
-                            elif Primary == LauraX:
-                                ch_l "You really shouldn't."
-                            elif Primary == JeanX:
-                                ch_j "Um, no you aren't."
-                            elif Primary == StormX:
-                                ch_s "You most certainly are not."
-                            elif Primary == JubesX:
-                                ch_v "Well, it's easier than calling -out- for dinner. . ."
-                        else:
-                            $ Primary.change_stat("obedience", 80, 5)
-                            $ Primary.change_face("_sad")
-                            if Primary == RogueX:
-                                ch_r ". . ."
-                                ch_r "I guess that's ok."
-                            elif Primary == KittyX:
-                                ch_k ". . ."
-                                ch_k "Fine."
-                            elif Primary == EmmaX:
-                                ch_e ". . ."
-                                ch_e "Fine."
-                            elif Primary == LauraX:
-                                ch_l ". . ."
-                            elif Primary == JeanX:
-                                ch_j "Fine, whatever."
-                            elif Primary == StormX:
-                                ch_s "We will have to discuss boundaries later."
-                            elif Primary == JubesX:
-                                ch_v "Uh-huh. . ."
-                            $ line = "stay"
-                        if line != "stay":
-                            $ Primary.change_stat("love", 60, -5, 1)
-                            $ Primary.change_stat("love", 80, -5)
+                if line != "stay":
+                    menu:
+                        extend ""
+                        "Sure, ok.":
+                            $ Primary.change_stat("love", 80, 1)
                             $ Primary.change_stat("obedience", 50, 2)
-                            $ Primary.change_stat("inhibition", 60, 5)
-                            "[Primary.name] kicks you out of the room."
+                            $ Primary.change_stat("inhibition", 50, 2)
 
-            if line != "stay":
-                $ Player.location = "bg_player"
-                jump player_room
+                            Primary.voice "Thanks."
 
-        elif Primary == RogueX:
-            ch_r "Sorry, I wasn't expecting to bump into you here."
-        elif Primary == KittyX:
-            ch_k "Hey[KittyX.like]funny meeting you here."
-        elif Primary == EmmaX:
-            ch_e "I didn't expect to run into you here."
-        elif Primary == LauraX:
-            ch_l "Oh, hey."
-        elif Primary == JeanX:
-            ch_j "Oh, you. . ."
-        elif Primary == StormX:
-            ch_s "Ah, [StormX.player_petname]."
-        elif Primary == JubesX:
-            ch_v "Oh, hey. . ."
+                            "You head back to your room."
+                        "Sorry, I'll go.":
+                            $ Primary.change_face("_smile")
+                            $ Primary.change_stat("love", 90, 2)
+                            $ Primary.change_stat("obedience", 50, 3)
 
+                            Primary.voice "Thanks."
 
-    elif Player.location == "bg_classroom":
+                            "You head back to your room."
+                        "Are you sure I can't stay?":
+                            if "_angry" in Primary.daily_history:
+                                $ Primary.change_face("_angry")
 
+                                if Primary == RogueX:
+                                    ch_r "What part of \"no\" don't ya get?"
+                                elif Primary == KittyX:
+                                    ch_k "I think I said {i}NO!{/i}"
+                                elif Primary == EmmaX:
+                                    ch_e "I believe I said {i}no.{/i}"
+                                elif Primary == LauraX:
+                                    ch_l "[[growls] 0. . .You probably shouldn't."
+                                elif Primary == JeanX:
+                                    ch_j "Oh, bad call, [Primary.player_petname]"
+                                elif Primary == StormX:
+                                    ch_s "Quite certain."
+                                elif Primary == JubesX:
+                                    ch_v "Oh, let me check. . ."
 
+                                    $ Primary.change_face("_angry", eyes = "_side")
 
-        if Secondary:
+                                    ch_v ". . ."
 
-            "[Primary.name] and [Secondary.name] just entered the room."
-        else:
+                                    $ Primary.change_face("_angry", mouth = "open")
 
-            "[Primary.name] just entered the room."
+                                    ch_v "-YES.-"
 
-        if Primary == RogueX or Secondary == RogueX:
-            ch_r "Hey, [RogueX.player_petname]."
-        if Primary == KittyX or Secondary == KittyX:
-            ch_k "Oh, hey."
-        if Primary == EmmaX or Secondary == EmmaX:
-            ch_e "Oh, hello, [EmmaX.player_petname]."
-        if Primary == LauraX or Secondary == LauraX:
-            ch_l "Hey."
-        if Primary == StormX or Secondary == StormX:
-            ch_s "Hello, [StormX.player_petname]."
-        if Primary == JubesX or Secondary == JubesX:
-            ch_v "Hey!"
+                                    $ Primary.change_face("_angry")
+                            elif time_index > 2 and approval_check(Primary, 800, "LI") and approval_check(Primary, 400, "OI"):
+                                $ Primary.change_face("_sadside")
 
-        $ line = 0
-        $ D20 = renpy.random.randint(1, 20)
+                                if Primary == RogueX:
+                                    ch_r "I suppose I can make an exception this once."
+                                elif Primary == KittyX:
+                                    ch_k "Maybe just this once. . ."
+                                elif Primary == EmmaX:
+                                    ch_e "Perhaps just this once. . ."
+                                elif Primary == LauraX:
+                                    ch_l "I guess. . ."
+                                elif Primary == JeanX:
+                                    ch_j "Oh, whatever, make it quick."
+                                elif Primary == StormX:
+                                    ch_s "If it is really so important. . ."
+                                elif Primary == JubesX:
+                                    ch_v "Sure."
 
-        if Primary == EmmaX or Primary == StormX:
+                                $ line = "stay"
+                            elif time_index > 2:
+                                if Primary == RogueX:
+                                    ch_r "No way, [RogueX.player_petname]. Try again tomorrow."
+                                elif Primary == KittyX:
+                                    ch_k "Noooope. Try again tomorrow."
+                                elif Primary == EmmaX:
+                                    ch_e "I'm afraid not. Try again tomorrow."
+                                elif Primary == LauraX:
+                                    ch_l "No. Maybe tomorrow."
+                                elif Primary == JeanX:
+                                    ch_j "Um, no? Get out."
+                                elif Primary == StormX:
+                                    ch_s "Not tonight, perhaps during class."
+                                elif Primary == JubesX:
+                                    ch_v "Sure."
 
-            if Secondary:
-                $ Primary = Secondary
-                $ Secondary = 0
-            else:
-                $ Primary = 0
-        if Primary:
+                                    $ line = "stay"
+                            elif approval_check(Primary, 750):
+                                if Primary == RogueX:
+                                    ch_r "Oh, fine. For a little bit."
+                                elif Primary == KittyX:
+                                    ch_k "Oh, fiiiine."
+                                    ch_k "Just for a little bit."
+                                elif Primary == EmmaX:
+                                    ch_e "Oh, very well. . ."
+                                    ch_e "Just for a little bit."
+                                elif Primary == LauraX:
+                                    ch_l "Ok."
+                                    ch_l "Just for a minute."
+                                elif Primary == JeanX:
+                                    ch_j "I guess? Whatever."
+                                elif Primary == StormX:
+                                    ch_s "If it is really so important. . ."
+                                elif Primary == JubesX:
+                                    ch_v "Sure."
 
-            if approval_check(Primary, 1000):
-                if len(Present) < 2 and D20 >= 10:
-                    $ line = Primary.name + " takes the seat next to you"
+                                $ line = "stay"
+                            else:
+                                $ Primary.change_face("_angry")
+                                if Primary == RogueX:
+                                    ch_r "No, seriously, get."
+                                elif Primary == KittyX:
+                                    ch_k "Noooope."
+                                elif Primary == EmmaX:
+                                    ch_e "Definitely not."
+                                elif Primary == LauraX:
+                                    ch_l "No."
+                                elif Primary == JeanX:
+                                    ch_j "Um, no?"
+                                elif Primary == StormX:
+                                    ch_s "Definitely not."
+                                elif Primary == JubesX:
+                                    ch_v "Nope."
 
-                    $ Present.append(Primary)
+                            if line != "stay":
+                                $ Primary.change_stat("love", 80, -1)
+                                $ Primary.change_stat("inhibition", 50, 3)
+
+                                "[Primary.name] kicks you out of the room."
+                        "I'm sticking around, thanks.":
+                            if "_angry" in Primary.daily_history or (not approval_check(Primary, 1800) and not approval_check(Primary, 500, "O")):
+                                $ Primary.change_face("_angry")
+
+                                if Primary == RogueX:
+                                    ch_r "No way, buster! Out!"
+                                elif Primary == KittyX:
+                                    ch_k "Nooope, out!"
+                                elif Primary == EmmaX:
+                                    ch_e "You must be joking."
+                                elif Primary == LauraX:
+                                    ch_l "You really shouldn't."
+                                elif Primary == JeanX:
+                                    ch_j "Um, no you aren't."
+                                elif Primary == StormX:
+                                    ch_s "You most certainly are not."
+                                elif Primary == JubesX:
+                                    ch_v "Well, it's easier than calling -out- for dinner. . ."
+                            else:
+                                $ Primary.change_face("_sad")
+                                $ Primary.change_stat("obedience", 80, 5)
+
+                                if Primary == RogueX:
+                                    ch_r ". . ."
+                                    ch_r "I guess that's ok."
+                                elif Primary == KittyX:
+                                    ch_k ". . ."
+                                    ch_k "Fine."
+                                elif Primary == EmmaX:
+                                    ch_e ". . ."
+                                    ch_e "Fine."
+                                elif Primary == LauraX:
+                                    ch_l ". . ."
+                                elif Primary == JeanX:
+                                    ch_j "Fine, whatever."
+                                elif Primary == StormX:
+                                    ch_s "We will have to discuss boundaries later."
+                                elif Primary == JubesX:
+                                    ch_v "Uh-huh. . ."
+
+                                $ line = "stay"
+
+                            if line != "stay":
+                                $ Primary.change_stat("love", 60, -5, 1)
+                                $ Primary.change_stat("love", 80, -5)
+                                $ Primary.change_stat("obedience", 50, 2)
+                                $ Primary.change_stat("inhibition", 60, 5)
+
+                                "[Primary.name] kicks you out of the room."
+
+                if line != "stay":
+                    $ Player.location = "bg_campus"
+
+                    jump reset_location
+
+            elif Primary == RogueX:
+                ch_r "Sorry, I wasn't expecting to bump into you here."
+            elif Primary == KittyX:
+                ch_k "Hey[KittyX.like]funny meeting you here."
+            elif Primary == EmmaX:
+                ch_e "I didn't expect to run into you here."
+            elif Primary == LauraX:
+                ch_l "Oh, hey."
+            elif Primary == JeanX:
+                ch_j "Oh, you. . ."
+            elif Primary == StormX:
+                ch_s "Ah, [StormX.player_petname]."
+            elif Primary == JubesX:
+                ch_v "Oh, hey. . ."
+        elif Player.location == "bg_classroom":
+            if Primary == RogueX or Secondary == RogueX:
+                ch_r "Hey, [RogueX.player_petname]."
+
+            if Primary == KittyX or Secondary == KittyX:
+                ch_k "Oh, hey."
+
+            if Primary == EmmaX or Secondary == EmmaX:
+                ch_e "Oh, hello, [EmmaX.player_petname]."
+
+            if Primary == LauraX or Secondary == LauraX:
+                ch_l "Hey."
+
+            if Primary == StormX or Secondary == StormX:
+                ch_s "Hello, [StormX.player_petname]."
+
+            if Primary == JubesX or Secondary == JubesX:
+                ch_v "Hey!"
+
+            $ D20 = renpy.random.randint(1, 20)
+
+            if Primary in [EmmaX, StormX]:
+                if Secondary:
+                    $ Primary = Secondary
+                    $ Secondary = None
+                else:
+                    $ Primary = None
+
+            if Primary:
+                if approval_check(Primary, 1000):
+                    if D20 >= 10:
+                        $ line = Primary.name + " takes a seat next to you"
+
+                        $ Present.append(Primary)
+                    else:
+                        $ line = Primary.name + " sits across the room from you"
+
+                        $ Nearby.append(Primary)
                 else:
                     $ line = Primary.name + " sits across the room from you"
 
                     $ Nearby.append(Primary)
-            else:
-                $ line = Primary.name + " sits across the room from you"
 
-                $ Nearby.append(Primary)
+            if Secondary:
+                if approval_check(Secondary, 1000):
+                    if D20 >= 10:
+                        if Primary in Present:
+                            $ line = Primary.name + " and " + Secondary.name + " sit down next to you"
+                        else:
+                            $ line = line + ", while " + Secondary.name + " takes the seat next to you"
 
-        if Secondary:
-            if approval_check(Secondary, 1000):
-                if len(Present) < 2 and D20 >= 10:
-
-                    if Primary in Present:
-                        $ line = Primary.name + " and " + Secondary.name + " sit down next to you"
+                        $ Present.append(Secondary)
                     else:
-                        $ line = line + ", while " + Secondary.name + " takes the seat next to you"
+                        if Primary in Nearby:
+                            $ line = Primary.name + " and " + Secondary.name + " sit across the room from you"
+                        else:
+                            $ line = line + ", while " + Secondary.name + " sits across the room from you"
 
-                    $ Present.append(Secondary)
+                        $ Nearby.append(Secondary)
                 else:
                     if Primary in Nearby:
                         $ line = Primary.name + " and " + Secondary.name + " sit across the room from you"
@@ -2500,78 +2862,41 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0):
                         $ line = line + ", while " + Secondary.name + " sits across the room from you"
 
                     $ Nearby.append(Secondary)
-            else:
-                if Primary in Nearby:
-                    $ line = Primary.name + " and " + Secondary.name + " sit across the room from you"
-                else:
-                    $ line = line + ", while " + Secondary.name + " sits across the room from you"
 
-                $ Nearby.append(Secondary)
-        if line:
-            "[line]."
+            if line:
+                "[line]."
 
-        if EmmaX.location == "bg_teacher":
-            "[EmmaX.name] takes her position behind the podium."
-        elif StormX.location == "bg_teacher":
-            "[StormX.name] takes her position behind the podium."
+            if EmmaX.location == "bg_teacher":
+                "[EmmaX.name] takes her position behind the podium."
+            elif StormX.location == "bg_teacher":
+                "[StormX.name] takes her position behind the podium."
+        elif Player.location in ["bg_campus", "bg_dangerroom", "bg_pool"]:
+            if Primary == RogueX or Secondary == RogueX:
+                ch_r "Hey, [RogueX.player_petname]."
 
-    elif Player.location == "bg_dangerroom":
-        if Secondary:
+            if Primary == KittyX or Secondary == KittyX:
+                ch_k "Oh, hey."
 
-            "[Primary.name] and [Secondary.name] just entered the room."
-        else:
+            if Primary == EmmaX or Secondary == EmmaX:
+                ch_e "Oh, hello, [EmmaX.player_petname]."
 
-            "[Primary.name] just entered the room."
+            if Primary == LauraX or Secondary == LauraX:
+                ch_l "Hey."
 
-    elif Player.location == "bg_campus":
-        if Secondary:
+            if Primary == StormX or Secondary == StormX:
+                ch_s "Hello, [StormX.player_petname]."
 
-            "[Primary.name] and [Secondary.name] just entered the square."
-        else:
-
-            "[Primary.name] just entered the square."
-
-    elif Player.location == "bg_pool":
-        if Secondary:
-
-            "[Primary.name] and [Secondary.name] just entered the pool area."
-        else:
-
-            "[Primary.name] just entered the pool area."
-    else:
-
-        if Secondary:
-
-            "[Primary.name] and [Secondary.name] just entered the room."
-        else:
-
-            "[Primary.name] just entered the room."
-
-
-    if Player.location in ("bg_campus","bg_dangerroom","bg_pool"):
-        if Primary == RogueX or Secondary == RogueX:
-            ch_r "Hey, [RogueX.player_petname]."
-        if Primary == KittyX or Secondary == KittyX:
-            ch_k "Oh, hey."
-        if Primary == EmmaX or Secondary == EmmaX:
-            ch_e "Oh, hello, [EmmaX.player_petname]."
-        if Primary == LauraX or Secondary == LauraX:
-            ch_l "Hey."
-        if Primary == StormX or Secondary == StormX:
-            ch_s "Hello, [StormX.player_petname]."
-        if Primary == JubesX or Secondary == JubesX:
-            ch_v "Hey!"
-
+            if Primary == JubesX or Secondary == JubesX:
+                ch_v "Hey!"
 
     python:
         for G in all_Girls:
             if G in Nearby:
                 G.location = "nearby"
-            elif G.location == Player.location:
-                Present.append(G)
 
     if Nearby:
         "There were some others as well, but they kept their distance."
+
     return
 
 
@@ -2652,324 +2977,267 @@ label dismiss_menu:
 
     return
 
-label locked_door(Girl, entering = False, current_Girl = None):
-    $ Player.add_word(1,"interruption")
+label locked_door(arriving_Girls):
+    if arriving_Girls in all_Girls:
+        $ arriving_Girls = [arriving_Girls]
 
-    if not Player.primary_action:
-        call set_the_scene
+    $ Primary = None
 
-    if Girl == KittyX:
-        if Player.location == "bg_campus" or Player.location == "bg_pool":
-            "Suddenly, [Girl.name] rounds a corner."
+    $ temp_Girls = arriving_Girls[:]
+
+    while temp_Girls:
+        if Player.location == temp_Girls[0].home:
+            $ Primary = temp_Girls[0]
+
+            $ temp_Girls = []
+        elif temp_Girls[0] == JeanX:
+            $ Primary = JeanX
+
+        if temp_Girls:
+            $ temp_Girls.remove(temp_Girls[0])
+
+    if not Primary:
+        $ Primary = arriving_Girls[0]
+
+    if len(arriving_Girls) > 1:
+        $ Secondary = arriving_Girls[0] if Primary != arriving_Girls[0] else arriving_Girls[1]
+
+        if len(arriving_Girls) > 3:
+            $ line = Primary.name + " and a few others"
+        elif len(arriving_Girls) > 2:
+            $ line = Primary.name + " and a couple others"
         else:
-            "You look to the door just as [KittyX.name] phases into the room."
+            $ line = Primary.name + " and " + Secondary.name
+    else:
+        $ Secondary = None
 
-        call set_Character_taboos
+        $ line = Primary.name
 
-        $ Girl.change_outfit()
-
-        call add_Girl(Girl)
-
-        ch_k "Hi, [KittyX.player_petname]!"
-
-        return True
-
-    if not door_locked:
-        call add_Girl(Girl)
-
-        if entering:
-            if Player.location == "bg_campus" or Player.location == "bg_pool":
-                "Suddenly, [Girl.name] rounds a corner."
-            else:
-                "Suddenly, [Girl.name] enters the room, apparently without knocking."
-
-            if Girl == RogueX:
-                ch_r "Hey, got a minute, [Girl.player_petname]?"
-            elif Girl == EmmaX:
-                ch_e "[Girl.player_petname], I had something I wanted to discuss. . ."
-            elif Girl == LauraX:
-                ch_l "Hey, [Girl.player_petname]."
-            elif Girl == JeanX:
-                ch_j "Hey, [Girl.player_petname]."
-            elif Girl == StormX:
-                ch_s "May I come in, [Girl.player_petname]?"
-            elif Girl == JubesX:
-                ch_v "Hey, [Girl.player_petname]."
-
-        return True
-
-    if Girl.location == Girl.home:
-        "You hear a key in the lock, and [Girl.name] enters the room."
-    elif Girl == JeanX:
+    if Player.location == Primary.home:
+        if len(arriving_Girls) > 1:
+            "You hear a key in the lock, and [line] enter the room."
+        else:
+            "You hear a key in the lock, and [line] enters the room."
+    elif Primary == JeanX:
         "You hear a rattle at the door."
         "After a moment, and some clicking in the lock, the door pops open."
-        "[Girl.name] walks into the room."
 
-        call set_Character_taboos
+        if len(arriving_Girls) > 1:
+            "[line] walk into the room."
+        else:
+            "[line] walks into the room."
 
-        $ Girl.change_outfit()
-
-        call add_Girl(Girl)
+        call add_Girls(arriving_Girls)
 
         ch_j "Hey, [Girl.player_petname]!"
-
-        return True
     else:
         "The doorknob jiggles. A moment later, you hear a knock."
 
-        if Girl == RogueX:
-            ch_r "Could I come in, [Girl.player_petname]?"
-        elif Girl == EmmaX:
-            ch_e "[Girl.player_petname], I'm waiting."
-        elif Girl == LauraX:
-            ch_l "It's me."
-        elif Girl == StormX:
-            ch_s "[Girl.player_petname], may I come in?"
-        elif Girl == JubesX:
-            ch_v "Hey, it's [Girl.name]."
+        if len(arriving_Girls) > 1:
+            if Primary == RogueX:
+                ch_r "Could we come in, [Primary.player_petname]?"
+            elif Primary == EmmaX:
+                ch_e "[Primary.player_petname], we're waiting."
+            elif Primary == LauraX:
+                ch_l "It's me."
+
+                if len(arriving_Girls) > 2:
+                    ch_l ". . . and some friends."
+                else:
+                    ch_l ". . . and [Secondary.name]."
+            elif Primary == StormX:
+                ch_s "[Primary.player_petname], may we come in?"
+            elif Primary == JubesX:
+                if len(arriving_Girls) > 2:
+                    ch_v "Hey, it's [Primary.name]."
+                else:
+                    ch_l "Hey, it's [Primary.name] and [Secondary.name]."
+        else:
+            if Primary == RogueX:
+                ch_r "Could I come in, [Primary.player_petname]?"
+            elif Primary == EmmaX:
+                ch_e "[Primary.player_petname], I'm waiting."
+            elif Primary == LauraX:
+                ch_l "It's me."
+            elif Primary == StormX:
+                ch_s "[Primary.player_petname], may I come in?"
+            elif Primary == JubesX:
+                ch_v "Hey, it's [Primary.name]."
 
         menu:
             extend ""
-            "Open door":
-                ch_p "Hold on, [Girl.name]!"
+            "Open door.":
+                ch_p "Hold on, [Primary.name]!"
                 "You unlock the door and let her in."
 
-                $ Girl.location = Player.location
-                $ Girl.change_outfit()
-            "Open door [[but stop fucking first]" if Player.primary_action:
-                ch_p "Hold on, [Girl.name]!"
+                call add_Girls(arriving_Girls)
+            "Open door. [[Stop fucking first]" if Player.primary_action:
+                ch_p "Hold on, [Primary.name]!"
 
-                call Sex_Over (1, Primary)
+                call sex_over
+
                 "You unlock the door and let her in."
 
-                $ Girl.change_outfit()
+                call add_Girls(arriving_Girls)
 
-                call add_Girl(Girl)
-
-                if Girl == RogueX:
-                    ch_r "Hey, got a minute, [Girl.player_petname]?"
-                elif Girl == EmmaX:
-                    ch_e "[Girl.player_petname], I had something I wanted to discuss. . ."
-                elif Girl == LauraX:
-                    ch_l "Hey, [Girl.player_petname]."
-                elif Girl == StormX:
+                if Primary == RogueX:
+                    ch_r "Hey, got a minute, [Primary.player_petname]?"
+                elif Primary == EmmaX:
+                    ch_e "[Primary.player_petname], I had something I wanted to discuss. . ."
+                elif Primary == LauraX:
+                    ch_l "Hey, [Primary.player_petname]."
+                elif Primary == StormX:
                     ch_s "Hello, I wanted to talk with you. . ."
-                elif Girl == JubesX:
-                    ch_v "Hey, [Girl.player_petname]."
+                elif Primary == JubesX:
+                    ch_v "Hey, [Primary.player_petname]."
+            "Send her away." if not Secondary:
+                ch_p "Sorry, could you come back later?"
 
-                jump reset_location
-            "Send her away":
-                ch_p "Er, sorry, could you come back later?"
+                $ Primary.change_stat("love", 80, -2)
 
-                $ Girl.change_stat("love", 80, -2)
-
-                if Girl == RogueX:
-                    ch_r "C'mon, [Girl.player_petname], don't yank my chain like this!"
-
-                    if Girl.location == Player.location:
-                        call remove_Girl(Girl)
+                if Primary == RogueX:
+                    ch_r "C'mon, [Primary.player_petname], don't yank my chain like this!"
 
                     return False
-                elif Girl == EmmaX:
-                    $ Girl.change_stat("obedience", 80, -2)
+                elif Primary == EmmaX:
+                    $ Primary.change_stat("obedience", 80, -2)
 
                     ch_e "I have to say, [EmmaX.player_petname], I understand the appeal of having someone at your beck and call. . ."
-                    ch_e "but I don't appreciate being on the receiving end!"
-
-                    if Girl.location == Player.location:
-                        call remove_Girl(Girl)
+                    ch_e ". . . but I don't appreciate being on the receiving end!"
 
                     return False
-                elif Girl in [LauraX, JubesX]:
-                    "[Girl.name] goes quiet."
+                elif Primary in [LauraX, JubesX]:
+                    "[Primary.name] goes quiet."
 
-                    if approval_check(Girl, 500, "I") and not approval_check(Girl, 500, "O"):
-                        $ Girl.change_outfit()
-
-                        if Girl == LauraX:
+                    if approval_check(Primary, 500, "I") and not approval_check(Primary, 500, "O"):
+                        if Primary == LauraX:
                             $ LauraX.arm_pose = 2
                             $ LauraX.claws = 1
 
                             "snickt"
 
-                            call add_Girl(Girl)
+                            call add_Girls(arriving_Girls)
 
                             "The door swings open."
 
                             $ LauraX.claws = 0
 
-                            ch_l "Hey, so I don't like being jerked around, so don't do that, okay?"
-                        elif Girl == JubesX:
+                            ch_l "Hey, I don't like being jerked around, so don't do that, okay?"
+                        elif Primary == JubesX:
                             "A thin mist passes under the door, and forms into a human shape."
 
-                            call add_Girl(Girl)
+                            call add_Girls(arriving_Girls)
 
                             ch_v "Well, I wanted to talk."
 
-                        $ Girl.change_stat("obedience", 80, -4)
+                        $ Primary.change_stat("obedience", 80, -4)
                     else:
-                        $ Girl.change_stat("love", 80, -1)
-                        $ Girl.change_stat("obedience", 80, 3)
+                        $ Primary.change_stat("love", 80, -1)
+                        $ Primary.change_stat("obedience", 80, 3)
 
-                        Girl.voice "Ok."
+                        Primary.voice "Ok."
 
                         "You hear her shuffling off."
 
-                        if Girl.location == Player.location:
-                            call remove_Girl(Girl)
-
                         return False
-                elif Girl == StormX:
-                    if approval_check(Girl, 800,"LI") and not approval_check(Girl, 500,"O"):
-                        $ Girl.change_outfit()
-
-                        call add_Girl(Girl)
+                elif Primary == StormX:
+                    if approval_check(Primary, 800,"LI") and not approval_check(Primary, 500,"O"):
+                        $ Primary.change_outfit()
 
                         "You hear some clicking from the door."
                         "The door swings open."
 
-                        $ Girl.change_stat("obedience", 80, -4)
+                        call add_Girls(arriving_Girls)
+
+                        $ Primary.change_stat("obedience", 80, -4)
 
                         ch_s "That was not a quality lock."
                     else:
-                        $ Girl.change_stat("love", 80, -1)
-                        $ Girl.change_stat("obedience", 80, 3)
+                        $ Primary.change_stat("love", 80, -1)
+                        $ Primary.change_stat("obedience", 80, 3)
 
                         ch_s ". . ."
                         ch_s "Very well, I can respect that."
 
-                        if Girl.location == Player.location:
-                            call remove_Girl(Girl)
+                        return False
+            "Send them away." if Secondary:
+                ch_p "Sorry, could you come back later?"
+
+                $ Primary.change_stat("love", 80, -2)
+
+                if Primary == RogueX:
+                    ch_r "C'mon, [Primary.player_petname], don't yank our chains like this!"
+
+                    return False
+                elif Primary == EmmaX:
+                    $ Primary.change_stat("obedience", 80, -2)
+
+                    ch_e "I have to say, [EmmaX.player_petname], I understand the appeal of having someone at your beck and call. . ."
+                    ch_e ". . . but I don't appreciate being on the receiving end!"
+
+                    return False
+                elif Primary in [LauraX, JubesX]:
+                    "[Primary.name] goes quiet."
+
+                    if approval_check(Primary, 500, "I") and not approval_check(Primary, 500, "O"):
+                        if Primary == LauraX:
+                            $ LauraX.arm_pose = 2
+                            $ LauraX.claws = 1
+
+                            "snickt"
+
+                            call add_Girls(arriving_Girls)
+
+                            "The door swings open."
+
+                            $ LauraX.claws = 0
+
+                            ch_l "Hey, I don't like being jerked around, so don't do that, okay?"
+                        elif Primary == JubesX:
+                            "A thin mist passes under the door, and forms into a human shape."
+
+                            call add_Girls(arriving_Girls)
+
+                            ch_v "Well, we wanted to talk."
+
+                        $ Primary.change_stat("obedience", 80, -4)
+                    else:
+                        $ Primary.change_stat("love", 80, -1)
+                        $ Primary.change_stat("obedience", 80, 3)
+
+                        Primary.voice "Ok."
+
+                        "You hear footsteps wandering off."
+
+                        return False
+                elif Primary == StormX:
+                    if approval_check(Primary, 800,"LI") and not approval_check(Primary, 500,"O"):
+                        $ Primary.change_outfit()
+
+                        "You hear some clicking from the door."
+                        "The door swings open."
+
+                        call add_Girls(arriving_Girls)
+
+                        $ Primary.change_stat("obedience", 80, -4)
+
+                        ch_s "That was not a quality lock."
+                    else:
+                        $ Primary.change_stat("love", 80, -1)
+                        $ Primary.change_stat("obedience", 80, 3)
+
+                        ch_s ". . ."
+                        ch_s "Very well, we can respect that."
 
                         return False
 
-    if current_Girl:
-        if current_Girl == EmmaX and ("threesome" not in EmmaX.history or "classcaught" not in EmmaX.history):
-
-            $ Girl.add_word(1, 0, 0,"saw with " + current_Girl.tag)
-
-            if Player.location == EmmaX.home:
-                ch_e "I. . . This isn't what it looks like. . ."
-                "She shoves the two of you out of her room and slams the door."
-
-                $ Girl.location = "bg_player"
-
-                call remove_Girl(EmmaX)
-            else:
-                ch_e "I. . . This isn't what it looks like. . ."
-
-                call remove_Girl(EmmaX)
-
-                "She seems uncomfortable with the situation and leaves the room."
-                "Perhaps you should ask her about it later."
-
-            jump reset_location
-
-        if "poly " + current_Girl.tag in Girl.traits or (current_Girl in Player.Harem and Girl in Player.Harem):
-            pass
-        else:
-            if approval_check(current_Girl, 1500, taboo_modifier=2, Bonus = (Girl.likes[current_Girl.tag] - 500)):
-                $ current_Girl.change_face("_sexy", 1)
-                $ current_Girl.change_stat("obedience", 90, 5)
-                $ current_Girl.change_stat("inhibition", 90, 5)
-                $ current_Girl.change_stat("lust", 90, 3)
-            else:
-
-                $ current_Girl.change_face("_angry", 1)
-
-                if current_Girl == RogueX:
-                    ch_r "Hey, [Girl.tag], we're a little busy here?"
-                elif current_Girl == KittyX:
-                    ch_k "Um, [Girl.tag]? Read the room?"
-                elif current_Girl == EmmaX:
-                    ch_e "[Girl.tag], could you please leave?"
-                elif current_Girl == LauraX:
-                    ch_l "Scram, [Girl.tag]."
-                elif current_Girl == JeanX:
-                    ch_j "Leave, [Girl.tag]."
-                elif current_Girl == StormX:
-                    ch_s "Would you mind give us some space?"
-                elif current_Girl == JubesX:
-                    ch_v "Yeah, we were. . . busy."
-
-                $ Girl.add_word(1, 0, 0,"saw with " + current_Girl.tag)
-
-                if Girl == RogueX:
-                    $ Girl.change_face("_perplexed", 2)
-
-                    ch_r "Oh, sorry about that! I'll head out."
-                elif Girl == KittyX:
-                    $ Girl.change_face("_perplexed", 2)
-
-                    ch_k "Oh! Sorrysorrysorry!"
-                elif Girl == EmmaX:
-                    $ Girl.change_face("_bemused", 2)
-
-                    ch_e "I wouldn't want to spoil the mood. . ."
-                elif Girl == LauraX:
-                    ch_l "Oh, sure. Whatever."
-                elif Girl == JeanX:
-                    $ Girl.change_face("_bemused", 1)
-
-                    ch_j "Fine."
-                elif Girl == StormX:
-                    $ Girl.change_face("_bemused", 1)
-
-                    ch_s "Yes. . ."
-                elif Girl == JubesX:
-                    $ Girl.change_face("_perplexed", 2)
-
-                    ch_v "Oh, yes! Sorry!"
-
-                $ Girl.change_face("_sad", 1)
-                $ current_Girl.change_face("_sexy", 1)
-
-                if Girl.location == Player.location:
-                    call remove_Girl(Girl)
-
-                return False
-
-        if current_Girl == RogueX:
-            ch_r "Oh, [Girl.tag], did you want to join in?"
-        elif current_Girl == KittyX:
-            ch_k "Um, [Girl.tag]? Did you want something?"
-        elif current_Girl == EmmaX:
-            ch_e "Oh, [Girl.tag]. . . care to join us?"
-        elif current_Girl == LauraX:
-            ch_l "Oh, hey, [Girl.tag]."
-        elif current_Girl == JeanX:
-            ch_j "Hey."
-        elif current_Girl == StormX:
-            ch_s "Oh, hello [Girl.tag], did you want to join in?"
-        elif current_Girl == JubesX:
-            ch_v "Hey, [Girl.tag], did you need something?"
-
-    $ Girl.location = Player.location
-
-    call set_Character_taboos
-
-    $ Girl.change_outfit(check_if_yoinked = True)
-    $ Player.drain_word("locked", 0, 0, 1)
-
-    call set_the_scene (1, 0, 0, 0)
-
-    $ Partner = Girl
+    $ door_locked = False
 
     return True
 
 
 
 label shift_focus(Girl, Second = None):
-    if Girl.location == Player.location:
-        python:
-            for G in active_Girls:
-                if G != Girl and G.location == Player.location:
-                    G.sprite_location = stage_right
-                    G.sprite_layer = 3
-
-        $ Girl.sprite_location = stage_center
-        $ Girl.sprite_layer = 4
-
     if focused_Girl == Girl:
         pass
     elif Second and Second != Girl:
@@ -3262,10 +3530,11 @@ label Jumped(Act=0):
 
     if Girls[0].location != Player.location and "locked" in Player.traits:
 
-        call locked_door (Girls[0])
-        if not Girls or Girls[0].location != Player.location:
+        call Girls_arrive(Girls[0])
 
+        if not _return:
             $ Player.recent_history.append("nope")
+
             return
 
     python:
@@ -3287,9 +3556,6 @@ label Jumped(Act=0):
         elif Girls[0].home != Player.location and not (Partner and Partner.home == Player.location):
 
             $ Act = "leave"
-
-    if Room_Full():
-        $ Act = "leave"
 
     call shift_focus (Girls[0])
     call set_the_scene
@@ -4627,13 +4893,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
     $ Girl.change_face("_sly", 1)
     return React
 
-label Girls_taboo(Girl=0, counter=1, Choice=0, D20=0):
-
-
-
-
-    if Girl not in all_Girls:
-        $ Girl = focused_Girl
+label Girls_taboo(Girl, Choice=0):
     $ Player.add_word(1, 0,Girl.tag)
     $ Player.add_word(1, 0,"scent")
 
@@ -4681,22 +4941,21 @@ label Girls_taboo(Girl=0, counter=1, Choice=0, D20=0):
 
             pass
         elif D20 == 1 and AloneCheck(Girl) and time_index < 3:
+            python:
+                shuffled_Girls = active_Girls[:]
+                renpy.random.shuffle(shuffled_Girls)
 
-            $ Choice = active_Girls[:]
-            $ Choice.remove(Girl)
-            $ renpy.random.shuffle(Choice)
-            while Choice:
-                if Choice[0].location != Player.location and "lockedout" not in Girl.traits:
-                    $ second_girl_secondary_action = Choice[0]
-                    $ Choice = [1]
-                $ Choice.remove(Choice[0])
-            if second_girl_secondary_action:
-                call locked_door (second_girl_secondary_action, 1, Girl)
+                interrupting_Girl = None
 
-            $ Choice = 0
-            $ second_girl_secondary_action = None
+                for G in shuffled_Girls:
+                    if G != Girl:
+                        if G.location != Player.location and "lockedout" not in Girl.traits:
+                            interrupting_Girl = G
 
+                            break
 
+            if interrupting_Girl:
+                call Girls_arrive(interrupting_Girl)
 
         call Girls_Noticed (Girl)
 
@@ -5025,7 +5284,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0):
 
             $ B -= 200
 
-    call add_Girl(Other, x_position = stage_far_right)
+    call add_Girls(Other, x_position = stage_far_right)
 
     if Partner == Other:
 
@@ -5141,39 +5400,35 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0):
         $ line = 0
     return
 
-label Sex_Over(Clothes = True, Girls = None):
+label sex_over(put_clothes_on = True):
     call stop_all_actions
 
-    if Girls in all_Girls:
-        $ temp_Girls = [Girls]
-    else:
-        $ temp_Girls = all_Girls[:]
-        $ renpy.random.shuffle(temp_Girls)
+    $ temp_Girls = Present[:]
+    $ renpy.random.shuffle(temp_Girls)
 
     while temp_Girls:
-        if temp_Girls[0].location == Player.location:
-            $ temp_Girls[0].session_orgasms = 0
+        $ temp_Girls[0].session_orgasms = 0
 
-            call Girl_Cleanup(temp_Girls[0], "after")
+        call Girl_Cleanup(temp_Girls[0], "after")
 
-            if Player.spunk:
-                if temp_Girls[0] == RogueX:
-                    ch_r "Let me take care of that for you. . ."
-                elif temp_Girls[0] == KittyX:
-                    ch_k "You've got a little something. . ."
-                    ch_k "just let me get that."
-                elif temp_Girls[0] == EmmaX:
-                    ch_e "[EmmaX.player_petname], let's get you presentable. . ."
-                elif temp_Girls[0] == LauraX:
-                    ch_l "[LauraX.player_petname], you've got a little something. . ."
-                elif temp_Girls[0] == JeanX:
-                    ch_j "[JeanX.player_petname], you might want to clean up. . ."
-                elif temp_Girls[0] == StormX:
-                    ch_s "Allow me to take care of that, [StormX.player_petname]. . ."
-                elif temp_Girls[0] == JubesX:
-                    ch_v "Oh, I can clean that up for you, [JubesX.player_petname]. . ."
+        if Player.spunk:
+            if temp_Girls[0] == RogueX:
+                ch_r "Let me take care of that for you. . ."
+            elif temp_Girls[0] == KittyX:
+                ch_k "You've got a little something. . ."
+                ch_k "just let me get that."
+            elif temp_Girls[0] == EmmaX:
+                ch_e "[EmmaX.player_petname], let's get you presentable. . ."
+            elif temp_Girls[0] == LauraX:
+                ch_l "[LauraX.player_petname], you've got a little something. . ."
+            elif temp_Girls[0] == JeanX:
+                ch_j "[JeanX.player_petname], you might want to clean up. . ."
+            elif temp_Girls[0] == StormX:
+                ch_s "Allow me to take care of that, [StormX.player_petname]. . ."
+            elif temp_Girls[0] == JubesX:
+                ch_v "Oh, I can clean that up for you, [JubesX.player_petname]. . ."
 
-                call Girl_Cleanup(temp_Girls[0])
+            call Girl_Cleanup(temp_Girls[0])
 
         if "nowhammy" not in JeanX.traits and "saw with Jean" in temp_Girls[0].traits:
             $ temp_Girls[0].traits.remove("saw with Jean")
@@ -5181,39 +5436,36 @@ label Sex_Over(Clothes = True, Girls = None):
 
         $ temp_Girls.remove(temp_Girls[0])
 
-    if Girls == Partner and Girls in all_Girls:
-        call shift_focus (Girls)
-
-    $ Girls = 0
-
-    $ temp_Girls = all_Girls[:]
+    $ temp_Girls = Present[:]
+    $ renpy.random.shuffle(temp_Girls)
 
     while temp_Girls:
-        if temp_Girls[0].location == Player.location:
-            call show_full_body(temp_Girls[0])
+        call show_full_body(temp_Girls[0])
 
         $ temp_Girls.remove(temp_Girls[0])
 
-    if Clothes:
-        $ line = None
-
+    if put_clothes_on:
         python:
-            for G in all_Girls:
-                if G.location == Player.location:
-                    if G.change_outfit() == 2:
-                        if line:
-                            line = line + " and " + G.name
-                        else:
-                            line = G.name
+            line = None
 
-                        Girls += 1
+            Girls = 0
+
+            for G in Present:
+                if G.change_outfit() == 2:
+                    if line:
+                        line = line + " and " + G.name
+                    else:
+                        line = G.name
+
+                    Girls += 1
 
         if Girls > 1:
             "[line] throw their clothes back on."
         elif Girls:
             "[line] throws her clothes back on."
 
-    call get_dressed
+        call get_dressed
+
     call checkout
     call reset_player
 

@@ -1783,7 +1783,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
     $ RogueX.recent_history.append("summoned")
     $ line = 0
     if "locked" in Player.traits:
-        call locked_door (RogueX)
+        call Girls_arrive (RogueX)
         return
     call set_Character_taboos(taboo_location = False)
     $ RogueX.change_outfit()

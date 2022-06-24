@@ -1958,7 +1958,7 @@ label Storm_Summon(approval_bonus=approval_bonus):
     $ StormX.recent_history.append("summoned")
     $ line = 0
     if "locked" in Player.traits:
-        call locked_door (StormX)
+        call Girls_arrive (StormX)
         return
     $ StormX.location = Player.location
     call set_Character_taboos(taboo_location = False)

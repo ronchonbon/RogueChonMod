@@ -1,12 +1,6 @@
 label meet_Laura:
     $ Player.location = "bg_dangerroom"
 
-    show black_screen onlayer black
-
-    call remove_all
-
-    hide black_screen onlayer black
-
     "As you approach the Danger Room, you hear a ferocious clanging of metal."
     "Just as you pass through the door, a robotic arm smashes into your face."
 
@@ -16,9 +10,12 @@ label meet_Laura:
 
     $ LauraX.name = "???"
     $ LauraX.names = []
+    $ LauraX.location = Player.location
     $ LauraX.change_face("_normal")
 
-    call add_Girl(LauraX, x_position = stage_center, animation_transform = close_launch_animation, transition = False)
+    call move_Girl(LauraX, x_position = stage_center, animation_transform = close_launch_animation(1.3), transition = False)
+
+    pause 1.0
 
     hide black_screen onlayer black with dissolve
 

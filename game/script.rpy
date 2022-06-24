@@ -75,13 +75,13 @@ init -1:
 
     default always_return_to_room = 1
 
-    default stage_far_far_left = 0.1
-    default stage_far_left = 0.23
+    default stage_far_far_left = 0.15
+    default stage_far_left = 0.25
     default stage_left = 0.35
     default stage_center = 0.5
-    default stage_right = 0.62
+    default stage_right = 0.65
     default stage_far_right = 0.75
-    default stage_far_far_right = 0.875
+    default stage_far_far_right = 0.85
 
     default number_of_holders = 1
 
@@ -192,9 +192,10 @@ label start:
 
     $ Player.cash = 100000
 
+    $ time_index = 2
+    $ current_time = time_options[time_index]
+
     $ Player.location = "bg_campus"
-    $ time_index = 1
-    $ current_time = "midday"
 
     scene background onlayer background
     scene
@@ -226,18 +227,41 @@ label start:
     #
     # $ girl_secondary_action = "finger_pussy"
 
-    $ offset = 0.15
+    $ exit = False
 
-    $ temp_Girls = all_Girls[:]
+    while not exit:
+        menu:
+            "Campus":
+                $ Player.location = "bg_campus"
+            "Pool":
+                $ Player.location = "bg_pool"
+            "My room":
+                $ Player.location = "bg_player"
+            "Exit":
+                $ exit = True
 
-    while temp_Girls:
-        call show_Girl(temp_Girls[0], offset)
+        menu:
+            "Morning":
+                $ time_index = 0
+            "Midday":
+                $ time_index = 1
+            "Evening":
+                $ time_index = 2
+            "Night":
+                $ time_index = 3
+            "Exit":
+                $ exit = True
 
-        $ offset += 0.1
+        $ current_time = time_options[time_index]
 
-        $ temp_Girls.remove(temp_Girls[0])
+        call hide_all
+        call add_Girls(all_Girls, fade = True)
 
-        ""
+    ""
+
+    python:
+        for G in all_Girls:
+            G.location = "hold"
 
     $ all_Girls.remove(MystiqueX)
     $ active_Girls = []

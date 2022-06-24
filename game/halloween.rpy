@@ -25,8 +25,8 @@ label Halloween_chat(Girl=0):
 
         $ Nearby.remove(Girl)
         $ Present.append(Girl)
-        
-        call add_Girl(Girl)
+
+        call add_Girls(Girl)
     hide black_screen onlayer black
 
     if Girl == EmmaX and "classcaught" not in EmmaX.history:
@@ -255,7 +255,7 @@ label HWchange_stat(Girl=0, HWType=0, HWCheck=0, HWvalue=0, HWStore=0):
     return
 
 
-label Halloween_Party_entry(HWEvents=[], HWPlayer.Party=[], halloween_costume=0, HWline=[]):
+label Halloween_Party_entry(HWEvents=[], halloween_costume=0, HWline=[]):
 
 
 

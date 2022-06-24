@@ -4,6 +4,9 @@ transform sprite_location(x_position = stage_right, y_position = 0):
 transform silhouette:
     matrixcolor TintMatrix(Color(rgb = (0.44, 0.54, 0.75)))*BrightnessMatrix(-0.2)
 
+transform morning:
+    matrixcolor TintMatrix(Color(rgb = (1.0, 0.95, 0.8)))*BrightnessMatrix(-0.05)
+
 transform sunset:
     matrixcolor TintMatrix(Color(rgb = (1.0, 0.8, 0.65)))*BrightnessMatrix(0.05)
 
@@ -376,19 +379,18 @@ label get_transition:
 
     return entrance_transition, exit_transition
 
-label add_Girl(Girl, x_position = None, y_position = None, sprite_layer = None, animation_transform = None, transition = None):
-    call get_color_transform
-    $ color_transform = _return
+label add_Girls(Girls, fade = False):
+    if Girls in all_Girls:
+        $ Girls = [Girls]
 
-    if transition is None:
-        call get_transition
-        $ transition = _return[0]
-    elif not transition:
-        $ transition = None
+    python:
+        for G in Girls:
+            if G.location != "bg_teacher":
+                G.location = Player.location
 
-    call show_Girl(Girl, x_position = x_position, y_position = y_position, sprite_layer = sprite_layer, color_transform = color_transform, animation_transform = animation_transform, transition = transition)
-
-    $ Girl.location = Player.location
+    call shift_focus(Girls[0])
+    call check_who_is_present
+    call set_the_scene(fade = fade)
 
     return
 
@@ -412,9 +414,6 @@ label remove_Girl(Girl, transition = None):
 
     if Partner == Girl:
         $ Partner = None
-
-    $ Girl.drain_word("leaving", 1, 0, 0)
-    $ Girl.drain_word("arriving", 1, 0, 0)
 
     if Player.location in ["bg_campus", "bg_classroom", "bg_dangerroom", "bg_pool"]:
         $ Nearby.append(Girl)

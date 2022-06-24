@@ -8,6 +8,7 @@ init python:
             self.color = "Green"
 
             self.location = "bg_study"
+            self.traveling = False
 
             self.semen = 2
             self.max_semen = 3

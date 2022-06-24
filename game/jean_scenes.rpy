@@ -12,7 +12,7 @@ label meet_Jean:
 
     $ Player.location = "bg_showerroom"
 
-    call add_Girl(JeanX, x_position = stage_center, transition = False)
+    call add_Girls(JeanX)
 
     "As you approach the showers, you notice someone getting dressed."
 

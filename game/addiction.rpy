@@ -11,7 +11,7 @@ label addiction_event(Girl):
 
             $ Player.location = "bg_player"
         else:
-            call locked_door(Girl, entering = True)
+            call Girls_arrive(Girl)
 
             if not _return:
                 return
@@ -23,7 +23,7 @@ label addiction_event(Girl):
         if Girl.location == Player.location or Girl in Player.Party:
             "[Girl.name] turns to you with a bit of a dazed look."
         else:
-            call locked_door(Girl, entering = True)
+            call Girls_arrive(Girl)
 
             if not _return:
                 return
@@ -1523,7 +1523,7 @@ label addiction_good_end:
     $ Girl.change_face("_normal", 0)
     $ Girl.mouth = "_sad"
 
-    call Sex_Over
+    call sex_over
 
     if Girl not in Player.Phonebook:
         if Girl == RogueX:
@@ -1574,7 +1574,7 @@ label addiction_bad_end:
 
     $ Girl.addiction_rate += 2
 
-    call Sex_Over
+    call sex_over
     call checkout
 
     $ Girl.arm_pose = 1
@@ -1740,7 +1740,7 @@ label addiction_fix(Girl):
     $ Girl.location = Player.location
     $ Girl.change_outfit()
 
-    call locked_door(Girl)
+    call Girls_arrive(Girl)
 
     if not _return:
         return
