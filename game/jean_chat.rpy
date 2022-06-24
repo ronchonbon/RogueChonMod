@@ -998,22 +998,22 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
         $ Options = [O]
     else:
 
-        if JeanX not in Phonebook:
+        if JeanX not in Player.Phonebook:
             if approval_check(JeanX, 500, "L") or approval_check(JeanX, 250, "I"):
                 ch_j "Oh, here's my number, gimme a call some time."
-                $ Phonebook.append(JeanX)
+                $ Player.Phonebook.append(JeanX)
                 return
             elif approval_check(JeanX, 250, "O"):
                 ch_j "I guess you should have my number. . ."
-                $ Phonebook.append(JeanX)
+                $ Player.Phonebook.append(JeanX)
                 return
 
-        if "hungry" not in JeanX.traits and (JeanX.event_counter["swallowed"] + JeanX.had_chat[2]) >= 10 and JeanX.location == bg_current:
+        if "hungry" not in JeanX.traits and (JeanX.event_counter["swallowed"] + JeanX.had_chat[2]) >= 10 and JeanX.location == Player.location:
             call Jean_Hungry
             return
 
-        if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(JeanX, 800, "I")):
-            if JeanX.location == bg_current and JeanX.thirst >= 30 and "refused" not in JeanX.daily_history and "quicksex" not in JeanX.daily_history:
+        if Player.location != "bg_restaurant" and Player.location != "bg_halloween" and (not taboo or approval_check(JeanX, 800, "I")):
+            if JeanX.location == Player.location and JeanX.thirst >= 30 and "refused" not in JeanX.daily_history and "quicksex" not in JeanX.daily_history:
                 $ JeanX.change_face("_sly", 1)
                 ch_j "I could use some stress relief, you busy?"
                 call Quick_Sex (JeanX)
@@ -1032,7 +1032,7 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
         if "corruption" in Player.traits and "cologne chat" not in JeanX.daily_history:
             $ Options.append("corruption")
 
-        if JeanX.went_on_date >= 1 and bg_current != "bg_restaurant":
+        if JeanX.went_on_date >= 1 and Player.location != "bg_restaurant":
 
             $ Options.append("dated")
 
@@ -1785,11 +1785,11 @@ label Jean_Summon(approval_bonus=approval_bonus):
     if D20 <= 3:
 
         $ line = "no"
-    if time_index >= 3:
+    if time_index > 2:
         if approval_check(JeanX, 500, "L") or approval_check(JeanX, 400, "O"):
 
             ch_j "You're up too? Yeah, that's fine."
-            $ JeanX.location = bg_current
+            $ JeanX.location = Player.location
             call set_the_scene
         else:
 
@@ -1993,9 +1993,9 @@ label Jean_Summon(approval_bonus=approval_bonus):
         elif JeanX.location == "bg_campus":
             ch_j "Ok."
             jump campus
-        elif JeanX.location in personal_rooms:
+        elif JeanX.location in bedrooms:
             ch_j "Yeah, see you."
-            $ bg_current = JeanX.location
+            $ Player.location = JeanX.location
             jump reset_location
         else:
             ch_j "Um, I'll just meet you in my room."
@@ -2014,8 +2014,8 @@ label Jean_Summon(approval_bonus=approval_bonus):
     if "locked" in Player.traits:
         call locked_door (JeanX)
         return
-    $ JeanX.location = bg_current
-    call taboo_level(taboo_location = False)
+    $ JeanX.location = Player.location
+    call set_Character_taboos(taboo_location = False)
     $ JeanX.change_outfit()
     call set_the_scene
     return
@@ -2023,29 +2023,10 @@ label Jean_Summon(approval_bonus=approval_bonus):
 
 
 
-label Jean_Leave(approval_bonus=approval_bonus, GirlsNum=0):
-    if "leaving" in JeanX.recent_history:
-        $ JeanX.drain_word("leaving")
-    else:
-        return
+label Jean_Leave:
+    $ JeanX.change_outfit()
 
-    if JeanX.location == "hold":
-
-        ch_j "Ok, I've got work to do, apparently."
-        return
-
-    if JeanX in Party or "lockedtravels" in JeanX.traits:
-
-
-        $ JeanX.location = bg_current
-        return
-
-    elif "freetravels" in JeanX.traits or not approval_check(JeanX, 700):
-
-        $ JeanX.change_outfit()
-        if GirlsNum:
-            ch_j "I'm leaving too."
-
+    if "freetravels" in JeanX.traits or not approval_check(JeanX, 700):
         if JeanX.location == "bg_classroom":
             ch_j "I've got class."
         elif JeanX.location == "bg_dangerroom":
@@ -2065,30 +2046,21 @@ label Jean_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                 ch_j "I'm headed out."
         else:
             ch_j "I'm headed out."
+
         call hide_Girl(JeanX)
+
         return
-
-
-    if bg_current == "bg_dangerroom":
-        call exit_gym ([JeanX])
-
-    $ JeanX.change_outfit()
 
     if "follow" not in JeanX.traits:
 
         $ JeanX.traits.append("follow")
 
-    $ D20 = renpy.random.randint(1, 20)
-    $ line = 0
-
     if JeanX.location == "bg_classroom":
         $ approval_bonus = 10
     elif JeanX.location == "bg_showerroom":
         $ approval_bonus = 40
-
-
-    if GirlsNum:
-        ch_j "Yeah, I'm headed out too."
+    else:
+        $ approval_bonus = 0
 
     if JeanX.location == "bg_classroom":
         ch_j "I've got class."
@@ -2105,12 +2077,14 @@ label Jean_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_j "I'm hitting the showers."
         else:
             ch_j "I'm hitting the showers, maybe hang back for a bit."
+
             return
     elif JeanX.location == "bg_pool":
         ch_j "I was hitting the pool."
     else:
         ch_j "Are you coming with?"
 
+    $ D20 = renpy.random.randint(1, 20)
 
     menu:
         extend ""
@@ -2186,70 +2160,70 @@ label Jean_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                     $ JeanX.change_stat("obedience", 70, -1)
                 $ line = "no"
 
-
-    call taboo_level(taboo_location = False)
-    $ JeanX.recent_history.append("followed")
     if not line:
-
         call hide_Girl(JeanX)
-        call change_out_of_gym_clothes ([JeanX])
+
         return
 
     if line == "no":
-
         ch_j "I'd rather not."
+
         call hide_Girl(JeanX)
-        call change_out_of_gym_clothes ([JeanX])
+
         return
 
     elif line == "go to":
-
-
-        $ approval_bonus = 0
-        $ line = 0
-        call drain_all_words ("leaving")
-        call drain_all_words ("arriving")
-        $ JeanX.recent_history.append("goto")
-        $ Player.recent_history.append("goto")
         call hide_Girl(JeanX)
-        call change_out_of_gym_clothes ([JeanX])
+
         if JeanX.location == "bg_classroom":
             ch_j "Ok."
-            jump classroom_entry
         elif JeanX.location == "bg_dangerroom":
             ch_j "I'll get warmed up."
-            jump danger_room_entry
         elif JeanX.location == "bg_jean":
             ch_j "Ok."
-            $ Girl = JeanX
-            jump girls_room
         elif JeanX.location == "bg_player":
             ch_j "Good."
-            jump player_room
         elif JeanX.location == "bg_showerroom":
             ch_j "Ok, nice."
-            jump shower_entry
         elif JeanX.location == "bg_campus":
             ch_j "Ok."
-            jump campus_entry
         elif JeanX.location == "bg_pool":
             ch_j "Cool."
-            jump pool_entry
-        else:
-            ch_j "I'll just meet you in your room."
-            $ JeanX.location = "bg_player"
+
+        call hide_all
+
+        $ Player.traveling = True
+
+        $ destination = JeanX.location
+
+        if destination == "bg_player":
             jump player_room
+        elif destination == "bg_jean":
+            $ Girl = JeanX
 
-
+            jump girls_room
+        elif destination == "bg_classroom":
+            jump classroom
+        elif destination == "bg_dangerroom":
+            jump danger_room
+        elif destination == "bg_showerroom":
+            jump shower
+        elif destination == "bg_pool":
+            jump pool
+        elif destination == "bg_study":
+            jump study
+        elif destination == "bg_mall":
+            jump mall
 
     elif line == "lonely":
         ch_j "Well, I guess. . ."
     elif line == "command":
         ch_j "Fine, [JeanX.player_petname]. . ."
 
-    $ line = 0
     ch_j "I'll stick around."
-    $ JeanX.location = bg_current
+
+    $ JeanX.location = Player.location
+
     return
 
 
@@ -2397,7 +2371,7 @@ label Jean_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                             $ JeanX.outfit["bra"] = "_lace_corset"
 
                 "I like that bikini top." if JeanX.outfit["bra"] != "_bikini_top" and "_bikini_top" in JeanX.inventory:
-                    if bg_current == "bg_pool":
+                    if Player.location == "bg_pool":
                         ch_j "Sure."
                         $ JeanX.outfit["bra"] = "_bikini_top"
                     else:
@@ -2510,7 +2484,7 @@ label Jean_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                             $ JeanX.outfit["underwear"] = "_lace_panties"
 
                 "I like those bikini bottoms." if "_bikini_bottoms" in JeanX.inventory and JeanX.outfit["underwear"] != "_bikini_bottoms":
-                    if bg_current == "bg_pool":
+                    if Player.location == "bg_pool":
                         ch_j "Sure."
                         $ JeanX.outfit["underwear"] = "_bikini_bottoms"
                     else:

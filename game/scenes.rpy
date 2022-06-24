@@ -47,7 +47,7 @@ label training:
     $ temp_Girls = active_Girls[:]
 
     while temp_Girls:
-        if temp_Girls[0].location == bg_current:
+        if temp_Girls[0].location == Player.location:
             call Girl_TightsRipped(temp_Girls[0])
 
         $ temp_Girls.remove(temp_Girls[0])
@@ -767,9 +767,9 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
     call shift_focus (Girl)
 
     $ Girl.change_face("_angry")
-    if Girl.location != bg_current and Girl not in Party:
+    if Girl.location != Player.location and Girl not in Player.Party:
         "Suddenly, [Girl.name] shows up and says she needs to talk to you."
-    $ Girl.location = bg_current
+    $ Girl.location = Player.location
 
     $ Girl.drain_word("asked_to_meet", 0, 1)
     if "meet girl" in Player.daily_history:
@@ -1446,12 +1446,12 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
 
     $ round -= 10 if round > 10 else round
 
-    if bg_current == Girl.home:
+    if Player.location == Girl.home:
 
-        $ bg_current = "bg_player"
+        $ Player.location = "bg_player"
         jump reset_location
     else:
-        call remove_Girl (Girl)
+        call remove_Girl(Girl)
     return
 
 label NoFap(Girl=0, TabStore=taboo, counter=0):
@@ -1975,7 +1975,7 @@ label CalltoFap(Girl=0, Fap=0):
         $ Girl.add_word(1, 0,"will_masturbate", 0, 0)
         return
 
-    if Girl.location == bg_current:
+    if Girl.location == Player.location:
 
         return
 
@@ -2265,8 +2265,8 @@ label CalltoFap(Girl=0, Fap=0):
         $ del Options[:]
 
         $ Girl.location = Girl.home
-        $ bg_current = Girl.home
-        call taboo_level(1)
+        $ Player.location = Girl.home
+        call set_Character_taboos(1)
 
         jump reset_location
 
@@ -2277,7 +2277,7 @@ label CalltoFap(Girl=0, Fap=0):
             pass
         else:
             $ Girl.location = Girl.home
-        call taboo_level(taboo_location = False)
+        call set_Character_taboos(taboo_location = False)
         call PhoneSex (Girl)
         $ renpy.pop_call()
     elif Fap:
@@ -2290,10 +2290,10 @@ label CalltoFap(Girl=0, Fap=0):
 label PhoneSex(Girl=0):
 
 
-    if bg_current != "bg_player":
+    if Player.location != "bg_player":
         "You rush back to your room."
-        $ bg_current = "bg_player"
-        call taboo_level
+        $ Player.location = "bg_player"
+        call set_Character_taboos
         call set_the_scene
     if Girl in (EmmaX,JeanX):
 
@@ -2346,9 +2346,10 @@ label PhoneSex(Girl=0):
 
     hide PhoneSex
 
-    call Get_Dressed
+    call get_dressed
     $ Girl.change_outfit(check_if_yoinked = True)
-    call checkout(total = True)
+    call checkout
+    call reset_player
     $ Player.recent_history.remove("phonesex")
     return
 
@@ -2356,7 +2357,7 @@ label Rogue_First_Topless(Silent=0, Templine=0):
     if RogueX.outfit["bra"] or RogueX.outfit["top"]:
 
         return
-    if RogueX.location != bg_current and "phonesex" not in Player.recent_history:
+    if RogueX.location != Player.location and "phonesex" not in Player.recent_history:
         return
     $ RogueX.recent_history.append("topless")
     $ RogueX.daily_history.append("topless")
@@ -2462,7 +2463,7 @@ label Rogue_First_Bottomless(Silent=0):
     if RogueX.outfit["underwear"] or RogueX.outfit["bottom"] or RogueX.hose_number() > 9:
 
         return
-    if RogueX.location != bg_current and "phonesex" not in Player.recent_history:
+    if RogueX.location != Player.location and "phonesex" not in Player.recent_history:
         return
     $ RogueX.recent_history.append("bottomless")
     $ RogueX.daily_history.append("bottomless")
@@ -2506,7 +2507,7 @@ label Kitty_First_Topless(Silent=0, Templine=0):
     if KittyX.outfit["bra"] or KittyX.outfit["top"]:
 
         return
-    if KittyX.location != bg_current and "phonesex" not in Player.recent_history:
+    if KittyX.location != Player.location and "phonesex" not in Player.recent_history:
         return
     $ KittyX.recent_history.append("topless")
     $ KittyX.daily_history.append("topless")
@@ -2615,7 +2616,7 @@ label Kitty_First_Bottomless(Silent=0):
     if KittyX.outfit["underwear"] or KittyX.outfit["bottom"] or KittyX.hose_number() > 9:
 
         return
-    if KittyX.location != bg_current and "phonesex" not in Player.recent_history:
+    if KittyX.location != Player.location and "phonesex" not in Player.recent_history:
         return
     $ KittyX.recent_history.append("bottomless")
     $ KittyX.daily_history.append("bottomless")
@@ -2682,7 +2683,7 @@ label Emma_First_Topless(Silent=0, Templine=0):
     if EmmaX.outfit["bra"] or EmmaX.outfit["top"]:
 
         return
-    if EmmaX.location != bg_current and "phonesex" not in Player.recent_history:
+    if EmmaX.location != Player.location and "phonesex" not in Player.recent_history:
         return
     $ EmmaX.recent_history.append("topless")
     $ EmmaX.daily_history.append("topless")
@@ -2816,7 +2817,7 @@ label Emma_First_Bottomless(Silent=0):
     if EmmaX.outfit["underwear"] or EmmaX.outfit["bottom"] or EmmaX.hose_number() > 9:
 
         return
-    if EmmaX.location != bg_current and "phonesex" not in Player.recent_history:
+    if EmmaX.location != Player.location and "phonesex" not in Player.recent_history:
         return
     $ EmmaX.recent_history.append("bottomless")
     $ EmmaX.daily_history.append("bottomless")
@@ -2900,7 +2901,7 @@ label Laura_First_Topless(Silent=0, Templine=0):
     if LauraX.outfit["bra"] or LauraX.outfit["top"]:
 
         return
-    if LauraX.location != bg_current and "phonesex" not in Player.recent_history:
+    if LauraX.location != Player.location and "phonesex" not in Player.recent_history:
         return
     $ LauraX.recent_history.append("topless")
     $ LauraX.daily_history.append("topless")
@@ -3016,7 +3017,7 @@ label Laura_First_Bottomless(Silent=0):
     if LauraX.outfit["underwear"] or LauraX.outfit["bottom"] or LauraX.hose_number() > 9:
 
         return
-    if LauraX.location != bg_current and "phonesex" not in Player.recent_history:
+    if LauraX.location != Player.location and "phonesex" not in Player.recent_history:
         return
     $ LauraX.recent_history.append("bottomless")
     $ LauraX.daily_history.append("bottomless")
@@ -3105,7 +3106,7 @@ label Jean_First_Topless(Silent=0, Templine=0):
 
 
         return
-    if JeanX.location != bg_current and "phonesex" not in Player.recent_history:
+    if JeanX.location != Player.location and "phonesex" not in Player.recent_history:
         return
     $ JeanX.recent_history.append("topless")
     $ JeanX.daily_history.append("topless")
@@ -3238,7 +3239,7 @@ label Jean_First_Bottomless(Silent=0):
     if JeanX.outfit["underwear"] or JeanX.outfit["bottom"] or JeanX.hose_number() > 9:
 
         return
-    if JeanX.location != bg_current and "phonesex" not in Player.recent_history:
+    if JeanX.location != Player.location and "phonesex" not in Player.recent_history:
         return
     $ JeanX.recent_history.append("bottomless")
     $ JeanX.daily_history.append("bottomless")
@@ -3334,7 +3335,7 @@ label Storm_First_Topless(Silent=0, Templine=0):
     if StormX.outfit["bra"] or StormX.outfit["top"]:
 
         return
-    if StormX.location != bg_current and "phonesex" not in Player.recent_history:
+    if StormX.location != Player.location and "phonesex" not in Player.recent_history:
         return
     $ StormX.recent_history.append("topless")
     $ StormX.daily_history.append("topless")
@@ -3346,7 +3347,7 @@ label Storm_First_Bottomless(Silent=0):
     if StormX.outfit["underwear"] or StormX.outfit["bottom"] or StormX.hose_number() > 9:
 
         return
-    if StormX.location != bg_current and "phonesex" not in Player.recent_history:
+    if StormX.location != Player.location and "phonesex" not in Player.recent_history:
         return
     $ StormX.recent_history.append("bottomless")
     $ StormX.daily_history.append("bottomless")
@@ -3358,7 +3359,7 @@ label Jubes_First_Topless(Silent=0, Templine=0):
     if JubesX.outfit["bra"] or JubesX.outfit["top"]:
 
         return
-    if JubesX.location != bg_current and "phonesex" not in Player.recent_history:
+    if JubesX.location != Player.location and "phonesex" not in Player.recent_history:
         return
     $ JubesX.recent_history.append("topless")
     $ JubesX.daily_history.append("topless")
@@ -3477,7 +3478,7 @@ label Jubes_First_Bottomless(Silent=0):
     if JubesX.outfit["underwear"] or JubesX.outfit["bottom"] or JubesX.hose_number() > 9:
 
         return
-    if JubesX.location != bg_current and "phonesex" not in Player.recent_history:
+    if JubesX.location != Player.location and "phonesex" not in Player.recent_history:
         return
     $ JubesX.recent_history.append("bottomless")
     $ JubesX.daily_history.append("bottomless")
@@ -3578,7 +3579,7 @@ label study_Explore:
                 "As you search the bookshelf, you accidentally knock one of the books off."
                 "It hammers against the floor, and a little light blinks on the desk."
         "Left Desk Drawer":
-            if KittyX.location != bg_current and StormX.location != bg_current:
+            if KittyX.location != Player.location and StormX.location != Player.location:
                 "You can't seem to get it open, it would be nice to have someone open the catch from the inside."
             elif D20 >= 10 + counter:
                 $ line = "left"
@@ -3586,7 +3587,7 @@ label study_Explore:
                 "As you open the drawer, it makes a loud a squeak."
                 "As you look around, you notice a little light starts blinking on the desk."
         "Middle Desk Drawer":
-            if KittyX.location != bg_current and StormX.location != bg_current:
+            if KittyX.location != Player.location and StormX.location != Player.location:
                 "You can't seem to get it open, it would be nice to have someone open the catch from the inside."
             elif D20 >= 15 + counter:
                 $ line = "middle"
@@ -3594,7 +3595,7 @@ label study_Explore:
                 "As you open the drawer, it makes a loud a squeak."
                 "As you look around, you notice a little light starts blinking on the desk."
         "Right Desk Drawer":
-            if KittyX.location != bg_current and StormX.location != bg_current:
+            if KittyX.location != Player.location and StormX.location != Player.location:
                 "You can't seem to get it open, it would be nice to have someone open the catch from the inside."
             elif D20 >= 5 + counter:
                 $ line = "right"
@@ -3608,11 +3609,14 @@ label study_Explore:
     if not line:
         "Probably best to get out of here."
         "You slip out and head back to your room."
-        jump player_room_entry
+
+        $ Player.location = "bg_room"
+
+        jump reset_location
     elif line == "book":
         if D20 >= 15 and "Well Studied" not in achievements:
             "As you check the books on the shelf, you notice that one of them is actually a disguised lockbox."
-            if KittyX.location == bg_current:
+            if KittyX.location == Player.location:
                 menu:
                     "Since [KittyX.name] is around, have her check inside?"
                     "Check in the box":
@@ -3635,7 +3639,7 @@ label study_Explore:
                             ch_k "I really don't think we should do that."
                     "Put it back.":
                         "You place the box back on the shelf."
-            elif StormX.location == bg_current:
+            elif StormX.location == Player.location:
                 menu:
                     "Since [StormX.name] is around, have her check inside?"
                     "Check in the box":
@@ -3672,7 +3676,7 @@ label study_Explore:
                 "Buried under a pile of documents, you find a printed out photo."
                 "It appears to be a selfie of Mystique making out with Xavier."
                 "She's reaching down to adjust his . . . oh, {i}that's{/i} interesting."
-                if StormX.location == bg_current:
+                if StormX.location == Player.location:
                     ch_s "You should probably put that back, it looks personal."
                 else:
                     "[[Xavier's photo acquired.]"
@@ -3685,27 +3689,27 @@ label study_Explore:
         else:
             "There doesn't seem to be anything more of interest in here."
     elif line == "middle":
-        if "all" not in Keys:
+        if "all" not in Player.Keys:
             "Under a few trinkets, you find a small keyring."
             "[[Keyring acquired.]"
-            if "Xavier" not in Keys:
-                $ Keys.append("Xavier")
-            if RogueX not in Keys:
-                $ Keys.append(RogueX)
-            if KittyX not in Keys:
-                $ Keys.append(KittyX)
-            if EmmaX not in Keys:
-                $ Keys.append(EmmaX)
-            if LauraX not in Keys:
-                $ Keys.append(LauraX)
-            if JeanX not in Keys:
-                $ Keys.append(JeanX)
-            if StormX not in Keys:
-                $ Keys.append(StormX)
-            if JubesX not in Keys:
-                $ Keys.append(JubesX)
-            if "all" not in Keys:
-                $ Keys.append("all")
+            if "Xavier" not in Player.Keys:
+                $ Player.Keys.append("Xavier")
+            if RogueX not in Player.Keys:
+                $ Player.Keys.append(RogueX)
+            if KittyX not in Player.Keys:
+                $ Player.Keys.append(KittyX)
+            if EmmaX not in Player.Keys:
+                $ Player.Keys.append(EmmaX)
+            if LauraX not in Player.Keys:
+                $ Player.Keys.append(LauraX)
+            if JeanX not in Player.Keys:
+                $ Player.Keys.append(JeanX)
+            if StormX not in Player.Keys:
+                $ Player.Keys.append(StormX)
+            if JubesX not in Player.Keys:
+                $ Player.Keys.append(JubesX)
+            if "all" not in Player.Keys:
+                $ Player.Keys.append("all")
         else:
             "There doesn't seem to be anything interesting in here."
     elif line == "right":
@@ -3713,7 +3717,7 @@ label study_Explore:
         if "Xavier's files" not in Player.inventory:
             if D20 >= 10:
                 "You search through some documents, but don't find anything."
-                if StormX.location == bg_current:
+                if StormX.location == Player.location:
                     ch_s "Hmm. . ."
                     "She reaches under some of the documents and finds a small notch."
                     "With a soft \"click\"a panel flips open in the drawer, revealing some file folders."

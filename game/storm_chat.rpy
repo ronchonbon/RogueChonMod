@@ -915,22 +915,22 @@ label Storm_Chitchat(O=0, Options=["default","default","default"]):
         $ Options = [O]
     else:
 
-        if StormX not in Phonebook:
+        if StormX not in Player.Phonebook:
             if approval_check(StormX, 500, "L") or approval_check(StormX, 250, "I"):
                 ch_s "Oh, here's my number, in case you need back-up."
-                $ Phonebook.append(StormX)
+                $ Player.Phonebook.append(StormX)
                 return
             elif approval_check(StormX, 250, "O"):
                 ch_s "If you need to contact me, here's my number."
-                $ Phonebook.append(StormX)
+                $ Player.Phonebook.append(StormX)
                 return
 
-        if "hungry" not in StormX.traits and (StormX.event_counter["swallowed"] + StormX.had_chat[2]) >= 10 and StormX.location == bg_current:
+        if "hungry" not in StormX.traits and (StormX.event_counter["swallowed"] + StormX.had_chat[2]) >= 10 and StormX.location == Player.location:
             call Storm_Hungry
             return
 
-        if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(StormX, 800, "I")):
-            if StormX.location == bg_current and StormX.thirst >= 30 and "refused" not in StormX.daily_history and "quicksex" not in StormX.daily_history:
+        if Player.location != "bg_restaurant" and Player.location != "bg_halloween" and (not taboo or approval_check(StormX, 800, "I")):
+            if StormX.location == Player.location and StormX.thirst >= 30 and "refused" not in StormX.daily_history and "quicksex" not in StormX.daily_history:
                 $ StormX.change_face("_sly", 1)
                 ch_s "I was wondering if you wanted to. . ."
                 ch_s "\"get intimate\" with me?"
@@ -950,7 +950,7 @@ label Storm_Chitchat(O=0, Options=["default","default","default"]):
         if "corruption" in Player.traits and "cologne chat" not in StormX.daily_history:
             $ Options.append("corruption")
 
-        if StormX.went_on_date >= 1 and bg_current != "bg_restaurant":
+        if StormX.went_on_date >= 1 and Player.location != "bg_restaurant":
 
             $ Options.append("dated")
 
@@ -1727,11 +1727,11 @@ label Storm_Summon(approval_bonus=approval_bonus):
     if D20 <= 3:
 
         $ line = "no"
-    if time_index >= 3:
+    if time_index > 2:
         if approval_check(StormX, 500, "L") or approval_check(StormX, 400, "O"):
 
             ch_s "You are awake? I can join you."
-            $ StormX.location = bg_current
+            $ StormX.location = Player.location
             call set_the_scene
         else:
 
@@ -1939,9 +1939,9 @@ label Storm_Summon(approval_bonus=approval_bonus):
         elif StormX.location == "bg_campus":
             ch_s "I will keep an eye out for you."
             jump campus
-        elif StormX.location in personal_rooms:
+        elif StormX.location in bedrooms:
             ch_s "I will see you then."
-            $ bg_current = StormX.location
+            $ Player.location = StormX.location
             jump reset_location
         else:
             ch_s "I will just meet you in my room."
@@ -1960,8 +1960,8 @@ label Storm_Summon(approval_bonus=approval_bonus):
     if "locked" in Player.traits:
         call locked_door (StormX)
         return
-    $ StormX.location = bg_current
-    call taboo_level(taboo_location = False)
+    $ StormX.location = Player.location
+    call set_Character_taboos(taboo_location = False)
     $ StormX.change_outfit()
     call set_the_scene
     return
@@ -1969,29 +1969,10 @@ label Storm_Summon(approval_bonus=approval_bonus):
 
 
 
-label Storm_Leave(approval_bonus=approval_bonus, GirlsNum=0):
-    if "leaving" in StormX.recent_history:
-        $ StormX.drain_word("leaving")
-    else:
-        return
+label Storm_Leave:
+    $ StormX.change_outfit()
 
-    if StormX.location == "hold":
-
-        ch_s "I've got some business to take care of."
-        return
-
-    if StormX in Party or "lockedtravels" in StormX.traits:
-
-
-        $ StormX.location = bg_current
-        return
-
-    elif "freetravels" in StormX.traits or not approval_check(StormX, 700):
-
-        $ StormX.change_outfit()
-        if GirlsNum:
-            ch_s "Yes, I'm leaving too."
-
+    if "freetravels" in StormX.traits or not approval_check(StormX, 700):
         if StormX.location == "bg_classroom" or StormX.location == "bg_teacher":
             ch_s "I've got class to teach."
         elif StormX.location == "bg_dangerroom":
@@ -2011,21 +1992,13 @@ label Storm_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                 ch_s "I will see you later."
         else:
             ch_s "I will see you later."
-        hide Storm_sprite
+
+        call hide_Girl(StormX)
+
         return
 
-
-    if bg_current == "bg_dangerroom":
-        call exit_gym ([StormX])
-
-    $ StormX.change_outfit()
-
     if "follow" not in StormX.traits:
-
         $ StormX.traits.append("follow")
-
-    $ D20 = renpy.random.randint(1, 20)
-    $ line = 0
 
     if StormX.location == "bg_classroom" or StormX.location == "bg_teacher":
         $ approval_bonus = 30
@@ -2033,11 +2006,8 @@ label Storm_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         $ approval_bonus = 20
     elif StormX.location == "bg_showerroom":
         $ approval_bonus = 40
-
-
-    if GirlsNum:
-        ch_s "Yeah, I'm headed out too."
-
+    else:
+        $ approval_bonus = 0
 
     if StormX.location == "bg_classroom" or StormX.location == "bg_teacher":
         ch_s "I've got class to teach, are you attending?"
@@ -2056,9 +2026,12 @@ label Storm_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_s "I am hitting the showers, care to join me?"
         else:
             ch_s "I will see you later."
+
+            return
     else:
         ch_s "Care to join me?"
 
+    $ D20 = renpy.random.randint(1, 20)
 
     menu:
         extend ""
@@ -2134,18 +2107,14 @@ label Storm_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                     $ StormX.change_stat("obedience", 70, -1)
                 $ line = "no"
 
-
-
-    call taboo_level(taboo_location = False)
     $ StormX.recent_history.append("followed")
-    if not line:
 
-        hide Storm_sprite
-        call change_out_of_gym_clothes ([StormX])
+    if not line:
+        call hide_Girl(StormX)
+
         return
 
     if line == "no":
-
         if StormX.location == "bg_classroom" or StormX.location == "bg_teacher":
             ch_s "I cannot skip class like this."
         elif StormX.location == "bg_dangerroom":
@@ -2153,59 +2122,62 @@ label Storm_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         else:
             ch_s "I am sorry, [StormX.player_petname], I am occupied."
 
-        hide Storm_sprite
-        call change_out_of_gym_clothes ([StormX])
+        call hide_Girl(StormX)
+
         return
 
     elif line == "go to":
+        call hide_Girl(StormX)
 
-
-        $ approval_bonus = 0
-        $ line = 0
-        call drain_all_words ("leaving")
-        call drain_all_words ("arriving")
-        $ StormX.recent_history.append("goto")
-        $ Player.recent_history.append("goto")
-        hide Storm_sprite
-        call change_out_of_gym_clothes ([StormX])
         if StormX.location == "bg_classroom" or StormX.location == "bg_teacher":
             ch_s "I will see you soon then."
-            jump classroom
         elif StormX.location == "bg_dangerroom":
             ch_s "I will see you soon then."
-            jump danger_room
         elif StormX.location == "bg_storm":
             ch_s "I will see you soon then."
-            $ Girl = StormX
-            jump girls_room
         elif StormX.location == "bg_player":
             ch_s "I will be waiting."
-            jump player_room
         elif StormX.location == "bg_showerroom":
             ch_s "I will leave you some hot water."
-            jump shower_room
         elif StormX.location == "bg_campus":
             ch_s "I will keep an eye out for you."
-            jump campus
         elif StormX.location == "bg_pool":
             ch_s "Excellent."
-            jump pool_entry
-        else:
-            ch_s "I will just meet you in your room."
-            $ StormX.location = "bg_player"
+
+        call hide_all
+
+        $ Player.traveling = True
+
+        $ destination = StormX.location
+
+        if destination == "bg_player":
             jump player_room
+        elif destination == "bg_storm":
+            $ Girl = StormX
 
-
-
+            jump girls_room
+        elif destination == "bg_classroom":
+            jump classroom
+        elif destination == "bg_dangerroom":
+            jump danger_room
+        elif destination == "bg_showerroom":
+            jump shower
+        elif destination == "bg_pool":
+            jump pool
+        elif destination == "bg_study":
+            jump study
+        elif destination == "bg_mall":
+            jump mall
 
     elif line == "lonely":
         ch_s "Why must you be so adorable?"
     elif line == "command":
         ch_s "Yes, [StormX.player_petname]."
 
-    $ line = 0
     ch_s "I'll stick around."
-    $ StormX.location = bg_current
+
+    $ StormX.location = Player.location
+
     return
 
 
@@ -2357,7 +2329,7 @@ label Storm_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                             $ StormX.outfit["bra"] = "_lace_bra"
 
                 "I like that bikini top." if StormX.outfit["bra"] != "_bikini_top" and "_bikini_top" in StormX.inventory:
-                    if bg_current == "bg_pool":
+                    if Player.location == "bg_pool":
                         ch_s "Fine."
                         $ StormX.outfit["bra"] = "_bikini_top"
                     else:
@@ -2509,7 +2481,7 @@ label Storm_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                             $ StormX.outfit["underwear"] = "_lace_panties"
 
                 "I like those bikini bottoms." if "_bikini_bottoms" in StormX.inventory and StormX.outfit["underwear"] != "_bikini_bottoms":
-                    if bg_current == "bg_pool":
+                    if Player.location == "bg_pool":
                         ch_s "Fine."
                         $ StormX.outfit["underwear"] = "_bikini_bottoms"
                     else:

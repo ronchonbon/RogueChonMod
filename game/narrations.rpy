@@ -2913,27 +2913,9 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
         call Seen_First_Peen (GirlA, GirlB, React=1)
         $ line = line + " before she slides her hand down and firmly grabs your dick"
         $ Action = "handjob"
-        if GirlA == RogueX:
-            show Rogue_sprite standing zorder GirlA.sprite_layer:
-                ease 1 ypos 200
-        elif GirlA == KittyX:
-            show Kitty_sprite standing zorder GirlA.sprite_layer:
-                ease 1 ypos 200
-        elif GirlA == EmmaX:
-            show Emma_sprite standing zorder GirlA.sprite_layer:
-                ease 1 ypos 200
-        elif GirlA == LauraX:
-            show Laura_sprite standing zorder GirlA.sprite_layer:
-                ease 1 ypos 200
-        elif GirlA == JeanX:
-            show Jean_sprite standing zorder GirlA.sprite_layer:
-                ease 1 ypos 200
-        elif GirlA == StormX:
-            show Storm_sprite standing zorder GirlA.sprite_layer:
-                ease 1 ypos 200
-        elif GirlA == JubesX:
-            show Jubes_sprite standing zorder GirlA.sprite_layer:
-                ease 1 ypos 200
+
+        call move_Girl(GirlA, y_position = 0.25, transition = ease)
+
         $ approval = 4
         $ TempFocus += 3 if Player.focus > 70 else 2
         $ TempLust += 2 if GirlA.lust < 60 else 0
@@ -2942,27 +2924,9 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
     elif Options[0] == "blowjob":
         call Seen_First_Peen (GirlA, GirlB, React=1)
         $ line = line + " before she slides down and begins to slowly lick your cock"
-        if GirlA == RogueX:
-            show Rogue_sprite standing zorder GirlA.sprite_layer:
-                ease 1 ypos 200
-        elif GirlA == KittyX:
-            show Kitty_sprite standing zorder GirlA.sprite_layer:
-                ease 1 ypos 200
-        elif GirlA == EmmaX:
-            show Emma_sprite standing zorder GirlA.sprite_layer:
-                ease 1 ypos 200
-        elif GirlA == LauraX:
-            show Laura_sprite standing zorder GirlA.sprite_layer:
-                ease 1 ypos 200
-        elif GirlA == JeanX:
-            show Jean_sprite standing zorder GirlA.sprite_layer:
-                ease 1 ypos 200
-        elif GirlA == StormX:
-            show Storm_sprite standing zorder GirlA.sprite_layer:
-                ease 1 ypos 200
-        elif GirlA == JubesX:
-            show Jubes_sprite standing zorder GirlA.sprite_layer:
-                ease 1 ypos 200
+
+        call move_Girl(GirlA, y_position = 0.25, transition = ease)
+
         $ Action = "blowjob"
         $ approval = 4
 

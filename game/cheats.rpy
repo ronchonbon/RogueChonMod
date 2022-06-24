@@ -132,7 +132,7 @@ label wardrobe_editor(Girl):
                 while True:
                     menu:
                         "Default":
-                            call reset_position(Girl)
+                            call show_full_body(Girl)
                         # "Face":
                         #     call kiss_launch(Girl)
                         # "Body":
@@ -141,31 +141,31 @@ label wardrobe_editor(Girl):
                             if not renpy.showing(Girl.tag + " handjob"):
                                 call show_handjob(Girl)
                             else:
-                                call reset_position(Girl)
+                                call show_full_body(Girl)
                         "Titjob":
                             if not renpy.showing(Girl.tag + " titjob"):
                                 call show_titjob(Girl)
                             else:
-                                call reset_position(Girl)
+                                call show_full_body(Girl)
                         "Blowjob":
                             if not renpy.showing(Girl.tag + " blowjob"):
                                 call show_blowjob(Girl)
                             else:
-                                call reset_position(Girl)
+                                call show_full_body(Girl)
                         "Missionary":
                             $ Girl.pose = "sex"
 
                             if not renpy.showing(Girl.tag + " sex"):
                                 call show_sex(Girl, "sex")
                             else:
-                                call reset_position(Girl)
+                                call show_full_body(Girl)
                         "Doggy":
                             $ Girl.pose = "doggy"
 
                             if not renpy.showing(Girl.tag + " doggy"):
                                 call show_sex(Girl, "anal")
                             else:
-                                call reset_position(Girl)
+                                call show_full_body(Girl)
                         "Back":
                             jump wardrobe_menu
             "First casual outfit":

@@ -4,7 +4,7 @@ label event_template:
     show black_screen onlayer black
 
     # sets the location you want the event to take place in
-    $ bg_current = "bg_classroom"
+    $ Player.location = "bg_classroom"
 
     hide black_screen onlayer black
 

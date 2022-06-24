@@ -25,9 +25,8 @@ label Halloween_chat(Girl=0):
 
         $ Nearby.remove(Girl)
         $ Present.append(Girl)
-        $ Girl.location = "bg_halloween"
-
-        call show_Girl (Girl)
+        
+        call add_Girl(Girl)
     hide black_screen onlayer black
 
     if Girl == EmmaX and "classcaught" not in EmmaX.history:
@@ -80,9 +79,9 @@ label Halloween_chat_Menu:
                     call Flirt (Girl)
                     return
 
-                "Sex Menu (locked)" if Girl.location != bg_current:
+                "Sex Menu (locked)" if Girl.location != Player.location:
                     pass
-                "Sex Menu" if Girl.location == bg_current:
+                "Sex Menu" if Girl.location == Player.location:
                     if Girl.love >= Girl.obedience:
                         ch_p "Did you want to fool around?"
                     else:
@@ -256,16 +255,16 @@ label HWchange_stat(Girl=0, HWType=0, HWCheck=0, HWvalue=0, HWStore=0):
     return
 
 
-label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline=[]):
+label Halloween_Party_entry(HWEvents=[], HWPlayer.Party=[], halloween_costume=0, HWline=[]):
 
 
 
 
 
-    $ bg_current = "bg_halloween"
-    call remove_Girl ("all")
+    $ Player.location = "bg_halloween"
+    call remove_all
 
-    $ Party = []
+    $ Player.Party = []
     $ Present = []
     $ Nearby = []
     "You enter the university square, where the party seems to be in full swing."
@@ -715,7 +714,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], halloween_costume=0, HWline
                     ease 0.8 pos (1200,50)
                 pause 0.8
                 "[LauraX.name] stalks out of the party for the night."
-                call remove_Girl (LauraX)
+                call remove_Girl(LauraX)
 
                 $ KittyX.change_face("_angry")
                 call HWchange_stat (KittyX, "love", 70, 2)
@@ -1554,7 +1553,7 @@ label Halloween_Party:
     if round <= 10:
         call Halloween_Ending
     menu:
-        "You are at the Halloween Party. What would you like to do?"
+        "You are at the Halloween Player.Party. What would you like to do?"
         "Talk to [RogueX.name]." if RogueX.location == "bg_halloween" or RogueX.location == "nearby":
             call Halloween_chat (RogueX)
         "Talk to [KittyX.name]." if KittyX.location == "bg_halloween" or KittyX.location == "nearby":
@@ -1627,7 +1626,7 @@ label Halloween_Ending(Girl=0):
         "No thanks.":
             $ Girl = 0
 
-    $ bg_current = "bg_player"
+    $ Player.location = "bg_player"
     call wait
     call girls_location
     if Girl:

@@ -84,12 +84,13 @@ label masturbate(Girl, context = None):
 
                 $ Player.change_stat("focus", 50, 30)
 
-                call checkout(total = True)
+                call checkout
+                call reset_player
 
                 if approval:
                     $ Girl.change_face("_bemused", 2)
 
-                    if bg_current == "bg_rogue":
+                    if Player.location == "bg_rogue":
                         call what_did_you_come_over_for_approval_lines(Girl, "masturbation")
                     else:
                         call fancy_bumping_into_you_approval_lines(Girl, "masturbation")
@@ -101,7 +102,7 @@ label masturbate(Girl, context = None):
                     $ Girl.recent_history.append("_angry")
                     $ Girl.daily_history.append("_angry")
 
-                    if bg_current == "bg_rogue":
+                    if Player.location == "bg_rogue":
                         call what_did_you_come_over_for_disapproval_lines(Girl, "masturbation")
 
                         jump reset_location
@@ -200,7 +201,7 @@ label masturbation_cycle(Girl):
     while round > 0:
         $ stack_depth = renpy.call_stack_depth()
 
-        call reset_position(Girl)
+        call show_full_body(Girl)
 
         $ Girl.lust_face()
 
@@ -232,7 +233,7 @@ label masturbation_cycle(Girl):
                     call Player_Cumming (Girl)
 
                     if "_angry" in Girl.recent_history:
-                        call reset_position(Girl)
+                        call show_full_body(Girl)
 
                         return "stop"
 
@@ -248,13 +249,13 @@ label masturbation_cycle(Girl):
 
                     $ Player.focus = 95
 
-                    if Girl.location == bg_current or (bg_current == "bg_classroom" and Girl.location == "bg_teacher"):
+                    if Girl.location == Player.location or (Player.location == "bg_classroom" and Girl.location == "bg_teacher"):
                         return "interrupt"
 
             if Girl.lust >= 100:
                 call Girl_Cumming (Girl)
 
-                if Girl.location == bg_current or (bg_current == "bg_classroom" and Girl.location == "bg_teacher"):
+                if Girl.location == Player.location or (Player.location == "bg_classroom" and Girl.location == "bg_teacher"):
                     return "interrupt"
 
             if orgasmed:
@@ -278,7 +279,7 @@ label masturbation_cycle(Girl):
             elif round == 5:
                 "She's definitely going to stop soon."
         else:
-            if Girl.location == bg_current:
+            if Girl.location == Player.location:
                 call Escalation(Girl)
 
             if round == 10:
@@ -396,7 +397,7 @@ label after_masturbation(Girl, context):
 
         call checkout
 
-        if Girl.location != bg_current:
+        if Girl.location != Player.location:
             return "stop"
 
         if round <= 10:

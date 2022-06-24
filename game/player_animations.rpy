@@ -3,7 +3,7 @@ image Zero_fondle_thigh_animation:
     "Zero_hand"
 
     subpixel True
-    alpha 0.5 zoom 0.7
+    zoom 0.6
     block:
         parallel:
             pause 0.5
@@ -23,7 +23,7 @@ image Zero_fondle_breasts_right_animation:
     "Zero_hand"
 
     subpixel True
-    alpha 0.5 xzoom -0.7 yzoom 0.7
+    xzoom -0.6 yzoom 0.6
     block:
         ease 1 rotate 0
         ease 1 rotate -30
@@ -34,7 +34,7 @@ image Zero_fondle_breasts_left_animation:
     "Zero_hand"
 
     subpixel True
-    alpha 0.5 zoom 0.7
+    zoom 0.6
     block:
         ease 1 rotate 10
         ease 1 rotate 40
@@ -45,7 +45,7 @@ image Zero_suck_breasts_right_animation:
     "Zero_tongue"
 
     subpixel True
-    alpha 0.5 xzoom -0.5 yzoom 0.5
+    xzoom -0.5 yzoom 0.5
     block:
         ease 0.8 rotate -35 offset (5, -20)
         pause 0.2
@@ -57,7 +57,7 @@ image Zero_suck_breasts_left_animation:
     "Zero_tongue"
 
     subpixel True
-    alpha 0.5 zoom 0.5
+    zoom 0.5
     block:
         ease 0.8 rotate 35 offset (-5, -20)
         pause 0.2
@@ -69,7 +69,7 @@ image Zero_fondle_pussy_animation:
     "Zero_hand"
 
     subpixel True
-    alpha 0.5 zoom 0.7
+    zoom 0.6
     block:
         choice:
             ease 0.5 rotate 140 offset (0, -15)
@@ -85,7 +85,7 @@ image Zero_finger_pussy_animation:
     "Zero_finger"
 
     subpixel True
-    alpha 0.5 zoom 0.7
+    zoom 0.6
     block:
         choice:
             ease 0.75 rotate 30 offset (10, -35)
@@ -111,7 +111,7 @@ image Zero_eat_pussy_animation:
     "Zero_tongue"
 
     subpixel True
-    alpha 0.5 xzoom -0.5 yzoom 0.5
+    xzoom -0.5 yzoom 0.5
     block:
         easeout 0.5 rotate -50 offset (-20, -20)
         linear 0.5 rotate -60 offset (-30, -10)
@@ -123,7 +123,7 @@ image Zero_doggy_fondle_breast_animation:
     "Zero_hand_under"
 
     subpixel True
-    alpha 0.5 zoom 0.34
+    alpha 0.5 zoom 0.3
     block:
         ease 1 rotate -20
         ease 1 rotate -40

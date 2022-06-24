@@ -73,6 +73,8 @@ layeredimage Jubes_sprite standing:
 
     if not JubesX.outfit["top"]:
         Null()
+    elif JubesX.outfit["top"] == "_towel":
+        "images/Jubes_standing/Jubes_standing_top[JubesX.outfit[top]][JubesX.arm_pose].png"
     elif JubesX.top_pulled_up:
         "images/Jubes_standing/Jubes_standing_top[JubesX.outfit[top]]_up.png"
     else:

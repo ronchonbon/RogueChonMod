@@ -1424,7 +1424,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0, 0],
     $ Present = []
     $ temp_Girls = all_Girls[:]
     while temp_Girls:
-        if temp_Girls[0].location == bg_current:
+        if temp_Girls[0].location == Player.location:
             $ Present.append(temp_Girls[0])
         $ temp_Girls.remove(temp_Girls[0])
 
@@ -1435,13 +1435,13 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0, 0],
 
     while len(Present) > 2:
 
-        call remove_Girl (Present[2])
+        call remove_Girl(Present[2])
 
 
     if len(Present) == 2:
         $ renpy.random.shuffle(Present)
         if Girl and Present[0] != Girl:
-            $ Party.reverse()
+            $ Player.Party.reverse()
         elif approval_check(Present[0],Check=1) <= approval_check(Present[1],Check=1):
 
             $ Present.reverse()
@@ -1518,7 +1518,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0, 0],
     if not Present:
         return
 
-    if EmmaX.location == bg_current and EmmaX not in Present:
+    if EmmaX.location == Player.location and EmmaX not in Present:
 
         if "classcaught" not in EmmaX.history:
             if EmmaX.location == EmmaX.home:
@@ -1528,7 +1528,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0, 0],
                 return
             else:
                 ch_e "I should really be going."
-                call remove_Girl (EmmaX)
+                call remove_Girl(EmmaX)
 
     if "stripping" in Present[0].daily_history and approval_check(Present[0], 500, taboo_modifier = 3):
         $ line = renpy.random.choice(["You liked the show earlier?",
@@ -1545,7 +1545,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0, 0],
     $ temp_Girls = all_Girls[:]
 
     while temp_Girls:
-        call reset_position(temp_Girls[0])
+        call show_full_body(temp_Girls[0])
 
         $ temp_Girls.remove(temp_Girls[0])
 
@@ -1553,7 +1553,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0, 0],
     while counter:
         $ counter -= 1
 
-        call show_Girl(Present[counter], transformation = Girl_Dance1(Present[counter]))
+        call show_Girl(Present[counter], color_transform = Girl_Dance1(Present[counter]))
 
         $ Present[counter].recent_history.append("stripping")
         $ Present[counter].daily_history.append("stripping")
@@ -1593,7 +1593,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0, 0],
 
     $ temp_Girls = all_Girls[:]
     while temp_Girls:
-        if temp_Girls[0].location == bg_current and temp_Girls[0] not in Present:
+        if temp_Girls[0].location == Player.location and temp_Girls[0] not in Present:
             $ Present.append(temp_Girls[0])
             if "stopdancing" not in temp_Girls[0].recent_history:
                 $ temp_Girls[0].recent_history.append("stopdancing")
@@ -1620,7 +1620,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0, 0],
                 jump Group_Strip_End
 
 
-    if EmmaX.location == bg_current and len(Present) >= 2:
+    if EmmaX.location == Player.location and len(Present) >= 2:
 
         if "classcaught" not in EmmaX.history or "threesome" not in EmmaX.history or (taboo and "taboo" not in EmmaX.history):
             if EmmaX.location == "bg_emma":
@@ -1630,7 +1630,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0, 0],
                 return
             else:
                 ch_e "I should really be going."
-                call remove_Girl (EmmaX)
+                call remove_Girl(EmmaX)
 
 label Group_Stripping:
     while round >= 10 and Present:
@@ -2077,7 +2077,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 extend ""
                 "Ok, you can stop":
                     $ Girl.recent_history.append("stopdancing")
-                    call reset_position(Girl)
+                    call show_full_body(Girl)
                 "Keep on dancing":
                     $ Girl.recent_history.append("keepdancing")
 
@@ -2115,8 +2115,8 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 $ Count = 0
                 jump Group_Strip_End
 
-        call reset_position(Girl)
-        call display_Girl(Girl, transformation = Girl_Dance1(Girl))
+        call show_full_body(Girl)
+        call display_Girl(Girl, color_transform = Girl_Dance1(Girl))
 
         "[Girl.name] begins to dance again."
 
@@ -2212,7 +2212,7 @@ label Strip_Ultimatum:
     if "keepdancing" in Girl.recent_history:
         return
 
-    call reset_position(Girl)
+    call show_full_body(Girl)
 
     $ Girl.change_face("_bemused", 1)
     if "stripforced" in Girl.recent_history:
@@ -2302,7 +2302,7 @@ label Strip_Ultimatum:
                     ch_v "I'd better not break your face either. . ."
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")
-                call remove_Girl (Girl)
+                call remove_Girl(Girl)
                 return
             $ approval_bonus += 20
             $ Girl.forced += 1
@@ -2349,7 +2349,7 @@ label Strip_Ultimatum:
                     ch_v "Oh, I can, but you're not goinna see it. . ."
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")
-                call remove_Girl (Girl)
+                call remove_Girl(Girl)
                 return
             $ Girl.change_stat("love", 200, -10)
             $ Girl.change_stat("obedience", 50, 3)
@@ -2374,7 +2374,7 @@ label Strip_Ultimatum:
     if "ultimatum" not in Girl.daily_history:
         $ Girl.daily_history.append("ultimatum")
 
-    call show_Girl(Girl, transformation = Girl_Dance1(Girl))
+    call show_Girl(Girl, color_transform = Girl_Dance1(Girl))
     
     "[Girl.name] begins to dance again."
     return

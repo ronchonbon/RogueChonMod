@@ -1945,12 +1945,12 @@ label gifts:
             "Wardrobe":
                 ch_p "I wanted to talk about your style."
 
-                call taboo_level
+                call set_Character_taboos
 
                 $ line = "Giftstore"
 
                 call expression Girl.tag + "_Clothes"
-            "Switch to. . ." if Girl.location == bg_current:
+            "Switch to. . ." if Girl.location == Player.location:
                 call switch_chat
 
                 ch_p "I'd like to give you something."

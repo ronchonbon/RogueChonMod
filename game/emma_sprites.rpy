@@ -545,18 +545,20 @@ layeredimage Emma_blowjob_body:
 
 layeredimage Emma_blowjob_head:
     if EmmaX.wet:
-        "images/Emma_blowjob/Emma_blowjob_hair_mid_wet.png"
+        "images/Emma_blowjob/Emma_blowjob_hair_wet_mid.png"
     else:
-        "images/Emma_blowjob/Emma_blowjob_hair_mid[EmmaX.outfit[hair]].png"
+        "images/Emma_blowjob/Emma_blowjob_hair[EmmaX.outfit[hair]]_mid.png"
 
-    if renpy.showing("Emma_sprite blowjob") and action_speed > 2 and EmmaX.blushing:
-        "images/Emma_blowjob/Emma_blowjob_face_open_blush.png"
-    elif renpy.showing("Emma_sprite blowjob") and action_speed > 2:
-        "images/Emma_blowjob/Emma_blowjob_face_open.png"
-    elif EmmaX.blushing:
-        "images/Emma_blowjob/Emma_blowjob_face_closed_blush.png"
-    else:
-        "images/Emma_blowjob/Emma_blowjob_face_closed.png"
+    always:
+        "images/Emma_blowjob/Emma_blowjob_face.png"
+    # if renpy.showing("Emma_sprite blowjob") and action_speed > 2 and EmmaX.blushing:
+    #     "images/Emma_blowjob/Emma_blowjob_face_open_blush.png"
+    # elif renpy.showing("Emma_sprite blowjob") and action_speed > 2:
+    #     "images/Emma_blowjob/Emma_blowjob_face_open.png"
+    # elif EmmaX.blushing:
+    #     "images/Emma_blowjob/Emma_blowjob_face_closed_blush.png"
+    # else:
+    #     "images/Emma_blowjob/Emma_blowjob_face_closed.png"
 
     if renpy.showing("Emma_sprite titjob") and action_speed > 2:
         "images/Emma_blowjob/Emma_blowjob_mouth_tongue.png"

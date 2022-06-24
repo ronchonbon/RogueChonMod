@@ -827,8 +827,8 @@ label Massage_Cycle:
 
                 call Player_Cumming (Girl)
                 if "_angry" in Girl.recent_history:
-                    call reset_position(Girl)
-                    call reset_position(Partner)
+                    call show_full_body(Girl)
+                    call show_full_body(Partner)
                     return
                 $ Girl.change_stat("lust", 200, 5)
                 if 100 > Girl.lust >= 70 and Girl.session_orgasms < 2:
@@ -885,7 +885,7 @@ label Massage_Cycle:
 
 
 label Massage_After:
-    call reset_position(Girl)
+    call show_full_body(Girl)
     if MCount >= 3:
         $ Girl.change_stat("love", 90, 1)
         $ Girl.change_stat("love", 50, 2)

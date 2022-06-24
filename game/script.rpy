@@ -28,23 +28,18 @@ init -1:
     default weekday = 6
     default day_of_week = week[weekday]
 
-    default bg_current = "bg_study"
-
     default focused_Girl = None
     default Partner = None
-    default Party = []
     default Present = []
     default Nearby = []
     default all_Girls = []
     default active_Girls = []
 
-    default Phonebook = []
-    default Keys = []
     default Rules = []
 
     default total_SEXP = 0
 
-    default personal_rooms = ["bg_player"]
+    default bedrooms = ["bg_player"]
 
     default taboo = 0
 
@@ -197,22 +192,22 @@ label start:
 
     $ Player.cash = 100000
 
-    # $ bg_current = "bg_campus"
-    # $ time_index = 1
-    # $ current_time = "midday"
-    #
-    # scene background onlayer background
-    # scene
-    #
-    # show foreground zorder 50
-    # show Chibi_cock onlayer screens
-    #
-    # $ MystiqueX.change_outfit("supervillain")
-    #
-    # python:
-    #     for G in all_Girls:
-    #         active_Girls.append(G)
-    #
+    $ Player.location = "bg_campus"
+    $ time_index = 1
+    $ current_time = "midday"
+
+    scene background onlayer background
+    scene
+
+    show foreground zorder 2
+    show Chibi_cock onlayer screens
+
+    $ MystiqueX.change_outfit("supervillain")
+
+    python:
+        for G in all_Girls:
+            active_Girls.append(G)
+
     #         # G.change_face("_surprised", blushing = 2)
     #         # G.change_outfit("nude")
     #         # G.mouth = "_smirk"
@@ -221,28 +216,29 @@ label start:
     #         # G.spunk["pussy"] = True
     #         # G.spunk["anus"] = True
     #
-    # # $ Player.sprite = True
-    # # $ show_feet = False
-    # # $ action_speed = 2
-    # # $ Player.cock_position = "anal"
-    # # $ Player.primary_action = "fondle_breasts"
-    # # $ Player.secondary_action = "fondle_thighs"
+    # $ Player.sprite = True
+    # $ show_feet = False
+    # $ action_speed = 2
     #
-    # # $ girl_secondary_action = "finger_pussy"
+    # $ Player.cock_position = "anal"
+    # $ Player.primary_action = "fondle_breasts"
+    # $ Player.secondary_action = "fondle_thighs"
     #
-    # $ offset = 0.15
-    #
-    # $ temp_Girls = all_Girls[:]
-    #
-    # while temp_Girls:
-    #     call show_Girl(temp_Girls[0], offset)
-    #
-    #     $ offset += 0.1
-    #
-    #     $ temp_Girls.remove(temp_Girls[0])
-    #
-    # ""
-    
+    # $ girl_secondary_action = "finger_pussy"
+
+    $ offset = 0.15
+
+    $ temp_Girls = all_Girls[:]
+
+    while temp_Girls:
+        call show_Girl(temp_Girls[0], offset)
+
+        $ offset += 0.1
+
+        $ temp_Girls.remove(temp_Girls[0])
+
+        ""
+
     $ all_Girls.remove(MystiqueX)
     $ active_Girls = []
     $ focused_Girl = RogueX

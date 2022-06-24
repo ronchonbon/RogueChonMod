@@ -121,9 +121,9 @@ label change_wardrobe(Girl):
                 call special_menu(Girl)
             "About your accessories. . .":
                 call accessories_menu(Girl)
-            "Would you be more comfortable behind a screen?(locked)" if Girl.location == bg_current and (Girl.taboo or renpy.showing("dress_screen")):
+            "Would you be more comfortable behind a screen?(locked)" if Girl.location == Player.location and (Girl.taboo or renpy.showing("dress_screen")):
                 pass
-            "Would you be more comfortable behind a screen?" if Girl.location == bg_current and (not Girl.taboo and not renpy.showing('dress_screen')):
+            "Would you be more comfortable behind a screen?" if Girl.location == Player.location and (not Girl.taboo and not renpy.showing('dress_screen')):
                 if Girl == StormX:
                     ch_s "I won't need it, but I appreciate the offer."
                 elif approval_check(Girl, 1500) or (Girl.seen_breasts and Girl.seen_pussy):
@@ -161,7 +161,7 @@ label change_wardrobe(Girl):
 
                 if _return:
                     hide dress_screen
-            "Could I get a look?" if Girl.location != bg_current:
+            "Could I get a look?" if Girl.location != Player.location:
                 call outfitShame(Girl, 0, 2)
 
                 if _return:
@@ -183,9 +183,9 @@ label change_wardrobe(Girl):
                         ch_v "Ok, that good?"
 
                     hide PhoneSex
-            # "Gift for you(locked)" if Girl.location != bg_current:
+            # "Gift for you(locked)" if Girl.location != Player.location:
             #     pass
-            # "Gift for you" if Girl.location == bg_current:
+            # "Gift for you" if Girl.location == Player.location:
             #     ch_p "I'd like to give you something."
             #
             #     call gifts
@@ -540,7 +540,7 @@ label outfits_menu(Girl):
                             return
             "Remember that outfit we put together?(locked)" if not Girl.first_custom_outfit["outfit_active"] and not Girl.second_custom_outfit["outfit_active"] and not Girl.third_custom_outfit["outfit_active"]:
                 pass
-            "Could you put on your gym clothes?" if not Girl.taboo or bg_current == "bg_dangerroom":
+            "Could you put on your gym clothes?" if not Girl.taboo or Player.location == "bg_dangerroom":
                 $ Girl.change_outfit("gym_clothes")
             "Could you try on your sleep outfit?" if not Girl.taboo:
                 if approval_check(Girl, 1200):
@@ -550,9 +550,9 @@ label outfits_menu(Girl):
 
                     if _return:
                         $ Girl.change_outfit("sleepwear")
-            "Can I see your swimsuit?" if (not Girl.taboo or bg_current == "bg_pool") and Girl.swimwear["outfit_active"]:
+            "Can I see your swimsuit?" if (not Girl.taboo or Player.location == "bg_pool") and Girl.swimwear["outfit_active"]:
                 $ Girl.change_outfit("swimwear")
-            "Can I see your swimsuit?(locked)" if (Girl.taboo and bg_current != "bg_pool") or not Girl.swimwear["outfit_active"]:
+            "Can I see your swimsuit?(locked)" if (Girl.taboo and Player.location != "bg_pool") or not Girl.swimwear["outfit_active"]:
                 $ Girl.change_outfit("swimwear")
             "Could you put on your Halloween costume again?" if "halloween" in Girl.history:
                 if Girl == RogueX:
@@ -1286,7 +1286,7 @@ label tops_menu(Girl):
         # elif item == "_towel":
         #     $ Girl.change_face("_bemused", 1)
         #
-        #     $ bonus = 5 if bg_current == "bg_showerroom" else 0
+        #     $ bonus = 5 if Player.location == "bg_showerroom" else 0
         #
         #     if Girl.outfit["bra"] or (Girl.seen_breasts and approval_check(Girl, 500, taboo_modifier=(3-public-bonus))):
         #         if Girl == RogueX:
@@ -1827,7 +1827,7 @@ label bras_menu(Girl):
 #
 #                     $ item = ""
 #         elif item == "_bikini_top":
-#             if bg_current == "bg_pool":
+#             if Player.location == "bg_pool":
 #                 if Girl == RogueX:
 #                     ch_r "Sure."
 #                 elif Girl == KittyX:
@@ -2067,7 +2067,7 @@ label underwears_menu(Girl):
 #
 #                         $ item = ""
 #         elif item == "_bikini_bottoms":
-#             if bg_current == "bg_pool":
+#             if Player.location == "bg_pool":
 #                 if Girl == RogueX:
 #                     ch_r "Sure."
 #                 elif Girl == KittyX:
@@ -3710,7 +3710,7 @@ label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
 
 label outfitShame(Girl, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
     if not Check and not taboo and not Girl.taboo and Custom != 20:
-        if Girl.clothing[9] and bg_current in personal_rooms:
+        if Girl.clothing[9] and Player.location in bedrooms:
             if "halloween" not in Player.daily_history:
                 call Private_outfit(Girl)
         return
@@ -4539,7 +4539,7 @@ label outfitShame(Girl, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
     if Check:
         pass
-    elif bg_current == "bg_halloween" or (bg_current == "bg_player" and "halloween" in Player.daily_history):
+    elif Player.location == "bg_halloween" or (Player.location == "bg_player" and "halloween" in Player.daily_history):
 
         pass
     elif "exhibitionist" in Girl.traits and Tempshame <= 20:
@@ -4572,15 +4572,15 @@ label outfitShame(Girl, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
         $ Girl.change_outfit("gym_clothes")
     elif not Girl.taboo:
         pass
-    elif Girl.outfit_name == "swimwear" and bg_current == "bg_pool":
+    elif Girl.outfit_name == "swimwear" and Player.location == "bg_pool":
         pass
-    elif bg_current == "bg_pool" and Girl.bra_number() >= 3 and Girl.underwear_number() >= 6:
+    elif Player.location == "bg_pool" and Girl.bra_number() >= 3 and Girl.underwear_number() >= 6:
         pass
-    elif Girl.outfit_name == "gym_clothes" and bg_current == "bg_dangerroom":
+    elif Girl.outfit_name == "gym_clothes" and Player.location == "bg_dangerroom":
         pass
     else:
 
-        if Girl.location == bg_current:
+        if Girl.location == Player.location:
             if Girl == RogueX:
                 ch_r "I'll be right back, I've got to change out of this."
             elif Girl == KittyX:

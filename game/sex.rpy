@@ -411,7 +411,7 @@ label end_of_action_round(Girl, action):
             call Player_Cumming(Girl)
 
             if "_angry" in Girl.recent_history:
-                call reset_position(Girl)
+                call show_full_body(Girl)
 
                 return [None, "stop"]
 
@@ -571,7 +571,7 @@ label jerking_off(Girl = None):
     if not Girl:
         python:
             for G in all_Girls:
-                if G.location == bg_current:
+                if G.location == Player.location:
                     Girl = G
 
                     break
@@ -684,7 +684,7 @@ label jerking_off(Girl = None):
 
             return "stop"
 
-        if Girl.remaining_actions and Girl.location == bg_current:
+        if Girl.remaining_actions and Girl.location == Player.location:
             $ options = ["none"]
 
             $ counter = 0

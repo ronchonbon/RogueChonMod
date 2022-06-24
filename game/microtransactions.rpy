@@ -4,24 +4,24 @@ label Microtransactions_Intro:
     ch_x "Could you come to my office please?"
     menu:
         extend ""
-        "Ok" if not Party and not Present:
-            $ Party = []
+        "Ok" if not Player.Party and not Present:
+            $ Player.Party = []
             "You head over."
-        "I should go for this." if Party or Present:
-            $ Party = []
+        "I should go for this." if Player.Party or Present:
+            $ Player.Party = []
             "You excuse yourself and head out."
         "Nah.":
 
             ch_x "-Now,- [Player.name]!"
-            if Party or Present:
-                $ Party = []
+            if Player.Party or Present:
+                $ Player.Party = []
                 "You excuse yourself and head out."
             else:
                 "You head over."
     show black_screen onlayer black
     pause 0.1
     $ round -= 5
-    $ bg_current = "bg_study"
+    $ Player.location = "bg_study"
     call change_Xavier_face ("_happy")
     call set_the_scene
     hide black_screen onlayer black
@@ -79,14 +79,14 @@ label Microtransactions_Intro:
     show black_screen onlayer black
     scene
     pause 0.1
-    $ bg_current = "bg_classroom"
+    $ Player.location = "bg_classroom"
     #scene empty_class onlayer backdrop
     hide black_screen onlayer black
     $ round -= 5
     "You take a small metal box from the Professor, and head to Professor McCoy's lab."
     "You drop it off in the corner, and it rapidly expands into a large device labeled \"Pym\""
     ch_b "Oh, my shrink ray!"
-    $ bg_current = "bg_study"
+    $ Player.location = "bg_study"
     show black_screen onlayer black
     pause 0.1
     call set_the_scene
@@ -99,7 +99,7 @@ label Microtransactions_Intro:
     ch_x "If you wish to make further microtransactions, just access it from McCoy's lab."
     ch_x "I'm sure there will be plenty of business."
     "You return to your room."
-    $ bg_current = "bg_player"
+    $ Player.location = "bg_player"
     show black_screen onlayer black
     pause 0.1
     call set_the_scene

@@ -4,7 +4,7 @@ label Flirt(Girl=0):
     $ Girl = check_girl(Girl)
     call shift_focus (Girl)
 
-    if Girl.location != bg_current:
+    if Girl.location != Player.location:
 
         menu:
             "Compliment her":
@@ -12,9 +12,9 @@ label Flirt(Girl=0):
                 call Compliment (Girl)
 
 
-            "Phone Sex" if bg_current == "bg_player":
+            "Phone Sex" if Player.location == "bg_player":
                 ch_p "Want to do some phone sex?"
-                call taboo_level(taboo_location = False)
+                call set_Character_taboos(taboo_location = False)
                 if not approval_check(Girl, 900) or Girl.SEXP < 15:
 
                     $ Girl.change_stat("love", 70, -2)
@@ -114,12 +114,12 @@ label Flirt(Girl=0):
                     return
                 $ Girl.change_stat("obedience", 70, 2)
                 $ Girl.change_stat("inhibition", 80, 2)
-                call taboo_level(taboo_location = False)
+                call set_Character_taboos(taboo_location = False)
                 call PhoneSex (Girl)
-                call taboo_level(taboo_location = False)
+                call set_Character_taboos(taboo_location = False)
                 $ renpy.pop_call()
                 return
-            "Phone Sex [[not here] (locked)" if bg_current != "bg_player":
+            "Phone Sex [[not here] (locked)" if Player.location != "bg_player":
                 pass
             "Never mind [[exit]":
                 pass
@@ -564,7 +564,7 @@ label Flirt(Girl=0):
                             $ Girl.change_stat("love", 90, 1)
                             $ Girl.change_stat("love", 60, 3)
                             $ Girl.change_stat("inhibition", 50, 2)
-                            if bg_current == "bg_halloween":
+                            if Player.location == "bg_halloween":
                                 "She shrugs away from you and winks."
                                 Girl.voice "Not now. . ."
                             else:
@@ -1645,7 +1645,7 @@ label Flirt(Girl=0):
                     $ LauraX.claws = 0
                 if Girl == EmmaX and taboo and "taboo" not in EmmaX.history:
                     ch_e "Show some respect when in public, [EmmaX.player_petname]."
-                elif bg_current == "bg_halloween":
+                elif Player.location == "bg_halloween":
                     "She shrugs away from you and winks."
                     Girl.voice "Not now. . ."
                 elif Girl.action_counter["fondle_breasts"]and approval_check(Girl, 1100, taboo_modifier = 3):
@@ -2539,7 +2539,7 @@ label Compliment(Girl=0, line0=0, line1=0, line2=0, Options=[], CountList=[], li
                 $ Girl.change_face("_normal")
             ". . .":
                 pass
-    elif bg_current == "date":
+    elif Player.location == "date":
 
         if "compliment" not in Girl.recent_history:
             $ Girl.add_word(1,"compliment", 0, 0, 0)
@@ -2551,7 +2551,7 @@ label Love_You(Girl=0):
 
 
     ch_p "[Girl.name], I love you."
-    if bg_current == "bg_halloween":
+    if Player.location == "bg_halloween":
         Girl.voice ". . . we should talk after the party. . ."
         return
 
@@ -2710,7 +2710,7 @@ label Love_You(Girl=0):
                 ch_v "I. . . not now. . ."
 
             "[Girl.name] leaves the room."
-            call remove_Girl (Girl)
+            call remove_Girl(Girl)
             jump reset_location
         return
 
@@ -4008,7 +4008,7 @@ label AskPanties(Girl=0, Store=0):
                 $ Girl.daily_history.append("commando")
                 $ Girl.change_outfit()
                 call outfitShame (Girl, 20)
-                $ Girl.location = bg_current
+                $ Girl.location = Player.location
                 call set_the_scene
                 "She returns and quietly hands you her balled up panties."
         else:

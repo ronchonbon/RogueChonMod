@@ -1,44 +1,35 @@
 label addiction_event(Girl):
     $ Girl.drain_word("asked_to_meet")
 
-    call set_the_scene
-    call shift_focus(Girl)
-
     $ Girl.event_happened[1] += 1
 
     $ Player.add_word(1, 0,"fix")
 
-    $ taboo = 0
-
-    $ Girl.taboo = 0
-
-    $ bg_current = "bg_player"
-
-    $ Girl.location = bg_current
-    $ Girl.change_outfit()
-
-    call locked_door(Girl, entering = True)
-
-    if not _return:
-        return
-
-    if bg_current != "bg_player":
-        if Girl.location == bg_current or Girl in Party:
+    if Player.location != "bg_player":
+        if Girl.location == Player.location or Girl in Player.Party:
             "Out of the blue, [Girl.name] says she wants to talk to you in your room and drags you over there."
+
+            $ Player.location = "bg_player"
         else:
-            "[Girl.name] shows up and hurriedly says she wants to talk to you in your room and drags you over there."
+            call locked_door(Girl, entering = True)
+
+            if not _return:
+                return
+
+            "[Girl.name] hurriedly says she wants to talk to you in your room and drags you over there."
+
+            $ Player.location = "bg_player"
     else:
-        if Girl.location == bg_current or Girl in Party:
+        if Girl.location == Player.location or Girl in Player.Party:
             "[Girl.name] turns to you with a bit of a dazed look."
         else:
-            "[Girl.name] barges into your room in a tizzy."
+            call locked_door(Girl, entering = True)
 
-    $ bg_current = "bg_player"
+            if not _return:
+                return
 
-    $ Girl.location = bg_current
-
-    call set_the_scene
     call clear_the_room(Girl)
+    call shift_focus(Girl)
 
     if Girl.event_happened[1] == 1:
         if Girl == RogueX:
@@ -797,7 +788,7 @@ label addiction_ultimatum:
 
                 $ Player.traits.append("locked")
 
-                call taboo_level
+                call set_Character_taboos
             "No":
                 pass
     while between_event_count:
@@ -1201,7 +1192,7 @@ label addiction_ultimatum:
 
                     "[Girl.name] gives one last look over her shoulder before slamming the door and storming out."
 
-                    call remove_Girl (Girl)
+                    call remove_Girl(Girl)
 
                     jump addiction_bad_end
             "Oh, never mind." if menu_context == "sunshock":
@@ -1534,7 +1525,7 @@ label addiction_good_end:
 
     call Sex_Over
 
-    if Girl not in Phonebook:
+    if Girl not in Player.Phonebook:
         if Girl == RogueX:
             ch_r "I'm going to need to get in touch, you should probably have my number, here you go."
         elif Girl == KittyX:
@@ -1551,7 +1542,7 @@ label addiction_good_end:
         elif Girl == JubesX:
             ch_v "I guess I should give you my number. . ."
 
-        $ Phonebook.append(Girl)
+        $ Player.Phonebook.append(Girl)
     if Girl == RogueX:
         ch_r "I may need to do this again sometime. . . I'll see ya later."
     elif Girl == KittyX:
@@ -1588,13 +1579,13 @@ label addiction_bad_end:
 
     $ Girl.arm_pose = 1
 
-    if Girl not in Party:
-        if bg_current == Girl.home:
+    if Girl not in Player.Party:
+        if Player.location == Girl.home:
             "You head back to your room."
-        elif bg_current == "bg_player" and Girl.location == bg_current:
+        elif Player.location == "bg_player" and Girl.location == Player.location:
             "[Girl.name] heads out."
 
-        call remove_Girl (Girl)
+        call remove_Girl(Girl)
 
     $ renpy.pop_call()
     $ renpy.pop_call()
@@ -1746,7 +1737,7 @@ label addiction_fix(Girl):
     call set_the_scene
     call shift_focus(Girl)
 
-    $ Girl.location = bg_current
+    $ Girl.location = Player.location
     $ Girl.change_outfit()
 
     call locked_door(Girl)
@@ -1754,7 +1745,6 @@ label addiction_fix(Girl):
     if not _return:
         return
 
-    call set_the_scene
     call clear_the_room(Girl)
 
     $ Girl.change_face("_manic")
@@ -1763,13 +1753,13 @@ label addiction_fix(Girl):
 
     $ Girl.taboo = 0
 
-    if bg_current != "bg_player" and bg_current != Girl.home:
-        if Girl.location == bg_current or Girl in Party:
+    if Player.location != "bg_player" and Player.location != Girl.home:
+        if Girl.location == Player.location or Girl in Player.Party:
             "[Girl.name] says she wants to talk to you in your room and drags you over there."
         else:
             "[Girl.name] shows up, says she wants to talk to you in your room and drags you over there."
     else:
-        if Girl.location == bg_current or Girl in Party:
+        if Girl.location == Player.location or Girl in Player.Party:
             "[Girl.name] turns to you with a hungry look."
         else:
             "[Girl.name] pops into your room in a bit of a tizzy."
@@ -2164,7 +2154,7 @@ label addiction_fix_end:
             "Did you want to stick around?":
                 if not Girl.forced and approval_check(Girl, 800, "LI"):
                     $ Girl.change_face("_smile", 1)
-                    $ Party.append(Girl)
+                    $ Player.Party.append(Girl)
 
                     if Girl == RogueX:
                         ch_r "Sure, ok."

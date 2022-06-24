@@ -1,6 +1,6 @@
 label MindFuck_Screen:
 
-    if bg_current in personal_rooms:
+    if Player.location in bedrooms:
         call RoomMask
 
 
@@ -22,25 +22,25 @@ label MindFuck_Screen:
 
 
 
-    elif bg_current == "bg_classroom":
+    elif Player.location == "bg_classroom":
         show bg_classmask onlayer black:
             alpha .2
-    elif bg_current == "bg_dangerroom":
+    elif Player.location == "bg_dangerroom":
         show bg_danger onlayer black:
             alpha .2
-    elif bg_current == "bg_showerroom":
+    elif Player.location == "bg_showerroom":
         show bg_shower onlayer black:
             alpha .2
-    elif bg_current == "bg_study":
+    elif Player.location == "bg_study":
         show bg_study onlayer black:
             alpha .2
-    elif bg_current == "bg_movies":
+    elif Player.location == "bg_movies":
         show bg_movies onlayer black:
             alpha .2
-    elif bg_current == "bg_restaurant":
+    elif Player.location == "bg_restaurant":
         show bg_rest onlayer black:
             alpha .2
-    elif bg_current == "bg_pool":
+    elif Player.location == "bg_pool":
         show bg_pool onlayer black:
             alpha .2
     else:
@@ -51,7 +51,7 @@ label MindFuck_Screen:
 label psychicFlash(Face="_sly", TempLoc=0):
     call MindFuck_Screen
     $ line = Girl.location
-    $ Girl.location = bg_current
+    $ Girl.location = Player.location
     call set_the_scene (1, 0, 0, 0, 1)
     if Face:
         $ Girl.change_face(Face)
@@ -88,7 +88,7 @@ label MindFuck(TempLoc=0):
 
             call MindFuck_Screen
             $ TempLoc = Girl.location
-            $ Girl.location = bg_current
+            $ Girl.location = Player.location
             $ Girl.change_face("_sly")
 
             call set_the_scene (1, 0, 0, 0, 1)

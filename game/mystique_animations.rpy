@@ -6,8 +6,12 @@ image Mystique_blinking:
         3.25
     choice:
         3
+    "images/Mystique_standing/Mystique_standing_eyes_half_blink.png"
+    0.05
     "images/Mystique_standing/Mystique_standing_eyes_closed.png"
-    0.25
+    0.15
+    "images/Mystique_standing/Mystique_standing_eyes_half_blink.png"
+    0.05
     repeat
 
 image Raven_blinking:
@@ -38,10 +42,8 @@ layeredimage Mystique_grool_dripping_animation:
 layeredimage Mystique_grool_animations:
     if not MystiqueX.grool:
         Null()
-    elif MystiqueX.bottom_pulled_down:
-        AlphaMask("Mystique_grool_dripping_animation", "images/Mystique_standing/Mystique_standing_grool_mask_pants.png")
-    elif MystiqueX.underwear_pulled_down:
-        AlphaMask("Mystique_grool_dripping_animation", "images/Mystique_standing/Mystique_standing_grool_mask_underwear.png")
+    elif MystiqueX.outfit["dress"]:
+        AlphaMask("Mystique_grool_dripping_animation", "images/Mystique_standing/Mystique_standing_grool_mask_dress.png")
     elif not MystiqueX.pussy_covered:
         AlphaMask("Mystique_grool_dripping_animation", "images/Mystique_standing/Mystique_standing_grool_mask.png")
 
@@ -61,24 +63,22 @@ layeredimage Mystique_spunk_dripping_animation:
 layeredimage Mystique_spunk_animations:
     if not MystiqueX.spunk["pussy"] and not MystiqueX.spunk["anus"]:
         Null()
-    elif MystiqueX.bottom_pulled_down:
-        AlphaMask("Mystique_spunk_dripping_animation", "images/Mystique_standing/Mystique_standing_grool_mask_pants.png")
-    elif MystiqueX.underwear_pulled_down:
-        AlphaMask("Mystique_spunk_dripping_animation", "images/Mystique_standing/Mystique_standing_grool_mask_underwear.png")
+    elif MystiqueX.outfit["dress"]:
+        AlphaMask("Mystique_grool_dripping_animation", "images/Mystique_standing/Mystique_standing_grool_mask_dress.png")
     elif not MystiqueX.pussy_covered:
-        AlphaMask("Mystique_spunk_dripping_animation", "images/Mystique_standing/Mystique_standing_grool_mask.png")
+        AlphaMask("Mystique_grool_dripping_animation", "images/Mystique_standing/Mystique_standing_grool_mask.png")
 
 layeredimage Mystique_standing_fondling_animations:
     if not girl_secondary_action:
         Null()
     elif girl_secondary_action == "fondle_breasts":
-        "Girl_fondle_breast_left_animation" pos (0.518, 0.633)
+        "Mystique_fondle_breast_left_animation" pos (0.518, 0.633)
     elif girl_secondary_action == "fondle_breasts":
-        "Girl_fondle_breast_right_animation" pos (0.395, 0.621)
+        "Mystique_fondle_breast_right_animation" pos (0.395, 0.621)
     elif girl_secondary_action == "fondle_pussy":
-        "Girl_fondle_pussy_animation" pos (0.475, 0.995)
+        "Mystique_fondle_pussy_animation" pos (0.475, 0.995)
     elif girl_secondary_action in "finger_pussy":
-        "Girl_finger_pussy_animation" pos (0.485, 1.06)
+        "Mystique_finger_pussy_animation" pos (0.485, 1.06)
 
     if not Player.primary_action:
         Null()

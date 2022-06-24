@@ -125,9 +125,9 @@ label showering:
                     elif showering_Girls[counter] == JeanX:
                         ch_j "I'm heading out."
                     elif showering_Girls[counter] == StormX:
-                        "I was about finished and heading out now."
+                        ch_s "I was about finished and heading out now."
                     elif showering_Girls[counter] == JubesX:
-                        "I finished getting showered, so I'm taking off."
+                        ch_v "I finished getting showered, so I'm taking off."
 
                 $ already_showered = True
             else:
@@ -140,7 +140,7 @@ label showering:
 
                         $ staying_Girls.append(showering_Girls[counter])
                     elif showering_Girls[counter] == KittyX:
-                        "Yeah, I could stick around."
+                        ch_k "Yeah, I could stick around."
 
                         $ staying_Girls.append(showering_Girls[counter])
                     elif showering_Girls[counter] == EmmaX:
@@ -188,19 +188,19 @@ label showering:
             menu:
                 extend ""
                 "Ok, see you later then.":
-                    if RogueX.location == bg_current and RogueX not in staying_Girls:
+                    if RogueX.location == Player.location and RogueX not in staying_Girls:
                         ch_r "Yeah, later."
-                    if KittyX.location == bg_current and KittyX not in staying_Girls:
+                    if KittyX.location == Player.location and KittyX not in staying_Girls:
                         ch_k "Bye!"
-                    if EmmaX.location == bg_current and EmmaX not in staying_Girls:
+                    if EmmaX.location == Player.location and EmmaX not in staying_Girls:
                         ch_e "Yes, later."
-                    if LauraX.location == bg_current and LauraX not in staying_Girls:
+                    if LauraX.location == Player.location and LauraX not in staying_Girls:
                         ch_l "Yup."
-                    if JeanX.location == bg_current and JeanX not in staying_Girls:
+                    if JeanX.location == Player.location and JeanX not in staying_Girls:
                         ch_j "Ok."
-                    if StormX.location == bg_current and StormX not in staying_Girls:
+                    if StormX.location == Player.location and StormX not in staying_Girls:
                         ch_s "Yes, I'll see you."
-                    if JubesX.location == bg_current and JubesX not in staying_Girls:
+                    if JubesX.location == Player.location and JubesX not in staying_Girls:
                         ch_v "Laters!"
                 "Sure you got every spot?" if already_showered:
                     $ line = "spot"
@@ -212,7 +212,7 @@ label showering:
             if line:
                 python:
                     for G in showering_Girls:
-                        if G.location == bg_current and G not in staying_Girls:
+                        if G.location == Player.location and G not in staying_Girls:
                             if G == EmmaX and (not "classcaught" in EmmaX.history or (staying_Girls and "threesome" not in EmmaX.history)):
                                 pass
                             elif G == JeanX and approval_check(G, 600):
@@ -244,48 +244,48 @@ label showering:
                         elif staying_Girls[0] == JubesX:
                             ch_v "I mean, you can never be -too- clean. . ."
 
-                    if RogueX.location == bg_current and RogueX not in staying_Girls:
+                    if RogueX.location == Player.location and RogueX not in staying_Girls:
                         if staying_Girls:
                             ch_r "Well, [RogueX.player_petname], I think I'm fine."
                         else:
                             ch_r "No, [RogueX.player_petname], I think I'm covered."
 
-                    if KittyX.location == bg_current and KittyX not in staying_Girls:
+                    if KittyX.location == Player.location and KittyX not in staying_Girls:
                         if staying_Girls:
                             ch_k "Oh, well I think I[KittyX.like]got it?"
                             ch_k "See you later, [KittyX.player_petname]."
                         else:
                             ch_k "Ha, I'm squeaky clean, [KittyX.player_petname], see you later."
 
-                    if EmmaX.location == bg_current and EmmaX not in staying_Girls:
+                    if EmmaX.location == Player.location and EmmaX not in staying_Girls:
                         if staying_Girls:
                             ch_e "Well it appears you'll be taken care of."
                             ch_e "I'll be going, [EmmaX.player_petname]."
                         else:
                             ch_e "I'm afraid not, [EmmaX.player_petname], I'll be going."
 
-                    if LauraX.location == bg_current and LauraX not in staying_Girls:
+                    if LauraX.location == Player.location and LauraX not in staying_Girls:
                         if staying_Girls:
                             ch_l "Looks like you got this handled."
                             ch_l "I'm out, [LauraX.player_petname]."
                         else:
                             ch_l "I'm out."
 
-                    if JeanX.location == bg_current and JeanX not in staying_Girls:
+                    if JeanX.location == Player.location and JeanX not in staying_Girls:
                         if staying_Girls:
                             ch_j "Well, looks like you guys are going to have fun."
                             ch_j "I'll head out, [JeanX.player_petname]."
                         else:
                             ch_j "I'll head out."
 
-                    if StormX.location == bg_current and StormX not in staying_Girls:
+                    if StormX.location == Player.location and StormX not in staying_Girls:
                         if staying_Girls:
                             ch_s "It looks like you'll be occupied."
                             ch_s "I'll be going, [StormX.player_petname]."
                         else:
                             ch_s "I really doubt that I could have, [StormX.player_petname], I'll be going."
 
-                    if JubesX.location == bg_current and JubesX not in staying_Girls:
+                    if JubesX.location == Player.location and JubesX not in staying_Girls:
                         if staying_Girls:
                             ch_v "Nah, I think you'll be fine."
                             ch_v "Later, guys."
@@ -306,48 +306,48 @@ label showering:
                         elif staying_Girls[0] == JubesX:
                             ch_v ". . . Yeah, ok."
 
-                    if RogueX.location == bg_current and RogueX not in staying_Girls:
+                    if RogueX.location == Player.location and RogueX not in staying_Girls:
                         if staying_Girls:
                             ch_r "Oh, well, I'm gonna pass on that, [RogueX.player_petname]."
                         else:
                             ch_r "Yeah, I'm gonna pass on that, [RogueX.player_petname]."
 
-                    if KittyX.location == bg_current and KittyX not in staying_Girls:
+                    if KittyX.location == Player.location and KittyX not in staying_Girls:
                         if staying_Girls:
                             ch_k "Well, [KittyX.like]I don't need to see that."
                             ch_k "See you later, [KittyX.player_petname]."
                         else:
                             ch_k "[KittyX.Like]I don't need to see that."
 
-                    if EmmaX.location == bg_current and EmmaX not in staying_Girls:
+                    if EmmaX.location == Player.location and EmmaX not in staying_Girls:
                         if staying_Girls:
                             ch_e "You appear to have enough of an audience."
                             ch_e "I'll be going, [EmmaX.player_petname]."
                         else:
                             ch_e "I think I'll be fine, [EmmaX.player_petname], I'll be going."
 
-                    if LauraX.location == bg_current and LauraX not in staying_Girls:
+                    if LauraX.location == Player.location and LauraX not in staying_Girls:
                         if staying_Girls:
                             ch_l "She's got you covered."
                             ch_l "I'm out, [LauraX.player_petname]."
                         else:
                             ch_l "I'm out."
 
-                    if JeanX.location == bg_current and JeanX not in staying_Girls:
+                    if JeanX.location == Player.location and JeanX not in staying_Girls:
                         if staying_Girls:
                             ch_j "Well, looks like you guys are going to have fun."
                             ch_j "I'll head out, [JeanX.player_petname]."
                         else:
                             ch_j "I'll head out."
 
-                    if StormX.location == bg_current and StormX not in staying_Girls:
+                    if StormX.location == Player.location and StormX not in staying_Girls:
                         if staying_Girls:
                             ch_s "Oh, I think someone else wants the show."
                             ch_s "I'll be going, [StormX.player_petname]."
                         else:
                             ch_s "I don't see why I would, [StormX.player_petname]. I'll be going."
 
-                    if JubesX.location == bg_current and JubesX not in staying_Girls:
+                    if JubesX.location == Player.location and JubesX not in staying_Girls:
                         if staying_Girls:
                             ch_v "Um, no thanks. . ."
                             ch_v "See you later, [JubesX.player_petname]."
@@ -371,21 +371,21 @@ label showering:
                         elif staying_Girls[0] == JubesX:
                             ch_v "Well. . . I guess we should make up for that. . ."
 
-                    if RogueX.location == bg_current and RogueX not in staying_Girls:
+                    if RogueX.location == Player.location and RogueX not in staying_Girls:
                         if staying_Girls:
                             ch_r "Really? Well not me."
                             ch_r "Have fun, [RogueX.player_petname]."
                         else:
                             ch_r "Keep dreaming, [RogueX.player_petname]."
 
-                    if KittyX.location == bg_current and KittyX not in staying_Girls:
+                    if KittyX.location == Player.location and KittyX not in staying_Girls:
                         if staying_Girls:
                             ch_k "Seriously?! Well I'm not into that."
                             ch_k "Later, [KittyX.player_petname]."
                         else:
                             ch_k "[KittyX.Like]no way!"
 
-                    if EmmaX.location == bg_current and EmmaX not in staying_Girls:
+                    if EmmaX.location == Player.location and EmmaX not in staying_Girls:
                         if staying_Girls:
                             ch_e "I wouldn't want to intrude."
                             ch_e "I'll be going."
@@ -393,21 +393,21 @@ label showering:
                             ch_e "Hmm, I doubt you could handle it."
                             ch_e "I'll be going."
 
-                    if LauraX.location == bg_current and LauraX not in staying_Girls:
+                    if LauraX.location == Player.location and LauraX not in staying_Girls:
                         if staying_Girls:
                             ch_l "She's got you covered."
                             ch_l "I'm out, [LauraX.player_petname]."
                         else:
                             ch_l "I'm out."
 
-                    if JeanX.location == bg_current and JeanX not in staying_Girls:
+                    if JeanX.location == Player.location and JeanX not in staying_Girls:
                         if staying_Girls:
                             ch_j "Well, looks like you guys are going to have fun."
                             ch_j "I'll head out, [JeanX.player_petname]."
                         else:
                             ch_j "I'll head out."
 
-                    if StormX.location == bg_current and StormX not in staying_Girls:
+                    if StormX.location == Player.location and StormX not in staying_Girls:
                         if staying_Girls:
                             ch_s "Well, you two enjoy yourselves."
                             ch_s "I'll be going."
@@ -415,7 +415,7 @@ label showering:
                             ch_s "I'm flattered, but no."
                             ch_s "I'll be going."
 
-                    if JubesX.location == bg_current and JubesX not in staying_Girls:
+                    if JubesX.location == Player.location and JubesX not in staying_Girls:
                         if staying_Girls:
                             ch_v "Ok, looks like you two can have fun with that."
                             ch_v "Later, [JubesX.player_petname]."
@@ -450,7 +450,7 @@ label showering:
         $ temp_Girls = showering_Girls[:]
 
         while temp_Girls:
-            if temp_Girls[0].location == bg_current:
+            if temp_Girls[0].location == Player.location:
                 if temp_Girls[0] in staying_Girls:
                     $ temp_Girls[0].change_outfit("nude")
                     $ temp_Girls[0].wet = True
@@ -489,15 +489,15 @@ label showering:
         if len(Nearby) >= 2:
             "As you finish getting undressed, [Nearby[0].name] and [Nearby[1].name] enter the room."
 
-            $ Nearby[1].location = bg_current
+            $ Nearby[1].location = Player.location
         else:
             "As you finish getting undressed, [Nearby[0].name] enters the room."
 
-        $ Nearby[0].location = bg_current
+        $ Nearby[0].location = Player.location
 
         $ intruding_Girls = Nearby[:]
 
-        call set_the_scene(check_if_dressed = False)
+        call set_the_scene
         call Seen_First_Peen (0, 0, 1, 1)
 
         if RogueX in intruding_Girls:
@@ -740,24 +740,24 @@ label showering:
     if "scent" in Player.daily_history:
         $ Player.daily_history.remove("scent")
 
-    call Get_Dressed
+    call get_dressed
 
-    if RogueX.location == bg_current:
+    if RogueX.location == Player.location:
         $ RogueX.change_outfit("shower")
 
-    if KittyX.location == bg_current:
+    if KittyX.location == Player.location:
         $ KittyX.change_outfit("shower")
 
-    if EmmaX.location == bg_current:
+    if EmmaX.location == Player.location:
         $ EmmaX.change_outfit("shower")
 
-    if LauraX.location == bg_current:
+    if LauraX.location == Player.location:
         $ LauraX.change_outfit("shower")
 
-    if JeanX.location == bg_current:
+    if JeanX.location == Player.location:
         $ JeanX.change_outfit("shower")
 
-    if JubesX.location == bg_current:
+    if JubesX.location == Player.location:
         $ JubesX.change_outfit("shower")
 
     return
@@ -822,7 +822,7 @@ label Shower_Sex(Options=0, line=0):
                 pass
             "Stop her." if len(staying_Girls) < 2:
                 $ line = 0
-                call reset_position(staying_Girls[0])
+                call show_full_body(staying_Girls[0])
                 "You take a step back, pulling away from her."
                 $ staying_Girls[0].change_stat("love", 80, -1)
                 $ staying_Girls[0].change_stat("obedience", 80, 5)
@@ -831,8 +831,8 @@ label Shower_Sex(Options=0, line=0):
                 "She seems a bit disappointed."
             "Stop them." if len(staying_Girls) > 1:
                 $ line = 0
-                call reset_position(staying_Girls[0])
-                call reset_position(staying_Girls[1])
+                call show_full_body(staying_Girls[0])
+                call show_full_body(staying_Girls[1])
                 "You take a step back, pulling away from them."
                 $ staying_Girls[0].change_stat("love", 80, -1)
                 $ staying_Girls[0].change_stat("obedience", 80, 5)
@@ -1040,7 +1040,7 @@ label Shower_Sex(Options=0, line=0):
                 pass
             "Stop her." if len(staying_Girls) < 2:
                 $ line = 0
-                call reset_position(staying_Girls[0])
+                call show_full_body(staying_Girls[0])
                 "You take a step back, pulling away from her."
                 $ staying_Girls[0].change_stat("love", 80, -2)
                 $ staying_Girls[0].change_stat("obedience", 80, 5)
@@ -1049,8 +1049,8 @@ label Shower_Sex(Options=0, line=0):
                 "She seems a bit disappointed."
             "Stop them." if len(staying_Girls) > 1:
                 $ line = 0
-                call reset_position(staying_Girls[0])
-                call reset_position(staying_Girls[1])
+                call show_full_body(staying_Girls[0])
+                call show_full_body(staying_Girls[1])
                 "You take a step back, pulling away from them."
                 $ staying_Girls[0].change_face("_sad")
                 $ staying_Girls[0].change_stat("love", 80, -2)
@@ -1090,11 +1090,11 @@ label Shower_Sex(Options=0, line=0):
                 call Girl_Cumming (staying_Girls[0], 1)
             if len(staying_Girls) > 1:
                 "The girls take a step back."
-                call reset_position(staying_Girls[1])
+                call show_full_body(staying_Girls[1])
             else:
                 "[staying_Girls[0].name] takes a step back."
 
-            call reset_position(staying_Girls[0])
+            call show_full_body(staying_Girls[0])
 
         elif 4 <= Options[0] <= 5 and D20 >= 10:
 
@@ -1118,10 +1118,10 @@ label Shower_Sex(Options=0, line=0):
                         staying_Girls[0].spunk[key] = False
             if len(staying_Girls) > 1:
                 "The girls take a step back."
-                call reset_position(staying_Girls[1])
+                call show_full_body(staying_Girls[1])
             else:
                 "[staying_Girls[0].name] takes a step back."
-            call reset_position(staying_Girls[0])
+            call show_full_body(staying_Girls[0])
 
         elif 6 <= Options[0] <= 7 and D20 >= 15:
 
@@ -1138,15 +1138,15 @@ label Shower_Sex(Options=0, line=0):
             if len(staying_Girls) > 1:
                 $ staying_Girls[1].check_if_likes(staying_Girls[0],900,3, 1)
                 "The girls take a step back."
-                call reset_position(staying_Girls[1])
+                call show_full_body(staying_Girls[1])
             else:
                 "[staying_Girls[0].name] takes a step back."
-            call reset_position(staying_Girls[0])
+            call show_full_body(staying_Girls[0])
         else:
 
             if len(staying_Girls) > 1:
-                call reset_position(staying_Girls[1])
-            call reset_position(staying_Girls[0])
+                call show_full_body(staying_Girls[1])
+            call show_full_body(staying_Girls[0])
             $ Player.change_stat("focus", 50, 15)
             $ Player.change_stat("focus", 80, 5)
             if D20 >= 15:
@@ -1161,20 +1161,4 @@ label Shower_Sex(Options=0, line=0):
                 if 4 <= Options[0] <= 5:
                     "You're left pretty hard."
     call shift_focus (staying_Girls[0])
-    return
-
-
-label change_out_of_towels:
-    $ temp_Girls = all_Girls[:]
-
-    while temp_Girls:
-        if temp_Girls[0].location == "bg_showerroom":
-            $ temp_Girls[0].add_word(1, "showered", "showered")
-
-        if "met" in temp_Girls[0].history and temp_Girls[0] not in Party:
-            $ temp_Girls[0].location = temp_Girls[0].weekly_schedule[weekday][time_index]
-
-        $ temp_Girls[0].change_outfit(temp_Girls[0].today_outfit_name)
-        $ temp_Girls.remove(temp_Girls[0])
-
     return

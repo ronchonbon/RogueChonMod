@@ -6,13 +6,13 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
     $ counter = 0
     $ QuizOrder = [1,2,3,4,5,6,7,8,9, 10, 11, 12, 13, 14, 15]
     $ renpy.random.shuffle(QuizOrder)
-    if EmmaX in Party and Party[0] != EmmaX:
+    if EmmaX in Player.Party and Player.Party[0] != EmmaX:
 
-        $ Party.reverse()
-        call shift_focus (Party[0])
+        $ Player.Party.reverse()
+        call shift_focus (Player.Party[0])
 
 
-    if Party[0] == RogueX:
+    if Player.Party[0] == RogueX:
         if not RogueX.outfit["top"] and not RogueX.outfit["bottom"] and RogueX.underwear_number <= 5:
 
             $ RogueX.change_face("_sly")
@@ -26,7 +26,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
         "[RogueX.name] moves a bit closer to you, and then suggests \"strip studying.\""
         ch_r "Alright, [RogueX.player_petname], I'll make this simple. I'll ask you a quiz question, get it right, I take something off. . ."
         ch_r "Get three wrong, and we're done for the night. Good luck."
-    elif Party[0] == KittyX:
+    elif Player.Party[0] == KittyX:
         "[KittyX.name] takes the book from your hand, and sets it aside."
         if not KittyX.outfit["top"] and not KittyX.outfit["bottom"]:
 
@@ -44,7 +44,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
         ch_k "Ok, so[KittyX.like]if you get a question right. . . I'll take off a piece of clothing. . ."
         ch_k "But you only get three tries."
         $ KittyX.change_face("_sly", 1)
-    elif Party[0] == EmmaX:
+    elif Player.Party[0] == EmmaX:
         call Emma_StripStudy_Intro
         if not _return:
 
@@ -56,7 +56,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
         $ EmmaX.change_face("_sly")
         ch_e "I'll take off a piece of clothing. . ."
         ch_e "But you only get three tries."
-    elif Party[0] == LauraX:
+    elif Player.Party[0] == LauraX:
 
         $ LauraX.change_face("_sly", 1)
         "[LauraX.name] takes the book from your hand, and sets it aside."
@@ -97,7 +97,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
                     $ LauraX.change_face("_angry", 1)
                 ch_l "Huh. Ok. Be that way."
         return
-    elif Party[0] == JeanX:
+    elif Player.Party[0] == JeanX:
 
         "[JeanX.name] takes the book from your hand, and sets it aside."
         ch_j "This is -boring!-"
@@ -139,7 +139,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
                 ch_j "Huh. Ok. Fine."
                 "It was not fine. . ."
         return
-    elif Party[0] == StormX:
+    elif Player.Party[0] == StormX:
         ch_s "I suppose that you may need some encouragment. . ."
         $ StormX.change_face("_bemused", eyes = "_side")
         ch_s "If you do get a question right. . . "
@@ -147,7 +147,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
         $ StormX.change_face("_sly")
         ch_s "I could remove an article of clothing. . ."
         ch_s "You get three mistakes, make them count."
-    elif Party[0] == JubesX:
+    elif Player.Party[0] == JubesX:
         "[JubesX.name] takes the book from your hand, and sets it aside."
         if not JubesX.outfit["top"] and not JubesX.outfit["bottom"]:
 
@@ -169,56 +169,56 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
         $ JubesX.change_face("_sly", 1)
 
 
-    $ temp_Girls = Party[:]
+    $ temp_Girls = Player.Party[:]
     while temp_Girls:
         $ temp_Girls[0].add_word(1, 0,"stripstudy", 0,"stripstudy")
         $ temp_Girls.remove(temp_Girls[0])
 
-    if len(Party) >= 2:
+    if len(Player.Party) >= 2:
         if counter == 3:
 
             pass
-        elif approval_check(Party[1], 1300) or approval_check(Party[1], 500,"I"):
-            if Party[1] == RogueX:
+        elif approval_check(Player.Party[1], 1300) or approval_check(Player.Party[1], 500,"I"):
+            if Player.Party[1] == RogueX:
                 ch_r "I guess we'll take turns."
-            elif Party[1] == KittyX:
+            elif Player.Party[1] == KittyX:
                 ch_k "So[KittyX.like]I guess we take turns?"
-            elif Party[1] == EmmaX:
+            elif Player.Party[1] == EmmaX:
                 "Let Oni know that Emma was in second please."
-            elif Party[1] == LauraX:
+            elif Player.Party[1] == LauraX:
                 ch_l "I will also take a turn."
-            elif Party[1] == JeanX:
+            elif Player.Party[1] == JeanX:
                 ch_j "Sure, ok, give me a shot."
-            elif Party[1] == StormX:
+            elif Player.Party[1] == StormX:
                 ch_s "I suppose I could join in as well. . ."
-            elif Party[1] == JubesX:
+            elif Player.Party[1] == JubesX:
                 ch_v "So we take turns, right?"
         else:
 
-            if Party[1] == JeanX:
+            if Player.Party[1] == JeanX:
                 ch_j "Nah, seems lame."
                 "She just sits back and watches."
-                $ Party.remove(JeanX)
+                $ Player.Party.remove(JeanX)
             else:
-                if Party[1] == RogueX:
+                if Player.Party[1] == RogueX:
                     ch_r "I'm not comfortable with this."
-                elif Party[1] == KittyX:
+                elif Player.Party[1] == KittyX:
                     ch_k "Um, I'm not really into this?"
-                elif Party[1] == EmmaX:
+                elif Player.Party[1] == EmmaX:
                     "Let Oni know that Emma was in second please."
-                elif Party[1] == LauraX:
+                elif Player.Party[1] == LauraX:
                     ch_l "I don't think so."
-                elif Party[1] == StormX:
+                elif Player.Party[1] == StormX:
                     ch_s "I do not want to take part. . ."
-                elif Party[1] == JubesX:
+                elif Player.Party[1] == JubesX:
                     ch_v "Sorry, guys, this is -your- party. . ."
-                "[Party[1].name] leaves the room"
-                call remove_Girl (Party[1])
+                "[Player.Party[1].name] leaves the room"
+                call remove_Girl(Player.Party[1])
 
 
     while between_event_count:
 
-        call expression Party[0].tag + "_Quiz_Question"
+        call expression Player.Party[0].tag + "_Quiz_Question"
 
         $ between_event_count += 1
 
@@ -227,19 +227,19 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
         else:
             $ Count += 1
             call Strip_Study_Wrong
-            if between_event_count == 0 and len(Party) >= 2 and not Party[1].check_clothing:
+            if between_event_count == 0 and len(Player.Party) >= 2 and not Player.Party[1].check_clothing:
 
                 menu:
-                    "Well, [Party[1].name], you and I could still have some fun. . .":
+                    "Well, [Player.Party[1].name], you and I could still have some fun. . .":
                         $ approval_bonus = 50
-                        call enter_main_sex_menu(Party[0])
+                        call enter_main_sex_menu(Player.Party[0])
                     "Bummer":
                         pass
 
-        if len(Party) >= 2 and counter != 3 and Party[1].check_clothing:
+        if len(Player.Party) >= 2 and counter != 3 and Player.Party[1].check_clothing:
 
-            $ Party.reverse()
-            call shift_focus (Party[0])
+            $ Player.Party.reverse()
+            call shift_focus (Player.Party[0])
 
 
     return
@@ -250,177 +250,177 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
 
 
 label Strip_Study_Right:
-    if Party[0].outfit["hose"]:
+    if Player.Party[0].outfit["hose"]:
 
-        $ line = Party[0].outfit["hose"]
-        $ Party[0].outfit["hose"] = ""
+        $ line = Player.Party[0].outfit["hose"]
+        $ Player.Party[0].outfit["hose"] = ""
         "She slowly removes her [line]. . ."
-        $ Party[0].change_stat("lust", 50, 3)
+        $ Player.Party[0].change_stat("lust", 50, 3)
         return
 
-    if Party[0].outfit["top"]:
+    if Player.Party[0].outfit["top"]:
 
-        if Party[0] == StormX or Party[0].seen_breasts or (Party[0].outfit["bra"] and approval_check(Party[0], 300)) or approval_check(Party[0], 850):
-            $ Party[0].change_stat("inhibition", 25, 1)
-            $ Party[0].change_stat("inhibition", 50, 1)
-            $ line = Party[0].outfit["top"]
-            $ Party[0].outfit["top"] = ""
+        if Player.Party[0] == StormX or Player.Party[0].seen_breasts or (Player.Party[0].outfit["bra"] and approval_check(Player.Party[0], 300)) or approval_check(Player.Party[0], 850):
+            $ Player.Party[0].change_stat("inhibition", 25, 1)
+            $ Player.Party[0].change_stat("inhibition", 50, 1)
+            $ line = Player.Party[0].outfit["top"]
+            $ Player.Party[0].outfit["top"] = ""
             "She pulls her [line] off and throws it aside."
-            if not Party[0].outfit["bra"]:
-                call expression Party[0].tag + "_First_Topless"
+            if not Player.Party[0].outfit["bra"]:
+                call expression Player.Party[0].tag + "_First_Topless"
         else:
-            if Party[0] == RogueX:
-                ch_r "You know, I don't really think I'm ready for this, sorry [Party[0].player_petname]. I shouldn't have led you on."
-            elif Party[0] == KittyX:
+            if Player.Party[0] == RogueX:
+                ch_r "You know, I don't really think I'm ready for this, sorry [Player.Party[0].player_petname]. I shouldn't have led you on."
+            elif Player.Party[0] == KittyX:
                 ch_k "Sorry,I don't mean to be a tease, but I just can't handle this yet."
-            elif Party[0] == EmmaX:
+            elif Player.Party[0] == EmmaX:
                 ch_e "Sorry, I don't mean to be a tease, but I doubt you can handle this yet."
-            elif Party[0] == LauraX:
+            elif Player.Party[0] == LauraX:
                 $ LauraX.change_face("_sly", 2)
                 ch_l "Heh, got you going, right?."
                 $ LauraX.change_face("_bemused", 1)
-            elif Party[0] == JeanX:
+            elif Player.Party[0] == JeanX:
                 ch_j "Kidding."
 
 
-            elif Party[0] == JubesX:
+            elif Player.Party[0] == JubesX:
                 ch_v "I'm, uh. . . I'm kinda done for now. . ."
             $ between_event_count = 0
         return
 
-    if Party[0].outfit["bottom"]:
+    if Player.Party[0].outfit["bottom"]:
 
-        if Party[0] == StormX or (Party[0].seen_underwear and Party[0].seen_pussy) or (Party[0].outfit["underwear"] and (approval_check(Party[0], 700) or Party[0].seen_underwear)) or approval_check(Party[0], 950):
-            $ Party[0].change_stat("lust", 50, 5)
-            $ Party[0].change_stat("inhibition", 30, 1)
-            $ Party[0].change_stat("inhibition", 50, 1)
-            $ line = Party[0].outfit["bottom"]
-            $ Party[0].outfit["bottom"] = ""
+        if Player.Party[0] == StormX or (Player.Party[0].seen_underwear and Player.Party[0].seen_pussy) or (Player.Party[0].outfit["underwear"] and (approval_check(Player.Party[0], 700) or Player.Party[0].seen_underwear)) or approval_check(Player.Party[0], 950):
+            $ Player.Party[0].change_stat("lust", 50, 5)
+            $ Player.Party[0].change_stat("inhibition", 30, 1)
+            $ Player.Party[0].change_stat("inhibition", 50, 1)
+            $ line = Player.Party[0].outfit["bottom"]
+            $ Player.Party[0].outfit["bottom"] = ""
             "She unfastens her [line] and slides them down her legs."
-            if Party[0].outfit["underwear"]:
-                if not Party[0].seen_underwear:
-                    $ Party[0].change_stat("inhibition", 200, 2)
-                    $ Party[0].change_stat("inhibition", 50, 3)
-                    $ Party[0].seen_underwear = 1
+            if Player.Party[0].outfit["underwear"]:
+                if not Player.Party[0].seen_underwear:
+                    $ Player.Party[0].change_stat("inhibition", 200, 2)
+                    $ Player.Party[0].change_stat("inhibition", 50, 3)
+                    $ Player.Party[0].seen_underwear = 1
             else:
 
-                $ Party[0].blushing = "_blush1"
+                $ Player.Party[0].blushing = "_blush1"
                 "You notice that she apparently isn't wearing any panties, and she flushes a bit."
-                call expression Party[0].tag + "_First_Bottomless"
+                call expression Player.Party[0].tag + "_First_Bottomless"
         else:
-            if Party[0] == RogueX:
-                ch_r "You know, I don't really think I'm ready for this, sorry [Party[0].player_petname]. I shouldn't have led you on."
-            elif Party[0] == KittyX:
+            if Player.Party[0] == RogueX:
+                ch_r "You know, I don't really think I'm ready for this, sorry [Player.Party[0].player_petname]. I shouldn't have led you on."
+            elif Player.Party[0] == KittyX:
                 ch_k "Sorry,I don't mean to be a tease, but I just can't handle this yet."
-            elif Party[0] == EmmaX:
+            elif Player.Party[0] == EmmaX:
                 ch_e "Sorry, I don't mean to be a tease, but I doubt you can handle this yet."
-            elif Party[0] == LauraX:
+            elif Player.Party[0] == LauraX:
                 ch_l "Nah, that's all for now."
-            elif Party[0] == JeanX:
+            elif Player.Party[0] == JeanX:
                 ch_j "Kidding."
-            elif Party[0] == JubesX:
+            elif Player.Party[0] == JubesX:
                 ch_v "Yeah, sorry, I don't think I wanna go further than this. . ."
             $ between_event_count = 0
         return
 
-    if Party[0].outfit["bra"]:
-        if Party[0] == StormX or approval_check(Party[0], 900) or (Party[0].seen_breasts and approval_check(Party[0], 600)):
-            $ Party[0].change_stat("lust", 60, 5)
-            $ Party[0].change_stat("inhibition", 50, 2)
-            $ Party[0].change_stat("inhibition", 200, 1)
-            $ line = Party[0].outfit["bra"]
-            $ Party[0].outfit["bra"] = ""
+    if Player.Party[0].outfit["bra"]:
+        if Player.Party[0] == StormX or approval_check(Player.Party[0], 900) or (Player.Party[0].seen_breasts and approval_check(Player.Party[0], 600)):
+            $ Player.Party[0].change_stat("lust", 60, 5)
+            $ Player.Party[0].change_stat("inhibition", 50, 2)
+            $ Player.Party[0].change_stat("inhibition", 200, 1)
+            $ line = Player.Party[0].outfit["bra"]
+            $ Player.Party[0].outfit["bra"] = ""
             "She pulls her [line] over her head and tosses it aside."
-            if not Party[0].seen_breasts:
-                $ Party[0].change_stat("inhibition", 200, 3)
-                $ Party[0].change_stat("inhibition", 50, 1)
-                call expression Party[0].tag + "_First_Topless"
+            if not Player.Party[0].seen_breasts:
+                $ Player.Party[0].change_stat("inhibition", 200, 3)
+                $ Player.Party[0].change_stat("inhibition", 50, 1)
+                call expression Player.Party[0].tag + "_First_Topless"
             $ Player.change_stat("focus", 80, 15)
         else:
-            if Party[0] == RogueX:
-                ch_r "I know a deal's a deal, but I'd like to keep my top on, ok [Party[0].player_petname]? Sorry about that."
-            elif Party[0] == KittyX:
+            if Player.Party[0] == RogueX:
+                ch_r "I know a deal's a deal, but I'd like to keep my top on, ok [Player.Party[0].player_petname]? Sorry about that."
+            elif Player.Party[0] == KittyX:
                 ch_k "So. . . I know this is a bit late to mention it, but I'd like to keep my top on?"
-            elif Party[0] == EmmaX:
+            elif Player.Party[0] == EmmaX:
                 $ EmmaX.change_face("_perplexed", 1)
                 ch_e "Hmm. . . better than I thought."
                 $ EmmaX.change_face("_sly", 1)
                 ch_e "But I doubt you're ready for this yet."
-            elif Party[0] == LauraX:
+            elif Player.Party[0] == LauraX:
                 ch_l "Yeah, that's enough for now."
-            elif Party[0] == JeanX:
+            elif Player.Party[0] == JeanX:
                 ch_j "Kidding."
-            elif Party[0] == JubesX:
+            elif Player.Party[0] == JubesX:
                 ch_v "Yeah, sorry, I don't think I wanna go further than this. . ."
             $ between_event_count = 0
         return
 
-    if Party[0].outfit["underwear"]:
-        if Party[0] == StormX or approval_check(Party[0], 950) or (Party[0].seen_pussy and approval_check(Party[0], 600)):
-            $ Party[0].change_stat("lust", 70, 10)
-            $ Party[0].change_stat("inhibition", 70, 2)
-            $ Party[0].change_stat("inhibition", 200, 2)
-            $ line = Party[0].outfit["underwear"]
-            $ Party[0].outfit["underwear"] = ""
+    if Player.Party[0].outfit["underwear"]:
+        if Player.Party[0] == StormX or approval_check(Player.Party[0], 950) or (Player.Party[0].seen_pussy and approval_check(Player.Party[0], 600)):
+            $ Player.Party[0].change_stat("lust", 70, 10)
+            $ Player.Party[0].change_stat("inhibition", 70, 2)
+            $ Player.Party[0].change_stat("inhibition", 200, 2)
+            $ line = Player.Party[0].outfit["underwear"]
+            $ Player.Party[0].outfit["underwear"] = ""
             "She slides her [line] off, leaving her pussy bare."
-            if not Party[0].seen_pussy:
-                $ Party[0].change_stat("inhibition", 50, 4)
-                $ Party[0].change_stat("inhibition", 200, 4)
-                call expression Party[0].tag + "_First_Bottomless"
+            if not Player.Party[0].seen_pussy:
+                $ Player.Party[0].change_stat("inhibition", 50, 4)
+                $ Player.Party[0].change_stat("inhibition", 200, 4)
+                call expression Player.Party[0].tag + "_First_Bottomless"
             $ Player.change_stat("focus", 75, 20)
         else:
-            if Party[0] == RogueX:
-                ch_r "Look, this has gone a bit far, [Party[0].player_petname]. I'd like to call it a night."
-            elif Party[0] == KittyX:
+            if Player.Party[0] == RogueX:
+                ch_r "Look, this has gone a bit far, [Player.Party[0].player_petname]. I'd like to call it a night."
+            elif Player.Party[0] == KittyX:
                 ch_k "Wow, I. . . I'm not really ready for this sort of thing, I'm sorry!"
-            elif Party[0] == EmmaX:
+            elif Player.Party[0] == EmmaX:
                 $ EmmaX.change_face("_perplexed", 1)
                 ch_e "Hmm. . . better than I thought."
                 $ EmmaX.change_face("_sly", 1)
                 ch_e "But I doubt you're ready for this yet."
-            elif Party[0] == LauraX:
+            elif Player.Party[0] == LauraX:
                 $ LauraX.change_face("_perplexed", 2)
                 ch_l "I think you've had enough."
                 $ LauraX.change_face("_perplexed", 1)
-            elif Party[0] == JeanX:
+            elif Player.Party[0] == JeanX:
                 ch_j "Kidding."
-            elif Party[0] == JubesX:
+            elif Player.Party[0] == JubesX:
                 ch_v "Yeah, sorry, I don't think I wanna go further than this. . ."
             $ between_event_count = 0
         return
 
-    if Party[0] == RogueX:
+    if Player.Party[0] == RogueX:
         $ KittyX.change_face("_sly", 1)
         ch_r "Well, that's another right answer, but I don't have a stitch left to take off. . ."
-    elif Party[0] == KittyX:
+    elif Player.Party[0] == KittyX:
         ch_k "So. . . you got that one right. . ."
         $ KittyX.eyes = "_down"
         ch_k ". . . but I'm not[KittyX.like]wearing anything else. . ."
         $ KittyX.change_face("_sly", 1)
-    elif Party[0] == EmmaX:
+    elif Player.Party[0] == EmmaX:
         $ EmmaX.change_face("_sly", 1)
         ch_e "Hmm. . . another correct answer. . ."
         $ EmmaX.eyes = "_down"
         ch_e ". . . but I don't have anything else to remove. . ."
         $ EmmaX.change_face("_sly", 1)
-    elif Party[0] == LauraX:
+    elif Player.Party[0] == LauraX:
         $ LauraX.change_face("_sly", 1)
         ch_l "So. . . you got that one right. . ."
         $ LauraX.eyes = "_down"
         ch_l ". . . but it looks like I'm out of clothes. . ."
         $ LauraX.change_face("_sly", 1)
-    elif Party[0] == JeanX:
+    elif Player.Party[0] == JeanX:
         $ JeanX.change_face("_sly", 1, eyes = "_down")
         ch_j "Well, looks like you got all of them."
         $ JeanX.change_face("_sly", 1)
         ch_j "What're you planning to do to me now? . . "
-    elif Party[0] == StormX:
+    elif Player.Party[0] == StormX:
         $ StormX.change_face("_sly", 1)
         ch_s "Hmm. . . you answer correctly. . ."
         $ StormX.eyes = "_down"
         ch_s ". . . but as you can see, I am already naked. . ."
         $ StormX.change_face("_sly", 1)
-    elif Party[0] == JubesX:
+    elif Player.Party[0] == JubesX:
         ch_v "Well, what have we here. . ."
         $ JubesX.change_face("_sly", 1, eyes = "_down")
         ch_v "I seem to have run out of \"tokens.\" . ."
@@ -428,29 +428,29 @@ label Strip_Study_Right:
         ch_v "And ideas what we could do next?"
 
 
-    if len(Party) >= 2:
+    if len(Player.Party) >= 2:
         menu:
             "Well I could think of something else you could do. . .":
                 pass
-            "It looks like [Party[1].name] has some questions for me. . ." if Party[1].check_clothing:
+            "It looks like [Player.Party[1].name] has some questions for me. . ." if Player.Party[1].check_clothing:
 
                 return
     $ between_event_count = 0
     $ approval_bonus = 50
-    call enter_main_sex_menu(Party[0])
-    if Party[0] == RogueX:
+    call enter_main_sex_menu(Player.Party[0])
+    if Player.Party[0] == RogueX:
         ch_r "Well I sure enjoyed that."
-    elif Party[0] == KittyX:
+    elif Player.Party[0] == KittyX:
         ch_k "I think I learned a few things there. . ."
-    elif Party[0] == EmmaX:
+    elif Player.Party[0] == EmmaX:
         ch_e "I hope you picked up a few things. . ."
-    elif Party[0] == LauraX:
+    elif Player.Party[0] == LauraX:
         ch_l "Well, better than studying. . ."
-    elif Party[0] == JeanX:
+    elif Player.Party[0] == JeanX:
         ch_j "Well that killed some time."
-    elif Party[0] == StormX:
+    elif Player.Party[0] == StormX:
         ch_s "That was an entertaining diversion. . ."
-    elif Party[0] == JubesX:
+    elif Player.Party[0] == JubesX:
         ch_v "That's how I like to end an evening of studying. . ."
     $ between_event_count = 0
     return
@@ -459,51 +459,51 @@ label Strip_Study_Right:
 
 
 label Strip_Study_Wrong:
-    $ Party[0].change_face("_sly", 1)
+    $ Player.Party[0].change_face("_sly", 1)
     if Count == 1:
-        if Party[0] == RogueX:
+        if Player.Party[0] == RogueX:
             ch_r "Bzzt, too bad, [RogueX.player_petname]."
-        elif Party[0] == KittyX:
+        elif Player.Party[0] == KittyX:
             ch_k "Nope."
-        elif Party[0] == EmmaX:
+        elif Player.Party[0] == EmmaX:
             ch_e "Unfortunately. . . no."
-        elif Party[0] == LauraX:
+        elif Player.Party[0] == LauraX:
             ch_l "What?"
-        elif Party[0] == JeanX:
+        elif Player.Party[0] == JeanX:
             ch_j "Nope."
-        elif Party[0] == StormX:
+        elif Player.Party[0] == StormX:
             ch_s "Hmm. . . I am afraid not."
-        elif Party[0] == JubesX:
+        elif Player.Party[0] == JubesX:
             ch_v "Ooo, strike -one-. . ."
     elif Count == 2:
-        if Party[0] == RogueX:
+        if Player.Party[0] == RogueX:
             ch_r "Oh, you're really not good at this. Come on, you've only got one more shot."
-        elif Party[0] == KittyX:
+        elif Player.Party[0] == KittyX:
             ch_k "{i}So{/i} close. One more try."
-        elif Party[0] == EmmaX:
+        elif Player.Party[0] == EmmaX:
             ch_e "I'm afraid not, one more try."
-        elif Party[0] == LauraX:
+        elif Player.Party[0] == LauraX:
             ch_l ". . . how did you even. . ."
-        elif Party[0] == JeanX:
+        elif Player.Party[0] == JeanX:
             ch_j "Way off."
-        elif Party[0] == StormX:
+        elif Player.Party[0] == StormX:
             ch_s "Disappointing. . ."
-        elif Party[0] == JubesX:
+        elif Player.Party[0] == JubesX:
             ch_v "Ouch, strike -two-, [JubesX.player_petname]. . ."
     elif Count > 2:
-        if Party[0] == RogueX:
+        if Player.Party[0] == RogueX:
             ch_r "And you are out of here! Sorry, [RogueX.player_petname], thanks for playing, you're done."
-        elif Party[0] == KittyX:
+        elif Player.Party[0] == KittyX:
             ch_k "Aw, too bad, so sad. Maybe next time."
-        elif Party[0] == EmmaX:
+        elif Player.Party[0] == EmmaX:
             ch_e "Pity, I expected better of you."
-        elif Party[0] == LauraX:
+        elif Player.Party[0] == LauraX:
             ch_l "What? Fuck this."
-        elif Party[0] == JeanX:
+        elif Player.Party[0] == JeanX:
             ch_j "Have you evne been paying attention to your lectures?"
-        elif Party[0] == StormX:
+        elif Player.Party[0] == StormX:
             ch_s "Oh, that is unfortunate. No. . ."
-        elif Party[0] == JubesX:
+        elif Player.Party[0] == JubesX:
             ch_v "Oh -no!- That's strike -three!-"
             ch_v "The crowd does -not- like -that- one. . ."
         $ between_event_count = 0
@@ -1153,8 +1153,8 @@ label Storm_Quiz_Question:
                 $ StormX.change_face("_confused")
                 return False
             "B. Thicc?":
-                $ Party[0].change_stat("love", 80, 2)
-                $ Party[0].change_stat("inhibition", 80, 2)
+                $ Player.Party[0].change_stat("love", 80, 2)
+                $ Player.Party[0].change_stat("inhibition", 80, 2)
                 return True
             "C. Hot?":
                 return True
@@ -1322,9 +1322,9 @@ label Jubes_Quiz_Question:
 
 
 label Emma_StripStudy_Intro:
-    if Party[0] != EmmaX:
-        $ Party.reverse()
-    call shift_focus (Party[0])
+    if Player.Party[0] != EmmaX:
+        $ Player.Party.reverse()
+    call shift_focus (Player.Party[0])
     if not EmmaX.outfit["top"] and not EmmaX.outfit["bottom"]:
 
         $ EmmaX.change_face("_sly")
@@ -1488,9 +1488,9 @@ label Emma_StripStudy_Intro:
 
         if line == "striptease":
             $ EmmaX.change_face("_sly", 0)
-            if len(Party) >= 2:
-                ch_e "And you, [Party[1].name]? Care to participate?"
-                call check_if_second_minds (EmmaX, Party[1])
+            if len(Player.Party) >= 2:
+                ch_e "And you, [Player.Party[1].name]? Care to participate?"
+                call check_if_second_minds (EmmaX, Player.Party[1])
                 if _return == 4:
 
                     ch_e "Well I suppose we can. . . postone that."
@@ -1503,12 +1503,12 @@ label Emma_StripStudy_Intro:
 
                     ch_e "I suppose you can just watch then. . ."
                     $ counter = 3
-                elif _return == 1 and len(Party) >= 2:
-                    if Party[1] == RogueX:
+                elif _return == 1 and len(Player.Party) >= 2:
+                    if Player.Party[1] == RogueX:
                         ch_r "I guess I could join in."
-                    elif Party[1] == KittyX:
+                    elif Player.Party[1] == KittyX:
                         ch_k "It could be fun. . ."
-                    elif Party[1] == LauraX:
+                    elif Player.Party[1] == LauraX:
                         ch_l "Yeah, ok. . ."
             return True
         else:

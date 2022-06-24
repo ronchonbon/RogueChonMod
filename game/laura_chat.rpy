@@ -908,17 +908,17 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
         $ Options = [O]
     else:
 
-        if LauraX not in Phonebook:
+        if LauraX not in Player.Phonebook:
             if approval_check(LauraX, 500, "L") or approval_check(LauraX, 250, "I"):
                 ch_l "Oh, here's my number, in case you need back-up."
-                $ Phonebook.append(LauraX)
+                $ Player.Phonebook.append(LauraX)
                 return
             elif approval_check(LauraX, 250, "O"):
                 ch_l "If you need to contact me, here's my number."
-                $ Phonebook.append(LauraX)
+                $ Player.Phonebook.append(LauraX)
                 return
 
-        if "hungry" not in LauraX.traits and (LauraX.event_counter["swallowed"] + LauraX.had_chat[2]) >= 10 and LauraX.location == bg_current:
+        if "hungry" not in LauraX.traits and (LauraX.event_counter["swallowed"] + LauraX.had_chat[2]) >= 10 and LauraX.location == Player.location:
             call Laura_Hungry
             return
 
@@ -926,8 +926,8 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
             call Laura_Foul
             return
 
-        if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(LauraX, 800, "I")):
-            if LauraX.location == bg_current and LauraX.thirst >= 30 and "refused" not in LauraX.daily_history and "quicksex" not in LauraX.daily_history:
+        if Player.location != "bg_restaurant" and Player.location != "bg_halloween" and (not taboo or approval_check(LauraX, 800, "I")):
+            if LauraX.location == Player.location and LauraX.thirst >= 30 and "refused" not in LauraX.daily_history and "quicksex" not in LauraX.daily_history:
                 $ LauraX.change_face("_sly", 1)
                 ch_l "Hey, wanna bone?"
                 call Quick_Sex (LauraX)
@@ -949,7 +949,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
         if "Laura" not in LauraX.names:
             $ Options.append("laura")
 
-        if LauraX.went_on_date >= 1 and bg_current != "bg_restaurant":
+        if LauraX.went_on_date >= 1 and Player.location != "bg_restaurant":
 
             $ Options.append("dated")
 
@@ -1730,11 +1730,11 @@ label Laura_Summon(approval_bonus=approval_bonus):
     if D20 <= 3:
 
         $ line = "no"
-    if time_index >= 3:
+    if time_index > 2:
         if approval_check(LauraX, 500, "L") or approval_check(LauraX, 400, "O"):
 
             ch_l "You're up too? Sure, we can hang."
-            $ LauraX.location = bg_current
+            $ LauraX.location = Player.location
             call set_the_scene
         else:
 
@@ -1943,9 +1943,9 @@ label Laura_Summon(approval_bonus=approval_bonus):
         elif LauraX.location == "bg_campus":
             ch_l "Look for the biggest tree."
             jump campus
-        elif LauraX.location in personal_rooms:
+        elif LauraX.location in bedrooms:
             ch_l "Yeah, see you."
-            $ bg_current = LauraX.location
+            $ Player.location = LauraX.location
             jump reset_location
         else:
             ch_l "Um, I'll just meet you in my room."
@@ -1964,8 +1964,8 @@ label Laura_Summon(approval_bonus=approval_bonus):
     if "locked" in Player.traits:
         call locked_door (LauraX)
         return
-    $ LauraX.location = bg_current
-    call taboo_level(taboo_location = False)
+    $ LauraX.location = Player.location
+    call set_Character_taboos(taboo_location = False)
     $ LauraX.change_outfit()
     call set_the_scene
     return
@@ -1973,29 +1973,10 @@ label Laura_Summon(approval_bonus=approval_bonus):
 
 
 
-label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
-    if "leaving" in LauraX.recent_history:
-        $ LauraX.drain_word("leaving")
-    else:
-        return
+label Laura_Leave:
+    $ LauraX.change_outfit()
 
-    if LauraX.location == "hold":
-
-        ch_l "I'm taking off for a bit, later."
-        return
-
-    if LauraX in Party or "lockedtravels" in LauraX.traits:
-
-
-        $ LauraX.location = bg_current
-        return
-
-    elif "freetravels" in LauraX.traits or not approval_check(LauraX, 700):
-
-        $ LauraX.change_outfit()
-        if GirlsNum:
-            ch_l "Yeah, I'm leaving too."
-
+    if "freetravels" in LauraX.traits or not approval_check(LauraX, 700):
         if LauraX.location == "bg_classroom":
             ch_l "I've got class."
         elif LauraX.location == "bg_dangerroom":
@@ -2015,21 +1996,13 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                 ch_l "I'm headed out."
         else:
             ch_l "I'm headed out, later."
-        hide Laura_sprite
+
+        call hide_Girl(LauraX)
+
         return
 
-
-    if bg_current == "bg_dangerroom":
-        call exit_gym ([LauraX])
-
-    $ LauraX.change_outfit()
-
     if "follow" not in LauraX.traits:
-
         $ LauraX.traits.append("follow")
-
-    $ D20 = renpy.random.randint(1, 20)
-    $ line = 0
 
     if LauraX.location == "bg_classroom":
         $ approval_bonus = 10
@@ -2037,10 +2010,8 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         $ approval_bonus = 20
     elif LauraX.location == "bg_showerroom":
         $ approval_bonus = 40
-
-
-    if GirlsNum:
-        ch_l "Yeah, I'm headed out too."
+    else:
+        $ approval_bonus = 0
 
     if LauraX.location == "bg_classroom":
         ch_l "I've got class, want in?"
@@ -2057,12 +2028,14 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_l "I'm hitting the showers, you could use one too."
         else:
             ch_l "I'm hitting the showers, see you later."
+
             return
     elif LauraX.location == "bg_pool":
         ch_l "I was hitting the pool. Wanna come?"
     else:
         ch_l "Wanna join me?"
 
+    $ D20 = renpy.random.randint(1, 20)
 
     menu:
         extend ""
@@ -2138,75 +2111,77 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                     $ LauraX.change_stat("obedience", 70, -1)
                 $ line = "no"
 
-
-    call taboo_level(taboo_location = False)
     $ LauraX.recent_history.append("followed")
-    if not line:
 
-        hide Laura_sprite
-        call change_out_of_gym_clothes ([LauraX])
+    if not line:
+        call hide_Girl(LauraX)
+
         return
 
     if line == "no":
-
         if LauraX.location == "bg_classroom":
             ch_l "I really can't miss this one."
         elif LauraX.location == "bg_dangerroom":
             ch_l "Sorry [LauraX.player_petname], but I'm going a little stir crazy."
         else:
             ch_l "Sorry, I have stuff to do."
-        hide Laura_sprite
-        call change_out_of_gym_clothes ([LauraX])
+
+        call hide_Girl(LauraX)
+
         return
 
     elif line == "go to":
+        call hide_Girl(LauraX)
 
-
-        $ approval_bonus = 0
-        $ line = 0
-        call drain_all_words ("leaving")
-        call drain_all_words ("arriving")
-        $ LauraX.recent_history.append("goto")
-        $ Player.recent_history.append("goto")
-        hide Laura_sprite
-        call change_out_of_gym_clothes ([LauraX])
         if LauraX.location == "bg_classroom":
             ch_l "Ok, get a move on then."
-            jump classroom_entry
         elif LauraX.location == "bg_dangerroom":
             ch_l "I'll get warmed up."
-            jump danger_room_entry
         elif LauraX.location == "bg_laura":
             ch_l "Ok."
-            $ Girl = LauraX
-            jump girls_room
         elif LauraX.location == "bg_player":
             ch_l "Good."
-            jump player_room
         elif LauraX.location == "bg_showerroom":
             ch_l "Ok, nice."
-            jump shower_entry
         elif LauraX.location == "bg_campus":
             ch_l "Ok, nice."
-            jump campus_entry
         elif LauraX.location == "bg_pool":
             ch_l "Cool."
-            jump pool_entry
-        else:
-            ch_l "I'll just meet you in your room."
-            $ LauraX.location = "bg_player"
+
+        call hide_all
+
+        $ Player.traveling = True
+
+        $ destination = LauraX.location
+
+        if destination == "bg_player":
             jump player_room
+        elif destination == "bg_laura":
+            $ Girl = LauraX
 
-
+            jump girls_room
+        elif destination == "bg_classroom":
+            jump classroom
+        elif destination == "bg_dangerroom":
+            jump danger_room
+        elif destination == "bg_showerroom":
+            jump shower
+        elif destination == "bg_pool":
+            jump pool
+        elif destination == "bg_study":
+            jump study
+        elif destination == "bg_mall":
+            jump mall
 
     elif line == "lonely":
         ch_l "Well, I guess you should never go alone. . ."
     elif line == "command":
         ch_l "Yes [LauraX.player_petname]."
 
-    $ line = 0
     ch_l "I'll stick around."
-    $ LauraX.location = bg_current
+
+    $ LauraX.location = Player.location
+
     return
 
 
@@ -2361,7 +2336,7 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
 
                 "Add bikini_top" if LauraX.outfit["bra"] != "_bikini_top" and "_bikini_top" in LauraX.inventory:
                     ch_p "I like that bikini top."
-                    if bg_current == "bg_pool":
+                    if Player.location == "bg_pool":
                         ch_l "K."
                         $ LauraX.outfit["bra"] = "_bikini_top"
                     else:
@@ -2483,7 +2458,7 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                             $ LauraX.outfit["underwear"] = "_lace_panties"
 
                 "I like those bikini bottoms." if "_bikini_bottoms" in LauraX.inventory and LauraX.outfit["underwear"] != "_bikini_bottoms":
-                    if bg_current == "bg_pool":
+                    if Player.location == "bg_pool":
                         ch_l "K."
                         $ LauraX.outfit["underwear"] = "_bikini_bottoms"
                     else:

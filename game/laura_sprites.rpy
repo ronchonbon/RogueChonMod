@@ -119,7 +119,7 @@ layeredimage Laura_sprite standing:
         "images/Laura_standing/Laura_standing_piercings_breasts[LauraX.outfit[piercings]]_covered.png"
 
     if LauraX.outfit["jacket"] and LauraX.arm_pose == 2:
-        "images/Laura_standing/Laura_standing_sleeves[LauraX.outfit[jacket]][LauraX.arm_pose].png"
+        "images/Laura_standing/Laura_standing_jacket[LauraX.outfit[jacket]][LauraX.arm_pose]_sleeves.png"
 
     if not LauraX.outfit["suspenders"]:
         Null()

@@ -901,22 +901,22 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
         $ Options = [O]
     else:
 
-        if JubesX not in Phonebook:
+        if JubesX not in Player.Phonebook:
             if approval_check(JubesX, 500, "L") or approval_check(JubesX, 250, "I"):
                 ch_v "Oh, here's my number, call me maybe."
-                $ Phonebook.append(JubesX)
+                $ Player.Phonebook.append(JubesX)
                 return
             elif approval_check(JubesX, 250, "O"):
                 ch_v "If you need to call me, here's my number."
-                $ Phonebook.append(JubesX)
+                $ Player.Phonebook.append(JubesX)
                 return
 
-        if "hungry" not in JubesX.traits and JubesX.event_counter["swallowed"] >= 3 and JubesX.location == bg_current:
+        if "hungry" not in JubesX.traits and JubesX.event_counter["swallowed"] >= 3 and JubesX.location == Player.location:
             call Jubes_Hungry
             return
 
-        if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(JubesX, 800, "I")):
-            if JubesX.location == bg_current and JubesX.thirst >= 30 and "refused" not in JubesX.daily_history and "quicksex" not in JubesX.daily_history:
+        if Player.location != "bg_restaurant" and Player.location != "bg_halloween" and (not taboo or approval_check(JubesX, 800, "I")):
+            if JubesX.location == Player.location and JubesX.thirst >= 30 and "refused" not in JubesX.daily_history and "quicksex" not in JubesX.daily_history:
                 $ JubesX.change_face("_sly", 1)
                 ch_v "Hey, did you. . . wanna do something?"
                 call Quick_Sex (JubesX)
@@ -938,7 +938,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
         if "Jubes" not in JubesX.names:
             $ Options.append("jubes")
 
-        if JubesX.went_on_date >= 1 and bg_current != "bg_restaurant":
+        if JubesX.went_on_date >= 1 and Player.location != "bg_restaurant":
 
             $ Options.append("dated")
 
@@ -1940,9 +1940,9 @@ label Jubes_Summon(approval_bonus=approval_bonus):
         elif JubesX.location == "bg_campus":
             ch_v "I'm still in the shade a bit. . ."
             jump campus
-        elif JubesX.location in personal_rooms:
+        elif JubesX.location in bedrooms:
             ch_v "Yeah, see you."
-            $ bg_current = JubesX.location
+            $ Player.location = JubesX.location
             jump reset_location
         else:
             ch_v "Um, I'll just meet you in my room."
@@ -1956,7 +1956,7 @@ label Jubes_Summon(approval_bonus=approval_bonus):
     elif line == "command":
         ch_v "Ok, [JubesX.player_petname]."
 
-    if bg_current not in personal_rooms:
+    if Player.location not in bedrooms:
         call is_Jubes_sunshocked
         if _return:
 
@@ -1968,8 +1968,8 @@ label Jubes_Summon(approval_bonus=approval_bonus):
     if "locked" in Player.traits:
         call locked_door (JubesX)
         return
-    $ JubesX.location = bg_current
-    call taboo_level(taboo_location = False)
+    $ JubesX.location = Player.location
+    call set_Character_taboos(taboo_location = False)
     $ JubesX.change_outfit()
     call set_the_scene
     return
@@ -1977,29 +1977,10 @@ label Jubes_Summon(approval_bonus=approval_bonus):
 
 
 
-label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
-    if "leaving" in JubesX.recent_history:
-        $ JubesX.drain_word("leaving")
-    else:
-        return
+label Jubes_Leave:
+    $ JubesX.change_outfit()
 
-    if JubesX.location == "hold":
-
-        ch_v "Ok, peace out."
-        return
-
-    if JubesX in Party or "lockedtravels" in JubesX.traits:
-
-
-        $ JubesX.location = bg_current
-        return
-
-    elif "freetravels" in JubesX.traits or not approval_check(JubesX, 700):
-
-        $ JubesX.change_outfit()
-        if GirlsNum:
-            ch_v "Yeah, I'm leaving too."
-
+    if "freetravels" in JubesX.traits or not approval_check(JubesX, 700):
         if JubesX.location == "bg_classroom":
             ch_v "I've got class."
         elif JubesX.location == "bg_dangerroom":
@@ -2019,21 +2000,13 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                 ch_v "I'm headed out."
         else:
             ch_v "I'm headed out, later."
+
         call hide_Girl(JubesX)
+
         return
 
-
-    if bg_current == "bg_dangerroom":
-        call exit_gym ([JubesX])
-
-    $ JubesX.change_outfit()
-
     if "follow" not in JubesX.traits:
-
         $ JubesX.traits.append("follow")
-
-    $ D20 = renpy.random.randint(1, 20)
-    $ line = 0
 
     if JubesX.location == "bg_classroom":
         $ approval_bonus = 10
@@ -2041,6 +2014,8 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         $ approval_bonus = 20
     elif JubesX.location == "bg_showerroom":
         $ approval_bonus = 40
+    else:
+        $ approval_bonus = 0
 
 
     if GirlsNum:
@@ -2061,12 +2036,14 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_v "I'm hitting the showers, you should join me."
         else:
             ch_v "I'm hitting the showers, laters."
+
             return
     elif JubesX.location == "bg_pool":
         ch_v "I was hitting the pool. Wanna come?"
     else:
         ch_v "Wanna join me?"
 
+    $ D20 = renpy.random.randint(1, 20)
 
     menu:
         extend ""
@@ -2142,76 +2119,79 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                     $ JubesX.change_stat("obedience", 70, -1)
                 $ line = "no"
 
-
-    call taboo_level(taboo_location = False)
     $ JubesX.recent_history.append("followed")
-    if not line:
 
+    if not line:
         call hide_Girl(JubesX)
-        call change_out_of_gym_clothes ([JubesX])
+
         return
 
     if line == "no":
-
         if JubesX.location == "bg_classroom":
             ch_v "I really can't miss this one."
         elif JubesX.location == "bg_dangerroom":
             ch_v "Sorry [JubesX.player_petname], I need the exercise."
         else:
             ch_v "Sorry, I'm kinda busy."
+
         call hide_Girl(JubesX)
-        call change_out_of_gym_clothes ([JubesX])
+
         return
 
     elif line == "go to":
-
-
-        $ approval_bonus = 0
-        $ line = 0
-        call drain_all_words ("leaving")
-        call drain_all_words ("arriving")
-        $ JubesX.recent_history.append("goto")
-        $ Player.recent_history.append("goto")
         call hide_Girl(JubesX)
-        call change_out_of_gym_clothes ([JubesX])
+
         if JubesX.location == "bg_classroom":
             ch_v "Ok, get a move on then."
-            jump classroom_entry
         elif JubesX.location == "bg_dangerroom":
             ch_v "I'll get warmed up."
-            jump danger_room_entry
         elif JubesX.location == "bg_jubes":
             ch_v "Ok."
-            $ Girl = JubesX
-            jump girls_room
         elif JubesX.location == "bg_player":
             ch_v "Good."
-            jump player_room
         elif JubesX.location == "bg_showerroom":
             ch_v "Ok, nice."
-            jump shower_entry
         elif JubesX.location == "bg_campus":
             ch_v "Ok, nice."
-            jump campus_entry
         elif JubesX.location == "bg_pool":
             ch_v "Cool."
-            jump pool_entry
-        else:
-            ch_v "I'll just meet you in your room."
-            $ JubesX.location = "bg_player"
+
+        call hide_all
+
+        $ Player.traveling = True
+
+        $ destination = JubesX.location
+
+        if destination == "bg_player":
             jump player_room
+        elif destination == "bg_jubes":
+            $ Girl = JubesX
 
-
+            jump girls_room
+        elif destination == "bg_classroom":
+            jump classroom
+        elif destination == "bg_dangerroom":
+            jump danger_room
+        elif destination == "bg_showerroom":
+            jump shower
+        elif destination == "bg_pool":
+            jump pool
+        elif destination == "bg_study":
+            jump study
+        elif destination == "bg_mall":
+            jump mall
 
     elif line == "lonely":
         ch_v "Aw, well I can help with that!"
     elif line == "command":
         ch_v "Ok, [JubesX.player_petname]."
 
-    $ line = 0
     ch_v "I'll stay here."
-    $ JubesX.location = bg_current
+
+    $ JubesX.location = Player.location
+
     return
+
 
 
 
@@ -2336,7 +2316,7 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
 
                 "Add bikini_top" if JubesX.outfit["bra"] != "_bikini_top" and "_bikini_top" in JubesX.inventory:
                     ch_p "I like that bikini top."
-                    if bg_current == "bg_pool":
+                    if Player.location == "bg_pool":
                         ch_v "K."
                         $ JubesX.outfit["bra"] = "_bikini_top"
                     else:
@@ -2462,7 +2442,7 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                             $ JubesX.outfit["underwear"] = "_tiger_panties"
 
                 "I like those bikini bottoms." if "_bikini_bottoms" in JubesX.inventory and JubesX.outfit["underwear"] != "_bikini_bottoms":
-                    if bg_current == "bg_pool":
+                    if Player.location == "bg_pool":
                         ch_v "K."
                         $ JubesX.outfit["underwear"] = "_bikini_bottoms"
                     else:

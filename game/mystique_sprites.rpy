@@ -5,11 +5,11 @@ layeredimage Mystique_sprite standing normal:
     always:
         "images/Mystique_standing/Mystique_standing_body.png"
 
-    # always:
-    #     "Mystique_grool_animations"
-    #
-    # always:
-    #     "Mystique_spunk_animations"
+    always:
+        "Mystique_grool_animations"
+
+    always:
+        "Mystique_spunk_animations"
 
     if not MystiqueX.outfit["underwear"]:
         Null()

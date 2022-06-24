@@ -1,50 +1,51 @@
-
-
-label JeanMeet:
-    call shift_focus (JeanX)
-
+label meet_Jean:
     $ JeanX.name = "???"
-    $ JeanX.add_word(1,"showered","showered", 0, 0)
-    call remove_Girl ("all")
-    call Jeanname (1)
-
-
-    $ JeanX.location = "bg_showerroom"
-    $ bg_current = "bg_showerroom"
-    $ active_Girls.append(JeanX) if JeanX not in active_Girls else active_Girls
-    $ line = 0
-
-    $ JeanX.change_outfit("casual1")
-    $ JeanX.outfit_name = "casual1"
+    $ JeanX.names = []
 
     $ JeanX.outfit["bottom"] = ""
-    $ JeanX.change_face("_sly", 0)
-    call set_the_scene (0, 1, 0)
+
+    $ JeanX.change_face("_sly")
+
+    $ JeanX.add_word(1,"showered","showered", 0, 0)
+
+    call Jeanname(1)
+
+    $ Player.location = "bg_showerroom"
+
+    call add_Girl(JeanX, x_position = stage_center, transition = False)
+
     "As you approach the showers, you notice someone getting dressed."
-    call set_the_scene (1, 0, 0)
 
     ch_j "Hmm. . . I don't think I've seen you around before."
     ch_j "[JeanX.player_petname], right?"
+
     menu:
         ch_j "[JeanX.player_petname], right?"
         "No, it's [Player.name], actually.":
             call Jeanname
+
             $ JeanX.change_stat("love", 90, -2)
             $ JeanX.change_stat("obedience", 200, 2)
+
             ch_j "Right, [JeanX.player_petname], got it."
         "Yup, [JeanX.player_petname].":
             $ JeanX.change_face("_sly", mouth = "_smile")
             $ JeanX.change_stat("love", 90, 5)
+
             $ JeanX.IX -= 5
+
             ch_j "Thought you looked like a \"[JeanX.player_petname].\""
         "It's [Player.name], remember it.":
             call Jeanname
+
             $ JeanX.change_face("_confused")
             $ JeanX.change_stat("love", 90, -5)
             $ JeanX.change_stat("obedience", 200, 5)
+
             ch_j "Right, [JeanX.player_petname], I heard you!"
 
     $ JeanX.change_face("_sly")
+    $ argued = False
     menu:
         extend ""
         "No, seriously, it's [Player.name]." if Player.name != JeanX.player_petname:
@@ -121,10 +122,10 @@ label JeanMeet:
                             ch_j "Could you be too dumb to mind-take? . . "
                             $ JeanX.change_face("_confused", 1,eyes = "_psychic")
                             ch_j "No, it worked on Logan. . ."
-                            $ line = "argued"
+                            $ argued = True
 
 
-    if not line:
+    if not argued:
 
         $ JeanX.change_face("_sly")
         ch_j "Anyway, I know what you were doing here. . ."
@@ -287,7 +288,7 @@ label JeanMeet:
                 $ JeanX.change_stat("obedience", 200, 10)
             ". . .":
                 $ JeanX.change_stat("obedience", 200, 10)
-            "Of course I don't remember you flashing me":
+            "Of course I don't remember you flashing me.":
                 $ JeanX.change_face("_smile", 0)
                 $ JeanX.change_stat("love", 90, 10)
                 $ JeanX.change_stat("inhibition", 200, 50)
@@ -329,22 +330,21 @@ label JeanMeet:
     ch_j ". . . ignore me like that. . ."
     ch_j "I'll need to give this some thought. . ."
 
-
-    $ JeanX.history.append("met")
-    $ bg_current = "bg_showerroom"
-    $ round -= 10
-    call shift_focus (RogueX)
-    $ JeanX.location = "hold"
-    call remove_Girl(JeanX, transition = easeoutleft)
-    
-    $ JeanX.change_outfit("casual1")
+    call remove_Girl(JeanX)
 
     "She collects her things and leaves the room."
-    ch_p "Who the hell was that? . ."
+
+    $ JeanX.history.append("met")
+    $ JeanX.location = "hold"
 
     $ JeanX.name = "Jean"
 
-    call set_the_scene
+    ch_p "Who the hell was that? . ."
+
+    $ round -= 10
+
+    call shift_focus(RogueX)
+
     return
 
 
@@ -354,7 +354,7 @@ label Jean_Key:
     $ JeanX.change_face("_bemused")
     ch_j "Oh, here, just in case you wanted to drop by."
     "She tossed a key at you, which you manage to catch."
-    $ Keys.append(JeanX)
+    $ Player.Keys.append(JeanX)
     $ JeanX.event_happened[0] = 1
     ch_p "Thanks."
     return
@@ -364,15 +364,14 @@ label Jean_Key:
 
 label Jean_Like:
 
-    if JeanX.location != bg_current:
-        $ JeanX.location = bg_current
+    if JeanX.location != Player.location:
+        $ JeanX.location = Player.location
         "[JeanX.name] walks up to you."
-    call set_the_scene (0)
-    call show_Girl (JeanX)
-    call clear_the_room (JeanX)
-    call set_the_scene
+
+    call clear_the_room(JeanX)
+
     $ JeanX.daily_history.append("relationship")
-    call taboo_level
+    call set_Character_taboos
     $ line = 0
     $ JeanX.change_face("_sly", 1,eyes = "_down")
     ". . .{w=0.5}{nw}"
@@ -489,15 +488,14 @@ label Jean_Like:
 
 label Jean_Love:
 
-    if JeanX.location != bg_current:
-        $ JeanX.location = bg_current
+    if JeanX.location != Player.location:
+        $ JeanX.location = Player.location
         "[JeanX.name] walks up to you."
-    call set_the_scene (0)
-    call show_Girl (JeanX)
-    call clear_the_room (JeanX)
-    call set_the_scene
+
+    call clear_the_room(JeanX)
+
     $ JeanX.daily_history.append("relationship")
-    call taboo_level
+    call set_Character_taboos
     $ line = 0
     $ JeanX.change_face("_sly", 1)
     ch_j "So. . . [JeanX.player_petname]."
@@ -708,15 +706,14 @@ label Jean_Love:
 
 label Jean_Sub:
 
-    if JeanX.location != bg_current:
-        $ JeanX.location = bg_current
+    if JeanX.location != Player.location:
+        $ JeanX.location = Player.location
         "[JeanX.name] walks up to you."
-    call set_the_scene (0)
-    call show_Girl (JeanX)
-    call clear_the_room (JeanX)
-    call set_the_scene
+
+    call clear_the_room(JeanX)
+
     $ JeanX.daily_history.append("relationship")
-    call taboo_level
+    call set_Character_taboos
     $ line = 0
     $ JeanX.change_face("_sly", 1,eyes = "_side")
     ch_j "Hey. . . [JeanX.player_petname]."
@@ -849,15 +846,14 @@ label Jean_Sub:
 
 
 label Jean_Master:
-    if JeanX.location != bg_current:
-        $ JeanX.location = bg_current
+    if JeanX.location != Player.location:
+        $ JeanX.location = Player.location
         "[JeanX.name] walks up to you."
-    call set_the_scene (0)
-    call show_Girl (JeanX)
-    call clear_the_room (JeanX)
-    call set_the_scene
+
+    call clear_the_room(JeanX)
+
     $ JeanX.daily_history.append("relationship")
-    call taboo_level
+    call set_Character_taboos
     $ line = 0
     $ JeanX.change_face("_sly", 1,eyes = "_side")
     ch_j "Hey. . . [JeanX.player_petname]."
@@ -1025,33 +1021,34 @@ label Jeanname(Base=0, JNNum=0, Alpha=0, Jeannames={}):
         pass
     else:
         $ Base = Player.name[:1]
+
     $ Jeannames = { "A":"Abe",
-                        "B":"Barry",
-                        "C":"Carl",
-                        "D":"Dennis",
-                        "E":"Erik",
-                        "F":"Foggy",
-                        "G":"Gil",
-                        "H":"Hunk",
-                        "I":"Ike",
-                        "J":"Jeff",
-                        "K":"Kirk",
-                        "L":"Lance",
-                        "M":"Mitch",
-                        "N":"Norm",
-                        "O":"Ollie",
-                        "P":"Pete",
-                        "Q":"Quince",
-                        "R":"Rory",
-                        "S":"Sonny",
-                        "T":"Todd",
-                        "U":"Uri",
-                        "V":"Vince",
-                        "W":"Wally",
-                        "X":"Ray",
-                        "Y":"Yuri",
-                        "Z":"Zoro"
-                        }
+                    "B":"Barry",
+                    "C":"Carl",
+                    "D":"Dennis",
+                    "E":"Erik",
+                    "F":"Foggy",
+                    "G":"Gil",
+                    "H":"Hunk",
+                    "I":"Ike",
+                    "J":"Jeff",
+                    "K":"Kirk",
+                    "L":"Lance",
+                    "M":"Mitch",
+                    "N":"Norm",
+                    "O":"Ollie",
+                    "P":"Pete",
+                    "Q":"Quince",
+                    "R":"Rory",
+                    "S":"Sonny",
+                    "T":"Todd",
+                    "U":"Uri",
+                    "V":"Vince",
+                    "W":"Wally",
+                    "X":"Ray",
+                    "Y":"Yuri",
+                    "Z":"Zoro"}
+
     $ Base = Base.upper()
     if Base in Jeannames and Jeannames[Base] != Player.name:
         $ JeanX.player_petname = Jeannames[Base]
@@ -1063,4 +1060,3 @@ label Jeanname(Base=0, JNNum=0, Alpha=0, Jeannames={}):
         $ JeanX.player_petname = Jeannames[Base]
 
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

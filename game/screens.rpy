@@ -642,21 +642,21 @@ screen Inventory_screen:
 
             textbutton "Corruption Cologne: [inventory_count] doses" action ui.callsinnewcontext("corruption_screen") text_size 15
 
-        showif "Xavier" in Keys:
+        showif "Xavier" in Player.Keys:
             text "Xavier's Key" size 15
-        showif RogueX in Keys:
+        showif RogueX in Player.Keys:
             text "Rogue's Key" size 15
-        showif KittyX in Keys:
+        showif KittyX in Player.Keys:
             text "Kitty's Key" size 15
-        showif EmmaX in Keys:
+        showif EmmaX in Player.Keys:
             text "Emma's Key" size 15
-        showif LauraX in Keys:
+        showif LauraX in Player.Keys:
             text "Laura's Key" size 15
-        showif JeanX in Keys:
+        showif JeanX in Player.Keys:
             text "Jean's Key" size 15
-        showif StormX in Keys:
+        showif StormX in Player.Keys:
             text "Storm's Key" size 15
-        showif JubesX in Keys:
+        showif JubesX in Player.Keys:
             text "Jubes's Key" size 15
 
     imagebutton:

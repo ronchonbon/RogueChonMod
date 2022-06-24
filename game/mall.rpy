@@ -1,8 +1,8 @@
 label sex_shop:
-    $ bg_current = "bg_shop"
+    $ Player.location = "bg_shop"
 
     python:
-        for G in Party:
+        for G in Player.Party:
             G.location = "bg_shop"
 
     call set_the_scene
@@ -28,51 +28,51 @@ label sex_shop:
                     $ Player.inventory.append("_dildo")
                     $ Player.cash -= 20
 
-                    if Party:
-                        if approval_check(Party[0], 800):
-                            $ Party[0].change_face("_sly")
-                            $ Party[0].change_stat("love", 80, 1)
-                            $ Party[0].change_stat("obedience", 50, 3)
-                            $ Party[0].change_stat("inhibition", 50, 3)
+                    if Player.Party:
+                        if approval_check(Player.Party[0], 800):
+                            $ Player.Party[0].change_face("_sly")
+                            $ Player.Party[0].change_stat("love", 80, 1)
+                            $ Player.Party[0].change_stat("obedience", 50, 3)
+                            $ Player.Party[0].change_stat("inhibition", 50, 3)
 
-                            if Party[0] == RogueX:
-                                ch_r "Oh, what's that for, [Party[0].player_petname]?"
-                            elif Party[0] == KittyX:
+                            if Player.Party[0] == RogueX:
+                                ch_r "Oh, what's that for, [Player.Party[0].player_petname]?"
+                            elif Player.Party[0] == KittyX:
                                 ch_k "Is that for. . ."
-                            elif Party[0] == EmmaX:
+                            elif Player.Party[0] == EmmaX:
                                 ch_e "Hmm. . ."
-                            elif Party[0] == LauraX:
+                            elif Player.Party[0] == LauraX:
                                 ch_l ". . ."
-                            elif Party[0] == JeanX:
+                            elif Player.Party[0] == JeanX:
                                 pass
-                            elif Party[0] == StormX:
+                            elif Player.Party[0] == StormX:
                                 ch_s "Well that's certainly interesting. . ."
-                            elif Party[0] == JubesX:
+                            elif Player.Party[0] == JubesX:
                                 ch_v "What're you gonna do with that. . ."
                         else:
-                            $ Party[0].change_face("_confused",2)
-                            $ Party[0].change_stat("love", 60, -2)
-                            $ Party[0].change_stat("obedience", 70, 4)
-                            $ Party[0].change_stat("inhibition", 50, 2)
+                            $ Player.Party[0].change_face("_confused",2)
+                            $ Player.Party[0].change_stat("love", 60, -2)
+                            $ Player.Party[0].change_stat("obedience", 70, 4)
+                            $ Player.Party[0].change_stat("inhibition", 50, 2)
 
-                            if Party[0] == RogueX:
+                            if Player.Party[0] == RogueX:
                                 ch_r "Is that. . . oh. . ."
-                            elif Party[0] == KittyX:
+                            elif Player.Party[0] == KittyX:
                                 ch_k "Um, what's that about. . ."
-                            elif Party[0] == EmmaX:
+                            elif Player.Party[0] == EmmaX:
                                 ch_e "This is certainly an unusual trip. . ."
-                            elif Party[0] == LauraX:
+                            elif Player.Party[0] == LauraX:
                                 ch_l ". . ."
-                            elif Party[0] == JeanX:
+                            elif Player.Party[0] == JeanX:
                                 pass
-                            elif Party[0] == StormX:
+                            elif Player.Party[0] == StormX:
                                 ch_s "Interesting choice. . ."
-                            elif Party[0] == JubesX:
+                            elif Player.Party[0] == JubesX:
                                 ch_v "What're you gonna do with that. . ."
 
-                            $ Party[0].change_face("_confused", 1)
+                            $ Player.Party[0].change_face("_confused", 1)
 
-                        $ Party[0].change_stat("lust", 60, 5)
+                        $ Player.Party[0].change_stat("lust", 60, 5)
                 else:
                     "You don't have enough for that."
             "Buy \"Shocker\" vibrator for $25.":
@@ -84,75 +84,75 @@ label sex_shop:
                     $ Player.inventory.append("_vibrator")
                     $ Player.cash -= 25
 
-                    if Party:
-                        if approval_check(Party[0], 800):
-                            $ Party[0].change_face("_sly")
-                            $ Party[0].change_stat("love", 80, 2)
-                            $ Party[0].change_stat("obedience", 50, 2)
-                            $ Party[0].change_stat("inhibition", 50, 3)
+                    if Player.Party:
+                        if approval_check(Player.Party[0], 800):
+                            $ Player.Party[0].change_face("_sly")
+                            $ Player.Party[0].change_stat("love", 80, 2)
+                            $ Player.Party[0].change_stat("obedience", 50, 2)
+                            $ Player.Party[0].change_stat("inhibition", 50, 3)
 
-                            if Party[0] == RogueX:
-                                ch_r "Oh, what's that for, [Party[0].player_petname]?"
-                            elif Party[0] == KittyX:
+                            if Player.Party[0] == RogueX:
+                                ch_r "Oh, what's that for, [Player.Party[0].player_petname]?"
+                            elif Player.Party[0] == KittyX:
                                 ch_k "Is that for. . ."
-                            elif Party[0] == EmmaX:
+                            elif Player.Party[0] == EmmaX:
                                 ch_e "Hmm. . ."
-                            elif Party[0] == LauraX:
+                            elif Player.Party[0] == LauraX:
                                 ch_l ". . ."
-                            elif Party[0] == JeanX:
+                            elif Player.Party[0] == JeanX:
                                 pass
-                            elif Party[0] == StormX:
+                            elif Player.Party[0] == StormX:
                                 ch_s "Well that's certainly interesting. . ."
-                            elif Party[0] == JubesX:
+                            elif Player.Party[0] == JubesX:
                                 ch_v "What're you gonna do with that. . ."
 
-                            $ Party[0].change_stat("lust", 60, 5)
+                            $ Player.Party[0].change_stat("lust", 60, 5)
                         else:
-                            $ Party[0].change_face("_confused",2)
-                            $ Party[0].change_stat("obedience", 70, 2)
-                            $ Party[0].change_stat("inhibition", 50, 2)
+                            $ Player.Party[0].change_face("_confused",2)
+                            $ Player.Party[0].change_stat("obedience", 70, 2)
+                            $ Player.Party[0].change_stat("inhibition", 50, 2)
 
-                            if Party[0] == RogueX:
+                            if Player.Party[0] == RogueX:
                                 ch_r "Is that. . . oh. . ."
-                            elif Party[0] == KittyX:
+                            elif Player.Party[0] == KittyX:
                                 ch_k "Um, what's that about. . ."
-                            elif Party[0] == EmmaX:
+                            elif Player.Party[0] == EmmaX:
                                 ch_e "This is certainly an unusual trip. . ."
-                            elif Party[0] == LauraX:
+                            elif Player.Party[0] == LauraX:
                                 ch_l ". . ."
-                            elif Party[0] == JeanX:
+                            elif Player.Party[0] == JeanX:
                                 pass
-                            elif Party[0] == StormX:
+                            elif Player.Party[0] == StormX:
                                 ch_s "Interesting choice. . ."
-                            elif Party[0] == JubesX:
+                            elif Player.Party[0] == JubesX:
                                 ch_v "What're you gonna do with that. . ."
 
-                            $ Party[0].change_face("_confused", 1)
+                            $ Player.Party[0].change_face("_confused", 1)
                 else:
                     "You don't have enough for that."
-            "Give a gift to [RogueX.name]." if RogueX in Party:
+            "Give a gift to [RogueX.name]." if RogueX in Player.Party:
                 $ Girl = RogueX
-            "Give a gift to [KittyX.name]." if KittyX in Party:
+            "Give a gift to [KittyX.name]." if KittyX in Player.Party:
                 $ Girl = KittyX
-            "Give a gift to [EmmaX.name]." if EmmaX in Party:
+            "Give a gift to [EmmaX.name]." if EmmaX in Player.Party:
                 $ Girl = EmmaX
-            "Give a gift to [LauraX.name]." if LauraX in Party:
+            "Give a gift to [LauraX.name]." if LauraX in Player.Party:
                 $ Girl = LauraX
-            "Give a gift to [JeanX.name]." if JeanX in Party:
+            "Give a gift to [JeanX.name]." if JeanX in Player.Party:
                 $ Girl = JeanX
-            "Give a gift to [StormX.name]." if StormX in Party:
+            "Give a gift to [StormX.name]." if StormX in Player.Party:
                 $ Girl = StormX
-            "Give a gift to [JubesX.name]." if JubesX in Party:
+            "Give a gift to [JubesX.name]." if JubesX in Player.Party:
                 $ Girl = JubesX
             "Exit.":
                 "You head back into the mall. . ."
 
                 $ round -= 10 if round > 20 else round - 10
 
-                $ bg_current = "bg_mall"
+                $ Player.location = "bg_mall"
 
                 python:
-                    for G in Party:
+                    for G in Player.Party:
                         G.location = "bg_mall"
 
                 call set_the_scene
@@ -502,10 +502,10 @@ label sex_shop:
     return
 
 label swimsuit_shop:
-    $ bg_current = "bg_shop"
+    $ Player.location = "bg_shop"
 
     python:
-        for G in Party:
+        for G in Player.Party:
             G.location = "bg_shop"
 
     call set_the_scene
@@ -522,29 +522,29 @@ label swimsuit_shop:
 
         menu:
             "What did you want to do?"
-            "Have [RogueX.name] try something on." if RogueX in Party:
+            "Have [RogueX.name] try something on." if RogueX in Player.Party:
                 $ Girl = RogueX
-            "Have [KittyX.name] try something on." if KittyX in Party:
+            "Have [KittyX.name] try something on." if KittyX in Player.Party:
                 $ Girl = KittyX
-            "Have [EmmaX.name] try something on." if EmmaX in Party:
+            "Have [EmmaX.name] try something on." if EmmaX in Player.Party:
                 $ Girl = EmmaX
-            "Have [LauraX.name] try something on." if LauraX in Party:
+            "Have [LauraX.name] try something on." if LauraX in Player.Party:
                 $ Girl = LauraX
-            "Have [JeanX.name] try something on." if JeanX in Party:
+            "Have [JeanX.name] try something on." if JeanX in Player.Party:
                 $ Girl = JeanX
-            "Have [StormX.name] try something on." if StormX in Party:
+            "Have [StormX.name] try something on." if StormX in Player.Party:
                 $ Girl = StormX
-            "Have [JubesX.name] try something on." if JubesX in Party:
+            "Have [JubesX.name] try something on." if JubesX in Player.Party:
                 $ Girl = JubesX
             "Exit.":
                 "You head back into the mall. . ."
 
                 $ round -= 10 if round > 20 else round - 10
 
-                $ bg_current = "bg_mall"
+                $ Player.location = "bg_mall"
 
                 python:
-                    for G in Party:
+                    for G in Player.Party:
                         G.location = "bg_mall"
 
                 call set_the_scene
@@ -607,48 +607,48 @@ label swimsuit_shop:
                 $ Girl = None
 
         if Girl:
-            $ Party.remove(Girl)
-            $ Party.append(Girl)
+            $ Player.Party.remove(Girl)
+            $ Player.Party.append(Girl)
 
             "You grab some things and head into one of the dressing rooms with [Girl.name]."
 
-            if len(Party) > 2:
+            if len(Player.Party) > 2:
                 menu:
-                    Party[0].voice "Should we come in too?"
+                    Player.Party[0].voice "Should we come in too?"
                     "Sure.":
                         "The rest follow you in."
 
                         python:
-                            for G in Party:
+                            for G in Player.Party:
                                 G.location = "bg_dressing"
                     "Stay out here.":
-                        Party[0].voice "Fine, we'll wait out here."
+                        Player.Party[0].voice "Fine, we'll wait out here."
 
-                        $ Party = [Girl]
+                        $ Player.Party = [Girl]
 
                         $ Girl.location = "bg_dressing"
-            elif len(Party) == 2:
+            elif len(Player.Party) == 2:
                 menu:
-                    Party[0].voice "Should I come in too?"
+                    Player.Party[0].voice "Should I come in too?"
                     "Sure.":
-                        "[Party[0].name] follows you in."
+                        "[Player.Party[0].name] follows you in."
 
                         python:
-                            for G in Party:
+                            for G in Player.Party:
                                 G.location = "bg_dressing"
                     "Stay out here.":
-                        Party[0].voice "Fine, I'll just wait here then."
+                        Player.Party[0].voice "Fine, I'll just wait here then."
 
-                        $ Party = [Girl]
+                        $ Player.Party = [Girl]
 
                         $ Girl.location = "bg_dressing"
 
-            $ bg_current = "bg_dressing"
+            $ Player.location = "bg_dressing"
 
             $ door_locked = True
 
             call set_the_scene
-            call taboo_level
+            call set_Character_taboos
 
             $ cart = []
             $ leave = False
@@ -754,19 +754,19 @@ label swimsuit_shop:
                         if Girl == StormX and item in ["_bikini_top", "_bikini_bottoms"] and (Girl.outfit["bra"] == "_bikini_top" or Girl.outfit["underwear"] == "_bikini_bottoms"):
                             ch_s "Oh! I understand the purpose of the flap now!"
                 elif leave:
-                    if cart and len(Party) > 1:
-                        if Party[0].location == bg_current and Party[0] not in [LauraX, JeanX] and Party[0].likes[Girl.tag] >= 500:
-                            $ Party[0].change_face("_smile")
+                    if cart and len(Player.Party) > 1:
+                        if Player.Party[0].location == Player.location and Player.Party[0] not in [LauraX, JeanX] and Player.Party[0].likes[Girl.tag] >= 500:
+                            $ Player.Party[0].change_face("_smile")
 
-                            if Party[0] == RogueX:
+                            if Player.Party[0] == RogueX:
                                 ch_r "Look'in good there. . ."
-                            elif Party[0] == KittyX:
+                            elif Player.Party[0] == KittyX:
                                 ch_k "Oh, that looks cute on you!"
-                            elif Party[0] == EmmaX:
+                            elif Player.Party[0] == EmmaX:
                                 ch_e "You really do wear that well. . ."
-                            elif Party[0] == StormX:
+                            elif Player.Party[0] == StormX:
                                 ch_s "That really does suit you. . ."
-                            elif Party[0] == JubesX:
+                            elif Player.Party[0] == JubesX:
                                 ch_v "So cute!"
 
                             $ Girl.change_face("_smile")
@@ -786,24 +786,24 @@ label swimsuit_shop:
                             elif Girl == JubesX:
                                 ch_v "I know, right?"
 
-                            $ Girl.change_likes(Party[0],5)
+                            $ Girl.change_likes(Player.Party[0],5)
 
-                            $ Party[0].change_likes(Girl,3)
+                            $ Player.Party[0].change_likes(Girl,3)
 
                     $ Girl.change_outfit()
 
                     $ door_locked = False
 
-                    $ bg_current = "bg_shop"
+                    $ Player.location = "bg_shop"
 
                     call check_who_is_present
 
-                    $ Party = Present[:]
-                    $ Party.remove(Girl)
-                    $ Party.append(Girl)
+                    $ Player.Party = Present[:]
+                    $ Player.Party.remove(Girl)
+                    $ Player.Party.append(Girl)
 
                     call set_the_scene
-                    call taboo_level
+                    call set_Character_taboos
 
                     if not cart:
                         "That was fun, but since there wasn't anything she was interested in, she put it all back."
@@ -931,10 +931,10 @@ label swimsuit_shop:
     return
 
 label lingerie_shop:
-    $ bg_current = "bg_shop"
+    $ Player.location = "bg_shop"
 
     python:
-        for G in Party:
+        for G in Player.Party:
             G.location = "bg_shop"
 
     call set_the_scene
@@ -951,29 +951,29 @@ label lingerie_shop:
 
         menu:
             "What did you want to do?"
-            "Have [RogueX.name] try something on." if RogueX in Party:
+            "Have [RogueX.name] try something on." if RogueX in Player.Party:
                 $ Girl = RogueX
-            "Have [KittyX.name] try something on." if KittyX in Party:
+            "Have [KittyX.name] try something on." if KittyX in Player.Party:
                 $ Girl = KittyX
-            "Have [EmmaX.name] try something on." if EmmaX in Party:
+            "Have [EmmaX.name] try something on." if EmmaX in Player.Party:
                 $ Girl = EmmaX
-            "Have [LauraX.name] try something on." if LauraX in Party:
+            "Have [LauraX.name] try something on." if LauraX in Player.Party:
                 $ Girl = LauraX
-            "Have [JeanX.name] try something on." if JeanX in Party:
+            "Have [JeanX.name] try something on." if JeanX in Player.Party:
                 $ Girl = JeanX
-            "Have [StormX.name] try something on." if StormX in Party:
+            "Have [StormX.name] try something on." if StormX in Player.Party:
                 $ Girl = StormX
-            "Have [JubesX.name] try something on." if JubesX in Party:
+            "Have [JubesX.name] try something on." if JubesX in Player.Party:
                 $ Girl = JubesX
             "Exit.":
                 "You head back into the mall. . ."
 
                 $ round -= 10 if round > 20 else round - 10
 
-                $ bg_current = "bg_mall"
+                $ Player.location = "bg_mall"
 
                 python:
-                    for G in Party:
+                    for G in Player.Party:
                         G.location = "bg_mall"
 
                 call set_the_scene
@@ -1019,48 +1019,48 @@ label lingerie_shop:
                 $ Girl = None
 
         if Girl:
-            $ Party.remove(Girl)
-            $ Party.append(Girl)
+            $ Player.Party.remove(Girl)
+            $ Player.Party.append(Girl)
 
             "You grab some things and head into one of the dressing rooms with [Girl.name]."
 
-            if len(Party) > 2:
+            if len(Player.Party) > 2:
                 menu:
-                    Party[0].voice "Should we come in too?"
+                    Player.Party[0].voice "Should we come in too?"
                     "Sure.":
                         "The rest follow you in."
 
                         python:
-                            for G in Party:
+                            for G in Player.Party:
                                 G.location = "bg_dressing"
                     "Stay out here.":
-                        Party[0].voice "Fine, we'll wait out here."
+                        Player.Party[0].voice "Fine, we'll wait out here."
 
-                        $ Party = [Girl]
+                        $ Player.Party = [Girl]
 
                         $ Girl.location = "bg_dressing"
-            elif len(Party) == 2:
+            elif len(Player.Party) == 2:
                 menu:
-                    Party[0].voice "Should I come in too?"
+                    Player.Party[0].voice "Should I come in too?"
                     "Sure.":
-                        "[Party[0].name] follows you in."
+                        "[Player.Party[0].name] follows you in."
 
                         python:
-                            for G in Party:
+                            for G in Player.Party:
                                 G.location = "bg_dressing"
                     "Stay out here.":
-                        Party[0].voice "Fine, I'll just wait here then."
+                        Player.Party[0].voice "Fine, I'll just wait here then."
 
-                        $ Party = [Girl]
+                        $ Player.Party = [Girl]
 
                         $ Girl.location = "bg_dressing"
 
-            $ bg_current = "bg_dressing"
+            $ Player.location = "bg_dressing"
 
             $ door_locked = True
 
             call set_the_scene
-            call taboo_level
+            call set_Character_taboos
 
             $ cart = []
             $ leave = False
@@ -1301,19 +1301,19 @@ label lingerie_shop:
                     else:
                         $ cart.append(item)
                 elif leave:
-                    if cart and len(Party) > 1:
-                        if Party[0].location == bg_current and Party[0] not in [LauraX, JeanX] and Party[0].likes[Girl.tag] >= 500:
-                            $ Party[0].change_face("_smile")
+                    if cart and len(Player.Party) > 1:
+                        if Player.Party[0].location == Player.location and Player.Party[0] not in [LauraX, JeanX] and Player.Party[0].likes[Girl.tag] >= 500:
+                            $ Player.Party[0].change_face("_smile")
 
-                            if Party[0] == RogueX:
+                            if Player.Party[0] == RogueX:
                                 ch_r "Look'in good there. . ."
-                            elif Party[0] == KittyX:
+                            elif Player.Party[0] == KittyX:
                                 ch_k "Oh, that looks cute on you!"
-                            elif Party[0] == EmmaX:
+                            elif Player.Party[0] == EmmaX:
                                 ch_e "You really do wear that well. . ."
-                            elif Party[0] == StormX:
+                            elif Player.Party[0] == StormX:
                                 ch_s "That really does suit you. . ."
-                            elif Party[0] == JubesX:
+                            elif Player.Party[0] == JubesX:
                                 ch_v "So cute!"
 
                             $ Girl.change_face("_smile")
@@ -1333,24 +1333,24 @@ label lingerie_shop:
                             elif Girl == JubesX:
                                 ch_v "I know, right?"
 
-                            $ Girl.change_likes(Party[0],5)
+                            $ Girl.change_likes(Player.Party[0],5)
 
-                            $ Party[0].change_likes(Girl,3)
+                            $ Player.Party[0].change_likes(Girl,3)
 
                     $ Girl.change_outfit()
 
                     $ door_locked = False
 
-                    $ bg_current = "bg_shop"
+                    $ Player.location = "bg_shop"
 
                     call check_who_is_present
 
-                    $ Party = Present[:]
-                    $ Party.remove(Girl)
-                    $ Party.append(Girl)
+                    $ Player.Party = Present[:]
+                    $ Player.Party.remove(Girl)
+                    $ Player.Party.append(Girl)
 
                     call set_the_scene
-                    call taboo_level
+                    call set_Character_taboos
 
                     if not cart:
                         "That was fun, but since there wasn't anything she was interested in, she put it all back."
@@ -1581,10 +1581,10 @@ label lingerie_shop:
     return
 
 label clothing_shop:
-    $ bg_current = "bg_shop"
+    $ Player.location = "bg_shop"
 
     python:
-        for G in Party:
+        for G in Player.Party:
             G.location = "bg_shop"
 
     call set_the_scene
@@ -1601,29 +1601,29 @@ label clothing_shop:
 
         menu:
             "What did you want to do?"
-            "Have [RogueX.name] try something on." if RogueX in Party:
+            "Have [RogueX.name] try something on." if RogueX in Player.Party:
                 $ Girl = RogueX
-            "Have [KittyX.name] try something on." if KittyX in Party:
+            "Have [KittyX.name] try something on." if KittyX in Player.Party:
                 $ Girl = KittyX
-            "Have [EmmaX.name] try something on." if EmmaX in Party:
+            "Have [EmmaX.name] try something on." if EmmaX in Player.Party:
                 $ Girl = EmmaX
-            "Have [LauraX.name] try something on." if LauraX in Party:
+            "Have [LauraX.name] try something on." if LauraX in Player.Party:
                 $ Girl = LauraX
-            "Have [JeanX.name] try something on." if JeanX in Party:
+            "Have [JeanX.name] try something on." if JeanX in Player.Party:
                 $ Girl = JeanX
-            "Have [StormX.name] try something on." if StormX in Party:
+            "Have [StormX.name] try something on." if StormX in Player.Party:
                 $ Girl = StormX
-            "Have [JubesX.name] try something on." if JubesX in Party:
+            "Have [JubesX.name] try something on." if JubesX in Player.Party:
                 $ Girl = JubesX
             "Exit.":
                 "You head back into the mall. . ."
 
                 $ round -= 10 if round > 20 else round - 10
 
-                $ bg_current = "bg_mall"
+                $ Player.location = "bg_mall"
 
                 python:
-                    for G in Party:
+                    for G in Player.Party:
                         G.location = "bg_mall"
 
                 call set_the_scene
@@ -1639,48 +1639,48 @@ label clothing_shop:
             "This is placeholder dialogue."
 
         if Girl:
-            $ Party.remove(Girl)
-            $ Party.append(Girl)
+            $ Player.Party.remove(Girl)
+            $ Player.Party.append(Girl)
 
             "You grab some things and head into one of the dressing rooms with [Girl.name]."
 
-            if len(Party) > 2:
+            if len(Player.Party) > 2:
                 menu:
-                    Party[0].voice "Should we come in too?"
+                    Player.Party[0].voice "Should we come in too?"
                     "Sure.":
                         "The rest follow you in."
 
                         python:
-                            for G in Party:
+                            for G in Player.Party:
                                 G.location = "bg_dressing"
                     "Stay out here.":
-                        Party[0].voice "Fine, we'll wait out here."
+                        Player.Party[0].voice "Fine, we'll wait out here."
 
-                        $ Party = [Girl]
+                        $ Player.Party = [Girl]
 
                         $ Girl.location = "bg_dressing"
-            elif len(Party) == 2:
+            elif len(Player.Party) == 2:
                 menu:
-                    Party[0].voice "Should I come in too?"
+                    Player.Party[0].voice "Should I come in too?"
                     "Sure.":
-                        "[Party[0].name] follows you in."
+                        "[Player.Party[0].name] follows you in."
 
                         python:
-                            for G in Party:
+                            for G in Player.Party:
                                 G.location = "bg_dressing"
                     "Stay out here.":
-                        Party[0].voice "Fine, I'll just wait here then."
+                        Player.Party[0].voice "Fine, I'll just wait here then."
 
-                        $ Party = [Girl]
+                        $ Player.Party = [Girl]
 
                         $ Girl.location = "bg_dressing"
 
-            $ bg_current = "bg_dressing"
+            $ Player.location = "bg_dressing"
 
             $ door_locked = True
 
             call set_the_scene
-            call taboo_level
+            call set_Character_taboos
 
             $ cart = []
             $ leave = False
@@ -2014,19 +2014,19 @@ label clothing_shop:
                     else:
                         $ cart.append(item)
                 elif leave:
-                    if cart and len(Party) > 1:
-                        if Party[0].location == bg_current and Party[0] not in [LauraX, JeanX] and Party[0].likes[Girl.tag] >= 500:
-                            $ Party[0].change_face("_smile")
+                    if cart and len(Player.Party) > 1:
+                        if Player.Party[0].location == Player.location and Player.Party[0] not in [LauraX, JeanX] and Player.Party[0].likes[Girl.tag] >= 500:
+                            $ Player.Party[0].change_face("_smile")
 
-                            if Party[0] == RogueX:
+                            if Player.Party[0] == RogueX:
                                 ch_r "Look'in good there. . ."
-                            elif Party[0] == KittyX:
+                            elif Player.Party[0] == KittyX:
                                 ch_k "Oh, that looks cute on you!"
-                            elif Party[0] == EmmaX:
+                            elif Player.Party[0] == EmmaX:
                                 ch_e "You really do wear that well. . ."
-                            elif Party[0] == StormX:
+                            elif Player.Party[0] == StormX:
                                 ch_s "That really does suit you. . ."
-                            elif Party[0] == JubesX:
+                            elif Player.Party[0] == JubesX:
                                 ch_v "So cute!"
 
                             $ Girl.change_face("_smile")
@@ -2046,24 +2046,24 @@ label clothing_shop:
                             elif Girl == JubesX:
                                 ch_v "I know, right?"
 
-                            $ Girl.change_likes(Party[0],5)
+                            $ Girl.change_likes(Player.Party[0],5)
 
-                            $ Party[0].change_likes(Girl,3)
+                            $ Player.Party[0].change_likes(Girl,3)
 
                     $ Girl.change_outfit()
 
                     $ door_locked = False
 
-                    $ bg_current = "bg_shop"
+                    $ Player.location = "bg_shop"
 
                     call check_who_is_present
 
-                    $ Party = Present[:]
-                    $ Party.remove(Girl)
-                    $ Party.append(Girl)
+                    $ Player.Party = Present[:]
+                    $ Player.Party.remove(Girl)
+                    $ Player.Party.append(Girl)
 
                     call set_the_scene
-                    call taboo_level
+                    call set_Character_taboos
 
                     if not cart:
                         "That was fun, but since there wasn't anything she was interested in, she put it all back."

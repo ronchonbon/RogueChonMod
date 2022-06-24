@@ -3,13 +3,13 @@ init python:
     def check_girl(Girl, local = False):
         global focused_Girl
 
-        if Girl in all_Girls and (not local or bg_current == Check.location):
+        if Girl in all_Girls and (not local or Player.location == Check.location):
             return Girl
-        elif bg_current == focused_Girl.location:
+        elif Player.location == focused_Girl.location:
             return focused_Girl
         else:
             for Girl in all_Girls:
-                if bg_current == Girl.location:
+                if Player.location == Girl.location:
                     focused_Girl = Girl
 
                     return Girl
@@ -32,7 +32,7 @@ init python:
 
             I = (I - JeanX.IX)
 
-        if Loc == bg_current and cologne:
+        if Loc == Player.location and cologne:
             if Girl == LauraX:
                 if "mandrill" in Player.traits:
                     if L <= 400:
@@ -121,28 +121,133 @@ init python:
             return False
 
     def Room_Full():
-        global Party
+        global Player.Party
 
-        while len(Party) > 2:
-            Party.remove(Party[2])
+        while len(Player.Party) > 2:
+            Player.Party.remove(Player.Party[2])
 
         Here = []
 
         for G in all_Girls:
-            if G.location == bg_current and G not in Party:
+            if G.location == Player.location and G not in Player.Party:
                 Here.append(G)
 
-        if len(Party) + len(Here) >= 2:
+        if len(Player.Party) + len(Here) >= 2:
             return True
         else:
             return False
 
     def AloneCheck(Girl):
         for G in all_Girls:
-            if G != Girl and G.location == bg_current:
+            if G != Girl and G.location == Player.location:
                 return False
 
         return True
+
+label check_who_is_present:
+    $ Present = Player.Party[:] if Player.Party else []
+
+    python:
+        for G in all_Girls:
+            if G not in Present and G.location == Player.location:
+                Present.append(G)
+            elif G in Present and G.location != Player.location:
+                Present.remove(G)
+
+        for G in Present:
+            if G in Nearby:
+                Nearby.remove(G)
+
+            G.location = Player.location
+
+    if Present and focused_Girl not in Present:
+        $ renpy.random.shuffle(Present)
+
+        call shift_focus(Present[0])
+
+    return
+
+label check_taboo(Character):
+    if Character.location in bedrooms:
+        $ Character.taboo = 0
+    elif Character.location in ["bg_classroom", "bg_study"]:
+        if time_index > 2:
+            $ Character.taboo = 20
+        elif time_index == 2 or weekday >= 5:
+            $ Character.taboo = 30
+        else:
+            $ Character.taboo = 40
+    elif Character.location == "bg_dangerroom":
+        if time_index > 2:
+            $ Character.taboo = 20
+        else:
+            $ Character.taboo = 30
+    elif Character.location in ["bg_campus", "bg_pool"]:
+        if time_index > 2:
+            $ Character.taboo = 20
+        else:
+            $ Character.taboo = 40
+    elif Character.location == "bg_showerroom":
+        $ Character.taboo = 20
+    else:
+        $ Character.taboo = 40
+
+    if door_locked:
+        $ Character.taboo -= 10 if Character.taboo >= 10 else 0
+
+    python:
+        if Character != Player:
+            for G in all_Girls:
+                if G != Character and Character.location == G.location and Character.likes[G.tag] <= 700 and not (Character in Player.Harem and G in Player.Harem):
+                    Character.taboo = 20 if Character.taboo < 20 else Charcter.taboo
+
+            if Character.taboo > taboo and Character.location == Player.location:
+                taboo = Character.taboo
+
+    return
+
+label are_girls_angry:
+    $ multiple = False
+
+    $ temp_Girls = all_Girls[:]
+
+    while temp_Girls:
+        if temp_Girls[0].location == Player.location and "_angry" in temp_Girls[0].recent_history:
+            if Player.location == temp_Girls[0].home:
+                if temp_Girls[0] == RogueX:
+                    ch_r "You should get out, I'm fix'in ta throw down."
+                elif temp_Girls[0] == KittyX:
+                    ch_k "You should get out of here, I can't even look at you right now."
+                elif temp_Girls[0] == EmmaX:
+                     ch_e "You should leave, or do you want to test me?"
+                elif temp_Girls[0] == LauraX:
+                    ch_l "You should leave."
+                elif temp_Girls[0] == JeanX:
+                    ch_j "Out, NOW!"
+                elif temp_Girls[0] == StormX:
+                    ch_s "Out!"
+                elif temp_Girls[0] == JubesX:
+                    ch_v "Get out!"
+
+                $ Player.location = "bg_campus"
+
+                jump reset_location
+            else:
+                if multiple:
+                    ". . . and so does [temp_Girls[0].name]."
+                else:
+                    "[temp_Girls[0].name] storms off."
+
+                    if temp_Girls[0] == StormX:
+                        ". . . so to speak."
+
+                    call remove_Girl(temp_Girls[0])
+
+                    $ multiple = True
+
+        $ temp_Girls.remove(temp_Girls[0])
+
+    return
 
 label check_favorite_actions(Girl = None):
     if Girl:
@@ -295,118 +400,8 @@ label who_likes_who(Check = 70, D20 = 0):
 
     return
 
-label taboo_check(Character, location = None):
-    if location in personal_rooms or location == "hold":
-        $ Character.taboo = 0
-    elif "locked" in Player.traits and location == bg_current:
-        $ Character.taboo = 0
-    elif location in ["bg_classroom", "bg_study"]:
-        if time_index >= 3:
-            $ Character.taboo = 10
-        elif time_index == 2 or weekday >= 5:
-            $ Character.taboo = 30
-        else:
-            $ Character.taboo = 40
-    elif location == "bg_dangerroom":
-        if time_index >= 3:
-            $ Character.taboo = 20
-        else:
-            $ Character.taboo = 40
-    elif location in ["bg_campus", "bg_pool"]:
-        if time_index >= 3:
-            $ Character.taboo = 20
-        else:
-            $ Character.taboo = 40
-    elif location == "bg_showerroom":
-        $ Character.taboo = 20
-    else:
-        $ Character.taboo = 40
-
-    if Character.taboo >= 20:
-        return
-
-    python:
-        if Character != Player:
-            for G in all_Girls:
-                if G != Character and Character.location == G.location and Character.likes[G.tag] <= 700 and not (Character in Player.Harem and G in Player.Harem):
-                    Character.taboo = 20
-
-    if Character != Player:
-        if (Character.taboo > taboo and bg_current == Character.location):
-            $ taboo = Character.taboo
-
-    return
-
-label are_girls_angry:
-    $ approval_bonus = 0
-
-    $ temp_Girls = all_Girls[:]
-
-    $ multiple = False
-
-    while temp_Girls:
-        if temp_Girls[0].location == bg_current and "_angry" in temp_Girls[0].recent_history:
-            if bg_current == temp_Girls[0].home:
-                if temp_Girls[0] == RogueX:
-                    ch_r "You should get out, I'm fix'in ta throw down."
-                elif temp_Girls[0] == KittyX:
-                    ch_k "You should get out of here, I can't even look at you right now."
-                elif temp_Girls[0] == EmmaX:
-                     ch_e "You should leave, or do you want to test me?"
-                elif temp_Girls[0] == LauraX:
-                    ch_l "You should leave."
-                elif temp_Girls[0] == JeanX:
-                    ch_j "Out, NOW!"
-                elif temp_Girls[0] == StormX:
-                    ch_s "Out!"
-                elif temp_Girls[0] == JubesX:
-                    ch_v "Get out!"
-
-                $ bg_current = "bg_campus"
-
-                jump reset_location
-            else:
-                if multiple:
-                    ". . . and so does [temp_Girls[0].name]."
-                else:
-                    "[temp_Girls[0].name] storms off."
-
-                    if temp_Girls[0] == StormX:
-                        ". . . so to speak."
-
-                    call remove_Girl(temp_Girls[0])
-
-                    $ multiple = True
-                    
-        $ temp_Girls.remove(temp_Girls[0])
-
-    return
-
-label check_who_is_present:
-    $ Present = Party[:] if Party else []
-
-    python:
-        for G in all_Girls:
-            if G not in Present and G.location == bg_current:
-                Present.append(G)
-
-    if Present and focused_Girl not in Present:
-        $ renpy.random.shuffle(Present)
-
-        call shift_focus(Present[0])
-
-    python:
-        for G in Present:
-            if G in Nearby:
-                Nearby.remove(G)
-
-            G.location = bg_current
-
-    return
-
 label check_addiction:
     $ addicted_Girls = active_Girls[:]
-
     $ renpy.random.shuffle(addicted_Girls)
 
     if JubesX in addicted_Girls and JubesX.addiction >= 40 and JubesX.resistance:
@@ -414,7 +409,7 @@ label check_addiction:
 
         if "sunshine" not in JubesX.history or "addiction" in JubesX.daily_history:
             pass
-        elif bg_current == JubesX.home or bg_current == "bg_player":
+        elif Player.location == JubesX.home or Player.location == "bg_player":
             if not JubesX.resistance:
                 call addiction_event(JubesX)
             else:
@@ -443,7 +438,7 @@ label check_addiction:
                 return
 
     while addicted_Girls:
-        if "locked" in Player.traits and addicted_Girls[0].location != bg_current:
+        if "locked" in Player.traits and addicted_Girls[0].location != Player.location:
             pass
         elif "asked_for_fix" in Player.daily_history and "asked_to_meet" not in addicted_Girls[0].daily_history:
             pass
@@ -451,7 +446,7 @@ label check_addiction:
             pass
         elif "_angry" not in addicted_Girls[0].recent_history and "addiction" not in addicted_Girls[0].daily_history and addicted_Girls[0].remaining_actions >= 1:
             if (addicted_Girls[0].addiction >= 60 or (addicted_Girls[0].addiction >= 40 and addicted_Girls[0] == JubesX)) and addicted_Girls[0].resistance:
-                if bg_current == addicted_Girls[0].home or bg_current == "bg_player":
+                if Player.location == addicted_Girls[0].home or Player.location == "bg_player":
                     call addiction_fix(addicted_Girls[0])
                 else:
                     if "asked_to_meet" in addicted_Girls[0].recent_history:
@@ -480,7 +475,7 @@ label check_addiction:
             elif addicted_Girls[0] == JubesX and addicted_Girls[0].addiction < 50:
                 pass
             elif (addicted_Girls[0].addiction >= 35 and not addicted_Girls[0].event_happened[1]) or (addicted_Girls[0].addiction >= 60 and addicted_Girls[0].event_happened[1] <= 2) or addicted_Girls[0].addiction >= 90:
-                if bg_current == addicted_Girls[0].home or bg_current == "bg_player":
+                if Player.location == addicted_Girls[0].home or Player.location == "bg_player":
                     call addiction_event(addicted_Girls[0])
                 else:
                     if "asked_to_meet" in addicted_Girls[0].recent_history:
@@ -539,7 +534,7 @@ label check_if_cheated:
     $ renpy.random.shuffle(temp_Girls)
 
     while temp_Girls:
-        if "locked" in Player.traits and temp_Girls[0].location != bg_current:
+        if "locked" in Player.traits and temp_Girls[0].location != Player.location:
             pass
         else:
             $ temp_Girls2 = all_Girls[:]
@@ -553,7 +548,7 @@ label check_if_cheated:
                             $ temp_Girls[0].drain_word("saw with "+temp_Girls2[0].tag, 0, 0, 1)
                         elif temp_Girls[0] in Player.Harem and temp_Girls2[0].tag + "Yes" in Player.traits:
                             $ temp_Girls[0].drain_word("saw with "+temp_Girls2[0].tag, 0, 0, 1)
-                        elif bg_current == "bg_player" or bg_current == temp_Girls[0].home:
+                        elif Player.location == "bg_player" or Player.location == temp_Girls[0].home:
                             call Cheated (temp_Girls[0], temp_Girls2[0])
 
                             $ renpy.pop_call()

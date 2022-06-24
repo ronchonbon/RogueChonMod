@@ -14,14 +14,14 @@ label enter_main_sex_menu(Girl):
         if taboo > 20 and "taboo" not in Girl.history:
             call expression Girl.tag + "_taboo_Talk"
 
-            if bg_current == "bg_classroom" or bg_current in personal_rooms and AloneCheck(Girl):
+            if Player.location == "bg_classroom" or Player.location in bedrooms and AloneCheck(Girl):
                 ch_p "We could just lock the door, right?"
                 ch_e "We certainly could. . ."
                 "[Girl.name] walks to the door and locks it behind her."
 
                 $ Player.traits.append("locked")
 
-                call taboo_level
+                call set_Character_taboos
             else:
                 return
 
@@ -43,7 +43,7 @@ label enter_main_sex_menu(Girl):
         "[Girl.name]'s looking a bit tired out, maybe let her rest a bit."
 
     if "caught" in Girl.recent_history or "_angry" in Girl.recent_history:
-        if Girl.location == bg_current:
+        if Girl.location == Player.location:
             call sex_menu_caught_or_angry_lines(Girl)
 
         $ Girl.change_outfit()
@@ -58,7 +58,7 @@ label enter_main_sex_menu(Girl):
 
     call girl_sex_menu(Girl)
 
-    if Girl.location != bg_current:
+    if Girl.location != Player.location:
         call set_the_scene
         call stop_all_actions
 
@@ -203,17 +203,17 @@ label girl_sex_menu(Girl):
                             call out_of_action_lines(focused_Girl)
 
                             $ having_sex = False
-                    "Maybe make out with [RogueX.name]?" if focused_Girl != RogueX and RogueX.location == bg_current:
+                    "Maybe make out with [RogueX.name]?" if focused_Girl != RogueX and RogueX.location == Player.location:
                         call LesScene(RogueX)
-                    "Maybe make out with [KittyX.name]?" if focused_Girl != KittyX and  KittyX.location == bg_current:
+                    "Maybe make out with [KittyX.name]?" if focused_Girl != KittyX and  KittyX.location == Player.location:
                         call LesScene(KittyX)
-                    "Maybe make out with [LauraX.name]?" if focused_Girl != LauraX and LauraX.location == bg_current:
+                    "Maybe make out with [LauraX.name]?" if focused_Girl != LauraX and LauraX.location == Player.location:
                         call LesScene(LauraX)
-                    "Maybe make out with [JeanX.name]?" if focused_Girl != JeanX and JeanX.location == bg_current:
+                    "Maybe make out with [JeanX.name]?" if focused_Girl != JeanX and JeanX.location == Player.location:
                         call LesScene(JeanX)
-                    "Maybe make out with [StormX.name]?" if focused_Girl != StormX and StormX.location == bg_current:
+                    "Maybe make out with [StormX.name]?" if focused_Girl != StormX and StormX.location == Player.location:
                         call LesScene(StormX)
-                    "Maybe make out with [JubesX.name]?" if focused_Girl != JubesX and JubesX.location == bg_current:
+                    "Maybe make out with [JubesX.name]?" if focused_Girl != JubesX and JubesX.location == Player.location:
                         call LesScene(JubesX)
                     "Never mind [[something else]":
                         pass
@@ -453,7 +453,7 @@ label masturbation_menu(Girl):
     menu:
         "Keep watching.":
             pass
-        "[Girl.name]. . .[[jump in]" if "unseen" not in Girl.recent_history and Girl.location == bg_current:
+        "[Girl.name]. . .[[jump in]" if "unseen" not in Girl.recent_history and Girl.location == Player.location:
             "[Girl.name] slows what she's doing with a sly grin."
 
             call masturbation_join_in_lines(Girl, "masturbation")
@@ -468,7 +468,7 @@ label masturbation_menu(Girl):
                 return "stop"
         "Stop jack'in it." if Player.secondary_action == "jerking_off":
             $ Player.secondary_action = None
-        "Slap her ass" if Girl.location == bg_current:
+        "Slap her ass" if Girl.location == Player.location:
             if "unseen" in Girl.recent_history:
                 "You smack [Girl.name] firmly on the ass!"
 
@@ -490,7 +490,7 @@ label masturbation_menu(Girl):
             $ Player.focusing = 0
         "Change what I'm doing":
             menu:
-                "Threesome actions" if Girl.location == bg_current and Partner and "unseen" not in Girl.recent_history:
+                "Threesome actions" if Girl.location == Player.location and Partner and "unseen" not in Girl.recent_history:
                     menu:
                         "Ask [Partner.name] to do something else":
                             call Three_Change(Girl)
@@ -522,11 +522,11 @@ label masturbation_menu(Girl):
                         call Girl_Cleanup(Girl, "ask")
                 "Never mind":
                     pass
-        "Back to Sex Menu" if multi_action and Girl.location == bg_current:
+        "Back to Sex Menu" if multi_action and Girl.location == Player.location:
             ch_p "Let's try something else."
 
             return "switch"
-        "End Scene" if not multi_action or Girl.location != bg_current:
+        "End Scene" if not multi_action or Girl.location != Player.location:
             ch_p "Let's stop for now."
 
             return "stop"
@@ -1340,14 +1340,14 @@ label begging_menu(Girl, action):
 
             if _return == "accepted":
                 return action
-        "Come on, let me fuck those titties, [Girl.player_petname]" if action in ["titjob"]:
+        "Come on, let me fuck those titties, [Girl.petname]" if action in ["titjob"]:
             $ Girl.name_check() #checks reaction to petname
 
             call forced_action(Girl, action)
 
             if _return == "accepted":
                 return action
-        "Suck it, [Girl.player_petname]" if action in ["blowjob"]:                                               # Pressured into it
+        "Suck it, [Girl.petname]" if action in ["blowjob"]:                                               # Pressured into it
             $ Girl.name_check() #checks reaction to petname
 
             call forced_action(Girl, action)
@@ -1401,7 +1401,7 @@ label try_something_else_menu(Girl, action):
             else:
                 $ Girl.change_face("_angry", 1)
 
-                call reset_position(Girl)
+                call show_full_body(Girl)
 
                 "She scowls at you, drops your cock and pulls back."
 
@@ -1430,7 +1430,7 @@ label try_something_else_menu(Girl, action):
             else:
                 $ Girl.change_face("_angry", 1)
 
-                call reset_position(Girl)
+                call show_full_body(Girl)
 
                 "She scowls at you and pulls back."
 
@@ -1522,7 +1522,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
                 $ Girl.change_stat("love", 50, -10, 1)
                 $ Girl.change_stat("obedience", 50, 3)
 
-                call reset_position(Girl)
+                call show_full_body(Girl)
 
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")
@@ -1552,7 +1552,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
                 $ Girl.change_stat("love", 50, -10, 1)
                 $ Girl.change_stat("obedience", 50, 3)
 
-                call reset_position(Girl)
+                call show_full_body(Girl)
 
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")
@@ -1579,7 +1579,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
                 $ Girl.change_stat("love", 50, -10, 1)
                 $ Girl.change_stat("obedience", 50, 3)
 
-                call reset_position(Girl)
+                call show_full_body(Girl)
 
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")

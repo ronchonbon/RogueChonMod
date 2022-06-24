@@ -1,48 +1,41 @@
 label meet_Laura:
+    $ Player.location = "bg_dangerroom"
+
     show black_screen onlayer black
 
-    $ bg_current = "bg_dangerroom"
-
-    $ LauraX.outfit_name = "gym_clothes"
-    $ LauraX.today_outfit_name = "gym_clothes"
-    $ LauraX.change_outfit()
-
-    call clear_the_room("all", Passive = False, Silent = True)
-
-    "As you approach the Danger Room, you hear a ferocious clanging of metal."
+    call remove_all
 
     hide black_screen onlayer black
 
-    call shift_focus(LauraX)
-    call set_the_scene(False)
-
-    $ LauraX.location = "bg_dangerroom"
-    $ LauraX.name = "???"
-    $ LauraX.names.remove("Laura")
-
+    "As you approach the Danger Room, you hear a ferocious clanging of metal."
     "Just as you pass through the door, a robotic arm smashes into your face."
 
     show black_screen onlayer black with vpunch
 
     ". . ."
 
-    $ LauraX.change_face("_normal", 0)
+    $ LauraX.name = "???"
+    $ LauraX.names = []
+    $ LauraX.change_face("_normal")
 
-    call show_Girl(LauraX, x_position = stage_center)
+    call add_Girl(LauraX, x_position = stage_center, animation_transform = close_launch_animation, transition = False)
 
     hide black_screen onlayer black with dissolve
 
     "When you come to, a girl pulls you up by your arm."
 
-    $ LauraX.change_face("_surprised", 0, eyes = "_squint", brows = "_sad")
+    call move_Girl(LauraX, animation_transform = reset_zoom)
+    call shift_focus(LauraX)
 
-    ch_u "Oh, good, you don't look too damaged."
+    $ LauraX.change_face("_surprised", eyes = "_squint", brows = "_sad")
 
-    $ LauraX.change_face("_smile", 0, brows = "_sad")
+    ch_l "Oh, good, you don't look too damaged."
 
-    ch_u "Sorry about that, I was getting a work-out in, and must have forgotten to lock the door."
+    $ LauraX.change_face("_smile", brows = "_sad")
 
-    $ LauraX.change_face("_smile", 0)
+    ch_l "Sorry about that, I was getting a work-out in, and must have forgotten to lock the door."
+
+    $ LauraX.change_face("_smile")
 
     $ loop = True
     $ topics = []
@@ -51,134 +44,140 @@ label meet_Laura:
         menu:
             extend ""
             "Who are you?" if LauraX.name == "???":
-                $ LauraX.change_face("_normal", 0)
+                $ LauraX.change_face("_normal")
 
                 ch_l "I go by \"X-23\" in the field."
 
                 $ LauraX.name = "X-23"
                 $ LauraX.names.append("X-23")
             "X-23? Is that your real name?" if LauraX.name == "X-23" and "X23" not in topics:
-                $ LauraX.change_face("_confused", 0)
+                $ topics.append("X23")
+
+                $ LauraX.change_face("_confused")
 
                 ch_l "It's the one I was born with."
-
-                $ topics.append("X23")
             "Is there anything else I could call you?" if "X23" in topics and "Laura" not in topics:
+                $ topics.append("Laura")
+
+                $ LauraX.change_face("_normal")
                 $ LauraX.change_stat("love", 70, 5)
-                $ LauraX.change_face("_normal", 0)
 
                 ch_l "I also go by Laura. Laura Kinney."
 
-                $ LauraX.change_face("_confused", 0, mouth = "_normal")
+                $ LauraX.change_face("_confused", mouth = "_normal")
 
                 $ LauraX.name = "Laura"
                 $ LauraX.names.append("Laura")
 
-                $ topics.append("Laura")
-
                 menu:
                     extend ""
                     "Nice to meet you Laura.":
+                        $ LauraX.change_face("_normal")
                         $ LauraX.change_stat("love", 70, 5)
-                        $ LauraX.change_face("_normal", 0)
 
                         ch_l "Yeah, ok."
                     "Hello Laura Laura Kinney.":
-                        $ LauraX.change_face("_confused", 0,mouth = "_sucking")
+                        $ LauraX.change_face("_confused",mouth = "_sucking")
 
                         ch_l "It's just-"
 
-                        $ LauraX.change_face("_smile", 0,brows = "_surprised")
+                        $ LauraX.change_face("_smile", brows = "_surprised")
                         $ LauraX.change_stat("love", 70, 3)
                         $ LauraX.change_stat("inhibition", 70, 2)
 
                         ch_l "Oh, I get it."
                     "Ok, how did you get that name?":
-                        $ LauraX.change_face("_angry", 1,eyes = "_side")
+                        $ LauraX.change_face("_angry", blushing = 1, eyes = "_side")
                         $ LauraX.change_stat("love", 70, -2)
                         $ LauraX.change_stat("obedience", 70, 2)
 
                         ch_l "You're getting too personal."
+
+                        $ LauraX.blushing = ""
             "I think I'd prefer calling you X-23." if LauraX.name == "Laura" and "LauraX" in topics:
+                $ LauraX.change_face("_sadside", brows = "_normal")
                 $ LauraX.change_stat("love", 70, -2)
                 $ LauraX.change_stat("obedience", 70, 5)
-                $ LauraX.change_face("_sadside", 0,brows = "_normal")
 
                 ch_l "Suit yourself."
 
                 $ LauraX.name = "X-23"
             "My name is [Player.name]" if LauraX.name != "???" and "player" not in topics:
+                $ topics.append("player")
+
                 $ LauraX.change_face("_normal", 0)
 
                 ch_l "Ok."
 
-                $ topics.append("player")
-
                 menu:
                     extend ""
                     ". . .and it's nice to meet you?":
+                        $ LauraX.change_face("_confused", mouth = "_normal")
                         $ LauraX.change_stat("love", 70, 1)
-                        $ LauraX.change_face("_confused", 0,mouth = "_normal")
 
                         ch_l "Yeah, you too."
-                    "So. . .[[moving on]":
+                    "So. . .":
                         $ LauraX.change_stat("love", 70, 3)
                         $ LauraX.change_stat("obedience", 70, 1)
                         $ LauraX.change_stat("inhibition", 70, 1)
             "What are you doing here?" if "training" not in topics:
+                $ topics.append("training")
+
+                $ LauraX.change_face("_confused")
                 $ LauraX.change_stat("obedience", 70, -2)
-                $ LauraX.change_face("_confused", 0)
 
                 ch_l "Training. That's the point of this place."
-
-                $ topics.append("training")
 
                 menu:
                     extend ""
                     "I meant in the school, I haven't seen you around before.":
                         $ LauraX.change_stat("obedience", 70, 2)
                     "Ok, that's fair.":
-                        $ LauraX.change_face("_normal", 0)
+                        $ LauraX.change_face("_normal")
 
                         ch_p "But are you new to this school?"
 
                         $ LauraX.change_stat("love", 70, 3)
                         $ LauraX.change_stat("obedience", 70, 4)
+
                 ch_l "I've been here since before your time."
                 ch_l "Mostly out in the field though."
             "So you don't stay here long?" if "training" in topics and "Stay" not in topics:
+                $ topics.append("Stay")
+
+                $ LauraX.change_face("_normal", eyes = "_side")
                 $ LauraX.change_stat("love", 70, 2)
-                $ LauraX.change_face("_normal", 0,eyes = "_side")
 
                 ch_l "I'll be heading out again soon."
 
-                $ LauraX.change_face("_normal", 0)
+                $ LauraX.change_face("_normal")
 
                 ch_l "But I am planning to stick around after I get back from this mission."
 
-                $ topics.append("Stay")
             "What the hell was that?" if len(topics) <= 1 and "WTF" not in topics:
+                $ topics.append("WTF")
+
+                $ LauraX.change_face("_confused")
                 $ LauraX.change_stat("love", 70, -2)
                 $ LauraX.change_stat("obedience", 70, 8)
-                $ LauraX.change_face("_confused", 0)
 
                 ch_l "It was a robot arm."
 
-                $ LauraX.change_face("_sad", 1,eyes = "_leftside")
+                $ LauraX.change_face("_sad", blushing = 1, eyes = "_leftside")
 
                 ch_l "Like I said, sorry."
 
+                $ LauraX.change_face("_smile", blushing = 0, brows = "_confused")
                 $ LauraX.change_stat("obedience", 70, -3)
                 $ LauraX.change_stat("inhibition", 70, 3)
-                $ LauraX.change_face("_smile", 0,brows = "_confused")
 
                 ch_l "You probably should have ducked though."
-
-                $ topics.append("WTF")
             "So what's your mutant power?" if LauraX.name != "???" and "claws" not in topics:
+                $ topics.append("claws")
+
+                $ LauraX.change_face("_normal")
                 $ LauraX.change_stat("love", 70, 1)
                 $ LauraX.change_stat("obedience", 70, 1)
-                $ LauraX.change_face("_normal", 0)
 
                 ch_l "I can heal fast."
 
@@ -186,12 +185,10 @@ label meet_Laura:
 
                 ch_l "Also I have claws."
 
-                $ LauraX.claws = 1
-                $ LauraX.change_face("_smile", 0,brows = "_confused")
+                $ LauraX.claws = True
+                $ LauraX.change_face("_smile", brows = "_confused")
 
                 "snikt"
-
-                $ topics.append("claws")
 
                 menu:
                     "Those claws look pretty sharp.":
@@ -199,43 +196,44 @@ label meet_Laura:
 
                         ch_l "Yeah, indestructible too."
                     "Cool.":
+                        $ LauraX.change_face("_smile",brows = "_surprised")
                         $ LauraX.change_stat("love", 70, 3)
                         $ LauraX.change_stat("obedience", 70, 2)
                         $ LauraX.change_stat("inhibition", 70, 1)
-                        $ LauraX.change_face("_smile", 0,brows = "_surprised")
 
                         ch_l "Yeah, indestructible too."
                     "Ouch.":
-                        $ LauraX.claws = 0
-                        $ LauraX.change_face("_confused", 0)
+                        $ LauraX.claws = False
+                        $ LauraX.change_face("_confused")
                         $ LauraX.change_stat("love", 70, -2)
                         $ LauraX.change_stat("obedience", 70, -5)
 
                         ch_l "Don't worry, I won't stab you."
 
-                        $ LauraX.change_face("_confused", 0,mouth = "_normal")
+                        $ LauraX.change_face("_confused", mouth = "_normal")
                         $ LauraX.change_stat("inhibition", 70, 7)
 
                         ch_l "Probably."
 
-                $ LauraX.claws = 0
+                $ LauraX.claws = False
                 $ LauraX.arm_pose = 1
             "Don't you want to know my power?" if "claws" in topics and "powers" not in topics:
+                $ topics.append("powers")
+
                 if LauraX.love >= 405:
-                    $ LauraX.change_face("_smile", 0,brows = "_confused")
+                    $ LauraX.change_face("_smile", brows = "_confused")
 
                     ch_l "Yeah, I guess."
                 else:
-                    $ LauraX.change_face("_normal", 0)
+                    $ LauraX.change_face("_normal")
 
                     ch_l "Not really."
 
                 $ LauraX.change_stat("inhibition", 70, 3)
-                $ topics.append("powers")
 
                 ch_p "I'm immune to mutant powers and can shut them off."
 
-                $ LauraX.change_face("_smile", 0,brows = "_confused")
+                $ LauraX.change_face("_smile", brows = "_confused")
                 $ LauraX.change_stat("love", 70, 3)
                 $ LauraX.change_stat("obedience", 70, 3)
 
@@ -248,40 +246,42 @@ label meet_Laura:
                 ch_l "Give it a try."
                 "She holds out her arm, and you grab it."
 
+                $ LauraX.change_face("_confused")
                 $ LauraX.change_stat("love", 70, 1)
                 $ LauraX.change_stat("obedience", 70, 2)
                 $ LauraX.change_stat("lust", 70, 5)
-                $ LauraX.change_face("_confused", 0)
 
                 ch_l "Huh."
 
-                $ LauraX.change_face("_sexy", 1,eyes = "_closed")
                 $ LauraX.addiction_rate += 1
+                $ LauraX.change_face("_sexy", blushing = 1, eyes = "_closed")
 
                 "You can feel her shudder a little."
 
-                $ LauraX.change_face("_sexy", 1)
+                $ LauraX.addiction_rate += 1
+                $ LauraX.change_face("_sexy", blushing = 1)
                 $ LauraX.change_stat("love", 70, 1)
                 $ LauraX.change_stat("obedience", 70, 3)
                 $ LauraX.change_stat("lust", 70, 5)
-                $ LauraX.addiction_rate += 1
 
                 ch_l "That feels weird."
 
-                $ LauraX.change_face("_sexy", 1,eyes = "_leftside")
+                $ LauraX.addiction_rate += 1
+                $ LauraX.eyes = "_leftside"
                 $ LauraX.change_stat("obedience", 70, 1)
                 $ LauraX.change_stat("lust", 70, 3)
-                $ LauraX.addiction_rate += 1
 
                 ch_l "-a little more \"alive\" than usual."
 
+                $ LauraX.addiction_rate += 1
+                $ LauraX.change_face("_sexy", blushing = 1, brows = "_confused")
                 $ LauraX.change_stat("inhibition", 70, 5)
                 $ LauraX.change_stat("lust", 70, 5)
-                $ LauraX.change_face("_sexy", 1,brows = "_confused")
-                $ LauraX.addiction_rate += 1
 
                 ch_l "Almost. . . dangerous."
-            "Never mind that. . . [[moving on]" if LauraX.name != "???":
+
+                $ LauraX.blushing = ""
+            "Never mind that. . ." if LauraX.name != "???":
                 $ loop = False
 
         if len(topics) >= 3 and LauraX.name == "???":
@@ -301,11 +301,11 @@ label meet_Laura:
     if "player" in topics:
         $ LauraX.change_stat("love", 70, 2)
         $ LauraX.change_stat("lust", 70, 1)
-        $ LauraX.change_face("_smile", 0)
+        $ LauraX.change_face("_smile")
 
         ch_l "Maybe I'll see you when I get back, [Player.name]."
     else:
-        $ LauraX.change_face("_normal", 0)
+        $ LauraX.change_face("_normal")
 
         ch_l "Maybe I'll see you when I get back, stranger."
 
@@ -313,17 +313,16 @@ label meet_Laura:
         $ LauraX.change_stat("obedience", 70, 2)
         $ LauraX.change_stat("inhibition", 70, 2)
         $ LauraX.change_stat("lust", 70, 3)
-        $ LauraX.change_face("_smile", 1, brows = "_confused")
+        $ LauraX.change_face("_smile", blushing = 1, brows = "_confused")
 
         ch_l "We should. . . spar."
 
-    $ LauraX.location = "hold"
-
-    call remove_Girl(LauraX, transition = easeoutleft)
+    call remove_Girl(LauraX)
 
     "She dashes out of the room, headed for the hangar."
 
     $ LauraX.history.append("met")
+    $ LauraX.location = "hold"
     $ LauraX.to_do.append("mission")
 
     $ round -= 10
@@ -342,7 +341,7 @@ label Laura_Key:
     ch_l "Look, you've been sleeping over a lot and I was thinking. . ."
     ch_l "Just take it already."
     "She takes your hand and practically forces a key onto your palm before making your fingers close on it."
-    $ Keys.append(LauraX)
+    $ Player.Keys.append(LauraX)
     $ LauraX.event_happened[0] = 1
     ch_p "Thanks."
     return
@@ -354,9 +353,9 @@ label Laura_Key:
 
 label Laura_BF(temp_Girls=[]):
     call shift_focus (LauraX)
-    if LauraX.location != bg_current:
-        $ LauraX.location = bg_current
-        if LauraX not in Party:
+    if LauraX.location != Player.location:
+        $ LauraX.location = Player.location
+        if LauraX not in Player.Party:
             "[LauraX.name] approaches you and motions that she wants to speak to you alone."
         else:
             "[LauraX.name] turns towards you and motions that she wants to speak to you alone."
@@ -364,7 +363,7 @@ label Laura_BF(temp_Girls=[]):
     call set_the_scene (0)
     call show_Girl (LauraX)
     "She looks a bit concerned and you can tell she's a bit anxious about whatever she has to say."
-    call taboo_level
+    call set_Character_taboos
     call clear_the_room (LauraX)
     $ LauraX.daily_history.append("relationship")
     $ LauraX.change_face("_angry", 1,eyes = "_side")
@@ -566,7 +565,7 @@ label Laura_BF(temp_Girls=[]):
             ch_l "I should. . . leave."
             "[LauraX.name] wanders off in a bit of a daze."
             $ LauraX.event_happened[5] = 20
-            call remove_Girl (LauraX)
+            call remove_Girl(LauraX)
             $ line = 0
             return
 
@@ -620,7 +619,7 @@ label Laura_BF(temp_Girls=[]):
                     $ line = "no"
             if line == "no":
                 $ LauraX.event_happened[5] = 20
-                call remove_Girl (LauraX)
+                call remove_Girl(LauraX)
                 $ line = 0
                 return
 
@@ -646,7 +645,7 @@ label Laura_BF(temp_Girls=[]):
                 $ LauraX.change_face("_confused", 1)
                 ch_l "Hmm, get back to me, I guess?"
                 $ LauraX.event_happened[5] = 20
-                call remove_Girl (LauraX)
+                call remove_Girl(LauraX)
                 $ line = 0
                 return
         call Haremchange_stat (LauraX, 900, 20)
@@ -682,18 +681,18 @@ label Laura_Cleanhouse:
         $ LauraX.event_happened[5] = 2
         return
 
-    if LauraX.location == bg_current or LauraX in Party:
+    if LauraX.location == Player.location or LauraX in Player.Party:
         "[LauraX.name] glances over at you with a scowl."
     else:
         "[LauraX.name] turns a corner and notices you."
-    if bg_current != "bg_laura" and bg_current != "bg_player":
+    if Player.location != "bg_laura" and Player.location != "bg_player":
         "With little word, she moves behind you and pushes you towards her room."
-        $ bg_current = "bg_laura"
-    $ LauraX.location = bg_current
+        $ Player.location = "bg_laura"
+    $ LauraX.location = Player.location
     call set_the_scene
     call clear_the_room (LauraX)
     call set_the_scene
-    call taboo_level
+    call set_Character_taboos
     $ LauraX.daily_history.append("relationship")
     $ LauraX.change_stat("love", 200, -20)
     $ LauraX.change_face("_angry", 1)
@@ -783,18 +782,18 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
         $ temp_Girls.remove(temp_Girls[0])
     $ Shipshape = len(Shipping)
 
-    if LauraX.location == bg_current or LauraX in Party:
+    if LauraX.location == Player.location or LauraX in Player.Party:
         "[LauraX.name] glances over at you with a concerned look."
     else:
         "[LauraX.name] turns a corner and notices you."
-    if bg_current != "bg_laura" and bg_current != "bg_player":
+    if Player.location != "bg_laura" and Player.location != "bg_player":
         "With little word, she moves behind you and pushes you towards her room."
-        $ bg_current = "bg_laura"
-    $ LauraX.location = bg_current
+        $ Player.location = "bg_laura"
+    $ LauraX.location = Player.location
     call set_the_scene
     call clear_the_room (LauraX)
     call set_the_scene
-    call taboo_level
+    call set_Character_taboos
     $ LauraX.daily_history.append("relationship")
     $ LauraX.change_face("_sad", 1)
     ch_l "Hey, so, I like what this is. . ."
@@ -1062,7 +1061,7 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
         $ LauraX.recent_history.append("_angry")
         $ LauraX.daily_history.append("_angry")
         hide Laura_sprite with easeoutright
-        call remove_Girl (LauraX)
+        call remove_Girl(LauraX)
         $ LauraX.location = "hold"
         return
 
@@ -1188,7 +1187,7 @@ label Laura_Love_End:
     if "lover" not in LauraX.player_petnames:
         $ LauraX.event_happened[6] = 20
         hide Laura_sprite with easeoutright
-        call remove_Girl (LauraX)
+        call remove_Girl(LauraX)
         $ LauraX.location = "hold"
         return
 
@@ -1314,15 +1313,15 @@ label Laura_Love_Redux:
 label Laura_Sub:
     $ LauraX.drain_word("asked_to_meet")
     call shift_focus (LauraX)
-    if LauraX.location != bg_current and LauraX not in Party:
+    if LauraX.location != Player.location and LauraX not in Player.Party:
         "Suddenly, [LauraX.name] shows up and says she needs to talk to you."
 
-    $ LauraX.location = bg_current
+    $ LauraX.location = Player.location
     call set_the_scene (0)
     call show_Girl (LauraX)
     call clear_the_room (LauraX)
     call set_the_scene
-    call taboo_level
+    call set_Character_taboos
     $ LauraX.daily_history.append("relationship")
     $ LauraX.change_face("_bemused", 1)
 
@@ -1565,7 +1564,7 @@ label Laura_Sub:
         $ LauraX.player_petnames.append("sir")
 
     elif line == "rude":
-        call remove_Girl (LauraX)
+        call remove_Girl(LauraX)
         if not simulation:
             $ renpy.pop_call()
         "[LauraX.name] knocks her way past you and storms off."
@@ -1573,7 +1572,7 @@ label Laura_Sub:
         $ LauraX.change_face("_sadside", 2)
         ch_l "Huh, ok, if you're not interested. . ."
         hide Laura_sprite with easeoutright
-        call remove_Girl (LauraX)
+        call remove_Girl(LauraX)
         if not simulation:
             $ renpy.pop_call()
         "[LauraX.name] heads out of the room."
@@ -1658,7 +1657,7 @@ label Laura_Sub_Asked:
     if line == "rude":
 
         hide Laura_sprite with easeoutright
-        call remove_Girl (LauraX)
+        call remove_Girl(LauraX)
         $ LauraX.recent_history.append("_angry")
         if not simulation:
             $ renpy.pop_call()
@@ -1687,16 +1686,16 @@ label Laura_Sub_Asked:
 label Laura_Master:
     $ LauraX.drain_word("asked_to_meet")
     call shift_focus (LauraX)
-    if LauraX.location != bg_current and LauraX not in Party:
+    if LauraX.location != Player.location and LauraX not in Player.Party:
         "Suddenly, [LauraX.name] shows up and says she needs to talk to you."
 
-    $ LauraX.location = bg_current
+    $ LauraX.location = Player.location
     call set_the_scene (0)
     call show_Girl (LauraX)
     call clear_the_room (LauraX)
     call set_the_scene
     $ LauraX.daily_history.append("relationship")
-    call taboo_level
+    call set_Character_taboos
     $ line = 0
     $ LauraX.change_face("_sly", 1)
     ch_l "[LauraX.player_petname]. . ."
@@ -1843,7 +1842,7 @@ label Laura_Master:
     if line == "rude":
         $ LauraX.recent_history.append("_angry")
         hide Laura_sprite with easeoutright
-        call remove_Girl (LauraX)
+        call remove_Girl(LauraX)
         if not simulation:
             $ renpy.pop_call()
         "[LauraX.name] stomps out of the room."
@@ -1851,7 +1850,7 @@ label Laura_Master:
         ch_l "Ok, fine then."
         ch_l "And here I was, about to \"elevate your clearance.\""
         hide Laura_sprite with easeoutright
-        call remove_Girl (LauraX)
+        call remove_Girl(LauraX)
         if not simulation:
             $ renpy.pop_call()
         "[LauraX.name] brushes past you on her way out."
@@ -1874,11 +1873,11 @@ label Laura_Master:
 label Laura_Sexfriend:
 
     $ LauraX.lust = 70
-    $ LauraX.location = bg_current
+    $ LauraX.location = Player.location
     $ LauraX.drain_word("asked_to_meet")
     call set_the_scene
     $ LauraX.daily_history.append("relationship")
-    call taboo_level
+    call set_Character_taboos
     $ line = 0
     $ LauraX.change_face("_sly",2,eyes = "_side")
     "[LauraX.name] approaches you and pulls you aside. She seems to be shivering a little bit."
@@ -1981,11 +1980,11 @@ label Laura_Sexfriend:
                 extend ""
                 "Yeah":
                     ch_l "Sure, let's go."
-                    if bg_current == "bg_player":
-                        $ bg_current = "bg_laura"
+                    if Player.location == "bg_player":
+                        $ Player.location = "bg_laura"
                     else:
-                        $ bg_current = "bg_player"
-                    $ LauraX.location = bg_current
+                        $ Player.location = "bg_player"
+                    $ LauraX.location = Player.location
                     call clear_the_room (LauraX)
                     call set_the_scene
                     $ taboo = 0
@@ -2016,14 +2015,14 @@ label Laura_Fuckbuddy:
 
     "You hear a knock on the door, and go to answer it."
 
-    $ LauraX.location = bg_current
+    $ LauraX.location = Player.location
     call shift_focus (LauraX)
     call set_the_scene (0)
     $ LauraX.outfit_name = "casual1"
     $ LauraX.today_outfit_name = "casual1"
     $ LauraX.change_outfit("casual1")
     call show_Girl (LauraX)
-    call taboo_level
+    call set_Character_taboos
     $ Player.primary_action = "masturbation"
     $ girl_secondary_action = "fondle_pussy"
     $ LauraX.change_face("_sly",2,mouth = "_lipbite")
@@ -2128,7 +2127,7 @@ label Laura_Daddy:
 
 label Gwentro:
     $ Player.add_word(1,"interruption")
-    if taboo > 5 or RogueX.location == bg_current or KittyX.location == bg_current or EmmaX.location == bg_current:
+    if taboo > 5 or RogueX.location == Player.location or KittyX.location == Player.location or EmmaX.location == Player.location:
 
         return
     $ LauraX.history.append("Gwentro")
@@ -2312,9 +2311,9 @@ label Laura_Dressup:
 
     $ active_Girls.append(LauraX) if LauraX not in active_Girls else active_Girls
     call shift_focus (LauraX)
-    $ bg_current = "bg_campus"
-    call remove_Girl ("all")
-    $ LauraX.location = bg_current
+    $ Player.location = "bg_campus"
+    call remove_all
+    $ LauraX.location = Player.location
     call set_the_scene (0)
 
     $ LauraX.outfit_name = "casual1"
@@ -2362,11 +2361,11 @@ label Laura_Dressup:
             ch_l "Not really."
 
     hide Laura_sprite with easeoutright
-    call remove_Girl (LauraX)
+    call remove_Girl(LauraX)
     "[LauraX.name] walks away, and as you watch her go you feel a tap on your shoulder."
 
     call shift_focus (KittyX)
-    $ KittyX.location = bg_current
+    $ KittyX.location = Player.location
     call set_the_scene (0)
     $ KittyX.outfit_name = KittyX.today_outfit_name
     $ KittyX.change_outfit()
@@ -2509,20 +2508,20 @@ label Laura_Dressup3:
     $ LauraX.outfit["underwear"] = "_wolvie_panties"
     menu:
         extend ""
-        "Sneak a peek [[no key] (locked)" if KittyX not in Keys:
+        "Sneak a peek [[no key] (locked)" if KittyX not in Player.Keys:
             pass
-        "Sneak a peek" if KittyX in Keys:
+        "Sneak a peek" if KittyX in Player.Keys:
             "You use your key and unlock the door, opening it and sticking your head in."
             ch_p "Hey, [KittyX.name], what's going on?"
             ch_k "Hey, [KittyX.player_petname]! Come on in!"
 
-            $ bg_current = "bg_kitty"
+            $ Player.location = "bg_kitty"
 
             call clear_the_room ("all", 0, 1)
             call shift_focus (LauraX)
             $ KittyX.location = "bg_kitty"
             $ LauraX.location = "bg_kitty"
-            call set_the_scene(check_if_dressed = False)
+            call set_the_scene
 
             $ LauraX.change_face("_sad",2,eyes = "_squint", brows = "_confused")
             "[LauraX.name] stares at you, her eyes narrowed. She's clearly on edge."
@@ -2563,13 +2562,13 @@ label Laura_Dressup3:
             ch_k "Sure, [KittyX.player_petname]! Gimme a sec!"
             "[KittyX.name] unlocks the door and it swings open."
 
-            $ bg_current = "bg_kitty"
+            $ Player.location = "bg_kitty"
 
             call clear_the_room ("all", 0, 1)
             call shift_focus (LauraX)
             $ KittyX.location = "bg_kitty"
             $ LauraX.location = "bg_kitty"
-            call set_the_scene(check_if_dressed = False)
+            call set_the_scene
 
             $ LauraX.change_face("_sad",2,brows = "_surprised")
             "[LauraX.name] stares at you, as if she's not sure what she's seeing."
@@ -2705,7 +2704,7 @@ label Laura_Dressup3:
 
     $ round -= 20 if round >= 21 else round
 
-    $ bg_current = "bg_campus"
+    $ Player.location = "bg_campus"
 
     jump reset_location
     return
@@ -2720,18 +2719,18 @@ label Laura_Foul:
         $ LauraX.history.remove("partysolved")
     $ LauraX.add_word(1, 0, 0, 0,"partyfix")
     $ LauraX.change_face("_sad", 1)
-    if LauraX.location == bg_current or LauraX in Party:
+    if LauraX.location == Player.location or LauraX in Player.Party:
         "[LauraX.name] glances over at you with a distressed look."
     else:
         "[LauraX.name] turns a corner and notices you."
-    if bg_current != "bg_laura" and bg_current != "bg_player":
+    if Player.location != "bg_laura" and Player.location != "bg_player":
         "With little word, she moves behind you and pushes you towards her room."
-        $ bg_current = "bg_laura"
-    $ LauraX.location = bg_current
+        $ Player.location = "bg_laura"
+    $ LauraX.location = Player.location
     call set_the_scene
     call clear_the_room (LauraX)
     call set_the_scene
-    call taboo_level
+    call set_Character_taboos
     ch_l "Hey. . ."
     ch_l "[LauraX.player_petname]. . ."
     ch_l "About that time at the party. . ."
@@ -2760,7 +2759,7 @@ label Laura_Foul:
     if "sorry" not in LauraX.recent_history:
 
         $ LauraX.change_face("_sadside", 1)
-        ch_l "We were at the Halloween Party. . ."
+        ch_l "We were at the Halloween Player.Party. . ."
         $ LauraX.change_face("_sad", 1)
         ch_l "And you said something about my costume. . ."
         menu:

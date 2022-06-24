@@ -1,5 +1,5 @@
 label take_class:
-    #if day >= 9 and "met" not in EmmaX.history and "traveling" in Player.recent_history and bg_current == "bg_classroom" and weekday < 5:
+    #if day >= 9 and "met" not in EmmaX.history and "traveling" in Player.recent_history and Player.location == "bg_classroom" and weekday < 5:
     if "met" not in EmmaX.history and day >= 1:
         call meet_Emma
 
@@ -61,23 +61,10 @@ label take_class:
     return
 
 label classroom_seating:
-    $ Girls = []
+    $ Girls = Present[:]
     $ Present = []
 
-    python:
-        for G in active_Girls:
-            if G.location == bg_current:
-                Girls.append(G)
-
-        for G in Nearby:
-            if G not in Girls:
-                Girls.append(G)
-
     $ renpy.random.shuffle(Girls)
-
-    $ Nearby = []
-
-    call set_the_scene(character = False)
 
     if len(Girls) == 2:
         $ D20 = renpy.random.randint(500, 1500)
@@ -89,43 +76,28 @@ label classroom_seating:
 
             python:
                 for G in Girls:
-                    if G not in Nearby:
-                        Nearby.append(G)
+                    Nearby.append(G)
 
         menu:
-            extend ""
+            "Who do you want to sit next to?"
             "[Girls[0].name]":
                 $ Present = [Girls[0]]
-
-                if Girls[0] in Nearby:
-                    $ Nearby.remove(Girls[0])
             "[Girls[1].name]":
                 $ Present = [Girls[1]]
-
-                if Girls[1] in Nearby:
-                    $ Nearby.remove(Girls[1])
             "Between them." if not Nearby:
-                $ Present = [Girls[0], Girls[1]]
-
-                if Girls[0] in Nearby:
-                    $ Nearby.remove(Girls[0])
-
-                if Girls[1] in Nearby:
-                    $ Nearby.remove(Girls[1])
+                $ Present = Girls[:]
             "Neither":
                 "You decide to sit a distance away from either of them."
 
                 python:
                     for G in Girls:
-                        if G not in Nearby:
-                            Nearby.append(G)
+                        Nearby.append(G)
     elif len(Girls) > 2:
-        "You see several girls are in the room, who would you like to sit near?"
-
         $ flag = False
 
         while not flag:
             menu:
+                "You see several girls are in the room, who would you like to sit near?"
                 "[RogueX.name]" if RogueX in Girls and RogueX not in Present:
                     $ Present.append(RogueX)
                 "[KittyX.name]" if KittyX in Girls and KittyX not in Present:
@@ -145,7 +117,12 @@ label classroom_seating:
             "Yes":
                 $ Present.append(Girls[0])
             "No, I'll sit away from her a bit.":
-                $ Nearby.append(Girls[0])
+                pass
+
+    if Present and focused_Girl not in Present:
+        call shift_focus(Present[0])
+
+    call set_the_scene(fade = True)
 
     if len(Present) > 2:
         "You figure out seating arrangements with the girls."
@@ -156,25 +133,15 @@ label classroom_seating:
     else:
         "You look for a seat off to the side."
 
-    python:
-        for G in Present:
-            G.location = "bg_classroom"
-
     if len(Girls) > len(Present):
         "The rest are scattered around the room."
 
     python:
         for G in Girls:
             if G not in Present:
-                if G not in Nearby:
-                    Nearby.append(G)
+                Nearby.append(G)
 
                 G.location = "nearby"
-
-    if Present:
-        call shift_focus(Present[0])
-
-    call set_the_scene(silent = True)
 
     return
 
@@ -200,23 +167,9 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
     $ temp_Girls = active_Girls[:]
 
     while temp_Girls:
+        if renpy.showing(temp_Girls[0].tag + "_sprite"):
+            call move_Girl(temp_Girls[0], y_position = 0.33, transition = ease)
 
-        if renpy.showing(temp_Girls[0].tag+"_Sprite"):
-            if temp_Girls[0] == RogueX:
-                show Rogue_sprite standing at sprite_location(RogueX.sprite_location,50):
-                    ease .5 ypos 250
-            elif temp_Girls[0] == KittyX:
-                show Kitty_sprite standing at sprite_location(KittyX.sprite_location,50):
-                    ease .5 ypos 250
-            elif temp_Girls[0] == LauraX:
-                show Laura_sprite standing at sprite_location(LauraX.sprite_location,50):
-                    ease .5 ypos 250
-            elif temp_Girls[0] == JeanX:
-                show Jean_sprite standing at sprite_location(JeanX.sprite_location,50):
-                    ease .5 ypos 250
-            elif temp_Girls[0] == JubesX:
-                show Jubes_sprite standing at sprite_location(JubesX.sprite_location,50):
-                    ease .5 ypos 250
         $ temp_Girls.remove(temp_Girls[0])
 
     call shift_focus (Girl)
@@ -731,7 +684,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         Present[1].voice "Well!"
                         $ Present[1].change_likes(Girl,-4)
                         $ Girl.change_likes(Present[1],-2)
-                        call remove_Girl (Present[1])
+                        call remove_Girl(Present[1])
                     elif approval_check(Present[1], 1500) and Present[1].likes[Girl.tag] >= 600:
 
                         $ Present[1].eyes = "_leftside"
@@ -872,8 +825,9 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                 call caught_having_sex(Girl)
             else:
                 "Since Xavier isn't concerned with your activities, you both head back to your room instead."
-                $ Girl.location = "bg_player"
-                call clear_the_room (Girl, 0, 1)
+
+                $ Party = [Girl]
+                
                 jump player_room
 
 

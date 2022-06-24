@@ -3,7 +3,7 @@
 label Emma_chat_Minimal:
     $ EmmaX.change_face()
     call shift_focus (EmmaX)
-    if EmmaX.location != bg_current:
+    if EmmaX.location != Player.location:
         show cellphone at sprite_location(EmmaX.sprite_location)
     else:
         hide cellphone
@@ -15,10 +15,10 @@ label Emma_chat_Minimal:
         return
     menu:
         ch_e "What was it you wished to discuss, [EmmaX.player_petname]?"
-        "Come on over." if EmmaX.location != bg_current:
+        "Come on over." if EmmaX.location != Player.location:
             ch_e "I don't think I should be visiting students at their whim."
             ch_e "You know my office hours."
-        "Ask [EmmaX.name] to leave" if EmmaX.location == bg_current:
+        "Ask [EmmaX.name] to leave" if EmmaX.location == Player.location:
             ch_e "I'll come and go as I see fit, thank you."
         "Romance her":
             menu:
@@ -26,13 +26,13 @@ label Emma_chat_Minimal:
                     pass
                 "Flirt with her" if not EmmaX.had_chat[5]:
                     call Emma_Flirt_Minimal
-                "Sex Menu" if EmmaX.location == bg_current:
+                "Sex Menu" if EmmaX.location == Player.location:
                     ch_p "Did you want to fool around?"
                     ch_e "With a student? You should know better than that, [EmmaX.player_petname]."
                 "Date":
                     ch_p "Do you want to go on a date tonight?"
                     ch_e "Well that certainly doesn't seem appropriate."
-                "Gifts" if EmmaX.location == bg_current:
+                "Gifts" if EmmaX.location == Player.location:
                     ch_p "I'd like to give you something."
                     ch_e "I'm not sure that would be appropriate at the moment."
                 "Back":
@@ -44,13 +44,13 @@ label Emma_chat_Minimal:
                 "Relationship status":
                     ch_p "Could we talk about us?"
                     ch_e "I'm not sure that's an appropriate discussion at the moment."
-                "Could I get your number?" if EmmaX not in Phonebook:
+                "Could I get your number?" if EmmaX not in Player.Phonebook:
                     if approval_check(EmmaX, 800, "LI"):
                         ch_e "I don't see why not."
-                        $ Phonebook.append(EmmaX)
+                        $ Player.Phonebook.append(EmmaX)
                     elif approval_check(EmmaX, 500, "OI"):
                         ch_e "Hmm. . . fine, hand me your phone."
-                        $ Phonebook.append(EmmaX)
+                        $ Player.Phonebook.append(EmmaX)
                     else:
                         ch_e "I don't think it's appropriate to give my number out to a student like that."
                 "Back":
@@ -58,12 +58,12 @@ label Emma_chat_Minimal:
         "Change [EmmaX.name]":
             ch_p "Let's talk about you."
             ch_e "I doubt that's any of your business."
-        "Party up" if EmmaX not in Party and EmmaX.location == bg_current:
+        "Player.Party up" if EmmaX not in Player.Party and EmmaX.location == Player.location:
             ch_p "Could you follow me for a bit?"
             ch_e "I don't think I should."
-        "Disband party" if EmmaX in Party:
+        "Disband party" if EmmaX in Player.Party:
             ch_p "Ok, you can leave if you prefer."
-            $ Party.remove(EmmaX)
+            $ Player.Party.remove(EmmaX)
         "Never mind.":
             if time_index == 2:
                 ch_e "Now if that will be all, please clear out of here."
@@ -1039,21 +1039,21 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
     if O:
         $ Options = [O]
     else:
-        if EmmaX not in Phonebook:
+        if EmmaX not in Player.Phonebook:
             if approval_check(EmmaX, 850, "LI"):
                 ch_e "If you'd like to reach me. . . after hours, here's my number."
-                $ Phonebook.append(EmmaX)
+                $ Player.Phonebook.append(EmmaX)
                 return
             elif approval_check(EmmaX, 500, "OI"):
                 ch_e "I should let you know how to contact me."
-                $ Phonebook.append(EmmaX)
+                $ Player.Phonebook.append(EmmaX)
                 return
 
-        if "hungry" not in EmmaX.traits and (EmmaX.event_counter["swallowed"] + EmmaX.had_chat[2]) >= 10 and EmmaX.location == bg_current:
+        if "hungry" not in EmmaX.traits and (EmmaX.event_counter["swallowed"] + EmmaX.had_chat[2]) >= 10 and EmmaX.location == Player.location:
             call Emma_Hungry
             return
-        if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(EmmaX, 800, "I")):
-            if EmmaX.location == bg_current and EmmaX.thirst >= 30 and "refused" not in EmmaX.daily_history and "quicksex" not in EmmaX.daily_history:
+        if Player.location != "bg_restaurant" and Player.location != "bg_halloween" and (not taboo or approval_check(EmmaX, 800, "I")):
+            if EmmaX.location == Player.location and EmmaX.thirst >= 30 and "refused" not in EmmaX.daily_history and "quicksex" not in EmmaX.daily_history:
                 $ Girl.change_face("_sly", 1,eyes = "_down")
                 ch_e "I've got an itch. . . "
                 "[EmmaX.name] draws her hand down her body and grazes her pussy."
@@ -1081,7 +1081,7 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
             if "corruption" in Player.traits and "cologne chat" not in EmmaX.daily_history:
                 $ Options.append("corruption")
 
-            if EmmaX.went_on_date >= 1 and bg_current != "bg_restaurant":
+            if EmmaX.went_on_date >= 1 and Player.location != "bg_restaurant":
 
                 $ Options.append("dated")
             if "cheek" in EmmaX.daily_history and "cheek" not in EmmaX.had_chat:
@@ -1139,7 +1139,7 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
             if "public" in EmmaX.history and "public" not in EmmaX.had_chat:
                 $ Options.append("public")
 
-            if (bg_current == "bg_emma" or bg_current == "bg_player") and "relationship" not in EmmaX.daily_history:
+            if (Player.location == "bg_emma" or Player.location == "bg_player") and "relationship" not in EmmaX.daily_history:
                 if "lover" not in EmmaX.player_petnames and EmmaX.love >= 950 and EmmaX.event_happened[6] != 20:
                     $ Options.append("lover?")
                 elif "sir" not in EmmaX.history and EmmaX.obedience >= 500:
@@ -1148,9 +1148,9 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
                     $ Options.append("daddy?")
                 elif "master" not in EmmaX.history and EmmaX.obedience >= 800 and "sir" in EmmaX.player_petnames:
                     $ Options.append("master?")
-                elif "sex friend" not in EmmaX.player_petnames and EmmaX.inhibition >= 500 and bg_current == "bg_classroom" and time_index == 2:
+                elif "sex friend" not in EmmaX.player_petnames and EmmaX.inhibition >= 500 and Player.location == "bg_classroom" and time_index == 2:
                     $ Options.append("sexfriend?")
-                elif "fuck buddy" not in EmmaX.player_petnames and EmmaX.inhibition >= 800 and bg_current != EmmaX.location:
+                elif "fuck buddy" not in EmmaX.player_petnames and EmmaX.inhibition >= 800 and Player.location != EmmaX.location:
                     $ Options.append("fuckbuddy?")
 
 
@@ -1549,13 +1549,11 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
     return
 
 
-label Emma_names(Tempname=0):
-    call get_last_name
-    $ Tempname = _return
+label Emma_names:
+    $ last_name = get_last_name(Player)
     menu:
         ch_e "Oh? What would you like me to call you?"
-        "[Tempname]'s fine.":
-
+        "[last_name]'s fine.":
             $ EmmaX.player_petname = Tempname
             ch_e "I assumed it was, [EmmaX.player_petname]."
         "Call me by my name.":
@@ -1881,7 +1879,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
         elif EmmaX.recent_history.count("no_summon") > 1:
             ch_e "You heard me the first time."
             $ EmmaX.recent_history.append("_angry")
-        elif time_index >= 3:
+        elif time_index > 2:
             ch_e "It's past your bedtime."
         else:
             ch_e "As I said, I've got things to do."
@@ -1902,11 +1900,11 @@ label Emma_Summon(approval_bonus=approval_bonus):
     if D20 <= 3:
 
         $ line = "no"
-    if time_index >= 3:
+    if time_index > 2:
         if approval_check(EmmaX, 700, "L") or approval_check(EmmaX, 300, "O"):
 
             ch_e "It's getting late, but fine, what did you want?"
-            $ EmmaX.location = bg_current
+            $ EmmaX.location = Player.location
             call set_the_scene
         else:
 
@@ -2108,9 +2106,9 @@ label Emma_Summon(approval_bonus=approval_bonus):
         elif EmmaX.location == "bg_campus":
             ch_e "I've got a nice location picked out."
             jump campus
-        elif EmmaX.location in personal_rooms:
+        elif EmmaX.location in bedrooms:
             ch_e "I'll try to keep occupied."
-            $ bg_current = EmmaX.location
+            $ Player.location = EmmaX.location
             jump reset_location
         else:
             ch_e "You know, I'll just meet you in my room."
@@ -2129,8 +2127,8 @@ label Emma_Summon(approval_bonus=approval_bonus):
     if "locked" in Player.traits:
         call locked_door (EmmaX)
         return
-    $ EmmaX.location = bg_current
-    call taboo_level(taboo_location = False)
+    $ EmmaX.location = Player.location
+    call set_Character_taboos(taboo_location = False)
     $ EmmaX.change_outfit()
     call set_the_scene
     return
@@ -2138,29 +2136,10 @@ label Emma_Summon(approval_bonus=approval_bonus):
 
 
 
-label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
-    if "leaving" in EmmaX.recent_history:
-        $ EmmaX.drain_word("leaving")
-    else:
-        return
+label Emma_Leave:
+    $ EmmaX.change_outfit()
 
-    if EmmaX.location == "hold":
-
-        ch_e "Sorry, I have some business to attend to."
-        return
-
-    if EmmaX in Party or "lockedtravels" in EmmaX.traits:
-
-
-        $ EmmaX.location = bg_current
-        return
-
-    elif "freetravels" in EmmaX.traits or not approval_check(EmmaX, 700):
-
-        $ EmmaX.change_outfit()
-        if GirlsNum:
-            ch_e "I have to head out as well."
-
+    if "freetravels" in EmmaX.traits or not approval_check(EmmaX, 700):
         if EmmaX.location == "bg_teacher":
             ch_e "I have a class to teach."
         elif EmmaX.location == "bg_classroom":
@@ -2184,18 +2163,8 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
 
         return
 
-
-    if bg_current == "bg_dangerroom":
-        call exit_gym ([EmmaX])
-
-    $ EmmaX.change_outfit()
-
     if "follow" not in EmmaX.traits:
-
         $ EmmaX.traits.append("follow")
-
-    $ D20 = renpy.random.randint(1, 20)
-    $ line = 0
 
     if EmmaX.location == "bg_teacher":
         $ approval_bonus = -40
@@ -2205,10 +2174,8 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         $ approval_bonus = 20
     elif EmmaX.location == "bg_showerroom":
         $ approval_bonus = 20
-
-
-    if GirlsNum:
-        ch_e "I'm leaving as well."
+    else:
+        $ approval_bonus = 0
 
     if EmmaX.location == "bg_teacher":
         ch_e "I've got a class to teach, but you could probably learn a thing or two from it."
@@ -2227,12 +2194,14 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_e "I'm catching a quick shower, care to join me?"
         else:
             ch_e "I'm headed for the showers, make sure to keep your distance."
+
             return
     elif EmmaX.location == "bg_pool":
         ch_e "I was heading for a swim. Care to join me?"
     else:
         ch_e "Would you care to come with me?"
 
+    $ D20 = renpy.random.randint(1, 20)
 
     menu:
         extend ""
@@ -2240,75 +2209,73 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             if "followed" not in EmmaX.recent_history:
                 $ EmmaX.change_stat("love", 55, 1)
                 $ EmmaX.change_stat("inhibition", 30, 1)
+
             $ line = "go to"
         "Nah, we can talk later.":
-
             if "followed" not in EmmaX.recent_history:
                 $ EmmaX.change_stat("obedience", 50, 1)
                 $ EmmaX.change_stat("obedience", 30, 2)
+
             ch_e "Very well, I'll talk to you later."
         "Could you please stay with me? I'll get lonely.":
-
             if approval_check(EmmaX, 600, "L") or approval_check(EmmaX, 1400):
                 if "followed" not in EmmaX.recent_history:
                     $ EmmaX.change_stat("love", 70, 1)
                     $ EmmaX.change_stat("obedience", 50, 1)
+
                 $ line = "lonely"
             else:
                 if "followed" not in EmmaX.recent_history:
                     $ EmmaX.change_stat("inhibition", 30, 1)
+
                 $ line = "no"
         "No, stay here.":
-
             if approval_check(EmmaX, 600, "O"):
-
                 if "followed" not in EmmaX.recent_history:
                     if EmmaX.love >= 50:
                         $ EmmaX.change_stat("love", 90, 1)
                     $ EmmaX.change_stat("love", 40, -1)
                     $ EmmaX.change_stat("obedience", 90, 1)
+
                 $ line = "command"
-
             elif D20 >= 7 and approval_check(EmmaX, 1400):
-
                 if "followed" not in EmmaX.recent_history:
                     $ EmmaX.change_stat("love", 70, -2)
                     $ EmmaX.change_stat("love", 90, -1)
                     $ EmmaX.change_stat("obedience", 50, 2)
                     $ EmmaX.change_stat("obedience", 90, 1)
+
                 ch_e "I guess it wasn't that important. . ."
+
                 $ line = "yes"
-
             elif approval_check(EmmaX, 200, "O"):
-
                 if "followed" not in EmmaX.recent_history:
                     $ EmmaX.change_stat("love", 70, -4)
                     $ EmmaX.change_stat("love", 90, -2)
+
                 ch_e "Does that work with your little strumpets?"
+
                 if "followed" not in EmmaX.recent_history:
                     $ EmmaX.change_stat("inhibition", 40, 2)
                     $ EmmaX.change_stat("inhibition", 60, 1)
                     $ EmmaX.change_stat("obedience", 70, -2)
             else:
-
                 if "followed" not in EmmaX.recent_history:
                     $ EmmaX.change_stat("inhibition", 30, 1)
                     $ EmmaX.change_stat("inhibition", 50, 1)
                     $ EmmaX.change_stat("love", 50, -1, 1)
                     $ EmmaX.change_stat("obedience", 70, -1)
+
                 $ line = "no"
 
-
-    call taboo_level(taboo_location = False)
     $ EmmaX.recent_history.append("followed")
-    if not line:
 
+    if not line:
         call hide_Girl(EmmaX)
-        call change_out_of_gym_clothes ([EmmaX])
+
         return
 
     if line == "no":
-
         if EmmaX.location == "bg_teacher":
             ch_e "I'm not \"cutting class,\" [EmmaX.player_petname]."
         elif EmmaX.location == "bg_classroom":
@@ -2317,62 +2284,65 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_e "I'm sorry, but how do you think I keep this figure?"
         else:
             ch_e "I'm sorry, I'm just much too busy at the moment."
+
         call hide_Girl(EmmaX)
-        call change_out_of_gym_clothes ([EmmaX])
+
         return
 
     elif line == "go to":
-
-
-        $ approval_bonus = 0
-        $ line = 0
-        call drain_all_words ("leaving")
-        call drain_all_words ("arriving")
-        $ EmmaX.recent_history.append("goto")
-        $ Player.recent_history.append("goto")
         call hide_Girl(EmmaX)
-        call change_out_of_gym_clothes ([EmmaX])
+
         if EmmaX.location == "bg_teacher":
             ch_e "I'll see you there."
-            jump classroom_entry
         elif EmmaX.location == "bg_classroom":
             ch_e "Excellent, that should pass the time."
-            jump classroom_entry
         elif EmmaX.location == "bg_dangerroom":
             ch_e "I'll try to leave some for you."
-            jump danger_room_entry
         elif EmmaX.location == "bg_emma":
             ch_e "I'll be waiting."
-            $ Girl = EmmaX
-            jump girls_room
         elif EmmaX.location == "bg_player":
             ch_e "I'll be waiting."
-            jump player_room
         elif EmmaX.location == "bg_showerroom":
             ch_e "I'll get started."
-            jump shower_entry
         elif EmmaX.location == "bg_campus":
             ch_e "Ok, let's."
-            jump campus_entry
         elif EmmaX.location == "bg_pool":
             ch_e "Ok, let's."
-            jump pool_entry
-        else:
-            ch_e "You know, I'll just meet you in my room."
-            $ EmmaX.location = "bg_emma"
+
+        call hide_all
+
+        $ Player.traveling = True
+
+        $ destination = EmmaX.location
+
+        if destination == "bg_player":
+            jump player_room
+        elif destination == "bg_emma":
             $ Girl = EmmaX
+
             jump girls_room
-
-
+        elif destination == "bg_classroom":
+            jump classroom
+        elif destination == "bg_dangerroom":
+            jump danger_room
+        elif destination == "bg_showerroom":
+            jump shower
+        elif destination == "bg_pool":
+            jump pool
+        elif destination == "bg_study":
+            jump study
+        elif destination == "bg_mall":
+            jump mall
 
     elif line == "lonely":
         ch_e "Well we wouldn't want that. . ."
     elif line == "command":
         ch_e "If you insist."
 
-    $ line = 0
     ch_e "I suppose I can stay for a while."
-    $ EmmaX.location = bg_current
+
+    $ EmmaX.location = Player.location
+
     return
 
 
@@ -2510,7 +2480,7 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                             $ EmmaX.outfit["bra"] = "_sports_bra"
 
                 "I like that bikini top." if EmmaX.outfit["bra"] != "_bikini_top" and "_bikini_top" in EmmaX.inventory:
-                    if bg_current == "bg_pool":
+                    if Player.location == "bg_pool":
                         ch_e "Fine."
                         $ EmmaX.outfit["bra"] = "_bikini_top"
                     else:
@@ -2637,7 +2607,7 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                             $ EmmaX.outfit["underwear"] = "_lace_panties"
 
                 "I like those bikini bottoms." if EmmaX.outfit["underwear"] != "_bikini_bottoms" and "_bikini_bottoms" in EmmaX.inventory:
-                    if bg_current == "bg_pool":
+                    if Player.location == "bg_pool":
                         ch_e "Fine."
                         $ EmmaX.outfit["underwear"] = "_bikini_bottoms"
                     else:

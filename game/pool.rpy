@@ -5,19 +5,19 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
     menu:
         "With who?"
-        "[RogueX.name]" if bg_current == RogueX.location:
+        "[RogueX.name]" if Player.location == RogueX.location:
             $ Girl = RogueX
-        "[KittyX.name]" if bg_current == KittyX.location:
+        "[KittyX.name]" if Player.location == KittyX.location:
             $ Girl = KittyX
-        "[EmmaX.name]" if bg_current == EmmaX.location:
+        "[EmmaX.name]" if Player.location == EmmaX.location:
             $ Girl = EmmaX
-        "[LauraX.name]" if bg_current == LauraX.location:
+        "[LauraX.name]" if Player.location == LauraX.location:
             $ Girl = LauraX
-        "[JeanX.name]" if bg_current == JeanX.location:
+        "[JeanX.name]" if Player.location == JeanX.location:
             $ Girl = JeanX
-        "[StormX.name]" if bg_current == StormX.location:
+        "[StormX.name]" if Player.location == StormX.location:
             $ Girl = StormX
-        "[JubesX.name]" if bg_current == JubesX.location:
+        "[JubesX.name]" if Player.location == JubesX.location:
             $ Girl = JubesX
         "Never mind.":
             return
@@ -492,19 +492,19 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
 
     menu:
         "With who?"
-        "[RogueX.name]" if bg_current == RogueX.location:
+        "[RogueX.name]" if Player.location == RogueX.location:
             $ Girl = RogueX
-        "[KittyX.name]" if bg_current == KittyX.location:
+        "[KittyX.name]" if Player.location == KittyX.location:
             $ Girl = KittyX
-        "[EmmaX.name]" if bg_current == EmmaX.location:
+        "[EmmaX.name]" if Player.location == EmmaX.location:
             $ Girl = EmmaX
-        "[LauraX.name]" if bg_current == LauraX.location:
+        "[LauraX.name]" if Player.location == LauraX.location:
             $ Girl = LauraX
-        "[JeanX.name]" if bg_current == JeanX.location:
+        "[JeanX.name]" if Player.location == JeanX.location:
             $ Girl = JeanX
-        "[StormX.name]" if bg_current == StormX.location:
+        "[StormX.name]" if Player.location == StormX.location:
             $ Girl = StormX
-        "[JubesX.name]" if bg_current == JubesX.location:
+        "[JubesX.name]" if Player.location == JubesX.location:
             $ Girl = JubesX
         "Never mind.":
             return
@@ -779,19 +779,19 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
 
 label Pool_Topless(Girl, temp_Girls=[]):
 
-    if Girl.location != bg_current:
+    if Girl.location != Player.location:
 
         $ temp_Girls = all_Girls[:]
         $ renpy.random.shuffle(temp_Girls)
         while temp_Girls:
-            if temp_Girls[0].location == bg_current:
+            if temp_Girls[0].location == Player.location:
                 call shift_focus (temp_Girls[0])
                 $ temp_Girls = [1]
             $ temp_Girls.remove(temp_Girls[0])
 
     call shift_focus(Girl)
 
-    if (Girl.bra_number() <= 1 and Girl.top_number() <= 1) or Girl.location != bg_current:
+    if (Girl.bra_number() <= 1 and Girl.top_number() <= 1) or Girl.location != Player.location:
 
         $ D20 = renpy.random.randint(1, 14)
         return
@@ -873,7 +873,7 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
     $ Passline = 0
     $ temp_Girls = all_Girls[:]
     while temp_Girls:
-        if bg_current == temp_Girls[0].location and approval_check(temp_Girls[0], 700):
+        if Player.location == temp_Girls[0].location and approval_check(temp_Girls[0], 700):
             if temp_Girls[0].outfit["bra"] == temp_Girls[0].swimwear["bra"] and temp_Girls[0].outfit["underwear"] == temp_Girls[0].swimwear["underwear"]:
 
                 $ Swimmers.append(temp_Girls[0])
@@ -944,7 +944,7 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
     $ temp_Girls = Swimmers[:]
 
     while temp_Girls:
-        call show_Girl(temp_Girls[0], sprite_layer = 4, transformation = instant_reset, transition = dissolve)
+        call show_Girl(temp_Girls[0], sprite_layer = 4, color_transform = reset_zoom_instantly, transition = dissolve)
 
         $ temp_Girls.remove(temp_Girls[0])
 
@@ -955,20 +955,11 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
 
 
 
-label SwimSuit(temp_Girls=[]):
 
-    $ temp_Girls = all_Girls[:]
-    while temp_Girls:
-        if temp_Girls[0].location == bg_current and temp_Girls[0].swimwear["outfit_active"] and temp_Girls[0] not in Party and temp_Girls[0].weekly_schedule[weekday][time_index] == "bg_pool":
-
-
-            $ temp_Girls[0].change_outfit("swimwear")
-        $ temp_Girls.remove(temp_Girls[0])
-    return
 
 label ShowPool(Girls):
     while Girls:
-        if Girls[0].location == bg_current:
+        if Girls[0].location == Player.location:
             $ Girls[0].add_word(0,"swim","swim", 0, 0)
             $ Girls[0].wet = 1
 
@@ -980,7 +971,7 @@ label ShowPool(Girls):
 
             show foreground zorder 2
 
-            call show_Girl(Girls[0], sprite_layer = 1, transformation = swimming(x_position), transition = dissolve)
+            call show_Girl(Girls[0], sprite_layer = 1, color_transform = swimming(x_position), transition = dissolve)
 
         $ Girls.remove(Girls[0])
 

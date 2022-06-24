@@ -1,38 +1,38 @@
 label chat:
     menu:
-        "Chat with [RogueX.name]" if RogueX.location == bg_current:
+        "Chat with [RogueX.name]" if RogueX.location == Player.location:
             $ Girl = RogueX
-        "Text [RogueX.name]" if RogueX.location != bg_current:
+        "Text [RogueX.name]" if RogueX.location != Player.location:
             $ Girl = RogueX
-        "Chat with [KittyX.name]" if KittyX.location == bg_current:
+        "Chat with [KittyX.name]" if KittyX.location == Player.location:
             $ Girl = KittyX
-        "Text [KittyX.name]" if KittyX.location != bg_current and "met" in KittyX.history:
+        "Text [KittyX.name]" if KittyX.location != Player.location and "met" in KittyX.history:
             $ Girl = KittyX
-        "Chat with [EmmaX.name]" if EmmaX.location == bg_current:
+        "Chat with [EmmaX.name]" if EmmaX.location == Player.location:
             $ Girl = EmmaX
-        "Text [EmmaX.name]" if EmmaX.location != bg_current and "met" in EmmaX.history:
+        "Text [EmmaX.name]" if EmmaX.location != Player.location and "met" in EmmaX.history:
             $ Girl = EmmaX
-        "Chat with [LauraX.name]" if LauraX.location == bg_current:
+        "Chat with [LauraX.name]" if LauraX.location == Player.location:
             $ Girl = LauraX
-        "Text [LauraX.name]" if LauraX.location != bg_current and "met" in LauraX.history:
+        "Text [LauraX.name]" if LauraX.location != Player.location and "met" in LauraX.history:
             $ Girl = LauraX
-        "Chat with [JeanX.name]" if JeanX.location == bg_current:
+        "Chat with [JeanX.name]" if JeanX.location == Player.location:
             $ Girl = JeanX
-        "Text [JeanX.name]" if JeanX.location != bg_current and "met" in JeanX.history:
+        "Text [JeanX.name]" if JeanX.location != Player.location and "met" in JeanX.history:
             $ Girl = JeanX
-        "Chat with [StormX.name]" if StormX.location == bg_current:
+        "Chat with [StormX.name]" if StormX.location == Player.location:
             $ Girl = StormX
-        "Text [StormX.name]" if StormX.location != bg_current and "met" in StormX.history:
+        "Text [StormX.name]" if StormX.location != Player.location and "met" in StormX.history:
             $ Girl = StormX
-        "Chat with [JubesX.name]" if JubesX.location == bg_current:
+        "Chat with [JubesX.name]" if JubesX.location == Player.location:
             $ Girl = JubesX
-        "Text [JubesX.name]" if JubesX.location != bg_current and "met" in JubesX.history:
+        "Text [JubesX.name]" if JubesX.location != Player.location and "met" in JubesX.history:
             $ Girl = JubesX
         "Never mind":
             return
 
     if Girl:
-        if Girl.location == bg_current:
+        if Girl.location == Player.location:
             if Girl == EmmaX and "classcaught" not in EmmaX.history:
                 jump Emma_chat_Minimal
 
@@ -54,7 +54,7 @@ label chat:
 
                 return
 
-            if Girl == LauraX and Girl.location == bg_current and "scent" in Player.daily_history:
+            if Girl == LauraX and Girl.location == Player.location and "scent" in Player.daily_history:
                 if not approval_check(Girl, 1700) and not approval_check(Girl, 600,"O"):
                     python:
                         for G in all_Girls:
@@ -120,12 +120,12 @@ label chat:
                     ch_v "Hey, what can I do for ya, [Girl.player_petname]?"
 
             call chat_menu
-        elif Girl in Phonebook:
+        elif Girl in Player.Phonebook:
             if Girl.location == "hold":
                 "She doesn't seem to be picking up."
             else:
                 if Girl == EmmaX:
-                    if EmmaX.location == "bg_teacher" and bg_current == "bg_classroom":
+                    if EmmaX.location == "bg_teacher" and Player.location == "bg_classroom":
                         "She texts back, \"We can speak after class, [EmmaX.player_petname].\""
 
                         return
@@ -133,12 +133,12 @@ label chat:
                         jump Emma_chat_Minimal
 
                 if Girl == StormX:
-                    if StormX.location == "bg_teacher" and bg_current == "bg_classroom":
+                    if StormX.location == "bg_teacher" and Player.location == "bg_classroom":
                         "She texts back, \"This can wait until after class, [StormX.player_petname].\""
 
                         return
 
-                if Girl.location != bg_current:
+                if Girl.location != Player.location:
                     show cellphone at sprite_location(stage_left)
                 else:
                     hide cellphone
@@ -172,7 +172,10 @@ label chat_menu:
 
     call shift_focus(Girl)
 
-    if Girl.location != bg_current:
+    if time_index == 2 and "going_on_date" in Girl.daily_history:
+        call Readytogo(Girl)
+
+    if Girl.location != Player.location:
         show cellphone at sprite_location(stage_left)
     else:
         hide cellphone
@@ -195,16 +198,22 @@ label chat_menu:
 
         return
 
-    if time_index == 2 and "going_on_date" in Player.daily_history:
-        call Readytogo(Girl)
-
     menu:
-        "Come on over." if Girl.location != bg_current:
-            if Girl in Nearby and bg_current != "bg_showerrroom":
-                call Swap_Nearby(Girl)
+        "Come on over." if Girl.location != Player.location:
+            if Girl in Nearby and Player.location != "bg_showerrroom":
+                "[Girl.name] comes and joins you."
+
+                $ Nearby.remove(Girl)
+                $ Present.append(Girl)
+
+                call shift_focus(Girl)
+
+                $ Girl.location = Player.location
+
+                call set_the_scene
             else:
                 call expression Girl.tag + "_Summon"
-        "Ask [Girl.name] to leave" if Girl.location == bg_current:
+        "Ask [Girl.name] to leave" if Girl.location == Player.location:
             call dismiss_girl(Girl)
 
             return
@@ -214,9 +223,9 @@ label chat_menu:
                     pass
                 "Flirt with her" if not Girl.had_chat[5]:
                     call Flirt(Girl)
-                "Sex Menu (locked)" if Girl.location != bg_current:
+                "Sex Menu (locked)" if Girl.location != Player.location:
                     pass
-                "Sex Menu" if Girl.location == bg_current:
+                "Sex Menu" if Girl.location == Player.location:
                     if Girl.love >= Girl.obedience:
                         ch_p "Did you want to fool around?"
                     else:
@@ -306,9 +315,9 @@ label chat_menu:
                     ch_p "Do you want to go on a date tonight?"
 
                     call Date_Ask(Girl)
-                # "Gifts (locked)" if Girl.location != bg_current:
+                # "Gifts (locked)" if Girl.location != Player.location:
                 #     pass
-                # "Gifts" if Girl.location == bg_current:
+                # "Gifts" if Girl.location == Player.location:
                 #     ch_p "I'd like to give you something."
                 #
                 #     call gifts
@@ -321,7 +330,7 @@ label chat_menu:
                 "Relationship status":
                     ch_p "Could we talk about us?"
 
-                    if Girl.location == bg_current:
+                    if Girl.location == Player.location:
                         call expression Girl.tag + "_Relationship"
                     else:
                         if Girl == RogueX:
@@ -364,11 +373,11 @@ label chat_menu:
                             call expression Girl.tag + "_Monogamy"
                         "Never mind.":
                             pass
-                "Could I get your number?" if Girl not in Phonebook:
+                "Could I get your number?" if Girl not in Player.Phonebook:
                     if Girl == EmmaX and approval_check(Girl, 800, "LI"):
                         ch_e "I don't see why not."
 
-                        $ Phonebook.append(Girl)
+                        $ Player.Phonebook.append(Girl)
                     elif Girl != EmmaX and(approval_check(Girl, 400, "L") or approval_check(Girl, 200, "I")):
                         if Girl == RogueX:
                             ch_r "Sure, I suppose."
@@ -383,7 +392,7 @@ label chat_menu:
                         elif Girl == JubesX:
                             ch_v "Sure, yeah."
 
-                        $ Phonebook.append(Girl)
+                        $ Player.Phonebook.append(Girl)
                     elif approval_check(Girl, 200, "O",Alt=[[EmmaX],500-EmmaX.inhibition]):
                         if Girl == RogueX:
                             ch_r "If you want it, I guess."
@@ -400,7 +409,7 @@ label chat_menu:
                         elif Girl == JubesX:
                             ch_v "I guess?"
 
-                        $ Phonebook.append(Girl)
+                        $ Player.Phonebook.append(Girl)
                     else:
                         if Girl == RogueX:
                             ch_r "I don't really want you calling me."
@@ -420,18 +429,18 @@ label chat_menu:
                     pass
         "Change her":
             call change_attributes(Girl)
-        "Add her to party" if Girl not in Party and Girl.location == bg_current:
+        "Add her to party" if Girl not in Player.Party and Girl.location == Player.location:
             ch_p "Could you follow me for a bit?"
 
             if Girl == EmmaX and approval_check(Girl, 1250):
-                $ Party.append(Girl)
+                $ Player.Party.append(Girl)
 
                 ch_e "Lead away."
 
                 return
 
             if approval_check(Girl, 600,Alt=[[EmmaX,JeanX],900]):
-                $ Party.append(Girl)
+                $ Player.Party.append(Girl)
 
                 if Girl == RogueX:
                     ch_r "Ok, Where did you want to go?"
@@ -479,56 +488,56 @@ label chat_menu:
                     ch_s "I'm comfortable here."
                 elif Girl == JubesX:
                     ch_v "Def not."
-        "Disband party" if Girl in Party:
+        "Disband party" if Girl in Player.Party:
             ch_p "Ok, you can leave if you prefer."
 
-            $ temp_Girls = Party[:]
+            $ temp_Girls = Player.Party[:]
 
             while temp_Girls:
-                $ Party.remove(temp_Girls[0])
+                $ Player.Party.remove(temp_Girls[0])
 
                 call change_into_scheduled_outfit([temp_Girls[0]], 0)
 
                 if "leaving" in temp_Girls[0].recent_history:
                     $ temp_Girls[0].drain_word("leaving")
                 if temp_Girls[0] == RogueX:
-                    if temp_Girls[0].location == bg_current:
+                    if temp_Girls[0].location == Player.location:
                         ch_r "Ok, I'll probably stick around for a bit anyway."
                     else:
                         ch_r "Ok, see you later then."
                 elif temp_Girls[0] == KittyX:
-                    if temp_Girls[0].location == bg_current:
+                    if temp_Girls[0].location == Player.location:
                         ch_k "Good to know, but I'm[temp_Girls[0].like] fine here."
                     else:
                         ch_k "Cool, later."
                 elif temp_Girls[0] == EmmaX:
-                    if temp_Girls[0].location == bg_current:
+                    if temp_Girls[0].location == Player.location:
                         ch_e "I'm glad I have your \"permission\" to leave, but I'd rather be here."
-                    elif temp_Girls[0].location == "bg_teacher" and bg_current == "bg_classroom":
+                    elif temp_Girls[0].location == "bg_teacher" and Player.location == "bg_classroom":
                         ch_e "I'm glad I have your \"permission\" to leave, but I {i}do{/i} have a class to teach."
                     else:
                         ch_e "If that's all then, I'll see you later."
                 elif temp_Girls[0] == LauraX:
-                    if temp_Girls[0].location == bg_current:
+                    if temp_Girls[0].location == Player.location:
                         ch_l "I think I'm fine here."
                     else:
                         ch_l "Ok, see ya then."
                 elif temp_Girls[0] == JeanX:
                     ch_j "Ok."
                 elif temp_Girls[0] == StormX:
-                    if temp_Girls[0].location == bg_current:
+                    if temp_Girls[0].location == Player.location:
                         ch_s "I would rather stay, thank you."
-                    elif temp_Girls[0].location == "bg_teacher" and bg_current == "bg_classroom":
+                    elif temp_Girls[0].location == "bg_teacher" and Player.location == "bg_classroom":
                         ch_s "I do have a class to teach. I think that I'll stay."
                     else:
                         ch_s "Ah, fine, I'll see you later."
                 elif temp_Girls[0] == JubesX:
-                    if temp_Girls[0].location == bg_current:
+                    if temp_Girls[0].location == Player.location:
                         ch_v "Ok, but I'll stick around."
                     else:
                         ch_v "Ok, ok. Laters."
 
-                if temp_Girls[0].location != bg_current:
+                if temp_Girls[0].location != Player.location:
                     call set_the_scene
 
                 if temp_Girls:
@@ -557,7 +566,7 @@ label chat_menu:
     jump chat_menu
 
 label switch_chat:
-    if bg_current == "bg_halloween":
+    if Player.location == "bg_halloween":
         "You'll have to go to the other girls if you want to talk to them."
 
         return
@@ -580,8 +589,8 @@ label switch_chat:
         "Never mind":
             return
 
-    if temp_Girl.location != bg_current:
-        if temp_Girl in Phonebook:
+    if temp_Girl.location != Player.location:
+        if temp_Girl in Player.Phonebook:
             "You give [temp_Girl.name] a call."
 
             if temp_Girl == EmmaX and "classcaught" not in EmmaX.history:
@@ -629,10 +638,10 @@ label change_attributes(Girl):
             "Your wardrobe.":
                 ch_p "I wanted to talk about your style."
 
-                if bg_current == "bg_halloween":
+                if Player.location == "bg_halloween":
                     Girl.voice "Not at the party. . ."
                 else:
-                    call taboo_level
+                    call set_Character_taboos
                     call change_wardrobe(Girl)
             "Shift her personality" if approval_check(Girl, 900, "L", taboo_modifier=0) or approval_check(Girl, 900, "O", taboo_modifier=0) or approval_check(Girl, 900, "I", taboo_modifier=0):
                 ch_p "Could we talk about us?"
@@ -857,8 +866,8 @@ label change_attributes(Girl):
                 return
 
 label dismiss_girl(Girl):
-    if Girl in Party:
-        $ Party.remove(Girl)
+    if Girl in Player.Party:
+        $ Player.Party.remove(Girl)
 
     call change_into_scheduled_outfit([Girl], 0)
 
@@ -869,7 +878,7 @@ label dismiss_girl(Girl):
 
     menu:
         "You can leave if you like.":
-            if Girl.location == bg_current and not approval_check(Girl, 700, "O"):
+            if Girl.location == Player.location and not approval_check(Girl, 700, "O"):
                 if Girl == RogueX:
                     ch_r "Thanks, but I think I'll stick around."
                 elif Girl == KittyX:
@@ -902,7 +911,7 @@ label dismiss_girl(Girl):
 
                 $ leaving = True
         "Could you give me the room please?":
-            if Girl.location == bg_current and not approval_check(Girl, 800, "LO"):
+            if Girl.location == Player.location and not approval_check(Girl, 800, "LO"):
                 if Girl == RogueX:
                     ch_r "I'd rather stick around."
                 elif Girl == KittyX:
@@ -954,7 +963,7 @@ label dismiss_girl(Girl):
 
                 $ leaving = True
         "You can go now.":
-            if Girl.location == bg_current and not approval_check(Girl, 500, "O"):
+            if Girl.location == Player.location and not approval_check(Girl, 500, "O"):
                 if Girl == RogueX:
                     ch_r "I think I'll stay."
                 elif Girl == KittyX:
@@ -1010,13 +1019,13 @@ label dismiss_girl(Girl):
         "Nevermind.":
             return
 
-    if not leaving and bg_current in ["bg_campus", "bg_classroom", "bg_dangerroom"]:
-        call remove_Girl(Girl, 1, 1)
+    if not leaving and Player.location in ["bg_campus", "bg_classroom", "bg_dangerroom"]:
+        call remove_Girl(Girl)
     elif not leaving:
         menu:
             extend ""
             "I insist, get going.":
-                if Girl.location != bg_current and (approval_check(Girl, 1200, "LO") or approval_check(Girl, 500, "O")):
+                if Girl.location != Player.location and (approval_check(Girl, 1200, "LO") or approval_check(Girl, 500, "O")):
                     if "dismissed" not in Girl.daily_history:
                         $ Girl.change_stat("love", 70, -5, 1)
                         $ Girl.change_stat("obedience", 50, 10)
@@ -1039,7 +1048,7 @@ label dismiss_girl(Girl):
                         ch_v "Ok, fine. . ."
 
                     $ leaving = True
-                elif Girl.location != bg_current and (approval_check(Girl, 1000, "LO") or approval_check(Girl, 300, "O")):
+                elif Girl.location != Player.location and (approval_check(Girl, 1000, "LO") or approval_check(Girl, 300, "O")):
                     if "dismissed" not in Girl.daily_history:
                         $ Girl.change_stat("love", 50, -5, 1)
                         $ Girl.change_stat("love", 70, -5, 1)
@@ -1065,7 +1074,7 @@ label dismiss_girl(Girl):
                         ch_v "Whatever. . ."
 
                     $ leaving = True
-                elif Girl.location != bg_current:
+                elif Girl.location != Player.location:
                     if "dismissed" not in Girl.daily_history:
                         $ Girl.change_stat("love", 50, -5, 1)
                         $ Girl.change_stat("love", 70, -10, 1)
@@ -1146,11 +1155,11 @@ label dismiss_girl(Girl):
     if Girl in Nearby:
         "You shift a bit away from [Girl.name]"
     elif not leaving:
-        $ Girl.location = bg_current
+        $ Girl.location = Player.location
     else:
-        if Girl.location != bg_current:
+        if Girl.location != Player.location:
             pass
-        elif bg_current == Girl.home:
+        elif Player.location == Girl.home:
             $ Girl.location = "bg_campus"
         else:
             $ Girl.location = Girl.home

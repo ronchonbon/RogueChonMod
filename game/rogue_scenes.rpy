@@ -1,7 +1,7 @@
 label prologue:
     $ time_index = 2
     $ current_time = "evening"
-    $ bg_current = "bg_study"
+    $ Player.location = "bg_study"
 
     scene background onlayer background
     scene
@@ -28,21 +28,22 @@ label prologue:
     ch_x "Nonsense, my boy. You have an incredibly useful ability. . ."
     ch_x "the power to negate other powers, even including my own."
 
-    $ RogueX.location = "bg_study"
+    call add_Girl(RogueX, x_position = stage_far_right)
 
-    call shift_focus(RogueX)
-    call show_Girl(RogueX, x_position = stage_far_right, transition = easeinright)
-
+    $ RogueX.name = "???"
     $ RogueX.change_face("_surprised")
 
     ch_r "What's that Prof? This new kid can negate mutant powers?"
 
     $ RogueX.mouth = "_normal"
 
-    call show_Girl(RogueX, x_position = stage_right, transition = ease)
+    call move_Girl(RogueX, x_position = stage_right, transition = ease)
 
     ch_r "Maybe even my own?"
-    ch_x "That is correct, [RogueX.name], though currently, his powers are weak and uncontrolled."
+    ch_x "That is correct, Rogue, though currently, his powers are weak and uncontrolled."
+
+    $ RogueX.name = "Rogue"
+    
     ch_x "One day, however, he may even be able to help you turn your powers off permanently."
     ch_r "! . . ."
 
@@ -54,9 +55,7 @@ label prologue:
 
     hide Xavier_sprite with easeoutright
 
-    call show_Girl(RogueX, x_position = stage_center, transition = ease)
-
-    $ active_Girls.append(RogueX)
+    call move_Girl(RogueX, x_position = stage_center, transition = ease)
 
     menu:
         ch_r "A pleasure ta meet ya, [RogueX.player_petname]. Let me give ya the lay of the place."
@@ -102,29 +101,25 @@ label prologue:
             $ RogueX.change_stat("obedience", 200, 30)
             $ RogueX.change_face("_angry")
 
-            call show_Girl(RogueX, transition = vpunch)
+            call move_Girl(RogueX, transition = vpunch)
 
             ch_r "Well I never!"
             ch_r "Hmph, I have to give the tour anyways, so get mov'in. . ."
 
-    hide Rogue_sprite with easeoutright
+    call hide_Girl(RogueX)
 
 label tour_start:
-    $ bg_current = "bg_campus"
+    $ Player.location = "bg_campus"
 
-    $ RogueX.location = "bg_campus"
-
-    call show_Girl(RogueX, transformation = sunset, transition = easeinleft)
+    call add_Girl(RogueX)
 
     ch_r "This is the campus square. It links up to all the major locations on campus and you'll probably pass through here a lot."
 
-    hide Rogue_sprite with easeoutright
+    call hide_Girl(RogueX)
 
-    $ bg_current = "bg_player"
+    $ Player.location = "bg_player"
 
-    $ RogueX.location = "bg_player"
-
-    call show_Girl(RogueX, transition = easeinleft)
+    call add_Girl(RogueX)
 
     ch_r "This will be your room, we each get private rooms now that the campus has been expanded."
 
@@ -148,29 +143,26 @@ label tour_start:
     else:
         ch_r "You can stop by sometime, but not after curfew."
 
-    hide Rogue_sprite with easeoutleft
+    call hide_Girl(RogueX)
 
-    $ bg_current = "bg_classroom"
+    $ Player.location = "bg_classroom"
 
-    $ RogueX.location = "bg_classroom"
-
-    call show_Girl(RogueX, transition = easeinright)
+    call add_Girl(RogueX)
 
     ch_r "And this is one of our state-of-the-art classrooms."
     ch_r "They're multi-purpose so they can teach almost anything in them."
     ch_r "This used to just be an after school training facility, but over the past few years it's grown into a full service university."
 
-    hide Rogue_sprite with easeoutright
+    call hide_Girl(RogueX)
 
-    $ bg_current = "bg_dangerroom"
+    $ Player.location = "bg_dangerroom"
 
-    $ RogueX.location = "bg_dangerroom"
-
-    call show_Girl(RogueX, transition = easeinleft)
+    call add_Girl(RogueX)
 
     ch_r "This is the Danger Room. It's been upgraded to a fully holographic experience, allowing realistic battlefield simulations."
 
     $ counter = 0
+
     while counter < 3:
         menu:
             extend ""
@@ -196,14 +188,12 @@ label tour_start:
 
     ch_r "Moving on then. . ."
 
-    hide Rogue_sprite with easeoutleft
+    call hide_Girl(RogueX)
 
 label tour_end:
-    $ bg_current = "bg_campus"
+    $ Player.location = "bg_campus"
 
-    $ RogueX.location = bg_current
-
-    call show_Girl(RogueX, transformation = sunset, transition = easeinright)
+    call add_Girl(RogueX)
 
     ch_r "Well, that's the nickel tour, now you know where everything is. . ."
 
@@ -310,7 +300,7 @@ label tour_end:
         ch_r "Maybe I'll see you around though. Here's my number, you can give me a call."
 
         if not simulation:
-            $ Phonebook.append(RogueX)
+            $ Player.Phonebook.append(RogueX)
 
     $ RogueX.outfit["gloves"] = "_gloves"
     $ RogueX.arm_pose = 1
@@ -328,6 +318,8 @@ label tour_parting:
     menu:
         extend ""
         "Ok, see you later.":
+            call remove_Girl(RogueX)
+
             "You head back to your room."
         "[line]":
             if RogueX.love >= 560:
@@ -347,7 +339,7 @@ label tour_parting:
                     ch_r "What the hell, [Player.name]?!"
                     ch_r "Way to take advantage of a girl's feelings there!"
 
-                    hide Rogue_sprite with easeoutright
+                    call remove_Girl(RogueX)
 
                     "[RogueX.name] tears off and you head back to your room."
                 else:
@@ -355,11 +347,9 @@ label tour_parting:
 
                     ch_r "That was real nice, [RogueX.player_petname]. I'll definitely be seeing you later."
 
-                    hide Rogue_sprite with easeoutright
+                    call remove_Girl(RogueX)
 
                     "You head back to your room."
-
-                    $ RogueX.emotion = "_normal"
             else:
                 if (RogueX.love >= 530 or RogueX.obedience > 50) and not RogueX.action_counter["kiss"]:
                     $ RogueX.addiction_rate += 1
@@ -379,18 +369,17 @@ label tour_parting:
                     $ RogueX.change_face("_bemused")
 
                     ch_r "Nah, I think you've had enough for today, [RogueX.player_petname]."
+
+                    call remove_Girl(RogueX)
+
                     "You head back to your room."
 
                     $ RogueX.emotion = "_normal"
 
-    $ RogueX.location = "bg_rogue"
-
-    call hide_Girl(RogueX, transition = easeoutright)
-
     if simulation:
         return False
 
-    $ bg_current = "bg_player"
+    $ active_Girls.append(RogueX)
 
     call wait
     jump player_room
@@ -423,7 +412,7 @@ label Rogue_first_kiss:
     $ RogueX.change_stat("obedience", 30, 20)
     $ RogueX.change_stat("inhibition", 30, 30)
 
-    call reset_position(RogueX)
+    call show_full_body(RogueX)
 
     return
 
@@ -444,7 +433,7 @@ label Rogue_Key:
     ch_r "Hey, you've been sleeping over a lot, I figured you might want a key?"
     ch_p "Thanks."
     $ RogueX.arm_pose = 1
-    $ Keys.append(RogueX)
+    $ Player.Keys.append(RogueX)
     $ RogueX.event_happened[0] = 1
     return
 
@@ -455,14 +444,14 @@ label Rogue_BF:
 
     $ Player.add_word(1,"interruption")
     $ RogueX.drain_word("asked_to_meet")
-    if RogueX.location != bg_current and RogueX not in Party:
+    if RogueX.location != Player.location and RogueX not in Player.Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
-    $ RogueX.location = bg_current
+    $ RogueX.location = Player.location
     call set_the_scene (0)
     call show_Girl (RogueX)
     call clear_the_room (RogueX)
-    call taboo_level
+    call set_Character_taboos
     $ RogueX.daily_history.append("relationship")
     $ RogueX.change_face("_bemused", 1)
     ch_r "So, [RogueX.player_petname], we've been hanging out for a while now."
@@ -531,7 +520,7 @@ label Rogue_BF:
                 $ RogueX.change_stat("love", 200, -10)
                 ch_r "I get it. That's fine."
                 $ RogueX.event_happened[5] = 20
-                call remove_Girl (RogueX)
+                call remove_Girl(RogueX)
                 $ line = 0
                 return
         "Not really.":
@@ -565,8 +554,8 @@ label Rogue_BF_Jerk:
             return True
         $ RogueX.player_petnames.append("boyfriend")
         $ achievements.append("I am not your Boyfriend!")
-        $ bg_current = "bg_player"
-        call remove_Girl (RogueX)
+        $ Player.location = "bg_player"
+        call remove_Girl(RogueX)
         call set_the_scene
         return
     if 1 <  RogueX.event_happened[5] < 20:
@@ -575,15 +564,15 @@ label Rogue_BF_Jerk:
     else:
         $ RogueX.change_stat("love", 200, -50)
 
-    if bg_current == RogueX.home:
+    if Player.location == RogueX.home:
         ch_r "Jerk! Out!"
     else:
         "[RogueX.name] storms off."
     if simulation:
         return True
     $ RogueX.location = "bg_rogue"
-    $ bg_current = "bg_player"
-    call remove_Girl (RogueX)
+    $ Player.location = "bg_player"
+    call remove_Girl(RogueX)
     call set_the_scene
     jump reset_location
 
@@ -594,8 +583,8 @@ label Rogue_Love:
     call shift_focus (RogueX)
     $ RogueX.drain_word("asked_to_meet")
 
-    if bg_current != "bg_rogue":
-        if RogueX.location == bg_current or RogueX in Party:
+    if Player.location != "bg_rogue":
+        if RogueX.location == Player.location or RogueX in Player.Party:
             "Suddenly, [RogueX.name] says she wants to talk to you in her room and drags you over there."
         else:
             "[RogueX.name] shows up, hurriedly says she wants to talk to you in her room and drags you over there."
@@ -603,12 +592,12 @@ label Rogue_Love:
         "[RogueX.name] suddenly stares at you very intently."
 
     $ Player.add_word(1,"interruption")
-    $ bg_current = "bg_rogue"
-    $ RogueX.location = bg_current
+    $ Player.location = "bg_rogue"
+    $ RogueX.location = Player.location
     call set_the_scene (0)
     call show_Girl (RogueX)
     call clear_the_room (RogueX)
-    call taboo_level
+    call set_Character_taboos
     $ RogueX.daily_history.append("relationship")
     $ RogueX.change_face("_bemused", 1)
     if RogueX in Player.Harem:
@@ -707,7 +696,7 @@ label Rogue_Love:
     call enter_main_sex_menu(RogueX)
     $ approval_bonus = 0
 
-    $ bg_current = "bg_rogue"
+    $ Player.location = "bg_rogue"
 
     jump reset_location
 
@@ -728,8 +717,8 @@ label Rogue_Love_Jerk:
         $ RogueX.player_petnames.append("lover")
         $ achievements.append("One Sided Love")
         $ RogueX.location = "bg_rogue"
-        $ bg_current = "bg_player"
-        call remove_Girl (RogueX)
+        $ Player.location = "bg_player"
+        call remove_Girl(RogueX)
         jump player_room
     if RogueX.event_happened[6] > 1:
         ch_r "Fool me once, shame on you. . . I thought you'd grown."
@@ -739,8 +728,8 @@ label Rogue_Love_Jerk:
     if simulation:
         return False
     $ RogueX.location = "bg_rogue"
-    $ bg_current = "bg_player"
-    call remove_Girl (RogueX)
+    $ Player.location = "bg_player"
+    call remove_Girl(RogueX)
     jump player_room
 
 label Rogue_AnnaMarie:
@@ -795,15 +784,15 @@ label Rogue_AnnaMarie:
 label Rogue_Sub:
     call shift_focus (RogueX)
     $ RogueX.drain_word("asked_to_meet")
-    if RogueX.location != bg_current and RogueX not in Party:
+    if RogueX.location != Player.location and RogueX not in Player.Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
     $ Player.add_word(1,"interruption")
-    $ RogueX.location = bg_current
+    $ RogueX.location = Player.location
     call set_the_scene (0)
     call show_Girl (RogueX)
     call clear_the_room (RogueX)
-    call taboo_level
+    call set_Character_taboos
     $ RogueX.daily_history.append("relationship")
     $ RogueX.change_face("_bemused", 1)
     ch_r ". . ."
@@ -890,9 +879,9 @@ label Rogue_Sub_Jerk:
             return
         $ RogueX.player_petnames.append("sir")
         $ achievements.append("Nosiree")
-        $ bg_current = "bg_player"
+        $ Player.location = "bg_player"
         $ RogueX.location = "bg_rogue"
-        call remove_Girl (RogueX)
+        call remove_Girl(RogueX)
         jump player_room
     if RogueX.event_happened[7] > 1:
         ch_r "I thought you may have learned to respect my needs by now."
@@ -902,8 +891,8 @@ label Rogue_Sub_Jerk:
     if simulation:
         return
     $ RogueX.location = "bg_rogue"
-    $ bg_current = "bg_player"
-    call remove_Girl (RogueX)
+    $ Player.location = "bg_player"
+    call remove_Girl(RogueX)
     jump player_room
 
 
@@ -913,15 +902,15 @@ label Rogue_Sub_Jerk:
 label Rogue_Master:
     call shift_focus (RogueX)
     $ RogueX.drain_word("asked_to_meet")
-    if RogueX.location != bg_current and RogueX not in Party:
+    if RogueX.location != Player.location and RogueX not in Player.Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
     $ Player.add_word(1,"interruption")
-    $ RogueX.location = bg_current
+    $ RogueX.location = Player.location
     call set_the_scene (0)
     call show_Girl (RogueX)
     call clear_the_room (RogueX)
-    call taboo_level
+    call set_Character_taboos
     $ RogueX.daily_history.append("relationship")
     $ RogueX.change_face("_bemused", 1)
     ch_r ". . ."
@@ -1013,9 +1002,9 @@ label Rogue_Obed_Jerk:
             return
         $ RogueX.player_petnames.append("master")
         $ achievements.append("Heavy is the Head")
-        $ bg_current = "bg_player"
+        $ Player.location = "bg_player"
         $ RogueX.location = "bg_rogue"
-        call remove_Girl (RogueX)
+        call remove_Girl(RogueX)
         jump player_room
     if RogueX.event_happened[8] > 1:
         ch_r "I thought you may have learned to respect my needs by now."
@@ -1025,8 +1014,8 @@ label Rogue_Obed_Jerk:
     if simulation:
         return
     $ RogueX.location = "bg_rogue"
-    $ bg_current = "bg_player"
-    call remove_Girl (RogueX)
+    $ Player.location = "bg_player"
+    call remove_Girl(RogueX)
     jump player_room
 
 
@@ -1037,7 +1026,7 @@ label Rogue_Sexfriend:
     call shift_focus (RogueX)
     $ RogueX.daily_history.append("relationship")
     if RogueX in Player.Harem:
-        if RogueX.location != bg_current and RogueX not in Party:
+        if RogueX.location != Player.location and RogueX not in Player.Party:
             return
         $ RogueX.drain_word("asked_to_meet")
         if "_stockings_and_garterbelt" not in RogueX.inventory:
@@ -1048,17 +1037,17 @@ label Rogue_Sexfriend:
         return
 
     $ RogueX.drain_word("asked_to_meet")
-    if RogueX.location != bg_current and RogueX not in Party:
+    if RogueX.location != Player.location and RogueX not in Player.Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
     if "_stockings_and_garterbelt" not in RogueX.inventory:
         $ RogueX.inventory.append("_stockings_and_garterbelt")
     $ RogueX.player_petnames.append("sex friend")
-    $ RogueX.location = bg_current
+    $ RogueX.location = Player.location
     call set_the_scene (0)
     call show_Girl (RogueX)
     call clear_the_room (RogueX)
-    call taboo_level
+    call set_Character_taboos
     $ RogueX.change_face("_smile", 1)
     ch_r ". . ."
     ch_r "We've been having fun, right?"
@@ -1133,21 +1122,21 @@ label Rogue_Sexfriend_Jerk:
             return
         $ RogueX.player_petnames.append("sex friend")
         $ achievements.append("Man of Virtue")
-        $ bg_current = "bg_player"
+        $ Player.location = "bg_player"
         $ RogueX.location = "bg_rogue"
-        call remove_Girl (RogueX)
+        call remove_Girl(RogueX)
         jump player_room
     $ Count = (10*RogueX.event_happened[9])
     $ RogueX.change_stat("inhibition", 200, -Count)
-    if bg_current == "bg_rogue":
+    if Player.location == "bg_rogue":
         ch_r "Ok, you can go now."
-        $ bg_current = "bg_player"
+        $ Player.location = "bg_player"
     else:
         ch_r "Ok, I'm out."
         $ RogueX.location = "bg_rogue"
     if simulation:
         return
-    call remove_Girl (RogueX)
+    call remove_Girl(RogueX)
     jump player_room
 
 
@@ -1158,21 +1147,21 @@ label Rogue_Fuckbuddy:
     call shift_focus (RogueX)
     $ RogueX.drain_word("asked_to_meet")
     if RogueX in Player.Harem:
-        if RogueX.location != bg_current and RogueX not in Party:
+        if RogueX.location != Player.location and RogueX not in Player.Party:
             return
         $ RogueX.player_petnames.append("fuck buddy")
         $ RogueX.change_stat("inhibition", 200, 50)
         "[RogueX.name] suddenly reaches down and gives your package a little squeeze."
         return
 
-    if RogueX.location != bg_current and RogueX not in Party:
+    if RogueX.location != Player.location and RogueX not in Player.Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
-    $ RogueX.location = bg_current
+    $ RogueX.location = Player.location
     call set_the_scene (0)
     call show_Girl (RogueX)
     call clear_the_room (RogueX)
-    call taboo_level
+    call set_Character_taboos
     $ RogueX.change_face("_bemused", 1)
     ch_r ". . ."
     ch_r "I've been having a lot of fun with this \"sex friend\" thing."
@@ -1209,7 +1198,7 @@ label Rogue_Fuckbuddy:
                 call Rogue_First_Topless (1)
                 call breasts_launch(RogueX)
                 "Rogue, throws her top off, grabs you and shoves your head into her cleavage."
-                call reset_position(RogueX)
+                call show_full_body(RogueX)
             "What do you mean by that?":
                 $ RogueX.brows = "_confused"
                 menu:
@@ -1217,7 +1206,7 @@ label Rogue_Fuckbuddy:
                     "Oh, ok, sure.":
                         call kiss_launch(RogueX)
                         "Rogue laughs and tackles you into a hug."
-                        call reset_position(RogueX)
+                        call show_full_body(RogueX)
                     "Oh, no, not my style.":
                         jump Rogue_Fuckbuddy_Jerk
             "No thanks.":
@@ -1255,13 +1244,13 @@ label Rogue_Fuckbuddy_Jerk:
     $ renpy.pop_call()
     $ Count = (10*RogueX.event_happened[10])
     $ RogueX.change_stat("inhibition", 200, -Count)
-    if bg_current == "bg_rogue":
+    if Player.location == "bg_rogue":
         ch_r "Ok, you can go now."
-        $ bg_current = "bg_player"
+        $ Player.location = "bg_player"
     else:
         ch_r "Ok, I'm out."
         $ RogueX.location = "bg_rogue"
-    call remove_Girl (RogueX)
+    call remove_Girl(RogueX)
     jump player_room
 
 

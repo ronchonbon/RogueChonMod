@@ -1,3 +1,35 @@
+image black_screen:
+    Solid("#000000")
+
+    on show:
+        alpha 0.0
+        linear 0.4 alpha 1.0
+    on hide:
+        alpha 1.0
+        linear 0.4 alpha 0.0
+
+layeredimage background:
+    always:
+        "images/backgrounds/sky_[current_time].png"
+
+    if Player.location not in ["bg_campus", "bg_study", "bg_storm",  "bg_pool", "bg_mall"]:
+        "images/backgrounds/[Player.location].png"
+    else:
+        "images/backgrounds/[Player.location]_[current_time].png"
+
+layeredimage foreground:
+    if Player.location == "bg_pool":
+        AlphaMask("images/backgrounds/[Player.location]_[current_time].png", "images/backgrounds/bg_pool_mask.png")
+
+    if Player.location == "bg_restaurant":
+        "images/backgrounds/bg_restaurant_table.png"
+
+    if Player.location == "bg_classroom":
+        "images/backgrounds/bg_classroom_front.png"
+
+    if Player.location == "bg_classroom" and time_index < 2 and weekday < 5:
+        "images/backgrounds/bg_classroom_pupils.png"
+
 init python:
 
     def call_holder(value, Color, XPOS):
@@ -17,42 +49,6 @@ transform stat_animation(Timer, XPOS):
         linear 2.0 ypos 0.0
     parallel:
         linear 2.0 alpha 0
-
-transform dripping(x_offset = 0, start = 0, transparency = 1.0):
-    offset (x_offset, start) alpha transparency
-    easeout 0.9 yoffset 350 alpha 0.0
-
-transform swimming(x_position):
-    subpixel True
-    pos (x_position, 0.4) zoom 0.5
-    choice:
-        yoffset 0
-    choice:
-        pause 0.3
-    choice:
-        pause 0.5
-    block:
-        ease 1 yoffset 10
-        ease 1.5 yoffset 0
-        repeat
-
-transform teaching:
-    pos (0.5, 0.15) zoom 0.4
-
-transform silhouette:
-    matrixcolor TintMatrix(Color(rgb = (0.44, 0.54, 0.75)))*BrightnessMatrix(-0.2)
-
-transform sunset:
-    matrixcolor TintMatrix(Color(rgb = (1.0, 0.8, 0.65)))*BrightnessMatrix(0.05)
-
-transform night:
-    matrixcolor TintMatrix(Color(rgb = (0.45, 0.45, 0.65)))*BrightnessMatrix(-0.07)
-
-transform candlelit:
-    matrixcolor TintMatrix(Color(rgb = (1.0, 0.95, 0.95)))*BrightnessMatrix(-0.1)
-
-transform theater:
-    matrixcolor TintMatrix(Color(rgb = (0.45, 0.45, 0.65)))*BrightnessMatrix(-0.05)
 
 screen stat_graphic(value, Color, Timer, XPOS):
     showif value > 0:
@@ -100,102 +96,9 @@ screen stat_holder_10(value, Color, XPOS):
     use stat_graphic(value, Color, 0.9, XPOS - 0.015)
     timer 1.5 action Hide("stat_holder_10")
 
-layeredimage Xavier_sprite:
-    always:
-        "images/NPC/Xavier_body.png"
-
-    always:
-        "images/NPC/Xavier_brows[Xavier_brows].png"
-
-    always:
-        "images/NPC/Xavier_mouth[Xavier_mouth].png"
-
-    if Xavier_eyes == "_closed":
-        "images/NPC/Xavier_eyes[Xavier_eyes].png"
-    else:
-        "Xavier_blinking"
-
-    if Xavier_psychic:
-        "images/NPC/Xavier_psychic.png"
-
-    anchor (0.5, 0.0) offset (60, 355) zoom 0.7
-
-image Xavier_blinking:
-    "images/NPC/Xavier_eyes[Xavier_eyes].png"
-    choice:
-        3.5
-    choice:
-        3.25
-    choice:
-        3
-    "images/NPC/Xavier_eyes_squint.png"
-    0.05
-    "images/NPC/Xavier_eyes_closed.png"
-    0.15
-    "images/NPC/Xavier_eyes_squint.png"
-    0.05
-    repeat
-
-label change_Xavier_face(face = Xavier_emotion):
-    if face == "_psychic":
-        $ Xavier_mouth = "_stern"
-        $ Xavier_brows = "_concentrate"
-        $ Xavier_eyes = "_concentrate"
-        $ Xavier_psychic = True
-    elif face == "_hypno":
-        $ Xavier_mouth = "_neutral"
-        $ Xavier_brows = "_neutral"
-        $ Xavier_eyes = "_hypno"
-        $ Xavier_psychic = False
-    elif face == "_shocked":
-        $ Xavier_mouth = "_neutral"
-        $ Xavier_brows = "_shocked"
-        $ Xavier_eyes = "_shocked"
-        $ Xavier_psychic = False
-    elif face == "_happy":
-        $ Xavier_mouth = "_smile"
-        $ Xavier_brows = "_happy"
-        $ Xavier_eyes = "_happy"
-        $ Xavier_psychic = False
-    elif face == "angry":
-        $ Xavier_mouth = "_stern"
-        $ Xavier_brows = "_concentrate"
-        $ Xavier_eyes = "_happy"
-        $ Xavier_psychic = False
-
-    return
-
-image black_screen:
-    Solid("#000000")
-
-    on show:
-        alpha 1.0
-        linear 0.4 alpha 1.0
-    on hide:
-        alpha 1.0
-        linear 0.4 alpha 0.0
-
-layeredimage background:
-    always:
-        "images/backgrounds/sky_[current_time].png"
-
-    if bg_current not in ["bg_campus", "bg_study", "bg_storm",  "bg_pool", "bg_mall"]:
-        "images/backgrounds/[bg_current].png"
-    else:
-        "images/backgrounds/[bg_current]_[current_time].png"
-
-layeredimage foreground:
-    if bg_current == "bg_pool":
-        AlphaMask("images/backgrounds/[bg_current]_[current_time].png", "images/backgrounds/bg_pool_mask.png")
-
-    if bg_current == "bg_restaurant":
-        "images/backgrounds/bg_restaurant_table.png"
-
-    if bg_current == "bg_classroom":
-        "images/backgrounds/bg_classroom_front.png"
-
-    if bg_current == "bg_classroom" and time_index < 2 and weekday < 5:
-        "images/backgrounds/bg_classroom_pupils.png"
+transform dripping(x_offset = 0, start = 0, transparency = 1.0):
+    offset (x_offset, start) alpha transparency
+    easeout 0.9 yoffset 350 alpha 0.0
 
 image grool_dripping_animation:
     animation
@@ -276,10 +179,84 @@ image licking:
         easein 0.6 yoffset 0
         repeat
 
+image punchout:
+    Null(0, 0)
+
+label punch:
+    show punchout with vpunch
+    hide punchout
+
+    return
+
 image dildo:
     "images/misc/dildo.png"
 
     anchor (0.5, 0.5)
+
+layeredimage Xavier_sprite:
+    always:
+        "images/NPC/Xavier_body.png"
+
+    always:
+        "images/NPC/Xavier_brows[Xavier_brows].png"
+
+    always:
+        "images/NPC/Xavier_mouth[Xavier_mouth].png"
+
+    if Xavier_eyes == "_closed":
+        "images/NPC/Xavier_eyes[Xavier_eyes].png"
+    else:
+        "Xavier_blinking"
+
+    if Xavier_psychic:
+        "images/NPC/Xavier_psychic.png"
+
+    anchor (0.5, 0.0) offset (60, 355) zoom 0.7
+
+image Xavier_blinking:
+    "images/NPC/Xavier_eyes[Xavier_eyes].png"
+    choice:
+        3.5
+    choice:
+        3.25
+    choice:
+        3
+    "images/NPC/Xavier_eyes_squint.png"
+    0.05
+    "images/NPC/Xavier_eyes_closed.png"
+    0.15
+    "images/NPC/Xavier_eyes_squint.png"
+    0.05
+    repeat
+
+label change_Xavier_face(face = Xavier_emotion):
+    if face == "_psychic":
+        $ Xavier_mouth = "_stern"
+        $ Xavier_brows = "_concentrate"
+        $ Xavier_eyes = "_concentrate"
+        $ Xavier_psychic = True
+    elif face == "_hypno":
+        $ Xavier_mouth = "_neutral"
+        $ Xavier_brows = "_neutral"
+        $ Xavier_eyes = "_hypno"
+        $ Xavier_psychic = False
+    elif face == "_shocked":
+        $ Xavier_mouth = "_neutral"
+        $ Xavier_brows = "_shocked"
+        $ Xavier_eyes = "_shocked"
+        $ Xavier_psychic = False
+    elif face == "_happy":
+        $ Xavier_mouth = "_smile"
+        $ Xavier_brows = "_happy"
+        $ Xavier_eyes = "_happy"
+        $ Xavier_psychic = False
+    elif face == "angry":
+        $ Xavier_mouth = "_stern"
+        $ Xavier_brows = "_concentrate"
+        $ Xavier_eyes = "_happy"
+        $ Xavier_psychic = False
+
+    return
 
 
 

@@ -965,21 +965,21 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
         $ Options = [O]
     else:
 
-        if KittyX not in Phonebook:
+        if KittyX not in Player.Phonebook:
             if approval_check(KittyX, 500, "L") or approval_check(KittyX, 250, "I"):
                 ch_k "You know, I never got around to giving you my number, here you go."
-                $ Phonebook.append(KittyX)
+                $ Player.Phonebook.append(KittyX)
                 return
             elif approval_check(KittyX, 250, "O"):
                 ch_k "You know, you should probably have my number, here you go."
-                $ Phonebook.append(KittyX)
+                $ Player.Phonebook.append(KittyX)
                 return
 
-        if "hungry" not in KittyX.traits and (KittyX.event_counter["swallowed"] + KittyX.had_chat[2]) >= 10 and KittyX.location == bg_current:
+        if "hungry" not in KittyX.traits and (KittyX.event_counter["swallowed"] + KittyX.had_chat[2]) >= 10 and KittyX.location == Player.location:
             call Kitty_Hungry
             return
-        if bg_current != "bg_restaurant" and bg_current != "bg_halloween" and (not taboo or approval_check(KittyX, 800, "I")):
-            if KittyX.location == bg_current and KittyX.thirst >= 30 and "refused" not in KittyX.daily_history and "quicksex" not in KittyX.daily_history:
+        if Player.location != "bg_restaurant" and Player.location != "bg_halloween" and (not taboo or approval_check(KittyX, 800, "I")):
+            if KittyX.location == Player.location and KittyX.thirst >= 30 and "refused" not in KittyX.daily_history and "quicksex" not in KittyX.daily_history:
                 $ Girl.change_face("_smile",2,brows = "_sad")
                 ch_k "Hey, um . . . did you want to. . ."
                 ch_k ". . . sex?"
@@ -1015,7 +1015,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
         if "bottomless" in KittyX.history:
             $ Options.append("bottomless")
 
-        if KittyX.went_on_date >= 1 and bg_current != "bg_restaurant":
+        if KittyX.went_on_date >= 1 and Player.location != "bg_restaurant":
 
             $ Options.append("dated")
         if "cheek" in KittyX.daily_history and "cheek" not in KittyX.had_chat:
@@ -1068,7 +1068,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
 
 
 
-        if (bg_current == "bg_kitty" or bg_current == "bg_player") and "relationship" not in KittyX.daily_history:
+        if (Player.location == "bg_kitty" or Player.location == "bg_player") and "relationship" not in KittyX.daily_history:
             if "lover" not in KittyX.player_petnames and KittyX.love >= 950 and KittyX.event_happened[6] != 20:
                 $ Options.append("lover?")
             elif "sir" not in KittyX.player_petnames and KittyX.obedience >= 500 and "sir" not in KittyX.history:
@@ -1797,7 +1797,7 @@ label Kitty_Summon(approval_bonus=approval_bonus):
         elif KittyX.recent_history.count("no_summon") > 1:
             ch_k "I'm telling you to give it a rest!"
             $ KittyX.recent_history.append("_angry")
-        elif time_index >= 3:
+        elif time_index > 2:
             ch_k "Like I said, it's too late for that."
         else:
             ch_k "Like I told you, I'm busy."
@@ -1817,11 +1817,11 @@ label Kitty_Summon(approval_bonus=approval_bonus):
 
         $ line = "no"
 
-    elif time_index >= 3:
+    elif time_index > 2:
         if approval_check(KittyX, 700, "L") or approval_check(KittyX, 300, "O"):
 
             ch_k "It's[KittyX.like]getting kinda late, but we can hang out for a bit."
-            $ KittyX.location = bg_current
+            $ KittyX.location = Player.location
             call set_the_scene
         else:
 
@@ -2020,9 +2020,9 @@ label Kitty_Summon(approval_bonus=approval_bonus):
         elif KittyX.location == "bg_campus":
             ch_k "I've got a nice spot in the shade."
             jump campus
-        elif KittyX.location in personal_rooms:
+        elif KittyX.location in bedrooms:
             ch_k "See ya' in a bit. . ."
-            $ bg_current = KittyX.location
+            $ Player.location = KittyX.location
             jump reset_location
         else:
             ch_k "You know, I'll just meet you in my room."
@@ -2041,39 +2041,20 @@ label Kitty_Summon(approval_bonus=approval_bonus):
     if "locked" in Player.traits:
         call locked_door (KittyX)
         return
-    call taboo_level(taboo_location = False)
-    $ KittyX.location = bg_current
+    call set_Character_taboos(taboo_location = False)
+    $ KittyX.location = Player.location
     $ KittyX.change_outfit()
-    call taboo_level(taboo_location = False)
+    call set_Character_taboos(taboo_location = False)
     call set_the_scene
     return
 
 
 
 
-label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
-    if "leaving" in KittyX.recent_history:
-        $ KittyX.drain_word("leaving")
-    else:
-        return
+label Kitty_Leave:
+    $ KittyX.change_outfit()
 
-    if KittyX.location == "hold":
-
-        ch_k "I'm[KittyX.like]going off the grid, see you later."
-        return
-
-    if KittyX in Party or "lockedtravels" in KittyX.traits:
-
-
-        $ KittyX.location = bg_current
-        return
-
-    elif "freetravels" in KittyX.traits or not approval_check(KittyX, 700):
-
-        $ KittyX.change_outfit()
-        if GirlsNum:
-            ch_k "Yeah, I'm headed out too."
-
+    if "freetravels" in KittyX.traits or not approval_check(KittyX, 700):
         if KittyX.location == "bg_classroom":
             ch_k "I'm[KittyX.like]headed to class right now."
         elif KittyX.location == "bg_dangerroom":
@@ -2093,21 +2074,13 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                 ch_k "I'm outta here, later!"
         else:
             ch_k "I'm headed out, see you later."
+
         call hide_Girl(KittyX)
+
         return
 
-
-    if bg_current == "bg_dangerroom":
-        call exit_gym ([KittyX])
-
-    $ KittyX.change_outfit()
-
     if "follow" not in KittyX.traits:
-
         $ KittyX.traits.append("follow")
-
-    $ D20 = renpy.random.randint(1, 20)
-    $ line = 0
 
     if KittyX.location == "bg_classroom":
         $ approval_bonus = 10
@@ -2115,10 +2088,8 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         $ approval_bonus = 20
     elif KittyX.location == "bg_showerroom":
         $ approval_bonus = 40
-
-
-    if GirlsNum:
-        ch_k "Yeah, I'm headed out too."
+    else:
+        $ approval_bonus = 0
 
     if KittyX.location == "bg_classroom":
         ch_k "I'm headed to class right now, you could[KittyX.like]join me."
@@ -2135,11 +2106,14 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_k "I'm[KittyX.like]hitting the showers, want to join me?"
         else:
             ch_k "I'm hitting the showers, maybe we could[KittyX.like]touch base later."
+
             return
     elif KittyX.location == "bg_pool":
         ch_k "I'm[KittyX.like]hitting up the pool. You coming?"
     else:
         ch_k "Wanna[KittyX.like]come with me, [KittyX.player_petname]?"
+
+    $ D20 = renpy.random.randint(1, 20)
 
     menu:
         extend ""
@@ -2147,71 +2121,72 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             if "followed" not in KittyX.recent_history:
                 $ KittyX.change_stat("love", 55, 1)
                 $ KittyX.change_stat("inhibition", 30, 1)
+
             $ line = "go to"
         "Nah, we can talk later.":
-
             if "followed" not in KittyX.recent_history:
                 $ KittyX.change_stat("obedience", 50, 1)
                 $ KittyX.change_stat("obedience", 30, 2)
+
             ch_k "Ok, cool. Talk to you later then."
         "Could you please stay with me? I'll get lonely.":
-
             if approval_check(KittyX, 600, "L") or approval_check(KittyX, 1400):
                 if "followed" not in KittyX.recent_history:
                     $ KittyX.change_stat("love", 70, 1)
                     $ KittyX.change_stat("obedience", 50, 1)
+
                 $ line = "lonely"
             else:
                 if "followed" not in KittyX.recent_history:
                     $ KittyX.change_stat("inhibition", 30, 1)
+
                 $ line = "no"
         "No, stay here.":
-
             if approval_check(KittyX, 600, "O"):
-
                 if "followed" not in KittyX.recent_history:
                     if KittyX.love >= 50:
                         $ KittyX.change_stat("love", 90, 1)
                     $ KittyX.change_stat("love", 40, -1)
                     $ KittyX.change_stat("obedience", 90, 1)
+
                 $ line = "command"
-
             elif D20 >= 7 and approval_check(KittyX, 1400):
-
                 if "followed" not in KittyX.recent_history:
                     $ KittyX.change_stat("love", 70, -2)
                     $ KittyX.change_stat("love", 90, -1)
                     $ KittyX.change_stat("obedience", 50, 2)
                     $ KittyX.change_stat("obedience", 90, 1)
+
                 ch_k "Uh, sure, I guess."
+
                 $ line = "yes"
-
             elif approval_check(KittyX, 200, "O"):
-
                 if "followed" not in KittyX.recent_history:
                     $ KittyX.change_stat("love", 70, -4)
                     $ KittyX.change_stat("love", 90, -2)
+
                 ch_k "[KittyX.Like]in your dreams, [KittyX.player_petname]."
+
                 if "followed" not in KittyX.recent_history:
                     $ KittyX.change_stat("inhibition", 40, 2)
                     $ KittyX.change_stat("inhibition", 60, 1)
                     $ KittyX.change_stat("obedience", 70, -2)
+
                 ch_k "I'm gone."
             else:
-
                 if "followed" not in KittyX.recent_history:
                     $ KittyX.change_stat("inhibition", 30, 1)
                     $ KittyX.change_stat("inhibition", 50, 1)
                     $ KittyX.change_stat("love", 50, -1, 1)
                     $ KittyX.change_stat("obedience", 70, -1)
+
                 $ line = "no"
 
-
     $ KittyX.recent_history.append("followed")
-    if not line:
 
+    if not line:
         call hide_Girl(KittyX)
-        call change_out_of_gym_clothes ([KittyX])
+
         return
 
     if line == "no":
@@ -2222,58 +2197,61 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_k "Sorry [KittyX.player_petname], but I[KittyX.like]need the practice?"
         else:
             ch_k "I'm[KittyX.like]sorry, [KittyX.player_petname], I've got things to do."
+
         call hide_Girl(KittyX)
-        call change_out_of_gym_clothes ([KittyX])
+
         return
 
     elif line == "go to":
-
-
-        $ approval_bonus = 0
-        $ line = 0
-        call drain_all_words ("leaving")
-        call drain_all_words ("arriving")
-        $ KittyX.recent_history.append("goto")
-        $ Player.recent_history.append("goto")
         call hide_Girl(KittyX)
-        call change_out_of_gym_clothes ([KittyX])
+
         if KittyX.location == "bg_classroom":
             ch_k "Cool, study buddy!"
-            jump classroom_entry
         elif KittyX.location == "bg_dangerroom":
             ch_k "I'll be ready and waiting!"
-            jump danger_room_entry
         elif KittyX.location == "bg_kitty":
             ch_k "I'll meet you there."
-            $ Girl = KittyX
-            jump girls_room
         elif KittyX.location == "bg_player":
             ch_k "I'll be waiting."
-            jump player_room
         elif KittyX.location == "bg_showerroom":
             ch_k "I guess I'll see you there."
-            jump shower_entry
         elif KittyX.location == "bg_campus":
             ch_k "Let's head over there."
-            jump campus_entry
         elif KittyX.location == "bg_pool":
             ch_k "Ok, let's go."
-            jump pool_entry
-        else:
-            ch_k "You know, I'll just meet you in my room."
-            $ KittyX.location = "bg_kitty"
+
+        call hide_all
+
+        $ Player.traveling = True
+
+        $ destination = KittyX.location
+
+        if destination == "bg_player":
+            jump player_room
+        elif destination == "bg_kitty":
             $ Girl = KittyX
+
             jump girls_room
-
-
+        elif destination == "bg_classroom":
+            jump classroom
+        elif destination == "bg_dangerroom":
+            jump danger_room
+        elif destination == "bg_showerroom":
+            jump shower
+        elif destination == "bg_pool":
+            jump pool
+        elif destination == "bg_study":
+            jump study
+        elif destination == "bg_mall":
+            jump mall
 
     elif line == "lonely":
         ch_k "I guess[KittyX.like]I couldn't leave you lonely. . ."
     elif line == "command":
         ch_k "Humph, ok."
 
-    $ line = 0
     ch_k "I guess I can stick around."
-    $ KittyX.location = bg_current
-    call taboo_level(taboo_location = False)
+
+    $ KittyX.location = Player.location
+
     return

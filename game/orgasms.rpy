@@ -90,16 +90,16 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
             $ action_context = "swap"
             $ approval_bonus = 0
             call shift_focus (Partner)
-            call reset_position(Partner)
+            call show_full_body(Partner)
             call Player_Cumming (focused_Girl, approval_bonus=0)
 
             call shift_focus (Partner)
-            call reset_position(Partner)
+            call show_full_body(Partner)
 
             $ action_context = None
             "[Girl.name] Steps back in."
 
-            call reset_position(Girl)
+            call show_full_body(Girl)
 
             return
 
@@ -110,18 +110,18 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
             else:
                 "You spray jizz across the room."
             jump Girl_Orgasm_After
-        "Pull back" if Player.primary_action != "psy" and Girl.location == bg_current and action_context != "swap":
+        "Pull back" if Player.primary_action != "psy" and Girl.location == Player.location and action_context != "swap":
             if renpy.showing(Girl.tag+" blowjob"):
                 if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.event_counter["swallowed"]:
                     jump Manic_Suck
 
-                call reset_position(Girl)
+                call show_full_body(Girl)
             elif renpy.showing(Girl.tag+" handjob"):
-                call reset_position(Girl)
+                call show_full_body(Girl)
             elif renpy.showing(Girl.tag+" doggy"):
-                call reset_position(Girl)
+                call show_full_body(Girl)
             elif renpy.showing(Girl.tag+" sex"):
-                call reset_position(Girl)
+                call show_full_body(Girl)
             if approval_check(Girl, 500, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.addiction > 50 and Girl.event_counter["swallowed"]:
                 $ Girl.eyes = "_manic"
                 $ Girl.mouth = "_kiss"
@@ -423,7 +423,7 @@ label Girl_Warn_Her:
     if renpy.showing(Girl.tag+" blowjob"):
         jump Girl_In_mouth
     elif Player.primary_action == "sex" or Player.primary_action == "anal":
-        call reset_position(Girl)
+        call show_full_body(Girl)
         "She pulls off of you and grabs your cock in her hand."
         jump Girl_Handy_Finish
     elif renpy.showing(Girl.tag+" doggy") or renpy.showing(Girl.tag+" sex"):
@@ -925,7 +925,7 @@ label Girl_In_mouth:
                 $ Girl.change_face("_angry", 1)
                 "She scowls at you, drops you cock and pulls back."
                 call show_handjob(Girl, orgasm = True)
-                call reset_position(Girl)
+                call show_full_body(Girl)
                 $ Girl.change_stat("love", 50, -3, 1)
                 $ Girl.change_stat("love", 80, -4, 1)
                 if Girl == RogueX:
@@ -1452,7 +1452,7 @@ label Girl_Cum_Outside:
 
 label Girl_Handy_Finish:
     if renpy.showing(Girl.tag+" doggy") or renpy.showing(Girl.tag+" sex"):
-        call reset_position(Girl)
+        call show_full_body(Girl)
         if Player.primary_action == "hotdog":
             "She bends down and begins to stroke you off."
         else:
@@ -1581,15 +1581,15 @@ label Girl_Orgasm_After:
             call Girl_CleanCock(Girl)
         "Actually, let [Partner.name] do it." if Partner in all_Girls:
             call shift_focus (Partner)
-            call reset_position(Partner)
+            call show_full_body(Partner)
             call Girl_CleanCock (focused_Girl)
 
             call shift_focus (Partner)
-            call reset_position(Partner)
+            call show_full_body(Partner)
 
             "[Partner.name] Steps back."
 
-            call reset_position(Girl)
+            call show_full_body(Girl)
         "No":
             pass
     if Girl.spunk:
@@ -1668,9 +1668,9 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
     $ Girl.drain_word("will_masturbate", 1, 1, 0)
     $ Girl.drain_word("wants_to_masturbate", 1, 1, 0)
 
-    if Girl.location == "bg_teacher" and bg_current == "bg_classroom":
+    if Girl.location == "bg_teacher" and Player.location == "bg_classroom":
         pass
-    elif Girl.location != bg_current and "phonesex" not in Player.recent_history:
+    elif Girl.location != Player.location and "phonesex" not in Player.recent_history:
 
         $ Girl.lust = 25
         return
@@ -1786,7 +1786,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
         $ temp_Girls = all_Girls[:]
         $ temp_Girls.remove(Girl)
         while temp_Girls:
-            if temp_Girls[0].location == bg_current and "noticed "+Girl.tag in temp_Girls[0].recent_history:
+            if temp_Girls[0].location == Player.location and "noticed "+Girl.tag in temp_Girls[0].recent_history:
                 $ temp_Girls[0].lust += 15 if temp_Girls[0].likes[Girl.tag] >= 500 else 10
                 $ temp_Girls[0].lust += 5 if temp_Girls[0].event_counter["been_with_girl"] >= 5 else 0
             if temp_Girls[0].lust >= 100:
@@ -1909,9 +1909,9 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
                             "She drifts off into incoherent moans."
 
     if Player.primary_action == "striptease":
-        call reset_position(Girl)
-        call show_Girl(Girl, transformation = Girl_Dance1(Girl))
-        
+        call show_full_body(Girl)
+        call show_Girl(Girl, color_transform = Girl_Dance1(Girl))
+
         "[Girl.name] begins to dance again."
     return
 
@@ -2841,8 +2841,8 @@ label Partner_Cleanup_Check(Girl=0, B=0):
 
         if Girl.event_counter["swallowed"] >=5:
             $ Options.append("eat")
-        call reset_position(focused_Girl)
-        call reset_position(Partner)
+        call show_full_body(focused_Girl)
+        call show_full_body(Partner)
         if Choice == "partner lick":
             $ Girl.check_if_likes(Partner,900, 10, 1)
             call Partner_CGline (13, Girl)
@@ -3098,7 +3098,7 @@ label Partner_Clean_Girl(Girl=0):
     else:
         $ Partner.spunk["hand"] = True
     $ counter = 0
-    if Girl.spunk[Girl.spunk["chin"] or "mouth"]:
+    if Girl.spunk["chin"] or Girl.spunk["mouth"]:
         while Girl.spunk["chin"]:
             $ Girl.spunk["chin"] = False
         $ Girl.check_if_likes(Partner,900,2, 1)

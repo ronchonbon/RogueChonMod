@@ -1,40 +1,31 @@
 label meet_Emma:
-    show black_screen onlayer black
-
-    $ bg_current = "bg_classroom"
-
-    $ EmmaX.outfit_name = "casual1"
-    $ EmmaX.today_outfit_name = "casual1"
-    $ EmmaX.change_outfit()
-
-    call clear_the_room("all", Passive = False, Silent = True)
-
-    hide black_screen onlayer black
-
-    call shift_focus(EmmaX)
-    call set_the_scene(False)
+    $ Player.location = "bg_classroom"
 
     "You enter the classroom and have a seat."
     "The bell to class rings, but Professor McCoy seems to be late."
     "A strange woman enters the room and heads to the podium with a regal stride."
 
-    call show_Girl(EmmaX, x_position = stage_right, sprite_layer = 1, transformation = teaching, transition = easeinright)
+    call add_Girl(EmmaX, x_position = stage_right, sprite_layer = 1, animation_transform = teaching, transition = easeinright)
+    call shift_focus(EmmaX)
 
-    $ EmmaX.location = "bg_classroom"
-    $ EmmaX.change_face("_normal")
+    $ EmmaX.name = "???"
     $ EmmaX.arm_pose = 1
+    $ EmmaX.change_face("_normal")
 
-    ch_u "Hello students. My name is Emma Frost, and I have been invited to conduct this class."
+    ch_e "Hello students. My name is Emma Frost, and I have been invited to conduct this class."
+
+    $ EmmaX.name = "Ms. Frost"
+
     ch_e "I hope that over my tenure here you will demonstrate talents and hard work worthy of my respect."
     "She scans her eyes over the room, passing over each student."
 
     $ EmmaX.change_face("_surprised")
 
-    pause 1
+    pause 1.0
 
+    $ EmmaX.lust += 5
     $ EmmaX.change_face("_sly", mouth = "_sad")
     $ EmmaX.change_stat("love", 90, -10)
-    $ EmmaX.lust += 5
 
     "As her eyes pass over you, they briefly widen and then narrow."
 
@@ -57,48 +48,48 @@ label meet_Emma:
     ch_e "All right students, class dismissed."
     ch_e "[EmmaX.player_petname], could you wait a moment, I have something to discuss with you."
 
-    call show_Girl(EmmaX, x_position = stage_center, sprite_layer = 4, transformation = instant_reset, transition = dissolve)
+    call move_Girl(EmmaX, x_position = stage_center, sprite_layer = 4, animation_transform = reset_zoom_instantly, transition = dissolve)
 
     menu:
         extend ""
         "Yes?":
-            $ EmmaX.change_stat("love", 70, 10)
             $ EmmaX.change_face("_normal")
+            $ EmmaX.change_stat("love", 70, 10)
         "I've got places to be.":
+            $ EmmaX.change_face("_angry")
             $ EmmaX.change_stat("love", 70, -15)
             $ EmmaX.change_stat("obedience", 80, 10)
-            $ EmmaX.change_face("_angry")
 
             ch_e "[Player.name], do not take that attitude with me."
             "She places herself in the doorway, preventing you from leaving."
         "For such a sexy teacher? I've got some time.":
+            $ EmmaX.change_face("_angry", 1, mouth = "_smirk")
             $ EmmaX.change_stat("love", 70, -5)
             $ EmmaX.change_stat("obedience", 80, 5)
-            $ EmmaX.change_face("_angry", 1, mouth = "_smirk")
 
             ch_e "That's rather. . . inappropriate."
 
             $ EmmaX.change_face("_bemused", mouth = "_smile")
             $ EmmaX.change_stat("love", 70, 20)
-            $ EmmaX.change_stat("lust", 50, 5)
             $ EmmaX.change_stat("inhibition", 25, 15)
+            $ EmmaX.change_stat("lust", 50, 5)
 
             ch_e "But also obvious, so I can't criticize you too harshly."
 
     ch_e "I've heard about you from Professor Xavier and. . . others."
 
     if Player.reputation <= 200:
+        $ EmmaX.change_face("_angry", brows = "_confused")
         $ EmmaX.change_stat("obedience", 80, 10)
         $ EmmaX.change_stat("inhibition", 90, 15)
         $ EmmaX.change_stat("lust", 50, 5)
-        $ EmmaX.change_face("_angry", brows = "_confused")
 
         ch_e "You seem to be a bit of a scoundrel. . ."
     elif Player.reputation < 600:
+        $ EmmaX.change_face("_sly")
         $ EmmaX.change_stat("obedience", 80, 5)
         $ EmmaX.change_stat("inhibition", 90, 5)
         $ EmmaX.change_stat("lust", 50, 5)
-        $ EmmaX.change_face("_sly")
 
         ch_e "You have quite a reputation around campus. . ."
     else:
@@ -107,19 +98,19 @@ label meet_Emma:
         ch_e "You have managed a reasonable reputation. . ."
 
     if total_SEXP >= 110 or (len(Player.Harem) >= 2 and not simulation):
+        $ EmmaX.change_face("_sly")
         $ EmmaX.change_stat("love", 70, 5)
         $ EmmaX.change_stat("obedience", 80, 10)
         $ EmmaX.change_stat("inhibition", 200, 10)
         $ EmmaX.change_stat("lust", 50, 5)
-        $ EmmaX.change_face("_sly")
 
         ch_e ". . . and a number of conquests to your name. . ."
     elif total_SEXP >= 60:
+        $ EmmaX.change_face("_smile")
         $ EmmaX.change_stat("love", 70, 5)
         $ EmmaX.change_stat("obedience", 80, 5)
         $ EmmaX.change_stat("inhibition", 200, 5)
         $ EmmaX.change_stat("lust", 50, 2)
-        $ EmmaX.change_face("_smile")
 
         ch_e ". . . and are not without some romantic entanglements. . ."
     else:
@@ -128,9 +119,9 @@ label meet_Emma:
         ch_e ". . .though I haven't heard of much of a romantic life. . ."
 
     if Player.level >= 3:
+        $ EmmaX.change_face("_smile")
         $ EmmaX.change_stat("love", 70, 5)
         $ EmmaX.change_stat("obedience", 80, 5)
-        $ EmmaX.change_face("_smile")
 
         ch_e "But your grades have been excellent."
     elif Player.level >= 2:
@@ -138,9 +129,9 @@ label meet_Emma:
 
         ch_e "But your grades have been marginal at best."
     else:
+        $ EmmaX.change_face("_normal", brows = "_sad")
         $ EmmaX.change_stat("love", 70, -5)
         $ EmmaX.change_stat("lust", 10, -5, 1)
-        $ EmmaX.change_face("_normal", brows = "_sad")
 
         ch_e "But you haven't been living up to your potential in class."
 
@@ -168,22 +159,22 @@ label meet_Emma:
     menu:
         extend ""
         "I imagine it would.":
+            $ EmmaX.change_face("_normal")
             $ EmmaX.change_stat("love", 70, 5)
             $ EmmaX.change_stat("inhibition", 200, 5)
-            $ EmmaX.change_face("_normal")
 
             ch_e "Hmm, yes."
         "Huh.":
+            $ EmmaX.change_face("_confused", mouth = "_normal")
             $ EmmaX.change_stat("love", 70, -1)
             $ EmmaX.change_stat("obedience", 80, -1)
-            $ EmmaX.change_face("_confused", mouth = "_normal")
 
             ch_e ". . . yes."
 
             $ EmmaX.change_face("_normal")
         "So you can't see what I'm picturing right now?":
-            $ EmmaX.change_stat("obedience", 80, 5)
             $ EmmaX.change_face("_bemused")
+            $ EmmaX.change_stat("obedience", 80, 5)
 
             pause 0.5
 
@@ -204,14 +195,14 @@ label meet_Emma:
     menu:
         extend ""
         "I'd be ok with that.":
+            $ EmmaX.change_face("_smile")
             $ EmmaX.change_stat("love", 70, 5)
             $ EmmaX.change_stat("inhibition", 200, 5)
-            $ EmmaX.change_face("_smile")
 
             ch_e "Excellent, I look forward to it."
         "I don't know if you should experiment on your students.":
-            $ EmmaX.change_stat("love", 70, -5)
             $ EmmaX.change_face("_normal", mouth = "_sad")
+            $ EmmaX.change_stat("love", 70, -5)
 
             ch_e "There's nothing for you to worry about."
 
@@ -220,9 +211,9 @@ label meet_Emma:
             ch_e "I'll be. . . gentle."
         "If it means spending more time with you. . .":
             if approval_check(EmmaX, 295, "L"):
+                $ EmmaX.change_face("_sly")
                 $ EmmaX.change_stat("inhibition", 200, 5)
                 $ EmmaX.change_stat("lust", 50, 5)
-                $ EmmaX.change_face("_sly")
 
                 ch_e "Oh, I believe we'll be spending a good deal of time together. . ."
             else:
@@ -233,10 +224,10 @@ label meet_Emma:
                 $ EmmaX.change_face("_normal")
         "What do I get out of it?":
             if not approval_check(EmmaX, 290, "L"):
+                $ EmmaX.change_face("_angry")
                 $ EmmaX.change_stat("love", 70, -5)
                 $ EmmaX.change_stat("obedience", 80, 5)
                 $ EmmaX.change_stat("inhibition", 200, 5)
-                $ EmmaX.change_face("_angry")
 
                 ch_e "You'll stand some chance of passing this class, [EmmaX.player_petname]."
 
@@ -250,22 +241,22 @@ label meet_Emma:
                     menu:
                         extend ""
                         "I guess if it helps your \"research.\" . .":
+                            $ EmmaX.change_face("_smile")
                             $ EmmaX.change_stat("love", 70, 10)
                             $ EmmaX.change_stat("obedience", 80, -5)
-                            $ EmmaX.change_face("_smile")
 
                             ch_e "I'm glad to see that you can be reasonable."
                         "Spending more time with you would be plenty. . .":
+                            $ EmmaX.change_face("_sly")
                             $ EmmaX.change_stat("love", 70, 5)
                             $ EmmaX.change_stat("obedience", 80, 5)
                             $ EmmaX.change_stat("lust", 20, 5)
-                            $ EmmaX.change_face("_sly")
 
                             ch_e "It certainly should be."
                         "A kiss?":
+                            $ EmmaX.change_face("_surprised", 1, mouth = "_surprised")
                             $ EmmaX.change_stat("love", 70, -5)
                             $ EmmaX.change_stat("obedience", 80, 10)
-                            $ EmmaX.change_face("_surprised", 1, mouth = "_surprised")
 
                             ch_e "[EmmaX.player_petname], that is incredibly inappropriate!"
 
@@ -282,9 +273,9 @@ label meet_Emma:
 
                                 ch_e ". . .never. . ."
                         "I think you know what I'd want. . .":
+                            $ EmmaX.change_face("_sly", brows = "_angry")
                             $ EmmaX.change_stat("obedience", 80, 5)
                             $ EmmaX.change_stat("lust", 50, 5)
-                            $ EmmaX.change_face("_sly", brows = "_angry")
 
                             ch_e "Yes, I imagine that I do. . ."
 
@@ -321,9 +312,7 @@ label meet_Emma:
     ch_e "That said, class is finished for the day and I have some paperwork to attend to, so I'll see you. . ."
     ch_e ". . . later. . ."
 
-    $ EmmaX.location = "bg_emma"
-
-    call hide_Girl(EmmaX, transition = easeoutright)
+    call remove_Girl(EmmaX)
 
     "She strides out of the room and down the hall."
 
@@ -338,11 +327,11 @@ label meet_Emma:
 label Emma_Caught_Classroom:
     show black_screen onlayer black
 
-    $ bg_current = "bg_classroom"
+    $ Player.location = "bg_classroom"
 
     $ EmmaX.change_outfit()
 
-    call clear_the_room(EmmaX, Passive = False, Silent = True)
+    call clear_the_room(EmmaX, silent = True)
 
     "As you walk down the halls, you hear some odd noises coming from the classroom."
 
@@ -688,7 +677,7 @@ label Emma_Caught_Classroom:
         $ EmmaX.names.append("Emma")
         $ EmmaX.location = "bg_emma"
 
-        call hide_Girl(EmmaX, transition = easeoutright)
+        call remove_Girl(EmmaX)
 
         $ round = 20 if round > 20 else round
 
@@ -716,10 +705,11 @@ label Emma_Teacher_Caught(Girl=0):
         return
 
     ch_e "[Player.name]? [Girl.name]? Could you stop what you're doing immediately?"
-    call checkout(total = True)
+    call checkout
+    call reset_player
 
     $ Girl.change_face("_bemused", 2, eyes = "_side")
-    call reset_position(Girl)
+    call show_full_body(Girl)
     if approval_check(Girl, 700, "I"):
         $ Girl.change_face("_bemused", 1)
         "[Girl.name] shrugs and returns to her seat."
@@ -727,7 +717,7 @@ label Emma_Teacher_Caught(Girl=0):
     else:
         "[Girl.name] jumps and dashes out of the room."
         call Partner_Like (EmmaX, -2, -3, 500, Girl)
-        call remove_Girl (Girl)
+        call remove_Girl(Girl)
 
     $ Girl.reputation -= 1
     call Partner_Like (Girl, 3, 2, 800, EmmaX)
@@ -755,24 +745,34 @@ label Emma_Teacher_Caught(Girl=0):
 
 
 label Emma_Detention:
-
     call shift_focus (EmmaX)
-    call clear_the_room (EmmaX, 0, 1)
-    if "traveling" in Player.recent_history:
+
+    $ Player.location = "bg_classroom"
+
+    call set_the_scene
+
+    if True:
         "You enter the room and see [EmmaX.name] waiting for you at the back of the room."
     else:
         "After class, the students file out, and you wait a few minutes until they're all gone."
         "Once the last student leaves, [EmmaX.name] approaches you."
+
     show black_screen onlayer black
-    $ bg_current = "bg_classroom"
-    $ EmmaX.location = "bg_classroom"
+
     $ EmmaX.change_outfit()
-    call set_the_scene
     $ EmmaX.change_face("_sly")
     $ EmmaX.arm_pose = 2
+
+    call remove_all
+
+    $ EmmaX.location = "bg_classroom"
+
+    call set_the_scene
+
     $ Count = 0
-    call clear_the_room (EmmaX, 0, 1)
+
     hide black_screen onlayer black
+
     $ line = 0
     if "detention" in Player.daily_history:
         ch_e "I'm glad you take your. . . education seriously."
@@ -892,7 +892,7 @@ label Emma_Key:
     ch_e ". . . you might want a key. . ."
     ch_p "Thanks."
     $ EmmaX.arm_pose = 1
-    $ Keys.append(EmmaX)
+    $ Player.Keys.append(EmmaX)
     $ EmmaX.event_happened[0] = 1
     return
 
@@ -1102,7 +1102,7 @@ label Emma_ThreeCheck(Pass=3, Quest=[], Girl=0, temp_Girls=[]):
     while temp_Girls:
         if "saw with " + temp_Girls[0].tag in EmmaX.traits:
             $ line = "I saw you with " + temp_Girls[0].tag
-        if temp_Girls[0].location == bg_current:
+        if temp_Girls[0].location == Player.location:
             $ Girl = temp_Girls[0]
             $ temp_Girls = [1]
         $ temp_Girls.remove(temp_Girls[0])
@@ -1160,7 +1160,7 @@ label Emma_ThreeCheck(Pass=3, Quest=[], Girl=0, temp_Girls=[]):
 
 
                 $ Quest.append(2)
-                if Girl.location == bg_current:
+                if Girl.location == Player.location:
                     $ Pass -= 1
                     if "poly Emma" in Girl.traits:
 
@@ -1295,18 +1295,17 @@ label Emma_ThreeCheck(Pass=3, Quest=[], Girl=0, temp_Girls=[]):
 label Emma_BF:
     $ EmmaX.drain_word("asked_to_meet")
     call shift_focus (EmmaX)
-    if EmmaX.location != bg_current:
-        $ EmmaX.location = bg_current
-        if EmmaX not in Party:
-            "[EmmaX.name] approaches you and asks if the two of you can talk."
-        else:
-            "[EmmaX.name] turns towards you and asks if the two of you can talk."
 
-    call set_the_scene (0)
-    call show_Girl (EmmaX)
+    if EmmaX not in Player.Party:
+        "[EmmaX.name] approaches you and asks if the two of you can talk."
+
+        call add_Girl(EmmaX)
+    else:
+        "[EmmaX.name] turns towards you and asks if the two of you can talk."
+
     "You can tell she's a bit uncomfortable about whatever she has to say."
-    call taboo_level
-    call clear_the_room (EmmaX)
+    call set_Character_taboos
+    call clear_the_room(EmmaX)
     $ EmmaX.daily_history.append("relationship")
     $ EmmaX.change_face("_bemused", 1)
 
@@ -1375,7 +1374,7 @@ label Emma_BF:
                 ch_e "Well. . ."
                 ch_e "I suppose I understand."
                 $ EmmaX.event_happened[5] = 20
-                call remove_Girl (EmmaX)
+                call remove_Girl(EmmaX)
                 $ line = 0
                 return
         "Not really.":
@@ -1411,8 +1410,8 @@ label Emma_BF_Jerk:
             return True
         $ EmmaX.player_petnames.append("boyfriend")
         $ achievements.append("I am not your Boyfriend!")
-        $ bg_current = "bg_player"
-        call remove_Girl (EmmaX)
+        $ Player.location = "bg_player"
+        call remove_Girl(EmmaX)
         call set_the_scene
         $ renpy.pop_call()
         jump player_room
@@ -1425,34 +1424,35 @@ label Emma_BF_Jerk:
     ch_e "Get away from me."
     if simulation:
         return
-    $ bg_current = "bg_player"
-    call remove_Girl (EmmaX)
+    $ Player.location = "bg_player"
+    call remove_Girl(EmmaX)
     $ renpy.pop_call()
     jump player_room
 
 
-label Emma_Love(Shipping=[], Shipshape=0, temp_Girls=[]):
+label Emma_Love:
     $ EmmaX.drain_word("asked_to_meet")
 
-    $ temp_Girls = all_Girls[:]
-    $ temp_Girls.remove(EmmaX)
-    while temp_Girls:
-        if approval_check(temp_Girls[0], 1200, "LO"):
-            $ Shipping.append(temp_Girls[0])
-        $ temp_Girls.remove(temp_Girls[0])
+    $ Shipping = []
+
+    python:
+        for G in all_Girls:
+            if G != EmmaX and approval_Check(G, 1200, "LO"):
+                Shipping.append(G)
+
     $ Shipshape = len(Shipping)
 
-    if EmmaX.location == bg_current or EmmaX in Party:
+    if EmmaX.location == Player.location or EmmaX in Player.Party:
         "[EmmaX.name] glances over at you with an apprising look on her face."
     else:
         "[EmmaX.name] turns a corner and notices you."
-    if bg_current != "bg_emma" and bg_current != "bg_player":
+    if Player.location != "bg_emma" and Player.location != "bg_player":
         "With little word, she takes your hand and pulls you back to her room."
-        $ bg_current = "bg_emma"
-    $ EmmaX.location = bg_current
+        $ Player.location = "bg_emma"
+    $ EmmaX.location = Player.location
     call set_the_scene
-    call clear_the_room (EmmaX)
-    call taboo_level
+    call clear_the_room(EmmaX)
+    call set_Character_taboos
     $ EmmaX.daily_history.append("relationship")
 
     $ EmmaX.change_face("_sexy", eyes = "_side")
@@ -1674,8 +1674,7 @@ label Emma_Love(Shipping=[], Shipshape=0, temp_Girls=[]):
 
 label Emma_Love_End:
     if "lover" not in EmmaX.player_petnames:
-        call hide_Girl(EmmaX, transition = easeoutright)
-        call remove_Girl (EmmaX)
+        call remove_Girl(EmmaX)
         $ EmmaX.location = "hold"
         return
 
@@ -1780,14 +1779,14 @@ label Emma_Sub:
     $ EmmaX.drain_word("asked_to_meet")
     call shift_focus (EmmaX)
 
-    if EmmaX.location != bg_current and EmmaX not in Party:
+    if EmmaX.location != Player.location and EmmaX not in Player.Party:
         "[EmmaX.name] shows up and says she needs to talk to you."
     else:
         "[EmmaX.name] approaches you, looking to talk."
-    $ EmmaX.location = bg_current
+    $ EmmaX.location = Player.location
     call set_the_scene
     call clear_the_room (EmmaX)
-    call taboo_level
+    call set_Character_taboos
     $ EmmaX.daily_history.append("relationship")
     $ EmmaX.change_face("_bemused", 1)
 
@@ -1946,8 +1945,7 @@ label Emma_Sub:
         $ EmmaX.player_petnames.append("sir")
 
     elif line == "rude":
-        call hide_Girl(EmmaX, transition = easeoutright)
-        call remove_Girl (EmmaX)
+        call remove_Girl(EmmaX)
         $ renpy.pop_call()
         "[EmmaX.name] marches out the door in a huff, leaving you alone."
     elif line == "embarrassed":
@@ -1958,8 +1956,7 @@ label Emma_Sub:
         $ EmmaX.change_face("_sadside", 2)
         ch_e "I should go. I think I see a student over there in need."
         $ EmmaX.blushing = "_blush1"
-        call hide_Girl(EmmaX, transition = easeoutright)
-        call remove_Girl (EmmaX)
+        call remove_Girl(EmmaX)
         $ renpy.pop_call()
         "[EmmaX.name] dashes out the door, leaving you alone. It didn't look like she could get away fast enough."
     return
@@ -2040,8 +2037,7 @@ label Emma_Sub_Asked:
     $ EmmaX.daily_history.append("asked sub")
     if line == "rude":
 
-        call hide_Girl(EmmaX, transition = easeoutright)
-        call remove_Girl (EmmaX)
+        call remove_Girl(EmmaX)
         $ EmmaX.recent_history.append("_angry")
         $ renpy.pop_call()
         "[EmmaX.name] marches out the door, leaving you alone. She looked pretty upset."
@@ -2069,15 +2065,15 @@ label Emma_Sub_Asked:
 label Emma_Master:
     $ EmmaX.drain_word("asked_to_meet")
     call shift_focus (EmmaX)
-    $ EmmaX.location = bg_current
+    $ EmmaX.location = Player.location
     call set_the_scene
-    if EmmaX.location != bg_current and EmmaX not in Party:
+    if EmmaX.location != Player.location and EmmaX not in Player.Party:
         "[EmmaX.name] shows up and says she needs to talk to you."
     else:
         "[EmmaX.name] approaches you, looking to talk."
     call clear_the_room (EmmaX)
     $ EmmaX.daily_history.append("relationship")
-    call taboo_level
+    call set_Character_taboos
     $ line = 0
     $ EmmaX.change_face("_bemused", 1)
     ch_e "[EmmaX.player_petname], if you don't mind my saying so. . ."
@@ -2175,11 +2171,11 @@ label Emma_Master:
     $ EmmaX.history.append("master")
     if line == "rude":
         $ EmmaX.recent_history.append("_angry")
-        call remove_Girl (EmmaX)
+        call remove_Girl(EmmaX)
         $ renpy.pop_call()
         "[EmmaX.name] storms out the door in a huff."
     elif line == "embarrassed":
-        call remove_Girl (EmmaX)
+        call remove_Girl(EmmaX)
         $ renpy.pop_call()
         "[EmmaX.name] dashed out of the room, leaving you alone. She looked really embarrassed."
     elif line != "fail":
@@ -2200,11 +2196,11 @@ label Emma_Sexfriend:
     if EmmaX in Player.Harem:
         $ EmmaX.player_petnames.append("sex friend")
         return
-    $ EmmaX.location = bg_current
+    $ EmmaX.location = Player.location
     call set_the_scene
     call clear_the_room (EmmaX, 1, 1)
     $ EmmaX.daily_history.append("relationship")
-    call taboo_level
+    call set_Character_taboos
     $ line = 0
     "After class, the students file out of the room."
     $ EmmaX.change_face("_bemused", 1)
@@ -2336,7 +2332,7 @@ label Emma_Sexfriend:
         $ EmmaX.change_stat("love", 200, -20)
         $ EmmaX.change_stat("obedience", 50, 5)
         $ EmmaX.change_stat("inhibition", 80, -10)
-        call hide_Girl(EmmaX, transition = easeoutright)
+        call remove_Girl(EmmaX)
         $ EmmaX.recent_history.append("_angry")
         "[EmmaX.name] storms off in a huff. She seemed pretty mad at you."
     elif line == "embarrassed":
@@ -2344,10 +2340,10 @@ label Emma_Sexfriend:
         $ EmmaX.change_stat("love", 200, -10)
         $ EmmaX.change_stat("obedience", 50, 5)
         $ EmmaX.change_stat("inhibition", 80, -20)
-        call hide_Girl(EmmaX, transition = easeoutright)
+        call remove_Girl(EmmaX)
         "[EmmaX.name] dashes out of the room, leaving you alone. That was very strange."
     elif line == "_sad":
-        call hide_Girl(EmmaX, transition = easeoutright)
+        call remove_Girl(EmmaX)
         "[EmmaX.name] wanders into the hall, leaving you alone. You think you may have hurt her feelings."
     else:
         $ EmmaX.player_petnames.append("sex friend")
@@ -2359,9 +2355,9 @@ label Emma_Sexfriend:
         "You look back at her and she winks."
         ch_e "I do have a few tricks up my sleeves, [EmmaX.player_petname]."
         ch_e "I'll see you later, I hope."
-        call hide_Girl(EmmaX, transition = easeoutright)
+        call remove_Girl(EmmaX)
         "She leaves the room, and the phantom \"lips\" give you one final kiss. "
-    call remove_Girl (EmmaX)
+    call remove_Girl(EmmaX)
     return
 
 

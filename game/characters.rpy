@@ -7,6 +7,8 @@ init python:
             self.sprite = None
             self.color = "Green"
 
+            self.location = "bg_study"
+
             self.semen = 2
             self.max_semen = 3
 
@@ -20,6 +22,9 @@ init python:
             self.traits = []
             self.history = []
 
+            self.Phonebook = []
+            self.Party = []
+            self.Keys = []
             self.Harem = []
 
             self.XP = 0
@@ -441,7 +446,7 @@ init python:
             self.change_outfit("today")
 
             shop_inventory.extend(["DL", "G", "A"])
-            personal_rooms.append(self.home)
+            bedrooms.append(self.home)
 
             global all_Girls
 
@@ -1000,7 +1005,7 @@ init python:
                 if outfit_holder != "sleepwear" and outfit_holder != "gym_clothes":
                     self.outfit["underwear"] = ""
 
-            if self.location == bg_current and not outfit_changed:
+            if self.location == Player.location and not outfit_changed:
                 if got_dressed == 2:
                     renpy.say(None, self.name + " throws on a towel.")
                 elif got_dressed:
