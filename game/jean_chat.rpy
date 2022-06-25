@@ -2192,8 +2192,6 @@ label Jean_Leave:
 
         call hide_all
 
-        $ Player.traveling = True
-
         $ destination = JeanX.location
 
         if destination == "bg_player":

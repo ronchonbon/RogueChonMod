@@ -2146,8 +2146,6 @@ label Storm_Leave:
 
         call hide_all
 
-        $ Player.traveling = True
-
         $ destination = StormX.location
 
         if destination == "bg_player":

@@ -322,8 +322,6 @@ label meet_Emma:
 
     $ active_Girls.append(EmmaX)
 
-    $ round -= 10
-
     return
 
 label Emma_Caught_Classroom:

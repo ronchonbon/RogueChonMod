@@ -82,7 +82,7 @@ label masturbate(Girl, context = None):
                 $ Girl.arm_pose = 1
                 $ Girl.remaining_actions -= 1
 
-                $ Player.change_stat("focus", 50, 30)
+                call change_Player_stat("focus", 50, 30)
 
                 call checkout
                 call reset_player

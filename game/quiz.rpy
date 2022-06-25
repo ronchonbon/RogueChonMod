@@ -335,7 +335,7 @@ label Strip_Study_Right:
                 $ Player.Party[0].change_stat("inhibition", 200, 3)
                 $ Player.Party[0].change_stat("inhibition", 50, 1)
                 call expression Player.Party[0].tag + "_First_Topless"
-            $ Player.change_stat("focus", 80, 15)
+            call change_Player_stat("focus", 80, 15)
         else:
             if Player.Party[0] == RogueX:
                 ch_r "I know a deal's a deal, but I'd like to keep my top on, ok [Player.Party[0].player_petname]? Sorry about that."
@@ -367,7 +367,7 @@ label Strip_Study_Right:
                 $ Player.Party[0].change_stat("inhibition", 50, 4)
                 $ Player.Party[0].change_stat("inhibition", 200, 4)
                 call expression Player.Party[0].tag + "_First_Bottomless"
-            $ Player.change_stat("focus", 75, 20)
+            call change_Player_stat("focus", 75, 20)
         else:
             if Player.Party[0] == RogueX:
                 ch_r "Look, this has gone a bit far, [Player.Party[0].player_petname]. I'd like to call it a night."

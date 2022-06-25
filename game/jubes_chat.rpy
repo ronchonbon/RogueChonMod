@@ -2158,8 +2158,6 @@ label Jubes_Leave:
 
         call hide_all
 
-        $ Player.traveling = True
-
         $ destination = JubesX.location
 
         if destination == "bg_player":

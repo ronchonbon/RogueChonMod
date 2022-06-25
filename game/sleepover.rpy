@@ -1546,7 +1546,7 @@ label sleepover_MorningWood:
     else:
         ch_u "\"Squish, squish, squish.\""
 
-    $ Player.change_stat("focus", 80, 5)
+    call change_Player_stat("focus", 80, 5)
     $ Player.Party[0].change_stat("lust", 80, 5)
     $ Player.daily_history.append("morningwood")
 
@@ -1578,7 +1578,7 @@ label sleepover_MorningWood:
             ch_u "\"Squish, squish, squish.\" \n \ \"Slurp, slurp, slurp.\""
         else:
             ch_u "\"Squish, squish, squish.\""
-    $ Player.change_stat("focus", 80, 5)
+    call change_Player_stat("focus", 80, 5)
     $ Player.Party[0].change_stat("lust", 80, 5)
 
     "It's somewhere below your waist. . ."
@@ -1592,7 +1592,7 @@ label sleepover_MorningWood:
             ch_u "\"Squish, squish, squish.\" \n \ \"Slurp, slurp, slurp.\""
         else:
             ch_u "\"Squish, squish, squish.\""
-    $ Player.change_stat("focus", 80, 10)
+    call change_Player_stat("focus", 80, 10)
     $ Player.Party[0].change_stat("lust", 80, 5)
 
     "You open your eyes. . ."
@@ -1605,7 +1605,7 @@ label sleepover_MorningWood:
     call Seen_First_Peen (Player.Party[0], Partner, 1, 1, 1)
     while Count > 0:
 
-        $ Player.change_stat("focus", 80, 10)
+        call change_Player_stat("focus", 80, 10)
         $ Player.Party[0].change_stat("lust", 80, 5)
         if Partner:
             $ Partner.change_stat("lust", 80, 5)

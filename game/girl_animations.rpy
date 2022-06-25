@@ -35,12 +35,12 @@ transform reset_zoom_instantly:
     offset (0, 0) xzoom 1.0 yzoom 1.0 zoom 1.0
 
 transform smooch_animation:
-    ease 0.6 ypos 0.1 zoom 2.0
+    ease 0.6 ypos 0.0 zoom 2.0
     pause 1.0
     ease 0.6 ypos 0.0 zoom 1.0
 
 transform kiss_launch_animation:
-    ease 0.75 ypos 0.1 zoom 2.0
+    ease 0.75 ypos 0.0 zoom 2.0
 
 transform breasts_launch_animation:
     ease 0.75 ypos -0.2 zoom 2.0
@@ -447,10 +447,6 @@ label remove_Girl(Girl, transition = None):
         "[Girl.name] unlocks the door on her way out."
 
         $ door_locked = False
-
-    if not transition:
-        call get_transition
-        $ transition = _return[1]
 
     call hide_Girl(Girl, transition = transition)
 

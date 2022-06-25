@@ -2510,10 +2510,10 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             $ Girl.change_stat("inhibition", 80, -3)
             call Date_Bonus (Girl, -1)
         else:
-            $ Player.change_stat("focus", 60, 10)
+            call change_Player_stat("focus", 60, 10)
             if _return == 1:
                 "[Previous.name] decides to join in the fun and adds her foot to the mix."
-                $ Player.change_stat("focus", 60, 5)
+                call change_Player_stat("focus", 60, 5)
                 $ Girl.check_if_likes(Previous, 1000,2, 1)
                 $ Previous.check_if_likes(Girl, 1000, 1, 1)
             if _return == 3:

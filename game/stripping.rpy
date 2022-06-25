@@ -1733,7 +1733,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
             if approval_check(Girl, 750, taboo_modifier = 3):
                 $ Girl.change_stat("obedience", 50, 1)
                 $ Girl.change_stat("inhibition", 25, 1)
-                $ Player.change_stat("focus", 60, 3)
+                call change_Player_stat("focus", 60, 3)
                 $ line = Girl.outfit["jacket"]
                 $ Girl.outfit["jacket"] = ""
                 "She shrugs off her [line] and throws it behind her."
@@ -1744,7 +1744,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
             if approval_check(Girl, 750, taboo_modifier = 3):
                 $ Girl.change_stat("obedience", 50, 1)
                 $ Girl.change_stat("inhibition", 25, 1)
-                $ Player.change_stat("focus", 60, 3)
+                call change_Player_stat("focus", 60, 3)
                 $ line = Girl.outfit["jacket"]
                 $ Girl.outfit["jacket"] = ""
                 "She shrugs off her [line] and throws it behind her."
@@ -1755,7 +1755,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
             if approval_check(Girl, 750, taboo_modifier = 3,Alt=[[StormX],(300-Nudist*3)]):
                 $ Girl.change_stat("obedience", 50, 1)
                 $ Girl.change_stat("inhibition", 25, 1)
-                $ Player.change_stat("focus", 60, 3)
+                call change_Player_stat("focus", 60, 3)
                 $ line = Girl.outfit["top"]
                 $ Girl.outfit["top"] = ""
                 if Girl == KittyX:
@@ -1771,7 +1771,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 $ Girl.change_stat("lust", 50, 5)
                 $ Girl.change_stat("obedience", 50, 1)
                 $ Girl.change_stat("inhibition", 30, 1)
-                $ Player.change_stat("focus", 60, 5)
+                call change_Player_stat("focus", 60, 5)
                 $ line = Girl.outfit["bottom"]
                 $ Girl.outfit["bottom"] = ""
                 if Girl == KittyX:
@@ -1792,18 +1792,18 @@ label Girl_Stripping(Girl=0, Nudist=0):
             if Girl.outfit["hose"] == "_tights":
                 if approval_check(Girl, 1200, taboo_modifier = 3):
                     $ Girl.change_stat("lust", 50, 6)
-                    $ Player.change_stat("focus", 60, 6)
+                    call change_Player_stat("focus", 60, 6)
                 else:
                     jump Strip_Ultimatum
 
             elif Girl.hose_number() >= 6 and approval_check(Girl, 1200, taboo_modifier = 3):
                 if approval_check(Girl, 1200, taboo_modifier = 3,Alt=[[StormX],(600-Nudist*3)]):
                     $ Girl.change_stat("lust", 50, 4)
-                    $ Player.change_stat("focus", 60, 4)
+                    call change_Player_stat("focus", 60, 4)
                 else:
                     jump Strip_Ultimatum
             else:
-                $ Player.change_stat("focus", 60, 3)
+                call change_Player_stat("focus", 60, 3)
             $ line = Girl.outfit["hose"]
             $ Girl.outfit["hose"] = ""
             if Girl == KittyX:
@@ -1818,7 +1818,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 $ Girl.change_stat("lust", 60, 5)
                 $ Girl.change_stat("obedience", 50, 2)
                 $ Girl.change_stat("inhibition", 50, 10)
-                $ Player.change_stat("focus", 80, 15)
+                call change_Player_stat("focus", 80, 15)
                 $ line = Girl.outfit["jacket"]
                 $ Girl.outfit["jacket"] = ""
                 "She shrugs off her [line] and throws it behind her."
@@ -1838,7 +1838,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 $ Girl.change_stat("lust", 60, 5)
                 $ Girl.change_stat("obedience", 50, 2)
                 $ Girl.change_stat("inhibition", 50, 10)
-                $ Player.change_stat("focus", 80, 15)
+                call change_Player_stat("focus", 80, 15)
                 $ line = Girl.outfit["top"]
                 $ Girl.outfit["top"] = ""
                 if not Girl.seen_breasts:
@@ -1868,7 +1868,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 $ Girl.change_stat("lust", 60, 5)
                 $ Girl.change_stat("obedience", 50, 2)
                 $ Girl.change_stat("inhibition", 50, 1)
-                $ Player.change_stat("focus", 80, 15)
+                call change_Player_stat("focus", 80, 15)
                 $ line = Girl.outfit["bra"]
                 $ Girl.outfit["bra"] = ""
                 if not Girl.seen_breasts:
@@ -1919,7 +1919,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     else:
                         "She unzips and pulls down her [line], dropping them to the floor."
                     $ Girl.change_stat("inhibition", 70, 2)
-                $ Player.change_stat("focus", 85, 15)
+                call change_Player_stat("focus", 85, 15)
             else:
                 jump Strip_Ultimatum
 
@@ -1953,7 +1953,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     $ Girl.change_stat("obedience", 50, 1)
                     $ Girl.change_stat("obedience", 75, 1)
                     $ Girl.change_stat("inhibition", 70, 2)
-                $ Player.change_stat("focus", 85, 15)
+                call change_Player_stat("focus", 85, 15)
             else:
                 jump Strip_Ultimatum
         elif Girl.outfit["top"] and not Girl.outfit["underwear"]:
@@ -1994,7 +1994,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     $ Girl.change_stat("obedience", 50, 1)
                     $ Girl.change_stat("obedience", 75, 1)
                     $ Girl.change_stat("inhibition", 70, 2)
-                $ Player.change_stat("focus", 85, 15)
+                call change_Player_stat("focus", 85, 15)
             else:
                 jump Strip_Ultimatum
 
@@ -2023,7 +2023,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     else:
                         "She pulls her [line] over her head, tossing it to the ground."
                     $ Girl.change_stat("inhibition", 50, 1)
-                $ Player.change_stat("focus", 80, 15)
+                call change_Player_stat("focus", 80, 15)
             else:
                 jump Strip_Ultimatum
 
@@ -2053,7 +2053,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     else:
                         "She looks up at you, and then gently pulls her [line] down, kicking them off to the side."
                     $ Girl.change_stat("inhibition", 70, 2)
-                $ Player.change_stat("focus", 85, 15)
+                call change_Player_stat("focus", 85, 15)
             else:
                 jump Strip_Ultimatum
         else:
@@ -2085,10 +2085,10 @@ label Girl_Stripping(Girl=0, Nudist=0):
     $ Girl.change_stat("lust", 70, 2)
     if "exhibitionist" in Girl.traits:
         $ Girl.change_stat("lust", 200, 2)
-    $ Player.change_stat("focus", 60, 3)
+    call change_Player_stat("focus", 60, 3)
     if Player.secondary_action == "jerking_off":
         $ Girl.change_stat("lust", 200, 2)
-        $ Player.change_stat("focus", 200, 5)
+        call change_Player_stat("focus", 200, 5)
 
     if not Player.semen and Player.focus >= 50:
         $ Player.focus = 50

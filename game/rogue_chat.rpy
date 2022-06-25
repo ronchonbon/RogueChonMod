@@ -1966,8 +1966,6 @@ label Rogue_Leave:
 
         call hide_all
 
-        $ Player.traveling = True
-
         $ destination = RogueX.location
 
         if destination == "bg_player":

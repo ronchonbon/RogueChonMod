@@ -2580,7 +2580,7 @@ label Self_Cleanup(Girl=0):
         $ counter += 1
     if Girl.spunk["breasts"]:
         $ Girl.spunk["breasts"] = False
-        $ Player.change_stat("focus",80,2)
+        call change_Player_stat("focus",80,2)
         if counter:
             "then she wipes the spunk off of her chest,"
         else:
@@ -2602,7 +2602,7 @@ label Self_Cleanup(Girl=0):
         $ counter += 1
     if Girl.spunk["pussy"]:
         $ Girl.spunk["pussy"] = False
-        $ Player.change_stat("focus",80,3)
+        call change_Player_stat("focus",80,3)
         if counter:
             "then she wipes the spunk inside her pussy,"
         else:
@@ -2611,7 +2611,7 @@ label Self_Cleanup(Girl=0):
     if Girl.spunk["anus"] and (approval_check(Girl, 800, "I") or Choice != "eat"):
         while Girl.spunk["anus"]:
             $ Girl.spunk["anus"] = False
-        $ Player.change_stat("focus",80,2)
+        call change_Player_stat("focus",80,2)
         if counter:
             "then she wipes the spunk dripping out of her ass,"
         else:
@@ -2621,7 +2621,7 @@ label Self_Cleanup(Girl=0):
         $ Girl.spunk["hand"] = False
         if Choice == "eat":
             $ Girl.spunk["mouth"] = True
-            $ Player.change_stat("focus",80,3)
+            call change_Player_stat("focus",80,3)
             if counter and Girl.spunk["anus"]:
                 "then licks her hands off with a satisfied grin,"
             if counter:
@@ -3110,7 +3110,7 @@ label Partner_Clean_Girl(Girl=0):
                 $ Partner.spunk["chin"] = True
             $ Partner.change_stat("lust", 80, 3)
             $ Girl.change_stat("lust", 80, 4)
-            $ Player.change_stat("focus",80,3)
+            call change_Player_stat("focus",80,3)
             "[Partner.name] licks her way up [Girl.name]'s chin, before deeply kissing her."
         else:
             $ Girl.change_stat("lust", 80, 2)
@@ -3136,7 +3136,7 @@ label Partner_Clean_Girl(Girl=0):
                 $ Partner.spunk["chin"] = True
             $ Partner.change_stat("lust", 80, 2)
             $ Girl.change_stat("lust", 80, 4)
-            $ Player.change_stat("focus",80,3)
+            call change_Player_stat("focus",80,3)
             if counter:
                 "then she licks the spunk off of [Girl.name]'s face,"
             else:
@@ -3158,7 +3158,7 @@ label Partner_Clean_Girl(Girl=0):
                 $ Partner.spunk["chin"] = True
             $ Partner.change_stat("lust", 80, 2)
             $ Girl.change_stat("lust", 200, 4)
-            $ Player.change_stat("focus",80,4)
+            call change_Player_stat("focus",80,4)
             if counter:
                 "then she licks her way across [Girl.name]'s chest,"
             else:
@@ -3166,7 +3166,7 @@ label Partner_Clean_Girl(Girl=0):
         else:
             $ Partner.change_stat("lust", 80, 2)
             $ Girl.change_stat("lust", 80, 2)
-            $ Player.change_stat("focus",80,2)
+            call change_Player_stat("focus",80,2)
             if counter:
                 "then she wipes the spunk off of [Girl.name]'s chest,"
             else:
@@ -3181,7 +3181,7 @@ label Partner_Clean_Girl(Girl=0):
                 $ Partner.spunk["chin"] = True
             $ Partner.change_stat("lust", 80, 2)
             $ Girl.change_stat("lust", 80, 3)
-            $ Player.change_stat("focus",80, 1)
+            call change_Player_stat("focus",80, 1)
             if counter:
                 "then she licks her way down [Girl.name]'s belly,"
             else:
@@ -3223,7 +3223,7 @@ label Partner_Clean_Girl(Girl=0):
                 $ Partner.spunk["chin"] = True
             $ Partner.change_stat("lust", 80, 4)
             $ Girl.change_stat("lust", 200, 6)
-            $ Player.change_stat("focus",80,6)
+            call change_Player_stat("focus",80,6)
             if counter:
                 "then she sucks gently at [Girl.name]'s pussy,"
             else:
@@ -3231,7 +3231,7 @@ label Partner_Clean_Girl(Girl=0):
         else:
             $ Partner.change_stat("lust", 80, 2)
             $ Girl.change_stat("lust", 200, 4)
-            $ Player.change_stat("focus",80,4)
+            call change_Player_stat("focus",80,4)
             if counter:
                 "then she strokes along [Girl.name]'s pussy, wiping the spunk clean,"
             else:
@@ -3247,7 +3247,7 @@ label Partner_Clean_Girl(Girl=0):
                 $ Partner.spunk["chin"] = True
             $ Partner.change_stat("lust", 80, 2)
             $ Girl.change_stat("lust", 200, 6)
-            $ Player.change_stat("focus",80,5)
+            call change_Player_stat("focus",80,5)
             if counter:
                 "then she licks up the spunk dripping out of [Girl.name]'s ass,"
             else:
@@ -3255,7 +3255,7 @@ label Partner_Clean_Girl(Girl=0):
         else:
             $ Partner.change_stat("lust", 80, 2)
             $ Girl.change_stat("lust", 200, 6)
-            $ Player.change_stat("focus",80,3)
+            call change_Player_stat("focus",80,3)
             if counter:
                 "then she wipes the spunk dripping out of [Girl.name]'s ass, discarding it,"
             else:
@@ -3271,7 +3271,7 @@ label Partner_Clean_Girl(Girl=0):
             if not Partner.spunk["chin"]:
                 $ Partner.spunk["chin"] = True
             $ Girl.change_stat("lust", 80, 3)
-            $ Player.change_stat("focus",80,3)
+            call change_Player_stat("focus",80,3)
             if counter:
                 "and finally she licks [Girl.name]'s hands off with a satisfied grin."
             else:
@@ -3289,7 +3289,7 @@ label Partner_Clean_Girl(Girl=0):
             while Partner.spunk["chin"]:
                 $ Partner.spunk["chin"] = False
             $ Girl.change_stat("inhibition", 80, 2)
-            $ Player.change_stat("focus",80,3)
+            call change_Player_stat("focus",80,3)
             "Then [Partner.name] swallows and wipes her mouth."
             $ Partner.event_counter["swallowed"] += 1
             $ Partner.addiction -= (10*counter)

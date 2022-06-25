@@ -11,7 +11,7 @@ label meet_Jubes:
 
     ch_u "\"Slurp, slurp, slurp.\""
 
-    $ Player.change_stat("focus", 80, 5)
+    call change_Player_stat("focus", 80, 5)
 
     $ JubesX.change_face("_sucking", 1)
     $ JubesX.change_stat("lust", 80, 5)
@@ -19,7 +19,7 @@ label meet_Jubes:
     "You feel a pleasant sensation. . ."
     ch_u "\"Slurp, slurp, slurp.\""
 
-    $ Player.change_stat("focus", 80, 5)
+    call change_Player_stat("focus", 80, 5)
 
     $ JubesX.change_stat("lust", 80, 5)
     $ JubesX.addiction_rate += 1
@@ -27,7 +27,7 @@ label meet_Jubes:
     "It's somewhere below your waist. . ."
     ch_u "\"Slurp, slurp, slurp.\""
 
-    $ Player.change_stat("focus", 80, 10)
+    call change_Player_stat("focus", 80, 10)
 
     $ JubesX.change_stat("lust", 80, 5)
 
@@ -48,7 +48,7 @@ label meet_Jubes:
     "Someone seems to be giving you a hickey on your neck. . ."
 
     while counter > 0:
-        $ Player.change_stat("focus", 80, 10)
+        call change_Player_stat("focus", 80, 10)
 
         $ JubesX.change_stat("lust", 80, 5)
 

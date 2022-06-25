@@ -2073,7 +2073,7 @@ label Girl_Self_lines(GirlA=Primary, Mode="T3", Action=girl_secondary_action, Te
 
         if Player.primary_action == "massage":
             $ TempFocusX += 4 if Player.focus < 50 else 3
-            $ Player.change_stat("focus", 200, TempFocusX)
+            call change_Player_stat("focus", 200, TempFocusX)
             $ GirlA.change_stat("lust", 200, TempLustX)
             return
         else:

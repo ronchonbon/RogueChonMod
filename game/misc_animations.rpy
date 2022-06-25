@@ -32,71 +32,77 @@ layeredimage foreground:
     if Player.location == "bg_classroom" and time_index < 2 and weekday < 5:
         "images/backgrounds/bg_classroom_pupils.png"
 
-init python:
-
-    def call_holder(value, Color, XPOS):
-        global number_of_holders
-
-        number_of_holders += 1 if number_of_holders < 10 else -9
-
-        renpy.show_screen("stat_holder_" + str(number_of_holders), value, Color, XPOS)
-
-        return
-
-transform stat_animation(Timer, XPOS):
-    alpha 0
-    pause Timer
-    xpos XPOS ypos 0.25 alpha 1
+transform stat_rising:
+    choice:
+        pause 0.6
+        xpos 0.75 ypos 0.25
+    choice:
+        pause 0.7
+        xpos 0.735 ypos 0.25
+    choice:
+        pause 0.8
+        xpos 0.765 ypos 0.25
+    choice:
+        pause 0.9
+        xpos 0.72 ypos 0.25
+    choice:
+        pause 1.0
+        xpos 0.78 ypos 0.25
+    choice:
+        pause 1.1
+        xpos 0.75 ypos 0.25
+    choice:
+        pause 1.2
+        xpos 0.735 ypos 0.25
+    choice:
+        pause 1.3
+        xpos 0.765 ypos 0.25
+    choice:
+        pause 1.4
+        xpos 0.72 ypos 0.25
+    choice:
+        pause 1.5
+        xpos 0.78 ypos 0.25
     parallel:
         linear 2.0 ypos 0.0
     parallel:
         linear 2.0 alpha 0
 
-screen stat_graphic(value, Color, Timer, XPOS):
-    showif value > 0:
-        text "+[value]" size 40 color Color at stat_animation(Timer, XPOS)
-    else:
-        text "[value]" size 40 color Color at stat_animation(Timer, XPOS)
-
-screen stat_holder_1(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.0, XPOS - 0.015)
-    timer 0.6 action Hide("stat_holder_1")
-
-screen stat_holder_2(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.1, XPOS)
-    timer 0.7 action Hide("stat_holder_2")
-
-screen stat_holder_3(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.2, XPOS + 0.015)
-    timer 0.8 action Hide("stat_holder_3")
-
-screen stat_holder_4(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.3, XPOS - 0.015)
-    timer 0.9 action Hide("stat_holder_4")
-
-screen stat_holder_5(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.4, XPOS)
-    timer 1.0 action Hide("stat_holder_5")
-
-screen stat_holder_6(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.5, XPOS + 0.015)
-    timer 1.1 action Hide("stat_holder_6")
-
-screen stat_holder_7(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.6, XPOS - 0.015)
-    timer 1.2 action Hide("stat_holder_7")
-
-screen stat_holder_8(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.7, XPOS)
-    timer 1.3 action Hide("stat_holder_8")
-
-screen stat_holder_9(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.8, XPOS + 0.015)
-    timer 1.4 action Hide("stat_holder_9")
-
-screen stat_holder_10(value, Color, XPOS):
-    use stat_graphic(value, Color, 0.9, XPOS - 0.015)
-    timer 1.5 action Hide("stat_holder_10")
+transform stat_falling:
+    choice:
+        pause 0.6
+        xpos 0.75
+    choice:
+        pause 0.7
+        xpos 0.735
+    choice:
+        pause 0.8
+        xpos 0.765
+    choice:
+        pause 0.9
+        xpos 0.72
+    choice:
+        pause 1.0
+        xpos 0.78
+    choice:
+        pause 1.1
+        xpos 0.75
+    choice:
+        pause 1.2
+        xpos 0.735
+    choice:
+        pause 1.3
+        xpos 0.765
+    choice:
+        pause 1.4
+        xpos 0.72
+    choice:
+        pause 1.5
+        xpos 0.78
+    parallel:
+        linear 2.0 ypos 0.25
+    parallel:
+        linear 2.0 alpha 0.0
 
 transform dripping(x_offset = 0, start = 0, transparency = 1.0):
     offset (x_offset, start) alpha transparency

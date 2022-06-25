@@ -2,9 +2,37 @@
 errors listed below, and try again.
 
 
-File "game/utilities.rpy", line 4047: expected statement.
-    , TempFocus=0, PrimaryLust=0, SecondaryLust=0, line2=0, line3=0, line4=0, D20S=0
-    ^
+File "game/utilities.rpy", line 26: reached end of line when expecting ':'.
+    if update > 0
+                 ^
+
+File "game/utilities.rpy", line 28: expected statement.
+    else:
+        ^
+
+File "game/utilities.rpy", line 103: end of line expected.
+    text "+[update]" size 40 color shade at stat_rising
+                     ^
+
+File "game/utilities.rpy", line 105: end of line expected.
+    text "[update]" size 40 color shade at stat_falling
+                    ^
+
+File "game/utilities.rpy", line 115: end of line expected.
+    text "+[stat - 1000 - update]" size 40 color shade at stat_rising
+                                   ^
+
+File "game/utilities.rpy", line 117: end of line expected.
+    text "[stat - 1000 - update]" size 40 color shade at stat_falling
+                                  ^
+
+File "game/utilities.rpy", line 160: reached end of line when expecting ':'.
+    if update > 0
+                 ^
+
+File "game/utilities.rpy", line 162: expected statement.
+    else:
+        ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Fri Jun 24 17:54:57 2022
+Fri Jun 24 21:13:57 2022

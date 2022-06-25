@@ -5,6 +5,169 @@ init python:
 
         return split_name[character.name.count(" ")]
 
+label change_Player_stat(flavor, check, update, greater_than = False):
+    $ stat = getattr(Player, flavor)
+
+    if greater_than:
+        if stat >= check:
+            $ stat += update
+        else:
+            $ update = 0
+    else:
+        if stat <= check:
+            $ stat += update
+        else:
+            $ update = 0
+
+    $ stat = 100 if stat > 100 else stat
+
+    $ setattr(self, flavor, stat)
+
+    if update > 0
+        text "+[update]" size 40 color "#FFFFFF" at stat_rising
+    else:
+        text "[update]" size 40 color "#FFFFFF" at stat_falling
+
+label change_Girl_stat(Girl, flavor, check, update, greater_than = False, Alt = [[], 0, 0]):
+    if Girl in Alt[0]:
+        $ check = Alt[1] if Alt[1] else check
+        $ update = Alt[2] if Alt[2] else update
+
+    if flavor in ["love", "obedience", "inhibition"]:
+        $ check *= 10
+
+    $ stat = getattr(Girl, flavor)
+
+    $ Overflow = Girl.had_chat[4]
+
+    if Girl == JeanX and flavor == "inhibition" and Girl.IX > 0:
+        $ stat -= Girl.IX
+
+    if greater_than:
+        if stat >= check:
+            $ stat += update
+        else:
+            $ update = 0
+    else:
+        if stat <= check:
+            $ stat += update
+        else:
+            $ update = 0
+
+    if Girl == JeanX and flavor == "inhibition" and Girl.IX > 0:
+        $ stat += Girl.IX
+
+    if update:
+        if Girl == JeanX and update > 0:
+            if flavor == "obedience" and Girl.obedience <= 800 and check < 800:
+                $ update = int(update/2)
+                $ stat -= update
+            elif flavor == "inhibition" and Girl.IX > 0:
+                if Girl.taboo >= 40:
+                    $ update += update
+                    $ stat += update
+                if stat > 1000:
+                    $ Girl.IX -= (stat - 1000)
+
+                    $ stat = 1000
+                    $ update = 0
+                elif stat > 700:
+                    $ Girl.IX -= int(update/2)
+
+                $ Girl.IX = 0 if Girl.IX < 0 else Girl.IX
+            elif flavor == "love" and stat >= 500 and Girl.obedience < 700:
+                if Girl.love < 500:
+                    $ Girl.love = 500
+
+                    $ update = stat - 500
+
+                $ Girl.stored_stats += update
+
+                if check > Girl.obedience:
+                    $ flavor = "obedience"
+                    $ update = int(update/5)
+                    $ stat = Girl.obedience + update
+                else:
+                    $ update = 0
+
+        if flavor == "love":
+            $ shade = "#c11b17"
+        elif flavor == "obedience":
+            $ shade = "#2554c7"
+        elif flavor == "inhibition":
+            $ shade = "#FFF380"
+        elif flavor == "lust":
+            $ shade = "#FAAFBE"
+
+            if update > 0:
+                text "+[update]" size 40 color shade at stat_rising
+            else:
+                text "[update]" size 40 color shade at stat_falling
+
+            $ stat = 100 if stat > 100 else stat
+
+            $ setattr(Girl, flavor, stat)
+
+            return
+
+        if stat > 1000:
+            if stat - 1000 - update > 0:
+                text "+[stat - 1000 - update]" size 40 color shade at stat_rising
+            else:
+                text "[stat - 1000 - update]" size 40 color shade at stat_falling
+
+            if not Girl.had_chat[4]:
+                $ update = 0
+            else:
+                $ update = stat - 1000
+
+                $ setattr(Girl, flavor, 1000)
+
+                if flavor == "love":
+                    if Girl.had_chat[4] == 1:
+                        $ flavor = "obedience"
+                    elif Girl.had_chat[4] == 2:
+                        $ flavor = "inhibition"
+                    else:
+                        $ update = 0
+                elif flavor == "obedience":
+                    if Girl.had_chat[4] == 3:
+                        $ flavor = "inhibition"
+                    elif Girl.had_chat[4] == 4:
+                        $ flavor = "love"
+                    else:
+                        $ update = 0
+                elif flavor == "inhibition":
+                    if Girl.had_chat[4] == 5:
+                        $ flavor = "obedience"
+                    elif Girl.had_chat[4] == 6:
+                        $ flavor = "love"
+                    else:
+                        $ update = 0
+
+                $ stat = getattr(Girl, flavor)
+                $ stat += update
+
+                if flavor == "love":
+                    $ shade = "#c11b17"
+                elif flavor == "obedience":
+                    $ shade = "#2554c7"
+                elif flavor == "inhibition":
+                    $ shade = "#FFF380"
+                else:
+                    $ shade = "#FFFFFF"
+
+        if update > 0
+            text "+[update]" size 40 color "#FFFFFF" at stat_rising
+        else:
+            text "[update]" size 40 color "#FFFFFF" at stat_falling
+
+    $ stat = 1000 if stat > 1000 else stat
+
+    $ setattr(Girl, flavor, stat)
+
+    return
+
 label set_Character_taboos:
     call check_taboo(Player)
 
@@ -23,6 +186,8 @@ label set_Character_taboos:
 label set_the_scene(show_Characters = True, fade = False, static = False):
     if fade:
         show black_screen onlayer black
+
+        pause 0.4
 
     if show_Characters:
         if Present:
@@ -588,6 +753,8 @@ label change_clothes:
 
 label wait:
     show black_screen onlayer black
+
+    pause 0.4
 
     $ stack_depth = renpy.call_stack_depth()
 
@@ -1287,7 +1454,10 @@ label clear_the_room(Girl, passive = False, silent = False):
                 elif Girls[0] == JubesX:
                     ch_v "I'm gonna peace out. . ."
 
-            call remove_Girl(Girls[0])
+            if passive and silent:
+                call remove_Girl(Girls[0], transition = None)
+            else:
+                call remove_Girl(Girls[0])
 
             $ Girls.remove(Girls[0])
 
@@ -1444,7 +1614,7 @@ menu Tutorial:
                             $ RogueX.lust -= 1
                         "Player Excitement":
                             "The rather \"suggestive\" bar to the right of Inhibitions represents your own excitement."
-                            $ Player.change_stat("focus", 200, 1)
+                            call change_Player_stat("focus", 200, 1)
                             $ Player.focus -= 1
                             "When it reaches 100%%, you orgasm. If you wish to delay this, you can learn to \"focus\" during sex and slow the progression."
                             "The better you get at each sexual activity, the faster these stats will rise."
@@ -4096,7 +4266,7 @@ label Sex_Dialog(Primary, Secondary):
 
 
 
-    $ Player.change_stat("focus", 200, TempFocus)
+    call change_Player_stat("focus", 200, TempFocus)
 
 
     $ Primary.change_stat("lust", 200, PrimaryLust)

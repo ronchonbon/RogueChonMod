@@ -2311,8 +2311,6 @@ label Emma_Leave:
 
         call hide_all
 
-        $ Player.traveling = True
-
         $ destination = EmmaX.location
 
         if destination == "bg_player":

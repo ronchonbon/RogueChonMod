@@ -30,21 +30,6 @@ layeredimage Laura_sprite standing:
     always:
         "images/Laura_standing/Laura_standing_breasts.png"
 
-    if LauraX.arm_pose == 2:
-        "images/Laura_standing/Laura_standing_arm[LauraX.arm_pose]_left.png"
-
-    if not LauraX.outfit["gloves"]:
-        Null()
-    elif LauraX.outfit["gloves"] == "_gloves":
-        "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose]_right.png"
-    elif LauraX.outfit["gloves"] == "_bunny_gloves" and LauraX.arm_pose == 1:
-        "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose].png"
-    else:
-        "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose].png"
-
-    if LauraX.outfit["gloves"] == "_gloves" and LauraX.arm_pose == 2:
-        "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose]_left.png"
-
     if LauraX.outfit["piercings"]:
         "images/Laura_standing/Laura_standing_piercings_breasts[LauraX.outfit[piercings]].png"
 
@@ -112,6 +97,21 @@ layeredimage Laura_sprite standing:
     if not renpy.showing("Laura_sprite blowjob"):
         "Laura_head" pos (0.209, 0.371) zoom 0.5
 
+    if LauraX.arm_pose == 2:
+        "images/Laura_standing/Laura_standing_arm[LauraX.arm_pose]_left.png"
+
+    if not LauraX.outfit["gloves"]:
+        Null()
+    elif LauraX.outfit["gloves"] == "_gloves":
+        "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose]_right.png"
+    elif LauraX.outfit["gloves"] == "_bunny_gloves" and LauraX.arm_pose == 1:
+        "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose].png"
+    else:
+        "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose].png"
+
+    if LauraX.outfit["gloves"] == "_gloves" and LauraX.arm_pose == 2:
+        "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose]_left.png"
+
     if LauraX.outfit["piercings"] and LauraX.pussy_covered:
         "images/Laura_standing/Laura_standing_piercings_pussy[LauraX.outfit[piercings]]_covered.png"
 
@@ -178,7 +178,8 @@ layeredimage Laura_head:
         "images/Laura_sex/Laura_sex_hair[LauraX.outfit[hair]]_back.png"
 
     always:
-        "images/Laura_standing/Laura_standing_head[LauraX.blushing].png"
+        "images/Laura_standing/Laura_standing_head.png"
+        # "images/Laura_standing/Laura_standing_head[LauraX.blushing].png"
 
     if LauraX.blushing == "_blush2":
         "images/Laura_standing/Laura_standing_brows[LauraX.brows]_blush.png"
