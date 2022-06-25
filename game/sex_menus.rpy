@@ -272,8 +272,8 @@ label girl_sex_menu(Girl):
                         if "round2" not in focused_Girl.recent_history:
                             call exit_sex_menu_experienced_first_round_lines(focused_Girl)
 
-                            $ focused_Girl.change_stat("inhibition", 30, 2)
-                            $ focused_Girl.change_stat("inhibition", 50, 1)
+                            call change_Girl_stat(focused_Girl, "inhibition", 30, 2)
+                            call change_Girl_stat(focused_Girl, "inhibition", 50, 1)
                         elif focused_Girl.addiction >= 50:
                             call exit_sex_menu_experienced_addicted_lines(focused_Girl)
                         else:
@@ -285,17 +285,17 @@ label girl_sex_menu(Girl):
                                 if "unsatisfied" in focused_Girl.recent_history and not focused_Girl.session_orgasms:
                                     $ focused_Girl.change_face("_angry")
                                     $ focused_Girl.eyes = "_side"
-                                    $ focused_Girl.change_stat("love", 70, -2)
-                                    $ focused_Girl.change_stat("love", 90, -4)
-                                    $ focused_Girl.change_stat("obedience", 30, 2)
-                                    $ focused_Girl.change_stat("obedience", 70, 1)
+                                    call change_Girl_stat(focused_Girl, "love", 70, -2)
+                                    call change_Girl_stat(focused_Girl, "love", 90, -4)
+                                    call change_Girl_stat(focused_Girl, "obedience", 30, 2)
+                                    call change_Girl_stat(focused_Girl, "obedience", 70, 1)
 
                                     call exit_sex_menu_done_for_now_unsatisfied_lines(focused_Girl)
 
                                     $ having_sex = False
                                 else:
                                     $ focused_Girl.change_face("_bemused", 1)
-                                    $ focused_Girl.change_stat("obedience", 50, 2)
+                                    call change_Girl_stat(focused_Girl, "obedience", 50, 2)
 
                                     call exit_sex_menu_done_for_now_satisfied_lines(focused_Girl)
 
@@ -328,8 +328,8 @@ label girl_sex_menu(Girl):
                                 $ having_sex = False
                             "Ok, we can try something else." if multi_action and "round2" not in focused_Girl.recent_history:
                                 $ focused_Girl.change_face("_smile")
-                                $ focused_Girl.change_stat("love", 70, 2)
-                                $ focused_Girl.change_stat("love", 90, 1)
+                                call change_Girl_stat(focused_Girl, "love", 70, 2)
+                                call change_Girl_stat(focused_Girl, "love", 90, 1)
 
                                 call exit_sex_menu_less_than_two_rounds_lines(focused_Girl)
 
@@ -344,8 +344,8 @@ label girl_sex_menu(Girl):
 
                         call exit_sex_menu_girl_also_tired_lines(focused_Girl)
 
-                        $ focused_Girl.change_stat("inhibition", 30, 2)
-                        $ focused_Girl.change_stat("inhibition", 50, 1)
+                        call change_Girl_stat(focused_Girl, "inhibition", 30, 2)
+                        call change_Girl_stat(focused_Girl, "inhibition", 50, 1)
 
                         $ having_sex = False
                 else:
@@ -711,8 +711,8 @@ label handjob_menu(Girl, action):
             pass
         "Take it deeper." if action == "blowjob" and action_speed != 4:
             if "pushed" not in Girl.recent_history and Girl.action_counter["blowjob"] < 5:
-                $ Girl.change_stat("love", 80, -(20 - 2*Girl.action_counter["blowjob"]))
-                $ Girl.change_stat("obedience", 80, 30 - 3*Girl.action_counter["blowjob"])
+                call change_Girl_stat(Girl, "love", 80, -(20 - 2*Girl.action_counter["blowjob"]))
+                call change_Girl_stat(Girl, "obedience", 80, 30 - 3*Girl.action_counter["blowjob"])
                 $ Girl.recent_history.append("pushed")
 
             if Player.secondary_action == "jerking_off" and action_speed != 3:
@@ -725,7 +725,7 @@ label handjob_menu(Girl, action):
             "[Girl.name] hums contentedly."
 
             if "setpace" not in Girl.recent_history:
-                $ Girl.change_stat("love", 80, 2)
+                call change_Girl_stat(Girl, "love", 80, 2)
 
             $ D20 = renpy.random.randint(1, 20)
 
@@ -738,7 +738,7 @@ label handjob_menu(Girl, action):
                 $ action_speed = 4
 
                 if "setpace" not in Girl.recent_history:
-                    $ Girl.change_stat("inhibition", 80, 3)
+                    call change_Girl_stat(Girl, "inhibition", 80, 3)
             elif D20 > 10:
                 $ action_speed = 3
             elif D20 > 5:
@@ -1029,33 +1029,33 @@ label begging_menu(Girl, action):
             call maybe_later_lines(Girl, action)
 
             if action in ["fondle_thighs", "fondle_breasts", "suck_breasts"]:
-                $ Girl.change_stat("love", 80, 1)
-                $ Girl.change_stat("inhibition", 30, 2)
+                call change_Girl_stat(Girl, "love", 80, 1)
+                call change_Girl_stat(Girl, "inhibition", 30, 2)
 
                 if action in breast_actions:
-                    $ Girl.change_stat("love", 50, 1)
+                    call change_Girl_stat(Girl, "love", 50, 1)
             elif action in ["masturbation", "fondle_pussy"]:
-                $ Girl.change_stat("love", 80, 2)
-                $ Girl.change_stat("inhibition", 70, 2)
+                call change_Girl_stat(Girl, "love", 80, 2)
+                call change_Girl_stat(Girl, "inhibition", 70, 2)
             elif action in ["fondle_ass"]:
-                $ Girl.change_stat("love", 80, 2)
-                $ Girl.change_stat("inhibition", 50, 2)
+                call change_Girl_stat(Girl, "love", 80, 2)
+                call change_Girl_stat(Girl, "inhibition", 50, 2)
             elif action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal"]:
-                $ Girl.change_stat("love", 80, 2)
-                $ Girl.change_stat("inhibition", 70, 2)
+                call change_Girl_stat(Girl, "love", 80, 2)
+                call change_Girl_stat(Girl, "inhibition", 70, 2)
             elif action in ["hotdog"]:
-                $ Girl.change_stat("love", 80, 1)
-                $ Girl.change_stat("inhibition", 50, 1)
+                call change_Girl_stat(Girl, "love", 80, 1)
+                call change_Girl_stat(Girl, "inhibition", 50, 1)
 
             $ Girl.recent_history.append("no_" + action)
             $ Girl.daily_history.append("no_" + action)
         "You look like you could use it. . ." if action == "masturbation":
             if approval:
                 $ Girl.change_face("_sexy")
-                $ Girl.change_stat("obedience", 90, 2)
-                $ Girl.change_stat("obedience", 50, 2)
-                $ Girl.change_stat("inhibition", 70, 3)
-                $ Girl.change_stat("inhibition", 40, 2)
+                call change_Girl_stat(Girl, "obedience", 90, 2)
+                call change_Girl_stat(Girl, "obedience", 50, 2)
+                call change_Girl_stat(Girl, "inhibition", 70, 3)
+                call change_Girl_stat(Girl, "inhibition", 40, 2)
 
                 call begging_lines(Girl, action)
 
@@ -1067,22 +1067,22 @@ label begging_menu(Girl, action):
                 $ Girl.change_face("_sexy")
 
                 if action == "fondle_thighs":
-                    $ Girl.change_stat("obedience", 60, 1)
-                    $ Girl.change_stat("obedience", 30, 2)
-                    $ Girl.change_stat("inhibition", 50, 1)
-                    $ Girl.change_stat("inhibition", 30, 2)
+                    call change_Girl_stat(Girl, "obedience", 60, 1)
+                    call change_Girl_stat(Girl, "obedience", 30, 2)
+                    call change_Girl_stat(Girl, "inhibition", 50, 1)
+                    call change_Girl_stat(Girl, "inhibition", 30, 2)
                 elif action in ["fondle_breasts", "suck_breasts"]:
                     if Girl != LauraX:
-                        $ Girl.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(Girl, "obedience", 90, 1)
 
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("inhibition", 60, 3)
-                    $ Girl.change_stat("inhibition", 30, 2)
+                    call change_Girl_stat(Girl, "obedience", 50, 2)
+                    call change_Girl_stat(Girl, "inhibition", 60, 3)
+                    call change_Girl_stat(Girl, "inhibition", 30, 2)
                 elif action in ["fondle_pussy", "blowjob"]:
-                    $ Girl.change_stat("obedience", 90, 2)
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("inhibition", 70, 3)
-                    $ Girl.change_stat("inhibition", 40, 2)
+                    call change_Girl_stat(Girl, "obedience", 90, 2)
+                    call change_Girl_stat(Girl, "obedience", 50, 2)
+                    call change_Girl_stat(Girl, "inhibition", 70, 3)
+                    call change_Girl_stat(Girl, "inhibition", 40, 2)
 
                 call begging_lines(Girl, action)
 
@@ -1094,8 +1094,8 @@ label begging_menu(Girl, action):
                     call please_not_good_enough_lines(Girl, action)
                 elif action in ["blowjob"]:
                     if approval_check(Girl, 1100, taboo_modifier = 3): # 110, 125, 140, taboo -120(230)             Handy instead?
-                        $ Girl.change_stat("inhibition", 80, 1)
-                        $ Girl.change_stat("inhibition", 60, 3)
+                        call change_Girl_stat(Girl, "inhibition", 80, 1)
+                        call change_Girl_stat(Girl, "inhibition", 60, 3)
                         $ Girl.change_face("_confused", 1)
 
                         call maybe_handjob_instead_lines(Girl)
@@ -1103,17 +1103,17 @@ label begging_menu(Girl, action):
                         menu:
                             extend ""
                             "Sure, that's fine.":
-                                $ Girl.change_stat("love", 80, 2)
-                                $ Girl.change_stat("inhibition", 60, 1)
-                                $ Girl.change_stat("obedience", 50, 1)
+                                call change_Girl_stat(Girl, "love", 80, 2)
+                                call change_Girl_stat(Girl, "inhibition", 60, 1)
+                                call change_Girl_stat(Girl, "obedience", 50, 1)
 
                                 return "handjob"
                             "Nah, if it's not a BJ, forget it.":
-                                $ Girl.change_stat("love", 200, -2)
+                                call change_Girl_stat(Girl, "love", 200, -2)
 
                                 call alternative_rejected_lines(Girl)
 
-                                $ Girl.change_stat("obedience", 70, 2)
+                                call change_Girl_stat(Girl, "obedience", 70, 2)
 
                 $ Girl.recent_history.append("no_" + action)
                 $ Girl.daily_history.append("no_" + action)
@@ -1122,21 +1122,21 @@ label begging_menu(Girl, action):
 
             call maybe_later_lines(Girl, action)
 
-            $ Girl.change_stat("love", 80, 2)
-            $ Girl.change_stat("inhibition", 70, 2)
+            call change_Girl_stat(Girl, "love", 80, 2)
+            call change_Girl_stat(Girl, "inhibition", 70, 2)
 
             $ Girl.recent_history.append("no_" + action)
             $ Girl.daily_history.append("no_" + action)
         "I think you'd really enjoy it. . ." if action in ["eat_pussy", "eat_ass"]:
             if approval:
                 $ Girl.change_face("_sexy")
-                $ Girl.change_stat("obedience", 90, 2)
-                $ Girl.change_stat("obedience", 50, 2)
+                call change_Girl_stat(Girl, "obedience", 90, 2)
+                call change_Girl_stat(Girl, "obedience", 50, 2)
 
                 call trying_to_convince_lines(Girl, action)
 
-                $ Girl.change_stat("inhibition", 70, 3)
-                $ Girl.change_stat("inhibition", 40, 2)
+                call change_Girl_stat(Girl, "inhibition", 70, 3)
+                call change_Girl_stat(Girl, "inhibition", 40, 2)
 
                 return action
             else:
@@ -1149,13 +1149,13 @@ label begging_menu(Girl, action):
         "Just one good squeeze?" if action == "fondle_ass":
             if approval:
                 $ Girl.change_face("_sexy")
-                $ Girl.change_stat("obedience", 90, 1)
-                $ Girl.change_stat("obedience", 50, 2)
+                call change_Girl_stat(Girl, "obedience", 90, 1)
+                call change_Girl_stat(Girl, "obedience", 50, 2)
 
                 call begging_lines(Girl, action)
 
-                $ Girl.change_stat("inhibition", 70, 1)
-                $ Girl.change_stat("inhibition", 40, 2)
+                call change_Girl_stat(Girl, "inhibition", 70, 1)
+                call change_Girl_stat(Girl, "inhibition", 40, 2)
 
                 return action
             else:
@@ -1168,10 +1168,10 @@ label begging_menu(Girl, action):
         "I'd really appreciate it. . ." if action in ["handjob"]:
             if approval:
                 $ Girl.change_face("_sexy")
-                $ Girl.change_stat("obedience", 90, 2)
-                $ Girl.change_stat("obedience", 50, 2)
-                $ Girl.change_stat("inhibition", 70, 3)
-                $ Girl.change_stat("inhibition", 40, 2)
+                call change_Girl_stat(Girl, "obedience", 90, 2)
+                call change_Girl_stat(Girl, "obedience", 50, 2)
+                call change_Girl_stat(Girl, "inhibition", 70, 3)
+                call change_Girl_stat(Girl, "inhibition", 40, 2)
 
                 call begging_lines(Girl, action)
 
@@ -1181,10 +1181,10 @@ label begging_menu(Girl, action):
         "I think this could be fun for both of us. . ." if action in ["titjob"]:
             if approval:
                 $ Girl.change_face("_sexy")
-                $ Girl.change_stat("obedience", 80, 2)
-                $ Girl.change_stat("obedience", 40, 2)
-                $ Girl.change_stat("inhibition", 70, 3)
-                $ Girl.change_stat("inhibition", 40, 2)
+                call change_Girl_stat(Girl, "obedience", 80, 2)
+                call change_Girl_stat(Girl, "obedience", 40, 2)
+                call change_Girl_stat(Girl, "inhibition", 70, 3)
+                call change_Girl_stat(Girl, "inhibition", 40, 2)
 
                 call trying_to_convince_lines(Girl, action)
 
@@ -1195,8 +1195,8 @@ label begging_menu(Girl, action):
                 $ blowjob_rejected = False
 
                 if approval >= 2:
-                    $ Girl.change_stat("inhibition", 80, 1)
-                    $ Girl.change_stat("inhibition", 60, 3)
+                    call change_Girl_stat(Girl, "inhibition", 80, 1)
+                    call change_Girl_stat(Girl, "inhibition", 60, 3)
                     $ Girl.change_face("_confused", 1)
 
                     call maybe_blowjob_instead_lines(Girl)
@@ -1204,22 +1204,22 @@ label begging_menu(Girl, action):
                     menu:
                         extend ""
                         "Ok, get down there.":
-                            $ Girl.change_stat("love", 80, 2)
-                            $ Girl.change_stat("inhibition", 60, 1)
-                            $ Girl.change_stat("obedience", 50, 1)
+                            call change_Girl_stat(Girl, "love", 80, 2)
+                            call change_Girl_stat(Girl, "inhibition", 60, 1)
+                            call change_Girl_stat(Girl, "obedience", 50, 1)
 
                             return "blowjob"
                         "Nah, it's all about dem titties.":
                             $ blowjob_rejected = True
 
-                    $ Girl.change_stat("love", 200, -2)
+                    call change_Girl_stat(Girl, "love", 200, -2)
 
                     call alternative_rejected_lines(Girl)
 
-                    $ Girl.change_stat("obedience", 70, 2)
+                    call change_Girl_stat(Girl, "obedience", 70, 2)
                 elif approval:
-                    $ Girl.change_stat("inhibition", 80, 1)
-                    $ Girl.change_stat("inhibition", 60, 3)
+                    call change_Girl_stat(Girl, "inhibition", 80, 1)
+                    call change_Girl_stat(Girl, "inhibition", 60, 3)
                     $ Girl.change_face("_confused", 1)
 
                     call maybe_handjob_instead_lines(Girl)
@@ -1227,9 +1227,9 @@ label begging_menu(Girl, action):
                     menu:
                         extend ""
                         "Sure, that's fine.":
-                            $ Girl.change_stat("love", 80, 2)
-                            $ Girl.change_stat("inhibition", 60, 1)
-                            $ Girl.change_stat("obedience", 50, 1)
+                            call change_Girl_stat(Girl, "love", 80, 2)
+                            call change_Girl_stat(Girl, "inhibition", 60, 1)
+                            call change_Girl_stat(Girl, "obedience", 50, 1)
 
                             return "handjob"
                         "Seriously, titties." if blowjob_rejected:
@@ -1237,21 +1237,21 @@ label begging_menu(Girl, action):
                         "Nah, it's all about dem titties." if not blowjob_rejected:
                             pass
 
-                    $ Girl.change_stat("love", 200, -2)
+                    call change_Girl_stat(Girl, "love", 200, -2)
 
                     call alternative_rejected_lines(Girl)
 
-                    $ Girl.change_stat("obedience", 70, 2)
+                    call change_Girl_stat(Girl, "obedience", 70, 2)
 
                 $ Girl.recent_history.append("no_" + action)
                 $ Girl.daily_history.append("no_" + action)
         "I think you'd like it. . ." if action in ["dildo_pussy", "dildo_ass"]:
             if approval:
                 $ Girl.change_face("_sexy")
-                $ Girl.change_stat("obedience", 90, 2)
-                $ Girl.change_stat("obedience", 50, 2)
-                $ Girl.change_stat("inhibition", 70, 3)
-                $ Girl.change_stat("inhibition", 40, 2)
+                call change_Girl_stat(Girl, "obedience", 90, 2)
+                call change_Girl_stat(Girl, "obedience", 50, 2)
+                call change_Girl_stat(Girl, "inhibition", 70, 3)
+                call change_Girl_stat(Girl, "inhibition", 40, 2)
 
                 call trying_to_convince_lines(Girl, action)
 
@@ -1261,10 +1261,10 @@ label begging_menu(Girl, action):
         "I think you'd enjoy it as much as I would. . ." if action in ["sex"]:
             if approval:
                 $ Girl.change_face("_sexy")
-                $ Girl.change_stat("obedience", 90, 2)
-                $ Girl.change_stat("obedience", 50, 2)
-                $ Girl.change_stat("inhibition", 70, 3)
-                $ Girl.change_stat("inhibition", 40, 2)
+                call change_Girl_stat(Girl, "obedience", 90, 2)
+                call change_Girl_stat(Girl, "obedience", 50, 2)
+                call change_Girl_stat(Girl, "inhibition", 70, 3)
+                call change_Girl_stat(Girl, "inhibition", 40, 2)
 
                 call trying_to_convince_lines(Girl, action)
 
@@ -1274,10 +1274,10 @@ label begging_menu(Girl, action):
         "I bet it would feel really good. . ." if action in ["anal"]:
             if approval:
                 $ Girl.change_face("_sexy")
-                $ Girl.change_stat("obedience", 90, 2)
-                $ Girl.change_stat("obedience", 50, 2)
-                $ Girl.change_stat("inhibition", 70, 3)
-                $ Girl.change_stat("inhibition", 40, 2)
+                call change_Girl_stat(Girl, "obedience", 90, 2)
+                call change_Girl_stat(Girl, "obedience", 50, 2)
+                call change_Girl_stat(Girl, "inhibition", 70, 3)
+                call change_Girl_stat(Girl, "inhibition", 40, 2)
 
                 call trying_to_convince_lines(Girl, action)
 
@@ -1287,8 +1287,8 @@ label begging_menu(Girl, action):
         "You might like it. . ." if action in ["hotdog"]:
             if approval:
                 $ Girl.change_face("_sexy")
-                $ Girl.change_stat("obedience", 60, 2)
-                $ Girl.change_stat("inhibition", 50, 2)
+                call change_Girl_stat(Girl, "obedience", 60, 2)
+                call change_Girl_stat(Girl, "inhibition", 50, 2)
 
                 call trying_to_convince_lines(Girl, action)
 
@@ -1393,9 +1393,9 @@ label try_something_else_menu(Girl, action):
             $ Player.focus += 15
         "No, get back down there." if action in ["handjob", "footjob", "titjob", "blowjob"]:
             if approval_check(Girl, 1200) or approval_check(Girl, 500, "O"):
-                $ Girl.change_stat("love", 200, -5)
-                $ Girl.change_stat("obedience", 50, 3)
-                $ Girl.change_stat("obedience", 80, 2)
+                call change_Girl_stat(Girl, "love", 200, -5)
+                call change_Girl_stat(Girl, "obedience", 50, 3)
+                call change_Girl_stat(Girl, "obedience", 80, 2)
 
                 "She grumbles but keeps going."
             else:
@@ -1407,10 +1407,10 @@ label try_something_else_menu(Girl, action):
 
                 call this_is_boring_lines(Girl, action)
 
-                $ Girl.change_stat("love", 50, -3, 1)
-                $ Girl.change_stat("love", 80, -4, 1)
-                $ Girl.change_stat("obedience", 30, -1, 1)
-                $ Girl.change_stat("obedience", 50, -1, 1)
+                call change_Girl_stat(Girl, "love", 50, -3, 1)
+                call change_Girl_stat(Girl, "love", 80, -4, 1)
+                call change_Girl_stat(Girl, "obedience", 30, -1, 1)
+                call change_Girl_stat(Girl, "obedience", 50, -1, 1)
                 $ Girl.add_word(1,"_angry","_angry")
 
                 return [None, "stop"]
@@ -1422,9 +1422,9 @@ label try_something_else_menu(Girl, action):
             return [None, "switch"]
         "No, this is fun.":
             if approval_check(Girl, 1200) or approval_check(Girl, 500, "O"):
-                $ Girl.change_stat("love", 200, -5)
-                $ Girl.change_stat("obedience", 50, 3)
-                $ Girl.change_stat("obedience", 80, 2)
+                call change_Girl_stat(Girl, "love", 200, -5)
+                call change_Girl_stat(Girl, "obedience", 50, 3)
+                call change_Girl_stat(Girl, "obedience", 80, 2)
 
                 "She grumbles but lets you keep going."
             else:
@@ -1436,10 +1436,10 @@ label try_something_else_menu(Girl, action):
 
                 call this_is_boring_lines(Girl, action)
 
-                $ Girl.change_stat("love", 50, -3, 1)
-                $ Girl.change_stat("love", 80, -4, 1)
-                $ Girl.change_stat("obedience", 30, -1, 1)
-                $ Girl.change_stat("obedience", 50, -1, 1)
+                call change_Girl_stat(Girl, "love", 50, -3, 1)
+                call change_Girl_stat(Girl, "love", 80, -4, 1)
+                call change_Girl_stat(Girl, "obedience", 30, -1, 1)
+                call change_Girl_stat(Girl, "obedience", 50, -1, 1)
                 $ Girl.add_word(1,"_angry","_angry")
 
                 return [None, "stop"]
@@ -1492,9 +1492,9 @@ label what_do_you_think_youre_doing_menu(Girl, action):
         "Sorry, sorry! Never mind.":
             if approval:
                 $ Girl.change_face("_sexy", 1)
-                $ Girl.change_stat("obedience", 70, 3)
-                $ Girl.change_stat("inhibition", 50, 3)
-                $ Girl.change_stat("inhibition", 70, 1)
+                call change_Girl_stat(Girl, "obedience", 70, 3)
+                call change_Girl_stat(Girl, "inhibition", 50, 3)
+                call change_Girl_stat(Girl, "inhibition", 70, 1)
 
                 call since_you_are_so_nice_lines(Girl, action)
 
@@ -1506,21 +1506,21 @@ label what_do_you_think_youre_doing_menu(Girl, action):
 
             call pull_back_before_get_in_lines(Girl, action)
         "Just playing with my favorite toys." if action in dildo_actions:
-            $ Girl.change_stat("love", 80, -10, 1)
-            $ Girl.change_stat("love", 200, -10)
+            call change_Girl_stat(Girl, "love", 80, -10, 1)
+            call change_Girl_stat(Girl, "love", 200, -10)
 
             "You press it inside some more."
 
-            $ Girl.change_stat("obedience", 70, 3)
-            $ Girl.change_stat("inhibition", 50, 3)
+            call change_Girl_stat(Girl, "obedience", 70, 3)
+            call change_Girl_stat(Girl, "inhibition", 50, 3)
 
             if not approval_check(Girl, 700, "O", taboo_modifier=1): #checks if obedience is 700+
                 $ Girl.change_face("_angry")
 
                 call were_done_here_lines(Girl, action)
 
-                $ Girl.change_stat("love", 50, -10, 1)
-                $ Girl.change_stat("obedience", 50, 3)
+                call change_Girl_stat(Girl, "love", 50, -10, 1)
+                call change_Girl_stat(Girl, "obedience", 50, 3)
 
                 call show_full_body(Girl)
 
@@ -1533,24 +1533,24 @@ label what_do_you_think_youre_doing_menu(Girl, action):
 
                 return "accepted"
         "Just fucking." if action in ["sex", "anal"]:
-            $ Girl.change_stat("love", 80, -10, 1)
-            $ Girl.change_stat("love", 200, -10)
+            call change_Girl_stat(Girl, "love", 80, -10, 1)
+            call change_Girl_stat(Girl, "love", 200, -10)
 
             if action == "sex":
                 "You press inside some more."
             elif action == "anal":
                 "You press into her."
 
-            $ Girl.change_stat("obedience", 70, 3)
-            $ Girl.change_stat("inhibition", 50, 3)
+            call change_Girl_stat(Girl, "obedience", 70, 3)
+            call change_Girl_stat(Girl, "inhibition", 50, 3)
 
             if not approval_check(Girl, 700, "O", taboo_modifier=1):   #checks if obedience is 700+
                 $ Girl.change_face("_angry")
 
                 call were_done_here_lines(Girl, action)
 
-                $ Girl.change_stat("love", 50, -10, 1)
-                $ Girl.change_stat("obedience", 50, 3)
+                call change_Girl_stat(Girl, "love", 50, -10, 1)
+                call change_Girl_stat(Girl, "obedience", 50, 3)
 
                 call show_full_body(Girl)
 
@@ -1563,21 +1563,21 @@ label what_do_you_think_youre_doing_menu(Girl, action):
 
                 return "accepted"
         "You'll see." if action == "hotdog":
-            $ Girl.change_stat("love", 80, -10, 1)
-            $ Girl.change_stat("love", 200, -8)
+            call change_Girl_stat(Girl, "love", 80, -10, 1)
+            call change_Girl_stat(Girl, "love", 200, -8)
 
             "You grind against her asscrack."
 
-            $ Girl.change_stat("obedience", 70, 3)
-            $ Girl.change_stat("inhibition", 50, 3)
+            call change_Girl_stat(Girl, "obedience", 70, 3)
+            call change_Girl_stat(Girl, "inhibition", 50, 3)
 
             if not approval_check(Girl, 500, "O", taboo_modifier=1): #checks if obedience is 700+
                 $ Girl.change_face("_angry")
 
                 call were_done_here_lines(Girl, action)
 
-                $ Girl.change_stat("love", 50, -10, 1)
-                $ Girl.change_stat("obedience", 50, 3)
+                call change_Girl_stat(Girl, "love", 50, -10, 1)
+                call change_Girl_stat(Girl, "obedience", 50, 3)
 
                 call show_full_body(Girl)
 

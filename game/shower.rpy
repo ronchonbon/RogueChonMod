@@ -791,30 +791,30 @@ label Shower_Sex(Options=0, line=0):
                     "That was refreshing."])
         "[line]"
         if len(staying_Girls) > 1:
-            $ staying_Girls[0].change_stat("lust", 50, 15)
-            $ staying_Girls[1].change_stat("lust", 50, 15)
-            $ staying_Girls[0].change_stat("lust", 90, 10)
-            $ staying_Girls[1].change_stat("lust", 90, 10)
+            call change_Girl_stat(staying_Girls[0], "lust", 50, 15)
+            call change_Girl_stat(staying_Girls[1], "lust", 50, 15)
+            call change_Girl_stat(staying_Girls[0], "lust", 90, 10)
+            call change_Girl_stat(staying_Girls[1], "lust", 90, 10)
             "You got a good look at them washing off, and they didn't seem to mind the view either."
             $ staying_Girls[0].check_if_likes(staying_Girls[1],600,4, 1)
             $ staying_Girls[1].check_if_likes(staying_Girls[0],600,4, 1)
             $ staying_Girls[0].check_if_likes(staying_Girls[1],800,2, 1)
             $ staying_Girls[1].check_if_likes(staying_Girls[0],800,2, 1)
         else:
-            $ staying_Girls[0].change_stat("lust", 50, 15)
-            $ staying_Girls[0].change_stat("lust", 90, 10)
+            call change_Girl_stat(staying_Girls[0], "lust", 50, 15)
+            call change_Girl_stat(staying_Girls[0], "lust", 90, 10)
             "You got a good look at her washing off, and she didn't seem to mind the view either."
         return
 
     if line:
         if len(staying_Girls) > 1:
-            $ staying_Girls[0].change_stat("lust", 50, 5)
-            $ staying_Girls[0].change_stat("lust", 70, 3)
-            $ staying_Girls[1].change_stat("lust", 50, 5)
-            $ staying_Girls[1].change_stat("lust", 70, 3)
+            call change_Girl_stat(staying_Girls[0], "lust", 50, 5)
+            call change_Girl_stat(staying_Girls[0], "lust", 70, 3)
+            call change_Girl_stat(staying_Girls[1], "lust", 50, 5)
+            call change_Girl_stat(staying_Girls[1], "lust", 70, 3)
         else:
-            $ staying_Girls[0].change_stat("lust", 50, 6)
-            $ staying_Girls[0].change_stat("lust", 70, 3)
+            call change_Girl_stat(staying_Girls[0], "lust", 50, 6)
+            call change_Girl_stat(staying_Girls[0], "lust", 70, 3)
         call change_Player_stat("focus", 50, 5)
         call change_Player_stat("focus", 80, 2)
         menu:
@@ -825,9 +825,9 @@ label Shower_Sex(Options=0, line=0):
                 $ line = 0
                 call show_full_body(staying_Girls[0])
                 "You take a step back, pulling away from her."
-                $ staying_Girls[0].change_stat("love", 80, -1)
-                $ staying_Girls[0].change_stat("obedience", 80, 5)
-                $ staying_Girls[0].change_stat("inhibition", 80, -1)
+                call change_Girl_stat(staying_Girls[0], "love", 80, -1)
+                call change_Girl_stat(staying_Girls[0], "obedience", 80, 5)
+                call change_Girl_stat(staying_Girls[0], "inhibition", 80, -1)
                 $ staying_Girls[0].change_face("_sad")
                 "She seems a bit disappointed."
             "Stop them." if len(staying_Girls) > 1:
@@ -835,11 +835,11 @@ label Shower_Sex(Options=0, line=0):
                 call show_full_body(staying_Girls[0])
                 call show_full_body(staying_Girls[1])
                 "You take a step back, pulling away from them."
-                $ staying_Girls[0].change_stat("love", 80, -1)
-                $ staying_Girls[0].change_stat("obedience", 80, 5)
-                $ staying_Girls[0].change_stat("inhibition", 80, -1)
-                $ staying_Girls[1].change_stat("obedience", 80, 5)
-                $ staying_Girls[1].change_stat("inhibition", 80, -1)
+                call change_Girl_stat(staying_Girls[0], "love", 80, -1)
+                call change_Girl_stat(staying_Girls[0], "obedience", 80, 5)
+                call change_Girl_stat(staying_Girls[0], "inhibition", 80, -1)
+                call change_Girl_stat(staying_Girls[1], "obedience", 80, 5)
+                call change_Girl_stat(staying_Girls[1], "inhibition", 80, -1)
                 $ staying_Girls[0].change_face("_sad")
                 $ staying_Girls[1].change_face("_sad")
                 "They seem a bit disappointed."
@@ -878,18 +878,18 @@ label Shower_Sex(Options=0, line=0):
 
 
         if Options[0] == 2:
-            $ staying_Girls[0].change_stat("lust", 50, 5)
-            $ staying_Girls[0].change_stat("lust", 70, 2)
-            $ staying_Girls[1].change_stat("lust", 50, 7)
-            $ staying_Girls[1].change_stat("lust", 70, 3)
+            call change_Girl_stat(staying_Girls[0], "lust", 50, 5)
+            call change_Girl_stat(staying_Girls[0], "lust", 70, 2)
+            call change_Girl_stat(staying_Girls[1], "lust", 50, 7)
+            call change_Girl_stat(staying_Girls[1], "lust", 70, 3)
             call change_Player_stat("focus", 50, 8)
             call change_Player_stat("focus", 80, 4)
             "[line] reaches over to [staying_Girls[1].name] and begins soaping up her chest."
         elif Options[0] == 3:
-            $ staying_Girls[0].change_stat("lust", 50, 7)
-            $ staying_Girls[0].change_stat("lust", 70, 3)
-            $ staying_Girls[1].change_stat("lust", 50, 8)
-            $ staying_Girls[1].change_stat("lust", 70, 4)
+            call change_Girl_stat(staying_Girls[0], "lust", 50, 7)
+            call change_Girl_stat(staying_Girls[0], "lust", 70, 3)
+            call change_Girl_stat(staying_Girls[1], "lust", 50, 8)
+            call change_Girl_stat(staying_Girls[1], "lust", 70, 4)
             call change_Player_stat("focus", 50, 8)
             call change_Player_stat("focus", 80, 5)
             "[line] reaches over to [staying_Girls[1].name] and begins soaping up her pussy."
@@ -897,21 +897,21 @@ label Shower_Sex(Options=0, line=0):
 
         elif Options[0] == 4:
             if len(staying_Girls) > 1:
-                $ staying_Girls[0].change_stat("lust", 50, 10)
-                $ staying_Girls[0].change_stat("lust", 70, 7)
+                call change_Girl_stat(staying_Girls[0], "lust", 50, 10)
+                call change_Girl_stat(staying_Girls[0], "lust", 70, 7)
             else:
-                $ staying_Girls[0].change_stat("lust", 50, 8)
-                $ staying_Girls[0].change_stat("lust", 70, 5)
+                call change_Girl_stat(staying_Girls[0], "lust", 50, 8)
+                call change_Girl_stat(staying_Girls[0], "lust", 70, 5)
             call change_Player_stat("focus", 50, 10)
             call change_Player_stat("focus", 80, 6)
             "[line] reaches down and takes your cock in her hand, soaping it up."
         elif Options[0] == 5:
             if len(staying_Girls) > 1:
-                $ staying_Girls[0].change_stat("lust", 50, 12)
-                $ staying_Girls[0].change_stat("lust", 70, 8)
+                call change_Girl_stat(staying_Girls[0], "lust", 50, 12)
+                call change_Girl_stat(staying_Girls[0], "lust", 70, 8)
             else:
-                $ staying_Girls[0].change_stat("lust", 50, 9)
-                $ staying_Girls[0].change_stat("lust", 70, 6)
+                call change_Girl_stat(staying_Girls[0], "lust", 50, 9)
+                call change_Girl_stat(staying_Girls[0], "lust", 70, 6)
             call change_Player_stat("focus", 50, 10)
             call change_Player_stat("focus", 80, 4)
             "[line] kneels down and wraps her breasts around your cock, soaping it up."
@@ -919,53 +919,53 @@ label Shower_Sex(Options=0, line=0):
 
         elif Options[0] == 6:
             if len(staying_Girls) > 1:
-                $ staying_Girls[0].change_stat("lust", 50, 11)
-                $ staying_Girls[0].change_stat("lust", 70, 6)
+                call change_Girl_stat(staying_Girls[0], "lust", 50, 11)
+                call change_Girl_stat(staying_Girls[0], "lust", 70, 6)
             else:
-                $ staying_Girls[0].change_stat("lust", 50, 9)
-                $ staying_Girls[0].change_stat("lust", 70, 5)
+                call change_Girl_stat(staying_Girls[0], "lust", 50, 9)
+                call change_Girl_stat(staying_Girls[0], "lust", 70, 5)
             call change_Player_stat("focus", 50, 9)
             call change_Player_stat("focus", 80, 4)
             "[line] reaches down and begins fondling her own pussy, building a nice lather."
         elif Options[0] == 7:
             if len(staying_Girls) > 1:
-                $ staying_Girls[0].change_stat("lust", 50, 10)
-                $ staying_Girls[0].change_stat("lust", 70, 5)
+                call change_Girl_stat(staying_Girls[0], "lust", 50, 10)
+                call change_Girl_stat(staying_Girls[0], "lust", 70, 5)
             else:
-                $ staying_Girls[0].change_stat("lust", 50, 9)
-                $ staying_Girls[0].change_stat("lust", 70, 4)
+                call change_Girl_stat(staying_Girls[0], "lust", 50, 9)
+                call change_Girl_stat(staying_Girls[0], "lust", 70, 4)
             call change_Player_stat("focus", 50, 8)
             call change_Player_stat("focus", 80, 3)
             "[line] begins rubbing her own breasts in circles, building a nice lather."
 
 
         elif Options[0] == 8:
-            $ staying_Girls[0].change_stat("lust", 50, 6)
-            $ staying_Girls[0].change_stat("lust", 70, 3)
+            call change_Girl_stat(staying_Girls[0], "lust", 50, 6)
+            call change_Girl_stat(staying_Girls[0], "lust", 70, 3)
             call change_Player_stat("focus", 50, 7)
             call change_Player_stat("focus", 80, 3)
             "[line] draws her breasts up and down your arm, the soap bubbles squirting out."
         elif Options[0] == 9:
-            $ staying_Girls[0].change_stat("lust", 50, 8)
-            $ staying_Girls[0].change_stat("lust", 70, 3)
+            call change_Girl_stat(staying_Girls[0], "lust", 50, 8)
+            call change_Girl_stat(staying_Girls[0], "lust", 70, 3)
             call change_Player_stat("focus", 50, 8)
             call change_Player_stat("focus", 80, 3)
             "[line] kneels down and rubs her breasts against your leg, soaping it up."
         elif Options[0] == 10:
-            $ staying_Girls[0].change_stat("lust", 50, 7)
-            $ staying_Girls[0].change_stat("lust", 70, 3)
+            call change_Girl_stat(staying_Girls[0], "lust", 50, 7)
+            call change_Girl_stat(staying_Girls[0], "lust", 70, 3)
             call change_Player_stat("focus", 50, 6)
             call change_Player_stat("focus", 80, 3)
             "[line] presses against your back, her soapy breasts rubbing back and forth against it."
         elif Options[0] == 11:
-            $ staying_Girls[0].change_stat("lust", 50, 7)
-            $ staying_Girls[0].change_stat("lust", 70, 3)
+            call change_Girl_stat(staying_Girls[0], "lust", 50, 7)
+            call change_Girl_stat(staying_Girls[0], "lust", 70, 3)
             call change_Player_stat("focus", 50, 8)
             call change_Player_stat("focus", 80, 4)
             "[line] presses against your chest, her soapy breasts rubbing back and forth against it."
         elif Options[0] == 1:
-            $ staying_Girls[0].change_stat("lust", 50, 5)
-            $ staying_Girls[0].change_stat("lust", 70, 2)
+            call change_Girl_stat(staying_Girls[0], "lust", 50, 5)
+            call change_Girl_stat(staying_Girls[0], "lust", 70, 2)
             call change_Player_stat("focus", 50, 6)
             call change_Player_stat("focus", 80, 3)
             "[line] stares silently at you as she moves her hands along her soapy body. . ."
@@ -983,10 +983,10 @@ label Shower_Sex(Options=0, line=0):
 
             if approval_check(staying_Girls[1], 1300) and staying_Girls[1].likes[staying_Girls[0].tag] >= 800:
                 $ staying_Girls[1].change_face("_sexy", 1)
-                $ staying_Girls[0].change_stat("lust", 50, 5)
-                $ staying_Girls[0].change_stat("lust", 70, 5)
-                $ staying_Girls[1].change_stat("lust", 50, 12)
-                $ staying_Girls[1].change_stat("lust", 70, 12)
+                call change_Girl_stat(staying_Girls[0], "lust", 50, 5)
+                call change_Girl_stat(staying_Girls[0], "lust", 70, 5)
+                call change_Girl_stat(staying_Girls[1], "lust", 50, 12)
+                call change_Girl_stat(staying_Girls[1], "lust", 70, 12)
                 call close_launch(staying_Girls[0], staying_Girls[1])
                 "[staying_Girls[1].name] seems really into this, and returns the favor."
                 call change_Player_stat("focus", 50, 7)
@@ -994,14 +994,14 @@ label Shower_Sex(Options=0, line=0):
                 $ line = 4
             elif approval_check(staying_Girls[1], 1200) and staying_Girls[1].likes[staying_Girls[0].tag] >= 700:
                 $ staying_Girls[1].change_face("_sexy",2,eyes = "_closed")
-                $ staying_Girls[1].change_stat("lust", 50, 10)
-                $ staying_Girls[1].change_stat("lust", 70, 10)
+                call change_Girl_stat(staying_Girls[1], "lust", 50, 10)
+                call change_Girl_stat(staying_Girls[1], "lust", 70, 10)
                 call change_Player_stat("focus", 50, 5)
                 call change_Player_stat("focus", 80, 3)
                 call close_launch(staying_Girls[0], staying_Girls[1])
                 "[staying_Girls[1].name] seems really into this, and leans into it."
             else:
-                $ staying_Girls[1].change_stat("lust", 50, 10)
+                call change_Girl_stat(staying_Girls[1], "lust", 50, 10)
                 $ staying_Girls[1].change_face("_sadside", brows = "_confused")
                 "[staying_Girls[1].name] doesn't really seem to appreciate this."
                 "She pulls away."
@@ -1010,15 +1010,15 @@ label Shower_Sex(Options=0, line=0):
 
             if (approval_check(staying_Girls[1], 1300) and staying_Girls[1].likes[staying_Girls[0].tag] >= 700) or approval_check(staying_Girls[1], 2000):
                 if Options[0] == 5:
-                    $ staying_Girls[1].change_stat("lust", 50, 10)
-                    $ staying_Girls[1].change_stat("lust", 70, 5)
+                    call change_Girl_stat(staying_Girls[1], "lust", 50, 10)
+                    call change_Girl_stat(staying_Girls[1], "lust", 70, 5)
                     call change_Player_stat("focus", 50, 6)
                     call change_Player_stat("focus", 80, 3)
                     call close_launch(staying_Girls[0], staying_Girls[1])
                     "[staying_Girls[1].name] seems really into this, slowly rubbing against you as she watches."
                 else:
-                    $ staying_Girls[1].change_stat("lust", 50, 10)
-                    $ staying_Girls[1].change_stat("lust", 70, 5)
+                    call change_Girl_stat(staying_Girls[1], "lust", 50, 10)
+                    call change_Girl_stat(staying_Girls[1], "lust", 70, 5)
                     call change_Player_stat("focus", 50, 5)
                     call change_Player_stat("focus", 80, 3)
                     call close_launch(staying_Girls[0], staying_Girls[1])
@@ -1026,12 +1026,12 @@ label Shower_Sex(Options=0, line=0):
                 $ line = 4
             elif ((approval_check(staying_Girls[1], 1200) and staying_Girls[1].likes[staying_Girls[0].tag] >= 600)) or approval_check(staying_Girls[1], 1600):
                 $ staying_Girls[1].change_face("_sexy",2,eyes = "_down")
-                $ staying_Girls[1].change_stat("lust", 50, 10)
-                $ staying_Girls[1].change_stat("lust", 70, 5)
+                call change_Girl_stat(staying_Girls[1], "lust", 50, 10)
+                call change_Girl_stat(staying_Girls[1], "lust", 70, 5)
                 "[staying_Girls[1].name] seems really into this, and watches her do it."
             else:
                 $ staying_Girls[1].change_face("_sadside", brows = "_confused")
-                $ staying_Girls[1].change_stat("lust", 50, 5)
+                call change_Girl_stat(staying_Girls[1], "lust", 50, 5)
                 "[staying_Girls[1].name] doesn't really seem to appreciate this."
                 $ line = 3
     if line:
@@ -1043,9 +1043,9 @@ label Shower_Sex(Options=0, line=0):
                 $ line = 0
                 call show_full_body(staying_Girls[0])
                 "You take a step back, pulling away from her."
-                $ staying_Girls[0].change_stat("love", 80, -2)
-                $ staying_Girls[0].change_stat("obedience", 80, 5)
-                $ staying_Girls[0].change_stat("inhibition", 80, -2)
+                call change_Girl_stat(staying_Girls[0], "love", 80, -2)
+                call change_Girl_stat(staying_Girls[0], "obedience", 80, 5)
+                call change_Girl_stat(staying_Girls[0], "inhibition", 80, -2)
                 $ staying_Girls[0].change_face("_sad")
                 "She seems a bit disappointed."
             "Stop them." if len(staying_Girls) > 1:
@@ -1054,18 +1054,18 @@ label Shower_Sex(Options=0, line=0):
                 call show_full_body(staying_Girls[1])
                 "You take a step back, pulling away from them."
                 $ staying_Girls[0].change_face("_sad")
-                $ staying_Girls[0].change_stat("love", 80, -2)
-                $ staying_Girls[0].change_stat("obedience", 80, 5)
-                $ staying_Girls[0].change_stat("inhibition", 80, -2)
+                call change_Girl_stat(staying_Girls[0], "love", 80, -2)
+                call change_Girl_stat(staying_Girls[0], "obedience", 80, 5)
+                call change_Girl_stat(staying_Girls[0], "inhibition", 80, -2)
                 if line == 3:
-                    $ staying_Girls[1].change_stat("love", 80, 4)
-                    $ staying_Girls[1].change_stat("obedience", 80, 5)
+                    call change_Girl_stat(staying_Girls[1], "love", 80, 4)
+                    call change_Girl_stat(staying_Girls[1], "obedience", 80, 5)
                     $ staying_Girls[1].change_face("_bemused")
                     "[staying_Girls[0].name] seems a bit disappointed, but [staying_Girls[1].name] seems pleased."
                 else:
-                    $ staying_Girls[1].change_stat("love", 80, -1)
-                    $ staying_Girls[1].change_stat("obedience", 80, 5)
-                    $ staying_Girls[1].change_stat("inhibition", 80, -1)
+                    call change_Girl_stat(staying_Girls[1], "love", 80, -1)
+                    call change_Girl_stat(staying_Girls[1], "obedience", 80, 5)
+                    call change_Girl_stat(staying_Girls[1], "inhibition", 80, -1)
                     $ staying_Girls[1].change_face("_sad")
                     "They seem a bit disappointed."
 
@@ -1104,13 +1104,13 @@ label Shower_Sex(Options=0, line=0):
                 $ staying_Girls[0].spunk["breasts"] = True
 
             if line == 4:
-                $ staying_Girls[0].change_stat("inhibition", 90, 7)
-                $ staying_Girls[1].change_stat("inhibition", 90, 4)
+                call change_Girl_stat(staying_Girls[0], "inhibition", 90, 7)
+                call change_Girl_stat(staying_Girls[1], "inhibition", 90, 4)
                 $ staying_Girls[0].check_if_likes(staying_Girls[1],900,3, 1)
                 $ staying_Girls[1].check_if_likes(staying_Girls[0],900,3, 1)
                 "After a few minutes of this, the two of them manage to get you off."
             else:
-                $ staying_Girls[0].change_stat("inhibition", 90, 5)
+                call change_Girl_stat(staying_Girls[0], "inhibition", 90, 5)
                 "After a few minutes of this, she manages to get you off."
             "A little more work is needed to clean up the mess."
             if Options[0] == 5:
@@ -1126,13 +1126,13 @@ label Shower_Sex(Options=0, line=0):
 
         elif 6 <= Options[0] <= 7 and D20 >= 15:
 
-            $ staying_Girls[0].change_stat("inhibition", 90, 7)
+            call change_Girl_stat(staying_Girls[0], "inhibition", 90, 7)
             call change_Player_stat("focus", 50, 15)
             call change_Player_stat("focus", 80, 5)
             "After a few minutes of this, it looks like [staying_Girls[0].name] gets off."
             call Girl_Cumming (staying_Girls[0], 1)
             if line == 4:
-                $ staying_Girls[1].change_stat("inhibition", 90, 6)
+                call change_Girl_stat(staying_Girls[1], "inhibition", 90, 6)
                 $ staying_Girls[0].check_if_likes(staying_Girls[1],900,3, 1)
                 "It looks like [staying_Girls[1].name] is enjoying herself as well. . ."
                 call Girl_Cumming (staying_Girls[1], 1)

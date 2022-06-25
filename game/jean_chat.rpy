@@ -46,7 +46,7 @@ label Jean_Relationship:
                 if JeanX.love >= 800:
                     $ JeanX.change_face("_surprised", 1)
                     $ JeanX.mouth = "_smile"
-                    $ JeanX.change_stat("love", 200, 40)
+                    call change_Girl_stat(JeanX, "love", 200, 40)
                     ch_j "Huh. Ok."
                     if "boyfriend" not in JeanX.player_petnames:
                         $ JeanX.player_petnames.append("boyfriend")
@@ -94,7 +94,7 @@ label Jean_Relationship:
                 if JeanX.love >= 800:
                     $ JeanX.change_face("_surprised", 1)
                     $ JeanX.mouth = "_smile"
-                    $ JeanX.change_stat("love", 90, 5)
+                    call change_Girl_stat(JeanX, "love", 90, 5)
                     ch_j "Oh, fine, whatever."
                     if "boyfriend" not in JeanX.player_petnames:
                         $ JeanX.player_petnames.append("boyfriend")
@@ -108,7 +108,7 @@ label Jean_Relationship:
                     $ JeanX.action_counter["kiss"] += 1
                 elif JeanX.love >= 600 and approval_check(JeanX, 1500):
                     $ JeanX.change_face("_smile", 1)
-                    $ JeanX.change_stat("love", 90, 5)
+                    call change_Girl_stat(JeanX, "love", 90, 5)
                     ch_j "Sure, whatever."
                     if "boyfriend" not in JeanX.player_petnames:
                         $ JeanX.player_petnames.append("boyfriend")
@@ -380,14 +380,14 @@ label Jean_Monogamy:
 
                 $ JeanX.change_face("_sly", 1)
                 if "monogamous" not in JeanX.daily_history:
-                    $ JeanX.change_stat("obedience", 90, -2)
+                    call change_Girl_stat(JeanX, "obedience", 90, -2)
                 ch_j "Sorry, I've got plans later."
                 return
             elif approval_check(JeanX, 1200, "LO", taboo_modifier=0) and JeanX.love >= JeanX.obedience:
 
                 $ JeanX.change_face("_sly", 1)
                 if "monogamous" not in JeanX.daily_history:
-                    $ JeanX.change_stat("love", 90, 1)
+                    call change_Girl_stat(JeanX, "love", 90, 1)
                 ch_j "Oh, jealous?"
                 ch_j "Ok, fine, but you owe me. . ."
             elif approval_check(JeanX, 700, "O", taboo_modifier=0):
@@ -400,7 +400,7 @@ label Jean_Monogamy:
                 ch_j "Ha!"
                 return
             if "monogamous" not in JeanX.daily_history:
-                $ JeanX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(JeanX, "obedience", 90, 3)
             $ JeanX.add_word(1, 0,"monogamous")
             $ JeanX.traits.append("monogamous")
         "Don't hook up with other girls." if "monogamous" not in JeanX.traits:
@@ -412,7 +412,7 @@ label Jean_Monogamy:
 
                 $ JeanX.change_face("_sly", 1)
                 if "monogamous" not in JeanX.daily_history:
-                    $ JeanX.change_stat("obedience", 90, -2)
+                    call change_Girl_stat(JeanX, "obedience", 90, -2)
                 ch_j "Sorry, I've got plans later."
                 return
             elif approval_check(JeanX, 600, "O", taboo_modifier=0):
@@ -430,7 +430,7 @@ label Jean_Monogamy:
                 ch_j "Ha!"
                 return
             if "monogamous" not in JeanX.daily_history:
-                $ JeanX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(JeanX, "obedience", 90, 3)
             $ JeanX.add_word(1, 0,"monogamous")
             $ JeanX.traits.append("monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in JeanX.traits:
@@ -443,10 +443,10 @@ label Jean_Monogamy:
             else:
                 $ JeanX.change_face("_sly", 1,brows = "_confused")
                 if "monogamous" not in JeanX.daily_history:
-                    $ JeanX.change_stat("love", 90, -2)
+                    call change_Girl_stat(JeanX, "love", 90, -2)
                 ch_j "Good to know. . ."
             if "monogamous" not in JeanX.daily_history:
-                $ JeanX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(JeanX, "obedience", 90, 3)
             if "monogamous" in JeanX.traits:
                 $ JeanX.traits.remove("monogamous")
             $ JeanX.add_word(1, 0,"monogamous")
@@ -468,7 +468,7 @@ label Jean_Jumped:
 
                 $ JeanX.change_face("_sly", 1)
                 if "chill" not in JeanX.daily_history:
-                    $ JeanX.change_stat("obedience", 90, -2)
+                    call change_Girl_stat(JeanX, "obedience", 90, -2)
                 ch_j "Why waste the time?"
                 ch_j "It's not like you'd say \"no.\""
                 return
@@ -476,7 +476,7 @@ label Jean_Jumped:
 
                 $ JeanX.change_face("_surprised", 1)
                 if "chill" not in JeanX.daily_history:
-                    $ JeanX.change_stat("love", 90, 1)
+                    call change_Girl_stat(JeanX, "love", 90, 1)
                 ch_j "I was really horny though. . ."
                 $ JeanX.change_face("_sly", 1,eyes = "_side")
                 ch_j "I'll give it some thought. . ."
@@ -491,7 +491,7 @@ label Jean_Jumped:
                 ch_j "It's not like you'd say \"no.\""
                 return
             if "chill" not in JeanX.daily_history:
-                $ JeanX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(JeanX, "obedience", 90, 3)
             $ JeanX.add_word(1, 0,"chill")
             $ JeanX.traits.append("chill")
         "Don't bother me like that." if "chill" not in JeanX.traits:
@@ -503,7 +503,7 @@ label Jean_Jumped:
 
                 $ JeanX.change_face("_sly", 1)
                 if "chill" not in JeanX.daily_history:
-                    $ JeanX.change_stat("obedience", 90, -2)
+                    call change_Girl_stat(JeanX, "obedience", 90, -2)
                 ch_j "Why waste the time?"
                 ch_j "It's not like you'd say \"no.\""
                 return
@@ -523,7 +523,7 @@ label Jean_Jumped:
                 ch_j "It's not like you'd say \"no.\""
                 return
             if "chill" not in JeanX.daily_history:
-                $ JeanX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(JeanX, "obedience", 90, 3)
             $ JeanX.add_word(1, 0,"chill")
             $ JeanX.traits.append("chill")
         "Knock yourself out.":
@@ -536,10 +536,10 @@ label Jean_Jumped:
             else:
                 $ JeanX.change_face("_sly", 1,brows = "_confused")
                 if "chill" not in JeanX.daily_history:
-                    $ JeanX.change_stat("love", 90, -2)
+                    call change_Girl_stat(JeanX, "love", 90, -2)
                 ch_j "We'll see. . ."
             if "chill" not in JeanX.daily_history:
-                $ JeanX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(JeanX, "obedience", 90, 3)
             if "chill" in JeanX.traits:
                 $ JeanX.traits.remove("chill")
             $ JeanX.add_word(1, 0,"chill")
@@ -577,11 +577,11 @@ label Jean_SexChat:
                         "Sex.":
                             $ JeanX.change_face("_sly")
                             if JeanX.player_favorite_action == "sex":
-                                $ JeanX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(JeanX, "lust", 80, 5)
                                 ch_j "Yeah, I know that. . ."
                             elif JeanX.favorite_action == "sex":
-                                $ JeanX.change_stat("love", 90, 5)
-                                $ JeanX.change_stat("lust", 80, 10)
+                                call change_Girl_stat(JeanX, "love", 90, 5)
+                                call change_Girl_stat(JeanX, "lust", 80, 10)
                                 ch_j "I really like it too!"
                             elif JeanX.action_counter["sex"] >= 5:
                                 ch_j "Well I don't mind that."
@@ -596,11 +596,11 @@ label Jean_SexChat:
 
                             $ JeanX.change_face("_sly")
                             if JeanX.player_favorite_action == "anal":
-                                $ JeanX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(JeanX, "lust", 80, 5)
                                 ch_j "So you've said. . ."
                             elif JeanX.favorite_action == "anal":
-                                $ JeanX.change_stat("love", 90, 5)
-                                $ JeanX.change_stat("lust", 80, 10)
+                                call change_Girl_stat(JeanX, "love", 90, 5)
+                                call change_Girl_stat(JeanX, "lust", 80, 10)
                                 ch_j "I love it too!"
                             elif JeanX.action_counter["anal"] >= 10:
                                 ch_j "Yeah, it's. . . nice. . ."
@@ -615,11 +615,11 @@ label Jean_SexChat:
 
                             $ JeanX.change_face("_sly")
                             if JeanX.player_favorite_action == "blowjob":
-                                $ JeanX.change_stat("lust", 80, 3)
+                                call change_Girl_stat(JeanX, "lust", 80, 3)
                                 ch_j "Yeah, I know."
                             elif JeanX.favorite_action == "blowjob":
-                                $ JeanX.change_stat("love", 90, 5)
-                                $ JeanX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(JeanX, "love", 90, 5)
+                                call change_Girl_stat(JeanX, "lust", 80, 5)
                                 ch_j "I can't say I hate it either. . ."
                             elif JeanX.action_counter["blowjob"] >= 10:
                                 ch_j "Yeah, you're surprisingly tasty."
@@ -634,11 +634,11 @@ label Jean_SexChat:
 
                             $ JeanX.change_face("_sly")
                             if JeanX.player_favorite_action == "titjob":
-                                $ JeanX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(JeanX, "lust", 80, 5)
                                 ch_j "Yeah, you've said that before. . ."
                             elif JeanX.favorite_action == "titjob":
-                                $ JeanX.change_stat("love", 90, 5)
-                                $ JeanX.change_stat("lust", 80, 7)
+                                call change_Girl_stat(JeanX, "love", 90, 5)
+                                call change_Girl_stat(JeanX, "lust", 80, 7)
                                 ch_j "Yeah, I enjoy that too. . ."
                             elif JeanX.action_counter["titjob"] >= 10:
                                 ch_j "Nice, right?"
@@ -648,18 +648,18 @@ label Jean_SexChat:
                             else:
                                 $ JeanX.change_face("_bemused")
                                 ch_j "They are pretty nice. . ."
-                                $ JeanX.change_stat("love", 80, 5)
-                                $ JeanX.change_stat("inhibition", 50, 10)
+                                call change_Girl_stat(JeanX, "love", 80, 5)
+                                call change_Girl_stat(JeanX, "inhibition", 50, 10)
                             $ JeanX.player_favorite_action = "titjob"
                         "Footjobs.":
 
                             $ JeanX.change_face("_sly")
                             if JeanX.player_favorite_action == "footjob":
-                                $ JeanX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(JeanX, "lust", 80, 5)
                                 ch_j "Yeah, you've said that. . ."
                             elif JeanX.favorite_action == "footjob":
-                                $ JeanX.change_stat("love", 90, 5)
-                                $ JeanX.change_stat("lust", 80, 7)
+                                call change_Girl_stat(JeanX, "love", 90, 5)
+                                call change_Girl_stat(JeanX, "lust", 80, 7)
                                 ch_j "I do like using my feet. . ."
                             elif JeanX.action_counter["footjob"] >= 10:
                                 ch_j "I like it too . . ."
@@ -674,11 +674,11 @@ label Jean_SexChat:
 
                             $ JeanX.change_face("_sly")
                             if JeanX.player_favorite_action == "handjob":
-                                $ JeanX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(JeanX, "lust", 80, 5)
                                 ch_j "Yeah, you've said that. . ."
                             elif JeanX.favorite_action == "handjob":
-                                $ JeanX.change_stat("love", 90, 5)
-                                $ JeanX.change_stat("lust", 80, 7)
+                                call change_Girl_stat(JeanX, "love", 90, 5)
+                                call change_Girl_stat(JeanX, "lust", 80, 7)
                                 ch_j "I do have quite the touch. . ."
                             elif JeanX.action_counter["handjob"] >= 10:
                                 ch_j "I like it too . . ."
@@ -694,11 +694,11 @@ label Jean_SexChat:
                             $ counter = JeanX.action_counter["fondle_breasts"]+ JeanX.action_counter["fondle_thighs"]+ JeanX.action_counter["suck_breasts"] + JeanX.action_counter["hotdog"]
                             $ JeanX.change_face("_sly")
                             if JeanX.player_favorite_action == "fondle":
-                                $ JeanX.change_stat("lust", 80, 3)
+                                call change_Girl_stat(JeanX, "lust", 80, 3)
                                 ch_j "Yeah, I think we're clear on that. . ."
                             elif JeanX.favorite_action in ("hotdog","suck_breasts","fondle_breasts","fondle_thighs"):
-                                $ JeanX.change_stat("love", 90, 5)
-                                $ JeanX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(JeanX, "love", 90, 5)
+                                call change_Girl_stat(JeanX, "lust", 80, 5)
                                 ch_j "I love when you touch me. . ."
                             elif counter >= 10:
                                 ch_j "Yeah, it's really nice . . ."
@@ -714,11 +714,11 @@ label Jean_SexChat:
 
                             $ JeanX.change_face("_sly")
                             if JeanX.player_favorite_action == "kiss":
-                                $ JeanX.change_stat("love", 90, 3)
+                                call change_Girl_stat(JeanX, "love", 90, 3)
                                 ch_j "Dork. . ."
                             elif JeanX.favorite_action == "kiss":
-                                $ JeanX.change_stat("love", 90, 5)
-                                $ JeanX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(JeanX, "love", 90, 5)
+                                call change_Girl_stat(JeanX, "lust", 80, 5)
                                 ch_j "I. . . do too, ok? . ."
                             elif JeanX.action_counter["kiss"] >= 10:
                                 ch_j "Yeah, it's fun . . ."
@@ -788,25 +788,25 @@ label Jean_SexChat:
                 else:
                     if approval_check(JeanX, 1000) and JeanX.obedience <= JeanX.love:
                         $ JeanX.change_face("_bemused")
-                        $ JeanX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(JeanX, "obedience", 90, 1)
                         ch_j ". . . fine."
                         $ JeanX.traits.remove("vocal")
                     elif approval_check(JeanX, 700, "O"):
                         $ JeanX.change_face("_sadside")
-                        $ JeanX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(JeanX, "obedience", 90, 1)
                         ch_j ". . ."
                         $ JeanX.traits.remove("vocal")
                     elif approval_check(JeanX, 600):
                         $ JeanX.change_face("_sly")
-                        $ JeanX.change_stat("love", 90, -3)
-                        $ JeanX.change_stat("obedience", 50, -1)
-                        $ JeanX.change_stat("inhibition", 90, 5)
+                        call change_Girl_stat(JeanX, "love", 90, -3)
+                        call change_Girl_stat(JeanX, "obedience", 50, -1)
+                        call change_Girl_stat(JeanX, "inhibition", 90, 5)
                         ch_j "Oh, I'll talk and you'll listen, [JeanX.player_petname]."
                     else:
                         $ JeanX.change_face("_angry")
-                        $ JeanX.change_stat("love", 90, -5)
-                        $ JeanX.change_stat("obedience", 60, -3)
-                        $ JeanX.change_stat("inhibition", 90, 10)
+                        call change_Girl_stat(JeanX, "love", 90, -5)
+                        call change_Girl_stat(JeanX, "obedience", 60, -3)
+                        call change_Girl_stat(JeanX, "inhibition", 90, 10)
                         ch_j "Yeah, that'll be the day. . ."
 
                     $ JeanX.daily_history.append("setvocal")
@@ -817,22 +817,22 @@ label Jean_SexChat:
                 else:
                     if approval_check(JeanX, 1000) and JeanX.obedience <= JeanX.love:
                         $ JeanX.change_face("_sly")
-                        $ JeanX.change_stat("obedience", 90, 2)
+                        call change_Girl_stat(JeanX, "obedience", 90, 2)
                         ch_j "I think that can be arranged. . ."
                         $ JeanX.traits.append("vocal")
                     elif approval_check(JeanX, 700, "O"):
                         $ JeanX.change_face("_sadside")
-                        $ JeanX.change_stat("obedience", 90, 2)
+                        call change_Girl_stat(JeanX, "obedience", 90, 2)
                         ch_j "I'll see what I can do, [JeanX.player_petname]."
                         $ JeanX.traits.append("vocal")
                     elif approval_check(JeanX, 600):
                         $ JeanX.change_face("_sly")
-                        $ JeanX.change_stat("obedience", 90, 3)
+                        call change_Girl_stat(JeanX, "obedience", 90, 3)
                         ch_j "Sure, whatever."
                         $ JeanX.traits.append("vocal")
                     else:
                         $ JeanX.change_face("_angry")
-                        $ JeanX.change_stat("inhibition", 90, 5)
+                        call change_Girl_stat(JeanX, "inhibition", 90, 5)
                         ch_j ". . ."
 
                     $ JeanX.daily_history.append("setvocal")
@@ -845,25 +845,25 @@ label Jean_SexChat:
                 else:
                     if approval_check(JeanX, 1200) and JeanX.obedience <= JeanX.love:
                         $ JeanX.change_face("_bemused")
-                        $ JeanX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(JeanX, "obedience", 90, 1)
                         ch_j "Like me \"passive?\" I'll see what I can do. . ."
                         $ JeanX.traits.append("passive")
                     elif approval_check(JeanX, 700, "O"):
                         $ JeanX.change_face("_sadside")
-                        $ JeanX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(JeanX, "obedience", 90, 1)
                         ch_j ". . . yeah, ok. . ."
                         $ JeanX.traits.append("passive")
                     elif approval_check(JeanX, 600):
                         $ JeanX.change_face("_sly")
-                        $ JeanX.change_stat("love", 90, -3)
-                        $ JeanX.change_stat("obedience", 50, -1)
-                        $ JeanX.change_stat("inhibition", 90, 5)
+                        call change_Girl_stat(JeanX, "love", 90, -3)
+                        call change_Girl_stat(JeanX, "obedience", 50, -1)
+                        call change_Girl_stat(JeanX, "inhibition", 90, 5)
                         ch_j "Hm, -NO.-"
                     else:
                         $ JeanX.change_face("_angry")
-                        $ JeanX.change_stat("love", 90, -5)
-                        $ JeanX.change_stat("obedience", 60, -3)
-                        $ JeanX.change_stat("inhibition", 90, 10)
+                        call change_Girl_stat(JeanX, "love", 90, -5)
+                        call change_Girl_stat(JeanX, "obedience", 60, -3)
+                        call change_Girl_stat(JeanX, "inhibition", 90, 10)
                         ch_j "You wish."
 
                     $ JeanX.daily_history.append("initiative")
@@ -874,22 +874,22 @@ label Jean_SexChat:
                 else:
                     if approval_check(JeanX, 1000) and JeanX.obedience <= JeanX.love:
                         $ JeanX.change_face("_bemused")
-                        $ JeanX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(JeanX, "obedience", 90, 1)
                         ch_j "Damned right I will."
                         $ JeanX.traits.remove("passive")
                     elif approval_check(JeanX, 700, "O"):
                         $ JeanX.change_face("_sadside")
-                        $ JeanX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(JeanX, "obedience", 90, 1)
                         ch_j ". . . fine. . ."
                         $ JeanX.traits.remove("passive")
                     elif approval_check(JeanX, 600):
                         $ JeanX.change_face("_sly")
-                        $ JeanX.change_stat("obedience", 90, 3)
+                        call change_Girl_stat(JeanX, "obedience", 90, 3)
                         ch_j "Sure."
                         $ JeanX.traits.remove("passive")
                     else:
                         $ JeanX.change_face("_angry")
-                        $ JeanX.change_stat("inhibition", 90, 5)
+                        call change_Girl_stat(JeanX, "inhibition", 90, 5)
                         ch_j "Ugh, don't bother me with that, figure it out yourself."
 
                     $ JeanX.daily_history.append("initiative")
@@ -924,11 +924,11 @@ label Jean_SexChat:
                     extend ""
                     "That is so cool":
                         if "whammytalk" not in JeanX.had_chat:
-                            $ JeanX.change_stat("love", 60, 10)
-                            $ JeanX.change_stat("love", 90, 5)
-                            $ JeanX.change_stat("obedience", 60, 10)
-                            $ JeanX.change_stat("obedience", 80, 5)
-                            $ JeanX.change_stat("inhibition", 90, 10)
+                            call change_Girl_stat(JeanX, "love", 60, 10)
+                            call change_Girl_stat(JeanX, "love", 90, 5)
+                            call change_Girl_stat(JeanX, "obedience", 60, 10)
+                            call change_Girl_stat(JeanX, "obedience", 80, 5)
+                            call change_Girl_stat(JeanX, "inhibition", 90, 10)
                         ch_j "I know, right?"
                         $ JeanX.had_chat.append("whammytalk")
                     "Yeah, can should start doing that again." if "nowhammy" in JeanX.traits:
@@ -939,9 +939,9 @@ label Jean_SexChat:
                             ch_j "I'd love to, but Chuck'd have my ovaries over it. . ."
                         elif approval_check(JeanX, 800, "I"):
                             if "whammytalk" not in JeanX.daily_history:
-                                $ JeanX.change_stat("love", 80, 10)
-                                $ JeanX.change_stat("obedience", 60, 5)
-                                $ JeanX.change_stat("inhibition", 90, 10)
+                                call change_Girl_stat(JeanX, "love", 80, 10)
+                                call change_Girl_stat(JeanX, "obedience", 60, 5)
+                                call change_Girl_stat(JeanX, "inhibition", 90, 10)
                             if not approval_check(JeanX, 800, "LO"):
 
                                 $ JeanX.change_face("_sad")
@@ -955,16 +955,16 @@ label Jean_SexChat:
                         else:
 
                             if "whammytalk" not in JeanX.daily_history:
-                                $ JeanX.change_stat("love", 90, 5)
-                                $ JeanX.change_stat("obedience", 60, 3)
+                                call change_Girl_stat(JeanX, "love", 90, 5)
+                                call change_Girl_stat(JeanX, "obedience", 60, 3)
                             ch_j "Ok, thanks. . ."
                             $ JeanX.traits.append("whammy")
                         $ JeanX.daily_history.append("whammytalk")
                     "Don't do that anymore, I want them to remember." if "whammy" in JeanX.traits:
                         if "whammytalk" not in JeanX.daily_history:
-                            $ JeanX.change_stat("obedience", 60, 5)
-                            $ JeanX.change_stat("obedience", 85, 5)
-                            $ JeanX.change_stat("inhibition", 90, 10)
+                            call change_Girl_stat(JeanX, "obedience", 60, 5)
+                            call change_Girl_stat(JeanX, "obedience", 85, 5)
+                            call change_Girl_stat(JeanX, "inhibition", 90, 10)
                         ch_j "Oh, well. . ."
                         if approval_check(JeanX, 1500):
                             $ JeanX.change_face("_sad")
@@ -1188,34 +1188,34 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
             menu:
                 extend ""
                 "It was a total accident! I promise!":
-                    $ JeanX.change_stat("love", 50, 5)
-                    $ JeanX.change_stat("love", 90, 2)
+                    call change_Girl_stat(JeanX, "love", 50, 5)
+                    call change_Girl_stat(JeanX, "love", 90, 2)
                     if approval_check(JeanX, 1200):
                         $ JeanX.change_face("_sly", 1)
                         ch_j "Well, it's not like I minded."
                     $ JeanX.change_face("_smile")
                     ch_j "I guess we can all make mistakes. . ."
                 "Just with you.":
-                    $ JeanX.change_stat("obedience", 40, 5)
+                    call change_Girl_stat(JeanX, "obedience", 40, 5)
                     if approval_check(JeanX, 1000) or approval_check(JeanX, 700, "L"):
-                        $ JeanX.change_stat("love", 90, 3)
+                        call change_Girl_stat(JeanX, "love", 90, 3)
                         $ JeanX.change_face("_sly", 1)
                         ch_j "Oh, a charmer. . ."
                     else:
-                        $ JeanX.change_stat("love", 70, -5)
+                        call change_Girl_stat(JeanX, "love", 70, -5)
                         $ JeanX.change_face("_angry")
                         ch_j "I'll bet. . ."
                 "Totally on purpose. I regret nothing.":
                     if approval_check(JeanX, 800):
-                        $ JeanX.change_stat("obedience", 60, 5)
-                        $ JeanX.change_stat("inhibition", 50, 5)
+                        call change_Girl_stat(JeanX, "obedience", 60, 5)
+                        call change_Girl_stat(JeanX, "inhibition", 50, 5)
                         $ JeanX.change_face("_perplexed",2)
                         ch_j "fair"
                         $ JeanX.blushing = "_blush1"
                     else:
-                        $ JeanX.change_stat("love", 50, -10)
-                        $ JeanX.change_stat("love", 80, -10)
-                        $ JeanX.change_stat("obedience", 50, 10)
+                        call change_Girl_stat(JeanX, "love", 50, -10)
+                        call change_Girl_stat(JeanX, "love", 80, -10)
+                        call change_Girl_stat(JeanX, "obedience", 50, 10)
                         $ JeanX.change_face("_angry")
                         ch_j "Perv."
 
@@ -1236,8 +1236,8 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
                 $ JeanX.change_face("_sly",2)
                 ch_j "They were pretty hot."
             "Good. You looked like you could use to learn a thing or two from them.":
-                $ JeanX.change_stat("obedience", 70, 5)
-                $ JeanX.change_stat("inhibition", 50, 5)
+                call change_Girl_stat(JeanX, "obedience", 70, 5)
+                call change_Girl_stat(JeanX, "inhibition", 50, 5)
                 $ JeanX.change_face("_angry")
                 ch_j "Yeah right."
         $ JeanX.blushing = "_blush1"
@@ -1265,28 +1265,28 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
             menu:
                 extend ""
                 "You were totally amazing.":
-                    $ JeanX.change_stat("love", 90, 5)
-                    $ JeanX.change_stat("obedience", 60, 15)
-                    $ JeanX.change_stat("inhibition", 60, 10)
+                    call change_Girl_stat(JeanX, "love", 90, 5)
+                    call change_Girl_stat(JeanX, "obedience", 60, 15)
+                    call change_Girl_stat(JeanX, "inhibition", 60, 10)
                     $ JeanX.change_face("_normal", 1)
                     ch_j "You know it."
                     $ JeanX.change_face("_sexy", 1)
                     ch_j "I wouldn't mind having another taste. . ."
                 "Honestly? It was good. . .but you could use a little practice, I think.":
                     if approval_check(JeanX, 300, "I") or not approval_check(JeanX, 800):
-                        $ JeanX.change_stat("love", 90, -5)
-                        $ JeanX.change_stat("obedience", 60, 10)
-                        $ JeanX.change_stat("inhibition", 50, 10)
+                        call change_Girl_stat(JeanX, "love", 90, -5)
+                        call change_Girl_stat(JeanX, "obedience", 60, 10)
+                        call change_Girl_stat(JeanX, "inhibition", 50, 10)
                         $ JeanX.change_face("_perplexed", 1)
                         ch_j "Really? I'd never gotten any complaints before. . ."
                     else:
-                        $ JeanX.change_stat("obedience", 70, 15)
-                        $ JeanX.change_stat("inhibition", 50, 5)
+                        call change_Girl_stat(JeanX, "obedience", 70, 15)
+                        call change_Girl_stat(JeanX, "inhibition", 50, 5)
                         $ JeanX.change_face("_sexy", 1)
                         ch_j "You just don't know quality when you feel it."
                 "I guess. If you're into weird sounds and too much teeth. Spoiler, I'm not.":
-                    $ JeanX.change_stat("love", 90, -10)
-                    $ JeanX.change_stat("obedience", 60, -5)
+                    call change_Girl_stat(JeanX, "love", 90, -10)
+                    call change_Girl_stat(JeanX, "obedience", 60, -5)
                     $ JeanX.change_face("_angry",2)
                     ch_j "You just don't know quality."
             $ JeanX.blushing = "_blush1"
@@ -1347,8 +1347,8 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
         $ JeanX.change_face("_sly", 1, eyes = "_down")
         ch_j "Oh, I forgot to mention, congrats on that package you're swinging. . ."
         $ JeanX.change_face("_bemused", 1)
-        $ JeanX.change_stat("love", 50, 5)
-        $ JeanX.change_stat("love", 60, 10)
+        call change_Girl_stat(JeanX, "love", 50, 5)
+        call change_Girl_stat(JeanX, "love", 60, 10)
         $ JeanX.history.remove("seenpeen")
     elif Options[0] == "topless":
         ch_j "So you got a good look at my tits earlier, Pretty great, right?"
@@ -1884,67 +1884,67 @@ label Jean_Summon(approval_bonus=approval_bonus):
             menu:
                 extend ""
                 "Ok, I'll be right there.":
-                    $ JeanX.change_stat("love", 55, 1)
-                    $ JeanX.change_stat("inhibition", 30, 1)
+                    call change_Girl_stat(JeanX, "love", 55, 1)
+                    call change_Girl_stat(JeanX, "inhibition", 30, 1)
                     ch_j "Good."
                     $ line = "go to"
                 "Ok, we can talk later then.":
 
-                    $ JeanX.change_stat("obedience", 50, 1)
-                    $ JeanX.change_stat("obedience", 30, 2)
+                    call change_Girl_stat(JeanX, "obedience", 50, 1)
+                    call change_Girl_stat(JeanX, "obedience", 30, 2)
                     ch_j "Ok."
                 "Could you please come visit me? I'm lonely.":
 
                     if approval_check(JeanX, 650, "L") or approval_check(JeanX, 1500):
-                        $ JeanX.change_stat("love", 70, 1)
-                        $ JeanX.change_stat("obedience", 50, 1)
+                        call change_Girl_stat(JeanX, "love", 70, 1)
+                        call change_Girl_stat(JeanX, "obedience", 50, 1)
                         $ line = "lonely"
                     else:
-                        $ JeanX.change_stat("inhibition", 30, 1)
+                        call change_Girl_stat(JeanX, "inhibition", 30, 1)
                         $ line = "no"
                         ch_j "Needy much?"
                 "Come on, it'll be fun.":
 
                     if approval_check(JeanX, 400, "L") and approval_check(JeanX, 800):
-                        $ JeanX.change_stat("love", 70, 1)
-                        $ JeanX.change_stat("obedience", 50, 1)
+                        call change_Girl_stat(JeanX, "love", 70, 1)
+                        call change_Girl_stat(JeanX, "obedience", 50, 1)
                         $ line = "fun"
                     else:
-                        $ JeanX.change_stat("inhibition", 30, 1)
+                        call change_Girl_stat(JeanX, "inhibition", 30, 1)
                         $ line = "no"
                 "I said come over here.":
 
                     if approval_check(JeanX, 600, "O"):
 
-                        $ JeanX.change_stat("love", 50, 1, 1)
-                        $ JeanX.change_stat("love", 40, -1)
-                        $ JeanX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(JeanX, "love", 50, 1, 1)
+                        call change_Girl_stat(JeanX, "love", 40, -1)
+                        call change_Girl_stat(JeanX, "obedience", 90, 1)
                         $ line = "command"
 
                     elif D20 >= 7 and approval_check(JeanX, 1500):
 
-                        $ JeanX.change_stat("love", 70, -2)
-                        $ JeanX.change_stat("love", 90, -1)
-                        $ JeanX.change_stat("obedience", 50, 2)
-                        $ JeanX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(JeanX, "love", 70, -2)
+                        call change_Girl_stat(JeanX, "love", 90, -1)
+                        call change_Girl_stat(JeanX, "obedience", 50, 2)
+                        call change_Girl_stat(JeanX, "obedience", 90, 1)
                         ch_j "Ok, fine."
                         $ line = "yes"
 
                     elif approval_check(JeanX, 200, "O"):
 
-                        $ JeanX.change_stat("love", 60, -4)
-                        $ JeanX.change_stat("love", 90, -3)
+                        call change_Girl_stat(JeanX, "love", 60, -4)
+                        call change_Girl_stat(JeanX, "love", 90, -3)
                         ch_j "And I said \"no.\""
-                        $ JeanX.change_stat("inhibition", 40, 2)
-                        $ JeanX.change_stat("inhibition", 60, 1)
-                        $ JeanX.change_stat("obedience", 70, -3)
+                        call change_Girl_stat(JeanX, "inhibition", 40, 2)
+                        call change_Girl_stat(JeanX, "inhibition", 60, 1)
+                        call change_Girl_stat(JeanX, "obedience", 70, -3)
                         ch_j "I'm staying here."
                     else:
 
-                        $ JeanX.change_stat("inhibition", 30, 1)
-                        $ JeanX.change_stat("inhibition", 50, 1)
-                        $ JeanX.change_stat("love", 50, -1, 1)
-                        $ JeanX.change_stat("obedience", 70, -1)
+                        call change_Girl_stat(JeanX, "inhibition", 30, 1)
+                        call change_Girl_stat(JeanX, "inhibition", 50, 1)
+                        call change_Girl_stat(JeanX, "love", 50, -1, 1)
+                        call change_Girl_stat(JeanX, "obedience", 70, -1)
                         $ line = "no"
     else:
 
@@ -2086,78 +2086,80 @@ label Jean_Leave:
 
     $ D20 = renpy.random.randint(1, 20)
 
+    $ line = None
+
     menu:
         extend ""
         "Ok, I'll catch up.":
             if "followed" not in JeanX.recent_history:
-                $ JeanX.change_stat("love", 55, 1)
-                $ JeanX.change_stat("inhibition", 30, 1)
+                call change_Girl_stat(JeanX, "love", 55, 1)
+                call change_Girl_stat(JeanX, "inhibition", 30, 1)
             $ line = "go to"
         "Ok, we can talk later.":
 
             if "followed" not in JeanX.recent_history:
-                $ JeanX.change_stat("obedience", 50, 1)
-                $ JeanX.change_stat("obedience", 30, 2)
+                call change_Girl_stat(JeanX, "obedience", 50, 1)
+                call change_Girl_stat(JeanX, "obedience", 30, 2)
             ch_j "Fine, whatever."
         "Could you please stay with me? I'll get lonely.":
 
             if approval_check(JeanX, 650, "L") or approval_check(JeanX, 1500):
                 if "followed" not in JeanX.recent_history:
-                    $ JeanX.change_stat("love", 70, 1)
-                    $ JeanX.change_stat("obedience", 50, 1)
+                    call change_Girl_stat(JeanX, "love", 70, 1)
+                    call change_Girl_stat(JeanX, "obedience", 50, 1)
                 $ line = "lonely"
             else:
                 if "followed" not in JeanX.recent_history:
-                    $ JeanX.change_stat("inhibition", 30, 1)
+                    call change_Girl_stat(JeanX, "inhibition", 30, 1)
                 $ line = "no"
                 ch_j "Needy much?"
         "Come on, it'll be fun.":
 
             if approval_check(JeanX, 400, "L") and approval_check(JeanX, 800):
-                $ JeanX.change_stat("love", 70, 1)
-                $ JeanX.change_stat("obedience", 50, 1)
+                call change_Girl_stat(JeanX, "love", 70, 1)
+                call change_Girl_stat(JeanX, "obedience", 50, 1)
                 $ line = "fun"
             else:
-                $ JeanX.change_stat("inhibition", 30, 1)
+                call change_Girl_stat(JeanX, "inhibition", 30, 1)
                 $ line = "no"
         "No, stay here.":
 
             if approval_check(JeanX, 600, "O"):
 
                 if "followed" not in JeanX.recent_history:
-                    $ JeanX.change_stat("love", 40, -2)
-                    $ JeanX.change_stat("obedience", 90, 1)
+                    call change_Girl_stat(JeanX, "love", 40, -2)
+                    call change_Girl_stat(JeanX, "obedience", 90, 1)
                 $ line = "command"
 
             elif D20 >= 7 and approval_check(JeanX, 1400):
 
                 if "followed" not in JeanX.recent_history:
-                    $ JeanX.change_stat("love", 70, -2)
-                    $ JeanX.change_stat("love", 90, -1)
-                    $ JeanX.change_stat("obedience", 50, 2)
-                    $ JeanX.change_stat("obedience", 90, 1)
+                    call change_Girl_stat(JeanX, "love", 70, -2)
+                    call change_Girl_stat(JeanX, "love", 90, -1)
+                    call change_Girl_stat(JeanX, "obedience", 50, 2)
+                    call change_Girl_stat(JeanX, "obedience", 90, 1)
                 ch_j ". . . Fine."
                 $ line = "yes"
 
             elif approval_check(JeanX, 200, "O"):
 
                 if "followed" not in JeanX.recent_history:
-                    $ JeanX.change_stat("love", 70, -4)
-                    $ JeanX.change_stat("love", 90, -2)
+                    call change_Girl_stat(JeanX, "love", 70, -4)
+                    call change_Girl_stat(JeanX, "love", 90, -2)
                 ch_j "You're not the boss of me."
                 if "followed" not in JeanX.recent_history:
-                    $ JeanX.change_stat("inhibition", 40, 2)
-                    $ JeanX.change_stat("inhibition", 60, 1)
-                    $ JeanX.change_stat("obedience", 70, -2)
+                    call change_Girl_stat(JeanX, "inhibition", 40, 2)
+                    call change_Girl_stat(JeanX, "inhibition", 60, 1)
+                    call change_Girl_stat(JeanX, "obedience", 70, -2)
                 ch_j "Ha!"
             else:
 
                 if "followed" not in JeanX.recent_history:
-                    $ JeanX.change_stat("inhibition", 30, 1)
-                    $ JeanX.change_stat("inhibition", 50, 1)
-                    $ JeanX.change_stat("love", 50, -1, 1)
-                    $ JeanX.change_stat("love", 90, -2)
-                    $ JeanX.change_stat("obedience", 70, -1)
+                    call change_Girl_stat(JeanX, "inhibition", 30, 1)
+                    call change_Girl_stat(JeanX, "inhibition", 50, 1)
+                    call change_Girl_stat(JeanX, "love", 50, -1, 1)
+                    call change_Girl_stat(JeanX, "love", 90, -2)
+                    call change_Girl_stat(JeanX, "obedience", 70, -1)
                 $ line = "no"
 
     if not line:

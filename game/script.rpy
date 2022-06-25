@@ -158,14 +158,11 @@ init -1:
     define Mystique_dissolve = ImageDissolve("images/wipes/Mystique_dissolve.jpg", 1.0, 8)
 
 label start:
-    $ renpy.start_predict("images/backgrounds/*.*")
+    python:
+        renpy.start_predict("images/backgrounds/*.*")
 
-    $ temp_Girls = all_Girls[:]
-
-    while temp_Girls:
-        $ renpy.start_predict("images/" + temp_Girls[0].tag + "_standing/*.*")
-
-        $ temp_Girls.remove(temp_Girls[0])
+        for G in all_Girls:
+            renpy.start_predict("images/" + G.tag + "_standing/*.*")
 
     $ Player = PlayerClass()
 

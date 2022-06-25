@@ -15,14 +15,14 @@ label masturbate(Girl, context = None):
                 menu:
                     extend ""
                     "Would you like some help? I could lend some helping hands. . ." if Girl.remaining_actions:
-                        $ Girl.change_stat("love", 90, 1)
-                        $ Girl.change_stat("obedience", 50, 2)
+                        call change_Girl_stat(Girl, "love", 90, 1)
+                        call change_Girl_stat(Girl, "obedience", 50, 2)
                         $ Girl.change_face("_sexy")
 
                         call lend_some_helping_hands_lines(Girl, "masturbation")
 
-                        $ Girl.change_stat("obedience", 70, 2)
-                        $ Girl.change_stat("inhibition", 70, 1)
+                        call change_Girl_stat(Girl, "obedience", 70, 2)
+                        call change_Girl_stat(Girl, "inhibition", 70, 1)
 
                         $ Girl.action_counter["masturbation"] += 1
 
@@ -30,14 +30,14 @@ label masturbate(Girl, context = None):
 
                         return _return
                     "Would you like some help? I could. . . up to you, I guess." if Player.semen and Girl.remaining_actions:
-                        $ Girl.change_stat("love", 70, 2)
-                        $ Girl.change_stat("love", 90, 1)
+                        call change_Girl_stat(Girl, "love", 70, 2)
+                        call change_Girl_stat(Girl, "love", 90, 1)
                         $ Girl.change_face("_sexy")
 
                         call lend_some_helping_hands_lines(Girl, "masturbation")
 
-                        $ Girl.change_stat("obedience", 70, 2)
-                        $ Girl.change_stat("inhibition", 70, 1)
+                        call change_Girl_stat(Girl, "obedience", 70, 2)
+                        call change_Girl_stat(Girl, "inhibition", 70, 1)
 
                         $ D20 = renpy.random.randint(1, 20)
 
@@ -58,14 +58,14 @@ label masturbate(Girl, context = None):
                         return "switch"
                     "You look like you have things well in hand. . .":
                         if Girl.lust >= 50:
-                            $ Girl.change_stat("love", 70, 2)
-                            $ Girl.change_stat("love", 90, 1)
+                            call change_Girl_stat(Girl, "love", 70, 2)
+                            call change_Girl_stat(Girl, "love", 90, 1)
                             $ Girl.change_face("_sexy")
 
                             call well_in_hand_lust_lines(Girl, "masturbation")
 
-                            $ Girl.change_stat("obedience", 80, 3)
-                            $ Girl.change_stat("inhibition", 80, 5)
+                            call change_Girl_stat(Girl, "obedience", 80, 3)
+                            call change_Girl_stat(Girl, "inhibition", 80, 5)
 
                             $ accepted = True
                         elif approval_check(Girl, 1000):
@@ -97,7 +97,7 @@ label masturbate(Girl, context = None):
 
                     $ Girl.blushing = "_blush1"
                 else:
-                    $ Girl.change_stat("love", 200, -5)
+                    call change_Girl_stat(Girl, "love", 200, -5)
                     $ Girl.change_face("_angry")
                     $ Girl.recent_history.append("_angry")
                     $ Girl.daily_history.append("_angry")
@@ -177,13 +177,13 @@ label before_masturbation(Girl):
 
         if not Girl.action_counter["masturbation"]:
             if Girl.forced:
-                $ Girl.change_stat("love", 90, -20)
-                $ Girl.change_stat("obedience", 70, 45)
-                $ Girl.change_stat("inhibition", 80, 35)
+                call change_Girl_stat(Girl, "love", 90, -20)
+                call change_Girl_stat(Girl, "obedience", 70, 45)
+                call change_Girl_stat(Girl, "inhibition", 80, 35)
             else:
-                $ Girl.change_stat("love", 90, 15)
-                $ Girl.change_stat("obedience", 70, 35)
-                $ Girl.change_stat("inhibition", 80, 40)
+                call change_Girl_stat(Girl, "love", 90, 15)
+                call change_Girl_stat(Girl, "obedience", 70, 35)
+                call change_Girl_stat(Girl, "inhibition", 80, 40)
 
     if taboo:
         $ Girl.drain_word("no_taboo")
@@ -238,7 +238,7 @@ label masturbation_cycle(Girl):
 
                         return "stop"
 
-                    $ Girl.change_stat("lust", 200, 5)
+                    call change_Girl_stat(Girl, "lust", 200, 5)
 
                     if 100 > Girl.lust >= 70 and Girl.session_orgasms < 2:
                         $ Girl.recent_history.append("unsatisfied")
@@ -321,22 +321,22 @@ label after_masturbation(Girl, context):
             menu:
                 "Long enough, it was an excellent show.":
                     $ Girl.change_face("_sexy")
-                    $ Girl.change_stat("obedience", 50, 3)
-                    $ Girl.change_stat("obedience", 70, 2)
+                    call change_Girl_stat(Girl, "obedience", 50, 3)
+                    call change_Girl_stat(Girl, "obedience", 70, 2)
 
                     call masturbation_excellent_show_cock_out_lines(Girl, "masturbation")
 
                     if Girl.love >= 800 or Girl.obedience >= 500 or Girl.inhibition >= 500:
                         $ approval_bonus += 10
-                        $ Girl.change_stat("lust", 90, 5)
+                        call change_Girl_stat(Girl, "lust", 90, 5)
 
                         call masturbation_excellent_show_cock_out_happy_lines(Girl, "masturbation")
                 "I. . . just got here?":
                     $ Girl.change_face("_angry")
-                    $ Girl.change_stat("love", 70, 2)
-                    $ Girl.change_stat("love", 90, 1)
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("obedience", 70, 2)
+                    call change_Girl_stat(Girl, "love", 70, 2)
+                    call change_Girl_stat(Girl, "love", 90, 1)
+                    call change_Girl_stat(Girl, "obedience", 50, 2)
+                    call change_Girl_stat(Girl, "obedience", 70, 2)
 
                     "She looks pointedly at your cock."
 
@@ -345,14 +345,14 @@ label after_masturbation(Girl, context):
                     if Girl.love >= 800 or Girl.obedience >= 500 or Girl.inhibition >= 500:
                         $ approval_bonus += 10
 
-                        $ Girl.change_stat("lust", 90, 5)
+                        call change_Girl_stat(Girl, "lust", 90, 5)
                         $ Girl.change_face("_bemused", 1)
 
                         call masturbation_just_got_here_cock_out_happy_lines(Girl, "masturbation")
                     else:
                         $ approval_bonus -= 10
 
-                        $ Girl.change_stat("lust", 200, -5)
+                        call change_Girl_stat(Girl, "lust", 200, -5)
 
             call Seen_First_Peen(Girl, Partner)
 
@@ -364,19 +364,19 @@ label after_masturbation(Girl, context):
                 extend ""
                 "Long enough.":
                     $ Girl.change_face("_sexy", 1)
-                    $ Girl.change_stat("obedience", 50, 3)
-                    $ Girl.change_stat("obedience", 70, 2)
+                    call change_Girl_stat(Girl, "obedience", 50, 3)
+                    call change_Girl_stat(Girl, "obedience", 70, 2)
 
                     call masturbation_watching_for_long_enough_lines(Girl, "masturbation")
                 "I just got here.":
                     $ Girl.change_face("_bemused", 1)
-                    $ Girl.change_stat("love", 70, 2)
-                    $ Girl.change_stat("love", 90, 1)
+                    call change_Girl_stat(Girl, "love", 70, 2)
+                    call change_Girl_stat(Girl, "love", 90, 1)
 
                     call masturbation_just_got_here_lines(Girl, "masturbation")
 
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("obedience", 70, 2)
+                    call change_Girl_stat(Girl, "obedience", 50, 2)
+                    call change_Girl_stat(Girl, "obedience", 70, 2)
 
         $ Girl.drain_word("unseen", 1, 0)
         $ Girl.action_counter["masturbation"] += 1

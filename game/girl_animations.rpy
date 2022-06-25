@@ -2,19 +2,22 @@ transform sprite_location(x_position = stage_right, y_position = 0):
     pos (x_position, y_position)
 
 transform silhouette:
-    matrixcolor TintMatrix(Color(rgb = (0.3, 0.4, 0.4)))*BrightnessMatrix(-0.5)
+    matrixcolor TintMatrix(Color(rgb = (0.3, 0.4, 0.4)))*OpacityMatrix(0.95)*BrightnessMatrix(-0.9)
 
 transform morning:
     matrixcolor TintMatrix(Color(rgb = (1.0, 0.95, 0.9)))*BrightnessMatrix(0.02)
 
 transform daylight:
-    matrixcolor TintMatrix(Color(rgb = (1.0, 1.0, 1.0)))*BrightnessMatrix(0.0)
+    matrixcolor TintMatrix(Color(rgb = (1.0, 1.0, 1.0)))*BrightnessMatrix(0.05)
 
 transform sunset:
     matrixcolor TintMatrix(Color(rgb = (1.0, 0.8, 0.65)))*BrightnessMatrix(0.05)
 
 transform moonlight:
     matrixcolor TintMatrix(Color(rgb = (0.5, 0.6, 1.0)))*BrightnessMatrix(0.0)
+
+transform indoors:
+    matrixcolor TintMatrix(Color(rgb = (1.0, 1.0, 1.0)))*BrightnessMatrix(0.0)
 
 transform lights_off:
     matrixcolor TintMatrix(Color(rgb = (0.45, 0.45, 0.65)))*BrightnessMatrix(-0.07)
@@ -27,6 +30,9 @@ transform theater:
 
 transform teaching:
     pos (0.5, 0.15) zoom 0.4
+
+transform dining:
+    ypos 0.25
 
 transform reset_zoom:
     ease 0.75 offset (0, 0) xzoom 1.0 yzoom 1.0 zoom 1.0
@@ -355,7 +361,12 @@ label hide_Girl(Girl, transition = None):
 
     return
 
-label hide_all:
+label hide_all(fade = False):
+    if fade:
+        show black_screen onlayer black
+
+        pause 0.4
+
     $ temp_Girls = all_Girls[:]
 
     while temp_Girls:
@@ -367,11 +378,16 @@ label hide_all:
     if renpy.showing("Xavier_sprite"):
         hide Xavier_sprite
 
+    if fade:
+        hide black_screen onlayer black
+
     return
 
 label get_color_transform:
     if Player.location in ["bg_campus", "bg_pool", "bg_storm"] and time_index == 0:
         $ color_transform = morning
+    elif Player.location in ["bg_campus", "bg_pool", "bg_storm"] and time_index == 1:
+        $ color_transform = daylight
     elif Player.location in ["bg_campus", "bg_pool", "bg_storm"] and time_index == 2:
         $ color_transform = sunset
     elif Player.location in ["bg_campus", "bg_pool", "bg_storm"] and time_index > 2:
@@ -383,7 +399,7 @@ label get_color_transform:
     elif Player.location == "bg_movies":
         $ color_transform = theater
     else:
-        $ color_transform = daylight
+        $ color_transform = indoors
 
     return color_transform
 
@@ -412,9 +428,11 @@ label add_Girls(Girls, fade = False, static = False):
         for G in Girls:
             G.location = Player.location
 
-    call shift_focus(Girls[0])
-    call check_who_is_present
+            if G not in Present:
+                Present.append(G)
+
     call set_the_scene(fade = fade, static = static)
+    call shift_focus(Girls[0])
 
     return
 
@@ -510,7 +528,7 @@ label shift_view(Girl, view):
 label show_full_body(Girl):
     $ Girl.pose = "full"
 
-    call show_Girl(Girl, animation_transform = reset_zoom)
+    call show_Girl(Girl, color_transform = color_transform, animation_transform = reset_zoom)
 
     return
 
@@ -584,26 +602,29 @@ label show_handjob(Girl, orgasm = False):
 
     $ renpy.start_predict("images/" + Girl.tag + "_handjob/*.*")
 
+    call get_color_transform
+    $ color_transform = _return
+
     if Girl == RogueX:
-        show Rogue_sprite handjob zorder 150 at sprite_location(stage_center):
+        show Rogue_sprite handjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == KittyX:
-        show Kitty_sprite handjob zorder 150 at sprite_location(stage_center):
+        show Kitty_sprite handjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == EmmaX:
-        show Emma_sprite handjob zorder 150 at sprite_location(stage_center):
+        show Emma_sprite handjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == LauraX:
-        show Laura_sprite handjob zorder 150 at sprite_location(stage_center):
+        show Laura_sprite handjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == JeanX:
-        show Jean_sprite handjob zorder 150 at sprite_location(stage_center):
+        show Jean_sprite handjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == StormX:
-        show Storm_sprite handjob zorder 150 at sprite_location(stage_center):
+        show Storm_sprite handjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == JubesX:
-        show Jubes_sprite handjob zorder 150 at sprite_location(stage_center):
+        show Jubes_sprite handjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
 
     return
@@ -662,26 +683,29 @@ label show_titjob(Girl, orgasm = False):
 
     $ renpy.start_predict("images/" + Girl.tag + "_titjob/*.*")
 
+    call get_color_transform
+    $ color_transform = _return
+
     if Girl == RogueX:
-        show Rogue_sprite titjob zorder 150 at sprite_location(stage_center):
+        show Rogue_sprite titjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == KittyX:
-        show Kitty_sprite titjob zorder 150 at sprite_location(stage_center):
+        show Kitty_sprite titjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == EmmaX:
-        show Emma_sprite titjob zorder 150 at sprite_location(stage_center):
+        show Emma_sprite titjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == LauraX:
-        show Laura_sprite titjob zorder 150 at sprite_location(stage_center):
+        show Laura_sprite titjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == JeanX:
-        show Jean_sprite titjob zorder 150 at sprite_location(stage_center):
+        show Jean_sprite titjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == StormX:
-        show Storm_sprite titjob zorder 150 at sprite_location(stage_center):
+        show Storm_sprite titjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == JubesX:
-        show Jubes_sprite titjob zorder 150 at sprite_location(stage_center):
+        show Jubes_sprite titjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
 
     return
@@ -711,26 +735,29 @@ label show_blowjob(Girl, orgasm = False):
 
     $ renpy.start_predict("images/" + Girl.tag + "_blowjob/*.*")
 
+    call get_color_transform
+    $ color_transform = _return
+
     if Girl == RogueX:
-        show Rogue_sprite blowjob zorder 150 at sprite_location(stage_center):
+        show Rogue_sprite blowjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == KittyX:
-        show Kitty_sprite blowjob zorder 150 at sprite_location(stage_center):
+        show Kitty_sprite blowjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == EmmaX:
-        show Emma_sprite blowjob zorder 150 at sprite_location(stage_center):
+        show Emma_sprite blowjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == LauraX:
-        show Laura_sprite blowjob zorder 150 at sprite_location(stage_center):
+        show Laura_sprite blowjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == JeanX:
-        show Jean_sprite blowjob zorder 150 at sprite_location(stage_center):
+        show Jean_sprite blowjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == StormX:
-        show Storm_sprite blowjob zorder 150 at sprite_location(stage_center):
+        show Storm_sprite blowjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
     elif Girl == JubesX:
-        show Jubes_sprite blowjob zorder 150 at sprite_location(stage_center):
+        show Jubes_sprite blowjob zorder 150 at sprite_location(stage_center), color_transform:
             zoom 1.0
 
     return
@@ -767,20 +794,23 @@ label show_sex(Girl, action):
 
     $ renpy.start_predict("images/" + Girl.tag + "_sex/*.*")
 
+    call get_color_transform
+    $ color_transform = _return
+
     if Girl == RogueX:
-        show Rogue_sprite sex zorder 150 at sprite_location(stage_center)
+        show Rogue_sprite sex zorder 150 at sprite_location(stage_center), color_transform
     elif Girl == KittyX:
-        show Kitty_sprite sex zorder 150 at sprite_location(stage_center)
+        show Kitty_sprite sex zorder 150 at sprite_location(stage_center), color_transform
     elif Girl == EmmaX:
-        show Emma_sprite sex zorder 150 at sprite_location(stage_center)
+        show Emma_sprite sex zorder 150 at sprite_location(stage_center), color_transform
     elif Girl == LauraX:
-        show Laura_sprite sex zorder 150 at sprite_location(stage_center)
+        show Laura_sprite sex zorder 150 at sprite_location(stage_center), color_transform
     elif Girl == JeanX:
-        show Jean_sprite sex zorder 150 at sprite_location(stage_center)
+        show Jean_sprite sex zorder 150 at sprite_location(stage_center), color_transform
     elif Girl == StormX:
-        show Storm_sprite sex zorder 150 at sprite_location(stage_center)
+        show Storm_sprite sex zorder 150 at sprite_location(stage_center), color_transform
     elif Girl == JubesX:
-        show Jubes_sprite sex zorder 150 at sprite_location(stage_center)
+        show Jubes_sprite sex zorder 150 at sprite_location(stage_center), color_transform
 
     return
 
@@ -792,20 +822,23 @@ label show_doggy(Girl):
 
     $ renpy.start_predict("images/" + Girl.tag + "_doggy/*.*")
 
+    call get_color_transform
+    $ color_transform = _return
+
     if Girl == RogueX:
-        show Rogue_sprite doggy zorder 150 at sprite_location(stage_center)
+        show Rogue_sprite doggy zorder 150 at sprite_location(stage_center), color_transform
     elif Girl == KittyX:
-        show Kitty_sprite doggy zorder 150 at sprite_location(stage_center)
+        show Kitty_sprite doggy zorder 150 at sprite_location(stage_center), color_transform
     elif Girl == EmmaX:
-        show Emma_sprite doggy zorder 150 at sprite_location(stage_center)
+        show Emma_sprite doggy zorder 150 at sprite_location(stage_center), color_transform
     elif Girl == LauraX:
-        show Laura_sprite doggy zorder 150 at sprite_location(stage_center)
+        show Laura_sprite doggy zorder 150 at sprite_location(stage_center), color_transform
     elif Girl == JeanX:
-        show Jean_sprite doggy zorder 150 at sprite_location(stage_center)
+        show Jean_sprite doggy zorder 150 at sprite_location(stage_center), color_transform
     elif Girl == StormX:
-        show Storm_sprite doggy zorder 150 at sprite_location(stage_center)
+        show Storm_sprite doggy zorder 150 at sprite_location(stage_center), color_transform
     elif Girl == JubesX:
-        show Jubes_sprite doggy zorder 150 at sprite_location(stage_center)
+        show Jubes_sprite doggy zorder 150 at sprite_location(stage_center), color_transform
 
     return
 

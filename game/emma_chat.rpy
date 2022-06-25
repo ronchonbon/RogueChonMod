@@ -81,8 +81,8 @@ label Emma_Flirt_Minimal:
             call Compliment (Girl)
         "Say you love her":
             if EmmaX.love >= 500:
-                $ EmmaX.change_stat("love", 90, 2)
-            $ EmmaX.change_stat("obedience", 40, 1)
+                call change_Girl_stat(EmmaX, "love", 90, 2)
+            call change_Girl_stat(EmmaX, "obedience", 40, 1)
             ch_e "Don't even joke, [EmmaX.player_petname]."
         "Touch her cheek":
             "You begin to approach her, but she cuts you off with a firm hand out."
@@ -162,7 +162,7 @@ label Emma_Relationship:
                 if EmmaX.love >= 800:
                     $ EmmaX.change_face("_surprised", 1)
                     $ EmmaX.mouth = "_smile"
-                    $ EmmaX.change_stat("love", 200, 40)
+                    call change_Girl_stat(EmmaX, "love", 200, 40)
                     ch_e "I suppose I've become accustomed to you. . ."
                     if "boyfriend" not in EmmaX.player_petnames:
                         $ EmmaX.player_petnames.append("boyfriend")
@@ -208,7 +208,7 @@ label Emma_Relationship:
 
                 if EmmaX.love >= 800:
                     $ EmmaX.change_face("_sly", 1)
-                    $ EmmaX.change_stat("love", 90, 5)
+                    call change_Girl_stat(EmmaX, "love", 90, 5)
                     ch_e "Try as I might, I can't stay mad at you."
                     if "boyfriend" not in EmmaX.player_petnames:
                         $ EmmaX.player_petnames.append("boyfriend")
@@ -222,7 +222,7 @@ label Emma_Relationship:
                     $ EmmaX.action_counter["kiss"] += 1
                 elif EmmaX.love >= 600 and approval_check(EmmaX, 1500):
                     $ EmmaX.change_face("_smile", 1)
-                    $ EmmaX.change_stat("love", 90, 5)
+                    call change_Girl_stat(EmmaX, "love", 90, 5)
                     ch_e "Hrm, very well."
                     if "boyfriend" not in EmmaX.player_petnames:
                         $ EmmaX.player_petnames.append("boyfriend")
@@ -480,14 +480,14 @@ label Emma_Monogamy:
 
                 $ EmmaX.change_face("_sly", 1)
                 if "monogamous" not in EmmaX.daily_history:
-                    $ EmmaX.change_stat("obedience", 90, -2)
+                    call change_Girl_stat(EmmaX, "obedience", 90, -2)
                 ch_e "You know, it's not like you leave me any alternatives. . ."
                 return
             elif approval_check(EmmaX, 1300, "LO", taboo_modifier=0) and EmmaX.love >= EmmaX.obedience:
 
                 $ EmmaX.change_face("_sly", 1)
                 if "monogamous" not in EmmaX.daily_history:
-                    $ EmmaX.change_stat("love", 90, 1)
+                    call change_Girl_stat(EmmaX, "love", 90, 1)
                 ch_e "Jealousy is an adorable look on you. . ."
                 ch_e "I suppose I could restain myself. . ."
             elif approval_check(EmmaX, 750, "O", taboo_modifier=0):
@@ -501,7 +501,7 @@ label Emma_Monogamy:
                 ch_e "Don't leave me wanting. . ."
                 return
             if "monogamous" not in EmmaX.daily_history:
-                $ EmmaX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(EmmaX, "obedience", 90, 3)
             $ EmmaX.add_word(1, 0,"monogamous")
             $ EmmaX.traits.append("monogamous")
         "Don't hook up with other girls." if "monogamous" not in EmmaX.traits:
@@ -513,7 +513,7 @@ label Emma_Monogamy:
 
                 $ EmmaX.change_face("_sly", 1)
                 if "monogamous" not in EmmaX.daily_history:
-                    $ EmmaX.change_stat("obedience", 90, -2)
+                    call change_Girl_stat(EmmaX, "obedience", 90, -2)
                 ch_e "You know, it's not like you leave me any alternatives. . ."
                 return
             elif approval_check(EmmaX, 600, "O", taboo_modifier=0):
@@ -531,7 +531,7 @@ label Emma_Monogamy:
                 ch_e "My affairs are my own business."
                 return
             if "monogamous" not in EmmaX.daily_history:
-                $ EmmaX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(EmmaX, "obedience", 90, 3)
             $ EmmaX.add_word(1, 0,"monogamous")
             $ EmmaX.traits.append("monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in EmmaX.traits:
@@ -544,10 +544,10 @@ label Emma_Monogamy:
             else:
                 $ EmmaX.change_face("_sly", 1,brows = "_confused")
                 if "monogamous" not in EmmaX.daily_history:
-                    $ EmmaX.change_stat("love", 90, -2)
+                    call change_Girl_stat(EmmaX, "love", 90, -2)
                 ch_e "I wasn't aware that I needed your permission."
             if "monogamous" not in EmmaX.daily_history:
-                $ EmmaX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(EmmaX, "obedience", 90, 3)
             if "monogamous" in EmmaX.traits:
                 $ EmmaX.traits.remove("monogamous")
             $ EmmaX.add_word(1, 0,"monogamous")
@@ -569,7 +569,7 @@ label Emma_Jumped:
 
                 $ EmmaX.change_face("_sly", 1)
                 if "chill" not in EmmaX.daily_history:
-                    $ EmmaX.change_stat("obedience", 90, -2)
+                    call change_Girl_stat(EmmaX, "obedience", 90, -2)
                 ch_e "I do have certain. . . needs that must be met."
                 ch_e "Stay on your toes."
                 return
@@ -577,7 +577,7 @@ label Emma_Jumped:
 
                 $ EmmaX.change_face("_sly", 1)
                 if "chill" not in EmmaX.daily_history:
-                    $ EmmaX.change_stat("love", 90, 1)
+                    call change_Girl_stat(EmmaX, "love", 90, 1)
                 ch_e "I didn't intend to upset you, [EmmaX.player_petname]. . ."
                 ch_e "I'll try to keep control. . ."
             elif approval_check(EmmaX, 600, "O", taboo_modifier=0):
@@ -591,7 +591,7 @@ label Emma_Jumped:
                 ch_e "Stay on your toes."
                 return
             if "chill" not in EmmaX.daily_history:
-                $ EmmaX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(EmmaX, "obedience", 90, 3)
             $ EmmaX.add_word(1, 0,"chill")
             $ EmmaX.traits.append("chill")
         "Don't bother me like that." if "chill" not in EmmaX.traits:
@@ -603,7 +603,7 @@ label Emma_Jumped:
 
                 $ EmmaX.change_face("_sly", 1)
                 if "chill" not in EmmaX.daily_history:
-                    $ EmmaX.change_stat("obedience", 90, -2)
+                    call change_Girl_stat(EmmaX, "obedience", 90, -2)
                 ch_e "I do have certain. . . needs that must be met."
                 ch_e "Stay on your toes."
                 return
@@ -623,7 +623,7 @@ label Emma_Jumped:
                 ch_e "Stay on your toes."
                 return
             if "chill" not in EmmaX.daily_history:
-                $ EmmaX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(EmmaX, "obedience", 90, 3)
             $ EmmaX.add_word(1, 0,"chill")
             $ EmmaX.traits.append("chill")
         "Knock yourself out.":
@@ -636,10 +636,10 @@ label Emma_Jumped:
             else:
                 $ EmmaX.change_face("_sly", 1,brows = "_confused")
                 if "chill" not in EmmaX.daily_history:
-                    $ EmmaX.change_stat("love", 90, -2)
+                    call change_Girl_stat(EmmaX, "love", 90, -2)
                 ch_e "We'll see. . ."
             if "chill" not in EmmaX.daily_history:
-                $ EmmaX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(EmmaX, "obedience", 90, 3)
             if "chill" in EmmaX.traits:
                 $ EmmaX.traits.remove("chill")
             $ EmmaX.add_word(1, 0,"chill")
@@ -677,11 +677,11 @@ label Emma_SexChat:
                         "Sex.":
                             $ EmmaX.change_face("_sly")
                             if EmmaX.player_favorite_action == "sex":
-                                $ EmmaX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(EmmaX, "lust", 80, 5)
                                 ch_e "I'm well aware. . ."
                             elif EmmaX.favorite_action == "sex":
-                                $ EmmaX.change_stat("love", 90, 5)
-                                $ EmmaX.change_stat("lust", 80, 10)
+                                call change_Girl_stat(EmmaX, "love", 90, 5)
+                                call change_Girl_stat(EmmaX, "lust", 80, 10)
                                 ch_e "Oh. . . as chance would have it. . ."
                             elif EmmaX.action_counter["sex"]:
                                 ch_e "I can see why."
@@ -693,11 +693,11 @@ label Emma_SexChat:
 
                             $ EmmaX.change_face("_sly")
                             if EmmaX.player_favorite_action == "anal":
-                                $ EmmaX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(EmmaX, "lust", 80, 5)
                                 ch_e "So you've told me. . ."
                             elif EmmaX.favorite_action == "anal":
-                                $ EmmaX.change_stat("love", 90, 5)
-                                $ EmmaX.change_stat("lust", 80, 10)
+                                call change_Girl_stat(EmmaX, "love", 90, 5)
+                                call change_Girl_stat(EmmaX, "lust", 80, 10)
                                 ch_e "{i}Mine too{/i}. . ."
                             elif EmmaX.action_counter["anal"] >= 10:
                                 ch_e "It certainly is a workout. . ."
@@ -712,11 +712,11 @@ label Emma_SexChat:
 
                             $ EmmaX.change_face("_sly")
                             if EmmaX.player_favorite_action == "blowjob":
-                                $ EmmaX.change_stat("lust", 80, 3)
+                                call change_Girl_stat(EmmaX, "lust", 80, 3)
                                 ch_e "Yes, so you've said. . ."
                             elif EmmaX.favorite_action == "blowjob":
-                                $ EmmaX.change_stat("love", 90, 5)
-                                $ EmmaX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(EmmaX, "love", 90, 5)
+                                call change_Girl_stat(EmmaX, "lust", 80, 5)
                                 ch_e "Hmm, you are delicious. . ."
                             elif EmmaX.action_counter["blowjob"] >= 10:
                                 ch_e "I certainly can't complain . . ."
@@ -731,11 +731,11 @@ label Emma_SexChat:
 
                             $ EmmaX.change_face("_sly")
                             if EmmaX.player_favorite_action == "titjob":
-                                $ EmmaX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(EmmaX, "lust", 80, 5)
                                 ch_e "So you're said. . ."
                             elif EmmaX.favorite_action == "titjob":
-                                $ EmmaX.change_stat("love", 90, 5)
-                                $ EmmaX.change_stat("lust", 80, 7)
+                                call change_Girl_stat(EmmaX, "love", 90, 5)
+                                call change_Girl_stat(EmmaX, "lust", 80, 7)
                                 ch_e "I really enjoy it too. . ."
                             elif EmmaX.action_counter["titjob"] >= 10:
                                 ch_e "I can't imagine why . . ."
@@ -750,11 +750,11 @@ label Emma_SexChat:
 
                             $ EmmaX.change_face("_sly")
                             if EmmaX.player_favorite_action == "footjob":
-                                $ EmmaX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(EmmaX, "lust", 80, 5)
                                 ch_e "Yes, so you've said. . ."
                             elif EmmaX.favorite_action == "footjob":
-                                $ EmmaX.change_stat("love", 90, 5)
-                                $ EmmaX.change_stat("lust", 80, 7)
+                                call change_Girl_stat(EmmaX, "love", 90, 5)
+                                call change_Girl_stat(EmmaX, "lust", 80, 7)
                                 ch_e "It certainly is a diversion. . ."
                             elif EmmaX.action_counter["footjob"] >= 10:
                                 ch_e "Yes, it certainly is a workout . . ."
@@ -769,11 +769,11 @@ label Emma_SexChat:
 
                             $ EmmaX.change_face("_sly")
                             if EmmaX.player_favorite_action == "handjob":
-                                $ EmmaX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(EmmaX, "lust", 80, 5)
                                 ch_e "Yes, so you've said. . ."
                             if EmmaX.favorite_action == "handjob":
-                                $ EmmaX.change_stat("love", 90, 5)
-                                $ EmmaX.change_stat("lust", 80, 7)
+                                call change_Girl_stat(EmmaX, "love", 90, 5)
+                                call change_Girl_stat(EmmaX, "lust", 80, 7)
                                 ch_e "It certainly is a diversion. . ."
                             elif EmmaX.action_counter["handjob"] >= 10:
                                 ch_e "Yes, it certainly is a workout . . ."
@@ -789,11 +789,11 @@ label Emma_SexChat:
                             $ counter = EmmaX.action_counter["fondle_breasts"]+ EmmaX.action_counter["fondle_thighs"]+ EmmaX.action_counter["suck_breasts"] + EmmaX.action_counter["hotdog"]
                             $ EmmaX.change_face("_sly")
                             if EmmaX.player_favorite_action == "fondle":
-                                $ EmmaX.change_stat("lust", 80, 3)
+                                call change_Girl_stat(EmmaX, "lust", 80, 3)
                                 ch_e "I've heard that before. . ."
                             elif EmmaX.favorite_action in ("hotdog","suck_breasts","fondle_breasts","fondle_thighs"):
-                                $ EmmaX.change_stat("love", 90, 5)
-                                $ EmmaX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(EmmaX, "love", 90, 5)
+                                call change_Girl_stat(EmmaX, "lust", 80, 5)
                                 ch_e "You do have a way with my body . ."
                             elif not counter:
                                 $ EmmaX.change_face("_perplexed")
@@ -807,11 +807,11 @@ label Emma_SexChat:
 
                             $ EmmaX.change_face("_sly")
                             if EmmaX.player_favorite_action == "kiss":
-                                $ EmmaX.change_stat("love", 90, 3)
+                                call change_Girl_stat(EmmaX, "love", 90, 3)
                                 ch_e "I'm well aware. . ."
                             elif EmmaX.favorite_action == "kiss":
-                                $ EmmaX.change_stat("love", 90, 5)
-                                $ EmmaX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(EmmaX, "love", 90, 5)
+                                call change_Girl_stat(EmmaX, "lust", 80, 5)
                                 ch_e "For some reason, the romantic in me agrees. . ."
                             elif EmmaX.action_counter["kiss"] >= 10:
                                 ch_e "I love kissing you too . . ."
@@ -881,25 +881,25 @@ label Emma_SexChat:
                 else:
                     if approval_check(EmmaX, 1000) and EmmaX.obedience <= EmmaX.love:
                         $ EmmaX.change_face("_bemused")
-                        $ EmmaX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(EmmaX, "obedience", 90, 1)
                         ch_e "Oh, very well. . ."
                         $ EmmaX.traits.remove("vocal")
                     elif approval_check(EmmaX, 700, "O"):
                         $ EmmaX.change_face("_sadside")
-                        $ EmmaX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(EmmaX, "obedience", 90, 1)
                         ch_e "I suppose I could, [EmmaX.player_petname]."
                         $ EmmaX.traits.remove("vocal")
                     elif approval_check(EmmaX, 600):
                         $ EmmaX.change_face("_sly")
-                        $ EmmaX.change_stat("love", 90, -3)
-                        $ EmmaX.change_stat("obedience", 50, -1)
-                        $ EmmaX.change_stat("inhibition", 90, 5)
+                        call change_Girl_stat(EmmaX, "love", 90, -3)
+                        call change_Girl_stat(EmmaX, "obedience", 50, -1)
+                        call change_Girl_stat(EmmaX, "inhibition", 90, 5)
                         ch_e "Don't presume to tell me what to say, [EmmaX.player_petname]."
                     else:
                         $ EmmaX.change_face("_angry")
-                        $ EmmaX.change_stat("love", 90, -5)
-                        $ EmmaX.change_stat("obedience", 60, -3)
-                        $ EmmaX.change_stat("inhibition", 90, 10)
+                        call change_Girl_stat(EmmaX, "love", 90, -5)
+                        call change_Girl_stat(EmmaX, "obedience", 60, -3)
+                        call change_Girl_stat(EmmaX, "inhibition", 90, 10)
                         ch_e "I'll say what I wish, and you'll enjoy it."
 
                     $ EmmaX.daily_history.append("setvocal")
@@ -910,22 +910,22 @@ label Emma_SexChat:
                 else:
                     if approval_check(EmmaX, 1000) and EmmaX.obedience <= EmmaX.love:
                         $ EmmaX.change_face("_sly")
-                        $ EmmaX.change_stat("obedience", 90, 2)
+                        call change_Girl_stat(EmmaX, "obedience", 90, 2)
                         ch_e "Mmmm, I believe I can do that. . ."
                         $ EmmaX.traits.append("vocal")
                     elif approval_check(EmmaX, 700, "O"):
                         $ EmmaX.change_face("_sadside")
-                        $ EmmaX.change_stat("obedience", 90, 2)
+                        call change_Girl_stat(EmmaX, "obedience", 90, 2)
                         ch_e "If that's what you wish, [EmmaX.player_petname]."
                         $ EmmaX.traits.append("vocal")
                     elif approval_check(EmmaX, 600):
                         $ EmmaX.change_face("_sly")
-                        $ EmmaX.change_stat("obedience", 90, 3)
+                        call change_Girl_stat(EmmaX, "obedience", 90, 3)
                         ch_e "I suppose I could, [EmmaX.player_petname]."
                         $ EmmaX.traits.append("vocal")
                     else:
                         $ EmmaX.change_face("_angry")
-                        $ EmmaX.change_stat("inhibition", 90, 5)
+                        call change_Girl_stat(EmmaX, "inhibition", 90, 5)
                         ch_e "If I feel like it."
 
                     $ EmmaX.daily_history.append("setvocal")
@@ -938,25 +938,25 @@ label Emma_SexChat:
                 else:
                     if approval_check(EmmaX, 1000) and EmmaX.obedience <= EmmaX.love:
                         $ EmmaX.change_face("_bemused")
-                        $ EmmaX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(EmmaX, "obedience", 90, 1)
                         ch_e "Oh, so you want to take charge? . ."
                         $ EmmaX.traits.append("passive")
                     elif approval_check(EmmaX, 700, "O"):
                         $ EmmaX.change_face("_sadside")
-                        $ EmmaX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(EmmaX, "obedience", 90, 1)
                         ch_e "I'll await your instruction, [EmmaX.player_petname]."
                         $ EmmaX.traits.append("passive")
                     elif approval_check(EmmaX, 600):
                         $ EmmaX.change_face("_sly")
-                        $ EmmaX.change_stat("love", 90, -3)
-                        $ EmmaX.change_stat("obedience", 50, -1)
-                        $ EmmaX.change_stat("inhibition", 90, 5)
+                        call change_Girl_stat(EmmaX, "love", 90, -3)
+                        call change_Girl_stat(EmmaX, "obedience", 50, -1)
+                        call change_Girl_stat(EmmaX, "inhibition", 90, 5)
                         ch_e "Oh, you don't mean that, [EmmaX.player_petname]."
                     else:
                         $ EmmaX.change_face("_angry")
-                        $ EmmaX.change_stat("love", 90, -5)
-                        $ EmmaX.change_stat("obedience", 60, -3)
-                        $ EmmaX.change_stat("inhibition", 90, 10)
+                        call change_Girl_stat(EmmaX, "love", 90, -5)
+                        call change_Girl_stat(EmmaX, "obedience", 60, -3)
+                        call change_Girl_stat(EmmaX, "inhibition", 90, 10)
                         ch_e "You wish."
 
                     $ EmmaX.daily_history.append("initiative")
@@ -967,22 +967,22 @@ label Emma_SexChat:
                 else:
                     if approval_check(EmmaX, 1000) and EmmaX.obedience <= EmmaX.love:
                         $ EmmaX.change_face("_bemused")
-                        $ EmmaX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(EmmaX, "obedience", 90, 1)
                         ch_e "Oh, you know that I will. . ."
                         $ EmmaX.traits.remove("passive")
                     elif approval_check(EmmaX, 700, "O"):
                         $ EmmaX.change_face("_sadside")
-                        $ EmmaX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(EmmaX, "obedience", 90, 1)
                         ch_e "I can do that, [EmmaX.player_petname]."
                         $ EmmaX.traits.remove("passive")
                     elif approval_check(EmmaX, 600):
                         $ EmmaX.change_face("_sly")
-                        $ EmmaX.change_stat("obedience", 90, 3)
+                        call change_Girl_stat(EmmaX, "obedience", 90, 3)
                         ch_e "I suppose I might, [EmmaX.player_petname]."
                         $ EmmaX.traits.remove("passive")
                     else:
                         $ EmmaX.change_face("_angry")
-                        $ EmmaX.change_stat("inhibition", 90, 5)
+                        call change_Girl_stat(EmmaX, "inhibition", 90, 5)
                         ch_e "We'll see."
 
                     $ EmmaX.daily_history.append("initiative")
@@ -1278,8 +1278,8 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
             menu:
                 extend ""
                 "It was a total accident! I promise!":
-                    $ EmmaX.change_stat("love", 50, 5)
-                    $ EmmaX.change_stat("love", 90, 2)
+                    call change_Girl_stat(EmmaX, "love", 50, 5)
+                    call change_Girl_stat(EmmaX, "love", 90, 2)
                     if approval_check(EmmaX, 1000):
                         $ EmmaX.change_face("_sly", 1)
                         ch_e "Oh? so I can't count on a repeat performance?"
@@ -1287,34 +1287,34 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
                         $ EmmaX.change_face("_smile")
                         ch_e "It happens, just don't make a habit of it."
                 "I only have eyes for you.":
-                    $ EmmaX.change_stat("obedience", 40, 5)
+                    call change_Girl_stat(EmmaX, "obedience", 40, 5)
                     if approval_check(EmmaX, 1000) or approval_check(EmmaX, 700, "L"):
-                        $ EmmaX.change_stat("love", 90, 3)
+                        call change_Girl_stat(EmmaX, "love", 90, 3)
                         $ EmmaX.change_face("_sly", 1)
                         ch_e "Oh, I'm sure that's true. . ."
                         ch_e "It is nice to hear though."
                     else:
-                        $ EmmaX.change_stat("love", 70, -5)
+                        call change_Girl_stat(EmmaX, "love", 70, -5)
                         $ EmmaX.change_face("_angry", eyes = "_side")
                         ch_e "I suppose it's better than being stalked by one-eye over there."
                 "Totally on purpose. I regret nothing.":
                     if approval_check(EmmaX, 1200):
-                        $ EmmaX.change_stat("love", 90, 3)
-                        $ EmmaX.change_stat("obedience", 70, 10)
-                        $ EmmaX.change_stat("inhibition", 50, 5)
+                        call change_Girl_stat(EmmaX, "love", 90, 3)
+                        call change_Girl_stat(EmmaX, "obedience", 70, 10)
+                        call change_Girl_stat(EmmaX, "inhibition", 50, 5)
                         $ EmmaX.change_face("_sly", 1)
                         ch_e "Welll. . . I suppose I can appreciate your honesty."
                         $ EmmaX.change_face("_sly", 1, eyes = "_side")
                         ch_e ". . .if not for your lack of follow-through."
                     elif approval_check(EmmaX, 800):
-                        $ EmmaX.change_stat("obedience", 60, 5)
-                        $ EmmaX.change_stat("inhibition", 50, 5)
+                        call change_Girl_stat(EmmaX, "obedience", 60, 5)
+                        call change_Girl_stat(EmmaX, "inhibition", 50, 5)
                         $ EmmaX.change_face("_perplexed",2)
                         ch_e "Hmm? I suppose I can't blame you for that."
                     else:
-                        $ EmmaX.change_stat("love", 50, -10)
-                        $ EmmaX.change_stat("love", 80, -10)
-                        $ EmmaX.change_stat("obedience", 50, 10)
+                        call change_Girl_stat(EmmaX, "love", 50, -10)
+                        call change_Girl_stat(EmmaX, "love", 80, -10)
+                        call change_Girl_stat(EmmaX, "obedience", 50, 10)
                         $ EmmaX.change_face("_angry")
                         ch_e "Unexpectedly honest, but still unacceptable."
 
@@ -1335,8 +1335,8 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
                 $ EmmaX.change_face("_sly",2)
                 ch_e "They were a bit simplistic, but certainly inspirational."
             "Good. You looked like you could use to learn a thing or two from them.":
-                $ EmmaX.change_stat("love", 90, 3)
-                $ EmmaX.change_stat("inhibition", 50, 10)
+                call change_Girl_stat(EmmaX, "love", 90, 3)
+                call change_Girl_stat(EmmaX, "inhibition", 50, 10)
                 $ EmmaX.change_face("_sly")
                 ch_e "Oh, [EmmaX.player_petname], the things I could teach those authors would leave them in the hospital."
         $ EmmaX.blushing = "_blush1"
@@ -1369,20 +1369,20 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
             menu:
                 extend ""
                 "Well, there's always more where that came from.":
-                    $ EmmaX.change_stat("love", 90, 5)
-                    $ EmmaX.change_stat("inhibition", 60, 10)
+                    call change_Girl_stat(EmmaX, "love", 90, 5)
+                    call change_Girl_stat(EmmaX, "inhibition", 60, 10)
                     $ EmmaX.change_face("_sly")
                     ch_e "I'll have to take you up on that."
                 "I'm glad it measured up to all those other guys.":
                     if approval_check(EmmaX, 300, "I") or not approval_check(EmmaX, 800):
-                        $ EmmaX.change_stat("obedience", 60, 10)
-                        $ EmmaX.change_stat("inhibition", 50, 10)
+                        call change_Girl_stat(EmmaX, "obedience", 60, 10)
+                        call change_Girl_stat(EmmaX, "inhibition", 50, 10)
                         $ EmmaX.change_face("_smile", 1)
                         ch_e "Oh, it certainly managed that."
                     else:
-                        $ EmmaX.change_stat("love", 80, -2)
-                        $ EmmaX.change_stat("obedience", 70, 10)
-                        $ EmmaX.change_stat("inhibition", 50, 5)
+                        call change_Girl_stat(EmmaX, "love", 80, -2)
+                        call change_Girl_stat(EmmaX, "obedience", 70, 10)
+                        call change_Girl_stat(EmmaX, "inhibition", 50, 5)
                         $ EmmaX.change_face("_sly")
                         ch_e "Are you trying to imply something about my. . . experience?"
             $ EmmaX.blushing = "_blush1"
@@ -1436,8 +1436,8 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
         $ EmmaX.change_face("_sly", 1, eyes = "_down")
         ch_e "That cock you've got is certainly an interesting specimen."
         $ EmmaX.change_face("_bemused", 1)
-        $ EmmaX.change_stat("love", 50, 5)
-        $ EmmaX.change_stat("love", 90, 10)
+        call change_Girl_stat(EmmaX, "love", 50, 5)
+        call change_Girl_stat(EmmaX, "love", 90, 10)
         $ EmmaX.history.remove("seenpeen")
     elif Options[0] == "topless":
         $ EmmaX.change_face("_sly", 1)
@@ -1477,9 +1477,9 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
             ch_e "With that show we put on the other day, I doubt we can keep rumors from spreading."
         ch_e ". . ."
         $ EmmaX.change_face("_sly")
-        $ EmmaX.change_stat("obedience", 70, 10)
-        $ EmmaX.change_stat("inhibition", 60, 10)
-        $ EmmaX.change_stat("inhibition", 90, 10)
+        call change_Girl_stat(EmmaX, "obedience", 70, 10)
+        call change_Girl_stat(EmmaX, "inhibition", 60, 10)
+        call change_Girl_stat(EmmaX, "inhibition", 90, 10)
         ch_e "I suppose we'll just have to spread some more. . ."
         $ EmmaX.had_chat.append("public")
 
@@ -1793,8 +1793,8 @@ label Emma_Rename:
             if approval_check(EmmaX, 1000, "LI"):
                 $ EmmaX.change_face("_sly", 1)
                 if "namechange" not in EmmaX.daily_history:
-                    $ EmmaX.change_stat("obedience", 70, 2)
-                    $ EmmaX.change_stat("inhibition", 70, 3)
+                    call change_Girl_stat(EmmaX, "obedience", 70, 2)
+                    call change_Girl_stat(EmmaX, "inhibition", 70, 3)
                 ch_e "Naughty boy. . ."
             else:
                 ch_e "I suppose we could keep things professional. . ."
@@ -1805,9 +1805,9 @@ label Emma_Rename:
                 ch_e "Where have you heard that-"
                 $ EmmaX.change_face("_sly", 2)
                 if "namechange" not in EmmaX.daily_history:
-                    $ EmmaX.change_stat("love", 80, 2)
-                    $ EmmaX.change_stat("obedience", 70, 2)
-                    $ EmmaX.change_stat("inhibition", 80, 3)
+                    call change_Girl_stat(EmmaX, "love", 80, 2)
+                    call change_Girl_stat(EmmaX, "obedience", 70, 2)
+                    call change_Girl_stat(EmmaX, "inhibition", 80, 3)
                 ch_e "Oh, you dirty, dirty boy. . ."
             else:
                 $ EmmaX.change_face("_confused")
@@ -1999,57 +1999,57 @@ label Emma_Summon(approval_bonus=approval_bonus):
             menu:
                 extend ""
                 "Sure, I'll be right there.":
-                    $ EmmaX.change_stat("love", 55, 1)
-                    $ EmmaX.change_stat("inhibition", 30, 1)
+                    call change_Girl_stat(EmmaX, "love", 55, 1)
+                    call change_Girl_stat(EmmaX, "inhibition", 30, 1)
                     ch_e "I'll be waiting."
                     $ line = "go to"
                 "Nah, we can talk later.":
 
-                    $ EmmaX.change_stat("obedience", 50, 1)
-                    $ EmmaX.change_stat("obedience", 30, 2)
+                    call change_Girl_stat(EmmaX, "obedience", 50, 1)
+                    call change_Girl_stat(EmmaX, "obedience", 30, 2)
                     ch_e "Very well."
                 "Could you please come visit me? I'm lonely.":
 
                     if approval_check(EmmaX, 600, "L") or approval_check(EmmaX, 1400):
-                        $ EmmaX.change_stat("love", 70, 1)
-                        $ EmmaX.change_stat("obedience", 50, 1)
+                        call change_Girl_stat(EmmaX, "love", 70, 1)
+                        call change_Girl_stat(EmmaX, "obedience", 50, 1)
                         $ line = "lonely"
                     else:
-                        $ EmmaX.change_stat("inhibition", 30, 1)
+                        call change_Girl_stat(EmmaX, "inhibition", 30, 1)
                         $ line = "no"
                 "I said come over here.":
 
                     if approval_check(EmmaX, 600, "O"):
 
-                        $ EmmaX.change_stat("love", 50, 1, 1)
-                        $ EmmaX.change_stat("love", 40, -1)
-                        $ EmmaX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(EmmaX, "love", 50, 1, 1)
+                        call change_Girl_stat(EmmaX, "love", 40, -1)
+                        call change_Girl_stat(EmmaX, "obedience", 90, 1)
                         $ line = "command"
 
                     elif D20 >= 7 and approval_check(EmmaX, 1400):
 
-                        $ EmmaX.change_stat("love", 70, -2)
-                        $ EmmaX.change_stat("love", 90, -1)
-                        $ EmmaX.change_stat("obedience", 50, 2)
-                        $ EmmaX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(EmmaX, "love", 70, -2)
+                        call change_Girl_stat(EmmaX, "love", 90, -1)
+                        call change_Girl_stat(EmmaX, "obedience", 50, 2)
+                        call change_Girl_stat(EmmaX, "obedience", 90, 1)
                         ch_e "Ok, fine, [EmmaX.player_petname]."
                         $ line = "yes"
 
                     elif approval_check(EmmaX, 200, "O"):
 
-                        $ EmmaX.change_stat("love", 70, -4)
-                        $ EmmaX.change_stat("love", 90, -2)
+                        call change_Girl_stat(EmmaX, "love", 70, -4)
+                        call change_Girl_stat(EmmaX, "love", 90, -2)
                         ch_e "Who do you think is in charge here?!"
-                        $ EmmaX.change_stat("inhibition", 40, 2)
-                        $ EmmaX.change_stat("inhibition", 60, 1)
-                        $ EmmaX.change_stat("obedience", 70, -2)
+                        call change_Girl_stat(EmmaX, "inhibition", 40, 2)
+                        call change_Girl_stat(EmmaX, "inhibition", 60, 1)
+                        call change_Girl_stat(EmmaX, "obedience", 70, -2)
                         ch_e "You'd better hope you don't find me here."
                     else:
 
-                        $ EmmaX.change_stat("inhibition", 30, 1)
-                        $ EmmaX.change_stat("inhibition", 50, 1)
-                        $ EmmaX.change_stat("love", 50, -1, 1)
-                        $ EmmaX.change_stat("obedience", 70, -1)
+                        call change_Girl_stat(EmmaX, "inhibition", 30, 1)
+                        call change_Girl_stat(EmmaX, "inhibition", 50, 1)
+                        call change_Girl_stat(EmmaX, "love", 50, -1, 1)
+                        call change_Girl_stat(EmmaX, "obedience", 70, -1)
                         $ line = "no"
     else:
 
@@ -2203,68 +2203,70 @@ label Emma_Leave:
 
     $ D20 = renpy.random.randint(1, 20)
 
+    $ line = None
+
     menu:
         extend ""
         "Sure, I'll catch up.":
             if "followed" not in EmmaX.recent_history:
-                $ EmmaX.change_stat("love", 55, 1)
-                $ EmmaX.change_stat("inhibition", 30, 1)
+                call change_Girl_stat(EmmaX, "love", 55, 1)
+                call change_Girl_stat(EmmaX, "inhibition", 30, 1)
 
             $ line = "go to"
         "Nah, we can talk later.":
             if "followed" not in EmmaX.recent_history:
-                $ EmmaX.change_stat("obedience", 50, 1)
-                $ EmmaX.change_stat("obedience", 30, 2)
+                call change_Girl_stat(EmmaX, "obedience", 50, 1)
+                call change_Girl_stat(EmmaX, "obedience", 30, 2)
 
             ch_e "Very well, I'll talk to you later."
         "Could you please stay with me? I'll get lonely.":
             if approval_check(EmmaX, 600, "L") or approval_check(EmmaX, 1400):
                 if "followed" not in EmmaX.recent_history:
-                    $ EmmaX.change_stat("love", 70, 1)
-                    $ EmmaX.change_stat("obedience", 50, 1)
+                    call change_Girl_stat(EmmaX, "love", 70, 1)
+                    call change_Girl_stat(EmmaX, "obedience", 50, 1)
 
                 $ line = "lonely"
             else:
                 if "followed" not in EmmaX.recent_history:
-                    $ EmmaX.change_stat("inhibition", 30, 1)
+                    call change_Girl_stat(EmmaX, "inhibition", 30, 1)
 
                 $ line = "no"
         "No, stay here.":
             if approval_check(EmmaX, 600, "O"):
                 if "followed" not in EmmaX.recent_history:
                     if EmmaX.love >= 50:
-                        $ EmmaX.change_stat("love", 90, 1)
-                    $ EmmaX.change_stat("love", 40, -1)
-                    $ EmmaX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(EmmaX, "love", 90, 1)
+                    call change_Girl_stat(EmmaX, "love", 40, -1)
+                    call change_Girl_stat(EmmaX, "obedience", 90, 1)
 
                 $ line = "command"
             elif D20 >= 7 and approval_check(EmmaX, 1400):
                 if "followed" not in EmmaX.recent_history:
-                    $ EmmaX.change_stat("love", 70, -2)
-                    $ EmmaX.change_stat("love", 90, -1)
-                    $ EmmaX.change_stat("obedience", 50, 2)
-                    $ EmmaX.change_stat("obedience", 90, 1)
+                    call change_Girl_stat(EmmaX, "love", 70, -2)
+                    call change_Girl_stat(EmmaX, "love", 90, -1)
+                    call change_Girl_stat(EmmaX, "obedience", 50, 2)
+                    call change_Girl_stat(EmmaX, "obedience", 90, 1)
 
                 ch_e "I guess it wasn't that important. . ."
 
                 $ line = "yes"
             elif approval_check(EmmaX, 200, "O"):
                 if "followed" not in EmmaX.recent_history:
-                    $ EmmaX.change_stat("love", 70, -4)
-                    $ EmmaX.change_stat("love", 90, -2)
+                    call change_Girl_stat(EmmaX, "love", 70, -4)
+                    call change_Girl_stat(EmmaX, "love", 90, -2)
 
                 ch_e "Does that work with your little strumpets?"
 
                 if "followed" not in EmmaX.recent_history:
-                    $ EmmaX.change_stat("inhibition", 40, 2)
-                    $ EmmaX.change_stat("inhibition", 60, 1)
-                    $ EmmaX.change_stat("obedience", 70, -2)
+                    call change_Girl_stat(EmmaX, "inhibition", 40, 2)
+                    call change_Girl_stat(EmmaX, "inhibition", 60, 1)
+                    call change_Girl_stat(EmmaX, "obedience", 70, -2)
             else:
                 if "followed" not in EmmaX.recent_history:
-                    $ EmmaX.change_stat("inhibition", 30, 1)
-                    $ EmmaX.change_stat("inhibition", 50, 1)
-                    $ EmmaX.change_stat("love", 50, -1, 1)
-                    $ EmmaX.change_stat("obedience", 70, -1)
+                    call change_Girl_stat(EmmaX, "inhibition", 30, 1)
+                    call change_Girl_stat(EmmaX, "inhibition", 50, 1)
+                    call change_Girl_stat(EmmaX, "love", 50, -1, 1)
+                    call change_Girl_stat(EmmaX, "obedience", 70, -1)
 
                 $ line = "no"
 

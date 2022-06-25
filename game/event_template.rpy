@@ -40,7 +40,7 @@ label event_template:
     $ EmmaX.change_face("_sly", mouth = "_sad")
 
     # this is the command to raise or lower stats. the first argument is the stat to raise and the third argument is the amount to raise by
-    $ EmmaX.change_stat("love", 90, -10)
+    call change_Girl_stat(EmmaX, "love", 90, -10)
 
     # you can also directly raise a stat, but this will not be accompanied by a notification
     $ EmmaX.lust += 5
@@ -75,26 +75,26 @@ label event_template:
         "Yes?":
 
             # this indicates what should happen if this menu option is chosen
-            $ EmmaX.change_stat("love", 70, 10)
+            call change_Girl_stat(EmmaX, "love", 70, 10)
             $ EmmaX.change_face("_normal")
         "I've got places to be.":
-            $ EmmaX.change_stat("love", 70, -15)
-            $ EmmaX.change_stat("obedience", 80, 10)
+            call change_Girl_stat(EmmaX, "love", 70, -15)
+            call change_Girl_stat(EmmaX, "obedience", 80, 10)
             $ EmmaX.change_face("_angry")
 
             ch_e "[Player.name], do not take that attitude with me."
             "She places herself in the doorway, preventing you from leaving."
         "For such a sexy teacher? I've got some time.":
-            $ EmmaX.change_stat("love", 70, -5)
-            $ EmmaX.change_stat("obedience", 80, 5)
+            call change_Girl_stat(EmmaX, "love", 70, -5)
+            call change_Girl_stat(EmmaX, "obedience", 80, 5)
             $ EmmaX.change_face("_angry", 1, mouth = "_smirk")
 
             ch_e "That's rather. . . inappropriate."
 
             $ EmmaX.change_face("_bemused", mouth = "_smile")
-            $ EmmaX.change_stat("love", 70, 20)
-            $ EmmaX.change_stat("lust", 50, 5)
-            $ EmmaX.change_stat("inhibition", 25, 15)
+            call change_Girl_stat(EmmaX, "love", 70, 20)
+            call change_Girl_stat(EmmaX, "lust", 50, 5)
+            call change_Girl_stat(EmmaX, "inhibition", 25, 15)
 
             ch_e "But also obvious, so I can't criticize you too harshly."
 
@@ -104,16 +104,16 @@ label event_template:
     if Player.reputation <= 200:
 
         # this only happens if Zero's reputation is less than or equal to 200, for example
-        $ EmmaX.change_stat("obedience", 80, 10)
-        $ EmmaX.change_stat("inhibition", 90, 15)
-        $ EmmaX.change_stat("lust", 50, 5)
+        call change_Girl_stat(EmmaX, "obedience", 80, 10)
+        call change_Girl_stat(EmmaX, "inhibition", 90, 15)
+        call change_Girl_stat(EmmaX, "lust", 50, 5)
         $ EmmaX.change_face("_angry", brows = "_confused")
 
         ch_e "You seem to be a bit of a scoundrel. . ."
     elif Player.reputation < 600:
-        $ EmmaX.change_stat("obedience", 80, 5)
-        $ EmmaX.change_stat("inhibition", 90, 5)
-        $ EmmaX.change_stat("lust", 50, 5)
+        call change_Girl_stat(EmmaX, "obedience", 80, 5)
+        call change_Girl_stat(EmmaX, "inhibition", 90, 5)
+        call change_Girl_stat(EmmaX, "lust", 50, 5)
         $ EmmaX.change_face("_sly")
 
         ch_e "You have quite a reputation around campus. . ."
@@ -123,18 +123,18 @@ label event_template:
         ch_e "You have managed a reasonable reputation. . ."
 
     if total_SEXP >= 110 or (len(Player.Harem) >= 2 and not simulation):
-        $ EmmaX.change_stat("love", 70, 5)
-        $ EmmaX.change_stat("obedience", 80, 10)
-        $ EmmaX.change_stat("inhibition", 200, 10)
-        $ EmmaX.change_stat("lust", 50, 5)
+        call change_Girl_stat(EmmaX, "love", 70, 5)
+        call change_Girl_stat(EmmaX, "obedience", 80, 10)
+        call change_Girl_stat(EmmaX, "inhibition", 200, 10)
+        call change_Girl_stat(EmmaX, "lust", 50, 5)
         $ EmmaX.change_face("_sly")
 
         ch_e ". . . and a number of conquests to your name. . ."
     elif total_SEXP >= 60:
-        $ EmmaX.change_stat("love", 70, 5)
-        $ EmmaX.change_stat("obedience", 80, 5)
-        $ EmmaX.change_stat("inhibition", 200, 5)
-        $ EmmaX.change_stat("lust", 50, 2)
+        call change_Girl_stat(EmmaX, "love", 70, 5)
+        call change_Girl_stat(EmmaX, "obedience", 80, 5)
+        call change_Girl_stat(EmmaX, "inhibition", 200, 5)
+        call change_Girl_stat(EmmaX, "lust", 50, 2)
         $ EmmaX.change_face("_smile")
 
         ch_e ". . . and are not without some romantic entanglements. . ."
@@ -144,8 +144,8 @@ label event_template:
         ch_e ". . .though I haven't heard of much of a romantic life. . ."
 
     if Player.level >= 3:
-        $ EmmaX.change_stat("love", 70, 5)
-        $ EmmaX.change_stat("obedience", 80, 5)
+        call change_Girl_stat(EmmaX, "love", 70, 5)
+        call change_Girl_stat(EmmaX, "obedience", 80, 5)
         $ EmmaX.change_face("_smile")
 
         ch_e "But your grades have been excellent."
@@ -154,8 +154,8 @@ label event_template:
 
         ch_e "But your grades have been marginal at best."
     else:
-        $ EmmaX.change_stat("love", 70, -5)
-        $ EmmaX.change_stat("lust", 10, -5, 1)
+        call change_Girl_stat(EmmaX, "love", 70, -5)
+        call change_Girl_stat(EmmaX, "lust", 10, -5, 1)
         $ EmmaX.change_face("_normal", brows = "_sad")
 
         ch_e "But you haven't been living up to your potential in class."
@@ -184,21 +184,21 @@ label event_template:
     menu:
         extend ""
         "I imagine it would.":
-            $ EmmaX.change_stat("love", 70, 5)
-            $ EmmaX.change_stat("inhibition", 200, 5)
+            call change_Girl_stat(EmmaX, "love", 70, 5)
+            call change_Girl_stat(EmmaX, "inhibition", 200, 5)
             $ EmmaX.change_face("_normal")
 
             ch_e "Hmm, yes."
         "Huh.":
-            $ EmmaX.change_stat("love", 70, -1)
-            $ EmmaX.change_stat("obedience", 80, -1)
+            call change_Girl_stat(EmmaX, "love", 70, -1)
+            call change_Girl_stat(EmmaX, "obedience", 80, -1)
             $ EmmaX.change_face("_confused", mouth = "_normal")
 
             ch_e ". . . yes."
 
             $ EmmaX.change_face("_normal")
         "So you can't see what I'm picturing right now?":
-            $ EmmaX.change_stat("obedience", 80, 5)
+            call change_Girl_stat(EmmaX, "obedience", 80, 5)
             $ EmmaX.change_face("_bemused")
 
             # you can have little mini-animations by setting the sprite to do something, pausing, and then changing the sprite
@@ -209,9 +209,9 @@ label event_template:
             "She glances downward."
 
             $ EmmaX.change_face("_sly")
-            $ EmmaX.change_stat("love", 70, 10)
-            $ EmmaX.change_stat("inhibition", 200, 10)
-            $ EmmaX.change_stat("lust", 50, 15)
+            call change_Girl_stat(EmmaX, "love", 70, 10)
+            call change_Girl_stat(EmmaX, "inhibition", 200, 10)
+            call change_Girl_stat(EmmaX, "lust", 50, 15)
 
             ch_e "I can't read your mind, but I'm not blind, [EmmaX.player_petname]."
 
@@ -221,13 +221,13 @@ label event_template:
     menu:
         extend ""
         "I'd be ok with that.":
-            $ EmmaX.change_stat("love", 70, 5)
-            $ EmmaX.change_stat("inhibition", 200, 5)
+            call change_Girl_stat(EmmaX, "love", 70, 5)
+            call change_Girl_stat(EmmaX, "inhibition", 200, 5)
             $ EmmaX.change_face("_smile")
 
             ch_e "Excellent, I look forward to it."
         "I don't know if you should experiment on your students.":
-            $ EmmaX.change_stat("love", 70, -5)
+            call change_Girl_stat(EmmaX, "love", 70, -5)
             $ EmmaX.change_face("_normal", mouth = "_sad")
 
             ch_e "There's nothing for you to worry about."
@@ -237,8 +237,8 @@ label event_template:
             ch_e "I'll be. . . gentle."
         "If it means spending more time with you. . .":
             if approval_check(EmmaX, 295, "L"):
-                $ EmmaX.change_stat("inhibition", 200, 5)
-                $ EmmaX.change_stat("lust", 50, 5)
+                call change_Girl_stat(EmmaX, "inhibition", 200, 5)
+                call change_Girl_stat(EmmaX, "lust", 50, 5)
                 $ EmmaX.change_face("_sly")
 
                 ch_e "Oh, I believe we'll be spending a good deal of time together. . ."
@@ -250,9 +250,9 @@ label event_template:
                 $ EmmaX.change_face("_normal")
         "What do I get out of it?":
             if not approval_check(EmmaX, 290, "L"):
-                $ EmmaX.change_stat("love", 70, -5)
-                $ EmmaX.change_stat("obedience", 80, 5)
-                $ EmmaX.change_stat("inhibition", 200, 5)
+                call change_Girl_stat(EmmaX, "love", 70, -5)
+                call change_Girl_stat(EmmaX, "obedience", 80, 5)
+                call change_Girl_stat(EmmaX, "inhibition", 200, 5)
                 $ EmmaX.change_face("_angry")
 
                 ch_e "You'll stand some chance of passing this class, [EmmaX.player_petname]."
@@ -267,21 +267,21 @@ label event_template:
                     menu:
                         extend ""
                         "I guess if it helps your \"research.\" . .":
-                            $ EmmaX.change_stat("love", 70, 10)
-                            $ EmmaX.change_stat("obedience", 80, -5)
+                            call change_Girl_stat(EmmaX, "love", 70, 10)
+                            call change_Girl_stat(EmmaX, "obedience", 80, -5)
                             $ EmmaX.change_face("_smile")
 
                             ch_e "I'm glad to see that you can be reasonable."
                         "Spending more time with you would be plenty. . .":
-                            $ EmmaX.change_stat("love", 70, 5)
-                            $ EmmaX.change_stat("obedience", 80, 5)
-                            $ EmmaX.change_stat("lust", 20, 5)
+                            call change_Girl_stat(EmmaX, "love", 70, 5)
+                            call change_Girl_stat(EmmaX, "obedience", 80, 5)
+                            call change_Girl_stat(EmmaX, "lust", 20, 5)
                             $ EmmaX.change_face("_sly")
 
                             ch_e "It certainly should be."
                         "A kiss?":
-                            $ EmmaX.change_stat("love", 70, -5)
-                            $ EmmaX.change_stat("obedience", 80, 10)
+                            call change_Girl_stat(EmmaX, "love", 70, -5)
+                            call change_Girl_stat(EmmaX, "obedience", 80, 10)
                             $ EmmaX.change_face("_surprised", 1, mouth = "_surprised")
 
                             ch_e "[EmmaX.player_petname], that is incredibly inappropriate!"
@@ -292,30 +292,30 @@ label event_template:
 
                             if approval_check(EmmaX, 220, "I"):
                                 $ EmmaX.change_face("_sly", 1)
-                                $ EmmaX.change_stat("love", 70, 5)
-                                $ EmmaX.change_stat("obedience", 80, 5)
-                                $ EmmaX.change_stat("inhibition", 200, 5)
-                                $ EmmaX.change_stat("lust", 50, 5)
+                                call change_Girl_stat(EmmaX, "love", 70, 5)
+                                call change_Girl_stat(EmmaX, "obedience", 80, 5)
+                                call change_Girl_stat(EmmaX, "inhibition", 200, 5)
+                                call change_Girl_stat(EmmaX, "lust", 50, 5)
 
                                 ch_e ". . .never. . ."
                         "I think you know what I'd want. . .":
-                            $ EmmaX.change_stat("obedience", 80, 5)
-                            $ EmmaX.change_stat("lust", 50, 5)
+                            call change_Girl_stat(EmmaX, "obedience", 80, 5)
+                            call change_Girl_stat(EmmaX, "lust", 50, 5)
                             $ EmmaX.change_face("_sly", brows = "_angry")
 
                             ch_e "Yes, I imagine that I do. . ."
 
                             if approval_check(EmmaX, 220, "I"):
                                 $ EmmaX.change_face("_sly", 1)
-                                $ EmmaX.change_stat("love", 70, 5)
-                                $ EmmaX.change_stat("obedience", 80, 5)
-                                $ EmmaX.change_stat("inhibition", 200, 10)
-                                $ EmmaX.change_stat("lust", 50, 5)
+                                call change_Girl_stat(EmmaX, "love", 70, 5)
+                                call change_Girl_stat(EmmaX, "obedience", 80, 5)
+                                call change_Girl_stat(EmmaX, "inhibition", 200, 10)
+                                call change_Girl_stat(EmmaX, "lust", 50, 5)
 
                                 ch_e "And we may be able to come to some sort of \"mutually beneficial\" arrangement."
                             else:
                                 $ EmmaX.change_face("_bemused", 0)
-                                $ EmmaX.change_stat("love", 70, -5)
+                                call change_Girl_stat(EmmaX, "love", 70, -5)
 
                                 ch_e "But figuring out whether I'm correct is the entire point here."
                 else:
@@ -325,9 +325,9 @@ label event_template:
 
                     if approval_check(EmmaX, 300, "L"):
                         $ EmmaX.change_face("_sly")
-                        $ EmmaX.change_stat("obedience", 80, 5)
-                        $ EmmaX.change_stat("inhibition", 200, 5)
-                        $ EmmaX.change_stat("lust", 50, 5)
+                        call change_Girl_stat(EmmaX, "obedience", 80, 5)
+                        call change_Girl_stat(EmmaX, "inhibition", 200, 5)
+                        call change_Girl_stat(EmmaX, "lust", 50, 5)
 
                         ch_e "-and maybe if you're good. . ."
                     else:

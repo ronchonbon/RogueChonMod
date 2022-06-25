@@ -17,7 +17,10 @@ label prologue:
     "You've arrived in the early evening at the Xavier Institute, where you've been promised a new home."
     "Things have been tough for mutants in the years since Apocalypse's fall, but this sounds like it might be a good deal."
 
-    show Xavier_sprite at sprite_location(stage_left) with easeinleft
+    call get_color_transform
+    $ color_transform = _return
+
+    show Xavier_sprite at sprite_location(stage_left), color_transform with easeinleft
 
     ch_x "Welcome to the Xavier Institute for Higher Learning. This is a home for all mutants to learn and grow."
     ch_x "My name is Charles Xavier, and I have dedicated my life to helping other mutants such as yourself."
@@ -33,7 +36,7 @@ label prologue:
     $ RogueX.location = Player.location
     $ RogueX.change_face("_surprised")
 
-    call show_Girl(RogueX, x_position = stage_far_far_right, transition = easeinright)
+    call show_Girl(RogueX, x_position = stage_far_far_right, color_transform = color_transform, transition = easeinright)
     call shift_focus(RogueX)
 
     ch_r "What's that Prof? This new kid can negate mutant powers?"
@@ -63,7 +66,7 @@ label prologue:
     menu:
         ch_r "A pleasure ta meet ya, [RogueX.player_petname]. Let me give ya the lay of the place."
         "It's nice to meet you too.":
-            $ RogueX.change_stat("love", 200, 20)
+            call change_Girl_stat(RogueX, "love", 200, 20)
             $ RogueX.change_face("_smile", 1)
 
             ch_r "Oh, a gentleman. I think we'll really get along."
@@ -72,7 +75,7 @@ label prologue:
 
             ch_r "Ok, so let me show ya around. . ."
         "The \"lay\" of the place, eh?":
-            $ RogueX.change_stat("love", 200, 10)
+            call change_Girl_stat(RogueX, "love", 200, 10)
             $ RogueX.brows = "_normal"
             $ RogueX.eyes = "_surprised"
             $ RogueX.mouth = "_smile"
@@ -81,12 +84,12 @@ label prologue:
             ch_r "Wha- what? N, no, that's not what I meant! I'm just giving you the campus tour!"
 
             $ RogueX.change_face("_bemused")
-            $ RogueX.change_stat("inhibition", 200, 20)
-            $ RogueX.change_stat("obedience", 200, 20)
+            call change_Girl_stat(RogueX, "inhibition", 200, 20)
+            call change_Girl_stat(RogueX, "obedience", 200, 20)
 
             ch_r "Hmm. . ."
 
-            $ RogueX.change_stat("lust", 90, 3)
+            call change_Girl_stat(RogueX, "lust", 90, 3)
             $ RogueX.change_face("_normal")
             $ RogueX.eyes = "_surprised"
 
@@ -94,14 +97,14 @@ label prologue:
 
             $ RogueX.change_face("_smile", 0)
         "Whatever.":
-            $ RogueX.change_stat("obedience", 200, 20)
+            call change_Girl_stat(RogueX, "obedience", 200, 20)
             $ RogueX.change_face("_sad")
             $ RogueX.brows = "_normal"
 
             ch_r "Tsk, well ok, let's get started."
         "Screw off.":
-            $ RogueX.change_stat("love", 200, -30)
-            $ RogueX.change_stat("obedience", 200, 30)
+            call change_Girl_stat(RogueX, "love", 200, -30)
+            call change_Girl_stat(RogueX, "obedience", 200, 30)
             $ RogueX.change_face("_angry")
 
             call show_Girl(RogueX, transition = vpunch)
@@ -130,10 +133,10 @@ label tour_start:
         ch_r "Pretty nice, right?"
         "It is with you in it.":
             $ RogueX.blushing = "_blush1"
-            $ RogueX.change_stat("love", 200, 20)
-            $ RogueX.change_stat("lust", 90, 5)
+            call change_Girl_stat(RogueX, "love", 200, 20)
+            call change_Girl_stat(RogueX, "lust", 90, 5)
         "It'll do.":
-            $ RogueX.change_stat("obedience", 200, 10)
+            call change_Girl_stat(RogueX, "obedience", 200, 10)
 
     ch_p "And where do you live?"
 
@@ -178,8 +181,8 @@ label tour_start:
                 $ RogueX.eyes = "_side"
                 $ RogueX.mouth = "_lipbite"
                 $ RogueX.blushing = "_blush1"
-                $ RogueX.change_stat("inhibition", 200, 30)
-                $ RogueX.change_stat("lust", 200, 5)
+                call change_Girl_stat(RogueX, "inhibition", 200, 30)
+                call change_Girl_stat(RogueX, "lust", 200, 5)
 
                 ch_r "Well. . . I suppose it could. . . if one were into such things."
 
@@ -215,7 +218,7 @@ label tour_end:
 
             ch_r ". . ."
 
-            $ RogueX.change_stat("love", 200, -30)
+            call change_Girl_stat(RogueX, "love", 200, -30)
 
     ch_r "Well, you see, my power is the ability to absorb the mutant powers and memories of those I touch."
     ch_r "Only, I still can't really control it. I can't touch people without hurting them, and I might even put them into a coma if I'm not careful."
@@ -228,9 +231,9 @@ label tour_end:
         ch_r "So I was hoping that maybe with your power. . . I could touch you?"
         "Like, a kiss?":
             if RogueX.love >= 500:
-                $ RogueX.change_stat("love", 200, 20)
-                $ RogueX.change_stat("obedience", 200, 30)
-                $ RogueX.change_stat("inhibition", 20, 20)
+                call change_Girl_stat(RogueX, "love", 200, 20)
+                call change_Girl_stat(RogueX, "obedience", 200, 30)
+                call change_Girl_stat(RogueX, "inhibition", 20, 20)
                 $ RogueX.change_face("_surprised", 1)
 
                 ch_r "Well, aren't you fresh."
@@ -246,7 +249,7 @@ label tour_end:
 
                 $ RogueX.change_face("_smile")
             else:
-                $ RogueX.change_stat("love", 200, 30)
+                call change_Girl_stat(RogueX, "love", 200, 30)
                 $ RogueX.change_face("_bemused")
 
                 ch_r "Heh, You'll have to earn that [RogueX.player_petname]."
@@ -257,7 +260,7 @@ label tour_end:
 
                 "She pulls off her glove and touches your face."
         "Ok, be my guest.":
-            $ RogueX.change_stat("love", 200, 30)
+            call change_Girl_stat(RogueX, "love", 200, 30)
             $ RogueX.change_face("_smile")
             $ RogueX.outfit["gloves"] = ""
             $ RogueX.arm_pose = 2
@@ -265,8 +268,8 @@ label tour_end:
 
             "She pulls off her glove and touches your face."
         "No, that's weird.":
-            $ RogueX.change_stat("love", 200, -30)
-            $ RogueX.change_stat("inhibition", 200, 30)
+            call change_Girl_stat(RogueX, "love", 200, -30)
+            call change_Girl_stat(RogueX, "inhibition", 200, 30)
             $ RogueX.change_face("_sad", brows = "_normal")
 
             ch_r "Well I'm just too damned curious, sorry."
@@ -286,9 +289,9 @@ label tour_end:
     menu:
         ch_r "Do you know how long it's been since I've felt human contact without hurting them?"
         "Glad I could help.":
-            $ RogueX.change_stat("love", 200, 10)
+            call change_Girl_stat(RogueX, "love", 200, 10)
         "I'm guessing it's been quite a while.":
-            $ RogueX.change_stat("lust", 200, 5)
+            call change_Girl_stat(RogueX, "lust", 200, 5)
             $ RogueX.change_face("_bemused", 1)
 
             ch_r ". . ."
@@ -327,8 +330,8 @@ label tour_parting:
         "[line]":
             if RogueX.love >= 560:
                 $ RogueX.change_face("_bemused", 1)
-                $ RogueX.change_stat("inhibition", 10, 20)
-                $ RogueX.change_stat("inhibition", 50, 10)
+                call change_Girl_stat(RogueX, "inhibition", 10, 20)
+                call change_Girl_stat(RogueX, "inhibition", 50, 10)
 
                 if simulation:
                     return True
@@ -336,8 +339,8 @@ label tour_parting:
                 call start_action(RogueX, "kiss")
 
                 if "_angry" in RogueX.recent_history:
-                    $ RogueX.change_stat("love", 200, -10)
-                    $ RogueX.change_stat("obedience", 200, 30)
+                    call change_Girl_stat(RogueX, "love", 200, -10)
+                    call change_Girl_stat(RogueX, "obedience", 200, 30)
 
                     ch_r "What the hell, [Player.name]?!"
                     ch_r "Way to take advantage of a girl's feelings there!"
@@ -356,8 +359,8 @@ label tour_parting:
             else:
                 if (RogueX.love >= 530 or RogueX.obedience > 50) and not RogueX.action_counter["kiss"]:
                     $ RogueX.addiction_rate += 1
-                    $ RogueX.change_stat("lust", 200, 5)
-                    $ RogueX.change_stat("love", 200, 10)
+                    call change_Girl_stat(RogueX, "lust", 200, 5)
+                    call change_Girl_stat(RogueX, "love", 200, 10)
                     $ RogueX.action_counter["kiss"] += 1
                     $ RogueX.change_face("_bemused", 1)
 
@@ -384,7 +387,6 @@ label tour_parting:
 
     $ active_Girls.append(RogueX)
 
-    call wait
     jump player_room
 
 label Rogue_first_kiss:
@@ -398,12 +400,12 @@ label Rogue_first_kiss:
     "You lean in and your lips meet [RogueX.name]'s."
 
     $ RogueX.eyes = "_surprised"
-    $ RogueX.change_stat("love", 90, 15)
-    $ RogueX.change_stat("love", 60, 30)
+    call change_Girl_stat(RogueX, "love", 90, 15)
+    call change_Girl_stat(RogueX, "love", 60, 30)
 
     "A slight spark passes between you and her eyes widen with surprise."
 
-    $ RogueX.change_stat("lust", 70, 5)
+    call change_Girl_stat(RogueX, "lust", 70, 5)
 
     ch_r "Wow, [RogueX.player_petname], that was really something. . ."
 
@@ -412,8 +414,8 @@ label Rogue_first_kiss:
     ch_r "Not the kind of zap I'm used to."
 
     $ RogueX.addiction -= 5
-    $ RogueX.change_stat("obedience", 30, 20)
-    $ RogueX.change_stat("inhibition", 30, 30)
+    call change_Girl_stat(RogueX, "obedience", 30, 20)
+    call change_Girl_stat(RogueX, "inhibition", 30, 30)
 
     call show_full_body(RogueX)
 
@@ -463,12 +465,12 @@ label Rogue_BF:
     menu:
         ch_r "Right?"
         "Yeah, it's been great.":
-            $ RogueX.change_stat("love", 200, 20)
+            call change_Girl_stat(RogueX, "love", 200, 20)
         "Yeah, I guess":
-            $ RogueX.change_stat("love", 200, 10)
+            call change_Girl_stat(RogueX, "love", 200, 10)
         "Um, maybe?":
-            $ RogueX.change_stat("love", 200, -10)
-            $ RogueX.change_stat("obedience", 200, 30)
+            call change_Girl_stat(RogueX, "love", 200, -10)
+            call change_Girl_stat(RogueX, "obedience", 200, 30)
     if RogueX.SEXP >= 10:
         ch_r "I mean, we've done some stuff. . ."
     if RogueX.SEXP >= 15:
@@ -493,7 +495,7 @@ label Rogue_BF:
     menu:
         extend ""
         "I'd love to!":
-            $ RogueX.change_stat("love", 200, 30)
+            call change_Girl_stat(RogueX, "love", 200, 30)
             "Rogue leaps in and kisses you deeply."
             $ RogueX.change_face("_kiss")
             $ RogueX.action_counter["kiss"] += 1
@@ -507,7 +509,7 @@ label Rogue_BF:
             menu:
                 extend ""
                 "Sure":
-                    $ RogueX.change_stat("love", 200, 30)
+                    call change_Girl_stat(RogueX, "love", 200, 30)
                     "Rogue leaps in and kisses you deeply."
                     $ RogueX.change_face("_kiss")
                     $ RogueX.action_counter["kiss"] += 1
@@ -520,7 +522,7 @@ label Rogue_BF:
                 "No way.":
                     jump Rogue_BF_Jerk
             if line == "no":
-                $ RogueX.change_stat("love", 200, -10)
+                call change_Girl_stat(RogueX, "love", 200, -10)
                 ch_r "I get it. That's fine."
                 $ RogueX.event_happened[5] = 20
                 call remove_Girl(RogueX)
@@ -546,9 +548,9 @@ label Rogue_BF_Jerk:
     $ RogueX.change_face("_angry", 1)
     ch_r "Well fine!"
     $ Count = (20* RogueX.event_happened[5])
-    $ RogueX.change_stat("obedience", 50, 40)
+    call change_Girl_stat(RogueX, "obedience", 50, 40)
     if RogueX.event_happened[5] != 20:
-        $ RogueX.change_stat("obedience", 200, (20* RogueX.event_happened[5]))
+        call change_Girl_stat(RogueX, "obedience", 200, (20* RogueX.event_happened[5]))
     if 20 > RogueX.event_happened[5] >= 3:
         $ RogueX.change_face("_sad")
         ch_r "Hrmph. I don't care what you want, we're dating. Deal with it."
@@ -563,9 +565,9 @@ label Rogue_BF_Jerk:
         return
     if 1 <  RogueX.event_happened[5] < 20:
         ch_r "I don't know why I keep asking, I should know you haven't changed."
-        $ RogueX.change_stat("love", 200, -(50* RogueX.event_happened[5]))
+        call change_Girl_stat(RogueX, "love", 200, -(50* RogueX.event_happened[5]))
     else:
-        $ RogueX.change_stat("love", 200, -50)
+        call change_Girl_stat(RogueX, "love", 200, -50)
 
     if Player.location == RogueX.home:
         ch_r "Jerk! Out!"
@@ -612,15 +614,15 @@ label Rogue_Love:
     menu:
         ch_r "Right?"
         "I love you, [RogueX.name].":
-            $ RogueX.change_stat("love", 200, 50)
+            call change_Girl_stat(RogueX, "love", 200, 50)
             $ RogueX.event_happened[6] = 10
         "Yeah, it's been great.":
-            $ RogueX.change_stat("love", 200, 20)
+            call change_Girl_stat(RogueX, "love", 200, 20)
         "Yeah, I guess":
-            $ RogueX.change_stat("love", 200, 10)
+            call change_Girl_stat(RogueX, "love", 200, 10)
         "Um, maybe?":
-            $ RogueX.change_stat("love", 200, -10)
-            $ RogueX.change_stat("obedience", 200, 30)
+            call change_Girl_stat(RogueX, "love", 200, -10)
+            call change_Girl_stat(RogueX, "obedience", 200, 30)
     if not RogueX.event_happened[6]:
         ch_r "Right, so I was thinking. . ."
         ch_r "I love you."
@@ -642,7 +644,7 @@ label Rogue_Love:
         menu:
             extend ""
             "I love you too.":
-                $ RogueX.change_stat("love", 200, 50)
+                call change_Girl_stat(RogueX, "love", 200, 50)
                 "[RogueX.name] collapses into your arms."
             "That's great!":
                 $ RogueX.brows = "_confused"
@@ -654,8 +656,8 @@ label Rogue_Love:
             "So?":
                 jump Rogue_Love_Jerk
             "Well I don't think of you like that.":
-                $ RogueX.change_stat("love", 200, -50)
-                $ RogueX.change_stat("obedience", 200, 50)
+                call change_Girl_stat(RogueX, "love", 200, -50)
+                call change_Girl_stat(RogueX, "obedience", 200, 50)
                 jump Rogue_Love_Jerk
     $ RogueX.change_face("_bemused", 1,eyes = "_side")
     $ RogueX.player_petnames.append("lover")
@@ -664,12 +666,12 @@ label Rogue_Love:
     $ RogueX.change_face("_sly")
     ch_r "I'm hoping to share a lot more with you if I can. . ."
     if not RogueX.action_counter["sex"]:
-        $ RogueX.change_stat("obedience", 70, 10)
+        call change_Girl_stat(RogueX, "obedience", 70, 10)
         ch_r "So. . . did you want to . . . consumate this?"
         menu:
             extend ""
             "Yeah. . . [[have sex]":
-                $ RogueX.change_stat("inhibition", 30, 30)
+                call change_Girl_stat(RogueX, "inhibition", 30, 30)
                 ch_r "Hmm. . ."
                 if simulation:
                     return True
@@ -679,12 +681,12 @@ label Rogue_Love:
                 return
             "I have something else in mind. . .[[choose another activity]":
                 $ RogueX.brows = "_confused"
-                $ RogueX.change_stat("obedience", 70, 20)
+                call change_Girl_stat(RogueX, "obedience", 70, 20)
                 ch_r "Well now you've got me curious. . ."
                 pass
             "Ew. [[do nothing]":
-                $ RogueX.change_stat("love", 200, -10)
-                $ RogueX.change_stat("obedience", 70, 40)
+                call change_Girl_stat(RogueX, "love", 200, -10)
+                call change_Girl_stat(RogueX, "obedience", 70, 40)
                 $ RogueX.change_face("_perplexed", 1)
                 ch_r "Um, ok?"
                 ch_r "{size=-5}What the fuck was that?{/size}"
@@ -709,8 +711,8 @@ label Rogue_Love_Jerk:
     $ RogueX.change_face("_angry", 1)
     ch_r "Well fine!"
     $ Count = (20* RogueX.event_happened[6])
-    $ RogueX.change_stat("obedience", 50, 40)
-    $ RogueX.change_stat("obedience", 200, Count)
+    call change_Girl_stat(RogueX, "obedience", 50, 40)
+    call change_Girl_stat(RogueX, "obedience", 200, Count)
     if RogueX.event_happened[6] == 3:
         $ RogueX.change_face("_sad")
         ch_r "I. . . I don't care, I love you too much anyways."
@@ -727,7 +729,7 @@ label Rogue_Love_Jerk:
         ch_r "Fool me once, shame on you. . . I thought you'd grown."
     ch_r "If that's how you want to be, you can get the hell out of here!"
     $ Count = (100* RogueX.event_happened[6])
-    $ RogueX.change_stat("love", 200, -Count)
+    call change_Girl_stat(RogueX, "love", 200, -Count)
     if simulation:
         return False
     $ RogueX.location = "bg_rogue"
@@ -746,19 +748,19 @@ label Rogue_AnnaMarie:
     menu:
         extend ""
         "That's a lovely name.":
-            $ RogueX.change_stat("love", 200, 10)
-            $ RogueX.change_stat("obedience", 50, 5)
-            $ RogueX.change_stat("inhibition", 70, 5)
+            call change_Girl_stat(RogueX, "love", 200, 10)
+            call change_Girl_stat(RogueX, "obedience", 50, 5)
+            call change_Girl_stat(RogueX, "inhibition", 70, 5)
             $ RogueX.change_face("_smile",2)
             ch_r "Oh, thank you so much for say'in. . ."
         "Huh, ok.":
-            $ RogueX.change_stat("obedience", 80, 5)
+            call change_Girl_stat(RogueX, "obedience", 80, 5)
             $ RogueX.change_face("_confused", 1)
             ch_r "Um. . . yeah."
         "Don't like it.":
-            $ RogueX.change_stat("love", 200, -5)
-            $ RogueX.change_stat("obedience", 200, 10)
-            $ RogueX.change_stat("inhibition", 200, -5)
+            call change_Girl_stat(RogueX, "love", 200, -5)
+            call change_Girl_stat(RogueX, "obedience", 200, 10)
+            call change_Girl_stat(RogueX, "inhibition", 200, -5)
             $ RogueX.change_face("_angry", 1)
             ch_r "Oh. . . Ok. . ."
     menu:
@@ -820,12 +822,12 @@ label Rogue_Sub:
     menu:
         extend ""
         "Yeah, it's been great.":
-            $ RogueX.change_stat("love", 200, 20)
+            call change_Girl_stat(RogueX, "love", 200, 20)
         "Yeah, I guess":
-            $ RogueX.change_stat("love", 200, 10)
+            call change_Girl_stat(RogueX, "love", 200, 10)
         "Um, maybe?":
-            $ RogueX.change_stat("love", 200, -10)
-            $ RogueX.change_stat("obedience", 200, 30)
+            call change_Girl_stat(RogueX, "love", 200, -10)
+            call change_Girl_stat(RogueX, "obedience", 200, 30)
     if not RogueX.event_happened[7]:
         ch_r "Right, so I was thinking. . ."
         $ RogueX.eyes = "_sexy"
@@ -837,7 +839,7 @@ label Rogue_Sub:
     menu:
         extend ""
         "Sounds interesting, yes.":
-            $ RogueX.change_stat("obedience", 200, 100)
+            call change_Girl_stat(RogueX, "obedience", 200, 100)
             $ RogueX.player_petnames.append("sir")
             "[RogueX.name] nods obediently."
         "What do you mean by that?":
@@ -847,7 +849,7 @@ label Rogue_Sub:
             menu:
                 ch_r "I mean that I would like you to give me orders, and I will follow them as best I can."
                 "Sounds interesting, ok.":
-                    $ RogueX.change_stat("obedience", 200, 100)
+                    call change_Girl_stat(RogueX, "obedience", 200, 100)
                     "[RogueX.name] nods obediently."
                 "Oh, ok, sure.":
                     "[RogueX.name] seems a bit put out, but takes it as a positive sign and nods."
@@ -871,8 +873,8 @@ label Rogue_Sub_Jerk:
     $ RogueX.change_face("_sad", 1)
     ch_r "Hrmph!"
     $ Count = (20* RogueX.event_happened[7])
-    $ RogueX.change_stat("inhibition", 50, 30)
-    $ RogueX.change_stat("inhibition", 200, Count)
+    call change_Girl_stat(RogueX, "inhibition", 50, 30)
+    call change_Girl_stat(RogueX, "inhibition", 200, Count)
     if not simulation:
         $ renpy.pop_call()
     if RogueX.event_happened[7] == 2:
@@ -890,7 +892,7 @@ label Rogue_Sub_Jerk:
         ch_r "I thought you may have learned to respect my needs by now."
     ch_r "If that's how it is, I would appreciate some time alone."
     $ Count = (20* RogueX.event_happened[7])
-    $ RogueX.change_stat("obedience", 200, -Count)
+    call change_Girl_stat(RogueX, "obedience", 200, -Count)
     if simulation:
         return
     $ RogueX.location = "bg_rogue"
@@ -936,14 +938,14 @@ label Rogue_Master:
     menu:
         ch_r "Have I been pleasing you, [RogueX.player_petname]?"
         "Certainly.":
-            $ RogueX.change_stat("love", 200, 20)
-            $ RogueX.change_stat("obedience", 200, 20)
+            call change_Girl_stat(RogueX, "love", 200, 20)
+            call change_Girl_stat(RogueX, "obedience", 200, 20)
         "Yeah, I guess.":
-            $ RogueX.change_stat("love", 200, 10)
-            $ RogueX.change_stat("obedience", 200, 20)
+            call change_Girl_stat(RogueX, "love", 200, 10)
+            call change_Girl_stat(RogueX, "obedience", 200, 20)
         "Not especially.":
-            $ RogueX.change_stat("love", 200, -10)
-            $ RogueX.change_stat("obedience", 200, 30)
+            call change_Girl_stat(RogueX, "love", 200, -10)
+            call change_Girl_stat(RogueX, "obedience", 200, 30)
     if not RogueX.event_happened[8]:
         ch_r "Yes, well, given that. . ."
         ch_r "I think that I would like you to be my master, formally."
@@ -954,7 +956,7 @@ label Rogue_Master:
     menu:
         extend ""
         "Very well.":
-            $ RogueX.change_stat("obedience", 200, 100)
+            call change_Girl_stat(RogueX, "obedience", 200, 100)
             $ RogueX.player_petnames.append("master")
             "[RogueX.name] bows obediently."
         "What do you mean by that?":
@@ -971,10 +973,10 @@ label Rogue_Master:
                 "You should do your own thing, you don't need me telling you what to do.":
                     $ RogueX.brows = "_confused"
                     ch_r "Ok, if that's what you want. . ."
-                    $ RogueX.change_stat("inhibition", 50, 100)
-                    $ RogueX.change_stat("inhibition", 90, 50)
+                    call change_Girl_stat(RogueX, "inhibition", 50, 100)
+                    call change_Girl_stat(RogueX, "inhibition", 90, 50)
                     ch_r "For now at least. . ."
-                    $ RogueX.change_stat("obedience", 200, -200)
+                    call change_Girl_stat(RogueX, "obedience", 200, -200)
                     $ RogueX.event_happened[8] = 3
                 "Oh, no, sounds like too much work.":
                     jump Rogue_Obed_Jerk
@@ -993,8 +995,8 @@ label Rogue_Obed_Jerk:
     $ RogueX.change_face("_sad", 1)
     ch_r "Well fine!"
     $ Count = (20* RogueX.event_happened[8])
-    $ RogueX.change_stat("inhibition", 50, 30)
-    $ RogueX.change_stat("inhibition", 200, Count)
+    call change_Girl_stat(RogueX, "inhibition", 50, 30)
+    call change_Girl_stat(RogueX, "inhibition", 200, Count)
     if not simulation:
         $ renpy.pop_call()
     if RogueX.event_happened[8] == 2:
@@ -1013,7 +1015,7 @@ label Rogue_Obed_Jerk:
         ch_r "I thought you may have learned to respect my needs by now."
     ch_r "If that's how it is, I would appreciate some time alone."
     $ Count = (50* RogueX.event_happened[8])
-    $ RogueX.change_stat("obedience", 200, -Count)
+    call change_Girl_stat(RogueX, "obedience", 200, -Count)
     if simulation:
         return
     $ RogueX.location = "bg_rogue"
@@ -1035,7 +1037,7 @@ label Rogue_Sexfriend:
         if "_stockings_and_garterbelt" not in RogueX.inventory:
             $ RogueX.inventory.append("_stockings_and_garterbelt")
         $ RogueX.player_petnames.append("sex friend")
-        $ RogueX.change_stat("inhibition", 200, 50)
+        call change_Girl_stat(RogueX, "inhibition", 200, 50)
         "[RogueX.name] suddenly gives your butt a little squeeze."
         return
 
@@ -1063,13 +1065,13 @@ label Rogue_Sexfriend:
     menu:
         ch_r "Haven't I been fun to have around?"
         "Yeah, you've been great.":
-            $ RogueX.change_stat("love", 200, 20)
-            $ RogueX.change_stat("inhibition", 200, 20)
+            call change_Girl_stat(RogueX, "love", 200, 20)
+            call change_Girl_stat(RogueX, "inhibition", 200, 20)
         "Hmmm. . . yes?":
-            $ RogueX.change_stat("inhibition", 200, 20)
+            call change_Girl_stat(RogueX, "inhibition", 200, 20)
         "Maybe. . .":
-            $ RogueX.change_stat("love", 200, -10)
-            $ RogueX.change_stat("obedience", 200, 30)
+            call change_Girl_stat(RogueX, "love", 200, -10)
+            call change_Girl_stat(RogueX, "obedience", 200, 30)
     if RogueX in Player.Harem:
         ch_r "I'd like to have a -lot- more sex. . ."
     if not RogueX.event_happened[9]:
@@ -1086,7 +1088,7 @@ label Rogue_Sexfriend:
         menu:
             extend ""
             "Sounds fun!":
-                $ RogueX.change_stat("inhibition", 200, 100)
+                call change_Girl_stat(RogueX, "inhibition", 200, 100)
                 $ RogueX.player_petnames.append("sex friend")
                 "[RogueX.name] nods obediently."
             "What do you mean by that?":
@@ -1114,7 +1116,7 @@ label Rogue_Sexfriend_Jerk:
     $ RogueX.change_face("_sad", 1)
     $ RogueX.daily_history.append("relationship")
     ch_r "Your loss."
-    $ RogueX.change_stat("obedience", 50, 30)
+    call change_Girl_stat(RogueX, "obedience", 50, 30)
     if not simulation:
         $ renpy.pop_call()
     if RogueX.event_happened[9] == 3:
@@ -1130,7 +1132,7 @@ label Rogue_Sexfriend_Jerk:
         call remove_Girl(RogueX)
         jump player_room
     $ Count = (10*RogueX.event_happened[9])
-    $ RogueX.change_stat("inhibition", 200, -Count)
+    call change_Girl_stat(RogueX, "inhibition", 200, -Count)
     if Player.location == "bg_rogue":
         ch_r "Ok, you can go now."
         $ Player.location = "bg_player"
@@ -1153,7 +1155,7 @@ label Rogue_Fuckbuddy:
         if RogueX.location != Player.location and RogueX not in Player.Party:
             return
         $ RogueX.player_petnames.append("fuck buddy")
-        $ RogueX.change_stat("inhibition", 200, 50)
+        call change_Girl_stat(RogueX, "inhibition", 200, 50)
         "[RogueX.name] suddenly reaches down and gives your package a little squeeze."
         return
 
@@ -1173,15 +1175,15 @@ label Rogue_Fuckbuddy:
     menu:
         extend ""
         "You bet!":
-            $ RogueX.change_stat("love", 200, 20)
-            $ RogueX.change_stat("obedience", 200, 20)
-            $ RogueX.change_stat("inhibition", 200, 30)
+            call change_Girl_stat(RogueX, "love", 200, 20)
+            call change_Girl_stat(RogueX, "obedience", 200, 20)
+            call change_Girl_stat(RogueX, "inhibition", 200, 30)
         "Yeah?":
-            $ RogueX.change_stat("love", 200, 10)
-            $ RogueX.change_stat("obedience", 200, 20)
+            call change_Girl_stat(RogueX, "love", 200, 10)
+            call change_Girl_stat(RogueX, "obedience", 200, 20)
         "Whatever.":
-            $ RogueX.change_stat("love", 200, -10)
-            $ RogueX.change_stat("obedience", 200, 30)
+            call change_Girl_stat(RogueX, "love", 200, -10)
+            call change_Girl_stat(RogueX, "obedience", 200, 30)
     ch_r "So, since it's worked so far. . ."
     $ RogueX.event_happened[10] += 1
     $ RogueX.player_petnames.append("fuck buddy")
@@ -1190,7 +1192,7 @@ label Rogue_Fuckbuddy:
         menu:
             extend ""
             "Heh, ok, fuck buddy.":
-                $ RogueX.change_stat("inhibition", 200, 100)
+                call change_Girl_stat(RogueX, "inhibition", 200, 100)
                 $ RogueX.player_petnames.append("fuck buddy")
                 $ RogueX.arm_pose = 2
                 ch_r "Whoo hoo!"
@@ -1225,7 +1227,7 @@ label Rogue_Fuckbuddy:
     return
 
 label Rogue_Fuckbuddy_Jerk:
-    $ RogueX.change_stat("obedience", 50, 30)
+    call change_Girl_stat(RogueX, "obedience", 50, 30)
     $ RogueX.change_face("_bemused", 1)
     if RogueX.event_happened[10] > 1:
         $ RogueX.arm_pose = 2
@@ -1246,7 +1248,7 @@ label Rogue_Fuckbuddy_Jerk:
         return
     $ renpy.pop_call()
     $ Count = (10*RogueX.event_happened[10])
-    $ RogueX.change_stat("inhibition", 200, -Count)
+    call change_Girl_stat(RogueX, "inhibition", 200, -Count)
     if Player.location == "bg_rogue":
         ch_r "Ok, you can go now."
         $ Player.location = "bg_player"
@@ -1279,9 +1281,9 @@ label Rogue_Daddy:
         extend ""
         "Ok, go right ahead?":
             $ RogueX.change_face("_smile")
-            $ RogueX.change_stat("love", 90, 20)
-            $ RogueX.change_stat("obedience", 60, 10)
-            $ RogueX.change_stat("inhibition", 80, 30)
+            call change_Girl_stat(RogueX, "love", 90, 20)
+            call change_Girl_stat(RogueX, "obedience", 60, 10)
+            call change_Girl_stat(RogueX, "inhibition", 80, 30)
             ch_r "Squee!"
             $ RogueX.player_petname = "daddy"
         "What do you mean by that?":
@@ -1292,28 +1294,28 @@ label Rogue_Daddy:
                 extend ""
                 "Sounds interesting, fine by me.":
                     $ RogueX.change_face("_smile")
-                    $ RogueX.change_stat("love", 90, 15)
-                    $ RogueX.change_stat("obedience", 60, 20)
-                    $ RogueX.change_stat("inhibition", 80, 25)
+                    call change_Girl_stat(RogueX, "love", 90, 15)
+                    call change_Girl_stat(RogueX, "obedience", 60, 20)
+                    call change_Girl_stat(RogueX, "inhibition", 80, 25)
                     ch_r "Great! . . daddy."
                     $ RogueX.player_petname = "daddy"
                 "Could you not, please?":
-                    $ RogueX.change_stat("love", 90, 5)
-                    $ RogueX.change_stat("obedience", 80, 40)
-                    $ RogueX.change_stat("inhibition", 80, 20)
+                    call change_Girl_stat(RogueX, "love", 90, 5)
+                    call change_Girl_stat(RogueX, "obedience", 80, 40)
+                    call change_Girl_stat(RogueX, "inhibition", 80, 20)
                     $ RogueX.change_face("_sad")
                     ch_r " . . . "
                     ch_r "Well, ok."
                 "No, that creeps me out.":
-                    $ RogueX.change_stat("love", 90, -10)
-                    $ RogueX.change_stat("obedience", 80, 45)
-                    $ RogueX.change_stat("inhibition", 70, 5)
+                    call change_Girl_stat(RogueX, "love", 90, -10)
+                    call change_Girl_stat(RogueX, "obedience", 80, 45)
+                    call change_Girl_stat(RogueX, "inhibition", 70, 5)
                     $ RogueX.change_face("_angry")
                     ch_r "Hrmph."
         "No, that creeps me out.":
-            $ RogueX.change_stat("love", 90, -5)
-            $ RogueX.change_stat("obedience", 80, 40)
-            $ RogueX.change_stat("inhibition", 70, 10)
+            call change_Girl_stat(RogueX, "love", 90, -5)
+            call change_Girl_stat(RogueX, "obedience", 80, 40)
+            call change_Girl_stat(RogueX, "inhibition", 70, 10)
             $ RogueX.change_face("_angry")
             ch_r "Hrmph."
     $ RogueX.player_petnames.append("daddy")
@@ -1343,12 +1345,12 @@ label Rogue_Frisky_Class:
             pass
         "Naah. Not so much.":
 
-            $ RogueX.change_stat("love", 80, -3)
-            $ RogueX.change_stat("inhibition", 60, -3)
+            call change_Girl_stat(RogueX, "love", 80, -3)
+            call change_Girl_stat(RogueX, "inhibition", 60, -3)
             $ RogueX.change_face("_confused")
         "It's my favorite subject.":
 
-            $ RogueX.change_stat("love", 80, 5)
+            call change_Girl_stat(RogueX, "love", 80, 5)
             $ RogueX.change_face("_smile")
             "[RogueX.name] reads your note and starts to smile. She quickly dashes off another note, sliding it in front of you again."
             "You unfold the note, trying not to let the teacher see you. {i}\"Then maybe we could study together tonight?\"{/i}."
@@ -1378,15 +1380,15 @@ label Rogue_Frisky_Class:
         menu:
             "You respond. . ."
             "Maybe later.":
-                $ RogueX.change_stat("love", 80, -3)
-                $ RogueX.change_stat("obedience", 70, 5)
-                $ RogueX.change_stat("inhibition", 60, -3)
+                call change_Girl_stat(RogueX, "love", 80, -3)
+                call change_Girl_stat(RogueX, "obedience", 70, 5)
+                call change_Girl_stat(RogueX, "inhibition", 60, -3)
                 $ RogueX.change_face("_confused")
                 $ line = 0
             "Naah. I've got better things to do.":
-                $ RogueX.change_stat("love", 200, -15)
-                $ RogueX.change_stat("obedience", 70, 5)
-                $ RogueX.change_stat("inhibition", 60, -3)
+                call change_Girl_stat(RogueX, "love", 200, -15)
+                call change_Girl_stat(RogueX, "obedience", 70, 5)
+                call change_Girl_stat(RogueX, "inhibition", 60, -3)
                 $ line = 0
                 $ RogueX.change_face("_angry")
                 $ RogueX.daily_history.append("_angry")
@@ -1398,13 +1400,13 @@ label Rogue_Frisky_Class:
             "We could get some \"studying\" done right now.":
                 if approval_check(RogueX, 1200):
                     $ RogueX.change_face("_sly", 1)
-                    $ RogueX.change_stat("love", 80, 3)
-                    $ RogueX.change_stat("inhibition", 60, 3)
+                    call change_Girl_stat(RogueX, "love", 80, 3)
+                    call change_Girl_stat(RogueX, "inhibition", 60, 3)
                     "[RogueX.name] gets a mischevious grin on her face and leans towards you."
                     $ line = "flirt"
                 elif approval_check(RogueX, 700):
                     $ RogueX.change_face("_smile", 1)
-                    $ RogueX.change_stat("inhibition", 60, 2)
+                    call change_Girl_stat(RogueX, "inhibition", 60, 2)
                     "[RogueX.name] blushes and smiles your way."
                     $ line = "flirt"
                 else:
@@ -1436,19 +1438,19 @@ label Rogue_Frisky_Class:
                         $ line = "tease"
                     else:
                         $ line = "rejected"
-                        $ RogueX.change_stat("love", 200, -15)
-                        $ RogueX.change_stat("obedience", 70, 2)
-                        $ RogueX.change_stat("inhibition", 60, -2)
+                        call change_Girl_stat(RogueX, "love", 200, -15)
+                        call change_Girl_stat(RogueX, "obedience", 70, 2)
+                        call change_Girl_stat(RogueX, "inhibition", 60, -2)
                     jump Rogue_Frisky_Class_End
 
                 "Look into her eyes and smile slightly." if line == "flirt":
                     $ RogueX.change_face("_smile")
-                    $ RogueX.change_stat("love", 200, 5)
+                    call change_Girl_stat(RogueX, "love", 200, 5)
                     "[RogueX.name] smiles back."
                     "She looks back towards the front of the class, but her hand drifts across the top of the desk until she's holding yours."
                     $ line = "handholding"
                 "Grasp her hand gently, stroking the top of it." if line == "handholding":
-                    $ RogueX.change_stat("love", 200, 5)
+                    call change_Girl_stat(RogueX, "love", 200, 5)
                     $ RogueX.change_face("_smile")
                     "[RogueX.name] sighs contentedly and holds your hand for the remainder of class."
                     jump Rogue_Frisky_Class_End
@@ -1457,20 +1459,20 @@ label Rogue_Frisky_Class:
                     $ line = "fondle_pussy"
                     if approval_check(RogueX, 1500) and RogueX.action_counter["fondle_pussy"] and RogueX.SEXP >= 40:
                         $ RogueX.change_face("_sly")
-                        $ RogueX.change_stat("love", 90, 5)
-                        $ RogueX.change_stat("obedience", 70, 5)
-                        $ RogueX.change_stat("inhibition", 60, 5)
+                        call change_Girl_stat(RogueX, "love", 90, 5)
+                        call change_Girl_stat(RogueX, "obedience", 70, 5)
+                        call change_Girl_stat(RogueX, "inhibition", 60, 5)
                         "[RogueX.name] gets a mischievous grin and places her hand on your arm."
                     elif approval_check(RogueX, 1800) and RogueX.action_counter["fondle_pussy"]:
                         $ RogueX.change_face("_smile")
-                        $ RogueX.change_stat("love", 80, 3)
-                        $ RogueX.change_stat("obedience", 70, 7)
-                        $ RogueX.change_stat("inhibition", 60, 3)
+                        call change_Girl_stat(RogueX, "love", 80, 3)
+                        call change_Girl_stat(RogueX, "obedience", 70, 7)
+                        call change_Girl_stat(RogueX, "inhibition", 60, 3)
                         "[RogueX.name] starts slightly as your hand travels up her thigh, but then she lets out a slight grin."
                     elif approval_check(RogueX, 2000):
                         $ RogueX.change_face("_perplexed",2)
-                        $ RogueX.change_stat("obedience", 70, 10)
-                        $ RogueX.change_stat("inhibition", 60, 3)
+                        call change_Girl_stat(RogueX, "obedience", 70, 10)
+                        call change_Girl_stat(RogueX, "inhibition", 60, 3)
                         "[RogueX.name] glances at you in alarm, but then slowly calms down."
                         $ RogueX.change_face("_smile", 1)
                         $ D20 += 2
@@ -1497,28 +1499,28 @@ label Rogue_Frisky_Class:
                         $ D20 += 5
 
                 "Keep fondling her pussy." if line == "fondle_pussy":
-                    $ RogueX.change_stat("obedience", 70, 5)
-                    $ RogueX.change_stat("inhibition", 60, 3)
+                    call change_Girl_stat(RogueX, "obedience", 70, 5)
+                    call change_Girl_stat(RogueX, "inhibition", 60, 3)
                     "As the class drones on, you continue to slowly massage her warm delta."
                     $ D20 += 5
 
                 "Start fondling her tits." if line != "fondle_breasts":
                     $ line = "fondle_breasts"
                     if approval_check(RogueX, 1500) and RogueX.action_counter["fondle_breasts"]and RogueX.SEXP >= 40:
-                        $ RogueX.change_stat("love", 80, 5)
-                        $ RogueX.change_stat("obedience", 70, 5)
-                        $ RogueX.change_stat("inhibition", 60, 3)
+                        call change_Girl_stat(RogueX, "love", 80, 5)
+                        call change_Girl_stat(RogueX, "obedience", 70, 5)
+                        call change_Girl_stat(RogueX, "inhibition", 60, 3)
                         $ RogueX.change_face("_sly")
                         "[RogueX.name] closes her eyes and caresses your arm."
                     elif approval_check(RogueX, 1800) and RogueX.action_counter["fondle_breasts"]:
-                        $ RogueX.change_stat("love", 80, 3)
-                        $ RogueX.change_stat("obedience", 70, 7)
-                        $ RogueX.change_stat("inhibition", 60, 3)
+                        call change_Girl_stat(RogueX, "love", 80, 3)
+                        call change_Girl_stat(RogueX, "obedience", 70, 7)
+                        call change_Girl_stat(RogueX, "inhibition", 60, 3)
                         $ RogueX.change_face("_smile", 1)
                         "[RogueX.name] flinches as your hand travels up her ribcage, but she grins as you reach her breast."
                     elif approval_check(RogueX, 2000):
-                        $ RogueX.change_stat("obedience", 70, 10)
-                        $ RogueX.change_stat("inhibition", 60, 3)
+                        call change_Girl_stat(RogueX, "obedience", 70, 10)
+                        call change_Girl_stat(RogueX, "inhibition", 60, 3)
                         $ RogueX.change_face("_perplexed",2)
                         "[RogueX.name] glances at you in alarm, but then slowly calms down."
                         $ RogueX.change_face("_smile",2)
@@ -1532,16 +1534,16 @@ label Rogue_Frisky_Class:
                         "her nipples begin to firm up and she lets out a small moan of pleasure."
                         $ D20 += 7
                 "Keep fondling her tits." if line == "fondle_breasts":
-                    $ RogueX.change_stat("obedience", 70, 5)
-                    $ RogueX.change_stat("inhibition", 60, 2)
+                    call change_Girl_stat(RogueX, "obedience", 70, 5)
+                    call change_Girl_stat(RogueX, "inhibition", 60, 2)
                     "Barely paying attention to the lecture, you continue to pulse her breast in your palm."
                     $ D20 += 7
 
             if line == "too far":
                 $ RogueX.change_face("_surprised",2)
-                $ RogueX.change_stat("love", 80, -5)
-                $ RogueX.change_stat("obedience", 70, 7)
-                $ RogueX.change_stat("inhibition", 50, -3)
+                call change_Girl_stat(RogueX, "love", 80, -5)
+                call change_Girl_stat(RogueX, "obedience", 70, 7)
+                call change_Girl_stat(RogueX, "inhibition", 50, -3)
                 "[RogueX.name] sits up straight in her seat and makes a little yelping noise."
                 $ RogueX.change_face("_angry", 1)
                 "Between that and the icy glare she shoots you, it's enough to draw the attention of your fellow students in your direction."
@@ -1549,9 +1551,9 @@ label Rogue_Frisky_Class:
 
 
         if line not in ("rejected", "handholding", "tease"):
-            $ RogueX.change_stat("love", 80, -10)
-            $ RogueX.change_stat("obedience", 70, -5)
-            $ RogueX.change_stat("inhibition", 50, -10)
+            call change_Girl_stat(RogueX, "love", 80, -10)
+            call change_Girl_stat(RogueX, "obedience", 70, -5)
+            call change_Girl_stat(RogueX, "inhibition", 50, -10)
             $ RogueX.change_face("_surprised")
             if EmmaX.teaching:
                 "[EmmaX.name] stops her lecture in mid-sentence when she notices that the whole class is looking at you and [RogueX.name]."

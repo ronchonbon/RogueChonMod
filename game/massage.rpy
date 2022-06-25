@@ -13,9 +13,9 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
         $ Girl.change_face("_bemused", 1)
         if Girl.forced:
             $ Girl.change_face("_sad")
-            $ Girl.change_stat("love", 20, -2, 1)
-            $ Girl.change_stat("obedience", 90, 1)
-            $ Girl.change_stat("inhibition", 60, 1)
+            call change_Girl_stat(Girl, "love", 20, -2, 1)
+            call change_Girl_stat(Girl, "obedience", 90, 1)
+            call change_Girl_stat(Girl, "inhibition", 60, 1)
         if Girl == RogueX:
             ch_r "Ok [Girl.player_petname], sure."
         elif Girl == KittyX:
@@ -30,8 +30,8 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
             ch_s "I could certainly use it."
         elif Girl == JubesX:
             ch_v "Oh, yeah, sure."
-        $ Girl.change_stat("love", 90, 1)
-        $ Girl.change_stat("inhibition", 50, 3)
+        call change_Girl_stat(Girl, "love", 90, 1)
+        call change_Girl_stat(Girl, "inhibition", 50, 3)
         jump Massage_Prep
     else:
 
@@ -103,9 +103,9 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
                 return
             "Maybe later?" if "no_massage" not in Girl.daily_history:
                 $ Girl.change_face("_sexy")
-                $ Girl.change_stat("love", 80, 1)
-                $ Girl.change_stat("inhibition", 20, 1)
-                $ Girl.change_stat("obedience", 20, 1)
+                call change_Girl_stat(Girl, "love", 80, 1)
+                call change_Girl_stat(Girl, "inhibition", 20, 1)
+                call change_Girl_stat(Girl, "obedience", 20, 1)
                 if Girl == RogueX:
                     ch_r "Sure, maybe."
                 elif Girl == KittyX:
@@ -126,9 +126,9 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
             "Come on, please?":
                 if approval:
                     $ Girl.change_face("_sexy")
-                    $ Girl.change_stat("obedience", 90, 1)
-                    $ Girl.change_stat("obedience", 40, 2)
-                    $ Girl.change_stat("inhibition", 30, 2)
+                    call change_Girl_stat(Girl, "obedience", 90, 1)
+                    call change_Girl_stat(Girl, "obedience", 40, 2)
+                    call change_Girl_stat(Girl, "inhibition", 30, 2)
                     if Girl == RogueX:
                         ch_r "Well, if you're that desperate. . ."
                     elif Girl == KittyX:
@@ -173,8 +173,8 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
         $ Girl.daily_history.append("_angry")
     elif Girl.forced:
         $ Girl.change_face("_angry", 1)
-        $ Girl.change_stat("lust", 60, 5)
-        $ Girl.change_stat("obedience", 50, -2)
+        call change_Girl_stat(Girl, "lust", 60, 5)
+        call change_Girl_stat(Girl, "obedience", 50, -2)
         if Girl == RogueX:
             ch_r "I don't even want you touching me."
         elif Girl == KittyX:
@@ -232,8 +232,8 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
 label Massage_Prep(Girl=focused_Girl, Current=0, Past=0, MCount=0):
     call Top_Off (Girl, "massage")
     if not Girl.outfit["top"] and "no_topless" not in Girl.recent_history:
-        $ Girl.change_stat("obedience", 50, 3)
-        $ Girl.change_stat("inhibition", 50, 3)
+        call change_Girl_stat(Girl, "obedience", 50, 3)
+        call change_Girl_stat(Girl, "inhibition", 50, 3)
     elif Girl.forced:
 
         if "no_topless" in Girl.recent_history:
@@ -254,8 +254,8 @@ label Massage_Prep(Girl=focused_Girl, Current=0, Past=0, MCount=0):
             menu:
                 extend ""
                 "Sure, ok.":
-                    $ Girl.change_stat("obedience", 50, 5)
-                    $ Girl.change_stat("inhibition", 50, 5)
+                    call change_Girl_stat(Girl, "obedience", 50, 5)
+                    call change_Girl_stat(Girl, "inhibition", 50, 5)
                 "Nope, not worth it.":
                     if Girl == RogueX:
                         ch_r "Fine then! What else?"
@@ -273,8 +273,8 @@ label Massage_Prep(Girl=focused_Girl, Current=0, Past=0, MCount=0):
                         ch_v "Well ok then, be that way."
                     return
         else:
-            $ Girl.change_stat("obedience", 50, 5)
-            $ Girl.change_stat("inhibition", 50, 5)
+            call change_Girl_stat(Girl, "obedience", 50, 5)
+            call change_Girl_stat(Girl, "inhibition", 50, 5)
             if Girl == RogueX:
                 ch_r "Ok, but after we do this, I get a little touch too."
             elif Girl == KittyX:
@@ -456,10 +456,10 @@ label Massage_Cycle:
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
-                $ Girl.change_stat("lust", 60, 2)
-                $ Girl.change_stat("lust", 90, 1)
+                call change_Girl_stat(Girl, "lust", 60, 2)
+                call change_Girl_stat(Girl, "lust", 90, 1)
                 if Past == Current:
-                    $ Girl.change_stat("lust", 90, 2)
+                    call change_Girl_stat(Girl, "lust", 90, 2)
                     "You really dig into her neck muscles, and she lets out a long groan of pleasure."
                 else:
                     "[line]. She stretches out in obvious pleasure as the knots release."
@@ -475,10 +475,10 @@ label Massage_Cycle:
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
-                $ Girl.change_stat("lust", 60, 2)
-                $ Girl.change_stat("lust", 90, 2)
+                call change_Girl_stat(Girl, "lust", 60, 2)
+                call change_Girl_stat(Girl, "lust", 90, 2)
                 if Past == Current:
-                    $ Girl.change_stat("lust", 90, 2)
+                    call change_Girl_stat(Girl, "lust", 90, 2)
                     "You really dig into her shoulders, and she wriggles them and moans."
                 else:
                     "[line]. She stretches out in obvious pleasure as the knots release."
@@ -498,10 +498,10 @@ label Massage_Cycle:
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
-                $ Girl.change_stat("lust", 60, 2)
-                $ Girl.change_stat("lust", 90, 2)
+                call change_Girl_stat(Girl, "lust", 60, 2)
+                call change_Girl_stat(Girl, "lust", 90, 2)
                 if Past == Current:
-                    $ Girl.change_stat("lust", 90, 2)
+                    call change_Girl_stat(Girl, "lust", 90, 2)
                     "You really put the pressure into her spine, and she lets out a long groan of pleasure."
                 else:
                     "[line]. She moans as you hear her vertebrae stretch."
@@ -523,17 +523,17 @@ label Massage_Cycle:
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
-                $ Girl.change_stat("lust", 60, 1)
-                $ Girl.change_stat("lust", 90, 2)
-                $ Girl.change_stat("lust", 200, 3)
+                call change_Girl_stat(Girl, "lust", 60, 1)
+                call change_Girl_stat(Girl, "lust", 90, 2)
+                call change_Girl_stat(Girl, "lust", 200, 3)
                 if Past == Current:
-                    $ Girl.change_stat("lust", 200, 2)
+                    call change_Girl_stat(Girl, "lust", 200, 2)
                     "You knead her breasts firmly and she lets out a low moan."
                 else:
                     "[line]. Her nipples grow sharp in your palms."
             elif Past == Current:
                 $ Check = 1050
-                $ Girl.change_stat("lust", 200, 2)
+                call change_Girl_stat(Girl, "lust", 200, 2)
                 $ line = "You continue to rub " +Girl.name+ "'s " +Current
 
             if not Girl.outfit["top"] and not Girl.outfit["bra"]:
@@ -551,10 +551,10 @@ label Massage_Cycle:
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
-                $ Girl.change_stat("lust", 60, 2)
-                $ Girl.change_stat("lust", 90, 1)
+                call change_Girl_stat(Girl, "lust", 60, 2)
+                call change_Girl_stat(Girl, "lust", 90, 1)
                 if Past == Current:
-                    $ Girl.change_stat("lust", 90, 2)
+                    call change_Girl_stat(Girl, "lust", 90, 2)
                     "You really dig into her triceps, and she seemed really knotted up."
                 else:
                     "[line]. Her hands flex involuntarily and she coos in pleasure."
@@ -574,9 +574,9 @@ label Massage_Cycle:
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
-                $ Girl.change_stat("lust", 70, 2)
+                call change_Girl_stat(Girl, "lust", 70, 2)
                 if Past == Current:
-                    $ Girl.change_stat("lust", 70, 2)
+                    call change_Girl_stat(Girl, "lust", 70, 2)
                     "You stretch each finger and rub along the joints. She lets out a small gasp."
                 else:
                     "[line]. Her fingers flex with pleasure."
@@ -598,8 +598,8 @@ label Massage_Cycle:
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
-                $ Girl.change_stat("lust", 60, 2)
-                $ Girl.change_stat("lust", 90, 1)
+                call change_Girl_stat(Girl, "lust", 60, 2)
+                call change_Girl_stat(Girl, "lust", 90, 1)
                 if Past == Current:
                     "You really dig into her hips, and she lets out a long groan of pleasure."
                 else:
@@ -623,17 +623,17 @@ label Massage_Cycle:
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
-                $ Girl.change_stat("lust", 60, 2)
-                $ Girl.change_stat("lust", 90, 1)
-                $ Girl.change_stat("lust", 200, 3)
+                call change_Girl_stat(Girl, "lust", 60, 2)
+                call change_Girl_stat(Girl, "lust", 90, 1)
+                call change_Girl_stat(Girl, "lust", 200, 3)
                 if Past == Current:
-                    $ Girl.change_stat("lust", 200, 2)
+                    call change_Girl_stat(Girl, "lust", 200, 2)
                     "You move across her ass in a wavelike pattern as her back wriggles in pleasure."
                 else:
                     "[line]. Her muscles tighten and release as you squeeze them."
             elif Past == Current:
                 $ Check = 950
-                $ Girl.change_stat("lust", 90, 2)
+                call change_Girl_stat(Girl, "lust", 90, 2)
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
             if not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and Girl.outfit["hose"] != "_pantyhose":
@@ -651,17 +651,17 @@ label Massage_Cycle:
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
-                $ Girl.change_stat("lust", 60, 2)
-                $ Girl.change_stat("lust", 90, 2)
-                $ Girl.change_stat("lust", 200, 3)
+                call change_Girl_stat(Girl, "lust", 60, 2)
+                call change_Girl_stat(Girl, "lust", 90, 2)
+                call change_Girl_stat(Girl, "lust", 200, 3)
                 if Past == Current:
-                    $ Girl.change_stat("lust", 200, 5)
+                    call change_Girl_stat(Girl, "lust", 200, 5)
                     "You draw your thumbs across her clit and she shudders with pleasure."
                 else:
                     "[line]. Her back arches with pleasure and she releases a soft moan."
             elif Past == Current:
                 $ Check = 1200
-                $ Girl.change_stat("lust", 200, 3)
+                call change_Girl_stat(Girl, "lust", 200, 3)
                 $ line = "You continue to rub " +Girl.name+ "'s " +Current
 
             if not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and Girl.outfit["hose"] != "_pantyhose":
@@ -679,10 +679,10 @@ label Massage_Cycle:
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
-                $ Girl.change_stat("lust", 60, 2)
-                $ Girl.change_stat("lust", 90, 1)
+                call change_Girl_stat(Girl, "lust", 60, 2)
+                call change_Girl_stat(Girl, "lust", 90, 1)
                 if Past == Current:
-                    $ Girl.change_stat("lust", 60, 1)
+                    call change_Girl_stat(Girl, "lust", 60, 1)
                     "You really put some pressure into stretching out her quads, and she groans in pleasure."
                 else:
                     "[line]. Her legs stretch out with clear satisfaction."
@@ -705,10 +705,10 @@ label Massage_Cycle:
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
-                $ Girl.change_stat("lust", 60, 2)
-                $ Girl.change_stat("lust", 90, 1)
+                call change_Girl_stat(Girl, "lust", 60, 2)
+                call change_Girl_stat(Girl, "lust", 90, 1)
                 if Past == Current:
-                    $ Girl.change_stat("lust", 60, 1)
+                    call change_Girl_stat(Girl, "lust", 60, 1)
                     "You stretch her ankles back and forth, as you work out her tensed calves."
                 else:
                     "[line]. She flexes her toes in satisfaction as her muscles stretch out."
@@ -728,10 +728,10 @@ label Massage_Cycle:
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
-                $ Girl.change_stat("lust", 60, 2)
-                $ Girl.change_stat("lust", 90, 1)
+                call change_Girl_stat(Girl, "lust", 60, 2)
+                call change_Girl_stat(Girl, "lust", 90, 1)
                 if Past == Current:
-                    $ Girl.change_stat("lust", 90, 2)
+                    call change_Girl_stat(Girl, "lust", 90, 2)
                     "You press your thumbs deeply into her arches, and her toes curl around them."
                 else:
                     "[line]. She stretches her toes and lets out a soft moan."
@@ -747,8 +747,8 @@ label Massage_Cycle:
         if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
             if Girl == JeanX:
-                $ Girl.change_stat("love", 60, 1)
-                $ Girl.change_stat("obedience", 30, 1)
+                call change_Girl_stat(Girl, "love", 60, 1)
+                call change_Girl_stat(Girl, "obedience", 30, 1)
         elif approval_check(Girl, Check):
 
             $ line = line + renpy.random.choice([". She wriggles a little in contentment.",
@@ -756,8 +756,8 @@ label Massage_Cycle:
                                 ". She really seems to enjoy it.",
                                 ". She seems comfortable with this.",
                                 ". She lets out a small purr of pleasure."])
-            $ Girl.change_stat("lust", 60, 2)
-            $ Girl.change_stat("lust", 90, 1)
+            call change_Girl_stat(Girl, "lust", 60, 2)
+            call change_Girl_stat(Girl, "lust", 90, 1)
             "[line]"
             if Current == Past and Current in ("breasts","ass","pussy"):
 
@@ -777,8 +777,8 @@ label Massage_Cycle:
                                 ". She doesn't seem to enjoy it.",
                                 ". She doesn't seem comfortable with this.",
                                 ". She lets out a small tsk of irritation."])
-            $ Girl.change_stat("lust", 60, -1)
-            $ Girl.change_stat("lust", 90, -2)
+            call change_Girl_stat(Girl, "lust", 60, -1)
+            call change_Girl_stat(Girl, "lust", 90, -2)
             "[line]"
             if Current == Past and Current in ("breasts","ass","pussy"):
 
@@ -830,7 +830,7 @@ label Massage_Cycle:
                     call show_full_body(Girl)
                     call show_full_body(Partner)
                     return
-                $ Girl.change_stat("lust", 200, 5)
+                call change_Girl_stat(Girl, "lust", 200, 5)
                 if 100 > Girl.lust >= 70 and Girl.session_orgasms < 2:
                     $ Girl.recent_history.append("unsatisfied")
                     $ Girl.daily_history.append("unsatisfied")
@@ -860,8 +860,8 @@ label Massage_Cycle:
                     elif Girl == JeanX:
                         ch_j "Wow, you really know what you're doing there. . ."
                         if Girl.event_counter["orgasmed"]< 2:
-                            $ Girl.change_stat("love", 80, 2)
-                            $ Girl.change_stat("obedience", 50, 2)
+                            call change_Girl_stat(Girl, "love", 80, 2)
+                            call change_Girl_stat(Girl, "obedience", 50, 2)
                     elif Girl == StormX:
                         ch_s ". . ."
                         ch_s "Well that was unexpected. . ."
@@ -887,9 +887,9 @@ label Massage_Cycle:
 label Massage_After:
     call show_full_body(Girl)
     if MCount >= 3:
-        $ Girl.change_stat("love", 90, 1)
-        $ Girl.change_stat("love", 50, 2)
-        $ Girl.change_stat("obedience", 30, 2)
+        call change_Girl_stat(Girl, "love", 90, 1)
+        call change_Girl_stat(Girl, "love", 50, 2)
+        call change_Girl_stat(Girl, "obedience", 30, 2)
 
     $ Girl.action_counter["massage"] += 1
     $ Girl.remaining_actions -= 1
@@ -915,9 +915,9 @@ label Massage_After:
             ch_l "That felt amazing, did you have anything else in mind?"
         elif Girl == JeanX:
             ch_j "Mmmm. . . that was fantastic!"
-            $ Girl.change_stat("love", 80, 2)
-            $ Girl.change_stat("love", 50, 2)
-            $ Girl.change_stat("obedience", 50, 2)
+            call change_Girl_stat(Girl, "love", 80, 2)
+            call change_Girl_stat(Girl, "love", 50, 2)
+            call change_Girl_stat(Girl, "obedience", 50, 2)
             ch_j "Did you have any other plans?"
         elif Girl == StormX:
             ch_s "That was a truly exceptional massage, [Girl.player_petname]."
@@ -957,7 +957,7 @@ label Massage_After:
             ch_s "Thank you, [Girl.player_petname]."
         elif Girl == JubesX:
             ch_v "Hey, good job with that one."
-    $ Girl.change_stat("love", 90, int(MCount/2))
+    call change_Girl_stat(Girl, "love", 90, int(MCount/2))
     $ approval_bonus = 0
     call checkout
     return

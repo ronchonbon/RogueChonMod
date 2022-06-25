@@ -47,7 +47,7 @@ label Kitty_Relationship:
                 if KittyX.love >= 800:
                     $ KittyX.change_face("_surprised", 1)
                     $ KittyX.mouth = "_smile"
-                    $ KittyX.change_stat("love", 200, 40)
+                    call change_Girl_stat(KittyX, "love", 200, 40)
                     ch_k "YES!"
                     if "boyfriend" not in KittyX.player_petnames:
                         $ KittyX.player_petnames.append("boyfriend")
@@ -94,7 +94,7 @@ label Kitty_Relationship:
                 if KittyX.love >= 800:
                     $ KittyX.change_face("_surprised", 1)
                     $ KittyX.mouth = "_smile"
-                    $ KittyX.change_stat("love", 90, 5)
+                    call change_Girl_stat(KittyX, "love", 90, 5)
                     ch_k "Well, I guess, sure!"
                     if "boyfriend" not in KittyX.player_petnames:
                         $ KittyX.player_petnames.append("boyfriend")
@@ -108,7 +108,7 @@ label Kitty_Relationship:
                     $ KittyX.action_counter["kiss"] += 1
                 elif KittyX.love >= 600 and approval_check(KittyX, 1500):
                     $ KittyX.change_face("_smile", 1)
-                    $ KittyX.change_stat("love", 90, 5)
+                    call change_Girl_stat(KittyX, "love", 90, 5)
                     ch_k "Um, ok, I guess."
                     if "boyfriend" not in KittyX.player_petnames:
                         $ KittyX.player_petnames.append("boyfriend")
@@ -427,14 +427,14 @@ label Kitty_Monogamy:
 
                 $ KittyX.change_face("_sly", 1)
                 if "monogamous" not in KittyX.daily_history:
-                    $ KittyX.change_stat("obedience", 90, -2)
+                    call change_Girl_stat(KittyX, "obedience", 90, -2)
                 ch_k "I[KittyX.like]appreciate the interest, but you aren't around enough. . ."
                 return
             elif approval_check(KittyX, 1100, "LO", taboo_modifier=0) and KittyX.love >= KittyX.obedience:
 
                 $ KittyX.change_face("_sly", 1)
                 if "monogamous" not in KittyX.daily_history:
-                    $ KittyX.change_stat("love", 90, 1)
+                    call change_Girl_stat(KittyX, "love", 90, 1)
                 ch_k "Aw, is someone jellie?"
                 ch_k "I guess I could take care of myself. . ."
             elif approval_check(KittyX, 600, "O", taboo_modifier=0):
@@ -447,7 +447,7 @@ label Kitty_Monogamy:
                 ch_k "I'll hook up with who I want!"
                 return
             if "monogamous" not in KittyX.daily_history:
-                $ KittyX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(KittyX, "obedience", 90, 3)
             $ KittyX.add_word(1, 0,"monogamous")
             $ KittyX.traits.append("monogamous")
         "Don't hook up with other girls." if "monogamous" not in KittyX.traits:
@@ -459,7 +459,7 @@ label Kitty_Monogamy:
 
                 $ KittyX.change_face("_sly", 1)
                 if "monogamous" not in KittyX.daily_history:
-                    $ KittyX.change_stat("obedience", 90, -2)
+                    call change_Girl_stat(KittyX, "obedience", 90, -2)
                 ch_k "I[KittyX.like]appreciate the interest, but you aren't around enough. . ."
                 return
             elif approval_check(KittyX, 500, "O", taboo_modifier=0):
@@ -477,7 +477,7 @@ label Kitty_Monogamy:
                 ch_k "I'll hook up with who I want!"
                 return
             if "monogamous" not in KittyX.daily_history:
-                $ KittyX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(KittyX, "obedience", 90, 3)
             $ KittyX.add_word(1, 0,"monogamous")
             $ KittyX.traits.append("monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in KittyX.traits:
@@ -491,10 +491,10 @@ label Kitty_Monogamy:
             else:
                 $ KittyX.change_face("_sly", 1,brows = "_confused")
                 if "monogamous" not in KittyX.daily_history:
-                    $ KittyX.change_stat("love", 90, -2)
+                    call change_Girl_stat(KittyX, "love", 90, -2)
                 ch_k "You're not the boss of my pussy!"
             if "monogamous" not in KittyX.daily_history:
-                $ KittyX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(KittyX, "obedience", 90, 3)
             if "monogamous" in KittyX.traits:
                 $ KittyX.traits.remove("monogamous")
             $ KittyX.add_word(1, 0,"monogamous")
@@ -515,7 +515,7 @@ label Kitty_Jumped:
 
                 $ KittyX.change_face("_surprised",2)
                 if "chill" not in KittyX.daily_history:
-                    $ KittyX.change_stat("obedience", 90, -2)
+                    call change_Girl_stat(KittyX, "obedience", 90, -2)
                 ch_k "Well- Well maybe spend some more time with me!"
                 $ KittyX.change_face("_angry", 1,eyes = "_side")
                 return
@@ -523,7 +523,7 @@ label Kitty_Jumped:
 
                 $ KittyX.change_face("_sadside", 1)
                 if "chill" not in KittyX.daily_history:
-                    $ KittyX.change_stat("love", 90, 1)
+                    call change_Girl_stat(KittyX, "love", 90, 1)
                 ch_k "Sorry, [KittyX.player_petname]. . ."
                 ch_k "I can't keep my hands to myself. . ."
                 ch_k "I'll try though. . ."
@@ -537,7 +537,7 @@ label Kitty_Jumped:
                 ch_k "I can't keep my hands to myself. . ."
                 return
             if "chill" not in KittyX.daily_history:
-                $ KittyX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(KittyX, "obedience", 90, 3)
             $ KittyX.add_word(1, 0,"chill")
             $ KittyX.traits.append("chill")
         "Don't bother me like that." if "chill" not in KittyX.traits:
@@ -549,7 +549,7 @@ label Kitty_Jumped:
 
                 $ KittyX.change_face("_angry", 1)
                 if "chill" not in KittyX.daily_history:
-                    $ KittyX.change_stat("obedience", 90, -2)
+                    call change_Girl_stat(KittyX, "obedience", 90, -2)
                 ch_k "Don't keep me waiting then!"
                 return
             elif approval_check(KittyX, 400, "O", taboo_modifier=0):
@@ -567,7 +567,7 @@ label Kitty_Jumped:
                 ch_k "I don't know. I guess we'll see. . ."
                 return
             if "chill" not in KittyX.daily_history:
-                $ KittyX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(KittyX, "obedience", 90, 3)
             $ KittyX.add_word(1, 0,"chill")
             $ KittyX.traits.append("chill")
         "Knock yourself out.":
@@ -580,12 +580,12 @@ label Kitty_Jumped:
             else:
                 $ KittyX.change_face("_sly", 1,brows = "_confused")
                 if "chill" not in KittyX.daily_history:
-                    $ KittyX.change_stat("love", 90, -2)
+                    call change_Girl_stat(KittyX, "love", 90, -2)
                 ch_k "I don't know."
                 ch_k "If I've got the time."
                 ch_k "I guess."
             if "chill" not in KittyX.daily_history:
-                $ KittyX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(KittyX, "obedience", 90, 3)
             if "chill" in KittyX.traits:
                 $ KittyX.traits.remove("chill")
             $ KittyX.add_word(1, 0,"chill")
@@ -623,11 +623,11 @@ label Kitty_SexChat:
                         "Sex.":
                             $ KittyX.change_face("_sly")
                             if KittyX.player_favorite_action == "sex":
-                                $ KittyX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(KittyX, "lust", 80, 5)
                                 ch_k "Yeah, I know that. . ."
                             elif KittyX.favorite_action == "sex":
-                                $ KittyX.change_stat("love", 90, 5)
-                                $ KittyX.change_stat("lust", 80, 10)
+                                call change_Girl_stat(KittyX, "love", 90, 5)
+                                call change_Girl_stat(KittyX, "lust", 80, 10)
                                 ch_k "I really like it too!"
                             elif KittyX.action_counter["sex"] >= 5:
                                 ch_k "Well I don't mind that."
@@ -642,11 +642,11 @@ label Kitty_SexChat:
 
                             $ KittyX.change_face("_sly")
                             if KittyX.player_favorite_action == "anal":
-                                $ KittyX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(KittyX, "lust", 80, 5)
                                 ch_k "So you've said. . ."
                             elif KittyX.favorite_action == "anal":
-                                $ KittyX.change_stat("love", 90, 5)
-                                $ KittyX.change_stat("lust", 80, 10)
+                                call change_Girl_stat(KittyX, "love", 90, 5)
+                                call change_Girl_stat(KittyX, "lust", 80, 10)
                                 ch_k "I love it too!"
                             elif KittyX.action_counter["anal"] >= 10:
                                 ch_k "Yeah, it's. . . nice. . ."
@@ -661,11 +661,11 @@ label Kitty_SexChat:
 
                             $ KittyX.change_face("_sly")
                             if KittyX.player_favorite_action == "blowjob":
-                                $ KittyX.change_stat("lust", 80, 3)
+                                call change_Girl_stat(KittyX, "lust", 80, 3)
                                 ch_k "Yeah, I know."
                             elif KittyX.favorite_action == "blowjob":
-                                $ KittyX.change_stat("love", 90, 5)
-                                $ KittyX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(KittyX, "love", 90, 5)
+                                call change_Girl_stat(KittyX, "lust", 80, 5)
                                 ch_k "I love your dick!"
                             elif KittyX.action_counter["blowjob"] >= 10:
                                 ch_k "Yeah, you're pretty tasty."
@@ -680,11 +680,11 @@ label Kitty_SexChat:
 
                             $ KittyX.change_face("_sly")
                             if KittyX.player_favorite_action == "titjob":
-                                $ KittyX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(KittyX, "lust", 80, 5)
                                 ch_k "Yeah, you've said that before. . ."
                             elif KittyX.favorite_action == "titjob":
-                                $ KittyX.change_stat("love", 90, 5)
-                                $ KittyX.change_stat("lust", 80, 7)
+                                call change_Girl_stat(KittyX, "love", 90, 5)
+                                call change_Girl_stat(KittyX, "lust", 80, 7)
                                 ch_k "Yeah, I enjoy that too. . ."
                             elif KittyX.action_counter["titjob"] >= 10:
                                 ch_k "It's certainly an interesting experience . . ."
@@ -694,18 +694,18 @@ label Kitty_SexChat:
                             else:
                                 $ KittyX.change_face("_bemused")
                                 ch_k "That's nice of you to say. . ."
-                                $ KittyX.change_stat("love", 80, 5)
-                                $ KittyX.change_stat("inhibition", 50, 10)
+                                call change_Girl_stat(KittyX, "love", 80, 5)
+                                call change_Girl_stat(KittyX, "inhibition", 50, 10)
                             $ KittyX.player_favorite_action = "titjob"
                         "Footjobs.":
 
                             $ KittyX.change_face("_sly")
                             if KittyX.player_favorite_action == "footjob":
-                                $ KittyX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(KittyX, "lust", 80, 5)
                                 ch_k "Yeah, you've said that. . ."
                             elif KittyX.favorite_action == "footjob":
-                                $ KittyX.change_stat("love", 90, 5)
-                                $ KittyX.change_stat("lust", 80, 7)
+                                call change_Girl_stat(KittyX, "love", 90, 5)
+                                call change_Girl_stat(KittyX, "lust", 80, 7)
                                 ch_k "You do feel pretty nice. . ."
                             elif KittyX.action_counter["footjob"] >= 10:
                                 ch_k "I like it too . . ."
@@ -720,11 +720,11 @@ label Kitty_SexChat:
 
                             $ KittyX.change_face("_sly")
                             if KittyX.player_favorite_action == "handjob":
-                                $ KittyX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(KittyX, "lust", 80, 5)
                                 ch_k "Yeah, you've said that. . ."
                             elif KittyX.favorite_action == "handjob":
-                                $ KittyX.change_stat("love", 90, 5)
-                                $ KittyX.change_stat("lust", 80, 7)
+                                call change_Girl_stat(KittyX, "love", 90, 5)
+                                call change_Girl_stat(KittyX, "lust", 80, 7)
                                 ch_k "You do feel pretty comfy. . ."
                             elif KittyX.action_counter["handjob"] >= 10:
                                 ch_k "I like it too . . ."
@@ -740,11 +740,11 @@ label Kitty_SexChat:
                             $ counter = KittyX.action_counter["fondle_breasts"]+ KittyX.action_counter["fondle_thighs"]+ KittyX.action_counter["suck_breasts"] + KittyX.action_counter["hotdog"]
                             $ KittyX.change_face("_sly")
                             if KittyX.player_favorite_action == "fondle":
-                                $ KittyX.change_stat("lust", 80, 3)
+                                call change_Girl_stat(KittyX, "lust", 80, 3)
                                 ch_k "Yeah, I think we're clear on that. . ."
                             elif KittyX.favorite_action in ("hotdog","suck_breasts","fondle_breasts","fondle_thighs"):
-                                $ KittyX.change_stat("love", 90, 5)
-                                $ KittyX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(KittyX, "love", 90, 5)
+                                call change_Girl_stat(KittyX, "lust", 80, 5)
                                 ch_k "I love when you touch me. . ."
                             elif counter >= 10:
                                 ch_k "Yeah, it's really nice . . ."
@@ -760,11 +760,11 @@ label Kitty_SexChat:
 
                             $ KittyX.change_face("_sly")
                             if KittyX.player_favorite_action == "kiss":
-                                $ KittyX.change_stat("love", 90, 3)
+                                call change_Girl_stat(KittyX, "love", 90, 3)
                                 ch_k "Such a romantic. . ."
                             elif KittyX.favorite_action == "kiss":
-                                $ KittyX.change_stat("love", 90, 5)
-                                $ KittyX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(KittyX, "love", 90, 5)
+                                call change_Girl_stat(KittyX, "lust", 80, 5)
                                 ch_k "Hmm, the taste of you on my lips. . ."
                             elif KittyX.action_counter["kiss"] >= 10:
                                 ch_k "I love kissing you too . . ."
@@ -837,25 +837,25 @@ label Kitty_SexChat:
                 else:
                     if approval_check(KittyX, 1000) and KittyX.obedience <= KittyX.love:
                         $ KittyX.change_face("_bemused")
-                        $ KittyX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(KittyX, "obedience", 90, 1)
                         ch_k "Well, I guess I can be quieter. . ."
                         $ KittyX.traits.remove("vocal")
                     elif approval_check(KittyX, 700, "O"):
                         $ KittyX.change_face("_sadside")
-                        $ KittyX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(KittyX, "obedience", 90, 1)
                         ch_k "Um, ok, [KittyX.player_petname]."
                         $ KittyX.traits.remove("vocal")
                     elif approval_check(KittyX, 600):
                         $ KittyX.change_face("_sly")
-                        $ KittyX.change_stat("love", 90, -3)
-                        $ KittyX.change_stat("obedience", 50, -1)
-                        $ KittyX.change_stat("inhibition", 90, 5)
+                        call change_Girl_stat(KittyX, "love", 90, -3)
+                        call change_Girl_stat(KittyX, "obedience", 50, -1)
+                        call change_Girl_stat(KittyX, "inhibition", 90, 5)
                         ch_k "You wish, [KittyX.player_petname]."
                     else:
                         $ KittyX.change_face("_angry")
-                        $ KittyX.change_stat("love", 90, -5)
-                        $ KittyX.change_stat("obedience", 60, -3)
-                        $ KittyX.change_stat("inhibition", 90, 10)
+                        call change_Girl_stat(KittyX, "love", 90, -5)
+                        call change_Girl_stat(KittyX, "obedience", 60, -3)
+                        call change_Girl_stat(KittyX, "inhibition", 90, 10)
                         ch_k "Oh, am I too {i}chatty{/i} when I'm getting you off?"
 
                     $ KittyX.daily_history.append("setvocal")
@@ -866,22 +866,22 @@ label Kitty_SexChat:
                 else:
                     if approval_check(KittyX, 1000) and KittyX.obedience <= KittyX.love:
                         $ KittyX.change_face("_sly")
-                        $ KittyX.change_stat("obedience", 90, 2)
+                        call change_Girl_stat(KittyX, "obedience", 90, 2)
                         ch_k "Hmm, ok. . ."
                         $ KittyX.traits.append("vocal")
                     elif approval_check(KittyX, 700, "O"):
                         $ KittyX.change_face("_sadside")
-                        $ KittyX.change_stat("obedience", 90, 2)
+                        call change_Girl_stat(KittyX, "obedience", 90, 2)
                         ch_k "I guess I could try, [KittyX.player_petname]."
                         $ KittyX.traits.append("vocal")
                     elif approval_check(KittyX, 600):
                         $ KittyX.change_face("_sly")
-                        $ KittyX.change_stat("obedience", 90, 3)
+                        call change_Girl_stat(KittyX, "obedience", 90, 3)
                         ch_k "I guess I could, [KittyX.player_petname]."
                         $ KittyX.traits.append("vocal")
                     else:
                         $ KittyX.change_face("_angry")
-                        $ KittyX.change_stat("inhibition", 90, 5)
+                        call change_Girl_stat(KittyX, "inhibition", 90, 5)
                         ch_k "Hmm, I don't know about that."
 
                     $ KittyX.daily_history.append("setvocal")
@@ -894,25 +894,25 @@ label Kitty_SexChat:
                 else:
                     if approval_check(KittyX, 1000) and KittyX.obedience <= KittyX.love:
                         $ KittyX.change_face("_bemused")
-                        $ KittyX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(KittyX, "obedience", 90, 1)
                         ch_k "Heh, if you insist. . ."
                         $ KittyX.traits.append("passive")
                     elif approval_check(KittyX, 700, "O"):
                         $ KittyX.change_face("_sadside")
-                        $ KittyX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(KittyX, "obedience", 90, 1)
                         ch_k "I'll try to hold back, [KittyX.player_petname]."
                         $ KittyX.traits.append("passive")
                     elif approval_check(KittyX, 600):
                         $ KittyX.change_face("_sly")
-                        $ KittyX.change_stat("love", 90, -3)
-                        $ KittyX.change_stat("obedience", 50, -1)
-                        $ KittyX.change_stat("inhibition", 90, 5)
+                        call change_Girl_stat(KittyX, "love", 90, -3)
+                        call change_Girl_stat(KittyX, "obedience", 50, -1)
+                        call change_Girl_stat(KittyX, "inhibition", 90, 5)
                         ch_k "You wish, [KittyX.player_petname]."
                     else:
                         $ KittyX.change_face("_angry")
-                        $ KittyX.change_stat("love", 90, -5)
-                        $ KittyX.change_stat("obedience", 60, -3)
-                        $ KittyX.change_stat("inhibition", 90, 10)
+                        call change_Girl_stat(KittyX, "love", 90, -5)
+                        call change_Girl_stat(KittyX, "obedience", 60, -3)
+                        call change_Girl_stat(KittyX, "inhibition", 90, 10)
                         ch_k "If I feel like it."
 
                     $ KittyX.daily_history.append("initiative")
@@ -923,22 +923,22 @@ label Kitty_SexChat:
                 else:
                     if approval_check(KittyX, 1000) and KittyX.obedience <= KittyX.love:
                         $ KittyX.change_face("_bemused")
-                        $ KittyX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(KittyX, "obedience", 90, 1)
                         ch_k "Heh, I'll see what I can do. . ."
                         $ KittyX.traits.remove("passive")
                     elif approval_check(KittyX, 700, "O"):
                         $ KittyX.change_face("_sadside")
-                        $ KittyX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(KittyX, "obedience", 90, 1)
                         ch_k "I can do that, [KittyX.player_petname]."
                         $ KittyX.traits.remove("passive")
                     elif approval_check(KittyX, 600):
                         $ KittyX.change_face("_sly")
-                        $ KittyX.change_stat("obedience", 90, 3)
+                        call change_Girl_stat(KittyX, "obedience", 90, 3)
                         ch_k "I can try, [KittyX.player_petname]."
                         $ KittyX.traits.remove("passive")
                     else:
                         $ KittyX.change_face("_angry")
-                        $ KittyX.change_stat("inhibition", 90, 5)
+                        call change_Girl_stat(KittyX, "inhibition", 90, 5)
                         ch_k "You're not my supervisor!"
 
                     $ KittyX.daily_history.append("initiative")
@@ -1162,40 +1162,40 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
             menu:
                 extend ""
                 "It was a total accident! I promise!":
-                    $ KittyX.change_stat("love", 50, 5)
-                    $ KittyX.change_stat("love", 90, 2)
+                    call change_Girl_stat(KittyX, "love", 50, 5)
+                    call change_Girl_stat(KittyX, "love", 90, 2)
                     if approval_check(KittyX, 1200):
                         $ KittyX.change_face("_sly", 1)
                         ch_k "Yeah? {i}Maybe{/i} you should[KittyX.like]have accidents like that more often."
                     $ KittyX.change_face("_smile")
                     ch_k "It's cool, [KittyX.player_petname]. Eveybody makes mistakes. . . sometimes."
                 "Just you.":
-                    $ KittyX.change_stat("obedience", 40, 5)
+                    call change_Girl_stat(KittyX, "obedience", 40, 5)
                     if approval_check(KittyX, 1000) or approval_check(KittyX, 700, "L"):
-                        $ KittyX.change_stat("love", 90, 3)
+                        call change_Girl_stat(KittyX, "love", 90, 3)
                         $ KittyX.change_face("_sly", 1)
                         ch_k "You know how to make a girl feel special, [KittyX.player_petname]."
                     else:
-                        $ KittyX.change_stat("love", 70, -5)
+                        call change_Girl_stat(KittyX, "love", 70, -5)
                         $ KittyX.change_face("_angry")
                         ch_k "You're {i}such{/i} a creep, [Player.name], y'know that?"
                 "Totally on purpose. I regret nothing.":
                     if approval_check(KittyX, 1200):
-                        $ KittyX.change_stat("love", 90, 3)
-                        $ KittyX.change_stat("obedience", 70, 10)
-                        $ KittyX.change_stat("inhibition", 50, 5)
+                        call change_Girl_stat(KittyX, "love", 90, 3)
+                        call change_Girl_stat(KittyX, "obedience", 70, 10)
+                        call change_Girl_stat(KittyX, "inhibition", 50, 5)
                         $ KittyX.change_face("_sly", 1)
                         ch_k "Hmm. . .next time, we'll have to[KittyX.like]take advantage of the moment."
                     elif approval_check(KittyX, 800):
-                        $ KittyX.change_stat("obedience", 60, 5)
-                        $ KittyX.change_stat("inhibition", 50, 5)
+                        call change_Girl_stat(KittyX, "obedience", 60, 5)
+                        call change_Girl_stat(KittyX, "inhibition", 50, 5)
                         $ KittyX.change_face("_perplexed",2)
                         ch_k "Wha. . . um. . . okay?"
                         $ KittyX.blushing = "_blush1"
                     else:
-                        $ KittyX.change_stat("love", 50, -10)
-                        $ KittyX.change_stat("love", 80, -10)
-                        $ KittyX.change_stat("obedience", 50, 10)
+                        call change_Girl_stat(KittyX, "love", 50, -10)
+                        call change_Girl_stat(KittyX, "love", 80, -10)
+                        call change_Girl_stat(KittyX, "obedience", 50, 10)
                         $ KittyX.change_face("_angry")
                         ch_k "You're such a creep, [KittyX.player_petname], y'know that?"
 
@@ -1215,9 +1215,9 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
                 $ KittyX.change_face("_sly",2)
                 ch_k "They were[KittyX.like]. . .{i}interesting{/i}."
             "Good. You looked like you could use to learn a thing or two from them.":
-                $ KittyX.change_stat("love", 90, -3)
-                $ KittyX.change_stat("obedience", 70, 5)
-                $ KittyX.change_stat("inhibition", 50, 5)
+                call change_Girl_stat(KittyX, "love", 90, -3)
+                call change_Girl_stat(KittyX, "obedience", 70, 5)
+                call change_Girl_stat(KittyX, "inhibition", 50, 5)
                 $ KittyX.change_face("_angry")
                 ch_k "Guess {i}you'll{/i} never find out, huh?"
         $ KittyX.blushing = "_blush1"
@@ -1247,25 +1247,25 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
             menu:
                 extend ""
                 "You were totally amazing.":
-                    $ KittyX.change_stat("love", 90, 5)
-                    $ KittyX.change_stat("inhibition", 60, 10)
+                    call change_Girl_stat(KittyX, "love", 90, 5)
+                    call change_Girl_stat(KittyX, "inhibition", 60, 10)
                     $ KittyX.change_face("_sexy", 1)
                     ch_k "Awesome. 'Cause I can't wait to try again."
                 "Honestly? It was good. . .but you could use a little practice, I think.":
                     if approval_check(KittyX, 300, "I") or not approval_check(KittyX, 800):
-                        $ KittyX.change_stat("love", 90, -5)
-                        $ KittyX.change_stat("obedience", 60, 10)
-                        $ KittyX.change_stat("inhibition", 50, 10)
+                        call change_Girl_stat(KittyX, "love", 90, -5)
+                        call change_Girl_stat(KittyX, "obedience", 60, 10)
+                        call change_Girl_stat(KittyX, "inhibition", 50, 10)
                         $ KittyX.change_face("_perplexed", 1)
                         ch_k "Yeah? Well then maybe I'll get some practice in before we do it again."
                     else:
-                        $ KittyX.change_stat("obedience", 70, 15)
-                        $ KittyX.change_stat("inhibition", 50, 5)
+                        call change_Girl_stat(KittyX, "obedience", 70, 15)
+                        call change_Girl_stat(KittyX, "inhibition", 50, 5)
                         $ KittyX.change_face("_sexy", 1)
                         ch_k "Yeah? Well, I'm[KittyX.player_petname]looking forward our next training session, then."
                 "I guess. If you're into weird sounds and too much teeth. Spoiler, I'm not.":
-                    $ KittyX.change_stat("love", 90, -10)
-                    $ KittyX.change_stat("obedience", 60, 10)
+                    call change_Girl_stat(KittyX, "love", 90, -10)
+                    call change_Girl_stat(KittyX, "obedience", 60, 10)
                     $ KittyX.change_face("_angry",2)
                     ch_k "Guess you're gonna have to[KittyX.like]figure out a way to get it to suck itself then from now on. . .{i}jerk{/i}."
             $ KittyX.blushing = "_blush1"
@@ -1332,14 +1332,14 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
             extend ""
             "Oh, ok then.":
                 $ KittyX.change_face("_perplexed", 1)
-                $ KittyX.change_stat("love", 60, 2)
+                call change_Girl_stat(KittyX, "love", 60, 2)
                 ch_k ". . ."
             "Yeah, I know.":
-                $ KittyX.change_stat("love", 90, 5)
+                call change_Girl_stat(KittyX, "love", 90, 5)
             "Huh, why not go by that then?":
                 if approval_check(KittyX, 1200, "LO") or approval_check(KittyX, 500, "0"):
                     $ KittyX.name = "Shadowcat"
-                    $ KittyX.change_stat("obedience", 90, 5)
+                    call change_Girl_stat(KittyX, "obedience", 90, 5)
                     ch_k "I guess? . ."
                 else:
                     ch_k "Kind of a silly name to go around with. . ."
@@ -1348,8 +1348,8 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
                         "Ok, \"[KittyX.name]\" it is then.":
                             $ KittyX.change_face("_smile", 1)
                         "I insist.":
-                            $ KittyX.change_stat("love", 90, -10)
-                            $ KittyX.change_stat("obedience", 50, 10)
+                            call change_Girl_stat(KittyX, "love", 90, -10)
+                            call change_Girl_stat(KittyX, "obedience", 50, 10)
                             $ KittyX.change_face("_angry", 2)
         ch_k ". . ."
 
@@ -1361,18 +1361,18 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
             extend ""
             "Oh, ok then.":
                 $ KittyX.change_face("_perplexed", 1)
-                $ KittyX.change_stat("love", 60, 2)
+                call change_Girl_stat(KittyX, "love", 60, 2)
                 ch_k ". . ."
             "I kind of prefer \"[KittyX.name].\"":
-                $ KittyX.change_stat("love", 90, 5)
-                $ KittyX.change_stat("inhibition", 50, 5)
+                call change_Girl_stat(KittyX, "love", 90, 5)
+                call change_Girl_stat(KittyX, "inhibition", 50, 5)
                 if approval_check(KittyX, 800, "LO"):
-                    $ KittyX.change_stat("obedience", 70, 5)
+                    call change_Girl_stat(KittyX, "obedience", 70, 5)
                 ch_k "Yeah, me too. . ."
             "Why not go by \"Katherine\" then?":
                 if approval_check(KittyX, 1200, "LO") or approval_check(KittyX, 500, "0"):
                     $ KittyX.name = "Katherine"
-                    $ KittyX.change_stat("obedience", 90, 5)
+                    call change_Girl_stat(KittyX, "obedience", 90, 5)
                     ch_k "I suppose I could. . ."
                 else:
                     ch_k "I don't really like it that much. . ."
@@ -1381,8 +1381,8 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
                         "Ok, \"[KittyX.name]\" it is then.":
                             $ KittyX.change_face("_smile", 1)
                         "I insist.":
-                            $ KittyX.change_stat("love", 90, -10)
-                            $ KittyX.change_stat("obedience", 50, 10)
+                            call change_Girl_stat(KittyX, "love", 90, -10)
+                            call change_Girl_stat(KittyX, "obedience", 50, 10)
                             $ KittyX.change_face("_angry", 2)
                             ch_k "!!!"
 
@@ -1392,7 +1392,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
         ch_k "Maybe I didn't mention it before, but. . ."
         ch_k "That cock of yours is. . . impressive."
         $ KittyX.change_face("_bemused", 1)
-        $ KittyX.change_stat("love", 90, 3)
+        call change_Girl_stat(KittyX, "love", 90, 3)
         $ KittyX.history.remove("seenpeen")
     elif Options[0] == "topless":
         $ KittyX.change_face("_bemused",2,eyes = "_side")
@@ -1707,16 +1707,16 @@ label Kitty_Rename:
             ch_k "Me too!"
         "I thought \"Kate\" sounded cool." if KittyX.name != "Kate" and "Kate" in KittyX.names:
             if "namechange" not in KittyX.daily_history:
-                $ KittyX.change_stat("love", 70, 1)
-                $ KittyX.change_stat("inhibition", 60, 2)
-                $ KittyX.change_stat("inhibition", 80, 1)
+                call change_Girl_stat(KittyX, "love", 70, 1)
+                call change_Girl_stat(KittyX, "inhibition", 60, 2)
+                call change_Girl_stat(KittyX, "inhibition", 80, 1)
             $ KittyX.name = "Kate"
             ch_k "Yeah, I thought so too. . ."
         "Do you go by \"Katherine?\"" if KittyX.name != "Katherine" and "Katherine" in KittyX.names:
             if approval_check(KittyX, 1200, "LO") or approval_check(KittyX, 500, "0"):
                 $ KittyX.name = "Katherine"
                 if "namechange" not in KittyX.daily_history:
-                    $ KittyX.change_stat("obedience", 70, 2)
+                    call change_Girl_stat(KittyX, "obedience", 70, 2)
                 ch_k "I guess. . . I could?"
             else:
                 ch_k "I don't really like that one. . ."
@@ -1916,57 +1916,57 @@ label Kitty_Summon(approval_bonus=approval_bonus):
             menu:
                 extend ""
                 "Sure, I'll be right there.":
-                    $ KittyX.change_stat("love", 55, 1)
-                    $ KittyX.change_stat("inhibition", 30, 1)
+                    call change_Girl_stat(KittyX, "love", 55, 1)
+                    call change_Girl_stat(KittyX, "inhibition", 30, 1)
                     ch_k "See ya!"
                     $ line = "go to"
                 "Nah, we can talk later.":
 
-                    $ KittyX.change_stat("obedience", 50, 1)
-                    $ KittyX.change_stat("obedience", 30, 2)
+                    call change_Girl_stat(KittyX, "obedience", 50, 1)
+                    call change_Girl_stat(KittyX, "obedience", 30, 2)
                     ch_k "Oh, ok. Later then."
                 "Could you please come visit me? I'm lonely.":
 
                     if approval_check(KittyX, 600, "L") or approval_check(KittyX, 1400):
-                        $ KittyX.change_stat("love", 70, 1)
-                        $ KittyX.change_stat("obedience", 50, 1)
+                        call change_Girl_stat(KittyX, "love", 70, 1)
+                        call change_Girl_stat(KittyX, "obedience", 50, 1)
                         $ line = "lonely"
                     else:
-                        $ KittyX.change_stat("inhibition", 30, 1)
+                        call change_Girl_stat(KittyX, "inhibition", 30, 1)
                         $ line = "no"
                 "I said come over here.":
 
                     if approval_check(KittyX, 600, "O"):
 
-                        $ KittyX.change_stat("love", 50, 1, 1)
-                        $ KittyX.change_stat("love", 40, -1)
-                        $ KittyX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(KittyX, "love", 50, 1, 1)
+                        call change_Girl_stat(KittyX, "love", 40, -1)
+                        call change_Girl_stat(KittyX, "obedience", 90, 1)
                         $ line = "command"
 
                     elif D20 >= 7 and approval_check(KittyX, 1400):
 
-                        $ KittyX.change_stat("love", 70, -2)
-                        $ KittyX.change_stat("love", 90, -1)
-                        $ KittyX.change_stat("obedience", 50, 2)
-                        $ KittyX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(KittyX, "love", 70, -2)
+                        call change_Girl_stat(KittyX, "love", 90, -1)
+                        call change_Girl_stat(KittyX, "obedience", 50, 2)
+                        call change_Girl_stat(KittyX, "obedience", 90, 1)
                         ch_k "Ok, fine, [KittyX.player_petname]."
                         $ line = "yes"
 
                     elif approval_check(KittyX, 200, "O"):
 
-                        $ KittyX.change_stat("love", 70, -4)
-                        $ KittyX.change_stat("love", 90, -2)
+                        call change_Girl_stat(KittyX, "love", 70, -4)
+                        call change_Girl_stat(KittyX, "love", 90, -2)
                         ch_k "You're not my supervisor!"
-                        $ KittyX.change_stat("inhibition", 40, 2)
-                        $ KittyX.change_stat("inhibition", 60, 1)
-                        $ KittyX.change_stat("obedience", 70, -2)
+                        call change_Girl_stat(KittyX, "inhibition", 40, 2)
+                        call change_Girl_stat(KittyX, "inhibition", 60, 1)
+                        call change_Girl_stat(KittyX, "obedience", 70, -2)
                         ch_k "You know where to find me."
                     else:
 
-                        $ KittyX.change_stat("inhibition", 30, 1)
-                        $ KittyX.change_stat("inhibition", 50, 1)
-                        $ KittyX.change_stat("love", 50, -1, 1)
-                        $ KittyX.change_stat("obedience", 70, -1)
+                        call change_Girl_stat(KittyX, "inhibition", 30, 1)
+                        call change_Girl_stat(KittyX, "inhibition", 50, 1)
+                        call change_Girl_stat(KittyX, "love", 50, -1, 1)
+                        call change_Girl_stat(KittyX, "obedience", 70, -1)
                         $ line = "no"
     else:
 
@@ -2115,70 +2115,72 @@ label Kitty_Leave:
 
     $ D20 = renpy.random.randint(1, 20)
 
+    $ line = None
+
     menu:
         extend ""
         "Sure, I'll catch up.":
             if "followed" not in KittyX.recent_history:
-                $ KittyX.change_stat("love", 55, 1)
-                $ KittyX.change_stat("inhibition", 30, 1)
+                call change_Girl_stat(KittyX, "love", 55, 1)
+                call change_Girl_stat(KittyX, "inhibition", 30, 1)
 
             $ line = "go to"
         "Nah, we can talk later.":
             if "followed" not in KittyX.recent_history:
-                $ KittyX.change_stat("obedience", 50, 1)
-                $ KittyX.change_stat("obedience", 30, 2)
+                call change_Girl_stat(KittyX, "obedience", 50, 1)
+                call change_Girl_stat(KittyX, "obedience", 30, 2)
 
             ch_k "Ok, cool. Talk to you later then."
         "Could you please stay with me? I'll get lonely.":
             if approval_check(KittyX, 600, "L") or approval_check(KittyX, 1400):
                 if "followed" not in KittyX.recent_history:
-                    $ KittyX.change_stat("love", 70, 1)
-                    $ KittyX.change_stat("obedience", 50, 1)
+                    call change_Girl_stat(KittyX, "love", 70, 1)
+                    call change_Girl_stat(KittyX, "obedience", 50, 1)
 
                 $ line = "lonely"
             else:
                 if "followed" not in KittyX.recent_history:
-                    $ KittyX.change_stat("inhibition", 30, 1)
+                    call change_Girl_stat(KittyX, "inhibition", 30, 1)
 
                 $ line = "no"
         "No, stay here.":
             if approval_check(KittyX, 600, "O"):
                 if "followed" not in KittyX.recent_history:
                     if KittyX.love >= 50:
-                        $ KittyX.change_stat("love", 90, 1)
-                    $ KittyX.change_stat("love", 40, -1)
-                    $ KittyX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(KittyX, "love", 90, 1)
+                    call change_Girl_stat(KittyX, "love", 40, -1)
+                    call change_Girl_stat(KittyX, "obedience", 90, 1)
 
                 $ line = "command"
             elif D20 >= 7 and approval_check(KittyX, 1400):
                 if "followed" not in KittyX.recent_history:
-                    $ KittyX.change_stat("love", 70, -2)
-                    $ KittyX.change_stat("love", 90, -1)
-                    $ KittyX.change_stat("obedience", 50, 2)
-                    $ KittyX.change_stat("obedience", 90, 1)
+                    call change_Girl_stat(KittyX, "love", 70, -2)
+                    call change_Girl_stat(KittyX, "love", 90, -1)
+                    call change_Girl_stat(KittyX, "obedience", 50, 2)
+                    call change_Girl_stat(KittyX, "obedience", 90, 1)
 
                 ch_k "Uh, sure, I guess."
 
                 $ line = "yes"
             elif approval_check(KittyX, 200, "O"):
                 if "followed" not in KittyX.recent_history:
-                    $ KittyX.change_stat("love", 70, -4)
-                    $ KittyX.change_stat("love", 90, -2)
+                    call change_Girl_stat(KittyX, "love", 70, -4)
+                    call change_Girl_stat(KittyX, "love", 90, -2)
 
                 ch_k "[KittyX.Like]in your dreams, [KittyX.player_petname]."
 
                 if "followed" not in KittyX.recent_history:
-                    $ KittyX.change_stat("inhibition", 40, 2)
-                    $ KittyX.change_stat("inhibition", 60, 1)
-                    $ KittyX.change_stat("obedience", 70, -2)
+                    call change_Girl_stat(KittyX, "inhibition", 40, 2)
+                    call change_Girl_stat(KittyX, "inhibition", 60, 1)
+                    call change_Girl_stat(KittyX, "obedience", 70, -2)
 
                 ch_k "I'm gone."
             else:
                 if "followed" not in KittyX.recent_history:
-                    $ KittyX.change_stat("inhibition", 30, 1)
-                    $ KittyX.change_stat("inhibition", 50, 1)
-                    $ KittyX.change_stat("love", 50, -1, 1)
-                    $ KittyX.change_stat("obedience", 70, -1)
+                    call change_Girl_stat(KittyX, "inhibition", 30, 1)
+                    call change_Girl_stat(KittyX, "inhibition", 50, 1)
+                    call change_Girl_stat(KittyX, "love", 50, -1, 1)
+                    call change_Girl_stat(KittyX, "obedience", 70, -1)
 
                 $ line = "no"
 

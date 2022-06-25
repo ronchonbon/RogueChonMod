@@ -11,7 +11,6 @@ init -1 python hide:
     config.version = "0.3a"
 
     config.gl2 = True
-    config.keep_running_transform = False
     config.cache_surfaces = False
     config.optimize_texture_bounds = True
     config.image_cache_size = 200

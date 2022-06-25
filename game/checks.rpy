@@ -125,24 +125,16 @@ init python:
 
         return True
 
-label check_who_is_present:
+label check_who_is_present(location = Player.location):
     $ Present = Player.Party[:] if Player.Party else []
 
     python:
-        for G in Player.Party:
-            G.location = Player.location
-
         for G in all_Girls:
-            if G.location == "bg_teacher":
-                G.location = "bg_classroom"
-                G.teaching = True
-            elif G.teaching:
-                G.teaching = False
-
-            if G not in Present and G.location == Player.location:
-                Present.append(G)
-            elif G in Present and G.location != Player.location:
-                Present.remove(G)
+            if G not in Player.Party:
+                if G not in Present and G.location == location:
+                    Present.append(G)
+                elif G in Present and G.location != location:
+                    Present.remove(G)
 
         for G in Present:
             if G in Nearby:

@@ -1737,7 +1737,7 @@ label Offhand_Dialog(Girl=Primary, Templine=0):
                         " You kiss her passionately.",
                         " Your tongues swirl around each other's."])
         if Girl.love >= 300:
-            $ Girl.change_stat("love", 75, 1)
+            call change_Girl_stat(Girl, "love", 75, 1)
         $ PrimaryLust += 2 if Girl.lust < 50 else 1
 
     elif Player.secondary_action == "fondle_breasts":
@@ -2074,7 +2074,7 @@ label Girl_Self_lines(GirlA=Primary, Mode="T3", Action=girl_secondary_action, Te
         if Player.primary_action == "massage":
             $ TempFocusX += 4 if Player.focus < 50 else 3
             call change_Player_stat("focus", 200, TempFocusX)
-            $ GirlA.change_stat("lust", 200, TempLustX)
+            call change_Girl_stat(GirlA, "lust", 200, TempLustX)
             return
         else:
             if "TempFocus" not in locals().keys():
@@ -4541,8 +4541,8 @@ label start_of_sex_narration(Girl, action):
             $ Girl.inhibition += int(taboo/10)
             $ Girl.lust += int(taboo/5)
         else:
-            $ JeanX.change_stat("inhibition", 90, int(taboo/10))
-            $ JeanX.change_stat("lust", 50, int(taboo/5))
+            call change_Girl_stat(JeanX, "inhibition", 90, int(taboo/10))
+            call change_Girl_stat(JeanX, "lust", 50, int(taboo/5))
     else:
         if Girl in [RogueX, KittyX]:
             if (action == "sex" and not Girl.action_counter["sex"]) or (action == "anal" and not Girl.action_counter["anal"]):

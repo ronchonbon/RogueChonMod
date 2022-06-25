@@ -92,8 +92,8 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
             extend ""
             "Yeah, it was an excellent show.":
                 $ Girl.change_face("_sexy")
-                $ Girl.change_stat("obedience", 50, 3)
-                $ Girl.change_stat("obedience", 70, 2)
+                call change_Girl_stat(Girl, "obedience", 50, 3)
+                call change_Girl_stat(Girl, "obedience", 70, 2)
                 "[Girl.name] glances over at [Partner.name]."
                 if Girl == RogueX:
                     ch_r "Well, I imagine it was. . ."
@@ -111,7 +111,7 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
                     ch_v "Hear that? We're stars."
                 if Girl.love >= 800 or Girl.obedience >= 500 or Girl.inhibition >= 500:
                     $ approval_bonus += 10
-                    $ Girl.change_stat("lust", 90, 5)
+                    call change_Girl_stat(Girl, "lust", 90, 5)
                     if Girl == RogueX:
                         ch_r "And the view from this angle ain't so bad either. . ."
                     elif Girl == KittyX:
@@ -130,10 +130,10 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
 
 
                 $ Girl.change_face("_angry")
-                $ Girl.change_stat("love", 70, 2)
-                $ Girl.change_stat("love", 90, 1)
-                $ Girl.change_stat("obedience", 50, 2)
-                $ Girl.change_stat("obedience", 70, 2)
+                call change_Girl_stat(Girl, "love", 70, 2)
+                call change_Girl_stat(Girl, "love", 90, 1)
+                call change_Girl_stat(Girl, "obedience", 50, 2)
+                call change_Girl_stat(Girl, "obedience", 70, 2)
                 "She looks pointedly at your cock,"
                 if Girl == RogueX:
                     ch_r "Suuure . . ."
@@ -151,7 +151,7 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
                     ch_v "Of course you did."
                 if Girl.love >= 800 or Girl.obedience >= 500 or Girl.inhibition >= 500:
                     $ approval_bonus += 10
-                    $ Girl.change_stat("lust", 90, 5)
+                    call change_Girl_stat(Girl, "lust", 90, 5)
                     $ Girl.change_face("_bemused", 1)
                     if Girl == RogueX:
                         ch_r "-but I guess we were pretty tempting. . ."
@@ -169,7 +169,7 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
                         ch_v "Too bad you missed the fun. . ."
                 else:
                     $ approval_bonus -= 10
-                    $ Girl.change_stat("lust", 200, -5)
+                    call change_Girl_stat(Girl, "lust", 200, -5)
 
         call Seen_First_Peen (Girl, Partner)
     else:
@@ -179,8 +179,8 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
             extend ""
             "Long enough.":
                 $ Girl.change_face("_sexy", 1)
-                $ Girl.change_stat("obedience", 50, 3)
-                $ Girl.change_stat("obedience", 70, 2)
+                call change_Girl_stat(Girl, "obedience", 50, 3)
+                call change_Girl_stat(Girl, "obedience", 70, 2)
                 if Girl == RogueX:
                     ch_r "Well I hope you got a good show out of it. . ."
                 elif Girl == KittyX:
@@ -197,8 +197,8 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
                     ch_v "Hate to think you missed it. . ."
             "I just got here.":
                 $ Girl.change_face("_bemused", 1)
-                $ Girl.change_stat("love", 70, 2)
-                $ Girl.change_stat("love", 90, 1)
+                call change_Girl_stat(Girl, "love", 70, 2)
+                call change_Girl_stat(Girl, "love", 90, 1)
                 if Girl == RogueX:
                     ch_r "A likely story . . ."
                 elif Girl == KittyX:
@@ -213,12 +213,12 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
                     ch_s "I believe you."
                 elif Girl == JubesX:
                     ch_v "Of course you did."
-                $ Girl.change_stat("obedience", 50, 2)
-                $ Girl.change_stat("obedience", 70, 2)
+                call change_Girl_stat(Girl, "obedience", 50, 2)
+                call change_Girl_stat(Girl, "obedience", 70, 2)
 
     if not approval_check(Girl, 1350):
 
-        $ Girl.change_stat("love", 200, -5)
+        call change_Girl_stat(Girl, "love", 200, -5)
         $ Girl.change_face("_angry")
         $ Girl.recent_history.append("_angry")
         $ Girl.daily_history.append("_angry")
@@ -347,7 +347,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
         menu:
             extend ""
             "I guess I should probably get going then. . .":
-                $ Girl.change_stat("love", 80, 3)
+                call change_Girl_stat(Girl, "love", 80, 3)
                 if approval >= 2:
 
                     if Girl == RogueX:
@@ -553,8 +553,8 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
 
         if Girl.forced:
             $ Girl.change_face("_sad")
-            $ Girl.change_stat("love", 70, -3, 1)
-            $ Girl.change_stat("love", 20, -2, 1)
+            call change_Girl_stat(Girl, "love", 70, -3, 1)
+            call change_Girl_stat(Girl, "love", 20, -2, 1)
         elif Bonus >= 100:
             $ Girl.change_face("_sly", eyes = "_side")
             if Girl == RogueX:
@@ -628,8 +628,8 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
 
         if Girl.forced:
             $ Girl.change_face("_sad")
-            $ Girl.change_stat("love", 70, -3, 1)
-            $ Girl.change_stat("love", 20, -2, 1)
+            call change_Girl_stat(Girl, "love", 70, -3, 1)
+            call change_Girl_stat(Girl, "love", 20, -2, 1)
             if Girl == RogueX:
                 ch_r "So you want to watch me with a girl again?"
             elif Girl == KittyX:
@@ -700,8 +700,8 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
 
         if Girl.forced:
             $ Girl.change_face("_sad")
-            $ Girl.change_stat("obedience", 90, 1)
-            $ Girl.change_stat("inhibition", 60, 1)
+            call change_Girl_stat(Girl, "obedience", 90, 1)
+            call change_Girl_stat(Girl, "inhibition", 60, 1)
             if Girl == RogueX:
                 ch_r "Fine, I'm ok with it if she is. . ."
             elif Girl == KittyX:
@@ -718,8 +718,8 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
                 ch_v "Could be worse. . ."
         else:
             $ Girl.change_face("_sexy", 1)
-            $ Girl.change_stat("love", 90, 1)
-            $ Girl.change_stat("inhibition", 50, 3)
+            call change_Girl_stat(Girl, "love", 90, 1)
+            call change_Girl_stat(Girl, "inhibition", 50, 3)
             if action_context == "interrupted":
                 if Girl == RogueX:
                     ch_r "Well I could do some more. . ."
@@ -760,9 +760,9 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
                 else:
                     Girl.voice "[line]"
                 $ line = 0
-        $ Girl.change_stat("obedience", 20, 1)
-        $ Girl.change_stat("obedience", 60, 1)
-        $ Girl.change_stat("inhibition", 70, 2)
+        call change_Girl_stat(Girl, "obedience", 20, 1)
+        call change_Girl_stat(Girl, "obedience", 60, 1)
+        call change_Girl_stat(Girl, "inhibition", 70, 2)
         jump Les_Partner
     else:
 
@@ -785,7 +785,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
             "Maybe later?":
                 $ Girl.change_face("_sexy", 1)
                 if Bonus >= 100:
-                    $ Girl.change_stat("inhibition", 90, 5)
+                    call change_Girl_stat(Girl, "inhibition", 90, 5)
                     if Girl == RogueX:
                         ch_r "Well. . . definitely at some point. . ."
                     elif Girl == KittyX:
@@ -843,8 +843,8 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
                 elif Girl == JubesX:
                     ch_v "Sorry."
                 $ Girl.change_face("_smile", 1)
-                $ Girl.change_stat("love", 80, 2)
-                $ Girl.change_stat("inhibition", 70, 5)
+                call change_Girl_stat(Girl, "love", 80, 2)
+                call change_Girl_stat(Girl, "inhibition", 70, 5)
                 call taboo_Level
                 return
             "You look like you might be into it. . .":
@@ -852,10 +852,10 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
 
                 if approval:
                     $ Girl.change_face("_sexy")
-                    $ Girl.change_stat("obedience", 90, 4)
-                    $ Girl.change_stat("obedience", 50, 5)
-                    $ Girl.change_stat("inhibition", 70, 4)
-                    $ Girl.change_stat("inhibition", 40, 4)
+                    call change_Girl_stat(Girl, "obedience", 90, 4)
+                    call change_Girl_stat(Girl, "obedience", 50, 5)
+                    call change_Girl_stat(Girl, "inhibition", 70, 4)
+                    call change_Girl_stat(Girl, "inhibition", 40, 4)
                     $ line = renpy.random.choice(["Well. . . ok.",
                                         "I don't mind getting with her. . .",
                                         "A",
@@ -888,8 +888,8 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
                 $ approval = approval_check(Girl, 550, "OI", taboo_modifier = 2)
                 if approval > 1 or (approval and Girl.forced):
                     $ Girl.change_face("_sad")
-                    $ Girl.change_stat("love", 70, -5, 1)
-                    $ Girl.change_stat("love", 200, -5)
+                    call change_Girl_stat(Girl, "love", 70, -5, 1)
+                    call change_Girl_stat(Girl, "love", 200, -5)
                     if Girl == RogueX:
                         ch_r "Ok, fine. I'll give it a try."
                     elif Girl == KittyX:
@@ -904,13 +904,13 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
                         ch_s ". . ."
                     elif Girl == JubesX:
                         ch_v "Fine."
-                    $ Girl.change_stat("obedience", 80, 4)
-                    $ Girl.change_stat("inhibition", 80, 1)
-                    $ Girl.change_stat("inhibition", 60, 3)
+                    call change_Girl_stat(Girl, "obedience", 80, 4)
+                    call change_Girl_stat(Girl, "inhibition", 80, 1)
+                    call change_Girl_stat(Girl, "inhibition", 60, 3)
                     $ Girl.forced = 1
                     jump Les_Partner
                 else:
-                    $ Girl.change_stat("love", 200, -20)
+                    call change_Girl_stat(Girl, "love", 200, -20)
                     $ Girl.recent_history.append("_angry")
                     $ Girl.daily_history.append("_angry")
 
@@ -978,10 +978,10 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
             ch_s "I would prefer something else."
         elif Girl == JubesX:
             ch_v "Just not into it."
-        $ Girl.change_stat("lust", 90, 5)
+        call change_Girl_stat(Girl, "lust", 90, 5)
         if Girl.love > 300:
-            $ Girl.change_stat("love", 70, -2)
-        $ Girl.change_stat("obedience", 50, -2)
+            call change_Girl_stat(Girl, "love", 70, -2)
+        call change_Girl_stat(Girl, "obedience", 50, -2)
         $ Girl.recent_history.append("_angry")
         $ Girl.daily_history.append("_angry")
     elif Girl.taboo > 20:
@@ -1002,8 +1002,8 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
             ch_s "This area may be too public."
         elif Girl == JubesX:
             ch_v "It's too public here."
-        $ Girl.change_stat("lust", 90, 5)
-        $ Girl.change_stat("obedience", 50, -3)
+        call change_Girl_stat(Girl, "lust", 90, 5)
+        call change_Girl_stat(Girl, "obedience", 50, -3)
     elif Girl.event_counter["been_with_girl"]:
         $ Girl.change_face("_sad")
         if Girl == RogueX:
@@ -1114,13 +1114,13 @@ label Les_Prep(Girl=focused_Girl, temp_Girls=[]):
         if not Girl.event_counter["seen_with_girl"]:
 
             if Girl.forced:
-                $ Girl.change_stat("love", 90, -20)
-                $ Girl.change_stat("obedience", 70, 55)
-                $ Girl.change_stat("inhibition", 80, 55)
+                call change_Girl_stat(Girl, "love", 90, -20)
+                call change_Girl_stat(Girl, "obedience", 70, 55)
+                call change_Girl_stat(Girl, "inhibition", 80, 55)
             else:
-                $ Girl.change_stat("love", 90, 5)
-                $ Girl.change_stat("obedience", 70, 20)
-                $ Girl.change_stat("inhibition", 80, 60)
+                call change_Girl_stat(Girl, "love", 90, 5)
+                call change_Girl_stat(Girl, "obedience", 70, 20)
+                call change_Girl_stat(Girl, "inhibition", 80, 60)
         call Les_FirstKiss
         $ girl_secondary_action == "kiss girl"
         $ second_girl_main_action == "kiss girl"
@@ -1266,7 +1266,7 @@ label Les_Cycle(Girl=focused_Girl):
                         call show_full_body(Girl)
                         call show_full_body(Partner)
                         return
-                    $ Girl.change_stat("lust", 200, 5)
+                    call change_Girl_stat(Girl, "lust", 200, 5)
                     if 100 > Girl.lust >= 70 and Girl.session_orgasms < 2:
                         $ Girl.recent_history.append("unsatisfied")
                         $ Girl.daily_history.append("unsatisfied")
@@ -1493,9 +1493,9 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
         if "threesome" not in EmmaX.history or "classcaught" not in EmmaX.history or (taboo > 20 and "taboo" not in EmmaX.history):
             $ EmmaX.recent_history.append("no_lesbian")
             $ EmmaX.daily_history.append("no_lesbian")
-            $ EmmaX.change_stat("obedience", 70, 5)
-            $ EmmaX.change_stat("inhibition", 80, 5)
-            $ EmmaX.change_stat("lust", 50, 10)
+            call change_Girl_stat(EmmaX, "obedience", 70, 5)
+            call change_Girl_stat(EmmaX, "inhibition", 80, 5)
+            call change_Girl_stat(EmmaX, "lust", 50, 10)
             $ Speaker.change_face("_sadside", 1)
             "[EmmaX.name] looks around furtively."
             if Subject == StormX:
@@ -2279,26 +2279,26 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
         if Player.Party[0].likes[Newbie.tag] >= 800:
 
             $ line = "yy"
-            $ Player.Party[0].change_stat("love", 90, 5)
-            $ Player.Party[0].change_stat("obedience", 50, 5)
-            $ Player.Party[0].change_stat("inhibition", 90, 10)
+            call change_Girl_stat(Player.Party[0], "love", 90, 5)
+            call change_Girl_stat(Player.Party[0], "obedience", 50, 5)
+            call change_Girl_stat(Player.Party[0], "inhibition", 90, 10)
         elif approval_check(Player.Party[0], 1800):
 
             $ line = "ym"
-            $ Player.Party[0].change_stat("obedience", 50, 5)
+            call change_Girl_stat(Player.Party[0], "obedience", 50, 5)
         elif approval_check(Player.Party[0], 1500) and Player.Party[0].likes[Newbie.tag] >= 500:
 
             $ line = "ym"
         else:
 
             $ line = "yn"
-            $ Player.Party[0].change_stat("love", 90, -10)
+            call change_Girl_stat(Player.Party[0], "love", 90, -10)
 
     if line == "m":
         if Player.Party[0].likes[Newbie.tag] >= 800:
 
             $ line = "my"
-            $ Player.Party[0].change_stat("inhibition", 90, 5)
+            call change_Girl_stat(Player.Party[0], "inhibition", 90, 5)
         elif approval_check(Player.Party[0], 1800):
 
             $ line = "mm"
@@ -2313,19 +2313,19 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
         if Player.Party[0].likes[Newbie.tag] >= 800:
 
             $ line = "ny"
-            $ Player.Party[0].change_stat("inhibition", 90, 10)
+            call change_Girl_stat(Player.Party[0], "inhibition", 90, 10)
         elif approval_check(Player.Party[0], 1700):
 
             $ line = "nm"
-            $ Player.Party[0].change_stat("inhibition", 90, 5)
+            call change_Girl_stat(Player.Party[0], "inhibition", 90, 5)
         elif approval_check(Player.Party[0], 1300) and Player.Party[0].likes[Newbie.tag] >= 500:
 
             $ line = "nm"
-            $ Player.Party[0].change_stat("love", 90, 5)
+            call change_Girl_stat(Player.Party[0], "love", 90, 5)
         else:
 
             $ line = "nn"
-            $ Player.Party[0].change_stat("love", 90, 10)
+            call change_Girl_stat(Player.Party[0], "love", 90, 10)
 
 
 
@@ -2524,8 +2524,8 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
 
                 $ line = "yy"
                 $ Player.Party[0].change_face("_smile")
-                $ Player.Party[0].change_stat("love", 90, 10)
-                $ Player.Party[0].change_stat("obedience", 50, 10)
+                call change_Girl_stat(Player.Party[0], "love", 90, 10)
+                call change_Girl_stat(Player.Party[0], "obedience", 50, 10)
                 if Player.Party[0] == RogueX:
                     ch_r "Great, sounds fun."
                 elif Player.Party[0] == KittyX:
@@ -2545,7 +2545,7 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
 
                 $ line = "nn"
                 $ Player.Party[0].change_face("_smile")
-                $ Player.Party[0].change_stat("love", 90, 10)
+                call change_Girl_stat(Player.Party[0], "love", 90, 10)
                 if Player.Party[0] == RogueX:
                     ch_r "Good to hear."
                 elif Player.Party[0] == KittyX:
@@ -2569,7 +2569,7 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
 
                 $ line = "nn"
                 $ Player.Party[0].change_face("_sad")
-                $ Player.Party[0].change_stat("obedience", 70, 5)
+                call change_Girl_stat(Player.Party[0], "obedience", 70, 5)
                 if Player.Party[0] == RogueX:
                     ch_r "Oh, ok."
                 elif Player.Party[0] == KittyX:
@@ -2592,8 +2592,8 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
 
         if approval_check(Player.Party[0], 1600) and Player.Party[0].likes[Newbie.tag] >= 500:
             $ Player.Party[0].change_face("_sadside")
-            $ Player.Party[0].change_stat("love", 90, -5)
-            $ Player.Party[0].change_stat("obedience", 50, 15)
+            call change_Girl_stat(Player.Party[0], "love", 90, -5)
+            call change_Girl_stat(Player.Party[0], "obedience", 50, 15)
             if Player.Party[0] == RogueX:
                 ch_r "Fine, she's in."
             elif Player.Party[0] == KittyX:
@@ -2613,8 +2613,8 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
             $ line = "yy"
         else:
             $ Player.Party[0].change_face("_angry", eyes = "_side")
-            $ Player.Party[0].change_stat("love", 90, -25)
-            $ Player.Party[0].change_stat("inhibition", 90, 10)
+            call change_Girl_stat(Player.Party[0], "love", 90, -25)
+            call change_Girl_stat(Player.Party[0], "inhibition", 90, 10)
             if Player.Party[0] == RogueX:
                 ch_r "I just don't like you that much, [RogueX.player_petname]."
                 ch_r "I'm out."
@@ -2881,44 +2881,44 @@ label Harem_Start(Newbie=0, round2=0):
         if Player.Party[0].likes[Newbie.tag] >= 800 and Player.Party[1].likes[Newbie.tag] >= 800:
 
             $ line = "yy"
-            $ Player.Party[0].change_stat("love", 90, 5)
-            $ Player.Party[0].change_stat("obedience", 50, 5)
-            $ Player.Party[0].change_stat("inhibition", 90, 10)
-            $ Player.Party[1].change_stat("love", 90, 5)
-            $ Player.Party[1].change_stat("obedience", 50, 5)
-            $ Player.Party[1].change_stat("inhibition", 90, 10)
+            call change_Girl_stat(Player.Party[0], "love", 90, 5)
+            call change_Girl_stat(Player.Party[0], "obedience", 50, 5)
+            call change_Girl_stat(Player.Party[0], "inhibition", 90, 10)
+            call change_Girl_stat(Player.Party[1], "love", 90, 5)
+            call change_Girl_stat(Player.Party[1], "obedience", 50, 5)
+            call change_Girl_stat(Player.Party[1], "inhibition", 90, 10)
         elif approval_check(Player.Party[0], 1800) and approval_check(Player.Party[1], 1800):
 
             $ line = "ym"
-            $ Player.Party[0].change_stat("obedience", 50, 10)
-            $ Player.Party[1].change_stat("obedience", 50, 10)
+            call change_Girl_stat(Player.Party[0], "obedience", 50, 10)
+            call change_Girl_stat(Player.Party[1], "obedience", 50, 10)
         elif approval_check(Player.Party[0], 1500) and approval_check(Player.Party[1], 1500):
             if Player.Party[0].likes[Newbie.tag] >= 500 and Player.Party[1].likes[Newbie.tag] >= 500:
 
                 $ line = "ym"
-                $ Player.Party[0].change_stat("obedience", 80, 15)
-                $ Player.Party[1].change_stat("obedience", 80, 15)
+                call change_Girl_stat(Player.Party[0], "obedience", 80, 15)
+                call change_Girl_stat(Player.Party[1], "obedience", 80, 15)
             else:
 
                 $ line = "yn"
-                $ Player.Party[0].change_stat("love", 90, -5)
-                $ Player.Party[0].change_stat("obedience", 50, -5)
-                $ Player.Party[1].change_stat("love", 90, -5)
-                $ Player.Party[1].change_stat("obedience", 50, -5)
+                call change_Girl_stat(Player.Party[0], "love", 90, -5)
+                call change_Girl_stat(Player.Party[0], "obedience", 50, -5)
+                call change_Girl_stat(Player.Party[1], "love", 90, -5)
+                call change_Girl_stat(Player.Party[1], "obedience", 50, -5)
         else:
 
             $ line = "yn"
-            $ Player.Party[0].change_stat("love", 90, -10)
-            $ Player.Party[0].change_stat("obedience", 50, -5)
-            $ Player.Party[1].change_stat("love", 90, -10)
-            $ Player.Party[1].change_stat("obedience", 50, -5)
+            call change_Girl_stat(Player.Party[0], "love", 90, -10)
+            call change_Girl_stat(Player.Party[0], "obedience", 50, -5)
+            call change_Girl_stat(Player.Party[1], "love", 90, -10)
+            call change_Girl_stat(Player.Party[1], "obedience", 50, -5)
 
     if line == "m":
         if Player.Party[0].likes[Newbie.tag] >= 800 and Player.Party[1].likes[Newbie.tag] >= 800:
 
             $ line = "my"
-            $ Player.Party[0].change_stat("inhibition", 90, 5)
-            $ Player.Party[1].change_stat("inhibition", 90, 5)
+            call change_Girl_stat(Player.Party[0], "inhibition", 90, 5)
+            call change_Girl_stat(Player.Party[1], "inhibition", 90, 5)
         elif approval_check(Player.Party[0], 1800) and approval_check(Player.Party[1], 1800):
 
             $ line = "mm"
@@ -2937,12 +2937,12 @@ label Harem_Start(Newbie=0, round2=0):
         if Player.Party[0].likes[Newbie.tag] >= 800 and Player.Party[1].likes[Newbie.tag] >= 800:
 
             $ line = "ny"
-            $ Player.Party[0].change_stat("inhibition", 90, 10)
-            $ Player.Party[1].change_stat("inhibition", 90, 10)
+            call change_Girl_stat(Player.Party[0], "inhibition", 90, 10)
+            call change_Girl_stat(Player.Party[1], "inhibition", 90, 10)
         elif approval_check(Player.Party[0], 1700) and approval_check(Player.Party[1], 1700):
 
             $ line = "nm"
-            $ Player.Party[0].change_stat("inhibition", 90, 5)
+            call change_Girl_stat(Player.Party[0], "inhibition", 90, 5)
         elif approval_check(Player.Party[0], 1300) and approval_check(Player.Party[1], 1300):
             if Player.Party[0].likes[Newbie.tag] >= 500 and Player.Party[1].likes[Newbie.tag] >= 500:
 
@@ -2950,17 +2950,17 @@ label Harem_Start(Newbie=0, round2=0):
             else:
 
                 $ line = "nn"
-                $ Player.Party[0].change_stat("love", 90, 5)
-                $ Player.Party[0].change_stat("inhibition", 90, 5)
-                $ Player.Party[1].change_stat("love", 90, 5)
-                $ Player.Party[1].change_stat("inhibition", 90, 5)
+                call change_Girl_stat(Player.Party[0], "love", 90, 5)
+                call change_Girl_stat(Player.Party[0], "inhibition", 90, 5)
+                call change_Girl_stat(Player.Party[1], "love", 90, 5)
+                call change_Girl_stat(Player.Party[1], "inhibition", 90, 5)
         else:
 
             $ line = "nn"
-            $ Player.Party[0].change_stat("love", 90, 5)
-            $ Player.Party[0].change_stat("inhibition", 90, 5)
-            $ Player.Party[1].change_stat("love", 90, 5)
-            $ Player.Party[1].change_stat("inhibition", 90, 5)
+            call change_Girl_stat(Player.Party[0], "love", 90, 5)
+            call change_Girl_stat(Player.Party[0], "inhibition", 90, 5)
+            call change_Girl_stat(Player.Party[1], "love", 90, 5)
+            call change_Girl_stat(Player.Party[1], "inhibition", 90, 5)
 
 
 
@@ -3163,10 +3163,10 @@ label Harem_Start(Newbie=0, round2=0):
                 $ line = "yy"
                 $ Player.Party[0].change_face("_smile")
                 $ Player.Party[1].change_face("_smile")
-                $ Player.Party[0].change_stat("obedience", 80, 5)
-                $ Player.Party[0].change_stat("inhibition", 90, 10)
-                $ Player.Party[1].change_stat("obedience", 80, 5)
-                $ Player.Party[1].change_stat("inhibition", 90, 10)
+                call change_Girl_stat(Player.Party[0], "obedience", 80, 5)
+                call change_Girl_stat(Player.Party[0], "inhibition", 90, 10)
+                call change_Girl_stat(Player.Party[1], "obedience", 80, 5)
+                call change_Girl_stat(Player.Party[1], "inhibition", 90, 10)
                 if Player.Party[0] == RogueX:
                     ch_r "Great, sounds fun."
                 elif Player.Party[0] == KittyX:
@@ -3186,10 +3186,10 @@ label Harem_Start(Newbie=0, round2=0):
                 $ line = "nn"
                 $ Player.Party[0].change_face("_normal")
                 $ Player.Party[1].change_face("_normal")
-                $ Player.Party[0].change_stat("love", 90, 5)
-                $ Player.Party[0].change_stat("inhibition", 90, 5)
-                $ Player.Party[1].change_stat("love", 90, 5)
-                $ Player.Party[1].change_stat("inhibition", 90, 5)
+                call change_Girl_stat(Player.Party[0], "love", 90, 5)
+                call change_Girl_stat(Player.Party[0], "inhibition", 90, 5)
+                call change_Girl_stat(Player.Party[1], "love", 90, 5)
+                call change_Girl_stat(Player.Party[1], "inhibition", 90, 5)
                 if Player.Party[0] == RogueX:
                     ch_r "Good to hear."
                 elif Player.Party[0] == KittyX:
@@ -3213,8 +3213,8 @@ label Harem_Start(Newbie=0, round2=0):
                 $ line = "nn"
                 $ Player.Party[0].change_face("_sad")
                 $ Player.Party[1].change_face("_sad")
-                $ Player.Party[0].change_stat("obedience", 50, 5)
-                $ Player.Party[1].change_stat("obedience", 50, 5)
+                call change_Girl_stat(Player.Party[0], "obedience", 50, 5)
+                call change_Girl_stat(Player.Party[1], "obedience", 50, 5)
                 if Player.Party[0] == RogueX:
                     ch_r "Oh, ok."
                 elif Player.Party[0] == KittyX:
@@ -3236,8 +3236,8 @@ label Harem_Start(Newbie=0, round2=0):
         elif len(Player.Harem) >= 3:
             $ Player.Party[0].change_face("_smile", eyes = "_side")
             $ Player.Party[1].change_face("_smile", eyes = "_side")
-            $ Player.Party[0].change_stat("obedience", 90, 5)
-            $ Player.Party[0].change_stat("inhibition", 90, 5)
+            call change_Girl_stat(Player.Party[0], "obedience", 90, 5)
+            call change_Girl_stat(Player.Party[0], "inhibition", 90, 5)
             if Player.Party[0] == RogueX:
                 ch_r "Oh, what's one more."
             elif Player.Party[0] == KittyX:
@@ -3261,8 +3261,8 @@ label Harem_Start(Newbie=0, round2=0):
                 if approval_check(Player.Party[Count], 1600) and Player.Party[Count].likes[Newbie.tag] >= 500:
 
                     $ Player.Party[Count].change_face("_sadside")
-                    $ Player.Party[Count].change_stat("love", 90, -5)
-                    $ Player.Party[Count].change_stat("obedience", 90, 10)
+                    call change_Girl_stat(Player.Party[Count], "love", 90, -5)
+                    call change_Girl_stat(Player.Party[Count], "obedience", 90, 10)
                     if Player.Party[Count] == RogueX:
                         ch_r "Fine, she's in."
                     elif Player.Party[Count] == KittyX:
@@ -3282,8 +3282,8 @@ label Harem_Start(Newbie=0, round2=0):
                 else:
 
                     $ Player.Party[Count].change_face("_angry", eyes = "_side")
-                    $ Player.Party[Count].change_stat("love", 90, -25)
-                    $ Player.Party[Count].change_stat("inhibition", 90, 10)
+                    call change_Girl_stat(Player.Party[Count], "love", 90, -25)
+                    call change_Girl_stat(Player.Party[Count], "inhibition", 90, 10)
                     if Player.Party[Count] == RogueX:
                         ch_r "I just don't like you that much, [RogueX.player_petname]."
                         ch_r "I'm out."
@@ -3416,28 +3416,28 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
         menu:
             extend ""
             "Sure, I'll be right there!":
-                $ Girl.change_stat("love", 95, 5)
-                $ Girl.change_stat("obedience", 95, 3)
-                $ Girl.change_stat("inhibition", 95, 2)
+                call change_Girl_stat(Girl, "love", 95, 5)
+                call change_Girl_stat(Girl, "obedience", 95, 3)
+                call change_Girl_stat(Girl, "inhibition", 95, 2)
                 if Girl in (EmmaX,StormX):
                     ch_e "Lovely, see you in a bit."
                 else:
                     Girl.voice "Cool. See you here."
-                $ Girl2.change_stat("love", 95, 5)
-                $ Girl2.change_stat("obedience", 95, 3)
-                $ Girl2.change_stat("inhibition", 95, 2)
+                call change_Girl_stat(Girl2, "love", 95, 5)
+                call change_Girl_stat(Girl2, "obedience", 95, 3)
+                call change_Girl_stat(Girl2, "inhibition", 95, 2)
                 $ line = "yes"
             "Nah, have fun though.":
-                $ Girl.change_stat("love", 90, -4)
-                $ Girl.change_stat("obedience", 95, 2)
-                $ Girl.change_stat("inhibition", 90, -2)
+                call change_Girl_stat(Girl, "love", 90, -4)
+                call change_Girl_stat(Girl, "obedience", 95, 2)
+                call change_Girl_stat(Girl, "inhibition", 90, -2)
                 if Girl == RogueX:
                     ch_r "Oh. Ok then. . ."
                 elif Girl == KittyX:
                     ch_k "Wow, ok, I guess."
                 elif Girl == EmmaX:
                     ch_e "I admire your restraint. . ."
-                    $ Girl.change_stat("obedience", 95, 2)
+                    call change_Girl_stat(Girl, "obedience", 95, 2)
                     ch_e "If not your wisdom. . ."
                 elif Girl == LauraX:
                     ch_l "Huh. Ok."
@@ -3448,23 +3448,23 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                     ch_s "That is unfortunate. . ."
                 elif Girl == JubesX:
                     ch_v "Ok, but you're missing out!"
-                $ Girl2.change_stat("love", 90, -4)
-                $ Girl2.change_stat("obedience", 95, 2)
-                $ Girl2.change_stat("inhibition", 90, -2)
+                call change_Girl_stat(Girl2, "love", 90, -4)
+                call change_Girl_stat(Girl2, "obedience", 95, 2)
+                call change_Girl_stat(Girl2, "inhibition", 90, -2)
                 $ Player.recent_history.append("no_les")
                 "She hangs up."
                 hide cellphone
                 jump reset_location
             "What, are you watching a movie?" if line != "what" and Girl != JeanX:
-                $ Girl.change_stat("love", 80, 2)
-                $ Girl.change_stat("inhibition", 80, 2)
+                call change_Girl_stat(Girl, "love", 80, 2)
+                call change_Girl_stat(Girl, "inhibition", 80, 2)
                 if Girl == RogueX:
                     ch_r "Oh, we're putting on quite the show, but no."
                 elif Girl == KittyX:
-                    $ Girl.change_stat("inhibition", 80, 2)
+                    call change_Girl_stat(Girl, "inhibition", 80, 2)
                     ch_k "Um. . . no. . .we're, um. . ."
                 elif Girl == EmmaX:
-                    $ Girl.change_stat("love", 80, 1)
+                    call change_Girl_stat(Girl, "love", 80, 1)
                     ch_e "Oh, that's adorable. No, of course not."
                 elif Girl == LauraX:
                     ch_l "You hit your head or something?"
@@ -3473,13 +3473,13 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 elif Girl == JubesX:
                     ch_v "Heh, no! We aren't. . . it's more fun than that. . ."
 
-                $ Girl2.change_stat("love", 80, 2)
-                $ Girl2.change_stat("inhibition", 80, 2)
+                call change_Girl_stat(Girl2, "love", 80, 2)
+                call change_Girl_stat(Girl2, "inhibition", 80, 2)
                 if Girl2 == RogueX:
                     ch_r "We're bumpin uglies, [Girl2.player_petname]."
                     ch_r "Thought you might want in."
                 elif Girl2 == KittyX:
-                    $ Girl2.change_stat("inhibition", 80, 2)
+                    call change_Girl_stat(Girl2, "inhibition", 80, 2)
                     ch_k "It's, um. . . sex."
                     ch_k "We're having sex."
                     ch_k "-thought you might wanna join us?"
@@ -3560,8 +3560,8 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 $ Girl.lust = 20
                 $ Girl2.thirst -= 30
                 $ Girl2lust = 20
-                $ Girl.change_stat("love", 90, -3)
-                $ Girl2.change_stat("love", 90, -3)
+                call change_Girl_stat(Girl, "love", 90, -3)
+                call change_Girl_stat(Girl2, "love", 90, -3)
                 $ renpy.pop_call()
                 $ Player.location = "bg_campus"
                 $ line = 0
@@ -3604,9 +3604,9 @@ label Share(Girl=0, Other=0):
     if Girl.broken_up[0]:
 
         "[Girl.name] sends you a text."
-        $ Other.change_stat("love", 90, -10)
-        $ Other.change_stat("obedience", 80, 10)
-        $ Other.change_stat("inhibition", 80, 5)
+        call change_Girl_stat(Other, "love", 90, -10)
+        call change_Girl_stat(Other, "obedience", 80, 10)
+        call change_Girl_stat(Other, "inhibition", 80, 5)
 
         if Other == RogueX:
             Girl.voice "She said to \"stop bother'in her?\""
@@ -3630,8 +3630,8 @@ label Share(Girl=0, Other=0):
             $ Other.add_word(1, 0, 0,"poly "+Girl.tag, 0)
 
 
-            $ Other.change_stat("obedience", 80, 10)
-            $ Other.change_stat("inhibition", 80, 15)
+            call change_Girl_stat(Other, "obedience", 80, 10)
+            call change_Girl_stat(Other, "inhibition", 80, 15)
 
             $ temp_Girls = Player.Harem[:]
             while temp_Girls:
@@ -3658,12 +3658,12 @@ label Share(Girl=0, Other=0):
             "[Girl.name] sends you a text."
             Girl.voice "I talked to [Other.name] about sharing you, and she said she wasn't into that sort of thing,"
             if not approval_check(Other, 2000):
-                $ Other.change_stat("love", 200, -15)
-                $ Other.change_stat("obedience", 50, -5)
-                $ Other.change_stat("inhibition", 50, 5)
+                call change_Girl_stat(Other, "love", 200, -15)
+                call change_Girl_stat(Other, "obedience", 50, -5)
+                call change_Girl_stat(Other, "inhibition", 50, 5)
                 Girl.voice "She's just not into you like that."
             else:
-                $ Other.change_stat("love", 200, -5)
+                call change_Girl_stat(Other, "love", 200, -5)
                 Girl.voice "She doesn't really like me that much. . ."
 
 

@@ -249,7 +249,7 @@ label HWchange_stat(Girl=0, HWType=0, HWCheck=0, HWvalue=0, HWStore=0):
     if Girl not in all_Girls:
         return
     $ HWStore = getattr(Girl,HWType)
-    $ Girl.change_stat(HWType,HWCheck,HWvalue)
+    call change_Girl_stat(Girl, HWType,HWCheck,HWvalue)
     if "halloween" in Girl.history:
         $ setattr(Girl, HWType, HWStore)
     return

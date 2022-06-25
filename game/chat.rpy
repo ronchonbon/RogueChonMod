@@ -692,8 +692,8 @@ label change_attributes(Girl):
                             ch_v "Oh, sure, ok. . ."
 
                         if "follow" not in Girl.daily_history:
-                            $ Girl.change_stat("love", 90, -2)
-                            $ Girl.change_stat("obedience", 30, 5)
+                            call change_Girl_stat(Girl, "love", 90, -2)
+                            call change_Girl_stat(Girl, "obedience", 30, 5)
 
                         $ line = "free"
                     "You can ask if I want to follow you." if "asktravels" not in Girl.traits or "freetravels" in Girl.traits:
@@ -715,8 +715,8 @@ label change_attributes(Girl):
                             ch_v "Ok, yeah, wouldn't want you falling behind. . ."
 
                         if "follow" not in Girl.daily_history:
-                            $ Girl.change_stat("love", 70, 2)
-                            $ Girl.change_stat("inhibition", 60, 2)
+                            call change_Girl_stat(Girl, "love", 70, 2)
+                            call change_Girl_stat(Girl, "inhibition", 60, 2)
 
                         $ line = "ask"
                     "Don't ever leave when I'm around." if "lockedtravels" not in Girl.traits or "freetravels" in Girl.traits:
@@ -747,11 +747,11 @@ label change_attributes(Girl):
 
                             if "follow" not in Girl.daily_history:
                                 if Girl.love > 90:
-                                    $ Girl.change_stat("love", 99, 2)
+                                    call change_Girl_stat(Girl, "love", 99, 2)
 
-                                $ Girl.change_stat("obedience", 60, 5)
+                                call change_Girl_stat(Girl, "obedience", 60, 5)
 
-                            $ Girl.change_stat("inhibition", 50, -5, 1)
+                            call change_Girl_stat(Girl, "inhibition", 50, -5, 1)
 
                             $ line = "lock"
                         else:
@@ -936,8 +936,8 @@ label dismiss_girl(Girl):
                     ch_v "Nah, I'm good here."
             else:
                 if "dismissed" not in Girl.daily_history:
-                    $ Girl.change_stat("obedience", 30, 5)
-                    $ Girl.change_stat("obedience", 50, 5)
+                    call change_Girl_stat(Girl, "obedience", 30, 5)
+                    call change_Girl_stat(Girl, "obedience", 50, 5)
 
                 if Girl == RogueX:
                     ch_r "Not a problem, see you later then."
@@ -990,8 +990,8 @@ label dismiss_girl(Girl):
                     ch_v "Why's that?"
             else:
                 if "dismissed" not in Girl.daily_history:
-                    $ Girl.change_stat("obedience", 40, 10)
-                    $ Girl.change_stat("obedience", 60, 5)
+                    call change_Girl_stat(Girl, "obedience", 40, 10)
+                    call change_Girl_stat(Girl, "obedience", 60, 5)
 
                 if Girl == RogueX:
                     ch_r "If you wish."
@@ -1020,9 +1020,9 @@ label dismiss_girl(Girl):
             "I insist, get going.":
                 if Girl.location != Player.location and (approval_check(Girl, 1200, "LO") or approval_check(Girl, 500, "O")):
                     if "dismissed" not in Girl.daily_history:
-                        $ Girl.change_stat("love", 70, -5, 1)
-                        $ Girl.change_stat("obedience", 50, 10)
-                        $ Girl.change_stat("obedience", 80, 5)
+                        call change_Girl_stat(Girl, "love", 70, -5, 1)
+                        call change_Girl_stat(Girl, "obedience", 50, 10)
+                        call change_Girl_stat(Girl, "obedience", 80, 5)
 
                     if Girl == RogueX:
                         ch_r "Ok, if you insist."
@@ -1043,10 +1043,10 @@ label dismiss_girl(Girl):
                     $ leaving = True
                 elif Girl.location != Player.location and (approval_check(Girl, 1000, "LO") or approval_check(Girl, 300, "O")):
                     if "dismissed" not in Girl.daily_history:
-                        $ Girl.change_stat("love", 50, -5, 1)
-                        $ Girl.change_stat("love", 70, -5, 1)
-                        $ Girl.change_stat("obedience", 50, 10)
-                        $ Girl.change_stat("obedience", 80, 5)
+                        call change_Girl_stat(Girl, "love", 50, -5, 1)
+                        call change_Girl_stat(Girl, "love", 70, -5, 1)
+                        call change_Girl_stat(Girl, "obedience", 50, 10)
+                        call change_Girl_stat(Girl, "obedience", 80, 5)
 
                     $ Girl.change_face("_angry")
 
@@ -1069,11 +1069,11 @@ label dismiss_girl(Girl):
                     $ leaving = True
                 elif Girl.location != Player.location:
                     if "dismissed" not in Girl.daily_history:
-                        $ Girl.change_stat("love", 50, -5, 1)
-                        $ Girl.change_stat("love", 70, -10, 1)
-                        $ Girl.change_stat("obedience", 50, -5)
-                        $ Girl.change_stat("inhibition", 50, 5)
-                        $ Girl.change_stat("inhibition", 80, 3)
+                        call change_Girl_stat(Girl, "love", 50, -5, 1)
+                        call change_Girl_stat(Girl, "love", 70, -10, 1)
+                        call change_Girl_stat(Girl, "obedience", 50, -5)
+                        call change_Girl_stat(Girl, "inhibition", 50, 5)
+                        call change_Girl_stat(Girl, "inhibition", 80, 3)
 
                     $ Girl.change_face("_angry")
 
@@ -1093,9 +1093,9 @@ label dismiss_girl(Girl):
                         ch_v "Well now I'm -definitely- sticking around. . ."
                 elif approval_check(Girl, 1400, "LO") or approval_check(Girl, 400, "O"):
                     if "dismissed" not in Girl.daily_history:
-                        $ Girl.change_stat("love", 50, -5, 1)
-                        $ Girl.change_stat("obedience", 50, 10)
-                        $ Girl.change_stat("obedience", 80, 5)
+                        call change_Girl_stat(Girl, "love", 50, -5, 1)
+                        call change_Girl_stat(Girl, "obedience", 50, 10)
+                        call change_Girl_stat(Girl, "obedience", 80, 5)
 
                     $ Girl.change_face("_sad")
 
@@ -1117,11 +1117,11 @@ label dismiss_girl(Girl):
                     $ leaving = True
                 else:
                     if "dismissed" not in Girl.daily_history:
-                        $ Girl.change_stat("love", 50, -5, 1)
-                        $ Girl.change_stat("love", 70, -10, 1)
-                        $ Girl.change_stat("obedience", 50, -5)
-                        $ Girl.change_stat("inhibition", 50, 3)
-                        $ Girl.change_stat("inhibition", 80, 2)
+                        call change_Girl_stat(Girl, "love", 50, -5, 1)
+                        call change_Girl_stat(Girl, "love", 70, -10, 1)
+                        call change_Girl_stat(Girl, "obedience", 50, -5)
+                        call change_Girl_stat(Girl, "inhibition", 50, 3)
+                        call change_Girl_stat(Girl, "inhibition", 80, 2)
 
                     $ Girl.change_face("_sad")
 

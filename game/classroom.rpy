@@ -52,14 +52,18 @@ label take_class:
     return
 
 label classroom_seating:
+    call set_the_scene(location = "bg_classroom", fade = True)
+
     $ Girls = Present[:]
 
     python:
-        for G in Girls:
-            if G.teaching:
+        for G in reversed(Girls):
+            if G in [EmmaX, StormX]:
+                Girls.remove(G)
+            elif G in Player.Party:
                 Girls.remove(G)
 
-    $ Present = []
+    $ Present = Player.Party
 
     $ renpy.random.shuffle(Girls)
 
@@ -78,11 +82,12 @@ label classroom_seating:
         menu:
             "Who do you want to sit next to?"
             "[Girls[0].name]":
-                $ Present = [Girls[0]]
+                $ Present.append(Girls[0])
             "[Girls[1].name]":
-                $ Present = [Girls[1]]
+                $ Present.append(Girls[1])
             "Between them." if not Nearby:
-                $ Present = Girls[:]
+                $ Present.append(Girls[0])
+                $ Present.append(Girls[1])
             "Neither":
                 "You decide to sit a distance away from either of them."
 
@@ -119,8 +124,6 @@ label classroom_seating:
     if Present and focused_Girl not in Present:
         call shift_focus(Present[0])
 
-    call set_the_scene(fade = True)
-
     if len(Present) > 2:
         "You figure out seating arrangements with the girls."
     elif len(Present) == 2:
@@ -129,6 +132,8 @@ label classroom_seating:
         "You look for a seat next to [Present[0].name]."
     else:
         "You look for a seat off to the side."
+
+    call set_the_scene
 
     if len(Girls) > len(Present):
         "The rest are scattered around the room."
@@ -188,16 +193,16 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
         menu:
             "Y":
                 $ Girl.change_face("_sly", 1)
-                $ Girl.change_stat("love", 80, 3)
-                $ Girl.change_stat("inhibition", 60, 3)
+                call change_Girl_stat(Girl, "love", 80, 3)
+                call change_Girl_stat(Girl, "inhibition", 60, 3)
                 "She smiles suggestively."
                 $ D20 = renpy.random.randint(1, 15)
                 jump Frisky_Class_Loop
             "N":
-                $ Girl.change_stat("love", 80, -10)
-                $ Girl.change_stat("love", 70, -5)
-                $ Girl.change_stat("obedience", 70, 5)
-                $ Girl.change_stat("inhibition", 60, -3)
+                call change_Girl_stat(Girl, "love", 80, -10)
+                call change_Girl_stat(Girl, "love", 70, -5)
+                call change_Girl_stat(Girl, "obedience", 70, 5)
+                call change_Girl_stat(Girl, "inhibition", 60, -3)
                 $ line = "rejected"
                 $ Girl.change_face("_angry")
                 $ Girl.daily_history.append("_angry")
@@ -228,20 +233,20 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
             jump Frisky_Class_End
         "Naah. Not so much.":
 
-            $ Girl.change_stat("love", 80, -3)
-            $ Girl.change_stat("inhibition", 60, -3)
+            call change_Girl_stat(Girl, "love", 80, -3)
+            call change_Girl_stat(Girl, "inhibition", 60, -3)
             $ Girl.change_face("_confused")
             jump Frisky_Class_End
 
         "It's my favorite subject." if Girl in (RogueX,KittyX):
-            $ Girl.change_stat("love", 80, 5)
+            call change_Girl_stat(Girl, "love", 80, 5)
             $ Girl.change_face("_smile")
             "[Girl.name] reads your note and starts to smile. She quickly dashes off another note, sliding it in front of you again."
             "You unfold the note, trying not to let the teacher see you. \"Then maybe we could study together tonight?\"."
             $ line = "continue"
 
         "Yeah, pretty lame." if Girl not in (RogueX,KittyX):
-            $ Girl.change_stat("love", 80, 5)
+            call change_Girl_stat(Girl, "love", 80, 5)
             $ Girl.change_face("_smile")
             "[Girl.name] reads your note and starts to smile. She quickly dashes off another note, sliding it in front of you again."
             "You unfold the note, trying not to let the teacher see you. \"Then maybe we could 'study' together tonight?\"."
@@ -288,17 +293,17 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
         menu:
             "You respond. . ."
             "Maybe later.":
-                $ Girl.change_stat("love", 80, -3)
-                $ Girl.change_stat("obedience", 70, 5)
-                $ Girl.change_stat("inhibition", 60, -3)
+                call change_Girl_stat(Girl, "love", 80, -3)
+                call change_Girl_stat(Girl, "obedience", 70, 5)
+                call change_Girl_stat(Girl, "inhibition", 60, -3)
                 $ Girl.change_face("_confused")
                 $ line = 0
                 jump Frisky_Class_End
             "Naah. I've got better things to do.":
-                $ Girl.change_stat("love", 80, -10)
-                $ Girl.change_stat("love", 70, -5)
-                $ Girl.change_stat("obedience", 70, 5)
-                $ Girl.change_stat("inhibition", 60, -3)
+                call change_Girl_stat(Girl, "love", 80, -10)
+                call change_Girl_stat(Girl, "love", 70, -5)
+                call change_Girl_stat(Girl, "obedience", 70, 5)
+                call change_Girl_stat(Girl, "inhibition", 60, -3)
                 $ line = "rejected"
                 $ Girl.change_face("_angry")
                 $ Girl.daily_history.append("_angry")
@@ -312,13 +317,13 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
             "We could get some \"studying\" done right now.":
                 if approval_check(Girl, 1000):
                     $ Girl.change_face("_sly", 1)
-                    $ Girl.change_stat("love", 80, 3)
-                    $ Girl.change_stat("inhibition", 60, 3)
+                    call change_Girl_stat(Girl, "love", 80, 3)
+                    call change_Girl_stat(Girl, "inhibition", 60, 3)
                     "[Girl.name] gets a mischevious grin on her face and leans towards you."
                     $ line = "flirt"
                 elif approval_check(Girl, 700):
                     $ Girl.change_face("_smile", 1)
-                    $ Girl.change_stat("inhibition", 60, 2)
+                    call change_Girl_stat(Girl, "inhibition", 60, 2)
                     if Girl in (RogueX,KittyX):
                         "[Girl.name] blushes and smiles your way."
                     else:
@@ -356,21 +361,21 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         $ line = "tease"
                     else:
                         $ line = "rejected"
-                        $ Girl.change_stat("love", 200, -15)
-                        $ Girl.change_stat("obedience", 70, 2)
-                        $ Girl.change_stat("inhibition", 60, -2)
+                        call change_Girl_stat(Girl, "love", 200, -15)
+                        call change_Girl_stat(Girl, "obedience", 70, 2)
+                        call change_Girl_stat(Girl, "inhibition", 60, -2)
                     jump Frisky_Class_End
 
                 "Look into her eyes and smile slightly." if line == "flirt":
                     $ Girl.change_face("_smile")
-                    $ Girl.change_stat("love", 200, 5)
+                    call change_Girl_stat(Girl, "love", 200, 5)
                     "[Girl.name] smiles back."
                     "She looks back towards the front of the class, but her hand drifts across the top of the desk until she's holding yours."
                     $ line = "handholding"
                     jump Frisky_Class_Loop
                 "Grasp her hand gently, stroking the top of it." if line == "handholding":
-                    $ Girl.change_stat("love", 200, 5)
-                    $ Girl.change_stat("lust", 50, 5)
+                    call change_Girl_stat(Girl, "love", 200, 5)
+                    call change_Girl_stat(Girl, "lust", 50, 5)
                     $ Girl.change_face("_smile")
                     "[Girl.name] sighs contentedly and holds your hand for the remainder of class."
                     jump Frisky_Class_End
@@ -380,20 +385,20 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                     $ line = "fondle_pussy"
                     if approval_check(Girl, 1200) and Girl.action_counter["fondle_pussy"] and Girl.SEXP >= 40:
                         $ Girl.change_face("_sly")
-                        $ Girl.change_stat("love", 90, 5)
-                        $ Girl.change_stat("obedience", 70, 5)
-                        $ Girl.change_stat("inhibition", 60, 5)
+                        call change_Girl_stat(Girl, "love", 90, 5)
+                        call change_Girl_stat(Girl, "obedience", 70, 5)
+                        call change_Girl_stat(Girl, "inhibition", 60, 5)
                         "[Girl.name] gets a mischievous grin and places her hand on your arm."
                     elif approval_check(Girl, 1400) and Girl.action_counter["fondle_pussy"]:
                         $ Girl.change_face("_smile")
-                        $ Girl.change_stat("love", 80, 3)
-                        $ Girl.change_stat("obedience", 70, 7)
-                        $ Girl.change_stat("inhibition", 60, 3)
+                        call change_Girl_stat(Girl, "love", 80, 3)
+                        call change_Girl_stat(Girl, "obedience", 70, 7)
+                        call change_Girl_stat(Girl, "inhibition", 60, 3)
                         "[Girl.name] starts slightly as your hand travels up her thigh, but then she lets out a slight grin."
                     elif approval_check(Girl, 1500):
                         $ Girl.change_face("_perplexed",2)
-                        $ Girl.change_stat("obedience", 70, 10)
-                        $ Girl.change_stat("inhibition", 60, 3)
+                        call change_Girl_stat(Girl, "obedience", 70, 10)
+                        call change_Girl_stat(Girl, "inhibition", 60, 3)
                         "[Girl.name] glances at you in alarm, but then slowly calms down."
                         $ Girl.change_face("_smile", 1)
                         $ D20 += 2
@@ -402,7 +407,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
 
                     if line == "fondle_pussy":
                         $ Girl.change_face("_sly")
-                        $ Girl.change_stat("lust", 94, 5)
+                        call change_Girl_stat(Girl, "lust", 94, 5)
                         if Girl.wearing_skirt:
                             "[Girl.name]'s sly smile turns sultry as she feels your fingers sneak under the hem of her skirt, slowly tracing the soft contours of her mound."
                         elif Girl.bottom_number() >= 7:
@@ -410,7 +415,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         else:
                             "[Girl.name]'s sly smile turns sultry as she feels your fingers sneak between her legs, slowly tracing the soft contours of her mound."
 
-                        $ Girl.change_stat("lust", 94, 5)
+                        call change_Girl_stat(Girl, "lust", 94, 5)
                         if Girl.outfit["underwear"] == "_shorts":
                             "You think her shorts are becoming damp as you stroke the thin material. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
                         elif Girl.outfit["underwear"]:
@@ -423,10 +428,10 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         $ D20 += 5
 
                 "Keep fondling her pussy." if line == "fondle_pussy":
-                    $ Girl.change_stat("obedience", 70, 5)
-                    $ Girl.change_stat("inhibition", 60, 3)
-                    $ Girl.change_stat("lust", 89, 5)
-                    $ Girl.change_stat("lust", 94, 5)
+                    call change_Girl_stat(Girl, "obedience", 70, 5)
+                    call change_Girl_stat(Girl, "inhibition", 60, 3)
+                    call change_Girl_stat(Girl, "lust", 89, 5)
+                    call change_Girl_stat(Girl, "lust", 94, 5)
                     $ lineB = renpy.random.choice(["As the class drones on, you continue to slowly massage her warm delta.",
                                         "As the class continues, you continue to slowly massage her moist pussy.",
                                         "As the lecture drones on, you continue to slowly stroke her clit.",
@@ -439,20 +444,20 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                 "Start fondling her tits." if line != "fondle_breasts":
                     $ line = "fondle_breasts"
                     if approval_check(Girl, 1100) and Girl.action_counter["fondle_breasts"]and Girl.SEXP >= 40:
-                        $ Girl.change_stat("love", 80, 5)
-                        $ Girl.change_stat("obedience", 70, 5)
-                        $ Girl.change_stat("inhibition", 60, 3)
+                        call change_Girl_stat(Girl, "love", 80, 5)
+                        call change_Girl_stat(Girl, "obedience", 70, 5)
+                        call change_Girl_stat(Girl, "inhibition", 60, 3)
                         $ Girl.change_face("_sly")
                         "[Girl.name] closes her eyes and caresses your arm."
                     elif approval_check(Girl, 1300) and Girl.action_counter["fondle_breasts"]:
-                        $ Girl.change_stat("love", 80, 3)
-                        $ Girl.change_stat("obedience", 70, 7)
-                        $ Girl.change_stat("inhibition", 60, 3)
+                        call change_Girl_stat(Girl, "love", 80, 3)
+                        call change_Girl_stat(Girl, "obedience", 70, 7)
+                        call change_Girl_stat(Girl, "inhibition", 60, 3)
                         $ Girl.change_face("_smile", 1)
                         "[Girl.name] flinches as your hand travels up her ribcage, but she grins as you reach her breast."
                     elif approval_check(Girl, 1400):
-                        $ Girl.change_stat("obedience", 70, 10)
-                        $ Girl.change_stat("inhibition", 60, 3)
+                        call change_Girl_stat(Girl, "obedience", 70, 10)
+                        call change_Girl_stat(Girl, "inhibition", 60, 3)
                         $ Girl.change_face("_perplexed",2)
                         "[Girl.name] glances at you in alarm, but then slowly calms down."
                         $ Girl.change_face("_smile",2)
@@ -462,15 +467,15 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
 
                     if line == "fondle_breasts":
                         $ Girl.change_face("_sly")
-                        $ Girl.change_stat("lust", 94, 5)
+                        call change_Girl_stat(Girl, "lust", 94, 5)
                         "[Girl.name]'s sly eyes spakle as your hand cups her breast, giving it a casual caress."
                         "her nipples begin to firm up and she lets out a small moan of pleasure."
                         $ D20 += 7
                         $ Player.primary_action = "fondle_breasts"
                 "Keep fondling her tits." if line == "fondle_breasts":
-                    $ Girl.change_stat("obedience", 70, 5)
-                    $ Girl.change_stat("inhibition", 60, 2)
-                    $ Girl.change_stat("lust", 95, 3)
+                    call change_Girl_stat(Girl, "obedience", 70, 5)
+                    call change_Girl_stat(Girl, "inhibition", 60, 2)
+                    call change_Girl_stat(Girl, "lust", 95, 3)
                     "Barely paying attention to the lecture, you continue to pulse her breast in your palm."
                     $ D20 += 7
 
@@ -480,20 +485,20 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         "[Girl.name] grins and her hand grasps your cock again."
                     elif approval_check(Girl, 1200) and Girl.action_counter["handjob"] and Girl.SEXP >= 40:
                         $ Girl.change_face("_sly")
-                        $ Girl.change_stat("love", 90, 5)
-                        $ Girl.change_stat("obedience", 70, 5)
-                        $ Girl.change_stat("inhibition", 60, 5)
+                        call change_Girl_stat(Girl, "love", 90, 5)
+                        call change_Girl_stat(Girl, "obedience", 70, 5)
+                        call change_Girl_stat(Girl, "inhibition", 60, 5)
                         "[Girl.name] gets a mischievous grin and her hand starts to caress your crotch."
                     elif approval_check(Girl, 1400) and Girl.action_counter["fondle_pussy"]:
                         $ Girl.change_face("_smile")
-                        $ Girl.change_stat("love", 80, 3)
-                        $ Girl.change_stat("obedience", 70, 7)
-                        $ Girl.change_stat("inhibition", 60, 3)
+                        call change_Girl_stat(Girl, "love", 80, 3)
+                        call change_Girl_stat(Girl, "obedience", 70, 7)
+                        call change_Girl_stat(Girl, "inhibition", 60, 3)
                         "[Girl.name] starts slightly as your move her hand up your thigh, but then she lets out a slight grin."
                     elif approval_check(Girl, 1500):
                         $ Girl.change_face("_perplexed",2)
-                        $ Girl.change_stat("obedience", 70, 10)
-                        $ Girl.change_stat("inhibition", 60, 3)
+                        call change_Girl_stat(Girl, "obedience", 70, 10)
+                        call change_Girl_stat(Girl, "inhibition", 60, 3)
                         "[Girl.name] glances at you in alarm, but then slowly calms down."
                         $ Girl.change_face("_smile", 1)
                         $ D20 += 2
@@ -503,12 +508,12 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                     if line != "too far":
 
                         $ Girl.change_face("_sly")
-                        $ Girl.change_stat("lust", 94, 5)
+                        call change_Girl_stat(Girl, "lust", 94, 5)
                         if "cockout" not in Player.recent_history:
                             "[Girl.name]'s hand slowly unzips your pants and pulls your cock free."
                             $ Player.add_word(1,"cockout")
                             call Seen_First_Peen (Girl, Partner)
-                            $ Girl.change_stat("lust", 94, 5)
+                            call change_Girl_stat(Girl, "lust", 94, 5)
                         $ Player.secondary_action = "handjob"
                         $ Girl.recent_history.append("handjob")
                         $ Girl.daily_history.append("handjob")
@@ -523,19 +528,19 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                     if approval_check(Girl, 1800) or approval_check(Girl, 700, "O") or (Girl.love+Girl.obedience) >= (2*Girl.inhibition):
 
                         $ Girl.change_face("_sad")
-                        $ Girl.change_stat("love", 90, -1)
-                        $ Girl.change_stat("obedience", 60, 2)
-                        $ Girl.change_stat("obedience", 80, 3)
+                        call change_Girl_stat(Girl, "love", 90, -1)
+                        call change_Girl_stat(Girl, "obedience", 60, 2)
+                        call change_Girl_stat(Girl, "obedience", 80, 3)
                         "[Girl.name] allows her hand to be pulled away and goes back to what she'd been doing with it."
                         $ Girl.change_face("_sly")
                         $ Player.secondary_action = None
                     else:
                         $ Girl.change_face("_angry")
-                        $ Girl.change_stat("love", 80, -3)
-                        $ Girl.change_stat("love", 90, -1)
-                        $ Girl.change_stat("obedience", 70, -2)
-                        $ Girl.change_stat("inhibition", 60, 3)
-                        $ Girl.change_stat("inhibition", 80, 2)
+                        call change_Girl_stat(Girl, "love", 80, -3)
+                        call change_Girl_stat(Girl, "love", 90, -1)
+                        call change_Girl_stat(Girl, "obedience", 70, -2)
+                        call change_Girl_stat(Girl, "inhibition", 60, 3)
+                        call change_Girl_stat(Girl, "inhibition", 80, 2)
                         "[Girl.name] grasps your cock tightly, then continues to stroke it when you let go."
                         $ Girl.change_face("_sly")
                         $ D20 += 2
@@ -553,15 +558,15 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         "Let her":
                             "You smile and nod a little."
                             $ Girl.change_face("_sly")
-                            $ Girl.change_stat("love", 80, 1)
-                            $ Girl.change_stat("inhibition", 70, 3)
-                            $ Girl.change_stat("inhibition", 90, 2)
-                            $ Girl.change_stat("lust", 94, 5)
+                            call change_Girl_stat(Girl, "love", 80, 1)
+                            call change_Girl_stat(Girl, "inhibition", 70, 3)
+                            call change_Girl_stat(Girl, "inhibition", 90, 2)
+                            call change_Girl_stat(Girl, "lust", 94, 5)
                             if "cockout" not in Player.recent_history:
                                 "[Girl.name]'s hand slowly unzips your pants and pulls your cock free."
                                 $ Player.add_word(1,"cockout")
                                 call Seen_First_Peen (Girl, Partner)
-                                $ Girl.change_stat("lust", 94, 5)
+                                call change_Girl_stat(Girl, "lust", 94, 5)
                             $ Player.secondary_action = "handjob"
                             $ Girl.recent_history.append("handjob")
                             $ Girl.daily_history.append("handjob")
@@ -575,19 +580,19 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                             if approval_check(Girl, 1800) or approval_check(Girl, 700, "O") or (Girl.love+Girl.obedience) >= (2*Girl.inhibition):
 
                                 $ Girl.change_face("_sad")
-                                $ Girl.change_stat("love", 90, -1)
-                                $ Girl.change_stat("obedience", 60, 2)
-                                $ Girl.change_stat("obedience", 80, 3)
+                                call change_Girl_stat(Girl, "love", 90, -1)
+                                call change_Girl_stat(Girl, "obedience", 60, 2)
+                                call change_Girl_stat(Girl, "obedience", 80, 3)
                                 "[Girl.name] allows her hand to be pulled away and goes back to what she'd been doing with it."
                                 $ Girl.change_face("_sly")
                                 $ Player.secondary_action = None
                             else:
                                 $ Girl.change_face("_angry")
-                                $ Girl.change_stat("love", 80, -3)
-                                $ Girl.change_stat("love", 90, -1)
-                                $ Girl.change_stat("obedience", 70, -2)
-                                $ Girl.change_stat("inhibition", 60, 3)
-                                $ Girl.change_stat("inhibition", 80, 2)
+                                call change_Girl_stat(Girl, "love", 80, -3)
+                                call change_Girl_stat(Girl, "love", 90, -1)
+                                call change_Girl_stat(Girl, "obedience", 70, -2)
+                                call change_Girl_stat(Girl, "inhibition", 60, 3)
+                                call change_Girl_stat(Girl, "inhibition", 80, 2)
                                 "[Girl.name] stops, but looks really annoyed."
                                 $ D20 += 10
 
@@ -609,7 +614,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         $ Girl.daily_history.append("swallow")
                     else:
                         "She quickly wipes her hand off under the desk."
-                    $ Girl.change_stat("lust", 200, 5)
+                    call change_Girl_stat(Girl, "lust", 200, 5)
                     $ D20 += 10
                     if not Player.semen:
                         "She continues to lightly stroke you, but you don't seem up to it for now. . ."
@@ -639,9 +644,9 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
             if line == "too far":
 
                 $ Girl.change_face("_surprised",2)
-                $ Girl.change_stat("love", 80, -5)
-                $ Girl.change_stat("obedience", 70, 7)
-                $ Girl.change_stat("inhibition", 50, -3)
+                call change_Girl_stat(Girl, "love", 80, -5)
+                call change_Girl_stat(Girl, "obedience", 70, 7)
+                call change_Girl_stat(Girl, "inhibition", 50, -3)
                 "[Girl.name] sits up straight in her seat and makes a little yelping noise."
                 $ Girl.change_face("_angry", 1)
                 "Between that and the icy glare she shoots you, it's enough to draw the attention of your fellow students in your direction."
@@ -656,7 +661,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
 
                         $ Partner.change_likes(Girl,2)
                         $ Girl.change_likes(Partner,2)
-                        $ Partner.change_stat("lust", 95, 3)
+                        call change_Girl_stat(Partner, "lust", 95, 3)
                         $ lineB = renpy.random.choice([0,
                                             0,
                                             0,
@@ -689,10 +694,10 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         $ Present[1].change_face("_sly", 1)
                         "She seems to be kinda into it. . ."
                         if approval_check(Present[1], 800, "I") or "exhibitionist" in Present[1].traits:
-                            $ Girl.change_stat("inhibition", 90, 3)
+                            call change_Girl_stat(Girl, "inhibition", 90, 3)
                             $ Present[1].change_likes(Girl,3)
                             $ Girl.change_likes(Present[1],5)
-                            $ Present[1].change_stat("lust", 89, 7)
+                            call change_Girl_stat(Present[1], "lust", 89, 7)
                             "You notice that [Present[1].name]'s begun feeling herself up as well."
                             $ Present[1].add_word(1,"frisky","frisky", 0, 0)
                             $ Partner = Present[1]
@@ -723,7 +728,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
 
                     $ Teacher.change_likes(Girl,2)
                     $ Girl.change_likes(Teacher,2)
-                    $ Teacher.change_stat("lust", 95, 3)
+                    call change_Girl_stat(Teacher, "lust", 95, 3)
                     $ lineB = renpy.random.choice([0,
                                     0,
                                     0,
@@ -790,10 +795,10 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                     "She gets a sly smile on her face and continues her lecture."
                     $ Girl.change_face("_sly", 1)
                     if approval_check(Teacher, 800, "I") or "exhibitionist" in Teacher.traits:
-                        $ Teacher.change_stat("inhibition", 90, 3)
+                        call change_Girl_stat(Teacher, "inhibition", 90, 3)
                         $ Teacher.change_likes(Girl,3)
                         $ Girl.change_likes(Teacher,5)
-                        $ Teacher.change_stat("lust", 89, 7)
+                        call change_Girl_stat(Teacher, "lust", 89, 7)
                         "You notice that [Teacher.name]'s hand has snaked down beneath the podium and begun to move."
                         $ Teacher.add_word(1,"frisky","frisky", 0, 0)
                         $ Player.add_word(1,"go on","go on", 0, 0)
@@ -814,9 +819,9 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                 ch_b "[Player.name]!?! {b}WHAT ARE YOU DOING? BOTH OF YOU, TO THE PROFESSOR'S OFFICE, IMMEDIATELY!{/b}"
             $ Girl.add_word(1, 0, 0, 0,"friskyclass")
             $ line = 0
-            $ Girl.change_stat("love", 80, -10)
-            $ Girl.change_stat("obedience", 70, -5)
-            $ Girl.change_stat("inhibition", 50, -10)
+            call change_Girl_stat(Girl, "love", 80, -10)
+            call change_Girl_stat(Girl, "obedience", 70, -5)
+            call change_Girl_stat(Girl, "inhibition", 50, -10)
             $ Player.primary_action = None
             if Girl not in Rules:
                 call caught_having_sex(Girl)

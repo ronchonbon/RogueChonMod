@@ -217,8 +217,8 @@ label change_wardrobe(Girl):
 
                         $ Girl.change_face("_sly")
                     elif Girl.had_chat[1] <= 1:
-                        $ Girl.change_stat("love", 70, 15)
-                        $ Girl.change_stat("obedience", 40, 20)
+                        call change_Girl_stat(Girl, "love", 70, 15)
+                        call change_Girl_stat(Girl, "obedience", 40, 20)
 
                         if Girl == RogueX:
                             ch_r "Aw, that's sweet."
@@ -235,8 +235,8 @@ label change_wardrobe(Girl):
                         elif Girl == JubesX:
                             ch_v "Oh! Thank you."
                     elif Girl.had_chat[1] <= 10:
-                        $ Girl.change_stat("love", 70, 5)
-                        $ Girl.change_stat("obedience", 40, 7)
+                        call change_Girl_stat(Girl, "love", 70, 5)
+                        call change_Girl_stat(Girl, "obedience", 40, 7)
 
                         if Girl == RogueX:
                             ch_r "Thanks."
@@ -253,8 +253,8 @@ label change_wardrobe(Girl):
                         elif Girl == JubesX:
                             ch_v "Right?"
                     elif Girl.had_chat[1] <= 50:
-                        $ Girl.change_stat("love", 70, 1)
-                        $ Girl.change_stat("obedience", 40, 1)
+                        call change_Girl_stat(Girl, "love", 70, 1)
+                        call change_Girl_stat(Girl, "obedience", 40, 1)
 
                         if Girl == RogueX:
                             ch_r "Ok."
@@ -750,8 +750,8 @@ label outfits_menu(Girl):
 
                                 $ Girl.outfit_name = "nude"
                                 $ Girl.outfit["shame"] = 50
-                                $ Girl.change_stat("lust", 50, 10)
-                                $ Girl.change_stat("lust", 70, 5)
+                                call change_Girl_stat(Girl, "lust", 50, 10)
+                                call change_Girl_stat(Girl, "lust", 70, 5)
                                 $ Girl.change_face("_sexy", 1)
                             elif (Girl == JeanX and "nowhammy" not in Girl.traits) or approval_check(Girl, 800, "I") or approval_check(Girl, 2800, taboo_modifier=0):
                                 if Girl == RogueX:
@@ -4194,7 +4194,7 @@ label outfitShame(Girl, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_r "It's a little late to worry about that, right?"
             if "exhibitionist" in Girl.traits and Tempshame >= 20:
                 ch_r "Hmm. . . yeah, I'd love to. . ."
-                $ Girl.change_stat("lust", 80, 10)
+                call change_Girl_stat(Girl, "lust", 80, 10)
             elif Custom == 7:
 
                 $ Girl.change_face("_bemused", 1)
@@ -4239,7 +4239,7 @@ label outfitShame(Girl, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_k "Kinda late to ask, right?"
             if "exhibitionist" in Girl.traits and Tempshame >= 20:
                 ch_k "I'm getting wet just thinking about it. . ."
-                $ Girl.change_stat("lust", 80, 10)
+                call change_Girl_stat(Girl, "lust", 80, 10)
             elif Tempshame <= 5:
                 $ Girl.change_face("_smile")
                 ch_k "Sure, it's a cute look!"
@@ -4283,7 +4283,7 @@ label outfitShame(Girl, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_e "Is that a trick question?"
             if "exhibitionist" in Girl.traits and Tempshame >= 20:
                 ch_e "The thought of it gets me moist. . ."
-                $ Girl.change_stat("lust", 80, 10)
+                call change_Girl_stat(Girl, "lust", 80, 10)
             elif Tempshame <= 5:
                 $ Girl.change_face("_smile")
                 ch_e "Yes, it's a fine choice."
@@ -4326,7 +4326,7 @@ label outfitShame(Girl, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Girl.mouth = "_smile"
                 ch_l "Well a bit late for that, I guess."
             if "exhibitionist" in Girl.traits and Tempshame >= 20:
-                $ Girl.change_stat("lust", 80, 10)
+                call change_Girl_stat(Girl, "lust", 80, 10)
                 $ Girl.change_face("_sexy", 2)
                 ch_l ". . ."
                 $ Girl.change_face("_sexy", 1)
@@ -4371,7 +4371,7 @@ label outfitShame(Girl, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Girl.mouth = "_smile"
                 ch_j "Well, I guess so, right?"
             if "exhibitionist" in Girl.traits and Tempshame >= 20:
-                $ Girl.change_stat("lust", 80, 10)
+                call change_Girl_stat(Girl, "lust", 80, 10)
                 $ Girl.change_face("_sexy", 2)
                 ch_j ". . ."
                 $ Girl.change_face("_sexy", 1)
@@ -4419,7 +4419,7 @@ label outfitShame(Girl, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_s "It seems a bit late for that question. . ."
             if "exhibitionist" in Girl.traits and Tempshame >= 20:
                 ch_s "I do find the idea. . . exciting. . ."
-                $ Girl.change_stat("lust", 80, 10)
+                call change_Girl_stat(Girl, "lust", 80, 10)
             elif Tempshame <= 10:
                 $ Girl.change_face("_smile")
                 ch_s "Yes, it's a fine choice."
@@ -4458,7 +4458,7 @@ label outfitShame(Girl, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Girl.mouth = "_smile"
                 ch_v "I guess that ship has sailed. . ."
             if "exhibitionist" in Girl.traits and Tempshame >= 20:
-                $ Girl.change_stat("lust", 80, 10)
+                call change_Girl_stat(Girl, "lust", 80, 10)
                 $ Girl.change_face("_sexy", 2)
                 ch_v ". . ."
                 $ Girl.change_face("_sexy", 1)

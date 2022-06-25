@@ -46,7 +46,7 @@ label Storm_Relationship:
                 if StormX.love >= 800:
                     $ StormX.change_face("_surprised", 1)
                     $ StormX.mouth = "_smile"
-                    $ StormX.change_stat("love", 200, 40)
+                    call change_Girl_stat(StormX, "love", 200, 40)
                     ch_s "I would love to!"
                     if "boyfriend" not in StormX.player_petnames:
                         $ StormX.player_petnames.append("boyfriend")
@@ -93,7 +93,7 @@ label Storm_Relationship:
                 if StormX.love >= 800:
                     $ StormX.change_face("_surprised", 1)
                     $ StormX.mouth = "_smile"
-                    $ StormX.change_stat("love", 90, 5)
+                    call change_Girl_stat(StormX, "love", 90, 5)
                     ch_s "I suppose I could give you another chance."
                     if "boyfriend" not in StormX.player_petnames:
                         $ StormX.player_petnames.append("boyfriend")
@@ -107,7 +107,7 @@ label Storm_Relationship:
                     $ StormX.action_counter["kiss"] += 1
                 elif StormX.love >= 600 and approval_check(StormX, 1500):
                     $ StormX.change_face("_smile", 1)
-                    $ StormX.change_stat("love", 90, 5)
+                    call change_Girl_stat(StormX, "love", 90, 5)
                     ch_s "I suppose I could give it another chance."
                     if "boyfriend" not in StormX.player_petnames:
                         $ StormX.player_petnames.append("boyfriend")
@@ -385,14 +385,14 @@ label Storm_Monogamy:
 
                 $ StormX.change_face("_sly", 1)
                 if "monogamous" not in StormX.daily_history:
-                    $ StormX.change_stat("obedience", 90, -2)
+                    call change_Girl_stat(StormX, "obedience", 90, -2)
                 ch_s "I do have needs that must be met. . ."
                 return
             elif approval_check(StormX, 1200, "LO", taboo_modifier=0) and StormX.love >= StormX.obedience:
 
                 $ StormX.change_face("_sly", 1)
                 if "monogamous" not in StormX.daily_history:
-                    $ StormX.change_stat("love", 90, 1)
+                    call change_Girl_stat(StormX, "love", 90, 1)
                 ch_s "I did not take you for the jealous type."
                 ch_s "Very well, for now. . ."
             elif approval_check(StormX, 700, "O", taboo_modifier=0):
@@ -405,7 +405,7 @@ label Storm_Monogamy:
                 ch_s "I do have needs. No."
                 return
             if "monogamous" not in StormX.daily_history:
-                $ StormX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(StormX, "obedience", 90, 3)
             $ StormX.add_word(1, 0,"monogamous")
             $ StormX.traits.append("monogamous")
         "Don't hook up with other girls." if "monogamous" not in StormX.traits:
@@ -417,7 +417,7 @@ label Storm_Monogamy:
 
                 $ StormX.change_face("_sly", 1)
                 if "monogamous" not in StormX.daily_history:
-                    $ StormX.change_stat("obedience", 90, -2)
+                    call change_Girl_stat(StormX, "obedience", 90, -2)
                 ch_s "I do have needs that must be met. . ."
                 return
             elif approval_check(StormX, 600, "O", taboo_modifier=0):
@@ -434,7 +434,7 @@ label Storm_Monogamy:
                 ch_s "I would watch your tone."
                 return
             if "monogamous" not in StormX.daily_history:
-                $ StormX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(StormX, "obedience", 90, 3)
             $ StormX.add_word(1, 0,"monogamous")
             $ StormX.traits.append("monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in StormX.traits:
@@ -447,10 +447,10 @@ label Storm_Monogamy:
             else:
                 $ StormX.change_face("_sly", 1,brows = "_confused")
                 if "monogamous" not in StormX.daily_history:
-                    $ StormX.change_stat("love", 90, -2)
+                    call change_Girl_stat(StormX, "love", 90, -2)
                 ch_s "It sounds like I have some weekend plans to make then."
             if "monogamous" not in StormX.daily_history:
-                $ StormX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(StormX, "obedience", 90, 3)
             if "monogamous" in StormX.traits:
                 $ StormX.traits.remove("monogamous")
             $ StormX.add_word(1, 0,"monogamous")
@@ -471,14 +471,14 @@ label Storm_Jumped:
 
                 $ StormX.change_face("_sly", 1)
                 if "chill" not in StormX.daily_history:
-                    $ StormX.change_stat("obedience", 90, -2)
+                    call change_Girl_stat(StormX, "obedience", 90, -2)
                 ch_s "I would if you would come to me more often. . ."
                 return
             elif approval_check(StormX, 1000, "LO", taboo_modifier=0) and StormX.love >= StormX.obedience:
 
                 $ StormX.change_face("_surprised", 1)
                 if "chill" not in StormX.daily_history:
-                    $ StormX.change_stat("love", 90, 1)
+                    call change_Girl_stat(StormX, "love", 90, 1)
                 ch_s "I am sorry, but I have needs. . ."
                 $ StormX.change_face("_sly", 1,eyes = "_side")
                 ch_s "I will -try- to keep them in check. . ."
@@ -492,7 +492,7 @@ label Storm_Jumped:
                 ch_s "I will take what I need."
                 return
             if "chill" not in StormX.daily_history:
-                $ StormX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(StormX, "obedience", 90, 3)
             $ StormX.add_word(1, 0,"chill")
             $ StormX.traits.append("chill")
         "Don't bother me like that." if "chill" not in StormX.traits:
@@ -504,7 +504,7 @@ label Storm_Jumped:
 
                 $ StormX.change_face("_sly", 1)
                 if "chill" not in StormX.daily_history:
-                    $ StormX.change_stat("obedience", 90, -2)
+                    call change_Girl_stat(StormX, "obedience", 90, -2)
                 ch_s "I would if you would come to me more often. . ."
                 return
             elif approval_check(StormX, 400, "O", taboo_modifier=0):
@@ -522,7 +522,7 @@ label Storm_Jumped:
                 ch_s "I will take what I need."
                 return
             if "chill" not in StormX.daily_history:
-                $ StormX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(StormX, "obedience", 90, 3)
             $ StormX.add_word(1, 0,"chill")
             $ StormX.traits.append("chill")
         "Knock yourself out.":
@@ -535,10 +535,10 @@ label Storm_Jumped:
             else:
                 $ StormX.change_face("_sly", 1,brows = "_confused")
                 if "chill" not in StormX.daily_history:
-                    $ StormX.change_stat("love", 90, -2)
+                    call change_Girl_stat(StormX, "love", 90, -2)
                 ch_s "If I find myself in need, certainly."
             if "chill" not in StormX.daily_history:
-                $ StormX.change_stat("obedience", 90, 3)
+                call change_Girl_stat(StormX, "obedience", 90, 3)
             if "chill" in StormX.traits:
                 $ StormX.traits.remove("chill")
             $ StormX.add_word(1, 0,"chill")
@@ -576,11 +576,11 @@ label Storm_SexChat:
                         "Sex.":
                             $ StormX.change_face("_sly")
                             if StormX.player_favorite_action == "sex":
-                                $ StormX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(StormX, "lust", 80, 5)
                                 ch_s "Yes, so you've said."
                             elif StormX.favorite_action == "sex":
-                                $ StormX.change_stat("love", 90, 5)
-                                $ StormX.change_stat("lust", 80, 10)
+                                call change_Girl_stat(StormX, "love", 90, 5)
+                                call change_Girl_stat(StormX, "lust", 80, 10)
                                 ch_s "I also enjoy that. . ."
                             elif StormX.action_counter["sex"] >= 5:
                                 ch_s "It certainly is enjoyable. . ."
@@ -595,11 +595,11 @@ label Storm_SexChat:
 
                             $ StormX.change_face("_sly")
                             if StormX.player_favorite_action == "anal":
-                                $ StormX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(StormX, "lust", 80, 5)
                                 ch_s "Yes, so you've said."
                             elif StormX.favorite_action == "anal":
-                                $ StormX.change_stat("love", 90, 5)
-                                $ StormX.change_stat("lust", 80, 10)
+                                call change_Girl_stat(StormX, "love", 90, 5)
+                                call change_Girl_stat(StormX, "lust", 80, 10)
                                 ch_s "I also enjoy that. . ."
                             elif StormX.action_counter["anal"] >= 10:
                                 ch_s "It certainly is enjoyable. . ."
@@ -614,11 +614,11 @@ label Storm_SexChat:
 
                             $ StormX.change_face("_sly")
                             if StormX.player_favorite_action == "blowjob":
-                                $ StormX.change_stat("lust", 80, 3)
+                                call change_Girl_stat(StormX, "lust", 80, 3)
                                 ch_s "Yes, so you've said."
                             elif StormX.favorite_action == "blowjob":
-                                $ StormX.change_stat("love", 90, 5)
-                                $ StormX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(StormX, "love", 90, 5)
+                                call change_Girl_stat(StormX, "lust", 80, 5)
                                 ch_s "I would have to agree. . ."
                             elif StormX.action_counter["blowjob"] >= 10:
                                 ch_s "You are quite delicious. . ."
@@ -633,11 +633,11 @@ label Storm_SexChat:
 
                             $ StormX.change_face("_sly")
                             if StormX.player_favorite_action == "titjob":
-                                $ StormX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(StormX, "lust", 80, 5)
                                 ch_s "Yes, so you've said."
                             elif StormX.favorite_action == "titjob":
-                                $ StormX.change_stat("love", 90, 5)
-                                $ StormX.change_stat("lust", 80, 7)
+                                call change_Girl_stat(StormX, "love", 90, 5)
+                                call change_Girl_stat(StormX, "lust", 80, 7)
                                 ch_s "I also enjoy that. . ."
                             elif StormX.action_counter["titjob"] >= 10:
                                 ch_s "It certainly is enjoyable. . ."
@@ -647,18 +647,18 @@ label Storm_SexChat:
                             else:
                                 $ StormX.change_face("_bemused")
                                 ch_s "Yes. . . um. . . it is fine. . ."
-                                $ StormX.change_stat("love", 80, 5)
-                                $ StormX.change_stat("inhibition", 50, 10)
+                                call change_Girl_stat(StormX, "love", 80, 5)
+                                call change_Girl_stat(StormX, "inhibition", 50, 10)
                             $ StormX.player_favorite_action = "titjob"
                         "Footjobs.":
 
                             $ StormX.change_face("_sly")
                             if StormX.player_favorite_action == "footjob":
-                                $ StormX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(StormX, "lust", 80, 5)
                                 ch_s "Yes, so you've said."
                             elif StormX.favorite_action == "footjob":
-                                $ StormX.change_stat("love", 90, 5)
-                                $ StormX.change_stat("lust", 80, 7)
+                                call change_Girl_stat(StormX, "love", 90, 5)
+                                call change_Girl_stat(StormX, "lust", 80, 7)
                                 ch_s "I also enjoy that. . ."
                             elif StormX.action_counter["footjob"] >= 10:
                                 ch_s "I like it too . . ."
@@ -673,11 +673,11 @@ label Storm_SexChat:
 
                             $ StormX.change_face("_sly")
                             if StormX.player_favorite_action == "handjob":
-                                $ StormX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(StormX, "lust", 80, 5)
                                 ch_s "Yes, so you've said."
                             elif StormX.favorite_action == "handjob":
-                                $ StormX.change_stat("love", 90, 5)
-                                $ StormX.change_stat("lust", 80, 7)
+                                call change_Girl_stat(StormX, "love", 90, 5)
+                                call change_Girl_stat(StormX, "lust", 80, 7)
                                 ch_s "I also enjoy that. . ."
                             elif StormX.action_counter["handjob"] >= 10:
                                 ch_s "I like it too . . ."
@@ -693,11 +693,11 @@ label Storm_SexChat:
                             $ counter = StormX.action_counter["fondle_breasts"]+ StormX.action_counter["fondle_thighs"]+ StormX.action_counter["suck_breasts"] + StormX.action_counter["hotdog"]
                             $ StormX.change_face("_sly")
                             if StormX.player_favorite_action == "fondle":
-                                $ StormX.change_stat("lust", 80, 3)
+                                call change_Girl_stat(StormX, "lust", 80, 3)
                                 ch_s "Yes, so you've said."
                             elif StormX.favorite_action in ("hotdog","suck_breasts","fondle_breasts","fondle_thighs"):
-                                $ StormX.change_stat("love", 90, 5)
-                                $ StormX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(StormX, "love", 90, 5)
+                                call change_Girl_stat(StormX, "lust", 80, 5)
                                 ch_s "I do not mind that myself. . ."
                             elif counter >= 10:
                                 ch_s "It certainly is enjoyable. . ."
@@ -713,11 +713,11 @@ label Storm_SexChat:
 
                             $ StormX.change_face("_sly")
                             if StormX.player_favorite_action == "kiss":
-                                $ StormX.change_stat("love", 90, 3)
+                                call change_Girl_stat(StormX, "love", 90, 3)
                                 ch_s "Yes, so you've said."
                             elif StormX.favorite_action == "kiss":
-                                $ StormX.change_stat("love", 90, 5)
-                                $ StormX.change_stat("lust", 80, 5)
+                                call change_Girl_stat(StormX, "love", 90, 5)
+                                call change_Girl_stat(StormX, "lust", 80, 5)
                                 ch_s "I also enjoy that. . ."
                             elif StormX.action_counter["kiss"] >= 10:
                                 ch_s "It certainly is enjoyable. . ."
@@ -787,25 +787,25 @@ label Storm_SexChat:
                 else:
                     if approval_check(StormX, 1000) and StormX.obedience <= StormX.love:
                         $ StormX.change_face("_bemused")
-                        $ StormX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(StormX, "obedience", 90, 1)
                         ch_s "I can be silent if you wish."
                         $ StormX.traits.remove("vocal")
                     elif approval_check(StormX, 700, "O"):
                         $ StormX.change_face("_sadside")
-                        $ StormX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(StormX, "obedience", 90, 1)
                         ch_s ". . ."
                         $ StormX.traits.remove("vocal")
                     elif approval_check(StormX, 600):
                         $ StormX.change_face("_sly")
-                        $ StormX.change_stat("love", 90, -3)
-                        $ StormX.change_stat("obedience", 50, -1)
-                        $ StormX.change_stat("inhibition", 90, 5)
+                        call change_Girl_stat(StormX, "love", 90, -3)
+                        call change_Girl_stat(StormX, "obedience", 50, -1)
+                        call change_Girl_stat(StormX, "inhibition", 90, 5)
                         ch_s "Do not presume to control me, [StormX.player_petname]."
                     else:
                         $ StormX.change_face("_angry")
-                        $ StormX.change_stat("love", 90, -5)
-                        $ StormX.change_stat("obedience", 60, -3)
-                        $ StormX.change_stat("inhibition", 90, 10)
+                        call change_Girl_stat(StormX, "love", 90, -5)
+                        call change_Girl_stat(StormX, "obedience", 60, -3)
+                        call change_Girl_stat(StormX, "inhibition", 90, 10)
                         ch_s "I do not take orders from you, [StormX.player_petname]."
 
                     $ StormX.daily_history.append("setvocal")
@@ -816,22 +816,22 @@ label Storm_SexChat:
                 else:
                     if approval_check(StormX, 1000) and StormX.obedience <= StormX.love:
                         $ StormX.change_face("_sly")
-                        $ StormX.change_stat("obedience", 90, 2)
+                        call change_Girl_stat(StormX, "obedience", 90, 2)
                         ch_s "I believe I can make myself known. . ."
                         $ StormX.traits.append("vocal")
                     elif approval_check(StormX, 700, "O"):
                         $ StormX.change_face("_sadside")
-                        $ StormX.change_stat("obedience", 90, 2)
+                        call change_Girl_stat(StormX, "obedience", 90, 2)
                         ch_s "If that is what you want, [StormX.player_petname]."
                         $ StormX.traits.append("vocal")
                     elif approval_check(StormX, 600):
                         $ StormX.change_face("_sly")
-                        $ StormX.change_stat("obedience", 90, 3)
+                        call change_Girl_stat(StormX, "obedience", 90, 3)
                         ch_s "I suppose that I could. . ."
                         $ StormX.traits.append("vocal")
                     else:
                         $ StormX.change_face("_angry")
-                        $ StormX.change_stat("inhibition", 90, 5)
+                        call change_Girl_stat(StormX, "inhibition", 90, 5)
                         ch_s ". . . I would rather not."
 
                     $ StormX.daily_history.append("setvocal")
@@ -844,25 +844,25 @@ label Storm_SexChat:
                 else:
                     if approval_check(StormX, 1200) and StormX.obedience <= StormX.love:
                         $ StormX.change_face("_bemused")
-                        $ StormX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(StormX, "obedience", 90, 1)
                         ch_s "Allow you to take the lead? Fine."
                         $ StormX.traits.append("passive")
                     elif approval_check(StormX, 700, "O"):
                         $ StormX.change_face("_sadside")
-                        $ StormX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(StormX, "obedience", 90, 1)
                         ch_s "I will try to restrain myself."
                         $ StormX.traits.append("passive")
                     elif approval_check(StormX, 600):
                         $ StormX.change_face("_sly")
-                        $ StormX.change_stat("love", 90, -3)
-                        $ StormX.change_stat("obedience", 50, -1)
-                        $ StormX.change_stat("inhibition", 90, 5)
+                        call change_Girl_stat(StormX, "love", 90, -3)
+                        call change_Girl_stat(StormX, "obedience", 50, -1)
+                        call change_Girl_stat(StormX, "inhibition", 90, 5)
                         ch_s "We shall see."
                     else:
                         $ StormX.change_face("_angry")
-                        $ StormX.change_stat("love", 90, -5)
-                        $ StormX.change_stat("obedience", 60, -3)
-                        $ StormX.change_stat("inhibition", 90, 10)
+                        call change_Girl_stat(StormX, "love", 90, -5)
+                        call change_Girl_stat(StormX, "obedience", 60, -3)
+                        call change_Girl_stat(StormX, "inhibition", 90, 10)
                         ch_s "I don't think that I shall."
 
                     $ StormX.daily_history.append("initiative")
@@ -873,22 +873,22 @@ label Storm_SexChat:
                 else:
                     if approval_check(StormX, 1000) and StormX.obedience <= StormX.love:
                         $ StormX.change_face("_bemused")
-                        $ StormX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(StormX, "obedience", 90, 1)
                         ch_s "You would prefer I choose? Very Well."
                         $ StormX.traits.remove("passive")
                     elif approval_check(StormX, 700, "O"):
                         $ StormX.change_face("_sadside")
-                        $ StormX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(StormX, "obedience", 90, 1)
                         ch_s "If you insist."
                         $ StormX.traits.remove("passive")
                     elif approval_check(StormX, 600):
                         $ StormX.change_face("_sly")
-                        $ StormX.change_stat("obedience", 90, 3)
+                        call change_Girl_stat(StormX, "obedience", 90, 3)
                         ch_s "We shall see."
                         $ StormX.traits.remove("passive")
                     else:
                         $ StormX.change_face("_angry")
-                        $ StormX.change_stat("inhibition", 90, 5)
+                        call change_Girl_stat(StormX, "inhibition", 90, 5)
                         ch_s "I would rather not."
 
                     $ StormX.daily_history.append("initiative")
@@ -1170,9 +1170,9 @@ label Storm_Chitchat(O=0, Options=["default","default","default"]):
                 $ StormX.change_face("_sly",2)
                 ch_s "They were. . .{i}interesting{/i}."
             "Good. You looked like you could use to learn a thing or two from them.":
-                $ StormX.change_stat("love", 90, -3)
-                $ StormX.change_stat("obedience", 70, 5)
-                $ StormX.change_stat("inhibition", 50, 5)
+                call change_Girl_stat(StormX, "love", 90, -3)
+                call change_Girl_stat(StormX, "obedience", 70, 5)
+                call change_Girl_stat(StormX, "inhibition", 50, 5)
                 $ StormX.change_face("_angry")
                 ch_s "Well, I cannot say they I din't learn a thing or so."
         $ StormX.blushing = "_blush1"
@@ -1200,8 +1200,8 @@ label Storm_Chitchat(O=0, Options=["default","default","default"]):
             menu:
                 extend ""
                 "You were totally amazing.":
-                    $ StormX.change_stat("love", 90, 5)
-                    $ StormX.change_stat("inhibition", 60, 10)
+                    call change_Girl_stat(StormX, "love", 90, 5)
+                    call change_Girl_stat(StormX, "inhibition", 60, 10)
                     $ StormX.change_face("_normal", 1)
                     ch_s ". . . "
                     $ StormX.change_face("_sexy", 1)
@@ -1209,19 +1209,19 @@ label Storm_Chitchat(O=0, Options=["default","default","default"]):
                     ch_s "Let me know if you're like a repeat. . ."
                 "Honestly? It was good. . .but you could use a little practice, I think.":
                     if approval_check(StormX, 300, "I") or not approval_check(StormX, 800):
-                        $ StormX.change_stat("love", 90, -5)
-                        $ StormX.change_stat("obedience", 60, 10)
-                        $ StormX.change_stat("inhibition", 50, 10)
+                        call change_Girl_stat(StormX, "love", 90, -5)
+                        call change_Girl_stat(StormX, "obedience", 60, 10)
+                        call change_Girl_stat(StormX, "inhibition", 50, 10)
                         $ StormX.change_face("_perplexed", 1)
                         ch_s "Oh? Well I am sorry I was not up to your usual standards. . ."
                     else:
-                        $ StormX.change_stat("obedience", 70, 15)
-                        $ StormX.change_stat("inhibition", 50, 5)
+                        call change_Girl_stat(StormX, "obedience", 70, 15)
+                        call change_Girl_stat(StormX, "inhibition", 50, 5)
                         $ StormX.change_face("_sexy", 1)
                         ch_s "Oh? I'm certain that I can improve on the experience. . ."
                 "I guess. If you're into weird sounds and too much teeth. Spoiler, I'm not.":
-                    $ StormX.change_stat("love", 90, -10)
-                    $ StormX.change_stat("obedience", 60, 10)
+                    call change_Girl_stat(StormX, "love", 90, -10)
+                    call change_Girl_stat(StormX, "obedience", 60, 10)
                     $ StormX.change_face("_angry",2)
                     ch_s "Oh, then I suppose you will not miss it."
             $ StormX.blushing = "_blush1"
@@ -1282,7 +1282,7 @@ label Storm_Chitchat(O=0, Options=["default","default","default"]):
         $ StormX.change_face("_sly",2, eyes = "_down")
         ch_s ". . . manhood. . ."
         $ StormX.change_face("_bemused", 1)
-        $ StormX.change_stat("love", 50, 5)
+        call change_Girl_stat(StormX, "love", 50, 5)
         $ StormX.history.remove("seenpeen")
 
 
@@ -1825,67 +1825,67 @@ label Storm_Summon(approval_bonus=approval_bonus):
             menu:
                 extend ""
                 "Sure, I'll be right there.":
-                    $ StormX.change_stat("love", 55, 1)
-                    $ StormX.change_stat("inhibition", 30, 1)
+                    call change_Girl_stat(StormX, "love", 55, 1)
+                    call change_Girl_stat(StormX, "inhibition", 30, 1)
                     ch_s "I will see you soon then."
                     $ line = "go to"
                 "Nah, we can talk later.":
 
-                    $ StormX.change_stat("obedience", 50, 1)
-                    $ StormX.change_stat("obedience", 30, 2)
+                    call change_Girl_stat(StormX, "obedience", 50, 1)
+                    call change_Girl_stat(StormX, "obedience", 30, 2)
                     ch_s "Fine. Later then."
                 "Could you please come visit me? I'm lonely.":
 
                     if approval_check(StormX, 650, "L") or approval_check(StormX, 1500):
-                        $ StormX.change_stat("love", 70, 1)
-                        $ StormX.change_stat("obedience", 50, 1)
+                        call change_Girl_stat(StormX, "love", 70, 1)
+                        call change_Girl_stat(StormX, "obedience", 50, 1)
                         $ line = "lonely"
                     else:
-                        $ StormX.change_stat("inhibition", 30, 1)
+                        call change_Girl_stat(StormX, "inhibition", 30, 1)
                         $ line = "no"
                         ch_s "Well we cannot have that. . ."
                 "Come on, it'll be fun.":
 
                     if approval_check(StormX, 400, "L") and approval_check(StormX, 800):
-                        $ StormX.change_stat("love", 70, 1)
-                        $ StormX.change_stat("obedience", 50, 1)
+                        call change_Girl_stat(StormX, "love", 70, 1)
+                        call change_Girl_stat(StormX, "obedience", 50, 1)
                         $ line = "fun"
                     else:
-                        $ StormX.change_stat("inhibition", 30, 1)
+                        call change_Girl_stat(StormX, "inhibition", 30, 1)
                         $ line = "no"
                 "I said come over here.":
 
                     if approval_check(StormX, 600, "O"):
 
-                        $ StormX.change_stat("love", 50, 1, 1)
-                        $ StormX.change_stat("love", 40, -1)
-                        $ StormX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(StormX, "love", 50, 1, 1)
+                        call change_Girl_stat(StormX, "love", 40, -1)
+                        call change_Girl_stat(StormX, "obedience", 90, 1)
                         $ line = "command"
 
                     elif D20 >= 7 and approval_check(StormX, 1500):
 
-                        $ StormX.change_stat("love", 70, -2)
-                        $ StormX.change_stat("love", 90, -1)
-                        $ StormX.change_stat("obedience", 50, 2)
-                        $ StormX.change_stat("obedience", 90, 1)
+                        call change_Girl_stat(StormX, "love", 70, -2)
+                        call change_Girl_stat(StormX, "love", 90, -1)
+                        call change_Girl_stat(StormX, "obedience", 50, 2)
+                        call change_Girl_stat(StormX, "obedience", 90, 1)
                         ch_s "Fine."
                         $ line = "yes"
 
                     elif approval_check(StormX, 200, "O"):
 
-                        $ StormX.change_stat("love", 60, -4)
-                        $ StormX.change_stat("love", 90, -3)
+                        call change_Girl_stat(StormX, "love", 60, -4)
+                        call change_Girl_stat(StormX, "love", 90, -3)
                         ch_s "And I refused."
-                        $ StormX.change_stat("inhibition", 40, 2)
-                        $ StormX.change_stat("inhibition", 60, 1)
-                        $ StormX.change_stat("obedience", 70, -3)
+                        call change_Girl_stat(StormX, "inhibition", 40, 2)
+                        call change_Girl_stat(StormX, "inhibition", 60, 1)
+                        call change_Girl_stat(StormX, "obedience", 70, -3)
                         ch_s "I would rather stay."
                     else:
 
-                        $ StormX.change_stat("inhibition", 30, 1)
-                        $ StormX.change_stat("inhibition", 50, 1)
-                        $ StormX.change_stat("love", 50, -1, 1)
-                        $ StormX.change_stat("obedience", 70, -1)
+                        call change_Girl_stat(StormX, "inhibition", 30, 1)
+                        call change_Girl_stat(StormX, "inhibition", 50, 1)
+                        call change_Girl_stat(StormX, "love", 50, -1, 1)
+                        call change_Girl_stat(StormX, "obedience", 70, -1)
                         $ line = "no"
     else:
 
@@ -2033,78 +2033,80 @@ label Storm_Leave:
 
     $ D20 = renpy.random.randint(1, 20)
 
+    $ line = None
+
     menu:
         extend ""
         "Sure, I'll catch up.":
             if "followed" not in StormX.recent_history:
-                $ StormX.change_stat("love", 55, 1)
-                $ StormX.change_stat("inhibition", 30, 1)
+                call change_Girl_stat(StormX, "love", 55, 1)
+                call change_Girl_stat(StormX, "inhibition", 30, 1)
             $ line = "go to"
         "Nah, we can talk later.":
 
             if "followed" not in StormX.recent_history:
-                $ StormX.change_stat("obedience", 50, 1)
-                $ StormX.change_stat("obedience", 30, 2)
+                call change_Girl_stat(StormX, "obedience", 50, 1)
+                call change_Girl_stat(StormX, "obedience", 30, 2)
             ch_s "Very well."
         "Could you please stay with me? I'll get lonely.":
 
             if approval_check(StormX, 650, "L") or approval_check(StormX, 1500):
                 if "followed" not in StormX.recent_history:
-                    $ StormX.change_stat("love", 70, 1)
-                    $ StormX.change_stat("obedience", 50, 1)
+                    call change_Girl_stat(StormX, "love", 70, 1)
+                    call change_Girl_stat(StormX, "obedience", 50, 1)
                 $ line = "lonely"
             else:
                 if "followed" not in StormX.recent_history:
-                    $ StormX.change_stat("inhibition", 30, 1)
+                    call change_Girl_stat(StormX, "inhibition", 30, 1)
                 $ line = "no"
                 ch_s "Well we cannot have that. . ."
         "Come on, it'll be fun.":
 
             if approval_check(StormX, 400, "L") and approval_check(StormX, 800):
-                $ StormX.change_stat("love", 70, 1)
-                $ StormX.change_stat("obedience", 50, 1)
+                call change_Girl_stat(StormX, "love", 70, 1)
+                call change_Girl_stat(StormX, "obedience", 50, 1)
                 $ line = "fun"
             else:
-                $ StormX.change_stat("inhibition", 30, 1)
+                call change_Girl_stat(StormX, "inhibition", 30, 1)
                 $ line = "no"
         "No, stay here.":
 
             if approval_check(StormX, 600, "O"):
 
                 if "followed" not in StormX.recent_history:
-                    $ StormX.change_stat("love", 40, -2)
-                    $ StormX.change_stat("obedience", 90, 1)
+                    call change_Girl_stat(StormX, "love", 40, -2)
+                    call change_Girl_stat(StormX, "obedience", 90, 1)
                 $ line = "command"
 
             elif D20 >= 7 and approval_check(StormX, 1400):
 
                 if "followed" not in StormX.recent_history:
-                    $ StormX.change_stat("love", 70, -2)
-                    $ StormX.change_stat("love", 90, -1)
-                    $ StormX.change_stat("obedience", 50, 2)
-                    $ StormX.change_stat("obedience", 90, 1)
+                    call change_Girl_stat(StormX, "love", 70, -2)
+                    call change_Girl_stat(StormX, "love", 90, -1)
+                    call change_Girl_stat(StormX, "obedience", 50, 2)
+                    call change_Girl_stat(StormX, "obedience", 90, 1)
                     ch_s "Fine."
                 $ line = "yes"
 
             elif approval_check(StormX, 200, "O"):
 
                 if "followed" not in StormX.recent_history:
-                    $ StormX.change_stat("love", 70, -4)
-                    $ StormX.change_stat("love", 90, -2)
+                    call change_Girl_stat(StormX, "love", 70, -4)
+                    call change_Girl_stat(StormX, "love", 90, -2)
                 ch_s "And I refused."
                 if "followed" not in StormX.recent_history:
-                    $ StormX.change_stat("inhibition", 40, 2)
-                    $ StormX.change_stat("inhibition", 60, 1)
-                    $ StormX.change_stat("obedience", 70, -2)
+                    call change_Girl_stat(StormX, "inhibition", 40, 2)
+                    call change_Girl_stat(StormX, "inhibition", 60, 1)
+                    call change_Girl_stat(StormX, "obedience", 70, -2)
                 ch_s "I would rather stay."
             else:
 
                 if "followed" not in StormX.recent_history:
-                    $ StormX.change_stat("inhibition", 30, 1)
-                    $ StormX.change_stat("inhibition", 50, 1)
-                    $ StormX.change_stat("love", 50, -1, 1)
-                    $ StormX.change_stat("love", 90, -2)
-                    $ StormX.change_stat("obedience", 70, -1)
+                    call change_Girl_stat(StormX, "inhibition", 30, 1)
+                    call change_Girl_stat(StormX, "inhibition", 50, 1)
+                    call change_Girl_stat(StormX, "love", 50, -1, 1)
+                    call change_Girl_stat(StormX, "love", 90, -2)
+                    call change_Girl_stat(StormX, "obedience", 70, -1)
                 $ line = "no"
 
     $ StormX.recent_history.append("followed")

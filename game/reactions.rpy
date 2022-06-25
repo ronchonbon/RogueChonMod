@@ -57,8 +57,8 @@ label forced_rejected_reactions(Girl, action):
 
 label first_action_approval_forced_reactions(Girl, action):
     $ Girl.change_face("_sad")
-    $ Girl.change_stat("love", 70, -3, 1)
-    $ Girl.change_stat("love", 20, -2, 1)
+    call change_Girl_stat(Girl, "love", 70, -3, 1)
+    call change_Girl_stat(Girl, "love", 20, -2, 1)
 
     return
 

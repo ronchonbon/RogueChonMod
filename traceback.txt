@@ -1,50 +1,152 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/locations.rpy", line 146, in script call
+  File "game/locations.rpy", line 151, in script call
     call world_map
-  File "game/locations.rpy", line 629, in script call
-    call traveling_event_calls
-  File "game/utilities.rpy", line 305, in script call
-    call Emma_Caught_Classroom
-  File "game/emma_scenes.rpy", line 380, in script call
-    call add_Girl(EmmaX)
-  File "game/locations.rpy", line 146, in script call
+  File "game/locations.rpy", line 672, in script call
+    call take_class
+  File "game/classroom.rpy", line 4, in script call
+    call meet_Emma
+  File "game/locations.rpy", line 718, in script call
     call world_map
-  File "game/locations.rpy", line 629, in script call
-    call traveling_event_calls
-  File "game/utilities.rpy", line 305, in script call
-    call Emma_Caught_Classroom
-  File "game/emma_scenes.rpy", line 380, in script call
-    call add_Girl(EmmaX)
-ScriptError: could not find label 'add_Girl'.
+  File "game/locations.rpy", line 846, in script call
+    call traveling_event_calls(location = "bg_dangerroom")
+  File "game/utilities.rpy", line 499, in script call
+    call meet_Laura
+  File "game/locations.rpy", line 906, in script call
+    call world_map
+  File "game/locations.rpy", line 1042, in script call
+    call traveling_event_calls(location = "bg_showerroom")
+  File "game/utilities.rpy", line 510, in script call
+    call meet_Jean
+  File "game/locations.rpy", line 1103, in script call
+    call world_map
+  File "game/locations.rpy", line 100, in script call
+    call traveling_event_calls(location = "bg_player")
+  File "game/utilities.rpy", line 517, in script call
+    call meet_Storm_prelude
+  File "game/locations.rpy", line 151, in script call
+    call world_map
+  File "game/locations.rpy", line 718, in script call
+    call world_map
+  File "game/locations.rpy", line 151, in script call
+    call world_map
+  File "game/locations.rpy", line 632, in script call
+    call traveling_event_calls(location = "bg_classroom")
+  File "game/utilities.rpy", line 477, in script call
+    call meet_Storm_ask_Emma
+  File "game/locations.rpy", line 718, in script call
+    call world_map
+  File "game/locations.rpy", line 151, in script call
+    call world_map
+  File "game/locations.rpy", line 675, in script call
+    call event_calls
+  File "game/utilities.rpy", line 303, in script call
+    call check_addiction
+  File "game/checks.rpy", line 434, in script call
+    call return_to_room
+  File "game/locations.rpy", line 151, in script call
+    call world_map
+  File "game/locations.rpy", line 632, in script call
+    call traveling_event_calls(location = "bg_classroom")
+  File "game/utilities.rpy", line 551, in script call
+    call Jubes_Mall
+  File "game/jubes_scenes.rpy", line 1100, in script call
+    call mall
+  File "game/locations.rpy", line 1479, in script call
+    call swimsuit_shop
+  File "game/mall.rpy", line 851, in script call
+    call change_Girl_stat(Girl, "love", 200, 20)
+  File "game/utilities.rpy", line 121, in script
+    show expression Text("[line]", size = 40, color = "#FFFFFF") at stat_falling(Girl.sprite_location) onlayer screens
+  File "game/utilities.rpy", line 121, in <module>
+    show expression Text("[line]", size = 40, color = "#FFFFFF") at stat_falling(Girl.sprite_location) onlayer screens
+KeyError: u'stat - 1000 - update'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/locations.rpy", line 146, in script call
+  File "game/locations.rpy", line 151, in script call
     call world_map
-  File "game/locations.rpy", line 629, in script call
-    call traveling_event_calls
-  File "game/utilities.rpy", line 305, in script call
-    call Emma_Caught_Classroom
-  File "game/emma_scenes.rpy", line 380, in script call
-    call add_Girl(EmmaX)
-  File "renpy/ast.py", line 1490, in execute
-    rv = renpy.game.context().call(label, return_site=self.next.name)
-  File "game/locations.rpy", line 146, in script call
+  File "game/locations.rpy", line 672, in script call
+    call take_class
+  File "game/classroom.rpy", line 4, in script call
+    call meet_Emma
+  File "game/locations.rpy", line 718, in script call
     call world_map
-  File "game/locations.rpy", line 629, in script call
-    call traveling_event_calls
-  File "game/utilities.rpy", line 305, in script call
-    call Emma_Caught_Classroom
-  File "game/emma_scenes.rpy", line 380, in script call
-    call add_Girl(EmmaX)
-  File "renpy/script.py", line 918, in lookup
-    raise ScriptError("could not find label '%s'." % str(original))
-ScriptError: could not find label 'add_Girl'.
+  File "game/locations.rpy", line 846, in script call
+    call traveling_event_calls(location = "bg_dangerroom")
+  File "game/utilities.rpy", line 499, in script call
+    call meet_Laura
+  File "game/locations.rpy", line 906, in script call
+    call world_map
+  File "game/locations.rpy", line 1042, in script call
+    call traveling_event_calls(location = "bg_showerroom")
+  File "game/utilities.rpy", line 510, in script call
+    call meet_Jean
+  File "game/locations.rpy", line 1103, in script call
+    call world_map
+  File "game/locations.rpy", line 100, in script call
+    call traveling_event_calls(location = "bg_player")
+  File "game/utilities.rpy", line 517, in script call
+    call meet_Storm_prelude
+  File "game/locations.rpy", line 151, in script call
+    call world_map
+  File "game/locations.rpy", line 718, in script call
+    call world_map
+  File "game/locations.rpy", line 151, in script call
+    call world_map
+  File "game/locations.rpy", line 632, in script call
+    call traveling_event_calls(location = "bg_classroom")
+  File "game/utilities.rpy", line 477, in script call
+    call meet_Storm_ask_Emma
+  File "game/locations.rpy", line 718, in script call
+    call world_map
+  File "game/locations.rpy", line 151, in script call
+    call world_map
+  File "game/locations.rpy", line 675, in script call
+    call event_calls
+  File "game/utilities.rpy", line 303, in script call
+    call check_addiction
+  File "game/checks.rpy", line 434, in script call
+    call return_to_room
+  File "game/locations.rpy", line 151, in script call
+    call world_map
+  File "game/locations.rpy", line 632, in script call
+    call traveling_event_calls(location = "bg_classroom")
+  File "game/utilities.rpy", line 551, in script call
+    call Jubes_Mall
+  File "game/jubes_scenes.rpy", line 1100, in script call
+    call mall
+  File "game/locations.rpy", line 1479, in script call
+    call swimsuit_shop
+  File "game/mall.rpy", line 851, in script call
+    call change_Girl_stat(Girl, "love", 200, 20)
+  File "game/utilities.rpy", line 121, in script
+    show expression Text("[line]", size = 40, color = "#FFFFFF") at stat_falling(Girl.sprite_location) onlayer screens
+  File "renpy/ast.py", line 1197, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "renpy/ast.py", line 1153, in show_imspec
+    expression = renpy.python.py_eval(expression)
+  File "renpy/python.py", line 2276, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "renpy/python.py", line 2269, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/utilities.rpy", line 121, in <module>
+    show expression Text("[line]", size = 40, color = "#FFFFFF") at stat_falling(Girl.sprite_location) onlayer screens
+  File "renpy/text/text.py", line 1574, in __init__
+    self.set_text(text, scope, substitute)
+  File "renpy/text/text.py", line 1693, in set_text
+    i, did_sub = renpy.substitutions.substitute(i, scope, substitute)
+  File "renpy/substitutions.py", line 270, in substitute
+    s = formatter.vformat(s, (), kwargs)
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python2.7/string.py", line 563, in vformat
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python2.7/string.py", line 585, in _vformat
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python2.7/string.py", line 646, in get_field
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python2.7/string.py", line 605, in get_value
+KeyError: u'stat - 1000 - update'
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like Chonky Mod 0.3a
-Fri Jun 24 17:58:00 2022
+Sat Jun 25 02:07:18 2022

@@ -1702,7 +1702,7 @@ label Group_Strip_End:
         $ Present[1].drain_word("stopdancing", 1, 0, 0)
         $ Present[1].drain_word("keepdancing", 1, 0, 0)
 
-    call set_the_scene (1, 0, 0, 0)
+    call set_the_scene
     $ Count = 0
     $ between_event_count = 0
 
@@ -1731,8 +1731,8 @@ label Girl_Stripping(Girl=0, Nudist=0):
         if Girl == JubesX and Girl.outfit["jacket"] and (Girl.outfit["top"] or Girl.outfit["bra"]) and (Girl.outfit["underwear"] or Girl.outfit["bottom"] or Girl.outfit["hose"] == "_tights"):
 
             if approval_check(Girl, 750, taboo_modifier = 3):
-                $ Girl.change_stat("obedience", 50, 1)
-                $ Girl.change_stat("inhibition", 25, 1)
+                call change_Girl_stat(Girl, "obedience", 50, 1)
+                call change_Girl_stat(Girl, "inhibition", 25, 1)
                 call change_Player_stat("focus", 60, 3)
                 $ line = Girl.outfit["jacket"]
                 $ Girl.outfit["jacket"] = ""
@@ -1742,8 +1742,8 @@ label Girl_Stripping(Girl=0, Nudist=0):
         elif Girl == JubesX and Girl.outfit["jacket"] and Girl.outfit["top"] and (Girl.outfit["underwear"] or Girl.outfit["bottom"] or Girl.outfit["hose"] == "_tights"):
 
             if approval_check(Girl, 750, taboo_modifier = 3):
-                $ Girl.change_stat("obedience", 50, 1)
-                $ Girl.change_stat("inhibition", 25, 1)
+                call change_Girl_stat(Girl, "obedience", 50, 1)
+                call change_Girl_stat(Girl, "inhibition", 25, 1)
                 call change_Player_stat("focus", 60, 3)
                 $ line = Girl.outfit["jacket"]
                 $ Girl.outfit["jacket"] = ""
@@ -1753,8 +1753,8 @@ label Girl_Stripping(Girl=0, Nudist=0):
         elif Girl.outfit["top"] and Girl.outfit["bra"] and (Girl.outfit["underwear"] or Girl.outfit["bottom"] or Girl.outfit["hose"] == "_tights"):
 
             if approval_check(Girl, 750, taboo_modifier = 3,Alt=[[StormX],(300-Nudist*3)]):
-                $ Girl.change_stat("obedience", 50, 1)
-                $ Girl.change_stat("inhibition", 25, 1)
+                call change_Girl_stat(Girl, "obedience", 50, 1)
+                call change_Girl_stat(Girl, "inhibition", 25, 1)
                 call change_Player_stat("focus", 60, 3)
                 $ line = Girl.outfit["top"]
                 $ Girl.outfit["top"] = ""
@@ -1768,9 +1768,9 @@ label Girl_Stripping(Girl=0, Nudist=0):
         elif Girl.outfit["bottom"] and (Girl.outfit["underwear"] or Girl.outfit["hose"] == "_tights"):
 
             if approval_check(Girl, 1200, taboo_modifier = 3,Alt=[[StormX],(600-Nudist*3)]) or (Girl.seen_underwear and approval_check(Girl, 900, taboo_modifier = 3) and not Girl.taboo):
-                $ Girl.change_stat("lust", 50, 5)
-                $ Girl.change_stat("obedience", 50, 1)
-                $ Girl.change_stat("inhibition", 30, 1)
+                call change_Girl_stat(Girl, "lust", 50, 5)
+                call change_Girl_stat(Girl, "obedience", 50, 1)
+                call change_Girl_stat(Girl, "inhibition", 30, 1)
                 call change_Player_stat("focus", 60, 5)
                 $ line = Girl.outfit["bottom"]
                 $ Girl.outfit["bottom"] = ""
@@ -1779,10 +1779,10 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 else:
                     "She unzips and pulls down her [line], dropping them to the floor."
                 if not Girl.seen_underwear:
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("obedience", 200, 3)
-                    $ Girl.change_stat("inhibition", 50, 3)
-                    $ Girl.change_stat("inhibition", 200, 2)
+                    call change_Girl_stat(Girl, "obedience", 50, 2)
+                    call change_Girl_stat(Girl, "obedience", 200, 3)
+                    call change_Girl_stat(Girl, "inhibition", 50, 3)
+                    call change_Girl_stat(Girl, "inhibition", 200, 2)
                     $ Girl.seen_underwear = 1
             else:
                 jump Strip_Ultimatum
@@ -1791,14 +1791,14 @@ label Girl_Stripping(Girl=0, Nudist=0):
 
             if Girl.outfit["hose"] == "_tights":
                 if approval_check(Girl, 1200, taboo_modifier = 3):
-                    $ Girl.change_stat("lust", 50, 6)
+                    call change_Girl_stat(Girl, "lust", 50, 6)
                     call change_Player_stat("focus", 60, 6)
                 else:
                     jump Strip_Ultimatum
 
             elif Girl.hose_number() >= 6 and approval_check(Girl, 1200, taboo_modifier = 3):
                 if approval_check(Girl, 1200, taboo_modifier = 3,Alt=[[StormX],(600-Nudist*3)]):
-                    $ Girl.change_stat("lust", 50, 4)
+                    call change_Girl_stat(Girl, "lust", 50, 4)
                     call change_Player_stat("focus", 60, 4)
                 else:
                     jump Strip_Ultimatum
@@ -1815,19 +1815,19 @@ label Girl_Stripping(Girl=0, Nudist=0):
         elif Girl == JubesX and Girl.outfit["jacket"] and (Girl.outfit["underwear"] or Girl.outfit["bottom"] or Girl.outfit["hose"] == "_tights"):
 
             if approval_check(Girl, 1250, taboo_modifier = 3) or (Girl.seen_breasts and approval_check(Girl, 1000, taboo_modifier = 3) and not Girl.taboo):
-                $ Girl.change_stat("lust", 60, 5)
-                $ Girl.change_stat("obedience", 50, 2)
-                $ Girl.change_stat("inhibition", 50, 10)
+                call change_Girl_stat(Girl, "lust", 60, 5)
+                call change_Girl_stat(Girl, "obedience", 50, 2)
+                call change_Girl_stat(Girl, "inhibition", 50, 10)
                 call change_Player_stat("focus", 80, 15)
                 $ line = Girl.outfit["jacket"]
                 $ Girl.outfit["jacket"] = ""
                 "She shrugs off her [line] and throws it behind her."
                 if not Girl.seen_breasts:
                     $ Girl.change_face("_bemused", 1)
-                    $ Girl.change_stat("obedience", 50, 3)
-                    $ Girl.change_stat("obedience", 200, 4)
-                    $ Girl.change_stat("inhibition", 50, 3)
-                    $ Girl.change_stat("inhibition", 200, 3)
+                    call change_Girl_stat(Girl, "obedience", 50, 3)
+                    call change_Girl_stat(Girl, "obedience", 200, 4)
+                    call change_Girl_stat(Girl, "inhibition", 50, 3)
+                    call change_Girl_stat(Girl, "inhibition", 200, 3)
                     "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     call expression Girl.tag + "_First_Topless" pass (1)
             else:
@@ -1835,18 +1835,18 @@ label Girl_Stripping(Girl=0, Nudist=0):
         elif Girl.outfit["top"] and not Girl.outfit["bra"] and (Girl.outfit["underwear"] or Girl.outfit["hose"] == "_tights"):
 
             if approval_check(Girl, 1250, taboo_modifier = 3,Alt=[[StormX],(650-Nudist*3)]) or (Girl.seen_breasts and approval_check(Girl, 1000, taboo_modifier = 3) and not Girl.taboo):
-                $ Girl.change_stat("lust", 60, 5)
-                $ Girl.change_stat("obedience", 50, 2)
-                $ Girl.change_stat("inhibition", 50, 10)
+                call change_Girl_stat(Girl, "lust", 60, 5)
+                call change_Girl_stat(Girl, "obedience", 50, 2)
+                call change_Girl_stat(Girl, "inhibition", 50, 10)
                 call change_Player_stat("focus", 80, 15)
                 $ line = Girl.outfit["top"]
                 $ Girl.outfit["top"] = ""
                 if not Girl.seen_breasts:
                     $ Girl.change_face("_bemused", 1)
-                    $ Girl.change_stat("obedience", 50, 3)
-                    $ Girl.change_stat("obedience", 200, 4)
-                    $ Girl.change_stat("inhibition", 50, 3)
-                    $ Girl.change_stat("inhibition", 200, 3)
+                    call change_Girl_stat(Girl, "obedience", 50, 3)
+                    call change_Girl_stat(Girl, "obedience", 200, 4)
+                    call change_Girl_stat(Girl, "inhibition", 50, 3)
+                    call change_Girl_stat(Girl, "inhibition", 200, 3)
                     if Girl == KittyX:
                         "She hesitantly glances your way, and then with tug her [line] passes through her, tossing it to the ground."
                     elif Girl in (EmmaX,LauraX,StormX):
@@ -1865,9 +1865,9 @@ label Girl_Stripping(Girl=0, Nudist=0):
         elif Girl.outfit["bra"] and not Girl.outfit["top"]:
 
             if approval_check(Girl, 1250, taboo_modifier = 3,Alt=[[StormX],(650-Nudist*3)]) or (Girl.seen_breasts and approval_check(Girl, 1000, taboo_modifier = 3) and not Girl.taboo):
-                $ Girl.change_stat("lust", 60, 5)
-                $ Girl.change_stat("obedience", 50, 2)
-                $ Girl.change_stat("inhibition", 50, 1)
+                call change_Girl_stat(Girl, "lust", 60, 5)
+                call change_Girl_stat(Girl, "obedience", 50, 2)
+                call change_Girl_stat(Girl, "inhibition", 50, 1)
                 call change_Player_stat("focus", 80, 15)
                 $ line = Girl.outfit["bra"]
                 $ Girl.outfit["bra"] = ""
@@ -1879,10 +1879,10 @@ label Girl_Stripping(Girl=0, Nudist=0):
                         "She glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     else:
                         "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
-                    $ Girl.change_stat("obedience", 50, 3)
-                    $ Girl.change_stat("obedience", 200, 4)
-                    $ Girl.change_stat("inhibition", 50, 3)
-                    $ Girl.change_stat("inhibition", 200, 3)
+                    call change_Girl_stat(Girl, "obedience", 50, 3)
+                    call change_Girl_stat(Girl, "obedience", 200, 4)
+                    call change_Girl_stat(Girl, "inhibition", 50, 3)
+                    call change_Girl_stat(Girl, "inhibition", 200, 3)
                     call expression Girl.tag + "_First_Topless" pass (1)
                 else:
                     $ Girl.change_face("_sexy")
@@ -1896,14 +1896,14 @@ label Girl_Stripping(Girl=0, Nudist=0):
         elif Girl.outfit["bottom"]:
 
             if approval_check(Girl, 1350, taboo_modifier = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.seen_pussy and approval_check(Girl, 1100, taboo_modifier = 3) and not Girl.taboo):
-                $ Girl.change_stat("lust", 75, 10)
+                call change_Girl_stat(Girl, "lust", 75, 10)
                 $ line = Girl.outfit["bottom"]
                 $ Girl.outfit["bottom"] = ""
                 if not Girl.seen_pussy:
-                    $ Girl.change_stat("obedience", 60, 3)
-                    $ Girl.change_stat("obedience", 200, 5)
-                    $ Girl.change_stat("inhibition", 50, 4)
-                    $ Girl.change_stat("inhibition", 200, 4)
+                    call change_Girl_stat(Girl, "obedience", 60, 3)
+                    call change_Girl_stat(Girl, "obedience", 200, 5)
+                    call change_Girl_stat(Girl, "inhibition", 50, 4)
+                    call change_Girl_stat(Girl, "inhibition", 200, 4)
                     if Girl == KittyX:
                         "She shyly looks up at you, and then slowly lets her [line] slide to the floor."
                     elif Girl in (EmmaX,LauraX,JeanX):
@@ -1912,13 +1912,13 @@ label Girl_Stripping(Girl=0, Nudist=0):
                         "She shyly looks up at you, and then slowly unzips and pulls down her [line], dropping them to the floor."
                     call expression Girl.tag + "_First_Bottomless" pass (1)
                 else:
-                    $ Girl.change_stat("obedience", 50, 1)
-                    $ Girl.change_stat("obedience", 75, 1)
+                    call change_Girl_stat(Girl, "obedience", 50, 1)
+                    call change_Girl_stat(Girl, "obedience", 75, 1)
                     if Girl == KittyX:
                         "She lets her [line] pass through her legs, dropping them to the floor."
                     else:
                         "She unzips and pulls down her [line], dropping them to the floor."
-                    $ Girl.change_stat("inhibition", 70, 2)
+                    call change_Girl_stat(Girl, "inhibition", 70, 2)
                 call change_Player_stat("focus", 85, 15)
             else:
                 jump Strip_Ultimatum
@@ -1929,10 +1929,10 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 $ line = Girl.outfit["jacket"]
                 $ Girl.outfit["jacket"] = ""
                 if not Girl.seen_pussy:
-                    $ Girl.change_stat("obedience", 60, 3)
-                    $ Girl.change_stat("obedience", 200, 5)
-                    $ Girl.change_stat("inhibition", 50, 4)
-                    $ Girl.change_stat("inhibition", 200, 4)
+                    call change_Girl_stat(Girl, "obedience", 60, 3)
+                    call change_Girl_stat(Girl, "obedience", 200, 5)
+                    call change_Girl_stat(Girl, "inhibition", 50, 4)
+                    call change_Girl_stat(Girl, "inhibition", 200, 4)
                     "She hesitantly glances your way, and then with a shrug pulls her [line] off, tossing it to the ground."
                     call expression Girl.tag + "_First_Bottomless" pass (1)
                 else:
@@ -1940,19 +1940,19 @@ label Girl_Stripping(Girl=0, Nudist=0):
 
                 if not Girl.outfit["bra"] or Girl.top_pulled_up:
                     if not Girl.seen_breasts:
-                        $ Girl.change_stat("obedience", 50, 3)
-                        $ Girl.change_stat("inhibition", 50, 3)
+                        call change_Girl_stat(Girl, "obedience", 50, 3)
+                        call change_Girl_stat(Girl, "inhibition", 50, 3)
                         call expression Girl.tag + "_First_Topless" pass (1)
                     else:
-                        $ Girl.change_stat("lust", 60, 15)
-                        $ Girl.change_stat("obedience", 50, 3)
-                        $ Girl.change_stat("obedience", 75, 1)
-                        $ Girl.change_stat("inhibition", 50, 3)
+                        call change_Girl_stat(Girl, "lust", 60, 15)
+                        call change_Girl_stat(Girl, "obedience", 50, 3)
+                        call change_Girl_stat(Girl, "obedience", 75, 1)
+                        call change_Girl_stat(Girl, "inhibition", 50, 3)
                 else:
-                    $ Girl.change_stat("lust", 75, 10)
-                    $ Girl.change_stat("obedience", 50, 1)
-                    $ Girl.change_stat("obedience", 75, 1)
-                    $ Girl.change_stat("inhibition", 70, 2)
+                    call change_Girl_stat(Girl, "lust", 75, 10)
+                    call change_Girl_stat(Girl, "obedience", 50, 1)
+                    call change_Girl_stat(Girl, "obedience", 75, 1)
+                    call change_Girl_stat(Girl, "inhibition", 70, 2)
                 call change_Player_stat("focus", 85, 15)
             else:
                 jump Strip_Ultimatum
@@ -1962,10 +1962,10 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 $ line = Girl.outfit["top"]
                 $ Girl.outfit["top"] = ""
                 if not Girl.seen_pussy:
-                    $ Girl.change_stat("obedience", 60, 3)
-                    $ Girl.change_stat("obedience", 200, 5)
-                    $ Girl.change_stat("inhibition", 50, 4)
-                    $ Girl.change_stat("inhibition", 200, 4)
+                    call change_Girl_stat(Girl, "obedience", 60, 3)
+                    call change_Girl_stat(Girl, "obedience", 200, 5)
+                    call change_Girl_stat(Girl, "inhibition", 50, 4)
+                    call change_Girl_stat(Girl, "inhibition", 200, 4)
                     if Girl == KittyX:
                         "She hesitantly glances your way, and then with a tug pulls her [line] through herself, tossing it to the ground."
                     elif Girl in (EmmaX,LauraX,StormX):
@@ -1981,19 +1981,19 @@ label Girl_Stripping(Girl=0, Nudist=0):
 
                 if not Girl.outfit["bra"] or Girl.top_pulled_up:
                     if not Girl.seen_breasts:
-                        $ Girl.change_stat("obedience", 50, 3)
-                        $ Girl.change_stat("inhibition", 50, 3)
+                        call change_Girl_stat(Girl, "obedience", 50, 3)
+                        call change_Girl_stat(Girl, "inhibition", 50, 3)
                         call expression Girl.tag + "_First_Topless" pass (1)
                     else:
-                        $ Girl.change_stat("lust", 60, 15)
-                        $ Girl.change_stat("obedience", 50, 3)
-                        $ Girl.change_stat("obedience", 75, 1)
-                        $ Girl.change_stat("inhibition", 50, 3)
+                        call change_Girl_stat(Girl, "lust", 60, 15)
+                        call change_Girl_stat(Girl, "obedience", 50, 3)
+                        call change_Girl_stat(Girl, "obedience", 75, 1)
+                        call change_Girl_stat(Girl, "inhibition", 50, 3)
                 else:
-                    $ Girl.change_stat("lust", 75, 10)
-                    $ Girl.change_stat("obedience", 50, 1)
-                    $ Girl.change_stat("obedience", 75, 1)
-                    $ Girl.change_stat("inhibition", 70, 2)
+                    call change_Girl_stat(Girl, "lust", 75, 10)
+                    call change_Girl_stat(Girl, "obedience", 50, 1)
+                    call change_Girl_stat(Girl, "obedience", 75, 1)
+                    call change_Girl_stat(Girl, "inhibition", 70, 2)
                 call change_Player_stat("focus", 85, 15)
             else:
                 jump Strip_Ultimatum
@@ -2001,14 +2001,14 @@ label Girl_Stripping(Girl=0, Nudist=0):
         elif Girl.outfit["bra"]:
 
             if approval_check(Girl, 1250, taboo_modifier = 3,Alt=[[StormX],(750-Nudist*3)]) or (Girl.seen_breasts and approval_check(Girl, 1100, taboo_modifier = 3) and not Girl.taboo):
-                $ Girl.change_stat("lust", 60, 5)
+                call change_Girl_stat(Girl, "lust", 60, 5)
                 $ line = Girl.outfit["bra"]
                 $ Girl.outfit["bra"] = ""
                 if not Girl.seen_breasts:
-                    $ Girl.change_stat("obedience", 50, 3)
-                    $ Girl.change_stat("obedience", 200, 4)
-                    $ Girl.change_stat("inhibition", 50, 3)
-                    $ Girl.change_stat("inhibition", 200, 3)
+                    call change_Girl_stat(Girl, "obedience", 50, 3)
+                    call change_Girl_stat(Girl, "obedience", 200, 4)
+                    call change_Girl_stat(Girl, "inhibition", 50, 3)
+                    call change_Girl_stat(Girl, "inhibition", 200, 3)
                     if Girl == KittyX:
                         "She hesitantly glances your way, and then with a tug pulls her [line] through herself, tossing it to the ground."
                     elif Girl in (EmmaX,LauraX,StormX):
@@ -2017,12 +2017,12 @@ label Girl_Stripping(Girl=0, Nudist=0):
                         "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     call expression Girl.tag + "_First_Topless" pass (1)
                 else:
-                    $ Girl.change_stat("obedience", 50, 2)
+                    call change_Girl_stat(Girl, "obedience", 50, 2)
                     if Girl == KittyX:
                         "She drops her shoulders and her [line] falls to the floor."
                     else:
                         "She pulls her [line] over her head, tossing it to the ground."
-                    $ Girl.change_stat("inhibition", 50, 1)
+                    call change_Girl_stat(Girl, "inhibition", 50, 1)
                 call change_Player_stat("focus", 80, 15)
             else:
                 jump Strip_Ultimatum
@@ -2030,14 +2030,14 @@ label Girl_Stripping(Girl=0, Nudist=0):
         elif Girl.outfit["underwear"]:
 
             if approval_check(Girl, 1350, taboo_modifier = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.seen_pussy and approval_check(Girl, 1100, taboo_modifier = 3) and not Girl.taboo):
-                $ Girl.change_stat("lust", 75, 10)
+                call change_Girl_stat(Girl, "lust", 75, 10)
                 $ line = Girl.outfit["underwear"]
                 $ Girl.outfit["underwear"] = ""
                 if not Girl.seen_pussy:
-                    $ Girl.change_stat("obedience", 60, 3)
-                    $ Girl.change_stat("obedience", 200, 5)
-                    $ Girl.change_stat("inhibition", 50, 4)
-                    $ Girl.change_stat("inhibition", 200, 4)
+                    call change_Girl_stat(Girl, "obedience", 60, 3)
+                    call change_Girl_stat(Girl, "obedience", 200, 5)
+                    call change_Girl_stat(Girl, "inhibition", 50, 4)
+                    call change_Girl_stat(Girl, "inhibition", 200, 4)
                     if Girl == KittyX:
                         "She shyly looks up at you, and then slowly tugs her [line] off, flinging them to the side."
                     elif Girl in (EmmaX,LauraX):
@@ -2046,13 +2046,13 @@ label Girl_Stripping(Girl=0, Nudist=0):
                         "She shyly looks up at you, and then slowly pulls her [line] down, kicking them off to the side."
                     call expression Girl.tag + "_First_Bottomless" pass (1)
                 else:
-                    $ Girl.change_stat("obedience", 50, 1)
-                    $ Girl.change_stat("obedience", 75, 1)
+                    call change_Girl_stat(Girl, "obedience", 50, 1)
+                    call change_Girl_stat(Girl, "obedience", 75, 1)
                     if Girl == KittyX:
                         "She looks up at you, and then gently pulls her [line] off, flicking them to the side."
                     else:
                         "She looks up at you, and then gently pulls her [line] down, kicking them off to the side."
-                    $ Girl.change_stat("inhibition", 70, 2)
+                    call change_Girl_stat(Girl, "inhibition", 70, 2)
                 call change_Player_stat("focus", 85, 15)
             else:
                 jump Strip_Ultimatum
@@ -2082,12 +2082,12 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     $ Girl.recent_history.append("keepdancing")
 
 
-    $ Girl.change_stat("lust", 70, 2)
+    call change_Girl_stat(Girl, "lust", 70, 2)
     if "exhibitionist" in Girl.traits:
-        $ Girl.change_stat("lust", 200, 2)
+        call change_Girl_stat(Girl, "lust", 200, 2)
     call change_Player_stat("focus", 60, 3)
     if Player.secondary_action == "jerking_off":
-        $ Girl.change_stat("lust", 200, 2)
+        call change_Girl_stat(Girl, "lust", 200, 2)
         call change_Player_stat("focus", 200, 5)
 
     if not Player.semen and Player.focus >= 50:
@@ -2101,7 +2101,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
             call Player_Cumming (Girl)
             if "_angry" in Girl.recent_history:
                 return
-            $ Girl.change_stat("lust", 200, 5)
+            call change_Girl_stat(Girl, "lust", 200, 5)
             if not Player.semen and Player.secondary_action == "jerking_off":
                 "You're spitting dust here, maybe just watch quietly for a while."
                 $ Player.secondary_action = None
@@ -2134,11 +2134,11 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 elif approval_bonus <= 20:
                     $ approval_bonus += 1
             if taboo and Girl.action_counter["striptease"] <= 10:
-                $ Girl.change_stat("obedience", 50, 7)
+                call change_Girl_stat(Girl, "obedience", 50, 7)
             elif taboo or Girl.action_counter["striptease"] <= 10:
-                $ Girl.change_stat("obedience", 50, 5)
+                call change_Girl_stat(Girl, "obedience", 50, 5)
             elif Girl.action_counter["striptease"] <= 50:
-                $ Girl.change_stat("obedience", 50, 3)
+                call change_Girl_stat(Girl, "obedience", 50, 3)
         "Keep Dancing. . ." if "keepdancing" in Girl.recent_history:
             $ Girl.eyes = "_sexy"
 
@@ -2175,12 +2175,12 @@ label Girl_Stripping(Girl=0, Nudist=0):
             if "watching" not in Girl.recent_history:
                 if "keepdancing" not in Girl.recent_history:
                     if taboo and Girl.action_counter["striptease"] <= 10:
-                        $ Girl.change_stat("inhibition", 50, 3)
+                        call change_Girl_stat(Girl, "inhibition", 50, 3)
                     elif taboo or Girl.action_counter["striptease"] <= 10:
-                        $ Girl.change_stat("inhibition", 50, 1)
+                        call change_Girl_stat(Girl, "inhibition", 50, 1)
                 elif Girl.action_counter["striptease"] <= 50:
-                    $ Girl.change_stat("inhibition", 50, 2)
-                    $ Girl.change_stat("lust", 70, 2)
+                    call change_Girl_stat(Girl, "inhibition", 50, 2)
+                    call change_Girl_stat(Girl, "lust", 70, 2)
                 $ Girl.recent_history.append("watching")
 
         "Start jack'in it." if Player.secondary_action != "jerking_off":
@@ -2250,17 +2250,17 @@ label Strip_Ultimatum:
         extend ""
         "That's ok, you can stop.":
             if "ultimatum" not in Girl.daily_history:
-                $ Girl.change_stat("love", 50, 2)
-                $ Girl.change_stat("love", 90, 2)
-                $ Girl.change_stat("inhibition", 50, 2)
+                call change_Girl_stat(Girl, "love", 50, 2)
+                call change_Girl_stat(Girl, "love", 90, 2)
+                call change_Girl_stat(Girl, "inhibition", 50, 2)
                 $ Girl.daily_history.append("ultimatum")
             $ Girl.recent_history.append("stopdancing")
             return
         "That's ok, but keep dancing for a bit. . .":
             if "ultimatum" not in Girl.daily_history:
-                $ Girl.change_stat("love", 50, 2)
-                $ Girl.change_stat("obedience", 50, 2)
-                $ Girl.change_stat("inhibition", 50, 2)
+                call change_Girl_stat(Girl, "love", 50, 2)
+                call change_Girl_stat(Girl, "obedience", 50, 2)
+                call change_Girl_stat(Girl, "inhibition", 50, 2)
                 $ Girl.daily_history.append("ultimatum")
             $ Girl.recent_history.append("keepdancing")
             if "stripforced" in Girl.recent_history:
@@ -2326,7 +2326,7 @@ label Strip_Ultimatum:
                 elif Girl == JubesX:
                     ch_v "Well. . . ok. . ."
                 $ Girl.recent_history.append("stripforced")
-            $ Girl.change_stat("love", 200, -40)
+            call change_Girl_stat(Girl, "love", 200, -40)
         "You can do better than that. Keep going." if not Girl.forced:
             if not approval_check(Girl, 300, "O", taboo_modifier=5) and not approval_check(Girl, 700, "L", taboo_modifier=5):
                 $ Girl.change_face("_angry")
@@ -2351,9 +2351,9 @@ label Strip_Ultimatum:
                 $ Girl.daily_history.append("_angry")
                 call remove_Girl(Girl)
                 return
-            $ Girl.change_stat("love", 200, -10)
-            $ Girl.change_stat("obedience", 50, 3)
-            $ Girl.change_stat("obedience", 75, 5)
+            call change_Girl_stat(Girl, "love", 200, -10)
+            call change_Girl_stat(Girl, "obedience", 50, 3)
+            call change_Girl_stat(Girl, "obedience", 75, 5)
             $ approval_bonus += 20
             $ Girl.forced += 1
             $ Girl.change_face("_sad")
@@ -2607,7 +2607,7 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
         $ line = 0
         if approval_check(Girl, 1250, taboo_modifier = 1) or (Girl.seen_breasts and approval_check(Girl, 500) and not taboo):
 
-            $ Girl.change_stat("inhibition", 70, 1)
+            call change_Girl_stat(Girl, "inhibition", 70, 1)
             $ Girl.top_pulled_up = 1
             $ line = Girl.outfit["top"] if Girl.outfit["top"] else Girl.outfit["bra"]
             "[Girl.name] sighs in frustration, and pulls her [line] up over her breasts."
@@ -2626,11 +2626,11 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
             elif Girl == JubesX:
                 ch_v "Ok, that's more comfortable. . ."
             if taboo:
-                $ Girl.change_stat("inhibition", 90, (int(taboo/20)))
+                call change_Girl_stat(Girl, "inhibition", 90, (int(taboo/20)))
             call expression Girl.tag + "_First_Topless" pass (1)
         elif Girl.outfit["top"] and Girl.outfit["bra"] and approval_check(Girl, 800, taboo_modifier = 1):
 
-            $ Girl.change_stat("inhibition", 40, 1)
+            call change_Girl_stat(Girl, "inhibition", 40, 1)
             $ line = Girl.outfit["top"]
             $ Girl.outfit["top"] = ""
             if Girl == KittyX:
@@ -2682,11 +2682,11 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
         $ Girl.change_face("_sexy", 1)
         if Girl.forced:
             $ Girl.change_face("_sad", 1)
-            $ Girl.change_stat("love", 20, -2, 1)
-            $ Girl.change_stat("love", 70, -3, 1)
-            $ Girl.change_stat("obedience", 90, 1)
-            $ Girl.change_stat("inhibition", 60, 1)
-        $ Girl.change_stat("inhibition", 50, 3)
+            call change_Girl_stat(Girl, "love", 20, -2, 1)
+            call change_Girl_stat(Girl, "love", 70, -3, 1)
+            call change_Girl_stat(Girl, "obedience", 90, 1)
+            call change_Girl_stat(Girl, "inhibition", 60, 1)
+        call change_Girl_stat(Girl, "inhibition", 50, 3)
         $ counter = 1
         while (Girl.outfit["bra"] or Girl.outfit["top"] or (Girl == JubesX and Girl.outfit["jacket"])) and counter:
             if Girl == RogueX:
@@ -2791,10 +2791,10 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                     $ counter = 0
         if Girl.bra_number() < 3 and Girl.top_number() < 3:
 
-            $ Girl.change_stat("obedience", 50, 1)
-            $ Girl.change_stat("obedience", 90, 1)
+            call change_Girl_stat(Girl, "obedience", 50, 1)
+            call change_Girl_stat(Girl, "obedience", 90, 1)
             call expression Girl.tag + "_First_Topless"
-        $ Girl.change_stat("lust", 80, 3)
+        call change_Girl_stat(Girl, "lust", 80, 3)
         $ Girl.recent_history.append("ask topless")
         $ Girl.daily_history.append("ask topless")
         $ approval_bonus = 0
@@ -2962,10 +2962,10 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
 
         "Ok, that's fine." if "no_topless" not in Girl.recent_history:
             if "ask topless" not in Girl.daily_history:
-                $ Girl.change_stat("lust", 80, 3)
-                $ Girl.change_stat("love", 70, 1)
-                $ Girl.change_stat("love", 90, 1)
-                $ Girl.change_stat("inhibition", 50, 3)
+                call change_Girl_stat(Girl, "lust", 80, 3)
+                call change_Girl_stat(Girl, "love", 70, 1)
+                call change_Girl_stat(Girl, "love", 90, 1)
+                call change_Girl_stat(Girl, "inhibition", 50, 3)
             if Girl.forced:
                 $ Girl.mouth = "_smile"
                 if Girl == RogueX:
@@ -2983,9 +2983,9 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                 elif Girl == JubesX:
                     ch_v "Yeah, thanks. . ."
                 if "ask topless" not in Girl.daily_history:
-                    $ Girl.change_stat("love", 20, 2)
-                    $ Girl.change_stat("love", 70, 2)
-                    $ Girl.change_stat("inhibition", 60, 1)
+                    call change_Girl_stat(Girl, "love", 20, 2)
+                    call change_Girl_stat(Girl, "love", 70, 2)
+                    call change_Girl_stat(Girl, "inhibition", 60, 1)
 
         "How about just the jacket?" if Girl == JubesX and Girl.outfit["jacket"]:
 
@@ -3000,32 +3000,32 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                 $ Girl.change_face("_bemused", 1)
                 $ Girl.outfit["jacket"] = ""
                 "[Girl.name] shrugs off her Jacket."
-                $ Girl.change_stat("obedience", 50, 1)
-                $ Girl.change_stat("inhibition", 30, 2)
+                call change_Girl_stat(Girl, "obedience", 50, 1)
+                call change_Girl_stat(Girl, "inhibition", 30, 2)
             elif not Girl.outfit["bra"]:
                 $ Girl.eyes = "_surprised"
                 $ Girl.blushing = "_blush2"
                 ch_v "I kinda don't have anything under this. . ."
-                $ Girl.change_stat("inhibition", 30, 1)
+                call change_Girl_stat(Girl, "inhibition", 30, 1)
                 menu:
                     extend ""
                     "Ok, you can leave it on.":
                         $ Girl.mouth = "_smile"
-                        $ Girl.change_stat("love", 70, 2)
+                        call change_Girl_stat(Girl, "love", 70, 2)
                         ch_v "Whew, thanks. . ."
                     "That doesn't bother me any.":
 
                         if approval_check(Girl, 500, "I", taboo_modifier=3) or approval_check(Girl, 1000, "LI", taboo_modifier=3):
                             $ Girl.change_face("_bemused", 1)
                             ch_v "Whoa, spicy. . ."
-                            $ Girl.change_stat("obedience", 20, 2)
-                            $ Girl.change_stat("obedience", 60, 1)
+                            call change_Girl_stat(Girl, "obedience", 20, 2)
+                            call change_Girl_stat(Girl, "obedience", 60, 1)
                             $ Girl.change_face("_sexy")
                             $ Girl.outfit["jacket"] = ""
                             "[Girl.name] shrugs off her Jacket."
                             $ Girl.outfit["top"] = ""
-                            $ Girl.change_stat("inhibition", 30, 2)
-                            $ Girl.change_stat("inhibition", 60, 1)
+                            call change_Girl_stat(Girl, "inhibition", 30, 2)
+                            call change_Girl_stat(Girl, "inhibition", 60, 1)
                             call expression Girl.tag + "_First_Topless"
                         else:
                             $ Girl.change_face("_bemused")
@@ -3069,8 +3069,8 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                         "[Girl.name] pulls her [line] over her head, throwing it aside."
                 else:
                     "[Girl.name] tosses the [line] over her head."
-                $ Girl.change_stat("obedience", 50, 1)
-                $ Girl.change_stat("inhibition", 30, 2)
+                call change_Girl_stat(Girl, "obedience", 50, 1)
+                call change_Girl_stat(Girl, "inhibition", 30, 2)
             elif not Girl.outfit["bra"]:
                 $ Girl.eyes = "_surprised"
                 $ Girl.blushing = "_blush2"
@@ -3088,12 +3088,12 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                     ch_s "I am naked under this, you know. . ."
                 elif Girl == JubesX:
                     ch_v "I kinda don't have anything under this. . ."
-                $ Girl.change_stat("inhibition", 30, 1)
+                call change_Girl_stat(Girl, "inhibition", 30, 1)
                 menu:
                     extend ""
                     "Ok, you can leave it on.":
                         $ Girl.mouth = "_smile"
-                        $ Girl.change_stat("love", 70, 2)
+                        call change_Girl_stat(Girl, "love", 70, 2)
                         if Girl == RogueX:
                             ch_r "Great!"
                         elif Girl == KittyX:
@@ -3126,8 +3126,8 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                                 ch_s "It doesn't bother me much either."
                             elif Girl == JubesX:
                                 ch_v "Whoa, spicy. . ."
-                            $ Girl.change_stat("obedience", 20, 2)
-                            $ Girl.change_stat("obedience", 60, 1)
+                            call change_Girl_stat(Girl, "obedience", 20, 2)
+                            call change_Girl_stat(Girl, "obedience", 60, 1)
                             $ Girl.change_face("_sexy")
                             $ line = Girl.outfit["top"]
                             $ Girl.outfit["top"] = ""
@@ -3142,8 +3142,8 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                             else:
                                 "[Girl.name] tosses the [line] over her head."
                             $ Girl.outfit["top"] = ""
-                            $ Girl.change_stat("inhibition", 30, 2)
-                            $ Girl.change_stat("inhibition", 60, 1)
+                            call change_Girl_stat(Girl, "inhibition", 30, 2)
+                            call change_Girl_stat(Girl, "inhibition", 60, 1)
                             call expression Girl.tag + "_First_Topless"
                         else:
                             $ Girl.change_face("_bemused")
@@ -3160,7 +3160,7 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
 
 
             if approval and approval_check(Girl, 600, "L", taboo_modifier=1):
-                $ Girl.change_stat("obedience", 40, 2)
+                call change_Girl_stat(Girl, "obedience", 40, 2)
                 $ Girl.change_face("_sexy")
                 if Girl == RogueX:
                     if "no_topless" in Girl.recent_history:
@@ -3191,8 +3191,8 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                 $ Girl.top_pulled_up = 1
                 "[Girl.name] just pulls her top up over her tits."
                 $ Girl.outfit["gloves"] = ""
-                $ Girl.change_stat("inhibition", 30, 2)
-                $ Girl.change_stat("inhibition", 60, 1)
+                call change_Girl_stat(Girl, "inhibition", 30, 2)
+                call change_Girl_stat(Girl, "inhibition", 60, 1)
                 call expression Girl.tag + "_First_Topless"
             elif "no_topless" in Girl.recent_history:
                 $ Girl.change_face("_angry")
@@ -3210,7 +3210,7 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                     ch_s "Not today, no."
                 elif Girl == JubesX:
                     ch_v "Nah. . ."
-                $ Girl.change_stat("love", 80, -5)
+                call change_Girl_stat(Girl, "love", 80, -5)
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")
             else:
@@ -3298,7 +3298,7 @@ label Top_Off_Refused(Girl=0):
         extend ""
         "Sure, never mind." if "no_topless" not in Girl.recent_history:
             $ Girl.change_face("_sexy")
-            $ Girl.change_stat("love", 70, 2)
+            call change_Girl_stat(Girl, "love", 70, 2)
             if Girl == RogueX or Girl == KittyX:
                 Girl.voice "Great!"
             else:
@@ -3328,10 +3328,10 @@ label Top_Off_Refused(Girl=0):
                 ch_s "So be it."
             elif Girl == JubesX:
                 ch_v "Too bad then. . ."
-            $ Girl.change_stat("lust", 50, 5)
-            $ Girl.change_stat("love", 70, -2, 1)
+            call change_Girl_stat(Girl, "lust", 50, 5)
+            call change_Girl_stat(Girl, "love", 70, -2, 1)
             if "no_topless" not in Girl.recent_history:
-                $ Girl.change_stat("obedience", 60, 4)
+                call change_Girl_stat(Girl, "obedience", 60, 4)
             $ Girl.recent_history.append("_angry")
             $ Girl.daily_history.append("_angry")
     $ Girl.recent_history.append("no_topless")
@@ -3346,9 +3346,9 @@ label ToplessorNothing(Girl=0):
 
     $ Girl.change_face("_angry")
     if approval_check(Girl, 800, "OI", taboo_modifier = 4) and approval_check(Girl, 400, "O", taboo_modifier = 3):
-        $ Girl.change_stat("love", 20, -2, 1)
-        $ Girl.change_stat("love", 70, -5, 1)
-        $ Girl.change_stat("inhibition", 60, 3)
+        call change_Girl_stat(Girl, "love", 20, -2, 1)
+        call change_Girl_stat(Girl, "love", 70, -5, 1)
+        call change_Girl_stat(Girl, "inhibition", 60, 3)
         $ Girl.change_face("_sad")
         if Girl == RogueX:
             if "no_topless" in Girl.recent_history:
@@ -3390,14 +3390,14 @@ label ToplessorNothing(Girl=0):
                 ch_v "Ok, fine, just quit asking."
             else:
                 ch_v "Ok, fine, whatever."
-        $ Girl.change_stat("obedience", 60, 4)
-        $ Girl.change_stat("obedience", 90, 2)
+        call change_Girl_stat(Girl, "obedience", 60, 4)
+        call change_Girl_stat(Girl, "obedience", 90, 2)
         $ Girl.top_pulled_up = 1
         "[Girl.name] slowly pulls her top up over her tits."
         call expression Girl.tag + "_First_Topless"
     else:
-        $ Girl.change_stat("love", 200, -10)
-        $ Girl.change_stat("obedience", 40, -1, 1)
+        call change_Girl_stat(Girl, "love", 200, -10)
+        call change_Girl_stat(Girl, "obedience", 40, -1, 1)
         if Girl == RogueX:
             if "no_topless" in Girl.recent_history:
                 ch_r "Seriously, cut this shit out."
@@ -3526,9 +3526,9 @@ label Bottoms_Off(Girl, Intro=1, line=0, counter=0):
             if Girl.wearing_skirt:
 
                 if approval >= 2 or (Girl.seen_pussy and not taboo):
-                    $ Girl.change_stat("inhibition", 60, 1)
+                    call change_Girl_stat(Girl, "inhibition", 60, 1)
                     if taboo:
-                        $ Girl.change_stat("inhibition", 90, (int(taboo/20)))
+                        call change_Girl_stat(Girl, "inhibition", 90, (int(taboo/20)))
                     $ Girl.upskirt = True
                     "She slides her skirt up."
                     $ counter = 1
@@ -3542,7 +3542,7 @@ label Bottoms_Off(Girl, Intro=1, line=0, counter=0):
                     return
                 elif Girl.upskirt:
                     return
-                $ Girl.change_stat("inhibition", 60, 1)
+                call change_Girl_stat(Girl, "inhibition", 60, 1)
                 if Girl.hose_number() >= 6:
                     $ line = Girl.outfit["hose"]
                     $ Girl.outfit["hose"] = ""
@@ -3568,15 +3568,15 @@ label Bottoms_Off(Girl, Intro=1, line=0, counter=0):
                         "[Girl.name] grumbles to herself, and then pulls her [line] down her bare ass."
                 call expression Girl.tag + "_First_Bottomless" pass (1)
                 if taboo:
-                    $ Girl.change_stat("inhibition", 90, (int(taboo/10)))
+                    call change_Girl_stat(Girl, "inhibition", 90, (int(taboo/10)))
                 $ counter = 1
 
         if Girl.outfit["underwear"] and not Girl.underwear_pulled_down:
 
             if approval >= 2 or (Girl.seen_pussy and not taboo):
-                $ Girl.change_stat("inhibition", 70, 2)
+                call change_Girl_stat(Girl, "inhibition", 70, 2)
                 if taboo:
-                    $ Girl.change_stat("inhibition", 90, (int(taboo/10)))
+                    call change_Girl_stat(Girl, "inhibition", 90, (int(taboo/10)))
 
                 call expose_pussy(Girl)
 
@@ -3613,10 +3613,10 @@ label Bottoms_Off(Girl, Intro=1, line=0, counter=0):
         $ Girl.change_face("_sexy", 1)
         if Girl.forced:
             $ Girl.change_face("_sad", 1)
-            $ Girl.change_stat("love", 20, -2, 1)
-            $ Girl.change_stat("love", 70, -3, 1)
-            $ Girl.change_stat("obedience", 90, 1)
-            $ Girl.change_stat("inhibition", 60, 1)
+            call change_Girl_stat(Girl, "love", 20, -2, 1)
+            call change_Girl_stat(Girl, "love", 70, -3, 1)
+            call change_Girl_stat(Girl, "obedience", 90, 1)
+            call change_Girl_stat(Girl, "inhibition", 60, 1)
         if Girl == RogueX:
             if approval >= 3:
                 $ line = "Hmmm, what do you want to see? . ."
@@ -3649,10 +3649,10 @@ label Bottoms_Off(Girl, Intro=1, line=0, counter=0):
         call Bottoms_Off_Legs (Girl)
 
         if not Girl.outfit["underwear"] and Girl.recent_history.count("bottomless") < 2:
-            $ Girl.change_stat("obedience", 50, 1)
-            $ Girl.change_stat("obedience", 90, 1)
-            $ Girl.change_stat("inhibition", 50, 3)
-            $ Girl.change_stat("lust", 80, 3)
+            call change_Girl_stat(Girl, "obedience", 50, 1)
+            call change_Girl_stat(Girl, "obedience", 90, 1)
+            call change_Girl_stat(Girl, "inhibition", 50, 3)
+            call change_Girl_stat(Girl, "lust", 80, 3)
 
     elif Girl.outfit["bottom"] or Girl.outfit["underwear"] or Girl.outfit["hose"]:
 
@@ -3829,10 +3829,10 @@ label Bottoms_Off(Girl, Intro=1, line=0, counter=0):
             extend ""
             "Ok, never mind." if "no_bottomless" not in Girl.recent_history:
                 if "ask bottomless" not in Girl.daily_history:
-                    $ Girl.change_stat("lust", 80, 2)
-                    $ Girl.change_stat("love", 70, 1)
-                    $ Girl.change_stat("love", 90, 1)
-                    $ Girl.change_stat("inhibition", 50, 3)
+                    call change_Girl_stat(Girl, "lust", 80, 2)
+                    call change_Girl_stat(Girl, "love", 70, 1)
+                    call change_Girl_stat(Girl, "love", 90, 1)
+                    call change_Girl_stat(Girl, "inhibition", 50, 3)
                 if Girl.forced:
                     $ Girl.mouth = "_smile"
                     if Girl == RogueX:
@@ -3850,9 +3850,9 @@ label Bottoms_Off(Girl, Intro=1, line=0, counter=0):
                     elif Girl == JubesX:
                         ch_v "Thanks. . ."
                     if "ask bottomless" not in Girl.daily_history:
-                        $ Girl.change_stat("love", 20, 3)
-                        $ Girl.change_stat("love", 70, 4)
-                        $ Girl.change_stat("inhibition", 60, 2)
+                        call change_Girl_stat(Girl, "love", 20, 3)
+                        call change_Girl_stat(Girl, "love", 70, 4)
+                        call change_Girl_stat(Girl, "inhibition", 60, 2)
 
             "Sorry, sorry." if "no_bottomless" in Girl.recent_history:
                 if Girl == RogueX:
@@ -3918,10 +3918,10 @@ label Bottoms_Off(Girl, Intro=1, line=0, counter=0):
             "No, lose 'em.":
 
                 if (approval and Girl.obedience >= 250) or (approval_check(Girl, 850, "OI", taboo_modifier = 5) and approval_check(Girl, 400, "O")):
-                    $ Girl.change_stat("love", 20, -1, 1)
-                    $ Girl.change_stat("love", 70, -5, 1)
-                    $ Girl.change_stat("obedience", 50, 4)
-                    $ Girl.change_stat("inhibition", 60, 3)
+                    call change_Girl_stat(Girl, "love", 20, -1, 1)
+                    call change_Girl_stat(Girl, "love", 70, -5, 1)
+                    call change_Girl_stat(Girl, "obedience", 50, 4)
+                    call change_Girl_stat(Girl, "inhibition", 60, 3)
                     if Girl == RogueX:
                         $ line =  "Fine, if that's what you want. What do you want to see?"
                     elif Girl == KittyX:
@@ -3941,7 +3941,7 @@ label Bottoms_Off(Girl, Intro=1, line=0, counter=0):
                     $ Girl.forced = 1
                     call Bottoms_Off_Legs (Girl)
                 else:
-                    $ Girl.change_stat("love", 200, -10)
+                    call change_Girl_stat(Girl, "love", 200, -10)
                     if approval_check(Girl, 400, "O"):
                         if Girl == RogueX:
                             ch_r "I. . . I really can't."
@@ -4485,8 +4485,8 @@ label Bottoms_Off_Refused(Girl=0):
         extend ""
         "Sure, never mind." if "no_bottomless" not in Girl.recent_history:
             $ Girl.mouth = "_smile"
-            $ Girl.change_stat("love", 70, 2)
-            $ Girl.change_stat("obedience", 60, 2)
+            call change_Girl_stat(Girl, "love", 70, 2)
+            call change_Girl_stat(Girl, "obedience", 60, 2)
             if Girl == RogueX:
                 ch_r "Great."
             elif Girl == KittyX:
@@ -4522,10 +4522,10 @@ label Bottoms_Off_Refused(Girl=0):
                 ch_v "Whatever. . ."
             else:
                 Girl.voice "Your loss."
-            $ Girl.change_stat("lust", 50, 5)
-            $ Girl.change_stat("love", 70, -2, 1)
+            call change_Girl_stat(Girl, "lust", 50, 5)
+            call change_Girl_stat(Girl, "love", 70, -2, 1)
             if "no_bottomless" not in Girl.recent_history:
-                $ Girl.change_stat("obedience", 60, 4)
+                call change_Girl_stat(Girl, "obedience", 60, 4)
             $ Girl.recent_history.append("_angry")
             $ Girl.daily_history.append("_angry")
 

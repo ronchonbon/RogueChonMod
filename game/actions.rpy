@@ -70,13 +70,13 @@ label start_action(Girl, action, context = None):
 
                     call excited_for_kiss_obedience_lines(Girl, action)
 
-                    $ Girl.change_stat("obedience", 60, 1)
+                    call change_Girl_stat(Girl, "obedience", 60, 1)
                 elif approval_check(Girl, 250, "O",Alt=[[KittyX,LauraX],300]) and approval_check(Girl, 250, "L",Alt=[[KittyX,LauraX],200]):
                     $ Girl.change_face("_bemused")
 
                     Girl.voice "Ok, fine."
 
-                    $ Girl.change_stat("obedience", 50, 3)
+                    call change_Girl_stat(Girl, "obedience", 50, 3)
                 elif Girl.addiction >= 50:
                     $ Girl.change_face("_sexy")
                     $ Girl.eyes = "_manic"
@@ -153,8 +153,8 @@ label before_action(Girl, action, context = None):
     $ Girl.change_face("_sexy")
 
     if action == "kiss":
-        $ Girl.change_stat("inhibition", 10, 1)
-        $ Girl.change_stat("inhibition", 20, 1)
+        call change_Girl_stat(Girl, "inhibition", 10, 1)
+        call change_Girl_stat(Girl, "inhibition", 20, 1)
 
         call kiss_launch(Girl)
 
@@ -284,14 +284,14 @@ label before_action(Girl, action, context = None):
 
     if taboo:
         if action == "fondle_thighs":
-            $ Girl.change_stat("lust", 200, (int(taboo/5)))
-            $ Girl.change_stat("inhibition", 200, (2*(int(taboo/5))))
+            call change_Girl_stat(Girl, "lust", 200, (int(taboo/5)))
+            call change_Girl_stat(Girl, "inhibition", 200, (2*(int(taboo/5))))
         elif action in ["fondle_breasts", "suck_breasts", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "dildo_pussy", "dildo_ass"]:
             $ Girl.inhibition += int(taboo/10)
             $ Girl.lust += int(taboo/5)
         elif action in ["fondle_pussy", "eat_pussy", "finger_ass", "eat_ass"]:
             if Girl == JeanX and Girl.taboo:
-                $ Girl.change_stat("inhibition", 200, (int(taboo/10)))
+                call change_Girl_stat(Girl, "inhibition", 200, (int(taboo/10)))
             elif taboo:
                 $ Girl.inhibition += int(taboo/10)
 
@@ -430,9 +430,9 @@ label after_action(Girl, action, context = None):
 
     if action == "kiss" and action not in Girl.recent_history:
         if Girl.love > 300:
-            $ Girl.change_stat("love", 60, 4)
+            call change_Girl_stat(Girl, "love", 60, 4)
 
-        $ Girl.change_stat("love", 70, 1)
+        call change_Girl_stat(Girl, "love", 70, 1)
 
     if action in ["fondle_thighs", "fondle_ass"]:
         if not Girl.legs_covered:
@@ -450,7 +450,7 @@ label after_action(Girl, action, context = None):
             $ Girl.addiction_rate += 1
 
     if action in ["handjob", "footjob"]:
-        $ Girl.change_stat("lust", 90, 5)
+        call change_Girl_stat(Girl, "lust", 90, 5)
 
     if achievement is not None and achievement in achievements:
         pass

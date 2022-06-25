@@ -98,11 +98,11 @@ label study:
         "You study for the game design course."])
     "[line]"
 
-    $ Player.Party[0].change_stat("love", 80, 2)
+    call change_Girl_stat(Player.Party[0], "love", 80, 2)
     $ Player.Party[0].XP += 5
 
     if len(Player.Party) >= 2:
-        $ Player.Party[1].change_stat("love", 80, 2)
+        call change_Girl_stat(Player.Party[1], "love", 80, 2)
         $ Player.Party[0].check_if_likes(Player.Party[1], 700, 5, 1)
         $ Player.Party[1].check_if_likes(Player.Party[0], 700, 5, 1)
         $ Player.Party[1].XP += 5
@@ -221,10 +221,10 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
                     "[JeanX.name] throws an arm over your shoulders and leans against you as this pressure continues. . ."
                 "Flex your power to shut it down":
                     $ Player.Party[0].change_face("_sad")
-                    $ Player.Party[0].change_stat("love", 80, -2)
-                    $ Player.Party[0].change_stat("obedience", 50, 3)
-                    $ Player.Party[0].change_stat("obedience", 80, 5)
-                    $ Player.Party[0].change_stat("inhibition", 90, -2)
+                    call change_Girl_stat(Player.Party[0], "love", 80, -2)
+                    call change_Girl_stat(Player.Party[0], "obedience", 50, 3)
+                    call change_Girl_stat(Player.Party[0], "obedience", 80, 5)
+                    call change_Girl_stat(Player.Party[0], "inhibition", 90, -2)
 
                     ch_j "Aw. . ."
 

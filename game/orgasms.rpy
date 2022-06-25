@@ -171,17 +171,17 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
                             ch_s "Mmmm. . ."
                         elif Girl == JubesX:
                             ch_v "Well duh!"
-                        $ Girl.change_stat("obedience", 50, 2,Alt=[[JeanX],800,4])
-                        $ Girl.change_stat("obedience", 70, 1)
-                        $ Girl.change_stat("inhibition", 30, 2)
-                        $ Girl.change_stat("inhibition", 50, 3)
+                        call change_Girl_stat(Girl, "obedience", 50, 2,Alt=[[JeanX],800,4])
+                        call change_Girl_stat(Girl, "obedience", 70, 1)
+                        call change_Girl_stat(Girl, "inhibition", 30, 2)
+                        call change_Girl_stat(Girl, "inhibition", 50, 3)
                         jump Girl_Swallowed
                     "No, we're done for now.":
                         if approval_check(Girl, 250, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) or Girl.addiction > 75:
-                            $ Girl.change_stat("obedience", 50, -1)
-                            $ Girl.change_stat("obedience", 70, -2)
-                            $ Girl.change_stat("inhibition", 30, 2)
-                            $ Girl.change_stat("inhibition", 70, 3)
+                            call change_Girl_stat(Girl, "obedience", 50, -1)
+                            call change_Girl_stat(Girl, "obedience", 70, -2)
+                            call change_Girl_stat(Girl, "inhibition", 30, 2)
+                            call change_Girl_stat(Girl, "inhibition", 70, 3)
                             if not renpy.showing(Girl.tag+" blowjob"):
                                 call show_blowjob(Girl, orgasm = True)
                                 $ action_speed = 4
@@ -203,8 +203,8 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
                                 ch_v "Ok, -now- we're done."
                             jump Girl_Swallowed
                         else:
-                            $ Girl.change_stat("obedience", 30, 3,Alt=[[JeanX],800,3])
-                            $ Girl.change_stat("obedience", 70, 5)
+                            call change_Girl_stat(Girl, "obedience", 30, 3,Alt=[[JeanX],800,3])
+                            call change_Girl_stat(Girl, "obedience", 70, 5)
                             $ Girl.change_face("_sad")
                             $ Girl.brows = "_confused"
                             if Girl == RogueX:
@@ -226,7 +226,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
                             return
 
             $ Girl.change_face("_sexy", 1)
-            $ Girl.change_stat("obedience", 50, 2)
+            call change_Girl_stat(Girl, "obedience", 50, 2)
             "You pull pull back away from her. She looks up at you and licks her lips."
 
             if Girl == RogueX:
@@ -268,15 +268,15 @@ label Manic_Suck:
         ch_s "That would have been wasteful. . ."
     else:
         Girl.voice "Sorry, [Girl.player_petname], I just couldn't let that go to waste."
-    $ Girl.change_stat("obedience", 200, -5,Alt=[[JeanX],800,5])
-    $ Girl.change_stat("inhibition", 200, 10)
+    call change_Girl_stat(Girl, "obedience", 200, -5,Alt=[[JeanX],800,5])
+    call change_Girl_stat(Girl, "inhibition", 200, 10)
     jump Girl_Swallowed
 
 label Girl_Warn_Her:
     "You let her know that you're going to come."
-    $ Girl.change_stat("love", 90, 3,Alt=[[JeanX],900,5])
+    call change_Girl_stat(Girl, "love", 90, 3,Alt=[[JeanX],900,5])
     if Girl.obedience >= 500:
-        $ Girl.change_stat("obedience", 80, 5)
+        call change_Girl_stat(Girl, "obedience", 80, 5)
     if ("hungry" in Girl.traits and D20 >= 5):
         if renpy.showing(Girl.tag+" doggy") or renpy.showing(Girl.tag+" sex"):
             call show_handjob(Girl, orgasm = True)
@@ -559,8 +559,8 @@ label Girl_In_mouth:
                 $ Girl.eyes = "_squint"
                 ch_v "Ok. . ."
             $ Girl.change_face()
-            $ Girl.change_stat("inhibition", 30, 2)
-            $ Girl.change_stat("inhibition", 50, 2)
+            call change_Girl_stat(Girl, "inhibition", 30, 2)
+            call change_Girl_stat(Girl, "inhibition", 50, 2)
         else:
 
             if approval_check(Girl, 800, "LI") and approval_check(Girl, 400, "OI"):
@@ -593,7 +593,7 @@ label Girl_In_mouth:
             menu:
                 extend ""
                 "Sorry about that.":
-                    $ Girl.change_stat("love", 80, 1)
+                    call change_Girl_stat(Girl, "love", 80, 1)
                     $ Girl.addiction_rate += 1
                     if "addictive" in Player.traits:
                         $ Girl.addiction_rate += 1
@@ -637,7 +637,7 @@ label Girl_In_mouth:
                             ch_j "Hmmm. . . robust. . ."
                         elif Girl == StormX:
                             ch_s "That is. . . uncommon. . ."
-                        $ Girl.change_stat("obedience", 50, 10,Alt=[[JeanX],900, 10])
+                        call change_Girl_stat(Girl, "obedience", 50, 10,Alt=[[JeanX],900, 10])
                         $ Girl.spunk["mouth"] = False
                     elif approval_check(Girl, 1200, "OI", Bonus = (Girl.addiction*10)):
                         $ Girl.change_face("_bemused", 1)
@@ -660,16 +660,16 @@ label Girl_In_mouth:
                             ch_j "Eh. . . could be worse."
                         elif Girl == StormX:
                             ch_s "That was. . . fine. . ."
-                        $ Girl.change_stat("obedience", 50, 10,Alt=[[JeanX],900, 10])
+                        call change_Girl_stat(Girl, "obedience", 50, 10,Alt=[[JeanX],900, 10])
                     else:
                         $ Girl.spunk["hand"] = False
                         "She scowls at you and wipes her hand off. Then she licks her lips."
                         jump Girl_Orgasm_After
                 "Swallow it, now.":
 
-                    $ Girl.change_stat("love", 30, -1, 1)
-                    $ Girl.change_stat("love", 50, -1, 1)
-                    $ Girl.change_stat("love", 80, -1, 1)
+                    call change_Girl_stat(Girl, "love", 30, -1, 1)
+                    call change_Girl_stat(Girl, "love", 50, -1, 1)
+                    call change_Girl_stat(Girl, "love", 80, -1, 1)
                     if approval_check(Girl, 1200, "OI") or Girl.addiction >= 50:
                         $ Girl.change_face("_sad", 1)
                         $ Girl.spunk["mouth"] = True
@@ -689,7 +689,7 @@ label Girl_In_mouth:
                             ch_j "Eh. . . could be worse."
                         elif Girl == StormX:
                             ch_s "That is. . . fine. . ."
-                        $ Girl.change_stat("obedience", 50, 10,Alt=[[JeanX],900, 10])
+                        call change_Girl_stat(Girl, "obedience", 50, 10,Alt=[[JeanX],900, 10])
                     else:
                         $ Girl.spunk["hand"] = False
                         "She scowls at you and wipes her hand off. Then she licks her lips."
@@ -751,7 +751,7 @@ label Girl_In_mouth:
         call Sex_Basic_Dialog (Girl, "swallow2")
         call Sex_Basic_Dialog (Girl, "notwarned")
         $ Girl.spunk["mouth"] = False
-        $ Girl.change_stat("inhibition", 200, 5)
+        call change_Girl_stat(Girl, "inhibition", 200, 5)
         jump Girl_Swallowed
 
     elif Girl.event_counter["swallowed"]:
@@ -834,7 +834,7 @@ label Girl_In_mouth:
     menu:
         extend ""
         "Sorry about that.":
-            $ Girl.change_stat("love", 80, 3)
+            call change_Girl_stat(Girl, "love", 80, 3)
             $ Girl.addiction_rate += 1
             if "addictive" in Player.traits:
                 $ Girl.addiction_rate += 1
@@ -854,8 +854,8 @@ label Girl_In_mouth:
             elif Girl == JubesX:
                 ch_v "Well, doesn't hurt to ask. . ."
             if approval_check(Girl, 1200, taboo_modifier=1) and "full" not in Girl.recent_history:
-                $ Girl.change_stat("inhibition", 30, 3)
-                $ Girl.change_stat("inhibition", 70, 2)
+                call change_Girl_stat(Girl, "inhibition", 30, 3)
+                call change_Girl_stat(Girl, "inhibition", 70, 2)
                 $ Girl.change_face("_sexy", 1)
                 if Girl == RogueX:
                     ch_r "Maybe it is worth a try. . ."
@@ -876,8 +876,8 @@ label Girl_In_mouth:
 
         "Give it a try, you might like it." if "full" not in Girl.recent_history:
             if approval_check(Girl, 1200, taboo_modifier=1):
-                $ Girl.change_stat("obedience", 50, 5)
-                $ Girl.change_stat("obedience", 70, 3)
+                call change_Girl_stat(Girl, "obedience", 50, 5)
+                call change_Girl_stat(Girl, "obedience", 70, 3)
                 $ Girl.brows = "_confused"
                 $ Girl.eyes = "_sexy"
                 if Girl == RogueX:
@@ -926,8 +926,8 @@ label Girl_In_mouth:
                 "She scowls at you, drops you cock and pulls back."
                 call show_handjob(Girl, orgasm = True)
                 call show_full_body(Girl)
-                $ Girl.change_stat("love", 50, -3, 1)
-                $ Girl.change_stat("love", 80, -4, 1)
+                call change_Girl_stat(Girl, "love", 50, -3, 1)
+                call change_Girl_stat(Girl, "love", 80, -4, 1)
                 if Girl == RogueX:
                     ch_r "Well if that's your attitude you can handle your own business."
                 elif Girl == KittyX:
@@ -942,14 +942,14 @@ label Girl_In_mouth:
                     ch_s "No."
                 elif Girl == JubesX:
                     ch_v "I don't need this. . ."
-                $ Girl.change_stat("obedience", 30, -1, 1,Alt=[[JeanX],900,3])
-                $ Girl.change_stat("obedience", 50, -1, 1)
+                call change_Girl_stat(Girl, "obedience", 30, -1, 1,Alt=[[JeanX],900,3])
+                call change_Girl_stat(Girl, "obedience", 50, -1, 1)
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")
                 $ line = 0
                 return
-            $ Girl.change_stat("obedience", 50, 10,Alt=[[JeanX],900, 10])
-            $ Girl.change_stat("obedience", 70, 5)
+            call change_Girl_stat(Girl, "obedience", 50, 10,Alt=[[JeanX],900, 10])
+            call change_Girl_stat(Girl, "obedience", 70, 5)
 
     if not renpy.showing(Girl.tag+" blowjob"):
         call show_blowjob(Girl, orgasm = True)
@@ -959,8 +959,8 @@ label Girl_In_mouth:
     else:
         "She tentatively places the tip in her mouth, and you blast inside it."
         $ Girl.change_face("_sexy")
-        $ Girl.change_stat("love", 50, -3, 1)
-        $ Girl.change_stat("love", 80, -4, 1)
+        call change_Girl_stat(Girl, "love", 50, -3, 1)
+        call change_Girl_stat(Girl, "love", 80, -4, 1)
     $ Girl.mouth = "_sucking"
     $ Player.spunk = 1
     $ Girl.spunk["chin"] = True
@@ -977,8 +977,8 @@ label Girl_In_mouth:
     else:
         $ Girl.change_face("_sad")
         call Sex_Basic_Dialog (Girl, "swallowfirst")
-    $ Girl.change_stat("inhibition", 30, 3)
-    $ Girl.change_stat("inhibition", 50, 2)
+    call change_Girl_stat(Girl, "inhibition", 30, 3)
+    call change_Girl_stat(Girl, "inhibition", 50, 2)
     $ Girl.action_counter["blowjob"] += 1
     jump Girl_Swallowed
 
@@ -1048,7 +1048,7 @@ label Girl_Creampie_P:
         $ action_speed = 0
         if Girl.lust >= 85:
             call Girl_Cumming (Girl)
-        $ Girl.change_stat("love", 90, 1)
+        call change_Girl_stat(Girl, "love", 90, 1)
         if Girl == RogueX:
             ch_r "Hmm, you know how to fill me up {i}right.{/i}"
         elif Girl == KittyX:
@@ -1066,8 +1066,8 @@ label Girl_Creampie_P:
         jump Girl_Creampied
     else:
         $ Girl.change_face("_sexy")
-        $ Girl.change_stat("love", 80, 2)
-        $ Girl.change_stat("love", 90, 2)
+        call change_Girl_stat(Girl, "love", 80, 2)
+        call change_Girl_stat(Girl, "love", 90, 2)
         if Girl == RogueX:
             ch_r "Thanks for the heads up *grunt* [Girl.player_petname], but I'd rather you didn't."
         elif Girl == KittyX:
@@ -1151,7 +1151,7 @@ label Girl_Creampie_A:
         $ action_speed = 0
         if Girl.lust >= 85:
             call Girl_Cumming (Girl)
-        $ Girl.change_stat("love", 90, 1)
+        call change_Girl_stat(Girl, "love", 90, 1)
         if Girl == RogueX:
             ch_r "Hmm, I feel so full. . ."
         elif Girl == KittyX:
@@ -1169,7 +1169,7 @@ label Girl_Creampie_A:
         jump Girl_Creampied
     else:
         $ Girl.change_face("_sexy")
-        $ Girl.change_stat("love", 80, 2)
+        call change_Girl_stat(Girl, "love", 80, 2)
         if Girl == RogueX:
             ch_r "Thanks for the heads up *grunt* [Girl.player_petname], but I'd rather you didn't."
         elif Girl == KittyX:
@@ -1378,8 +1378,8 @@ label Girl_Cum_Outside:
             ch_s "That would have been wasteful. . ."
         elif Girl == JubesX:
             ch_v "Wouldn't want to let all that go to waste. . ."
-        $ Girl.change_stat("obedience", 80, -5)
-        $ Girl.change_stat("inhibition", 200, 10)
+        call change_Girl_stat(Girl, "obedience", 80, -5)
+        call change_Girl_stat(Girl, "inhibition", 200, 10)
         jump Girl_Swallowed
     if Player.primary_action != "footjob":
         $ Player.cock_position = "out"
@@ -1424,7 +1424,7 @@ label Girl_Cum_Outside:
         elif Girl == JubesX:
             ch_v "Wouldn't want to let all that go to waste. . ."
         $ Girl.spunk["mouth"] = False
-        $ Girl.change_stat("inhibition", 50, 3)
+        call change_Girl_stat(Girl, "inhibition", 50, 3)
         jump Girl_Swallowed
 
 
@@ -1490,7 +1490,7 @@ label Girl_Handy_Finish:
 
 label Girl_Swallowed:
     $ Girl.event_counter["swallowed"] += 1
-    $ Girl.change_stat("inhibition", 50, 3)
+    call change_Girl_stat(Girl, "inhibition", 50, 3)
     $ Girl.addiction -= 20
     if Girl.spunk["mouth"]:
         $ Girl.spunk["mouth"] = False
@@ -1521,7 +1521,7 @@ label Girl_Swallowed:
                 ch_j "Heh. . . kinda full. . ."
             else:
                 $ Girl.change_face("_bemused", 1,eyes = "_side")
-                $ Girl.change_stat("obedience", 200, 3)
+                call change_Girl_stat(Girl, "obedience", 200, 3)
                 ch_j "Um, you didn't hear that. . ."
         elif Girl == StormX:
             ch_s "-buurp-"
@@ -1537,33 +1537,33 @@ label Girl_Swallowed:
     if "addictive" in Player.traits:
         $ Girl.addiction_rate += 2
     if Player.primary_action == "anal":
-        $ Girl.change_stat("obedience", 50, 2)
-        $ Girl.change_stat("obedience", 200, 2)
+        call change_Girl_stat(Girl, "obedience", 50, 2)
+        call change_Girl_stat(Girl, "obedience", 200, 2)
     if Girl.event_counter["swallowed"] == 1:
         $ Girl.SEXP += 12
-        $ Girl.change_stat("inhibition", 70, 5)
+        call change_Girl_stat(Girl, "inhibition", 70, 5)
     jump Girl_Orgasm_After
 
 
 label Girl_Creampied:
     if Player.primary_action == "sex":
         $ Girl.event_counter["creampied"] += 1
-        $ Girl.change_stat("lust", 200, 10)
+        call change_Girl_stat(Girl, "lust", 200, 10)
         $ Girl.recent_history.append("creampie sex")
         $ Girl.daily_history.append("creampie sex")
     elif Player.primary_action == "anal":
         $ Girl.event_counter["anal_creampied"] += 1
-        $ Girl.change_stat("lust", 200, 5)
+        call change_Girl_stat(Girl, "lust", 200, 5)
         $ Girl.recent_history.append("creampie anal")
         $ Girl.daily_history.append("creampie anal")
-    $ Girl.change_stat("inhibition", 50, 3)
+    call change_Girl_stat(Girl, "inhibition", 50, 3)
     $ Girl.addiction -= 30
     $ Girl.addiction_rate += 2
     if "addictive" in Player.traits:
         $ Girl.addiction_rate += 3
     if Girl.event_counter["creampied"] == 1:
         $ Girl.SEXP += 10
-        $ Girl.change_stat("inhibition", 70, 5)
+        call change_Girl_stat(Girl, "inhibition", 70, 5)
 
 
 
@@ -1623,7 +1623,7 @@ label Girl_CleanCock(Girl):
                 elif Girl.obedience > Girl.inhibition:
                     $ Girl.eyes = "_side"
                     "She dutifully licks your cock clean with lowered eyes."
-                    $ Girl.change_stat("obedience", 80, 3)
+                    call change_Girl_stat(Girl, "obedience", 80, 3)
                 else:
                     "She happily licks your cock clean."
             elif Girl.addiction >= 60:
@@ -1701,8 +1701,8 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
     $ Girl.lust = 30 if "hotblooded" in Girl.traits else 0
     $ Girl.lust += (Girl.session_orgasms*5)
     $ Girl.lust = 60 if Girl.lust >= 60 else Girl.lust
-    $ Girl.change_stat("inhibition", 50, 1)
-    $ Girl.change_stat("inhibition", 70, 1)
+    call change_Girl_stat(Girl, "inhibition", 50, 1)
+    call change_Girl_stat(Girl, "inhibition", 70, 1)
 
     if Quick:
         $ Girl.change_face("_sexy", 2)
@@ -1749,8 +1749,8 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
     Girl.voice "[line]"
 
     if "unsatisfied" in Girl.recent_history:
-        $ Girl.change_stat("love", 70, 2)
-        $ Girl.change_stat("love", 90, 1)
+        call change_Girl_stat(Girl, "love", 70, 2)
+        call change_Girl_stat(Girl, "love", 90, 1)
         if "unsatisfied" in Girl.daily_history:
             if Girl == RogueX:
                 ch_r "I guess that makes up for earlier, [Girl.player_petname]."
@@ -1761,9 +1761,9 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
             elif Girl == LauraX:
                 ch_l "Thanks for evening the score, [Girl.player_petname]?"
             elif Girl == JeanX:
-                $ Girl.change_stat("obedience", 50, 6)
-                $ Girl.change_stat("obedience", 80, 2)
-                $ Girl.change_stat("obedience", 90, 2)
+                call change_Girl_stat(Girl, "obedience", 50, 6)
+                call change_Girl_stat(Girl, "obedience", 80, 2)
+                call change_Girl_stat(Girl, "obedience", 90, 2)
                 ch_j "-Finally.-"
             elif Girl == StormX:
                 ch_s "I think that brings us even, [Girl.player_petname]."
@@ -1776,11 +1776,11 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
         if Girl.session_orgasms == 1:
 
             $ Girl.event_counter["forced"] -= 1 if 5 > Girl.event_counter["forced"] > 0 else 0
-        $ Girl.change_stat("lust", 40, 1)
-        $ Girl.change_stat("love", 70, 1)
-        $ Girl.change_stat("love", 90, 1)
-        $ Girl.change_stat("obedience", 50, 2,Alt=[[JeanX],900,5])
-        $ Girl.change_stat("obedience", 70, 2)
+        call change_Girl_stat(Girl, "lust", 40, 1)
+        call change_Girl_stat(Girl, "love", 70, 1)
+        call change_Girl_stat(Girl, "love", 90, 1)
+        call change_Girl_stat(Girl, "obedience", 50, 2,Alt=[[JeanX],900,5])
+        call change_Girl_stat(Girl, "obedience", 70, 2)
 
 
         $ temp_Girls = all_Girls[:]
@@ -1813,10 +1813,10 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
                     ch_s "Excellent job, [Girl.player_petname]."
                 elif Girl == JubesX:
                     ch_v "Oh, that hit where it needed to. . ."
-                $ Girl.change_stat("love", 50, 1)
-                $ Girl.change_stat("love", 80, 2)
-                $ Girl.change_stat("obedience", 50, 1)
-                $ Girl.change_stat("obedience", 60, 1)
+                call change_Girl_stat(Girl, "love", 50, 1)
+                call change_Girl_stat(Girl, "love", 80, 2)
+                call change_Girl_stat(Girl, "obedience", 50, 1)
+                call change_Girl_stat(Girl, "obedience", 60, 1)
             elif Girl.session_orgasms == 3:
                 $ Girl.brows = "_confused"
                 if Girl == RogueX:
@@ -1828,16 +1828,16 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
                 elif Girl == LauraX:
                     ch_l "You can. . . definitely. . . keep up. . ."
                 elif Girl == JeanX:
-                    $ Girl.change_stat("love", 90, 3)
+                    call change_Girl_stat(Girl, "love", 90, 3)
                     ch_j "Hey. . . really good job. . ."
                 elif Girl == StormX:
                     ch_s "Very. . . dedicated. . . [Girl.player_petname]."
                 elif Girl == JubesX:
                     ch_v "You, uh, just keep'em coming, uh?"
-                $ Girl.change_stat("love", 50, 2)
-                $ Girl.change_stat("love", 80, 2)
-                $ Girl.change_stat("obedience", 30, 1)
-                $ Girl.change_stat("obedience", 50, 1)
+                call change_Girl_stat(Girl, "love", 50, 2)
+                call change_Girl_stat(Girl, "love", 80, 2)
+                call change_Girl_stat(Girl, "obedience", 30, 1)
+                call change_Girl_stat(Girl, "obedience", 50, 1)
             elif Girl.session_orgasms == 5 and Partner != Girl:
                 $ Girl.mouth = "_tongue"
                 if Girl == RogueX:
@@ -1853,9 +1853,9 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
                     ch_l "I don't. . . usually. . . wear out. . . this easy. . ."
                     ch_l "could. . . we. . . take. . . a break?"
                 elif Girl == JeanX:
-                    $ Girl.change_stat("love", 50, 5)
+                    call change_Girl_stat(Girl, "love", 50, 5)
                     ch_j "Uh. . . I'm a little. . ."
-                    $ Girl.change_stat("love", 90, 3)
+                    call change_Girl_stat(Girl, "love", 90, 3)
                     ch_j "Maybe that's. . . enough for now?"
                 elif Girl == StormX:
                     ch_s "Perhaps. . . this would be. . . enough for now. . . [Girl.player_petname]?"
@@ -1873,9 +1873,9 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
                     "No, I'm not done yet.":
                         if Player.primary_action == "sex" or Player.primary_action == "anal":
                             if approval_check(Girl, 1000, taboo_modifier=1) or approval_check(Girl, 400, "O", taboo_modifier=1):
-                                $ Girl.change_stat("love", 200, -5)
-                                $ Girl.change_stat("obedience", 50, 2,Alt=[[JeanX],900,5])
-                                $ Girl.change_stat("obedience", 80, 3)
+                                call change_Girl_stat(Girl, "love", 200, -5)
+                                call change_Girl_stat(Girl, "obedience", 50, 2,Alt=[[JeanX],900,5])
+                                call change_Girl_stat(Girl, "obedience", 80, 3)
                                 $ Girl.eyes = "_stunned"
                                 "She drifts off into incoherent moans."
                             else:
@@ -1896,15 +1896,15 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
                                     ch_s "I wish I could manage it, [Girl.player_petname]."
                                 elif Girl == JubesX:
                                     ch_v "Well, uh. . . I am."
-                                $ Girl.change_stat("love", 50, -3, 1)
-                                $ Girl.change_stat("love", 80, -4, 1)
-                                $ Girl.change_stat("obedience", 30, -1, 1,Alt=[[JeanX],300,5])
-                                $ Girl.change_stat("obedience", 50, -1, 1,Alt=[[JeanX],900,5])
+                                call change_Girl_stat(Girl, "love", 50, -3, 1)
+                                call change_Girl_stat(Girl, "love", 80, -4, 1)
+                                call change_Girl_stat(Girl, "obedience", 30, -1, 1,Alt=[[JeanX],300,5])
+                                call change_Girl_stat(Girl, "obedience", 50, -1, 1,Alt=[[JeanX],900,5])
                                 $ Girl.recent_history.append("_angry")
                                 $ Girl.daily_history.append("_angry")
                         else:
-                            $ Girl.change_stat("obedience", 50, 3,Alt=[[JeanX],900,5])
-                            $ Girl.change_stat("obedience", 80, 2)
+                            call change_Girl_stat(Girl, "obedience", 50, 3,Alt=[[JeanX],900,5])
+                            call change_Girl_stat(Girl, "obedience", 80, 2)
                             $ Girl.eyes = "_stunned"
                             "She drifts off into incoherent moans."
 
@@ -1974,9 +1974,9 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
 
                     $ Girl.change_face("_sly")
                     if approval_check(Girl, 300, "I") or approval_check(Girl, 1000):
-                        $ Girl.change_stat("obedience", 70, 1)
-                        $ Girl.change_stat("inhibition", 50, 1)
-                        $ Girl.change_stat("lust", 90, 2)
+                        call change_Girl_stat(Girl, "obedience", 70, 1)
+                        call change_Girl_stat(Girl, "inhibition", 50, 1)
+                        call change_Girl_stat(Girl, "lust", 90, 2)
                         $ Choice = "leave"
                         if Girl == RogueX:
                             ch_r "Heh, ok, [Girl.player_petname]."
@@ -1991,7 +1991,7 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                         elif Girl == StormX:
                             ch_s "Oh, I suppose that I could, [Girl.player_petname]."
                         elif Girl == JubesX:
-                            $ Girl.change_stat("love", 80, -2)
+                            call change_Girl_stat(Girl, "love", 80, -2)
                             $ Girl.change_face("_sad")
                             ch_v "Well, uh. . . I guess. . ."
                     else:
@@ -2013,9 +2013,9 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
 
 
                 elif approval_check(Girl, 900, "I") or "exhibitionist" in Girl.traits:
-                    $ Girl.change_stat("obedience", 70, 2)
-                    $ Girl.change_stat("obedience", 90, 1)
-                    $ Girl.change_stat("lust", 90, 5)
+                    call change_Girl_stat(Girl, "obedience", 70, 2)
+                    call change_Girl_stat(Girl, "obedience", 90, 1)
+                    call change_Girl_stat(Girl, "lust", 90, 5)
                     $ Choice = "leave"
                     $ Girl.change_face("_sly")
                     if Girl == RogueX:
@@ -2031,13 +2031,13 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                     elif Girl == StormX:
                         ch_s "Something to wear out, [Girl.player_petname]. . ."
                     elif Girl == JubesX:
-                        $ Girl.change_stat("love", 80, -2)
+                        call change_Girl_stat(Girl, "love", 80, -2)
                         $ Girl.change_face("_sad")
                         ch_v "Oh, uh. . . I guess I could. . ."
                 elif approval_check(Girl, 600, "I") and approval_check(Girl, 1200, "LO",Alt=[[JubesX], 1500]):
-                    $ Girl.change_stat("obedience", 90, 1)
-                    $ Girl.change_stat("inhibition", 80, 1)
-                    $ Girl.change_stat("lust", 90, 5)
+                    call change_Girl_stat(Girl, "obedience", 90, 1)
+                    call change_Girl_stat(Girl, "inhibition", 80, 1)
+                    call change_Girl_stat(Girl, "lust", 90, 5)
                     $ Choice = "leave"
                     $ Girl.change_face("_surprised",2)
                     if Girl == RogueX:
@@ -2079,11 +2079,11 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                         extend ""
                         "Please?":
                             if approval_check(Girl, 1800,Alt=[[JubesX],2200]):
-                                $ Girl.change_stat("love", 85, 1)
-                                $ Girl.change_stat("obedience", 50, 2)
-                                $ Girl.change_stat("obedience", 80, 1)
-                                $ Girl.change_stat("inhibition", 40, 3)
-                                $ Girl.change_stat("inhibition", 80, 1)
+                                call change_Girl_stat(Girl, "love", 85, 1)
+                                call change_Girl_stat(Girl, "obedience", 50, 2)
+                                call change_Girl_stat(Girl, "obedience", 80, 1)
+                                call change_Girl_stat(Girl, "inhibition", 40, 3)
+                                call change_Girl_stat(Girl, "inhibition", 80, 1)
                                 if Girl == RogueX:
                                     ch_r "Oh, fine!"
                                 elif Girl == KittyX:
@@ -2097,7 +2097,7 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                                 elif Girl == StormX:
                                     ch_s ". . . Fine."
                                 elif Girl == JubesX:
-                                    $ Girl.change_stat("love", 80, -2)
+                                    call change_Girl_stat(Girl, "love", 80, -2)
                                     ch_v ". . . fine. . ."
                                 $ Choice = "leave"
                             elif Cleaned:
@@ -2117,7 +2117,7 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                                 elif Girl == JubesX:
                                     ch_v "I don't wanna!"
                             elif approval_check(Girl, 800):
-                                $ Girl.change_stat("inhibition", 50, 1)
+                                call change_Girl_stat(Girl, "inhibition", 50, 1)
                                 if Girl == RogueX:
                                     ch_r "You're persistant, but no way."
                                 elif Girl == KittyX:
@@ -2133,9 +2133,9 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                                 elif Girl == JubesX:
                                     ch_v "No!"
                             else:
-                                $ Girl.change_stat("love", 75, -5)
-                                $ Girl.change_stat("love", 40, -10)
-                                $ Girl.change_stat("obedience", 90, 2)
+                                call change_Girl_stat(Girl, "love", 75, -5)
+                                call change_Girl_stat(Girl, "love", 40, -10)
+                                call change_Girl_stat(Girl, "obedience", 90, 2)
                                 $ Girl.change_face("_angry")
                                 if Girl == RogueX:
                                     ch_r "Don't be an asshole."
@@ -2154,8 +2154,8 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                         "I insist.":
                             $ Girl.change_face("_sad")
                             if approval_check(Girl, 400, "I") and approval_check(Girl, 1200, "LO",Alt=[[JubesX], 1500]):
-                                $ Girl.change_stat("obedience", 40, 3)
-                                $ Girl.change_stat("obedience", 90, 2)
+                                call change_Girl_stat(Girl, "obedience", 40, 3)
+                                call change_Girl_stat(Girl, "obedience", 90, 2)
                                 if Girl == RogueX:
                                     ch_r "Alright, fine."
                                 elif Girl == KittyX:
@@ -2169,14 +2169,14 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                                 elif Girl == StormX:
                                     ch_s ". . . I suppose."
                                 elif Girl == JubesX:
-                                    $ Girl.change_stat("love", 80, -2)
+                                    call change_Girl_stat(Girl, "love", 80, -2)
                                     ch_v ". . . fine."
                                 $ Choice = "leave"
                             elif approval_check(Girl, 800, "O"):
-                                $ Girl.change_stat("love", 50, -10)
-                                $ Girl.change_stat("love", 200, -5)
-                                $ Girl.change_stat("obedience", 90, 10)
-                                $ Girl.change_stat("obedience", 200, 5)
+                                call change_Girl_stat(Girl, "love", 50, -10)
+                                call change_Girl_stat(Girl, "love", 200, -5)
+                                call change_Girl_stat(Girl, "obedience", 90, 10)
+                                call change_Girl_stat(Girl, "obedience", 200, 5)
                                 if Girl == RogueX:
                                     ch_r "If you have to insist."
                                 elif Girl == KittyX:
@@ -2193,8 +2193,8 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                                     ch_v ". . . fine."
                                 $ Choice = "leave"
                             elif Cleaned:
-                                $ Girl.change_stat("love", 50, -5)
-                                $ Girl.change_stat("love", 200, -1)
+                                call change_Girl_stat(Girl, "love", 50, -5)
+                                call change_Girl_stat(Girl, "love", 200, -1)
                                 $ Girl.change_face("_angry")
                                 if Girl == RogueX:
                                     ch_r "Seriously, stop bugging me about this."
@@ -2211,8 +2211,8 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                                 elif Girl == JubesX:
                                     ch_v "I don't wanna!"
                             elif approval_check(Girl, 800):
-                                $ Girl.change_stat("love", 50, -3)
-                                $ Girl.change_stat("love", 200, -1)
+                                call change_Girl_stat(Girl, "love", 50, -3)
+                                call change_Girl_stat(Girl, "love", 200, -1)
                                 $ Girl.change_face("_sad")
                                 if Girl == RogueX:
                                     ch_r "Sorry, that's just a bridge too far."
@@ -2229,8 +2229,8 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                                 elif Girl == JubesX:
                                     ch_v "No!"
                             else:
-                                $ Girl.change_stat("love", 50, -10)
-                                $ Girl.change_stat("love", 200, -5)
+                                call change_Girl_stat(Girl, "love", 50, -10)
+                                call change_Girl_stat(Girl, "love", 200, -5)
                                 $ Girl.change_face("_angry")
                                 if Girl == RogueX:
                                     ch_r "Well {i}I{/i} insist you don't know how to talk to a lady!"
@@ -2267,10 +2267,10 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                 $ Girl.change_face("_sly")
                 if "hungry" in Girl.traits or (Girl.event_counter["swallowed"] >= 5 and approval_check(Girl, 800)):
 
-                    $ Girl.change_stat("obedience", 90, 1)
-                    $ Girl.change_stat("inhibition", 50, 3)
-                    $ Girl.change_stat("inhibition", 80, 1)
-                    $ Girl.change_stat("lust", 90, 5)
+                    call change_Girl_stat(Girl, "obedience", 90, 1)
+                    call change_Girl_stat(Girl, "inhibition", 50, 3)
+                    call change_Girl_stat(Girl, "inhibition", 80, 1)
+                    call change_Girl_stat(Girl, "lust", 90, 5)
                     $ Choice = "eat"
                     if Girl == RogueX:
                         ch_r "I am a bit peckish. . ."
@@ -2289,11 +2289,11 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                         ch_v "Sweet!"
                 elif Girl.event_counter["swallowed"] and approval_check(Girl, 800):
 
-                    $ Girl.change_stat("obedience", 50, 1)
-                    $ Girl.change_stat("obedience", 90, 1)
-                    $ Girl.change_stat("inhibition", 50, 2)
-                    $ Girl.change_stat("inhibition", 80, 1)
-                    $ Girl.change_stat("lust", 90, 5)
+                    call change_Girl_stat(Girl, "obedience", 50, 1)
+                    call change_Girl_stat(Girl, "obedience", 90, 1)
+                    call change_Girl_stat(Girl, "inhibition", 50, 2)
+                    call change_Girl_stat(Girl, "inhibition", 80, 1)
+                    call change_Girl_stat(Girl, "lust", 90, 5)
                     $ Choice = "eat"
                     if Girl == RogueX:
                         ch_r "I guess it wasn't so bad last time. . ."
@@ -2312,10 +2312,10 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                         ch_v "Sweet!"
                 elif approval_check(Girl, 1200) or Girl == JubesX:
 
-                    $ Girl.change_stat("obedience", 50, 1)
-                    $ Girl.change_stat("obedience", 90, 1)
-                    $ Girl.change_stat("inhibition", 50, 3)
-                    $ Girl.change_stat("inhibition", 80, 1)
+                    call change_Girl_stat(Girl, "obedience", 50, 1)
+                    call change_Girl_stat(Girl, "obedience", 90, 1)
+                    call change_Girl_stat(Girl, "inhibition", 50, 3)
+                    call change_Girl_stat(Girl, "inhibition", 80, 1)
                     $ Choice = "eat"
                     if Girl == RogueX:
                         ch_r "I suppose I could give it a go. . ."
@@ -2350,8 +2350,8 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                 else:
 
 
-                    $ Girl.change_stat("love", 50, -5)
-                    $ Girl.change_stat("love", 200, -3)
+                    call change_Girl_stat(Girl, "love", 50, -5)
+                    call change_Girl_stat(Girl, "love", 200, -3)
                     $ Girl.change_face("_angry")
                     if Girl == RogueX:
                         ch_r "No."
@@ -2371,10 +2371,10 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
 
                 if approval_check(Girl, 600, "I") and not approval_check(Girl, 1500, "LO") and Girl != JubesX:
                     $ Girl.change_face("_sly")
-                    $ Girl.change_stat("obedience", 50, -3)
-                    $ Girl.change_stat("inhibition", 70, 10)
-                    $ Girl.change_stat("inhibition", 200, 5)
-                    $ Girl.change_stat("lust", 60, 5)
+                    call change_Girl_stat(Girl, "obedience", 50, -3)
+                    call change_Girl_stat(Girl, "inhibition", 70, 10)
+                    call change_Girl_stat(Girl, "inhibition", 200, 5)
+                    call change_Girl_stat(Girl, "lust", 60, 5)
                     if Girl == RogueX:
                         ch_r "I don't know, [Girl.player_petname], I kind of like it where it is. . ."
                     elif Girl == KittyX:
@@ -2393,12 +2393,12 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                         extend ""
                         "Ok, fine.":
                             $ Girl.change_face("_smile")
-                            $ Girl.change_stat("love", 70, 5)
-                            $ Girl.change_stat("obedience", 50, 3)
+                            call change_Girl_stat(Girl, "love", 70, 5)
+                            call change_Girl_stat(Girl, "obedience", 50, 3)
                         "No, clean it up.":
                             if approval_check(Girl, 600, "O"):
                                 $ Girl.change_face("_sad")
-                                $ Girl.change_stat("obedience", 50, 10)
+                                call change_Girl_stat(Girl, "obedience", 50, 10)
                                 if Girl == RogueX:
                                     ch_r "If that's what you really want. . ."
                                 elif Girl == KittyX:
@@ -2416,8 +2416,8 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                                 $ Choice = "clean"
                             elif approval_check(Girl, 1200, "LO"):
                                 $ Girl.change_face("_sad")
-                                $ Girl.change_stat("love", 70, -3)
-                                $ Girl.change_stat("obedience", 50, 3)
+                                call change_Girl_stat(Girl, "love", 70, -3)
+                                call change_Girl_stat(Girl, "obedience", 50, 3)
                                 if Girl == RogueX:
                                     ch_r "You take the fun out of this. . ."
                                 elif Girl == KittyX:
@@ -2432,8 +2432,8 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                                     ch_s ". . . Fine."
                                 $ Choice = "clean"
                             else:
-                                $ Girl.change_stat("love", 70, -5)
-                                $ Girl.change_stat("obedience", 50, -5)
+                                call change_Girl_stat(Girl, "love", 70, -5)
+                                call change_Girl_stat(Girl, "obedience", 50, -5)
                                 if Girl == RogueX:
                                     ch_r "I {i}said{/i} it's stay'in."
                                 elif Girl == KittyX:
@@ -2509,8 +2509,8 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
         call Self_Cleanup (Girl)
 
     if Choice == "leave":
-        $ Girl.change_stat("inhibition", 80, 2)
-        $ Girl.change_stat("inhibition", 200, 1)
+        call change_Girl_stat(Girl, "inhibition", 80, 2)
+        call change_Girl_stat(Girl, "inhibition", 200, 1)
         "She leaves the jizz right where it is and gives you a wink."
         if Girl.spunk["hand"]:
             $ Girl.spunk["hand"] = False
@@ -2629,7 +2629,7 @@ label Self_Cleanup(Girl=0):
             else:
                 "[Girl.name] licks her hands off with a satisfied grin."
 
-            $ Girl.change_stat("inhibition", 80, 2)
+            call change_Girl_stat(Girl, "inhibition", 80, 2)
             $ Girl.spunk["mouth"] = False
             $ Girl.event_counter["swallowed"] += 1
             $ Girl.addiction -= (10*counter)
@@ -2750,47 +2750,47 @@ label Partner_Cleanup_Check(Girl=0, B=0):
     if not approval_check(Partner, 1400, Bonus=3*B) or Partner.likes[Girl.tag] < (500-2*B):
 
         $ Partner.change_face("_sly")
-        $ Partner.change_stat("obedience", 50, -3)
-        $ Partner.change_stat("inhibition", 70, 10)
-        $ Partner.change_stat("inhibition", 200, 5)
-        $ Partner.change_stat("lust", 60, 5)
+        call change_Girl_stat(Partner, "obedience", 50, -3)
+        call change_Girl_stat(Partner, "inhibition", 70, 10)
+        call change_Girl_stat(Partner, "inhibition", 200, 5)
+        call change_Girl_stat(Partner, "lust", 60, 5)
         call Partner_CGline (2)
         menu:
             extend ""
             "Fine, never mind.":
                 $ Partner.change_face("_smile")
-                $ Partner.change_stat("love", 70, 5)
-                $ Partner.change_stat("obedience", 50, 3)
+                call change_Girl_stat(Partner, "love", 70, 5)
+                call change_Girl_stat(Partner, "obedience", 50, 3)
                 $ Choice = "random"
             "Yeah, go ahead.":
                 if approval_check(Partner, 600,"O", Bonus=3*B):
 
                     $ Partner.change_face("_sad")
-                    $ Partner.change_stat("obedience", 50, 10)
+                    call change_Girl_stat(Partner, "obedience", 50, 10)
                     call Partner_CGline (3)
                 elif Partner.likes[Girl.tag] >= 800:
 
                     $ Partner.change_face("_sly")
-                    $ Partner.change_stat("love", 70, -3)
-                    $ Partner.change_stat("obedience", 50, 3)
+                    call change_Girl_stat(Partner, "love", 70, -3)
+                    call change_Girl_stat(Partner, "obedience", 50, 3)
                     call Partner_CGline (4)
                 elif approval_check(Partner, 1200, Bonus=3*B):
 
                     $ Partner.change_face("_normal")
-                    $ Partner.change_stat("love", 70, -3)
-                    $ Partner.change_stat("obedience", 50, 3)
+                    call change_Girl_stat(Partner, "love", 70, -3)
+                    call change_Girl_stat(Partner, "obedience", 50, 3)
                     call Partner_CGline (5)
                 elif Choice == "partner lick" and approval_check(Partner, 1200) and Partner.likes[Girl.tag] >= 600:
 
                     $ Partner.change_face("_normal")
-                    $ Partner.change_stat("love", 70, -3)
-                    $ Partner.change_stat("obedience", 50, 3)
+                    call change_Girl_stat(Partner, "love", 70, -3)
+                    call change_Girl_stat(Partner, "obedience", 50, 3)
                     call Partner_CGline (6)
                     $ Choice = "partner wipe"
                 else:
 
-                    $ Partner.change_stat("love", 70, -5)
-                    $ Partner.change_stat("obedience", 50, -5)
+                    call change_Girl_stat(Partner, "love", 70, -5)
+                    call change_Girl_stat(Partner, "obedience", 50, -5)
                     $ Girl.check_if_likes(Partner,900,-2, 1)
                     call Partner_CGline (7)
                     $ Choice = "random"
@@ -2804,33 +2804,33 @@ label Partner_Cleanup_Check(Girl=0, B=0):
 
 
     if Choice != "random":
-        $ Girl.change_stat("lust", 60, 5)
+        call change_Girl_stat(Girl, "lust", 60, 5)
         if not approval_check(Girl, 1400, Bonus=3*B) or Girl.likes[Partner.tag] < (500-2*B):
 
             if Girl.likes[Partner.tag] >= 800:
-                $ Girl.change_stat("inhibition", 90, 5)
+                call change_Girl_stat(Girl, "inhibition", 90, 5)
                 $ Partner.check_if_likes(Girl,900,5, 1)
                 call Partner_CGline (8, Girl)
             elif approval_check(Girl, 1200, Bonus=3*B):
-                $ Girl.change_stat("obedience", 50, 3)
-                $ Girl.change_stat("obedience", 80, 2)
-                $ Girl.change_stat("inhibition", 70, 3)
+                call change_Girl_stat(Girl, "obedience", 50, 3)
+                call change_Girl_stat(Girl, "obedience", 80, 2)
+                call change_Girl_stat(Girl, "inhibition", 70, 3)
                 call Partner_CGline (9, Girl)
             elif approval_check(Girl, 1000, Bonus=3*B) and Girl.likes[Partner.tag] >= (600-B):
-                $ Girl.change_stat("love", 70, 1)
-                $ Girl.change_stat("obedience", 50, 3)
-                $ Girl.change_stat("obedience", 80, 3)
-                $ Girl.change_stat("inhibition", 70, 5)
+                call change_Girl_stat(Girl, "love", 70, 1)
+                call change_Girl_stat(Girl, "obedience", 50, 3)
+                call change_Girl_stat(Girl, "obedience", 80, 3)
+                call change_Girl_stat(Girl, "inhibition", 70, 5)
                 $ Partner.check_if_likes(Girl,900,3, 1)
                 call Partner_CGline (10, Girl)
             else:
-                $ Girl.change_stat("obedience", 70, -3)
-                $ Girl.change_stat("inhibition", 70, 2)
+                call change_Girl_stat(Girl, "obedience", 70, -3)
+                call change_Girl_stat(Girl, "inhibition", 70, 2)
                 call Partner_CGline (11, Girl)
                 $ Choice = "random"
         else:
-            $ Girl.change_stat("obedience", 50, 3)
-            $ Girl.change_stat("inhibition", 70, 3)
+            call change_Girl_stat(Girl, "obedience", 50, 3)
+            call change_Girl_stat(Girl, "inhibition", 70, 3)
             call Partner_CGline (12, Girl)
 
     if Choice != "random":
@@ -3108,12 +3108,12 @@ label Partner_Clean_Girl(Girl=0):
                 $ Partner.spunk["mouth"] = True
             if not Partner.spunk["chin"]:
                 $ Partner.spunk["chin"] = True
-            $ Partner.change_stat("lust", 80, 3)
-            $ Girl.change_stat("lust", 80, 4)
+            call change_Girl_stat(Partner, "lust", 80, 3)
+            call change_Girl_stat(Girl, "lust", 80, 4)
             call change_Player_stat("focus",80,3)
             "[Partner.name] licks her way up [Girl.name]'s chin, before deeply kissing her."
         else:
-            $ Girl.change_stat("lust", 80, 2)
+            call change_Girl_stat(Girl, "lust", 80, 2)
             "[Partner.name] wipes her thumb across [Girl.name]'s chin,"
         $ counter += 1
     if Girl.spunk["mouth"] and counter:
@@ -3134,15 +3134,15 @@ label Partner_Clean_Girl(Girl=0):
                 $ Partner.spunk["mouth"] = True
             if not Partner.spunk["chin"]:
                 $ Partner.spunk["chin"] = True
-            $ Partner.change_stat("lust", 80, 2)
-            $ Girl.change_stat("lust", 80, 4)
+            call change_Girl_stat(Partner, "lust", 80, 2)
+            call change_Girl_stat(Girl, "lust", 80, 4)
             call change_Player_stat("focus",80,3)
             if counter:
                 "then she licks the spunk off of [Girl.name]'s face,"
             else:
                 "[Partner.name] licks the spunk off of [Girl.name]'s face,"
         else:
-            $ Girl.change_stat("lust", 80, 1)
+            call change_Girl_stat(Girl, "lust", 80, 1)
             if counter:
                 "then she wipes the spunk off of [Girl.name]'s face,"
             else:
@@ -3156,16 +3156,16 @@ label Partner_Clean_Girl(Girl=0):
                 $ Partner.spunk["mouth"] = True
             if not Partner.spunk["chin"]:
                 $ Partner.spunk["chin"] = True
-            $ Partner.change_stat("lust", 80, 2)
-            $ Girl.change_stat("lust", 200, 4)
+            call change_Girl_stat(Partner, "lust", 80, 2)
+            call change_Girl_stat(Girl, "lust", 200, 4)
             call change_Player_stat("focus",80,4)
             if counter:
                 "then she licks her way across [Girl.name]'s chest,"
             else:
                 "[Partner.name] licks her way across [Girl.name]'s chest,"
         else:
-            $ Partner.change_stat("lust", 80, 2)
-            $ Girl.change_stat("lust", 80, 2)
+            call change_Girl_stat(Partner, "lust", 80, 2)
+            call change_Girl_stat(Girl, "lust", 80, 2)
             call change_Player_stat("focus",80,2)
             if counter:
                 "then she wipes the spunk off of [Girl.name]'s chest,"
@@ -3179,16 +3179,16 @@ label Partner_Clean_Girl(Girl=0):
                 $ Partner.spunk["mouth"] = True
             if not Partner.spunk["chin"]:
                 $ Partner.spunk["chin"] = True
-            $ Partner.change_stat("lust", 80, 2)
-            $ Girl.change_stat("lust", 80, 3)
+            call change_Girl_stat(Partner, "lust", 80, 2)
+            call change_Girl_stat(Girl, "lust", 80, 3)
             call change_Player_stat("focus",80, 1)
             if counter:
                 "then she licks her way down [Girl.name]'s belly,"
             else:
                 "[Partner.name] licks her way down [Girl.name]'s belly,"
         else:
-            $ Partner.change_stat("lust", 80, 1)
-            $ Girl.change_stat("lust", 80, 1)
+            call change_Girl_stat(Partner, "lust", 80, 1)
+            call change_Girl_stat(Girl, "lust", 80, 1)
             if counter:
                 "then she wipes the spunk off of [Girl.name]'s belly,"
             else:
@@ -3201,13 +3201,13 @@ label Partner_Clean_Girl(Girl=0):
                 $ Partner.spunk["mouth"] = True
             if not Partner.spunk["chin"]:
                 $ Partner.spunk["chin"] = True
-            $ Girl.change_stat("lust", 80, 2)
+            call change_Girl_stat(Girl, "lust", 80, 2)
             if counter:
                 "then she licks her way up [Girl.name]'s lower back,"
             else:
                 "[Partner.name] licks her way up [Girl.name]'s lower back,"
         else:
-            $ Girl.change_stat("lust", 80, 1)
+            call change_Girl_stat(Girl, "lust", 80, 1)
             if counter:
                 "then she wipes the spunk off of [Girl.name]'s lower back,"
             else:
@@ -3221,16 +3221,16 @@ label Partner_Clean_Girl(Girl=0):
                 $ Partner.spunk["mouth"] = True
             if not Partner.spunk["chin"]:
                 $ Partner.spunk["chin"] = True
-            $ Partner.change_stat("lust", 80, 4)
-            $ Girl.change_stat("lust", 200, 6)
+            call change_Girl_stat(Partner, "lust", 80, 4)
+            call change_Girl_stat(Girl, "lust", 200, 6)
             call change_Player_stat("focus",80,6)
             if counter:
                 "then she sucks gently at [Girl.name]'s pussy,"
             else:
                 "[Partner.name] bends down and sucks gently at [Girl.name]'s pussy,"
         else:
-            $ Partner.change_stat("lust", 80, 2)
-            $ Girl.change_stat("lust", 200, 4)
+            call change_Girl_stat(Partner, "lust", 80, 2)
+            call change_Girl_stat(Girl, "lust", 200, 4)
             call change_Player_stat("focus",80,4)
             if counter:
                 "then she strokes along [Girl.name]'s pussy, wiping the spunk clean,"
@@ -3245,16 +3245,16 @@ label Partner_Clean_Girl(Girl=0):
                 $ Partner.spunk["mouth"] = True
             if not Partner.spunk["chin"]:
                 $ Partner.spunk["chin"] = True
-            $ Partner.change_stat("lust", 80, 2)
-            $ Girl.change_stat("lust", 200, 6)
+            call change_Girl_stat(Partner, "lust", 80, 2)
+            call change_Girl_stat(Girl, "lust", 200, 6)
             call change_Player_stat("focus",80,5)
             if counter:
                 "then she licks up the spunk dripping out of [Girl.name]'s ass,"
             else:
                 "[Partner.name] licks up the spunk dripping our of [Girl.name]'s ass,"
         else:
-            $ Partner.change_stat("lust", 80, 2)
-            $ Girl.change_stat("lust", 200, 6)
+            call change_Girl_stat(Partner, "lust", 80, 2)
+            call change_Girl_stat(Girl, "lust", 200, 6)
             call change_Player_stat("focus",80,3)
             if counter:
                 "then she wipes the spunk dripping out of [Girl.name]'s ass, discarding it,"
@@ -3270,7 +3270,7 @@ label Partner_Clean_Girl(Girl=0):
                 $ Partner.spunk["mouth"] = True
             if not Partner.spunk["chin"]:
                 $ Partner.spunk["chin"] = True
-            $ Girl.change_stat("lust", 80, 3)
+            call change_Girl_stat(Girl, "lust", 80, 3)
             call change_Player_stat("focus",80,3)
             if counter:
                 "and finally she licks [Girl.name]'s hands off with a satisfied grin."
@@ -3288,7 +3288,7 @@ label Partner_Clean_Girl(Girl=0):
                 $ Partner.spunk["mouth"] = False
             while Partner.spunk["chin"]:
                 $ Partner.spunk["chin"] = False
-            $ Girl.change_stat("inhibition", 80, 2)
+            call change_Girl_stat(Girl, "inhibition", 80, 2)
             call change_Player_stat("focus",80,3)
             "Then [Partner.name] swallows and wipes her mouth."
             $ Partner.event_counter["swallowed"] += 1

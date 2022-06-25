@@ -177,7 +177,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 "And?":
                     if line == "sure":
                         if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
-                            $ Girl.change_stat("inhibition", 70, 1)
+                            call change_Girl_stat(Girl, "inhibition", 70, 1)
 
                         $ Girl.change_face("_sly", 1)
                         if Girl == RogueX:
@@ -196,8 +196,8 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                             ch_v "Well. . . ok. . ."
                     else:
                         if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
-                            $ Girl.change_stat("love", 70, -1)
-                            $ Girl.change_stat("obedience", 80, 1)
+                            call change_Girl_stat(Girl, "love", 70, -1)
+                            call change_Girl_stat(Girl, "obedience", 80, 1)
 
                         $ Girl.change_face("_angry",2)
                         if Girl == RogueX:
@@ -218,8 +218,8 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 "Take it off anyway.":
                     if line == "sure" or (line == "sorry" and Girl != StormX and approval_check(Girl, 600+Mod, "O")):
                         if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
-                            $ Girl.change_stat("obedience", 50, 1)
-                            $ Girl.change_stat("obedience", 80, 2)
+                            call change_Girl_stat(Girl, "obedience", 50, 1)
+                            call change_Girl_stat(Girl, "obedience", 80, 2)
                         if line != "sure":
                             $ Girl.change_face("_sad",2)
                         else:
@@ -235,7 +235,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                         elif Girl == JeanX:
                             ch_j ". . . ok."
                         elif Girl == StormX:
-                            $ Girl.change_stat("love", 80, -2)
+                            call change_Girl_stat(Girl, "love", 80, -2)
                             ch_s ". . . fine. . ."
                         elif Girl == JubesX:
                             ch_v "Whatever. . ."
@@ -243,9 +243,9 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                         $ line = "sure"
                     else:
                         if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
-                            $ Girl.change_stat("love", 80, -2)
-                            $ Girl.change_stat("obedience", 80, -1)
-                            $ Girl.change_stat("inhibition", 60, 1)
+                            call change_Girl_stat(Girl, "love", 80, -2)
+                            call change_Girl_stat(Girl, "obedience", 80, -1)
+                            call change_Girl_stat(Girl, "inhibition", 60, 1)
 
                         $ Girl.change_face("_angry", 1)
                         if Girl == RogueX:
@@ -260,7 +260,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                             $ Girl.change_face("_bemused", 1)
                             ch_j "Ha! no."
                         elif Girl == StormX:
-                            $ Girl.change_stat("love", 80, -2)
+                            call change_Girl_stat(Girl, "love", 80, -2)
                             ch_s "You presume too much."
                         elif Girl == JubesX:
                             ch_v "Nope."
@@ -269,10 +269,10 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                         return
                 "Hot.":
                     if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
-                        $ Girl.change_stat("love", 80, 1)
-                        $ Girl.change_stat("obedience", 70, 2)
-                        $ Girl.change_stat("inhibition", 60, 1)
-                        $ Girl.change_stat("inhibition", 80, 1)
+                        call change_Girl_stat(Girl, "love", 80, 1)
+                        call change_Girl_stat(Girl, "obedience", 70, 2)
+                        call change_Girl_stat(Girl, "inhibition", 60, 1)
+                        call change_Girl_stat(Girl, "inhibition", 80, 1)
 
                     $ Girl.change_face("_sly", 1)
                     if Girl == RogueX:
@@ -293,10 +293,10 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
                     if line == "sure":
                         if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
-                            $ Girl.change_stat("love", 80, 2)
-                            $ Girl.change_stat("obedience", 80, 1)
-                            $ Girl.change_stat("inhibition", 60, 1)
-                            $ Girl.change_stat("inhibition", 80, 1)
+                            call change_Girl_stat(Girl, "love", 80, 2)
+                            call change_Girl_stat(Girl, "obedience", 80, 1)
+                            call change_Girl_stat(Girl, "inhibition", 60, 1)
+                            call change_Girl_stat(Girl, "inhibition", 80, 1)
 
                         $ Girl.change_face("_sly", 1)
                         if Girl == RogueX:
@@ -315,9 +315,9 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                             ch_v "You bet. . ."
                     else:
                         if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
-                            $ Girl.change_stat("love", 50, 1)
-                            $ Girl.change_stat("love", 80, 1)
-                            $ Girl.change_stat("inhibition", 60, 1)
+                            call change_Girl_stat(Girl, "love", 50, 1)
+                            call change_Girl_stat(Girl, "love", 80, 1)
+                            call change_Girl_stat(Girl, "inhibition", 60, 1)
 
                         $ Girl.change_face("_smile")
                         if Girl == RogueX:
@@ -353,10 +353,10 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
         if line == "sure":
 
             if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
-                $ Girl.change_stat("obedience", 70, 2)
-                $ Girl.change_stat("obedience", 90, 1)
-                $ Girl.change_stat("inhibition", 70, 2)
-                $ Girl.change_stat("inhibition", 90, 1)
+                call change_Girl_stat(Girl, "obedience", 70, 2)
+                call change_Girl_stat(Girl, "obedience", 90, 1)
+                call change_Girl_stat(Girl, "inhibition", 70, 2)
+                call change_Girl_stat(Girl, "inhibition", 90, 1)
             $ Girl.change_face("_sly", 1)
             if Girl == RogueX:
                 ch_r "I suppose I could. . ."
@@ -394,10 +394,10 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
         elif line == "sorry" and (Type == "over" or Type == "legs" or Type == "_jacket"):
 
             if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
-                $ Girl.change_stat("obedience", 50, 1)
-                $ Girl.change_stat("obedience", 80, 1)
-                $ Girl.change_stat("inhibition", 60, 1)
-                $ Girl.change_stat("inhibition", 80, 1)
+                call change_Girl_stat(Girl, "obedience", 50, 1)
+                call change_Girl_stat(Girl, "obedience", 80, 1)
+                call change_Girl_stat(Girl, "inhibition", 60, 1)
+                call change_Girl_stat(Girl, "inhibition", 80, 1)
             $ Girl.change_face("_bemused", 1)
             if Girl == RogueX:
                 ch_r "I suppose I could. . ."
@@ -426,10 +426,10 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
         elif line == "sorry":
 
             if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
-                $ Girl.change_stat("obedience", 50, 2)
-                $ Girl.change_stat("obedience", 80, 2)
-                $ Girl.change_stat("inhibition", 60, 1)
-                $ Girl.change_stat("inhibition", 90, 2)
+                call change_Girl_stat(Girl, "obedience", 50, 2)
+                call change_Girl_stat(Girl, "obedience", 80, 2)
+                call change_Girl_stat(Girl, "inhibition", 60, 1)
+                call change_Girl_stat(Girl, "inhibition", 90, 2)
             $ Girl.change_face("_sadside", 1)
             if Girl == RogueX:
                 ch_r "Sorry, I think I can live with the tan lines. . ."
@@ -449,9 +449,9 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
         elif line == "no":
 
-            $ Girl.change_stat("love", 50, -5)
-            $ Girl.change_stat("obedience", 50, 2)
-            $ Girl.change_stat("inhibition", 60, 1)
+            call change_Girl_stat(Girl, "love", 50, -5)
+            call change_Girl_stat(Girl, "obedience", 50, 2)
+            call change_Girl_stat(Girl, "inhibition", 60, 1)
             $ Girl.change_face("_angry", 1)
             if Girl == RogueX:
                 ch_r "Not interested, [RogueX.player_petname]. . ."
@@ -588,10 +588,10 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
         if line == "sure":
 
             if "dip" not in Girl.recent_history and "no_dip" not in Girl.recent_history:
-                $ Girl.change_stat("obedience", 70, 2)
-                $ Girl.change_stat("obedience", 90, 1)
-                $ Girl.change_stat("inhibition", 70, 2)
-                $ Girl.change_stat("inhibition", 90, 1)
+                call change_Girl_stat(Girl, "obedience", 70, 2)
+                call change_Girl_stat(Girl, "obedience", 90, 1)
+                call change_Girl_stat(Girl, "inhibition", 70, 2)
+                call change_Girl_stat(Girl, "inhibition", 90, 1)
             $ Girl.change_face("_sly", 1)
             if Girl == RogueX:
                 ch_r "Sounds fun. . ."
@@ -623,10 +623,10 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
         elif line == "sorry":
 
             if "dip" not in Girl.recent_history and "no_dip" not in Girl.recent_history:
-                $ Girl.change_stat("obedience", 50, 2)
-                $ Girl.change_stat("obedience", 80, 2)
-                $ Girl.change_stat("inhibition", 60, 1)
-                $ Girl.change_stat("inhibition", 90, 2)
+                call change_Girl_stat(Girl, "obedience", 50, 2)
+                call change_Girl_stat(Girl, "obedience", 80, 2)
+                call change_Girl_stat(Girl, "inhibition", 60, 1)
+                call change_Girl_stat(Girl, "inhibition", 90, 2)
             $ Girl.change_face("_sadside", 1)
             if Girl == RogueX:
                 ch_r "Couldn't we just take a normal swim?"
@@ -648,9 +648,9 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                     if Girl.swimwear["outfit_active"]:
 
                         if "dip" not in Girl.recent_history and "no_dip" not in Girl.recent_history:
-                            $ Girl.change_stat("love", 80, 2)
-                            $ Girl.change_stat("obedience", 50, 1)
-                            $ Girl.change_stat("inhibition", 60, 2)
+                            call change_Girl_stat(Girl, "love", 80, 2)
+                            call change_Girl_stat(Girl, "obedience", 50, 1)
+                            call change_Girl_stat(Girl, "inhibition", 60, 2)
                         $ Girl.change_face("_smile")
                         if Girl == RogueX:
                             ch_r "Thanks, [RogueX.player_petname]."
@@ -720,10 +720,10 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                 "Never mind then.":
 
 
-                    $ Girl.change_stat("love", 80, -1)
+                    call change_Girl_stat(Girl, "love", 80, -1)
                     if "dip" not in Girl.recent_history and "no_dip" not in Girl.recent_history:
-                        $ Girl.change_stat("obedience", 50, 2)
-                        $ Girl.change_stat("inhibition", 60, 1)
+                        call change_Girl_stat(Girl, "obedience", 50, 2)
+                        call change_Girl_stat(Girl, "inhibition", 60, 1)
                     if Girl == RogueX:
                         ch_r "Hmph."
                     elif Girl == KittyX:
@@ -741,10 +741,10 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
 
         elif line == "no":
 
-            $ Girl.change_stat("love", 50, -5)
+            call change_Girl_stat(Girl, "love", 50, -5)
             if "dip" not in Girl.recent_history and "no_dip" not in Girl.recent_history:
-                $ Girl.change_stat("obedience", 50, 2)
-                $ Girl.change_stat("inhibition", 60, 1)
+                call change_Girl_stat(Girl, "obedience", 50, 2)
+                call change_Girl_stat(Girl, "inhibition", 60, 1)
             $ Girl.change_face("_angry", 1)
             if Girl == RogueX:
                 ch_r "Not interested, [RogueX.player_petname]. . ."
@@ -803,13 +803,13 @@ label Pool_Topless(Girl, temp_Girls=[]):
             ch_p "Looks like you might be missing something there. . ."
             $ Girl.change_face("_confused")
             if Girl != StormX:
-                $ Girl.change_stat("obedience", 60, 2)
-                $ Girl.change_stat("inhibition", 50, -2)
+                call change_Girl_stat(Girl, "obedience", 60, 2)
+                call change_Girl_stat(Girl, "inhibition", 50, -2)
                 Girl.voice ". . ."
                 $ Girl.change_face("_surprised",2,eyes = "_down")
-            $ Girl.change_stat("love", 80, 3)
-            $ Girl.change_stat("love", 90, 1)
-            $ Girl.change_stat("lust", 50, 2)
+            call change_Girl_stat(Girl, "love", 80, 3)
+            call change_Girl_stat(Girl, "love", 90, 1)
+            call change_Girl_stat(Girl, "lust", 50, 2)
             $ Count = 100
         "Say nothing":
             $ Girl.change_face("_surprised",2,eyes = "_down")
@@ -823,39 +823,39 @@ label Pool_Topless(Girl, temp_Girls=[]):
         $ Girl.change_face("_sly")
         $ Girl.outfit["bra"] = ""
         $ Girl.outfit["top"] = ""
-        $ Girl.change_stat("obedience", 60, 2)
-        $ Girl.change_stat("inhibition", 50, 4)
-        $ Girl.change_stat("inhibition", 90, 2)
-        $ Girl.change_stat("lust", 50, 5)
+        call change_Girl_stat(Girl, "obedience", 60, 2)
+        call change_Girl_stat(Girl, "inhibition", 50, 4)
+        call change_Girl_stat(Girl, "inhibition", 90, 2)
+        call change_Girl_stat(Girl, "lust", 50, 5)
         "She smiles and tosses her top over her head."
         call expression Girl.tag + "_First_Topless"
     elif approval_check(Girl, 500-Count,"I") or approval_check(Girl, 1200-Count):
         $ Girl.change_face("_sly", 1)
-        $ Girl.change_stat("obedience", 60, 2)
-        $ Girl.change_stat("inhibition", 50, 3)
-        $ Girl.change_stat("inhibition", 80, 2)
-        $ Girl.change_stat("lust", 50, 3)
+        call change_Girl_stat(Girl, "obedience", 60, 2)
+        call change_Girl_stat(Girl, "inhibition", 50, 3)
+        call change_Girl_stat(Girl, "inhibition", 80, 2)
+        call change_Girl_stat(Girl, "lust", 50, 3)
         "She smiles, and leaves the top how it is."
         call expression Girl.tag + "_First_Topless"
     else:
         if approval_check(Girl, 800-Count) or (Girl == StormX):
 
-            $ Girl.change_stat("obedience", 60, 2)
-            $ Girl.change_stat("inhibition", 70, 2)
-            $ Girl.change_stat("lust", 50, 1)
+            call change_Girl_stat(Girl, "obedience", 60, 2)
+            call change_Girl_stat(Girl, "inhibition", 70, 2)
+            call change_Girl_stat(Girl, "lust", 50, 1)
             $ Girl.change_face("_bemused",2)
         else:
 
-            $ Girl.change_stat("love", 70, -2)
-            $ Girl.change_stat("inhibition", 50, 1)
+            call change_Girl_stat(Girl, "love", 70, -2)
+            call change_Girl_stat(Girl, "inhibition", 50, 1)
             $ Girl.change_face("_angry",2)
         call expression Girl.tag + "_First_Topless" pass (1)
         $ Girl.top_pulled_up = 0
         "She tugs her top back into place."
         if Count <= 0:
-            $ Girl.change_stat("love", 70, -5)
-            $ Girl.change_stat("obedience", 60, -2)
-            $ Girl.change_stat("inhibition", 60, 2)
+            call change_Girl_stat(Girl, "love", 70, -5)
+            call change_Girl_stat(Girl, "obedience", 60, -2)
+            call change_Girl_stat(Girl, "inhibition", 60, 2)
             Girl.voice "You could have told me."
 
     $ Count = 0

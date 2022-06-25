@@ -14,7 +14,7 @@ layeredimage background:
 
     if (Player.location in bedrooms or Player.location in ["bg_classroom", "bg_dangerroom"]) and time_index == 4:
         At("images/backgrounds/[Player.location].png", lights_off)
-    elif Player.location in ["bg_storm", "bg_campus", "bg_pool"]:
+    elif Player.location in ["bg_storm", "bg_campus", "bg_pool", "bg_mall"]:
         "images/backgrounds/[Player.location]_[current_time].png"
     else:
         "images/backgrounds/[Player.location].png"
@@ -29,76 +29,78 @@ layeredimage foreground:
     if Player.location == "bg_classroom":
         "images/backgrounds/bg_classroom_front.png"
 
-    if Player.location == "bg_classroom" and time_index < 2 and weekday < 5:
+    if Player.location == "bg_classroom" and time_index < 2 and weekday < 5 and round > 15:
         "images/backgrounds/bg_classroom_pupils.png"
 
-transform stat_rising:
+transform stat_rising(x_position):
+    ypos 0.25 alpha 0.0
     choice:
         pause 0.6
-        xpos 0.75 ypos 0.25
+        xpos x_position alpha 1.0
     choice:
         pause 0.7
-        xpos 0.735 ypos 0.25
+        xpos x_position - 0.015 alpha 1.0
     choice:
         pause 0.8
-        xpos 0.765 ypos 0.25
+        xpos x_position + 0.015 alpha 1.0
     choice:
         pause 0.9
-        xpos 0.72 ypos 0.25
+        xpos x_position - 0.03 alpha 1.0
     choice:
         pause 1.0
-        xpos 0.78 ypos 0.25
+        xpos x_position + 0.03 alpha 1.0
     choice:
         pause 1.1
-        xpos 0.75 ypos 0.25
+        xpos x_position alpha 1.0
     choice:
         pause 1.2
-        xpos 0.735 ypos 0.25
+        xpos x_position - 0.015 alpha 1.0
     choice:
         pause 1.3
-        xpos 0.765 ypos 0.25
+        xpos x_position + 0.015 alpha 1.0
     choice:
         pause 1.4
-        xpos 0.72 ypos 0.25
+        xpos x_position - 0.03 alpha 1.0
     choice:
         pause 1.5
-        xpos 0.78 ypos 0.25
+        xpos x_position + 0.03 alpha 1.0
     parallel:
         linear 2.0 ypos 0.0
     parallel:
-        linear 2.0 alpha 0
+        linear 2.0 alpha 0.0
 
-transform stat_falling:
+transform stat_falling(x_position):
+    ypos 0.0 alpha 0.05
     choice:
         pause 0.6
-        xpos 0.75
+        xpos x_position alpha 1.0
     choice:
         pause 0.7
-        xpos 0.735
+        xpos x_position - 0.015 alpha 1.0
     choice:
         pause 0.8
-        xpos 0.765
+        xpos x_position + 0.015 alpha 1.0
     choice:
         pause 0.9
-        xpos 0.72
+        xpos x_position - 0.03 alpha 1.0
     choice:
         pause 1.0
-        xpos 0.78
+        xpos x_position + 0.03 alpha 1.0
     choice:
         pause 1.1
-        xpos 0.75
+        xpos x_position alpha 1.0
     choice:
         pause 1.2
-        xpos 0.735
+        xpos x_position - 0.015 alpha 1.0
     choice:
         pause 1.3
-        xpos 0.765
+        xpos x_position + 0.015 alpha 1.0
     choice:
         pause 1.4
-        xpos 0.72
+        xpos x_position - 0.03 alpha 1.0
     choice:
         pause 1.5
-        xpos 0.78
+        xpos x_position + 0.03 alpha 1.0
     parallel:
         linear 2.0 ypos 0.25
     parallel:

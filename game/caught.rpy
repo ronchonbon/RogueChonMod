@@ -59,7 +59,7 @@ label caught_changing(Girl):
         if D20 > 5:
             if not approval_check(Girl, 70*D20) and (not Girl.seen_pussy or not Girl.seen_breasts):
                 $ Girl.change_face("_surprised", brows = "_angry")
-                $ Girl.change_stat("love", 80, -50)
+                call change_Girl_stat(Girl, "love", 80, -50)
 
                 if not Girl.breasts_covered or not Girl.pussy_covered:
                     call expression Girl.tag + "_First_Bottomless" pass (1)
@@ -72,9 +72,9 @@ label caught_changing(Girl):
                 $ Girl.change_face("_surprised", 1,brows = "_confused")
 
                 if "exhibitionist" in Girl.traits:
-                    $ Girl.change_stat("lust", 200, 2*D20)
+                    call change_Girl_stat(Girl, "lust", 200, 2*D20)
                 else:
-                    $ Girl.change_stat("lust", 200, D20)
+                    call change_Girl_stat(Girl, "lust", 200, D20)
 
                 if D20 > 17:
                     call expression Girl.tag + "_First_Bottomless"
@@ -84,7 +84,7 @@ label caught_changing(Girl):
                 elif D20 > 14:
                     call expression Girl.tag + "_First_Topless"
 
-            $ Girl.change_stat("inhibition", 70, 20)
+            call change_Girl_stat(Girl, "inhibition", 70, 20)
 
             if Girl == RogueX:
                 ch_r "Hey! Learn to knock maybe?!"
@@ -102,20 +102,20 @@ label caught_changing(Girl):
             menu:
                 extend ""
                 "Sorry, I should have knocked.":
-                    $ Girl.change_stat("love", 50, 2)
-                    $ Girl.change_stat("love", 80, 4)
+                    call change_Girl_stat(Girl, "love", 50, 2)
+                    call change_Girl_stat(Girl, "love", 80, 4)
                 "And miss the view?":
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("obedience", 80, 2)
-                    $ Girl.change_stat("inhibition", 60, 1)
+                    call change_Girl_stat(Girl, "obedience", 50, 2)
+                    call change_Girl_stat(Girl, "obedience", 80, 2)
+                    call change_Girl_stat(Girl, "inhibition", 60, 1)
         else:
             if not approval_check(Girl, 800) and (not Girl.seen_pussy or not Girl.seen_breasts):
                 $ Girl.change_face("_angry", brows = "_confused")
-                $ Girl.change_stat("love", 80, -5)
+                call change_Girl_stat(Girl, "love", 80, -5)
             else:
                 $ Girl.change_face("_sexy", brows = "_confused")
 
-            $ Girl.change_stat("inhibition", 50, 3)
+            call change_Girl_stat(Girl, "inhibition", 50, 3)
 
             if Girl == RogueX:
                 ch_r "Well hello there, [Girl.player_petname]. Hoping to see something more?"
@@ -133,13 +133,13 @@ label caught_changing(Girl):
             menu:
                 extend ""
                 "Sorry, I should have knocked.":
-                    $ Girl.change_stat("love", 50, 2)
-                    $ Girl.change_stat("love", 80, 2)
+                    call change_Girl_stat(Girl, "love", 50, 2)
+                    call change_Girl_stat(Girl, "love", 80, 2)
                 "Well, to be honest. . .":
-                    $ Girl.change_stat("love", 50, -2)
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("obedience", 80, 2)
-                    $ Girl.change_stat("inhibition", 60, 1)
+                    call change_Girl_stat(Girl, "love", 50, -2)
+                    call change_Girl_stat(Girl, "obedience", 50, 2)
+                    call change_Girl_stat(Girl, "obedience", 80, 2)
+                    call change_Girl_stat(Girl, "inhibition", 60, 1)
 
         $ Girl.change_face("_sexy")
 
@@ -211,17 +211,17 @@ label caught_changing(Girl):
                 $ Girl.change_outfit("today")
             "Actually, you could leave them off.":
                 if approval_check(Girl, 350+(10*D20)):
-                    $ Girl.change_stat("love", 70, 3)
-                    $ Girl.change_stat("obedience", 50, 1)
-                    $ Girl.change_stat("obedience", 80, 2)
-                    $ Girl.change_stat("inhibition", 60, 2)
+                    call change_Girl_stat(Girl, "love", 70, 3)
+                    call change_Girl_stat(Girl, "obedience", 50, 1)
+                    call change_Girl_stat(Girl, "obedience", 80, 2)
+                    call change_Girl_stat(Girl, "inhibition", 60, 2)
                     $ Girl.change_face("_sexy")
 
                     ch_s "I suppose that could not hurt. . ."
 
                     $ Girl.set_temp_outfit()
                 else:
-                    $ Girl.change_stat("inhibition", 60, 2)
+                    call change_Girl_stat(Girl, "inhibition", 60, 2)
                     $ Girl.change_face("_smile")
 
                     ch_s "Ha! I would not want to be too much of a distraction."
@@ -230,67 +230,67 @@ label caught_changing(Girl):
             "Why not lose the rest too?":
                 $ Girl.change_face("_sexy")
                 if approval_check(Girl, 700):
-                    $ Girl.change_stat("love", 50, 1)
-                    $ Girl.change_stat("love", 70, 1)
-                    $ Girl.change_stat("obedience", 50, 1)
-                    $ Girl.change_stat("obedience", 80, 1)
-                    $ Girl.change_stat("inhibition", 70, 1)
+                    call change_Girl_stat(Girl, "love", 50, 1)
+                    call change_Girl_stat(Girl, "love", 70, 1)
+                    call change_Girl_stat(Girl, "obedience", 50, 1)
+                    call change_Girl_stat(Girl, "obedience", 80, 1)
+                    call change_Girl_stat(Girl, "inhibition", 70, 1)
 
                     ch_s "Oh, you are a naughty one. . ."
 
                     $ Girl.change_outfit("nude")
                     $ Girl.set_temp_outfit()
                 elif approval_check(Girl, 350+(10*D20)):
-                    $ Girl.change_stat("love", 80, 1)
-                    $ Girl.change_stat("obedience", 50, 1)
-                    $ Girl.change_stat("obedience", 80, 1)
-                    $ Girl.change_stat("inhibition", 70, 2)
+                    call change_Girl_stat(Girl, "love", 80, 1)
+                    call change_Girl_stat(Girl, "obedience", 50, 1)
+                    call change_Girl_stat(Girl, "obedience", 80, 1)
+                    call change_Girl_stat(Girl, "inhibition", 70, 2)
 
                     ch_s "I could at least. . . pause for a moment?"
 
                     $ Girl.set_temp_outfit()
                 else:
-                    $ Girl.change_stat("love", 60, 1)
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("inhibition", 70, 1)
+                    call change_Girl_stat(Girl, "love", 60, 1)
+                    call change_Girl_stat(Girl, "obedience", 50, 2)
+                    call change_Girl_stat(Girl, "inhibition", 70, 1)
 
                     ch_s "You are joking, [Girl.player_petname]."
 
                     $ Girl.change_outfit("today")
             "Don't, stay like that.":
-                $ Girl.change_stat("obedience", 80, 2)
+                call change_Girl_stat(Girl, "obedience", 80, 2)
 
                 if approval_check(Girl, 1100):
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("inhibition", 60, 1)
+                    call change_Girl_stat(Girl, "obedience", 50, 2)
+                    call change_Girl_stat(Girl, "inhibition", 60, 1)
                     $ Girl.change_face("_sexy")
 
                     ch_s "If you want. . ."
 
                     $ Girl.set_temp_outfit()
                 elif approval_check(Girl, 350+(10*D20)) and approval_check(Girl, 400, "O"):
-                    $ Girl.change_stat("love", 50, -2)
-                    $ Girl.change_stat("love", 80, -1)
-                    $ Girl.change_stat("obedience", 50, 2)
+                    call change_Girl_stat(Girl, "love", 50, -2)
+                    call change_Girl_stat(Girl, "love", 80, -1)
+                    call change_Girl_stat(Girl, "obedience", 50, 2)
                     $ Girl.change_face("_sexy", eyes = "_side")
 
                     ch_s ". . . Very well."
 
                     $ Girl.set_temp_outfit()
                 else:
-                    $ Girl.change_stat("love", 80, -2)
-                    $ Girl.change_stat("obedience", 50, -1)
+                    call change_Girl_stat(Girl, "love", 80, -2)
+                    call change_Girl_stat(Girl, "obedience", 50, -1)
                     $ Girl.change_face("_angry")
 
                     ch_s "You do not decide that, [Girl.player_petname]."
 
                     $ Girl.change_outfit("today")
             "Lose the rest of it.":
-                $ Girl.change_stat("obedience", 80, 2)
+                call change_Girl_stat(Girl, "obedience", 80, 2)
 
                 if approval_check(Girl, 1300):
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("inhibition", 60, 1)
+                    call change_Girl_stat(Girl, "obedience", 50, 2)
+                    call change_Girl_stat(Girl, "inhibition", 60, 1)
                     $ Girl.change_face("_sexy")
 
                     ch_s "Fine. . ."
@@ -298,10 +298,10 @@ label caught_changing(Girl):
                     $ Girl.change_outfit("nude")
                     $ Girl.set_temp_outfit()
                 elif approval_check(Girl,800) and approval_check(Girl, 500, "O"):
-                    $ Girl.change_stat("love", 50, -2)
-                    $ Girl.change_stat("love", 80, -2)
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("obedience", 80, 1)
+                    call change_Girl_stat(Girl, "love", 50, -2)
+                    call change_Girl_stat(Girl, "love", 80, -2)
+                    call change_Girl_stat(Girl, "obedience", 50, 2)
+                    call change_Girl_stat(Girl, "obedience", 80, 1)
                     $ Girl.change_face("_sexy", eyes = "_side")
 
                     ch_s ". . . Fine."
@@ -309,10 +309,10 @@ label caught_changing(Girl):
                     $ Girl.change_outfit("nude")
                     $ Girl.set_temp_outfit()
                 else:
-                    $ Girl.change_stat("love", 50, -2)
-                    $ Girl.change_stat("love", 80, -2)
-                    $ Girl.change_stat("obedience", 50, -2)
-                    $ Girl.change_stat("obedience", 80, 2)
+                    call change_Girl_stat(Girl, "love", 50, -2)
+                    call change_Girl_stat(Girl, "love", 80, -2)
+                    call change_Girl_stat(Girl, "obedience", 50, -2)
+                    call change_Girl_stat(Girl, "obedience", 80, 2)
                     $ Girl.change_face("_angry")
 
                     ch_s "I do not think that I will, [Girl.player_petname]."
@@ -370,11 +370,9 @@ label caught_showering(Girl):
             "You hear a sharp shuffling sound and the water gets cut off."
             "After several seconds and some more shuffling, [Girl.name] comes to the door."
 
-            $ Player.location = "bg_showerroom"
-
             $ Girl.change_face("_perplexed",2,mouth = "_normal")
 
-            call set_the_scene
+            call set_the_scene(location = "bg_showerroom")
 
             if Girl == RogueX:
                 ch_r "Sorry about that [Girl.player_petname], I was. . . just wrapping up my shower."
@@ -391,15 +389,13 @@ label caught_showering(Girl):
             elif Girl == JubesX:
                 ch_v "Oh, hey, [Girl.player_petname]. . . I was. . . what did you hear?"
 
-            $ Girl.change_stat("lust", 90, 5)
+            call change_Girl_stat(Girl, "lust", 90, 5)
 
             $ approval_bonus += 10
         else:
             "You hear the rustling of a towel and some knocking around, but after a few seconds [Girl.name] comes to the door."
 
-            $ Player.location = "bg_showerroom"
-
-            call set_the_scene
+            call set_the_scene("bg_showerroom")
 
             if Girl == RogueX:
                 ch_r "Sorry about that [Girl.player_petname], I was just wrapping up my shower."
@@ -454,16 +450,16 @@ label caught_showering(Girl):
                     "She grabs a towel and covers up."
 
                 $ Girl.change_face("_angry", 1)
-                $ Girl.change_stat("love", 80, -5)
+                call change_Girl_stat(Girl, "love", 80, -5)
             else:
                 if "exhibitionist" in Girl.traits:
-                    $ Girl.change_stat("lust", 90, (2*D20))
+                    call change_Girl_stat(Girl, "lust", 90, (2*D20))
                 else:
-                    $ Girl.change_stat("lust", 80, D20)
+                    call change_Girl_stat(Girl, "lust", 80, D20)
 
                 $ Girl.brows = "_confused"
 
-            $ Girl.change_stat("inhibition", 70, 3)
+            call change_Girl_stat(Girl, "inhibition", 70, 3)
 
             if Girl == RogueX:
                 ch_r "Hey! Learn to knock maybe?!"
@@ -483,27 +479,27 @@ label caught_showering(Girl):
             menu:
                 extend ""
                 "Sorry, I should have knocked.":
-                    $ Girl.change_stat("love", 50, 2)
+                    call change_Girl_stat(Girl, "love", 50, 2)
 
                     if Girl != StormX:
-                        $ Girl.change_stat("love", 80, 4)
+                        call change_Girl_stat(Girl, "love", 80, 4)
                 "And miss the view?":
-                    $ Girl.change_stat("obedience", 50, 2)
+                    call change_Girl_stat(Girl, "obedience", 50, 2)
 
                     if Girl != StormX:
-                        $ Girl.change_stat("obedience", 80, 2)
-                        $ Girl.change_stat("inhibition", 60, 1)
+                        call change_Girl_stat(Girl, "obedience", 80, 2)
+                        call change_Girl_stat(Girl, "inhibition", 60, 1)
                 "Why, would it have made a difference?":
                     if not approval_check(Girl, 500,"I"):
-                        $ Girl.change_stat("love", 50, -3)
-                        $ Girl.change_stat("obedience", 50, 2)
+                        call change_Girl_stat(Girl, "love", 50, -3)
+                        call change_Girl_stat(Girl, "obedience", 50, 2)
 
-                    $ Girl.change_stat("obedience", 80, 2)
-                    $ Girl.change_stat("inhibition", 60, 2)
+                    call change_Girl_stat(Girl, "obedience", 80, 2)
+                    call change_Girl_stat(Girl, "inhibition", 60, 2)
                 "It's not as if you're leaving that much to the imagination. . ." if Girl == EmmaX:
-                    $ EmmaX.change_stat("obedience", 50, 2)
-                    $ EmmaX.change_stat("obedience", 80, 2)
-                    $ EmmaX.change_stat("inhibition", 60, 2)
+                    call change_Girl_stat(EmmaX, "obedience", 50, 2)
+                    call change_Girl_stat(EmmaX, "obedience", 80, 2)
+                    call change_Girl_stat(EmmaX, "inhibition", 60, 2)
         else:
             if Girl == StormX:
                 $ Girl.outfit["face_outer_accessory"] = "_towel"
@@ -516,11 +512,11 @@ label caught_showering(Girl):
 
             if not approval_check(Girl, 1100) and (not Girl.seen_pussy or not Girl.seen_breasts):
                 $ Girl.change_face("_angry", brows = "_confused")
-                $ Girl.change_stat("love", 80, -5)
+                call change_Girl_stat(Girl, "love", 80, -5)
             else:
                 $ Girl.change_face("_sexy", brows = "_confused")
 
-            $ Girl.change_stat("inhibition", 50, 3)
+            call change_Girl_stat(Girl, "inhibition", 50, 3)
 
             if Girl == RogueX:
                 ch_r "Well hello there, [RogueX.player_petname]. Hoping to see something more?"
@@ -540,30 +536,30 @@ label caught_showering(Girl):
             menu:
                 extend ""
                 "Sorry, I should have knocked.":
-                    $ Girl.change_stat("love", 50, 2)
+                    call change_Girl_stat(Girl, "love", 50, 2)
 
                     if Girl != StormX:
-                        $ Girl.change_stat("love", 80, 2)
+                        call change_Girl_stat(Girl, "love", 80, 2)
                 "Well, to be honest. . .":
-                    $ Girl.change_stat("love", 50, -2)
-                    $ Girl.change_stat("obedience", 50, 2)
+                    call change_Girl_stat(Girl, "love", 50, -2)
+                    call change_Girl_stat(Girl, "obedience", 50, 2)
 
                     if Girl != StormX:
-                        $ Girl.change_stat("obedience", 80, 2)
-                        $ Girl.change_stat("inhibition", 60, 1)
+                        call change_Girl_stat(Girl, "obedience", 80, 2)
+                        call change_Girl_stat(Girl, "inhibition", 60, 1)
                 "I still like the view. . ." if Girl != EmmaX:
                     if approval_check(Girl, 500,"I"):
-                        $ Girl.change_stat("love", 80, 1)
+                        call change_Girl_stat(Girl, "love", 80, 1)
                     else:
-                        $ Girl.change_stat("love", 50, -1)
-                        $ Girl.change_stat("obedience", 50, 2)
+                        call change_Girl_stat(Girl, "love", 50, -1)
+                        call change_Girl_stat(Girl, "obedience", 50, 2)
 
-                    $ Girl.change_stat("obedience", 80, 2)
-                    $ Girl.change_stat("inhibition", 60, 3)
+                    call change_Girl_stat(Girl, "obedience", 80, 2)
+                    call change_Girl_stat(Girl, "inhibition", 60, 3)
                 "It's not as if you're leaving that much to the imagination. . ." if Girl == EmmaX:
-                    $ EmmaX.change_stat("obedience", 50, 2)
-                    $ EmmaX.change_stat("obedience", 80, 2)
-                    $ EmmaX.change_stat("inhibition", 60, 2)
+                    call change_Girl_stat(EmmaX, "obedience", 50, 2)
+                    call change_Girl_stat(EmmaX, "obedience", 80, 2)
+                    call change_Girl_stat(EmmaX, "inhibition", 60, 2)
 
         $ Girl.change_face("_sexy")
 
@@ -720,7 +716,7 @@ label caught_masturbating(Girl):
             $ line = "leave"
 
     if line == "leave":
-        $ Girl.change_stat("lust", 80, 20)
+        call change_Girl_stat(Girl, "lust", 80, 20)
 
         "You leave [Girl.name] to her business and slip out."
 
@@ -1129,38 +1125,38 @@ label caught_having_sex(Girl):
         ch_x "Well what have you to say for yourselves?"
         "Sorry sir, won't do it again.":
             if RogueX.location == Player.location and RogueX.event_counter["caught"] < 3:
-                $ RogueX.change_stat("love", 70, 20)
-                $ RogueX.change_stat("inhibition", 50, -15)
-                $ RogueX.change_stat("love", 90, 5)
+                call change_Girl_stat(RogueX, "love", 70, 20)
+                call change_Girl_stat(RogueX, "inhibition", 50, -15)
+                call change_Girl_stat(RogueX, "love", 90, 5)
 
             if KittyX.location == Player.location and KittyX.event_counter["caught"] < 3:
-                $ KittyX.change_stat("love", 70, 10)
-                $ KittyX.change_stat("inhibition", 30, -25)
-                $ KittyX.change_stat("inhibition", 50, -10)
+                call change_Girl_stat(KittyX, "love", 70, 10)
+                call change_Girl_stat(KittyX, "inhibition", 30, -25)
+                call change_Girl_stat(KittyX, "inhibition", 50, -10)
 
             if EmmaX.location == Player.location and EmmaX.event_counter["caught"] < 3:
-                $ EmmaX.change_stat("love", 70, 5)
-                $ EmmaX.change_stat("inhibition", 30, -15)
+                call change_Girl_stat(EmmaX, "love", 70, 5)
+                call change_Girl_stat(EmmaX, "inhibition", 30, -15)
 
             if LauraX.location == Player.location and LauraX.event_counter["caught"] < 3:
-                $ LauraX.change_stat("inhibition", 30, -20)
-                $ LauraX.change_stat("inhibition", 50, -10)
+                call change_Girl_stat(LauraX, "inhibition", 30, -20)
+                call change_Girl_stat(LauraX, "inhibition", 50, -10)
 
             if JeanX.location == Player.location and JeanX.event_counter["caught"] < 3:
-                $ JeanX.change_stat("obedience", 30, -20)
-                $ JeanX.change_stat("obedience", 50, -10)
+                call change_Girl_stat(JeanX, "obedience", 30, -20)
+                call change_Girl_stat(JeanX, "obedience", 50, -10)
 
             if StormX.location == Player.location and StormX.event_counter["caught"] < 3:
-                $ StormX.change_stat("love", 70, 5)
-                $ StormX.change_stat("inhibition", 30, -5)
+                call change_Girl_stat(StormX, "love", 70, 5)
+                call change_Girl_stat(StormX, "inhibition", 30, -5)
 
             if JubesX.location == Player.location and JubesX.event_counter["caught"] < 3:
-                $ JubesX.change_stat("love", 70, 10)
-                $ JubesX.change_stat("obedience", 70, 5)
-                $ JubesX.change_stat("inhibition", 30, -10)
-                $ JubesX.change_stat("inhibition", 50, -5)
+                call change_Girl_stat(JubesX, "love", 70, 10)
+                call change_Girl_stat(JubesX, "obedience", 70, 5)
+                call change_Girl_stat(JubesX, "inhibition", 30, -10)
+                call change_Girl_stat(JubesX, "inhibition", 50, -5)
 
-            $ Girl.change_stat("obedience", 50, -5)
+            call change_Girl_stat(Girl, "obedience", 50, -5)
 
             call change_Xavier_face("_happy")
 
@@ -1193,40 +1189,40 @@ label caught_having_sex(Girl):
         "Just having a little fun, right [Girl.petname]?":
             $ Girl.name_check()
             $ Girl.change_face("_bemused")
-            $ Girl.change_stat("lust", 90, 5)
+            call change_Girl_stat(Girl, "lust", 90, 5)
 
             if RogueX.location == Player.location and RogueX.event_counter["caught"] < 5:
-                $ RogueX.change_stat("love", 70, 20)
-                $ RogueX.change_stat("love", 90, 10)
+                call change_Girl_stat(RogueX, "love", 70, 20)
+                call change_Girl_stat(RogueX, "love", 90, 10)
 
             if KittyX.location == Player.location and KittyX.event_counter["caught"] < 5:
-                $ KittyX.change_stat("inhibition", 90, 10)
-                $ KittyX.change_stat("love", 90, 10)
+                call change_Girl_stat(KittyX, "inhibition", 90, 10)
+                call change_Girl_stat(KittyX, "love", 90, 10)
 
             if EmmaX.location == Player.location and EmmaX.event_counter["caught"] < 5:
-                $ EmmaX.change_stat("inhibition", 90, 10)
-                $ EmmaX.change_stat("love", 90, 10)
+                call change_Girl_stat(EmmaX, "inhibition", 90, 10)
+                call change_Girl_stat(EmmaX, "love", 90, 10)
 
             if LauraX.location == Player.location and LauraX.event_counter["caught"] < 5:
-                $ LauraX.change_stat("inhibition", 90, 10)
-                $ LauraX.change_stat("obedience", 90, 5)
-                $ LauraX.change_stat("love", 90, 5)
+                call change_Girl_stat(LauraX, "inhibition", 90, 10)
+                call change_Girl_stat(LauraX, "obedience", 90, 5)
+                call change_Girl_stat(LauraX, "love", 90, 5)
 
             if JeanX.location == Player.location and JeanX.event_counter["caught"] < 5:
-                $ JeanX.change_stat("inhibition", 200, 10)
-                $ JeanX.change_stat("obedience", 50, 5)
-                $ JeanX.change_stat("obedience", 90, 5)
-                $ JeanX.change_stat("love", 90, 5)
+                call change_Girl_stat(JeanX, "inhibition", 200, 10)
+                call change_Girl_stat(JeanX, "obedience", 50, 5)
+                call change_Girl_stat(JeanX, "obedience", 90, 5)
+                call change_Girl_stat(JeanX, "love", 90, 5)
 
             if StormX.location == Player.location and StormX.event_counter["caught"] < 5:
-                $ StormX.change_stat("inhibition", 90, 15)
-                $ StormX.change_stat("obedience", 50, 5)
-                $ StormX.change_stat("love", 90, 5)
+                call change_Girl_stat(StormX, "inhibition", 90, 15)
+                call change_Girl_stat(StormX, "obedience", 50, 5)
+                call change_Girl_stat(StormX, "love", 90, 5)
 
             if JubesX.location == Player.location and JubesX.event_counter["caught"] < 5:
-                $ JubesX.change_stat("inhibition", 90, 5)
-                $ JubesX.change_stat("obedience", 80, 5)
-                $ JubesX.change_stat("love", 90, 10)
+                call change_Girl_stat(JubesX, "inhibition", 90, 5)
+                call change_Girl_stat(JubesX, "obedience", 80, 5)
+                call change_Girl_stat(JubesX, "love", 90, 10)
 
             call change_Xavier_face("_angry")
 
@@ -1240,37 +1236,37 @@ label caught_having_sex(Girl):
                 ch_x "I'm halving your daily stipend for [punishment_days] days."
 
             if RogueX.location == Player.location and RogueX.event_counter["caught"] < 3:
-                $ RogueX.change_stat("obedience", 50, 20)
-                $ RogueX.change_stat("obedience", 90, 20)
-                $ RogueX.change_stat("inhibition", 30, -20)
-                $ RogueX.change_stat("inhibition", 50, -10)
+                call change_Girl_stat(RogueX, "obedience", 50, 20)
+                call change_Girl_stat(RogueX, "obedience", 90, 20)
+                call change_Girl_stat(RogueX, "inhibition", 30, -20)
+                call change_Girl_stat(RogueX, "inhibition", 50, -10)
 
             if KittyX.location == Player.location and KittyX.event_counter["caught"] < 3:
-                $ KittyX.change_stat("obedience", 50, 20)
-                $ KittyX.change_stat("obedience", 90, 20)
-                $ KittyX.change_stat("inhibition", 30, -20)
+                call change_Girl_stat(KittyX, "obedience", 50, 20)
+                call change_Girl_stat(KittyX, "obedience", 90, 20)
+                call change_Girl_stat(KittyX, "inhibition", 30, -20)
 
             if EmmaX.location == Player.location and EmmaX.event_counter["caught"] < 3:
-                $ EmmaX.change_stat("obedience", 50, 20)
-                $ EmmaX.change_stat("obedience", 90, 20)
-                $ EmmaX.change_stat("inhibition", 30, -20)
+                call change_Girl_stat(EmmaX, "obedience", 50, 20)
+                call change_Girl_stat(EmmaX, "obedience", 90, 20)
+                call change_Girl_stat(EmmaX, "inhibition", 30, -20)
 
             if LauraX.location == Player.location and LauraX.event_counter["caught"] < 3:
-                $ LauraX.change_stat("obedience", 50, 20)
-                $ LauraX.change_stat("obedience", 90, 20)
-                $ LauraX.change_stat("inhibition", 30, -20)
+                call change_Girl_stat(LauraX, "obedience", 50, 20)
+                call change_Girl_stat(LauraX, "obedience", 90, 20)
+                call change_Girl_stat(LauraX, "inhibition", 30, -20)
 
             if JeanX.location == Player.location and JeanX.event_counter["caught"] < 3:
-                $ JeanX.change_stat("obedience", 50, 20)
-                $ JeanX.change_stat("obedience", 90, 20)
+                call change_Girl_stat(JeanX, "obedience", 50, 20)
+                call change_Girl_stat(JeanX, "obedience", 90, 20)
 
             if StormX.location == Player.location and StormX.event_counter["caught"] < 3:
-                $ StormX.change_stat("obedience", 50, 20)
-                $ StormX.change_stat("inhibition", 30, -10)
+                call change_Girl_stat(StormX, "obedience", 50, 20)
+                call change_Girl_stat(StormX, "inhibition", 30, -10)
 
             if JubesX.location == Player.location and JubesX.event_counter["caught"] < 3:
-                $ JubesX.change_stat("obedience", 70, 10)
-                $ JubesX.change_stat("inhibition", 30, -10)
+                call change_Girl_stat(JubesX, "obedience", 70, 10)
+                call change_Girl_stat(JubesX, "inhibition", 30, -10)
 
             ch_x "I've had enough of you, begone."
         "Just this. . . Plan Omega, [RogueX.name]." if Girl == RogueX and Player.level >= 5:
@@ -1289,41 +1285,41 @@ label caught_having_sex(Girl):
             $ Plan = JubesX
         "You can suck it, old man.":
             $ Girl.change_face("_surprised")
-            $ Girl.change_stat("lust", 90, 10)
+            call change_Girl_stat(Girl, "lust", 90, 10)
 
             if RogueX.location == Player.location and RogueX.event_counter["caught"] < 3:
-                $ RogueX.change_stat("obedience", 50, 20)
-                $ RogueX.change_stat("obedience", 90, 40)
+                call change_Girl_stat(RogueX, "obedience", 50, 20)
+                call change_Girl_stat(RogueX, "obedience", 90, 40)
 
             if KittyX.location == Player.location and KittyX.event_counter["caught"] < 3:
-                $ KittyX.change_stat("obedience", 50, 25)
-                $ KittyX.change_stat("obedience", 90, 40)
+                call change_Girl_stat(KittyX, "obedience", 50, 25)
+                call change_Girl_stat(KittyX, "obedience", 90, 40)
 
             if EmmaX.location == Player.location and EmmaX.event_counter["caught"] < 3:
-                $ EmmaX.change_stat("love", 90, 5)
-                $ EmmaX.change_stat("obedience", 50, 20)
-                $ EmmaX.change_stat("obedience", 90, 30)
+                call change_Girl_stat(EmmaX, "love", 90, 5)
+                call change_Girl_stat(EmmaX, "obedience", 50, 20)
+                call change_Girl_stat(EmmaX, "obedience", 90, 30)
 
             if LauraX.location == Player.location and LauraX.event_counter["caught"] < 3:
-                $ LauraX.change_stat("love", 90, 5)
-                $ LauraX.change_stat("obedience", 50, 25)
-                $ LauraX.change_stat("obedience", 90, 30)
+                call change_Girl_stat(LauraX, "love", 90, 5)
+                call change_Girl_stat(LauraX, "obedience", 50, 25)
+                call change_Girl_stat(LauraX, "obedience", 90, 30)
 
             if JeanX.location == Player.location and JeanX.event_counter["caught"] < 3:
-                $ JeanX.change_stat("love", 50, 5)
-                $ JeanX.change_stat("love", 90, 10)
-                $ JeanX.change_stat("obedience", 50, 25)
-                $ JeanX.change_stat("obedience", 90, 30)
+                call change_Girl_stat(JeanX, "love", 50, 5)
+                call change_Girl_stat(JeanX, "love", 90, 10)
+                call change_Girl_stat(JeanX, "obedience", 50, 25)
+                call change_Girl_stat(JeanX, "obedience", 90, 30)
 
             if StormX.location == Player.location and StormX.event_counter["caught"] < 3:
-                $ StormX.change_stat("love", 90, -5)
-                $ StormX.change_stat("obedience", 50, 20)
-                $ StormX.change_stat("obedience", 90, 30)
+                call change_Girl_stat(StormX, "love", 90, -5)
+                call change_Girl_stat(StormX, "obedience", 50, 20)
+                call change_Girl_stat(StormX, "obedience", 90, 30)
 
             if JubesX.location == Player.location and JubesX.event_counter["caught"] < 3:
-                $ JubesX.change_stat("love", 80, 10)
-                $ JubesX.change_stat("obedience", 50, 25)
-                $ JubesX.change_stat("obedience", 90, 30)
+                call change_Girl_stat(JubesX, "love", 80, 10)
+                call change_Girl_stat(JubesX, "obedience", 50, 25)
+                call change_Girl_stat(JubesX, "obedience", 90, 30)
 
             call change_Xavier_face("_angry")
 
@@ -1338,48 +1334,48 @@ label caught_having_sex(Girl):
 
             if RogueX.location == Player.location and RogueX.event_counter["caught"] < 3:
                 if RogueX.inhibition > 500:
-                    $ RogueX.change_stat("inhibition", 90, 15)
+                    call change_Girl_stat(RogueX, "inhibition", 90, 15)
 
-                $ RogueX.change_stat("inhibition", 30, -20)
-                $ RogueX.change_stat("inhibition", 50, -10)
+                call change_Girl_stat(RogueX, "inhibition", 30, -20)
+                call change_Girl_stat(RogueX, "inhibition", 50, -10)
 
             if KittyX.location == Player.location and KittyX.event_counter["caught"] < 3:
                 if KittyX.inhibition > 500:
-                    $ KittyX.change_stat("inhibition", 90, 15)
+                    call change_Girl_stat(KittyX, "inhibition", 90, 15)
 
-                $ KittyX.change_stat("inhibition", 30, -20)
-                $ KittyX.change_stat("inhibition", 50, -10)
+                call change_Girl_stat(KittyX, "inhibition", 30, -20)
+                call change_Girl_stat(KittyX, "inhibition", 50, -10)
 
             if EmmaX.location == Player.location and EmmaX.event_counter["caught"] < 3:
                 if EmmaX.inhibition > 500:
-                    $ EmmaX.change_stat("inhibition", 90, 15)
+                    call change_Girl_stat(EmmaX, "inhibition", 90, 15)
 
-                $ EmmaX.change_stat("inhibition", 30, -20)
-                $ EmmaX.change_stat("inhibition", 50, -10)
+                call change_Girl_stat(EmmaX, "inhibition", 30, -20)
+                call change_Girl_stat(EmmaX, "inhibition", 50, -10)
 
             if LauraX.location == Player.location and LauraX.event_counter["caught"] < 3:
                 if LauraX.inhibition > 500:
-                    $ LauraX.change_stat("inhibition", 90, 15)
+                    call change_Girl_stat(LauraX, "inhibition", 90, 15)
 
-                $ LauraX.change_stat("inhibition", 30, -15)
-                $ LauraX.change_stat("inhibition", 50, -10)
+                call change_Girl_stat(LauraX, "inhibition", 30, -15)
+                call change_Girl_stat(LauraX, "inhibition", 50, -10)
 
             if JeanX.location == Player.location and JeanX.event_counter["caught"] < 3:
-                $ JeanX.change_stat("inhibition", 90, 15)
+                call change_Girl_stat(JeanX, "inhibition", 90, 15)
 
             if StormX.location == Player.location and StormX.event_counter["caught"] < 3:
                 if StormX.inhibition > 500:
-                    $ StormX.change_stat("inhibition", 90, 5)
+                    call change_Girl_stat(StormX, "inhibition", 90, 5)
 
-                $ StormX.change_stat("inhibition", 30, -10)
-                $ StormX.change_stat("inhibition", 50, -5)
+                call change_Girl_stat(StormX, "inhibition", 30, -10)
+                call change_Girl_stat(StormX, "inhibition", 50, -5)
 
             if JubesX.location == Player.location and JubesX.event_counter["caught"] < 3:
                 if JubesX.inhibition > 500:
-                    $ JubesX.change_stat("inhibition", 90, 15)
+                    call change_Girl_stat(JubesX, "inhibition", 90, 15)
 
-                $ JubesX.change_stat("inhibition", 30, -15)
-                $ JubesX.change_stat("inhibition", 50, -10)
+                call change_Girl_stat(JubesX, "inhibition", 30, -15)
+                call change_Girl_stat(JubesX, "inhibition", 50, -10)
 
             ch_x "Now get out of my sight."
 
@@ -1447,11 +1443,11 @@ label caught_having_sex(Girl):
             menu:
                 "Dammit [Plan.name]. . .":
                     $ Plan.change_face("_angry")
-                    $ Plan.change_stat("obedience", 50, 5)
-                    $ Plan.change_stat("love", 90, -5)
+                    call change_Girl_stat(Plan, "obedience", 50, 5)
+                    call change_Girl_stat(Plan, "love", 90, -5)
                 "Yeah, I guess you're right. . .":
                     $ Plan.change_face("_bemused")
-                    $ Plan.change_stat("love", 90, 5)
+                    call change_Girl_stat(Plan, "love", 90, 5)
         else:
             $ Plan.change_face("_confused")
 
@@ -1509,39 +1505,39 @@ label caught_having_sex(Girl):
             ch_x "I'm halving your daily stipend for [punishment_days] days."
 
             if RogueX.location == Player.location and RogueX.event_counter["caught"] < 3:
-                $ RogueX.change_stat("obedience", 50, 10)
-                $ RogueX.change_stat("obedience", 90, 10)
-                $ RogueX.change_stat("inhibition", 30, -10)
-                $ RogueX.change_stat("inhibition", 50, -5)
+                call change_Girl_stat(RogueX, "obedience", 50, 10)
+                call change_Girl_stat(RogueX, "obedience", 90, 10)
+                call change_Girl_stat(RogueX, "inhibition", 30, -10)
+                call change_Girl_stat(RogueX, "inhibition", 50, -5)
 
             if KittyX.location == Player.location and KittyX.event_counter["caught"] < 3:
-                $ KittyX.change_stat("obedience", 50, 10)
-                $ KittyX.change_stat("obedience", 90, 10)
-                $ KittyX.change_stat("inhibition", 30, -10)
-                $ KittyX.change_stat("inhibition", 50, -5)
+                call change_Girl_stat(KittyX, "obedience", 50, 10)
+                call change_Girl_stat(KittyX, "obedience", 90, 10)
+                call change_Girl_stat(KittyX, "inhibition", 30, -10)
+                call change_Girl_stat(KittyX, "inhibition", 50, -5)
 
             if EmmaX.location == Player.location and EmmaX.event_counter["caught"] < 3:
-                $ EmmaX.change_stat("obedience", 50, 10)
-                $ EmmaX.change_stat("inhibition", 50, -5)
+                call change_Girl_stat(EmmaX, "obedience", 50, 10)
+                call change_Girl_stat(EmmaX, "inhibition", 50, -5)
 
             if LauraX.location == Player.location and LauraX.event_counter["caught"] < 3:
-                $ LauraX.change_stat("obedience", 50, 10)
-                $ LauraX.change_stat("obedience", 90, 10)
-                $ LauraX.change_stat("inhibition", 30, -10)
-                $ LauraX.change_stat("inhibition", 50, -5)
+                call change_Girl_stat(LauraX, "obedience", 50, 10)
+                call change_Girl_stat(LauraX, "obedience", 90, 10)
+                call change_Girl_stat(LauraX, "inhibition", 30, -10)
+                call change_Girl_stat(LauraX, "inhibition", 50, -5)
 
             if JeanX.location == Player.location and JeanX.event_counter["caught"] < 3:
-                $ JeanX.change_stat("obedience", 50, -10)
+                call change_Girl_stat(JeanX, "obedience", 50, -10)
 
             if StormX.location == Player.location and StormX.event_counter["caught"] < 3:
-                $ StormX.change_stat("obedience", 50, 10)
-                $ StormX.change_stat("inhibition", 50, -5)
+                call change_Girl_stat(StormX, "obedience", 50, 10)
+                call change_Girl_stat(StormX, "inhibition", 50, -5)
 
             if JubesX.location == Player.location and JubesX.event_counter["caught"] < 3:
-                $ JubesX.change_stat("obedience", 50, 5)
-                $ JubesX.change_stat("obedience", 90, 5)
-                $ JubesX.change_stat("inhibition", 30, -8)
-                $ JubesX.change_stat("inhibition", 50, -2)
+                call change_Girl_stat(JubesX, "obedience", 50, 5)
+                call change_Girl_stat(JubesX, "obedience", 90, 5)
+                call change_Girl_stat(JubesX, "inhibition", 30, -8)
+                call change_Girl_stat(JubesX, "inhibition", 50, -2)
 
         ch_x "I've had enough of you, begone."
 
@@ -1623,7 +1619,7 @@ label caught_having_sex(Girl):
         ch_x "Emma, I'd like you to stay after for a brief discussion about \"boundaries\". . ."
 
         if EmmaX.event_counter["caught"]:
-            $ EmmaX.change_stat("love", 90, -5)
+            call change_Girl_stat(EmmaX, "love", 90, -5)
             $ Girl.change_face("_angry", eyes = "_closed")
 
             ch_e "Not again. . ."
@@ -1635,7 +1631,7 @@ label caught_having_sex(Girl):
             ch_x "Ororo, I'd like you to stay after for a brief discussion about \"boundaries\". . ."
 
         if StormX.event_counter["caught"]:
-            $ StormX.change_stat("love", 90, -5)
+            call change_Girl_stat(StormX, "love", 90, -5)
             $ Girl.change_face("_angry", eyes = "_closed")
 
             ch_s "Again? . ."
@@ -1739,11 +1735,11 @@ label execute_plan(Girl):
             ch_x "Oh, not again."
             ch_x "What is it you want this time?"
 
-            $ RogueX.change_stat("obedience", 80, 3)
-            $ RogueX.change_stat("inhibition", 70, 1)
+            call change_Girl_stat(RogueX, "obedience", 80, 3)
+            call change_Girl_stat(RogueX, "inhibition", 70, 1)
         else:
-            $ RogueX.change_stat("obedience", 50, 40)
-            $ RogueX.change_stat("inhibition", 70, 20)
+            call change_Girl_stat(RogueX, "obedience", 50, 40)
+            call change_Girl_stat(RogueX, "inhibition", 70, 20)
 
         ch_r "Well, [RogueX.player_petname], what would you like to do with this opportunity?"
         ch_r "I think we'll only get three tries at this. . ."
@@ -1760,14 +1756,14 @@ label execute_plan(Girl):
             ch_x "Oh, not again."
             ch_x "What is it you want this time?"
 
-            $ KittyX.change_stat("obedience", 80, 3)
-            $ KittyX.change_stat("inhibition", 70, 1)
+            call change_Girl_stat(KittyX, "obedience", 80, 3)
+            call change_Girl_stat(KittyX, "inhibition", 70, 1)
         else:
             ch_x "What is the meaning of this? Unhand me!"
             "You pull out the photo you found earlier in his study."
 
-            $ KittyX.change_stat("obedience", 50, 40)
-            $ KittyX.change_stat("inhibition", 70, 30)
+            call change_Girl_stat(KittyX, "obedience", 50, 40)
+            call change_Girl_stat(KittyX, "inhibition", 70, 30)
 
             ch_p "I have here a rather. . . compromising photo of you and Mystique."
             ch_p "I was thinking maybe you could cut me a little slack around here."
@@ -1777,8 +1773,8 @@ label execute_plan(Girl):
             ch_x "Very well. . . I'll forget about your punishment."
             ch_p "Oh, I think we can do a bit better than that. . ."
 
-            $ KittyX.change_stat("obedience", 200, 30)
-            $ KittyX.change_stat("inhibition", 200, 10)
+            call change_Girl_stat(KittyX, "obedience", 200, 30)
+            call change_Girl_stat(KittyX, "inhibition", 200, 10)
 
         ch_k "Well, [KittyX.player_petname], what should we ask for?"
     elif Girl in [EmmaX, JeanX]:
@@ -1791,13 +1787,13 @@ label execute_plan(Girl):
         if (Girl == EmmaX and "Psi" in Player.traits) or (Girl == JeanX and "Alpha" in Player.traits):
             ch_x "Oh, not again. . ."
 
-            $ Girl.change_stat("obedience", 80, 3)
-            $ Girl.change_stat("inhibition", 80, 1)
+            call change_Girl_stat(Girl, "obedience", 80, 3)
+            call change_Girl_stat(Girl, "inhibition", 80, 1)
         else:
-            $ Girl.change_stat("obedience", 50, 40)
-            $ Girl.change_stat("inhibition", 70, 30)
-            $ Girl.change_stat("obedience", 200, 30)
-            $ Girl.change_stat("inhibition", 200, 10)
+            call change_Girl_stat(Girl, "obedience", 50, 40)
+            call change_Girl_stat(Girl, "inhibition", 70, 30)
+            call change_Girl_stat(Girl, "obedience", 200, 30)
+            call change_Girl_stat(Girl, "inhibition", 200, 10)
 
         Girl.voice "Well, [Girl.player_petname], what should we ask for?"
     elif Girl == LauraX:
@@ -1810,8 +1806,8 @@ label execute_plan(Girl):
 
             ch_x "What is it you want this time?"
 
-            $ LauraX.change_stat("obedience", 80, 3)
-            $ LauraX.change_stat("inhibition", 80, 1)
+            call change_Girl_stat(LauraX, "obedience", 80, 3)
+            call change_Girl_stat(LauraX, "inhibition", 80, 1)
         else:
             ch_x "What is the meaning of this? Unhand me!"
             ch_p "[LauraX.name] and I were talking, and it seems like neither of us appreciates you bothering us."
@@ -1827,10 +1823,10 @@ label execute_plan(Girl):
             ch_x "Very well. . . I'll forget about your punishment."
             ch_p "Oh, I think we can do a bit better than that. . ."
 
-            $ LauraX.change_stat("obedience", 50, 40)
-            $ LauraX.change_stat("inhibition", 80, 30)
-            $ LauraX.change_stat("obedience", 200, 30)
-            $ LauraX.change_stat("inhibition", 200, 10)
+            call change_Girl_stat(LauraX, "obedience", 50, 40)
+            call change_Girl_stat(LauraX, "inhibition", 80, 30)
+            call change_Girl_stat(LauraX, "obedience", 200, 30)
+            call change_Girl_stat(LauraX, "inhibition", 200, 10)
 
         ch_l "Well, [LauraX.player_petname], what should we ask for?"
     elif Girl == StormX:
@@ -1846,14 +1842,14 @@ label execute_plan(Girl):
             ch_x "Oh, not this again."
             ch_x "What is it you want this time?"
 
-            $ StormX.change_stat("obedience", 80, 3)
-            $ StormX.change_stat("inhibition", 70, 1)
+            call change_Girl_stat(StormX, "obedience", 80, 3)
+            call change_Girl_stat(StormX, "inhibition", 70, 1)
         else:
             ch_x "What is the meaning of this? Unhand me!"
             "You pull out the files you found earlier in his study."
 
-            $ StormX.change_stat("obedience", 50, 40)
-            $ StormX.change_stat("inhibition", 70, 30)
+            call change_Girl_stat(StormX, "obedience", 50, 40)
+            call change_Girl_stat(StormX, "inhibition", 70, 30)
 
             ch_p "I have here some rather. . . questionable \"medical\" files."
             ch_p "I was thinking maybe you could cut me a little slack around here."
@@ -1862,8 +1858,8 @@ label execute_plan(Girl):
             ch_x "Very well. . . I'll forget about your punishment."
             ch_p "Oh, I think we can do a bit better than that. . ."
 
-            $ StormX.change_stat("obedience", 200, 30)
-            $ StormX.change_stat("inhibition", 200, 10)
+            call change_Girl_stat(StormX, "obedience", 200, 30)
+            call change_Girl_stat(StormX, "inhibition", 200, 10)
 
         ch_s "Well, [StormX.player_petname], what should we ask for?"
     elif Girl == JubesX:
@@ -1880,21 +1876,21 @@ label execute_plan(Girl):
             ch_x "Oh, not again."
             ch_x "What is it you want this time?"
 
-            $ JubesX.change_stat("obedience", 80, 3)
-            $ JubesX.change_stat("inhibition", 70, 1)
+            call change_Girl_stat(JubesX, "obedience", 80, 3)
+            call change_Girl_stat(JubesX, "inhibition", 70, 1)
         else:
             ch_x "What is the meaning of this? Unhand me!"
 
-            $ JubesX.change_stat("inhibition", 70, 30)
+            call change_Girl_stat(JubesX, "inhibition", 70, 30)
 
             ch_v "Look into my eyes. . ."
 
-            $ JubesX.change_stat("obedience", 50, 40)
-            $ JubesX.change_stat("inhibition", 200, 10)
+            call change_Girl_stat(JubesX, "obedience", 50, 40)
+            call change_Girl_stat(JubesX, "inhibition", 200, 10)
 
             ch_v "See the sparks dancing around them? . . ."
 
-            $ JubesX.change_stat("obedience", 200, 30)
+            call change_Girl_stat(JubesX, "obedience", 200, 30)
 
             "She slowly mesmerizes him into a trance, using a combination of her vampiric abilties and fireworks. . ."
 
@@ -1923,10 +1919,10 @@ label execute_plan(Girl):
                 $ JeanX.traits.append("whammy")
 
                 if JeanX.location == Player.location:
-                    $ JeanX.change_stat("obedience", 50, 5)
-                    $ JeanX.change_stat("love", 50, 5)
-                    $ JeanX.change_stat("love", 70, 5)
-                    $ JeanX.change_stat("love", 90, 5)
+                    call change_Girl_stat(JeanX, "obedience", 50, 5)
+                    call change_Girl_stat(JeanX, "love", 50, 5)
+                    call change_Girl_stat(JeanX, "love", 70, 5)
+                    call change_Girl_stat(JeanX, "love", 90, 5)
                     $ Girl.change_face("_sly", 1)
 
                     ch_j "Nice. . ."
@@ -1937,10 +1933,10 @@ label execute_plan(Girl):
                 $ JeanX.traits.remove("whammy")
 
                 if JeanX.location == Player.location:
-                    $ JeanX.change_stat("obedience", 50, 5)
-                    $ JeanX.change_stat("obedience", 80, 5)
-                    $ JeanX.change_stat("love", 70, -5)
-                    $ JeanX.change_stat("love", 90, -5)
+                    call change_Girl_stat(JeanX, "obedience", 50, 5)
+                    call change_Girl_stat(JeanX, "obedience", 80, 5)
+                    call change_Girl_stat(JeanX, "love", 70, -5)
+                    call change_Girl_stat(JeanX, "love", 90, -5)
                     $ JeanX.change_face("_angry", 1,mouth = "_surprised")
 
                     ch_j "Hey!"
@@ -2004,9 +2000,9 @@ label execute_plan(Girl):
 
     if Girl == RogueX:
         if "Omega" not in Player.traits:
-            $ Girl.change_stat("lust", 90, 10)
-            $ Girl.change_stat("love", 70, 30)
-            $ Girl.change_stat("love", 200, 20)
+            call change_Girl_stat(Girl, "lust", 90, 10)
+            call change_Girl_stat(Girl, "love", 70, 30)
+            call change_Girl_stat(Girl, "love", 200, 20)
 
             $ Player.traits.append("Omega")
 
@@ -2016,10 +2012,10 @@ label execute_plan(Girl):
         $ Girl.arm_pose = 1
     elif Girl == KittyX:
         if "Kappa" not in Player.traits:
-            $ Girl.change_stat("lust", 90, 10)
-            $ Girl.change_stat("inhibition", 80, 10)
-            $ Girl.change_stat("love", 70, 10)
-            $ Girl.change_stat("love", 200, 20)
+            call change_Girl_stat(Girl, "lust", 90, 10)
+            call change_Girl_stat(Girl, "inhibition", 80, 10)
+            call change_Girl_stat(Girl, "love", 70, 10)
+            call change_Girl_stat(Girl, "love", 200, 20)
 
             $ Player.traits.append("Kappa")
 
@@ -2028,18 +2024,18 @@ label execute_plan(Girl):
         ch_p "Ok, that's enough. Make Xavier forget that any of this happened, and then let's get out of here."
 
         if "Psi" not in Player.traits:
-            $ Girl.change_stat("lust", 90, 10)
-            $ Girl.change_stat("inhibition", 80, 10)
-            $ Girl.change_stat("love", 70, 10)
-            $ Girl.change_stat("love", 200, 20)
+            call change_Girl_stat(Girl, "lust", 90, 10)
+            call change_Girl_stat(Girl, "inhibition", 80, 10)
+            call change_Girl_stat(Girl, "love", 70, 10)
+            call change_Girl_stat(Girl, "love", 200, 20)
 
             $ Player.traits.append("Psi")
     elif Girl == LauraX:
         if "Chi" not in Player.traits:
-            $ Girl.change_stat("lust", 90, 10)
-            $ Girl.change_stat("inhibition", 80, 10)
-            $ Girl.change_stat("love", 70, 10)
-            $ Girl.change_stat("love", 200, 20)
+            call change_Girl_stat(Girl, "lust", 90, 10)
+            call change_Girl_stat(Girl, "inhibition", 80, 10)
+            call change_Girl_stat(Girl, "love", 70, 10)
+            call change_Girl_stat(Girl, "love", 200, 20)
 
             $ Player.traits.append("Chi")
 
@@ -2049,29 +2045,29 @@ label execute_plan(Girl):
         ch_p "Ok, that's enough. Make Xavier forget that any of this happened, and then let's get out of here."
 
         if "Alpha" not in Player.traits:
-            $ Girl.change_stat("lust", 70, 20)
-            $ Girl.change_stat("lust", 90, 10)
-            $ Girl.change_stat("inhibition", 80, 10)
-            $ Girl.change_stat("obedience", 70, 10)
-            $ Girl.change_stat("obedience", 200, 20)
-            $ Girl.change_stat("love", 70, 10)
-            $ Girl.change_stat("love", 200, 20)
+            call change_Girl_stat(Girl, "lust", 70, 20)
+            call change_Girl_stat(Girl, "lust", 90, 10)
+            call change_Girl_stat(Girl, "inhibition", 80, 10)
+            call change_Girl_stat(Girl, "obedience", 70, 10)
+            call change_Girl_stat(Girl, "obedience", 200, 20)
+            call change_Girl_stat(Girl, "love", 70, 10)
+            call change_Girl_stat(Girl, "love", 200, 20)
 
             $ Player.traits.append("Alpha")
     elif Girl == StormX:
         if "Rho" not in Player.traits:
-            $ Girl.change_stat("lust", 90, 10)
-            $ Girl.change_stat("inhibition", 80, 10)
-            $ Girl.change_stat("love", 70, 10)
-            $ Girl.change_stat("love", 200, 20)
+            call change_Girl_stat(Girl, "lust", 90, 10)
+            call change_Girl_stat(Girl, "inhibition", 80, 10)
+            call change_Girl_stat(Girl, "love", 70, 10)
+            call change_Girl_stat(Girl, "love", 200, 20)
 
             $ Player.traits.append("Rho")
     elif Girl == JubesX:
         if "Zeta" not in Player.traits:
-            $ Girl.change_stat("lust", 90, 10)
-            $ Girl.change_stat("inhibition", 80, 10)
-            $ Girl.change_stat("love", 70, 10)
-            $ Girl.change_stat("love", 200, 20)
+            call change_Girl_stat(Girl, "lust", 90, 10)
+            call change_Girl_stat(Girl, "inhibition", 80, 10)
+            call change_Girl_stat(Girl, "love", 70, 10)
+            call change_Girl_stat(Girl, "love", 200, 20)
 
             $ Player.traits.append("Zeta")
 
