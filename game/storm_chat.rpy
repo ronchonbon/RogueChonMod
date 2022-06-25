@@ -1970,8 +1970,6 @@ label Storm_Summon(approval_bonus=approval_bonus):
 
 
 label Storm_Leave:
-    $ StormX.change_outfit()
-
     if "freetravels" in StormX.traits or not approval_check(StormX, 700):
         if StormX.location == "bg_classroom" or StormX.teaching:
             ch_s "I've got class to teach."
@@ -2130,6 +2128,7 @@ label Storm_Leave:
 
     elif line == "go to":
         call hide_Girl(StormX)
+        call change_clothes
 
         if StormX.location == "bg_classroom" or StormX.teaching:
             ch_s "I will see you soon then."

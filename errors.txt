@@ -2,8 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/classroom.rpy", line 85: is not terminated with a newline. (Check strings and parenthesis.)
-                    $ Present.append(Girls[0]
+File "game/misc_animations.rpy", line 55: layeredimage statement expects a non-empty block.
+    layeredimage foreground:
+                ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Sat Jun 25 02:15:11 2022
+Sat Jun 25 17:23:41 2022

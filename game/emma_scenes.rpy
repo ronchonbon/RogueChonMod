@@ -9,6 +9,7 @@ label meet_Emma:
     $ EmmaX.arm_pose = 1
     $ EmmaX.change_face("_normal")
 
+    call change_clothes
     call add_Girls(EmmaX)
 
     ch_e "Hello students. My name is Emma Frost, and I have been invited to conduct this class."
@@ -61,7 +62,7 @@ label meet_Emma:
 
     $ round = 15
 
-    call show_Girl(EmmaX, x_position = stage_center, sprite_layer = 4, animation_transform = reset_zoom_instantly, transition = dissolve)
+    call show_Girl(EmmaX, x_position = stage_center, sprite_layer = 6, animation_transform = reset_zoom_instantly, transition = dissolve)
 
     hide black_screen onlayer black
 

@@ -322,12 +322,9 @@ label caught_changing(Girl):
     return
 
 label caught_showering(Girl):
-    call shift_focus(Girl)
+    call set_the_scene(location = "bg_door", fade = True)
 
     $ Girl.add_word(1,"showered","showered", 0, 0)
-
-    call remove_all
-
     $ Girl.change_outfit("nude")
     $ Girl.change_face("_smile", 1)
 
@@ -359,7 +356,7 @@ label caught_showering(Girl):
             jump reset_location
 
     if knock:
-        "You knock on the door. You hear some shuffling inside"
+        "You knock on the door. You hear some shuffling inside."
 
         if Girl == StormX:
             $ Girl.outfit["face_outer_accessory"] = "_towel"
@@ -372,6 +369,7 @@ label caught_showering(Girl):
 
             $ Girl.change_face("_perplexed",2,mouth = "_normal")
 
+            call shift_focus(Girl)
             call set_the_scene(location = "bg_showerroom")
 
             if Girl == RogueX:
@@ -395,7 +393,8 @@ label caught_showering(Girl):
         else:
             "You hear the rustling of a towel and some knocking around, but after a few seconds [Girl.name] comes to the door."
 
-            call set_the_scene("bg_showerroom")
+            call shift_focus(Girl)
+            call set_the_scene(location = "bg_showerroom")
 
             if Girl == RogueX:
                 ch_r "Sorry about that [Girl.player_petname], I was just wrapping up my shower."
@@ -413,6 +412,8 @@ label caught_showering(Girl):
                 ch_v "Oh, hey, [Girl.player_petname]. I was wrapping up here. . ."
     else:
         $ Player.location = "bg_showerroom"
+
+        call shift_focus(Girl)
 
         if "will_masturbate" in Girl.daily_history:
             $ Girl.drain_word("will_masturbate", 0, 1)

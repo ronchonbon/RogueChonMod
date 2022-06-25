@@ -122,9 +122,9 @@ init python:
             self.XP_goal = 100
             self.level = 1
 
-            # sprite_layer = [background_characters, foreground, foreground_characters, focused_characters]
+            # sprite_layer = [background_characters (eg. teachers), midground (eg. pool mask), midground_characters (eg. students), foreground (eg. desks), foreground_characters (eg. Present), focused_Girl, cover (eg. fog)]
             self.sprite_location = stage_center
-            self.sprite_layer = 4
+            self.sprite_layer = 6
 
             self.remaining_actions = 3
             self.max_actions = 3

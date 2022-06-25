@@ -1974,8 +1974,6 @@ label Laura_Summon(approval_bonus=approval_bonus):
 
 
 label Laura_Leave:
-    $ LauraX.change_outfit()
-
     if "freetravels" in LauraX.traits or not approval_check(LauraX, 700):
         if LauraX.location == "bg_classroom":
             ch_l "I've got class."
@@ -2134,6 +2132,7 @@ label Laura_Leave:
 
     elif line == "go to":
         call hide_Girl(LauraX)
+        call change_clothes
 
         if LauraX.location == "bg_classroom":
             ch_l "Ok, get a move on then."

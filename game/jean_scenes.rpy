@@ -333,14 +333,17 @@ label meet_Jean:
 
     "She collects her things and leaves the room."
 
-    $ JeanX.history.append("met")
-    $ JeanX.location = "hold"
-
     $ JeanX.name = "Jean"
+    $ JeanX.location = "bg_jean"
+    $ JeanX.history.append("met")
+
+    $ active_Girls.append(JeanX)
 
     ch_p "Who the hell was that? . ."
 
     call shift_focus(RogueX)
+
+    $ round -= 10
 
     jump shower_room
 

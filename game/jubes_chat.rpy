@@ -1978,8 +1978,6 @@ label Jubes_Summon(approval_bonus=approval_bonus):
 
 
 label Jubes_Leave:
-    $ JubesX.change_outfit()
-
     if "freetravels" in JubesX.traits or not approval_check(JubesX, 700):
         if JubesX.location == "bg_classroom":
             ch_v "I've got class."
@@ -2142,6 +2140,7 @@ label Jubes_Leave:
 
     elif line == "go to":
         call hide_Girl(JubesX)
+        call change_clothes
 
         if JubesX.location == "bg_classroom":
             ch_v "Ok, get a move on then."

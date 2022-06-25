@@ -7,7 +7,9 @@ label prologue:
     scene background onlayer background
     scene
 
-    show foreground zorder 2
+    show midground zorder 2
+    show foreground zorder 4
+    show cover zorder 7
     show Chibi_cock onlayer screens
 
     if simulation:
@@ -385,7 +387,11 @@ label tour_parting:
     if simulation:
         return False
 
+    $ RogueX.location = "bg_rogue"
+
     $ active_Girls.append(RogueX)
+
+    $ round = 10
 
     jump player_room
 

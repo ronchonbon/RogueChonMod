@@ -198,6 +198,11 @@ label start:
 
     $ Player.cash = 100000
 
+    # show Jubes_sprite titjob at sprite_location(0.5)
+    # $ action_speed = 2
+    #
+    # ""
+
     $ time_index = 2
     $ current_time = time_options[time_index]
 
@@ -206,7 +211,9 @@ label start:
     scene background onlayer background
     scene
 
-    show foreground zorder 2
+    show midground zorder 2
+    show foreground zorder 4
+    show cover zorder 7
     show Chibi_cock onlayer screens
 
     $ MystiqueX.change_outfit("supervillain")
@@ -251,6 +258,8 @@ label start:
                         $ Player.location = "bg_classroom"
                     "Danger Room":
                         $ Player.location = "bg_dangerroom"
+                    "Showers":
+                        $ Player.location = "bg_showerroom"
                     "Pool":
                         $ Player.location = "bg_pool"
                     "Restaurant":

@@ -11,7 +11,7 @@ label sleepover:
 
         "It's getting late, so you go to sleep."
 
-        if "met" not in JubesX.history and day >= 1:
+        if "met" not in JubesX.history and day >= 2:
             $ time_index = 4
 
             call meet_Jubes

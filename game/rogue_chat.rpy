@@ -1795,8 +1795,6 @@ label Rogue_Summon(approval_bonus=approval_bonus):
 
 
 label Rogue_Leave:
-    $ RogueX.change_outfit()
-
     if "freetravels" in RogueX.traits or not approval_check(RogueX, 700):
         if not approval_check(RogueX, 600, "LO"):
             ch_r "I'm headed out, see you later."
@@ -1949,6 +1947,7 @@ label Rogue_Leave:
 
     elif line == "go to":
         call hide_Girl(RogueX)
+        call change_clothes
 
         if RogueX.location == "bg_classroom":
             ch_r "See you then!"

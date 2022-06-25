@@ -874,7 +874,7 @@ image Laura_titjob_hair_animation5:
 
 layeredimage Laura_sprite titjob:
     always:
-        "Laura_titjob_hair_back_animation[action_speed]" pos (-0.035, -0.26) zoom 1.1
+        "Laura_titjob_hair_back_animation[action_speed]" pos (-0.035, -0.26) zoom 0.55
 
     always:
         "Laura_titjob_body_animation[action_speed]"
@@ -889,7 +889,7 @@ layeredimage Laura_sprite titjob:
         "Laura_titjob_right_arm_animation[action_speed]" pos (0.0, 0.01)
 
     always:
-        "Laura_titjob_head_animation[action_speed]" pos (-0.035, -0.26) zoom 1.1
+        "Laura_titjob_head_animation[action_speed]" pos (-0.035, -0.26) zoom 0.55
 
     always:
         "Zero_cock_Laura"
@@ -901,9 +901,9 @@ layeredimage Laura_sprite titjob:
         "Laura_titjob_left_arm_animation[action_speed]" pos (0.0, 0.01)
 
     always:
-        "Laura_titjob_hair_mid_animation[action_speed]" pos (-0.035, -0.26) zoom 1.1
+        "Laura_titjob_hair_mid_animation[action_speed]" pos (-0.035, -0.26) zoom 0.55
 
     always:
-        "Laura_titjob_hair_animation[action_speed]" pos (-0.035, -0.26) zoom 1.1
+        "Laura_titjob_hair_animation[action_speed]" pos (-0.035, -0.26) zoom 0.55
 
     anchor (0.5, 0.0) offset (400, 900) zoom 1.05

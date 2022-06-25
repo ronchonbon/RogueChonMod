@@ -2024,8 +2024,6 @@ label Jean_Summon(approval_bonus=approval_bonus):
 
 
 label Jean_Leave:
-    $ JeanX.change_outfit()
-
     if "freetravels" in JeanX.traits or not approval_check(JeanX, 700):
         if JeanX.location == "bg_classroom":
             ch_j "I've got class."
@@ -2176,6 +2174,7 @@ label Jean_Leave:
 
     elif line == "go to":
         call hide_Girl(JeanX)
+        call change_clothes
 
         if JeanX.location == "bg_classroom":
             ch_j "Ok."

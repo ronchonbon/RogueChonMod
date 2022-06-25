@@ -9,10 +9,9 @@ label meet_Storm_prelude:
     jump player_room
 
 label meet_Storm_ask_Emma:
-    $ Present = [EmmaX]
-
     $ EmmaX.teaching = False
 
+    call shift_focus(EmmaX)
     call set_the_scene(location = "bg_classroom", fade = True)
 
     "Before class, you approach [EmmaX.name]."
@@ -83,6 +82,9 @@ label meet_Storm_ask_Emma:
 
     call set_the_scene
     call take_class
+    call tenth_round
+    call set_Girls_locations
+    call event_calls
     jump classroom
 
 label meet_StormWater:

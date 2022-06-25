@@ -2052,8 +2052,6 @@ label Kitty_Summon(approval_bonus=approval_bonus):
 
 
 label Kitty_Leave:
-    $ KittyX.change_outfit()
-
     if "freetravels" in KittyX.traits or not approval_check(KittyX, 700):
         if KittyX.location == "bg_classroom":
             ch_k "I'm[KittyX.like]headed to class right now."
@@ -2206,6 +2204,7 @@ label Kitty_Leave:
 
     elif line == "go to":
         call hide_Girl(KittyX)
+        call change_clothes
 
         if KittyX.location == "bg_classroom":
             ch_k "Cool, study buddy!"

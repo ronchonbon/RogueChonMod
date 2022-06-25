@@ -944,7 +944,7 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
     $ temp_Girls = Swimmers[:]
 
     while temp_Girls:
-        call show_Girl(temp_Girls[0], sprite_layer = 4, color_transform = reset_zoom_instantly, transition = dissolve)
+        call show_Girl(temp_Girls[0], sprite_layer = 6, color_transform = reset_zoom_instantly, transition = dissolve)
 
         $ temp_Girls.remove(temp_Girls[0])
 
@@ -969,7 +969,7 @@ label ShowPool(Girls):
 
             $ x_position = 0.4 if len(Girls) > 1 else 0.5
 
-            show foreground zorder 2
+            show foreground zorder 4
 
             call show_Girl(Girls[0], sprite_layer = 1, color_transform = swimming(x_position), transition = dissolve)
 

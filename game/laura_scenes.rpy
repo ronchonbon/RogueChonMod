@@ -1,6 +1,6 @@
 label meet_Laura:
     $ Present = []
-    
+
     call set_the_scene(location = "bg_dangerroom")
 
     "As you approach the Danger Room, you hear a ferocious clanging of metal."
@@ -13,6 +13,9 @@ label meet_Laura:
     $ LauraX.name = "???"
     $ LauraX.names = []
     $ LauraX.location = Player.location
+
+    call change_clothes
+
     $ LauraX.change_face("_normal")
 
     call show_Girl(LauraX, x_position = stage_center, animation_transform = kiss_launch_animation, transition = False)
@@ -320,11 +323,15 @@ label meet_Laura:
 
     "She dashes out of the room, headed for the hangar."
 
-    $ LauraX.history.append("met")
+    $ Nearby = []
+
     $ LauraX.location = "hold"
+    $ LauraX.history.append("met")
     $ LauraX.to_do.append("mission")
 
     call shift_focus(RogueX)
+
+    $ round -= 20
 
     jump danger_room
 
@@ -2131,14 +2138,14 @@ label Gwentro:
     $ Gwen_name = "???"
     ch_g "Where is the exit to this place?!"
     call GwenFace ("_angry")
-    show Gwen_Sprite zorder 25 at sprite_location(1500):
+    show Gwen_Sprite zorder 45 at sprite_location(1500):
         xzoom -1
-    show Gwen_Sprite zorder 25 at sprite_location(100) with easeinright
+    show Gwen_Sprite zorder 45 at sprite_location(100) with easeinright
     pause .1
     call GwenFace ("_surprised")
     $ action_speed = 0
     $ LauraX.change_face("_surprised",2,eyes = "_side")
-    show Gwen_Sprite zorder 25 at sprite_location(200) with vpunch
+    show Gwen_Sprite zorder 45 at sprite_location(200) with vpunch
     ch_g "Ouch!"
     call GwenFace ("_angry")
     ch_g "Ok, that's a wall. . . apparently."

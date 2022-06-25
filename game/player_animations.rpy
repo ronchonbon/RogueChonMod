@@ -894,7 +894,7 @@ image Kitty_blowjob_cock_animation1:
 image Kitty_blowjob_cock_animation2:
     "Zero_blowjob_cock"
 
-    offset (1, 0) rotate -1
+    offset (2, 9)
 
 image Kitty_blowjob_cock_animation3:
     "Zero_blowjob_cock"

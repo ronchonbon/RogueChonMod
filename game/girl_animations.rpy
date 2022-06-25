@@ -8,10 +8,10 @@ transform morning:
     matrixcolor TintMatrix(Color(rgb = (1.0, 0.95, 0.9)))*BrightnessMatrix(0.02)
 
 transform daylight:
-    matrixcolor TintMatrix(Color(rgb = (1.0, 1.0, 1.0)))*BrightnessMatrix(0.05)
+    matrixcolor TintMatrix(Color(rgb = (1.0, 1.0, 1.0)))*BrightnessMatrix(0.02)
 
 transform sunset:
-    matrixcolor TintMatrix(Color(rgb = (1.0, 0.8, 0.65)))*BrightnessMatrix(0.05)
+    matrixcolor TintMatrix(Color(rgb = (1.0, 0.8, 0.65)))*BrightnessMatrix(0.01)
 
 transform moonlight:
     matrixcolor TintMatrix(Color(rgb = (0.5, 0.6, 1.0)))*BrightnessMatrix(0.0)
@@ -32,13 +32,16 @@ transform teaching:
     pos (0.5, 0.15) zoom 0.4
 
 transform dining:
-    ypos 0.25
+    ypos 0.2
 
 transform reset_zoom:
     ease 0.75 offset (0, 0) xzoom 1.0 yzoom 1.0 zoom 1.0
 
 transform reset_zoom_instantly:
     offset (0, 0) xzoom 1.0 yzoom 1.0 zoom 1.0
+
+transform null:
+    alpha 1.0
 
 transform smooch_animation:
     ease 0.6 ypos 0.0 zoom 2.0
@@ -260,54 +263,54 @@ label show_Girl(Girl, x_position = None, y_position = None, sprite_layer = None,
                 show Mystique_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), animation_transform
     elif transition:
         if Girl == RogueX:
-            show Rogue_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+            show Rogue_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null with transition
         elif Girl == KittyX:
-            show Kitty_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+            show Kitty_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null with transition
         elif Girl == EmmaX:
             if Girl.diamond:
-                show Emma_sprite standing diamond zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+                show Emma_sprite standing diamond zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null with transition
             else:
-                show Emma_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+                show Emma_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null with transition
         elif Girl == LauraX:
             $ Girl.claws = False
 
-            show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+            show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null with transition
         elif Girl == JeanX:
-            show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+            show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null with transition
         elif Girl == StormX:
-            show Storm_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+            show Storm_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null with transition
         elif Girl == JubesX:
-            show Jubes_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+            show Jubes_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null with transition
         elif Girl == MystiqueX:
             if Girl.disguise:
-                show expression "Mystique_sprite standing " + Girl.disguise zorder Girl.sprite_layer as Mystique_sprite at sprite_location(Girl.sprite_location, y_position) with transition
+                show expression "Mystique_sprite standing " + Girl.disguise zorder Girl.sprite_layer as Mystique_sprite at sprite_location(Girl.sprite_location, y_position), null with transition
             else:
-                show Mystique_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position) with transition
+                show Mystique_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null with transition
     else:
         if Girl == RogueX:
-            show Rogue_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+            show Rogue_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null
         elif Girl == KittyX:
-            show Kitty_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+            show Kitty_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null
         elif Girl == EmmaX:
             if Girl.diamond:
-                show Emma_sprite standing diamond zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+                show Emma_sprite standing diamond zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null
             else:
-                show Emma_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+                show Emma_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null
         elif Girl == LauraX:
             $ Girl.claws = False
 
-            show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+            show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null
         elif Girl == JeanX:
-            show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+            show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null
         elif Girl == StormX:
-            show Storm_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+            show Storm_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null
         elif Girl == JubesX:
-            show Jubes_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+            show Jubes_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null
         elif Girl == MystiqueX:
             if Girl.disguise:
-                show expression "Mystique_sprite standing " + Girl.disguise zorder Girl.sprite_layer as Mystique_sprite at sprite_location(Girl.sprite_location, y_position)
+                show expression "Mystique_sprite standing " + Girl.disguise zorder Girl.sprite_layer as Mystique_sprite at sprite_location(Girl.sprite_location, y_position), null
             else:
-                show Mystique_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position)
+                show Mystique_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null
 
     return
 
@@ -528,7 +531,7 @@ label shift_view(Girl, view):
 label show_full_body(Girl):
     $ Girl.pose = "full"
 
-    call show_Girl(Girl, color_transform = color_transform, animation_transform = reset_zoom)
+    call show_Girl(Girl, animation_transform = reset_zoom)
 
     return
 
@@ -862,7 +865,7 @@ label close_launch(GirlA, GirlB = None):
             else:
                 $ x_position = 0.5
 
-            $ temp_Girls[0].sprite_layer = 4
+            $ temp_Girls[0].sprite_layer = 6
 
             $ x_zoom = -1.3
         elif GirlB == temp_Girls[0]:
@@ -871,7 +874,7 @@ label close_launch(GirlA, GirlB = None):
             else:
                 $ x_position = 0.7
 
-            $ temp_Girls[0].sprite_layer = 3
+            $ temp_Girls[0].sprite_layer = 5
 
             $ x_zoom = 1.3
 
@@ -910,7 +913,7 @@ label lesbian_launch(Girl):
             else:
                 $ x_position = 500
 
-            $ temp_Girls[0].sprite_layer = 4
+            $ temp_Girls[0].sprite_layer = 6
 
             $ x_zoom = -1.3
         else:
@@ -921,11 +924,11 @@ label lesbian_launch(Girl):
 
             if temp_Girls[0] == KittyX:
                 if RogueX in (Partner,Girl):
-                    $ KittyX.sprite_layer = 3
+                    $ KittyX.sprite_layer = 5
                 else:
                     $ KittyX.sprite_layer = 1
             else:
-                $ temp_Girls[0].sprite_layer = 3
+                $ temp_Girls[0].sprite_layer = 5
 
             $ x_zoom = 1.3
 

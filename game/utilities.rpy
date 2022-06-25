@@ -225,21 +225,24 @@ label set_the_scene(location = Player.location, show_Characters = True, fade = F
 
             while temp_Girls:
                 if temp_Girls[0].teaching and Player.location == "bg_classroom":
-                    if renpy.showing(temp_Girls[0].tag + "_sprite") and transition is not False:
-                        call show_Girl(temp_Girls[0], sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = dissolve)
+                    if renpy.showing(temp_Girls[0].tag + "_sprite"):
+                        call hide_Girl(temp_Girls[0], transition = False)
+                        call show_Girl(temp_Girls[0], sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = False)
                     else:
                         call show_Girl(temp_Girls[0], sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = transition)
 
                     $ number_of_Girls -= 1
                 elif temp_Girls[0].location == Player.location:
-                    if Player.location == "bg_restaurant" and renpy.showing(temp_Girls[0].tag + "_sprite") and transition is not False:
-                        call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 1, color_transform = color_transform, animation_transform = dining, transition = dissolve)
+                    if Player.location == "bg_restaurant" and renpy.showing(temp_Girls[0].tag + "_sprite"):
+                        call hide_Girl(temp_Girls[0], transition = False)
+                        call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 1, color_transform = color_transform, animation_transform = dining, transition = False)
                     elif Player.location == "bg_restaurant":
                         call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 1, color_transform = color_transform, animation_transform = dining, transition = transition)
-                    elif renpy.showing(temp_Girls[0].tag + "_sprite") and transition is not False:
-                        call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 3, color_transform = color_transform, animation_transform = reset_zoom_instantly, transition = dissolve)
+                    elif renpy.showing(temp_Girls[0].tag + "_sprite"):
+                        call hide_Girl(temp_Girls[0], transition = False)
+                        call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 5, color_transform = color_transform, transition = False)
                     else:
-                        call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 3, color_transform = color_transform, transition = transition)
+                        call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 5, color_transform = color_transform, transition = transition)
 
                     $ number_of_Girls -= 1
 
@@ -253,19 +256,22 @@ label set_the_scene(location = Player.location, show_Characters = True, fade = F
                 $ temp_Girls.remove(temp_Girls[0])
 
             if focused_Girl.teaching and Player.location == "bg_classroom":
-                if renpy.showing(focused_Girl.tag + "_sprite") and transition is not False:
-                    call show_Girl(focused_Girl, sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = dissolve)
+                if renpy.showing(focused_Girl.tag + "_sprite"):
+                    call hide_Girl(focused_Girl, transition = False)
+                    call show_Girl(focused_Girl, sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = False)
                 else:
                     call show_Girl(focused_Girl, sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = transition)
             elif focused_Girl.location == Player.location:
-                if Player.location == "bg_restaurant" and renpy.showing(focused_Girl.tag + "_sprite") and transition is not False:
-                    call show_Girl(focused_Girl, x_position = stage_center, sprite_layer = 1, color_transform = color_transform, animation_transform = dining, transition = dissolve)
+                if Player.location == "bg_restaurant" and renpy.showing(focused_Girl.tag + "_sprite"):
+                    call hide_Girl(focused_Girl, transition = False)
+                    call show_Girl(focused_Girl, x_position = stage_center, sprite_layer = 1, color_transform = color_transform, animation_transform = dining, transition = False)
                 elif Player.location == "bg_restaurant":
                     call show_Girl(focused_Girl, x_position = stage_center, sprite_layer = 1, color_transform = color_transform, animation_transform = dining, transition = transition)
-                elif renpy.showing(focused_Girl.tag + "_sprite") and transition is not False:
-                    call show_Girl(focused_Girl, x_position = stage_center, sprite_layer = 4, color_transform = color_transform, animation_transform = reset_zoom_instantly, transition = dissolve)
+                elif renpy.showing(focused_Girl.tag + "_sprite"):
+                    call hide_Girl(focused_Girl, transition = False)
+                    call show_Girl(focused_Girl, x_position = stage_center, sprite_layer = 6, color_transform = color_transform, transition = False)
                 else:
-                    call show_Girl(focused_Girl, x_position = stage_center, sprite_layer = 4, color_transform = color_transform, transition = transition)
+                    call show_Girl(focused_Girl, x_position = stage_center, sprite_layer = 6, color_transform = color_transform, transition = transition)
             elif renpy.showing(focused_Girl.tag + "_sprite"):
                 call hide_Girl(focused_Girl)
 
@@ -473,7 +479,7 @@ label traveling_event_calls(location):
 
     if EmmaX in active_Girls:
         if location == "bg_classroom":
-            if "noise" in Player.history and "attic" not in Player.history and EmmaX.location in ["bg_classroom", "bg_teacher"] and time_index < 2 and weekday < 5:
+            if "noise" in Player.history and "attic" not in Player.history and EmmaX.teaching and time_index < 2 and weekday < 5:
                 call meet_Storm_ask_Emma
 
                 return
@@ -710,11 +716,11 @@ label set_Girls_locations:
         arriving_Girls = []
 
         for G in temp_Girls:
-            if G.location == "nearby":
-                G.location = Player.location
-
             if G not in Player.Party:
                 previous_location = G.location
+
+                if G.location == "nearby":
+                    G.location = Player.location
 
                 if G == JubesX and G.addiction > 60:
                     G.location = G.home
@@ -745,16 +751,16 @@ label set_Girls_locations:
 
         $ leaving_Girls.remove(leaving_Girls[0])
 
+    call change_clothes
+
     if arriving_Girls:
         call Girls_arrive(arriving_Girls)
-
-    call change_clothes
 
     return
 
 label change_clothes:
     python:
-        for G in all_Girls:
+        for G in active_Girls:
             if G not in Player.Party:
                 if G.location == "bg_dangerroom":
                     G.outfit_name = "gym_clothes"

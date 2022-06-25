@@ -248,7 +248,7 @@ layeredimage Kitty_blowjob_head:
     elif renpy.showing("Kitty_sprite blowjob") and action_speed == 1:
         "images/Kitty_blowjob/Kitty_blowjob_mouth_tongue.png"
     elif renpy.showing("Kitty_sprite blowjob") and action_speed == 2:
-        "Kitty_blowjob_mouth_animation[action_speed]"
+        "Kitty_blowjob_mouth_animation[action_speed]" pos (0.225, 0.555)
     elif renpy.showing("Kitty_sprite blowjob") and action_speed > 2:
         "images/Kitty_blowjob/Kitty_blowjob_mouth_sucking.png"
     else:

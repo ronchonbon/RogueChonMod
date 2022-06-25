@@ -654,16 +654,16 @@ image Kitty_blowjob_mouth_animation2:
     "Kitty_blowjob_mouth"
 
     subpixel True
-    zoom 0.7
+    zoom 0.8
     block:
         pause 0.40
-        easeout 0.40 zoom 0.69
-        linear 0.10 zoom 0.7
-        easein 0.45 zoom 0.65
+        easeout 0.40 zoom 0.78
+        linear 0.10 zoom 0.8
+        easein 0.45 zoom 0.75
         pause 0.15
-        easeout 0.25 zoom 0.7
-        linear 0.10 zoom 0.69
-        easein 0.30 zoom 0.7
+        easeout 0.25 zoom 0.8
+        linear 0.10 zoom 0.78
+        easein 0.30 zoom 0.65
         pause 0.35
         repeat
 
@@ -672,16 +672,16 @@ image Kitty_blowjob_mask_animation2:
     "Kitty_blowjob_mask"
 
     subpixel True
-    zoom 0.7
+    anchor(0.5, 0.65) offset(2, 135) zoom 0.8
     block:
         pause 0.40
-        easeout 0.40 zoom 0.69
-        linear 0.10 zoom 0.7
-        easein 0.45 zoom 0.65
+        easeout 0.40 zoom 0.78
+        linear 0.10 zoom 0.8
+        easein 0.45 zoom 0.75
         pause 0.15
-        easeout 0.25 zoom 0.7
-        linear 0.10 zoom 0.69
-        easein 0.30 zoom 0.7
+        easeout 0.25 zoom 0.8
+        linear 0.10 zoom 0.78
+        easein 0.30 zoom 0.65
         pause 0.35
         repeat
 

@@ -351,8 +351,8 @@ image Rogue_titjob_breasts_animation2:
 
     subpixel True
     block:
-        ease 0.3 yoffset 10
-        ease 0.35 yoffset -55
+        ease 0.33 yoffset 10
+        ease 0.32 yoffset -55
         ease 0.1 yoffset -50
         repeat
 

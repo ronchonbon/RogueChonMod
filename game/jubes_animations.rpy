@@ -255,7 +255,7 @@ image Jubes_titjob_bra_back_animation1:
         ease 1.9 yoffset -60
         pause 0.4
         ease 1.8 yoffset 60
-        ease 0.5 yoffset 50
+        ease 0.5 yoffset 56
         repeat
 
 image Jubes_titjob_bra_back_animation2:
@@ -264,7 +264,7 @@ image Jubes_titjob_bra_back_animation2:
 
     subpixel True
     block:
-        ease 0.3 yoffset 60
+        ease 0.3 yoffset 65
         ease 0.7 yoffset -20
         pause 0.2
         ease 0.4 yoffset 80
@@ -313,9 +313,9 @@ image Jubes_titjob_body_animation1:
 
     subpixel True
     block:
-        ease 2 ypos -50
+        ease 2 yoffset -50
         pause 0.2
-        ease 2 ypos 60
+        ease 2 yoffset 60
         pause 0.5
         repeat
 
@@ -463,7 +463,7 @@ image Jubes_titjob_breasts_under_animation1:
         ease 1.9 yoffset -60
         pause 0.4
         ease 1.8 yoffset 60
-        ease 0.5 yoffset 50
+        ease 0.5 yoffset 56
         repeat
 
 image Jubes_titjob_breasts_under_animation2:
@@ -472,7 +472,7 @@ image Jubes_titjob_breasts_under_animation2:
 
     subpixel True
     block:
-        ease 0.3 yoffset 60
+        ease 0.3 yoffset 65
         ease 0.7 yoffset -20
         pause 0.2
         ease 0.4 yoffset 80
@@ -525,7 +525,7 @@ image Jubes_titjob_breasts_animation1:
         ease 1.9 yoffset -60
         pause 0.4
         ease 1.8 yoffset 60
-        ease 0.5 yoffset 50
+        ease 0.5 yoffset 56
         repeat
 
 image Jubes_titjob_breasts_animation2:
@@ -534,7 +534,7 @@ image Jubes_titjob_breasts_animation2:
 
     subpixel True
     block:
-        ease 0.3 yoffset 60
+        ease 0.3 yoffset 65
         ease 0.7 yoffset -20
         pause 0.2
         ease 0.4 yoffset 80
@@ -570,7 +570,7 @@ layeredimage Jubes_sprite titjob:
         "Jubes_titjob_jacket_back_animation[action_speed]"
 
     if JubesX.outfit["bra"] in ["_sports_bra", "_bikini_top"]:
-        "Jubes_titjob_bra_back_animation[action_speed]" pos (0.0, -0.06)
+        "Jubes_titjob_bra_back_animation[action_speed]"
 
     always:
         "Jubes_titjob_body_animation[action_speed]"
@@ -579,13 +579,13 @@ layeredimage Jubes_sprite titjob:
         "Jubes_titjob_head_animation[action_speed]" pos (0.0, -0.19) zoom 0.9
 
     always:
-        "Jubes_titjob_breasts_under_animation[action_speed]" pos (0.0, -0.06)
+        "Jubes_titjob_breasts_under_animation[action_speed]"
 
     always:
         "Zero_cock_Jubes"
 
     always:
-        "Jubes_titjob_breasts_animation[action_speed]" pos (0.0, -0.06)
+        "Jubes_titjob_breasts_animation[action_speed]"
 
     anchor (0.5, 0.0) offset (360, 800) zoom 1.15
 

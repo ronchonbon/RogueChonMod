@@ -61,6 +61,13 @@ label world_map:
                 return
 
         if destination:
+            $ stack_depth = renpy.call_stack_depth()
+
+            while stack_depth > 0:
+                $ stack_depth -= 1
+
+                $ renpy.pop_call()
+
             if Player.location == "bg_dangerroom":
                 call exit_gym
 
@@ -629,8 +636,8 @@ label classroom:
 
         $ Nearby = []
 
-        call traveling_event_calls(location = "bg_classroom")
         call check_who_is_present(location = "bg_classroom")
+        call traveling_event_calls(location = "bg_classroom")
         call set_Character_taboos
 
         if time_index < 2 and weekday < 5:
@@ -1040,14 +1047,10 @@ label shower_room:
         $ Nearby = []
 
         call traveling_event_calls(location = "bg_showerroom")
-        call check_who_is_present(location = "bg_door")
         call set_Character_taboos
-        call set_the_scene(location = "bg_door", fade = True)
         call shower_entry
 
     if Player.location != "bg_showerroom":
-        $ door_locked = False
-
         call check_who_is_present(location = "bg_showerroom")
         call set_Character_taboos
         call set_the_scene(location = "bg_showerroom", fade = True)

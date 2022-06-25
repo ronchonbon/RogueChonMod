@@ -2137,8 +2137,6 @@ label Emma_Summon(approval_bonus=approval_bonus):
 
 
 label Emma_Leave:
-    $ EmmaX.change_outfit()
-
     if "freetravels" in EmmaX.traits or not approval_check(EmmaX, 700):
         if EmmaX.teaching:
             ch_e "I have a class to teach."
@@ -2293,6 +2291,7 @@ label Emma_Leave:
 
     elif line == "go to":
         call hide_Girl(EmmaX)
+        call change_clothes
 
         if EmmaX.teaching:
             ch_e "I'll see you there."
