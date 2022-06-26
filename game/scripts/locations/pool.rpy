@@ -92,7 +92,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
             menu:
                 extend ""
-                "take it all off?" if (Girl.outfit["top"] or Girl.outfit["bra"]) and (Girl.outfit["bottom"] or Girl.outfit["underwear"] or Girl.outfit["hose"]):
+                "Take it all off?" if (Girl.outfit["top"] or Girl.outfit["bra"]) and (Girl.outfit["bottom"] or Girl.outfit["underwear"] or Girl.outfit["hose"]):
                     if Girl.outfit["top"] == "_towel" and not Girl.outfit["bottom"] and not Girl.outfit["hose"] and not Girl.outfit["underwear"]:
                         $ Type = "no_panties"
                     elif (Girl.outfit["bottom"] or Girl.outfit["hose"]) and not Girl.outfit["underwear"]:

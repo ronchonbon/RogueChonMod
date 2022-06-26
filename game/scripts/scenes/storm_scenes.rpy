@@ -128,14 +128,11 @@ label meet_Storm:
             "As you climb the stairs, a gust of chill wind rushes down them."
             "Oh, look at the time, maybe this is something that should wait for earlier in the day. . ."
 
-
         "You return to your room."
 
         $ Player.add_word(1, 0,"noattic", 0, 0)
 
-        $ Player.location = "bg_player"
-
-        jump reset_location
+        jump player_room
 
     call set_the_scene(location = "bg_storm", fade = True)
 
