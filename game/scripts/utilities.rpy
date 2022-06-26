@@ -2404,18 +2404,16 @@ label Girls_arrive(arriving_Girls):
     while len(arriving_Girls) > 2:
         $ arriving_Girls.remove(arriving_Girls[-1])
 
-    $ Primary = None
+    python:
+        Primary = None
 
-    while temp_Girls:
-        if Player.location == temp_Girls[0].home:
-            $ Primary = temp_Girls[0]
+        for G in arriving_Girls:
+            if Player.location == G.home:
+                Primary = G
 
-            $ temp_Girls = []
-        elif temp_Girls[0] == JeanX:
-            $ Primary = JeanX
-
-        if temp_Girls:
-            $ temp_Girls.remove(temp_Girls[0])
+                break
+            elif G == JeanX:
+                Primary = JeanX
 
     if not Primary:
         $ Primary = arriving_Girls[0]

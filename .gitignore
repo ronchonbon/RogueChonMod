@@ -17,3 +17,15 @@
 game/saves/persistent
 
 log.txt
+
+traceback.txt
+
+game/saves/navigation.json
+
+game/cache/screens.rpyb
+
+game/cache/bytecode.rpyb
+
+game/cache/pyanalysis.rpyb
+
+game/cache/shaders.txt
