@@ -2116,7 +2116,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 jump Group_Strip_End
 
         call show_full_body(Girl)
-        call display_Girl(Girl, color_transform = Girl_Dance1(Girl))
+        call show_Girl(Girl, color_transform = Girl_Dance1(Girl))
 
         "[Girl.name] begins to dance again."
 

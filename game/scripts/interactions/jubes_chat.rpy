@@ -2016,9 +2016,6 @@ label Jubes_Leave:
         $ approval_bonus = 0
 
 
-    if GirlsNum:
-        ch_v "Yeah, I'm headed out too."
-
     if JubesX.location == "bg_classroom":
         ch_v "I've got class, you interested?"
     elif JubesX.location == "bg_dangerroom":

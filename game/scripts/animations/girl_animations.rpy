@@ -878,7 +878,7 @@ label close_launch(GirlA, GirlB = None):
 
             $ x_zoom = 1.3
 
-        call display_Girl(temp_Girls[0], x_position = x_position, y_position = 0.15, color_transform = close_launch_animation(x_zoom))
+        call show_Girl(temp_Girls[0], x_position = x_position, y_position = 0.15, color_transform = close_launch_animation(x_zoom))
 
         $ temp_Girls.remove(temp_Girls[0])
 
