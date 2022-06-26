@@ -16,16 +16,18 @@
 
 game/saves/persistent
 
+errors.txt
+
 log.txt
 
 traceback.txt
 
 game/saves/navigation.json
 
-game/cache/screens.rpyb
-
 game/cache/bytecode.rpyb
 
-game/cache/pyanalysis.rpyb
+game/cache/screens.rpyb
 
 game/cache/shaders.txt
+
+game/cache/pyanalysis.rpyb

@@ -23,8 +23,8 @@ layeredimage Jean_sprite standing:
     if JeanX.outfit["piercings"]:
         "images/Jean_standing/Jean_standing_piercings_pussy[JeanX.outfit[piercings]].png"
 
-    if JeanX.outfit["clamps"]:
-        "images/Jean_standing/Jean_standing_clamps[JeanX.outfit[clamps]].png"
+    if JeanX.outfit["nipple_accessories"]:
+        "images/Jean_standing/Jean_standing_nipple_accessories[JeanX.outfit[nipple_accessories]].png"
 
     if JeanX.outfit["rope"]:
         "images/Jean_standing/Jean_standing_rope[JeanX.outfit[rope]].png"
@@ -351,8 +351,8 @@ layeredimage Jean_blowjob_head:
 #     if JeanX.outfit["gag"]:
 #         "images/Jean_kneeling/Jean_kneeling_gag[JeanX.outfit[gag]].png"
 #
-#     if JeanX.outfit["clamps"]:
-#         "images/Jean_kneeling/Jean_kneeling_clamps[JeanX.outfit[clamps]].png"
+#     if JeanX.outfit["nipple_accessories"]:
+#         "images/Jean_kneeling/Jean_kneeling_nipple_accessories[JeanX.outfit[nipple_accessories]].png"
 #
 #     if JeanX.outfit["rope"]:
 #         "images/Jean_kneeling/Jean_kneeling_rope[JeanX.outfit[rope]].png"

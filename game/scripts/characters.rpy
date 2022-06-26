@@ -1251,7 +1251,7 @@ init python:
 
                 self.bondage_outfit = get_base_outfit(
                     {"hair": "_short",
-                    "clamps": "_nipple_pegs", "rope": "_harness",
+                    "nipple_accessories": "_nipple_pegs", "rope": "_harness",
                     "held_item": "_hitachi",
                     "shame": 100, "outfit_active": 2})
 
@@ -2064,7 +2064,7 @@ init python:
         outfit = {"buttplug": "",
             "face_tattoos": "", "face_piercings": "", "makeup": "", "gag": "",
             "face_inner_accessory": "", "hair": "", "face_outer_accessory": "",
-            "tattoos": "", "piercings": "", "clamps": "", "rope": "",
+            "tattoos": "", "piercings": "", "nipple_accessories": "", "rope": "",
             "bodysuit": "", "bra": "", "underwear": "",
             "hose": "", "bottom": "",
             "dress": "", "boots": "", "top": "",

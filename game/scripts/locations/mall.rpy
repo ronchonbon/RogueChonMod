@@ -1598,9 +1598,9 @@ label clothing_shop:
 
                 menu:
                     "What did you want to try on here?"
-                    "Raven cloak" if Girl == RogueX and Girl.outfit["cloak"] != "_raven_cloak":
-                        $ item = "_raven_cloak"
-                    "Raven cloak (locked)" if Girl.outfit["cloak"] == "_raven_cloak":
+                    "Raven cloak" if Girl == RogueX and Girl.outfit["cloak"] != "_Raven_cloak":
+                        $ item = "_Raven_cloak"
+                    "Raven cloak (locked)" if Girl.outfit["cloak"] == "_Raven_cloak":
                         pass
                     "Classic jacket" if Girl == RogueX and Girl.outfit["jacket"] != "_classic_jacket":
                         $ item = "_classic_jacket"
@@ -1638,9 +1638,9 @@ label clothing_shop:
                         $ item = "_classic_bra"
                     "Classic outfit bra (locked)" if Girl.outfit["bra"] == "_classic_bra":
                         pass
-                    "Raven suit" if Girl == RogueX and Girl.outfit["bodysuit"] != "_raven_suit":
-                        $ item = "_raven_suit"
-                    "Raven suit (locked)" if Girl.outfit["bodysuit"] == "_raven_suit":
+                    "Raven suit" if Girl == RogueX and Girl.outfit["bodysuit"] != "_Raven_suit":
+                        $ item = "_Raven_suit"
+                    "Raven suit (locked)" if Girl.outfit["bodysuit"] == "_Raven_suit":
                         pass
                     "Swimsuit" if Girl == RogueX and Girl.outfit["bodysuit"] != "_swimsuit":
                         $ item = "_swimsuit"
@@ -1662,9 +1662,9 @@ label clothing_shop:
                         $ item = "_black_and_blue_pants"
                     "Black and blue pants (locked)" if Girl.outfit["bottom"] == "_black_and_blue_pants":
                         pass
-                    "Chinese dress" if Girl == KittyX and Girl.outfit["dress"] != "_chinese_dress":
-                        $ item = "_chinese_dress"
-                    "Chinese dress (locked)" if Girl.outfit["dress"] == "_chinese_dress":
+                    "Qipao" if Girl == KittyX and Girl.outfit["dress"] != "_qipao":
+                        $ item = "_qipao"
+                    "Qipao (locked)" if Girl.outfit["dress"] == "_qipao":
                         pass
                     "Domme outfit" if Girl == EmmaX and Girl.outfit["bodysuit"] != "_domme_suit":
                         $ item = "_domme_suit"
@@ -1977,8 +1977,8 @@ label clothing_shop:
 
                         menu:
                             "So what did you want to buy?"
-                            "The Raven cloak." if "_raven_cloak" in cart:
-                                $ item = "_raven_cloak"
+                            "The Raven cloak." if "_Raven_cloak" in cart:
+                                $ item = "_Raven_cloak"
                             "Rogue's classic jacket." if "_classic_jacket" in cart:
                                 $ item = "_classic_jacket"
                             "The opaque fetish top." if "_opaque_fetish_top" in cart:
@@ -1997,8 +1997,8 @@ label clothing_shop:
                                 $ item = "_blue_dress"
                             "Rogue's classic outfit top." if "_classic_bra" in cart:
                                 $ item = "_classic_bra"
-                            "The Raven suit." if "_raven_suit" in cart:
-                                $ item = "_raven_suit"
+                            "The Raven suit." if "_Raven_suit" in cart:
+                                $ item = "_Raven_suit"
                             "The swimsuit." if "_swimsuit" in cart:
                                 $ item = "_swimsuit"
                             "The sexy swimsuit." if "_sexy_swimsuit" in cart:
@@ -2007,8 +2007,8 @@ label clothing_shop:
                                 $ item = "_catsuit"
                             "The violet shirt." if "_violet_shirt" in cart:
                                 $ item = "_violet_shirt"
-                            "The Chinese dress." if "_chinese_dress" in cart:
-                                $ item = "_chinese_dress"
+                            "The qipao." if "_qipao" in cart:
+                                $ item = "_qipao"
                             "The black and blue pants." if "_black_and_blue_pants" in cart:
                                 $ item = "_black_and_blue_pants"
                             "The domme outfit." if "_domme_suit" in cart:
@@ -2059,13 +2059,13 @@ label clothing_shop:
                                     "Wait, you already have a pair of these."
                                     "You pull out the pair in your bag and give them to [Girl.name]."
                             else:
-                                if item in ["_raven_suit", "_catsuit", "_domme_suit"]:
+                                if item in ["_Raven_suit", "_catsuit", "_domme_suit"]:
                                     $ cost = 200
-                                elif item in ["_raven_cloak", "_opaque_fetish_top", "_sheer_fetish_top", "_opaque_fetish_pants", "_sheer_fetish_pants", "_red_dress", "_blue_dress", "_classic_bra"]:
+                                elif item in ["_Raven_cloak", "_opaque_fetish_top", "_sheer_fetish_top", "_opaque_fetish_pants", "_sheer_fetish_pants", "_red_dress", "_blue_dress", "_classic_bra"]:
                                     $ cost = 100
                                 elif item in ["_classic_jacket", "_classic_pants", "_swimsuit", "_sexy_swimsuit", "_violet_shirt", "_black_and_blue_pants", "_domme_boots"]:
                                     $ cost = 75
-                                elif item in ["_chinese_dress", "_sci_fi_suit"]:
+                                elif item in ["_qipao", "_sci_fi_suit"]:
                                     $ cost = 300
                                 elif item == "_bunny_suit":
                                     $ cost = 150
@@ -2089,11 +2089,11 @@ label clothing_shop:
                                 $ Girl.inventory.append(item)
                                 $ Girl.change_face("_bemused", 1)
 
-                                if item == "_raven_suit":
+                                if item == "_Raven_suit":
                                     call change_Girl_stat(Girl, "love", 200, 25)
                                     call change_Girl_stat(Girl, "obedience", 200, 20)
                                     call change_Girl_stat(Girl, "inhibition", 200, 20)
-                                elif item == "_raven_cloak":
+                                elif item == "_Raven_cloak":
                                     call change_Girl_stat(Girl, "love", 200, 15)
                                     call change_Girl_stat(Girl, "obedience", 200, 20)
                                     call change_Girl_stat(Girl, "inhibition", 200, 10)
@@ -2117,7 +2117,7 @@ label clothing_shop:
                                     $ Girl.change_face("_smile")
 
                                     ch_r "Thanks, [Girl.player_petname]."
-                                elif item == "_chinese_dress":
+                                elif item == "_qipao":
                                     call change_Girl_stat(Girl, "love", 200, 25)
                                     call change_Girl_stat(Girl, "obedience", 200, 20)
                                     call change_Girl_stat(Girl, "inhibition", 200, 20)

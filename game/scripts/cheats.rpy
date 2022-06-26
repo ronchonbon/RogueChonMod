@@ -63,12 +63,103 @@ label cheat_editor(Girl):
                         pass
             "Wardrobe":
                 call wardrobe_editor(Girl)
+            "Unlock all Girls":
+                python:
+                    for G in all_Girls:
+                        active_Girls.append(G)
+
+                        Player.Phonebook.append(G)
+
+                        G.history.append("met")
+
+                        if G == EmmaX:
+                            EmmaX.name = "Emma"
+                            EmmaX.names.append("Emma")
+                            G.history.append("classcaught")
+                        elif G == LauraX:
+                            LauraX.name = "Laura"
+                            LauraX.names.append("X-23")
+                            LauraX.names.append("Laura")
+                            G.history.append("dress0")
+                        elif G == StormX:
+                            StormX.names.append("Ororo")
+                            StormX.names.append("Ms. Munroe")
+
+                        if G.location == "hold":
+                            G.location = G.home
             "Maximize all Girls' stats":
                 python:
                     for G in all_Girls:
                         G.love = 1000
                         G.obedience = 1000
                         G.inhibition = 1000
+            "Add all Girls to Harem":
+                python:
+                    for G in all_Girls:
+                        Player.Harem.append(G)
+            "Unlock all outfits":
+                python:
+                    for G in all_Girls:
+                        for item in face_inner_accessories:
+                            G.inventory.append(item)
+
+                        for item in face_outer_accessories:
+                            G.inventory.append(item)
+
+                        for item in bras:
+                            G.inventory.append(item)
+
+                        for item in underwears:
+                            G.inventory.append(item)
+
+                        for item in hoses:
+                            G.inventory.append(item)
+
+                        for item in socks:
+                            G.inventory.append(item)
+
+                        for item in bodysuits:
+                            G.inventory.append(item)
+
+                        for item in pants:
+                            G.inventory.append(item)
+
+                        for item in skirts:
+                            G.inventory.append(item)
+
+                        for item in shorts:
+                            G.inventory.append(item)
+
+                        for item in dresses:
+                            G.inventory.append(item)
+
+                        for item in boots:
+                            G.inventory.append(item)
+
+                        for item in tops:
+                            G.inventory.append(item)
+
+                        for item in necks:
+                            G.inventory.append(item)
+
+                        for item in gloves:
+                            G.inventory.append(item)
+
+                        for item in sleeves:
+                            G.inventory.append(item)
+
+                        for item in suspenders:
+                            G.inventory.append(item)
+
+                        for item in belts:
+                            G.inventory.append(item)
+
+                        for item in jackets:
+                            G.inventory.append(item)
+
+                        for item in cloaks:
+                            G.inventory.append(item)
+
             "Return":
                 call checkout
 
@@ -199,12 +290,12 @@ label wardrobe_editor(Girl):
                         "Add catsuit" if Girl == RogueX:
                             $ Girl.outfit["bodysuit"] = "_catsuit"
                         "Add Raven suit" if Girl == RogueX:
-                            $ Girl.outfit["bodysuit"] = "_raven_suit"
+                            $ Girl.outfit["bodysuit"] = "_Raven_suit"
                         "Toggle Raven cloak" if Girl == RogueX:
-                            if Girl.outfit["cloak"] == "_raven_cloak":
+                            if Girl.outfit["cloak"] == "_Raven_cloak":
                                 $ Girl.outfit["cloak"] = ""
                             else:
-                                $ Girl.outfit["cloak"] = "_raven_cloak"
+                                $ Girl.outfit["cloak"] = "_Raven_cloak"
                         "Add blue dress" if Girl == RogueX:
                             $ Girl.outfit["dress"] = "_blue_dress"
                         "Add one-piece swimsuit" if Girl == RogueX:
@@ -213,8 +304,8 @@ label wardrobe_editor(Girl):
                             $ Girl.outfit["bodysuit"] = "_sexy_swimsuit"
                         "Add red dress" if Girl == RogueX:
                             $ Girl.outfit["dress"] = "_red_dress"
-                        "Add Chinese dress" if Girl == KittyX:
-                            $ Girl.outfit["dress"] = "_chinese_dress"
+                        "Add qipao" if Girl == KittyX:
+                            $ Girl.outfit["dress"] = "_qipao"
                         "Add sci-fi suit" if Girl == JeanX:
                             $ Girl.arm_pose = 1
                             $ Girl.outfit["bodysuit"] = "_sci_fi"

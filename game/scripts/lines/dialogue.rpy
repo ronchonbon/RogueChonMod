@@ -2482,124 +2482,154 @@ label action_accepted_enthusiastically_lines(Girl, action):
 label daily_action_lines(Girl, action):
     if Girl == RogueX:
         $ lines = ["Didn't get enough earlier?",
-            "{i}I'm{/i} used to being the one sucking people dry. . .",
-            "Gimme some sugar, sugar.",
-            "Maybe not so hard this time though.",
-            "Maybe not so rough this time though.",
-            "You enjoyed the show?",
-            "It is nice to have an audience. . .",
-            "I'm still tingling a bit from earlier.",
-            "You do have a smooth touch. . .",
-            "Take it a bit gently, I'm still quivering from earlier.",
             "Again? Oh, you're insatiable!",
             "Must be my lucky day!",
-            "You sure know how to keep a girl satisfied. . .",
             "Mmm. . .",
             "Back again so soon?",
-            "You're going to give me calluses.",
             "Another one?",
-            "Breaking out the toys again?",
             "So you'd like another go?",
-            "You can't stay away from this booty. . .",
-            "Are you sure that's all you want?",
-            "You can't stay away from this. . .",
-            "Didn't get enough earlier?",
-            "You're going to wear me out.",
-            "I'm still a bit sore from earlier.",
-            "My arm's still a bit sore from earlier.",
-            "My feet are a bit sore from earlier.",
-            "My feet are kinda sore from earlier.",
-            "My tits are still a bit sore from earlier.",
-            "You're going to give me lockjaw.",
-            "Let me get some saliva going.",
-            "Didn't get enough earlier?",
-            "My jaw's still a bit sore from earlier."]
+            "You can't stay away from this. . ."]
+
+        if action in hand_actions or action in mouth_actions or action == "hotdog":
+            $ lines.append("Are you sure that's all you want?")
+
+            if action == "kiss":
+                $ lines.append("Gimme some sugar, sugar.")
+                $ lines.append("Let me get some saliva going.")
+            elif action in hand_actions:
+                $ lines.append("You do have a smooth touch. . .")
+        elif action == "sex" or action == "anal":
+            $ lines.append("Maybe not so hard this time though.")
+            $ lines.append("Maybe not so rough this time though.")
+            $ lines.append("I'm still a bit sore from earlier.")
+
+            if action == "anal":
+                $ lines.append("You can't stay away from this booty. . .")
+        elif action in fondle_actions or action in dildo_actions or action == "sex" or action == "anal":
+            $ lines.append("You sure know how to keep a girl satisfied. . .")
+            $ lines.append("I'm still tingling a bit from earlier.")
+            $ lines.append("Take it a bit gently, I'm still quivering from earlier.")
+            $ lines.append("You're going to wear me out.")
+
+            if action in dildo_actions:
+                $ lines.append("Breaking out the toys again?")
+        elif action == "masturbation":
+            $ lines.append("You enjoyed the show?")
+            $ lines.append("It is nice to have an audience. . .")
+        elif action == "blowjob":
+            $ lines.append("{i}I'm{/i} used to being the one sucking people dry. . .")
+            $ lines.append("My jaw's still a bit sore from earlier.")
+            $ lines.append("You're going to give me lockjaw.")
+        elif action == "titjob":
+            $ lines.append("My tits are still a bit sore from earlier.")
+        elif action == "handjob":
+            $ lines.append("My arm's still a bit sore from earlier.")
+            $ lines.append("You're going to give me calluses.")
+        elif action == "footjob":
+            $ lines.append("My feet are kinda sore from earlier.")
+            $ lines.append("My feet are a bit sore from earlier.")
     elif Girl == KittyX:
         $ lines = ["Didn't get enough earlier?",
             "Meow.",
-            "Come'ere tasty.",
-            "Take it easy though.",
-            "Take it a bit gently, I'm still shaking from earlier.",
+            "Another one?",
             "Huh? Again?",
             "I must have done something right.",
-            "What a girl wants. . .",
-            "Maybe not so rough this time though.",
             "Mmm. . .",
-            "Was it that good?"
-            "I kinda liked the audience. . ."
-            "You're going to give me calluses.",
-            "Didn't get enough earlier?",
-            "My hand's kinda sore from earlier.",
-            "You're going to make me sore.",
-            "Didn't get enough earlier?",
-            "My tits are still kinda sore from earlier.",
-            "You're going to give me lockhee- . . . jaw.",
-            "Let me get some saliva going.",
-            "Didn't get enough earlier?",
-            "My jaw's still a bit sore from earlier.",
-            "Another one?",
-            "You're going to give me calluses.",
-            "Didn't get enough earlier?",
-            "My feet are kinda sore from earlier.",
+            "Was it that good?",
+            "You're really digging this. . .",
             "Back again so soon?",
             "So you'd like another round?",
-            "You can't stay away from this. . .",
-            "Didn't get enough earlier?",
-            "You're wearing me out here!",
-            "I'm still a little sore from earlier.",
-            "You're really digging this. . .",
-            "Are you sure that's all you want?",
-            "Breaking out the toys again?",
-            "I'm still a bit sore from earlier.",
-            "You're going to wear me out."]
+            "You can't stay away from this. . ."]
+
+        if action in hand_actions or action in mouth_actions or action == "hotdog":
+            $ lines.append("Are you sure that's all you want?")
+
+            if action == "kiss":
+                $ lines.append("Let me get some saliva going.")
+                $ lines.append("Come'ere tasty.")
+        elif action == "sex" or action == "anal":
+            $ lines.append("Maybe not so rough this time though.")
+            $ lines.append("You're going to make me sore.")
+            $ lines.append("I'm still a bit sore from earlier.")
+            $ lines.append("I'm still a little sore from earlier.")
+        elif action in fondle_actions or action in dildo_actions or action == "sex" or action == "anal":
+            $ lines.append("You're going to wear me out.")
+            $ lines.append("You're wearing me out here!")
+            $ lines.append("Take it a bit gently, I'm still shaking from earlier.")
+            $ lines.append("Take it easy though.")
+
+            if action in dildo_actions:
+                $ lines.append("Breaking out the toys again?")
+            elif action "eat_pussy":
+                $ lines.append("What a girl wants. . .")
+        elif action == "masturbation":
+            $ lines.append("I kinda liked the audience. . .")
+        elif action == "blowjob":
+            $ lines.append("My jaw's still a bit sore from earlier.")
+            $ lines.append("You're going to give me lockhee- . . . jaw.")
+        elif action == "titjob":
+            $ lines.append("My tits are still kinda sore from earlier.")
+        elif action == "handjob":
+            $ lines.append("You're going to give me calluses")
+            $ lines.append("My hand's kinda sore from earlier.")
+        elif action == "footjob":
+            $ lines.append("My feet are kinda sore from earlier.")
     elif Girl == EmmaX:
         $ lines = ["You didn't get enough earlier?",
-            "Relax, gently. . .",
-            "Take it a bit gently, I'm still shaking from earlier.",
-            "Huh? Again?",
-            "Mmmm. . .",
-            "Come and get it.",
-            "I must have done something right.",
-            "What a queen deserves. . .",
-            "Perhaps not so rough this time?",
-            "Mmm. . .",
-            "Another?",
-            "I was that good?",
-            "I did enjoy the audience participation. . .",
-            "You're going to wear out my arm.",
-            "Didn't get enough earlier?",
-            "My hand's a bit sore from earlier.",
-            "My hand's rather sore from before.",
-            "You're going to wear them out.",
-            "Didn't get enough earlier?",
-            "I'm still a bit sore from earlier.",
-            "Back so soon?",
-            "Let me get some saliva going.",
-            "Didn't get enough earlier?",
-            "My jaw's still sore from our prior engagement.",
-            "My jaw's still a bit sore from earlier.",
-            "Breaking out the toys again?",
-            "Didn't get enough earlier?",
-            "You're going to wear me out.",
-            "I'd rather not get calluses.",
-            "My feet are rather sore from earlier.",
-            "Back again?",
-            "You'd like another round?",
-            "I suppose I am irresistible. . .",
-            "So you'd like another round?",
-            "I'm still a little sore from earlier.",
-            "Didn't get enough earlier?",
-            "You're wearing me out, " + Girl.player_petname + ".",
             "Back again so soon?",
             "So you'd like another round?",
             "You're really into this. . .",
-            "Are you sure that's all you want?"]
+            "Didn't get enough earlier?",
+            "Back again?",
+            "You'd like another round?",
+            "I suppose I am irresistible. . .",
+            "Back so soon?",
+            "Huh? Again?",
+            "Mmmm. . .",
+            "Mmm. . .",
+            "Come and get it.",
+            "Another?",
+            "I was that good?",
+            "I must have done something right."]
+
+        if action in hand_actions or action in mouth_actions or action == "hotdog":
+            $ lines.append("Are you sure that's all you want?")
+
+            if action == "kiss":
+                $ lines.append("Let me get some saliva going.")
+            elif action in hand_actions:
+                $ lines.append("Relax, gently. . .")
+        elif action == "sex" or action == "anal":
+            $ lines.append("Perhaps not so rough this time?")
+            $ lines.append("I'm still a bit sore from earlier.")
+            $ lines.append("I'm still a little sore from earlier.")
+        elif action in fondle_actions or action in dildo_actions or action == "sex" or action == "anal":
+            $ lines.append("You're wearing me out, " + Girl.player_petname + ".")
+            $ lines.append("You're going to wear me out.")
+            $ lines.append("Take it a bit gently, I'm still shaking from earlier.")
+
+            if action in dildo_actions:
+                $ lines.append("Breaking out the toys again?")
+            elif action "eat_pussy":
+                $ lines.append("What a queen deserves. . .")
+        elif action == "masturbation":
+            $ lines.append("I did enjoy the audience participation. . .")
+        elif action == "blowjob":
+            $ lines.append("My jaw's still a bit sore from earlier.")
+            $ lines.append("My jaw's still sore from our prior engagement.")
+        elif action == "titjob":
+            $ lines.append("You're going to wear them out.")
+        elif action == "handjob":
+            $ lines.append("I'd rather not get calluses.")
+            $ lines.append("You're going to wear out my arm.")
+            $ lines.append("My hand's a bit sore from earlier.")
+            $ lines.append("My hand's rather sore from before.")
+        elif action == "footjob":
+            $ lines.append("My feet are rather sore from earlier.")
     elif Girl == LauraX:
         $ lines = ["You didn't get enough earlier?",
-            "Chill. . .",
-            "Take it slow, I'm still shaking from earlier.",
             "Huh? Again?",
-            "I must have done something right.",
+            "I must have done something right."
             "I do like this treatment. . .",
             "Mmm, you like that? . .",
             "Mmm. . .",
@@ -2607,38 +2637,45 @@ label daily_action_lines(Girl, action):
             "Mmmmmm.",
             "Get over here.",
             "Did you enjoy that?",
-            "I liked having an audience. . ."
-            "I'm glad I don't grow calluses.",
             "Didn't get enough earlier?",
-            "Again the with handjobs, huh?",
             "I guess you want more.",
             "Back for more?",
-            "Didn't get enough earlier?",
-            "You're really working these puppies.",
-            "Wear'in me out here.",
-            "I must be too good at this.",
-            "Let me get some saliva going.",
-            "Didn't get enough earlier?",
-            "Breaking out the toys again?",
-            "You're going to wear me out.",
-            "I'm still a bit sore from earlier.",
-            "You're going to wear me out.",
-            "Back again?",
-            "You'd like another round?",
-            "I must be better than I thought.",
-            "Didn't get enough earlier?",
-            "Your funeral, " + Girl.player_petname + ".",
+            "I must be too good at this."
+            "Again? Sure.",
+            "You're really into this. . .",
             "Back again so soon?",
             "So you'd like another round?",
-            "Again? Sure.",
-            "Didn't get enough earlier?",
-            "Your funeral, " + Girl.player_petname + ".",
-            "You're really into this. . .",
-            "Are you sure that's all you want?"]
+            "Back again?",
+            "You'd like another round?",
+            "I must be better than I thought."]
+
+        if action in hand_actions or action in mouth_actions or action == "hotdog":
+            $ lines.append("Are you sure that's all you want?")
+
+            if action == "kiss":
+                $ lines.append("Let me get some saliva going.")
+            elif action in hand_actions:
+                $ lines.append("Chill. . .")
+        elif action == "sex" or action == "anal":
+            $ lines.append("I'm still a bit sore from earlier.")
+        elif action in fondle_actions or action in dildo_actions or action == "sex" or action == "anal":
+            $ lines.append("Take it slow, I'm still shaking from earlier.")
+            $ lines.append("Wear'in me out here.")
+            $ lines.append("You're going to wear me out.")
+
+            if action in dildo_actions:
+                $ lines.append("Breaking out the toys again?")
+        elif action == "masturbation":
+            $ lines.append("I liked having an audience. . .")
+        elif action == "titjob":
+            $ lines.append("You're really working these puppies.")
+        elif action == "handjob":
+            $ lines.append("I'm glad I don't grow calluses.")
+            $ lines.append("Again the with handjobs, huh?")
+        elif sex_actions in Girl.recent_history:
+            $ lines.append("Your funeral, " + Girl.player_petname + ".")
     elif Girl == JeanX:
         $ lines = ["You didn't get enough earlier?",
-            "Chill. . .",
-            "Take it slow, I'm still shaking from earlier.",
             "Huh? Again?",
             "I must have done something right.",
             "I do like this. . .",
@@ -2647,76 +2684,95 @@ label daily_action_lines(Girl, action):
             "MmMmmm. . .",
             "Oh, get over here.",
             "Did you enjoy that?",
-            "I do like having an audience. . .",
             "Another one?",
             "Didn't get enough earlier?",
-            "Again the with handjobs, huh?",
             "I guess you want more.",
             "Back for more?",
-            "You're really working these babies.",
-            "Didn't get enough earlier?",
-            "You're wearing me out here.",
             "I must be too good at this.",
-            "Breaking out the toys again?",
-            "You're going to wear me out.",
             "Back again?",
             "You'd like another round?",
             "I must be better than I thought.",
-            "Didn't get enough earlier?",
-            "Your funeral, " + Girl.player_petname + ".",
             "Back again so soon?",
             "So you'd like another round?",
             "Again? Sure.",
-            "You're really into this. . .",
-            "Are you sure that's all you want?"]
+            "You're really into this. . ."]
+
+        if action in hand_actions or action in mouth_actions or action == "hotdog":
+            $ lines.append("Are you sure that's all you want?")
+
+            if action in hand_actions:
+                $ lines.append("Chill. . .")
+        elif action in fondle_actions or action in dildo_actions or action == "sex" or action == "anal":
+            $ lines.append("Take it slow, I'm still shaking from earlier.")
+            $ lines.append("You're wearing me out here.")
+            $ lines.append("You're going to wear me out.")
+
+            if action in dildo_actions:
+                $ lines.append("Breaking out the toys again?")
+        elif action == "masturbation":
+            $ lines.append("I do like having an audience. . .")
+        elif action == "titjob":
+            $ lines.append("You're really working these babies.")
+        elif action == "handjob":
+            $ lines.append("Again the with handjobs, huh?")
+        elif sex_actions in Girl.recent_history:
+            $ lines.append("Your funeral, " + Girl.player_petname + ".")
     elif Girl == StormX:
         $ lines = ["You didn't get enough earlier?",
-            "Relax, gently. . .",
-            "Gently. . . gently. . .",
-            "Take it a bit gently, I am still glowing from earlier.",
             "Huh? Again?",
             "I must have done something right.",
-            "What a queen deserves. . .",
-            "Perhaps not so rough this time?",
             "Mmm. . .",
-            "My arm will wear out.",
             "You did not get enough earlier?",
-            "My hand is quite sore from earlier.",
-            "My hand is rather sore from before.",
-            "You will wear them out like this.",
-            "You did not get enough earlier?",
-            "I am still a bit sore from earlier.",
             "Back so soon?",
             "Mmmm. . .",
             "Yes, let's.",
             "I must prepare myself.",
-            "I put on quite the show?",
-            "I did enjoy the audience participation. . .",
             "You did not get enough earlier?",
-            "My jaw is still rather sore.",
-            "My jaw is still recovering.",
-            "Breaking out the toys again?",
-            "You did not get enough earlier?",
-            "You're going to wear me out.",
             "Another?",
-            "You did not get enough earlier?",
-            "My feet are rather sore from earlier.",
             "Back again?",
             "You would like another round?",
             "I suppose that I can be irresistible. . .",
             "Did you not get enough earlier?",
-            "You are wearing me out, " + Girl.player_petname + ".",
             "Back again so soon?",
             "So you would like another round?",
-            "I am still rather sore from earlier.",
-            "You did not get enough earlier?",
-            "You are tiring me, " + Girl.player_petname + ".",
-            "You really are into this. . .",
-            "Are you sure that is all you would want?"]
+            "You really are into this. . ."]
+
+        if action in hand_actions or action in mouth_actions or action == "hotdog":
+            $ lines.append("Are you sure that is all you would want?")
+
+            if action in hand_actions:
+                $ lines.append("Relax, gently. . .")
+                $ lines.append("Gently. . . gently. . .")
+        elif action == "sex" or action == "anal":
+            $ lines.append("Perhaps not so rough this time?")
+            $ lines.append("I am still a bit sore from earlier.")
+            $ lines.append("I am still rather sore from earlier.")
+        elif action in fondle_actions or action in dildo_actions or action == "sex" or action == "anal":
+            $ lines.append("Take it a bit gently, I am still glowing from earlier.")
+            $ lines.append("You're going to wear me out.")
+            $ lines.append("You are wearing me out, " + Girl.player_petname + ".")
+            $ lines.append("You are tiring me, " + Girl.player_petname + ".")
+
+            if action in dildo_actions:
+                $ lines.append("Breaking out the toys again?")
+            elif action "eat_pussy":
+                $ lines.append("What a queen deserves. . .")
+                $ lines.append("I did enjoy the audience participation. . .")
+        elif action == "masturbation":
+            $ lines.append("I put on quite the show?")
+        elif action == "blowjob":
+            $ lines.append("My jaw is still rather sore.")
+            $ lines.append("My jaw is still recovering.")
+        elif action == "titjob":
+            $ lines.append("You will wear them out like this.")
+        elif action == "handjob":
+            $ lines.append("My arm will wear out.")
+            $ lines.append("My hand is quite sore from earlier.")
+            $ lines.append("My hand is rather sore from before.")
+        elif action == "footjob":
+            $ lines.append("My feet are rather sore from earlier.")
     elif Girl == JubesX:
         $ lines = ["You didn't get enough earlier?",
-            "Relax. . .",
-            "Take it slow, I'm still shaking from earlier.",
             "Huh? Again?",
             "I must have done something right.",
             "I guess fair's fair. . .",
@@ -2724,13 +2780,18 @@ label daily_action_lines(Girl, action):
             "Sure, come to me.",
             "Mmm, you like that? . .",
             "Did you enjoy that?",
-            "I enjoyed having an audience. . .",
             "Mmm. . .",
             "Another one?",
-            "I'm glad I don't grow calluses.",
-            "Didn't get enough earlier?",
-            "Again with the handjobs, huh?",
             "I guess you want more."]
+
+        if action in hand_actions:
+                $ lines.append("Relax. . .")
+                $ lines.append("Take it slow, I'm still shaking from earlier.")
+        elif action == "masturbation":
+            $ lines.append("I enjoyed having an audience. . .")
+        elif action == "handjob":
+            $ lines.append("I'm glad I don't grow calluses.")
+            $ lines.append("Again with the handjobs, huh?")
 
     $ line = renpy.random.choice(lines)
 
@@ -6105,6 +6166,28 @@ label masturbation_just_got_here_lines(Girl, action):
         $ lines = ["That seems likely. . ."]
     elif Girl == JubesX:
         $ lines = ["Suuuure. . ."]
+
+    $ line = renpy.random.choice(lines)
+
+    Girl.voice "[line]"
+
+    return
+
+label masturbation_keep_going_lines(Girl, action):
+    if Girl == RogueX:
+        $ lines = ["Well, alright. . ."]
+    elif Girl == KittyX:
+        $ lines = ["Sure. . ."]
+    elif Girl == EmmaX:
+        $ lines = ["I suppose. . ."]
+    elif Girl == LauraX:
+        $ lines = ["Ok. . ."]
+    elif Girl == JeanX:
+        $ lines = ["Ok. . ."]
+    elif Girl == StormX:
+        $ lines = ["I could. . ."]
+    elif Girl == JubesX:
+        $ lines = ["Ok. . ."]
 
     $ line = renpy.random.choice(lines)
 

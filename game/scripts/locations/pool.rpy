@@ -881,11 +881,6 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
 
                 $ Swimmers.append(temp_Girls[0])
             else:
-                if line or Passline:
-
-                    call show_Girl(temp_Girls[0])
-                else:
-                    call show_Girl(temp_Girls[0])
                 if temp_Girls[0].change_outfit("swimwear"):
 
                     $ line = "" if Swimmers and not Passline else "s"

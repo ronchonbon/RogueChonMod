@@ -378,6 +378,8 @@ label action_cycle(Girl, action):
                 call sex_menu(Girl, action)
 
             if _return[1] == "switch":
+                $ action_speed = 0
+
                 return [None, "switch"]
             elif _return[1] == "stop":
                 return [None, "stop"]

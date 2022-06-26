@@ -2218,16 +2218,16 @@ label special_menu(Girl):
                 $ item = "_no_dress"
             "Try without the [Girl.outfit[bodysuit]]." if Girl.outfit["bodysuit"]:
                 $ item = "_no_bodysuit"
-            "How about the Raven cloak?" if Girl == RogueX and Girl.outfit["cloak"] != "_raven_cloak" and "_raven_cloak" in Girl.inventory:
-                $ item = "_raven_cloak"
+            "How about the Raven cloak?" if Girl == RogueX and Girl.outfit["cloak"] != "_Raven_cloak" and "_Raven_cloak" in Girl.inventory:
+                $ item = "_Raven_cloak"
             "What about your blue dress?" if Girl == RogueX and Girl.outfit["dress"] != "_blue_dress" and "_blue_dress" in Girl.inventory:
                 $ item = "_blue_dress"
             "I like your red dress." if Girl == RogueX and Girl.outfit["dress"] != "_red_dress" and "_red_dress" in Girl.inventory:
                 $ item = "_red_dress"
-            "Try on that Chinese dress." if Girl == KittyX and Girl.outfit["dress"] != "_chinese" and "_chinese" in Girl.inventory:
-                $ item = "_chinese"
-            "You know I love your Raven suit." if Girl == RogueX and Girl.outfit["bodysuit"] != "_raven_suit" and "_raven_suit" in Girl.inventory:
-                $ item = "_raven_suit"
+            "Try on that qipao." if Girl == KittyX and Girl.outfit["dress"] != "_qipao" and "_qipao" in Girl.inventory:
+                $ item = "_qipao"
+            "You know I love your Raven suit." if Girl == RogueX and Girl.outfit["bodysuit"] != "_Raven_suit" and "_Raven_suit" in Girl.inventory:
+                $ item = "_Raven_suit"
             "Try on your one-piece swimsuit." if Girl == RogueX and Girl.outfit["bodysuit"] != "_swimsuit" and "_swimsuit" in Girl.inventory:
                 $ item = "_swimsuit"
             "What about your sexy one-piece swimsuit?" if Girl == RogueX and Girl.outfit["bodysuit"] != "_sexy_swimsuit" and "_sexy_swimsuit" in Girl.inventory:

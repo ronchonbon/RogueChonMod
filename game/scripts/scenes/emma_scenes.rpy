@@ -1358,8 +1358,8 @@ label Emma_BF:
         extend ""
         "Are you kidding? I'd love to!":
             call change_Girl_stat(EmmaX, "love", 200, 25)
-            "[EmmaX.name] wraps her arms around you and starts kissing you passionately."
             call kiss_launch(EmmaX)
+            "[EmmaX.name] wraps her arms around you and starts kissing you passionately."
             $ EmmaX.action_counter["kiss"] += 1
         "Uhm, okay.":
             $ EmmaX.brows = "_confused"
@@ -1450,7 +1450,7 @@ label Emma_Love:
 
     python:
         for G in all_Girls:
-            if G != EmmaX and approval_Check(G, 1200, "LO"):
+            if G != EmmaX and approval_check(G, 1200, "LO"):
                 Shipping.append(G)
 
     $ Shipshape = len(Shipping)

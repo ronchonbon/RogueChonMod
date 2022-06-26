@@ -1475,7 +1475,7 @@ image Jean_titjob_cock_animation1:
     "Zero_blowjob_cock"
 
     subpixel True
-    rotate -6
+    rotate -8
     block:
         ease 2 yoffset 0
         pause 0.4
@@ -1488,16 +1488,16 @@ image Jean_titjob_cock_animation2:
     "Zero_blowjob_cock"
 
     subpixel True
-    rotate -4
+    rotate -7
     parallel:
         ease 1 yoffset 0
         pause 0.2
         ease 0.4 yoffset 30
         repeat
     parallel:
-        ease 1 rotate -2
+        ease 1 rotate -5
         pause 0.1
-        ease 0.5 rotate -4
+        ease 0.5 rotate -7
         repeat
 
 image Jean_titjob_cock_animation3:

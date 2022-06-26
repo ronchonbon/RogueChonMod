@@ -2169,7 +2169,7 @@ label Compliment(Girl=0, line0=0, line1=0, line2=0, Options=[], CountList=[], li
                 ch_v "I have that effect on people."
             $ Girl.change_face("_bemused", 1)
         else:
-            $ Girl.change_face("_angry", 1,eyes = "_up")
+            $ Girl.change_face("_angry", 1,eyes = "_stunned")
             call change_Girl_stat(Girl, "love", 60, 1)
             call change_Girl_stat(Girl, "obedience", 50, 1)
             if Girl == RogueX:
@@ -2179,7 +2179,7 @@ label Compliment(Girl=0, line0=0, line1=0, line2=0, Options=[], CountList=[], li
             elif Girl == EmmaX:
                 ch_e "Perhaps you're laying it on a bit thick there. . ."
             elif Girl == JeanX:
-                $ Girl.change_face("_bemused", 1,eyes = "_up")
+                $ Girl.change_face("_bemused", 1,eyes = "_stunned")
                 call change_Girl_stat(Girl, "love", 60, 1)
                 call change_Girl_stat(Girl, "obedience", 80, 1)
                 call change_Girl_stat(Girl, "inhibition", 80, 1)
