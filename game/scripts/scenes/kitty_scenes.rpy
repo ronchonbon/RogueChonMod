@@ -438,8 +438,8 @@ label Kitty_Love:
     else:
         "[KittyX.name] suddenly stares at you very intently."
 
-    $ KittyX.location = Player.location
-    call set_the_scene (0)
+
+    call set_the_scene
     call show_Girl (KittyX)
     call clear_the_room (KittyX)
     call set_Character_taboos
@@ -684,7 +684,7 @@ label Kitty_Love_End:
     if Player.location != "bg_player" and Player.location != "bg_kitty":
         ch_k "Wait, let's take this someplace more private. . ."
         $ Player.location = "bg_kitty"
-        $ KittyX.location = Player.location
+
         call set_the_scene
         call clear_the_room (KittyX)
         call set_Character_taboos
@@ -779,8 +779,8 @@ label Kitty_Sub:
     if KittyX.location != Player.location and KittyX not in Player.Party:
         "Suddenly, [KittyX.name] shows up and says she needs to talk to you."
 
-    $ KittyX.location = Player.location
-    call set_the_scene (0)
+
+    call set_the_scene
     call show_Girl (KittyX)
     call clear_the_room (KittyX)
     call set_Character_taboos
@@ -1086,8 +1086,8 @@ label Kitty_Master:
     if KittyX.location != Player.location and KittyX not in Player.Party:
         "Suddenly, [KittyX.name] shows up and says she needs to talk to you."
 
-    $ KittyX.location = Player.location
-    call set_the_scene (0)
+
+    call set_the_scene
     call show_Girl (KittyX)
     call clear_the_room (KittyX)
     $ KittyX.daily_history.append("relationship")
@@ -1206,8 +1206,8 @@ label Kitty_Master:
 
 
 label Kitty_Sexfriend:
-    $ KittyX.location = Player.location
-    call set_the_scene (0)
+
+    call set_the_scene
     call show_Girl (KittyX)
     call clear_the_room (KittyX)
     $ KittyX.daily_history.append("relationship")
@@ -2204,7 +2204,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
 
 label Kitty_Kate:
     $ KittyX.location = Player.location
-    call set_the_scene (0)
+    call set_the_scene
     call show_Girl (KittyX)
     call set_Character_taboos
     $ line = 0

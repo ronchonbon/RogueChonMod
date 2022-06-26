@@ -52,7 +52,7 @@ label psychicFlash(Face="_sly", TempLoc=0):
     call MindFuck_Screen
     $ line = Girl.location
     $ Girl.location = Player.location
-    call set_the_scene (1, 0, 0, 0, 1)
+    call set_the_scene
     if Face:
         $ Girl.change_face(Face)
     $ Girl.arm_pose = 2
@@ -91,7 +91,7 @@ label MindFuck(TempLoc=0):
             $ Girl.location = Player.location
             $ Girl.change_face("_sly")
 
-            call set_the_scene (1, 0, 0, 0, 1)
+            call set_the_scene
             Girl.voice "There. . ."
 
             $ Player.add_word(1,"MindFuck","MindFuck", 0,"MindFuck")

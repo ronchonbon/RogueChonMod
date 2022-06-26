@@ -1910,7 +1910,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
 
     if Player.primary_action == "striptease":
         call show_full_body(Girl)
-        call show_Girl(Girl, color_transform = Girl_Dance1(Girl))
+        call show_Girl(Girl, color_transform = dancing(Girl.sprite_location))
 
         "[Girl.name] begins to dance again."
     return

@@ -11,7 +11,7 @@ label take_class:
         $ line = "You make it in time for the start of the class."
     elif round >= 50:
         $ line = "You get in a bit late, but there's plenty of class left."
-    elif round >= 30:
+    else:
         $ line = "You're pretty late, but catch the tail end of the class."
 
     $ Player.primary_action = None
@@ -63,7 +63,7 @@ label classroom_seating:
             elif G in Player.Party:
                 Girls.remove(G)
 
-    $ Present = Player.Party
+    $ Present = Player.Party if Player.Party else []
 
     $ renpy.random.shuffle(Girls)
 

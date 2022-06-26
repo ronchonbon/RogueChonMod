@@ -2128,7 +2128,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
         call Girls_arrive (EmmaX)
         return
     $ EmmaX.location = Player.location
-    call set_Character_taboos(taboo_location = False)
+    call set_Character_taboos
     $ EmmaX.change_outfit()
     call set_the_scene
     return

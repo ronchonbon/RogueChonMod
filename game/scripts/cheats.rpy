@@ -63,6 +63,12 @@ label cheat_editor(Girl):
                         pass
             "Wardrobe":
                 call wardrobe_editor(Girl)
+            "Maximize all Girls' stats":
+                python:
+                    for G in all_Girls:
+                        G.love = 1000
+                        G.obedience = 1000
+                        G.inhibition = 1000
             "Return":
                 call checkout
 

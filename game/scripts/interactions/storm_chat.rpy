@@ -1961,7 +1961,7 @@ label Storm_Summon(approval_bonus=approval_bonus):
         call Girls_arrive (StormX)
         return
     $ StormX.location = Player.location
-    call set_Character_taboos(taboo_location = False)
+    call set_Character_taboos
     $ StormX.change_outfit()
     call set_the_scene
     return
@@ -1971,7 +1971,7 @@ label Storm_Summon(approval_bonus=approval_bonus):
 
 label Storm_Leave:
     if "freetravels" in StormX.traits or not approval_check(StormX, 700):
-        if StormX.location == "bg_classroom" or StormX.teaching:
+        if StormX.teaching:
             ch_s "I've got class to teach."
         elif StormX.location == "bg_dangerroom":
             ch_s "I am heading for the Danger Room."
@@ -2007,7 +2007,7 @@ label Storm_Leave:
     else:
         $ approval_bonus = 0
 
-    if StormX.location == "bg_classroom" or StormX.teaching:
+    if StormX.teaching:
         ch_s "I've got class to teach, are you attending?"
     elif StormX.location == "bg_dangerroom":
         ch_s "I am heading for the Danger Room, care to join me?"

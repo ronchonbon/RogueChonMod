@@ -458,9 +458,9 @@ label Rogue_BF:
     if RogueX.location != Player.location and RogueX not in Player.Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
-    $ RogueX.location = Player.location
-    call set_the_scene (0)
-    call show_Girl (RogueX)
+
+    call set_the_scene
+
     call clear_the_room (RogueX)
     call set_Character_taboos
     $ RogueX.daily_history.append("relationship")
@@ -604,9 +604,9 @@ label Rogue_Love:
 
     $ Player.add_word(1,"interruption")
     $ Player.location = "bg_rogue"
-    $ RogueX.location = Player.location
-    call set_the_scene (0)
-    call show_Girl (RogueX)
+
+    call set_the_scene
+
     call clear_the_room (RogueX)
     call set_Character_taboos
     $ RogueX.daily_history.append("relationship")
@@ -799,9 +799,9 @@ label Rogue_Sub:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
     $ Player.add_word(1,"interruption")
-    $ RogueX.location = Player.location
-    call set_the_scene (0)
-    call show_Girl (RogueX)
+
+    call set_the_scene
+
     call clear_the_room (RogueX)
     call set_Character_taboos
     $ RogueX.daily_history.append("relationship")
@@ -917,9 +917,9 @@ label Rogue_Master:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
     $ Player.add_word(1,"interruption")
-    $ RogueX.location = Player.location
-    call set_the_scene (0)
-    call show_Girl (RogueX)
+
+    call set_the_scene
+
     call clear_the_room (RogueX)
     call set_Character_taboos
     $ RogueX.daily_history.append("relationship")
@@ -1054,9 +1054,9 @@ label Rogue_Sexfriend:
     if "_stockings_and_garterbelt" not in RogueX.inventory:
         $ RogueX.inventory.append("_stockings_and_garterbelt")
     $ RogueX.player_petnames.append("sex friend")
-    $ RogueX.location = Player.location
-    call set_the_scene (0)
-    call show_Girl (RogueX)
+
+    call set_the_scene
+
     call clear_the_room (RogueX)
     call set_Character_taboos
     $ RogueX.change_face("_smile", 1)
@@ -1168,9 +1168,9 @@ label Rogue_Fuckbuddy:
     if RogueX.location != Player.location and RogueX not in Player.Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
-    $ RogueX.location = Player.location
-    call set_the_scene (0)
-    call show_Girl (RogueX)
+
+    call set_the_scene
+
     call clear_the_room (RogueX)
     call set_Character_taboos
     $ RogueX.change_face("_bemused", 1)
@@ -1578,9 +1578,10 @@ label Rogue_Frisky_Class:
             else:
                 "Since Xavier isn't concerned with your activities, you both head back to your room instead."
 
-                $ RogueX.location = "bg_player"
+                $ Player.location = "bg_player"
 
                 call clear_the_room (RogueX, 0, 1)
+
                 jump player_room
 
 

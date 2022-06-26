@@ -14,7 +14,7 @@ label Flirt(Girl=0):
 
             "Phone Sex" if Player.location == "bg_player":
                 ch_p "Want to do some phone sex?"
-                call set_Character_taboos(taboo_location = False)
+                call set_Character_taboos
                 if not approval_check(Girl, 900) or Girl.SEXP < 15:
 
                     call change_Girl_stat(Girl, "love", 70, -2)
@@ -114,9 +114,9 @@ label Flirt(Girl=0):
                     return
                 call change_Girl_stat(Girl, "obedience", 70, 2)
                 call change_Girl_stat(Girl, "inhibition", 80, 2)
-                call set_Character_taboos(taboo_location = False)
+                call set_Character_taboos
                 call PhoneSex (Girl)
-                call set_Character_taboos(taboo_location = False)
+                call set_Character_taboos
                 $ renpy.pop_call()
                 return
             "Phone Sex [[not here] (locked)" if Player.location != "bg_player":

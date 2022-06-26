@@ -341,16 +341,12 @@ label meet_Emma:
 label Emma_Caught_Classroom:
     show black_screen onlayer black
 
-    $ Player.location = "bg_classroom"
-
-    call clear_the_room(EmmaX, passive = True, silent = True)
-
-    $ EmmaX.location = "bg_teacher"
+    $ EmmaX.teaching = True
     $ EmmaX.arm_pose = 1
     $ EmmaX.change_face("_sexy", eyes = "_closed")
 
-    call check_who_is_present
-    call set_the_scene
+    call set_the_scene(location = "bg_classroom")
+    call clear_the_room(EmmaX, passive = True, silent = True)
 
     "As you walk down the halls, you hear some odd noises coming from the classroom."
 

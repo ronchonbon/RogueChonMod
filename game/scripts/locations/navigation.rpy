@@ -92,7 +92,7 @@ label world_map:
             elif destination == "bg_pool":
                 jump pool
             elif destination == "bg_study":
-                jump study
+                jump study_room
             elif destination == "bg_mall":
                 jump mall
 
@@ -105,11 +105,9 @@ label player_room:
         $ Nearby = []
 
         call traveling_event_calls(location = "bg_player")
-        call check_who_is_present(location = "bg_player")
         call set_Character_taboos
         call set_the_scene(location = "bg_player", fade = True)
     else:
-        call check_who_is_present(location = "bg_player")
         call set_Character_taboos
         call set_the_scene(location = "bg_player")
 
@@ -261,7 +259,6 @@ label girls_room_entry:
                 "Knock politely":
                     $ knocking = True
                 "Use the key to enter.":
-                    call check_who_is_present(location = Girl.home)
                     call set_Character_taboos
                     call set_the_scene(location = Girl.home, fade = True)
 
@@ -384,11 +381,16 @@ label girls_room_entry:
                 elif Girl == JubesX:
                     ch_v "Don't mess with me at night, [Girl.player_petname]. Out!"
 
+                $ Girl.location = Girl.home
+
                 jump reset_location
             elif "no_entry" in Girl.recent_history or "_angry" in Girl.recent_history:
                 $ Girl.change_face("_angry")
 
                 call get_out_lines(Girl)
+
+                $ Girl.location = Girl.home
+
                 jump reset_location
             elif time_index > 2 and (Girl.event_counter["sleepover"] or Girl.SEXP >= 30 or Girl == JubesX):
                 if Girl == RogueX:
@@ -454,6 +456,7 @@ label girls_room_entry:
                 elif Girl == JubesX:
                     ch_v "Nope. . ."
 
+                $ Girl.location = Girl.home
                 $ Girl.recent_history.append("no_entry")
                 $ Girl.daily_history.append("no_entry")
 
@@ -489,13 +492,11 @@ label girls_room_entry:
                 elif Girl == JubesX:
                     ch_v "Oh, no thanks."
 
-            $ Girl.recent_history.append("no_entry")
-            $ Girl.daily_history.append("no_entry")
+                $ Girl.location = Girl.home
+                $ Girl.recent_history.append("no_entry")
+                $ Girl.daily_history.append("no_entry")
 
-            jump reset_location
-
-    if Girl.location == "bg_door":
-        $ Girl.location = Girl.home
+                jump reset_location
 
     return
 
@@ -508,7 +509,6 @@ label girls_room:
         $ Nearby = []
 
         call traveling_event_calls(location = Girl.home)
-        call check_who_is_present(location = "bg_door")
         call set_Character_taboos
         call set_the_scene(location = "bg_door", fade = True)
         call girls_room_entry
@@ -516,7 +516,6 @@ label girls_room:
     if Player.location != Girl.home:
         $ door_locked = False
 
-        call check_who_is_present(location = Girl.home)
         call set_Character_taboos
         call set_the_scene(location = Girl.home, fade = True)
 
@@ -593,7 +592,6 @@ label campus:
 
         call traveling_event_calls(location = "bg_campus")
 
-    call check_who_is_present(location = "bg_campus")
     call set_Character_taboos
     call set_the_scene(location = "bg_campus", fade = True)
     call quick_event_calls
@@ -636,19 +634,17 @@ label classroom:
 
         $ Nearby = []
 
-        call check_who_is_present(location = "bg_classroom")
         call traveling_event_calls(location = "bg_classroom")
         call set_Character_taboos
 
         if time_index < 2 and weekday < 5:
             call classroom_seating
 
-        if Player.location == "bg_classroom":
-            call set_the_scene(location = "bg_classroom")
+        if Player.location != "bg_classroom":
+            call set_the_scene(location = "bg_classroom", fade = True)
     else:
         $ door_locked = False
 
-        call check_who_is_present(location = "bg_classroom")
         call set_Character_taboos
         call set_the_scene(location = "bg_classroom")
 
@@ -851,12 +847,10 @@ label danger_room:
         $ Nearby = []
 
         call traveling_event_calls(location = "bg_dangerroom")
-        call check_who_is_present(location = "bg_dangerroom")
         call set_Character_taboos
         call set_the_scene(location = "bg_dangerroom", fade = True)
         call danger_room_entry
     else:
-        call check_who_is_present(location = "bg_dangerroom")
         call set_Character_taboos
         call set_the_scene(location = "bg_dangerroom")
 
@@ -937,7 +931,6 @@ label shower_entry:
         elif D20 > 13:
             $ showering_Girls[0].add_word(1,"showered","showered", 0, 0)
 
-            call check_who_is_present(location = "bg_showerroom")
             call set_Character_taboos
             call set_the_scene(location = "bg_showerroom", fade = True)
             call caught_changing(showering_Girls[0])
@@ -952,7 +945,6 @@ label shower_entry:
 
             G.location = "bg_showerroom"
 
-    call check_who_is_present(location = "bg_showerroom")
     call set_the_scene(location = "bg_showerroom", fade = True)
 
     if len(Player.Party) > 2:
@@ -1051,7 +1043,6 @@ label shower_room:
         call shower_entry
 
     if Player.location != "bg_showerroom":
-        call check_who_is_present(location = "bg_showerroom")
         call set_Character_taboos
         call set_the_scene(location = "bg_showerroom", fade = True)
 
@@ -1115,7 +1106,6 @@ label pool:
 
         call traveling_event_calls(location = "bg_pool")
 
-    call check_who_is_present(location = "bg_pool")
     call set_Character_taboos
     call set_the_scene(location = "bg_pool", fade = True)
     call quick_event_calls
@@ -1312,7 +1302,6 @@ label study_room:
 
         call traveling_event_calls(location = "bg_study")
 
-        call check_who_is_present(location = "bg_door")
         call set_Character_taboos
         call set_the_scene(location = "bg_door", fade = True)
         call study_entry
@@ -1320,7 +1309,6 @@ label study_room:
     if Player.location != "bg_study":
         $ door_locked = False
 
-        call check_who_is_present(location = "bg_study")
         call set_Character_taboos
         call change_Xavier_face("_happy")
         call set_the_scene(location = "bg_study", fade = True)
@@ -1427,13 +1415,11 @@ label mall:
         $ Nearby = []
 
         call traveling_event_calls(location = "bg_mall")
-        call check_who_is_present(location = "bg_mall")
         call set_Character_taboos
         call set_the_scene(location = "bg_mall", fade = True)
 
         "You're at the Salem Centre Mall."
     else:
-        call check_who_is_present(location = "bg_mall")
         call set_Character_taboos
         call set_the_scene(location = "bg_mall")
 

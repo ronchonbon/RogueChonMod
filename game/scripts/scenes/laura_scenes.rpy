@@ -364,7 +364,7 @@ label Laura_BF(temp_Girls=[]):
         else:
             "[LauraX.name] turns towards you and motions that she wants to speak to you alone."
     $ LauraX.drain_word("asked_to_meet")
-    call set_the_scene (0)
+    call set_the_scene
     call show_Girl (LauraX)
     "She looks a bit concerned and you can tell she's a bit anxious about whatever she has to say."
     call set_Character_taboos
@@ -692,7 +692,7 @@ label Laura_Cleanhouse:
     if Player.location != "bg_laura" and Player.location != "bg_player":
         "With little word, she moves behind you and pushes you towards her room."
         $ Player.location = "bg_laura"
-    $ LauraX.location = Player.location
+
     call set_the_scene
     call clear_the_room (LauraX)
     call set_the_scene
@@ -793,7 +793,7 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
     if Player.location != "bg_laura" and Player.location != "bg_player":
         "With little word, she moves behind you and pushes you towards her room."
         $ Player.location = "bg_laura"
-    $ LauraX.location = Player.location
+
     call set_the_scene
     call clear_the_room (LauraX)
     call set_the_scene
@@ -1320,8 +1320,8 @@ label Laura_Sub:
     if LauraX.location != Player.location and LauraX not in Player.Party:
         "Suddenly, [LauraX.name] shows up and says she needs to talk to you."
 
-    $ LauraX.location = Player.location
-    call set_the_scene (0)
+
+    call set_the_scene
     call show_Girl (LauraX)
     call clear_the_room (LauraX)
     call set_the_scene
@@ -1693,8 +1693,8 @@ label Laura_Master:
     if LauraX.location != Player.location and LauraX not in Player.Party:
         "Suddenly, [LauraX.name] shows up and says she needs to talk to you."
 
-    $ LauraX.location = Player.location
-    call set_the_scene (0)
+
+    call set_the_scene
     call show_Girl (LauraX)
     call clear_the_room (LauraX)
     call set_the_scene
@@ -1988,7 +1988,7 @@ label Laura_Sexfriend:
                         $ Player.location = "bg_laura"
                     else:
                         $ Player.location = "bg_player"
-                    $ LauraX.location = Player.location
+
                     call clear_the_room (LauraX)
                     call set_the_scene
                     $ taboo = 0
@@ -2021,7 +2021,7 @@ label Laura_Fuckbuddy:
 
     $ LauraX.location = Player.location
     call shift_focus (LauraX)
-    call set_the_scene (0)
+    call set_the_scene
     $ LauraX.outfit_name = "casual1"
     $ LauraX.today_outfit_name = "casual1"
     $ LauraX.change_outfit("casual1")
@@ -2318,7 +2318,7 @@ label Laura_Dressup:
     $ Player.location = "bg_campus"
     call remove_all
     $ LauraX.location = Player.location
-    call set_the_scene (0)
+    call set_the_scene
 
     $ LauraX.outfit_name = "casual1"
     $ LauraX.change_outfit("casual1")
@@ -2370,7 +2370,7 @@ label Laura_Dressup:
 
     call shift_focus (KittyX)
     $ KittyX.location = Player.location
-    call set_the_scene (0)
+    call set_the_scene
     $ KittyX.outfit_name = KittyX.today_outfit_name
     $ KittyX.change_outfit()
     call show_Girl (KittyX)
@@ -2730,7 +2730,7 @@ label Laura_Foul:
     if Player.location != "bg_laura" and Player.location != "bg_player":
         "With little word, she moves behind you and pushes you towards her room."
         $ Player.location = "bg_laura"
-    $ LauraX.location = Player.location
+
     call set_the_scene
     call clear_the_room (LauraX)
     call set_the_scene

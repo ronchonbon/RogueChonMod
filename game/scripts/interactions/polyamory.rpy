@@ -3522,7 +3522,7 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
     $ Girl.add_word(1, 0, 0, 0,"les "+Girl2.tag)
     $ Girl2.add_word(1, 0, 0, 0,"les "+Girl.tag)
 
-    call set_the_scene (0, 1, 0, 0)
+    call set_the_scene
     "As you approach her room, you hear soft moans from inside, and notice that the door is slightly ajar."
     while line < 2:
         menu:
@@ -3570,7 +3570,7 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
     $ line = 0
     $ Girl.change_face("_sly", 1)
     $ Girl2.change_face("_sly", 1)
-    call set_the_scene (1, 0, 0, 0)
+    call set_the_scene
     if Girl == RogueX:
         ch_r "Sorry we got started without you."
     elif Girl == KittyX:

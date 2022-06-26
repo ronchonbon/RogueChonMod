@@ -39,7 +39,7 @@ init -1:
 
     default total_SEXP = 0
 
-    default bedrooms = ["bg_player"]
+    default bedrooms = ["bg_player", "bg_rogue", "bg_kitty", "bg_emma", "bg_laura", "bg_jean", "bg_storm", "bg_jubes"]
 
     default taboo = 0
 

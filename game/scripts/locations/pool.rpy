@@ -769,7 +769,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
     $ Girl.wet = 1
     $ round -= 20 if round >= 20 else round
     "You both swim around for a bit."
-    call set_the_scene (1, 0, 0)
+    call set_the_scene
 
     return
 

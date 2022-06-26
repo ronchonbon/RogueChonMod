@@ -65,6 +65,8 @@ layeredimage Kitty_sprite standing:
 
     if not KittyX.outfit["bottom"]:
         Null()
+    elif KittyX.bottom_pulled_down and KittyX.outfit["bottom"] == "_capris":
+        Null()
     elif KittyX.bottom_pulled_down or KittyX.upskirt:
         "images/Kitty_standing/Kitty_standing_bottom[KittyX.outfit[bottom]]_down.png"
     elif KittyX.grool > 1 and KittyX.outfit["bottom"] in ["_shorts", "_yoga_pants", "_black_and_blue_pants"]:
@@ -507,6 +509,8 @@ layeredimage Kitty_sex_legs:
         Null()
     elif KittyX.outfit["bottom"] not in skirts and KittyX.grool > 1 and not KittyX.bottom_pulled_down:
         "images/Kitty_sex/Kitty_sex_bottom[KittyX.outfit[bottom]]_grool.png"
+    elif KittyX.bottom_pulled_down and KittyX.outfit["bottom"] == "_capris":
+        Null()
     elif KittyX.bottom_pulled_down or KittyX.upskirt:
         "images/Kitty_sex/Kitty_sex_bottom[KittyX.outfit[bottom]]_down.png"
     else:
@@ -794,13 +798,13 @@ layeredimage Kitty_doggy_ass:
         Null()
     elif KittyX.outfit["bottom"] in skirts and KittyX.upskirt:
         "images/Kitty_doggy/Kitty_doggy_bottom[KittyX.outfit[bottom]]_down.png"
-    elif KittyX.bottom not in skirts and KittyX.grool > 1:
+    elif KittyX.outfit["bottom"] not in skirts and KittyX.grool > 1:
         "images/Kitty_doggy/Kitty_doggy_bottom[KittyX.outfit[bottom]]_grool.png"
     else:
         "images/Kitty_doggy/Kitty_doggy_bottom[KittyX.outfit[bottom]].png"
 
     if KittyX.outfit["top"] == "_pink_top" and not (KittyX.bottom_pulled_down or KittyX.upskirt):
-        "images/Kitty_doggy/Kitty_doggy_topKittyX.outfit[top]_tail.png"
+        "images/Kitty_doggy/Kitty_doggy_top[KittyX.outfit[top]]_tail.png"
 
     if KittyX.outfit["bra"] != "_towel":
         Null()

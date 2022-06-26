@@ -729,7 +729,7 @@ label Storm_Hairtalk:
 
     call shift_focus (StormX)
     $ Player.location = "bg_classroom"
-    $ StormX.location = "bg_classroom"
+
     call clear_the_room (StormX, 0, 1)
     call set_the_scene
     call alternate_clothes (StormX, 8)
@@ -1074,15 +1074,15 @@ label Storm_Key:
 label Storm_BF:
     call shift_focus (StormX)
     if StormX.location != Player.location:
-        $ StormX.location = Player.location
+
         if StormX not in Player.Party:
             "[StormX.name] approaches you and asks if the two of you can talk."
         else:
             "[StormX.name] turns towards you and asks if the two of you can talk."
     $ StormX.drain_word("asked_to_meet")
 
-    call set_the_scene (0)
-    call show_Girl (StormX)
+    call set_the_scene
+
     call set_Character_taboos
     call clear_the_room (StormX)
     $ StormX.daily_history.append("relationship")
@@ -1307,7 +1307,7 @@ label Storm_Love:
     if Player.location != "bg_storm" and Player.location != "bg_player":
         "With little word, she takes your hand and pulls you up to her room."
         $ Player.location = "bg_storm"
-    $ StormX.location = Player.location
+
     call set_the_scene
     call clear_the_room (StormX)
     call set_Character_taboos
@@ -1706,7 +1706,7 @@ label Storm_Sub:
     call shift_focus (StormX)
     $ StormX.drain_word("asked_to_meet")
 
-    $ StormX.location = Player.location
+
     call set_the_scene
     if StormX.location != Player.location and StormX not in Player.Party:
         "[StormX.name] shows up and says she needs to talk to you."
@@ -1991,7 +1991,7 @@ label Storm_Sub_Asked:
 label Storm_Master:
     $ StormX.drain_word("asked_to_meet")
     call shift_focus (StormX)
-    $ StormX.location = Player.location
+
     call set_the_scene
     if StormX.location != Player.location and StormX not in Player.Party:
         "[StormX.name] shows up and says she needs to talk to you."

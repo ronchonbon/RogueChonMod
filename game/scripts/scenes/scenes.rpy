@@ -2277,7 +2277,7 @@ label CalltoFap(Girl=0, Fap=0):
             pass
         else:
             $ Girl.location = Girl.home
-        call set_Character_taboos(taboo_location = False)
+        call set_Character_taboos
         call PhoneSex (Girl)
         $ renpy.pop_call()
     elif Fap:

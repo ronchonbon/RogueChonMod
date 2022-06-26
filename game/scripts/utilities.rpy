@@ -174,12 +174,13 @@ label change_Girl_stat(Girl, flavor, check, update, greater_than = False, Alt = 
 
 label set_Character_taboos:
     call check_taboo(Player)
+    call check_who_is_present
 
     $ temp_Girls = Present[:]
 
     while temp_Girls:
         if temp_Girls[0] == JeanX and "nowhammy" not in JeanX.traits:
-            $ JeanX.taboo = 0
+            $ temp_Girls[0].taboo = 0
         else:
             call check_taboo(temp_Girls[0])
 
@@ -201,6 +202,8 @@ label set_the_scene(location = Player.location, show_Characters = True, fade = F
                 G.location = Player.location
 
     if show_Characters:
+        call check_who_is_present(location = Player.location)
+
         if Present:
             if focused_Girl not in Present:
                 call shift_focus(Present[0])
@@ -479,7 +482,7 @@ label traveling_event_calls(location):
 
     if EmmaX in active_Girls:
         if location == "bg_classroom":
-            if "noise" in Player.history and "attic" not in Player.history and EmmaX.teaching and time_index < 2 and weekday < 5:
+            if "noise" in Player.history and "attic" not in Player.history and EmmaX.teaching and EmmaX.location == "bg_classroom" and time_index < 2 and weekday < 5:
                 call meet_Storm_ask_Emma
 
                 return
@@ -505,7 +508,7 @@ label traveling_event_calls(location):
             call meet_Laura
 
             return
-    elif LauraX in active_Girls:
+    else:
         if location == "bg_campus" and KittyX in active_Girls and time_index < 3 and "dress0" in LauraX.history:
             call Laura_Dressup
 
@@ -760,7 +763,7 @@ label set_Girls_locations:
 
 label change_clothes:
     python:
-        for G in active_Girls:
+        for G in all_Girls:
             if G not in Player.Party:
                 if G.location == "bg_dangerroom":
                     G.outfit_name = "gym_clothes"
@@ -1025,7 +1028,6 @@ label reset_all_girls_at_end:
                     G.outfit["piercings"] = "_barbell"
                     G.to_do.remove("_barbell")
 
-            G.outfit_name = "sleepwear"
             G.change_outfit("sleepwear")
 
             G.addiction += G.addiction_rate
@@ -1495,6 +1497,7 @@ label clear_the_room(Girl, passive = False, silent = False):
 label stop_all_actions(visual = False):
     $ Player.primary_action = None
     $ Player.secondary_action = None
+    $ girl_secondary_action = None
     $ second_girl_main_action = None
     $ second_girl_secondary_action = None
 
@@ -2465,9 +2468,9 @@ label Girls_arrive(arriving_Girls):
                     $ door_locked = False
             else:
                 if len(arriving_Girls) > 1:
-                    "Suddenly, [line] enter the room, apparently without knocking."
+                    "[line] enter the room."
                 else:
-                    "Suddenly, [line] enters the room, apparently without knocking."
+                    "[line] enters the room."
 
         call add_Girls(arriving_Girls)
 
@@ -5128,6 +5131,9 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
     return React
 
 label Girls_taboo(Girl, Choice=0):
+    if Player.location in bedrooms or door_locked:
+        return
+
     $ Player.add_word(1, 0,Girl.tag)
     $ Player.add_word(1, 0,"scent")
 
@@ -5141,8 +5147,8 @@ label Girls_taboo(Girl, Choice=0):
     $ D20 = renpy.random.randint(1, 20)
 
     if "screen" in Girl.traits or (Partner and "screen" in Partner.traits):
-
         $ D20 += 8
+
     if D20 < 10:
 
         if taboo > 20:

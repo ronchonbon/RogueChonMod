@@ -28,12 +28,6 @@ transform candlelit:
 transform theater:
     matrixcolor TintMatrix(Color(rgb = (0.45, 0.45, 0.65)))*BrightnessMatrix(-0.05)
 
-transform teaching:
-    pos (0.5, 0.15) zoom 0.4
-
-transform dining:
-    ypos 0.2
-
 transform reset_zoom:
     ease 0.75 offset (0, 0) xzoom 1.0 yzoom 1.0 zoom 1.0
 
@@ -72,6 +66,46 @@ transform show_blowjob_animation:
 transform close_launch_animation(x_zoom):
     ease 0.75 xzoom x_zoom yzoom 1.3
 
+transform teaching:
+    pos (0.4, 0.15) zoom 0.4
+
+transform dining:
+    ypos 0.15 zoom 1.15
+
+transform dancing(x_position):
+    subpixel True
+    pos (x_position, 0.05)
+    choice:
+        parallel:
+            ease 2.5 xoffset -40
+            ease 2.5 xoffset 0
+        parallel:
+            easeout 1.0 yoffset 30
+            linear 0.5 yoffset 40
+            easein 1.0 yoffset 0
+            easeout 1.0 yoffset 40
+            linear 0.5 yoffset 50
+            easein 1.0 yoffset 0
+    choice:
+        parallel:
+            ease 2.5 xoffset 40
+            ease 2.5 xoffset 0
+        parallel:
+            easeout 1.0 yoffset 30
+            linear 0.5 yoffset 40
+            easein 1.0 yoffset 0
+            easeout 1.0 yoffset 40
+            linear 0.5 yoffset 50
+            easein 1.0 yoffset 0
+    choice (0.3):
+        parallel:
+            ease 2.5 xoffset -30
+            ease 2.5 xoffset 0
+        parallel:
+            ease 1.5 yoffset 150
+            ease 3.5 yoffset 0
+    repeat
+
 transform swimming(x_position):
     subpixel True
     pos (x_position, 0.4) zoom 0.5
@@ -87,6 +121,7 @@ transform swimming(x_position):
         repeat
 
 transform vampire:
+    subpixel True
     ease 0.1 offset (100, 50) zoom 2.5
     block:
         ease 1 yoffset 100

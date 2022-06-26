@@ -1,5 +1,4 @@
 label sex_shop:
-    call check_who_is_present(location = "bg_shop")
     call set_the_scene(location = "bg_shop")
 
     "You head into \"Spiral's Body Shoppe\". . ."
@@ -144,7 +143,6 @@ label sex_shop:
 
                 $ round -= 10 if round > 20 else round - 10
 
-                call check_who_is_present(location = "bg_mall")
                 call set_the_scene(location = "bg_mall")
 
                 return
@@ -492,7 +490,6 @@ label sex_shop:
     return
 
 label swimsuit_shop:
-    call check_who_is_present(location = "bg_shop")
     call set_the_scene(location = "bg_shop")
 
     "You head into \"The Swimsuit Issue\". . ."
@@ -526,7 +523,6 @@ label swimsuit_shop:
 
                 $ round -= 10 if round > 20 else round - 10
 
-                call check_who_is_present(location = "bg_mall")
                 call set_the_scene(location = "bg_mall")
 
                 return
@@ -613,7 +609,6 @@ label swimsuit_shop:
 
             $ door_locked = True
 
-            call check_who_is_present(location = "bg_dressing")
             call set_the_scene(location = "bg_dressing")
             call set_Character_taboos
 
@@ -761,7 +756,6 @@ label swimsuit_shop:
 
                     $ door_locked = False
 
-                    call check_who_is_present(location = "bg_shop")
                     call set_the_scene(location = "bg_shop")
 
                     $ Player.Party = Present[:]
@@ -897,7 +891,6 @@ label swimsuit_shop:
     return
 
 label lingerie_shop:
-    call check_who_is_present(location = "bg_shop")
     call set_the_scene(location = "bg_shop")
 
     call set_the_scene
@@ -933,7 +926,6 @@ label lingerie_shop:
 
                 $ round -= 10 if round > 20 else round - 10
 
-                call check_who_is_present(location = "bg_mall")
                 call set_the_scene(location = "bg_mall")
 
                 return
@@ -1003,7 +995,6 @@ label lingerie_shop:
 
             $ door_locked = True
 
-            call check_who_is_present(location = "bg_dressing")
             call set_the_scene(location = "bg_dressing")
             call set_Character_taboos
 
@@ -1286,7 +1277,6 @@ label lingerie_shop:
 
                     $ door_locked = False
 
-                    call check_who_is_present(location = "bg_shop")
                     call set_the_scene(location = "bg_shop")
 
                     $ Player.Party = Present[:]
@@ -1525,7 +1515,6 @@ label lingerie_shop:
     return
 
 label clothing_shop:
-    call check_who_is_present(location = "bg_shop")
     call set_the_scene(location = "bg_shop")
 
     "You head into \"Urban Big-Titter's\". . ."
@@ -1559,7 +1548,6 @@ label clothing_shop:
 
                 $ round -= 10 if round > 20 else round - 10
 
-                call check_who_is_present(location = "bg_mall")
                 call set_the_scene(location = "bg_mall")
 
                 return
@@ -1599,7 +1587,6 @@ label clothing_shop:
 
             $ door_locked = True
 
-            call check_who_is_present(location = "bg_dressing")
             call set_the_scene(location = "bg_dressing")
             call set_Character_taboos
 
@@ -1979,7 +1966,6 @@ label clothing_shop:
                     $ Player.Party.remove(Girl)
                     $ Player.Party.append(Girl)
 
-                    call check_who_is_present(location = "bg_shop")
                     call set_the_scene(location = "bg_shop")
                     call set_Character_taboos
 

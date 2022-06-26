@@ -3770,129 +3770,143 @@ label used_to_action_lines(Girl, action):
     if Girl == RogueX:
         $ lines = ["You want some of this action?",
             "So you'd like another go?",
-            "You want to stick it in my pussy again?",
-            "You want to stick it in my ass again?",
-            "You want me ta lube up your toy?",
-            "You can't stay away from this. . .",
-            "You want me to slick your pole?",
-            "You can't stay away from this booty.",
-            "You want me to ride your pole?",
-            "You wanna dip your wick?",
-            "So you'd like another handy?",
-            "A little. . . [fist pumping hand gestures]?",
-            "You want me to grease your skids?",
-            "A little tender loving care?",
-            "You want me to use my feet?",
-            "So you'd like another foot rub?",
-            "So you'd like me to. . . [she rubs her foot along your leg]?",
-            "So you'd like another foot rub?",
-            "You want some of this action [jiggles her tits]?",
-            "So you'd like another titjob?",
-            "A little. . . bounce?",
-            "You want me to pillow your crank?",
-            "A little soft embrace?",
-            "You want some of this action [mimes blowing]?",
-            "So you'd like another blowjob?",
-            "A little. . . lick?",
-            "You want me to wet your willy?",
-            "A little tender loving care?",
-            "You sure do like to watch.",
-            "So you'd like me to go again?",
-            "You want to watch some more?",
-            "You want me ta diddle myself?"]
+            "You can't stay away from this. . ."]
+
+        if action == "masturbation":
+            $ lines.append("You sure do like to watch.")
+            $ lines.append("So you'd like me to go again?")
+            $ lines.append("You want to watch some more?")
+            $ lines.append("You want me ta diddle myself?")
+        elif action == "handjob":
+            $ lines.append("So you'd like another handy?")
+            $ lines.append("A little. . . [fist pumping hand gestures]?")
+            $ lines.append("A little tender loving care?")
+        elif action == "footjob":
+            $ lines.append("You want me to use my feet?")
+            $ lines.append("So you'd like another foot rub?")
+            $ lines.append("So you'd like me to. . . [she rubs her foot along your leg]?")
+            $ lines.append("So you'd like another foot rub?")
+        elif action == "titjob":
+            $ lines.append("A little soft embrace?")
+            $ lines.append("You want some of this action [jiggles her tits]?")
+            $ lines.append("So you'd like another titjob?")
+            $ lines.append("You want me to pillow your crank?")
+        elif action == "blowjob":
+            $ lines.append("You want some of this action [mimes blowing]?")
+            $ lines.append("So you'd like another blowjob?")
+            $ lines.append("A little. . . lick?")
+            $ lines.append("You want me to wet your willy?")
+            $ lines.append("You want me to slick your pole?")
+            $ lines.append("You want me to grease your skids?")
+        elif action in dildo_actions:
+            $ lines.append("You want me ta lube up your toy?")
+        elif action == "sex":
+            $ lines.append("You want to stick it in my pussy again?")
+            $ lines.append("You want me to ride your pole?")
+            $ lines.append("You wanna dip your wick?")
+        elif action == "anal":
+            $ lines.append("You want to stick it in my ass again?")
+            $ lines.append("You can't stay away from this booty.")
+            $ lines.append("You want me to ride your pole?")
+            $ lines.append("You wanna dip your wick?")
+        elif action == "hotdog":
+            $ lines.append("A little. . . bounce?")
     elif Girl == KittyX:
         $ lines = ["You want some of this?",
-            "So you'd like another handy?",
-            "A little. . . [fist pumping hand gestures]?",
-            "A little TLC?",
-            "You want some of this action [rubs her chest]?",
-            "So you'd like another titjob?",
-            "A little. . . puffpuff?",
-            "A little soft embrace?",
-            "You want me to [mimes blowing]?",
-            "So you wanna 'nother blowjob?",
-            "A little. . . lick?",
-            "You want me to suck you off?",
             "You want some of this action?",
             "So you'd like another go?",
-            "You want to stick it in my pussy again?",
-            "You want me ta lube up your toy?",
-            "You want to stick it in my ass again?",
-            "You want me to use my feet?",
-            "So you'd like another foot sesh?",
-            "A little. . . [she rubs her foot along your leg]?",
             "Oooh, you want some of this?",
             "You can't stay away from this. . .",
             "So you'd like another round?",
-            "I do have booty for days. . .",
-            "You gonna make me purr?",
-            "You wanna slide into me?",
-            "So you'd like another round?",
             "You're really digging this. . .",
-            "You want another rub?",
-            "You really like to watch.",
-            "Again?",
-            "You like to watch me.",
-            "You want me to get myself off?"]
+            "Again?"]
+
+        if action == "masturbation":
+            $ lines.append("You like to watch me.")
+            $ lines.append("You want me to get myself off?")
+        elif action == "handjob":
+            $ lines.append("So you'd like another handy?")
+            $ lines.append("A little. . . [fist pumping hand gestures]?")
+            $ lines.append("A little TLC?")
+            $ lines.append("You want another rub?")
+        elif action == "footjob":
+            $ lines.append("You want me to use my feet?")
+            $ lines.append("So you'd like another foot sesh?")
+            $ lines.append("A little. . . [she rubs her foot along your leg]?")
+            $ lines.append("You want another rub?")
+        elif action == "titjob":
+            $ lines.append("You want some of this action [rubs her chest]?")
+            $ lines.append("So you'd like another titjob?")
+            $ lines.append("A little. . . puffpuff?")
+            $ lines.append("A little soft embrace?")
+        elif action == "blowjob":
+            $ lines.append("You want me to [mimes blowing]?")
+            $ lines.append("So you wanna 'nother blowjob?")
+            $ lines.append("A little. . . lick?")
+            $ lines.append("You want me to suck you off?")
+        elif action in dildo_actions:
+            $ lines.append("You want me ta lube up your toy?")
+        elif action == "sex":
+            $ lines.append("You want to stick it in my pussy again?")
+            $ lines.append("You wanna slide into me?")
+            $ lines.append("You gonna make me purr?")
+        elif action == "anal":
+            $ lines.append("You want to stick it in my ass again?")
+            $ lines.append("I do have booty for days. . .")
+            $ lines.append("You wanna slide into me?")
+        elif action == "hotdog":
+            $ lines.append("You want another rub?")
     elif Girl == EmmaX:
         $ lines = ["You want more?",
             "So you'd like another?",
-            "More of this? [fist pumping hand gestures]",
-            "Oh, did you want some attention?",
-            "You want some of these? [jiggles her tits]",
-            "So you'd like another titjob?",
-            "A little. . . [bounces tits]?",
-            "A little warm embrace?",
-            "You want me to [mimes blowing]?",
-            "So you want another blowjob?",
-            "You want me to suck you off?",
-            "Are you asking if I'm hungry?",
             "You want some of this action?",
-            "You want to stick it in my pussy again?",
             "So you'd like another go?",
-            "You'd like to stick it in my ass again?",
-            "You'd like me to lube up your toy?",
-            "You'd like me to use my feet again?",
-            "So you'd like another footjob?",
-            "Mmmm, some. . . [she rubs her foot along your leg]?",
-            "A little foot rub?",
             "Oh, you want some of this?",
             "You'd like another round?",
-            "I suppose I am irresistible. . .",
-            "Do you intend to make me melt?",
             "I knew you enjoyed it. . .",
-            "You want me to ride you?",
+            "I suppose I am irresistible. . .",
             "Oooh, you want some of this?",
             "So you'd like another round?",
             "You're really into this. . .",
-            "You want another rub?",
-            "You really do like to watch.",
-            "Once more?",
-            "You enjoy watching me.",
-            "You want me to take care of myself?"]
+            "Once more?"]
+
+        if action == "masturbation":
+            $ lines.append("You really do like to watch.")
+            $ lines.append("You enjoy watching me.")
+            $ lines.append("You want me to take care of myself?")
+        elif action == "handjob":
+            $ lines.append("More of this? [fist pumping hand gestures]")
+            $ lines.append("Oh, did you want some attention?")
+        elif action == "footjob":
+            $ lines.append("You'd like me to use my feet again?")
+            $ lines.append("So you'd like another footjob?")
+            $ lines.append("Mmmm, some. . . [she rubs her foot along your leg]?")
+            $ lines.append("A little foot rub?")
+        elif action == "titjob":
+            $ lines.append("You want some of these? [jiggles her tits]")
+            $ lines.append("So you'd like another titjob?")
+            $ lines.append("A little. . . [bounces tits]?")
+            $ lines.append("A little warm embrace?")
+        elif action == "blowjob":
+            $ lines.append("You want me to [mimes blowing]?")
+            $ lines.append("So you want another blowjob?")
+            $ lines.append("You want me to suck you off?")
+            $ lines.append("Are you asking if I'm hungry?")
+        elif action in dildo_actions:
+            $ lines.append("You'd like me to lube up your toy?")
+        elif action == "sex":
+            $ lines.append("You want to stick it in my pussy again?")
+            $ lines.append("Do you intend to make me melt?")
+            $ lines.append("You want me to ride you?")
+        elif action == "anal":
+            $ lines.append("You'd like to stick it in my ass again?")
+            $ lines.append("You want me to ride you?")
+        elif action == "hotdog":
+            $ lines.append("You want another rub?")
     elif Girl == LauraX:
         $ lines = ["You want some more?",
-            "So you'd like another handy?",
-            "You want a. . . [fist pumping hand gestures]?",
-            "Another handjob?",
-            "You want some of this action [rubs her chest]?",
-            "So you'd like another titjob?",
-            "Another titjob?",
-            "A little [points at her chest]?",
-            "You want me to [mimes blowing]?",
-            "So you want another blowjob?",
-            "You want me to lick you?",
-            "You want me to suck you off?",
-            "A little bj?",
             "You want some of this action?",
             "So you'd like another go?",
-            "You want to stick it in my pussy again?",
-            "You want me ta lube up your toy?",
-            "You want to stick it in my ass again?",
-            "You want me to use my feet?",
-            "So you'd like another footjob?",
-            "A little. . . [she rubs her foot along your leg]?",
-            "A little TLC?",
             "Oh, you want some of this?",
             "You'd like another round?",
             "I must be better than I thought.",
@@ -3900,97 +3914,152 @@ label used_to_action_lines(Girl, action):
             "Oooh, you want some of this?",
             "So you'd like another round?",
             "I knew you enjoyed it. . .",
-            "I hope you don't plan on wearing me out.",
-            "You want to plow me?",
             "You're really into this. . .",
-            "You want another rub?",
-            "You like to watch.",
-            "Again?",
-            "You really like to watch me.",
-            "You want me to masturbate again?"]
+            "Again?"]
+
+        if action == "masturbation":
+            $ lines.append("You like to watch.")
+            $ lines.append("You really like to watch me.")
+            $ lines.append("You want me to masturbate again?")
+        elif action == "handjob":
+            $ lines.append("So you'd like another handy?")
+            $ lines.append("You want a. . . [fist pumping hand gestures]?")
+            $ lines.append("Another handjob?")
+            $ lines.append("A little TLC?")
+        elif action == "footjob":
+            $ lines.append("You want me to use my feet?")
+            $ lines.append("So you'd like another footjob?")
+            $ lines.append("A little. . . [she rubs her foot along your leg]?")
+        elif action == "titjob":
+            $ lines.append("You want some of this action [rubs her chest]?")
+            $ lines.append("So you'd like another titjob?")
+            $ lines.append("Another titjob?")
+            $ lines.append("A little [points at her chest]?")
+        elif action == "blowjob":
+            $ lines.append("You want me to [mimes blowing]?")
+            $ lines.append("So you want another blowjob?")
+            $ lines.append("You want me to lick you?")
+            $ lines.append("You want me to suck you off?")
+            $ lines.append("A little bj?")
+        elif action in dildo_actions:
+            $ lines.append("You want me ta lube up your toy?")
+        elif action == "sex":
+            $ lines.append("You want to stick it in my pussy again?")
+            $ lines.append("You want to plow me?")
+        elif action == "anal":
+            $ lines.append("You want to stick it in my ass again?")
+            $ lines.append("You want to plow me?")
+        elif action == "hotdog":
+            $ lines.append("You want another rub?")
     elif Girl == JeanX:
         $ lines = ["You want some more?",
-            "So you'd like another handjob?",
-            "You want a. . . [fist pumping hand gestures]?",
-            "Another handjob?",
-            "You want some of this action [rubs her chest]?",
-            "So you'd like another titjob?",
-            "Another titjob?",
-            "A little [points at her chest]?",
-            "You want me to [mimes blowing]?",
-            "So you want another blowjob?",
-            "You want me to lick you?",
-            "You want me to suck you off?",
-            "A BJ?",
             "You want some of this action?",
             "So you'd like another go?",
-            "You want to stick it in my pussy again?",
-            "You want me ta lube up your toy?",
-            "You want me to use my feet?",
-            "So you'd like another footjob?",
-            "A little. . . [she rubs her foot along your leg]?",
-            "A little foot rub?",
             "Oh, you want some of this?",
             "You'd like another round?",
             "I must be better than I thought.",
-            "You want to fuck me?",
             "I knew you enjoyed it. . .",
             "I hope you don't plan on wearing me out.",
-            "You want to plow me?",
             "Oooh, you want some of this?",
             "So you'd like another round?",
             "You're really into this. . .",
-            "You want another rub?",
-            "You do like to watch.",
-            "Again?",
-            "You like to watch me.",
-            "You'd like me to masturbate again?"]
+            "Again?"]
+
+        if action == "masturbation":
+            $ lines.append("You do like to watch.")
+            $ lines.append("You'd like me to masturbate again?")
+            $ lines.append("You like to watch me.")
+        elif action == "handjob":
+            $ lines.append("So you'd like another handjob?")
+            $ lines.append("You want a. . . [fist pumping hand gestures]?")
+            $ lines.append("Another handjob?")
+        elif action == "footjob":
+            $ lines.append("You want me to use my feet?")
+            $ lines.append("So you'd like another footjob?")
+            $ lines.append("A little foot rub?")
+            $ lines.append("A little. . . [she rubs her foot along your leg]?")
+        elif action == "titjob":
+            $ lines.append("You want some of this action [rubs her chest]?")
+            $ lines.append("So you'd like another titjob?")
+            $ lines.append("Another titjob?")
+            $ lines.append("A little [points at her chest]?")
+        elif action == "blowjob":
+            $ lines.append("You want me to [mimes blowing]?")
+            $ lines.append("So you want another blowjob?")
+            $ lines.append("You want me to lick you?")
+            $ lines.append("You want me to suck you off?")
+            $ lines.append("A BJ?")
+        elif action in dildo_actions:
+            $ lines.append("You want me ta lube up your toy?")
+        elif action == "sex":
+            $ lines.append("You want to stick it in my pussy again?")
+            $ lines.append("You want to fuck me?")
+            $ lines.append("You want to plow me?")
+        elif action == "anal":
+            $ lines.append("You want to fuck me?")
+            $ lines.append("You want to plow me?")
+        elif action == "hotdog":
+            $ lines.append("You want another rub?")
     elif Girl == StormX:
         $ lines = ["You want more?",
             "So you would like another?",
-            "More of this? [fist pumping hand gestures]",
-            "Oh, did you want some attention?",
             "You want some more?",
-            "So you'd like another handy?",
-            "You want a. . . [fist pumping hand gestures]?",
-            "Another handjob?",
-            "You wish to use these? [jiggles her tits]",
-            "So you would like another titjob?",
-            ". . . [bounces tits]?",
-            "You would like to give it a hug?",
-            ". . . [mimes blowing]?",
-            "So you would like another blowjob?",
-            "You wish for me to suck you off?",
-            "Are you asking if I am hungry?",
             "You want some of this action?",
             "So you'd like another go?",
-            "You want to stick it in my pussy again?",
-            "You want me ta lube up your toy?",
-            "You'd like to stick it in my ass again?",
-            "You would like me to use my feet again?",
-            "So you would like another footjob?",
-            "Mmmm, some. . . [she rubs her foot along your leg]?",
-            "A little foot rub?",
             "Oh, did you want some of this?",
             "You would like another round?",
             "I suppose that I can be irresistible. . .",
             "I could get used to this. . .",
-            "Did you want me to ride you?",
             "Oooh, you wanted some of this?",
             "So you would like another round?",
             "I knew you would enjoy it. . .",
-            "You want me to ride you?",
             "You really are into this. . .",
-            "You want another rub?",
-            "You really do like to watch.",
-            "Once more?",
-            "You enjoy watching me do that?",
-            "You want me to take care of myself?"]
+            "Once more?"]
+
+        if action == "masturbation":
+            $ lines.append("You really do like to watch.")
+            $ lines.append("You enjoy watching me do that?")
+            $ lines.append("You want me to take care of myself?")
+        elif action == "handjob":
+            $ lines.append("More of this? [fist pumping hand gestures]")
+            $ lines.append("Oh, did you want some attention?")
+            $ lines.append("So you'd like another handy?")
+            $ lines.append("Another handjob?")
+        elif action == "footjob":
+            $ lines.append("You would like me to use my feet again?")
+            $ lines.append("So you would like another footjob?")
+            $ lines.append("Mmmm, some. . . [she rubs her foot along your leg]?")
+            $ lines.append("A little foot rub?")
+        elif action == "titjob":
+            $ lines.append("You wish to use these? [jiggles her tits]")
+            $ lines.append("So you would like another titjob?")
+            $ lines.append(". . . [bounces tits]?")
+            $ lines.append("You would like to give it a hug?")
+        elif action == "blowjob":
+            $ lines.append(". . . [mimes blowing]?")
+            $ lines.append("So you would like another blowjob?")
+            $ lines.append("You wish for me to suck you off?")
+            $ lines.append("Are you asking if I am hungry?")
+        elif action in dildo_actions:
+            $ lines.append("You want me ta lube up your toy?")
+        elif action == "sex":
+            $ lines.append("You want to stick it in my pussy again?")
+            $ lines.append("Did you want me to ride you?")
+            $ lines.append("You want me to ride you?")
+        elif action == "anal":
+            $ lines.append("You'd like to stick it in my ass again?")
+            $ lines.append("Did you want me to ride you?")
+            $ lines.append("You want me to ride you?")
+        elif action == "hotdog":
+            $ lines.append("You want another rub?")
     elif Girl == JubesX:
-        $ lines = ["You do enjoy watching.",
-            "Again?",
-            "You really enjoy watching me.",
-            "You want me to shlick again?"]
+        $ lines = ["Again?"]
+
+        if action == "masturbation":
+            $ lines.append("You do enjoy watching.")
+            $ lines.append("You really enjoy watching me.")
+        elif action == "blowjob":
+            $ lines.append("You want me to shlick again?")
 
     $ line = renpy.random.choice(lines)
 

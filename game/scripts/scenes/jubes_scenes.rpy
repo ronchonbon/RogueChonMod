@@ -876,8 +876,8 @@ label Jubes_Mall:
     if JubesX.location == Player.location:
         "[JubesX.name] suddently freezes up, then turns to you."
     else:
-        call add_Girls(JubesX)
-        "[JubesX.name] rushes into the room."
+        "[JubesX.name] rushes up to you."
+
     call clear_the_room (JubesX, 0, 0)
     call set_the_scene
     $ Player.add_word(1, 0, 0, 0,"mall")
@@ -1111,7 +1111,6 @@ label Jubes_Mall:
 
     "You both head back to campus."
 
-    call check_who_is_present(location = "bg_campus")
     call set_the_scene(location = "bg_campus")
 
     ch_v "Anyway, it was nice to hang out with you."
@@ -1480,7 +1479,7 @@ label Jubes_Cleanhouse:
     if Player.location != "bg_jubes" and Player.location != "bg_player":
         "With little word, she moves behind you and pushes you towards her room."
         $ Player.location = "bg_jubes"
-    $ JubesX.location = Player.location
+
     call set_the_scene
     call clear_the_room (JubesX)
     call set_the_scene
@@ -1566,8 +1565,6 @@ label Jubes_Sub:
     call shift_focus (JubesX)
     if JubesX.location != Player.location and JubesX not in Player.Party:
         "Suddenly, [JubesX.name] shows up and says she needs to talk to you."
-
-    $ JubesX.location = Player.location
 
     call clear_the_room (JubesX)
 
@@ -1938,8 +1935,6 @@ label Jubes_Master:
     if JubesX.location != Player.location and JubesX not in Player.Party:
         "Suddenly, [JubesX.name] shows up and says she needs to talk to you."
 
-    $ JubesX.location = Player.location
-
     call clear_the_room (JubesX)
 
     $ JubesX.daily_history.append("relationship")
@@ -2232,7 +2227,7 @@ label Jubes_Sexfriend:
                         $ Player.location = "bg_jubes"
                     else:
                         $ Player.location = "bg_player"
-                    $ JubesX.location = Player.location
+
                     call clear_the_room (JubesX)
                     call set_the_scene
                     $ taboo = 0
@@ -2265,7 +2260,7 @@ label Jubes_Fuckbuddy:
 
     $ JubesX.location = Player.location
     call shift_focus (JubesX)
-    call set_the_scene (0)
+    call set_the_scene
     $ JubesX.outfit_name = "casual1"
     $ JubesX.today_outfit_name = "casual1"
     $ JubesX.change_outfit("casual1")

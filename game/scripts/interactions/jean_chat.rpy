@@ -2015,7 +2015,7 @@ label Jean_Summon(approval_bonus=approval_bonus):
         call Girls_arrive (JeanX)
         return
     $ JeanX.location = Player.location
-    call set_Character_taboos(taboo_location = False)
+    call set_Character_taboos
     $ JeanX.change_outfit()
     call set_the_scene
     return

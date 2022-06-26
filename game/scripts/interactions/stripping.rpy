@@ -1,1735 +1,288 @@
-label remove_jacket(Girl):
-    if Girl.jacket_closed:
-        $ Girl.jacket_closed = False
-
-        pause 0.2
-
-    $ Girl.jacket_opened = True
-
-    pause 0.2
-
-    $ Girl.outfit["jacket"] = ""
-    $ Girl.set_outfit_flags()
-
-    if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Topless"
-
-    return
-
-label add_jacket(Girl, item, set_flags = True):
-    $ Girl.jacket_opened = True
-    $ Girl.outfit["jacket"] = item
-
-    pause 0.2
-
-    $ Girl.jacket_opened = False
-
-    if set_flags:
-        $ Girl.set_outfit_flags()
-
-    return
-
-label change_jacket(Girl, item, redress = True):
-    if Girl.outfit["cloak"]:
-        $ temp_cloak = Girl.outfit["cloak"]
-
-        $ Girl.outfit["cloak"] = ""
-
-        pause 0.2
-    else:
-        $ temp_cloak = None
-
-    if Girl.outfit["jacket"]:
-        call remove_jacket(Girl)
-
-        pause 0.2
-
-    if item:
-        call add_jacket(Girl, item, set_flags = False)
-
-        pause 0.2
-
-    if redress:
-        if temp_cloak:
-            $ Girl.outfit["cloak"] = temp_cloak
-
-    $ Girl.set_outfit_flags()
-
-    return
-
-label remove_suspenders(Girl):
-    $ Girl.suspenders_aside = True
-
-    pause 0.2
-
-    $ Girl.outfit["suspenders"] = ""
-    $ Girl.set_outfit_flags()
-
-    if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Topless"
-
-    return
-
-label add_suspenders(Girl, item, set_flags = True):
-    $ Girl.suspenders_aside = True
-    $ Girl.outfit["suspenders"] = item
-
-    pause 0.2
-
-    $ Girl.suspenders_aside = False
-
-    if set_flags:
-        $ Girl.set_outfit_flags()
-
-    return
-
-label remove_top(Girl):
-    if Girl.outfit["top"]:
-        $ Girl.top_pulled_up = True
-
-    pause 0.2
-
-    $ Girl.outfit["top"] = ""
-    $ Girl.set_outfit_flags()
-
-    if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Topless"
-
-    return
-
-label add_top(Girl, item, set_flags = True):
-    $ Girl.top_pulled_up = True
-    $ Girl.outfit["top"] = item
-
-    pause 0.2
-
-    if Girl.outfit["top"]:
-        $ Girl.top_pulled_up = False
-
-    if set_flags:
-        $ Girl.set_outfit_flags()
-
-    return
-
-label change_top(Girl, item, redress = True):
-    if Girl.outfit["cloak"]:
-        $ temp_cloak = Girl.outfit["cloak"]
-
-        $ Girl.outfit["cloak"] = ""
-
-        pause 0.2
-    else:
-        $ temp_cloak = None
-
-    if Girl.outfit["jacket"]:
-        $ temp_jacket = Girl.outfit["jacket"]
-
-        call remove_jacket(Girl)
-
-        pause 0.2
-    else:
-        $ temp_jacket = None
-
-    if Girl.outfit["suspenders"]:
-        $ temp_suspenders = Girl.outfit["suspenders"]
-
-        call remove_suspenders(Girl)
-
-        pause 0.2
-    else:
-        $ temp_suspenders = None
-
-    if Girl.outfit["belt"]:
-        $ temp_belt = Girl.outfit["belt"]
-
-        $ Girl.outfit["belt"] = ""
-
-        pause 0.2
-    else:
-        $ temp_belt = None
-
-    if Girl.outfit["top"]:
-        call remove_top(Girl)
-
-        pause 0.2
-
-    if item:
-        call add_top(Girl, item, set_flags = False)
-
-        pause 0.2
-
-    if redress:
-        if temp_belt:
-            $ Girl.outfit["belt"] = temp_belt
-
-            pause 0.2
-
-        if temp_suspenders:
-            call add_suspenders(Girl, temp_suspenders, set_flags = False)
-
-            pause 0.2
-
-        if temp_jacket:
-            call add_jacket(Girl, temp_jacket, set_flags = False)
-
-            pause 0.2
-
-        if temp_cloak:
-            $ Girl.outfit["cloak"] = temp_cloak
-
-    $ Girl.set_outfit_flags()
-
-    return
-
-label remove_dress(Girl):
-    $ Girl.dress_upskirt = True
-
-    pause 0.2
-
-    $ Girl.outfit["dress"] = ""
-    $ Girl.set_outfit_flags()
-
-    if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Topless"
-        call expression Girl.tag + "_First_Bottomless"
-
-    return
-
-label add_dress(Girl, item, set_flags = True):
-    $ Girl.dress_upskirt = True
-    $ Girl.outfit["dress"] = item
-
-    pause 0.2
-
-    $ Girl.dress_upskirt = False
-
-    if set_flags:
-        $ Girl.set_outfit_flags()
-
-    return
-
-label change_dress(Girl, item, redress = True):
-    if Girl.outfit["cloak"]:
-        $ temp_cloak = Girl.outfit["cloak"]
-
-        $ Girl.outfit["cloak"] = ""
-
-        pause 0.2
-    else:
-        $ temp_cloak = None
-
-    if Girl.outfit["jacket"]:
-        $ temp_jacket = Girl.outfit["jacket"]
-
-        call remove_jacket(Girl)
-
-        pause 0.2
-    else:
-        $ temp_jacket = None
-
-    if Girl.outfit["suspenders"]:
-        $ temp_suspenders = Girl.outfit["suspenders"]
-
-        call remove_suspenders(Girl)
-
-        pause 0.2
-    else:
-        $ temp_suspenders = None
-
-    if Girl.outfit["belt"]:
-        $ temp_belt = Girl.outfit["belt"]
-
-        $ Girl.outfit["belt"] = ""
-
-        pause 0.2
-    else:
-        $ temp_belt = None
-
-    if Girl.outfit["top"]:
-        $ temp_top = Girl.outfit["top"]
-
-        call remove_top(Girl)
-
-        pause 0.2
-    else:
-        $ temp_top = None
-
-    if Girl.outfit["dress"]:
-        call remove_dress(Girl)
-
-        pause 0.2
-
-    if item:
-        call add_dress(Girl, item, set_flags = False)
-
-        pause 0.2
-
-    if redress:
-        if temp_top:
-            call add_top(Girl, temp_top, set_flags = False)
-
-            pause 0.2
-
-        if temp_belt:
-            $ Girl.outfit["belt"] = temp_belt
-
-            pause 0.2
-
-        if temp_suspenders:
-            call add_suspenders(Girl, temp_suspenders, set_flags = False)
-
-            pause 0.2
-
-        if temp_jacket:
-            call add_jacket(Girl, temp_jacket, set_flags = False)
-
-            pause 0.2
-
-        if temp_cloak:
-            $ Girl.outfit["cloak"] = temp_cloak
-
-    $ Girl.set_outfit_flags()
-
-    return
-
-label remove_bodysuit(Girl):
-    $ Girl.bodysuit_top_pulled_aside = True
-    $ Girl.bodysuit_bottom_pulled_aside = True
-
-    pause 0.2
-
-    $ Girl.outfit["bodysuit"] = ""
-    $ Girl.set_outfit_flags()
-
-    if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Topless"
-        call expression Girl.tag + "_First_Bottomless"
-
-    return
-
-label add_bodysuit(Girl, item, set_flags = True):
-    $ Girl.bodysuit_top_pulled_aside = True
-    $ Girl.bodysuit_bottom_pulled_aside = True
-    $ Girl.outfit["bodysuit"] = item
-
-    pause 0.2
-
-    $ Girl.bodysuit_top_pulled_aside = False
-    $ Girl.bodysuit_bottom_pulled_aside = False
-
-    if set_flags:
-        $ Girl.set_outfit_flags()
-
-    return
-
-label change_bodysuit(Girl, item, redress = True):
-    if Girl.outfit["cloak"]:
-        $ temp_cloak = Girl.outfit["cloak"]
-
-        $ Girl.outfit["cloak"] = ""
-
-        pause 0.2
-    else:
-        $ temp_cloak = None
-
-    if Girl.outfit["jacket"]:
-        $ temp_jacket = Girl.outfit["jacket"]
-
-        call remove_jacket(Girl)
-
-        pause 0.2
-    else:
-        $ temp_jacket = None
-
-    if Girl.outfit["suspenders"]:
-        $ temp_suspenders = Girl.outfit["suspenders"]
-
-        call remove_suspenders(Girl)
-
-        pause 0.2
-    else:
-        $ temp_suspenders = None
-
-    if Girl.outfit["belt"]:
-        $ temp_belt = Girl.outfit["belt"]
-
-        $ Girl.outfit["belt"] = ""
-
-        pause 0.2
-    else:
-        $ temp_belt = None
-
-    if Girl.outfit["top"]:
-        $ temp_top = Girl.outfit["top"]
-
-        call remove_top(Girl)
-
-        pause 0.2
-    else:
-        $ temp_top = None
-
-    if Girl.outfit["boots"]:
-        $ temp_boots = Girl.outfit["boots"]
-
-        $ Girl.outfit["boots"] = ""
-
-        pause 0.2
-    else:
-        $ temp_boots = None
-
-    if Girl.outfit["dress"]:
-        $ temp_dress = Girl.outfit["dress"]
-
-        call remove_dress(Girl)
-
-        pause 0.2
-    else:
-        $ temp_dress = None
-
-    if Girl.outfit["bottom"]:
-        $ temp_bottom = Girl.outfit["bottom"]
-
-        call remove_bottom(Girl)
-
-        pause 0.2
-    else:
-        $ temp_bottom = None
-
-    if Girl.outfit["bra"]:
-        $ temp_bra = Girl.outfit["bra"]
-
-        call remove_bra(Girl)
-
-        pause 0.2
-    else:
-        $ temp_bra = None
-
-    if Girl.outfit["bodysuit"]:
-        call remove_bodysuit(Girl)
-
-        pause 0.2
-
-    if item:
-        call add_bodysuit(Girl, item, set_flags = False)
-
-        pause 0.2
-
-    if redress:
-        if temp_bra:
-            call add_bra(Girl, temp_bottom, set_flags = True)
-
-            pause 0.2
-
-        if temp_bottom:
-            call add_bottom(Girl, temp_bottom, set_flags = False)
-
-            pause 0.2
-
-        if temp_dress:
-            call add_dress(Girl, temp_dress, set_flags = False)
-
-            pause 0.2
-
-        if temp_boots:
-            $ Girl.outfit["boots"] = temp_boots
-
-            pause 0.2
-
-        if temp_top:
-            call add_top(Girl, temp_top, set_flags = False)
-
-            pause 0.2
-
-        if temp_belt:
-            $ Girl.outfit["belt"] = temp_belt
-
-            pause 0.2
-
-        if temp_suspenders:
-            call add_suspenders(Girl, temp_suspenders, set_flags = False)
-
-            pause 0.2
-
-        if temp_jacket:
-            call add_jacket(Girl, temp_jacket, set_flags = False)
-
-            pause 0.2
-
-        if temp_cloak:
-            $ Girl.outfit["cloak"] = temp_cloak
-
-    $ Girl.set_outfit_flags()
-
-    return
-
-label remove_bra(Girl):
-    if Girl.outfit["bra"]:
-        $ Girl.bra_pulled_up = True
-
-    pause 0.2
-
-    $ Girl.outfit["bra"] = ""
-    $ Girl.set_outfit_flags()
-
-    if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Topless"
-
-    return
-
-label add_bra(Girl, item, set_flags = True):
-    $ Girl.bra_pulled_up = True
-    $ Girl.outfit["bra"] = item
-
-    pause 0.2
-
-    if Girl.outfit["bra"]:
-        $ Girl.bra_pulled_up = False
-
-    if set_flags:
-        $ Girl.set_outfit_flags()
-
-    return
-
-label change_bra(Girl, item, redress = True):
-    if Girl.outfit["cloak"]:
-        $ temp_cloak = Girl.outfit["cloak"]
-
-        $ Girl.outfit["cloak"] = ""
-
-        pause 0.2
-    else:
-        $ temp_cloak = None
-
-    if Girl.outfit["jacket"]:
-        $ temp_jacket = Girl.outfit["jacket"]
-
-        call remove_jacket(Girl)
-
-        pause 0.2
-    else:
-        $ temp_jacket = None
-
-    if Girl.outfit["suspenders"]:
-        $ temp_suspenders = Girl.outfit["suspenders"]
-
-        call remove_suspenders(Girl)
-
-        pause 0.2
-    else:
-        $ temp_suspenders = None
-
-    if Girl.outfit["belt"]:
-        $ temp_belt = Girl.outfit["belt"]
-
-        $ Girl.outfit["belt"] = ""
-
-        pause 0.2
-    else:
-        $ temp_belt = None
-
-    if Girl.outfit["top"]:
-        $ temp_top = Girl.outfit["top"]
-
-        call remove_top(Girl)
-
-        pause 0.2
-    else:
-        $ temp_top = None
-
-    if Girl.outfit["dress"]:
-        $ temp_dress = Girl.outfit["dress"]
-
-        call remove_dress(Girl)
-
-        pause 0.2
-    else:
-        $ temp_dress = None
-
-    if Girl.outfit["bra"]:
-        call remove_bra(Girl)
-
-        pause 0.2
-
-    if item:
-        call add_bra(Girl, item, set_flags = True)
-
-        pause 0.2
-
-    if redress:
-        if temp_dress:
-            call add_dress(Girl, temp_dress, set_flags = False)
-
-            pause 0.2
-
-        if temp_top:
-            call add_top(Girl, temp_top, set_flags = False)
-
-            pause 0.2
-
-        if temp_belt:
-            $ Girl.outfit["belt"] = temp_belt
-
-            pause 0.2
-
-        if temp_suspenders:
-            call add_suspenders(Girl, temp_suspenders, set_flags = False)
-
-            pause 0.2
-
-        if temp_jacket:
-            call add_jacket(Girl, temp_jacket, set_flags = False)
-
-            pause 0.2
-
-        if temp_cloak:
-            $ Girl.outfit["cloak"] = temp_cloak
-
-    $ Girl.set_outfit_flags()
-
-    return
-
-label remove_bottom(Girl):
-    if Girl.outfit["bottom"] in pants or Girl.outfit["bottom"] in shorts:
-        $ Girl.bottom_pulled_down = True
-
-        pause 0.2
-    elif Girl.outfit["bottom"] in skirts:
-        $ Girl.upskirt = True
-
-        pause 0.2
-
-    $ Girl.outfit["bottom"] = ""
-    $ Girl.set_outfit_flags()
-
-    if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Bottomless" pass(1)
-
-    return
-
-label add_bottom(Girl, item, set_flags = True):
-    $ Girl.bottom_pulled_down = True
-    $ Girl.upskirt = True
-
-    $ Girl.outfit["bottom"] = item
-
-    pause 0.2
-
-    $ Girl.bottom_pulled_down = False
-    $ Girl.upskirt = False
-
-    if set_flags:
-        $ Girl.set_outfit_flags()
-
-    return
-
-label change_bottom(Girl, item, redress = True):
-    if Girl.outfit["boots"]:
-        $ temp_boots = Girl.outfit["boots"]
-
-        $ Girl.outfit["boots"] = ""
-
-        pause 0.2
-    else:
-        $ temp_boots = None
-
-    if Girl.outfit["belt"]:
-        $ temp_belt = Girl.outfit["belt"]
-
-        $ Girl.outfit["belt"] = ""
-
-        pause 0.2
-    else:
-        $ temp_belt = None
-
-    if Girl.outfit["dress"]:
-        $ Girl.dress_upskirt = True
-
-        pause 0.2
-
-    if Girl.outfit["bottom"]:
-        call remove_bottom(Girl)
-
-        pause 0.2
-
-    if item:
-        call add_bottom(Girl, item, set_flags = False)
-
-        pause 0.2
-
-    if redress:
-        if Girl.dress_upskirt:
-            $ Girl.dress_upskirt = False
-
-            pause 0.2
-
-        if temp_belt:
-            $ Girl.outfit["belt"] = temp_belt
-
-            pause 0.2
-
-        if temp_boots:
-            $ Girl.outfit["boots"] = temp_boots
-
-    $ Girl.set_outfit_flags()
-
-    return
-
-label change_hose(Girl, item, redress = True):
-    if Girl.outfit["boots"]:
-        $ temp_boots = Girl.outfit["boots"]
-
-        $ Girl.outfit["boots"] = ""
-
-        pause 0.2
-    else:
-        $ temp_boots = None
-
-    if Girl.outfit["belt"]:
-        $ temp_belt = Girl.outfit["belt"]
-
-        $ Girl.outfit["belt"] = ""
-
-        pause 0.2
-    else:
-        $ temp_belt = None
-
-    if Girl.outfit["dress"]:
-        $ Girl.dress_upskirt = True
-
-        pause 0.2
-
-    if not Girl.outfit["bottom"]:
-        $ temp_bottom = None
-    elif Girl.outfit["bottom"] in skirts:
-        $ temp_bottom = None
-
-        $ Girl.upskirt = True
-
-        pause 0.2
-    else:
-        $ temp_bottom = Girl.outfit["bottom"]
-
-        call remove_bottom(Girl)
-
-        pause 0.2
-
-    if Girl.outfit["bodysuit"]:
-        if Girl.outfit["cloak"]:
-            $ temp_cloak = Girl.outfit["cloak"]
-
-            $ Girl.outfit["cloak"] = ""
-
-            pause 0.2
-        else:
-            $ temp_cloak = None
-
-        if Girl.outfit["jacket"]:
-            $ temp_jacket = Girl.outfit["jacket"]
-
-            call remove_jacket(Girl)
-
-            pause 0.2
-        else:
-            $ temp_jacket = None
-
-        if Girl.outfit["suspenders"]:
-            $ temp_suspenders = Girl.outfit["suspenders"]
-
-            call remove_suspenders(Girl)
-
-            pause 0.2
-        else:
-            $ temp_suspenders = None
-
-        if Girl.outfit["belt"]:
-            $ temp_belt = Girl.outfit["belt"]
-
-            $ Girl.outfit["belt"] = ""
-
-            pause 0.2
-        else:
-            $ temp_belt = None
-
-        if Girl.outfit["top"]:
-            $ temp_top = Girl.outfit["top"]
-
-            call remove_top(Girl)
-
-            pause 0.2
-        else:
-            $ temp_top = None
-
-        if Girl.outfit["boots"]:
-            $ temp_boots = Girl.outfit["boots"]
-
-            $ Girl.outfit["boots"] = ""
-
-            pause 0.2
-        else:
-            $ temp_boots = None
-
-        if Girl.outfit["dress"]:
-            $ temp_dress = Girl.outfit["dress"]
-
-            call remove_dress(Girl)
-
-            pause 0.2
-        else:
-            $ temp_dress = None
-
-        if Girl.outfit["bottom"]:
-            $ temp_bottom = Girl.outfit["bottom"]
-
-            call remove_bottom(Girl)
-
-            pause 0.2
-        else:
-            $ temp_bottom = None
-
-        $ temp_bodysuit = Girl.outfit["bodysuit"]
-
-        call remove_bodysuit(Girl)
-
-        pause 0.2
-    else:
-        $ temp_bodysuit = None
-
-    if Girl.outfit["hose"]:
-        if Girl.outfit["hose"] == "_stockings_and_garterbelt":
-            $ Girl.outfit["hose"] = "_garterbelt"
-
-            pause 0.2
-
-        $ Girl.outfit["hose"] = ""
-
-        pause 0.2
-
-    if item:
-        if item == "_stockings_and_garterbelt":
-            $ Girl.outfit["hose"] = "_garterbelt"
-
-            pause 0.2
-
-        $ Girl.outfit["hose"] = item
-
-        pause 0.2
-
-    if redress:
-        if temp_bodysuit:
-            call add_bodysuit(Girl, temp_bodysuit, set_flags = False)
-
-            pause 0.2
-
-            if temp_bottom:
-                call add_bottom(Girl, temp_bottom, set_flags = False)
-
-                pause 0.2
-
-                $ temp_bottom = None
-
-            if temp_dress:
-                call add_dress(Girl, temp_dress, set_flags = False)
-
-                pause 0.2
-
-            if temp_boots:
-                $ Girl.outfit["boots"] = temp_boots
-
-                pause 0.2
-
-            if temp_top:
-                call add_top(Girl, temp_top, set_flags = False)
-
-                pause 0.2
-
-            if temp_suspenders:
-                call add_suspenders(Girl, temp_suspenders, set_flags = False)
-
-                pause 0.2
-
-            if temp_jacket:
-                call add_jacket(Girl, temp_jacket, set_flags = False)
-
-                pause 0.2
-
-            if temp_cloak:
-                $ Girl.outfit["cloak"] = temp_cloak
-
-                pause 0.2
-
-        if temp_bottom:
-            call add_bottom(Girl, temp_bottom, set_flags = False)
-
-            pause 0.2
-
-        if Girl.upskirt:
-            $ Girl.upskirt = False
-
-            pause 0.2
-
-        if Girl.dress_upskirt:
-            $ Girl.dress_upskirt = False
-
-            pause 0.2
-
-        if temp_belt:
-            $ Girl.outfit["belt"] = temp_belt
-
-            pause 0.2
-
-        if temp_boots:
-            $ Girl.outfit["boots"] = temp_boots
-
-    $ Girl.set_outfit_flags()
-
-    return
-
-label change_socks(Girl, item, redress = True):
-    if Girl.outfit["boots"]:
-        $ temp_boots = Girl.outfit["boots"]
-
-        $ Girl.outfit["boots"] = ""
-
-        pause 0.2
-    else:
-        $ temp_boots = None
-
-    if Girl.outfit["bottom"] in pants or Girl.outfit["bottom"] in shorts:
-        $ temp_bottom = Girl.outfit["bottom"]
-
-        call remove_bottom(Girl)
-
-        pause 0.2
-
-    if Girl.outfit["hose"]:
-        if Girl.outfit["hose"] == "_stockings_and_garterbelt":
-            $ Girl.outfit["hose"] = "_garterbelt"
-
-            pause 0.2
-
-        $ Girl.outfit["hose"] = ""
-
-        pause 0.2
-
-    if item:
-        $ Girl.outfit["hose"] = item
-
-        pause 0.2
-
-    if redress:
-        if temp_bottom:
-            call add_bottom(Girl, temp_bottom, set_flags = False)
-
-            pause 0.2
-
-        if temp_boots:
-            $ Girl.outfit["boots"] = temp_boots
-
-    $ Girl.set_outfit_flags()
-
-    return
-
-label remove_underwear(Girl):
-    $ Girl.underwear_pulled_down = True
-
-    pause 0.2
-
-    $ Girl.outfit["underwear"] = ""
-
-    pause 0.2
-
-    $ Girl.set_outfit_flags()
-
-    if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Bottomless"
-
-    return
-
-label add_underwear(Girl, item, set_flags = True):
-    $ Girl.underwear_pulled_down = True
-    $ Girl.outfit["underwear"] = item
-
-    pause 0.2
-
-    $ Girl.underwear_pulled_down = False
-
-    if set_flags:
-        $ Girl.set_outfit_flags()
-
-    return
-
-label change_underwear(Girl, item, redress = True):
-    if Girl.outfit["boots"]:
-        $ temp_boots = Girl.outfit["boots"]
-
-        $ Girl.outfit["boots"] = ""
-
-        pause 0.2
-    else:
-        $ temp_boots = None
-
-    if Girl.outfit["belt"]:
-        $ temp_belt = Girl.outfit["belt"]
-
-        $ Girl.outfit["belt"] = ""
-
-        pause 0.2
-    else:
-        $ temp_belt = None
-
-    if Girl.outfit["dress"]:
-        $ Girl.dress_upskirt = True
-
-        pause 0.2
-
-    if not Girl.outfit["bottom"]:
-        $ temp_bottom = None
-    elif Girl.outfit["bottom"] in skirts:
-        $ temp_bottom = None
-
-        $ Girl.upskirt = True
-
-        pause 0.2
-    else:
-        $ temp_bottom = Girl.outfit["bottom"]
-
-        call remove_bottom(Girl)
-
-        pause 0.2
-
-    if Girl.outfit["bodysuit"]:
-        if Girl.outfit["cloak"]:
-            $ temp_cloak = Girl.outfit["cloak"]
-
-            $ Girl.outfit["cloak"] = ""
-
-            pause 0.2
-        else:
-            $ temp_cloak = None
-
-        if Girl.outfit["jacket"]:
-            $ temp_jacket = Girl.outfit["jacket"]
-
-            call remove_jacket(Girl)
-
-            pause 0.2
-        else:
-            $ temp_jacket = None
-
-        if Girl.outfit["suspenders"]:
-            $ temp_suspenders = Girl.outfit["suspenders"]
-
-            call remove_suspenders(Girl)
-
-            pause 0.2
-        else:
-            $ temp_suspenders = None
-
-        if Girl.outfit["belt"]:
-            $ temp_belt = Girl.outfit["belt"]
-
-            $ Girl.outfit["belt"] = ""
-
-            pause 0.2
-        else:
-            $ temp_belt = None
-
-        if Girl.outfit["top"]:
-            $ temp_top = Girl.outfit["top"]
-
-            call remove_top(Girl)
-
-            pause 0.2
-        else:
-            $ temp_top = None
-
-        if Girl.outfit["boots"]:
-            $ temp_boots = Girl.outfit["boots"]
-
-            $ Girl.outfit["boots"] = ""
-
-            pause 0.2
-        else:
-            $ temp_boots = None
-
-        if Girl.outfit["dress"]:
-            $ temp_dress = Girl.outfit["dress"]
-
-            call remove_dress(Girl)
-
-            pause 0.2
-        else:
-            $ temp_dress = None
-
-        $ temp_bodysuit = Girl.outfit["bodysuit"]
-
-        call remove_bodysuit(Girl)
-
-        pause 0.2
-    else:
-        $ temp_bodysuit = None
-
-    if Girl.outfit["hose"] in hoses or Girl.outfit["hose"] == "_stockings_and_garterbelt":
-        $ temp_hose = Girl.outfit["hose"]
-
-        if Girl.outfit["hose"] == "_stockings_and_garterbelt":
-            $ Girl.outfit["hose"] = "_garterbelt"
-
-            pause 0.2
-
-        $ Girl.outfit["hose"] = ""
-
-        pause 0.2
-    else:
-        $ temp_hose = None
-
-    if Girl.outfit["underwear"]:
-        call remove_underwear(Girl)
-
-        pause 0.2
-
-    if item:
-        call add_underwear(Girl, item, set_flags = False)
-
-        pause 0.2
-
-    if redress:
-        if temp_hose:
-            if temp_hose == "_stockings_and_garterbelt":
-                $ Girl.outfit["hose"] = "_garterbelt"
-
-                pause 0.2
-
-            $ Girl.outfit["hose"] = temp_hose
-
-            pause 0.2
-
-        if temp_bodysuit:
-            call add_bodysuit(Girl, temp_bodysuit, set_flags = False)
-
-            pause 0.2
-
-            if temp_bottom:
-                call add_bottom(Girl, temp_bottom, set_flags = False)
-
-                pause 0.2
-
-                $ temp_bottom = None
-
-            if temp_dress:
-                call add_dress(Girl, temp_dress, set_flags = False)
-
-                pause 0.2
-
-            if temp_boots:
-                $ Girl.outfit["boots"] = temp_boots
-
-                pause 0.2
-
-            if temp_top:
-                call add_top(Girl, temp_top, set_flags = False)
-
-                pause 0.2
-
-            if temp_belt:
-                $ Girl.outfit["belt"] = temp_belt
-
-                pause 0.2
-
-            if temp_suspenders:
-                call add_suspenders(Girl, temp_suspenders, set_flags = False)
-
-                pause 0.2
-
-            if temp_jacket:
-                call add_jacket(Girl, temp_jacket, set_flags = False)
-
-                pause 0.2
-
-            if temp_cloak:
-                $ Girl.outfit["cloak"] = temp_cloak
-
-                pause 0.2
-
-        if temp_bottom:
-            call add_bottom(Girl, temp_bottom, set_flags = False)
-
-            pause 0.2
-
-        if Girl.upskirt:
-            $ Girl.upskirt = False
-
-            pause 0.2
-
-        if Girl.dress_upskirt:
-            $ Girl.dress_upskirt = False
-
-            pause 0.2
-
-        if temp_belt:
-            $ Girl.outfit["belt"] = temp_belt
-
-            pause 0.2
-
-        if temp_boots:
-            $ Girl.outfit["boots"] = temp_boots
-
-    $ Girl.set_outfit_flags()
-
-    return
-
-label expose_underwear(Girl):
-    if Girl.outfit["dress"]:
-        $ Girl.dress_upskirt = True
-
-        pause 0.2
-
-    if not Girl.outfit["bottom"]:
-        pass
-    elif Girl.outfit["bottom"] in skirts:
-        $ Girl.upskirt = True
-
-        pause 0.2
-    else:
-        $ Girl.bottom_pulled_down = True
-
-        pause 0.2
-
-    if Girl.outfit["bodysuit"]:
-        $ Girl.bodysuit_bottom_pulled_aside = True
-
-        pause 0.2
-
-    if Girl.outfit["hose"] in ["_tights", "_ripped_tights", "_pantyhose", "_ripped_pantyhose"]:
-        $ Girl.outfit["hose"] = ""
-
-        pause 0.2
-
-    $ Girl.set_outfit_flags()
-
-    if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Bottomless" pass(1)
-
-    return
-
-label expose_breasts(Girl):
-    if Girl.outfit["jacket"]:
-        if Girl.jacket_closed:
-            $ Girl.jacket_closed = False
-
-            pause 0.2
-
-        $ Girl.jacket_opened = True
-
-        pause 0.2
-
-    if Girl.outfit["suspenders"]:
-        $ Girl.suspenders_aside = True
-
-        pause 0.2
-
-    if Girl.outfit["top"]:
-        $ Girl.top_pulled_up = True
-
-        pause 0.2
-
-    if Girl.outfit["dress"]:
-        $ Girl.dress_top_pulled_down = True
-
-        pause 0.2
-
-    if Girl.outfit["bodysuit"]:
-        $ Girl.bodysuit_top_pulled_aside = True
-
-        pause 0.2
-
-    if Girl.outfit["bra"]:
-        $ Girl.bra_pulled_up = True
-
-    $ Girl.set_outfit_flags()
-
-    if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Topless" pass(1)
-
-    return
-
-label expose_pussy(Girl):
-    call expose_underwear(Girl)
-
-    if Girl.outfit["underwear"]:
-        $ Girl.underwear_pulled_down = True
-
-        pause 0.2
-
-    $ Girl.set_outfit_flags()
-
-    if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Bottomless" pass(1)
-
-    return
-
-label fully_expose(Girl):
-    call expose_breasts(Girl)
-
-    pause 0.2
-
-    call expose_pussy(Girl)
-
-    return
-
-label fully_undress(Girl):
-    if Girl.outfit["cloak"]:
-        $ Girl.outfit["cloak"] = ""
-
-        pause 0.2
-
-    if Girl.outfit["jacket"]:
-        call remove_jacket(Girl)
-
-        pause 0.2
-
-    if Girl.outfit["suspenders"]:
-        call remove_suspenders(Girl)
-
-        pause 0.2
-
-    if Girl.outfit["belt"]:
-        $ Girl.outfit["belt"] = ""
-
-        pause 0.2
-
-    if Girl.outfit["top"]:
-        call remove_top(Girl)
-
-        pause 0.2
-
-    if Girl.outfit["dress"]:
-        call remove_dress(Girl)
-
-        pause 0.2
-
-    if Girl.outfit["bra"]:
-        call remove_bra(Girl)
-
-    $ Girl.set_outfit_flags()
-
-    if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Topless" pass(1)
-
-    if Girl.outfit["boots"]:
-        $ Girl.outfit["boots"] = ""
-
-        pause 0.2
-
-    if Girl.outfit["bottom"]:
-        call remove_bottom(Girl)
-
-        pause 0.2
-
-    if Girl.outfit["bodysuit"]:
-        call remove_bodysuit(Girl)
-
-        pause 0.2
-
-    if Girl.outfit["hose"]:
-        if Girl.outfit["hose"] == "_stockings_and_garterbelt":
-            $ Girl.outfit["hose"] = "_garterbelt"
-
-            pause 0.2
-
-        $ Girl.outfit["hose"] = ""
-
-        pause 0.2
-
-    if Girl.outfit["underwear"]:
-        call remove_underwear(Girl)
-
-    $ Girl.set_outfit_flags()
-
-    if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Bottomless" pass(1)
-
-    return
-
-label fix_clothing(Girl):
-    if Girl.underwear_pulled_down:
-        $ Girl.underwear_pulled_down = False
-
-        pause 0.2
-
-    if Girl.hose_pulled_down:
-        $ Girl.hose_pulled_down = False
-
-        pause 0.2
-
-    if Girl.bodysuit_bottom_pulled_aside:
-        $ Girl.bodysuit_bottom_pulled_aside = False
-
-        pause 0.2
-
-    if Girl.bottom_pulled_down:
-        $ Girl.bottom_pulled_down = False
-
-        pause 0.2
-
-    if Girl.upskirt:
-        $ Girl.upskirt = False
-
-        pause 0.2
-
-    if Girl.dress_upskirt:
-        $ Girl.dress_upskirt = False
-
-        pause 0.2
-
-    if Girl.bra_pulled_up:
-        $ Girl.bra_pulled_up = False
-
-        pause 0.2
-
-    if Girl.bodysuit_top_pulled_aside:
-        $ Girl.bodysuit_top_pulled_aside = False
-
-        pause 0.2
-
-    if Girl.dress_top_pulled_down:
-        $ Girl.dress_top_pulled_down = False
-
-        pause 0.2
-
-    if Girl.top_pulled_up:
-        $ Girl.top_pulled_up = False
-
-        pause 0.2
-
-    if Girl.suspenders_aside:
-        $ Girl.suspenders_aside = False
-
-        pause 0.2
-
-    if Girl.jacket_opened:
-        $ Girl.jacket_opened = False
-
-    $ Girl.set_outfit_flags()
-
-    return
-
-
-
-
-
-
-label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0, 0], temp_Girls=[]):
-
-    $ Present = []
-    $ temp_Girls = all_Girls[:]
-    while temp_Girls:
-        if temp_Girls[0].location == Player.location:
-            $ Present.append(temp_Girls[0])
-        $ temp_Girls.remove(temp_Girls[0])
+label Group_Strip(Girl):
+    call check_who_is_present
 
     if not Present:
         "Nobody's here."
         "You dance alone."
         return
 
-    while len(Present) > 2:
+    $ dancing_Girls = Present[:]
 
-        call remove_Girl(Present[2])
+    while dancing_Girls[0] != Girl:
+        $ renpy.random.shuffle(dancing_Girls)
 
-
-    if len(Present) == 2:
-        $ renpy.random.shuffle(Present)
-        if Girl and Present[0] != Girl:
-            $ Player.Party.reverse()
-        elif approval_check(Present[0],Check=1) <= approval_check(Present[1],Check=1):
-
-            $ Present.reverse()
-
-    call shift_focus (Present[0])
-
-    $ round -= 5 if round > 5 else (round-1)
+    call shift_focus(Girl)
     call set_the_scene
 
-    $ Present[0].change_face("_sexy", 1)
-    if len(Present) >= 2:
-        if Present[1] in all_Girls:
-            $ Present[1].change_face("_sexy", 1)
-        else:
-            $ Present.remove(Present[1])
+    $ round -= 5 if round > 5 else round - 1
 
-    $ counter = len(Present)
+    python:
+        for G in dancing_Girls:
+            G.change_face("_sexy", 1)
+
+    $ counter = len(dancing_Girls)
+
     while counter:
         $ counter -= 1
-        if Girl == EmmaX and "classcaught" in EmmaX.recent_history and AloneCheck(EmmaX):
 
+        if Girl == EmmaX and "classcaught" in EmmaX.recent_history:
             pass
-        elif not approval_check(Present[counter], 600, taboo_modifier = 1,Alt=[[EmmaX],(650+taboo*10)]) or (Present[counter] == EmmaX and taboo and "taboo" not in EmmaX.history):
-            if not approval_check(Present[counter], 400):
-                if Present[counter] == RogueX:
+        elif not approval_check(dancing_Girls[counter], 600, taboo_modifier = 1, Alt = [[EmmaX],(650+taboo*10)]) or (dancing_Girls[counter] == EmmaX and taboo and "taboo" not in EmmaX.history):
+            if not approval_check(dancing_Girls[counter], 400):
+                if dancing_Girls[counter] == RogueX:
                     ch_r "I'm just some sort'a gogo dancer now?"
-                elif Present[counter] == KittyX:
+                elif dancing_Girls[counter] == KittyX:
                     ch_k "Like I would just dance for you?"
-                elif Present[counter] == EmmaX:
+                elif dancing_Girls[counter] == EmmaX:
                     ch_e "Oh, you think I'll dance to your tune?"
-                elif Present[counter] == LauraX:
+                elif dancing_Girls[counter] == LauraX:
                     ch_l "I don't dance."
-                elif Present[counter] == JeanX:
+                elif dancing_Girls[counter] == JeanX:
                     ch_j "I'm not in the mood."
-                elif Present[counter] == StormX:
+                elif dancing_Girls[counter] == StormX:
                     ch_s "I do not dance."
-                elif Present[counter] == JubesX:
+                elif dancing_Girls[counter] == JubesX:
                     ch_v "I don't wanna dance, weirdo. . ."
-            elif Present[counter].taboo:
-                if Present[counter] == RogueX:
+            elif dancing_Girls[counter].taboo:
+                if dancing_Girls[counter] == RogueX:
                     ch_r "I don't think this is the best place for dance'n."
-                elif Present[counter] == KittyX:
+                elif dancing_Girls[counter] == KittyX:
                     ch_k "I don't know, this really isn't a good place for it?"
-                elif Present[counter] == EmmaX:
+                elif dancing_Girls[counter] == EmmaX:
                     ch_e "You must be joking. Here?"
-                elif Present[counter] == LauraX:
+                elif dancing_Girls[counter] == LauraX:
                     if approval_check(LauraX, 600, taboo_modifier = 0):
-                        $ Present.append(LauraX)
+                        $ dancing_Girls.append(LauraX)
                     else:
                         ch_l "I don't feel like it."
-                elif Present[counter] == JeanX:
+                elif dancing_Girls[counter] == JeanX:
                     ch_j "I don't want to just randomly dance in public."
-                elif Present[counter] == StormX:
+                elif dancing_Girls[counter] == StormX:
                     ch_s "I would not want to make a scene."
-                elif Present[counter] == JubesX:
+                elif dancing_Girls[counter] == JubesX:
                     ch_v "This isn't really the place for it. . ."
             else:
-                if Present[counter] == RogueX:
+                if dancing_Girls[counter] == RogueX:
                     ch_r "I dont feel it right now."
-                elif Present[counter] == KittyX:
+                elif dancing_Girls[counter] == KittyX:
                     ch_k "I don't know, I don't really feel like dancing right now."
-                elif Present[counter] == EmmaX:
+                elif dancing_Girls[counter] == EmmaX:
                     ch_e "I don't really feel like dancing at the moment."
-                elif Present[counter] == LauraX:
+                elif dancing_Girls[counter] == LauraX:
                     ch_l "I don't feel like it."
-                elif Present[counter] == JeanX:
+                elif dancing_Girls[counter] == JeanX:
                     ch_j "I'm not in the mood."
-                elif Present[counter] == StormX:
+                elif dancing_Girls[counter] == StormX:
                     ch_s "I do not wish to dance right now."
-                elif Present[counter] == JubesX:
+                elif dancing_Girls[counter] == JubesX:
                     ch_v "Yeah, I don't feel like dancing right now. . ."
-            $ Present.remove(Present[counter])
 
-    if not Present:
+            $ dancing_Girls.remove(dancing_Girls[counter])
+
+    if not dancing_Girls:
         return
 
-    if EmmaX.location == Player.location and EmmaX not in Present:
-
+    if EmmaX.location == Player.location and EmmaX not in dancing_Girls:
         if "classcaught" not in EmmaX.history:
             if EmmaX.location == EmmaX.home:
-
                 ch_e "If the two of you would like to dance, please do it elsewhere."
-                $ Present = []
+
                 return
             else:
                 ch_e "I should really be going."
+
                 call remove_Girl(EmmaX)
 
-    if "stripping" in Present[0].daily_history and approval_check(Present[0], 500, taboo_modifier = 3):
+    if "stripping" in dancing_Girls[0].daily_history and approval_check(dancing_Girls[0], 500, taboo_modifier = 3):
         $ line = renpy.random.choice(["You liked the show earlier?",
-                    "Didn't get enough earlier?",
-                    "You're going to wear me out."])
+            "Didn't get enough earlier?",
+            "You're going to wear me out."])
     else:
         $ line = renpy.random.choice(["Ok, that sounds fun.",
-                    "I could get into that.",
-                    "Yeah, ok."])
+            "I could get into that.",
+            "Yeah, ok."])
 
-    Present[0].voice "[line]"
-    $ line = 0
+    dancing_Girls[0].voice "[line]"
 
-    $ temp_Girls = all_Girls[:]
+    $ temp_Girls = dancing_Girls[:]
 
     while temp_Girls:
         call show_full_body(temp_Girls[0])
 
         $ temp_Girls.remove(temp_Girls[0])
 
-    $ counter = len(Present)
+    $ stored_approval_bonus = []
+
+    $ counter = len(dancing_Girls)
+
     while counter:
         $ counter -= 1
 
-        call show_Girl(Present[counter], color_transform = Girl_Dance1(Present[counter]))
+        call show_Girl(dancing_Girls[counter], animation_transform = dancing(dancing_Girls[counter].sprite_location))
 
-        $ Present[counter].recent_history.append("stripping")
-        $ Present[counter].daily_history.append("stripping")
-        $ Present[counter].action_counter["striptease"] += 1
-        $ Present[counter].remaining_actions -= 1
-        $ approval_bonusP[counter] = approval_bonus
-        if Present[counter].seen_breasts or Present[counter].seen_pussy:
+        $ dancing_Girls[counter].recent_history.append("stripping")
+        $ dancing_Girls[counter].daily_history.append("stripping")
+        $ dancing_Girls[counter].action_counter["striptease"] += 1
+        $ dancing_Girls[counter].remaining_actions -= 1
 
-            $ approval_bonusP[counter] += 20
-        if Present[counter].seen_underwear:
+        $ temp_approval_bonus = approval_bonus
 
-            $ approval_bonusP[counter] += 5
-        if "exhibitionist" in Present[counter].traits:
-            $ approval_bonusP[counter] += (4*taboo)
-        if ("sex friend" in Present[counter].player_petnames or Present[counter] in Player.Harem) and not taboo:
-            $ approval_bonusP[counter] += 15
-        elif "ex" in Present[counter].traits:
-            $ approval_bonusP[counter] -= 40
-        elif Present[counter].event_counter["forced"] and not Present[counter].forced:
-            $ approval_bonusP[counter] -= 5*Present[counter].event_counter["forced"]
+        if dancing_Girls[counter].seen_breasts or dancing_Girls[counter].seen_pussy:
+            $ temp_approval_bonus += 20
+        if dancing_Girls[counter].seen_underwear:
+            $ temp_approval_bonus += 5
+        if "exhibitionist" in dancing_Girls[counter].traits:
+            $ temp_approval_bonus += 4*taboo
+        if ("sex friend" in dancing_Girls[counter].player_petnames or dancing_Girls[counter] in Player.Harem) and not taboo:
+            $ temp_approval_bonus += 15
+        elif "ex" in dancing_Girls[counter].traits:
+            $ temp_approval_bonus -= 40
+        elif dancing_Girls[counter].event_counter["forced"] and not dancing_Girls[counter].forced:
+            $ temp_approval_bonus -= 5*dancing_Girls[counter].event_counter["forced"]
 
-    if len(Present) >= 2:
+        $ stored_approval_bonus.append(temp_approval_bonus)
+
+    if len(dancing_Girls) > 1:
         "They start to dance."
-        $ Partner = Present[1]
+
+        $ Partner = dancing_Girls[1]
+
         $ between_event_count = 1
     else:
         "She starts to dance."
+
         $ between_event_count = 0
-        $ Partner = 0
 
-
-    if Girl == EmmaX and "classcaught" in EmmaX.recent_history and AloneCheck(EmmaX):
-
-        $ Count = 0
+    if Girl == EmmaX and "classcaught" in EmmaX.recent_history:
         jump Group_Stripping
 
+    python:
+        for G in all_Girls:
+            if G in Present and G not in dancing_Girls:
+                if "stopdancing" not in G.recent_history:
+                    G.recent_history.append("stopdancing")
 
-    $ temp_Girls = all_Girls[:]
-    while temp_Girls:
-        if temp_Girls[0].location == Player.location and temp_Girls[0] not in Present:
-            $ Present.append(temp_Girls[0])
-            if "stopdancing" not in temp_Girls[0].recent_history:
-                $ temp_Girls[0].recent_history.append("stopdancing")
-        $ temp_Girls.remove(temp_Girls[0])
-
-    $ approval_bonus = approval_bonusP[0]
     $ Player.primary_action = "striptease"
-    $ Count = 1
 
-    while Count and round >=10:
+    $ interrupted = False
 
+    while not interrupted and round >= 10:
         $ round -= 2 if round > 2 else round
-        if len(Present) >= 2:
-            $ Present[0].check_if_likes(Present[1],600, 1, 1)
-            $ Present[1].check_if_likes(Present[0],600, 1, 1)
+
+        python:
+            for GA in dancing_Girls:
+                for GB in dancing_Girls:
+                    if GA != GB:
+                        GA.check_if_likes(GB, 600, 1, 1)
+                        GB.check_if_likes(GA, 600, 1, 1)
+
         menu:
             "Continue":
                 pass
             "Would you kindly take off some clothes?":
+                dancing_Girls[0].voice "Hmm?"
 
-                Present[0].voice "Hmm?"
-                $ Count = 0
+                $ interrupted = True
             "Stop":
                 jump Group_Strip_End
 
-
-    if EmmaX.location == Player.location and len(Present) >= 2:
-
+    if EmmaX.location == Player.location and len(Present) > 1:
         if "classcaught" not in EmmaX.history or "threesome" not in EmmaX.history or (taboo and "taboo" not in EmmaX.history):
             if EmmaX.location == "bg_emma":
-
                 ch_e "If the two of you would like to get indecent, please do it elsewhere."
-                $ Present = []
+
                 return
             else:
                 ch_e "I should really be going."
+
                 call remove_Girl(EmmaX)
 
 label Group_Stripping:
-    while round >= 10 and Present:
+    $ Count = 0
+
+    while round >= 10 and dancing_Girls:
         $ round -= 2 if round > 2 else round
 
-        if Present[Count] != focused_Girl:
-            call shift_focus (Present[Count])
+        if dancing_Girls[Count] != focused_Girl:
+            call shift_focus (dancing_Girls[Count])
 
-        call Girl_Stripping (Present[Count])
+        call Girl_Stripping (dancing_Girls[Count])
 
-        if len(Present) < 2 and Count != 0:
-            $ Count = 0
-        if not Present or not Present[Count]:
+        if not dancing_Girls:
             jump Group_Strip_End
-        if "stopdancing" in Present[Count].recent_history:
 
-            if len(Present) >= 2 and "stopdancing" in Present[0].recent_history and "stopdancing" in Present[1].recent_history:
-                jump Group_Strip_End
+        if "stopdancing" in dancing_Girls[Count].recent_history:
+            jump Group_Strip_End
 
         $ Player.primary_action = "striptease"
 
-        if not Present:
+        python:
+            for GA in dancing_Girls:
+                for GB in dancing_Girls:
+                        if GA != GB:
+                            GA.check_if_likes(GB, 800, 2, 1)
+                            GB.check_if_likes(GA, 800, 2, 1)
 
-            jump Group_Strip_End
-
-        if len(Present) >= 2 and Count != between_event_count:
-            $ Present[Count].check_if_likes(Present[between_event_count],800,2, 1)
-            $ Present[between_event_count].check_if_likes(Present[Count],800,2, 1)
-
-        if len(Present) >= 2:
-
-
-            if Count == 0 and "stopdancing" not in Present[1].recent_history:
+        if len(dancing_Girls) >= 2:
+            if Count == 0 and "stopdancing" not in dancing_Girls[1].recent_history:
                 $ Count = 1
                 $ between_event_count = 0
-                $ approval_bonusP[1] = approval_bonus
-                $ approval_bonus = approval_bonusP[0]
-            elif Count == 1 and "stopdancing" not in Present[0].recent_history:
+                $ stored_approval_bonus[1] = approval_bonus
+                $ approval_bonus = stored_approval_bonus[0]
+            elif Count == 1 and "stopdancing" not in dancing_Girls[0].recent_history:
                 $ Count = 0
                 $ between_event_count = 1
-                $ approval_bonusP[0] = approval_bonus
-                $ approval_bonus = approval_bonusP[1]
-            call shift_focus (Present[Count])
+                $ stored_approval_bonus[0] = approval_bonus
+                $ approval_bonus = stored_approval_bonus[1]
 
-
+            call shift_focus (dancing_Girls[Count])
             call Activity_Check (focused_Girl, Partner)
 
-        if len(Present) < 2 or "stopdancing" in Present[1].recent_history:
+        if len(dancing_Girls) < 2 or "stopdancing" in dancing_Girls[1].recent_history:
 
-            $ approval_bonus = approval_bonusP[Count]
+            $ approval_bonus = stored_approval_bonus[Count]
             $ Count = 0
             $ between_event_count = 0
             $ Partner = 0
 
             call Activity_Check (focused_Girl, Partner)
 
-            if not Present or "stopdancing" in Present[0].recent_history:
+            if not dancing_Girls or "stopdancing" in dancing_Girls[0].recent_history:
                 jump Group_Strip_End
 
-    if Present and round <=15:
-        Present[0].voice "It's getting late, we should probably take a break."
+    if dancing_Girls and round <=15:
+        dancing_Girls[0].voice "It's getting late, we should probably take a break."
 
 label Group_Strip_End:
-
-    if Present:
-        $ Present[0].drain_word("stopdancing", 1, 0, 0)
-        $ Present[0].drain_word("keepdancing", 1, 0, 0)
-    if len(Present) >= 2:
-        $ Present[1].drain_word("stopdancing", 1, 0, 0)
-        $ Present[1].drain_word("keepdancing", 1, 0, 0)
+    python:
+        for G in dancing_Girls:
+            G.drain_word("stopdancing", 1, 0, 0)
+            G.drain_word("keepdancing", 1, 0, 0)
 
     call set_the_scene
-    $ Count = 0
-    $ between_event_count = 0
 
     return
 
 
 
 
-label Girl_Stripping(Girl=0, Nudist=0):
-
+label Girl_Stripping(Girl):
     if "stopdancing" in Girl.recent_history:
-
         return
 
     $ Girl.arm_pose = 2
     $ Girl.lust_face(1)
 
-    if Girl == StormX and (StormX in Rules or Girl.taboo <= 20):
+    $ Nudist = 0
 
+    if Girl == StormX and (StormX in Rules or Girl.taboo <= 20):
         if Girl.forced:
             $ Nudist = -40
         else:
             $ Nudist = Girl.taboo
+
     if "keepdancing" not in Girl.recent_history:
-
         if Girl == JubesX and Girl.outfit["jacket"] and (Girl.outfit["top"] or Girl.outfit["bra"]) and (Girl.outfit["underwear"] or Girl.outfit["bottom"] or Girl.outfit["hose"] == "_tights"):
-
             if approval_check(Girl, 750, taboo_modifier = 3):
                 call change_Girl_stat(Girl, "obedience", 50, 1)
                 call change_Girl_stat(Girl, "inhibition", 25, 1)
@@ -2116,7 +669,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 jump Group_Strip_End
 
         call show_full_body(Girl)
-        call show_Girl(Girl, color_transform = Girl_Dance1(Girl))
+        call show_Girl(Girl, color_transform = dancing(Girl.sprite_location))
 
         "[Girl.name] begins to dance again."
 
@@ -2374,46 +927,10 @@ label Strip_Ultimatum:
     if "ultimatum" not in Girl.daily_history:
         $ Girl.daily_history.append("ultimatum")
 
-    call show_Girl(Girl, color_transform = Girl_Dance1(Girl))
+    call show_Girl(Girl, color_transform = dancing(Girl.sprite_location))
 
     "[Girl.name] begins to dance again."
     return
-
-transform Girl_Dance1(Chr=focused_Girl):
-    subpixel True
-    pos (Chr.sprite_location, 50)
-    xoffset 0
-    yoffset 0
-    choice:
-        parallel:
-            ease 2.5 xoffset -40
-            ease 2.5 xoffset 0
-        parallel:
-            easeout 1.0 yoffset 30
-            linear 0.5 yoffset 40
-            easein 1.0 yoffset 0
-            easeout 1.0 yoffset 40
-            linear 0.5 yoffset 50
-            easein 1.0 yoffset 0
-    choice:
-        parallel:
-            ease 2.5 xoffset 40
-            ease 2.5 xoffset 0
-        parallel:
-            easeout 1.0 yoffset 30
-            linear 0.5 yoffset 40
-            easein 1.0 yoffset 0
-            easeout 1.0 yoffset 40
-            linear 0.5 yoffset 50
-            easein 1.0 yoffset 0
-    choice (0.3):
-        parallel:
-            ease 2.5 xoffset -30
-            ease 2.5 xoffset 0
-        parallel:
-            ease 1.5 yoffset 150
-            ease 3.5 yoffset 0
-    repeat
 
 label AutoStrip(Girl):
     if (Girl.outfit["underwear"] and not Girl.underwear_pulled_down) or Girl.wearing_pants or Girl.hose_number() >= 6:
@@ -4407,9 +2924,8 @@ label NoPantiesOn(Girl=0):
             $ renpy.pop_call()
     return
 
-label Bottoms_Off_Refused(Girl=0):
-    $ Girl = check_girl(Girl)
-    call shift_focus (Girl)
+label Bottoms_Off_Refused(Girl):
+    call shift_focus(Girl)
 
     if Girl == RogueX:
         if "no_bottomless" in Girl.recent_history:
@@ -4418,6 +2934,7 @@ label Bottoms_Off_Refused(Girl=0):
             ch_r "If you keep this up, not ever, [Girl.player_petname]."
         else:
             $ Girl.change_face("_sad")
+
             if counter == 2:
                 ch_r "That's enough, [Girl.player_petname]. Sure we can't have some fun anyway?"
             else:
@@ -4429,6 +2946,7 @@ label Bottoms_Off_Refused(Girl=0):
             ch_k "Give it a rest."
         else:
             $ Girl.change_face("_sad")
+
             if counter == 2:
                 ch_k "What you see is what you get, but[Girl.like]can't we still have some fun?"
             else:
@@ -4440,6 +2958,7 @@ label Bottoms_Off_Refused(Girl=0):
             ch_e "Not today."
         else:
             $ Girl.change_face("_sad")
+
             if counter == 2:
                 ch_e "That's all I'm willing to do, is that a deal-breaker?"
             else:
@@ -4451,6 +2970,7 @@ label Bottoms_Off_Refused(Girl=0):
             ch_l "No, not today."
         else:
             $ Girl.change_face("_sad")
+
             if counter == 2:
                 ch_l "No more, is that going to be a problem?"
             else:
@@ -4463,14 +2983,13 @@ label Bottoms_Off_Refused(Girl=0):
         else:
             $ Girl.change_face("_sad")
 
-
-
             ch_j "Do we have a problem?"
     elif Girl == StormX:
         if "no_bottomless" in Girl.recent_history:
             ch_s "Show some restraint."
         else:
             $ Girl.change_face("_sad")
+
             if counter == 2:
                 ch_s "This is all, can we continue without it?"
             else:
@@ -4480,13 +2999,16 @@ label Bottoms_Off_Refused(Girl=0):
             ch_v "Like I said, nope."
         else:
             $ Girl.change_face("_sad")
+
             ch_v "This is it, ok?"
+
     menu:
         extend ""
         "Sure, never mind." if "no_bottomless" not in Girl.recent_history:
             $ Girl.mouth = "_smile"
             call change_Girl_stat(Girl, "love", 70, 2)
             call change_Girl_stat(Girl, "obedience", 60, 2)
+
             if Girl == RogueX:
                 ch_r "Great."
             elif Girl == KittyX:
@@ -4501,7 +3023,6 @@ label Bottoms_Off_Refused(Girl=0):
                 ch_s "Good. . ."
             elif Girl == JubesX:
                 ch_v "Cool."
-
         "Sorry, I'll drop it." if "no_bottomless" in Girl.recent_history:
             if Girl == EmmaX:
                 ch_e "Good."
@@ -4510,7 +3031,6 @@ label Bottoms_Off_Refused(Girl=0):
             else:
                 Girl.voice "Fine. . ."
         "No, let's do something else.":
-
             $ Girl.brows = "_confused"
             if Girl == RogueX:
                 ch_r "Ok [Girl.player_petname], your loss."
@@ -4522,14 +3042,17 @@ label Bottoms_Off_Refused(Girl=0):
                 ch_v "Whatever. . ."
             else:
                 Girl.voice "Your loss."
+
             call change_Girl_stat(Girl, "lust", 50, 5)
             call change_Girl_stat(Girl, "love", 70, -2, 1)
+
             if "no_bottomless" not in Girl.recent_history:
                 call change_Girl_stat(Girl, "obedience", 60, 4)
+
             $ Girl.recent_history.append("_angry")
             $ Girl.daily_history.append("_angry")
 
     $ Girl.recent_history.append("no_bottomless")
     $ Girl.daily_history.append("no_bottomless")
-    $ approval_bonus = 0
+
     return

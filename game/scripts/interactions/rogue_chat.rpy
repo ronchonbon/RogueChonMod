@@ -1785,7 +1785,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
     if "locked" in Player.traits:
         call Girls_arrive (RogueX)
         return
-    call set_Character_taboos(taboo_location = False)
+    call set_Character_taboos
     $ RogueX.change_outfit()
     $ RogueX.location = Player.location
     call set_the_scene

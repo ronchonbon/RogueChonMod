@@ -731,7 +731,7 @@ label caught_masturbating(Girl):
         $ Girl.change_face("_confused", 1,eyes = "_surprised", mouth = "_smile")
 
         call stop_all_actions
-        call set_the_scene
+        call set_the_scene(location = Girl.home)
 
         if Girl == RogueX:
             ch_r "Sorry about that [RogueX.player_petname], I was. . . working out."

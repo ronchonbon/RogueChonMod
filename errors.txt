@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/misc_animations.rpy", line 55: layeredimage statement expects a non-empty block.
-    layeredimage foreground:
-                ^
+File "game/scripts/animations/kitty_sprites.rpy", line 512: reached end of line when expecting ':'.
+    elif
+        ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Sat Jun 25 17:23:41 2022
+Sun Jun 26 01:25:15 2022

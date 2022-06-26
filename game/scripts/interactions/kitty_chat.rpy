@@ -2041,10 +2041,10 @@ label Kitty_Summon(approval_bonus=approval_bonus):
     if "locked" in Player.traits:
         call Girls_arrive (KittyX)
         return
-    call set_Character_taboos(taboo_location = False)
+    call set_Character_taboos
     $ KittyX.location = Player.location
     $ KittyX.change_outfit()
-    call set_Character_taboos(taboo_location = False)
+    call set_Character_taboos
     call set_the_scene
     return
 

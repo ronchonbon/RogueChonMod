@@ -365,7 +365,6 @@ label Jean_Key:
 label Jean_Like:
 
     if JeanX.location != Player.location:
-        $ JeanX.location = Player.location
         "[JeanX.name] walks up to you."
 
     call clear_the_room(JeanX)
@@ -489,7 +488,6 @@ label Jean_Like:
 label Jean_Love:
 
     if JeanX.location != Player.location:
-        $ JeanX.location = Player.location
         "[JeanX.name] walks up to you."
 
     call clear_the_room(JeanX)
@@ -707,7 +705,6 @@ label Jean_Love:
 label Jean_Sub:
 
     if JeanX.location != Player.location:
-        $ JeanX.location = Player.location
         "[JeanX.name] walks up to you."
 
     call clear_the_room(JeanX)
@@ -847,7 +844,6 @@ label Jean_Sub:
 
 label Jean_Master:
     if JeanX.location != Player.location:
-        $ JeanX.location = Player.location
         "[JeanX.name] walks up to you."
 
     call clear_the_room(JeanX)

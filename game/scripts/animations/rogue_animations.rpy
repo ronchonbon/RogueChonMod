@@ -581,11 +581,11 @@ image Rogue_blowjob_mouth_animation4:
     subpixel True
     zoom 0.94
     block:
-        ease 0.25 zoom 0.94
-        ease 0.25 zoom 1.0
+        ease 0.5 zoom 0.94
+        ease 0.5 zoom 1.0
         pause 0.5
-        ease 1.0 zoom 0.96
-        ease 1.0 zoom 1.0
+        ease 0.5 zoom 0.96
+        ease 1.5 zoom 1.0
         repeat
 
 image Rogue_blowjob_mask_animation2:
