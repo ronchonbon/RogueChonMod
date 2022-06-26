@@ -498,6 +498,8 @@ label girls_room_entry:
 
                 jump reset_location
 
+    $ Girl.location = Girl.home
+
     return
 
 label girls_room:

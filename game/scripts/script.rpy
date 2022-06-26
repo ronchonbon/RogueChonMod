@@ -39,7 +39,7 @@ init -1:
 
     default total_SEXP = 0
 
-    default bedrooms = ["bg_player", "bg_rogue", "bg_kitty", "bg_emma", "bg_laura", "bg_jean", "bg_storm", "bg_jubes"]
+    default bedrooms = ["bg_player"]
 
     default taboo = 0
 
@@ -122,7 +122,7 @@ init -1:
     define cloaks = ["_raven_cloak"]
 
     define hand_actions = ["massage", "fondle_thighs", "fondle_breasts", "fondle_pussy", "finger_pussy", "fondle_ass", "finger_ass"]
-    define finger_actions = ['finger_pussy", "finger_ass"']
+    define finger_actions = ["finger_pussy", "finger_ass"]
     define mouth_actions = ["kiss", "suck_breasts", "eat_pussy", "eat_ass"]
     define cock_actions = ["handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"]
     define dildo_actions = ["dildo_pussy", "dildo_ass"]
