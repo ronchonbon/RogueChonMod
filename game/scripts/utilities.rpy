@@ -1501,7 +1501,7 @@ label stop_all_actions(visual = False):
     $ second_girl_main_action = None
     $ second_girl_secondary_action = None
 
-    $ temp_Girls = all_Girls[:]
+    $ temp_Girls = Present[:]
 
     while temp_Girls:
         $ temp_Girls[0].main_action = None
@@ -1705,6 +1705,10 @@ menu Tutorial:
 label SpecialMenu:
     while True:
         menu:
+            "Meet Dr. Darkholme":
+                jump meet_Mystique
+            "Discover Mystique":
+                jump discover_Mystique
             "Tutorial":
                 jump Tutorial
             "Statchecker" if False:

@@ -296,7 +296,6 @@ label start:
         for G in all_Girls:
             G.location = "hold"
 
-    $ all_Girls.remove(MystiqueX)
     $ active_Girls = []
     $ focused_Girl = RogueX
 

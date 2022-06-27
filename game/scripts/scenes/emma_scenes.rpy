@@ -6,8 +6,6 @@ label meet_Emma:
 
     $ EmmaX.name = "???"
     $ EmmaX.teaching = True
-    $ EmmaX.arm_pose = 1
-    $ EmmaX.change_face("_normal")
 
     call change_clothes
     call add_Girls(EmmaX)

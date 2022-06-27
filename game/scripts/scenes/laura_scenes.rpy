@@ -1,7 +1,6 @@
 label meet_Laura:
-    $ Present = []
-
-    call set_the_scene(location = "bg_dangerroom")
+    call set_the_scene(location = "bg_dangerroom", show_Characters = False, fade = True)
+    call remove_all
 
     "As you approach the Danger Room, you hear a ferocious clanging of metal."
     "Just as you pass through the door, a robotic arm smashes into your face."

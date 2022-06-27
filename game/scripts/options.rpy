@@ -8,7 +8,7 @@ init -1 python hide:
     config.window_title = u"Rogue-Like Chonky Mod"
 
     config.name = "Rogue-Like Chonky Mod"
-    config.version = "0.3a"
+    config.version = "0.3b"
 
     config.gl2 = True
     config.cache_surfaces = False

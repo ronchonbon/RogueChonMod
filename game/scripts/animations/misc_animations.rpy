@@ -31,9 +31,9 @@ transform stat_rising(x_position):
         pause 1.5
         xpos x_position + 0.03 alpha 1.0
     parallel:
-        linear 2.0 ypos 0.0
+        linear 1.0 ypos 0.0
     parallel:
-        linear 2.0 alpha 0.0
+        linear 1.0 alpha 0.0
 
 transform stat_falling(x_position):
     ypos 0.0 alpha 0.05
@@ -68,9 +68,9 @@ transform stat_falling(x_position):
         pause 1.5
         xpos x_position + 0.03 alpha 1.0
     parallel:
-        linear 2.0 ypos 0.25
+        linear 1.0 ypos 0.25
     parallel:
-        linear 2.0 alpha 0.0
+        linear 1.0 alpha 0.0
 
 transform dripping(x_offset = 0, start = 0, transparency = 1.0):
     offset (x_offset, start) alpha transparency

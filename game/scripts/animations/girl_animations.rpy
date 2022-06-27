@@ -157,8 +157,6 @@ label show_Girl(Girl, x_position = None, y_position = None, sprite_layer = None,
             else:
                 show Emma_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), color_transform, animation_transform with transition
         elif Girl == LauraX:
-            $ Girl.claws = False
-
             show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), color_transform, animation_transform with transition
         elif Girl == JeanX:
             show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), color_transform, animation_transform with transition
@@ -182,8 +180,6 @@ label show_Girl(Girl, x_position = None, y_position = None, sprite_layer = None,
             else:
                 show Emma_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), color_transform, animation_transform
         elif Girl == LauraX:
-            $ Girl.claws = False
-
             show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), color_transform, animation_transform
         elif Girl == JeanX:
             show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), color_transform, animation_transform
@@ -207,8 +203,6 @@ label show_Girl(Girl, x_position = None, y_position = None, sprite_layer = None,
             else:
                 show Emma_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), color_transform with transition
         elif Girl == LauraX:
-            $ Girl.claws = False
-
             show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), color_transform with transition
         elif Girl == JeanX:
             show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), color_transform with transition
@@ -232,8 +226,6 @@ label show_Girl(Girl, x_position = None, y_position = None, sprite_layer = None,
             else:
                 show Emma_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), animation_transform with transition
         elif Girl == LauraX:
-            $ Girl.claws = False
-
             show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), animation_transform with transition
         elif Girl == JeanX:
             show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), animation_transform with transition
@@ -257,8 +249,6 @@ label show_Girl(Girl, x_position = None, y_position = None, sprite_layer = None,
             else:
                 show Emma_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), color_transform
         elif Girl == LauraX:
-            $ Girl.claws = False
-
             show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), color_transform
         elif Girl == JeanX:
             show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), color_transform
@@ -282,8 +272,6 @@ label show_Girl(Girl, x_position = None, y_position = None, sprite_layer = None,
             else:
                 show Emma_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), animation_transform
         elif Girl == LauraX:
-            $ Girl.claws = False
-
             show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), animation_transform
         elif Girl == JeanX:
             show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), animation_transform
@@ -307,8 +295,6 @@ label show_Girl(Girl, x_position = None, y_position = None, sprite_layer = None,
             else:
                 show Emma_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null with transition
         elif Girl == LauraX:
-            $ Girl.claws = False
-
             show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null with transition
         elif Girl == JeanX:
             show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null with transition
@@ -332,8 +318,6 @@ label show_Girl(Girl, x_position = None, y_position = None, sprite_layer = None,
             else:
                 show Emma_sprite standing normal zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null
         elif Girl == LauraX:
-            $ Girl.claws = False
-
             show Laura_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null
         elif Girl == JeanX:
             show Jean_sprite standing zorder Girl.sprite_layer at sprite_location(Girl.sprite_location, y_position), null

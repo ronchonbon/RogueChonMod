@@ -2354,7 +2354,7 @@ label PhoneSex(Girl=0):
     return
 
 label Rogue_First_Topless(Silent=0, Templine=0):
-    if RogueX.outfit["bra"] or RogueX.outfit["top"]:
+    if RogueX.breasts_covered:
 
         return
     if RogueX.location != Player.location and "phonesex" not in Player.recent_history:
@@ -2460,8 +2460,7 @@ label Rogue_First_Topless(Silent=0, Templine=0):
     return
 
 label Rogue_First_Bottomless(Silent=0):
-    if RogueX.outfit["underwear"] or RogueX.outfit["bottom"] or RogueX.hose_number() > 9:
-
+    if RogueX.pussy_covered:
         return
     if RogueX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -2504,8 +2503,7 @@ label Rogue_First_Bottomless(Silent=0):
     return
 
 label Kitty_First_Topless(Silent=0, Templine=0):
-    if KittyX.outfit["bra"] or KittyX.outfit["top"]:
-
+    if KittyX.breasts_covered:
         return
     if KittyX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -2613,8 +2611,7 @@ label Kitty_First_Topless(Silent=0, Templine=0):
     return
 
 label Kitty_First_Bottomless(Silent=0):
-    if KittyX.outfit["underwear"] or KittyX.outfit["bottom"] or KittyX.hose_number() > 9:
-
+    if KittyX.pussy_covered:
         return
     if KittyX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -2680,8 +2677,7 @@ label Kitty_First_Bottomless(Silent=0):
     return
 
 label Emma_First_Topless(Silent=0, Templine=0):
-    if EmmaX.outfit["bra"] or EmmaX.outfit["top"]:
-
+    if EmmaX.breasts_covered:
         return
     if EmmaX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -2814,8 +2810,7 @@ label Emma_First_Topless(Silent=0, Templine=0):
     return
 
 label Emma_First_Bottomless(Silent=0):
-    if EmmaX.outfit["underwear"] or EmmaX.outfit["bottom"] or EmmaX.hose_number() > 9:
-
+    if EmmaX.pussy_covered:
         return
     if EmmaX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -2898,8 +2893,7 @@ label Emma_First_Bottomless(Silent=0):
     return
 
 label Laura_First_Topless(Silent=0, Templine=0):
-    if LauraX.outfit["bra"] or LauraX.outfit["top"]:
-
+    if LauraX.breasts_covered:
         return
     if LauraX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -3014,8 +3008,7 @@ label Laura_First_Topless(Silent=0, Templine=0):
     return
 
 label Laura_First_Bottomless(Silent=0):
-    if LauraX.outfit["underwear"] or LauraX.outfit["bottom"] or LauraX.hose_number() > 9:
-
+    if LauraX.pussy_covered:
         return
     if LauraX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -3102,7 +3095,7 @@ label Laura_First_Bottomless(Silent=0):
     return
 
 label Jean_First_Topless(Silent=0, Templine=0):
-    if (JeanX.outfit["bra"] or JeanX.outfit["top"]) and not Templine:
+    if JeanX.breasts_covered and not Templine:
 
 
         return
@@ -3236,8 +3229,7 @@ label Jean_First_Topless(Silent=0, Templine=0):
     return
 
 label Jean_First_Bottomless(Silent=0):
-    if JeanX.outfit["underwear"] or JeanX.outfit["bottom"] or JeanX.hose_number() > 9:
-
+    if JeanX.pussy_covered:
         return
     if JeanX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -3331,9 +3323,7 @@ label Jean_First_Bottomless(Silent=0):
     return
 
 label Storm_First_Topless(Silent=0, Templine=0):
-
-    if StormX.outfit["bra"] or StormX.outfit["top"]:
-
+    if StormX.breasts_covered:
         return
     if StormX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -3344,8 +3334,7 @@ label Storm_First_Topless(Silent=0, Templine=0):
     return
 
 label Storm_First_Bottomless(Silent=0):
-    if StormX.outfit["underwear"] or StormX.outfit["bottom"] or StormX.hose_number() > 9:
-
+    if StormX.pussy_covered:
         return
     if StormX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -3356,8 +3345,7 @@ label Storm_First_Bottomless(Silent=0):
     return
 
 label Jubes_First_Topless(Silent=0, Templine=0):
-    if JubesX.outfit["bra"] or JubesX.outfit["top"]:
-
+    if JubesX.breasts_covered:
         return
     if JubesX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -3475,8 +3463,7 @@ label Jubes_First_Topless(Silent=0, Templine=0):
     return
 
 label Jubes_First_Bottomless(Silent=0):
-    if JubesX.outfit["underwear"] or JubesX.outfit["bottom"] or JubesX.hose_number() > 9:
-
+    if JubesX.pussy_covered:
         return
     if JubesX.location != Player.location and "phonesex" not in Player.recent_history:
         return

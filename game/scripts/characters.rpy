@@ -236,7 +236,7 @@ init python:
                                  ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"],
                                  ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"]]
 
-                self.likes = {"Kitty": 600, "Emma": 500, "Laura": 500, "Jean": 200, "Storm": 600, "Jubes": 500}
+                self.likes = {"Kitty": 600, "Emma": 500, "Laura": 500, "Jean": 200, "Storm": 600, "Jubes": 500, "Mystique": 0}
 
                 self.history = ["met"]
 
@@ -262,10 +262,10 @@ init python:
                                  ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
                                  ["bg_classroom", "bg_pool", "bg_kitty", "bg_kitty"],
                                  ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
-                                 ["bg_campus", "bg_dangerroom", "bg_kitty", "bg_kitty"],
+                                 ["bg_campus", "bg_dangerroom", "bg_mall", "bg_kitty"],
                                  ["bg_campus", "bg_dangerroom", "bg_kitty", "bg_kitty"]]
 
-                self.likes = {"Rogue": 600, "Emma": 500, "Laura": 500, "Jean": 300, "Storm": 600, "Jubes": 600}
+                self.likes = {"Rogue": 600, "Emma": 500, "Laura": 500, "Jean": 300, "Storm": 600, "Jubes": 600, "Mystique": 0}
 
                 self.used_to_anal = False
 
@@ -291,7 +291,7 @@ init python:
                                  ["bg_pool", "bg_pool", "bg_emma", "bg_emma"],
                                  ["bg_pool", "bg_pool", "bg_emma", "bg_emma"]]
 
-                self.likes = {"Rogue": 500, "Kitty": 500, "Laura": 500, "Jean": 100, "Storm": 500, "Jubes": 500}
+                self.likes = {"Rogue": 500, "Kitty": 500, "Laura": 500, "Jean": 100, "Storm": 500, "Jubes": 500, "Mystique": 0}
 
                 self.used_to_anal = True
 
@@ -323,7 +323,7 @@ init python:
                                         ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"],
                                         ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"]]
 
-                self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 500, "Jean": 300, "Storm": 500, "Jubes": 600}
+                self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 500, "Jean": 300, "Storm": 500, "Jubes": 600, "Mystique": 0}
 
                 self.used_to_anal = 2
 
@@ -349,7 +349,7 @@ init python:
                                         ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"],
                                         ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"]]
 
-                self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 300, "Laura": 500, "Storm": 300, "Jubes": 300}
+                self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 300, "Laura": 500, "Storm": 300, "Jubes": 300, "Mystique": 0}
 
                 self.used_to_anal = False
 
@@ -373,7 +373,7 @@ init python:
                                         ["bg_storm", "bg_campus", "bg_storm", "bg_pool"],
                                         ["bg_storm", "bg_campus", "bg_storm", "bg_pool"]]
 
-                self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 400, "Laura": 500, "Jean": 300, "Jubes": 500}
+                self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 400, "Laura": 500, "Jean": 300, "Jubes": 500, "Mystique": 0}
 
                 self.used_to_anal = False
 
@@ -393,11 +393,11 @@ init python:
                                         ["bg_classroom", "bg_classroom", "bg_jubes", "bg_jubes"],
                                         ["bg_jubes", "bg_dangerroom", "bg_dangerroom", "bg_jubes"],
                                         ["bg_dangerroom", "bg_dangerroom", "bg_jubes", "bg_jubes"],
-                                        ["bg_pool", "bg_campus", "bg_campus", "bg_jubes"],
-                                        ["bg_jubes", "bg_campus", "bg_jubes", "bg_pool"],
+                                        ["bg_pool", "bg_campus", "bg_mall", "bg_jubes"],
+                                        ["bg_jubes", "bg_campus", "bg_mall", "bg_pool"],
                                         ["bg_jubes", "bg_campus", "bg_jubes", "bg_pool"]]
 
-                self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 500, "Laura": 600, "Jean": 300, "Storm": 500}
+                self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 500, "Laura": 600, "Jean": 300, "Storm": 500, "Mystique": 0}
 
                 self.used_to_anal = False
 
@@ -415,29 +415,25 @@ init python:
 
                 self.disguise = None
 
-                self.weekly_schedule = [["bg_teacher", "bg_teacher", "bg_classroom", "bg_mystique"],
-                                 ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_mystique"],
-                                 ["bg_teacher", "bg_teacher", "bg_classroom", "bg_mystique"],
-                                 ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_mystique"],
-                                 ["bg_teacher", "bg_teacher", "bg_classroom", "bg_mystique"],
-                                 ["bg_pool", "bg_pool", "bg_mystique", "bg_mystique"],
-                                 ["bg_pool", "bg_pool", "bg_mystique", "bg_mystique"]]
+                self.weekly_schedule = [["bg_office", "bg_office", "bg_office", "bg_mystique"],
+                                 ["bg_office", "bg_office", "bg_office", "bg_mystique"],
+                                 ["bg_office", "bg_office", "bg_office", "bg_mystique"],
+                                 ["bg_office", "bg_office", "bg_office", "bg_mystique"],
+                                 ["bg_office", "bg_office", "bg_dangerroom", "bg_mystique"],
+                                 ["bg_mystique", "bg_office", "bg_dangerroom", "bg_mystique"],
+                                 ["bg_mystique", "bg_pool", "bg_mall", "bg_mystique"]]
 
-                self.likes = {"Rogue": 500, "Kitty": 500, "Laura": 500, "Jean": 100, "Storm": 500, "Jubes": 500}
+                self.likes = {"Rogue": 0, "Kitty": 0, "Emma": 0, "Laura": 0, "Jean": 0, "Storm": 0, "Jubes": 0}
 
                 self.used_to_anal = True
 
                 self.massage_chart = ["shoulders", "neck", "neck", "back", "hips", "ass", "ass", "back", "breasts", "breasts"]
 
-                self.names = ["Ms. Darkholme"]
-                self.name = "Ms. Darkholme"
+                self.names = ["Dr. Darkholme"]
+                self.name = "Dr. Darkholme"
 
-                global Player
-
-                last_name = get_last_name(Player)
-
-                self.player_petname = "Mr. " + last_name
-                self.player_petnames = ["young man", Player.name, "Mr. " + last_name]
+                self.player_petname = Player.name
+                self.player_petnames = [Player.name]
                 self.petname = self.name
                 self.petnames = ["Raven", "Ms. Darkholme"]
 
@@ -990,6 +986,7 @@ init python:
                 got_dressed = 1
 
             self.outfit = outfit_holder.copy()
+            self.disguise_outfit = self.outfit.copy()
 
             if "ripped" in self.daily_history and "modesty" not in self.recent_history:
                 self.outfit["hose"] = "_ripped_pantyhose" if self.outfit["hose"] == "_pantyhose" else self.outfit["hose"]
