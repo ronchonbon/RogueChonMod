@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -23,7 +23,12 @@
 # It's purpose is to store in one global all of the data that would
 # be to annoying to lug around otherwise.
 
-import renpy.display
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+from typing import Optional, Any
+
+import renpy
 
 # The basepath.
 basepath = None
@@ -33,23 +38,23 @@ basepath = None
 searchpath = [ ]
 
 # The options that were read off the command line.
-args = None
+args = None # type: Any
 
 # The game's script.
-script = None
+script = None # type: Optional[renpy.script.Script]
 
 # A stack of execution contexts.
 contexts = [ ]
 
 # The interface that the game uses to interact with the user.
-interface = None
+interface = None # type: Optional[renpy.display.core.Interface]
 
 # Are we inside lint?
 lint = False
 
 # The RollbackLog that keeps track of changes to the game state
 # and to the store.
-log = None
+log = None # type: renpy.rollback.RollbackLog|None
 
 # Some useful additional information about program execution that
 # can be added to the exception.
@@ -88,10 +93,10 @@ less_mouse = False
 less_imagedissolve = False
 
 # The persistent data that's kept from session to session
-persistent = None
+persistent = None # type: Any
 
 # The current preferences.
-preferences = None
+preferences = None # type: Any
 
 
 class ExceptionInfo(object):
@@ -124,18 +129,12 @@ class RestartContext(Exception):
     in the restarted context.
     """
 
-    def __init__(self, label):
-        self.label = label
-
 
 class RestartTopContext(Exception):
     """
     Restarts the top context. If `label` is given, calls that label
     in the restarted context.
     """
-
-    def __init__(self, label):
-        self.label = label
 
 
 class FullRestartException(Exception):
@@ -144,7 +143,7 @@ class FullRestartException(Exception):
     destroying the store and config and so on.
     """
 
-    def __init__(self, reason="end_game"):  # W0231
+    def __init__(self, reason="end_game"): # W0231
         self.reason = reason
 
 
@@ -249,7 +248,7 @@ def context(index=-1):
     return contexts[index]
 
 
-def invoke_in_new_context(callable, *args, **kwargs):  # @ReservedAssignment
+def invoke_in_new_context(callable, *args, **kwargs): # @ReservedAssignment
     """
     :doc: label
 
@@ -274,6 +273,8 @@ def invoke_in_new_context(callable, *args, **kwargs):  # @ReservedAssignment
     :func:`renpy.call_in_new_context` instead.
     """
 
+    restart_context = False
+
     context = renpy.execution.Context(False, contexts[-1], clear=True)
     contexts.append(context)
 
@@ -284,14 +285,24 @@ def invoke_in_new_context(callable, *args, **kwargs):  # @ReservedAssignment
 
         return callable(*args, **kwargs)
 
+    except renpy.game.RestartContext:
+        restart_context = True
+        raise
+
+    except renpy.game.RestartTopContext:
+        restart_context = True
+        raise
+
     except renpy.game.JumpOutException as e:
 
         contexts[-2].force_checkpoint = True
+        contexts[-2].abnormal = True
         raise renpy.game.JumpException(e.args[0])
 
     finally:
 
-        context.pop_all_dynamic()
+        if not restart_context:
+            context.pop_all_dynamic()
 
         contexts.pop()
         contexts[-1].do_deferred_rollback()
@@ -309,7 +320,6 @@ def call_in_new_context(label, *args, **kwargs):
     new context, and saving/loading will occur in the top level
     context.
 
-    This is used to begin a second interaction with the player
     Use this to begin a second interaction with the user while
     inside an interaction.
     """
@@ -326,7 +336,7 @@ def call_in_new_context(label, *args, **kwargs):
         renpy.store._args = None
 
     if kwargs:
-        renpy.store._kwargs = renpy.python.RevertableDict(kwargs)
+        renpy.store._kwargs = renpy.revertable.RevertableDict(kwargs)
     else:
         renpy.store._kwargs = None
 
@@ -337,6 +347,7 @@ def call_in_new_context(label, *args, **kwargs):
 
     except renpy.game.JumpOutException as e:
         contexts[-2].force_checkpoint = True
+        contexts[-2].abnormal = True
         raise renpy.game.JumpException(e.args[0])
 
     finally:
@@ -375,10 +386,10 @@ def call_replay(label, scope={}):
     # This has to be here, to ensure the scope stuff works.
     renpy.exports.execute_default_statement()
 
-    for k, v in renpy.config.replay_scope.iteritems():
+    for k, v in renpy.config.replay_scope.items():
         setattr(renpy.store, k, v)
 
-    for k, v in scope.iteritems():
+    for k, v in scope.items():
         setattr(renpy.store, k, v)
 
     renpy.store._in_replay = label

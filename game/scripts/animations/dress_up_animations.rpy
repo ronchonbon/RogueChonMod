@@ -416,7 +416,7 @@ label change_bodysuit(Girl, item, redress = True):
 
     if redress:
         if temp_bra:
-            call add_bra(Girl, temp_bottom, set_flags = True)
+            call add_bra(Girl, temp_bra, set_flags = True)
 
             pause 0.2
 

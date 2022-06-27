@@ -1,4 +1,4 @@
-﻿# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+﻿# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -132,6 +132,9 @@ init -1500 python:
 
             who, what, kwargs = entry
 
+            kwargs.setdefault("properties", { })
+            kwargs.setdefault("multiple", None)
+
             if i == len(nvl_list) - 1:
                 who_id = "who"
                 what_id = "what"
@@ -169,14 +172,18 @@ init -1500 python:
             e.window_args = kwargs["window_args"]
             e.properties = kwargs["properties"]
 
+            e.multiple = kwargs["multiple"]
+
             dialogue.append(e)
 
         show_args = dict(kwargs)
         if show_args:
-            del show_args["properties"]
             del show_args["who_args"]
             del show_args["what_args"]
             del show_args["window_args"]
+
+            show_args.pop("properties", None)
+            show_args.pop("multiple", None)
 
         return widget_properties, dialogue, show_args
 
@@ -193,7 +200,7 @@ init -1500 python:
 
         return renpy.get_widget(screen_name, "what", config.nvl_layer)
 
-    def nvl_show_core(who=None, what=None):
+    def nvl_show_core(who=None, what=None, multiple=None):
 
          # Screen version.
         if renpy.has_screen("nvl"):
@@ -230,11 +237,29 @@ init -1500 python:
         nvl_show_core()
 
     def nvl_show(with_):
+        """
+        :doc: nvl
+
+        The Python equivalent of the ``nvl show`` statement.
+
+        `with_`
+            The transition to use to show the NVL-mode window.
+        """
+
         nvl_show_core()
         renpy.with_statement(with_)
         store._last_say_who = "nvl"
 
     def nvl_hide(with_):
+        """
+        :doc: nvl
+
+        The Python equivalent of the ``nvl hide`` statement.
+
+        `with_`
+            The transition to use to hide the NVL-mode window.
+        """
+
         nvl_show_core()
         renpy.with_statement(None)
         renpy.with_statement(with_)
@@ -286,20 +311,33 @@ init -1500 python:
                 kind=kind,
                 **properties)
 
-        def push_nvl_list(self, who, what):
+        def push_nvl_list(self, who, what, multiple=None):
 
             kwargs = self.show_args.copy()
             kwargs["properties"] = dict(self.properties)
             kwargs["what_args"] = dict(self.what_args)
             kwargs["who_args"] = dict(self.who_args)
             kwargs["window_args"] = dict(self.window_args)
+            kwargs["multiple"] = multiple
+
+            if multiple:
+
+                def multiple_style(k):
+                    style = kwargs[k]["style"]
+                    style = "block{}_multiple{}_{}".format(multiple[0], multiple[1], style)
+                    kwargs[k]["style"] = style
+
+                multiple_style("what_args")
+                multiple_style("who_args")
+                multiple_style("window_args")
 
             store.nvl_list.append((who, what, kwargs))
 
         def pop_nvl_list(self):
-            store.nvl_list.pop()
+            if store.nvl_list:
+                store.nvl_list.pop()
 
-        def do_add(self, who, what):
+        def do_add(self, who, what, multiple=None):
 
             if store.nvl_list is None:
                 store.nvl_list = [ ]
@@ -311,46 +349,63 @@ init -1500 python:
             while config.nvl_list_length and (len(nvl_list) + 1 > config.nvl_list_length):
                 nvl_list.pop(0)
 
-        def do_display(self, who, what, **display_args):
+        def do_display(self, who, what, multiple=None, **display_args):
 
             page = self.clear or nvl_clear_next()
 
             if config.nvl_page_ctc and page:
-                display_args["ctc"] = config.nvl_page_ctc
+                display_args["ctc"] = renpy.easy.displayable_or_none(config.nvl_page_ctc)
                 display_args["ctc_position"] = config.nvl_page_ctc_position
 
             if config.nvl_paged_rollback:
                 if page:
                     checkpoint = True
                 else:
-                    if renpy.in_rollback():
+                    if renpy.roll_forward_info() is not None:
+                        renpy.checkpoint(renpy.roll_forward_info(), hard=False)
                         return
+
                     checkpoint = False
             else:
                 checkpoint = True
 
-            self.push_nvl_list(who, what)
+            if multiple is not None:
+                self.push_nvl_list(who, what, multiple=multiple)
+            else:
+                self.push_nvl_list(who, what)
 
             renpy.display_say(
                 who,
                 what,
                 nvl_show_core,
                 checkpoint=checkpoint,
+                multiple=multiple,
                 **display_args)
 
             self.pop_nvl_list()
 
-        def do_done(self, who, what):
+        def do_done(self, who, what, multiple=None):
 
-            self.push_nvl_list(who, what)
+            if multiple is not None:
+                self.push_nvl_list(who, what, multiple=multiple)
+            else:
+                self.push_nvl_list(who, what)
 
-            nvl_list[-1][2]["what_args"]["alt"] = ""
-            nvl_list[-1][2]["who_args"]["alt"] = ""
+            if multiple is None:
+                start = -1
+            elif multiple[0] == multiple[1]:
+                start = -multiple[0]
+            else:
+                start = 0
+
+            for i in range(start, 0):
+                nvl_list[i][2]["what_args"]["alt"] = ""
+                nvl_list[i][2]["who_args"]["alt"] = ""
 
             if self.clear:
                 nvl_clear()
 
-            self.add_history("adv", who, what)
+            self.add_history("nvl", who, what)
 
         def do_extend(self):
             renpy.mode(self.mode)
@@ -379,6 +434,12 @@ init -1500 python:
         kind=adv)
 
     def nvl_clear():
+        """
+        :doc: nvl
+
+        The Python equivalent of the ``nvl clear`` statement.
+        """
+
         store.nvl_list = [ ]
 
     # Run clear at the start of the game.
@@ -386,8 +447,19 @@ init -1500 python:
 
 
     def nvl_menu(items):
+        """
+        :doc: nvl
+
+        A Python function that displays a menu in NVL style. This is rarely
+        used directly. Instead, it's assigned to the :var:`menu` variable,
+        using something like::
+
+            define menu = nvl_menu
+        """
+
 
         renpy.mode('nvl_menu')
+        renpy.shown_window()
 
         if nvl_list is None:
             store.nvl_list = [ ]

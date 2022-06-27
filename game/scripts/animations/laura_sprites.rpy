@@ -36,6 +36,9 @@ layeredimage Laura_sprite standing:
     if LauraX.outfit["piercings"]:
         "images/Laura_standing/Laura_standing_piercings_pussy[LauraX.outfit[piercings]].png"
 
+    if LauraX.outfit["nipple_accessories"]:
+        "images/Laura_standing/Laura_standing_nipple_accessories[LauraX.outfit[nipple_accessories]].png"
+
     if not LauraX.outfit["bra"]:
         Null()
     elif LauraX.bra_pulled_up:
@@ -88,6 +91,9 @@ layeredimage Laura_sprite standing:
     else:
         "images/Laura_standing/Laura_standing_bottom[LauraX.outfit[bottom]].png"
 
+    if LauraX.outfit["dress"]:
+        "images/Laura_standing/Laura_standing_dress[LauraX.outfit[dress]][LauraX.arm_pose].png"
+
     if LauraX.outfit["top"]:
         "images/Laura_standing/Laura_standing_top[LauraX.outfit[top]].png"
 
@@ -111,6 +117,9 @@ layeredimage Laura_sprite standing:
 
     if LauraX.outfit["gloves"] == "_gloves" and LauraX.arm_pose == 2:
         "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose]_left.png"
+
+    if LauraX.outfit["dress"] == "_Mavis_dress":
+        "images/Laura_standing/Laura_standing_sleeves[LauraX.outfit[dress]][LauraX.arm_pose].png"
 
     if LauraX.outfit["piercings"] and LauraX.pussy_covered:
         "images/Laura_standing/Laura_standing_piercings_pussy[LauraX.outfit[piercings]]_covered.png"

@@ -1,4 +1,4 @@
-﻿# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+﻿# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -80,21 +80,31 @@ init -1500 python:
         A version of strftime that's meant to work with Ren'Py's translation
         system.
         """
-        rv = format
 
         month = t[1] - 1
         wday = t[6]
 
-        rv = rv.replace("%a", __(_weekday_name_short[wday]))
-        rv = rv.replace("%A", __(_weekday_name_long[wday]))
-        rv = rv.replace("%b", __(_month_name_short[month]))
-        rv = rv.replace("%B", __(_month_name_long[month]))
+        import re
+        import time
 
-        if "%" in rv:
-            import time
-            rv = time.strftime(rv.encode("utf-8"), t).decode("utf-8")
+        rv = [ ]
 
-        return rv
+        for i in re.split(r'(%[-_^#]?[0-9]*[a-zA-Z])', format):
+
+            if i == "%a":
+                rv.append(__(_weekday_name_short[wday]))
+            elif i == "%A":
+                rv.append(__(_weekday_name_long[wday]))
+            elif i == "%b":
+                rv.append(__(_month_name_short[month]))
+            elif i == "%B":
+                rv.append(__(_month_name_long[month]))
+            elif "%" in i:
+                rv.append(time.strftime(i, t))
+            else:
+                rv.append(i)
+
+        return "".join(rv)
 
 
     ##########################################################################
@@ -103,7 +113,7 @@ init -1500 python:
     config.linear_saves_page_size = None
     config.quicksave_slots = 10
 
-    # The number of file pages per
+    # The number of file pages per folder.
     config.file_pages_per_folder = 100
 
     if persistent._file_page is None:
@@ -117,7 +127,12 @@ init -1500 python:
 
     config.file_page_names = [ ]
 
-    def __slotname(name, page=None):
+    config.predict_file_pages = True
+
+    def __slotname(name, page=None, slot=False):
+
+        if slot:
+            return name
 
         if page is None:
             page = persistent._file_page
@@ -200,7 +215,7 @@ init -1500 python:
 
         return rv
 
-    def FileLoadable(name, page=None):
+    def FileLoadable(name, page=None, slot=False):
         """
          :doc: file_action_function
 
@@ -208,9 +223,9 @@ init -1500 python:
          if the file is loadable, and false otherwise.
          """
 
-        return renpy.can_load(__slotname(name, page))
+        return renpy.can_load(__slotname(name, page, slot))
 
-    def FileScreenshot(name, empty=None, page=None):
+    def FileScreenshot(name, empty=None, page=None, slot=False):
         """
          :doc: file_action_function
 
@@ -221,7 +236,7 @@ init -1500 python:
          The return value is a displayable.
          """
 
-        screenshot = renpy.slot_screenshot(__slotname(name, page))
+        screenshot = renpy.slot_screenshot(__slotname(name, page, slot=slot))
 
         if screenshot is not None:
             return screenshot
@@ -232,7 +247,7 @@ init -1500 python:
             return Null(config.thumbnail_width, config.thumbnail_height)
 
 
-    def FileTime(name, format=_("%b %d, %H:%M"), empty="", page=None):
+    def FileTime(name, format=_("%b %d, %H:%M"), empty="", page=None, slot=False):
         """
          :doc: file_action_function
 
@@ -243,7 +258,7 @@ init -1500 python:
          The return value is a string.
          """
 
-        mtime = renpy.slot_mtime(__slotname(name, page))
+        mtime = renpy.slot_mtime(__slotname(name, page, slot))
 
         if mtime is None:
             return empty
@@ -253,23 +268,24 @@ init -1500 python:
         format = renpy.translation.translate_string(format)
         return _strftime(format, time.localtime(mtime))
 
-    def FileJson(name, key=None, empty=None, missing=None, page=None):
+    def FileJson(name, key=None, empty=None, missing=None, page=None, slot=False):
         """
         :doc: file_action_function
 
         Accesses the Json information associated with `name`.
 
-        If `key` is None, returns the entire Json other object, or `empty` if the slot
-        is empty.
+        This always returns `empty` if the slot is empty.
+
+        If not, and if `key` is None, returns the entire dictionary containing the Json data.
 
         Otherwise, this returns json[key] if `key` is defined on the json object of the save,
-        `missing` if there is a save with the given name, but it does not contain `key`, or
-        `empty` if the save slot is empty.
+        and `missing` if there is a save with the given name, but it does not contain `key`.
 
-        Json is added to a save slot by callbacks registered using :var:`config.save_json_callbacks`.
+        Such Json data is added to a save slot by callbacks registered using
+        :var:`config.save_json_callbacks`.
         """
 
-        json = renpy.slot_json(__slotname(name, page))
+        json = renpy.slot_json(__slotname(name, page, slot))
 
         if json is None:
             return empty
@@ -280,7 +296,7 @@ init -1500 python:
         return json.get(key, missing)
 
 
-    def FileSaveName(name, empty="", page=None):
+    def FileSaveName(name, empty="", page=None, slot=False):
         """
          :doc: file_action_function
 
@@ -288,16 +304,16 @@ init -1500 python:
          or `empty` if the file does not exist.
          """
 
-        return FileJson(name, "_save_name", empty=empty, missing=empty, page=page)
+        return FileJson(name, "_save_name", empty=empty, missing=empty, page=page, slot=slot)
 
-    def FileNewest(name, page=None):
+    def FileNewest(name, page=None, slot=False):
         """
         :doc: file_action_function
 
         Returns True if this is the newest file slot, or False otherwise.
         """
 
-        return __newest_slot() == __slotname(name, page)
+        return __newest_slot() == __slotname(name, page, slot)
 
     class FileSave(Action, DictEquality):
         """
@@ -326,11 +342,15 @@ init -1500 python:
              If true, then saves on the supplied page will be cycled before
              being shown to the user. :var:`config.quicksave_slots` slots are
              used in the cycle.
+
+         `slot`
+             If True, `name` is taken to be a slot name, and `page` is ignored.
          """
 
         alt = "Save slot [text]"
+        slot = None
 
-        def __init__(self, name, confirm=True, newest=True, page=None, cycle=False):
+        def __init__(self, name, confirm=True, newest=True, page=None, cycle=False, slot=False):
             if name is None:
                 name = __unused_slot_name(page)
 
@@ -338,19 +358,23 @@ init -1500 python:
             self.confirm = confirm
             self.page = page
             self.cycle = cycle
+            self.slot = slot
 
-            self.alt = "Save slot %s: [text]" % (name,)
+            try:
+                self.alt = __("Save slot %s: [text]") % (name,)
+            except Exception:
+                self.alt = "Save slot %s: [text]" % (name,)
 
         def __call__(self):
 
             if not self.get_sensitive():
                 return
 
-            fn = __slotname(self.name, self.page)
+            fn = __slotname(self.name, self.page, self.slot)
 
             if renpy.scan_saved_game(fn):
                 if self.confirm:
-                    layout.yesno_screen(layout.OVERWRITE_SAVE, FileSave(self.name, False, False, self.page, cycle=self.cycle))
+                    layout.yesno_screen(layout.OVERWRITE_SAVE, FileSave(self.name, False, False, self.page, cycle=self.cycle, slot=self.slot))
                     return
 
             if self.cycle:
@@ -374,7 +398,7 @@ init -1500 python:
             if not self.confirm:
                 return False
 
-            return __newest_slot() == __slotname(self.name, self.page)
+            return __newest_slot() == __slotname(self.name, self.page, self.slot)
 
     class FileLoad(Action, DictEquality):
         """
@@ -383,8 +407,8 @@ init -1500 python:
          Loads the file.
 
          `name`
-             The name of the slot to load from. If None, an unused slot
-             the file will not be loadable.
+             The name of the slot to load from. If None, an unused slot will be
+             used, and hence the file will not be loadable.
 
          `confirm`
              If true and not at the main menu, prompt for confirmation before loading the file.
@@ -398,11 +422,15 @@ init -1500 python:
 
          `cycle`
              Ignored.
+
+         `slot`
+             If True, `name` is taken to be a slot name, and `page` is ignored.
          """
 
         alt = "Load slot [text]"
+        slot = None
 
-        def __init__(self, name, confirm=True, page=None, newest=True):
+        def __init__(self, name, confirm=True, page=None, newest=True, cycle=False, slot=False):
 
             if name is None:
                 name = __unused_slot_name(page)
@@ -411,22 +439,25 @@ init -1500 python:
             self.confirm = confirm
             self.page = page
             self.newest = newest
+            self.slot = slot
 
-            self.alt = "Load slot %s: [text]" % (name,)
-
+            try:
+                self.alt = __("Load slot %s: [text]") % (name,)
+            except Exception:
+                self.alt = "Load slot %s: [text]" % (name,)
 
         def __call__(self):
 
             if not self.get_sensitive():
                 return
 
-            fn = __slotname(self.name, self.page)
+            fn = __slotname(self.name, self.page, self.slot)
 
             if not main_menu:
                 if self.confirm:
                     if config.autosave_on_quit and not fn.startswith("auto-"):
                         renpy.loadsave.force_autosave()
-                    layout.yesno_screen(layout.LOADING, FileLoad(self.name, False, self.page))
+                    layout.yesno_screen(layout.LOADING, FileLoad(self.name, False, self.page, slot=self.slot))
                     return
 
             renpy.load(fn)
@@ -435,13 +466,13 @@ init -1500 python:
             if _in_replay:
                 return False
 
-            return renpy.can_load(__slotname(self.name, self.page))
+            return renpy.can_load(__slotname(self.name, self.page, self.slot))
 
         def get_selected(self):
             if not self.confirm or not self.newest:
                 return False
 
-            return __newest_slot() == __slotname(self.name, self.page)
+            return __newest_slot() == __slotname(self.name, self.page, self.slot)
 
     @renpy.pure
     class FileDelete(Action, DictEquality):
@@ -450,35 +481,44 @@ init -1500 python:
 
          Deletes the file.
 
+         `name`
+             The name of the slot to delete.
+
          `confirm`
-             If true, prompts before deleting a file.
+             If true and not at the main menu, prompt for confirmation before loading the file.
+
+         `page`
+             The page that the file will be loaded from. If None, the
+             current page is used.
+
+         `slot`
+             If True, `name` is taken to be a slot name, and `page` is ignored.
          """
 
-        alt = "Delete slot [text]"
+        alt = _("Delete slot [text]")
+        slot = None
 
-        def __init__(self, name, confirm=True, page=None):
+        def __init__(self, name, confirm=True, page=None, slot=False):
             self.name = name
             self.confirm = confirm
             self.page = page
+            self.slot = slot
 
         def __call__(self):
 
             if not self.get_sensitive():
                 return
 
-            fn = __slotname(self.name, self.page)
+            fn = __slotname(self.name, self.page, self.slot)
 
             if self.confirm:
-                layout.yesno_screen(layout.DELETE_SAVE, FileDelete(self.name, False, self.page))
+                layout.yesno_screen(layout.DELETE_SAVE, FileDelete(self.name, False, self.page, self.slot))
                 return
 
             renpy.unlink_save(fn)
 
         def get_sensitive(self):
-            return renpy.can_load(__slotname(self.name, self.page))
-
-        def get_selected(self):
-            return __newest_slot() == __slotname(self.name, self.page)
+            return renpy.can_load(__slotname(self.name, self.page, self.slot))
 
 
     def FileAction(name, page=None, **kwargs):
@@ -505,6 +545,22 @@ init -1500 python:
         else:
             return FileSave(name, page=page, **kwargs)
 
+    def _predict_file_page(page):
+        """
+        Predicts the screenshots on `page`.
+        """
+
+        if not config.predict_file_pages:
+            return
+
+        if page is None:
+            return
+
+        page = unicode(page)
+
+        for i in renpy.list_slots(page + "-"):
+            renpy.predict(renpy.slot_screenshot(i))
+
     @renpy.pure
     class FilePage(Action, DictEquality):
         """
@@ -516,7 +572,13 @@ init -1500 python:
 
         def __init__(self, page):
             self.page = str(page)
-            self.alt = "File page [text]"
+
+            if page == "auto":
+                self.alt = _("File page auto")
+            elif page == "quick":
+                self.alt = _("File page quick")
+            else:
+                self.alt = _("File page [text]")
 
         def __call__(self):
             if not self.get_sensitive():
@@ -527,6 +589,9 @@ init -1500 python:
 
         def get_selected(self):
             return self.page == persistent._file_page
+
+        def predict(self):
+            _predict_file_page(self.page)
 
     def FilePageName(auto="a", quick="q"):
         """
@@ -602,9 +667,9 @@ init -1500 python:
             page = self.get_page()
 
             if page == "auto":
-                return self.auto
+                return __(self.auto)
             elif page == "quick":
-                return self.quick
+                return __(self.quick)
             else:
 
                 page = int(page)
@@ -691,26 +756,35 @@ init -1500 python:
 
     class FilePageNext(Action, DictEquality):
         """
-         :doc: file_action
+        :doc: file_action
 
-         Goes to the next file page.
+        Goes to the next file page.
 
-         `max`
-             If set, this should be an integer that gives the number of
-             the maximum file page we can go to.
+        `max`
+            If set, this should be an integer that gives the number of
+            the maximum file page we can go to.
 
-         `wrap`
-             If true, we can go to the first page when on the last file page if max is set.
-         """
+        `wrap`
+            If true, we can go to the first page when on the
+            last file page if `max` is set.
 
-        alt = "Next file page"
+        `auto`
+            If true and wrap is set, this can bring the player to
+            the page of automatic saves.
 
-        def __init__(self, max=None, wrap=False):
+        `quick`
+            If true and wrap is set, this can bring the player to
+            the page of automatic saves.
+        """
+
+        alt = _("Next file page.")
+
+        def __init__(self, max=None, wrap=False, auto=True, quick=True):
 
             page = persistent._file_page
 
             if page == "auto":
-                if config.has_quicksave:
+                if config.has_quicksave and quick:
                     page = "quick"
                 else:
                     page = "1"
@@ -724,9 +798,9 @@ init -1500 python:
                 if max is not None:
                     if page > max:
                         if wrap:
-                            if config.has_autosave:
+                            if config.has_autosave and auto:
                                 page = "auto"
-                            elif config.has_quicksave:
+                            elif config.has_quicksave and quick:
                                 page = "quick"
                             else:
                                 page = "1"
@@ -748,31 +822,41 @@ init -1500 python:
         def get_sensitive(self):
             return self.page is not None
 
+        def predict(self):
+            _predict_file_page(self.page)
+
 
     class FilePagePrevious(Action, DictEquality):
         """
-         :doc: file_action
+        :doc: file_action
 
-         Goes to the previous file page, if possible.
+        Goes to the previous file page, if possible.
 
-         `max`
-             If set, this should be an integer that gives the number of
-             the maximum file page we can go to. This is required to enable
-             wrap.
+        `max`
+            If set, this should be an integer that gives the number of
+            the maximum file page we can go to. This is required to enable
+            wrap.
 
-         `wrap`
-             If true, we can go to the last page when on the first file page if max is set.
-         """
+        `wrap`
+            If true, we can go to the last page when on the first file page if max is set.
 
-        alt = "Previous file page"
+        `auto`
+            If true, this can bring the player to
+            the page of automatic saves.
 
-        def __init__(self, max=None, wrap=False):
+        `quick`
+            If true, this can bring the player to
+            the page of automatic saves.
+        """
+
+        alt = _("Previous file page.")
+
+        def __init__(self, max=None, wrap=False, auto=True, quick=True):
 
             if wrap and max is not None:
                 max = str(max)
             else:
                 max = None
-
 
             page = persistent._file_page
 
@@ -780,15 +864,15 @@ init -1500 python:
                 page = max
 
             elif page == "quick":
-                if config.has_autosave:
+                if config.has_autosave and auto:
                     page = "auto"
                 else:
                     page = max
 
             elif page == "1":
-                if config.has_quicksave:
+                if config.has_quicksave and quick:
                     page = "quick"
-                elif config.has_autosave:
+                elif config.has_autosave and auto:
                     page = "auto"
                 else:
                     page = max
@@ -808,6 +892,9 @@ init -1500 python:
         def get_sensitive(self):
             return self.page
 
+        def predict(self):
+            _predict_file_page(self.page)
+
     @renpy.pure
     class FileTakeScreenshot(Action, DictEquality):
         """
@@ -820,6 +907,7 @@ init -1500 python:
 
         def __call__(self):
             renpy.take_screenshot()
+            renpy.restart_interaction()
 
     @renpy.pure
     def QuickSave(message=_("Quick save complete."), newest=False):
@@ -840,7 +928,7 @@ init -1500 python:
             Notify(message),
             ]
 
-        rv[0].alt = "Quick save."
+        rv[0].alt = _("Quick save.")
 
         if not getattr(renpy.context(), "_menu", False):
             rv.insert(0, FileTakeScreenshot())
@@ -859,7 +947,7 @@ init -1500 python:
         """
 
         rv = FileLoad(1, page="quick", confirm=confirm, newest=False)
-        rv.alt = "Quick load."
+        rv.alt = _("Quick load.")
         return rv
 
 init 1050 python hide:
@@ -872,6 +960,5 @@ init 1050 python hide:
     if persistent._file_page not in config.file_page_names:
         try:
             int(persistent._file_page)
-        except:
+        except Exception:
             persistent._file_page = "1"
-

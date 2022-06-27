@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -23,14 +23,21 @@
 # This includes both simple settings (like the screen dimensions) and
 # methods that perform standard tasks, like the say and menu methods.
 
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+from typing import Optional, List
+
+
 import collections
 import os
+import renpy
 
 # Can we add more config variables?
 locked = False
 
 # Contains help for config variables.
-help = [ ]  # @ReservedAssignment
+help = [ ] # @ReservedAssignment
 
 # The title of the game window.
 window_title = None
@@ -90,7 +97,10 @@ savedir = None
 
 # The number of screens worth of images that are allowed to
 # live in the image cache at once.
-image_cache_size = 16
+image_cache_size = None
+
+# The size of the image cache, in megabytes.
+image_cache_size_mb = 300
 
 # The number of statements we will analyze when doing predictive
 # loading. Please note that this is a total number of statements in a
@@ -219,8 +229,10 @@ font_replacement_map = { }
 
 # A callback that is called when a with statement (but not
 # the with clause of a say or menu statement) executes. If not None,
-# it's called with a single argument, the transition supplied to the
-# with clause.
+# it's called with a two arguments, the transition supplied to the
+# with clause and the transition it is paired with. The latter is
+# None except in the case of the implicit None transition produced
+# by inline with statements.
 with_callback = None
 
 # The framerate limit, in frames per second.
@@ -231,17 +243,17 @@ frames = 0
 
 # NOT USED: A text editor that is launched at the location of the current
 # statement.
-editor = None  # os.environ.get('RENPY_EDITOR', None)
+editor = None # os.environ.get('RENPY_EDITOR', None)
 
 # NOT USED: Text editor, with arguments to reload or clobber the file - used,
 # for example, to display traceback.txt.
-editor_transient = None  # os.environ.get('RENPY_EDITOR_TRANSIENT', editor)
+editor_transient = None # os.environ.get('RENPY_EDITOR_TRANSIENT', editor)
 
 # NOT USED: The separator used between files in the text editor.
-editor_file_separator = None  # os.environ.get('RENPY_EDITOR_FILE_SEPARATOR', '" "')
+editor_file_separator = None # os.environ.get('RENPY_EDITOR_FILE_SEPARATOR', '" "')
 
 # Enable developer mode?
-developer = False  # Changed to True or False in the init code.
+developer = False # Changed to True or False in the init code.
 
 # The value of developer requested by the creator (True, False, or "auto")
 original_developer = False
@@ -295,6 +307,9 @@ character_callback = None
 # Character callback list.
 all_character_callbacks = [ ]
 
+# Should autsave be enabled?
+has_autosave = True
+
 # The number of autosave slots we have.
 autosave_slots = 10
 
@@ -310,7 +325,7 @@ show = None
 # The callback that is used by the hide statement.
 hide = None
 
-# Should we use cPickle or pickle for load/save?
+# Python 2.x only: Should we use cPickle or pickle for load/save?
 use_cpickle = True
 
 # The function to call as the inspector.
@@ -336,7 +351,7 @@ auto_save_extra_info = None
 
 # The directory (underneath ~/RenPy, ~/Library/RenPy, or ~/.renpy) where the
 # game-specific data is saved.
-save_directory = None
+save_directory = None # type: str
 
 # These are used to deal with the case where a picture is missing.
 missing_scene = None
@@ -359,8 +374,8 @@ rtl = False
 file_open_callback = None
 
 # The size of screenshot thumbnails. (Redefined in common/)
-thumbnail_width = None
-thumbnail_height = None
+thumbnail_width = 256
+thumbnail_height = 144
 
 # The end game transition.
 end_game_transition = None
@@ -379,11 +394,11 @@ quit_action = None
 screenshot_crop = None
 
 # Various directories.
-gamedir = None
-basedir = None
-renpy_base = None
-commondir = None
-logdir = None  # Where log and error files go.
+gamedir = ""
+basedir = ""
+renpy_base = ""
+commondir = None  # type: Optional[str]
+logdir = None  # type: Optional[str] # Where log and error files go.
 
 # Should we enable OpenGL mode?
 gl_enable = True
@@ -407,6 +422,10 @@ imagemap_cache = True
 # Callbacks that are called in order to predict images.
 predict_callbacks = [ ]
 
+# Callbacks that are called on expensive idle_frame one per tick
+# to predict screens or other hard stuff.
+expensive_predict_callbacks = [ ]
+
 # Should screens be predicted?
 predict_screens = True
 
@@ -414,10 +433,10 @@ predict_screens = True
 choice_screen_chosen = True
 
 # Should the narrator speak menu labels?
-narrator_menu = False
+narrator_menu = True
 
 # A list of screen variants to use.
-variants = [ None ]
+variants = [ None ] # type: List
 
 # A function from (auto_parameter, variant) -> displayable.
 imagemap_auto_function = None
@@ -435,6 +454,9 @@ new_character_image_argument = True
 # corresponding to a shown image.
 say_attribute_transition = None
 
+# The layer the say_attribute_transition runs on.
+say_attribute_transition_layer = None
+
 # What is the name and version of this game?
 name = ""
 version = ""
@@ -444,6 +466,9 @@ log_enable = True
 
 # Should we log text overflows?
 debug_text_overflow = False
+
+# Should underfull grids raise an exception?
+allow_underfull_grids = False
 
 # Should we save the window size in the preferences?
 save_physical_size = True
@@ -505,6 +530,9 @@ statement_callbacks = [ ]
 # A list of file extensions that are blacklisted by autoreload.
 autoreload_blacklist = [ ".rpyc", ".rpymc", ".rpyb", ".pyc", ".pyo" ]
 
+# A list of python modules that should be reloaded when appropriate.
+reload_modules = [ ]
+
 # The layer dialogue is shown on.
 say_layer = "screens"
 
@@ -530,6 +558,9 @@ adjust_view_size = None
 # True if we should autosave when a choice occurs.
 autosave_on_choice = True
 
+# True if we should autosave when the player has input something.
+autosave_on_input = True
+
 # A list of channels we should emphasize the audio on.
 emphasize_audio_channels = [ 'voice' ]
 
@@ -548,7 +579,7 @@ transition_screens = True
 predict_statements_callback = None
 
 # Should we use hardware video on platforms that support it?
-hw_video = True
+hw_video = False
 
 # A function to use to dispatch gestures.
 dispatch_gesture = None
@@ -563,10 +594,13 @@ gesture_component_size = .05
 gesture_stroke_size = .2
 
 # Should we log to stdout rather than files?
-log_to_stdout = False
+log_to_stdout = bool(int(os.environ.get("RENPY_LOG_TO_STDOUT", "0")))
 
 # new-style custom text tags.
 custom_text_tags = { }
+
+# Same, but for ones that are empty.
+self_closing_custom_text_tags = { }
 
 # A function that given the text from a TEXT token, returns a replacement text.
 replace_text = None
@@ -578,7 +612,7 @@ missing_label_callback = None
 preserve_zorder = True
 
 # The set of names to ignore.
-lint_ignore_replaces = [ 'help', 'quit' ]
+lint_ignore_replaces = [ 'help', 'quit', "_confirm_quit" ]
 
 # How long should the presplash be kept up for?
 minimum_presplash_time = 0.0
@@ -639,6 +673,9 @@ pass_joystick_events = False
 # A list of screens that should be shown when the overlay is enabled.
 overlay_screens = [ ]
 
+# A list of screens that should always be shown.
+always_shown_screens = [ ]
+
 # A map from tag to the default layer that tag should be displayed on.
 tag_layer = { }
 
@@ -676,7 +713,7 @@ movie_mixer = "music"
 # * mixer
 # * file prefix
 # * file suffix
-auto_channels = { "audio" : ( "sfx", "", ""  ) }
+auto_channels = { "audio" : ("sfx", "", "") }
 
 # The channel used by renpy.play.
 play_channel = "audio"
@@ -710,6 +747,12 @@ translate_files = [ ]
 # A list of files for which ##<space> comment sequences should also be
 # translated.
 translate_comments = [ ]
+
+# Should we trying detect user locale on first launch?
+enable_language_autodetect = False
+
+# A function from (locale, region) -> existing language.
+locale_to_language_function = None
 
 # Should we pass the full argument list to the say screen?
 old_say_args = False
@@ -781,9 +824,6 @@ position_viewport_side = True
 # Things that be given properties via Character.
 character_id_prefixes = [ ]
 
-# Should surfaces be cached?
-cache_surfaces = True
-
 # Should {nw} wait for voice.
 nw_voice = True
 
@@ -793,6 +833,9 @@ say_arguments_callback = None
 # Should we show an atl interpolation for one frame?
 atl_one_frame = True
 
+# Should function statements in ATL block fast-forward?
+atl_function_always_blocks = False
+
 # Should we keep the show layer state?
 keep_show_layer_state = True
 
@@ -801,6 +844,8 @@ fast_skipping_callbacks = [ ]
 
 # Should the audio periodic callback run in its own thread.
 audio_periodic_thread = True
+if renpy.emscripten:
+    audio_periodic_thread = False
 
 # A list of fonts to preload on Ren'Py startup.
 preload_fonts = [ ]
@@ -808,12 +853,423 @@ preload_fonts = [ ]
 # Should Ren'Py process multiple ATL events in a single update?
 atl_multiple_events = True
 
+# A callback that's called when checking to see if a file is loadable.
+loadable_callback = None
+
+# How many frames should be drawn fast each time the screen needs to be
+# updated?
+fast_redraw_frames = 4
+
+# The color passed to glClearColor when clearing the screen.
+gl_clear_color = "#000"
+
+# Screens that are updated once per frame rather than once per interaction.
+per_frame_screens = [ ]
+
+# How long we store performance data for.
+performance_window = 5.0
+
+# How long does a frame have to take (to the event) to trigger profiling.
+profile_time = 1.0 / 50.0
+
+# What event do we check to see if the profile needs to be printed?
+profile_to_event = "flip"
+
+# Should we instantly zap transient displayables, or properly hide them?
+fast_unhandled_event = True
+
+# Should a fast path be used when displaying empty windows.
+fast_empty_window = True
+
+# Should all nodes participate in rollback?
+all_nodes_rollback = False
+
+# Should Ren'Py manage GC itself?
+manage_gc = True
+
+# Default thresholds that apply to garbage collection.
+gc_thresholds = (25000, 10, 10)
+
+# The threshold for a level 0 gc when we have the time.
+idle_gc_count = 2500
+
+# Should we print unreachable.
+gc_print_unreachable = "RENPY_GC_PRINT_UNREACHABLE" in os.environ
+
+# The first frame that we consider to be "idle", so we can do gc and
+# prediction.
+idle_frame = 4
+
+# Does taking the transform state go through image reference targets?
+take_state_from_target = False
+
+# Does ui.viewport set the child_size if not set?
+scrollbar_child_size = True
+
+# Should surfaces be cached?
+cache_surfaces = False
+
+# Should we optimize textures by taking the bounding rect?
+optimize_texture_bounds = True
+
+# Should we predict everything in a ConditionSwitch?
+conditionswitch_predict_all = False
+
+# Transform events to deliver each time one happens.
+repeat_transform_events = [ "show", "replace", "update" ]
+
+# How many statements should we warp through?
+warp_limit = 1000
+
+# Should dissolve statments force the use of alpha.
+dissolve_force_alpha = True
+
+# A map from a displayable prefix to a function that returns a displayable
+# corresponding to the argument.
+displayable_prefix = { }
+
+# Should we re-play a movie when it's shown again.
+replay_movie_sprites = True
+
+# A callback that is called when entering a new context.
+context_callback = None
+
+# Should we reject . and .. in filenames?
+reject_relative = True
+
+# The prefix to use on the side image.
+side_image_prefix_tag = 'side'
+
+# Do the say attributes of a hidden side image use the side image tag?
+say_attributes_use_side_image = True
+
+# Does the menu statement show a window by itself, when there is no caption?
+menu_showed_window = False
+
+# Should the menu statement produce actions instead of values?
+menu_actions = True
+
+# Should disabled menu items be included?
+menu_include_disabled = False
+
+# Should we report extraneous attributes?
+report_extraneous_attributes = True
+
+# Should we play non-loooped music when skipping?
+skip_sounds = False
+
+# Should we lint screens without parameters?
+lint_screens_without_parameters = True
+
+# If not None, a function that's used to process and modify menu arguments.
+menu_arguments_callback = None
+
+# Should Ren'PY automatically clear the screenshot?
+auto_clear_screenshot = True
+
+# Should Ren'Py allow duplicate labels.
+allow_duplicate_labels = False
+
+# A map of font transform name to font transform function.
+font_transforms = { }
+
+# A scaling factor that is applied to a truetype font.
+ftfont_scale = { }
+
+# This is used to scale the ascent and descent of a font.
+ftfont_vertical_extent_scale = { }
+
+# The default shader.
+default_shader = "renpy.geometry"
+
+# If True, the volume of a channel is shown when it is mute.
+preserve_volume_when_muted = False
+
+
+def say_attribute_transition_callback(*args):
+    """
+    :args: (tag, attrs, mode)
+
+    Returns the say attribute transition to use, and the layer the transition
+    should be applied to (with None being a valid layer.
+
+    Attrs is the list of tags/attributes of the incoming image.
+
+    Mode is one of "permanent", "temporary", or "restore".
+    """
+
+    return renpy.config.say_attribute_transition, renpy.config.say_attribute_transition_layer
+
+
+# Should say_attribute_transition_callback take attrs?
+say_attribute_transition_callback_attrs = True
+
+# The function used by renpy.notify
+notify = None
+
+# Should Ren'Py support a SL2 keyword after a Python statement?
+keyword_after_python = False
+
+# A label Ren'Py should jump to if a load fails.
+load_failed_label = None
+
+# If true, Ren'Py distributes mono to both stereo channels. If false,
+# it splits it 50/50.
+equal_mono = True
+
+# If True, renpy.input will always return the default.
+disable_input = False
+
+# If True, the order of substrings in the Side positions will
+# also determine the order of their render.
+keep_side_render_order = True
+
+# Should this game enable and require gl2?
+gl2 = True
+
+# Does this game use the depth buffer? If so, how many bits of depth should
+# it use?
+depth_size = 24
+
+# A list of screens to remove when the context is copied.
+context_copy_remove_screens = [ "notify" ]
+
+# An exception handling callback.
+exception_handler = None
+
+# A label that is jumped to if return fails.
+return_not_found_label = None
+
+# A list of (regex, autoreload function) tuples.
+autoreload_functions = [ ]
+
+# A list of voice mixers (that should not be dropped when self voicing is
+# enabled).
+voice_mixers = [ "voice" ]
+
+# Should the text alignment pattern be drawn?
+debug_text_alignment = False
+
+# Init blocks taking longer than this amount of time to run are
+# reported to log.txt.
+profile_init = 0.25
+
+# Should live2d interpolate movements?
+live2d_interpolate = False
+
+# A list of text tags with contents that should be filtered by the TTS system.
+tts_filter_tags = [ "noalt", "rt", "art" ]
+
+# A function that merges uniforms together. This is a map from uniform name
+# to a function that takes the two values and merges them.
+merge_uniforms = { }
+
+# Does the side image required an attribute to be defined?
+side_image_requires_attributes = True
+
+# What is the max mipmap level?
+max_mipmap_level = 1000
+
+# Should we show the touch keyboard outside of emscripten/touch.
+touch_keyboard = os.environ.get("RENPY_TOUCH_KEYBOARD", False)
+
+# The size of the framebuffer Ren'Py creates, which doubles as the
+# largest texture size.
+fbo_size = (4096, 4096)
+
+# Names to ignore the redefinition of.
+lint_ignore_redefine = [ "gui.about" ]
+
+# A list of functions that are called when Ren'Py terminates.
+quit_callbacks = [ ]
+
+# The steam_appid, if known. This needs to be set here since it is loaded
+# very early.
+steam_appid = None
+
+# How long between when the controller is pressed and the first repeat?
+controller_first_repeat = .25
+
+# How long between repeats?
+controller_repeat = .05
+
+# The states that repeat.
+controller_repeat_states = { "pos", "neg", "press" }
+
+# If True, the side image will only be shown if an image with the same tag
+# is not shown.
+side_image_only_not_showing = False
+
+# How much should the texture bounds be expanded by? This allows the mipmaps
+# to properly include
+expand_texture_bounds = 8
+
+# Should time events be modal?
+modal_timeevent = False
+
+# This exists for debugging Ren'Py.
+gl_set_attributes = None
+
+# The blacklist of controllers with known problems.
+controller_blocklist = [
+    "030000007e0500000920", # Nintendo Pro Controller (needs init to work.)
+]
+
+# Should dissolve transitions be mipmapped by default?
+mipmap_dissolves = False
+
+# Should movies be mipmapped by default?
+mipmap_movies = False
+
+# Should text be mipmapped by default?
+mipmap_text = False
+
+# Should the screensaver be allowed?
+allow_screensaver = True
+
+# The amount of time to spend fading in and out music when the context changes.
+context_fadein_music = 0
+context_fadeout_music = 0
+
+# Shout it be possible to dismiss blocking transitions that are not part of
+# a with statement?
+dismiss_blocking_transitions = True
+
+# Should GL extensions be logged to log.txt
+log_gl_extensions = False
+
+# Should GL shaders be logged to log.txt
+log_gl_shaders = False
+
+# OpenGL Blend Funcs
+gl_blend_func = { }
+
+# Should we pause immediately after a rollback?
+pause_after_rollback = False
+
+# The default perspective.
+perspective = (100.0, 1000.0, 100000.0)
+
+# Does the scene clear the layer at list?
+scene_clears_layer_at_list = True
+
+# The mouse displayable, if any. Can be a displayable, or a callable that
+# return a displayable.
+mouse_displayable = None
+
+# The default bias for the GL level of detail.
+gl_lod_bias = -.5
+
+# A dictionary from a tag (or None) to a function that adjusts the attributes
+# of that tag.
+adjust_attributes = { }
+
+# A dictionary from a tag to a function that produces default attributes
+# for that tag.
+default_attribute_callbacks = { }
+
+# The compatibility mode for who/what substitutions.
+# 0: ver < 7.4
+# 1: 7.4 <= ver <= 7.4.4
+# 2: ver >= 7.4.5
+who_what_sub_compat = 2
+
+# Compat for {,x,y}minimum when applied to side.
+compat_viewport_minimum = False
+
+# Should webaudio be used on the web platform?
+webaudio = True
+
+# A list of audio types that are required to fully enable webaudio.
+webaudio_required_types = [ "audio/ogg", "audio/mp3" ]
+
+# If not None, a callback that can be used to alter audio filenames.
+audio_filename_callback = None
+
+# Should minimums be adjusted when x/yminimum and x/ymaximum are both floats?
+adjust_minimums = True
+
+# Should ATL start on show?
+atl_start_on_show = True
+
+# Should the default input caret blink ?
+input_caret_blink = 1.
+
+# The channel movies with play defined play on.
+single_movie_channel = None
+
+# Should Ren'Py raise exceptions when finding an image?
+raise_image_exceptions = True
+
+# Should the size transform property only accept numbers of pixels ?
+relative_transform_size = True
+
+# Should tts of layers be from front to back?
+tts_front_to_back = True
+
+# Should live2d loading be logged to log.txt
+log_live2d_loading = False
+
+# Should Ren'Py debug prediction?
+debug_prediction = False
+
+# Should mouse events that cause a window to gain focus be passed through.
+mouse_focus_clickthrough = False
+
+# Should the current displayable always run its unfocus handler, even when
+# focus is taken away by default.
+always_unfocus = True
+
+# A list of callbacks that are called when the game exits.
+at_exit_callbacks = [ ]
+
+# Should character statistics be included in the lint report
+# when config.developer is true?
+lint_character_statistics = True
+
+# Should vpgrids be allowed to raise under/overfull errors ?
+allow_unfull_vpgrids = False
+
+# Should vbox and hbox skip non-visible children?
+box_skip = True
+
+# What should be the default value of the crop_relative tpref ?
+crop_relative_default = True
+
+# A list of functions that are called when a character is called with
+# interact=False
+nointeract_callbacks = [ ]
+
+# Should the full size of the screen be offered to a LayeredImage?
+layeredimage_offer_screen = True
+
+# The default for rolling forward in call screen.
+call_screen_roll_forward = False
+
+# A function that's called with ("", interact=False) when no window is
+# displayed during a choice menu.
+choice_empty_window = None
+
+# The encoding that's used by renpy.open_file by default. False
+# means to use binary mode.
+open_file_encoding = os.environ.get("RENPY_OPEN_FILE_ENCODING", False)
+
+# A callback that can modify the gl2 window flags.
+gl2_modify_window_flags = None
+
+# Should the skip key (ctrl) function during text?
+skip_during_text = False
+
+# An alternate path to use when uneliding. (Mostly used by the launcher to enable
+# the style inspector.)
+alternate_unelide_path = None
+
 del os
 del collections
 
 
 def init():
-    import renpy.display
+    import renpy
 
     global scene
     scene = renpy.exports.scene
@@ -826,3 +1282,20 @@ def init():
 
     global tts_function
     tts_function = renpy.display.tts.default_tts_function
+
+    global notify
+    notify = renpy.exports.display_notify
+
+    global autoreload_functions
+    autoreload_functions = [
+        (r'\.(png|jpg|jpeg|webp|gif|tif|tiff|bmp)$', renpy.exports.flush_cache_file),
+        (r'\.(mp2|mp3|ogg|opus|wav)$', renpy.audio.audio.autoreload),
+        ]
+
+    from renpy.uguu import GL_FUNC_ADD, GL_ONE, GL_ONE_MINUS_SRC_ALPHA, GL_ZERO, GL_DST_COLOR, GL_MIN, GL_MAX # type: ignore
+
+    gl_blend_func["normal"] = (GL_FUNC_ADD, GL_ONE, GL_ONE_MINUS_SRC_ALPHA, GL_FUNC_ADD, GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
+    gl_blend_func["add"] = (GL_FUNC_ADD, GL_ONE, GL_ONE, GL_FUNC_ADD, GL_ZERO, GL_ONE)
+    gl_blend_func["multiply"] = (GL_FUNC_ADD, GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_FUNC_ADD, GL_ZERO, GL_ONE)
+    gl_blend_func["min"] = (GL_MIN, GL_ONE, GL_ONE, GL_MIN, GL_ONE, GL_ONE)
+    gl_blend_func["max"] = (GL_MAX, GL_ONE, GL_ONE, GL_MAX, GL_ONE, GL_ONE)

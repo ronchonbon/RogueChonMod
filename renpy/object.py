@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -19,10 +19,19 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
+
 
 # Allow pickling NoneType.
-import __builtin__
-__builtin__.NoneType = type(None)
+if PY2:
+    import __builtin__ # type: ignore
+    __builtin__.NoneType = type(None)
+else:
+    import builtins
+    builtins.NoneType = type(None) # type: ignore
 
 
 class Object(object):
@@ -55,7 +64,7 @@ class Object(object):
         self.__dict__.update(new_dict)
 
         if version != self.__version__:
-            self.after_upgrade(version)  # E1101
+            self.after_upgrade(version)  # type: ignore
 
         if self.after_setstate:
             self.after_setstate()  # E1102
@@ -77,7 +86,7 @@ class Sentinel(object):
         rv = sentinels.get(name, None)
 
         if rv is None:
-            rv = object.__new__(cls, name)
+            rv = object.__new__(cls)
             sentinels[name] = rv
 
         return rv

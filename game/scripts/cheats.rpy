@@ -160,6 +160,8 @@ label cheat_editor(Girl):
                         for item in cloaks:
                             G.inventory.append(item)
 
+                        Girl.swimwear["outfit_active"]
+
             "Return":
                 call checkout
 

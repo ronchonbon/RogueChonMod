@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -19,14 +19,17 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-from __future__ import unicode_literals
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
 
 import pygame_sdl2
 
 code_to_unicode = {
     pygame_sdl2.K_UNKNOWN : "",
     pygame_sdl2.K_RETURN : "\n",
-    pygame_sdl2.K_ESCAPE : "\e",
+    pygame_sdl2.K_ESCAPE : "",
     pygame_sdl2.K_BACKSPACE : "\b",
     pygame_sdl2.K_TAB : "\t",
     pygame_sdl2.K_SPACE : " ",

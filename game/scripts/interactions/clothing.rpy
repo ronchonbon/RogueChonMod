@@ -553,7 +553,7 @@ label outfits_menu(Girl):
             "Can I see your swimsuit?" if (not Girl.taboo or Player.location == "bg_pool") and Girl.swimwear["outfit_active"]:
                 $ Girl.change_outfit("swimwear")
             "Can I see your swimsuit?(locked)" if (Girl.taboo and Player.location != "bg_pool") or not Girl.swimwear["outfit_active"]:
-                $ Girl.change_outfit("swimwear")
+                pass
             "Could you put on your Halloween costume again?" if "halloween" in Girl.history:
                 if Girl == RogueX:
                     ch_r "Sure."
@@ -906,8 +906,18 @@ label tops_menu(Girl):
                 $ item = "_sheer_fetish_top"
             "How about your violet shirt?" if Girl == KittyX and Girl.outfit["top"] != "_violet_shirt" and "_violet_shirt" in Girl.inventory:
                 $ item = "_violet_shirt"
+            "You look really sexy in your leather top." if Girl == KittyX and Girl.outfit["top"] != "_leather_top" and "_leather_top" in Girl.inventory:
+                $ item = "_leather_top"
+            "Let's see that fishnet top." if Girl == LauraX and Girl.outfit["top"] != "_fishnet_top" and "_fishnet_top" in Girl.inventory:
+                $ item = "_fishnet_top"
+            "You know how much I like your school uniform shirt." if Girl == LauraX and Girl.outfit["top"] != "_school_uniform_shirt" and "_school_uniform_shirt" in Girl.inventory:
+                $ item = "_school_uniform_shirt"
+            "Try on your Sakura top." if Girl == JeanX and Girl.outfit["top"] != "_Sakura_top" and "_Sakura_top" in Girl.inventory:
+                $ item = "_Sakura_top"
             "Try on your classic jacket?" if Girl == RogueX and Girl.outfit["jacket"] != "_classic_jacket" and "_classic_jacket" in Girl.inventory:
                 $ item = "_classic_jacket"
+            "I want to see you in your black jacket." if Girl == EmmaX and Girl.outfit["jacket"] != "_black_jacket" and "_black_jacket" in Girl.inventory:
+                $ item = "_black_jacket"
             "I want to see something else.":
                 return
 
@@ -1466,10 +1476,34 @@ label bottoms_menu(Girl):
                 $ item = "_opaque_fetish_pants"
             "What about those sheer fetish pants?" if Girl == RogueX and Girl.outfit["bottom"] != "_sheer_fetish_pants" and "_sheer_fetish_pants" in Girl.inventory:
                 $ item = "_sheer_fetish_pants"
-            "You could always wear your classic outfit pants." if Girl == RogueX and Girl.outfit["bottom"] != "_classic_pants" and "_classic_pants" in Girl.inventory:
-                $ item = "_classic_pants"
+            "I want to see your jean shorts." if Girl in [RogueX, LauraX] and Girl.outfit["bottom"] != "_jean_shorts" and "_jean_shorts" in Girl.inventory:
+                $ item = "_jean_shorts"
+            "Try on your plaid skirt for me." if Girl == RogueX and Girl.outfit["bottom"] != "_plaid_skirt" and "_plaid_skirt" in Girl.inventory:
+                $ item = "_plaid_skirt"
             "You could always wear your black and blue pants." if Girl == KittyX and Girl.outfit["bottom"] != "_black_and_blue_pants" and "_black_and_blue_pants" in Girl.inventory:
                 $ item = "_black_and_blue_pants"
+            "Maybe try on your black shorts." if Girl in [KittyX, EmmaX, StormX] and Girl.outfit["bottom"] != "_black_shorts" and "_black_shorts" in Girl.inventory:
+                $ item = "_black_shorts"
+            "What about your pink shorts?" if Girl == KittyX and Girl.outfit["bottom"] != "_pink_shorts" and "_pink_shorts" in Girl.inventory:
+                $ item = "_pink_shorts"
+            "I like your star skirt." if Girl == KittyX and Girl.outfit["bottom"] != "_star_skirt" and "_star_skirt" in Girl.inventory:
+                $ item = "_star_skirt"
+            "I like your black yoga pants." if Girl == EmmaX and Girl.outfit["bottom"] != "_black_yoga_pants" and "_black_yoga_pants" in Girl.inventory:
+                $ item = "_black_yoga_pants"
+            "What about your leather pants?" if Girl == EmmaX and Girl.outfit["bottom"] != "_leather_pants" and "_leather_pants" in Girl.inventory:
+                $ item = "_leather_pants"
+            "You look so tight in those sports shorts." if Girl == EmmaX and Girl.outfit["bottom"] != "_sports_shorts" and "_sports_shorts" in Girl.inventory:
+                $ item = "_sports_shorts"
+            "I'd like to see your white shorts." if Girl == EmmaX and Girl.outfit["bottom"] != "_white_shorts" and "_white_shorts" in Girl.inventory:
+                $ item = "_white_shorts"
+            "What about your school uniform skirt?" if Girl == LauraX and Girl.outfit["bottom"] != "_school_uniform_skirt" and "_school_uniform_skirt" in Girl.inventory:
+                $ item = "_school_uniform_skirt"
+            "Can you wear your yoga pants?" if Girl == LauraX and Girl.outfit["bottom"] != "_yoga_pants" and "_yoga_pants" in Girl.inventory:
+                $ item = "_yoga_pants"
+            "Can you wear your Sakura skirt?" if Girl == JeanX and Girl.outfit["bottom"] != "_Sakura_skirt" and "_Sakura_skirt" in Girl.inventory:
+                $ item = "_Sakura_skirt"
+            "Throw on your purple skirt." if Girl == JeanX and Girl.outfit["bottom"] != "_purple_skirt" and "_purple_skirt" in Girl.inventory:
+                $ item = "_purple_skirt"
             "What about your leather boots?." if Girl == EmmaX and Girl.outfit["boots"] != "_domme_boots" and "_domme_boots" in Girl.inventory:
                 $ item = "_domme_boots"
             "I want to see something else.":
@@ -1752,14 +1786,32 @@ label bras_menu(Girl):
                 $ item = "_green_bra"
             "You look great in your lace bra." if Girl.outfit["bra"] != "_lace_bra" and "_lace_bra" in Girl.inventory:
                 $ item = "_lace_bra"
+            "How about your blue corset?" if Girl.outfit["bra"] != "_blue_corset" and "_blue_corset" in Girl.inventory:
+                $ item = "_blue_corset"
             "Try on your harness bra." if Girl == RogueX and Girl.outfit["bra"] != "_harness_bra" and "_harness_bra" in Girl.inventory:
                 $ item = "_harness_bra"
-            "You could always wear your classic outfit top." if Girl == RogueX and Girl.outfit["bra"] != "_classic_bra" and "_classic_bra" in Girl.inventory:
-                $ item = "_classic_bra"
+            "Put on your string bikini top." if Girl == RogueX and Girl.outfit["bra"] != "_string_bikini_top" and "_string_bikini_top" in Girl.inventory:
+                $ item = "_string_bikini_top"
             "Try on that kitty bra." if Girl == KittyX and Girl.outfit["bra"] != "_kitty_bra" and "_kitty_bra" in Girl.inventory:
                 $ item = "_kitty_bra"
             "What about your orange top?" if Girl == KittyX and Girl.outfit["bra"] != "_orange_top" and "_orange_top" in Girl.inventory:
                 $ item = "_orange_top"
+            "What about your black bra?" if Girl == KittyX and Girl.outfit["bra"] != "_black_strapless_bra" and "_black_strapless_bra" in Girl.inventory:
+                $ item = "_black_strapless_bra"
+            "I want to see your bustier." if Girl == KittyX and Girl.outfit["bra"] != "_bustier" and "_bustier" in Girl.inventory:
+                $ item = "_bustier"
+            "What about your pink bra?" if Girl == KittyX and Girl.outfit["bra"] != "_pink_strapless_bra" and "_pink_strapless_bra" in Girl.inventory:
+                $ item = "_pink_strapless_bra"
+            "Maybe your purple bra?" if Girl == KittyX and Girl.outfit["bra"] != "_purple_strapless_bra" and "_purple_strapless_bra" in Girl.inventory:
+                $ item = "_purple_strapless_bra"
+            "Maybe your black bustier?" if Girl == EmmaX and Girl.outfit["bra"] != "_black_bustier" and "_black_bustier" in Girl.inventory:
+                $ item = "_black_bustier"
+            "I like your black corset." if Girl == EmmaX and Girl.outfit["bra"] != "_black_corset" and "_black_corset" in Girl.inventory:
+                $ item = "_black_corset"
+            "Try on your ino top." if Girl == EmmaX and Girl.outfit["bra"] != "_ino_top" and "_ino_top" in Girl.inventory:
+                $ item = "_ino_top"
+            "Your white bustier is really nice." if Girl == EmmaX and Girl.outfit["bra"] != "_white_bustier" and "_white_bustier" in Girl.inventory:
+                $ item = "_white_bustier"
             "Never mind.":
                 return
 
@@ -1946,12 +1998,32 @@ label underwears_menu(Girl):
                 $ item = "_blue_panties"
             "Your tiger-striped panties are hot." if Girl == JubesX and Girl.outfit["underwear"] != "_tiger_panties" and "_tiger_panties" in Girl.inventory:
                 $ item = "_tiger_panties"
-            "What about those harness panties I bought you?" if Girl == RogueX and Girl.outfit["underwear"] != "_harness_panties" and "_harness_panties" in Girl.inventory:
+            "What about those harness panties I bought you?" if Girl in [RogueX, LauraX] and Girl.outfit["underwear"] != "_harness_panties" and "_harness_panties" in Girl.inventory:
                 $ item = "_harness_panties"
+            "Try on your seethrough panties." if Girl in [RogueX, JeanX] and Girl.outfit["underwear"] != "_seethrough_panties" and "_seethrough_panties" in Girl.inventory:
+                $ item = "_seethrough_panties"
+            "I like your spider-web panties." if Girl in [RogueX, LauraX, JeanX] and Girl.outfit["underwear"] != "_spider_web_panties" and "_spider_web_panties" in Girl.inventory:
+                $ item = "_spider_web_panties"
+            "Maybe your string bikini bottoms." if Girl in [RogueX, LauraX] and Girl.outfit["underwear"] != "_string_bikini_bottoms" and "_string_bikini_bottoms" in Girl.inventory:
+                $ item = "_string_bikini_bottoms"
+            "Maybe your pink micropanties." if Girl == KittyX and Girl.outfit["underwear"] != "_pink_micropanties" and "_pink_micropanties" in Girl.inventory:
+                $ item = "_pink_micropanties"
+            "I really like your purple micropanties." if Girl == KittyX and Girl.outfit["underwear"] != "_purple_micropanties" and "_purple_micropanties" in Girl.inventory:
+                $ item = "_purple_micropanties"
+            "Nothing sexier than your zipper panties." if Girl == KittyX and Girl.outfit["underwear"] != "_zipper_panties" and "_zipper_panties" in Girl.inventory:
+                $ item = "_zipper_panties"
             "How about those kitty panties I got you?" if Girl == KittyX and Girl.outfit["underwear"] != "_kitty_panties" and "_kitty_panties" in Girl.inventory:
                 $ item = "_kitty_panties"
             "You look nice in those nighty panties." if Girl == KittyX and Girl.outfit["underwear"] != "_nighty_panties" and "_nighty_panties" in Girl.inventory:
                 $ item = "_nighty_panties"
+            "I want to see those boy shorts." if Girl == LauraX and Girl.outfit["underwear"] != "_boy_shorts" and "_boy_shorts" in Girl.inventory:
+                $ item = "_boy_shorts"
+            "You look really nice in that G-string." if Girl == LauraX and Girl.outfit["underwear"] != "_g_string" and "_g_string" in Girl.inventory:
+                $ item = "_g_string"
+            "Nothing sexier than your crotchless panties." if Girl == JeanX and Girl.outfit["underwear"] != "_crotchless_panties" and "_crotchless_panties" in Girl.inventory:
+                $ item = "_crotchless_panties"
+            "You look really nice in those black lace panties." if Girl == StormX and Girl.outfit["underwear"] != "_black_lace_panties" and "_black_lace_panties" in Girl.inventory:
+                $ item = "_black_lace_panties"
             "Never mind.":
                 return
 
@@ -2196,6 +2268,14 @@ label hoses_menu(Girl):
                 $ item = "_stockings_and_garterbelt"
             "Maybe just the garterbelt?" if Girl.outfit["hose"] != "_garterbelt" and "_stockings_and_garterbelt" in Girl.inventory:
                 $ item = "_garterbelt"
+            "Try on your knee socks." if Girl == KittyX and Girl.outfit["hose"] != "_knee_socks" and "_knee_socks" in Girl.inventory:
+                $ item = "_knee_socks"
+            "Your fishnet stockings are so hot." if Girl in [KittyX, LauraX] and Girl.outfit["hose"] != "_fishnet_stockings" and "_fishnet_stockings" in Girl.inventory:
+                $ item = "_fishnet_stockings"
+            "Maybe the fishnet pantyhose." if Girl == LauraX and Girl.outfit["hose"] != "_fishnet_pantyhose" and "_fishnet_pantyhose" in Girl.inventory:
+                $ item = "_fishnet_pantyhose"
+            "Try the ripped fishnet pantyhose." if Girl == LauraX and Girl.outfit["hose"] != "_ripped_fishnet_pantyhose" and "_ripped_fishnet_pantyhose" in Girl.inventory:
+                $ item = "_ripped_fishnet_pantyhose"
             "Never mind.":
                 return
 
@@ -2220,24 +2300,42 @@ label special_menu(Girl):
                 $ item = "_no_bodysuit"
             "How about the Raven cloak?" if Girl == RogueX and Girl.outfit["cloak"] != "_Raven_cloak" and "_Raven_cloak" in Girl.inventory:
                 $ item = "_Raven_cloak"
+            "What about your black cape?" if Girl == EmmaX and Girl.outfit["cloak"] != "_black_cape" and "_black_cape" in Girl.inventory:
+                $ item = "_black_cape"
+            "Hmm, try on your white cape." if Girl == EmmaX and Girl.outfit["cloak"] != "_white_cape" and "_white_cape" in Girl.inventory:
+                $ item = "_white_cape"
             "What about your blue dress?" if Girl == RogueX and Girl.outfit["dress"] != "_blue_dress" and "_blue_dress" in Girl.inventory:
                 $ item = "_blue_dress"
             "I like your red dress." if Girl == RogueX and Girl.outfit["dress"] != "_red_dress" and "_red_dress" in Girl.inventory:
                 $ item = "_red_dress"
-            "Try on that qipao." if Girl == KittyX and Girl.outfit["dress"] != "_qipao" and "_qipao" in Girl.inventory:
+            "Try on that qipao." if Girl in [KittyX, LauraX] and Girl.outfit["dress"] != "_qipao" and "_qipao" in Girl.inventory:
                 $ item = "_qipao"
             "You know I love your Raven suit." if Girl == RogueX and Girl.outfit["bodysuit"] != "_Raven_suit" and "_Raven_suit" in Girl.inventory:
                 $ item = "_Raven_suit"
+            "What about the latex suit?" if Girl == RogueX and Girl.outfit["bodysuit"] != "_latex_suit" and "_latex_suit" in Girl.inventory:
+                $ item = "_latex_suit"
             "Try on your one-piece swimsuit." if Girl == RogueX and Girl.outfit["bodysuit"] != "_swimsuit" and "_swimsuit" in Girl.inventory:
                 $ item = "_swimsuit"
             "What about your sexy one-piece swimsuit?" if Girl == RogueX and Girl.outfit["bodysuit"] != "_sexy_swimsuit" and "_sexy_swimsuit" in Girl.inventory:
                 $ item = "_sexy_swimsuit"
             "You could wear your classic catsuit." if Girl == RogueX and Girl.outfit["bodysuit"] != "_catsuit" and "_catsuit" in Girl.inventory:
                 $ item = "_catsuit"
+            "Could you put on your black swimsuit?" if Girl == KittyX and Girl.outfit["bodysuit"] != "_black_swimsuit" and "_black_swimsuit" in Girl.inventory:
+                $ item = "_black_swimsuit"
+            "Try on the Taimanin leotard." if Girl == KittyX and Girl.outfit["bodysuit"] != "_Taimanin_leotard" and "_Taimanin_leotard" in Girl.inventory:
+                $ item = "_Taimanin_leotard"
+            "You have that pretty black dress." if Girl == KittyX and Girl.outfit["dress"] != "_black_dress" and "_black_dress" in Girl.inventory:
+                $ item = "_black_dress"
             "Can you wear that domme outfit?" if Girl == EmmaX and Girl.outfit["bodysuit"] != "_domme_suit" and "_domme_suit" in Girl.inventory:
                 $ item = "_domme_suit"
             "Throw on that bunny outfit." if Girl == LauraX and Girl.outfit["bodysuit"] != "_bunny_suit" and "_bunny_suit" in Girl.inventory:
                 $ item = "_bunny_suit"
+            "What about your slave outfit?" if Girl == LauraX and Girl.outfit["bodysuit"] != "_slave_outfit" and "_slave_outfit" in Girl.inventory:
+                $ item = "_slave_outfit"
+            "Try on your Ahsoka outfit." if Girl == LauraX and Girl.outfit["dress"] != "_Ahsoka_outfit" and "_Ahsoka_outfit" in Girl.inventory:
+                $ item = "_Ahsoka_outfit"
+            "Hmm, maybe your Mavis dress?" if Girl == LauraX and Girl.outfit["dress"] != "_Mavis_dress" and "_Mavis_dress" in Girl.inventory:
+                $ item = "_Mavis_dress"
             "Try on that sci-fi suit." if Girl == JeanX and Girl.outfit["bodysuit"] != "_sci_fi_suit" and "_sci_fi_suit" in Girl.inventory:
                 $ item = "_sci_fi_suit"
             "I want to see something else.":
@@ -2501,6 +2599,24 @@ label accessories_menu(Girl):
                     ch_s "Like this?"
                 else:
                     ch_s "Thank you, but I'm not interested in that style right now."
+            "Try dying your hair." if Girl == KittyX and Girl.outfit["hair"] != "_dyed":
+                $ approval = approval_check(Girl, 600)
+
+                if approval:
+                    ch_k "Hmm, I suppose so. . ."
+
+                    $ Girl.outfit["hair"] = "_dyed"
+                else:
+                    ch_k "I[Girl.like]kinda prefer it the way it is."
+            "Try wearing your hair with bangs." if Girl == EmmaX and Girl.outfit["hair"] != "_bangs":
+                $ approval = approval_check(Girl, 600)
+
+                if approval:
+                    ch_e "You think?"
+
+                    $ Girl.outfit["hair"] = "_bangs"
+                else:
+                    ch_e "I tend to prefer it a bit more loose."
             "Grow out your pubic hair." if not Girl.pubes:
                 if "pubes" in Girl.to_do:
                     $ Girl.change_face("_bemused", 1)
@@ -2694,6 +2810,16 @@ label accessories_menu(Girl):
                         ch_r "I'll keep them, if you don't mind."
                     elif Girl == KittyX:
                         ch_k "Well {i}I{/i} kinda like'em."
+            "Toggle DVA headband." if Girl == KittyX and "_DVA_headband" in Girl.inventory:
+                if Girl.outfit["face_outer_accessory"] == "_DVA_headband":
+                    $ Girl.outfit["face_outer_accessory"] = ""
+                else:
+                    $ Girl.outfit["face_outer_accessory"] = "_DVA_headband"
+            "Toggle pink ears." if Girl == KittyX and "_pink_ears" in Girl.inventory:
+                if Girl.outfit["face_outer_accessory"] == "_pink_ears":
+                    $ Girl.outfit["face_outer_accessory"] = ""
+                else:
+                    $ Girl.outfit["face_outer_accessory"] = "_pink_ears"
             "Toggle hat." if Girl == EmmaX and "halloween" in Girl.history:
                 if Girl.outfit["face_outer_accessory"] == "_hat":
                     $ Girl.outfit["face_outer_accessory"] = ""
@@ -2704,11 +2830,21 @@ label accessories_menu(Girl):
                     $ Girl.outfit["face_outer_accessory"] = ""
                 else:
                     $ Girl.outfit["face_outer_accessory"] = "_shades"
+            "Toggle blindfold." if Girl == KittyX:
+                if Girl.outfit["face_inner_accessory"] == "_blindfold":
+                    $ Girl.outfit["face_inner_accessory"] = ""
+                else:
+                    $ Girl.outfit["face_inner_accessory"] = "_blindfold"
             "Toggle earrings." if Girl in [StormX, JubesX]:
                 if Girl.outfit["face_inner_accessory"] == "_earrings":
                     $ Girl.outfit["face_inner_accessory"] = ""
                 else:
                     $ Girl.outfit["face_inner_accessory"] = "_earrings"
+            "Toggle gag." if Girl == KittyX:
+                if Girl.outfit["gag"] == "_ballgag":
+                    $ Girl.outfit["gag"] = ""
+                else:
+                    $ Girl.outfit["gag"] = "_ballgag"
             "Toggle spiked collar." if Girl == RogueX:
                 if Girl.outfit["neck"] == "_spiked_collar":
                     $ Girl.outfit["neck"] = ""
@@ -2748,6 +2884,16 @@ label accessories_menu(Girl):
                         $ Girl.outfit["neck"] = ""
                 elif Girl.outfit["neck"] == "_ring_necklace":
                     $ Girl.outfit["neck"] = ""
+            "Toggle slut choker." if Girl == RogueX and "_slut_choker" in Girl.inventory:
+                if Girl.outfit["neck"] == "_slut_choker":
+                    $ Girl.outfit["neck"] = ""
+                else:
+                    $ Girl.outfit["neck"] = "_slut_choker"
+            "Toggle shawl." if Girl == KittyX and "_shawl" in Girl.inventory:
+                if Girl.outfit["neck"] == "_shawl":
+                    $ Girl.outfit["neck"] = ""
+                else:
+                    $ Girl.outfit["neck"] = "_shawl"
             "Open/close jacket." if Girl.outfit["jacket"] and not Girl.jacket_closed:
                 if Girl.jacket_opened:
                     $ Girl.jacket_opened = False
@@ -2768,6 +2914,16 @@ label accessories_menu(Girl):
                     $ Girl.suspenders_aside = False
                 else:
                     $ Girl.suspenders_aside = True
+            "Toggle tattoos." if Girl == StormX:
+                if Girl.outfit["tattoos"] == "_tattoos":
+                    $ Girl.outfit["tattoos"] = ""
+                else:
+                    $ Girl.outfit["tattoos"] = "_tattoos"
+            "Toggle spider-web nipple covers." if Girl == LauraX:
+                if Girl.outfit["nipple_accessories"] == "_spider_webs":
+                    $ Girl.outfit["nipple_accessories"] = ""
+                else:
+                    $ Girl.outfit["nipple_accessories"] = "_spider_webs"
             "Toggle ring armlets." if Girl == StormX and "halloween" in Girl.history:
                 if Girl.outfit["sleeves"] == "_ring_armlets":
                     $ Girl.outfit["sleeves"] = ""
@@ -2778,6 +2934,11 @@ label accessories_menu(Girl):
                     $ Girl.outfit["gloves"] = ""
                 else:
                     $ Girl.outfit["gloves"] = "_gloves"
+            "Toggle gloves." if Girl == KittyX:
+                if Girl.outfit["gloves"] == "_black_gloves":
+                    $ Girl.outfit["gloves"] = ""
+                else:
+                    $ Girl.outfit["gloves"] = "_black_gloves"
             "Toggle wristbands." if Girl == LauraX:
                 if Girl.outfit["gloves"] == "_wrists":
                     $ Girl.outfit["gloves"] = ""

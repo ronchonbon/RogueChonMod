@@ -1,6 +1,31 @@
-from __future__ import print_function
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
+#
+# Permission is hereby granted, free of charge, to any person
+# obtaining a copy of this software and associated documentation files
+# (the "Software"), to deal in the Software without restriction,
+# including without limitation the rights to use, copy, modify, merge,
+# publish, distribute, sublicense, and/or sell copies of the Software,
+# and to permit persons to whom the Software is furnished to do so,
+# subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR OTHER DEALINGS IN THE SOFTWARE.
+
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
+
 import renpy
-import jnius  # @UnresolvedImport
+import jnius # type: ignore
 
 from renpy.audio.audio import MusicContext
 
@@ -69,6 +94,18 @@ class AndroidVideoChannel(object):
 
     context = property(get_context)
 
+    def copy_context(self):
+        """
+        Copies the MusicContext associated with this channel, updates the
+        ExecutionContext to point to the copy, and returns the copy.
+        """
+
+        mcd = renpy.game.context().music
+
+        ctx = self.get_context().copy()
+        mcd[self.name] = ctx
+        return ctx
+
     def start(self):
         """
         Starts playing the first video in the queue.
@@ -81,11 +118,10 @@ class AndroidVideoChannel(object):
 
         print("Playing", filename)
 
-        f = renpy.loader.load(filename)
-
-        real_fn = f.name
-        base = getattr(f, "base", -1)
-        length = getattr(f, "length", -1)
+        with renpy.loader.load(filename) as f:
+            real_fn = f.name
+            base = getattr(f, "base", -1)
+            length = getattr(f, "length", -1)
 
         self.filename = filename
         self.player = VideoPlayer(real_fn, base, length)
@@ -150,7 +186,7 @@ class AndroidVideoChannel(object):
         self.stop()
         self.queue = [ ]
 
-    def enqueue(self, filenames, loop=True, synchro_start=False, fadein=0, tight=None, loop_only=False):
+    def enqueue(self, filenames, loop=True, synchro_start=False, fadein=0, tight=None, loop_only=False, relative_volume=1.0):
         self.queue.extend(filenames)
 
     def set_volume(self, volume):
@@ -172,3 +208,12 @@ class AndroidVideoChannel(object):
     def unpause(self):
         if self.player is not None:
             self.player.unpause()
+
+    def reload(self):
+        return
+
+    def read_video(self):
+        return None
+
+    def video_ready(self):
+        return 1

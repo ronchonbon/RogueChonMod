@@ -1,4 +1,4 @@
-﻿# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+﻿# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -42,6 +42,11 @@ init -1500 python:
          the screen mechanism. If the screen doesn't exist, then "_screen"
          is appended to it, and that label is jumped to.
 
+         If the optional keyword argument `_transition` is given, the
+         menu will change screens using the provided transition.
+         If not manually specified, the default transition is
+         `config.intra_transition`.
+
          * ShowMenu("load")
          * ShowMenu("save")
          * ShowMenu("preferences")
@@ -57,9 +62,11 @@ init -1500 python:
 
          Extra arguments and keyword arguments are passed on to the screen
          """
+        transition = None  # For save compatability; see renpy#2376
 
         def __init__(self, screen=None, *args, **kwargs):
             self.screen = screen
+            self.transition = kwargs.pop("_transition", None)
             self.args = args
             self.kwargs = kwargs
 
@@ -83,7 +90,7 @@ init -1500 python:
 
                 if renpy.has_screen(screen):
 
-                    renpy.transition(config.intra_transition)
+                    renpy.transition(self.transition or config.intra_transition)
                     renpy.show_screen(screen, _transient=True, *self.args, **self.kwargs)
                     renpy.restart_interaction()
 
@@ -144,18 +151,26 @@ init -1500 python:
     @renpy.pure
     class MainMenu(Action, DictEquality):
         """
-         :doc: menu_action
+        :doc: menu_action
 
-         Causes Ren'Py to return to the main menu.
+        Causes Ren'Py to return to the main menu.
 
-         `confirm`
-              If true, causes Ren'Py to ask the user if he wishes to
-              return to the main menu, rather than returning
-              directly.
-         """
+        `confirm`
+            If true, causes Ren'Py to ask the user if he wishes to
+            return to the main menu, rather than returning
+            directly.
 
-        def __init__(self, confirm=True):
+        `save`
+            If true, the game is saved in :var:`_quit_slot` before Ren'Py
+            restarts and returns the user to the main menu. The game is not
+            saved if :var:`_quit_slot` is None.
+        """
+
+        save = True
+
+        def __init__(self, confirm=True, save=True):
             self.confirm = confirm
+            self.save = save
 
         def __call__(self):
 
@@ -166,9 +181,9 @@ init -1500 python:
                 if config.autosave_on_quit:
                     renpy.force_autosave()
 
-                layout.yesno_screen(layout.MAIN_MENU, MainMenu(False))
+                layout.yesno_screen(layout.MAIN_MENU, MainMenu(False, save=self.save))
             else:
-                renpy.full_restart()
+                renpy.full_restart(config.game_main_transition, save=self.save)
 
         def get_sensitive(self):
             return not renpy.context()._main_menu
@@ -203,8 +218,9 @@ init -1500 python:
                     renpy.force_autosave()
 
                 layout.yesno_screen(layout.QUIT, Quit(False))
+
             else:
-                renpy.jump("_quit")
+                renpy.quit(save=True)
 
     @renpy.pure
     class Skip(Action, DictEquality):

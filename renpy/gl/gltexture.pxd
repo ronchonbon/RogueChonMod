@@ -19,8 +19,9 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+from renpy.display.matrix cimport Matrix
 cimport renpy.display.render as render
-from gldraw cimport Environ
+from renpy.gl.gldraw cimport Environ
 
 cdef class TextureCore:
     cdef public int width
@@ -50,6 +51,9 @@ cdef class TextureCore:
 
 cdef class TextureGrid:
 
+
+    cdef object __weakref__
+
     cdef public int width
     cdef public int height
     cdef list rows
@@ -57,16 +61,17 @@ cdef class TextureGrid:
     cdef list tiles # list of lists.
     cdef public TextureGrid half_cache
 
-    cdef void make_ready(self, bint nearest)
+    cpdef void make_ready(self, bint nearest)
 
     cdef public object debug
+    cdef public bint ready
 
 
 cpdef blit(
     TextureGrid tg,
     double sx,
     double sy,
-    render.Matrix2D transform,
+    Matrix transform,
     double alpha,
     double over,
     Environ environ,
@@ -77,7 +82,7 @@ cpdef blend(
     TextureGrid tg1,
     double sx,
     double sy,
-    render.Matrix2D transform,
+    Matrix transform,
     double alpha,
     double over,
     double fraction,
@@ -90,7 +95,7 @@ cpdef imageblend(
     TextureGrid tg2,
     double sx,
     double sy,
-    render.Matrix2D transform,
+    Matrix transform,
     double alpha,
     double over,
     double fraction,

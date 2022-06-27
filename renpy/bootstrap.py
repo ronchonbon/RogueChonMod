@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -19,72 +19,45 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-from __future__ import print_function
-import os.path
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+from typing import Optional
+
+import os
 import sys
 import subprocess
 import io
 
+import __main__
+
+# Encoding and sys.stderr/stdout handling ######################################
+
 FSENCODING = sys.getfilesystemencoding() or "utf-8"
 
-# Sets the default encoding to the filesystem encoding.
+# Sets the default encoding to utf-8.
 old_stdout = sys.stdout
 old_stderr = sys.stderr
 
-reload(sys)
-sys.setdefaultencoding(FSENCODING)  # @UndefinedVariable
+if PY2:
+    sys_executable = sys.executable
+    reload(sys) # type: ignore
+    sys.setdefaultencoding("utf-8") # type: ignore
+    sys.executable = sys_executable
+
+def _setdefaultencoding(name):
+    """
+    This is install in sys to prevent games from trying to change the default
+    encoding.
+    """
+
+sys.setdefaultencoding = _setdefaultencoding # type: ignore
+
 
 sys.stdout = old_stdout
 sys.stderr = old_stderr
 
 import renpy.error
-
-
-# Extra things used for distribution.
-
-
-def extra_imports():
-    import datetime; datetime
-    import encodings.ascii; encodings.ascii
-    import encodings.utf_8; encodings.utf_8
-    import encodings.zlib_codec; encodings.zlib_codec
-    import encodings.unicode_escape; encodings.unicode_escape
-    import encodings.string_escape; encodings.string_escape
-    import encodings.raw_unicode_escape; encodings.raw_unicode_escape
-    import encodings.mbcs; encodings.mbcs
-    import encodings.utf_16; encodings.utf_16
-    import encodings.utf_16_be; encodings.utf_16_be
-    import encodings.utf_16_le; encodings.utf_16_le
-    import encodings.utf_32_be; encodings.utf_32_be
-    import encodings.latin_1; encodings.latin_1
-    import encodings.hex_codec; encodings.hex_codec
-    import encodings.base64_codec; encodings.base64_codec
-    import encodings.idna; encodings.idna
-    import math; math
-    import glob; glob
-    import pickle; pickle
-    import difflib; difflib
-    import shutil; shutil
-    import tarfile; tarfile
-    import bz2; bz2  # @UnresolvedImport
-    import webbrowser; webbrowser
-    import posixpath; posixpath
-    import ctypes; ctypes
-    import ctypes.wintypes; ctypes.wintypes
-    import argparse; argparse
-    import compiler; compiler
-    import textwrap; textwrap
-    import copy; copy
-    import urllib; urllib
-    import urllib2; urllib2
-    import codecs; codecs
-    import rsa; rsa
-    import decimal; decimal
-    import plistlib; plistlib
-    import _renpysteam; _renpysteam
-    import compileall; compileall
-    import cProfile; cProfile
-    import pstats; pstats
 
 
 class NullFile(io.IOBase):
@@ -101,17 +74,18 @@ class NullFile(io.IOBase):
 
 def null_files():
     try:
-        if sys.stderr.fileno() < 0:
+        if (sys.stderr is None) or sys.stderr.fileno() < 0:
             sys.stderr = NullFile()
 
-        if sys.stdout.fileno() < 0:
+        if (sys.stderr is None) or sys.stdout.fileno() < 0:
             sys.stdout = NullFile()
-    except:
+    except Exception:
         pass
 
 
 null_files()
 
+# Tracing ######################################################################
 
 trace_file = None
 trace_local = None
@@ -119,7 +93,7 @@ trace_local = None
 
 def trace_function(frame, event, arg):
     fn = os.path.basename(frame.f_code.co_filename)
-    print(fn, frame.f_lineno, frame.f_code.co_name, event, file=trace_file)
+    trace_file.write("{} {} {} {}\n".format(fn, frame.f_lineno, frame.f_code.co_name, event)) # type: ignore
     return trace_local
 
 
@@ -127,7 +101,7 @@ def enable_trace(level):
     global trace_file
     global trace_local
 
-    trace_file = file("trace.txt", "w", 1)
+    trace_file = open("trace.txt", "w", buffering=1, encoding="utf-8")
 
     if level > 1:
         trace_local = trace_function
@@ -138,32 +112,40 @@ def enable_trace(level):
 
 
 def mac_start(fn):
-    os.system("open " + fn)
+    """
+    os.start compatibility for mac.
+    """
 
-# This code fixes a bug in subprocess.Popen.__del__
-
+    os.system("open " + fn) # type: ignore
 
 def popen_del(self, *args, **kwargs):
-    return
+    """
+    Fix an issue where the __del__ method of popen doesn't wor,
+    """
 
+    return
 
 def bootstrap(renpy_base):
 
-    global renpy  # W0602
+    global renpy
 
-    import renpy.log  # @UnusedImport
+    import renpy.config
+    import renpy.log
 
     # Remove a legacy environment setting.
-    if os.environ.get(b"SDL_VIDEODRIVER", "") == "windib":
-        del os.environ[b"SDL_VIDEODRIVER"]
+    if os.environ.get("SDL_VIDEODRIVER", "") == "windib":
+        del os.environ["SDL_VIDEODRIVER"]
 
-    renpy_base = unicode(renpy_base, FSENCODING, "replace")
+    if not isinstance(renpy_base, str):
+        renpy_base = str(renpy_base, FSENCODING)
 
     # If environment.txt exists, load it into the os.environ dictionary.
     if os.path.exists(renpy_base + "/environment.txt"):
         evars = { }
-        execfile(renpy_base + "/environment.txt", evars)
-        for k, v in evars.iteritems():
+        with open(renpy_base + "/environment.txt", "r") as f:
+            code = compile(f.read(), renpy_base + "/environment.txt", 'exec')
+            exec(code, evars)
+        for k, v in evars.items():
             if k not in os.environ:
                 os.environ[k] = str(v)
 
@@ -171,12 +153,14 @@ def bootstrap(renpy_base):
     # .app file.), if on a mac.
     alt_path = os.path.abspath("renpy_base")
     if ".app" in alt_path:
-        alt_path = alt_path[:alt_path.find(".app")+4]
+        alt_path = alt_path[:alt_path.find(".app") + 4]
 
         if os.path.exists(alt_path + "/environment.txt"):
             evars = { }
-            execfile(alt_path + "/environment.txt", evars)
-            for k, v in evars.iteritems():
+            with open(alt_path + "/environment.txt", "rb") as f:
+                code = compile(f.read(), alt_path + "/environment.txt", 'exec')
+                exec(code, evars)
+            for k, v in evars.items():
                 if k not in os.environ:
                     os.environ[k] = str(v)
 
@@ -194,7 +178,9 @@ def bootstrap(renpy_base):
         enable_trace(args.trace)
 
     if args.basedir:
-        basedir = os.path.abspath(args.basedir).decode(FSENCODING)
+        basedir = os.path.abspath(args.basedir)
+        if not isinstance(basedir, str):
+            basedir = basedir.decode(FSENCODING)
     else:
         basedir = renpy_base
 
@@ -202,34 +188,18 @@ def bootstrap(renpy_base):
         sys.stderr.write("Base directory %r does not exist. Giving up.\n" % (basedir,))
         sys.exit(1)
 
-    gamedirs = [ name ]
-    game_name = name
+    # Make game/ on Android.
+    if renpy.android:
+        if not os.path.exists(basedir + "/game"):
+            os.mkdir(basedir + "/game", 0o777)
 
-    while game_name:
-        prefix = game_name[0]
-        game_name = game_name[1:]
-
-        if prefix == ' ' or prefix == '_':
-            gamedirs.append(game_name)
-
-    gamedirs.extend([ 'game', 'data', 'launcher/game' ])
-
-    for i in gamedirs:
-
-        if i == "renpy":
-            continue
-
-        gamedir = basedir + "/" + i
-        if os.path.isdir(gamedir):
-            break
-    else:
-        gamedir = basedir
+    gamedir = __main__.path_to_gamedir(basedir, name)
 
     sys.path.insert(0, basedir)
 
     if renpy.macintosh:
         # If we're on a mac, install our own os.start.
-        os.startfile = mac_start
+        os.startfile = mac_start # type: ignore
 
         # Are we starting from inside a mac app resources directory?
         if basedir.endswith("Contents/Resources/autorun"):
@@ -244,7 +214,7 @@ def bootstrap(renpy_base):
         import pygame_sdl2
         if not ("pygame" in sys.modules):
             pygame_sdl2.import_as_pygame()
-    except:
+    except Exception:
         print("""\
 Could not import pygame_sdl2. Please ensure that this program has been built
 and unpacked properly. Also, make sure that the directories containing
@@ -258,13 +228,13 @@ You may be using a system install of python. Please run {0}.sh,
 
     # If we're not given a command, show the presplash.
     if args.command == "run" and not renpy.mobile:
-        import renpy.display.presplash  # @Reimport
+        import renpy.display.presplash # @Reimport
         renpy.display.presplash.start(basedir, gamedir)
 
     # Ditto for the Ren'Py module.
     try:
-        import _renpy; _renpy
-    except:
+        import _renpy
+    except Exception:
         print("""\
 Could not import _renpy. Please ensure that this program has been built
 and unpacked properly.
@@ -274,9 +244,8 @@ You may be using a system install of python. Please run {0}.sh,
 """.format(name), file=sys.stderr)
         raise
 
-    # Load up all of Ren'Py, in the right order.
-
-    import renpy  # @Reimport
+    # Load the rest of Ren'Py.
+    import renpy
     renpy.import_all()
 
     renpy.loader.init_importer()
@@ -292,7 +261,7 @@ You may be using a system install of python. Please run {0}.sh,
                 renpy.config.renpy_base = renpy_base
                 renpy.config.basedir = basedir
                 renpy.config.gamedir = gamedir
-                renpy.config.args = [ ]
+                renpy.config.args = [ ] # type: ignore
 
                 if renpy.android:
                     renpy.config.logdir = os.environ['ANDROID_PUBLIC']
@@ -321,9 +290,12 @@ You may be using a system install of python. Please run {0}.sh,
 
                 if e.relaunch:
                     if hasattr(sys, "renpy_executable"):
-                        subprocess.Popen([sys.renpy_executable] + sys.argv[1:])
+                        subprocess.Popen([sys.renpy_executable] + sys.argv[1:]) # type: ignore
                     else:
-                        subprocess.Popen([sys.executable, "-EO"] + sys.argv)
+                        if PY2:
+                            subprocess.Popen([sys.executable, "-EO"] + sys.argv)
+                        else:
+                            subprocess.Popen([sys.executable] + sys.argv)
 
             except renpy.game.ParseErrorException:
                 pass
@@ -339,11 +311,16 @@ You may be using a system install of python. Please run {0}.sh,
         if "RENPY_SHUTDOWN_TRACE" in os.environ:
             enable_trace(int(os.environ["RENPY_SHUTDOWN_TRACE"]))
 
+        renpy.display.tts.tts(None)
+
         renpy.display.im.cache.quit()
 
         if renpy.display.draw:
             renpy.display.draw.quit()
 
+        renpy.audio.audio.quit()
+
         # Prevent subprocess from throwing errors while trying to run it's
         # __del__ method during shutdown.
-        subprocess.Popen.__del__ = popen_del
+        if not renpy.emscripten:
+            subprocess.Popen.__del__ = popen_del # type: ignore

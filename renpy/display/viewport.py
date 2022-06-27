@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -22,8 +22,14 @@
 # This file contains classes that handle layout of displayables on
 # the screen.
 
-import renpy.display
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
+import math
+
 import pygame_sdl2 as pygame
+import renpy
 
 
 def edgescroll_proportional(n):
@@ -39,6 +45,7 @@ class Viewport(renpy.display.layout.Container):
     __version__ = 5
 
     arrowkeys = False
+    pagekeys = False
 
     def after_upgrade(self, version):
         if version < 1:
@@ -61,14 +68,6 @@ class Viewport(renpy.display.layout.Container):
             self.edge_yspeed = 0
             self.edge_last_st = None
 
-        if version < 4:
-            self.xadjustment_param = None
-            self.yadjustment_param = None
-            self.offsets_param = (None, None)
-            self.set_adjustments_param = True
-            self.xinitial_param = None
-            self.yinitial_param = None
-
         if version < 5:
             self.focusable = self.draggable
 
@@ -87,37 +86,52 @@ class Viewport(renpy.display.layout.Container):
                  yinitial=None,
                  replaces=None,
                  arrowkeys=False,
+                 pagekeys=False,
                  **properties):
 
         super(Viewport, self).__init__(style=style, **properties)
+
         if child is not None:
             self.add(child)
 
-        self.xadjustment_param = xadjustment
-        self.yadjustment_param = yadjustment
-        self.offsets_param = offsets
-        self.set_adjustments_param = set_adjustments
-        self.xinitial_param = xinitial
-        self.yinitial_param = yinitial
+        if xadjustment is None:
+            self.xadjustment = renpy.display.behavior.Adjustment(1, 0)
+        else:
+            self.xadjustment = xadjustment
 
-        self._show()
+        if yadjustment is None:
+            self.yadjustment = renpy.display.behavior.Adjustment(1, 0)
+        else:
+            self.yadjustment = yadjustment
 
-        if isinstance(replaces, Viewport):
+        if self.xadjustment.adjustable is None:
+            self.xadjustment.adjustable = True
+
+        if self.yadjustment.adjustable is None:
+            self.yadjustment.adjustable = True
+
+        self.set_adjustments = set_adjustments
+
+        self.xoffset = offsets[0] if (offsets[0] is not None) else xinitial
+        self.yoffset = offsets[1] if (offsets[1] is not None) else yinitial
+
+        if isinstance(replaces, Viewport) and replaces.offsets:
             self.xadjustment.range = replaces.xadjustment.range
-            self.yadjustment.range = replaces.yadjustment.range
             self.xadjustment.value = replaces.xadjustment.value
+            self.yadjustment.range = replaces.yadjustment.range
             self.yadjustment.value = replaces.yadjustment.value
             self.xoffset = replaces.xoffset
             self.yoffset = replaces.yoffset
             self.drag_position = replaces.drag_position
         else:
-            self.drag_position = None
+            self.drag_position = None # type: tuple[int, int]|None
 
         self.child_width, self.child_height = child_size
 
         self.mousewheel = mousewheel
         self.draggable = draggable
         self.arrowkeys = arrowkeys
+        self.pagekeys = pagekeys
 
         # Layout participates in the focus system so drags get migrated.
         self.focusable = draggable or arrowkeys
@@ -151,29 +165,6 @@ class Viewport(renpy.display.layout.Container):
             self.edge_speed = 0
             self.edge_function = edgescroll_proportional
 
-    def _show(self):
-        if self.xadjustment_param is None:
-            self.xadjustment = renpy.display.behavior.Adjustment(1, 0)
-        else:
-            self.xadjustment = self.xadjustment_param
-
-        if self.yadjustment_param is None:
-            self.yadjustment = renpy.display.behavior.Adjustment(1, 0)
-        else:
-            self.yadjustment = self.yadjustment_param
-
-        if self.xadjustment.adjustable is None:
-            self.xadjustment.adjustable = True
-
-        if self.yadjustment.adjustable is None:
-            self.yadjustment.adjustable = True
-
-        self.set_adjustments = self.set_adjustments_param
-
-        offsets = self.offsets_param
-        self.xoffset = offsets[0] if (offsets[0] is not None) else self.xinitial_param
-        self.yoffset = offsets[1] if (offsets[1] is not None) else self.yinitial_param
-
     def per_interact(self):
         self.xadjustment.register(self)
         self.yadjustment.register(self)
@@ -189,8 +180,13 @@ class Viewport(renpy.display.layout.Container):
         The returned offsets will be negative or zero.
         """
 
+        cw = int(math.ceil(cw))
+        ch = int(math.ceil(ch))
+
         width = self.width
         height = self.height
+
+        xminimum, yminimum = renpy.display.layout.xyminimums(self.style, width, height)
 
         if not self.style.xfill:
             width = min(cw, width)
@@ -198,10 +194,10 @@ class Viewport(renpy.display.layout.Container):
         if not self.style.yfill:
             height = min(ch, height)
 
-        width = max(width, self.style.xminimum)
-        height = max(height, self.style.yminimum)
+        width = max(width, xminimum)
+        height = max(height, yminimum)
 
-        if self.set_adjustments:
+        if (not renpy.display.render.sizing) and self.set_adjustments:
 
             xarange = max(cw - width, 0)
 
@@ -244,7 +240,8 @@ class Viewport(renpy.display.layout.Container):
         cxo = -int(self.xadjustment.value)
         cyo = -int(self.yadjustment.value)
 
-        self._clipping = (cw > width) or (ch > height)
+        self.width = width
+        self.height = height
 
         return cxo, cyo, width, height
 
@@ -273,7 +270,7 @@ class Viewport(renpy.display.layout.Container):
 
         return rv
 
-    def check_edge_redraw(self, st):
+    def check_edge_redraw(self, st, reset_st=True):
         redraw = False
 
         if (self.edge_xspeed > 0) and (self.xadjustment.value < self.xadjustment.range):
@@ -288,7 +285,8 @@ class Viewport(renpy.display.layout.Container):
 
         if redraw:
             renpy.display.render.redraw(self, 0)
-            self.edge_last_st = st
+            if reset_st or self.edge_last_st is None:
+                self.edge_last_st = st
         else:
             self.edge_last_st = None
 
@@ -304,22 +302,43 @@ class Viewport(renpy.display.layout.Container):
 
         if self.draggable and renpy.display.focus.get_grab() == self:
 
-            oldx, oldy = self.drag_position
-            dx = x - oldx
-            dy = y - oldy
-
-            self.xadjustment.change(self.xadjustment.value - dx)
-            self.yadjustment.change(self.yadjustment.value - dy)
-
-            self.drag_position = (x, y)  # W0201
+            old_xvalue = self.xadjustment.value
+            old_yvalue = self.yadjustment.value
 
             if renpy.display.behavior.map_event(ev, 'viewport_drag_end'):
                 renpy.display.focus.set_grab(None)
+
+                # Invoke rounding adjustment on viewport release
+                xvalue = self.xadjustment.round_value(old_xvalue, release=True)
+                self.xadjustment.change(xvalue)
+                yvalue = self.yadjustment.round_value(old_yvalue, release=True)
+                self.yadjustment.change(yvalue)
                 raise renpy.display.core.IgnoreEvent()
+
+            oldx, oldy = self.drag_position # type: ignore
+            dx = x - oldx
+            dy = y - oldy
+
+            new_xvalue = self.xadjustment.round_value(old_xvalue - dx, release=False)
+            if old_xvalue == new_xvalue:
+                newx = oldx
+            else:
+                self.xadjustment.change(new_xvalue)
+                newx = x
+
+            new_yvalue = self.yadjustment.round_value(old_yvalue - dy, release=False)
+            if old_yvalue == new_yvalue:
+                newy = oldy
+            else:
+                self.yadjustment.change(new_yvalue)
+                newy = y
+
+            self.drag_position = (newx, newy) # W0201
 
         if not ((0 <= x < self.width) and (0 <= y <= self.height)):
             self.edge_xspeed = 0
             self.edge_yspeed = 0
+            self.edge_last_st = None
 
             inside = False
 
@@ -342,7 +361,7 @@ class Viewport(renpy.display.layout.Container):
                 adjustment = self.yadjustment
                 change = False
 
-            if renpy.display.behavior.map_event(ev, 'viewport_up'):
+            if renpy.display.behavior.map_event(ev, 'viewport_wheelup'):
 
                 if change and (adjustment.value == 0):
                     return None
@@ -353,7 +372,7 @@ class Viewport(renpy.display.layout.Container):
                 else:
                     raise renpy.display.core.IgnoreEvent()
 
-            if renpy.display.behavior.map_event(ev, 'viewport_down'):
+            if renpy.display.behavior.map_event(ev, 'viewport_wheeldown'):
 
                 if change and (adjustment.value == adjustment.range):
                     return None
@@ -410,6 +429,24 @@ class Viewport(renpy.display.layout.Container):
                 else:
                     raise renpy.display.core.IgnoreEvent()
 
+        if self.pagekeys:
+
+            if renpy.display.behavior.map_event(ev, 'viewport_pageup'):
+
+                rv = self.yadjustment.change(self.yadjustment.value - self.yadjustment.page)
+                if rv is not None:
+                    return rv
+                else:
+                    raise renpy.display.core.IgnoreEvent()
+
+            if renpy.display.behavior.map_event(ev, 'viewport_pagedown'):
+
+                rv = self.yadjustment.change(self.yadjustment.value + self.yadjustment.page)
+                if rv is not None:
+                    return rv
+                else:
+                    raise renpy.display.core.IgnoreEvent()
+
         if inside and self.draggable:
 
             if renpy.display.behavior.map_event(ev, 'viewport_drag_start'):
@@ -451,7 +488,7 @@ class Viewport(renpy.display.layout.Container):
             self.edge_yspeed = self.edge_speed * self.edge_function(yspeed)
 
             if xspeed or yspeed:
-                self.check_edge_redraw(st)
+                self.check_edge_redraw(st, reset_st=False)
             else:
                 self.edge_last_st = None
 
@@ -467,14 +504,20 @@ class Viewport(renpy.display.layout.Container):
 
 
 # For compatibility with old saves.
-renpy.display.layout.Viewport = Viewport
+renpy.display.layout.Viewport = Viewport # type: ignore
 
 
 class VPGrid(Viewport):
 
     __version__ = Viewport.__version__
 
-    def __init__(self, cols=None, rows=None, transpose=None, style="vpgrid", **properties):
+    allow_underfull = None
+
+    def __init__(self, cols=None, rows=None,
+                 transpose=None,
+                 style="vpgrid",
+                 allow_underfull=None,
+                 **properties):
 
         super(VPGrid, self).__init__(style=style, **properties)
 
@@ -487,6 +530,7 @@ class VPGrid(Viewport):
         self.grid_cols = cols
         self.grid_rows = rows
         self.grid_transpose = transpose
+        self.allow_underfull = allow_underfull
 
     def render(self, width, height, st, at):
 
@@ -508,7 +552,7 @@ class VPGrid(Viewport):
         rows = self.grid_rows
 
         if cols is None:
-            cols = lc // rows
+            cols = lc // rows # type: ignore
             if rows * cols < lc:
                 cols += 1
 
@@ -526,21 +570,28 @@ class VPGrid(Viewport):
         if yspacing is None:
             yspacing = self.style.spacing
 
+        left_margin = renpy.display.layout.scale(self.style.left_margin, width)
+        right_margin = renpy.display.layout.scale(self.style.right_margin, width)
+        top_margin = renpy.display.layout.scale(self.style.top_margin, height)
+        bottom_margin = renpy.display.layout.scale(self.style.bottom_margin, height)
+
         rend = renpy.display.render.render(self.children[0], child_width, child_height, st, at)
         cw, ch = rend.get_size()
 
-        tw = (cw + xspacing) * cols - xspacing
-        th = (ch + yspacing) * rows - yspacing
+        tw = (cw + xspacing) * cols - xspacing + left_margin + right_margin
+        th = (ch + yspacing) * rows - yspacing + top_margin + bottom_margin
 
         if self.style.xfill:
             tw = child_width
-            cw = (tw - (cols - 1) * xspacing) / cols
+            cw = (tw - (cols - 1) * xspacing - left_margin - right_margin) // cols
 
         if self.style.yfill:
             th = child_height
-            ch = (th - (rows - 1) * yspacing) / rows
+            ch = (th - (rows - 1) * yspacing - top_margin - bottom_margin) // rows
 
         cxo, cyo, width, height = self.update_offsets(tw, th, st)
+        cxo += left_margin
+        cyo += top_margin
 
         self.offsets = [ ]
 
@@ -586,3 +637,45 @@ class VPGrid(Viewport):
             rv.add_focus(self, None, 0, 0, width, height)
 
         return rv
+
+    def add(self, d):
+        super(VPGrid, self).add(d)
+
+        if None not in (self.grid_cols, self.grid_rows):
+            if len(self.children) > (self.grid_cols * self.grid_rows):
+                if not renpy.config.allow_unfull_vpgrids:
+                    raise Exception("VPGrid overfull.")
+
+    def per_interact(self):
+        super(VPGrid, self).per_interact()
+
+        exc = None
+        delta = 0
+
+        if None not in (self.grid_cols, self.grid_rows):
+            delta = (self.grid_cols * self.grid_rows) - len(self.children)
+            if delta > 0:
+                exc = Exception("VPGrid not completely full.")
+
+        else:
+            given = self.grid_cols or self.grid_rows
+            if given: # ignore the case where one is 0 - cannot be underfull
+                delta = given - (len(self.children) % given)
+                # the number of aditional children needed to complete
+                # within [1, given], `given` being all right
+                if delta < given:
+                    exc = Exception("VPGrid not completely full, needs a multiple of {} children.".format(given))
+
+        if exc is not None:
+            allow_underfull = self.allow_underfull
+            if allow_underfull is None:
+                allow_underfull = renpy.config.allow_underfull_grids or renpy.config.allow_unfull_vpgrids
+
+            if not renpy.config.developer:
+                allow_underfull = True
+
+            if not allow_underfull:
+                raise exc
+
+            for _ in range(delta):
+                self.add(renpy.display.layout.Null())

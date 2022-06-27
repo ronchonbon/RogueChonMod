@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -23,20 +23,25 @@
 # size-based caching and constructing images from operations (like
 # cropping and scaling).
 
-from __future__ import print_function
-import renpy.display
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
 
 import math
 import zipfile
-import cStringIO
 import threading
 import time
+import io
+import os.path
 
+import pygame_sdl2
+import renpy
 
 # This is an entry in the image cache.
 class CacheEntry(object):
 
-    def __init__(self, what, surf):
+    def __init__(self, what, surf, bounds):
 
         # The object that is being cached (which needs to be
         # hashable and comparable).
@@ -46,15 +51,29 @@ class CacheEntry(object):
         # None if we've tossed the surface.
         self.surf = surf
 
-        # The texture corresponding to the cached object.
+        # The sizes of surf.
+        self.width, self.height = surf.get_size()
+
+        # The texture corresponding to the visible area of the cached object.
+        # This may be None if no texture has been loaded.
         self.texture = None
 
-        # The size of this image.
-        w, h = surf.get_size()
-        self.size = w * h
+        # The bounds of the texture within the width and height.
+        self.bounds = bounds
 
         # The time when this cache entry was last used.
         self.time = 0
+
+    def size(self):
+        rv = 0
+
+        if self.surf is not None:
+            rv += self.width * self.height
+
+        if self.texture is not None:
+            rv += self.bounds[2] * self.bounds[3]
+
+        return rv
 
 # This is the singleton image cache.
 
@@ -76,16 +95,10 @@ class Cache(object):
         # False if this is not the first preload in this tick.
         self.first_preload_in_tick = True
 
-        # The total size of the current generation of images.
-        self.size_of_current_generation = 0
-
-        # The total size of everything in the cache.
-        self.total_cache_size = 0
-
         # A lock that must be held when updating the cache.
         self.lock = threading.Condition()
 
-        # A lock that mist be held to notify the preload thread.
+        # A lock that must be held to notify the preload thread.
         self.preload_lock = threading.Condition()
 
         # Is the preload_thread alive?
@@ -103,7 +116,7 @@ class Cache(object):
 
         # The preload thread.
         self.preload_thread = threading.Thread(target=self.preload_thread_main, name="preloader")
-        self.preload_thread.setDaemon(True)
+        self.preload_thread.daemon = True
         self.preload_thread.start()
 
         # Have we been added this tick?
@@ -118,16 +131,57 @@ class Cache(object):
         # This is only updated when config.developer is True.
         self.load_log = [ ]
 
+    def done(self):
+        """
+        Returns true if the cache does not have any images to preload.
+        """
+
+        with self.preload_lock:
+            return not self.preloads
+
+    def get_total_size(self):
+        """
+        Returns the total size of the surfaces and textures that make up the
+        cache, in pixels.
+        """
+
+        with self.lock:
+            rv = sum(i.size() for i in self.cache.values())
+
+        # print("Total cache size: {:.1f}/{:.1f} MB (Textures {:.1f} MB)".format(
+        #     4.0 * rv / 1024 / 1024,
+        #     4.0 * self.cache_limit / 1024 / 1024,
+        #     1.0 * renpy.exports.get_texture_size()[0] / 1024 / 1024,
+        #     ))
+
+        return rv
+
+    def get_current_size(self, generations):
+        """
+        Returns the size of the most recent `generation` generations of
+        the cache. (1 is the current, 2 is the current and one before).
+        """
+
+        start = self.time - generations
+
+        with self.lock:
+            rv = sum(i.size() for i in self.cache.values() if i.time > start)
+
+        return rv
+
     def init(self):
         """
         Updates the cache object to make use of settings that might be provided
         by the game-maker.
         """
 
-        self.cache_limit = renpy.config.image_cache_size * renpy.config.screen_width * renpy.config.screen_height
+        if renpy.config.image_cache_size is not None:
+            self.cache_limit = 2 * renpy.config.image_cache_size * renpy.config.screen_width * renpy.config.screen_height
+        else:
+            self.cache_limit = int(renpy.config.image_cache_size_mb * 1024 * 1024 // 4)
 
-    def quit(self):  # @ReservedAssignment
-        if not self.preload_thread.isAlive():
+    def quit(self): # @ReservedAssignment
+        if not self.preload_thread.is_alive():
             return
 
         with self.preload_lock:
@@ -147,12 +201,26 @@ class Cache(object):
         self.pin_cache = { }
         self.cache = { }
         self.first_preload_in_tick = True
-        self.size_of_current_generation = 0
-        self.total_cache_size = 0
 
         self.added.clear()
 
         self.lock.release()
+
+    def get_renders(self):
+        """
+        Get a list of Renders in the image cache, where ce.texture is a Render.
+        """
+
+        Render = renpy.display.render.Render
+
+        rv = [ ]
+
+        with self.lock:
+            for ce in self.cache.values():
+                if isinstance(ce.texture, Render):
+                    rv.append(ce.texture)
+
+        return rv
 
     # Increments time, and clears the list of images to be
     # preloaded.
@@ -162,7 +230,6 @@ class Cache(object):
             self.time += 1
             self.preloads = [ ]
             self.first_preload_in_tick = True
-            self.size_of_current_generation = 0
             self.added.clear()
 
         if renpy.config.debug_image_cache:
@@ -179,10 +246,15 @@ class Cache(object):
     # image. It also takes care of updating the age of images in the
     # cache to be current, and maintaining the size of the current
     # generation of images.
-    def get(self, image, predict=False, texture=False):
+    def get(self, image, predict=False, texture=False, render=False):
+
+        if render:
+            texture = True
+
+        optimize_bounds = renpy.config.optimize_texture_bounds and image.optimize_bounds
 
         if not isinstance(image, ImageBase):
-            raise Exception("Expected an image of some sort, but got" + str(image) + ".")
+            raise Exception("Expected an image of some sort, but got" + repr(image) + ".")
 
         if not image.cache:
             surf = image.load()
@@ -194,8 +266,19 @@ class Cache(object):
 
         if ce is not None:
 
+            ce.time = self.time
+
             if texture and (ce.texture is not None):
-                return ce.texture
+
+                if predict:
+                    return None
+
+                if render:
+                    rv = renpy.display.render.Render(ce.width, ce.height)
+                    rv.blit(ce.texture, ce.bounds[:2])
+                    return rv
+                else:
+                    return ce.texture
 
             if ce.surf is None:
                 ce = None
@@ -203,26 +286,29 @@ class Cache(object):
         # Otherwise, we load the image ourselves.
         if ce is None:
 
-            try:
-                if image in self.pin_cache:
-                    surf = self.pin_cache[image]
-                else:
-                    if not predict:
-                        with renpy.game.ExceptionInfo("While loading %r:", image):
-                            surf = image.load()
-                    else:
-                        surf = image.load()
+            if image in self.pin_cache:
+                surf = self.pin_cache[image]
+            else:
 
-            except:
-                raise
+                if not predict:
+                    with renpy.game.ExceptionInfo("While loading %r:", image):
+                        surf = image.load()
+                else:
+                    surf = image.load()
+
+            w, h = size = surf.get_size()
+
+            if optimize_bounds:
+                bounds = tuple(surf.get_bounding_rect())
+                bounds = expands_bounds(bounds, size, renpy.config.expand_texture_bounds)
+                w = bounds[2]
+                h = bounds[3]
+            else:
+                bounds = (0, 0, w, h)
 
             with self.lock:
 
-                ce = CacheEntry(image, surf)
-
-                if image not in self.cache:
-                    self.total_cache_size += ce.size
-
+                ce = CacheEntry(image, surf, bounds)
                 self.cache[image] = ce
 
                 # Indicate that this surface had changed.
@@ -230,30 +316,50 @@ class Cache(object):
 
                 if renpy.config.debug_image_cache:
                     if predict:
-                        renpy.display.ic_log.write("Added %r (%.02f%%)", ce.what, 100.0 * self.total_cache_size / self.cache_limit)
+                        renpy.display.ic_log.write("Added %r (%.02f%%)", ce.what, 100.0 * self.get_total_size() / self.cache_limit)
                     else:
                         renpy.display.ic_log.write("Total Miss %r", ce.what)
 
-        # Move it into the current generation. This isn't protected by
-        # a lock, so in certain circumstances we could have an
-        # inaccurate size - but that will be cured at the end of the
-        # current generation.
+        # Move it into the current generation.
 
-        if ce.time != self.time:
-            ce.time = self.time
-            self.size_of_current_generation += ce.size
+        ce.time = self.time
+
+        # Load the texture.
 
         if texture:
-            if ce.texture is None:
-                ce.texture = renpy.display.draw.load_texture(ce.surf)
 
-            rv = ce.texture
+            if ce.texture is None:
+
+                texsurf = ce.surf
+
+                if ce.bounds != (0, 0, ce.width, ce.height):
+                    texsurf = ce.surf.subsurface(ce.bounds)
+                    renpy.display.render.mutated_surface(texsurf)
+
+                ce.texture = renpy.display.draw.load_texture(texsurf)
+
+            if not predict:
+                if render:
+                    rv = renpy.display.render.Render(ce.width, ce.height)
+                    rv.blit(ce.texture, ce.bounds[:2])
+                else:
+                    rv = ce.texture
+            else:
+                rv = None
 
         else:
             rv = ce.surf
 
         if not renpy.config.cache_surfaces:
+
+            if ce.surf is not None:
+                renpy.display.draw.mutated_surface(ce.surf)
+
             ce.surf = None
+
+        if (ce.surf is None) and (ce.texture is None):
+            with self.lock:
+                self.kill(ce)
 
         # Done... return the surface.
         return rv
@@ -261,14 +367,10 @@ class Cache(object):
     # This kills off a given cache entry.
     def kill(self, ce):
 
-        # Should never happen... but...
-        if ce.time == self.time:
-            self.size_of_current_generation -= ce.size
-
         # Let the texture cache know we're not needed.
-        renpy.display.draw.mutated_surface(ce.surf)
+        if ce.surf is not None:
+            renpy.display.draw.mutated_surface(ce.surf)
 
-        self.total_cache_size -= ce.size
         del self.cache[ce.what]
 
         if renpy.config.debug_image_cache:
@@ -282,13 +384,13 @@ class Cache(object):
         """
 
         # If we're within the limit, return.
-        if self.total_cache_size <= self.cache_limit:
+        if self.get_total_size() <= self.cache_limit:
             return True
 
         # If we're outside the cache limit, we need to go and start
         # killing off some of the entries until we're back inside it.
 
-        for ce in sorted(self.cache.itervalues(), key=lambda a : a.time):
+        for ce in sorted(self.cache.values(), key=lambda a : a.time):
 
             if ce.time == self.time:
                 # If we're bigger than the limit, and there's nothing
@@ -299,10 +401,27 @@ class Cache(object):
             self.kill(ce)
 
             # If we're in the limit, we're done.
-            if self.total_cache_size <= self.cache_limit:
+            if self.get_total_size() <= self.cache_limit:
                 break
 
         return True
+
+    def flush_file(self, fn):
+        """
+        This flushes all cache entries that refer to `fn` from the cache.
+        """
+
+        to_flush = [ ]
+
+        for ce in self.cache.values():
+            if fn in ce.what.predict_files():
+                to_flush.append(ce)
+
+        for ce in to_flush:
+            self.kill(ce)
+
+        if to_flush:
+            renpy.display.render.free_memory()
 
     def preload_texture(self, im):
         """
@@ -314,7 +433,8 @@ class Cache(object):
 
     def get_texture(self, im):
         """
-        Gets `im` as a texture.
+        Gets `im` as a texture. Used when prediction is being used to load
+        the actual image.
         """
 
         self.get(im, texture=True)
@@ -332,8 +452,10 @@ class Cache(object):
 
             self.added.add(im)
 
-            if im in self.cache:
-                self.preload_texture(im)
+            ce = self.cache.get(im, None)
+
+            if ce and ce.texture:
+                ce.time = self.time
                 in_cache = True
             else:
                 self.preloads.append(im)
@@ -364,69 +486,73 @@ class Cache(object):
             self.preload_lock.wait()
             self.preload_lock.release()
 
-            while self.preloads and self.keep_preloading:
+            self.preload_thread_pass()
 
-                # If the size of the current generation is bigger than the
-                # total cache size, stop preloading.
-                with self.lock:
+    def preload_thread_pass(self):
 
-                    # If the cache is overfull, clean it out.
-                    if not self.cleanout():
+        while self.preloads and self.keep_preloading:
 
-                        if renpy.config.debug_image_cache:
-                            for i in self.preloads:
-                                renpy.display.ic_log.write("Overfull %r", i)
+            # If the size of the current generation is bigger than the
+            # total cache size, stop preloading.
+            with self.lock:
 
-                        self.preloads = [ ]
+                # If the cache is overfull, clean it out.
+                if not self.cleanout():
 
-                        break
+                    if renpy.config.debug_image_cache:
+                        for i in self.preloads:
+                            renpy.display.ic_log.write("Overfull %r", i)
+
+                    self.preloads = [ ]
+
+                    break
+
+            try:
+                image = self.preloads.pop(0)
+
+                if image not in self.preload_blacklist:
+                    try:
+                        self.preload_texture(image)
+                    except Exception:
+                        self.preload_blacklist.add(image)
+            except Exception:
+                pass
+
+        with self.lock:
+            self.cleanout()
+
+        # If we have time, preload pinned images.
+        if self.keep_preloading and not renpy.game.less_memory:
+
+            workset = set(renpy.store._cache_pin_set)
+
+            # Remove things that are not in the workset from the pin cache,
+            # and remove things that are in the workset from pin cache.
+            for i in list(self.pin_cache.keys()):
+
+                if i in workset:
+                    workset.remove(i)
+                else:
+                    surf = self.pin_cache[i]
+
+                    del self.pin_cache[i]
+
+            # For each image in the worklist...
+            for image in workset:
+
+                if image in self.preload_blacklist:
+                    continue
+
+                # If we have normal preloads, break out.
+                if self.preloads:
+                    break
 
                 try:
-                    image = self.preloads.pop(0)
-
-                    if image not in self.preload_blacklist:
-                        try:
-                            self.preload_texture(image)
-                        except:
-                            self.preload_blacklist.add(image)
-                except:
-                    pass
-
-            with self.lock:
-                self.cleanout()
-
-            # If we have time, preload pinned images.
-            if self.keep_preloading and not renpy.game.less_memory:
-
-                workset = set(renpy.store._cache_pin_set)
-
-                # Remove things that are not in the workset from the pin cache,
-                # and remove things that are in the workset from pin cache.
-                for i in self.pin_cache.keys():
-
-                    if i in workset:
-                        workset.remove(i)
-                    else:
-                        surf = self.pin_cache[i]
-
-                        del self.pin_cache[i]
-
-                # For each image in the worklist...
-                for image in workset:
-
-                    if image in self.preload_blacklist:
-                        continue
-
-                    # If we have normal preloads, break out.
-                    if self.preloads:
-                        break
-
-                    try:
-                        surf = image.load()
-                        self.pin_cache[image] = surf
-                        renpy.display.draw.load_texture(surf)
-                    except:
-                        self.preload_blacklist.add(image)
+                    surf = image.load()
+                    self.pin_cache[image] = surf
+                    renpy.display.draw.load_texture(surf)
+                except Exception:
+                    self.preload_blacklist.add(image)
 
     def add_load_log(self, filename):
 
@@ -450,7 +576,6 @@ def free_memory():
     Frees some memory.
     """
 
-    renpy.display.draw.free_memory()
     cache.clear()
 
 
@@ -462,6 +587,8 @@ class ImageBase(renpy.display.core.Displayable):
 
     __version__ = 1
 
+    optimize_bounds = False
+
     def after_upgrade(self, version):
         if version < 1:
             self.cache = True
@@ -470,11 +597,12 @@ class ImageBase(renpy.display.core.Displayable):
 
         self.rle = properties.pop('rle', None)
         self.cache = properties.pop('cache', True)
+        self.optimize_bounds = properties.pop('optimize_bounds', True)
 
         properties.setdefault('style', 'image')
 
         super(ImageBase, self).__init__(**properties)
-        self.identity = (type(self).__name__, ) + args
+        self.identity = (type(self).__name__,) + args
 
     def __hash__(self):
         return hash(self.identity)
@@ -486,10 +614,7 @@ class ImageBase(renpy.display.core.Displayable):
 
         return self.identity == other.identity
 
-    def __repr__(self):
-        return "<" + " ".join([repr(i) for i in self.identity]) + ">"
-
-    def load(self):
+    def load(self): # type:() -> pygame_sdl2.Surface
         """
         This function is called by the image cache code to cause this
         image to be loaded. It's expected that children of this class
@@ -499,13 +624,7 @@ class ImageBase(renpy.display.core.Displayable):
         raise Exception("load method not implemented.")
 
     def render(self, w, h, st, at):
-
-        texture = cache.get(self, texture=True)
-
-        w, h = texture.get_size()
-        rv = renpy.display.render.Render(w, h)
-        rv.blit(texture, (0, 0))
-        return rv
+        return cache.get(self, render=True)
 
     def predict_one(self):
         renpy.display.predict.image(self)
@@ -517,6 +636,22 @@ class ImageBase(renpy.display.core.Displayable):
         """
 
         return [ ]
+
+    def get_hash(self): # type: () -> int
+        """
+        Returns a hash of the image that will change when the file on disk
+        changes.
+        """
+
+        return 0
+
+
+
+
+
+
+ignored_images = set()
+images_to_ignore = set()
 
 
 class Image(ImageBase):
@@ -532,11 +667,11 @@ class Image(ImageBase):
         super(Image, self).__init__(filename, **properties)
         self.filename = filename
 
-    def __unicode__(self):
+    def _repr_info(self):
         if len(self.filename) < 20:
-            return u"Image %r" % self.filename
+            return repr(self.filename)
         else:
-            return u"Image \u2026%s" % self.filename[-20:]
+            return repr("\u2026"+self.filename[-20:])
 
     def get_hash(self):
         return renpy.loader.get_hash(self.filename)
@@ -545,12 +680,30 @@ class Image(ImageBase):
 
         cache.add_load_log(self.filename)
 
+
         try:
 
-            if unscaled:
-                surf = renpy.display.pgrender.load_image_unscaled(renpy.loader.load(self.filename), self.filename)
-            else:
-                surf = renpy.display.pgrender.load_image(renpy.loader.load(self.filename), self.filename)
+
+            try:
+                filelike = renpy.loader.load(self.filename)
+                filename = self.filename
+                force_size = None
+            except renpy.webloader.DownloadNeeded as e:
+                renpy.webloader.enqueue(e.relpath, 'image', self.filename)
+                # temporary placeholder:
+                filelike = open(os.path.join('_placeholders', e.relpath), 'rb')
+                filename = 'use_png_format.png'
+                force_size = e.size
+
+            with filelike as f:
+                if unscaled:
+                    surf = renpy.display.pgrender.load_image_unscaled(f, filename)
+                else:
+                    surf = renpy.display.pgrender.load_image(f, filename)
+
+            if force_size is not None:
+                # avoid size-related exceptions (e.g. Crop on a smaller placeholder)
+                surf = renpy.display.pgrender.transform_scale(surf, force_size)
 
             return surf
 
@@ -563,7 +716,15 @@ class Image(ImageBase):
 
                 return im.load()
 
-            raise
+            else:
+
+                if self.filename not in ignored_images:
+                    images_to_ignore.add(self.filename)
+                    raise e
+                else:
+                    return Image("_missing_image.png").load()
+
+            raise e
 
     def predict_files(self):
 
@@ -578,6 +739,35 @@ class Image(ImageBase):
             return [ self.filename ]
 
 
+class Data(ImageBase):
+    """
+    :doc: im_im
+
+    This image manipulator loads an image from binary data.
+
+    `data`
+        A string of bytes, giving the compressed image data in a standard
+        file format.
+
+    `filename`
+        A "filename" associated with the image. This is used to provide a
+        hint to Ren'Py about the format of `data`. (It's not actually
+        loaded from disk.)
+    """
+
+    def __init__(self, data, filename, **properties):
+        super(Data, self).__init__(data, filename, **properties)
+        self.data = data
+        self.filename = filename
+
+    def _repr_info(self):
+        return repr(self.filename)
+
+    def load(self):
+        f = io.BytesIO(self.data)
+        return renpy.display.pgrender.load_image(f, self.filename)
+
+
 class ZipFileImage(ImageBase):
 
     def __init__(self, zipfilename, filename, mtime=0, **properties):
@@ -588,13 +778,12 @@ class ZipFileImage(ImageBase):
 
     def load(self):
         try:
-            zf = zipfile.ZipFile(self.zipfilename, 'r')
-            data = zf.read(self.filename)
-            sio = cStringIO.StringIO(data)
-            rv = renpy.display.pgrender.load_image(sio, self.filename)
-            zf.close()
+            with zipfile.ZipFile(self.zipfilename, 'r') as zf:
+                data = zf.read(self.filename)
+                sio = io.BytesIO(data)
+                rv = renpy.display.pgrender.load_image(sio, self.filename)
             return rv
-        except:
+        except Exception:
             return renpy.display.pgrender.surface((2, 2), True)
 
     def predict_files(self):
@@ -603,7 +792,7 @@ class ZipFileImage(ImageBase):
 
 class Composite(ImageBase):
     """
-    :doc: im_im
+    :undocumented:
 
     This image manipulator composites multiple images together to
     form a single image.
@@ -673,7 +862,7 @@ class Composite(ImageBase):
 
 class Scale(ImageBase):
     """
-    :doc: im_im
+    :undocumented:
 
     An image manipulator that scales `im` (an image manipulator) to
     `width` and `height`.
@@ -736,6 +925,9 @@ class FactorScale(ImageBase):
     ::
 
         image logo doubled = im.FactorScale("logo.png", 1.5)
+
+    The same effect can now be achieved with the :tpref:`zoom` or the
+    :tpref:`xzoom` and :tpref:`yzoom` transform properties.
     """
 
     def __init__(self, im, width, height=None, bilinear=True, **properties):
@@ -793,6 +985,10 @@ class Flip(ImageBase):
     ::
 
         image eileen flip = im.Flip("eileen_happy.png", vertical=True)
+
+    The same effect can now be achieved by setting
+    :tpref:`xzoom` (for horizontal flip)
+    or :tpref:`yzoom` (for vertical flip) to a negative value.
     """
 
     def __init__(self, im, horizontal=False, vertical=False, **properties):
@@ -879,6 +1075,8 @@ class Crop(ImageBase):
     ::
 
         image logo crop = im.Crop("logo.png", (0, 0, 100, 307))
+
+    The same effect can now be achieved by setting the :tpref:`crop` transform property.
     """
 
     def __init__(self, im, x, y=None, w=None, h=None, **properties):
@@ -924,9 +1122,9 @@ def ramp(start, end):
 
         for i in range(0, 256):
             i = i / 255.0
-            chars.append(chr(int( end * i + start * (1.0 - i) ) ) )
+            chars.append(bchr(int(end * i + start * (1.0 - i))))
 
-        rv = "".join(chars)
+        rv = b"".join(chars)
         ramp_cache[start, end] = rv
 
     return rv
@@ -1059,6 +1257,51 @@ class Recolor(ImageBase):
         return self.image.predict_files()
 
 
+class Blur(ImageBase):
+    """
+    :doc: im_im
+
+    An image manipulator that blurs the image manipulator `im` using
+    an elliptical kernel described by `xrad` and optionally `yrad`.
+
+    If `yrad` is None, it will take the value of `xrad` resulting in
+    a circular kernel being used.
+
+    ::
+
+        image logo blurred = im.Blur("logo.png", 1.5)
+
+    The same effect can now be achieved with the :tpref:`blur` transform property.
+    """
+
+    def __init__(self, im, xrad, yrad=None, **properties):
+
+        im = image(im)
+
+        super(Blur, self).__init__(im, xrad, yrad, **properties)
+
+        self.image = im
+        self.rx = xrad
+        self.ry = xrad if yrad is None else yrad
+
+    def get_hash(self):
+        return self.image.get_hash()
+
+    def load(self):
+
+        surf = cache.get(self.image)
+
+        ws = renpy.display.pgrender.surface(surf.get_size(), True)
+        rv = renpy.display.pgrender.surface(surf.get_size(), True)
+
+        renpy.display.module.blur(surf, ws, rv, self.rx, self.ry)
+
+        return rv
+
+    def predict_files(self):
+        return self.image.predict_files()
+
+
 class MatrixColor(ImageBase):
     """
     :doc: im_matrixcolor
@@ -1123,7 +1366,7 @@ class MatrixColor(ImageBase):
 
 class matrix(tuple):
     """
-    :doc: im_matrixcolor
+    :doc: im_matrix
 
     Constructs an im.matrix object from `matrix`. im.matrix objects
     support The operations supported are matrix multiplication, scalar
@@ -1177,10 +1420,10 @@ class matrix(tuple):
 
     def vector_mul(self, o):
 
-        return (o[0]*self[0] + o[1]*self[1] + o[2]*self[2] + o[3]*self[3] + self[4],
-                o[0]*self[5] + o[1]*self[6] + o[2]*self[7] + o[3]*self[8] + self[9],
-                o[0]*self[10] + o[1]*self[11] + o[2]*self[12] + o[3]*self[13] + self[14],
-                o[0]*self[15] + o[1]*self[16] + o[2]*self[17] + o[3]*self[18] + self[19],
+        return (o[0] * self[0] + o[1] * self[1] + o[2] * self[2] + o[3] * self[3] + self[4],
+                o[0] * self[5] + o[1] * self[6] + o[2] * self[7] + o[3] * self[8] + self[9],
+                o[0] * self[10] + o[1] * self[11] + o[2] * self[12] + o[3] * self[13] + self[14],
+                o[0] * self[15] + o[1] * self[16] + o[2] * self[17] + o[3] * self[18] + self[19],
                 1)
 
     def __add__(self, other):
@@ -1222,11 +1465,14 @@ im.matrix(%f, %f, %f, %f, %f.
     @staticmethod
     def identity():
         """
-        :doc: im_matrixcolor
+        :doc: im_matrix
         :name: im.matrix.identity
 
         Returns an identity matrix, one that does not change color or
         alpha.
+
+        A suitable equivalent for the :tpref:`matrixcolor` transform property
+        is IdentityMatrix().
         """
 
         return matrix(1, 0, 0, 0, 0,
@@ -1237,7 +1483,7 @@ im.matrix(%f, %f, %f, %f, %f.
     @staticmethod
     def saturation(level, desat=(0.2126, 0.7152, 0.0722)):
         """
-        :doc: im_matrixcolor
+        :doc: im_matrix
         :name: im.matrix.saturation
 
         Returns an im.matrix that alters the saturation of an
@@ -1255,6 +1501,9 @@ im.matrix(%f, %f, %f, %f, %f.
             of an NTSC television signal. Since the human eye is
             mostly sensitive to green, more of the green channel is
             kept then the other two channels.
+
+        A suitable equivalent for the :tpref:`matrixcolor` transform property
+        is SaturationMatrix(value, desat).
         """
 
         r, g, b = desat
@@ -1270,12 +1519,15 @@ im.matrix(%f, %f, %f, %f, %f.
     @staticmethod
     def desaturate():
         """
-        :doc: im_matrixcolor
+        :doc: im_matrix
         :name: im.matrix.desaturate
 
         Returns an im.matrix that desaturates the image (makes it
         grayscale). This is equivalent to calling
         im.matrix.saturation(0).
+
+        A suitable equivalent for the :tpref:`matrixcolor` transform property
+        is SaturationMatrix(0).
         """
 
         return matrix.saturation(0.0)
@@ -1283,7 +1535,7 @@ im.matrix(%f, %f, %f, %f, %f.
     @staticmethod
     def tint(r, g, b):
         """
-        :doc: im_matrixcolor
+        :doc: im_matrix
         :name: im.matrix.tint
 
         Returns an im.matrix that tints an image, without changing
@@ -1292,6 +1544,9 @@ im.matrix(%f, %f, %f, %f, %f.
         placed into the final image. (For example, if `r` is .5, and
         the value of the red channel is 100, the transformed color
         will have a red value of 50.)
+
+        A suitable equivalent for the :tpref:`matrixcolor` transform property
+        is TintMatrix(Color((r, g, b))).
         """
 
         return matrix(r, 0, 0, 0, 0,
@@ -1302,11 +1557,14 @@ im.matrix(%f, %f, %f, %f, %f.
     @staticmethod
     def invert():
         """
-        :doc: im_matrixcolor
+        :doc: im_matrix
         :name: im.matrix.invert
 
         Returns an im.matrix that inverts the red, green, and blue
         channels of the image without changing the alpha channel.
+
+        A suitable equivalent for the :tpref:`matrixcolor` transform property
+        is InvertMatrix(1.0).
         """
 
         return matrix(-1, 0, 0, 0, 1,
@@ -1317,7 +1575,7 @@ im.matrix(%f, %f, %f, %f, %f.
     @staticmethod
     def brightness(b):
         """
-        :doc: im_matrixcolor
+        :doc: im_matrix
         :name: im.matrix.brightness
 
         Returns an im.matrix that alters the brightness of an image.
@@ -1326,6 +1584,9 @@ im.matrix(%f, %f, %f, %f, %f.
             The amount of change in image brightness. This should be
             a number between -1 and 1, with -1 the darkest possible
             image and 1 the brightest.
+
+        A suitable equivalent for the :tpref:`matrixcolor` transform property
+        is BrightnessMatrix(b).
         """
 
         return matrix(1, 0, 0, 0, b,
@@ -1336,11 +1597,14 @@ im.matrix(%f, %f, %f, %f, %f.
     @staticmethod
     def opacity(o):
         """
-        :doc: im_matrixcolor
+        :doc: im_matrix
         :name: im.matrix.opacity
 
         Returns an im.matrix that alters the opacity of an image. An
         `o` of 0.0 is fully transparent, while 1.0 is fully opaque.
+
+        A suitable equivalent for the :tpref:`matrixcolor` transform property
+        is OpacityMatrix(o).
         """
 
         return matrix(1, 0, 0, 0, 0,
@@ -1351,12 +1615,15 @@ im.matrix(%f, %f, %f, %f, %f.
     @staticmethod
     def contrast(c):
         """
-        :doc: im_matrixcolor
+        :doc: im_matrix
         :name: im.matrix.contrast
 
         Returns an im.matrix that alters the contrast of an image. `c` should
         be greater than 0.0, with values between 0.0 and 1.0 decreasing contrast, and
         values greater than 1.0 increasing contrast.
+
+        A suitable equivalent for the :tpref:`matrixcolor` transform property
+        is ContrastMatrix(c).
         """
 
         return matrix.brightness(-.5) * matrix.tint(c, c, c) * matrix.brightness(.5)
@@ -1365,11 +1632,14 @@ im.matrix(%f, %f, %f, %f, %f.
     @staticmethod
     def hue(h):
         """
-        :doc: im_matrixcolor
+        :doc: im_matrix
         :name: im.matrix.hue
 
         Returns an im.matrix that rotates the hue by `h` degrees, while
         preserving luminosity.
+
+        A suitable equivalent for the :tpref:`matrixcolor` transform property
+        is HueMatrix(h).
         """
 
         h = h * math.pi / 180
@@ -1379,9 +1649,9 @@ im.matrix(%f, %f, %f, %f, %f.
         lumG = 0.715
         lumB = 0.072
         return matrix(
-            lumR+cosVal*(1-lumR)+sinVal*(-lumR), lumG+cosVal*(-lumG)+sinVal*(-lumG), lumB+cosVal*(-lumB)+sinVal*(1-lumB), 0, 0,
-            lumR+cosVal*(-lumR)+sinVal*(0.143), lumG+cosVal*(1-lumG)+sinVal*(0.140), lumB+cosVal*(-lumB)+sinVal*(-0.283), 0, 0,
-            lumR+cosVal*(-lumR)+sinVal*(-(1-lumR)), lumG+cosVal*(-lumG)+sinVal*(lumG), lumB+cosVal*(1-lumB)+sinVal*(lumB), 0, 0,
+            lumR + cosVal * (1 - lumR) + sinVal * (-lumR), lumG + cosVal * (-lumG) + sinVal * (-lumG), lumB + cosVal * (-lumB) + sinVal * (1 - lumB), 0, 0,
+            lumR + cosVal * (-lumR) + sinVal * (0.143), lumG + cosVal * (1 - lumG) + sinVal * (0.140), lumB + cosVal * (-lumB) + sinVal * (-0.283), 0, 0,
+            lumR + cosVal * (-lumR) + sinVal * (-(1 - lumR)), lumG + cosVal * (-lumG) + sinVal * (lumG), lumB + cosVal * (1 - lumB) + sinVal * (lumB), 0, 0,
             0, 0, 0, 1, 0,
             0, 0, 0, 0, 1
             )
@@ -1389,7 +1659,7 @@ im.matrix(%f, %f, %f, %f, %f.
     @staticmethod
     def colorize(black_color, white_color):
         """
-        :doc: im_matrixcolor
+        :doc: im_matrix
         :name: im.matrix.colorize
 
         Returns an im.matrix that colorizes a black and white image.
@@ -1402,10 +1672,13 @@ im.matrix(%f, %f, %f, %f, %f.
                 "bwlogo.png",
                 im.matrix.colorize("#f00", "#00f"))
 
+
+        A suitable equivalent for the :tpref:`matrixcolor` transform property
+        is ColorizeMatrix(black_color, white_color).
         """
 
-        (r0, g0, b0, _a0) = renpy.easy.color(black_color)
-        (r1, g1, b1, _a1) = renpy.easy.color(white_color)
+        (r0, g0, b0, _a0) = renpy.easy.color(black_color) # type: ignore
+        (r1, g1, b1, _a1) = renpy.easy.color(white_color) # type: ignore
 
         r0 /= 255.0
         g0 /= 255.0
@@ -1414,9 +1687,9 @@ im.matrix(%f, %f, %f, %f, %f.
         g1 /= 255.0
         b1 /= 255.0
 
-        return matrix((r1-r0), 0, 0, 0, r0,
-                      0, (g1-g0), 0, 0, g0,
-                      0, 0, (b1-b0), 0, b0,
+        return matrix((r1 - r0), 0, 0, 0, r0,
+                      0, (g1 - g0), 0, 0, g0,
+                      0, 0, (b1 - b0), 0, b0,
                       0, 0, 0, 1, 0)
 
 
@@ -1427,6 +1700,9 @@ def Grayscale(im, desat=(0.2126, 0.7152, 0.0722), **properties):
 
     An image manipulator that creates a desaturated version of the image
     manipulator `im`.
+
+    The same effect can now be achieved by supplying SaturationMatrix(0)
+    to the :tpref:`matrixcolor` transform property.
     """
 
     return MatrixColor(im, matrix.saturation(0.0, desat), **properties)
@@ -1439,6 +1715,9 @@ def Sepia(im, tint=(1.0, .94, .76), desat=(0.2126, 0.7152, 0.0722), **properties
 
     An image manipulator that creates a sepia-toned version of the image
     manipulator `im`.
+
+    The same effect can now be achieved by supplying SepiaMatrix()
+    to the :tpref:`matrixcolor` transform property.
     """
 
     return MatrixColor(im, matrix.saturation(0.0, desat) * matrix.tint(tint[0], tint[1], tint[2]), **properties)
@@ -1450,7 +1729,7 @@ def Color(im, color):
     black and white is the supplied color.
     """
 
-    r, g, b, a = renpy.easy.color(color)
+    r, g, b, a = renpy.easy.color(color) # type: ignore
 
     return Recolor(im, r, g, b, a)
 
@@ -1478,6 +1757,9 @@ class Tile(ImageBase):
     `size`
         If not None, a (width, height) tuple. If None, this defaults to
         (:var:`config.screen_width`, :var:`config.screen_height`).
+
+    The same effect can now be achieved using the :func:`Tile`
+    displayable, with ``Tile(im, size=size)``.
     """
 
     def __init__(self, im, size=None, **properties):
@@ -1539,7 +1821,7 @@ class AlphaMask(ImageBase):
         self.mask = image(mask)
 
     def get_hash(self):
-        return self.base.get_hash() + self.image.get_hash()
+        return self.base.get_hash() + self.mask.get_hash()
 
     def load(self):
 
@@ -1563,13 +1845,18 @@ def image(arg, loose=False, **properties):
     """
     :doc: im_image
     :name: Image
-    :args: (filename, **properties)
+    :args: (filename, *, optimize_bounds=True, **properties)
 
     Loads an image from a file. `filename` is a
     string giving the name of the file.
 
     `filename` should be a JPEG or PNG file with an appropriate
     extension.
+
+    If optimize_bounds is True, only the portion of the image that
+    inside the bounding box of non-transparent pixels is loaded into
+    GPU memory. (The only reason to set this to False is when using an
+    image as input to a shader.)
     """
 
     """
@@ -1610,18 +1897,36 @@ def image(arg, loose=False, **properties):
         raise Exception("Could not construct image from argument.")
 
 
+def expands_bounds(bounds, size, amount):
+    """
+    This expands the rectangle bounds by amount, while ensure it fits inside size.
+    """
+
+    x, y, w, h = bounds
+    sx, sy = size
+
+    x0 = max(0, x - amount)
+    y0 = max(0, y - amount)
+    x1 = min(sx, x + w + amount)
+    y1 = min(sy, y + h + amount)
+
+    return (x0, y0, x1 - x0, y1 - y0)
+
+
 def load_image(im):
     """
+    :name: renpy.load_image
     :doc: udd_utility
 
-    Loads the image manipulator `im` using the image cache, and returns a texture.
+    Loads the image manipulator `im` using the image cache, and returns a render.
     """
 
-    return cache.get(image(im), texture=True)
+    return cache.get(image(im), render=True)
 
 
 def load_surface(im):
     """
+    :name: renpy.load_surface
     :doc: udd_utility
 
     Loads the image manipulator `im` using the image cache, and returns a pygame Surface.

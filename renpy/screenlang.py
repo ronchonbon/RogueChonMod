@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -19,7 +19,11 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import renpy.display
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
+import renpy
 import contextlib
 
 # Grab the python versions of the parser and ast modules.
@@ -80,9 +84,6 @@ class Positional(object):
         if parser:
             parser.add(self)
 
-# Used to generate the documentation
-all_keyword_names = set()
-
 
 class Keyword(object):
     """
@@ -92,10 +93,9 @@ class Keyword(object):
     def __init__(self, name):
         self.name = name
 
-        all_keyword_names.add(self.name)
-
         if parser:
             parser.add(self)
+
 
 STYLE_PREFIXES = [
     '',
@@ -119,9 +119,6 @@ class Style(object):
     def __init__(self, name):
         self.name = name
 
-        for j in STYLE_PREFIXES:
-            all_keyword_names.add(j + self.name)
-
         if parser:
             parser.add(self)
 
@@ -134,9 +131,6 @@ class PrefixStyle(object):
     def __init__(self, prefix, name):
         self.prefix = prefix
         self.name = name
-
-        for j in STYLE_PREFIXES:
-            all_keyword_names.add(prefix + j + self.name)
 
         if parser:
             parser.add(self)
@@ -226,7 +220,7 @@ class Parser(object):
                 if c is None:
                     l.error('Expected screen language statement.')
 
-                rv.extend(c)
+                rv.extend(c) # type: ignore
                 count += 1
 
         return rv
@@ -237,7 +231,7 @@ class Parser(object):
         and expr instances, and adjusts the line number.
         """
 
-        if isinstance(expr, unicode):
+        if isinstance(expr, str):
             expr = renpy.python.escape_unicode(expr)
 
         try:
@@ -245,10 +239,10 @@ class Parser(object):
         except SyntaxError as e:
             raise renpy.parser.ParseError(
                 filename,
-                lineno + e[1][1] - 1,
+                lineno + e.args[1][1] - 1,
                 "Syntax error while parsing python expression.",
-                e[1][3],
-                e[1][2])
+                e.args[1][3],
+                e.args[1][2])
 
         increment_lineno(rv, lineno-1)
 
@@ -260,7 +254,7 @@ class Parser(object):
         adjusts the line number. Returns a list of statements.
         """
 
-        if isinstance(code, unicode):
+        if isinstance(code, str):
             code = renpy.python.escape_unicode(code)
 
         try:
@@ -269,10 +263,10 @@ class Parser(object):
 
             raise renpy.parser.ParseError(
                 filename,
-                lineno + e[1][1] - 1,
+                lineno + e.args[1][1] - 1,
                 "Syntax error while parsing python code.",
-                e[1][3],
-                e[1][2])
+                e.args[1][3],
+                e.args[1][2])
 
         increment_lineno(rv, lineno-1)
 
@@ -453,7 +447,7 @@ class FunctionStatementParser(Parser):
                         rv.pop()
 
                         rv.extend(self.parse_exec("%s = (%s, %d)" % (child_name, name, child_index)))
-                        rv.extend(c)
+                        rv.extend(c) # type: ignore
 
                         needs_close = False
 
@@ -625,6 +619,7 @@ bar_properties = [ Style(i) for i in [
 box_properties = [ Style(i) for i in [
     "box_layout",
     "box_wrap",
+    "box_wrap_spacing",
     "box_reverse",
     "order_reverse",
     "spacing",
@@ -646,7 +641,7 @@ ui_properties = [
 
 
 def add(thing):
-    parser.add(thing)
+    parser.add(thing) # type: ignore
 
 
 ##############################################################################
@@ -723,6 +718,7 @@ Keyword("default")
 Keyword("length")
 Keyword("allow")
 Keyword("exclude")
+Keyword("copypaste")
 Keyword("prefix")
 Keyword("suffix")
 Keyword("changed")
@@ -887,18 +883,22 @@ Keyword("drag_name")
 Keyword("draggable")
 Keyword("droppable")
 Keyword("drag_raise")
+Keyword("dragging")
 Keyword("dragged")
 Keyword("dropped")
+Keyword("drop_allowable")
 Keyword("drag_handle")
 Keyword("drag_joined")
 Keyword("clicked")
 Keyword("hovered")
 Keyword("unhovered")
+Keyword("mouse_drop")
 Style("child")
 add(ui_properties)
 add(position_properties)
 
 FunctionStatementParser("draggroup", "ui.draggroup", many)
+Keyword("min_overlap")
 add(ui_properties)
 add(position_properties)
 
@@ -915,19 +915,14 @@ add(position_properties)
 
 class PassParser(Parser):
 
-    def __init__(self, name):
-        super(PassParser, self).__init__(name)
-
     def parse(self, l, name):
         return self.parse_exec("pass", l.number)
+
 
 PassParser("pass")
 
 
 class DefaultParser(Parser):
-
-    def __init__(self, name):
-        super(DefaultParser, self).__init__(name)
 
     def parse(self, l, name):
 
@@ -938,6 +933,7 @@ class DefaultParser(Parser):
         code = "_scope.setdefault(%r, (%s))" % (name, rest)
 
         return self.parse_exec(code, l.number)
+
 
 DefaultParser("default")
 
@@ -958,27 +954,39 @@ class UseParser(Parser):
 
         args = renpy.parser.parse_arguments(l)
 
+        extrapos = None
+        extrakw = None
+
         if args:
 
+            index = 0
+
             for k, v in args.arguments:
-                if k is None:
+
+                if index in args.starred_indexes:
+                    extrapos = v
+                elif index in args.doublestarred_indexes:
+                    extrakw = v
+                elif k is None:
                     code += ", (%s)" % v
                 else:
                     code += ", %s=(%s)" % (k, v)
+
+                index += 1
 
         code += ", _name=%s, _scope=_scope" % name
 
         if args:
 
-            if args.extrapos:
-                code += ", *(%s)" % args.extrapos
-
-            if args.extrakw:
-                code += ", **(%s)" % args.extrakw
+            if extrapos:
+                code += ", *(%s)" % extrapos
+            if extrakw:
+                code += ", **(%s)" % extrakw
 
         code += ")"
 
         return self.parse_exec(code, lineno)
+
 
 UseParser("use")
 
@@ -1042,6 +1050,7 @@ class IfParser(Parser):
                     break
 
         return [ rv ]
+
 
 IfParser("if")
 
@@ -1117,6 +1126,7 @@ class ForParser(Parser):
 
         return rv
 
+
 ForParser("for")
 
 
@@ -1141,6 +1151,7 @@ class PythonParser(Parser):
             lineno += 1
 
         return self.parse_exec(python_code, lineno)
+
 
 PythonParser("$", True)
 PythonParser("python", False)
@@ -1262,7 +1273,7 @@ class ScreenLangScreen(renpy.object.Object):
             values = renpy.ast.apply_arguments(self.parameters, args, kwargs)
             scope.update(values)
 
-        renpy.python.py_exec_bytecode(self.code.bytecode, locals=scope)
+        renpy.python.py_exec_bytecode(self.code.bytecode, locals=scope) # type: ignore
 
 
 class ScreenParser(Parser):
@@ -1301,7 +1312,7 @@ class ScreenParser(Parser):
         lineno = l.number
 
         screen.name = l.require(l.word)
-        screen.parameters = renpy.parser.parse_parameters(l)
+        screen.parameters = renpy.parser.parse_parameters(l) # type: ignore
 
         while parse_keyword(l):
             continue
@@ -1333,7 +1344,7 @@ class ScreenParser(Parser):
                 if c is None:
                     l.error('Expected a screen language statement.')
 
-                rv.extend(c)
+                rv.extend(c) # type: ignore
                 count += 1
 
         node = ast.Module(body=rv, lineno=lineno, col_offset=0)
@@ -1353,9 +1364,10 @@ class ScreenParser(Parser):
 #        print screen.name, "-----------------------------------------"
 #        unparse.Unparser(node)
 
-        screen.code = renpy.ast.PyCode(node, location, 'exec')
+        screen.code = renpy.ast.PyCode(node, location, 'exec') # type: ignore
 
         return screen
+
 
 screen_parser = ScreenParser()
 screen_parser.add(all_statements)

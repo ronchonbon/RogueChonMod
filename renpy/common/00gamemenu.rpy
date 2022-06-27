@@ -1,4 +1,4 @@
-﻿# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+﻿# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -59,9 +59,6 @@ init -1700 python:
     # to the main menu.
     config.end_game_transition = None
 
-    # basics: True if autosave should be used.
-    config.has_autosave = True
-
     # basics: True if quicksave has been enabled.
     config.has_quicksave = True
 
@@ -74,7 +71,7 @@ init -1700 python:
     # Layers to clear when entering the menus.
     config.menu_clear_layers = [ ]
 
-    # What we do on a game menu invokcation.
+    # What we do on a game menu invocation.
     config.game_menu_action = None
 
     # The screen that we go to when entering the game menu.
@@ -169,7 +166,7 @@ label _game_menu(*args, _game_menu_screen=_game_menu_screen, **kwargs):
         jump expression "game_menu"
 
     if renpy.has_screen(_game_menu_screen):
-        $ renpy.show_screen(_game_menu_screen, *args, **kwargs)
+        $ renpy.show_screen(_game_menu_screen, *args, _transient=True, **kwargs)
         $ ui.interact()
         jump _noisy_return
 
@@ -200,8 +197,6 @@ label _game_menu_preferences:
         jump expression "preferences_screen"
 
 label _quit:
-    if renpy.has_label("quit"):
-        call expression "quit"
     $ renpy.quit()
 
 label _return_fast_skipping:

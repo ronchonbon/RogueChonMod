@@ -1,4 +1,4 @@
-﻿# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+﻿# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -76,6 +76,13 @@ init 1500 python hide:
         if config.default_afm_time is not None:
             _preferences.afm_time = config.default_afm_time
 
+        if config.enable_language_autodetect:
+            locale, region = renpy.translation.detect_user_locale()
+            if locale is not None:
+                lang_name = config.locale_to_language_function(locale, region)
+                if lang_name is not None:
+                    config.default_language = lang_name
+
         if config.default_language is not None:
             _preferences.language = config.default_language
 
@@ -112,7 +119,20 @@ init 1500 python hide:
     error = _preferences.check()
 
     if error:
+        renpy.persistent.save()
         raise Exception(error)
+
+init -1500 python:
+    def _locale_to_language_function(locale, region):
+        lang_name = renpy.translation.locales.get(region)
+        if lang_name is not None and lang_name in renpy.known_languages():
+            return lang_name
+
+        lang_name = renpy.translation.locales.get(locale)
+        if lang_name is not None and lang_name in renpy.known_languages():
+            return lang_name
+
+    config.locale_to_language_function = _locale_to_language_function
 
 init -1500 python:
     def _imagemap_auto_function(auto_param, variant):
@@ -121,6 +141,8 @@ init -1500 python:
         if renpy.image_exists(rv):
             return rv
         elif renpy.loadable(rv):
+            return rv
+        elif renpy.easy.lookup_displayable_prefix(rv):
             return rv
         else:
             return None
@@ -177,7 +199,7 @@ init -1500 python:
             try:
                 import webbrowser
                 webbrowser.open(target)
-            except:
+            except Exception:
                 pass
 
     def hyperlink_sensitive(target):
@@ -200,3 +222,5 @@ init -1500:
     image text = renpy.ParameterizedText(style="centered_text")
     image vtext = renpy.ParameterizedText(style="centered_vtext")
 
+# Set _version to the version when the game was first started.
+default _version = config.version

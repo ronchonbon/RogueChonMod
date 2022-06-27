@@ -17,9 +17,6 @@ layeredimage Rogue_sprite standing:
     always:
         "images/Rogue_standing/Rogue_standing_body[RogueX.pubes][RogueX.outfit[piercings]].png"
 
-    if not renpy.showing("Rogue_sprite blowjob"):
-        "Rogue_head" pos (0.314, 0.312) zoom 0.58
-
     always:
         "images/Rogue_standing/Rogue_standing_arms[RogueX.arm_pose][RogueX.outfit[neck]][RogueX.outfit[gloves]].png"
 
@@ -65,6 +62,9 @@ layeredimage Rogue_sprite standing:
         "images/Rogue_standing/Rogue_standing_bodysuit[RogueX.outfit[bodysuit]][RogueX.arm_pose]_bottom.png"
     else:
         "images/Rogue_standing/Rogue_standing_bodysuit[RogueX.outfit[bodysuit]][RogueX.arm_pose].png"
+
+    if not renpy.showing("Rogue_sprite blowjob"):
+        "Rogue_head" pos (0.314, 0.312) zoom 0.58
 
     if not RogueX.outfit["bra"]:
         Null()

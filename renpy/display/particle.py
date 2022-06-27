@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -21,9 +21,14 @@
 
 # This code supports sprite and particle animation.
 
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
+
 from renpy.display.render import render, BLIT
 
-import renpy.display
+import renpy
 import random
 
 
@@ -46,6 +51,11 @@ class SpriteCache(renpy.object.Object):
     #
     # If true, then the render is simple enough it can just be appended to
     # the manager's render's children list.
+
+    child = None # type: renpy.display.core.Displayable|None
+    child_copy = None # type: renpy.display.core.Displayable|None
+    st = 0.0 # type: float|None
+    render = None # type: renpy.display.render.Render|None
 
 
 class Sprite(renpy.object.Object):
@@ -75,6 +85,17 @@ class Sprite(renpy.object.Object):
 
     The methods of a Sprite object are:
         """
+
+    x = 0 # type: int|float|renpy.display.core.absolute
+    y = 0 # type: int|float|renpy.display.core.absolute
+    zorder = 0 # type: int|float
+
+
+    child = None # type: renpy.display.core.Displayable|None
+    render = None # type: renpy.display.render.Render|None
+    live = True # type: bool
+    manager = None # type: SpriteManager|None
+
 
     # Fields:
     #
@@ -169,8 +190,7 @@ class SpriteManager(renpy.display.core.Displayable):
         SpriteManagers have the following fields:
 
         `width`, `height`
-
-             The width and height of this SpriteManager, in pixels.
+            The width and height of this SpriteManager, in pixels.
 
 
         SpriteManagers have the following methods:
@@ -298,7 +318,7 @@ class SpriteManager(renpy.display.core.Displayable):
         return rv
 
     def event(self, ev, x, y, st):
-        for i in xrange(len(self.children) -1, -1, -1):
+        for i in range(len(self.children) -1, -1, -1):
             s = self.children[i]
 
             if s.events:
@@ -320,7 +340,7 @@ class SpriteManager(renpy.display.core.Displayable):
                 for i in pl:
                     i = renpy.easy.displayable(i)
                     rv.append(i)
-        except:
+        except Exception:
             pass
 
         return rv
@@ -329,7 +349,7 @@ class SpriteManager(renpy.display.core.Displayable):
         self.children = [ ]
 
 
-class Particles(renpy.display.core.Displayable, renpy.python.NoRollback):
+class Particles(renpy.display.core.Displayable, renpy.rollback.NoRollback):
     """
     Supports particle motion, using the old API.
     """
@@ -414,8 +434,11 @@ class Particles(renpy.display.core.Displayable, renpy.python.NoRollback):
     def render(self, w, h, st, at):
         return renpy.display.render.render(self.sm, w, h, st, at)
 
+    def visit(self):
+        return [ self.sm ]
 
-class SnowBlossomFactory(renpy.python.NoRollback):
+
+class SnowBlossomFactory(renpy.rollback.NoRollback):
 
     rotate = False
 
@@ -436,7 +459,7 @@ class SnowBlossomFactory(renpy.python.NoRollback):
         self.init()
 
     def init(self):
-        self.starts = [ random.uniform(0, self.start) for _i in xrange(0, self.count) ]  # W0201
+        self.starts = [ random.uniform(0, self.start) for _i in range(0, self.count) ]  # W0201
         self.starts.append(self.start)
         self.starts.sort()
 
@@ -451,7 +474,7 @@ class SnowBlossomFactory(renpy.python.NoRollback):
         if (st == 0) and not particles and self.fast:
             rv = [ ]
 
-            for _i in xrange(0, self.count):
+            for _i in range(0, self.count):
                 rv.append(SnowBlossomParticle(self.image,
                                               ranged(self.xspeed),
                                               ranged(self.yspeed),
@@ -482,7 +505,7 @@ class SnowBlossomFactory(renpy.python.NoRollback):
         return [ self.image ]
 
 
-class SnowBlossomParticle(renpy.python.NoRollback):
+class SnowBlossomParticle(renpy.rollback.NoRollback):
 
     def __init__(self, image, xspeed, yspeed, border, start, offset, fast, rotate):
 

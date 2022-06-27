@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -22,14 +22,18 @@
 # This file contains displayables that move, zoom, rotate, or otherwise
 # transform displayables. (As well as displayables that support them.)
 
-from renpy.display.transform import *  # @UnusedWildImport
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
 
 import math
 
-import renpy.display
-
+import renpy
 from renpy.display.render import render
 from renpy.display.layout import Container
+
+# Some imports are here to handle pickles of a moved class.
+from renpy.display.transform import Transform, Proxy, TransformState, ATLTransform, null  # @UnusedImport
 
 
 class Motion(Container):
@@ -151,7 +155,7 @@ class Motion(Container):
         res = tuple(res)
 
         if len(res) == 2:
-            self.position = res + (self.style.xanchor, self.style.yanchor)
+            self.position = res + (self.style.xanchor or 0, self.style.yanchor or 0)
         else:
             self.position = res
 
@@ -393,8 +397,8 @@ def zoom_render(crend, x, y, w, h, zw, zh, bilinear):
     if zw == 0 or zh == 0 or w == 0 or h == 0:
         return rv
 
-    rv.forward = renpy.display.render.Matrix2D(w / zw, 0, 0, h / zh)
-    rv.reverse = renpy.display.render.Matrix2D(zw / w, 0, 0, zh / h)
+    rv.forward = renpy.display.matrix.Matrix2D(w / zw, 0, 0, h / zh)
+    rv.reverse = renpy.display.matrix.Matrix2D(zw / w, 0, 0, zh / h)
 
     rv.xclipping = True
     rv.yclipping = True
@@ -457,6 +461,9 @@ class ZoomCommon(renpy.display.core.Displayable):
 
     def visit(self):
         return [ self.child, self.after_child ]
+
+    def zoom_rectangle(self, done, width, height): # type: (ZoomCommon, float, float, float) -> tuple[int, int, int, int, int, int]
+        raise Exception("Zoom rectangle not implemented.")
 
     def render(self, width, height, st, at):
 
@@ -525,7 +532,7 @@ class Zoom(ZoomCommon):
 
     def zoom_rectangle(self, done, width, height):
 
-        rx, ry, rw, rh = [ (a + (b - a) * done) for a, b in zip(self.start, self.end) ]
+        rx, ry, rw, rh = [ (a + (b - a) * done) for a, b in zip(self.start, self.end) ] # type: ignore
 
         return rx, ry, rw, rh, self.size[0], self.size[1]
 
@@ -681,8 +688,8 @@ class RotoZoom(renpy.display.core.Displayable):
         if self.transform is None:
             self.transform = Transform(self.child)
 
-        self.transform.rotate = angle
-        self.transform.zoom = zoom
+        self.transform.rotate = angle # type: ignore
+        self.transform.zoom = zoom # type: ignore
 
         rv = renpy.display.render.render(self.transform, width, height, st, at)
 
@@ -693,16 +700,16 @@ class RotoZoom(renpy.display.core.Displayable):
 
 
 # For compatibility with old games.
-renpy.display.layout.Transform = Transform
-renpy.display.layout.RotoZoom = RotoZoom
-renpy.display.layout.SizeZoom = SizeZoom
-renpy.display.layout.FactorZoom = FactorZoom
-renpy.display.layout.Zoom = Zoom
-renpy.display.layout.Revolver = Revolver
-renpy.display.layout.Motion = Motion
-renpy.display.layout.Interpolate = Interpolate
+renpy.display.layout.Transform = Transform # type: ignore
+renpy.display.layout.RotoZoom = RotoZoom # type: ignore
+renpy.display.layout.SizeZoom = SizeZoom # type: ignore
+renpy.display.layout.FactorZoom = FactorZoom # type: ignore
+renpy.display.layout.Zoom = Zoom # type: ignore
+renpy.display.layout.Revolver = Revolver # type: ignore
+renpy.display.layout.Motion = Motion # type: ignore
+renpy.display.layout.Interpolate = Interpolate  # type: ignore
 
 # Leave these functions around - they might have been pickled somewhere.
-renpy.display.layout.Revolve = Revolve  # function
-renpy.display.layout.Move = Move  # function
-renpy.display.layout.Pan = Pan  # function
+renpy.display.layout.Revolve = Revolve  # type: ignore
+renpy.display.layout.Move = Move  # type: ignore
+renpy.display.layout.Pan = Pan  # type: ignore

@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -19,10 +19,13 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE
 
-from __future__ import unicode_literals
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
 
 import copy
-import renpy.audio
+import renpy
 
 pad_bindings = {
     "pad_leftshoulder_press" : [ "rollback", ],
@@ -57,7 +60,6 @@ pad_bindings = {
     "pad_righty_pos" : [ "focus_down", "bar_down" ],
 }
 
-
 all_preferences = [ ]
 
 
@@ -70,9 +72,6 @@ class Preference(object):
         self.name = name
         self.default = default
         self.types = types if types else type(default)
-
-        if self.types is unicode:
-            self.types = basestring
 
         all_preferences.append(self)
 
@@ -93,7 +92,6 @@ Preference("wait_voice", True)
 # Should we disengage auto-forward mode after a click?
 Preference("afm_after_click", False)
 
-
 # 2 - All transitions.
 # 1 - Only non-default transitions.
 # 0 - No transitions.
@@ -105,19 +103,19 @@ Preference("video_image_fallback", False)
 Preference("skip_after_choices", False)
 
 # A map from channel name to the current volume (between 0 and 1).
-Preference("volumes", { } )
+Preference("volumes", { })
 
 # Not used anymore.
-Preference("mute", { } )
+Preference("mute", { })
 
 # Joystick mappings.
-Preference("joymap", { } )
+Preference("joymap", { })
 
 # The size of the window, or None if we don't know it yet.
-Preference("physical_size", None, (tuple, type(None)) )
+Preference("physical_size", None, (tuple, type(None)))
 
 # The virtual size at the time self.physical_size was set.
-Preference("virtual_size", None, (tuple, type(None)) )
+Preference("virtual_size", None, (tuple, type(None)))
 
 # The graphics renderer we use.
 Preference("renderer", "auto")
@@ -126,10 +124,14 @@ Preference("renderer", "auto")
 Preference("performance_test", True)
 
 # The language we use for translations.
-Preference("language", None, (basestring, type(None)) )
+Preference("language", None, (str, type(None)))
 
 # Should we self-voice?
-Preference("self_voicing", False, (bool, basestring, type(None)))
+Preference("self_voicing", False, (bool, str, type(None)))
+
+# The amount to drop the volume of non-voice mixers when self voicing is
+# enabled.
+Preference("self_voicing_volume_drop", 0.5)
 
 # Should we emphasize audio?
 Preference("emphasize_audio", False)
@@ -144,12 +146,80 @@ Preference("desktop_rollback_side", "disable")
 # Should OpenGL do npot?
 Preference("gl_npot", True)
 
+# Should we try to save power by limiting how often we draw frames?
+Preference("gl_powersave", True)
+
+# The target framerate, used to set the swap interval.
+Preference("gl_framerate", None, (int, type(None)))
+
+# Do we allow tearing?
+Preference("gl_tearing", False)
+
+# The font transformation used.
+Preference("font_transform", None, (type(None), str))
+
+# An adjustment applied to font size.
+Preference("font_size", 1.0)
+
+# An adjustment applied to font line spacing.
+Preference("font_line_spacing", 1.0)
+
+# Do we forcefully use a system cursor?
+Preference("system_cursor", False)
+
+# Do we force high contrast text?
+Preference("high_contrast", False)
+
+# Should sound continue playing when the window is minimized?
+Preference("audio_when_minimized", True)
 
 class Preferences(renpy.object.Object):
     """
     Stores preferences that will one day be persisted.
     """
     __version__ = len(all_preferences)
+
+    # Default values, for typing purposes.
+    if 1 == 0:
+
+        fullscreen = False
+        skip_unseen = False
+        text_cps = 0
+        afm_time = 0
+        afm_enable = True
+        using_afm_enable = False
+        voice_sustain = False
+        mouse_move = False
+        show_empty_window = True
+        wait_voice = True
+        afm_after_click = False
+        transitions = 2
+        video_image_fallback = False
+        skip_after_choices = False
+        volumes = {}
+        mute = {}
+        joymap = {}
+        physical_size = None
+        virtual_size = None
+        renderer = u'auto'
+        performance_test = True
+        language = None
+        self_voicing = False
+        self_voicing_volume_drop = 0.5
+        emphasize_audio = False
+        pad_enabled = True
+        mobile_rollback_side = u'disable'
+        desktop_rollback_side = u'disable'
+        gl_npot = True
+        gl_powersave = True
+        gl_framerate = None
+        gl_tearing = False
+        font_transform = None
+        font_size = 1.0
+        font_line_spacing = 1.0
+        system_cursor = False
+        high_contrast = False
+        audio_when_minimized = True
 
     def init(self):
         """
@@ -165,11 +235,17 @@ class Preferences(renpy.object.Object):
         Checks that preferences have the right types.
         """
 
+        if self.gl_powersave == "auto":
+            self.gl_powersave = True
+
         error = None
 
         for p in all_preferences:
 
             v = getattr(self, p.name, None)
+
+            if isinstance(v, bytes):
+                v = v.decode("utf-8")
 
             if not isinstance(v, p.types):
                 error = "Preference {} has wrong type. {!r} is not of type {!r}.".format(p.name, v, p.types)
@@ -184,7 +260,7 @@ class Preferences(renpy.object.Object):
         self.init()
 
     def set_volume(self, mixer, volume):
-        if volume != 0:
+        if not renpy.config.preserve_volume_when_muted and volume != 0:
             self.mute[mixer] = False
 
         self.volumes[mixer] = volume
@@ -193,7 +269,7 @@ class Preferences(renpy.object.Object):
         if mixer not in self.volumes:
             return 0.0
 
-        if self.mute.get(mixer, False):
+        if not renpy.config.preserve_volume_when_muted and self.mute.get(mixer, False):
             return 0.0
 
         return self.volumes[mixer]
@@ -201,8 +277,9 @@ class Preferences(renpy.object.Object):
     def set_mute(self, mixer, mute):
         self.mute[mixer] = mute
 
-        if (not mute) and (self.volumes.get(mixer, 1.0) == 0.0):
-            self.volumes[mixer] = 1.0
+        if not renpy.config.preserve_volume_when_muted:
+            if (not mute) and (self.volumes.get(mixer, 1.0) == 0.0):
+                self.volumes[mixer] = 1.0
 
     def get_mute(self, mixer):
         if mixer not in self.volumes:
@@ -211,7 +288,7 @@ class Preferences(renpy.object.Object):
         return self.mute[mixer]
 
     def init_mixers(self):
-        for i in renpy.audio.music.get_all_mixers():
+        for i in renpy.audio.music.get_all_mixers() + ["main"]:
             self.volumes.setdefault(i, 1.0)
             self.mute.setdefault(i, False)
 
@@ -221,6 +298,9 @@ class Preferences(renpy.object.Object):
     def __eq__(self, other):
         return vars(self) == vars(other)
 
+    def __ne__(self, other):
+        return not (self == other)
 
-renpy.game.Preferences = Preferences
+
+renpy.game.Preferences = Preferences # type: ignore
 renpy.game.preferences = Preferences()

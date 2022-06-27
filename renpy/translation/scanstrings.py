@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -19,22 +19,24 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-from __future__ import print_function, unicode_literals
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
 
 import os
 import re
-import codecs
 
-import renpy.translation
+import renpy
 
 ################################################################################
 
 STRING_RE = r"""(?x)
 \b_[_p]?\s*\(\s*[uU]?(
-\"\"\"(?:\\.|\"{1,2}|[^\\"])*?\"\"\"
-|'''(?:\\.|\'{1,2}|[^\\'])*?'''
-|"(?:\\.|[^\\"])*"
-|'(?:\\.|[^\\'])*'
+\"\"\"(?:\\.|\\\n|\"{1,2}|[^\\"])*?\"\"\"
+|'''(?:\\.|\\\n|\'{1,2}|[^\\'])*?'''
+|"(?:\\.|\\\n|[^\\"])*"
+|'(?:\\.|\\\n|[^\\'])*'
 )\s*\)
 """
 
@@ -45,7 +47,6 @@ REGULAR_PRIORITIES = [
     ("screens.rpy", 30, "screens.rpy"),
     ("", 100, "launcher.rpy"),
 ]
-
 
 COMMON_PRIORITIES = [
     ("_compat/", 420, "obsolete.rpy"),
@@ -98,6 +99,9 @@ class String(object):
         for prefix, priority, launcher_file in pl:
             if self.elided.startswith(prefix):
                 break
+        else:
+            priority = 500
+            launcher_file = "unknown.rpy"
 
         self.priority = priority
         self.sort_key = (priority, self.filename, self.line)
@@ -119,7 +123,7 @@ def scan_strings(filename):
 
     rv = [ ]
 
-    for line, s in renpy.game.script.translator.additional_strings[filename]:  # @UndefinedVariable
+    for line, s in renpy.game.script.translator.additional_strings[filename]: # @UndefinedVariable
         rv.append(String(filename, line, s, False))
 
     for _filename, lineno, text in renpy.parser.list_logical_lines(filename):
@@ -127,6 +131,8 @@ def scan_strings(filename):
         for m in re.finditer(STRING_RE, text):
 
             s = m.group(1)
+            s = s.replace('\\\n', "")
+
             if s is not None:
                 s = s.strip()
                 s = "u" + s
@@ -151,7 +157,7 @@ def scan_comments(filename):
     comment = [ ]
     start = 0
 
-    with codecs.open(filename, "r", "utf-8") as f:
+    with open(filename, "r", encoding="utf-8") as f:
         lines = [ i.rstrip() for i in f.read().replace(u"\ufeff", "").split('\n') ]
 
     for i, l in enumerate(lines):

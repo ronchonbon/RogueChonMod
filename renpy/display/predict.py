@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -21,7 +21,12 @@
 
 # This file contains the routines that manage image prediction.
 
-import renpy.display
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
+
+import renpy
 
 # Called to indicate an image should be loaded or preloaded. This is
 # a function that takes an image manipulator, set by reset and predict,
@@ -84,11 +89,11 @@ def prediction_coroutine(root_widget):
 
     global predicting
 
-    # Wait to be told to start.
-    yield True
-
     # Start the prediction thread (to clean out the cache).
     renpy.display.im.cache.start_prediction()
+
+    # Wait to be told to start.
+    yield True
 
     # Set up the image prediction method.
     global image
@@ -120,11 +125,11 @@ def prediction_coroutine(root_widget):
     if len(renpy.game.contexts) >= 2:
         sls = renpy.game.contexts[-2].scene_lists
 
-        for l in sls.layers.itervalues():
+        for l in sls.layers.values():
             for sle in l:
                 try:
                     displayable(sle.displayable)
-                except:
+                except Exception:
                     pass
 
     else:
@@ -133,17 +138,33 @@ def prediction_coroutine(root_widget):
 
     predicting = False
 
-    while not (yield True):
+    while not (yield False):
         continue
 
+    predicting = True
+
+    for i in renpy.config.expensive_predict_callbacks:
+        done = False
+        while not done:
+            if not i():
+                done = True
+
+            predicting = False
+            yield False
+            predicting = True
+
+    predicted_screens = [ ]
+
     # Predict screens given with renpy.start_predict_screen.
-    for name, value in renpy.store._predict_screen.items():
+    for name, value in list(renpy.store._predict_screen.items()):
         args, kwargs = value
+
+        predicted_screens.append((name, args, kwargs))
 
         renpy.display.screen.predict_screen(name, *args, **kwargs)
 
         predicting = False
-        yield True
+        yield False
         predicting = True
 
     # Predict things (especially screens) that are reachable through
@@ -152,17 +173,20 @@ def prediction_coroutine(root_widget):
 
     try:
         root_widget.visit_all(lambda i : i.predict_one_action())
-    except:
-        pass
+    except Exception:
+        if renpy.config.debug_prediction:
+            import traceback
+
+            print("While predicting actions.")
+            traceback.print_exc()
+            print()
 
     predicting = False
-
-    predicted_screens = [ ]
 
     # Predict the screens themselves.
     for t in screens:
 
-        while not (yield True):
+        while not (yield False):
             continue
 
         if t in predicted_screens:
@@ -172,15 +196,13 @@ def prediction_coroutine(root_widget):
 
         name, args, kwargs = t
 
+        if name.startswith("_"):
+            continue
+
         predicting = True
 
-        try:
-            renpy.display.screen.predict_screen(name, *args, **kwargs)
-        except:
-            if renpy.config.debug_image_cache:
-                renpy.display.ic_log.write("While predicting screen %s %r", name, kwargs)
-                renpy.display.ic_log.exception()
+        renpy.display.screen.predict_screen(name, *args, **kwargs)
 
         predicting = False
 
-    yield False
+    yield None

@@ -601,6 +601,9 @@ screen Focus_Map:
             if JubesX in active_Girls:
                 imagebutton auto "images/Button_Jubes_%s.png" action ui.callsinnewcontext("shift_focus", JubesX) focus_mask True
 
+            if MystiqueX in active_Girls:
+                imagebutton auto "images/Button_Mystique_%s.png" action ui.callsinnewcontext("shift_focus", MystiqueX) focus_mask True
+
 screen Inventory_screen:
     frame:
         minimum (300, 0) pos (0.83, 0.125)

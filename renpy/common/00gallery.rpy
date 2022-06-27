@@ -1,4 +1,4 @@
-﻿# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+﻿# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -41,6 +41,7 @@ init -1500 python:
 
         def check(self, all_prior):
             for i in self.images:
+
                 if not renpy.seen_image(i):
                     return False
 
@@ -48,7 +49,10 @@ init -1500 python:
 
 
     class __GalleryImage(object):
-        def __init__(self, gallery, displayables):
+
+        show_properties = None
+
+        def __init__(self, gallery, displayables, **properties):
 
             # The gallery object we belong to.
             self.gallery = gallery
@@ -63,6 +67,7 @@ init -1500 python:
             # to not apply a transform.
             self.transforms = [ None ] * len(displayables)
 
+            self.show_properties, = renpy.split_properties(properties, "show_")
 
         def check_unlock(self, all_prior):
             """
@@ -92,9 +97,11 @@ init -1500 python:
                 else:
                     d = config.default_transform(d)
 
+                d = renpy.display.layout.AdjustTimes(d, None, None)
+
                 displayables.append(d)
 
-            renpy.show_screen("_gallery", locked=locked, index=index + 1, count=count, displayables=displayables, gallery=self.gallery)
+            renpy.show_screen(self.gallery.image_screen, locked=locked, index=index + 1, count=count, displayables=displayables, gallery=self.gallery, **self.show_properties)
 
             return ui.interact()
 
@@ -133,6 +140,7 @@ init -1500 python:
         def get_selected(self):
             return self.gallery.slideshow
 
+
     @renpy.pure
     class __GalleryAction(Action, FieldEquality):
 
@@ -145,6 +153,7 @@ init -1500 python:
 
         def __call__(self):
             renpy.invoke_in_new_context(self.gallery.show, self.index)
+
 
     class Gallery(object):
         """
@@ -181,7 +190,7 @@ init -1500 python:
 
             To customize the look of the navigation, you may override the
             gallery_navigation screen. The default screen is defined in
-            common/00gallery.rpy
+            renpy/common/00gallery.rpy
 
         .. attribute:: span_buttons
 
@@ -191,6 +200,27 @@ init -1500 python:
 
             The time it will take for the gallery to advance between images
             in slideshow mode.
+
+        .. attribute:: image_screen = "_gallery"
+
+            The screen that is used to show individual images in this gallery.
+            This screen is supplied the following keyword arguments:
+
+            `locked`
+                True if the image is locked.
+            `displayables`
+                A list of transformed displayables that should be shown to the user.
+            `index`
+                A 1-based index of the image being shown.
+            `count`
+                The number of images attached to the current button.
+            `gallery`
+                The image gallery object.
+
+            Additional arguments may be supplied by prefixing them with
+            `show_` in calls to Gallery.image and Gallery.unlock image.
+
+            The default screen is defined at the bottom of renpy/common/00gallery.rpy.
         """
 
         transition = None
@@ -199,6 +229,8 @@ init -1500 python:
         idle_border = None
 
         locked_button = None
+
+        image_screen = "_gallery"
 
         def __init__(self):
 
@@ -221,6 +253,10 @@ init -1500 python:
 
             self.slideshow_delay = 5
 
+            self.slideshow = False
+
+            self.image_screen = "_gallery"
+
         def button(self, name):
             """
             :doc: gallery method
@@ -238,15 +274,20 @@ init -1500 python:
             self.button_list.append(button)
             self.button_ = button
 
-        def image(self, *displayables):
+        def image(self, *displayables, **properties):
             """
             :doc: gallery method
+            :name: image
 
             Adds a new image to the current button, where an image consists
             of one or more displayables.
+
+            Properties beginning with `show_` have that prefix stripped off,
+            and are passed to the gallery.image_screen screen as additional
+            keyword arguments.
             """
 
-            self.image_ = __GalleryImage(self, displayables)
+            self.image_ = __GalleryImage(self, displayables, **properties)
             self.button_.images.append(self.image_)
             self.unlockable = self.image_
 
@@ -284,7 +325,7 @@ init -1500 python:
             A condition that is satisfied when an expression evaluates to true.
 
             `expression`
-                A string giving a python expression.
+                A string giving a Python expression.
             """
 
             if not isinstance(expression, basestring):
@@ -302,18 +343,19 @@ init -1500 python:
 
             self.unlockable.conditions.append(__GalleryAllPriorCondition())
 
-        def unlock_image(self, *images):
+        def unlock_image(self, *images, **properties):
             """
             :doc: gallery method
 
             A convenience method that is equivalent to calling image and unlock
-            with the same parameters. This will cause an image to be displayed
+            with the same parameters. (Keyword arguments beginning with ``show_`` are
+            only passed to image.) This will cause an image to be displayed
             if it has been seen before.
 
             The images should be specified as strings giving image names.
             """
 
-            self.image(*images)
+            self.image(*images, **properties)
             self.unlock(*images)
 
         def Action(self, name):
@@ -334,7 +376,7 @@ init -1500 python:
             else:
                 return None
 
-        def make_button(self, name, unlocked, locked=None, hover_border=None, idle_border=None, **properties):
+        def make_button(self, name, unlocked, locked=None, hover_border=None, idle_border=None, style=None, **properties):
             """
             :doc: gallery method
 
@@ -363,6 +405,11 @@ init -1500 python:
                 it is unlocked but unfocused. If None, the idle_border
                 field of the gallery object is used.
 
+            `style`
+                The style the button inherits from. When None, defaults
+                to the "empty" style, so as not to inherit borders and
+                so on.
+
             Additional keyword arguments become style properties of the
             created button object.
             """
@@ -378,7 +425,14 @@ init -1500 python:
             if idle_border is None:
                 idle_border = self.idle_border
 
-            return Button(action=action, child=unlocked, insensitive_child=locked, hover_foreground=hover_border, idle_foreground=idle_border, **properties)
+            if style is None:
+
+                if (config.script_version is not None) and (config.script_version <= (7, 0, 0)):
+                    style = "button"
+                else:
+                    style = "empty"
+
+            return Button(action=action, child=unlocked, insensitive_child=locked, hover_foreground=hover_border, idle_foreground=idle_border, style=style, **properties)
 
         def get_fraction(self, name, format="{seen}/{total}"):
             """
@@ -388,7 +442,7 @@ init -1500 python:
             named `name`.
 
             `format`
-                A python format string that's used to format the numbers. This has three values that
+                A Python format string that's used to format the numbers. This has three values that
                 can be substituted in:
 
                 {seen}
@@ -566,7 +620,7 @@ init -1500:
     #     The number of images attached to the current button.
     # gallery
     #     The image gallery object.
-    screen _gallery:
+    screen _gallery(locked, displayables, index, count, gallery, **properties):
 
         if locked:
             add "#000"
@@ -581,9 +635,9 @@ init -1500:
         key "game_menu" action gallery.Return()
 
         if gallery.navigation:
-            use gallery_navigation
+            use gallery_navigation(gallery=gallery)
 
-    screen gallery_navigation:
+    screen gallery_navigation(gallery):
         hbox:
             spacing 20
 

@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -19,11 +19,13 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-from __future__ import absolute_import, division, print_function
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
 
 import renpy
 import json
-import io
 
 
 def merge_strings():
@@ -47,7 +49,7 @@ def merge_strings():
     if language not in renpy.game.script.translator.strings:  # @UndefinedVariable
         raise Exception("Language %r does not have any translations." % language)
 
-    with io.open(args.source, "r", encoding="utf-8") as f:
+    with open(args.source, "r", encoding="utf-8") as f:
         data = json.loads(f.read())
 
     if args.reverse:
@@ -72,6 +74,9 @@ def merge_strings():
         if k not in data:
             continue
 
+        if k not in st.translation_loc:
+            continue
+
         new = data[k]
         quoted = renpy.translation.quote_unicode(new)
         code = u'new "{}"'.format(quoted)
@@ -81,5 +86,6 @@ def merge_strings():
         renpy.scriptedit.remove_line(filename, linenumber + 1)
 
     return False
+
 
 renpy.arguments.register_command("merge_strings", merge_strings)

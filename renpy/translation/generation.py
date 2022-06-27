@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -19,61 +19,23 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-from __future__ import print_function
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
 
-import renpy.translation
 
 import re
 import os
 import time
-import io
-import codecs
 import collections
 import shutil
 
+import renpy
 from renpy.translation import quote_unicode
+from renpy.parser import elide_filename
 
 ################################################################################
 # Translation Generation
 ################################################################################
-
-STRING_RE = r"""(?x)
-\b__?\s*\(\s*[uU]?(
-\"\"\"(?:\\.|\"{1,2}|[^\\"])*?\"\"\"
-|'''(?:\\.|\'{1,2}|[^\\'])*?'''
-|"(?:\\.|[^\\"])*"
-|'(?:\\.|[^\\'])*'
-)\s*\)
-"""
-
-
-def scan_strings(filename):
-    """
-    Scans `filename`, a file containing Ren'Py script, for translatable
-    strings.
-
-    Generates a list of (line, string) tuples.
-    """
-
-    rv = [ ]
-
-    for line, s in renpy.game.script.translator.additional_strings[filename]:  # @UndefinedVariable
-        rv.append((line, s))
-
-    line = 1
-
-    for _filename, lineno, text in renpy.parser.list_logical_lines(filename):
-
-        for m in re.finditer(STRING_RE, text):
-
-            s = m.group(1)
-            if s is not None:
-                s = s.strip()
-                s = "u" + s
-                s = eval(s)
-                rv.append((lineno, s))
-
-    return rv
 
 
 def scan_comments(filename):
@@ -86,7 +48,7 @@ def scan_comments(filename):
     comment = [ ]
     start = 0
 
-    with codecs.open(filename, "r", "utf-8") as f:
+    with open(filename, "r", encoding="utf-8") as f:
         lines = [ i.rstrip() for i in f.read().replace(u"\ufeff", "").split('\n') ]
 
     for i, l in enumerate(lines):
@@ -133,14 +95,14 @@ def open_tl_file(fn):
 
         try:
             os.makedirs(dn)
-        except:
+        except Exception:
             pass
 
-        f = io.open(fn, "a", encoding="utf-8")
+        f = open(fn, "a", encoding="utf-8")
         f.write(u"\ufeff")
 
     else:
-        f = io.open(fn, "a", encoding="utf-8")
+        f = open(fn, "a", encoding="utf-8")
 
     if todo:
         f.write(u"# TO" + "DO: Translation updated at {}\n".format(time.strftime("%Y-%m-%d %H:%M")))
@@ -166,7 +128,7 @@ def shorten_filename(filename):
     if the filename is in the common directory.
     """
 
-    commondir = os.path.normpath(renpy.config.commondir)
+    commondir = os.path.normpath(renpy.config.commondir) # type: ignore
     gamedir = os.path.normpath(renpy.config.gamedir)
 
     if filename.startswith(commondir):
@@ -184,7 +146,7 @@ def shorten_filename(filename):
     return fn, common
 
 
-def write_translates(filename, language, filter):  # @ReservedAssignment
+def write_translates(filename, language, filter): # @ReservedAssignment
 
     fn, common = shorten_filename(filename)
 
@@ -192,7 +154,7 @@ def write_translates(filename, language, filter):  # @ReservedAssignment
     if common:
         return
 
-    tl_filename = os.path.join(renpy.config.gamedir, renpy.config.tl_directory, language, fn)
+    tl_filename = os.path.join(renpy.config.gamedir, renpy.config.tl_directory, language, fn) # type: ignore
 
     if tl_filename[-1] == "m":
         tl_filename = tl_filename[:-1]
@@ -206,6 +168,10 @@ def write_translates(filename, language, filter):  # @ReservedAssignment
 
         if (t.identifier, language) in translator.language_translates:
             continue
+
+        if hasattr(t, "alternate"):
+            if (t.alternate, language) in translator.language_translates:
+                continue
 
         f = open_tl_file(tl_filename)
 
@@ -241,15 +207,15 @@ def translation_filename(s):
     return filename
 
 
-def write_strings(language, filter, min_priority, max_priority, common_only):  # @ReservedAssignment
+def write_strings(language, filter, min_priority, max_priority, common_only): # @ReservedAssignment
     """
     Writes strings to the file.
     """
 
     if language == "None":
-        stl = renpy.game.script.translator.strings[None]  # @UndefinedVariable
+        stl = renpy.game.script.translator.strings[None] # @UndefinedVariable
     else:
-        stl = renpy.game.script.translator.strings[language]  # @UndefinedVariable
+        stl = renpy.game.script.translator.strings[language] # @UndefinedVariable
 
     # If this function changes, count_missing may also need to
     # change.
@@ -287,7 +253,7 @@ def write_strings(language, filter, min_priority, max_priority, common_only):  #
         for s in sl:
             text = filter(s.text)
 
-            f.write(u"    # {}:{}\n".format(s.elided, s.line))
+            f.write(u"    # {}:{}\n".format(elide_filename(s.filename), s.line))
             f.write(u"    old \"{}\"\n".format(quote_unicode(s.text)))
             f.write(u"    new \"{}\"\n".format(quote_unicode(text)))
             f.write(u"\n")
@@ -301,7 +267,26 @@ def empty_filter(s):
     return ""
 
 
-def generic_filter(s, transform):
+def generic_filter(s, function):
+    """
+    :doc: text_utility
+
+    Transforms `s`, while leaving text tags and interpolation the same.
+
+    `function`
+        A function that is called with strings corresponding to runs of
+        text, and should return a second string that replaces that run
+        of text.
+
+    ::
+
+        init python:
+            def upper(s):
+                return s.upper()
+
+        $ upper_string = renpy.transform_text("{b}Not Upper{/b}", upper)
+
+    """
 
     def remove_special(s, start, end, process):
         specials = 0
@@ -348,7 +333,7 @@ def generic_filter(s, transform):
         return rv
 
     def remove_braces(s):
-        return remove_special(s, "{", "}", transform)
+        return remove_special(s, "{", "}", function)
 
     return remove_special(s, "[", "]", remove_braces)
 
@@ -357,7 +342,7 @@ def rot13_transform(s):
 
     ROT13 = { }
 
-    for i, j in zip("ABCDEFGHIJKLM", "NMOPQRSTUVWYZ"):
+    for i, j in zip("ABCDEFGHIJKLM", "NOPQRSTUVWXYZ"):
         ROT13[i] = j
         ROT13[j] = i
 
@@ -398,6 +383,9 @@ def piglatin_transform(s):
 
 
 def piglatin_filter(s):
+    if s == "{#language name and font}":
+        return "Igpay Atinlay"
+
     return generic_filter(s, piglatin_transform)
 
 
@@ -446,7 +434,7 @@ def count_missing(language, min_priority, max_priority, common_only):
 
     missing_strings = 0
 
-    stl = renpy.game.script.translator.strings[language]  # @UndefinedVariable
+    stl = renpy.game.script.translator.strings[language] # @UndefinedVariable
 
     strings = renpy.translation.scanstrings.scan(min_priority, max_priority, common_only)
 
@@ -502,13 +490,13 @@ def translate_command():
         return False
 
     if args.rot13:
-        filter = rot13_filter  # @ReservedAssignment
+        filter = rot13_filter # @ReservedAssignment
     elif args.piglatin:
-        filter = piglatin_filter  # @ReservedAssignment
+        filter = piglatin_filter # @ReservedAssignment
     elif args.empty:
-        filter = empty_filter  # @ReservedAssignment
+        filter = empty_filter # @ReservedAssignment
     else:
-        filter = null_filter  # @ReservedAssignment
+        filter = null_filter # @ReservedAssignment
 
     if not args.strings_only:
         for filename in translate_list_files():

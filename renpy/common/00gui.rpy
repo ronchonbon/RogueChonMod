@@ -1,4 +1,4 @@
-﻿# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+﻿# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -19,14 +19,17 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-init -1100 python in gui:
-    from store import config, layout, _preferences, Frame, Null
+init -1150 python in gui:
+    from store import config, layout, _preferences, Frame, Null, persistent, Action, DictEquality
+    import math
 
     config.translate_clean_stores.append("gui")
 
+    config.gui_text_position_properties = True
+
     _null = Null()
 
-    def init(width, height):
+    def init(width, height, fov=75):
         """
         :doc: gui
 
@@ -37,10 +40,20 @@ init -1100 python in gui:
 
         `height`
             The height of the default window.
+
+        `fov`
+            The field of view of the 3d stage.
         """
+
+        if (not renpy.is_init_phase()) and config.developer:
+            raise Exception("gui.init may only be called during the init phase.")
 
         config.screen_width = width
         config.screen_height = height
+
+        z = (width / 2) / math.tan(math.radians(fov / 2))
+
+        config.perspective = (100.0, z, 100000.0)
 
         layout.defaults()
 
@@ -58,6 +71,178 @@ init -1100 python in gui:
 
         from store import build
         build.include_old_themes = False
+
+        if persistent._gui_preference is None:
+            persistent._gui_preference = { }
+
+        if persistent._gui_preference_default is None:
+            persistent._gui_preference_default = { }
+
+    # A list of variant, function tuples.
+    variant_functions = [ ]
+
+    def variant(f, variant=None):
+        """
+        :doc: gui
+
+        A decorator that causes a function to be called when the gui is first
+        initialized, and again each time the gui is rebuilt.  This is intended
+        to be used as a function decorator,  of the form::
+
+            @gui.variant
+            def small():
+                gui.text_size = 30
+                # ...
+
+        It can also be called with `f` (a function) and `variant` (a string),
+        giving the variant name.
+        """
+
+        if variant is None:
+            variant = f.__name__
+
+        variant_functions.append((variant, f))
+
+        if renpy.variant(variant):
+            f()
+
+        return f
+
+    def rebuild():
+        """
+        :doc: gui
+
+        Rebuilds the GUI.
+
+        Note: This is a very slow function.
+        """
+
+        global variant_functions
+        old_variant_functions = variant_functions
+
+        renpy.ast.redefine([ "store.gui" ])
+
+        variant_functions = old_variant_functions
+
+        for variant, f in variant_functions:
+            if renpy.variant(variant):
+                f()
+
+        for i in config.translate_clean_stores:
+            renpy.python.clean_store_backup.backup_one("store." + i)
+
+        # Do the same sort of reset we'd do when changing language, without
+        # actually changing the language.
+        renpy.change_language(_preferences.language, force=True)
+
+    not_set = object()
+
+    def preference(name, default=not_set):
+        """
+        :doc: gui_preference
+
+        This function returns the value of the gui preference with
+        `name`.
+
+        `default`
+            If given, this value becomes the default value of the gui
+            preference. The default value should be given the first time
+            the preference is used.
+        """
+
+
+        prefs = persistent._gui_preference
+        defaults = persistent._gui_preference_default
+
+        if default is not not_set:
+            if (name not in defaults) or (defaults[name] != default):
+                prefs[name] = default
+                defaults[name] = default
+
+        return prefs[name]
+
+
+    class SetPreference(Action, DictEquality):
+        """
+        :doc: gui_preference
+
+        This Action sets the gui preference with `name` to `value`.
+
+        `rebuild`
+            If true, the default, :func:`gui.rebuild` is called to make
+            the changes take effect. This should generally be true, except
+            in the case of multiple gui.SetPreference actions, in which case
+            it should be False in all but the last one.
+
+        This is a very slow action, and probably not suitable for use
+        when a button is hovered.
+        """
+
+        def __init__(self, name, value, rebuild=True):
+            self.name = name
+            self.value = value
+            self.rebuild = rebuild
+
+        def __call__(self):
+            prefs = persistent._gui_preference
+
+            prefs[self.name] = self.value
+
+            if self.rebuild:
+                rebuild()
+
+        def get_selected(self):
+            prefs = persistent._gui_preference
+            return prefs.get(self.name, not_set) == self.value
+
+
+    class TogglePreference(Action, DictEquality):
+        """
+        :doc: gui_preference
+
+        This Action toggles the gui preference with `name` between
+        value `a` and value `b`. It is selected if the value is equal
+        to `a`.
+
+        `rebuild`
+            If true, the default, :func:`gui.rebuild` is called to make
+            the changes take effect. This should generally be true, except
+            in the case of multiple gui.SetPreference actions, in which case
+            it should be False in all but the last one.
+
+        This is a very slow action, and probably not suitable for use
+        when a button is hovered.
+        """
+
+        def __init__(self, name, a, b, rebuild=True):
+            self.name = name
+            self.a = a
+            self.b = b
+            self.rebuild = rebuild
+
+        def __call__(self):
+            prefs = persistent._gui_preference
+
+            if prefs[self.name] == self.a:
+                prefs[self.name] = self.b
+            else:
+                prefs[self.name] = self.a
+
+            if self.rebuild:
+                rebuild()
+
+        def get_selected(self):
+            prefs = persistent._gui_preference
+            return prefs.get(self.name, not_set) == self.a
+
+
+
+    renpy.pure("gui.preference")
+    renpy.pure("gui.SetPreference")
+    renpy.pure("gui.TogglePreference")
+
+    # The extension used for auto-defined images.
+    button_image_extension = ".png"
 
     def button_properties(kind):
         """
@@ -113,9 +298,9 @@ init -1100 python in gui:
         backgrounds = [ ]
 
         if kind != "button":
-            backgrounds.append("gui/button/" + kind[:-7] + "_[prefix_]background.png")
+            backgrounds.append("gui/button/" + kind[:-7] + "_[prefix_]background" + button_image_extension)
 
-        backgrounds.append("gui/button/[prefix_]background.png")
+        backgrounds.append("gui/button/[prefix_]background" + button_image_extension)
 
         if renpy.variant("small"):
             backgrounds = [ i.replace("gui/button", "gui/phone/button") for i in backgrounds ] + backgrounds
@@ -141,6 +326,7 @@ init -1100 python in gui:
 
     def text_properties(kind=None, accent=False):
         """
+        :name: gui.text_properties
         :doc: gui
 
         Given a `kind` of button, returns a dictionary giving standard style
@@ -182,7 +368,10 @@ init -1100 python in gui:
         selected_color
             To gui.kind_text_selected_color, if it exists.
 
-        All other :ref:`text style properties <text-style-properties>` are also available. For
+        All other :ref:`text style properties <text-style-properties>`
+        are available. When `kind` is not None,
+        :ref:`position style properties <position-style-properties>`
+        are also available. For
         example, gui.kind_text_outlines sets the outlines style property,
         gui.kind_text_kerning sets kerning, and so on.
         """
@@ -218,8 +407,14 @@ init -1100 python in gui:
                 if (xalign > 0) and (xalign < 1):
                     rv["layout"] = "subtitle"
 
+        if (kind is not None) and config.gui_text_position_properties:
+            property_names = renpy.sl2.slproperties.text_property_names + renpy.sl2.slproperties.position_property_names
+        else:
+            property_names = renpy.sl2.slproperties.text_property_names
+
         for prefix in renpy.sl2.slparser.STYLE_PREFIXES:
-            for property in renpy.sl2.slproperties.text_property_names:
+            for property in property_names:
+
                 prop = prefix + property
 
                 text_prop = "text_" + prop
@@ -290,7 +485,7 @@ init -1100 python in gui:
 
                 try:
                     os.makedirs(dn, 0o777)
-                except:
+                except Exception:
                     pass
 
                 if os.path.exists(fn):
@@ -308,12 +503,7 @@ init -1100 python in gui:
                     if not gui._skip_backup:
                         os.rename(fn, bfn)
 
-                import cStringIO
-                sio = cStringIO.StringIO()
-                renpy.display.module.save_png(s, sio, 3)
-
-                with open(fn, "wb") as f:
-                    f.write(sio.getvalue())
+                pygame_sdl2.image.save(s, fn, 3)
 
             def fill(self, color=None):
                 if color is None:
@@ -325,6 +515,7 @@ init -1100 python in gui:
                 return self
 
             def fill_rect(self, rect, color=None):
+
                 if color is None:
                     color = gui.accent_color
 
@@ -357,18 +548,21 @@ init -1100 python in gui:
             height = scale(gui.button_height, 33)
 
         check_width = gui.check_button_borders.padding[0]
+        check_margin = scale(None, 3)
         check_rect = (
-            scale(None, 3),
+            check_margin,
             gui.check_button_borders.padding[1],
-            min(check_width, scale(None, 5)),
+            min(check_width - check_margin, scale(None, 5)),
             height - gui.check_button_borders.padding[1] - gui.check_button_borders.padding[3],
             )
 
         radio_width = gui.radio_button_borders.padding[0]
+        radio_margin = scale(None, 3)
+
         radio_rect = (
-            scale(None, 3),
+            radio_margin,
             gui.radio_button_borders.padding[1],
-            min(radio_width, scale(None, 5)),
+            min(radio_width - radio_margin, scale(None, 5)),
             height - gui.radio_button_borders.padding[1] - gui.radio_button_borders.padding[3],
             )
 
@@ -436,11 +630,3 @@ init -1100 python in gui:
         return False
 
     renpy.arguments.register_command("gui_images", _gui_images)
-
-
-
-
-
-
-
-

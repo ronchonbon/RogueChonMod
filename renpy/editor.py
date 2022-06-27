@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -18,6 +18,12 @@
 # LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
+
 
 import os
 import renpy
@@ -66,7 +72,7 @@ class Editor(object):
 
     def open(self, filename, line=None, **kwargs):  # @ReservedAssignment
         """
-        Ensures `path` is open in the editor. This may be called multiple
+        Ensures `filename` is open in the editor. This may be called multiple
         times per transaction.
 
         `line`
@@ -75,6 +81,14 @@ class Editor(object):
 
         The first open call in a transaction is somewhat special - that file
         should be given focus in a tabbed editor environment.
+        """
+
+    # This should be set to True if the editor supports projects.
+    has_projects = False
+
+    def open_project(self, directory):
+        """
+        Opens `directory` as a project in the editor.
         """
 
 
@@ -86,12 +100,12 @@ class SystemEditor(Editor):
 
         try:
             if renpy.windows:
-                os.startfile(filename)  # @UndefinedVariable
+                os.startfile(filename) # type: ignore
             elif renpy.macintosh:
-                subprocess.call([ "open", filename ])  # @UndefinedVariable
+                subprocess.call([ "open", filename ])
             elif renpy.linux:
-                subprocess.call([ "xdg-open", filename ])  # @UndefinedVariable
-        except:
+                subprocess.call([ "xdg-open", filename ])
+        except Exception:
             traceback.print_exc()
 
 
@@ -120,10 +134,10 @@ def init():
     code = compile(source, path, "exec")
 
     scope = { "__file__" : path }
-    exec code in scope, scope
+    exec(code, scope, scope)
 
     if "Editor" in scope:
-        editor = scope["Editor"]()
+        editor = scope["Editor"]() # type: ignore
         return
 
     raise Exception("{0} did not define an Editor class.".format(path))
@@ -157,6 +171,6 @@ def launch_editor(filenames, line=1, transient=False):
 
         return True
 
-    except:
+    except Exception:
         traceback.print_exc()
         return False

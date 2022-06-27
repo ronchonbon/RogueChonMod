@@ -1,4 +1,4 @@
-﻿# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+﻿# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -123,6 +123,8 @@ init -1500 python in iap:
             self.store.clearSKUs()
 
             for p in products.values():
+                print("Adding sku:", self.identifier(p))
+
                 self.store.addSKU(self.identifier(p))
 
         def get_store_name(self):
@@ -182,7 +184,7 @@ init -1500 python in iap:
         def init(self):
             restore(False)
 
-    if renpy.ios:
+    if renpy.renpy.ios:
         import pyobjus
         IAPHelper = pyobjus.autoclass(b"IAPHelper")
         NSMutableArray = pyobjus.autoclass(b"NSMutableArray")
@@ -236,8 +238,8 @@ init -1500 python in iap:
                 if interact:
                     renpy.pause(.1)
                 else:
-                    import pygame
-                    pygame.event.pump()
+                    import pygame_sdl2
+                    pygame_sdl2.event.pump()
                     time.sleep(.1)
 
         def validate_products(self, interact):
@@ -285,7 +287,9 @@ init -1500 python in iap:
             rv = self.helper.formatPrice_(identifier)
 
             if rv is not None:
-                rv = rv.UTF8String().decode("utf-8")
+                rv = rv.UTF8String()
+                if isinstance(rv, bytes):
+                    rv = rv.decode("utf-8")
 
             return rv
 
@@ -566,10 +570,17 @@ init -1500 python in iap:
 
     def init():
         """
-        Called to initialize the IAP system.
+        :doc: iap
+
+        Initialize iap. This should be called after all calls to iap.register(),
+        but before any other iap function. If not called explicitly, this is
+        automatically called at the end of the initialization phase.
         """
 
         global backend
+
+        if not isinstance(backend, NoneBackend):
+            return
 
         if persistent._iap_purchases is None:
             persistent._iap_purchases = { }
@@ -583,9 +594,12 @@ init -1500 python in iap:
                 persistent._iap_purchases[p.identifier] = False
 
         # Set up the back end.
-        if renpy.android:
-            backend = init_android()
-        elif renpy.ios:
+        if renpy.renpy.android:
+            try:
+                backend = init_android()
+            except Exception:
+                backend = NoneBackend()
+        elif renpy.renpy.ios:
             backend = IOSBackend()
         else:
             backend = NoneBackend()

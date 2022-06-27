@@ -883,21 +883,13 @@ label close_launch(GirlA, GirlB = None):
                 $ x_position = 0.54
             else:
                 $ x_position = 0.5
-
-            $ temp_Girls[0].sprite_layer = 6
-
-            $ x_zoom = -1.3
         elif GirlB == temp_Girls[0]:
             if temp_Girls[0] == EmmaX or LauraX:
                 $ x_position = 0.68
             else:
                 $ x_position = 0.7
 
-            $ temp_Girls[0].sprite_layer = 5
-
-            $ x_zoom = 1.3
-
-        call show_Girl(temp_Girls[0], x_position = x_position, y_position = 0.15, color_transform = close_launch_animation(x_zoom))
+        call show_Girl(temp_Girls[0], x_position = x_position, animation_transform = close_launch_animation(1.3))
 
         $ temp_Girls.remove(temp_Girls[0])
 
@@ -931,27 +923,13 @@ label lesbian_launch(Girl):
                 $ x_position = 550
             else:
                 $ x_position = 500
-
-            $ temp_Girls[0].sprite_layer = 6
-
-            $ x_zoom = -1.3
         else:
             if temp_Girls[0] == EmmaX or LauraX:
                 $ x_position = 700
             else:
                 $ x_position = 715
 
-            if temp_Girls[0] == KittyX:
-                if RogueX in (Partner,Girl):
-                    $ KittyX.sprite_layer = 5
-                else:
-                    $ KittyX.sprite_layer = 1
-            else:
-                $ temp_Girls[0].sprite_layer = 5
-
-            $ x_zoom = 1.3
-
-        call show_Girl(temp_Girls[0], x_position = x_position, y_position = 0.15, color_transform = close_launch_animation(x_zoom))
+        call show_Girl(temp_Girls[0], x_position = x_position, color_transform = close_launch_animation(1.3))
 
         $ temp_Girls.remove(temp_Girls[0])
 

@@ -1,4 +1,4 @@
-﻿# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+﻿# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -22,12 +22,15 @@
 # This is kind of a catch-all file for things that are defined in the library,
 # but don't merit their own files.
 
-init -9999:
+init 9999:
     # Re-run the errorhandling setup, so we can adjust the styles to the new size
     # of the screen.
     call _errorhandling
 
 init -1700 python:
+
+    # Should we debug the equality operations?
+    config.debug_equality = False
 
     class DictEquality(object):
         """
@@ -36,13 +39,24 @@ init -1700 python:
         """
 
         def __eq__(self, o):
-            if self is o:
-                return True
 
-            if _type(self) is _type(o):
-                return (self.__dict__ == o.__dict__)
+            try:
+                if self is o:
+                    return True
 
-            return False
+                if _type(self) is _type(o):
+                    return (self.__dict__ == o.__dict__)
+
+                return False
+
+            except Exception:
+                if config.debug_equality:
+                    raise
+
+                return False
+
+        def __ne__(self, o):
+            return not (self == o)
 
     class FieldEquality(object):
         """
@@ -55,21 +69,35 @@ init -1700 python:
         identity_fields = [ ]
 
         def __eq__(self, o):
-            if self is o:
+
+            try:
+
+                if self is o:
+                    return True
+
+                if _type(self) is not _type(o):
+                    return False
+
+                for k in self.equality_fields:
+                    if self.__dict__[k] != o.__dict__[k]:
+                        return False
+
+                for k in self.identity_fields:
+                    if self.__dict__[k] is not o.__dict__[k]:
+                        return False
+
                 return True
 
-            if _type(self) is not _type(o):
+            except Exception:
+
+                if config.debug_equality:
+                    raise
+
                 return False
 
-            for k in self.equality_fields:
-                if self.__dict__[k] != o.__dict__[k]:
-                    return False
+        def __ne__(self, o):
+            return not (self == o)
 
-            for k in self.identity_fields:
-                if self.__dict__[k] is not o.__dict__[k]:
-                    return False
-
-            return True
 
 init -1700 python:
 
@@ -92,9 +120,25 @@ init -1700 python:
     def _default_empty_window():
 
         try:
-            who = _last_say_who
-            who = renpy.eval_who(who)
-        except:
+            scry = renpy.scry()
+
+            # When running in a say statement or menu-with-caption, scry for
+            # the next say statement, and get the window from that.
+            if scry.say or scry.menu_with_caption:
+                who = None
+
+                for i in range(10):
+                    if scry.say:
+                        who = scry.who
+                        break
+
+                    scry = scry.next()
+
+            else:
+                who = _last_say_who
+                who = renpy.eval_who(who)
+
+        except Exception:
             who = None
 
         if who is None:
@@ -102,9 +146,9 @@ init -1700 python:
 
         if isinstance(who, NVLCharacter):
             nvl_show_core()
-        elif isinstance(store.narrator, ADVCharacter):
+        elif not isinstance(store.narrator, NVLCharacter):
             store.narrator.empty_window()
-        elif isinstance(store._narrator, ADVCharacter):
+        else:
             store._narrator.empty_window()
 
     config.empty_window = _default_empty_window
@@ -130,30 +174,14 @@ init -1700 python:
         what = _last_say_what + config.extend_interjection + _last_raw_what
 
         args = args + _last_say_args
-        kw = dict(kwargs)
-        kw.update(_last_say_kwargs)
+        kw = dict(_last_say_kwargs)
+        kw.update(kwargs)
+        kw["interact"] = interact and kw.get("interact", True)
 
-        renpy.exports.say(who, what, interact=interact, *args, **kw)
+        renpy.exports.say(who, what, *args, **kw)
         store._last_say_what = what
 
     extend.record_say = False
-
-
-    ##########################################################################
-    # Self-voicing
-
-    # Strings used internally in Ren'Py.
-    _("Self-voicing disabled.")
-    _("Clipboard voicing enabled. ")
-    _("Self-voicing enabled. ")
-
-    def sv(what, interact=True):
-        """
-        Uses the narrator to speak `what` iff self-voicing is enabled.
-        """
-
-        if _preferences.self_voicing:
-            return narrator(what, interact=interact)
 
 
     ##########################################################################
@@ -217,6 +245,9 @@ init -1700 python:
     # Prediction of screens.
     def _predict_screens():
 
+        for i in config.overlay_screens:
+            renpy.predict_screen(i)
+
         s = _game_menu_screen
 
         if s is None:
@@ -232,7 +263,7 @@ init -1700 python:
                 renpy.predict_screen(s)
                 return
 
-    config.predict_callbacks.append(_predict_screens)
+    config.expensive_predict_callbacks.append(_predict_screens)
 
 
     ##########################################################################
@@ -245,7 +276,7 @@ init -1700 python:
         who = Character(who, kind=name_only)
         try:
             who.predict(what)
-        except:
+        except Exception:
             pass
 
     def say(who, what, interact=True, *args, **kwargs):
@@ -281,7 +312,92 @@ init -1000 python:
 
     # Record the builtins.
     renpy.lint.renpy_builtins = set(globals())
-    renpy.lint.renpy_builtins.remove('menu')
+
+    for i in """
+adv
+alt
+anim
+blinds
+center
+default
+default_transition
+dissolve
+ease
+easeinbottom
+easeinleft
+easeinright
+easeintop
+easeoutbottom
+easeoutleft
+easeoutright
+easeouttop
+fade
+hpunch
+irisin
+irisout
+left
+menu
+mouse_visible
+move
+moveinbottom
+moveinleft
+moveinright
+moveintop
+moveoutbottom
+moveoutleft
+moveoutright
+moveouttop
+name_only
+nvl
+nvl_variant
+offscreenleft
+offscreenright
+pixellate
+pushdown
+pushleft
+pushright
+pushup
+right
+save_name
+slideawaydown
+slideawayleft
+slideawayright
+slideawayup
+slidedown
+slideleft
+slideright
+slideup
+squares
+suppress_overlay
+sv
+top
+topleft
+topright
+truecenter
+vpunch
+wipedown
+wipeleft
+wiperight
+wipeup
+zoomin
+zoominout
+zoomout
+
+_autosave
+_confirm_quit
+_dismiss_pause
+_game_menu_screen
+_ignore_action
+_quit_slot
+_rollback
+_skipping
+_window_subtitle
+""".split():
+
+        # _history, history_list, and _version are set later, so aren't included.
+        renpy.lint.renpy_builtins.remove(i)
+
+    del i
 
 # After init, make some changes based on if config.developer is True.
 init 1700 python hide:
@@ -306,9 +422,9 @@ init 1700 python hide:
 
 
 
-# Used by renpy.return() to return.
+# Used by renpy.return_statement() to return.
 label _renpy_return:
-    return
+    return _return
 
 # Entry point for the developer screen. The rest of it is loaded from
 # _developer.rpym

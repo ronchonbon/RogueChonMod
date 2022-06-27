@@ -1,4 +1,4 @@
-﻿# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+﻿# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -24,7 +24,7 @@
 
 init -1800 python:
 
-    # The style hierarchy root has to be initialized through python
+    # The style hierarchy root has to be initialized through Python
     # code.
     style.default = Style(None)
     style.empty = Style(None)
@@ -150,6 +150,7 @@ init -1800:
         drop_shadow None
         drop_shadow_color (0, 0, 0, 255)
         outlines [ ]
+        outline_scaling "linear"
         minwidth 0
         text_align 0
         justify False
@@ -165,6 +166,7 @@ init -1800:
         slow_cps_multiplier 1.0
         slow_abortable False
         ruby_style style.ruby_text
+        altruby_style style.altruby_text
         # hyperlink_functions is set in 00defaults.rpy
         hinting "auto"
         adjust_spacing True
@@ -177,6 +179,7 @@ init -1800:
         ymargin 0
         xfill False
         yfill False
+        modal False
 
         # Size properties
         xminimum 0
@@ -192,6 +195,7 @@ init -1800:
         xoffset 0
         yoffset 0
         subpixel False
+        mipmap None
 
         # Sound properties
         activate_sound None
@@ -202,6 +206,7 @@ init -1800:
         first_spacing None
         box_layout None
         box_wrap False
+        box_wrap_spacing 0
         box_reverse False
         order_reverse False
         xfit False
@@ -332,6 +337,10 @@ init -1800:
         size 22
         xoffset 0
 
+    style altruby_text:
+        size 22
+        xoffset 0
+
     # Bars
 
     style vbar:
@@ -353,7 +362,7 @@ init -1800:
         yfill False
 
     style drag:
-        focus_mask True
+        focus_mask None
 
     # Out-of-game menu root windows
 
@@ -437,4 +446,3 @@ init label _style_reset:
 # Older init code doesn't necessarily like defer styles.
 init 1001 python:
     config.defer_styles = False
-

@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -24,7 +24,12 @@
 # are None, at least to the point of making it through __init__. This is
 # so that prediction of images works.
 
-import renpy.display
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
+
+import renpy
 from renpy.display.render import render
 
 
@@ -34,6 +39,9 @@ class Transition(renpy.display.core.Displayable):
     dispatching.
     """
 
+    new_widget = None # type:renpy.display.core.Displayable|None
+    old_widget = None # type:renpy.display.core.Displayable|None
+
     def __init__(self, delay, **properties):
         super(Transition, self).__init__(**properties)
         self.delay = delay
@@ -42,12 +50,12 @@ class Transition(renpy.display.core.Displayable):
     def event(self, ev, x, y, st):
 
         if self.events or ev.type == renpy.display.core.TIMEEVENT:
-            return self.new_widget.event(ev, x, y, st)  # E1101
+            return self.new_widget.event(ev, x, y, st) # E1101
         else:
             return None
 
     def visit(self):
-        return [ self.new_widget, self.old_widget ]  # E1101
+        return [ self.new_widget, self.old_widget ] # E1101
 
 
 def null_render(d, width, height, st, at):
@@ -199,7 +207,7 @@ def Fade(out_time,
          ):
     """
     :doc: transition function
-    :args: (out_time, hold_time, in_time, color="#000")
+    :args: (out_time, hold_time, in_time, *, color="#000")
     :name: Fade
 
     Returns a transition that takes `out_time` seconds to fade to
@@ -298,6 +306,12 @@ class Pixellate(Transition):
         rv.operation = renpy.display.render.PIXELLATE
         rv.operation_parameter = 2 ** step
 
+        rv.mesh = True
+        rv.add_shader("renpy.texture")
+        rv.add_property("texture_scaling", "nearest_mipmap_nearest")
+        rv.add_property("anisotropic", False)
+        rv.add_uniform("u_lod_bias", step + 1)
+
         renpy.display.render.redraw(self, 0)
 
         return rv
@@ -306,7 +320,7 @@ class Pixellate(Transition):
 class Dissolve(Transition):
     """
     :doc: transition function
-    :args: (time, alpha=False, time_warp=None)
+    :args: (time, alpha=False, time_warp=None, **properties)
     :name: Dissolve
 
     Returns a transition that dissolves from the old scene to the new scene.
@@ -315,14 +329,17 @@ class Dissolve(Transition):
         The time the dissolve will take.
 
     `alpha`
-        If true, the dissolve will alpha-composite the result of the transition
-        with the screen. If false, the result of the transition will replace the
-        screen, which is more efficient.
+        Ignored.
 
     `time_warp`
         A function that adjusts the timeline. If not None, this should be a
         function that takes a fractional time between 0.0 and 1.0, and returns
         a number in the same range.
+
+    When the dissolve will be scaled to less than half its natural size, the
+    :propref:`mipmap` style property can be set to True. This will cause mipmaps
+    to be generated, which will make the dissolve consume more GPU resources,
+    but will reduce artifacts.
     """
 
     __version__ = 1
@@ -363,11 +380,25 @@ class Dissolve(Transition):
         width = min(top.width, bottom.width)
         height = min(top.height, bottom.height)
 
-        rv = renpy.display.render.Render(width, height, opaque=not self.alpha)
+        rv = renpy.display.render.Render(width, height)
 
         rv.operation = renpy.display.render.DISSOLVE
-        rv.operation_alpha = self.alpha
+        rv.operation_alpha = self.alpha or renpy.config.dissolve_force_alpha
         rv.operation_complete = complete
+
+        if renpy.display.render.models:
+
+            target = rv.get_size()
+
+            if top.get_size() != target:
+                top = top.subsurface((0, 0, width, height))
+            if bottom.get_size() != target:
+                bottom = bottom.subsurface((0, 0, width, height))
+
+            rv.mesh = True
+            rv.add_shader("renpy.dissolve")
+            rv.add_uniform("u_renpy_dissolve", complete)
+            rv.add_property("mipmap", renpy.config.mipmap_dissolves if (self.style.mipmap is None) else self.style.mipmap)
 
         rv.blit(bottom, (0, 0), focus=False, main=False)
         rv.blit(top, (0, 0), focus=True, main=True)
@@ -380,7 +411,7 @@ class Dissolve(Transition):
 class ImageDissolve(Transition):
     """
     :doc: transition function
-    :args: (image, time, ramplen=8, reverse=False, alpha=True, time_warp=None)
+    :args: (image, time, ramplen=8, reverse=False, alpha=True, time_warp=None, **properties)
     :name: ImageDissolve
 
     Returns a transition that dissolves the old scene into the new scene, using
@@ -388,9 +419,10 @@ class ImageDissolve(Transition):
     dissolve in first, and black pixels will dissolve in last.
 
     `image`
-        A control image to use. This must be either an image file or
-        image manipulator. The control image should be the size of
-        the scenes being dissolved.
+        A control image to use. If `config.gl2` is True, then this can be any displayable,
+        else it needs to be either an image file or an image manipulator. The control image
+        should be the size of the scenes being dissolved, and if `reverse=True`,
+        it should be fully opaque.
 
     `time`
         The time the dissolve will take.
@@ -402,12 +434,10 @@ class ImageDissolve(Transition):
         completed one step of dissolving in.
 
     `reverse`
-        If true, black pixels will dissolve in before white pixels.
+        If True, black pixels will dissolve in before white pixels.
 
     `alpha`
-        If true, the dissolve will alpha-composite the result of the transition
-        with the screen. If false, the result of the transition will replace the
-        screen, which is more efficient.
+        Ignored.
 
     `time_warp`
         A function that adjusts the timeline. If not None, this should be a
@@ -419,6 +449,11 @@ class ImageDissolve(Transition):
         define circirisout = ImageDissolve("circiris.png", 1.0)
         define circirisin = ImageDissolve("circiris.png", 1.0, reverse=True)
         define circiristbigramp = ImageDissolve("circiris.png", 1.0, ramplen=256)
+
+    When the dissolve will be scaled to less than half its natural size, the
+    :propref:`mipmap` style property can be set to True. This will cause mipmaps
+    to be generated, which will make the dissolve consume more GPU resources,
+    but will reduce artifacts.
     """
 
     __version__ = 1
@@ -454,25 +489,39 @@ class ImageDissolve(Transition):
         self.alpha = alpha
         self.time_warp = time_warp
 
-        if not reverse:
-
-            # Copies red -> alpha
-            matrix = renpy.display.im.matrix(
-                0, 0, 0, 0, 1,
-                0, 0, 0, 0, 1,
-                0, 0, 0, 0, 1,
-                1, 0, 0, 0, 0)
+        if renpy.display.render.models:
+            if not reverse:
+                # Copies red -> alpha
+                matrix = renpy.display.matrix.Matrix([0, 0, 0, 0,
+                                                      0, 0, 0, 0,
+                                                      0, 0, 0, 0,
+                                                      1, 0, 0, 0, ])
+            else:
+                # Copies alpha-red -> alpha
+                matrix = renpy.display.matrix.Matrix([0, 0, 0, 0,
+                                                      0, 0, 0, 0,
+                                                      0, 0, 0, 0,
+                                                      -1, 0, 0, 1, ])
+                # asserts the displayable is not transparent at all
+                # just like InvertMatrix does
+            self.image = renpy.display.motion.Transform(image, matrixcolor=matrix)
 
         else:
-
-            # Copies 1-red -> alpha
-            matrix = renpy.display.im.matrix(
-                0, 0, 0, 0, 1,
-                0, 0, 0, 0, 1,
-                0, 0, 0, 0, 1,
-                - 1, 0, 0, 0, 1)
-
-        self.image = renpy.display.im.MatrixColor(image, matrix)
+            if not reverse:
+                # Copies red -> alpha
+                matrix = renpy.display.im.matrix(
+                    0, 0, 0, 0, 1,
+                    0, 0, 0, 0, 1,
+                    0, 0, 0, 0, 1,
+                    1, 0, 0, 0, 0)
+            else:
+                # Copies 1-red -> alpha
+                matrix = renpy.display.im.matrix(
+                    0, 0, 0, 0, 1,
+                    0, 0, 0, 0, 1,
+                    0, 0, 0, 0, 1,
+                    -1, 0, 0, 0, 1)
+            self.image = renpy.display.im.MatrixColor(image, matrix)
 
         if ramp is not None:
             ramplen = len(ramp)
@@ -499,7 +548,7 @@ class ImageDissolve(Transition):
         width = min(bottom.width, top.width, image.width)
         height = min(bottom.height, top.height, image.height)
 
-        rv = renpy.display.render.Render(width, height, opaque=not self.alpha)
+        rv = renpy.display.render.Render(width, height)
 
         complete = st / self.delay
 
@@ -507,9 +556,38 @@ class ImageDissolve(Transition):
             complete = self.time_warp(complete)
 
         rv.operation = renpy.display.render.IMAGEDISSOLVE
-        rv.operation_alpha = self.alpha
+        rv.operation_alpha = self.alpha or renpy.config.dissolve_force_alpha
         rv.operation_complete = complete
         rv.operation_parameter = self.ramplen
+
+        if renpy.display.render.models:
+
+            target = rv.get_size()
+
+            if image.get_size() != target:
+                image = image.subsurface((0, 0, width, height))
+            if top.get_size() != target:
+                top = top.subsurface((0, 0, width, height))
+            if bottom.get_size() != target:
+                bottom = bottom.subsurface((0, 0, width, height))
+
+            ramp = self.ramplen
+
+            # Prevent a DBZ if the user gives us a 0 ramp.
+            if ramp < 1:
+                ramp = 1
+
+            # Compute the offset to apply to the alpha.
+            start = -1.0
+            end = ramp / 256.0
+            offset = start + (end - start) * complete
+
+            rv.mesh = True
+
+            rv.add_shader("renpy.imagedissolve",)
+            rv.add_uniform("u_renpy_dissolve_offset", offset)
+            rv.add_uniform("u_renpy_dissolve_multiplier", 256.0 / ramp)
+            rv.add_property("mipmap", renpy.config.mipmap_dissolves if (self.style.mipmap is None) else self.style.mipmap)
 
         rv.blit(image, (0, 0), focus=False, main=False)
         rv.blit(bottom, (0, 0), focus=False, main=False)
@@ -523,7 +601,7 @@ class ImageDissolve(Transition):
 class AlphaDissolve(Transition):
     """
     :doc: transition function
-    :args: (control, delay=0.0, alpha=False, reverse=False)
+    :args: (control, delay=0.0, alpha=False, reverse=False, **properties)
 
     Returns a transition that uses a control displayable (almost always some
     sort of animated transform) to transition from one screen to another. The
@@ -537,14 +615,20 @@ class AlphaDissolve(Transition):
         The time the transition takes, before ending.
 
     `alpha`
-        If true, the image is composited with what's behind it. If false,
-        the default, the image is opaque and overwrites what's behind it.
+        Ignored.
 
     `reverse`
         If true, the alpha channel is reversed. Opaque areas are taken
         from the old image, while transparent areas are taken from the
         new image.
+
+    When the dissolve will be scaled to less than half its natural size, the
+    :propref:`mipmap` style property can be set to True. This will cause mipmaps
+    to be generated, which will make the dissolve consume more GPU resources,
+    but will reduce artifacts.
      """
+
+    mipmap = None
 
     def __init__(
             self,
@@ -587,12 +671,19 @@ class AlphaDissolve(Transition):
 
         control = render(self.control, width, height, st, at)
 
-        rv = renpy.display.render.Render(width, height, opaque=not self.alpha)
+        rv = renpy.display.render.Render(width, height)
 
         rv.operation = renpy.display.render.IMAGEDISSOLVE
-        rv.operation_alpha = self.alpha
+        rv.operation_alpha = self.alpha or renpy.config.dissolve_force_alpha
         rv.operation_complete = 256.0 / (256.0 + 256.0)
         rv.operation_parameter = 256
+
+        if renpy.display.render.models:
+            rv.mesh = True
+            rv.add_shader("renpy.imagedissolve",)
+            rv.add_uniform("u_renpy_dissolve_offset", 0)
+            rv.add_uniform("u_renpy_dissolve_multiplier", 1.0)
+            rv.add_property("mipmap", renpy.config.mipmap_dissolves if (self.style.mipmap is None) else self.style.mipmap)
 
         rv.blit(control, (0, 0), focus=False, main=False)
 
@@ -614,7 +705,7 @@ class CropMove(Transition):
 
     Returns a transition that works by cropping a scene and positioning it on the
     screen. This can be used to implement a variety of effects, all of which
-    involved changing rectangular slices of scenes.
+    involve changing rectangular slices of scenes.
 
     `time`
         The time the transition takes.
@@ -873,7 +964,7 @@ class PushMove(Transition):
     :name: PushMove
 
     Returns a transition that works by taking the new scene and using it to
-    "push" the old scene off the screen. 
+    "push" the old scene off the screen.
 
     `time`
         The time the transition takes.

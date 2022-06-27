@@ -86,6 +86,9 @@ layeredimage Storm_sprite standing:
     else:
         "images/Storm_standing/Storm_standing_breasts_down.png"
 
+    if StormX.outfit["tattoos"]:
+        "images/Storm_standing/Storm_standing_tattoos[StormX.outfit[tattoos]].png"
+
     if not StormX.outfit["piercings"]:
         Null()
     elif StormX.breasts_supported:

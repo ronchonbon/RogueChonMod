@@ -1,4 +1,4 @@
-﻿# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+﻿# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -29,10 +29,12 @@ init -1500 python:
         background.
         """
 
+        text = None
+
         def after_setstate(self):
             self.child = None
 
-        def __init__(self, base=None, full=False, flip=None, **properties):
+        def __init__(self, base=None, full=False, flip=None, text=None, **properties):
             """
             `base`
                 The type of image to display. This should be one of:
@@ -55,12 +57,7 @@ init -1500 python:
                     to use. If the image name begins with "bg", "cg", or
                     "event", uses 'bg'.
 
-                    Otherwise, contacts a web service to guess gender from
-                    the character's name, and uses that. (The 'girl' placeholder
-                    is used when the service can't guess.)
-
-                    The webservice will only be contacted when config.developer
-                    is True.
+                    Otherwise, the 'girl' placeholder is used.
 
             `full`
                 If true, a full-body sprite is used. Otherwise, a 3/4 sprite
@@ -68,8 +65,12 @@ init -1500 python:
 
             `flip`
                 If true, the sprite is flipped horizontally.
-            """
 
+            `text`
+                 If provided, no other text than this will be displayed on the
+                 placeholder. If not, the text will reflect the show
+                 instruction that was used to display it.
+            """
 
             super(Placeholder, self).__init__(**properties)
 
@@ -82,6 +83,11 @@ init -1500 python:
 
             # The child of this placeholder, if known.
             self.child = None
+
+            # The text of this placeholder, if known. This replaces the
+            # any derived text.
+            self.text = text
+
 
         def guess_base(self):
             """
@@ -117,7 +123,7 @@ init -1500 python:
 #                     rv = "boy"
 #                 else:
 #                     rv = "girl"
-#             except:
+#             except Exception:
 #                 rv = "girl"
 
             rv = "girl"
@@ -177,9 +183,11 @@ init -1500 python:
             else:
                 xzoom = 1
 
-            text = "\n".join(self.name)
+            if self.text is not None:
+                text = self.text
+            else:
+                text = "\n".join(self.name)
 
-            # Figure out the child.
             rv = Fixed(
                 Transform(image, crop=crop, size=size, xzoom=xzoom),
                 Text(text, pos=textpos, xanchor=0.5, yanchor=0.5, style="_default", color="#aaa", text_align=0.5),
@@ -193,10 +201,15 @@ init -1500 python:
         _duplicatable = True
 
         def _duplicate(self, args):
+            if not self._duplicatable:
+                return False
+
             args = args or self._args
 
-            rv = Placeholder(self.base, self.full, self.flip)
+            rv = Placeholder(self.base, self.full, self.flip, self.text)
             rv.name = list(args.name) + list(args.args)
+            rv._duplicatable = False
+
             return rv
 
         def visit(self):

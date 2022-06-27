@@ -1,4 +1,4 @@
-﻿# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+﻿# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -26,6 +26,9 @@ init -1600 python hide:
 
     # menus: Music to play at the main menu.
     config.main_menu_music = None
+
+    # The amount of time to spend fading in the main menu music.
+    config.main_menu_music_fadein = 0.0
 
     # advanced: Callbacks to run at start.
     config.start_callbacks = [ ]
@@ -59,6 +62,12 @@ init -1600 python hide:
     # Should we profile reloading?
     config.profile_reload = False
 
+    # When should start_store happen?
+    config.early_start_store = False
+
+    # A list of channes to stop playing when entering the main menu.
+    config.main_menu_stop_channels = [ "sound", "voice", "movie" ]
+
 init -1600 python:
 
     def _init_language():
@@ -69,12 +78,7 @@ init -1600 python:
 
         import os
 
-        if "RENPY_LANGUAGE" in os.environ:
-            language = os.environ["RENPY_LANGUAGE"]
-        elif config.language is not None:
-            language = config.language
-        else:
-            language = _preferences.language
+        language = os.environ.get("RENPY_LANGUAGE") or config.language or _preferences.language
 
         renpy.change_language(language)
 
@@ -88,7 +92,6 @@ label _after_load:
         main_menu = False
         _in_replay = None
 
-        renpy.execute_default_statement(False)
         _init_language()
 
     python hide:
@@ -156,13 +159,10 @@ label _start_replay:
 
     call _start_store
 
-    if config.start_scene_black:
-        scene black
-    else:
-        scene
+    scene black
 
     $ _init_language()
-    $ renpy.block_rollback()
+    $ renpy.block_rollback(purge=True)
 
     jump expression _in_replay
 
@@ -176,6 +176,9 @@ label _splashscreen:
             suppress_overlay = True
             _confirm_quit = False
 
+        renpy.dynamic("_autosave")
+        _autosave = False
+
     jump expression "splashscreen"
 
 
@@ -183,10 +186,16 @@ label _splashscreen:
 # tell anyone.
 label _start:
 
-    call _start_store
+    if config.early_start_store:
+        call _start_store
 
     python:
         renpy.execute_default_statement(True)
+
+    if not config.early_start_store:
+        call _start_store
+
+    python:
 
         # Predict the main menu. When a load occurs, the loaded data will
         # overwrite the prediction requests.
@@ -195,7 +204,14 @@ label _start:
 
         renpy.block_rollback()
 
-    call _gl_test
+    scene black
+
+    if not _restart:
+        call _gl_test
+
+    python hide:
+        renpy.warp.warp()
+
     call _load_reload_game from _call__load_reload_game_1
 
     python hide:
@@ -205,8 +221,6 @@ label _start:
 
     if config.start_scene_black:
         scene black
-    else:
-        scene
 
     if not _restart:
         $ renpy.display.interface.with_none(overlay=False)
@@ -217,6 +231,10 @@ label _start:
     $ _game_menu_screen = None
     $ _old_history = _history
     $ _history = False
+
+    python hide:
+        for i in config.main_menu_stop_channels:
+            renpy.music.stop(channel=i, fadeout=0.0)
 
     if renpy.has_label("splashscreen") and (not _restart) and (not renpy.os.environ.get("RENPY_SKIP_SPLASHSCREEN", None)):
         call _splashscreen from _call_splashscreen_1
@@ -229,17 +247,11 @@ label _start:
     $ renpy.block_rollback()
 
     if config.main_menu_music:
-        $ renpy.music.play(config.main_menu_music, if_changed=True)
+        $ renpy.music.play(config.main_menu_music, if_changed=True, fadein=config.main_menu_music_fadein)
     else:
         $ renpy.music.stop()
 
-    $ renpy.music.stop(channel="movie")
-
-    # Clean out any residual scene from the splashscreen.
-    if config.start_scene_black:
-        scene black
-    else:
-        scene
+    scene black
 
     python:
         # Stop predicting the main menu, now that we're ready to show it.
@@ -249,7 +261,7 @@ label _start:
         # Implement config.window
         _init_window()
 
-    # This has to be python, to deal with a case where _restart may
+    # This has to be Python, to deal with a case where _restart may
     # change across a shift-reload.
     python:
         if _restart is None:
@@ -262,7 +274,7 @@ label _start:
 
 label _invoke_main_menu:
 
-    # Again, this has to be python.
+    # Again, this has to be Python.
     python:
         if _restart:
             renpy.call_in_new_context(_restart[2])
@@ -280,9 +292,11 @@ label _invoke_main_menu:
 # initialize it.
 label _main_menu(_main_menu_screen="_main_menu_screen"):
 
-    $ _enter_menu()
-
     python:
+        renpy.block_rollback(purge=True)
+
+        _enter_menu()
+
         renpy.dynamic("_load_prompt")
         _load_prompt = False
 

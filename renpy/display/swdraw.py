@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -19,17 +19,18 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import renpy.display
-import pygame_sdl2 as pygame
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
+
 import math
-import weakref
 import time
 import os
 
-from renpy.display.render import blit_lock, IDENTITY, BLIT, DISSOLVE, IMAGEDISSOLVE, PIXELLATE
-
-# A map from cached surface to rle version of cached surface.
-rle_cache = weakref.WeakKeyDictionary()
+import pygame_sdl2 as pygame
+import renpy
+from renpy.display.render import blit_lock, IDENTITY, BLIT, DISSOLVE, IMAGEDISSOLVE, PIXELLATE, FLATTEN
 
 
 class Clipper(object):
@@ -254,7 +255,7 @@ def copy_surface(surf):
     w, h = surf.get_size()
     rv = surface(w, h, True)
 
-    renpy.display.accelerator.nogil_copy(surf, rv)  # @UndefinedVariable
+    renpy.display.accelerator.nogil_copy(surf, rv) # @UndefinedVariable
     return rv
 
 
@@ -305,15 +306,15 @@ def draw_special(what, dest, x, y):
 
         ramplen = what.operation_parameter
 
-        ramp = "\x00" * 256
+        ramp = b"\x00" * 256
 
-        for i in xrange(0, ramplen):
-            ramp += chr(255 * i / ramplen)
+        for i in range(0, ramplen):
+            ramp += bchr(255 * i // ramplen)
 
-        ramp += "\xff" * 256
+        ramp += b"\xff" * 256
 
-        step = int( what.operation_complete * (256 + ramplen) )
-        ramp = ramp[step:step+256]
+        step = int(what.operation_complete * (256 + ramplen))
+        ramp = ramp[step:step + 256]
 
         renpy.display.module.imageblend(
             bottom.subsurface((-x, -y, w, h)),
@@ -335,6 +336,10 @@ def draw_special(what, dest, x, y):
             surf.subsurface((-x, -y, w, h)),
             dest.subsurface((0, 0, w, h)),
             px, px, px, px)
+
+    elif what.operation == FLATTEN:
+        surf = what.children[0][0].render_to_texture(dest.get_masks()[3])
+        dest.subsurface((0, 0, w, h)).blit(surf, (0, 0))
 
     else:
         raise Exception("Unknown operation: %d" % what.operation)
@@ -359,8 +364,6 @@ def draw(dest, clip, what, xo, yo, screen):
 
         # Pixel-Aligned blit.
         if isinstance(xo, int) and isinstance(yo, int):
-            if screen:
-                what = rle_cache.get(what, what)
 
             if clip:
                 w, h = what.get_size()
@@ -429,7 +432,6 @@ def draw(dest, clip, what, xo, yo, screen):
             dest.forced.add((subx, suby, subx + subw, suby + subh, clip))
         else:
             newdest = dest.subsurface((subx, suby, subw, subh))
-            # what.draw_func(newdest, newx, newy)
             draw_special(what, newdest, newx, newy)
 
         return
@@ -485,19 +487,19 @@ def draw(dest, clip, what, xo, yo, screen):
 
     # Deal with alpha and transforms by passing them off to draw_transformed.
     if what.alpha != 1 or what.over != 1.0 or (what.forward is not None and what.forward is not IDENTITY):
-        for child, cxo, cyo, _focus, _main in what.visible_children:
+        for child, cxo, cyo, _focus, _main in what.children:
             draw_transformed(dest, clip, child, xo + cxo, yo + cyo,
                              what.alpha * what.over, what.forward, what.reverse)
         return
 
-    for child, cxo, cyo, _focus, _main in what.visible_children:
+    for child, cxo, cyo, _focus, _main in what.children:
         draw(dest, clip, child, xo + cxo, yo + cyo, screen)
 
 
 def draw_transformed(dest, clip, what, xo, yo, alpha, forward, reverse):
 
     # If our alpha has hit 0, don't do anything.
-    if alpha <= 0.003:  # (1 / 256)
+    if alpha <= 0.003: # (1 / 256)
         return
 
     if forward is None:
@@ -546,7 +548,7 @@ def draw_transformed(dest, clip, what, xo, yo, alpha, forward, reverse):
         if clip:
 
             dest.blits.append(
-                (minx, miny, maxx + dx0, maxy + dy0, clip, what,
+                (minx, miny, maxx + dx0, maxy + dy0, clip, what, # type: ignore
                  (cx, cy,
                   forward.xdx, forward.ydx,
                   forward.xdy, forward.ydy,
@@ -623,18 +625,18 @@ def draw_transformed(dest, clip, what, xo, yo, alpha, forward, reverse):
 
             dest = dest.subsurface((x, y, width, height))
 
-    if what.draw_func or what.operation != BLIT:
+    if what.operation != BLIT:
         child = what.pygame_surface(True)
         draw_transformed(dest, clip, child, xo, yo, alpha, forward, reverse)
         return
 
-    for child, cxo, cyo, _focus, _main in what.visible_children:
+    for child, cxo, cyo, _focus, _main in what.children:
 
         cxo, cyo = reverse.transform(cxo, cyo)
 
         if what.forward:
-            child_forward = forward * what.forward
-            child_reverse = what.reverse * reverse
+            child_forward = what.forward * forward
+            child_reverse = reverse * what.reverse
         else:
             child_forward = forward
             child_reverse = reverse
@@ -648,8 +650,6 @@ def do_draw_screen(screen_render, full_redraw, swdraw):
     """
 
     yoffset = xoffset = 0
-
-    screen_render.is_opaque()
 
     clip = (xoffset, yoffset, xoffset + screen_render.width, yoffset + screen_render.height)
     clipper = clippers[0]
@@ -687,32 +687,14 @@ class SWDraw(object):
         # The earliest time at which the next frame can be redrawn.
         self.next_frame = 0
 
-        # Mouse re-drawing.
-        self.mouse_location = None
-        self.mouse_backing = None
-        self.mouse_backing_pos = None
-        self.mouse_info = None
-
-        # Is the mouse currently visible?
-        self.mouse_old_visible = None
-
-        # This is used to display video to the screen.
-        self.fullscreen_surface = None
-
         # Info.
         self.info = { "renderer" : "sw", "resizable" : False, "additive" : False }
-
-        pygame.display.init()
-        renpy.display.interface.post_init()
 
         if self.display_info is None:
             self.display_info = renpy.display.get_info()
 
         # The scale factor we use for this display.
         self.scale_factor = 1.0
-
-        # Should we scale fast, or scale good-looking?
-        self.scale_fast = "RENPY_SCALE_FAST" in os.environ
 
         # The screen returned to us from pygame.
         self.screen = None
@@ -721,38 +703,28 @@ class SWDraw(object):
         # 1px border around it iff we're scaling.
         self.window = None
 
-        # Did we show fullscreen video in the last frame?
-        self.showing_video = False
-
     def get_texture_size(self):
         return 0, 0
 
-    def set_mode(self, virtual_size, physical_size, fullscreen):
+    def init(self, virtual_size):
+
+        # These disable a failed load of ANGLE.
+        pygame.display.gl_reset_attributes()
+        pygame.display.hint("SDL_OPENGL_ES_DRIVER", "0")
 
         # Reset before resize.
-        renpy.display.interface.kill_textures_and_surfaces()
         self.reset()
 
         width, height = virtual_size
 
         # Set up scaling, if necessary.
-        screen_width = self.display_info.current_w
-        screen_height = self.display_info.current_h
-
-        if not fullscreen:
-            screen_height -= 102
-            screen_width -= 102
+        screen_width = self.display_info.current_w # type: ignore
+        screen_height = self.display_info.current_h # type: ignore
 
         scale_factor = min(1.0 * screen_width / width, 1.0 * screen_height / height, 1.0)
         if "RENPY_SCALE_FACTOR" in os.environ:
             scale_factor = float(os.environ["RENPY_SCALE_FACTOR"])
         self.scale_factor = scale_factor
-
-        # Figure out the fullscreen info.
-        if fullscreen:
-            fsflag = pygame.FULLSCREEN
-        else:
-            fsflag = 0
 
         # Don't reuse the old screen, because doing so fails to update
         # properly on Xorg.
@@ -760,7 +732,7 @@ class SWDraw(object):
         scaled_width = int(width * scale_factor)
         scaled_height = int(height * scale_factor)
 
-        self.screen = pygame.display.set_mode((scaled_width, scaled_height), fsflag, 32)
+        self.screen = pygame.display.set_mode((scaled_width, scaled_height), 0, 32)
 
         if scale_factor != 1.0:
             self.window = surface(width, height, True)
@@ -780,93 +752,16 @@ class SWDraw(object):
         # The surface used to display fullscreen video.
         self.fullscreen_surface = self.screen
 
-        # Reset this on a mode change.
-        self.mouse_location = None
-        self.mouse_backing = None
-        self.mouse_backing_pos = None
-        self.mouse_info = None
-
         return True
 
-    # private
-    def show_mouse(self, pos, info):
-        """
-        Actually shows the mouse.
-        """
+    def update(self, force=True):
+        renpy.game.preferences.fullscreen = False
 
-        self.mouse_location = pos
-        self.mouse_info = info
+    def resize(self):
+        return
 
-        mxo, myo, tex = info
-
-        mx, my = pos
-        mw, mh = tex.get_size()
-
-        bx = mx - mxo
-        by = my - myo
-
-        self.mouse_backing_pos = (bx, by)
-        self.mouse_backing = surface(mw, mh, False)
-        self.mouse_backing.blit(self.window, (0, 0), (bx, by, mw, mh))
-
-        self.screen.blit(tex, (bx, by))
-
-        return bx, by, mw, mh
-
-    # private
-    def hide_mouse(self):
-        """
-        Actually hides the mouse.
-        """
-
-        size = self.mouse_backing.get_size()
-        self.screen.blit(self.mouse_backing, self.mouse_backing_pos)
-
-        rv = self.mouse_backing_pos + size
-
-        self.mouse_backing = None
-        self.mouse_backing_pos = None
-        self.mouse_location = None
-
-        return rv
-
-    # private
-    def draw_mouse(self, show_mouse):
-        """
-        This draws the mouse to the screen, if necessary. It uses the
-        buffer to minimize the amount of the screen that needs to be
-        drawn, and only redraws if the mouse has actually been moved.
-        """
-
-        hardware, x, y, tex = renpy.game.interface.get_mouse_info()
-
-        if self.mouse_old_visible != hardware:
-            pygame.mouse.set_visible(hardware)
-            self.mouse_old_visible = hardware
-
-        # The rest of this is for the software mouse.
-
-        if self.suppressed_blit:
-            return [ ]
-
-        if not show_mouse:
-            tex = None
-
-        info = (x, y, tex)
-        pos = pygame.mouse.get_pos()
-
-        if (pos == self.mouse_location and tex and info == self.mouse_info):
-            return [ ]
-
-        updates = [ ]
-
-        if self.mouse_location:
-            updates.append(self.hide_mouse())
-
-        if tex and pos and renpy.game.interface.mouse_focused:  # @UndefinedVariable
-            updates.append(self.show_mouse(pos, info))
-
-        return updates
+    def quit(self): # @ReservedAssignment
+        return
 
     def translate_point(self, x, y):
         x /= self.scale_factor
@@ -878,18 +773,8 @@ class SWDraw(object):
         y *= self.scale_factor
         return (x, y)
 
-    def update_mouse(self):
-        """
-        Draws the mouse, and then updates the screen.
-        """
-
-        updates = self.draw_mouse(True)
-
-        if updates:
-            pygame.display.update(updates)
-
     def mouse_event(self, ev):
-        x, y = getattr(ev, 'pos', pygame.mouse.get_pos())
+        x, y = getattr(ev, 'pos', pygame.mouse.get_pos()) # type: ignore
 
         x /= self.scale_factor
         y /= self.scale_factor
@@ -911,14 +796,17 @@ class SWDraw(object):
 
         return pygame.mouse.set_pos([x, y])
 
-    def screenshot(self, surftree, fullscreen_video):
+    def screenshot(self, surftree):
         """
         Returns a pygame surface containing a screenshot.
         """
 
         return self.window
 
-    def should_redraw(self, needs_redraw, first_pass):
+    def can_block(self):
+        return True
+
+    def should_redraw(self, needs_redraw, first_pass, can_block):
         """
         Uses the framerate to determine if we can and should redraw.
         """
@@ -954,31 +842,12 @@ class SWDraw(object):
 
         return True
 
-    def draw_screen(self, surftree, fullscreen_video):
+    def draw_screen(self, surftree):
         """
         Draws the screen.
         """
 
-        if fullscreen_video:
-
-            if not self.showing_video:
-                self.window.fill((0, 0, 0, 255))
-
-            w, h = self.window.get_size()
-            frame = renpy.display.video.render_movie("movie", w, h)
-
-            if frame is not None:
-                surftree = frame
-
-            self.full_redraw = True
-            self.showing_video = True
-
-        else:
-            self.showing_video = False
-
         updates = [ ]
-
-        updates.extend(self.draw_mouse(False))
 
         damage = do_draw_screen(surftree, self.full_redraw, self)
 
@@ -989,21 +858,12 @@ class SWDraw(object):
 
         if self.window is self.screen:
 
-            updates.extend(self.draw_mouse(True))
             pygame.display.update(updates)
 
         else:
+            renpy.display.scale.smoothscale(self.window, self.screen.get_size(), self.screen)
 
-            if self.scale_fast:
-                pygame.transform.scale(self.window, self.screen.get_size(), self.screen)
-            else:
-                renpy.display.scale.smoothscale(self.window, self.screen.get_size(), self.screen)
-
-            self.draw_mouse(True)
             pygame.display.flip()
-
-        if fullscreen_video:
-            self.full_redraw = True
 
     def render_to_texture(self, render, alpha):
 
@@ -1020,15 +880,15 @@ class SWDraw(object):
         # This doesn't work perfectly, but this should be a rare case and
         # swdraw is going away.
         if what.operation == IMAGEDISSOLVE:
-            a0 = self.is_pixel_opaque(what.visible_children[0][0], x, y)
-            a2 = self.is_pixel_opaque(what.visible_children[2][0], x, y)
+            a0 = self.is_pixel_opaque(what.children[0][0], x, y)
+            a2 = self.is_pixel_opaque(what.children[2][0], x, y)
 
             return a0 * a2
 
         if x < 0 or y < 0 or x >= what.width or y >= what.height:
             return 0
 
-        for (child, xo, yo, _focus, _main) in what.visible_children:
+        for (child, xo, yo, _focus, _main) in what.children:
             cx = x - xo
             cy = y - yo
 
@@ -1042,6 +902,9 @@ class SWDraw(object):
             else:
                 cx = int(cx)
                 cy = int(cy)
+
+                if cx < 0 or cy < 0:
+                    return False
 
                 cw, ch = child.get_size()
                 if cx >= cw or cy >= ch:
@@ -1060,28 +923,17 @@ class SWDraw(object):
         for i in clippers:
             i.mutated.add(id(surf))
 
-        if surf in rle_cache:
-            del rle_cache[surf]
-
-    def load_texture(self, surf, transient=False):
+    def load_texture(self, surf, transient=False, properties={}):
         """
         Creates a texture from the surface. In the software implementation,
         the only difference between a texture and a surface is that a texture
         is in the RLE cache.
         """
 
-        if surf in rle_cache:
-            return rle_cache[surf]
+        return surf.convert_alpha(self.screen)
 
-        rle_surf = copy_surface(surf)
-
-        if not transient:
-            rle_surf.set_alpha(255, pygame.RLEACCEL)
-
-        self.mutated_surface(rle_surf)
-        rle_cache[surf] = rle_surf
-
-        return rle_surf
+    def ready_one_texture(self):
+        return False
 
     def solid_texture(self, w, h, color):
         """
@@ -1097,30 +949,10 @@ class SWDraw(object):
         self.mutated_surface(surf)
         return surf
 
-    def free_memory(self):
+    def kill_textures(self):
         """
-        Frees up memory.
+        Kills all textures and caches of textures.
         """
-
-        rle_cache.clear()
-
-    def deinit(self):
-        """
-        Called when we're restarted.
-        """
-
-        renpy.display.render.free_memory()
-
-        return
-
-    def quit(self):  # @ReservedAssignment
-        """
-        Shuts down the drawing system.
-        """
-
-        pygame.display.quit()
-
-        return
 
     def event_peek_sleep(self):
         """

@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -26,10 +26,14 @@
 
 # All functions in the is file should be documented in the wiki.
 
-import sys
-import renpy.display
-import renpy.text
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
 
+from typing import Optional
+
+import sys
+
+import renpy
 from renpy.display.behavior import is_selected, is_sensitive
 
 ##############################################################################
@@ -52,6 +56,9 @@ class Action(renpy.object.Object):
     def get_selected(self):
         return False
 
+    def get_tooltip(self):
+        return None
+
     def periodic(self, st):
         return
 
@@ -70,23 +77,28 @@ class BarValue(renpy.object.Object):
     # Alt text.
     alt = "Bar"
 
+    force_step = False
+
     def replaces(self, other):
         return
 
     def periodic(self, st):
         return
 
-    def get_adjustment(self):
+    def get_adjustment(self): # type: (BarValue) -> renpy.display.behavior.Adjustment
         raise Exception("Not implemented")
 
     def get_style(self):
         return "bar", "vbar"
 
+    def get_tooltip(self):
+        return None
 
 ##############################################################################
 # Things we can add to. These have two methods: add is called with the
 # widget we're adding. close is called when the thing is ready to be
 # closed.
+
 
 class Addable(object):
     # A style_prefix associates with this addable.
@@ -239,7 +251,7 @@ def reset():
 renpy.game.post_init.append(reset)
 
 
-def interact(type='misc', roll_forward=None, **kwargs):  # @ReservedAssignment
+def interact(type='misc', roll_forward=None, **kwargs): # @ReservedAssignment
     """
     :doc: ui
     :args: (roll_forward=None, mouse='default')
@@ -278,7 +290,7 @@ def interact(type='misc', roll_forward=None, **kwargs):  # @ReservedAssignment
         renpy.config.skipping = None
 
     if len(stack) != 1:
-        raise Exception("ui.interact called with non-empty widget/layer stack. Did you forget a ui.close() somewhere?\nStack was "+('\n'.join([str(item) for item in stack])))
+        raise Exception("ui.interact called with non-empty widget/layer stack. Did you forget a ui.close() somewhere?\nStack was " + ('\n'.join([str(item) for item in stack])))
 
     if at_stack:
         raise Exception("ui.interact called with non-empty at stack.")
@@ -321,7 +333,7 @@ def remove_above(d):
 
 def at(transform):
     """
-    :doc: ui
+    :undocumented:
 
     Specifies a transform that is applied to the next displayable to
     be created. This is largely obsolete, as all UI functions now take
@@ -338,7 +350,7 @@ def clear():
 
 def detached():
     """
-    :doc: ui
+    :undocumented:
 
     Do not add the next displayable to any later or container. Use this if
     you want to assign the result of a ui function to a variable.
@@ -351,7 +363,7 @@ def detached():
 
 def layer(name):
     """
-    :doc: ui
+    :undocumented:
 
     Adds displayables to the layer named `name`. The later must be
     closed with :func:`ui.close`.
@@ -362,7 +374,7 @@ def layer(name):
 
 def close(d=None):
     """
-    :doc: ui
+    :undocumented:
     :args: ()
 
     Closes a displayable created with by a UI function. When a
@@ -378,14 +390,14 @@ def close(d=None):
 
 def reopen(w, clear):
 
-    stack.append(Many(w))
+    stack.append(Many(w, None, None))
 
     if clear:
         w.children[:] = [ ]
 
 
 def context_enter(w):
-    if isinstance(renpy.ui.stack[-1], renpy.ui.Many) and renpy.ui.stack[-1].displayable is w:
+    if isinstance(renpy.ui.stack[-1], renpy.ui.Many) and renpy.ui.stack[-1].displayable is w: # type: ignore
         return
 
     raise Exception("%r cannot be used as a context manager.", type(w).__name__)
@@ -409,7 +421,7 @@ def combine_style(style_prefix, style_suffix):
     else:
         new_style = style_prefix + "_" + style_suffix
 
-    return renpy.style.get_style(new_style)  # @UndefinedVariable
+    return renpy.style.get_style(new_style) # @UndefinedVariable
 
 
 def prefixed_style(style_suffix):
@@ -422,18 +434,21 @@ def prefixed_style(style_suffix):
 
 # The screen we're using as we add widgets. None if there isn't a
 # screen.
-screen = None
+screen = None # type: renpy.display.screen.ScreenDisplayable|None
 
 
 class Wrapper(renpy.object.Object):
 
     def __reduce__(self):
-        return self.name
+        if PY2:
+            return bytes(self.name) # type: ignore
+        else:
+            return self.name
 
     def __init__(self, function, one=False, many=False, imagemap=False, replaces=False, style=None, **kwargs):
 
         # The name assigned to this wrapper. This is used to serialize us correctly.
-        self.name = None
+        self.name = ''
 
         # The function to call.
         self.function = function
@@ -462,7 +477,7 @@ class Wrapper(renpy.object.Object):
 
         # Pull out the special kwargs, widget_id, at, and style_prefix.
 
-        widget_id = kwargs.pop("id", None)  # @ReservedAssignment
+        widget_id = kwargs.pop("id", None) # @ReservedAssignment
 
         at_list = kwargs.pop("at", [ ])
         if not isinstance(at_list, (list, tuple)):
@@ -497,7 +512,7 @@ class Wrapper(renpy.object.Object):
                 do_add = False
 
         if old_transfers:
-            old_main = screen.old_widgets.get(widget_id, None)
+            old_main = screen.old_widgets.get(widget_id, None) # type: ignore
 
             if self.replaces and old_main is not None:
                 keyword["replaces"] = old_main
@@ -512,18 +527,18 @@ class Wrapper(renpy.object.Object):
         try:
             w = self.function(*args, **keyword)
         except TypeError as e:
-            etype, e, tb = sys.exc_info(); etype
+            etype, e, tb = sys.exc_info()
 
             if tb.tb_next is None:
-                e.args = (e.args[0].replace("__call__", "ui." + self.name), )
+                e.args = (e.args[0].replace("__call__", "ui." + self.name),) # type: ignore
 
-            del tb  # Important! Prevents memory leaks via our frame.
+            del tb # Important! Prevents memory leaks via our frame.
             raise
 
         main = w._main or w
 
         # Migrate the focus.
-        if (old_main is not None) and (not screen.hiding):
+        if (old_main is not None) and (not screen.hiding): # type: ignore
             renpy.display.focus.replaced_by[id(old_main)] = main
 
         # Wrap the displayable based on the at_list and at_stack.
@@ -544,9 +559,9 @@ class Wrapper(renpy.object.Object):
 
         # Update the stack, as necessary.
         if self.one:
-            stack.append(One(w, style_prefix))
+            stack.append(One(w, style_prefix)) # type: ignore
         elif self.many:
-            stack.append(Many(w, self.imagemap, style_prefix))
+            stack.append(Many(w, self.imagemap, style_prefix)) # type:ignore
 
         # If we have an widget_id, record the displayable, the transform,
         # and maybe take the state from a previous transform.
@@ -569,9 +584,9 @@ class Wrapper(renpy.object.Object):
 
         return main
 
-
 ##############################################################################
 # Widget functions.
+
 
 def _add(d, **kwargs):
     d = renpy.easy.displayable(d)
@@ -620,6 +635,7 @@ text = Wrapper(renpy.text.text.Text, style="text", replaces=True)
 hbox = Wrapper(renpy.display.layout.MultiBox, layout="horizontal", style="hbox", many=True)
 vbox = Wrapper(renpy.display.layout.MultiBox, layout="vertical", style="vbox", many=True)
 fixed = Wrapper(renpy.display.layout.MultiBox, layout="fixed", style="fixed", many=True)
+default_fixed = Wrapper(renpy.display.layout.MultiBox, layout="fixed", many=True)
 grid = Wrapper(renpy.display.layout.Grid, style="grid", many=True)
 side = Wrapper(renpy.display.layout.Side, style="side", many=True)
 
@@ -638,12 +654,14 @@ pausebehavior = Wrapper(renpy.display.behavior.PauseBehavior)
 soundstopbehavior = Wrapper(renpy.display.behavior.SoundStopBehavior)
 
 
-def _key(key, action=None, activate_sound=None):
+def _key(key, action=None, activate_sound=None, capture=True):
 
-    if action is None:
-        raise Exception("Action is required in ui.key.")
+    if isinstance(key, (list, tuple)):
+        keymap = {k: action for k in key}
+    else:
+        keymap = {key: action}
 
-    return renpy.display.behavior.Keymap(activate_sound=activate_sound, **{ key : action})
+    return renpy.display.behavior.Keymap(activate_sound=activate_sound, capture=capture, **keymap)
 
 
 key = Wrapper(_key)
@@ -659,30 +677,37 @@ class ChoiceActionBase(Action):
     previously visited and mark it so if it is chosen.
     """
 
-    def __init__(self, label, value, location=None, block_all=None):
+    sensitive = True
+
+    def __init__(self, label, value, location=None, block_all=None, sensitive=True, args=None, kwargs=None):
         self.label = label
         self.value = value
         self.location = location
+        self.sensitive = sensitive
 
         if block_all is None:
             self.block_all = renpy.config.fix_rollback_without_choice
         else:
             self.block_all = block_all
 
-        self.chosen = None
-
-        if self.location:
-            self.chosen = renpy.game.persistent._chosen  # @UndefinedVariable
-
-            if self.chosen is None:
-                self.chosen = renpy.game.persistent._chosen = { }
+        # The arguments passed to a menu choice.
+        self.args = args
+        self.kwargs = kwargs
 
     def get_sensitive(self):
-        return not renpy.exports.in_fixed_rollback() or (not self.block_all and self.get_selected())
+        return (self.sensitive and
+                not renpy.exports.in_fixed_rollback() or (not self.block_all and self.get_selected()))
 
     def get_selected(self):
         roll_forward = renpy.exports.roll_forward_info()
         return renpy.exports.in_fixed_rollback() and roll_forward == self.value
+
+    @property
+    def chosen(self):
+        if not self.location:
+            return None
+
+        return renpy.game.persistent._chosen # type: ignore
 
     def get_chosen(self):
         if self.chosen is None:
@@ -800,8 +825,6 @@ def menu(menuitems,
          default=False,
          **properties):
 
-    # menu is now a conglomeration of other widgets. And bully for it.
-
     renpy.ui.vbox(style=style, **properties)
 
     for label, val in menuitems:
@@ -812,7 +835,10 @@ def menu(menuitems,
             text = choice_style
             button = choice_button_style
 
-            clicked = ChoiceReturn(label, val, location)
+            if isinstance(val, ChoiceReturn):
+                clicked = val
+            else:
+                clicked = ChoiceReturn(label, val, location)
 
             if clicked.get_chosen():
                 text = choice_chosen_style
@@ -836,7 +862,7 @@ def menu(menuitems,
     close()
 
 
-input = Wrapper(renpy.display.behavior.Input, exclude='{}', style="input", replaces=True)  # @ReservedAssignment
+input = Wrapper(renpy.display.behavior.Input, exclude='{}', style="input", replaces=True) # @ReservedAssignment
 
 
 def imagemap_compat(ground,
@@ -919,7 +945,7 @@ def _imagebutton(idle_image=None,
             if auto:
                 raise Exception("Imagebutton does not have a %s image. (auto=%r)." % (name, auto))
             else:
-                raise Exception("Imagebutton does not have a %s image." % (name, ))
+                raise Exception("Imagebutton does not have a %s image." % (name,))
 
         return None
 
@@ -960,12 +986,12 @@ def _textbutton(label, clicked=None, style=None, text_style=None, substitute=Tru
         style = prefixed_style("button")
 
     if text_style is None:
-        text_style = renpy.style.get_text_style(style, prefixed_style('button_text'))  # @UndefinedVariable
+        text_style = renpy.style.get_text_style(style, prefixed_style('button_text')) # @UndefinedVariable
 
     rv = renpy.display.behavior.Button(style=style, clicked=clicked, **button_kwargs)
     text = renpy.text.text.Text(label, style=text_style, substitute=substitute, scope=scope, **text_kwargs)
     rv.add(text)
-    rv._main = text
+    rv._main = text # type: ignore
     rv._composite_parts = [ text ]
     return rv
 
@@ -981,12 +1007,12 @@ def _label(label, style=None, text_style=None, substitute=True, scope=None, **kw
         style = prefixed_style('label')
 
     if text_style is None:
-        text_style = renpy.style.get_text_style(style, prefixed_style('label_text'))  # @UndefinedVariable
+        text_style = renpy.style.get_text_style(style, prefixed_style('label_text')) # @UndefinedVariable
 
     rv = renpy.display.layout.Window(None, style=style, **label_kwargs)
     text = renpy.text.text.Text(label, style=text_style, substitute=substitute, scope=scope, **text_kwargs)
     rv.add(text)
-    rv._main = text
+    rv._main = text # type: ignore
     rv._composite_parts = [ text ]
     return rv
 
@@ -999,13 +1025,13 @@ adjustment = renpy.display.behavior.Adjustment
 def _bar(*args, **properties):
 
     if len(args) == 4:
-        width, height, range, value = args  # @ReservedAssignment
+        width, height, range, value = args # @ReservedAssignment
     if len(args) == 2:
-        range, value = args  # @ReservedAssignment
+        range, value = args # @ReservedAssignment
         width = None
         height = None
     else:
-        range = 1  # @ReservedAssignment
+        range = 1 # @ReservedAssignment
         value = 0
         width = None
         height = None
@@ -1014,10 +1040,10 @@ def _bar(*args, **properties):
         width = properties.pop("width")
 
     if "height" in properties:
-        height  = properties.pop("height")
+        height = properties.pop("height")
 
     if "range" in properties:
-        range = properties.pop("range")  # @ReservedAssignment
+        range = properties.pop("range") # @ReservedAssignment
 
     if "value" in properties:
         value = properties.pop("value")
@@ -1045,7 +1071,7 @@ scrollbar = Wrapper(_bar, style='scrollbar', replaces=True)
 vscrollbar = Wrapper(_bar, style='vscrollbar', replaces=True)
 
 
-def _autobar_interpolate(range, start, end, time, st, at, **properties):  # @ReservedAssignment
+def _autobar_interpolate(range, start, end, time, st, at, **properties): # @ReservedAssignment
 
     if st > time:
         t = 1.0
@@ -1061,7 +1087,7 @@ def _autobar_interpolate(range, start, end, time, st, at, **properties):  # @Res
 autobar_interpolate = renpy.curry.curry(_autobar_interpolate)
 
 
-def _autobar(range, start, end, time, **properties):  # @ReservedAssignment
+def _autobar(range, start, end, time, **properties): # @ReservedAssignment
     return renpy.display.layout.DynamicDisplayable(autobar_interpolate(range, start, end, time, **properties))
 
 
@@ -1070,6 +1096,8 @@ transform = Wrapper(renpy.display.motion.Transform, one=True, style='transform')
 
 _viewport = Wrapper(renpy.display.viewport.Viewport, one=True, replaces=True, style='viewport')
 _vpgrid = Wrapper(renpy.display.viewport.VPGrid, many=True, replaces=True, style='vpgrid')
+
+VIEWPORT_SIZE = 32767
 
 
 def viewport_common(vpfunc, _spacing_to_side, scrollbars=None, **properties):
@@ -1084,7 +1112,9 @@ def viewport_common(vpfunc, _spacing_to_side, scrollbars=None, **properties):
         from renpy.sl2.slproperties import position_property_names
 
         for k, v in core_properties.items():
-            if k in position_property_names:
+            if (renpy.config.compat_viewport_minimum) and (k in { "minimum", "xminimum", "yminimum" }):
+                viewport_properties[k] = v
+            elif k in position_property_names:
                 side_properties[k] = v
             elif _spacing_to_side and (k == "spacing"):
                 side_properties[k] = v
@@ -1105,10 +1135,14 @@ def viewport_common(vpfunc, _spacing_to_side, scrollbars=None, **properties):
         vscrollbar_properties.setdefault("style", "vscrollbar")
 
     alt = viewport_properties.get("alt", "viewport")
-    scrollbar_properties.setdefault("alt", alt + " horizontal scrollbar")
-    vscrollbar_properties.setdefault("alt", alt + " vertical scrollbar")
+    scrollbar_properties.setdefault("alt", renpy.minstore.__(alt) + " " + renpy.minstore.__("horizontal scroll"))
+    vscrollbar_properties.setdefault("alt", renpy.minstore.__(alt) + " " + renpy.minstore.__("vertical scroll"))
 
     if scrollbars == "vertical":
+
+        if renpy.config.scrollbar_child_size:
+            viewport_properties.setdefault("child_size", (None, VIEWPORT_SIZE))
+
         side("c r", **side_properties)
 
         rv = vpfunc(**viewport_properties)
@@ -1122,6 +1156,10 @@ def viewport_common(vpfunc, _spacing_to_side, scrollbars=None, **properties):
         return rv
 
     elif scrollbars == "horizontal":
+
+        if renpy.config.scrollbar_child_size:
+            viewport_properties.setdefault("child_size", (VIEWPORT_SIZE, None))
+
         side("c b", **side_properties)
 
         rv = vpfunc(**viewport_properties)
@@ -1135,6 +1173,9 @@ def viewport_common(vpfunc, _spacing_to_side, scrollbars=None, **properties):
         return rv
 
     else:
+
+        if renpy.config.scrollbar_child_size:
+            viewport_properties.setdefault("child_size", (VIEWPORT_SIZE, VIEWPORT_SIZE))
 
         side("c r b", **side_properties)
 
@@ -1164,9 +1205,9 @@ drag = Wrapper(renpy.display.dragdrop.Drag, replaces=True, one=True)
 draggroup = Wrapper(renpy.display.dragdrop.DragGroup, replaces=True, many=True)
 mousearea = Wrapper(renpy.display.behavior.MouseArea, replaces=True)
 
-
 ##############################################################################
 # New-style imagemap related functions.
+
 
 class Imagemap(object):
     """
@@ -1210,13 +1251,13 @@ def _imagemap(ground=None, hover=None, insensitive=None, idle=None, selected_hov
 
         raise Exception("Could not find a %s image for imagemap." % name[0])
 
-    ground = pick(ground, ( "ground", "idle" ), idle)
-    idle = pick(idle, ( "idle", ), ground)
-    selected_idle = pick(selected_idle, ( "selected_idle", ), idle)
-    hover = pick(hover, ( "hover", ), ground)
-    selected_hover = pick(selected_hover, ( "selected_hover", ), hover)
-    insensitive = pick(insensitive, ("insensitive", ), ground)
-    selected_insensitive = pick(selected_insensitive, ("selected_insensitive", ), hover)
+    ground = pick(ground, ("ground", "idle"), idle)
+    idle = pick(idle, ("idle",), ground)
+    selected_idle = pick(selected_idle, ("selected_idle",), idle)
+    hover = pick(hover, ("hover",), ground)
+    selected_hover = pick(selected_hover, ("selected_hover",), hover)
+    insensitive = pick(insensitive, ("insensitive",), ground)
+    selected_insensitive = pick(selected_insensitive, ("selected_insensitive",), hover)
 
     imagemap_stack.append(
         Imagemap(
@@ -1242,7 +1283,7 @@ def _imagemap(ground=None, hover=None, insensitive=None, idle=None, selected_hov
     rv.add(box)
     parts.append(box)
 
-    rv._main = box
+    rv._main = box # type: ignore
     rv._composite_parts = parts
 
     return rv
@@ -1310,7 +1351,7 @@ def hotspot(*args, **kwargs):
     null()
 
 
-def _hotbar(spot, adjustment=None, range=None, value=None, **properties):  # @ReservedAssignment
+def _hotbar(spot, adjustment=None, range=None, value=None, **properties): # @ReservedAssignment
 
     if (adjustment is None) and (range is None) and (value is None):
         raise Exception("hotbar requires either an adjustment or a range and value.")
@@ -1327,10 +1368,10 @@ def _hotbar(spot, adjustment=None, range=None, value=None, **properties):  # @Re
     properties.setdefault("xanchor", 0)
     properties.setdefault("yanchor", 0)
 
-    fore_bar=imagemap.cache.crop(imagemap.selected_idle, spot)
-    aft_bar=imagemap.cache.crop(imagemap.idle, spot)
-    hover_fore_bar=imagemap.cache.crop(imagemap.selected_hover, spot)
-    hover_aft_bar=imagemap.cache.crop(imagemap.hover, spot)
+    fore_bar = imagemap.cache.crop(imagemap.selected_idle, spot)
+    aft_bar = imagemap.cache.crop(imagemap.idle, spot)
+    hover_fore_bar = imagemap.cache.crop(imagemap.selected_hover, spot)
+    hover_aft_bar = imagemap.cache.crop(imagemap.hover, spot)
 
     if h > w:
         properties.setdefault("bar_vertical", True)
@@ -1360,9 +1401,9 @@ def _hotbar(spot, adjustment=None, range=None, value=None, **properties):  # @Re
 
 hotbar = Wrapper(_hotbar, style="hotbar", replaces=True)
 
-
 ##############################################################################
 # Curried functions, for use in clicked, hovered, and unhovered.
+
 
 def _returns(v):
 
@@ -1375,12 +1416,12 @@ returns = renpy.curry.curry(_returns)
 def _jumps(label, transition=None):
 
     if isinstance(transition, basestring):
-        transition = getattr(renpy.config, transition)
+        transition = getattr(renpy.config, transition) # type: ignore
 
     if transition is not None:
         renpy.exports.transition(transition)
 
-    raise renpy.exports.jump(label)
+    renpy.exports.jump(label)
 
 
 jumps = renpy.curry.curry(_jumps)
@@ -1421,7 +1462,7 @@ on = Wrapper(renpy.display.behavior.OnEvent)
 
 def screen_id(id_, d):
     """
-    :doc: ui
+    :undocumented:
 
     Assigns the displayable `d` the screen widget id `id_`, as if it had
     been created by a screen statement with that id.
@@ -1430,7 +1471,10 @@ def screen_id(id_, d):
     if screen is None:
         raise Exception("ui.screen_id must be called from within a screen.")
 
-    screen.widget_id[id_] = d
+    screen.widgets[id_] = d._main or d
+    screen.base_widgets[id_] = d
+
+
 
 ##############################################################################
 # Postamble
@@ -1438,6 +1482,6 @@ def screen_id(id_, d):
 
 # Update the wrappers to have names.
 k, v = None, None
-for k, v in globals().iteritems():
+for k, v in globals().items():
     if isinstance(v, Wrapper):
         v.name = k

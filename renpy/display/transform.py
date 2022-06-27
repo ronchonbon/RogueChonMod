@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -19,17 +19,20 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-from __future__ import print_function
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+from typing import Any
 
 # This file contains displayables that move, zoom, rotate, or otherwise
 # transform displayables. (As well as displayables that support them.)
 import math
-import types  # @UnresolvedImport
+import types # @UnresolvedImport
 
-import renpy.display  # @UnusedImport
+import renpy
 from renpy.display.layout import Container
-
-import renpy.display.accelerator
+from renpy.display.accelerator import transform_render
+from renpy.atl import position, any_object, bool_or_none, float_or_none, matrix, mesh
 
 # The null object that's used if we don't have a defined child.
 null = None
@@ -40,6 +43,7 @@ def get_null():
 
     if null is None:
         null = renpy.display.layout.Null()
+        renpy.display.motion.null = null
 
     return null
 
@@ -81,81 +85,26 @@ def polar_to_cartesian(angle, radius, xaround, yaround):
 
 def first_not_none(*args):
     """
-    Returns the first argument that is not None.
+    Returns the first argument that is not None, or the last argument if
+    all are None.
     """
 
     for i in args:
         if i is not None:
             return i
-    return i
+
+    return args[-1]
 
 
 class TransformState(renpy.object.Object):
 
-    nearest = None
-    xoffset = None
-    yoffset = None
-    inherited_xpos = None
-    inherited_ypos = None
-    inherited_xanchor = None
-    inherited_yanchor = None
-    transform_anchor = False
-    additive = 0.0
-    debug = None
-    events = True
-    crop_relative = False
-    xpan = None
-    ypan = None
-    xtile = 1
-    ytile = 1
     last_angle = None
+    last_events = True
 
     def __init__(self):
-        self.alpha = 1
-        self.nearest = None
-        self.additive = 0.0
-        self.rotate = None
-        self.rotate_pad = True
-        self.transform_anchor = False
-        self.zoom = 1
-        self.xzoom = 1
-        self.yzoom = 1
 
-        self.xpos = None
-        self.ypos = None
-        self.xanchor = None
-        self.yanchor = None
-        self.xoffset = 0
-        self.yoffset = 0
-
-        self.xaround = 0.0
-        self.yaround = 0.0
-        self.xanchoraround = 0.0
-        self.yanchoraround = 0.0
-
-        self.xpan = None
-        self.ypan = None
-        self.xtile = 1
-        self.ytile = 1
-
-        self.subpixel = False
-
-        self.crop = None
-        self.crop_relative = False
-        self.corner1 = None
-        self.corner2 = None
-        self.size = None
-
-        self.delay = 0
-
-        self.debug = None
-        self.events = True
-
-        # Note: When adding a new property, we need to add it to:
-        # - take_state
-        # - diff
-        # - renpy.atl.PROPERTIES
-        # - Proxies in Transform
+        # Most fields on this object are set by add_property, at the bottom
+        # of this file.
 
         # An xpos (etc) inherited from our child overrides an xpos inherited
         # from an old transform, but not an xpos set in the current transform.
@@ -167,38 +116,25 @@ class TransformState(renpy.object.Object):
         self.inherited_xanchor = None
         self.inherited_yanchor = None
 
+        # The last angle that was rotated to.
+        self.last_angle = None
+
     def take_state(self, ts):
 
-        self.nearest = ts.nearest
-        self.alpha = ts.alpha
-        self.additive = ts.additive
-        self.rotate = ts.rotate
-        self.rotate_pad = ts.rotate_pad
-        self.transform_anchor = ts.transform_anchor
-        self.zoom = ts.zoom
-        self.xzoom = ts.xzoom
-        self.yzoom = ts.yzoom
+        d = self.__dict__
 
-        self.xaround = ts.xaround
-        self.yaround = ts.yaround
-        self.xanchoraround = ts.xanchoraround
-        self.yanchoraround = ts.yanchoraround
-
-        self.crop = ts.crop
-        self.crop_relative = ts.crop_relative
-        self.corner1 = ts.corner1
-        self.corner2 = ts.corner2
-        self.size = ts.size
-
-        self.xpan = ts.xpan
-        self.ypan = ts.ypan
-        self.xtile = ts.xtile
-        self.ytile = ts.ytile
+        for k in all_properties:
+            d[k] = getattr(ts, k)
 
         self.last_angle = ts.last_angle
+        self.last_events = ts.last_events
 
-        self.debug = ts.debug
-        self.events = ts.events
+        # Set the position and anchor to None, so inheritance works.
+        if self.perspective is None: # type: ignore
+            self.xpos = None
+            self.ypos = None
+            self.xanchor = None
+            self.yanchor = None
 
         # Take the computed position properties, not the
         # raw ones.
@@ -220,67 +156,40 @@ class TransformState(renpy.object.Object):
 
         rv = { }
 
-        def diff2(prop, new, old):
+        for prop in diff2_properties:
+            new = getattr(newts, prop)
+            old = getattr(self, prop)
+
             if new != old:
                 rv[prop] = (old, new)
 
-        def diff4(prop, new, inherited_new, old, inherited_old):
+        for prop in diff4_properties:
+
+            new = getattr(newts, prop)
+            old = getattr(self, prop)
+
             if new is None:
-                new_value = inherited_new
-            else:
-                new_value = new
-
+                new = getattr(newts, "inherited_" + prop)
             if old is None:
-                old_value = inherited_old
-            else:
-                old_value = old
+                old = getattr(self, "inherited_" + prop)
 
-            if new_value != old_value:
-                rv[prop] = (old_value, new_value)
-
-        diff2("nearest", newts.nearest, self.nearest)
-        diff2("alpha", newts.alpha, self.alpha)
-        diff2("additive", newts.additive, self.additive)
-        diff2("rotate", newts.rotate, self.rotate)
-        diff2("rotate_pad", newts.rotate_pad, self.rotate_pad)
-        diff2("transform_anchor", newts.transform_anchor, self.transform_anchor)
-        diff2("zoom", newts.zoom, self.zoom)
-        diff2("xzoom", newts.xzoom, self.xzoom)
-        diff2("yzoom", newts.yzoom, self.yzoom)
-
-        diff2("xaround", newts.xaround, self.xaround)
-        diff2("yaround", newts.yaround, self.yaround)
-        diff2("xanchoraround", newts.xanchoraround, self.xanchoraround)
-        diff2("yanchoraround", newts.yanchoraround, self.yanchoraround)
-
-        diff2("subpixel", newts.subpixel, self.subpixel)
-
-        diff2("crop", newts.crop, self.crop)
-        diff2("crop_relative", newts.crop_relative, self.crop_relative)
-        diff2("corner1", newts.corner1, self.corner1)
-        diff2("corner2", newts.corner2, self.corner2)
-        diff2("size", newts.size, self.size)
-
-        diff4("xpos", newts.xpos, newts.inherited_xpos, self.xpos, self.inherited_xpos)
-        diff4("xanchor", newts.xanchor, newts.inherited_xanchor, self.xanchor, self.inherited_xanchor)
-        diff2("xoffset", newts.xoffset, self.xoffset)
-
-        diff4("ypos", newts.ypos, newts.inherited_ypos, self.ypos, self.inherited_ypos)
-        diff4("yanchor", newts.yanchor, newts.inherited_yanchor, self.yanchor, self.inherited_yanchor)
-        diff2("yoffset", newts.yoffset, self.yoffset)
-
-        diff2("xpan", newts.xpan, self.xpan)
-        diff2("ypan", newts.ypan, self.ypan)
-
-        diff2("xtile", newts.xtile, self.xtile)
-        diff2("ytile", newts.ytile, self.ytile)
-
-        diff2("debug", newts.debug, self.debug)
-        diff2("events", newts.events, self.events)
+            if new != old:
+                rv[prop] = (old, new)
 
         return rv
 
     def get_placement(self, cxoffset=0, cyoffset=0):
+
+        if self.perspective is not None: # type: ignore
+            return (
+                0,
+                0,
+                0,
+                0,
+                cxoffset,
+                cyoffset,
+                False,
+                )
 
         return (
             first_not_none(self.xpos, self.inherited_xpos),
@@ -393,6 +302,24 @@ class TransformState(renpy.object.Object):
 
     offset = property(get_offset, set_offset)
 
+    def get_xysize(self):
+        return self.xsize, self.ysize
+
+    def set_xysize(self, value):
+        if value is None:
+            value = (None, None)
+        self.xsize, self.ysize = value
+
+    xysize = property(get_xysize, set_xysize)
+
+    def set_size(self, value):
+        if value is None:
+            self.xysize = None
+        else:
+            self.xysize = tuple(int(x) if isinstance(x, float) else x for x in value)
+
+    size = property(get_xysize, set_size)
+
     def set_xcenter(self, value):
         self.xpos = value
         self.xanchor = 0.5
@@ -409,6 +336,16 @@ class TransformState(renpy.object.Object):
 
     xcenter = property(get_xcenter, set_xcenter)
     ycenter = property(get_ycenter, set_ycenter)
+
+    def get_xycenter(self):
+        return self.xcenter, self.ycenter
+
+    def set_xycenter(self, value):
+        if value is None:
+            value = (None, None)
+        self.xcenter, self.ycenter = value
+
+    xycenter = property(get_xycenter, set_xycenter)
 
 
 class Proxy(object):
@@ -434,79 +371,21 @@ class Transform(Container):
     __version__ = 5
     transform_event_responder = True
 
-    # Proxying things over to our state.
-    nearest = Proxy("nearest")
-    alpha = Proxy("alpha")
-    additive = Proxy("additive")
-    rotate = Proxy("rotate")
-    rotate_pad = Proxy("rotate_pad")
-    transform_anchor = Proxy("transform_anchor")
-    zoom = Proxy("zoom")
-    xzoom = Proxy("xzoom")
-    yzoom = Proxy("yzoom")
-
-    xpos = Proxy("xpos")
-    ypos = Proxy("ypos")
-    xanchor = Proxy("xanchor")
-    yanchor = Proxy("yanchor")
-
-    xalign = Proxy("xalign")
-    yalign = Proxy("yalign")
-
-    around = Proxy("around")
-    alignaround = Proxy("alignaround")
-    angle = Proxy("angle")
-    radius = Proxy("radius")
-
-    xaround = Proxy("xaround")
-    yaround = Proxy("yaround")
-    xanchoraround = Proxy("xanchoraround")
-    yanchoraround = Proxy("yanchoraround")
-
-    pos = Proxy("pos")
-    anchor = Proxy("anchor")
-    align = Proxy("align")
-
-    crop = Proxy("crop")
-    crop_relative = Proxy("crop_relative")
-    corner1 = Proxy("corner1")
-    corner2 = Proxy("corner2")
-    size = Proxy("size")
-
-    delay = Proxy("delay")
-
-    xoffset = Proxy("xoffset")
-    yoffset = Proxy("yoffset")
-    offset = Proxy("offset")
-
-    subpixel = Proxy("subpixel")
-
-    xcenter = Proxy("xcenter")
-    ycenter = Proxy("ycenter")
-
-    xpan = Proxy("xpan")
-    ypan = Proxy("ypan")
-    xtile = Proxy("xtile")
-    ytile = Proxy("ytile")
-
-    debug = Proxy("debug")
-    events = Proxy("events")
-
     def after_upgrade(self, version):
 
         if version < 1:
             self.active = False
             self.state = TransformState()
 
-            self.state.xpos = self.xpos or 0
-            self.state.ypos = self.ypos or 0
-            self.state.xanchor = self.xanchor or 0
-            self.state.yanchor = self.yanchor or 0
-            self.state.alpha = self.alpha
-            self.state.rotate = self.rotate
-            self.state.zoom = self.zoom
-            self.state.xzoom = self.xzoom
-            self.state.yzoom = self.yzoom
+            self.state.xpos = self.xpos or 0 # type: ignore
+            self.state.ypos = self.ypos or 0 # type: ignore
+            self.state.xanchor = self.xanchor or 0 # type: ignore
+            self.state.yanchor = self.yanchor or 0 # type: ignore
+            self.state.alpha = self.alpha # type: ignore
+            self.state.rotate = self.rotate # type: ignore
+            self.state.zoom = self.zoom # type: ignore
+            self.state.xzoom = self.xzoom # type: ignore
+            self.state.yzoom = self.yzoom # type: ignore
 
             self.hide_request = False
             self.hide_response = True
@@ -541,7 +420,7 @@ class Transform(Container):
 
     # Compatibility with old versions of the class.
     active = False
-    children = False
+    children = [ ]
     arguments = DEFAULT_ARGUMENTS
 
     # Default before we set this.
@@ -550,18 +429,18 @@ class Transform(Container):
     def __init__(self,
                  child=None,
                  function=None,
-
-                 style='transform',
+                 style="default",
                  focus=None,
                  default=False,
                  _args=None,
+                 alt=None,
 
                  **kwargs):
 
         self.kwargs = kwargs
         self.style_arg = style
 
-        super(Transform, self).__init__(style=style, focus=focus, default=default, _args=_args)
+        super(Transform, self).__init__(style=style, focus=focus, default=default, _args=_args, alt=alt)
 
         self.function = function
 
@@ -569,7 +448,7 @@ class Transform(Container):
         if child is not None:
             self.add(child)
 
-        self.state = TransformState()
+        self.state = TransformState() # type: Any
 
         if kwargs:
 
@@ -577,7 +456,7 @@ class Transform(Container):
             self.arguments = { }
 
             # Fill self.arguments with a
-            for k, v in kwargs.iteritems():
+            for k, v in kwargs.items():
 
                 prefix = ""
                 prop = k
@@ -603,14 +482,15 @@ class Transform(Container):
                         prefix = new_prefix
 
             if "" in self.arguments:
-                for k, v in self.arguments[""].iteritems():
+                for k, v in self.arguments[""].items():
                     setattr(self.state, k, v)
 
         else:
             self.arguments = None
 
         # This is the matrix transforming our coordinates into child coordinates.
-        self.forward = None
+        self.forward = None # type: renpy.display.matrix.Matrix|None
+        self.reverse = None # type: renpy.display.matrix.Matrix|None
 
         # Have we called the function at least once?
         self.active = False
@@ -633,6 +513,9 @@ class Transform(Container):
         self.at_offset = 0
 
         self.child_st_base = 0
+
+        self.child_size = (0, 0)
+        self.render_size = (0, 0)
 
     def visit(self):
         if self.child is None:
@@ -662,7 +545,7 @@ class Transform(Container):
             if d is None:
                 continue
 
-            for k, v in d.iteritems():
+            for k, v in d.items():
                 setattr(state, k, v)
 
         return None
@@ -686,6 +569,9 @@ class Transform(Container):
             return
 
         self.state.take_state(t.state)
+
+        if isinstance(self.child, Transform) and isinstance(t.child, Transform):
+            self.child.take_state(t.child)
 
         if (self.child is None) and (t.child is not None):
             self.add(t.child)
@@ -741,10 +627,20 @@ class Transform(Container):
 
         return rv
 
-    def _hide(self, st, at, kind):
+    def _handles_event(self, event):
 
-        if not self.child:
-            return None
+        if (event == "replaced") and (not self.active):
+            return True
+
+        if self.function is not None:
+            return True
+
+        if self.child and self.child._handles_event(event):
+            return True
+
+        return False
+
+    def _hide(self, st, at, kind):
 
         # Prevent time from ticking backwards, as can happen if we replace a
         # transform but keep its state.
@@ -756,6 +652,12 @@ class Transform(Container):
         self.st = st = st + self.st_offset
         self.at = at = at + self.at_offset
 
+        if not self.active:
+            self.update_state()
+
+        if not self.child:
+            return None
+
         if not (self.hide_request or self.replaced_request):
             d = self.copy()
         else:
@@ -764,8 +666,8 @@ class Transform(Container):
         d.st_offset = self.st_offset
         d.at_offset = self.at_offset
 
-        if not (self.hide_request or self.replaced_request):
-            d.atl_st_offset = None
+        if isinstance(self, ATLTransform):
+            d.atl_st_offset = self.atl_st_offset if (self.atl_st_offset is not None) else self.st_offset # type: ignore
 
         if kind == "hide":
             d.hide_request = True
@@ -776,9 +678,11 @@ class Transform(Container):
         d.replaced_response = True
 
         if d.function is not None:
-            d.function(d, st + d.st_offset, at + d.at_offset)
+            d.function(d, st, at)
+        elif isinstance(d, ATLTransform):
+            d.execute(d, st, at)
 
-        new_child = d.child._hide(st, at, kind)
+        new_child = d.child._hide(st - self.st_offset, at - self.st_offset, kind)
 
         if new_child is not None:
             d.child = new_child
@@ -797,13 +701,13 @@ class Transform(Container):
 
         if duplicate and child._duplicatable:
             child = child._duplicate(self._args)
-            child._unique()
 
-        if child._duplicatable:
-            self._duplicatable = True
+            if not self._duplicatable:
+                child._unique()
 
         self.child = child
         self.children = [ child ]
+
         self.child_st_base = self.st
 
         child.per_interact()
@@ -814,6 +718,8 @@ class Transform(Container):
         """
         This updates the state to that at self.st, self.at.
         """
+
+        # NOTE: This function is duplicated (more or less) in ATLTransform.
 
         self.hide_response = True
         self.replaced_response = True
@@ -831,14 +737,21 @@ class Transform(Container):
 
         self.active = True
 
+        if self.state.last_events != self.state.events:
+            if self.state.events:
+                renpy.game.interface.timeout(0)
+            self.state.last_events = self.state.events
+
     # The render method is now defined in accelerator.pyx.
+    def render(self, width, height, st, at):
+        return transform_render(self, width, height, st, at)
 
     def event(self, ev, x, y, st):
 
         if self.hide_request:
             return None
 
-        if not self.state.events:
+        if not self.state.events: # type: ignore
             return
 
         children = self.children
@@ -847,7 +760,7 @@ class Transform(Container):
         if not offsets:
             return None
 
-        for i in xrange(len(self.children)-1, -1, -1):
+        for i in range(len(self.children) - 1, -1, -1):
 
             d = children[i]
             xo, yo = offsets[i]
@@ -869,7 +782,7 @@ class Transform(Container):
         if child is None:
             child = self.child
 
-        if (child is not None) and (child._duplicatable):
+        if getattr(child, '_duplicatable', False):
             child = child._duplicate(_args)
 
         rv = Transform(
@@ -884,9 +797,11 @@ class Transform(Container):
         return rv
 
     def _unique(self):
-        if self.child and self.child._duplicatable:
-            self._duplicatable = True
-        else:
+        if self._duplicatable:
+
+            if self.child is not None:
+                self.child._unique()
+
             self._duplicatable = False
 
     def get_placement(self):
@@ -962,12 +877,14 @@ class Transform(Container):
 
     def _duplicate(self, args):
 
+        if args and args.args:
+            args.extraneous()
+
         if not self._duplicatable:
             return self
 
         rv = self(_args=args)
         rv.take_execution_state(self)
-        rv._unique()
 
         return rv
 
@@ -986,24 +903,179 @@ class Transform(Container):
 
         return rv
 
-    def _show(self):
-        self.update_state()
-
-
-Transform.render = types.MethodType(renpy.display.accelerator.transform_render, None, Transform)
+    def _repr_info(self):
+        return repr(self.child)
 
 
 class ATLTransform(renpy.atl.ATLTransformBase, Transform):
 
     def __init__(self, atl, child=None, context={}, parameters=None, **properties):
         renpy.atl.ATLTransformBase.__init__(self, atl, context, parameters)
-        Transform.__init__(self, child=child, function=self.execute, **properties)
+        Transform.__init__(self, child=child, **properties)
 
         self.raw_child = self.child
 
-    def __repr__(self):
-        return "<ATL Transform {:x} {!r}>".format(id(self), self.atl.loc)
+    def update_state(self):
+        """
+        This updates the state to that at self.st, self.at.
+        """
 
-    def _show(self):
-        super(ATLTransform, self)._show()
-        self.execute(self, self.st, self.at)
+        self.hide_response = True
+        self.replaced_response = True
+
+        fr = self.execute(self, self.st, self.at)
+
+        # Order a redraw, if necessary.
+        if fr is not None:
+            renpy.display.render.redraw(self, fr)
+
+        self.active = True
+
+        if self.state.last_events != self.state.events:
+            if self.state.events:
+                renpy.game.interface.timeout(0)
+            self.state.last_events = self.state.events
+
+
+    def _repr_info(self):
+        return repr((self.child, self.atl.loc))
+
+
+# Names of transform properties, and if the property should be handled with
+# diff2 or diff4.
+all_properties = set()
+diff2_properties = set()
+diff4_properties = set()
+
+# Uniforms and GL properties.
+uniforms = set()
+gl_properties = set()
+
+
+def add_property(name, atl=any_object, default=None, diff=2): # type: (str, Any, Any, int|None) -> None
+    """
+    Adds an ATL property.
+    """
+
+    if name in all_properties:
+        return
+
+    all_properties.add(name)
+    setattr(TransformState, name, default)
+    setattr(Transform, name, Proxy(name))
+    renpy.atl.PROPERTIES[name] = atl
+
+    if diff == 2:
+        diff2_properties.add(name)
+    elif diff == 4:
+        diff4_properties.add(name)
+
+
+def add_uniform(name):
+    """
+    Adds a uniform with `name` to Transform and ATL.
+    """
+
+    if not name.startswith("u_"):
+        return
+
+    if name in renpy.gl2.gl2draw.standard_uniforms:
+        return
+
+    add_property(name, diff=2)
+
+    uniforms.add(name)
+
+
+def add_gl_property(name):
+    """
+    Adds a GL property with `name` to Transform and ATL.
+    """
+
+    add_property(name, diff=None)
+
+    gl_properties.add(name)
+
+
+add_property("additive", float, 0.0)
+add_property("alpha", float, 1.0)
+add_property("blend", any_object, None)
+add_property("blur", float_or_none, None)
+add_property("corner1", (position, position), None)
+add_property("corner2", (position, position), None)
+add_property("crop", (position, position, position, position), None)
+add_property("crop_relative", bool_or_none, None)
+add_property("debug", any_object, None)
+add_property("delay", float, 0)
+add_property("events", bool, True)
+add_property("fit", str, None)
+add_property("matrixanchor", (position, position), None)
+add_property("matrixcolor", matrix, None)
+add_property("matrixtransform", matrix, None)
+add_property("maxsize", (int, int), None)
+add_property("mesh", mesh, False, diff=None)
+add_property("mesh_pad", any_object, None)
+add_property("nearest", bool_or_none, None)
+add_property("perspective", any_object, None)
+add_property("rotate", float, None)
+add_property("rotate_pad", bool, True)
+add_property("shader", any_object, None, diff=None)
+add_property("subpixel", bool, False)
+add_property("transform_anchor", bool, False)
+add_property("zoom", float, 1.0)
+
+add_property("xanchoraround", float, 0.0)
+add_property("xanchor", position, None, diff=4)
+add_property("xaround", position, 0.0)
+add_property("xoffset", float, 0.0)
+add_property("xpan", float_or_none, None)
+add_property("xpos", position, None, diff=4)
+add_property("xsize", position, None)
+add_property("xtile", int, 1)
+add_property("xzoom", float, 1.0)
+
+add_property("yanchoraround", float, 0.0)
+add_property("yanchor", position, None, diff=4)
+add_property("yaround", position, 0.0)
+add_property("yoffset", float, 0.0)
+add_property("ypan", float_or_none, None)
+add_property("ypos", position, None, diff=4)
+add_property("ysize", position, None)
+add_property("ytile", int, 1)
+add_property("yzoom", float, 1.0)
+
+add_property("zpos", float, 0.0)
+add_property("zzoom", bool, False)
+
+add_gl_property("gl_anisotropic")
+add_gl_property("gl_blend_func")
+add_gl_property("gl_color_mask")
+add_gl_property("gl_depth")
+add_gl_property("gl_drawable_resolution")
+add_gl_property("gl_mipmap")
+add_gl_property("gl_pixel_perfect")
+add_gl_property("gl_texture_scaling")
+add_gl_property("gl_texture_wrap")
+
+ALIASES = {
+    "alignaround" : (float, float),
+    "align" : (float, float),
+    "anchor" : (position, position),
+    "angle" : float,
+    "around" : (position, position),
+    "offset" : (int, int),
+    "pos" : (position, position),
+    "radius" : float,
+    "size" : (int, int),
+    "xalign" : float,
+    "xcenter" : position,
+    "xycenter" : (position, position),
+    "xysize" : (position, position),
+    "yalign" : float,
+    "ycenter" : position,
+    }
+
+renpy.atl.PROPERTIES.update(ALIASES)
+
+for name in ALIASES:
+    setattr(Transform, name, Proxy(name))

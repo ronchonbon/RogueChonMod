@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -19,6 +19,11 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
+
 from renpy.sl2.slparser import Keyword, Style, PrefixStyle
 
 position_property_names = [
@@ -37,6 +42,9 @@ position_property_names = [
     "maximum",
     "xmaximum",
     "ymaximum",
+    "minimum",
+    "xminimum",
+    "yminimum",
     "area",
     "clipping",
     "xfill",
@@ -51,12 +59,12 @@ position_property_names = [
     "debug",
     ]
 
-position_properties = [ Style(i) for i in position_property_names ]
-text_position_properties = [ PrefixStyle("text_", i) for i in position_property_names ]
-side_position_properties = [ PrefixStyle("side_", i) for i in position_property_names ]
-viewport_position_properties = [ PrefixStyle("viewport_", i) for i in position_property_names ]
-scrollbar_position_properties = [ PrefixStyle("scrollbar_", i) for i in position_property_names ]
-vscrollbar_position_properties = [ PrefixStyle("vscrollbar_", i) for i in position_property_names ]
+position_properties = [ Style(i) for i in position_property_names ] + [ Keyword("tooltip") ] # type: ignore
+text_position_properties = [ PrefixStyle("text_", i) for i in position_property_names ] # type: ignore
+side_position_properties = [ PrefixStyle("side_", i) for i in position_property_names ] + [ Keyword("tooltip") ] # type: ignore
+viewport_position_properties = [ PrefixStyle("viewport_", i) for i in position_property_names ] # type: ignore
+scrollbar_position_properties = [ PrefixStyle("scrollbar_", i) for i in position_property_names ] + [ Keyword("tooltip") ] # type: ignore
+vscrollbar_position_properties = [ PrefixStyle("vscrollbar_", i) for i in position_property_names ] + [ Keyword("tooltip") ] # type: ignore
 
 text_property_names = [
     "antialias",
@@ -81,6 +89,7 @@ text_property_names = [
     "min_width",
     "newline_indent",
     "outlines",
+    "outline_scaling",
     "rest_indent",
     "ruby_style",
     "slow_cps",
@@ -90,19 +99,15 @@ text_property_names = [
     "text_align",
     "text_y_fudge",
     "underline",
-    "minimum",
-    "xminimum",
-    "yminimum",
     "hinting",
     "adjust_spacing",
+    "mipmap",
     ]
 
 text_properties = [ Style(i) for i in text_property_names ]
 text_text_properties = [ PrefixStyle("text_", i) for i in text_property_names ]
 
-window_properties = [ Style(i) for i in [
-    "background",
-    "foreground",
+margin_properties = [ Style(i) for i in [
     "left_margin",
     "right_margin",
     "bottom_margin",
@@ -110,6 +115,9 @@ window_properties = [ Style(i) for i in [
     "xmargin",
     "ymargin",
     "margin",
+    ] ]
+
+padding_properties = [ Style(i) for i in [
     "left_padding",
     "right_padding",
     "top_padding",
@@ -117,11 +125,14 @@ window_properties = [ Style(i) for i in [
     "xpadding",
     "ypadding",
     "padding",
-    "size_group",
-    "minimum",
-    "xminimum",
-    "yminimum",
     ] ]
+
+window_properties = [ Style(i) for i in [
+    "background",
+    "foreground",
+    "size_group",
+    "modal",
+    ] ] + margin_properties + padding_properties
 
 button_properties = [ Style(i) for i in [
     "sound",
@@ -140,10 +151,9 @@ button_properties = [ Style(i) for i in [
         Keyword("sensitive"),
         Keyword("keysym"),
         Keyword("alternate_keysym"),
-    ]
+    ] # type: ignore
 
-
-bar_property_names =  [
+bar_property_names = [
     "bar_vertical",
     "bar_invert",
     "bar_resizing",
@@ -168,10 +178,10 @@ bar_properties = [ Style(i) for i in bar_property_names ]
 scrollbar_bar_properties = [ PrefixStyle("scrollbar_", i) for i in bar_property_names ]
 vscrollbar_bar_properties = [ PrefixStyle("vscrollbar_", i) for i in bar_property_names ]
 
-
-box_properties = [ Style(i) for i in [
+box_property_names = [
     "box_layout",
     "box_wrap",
+    "box_wrap_spacing",
     "box_reverse",
     "order_reverse",
     "spacing",
@@ -179,17 +189,15 @@ box_properties = [ Style(i) for i in [
     "fit_first",
     "xfit",
     "yfit",
-    "minimum",
-    "xminimum",
-    "yminimum",
-    ] ]
+]
+
+box_properties = [ Style(i) for i in box_property_names ]
 
 grid_properties = [ Style(i) for i in [
     "spacing",
     "xspacing",
     "yspacing",
-    ] ]
-
+    ] ] + margin_properties
 
 ui_properties = [
     Keyword("at"),
@@ -200,6 +208,7 @@ ui_properties = [
     Keyword("style_suffix"),
     Keyword("focus"),
     Keyword("default"),
+    Keyword("default_focus"),
     ]
 
 property_groups = {

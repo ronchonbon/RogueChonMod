@@ -1,1 +1,3 @@
-vc_version = 2919
+vc_version = 22062402
+official = True
+nightly = False

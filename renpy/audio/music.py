@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -21,16 +21,20 @@
 
 # The public API for music in games.
 
-import renpy.audio
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
+
+import renpy
 
 from renpy.audio.audio import get_channel, get_serial
 
 # Part of the public api:
 from renpy.audio.audio import register_channel, alias_channel
-register_channel; alias_channel
 
 
-def play(filenames, channel="music", loop=None, fadeout=None, synchro_start=False, fadein=0, tight=None, if_changed=False):
+def play(filenames, channel="music", loop=None, fadeout=None, synchro_start=False, fadein=0, tight=None, if_changed=False, relative_volume=1.0):
     """
     :doc: audio
 
@@ -49,7 +53,8 @@ def play(filenames, channel="music", loop=None, fadeout=None, synchro_start=Fals
 
     `fadeout`
         If not None, this is a time in seconds to fade for. Otherwise the
-        fadeout time is taken from config.fade_music.
+        fadeout time is taken from config.fade_music. This is ignored if
+        the channel is paused when the music is played.
 
     `synchro_start`
         Ren'Py will ensure that all channels of with synchro_start set to true
@@ -71,6 +76,12 @@ def play(filenames, channel="music", loop=None, fadeout=None, synchro_start=Fals
         instead will be kept playing. (This will always queue up an additional
         loop of the music.)
 
+    `relative_volume`
+        This is the volume relative to the current channel volume.
+        The specified file will be played at that relative volume. If not
+        specified, it will always default to 1.0, which plays the file at the
+        original volume as determined by the mixer, channel and secondary volume.
+
     This clears the pause flag for `channel`.
     """
 
@@ -83,11 +94,14 @@ def play(filenames, channel="music", loop=None, fadeout=None, synchro_start=Fals
     if isinstance(filenames, basestring):
         filenames = [ filenames ]
 
+    if get_pause(channel=channel):
+        fadeout = 0
+
     with renpy.audio.audio.lock:
 
         try:
             c = get_channel(channel)
-            ctx = c.context
+            ctx = c.copy_context()
 
             if loop is None:
                 loop = c.default_loop
@@ -109,7 +123,13 @@ def play(filenames, channel="music", loop=None, fadeout=None, synchro_start=Fals
                 c.fadeout(fadeout)
                 loop_only = False
 
-            c.enqueue(filenames, loop=loop, synchro_start=synchro_start, fadein=fadein, tight=tight, loop_only=loop_only)
+            if renpy.config.skip_sounds and renpy.config.skipping and (not loop):
+                enqueue = False
+            else:
+                enqueue = True
+
+            if enqueue:
+                c.enqueue(filenames, loop=loop, synchro_start=synchro_start, fadein=fadein, tight=tight, loop_only=loop_only, relative_volume=relative_volume)
 
             t = get_serial()
             ctx.last_changed = t
@@ -118,18 +138,20 @@ def play(filenames, channel="music", loop=None, fadeout=None, synchro_start=Fals
             if loop:
                 ctx.last_filenames = filenames
                 ctx.last_tight = tight
+                ctx.last_relative_volume = relative_volume
             else:
                 ctx.last_filenames = [ ]
                 ctx.last_tight = False
+                ctx.last_relative_volume = 1.0
 
             ctx.pause = False
 
-        except:
+        except Exception:
             if renpy.config.debug_sound:
                 raise
 
 
-def queue(filenames, channel="music", loop=None, clear_queue=True, fadein=0, tight=None):
+def queue(filenames, channel="music", loop=None, clear_queue=True, fadein=0, tight=None, relative_volume=1.0):
     """
     :doc: audio
 
@@ -159,6 +181,12 @@ def queue(filenames, channel="music", loop=None, clear_queue=True, fadein=0, tig
         If this is True, then fadeouts will span into the next-queued sound. If
         None, this is true when loop is True, and false otherwise.
 
+    `relative_volume`
+        This is the volume relative to the current channel volume.
+        The specified file will be played at that relative volume. If not
+        specified, it will always default to 1.0, which plays the file at the
+        original volume as determined by the mixer, channel and secondary volume.
+
     This clears the pause flag for `channel`.
     """
 
@@ -172,12 +200,17 @@ def queue(filenames, channel="music", loop=None, clear_queue=True, fadein=0, tig
     if isinstance(filenames, basestring):
         filenames = [ filenames ]
 
+    if renpy.config.skipping == "fast":
+        stop(channel)
+
+    set_pause(False, channel=channel)
+
     with renpy.audio.audio.lock:
 
         try:
 
             c = get_channel(channel)
-            ctx = c.context
+            ctx = c.copy_context()
 
             if loop is None:
                 loop = c.default_loop
@@ -188,7 +221,13 @@ def queue(filenames, channel="music", loop=None, clear_queue=True, fadein=0, tig
             if clear_queue:
                 c.dequeue(True)
 
-            c.enqueue(filenames, loop=loop, fadein=fadein, tight=tight)
+            if renpy.config.skip_sounds and renpy.config.skipping and (not loop):
+                enqueue = False
+            else:
+                enqueue = True
+
+            if enqueue:
+                c.enqueue(filenames, loop=loop, fadein=fadein, tight=tight, relative_volume=relative_volume)
 
             t = get_serial()
             ctx.last_changed = t
@@ -197,13 +236,15 @@ def queue(filenames, channel="music", loop=None, clear_queue=True, fadein=0, tig
             if loop:
                 ctx.last_filenames = filenames
                 ctx.last_tight = tight
+                ctx.last_relative_volume = relative_volume
             else:
                 ctx.last_filenames = [ ]
                 ctx.last_tight = False
+                ctx.last_relative_volume = 1.0
 
             ctx.pause = False
 
-        except:
+        except Exception:
             if renpy.config.debug_sound:
                 raise
 
@@ -219,7 +260,7 @@ def playable(filename, channel="music"):
 
     filename, _, _ = c.split_filename(filename, False)
 
-    return renpy.loader.loadable(c.file_prefix + filename + c.file_suffix)
+    return renpy.loader.loadable(filename)
 
 
 def stop(channel="music", fadeout=None):
@@ -238,7 +279,8 @@ def stop(channel="music", fadeout=None):
 
     `fadeout`
         If not None, this is a time in seconds to fade for. Otherwise the
-        fadeout time is taken from config.fade_music.
+        fadeout time is taken from config.fade_music. This is ignored if
+        the channel is paused.
 
 
     """
@@ -246,11 +288,14 @@ def stop(channel="music", fadeout=None):
     if renpy.game.context().init_phase:
         return
 
+    if get_pause(channel=channel):
+        fadeout = 0.0
+
     with renpy.audio.audio.lock:
 
         try:
             c = get_channel(channel)
-            ctx = c.context
+            ctx = c.copy_context()
 
             if fadeout is None:
                 fadeout = renpy.config.fade_music
@@ -263,9 +308,11 @@ def stop(channel="music", fadeout=None):
             ctx.last_filenames = [ ]
             ctx.last_tight = False
 
-        except:
+        except Exception:
             if renpy.config.debug_sound:
                 raise
+
+    set_pause(False, channel=channel)
 
 
 def set_music(channel, flag, default=False):
@@ -309,7 +356,7 @@ def get_delay(time, channel="music"):
 
         return time - t
 
-    except:
+    except Exception:
         if renpy.config.debug_sound:
             raise
 
@@ -335,9 +382,9 @@ def get_pos(channel="music"):
         if not t or t < 0:
             return None
 
-        return t / 1000.0
+        return t
 
-    except:
+    except Exception:
         if renpy.config.debug_sound:
             raise
 
@@ -349,18 +396,20 @@ def get_duration(channel="music"):
     :doc: audio
 
     Returns the duration of the audio or video file on `channel`. Returns
-    0.0 if no file is playing on `channel`.
+    0.0 if no file is playing on `channel`, or the duration is unknown.
+    Some formats - notably MP3 - do not include duration information in a
+    format Ren'Py can access.
     """
 
     try:
         c = renpy.audio.audio.get_channel(channel)
         return c.get_duration()
 
-    except:
+    except Exception:
         if renpy.config.debug_sound:
             raise
 
-        return None
+        return 0.0
 
 
 def get_playing(channel="music"):
@@ -374,7 +423,7 @@ def get_playing(channel="music"):
     try:
         c = renpy.audio.audio.get_channel(channel)
         return c.get_playing()
-    except:
+    except Exception:
         if renpy.config.debug_sound:
             raise
 
@@ -390,6 +439,22 @@ def is_playing(channel="music"):
     """
 
     return (get_playing(channel=channel) is not None)
+
+
+def get_loop(channel="music"):
+    """
+    :doc: audio
+
+    Return a list of filenames that are being looped on `channel`, or None
+    if no files are being looped. In the case where a loop is queued, but
+    is not yet playing, the loop is returned, not the currently playing
+    music.
+    """
+
+    c = get_channel(channel)
+    ctx = c.get_context()
+
+    return ctx.last_filenames or None
 
 
 def set_volume(volume, delay=0, channel="music"):
@@ -415,7 +480,7 @@ def set_volume(volume, delay=0, channel="music"):
     try:
         c = renpy.audio.audio.get_channel(channel)
         c.set_secondary_volume(volume, delay)
-    except:
+    except Exception:
         if renpy.config.debug_sound:
             raise
 
@@ -443,7 +508,7 @@ def set_pan(pan, delay, channel="music"):
     try:
         c = renpy.audio.audio.get_channel(channel)
         c.set_pan(pan, delay)
-    except:
+    except Exception:
         if renpy.config.debug_sound:
             raise
 
@@ -464,7 +529,7 @@ def set_queue_empty_callback(callback, channel="music"):
     try:
         c = renpy.audio.audio.get_channel(channel)
         c.callback = callback
-    except:
+    except Exception:
         if renpy.config.debug_sound:
             raise
 
@@ -478,8 +543,8 @@ def set_pause(value, channel="music"):
     """
     try:
         c = renpy.audio.audio.get_channel(channel)
-        c.context.pause = value
-    except:
+        c.copy_context().pause = value
+    except Exception:
         if renpy.config.debug_sound:
             raise
 
@@ -493,7 +558,7 @@ def get_pause(channel="music"):
     try:
         c = renpy.audio.audio.get_channel(channel)
         return c.context.pause
-    except:
+    except Exception:
 
         return False
 
@@ -516,7 +581,7 @@ def set_mixer(channel, mixer, default=False):
         if not default or c.mixer is None:
             c.mixer = mixer
 
-    except:
+    except Exception:
         if renpy.config.debug_sound:
             raise
 
@@ -542,9 +607,8 @@ def channel_defined(channel):
     try:
         renpy.audio.audio.get_channel(channel)
         return True
-    except:
+    except Exception:
         return False
-
 
 # Music change logic:
 

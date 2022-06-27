@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -21,20 +21,25 @@
 
 # This module handles the logging of messages to a file.
 
-from __future__ import print_function
-import os.path
-import codecs
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # type: ignore
+
+
+
+import os
 import traceback
 import platform
 import time
 import tempfile
+import sys
+import io
+
+import encodings.latin_1 # @UnusedImport
 
 import renpy
-import sys
 
 real_stdout = sys.stdout
 real_stderr = sys.stderr
-
 
 # The file events are logged to.
 log_file = None
@@ -74,7 +79,11 @@ class LogFile(object):
         if renpy.ios:
             self.file = real_stdout
 
-    def open(self):  # @ReservedAssignment
+    def open(self): # @ReservedAssignment
+
+        if renpy.config.log_to_stdout:
+            self.file = real_stdout
+            return True
 
         if self.file:
             return True
@@ -91,29 +100,37 @@ class LogFile(object):
         if not renpy.config.log_enable:
             return False
 
+        if renpy.config.logdir is None:
+            return
+
         try:
-            base = os.environ.get("RENPY_LOG_BASE", renpy.config.logdir or renpy.config.basedir)
+            base = os.environ.get("RENPY_LOG_BASE", renpy.config.logdir)
+
+            if base is None:
+                return False
+
             fn = os.path.join(base, self.name + ".txt")
 
             altfn = os.path.join(tempfile.gettempdir(), "renpy-" + self.name + ".txt")
-
-            if renpy.android:
-                print("Logging to", fn)
 
             if self.append:
                 mode = "a"
             else:
                 mode = "w"
 
-            if renpy.config.log_to_stdout:
-                self.file = real_stdout
-
-            else:
+            try:
+                self.file = io.open(fn, mode, encoding="utf-8")
 
                 try:
-                    self.file = codecs.open(fn, mode, "utf-8")
-                except:
-                    self.file = codecs.open(altfn, mode, "utf-8")
+                    renpy.util.expose_file(fn)
+                except Exception:
+                    pass
+            except Exception:
+                self.file = io.open(altfn, mode, encoding="utf-8")
+                try:
+                    renpy.util.expose_file(altfn)
+                except Exception:
+                    pass
 
             if self.append:
                 self.write('')
@@ -123,7 +140,7 @@ class LogFile(object):
             self.write("%s", time.ctime())
             try:
                 self.write("%s", platform.platform())
-            except:
+            except Exception:
                 self.write("Unknown platform.")
             self.write("%s", renpy.version)
             self.write("%s %s", renpy.config.name, renpy.config.version)
@@ -131,7 +148,7 @@ class LogFile(object):
 
             return True
 
-        except:
+        except Exception:
             self.file = False
             traceback.print_exc(file=real_stderr)
             return False
@@ -143,19 +160,21 @@ class LogFile(object):
 
         if self.open():
 
-            if not self.raw_write:
-                s = s % args
-                s += "\n"
-
-            if not isinstance(s, unicode):
+            if not isinstance(s, str):
                 s = s.decode("latin-1")
 
-            s = s.replace("\n", "\r\n")
+            if not self.raw_write:
+                try:
+                    s = s % args
+                except Exception:
+                    s = repr((s,) + args)
 
-            self.file.write(s)
+                s += "\n"
+
+            self.file.write(s) # type: ignore
 
             if self.flush:
-                self.file.flush()
+                self.file.flush() # type: ignore
 
     def exception(self):
         """
@@ -163,7 +182,7 @@ class LogFile(object):
         """
 
         self.raw_write = True
-        traceback.print_exc(None, self)
+        traceback.print_exc(None, self) # type: ignore
         self.raw_write = False
 
 
@@ -171,7 +190,7 @@ class LogFile(object):
 log_cache = { }
 
 
-def open(name, append=False, developer=False, flush=False):  # @ReservedAssignment
+def open(name, append=False, developer=False, flush=False): # @ReservedAssignment
     rv = log_cache.get(name, None)
 
     if rv is None:
@@ -180,19 +199,52 @@ def open(name, append=False, developer=False, flush=False):  # @ReservedAssignme
 
     return rv
 
+################################################################################
+# Timed event log.
+
+
+class TimeLog(list):
+    """
+    This represents a log that is limited to the last `duration` seconds.
+    """
+
+    def __init__(self, duration):
+        self.duration = duration
+
+    def append(self, v):
+        now = time.time()
+
+        list.append(self, (now, v))
+        self.prune(now)
+
+    def prune(self, now=None):
+
+        if now is None:
+            now = time.time()
+
+        while self[0][0] < (now - self.duration):
+            self.pop(0)
 
 ################################################################################
 # Stdout / Stderr Redirection
 
+
 class StdioRedirector(object):
+
+    real_file = sys.stderr
 
     def __init__(self):
         self.buffer = ''
-        self.log = open("log", developer=False, append=False)
+        self.log = open("log", developer=False, append=False, flush=True)
 
     def write(self, s):
-        self.real_file.write(s)
-        self.real_file.flush()
+
+        if not isinstance(s, str):
+            s = str(s, "utf-8", "replace")
+
+        if not renpy.config.log_to_stdout:
+            self.real_file.write(s)
+            self.real_file.flush()
 
         if renpy.ios:
             return
@@ -203,7 +255,7 @@ class StdioRedirector(object):
 
         try:
             callbacks = self.get_callbacks()
-        except:
+        except Exception:
             callbacks = [ ]
 
         for l in lines[:-1]:
@@ -212,8 +264,7 @@ class StdioRedirector(object):
             for i in callbacks:
                 try:
                     i(l)
-                except:
-                    # traceback.print_exc(None, real_stderr)
+                except Exception:
                     pass
 
         self.buffer = lines[-1]
@@ -229,25 +280,32 @@ class StdioRedirector(object):
     def close(self):
         pass
 
-
-class StdoutRedirector(StdioRedirector):
-    real_file = real_stdout
-
     def get_callbacks(self):
-        return renpy.config.stdout_callbacks
+        return [ ]
 
 
-sys.stdout = sys_stdout = StdoutRedirector()
+if not "RENPY_NO_REDIRECT_STDIO" in os.environ:
 
+    class StdoutRedirector(StdioRedirector):
+        real_file = real_stdout
 
-class StderrRedirector(StdioRedirector):
-    real_file = real_stderr
+        def get_callbacks(self):
+            return renpy.config.stdout_callbacks
 
-    def get_callbacks(self):
-        return renpy.config.stderr_callbacks
+    sys.stdout = sys_stdout = StdoutRedirector()
 
+    class StderrRedirector(StdioRedirector):
+        real_file = real_stderr
 
-sys.stderr = sys_stderr = StderrRedirector()
+        def get_callbacks(self):
+            return renpy.config.stderr_callbacks
+
+    sys.stderr = sys_stderr = StderrRedirector()
+
+else:
+
+    sys_stdout = sys.stdout
+    sys_stderr = sys.stderr
 
 
 def post_init():

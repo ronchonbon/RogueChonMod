@@ -1622,10 +1622,6 @@ label clothing_shop:
                         $ item = "_sheer_fetish_pants"
                     "Sheer fetish pants (locked)" if Girl.outfit["bottom"] == "_sheer_fetish_pants":
                         pass
-                    "Classic outfit pants" if Girl == RogueX and Girl.outfit["bottom"] != "_classic_pants":
-                        $ item = "_classic_pants"
-                    "Classic outfit pants (locked)" if Girl.outfit["bottom"] == "_classic_pants":
-                        pass
                     "Red dress" if Girl == RogueX and Girl.outfit["dress"] != "_red_dress":
                         $ item = "_red_dress"
                     "Red dress (locked)" if Girl.outfit["dress"] == "_red_dress":
@@ -1633,10 +1629,6 @@ label clothing_shop:
                     "Blue dress" if Girl == RogueX and Girl.outfit["dress"] != "_blue_dress":
                         $ item = "_blue_dress"
                     "Blue dress (locked)" if Girl.outfit["dress"] == "_blue_dress":
-                        pass
-                    "Classic outfit bra" if Girl == RogueX and Girl.outfit["bra"] != "_classic_bra":
-                        $ item = "_classic_bra"
-                    "Classic outfit bra (locked)" if Girl.outfit["bra"] == "_classic_bra":
                         pass
                     "Raven suit" if Girl == RogueX and Girl.outfit["bodysuit"] != "_Raven_suit":
                         $ item = "_Raven_suit"
@@ -1989,14 +1981,10 @@ label clothing_shop:
                                 $ item = "_opaque_fetish_pants"
                             "The sheer fetish pants." if "_sheer_fetish_pants" in cart:
                                 $ item = "_sheer_fetish_pants"
-                            "Rogue's classic outfit pants." if "_classic_pants" in cart:
-                                $ item = "_classic_pants"
                             "The red dress." if "_red_dress" in cart:
                                 $ item = "_red_dress"
                             "The blue dress." if "_blue_dress" in cart:
                                 $ item = "_blue_dress"
-                            "Rogue's classic outfit top." if "_classic_bra" in cart:
-                                $ item = "_classic_bra"
                             "The Raven suit." if "_Raven_suit" in cart:
                                 $ item = "_Raven_suit"
                             "The swimsuit." if "_swimsuit" in cart:
@@ -2061,9 +2049,9 @@ label clothing_shop:
                             else:
                                 if item in ["_Raven_suit", "_catsuit", "_domme_suit"]:
                                     $ cost = 200
-                                elif item in ["_Raven_cloak", "_opaque_fetish_top", "_sheer_fetish_top", "_opaque_fetish_pants", "_sheer_fetish_pants", "_red_dress", "_blue_dress", "_classic_bra"]:
+                                elif item in ["_Raven_cloak", "_opaque_fetish_top", "_sheer_fetish_top", "_opaque_fetish_pants", "_sheer_fetish_pants", "_red_dress", "_blue_dress"]:
                                     $ cost = 100
-                                elif item in ["_classic_jacket", "_classic_pants", "_swimsuit", "_sexy_swimsuit", "_violet_shirt", "_black_and_blue_pants", "_domme_boots"]:
+                                elif item in ["_classic_jacket", "_swimsuit", "_sexy_swimsuit", "_violet_shirt", "_black_and_blue_pants", "_domme_boots"]:
                                     $ cost = 75
                                 elif item in ["_qipao", "_sci_fi_suit"]:
                                     $ cost = 300

@@ -28,6 +28,7 @@ cdef enum ruby_t:
     RUBY_NONE
     RUBY_BOTTOM
     RUBY_TOP
+    RUBY_ALT
 
 cdef class Glyph:
 
@@ -43,6 +44,7 @@ cdef class Glyph:
 
         # The character we use.
         public unsigned int character
+        public unsigned int variation
 
         # Controls splitting of this glyph, based on where we are in the
         # the line.
@@ -64,6 +66,9 @@ cdef class Glyph:
 
         # The hyperlink this is part of.
         public short hyperlink
+
+        # Should we draw this glyph.
+        public bint draw
 
 
 cdef class Line:

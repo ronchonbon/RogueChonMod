@@ -1,4 +1,4 @@
-# Copyright 2004-2017 Tom Rothamel <pytom@bishoujo.us>
+# Copyright 2004-2022 Tom Rothamel <pytom@bishoujo.us>
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -19,11 +19,24 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
+from renpy.compat import PY2, basestring, bchr, bord, chr, open, pystr, range, round, str, tobytes, unicode # *
+
+
+
 import sys
 import os
-import renpy.audio
 import subprocess
-import pygame
+
+import pygame_sdl2 as pygame
+import renpy
+
+
+class TTSDone(str):
+    """
+    A subclass of string that is returned from a tts function to stop
+    further TTS processing.
+    """
 
 
 class TTSRoot(Exception):
@@ -69,7 +82,7 @@ def default_tts_function(s):
         try:
             process.terminate()
             process.wait()
-        except:
+        except Exception:
             pass
 
     process = None
@@ -81,8 +94,8 @@ def default_tts_function(s):
 
     if renpy.game.preferences.self_voicing == "clipboard":
         try:
-            pygame.scrap.put(pygame.SCRAP_TEXT, s.encode("utf-8"))
-        except:
+            pygame.scrap.put(pygame.scrap.SCRAP_TEXT, s.encode("utf-8"))
+        except Exception:
             pass
 
         return
@@ -114,13 +127,21 @@ def default_tts_function(s):
     elif renpy.windows:
 
         if renpy.config.tts_voice is None:
-            voice = "default voice"  # something that is unlikely to match.
+            voice = "default voice" # something that is unlikely to match.
         else:
             voice = renpy.config.tts_voice
 
         say_vbs = os.path.join(os.path.dirname(sys.executable), "say.vbs")
         s = s.replace('"', "")
         process = subprocess.Popen([ "wscript", fsencode(say_vbs), fsencode(s), fsencode(voice) ])
+
+    elif renpy.emscripten and renpy.config.webaudio:
+
+        try:
+            from renpy.audio.webaudio import call
+            call("tts", s)
+        except Exception:
+            pass
 
 
 def tts(s):
@@ -132,7 +153,7 @@ def tts(s):
 
     try:
         renpy.config.tts_function(s)
-    except:
+    except Exception:
         pass
 
     queue = [ ]

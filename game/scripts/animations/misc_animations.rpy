@@ -282,7 +282,7 @@ image PhoneScreen:
         zoom 1.5
 
     contains:
-        "[focused_Girl.Tag]_sprite"
+        "[focused_Girl.tag]_sprite"
         pos (0, 0)
         offset (290,50)
         anchor (0.6, 0)
