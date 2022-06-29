@@ -43,7 +43,7 @@ init -1 python hide:
     style.window.xmaximum = 500
     style.window.yminimum = 5
 
-    style.say_who_window.background = Frame("images/Nametag.png", 20,20) #namebox.png
+    style.say_who_window.background = Frame("images/Nametag.png", 20, 20) #namebox.png
     style.say_who_window.xalign = 0.05
     style.say_who_window.yalign = -100
     style.say_who_window.xminimum = 50

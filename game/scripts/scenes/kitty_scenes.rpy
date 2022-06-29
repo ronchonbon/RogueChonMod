@@ -35,7 +35,7 @@ label meet_Kitty:
 
             ch_k "Wha! Well, yeah. . ."
 
-            $ KittyX.blushing = "blush1"
+            $ KittyX.blushing = "_blush1"
 
             $ flag = False
         "Sorry about that.":
@@ -492,7 +492,7 @@ label Kitty_Love:
             "Let her go":
                 "She dashes through the nearest wall and vanishes from view."
                 jump Kitty_Love_End
-        $ KittyX.blushing = "blush1"
+        $ KittyX.blushing = "_blush1"
         menu:
             extend ""
             "Pull her close":
@@ -824,7 +824,7 @@ label Kitty_Sub:
                         call change_Girl_stat(KittyX, "inhibition", 50, 5)
                         ch_k ". . ."
 
-    $ KittyX.blushing = "blush1"
+    $ KittyX.blushing = "_blush1"
     if not line:
 
         ch_k "Well, I've, uhm. . . never had a guy be like that with me before. . ."
@@ -921,7 +921,7 @@ label Kitty_Sub:
         ch_k "Awesome. So. . .if you wanted me to, I could[KittyX.like]call you {i}sir{/i} or something."
         $ KittyX.change_face("sly", 2)
         ch_k "Think you'd like that?"
-        $ KittyX.blushing = "blush1"
+        $ KittyX.blushing = "_blush1"
         menu:
             extend ""
             "That has a nice ring to it.":
@@ -950,7 +950,7 @@ label Kitty_Sub:
 
     $ KittyX.history.append("sir")
     if not line:
-        $ KittyX.blushing = "blush1"
+        $ KittyX.blushing = "_blush1"
         $ KittyX.player_petnames.append("sir")
 
     elif line == "rude":
@@ -965,7 +965,7 @@ label Kitty_Sub:
         $ KittyX.mouth = "smile"
         ch_k "I was just kidding. I[KittyX.like]. . yeah. That's kinda weird."
         ch_k "I should go. I think I hear Professor Xavier calling me."
-        $ KittyX.blushing = "blush1"
+        $ KittyX.blushing = "_blush1"
 
         call remove_Girl(KittyX)
         if not simulation:
@@ -1139,7 +1139,7 @@ label Kitty_Master:
                     call change_Girl_stat(KittyX, "obedience", 200, -50)
                     call change_Girl_stat(KittyX, "inhibition", 50, -15)
                     ch_k "Oh. Sorry. I guess I got[KittyX.like]carried away with it."
-                    $ KittyX.blushing = "blush1"
+                    $ KittyX.blushing = "_blush1"
                     $ line = "embarrassed"
         "As if I care what you think, slut.":
 
@@ -1293,7 +1293,7 @@ label Kitty_Sexfriend:
                             ch_k "Well. . ."
                         "No promises.":
 
-                            $ KittyX.change_face("perplexed",2)
+                            $ KittyX.change_face("perplexed", 2)
                             call change_Girl_stat(KittyX, "inhibition", 80, -5)
                             ch_k "Uhm. . . never mind, then."
                             $ line = "embarrassed"
@@ -1311,7 +1311,7 @@ label Kitty_Sexfriend:
             "Right. . . ":
                 pass
             "Okay. Just stop. You're creeping me out.":
-                $ KittyX.change_face("perplexed",2)
+                $ KittyX.change_face("perplexed", 2)
                 call change_Girl_stat(KittyX, "love", 200, -10)
                 call change_Girl_stat(KittyX, "inhibition", 80, -10)
                 ch_k "Sorry. I knew this was a mistake."
@@ -1324,7 +1324,7 @@ label Kitty_Sexfriend:
             "Right. . . ":
                 pass
             "Okay. Just stop. You're creeping me out.":
-                $ KittyX.change_face("perplexed",2)
+                $ KittyX.change_face("perplexed", 2)
                 call change_Girl_stat(KittyX, "love", 200, -10)
                 call change_Girl_stat(KittyX, "inhibition", 80, -10)
                 ch_k "Sorry. I knew this was a mistake."
@@ -1356,7 +1356,7 @@ label Kitty_Sexfriend:
                         $ line = "rude"
             "Uhm, to be honest, I'd rather not.":
 
-                $ KittyX.change_face("sadside",2)
+                $ KittyX.change_face("sadside", 2)
                 call change_Girl_stat(KittyX, "obedience", 50, 15)
                 call change_Girl_stat(KittyX, "inhibition", 80, -15)
                 ch_k "Oh. Okay."
@@ -1386,12 +1386,12 @@ label Kitty_Sexfriend:
         "[KittyX.name] phases through the floor leaving you alone. You think you may have hurt her feelings."
     else:
         $ KittyX.player_petnames.append("sex friend")
-        $ KittyX.change_face("sly",2)
+        $ KittyX.change_face("sly", 2)
         call change_Girl_stat(KittyX, "inhibition", 80, 10)
         call change_Girl_stat(KittyX, "lust", 80, 10)
         "[KittyX.name] leans in and passes her hand across your body."
         "As she does so, she phases her hand through your jeans, so her fingers slide along your bare skin."
-        $ KittyX.blushing = "blush1"
+        $ KittyX.blushing = "_blush1"
         ch_k "I'll definitely be seeing {i}you{/i} later, [KittyX.player_petname]."
         call remove_Girl(KittyX)
         "She passes through a nearby wall. "
@@ -2037,17 +2037,17 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
     call change_Girl_stat(KittyX, "inhibition", 80, Shy)
     "[KittyX.name] sneaks up behind [Girl.name]. . ."
 
-    $ Girl.change_face("surprised",2)
+    $ Girl.change_face("surprised", 2)
     if line == "over":
         $ line = Girl.outfit["top"]
         $ Girl.outfit["top"] = ""
-        call expression Girl.tag + "First_Topless" pass (1)
+        call expression Girl.tag + "_First_Topless" pass (1)
         "She reaches out and snags [Girl.name]'s [line], tugging it through her body."
 
     elif line == "chest":
         $ line = Girl.outfit["bra"]
         $ Girl.outfit["bra"] = ""
-        call expression Girl.tag + "First_Topless" pass (1)
+        call expression Girl.tag + "_First_Topless" pass (1)
         if Girl.outfit["top"]:
             "She reaches through [Girl.name]'s [Girl.outfit[top]] and snags her [line]."
         else:
@@ -2056,13 +2056,13 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
     elif line == "legs":
         $ line = Girl.outfit["bottom"]
         $ Girl.outfit["bottom"] = ""
-        call expression Girl.tag + "First_Bottomless" pass (1)
+        call expression Girl.tag + "_First_Bottomless" pass (1)
         "She reaches down and snags [Girl.name]'s [line], tugging them through her body."
 
     elif line == "panties":
         $ line = Girl.outfit["underwear"]
         $ Girl.outfit["underwear"] = ""
-        call expression Girl.tag + "First_Bottomless" pass (1)
+        call expression Girl.tag + "_First_Bottomless" pass (1)
         if Girl.outfit["bottom"]:
             "She reaches down through [Girl.name]'s [Girl.outfit[bottom]] and snags her [line]."
         elif Girl.outfit["hose"]:
@@ -2072,7 +2072,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
     elif line == "hose":
         $ line = Girl.outfit["hose"]
         $ Girl.outfit["hose"] = ""
-        call expression Girl.tag + "First_Bottomless" pass (1)
+        call expression Girl.tag + "_First_Bottomless" pass (1)
         if Girl.outfit["bottom"]:
             "She reaches down through [Girl.name]'s [Girl.outfit[bottom]] and snags her [line]."
         else:
@@ -2105,7 +2105,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
             call change_Girl_stat(Girl, "love", 90, -(Shy))
             "[Girl.name] glances back in surprise, and then glances over at you with a glare."
         else:
-            $ Girl.change_face("angry",2)
+            $ Girl.change_face("angry", 2)
             call change_Girl_stat(Girl, "love", 90, -(Shy))
             "[Girl.name] glances back in surprise, and then glances over at you with a glare."
             "She storms away in disgust."
@@ -2127,10 +2127,10 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
             call change_Girl_stat(Girl, "lust", 80, Shy)
             "[Girl.name] glances back in surprise, and then glances over at you with a glare."
             if Girl != JeanX:
-                $ Girl.change_face("sadside",2)
+                $ Girl.change_face("sadside", 2)
                 "She settles back down with a little embarassment."
         else:
-            $ Girl.change_face("angry",2)
+            $ Girl.change_face("angry", 2)
             call change_Girl_stat(Girl, "love", 90, -(Shy))
             call change_Girl_stat(Girl, "inhibition", 80, -(Shy))
             "[Girl.name] glances back in surprise, and then glances over at you with a glare."
@@ -2147,14 +2147,14 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
             "She looks around, daring anyone to comment."
         elif approval or Girl == JeanX:
 
-            $ Girl.change_face("angry",2)
+            $ Girl.change_face("angry", 2)
             call change_Girl_stat(Girl, "love", 90, -(Shy))
             call change_Girl_stat(Girl, "inhibition", 80, -(Shy))
             "[Girl.name] glances back in surprise, and then glances over at you with a glare."
             if Girl != JeanX:
                 "She seems really mortified, but stands her ground."
         else:
-            $ Girl.change_face("angry",2)
+            $ Girl.change_face("angry", 2)
             call change_Girl_stat(Girl, "love", 90, -(Shy))
             call change_Girl_stat(Girl, "inhibition", 80, -(Shy))
             "[Girl.name] glances back in surprise, and then glances over at you with a glare."

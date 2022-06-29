@@ -263,7 +263,7 @@ layeredimage Jubes_titjob_breasts:
     anchor (0.5, 0.5)
 
 layeredimage Jubes_blowjob_head:
-    if JubesX.blushing == "blush2":
+    if JubesX.blushing == "_blush2":
         "images/Jubes_blowjob/Jubes_blowjob_head_blush.png"
     else:
         "images/Jubes_blowjob/Jubes_blowjob_head.png"

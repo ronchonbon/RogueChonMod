@@ -190,7 +190,7 @@ layeredimage Laura_head:
         "images/Laura_standing/Laura_standing_head.png"
         # "images/Laura_standing/Laura_standing_head[LauraX.blushing].png"
 
-    if LauraX.blushing == "blush2":
+    if LauraX.blushing == "_blush2":
         "images/Laura_standing/Laura_standing_brows_[LauraX.brows]_blush.png"
     else:
         "images/Laura_standing/Laura_standing_brows_[LauraX.brows].png"

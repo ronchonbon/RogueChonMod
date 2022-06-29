@@ -44,7 +44,7 @@ label sex_shop:
                             elif Player.Party[0] == JubesX:
                                 ch_v "What're you gonna do with that. . ."
                         else:
-                            $ Player.Party[0].change_face("confused",2)
+                            $ Player.Party[0].change_face("confused", 2)
                             call change_Girl_stat(Player.Party[0], "love", 60, -2)
                             call change_Girl_stat(Player.Party[0], "obedience", 70, 4)
                             call change_Girl_stat(Player.Party[0], "inhibition", 50, 2)
@@ -102,7 +102,7 @@ label sex_shop:
 
                             call change_Girl_stat(Player.Party[0], "lust", 60, 5)
                         else:
-                            $ Player.Party[0].change_face("confused",2)
+                            $ Player.Party[0].change_face("confused", 2)
                             call change_Girl_stat(Player.Party[0], "obedience", 70, 2)
                             call change_Girl_stat(Player.Party[0], "inhibition", 50, 2)
 
@@ -153,7 +153,7 @@ label sex_shop:
                     if "dildo" not in Girl.inventory:
                         "You give [Girl.name] the dildo."
 
-                        $ Girl.blushing = "blush1"
+                        $ Girl.blushing = "_blush1"
                         $ Girl.arm_pose = 2
                         $ Girl.held_item = "dildo"
 
@@ -343,7 +343,7 @@ label sex_shop:
                     if "vibrator" not in Girl.inventory:
                         "You give [Girl.name] the Shocker Vibrator."
 
-                        $ Girl.blushing = "blush1"
+                        $ Girl.blushing = "_blush1"
                         $ Girl.arm_pose = 2
                         $ Girl.held_item = "vibrator"
 
@@ -783,7 +783,7 @@ label swimsuit_shop:
                                 $ Girl.change_face("sad")
 
                                 if "shopblock" not in Girl.daily_history:
-                                    $ Girl.add_word(1,"shopblock","shopblock")
+                                    $ Girl.add_word(1,"shopblock", "shopblock")
                                     call change_Girl_stat(Girl, "love", 50, -2)
                                     call change_Girl_stat(Girl, "love", 90, -2)
                                     call change_Girl_stat(Girl, "obedience", 50, 3)
@@ -1096,7 +1096,7 @@ label lingerie_shop:
 
                             $ item = None
                         elif not Girl.seen_breasts and not approval_check(Girl, 900):
-                            $ Girl.change_face("angry",2)
+                            $ Girl.change_face("angry", 2)
 
                             if Girl in [EmmaX, StormX]:
                                 Girl.voice "I don't think that would be appropriate."
@@ -1119,7 +1119,7 @@ label lingerie_shop:
 
                             $ item = None
                         elif not Girl.seen_pussy and not approval_check(Girl, 1000):
-                            $ Girl.change_face("angry",2)
+                            $ Girl.change_face("angry", 2)
 
                             if Girl in [EmmaX, StormX]:
                                 Girl.voice "I don't think that would be appropriate."
@@ -1330,7 +1330,7 @@ label lingerie_shop:
                                 $ Girl.change_face("sad")
 
                                 if "shopblock" not in Girl.daily_history:
-                                    $ Girl.add_word(1,"shopblock","shopblock")
+                                    $ Girl.add_word(1,"shopblock", "shopblock")
                                     call change_Girl_stat(Girl, "love", 50, -2)
                                     call change_Girl_stat(Girl, "love", 90, -2)
                                     call change_Girl_stat(Girl, "obedience", 50, 3)
@@ -2017,7 +2017,7 @@ label clothing_shop:
                                 $ Girl.change_face("sad")
 
                                 if "shopblock" not in Girl.daily_history:
-                                    $ Girl.add_word(1,"shopblock","shopblock")
+                                    $ Girl.add_word(1,"shopblock", "shopblock")
                                     call change_Girl_stat(Girl, "love", 50, -2)
                                     call change_Girl_stat(Girl, "love", 90, -2)
                                     call change_Girl_stat(Girl, "obedience", 50, 3)

@@ -9,10 +9,10 @@ label enter_main_sex_menu(Girl):
             return
 
         if "threesome" not in Girl.history and not AloneCheck(Girl):
-            call expression Girl.tag + "ThreeCheck"
+            call expression Girl.tag + "_ThreeCheck"
 
         if taboo > 20 and "taboo" not in Girl.history:
-            call expression Girl.tag + "taboo_Talk"
+            call expression Girl.tag + "_taboo_Talk"
 
             if Player.location == "bg_classroom" or Player.location in bedrooms and AloneCheck(Girl):
                 ch_p "We could just lock the door, right?"
@@ -85,17 +85,17 @@ label girl_sex_menu(Girl):
     while having_sex:
         if focused_Girl == RogueX:
             $ main_line = "So what would you like to do?"
-            $ fondle_line = "Well where exactly were you interested in touching, " + focused_Girl.player_petname + "?"
-            $ handjob_line = "What did you have in mind, " + focused_Girl.player_petname + "?"
+            $ fondle_line = "Well where exactly were you interested in touching, " + focused_Girl.player_petname + "_?"
+            $ handjob_line = "What did you have in mind, " + focused_Girl.player_petname + "_?"
             $ show_line = "What sort of show were you expecting?"
         elif focused_Girl == KittyX:
             $ main_line = "So what would you like to do?"
-            $ fondle_line = "Um, what did you want to touch, " + focused_Girl.player_petname + "?"
-            $ handjob_line = focused_Girl.Like + "what did you want me to do?"
-            $ show_line = focused_Girl.Like + "what did you want to see?"
+            $ fondle_line = "Um, what did you want to touch, " + focused_Girl.player_petname + "_?"
+            $ handjob_line = focused_Girl.Like + "_what did you want me to do?"
+            $ show_line = focused_Girl.Like + "_what did you want to see?"
         elif focused_Girl == EmmaX:
             $ main_line = "So, what was it you hoped to do?"
-            $ fondle_line = "Well? Where did you want to touch, " + focused_Girl.player_petname + "?"
+            $ fondle_line = "Well? Where did you want to touch, " + focused_Girl.player_petname + "_?"
             $ handjob_line = "What did you want me to do?"
             $ show_line = "What did you want to see?"
         elif focused_Girl == LauraX:
@@ -110,7 +110,7 @@ label girl_sex_menu(Girl):
             $ show_line = "What kind of show are you thinking?"
         elif focused_Girl == StormX:
             $ main_line = "So, what was it you hoped to do?"
-            $ fondle_line = "What did you wish to touch, " + focused_Girl.player_petname + "?"
+            $ fondle_line = "What did you wish to touch, " + focused_Girl.player_petname + "_?"
             $ handjob_line = "What did you want me to do?"
             $ show_line = "What did you want to see?"
         elif focused_Girl == JubesX:
@@ -1411,7 +1411,7 @@ label try_something_else_menu(Girl, action):
                 call change_Girl_stat(Girl, "love", 80, -4, 1)
                 call change_Girl_stat(Girl, "obedience", 30, -1, 1)
                 call change_Girl_stat(Girl, "obedience", 50, -1, 1)
-                $ Girl.add_word(1,"angry","angry")
+                $ Girl.add_word(1,"angry", "angry")
 
                 return [None, "stop"]
         "Finish up.":
@@ -1440,7 +1440,7 @@ label try_something_else_menu(Girl, action):
                 call change_Girl_stat(Girl, "love", 80, -4, 1)
                 call change_Girl_stat(Girl, "obedience", 30, -1, 1)
                 call change_Girl_stat(Girl, "obedience", 50, -1, 1)
-                $ Girl.add_word(1,"angry","angry")
+                $ Girl.add_word(1,"angry", "angry")
 
                 return [None, "stop"]
 

@@ -50,7 +50,7 @@ label addiction_event(Girl):
 
             ch_r "But I think maybe. . . could I touch you again?"
         elif Girl == KittyX:
-            $ Girl.change_face("bemused",2)
+            $ Girl.change_face("bemused", 2)
 
             ch_k "Oh. . . hey, [Girl.player_petname]. I've been thinking. . ."
 
@@ -98,7 +98,7 @@ label addiction_event(Girl):
             ch_j "Oh. . ."
             ch_j "Hey there. . . [Girl.player_petname]."
 
-            $ Girl.change_face("confused",2)
+            $ Girl.change_face("confused", 2)
 
             ch_j "I'm just going to touch you for a second."
 
@@ -116,7 +116,7 @@ label addiction_event(Girl):
 
                     ch_j "Cool."
                 "Why?":
-                    $ Girl.change_face("angry",2)
+                    $ Girl.change_face("angry", 2)
 
                     ch_j "None of your business!"
 
@@ -205,7 +205,7 @@ label addiction_event(Girl):
 
                 call before_action(Girl, "kiss")
             else:
-                $ Girl.change_face("sad",2)
+                $ Girl.change_face("sad", 2)
 
                 if Girl == RogueX:
                     ch_r "I don't think so, [Girl.player_petname]."
@@ -247,7 +247,7 @@ label addiction_event(Girl):
 
                 call before_action(Girl, "kiss")
             else:
-                $ Girl.change_face("sad",2)
+                $ Girl.change_face("sad", 2)
 
                 if Girl == RogueX:
                     ch_r "I don't think so, [Girl.player_petname]."
@@ -599,7 +599,7 @@ label second_addiction_event:
 
 label third_addiction_event:
     $ Girl.event_happened[1] += 1
-    $ Girl.change_face("manic",2)
+    $ Girl.change_face("manic", 2)
 
     if Girl == RogueX:
         ch_r "Ok, I've given you plenty of chances here. . . Plenty."
@@ -688,7 +688,7 @@ label third_addiction_event:
                 ch_s "Oh, I remember your \"offers.\""
                 ch_s ". . ."
 
-                $ Girl.change_face("sadside",2)
+                $ Girl.change_face("sadside", 2)
 
                 ch_s "I have given them a great deal of thought. . ."
             elif Girl == JubesX:
@@ -696,7 +696,7 @@ label third_addiction_event:
 
     $ Girl.brows = "angry"
     $ Girl.mouth = "sad"
-    $ Girl.blushing = "blush1"
+    $ Girl.blushing = "_blush1"
 
     if Girl == RogueX:
         ch_r "So. . .I need this to end. I need to figure this out. I'll do anything here."
@@ -724,7 +724,7 @@ label third_addiction_event:
     jump addiction_good_end
 
 label addiction_ultimatum:
-    $ Girl.add_word(1,"ultimatum","ultimatum")
+    $ Girl.add_word(1,"ultimatum", "ultimatum")
 
     $ approval_bonus = int(Girl.addiction/2)
 
@@ -1140,7 +1140,7 @@ label addiction_ultimatum:
                 if Girl.event_happened[1] >= 10:
                     call addiction_fix_beg
                 elif Girl.addiction >= 70:
-                    $ Girl.change_face("angry",2)
+                    $ Girl.change_face("angry", 2)
                     call change_Girl_stat(Girl, "love", 80, -2)
                     call change_Girl_stat(Girl, "obedience", 80, 3)
 
@@ -1164,7 +1164,7 @@ label addiction_ultimatum:
 
                     $ between_event_count = 0
                 else:
-                    $ Girl.change_face("angry",2)
+                    $ Girl.change_face("angry", 2)
                     call change_Girl_stat(Girl, "love", 200, -30)
                     call change_Girl_stat(Girl, "obedience", 200, 5)
 
@@ -1503,7 +1503,7 @@ label addiction_good_end:
         if Girl == RogueX:
             ch_r "Hmm, there might be something to your. . . fluids too. They felt so warm. . ."
         elif Girl == KittyX:
-            $ Girl.blushing = "blush2"
+            $ Girl.blushing = "_blush2"
 
             ch_k "And you, um. . . tasted really good too. . "
         elif Girl == EmmaX:
@@ -1849,7 +1849,7 @@ label addiction_fix(Girl):
                 elif Girl == JubesX:
                     ch_v "I would totally appreciate that."
             "You could always whore yourself out again.":
-                $ Girl.change_face("angry",2)
+                $ Girl.change_face("angry", 2)
                 call change_Girl_stat(Girl, "love", 50, -1, 1)
                 call change_Girl_stat(Girl, "love", 80, -3, 1)
                 call change_Girl_stat(Girl, "obedience", 50, 2)
@@ -1914,7 +1914,7 @@ label addiction_fix(Girl):
             elif Girl == JubesX:
                 ch_v "Could I get another hit?"
 
-    $ Girl.blushing = "blush1"
+    $ Girl.blushing = "_blush1"
 
     $ between_event_count = 2
     $ approval_bonus = 0
@@ -2265,7 +2265,7 @@ label addiction_serum:
                     ch_v "So -not- blood then. . ."
                     ch_v "Well, I guess anything's worth a shot. . ."
             "My jiz.":
-                $ Girl.blushing = "blush1"
+                $ Girl.blushing = "_blush1"
 
                 if Girl == RogueX:
                     if Girl.event_counter["swallowed"]:
@@ -2288,7 +2288,7 @@ label addiction_serum:
 
                         ch_k "Well. . . It's not like that doesn't work. . ."
                     else:
-                        $ Girl.change_face("surprised",2)
+                        $ Girl.change_face("surprised", 2)
 
                         ch_k "Your what? . . . You want me to. . ."
                         ch_k ". . . drink your jiz?"

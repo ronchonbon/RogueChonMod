@@ -398,7 +398,7 @@ label Rogue_Monogamy:
                 return
             if "monogamous" not in RogueX.daily_history:
                 call change_Girl_stat(RogueX, "obedience", 90, 3)
-            $ RogueX.add_word(1, 0,"monogamous","monogamous")
+            $ RogueX.add_word(1, 0,"monogamous", "monogamous")
         "Don't hook up with other girls." if "monogamous" not in RogueX.traits:
             if approval_check(RogueX, 900, "O", taboo_modifier=0):
 
@@ -427,7 +427,7 @@ label Rogue_Monogamy:
                 return
             if "monogamous" not in RogueX.daily_history:
                 call change_Girl_stat(RogueX, "obedience", 90, 3)
-            $ RogueX.add_word(1, 0,"monogamous","monogamous")
+            $ RogueX.add_word(1, 0,"monogamous", "monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in RogueX.traits:
             if approval_check(RogueX, 700, "O", taboo_modifier=0):
                 $ RogueX.change_face("sly", 1,eyes = "side")
@@ -484,7 +484,7 @@ label Rogue_Jumped:
                 return
             if "chill" not in RogueX.daily_history:
                 call change_Girl_stat(RogueX, "obedience", 90, 3)
-            $ RogueX.add_word(1, 0,"chill","chill")
+            $ RogueX.add_word(1, 0,"chill", "chill")
         "Don't bother me like that." if "chill" not in RogueX.traits:
             if approval_check(RogueX, 900, "O", taboo_modifier=0):
 
@@ -513,7 +513,7 @@ label Rogue_Jumped:
                 return
             if "chill" not in RogueX.daily_history:
                 call change_Girl_stat(RogueX, "obedience", 90, 3)
-            $ RogueX.add_word(1, 0,"chill","chill")
+            $ RogueX.add_word(1, 0,"chill", "chill")
         "Knock yourself out.":
             if approval_check(RogueX, 800, "L", taboo_modifier=0):
                 $ RogueX.change_face("sly", 1)
@@ -713,7 +713,7 @@ label Rogue_SexChat:
                             if RogueX.player_favorite_action == "fondle":
                                 call change_Girl_stat(RogueX, "lust", 80, 3)
                                 ch_r "Yeah, I think we've established that. . ."
-                            elif RogueX.favorite_action in ("hotdog","suck_breasts","fondle_breasts","fondle_thighs"):
+                            elif RogueX.favorite_action in ("hotdog", "suck_breasts", "fondle_breasts", "fondle_thighs"):
                                 call change_Girl_stat(RogueX, "love", 90, 5)
                                 call change_Girl_stat(RogueX, "lust", 80, 5)
                                 ch_r "I love how you touch me. . ."
@@ -931,7 +931,7 @@ label Rogue_SexChat:
 
 
 
-label Rogue_Chitchat(O=0, Options=["default","default","default"]):
+label Rogue_Chitchat(O=0, Options=["default", "default", "default"]):
     $ round -= 3 if round > 3 else (round-1)
     if O:
         $ Options = [O]

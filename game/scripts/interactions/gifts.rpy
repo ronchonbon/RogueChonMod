@@ -493,7 +493,7 @@ label gifts:
                         if "dildo" not in Girl.inventory:
                             "You give [Girl.name] the dildo."
 
-                            $ Girl.blushing = "blush1"
+                            $ Girl.blushing = "_blush1"
                             $ Girl.arm_pose = 2
                             $ Girl.held_item = "dildo"
 
@@ -681,7 +681,7 @@ label gifts:
                         if "vibrator" not in Girl.inventory:
                             "You give [Girl.name] the Shocker Vibrator."
 
-                            $ Girl.blushing = "blush1"
+                            $ Girl.blushing = "_blush1"
                             $ Girl.arm_pose = 2
                             $ Girl.held_item = "vibrator"
 
@@ -832,7 +832,7 @@ label gifts:
                         if "Dazzler and Longshot" not in Girl.inventory:
                             "You give [Girl.name] the book."
 
-                            $ Girl.blushing = "blush1"
+                            $ Girl.blushing = "_blush1"
 
                             if approval_check(Girl, 600, "L"):
                                 $ Girl.change_face("smile")
@@ -898,7 +898,7 @@ label gifts:
                         if "256 Shades of Grey" not in Girl.inventory:
                             "You give [Girl.name] the book."
 
-                            $ Girl.blushing = "blush1"
+                            $ Girl.blushing = "_blush1"
 
                             if approval_check(Girl, 500, "O"):
                                 $ Girl.change_face("bemused")
@@ -956,7 +956,7 @@ label gifts:
                             $ Player.inventory.remove("256 Shades of Grey")
 
                             $ Girl.inventory.append("256 Shades of Grey")
-                            call change_Girl_stat(Girl, "obedience", 200, 50,Alt=[[JeanX],200, 10])
+                            call change_Girl_stat(Girl, "obedience", 200, 50,Alt=[[JeanX], 200, 10])
                         else:
                             if Girl == EmmaX:
                                 ch_e "You're repeating yourself."
@@ -966,7 +966,7 @@ label gifts:
                         if "Avengers Tower Penthouse" not in Girl.inventory:
                             "You give [Girl.name] the book."
 
-                            $ Girl.blushing = "blush1"
+                            $ Girl.blushing = "_blush1"
 
                             if approval_check(Girl, 500, "I"):
                                 $ Girl.change_face("bemused")
@@ -1020,14 +1020,14 @@ label gifts:
                         pass
             "Clothing":
                 menu:
-                    "Give her the green nighty." if Girl.tag + "nighty" in Player.inventory:
+                    "Give her the green nighty." if Girl.tag + "_nighty" in Player.inventory:
                         if "nighty" not in Girl.inventory:
                             "You give [Girl.name] the nighty."
 
-                            $ Girl.blushing = "blush1"
+                            $ Girl.blushing = "_blush1"
 
                             if approval_check(Girl, 600):
-                                $ Player.inventory.remove(Girl.tag + "nighty")
+                                $ Player.inventory.remove(Girl.tag + "_nighty")
 
                                 $ Girl.change_face("bemused")
                                 $ Girl.inventory.append("nighty")
@@ -1039,7 +1039,7 @@ label gifts:
 
                                 call change_Girl_stat(Girl, "lust", 89, 10)
                             else:
-                                $ Player.inventory.remove(Girl.tag + "nighty")
+                                $ Player.inventory.remove(Girl.tag + "_nighty")
 
                                 $ Girl.change_face("confused")
                                 $ Girl.inventory.append("nighty")
@@ -1052,12 +1052,12 @@ label gifts:
                                 $ Girl.change_face("bemused")
                         else:
                             Girl.voice "I already have one of those."
-                    "Give her the corset." if Girl.tag + "corset" in Player.inventory:
+                    "Give her the corset." if Girl.tag + "_corset" in Player.inventory:
                         if "corset" not in Girl.inventory:
                             "You give [Girl.name] the corset."
 
                             if approval_check(Girl, 1000):
-                                $ Player.inventory.remove(Girl.tag + "corset")
+                                $ Player.inventory.remove(Girl.tag + "_corset")
 
                                 $ Girl.change_face("bemused")
                                 $ Girl.inventory.append("corset")
@@ -1072,7 +1072,7 @@ label gifts:
 
                                 call change_Girl_stat(Girl, "lust", 89, 10)
                             elif approval_check(Girl, 700) or Girl == JeanX:
-                                $ Player.inventory.remove(Girl.tag + "corset")
+                                $ Player.inventory.remove(Girl.tag + "_corset")
 
                                 $ Girl.change_face("confused", 1)
                                 $ Girl.inventory.append("corset")
@@ -1087,9 +1087,9 @@ label gifts:
 
                                 $ Girl.change_face("bemused", 1)
                             elif approval_check(Girl, 600):
-                                $ Player.inventory.remove(Girl.tag + "corset")
+                                $ Player.inventory.remove(Girl.tag + "_corset")
 
-                                $ Girl.change_face("confused",2)
+                                $ Girl.change_face("confused", 2)
                                 $ Girl.inventory.append("corset")
                                 call change_Girl_stat(Girl, "love", 200, 10)
                                 call change_Girl_stat(Girl, "obedience", 200, 15)
@@ -1100,12 +1100,12 @@ label gifts:
 
                                 $ Girl.change_face("bemused", 1)
                             elif "no_gift_bra" in Girl.daily_history:
-                                $ Girl.change_face("angry",2)
+                                $ Girl.change_face("angry", 2)
 
                                 if Girl == LauraX:
                                     ch_l "I just told you no."
                             else:
-                                $ Girl.change_face("angry",2)
+                                $ Girl.change_face("angry", 2)
                                 call change_Girl_stat(Girl, "love", 50, -10)
                                 call change_Girl_stat(Girl, "obedience", 20, 10)
                                 call change_Girl_stat(Girl, "inhibition", 20, 20)
@@ -1118,7 +1118,7 @@ label gifts:
                                         ch_l "You have too much time on your hands."
 
                                 call change_Girl_stat(Girl, "lust", 89, 5)
-                                $ Girl.blushing = "blush1"
+                                $ Girl.blushing = "_blush1"
 
                                 "She hands it back to you."
 
@@ -1126,12 +1126,12 @@ label gifts:
                                 $ Girl.daily_history.append("no_gift_bra")
                         else:
                             Girl.voice "I already have one of those."
-                    "Give her the lace corset." if Girl.tag + "lace_corset" in Player.inventory:
+                    "Give her the lace corset." if Girl.tag + "_lace_corset" in Player.inventory:
                         if "lace_corset" not in Girl.inventory:
                             "You give [Girl.name] the lace corset."
 
                             if approval_check(Girl, 1200):
-                                $ Player.inventory.remove(Girl.tag + "lace_corset")
+                                $ Player.inventory.remove(Girl.tag + "_lace_corset")
 
                                 $ Girl.change_face("bemused")
                                 $ Girl.inventory.append("lace_corset")
@@ -1143,7 +1143,7 @@ label gifts:
 
                                 call change_Girl_stat(Girl, "lust", 89, 10)
                             elif approval_check(Girl, 1000):
-                                $ Player.inventory.remove(Girl.tag + "lace_corset")
+                                $ Player.inventory.remove(Girl.tag + "_lace_corset")
 
                                 $ Girl.change_face("confused", 1)
                                 $ Girl.inventory.append("lace_corset")
@@ -1155,9 +1155,9 @@ label gifts:
 
                                 $ Girl.change_face("bemused", 1)
                             elif approval_check(Girl, 800):
-                                $ Player.inventory.remove(Girl.tag + "lace_corset")
+                                $ Player.inventory.remove(Girl.tag + "_lace_corset")
 
-                                $ Girl.change_face("confused",2)
+                                $ Girl.change_face("confused", 2)
                                 $ Girl.inventory.append("lace_corset")
                                 call change_Girl_stat(Girl, "love", 200, 20)
                                 call change_Girl_stat(Girl, "obedience", 200, 20)
@@ -1167,11 +1167,11 @@ label gifts:
 
                                 $ Girl.change_face("bemused", 1)
                             elif "no_gift_bra" in Girl.daily_history:
-                                $ Girl.change_face("angry",2)
+                                $ Girl.change_face("angry", 2)
 
                                 ch_l "I just told you no."
                             else:
-                                $ Girl.change_face("angry",2)
+                                $ Girl.change_face("angry", 2)
                                 call change_Girl_stat(Girl, "love", 50, -10)
                                 call change_Girl_stat(Girl, "obedience", 20, 10)
                                 call change_Girl_stat(Girl, "inhibition", 20, 20)
@@ -1182,7 +1182,7 @@ label gifts:
                                     ch_l "You have too much time on your hands."
 
                                 call change_Girl_stat(Girl, "lust", 89, 5)
-                                $ Girl.blushing = "blush1"
+                                $ Girl.blushing = "_blush1"
 
                                 "She hands it back to you."
 
@@ -1190,14 +1190,14 @@ label gifts:
                                 $ Girl.daily_history.append("no_gift_bra")
                         else:
                             Girl.voice "I already have one of those."
-                    "Give her the lace bra." if Girl.tag + "lace_bra" in Player.inventory:
+                    "Give her the lace bra." if Girl.tag + "_lace_bra" in Player.inventory:
                         if "lace_bra" not in Girl.inventory:
                             "You give [Girl.name] the lace bra."
 
-                            $ Girl.blushing = "blush1"
+                            $ Girl.blushing = "_blush1"
 
                             if approval_check(Girl, 1000) or Girl == JeanX:
-                                $ Player.inventory.remove(Girl.tag + "lace_bra")
+                                $ Player.inventory.remove(Girl.tag + "_lace_bra")
 
                                 $ Girl.change_face("bemused")
                                 $ Girl.inventory.append("lace_bra")
@@ -1220,7 +1220,7 @@ label gifts:
 
                                 call change_Girl_stat(Girl, "lust", 89, 10)
                             elif approval_check(Girl, 700, Alt = [[EmmaX], 600]):
-                                $ Player.inventory.remove(Girl.tag + "lace_bra")
+                                $ Player.inventory.remove(Girl.tag + "_lace_bra")
 
                                 $ Girl.change_face("confused")
                                 $ Girl.inventory.append("lace_bra")
@@ -1243,7 +1243,7 @@ label gifts:
                                 elif Girl == JubesX:
                                     ch_v "It's not my usual style. . ."
                             elif "no_gift_bra" in Girl.daily_history:
-                                $ Girl.change_face("angry",2)
+                                $ Girl.change_face("angry", 2)
 
                                 if Girl == RogueX:
                                     ch_r "You can't even give me 24 hours?!"
@@ -1291,14 +1291,14 @@ label gifts:
                             $ Girl.change_face("bemused")
                         else:
                             Girl.voice "I already have one of those."
-                    "Give her the lace panties." if Girl.tag + "lace_panties" in Player.inventory:
+                    "Give her the lace panties." if Girl.tag + "_lace_panties" in Player.inventory:
                         if "lace_panties" not in Girl.inventory:
                             "You give [Girl.name] the lace panties."
 
-                            $ Girl.blushing = "blush1"
+                            $ Girl.blushing = "_blush1"
 
                             if approval_check(Girl, 1100) or Girl == JeanX:
-                                $ Player.inventory.remove(Girl.tag + "lace_panties")
+                                $ Player.inventory.remove(Girl.tag + "_lace_panties")
 
                                 $ Girl.change_face("bemused")
                                 $ Girl.inventory.append("lace_panties")
@@ -1323,7 +1323,7 @@ label gifts:
 
                                 call change_Girl_stat(Girl, "lust", 89, 10)
                             elif approval_check(Girl, 800):
-                                $ Player.inventory.remove(Girl.tag + "lace_panties")
+                                $ Player.inventory.remove(Girl.tag + "_lace_panties")
 
                                 $ Girl.change_face("confused")
                                 $ Girl.inventory.append("lace_panties")
@@ -1356,7 +1356,7 @@ label gifts:
                                 elif Girl == JubesX:
                                     ch_v "A little. . . intimate. . ."
                             elif "no_gift_panties" in Girl.daily_history:
-                                $ Girl.change_face("angry",2)
+                                $ Girl.change_face("angry", 2)
 
                                 if Girl == RogueX:
                                     ch_r "Not today, [Girl.player_petname]!"
@@ -1416,14 +1416,14 @@ label gifts:
                             $ Girl.change_face("bemused")
                         else:
                             Girl.voice "I already have one of those."
-                    "Give her the bikini top." if Girl.tag + "bikini_top" in Player.inventory:
+                    "Give her the bikini top." if Girl.tag + "_bikini_top" in Player.inventory:
                         if "bikini_top" not in Girl.inventory:
                             "You give [Girl.name] the bikini top."
 
-                            $ Girl.blushing = "blush1"
+                            $ Girl.blushing = "_blush1"
 
                             if approval_check(Girl, 1200):
-                                $ Player.inventory.remove(Girl.tag + "bikini_top")
+                                $ Player.inventory.remove(Girl.tag + "_bikini_top")
 
                                 $ Girl.change_face("bemused")
                                 $ Girl.inventory.append("bikini_top")
@@ -1446,7 +1446,7 @@ label gifts:
                                 elif Girl == JubesX:
                                     ch_v "Ooo, so Cal. . ."
                             elif approval_check(Girl, 900) or Girl == JeanX:
-                                $ Player.inventory.remove(Girl.tag + "bikini_top")
+                                $ Player.inventory.remove(Girl.tag + "_bikini_top")
 
                                 $ Girl.change_face("confused", 1)
                                 $ Girl.inventory.append("bikini_top")
@@ -1471,9 +1471,9 @@ label gifts:
 
                                 $ Girl.change_face("bemused", 1)
                             elif approval_check(Girl, 700):
-                                $ Player.inventory.remove(Girl.tag + "bikini_top")
+                                $ Player.inventory.remove(Girl.tag + "_bikini_top")
 
-                                $ Girl.change_face("confused",2)
+                                $ Girl.change_face("confused", 2)
                                 $ Girl.inventory.append("bikini_top")
                                 call change_Girl_stat(Girl, "love", 200, 10)
                                 call change_Girl_stat(Girl, "obedience", 200, 5)
@@ -1494,7 +1494,7 @@ label gifts:
 
                                 $ Girl.change_face("bemused", 1)
                             elif "no_gift_bra" in Girl.daily_history:
-                                $ Girl.change_face("angry",2)
+                                $ Girl.change_face("angry", 2)
 
                                 if Girl == RogueX:
                                     ch_r "My answer's still no, stop asking!"
@@ -1509,7 +1509,7 @@ label gifts:
                                 elif Girl == JubesX:
                                     ch_v "This really doesn't work for me. . ."
                             else:
-                                $ Girl.change_face("angry",2)
+                                $ Girl.change_face("angry", 2)
                                 call change_Girl_stat(Girl, "love", 50, -5)
                                 call change_Girl_stat(Girl, "obedience", 20, 5)
                                 call change_Girl_stat(Girl, "inhibition", 20, 10)
@@ -1530,7 +1530,7 @@ label gifts:
                                     elif Girl == JubesX:
                                         ch_v "Nah, I don't think it works for me. . ."
 
-                                $ Girl.blushing = "blush1"
+                                $ Girl.blushing = "_blush1"
 
                                 "She hands it back to you."
 
@@ -1547,14 +1547,14 @@ label gifts:
                                     $ Girl.swimwear["outfit_active"] = 1
                         else:
                             Girl.voice "I already have one of those."
-                    "Give her the bikini bottoms." if Girl.tag + "bikini_bottoms" in Player.inventory:
+                    "Give her the bikini bottoms." if Girl.tag + "_bikini_bottoms" in Player.inventory:
                         if "bikini_bottoms" not in Girl.inventory:
                             "You give [Girl.name] the bikini bottoms."
 
-                            $ Girl.blushing = "blush1"
+                            $ Girl.blushing = "_blush1"
 
                             if approval_check(Girl, 1200):
-                                $ Player.inventory.remove(Girl.tag + "bikini_bottoms")
+                                $ Player.inventory.remove(Girl.tag + "_bikini_bottoms")
 
                                 $ Girl.change_face("bemused")
                                 $ Girl.inventory.append("bikini_bottoms")
@@ -1577,7 +1577,7 @@ label gifts:
                                 elif Girl == JubesX:
                                     ch_v "Wow, super sexy. . ."
                             elif approval_check(Girl, 900) or Girl == JeanX:
-                                $ Player.inventory.remove(Girl.tag + "bikini_bottoms")
+                                $ Player.inventory.remove(Girl.tag + "_bikini_bottoms")
 
                                 $ Girl.change_face("confused", 1)
                                 $ Girl.inventory.append("bikini_bottoms")
@@ -1602,9 +1602,9 @@ label gifts:
 
                                 $ Girl.change_face("bemused", 1)
                             elif approval_check(Girl, 700):
-                                $ Player.inventory.remove(Girl.tag + "bikini_bottoms")
+                                $ Player.inventory.remove(Girl.tag + "_bikini_bottoms")
 
-                                $ Girl.change_face("confused",2)
+                                $ Girl.change_face("confused", 2)
                                 $ Girl.inventory.append("bikini_bottoms")
                                 call change_Girl_stat(Girl, "love", 200, 10)
                                 call change_Girl_stat(Girl, "obedience", 200, 5)
@@ -1625,7 +1625,7 @@ label gifts:
 
                                 $ Girl.change_face("bemused", 1)
                             elif "no_gift_panties" in Girl.daily_history:
-                                $ Girl.change_face("angry",2)
+                                $ Girl.change_face("angry", 2)
 
                                 if Girl == RogueX:
                                     ch_r "My answer's still no, stop asking!"
@@ -1640,7 +1640,7 @@ label gifts:
                                 elif Girl == JubesX:
                                     ch_v "Definitely not."
                             else:
-                                $ Girl.change_face("angry",2)
+                                $ Girl.change_face("angry", 2)
                                 call change_Girl_stat(Girl, "love", 50, -5)
                                 call change_Girl_stat(Girl, "obedience", 20, 5)
                                 call change_Girl_stat(Girl, "inhibition", 20, 10)
@@ -1661,7 +1661,7 @@ label gifts:
                                     elif Girl == JubesX:
                                         ch_v "Oh no. . ."
 
-                                $ Girl.blushing = "blush1"
+                                $ Girl.blushing = "_blush1"
 
                                 "She hands them back to you."
 
@@ -1678,14 +1678,14 @@ label gifts:
                                     $ Girl.swimwear["outfit_active"] = 1
                         else:
                             Girl.voice "I already have one of those."
-                    "Give her the blue skirt." if Girl.tag + "blue_skirt" in Player.inventory:
+                    "Give her the blue skirt." if Girl.tag + "_blue_skirt" in Player.inventory:
                         if "blue_skirt" not in Girl.inventory:
                             "You give [Girl.name] the blue skirt."
 
-                            $ Girl.blushing = "blush1"
+                            $ Girl.blushing = "_blush1"
 
                             if approval_check(Girl, 1000):
-                                $ Player.inventory.remove(Girl.tag + "blue_skirt")
+                                $ Player.inventory.remove(Girl.tag + "_blue_skirt")
 
                                 $ Girl.change_face("bemused")
                                 $ Girl.inventory.append("blue_skirt")
@@ -1695,7 +1695,7 @@ label gifts:
 
                                 ch_k "This is a cute skirt. . ."
                             elif approval_check(Girl, 800):
-                                $ Player.inventory.remove(Girl.tag + "blue_skirt")
+                                $ Player.inventory.remove(Girl.tag + "_blue_skirt")
 
                                 $ Girl.change_face("confused", 1)
                                 $ Girl.inventory.append("blue_skirt")
@@ -1707,9 +1707,9 @@ label gifts:
 
                                 $ Girl.change_face("bemused", 1)
                             elif approval_check(Girl, 600):
-                                $ Player.inventory.remove(Girl.tag + "blue_skirt")
+                                $ Player.inventory.remove(Girl.tag + "_blue_skirt")
 
-                                $ Girl.change_face("confused",2)
+                                $ Girl.change_face("confused", 2)
                                 $ Girl.inventory.append("blue_skirt")
                                 call change_Girl_stat(Girl, "love", 200, 10)
                                 call change_Girl_stat(Girl, "obedience", 200, 5)
@@ -1719,22 +1719,22 @@ label gifts:
 
                                 $ Girl.change_face("bemused", 1)
                             elif "no_gift_skirt" in Girl.recent_history:
-                                $ Girl.change_face("angry",2)
+                                $ Girl.change_face("angry", 2)
 
                                 ch_k "I just don't want that."
                             elif "no_gift_skirt" in Girl.daily_history:
-                                $ Girl.change_face("angry",2)
+                                $ Girl.change_face("angry", 2)
 
                                 ch_k "Look, my answer's still no, stop asking!"
                             else:
-                                $ Girl.change_face("angry",2)
+                                $ Girl.change_face("angry", 2)
                                 call change_Girl_stat(Girl, "love", 50, -5)
                                 call change_Girl_stat(Girl, "obedience", 20, 5)
                                 call change_Girl_stat(Girl, "inhibition", 20, 10)
 
                                 ch_k "Oh, don't you worry what I'm wearing."
 
-                                $ Girl.blushing = "blush1"
+                                $ Girl.blushing = "_blush1"
 
                                 "She hands it back to you."
 
@@ -1750,7 +1750,7 @@ label gifts:
 
                             $ Player.inventory.remove("stockings_and_garterbelt")
 
-                            $ Girl.blushing = "blush1"
+                            $ Girl.blushing = "_blush1"
                             $ Girl.change_face("bemused")
                             $ Girl.inventory.append("stockings_and_garterbelt")
                             call change_Girl_stat(Girl, "love", 200, 5)
@@ -1767,10 +1767,10 @@ label gifts:
                             call change_Girl_stat(Girl, "lust", 89, 5)
                         else:
                             Girl.voice "I already have one of those."
-                    "Give her the pantyhose." if Girl.tag + "pantyhose" in Player.inventory:
+                    "Give her the pantyhose." if Girl.tag + "_pantyhose" in Player.inventory:
                         if "pantyhose" not in Girl.inventory:
                             "You give [Girl.name] the pantyhose."
-                            $ Player.inventory.remove(Girl.tag + "pantyhose")
+                            $ Player.inventory.remove(Girl.tag + "_pantyhose")
 
                             $ Girl.change_face("bemused")
                             $ Girl.inventory.append("pantyhose")
@@ -1781,13 +1781,13 @@ label gifts:
                             Girl.voice "These are lovely. . ."
                         else:
                             Girl.voice "I already have one of those."
-                    "Give her the knee stockings." if Girl.tag + "knee_stockings" in Player.inventory:
+                    "Give her the knee stockings." if Girl.tag + "_knee_stockings" in Player.inventory:
                         if "knee_stockings" not in Girl.inventory:
                             "You give [Girl.name] the knee stockings."
 
-                            $ Player.inventory.remove(Girl.tag + "knee_stockings")
+                            $ Player.inventory.remove(Girl.tag + "_knee_stockings")
 
-                            $ Girl.blushing = "blush1"
+                            $ Girl.blushing = "_blush1"
                             $ Girl.change_face("bemused")
                             $ Girl.inventory.append("knee_stockings")
                             call change_Girl_stat(Girl, "love", 200, 5)
@@ -1797,13 +1797,13 @@ label gifts:
                             Girl.voice "These are pretty nice. . ."
                         else:
                             Girl.voice "I already have one of those."
-                    "Give her the high socks." if Girl.tag + "socks" in Player.inventory:
+                    "Give her the high socks." if Girl.tag + "_socks" in Player.inventory:
                         if "socks" not in Girl.inventory:
                             "You give [Girl.name] the high socks."
 
-                            $ Player.inventory.remove(Girl.tag + "socks")
+                            $ Player.inventory.remove(Girl.tag + "_socks")
 
-                            $ Girl.blushing = "blush1"
+                            $ Girl.blushing = "_blush1"
                             $ Girl.change_face("bemused")
                             $ Girl.inventory.append("socks")
                             call change_Girl_stat(Girl, "love", 200, 5)
@@ -1813,12 +1813,12 @@ label gifts:
                             Girl.voice "These are pretty nice. . ."
                         else:
                             Girl.voice "I already have one of those."
-                    "Give her the harness." if Girl.tag + "harness" in Player.inventory:
+                    "Give her the harness." if Girl.tag + "_harness" in Player.inventory:
                         if "harness" not in Girl.inventory:
                             "You give [Girl.name] the harness."
 
                             if approval_check(Girl, 1200):
-                                $ Player.inventory.remove(Girl.tag + "harness")
+                                $ Player.inventory.remove(Girl.tag + "_harness")
 
                                 $ Girl.change_face("bemused")
                                 $ Girl.inventory.append("harness")
@@ -1834,7 +1834,7 @@ label gifts:
 
                                 call change_Girl_stat(Girl, "lust", 89, 10)
                             elif approval_check(Girl, 1000):
-                                $ Player.inventory.remove(Girl.tag + "harness")
+                                $ Player.inventory.remove(Girl.tag + "_harness")
 
                                 $ Girl.change_face("confused", 1)
                                 $ Girl.inventory.append("harness")
@@ -1846,9 +1846,9 @@ label gifts:
 
                                 $ Girl.change_face("bemused", 1)
                             elif approval_check(Girl, 800):
-                                $ Player.inventory.remove(Girl.tag + "harness")
+                                $ Player.inventory.remove(Girl.tag + "_harness")
 
-                                $ Girl.change_face("confused",2)
+                                $ Girl.change_face("confused", 2)
                                 $ Girl.inventory.append("harness")
                                 call change_Girl_stat(Girl, "love", 200, 20)
                                 call change_Girl_stat(Girl, "obedience", 200, 20)
@@ -1859,11 +1859,11 @@ label gifts:
 
                                 $ Girl.change_face("bemused", 1)
                             elif "no_gift_bra" in Girl.daily_history or "no_gift_panties" in Girl.daily_history:
-                                $ Girl.change_face("angry",2)
+                                $ Girl.change_face("angry", 2)
 
                                 ch_l "I just told you no."
                             else:
-                                $ Girl.change_face("angry",2)
+                                $ Girl.change_face("angry", 2)
                                 call change_Girl_stat(Girl, "love", 50, -10)
                                 call change_Girl_stat(Girl, "obedience", 20, 10)
                                 call change_Girl_stat(Girl, "inhibition", 20, 20)
@@ -1871,7 +1871,7 @@ label gifts:
                                 ch_r "Imma let you back the fuck off, real quick."
 
                                 call change_Girl_stat(Girl, "lust", 89, 5)
-                                $ Girl.blushing = "blush1"
+                                $ Girl.blushing = "_blush1"
 
                                 "She hands it back to you."
 
@@ -1881,12 +1881,12 @@ label gifts:
                                 $ Girl.daily_history.append("no_gift_panties")
                         else:
                             Girl.voice "I already have one of those."
-                    "Give her the fetish suits." if Girl.tag + "fetish" in Player.inventory:
+                    "Give her the fetish suits." if Girl.tag + "_fetish" in Player.inventory:
                         if "fetish" not in Girl.inventory:
                             "You give [Girl.name] the fetish suits."
 
                             if approval_check(Girl, 1200):
-                                $ Player.inventory.remove(Girl.tag + "fetish")
+                                $ Player.inventory.remove(Girl.tag + "_fetish")
 
                                 $ Girl.change_face("bemused")
                                 $ Girl.inventory.append("fetish")
@@ -1902,7 +1902,7 @@ label gifts:
 
                                 call change_Girl_stat(Girl, "lust", 89, 10)
                             elif approval_check(Girl, 1000):
-                                $ Player.inventory.remove(Girl.tag + "fetish")
+                                $ Player.inventory.remove(Girl.tag + "_fetish")
 
                                 $ Girl.change_face("confused", 1)
                                 $ Girl.inventory.append("fetish")
@@ -1914,9 +1914,9 @@ label gifts:
 
                                 $ Girl.change_face("bemused", 1)
                             elif approval_check(Girl, 800):
-                                $ Player.inventory.remove(Girl.tag + "fetish")
+                                $ Player.inventory.remove(Girl.tag + "_fetish")
 
-                                $ Girl.change_face("confused",2)
+                                $ Girl.change_face("confused", 2)
                                 $ Girl.inventory.append("fetish")
                                 call change_Girl_stat(Girl, "love", 200, 20)
                                 call change_Girl_stat(Girl, "obedience", 200, 20)
@@ -1927,7 +1927,7 @@ label gifts:
 
                                 $ Girl.change_face("bemused", 1)
                             else:
-                                $ Girl.change_face("angry",2)
+                                $ Girl.change_face("angry", 2)
                                 call change_Girl_stat(Girl, "love", 50, -10)
                                 call change_Girl_stat(Girl, "obedience", 20, 10)
                                 call change_Girl_stat(Girl, "inhibition", 20, 20)
@@ -1935,7 +1935,7 @@ label gifts:
                                 ch_r "Imma let you back the fuck off, real quick."
 
                                 call change_Girl_stat(Girl, "lust", 89, 5)
-                                $ Girl.blushing = "blush1"
+                                $ Girl.blushing = "_blush1"
 
                                 "She hands it back to you."
                         else:
@@ -1949,7 +1949,7 @@ label gifts:
 
                 $ line = "Giftstore"
 
-                call expression Girl.tag + "Clothes"
+                call expression Girl.tag + "_Clothes"
             "Switch to. . ." if Girl.location == Player.location:
                 call switch_chat
 

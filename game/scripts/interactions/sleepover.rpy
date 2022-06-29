@@ -811,7 +811,7 @@ label sleepover_Morning:
                 call change_Girl_stat(Player.Party[0], "love", 90, 8)
                 call change_Girl_stat(Player.Party[0], "obedience", 50, 10)
                 call change_Girl_stat(Player.Party[0], "inhibition", 70, 8)
-            $ Player.Party[0].blushing = "blush1"
+            $ Player.Party[0].blushing = "_blush1"
 
             if Player.Party[0] == RogueX:
                 ch_r "Aw, that's right sweet of ya, [RogueX.player_petname]."
@@ -877,7 +877,7 @@ label sleepover_Morning:
                 $ line = "nice"
         "You were constantly tossing around.":
 
-            $ Player.Party[0].blushing = "blush1"
+            $ Player.Party[0].blushing = "_blush1"
             if approval_check(Player.Party[0], 800, "L") or approval_check(Player.Party[0], 1200):
                 $ Player.Party[0].change_face("bemused")
                 Player.Party[0].voice "Hmm?"
@@ -967,26 +967,26 @@ label sleepover_Morning:
 
     if not Player.Party[0].event_counter["sleepover"] and line == "nice":
         if Player.Party[0] == RogueX:
-            $ Player.Party[0].blushing = "blush1"
+            $ Player.Party[0].blushing = "_blush1"
             ch_r "Aw, that's right sweet of ya, [RogueX.player_petname]."
             ch_r "Makes me want to do it again sometime."
         elif Player.Party[0] == KittyX:
-            $ Player.Party[0].blushing = "blush2"
+            $ Player.Party[0].blushing = "_blush2"
             ch_k "Yeah, I. . [KittyX.like]I had fun too."
-            $ Player.Party[0].blushing = "blush1"
+            $ Player.Party[0].blushing = "_blush1"
             ch_k "I wouldn't[KittyX.like]mind doing it again."
-            $ Player.Party[0].blushing = "blush2"
+            $ Player.Party[0].blushing = "_blush2"
             ch_k "You know, some other time. . . "
-            $ Player.Party[0].blushing = "blush1"
+            $ Player.Party[0].blushing = "_blush1"
         elif Player.Party[0] == EmmaX:
             $ Player.Party[0].change_face("smile", 1)
             ch_e "You're a hopeless romantic, [EmmaX.player_petname]."
-            $ Player.Party[0].change_face("smile",2,eyes = "side")
+            $ Player.Party[0].change_face("smile", 2,eyes = "side")
             ch_e "I suppose I can be a bit hopeless too. . ."
         elif Player.Party[0] == LauraX:
             $ Player.Party[0].change_face("confused", 1)
             ch_l "Oh. . ."
-            $ Player.Party[0].change_face("surprised",2,brows = "confused")
+            $ Player.Party[0].change_face("surprised", 2,brows = "confused")
             ch_l "Yeah, so did I, now that you mention it. . ."
             $ Player.Party[0].change_face("confused", 1)
             ch_l "Huh."
@@ -998,7 +998,7 @@ label sleepover_Morning:
         elif Player.Party[0] == StormX:
             $ Player.Party[0].change_face("smile", 1)
             ch_s "Well, yes, it was nice to sleep next to you as well, [StormX.player_petname]."
-            $ Player.Party[0].change_face("smile",2,eyes = "leftside")
+            $ Player.Party[0].change_face("smile", 2,eyes = "leftside")
             ch_s "I think we should make a habit of this. . ."
             $ Player.Party[0].change_face("smile", 1)
         elif Player.Party[0] == JubesX:
@@ -1053,7 +1053,7 @@ label sleepover_Morning:
                     call change_Girl_stat(Player.Party[1], "love", 90, 8)
                     call change_Girl_stat(Player.Party[1], "obedience", 50, 10)
                     call change_Girl_stat(Player.Party[1], "inhibition", 70, 8)
-                $ Player.Party[1].blushing = "blush1"
+                $ Player.Party[1].blushing = "_blush1"
 
                 if Player.Party[1] == RogueX:
                     ch_r "That's sweet of ya to say, [RogueX.player_petname]."
@@ -1123,29 +1123,29 @@ label sleepover_Morning:
 
         if not Player.Party[1].event_counter["sleepover"] and line == "nice":
             if Player.Party[1] == RogueX:
-                $ Player.Party[1].blushing = "blush1"
+                $ Player.Party[1].blushing = "_blush1"
                 ch_r "Aw, that's right sweet of ya, [RogueX.player_petname]."
                 ch_r "I think I'd want to do that again."
                 ch_r "And, uh, you too, [Player.Party[0].name]."
             elif Player.Party[1] == KittyX:
-                $ Player.Party[1].blushing = "blush2"
+                $ Player.Party[1].blushing = "_blush2"
                 ch_k "Yeah, I. . [KittyX.like]I had fun too."
-                $ Player.Party[1].blushing = "blush1"
+                $ Player.Party[1].blushing = "_blush1"
                 ch_k "I wouldn't[KittyX.like]mind doing it again."
-                $ Player.Party[1].blushing = "blush2"
+                $ Player.Party[1].blushing = "_blush2"
                 ch_k "You know, some other time. . . "
-                $ Player.Party[1].blushing = "blush1"
+                $ Player.Party[1].blushing = "_blush1"
                 ch_k "And[KittyX.like]you too, [Player.Party[0].name]."
             elif Player.Party[1] == EmmaX:
                 $ Player.Party[1].change_face("smile", 1)
                 ch_e "You're a hopeless romantic, [EmmaX.player_petname]."
-                $ Player.Party[1].change_face("smile",2,eyes = "side")
+                $ Player.Party[1].change_face("smile", 2,eyes = "side")
                 ch_e "I suppose I can be a bit hopeless too. . ."
                 ch_e "You know what I'm talking about, [Player.Party[0].name]."
             elif Player.Party[1] == LauraX:
                 $ LauraX.change_face("confused", 1)
                 ch_l "Oh. . ."
-                $ Player.Party[1].change_face("surprised",2,brows = "confused")
+                $ Player.Party[1].change_face("surprised", 2,brows = "confused")
                 ch_l "Yeah, so did I, now that you mention it. . ."
                 $ Player.Party[1].change_face("confused", 1)
                 ch_l "Huh."
@@ -1158,7 +1158,7 @@ label sleepover_Morning:
             elif Player.Party[1] == StormX:
                 $ Player.Party[1].change_face("smile", 1)
                 ch_s "Well, yes, it was nice to sleep next to you as well, [StormX.player_petname]."
-                $ Player.Party[1].change_face("smile",2,eyes = "leftside")
+                $ Player.Party[1].change_face("smile", 2,eyes = "leftside")
                 ch_s "I think we should make a habit of this. . ."
                 $ Player.Party[1].change_face("smile", 1)
             elif Player.Party[1] == JubesX:
@@ -1173,7 +1173,7 @@ label sleepover_Morning:
 
 
         elif line == "toss":
-            $ Player.Party[1].blushing = "blush1"
+            $ Player.Party[1].blushing = "_blush1"
             if approval_check(Player.Party[1], 800, "L") or approval_check(Player.Party[1], 1200):
                 $ Player.Party[1].change_face("bemused")
                 Player.Party[1].voice "Hmm?"
@@ -1641,7 +1641,7 @@ label sleepover_MorningWood:
                 $ Count = 1
         $ Count -= 1
     $ action_speed = 1
-    $ Player.Party[0].blushing = "blush1"
+    $ Player.Party[0].blushing = "_blush1"
     if second_girl_main_action:
         "[Player.Party[0].name] pulls back with a pop and [Player.Party[1].name] sits back."
         $ second_girl_main_action = None

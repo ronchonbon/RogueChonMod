@@ -203,7 +203,7 @@ label first_time_asking_reactions(Girl, action):
 
         call first_time_asking_lines(Girl, action)
 
-        $ Girl.blushing = "blush1"
+        $ Girl.blushing = "_blush1"
 
     if action == "titjob":
         if Girl.action_counter["blowjob"]:

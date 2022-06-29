@@ -8,7 +8,7 @@ label meet_Jean:
 
     $ JeanX.change_face("sly")
 
-    $ JeanX.add_word(1,"showered","showered", 0, 0)
+    $ JeanX.add_word(1,"showered", "showered", 0, 0)
 
     call Jeanname(1)
     call set_the_scene(location = "bg_showerroom", fade = True)
@@ -182,7 +182,7 @@ label meet_Jean:
             "You just flashed me.":
                 call change_Girl_stat(JeanX, "love", 90, 5)
                 ch_j "Exactl-{w=0.3}{nw}"
-                $ JeanX.change_face("surprised",2)
+                $ JeanX.change_face("surprised", 2)
                 call change_Girl_stat(JeanX, "love", 90, -10)
                 call change_Girl_stat(JeanX, "obedience", 200, 10)
                 call change_Girl_stat(JeanX, "inhibition", 200, -5)
@@ -199,7 +199,7 @@ label meet_Jean:
                         $ JeanX.change_face("confused", 1,eyes = "side")
                         ch_j "Right. . ."
                     "You just flashed me.":
-                        $ JeanX.change_face("confused",2)
+                        $ JeanX.change_face("confused", 2)
                         call change_Girl_stat(JeanX, "love", 90,-5)
                         call change_Girl_stat(JeanX, "obedience", 200, 10)
                         ch_j "How did you remember. . ."
@@ -208,7 +208,7 @@ label meet_Jean:
                         ch_j "I mind took you!"
                         $ line = "power"
                     "You showed me your tits, you ditz!":
-                        $ JeanX.change_face("angry",2)
+                        $ JeanX.change_face("angry", 2)
                         call change_Girl_stat(JeanX, "love", 90, -20)
                         call change_Girl_stat(JeanX, "obedience", 200, 20)
                         ch_j "Don't take that tone with me!"
@@ -246,7 +246,7 @@ label meet_Jean:
             $ JeanX.change_face("angry", 1)
             ch_j "Why did nobody tell me that's a thing?!"
         "I'm already in your head.":
-            $ JeanX.change_face("surprised",2)
+            $ JeanX.change_face("surprised", 2)
             call change_Girl_stat(JeanX, "love", 90, -5)
             call change_Girl_stat(JeanX, "obedience", 200, 30)
             ch_j "What?!"
@@ -258,7 +258,7 @@ label meet_Jean:
             ch_j "No you're not!"
             ch_j "You're just, like. . . immune to mind-taking or something!"
         "I'm a figment of your imagination.":
-            $ JeanX.change_face("angry",2)
+            $ JeanX.change_face("angry", 2)
             call change_Girl_stat(JeanX, "love", 90, -5)
             call change_Girl_stat(JeanX, "obedience", 200, 15)
             ch_j "Now you're just fucking with me."
@@ -279,7 +279,7 @@ label meet_Jean:
                 call change_Girl_stat(JeanX, "obedience", 200, 7)
             "What?":
                 pass
-        $ JeanX.change_face("angry",2)
+        $ JeanX.change_face("angry", 2)
         ch_j "And you remember? . ."
         menu:
             "Yup.":
@@ -292,7 +292,7 @@ label meet_Jean:
                 call change_Girl_stat(JeanX, "love", 90, 10)
                 call change_Girl_stat(JeanX, "inhibition", 200, 50)
                 ch_j "Ok, goo- {w=0.3}{nw}"
-                $ JeanX.change_face("angry",2)
+                $ JeanX.change_face("angry", 2)
                 call change_Girl_stat(JeanX, "love", 90, -20)
                 call change_Girl_stat(JeanX, "obedience", 200, 20)
                 call change_Girl_stat(JeanX, "inhibition", 200, -40)
@@ -325,7 +325,7 @@ label meet_Jean:
     ch_j "I'm not sure what to do with you. . ."
     $ JeanX.change_face("angry", 1)
     ch_j "I'm not used to anyone being able to just. . ."
-    $ JeanX.change_face("angry",2,eyes = "side")
+    $ JeanX.change_face("angry", 2,eyes = "side")
     ch_j ". . . ignore me like that. . ."
     ch_j "I'll need to give this some thought. . ."
 
@@ -427,7 +427,7 @@ label Jean_Like:
         menu:
             extend ""
             "Could you be my girlfriend?":
-                $ JeanX.change_face("surprised",2)
+                $ JeanX.change_face("surprised", 2)
                 call change_Girl_stat(JeanX, "love", 200, 5)
                 call change_Girl_stat(JeanX, "obedience", 90, -5)
                 ch_j "Ha! Girlfriend. . ."
@@ -512,9 +512,9 @@ label Jean_Love:
         extend ""
         "I love you.":
             $ line = "love"
-            $ JeanX.change_face("sly",2)
+            $ JeanX.change_face("sly", 2)
             ch_j "I lo-"
-            $ JeanX.change_face("surprised",2)
+            $ JeanX.change_face("surprised", 2)
             call change_Girl_stat(JeanX, "love", 90, 10)
             call change_Girl_stat(JeanX, "love", 200, 10)
             call change_Girl_stat(JeanX, "obedience", 90, 10)
@@ -526,7 +526,7 @@ label Jean_Love:
             call change_Girl_stat(JeanX, "obedience", 200, 5)
             ch_j "I. . ."
         "You love me.":
-            $ JeanX.change_face("surprised",2)
+            $ JeanX.change_face("surprised", 2)
             call change_Girl_stat(JeanX, "love", 200, 5)
             call change_Girl_stat(JeanX, "obedience", 90, 10)
             call change_Girl_stat(JeanX, "obedience", 200, 5)
@@ -547,7 +547,7 @@ label Jean_Love:
                 ch_j "Great!"
             ". . ." if not line:
                 $ line = "repeat"
-                $ JeanX.change_face("sad",2)
+                $ JeanX.change_face("sad", 2)
                 call change_Girl_stat(JeanX, "love", 200, -5)
                 call change_Girl_stat(JeanX, "obedience", 90, 10)
                 call change_Girl_stat(JeanX, "obedience", 200, 10)
@@ -570,7 +570,7 @@ label Jean_Love:
                 call change_Girl_stat(JeanX, "love", 200, 5)
                 ch_j "Adequate. . ."
             "I don't feel the same way.":
-                $ JeanX.change_face("surprised",2)
+                $ JeanX.change_face("surprised", 2)
                 call change_Girl_stat(JeanX, "love", 200, -5)
                 call change_Girl_stat(JeanX, "obedience", 90, 10)
                 call change_Girl_stat(JeanX, "obedience", 200, 5)
@@ -602,12 +602,12 @@ label Jean_Love:
             call change_Girl_stat(JeanX, "inhibition", 200, 5)
             $ Player.Harem.append(JeanX)
         "I'm not interested.":
-            $ JeanX.change_face("surprised",2)
+            $ JeanX.change_face("surprised", 2)
             call change_Girl_stat(JeanX, "love", 200, -5)
             call change_Girl_stat(JeanX, "obedience", 90, 5)
             call change_Girl_stat(JeanX, "inhibition", 200, -5)
             ch_j "What?"
-            $ JeanX.change_face("angry",2)
+            $ JeanX.change_face("angry", 2)
             ch_j "Why not?!"
             if len(Player.Harem) >= 2:
                 ch_j "Is it because of the others?"
@@ -623,7 +623,7 @@ label Jean_Love:
                     elif Player.Harem:
                         ch_j "That bitch."
                 "I just don't like you like that.":
-                    $ JeanX.change_face("sad",2,eyes = "surprised")
+                    $ JeanX.change_face("sad", 2,eyes = "surprised")
                     call change_Girl_stat(JeanX, "love", 90, -5)
                     call change_Girl_stat(JeanX, "love", 200, -5)
                     call change_Girl_stat(JeanX, "obedience", 90, 5)
@@ -766,7 +766,7 @@ label Jean_Sub:
             call change_Girl_stat(JeanX, "obedience", 90, 10)
             call change_Girl_stat(JeanX, "inhibition", 200, 5)
             call change_Girl_stat(JeanX, "lust", 85, 10)
-            $ JeanX.change_face("surprised",2)
+            $ JeanX.change_face("surprised", 2)
             ch_j "!!!"
             $ JeanX.change_face("sly", 1,eyes = "side")
             call change_Girl_stat(JeanX, "obedience", 90, -5)
@@ -976,7 +976,7 @@ label Jean_Daddy:
                     call change_Girl_stat(JeanX, "obedience", 60, 20)
                     call change_Girl_stat(JeanX, "inhibition", 80, 25)
                     ch_j "Nice."
-                    $ JeanX.change_face("sly",2)
+                    $ JeanX.change_face("sly", 2)
                     ch_j " . . . daddy."
                     $ JeanX.change_face("sly", 1)
                     $ JeanX.player_petname = "daddy"
@@ -984,7 +984,7 @@ label Jean_Daddy:
                     call change_Girl_stat(JeanX, "love", 90, 5)
                     call change_Girl_stat(JeanX, "obedience", 80, 40)
                     call change_Girl_stat(JeanX, "inhibition", 80, 20)
-                    $ JeanX.change_face("angry",2)
+                    $ JeanX.change_face("angry", 2)
                     ch_j " . . . "
                     ch_j "Fine, be that way!"
                     $ JeanX.change_face("angry", 1,eyes = "side")
@@ -992,14 +992,14 @@ label Jean_Daddy:
                     call change_Girl_stat(JeanX, "love", 90, -15)
                     call change_Girl_stat(JeanX, "obedience", 80, 45)
                     call change_Girl_stat(JeanX, "inhibition", 70, 5)
-                    $ JeanX.change_face("angry",2)
+                    $ JeanX.change_face("angry", 2)
                     ch_j "Oh, whatever, like you know!"
                     $ JeanX.change_face("angry", 1,eyes = "side")
         "You've got some real daddy issues, uh?":
             call change_Girl_stat(JeanX, "love", 90, -15)
             call change_Girl_stat(JeanX, "obedience", 80, 45)
             call change_Girl_stat(JeanX, "inhibition", 70, 5)
-            $ JeanX.change_face("angry",2)
+            $ JeanX.change_face("angry", 2)
             ch_j "Oh, whatever, like you know!"
             $ JeanX.change_face("angry", 1,eyes = "side")
     $ JeanX.player_petnames.append("daddy")
@@ -1011,7 +1011,7 @@ label Jean_Daddy:
 label Jeanname(Base=0, JNNum=0, Alpha=0, Jeannames={}):
     if Base == 1:
         $ Alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        $ JNNum = renpy.random.randint(0,25)
+        $ JNNum = renpy.random.randint(0, 25)
         $ Base = str(Alpha[JNNum])
     elif Base:
         pass
@@ -1051,7 +1051,7 @@ label Jeanname(Base=0, JNNum=0, Alpha=0, Jeannames={}):
     else:
 
         $ Alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        $ JNNum = renpy.random.randint(0,25)
+        $ JNNum = renpy.random.randint(0, 25)
         $ Base = str(Alpha[JNNum])
         $ JeanX.player_petname = Jeannames[Base]
 

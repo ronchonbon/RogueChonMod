@@ -178,7 +178,7 @@ label Date_Ask(Girl=0):
         call Date_Stood_Up (Girl)
 
         return
-    $ Girl.add_word(1,"askeddate","askeddate")
+    $ Girl.add_word(1,"askeddate", "askeddate")
 
     if Girl == EmmaX:
         if "classcaught" not in EmmaX.history:
@@ -1653,7 +1653,7 @@ label Date_Dinner:
 
     $ temp_Girls = Player.Party[:]
     while temp_Girls:
-        call expression temp_Girls[0].tag + "Dinner"
+        call expression temp_Girls[0].tag + "_Dinner"
         $ temp_Girls.remove(temp_Girls[0])
     call Player_Dinner
 
@@ -1662,11 +1662,11 @@ label Date_Dinner:
     $ line = "You eat your " + line
 
     if JubesX in Player.Party and "surfturf" in JubesX.recent_history:
-        $ line = line + ", "+JubesX.name+" picks at her food but barely eats any of it."
+        $ line = line + "_, "+JubesX.name+" picks at her food but barely eats any of it."
     elif KittyX in Player.Party and "surfturf" in KittyX.recent_history:
-        $ line = line + ", "+KittyX.name+" eats the steak but pushes the lobster to the side."
+        $ line = line + "_, "+KittyX.name+" eats the steak but pushes the lobster to the side."
     else:
-        $ line = line + ", and have a pleasant conversation over the meal."
+        $ line = line + "_, and have a pleasant conversation over the meal."
 
     "[line]"
     $ Player.recent_history.append("dinner")
@@ -1677,10 +1677,10 @@ label Date_Dinner:
         menu:
             "Chat with [Player.Party[0].name]":
                 ch_p "Anything going on, [Player.Party[0].name]?"
-                call expression Player.Party[0].tag + "Chitchat"
+                call expression Player.Party[0].tag + "_Chitchat"
             "Chat with [Player.Party[1].name]" if len(Player.Party) > 1:
                 ch_p "Anything going on, [Player.Party[1].name]?"
-                call expression Player.Party[1].tag + "Chitchat"
+                call expression Player.Party[1].tag + "_Chitchat"
             "Compliment [Player.Party[0].name]":
                 call Compliment (Player.Party[0])
             "Compliment [Player.Party[1].name]" if len(Player.Party) > 1:
@@ -2195,7 +2195,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 "A few seconds later, you and [Previous.name] follow her and she drags you both inside, locking the door behind you."
                 "She spends the next several minutes taking it up the ass while [Previous.name] feels you both up."
                 $ Girl.check_if_likes(Previous, 1000,3, 1)
-                $ Previous.check_if_likes(Girl, 1000,2, 1)
+                $ Previous.check_if_likes(Girl, 1000, 2, 1)
             else:
                 "A few seconds later, you follow her and she drags you inside, locking the door behind you."
                 "She spends the next several minutes taking it up the ass."
@@ -2240,7 +2240,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 "A few seconds later, you and [Previous.name] follow her and she drags you both inside, locking the door behind you."
                 "She spends the next several minutes fucking you raw while [Previous.name] feels you both up."
                 $ Girl.check_if_likes(Previous, 1000,3, 1)
-                $ Previous.check_if_likes(Girl, 1000,2, 1)
+                $ Previous.check_if_likes(Girl, 1000, 2, 1)
             else:
                 "A few seconds later, you follow her and she drags you inside, locking the door behind you."
                 "She spends the next several minutes fucking you raw."
@@ -2288,7 +2288,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
 
                 "[Previous.name] shifts closer and wraps one arm around you, the other hand caressing [Girl.name]'s cheek."
                 "[Girl.name] then procedes to blow you for several minutes until you cum."
-                $ Girl.check_if_likes(Previous, 1000,2, 1)
+                $ Girl.check_if_likes(Previous, 1000, 2, 1)
                 $ Previous.check_if_likes(Girl, 1000, 1, 1)
             elif _return == 2:
                 "She then procedes to blow you for several minutes until you cum, while [Previous.name] pretends to be occupied."
@@ -2368,8 +2368,8 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 $ Previous.recent_history.append("handjob")
                 $ Previous.daily_history.append("handjob")
                 $ Girl.check_if_likes(Previous,600,3, 1)
-                $ Previous.check_if_likes(Girl,600,2, 1)
-                $ Girl.check_if_likes(Previous, 1000,2, 1)
+                $ Previous.check_if_likes(Girl,600, 2, 1)
+                $ Girl.check_if_likes(Previous, 1000, 2, 1)
                 $ Previous.check_if_likes(Girl, 1000, 1, 1)
             elif _return == 2:
                 "She unzips your pants under the table, and proceeds to caress your cock, while [Previous.name] pretends to be occupied."
@@ -2444,7 +2444,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 "You slowly pulls your hands free with a sly smile."
                 $ Girl.check_if_likes(Previous,700,6, 1)
                 $ Girl.check_if_likes(Previous, 1000,6, 1)
-                $ Previous.check_if_likes(Girl, 1000,2, 1)
+                $ Previous.check_if_likes(Girl, 1000, 2, 1)
             else:
                 "You stroke her pussy for several minutes, until finally she shudders in orgasm."
                 "You slowly pulls your hand free with a sly smile."
@@ -2506,7 +2506,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             if _return == 1:
                 "[Previous.name] decides to join in the fun and adds her foot to the mix."
                 call change_Player_stat("focus", 60, 5)
-                $ Girl.check_if_likes(Previous, 1000,2, 1)
+                $ Girl.check_if_likes(Previous, 1000, 2, 1)
                 $ Previous.check_if_likes(Girl, 1000, 1, 1)
             if _return == 3:
                 call Date_Bonus (Previous, -3)
@@ -2991,7 +2991,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 "[Previous.name] also leans over and toys with [Girl.name]'s pussy."
                 $ Girl.check_if_likes(Previous,700,3, 1)
                 $ Girl.check_if_likes(Previous, 1000,3, 1)
-                $ Previous.check_if_likes(Girl, 1000,2, 1)
+                $ Previous.check_if_likes(Girl, 1000, 2, 1)
             if Girl.event_counter["anal_creampied"]:
                 if Girl.outfit["underwear"]:
                     "After several minutes of this, you can't take it anymore and come inside her."
@@ -3056,7 +3056,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 "[Previous.name] also leans over and toys with [Girl.name]'s pussy."
                 $ Girl.check_if_likes(Previous,700,3, 1)
                 $ Girl.check_if_likes(Previous, 1000,3, 1)
-                $ Previous.check_if_likes(Girl, 1000,2, 1)
+                $ Previous.check_if_likes(Girl, 1000, 2, 1)
             if Girl.event_counter["creampied"]:
                 if Girl.outfit["underwear"]:
                     "After several minutes of this, you can't take it anymore and come inside her."
@@ -3116,8 +3116,8 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
 
                 "[Previous.name] also leans over joins [Girl.name] at licking your cock."
                 "They take turns sucking on it contentedly for several minutes before you finally cum."
-                $ Girl.check_if_likes(Previous, 1000,2, 1)
-                $ Previous.check_if_likes(Girl, 1000,2, 1)
+                $ Girl.check_if_likes(Previous, 1000, 2, 1)
+                $ Previous.check_if_likes(Girl, 1000, 2, 1)
             else:
                 "She sucks on it contentedly for several minutes before you finally cum."
             $ Girl.spunk["mouth"] = True
@@ -3180,8 +3180,8 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
 
                 "She then leans over and begins to stroke your cock."
                 "[Previous.name] leans in and joins her, and they share a smile."
-                $ Girl.check_if_likes(Previous, 1000,2, 1)
-                $ Previous.check_if_likes(Girl, 1000,2, 1)
+                $ Girl.check_if_likes(Previous, 1000, 2, 1)
+                $ Previous.check_if_likes(Girl, 1000, 2, 1)
             else:
                 "She then leans over and begins to stroke it."
             $ Girl.change_face("surprised")
@@ -3279,7 +3279,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 "[Previous.name] leans in and begins to fondle her breasts as well."
                 $ Girl.check_if_likes(Previous,700,6, 1)
                 $ Girl.check_if_likes(Previous, 1000,3, 1)
-                $ Previous.check_if_likes(Girl, 1000,2, 1)
+                $ Previous.check_if_likes(Girl, 1000, 2, 1)
             "After several minutes of this, she shudders in orgasm and leans back with a contented sigh."
             $ Girl.eyes = "sexy"
             if Girl == RogueX:
@@ -3334,7 +3334,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             else:
                 "Looking down, you notice she's hiked up her skirt enough that you can see her bare pussy, lit by the movie screen."
             call change_Girl_stat(Girl, "inhibition", 60, 2)
-            call expression Girl.tag + "First_Bottomless" pass (1)
+            call expression Girl.tag + "_First_Bottomless" pass (1)
             if Girl == RogueX:
                 ch_r "Just a little downpayment on later, [Girl.player_petname]."
             elif Girl == KittyX:
@@ -3779,9 +3779,9 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
             else:
                 if Date_Cost[Count] >=15:
 
-                    call change_Girl_stat(Player.Party[Count], "love", 200, -5,Alt=[[LauraX],200,3])
+                    call change_Girl_stat(Player.Party[Count], "love", 200, -5,Alt=[[LauraX], 200,3])
                 else:
-                    call change_Girl_stat(Player.Party[Count], "love", 200, -3,Alt=[[LauraX],200, 0])
+                    call change_Girl_stat(Player.Party[Count], "love", 200, -3,Alt=[[LauraX], 200, 0])
                 if Player.Party[Count] == RogueX:
                     $ RogueX.change_face("angry", eyes = "side")
                     ch_r "Tch. Cheapskate."
@@ -3818,7 +3818,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
             if Total_Cost >=15:
                 call change_Girl_stat(Player.Party[Count], "love", 200, -4)
                 if Play_Cost > Date_Cost[Count]:
-                    call change_Girl_stat(Player.Party[Count], "love", 200, -10,Alt=[[EmmaX,LauraX],200,-5])
+                    call change_Girl_stat(Player.Party[Count], "love", 200, -10,Alt=[[EmmaX,LauraX], 200,-5])
                     call change_Girl_stat(Player.Party[Count], "obedience", 200, 0,Alt=[[EmmaX,LauraX],500,-2])
             if Player.location == "bg_restaurant" and "dinnersex" in Player.Party[Count].recent_history:
                 call Date_Bonus (Player.Party[Count], -Total_Cost)
@@ -3865,7 +3865,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
                     call Girl_Date_Over (Player.Party[Count])
 
 
-    if JeanX in Player.Party and line in (JeanX,"split","deadbeat"):
+    if JeanX in Player.Party and line in (JeanX,"split", "deadbeat"):
 
         ch_j "Waiter?"
         $ JeanX.change_face("confused", eyes = "psychic")

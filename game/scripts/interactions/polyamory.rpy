@@ -46,7 +46,7 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
     $ Partner.drain_word("unseen", 1, 0)
 
     $ Girl.change_face("surprised", 1)
-    $ Partner.change_face("surprised",2)
+    $ Partner.change_face("surprised", 2)
 
     "Suddenly, [Girl.name] jerks up from what she was doing with a start, and gives [Partner.name] a nudge."
     $ Girl.change_face("bemused", 0)
@@ -1133,8 +1133,8 @@ label Les_Prep(Girl=focused_Girl, temp_Girls=[]):
     if Girl.taboo:
         $ Girl.drain_word("no_taboo")
     $ Girl.drain_word("no_lesbian")
-    $ Girl.add_word(0,"lesbian","lesbian")
-    $ Partner.add_word(0,"lesbian","lesbian")
+    $ Girl.add_word(0,"lesbian", "lesbian")
+    $ Partner.add_word(0,"lesbian", "lesbian")
 
 label Les_Cycle(Girl=focused_Girl):
     $ Girl = check_girl(Girl)
@@ -1650,7 +1650,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
                 ch_v "Definitely. . ."
             if B >= 0:
                 ch_v "I dunno. . ."
-        $ Speaker.blushing = "blush1"
+        $ Speaker.blushing = "_blush1"
         menu:
             extend ""
             "Ok, that's fine. . .":
@@ -1753,7 +1753,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
                         ch_s "This is not how one asks a favor."
                     elif Speaker == JubesX:
                         ch_v "No way!"
-                    $ Speaker.add_word(1,"angry","angry")
+                    $ Speaker.add_word(1,"angry", "angry")
             "[Subject.name], what do you think?":
                 $ Subject.change_face("sexy", 1)
                 $ Speaker.change_likes(Subject,(int(B/10)))
@@ -2520,7 +2520,7 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
 
         menu:
             extend ""
-            "Ok, then I guess I will ask her to join us." if line in ("my","ny","ym","mm","nm"):
+            "Ok, then I guess I will ask her to join us." if line in ("my", "ny", "ym", "mm", "nm"):
 
                 $ line = "yy"
                 $ Player.Party[0].change_face("smile")
@@ -2541,7 +2541,7 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
                 elif Player.Party[0] == JubesX:
                     ch_v "Sweet!"
 
-            "Well then, I guess I'll stop." if line in ("mn","yn","ym","mm","nm"):
+            "Well then, I guess I'll stop." if line in ("mn", "yn", "ym", "mm", "nm"):
 
                 $ line = "nn"
                 $ Player.Party[0].change_face("smile")
@@ -2561,11 +2561,11 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
                 elif Player.Party[0] == JubesX:
                     ch_v "Ok, good."
 
-            "I'm asking her in anyway." if line in ("mn","yn"):
+            "I'm asking her in anyway." if line in ("mn", "yn"):
 
                 pass
 
-            "Well, I'm going to pass anyway." if line in ("nm","ny","mm"):
+            "Well, I'm going to pass anyway." if line in ("nm", "ny", "mm"):
 
                 $ line = "nn"
                 $ Player.Party[0].change_face("sad")
@@ -2643,13 +2643,13 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
 
     $ Player.Party = []
     if line == "yy":
-        if Newbie.tag + "No" in Player.traits:
-            $ Player.traits.remove(Newbie.tag + "No")
-        $ Player.drain_word(Newbie.tag + "No", 0, 0, 1)
-        $ Player.traits.append(Newbie.tag + "Yes")
+        if Newbie.tag + "_No" in Player.traits:
+            $ Player.traits.remove(Newbie.tag + "_No")
+        $ Player.drain_word(Newbie.tag + "_No", 0, 0, 1)
+        $ Player.traits.append(Newbie.tag + "_Yes")
         "You should give [Newbie.name] a call."
     else:
-        $ Player.traits.append(Newbie.tag + "No")
+        $ Player.traits.append(Newbie.tag + "_No")
     return
 
 
@@ -3158,7 +3158,7 @@ label Harem_Start(Newbie=0, round2=0):
 
         menu:
             extend ""
-            "Ok, then I guess I will ask her to join us." if line in ("my","ny","ym","mm","nm"):
+            "Ok, then I guess I will ask her to join us." if line in ("my", "ny", "ym", "mm", "nm"):
 
                 $ line = "yy"
                 $ Player.Party[0].change_face("smile")
@@ -3181,7 +3181,7 @@ label Harem_Start(Newbie=0, round2=0):
                     ch_s "Good."
                 elif Player.Party[0] == JubesX:
                     ch_v "Sweet!"
-            "Well then, I guess I'll stop." if line in ("mn","yn"):
+            "Well then, I guess I'll stop." if line in ("mn", "yn"):
 
                 $ line = "nn"
                 $ Player.Party[0].change_face("normal")
@@ -3204,11 +3204,11 @@ label Harem_Start(Newbie=0, round2=0):
                     ch_s "Good."
                 elif Player.Party[0] == JubesX:
                     ch_v "Ok, good."
-            "I'm asking her in anyway." if line in ("mn","yn"):
+            "I'm asking her in anyway." if line in ("mn", "yn"):
 
                 pass
 
-            "Well, I'm going to pass anyway." if line in ("ym","my","nm","ny","mm"):
+            "Well, I'm going to pass anyway." if line in ("ym", "my", "nm", "ny", "mm"):
 
                 $ line = "nn"
                 $ Player.Party[0].change_face("sad")
@@ -3313,17 +3313,17 @@ label Harem_Start(Newbie=0, round2=0):
 
 
     if line == "yy":
-        if Newbie.tag + "No" in Player.traits:
-            $ Player.traits.remove(Newbie.tag + "No")
-        $ Player.drain_word(Newbie.tag + "No", 0, 0, 1)
-        $ Player.traits.append(Newbie.tag + "Yes")
+        if Newbie.tag + "_No" in Player.traits:
+            $ Player.traits.remove(Newbie.tag + "_No")
+        $ Player.drain_word(Newbie.tag + "_No", 0, 0, 1)
+        $ Player.traits.append(Newbie.tag + "_Yes")
         $ Count = len(Player.Harem)
         while Count:
             $ Count -= 1
             $ Player.Harem[Count].drain_word("saw with "+Newbie.tag, 0, 0, 1)
         "You should give [Newbie.name] a call."
     else:
-        $ Player.traits.append(Newbie.tag + "No")
+        $ Player.traits.append(Newbie.tag + "_No")
 
     $ Player.Party = []
     $ Count = 0
@@ -3517,8 +3517,8 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
     $ Girl.drain_word("lesbian", 1, 0)
     $ Girl2.drain_word("lesbian", 1, 0)
 
-    $ Girl.add_word(0,"lesbian","lesbian")
-    $ Girl2.add_word(0,"lesbian","lesbian")
+    $ Girl.add_word(0,"lesbian", "lesbian")
+    $ Girl2.add_word(0,"lesbian", "lesbian")
     $ Girl.add_word(1, 0, 0, 0,"les "+Girl2.tag)
     $ Girl2.add_word(1, 0, 0, 0,"les "+Girl.tag)
 
@@ -3645,14 +3645,14 @@ label Share(Girl=0, Other=0):
 
                 if Other.tag+"Yes" not in Player.traits:
                     $ Player.traits.append(Other.tag+"Yes")
-                call expression Other.tag + "BF"
+                call expression Other.tag + "_BF"
                 $ renpy.pop_call()
                 $ renpy.pop_call()
             else:
 
                 if Other.tag+"Yes" not in Player.traits:
                     $ Player.traits.append(Other.tag+"Yes")
-                call ask_to_meet(Other, "bemused")
+                call ask_to_meet(Other)
         else:
 
             "[Girl.name] sends you a text."

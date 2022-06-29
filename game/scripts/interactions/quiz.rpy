@@ -4,7 +4,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
     $ Count = 0
     $ between_event_count = 1
     $ counter = 0
-    $ QuizOrder = [1,2,3,4,5,6,7,8,9, 10, 11, 12, 13, 14, 15]
+    $ QuizOrder = [1, 2,3,4,5,6,7,8,9, 10, 11, 12, 13, 14, 15]
     $ renpy.random.shuffle(QuizOrder)
     if EmmaX in Player.Party and Player.Party[0] != EmmaX:
 
@@ -218,7 +218,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
 
     while between_event_count:
 
-        call expression Player.Party[0].tag + "Quiz_Question"
+        call expression Player.Party[0].tag + "_Quiz_Question"
 
         $ between_event_count += 1
 
@@ -267,7 +267,7 @@ label Strip_Study_Right:
             $ Player.Party[0].outfit["top"] = ""
             "She pulls her [line] off and throws it aside."
             if not Player.Party[0].outfit["bra"]:
-                call expression Player.Party[0].tag + "First_Topless"
+                call expression Player.Party[0].tag + "_First_Topless"
         else:
             if Player.Party[0] == RogueX:
                 ch_r "You know, I don't really think I'm ready for this, sorry [Player.Party[0].player_petname]. I shouldn't have led you on."
@@ -304,9 +304,9 @@ label Strip_Study_Right:
                     $ Player.Party[0].seen_underwear = 1
             else:
 
-                $ Player.Party[0].blushing = "blush1"
+                $ Player.Party[0].blushing = "_blush1"
                 "You notice that she apparently isn't wearing any panties, and she flushes a bit."
-                call expression Player.Party[0].tag + "First_Bottomless"
+                call expression Player.Party[0].tag + "_First_Bottomless"
         else:
             if Player.Party[0] == RogueX:
                 ch_r "You know, I don't really think I'm ready for this, sorry [Player.Party[0].player_petname]. I shouldn't have led you on."
@@ -334,7 +334,7 @@ label Strip_Study_Right:
             if not Player.Party[0].seen_breasts:
                 call change_Girl_stat(Player.Party[0], "inhibition", 200, 3)
                 call change_Girl_stat(Player.Party[0], "inhibition", 50, 1)
-                call expression Player.Party[0].tag + "First_Topless"
+                call expression Player.Party[0].tag + "_First_Topless"
             call change_Player_stat("focus", 80, 15)
         else:
             if Player.Party[0] == RogueX:
@@ -366,7 +366,7 @@ label Strip_Study_Right:
             if not Player.Party[0].seen_pussy:
                 call change_Girl_stat(Player.Party[0], "inhibition", 50, 4)
                 call change_Girl_stat(Player.Party[0], "inhibition", 200, 4)
-                call expression Player.Party[0].tag + "First_Bottomless"
+                call expression Player.Party[0].tag + "_First_Bottomless"
             call change_Player_stat("focus", 75, 20)
         else:
             if Player.Party[0] == RogueX:

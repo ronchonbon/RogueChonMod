@@ -62,8 +62,8 @@ label caught_changing(Girl):
                 call change_Girl_stat(Girl, "love", 80, -50)
 
                 if not Girl.breasts_covered or not Girl.pussy_covered:
-                    call expression Girl.tag + "First_Bottomless" pass (1)
-                    call expression Girl.tag + "First_Topless" pass (1)
+                    call expression Girl.tag + "_First_Bottomless" pass (1)
+                    call expression Girl.tag + "_First_Topless" pass (1)
 
                     if Girl != StormX:
                         $ Girl.outfit["top"] = "towel"
@@ -77,12 +77,12 @@ label caught_changing(Girl):
                     call change_Girl_stat(Girl, "lust", 200, D20)
 
                 if D20 > 17:
-                    call expression Girl.tag + "First_Bottomless"
-                    call expression Girl.tag + "First_Topless" pass (1)
+                    call expression Girl.tag + "_First_Bottomless"
+                    call expression Girl.tag + "_First_Topless" pass (1)
                 elif D20 > 15:
-                    call expression Girl.tag + "First_Bottomless"
+                    call expression Girl.tag + "_First_Bottomless"
                 elif D20 > 14:
-                    call expression Girl.tag + "First_Topless"
+                    call expression Girl.tag + "_First_Topless"
 
             call change_Girl_stat(Girl, "inhibition", 70, 20)
 
@@ -324,7 +324,7 @@ label caught_changing(Girl):
 label caught_showering(Girl):
     call set_the_scene(location = "bg_door", fade = True)
 
-    $ Girl.add_word(1,"showered","showered", 0, 0)
+    $ Girl.add_word(1,"showered", "showered", 0, 0)
     $ Girl.change_outfit("nude")
     $ Girl.change_face("smile", 1)
 
@@ -367,7 +367,7 @@ label caught_showering(Girl):
             "You hear a sharp shuffling sound and the water gets cut off."
             "After several seconds and some more shuffling, [Girl.name] comes to the door."
 
-            $ Girl.change_face("perplexed",2,mouth = "normal")
+            $ Girl.change_face("perplexed", 2,mouth = "normal")
 
             call shift_focus(Girl)
             call set_the_scene(location = "bg_showerroom")
@@ -418,7 +418,7 @@ label caught_showering(Girl):
         if "will_masturbate" in Girl.daily_history:
             $ Girl.drain_word("will_masturbate", 0, 1)
             $ Girl.change_face("sexy", eyes = "closed")
-            $ Girl.add_word(1,"unseen","unseen", 0, 0)
+            $ Girl.add_word(1,"unseen", "unseen", 0, 0)
 
             call set_the_scene
 
@@ -439,8 +439,8 @@ label caught_showering(Girl):
 
             "As you enter the showers, you see [Girl.name] washing up."
 
-            call expression Girl.tag + "First_Bottomless" pass (1)
-            call expression Girl.tag + "First_Topless" pass (1)
+            call expression Girl.tag + "_First_Bottomless" pass (1)
+            call expression Girl.tag + "_First_Topless" pass (1)
 
             if not approval_check(Girl, 1200) or not Girl.seen_pussy or not Girl.seen_breasts:
                 $ Girl.brows = "angry"
@@ -619,8 +619,8 @@ label caught_showering(Girl):
 
                 "She flashes you real quick."
 
-                call expression Girl.tag + "First_Bottomless" pass (1)
-                call expression Girl.tag + "First_Topless" pass (1)
+                call expression Girl.tag + "_First_Bottomless" pass (1)
+                call expression Girl.tag + "_First_Topless" pass (1)
 
                 if Girl == LauraX:
                     ch_l "Heh!"
@@ -936,8 +936,8 @@ label caught_lesbian(GirlA, GirlB):
                 $ girl_secondary_action = "fondle_pussy"
                 $ second_girl_main_action = "fondle_pussy"
 
-                $ GirlA.add_word(1,"unseen","unseen")
-                $ GirlB.add_word(1,"unseen","unseen")
+                $ GirlA.add_word(1,"unseen", "unseen")
+                $ GirlB.add_word(1,"unseen", "unseen")
 
                 $ Partner = Girl2
                 $ interrupted = 0
@@ -1048,7 +1048,7 @@ label caught_having_sex(Girl):
         "And this isn't even the first time this has happened!"
 
     if Partner:
-        $ Partner.change_face("surprised",2)
+        $ Partner.change_face("surprised", 2)
 
         if Partner in Rules:
             if Partner == KittyX:
@@ -1549,7 +1549,7 @@ label caught_having_sex(Girl):
     if Partner:
         $ Partner.event_counter["caught"] += 1
 
-    $ Girl.add_word(0,"caught","caught")
+    $ Girl.add_word(0,"caught", "caught")
 
     if Girl == KittyX and KittyX not in Rules and "Xavier's photo" not in Player.inventory:
         "It would probably be a good idea to find some way to get Xavier to leave you alone."

@@ -95,7 +95,7 @@ label masturbate(Girl, context = None):
                     else:
                         call fancy_bumping_into_you_approval_lines(Girl, "masturbation")
 
-                    $ Girl.blushing = "blush1"
+                    $ Girl.blushing = "_blush1"
                 else:
                     call change_Girl_stat(Girl, "love", 200, -5)
                     $ Girl.change_face("angry")
@@ -307,7 +307,7 @@ label after_masturbation(Girl, context):
 
         "[Girl.name] stops what she's doing with a start, eyes wide."
 
-        call expression Girl.tag + "First_Bottomless" pass(1)
+        call expression Girl.tag + "_First_Bottomless" pass(1)
 
         $ Girl.change_face("surprised", 1)
 

@@ -688,7 +688,7 @@ label Laura_SexChat:
                             if LauraX.player_favorite_action == "fondle":
                                 call change_Girl_stat(LauraX, "lust", 80, 3)
                                 ch_l "Yeah, I think we're clear on that. . ."
-                            elif LauraX.favorite_action in ("hotdog","suck_breasts","fondle_breasts","fondle_thighs"):
+                            elif LauraX.favorite_action in ("hotdog", "suck_breasts", "fondle_breasts", "fondle_thighs"):
                                 call change_Girl_stat(LauraX, "love", 90, 5)
                                 call change_Girl_stat(LauraX, "lust", 80, 5)
                                 ch_l "I love when you touch me. . ."
@@ -902,7 +902,7 @@ label Laura_SexChat:
 
 
 
-label Laura_Chitchat(O=0, Options=["default","default","default"]):
+label Laura_Chitchat(O=0, Options=["default", "default", "default"]):
     $ round -= 3 if round > 3 else (round-1)
     if O:
         $ Options = [O]
@@ -1147,9 +1147,9 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
                     elif approval_check(LauraX, 800):
                         call change_Girl_stat(LauraX, "obedience", 60, 5)
                         call change_Girl_stat(LauraX, "inhibition", 50, 5)
-                        $ LauraX.change_face("perplexed",2)
+                        $ LauraX.change_face("perplexed", 2)
                         ch_l "I guess you show initiative."
-                        $ LauraX.blushing = "blush1"
+                        $ LauraX.blushing = "_blush1"
                     else:
                         call change_Girl_stat(LauraX, "love", 50, -10)
                         call change_Girl_stat(LauraX, "love", 80, -10)
@@ -1170,7 +1170,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
         menu:
             extend ""
             "Yeah? Did you like them?":
-                $ LauraX.change_face("sly",2)
+                $ LauraX.change_face("sly", 2)
                 ch_l "They were. . .{i}interesting{/i}."
             "Good. You looked like you could use to learn a thing or two from them.":
                 call change_Girl_stat(LauraX, "love", 90, -3)
@@ -1178,14 +1178,14 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
                 call change_Girl_stat(LauraX, "inhibition", 50, 5)
                 $ LauraX.change_face("angry")
                 ch_l "I don't see how."
-        $ LauraX.blushing = "blush1"
+        $ LauraX.blushing = "_blush1"
         $ LauraX.had_chat.append("book")
 
     elif Options[0] == "lingerie":
 
-        $ LauraX.change_face("sly",2)
+        $ LauraX.change_face("sly", 2)
         ch_l "That underwear you got me was kind of uncomfortable, but I do like the look."
-        $ LauraX.blushing = "blush1"
+        $ LauraX.blushing = "_blush1"
         $ LauraX.had_chat.append("lingerie")
 
     elif Options[0] == "handy":
@@ -1198,7 +1198,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
     elif Options[0] == "blowjob":
         if "blowjob" not in LauraX.had_chat:
 
-            $ LauraX.change_face("sly",2)
+            $ LauraX.change_face("sly", 2)
             ch_l "Hey, so did you like that blowjob?"
             menu:
                 extend ""
@@ -1224,9 +1224,9 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
                 "I guess. If you're into weird sounds and too much teeth. Spoiler, I'm not.":
                     call change_Girl_stat(LauraX, "love", 90, -10)
                     call change_Girl_stat(LauraX, "obedience", 60, 10)
-                    $ LauraX.change_face("angry",2)
+                    $ LauraX.change_face("angry", 2)
                     ch_l "Well, good luck with that then."
-            $ LauraX.blushing = "blush1"
+            $ LauraX.blushing = "_blush1"
             $ LauraX.had_chat.append("blowjob")
         else:
             $ line = renpy.random.choice(["I gotta tell you, your dick tastes great.",
@@ -1249,9 +1249,9 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
     elif Options[0] == "facial":
 
         ch_l "Hey. . .I know this is kind of odd. . ."
-        $ LauraX.change_face("sexy",2)
+        $ LauraX.change_face("sexy", 2)
         ch_l "I feel so {i}good{/i} with your jizz on my face."
-        $ LauraX.blushing = "blush1"
+        $ LauraX.blushing = "_blush1"
 
     elif Options[0] == "sleepover":
 
@@ -1266,10 +1266,10 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
     elif Options[0] == "sexed":
 
         ch_l "So. . . you should know. . ."
-        $ LauraX.change_face("sexy",2)
+        $ LauraX.change_face("sexy", 2)
         ch_l ". . .lately when I've been flicking the bean. . ."
         ch_l "I've been thinking about you inside of me."
-        $ LauraX.blushing = "blush1"
+        $ LauraX.blushing = "_blush1"
 
     elif Options[0] == "anal":
 
@@ -1640,7 +1640,7 @@ label Laura_Rename:
                     call change_Girl_stat(LauraX, "inhibition", 50, 2)
                 ch_l "I guess I could give that one a go. . ."
             else:
-                $ LauraX.blushing = "blush2"
+                $ LauraX.blushing = "_blush2"
                 ch_l "I. . . really don't think that would work for me. . ."
             $ LauraX.change_face()
         "Nevermind.":
@@ -2196,11 +2196,11 @@ label Laura_Leave:
             ch_l "I'm going commando today."
             "Then you could slip on a pair of panties. . .":
                 if LauraX.seen_pussy and approval_check(LauraX, 1100, taboo_modifier=4):
-                    $ LauraX.blushing = "blush1"
+                    $ LauraX.blushing = "_blush1"
                     ch_l "No, commando's fine. . ."
                     $ LauraX.blushing = ""
                 elif approval_check(LauraX, 1500, taboo_modifier=4):
-                    $ LauraX.blushing = "blush1"
+                    $ LauraX.blushing = "_blush1"
                     ch_l "No, commando's fine. . ."
                     $ LauraX.blushing = ""
                 elif approval_check(LauraX, 700, taboo_modifier=4):
@@ -2420,7 +2420,7 @@ label Laura_Leave:
                     elif LauraX.outfit["bottom"] == "skirt":
                         "She reaches under her skirt and pulls her [line] off."
                     else:
-                        $ LauraX.blushing = "blush1"
+                        $ LauraX.blushing = "_blush1"
                         "She steps away a moment and then comes back."
                         $ LauraX.blushing = ""
                     $ line = 0
@@ -2548,7 +2548,7 @@ label Laura_Leave:
                     return
                 $ LauraX.to_do.append("pubes")
                 $ LauraX.pubes_counter = 6
-        "Shave pubes" if LauraX.pubes == "hairy":
+        "Shave pubes" if LauraX.pubes == "_hairy":
             ch_p "I like it waxed clean down there."
             $ LauraX.change_face("bemused", 1)
             if "shave" in LauraX.to_do:

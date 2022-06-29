@@ -115,7 +115,6 @@ label player_room:
 
     if round <= 10:
         call tenth_round
-        call set_Girls_locations
         call set_the_scene
 
     call event_calls
@@ -140,14 +139,12 @@ label player_room:
                 $ door_locked = False
             "Sleep" if time_index > 2:
                 call tenth_round
-                call set_Girls_locations
                 call event_calls
                 call set_the_scene
             "Wait" if time_index < 3:
                 "You wait around a bit."
 
                 call tenth_round
-                call set_Girls_locations
                 call event_calls
                 call set_the_scene
             "Special options":
@@ -300,7 +297,7 @@ label girls_room_entry:
                     "You hear some soft moans, followed by some shuffling around as items tumble to the ground."
                     "After several seconds and some more shuffling of clothing, [Girl.name] comes to the door."
 
-                    $ Girl.change_face("perplexed",2)
+                    $ Girl.change_face("perplexed", 2)
 
                     call add_Girls(Girl)
 
@@ -525,7 +522,6 @@ label girls_room:
 
     if round <= 10:
         call tenth_round
-        call set_Girls_locations
         call set_the_scene
 
     call event_calls
@@ -571,14 +567,12 @@ label girls_room:
                 $ door_locked = False
             "Sleep" if time_index > 2:
                 call tenth_round
-                call set_Girls_locations
                 call event_calls
                 call set_the_scene
             "Wait" if time_index < 3:
                 "You wait around a bit."
 
                 call tenth_round
-                call set_Girls_locations
                 call event_calls
                 call set_the_scene
             "Leave":
@@ -605,7 +599,6 @@ label campus:
             jump player_room
 
         call tenth_round
-        call set_Girls_locations
         call set_the_scene
 
     call event_calls
@@ -622,7 +615,6 @@ label campus:
                 "You wait around a bit."
 
                 call tenth_round
-                call set_Girls_locations
                 call event_calls
                 call set_the_scene
             "Leave":
@@ -661,7 +653,6 @@ label classroom:
             jump reset_location
 
         call tenth_round
-        call set_Girls_locations
         call set_the_scene
 
     call event_calls
@@ -676,7 +667,6 @@ label classroom:
                 if round >= 30:
                     call take_class
                     call tenth_round
-                    call set_Girls_locations
                     call event_calls
                     call set_the_scene
                 else:
@@ -687,7 +677,6 @@ label classroom:
                 if round >= 30:
                     call take_class
                     call tenth_round
-                    call set_Girls_locations
                     call event_calls
                     call set_the_scene
                 else:
@@ -711,7 +700,6 @@ label classroom:
                 "You hang out for a bit."
 
                 call tenth_round
-                call set_Girls_locations
                 call event_calls
                 call set_the_scene
 
@@ -867,7 +855,6 @@ label danger_room:
             jump reset_location
 
         call tenth_round
-        call set_Girls_locations
         call set_the_scene
 
     call event_calls
@@ -902,7 +889,6 @@ label danger_room:
                 "You hang out for a bit."
 
                 call tenth_round
-                call set_Girls_locations
                 call event_calls
                 call set_the_scene
             "Leave":
@@ -931,7 +917,7 @@ label shower_entry:
         if D20 > 15:
             call caught_showering(showering_Girls[0])
         elif D20 > 13:
-            $ showering_Girls[0].add_word(1,"showered","showered", 0, 0)
+            $ showering_Girls[0].add_word(1,"showered", "showered", 0, 0)
 
             call set_Character_taboos
             call set_the_scene(location = "bg_showerroom", fade = True)
@@ -941,7 +927,7 @@ label shower_entry:
         for G in showering_Girls:
             if G not in Player.Party:
                 if D20 >= 10:
-                    G.add_word(1,"showered","showered", 0, 0)
+                    G.add_word(1,"showered", "showered", 0, 0)
 
                 G.change_outfit("shower")
 
@@ -1057,7 +1043,6 @@ label shower_room:
             jump player_room
 
         call tenth_round
-        call set_Girls_locations
         call set_the_scene
 
     call event_calls
@@ -1082,7 +1067,6 @@ label shower_room:
                     "Not gonna lie, kinda weird."
 
                 call tenth_round
-                call set_Girls_locations
                 call event_calls
                 call set_the_scene
 
@@ -1119,7 +1103,6 @@ label pool:
             jump player_room
 
         call tenth_round
-        call set_Girls_locations
         call set_the_scene
 
     call event_calls
@@ -1144,7 +1127,7 @@ label pool:
                 if time_index > 2 and not Present:
                     "It's a bit late for a swim."
                 else:
-                    call Pool_Swim
+                    call swim
             "Want to swim? (locked)" if round < 30:
                 pass
             "Want to skinnydip?" if round >= 30:
@@ -1155,7 +1138,6 @@ label pool:
                 "You hang out for a bit."
 
                 call tenth_round
-                call set_Girls_locations
                 call event_calls
                 call set_the_scene
             "Leave":
@@ -1326,7 +1308,6 @@ label study_room:
             jump player_room
 
         call tenth_round
-        call set_Girls_locations
         call set_the_scene
 
     call event_calls
@@ -1402,7 +1383,6 @@ label study_room:
                     jump reset_location
                 else:
                     call tenth_round
-                    call set_Girls_locations
                     call event_calls
                     call set_the_scene
 
@@ -1436,7 +1416,6 @@ label mall:
             jump player_room
 
         call tenth_round
-        call set_Girls_locations
         call set_the_scene
 
     call event_calls
@@ -1478,7 +1457,6 @@ label mall:
                 "You wait around a bit."
 
                 call tenth_round
-                call set_Girls_locations
                 call event_calls
                 call set_the_scene
             "Just wander and window shop" if Player.Party and round > 20:
@@ -1495,7 +1473,6 @@ label mall:
                     "You wander around with [Player.Party[0].name]and see what they have available."
 
                 call tenth_round
-                call set_Girls_locations
                 call event_calls
                 call set_the_scene
             "Do something else" if "date" in Player.recent_history and round > 20:

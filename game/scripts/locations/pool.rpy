@@ -52,16 +52,16 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
     if Girl == EmmaX:
         if "classcaught" not in EmmaX.history:
-            $ Girl.change_face("angry",2)
+            $ Girl.change_face("angry", 2)
             ch_e "That would be entirely inappropriate."
             return
         if "taboo" not in EmmaX.history:
-            $ Girl.change_face("bemused",2)
+            $ Girl.change_face("bemused", 2)
             ch_e "[EmmaX.player_petname], we can't be seen like that in public. . ."
             return
         if "threesome" not in EmmaX.history:
             if not AloneCheck(EmmaX):
-                $ Girl.change_face("bemused",2)
+                $ Girl.change_face("bemused", 2)
                 ch_e "Not with this sort of company. . ."
                 return
 
@@ -199,7 +199,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                             call change_Girl_stat(Girl, "love", 70, -1)
                             call change_Girl_stat(Girl, "obedience", 80, 1)
 
-                        $ Girl.change_face("angry",2)
+                        $ Girl.change_face("angry", 2)
                         if Girl == RogueX:
                             ch_r "\"And\" that's all you're getting. . . for now. . ."
                         elif Girl == KittyX:
@@ -221,7 +221,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                             call change_Girl_stat(Girl, "obedience", 50, 1)
                             call change_Girl_stat(Girl, "obedience", 80, 2)
                         if line != "sure":
-                            $ Girl.change_face("sad",2)
+                            $ Girl.change_face("sad", 2)
                         else:
                             $ Girl.change_face("normal", 1)
                         if Girl == RogueX:
@@ -338,11 +338,11 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             if line == "sure":
 
                 $ Girl.outfit["top"] = ""
-                call expression Girl.tag + "First_Topless"
+                call expression Girl.tag + "_First_Topless"
                 if Type == "no_panties":
                     $ Girl.outfit["bottom"] = ""
                     $ Girl.outfit["hose"] = ""
-                    call expression Girl.tag + "First_Bottomless"
+                    call expression Girl.tag + "_First_Bottomless"
                 $ Girl.add_word(1,"tan","tan")
             else:
                 $ Girl.add_word(1,"no_tan","no_tan")
@@ -380,14 +380,14 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 $ Girl.outfit["top"] = ""
             if Type == "bra" or Type == "both":
                 $ Girl.outfit["bra"] = ""
-            call expression Girl.tag + "First_Topless"
+            call expression Girl.tag + "_First_Topless"
 
             if Type == "legs" or Type == "both":
                 $ Girl.outfit["bottom"] = ""
                 $ Girl.outfit["hose"] = ""
             if Type == "panties" or Type == "both":
                 $ Girl.outfit["underwear"] = ""
-            call expression Girl.tag + "First_Bottomless"
+            call expression Girl.tag + "_First_Bottomless"
 
             $ Girl.add_word(1,"tan","tan")
 
@@ -532,16 +532,16 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
 
     if Girl == EmmaX:
         if "classcaught" not in EmmaX.history:
-            $ Girl.change_face("angry",2)
+            $ Girl.change_face("angry", 2)
             ch_e "That would be entirely inappropriate."
             return
         if "taboo" not in EmmaX.history:
-            $ Girl.change_face("bemused",2)
+            $ Girl.change_face("bemused", 2)
             ch_e "[EmmaX.player_petname], I couldn't risk us getting caught. . ."
             return
         if "threesome" not in EmmaX.history:
             if not AloneCheck(EmmaX):
-                $ Girl.change_face("bemused",2)
+                $ Girl.change_face("bemused", 2)
                 ch_e "Not with this sort of company. . ."
                 return
 
@@ -611,12 +611,12 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
 
             $ Girl.outfit["top"] = ""
             $ Girl.outfit["bra"] = ""
-            call expression Girl.tag + "First_Topless"
+            call expression Girl.tag + "_First_Topless"
 
             $ Girl.outfit["bottom"] = ""
             $ Girl.outfit["hose"] = ""
             $ Girl.outfit["underwear"] = ""
-            call expression Girl.tag + "First_Bottomless"
+            call expression Girl.tag + "_First_Bottomless"
             $ Girl.change_outfit("nude")
             $ Girl.add_word(1,"dip","dip")
 
@@ -765,7 +765,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
             $ Girl.add_word(1,"no_dip","no_dip")
             return
 
-    call ShowPool ([Girl])
+    call show_swimming(Girl)
     $ Girl.wet = 1
     $ round -= 20 if round >= 20 else round
     "You both swim around for a bit."
@@ -777,133 +777,154 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
 
 
 
-label Pool_Topless(Girl, temp_Girls=[]):
-
-    if Girl.location != Player.location:
-
-        $ temp_Girls = all_Girls[:]
-        $ renpy.random.shuffle(temp_Girls)
-        while temp_Girls:
-            if temp_Girls[0].location == Player.location:
-                call shift_focus (temp_Girls[0])
-                $ temp_Girls = [1]
-            $ temp_Girls.remove(temp_Girls[0])
-
+label wardrobe_malfunction(Girl):
     call shift_focus(Girl)
 
-    if (Girl.bra_number() <= 1 and Girl.top_number() <= 1) or Girl.location != Player.location:
+    $ Girl.expose_breasts()
 
-        $ D20 = renpy.random.randint(1, 14)
-        return
-    $ Girl.top_pulled_up = 1
-    "[Girl.name] dives into the pool"
+    "[Girl.name] dives into the pool."
+    "It appears she's had a wardrobe malfunction."
+
     menu:
-        "It appears she's had a wardrobe malfunction."
+        extend ""
         "Hey, [Girl.name]. . .":
             ch_p "Looks like you might be missing something there. . ."
+
             $ Girl.change_face("confused")
+
             if Girl != StormX:
                 call change_Girl_stat(Girl, "obedience", 60, 2)
                 call change_Girl_stat(Girl, "inhibition", 50, -2)
                 Girl.voice ". . ."
-                $ Girl.change_face("surprised",2,eyes = "down")
+                $ Girl.change_face("surprised", 2,eyes = "down")
+
             call change_Girl_stat(Girl, "love", 80, 3)
             call change_Girl_stat(Girl, "love", 90, 1)
             call change_Girl_stat(Girl, "lust", 50, 2)
-            $ Count = 100
-        "Say nothing":
-            $ Girl.change_face("surprised",2,eyes = "down")
-            "After a few moments, [Girl.name] seems to notice that her top rode up."
-            if approval_check(Girl, 1200):
-                $ Count = 0
-            else:
-                $ Count = -100
 
-    if approval_check(Girl, 800-Count,"I") or approval_check(Girl, 1600-Count) or (Girl == StormX and StormX in Rules):
+            $ offset = 100
+        "Say nothing.":
+            $ Girl.change_face("surprised", 2, eyes = "down")
+
+            "After a few moments, [Girl.name] seems to notice that her top is up."
+
+            if approval_check(Girl, 1200):
+                $ offset = 0
+            else:
+                $ offset = -100
+
+    if approval_check(Girl, 800 - offset,"I") or approval_check(Girl, 1600 - offset) or (Girl == StormX and StormX in Rules):
         $ Girl.change_face("sly")
-        $ Girl.outfit["bra"] = ""
-        $ Girl.outfit["top"] = ""
+
+        $ Girl.remove_Clothing("bra")
+
         call change_Girl_stat(Girl, "obedience", 60, 2)
         call change_Girl_stat(Girl, "inhibition", 50, 4)
         call change_Girl_stat(Girl, "inhibition", 90, 2)
         call change_Girl_stat(Girl, "lust", 50, 5)
+
         "She smiles and tosses her top over her head."
-        call expression Girl.tag + "First_Topless"
-    elif approval_check(Girl, 500-Count,"I") or approval_check(Girl, 1200-Count):
+
+        call expression Girl.tag + "_First_Topless"
+    elif approval_check(Girl, 500 - offset,"I") or approval_check(Girl, 1200 - offset):
         $ Girl.change_face("sly", 1)
+
         call change_Girl_stat(Girl, "obedience", 60, 2)
         call change_Girl_stat(Girl, "inhibition", 50, 3)
         call change_Girl_stat(Girl, "inhibition", 80, 2)
         call change_Girl_stat(Girl, "lust", 50, 3)
-        "She smiles, and leaves the top how it is."
-        call expression Girl.tag + "First_Topless"
-    else:
-        if approval_check(Girl, 800-Count) or (Girl == StormX):
 
+        "She smiles, and leaves the top how it is."
+
+        call expression Girl.tag + "_First_Topless"
+    else:
+        if approval_check(Girl, 800 - offset) or (Girl == StormX):
             call change_Girl_stat(Girl, "obedience", 60, 2)
             call change_Girl_stat(Girl, "inhibition", 70, 2)
             call change_Girl_stat(Girl, "lust", 50, 1)
-            $ Girl.change_face("bemused",2)
-        else:
 
+            $ Girl.change_face("bemused", 2)
+        else:
             call change_Girl_stat(Girl, "love", 70, -2)
             call change_Girl_stat(Girl, "inhibition", 50, 1)
-            $ Girl.change_face("angry",2)
-        call expression Girl.tag + "First_Topless" pass (1)
-        $ Girl.top_pulled_up = 0
+
+            $ Girl.change_face("angry", 2)
+
+        call expression Girl.tag + "_First_Topless" pass (1)
+
+        $ Girl.fix_clothing()
+
         "She tugs her top back into place."
-        if Count <= 0:
+
+        if offset == 0:
             call change_Girl_stat(Girl, "love", 70, -5)
             call change_Girl_stat(Girl, "obedience", 60, -2)
             call change_Girl_stat(Girl, "inhibition", 60, 2)
+
             Girl.voice "You could have told me."
 
-    $ Count = 0
     return
 
-
-
-label Pool_Swim(Swimmers=[], temp_Girls=[]):
+label swim:
     $ D20 = renpy.random.randint(1, 20)
 
     $ Player.daily_history.append("swim")
-    call set_the_scene
 
-    $ line = ""
-    $ Passline = 0
-    $ temp_Girls = all_Girls[:]
-    while temp_Girls:
-        if Player.location == temp_Girls[0].location and approval_check(temp_Girls[0], 700):
-            if temp_Girls[0].outfit["bra"] == temp_Girls[0].swimwear["bra"] and temp_Girls[0].outfit["underwear"] == temp_Girls[0].swimwear["underwear"]:
+    python:
+        Swimmers = []
+        Chillers = []
 
-                $ Swimmers.append(temp_Girls[0])
-            elif temp_Girls[0].fully_nude:
-
-                $ Swimmers.append(temp_Girls[0])
-            else:
-                if temp_Girls[0].change_outfit("swimwear"):
-
-                    $ line = "" if Swimmers and not Passline else "s"
-                    $ Swimmers.append(temp_Girls[0])
+        for G in Present:
+            if approval_check(G, 700):
+                if G.Wardrobe.current_Outfit.name == "swimwear":
+                    $ Swimmers.append(G)
+                elif G.Wardrobe.current_Outfit.fully_nude:
+                    $ Swimmers.append(G)
                 else:
+                    if "swimwear" not in self.Wardrobe.Outfits.keys():
+                        if self.tag == "Rogue":
+                            ch_r("I don't really have a swimsuit I could wear. . .")
+                        elif self.tag == "Kitty":
+                            ch_k("I wish I had something cute to wear, but I don't. . .")
+                        elif self.tag == "Emma":
+                            ch_e("I really don't own the proper attire. . .")
+                        elif self.tag == "Laura":
+                            ch_l("Don't have a suit. . .")
+                        elif self.tag == "Jean":
+                            ch_j("I might, if you buy me a suit. . .")
+                        elif self.tag == "Storm":
+                            ch_s("I -am- afraid I don't have a suit. . .")
+                        elif self.tag == "Jubes":
+                            ch_v("I haven't picked out a suit yet. . .")
 
-                    $ line = "" if Passline and not Swimmers else "s"
-                    $ Passline = Passline + " and " + temp_Girls[0].name if Passline else temp_Girls[0].name
-        $ temp_Girls.remove(temp_Girls[0])
+                        Chillers.append(G)
+                    elif self.tag == "Kitty" and "blue_skirt" not in self.Wardrobe.Clothes and self.inhibition <= 400:
+                        ch_k("I don't know, I do have a suit, but it's a little daring. . .")
+                        ch_k("If only I had a little skirt or something. . .")
 
-    if len(Swimmers) >= 2:
-        "The girls get[line] changed and join you."
+                        Chillers.append(G)
+                    else:
+                        G.change_Outfit("swimwear")
+
+                        $ Swimmers.append(G)
+
+    if len(Swimmers) > 1 and len(Chillers) > 1:
+        "Some of the girls get changed and join you, while the others chill out poolside."
+    elif len(Swimmers) > 1 and Chillers:
+        "[Chillers[0].name] chills out poolside while the rest of the girls get changed and join you."
+    elif Swimmers and len(Chillers) > 1:
+        "[Swimmers[0].name] gets changed and joins you while the rest of the girls chill out poolside."
+    elif Swimmers and Chillers:
+        "[Swimmers[0].name] gets changed and joins you while [Chillers[0].name] chills out poolside."
     elif Swimmers:
-        "[Swimmers[0].name] get[line] changed and joins you."
-    if Passline:
-        "[Passline] chill[line] out poolside."
-    $ Passline = 0
-    $ line = 0
+        "[Swimmers[0].name] gets changed and joins you."
+    elif Chillers:
+        "[Chillers[0].name] chills out poolside."
 
-    call ShowPool (Swimmers[:])
+    call show_swimming(Swimmers[:])
 
     if D20 >= 15 and Swimmers:
-        call Pool_Topless (Swimmers[0])
+        call wardrobe_malfunction (Swimmers[0])
     if D20 >= 11:
         "You take a nice, refreshing swim."
     elif D20 == 2:
@@ -934,6 +955,7 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
     call who_likes_who (80, 3)
     call RoomStatboost ("love", 80, 3)
     call RoomStatboost ("lust", 30, 5)
+
     $ round -= 20 if round >= 20 else round
 
     $ temp_Girls = Swimmers[:]
@@ -947,27 +969,27 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
 
     return
 
+label show_swimming(Swimmers):
+    if Swimmers in all_Girls:
+        $ Swimmers = [Swimmers]
 
+    while Swimmers:
+        $ Swimmers[0].wet = True
+        $ Swimmers[0].add_word(0,"swim","swim", 0, 0)
 
+        python:
+            for key in Swimmers[0].spunk.keys():
+                Swimmers[0].spunk[key] = False
 
+        $ x_position = renpy.random.random()
 
+        if x_position < 0.2:
+            $ x_position = 0.2
+        elif x_position > 0.8:
+            $ x_position = 0.8
 
-label ShowPool(Girls):
-    while Girls:
-        if Girls[0].location == Player.location:
-            $ Girls[0].add_word(0,"swim","swim", 0, 0)
-            $ Girls[0].wet = 1
+        call show_Girl(Swimmers[0], sprite_layer = 1, animation_transform = swimming(x_position), transition = dissolve)
 
-            python:
-                for key in Girls[0].spunk.keys():
-                    Girls[0].spunk[key] = False
-
-            $ x_position = 0.4 if len(Girls) > 1 else 0.5
-
-            show foreground zorder 4
-
-            call show_Girl(Girls[0], sprite_layer = 1, color_transform = swimming(x_position), transition = dissolve)
-
-        $ Girls.remove(Girls[0])
+        $ Swimmers.remove(Swimmers[0])
 
     return

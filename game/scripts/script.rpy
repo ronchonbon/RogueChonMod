@@ -73,7 +73,7 @@ init -1:
 
     default show_feet = False
 
-    default always_return_to_room = 1
+    default always_return_to_room = True
 
     default stage_far_far_left = 0.15
     default stage_far_left = 0.25
@@ -141,7 +141,7 @@ label start:
         renpy.start_predict("images/backgrounds/*.*")
 
         for G in all_Girls:
-            renpy.start_predict("images/" + G.tag + "standing/*.*")
+            renpy.start_predict("images/" + G.tag + "_standing/*.*")
 
     $ Player = PlayerClass()
 

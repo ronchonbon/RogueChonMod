@@ -696,7 +696,7 @@ label Jean_SexChat:
                             if JeanX.player_favorite_action == "fondle":
                                 call change_Girl_stat(JeanX, "lust", 80, 3)
                                 ch_j "Yeah, I think we're clear on that. . ."
-                            elif JeanX.favorite_action in ("hotdog","suck_breasts","fondle_breasts","fondle_thighs"):
+                            elif JeanX.favorite_action in ("hotdog", "suck_breasts", "fondle_breasts", "fondle_thighs"):
                                 call change_Girl_stat(JeanX, "love", 90, 5)
                                 call change_Girl_stat(JeanX, "lust", 80, 5)
                                 ch_j "I love when you touch me. . ."
@@ -992,7 +992,7 @@ label Jean_SexChat:
 
 
 
-label Jean_Chitchat(O=0, Options=["default","default","default"]):
+label Jean_Chitchat(O=0, Options=["default", "default", "default"]):
     $ round -= 3 if round > 3 else (round-1)
     if O:
         $ Options = [O]
@@ -1209,9 +1209,9 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
                     if approval_check(JeanX, 800):
                         call change_Girl_stat(JeanX, "obedience", 60, 5)
                         call change_Girl_stat(JeanX, "inhibition", 50, 5)
-                        $ JeanX.change_face("perplexed",2)
+                        $ JeanX.change_face("perplexed", 2)
                         ch_j "fair"
-                        $ JeanX.blushing = "blush1"
+                        $ JeanX.blushing = "_blush1"
                     else:
                         call change_Girl_stat(JeanX, "love", 50, -10)
                         call change_Girl_stat(JeanX, "love", 80, -10)
@@ -1233,21 +1233,21 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
         menu:
             extend ""
             "Yeah? Did you like them?":
-                $ JeanX.change_face("sly",2)
+                $ JeanX.change_face("sly", 2)
                 ch_j "They were pretty hot."
             "Good. You looked like you could use to learn a thing or two from them.":
                 call change_Girl_stat(JeanX, "obedience", 70, 5)
                 call change_Girl_stat(JeanX, "inhibition", 50, 5)
                 $ JeanX.change_face("angry")
                 ch_j "Yeah right."
-        $ JeanX.blushing = "blush1"
+        $ JeanX.blushing = "_blush1"
         $ JeanX.had_chat.append("book")
 
     elif Options[0] == "lingerie":
 
-        $ JeanX.change_face("sly",2)
+        $ JeanX.change_face("sly", 2)
         ch_j "I really enjoy those silky underthings you got me. . ."
-        $ JeanX.blushing = "blush1"
+        $ JeanX.blushing = "_blush1"
         $ JeanX.had_chat.append("lingerie")
 
     elif Options[0] == "handy":
@@ -1260,7 +1260,7 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
     elif Options[0] == "blowjob":
         if "blowjob" not in JeanX.had_chat:
 
-            $ JeanX.change_face("sly",2)
+            $ JeanX.change_face("sly", 2)
             ch_j "Hey, so did you enjoy that blowjob?"
             menu:
                 extend ""
@@ -1287,9 +1287,9 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
                 "I guess. If you're into weird sounds and too much teeth. Spoiler, I'm not.":
                     call change_Girl_stat(JeanX, "love", 90, -10)
                     call change_Girl_stat(JeanX, "obedience", 60, -5)
-                    $ JeanX.change_face("angry",2)
+                    $ JeanX.change_face("angry", 2)
                     ch_j "You just don't know quality."
-            $ JeanX.blushing = "blush1"
+            $ JeanX.blushing = "_blush1"
             $ JeanX.had_chat.append("blowjob")
         else:
             $ line = renpy.random.choice(["I gotta tell you, your dick tastes great.",
@@ -1314,9 +1314,9 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
 
         ch_j "Ok, so. . ."
         ch_j "You know how you came on my face?"
-        $ JeanX.change_face("sexy",2)
+        $ JeanX.change_face("sexy", 2)
         ch_j "That just felt -so- good for some reason. . ."
-        $ JeanX.blushing = "blush1"
+        $ JeanX.blushing = "_blush1"
 
     elif Options[0] == "sleepover":
 
@@ -1331,10 +1331,10 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
     elif Options[0] == "sexed":
 
         ch_j "So. . . you should know. . ."
-        $ JeanX.change_face("sexy",2)
+        $ JeanX.change_face("sexy", 2)
         ch_j ". . .lately when I've been schlicking. . ."
         ch_j "I've been thinking about you inside of me."
-        $ JeanX.blushing = "blush1"
+        $ JeanX.blushing = "_blush1"
 
     elif Options[0] == "anal":
 
@@ -2244,7 +2244,7 @@ label Jean_Leave:
             ch_j "I'm not wearing any panties at the moment."
             "Then you could slip on a pair of panties. . .":
                 if approval_check(JeanX, 1500, taboo_modifier=4) or (JeanX.seen_pussy and approval_check(JeanX, 1100, taboo_modifier=4)):
-                    $ JeanX.blushing = "blush1"
+                    $ JeanX.blushing = "_blush1"
                     ch_j "No, this is fine. . ."
                     $ JeanX.blushing = ""
                 elif approval_check(JeanX, 700, taboo_modifier=4):
@@ -2457,7 +2457,7 @@ label Jean_Leave:
                     elif JeanX.outfit["bottom"] == "skirt":
                         "She reaches under her skirt and pulls her [line] off."
                     else:
-                        $ JeanX.blushing = "blush1"
+                        $ JeanX.blushing = "_blush1"
                         "She steps away a moment and then comes back."
                         $ JeanX.blushing = ""
                     $ line = 0
@@ -2586,7 +2586,7 @@ label Jean_Leave:
                     return
                 $ JeanX.to_do.append("pubes")
                 $ JeanX.pubes_counter = 6
-        "Shave pubes" if JeanX.pubes == "hairy":
+        "Shave pubes" if JeanX.pubes == "_hairy":
             ch_p "I like it waxed clean down there."
             $ JeanX.change_face("bemused", 1)
             if "shave" in JeanX.to_do:

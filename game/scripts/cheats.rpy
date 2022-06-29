@@ -214,9 +214,9 @@ label face_editor(Girl):
                         $ Girl.emotion = "sly"
             "Toggle blushing":
                 if Girl.blushing == "":
-                    $ Girl.blushing = "blush1"
-                elif Girl.blushing == "blush1":
-                    $ Girl.blushing = "blush2"
+                    $ Girl.blushing = "_blush1"
+                elif Girl.blushing == "_blush1":
+                    $ Girl.blushing = "_blush2"
                 else:
                     $ Girl.blushing = ""
             "Back":
@@ -628,7 +628,7 @@ label wardrobe_editor(Girl):
                                 $ Girl.wet  = 0
                         "Toggle pubes":
                             if not Girl.pubes:
-                                $ Girl.pubes = "hairy"
+                                $ Girl.pubes = "_hairy"
                             else:
                                 $ Girl.pubes = ""
                         "Toggle hair" if Girl == RogueX:

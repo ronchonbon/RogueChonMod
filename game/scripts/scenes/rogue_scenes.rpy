@@ -81,7 +81,7 @@ label prologue:
             $ RogueX.brows = "normal"
             $ RogueX.eyes = "surprised"
             $ RogueX.mouth = "smile"
-            $ RogueX.blushing = "blush1"
+            $ RogueX.blushing = "_blush1"
 
             ch_r "Wha- what? N, no, that's not what I meant! I'm just giving you the campus tour!"
 
@@ -134,7 +134,7 @@ label tour_start:
     menu:
         ch_r "Pretty nice, right?"
         "It is with you in it.":
-            $ RogueX.blushing = "blush1"
+            $ RogueX.blushing = "_blush1"
             call change_Girl_stat(RogueX, "love", 200, 20)
             call change_Girl_stat(RogueX, "lust", 90, 5)
         "It'll do.":
@@ -182,7 +182,7 @@ label tour_start:
             "So can this place make some more. . . erotic simulations?" if counter != 2:
                 $ RogueX.eyes = "side"
                 $ RogueX.mouth = "lipbite"
-                $ RogueX.blushing = "blush1"
+                $ RogueX.blushing = "_blush1"
                 call change_Girl_stat(RogueX, "inhibition", 200, 30)
                 call change_Girl_stat(RogueX, "lust", 200, 5)
 
@@ -397,7 +397,7 @@ label tour_parting:
     jump player_room
 
 label Rogue_first_kiss:
-    $ RogueX.blushing = "blush2"
+    $ RogueX.blushing = "_blush2"
 
     call kiss_launch(RogueX)
 
@@ -636,7 +636,7 @@ label Rogue_Love:
     elif RogueX.event_happened[6] == 10:
         $ RogueX.change_face("confused")
         ch_r "So. . . wait, what?"
-        $ RogueX.change_face("smile",2)
+        $ RogueX.change_face("smile", 2)
         $ RogueX.brows = "surprised"
         ch_r "I love you too!"
         $ RogueX.change_face("kiss")
@@ -758,7 +758,7 @@ label Rogue_AnnaMarie:
             call change_Girl_stat(RogueX, "love", 200, 10)
             call change_Girl_stat(RogueX, "obedience", 50, 5)
             call change_Girl_stat(RogueX, "inhibition", 70, 5)
-            $ RogueX.change_face("smile",2)
+            $ RogueX.change_face("smile", 2)
             ch_r "Oh, thank you so much for say'in. . ."
         "Huh, ok.":
             call change_Girl_stat(RogueX, "obedience", 80, 5)
@@ -1369,15 +1369,15 @@ label Rogue_Frisky_Class:
                 "[RogueX.name] reads your note and smiles at you suggestively."
                 $ line = "flirt"
             elif approval_check(RogueX, 900):
-                $ RogueX.change_face("confused",2)
+                $ RogueX.change_face("confused", 2)
                 "[RogueX.name] reads your note and blushes furiously, looking down at her notes."
-                $ RogueX.blushing = "blush1"
+                $ RogueX.blushing = "_blush1"
                 $ line = "flirt"
             else:
-                $ RogueX.change_face("perplexed",2)
+                $ RogueX.change_face("perplexed", 2)
                 "[RogueX.name] reads your note and blushes furiously. She quickly dashes off another note, sliding it in front of you again."
                 "You unfold the note, trying not to let the teacher see you. {i}\"I meant the class! Maybe we could study tonight?\"{/i}."
-                $ RogueX.blushing = "blush1"
+                $ RogueX.blushing = "_blush1"
                 $ line = "continue"
 
 
@@ -1477,7 +1477,7 @@ label Rogue_Frisky_Class:
                         call change_Girl_stat(RogueX, "inhibition", 60, 3)
                         "[RogueX.name] starts slightly as your hand travels up her thigh, but then she lets out a slight grin."
                     elif approval_check(RogueX, 2000):
-                        $ RogueX.change_face("perplexed",2)
+                        $ RogueX.change_face("perplexed", 2)
                         call change_Girl_stat(RogueX, "obedience", 70, 10)
                         call change_Girl_stat(RogueX, "inhibition", 60, 3)
                         "[RogueX.name] glances at you in alarm, but then slowly calms down."
@@ -1528,9 +1528,9 @@ label Rogue_Frisky_Class:
                     elif approval_check(RogueX, 2000):
                         call change_Girl_stat(RogueX, "obedience", 70, 10)
                         call change_Girl_stat(RogueX, "inhibition", 60, 3)
-                        $ RogueX.change_face("perplexed",2)
+                        $ RogueX.change_face("perplexed", 2)
                         "[RogueX.name] glances at you in alarm, but then slowly calms down."
-                        $ RogueX.change_face("smile",2)
+                        $ RogueX.change_face("smile", 2)
                         $ D20 += 5
                     else:
                         $ line = "too far"
@@ -1547,7 +1547,7 @@ label Rogue_Frisky_Class:
                     $ D20 += 7
 
             if line == "too far":
-                $ RogueX.change_face("surprised",2)
+                $ RogueX.change_face("surprised", 2)
                 call change_Girl_stat(RogueX, "love", 80, -5)
                 call change_Girl_stat(RogueX, "obedience", 70, 7)
                 call change_Girl_stat(RogueX, "inhibition", 50, -3)

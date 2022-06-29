@@ -67,7 +67,7 @@ label Emma_chat_Minimal:
         "Never mind.":
             if time_index == 2:
                 ch_e "Now if that will be all, please clear out of here."
-                $ EmmaX.change_face("bemused",2)
+                $ EmmaX.change_face("bemused", 2)
                 ch_e "I have some. . . business to attend to."
             else:
                 "She seems a bit reserved. Maybe you need something to break the ice."
@@ -791,7 +791,7 @@ label Emma_SexChat:
                             if EmmaX.player_favorite_action == "fondle":
                                 call change_Girl_stat(EmmaX, "lust", 80, 3)
                                 ch_e "I've heard that before. . ."
-                            elif EmmaX.favorite_action in ("hotdog","suck_breasts","fondle_breasts","fondle_thighs"):
+                            elif EmmaX.favorite_action in ("hotdog", "suck_breasts", "fondle_breasts", "fondle_thighs"):
                                 call change_Girl_stat(EmmaX, "love", 90, 5)
                                 call change_Girl_stat(EmmaX, "lust", 80, 5)
                                 ch_e "You do have a way with my body . ."
@@ -1034,7 +1034,7 @@ label Emma_SexChat:
 
 
 
-label Emma_Chitchat(O=0, Options=["default","default","default"]):
+label Emma_Chitchat(O=0, Options=["default", "default", "default"]):
     $ round -= 3 if round > 3 else (round-1)
     if O:
         $ Options = [O]
@@ -1309,7 +1309,7 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
                     elif approval_check(EmmaX, 800):
                         call change_Girl_stat(EmmaX, "obedience", 60, 5)
                         call change_Girl_stat(EmmaX, "inhibition", 50, 5)
-                        $ EmmaX.change_face("perplexed",2)
+                        $ EmmaX.change_face("perplexed", 2)
                         ch_e "Hmm? I suppose I can't blame you for that."
                     else:
                         call change_Girl_stat(EmmaX, "love", 50, -10)
@@ -1332,14 +1332,14 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
         menu:
             extend ""
             "Yeah? Did you like them?":
-                $ EmmaX.change_face("sly",2)
+                $ EmmaX.change_face("sly", 2)
                 ch_e "They were a bit simplistic, but certainly inspirational."
             "Good. You looked like you could use to learn a thing or two from them.":
                 call change_Girl_stat(EmmaX, "love", 90, 3)
                 call change_Girl_stat(EmmaX, "inhibition", 50, 10)
                 $ EmmaX.change_face("sly")
                 ch_e "Oh, [EmmaX.player_petname], the things I could teach those authors would leave them in the hospital."
-        $ EmmaX.blushing = "blush1"
+        $ EmmaX.blushing = "_blush1"
         $ EmmaX.had_chat.append("book")
 
     elif Options[0] == "lingerie":
@@ -1361,7 +1361,7 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
     elif Options[0] == "blowjob":
         if "blowjob" not in EmmaX.had_chat:
 
-            $ EmmaX.change_face("sly",2)
+            $ EmmaX.change_face("sly", 2)
             ch_e "You know, [EmmaX.player_petname], you have a very unique flavor to you."
             ch_p "Oh?"
             ch_e "Your cock, I mean."
@@ -1385,7 +1385,7 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
                         call change_Girl_stat(EmmaX, "inhibition", 50, 5)
                         $ EmmaX.change_face("sly")
                         ch_e "Are you trying to imply something about my. . . experience?"
-            $ EmmaX.blushing = "blush1"
+            $ EmmaX.blushing = "_blush1"
             $ EmmaX.had_chat.append("blowjob")
         else:
             $ line = renpy.random.choice(["You've a taste that's easy to acquire.",
@@ -1420,7 +1420,7 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
 
     elif Options[0] == "sexed":
 
-        $ EmmaX.change_face("sexy",2)
+        $ EmmaX.change_face("sexy", 2)
         ch_e "Since being with you, I have a lot more to think about, after class. . ."
 
     elif Options[0] == "anal":
@@ -2358,7 +2358,7 @@ label Emma_Leave:
             ch_e "I'm not wearing any panties at the moment. . ."
             "Then you could slip on a pair. . .":
                 if (EmmaX.seen_pussy and approval_check(EmmaX, 1100, taboo_modifier=(5-Public))) or approval_check(EmmaX, 1500, taboo_modifier=(5-Public)):
-                    $ EmmaX.blushing = "blush1"
+                    $ EmmaX.blushing = "_blush1"
                     ch_e "I didn't say that bothered me. . ."
                     $ EmmaX.blushing = ""
                 elif approval_check(EmmaX, 700, taboo_modifier=5):
@@ -2569,7 +2569,7 @@ label Emma_Leave:
                     elif EmmaX.outfit["bottom"] == "skirt":
                         "She reaches under her skirt and pulls her [line] off."
                     else:
-                        $ EmmaX.blushing = "blush1"
+                        $ EmmaX.blushing = "_blush1"
                         "She steps away a moment and then comes back."
                         $ EmmaX.blushing = ""
                     $ line = 0
@@ -2707,7 +2707,7 @@ label Emma_Leave:
                 $ EmmaX.to_do.append("pubes")
                 $ EmmaX.pubes_counter = 6
 
-        "Shave pubes" if EmmaX.pubes == "hairy":
+        "Shave pubes" if EmmaX.pubes == "_hairy":
             ch_p "I like it waxed clean down there."
             $ EmmaX.change_face("bemused", 1)
             if "shave" in EmmaX.to_do:

@@ -380,7 +380,7 @@ label check_addiction:
                 JubesX.voice "I know I asked to meet you in your room earlier, but I really need a fix."
 
                 $ Player.add_word(1,"asked_for_fix", 0, 0, 0)
-                $ JubesX.add_word(1,"asked_to_meet","asked_to_meet", 0, 0)
+                $ JubesX.add_word(1,"asked_to_meet", "asked_to_meet", 0, 0)
 
                 call return_to_room
 
@@ -388,7 +388,7 @@ label check_addiction:
             else:
                 "[JubesX.name] texts and asks if you could get her a fix later."
 
-                $ JubesX.add_word(1,"asked_to_meet","asked_to_meet", 0, 0)
+                $ JubesX.add_word(1,"asked_to_meet", "asked_to_meet", 0, 0)
 
                 call return_to_room
 
@@ -414,7 +414,7 @@ label check_addiction:
 
                         $ Player.add_word(1,"asked_for_fix", 0, 0, 0)
 
-                        $ addicted_Girls[0].add_word(1,"asked_to_meet","asked_to_meet", 0, 0)
+                        $ addicted_Girls[0].add_word(1,"asked_to_meet", "asked_to_meet", 0, 0)
 
                         call return_to_room
 
@@ -422,7 +422,7 @@ label check_addiction:
                     else:
                         "[addicted_Girls[0].name] texts and asks if you could meet her in your room later."
 
-                        $ addicted_Girls[0].add_word(1,"asked_to_meet","asked_to_meet", 0, 0)
+                        $ addicted_Girls[0].add_word(1,"asked_to_meet", "asked_to_meet", 0, 0)
 
                         call return_to_room
 
@@ -443,7 +443,7 @@ label check_addiction:
 
                         $ Player.add_word(1,"asked_for_fix", 0, 0, 0)
 
-                        $ addicted_Girls[0].add_word(1,"asked_to_meet","asked_to_meet", 0, 0)
+                        $ addicted_Girls[0].add_word(1,"asked_to_meet", "asked_to_meet", 0, 0)
 
                         call return_to_room
 
@@ -451,7 +451,7 @@ label check_addiction:
                     else:
                         "[addicted_Girls[0].name] texts and asks if you could meet her in your room later."
 
-                        $ addicted_Girls[0].add_word(1,"asked_to_meet","asked_to_meet", 0, 0)
+                        $ addicted_Girls[0].add_word(1,"asked_to_meet", "asked_to_meet", 0, 0)
 
                         call return_to_room
 
@@ -503,7 +503,7 @@ label check_if_cheated:
                     if "saw with " + temp_Girls2[0].tag in temp_Girls[0].traits:
                         if temp_Girls[0] in Player.Harem and temp_Girls2[0] in Player.Harem:
                             $ temp_Girls[0].drain_word("saw with "+temp_Girls2[0].tag, 0, 0, 1)
-                        elif temp_Girls[0] in Player.Harem and temp_Girls2[0].tag + "Yes" in Player.traits:
+                        elif temp_Girls[0] in Player.Harem and temp_Girls2[0].tag + "_Yes" in Player.traits:
                             $ temp_Girls[0].drain_word("saw with "+temp_Girls2[0].tag, 0, 0, 1)
                         elif Player.location == "bg_player" or Player.location == temp_Girls[0].home:
                             call Cheated (temp_Girls[0], temp_Girls2[0])

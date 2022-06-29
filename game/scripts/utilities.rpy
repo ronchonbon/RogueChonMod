@@ -188,13 +188,16 @@ label set_Character_taboos:
 
     return
 
-label set_the_scene(location = Player.location, show_Characters = True, fade = False, static = False):
+label set_the_scene(location = None, show_Characters = True, fade = False, static = False):
     if fade:
         show black_screen onlayer black
 
         pause 0.4
 
-    $ Player.location = location
+    if location:
+        $ Player.location = location
+    else:
+        $ location = Player.location
 
     python:
         for G in active_Girls:
@@ -228,7 +231,7 @@ label set_the_scene(location = Player.location, show_Characters = True, fade = F
 
             while temp_Girls:
                 if temp_Girls[0].teaching and Player.location == "bg_classroom":
-                    if renpy.showing(temp_Girls[0].tag + "sprite"):
+                    if renpy.showing(temp_Girls[0].tag + "_sprite"):
                         call hide_Girl(temp_Girls[0], transition = False)
                         call show_Girl(temp_Girls[0], sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = False)
                     else:
@@ -236,12 +239,12 @@ label set_the_scene(location = Player.location, show_Characters = True, fade = F
 
                     $ number_of_Girls -= 1
                 elif temp_Girls[0].location == Player.location:
-                    if Player.location == "bg_restaurant" and renpy.showing(temp_Girls[0].tag + "sprite"):
+                    if Player.location == "bg_restaurant" and renpy.showing(temp_Girls[0].tag + "_sprite"):
                         call hide_Girl(temp_Girls[0], transition = False)
                         call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 1, color_transform = color_transform, animation_transform = dining, transition = False)
                     elif Player.location == "bg_restaurant":
                         call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 1, color_transform = color_transform, animation_transform = dining, transition = transition)
-                    elif renpy.showing(temp_Girls[0].tag + "sprite"):
+                    elif renpy.showing(temp_Girls[0].tag + "_sprite"):
                         call hide_Girl(temp_Girls[0], transition = False)
                         call show_Girl(temp_Girls[0], x_position = stage_center + total_offset, sprite_layer = 5, color_transform = color_transform, transition = False)
                     else:
@@ -253,29 +256,29 @@ label set_the_scene(location = Player.location, show_Characters = True, fade = F
                         $ total_offset = -offset*(number_of_Girls - 1)
                     else:
                         $ total_offset += offset
-                elif renpy.showing(temp_Girls[0].tag + "sprite"):
+                elif renpy.showing(temp_Girls[0].tag + "_sprite"):
                     call hide_Girl(temp_Girls[0])
 
                 $ temp_Girls.remove(temp_Girls[0])
 
             if focused_Girl.teaching and Player.location == "bg_classroom":
-                if renpy.showing(focused_Girl.tag + "sprite"):
+                if renpy.showing(focused_Girl.tag + "_sprite"):
                     call hide_Girl(focused_Girl, transition = False)
                     call show_Girl(focused_Girl, sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = False)
                 else:
                     call show_Girl(focused_Girl, sprite_layer = 1, color_transform = color_transform, animation_transform = teaching, transition = transition)
             elif focused_Girl.location == Player.location:
-                if Player.location == "bg_restaurant" and renpy.showing(focused_Girl.tag + "sprite"):
+                if Player.location == "bg_restaurant" and renpy.showing(focused_Girl.tag + "_sprite"):
                     call hide_Girl(focused_Girl, transition = False)
                     call show_Girl(focused_Girl, x_position = stage_center, sprite_layer = 1, color_transform = color_transform, animation_transform = dining, transition = False)
                 elif Player.location == "bg_restaurant":
                     call show_Girl(focused_Girl, x_position = stage_center, sprite_layer = 1, color_transform = color_transform, animation_transform = dining, transition = transition)
-                elif renpy.showing(focused_Girl.tag + "sprite"):
+                elif renpy.showing(focused_Girl.tag + "_sprite"):
                     call hide_Girl(focused_Girl, transition = False)
                     call show_Girl(focused_Girl, x_position = stage_center, sprite_layer = 6, color_transform = color_transform, transition = False)
                 else:
                     call show_Girl(focused_Girl, x_position = stage_center, sprite_layer = 6, color_transform = color_transform, transition = transition)
-            elif renpy.showing(focused_Girl.tag + "sprite"):
+            elif renpy.showing(focused_Girl.tag + "_sprite"):
                 call hide_Girl(focused_Girl)
 
         if Player.location == "bg_study" and time_index < 3:
@@ -355,7 +358,7 @@ label event_calls:
                 pass
             elif not event_Girls[0].event_happened[0] and event_Girls[0].event_counter["sleepover"] >= 5:
                 if event_Girls[0].location == Player.location or event_Girls[0] in Player.Party:
-                    call expression event_Girls[0].tag + "Key"
+                    call expression event_Girls[0].tag + "_Key"
                     return
             elif event_Girls[0] == JeanX:
                 if Player.location != "bg_classroom":
@@ -374,40 +377,40 @@ label event_calls:
                     return
             elif event_Girls[0] == JubesX:
                 pass
-            elif "boyfriend" not in event_Girls[0].player_petnames and event_Girls[0].love >= 800 and event_Girls[0].event_happened[5] != 20 and event_Girls[0].tag + "No" not in Player.traits:
+            elif "boyfriend" not in event_Girls[0].player_petnames and event_Girls[0].love >= 800 and event_Girls[0].event_happened[5] != 20 and event_Girls[0].tag + "_No" not in Player.traits:
                 if event_Girls[0] == LauraX and LauraX.event_happened[5] == 3:
                     call Laura_Cleanhouse
-                elif Player.Harem and event_Girls[0].tag + "Yes" not in Player.traits:
+                elif Player.Harem and event_Girls[0].tag + "_Yes" not in Player.traits:
                     call Poly_Start (event_Girls[0])
                 elif Player.location == event_Girls[0].home or Player.location == "bg_player":
-                    call expression event_Girls[0].tag + "BF"
+                    call expression event_Girls[0].tag + "_BF"
                 else:
-                    call ask_to_meet (event_Girls[0], "bemused")
+                    call ask_to_meet (event_Girls[0])
 
                 return
             elif "lover" not in event_Girls[0].player_petnames and event_Girls[0].love >= 950 and event_Girls[0].event_happened[6] < 15:
                 if Player.location == event_Girls[0].home or Player.location == "bg_player":
-                    call expression event_Girls[0].tag + "Love"
+                    call expression event_Girls[0].tag + "_Love"
                 else:
-                    call ask_to_meet (event_Girls[0], "bemused")
+                    call ask_to_meet (event_Girls[0])
 
                 return
             elif "sir" not in event_Girls[0].history and "sir" not in event_Girls[0].player_petnames and event_Girls[0].obedience >= 500:
                 if Player.location == event_Girls[0].home or Player.location == "bg_player":
-                    call expression event_Girls[0].tag + "Sub"
+                    call expression event_Girls[0].tag + "_Sub"
                 else:
-                    call ask_to_meet (event_Girls[0], "bemused")
+                    call ask_to_meet (event_Girls[0])
                 return
             elif "master" not in event_Girls[0].history and "master" not in event_Girls[0].player_petnames and event_Girls[0].obedience >= 850 and event_Girls[0].event_happened[8] < 2:
                 if Player.location == event_Girls[0].home or Player.location == "bg_player":
-                    call expression event_Girls[0].tag + "Master"
+                    call expression event_Girls[0].tag + "_Master"
                 else:
-                    call ask_to_meet (event_Girls[0], "bemused")
+                    call ask_to_meet (event_Girls[0])
 
                 return
             elif "daddy" not in event_Girls[0].player_petnames and approval_check(event_Girls[0], 750, "L") and approval_check(event_Girls[0], 500, "O") and approval_check(event_Girls[0], 500, "I"):
                 if (Player.location == event_Girls[0].home or Player.location == "bg_player") and event_Girls[0].location == Player.location:
-                    call expression event_Girls[0].tag + "Daddy"
+                    call expression event_Girls[0].tag + "_Daddy"
 
                 return
             elif "sex friend" not in event_Girls[0].player_petnames and event_Girls[0].inhibition >= 500:
@@ -423,26 +426,26 @@ label event_calls:
 
                         return
                 elif Player.location == event_Girls[0].home or Player.location == "bg_player":
-                    call expression event_Girls[0].tag + "Sexfriend"
+                    call expression event_Girls[0].tag + "_Sexfriend"
 
                     return
                 elif event_Girls[0] in Player.Harem and event_Girls[0].location == Player.location:
-                    call expression event_Girls[0].tag + "Sexfriend"
+                    call expression event_Girls[0].tag + "_Sexfriend"
 
                     return
                 elif event_Girls[0] == LauraX:
-                    call expression event_Girls[0].tag + "Sexfriend"
+                    call expression event_Girls[0].tag + "_Sexfriend"
 
                     return
             elif "fuck buddy" not in event_Girls[0].player_petnames and event_Girls[0].inhibition >= 800:
                 if event_Girls[0] == RogueX:
                     if Player.location != event_Girls[0].location:
-                        call expression event_Girls[0].tag + "Fuckbuddy"
+                        call expression event_Girls[0].tag + "_Fuckbuddy"
 
                         return
                 elif event_Girls[0] == LauraX:
                     if Player.location == "bg_player" and event_Girls[0].location != Player.location:
-                        call expression event_Girls[0].tag + "Fuckbuddy"
+                        call expression event_Girls[0].tag + "_Fuckbuddy"
 
                         return
                 elif event_Girls[0] == StormX:
@@ -451,11 +454,11 @@ label event_calls:
 
                         return
                 elif Player.location == event_Girls[0].home or Player.location == "bg_player":
-                    call expression event_Girls[0].tag + "Fuckbuddy"
+                    call expression event_Girls[0].tag + "_Fuckbuddy"
 
                     return
                 elif event_Girls[0] in Player.Harem and event_Girls[0].location == Player.location:
-                    call expression event_Girls[0].tag + "Fuckbuddy"
+                    call expression event_Girls[0].tag + "_Fuckbuddy"
 
                     return
 
@@ -475,10 +478,10 @@ label traveling_event_calls(location):
 
             return
 
-    # if location == "bg_classroom" and "met" not in KittyX.history:
-    #     call meet_Kitty
-    #
-    #     return
+    if location == "bg_classroom" and "met" not in KittyX.history:
+        call meet_Kitty
+
+        return
 
     if EmmaX in active_Girls:
         if location == "bg_classroom":
@@ -570,10 +573,10 @@ label quick_event_calls:
     while event_Girls:
         if event_Girls[0].location == Player.location:
             if event_Girls[0].lust >= 90:
-                $ event_Girls[0].blushing = "blush1"
+                $ event_Girls[0].blushing = "_blush1"
                 $ event_Girls[0].grool = 2
             elif event_Girls[0].lust >= 60:
-                $ event_Girls[0].blushing = "blush1"
+                $ event_Girls[0].blushing = "_blush1"
                 $ event_Girls[0].grool = 1
             else:
                 $ event_Girls[0].grool = 0
@@ -622,9 +625,9 @@ label tenth_round:
 
         return
 
-    $ Occupant = None
-
     python:
+        Occupant = None
+
         for G in all_Girls:
             if G.home == Player.location:
                 Occupant = G
@@ -750,7 +753,7 @@ label set_Girls_locations:
                 G.location = Player.location
 
     while leaving_Girls:
-        call expression leaving_Girls[0].tag + "Leave"
+        call expression leaving_Girls[0].tag + "_Leave"
 
         $ leaving_Girls.remove(leaving_Girls[0])
 
@@ -763,8 +766,10 @@ label set_Girls_locations:
 
 label change_clothes:
     python:
-        for G in all_Girls:
+        for G in active_Girls:
             if G not in Player.Party:
+                Outfit_name = None
+
                 if G.location == "bg_dangerroom":
                     Outfit_name = "gym_clothes"
                 elif G.location == "bg_pool" and G.swimwear["outfit_active"]:
@@ -773,10 +778,8 @@ label change_clothes:
                     Outfit_name = "shower"
                 elif G.teaching:
                     Outfit_name = "teacher"
-                else:
-                    Outfit_name = "first_casual"
 
-            G.change_Outfit(Outfit_name, instant = True)
+                G.change_Outfit(Outfit_name, instant = True)
 
     return
 
@@ -792,9 +795,11 @@ label wait:
 
     if time_index < 3:
         $ time_index += 1
-    else:
-        $ Player.Party = []
 
+        $ Player.recent_history = []
+
+        call set_Girls_locations
+    else:
         $ time_index = 0
         $ day += 1
 
@@ -804,6 +809,10 @@ label wait:
             $ weekday = 0
 
         $ day_of_week = week[weekday]
+
+        $ Player.recent_history = []
+        $ Player.daily_history = []
+        $ Player.Party = []
 
         if being_punished:
             $ Player.cash += int(Player.income/2)
@@ -819,8 +828,6 @@ label wait:
         $ Player.spunk = False
         $ Player.reputation += 10 if Player.reputation < 800 else 0
 
-        $ total_SEXP = 0
-
         if "mandrill" in Player.traits:
             $ Player.traits.remove("mandrill")
         if "purple" in Player.traits:
@@ -829,45 +836,14 @@ label wait:
             $ Player.traits.remove("corruption")
 
         call check_favorite_actions
-
-        if "halloween" in Player.daily_history:
-            if RogueX.Wardrobe.current_Outfit.Clothes["hair"] == "cosplay":
-                if "evo" in RogueX.daily_history:
-                    $ RogueX.Wardrobe.current_Outfit.Clothes["hair"] = "evo"
-                elif "wet" in RogueX.daily_history:
-                    $ RogueX.Wardrobe.current_Outfit.Clothes["hair"] = "wet"
-
-            if JeanX.Wardrobe.current_Outfit.Clothes["hair"] == "pony":
-                if "short" in JeanX.daily_history:
-                    $ JeanX.Wardrobe.current_Outfit.Clothes["hair"] = "short"
-                elif "wet" in JeanX.daily_history:
-                    $ JeanX.Wardrobe.current_Outfit.Clothes["hair"] = "wet"
-
-            if StormX.Wardrobe.current_Outfit.Clothes["hair"] == "short":
-                if "long" in StormX.daily_history:
-                    $ StormX.Wardrobe.current_Outfit.Clothes["hair"] = "long"
-                elif "mohawk" in StormX.daily_history:
-                    $ StormX.Wardrobe.current_Outfit.Clothes["hair"] = "mohawk"
-                elif "wet_long" in StormX.daily_history:
-                    $ StormX.Wardrobe.current_Outfit.Clothes["hair"] = "wet_long"
-                elif "wet_mohawk" in StormX.daily_history:
-                    $ StormX.Wardrobe.current_Outfit.Clothes["hair"] = "wet_mohawk"
-
         call reset_all_girls_at_end
-
-    $ Player.semen += 1
-    $ Player.focus -= 5 if Player.focus >= 10 else 0
+        call change_clothes
 
     $ multi_action = True
 
     $ current_time = time_options[(time_index)]
 
     $ round = 100
-
-    $ del Player.recent_history[:]
-
-    if time_index == 0:
-        $ del Player.daily_history[:]
 
     call set_Character_taboos
     call who_likes_who
@@ -876,29 +852,31 @@ label wait:
         call offscreen_studying
 
     call reset_all_girls_at_beginning
-    call change_clothes
+
+    $ Player.semen += 1
+    $ Player.focus -= 5 if Player.focus >= 10 else 0
 
     if Player.level < 10 and Player.XP >= Player.XP_goal:
         $ Player.XP_goal = int((1.15*Player.XP_goal) + 100)
         $ Player.level += 1
         $ Player.stat_points += 1
 
-        if Player.level <5:
-            $ Count = 1
-        elif Player.level <9:
-            $ Count = 2
+        if Player.level < 5:
+            $ increase = 1
+        elif Player.level < 9:
+            $ increase = 2
         else:
-            $ Count = 3
+            $ increase = 3
 
-        $ Player.income += Count
+        $ Player.income += increase
 
         "You've leveled up!"
-        "Xavier has noticed your achievements and raised your stipend by $[Count] per day. It is now $[Player.income]."
+        "Xavier has noticed your achievements and raised your stipend by $[increase] per day. It is now $[Player.income]."
 
         if Player.level == 10:
             "You've reached max level!"
 
-    call lesbian_check
+    call offscreen_lesbian
     call checkout
 
     pause 0.5
@@ -955,12 +933,11 @@ label checkout:
 
 label reset_player:
     call get_dressed
+    call stop_all_actions
 
     $ Player.focusing = False
 
     $ multi_action = True
-
-    call stop_all_actions
 
     $ position_timer = 100
 
@@ -970,14 +947,18 @@ label reset_player:
 
 label reset_all_girls_at_end:
     python:
+        total_SEXP = 0
+
         for G in all_Girls:
+            total_SEXP += G.SEXP
+
             if G in active_Girls and G.location != Player.location:
                 G.location = G.home
 
             if G.to_do:
                 if G == LauraX:
                     if "pubes" in G.to_do:
-                        G.pubes = "hairy"
+                        G.pubes = "_hairy"
                         G.to_do.remove("pubes")
 
                     if "mission" in G.to_do:
@@ -1000,31 +981,19 @@ label reset_all_girls_at_end:
                         G.pubes_counter -= 1
 
                         if not G.pubes_counter:
-                            G.pubes = "hairy"
+                            G.pubes = "_hairy"
                             G.to_do.remove("pubes")
 
                 if "shave" in G.to_do:
                     G.pubes = ""
                     G.to_do.remove("shave")
 
-                if G == StormX and "hair" in G.to_do:
-                    if G.Wardrobe.current_Outfit.Clothes["hair"] == "long":
-                        G.Wardrobe.current_Outfit.Clothes["hair"] = "mohawk"
-                    elif G.Wardrobe.current_Outfit.Clothes["hair"] == "wet_mohawk":
-                        G.Wardrobe.current_Outfit.Clothes["hair"] = "wet_long"
-                    elif G.Wardrobe.current_Outfit.Clothes["hair"] == "wet_long":
-                        G.Wardrobe.current_Outfit.Clothes["hair"] = "wet_mohawk"
-                    elif G.Wardrobe.current_Outfit.Clothes["hair"] == "mohawk":
-                        G.Wardrobe.current_Outfit.Clothes["hair"] = "long"
-
-                    G.to_do.remove("hair")
-
                 if "ring" in G.to_do:
-                    G.Wardrobe.current_Outfit.Clothes["piercings"] = "ring"
+                    G.change_into(ring_body_piercings())
                     G.to_do.remove("ring")
 
                 if "barbell" in G.to_do:
-                    G.Wardrobe.current_Outfit.Clothes["piercings"] = "barbell"
+                    G.change_into(barbell_body_piercings())
                     G.to_do.remove("barbell")
 
             G.change_Outfit("sleepwear")
@@ -1038,21 +1007,11 @@ label reset_all_girls_at_end:
             elif "addictive" not in Player.traits:
                 G.addiction_rate -= G.resistance
 
-                if G != RogueX and G.addiction_rate >= 3:
-                    G.addiction_rate -= G.resistance
-
-            G.event_counter["forced"] -= 1 if G.event_counter["forced"] > 0 else 0
-
-            if G.event_counter["forced"] > 0:
-                G.event_counter["forced"] -= 1 if approval_check(G, 1000, "LO") else 0
-
             G.remaining_actions = G.max_actions
             G.reputation = 0 if G.reputation < 0 else G.reputation
             G.reputation += 10 if G.reputation < 800 else 0
             G.reputation = 1000 if G.reputation > 1000 else G.reputation
             G.lust -= 5 if G.lust >= 50 else 0
-
-            total_SEXP += G.SEXP
 
             if G.SEXP >= 15:
                 if G.SEXP >= 50:
@@ -1062,7 +1021,6 @@ label reset_all_girls_at_end:
                 else:
                     G.thirst += 3 if G.thirst <= 50 else 1
 
-                G.thirst -= 5 if G.broken_up[0] else 0
                 G.thirst += 1 if G.lust >= 50 else 0
 
             if "will_masturbate" in G.daily_history and G.location != Player.location:
@@ -1071,37 +1029,27 @@ label reset_all_girls_at_end:
             elif "wants_to_masturbate" in G.daily_history:
                 G.thirst += 10 if G.thirst <= 50 else 5
 
-            G.broken_up[0] -= 1 if G.broken_up[0] > 0 else 0
-
             for key in G.spunk.keys():
                 G.spunk[key] = False
 
             if "lover" in G.player_petnames and G.love > 800:
                 G.love += 10
+
             if "master" in G.player_petnames and G.obedience > 600:
                 G.obedience += 10
+
             if "fuck buddy" in G.player_petnames:
                 G.inhibition += 10
 
-            if G == JeanX:
-                if G.love < 1000 and G.stored_stats > 0:
-                    if G.obedience >= 900:
-                        G.love += 10
-                        G.stored_stats -= 10
-                    elif G.obedience >= 700:
-                        G.love += 5
-                        G.stored_stats -= 5
-                    elif G.obedience >= 500:
-                        G.love += 1
-                        G.stored_stats -= 1
-                if G.reputation <= 800 and "nowhammy" not in JeanX.traits:
-                    G.reputation = 800
+            G.todays_Outfit_name = G.Outfit_schedule[weekday]
 
     return
 
-label offscreen_studying(Studiers = []):
+label offscreen_studying:
     python:
-        for G in all_Girls:
+        Studiers = []
+
+        for G in active_Girls:
             if G.location != Player.location and G.location in bedrooms:
                 Studiers.append(G)
 
@@ -1110,11 +1058,13 @@ label offscreen_studying(Studiers = []):
 
     $ renpy.random.shuffle(Studiers)
 
-    $ Studiers[0].check_if_likes(Studiers[1],800,5, 1)
-    $ Studiers[1].check_if_likes(Studiers[0],800,5, 1)
+    for GA in Studiers:
+        for GB in Studiers:
+            if GA != GB:
+                GA.check_if_likes(GB, 800, 5, 1)
+                GB.check_if_likes(GA, 800, 5, 1)
 
-    $ Studiers[0].XP += 5
-    $ Studiers[1].XP += 5
+        GA.XP += 5
 
     return
 
@@ -1126,16 +1076,14 @@ label reset_all_girls_at_beginning:
 
             if G.lust >= 70 or G.thirst >= 30 or (renpy.random.randint(1, 40) + G.lust)>= 70:
                 if "no_masturbating" in G.traits:
-                    G.add_word(1, 0,"wants_to_masturbate", 0, 0)
+                    G.add_word(1, 0, "wants_to_masturbate", 0, 0)
                 else:
-                    G.add_word(1, 0,"will_masturbate", 0, 0)
+                    G.add_word(1, 0, "will_masturbate", 0, 0)
 
             if "lesbian" in G.recent_history:
                 G.thirst -= int(G.thirst/2)
                 G.lust = 20
 
-            G.had_chat[5] = 0
-            G.event_happened[3] -= 1 if G.event_happened[3] else 0
             G.forced = False
 
             if G.location == "bg_classroom" or G.location == "bg_dangerroom" or G.teaching:
@@ -1148,25 +1096,22 @@ label reset_all_girls_at_beginning:
             G.addiction += G.addiction_rate
             G.addiction_rate -= G.resistance if G.addiction_rate > 3 else 0
 
-            if G.taboo and G.Wardrobe.current_Outfit.Clothes["shame"] and G in active_Girls:
-                if G.location == "bg_dangerroom":
-                    G.Wardrobe.current_Outfit.Clothes["shame"] -= 10 if G.Wardrobe.current_Outfit.Clothes["shame"] >= 10 else G.Wardrobe.current_Outfit.Clothes["shame"]
+            if G.taboo and G.Wardrobe.current_Outfit.shame and G in active_Girls:
+                stat_change = int((G.taboo*G.Wardrobe.current_Outfit.shame)/200)
 
-                Count = int((G.taboo*G.Wardrobe.current_Outfit.Clothes["shame"])/200)
-
-                G.change_stat("obedience", 90, Count)
-                G.change_stat("inhibition", 90, Count)
-                G.reputation -= Count
+                G.change_stat("obedience", 90, stat_change)
+                G.change_stat("inhibition", 90, stat_change)
+                G.reputation -= stat_change
 
             G.love -= 5*G.recent_history.count("unsatisfied")
 
-            del G.recent_history[:]
+            G.recent_history = []
 
             if "angry" in G.daily_history:
                 G.recent_history.append("angry")
 
             if time_index == 0:
-                del G.daily_history[:]
+                G.daily_history = []
             elif time_index == 3 and "going_on_date" in G.daily_history and "stoodup" not in G.traits:
                 Player.drain_word("going_on_date", 0, 1)
 
@@ -1178,9 +1123,9 @@ label reset_all_girls_at_beginning:
                 bonus = 0
 
             if G.used_to_anal < 2:
-                if (G.action_counter["anal"] + G.action_counter["dildo_ass"] + bonus) >= 15:
+                if G.action_counter["anal"] + G.action_counter["dildo_ass"] + bonus >= 15:
                     G.used_to_anal = 2
-                elif (G.action_counter["anal"] + G.action_counter["dildo_ass"] + bonus) >= 3:
+                elif G.action_counter["anal"] + G.action_counter["dildo_ass"] + bonus >= 3:
                     G.used_to_anal = 1
 
             G.XP = 3330 if G.XP > 3330 else G.XP
@@ -1204,61 +1149,52 @@ label reset_all_girls_at_beginning:
                     G.addiction = 40 if G.addiction > 40 else G.addiction
 
             G.set_default_faces()
-            G.change_face(5)
+            G.change_face()
 
     return
 
-label lesbian_check(Girls = []):
+label offscreen_lesbian:
     if "threesome" not in EmmaX.history:
         if EmmaX.thirst >= 30 and approval_check(EmmaX, 800, "I"):
             $ EmmaX.history.append("threesome")
 
     python:
+        Girls = []
+
         for G in active_Girls:
-            if G == RogueX and "touch" not in RogueX.traits:
-                pass
-            elif G == EmmaX and "threesome" not in EmmaX.history:
-                pass
-            elif approval_check(G, 500, "I", Alt = [[EmmaX, JeanX], 300]) and G.thirst >= 30:
-                if ("monogamous" not in G.traits or G.broken_up[0]) and G not in Player.Party:
-                    Girls.append(G)
-
-                    if G.thirst >= 60:
+            if G not in Player.Party or G.location != Player.location:
+                if G == RogueX and "touch" not in RogueX.traits:
+                    pass
+                elif G == EmmaX and "threesome" not in EmmaX.history:
+                    pass
+                elif approval_check(G, 500, "I", Alt = [[EmmaX, JeanX], 300]) and G.thirst >= 60:
+                    if "monogamous" not in G.traits or G.broken_up:
                         Girls.append(G)
-
-                if G.thirst >= 90:
-                    Girls.append(G)
 
     if not Girls:
         return
 
-    if Girls[0] != JeanX:
-        $ renpy.random.shuffle(Girls)
+    python:
+        renpy.random.shuffle(Girls)
 
-    $ Partner = None
+        partner_found = False
 
-    while len(Girls) >= 2:
-        if Partner:
-            $ Girls.remove(Girls[1])
-        elif Girls[1] == Girls[0] or Girls[1].location == Player.location or Girls[1] in Player.Party:
-            $ Girls.remove(Girls[1])
-        elif Girls[0] == JeanX and Girls[1].likes[Girls[0].tag] >= 500:
-            $ Partner = Girls[1]
-        elif (Girls[1] in Player.Harem and Girls[0] in Player.Harem) and Girls[0].likes[Girls[1].tag] >= 600:
-            $ Partner = Girls[1]
-        elif Girls[1].likes[Girls[0].tag] >= 800 and Girls[0].likes[Girls[1].tag] >= 800:
-            $ Partner = Girls[1]
-        elif Girls[1].thirst >= 90 and Girls[0].likes[Girls[1].tag] >= 600:
-            $ Partner = Girls[1]
-        else:
-            $ Girls.remove(Girls[1])
+        while not partner_found:
+            if Girls[0] == JeanX and G.likes[Girls[0].tag] >= 500:
+                partner_found = True
+            elif Girls[0] in Player.Harem and G in Player.Harem and Girls[0].likes[G.tag] >= 600:
+                partner_found = True
+            elif G.likes[Girls[0].tag] >= 800 and Girls[0].likes[G.tag] >= 800:
+                partner_found = True
+            elif G.thirst >= 90 and Girls[0].likes[G.tag] >= 600:
+                partner_found = True
+            else:
+                Girls.remove(G)
 
-    if not Partner:
+    if not partner_found:
         return
 
-    $ Girls.append(Partner)
-
-    $ Partner = None
+    $ Girls = [Girls[0], Girls[1]]
 
     if Player.location != Girls[0].home:
         $ Girls[0].location = Girls[0].home
@@ -1272,9 +1208,7 @@ label lesbian_check(Girls = []):
             GA.add_word(1, "lesbian", 0, 0, 0)
 
             for GB in Girls:
-                if GA == GB:
-                    continue
-                else:
+                if GA != GB:
                     GA.check_if_likes(GB, 700, 15, 1)
                     GA.check_if_likes(GB, 900, 10, 1)
                     GA.check_if_likes(GB, 1000, 5, 1)
@@ -1283,10 +1217,6 @@ label lesbian_check(Girls = []):
             GA.thirst -= 5
 
     return
-
-
-
-
 
 label clear_the_room(Girl, passive = False, silent = False):
     $ Girls = []
@@ -1444,9 +1374,6 @@ label clear_the_room(Girl, passive = False, silent = False):
 
     return
 
-
-
-
 label stop_all_actions(visual = False):
     $ Player.primary_action = None
     $ Player.secondary_action = None
@@ -1467,39 +1394,11 @@ label stop_all_actions(visual = False):
 
     return
 
-label reset_outfits:
-    "This resets all customized clothing to their defaults."
-    menu:
-        "Do you want to continue?"
-        "Yes":
-            python:
-                for G in all_Girls:
-                    G.set_default_outfits()
-
-            "Done."
-            "You will now need to set their custom outfits again."
-        "No":
-            pass
-
-    return
-
-label drain_all_words(word, recent = True, daily = True, traits = False):
-    $ temp_Girls = all_Girls[:]
-
-    while temp_Girls:
-        $ temp_Girls[0].drain_word(word, recent, daily, traits)
-
-        $ temp_Girls.remove(temp_Girls[0])
-
-    return
-
-label ask_to_meet(Girl, emotion = "bemused"):
+label ask_to_meet(Girl):
     if "asked_to_meet" not in Girl.daily_history and Girl.location != Player.location:
-        $ Girl.change_face(emotion)
-
         "[Girl.name] asks if you could meet her in your room later."
 
-        $ Girl.add_word(1, "asked_to_meet","asked_to_meet", 0, 0)
+        $ Girl.add_word(1, "asked_to_meet", "asked_to_meet", 0, 0)
 
         $ Player.add_word(1, 0, "meet girl", 0, 0)
 
@@ -1522,538 +1421,6 @@ label return_to_room:
             pass
 
     return
-
-
-
-
-
-
-
-menu Tutorial:
-    "What did you want to know about?"
-    "UI":
-        while True:
-            menu:
-                "Which UI element did you want to hear about?"
-                "Relationship Bar":
-                    "The bar covering the top left of the screen displays the stats of the primary girl in the scene. These stats are described elsewhere in the tutorial."
-                    "If the bar is green, it represents Rogue's stats. If it's dark blue, it represents Kitty's."
-                "Focus Button":
-                    "You can switch between available girls by hitting the small blue icon to the right of the Relationship Bar."
-                    "This changes which girl is currently the focus of your attention. You can do this as often as you like."
-                "Inventory":
-                    "The small backpack to the left of that is your inventory."
-                "Time":
-                    "The next panel shows the day since you started, the day of the week, and the time of day."
-                    "There are four periods in the day, Morning, Midday, Evening, and Night, representing roughly 4 hours each (not counting sleep time"
-                "Menus":
-                    "Much of the gameplay choices are made via menus along the left side of the screen."
-                    "Don't worry too much about making \"bad\" choices, they are only temporary setbacks."
-                    "There are no absolute fail states, and even choices that upset a girl can have eventual payoffs."
-                    "Play how you want to play, have fun."
-                "Back":
-                    jump Tutorial
-    "Stats":
-        menu Tutorial_Stats:
-            "Which stat were you interested in?"
-            "Relationship Stats":
-                "Stats are what is used to track your progress with the various girls in the mansion."
-
-                while True:
-                    menu:
-                        "Which Stat would you like to hear about?"
-                        "Love Stat":
-                            "If you look at the top-left of the screen, there is a red bar."
-                            "This represents the girl's \"love level.\""
-                            "You can raise this stat by doing things that make the girl happy. This produces a red +X number."
-                            call change_Girl_stat(RogueX, "love", 200, 1)
-                            "You can also lower this number if you do things that make the girl upset, which is represented by a red -X."
-                            call change_Girl_stat(RogueX, "love", 200, -1)
-                        "Obedience Stat":
-                            "The blue bar to the right of that is the \"Obedience level.\""
-                            "This represents the girl's willingness to do what you want, and raises when you convince her to do something."
-                            call change_Girl_stat(RogueX, "obedience", 200, 1)
-                            "It lowers when you push her too far and she refuses."
-                            call change_Girl_stat(RogueX, "obedience", 200, -1)
-                        "Inhibition Stat":
-                            "The yellow bar to the right of that is the \"Inhibition level.\""
-                            "This represent's the girl's own sexual interest, and raises when she decides to do something on her own, or something naughty for the first time."
-                            call change_Girl_stat(RogueX, "inhibition", 200, 1)
-                            "It lowers when she becomes overly ashamed, like when caught doing something sexier than she's comfortable with."
-                            call change_Girl_stat(RogueX, "inhibition", 200, -1)
-                            "These are the three core relationship stats, and most activities in the game are gated by how high each is, either alone or in combinations."
-                            "If you can reach 1000 in all three stats, she will be up for just about anything, although some activities do require special conditions."
-                        "Back":
-                            jump Tutorial_Stats
-            "Sexual stats":
-                "There are several stats which are used in sexual encounters."
-
-                while True:
-                    menu:
-                        "Which Stat would you like to hear about?"
-                        "lust":
-                            "The bar underneath \"Love\" represents the girl's \"Lust.\""
-                            "This stat raises as she becomes excited, and falls as she gets turned off or after she orgasms (at 100%%)."
-                            call change_Girl_stat(RogueX, "lust", 200, 1)
-                            $ RogueX.lust -= 1
-                        "Player Excitement":
-                            "The rather \"suggestive\" bar to the right of Inhibitions represents your own excitement."
-                            call change_Player_stat("focus", 200, 1)
-                            $ Player.focus -= 1
-                            "When it reaches 100%%, you orgasm. If you wish to delay this, you can learn to \"focus\" during sex and slow the progression."
-                            "The better you get at each sexual activity, the faster these stats will rise."
-                            "The bar underneath this represents the amount of times you can \"get it up\" before needing some time out. You can raise this stat when you level."
-                            "It's also worth noting that each girl will only be up for doing a certain number of activities in a given time period."
-                        "Back":
-                            jump Tutorial_Stats
-            "Player Stats":
-                "Aside from the sexual ones mentioned above, the player has a few stats of note."
-                "One is his XP. This raises as you study, attend classes, or attend training sessions."
-                "It represents your advancement as a mutant student of the academy. As you gain levels, you gain stat points."
-                "You can spend these to unlock new traits, either refining your powers or your sexual prowess."
-                "The girls also gain traits which unlock new abilities."
-                "You also have an income level, based on the stipend Xavier grants you. This rises as you level, but may be reduced for bad behavior."
-            "Addiction":
-                "The Addiction stat is represented by the bar below Obedience. This stat rises as she begins to crave your touch."
-                "It lowers when she comes into physical contact with you, the more intense the contact, the lower the craving gets."
-                "At high Addiction levels, she is highly susceptible to your advances, but will not be happy about it if you press her."
-                "The Addiction Rate is represented by the bar to the right of it. This stat represents how quickly her cravings build, and falls off over time."
-                "There are various ways that you can increase or decrease how addictive your touch becomes to her. Use this capability at your own risk."
-                "If this aspect does not interest you, you can just choose the more benign options to satisfy her cravings until her interest dies down."
-            "Back":
-                jump Tutorial
-
-        jump Tutorial_Stats
-    "Activities":
-        while True:
-            menu:
-                "So what can you do with your time?"
-                "Wait/Sleep":
-                    "You can always just \"Wait\" This causes you to waste time, but who knows, maybe something interesting will happen."
-                    "Of course when it's night time, this becomes \"Sleep.\" You can only sleep in your own room at first, but maybe someone else would let you sleep in her room."
-                "shop":
-                    "You can also access the school's fabricator store, where you can order various items to be delivered to your room."
-                "Class":
-                    "You can always attend classes. These are typically not that interesting, but will raise your XP, and various events might occur in class."
-                    "Classes are open during weekday morning and midday periods. You might bump into Rogue there."
-                    "You can access the classroom by using \"Leave [[Go to campus Square].\""
-                "Danger Room":
-                    "You can also attend a Danger Room training session. These also raise your XP."
-                    "The Danger Room is open any time except late at night (students need their sleep)."
-                    "You can access the Danger Room by using \"Leave [[Go to campus Square].\""
-                "Shower":
-                    "You can also take a shower, but don't worry, you'll do that off camera automatically if you don't get around to it."
-                    "You can access the showers by using \"Leave [[Go to campus Square].\""
-                "Study":
-                    "You can also choose to study with one of the other students. This will gain you XP, and who knows what else might happen?"
-                "Dating":
-                    "You can also go out on a date with one of the other students in the evenings. She will probably expect you to pay, so be prepared."
-                "Chat":
-                    "And of course you can just hang out with one of the other students, or talk to them on the phone if you have their number."
-                "Back":
-                    jump Tutorial
-    "Never mind.":
-        return
-
-label SpecialMenu:
-    while True:
-        menu:
-            "Meet Dr. Darkholme":
-                jump meet_Mystique
-            "Discover Mystique":
-                jump discover_Mystique
-            "Tutorial":
-                jump Tutorial
-            "Statchecker" if False:
-                "This element will check all the stats and make sure that they work in your current savegame."
-                "This is a good idea if you're getting 'variable not found' syle errors."
-                menu:
-                    "Do you want to do this?"
-                    "Yes":
-                        $ renpy.pop_call()
-                        call Failsafe
-                        jump player_room
-                    "Never mind.":
-                        pass
-            "Halloween Player.Party [[Evening Only] (locked)" if time_index != 2:
-                pass
-            "Halloween Player.Party" if time_index == 2:
-                if "halloween" in Player.history:
-                    "Did you want to repeat the Halloween party?"
-                    "Any girls you met the last time will not see stat changes from conversation,"
-                    "but they can still gain stats from flirting and similar activities."
-                else:
-                    "Looks like things are getting spooky around Xavier's Institute."
-                    "You've recieved an invitation to attend a Halloween party being held in the campus square."
-                    "You can do this now, or save it for later. You can always repeat it at a later date."
-                menu:
-                    "Go to the party?"
-                    "Yes":
-                        "You change into your costume and head out to the party."
-                        call Halloween_Party_entry
-                    "No":
-                        return
-
-
-            "Do some Microtransactions [[locked] (locked)" if "micro" not in Player.history:
-                call Microtransactions
-            "Do some Microtransactions" if "micro" in Player.history:
-                call Microtransactions
-            "Visit McCoy's lab to change things about myself.":
-                call Hanks_Lab
-            "Reset Custom outfits":
-                call reset_outfits
-            "Leveling Menu":
-                while True:
-                    menu:
-                        "Level-up menu"
-                        "Level Yourself" if Player.stat_points > 0 or "addict control" in Player.traits:
-                            call Level_Up (Player)
-                        "Level Yourself [[No points to spend] (locked)" if Player.stat_points <= 0 and "addict control" not in Player.traits:
-                            pass
-                        "Level [RogueX.name]" if RogueX.stat_points > 0:
-                            call Level_Up (RogueX)
-                        "Level [KittyX.name]" if KittyX.stat_points > 0 and "met" in KittyX.history:
-                            call Level_Up (KittyX)
-                        "Level [EmmaX.name]" if EmmaX.stat_points > 0 and "met" in EmmaX.history:
-                            call Level_Up (EmmaX)
-                        "Level [LauraX.name]" if LauraX.stat_points > 0 and "met" in LauraX.history:
-                            call Level_Up (LauraX)
-                        "Level [JeanX.name]" if JeanX.stat_points > 0 and "met" in JeanX.history:
-                            call Level_Up (JeanX)
-                        "Level [StormX.name]" if StormX.stat_points > 0 and "met" in StormX.history:
-                            call Level_Up (StormX)
-                        "Level [JubesX.name]" if JubesX.stat_points > 0 and "met" in JubesX.history:
-                            call Level_Up (JubesX)
-                        "Back":
-                            jump SpecialMenu
-                "You need to gain experience first by training or going to class."
-            "Return to Room when asked?":
-
-                "If a girl says she needs to see you, by default you are asked if you'd like to return."
-                menu:
-                    "Would you like the game to ask you this?"
-                    "Yes [[current]" if always_return_to_room:
-                        pass
-                    "Yes" if not always_return_to_room:
-                        $ always_return_to_room = 1
-                    "No [[current]" if not always_return_to_room:
-                        pass
-                    "No" if always_return_to_room:
-                        $ always_return_to_room = 0
-            "Press the red button" if False:
-                "Huh, wonder what that was about. . ."
-            "Never mind.":
-
-                return
-    return
-
-label Hanks_Lab(line=0):
-    "This is Professor McCoy's lab. You can do various self-modifications here."
-    "The changes will be so seemless, it's almost like nobody will even notice!"
-    while True:
-        $ line = 0
-        menu:
-            "What would you like to do?"
-            "Alter skin color":
-                menu:
-                    "What skin color would you like?"
-                    "Green":
-                        $ Player.color = "Green"
-                    "White":
-                        $ Player.color = "White"
-                    "Black":
-                        $ Player.color = "Black"
-                    "Never mind":
-                        $ line = 1
-                if not line:
-                    "You fiddle with some of McCoy's machinery and a glowing blue liquid pours into a flask."
-                    "You down it in a single gulp, and within minutes your skin tone shifts to be more [Player.color]ish."
-            "Change my name.":
-
-                "You log in to McCoy's high end computer, this should allow you to change your name in all offical databases."
-                $ Player.name = renpy.input("What name would you like?", default="Zero", length = 10)
-                $ Player.name = Player.name.strip()
-                if not Player.name:
-                    $ Player.name = "Zero"
-                if Player.name in ("master", "sir", "lover", "boyfriend", "sex friend", "fuck buddy"):
-                    "Nice try, smartass."
-                    $ Player.name = "Zero"
-                if "met" in KittyX.history:
-                    $ KittyX.player_petnames.append(Player.name[:1])
-                if "met" in EmmaX.history:
-                    call get_last_name
-                    $ EmmaX.player_petnames.append(_return)
-                "That should do it, your name has been updated and an email has been sent out to everyone on campus about the change."
-            "Blue Button":
-                $ Count = len(active_Girls)
-                "[Count]"
-                if len(active_Girls) == 8:
-                    "A-[active_Girls[0].tag],[active_Girls[1].tag],[active_Girls[2].tag],[active_Girls[3].tag]"
-                    "B-[active_Girls[4].tag],[active_Girls[5].tag],[active_Girls[6].tag],[active_Girls[7].tag]"
-                elif len(active_Girls) == 7:
-                    "A-[active_Girls[0].tag],[active_Girls[1].tag],[active_Girls[2].tag],[active_Girls[3].tag]"
-                    "B-[active_Girls[4].tag],[active_Girls[5].tag],[active_Girls[6].tag]"
-                elif len(active_Girls) == 6:
-                    "A-[active_Girls[0].tag],[active_Girls[1].tag],[active_Girls[2].tag],[active_Girls[3].tag]"
-                    "B-[active_Girls[4].tag],[active_Girls[5].tag]"
-                elif len(active_Girls) == 5:
-                    "A-[active_Girls[0].tag],[active_Girls[1].tag],[active_Girls[2].tag],[active_Girls[3].tag]"
-                    "B-[active_Girls[4].tag]"
-                elif len(active_Girls) == 4:
-                    "[active_Girls[0].tag],[active_Girls[1].tag],[active_Girls[2].tag],[active_Girls[3].tag]"
-                elif len(active_Girls) == 3:
-                    "[active_Girls[0].tag],[active_Girls[1].tag],[active_Girls[2].tag]"
-                elif len(active_Girls) == 2:
-                    "[active_Girls[0].tag],[active_Girls[1].tag]"
-                else:
-                    "[active_Girls[0].tag]"
-                $ Count = 0
-            "Yellow Button":
-                $ Count = len(all_Girls)
-                "[Count]"
-                if len(all_Girls) == 8:
-                    "A-[all_Girls[0].tag],[all_Girls[1].tag],[all_Girls[2].tag],[all_Girls[3].tag]"
-                    "B-[all_Girls[4].tag],[all_Girls[5].tag],[all_Girls[6].tag],[all_Girls[7].tag]"
-                elif len(all_Girls) == 7:
-                    "A-[all_Girls[0].tag],[all_Girls[1].tag],[all_Girls[2].tag],[all_Girls[3].tag]"
-                    "B-[all_Girls[4].tag],[all_Girls[5].tag],[all_Girls[6].tag]"
-                elif len(all_Girls) == 6:
-                    "A-[all_Girls[0].tag],[all_Girls[1].tag],[all_Girls[2].tag],[all_Girls[3].tag]"
-                    "B-[all_Girls[4].tag],[all_Girls[5].tag]"
-                elif len(all_Girls) == 5:
-                    "A-[all_Girls[0].tag],[all_Girls[1].tag],[all_Girls[2].tag],[all_Girls[3].tag]"
-                    "B-[all_Girls[4].tag]"
-                elif len(all_Girls) == 4:
-                    "[all_Girls[0].tag],[all_Girls[1].tag],[all_Girls[2].tag],[all_Girls[3].tag]"
-                elif len(all_Girls) == 3:
-                    "[all_Girls[0].tag],[all_Girls[1].tag],[all_Girls[2].tag]"
-                elif len(all_Girls) == 2:
-                    "[all_Girls[0].tag],[all_Girls[1].tag]"
-                else:
-                    "[all_Girls[0].tag]"
-                $ Count = 0
-            "Orange Button":
-                $ line = "This is Halloween." if "halloween" in RogueX.history else "no"
-                "Rogue: [line]"
-                $ line = "This is Halloween." if "halloween" in KittyX.history else "no"
-                "Kitty: [line]"
-                $ line = "This is Halloween." if "halloween" in EmmaX.history else "no"
-                "Emma: [line]"
-                $ line = "This is Halloween." if "halloween" in LauraX.history else "no"
-                "Laura: [line]"
-                $ line = "This is Halloween." if "halloween" in JeanX.history else "no"
-                "Jean: [line]"
-                $ line = "This is Halloween." if "halloween" in StormX.history else "no"
-                "Storm: [line]"
-                $ line = 0
-            "Leave.":
-                return
-
-    return
-
-label Level_Up(Chr=Player):
-    if Chr != Player and Chr not in all_Girls:
-        return
-    if Chr == Player:
-        while Player.stat_points > 0 or "addict control" in Player.traits:
-            menu:
-                "You have [Player.stat_points] points to spend. How would you like to spend them?"
-                "Increase sexual stamina. [[Acquired] (locked)" if "focus" in Player.traits:
-                    pass
-                "Increase sexual stamina. [[One point]" if "focus" not in Player.traits:
-                    menu:
-                        "This trait will unlock the \"Focus\" option during sex, giving you more time before you blow."
-                        "Unlock Focus.":
-                            if Player.stat_points > 0:
-                                $ Player.stat_points -= 1
-                                $ Player.traits.append("focus")
-                            else:
-                                "You don't have enough points for that."
-                        "Cancel.":
-                            pass
-
-                "Increase your addictiveness. [[One point]" if "addict control" not in Player.traits and "nonaddictive" not in Player.traits and "addictive" not in Player.traits:
-                    menu:
-                        "This trait will increase the addictiveness of your touch, making you harder for girls to quit."
-                        "Increase addictiveness.":
-                            if Player.stat_points > 0:
-                                $ Player.stat_points -= 1
-                                $ Player.traits.append("addictive")
-                            else:
-                                "You don't have enough points for that."
-                        "Cancel.":
-                            pass
-
-                "Reduce your addictiveness. [[One point]" if "addict control" not in Player.traits and "nonaddictive" not in Player.traits and "addictive" not in Player.traits:
-                    menu:
-                        "This trait will reduce the addictiveness of your touch, making it easier for girls to resist it."
-                        "Reduce addictiveness.":
-                            if Player.stat_points > 0:
-                                $ Player.stat_points -= 1
-                                $ Player.traits.append("nonaddictive")
-                            else:
-                                "You don't have enough points for that."
-                        "Cancel.":
-                            pass
-
-                "Control your Addiction level. [[Two points]" if "addict control" not in Player.traits and ("nonaddictive" in Player.traits or "addictive" in Player.traits):
-                    menu:
-                        "This trait will allow you to freely control the amount you addict girls to your touch."
-                        "Gain addiction control.":
-                            if Player.stat_points >= 2:
-                                $ Player.stat_points -= 2
-                                $ Player.traits.append("addict control")
-                            else:
-                                "You don't have enough points for that."
-                        "Cancel.":
-                            pass
-
-                "Increase your addictiveness. [[Free]" if "addict control" in Player.traits:
-                    menu:
-                        "This trait will increase the addictiveness of your touch, making you harder for girls to quit."
-                        "Increase addictiveness, no cost.":
-                            if "nonaddictive" in Player.traits:
-                                $ Player.traits.remove("nonaddictive")
-                                "You are now at the baseline addictiveness level."
-                            elif "addictive" not in Player.traits:
-                                $ Player.traits.append("addictive")
-                                "You are now at the enhanced addictiveness level."
-                            else:
-                                "You are already at the max addictiveness level."
-                        "Cancel.":
-                            pass
-                "Reduce your addictiveness. [[Free]" if "addict control" in Player.traits:
-                    menu:
-                        "This trait will reduce the addictiveness of your touch, making it easier for girls to resist it."
-                        "Reduce addictiveness.":
-                            if "addictive" in Player.traits:
-                                $ Player.traits.remove("addictive")
-                                "You are now at the baseline addictiveness level."
-                            elif "nonaddictive" not in Player.traits:
-                                $ Player.traits.append("nonaddictive")
-                                "You are now at the reduced addictiveness level."
-                            else:
-                                "You are already at the minimum addictiveness level."
-
-                            if "addictive" in Player.traits:
-                                $ Player.traits.remove("addictive")
-                                $ Player.traits.append("nonaddictive")
-                                $ Player.traits.append("addict control")
-                            else:
-                                $ Player.traits.append("nonaddictive")
-                        "Cancel.":
-                            pass
-
-                "Increase semen production. [[Maxed] (locked)" if Player.max_semen >= 5:
-                    pass
-                "Increase semen production. [[One point]" if Player.max_semen < 5:
-                    menu:
-                        "This trait will increase by 1 the number of times you can climax before needing a break."
-                        "Increase max semen.":
-                            if Player.stat_points > 0:
-                                $ Player.stat_points -= 1
-                                $ Player.max_semen += 1
-                            else:
-                                "You don't have enough points for that."
-                            if Player.max_semen >= 5:
-                                "You're already at the max level."
-                        "Cancel.":
-                            pass
-                "Never mind, I'll come back later.":
-
-                    return
-    else:
-
-        while Chr.stat_points > 0:
-            menu:
-                "[Chr.name] is Level [Chr.level] and has [Chr.stat_points] points to spend. How would you like to spend them?"
-                "Increase sexual focus. [[Acquired] (locked)" if "focus" in Chr.traits:
-                    pass
-                "Increase sexual focus. [[One point]" if "focus" not in Chr.traits:
-                    menu:
-                        "This trait will unlock the \"Focus\" option during sex, giving [Chr.name] more time before she orgasms."
-                        "Unlock Focus.":
-                            if Chr.stat_points:
-                                $ Chr.stat_points -= 1
-                                $ Chr.traits.append("focus")
-                            else:
-                                "You don't have enough points for that."
-                        "Cancel.":
-                            pass
-
-                "Increase [Chr.name]'s resistance. [[Maxed] (locked)" if Chr.resistance >= 3:
-                    pass
-                "Increase [Chr.name]'s resistance. [[One point]" if 0 < Chr.resistance < 3:
-                    menu:
-                        "This trait will increase [Chr.name]'s resistance to your touch's addictive properties."
-                        "Increase Resistance.":
-                            if Chr.stat_points:
-                                $ Chr.stat_points -= 1
-                                $ Chr.resistance += 1
-                            else:
-                                "You don't have enough points for that."
-                        "Cancel.":
-                            pass
-
-
-                "Increase stamina. [[Maxed] (locked)" if Chr.max_actions >= 10:
-                    pass
-                "Increase stamina. [[One point]" if Chr.max_actions < 10:
-                    "This trait will increase by 2 the number of sex actions [Chr.name] can take before needing a break."
-                    menu:
-                        "She currently has [Chr.max_actions] actions."
-                        "Increase sex actions.":
-                            if Chr.stat_points:
-                                $ Chr.stat_points -= 1
-                                $ Chr.max_actions += 2
-                                if Chr.max_actions > 10:
-                                    $ Chr.max_actions = 10
-                                    "[Chr.name] has reached her maximum actions."
-                            else:
-                                "You don't have enough points for that."
-                        "Cancel.":
-                            pass
-
-                "Allow [Chr.name] to touch. [[Acquired] (locked)" if Chr == RogueX and "touch" in Chr.traits:
-                    pass
-                "Allow [Chr.name] to touch. [[One point]" if Chr == RogueX and "touch" not in Chr.traits and Chr.level >= 5:
-                    "This trait will allow [Chr.name] to touch other people, not just you, without harming them."
-                    menu:
-                        "She can still borrow their abilities if they have any."
-                        "Unlock touch ability.":
-                            if Chr.stat_points:
-                                $ Chr.stat_points -= 1
-                                $ Chr.traits.append("touch")
-                            else:
-                                "You don't have enough points for that."
-                        "Cancel.":
-                            pass
-                "Never mind, I'll come back later.":
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    return
-
-    return
-
-
-
-
-
-
-
-
 
 label coitus_interruptus(Partners, Interrupters):
     if Partners in all_Girls:
@@ -3037,14 +2404,14 @@ label Girls_arrive(arriving_Girls):
                         if Primary in Present:
                             $ line = Primary.name + " and " + Secondary.name + " sit down next to you"
                         else:
-                            $ line = line + ", while " + Secondary.name + " takes the seat next to you"
+                            $ line = line + "_, while " + Secondary.name + " takes the seat next to you"
 
                         $ Present.append(Secondary)
                     else:
                         if Primary in Nearby:
                             $ line = Primary.name + " and " + Secondary.name + " sit across the room from you"
                         else:
-                            $ line = line + ", while " + Secondary.name + " sits across the room from you"
+                            $ line = line + "_, while " + Secondary.name + " sits across the room from you"
 
                         $ Nearby.append(Secondary)
 
@@ -3053,7 +2420,7 @@ label Girls_arrive(arriving_Girls):
                     if Primary in Nearby:
                         $ line = Primary.name + " and " + Secondary.name + " sit across the room from you"
                     else:
-                        $ line = line + ", while " + Secondary.name + " sits across the room from you"
+                        $ line = line + "_, while " + Secondary.name + " sits across the room from you"
 
                     $ Nearby.append(Secondary)
 
@@ -3092,61 +2459,32 @@ label Girls_arrive(arriving_Girls):
 
     return True
 
-
-
-label exit_gym(temp_Girls = []):
-    if temp_Girls and temp_Girls[0] in all_Girls:
-        pass
-    else:
-        $ temp_Girls = Player.Party[:]
+label exit_gym:
+    $ temp_Girls = Player.Party[:]
 
     $ line = None
 
     while temp_Girls:
-        if temp_Girls[0].Wardrobe.current_Outfit.Clothes_name == "gym_clothes":
-
+        if temp_Girls[0].Wardrobe.current_Outfit.name == "gym_clothes":
             if len(Player.Party) > 1:
                 $ line = "We should change out of these if we're leaving. . ."
             else:
                 $ line = "I should change out of these if we're leaving. . ."
 
-            $ temp_Girls[0].Wardrobe.current_Outfit.Clothes_name = temp_Girls[0].today_outfit_name
-
         $ temp_Girls.remove(temp_Girls[0])
 
-    if Player.Party and line:
+    if line:
         Player.Party[0].voice "[line]"
 
-    if line:
-        show black_screen onlayer black with dissolve
+        show black_screen onlayer black
 
-        $ temp_Girls = Player.Party[:]
-
-        while temp_Girls:
-            $ temp_Girls[0].change_outfit()
-            $ temp_Girls.remove(temp_Girls[0])
+        python:
+            for G in Player.Party:
+                G.change_Outfit(instant = True)
 
         hide black_screen onlayer black
 
     return
-
-
-
-
-
-label ReturnToSender:
-    python:
-        for G in active_Girls:
-            if G not in Player.Party and G.weekly_schedule[weekday][time_index] != Player.location:
-                G.location = G.weekly_schedule[weekday][time_index]
-
-                if G == JubesX and JubesX.addiction > 60:
-                    JubesX.location = JubesX.home
-
-    return
-
-
-
 
 label dismiss_menu:
     menu:
@@ -3165,7 +2503,7 @@ label dismiss_menu:
             call dismiss_girl(StormX)
         "[JubesX.name]" if JubesX.location == Player.location or JubesX in Player.Party:
             call dismiss_girl(JubesX)
-        "Nevermind.":
+        "Never mind.":
             pass
 
     return
@@ -3174,20 +2512,16 @@ label locked_door(arriving_Girls):
     if arriving_Girls in all_Girls:
         $ arriving_Girls = [arriving_Girls]
 
-    $ Primary = None
+    python:
+        Primary = None
 
-    $ temp_Girls = arriving_Girls[:]
+        for G in arriving_Girls:
+            if Player.location == G.home:
+                Primary = G
 
-    while temp_Girls:
-        if Player.location == temp_Girls[0].home:
-            $ Primary = temp_Girls[0]
-
-            $ temp_Girls = []
-        elif temp_Girls[0] == JeanX:
-            $ Primary = JeanX
-
-        if temp_Girls:
-            $ temp_Girls.remove(temp_Girls[0])
+                break
+            elif G == JeanX:
+                Primary = G
 
     if not Primary:
         $ Primary = arriving_Girls[0]
@@ -3428,6 +2762,293 @@ label locked_door(arriving_Girls):
 
     return True
 
+label get_dressed:
+    if "naked" in Player.recent_history:
+        "You get dressed."
+
+        $ Player.drain_word("naked")
+        $ Player.drain_word("cockout")
+    elif "cockout" in Player.recent_history:
+        "You put your cock away."
+
+        $ Player.drain_word("cockout")
+    return
+
+
+
+
+
+label SpecialMenu:
+    while True:
+        menu:
+            "Meet Dr. Darkholme":
+                jump meet_Mystique
+            "Discover Mystique":
+                jump discover_Mystique
+            "Halloween Player.Party [[Evening Only] (locked)" if time_index != 2:
+                pass
+            "Halloween Player.Party" if time_index == 2:
+                if "halloween" in Player.history:
+                    "Did you want to repeat the Halloween party?"
+                    "Any girls you met the last time will not see stat changes from conversation,"
+                    "but they can still gain stats from flirting and similar activities."
+                else:
+                    "Looks like things are getting spooky around Xavier's Institute."
+                    "You've recieved an invitation to attend a Halloween party being held in the campus square."
+                    "You can do this now, or save it for later. You can always repeat it at a later date."
+                menu:
+                    "Go to the party?"
+                    "Yes":
+                        "You change into your costume and head out to the party."
+                        call Halloween_Party_entry
+                    "No":
+                        return
+            "Leveling Menu":
+                while True:
+                    menu:
+                        "Level-up menu"
+                        "Level Yourself" if Player.stat_points > 0 or "addict control" in Player.traits:
+                            call Level_Up (Player)
+                        "Level Yourself [[No points to spend] (locked)" if Player.stat_points <= 0 and "addict control" not in Player.traits:
+                            pass
+                        "Level [RogueX.name]" if RogueX.stat_points > 0:
+                            call Level_Up (RogueX)
+                        "Level [KittyX.name]" if KittyX.stat_points > 0 and "met" in KittyX.history:
+                            call Level_Up (KittyX)
+                        "Level [EmmaX.name]" if EmmaX.stat_points > 0 and "met" in EmmaX.history:
+                            call Level_Up (EmmaX)
+                        "Level [LauraX.name]" if LauraX.stat_points > 0 and "met" in LauraX.history:
+                            call Level_Up (LauraX)
+                        "Level [JeanX.name]" if JeanX.stat_points > 0 and "met" in JeanX.history:
+                            call Level_Up (JeanX)
+                        "Level [StormX.name]" if StormX.stat_points > 0 and "met" in StormX.history:
+                            call Level_Up (StormX)
+                        "Level [JubesX.name]" if JubesX.stat_points > 0 and "met" in JubesX.history:
+                            call Level_Up (JubesX)
+                        "Back":
+                            jump SpecialMenu
+                "You need to gain experience first by training or going to class."
+            "Return to Room when asked?":
+                "If a girl says she needs to see you, by default you are asked if you'd like to return."
+                menu:
+                    "Would you like the game to ask you this?"
+                    "Yes [[current]" if always_return_to_room:
+                        pass
+                    "Yes" if not always_return_to_room:
+                        $ always_return_to_room = True
+                    "No [[current]" if not always_return_to_room:
+                        pass
+                    "No" if always_return_to_room:
+                        $ always_return_to_room = False
+            "Done.":
+                return
+
+
+label Level_Up(Chr=Player):
+    if Chr != Player and Chr not in all_Girls:
+        return
+    if Chr == Player:
+        while Player.stat_points > 0 or "addict control" in Player.traits:
+            menu:
+                "You have [Player.stat_points] points to spend. How would you like to spend them?"
+                "Increase sexual stamina. [[Acquired] (locked)" if "focus" in Player.traits:
+                    pass
+                "Increase sexual stamina. [[One point]" if "focus" not in Player.traits:
+                    menu:
+                        "This trait will unlock the \"Focus\" option during sex, giving you more time before you blow."
+                        "Unlock Focus.":
+                            if Player.stat_points > 0:
+                                $ Player.stat_points -= 1
+                                $ Player.traits.append("focus")
+                            else:
+                                "You don't have enough points for that."
+                        "Cancel.":
+                            pass
+
+                "Increase your addictiveness. [[One point]" if "addict control" not in Player.traits and "nonaddictive" not in Player.traits and "addictive" not in Player.traits:
+                    menu:
+                        "This trait will increase the addictiveness of your touch, making you harder for girls to quit."
+                        "Increase addictiveness.":
+                            if Player.stat_points > 0:
+                                $ Player.stat_points -= 1
+                                $ Player.traits.append("addictive")
+                            else:
+                                "You don't have enough points for that."
+                        "Cancel.":
+                            pass
+
+                "Reduce your addictiveness. [[One point]" if "addict control" not in Player.traits and "nonaddictive" not in Player.traits and "addictive" not in Player.traits:
+                    menu:
+                        "This trait will reduce the addictiveness of your touch, making it easier for girls to resist it."
+                        "Reduce addictiveness.":
+                            if Player.stat_points > 0:
+                                $ Player.stat_points -= 1
+                                $ Player.traits.append("nonaddictive")
+                            else:
+                                "You don't have enough points for that."
+                        "Cancel.":
+                            pass
+
+                "Control your Addiction level. [[Two points]" if "addict control" not in Player.traits and ("nonaddictive" in Player.traits or "addictive" in Player.traits):
+                    menu:
+                        "This trait will allow you to freely control the amount you addict girls to your touch."
+                        "Gain addiction control.":
+                            if Player.stat_points >= 2:
+                                $ Player.stat_points -= 2
+                                $ Player.traits.append("addict control")
+                            else:
+                                "You don't have enough points for that."
+                        "Cancel.":
+                            pass
+
+                "Increase your addictiveness. [[Free]" if "addict control" in Player.traits:
+                    menu:
+                        "This trait will increase the addictiveness of your touch, making you harder for girls to quit."
+                        "Increase addictiveness, no cost.":
+                            if "nonaddictive" in Player.traits:
+                                $ Player.traits.remove("nonaddictive")
+                                "You are now at the baseline addictiveness level."
+                            elif "addictive" not in Player.traits:
+                                $ Player.traits.append("addictive")
+                                "You are now at the enhanced addictiveness level."
+                            else:
+                                "You are already at the max addictiveness level."
+                        "Cancel.":
+                            pass
+                "Reduce your addictiveness. [[Free]" if "addict control" in Player.traits:
+                    menu:
+                        "This trait will reduce the addictiveness of your touch, making it easier for girls to resist it."
+                        "Reduce addictiveness.":
+                            if "addictive" in Player.traits:
+                                $ Player.traits.remove("addictive")
+                                "You are now at the baseline addictiveness level."
+                            elif "nonaddictive" not in Player.traits:
+                                $ Player.traits.append("nonaddictive")
+                                "You are now at the reduced addictiveness level."
+                            else:
+                                "You are already at the minimum addictiveness level."
+
+                            if "addictive" in Player.traits:
+                                $ Player.traits.remove("addictive")
+                                $ Player.traits.append("nonaddictive")
+                                $ Player.traits.append("addict control")
+                            else:
+                                $ Player.traits.append("nonaddictive")
+                        "Cancel.":
+                            pass
+
+                "Increase semen production. [[Maxed] (locked)" if Player.max_semen >= 5:
+                    pass
+                "Increase semen production. [[One point]" if Player.max_semen < 5:
+                    menu:
+                        "This trait will increase by 1 the number of times you can climax before needing a break."
+                        "Increase max semen.":
+                            if Player.stat_points > 0:
+                                $ Player.stat_points -= 1
+                                $ Player.max_semen += 1
+                            else:
+                                "You don't have enough points for that."
+                            if Player.max_semen >= 5:
+                                "You're already at the max level."
+                        "Cancel.":
+                            pass
+                "Never mind, I'll come back later.":
+
+                    return
+    else:
+
+        while Chr.stat_points > 0:
+            menu:
+                "[Chr.name] is Level [Chr.level] and has [Chr.stat_points] points to spend. How would you like to spend them?"
+                "Increase sexual focus. [[Acquired] (locked)" if "focus" in Chr.traits:
+                    pass
+                "Increase sexual focus. [[One point]" if "focus" not in Chr.traits:
+                    menu:
+                        "This trait will unlock the \"Focus\" option during sex, giving [Chr.name] more time before she orgasms."
+                        "Unlock Focus.":
+                            if Chr.stat_points:
+                                $ Chr.stat_points -= 1
+                                $ Chr.traits.append("focus")
+                            else:
+                                "You don't have enough points for that."
+                        "Cancel.":
+                            pass
+
+                "Increase [Chr.name]'s resistance. [[Maxed] (locked)" if Chr.resistance >= 3:
+                    pass
+                "Increase [Chr.name]'s resistance. [[One point]" if 0 < Chr.resistance < 3:
+                    menu:
+                        "This trait will increase [Chr.name]'s resistance to your touch's addictive properties."
+                        "Increase Resistance.":
+                            if Chr.stat_points:
+                                $ Chr.stat_points -= 1
+                                $ Chr.resistance += 1
+                            else:
+                                "You don't have enough points for that."
+                        "Cancel.":
+                            pass
+
+
+                "Increase stamina. [[Maxed] (locked)" if Chr.max_actions >= 10:
+                    pass
+                "Increase stamina. [[One point]" if Chr.max_actions < 10:
+                    "This trait will increase by 2 the number of sex actions [Chr.name] can take before needing a break."
+                    menu:
+                        "She currently has [Chr.max_actions] actions."
+                        "Increase sex actions.":
+                            if Chr.stat_points:
+                                $ Chr.stat_points -= 1
+                                $ Chr.max_actions += 2
+                                if Chr.max_actions > 10:
+                                    $ Chr.max_actions = 10
+                                    "[Chr.name] has reached her maximum actions."
+                            else:
+                                "You don't have enough points for that."
+                        "Cancel.":
+                            pass
+
+                "Allow [Chr.name] to touch. [[Acquired] (locked)" if Chr == RogueX and "touch" in Chr.traits:
+                    pass
+                "Allow [Chr.name] to touch. [[One point]" if Chr == RogueX and "touch" not in Chr.traits and Chr.level >= 5:
+                    "This trait will allow [Chr.name] to touch other people, not just you, without harming them."
+                    menu:
+                        "She can still borrow their abilities if they have any."
+                        "Unlock touch ability.":
+                            if Chr.stat_points:
+                                $ Chr.stat_points -= 1
+                                $ Chr.traits.append("touch")
+                            else:
+                                "You don't have enough points for that."
+                        "Cancel.":
+                            pass
+                "Never mind, I'll come back later.":
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    return
+
+    return
+
+
+
+
+
+
+
+
+
+
+
 
 
 label shift_focus(Girl, Second = None):
@@ -3598,9 +3219,9 @@ label Partner_Like(Girl=0, value=1, Altvalue=1, Measure=800, Partner=Partner):
 
             if second_girl_main_action == "watch":
                 pass
-            elif second_girl_main_action in ("handjob","blowjob"):
+            elif second_girl_main_action in ("handjob", "blowjob"):
                 $ value += 1
-            elif second_girl_main_action in ("eat_pussy","eat_ass"):
+            elif second_girl_main_action in ("eat_pussy", "eat_ass"):
                 $ value += 3
             else:
                 $ value += 2
@@ -3734,7 +3355,7 @@ label Jumped(Act=0):
         for G in Girls:
             G.location = Player.location
 
-    $ Girls[0].add_word(1,"jumped","jumped")
+    $ Girls[0].add_word(1,"jumped", "jumped")
 
     call set_Character_taboos
 
@@ -3770,9 +3391,9 @@ label Jumped(Act=0):
                 $ Girls[0].change_face("sad", 1)
                 "You tell her to cut it out, and head back to what you were doing."
                 $ Player.recent_history.append("nope")
-                $ Girls[0].add_word(1,"refused","refused")
+                $ Girls[0].add_word(1,"refused", "refused")
                 if not approval_check(Girls[0], 500, "O"):
-                    $ Girls[0].add_word(1,"angry","angry")
+                    $ Girls[0].add_word(1,"angry", "angry")
                 return
 
         if Partner:
@@ -3805,9 +3426,9 @@ label Jumped(Act=0):
                 $ Girls[0].change_face("sad", 1)
                 "You tell her to cut it out, and head back to what you were doing."
                 $ Player.recent_history.append("nope")
-                $ Girls[0].add_word(1,"refused","refused")
+                $ Girls[0].add_word(1,"refused", "refused")
                 if not approval_check(Girls[0], 500, "O"):
-                    $ Girls[0].add_word(1,"angry","angry")
+                    $ Girls[0].add_word(1,"angry", "angry")
                 return
 
     python:
@@ -3817,7 +3438,7 @@ label Jumped(Act=0):
     call set_Character_taboos
     call set_the_scene
 
-    $ Girls[0].add_word(1,"jumped","jumped", 0,"jumped")
+    $ Girls[0].add_word(1,"jumped", "jumped", 0,"jumped")
 
     if Girls[0] == RogueX:
         ch_r "You've been dodge'in me lately."
@@ -3842,7 +3463,7 @@ label Jumped(Act=0):
     call check_favorite_actions (Girls[0])
     $ Act = Girls[0].favorite_action
 
-    if Act in ("anal","sex","blowjob","titjob","handjob","hotdog"):
+    if Act in ("anal", "sex", "blowjob", "titjob", "handjob", "hotdog"):
 
         "[Girls[0].name] reaches down and unzips your fly. . ."
         if not Player.semen:
@@ -3861,7 +3482,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
 
 
     $ Girl.change_face("sly", 1)
-    $ Girl.add_word(1,"quicksex","quicksex")
+    $ Girl.add_word(1,"quicksex", "quicksex")
     menu:
         extend ""
         "Sure":
@@ -3978,7 +3599,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
 
                                 $ Girl.top_pulled_up = 1
                                 pause 1
-                                call expression Girl.tag + "First_Topless" pass (1)
+                                call expression Girl.tag + "_First_Topless" pass (1)
                                 $ Girl.top_pulled_up = 0
                                 $ Girl.change_face("confused", 1,mouth = "smile")
                                 call change_Girl_stat(Girl, "inhibition", 70, 3)
@@ -4003,7 +3624,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
 
                             if counter < 50:
 
-                                $ Girl.change_face("sad",2)
+                                $ Girl.change_face("sad", 2)
                                 call change_Girl_stat(Girl, "love", 90, -2)
                                 call change_Girl_stat(Girl, "obedience", 50, 5)
                                 call change_Girl_stat(Girl, "obedience", 95, 3)
@@ -4029,7 +3650,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
                                     ch_v "Ya'sure?"
                             else:
 
-                                $ Girl.change_face("sad",2,eyes = "surprised")
+                                $ Girl.change_face("sad", 2,eyes = "surprised")
                                 call change_Girl_stat(Girl, "love", 90, -4)
                                 call change_Girl_stat(Girl, "obedience", 70, 6)
                                 call change_Girl_stat(Girl, "obedience", 200, 3)
@@ -4083,7 +3704,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
                                 ch_v "Boooo."
                         else:
 
-                            $ Girl.change_face("sad",2,brows = "confused")
+                            $ Girl.change_face("sad", 2,brows = "confused")
                             call change_Girl_stat(Girl, "love", 95, -2)
                             call change_Girl_stat(Girl, "obedience", 50, -2)
                             call change_Girl_stat(Girl, "obedience", 90, -2)
@@ -4129,7 +3750,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
     call check_favorite_actions (Girl)
     $ Act = Girl.favorite_action
 
-    if Act in ("anal","sex","blowjob","titjob","handjob","hotdog"):
+    if Act in ("anal", "sex", "blowjob", "titjob", "handjob", "hotdog"):
 
         "[Girl.name] reaches down and unzips your fly. . ."
         if not Player.semen:
@@ -4181,7 +3802,7 @@ label Escalation(Girl=0):
         if "blowjob" in Girl.recent_history:
 
             $ renpy.pop_call()
-    elif Player.primary_action not in ("sex","anal") and approval_check(Girl, 1400,taboo_modifier=5,Alt=[[JeanX], 1200]) and Girl.lust >= 60 and Girl.action_counter["sex"] >= 3:
+    elif Player.primary_action not in ("sex", "anal") and approval_check(Girl, 1400,taboo_modifier=5,Alt=[[JeanX], 1200]) and Girl.lust >= 60 and Girl.action_counter["sex"] >= 3:
 
         call change_Girl_stat(Girl, "inhibition", 80, 4)
 
@@ -4244,7 +3865,7 @@ label Sex_Dialog(Primary, Secondary):
         $ line = 0
         call Girl_Self_lines (Primary, "T3", Primary.secondary_action, D20X=D20S)
         if line:
-            $ line3 = line + "."
+            $ line3 = line + "_."
 
 
 
@@ -4253,7 +3874,7 @@ label Sex_Dialog(Primary, Secondary):
         $ line = 0
         call SexDialog_Threeway
         if line:
-            $ line4 = line + "."
+            $ line4 = line + "_."
 
 
 
@@ -4538,7 +4159,15 @@ label Seen_First_Peen(Primary=0, Secondary=0, Silent=0, Undress=0, Passive=0, Gi
 
             if approval == Passive and "cockout" not in Player.recent_history:
 
-                call CockOut
+                if approval == 3:
+
+
+                    call Girl_First_Peen (Primary, React=1)
+                elif approval == 4:
+
+
+                    call Girl_First_Peen (Secondary, React=1)
+                $ approval = 0
             if "cockout" not in Player.recent_history:
                 return
 
@@ -4550,30 +4179,7 @@ label Seen_First_Peen(Primary=0, Secondary=0, Silent=0, Undress=0, Passive=0, Gi
             call Girl_First_Peen (Secondary, Silent, Undress, Second=_return)
     return
 
-label CockOut:
 
-    if approval == 3:
-
-
-        call Girl_First_Peen (Primary, React=1)
-    elif approval == 4:
-
-
-        call Girl_First_Peen (Secondary, React=1)
-    $ approval = 0
-    return
-
-label get_dressed:
-    if "naked" in Player.recent_history:
-        "You get dressed."
-
-        $ Player.drain_word("naked")
-        $ Player.drain_word("cockout")
-    elif "cockout" in Player.recent_history:
-        "You put your cock away."
-
-        $ Player.drain_word("cockout")
-    return
 
 label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
 
@@ -4823,13 +4429,13 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
 
             $ Girl.change_face("sly", 1)
             if Girl.seen_peen == 1:
-                $ Girl.change_face("surprised",2)
+                $ Girl.change_face("surprised", 2)
                 if Girl == RogueX:
                     ch_r "Whoa, I didn't know they looked so big up close."
                     $ Girl.change_face("bemused", 1)
                     call change_Girl_stat(Girl, "love", 90, 5)
                 elif Girl == KittyX:
-                    $ Girl.change_face("surprised",2)
+                    $ Girl.change_face("surprised", 2)
                     ch_k "That's. . . impressive."
                     $ Girl.change_face("bemused", 1)
                     call change_Girl_stat(Girl, "love", 90, 3)
@@ -4861,7 +4467,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                     call change_Girl_stat(Girl, "love", 90, 5)
                     call change_Girl_stat(Girl, "inhibition", 60, 2)
                 elif Girl == JubesX:
-                    $ Girl.change_face("surprised",2, eyes = "down")
+                    $ Girl.change_face("surprised", 2, eyes = "down")
                     ch_v "Oh. . . nice."
                     $ Girl.change_face("sly", 1)
                     call change_Girl_stat(Girl, "love", 80, 3)
@@ -5320,7 +4926,7 @@ label Girls_taboo(Girl, Choice=0):
                         elif Girl == JubesX:
                             ch_v "Um, yeah. . ."
                     elif Choice == "C":
-                        $ Girl.change_face("sexy",2)
+                        $ Girl.change_face("sexy", 2)
                         if Girl.obedience > Girl.inhibition:
                             $ Girl.eyes = "side"
                             if Girl == RogueX:
@@ -5358,7 +4964,7 @@ label Girls_taboo(Girl, Choice=0):
                                 ch_v "I guess."
                         call change_Girl_stat(Girl, "obedience", 200, 5)
                     "You get back to it."
-                    $ Girl.blushing = "blush1"
+                    $ Girl.blushing = "_blush1"
                 "Continue" if "spotted" in Girl.recent_history:
                     if Choice == "C":
                         call change_Girl_stat(Girl, "obedience", 200, 4)
@@ -5753,7 +5359,7 @@ label Girl_TightsRipped(Girl=0, Count=0):
                     $ Count = 3 if not approval_check(Girl, 1400) else Count
 
         if Count != 3:
-            $ Girl.add_word(1,"ripped","ripped")
+            $ Girl.add_word(1,"ripped", "ripped")
 
         if Count == 2:
 
@@ -5822,7 +5428,7 @@ label Girl_TightsRipped(Girl=0, Count=0):
             elif Girl == StormX:
                 $ Girl.change_face("bemused", 0)
                 ch_s "I really probably should change."
-            $ Girl.blushing = "blush1"
+            $ Girl.blushing = "_blush1"
             call remove_Girl(Girl)
             $ Girl.change_outfit()
 

@@ -513,7 +513,7 @@ label Kitty_Jumped:
         "Could you maybe just ask instead?" if "chill" not in KittyX.traits:
             if KittyX.thirst >= 60 and not approval_check(KittyX, 1500, "LO", taboo_modifier=0):
 
-                $ KittyX.change_face("surprised",2)
+                $ KittyX.change_face("surprised", 2)
                 if "chill" not in KittyX.daily_history:
                     call change_Girl_stat(KittyX, "obedience", 90, -2)
                 ch_k "Well- Well maybe spend some more time with me!"
@@ -742,7 +742,7 @@ label Kitty_SexChat:
                             if KittyX.player_favorite_action == "fondle":
                                 call change_Girl_stat(KittyX, "lust", 80, 3)
                                 ch_k "Yeah, I think we're clear on that. . ."
-                            elif KittyX.favorite_action in ("hotdog","suck_breasts","fondle_breasts","fondle_thighs"):
+                            elif KittyX.favorite_action in ("hotdog", "suck_breasts", "fondle_breasts", "fondle_thighs"):
                                 call change_Girl_stat(KittyX, "love", 90, 5)
                                 call change_Girl_stat(KittyX, "lust", 80, 5)
                                 ch_k "I love when you touch me. . ."
@@ -959,7 +959,7 @@ label Kitty_SexChat:
 
 
 
-label Kitty_Chitchat(O=0, Options=["default","default","default"]):
+label Kitty_Chitchat(O=0, Options=["default", "default", "default"]):
     $ round -= 3 if round > 3 else (round-1)
     if O:
         $ Options = [O]
@@ -980,7 +980,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
             return
         if Player.location != "bg_restaurant" and Player.location != "bg_halloween" and (not taboo or approval_check(KittyX, 800, "I")):
             if KittyX.location == Player.location and KittyX.thirst >= 30 and "refused" not in KittyX.daily_history and "quicksex" not in KittyX.daily_history:
-                $ Girl.change_face("smile",2,brows = "sad")
+                $ Girl.change_face("smile", 2,brows = "sad")
                 ch_k "Hey, um . . . did you want to. . ."
                 ch_k ". . . sex?"
                 call Quick_Sex (KittyX)
@@ -1189,9 +1189,9 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
                     elif approval_check(KittyX, 800):
                         call change_Girl_stat(KittyX, "obedience", 60, 5)
                         call change_Girl_stat(KittyX, "inhibition", 50, 5)
-                        $ KittyX.change_face("perplexed",2)
+                        $ KittyX.change_face("perplexed", 2)
                         ch_k "Wha. . . um. . . okay?"
-                        $ KittyX.blushing = "blush1"
+                        $ KittyX.blushing = "_blush1"
                     else:
                         call change_Girl_stat(KittyX, "love", 50, -10)
                         call change_Girl_stat(KittyX, "love", 80, -10)
@@ -1212,7 +1212,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
         menu:
             extend ""
             "Yeah? Did you like them?":
-                $ KittyX.change_face("sly",2)
+                $ KittyX.change_face("sly", 2)
                 ch_k "They were[KittyX.like]. . .{i}interesting{/i}."
             "Good. You looked like you could use to learn a thing or two from them.":
                 call change_Girl_stat(KittyX, "love", 90, -3)
@@ -1220,27 +1220,27 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
                 call change_Girl_stat(KittyX, "inhibition", 50, 5)
                 $ KittyX.change_face("angry")
                 ch_k "Guess {i}you'll{/i} never find out, huh?"
-        $ KittyX.blushing = "blush1"
+        $ KittyX.blushing = "_blush1"
         $ KittyX.had_chat.append("book")
 
     elif Options[0] == "lingerie":
 
-        $ KittyX.change_face("sly",2)
+        $ KittyX.change_face("sly", 2)
         ch_k "[KittyX.player_petname], I wanted to thank you again for the. . .{i}stuff{/i} you bought me. They're so cute!"
-        $ KittyX.blushing = "blush1"
+        $ KittyX.blushing = "_blush1"
         $ KittyX.had_chat.append("lingerie")
 
     elif Options[0] == "handy":
 
-        $ KittyX.change_face("sly",2)
+        $ KittyX.change_face("sly", 2)
         ch_k "I was just thinking about how I[KittyX.like]stroked your cock the other day. . ."
         ch_k "I loved the expression on your face. . .knowing I could[KittyX.like]make you {i}feel{/i} like that."
-        $ KittyX.blushing = "blush1"
+        $ KittyX.blushing = "_blush1"
 
     elif Options[0] == "blowjob":
         if "blowjob" not in KittyX.had_chat:
 
-            $ KittyX.change_face("sly",2)
+            $ KittyX.change_face("sly", 2)
             ch_k "So. . .uhm, be honest with me, [KittyX.player_petname]?"
             ch_k "When I gave you head. . . was it any good?"
             ch_k "I kinda had a hard time getting all of you into my mouth."
@@ -1266,9 +1266,9 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
                 "I guess. If you're into weird sounds and too much teeth. Spoiler, I'm not.":
                     call change_Girl_stat(KittyX, "love", 90, -10)
                     call change_Girl_stat(KittyX, "obedience", 60, 10)
-                    $ KittyX.change_face("angry",2)
+                    $ KittyX.change_face("angry", 2)
                     ch_k "Guess you're gonna have to[KittyX.like]figure out a way to get it to suck itself then from now on. . .{i}jerk{/i}."
-            $ KittyX.blushing = "blush1"
+            $ KittyX.blushing = "_blush1"
             $ KittyX.had_chat.append("blowjob")
         else:
             $ line = renpy.random.choice(["You know, I kinda like how you taste.",
@@ -1291,9 +1291,9 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
     elif Options[0] == "facial":
 
         ch_k "Hey. . .this is gonna sound kinda[KittyX.like]weird, but. . ."
-        $ KittyX.change_face("sexy",2)
+        $ KittyX.change_face("sexy", 2)
         ch_k "I feel so {i}sexy{/i} when you cum on my face."
-        $ KittyX.blushing = "blush1"
+        $ KittyX.blushing = "_blush1"
 
     elif Options[0] == "sleepover":
 
@@ -1308,18 +1308,18 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
     elif Options[0] == "sexed":
 
         ch_k "So. . .I want you to know something. . ."
-        $ KittyX.change_face("sexy",2)
+        $ KittyX.change_face("sexy", 2)
         ch_k ". . .[KittyX.Like]every time I masturbate. . ."
         ch_k "I think about how it felt, with you inside of me."
-        $ KittyX.blushing = "blush1"
+        $ KittyX.blushing = "_blush1"
 
     elif Options[0] == "anal":
 
-        $ KittyX.change_face("sly",2)
+        $ KittyX.change_face("sly", 2)
         ch_k "Y'know. . .after the other night, I'm kinda having trouble[KittyX.like]sitting down."
-        $ KittyX.change_face("sexy",2)
+        $ KittyX.change_face("sexy", 2)
         ch_k "{i}Totally{/i} worth it, though."
-        $ KittyX.blushing = "blush1"
+        $ KittyX.blushing = "_blush1"
     elif Options[0] == "kappa":
 
         ch_k "You know how Xavier[KittyX.like]caught us last time?"
@@ -1388,20 +1388,20 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
 
 
     elif Options[0] == "seenpeen":
-        $ KittyX.change_face("sly",2)
+        $ KittyX.change_face("sly", 2)
         ch_k "Maybe I didn't mention it before, but. . ."
         ch_k "That cock of yours is. . . impressive."
         $ KittyX.change_face("bemused", 1)
         call change_Girl_stat(KittyX, "love", 90, 3)
         $ KittyX.history.remove("seenpeen")
     elif Options[0] == "topless":
-        $ KittyX.change_face("bemused",2,eyes = "side")
+        $ KittyX.change_face("bemused", 2,eyes = "side")
         ch_k "Hey, when you saw me. . . topless earlier, you didn't have much to say. . ."
         ch_k "What'd you think?"
         call Kitty_First_TMenu
         $ KittyX.history.remove("topless")
     elif Options[0] == "bottomless":
-        $ KittyX.change_face("bemused",2,eyes = "side")
+        $ KittyX.change_face("bemused", 2,eyes = "side")
         ch_k "Hey, when you saw my. . . pussy earlier. . ."
         ch_k "You didn't say much. . . "
         ch_k "What'd you think?"

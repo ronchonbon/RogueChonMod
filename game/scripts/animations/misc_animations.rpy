@@ -174,13 +174,13 @@ layeredimage Xavier_sprite:
         "images/NPC/Xavier_body.png"
 
     always:
-        "images/NPC/Xavier_brows[Xavier_brows].png"
+        "images/NPC/Xavier_brows_[Xavier_brows].png"
 
     always:
-        "images/NPC/Xavier_mouth[Xavier_mouth].png"
+        "images/NPC/Xavier_mouth_[Xavier_mouth].png"
 
     if Xavier_eyes == "closed":
-        "images/NPC/Xavier_eyes[Xavier_eyes].png"
+        "images/NPC/Xavier_eyes_[Xavier_eyes].png"
     else:
         "Xavier_blinking"
 
@@ -190,7 +190,7 @@ layeredimage Xavier_sprite:
     anchor (0.5, 0.0) offset (60, 355) zoom 0.7
 
 image Xavier_blinking:
-    "images/NPC/Xavier_eyes[Xavier_eyes].png"
+    "images/NPC/Xavier_eyes_[Xavier_eyes].png"
     choice:
         3.5
     choice:
@@ -275,7 +275,7 @@ image PhoneRG:
 image PhoneScreen:
     contains:
         ConditionSwitch(
-            "focused_Girl.location == 'bg_rogue'","PhoneRG",
+            "focused_Girl.location == 'bg_rogue'", "PhoneRG",
             "True", "[focused_Girl.location]")
 
         offset (-800,-300)
@@ -296,9 +296,9 @@ image dress_screen:
         "images/dress_screen.png"
     contains:
 
-        AlphaMask("images/dress_screen_shadow.png","dress_screen_shadow")
+        AlphaMask("images/dress_screen_shadow.png", "dress_screen_shadow")
     zoom 1
-    offset (375,225)
+    offset (375, 225)
 
 image dress_screen_shadow:
 
@@ -387,7 +387,7 @@ transform Vibrate():
 
 
 image UI_Vibrator = LiveComposite(
-        (224,224),
+        (224, 224),
         (0, 0), ConditionSwitch(
             "not Vibration", "UI_VibA",
             "Vibration", At("UI_VibB", Vibrate()),

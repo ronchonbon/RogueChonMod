@@ -369,7 +369,7 @@ layeredimage Storm_blowjob_hair_back:
     anchor (0.5, 0.5)
 
 layeredimage Storm_blowjob_head:
-    if StormX.blushing == "blush2":
+    if StormX.blushing == "_blush2":
         "images/Storm_blowjob/Storm_blowjob_head_blush.png"
     else:
         "images/Storm_blowjob/Storm_blowjob_head.png"

@@ -10,14 +10,14 @@ label out_of_action_lines(Girl):
             "I'm rather tired right now, " + Girl.player_petname + " rain check?"]
     elif Girl == LauraX:
         $ lines = ["Maybe in a minute, I need a break.",
-            "Maybe later, " + Girl.player_petname + ""]
+            "Maybe later, " + Girl.player_petname + "_"]
     elif Girl == JeanX:
         $ lines = ["Gimme a minute, k?"]
     elif Girl == StormX:
         $ lines = ["I am sorry, " + Girl.player_petname + " I need to take a break."]
     elif Girl == JubesX:
         $ lines = ["I could use a short break first.",
-            "Maybe later, " + Girl.player_petname + ""]
+            "Maybe later, " + Girl.player_petname + "_"]
 
     $ line = renpy.random.choice(lines)
 
@@ -115,19 +115,19 @@ label generic_exit_sex_menu_lines(Girl):
 
 label exit_sex_menu_experienced_first_round_lines(Girl):
     if Girl == RogueX:
-        $ lines = ["Are you sure, " + Girl.player_petname + "? I could really use some company."]
+        $ lines = ["Are you sure, " + Girl.player_petname + "_? I could really use some company."]
     elif Girl == KittyX:
-        $ lines = ["Are you sure, " + Girl.player_petname + "? I wasn't exactly. . . finished."]
+        $ lines = ["Are you sure, " + Girl.player_petname + "_? I wasn't exactly. . . finished."]
     elif Girl == EmmaX:
-        $ lines = ["Are you certain, " + Girl.player_petname + "? Are you perhaps forgetting something?"]
+        $ lines = ["Are you certain, " + Girl.player_petname + "_? Are you perhaps forgetting something?"]
     elif Girl == LauraX:
-        $ lines = ["Are you sure, " + Girl.player_petname + "?{p}I could go another round. . . or two. . ."]
+        $ lines = ["Are you sure, " + Girl.player_petname + "_?{p}I could go another round. . . or two. . ."]
     elif Girl == JeanX:
-        $ lines = ["Are you sure, " + Girl.player_petname + "?{p}I could go another round. . . or two. . ."]
+        $ lines = ["Are you sure, " + Girl.player_petname + "_?{p}I could go another round. . . or two. . ."]
     elif Girl == StormX:
-        $ lines = ["Are you certain, " + Girl.player_petname + "? Are you perhaps forgetting something?"]
+        $ lines = ["Are you certain, " + Girl.player_petname + "_? Are you perhaps forgetting something?"]
     elif Girl == JubesX:
-        $ lines = ["Are you sure, " + Girl.player_petname + "?{p}I could keep going. . ."]
+        $ lines = ["Are you sure, " + Girl.player_petname + "_?{p}I could keep going. . ."]
 
     $ line = renpy.random.choice(lines)
 
@@ -159,7 +159,7 @@ label exit_sex_menu_experienced_addicted_lines(Girl):
 
 label exit_sex_menu_experienced_lines(Girl):
     if Girl == RogueX:
-        $ lines = ["Don't leave me hang'in, " + Girl.player_petname + "."]
+        $ lines = ["Don't leave me hang'in, " + Girl.player_petname + "_."]
     elif Girl == KittyX:
         $ lines = ["I still need some more attention."]
     elif Girl == EmmaX:
@@ -293,7 +293,7 @@ label exit_sex_menu_out_of_semen_lines(Girl):
     if Girl == RogueX:
         $ lines = ["Huh, can't be helped, I s'pose."]
     elif Girl == KittyX:
-        $ lines = ["Yeah, but " + Girl.like + ". . ."]
+        $ lines = ["Yeah, but " + Girl.like + "_. . ."]
     elif Girl == EmmaX:
         $ lines = ["I suppose that can't be helped. . ."]
     elif Girl == LauraX:
@@ -357,17 +357,17 @@ label exit_sex_menu_more_than_two_rounds_lines(Girl):
 
 label exit_sex_menu_girl_also_tired_lines(Girl):
     if Girl == RogueX:
-        $ lines = ["I guess I'm a bit tuckered out too, " + Girl.player_petname + ". I guess we can take a breather."]
+        $ lines = ["I guess I'm a bit tuckered out too, " + Girl.player_petname + "_. I guess we can take a breather."]
     elif Girl == KittyX:
-        $ lines = ["I guess I'm kinda tired too, " + Girl.player_petname + ". We can take a break. . .{p}. . .for now."]
+        $ lines = ["I guess I'm kinda tired too, " + Girl.player_petname + "_. We can take a break. . .{p}. . .for now."]
     elif Girl == EmmaX:
-        $ lines = ["I suppose I'm tired as well, " + Girl.player_petname + ". We can take a breather. . ."]
+        $ lines = ["I suppose I'm tired as well, " + Girl.player_petname + "_. We can take a breather. . ."]
     elif Girl == LauraX:
         $ lines = ["Yeah, you look like you've had enough. We can take a break. . .{p}}. . .for now."]
     elif Girl == JeanX:
         $ lines = ["Ok, sounds good. . ."]
     elif Girl == StormX:
-        $ lines = ["I could use some rest as well, " + Girl.player_petname + "."]
+        $ lines = ["I could use some rest as well, " + Girl.player_petname + "_."]
     elif Girl == JubesX:
         $ lines = ["Sure, I guess we can take a little break. . ."]
 
@@ -411,8 +411,8 @@ label end_of_action_lines(Girl, action):
             $ lines.append("Ok, I gotta rest my jaw for a minute. . .")
     elif Girl == EmmaX:
         $ lines = ["We need to stop for a moment, let me catch my breath.",
-            "All right, " + Girl.player_petname + ", that's plenty for now.",
-            "Ok, " + Girl.player_petname + ", that's enough of that for now.",
+            "All right, " + Girl.player_petname + "_, that's plenty for now.",
+            "Ok, " + Girl.player_petname + "_, that's enough of that for now.",
             "That's probably enough of that.",
             "Ok, that's enough, for now. . ."]
 
@@ -435,7 +435,7 @@ label end_of_action_lines(Girl, action):
             "That is enough of that."]
     elif Girl == JubesX:
         $ lines = ["Ok, that's it, I need a break.",
-            "" + Girl.player_petname + ", that will be enough for now."]
+            "" + Girl.player_petname + "_, that will be enough for now."]
 
     Girl.voice "[line]"
 
@@ -445,7 +445,7 @@ label ten_rounds_left_lines(Girl, action):
     if Girl == RogueX:
         $ lines = ["You might want to wrap this up, it's getting late."]
     elif Girl == KittyX:
-        $ lines = ["It's" + Girl.Like + "getting kinda late.",
+        $ lines = ["It's" + Girl.Like + "_getting kinda late.",
             "It's kind of time to get moving.",
             "We might want to wrap this up, it's getting late."]
     elif Girl == EmmaX:
@@ -466,7 +466,7 @@ label ten_rounds_left_lines(Girl, action):
     elif Girl == JeanX:
         $ lines = ["Wow, look at the time. . ."]
     elif Girl == StormX:
-        $ lines = ["It is getting late, " + Girl.player_petname + ". . ."]
+        $ lines = ["It is getting late, " + Girl.player_petname + "_. . ."]
 
         if actions in active_actions:
             $ lines.append("You might want to consider finishing. . .")
@@ -488,7 +488,7 @@ label five_rounds_left_lines(Girl, action):
         $ lines = ["Seriously, it'll be time to stop soon."]
     elif Girl == KittyX:
         $ lines = ["We should wrap this up.",
-            "For real" + Girl.like + "time's up.",
+            "For real" + Girl.like + "_time's up.",
             "Seriously, it'll be time to stop soon."]
     elif Girl == EmmaX:
         $ lines = ["We should take a break soon.",
@@ -499,12 +499,12 @@ label five_rounds_left_lines(Girl, action):
         if action == "masturbation":
             $ lines.append("Ung, I'm almost finished. . .")
     elif Girl == LauraX:
-        $ lines = ["Tick tock, " + Girl.player_petname + "."]
+        $ lines = ["Tick tock, " + Girl.player_petname + "_."]
 
         if action == "masturbation":
             $ lines.append("Five minutes, maybe.")
     elif Girl == JeanX:
-        $ lines = ["We should probably wrap this up, " + Girl.player_petname + ".",
+        $ lines = ["We should probably wrap this up, " + Girl.player_petname + "_.",
             "Ok, can we take a break?"]
     elif Girl == StormX:
         $ lines = ["We should take a break soon.",
@@ -572,47 +572,47 @@ label tired_lines(Girl, action):
 
 label auto_rejected_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["Ah, ah, Just keep doing what you were doing, " + Girl.player_petname + ".",
-            "Hey, just keep doing what you were doing, " + Girl.player_petname + ".",
-            "Oh! No, no thank you, " + Girl.player_petname + ".",
+        $ lines = ["Ah, ah, Just keep doing what you were doing, " + Girl.player_petname + "_.",
+            "Hey, just keep doing what you were doing, " + Girl.player_petname + "_.",
+            "Oh! No, no thank you, " + Girl.player_petname + "_.",
             "Um, no, I'm not really. . . don't."]
 
         if action in hand_actions:
-            $ lines.append("Hands off the merchandise, " + Girl.player_petname + ".")
-            $ lines.append("Hands off, " + Girl.player_petname + ".")
+            $ lines.append("Hands off the merchandise, " + Girl.player_petname + "_.")
+            $ lines.append("Hands off, " + Girl.player_petname + "_.")
 
         if action in finger_actions:
-            $ lines.append("Keep it out of there, " + Girl.player_petname + ".")
-            $ lines.append("Keep it outside, " + Girl.player_petname + ".")
+            $ lines.append("Keep it out of there, " + Girl.player_petname + "_.")
+            $ lines.append("Keep it outside, " + Girl.player_petname + "_.")
     elif Girl == KittyX:
-        $ lines = ["Nuh-uh, " + Girl.player_petname + ", get back to what you were doing.",
+        $ lines = ["Nuh-uh, " + Girl.player_petname + "_, get back to what you were doing.",
             "Oooo! Um, no, no thanks. No. . .",
-            "Whoa, back off, " + Girl.player_petname + ".",
+            "Whoa, back off, " + Girl.player_petname + "_.",
             "Um, don't do that. . .",
             "Um, what do you think you're doing?",
-            "Hmm, kinda rude, " + Girl.player_petname + "."]
+            "Hmm, kinda rude, " + Girl.player_petname + "_."]
 
         if action in hand_actions:
-            $ lines.append("Hands off, " + Girl.player_petname + ".")
+            $ lines.append("Hands off, " + Girl.player_petname + "_.")
 
         if action in ass_actions:
-            $ lines.append("Um" + Girl.like + "what are you doing back there?!")
+            $ lines.append("Um" + Girl.like + "_what are you doing back there?!")
 
         if action in dildo_actions:
             $ lines.append("Hey, what are you planning to do with that?!")
 
         if action in below_actions:
-            $ lines.append("Heh, keep it above the belt, " + Girl.player_petname + ".")
+            $ lines.append("Heh, keep it above the belt, " + Girl.player_petname + "_.")
 
         if action in insertion_actions:
             $ lines.append("Um, no take that out.")
     elif Girl == EmmaX:
-        $ lines = ["Whoa, back off, " + Girl.player_petname + ".",
-            "" + Girl.player_petname + "! Not now. . .",
+        $ lines = ["Whoa, back off, " + Girl.player_petname + "_.",
+            "" + Girl.player_petname + "_! Not now. . .",
             "Do you really think you can handle that?"]
 
         if action in hand_actions:
-            $ lines.append("Hands off, " + Girl.player_petname + ".")
+            $ lines.append("Hands off, " + Girl.player_petname + "_.")
 
         if action in finger_actions:
             $ lines.append("Careful what you put in there, you may not get it back.")
@@ -630,24 +630,24 @@ label auto_rejected_lines(Girl, action):
             $ lines.append("Excuse yourself, what are you planning to do with that?!")
 
         if action in below_actions:
-            $ lines.append("Perhaps we keep it above the waist, " + Girl.player_petname + ".")
+            $ lines.append("Perhaps we keep it above the waist, " + Girl.player_petname + "_.")
 
         if action == "hotdog":
-            $ lines.append("You might want to take a step back, " + Girl.player_petname + "?")
+            $ lines.append("You might want to take a step back, " + Girl.player_petname + "_?")
     elif Girl == LauraX:
-        $ lines = ["Roll it back, " + Girl.player_petname + ". . .",
-            "Whoa, back off, " + Girl.player_petname + ".",
-            "" + Girl.player_petname + "! No. . ."]
+        $ lines = ["Roll it back, " + Girl.player_petname + "_. . .",
+            "Whoa, back off, " + Girl.player_petname + "_.",
+            "" + Girl.player_petname + "_! No. . ."]
 
         if action in hand_actions:
             $ lines.append("Watch your hands, or lose them.")
-            $ lines.append("Hands off, " + Girl.player_petname + ".")
+            $ lines.append("Hands off, " + Girl.player_petname + "_.")
 
         if action in dildo_actions:
             $ lines.append("Hey, what are you planning to do with that?!")
 
         if action in below_actions:
-            $ lines.append("Maybe we keep it above the waist, " + Girl.player_petname + ".")
+            $ lines.append("Maybe we keep it above the waist, " + Girl.player_petname + "_.")
 
         if action in anal_insertion_actions:
             $ lines.append("Oh? A backdoor intruder?")
@@ -659,18 +659,18 @@ label auto_rejected_lines(Girl, action):
             $ lines.append("Oh, taking it all the way, are we?")
 
         if action == "hotdog":
-            $ lines.append("You might want to take a step back, " + Girl.player_petname + "?")
+            $ lines.append("You might want to take a step back, " + Girl.player_petname + "_?")
     elif Girl == JeanX:
-        $ lines = ["Not so fast, " + Girl.player_petname + ". . .",
-            "Hmmm, not yet, " + Girl.player_petname + ".",
-            "Ooo! Not right now, " + Girl.player_petname + ".",
-            "Whoa there, " + Girl.player_petname + "!"]
+        $ lines = ["Not so fast, " + Girl.player_petname + "_. . .",
+            "Hmmm, not yet, " + Girl.player_petname + "_.",
+            "Ooo! Not right now, " + Girl.player_petname + "_.",
+            "Whoa there, " + Girl.player_petname + "_!"]
 
         if action in dildo_actions:
             $ lines.append("Hey, what are you planning to do with that?!")
 
         if action in below_actions:
-            $ lines.append("Keep it above the waist, " + Girl.player_petname + ".")
+            $ lines.append("Keep it above the waist, " + Girl.player_petname + "_.")
 
         if action in insertion_actions:
             $ lines.append("Just sticking it in?")
@@ -679,20 +679,20 @@ label auto_rejected_lines(Girl, action):
             $ lines.append("Sticking in the back?")
 
         if action == "hotdog":
-            $ lines.append("Little close there, " + Girl.player_petname + "?")
+            $ lines.append("Little close there, " + Girl.player_petname + "_?")
     elif Girl == StormX:
         $ lines = ["Probably not, right now. . .",
             "Show some self control. . .",
             "Perhaps show some control. . .",
-            "You go too far, " + Girl.player_petname + ".",
-            "" + Girl.player_petname + "! Not now. . .",
+            "You go too far, " + Girl.player_petname + "_.",
+            "" + Girl.player_petname + "_! Not now. . .",
             "Are you certain that is what you want?"]
 
         if action in finger_actions:
             $ lines.append("Careful what you put in there, you may not get it back.")
 
         if action in hand_actions:
-            $ lines.append("Release me, " + Girl.player_petname + ".")
+            $ lines.append("Release me, " + Girl.player_petname + "_.")
 
         if action in dildo_actions:
             $ lines.append("Excuse yourself, what are you planning to do with that?!")
@@ -701,24 +701,24 @@ label auto_rejected_lines(Girl, action):
             $ lines.append("Excuse me, what are you aiming at?")
 
         if action in below_actions:
-            $ lines.append("Perhaps we keep it above the waist, " + Girl.player_petname + ".")
+            $ lines.append("Perhaps we keep it above the waist, " + Girl.player_petname + "_.")
 
         if action == "eat_pussy":
             $ lines.append("I appreciate the intent, but this is not the time for it.")
 
         if action == "hotdog":
-            $ lines.append("You are rather close, " + Girl.player_petname + ". . .")
+            $ lines.append("You are rather close, " + Girl.player_petname + "_. . .")
     elif Girl == JubesX:
-        $ lines = ["Cool your jets, " + Girl.player_petname + ". . .",
-            "Whoa, back off, " + Girl.player_petname + ".",
-            "" + Girl.player_petname + "! No. . ."]
+        $ lines = ["Cool your jets, " + Girl.player_petname + "_. . .",
+            "Whoa, back off, " + Girl.player_petname + "_.",
+            "" + Girl.player_petname + "_! No. . ."]
 
         if action in hand_actions:
             $ lines.append("Watch your hands, or lose them.")
-            $ lines.append("Hands off, " + Girl.player_petname + ".")
+            $ lines.append("Hands off, " + Girl.player_petname + "_.")
 
         if action in below_actions:
-            $ lines.append("Maybe we keep it above the waist, " + Girl.player_petname + ".")
+            $ lines.append("Maybe we keep it above the waist, " + Girl.player_petname + "_.")
 
         if action == "eat_pussy":
             $ lines.append("Hey, good instincts, but maybe hold off?")
@@ -863,7 +863,7 @@ label recent_action_lines(Girl, action):
             $ lines.append("Mmm, again? [yawns]")
 
         if action in sex_actions:
-            $ lines.append("Again? " + Girl.player_petname + ", you're insatiable!")
+            $ lines.append("Again? " + Girl.player_petname + "_, you're insatiable!")
 
         if action in anal_insertion_actions:
             $ lines.append("I am warmed up. . .")
@@ -923,7 +923,7 @@ label recent_action_lines(Girl, action):
             $ lines.append("I do not know if I have it in me. . .")
 
         if action in sex_actions:
-            $ lines.append("Again? " + Girl.player_petname + ", you are a lion!")
+            $ lines.append("Again? " + Girl.player_petname + "_, you are a lion!")
 
         if action in anal_insertion_actions:
             $ lines.append("I am properly stretched out. . .")
@@ -943,9 +943,9 @@ label recent_action_lines(Girl, action):
 label taboo_action_rejected_lines(Girl, action):
     if Girl == RogueX:
         $ lines = ["I really don't think this is the right place for that!",
-            "" + Girl.player_petname + "! Not in public!",
-            "This just really isn't the time or place, " + Girl.player_petname + "!",
-            "Not in such an exposed place, " + Girl.player_petname + ".",
+            "" + Girl.player_petname + "_! Not in public!",
+            "This just really isn't the time or place, " + Girl.player_petname + "_!",
+            "Not in such an exposed place, " + Girl.player_petname + "_.",
             "Not here!",
             "I'd be a bit embarassed doing that here."]
 
@@ -961,15 +961,15 @@ label taboo_action_rejected_lines(Girl, action):
             $ lines.append("I can't do that here!")
     elif Girl == KittyX:
         $ lines = ["I don't like being so. . . exposed.",
-            "Time and place, " + Girl.player_petname + "!",
-            "This just really isn't the time or place, " + Girl.player_petname + "!",
-            "" + Girl.player_petname + "! Not here!",
-            "" + Girl.player_petname + "! Time and place!",
+            "Time and place, " + Girl.player_petname + "_!",
+            "This just really isn't the time or place, " + Girl.player_petname + "_!",
+            "" + Girl.player_petname + "_! Not here!",
+            "" + Girl.player_petname + "_! Time and place!",
             "This is way too exposed!",
             "Not here!",
             "Certainly not here!",
             "Not here, not anywhere near here.",
-            "" + Girl.Like + "not here though?"]
+            "" + Girl.Like + "_not here though?"]
 
         if action in cock_actions:
             $ lines.append("You're being ridiculous. That? Here?!")
@@ -1073,7 +1073,7 @@ label taboo_lines(Girl, action):
             "I told you this is too public!",
             "I said not in public!",
             "I already told you this is too public!",
-            "I{i}just{/i}" + Girl.like + "told you, not in public!"]
+            "I{i}just{/i}" + Girl.like + "_told you, not in public!"]
 
         if action in passive_actions:
             $ lines.append("I already told you that I wouldn't do that out here!")
@@ -1081,7 +1081,7 @@ label taboo_lines(Girl, action):
         if action in dildo_actions:
             $ lines.append("Stop swinging that thing around in public!")
     elif Girl == EmmaX:
-        $ lines = ["As I said, not here, " + Girl.player_petname + ".",
+        $ lines = ["As I said, not here, " + Girl.player_petname + "_.",
             "This is not an appropriate place for that.",
             "I told you this is too public!",
             "I told you, not in public!",
@@ -1094,7 +1094,7 @@ label taboo_lines(Girl, action):
         if action in dildo_actions:
             $ lines.append("Stop showing that thing around in public!")
     elif Girl == LauraX:
-        $ lines = ["I told you, not here, " + Girl.player_petname + ".",
+        $ lines = ["I told you, not here, " + Girl.player_petname + "_.",
             "I said not in public.",
             "This is just way too exposed!",
             "Like I told you, too public!",
@@ -1108,7 +1108,7 @@ label taboo_lines(Girl, action):
         if action in dildo_actions:
             $ lines.append("Stop swinging that thing around in public!")
     elif Girl == JeanX:
-        $ lines = ["I told you. . . not here, " + Girl.player_petname + ".",
+        $ lines = ["I told you. . . not here, " + Girl.player_petname + "_.",
             "I told you I wasn't comfortable in public. . .",
             "I don't want to show off the goods like that!",
             "Like I said, too public!",
@@ -1119,8 +1119,8 @@ label taboo_lines(Girl, action):
         if action in dildo_actions:
             $ lines.append("Stop swinging that thing around in public!")
     elif Girl == StormX:
-        $ lines = ["This area is too public, " + Girl.player_petname + ".",
-            "As I said, not here, " + Girl.player_petname + ".",
+        $ lines = ["This area is too public, " + Girl.player_petname + "_.",
+            "As I said, not here, " + Girl.player_petname + "_.",
             "I was very clear, this is too public.",
             "This is not an appropriate place for that.",
             "I told you this is too public!",
@@ -1134,7 +1134,7 @@ label taboo_lines(Girl, action):
         if action in dildo_actions:
             $ lines.append("Stop showing that thing around in public!")
     elif Girl == JubesX:
-        $ lines = ["I told you, not here, " + Girl.player_petname + ".",
+        $ lines = ["I told you, not here, " + Girl.player_petname + "_.",
             "I said not in public."]
 
     $ line = renpy.random.choice(lines)
@@ -1145,81 +1145,81 @@ label taboo_lines(Girl, action):
 
 label action_not_done_yet_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["I just don't think I'm ready yet, " + Girl.player_petname + ". . .",
+        $ lines = ["I just don't think I'm ready yet, " + Girl.player_petname + "_. . .",
             "I. . . don't think that's. . .",
-            "That's. . . a little intimate, " + Girl.player_petname + ".",
-            "Not now, " + Girl.player_petname + ".",
-            "Let's not, ok " + Girl.player_petname + "?",
-            "Not yet, " + Girl.player_petname + ". . .",
+            "That's. . . a little intimate, " + Girl.player_petname + "_.",
+            "Not now, " + Girl.player_petname + "_.",
+            "Let's not, ok " + Girl.player_petname + "_?",
+            "Not yet, " + Girl.player_petname + "_. . .",
             "Oh, um, no, I'm not really comfortable with that. . .",
-            "I'm not really up for that, " + Girl.player_petname + ". . .",
-            ". . . well I don't know about that, " + Girl.player_petname + ". . .",
-            "I just don't think I'm ready yet, " + Girl.player_petname + ". . .",
-            "I'm just not into that, " + Girl.player_petname + ". . .",
+            "I'm not really up for that, " + Girl.player_petname + "_. . .",
+            ". . . well I don't know about that, " + Girl.player_petname + "_. . .",
+            "I just don't think I'm ready yet, " + Girl.player_petname + "_. . .",
+            "I'm just not into that, " + Girl.player_petname + "_. . .",
             "I. . . don't think that's. . ."]
 
         if action in pussy_actions:
-            $ lines.append("Um, not down there, " + Girl.player_petname + ". . .")
+            $ lines.append("Um, not down there, " + Girl.player_petname + "_. . .")
 
         if action in ass_actions:
-            $ lines.append("That's kinda naughty, " + Girl.player_petname + ". . .")
+            $ lines.append("That's kinda naughty, " + Girl.player_petname + "_. . .")
 
         if action in dildo_actions:
-            $ lines.append("I'm just not into toys, " + Girl.player_petname + ". . .")
+            $ lines.append("I'm just not into toys, " + Girl.player_petname + "_. . .")
 
         if action == "handjob":
-            $ lines.append("I don't really want to touch it, " + Girl.player_petname + ". . .")
+            $ lines.append("I don't really want to touch it, " + Girl.player_petname + "_. . .")
 
         if action == "blowjob":
-            $ lines.append("I don't think I'd like the taste, " + Girl.player_petname + ". . .")
+            $ lines.append("I don't think I'd like the taste, " + Girl.player_petname + "_. . .")
     elif Girl == KittyX:
-        $ lines = ["I'm" + Girl.like + "not ready for that, " + Girl.player_petname + ". . .",
+        $ lines = ["I'm" + Girl.like + "_not ready for that, " + Girl.player_petname + "_. . .",
             "Not. . . yet. . . maybe later.",
-            "Not yet, " + Girl.player_petname + ". . .",
+            "Not yet, " + Girl.player_petname + "_. . .",
             "I. . . don't think that's. . .",
-            "I'm not really up for that, " + Girl.player_petname + ". . .",
-            "I don't know that I'm. . ." + Girl.like + "ready? . .",
-            "I don't know, " + Girl.player_petname + ". . .",
-            "That's kinda hot, " + Girl.player_petname + ". . ."]
+            "I'm not really up for that, " + Girl.player_petname + "_. . .",
+            "I don't know that I'm. . ." + Girl.like + "_ready? . .",
+            "I don't know, " + Girl.player_petname + "_. . .",
+            "That's kinda hot, " + Girl.player_petname + "_. . ."]
 
         if action in pussy_actions:
-            $ lines.append("Um, not down there, " + Girl.player_petname + ". . .")
+            $ lines.append("Um, not down there, " + Girl.player_petname + "_. . .")
 
         if action in dildo_actions:
-            $ lines.append("I'm just not into toys, " + Girl.player_petname + ". . .")
+            $ lines.append("I'm just not into toys, " + Girl.player_petname + "_. . .")
 
         if action in ["eat_pussy", "eat_ass"]:
-            $ lines.append("That's pretty intimate, " + Girl.player_petname + ". . .")
+            $ lines.append("That's pretty intimate, " + Girl.player_petname + "_. . .")
 
         if action in ["eat_ass", "dildo_ass", "anal"]:
-            $ lines.append("I don't know that I'm. . ." + Girl.like + "that kind of girl?")
+            $ lines.append("I don't know that I'm. . ." + Girl.like + "_that kind of girl?")
 
         if action == "masturbation":
             $ lines.append("That's. . . private? You know?")
 
         if action == "blowjob":
-            $ lines.append("I don't know about the taste, " + Girl.player_petname + ". . .")
+            $ lines.append("I don't know about the taste, " + Girl.player_petname + "_. . .")
     elif Girl == EmmaX:
         $ lines = ["Let's work up to that, perhaps. . .",
-            "Seems a bit forward, " + Girl.player_petname + ".",
-            "I don't think we're there yet, " + Girl.player_petname + ". . .",
-            "I'm not sure we're at that stage, " + Girl.player_petname + ". . .",
-            "Not yet, " + Girl.player_petname + ". . .",
-            "Are you sure though, " + Girl.player_petname + "?. . .",
-            "Perhaps later, " + Girl.player_petname + ". . .",
-            "I'm unsure, " + Girl.player_petname + ". . .",
+            "Seems a bit forward, " + Girl.player_petname + "_.",
+            "I don't think we're there yet, " + Girl.player_petname + "_. . .",
+            "I'm not sure we're at that stage, " + Girl.player_petname + "_. . .",
+            "Not yet, " + Girl.player_petname + "_. . .",
+            "Are you sure though, " + Girl.player_petname + "_?. . .",
+            "Perhaps later, " + Girl.player_petname + "_. . .",
+            "I'm unsure, " + Girl.player_petname + "_. . .",
             "I don't know that you're ready for that yet.",
-            "Hmm, that could be amusing, " + Girl.player_petname + ". . ."]
+            "Hmm, that could be amusing, " + Girl.player_petname + "_. . ."]
 
         if action in breast_actions:
-            $ lines.append("I highly doubt you could handle them, " + Girl.player_petname + ". . .")
+            $ lines.append("I highly doubt you could handle them, " + Girl.player_petname + "_. . .")
 
         if action in ass_actions:
             $ lines.append("That's really not my usual style. . .")
 
         if action in dildo_actions:
-            $ lines.append("I'm a bit past toys, " + Girl.player_petname + ". . .")
-            $ lines.append("I'm just not into toys, " + Girl.player_petname + ". . .")
+            $ lines.append("I'm a bit past toys, " + Girl.player_petname + "_. . .")
+            $ lines.append("I'm just not into toys, " + Girl.player_petname + "_. . .")
 
         if action in sex_actions:
             $ lines.append("I really doubt you understand what you're in for. . .")
@@ -1228,95 +1228,95 @@ label action_not_done_yet_lines(Girl, action):
             $ lines.append("I don't know that I want to perform.")
 
         if action == "blowjob":
-            $ lines.append("I'm not sure you're up to my usual tastes, " + Girl.player_petname + ". . .")
+            $ lines.append("I'm not sure you're up to my usual tastes, " + Girl.player_petname + "_. . .")
     elif Girl == LauraX:
-        $ lines = ["Look, I don't know if we're ready for that, " + Girl.player_petname + ". . .",
+        $ lines = ["Look, I don't know if we're ready for that, " + Girl.player_petname + "_. . .",
             "Let's work up to that maybe. .",
-            "Seems a bit aggressive, " + Girl.player_petname + ".",
-            "I don't think we're there yet, " + Girl.player_petname + ". . .",
-            "Not yet, " + Girl.player_petname + ". . .",
-            "Seriously, " + Girl.player_petname + ". . .",
-            "Eh, " + Girl.player_petname + ". . .",
+            "Seems a bit aggressive, " + Girl.player_petname + "_.",
+            "I don't think we're there yet, " + Girl.player_petname + "_. . .",
+            "Not yet, " + Girl.player_petname + "_. . .",
+            "Seriously, " + Girl.player_petname + "_. . .",
+            "Eh, " + Girl.player_petname + "_. . .",
             "I don't know that I want to do that right now.",
-            "Hmm, that could be amusing, " + Girl.player_petname + ". . ."]
+            "Hmm, that could be amusing, " + Girl.player_petname + "_. . ."]
 
         if action in ass_actions:
             $ lines.append("That's really not my style. . .")
-            $ lines.append("I'm not really into that, " + Girl.player_petname + ". . .")
+            $ lines.append("I'm not really into that, " + Girl.player_petname + "_. . .")
 
         if action in dildo_actions:
-            $ lines.append("I'm just not into toys, " + Girl.player_petname + ". . .")
+            $ lines.append("I'm just not into toys, " + Girl.player_petname + "_. . .")
 
         if action == "blowjob":
-            $ lines.append("I don't know if your taste will match your scent, " + Girl.player_petname + ". . .")
+            $ lines.append("I don't know if your taste will match your scent, " + Girl.player_petname + "_. . .")
 
         if action in ["sex", "anal"]:
             $ lines.append("Oh, you have no idea what you're in for. . .")
             $ lines.append("I don't know that you're ready for that yet.")
     elif Girl == JeanX:
         $ lines = ["Let's work up to that maybe. .",
-            "I don't think we're there yet, " + Girl.player_petname + ". . .",
-            "Mmmm, not right now, " + Girl.player_petname + ". . .",
-            "Not yet, " + Girl.player_petname + ". . .",
-            "Seriously, " + Girl.player_petname + ". . .",
+            "I don't think we're there yet, " + Girl.player_petname + "_. . .",
+            "Mmmm, not right now, " + Girl.player_petname + "_. . .",
+            "Not yet, " + Girl.player_petname + "_. . .",
+            "Seriously, " + Girl.player_petname + "_. . .",
             "Well. . .",
             "I don't know, it's kind of a bad time. . .",
-            "Hmm, that could be amusing, " + Girl.player_petname + ". . ."]
+            "Hmm, that could be amusing, " + Girl.player_petname + "_. . ."]
 
         if action in hand_actions:
-            $ lines.append("Look, don't touch, " + Girl.player_petname + ". . .")
+            $ lines.append("Look, don't touch, " + Girl.player_petname + "_. . .")
 
         if action in ass_actions:
             $ lines.append("That's really not my style. . .")
-            $ lines.append("Not really my thing, " + Girl.player_petname + ". . .")
+            $ lines.append("Not really my thing, " + Girl.player_petname + "_. . .")
 
         if action in dildo_actions:
-            $ lines.append("I'm just not into toys, " + Girl.player_petname + ". . .")
+            $ lines.append("I'm just not into toys, " + Girl.player_petname + "_. . .")
 
         if action == "blowjob":
-            $ lines.append("I have been wondering what you taste like, " + Girl.player_petname + ". . .")
+            $ lines.append("I have been wondering what you taste like, " + Girl.player_petname + "_. . .")
 
         if action in ["sex", "anal"]:
             $ lines.append("Oh, this would be interesting. . .")
             $ lines.append("I don't know that you're ready for that yet.")
     elif Girl == StormX:
-        $ lines = ["Perhaps some other time, " + Girl.player_petname + ". . .",
+        $ lines = ["Perhaps some other time, " + Girl.player_petname + "_. . .",
             "Mmm. . . that would. . . no. . .",
-            "Perhaps go slower, " + Girl.player_petname + ". . .",
-            "Oh, that would. . .perhaps not, " + Girl.player_petname + ". . .",
-            "I would rather not, " + Girl.player_petname + ". . .",
+            "Perhaps go slower, " + Girl.player_petname + "_. . .",
+            "Oh, that would. . .perhaps not, " + Girl.player_petname + "_. . .",
+            "I would rather not, " + Girl.player_petname + "_. . .",
             "I am unsure about that. . .",
             "I am unsure about this.",
-            "Are you certain, " + Girl.player_petname + "? . .",
-            "I am not sure I would enjoy this, " + Girl.player_petname + ". . .",
-            "I am unsure, " + Girl.player_petname + ". . .",
-            "Hmm, that could be entertaining, " + Girl.player_petname + ". . ."]
+            "Are you certain, " + Girl.player_petname + "_? . .",
+            "I am not sure I would enjoy this, " + Girl.player_petname + "_. . .",
+            "I am unsure, " + Girl.player_petname + "_. . .",
+            "Hmm, that could be entertaining, " + Girl.player_petname + "_. . ."]
 
         if action in dildo_actions:
-            $ lines.append("I'm a bit past toys, " + Girl.player_petname + ". . .")
-            $ lines.append("I'm just not into toys, " + Girl.player_petname + ". . .")
+            $ lines.append("I'm a bit past toys, " + Girl.player_petname + "_. . .")
+            $ lines.append("I'm just not into toys, " + Girl.player_petname + "_. . .")
 
         if action in active_actions:
-            $ lines.append("I would rather you did not, " + Girl.player_petname + ".")
+            $ lines.append("I would rather you did not, " + Girl.player_petname + "_.")
 
         if action in ["sex", "anal"]:
             $ lines.append("I seriously doubt that you understand what you would be in for. . .")
             $ lines.append("I do not know that you are yet prepared for that.")
     elif Girl == JubesX:
-        $ lines = ["Look, I don't know if we're ready for that, " + Girl.player_petname + ". . .",
+        $ lines = ["Look, I don't know if we're ready for that, " + Girl.player_petname + "_. . .",
             "Let's work up to that maybe. .",
             "I don't know, I'm not really into it right now.",
-            "Kinda forward, " + Girl.player_petname + ".",
-            "I don't think we're there yet, " + Girl.player_petname + ". . .",
-            "I'm not sure we're there yet, " + Girl.player_petname + ". . .",
-            "Not yet, " + Girl.player_petname + ". . .",
-            "Seriously, " + Girl.player_petname + ". . ."]
+            "Kinda forward, " + Girl.player_petname + "_.",
+            "I don't think we're there yet, " + Girl.player_petname + "_. . .",
+            "I'm not sure we're there yet, " + Girl.player_petname + "_. . .",
+            "Not yet, " + Girl.player_petname + "_. . .",
+            "Seriously, " + Girl.player_petname + "_. . ."]
 
         if action in ass_actions:
             $ lines.append("That's really not my style. . .")
 
         if action in dildo_actions:
-            $ lines.append("I'm just not into toys, " + Girl.player_petname + ". . .")
+            $ lines.append("I'm just not into toys, " + Girl.player_petname + "_. . .")
 
     $ line = renpy.random.choice(lines)
 
@@ -1326,28 +1326,28 @@ label action_not_done_yet_lines(Girl, action):
 
 label sorry_never_mind_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["Ok, no problem, " + Girl.player_petname + ".",
-            "Yeah, fine, " + Girl.player_petname + ".",
-            "Yeah, ok, " + Girl.player_petname + ".",
+        $ lines = ["Ok, no problem, " + Girl.player_petname + "_.",
+            "Yeah, fine, " + Girl.player_petname + "_.",
+            "Yeah, ok, " + Girl.player_petname + "_.",
             "Fine.",
             "No problem."]
     elif Girl == KittyX:
-        $ lines = ["It's cool, " + Girl.player_petname + ".",
+        $ lines = ["It's cool, " + Girl.player_petname + "_.",
             "No problem.",
-            "Yeah, ok, " + Girl.player_petname + ".",
-            "Aw, it's ok, " + Girl.player_petname + ".",
+            "Yeah, ok, " + Girl.player_petname + "_.",
+            "Aw, it's ok, " + Girl.player_petname + "_.",
             "Yeah.",
             "It's cool."]
     elif Girl == EmmaX:
-        $ lines = ["Don't concern yourself, " + Girl.player_petname + ".",
+        $ lines = ["Don't concern yourself, " + Girl.player_petname + "_.",
             "No offense taken. I get it.",
             "I appreciate your restraint.",
-            "I appreciate your restraint, " + Girl.player_petname + ".",
+            "I appreciate your restraint, " + Girl.player_petname + "_.",
             "Quite alright.",
-            "That's all right, " + Girl.player_petname + ".",
-            "No harm done, " + Girl.player_petname + ".",
-            "I thought as much, " + Girl.player_petname + ".",
-            "I'm sure, " + Girl.player_petname + ".",
+            "That's all right, " + Girl.player_petname + "_.",
+            "No harm done, " + Girl.player_petname + "_.",
+            "I thought as much, " + Girl.player_petname + "_.",
+            "I'm sure, " + Girl.player_petname + "_.",
             "Thank you.",
             "I can appreciate your. . . drive.",
             "I don't blame you for your. . . enthusiasm.",
@@ -1355,9 +1355,9 @@ label sorry_never_mind_lines(Girl, action):
     elif Girl == LauraX:
         $ lines = ["No worries.",
             "It's cool.",
-            "It's cool, " + Girl.player_petname + ".",
+            "It's cool, " + Girl.player_petname + "_.",
             "It's fine.",
-            "Yeah, ok, " + Girl.player_petname + ".",
+            "Yeah, ok, " + Girl.player_petname + "_.",
             "Cool.",
             "Sure, no problem.",
             "Well, you are persistent.",
@@ -1366,23 +1366,23 @@ label sorry_never_mind_lines(Girl, action):
     elif Girl == JeanX:
         $ lines = ["It's fine, I get it.",
             "It's fine.",
-            "Ok, fine, " + Girl.player_petname + ".",
+            "Ok, fine, " + Girl.player_petname + "_.",
             "Ok then.",
-            "Yeah, ok, " + Girl.player_petname + ".",
+            "Yeah, ok, " + Girl.player_petname + "_.",
             "Sure, it's fine.",
             "Keep trying. . .",
             "I get it.",
             "So long as you don't push it."]
     elif Girl == StormX:
-        $ lines = ["Don't concern yourself, " + Girl.player_petname + ".",
+        $ lines = ["Don't concern yourself, " + Girl.player_petname + "_.",
             "No offense taken. I get it.",
             "I appreciate your restraint.",
-            "I appreciate your restraint, " + Girl.player_petname + ".",
+            "I appreciate your restraint, " + Girl.player_petname + "_.",
             "I understand.",
-            "That is fine, " + Girl.player_petname + ".",
-            "It is fine, " + Girl.player_petname + ".",
-            "I thought as much, " + Girl.player_petname + ".",
-            "I'm sure, " + Girl.player_petname + ".",
+            "That is fine, " + Girl.player_petname + "_.",
+            "It is fine, " + Girl.player_petname + "_.",
+            "I thought as much, " + Girl.player_petname + "_.",
+            "I'm sure, " + Girl.player_petname + "_.",
             "Thank you.",
             "I can appreciate your. . . desires.",
             "I cannot blame you for your. . . desires.",
@@ -1399,19 +1399,19 @@ label sorry_never_mind_lines(Girl, action):
 
 label maybe_later_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["I'll give it some thought, " + Girl.player_petname + ".",
-            "It's. . . possible, " + Girl.player_petname + ".",
-            "I'll be thinking about it, " + Girl.player_petname + ".",
-            "Anything's possible, " + Girl.player_petname + ".",
-            "Heh, maybe, " + Girl.player_petname + ".",
-            "I'll give it some thought, " + Girl.player_petname + ".",
+        $ lines = ["I'll give it some thought, " + Girl.player_petname + "_.",
+            "It's. . . possible, " + Girl.player_petname + "_.",
+            "I'll be thinking about it, " + Girl.player_petname + "_.",
+            "Anything's possible, " + Girl.player_petname + "_.",
+            "Heh, maybe, " + Girl.player_petname + "_.",
+            "I'll give it some thought, " + Girl.player_petname + "_.",
             ". . .{p}I guess?",
             "We'll have to see.",
-            "I might get hungry, " + Girl.player_petname + ".",
-            "Yeah, maybe, " + Girl.player_petname + "."]
+            "I might get hungry, " + Girl.player_petname + "_.",
+            "Yeah, maybe, " + Girl.player_petname + "_."]
 
         if action in dildo_actions:
-            $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + ".")
+            $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + "_.")
 
         if action == "masturbation":
             if Girl.lust > 50:
@@ -1420,19 +1420,19 @@ label maybe_later_lines(Girl, action):
                 $ lines.append("Hmm, maybe. . . I'll let you know.")
     elif Girl == KittyX:
         $ lines = ["Um, yeah, maybe later.",
-            "I'll give it some thought, " + Girl.player_petname + ".",
-            "Heh, maybe, " + Girl.player_petname + ".",
-            "It's. . . possible, " + Girl.player_petname + ".",
+            "I'll give it some thought, " + Girl.player_petname + "_.",
+            "Heh, maybe, " + Girl.player_petname + "_.",
+            "It's. . . possible, " + Girl.player_petname + "_.",
             ". . .{p}}Maybe.",
             "Maybe.",
-            "You" + Girl.like + "never know, " + Girl.player_petname + ".",
+            "You" + Girl.like + "_never know, " + Girl.player_petname + "_.",
             "Maybe, you never know.",
-            "Yeah, maybe, " + Girl.player_petname + ".",
-            "I'll be thinking about it, " + Girl.player_petname + ".",
-            "Anything's possible, " + Girl.player_petname + "."]
+            "Yeah, maybe, " + Girl.player_petname + "_.",
+            "I'll be thinking about it, " + Girl.player_petname + "_.",
+            "Anything's possible, " + Girl.player_petname + "_."]
 
         if action in dildo_actions:
-            $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + ".")
+            $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + "_.")
 
         if action == "masturbation":
             if Girl.lust > 50:
@@ -1441,20 +1441,20 @@ label maybe_later_lines(Girl, action):
                 $ lines.append("Hmm, maybe. . . I'll text you?")
     elif Girl == EmmaX:
         $ lines = ["Well, I can't rule it out. . .",
-            "I'll give it some thought, " + Girl.player_petname + ".",
-            "It's. . . possible, " + Girl.player_petname + ".",
+            "I'll give it some thought, " + Girl.player_petname + "_.",
+            "It's. . . possible, " + Girl.player_petname + "_.",
             ". . .{p}}I couldn't rule it out. . .",
             "Perhaps.",
-            "I wouldn't rule it out, " + Girl.player_petname + ".",
+            "I wouldn't rule it out, " + Girl.player_petname + "_.",
             ". . .{p}Perhaps.",
-            "Oh, most certainly. . .","I imagine we will. . .{p}}. . . often.",
-            "I imagine it will happen at some point, " + Girl.player_petname + ".",
-            "I'll be thinking about it, " + Girl.player_petname + ".",
-            "Anything's possible, " + Girl.player_petname + "."]
+            "Oh, most certainly. . .", "I imagine we will. . .{p}}. . . often.",
+            "I imagine it will happen at some point, " + Girl.player_petname + "_.",
+            "I'll be thinking about it, " + Girl.player_petname + "_.",
+            "Anything's possible, " + Girl.player_petname + "_."]
 
         if action in dildo_actions:
-            $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + ".")
-            $ lines.append("Perhaps I'll practice on my own time, " + Girl.player_petname + ".")
+            $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + "_.")
+            $ lines.append("Perhaps I'll practice on my own time, " + Girl.player_petname + "_.")
 
         if action == "masturbation":
             if Girl.lust > 50:
@@ -1464,19 +1464,19 @@ label maybe_later_lines(Girl, action):
     elif Girl == LauraX:
         $ lines = ["Eh. Maybe.",
             "Maybe?",
-            "Maybe, " + Girl.player_petname + ".",
-            "It's. . . possible, " + Girl.player_petname + ".",
+            "Maybe, " + Girl.player_petname + "_.",
+            "It's. . . possible, " + Girl.player_petname + "_.",
             "Maybe.",
-            "Yeah, maybe, " + Girl.player_petname + ".",
+            "Yeah, maybe, " + Girl.player_petname + "_.",
             ". . .{p}}Maybe.",
             "Probably. . .",
             "Oh, probably. . .{p}. . . often.",
             "I gues eventually. . .",
-            "I'll be thinking about it, " + Girl.player_petname + ".",
-            "Anything's possible, " + Girl.player_petname + "."]
+            "I'll be thinking about it, " + Girl.player_petname + "_.",
+            "Anything's possible, " + Girl.player_petname + "_."]
 
         if action in dildo_actions:
-            $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + ".")
+            $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + "_.")
 
         if action == "masturbation":
             if Girl.lust > 50:
@@ -1487,15 +1487,15 @@ label maybe_later_lines(Girl, action):
         $ lines = [". . . I guess? Maybe.",
             "Maybe.",
             ". . . maybe.",
-            "Sure, whatever, " + Girl.player_petname + ".",
+            "Sure, whatever, " + Girl.player_petname + "_.",
             "Well. . .{p}}Maybe.",
             "Sure, whatever. . .",
             "Oh, probably. . .",
             "I guess eventually. . .",
-            "Well, I'll give it some thought, " + Girl.player_petname + "."]
+            "Well, I'll give it some thought, " + Girl.player_petname + "_."]
 
         if action in dildo_actions:
-            $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + ".")
+            $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + "_.")
 
         if action == "masturbation":
             if Girl.lust > 50:
@@ -1503,19 +1503,19 @@ label maybe_later_lines(Girl, action):
             else:
                 $ lines.append("Well. . . maybe. . .")
     elif Girl == StormX:
-        $ lines = ["I will give it some thought, " + Girl.player_petname + ".",
+        $ lines = ["I will give it some thought, " + Girl.player_petname + "_.",
             ". . .{p}Perhaps. . .",
             "Perhaps.",
-            "I would not rule it out, " + Girl.player_petname + ".",
+            "I would not rule it out, " + Girl.player_petname + "_.",
             ". . .{p}Perhaps.",
             "Oh, of that I am certain. . .",
             "I imagine at some point we shall. . .{p}. . . frequently.",
-            "I expect it will happen at some point, " + Girl.player_petname + ".",
-            "I will give it some thought, " + Girl.player_petname + "."]
+            "I expect it will happen at some point, " + Girl.player_petname + "_.",
+            "I will give it some thought, " + Girl.player_petname + "_."]
 
         if action in dildo_actions:
-            $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + ".")
-            $ lines.append("Perhaps I'll practice on my own time, " + Girl.player_petname + ".")
+            $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + "_.")
+            $ lines.append("Perhaps I'll practice on my own time, " + Girl.player_petname + "_.")
 
         if action == "masturbation":
             if Girl.lust > 50:
@@ -1524,15 +1524,15 @@ label maybe_later_lines(Girl, action):
                 $ lines.append("We shall see.")
     elif Girl == JubesX:
         $ lines = ["Eh. Maybe.",
-        "Maybe, " + Girl.player_petname + ".",
+        "Maybe, " + Girl.player_petname + "_.",
         "Maybe?",
-        "It's. . . possible, " + Girl.player_petname + ".",
+        "It's. . . possible, " + Girl.player_petname + "_.",
         "Maybe.",
-        "I'll be thinking about it, " + Girl.player_petname + ".",
-        "Anything's possible, " + Girl.player_petname + "."]
+        "I'll be thinking about it, " + Girl.player_petname + "_.",
+        "Anything's possible, " + Girl.player_petname + "_."]
 
         if action in dildo_actions:
-            $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + ".")
+            $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + "_.")
 
         if action == "masturbation":
             if Girl.lust > 50:
@@ -1549,13 +1549,13 @@ label maybe_later_lines(Girl, action):
 label pull_back_before_get_in_lines(Girl, action):
     if Girl == RogueX:
         if Girl.action_counter[action]:
-            $ lines = ["Well ok, " + Girl.player_petname + ", no harm done. Just give me a little warning next time.",
-                "Well ok, " + Girl.player_petname + ", it has been kinda fun."]
+            $ lines = ["Well ok, " + Girl.player_petname + "_, no harm done. Just give me a little warning next time.",
+                "Well ok, " + Girl.player_petname + "_, it has been kinda fun."]
         else:
-            $ lines = ["Well ok, " + Girl.player_petname + ", I'm not really ready for that, but maybe if you ask nicely next time . . ."]
+            $ lines = ["Well ok, " + Girl.player_petname + "_, I'm not really ready for that, but maybe if you ask nicely next time . . ."]
 
             if action in anal_insertion_actions:
-                $ lines.append("Well ok, " + Girl.player_petname + ", that's a bit dirty, maybe ask a girl?")
+                $ lines.append("Well ok, " + Girl.player_petname + "_, that's a bit dirty, maybe ask a girl?")
 
     $ line = renpy.random.choice(lines)
 
@@ -1575,7 +1575,7 @@ label would_you_like_more_lines(Girl, action):
 
 label caught_masturbating_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["H- how long you been stand'in there, " + Girl.player_petname + "?"]
+        $ lines = ["H- how long you been stand'in there, " + Girl.player_petname + "_?"]
     elif Girl == KittyX:
         $ lines = ["Eeep!{p}When did you get here?!"]
     elif Girl == EmmaX:
@@ -1583,7 +1583,7 @@ label caught_masturbating_lines(Girl, action):
     elif Girl == LauraX:
         $ lines = ["Huh.{p}}When did you get here?"]
     elif Girl == JeanX:
-        $ lines = ["Oh, hey. . ." + Girl.player_petname + ".{p}}When did you get here?"]
+        $ lines = ["Oh, hey. . ." + Girl.player_petname + "_.{p}}When did you get here?"]
     elif Girl == StormX:
         $ lines = ["!{p}}How long have you been there?!"]
     elif Girl == JubesX:
@@ -1671,7 +1671,7 @@ label begging_lines(Girl, action):
         if action == "suck_breasts":
             $ lines.append("You better work your mouth that hard on these.")
     elif Girl == KittyX:
-        $ lines = ["Well" + Girl.like + "if you ask nicely. . .",
+        $ lines = ["Well" + Girl.like + "_if you ask nicely. . .",
             "Only if you make it worth it.",
             "I like it when you beg. . .",
             "Well, sure, I guess.",
@@ -1821,7 +1821,7 @@ label begging_lines(Girl, action):
 
 label please_not_good_enough_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["I'm afraid not this time, sorry " + Girl.player_petname + "."]
+        $ lines = ["I'm afraid not this time, sorry " + Girl.player_petname + "_."]
     elif Girl == KittyX:
         $ lines = ["Um, still no.",
             "Nuh uh."]
@@ -1852,31 +1852,31 @@ label please_not_good_enough_lines(Girl, action):
 
 label action_already_rejected_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["Learn to take \"no\" for an answer, " + Girl.player_petname + ".",
-            "I just don't want to, " + Girl.player_petname + ".",
+        $ lines = ["Learn to take \"no\" for an answer, " + Girl.player_petname + "_.",
+            "I just don't want to, " + Girl.player_petname + "_.",
             "I'aint tellin you again.",
-            "Look, I already told you no thanks, " + Girl.player_petname + ".",
+            "Look, I already told you no thanks, " + Girl.player_petname + "_.",
             "Read my lips, no.",
-            "Learn to take \"no\" for an answer, " + Girl.player_petname + "."]
+            "Learn to take \"no\" for an answer, " + Girl.player_petname + "_."]
     elif Girl == KittyX:
-        $ lines = ["Look, I already told you no thanks, " + Girl.player_petname + ".",
+        $ lines = ["Look, I already told you no thanks, " + Girl.player_petname + "_.",
             "You can eat a dick, 'cos I'm not.",
             "I'm not telling you again.",
-            "Learn to take \"no\" for an answer, " + Girl.player_petname + ".",
+            "Learn to take \"no\" for an answer, " + Girl.player_petname + "_.",
             "{i}Listen{/i}!",
             "How many times do I have to say \"no\"?"
-            "Not even, " + Girl.player_petname + ".",
-            "Maybe" + Girl.like + "take \"no\" for an answer?",
+            "Not even, " + Girl.player_petname + "_.",
+            "Maybe" + Girl.like + "_take \"no\" for an answer?",
             "I'm just not into that."]
     elif Girl == EmmaX:
         $ lines = ["Don't make me repeat myself.",
             "I've refused, end of story.",
             "Then I hope you can take care of yourself.",
             "I won't repeat myself.",
-            "Learn to take \"no\" for an answer, " + Girl.player_petname + ".",
+            "Learn to take \"no\" for an answer, " + Girl.player_petname + "_.",
             "You need to pay attention when I speak to you.",
-            "I don't appreciate having to repeat myself, " + Girl.player_petname + ".",
-            "I really can't, " + Girl.player_petname + ".",
+            "I don't appreciate having to repeat myself, " + Girl.player_petname + "_.",
+            "I really can't, " + Girl.player_petname + "_.",
             "Don't question me again.",
             "I've made myself clear."]
     elif Girl == LauraX:
@@ -1884,10 +1884,10 @@ label action_already_rejected_lines(Girl, action):
             "Look, I already told you no.",
             "I'm not telling you again.",
             "Suck this then.",
-            "Learn to take \"no\" for an answer, " + Girl.player_petname + ".",
+            "Learn to take \"no\" for an answer, " + Girl.player_petname + "_.",
             "Listen to the words that are coming out of my mouth.",
-            "I don't like to repeat myself, " + Girl.player_petname + ".",
-            "I really can't, " + Girl.player_petname + ".",
+            "I don't like to repeat myself, " + Girl.player_petname + "_.",
+            "I really can't, " + Girl.player_petname + "_.",
             "Don't push me.",
             "Don't push it.",
             "What did I tell you?"]
@@ -1897,10 +1897,10 @@ label action_already_rejected_lines(Girl, action):
             "I'm not telling you again.",
             "You want me to make you suck yourself?",
             "Damn. . . forgot I can't do that. . .",
-            "Learn to take \"no\" for an answer, " + Girl.player_petname + ".",
+            "Learn to take \"no\" for an answer, " + Girl.player_petname + "_.",
             "I don't want to have to go through this again.",
-            "I really can't, " + Girl.player_petname + ".",
-            "Don't push your luck, " + Girl.player_petname + ".",
+            "I really can't, " + Girl.player_petname + "_.",
+            "Don't push your luck, " + Girl.player_petname + "_.",
             "Know when to stop.",
             "What did I tell you?"]
     elif Girl == StormX:
@@ -1909,13 +1909,13 @@ label action_already_rejected_lines(Girl, action):
             "Then I hope you can take care of yourself.",
             "I shall not repeat myself.",
             "You go too far!",
-            "Learn to take \"no\" for an answer, " + Girl.player_petname + ".",
+            "Learn to take \"no\" for an answer, " + Girl.player_petname + "_.",
             "I have been clear on this.",
             "Do not question me again.",
             "I believe I have made myself clear."]
     elif Girl == JubesX:
         $ lines = ["I'm pretty clear on this, NO.",
-            "I really can't, " + Girl.player_petname + "."]
+            "I really can't, " + Girl.player_petname + "_."]
 
     $ line = renpy.random.choice(lines)
 
@@ -1928,47 +1928,47 @@ label otherwise_not_interested_lines(Girl, action):
         $ lines = ["Nah, I don't think I'm interested.",
             "Heh, no, I'm not doing that.",
             "Not hap'nin.",
-            "Not hap'nin, " + Girl.player_petname + ".",
-            "No luck, " + Girl.player_petname + ".",
-            "Tsk, not this time, " + Girl.player_petname + ".",
-            "Shoo, " + Girl.player_petname + ".",
+            "Not hap'nin, " + Girl.player_petname + "_.",
+            "No luck, " + Girl.player_petname + "_.",
+            "Tsk, not this time, " + Girl.player_petname + "_.",
+            "Shoo, " + Girl.player_petname + "_.",
             "I. . . not there!!",
             "Ew!",
-            "Um, no thanks, " + Girl.player_petname + ".",
+            "Um, no thanks, " + Girl.player_petname + "_.",
             "What?! Gross!",
             "I'd really rather not.",
             "That isn't really how I planned to use my feet today"
-            "How about let's not, " + Girl.player_petname + ".",
+            "How about let's not, " + Girl.player_petname + "_.",
             "Not interested.",
             "No way.",
             "Not happening.",
             "I'd really rather not.",
             "Oh, um, no, I'm not really comfortable with that. . .",
-            "Not right now, " + Girl.player_petname + ". . .",
+            "Not right now, " + Girl.player_petname + "_. . .",
             "Maybe not right now, ok?",
-            "I don't think we need any toys, " + Girl.player_petname + "."]
+            "I don't think we need any toys, " + Girl.player_petname + "_."]
     elif Girl == KittyX:
         $ lines = ["Um, no.",
-            "Um, no thanks, " + Girl.player_petname + ".",
+            "Um, no thanks, " + Girl.player_petname + "_.",
             "Oh, um, no, I'm not really comfortable with that. . .",
-            "Let's not, ok " + Girl.player_petname + "?",
-            "Not now, " + Girl.player_petname + ".",
-            "Not, right now " + Girl.player_petname + ". . .",
-            "Later, " + Girl.player_petname + "!",
-            "I don't think we need any toys, " + Girl.player_petname + ".",
+            "Let's not, ok " + Girl.player_petname + "_?",
+            "Not now, " + Girl.player_petname + "_.",
+            "Not, right now " + Girl.player_petname + "_. . .",
+            "Later, " + Girl.player_petname + "_!",
+            "I don't think we need any toys, " + Girl.player_petname + "_.",
             "Not now, ok?",
-            "Maybe" + Girl.like + "not right now? . .",
+            "Maybe" + Girl.like + "_not right now? . .",
             "Not. . . now. . .",
             "Um, no.",
             "No way.",
             "Nooope.",
-            "No luck " + Girl.player_petname + ".",
+            "No luck " + Girl.player_petname + "_.",
             "Ugh!",
-            "Scram, " + Girl.player_petname + ".",
+            "Scram, " + Girl.player_petname + "_.",
             "That's. . . not cool.",
             "Ew.",
             "I don't wanna touch that.",
-            "How about let's not, " + Girl.player_petname + ".",
+            "How about let's not, " + Girl.player_petname + "_.",
             "Nope.",
             "No way.",
             "I don't know about using my feet for. . . that.",
@@ -1979,25 +1979,25 @@ label otherwise_not_interested_lines(Girl, action):
         $ lines = ["You wish.",
             "Hmmm, no."
             "No. Thank you.",
-            "I don't think so, " + Girl.player_petname + ".",
+            "I don't think so, " + Girl.player_petname + "_.",
             "I'm really not comfortable with that. . .",
-            "Let's not, ok " + Girl.player_petname + "?",
+            "Let's not, ok " + Girl.player_petname + "_?",
             "I'd rather not today. . .",
-            "Not now, " + Girl.player_petname + ".",
+            "Not now, " + Girl.player_petname + "_.",
             "I'd rather not right now though.",
-            "Perhaps later, " + Girl.player_petname + ".",
-            "We don't need any toys, do we, " + Girl.player_petname + "?",
-            "I don't think we need any toys, " + Girl.player_petname + ".",
-            "Not now, " + Girl.player_petname + ". . .",
+            "Perhaps later, " + Girl.player_petname + "_.",
+            "We don't need any toys, do we, " + Girl.player_petname + "_?",
+            "I don't think we need any toys, " + Girl.player_petname + "_.",
+            "Not now, " + Girl.player_petname + "_. . .",
             "Perhaps another time would be better? . .",
             "I don't think that would be appropriate. . .",
             "No.",
-            "No thank you, " + Girl.player_petname + ".",
+            "No thank you, " + Girl.player_petname + "_.",
             "I know, I'm as disappointed as you are.",
-            "Not today, " + Girl.player_petname + ".",
+            "Not today, " + Girl.player_petname + "_.",
             "I'm sorry, not now.",
-            "No, I don't think so, " + Girl.player_petname + ".",
-            "How about let's not, " + Girl.player_petname + ".",
+            "No, I don't think so, " + Girl.player_petname + "_.",
+            "How about let's not, " + Girl.player_petname + "_.",
             "I don't think I will.",
             "No way.",
             "No, thank you.",
@@ -2010,20 +2010,20 @@ label otherwise_not_interested_lines(Girl, action):
             "You wish.",
             "Nope.",
             "I'm really not cool with that. . .",
-            "Let's not, ok " + Girl.player_petname + "?",
+            "Let's not, ok " + Girl.player_petname + "_?",
             "I'd rather not today. . .",
-            "Not now, " + Girl.player_petname + ".",
+            "Not now, " + Girl.player_petname + "_.",
             "Nah.",
-            "Not right now " + Girl.player_petname + ". . .",
-            "I don't know, " + Girl.player_petname + "!",
-            "I don't think we need any toys, " + Girl.player_petname + ".",
+            "Not right now " + Girl.player_petname + "_. . .",
+            "I don't know, " + Girl.player_petname + "_!",
+            "I don't think we need any toys, " + Girl.player_petname + "_.",
             "Not now, ok?",
             "Maybe later? . .",
             "I don't think that would be appropriate. . .",
             "No.",
-            "No thank you, " + Girl.player_petname + ".",
+            "No thank you, " + Girl.player_petname + "_.",
             "Yeah, sorry.",
-            "Not today, " + Girl.player_petname + ".",
+            "Not today, " + Girl.player_petname + "_.",
             "I'm sorry, not now.",
             "I don't know where that's been lately.",
             "Nah.",
@@ -2040,22 +2040,22 @@ label otherwise_not_interested_lines(Girl, action):
             "You wish. . .",
             "Nope.",
             "I'd rather not.",
-            "Let's not, ok " + Girl.player_petname + "?",
+            "Let's not, ok " + Girl.player_petname + "_?",
             "I'd rather not today. . .",
-            "Not now, " + Girl.player_petname + ".",
+            "Not now, " + Girl.player_petname + "_.",
             "Nope.",
-            "Not right now " + Girl.player_petname + ". . .",
-            "I don't know, " + Girl.player_petname + ". . .",
-            "I don't think we need any toys, " + Girl.player_petname + ".",
+            "Not right now " + Girl.player_petname + "_. . .",
+            "I don't know, " + Girl.player_petname + "_. . .",
+            "I don't think we need any toys, " + Girl.player_petname + "_.",
             "Not now, ok?",
             "I'm not in the mood right now . .",
             "I don't think that would be appropriate. . .",
             "No.",
             "Um, no.",
             "I'm sorry, not now.",
-            "No thanks, " + Girl.player_petname + ".",
+            "No thanks, " + Girl.player_petname + "_.",
             "Yeah, sorry.",
-            "Not today, " + Girl.player_petname + ".",
+            "Not today, " + Girl.player_petname + "_.",
             "I'd really prefer not touching that.",
             "Nah.",
             "Ha! Good one.",
@@ -2070,19 +2070,19 @@ label otherwise_not_interested_lines(Girl, action):
             "No. Thank you.",
             "I would be uncomfortable with that. . .",
             "I would rather not. . .",
-            "Not now, " + Girl.player_petname + ".",
+            "Not now, " + Girl.player_petname + "_.",
             "I would rather not right now though.",
-            "Perhaps later, " + Girl.player_petname + ". . .",
-            "Perhaps later, " + Girl.player_petname + ".",
-            "I do not think so, " + Girl.player_petname + ".",
-            "We don't need any toys, do we, " + Girl.player_petname + "?",
-            "I don't think we need any toys, " + Girl.player_petname + ".",
-            "Not now, " + Girl.player_petname + ". . .",
+            "Perhaps later, " + Girl.player_petname + "_. . .",
+            "Perhaps later, " + Girl.player_petname + "_.",
+            "I do not think so, " + Girl.player_petname + "_.",
+            "We don't need any toys, do we, " + Girl.player_petname + "_?",
+            "I don't think we need any toys, " + Girl.player_petname + "_.",
+            "Not now, " + Girl.player_petname + "_. . .",
             "Perhaps another time? . .",
             "I do not believe that would be appropriate. . .",
             "No, I do not think so.",
-            "No, I do not think so, " + Girl.player_petname + ".",
-            "I would rather not, " + Girl.player_petname + ".",
+            "No, I do not think so, " + Girl.player_petname + "_.",
+            "I would rather not, " + Girl.player_petname + "_.",
             "I do not think that I will.",
             "No way.",
             "No, thank you.",
@@ -2096,15 +2096,15 @@ label otherwise_not_interested_lines(Girl, action):
             "You wish.",
             "Nope.",
             "I'm really not cool with that. . .",
-            "Let's not, ok " + Girl.player_petname + "?",
+            "Let's not, ok " + Girl.player_petname + "_?",
             "I'd rather not today. . .",
-            "Not now, " + Girl.player_petname + ".",
+            "Not now, " + Girl.player_petname + "_.",
             "Nah.",
             "Um. . . no.",
             "No.",
-            "No thank you, " + Girl.player_petname + ".",
+            "No thank you, " + Girl.player_petname + "_.",
             "Yeah, sorry.",
-            "Not today, " + Girl.player_petname + ".",
+            "Not today, " + Girl.player_petname + "_.",
             "I'm sorry, not now."]
 
     $ line = renpy.random.choice(lines)
@@ -2124,17 +2124,17 @@ label previous_action_rejected_lines(Girl, action):
             "I think you should keep your fingers to yourself.",
             "Sorry, keep your hands out of there.",
             "I think you can manage it yourself this time. . .",
-            "Not right now, " + Girl.player_petname + ". . .",
+            "Not right now, " + Girl.player_petname + "_. . .",
             "I think I'll let you know when I want you touching these again.",
             "I think I've got the taste out of my mouth, thanks.",
             "Sorry, you can keep your toys to yourself.",
             "Sorry, you can keep your toys out of there.",
             "Maybe you could go fuck yourself instead.",
-            "Eh-eh, not anymore, " + Girl.player_petname + ".",
-            "The only thing you can do with my ass is kiss it, " + Girl.player_petname + ".{p}. . .Don't get any ideas."]
+            "Eh-eh, not anymore, " + Girl.player_petname + "_.",
+            "The only thing you can do with my ass is kiss it, " + Girl.player_petname + "_.{p}. . .Don't get any ideas."]
     elif Girl == KittyX:
         $ lines = ["You had your shot.",
-            "Sorry, " + Girl.player_petname + ", maybe later?",
+            "Sorry, " + Girl.player_petname + "_, maybe later?",
             "Fresh!",
             "Sorry, keep your hands out of there.",
             "Keep your head out of there.",
@@ -2148,8 +2148,8 @@ label previous_action_rejected_lines(Girl, action):
             "Sorry, you can keep your toys to yourself.",
             "Sorry, you can keep your toys out of there.",
             "I'm not feeling it today. . .",
-            "Maybe just" + Girl.like + "fuck yourself, huh?",
-            "That's" + Girl.like + "totally off the table.",
+            "Maybe just" + Girl.like + "_fuck yourself, huh?",
+            "That's" + Girl.like + "_totally off the table.",
             "Yeah, not again."]
     elif Girl == EmmaX:
         $ lines = ["I'm afraid you haven't earned back my good graces.",
@@ -2163,10 +2163,10 @@ label previous_action_rejected_lines(Girl, action):
             "Sorry, no more of that.",
             "I'd really rather not. . .",
             "I'm afraid you'll just have to remember the last time.",
-            "I'm just not in the mood, " + Girl.player_petname + ".",
+            "I'm just not in the mood, " + Girl.player_petname + "_.",
             "Sorry, you can keep your toys to yourself.",
             "Sorry, you can keep your toys out of there.",
-            "I'm not in the mood, " + Girl.player_petname + ". . .",
+            "I'm not in the mood, " + Girl.player_petname + "_. . .",
             "I'm sure you can figure out how to take care of that yourself.",
             "You'll have to show me you're worth it again.",
             "Not under the circumstances."]
@@ -2208,10 +2208,10 @@ label previous_action_rejected_lines(Girl, action):
         $ lines = ["No, I do not think so.",
             ". . . I would rather not.",
             "Our time together was a memory.",
-            "I am just not in the mood, " + Girl.player_petname + ".",
+            "I am just not in the mood, " + Girl.player_petname + "_.",
             "Sorry, you can keep your toys to yourself.",
             "Sorry, you can keep your toys out of there.",
-            "I am in no mood, " + Girl.player_petname + ". . .",
+            "I am in no mood, " + Girl.player_petname + "_. . .",
             "I am certain you can take care of that yourself.",
             "I expect that you can entertain yourself elsewhere.",
             "You shall have to display your worth to me again.",
@@ -2275,7 +2275,7 @@ label forced_but_not_unwelcome_lines(Girl, action):
             "Oh, very well.",
             "Well hello there. . .",
             "Suit yourself.",
-            "Hm. Alright, but don't push your luck, " + Girl.player_petname + ".",
+            "Hm. Alright, but don't push your luck, " + Girl.player_petname + "_.",
             "Oh, fine. . .",
             "Ok, fine. If we're going to do this, stick it in already.",
             "Oh, very well.",
@@ -2362,51 +2362,51 @@ label forced_but_welcome_lines(Girl, action):
 
 label said_no_recently_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["I {i}just{/i} told you \"no,\" " + Girl.player_petname + ".",
-            "I {i}just{/i} told you \"no,\" " + Girl.player_petname + ".",
-            "What part of \"no,\" did you not get, " + Girl.player_petname + "?"]
+        $ lines = ["I {i}just{/i} told you \"no,\" " + Girl.player_petname + "_.",
+            "I {i}just{/i} told you \"no,\" " + Girl.player_petname + "_.",
+            "What part of \"no,\" did you not get, " + Girl.player_petname + "_?"]
     elif Girl == KittyX:
-        $ lines = ["" + Girl.Like + "no way, " + Girl.player_petname + ".",
-            "I" + Girl.like + "{i}just{/i} told you \"no\"!"
-            "You don't" + Girl.like + "listen do you, " + Girl.player_petname + ".",
-            "I {i}just{/i} told you \"no,\" " + Girl.player_petname + ".",
-            "What did I" + Girl.like + "{i}just{/i} tell you " + Girl.player_petname + ".",
-            "You don't" + Girl.like + "listen do you, " + Girl.player_petname + ".",
-            "I{i}just{/i}" + Girl.like + "told you \"no\"!"]
+        $ lines = ["" + Girl.Like + "_no way, " + Girl.player_petname + "_.",
+            "I" + Girl.like + "_{i}just{/i} told you \"no\"!"
+            "You don't" + Girl.like + "_listen do you, " + Girl.player_petname + "_.",
+            "I {i}just{/i} told you \"no,\" " + Girl.player_petname + "_.",
+            "What did I" + Girl.like + "_{i}just{/i} tell you " + Girl.player_petname + "_.",
+            "You don't" + Girl.like + "_listen do you, " + Girl.player_petname + "_.",
+            "I{i}just{/i}" + Girl.like + "_told you \"no\"!"]
     elif Girl == EmmaX:
-        $ lines = ["Your persistence is doing you no favors, " + Girl.player_petname + ".",
-            "You need to learn to take\"no\" for an answer, " + Girl.player_petname + ".",
-            "I {i}just{/i} refused, " + Girl.player_petname + ".",
+        $ lines = ["Your persistence is doing you no favors, " + Girl.player_petname + "_.",
+            "You need to learn to take\"no\" for an answer, " + Girl.player_petname + "_.",
+            "I {i}just{/i} refused, " + Girl.player_petname + "_.",
             "I believe I just told you, \"no\"."
-            "What part of \"no,\" did you not get, " + Girl.player_petname + "?",
-            "Pay attention, " + Girl.player_petname + ".",
-            "I'm afraid that \"no\" is my final answer, " + Girl.player_petname + "."]
+            "What part of \"no,\" did you not get, " + Girl.player_petname + "_?",
+            "Pay attention, " + Girl.player_petname + "_.",
+            "I'm afraid that \"no\" is my final answer, " + Girl.player_petname + "_."]
     elif Girl == LauraX:
         $ lines = ["Take a breath here, before you regret it.",
-            "I just told you no, " + Girl.player_petname + ".",
-            "I {i}just{/i} told you \"no,\" " + Girl.player_petname + ".",
-            "Just told you I wouldn't, " + Girl.player_petname + ".",
-            "What part of \"no,\" did you not get, " + Girl.player_petname + "?",
-            "You should listen better, " + Girl.player_petname + ".",
+            "I just told you no, " + Girl.player_petname + "_.",
+            "I {i}just{/i} told you \"no,\" " + Girl.player_petname + "_.",
+            "Just told you I wouldn't, " + Girl.player_petname + "_.",
+            "What part of \"no,\" did you not get, " + Girl.player_petname + "_?",
+            "You should listen better, " + Girl.player_petname + "_.",
             "Sorry, " + Girl.player_petname + " \"no\"."]
     elif Girl == JeanX:
         $ lines = ["I'm not used to repeating myself.",
-            "I just told you no, " + Girl.player_petname + ".",
-            "I {i}just{/i} told you \"no,\" " + Girl.player_petname + ".",
-            "Just told you I wouldn't, " + Girl.player_petname + ".",
-            "What part of \"no,\" did you not get, " + Girl.player_petname + "?",
-            "Don't make me repeat myself again, " + Girl.player_petname + ".",
+            "I just told you no, " + Girl.player_petname + "_.",
+            "I {i}just{/i} told you \"no,\" " + Girl.player_petname + "_.",
+            "Just told you I wouldn't, " + Girl.player_petname + "_.",
+            "What part of \"no,\" did you not get, " + Girl.player_petname + "_?",
+            "Don't make me repeat myself again, " + Girl.player_petname + "_.",
             "I don't repeat myself."]
     elif Girl == StormX:
-        $ lines = ["Do not persist in this, " + Girl.player_petname + ".",
-            "Your persistance is doing you no favors, " + Girl.player_petname + ".",
-            "You will need to accept a \"no\", " + Girl.player_petname + ".",
-            "What part of \"no,\" did you not get, " + Girl.player_petname + "?",
-            "I have made myself clear, " + Girl.player_petname + ".",
-            "I am afraid that \"no\" is my final answer, " + Girl.player_petname + "."]
+        $ lines = ["Do not persist in this, " + Girl.player_petname + "_.",
+            "Your persistance is doing you no favors, " + Girl.player_petname + "_.",
+            "You will need to accept a \"no\", " + Girl.player_petname + "_.",
+            "What part of \"no,\" did you not get, " + Girl.player_petname + "_?",
+            "I have made myself clear, " + Girl.player_petname + "_.",
+            "I am afraid that \"no\" is my final answer, " + Girl.player_petname + "_."]
     elif Girl == JubesX:
         $ lines = ["I already told you, \"no\".",
-            "I just told you no, " + Girl.player_petname + "."]
+            "I just told you no, " + Girl.player_petname + "_."]
 
     $ line = renpy.random.choice(lines)
 
@@ -2423,9 +2423,9 @@ label action_accepted_enthusiastically_lines(Girl, action):
             "Sure, grab a cheek.",
             "Sure, get in there."]
     elif Girl == KittyX:
-        $ lines = ["Ok " + Girl.player_petname + ", come and get'em.",
+        $ lines = ["Ok " + Girl.player_petname + "_, come and get'em.",
             "Ok, fiiiine.",
-            "Ok " + Girl.player_petname + ", go ahead.",
+            "Ok " + Girl.player_petname + "_, go ahead.",
             "Ok, whatever.",
             "Mmmmmm.",
             "Oooooooh. . .",
@@ -2435,7 +2435,7 @@ label action_accepted_enthusiastically_lines(Girl, action):
     elif Girl == EmmaX:
         $ lines = ["That sounds lovely, ravish me.",
             "Oh very well. . .",
-            "Ok " + Girl.player_petname + ", go ahead.",
+            "Ok " + Girl.player_petname + "_, go ahead.",
             "Mmmm, I couldn't refuse. . .",
             "Mmmmmm. . .",
             "I can't exactly refuse. . .",
@@ -2443,7 +2443,7 @@ label action_accepted_enthusiastically_lines(Girl, action):
     elif Girl == LauraX:
         $ lines = ["Sure, sounds fun.",
             "Sure.",
-            "Ok " + Girl.player_petname + ", go ahead.",
+            "Ok " + Girl.player_petname + "_, go ahead.",
             "Mmmm, I couldn't refuse. . .",
             "Mmmmmm. . .",
             "Yeah, ok. . .",
@@ -2451,7 +2451,7 @@ label action_accepted_enthusiastically_lines(Girl, action):
     elif Girl == JeanX:
         $ lines = ["Sure, sounds fun.",
             "Sure.",
-            "Ok " + Girl.player_petname + ", go ahead.",
+            "Ok " + Girl.player_petname + "_, go ahead.",
             "Mmmm, I couldn't refuse. . .",
             "Mmmmmm. . .",
             "Yeah, ok. . .",
@@ -2459,7 +2459,7 @@ label action_accepted_enthusiastically_lines(Girl, action):
     elif Girl == StormX:
         $ lines = ["I would love that. . .",
             "Oh very well. . .",
-            "Ok " + Girl.player_petname + ", go ahead.",
+            "Ok " + Girl.player_petname + "_, go ahead.",
             "Mmmm, I could not refuse. . .",
             "Mmmmmm. . .",
             "I suppose that is reasonable. . .",
@@ -2467,7 +2467,7 @@ label action_accepted_enthusiastically_lines(Girl, action):
     elif Girl == JubesX:
         $ lines = ["Sure, sounds fun.",
             "Sure.",
-            "Ok " + Girl.player_petname + ", go ahead.",
+            "Ok " + Girl.player_petname + "_, go ahead.",
             "Mmmm, I couldn't refuse. . .",
             "Mmmmmm. . .",
             "Yeah, ok. . .",
@@ -2604,7 +2604,7 @@ label daily_action_lines(Girl, action):
             $ lines.append("I'm still a bit sore from earlier.")
             $ lines.append("I'm still a little sore from earlier.")
         elif action in fondle_actions or action in dildo_actions or action == "sex" or action == "anal":
-            $ lines.append("You're wearing me out, " + Girl.player_petname + ".")
+            $ lines.append("You're wearing me out, " + Girl.player_petname + "_.")
             $ lines.append("You're going to wear me out.")
             $ lines.append("Take it a bit gently, I'm still shaking from earlier.")
 
@@ -2673,7 +2673,7 @@ label daily_action_lines(Girl, action):
             $ lines.append("I'm glad I don't grow calluses.")
             $ lines.append("Again the with handjobs, huh?")
         elif sex_actions in Girl.recent_history:
-            $ lines.append("Your funeral, " + Girl.player_petname + ".")
+            $ lines.append("Your funeral, " + Girl.player_petname + "_.")
     elif Girl == JeanX:
         $ lines = ["You didn't get enough earlier?",
             "Huh? Again?",
@@ -2716,7 +2716,7 @@ label daily_action_lines(Girl, action):
         elif action == "handjob":
             $ lines.append("Again the with handjobs, huh?")
         elif sex_actions in Girl.recent_history:
-            $ lines.append("Your funeral, " + Girl.player_petname + ".")
+            $ lines.append("Your funeral, " + Girl.player_petname + "_.")
     elif Girl == StormX:
         $ lines = ["You didn't get enough earlier?",
             "Huh? Again?",
@@ -2750,8 +2750,8 @@ label daily_action_lines(Girl, action):
         elif action in fondle_actions or action in dildo_actions or action == "sex" or action == "anal":
             $ lines.append("Take it a bit gently, I am still glowing from earlier.")
             $ lines.append("You're going to wear me out.")
-            $ lines.append("You are wearing me out, " + Girl.player_petname + ".")
-            $ lines.append("You are tiring me, " + Girl.player_petname + ".")
+            $ lines.append("You are wearing me out, " + Girl.player_petname + "_.")
+            $ lines.append("You are tiring me, " + Girl.player_petname + "_.")
 
             if action in dildo_actions:
                 $ lines.append("Breaking out the toys again?")
@@ -2815,7 +2815,7 @@ label taboo_and_said_no_today_lines(Girl, action):
             "I told you that I didn't want you rubb'in up on me in public!"]
     elif Girl == KittyX:
         $ lines = ["I told you not here!",
-            "I told you this was" + Girl.like + "too public!",
+            "I told you this was" + Girl.like + "_too public!",
             "I told you not to touch me like that in public!",
             "You already got your answer!",
             "I told you that wasn't appropriate!",
@@ -2824,7 +2824,7 @@ label taboo_and_said_no_today_lines(Girl, action):
             "I told you, not in public!",
             "Stop swinging that thing around in public!",
             "I already told you. . . not in public!",
-            "I{i}just{/i}" + Girl.like + "told, not in public!"]
+            "I{i}just{/i}" + Girl.like + "_told, not in public!"]
     elif Girl == EmmaX:
         $ lines = ["You've been warned.",
             "I told you I couldn't be seen like that.",
@@ -2863,7 +2863,7 @@ label taboo_and_said_no_today_lines(Girl, action):
             "I'm not comfortable with that. . .",
             "I just told you. . . not in such an exposed location."]
     elif Girl == StormX:
-        $ lines = ["This area is too public, " + Girl.player_petname + ".",
+        $ lines = ["This area is too public, " + Girl.player_petname + "_.",
             "I told you not to touch me like that in public!",
             "You already got your answer!",
             "This is not an appropriate location for that. !",
@@ -2888,53 +2888,53 @@ label taboo_and_said_no_today_lines(Girl, action):
 
 label said_no_today_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["I already told you \"no,\" " + Girl.player_petname + ".",
+        $ lines = ["I already told you \"no,\" " + Girl.player_petname + "_.",
             "I already told you no, take a hint.",
             "What part of \"no\" don't you understand?",
-            "I already told you \"no,\" " + Girl.player_petname + ".",
-            "I told you \"no\" earlier " + Girl.player_petname + "."]
+            "I already told you \"no,\" " + Girl.player_petname + "_.",
+            "I told you \"no\" earlier " + Girl.player_petname + "_."]
     elif Girl == KittyX:
-        $ lines = ["I" + Girl.like + "already told you \"no\"."
-            "" + Girl.Like + "take a lesson, " + Girl.player_petname + ".",
-            "I told you \"no,\" " + Girl.player_petname + ".",
-            "I already told you \"no,\" " + Girl.player_petname + ".",
-            "I already" + Girl.like + "told you \"no\"."
-            "I{i}just{/i}" + Girl.like + "told you \"no\" earlier!"]
+        $ lines = ["I" + Girl.like + "_already told you \"no\"."
+            "" + Girl.Like + "_take a lesson, " + Girl.player_petname + "_.",
+            "I told you \"no,\" " + Girl.player_petname + "_.",
+            "I already told you \"no,\" " + Girl.player_petname + "_.",
+            "I already" + Girl.like + "_told you \"no\"."
+            "I{i}just{/i}" + Girl.like + "_told you \"no\" earlier!"]
     elif Girl == EmmaX:
         $ lines = ["I believe you know my answer on this matter.",
-            "I told you \"no,\" " + Girl.player_petname + ".",
-            "I already refused, " + Girl.player_petname + ".",
-            "I already told you \"no,\" " + Girl.player_petname + ".",
-            "I said \"no,\" " + Girl.player_petname + ".",
-            "I believe I just told you \"no,\" " + Girl.player_petname + "."]
+            "I told you \"no,\" " + Girl.player_petname + "_.",
+            "I already refused, " + Girl.player_petname + "_.",
+            "I already told you \"no,\" " + Girl.player_petname + "_.",
+            "I said \"no,\" " + Girl.player_petname + "_.",
+            "I believe I just told you \"no,\" " + Girl.player_petname + "_."]
     elif Girl == LauraX:
         $ lines = ["Don't make me tell you again today.",
-            "I told you \"no,\" " + Girl.player_petname + ".",
-            "I already told you \"no,\" " + Girl.player_petname + ".",
-            "Told you \"no,\" " + Girl.player_petname + ".",
-            "I already told you \"no,\" " + Girl.player_petname + ".",
+            "I told you \"no,\" " + Girl.player_petname + "_.",
+            "I already told you \"no,\" " + Girl.player_petname + "_.",
+            "Told you \"no,\" " + Girl.player_petname + "_.",
+            "I already told you \"no,\" " + Girl.player_petname + "_.",
             "I just told you \"no\"."
-            "I'm believe I just told you \"no,\" " + Girl.player_petname + "."]
+            "I'm believe I just told you \"no,\" " + Girl.player_petname + "_."]
     elif Girl == JeanX:
         $ lines = ["Don't ask me again today.",
-            "I already told you \"no,\" " + Girl.player_petname + ".",
-            "Told you \"no,\" " + Girl.player_petname + ".",
-            "I already told you \"no,\" " + Girl.player_petname + ".",
-            "I told you \"no,\" " + Girl.player_petname + ".",
+            "I already told you \"no,\" " + Girl.player_petname + "_.",
+            "Told you \"no,\" " + Girl.player_petname + "_.",
+            "I already told you \"no,\" " + Girl.player_petname + "_.",
+            "I told you \"no,\" " + Girl.player_petname + "_.",
             "Not today.",
-            "I believe I just told you \"no,\" " + Girl.player_petname + "."]
+            "I believe I just told you \"no,\" " + Girl.player_petname + "_."]
     elif Girl == StormX:
         $ lines = ["I have already told you my answer.",
             "I believe you know my answer on this matter.",
-            "You will need to accept a \"no\", " + Girl.player_petname + ".",
-            "I already refused, " + Girl.player_petname + ".",
-            "I told you \"no,\" " + Girl.player_petname + ".",
-            "I already told you \"no,\" " + Girl.player_petname + ".",
-            "I said \"no,\" " + Girl.player_petname + ".",
-            "I believe that I just told you \"no,\" " + Girl.player_petname + "."]
+            "You will need to accept a \"no\", " + Girl.player_petname + "_.",
+            "I already refused, " + Girl.player_petname + "_.",
+            "I told you \"no,\" " + Girl.player_petname + "_.",
+            "I already told you \"no,\" " + Girl.player_petname + "_.",
+            "I said \"no,\" " + Girl.player_petname + "_.",
+            "I believe that I just told you \"no,\" " + Girl.player_petname + "_."]
     elif Girl == JubesX:
         $ lines = ["Don't make me tell you again today.",
-            "I told you \"no,\" " + Girl.player_petname + "."]
+            "I told you \"no,\" " + Girl.player_petname + "_."]
 
     $ line = renpy.random.choice(lines)
 
@@ -2947,9 +2947,9 @@ label forced_action_rejected_lines(Girl, action):
         $ lines = ["I don't want you touching me.",
             "I don't want your lips on me.",
             "Um, no way.",
-            "Not even, " + Girl.player_petname + ".",
+            "Not even, " + Girl.player_petname + "_.",
             "Not even that much.",
-            "Stay out of my pants, " + Girl.player_petname + ".",
+            "Stay out of my pants, " + Girl.player_petname + "_.",
             "Hands off the booty!",
             "Ew, no way.",
             "I'm not doing something so. . . intimate with you watching.",
@@ -2962,8 +2962,8 @@ label forced_action_rejected_lines(Girl, action):
             "Even that's not worth it."]
     elif Girl == KittyX:
         $ lines = ["Not even.",
-            "" + Girl.Like + "get your mouth away from me.",
-            "Keep away from my kitty, " + Girl.player_petname + ".",
+            "" + Girl.Like + "_get your mouth away from me.",
+            "Keep away from my kitty, " + Girl.player_petname + "_.",
             "Back off!",
             "Um, no way.",
             "Ew, no way.",
@@ -2979,7 +2979,7 @@ label forced_action_rejected_lines(Girl, action):
     elif Girl == EmmaX:
         $ lines = ["Don't push your luck.",
             "Not worth it.",
-            "I don't think so, " + Girl.player_petname + ".",
+            "I don't think so, " + Girl.player_petname + "_.",
             "Do you want to keep those fingers?",
             "I'm not going that far today.",
             "I don't think so.",
@@ -2995,7 +2995,7 @@ label forced_action_rejected_lines(Girl, action):
     elif Girl == LauraX:
         $ lines = ["No.",
             "Not worth it.",
-            "I don't think so, " + Girl.player_petname + ".",
+            "I don't think so, " + Girl.player_petname + "_.",
             "Do you want to keep those fingers?",
             "I'm not going there today.",
             "I don't think so.",
@@ -3011,7 +3011,7 @@ label forced_action_rejected_lines(Girl, action):
     elif Girl == JeanX:
         $ lines = ["No.",
             ". . . no, not worth it.",
-            "I don't think so, " + Girl.player_petname + ".",
+            "I don't think so, " + Girl.player_petname + "_.",
             "Mmmm, no.",
             "I'm not going there today.",
             "I don't think so.",
@@ -3037,7 +3037,7 @@ label forced_action_rejected_lines(Girl, action):
     elif Girl == JubesX:
         $ lines = ["No.",
             "Suck yourself.",
-            "I don't think so, " + Girl.player_petname + ".",
+            "I don't think so, " + Girl.player_petname + "_.",
             "Do you want to keep those fingers?",
             "I'm not going there today.",
             "This isn't something I'm into.",
@@ -3051,7 +3051,7 @@ label forced_action_rejected_lines(Girl, action):
 
 label try_something_else_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["I know you're having fun, but maybe we could try something else " + Girl.player_petname + ".",
+        $ lines = ["I know you're having fun, but maybe we could try something else " + Girl.player_petname + "_.",
             "" + Girl.player_petname + " this is getting uncomfortable, maybe we could try something else.",
             "" + Girl.player_petname + " this is nice, but could we do something else?",
             "" + Girl.player_petname + " I know you're having fun down there, but maybe we could try something else."]
@@ -3068,7 +3068,7 @@ label this_is_boring_lines(Girl, action):
     elif Girl == KittyX:
         $ lines = ["Fun for you maybe, I'm tired of it.",
             "Not with that attitude, mister!",
-            "Hey, I've got better things to do if you're" + Girl.like + "going to be a dick about it.",
+            "Hey, I've got better things to do if you're" + Girl.like + "_going to be a dick about it.",
             "Well fuck you then.",
             "Well if that's your attitude, I don't need your \"help\"."]
     elif Girl == LauraX:
@@ -3117,8 +3117,8 @@ label this_is_boring_lines(Girl, action):
 label satisfied_lines(Girl, action):
     if Girl == RogueX:
         $ lines = ["That was. . . nice.",
-            "That was . . . real pleasant, " + Girl.player_petname + ".",
-            "I . . . really liked that, " + Girl.player_petname + ".",
+            "That was . . . real pleasant, " + Girl.player_petname + "_.",
+            "I . . . really liked that, " + Girl.player_petname + "_.",
             "Certainly different with someone else at the wheel.",
             "I. . . how'd I taste?",
             "That felt. . . interesting. . .",
@@ -3129,11 +3129,11 @@ label satisfied_lines(Girl, action):
             "That really wasn't half bad.",
             "Well I liked that. . .",
             "Well that was a bit rough. . .",
-            "That was . . . interesting " + Girl.player_petname + ". We'll have to do that again sometime.",
-            "That was pretty hot, " + Girl.player_petname + ", we'll have to do that again sometime.",
-            "That was really great, " + Girl.player_petname + ", we'll have to do that again sometime."]
+            "That was . . . interesting " + Girl.player_petname + "_. We'll have to do that again sometime.",
+            "That was pretty hot, " + Girl.player_petname + "_, we'll have to do that again sometime.",
+            "That was really great, " + Girl.player_petname + "_, we'll have to do that again sometime."]
     elif Girl == KittyX:
-        $ lines = ["I hope there was" + Girl.like + "enough to work with.",
+        $ lines = ["I hope there was" + Girl.like + "_enough to work with.",
             "I hope they were enough for you. . .",
             "I liked that.",
             "Your hand is. . . bigger than mine.",
@@ -3146,7 +3146,7 @@ label satisfied_lines(Girl, action):
             "Huh, that wasn't bad.",
             "Thanks for the extra hand. . .",
             "I could feel you down there. . .",
-            "I feel like I've been waiting" + Girl.like + "a million years for that.",
+            "I feel like I've been waiting" + Girl.like + "_a million years for that.",
             "Anal. . . huh, who knew?",
             "Well, did that work for you?",
             "That was. . . interesting. . .",
@@ -3378,7 +3378,7 @@ label get_out_lines(Girl):
 
 label first_time_pussy_eaten_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["That's pretty intimate, " + Girl.player_petname + ". . ."]
+        $ lines = ["That's pretty intimate, " + Girl.player_petname + "_. . ."]
 
     $ line = renpy.random.choice(lines)
 
@@ -3518,27 +3518,27 @@ label unconvinced_lines(Girl, action):
         $ lines = ["Tsk, not this time, " + Girl.player_petname + " that just seems. . . dirty.",
             "I really don't think that I would."]
     elif Girl == KittyX:
-        $ lines = ["Um, not this time, " + Girl.player_petname + ", that's too. . .",
+        $ lines = ["Um, not this time, " + Girl.player_petname + "_, that's too. . .",
             "I really don't think so.",
             "I really don't think that I would."]
     elif Girl == EmmaX:
-        $ lines = ["I would, but still no, " + Girl.player_petname + ".",
+        $ lines = ["I would, but still no, " + Girl.player_petname + "_.",
             "I really don't think so.",
             "I don't think that I would."]
     elif Girl == LauraX:
-        $ lines = ["I would, but still no, " + Girl.player_petname + ".",
+        $ lines = ["I would, but still no, " + Girl.player_petname + "_.",
             "I really don't think so.",
             "I don't think that I would."]
     elif Girl == JeanX:
-        $ lines = ["I would, but still no, " + Girl.player_petname + ".",
+        $ lines = ["I would, but still no, " + Girl.player_petname + "_.",
             "I really don't think so.",
             "I don't think that I would."]
     elif Girl == StormX:
-        $ lines = ["I would, but still no, " + Girl.player_petname + ".",
+        $ lines = ["I would, but still no, " + Girl.player_petname + "_.",
             "I really do not think so.",
             "I do not think that I would."]
     elif Girl == JubesX:
-        $ lines = ["I would, but still no, " + Girl.player_petname + ".",
+        $ lines = ["I would, but still no, " + Girl.player_petname + "_.",
             "Doubt.",
             "I really doubt that. . ."]
 
@@ -3599,10 +3599,10 @@ label starting_to_get_bored_lines(Girl, action):
             "Uh, that's nice, but. . .",
             "What are you even?",
             "Are you getting close here? I'm getting a little sore.",
-            "So are we" + Girl.like + "getting close here?",
+            "So are we" + Girl.like + "_getting close here?",
             "Are you getting close here?",
             "What are you even doing down there?",
-            "So are we" + Girl.like + "getting close here? This is not super pleasant. . ."]
+            "So are we" + Girl.like + "_getting close here? This is not super pleasant. . ."]
     elif Girl == EmmaX:
         $ lines = ["They really are magnificent, aren't they?",
             "Lovely, aren't they?",
@@ -3673,40 +3673,40 @@ label starting_to_get_bored_lines(Girl, action):
 
 label definitely_bored_now_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["I'm getting rug-burn here " + Girl.player_petname + ". Can we do something else?",
-            "I'm getting a little tired, " + Girl.player_petname + ". Can we do something else?",
-            "" + Girl.player_petname + ", this is getting uncomfortable, maybe we could try something else.",
+        $ lines = ["I'm getting rug-burn here " + Girl.player_petname + "_. Can we do something else?",
+            "I'm getting a little tired, " + Girl.player_petname + "_. Can we do something else?",
+            "" + Girl.player_petname + "_, this is getting uncomfortable, maybe we could try something else.",
             "Ow, i'm not used to this. Mind if we take a break?",
             "Can we be done with this now? I'm getting sore.",
-            "I'm . . .getting . . .worn out. . . here, . . " + Girl.player_petname + ".",
-            "I'm kinda done with this, " + Girl.player_petname + ".",
+            "I'm . . .getting . . .worn out. . . here, . . " + Girl.player_petname + "_.",
+            "I'm kinda done with this, " + Girl.player_petname + "_.",
             "Can we. . . do something. . . else?"]
     elif Girl == KittyX:
-        $ lines = ["Maybe we could try something else here " + Girl.player_petname + "?",
-            "You look like you're having fun there, but maybe we could" + Girl.like + "try something else?",
-            "" + Girl.player_petname + ", I know you're having fun down there, but maybe we could try something else.",
-            "" + Girl.player_petname + ", this is nice, but could we do something else?",
-            "" + Girl.player_petname + ", this is getting kind sore, maybe we could try something else.",
-            "" + Girl.player_petname + ", this is getting weird, maybe we could try something else.",
-            "Can we" + Girl.Like + "be done with this now? I'm getting sore.",
+        $ lines = ["Maybe we could try something else here " + Girl.player_petname + "_?",
+            "You look like you're having fun there, but maybe we could" + Girl.like + "_try something else?",
+            "" + Girl.player_petname + "_, I know you're having fun down there, but maybe we could try something else.",
+            "" + Girl.player_petname + "_, this is nice, but could we do something else?",
+            "" + Girl.player_petname + "_, this is getting kind sore, maybe we could try something else.",
+            "" + Girl.player_petname + "_, this is getting weird, maybe we could try something else.",
+            "Can we" + Girl.Like + "_be done with this now? I'm getting sore.",
             "Are you getting close here? I'm cramping up.",
-            "Can we" + Girl.Like + "be done with this now? I'm getting sore.",
-            "Ouch, hand cramp, can we" + Girl.like + "take a break?",
-            "I'm getting rug-burn here " + Girl.player_petname + ". Can we do something else?",
-            "I'm" + Girl.like + "totally worn out here. Can we do something else?",
-            "" + Girl.player_petname + ", this is getting uncomfortable, maybe we could try something else.",
-            "Ouch, foot cramp, can we" + Girl.like + "take a break?",
+            "Can we" + Girl.Like + "_be done with this now? I'm getting sore.",
+            "Ouch, hand cramp, can we" + Girl.like + "_take a break?",
+            "I'm getting rug-burn here " + Girl.player_petname + "_. Can we do something else?",
+            "I'm" + Girl.like + "_totally worn out here. Can we do something else?",
+            "" + Girl.player_petname + "_, this is getting uncomfortable, maybe we could try something else.",
+            "Ouch, foot cramp, can we" + Girl.like + "_take a break?",
             "I'm . . .getting . . kinda tired. . . here. . .",
             "I'm . . .getting . . kinda tired. . . of this. . .",
             "Can we. . . do something. . . else?",
             "This is getting a bit dull."]
     elif Girl == EmmaX:
-        $ lines = ["Perhaps we could try something else, " + Girl.player_petname + "?",
+        $ lines = ["Perhaps we could try something else, " + Girl.player_petname + "_?",
             "You certainly seem to be enjoying yourself, but perhaps we could add some variety?",
-            "" + Girl.player_petname + ", I know you're having fun down there, but maybe we could try something else.",
-            "" + Girl.player_petname + ", this is nice, but could we do something else?",
-            "" + Girl.player_petname + ", this is getting kind sore, maybe we could try something else.",
-            "" + Girl.player_petname + ", this is getting weird, maybe we could try something else.",
+            "" + Girl.player_petname + "_, I know you're having fun down there, but maybe we could try something else.",
+            "" + Girl.player_petname + "_, this is nice, but could we do something else?",
+            "" + Girl.player_petname + "_, this is getting kind sore, maybe we could try something else.",
+            "" + Girl.player_petname + "_, this is getting weird, maybe we could try something else.",
             "Are you certain you didn't have anything else in mind?",
             "Are you about done? I'm a little tired of this.",
             "Could we be done here, my feet are getting sore.",
@@ -3714,7 +3714,7 @@ label definitely_bored_now_lines(Girl, action):
             "Mind if we take a break?",
             "I'm getting a bit worn out, could we settle this some other way?",
             "I'm getting a bit worn out here, could we do something else?",
-            "" + Girl.player_petname + ", this is getting uncomfortable, maybe we could try something else.",
+            "" + Girl.player_petname + "_, this is getting uncomfortable, maybe we could try something else.",
             "Hmm, foot cramp, could we take a short break?",
             "I'm . . .getting . . a bit. . . tired. . . here. . .",
             "I'm . . .getting . . a bit. . . tired. . . of this. . .",
@@ -3722,31 +3722,31 @@ label definitely_bored_now_lines(Girl, action):
             "Can we. . . do something. . . else?",
             "I'm a bit bored by this."]
     elif Girl == LauraX:
-        $ lines = ["Maybe it's time for something else, " + Girl.player_petname + "?",
+        $ lines = ["Maybe it's time for something else, " + Girl.player_petname + "_?",
             "Maybe change things up a little?",
-            "" + Girl.player_petname + ", could we try something different?",
+            "" + Girl.player_petname + "_, could we try something different?",
             "This working for you?",
             "Are you getting close here? I'm bored.",
             "Ok, seriously, let's try something different.",
             "Hmm, this is boring, can we take a break?",
             "Seriously, can we do something else?",
             "I'm getting kinda bored. Can we do something else?",
-            "" + Girl.player_petname + ", this is getting uncomfortable, maybe we could try something else.",
+            "" + Girl.player_petname + "_, this is getting uncomfortable, maybe we could try something else.",
             "Hmm, this is getting a bit boring.",
             "Hey. . . could we. . . try something. . . else?",
             "Can we. . . do something. . . else?",
             "I'm kinda bored by this."]
     elif Girl == JeanX:
-        $ lines = ["Maybe it's time for something else, " + Girl.player_petname + "?",
+        $ lines = ["Maybe it's time for something else, " + Girl.player_petname + "_?",
             "Maybe try something else?",
-            "" + Girl.player_petname + ", could we try something different?",
+            "" + Girl.player_petname + "_, could we try something different?",
             "Nice, right?",
             "Hey, you about done up there?",
             "Ok, seriously, let's try something different.",
             "Ok, I'm bored now. Can we try something else?",
             "Ok, seriously, can't we do something else?",
             "Ok, that's enough of that. Can we do something else?",
-            "" + Girl.player_petname + ", this is getting uncomfortable, maybe we could try something else.",
+            "" + Girl.player_petname + "_, this is getting uncomfortable, maybe we could try something else.",
             "Hmm, my feet are cramping up here. . .",
             "Hey. . . you. . . about done. . . there?",
             "Can we. . . do something. . . else?",
@@ -3760,7 +3760,7 @@ label definitely_bored_now_lines(Girl, action):
             "Mind if we take a break?",
             "This is becoming uncomfortable, is there some way I could finish you off?",
             "My jaw is becoming uncomfortable, could we do something else?",
-            "" + Girl.player_petname + ", this is getting uncomfortable, maybe we could try something else.",
+            "" + Girl.player_petname + "_, this is getting uncomfortable, maybe we could try something else.",
             "Hmm, foot cramp. Could we take a short break?",
             "I am . . .becoming . . a bit. . . worn out. . . here. . .",
             "This is . . .becoming . . rather. . . uncomfortable. . .",
@@ -3778,7 +3778,7 @@ label definitely_bored_now_lines(Girl, action):
 
 label no_ass_to_mouth_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["No thanks, " + Girl.player_petname + ". Maybe a Handy instead?"]
+        $ lines = ["No thanks, " + Girl.player_petname + "_. Maybe a Handy instead?"]
 
     Girl.voice "[line]"
 
@@ -3791,7 +3791,7 @@ label since_you_are_so_nice_lines(Girl, action):
             "I guess it doesn't feel so bad. . ."]
     elif Girl == KittyX:
         $ lines = ["{i}Well. . .{/i} I didn't say I didn't want to. . .",
-            "Well" + Girl.like + "just take it easy, ok? . .",
+            "Well" + Girl.like + "_just take it easy, ok? . .",
             "I guess it doesn't feel so bad. . .",
             "Well, now that you mention it. . ."]
     elif Girl == EmmaX:
@@ -4130,39 +4130,39 @@ label used_to_action_lines(Girl, action):
 
 label auto_accepted_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["Ok, " + Girl.player_petname + ", let's do this.",
+        $ lines = ["Ok, " + Girl.player_petname + "_, let's do this.",
             "Hmm, stick it in. . .",
             "Hmm, I've apparently got someone's attention. . ."]
     elif Girl == KittyX:
-        $ lines = ["Oh. . . game on, " + Girl.player_petname + ".",
-            "Ooo, " + Girl.player_petname + ", toys!",
+        $ lines = ["Oh. . . game on, " + Girl.player_petname + "_.",
+            "Ooo, " + Girl.player_petname + "_, toys!",
             "Hmm, stick it in. . .",
             "Oookay. . .",
             "Hmm, I've apparently got someone's attention. . ."]
     elif Girl == EmmaX:
-        $ lines = ["Mmm, if you insist, " + Girl.player_petname + ".",
-            "Hmm, " + Girl.player_petname + ", toys!",
-            "Mmmm, " + Girl.player_petname + ", toys. . .",
+        $ lines = ["Mmm, if you insist, " + Girl.player_petname + "_.",
+            "Hmm, " + Girl.player_petname + "_, toys!",
+            "Mmmm, " + Girl.player_petname + "_, toys. . .",
             "Oooh, naughty boy. . .",
             "Now what shall we do with that . ."]
     elif Girl == LauraX:
-        $ lines = ["Fine by me, " + Girl.player_petname + ".",
-            "Ooo, " + Girl.player_petname + ", toys!",
+        $ lines = ["Fine by me, " + Girl.player_petname + "_.",
+            "Ooo, " + Girl.player_petname + "_, toys!",
             "Yeah, ok. . .",
             "Oh, what did you have in mind with that? . ."]
     elif Girl == JeanX:
-        $ lines = ["Oh, if you must, " + Girl.player_petname + ".",
-            "Ooo, " + Girl.player_petname + ", toys!",
+        $ lines = ["Oh, if you must, " + Girl.player_petname + "_.",
+            "Ooo, " + Girl.player_petname + "_, toys!",
             "Oh! Sure. . .",
             "Oh, what did you have in mind with that? . ."]
     elif Girl == StormX:
-        $ lines = ["Mmm, if you insist, " + Girl.player_petname + ".",
-            "Hmm, " + Girl.player_petname + ", toys!",
-            "Mmmm, " + Girl.player_petname + ", toys. . .",
-            "" + Girl.player_petname + ", I am surprised at you. . .",
+        $ lines = ["Mmm, if you insist, " + Girl.player_petname + "_.",
+            "Hmm, " + Girl.player_petname + "_, toys!",
+            "Mmmm, " + Girl.player_petname + "_, toys. . .",
+            "" + Girl.player_petname + "_, I am surprised at you. . .",
             "Now what shall we do with that . ."]
     elif Girl == JubesX:
-        $ lines = ["Fine by me, " + Girl.player_petname + "."]
+        $ lines = ["Fine by me, " + Girl.player_petname + "_."]
 
     $ line = renpy.random.choice(lines)
 
@@ -4188,18 +4188,18 @@ label were_done_here_lines(Girl, action):
     elif Girl == EmmaX:
         $ lines = ["Impertinent!{p}Do not test my patience with you.",
             "Impertinent!{p}You need to ask a lady first.",
-            "Don't push your luck, " + Girl.player_petname + ".",
+            "Don't push your luck, " + Girl.player_petname + "_.",
             "Ask nicely before trying anything like that!",
             "Ask nicely if you want to stick something in my ass!"]
     elif Girl == LauraX:
         $ lines = ["Dick.{p}Don't push me.",
             "Yeah, not like that you won't.",
-            "Don't push it, " + Girl.player_petname + ".",
+            "Don't push it, " + Girl.player_petname + "_.",
             "Jerk!{p}}Ask nice if you want to stick something in my pussy!",
             "Jerk!{p}Ask nice if you want to stick something in my ass!"]
     elif Girl == JeanX:
         $ lines = ["Hey, I don't need my powers to hurt you.",
-            "Tsk tsk.{p}Don't push it, " + Girl.player_petname + ".",
+            "Tsk tsk.{p}Don't push it, " + Girl.player_petname + "_.",
             "Jerk!{p}Ask nice if you want to stick something in my pussy!",
             "Jerk!{p}Ask nice if you want to stick something in my ass!"]
     elif Girl == StormX:
@@ -4207,7 +4207,7 @@ label were_done_here_lines(Girl, action):
             "I am afraid that is -not- what will happen here.",
             "That is unfortunate.",
             "I am afraid that is -not- what will happen here.",
-            "Do not go beyond yourself, " + Girl.player_petname + ".",
+            "Do not go beyond yourself, " + Girl.player_petname + "_.",
             "Ask nicely before trying anything like that!",
             "Ask nicely if you want to stick something in my ass!"]
     elif Girl == JubesX:
@@ -4240,7 +4240,7 @@ label first_action_approval_lines(Girl, action):
         $ lines = ["That's kinda gross. . .",
             "I guess. . .",
             "Hadn't really considered that.",
-            "" + Girl.Like + "sure. . .",
+            "" + Girl.Like + "_sure. . .",
             "This could be kinda fun . . .",
             "I guess it could be fun with a partner. . .",
             "I guess it could be fun two-player. . .",
@@ -4338,7 +4338,7 @@ label first_action_approval_mostly_love_lines(Girl, action):
             "I have wondered what you. . . taste like.",
             "This is kind of {i}intimate{/i} . . .",
             "I've had a reasonable amount of experience with these, you know. . .",
-            "I" + Girl.like + "haven't actually used one of these, back there before. . .",
+            "I" + Girl.like + "_haven't actually used one of these, back there before. . .",
             "I guess it couldn't hurt. . .",
             "I don't want you to think I'm some kind of slut. . .",
             "I guess? . .",
@@ -4403,38 +4403,38 @@ label first_action_approval_mostly_love_lines(Girl, action):
 
 label first_action_approval_mostly_obedience_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["If that's what you want, " + Girl.player_petname + ". . .",
+        $ lines = ["If that's what you want, " + Girl.player_petname + "_. . .",
             "If that's what you want. . .",
             "I suppose, if that's what you want. . .",
-            "Ok, " + Girl.player_petname + ", I'm ready."]
+            "Ok, " + Girl.player_petname + "_, I'm ready."]
     elif Girl == KittyX:
         $ lines = ["You don't have to do that.",
-            "If you want, " + Girl.player_petname + ". . .",
+            "If you want, " + Girl.player_petname + "_. . .",
             "I mean. . .",
-            "Ok by me, " + Girl.player_petname + ". .",
+            "Ok by me, " + Girl.player_petname + "_. .",
             "If you want me to. . .",
-            "If that's what you want, " + Girl.player_petname + ". . .",
-            "I suppose if it's you, " + Girl.player_petname + ". . .",
+            "If that's what you want, " + Girl.player_petname + "_. . .",
+            "I suppose if it's you, " + Girl.player_petname + "_. . .",
             "Well. . .",
             "If you want. . ."]
     elif Girl == EmmaX:
         $ lines = ["Is that what gets you off?",
-            "If that's what you'd like, " + Girl.player_petname + ". . .",
+            "If that's what you'd like, " + Girl.player_petname + "_. . .",
             "If that's what you want. . .",
-            "If that's what you want, " + Girl.player_petname + ". . .",
-            "If you enjoy that, " + Girl.player_petname + ". . .",
-            "If you insist, " + Girl.player_petname + ". . .",
-            "If that's what you're into, " + Girl.player_petname + ". . .",
+            "If that's what you want, " + Girl.player_petname + "_. . .",
+            "If you enjoy that, " + Girl.player_petname + "_. . .",
+            "If you insist, " + Girl.player_petname + "_. . .",
+            "If that's what you're into, " + Girl.player_petname + "_. . .",
             "I expected we'd get here at some point. . .",
             "If that's what works for you. . ."]
     elif Girl == LauraX:
         $ lines = ["Is that what gets you off?",
-            "If you want, " + Girl.player_petname + ". . .",
+            "If you want, " + Girl.player_petname + "_. . .",
             "If you'd like that. . .",
             "If that's what you want. . .",
             "If that's what you're into. . .",
-            "If that's what you want, " + Girl.player_petname + ". . .",
-            "Yes, " + Girl.player_petname + ". . .",
+            "If that's what you want, " + Girl.player_petname + "_. . .",
+            "Yes, " + Girl.player_petname + "_. . .",
             "I expected that. . .",
             "If that's what works for you. . ."]
     elif Girl == JeanX:
@@ -4442,18 +4442,18 @@ label first_action_approval_mostly_obedience_lines(Girl, action):
             "If you'd want that. . .",
             "I could do that, I guess. . .",
             "If that's what you're into. . .",
-            "If that's what you want, " + Girl.player_petname + ". . .",
-            "If you want, " + Girl.player_petname + ". . .",
-            "Ok, " + Girl.player_petname + ". . .",
+            "If that's what you want, " + Girl.player_petname + "_. . .",
+            "If you want, " + Girl.player_petname + "_. . .",
+            "Ok, " + Girl.player_petname + "_. . .",
             "I expected that. . .",
             "Ok, we can start with that. . ."]
     elif Girl == StormX:
         $ lines = ["That is what you want?",
-            "If that is what you want, " + Girl.player_petname + ". . .",
+            "If that is what you want, " + Girl.player_petname + "_. . .",
             "If that is what you want. . .",
-            "If you enjoy that, " + Girl.player_petname + ". . .",
-            "If that is what you wish, " + Girl.player_petname + ". . .",
-            "If you enjoy watching, " + Girl.player_petname + ". . .",
+            "If you enjoy that, " + Girl.player_petname + "_. . .",
+            "If that is what you wish, " + Girl.player_petname + "_. . .",
+            "If you enjoy watching, " + Girl.player_petname + "_. . .",
             "I expected we would get here at some point. . .",
             "If that is what works for you. . ."]
     elif Girl == JubesX:
@@ -4520,7 +4520,7 @@ label first_action_approval_addicted_lines(Girl, action):
             "Hmm, that would certainly be interesting. . .",
             "Hrmm. . ."]
     elif Girl == JubesX:
-        $ lines = ["If you want, " + Girl.player_petname + ". . ."]
+        $ lines = ["If you want, " + Girl.player_petname + "_. . ."]
 
     $ line = renpy.random.choice(lines)
 
@@ -4939,14 +4939,14 @@ label before_action_less_than_three_times_lines(Girl, action):
 
 label anal_insertion_not_loose_not_done_today_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["You could have been a bit more gentle last time, " + Girl.player_petname + ". . ."]
+        $ lines = ["You could have been a bit more gentle last time, " + Girl.player_petname + "_. . ."]
     elif Girl == KittyX:
-        $ lines = ["You could have been a bit more gentle last time, " + Girl.player_petname + ". . .",
+        $ lines = ["You could have been a bit more gentle last time, " + Girl.player_petname + "_. . .",
             "That was kind of. . . rough last time?"]
     elif Girl == EmmaX:
         $ lines = ["Perhaps we can work up to that."]
     elif Girl == LauraX:
-        $ lines = ["You could have been a bit more gentle last time, " + Girl.player_petname + ". . .",
+        $ lines = ["You could have been a bit more gentle last time, " + Girl.player_petname + "_. . .",
             "Maybe eventually. . ."]
     elif Girl == JeanX:
         $ lines = ["Maybe eventually. . ."]
@@ -4961,26 +4961,26 @@ label anal_insertion_not_loose_not_done_today_lines(Girl, action):
 
 label anal_insertion_not_loose_done_today_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["Sorry, I just need a little break back there, " + Girl.player_petname + ".",
-            "I'm still a little sore from earlier, " + Girl.player_petname + "."]
+        $ lines = ["Sorry, I just need a little break back there, " + Girl.player_petname + "_.",
+            "I'm still a little sore from earlier, " + Girl.player_petname + "_."]
     elif Girl == KittyX:
         $ lines = ["I'm not really over the last time, but. . .",
-            "I'm still a little sore from earlier, " + Girl.player_petname + ".",
-            "I'm still" + Girl.like + "sore from earlier. . .",
-            "Sorry, I just need a little break back there, " + Girl.player_petname + ".",
-            "I'm" + Girl.like + "a little sore here?"]
+            "I'm still a little sore from earlier, " + Girl.player_petname + "_.",
+            "I'm still" + Girl.like + "_sore from earlier. . .",
+            "Sorry, I just need a little break back there, " + Girl.player_petname + "_.",
+            "I'm" + Girl.like + "_a little sore here?"]
     elif Girl == EmmaX:
         $ lines = ["Don't wear me out here."]
     elif Girl == LauraX:
         $ lines = ["I'm still sore from earlier. . .",
-            "Sorry, I just need a little break back there, " + Girl.player_petname + ".",
+            "Sorry, I just need a little break back there, " + Girl.player_petname + "_.",
             "Not right now."]
     elif Girl == JeanX:
         $ lines = ["Not right now."]
     elif Girl == StormX:
         $ lines = ["Do not wear me out here."]
     elif Girl == JubesX:
-        $ lines = ["I'm still a little sore from earlier, " + Girl.player_petname + "."]
+        $ lines = ["I'm still a little sore from earlier, " + Girl.player_petname + "_."]
 
     $ line = renpy.random.choice(lines)
 
@@ -4990,13 +4990,13 @@ label anal_insertion_not_loose_done_today_lines(Girl, action):
 
 label hard_cock_lines(Girl, action):
     if Girl == EmmaX:
-        $ lines = ["My word " + Girl.player_petname + ", your member is hard enough to crack diamond. . . and I should know."]
+        $ lines = ["My word " + Girl.player_petname + "_, your member is hard enough to crack diamond. . . and I should know."]
     elif Girl == LauraX:
         $ lines = ["Nice to see you're ready for business. . ."]
     elif Girl == JeanX:
         $ lines = ["I see you won't need any encouragement. . ."]
     elif Girl == StormX:
-        $ lines = ["I must say " + Girl.player_petname + ", you certainly do seem to be. . . excited."]
+        $ lines = ["I must say " + Girl.player_petname + "_, you certainly do seem to be. . . excited."]
 
     $ line = renpy.random.choice(lines)
 
@@ -5049,14 +5049,14 @@ label first_time_asking_lines(Girl, action):
         if action in [dildo_actions, "sex", "anal"]:
             $ lines.append("You want to try and fit that. . .?")
     elif Girl == EmmaX:
-        $ lines = ["Hmm, are you sure you can handle that, " + Girl.player_petname + "?",
+        $ lines = ["Hmm, are you sure you can handle that, " + Girl.player_petname + "_?",
             "Hmm, are you sure you're really prepared for this? . . ",
             "Hmm, you don't take half measures. . ."]
 
         if action == "masturbation":
             $ lines.append("So you enjoy a good show then. . .")
         elif action == "footjob":
-            $ lines.append("Mmm, so you're into feet then, " + Girl.player_petname + "?")
+            $ lines.append("Mmm, so you're into feet then, " + Girl.player_petname + "_?")
         elif action == "blowjob":
             $ lines.append("So you'd like me to suck you off?")
         elif action in dildo_actions:
@@ -5122,7 +5122,7 @@ label first_time_asking_lines(Girl, action):
         elif action == "handjob":
             $ lines.append("You would like me to jerk you off?")
         elif action == "footjob":
-            $ lines.append("Oh, you would like me to use my feet, " + Girl.player_petname + "?")
+            $ lines.append("Oh, you would like me to use my feet, " + Girl.player_petname + "_?")
         elif action == "blowjob":
             $ lines.append("You would like me to suck on your penis?")
         elif action in dildo_actions:
@@ -5133,7 +5133,7 @@ label first_time_asking_lines(Girl, action):
             $ lines.append("You would just like to press against each other like this?")
 
         if action in breast_actions:
-            $ lines.append("My breasts are really appealing to you, " + Girl.player_petname + "?")
+            $ lines.append("My breasts are really appealing to you, " + Girl.player_petname + "_?")
     elif Girl == JubesX:
         $ lines = []
 
@@ -5242,7 +5242,7 @@ label mouth_not_enough(Girl, action):
 label what_do_you_think_youre_doing_lines(Girl, action):
     if Girl == RogueX:
         $ lines = ["Hey, what do you think you're doing back there?!",
-            "Hmm, kinda rude, " + Girl.player_petname + "."]
+            "Hmm, kinda rude, " + Girl.player_petname + "_."]
 
     $ line = renpy.random.choice(lines)
 
@@ -5277,11 +5277,11 @@ label achievement_lines(Girl, action):
             "I. . . liked that a lot."]
 
         if action == "handjob":
-            $ lines.append("I've kinda become" + Girl.like + "a \"Handi-Queen\" or something.")
+            $ lines.append("I've kinda become" + Girl.like + "_a \"Handi-Queen\" or something.")
         elif action == "footjob":
             $ lines.append("I guess I've gotten pretty smooth at the \"Kittypedi\".")
         elif action == "blowjob":
-            $ lines.append("I can't" + Girl.like + "get your taste out of my mind.")
+            $ lines.append("I can't" + Girl.like + "_get your taste out of my mind.")
     elif Girl == EmmaX:
         $ lines = ["I seem to fit you like a glove. . .",
             "You're one of the better partners I've had at that.",
@@ -5292,11 +5292,11 @@ label achievement_lines(Girl, action):
         elif action == "footjob":
             $ lines.append("I'm glad that you enjoy my feet.")
         elif action == "blowjob":
-            $ lines.append("You taste positively intoxicating, " + Girl.player_petname + ".")
+            $ lines.append("You taste positively intoxicating, " + Girl.player_petname + "_.")
         elif action == "titjob":
             $ lines.append("They've been trained well over the years.")
     elif Girl == LauraX:
-        $ lines = ["Looks like you filled out the punch card, " + Girl.player_petname + ".",
+        $ lines = ["Looks like you filled out the punch card, " + Girl.player_petname + "_.",
             "I think I'm finally back into practice on this.",
             "We're making this a regular thing, huh. . .",
             "I think you've got a knack for that.",
@@ -5321,7 +5321,7 @@ label achievement_lines(Girl, action):
         if action == "handjob":
             $ lines.append("I seem to have become the \"queen\" of good handjobs.")
         elif action == "blowjob":
-            $ lines.append("I cannot imagine how I went this long without such a delicacy, " + Girl.player_petname + ".")
+            $ lines.append("I cannot imagine how I went this long without such a delicacy, " + Girl.player_petname + "_.")
 
     $ line = renpy.random.choice(lines)
 
@@ -5823,11 +5823,11 @@ label kiss_accepted_lines(Girl, action):
 
 label lend_some_helping_hands_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["Well, " + Girl.player_petname + ", I suppose I could use some help with these. . .",
-            "Well, " + Girl.player_petname + ", I suppose you could help me with these. . ."]
+        $ lines = ["Well, " + Girl.player_petname + "_, I suppose I could use some help with these. . .",
+            "Well, " + Girl.player_petname + "_, I suppose you could help me with these. . ."]
     elif Girl == KittyX:
         $ lines = ["Um, you know, maybe start up top?",
-            "I'd" + Girl.like + "love it if you could give me a hand. . ."]
+            "I'd" + Girl.like + "_love it if you could give me a hand. . ."]
     elif Girl == EmmaX:
         $ lines = ["Hm, well I do have my hands full with these. . .",
             "I suppose I could use some added attention. . ."]
@@ -5873,7 +5873,7 @@ label why_dont_we_take_care_of_each_other_lines(Girl, action):
 
 label well_in_hand_lust_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["Well, " + Girl.player_petname + ", I suppose I do at that . ."]
+        $ lines = ["Well, " + Girl.player_petname + "_, I suppose I do at that . ."]
     elif Girl == KittyX:
         $ lines = ["Well {i}I{/i} think so. . ."]
     elif Girl == EmmaX:
@@ -5939,9 +5939,9 @@ label well_in_hand_disapproved_lines(Girl, action):
 
 label what_did_you_come_over_for_approval_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["So what did you come over for anyway, " + Girl.player_petname + "?"]
+        $ lines = ["So what did you come over for anyway, " + Girl.player_petname + "_?"]
     elif Girl == KittyX:
-        $ lines = ["So what are you" + Girl.like + "even doing here?"]
+        $ lines = ["So what are you" + Girl.like + "_even doing here?"]
     elif Girl == EmmaX:
         $ lines = ["Why are you even in my room?"]
     elif Girl == LauraX:
@@ -5961,9 +5961,9 @@ label what_did_you_come_over_for_approval_lines(Girl, action):
 
 label fancy_bumping_into_you_approval_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["So . . . fancy bumping into you here, " + Girl.player_petname + ". . ."]
+        $ lines = ["So . . . fancy bumping into you here, " + Girl.player_petname + "_. . ."]
     elif Girl == KittyX:
-        $ lines = ["I" + Girl.like + "didn't expect to see you here. . ."]
+        $ lines = ["I" + Girl.like + "_didn't expect to see you here. . ."]
     elif Girl == EmmaX:
         $ lines = ["I wasn't expecting visitors. . ."]
     elif Girl == LauraX:
@@ -6029,7 +6029,7 @@ label fancy_bumping_into_you_disapproval_lines(Girl, action):
 
 label masturbation_join_in_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["Yeah, did you want something, " + Girl.player_petname + "?"]
+        $ lines = ["Yeah, did you want something, " + Girl.player_petname + "_?"]
     elif Girl == KittyX:
         $ lines = ["Like what you see?"]
     elif Girl == EmmaX:
@@ -6207,7 +6207,7 @@ label masturbation_keep_going_lines(Girl, action):
 
 label masturbation_worn_out_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["I need to take a little break here, " + Girl.player_petname + ".",
+        $ lines = ["I need to take a little break here, " + Girl.player_petname + "_.",
             "I'm kinda worn out, maybe time for a break. . ."]
     elif Girl == KittyX:
         $ lines = ["Gimme a minute, I need to collect myself here. . ."]
@@ -6232,7 +6232,7 @@ label masturbation_worn_out_lines(Girl, action):
 
 label end_of_masturbation_satisfied_lines(Girl, action):
     if Girl == RogueX:
-        $ lines = ["That really worked for me, " + Girl.player_petname + ". How about you?"]
+        $ lines = ["That really worked for me, " + Girl.player_petname + "_. How about you?"]
     elif Girl == KittyX:
         $ lines = ["Well that worked for me, how 'bout you?"]
     elif Girl == EmmaX:

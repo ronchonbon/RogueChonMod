@@ -210,7 +210,7 @@ label chat_menu:
 
                 call set_the_scene
             else:
-                call expression Girl.tag + "Summon"
+                call expression Girl.tag + "_Summon"
         "Ask [Girl.name] to leave" if Girl.location == Player.location:
             call dismiss_girl(Girl)
 
@@ -306,7 +306,7 @@ label chat_menu:
                 "Dirty Talk" if Girl.SEXP >= 10:
                     ch_p "About when we get together. . ."
 
-                    call expression Girl.tag + "SexChat"
+                    call expression Girl.tag + "_SexChat"
                 "Date (locked)" if time_index > 2:
                     pass
                 "Date" if time_index <= 2:
@@ -324,12 +324,12 @@ label chat_menu:
         "Talk with her":
             menu:
                 "I just wanted to talk. . .":
-                    call expression Girl.tag + "Chitchat"
+                    call expression Girl.tag + "_Chitchat"
                 "Relationship status":
                     ch_p "Could we talk about us?"
 
                     if Girl.location == Player.location:
-                        call expression Girl.tag + "Relationship"
+                        call expression Girl.tag + "_Relationship"
                     else:
                         if Girl == RogueX:
                             ch_r "That sounds like it might be a little heavy to do over the phone."
@@ -354,21 +354,21 @@ label chat_menu:
                 "Other girls":
                     menu:
                         "How do you feel about [RogueX.name]?" if Girl != RogueX:
-                            call expression Girl.tag + "About" pass (RogueX)
+                            call expression Girl.tag + "_About" pass (RogueX)
                         "How do you feel about [KittyX.name]?" if Girl != KittyX and "met" in KittyX.history:
-                            call expression Girl.tag + "About" pass (KittyX)
+                            call expression Girl.tag + "_About" pass (KittyX)
                         "How do you feel about [EmmaX.name]?" if Girl != EmmaX and "met" in EmmaX.history:
-                            call expression Girl.tag + "About" pass (EmmaX)
+                            call expression Girl.tag + "_About" pass (EmmaX)
                         "How do you feel about [LauraX.name]?" if Girl != LauraX and "met" in LauraX.history:
-                            call expression Girl.tag + "About" pass (LauraX)
+                            call expression Girl.tag + "_About" pass (LauraX)
                         "How do you feel about [JeanX.name]?" if Girl != JeanX and "met" in JeanX.history:
-                            call expression Girl.tag + "About" pass (JeanX)
+                            call expression Girl.tag + "_About" pass (JeanX)
                         "How do you feel about [StormX.name]?" if Girl != StormX and "met" in StormX.history:
-                            call expression Girl.tag + "About" pass (StormX)
+                            call expression Girl.tag + "_About" pass (StormX)
                         "How do you feel about [JubesX.name]?" if Girl != JubesX and "met" in JubesX.history:
-                            call expression Girl.tag + "About" pass (JubesX)
+                            call expression Girl.tag + "_About" pass (JubesX)
                         "About hooking up with other girls. . .":
-                            call expression Girl.tag + "Monogamy"
+                            call expression Girl.tag + "_Monogamy"
                         "Never mind.":
                             pass
                 "Could I get your number?" if Girl not in Player.Phonebook:
@@ -640,19 +640,19 @@ label change_attributes(Girl):
             "Shift her personality" if approval_check(Girl, 900, "L", taboo_modifier=0) or approval_check(Girl, 900, "O", taboo_modifier=0) or approval_check(Girl, 900, "I", taboo_modifier=0):
                 ch_p "Could we talk about us?"
 
-                call expression Girl.tag + "Personality"
+                call expression Girl.tag + "_Personality"
             "Your petname":
                 ch_p "Could we talk about my pet name?"
 
-                call expression Girl.tag + "names"
+                call expression Girl.tag + "_names"
             "[Girl.name]'s petname":
                 ch_p "I've got a pet name for you, you know?"
 
-                call expression Girl.tag + "Pet"
+                call expression Girl.tag + "_Pet"
             "[Girl.name]'s name" if len(Girl.names) > 1:
                 ch_p "You know how you told me you went by a different name?"
 
-                call expression Girl.tag + "Rename"
+                call expression Girl.tag + "_Rename"
             "Follow options" if "follow" in Girl.traits:
                 ch_p "You know how you ask if I want to follow you sometimes?"
 

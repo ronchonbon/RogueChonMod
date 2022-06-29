@@ -462,8 +462,8 @@ label showering:
                     $ temp_Girls[0].recent_history.append("showered")
                     $ temp_Girls[0].daily_history.append("showered")
 
-                    call expression temp_Girls[0].tag + "First_Bottomless" pass (1)
-                    call expression temp_Girls[0].tag + "First_Topless" pass (1)
+                    call expression temp_Girls[0].tag + "_First_Bottomless" pass (1)
+                    call expression temp_Girls[0].tag + "_First_Topless" pass (1)
                 else:
                     call remove_Girl(temp_Girls[0])
 
@@ -503,7 +503,7 @@ label showering:
 
         if RogueX in intruding_Girls:
             if RogueX.seen_peen == 1:
-                $ RogueX.change_face("surprised",2,eyes = "down")
+                $ RogueX.change_face("surprised", 2,eyes = "down")
 
                 ch_r "Oh!"
 
@@ -516,7 +516,7 @@ label showering:
                 ch_r "I simply {i}must{/i} be more careful. . ."
 
         if KittyX in intruding_Girls:
-            $ KittyX.change_face("bemused",2,eyes = "side")
+            $ KittyX.change_face("bemused", 2,eyes = "side")
 
             if KittyX.seen_peen == 1:
                 ch_k "Sorry! Sorry! I need to stop just casually phasing into places!"
@@ -591,7 +591,7 @@ label showering:
             $ StormX.change_face("sexy")
 
         if JubesX in intruding_Girls:
-            $ JubesX.change_face("bemused",2,eyes = "side")
+            $ JubesX.change_face("bemused", 2,eyes = "side")
 
             if JubesX.seen_peen == 1:
                 ch_v "Oh, sorry! I wasn't paying attention."
@@ -663,8 +663,8 @@ label showering:
                 $ intruding_Girls[0].recent_history.append("showered")
                 $ intruding_Girls[0].daily_history.append("showered")
 
-                call expression intruding_Girls[0].tag + "First_Bottomless" pass (1)
-                call expression intruding_Girls[0].tag + "First_Topless" pass (1)
+                call expression intruding_Girls[0].tag + "_First_Bottomless" pass (1)
+                call expression intruding_Girls[0].tag + "_First_Topless" pass (1)
 
                 if intruding_Girls[0] == RogueX:
                     ch_r "I wouldn't mind stick'in around though."
@@ -769,7 +769,7 @@ label Shower_Sex(Options=0, line=0):
         $ renpy.random.shuffle(staying_Girls)
     call shift_focus (staying_Girls[0])
 
-    $ D20 = renpy.random.randint(1,20)
+    $ D20 = renpy.random.randint(1, 20)
     $ D20 += 5 if approval_check(staying_Girls[0], 1800) else 0
 
     if "showered" in Player.recent_history:
@@ -798,8 +798,8 @@ label Shower_Sex(Options=0, line=0):
             "You got a good look at them washing off, and they didn't seem to mind the view either."
             $ staying_Girls[0].check_if_likes(staying_Girls[1],600,4, 1)
             $ staying_Girls[1].check_if_likes(staying_Girls[0],600,4, 1)
-            $ staying_Girls[0].check_if_likes(staying_Girls[1],800,2, 1)
-            $ staying_Girls[1].check_if_likes(staying_Girls[0],800,2, 1)
+            $ staying_Girls[0].check_if_likes(staying_Girls[1],800, 2, 1)
+            $ staying_Girls[1].check_if_likes(staying_Girls[0],800, 2, 1)
         else:
             call change_Girl_stat(staying_Girls[0], "lust", 50, 15)
             call change_Girl_stat(staying_Girls[0], "lust", 90, 10)
@@ -993,7 +993,7 @@ label Shower_Sex(Options=0, line=0):
                 call change_Player_stat("focus", 80, 3)
                 $ line = 4
             elif approval_check(staying_Girls[1], 1200) and staying_Girls[1].likes[staying_Girls[0].tag] >= 700:
-                $ staying_Girls[1].change_face("sexy",2,eyes = "closed")
+                $ staying_Girls[1].change_face("sexy", 2,eyes = "closed")
                 call change_Girl_stat(staying_Girls[1], "lust", 50, 10)
                 call change_Girl_stat(staying_Girls[1], "lust", 70, 10)
                 call change_Player_stat("focus", 50, 5)
@@ -1025,7 +1025,7 @@ label Shower_Sex(Options=0, line=0):
                     "[staying_Girls[1].name] seems really into this, and joins her on the other side."
                 $ line = 4
             elif ((approval_check(staying_Girls[1], 1200) and staying_Girls[1].likes[staying_Girls[0].tag] >= 600)) or approval_check(staying_Girls[1], 1600):
-                $ staying_Girls[1].change_face("sexy",2,eyes = "down")
+                $ staying_Girls[1].change_face("sexy", 2,eyes = "down")
                 call change_Girl_stat(staying_Girls[1], "lust", 50, 10)
                 call change_Girl_stat(staying_Girls[1], "lust", 70, 5)
                 "[staying_Girls[1].name] seems really into this, and watches her do it."

@@ -363,7 +363,7 @@ label Girl_Stripping(Girl):
                 "Her [line] slide down off her legs, leaving them in a small pile."
             else:
                 "She rolls the [line] down off her legs, leaving them in a small pile."
-            call expression Girl.tag + "First_Bottomless" pass (1)
+            call expression Girl.tag + "_First_Bottomless" pass (1)
 
         elif Girl == JubesX and Girl.outfit["jacket"] and (Girl.outfit["underwear"] or Girl.outfit["bottom"] or Girl.outfit["hose"] == "tights"):
 
@@ -382,7 +382,7 @@ label Girl_Stripping(Girl):
                     call change_Girl_stat(Girl, "inhibition", 50, 3)
                     call change_Girl_stat(Girl, "inhibition", 200, 3)
                     "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
-                    call expression Girl.tag + "First_Topless" pass (1)
+                    call expression Girl.tag + "_First_Topless" pass (1)
             else:
                 jump Strip_Ultimatum
         elif Girl.outfit["top"] and not Girl.outfit["bra"] and (Girl.outfit["underwear"] or Girl.outfit["hose"] == "tights"):
@@ -406,7 +406,7 @@ label Girl_Stripping(Girl):
                         "She glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     else:
                         "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
-                    call expression Girl.tag + "First_Topless" pass (1)
+                    call expression Girl.tag + "_First_Topless" pass (1)
                 else:
                     if Girl == KittyX:
                         "She drops her shoulders and her [line] falls to the floor."
@@ -436,7 +436,7 @@ label Girl_Stripping(Girl):
                     call change_Girl_stat(Girl, "obedience", 200, 4)
                     call change_Girl_stat(Girl, "inhibition", 50, 3)
                     call change_Girl_stat(Girl, "inhibition", 200, 3)
-                    call expression Girl.tag + "First_Topless" pass (1)
+                    call expression Girl.tag + "_First_Topless" pass (1)
                 else:
                     $ Girl.change_face("sexy")
                     if Girl == KittyX:
@@ -463,7 +463,7 @@ label Girl_Stripping(Girl):
                         "She hesitantly looks up at you, and then slowly unzips and pulls down her [line], dropping them to the floor."
                     else:
                         "She shyly looks up at you, and then slowly unzips and pulls down her [line], dropping them to the floor."
-                    call expression Girl.tag + "First_Bottomless" pass (1)
+                    call expression Girl.tag + "_First_Bottomless" pass (1)
                 else:
                     call change_Girl_stat(Girl, "obedience", 50, 1)
                     call change_Girl_stat(Girl, "obedience", 75, 1)
@@ -487,7 +487,7 @@ label Girl_Stripping(Girl):
                     call change_Girl_stat(Girl, "inhibition", 50, 4)
                     call change_Girl_stat(Girl, "inhibition", 200, 4)
                     "She hesitantly glances your way, and then with a shrug pulls her [line] off, tossing it to the ground."
-                    call expression Girl.tag + "First_Bottomless" pass (1)
+                    call expression Girl.tag + "_First_Bottomless" pass (1)
                 else:
                     "She shrugs her [line] off, tossing it to the ground."
 
@@ -495,7 +495,7 @@ label Girl_Stripping(Girl):
                     if not Girl.seen_breasts:
                         call change_Girl_stat(Girl, "obedience", 50, 3)
                         call change_Girl_stat(Girl, "inhibition", 50, 3)
-                        call expression Girl.tag + "First_Topless" pass (1)
+                        call expression Girl.tag + "_First_Topless" pass (1)
                     else:
                         call change_Girl_stat(Girl, "lust", 60, 15)
                         call change_Girl_stat(Girl, "obedience", 50, 3)
@@ -525,7 +525,7 @@ label Girl_Stripping(Girl):
                         "She glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     else:
                         "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
-                    call expression Girl.tag + "First_Bottomless" pass (1)
+                    call expression Girl.tag + "_First_Bottomless" pass (1)
                 else:
                     if Girl == KittyX:
                         "She drops her shoulders and her [line] falls to the floor."
@@ -536,7 +536,7 @@ label Girl_Stripping(Girl):
                     if not Girl.seen_breasts:
                         call change_Girl_stat(Girl, "obedience", 50, 3)
                         call change_Girl_stat(Girl, "inhibition", 50, 3)
-                        call expression Girl.tag + "First_Topless" pass (1)
+                        call expression Girl.tag + "_First_Topless" pass (1)
                     else:
                         call change_Girl_stat(Girl, "lust", 60, 15)
                         call change_Girl_stat(Girl, "obedience", 50, 3)
@@ -568,7 +568,7 @@ label Girl_Stripping(Girl):
                         "She glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     else:
                         "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
-                    call expression Girl.tag + "First_Topless" pass (1)
+                    call expression Girl.tag + "_First_Topless" pass (1)
                 else:
                     call change_Girl_stat(Girl, "obedience", 50, 2)
                     if Girl == KittyX:
@@ -597,7 +597,7 @@ label Girl_Stripping(Girl):
                         "She looks up at you, and then slowly pulls her [line] down, kicking them off to the side."
                     else:
                         "She shyly looks up at you, and then slowly pulls her [line] down, kicking them off to the side."
-                    call expression Girl.tag + "First_Bottomless" pass (1)
+                    call expression Girl.tag + "_First_Bottomless" pass (1)
                 else:
                     call change_Girl_stat(Girl, "obedience", 50, 1)
                     call change_Girl_stat(Girl, "obedience", 75, 1)
@@ -1144,7 +1144,7 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                 ch_v "Ok, that's more comfortable. . ."
             if taboo:
                 call change_Girl_stat(Girl, "inhibition", 90, (int(taboo/20)))
-            call expression Girl.tag + "First_Topless" pass (1)
+            call expression Girl.tag + "_First_Topless" pass (1)
         elif Girl.outfit["top"] and Girl.outfit["bra"] and approval_check(Girl, 800, taboo_modifier = 1):
 
             call change_Girl_stat(Girl, "inhibition", 40, 1)
@@ -1310,7 +1310,7 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
 
             call change_Girl_stat(Girl, "obedience", 50, 1)
             call change_Girl_stat(Girl, "obedience", 90, 1)
-            call expression Girl.tag + "First_Topless"
+            call expression Girl.tag + "_First_Topless"
         call change_Girl_stat(Girl, "lust", 80, 3)
         $ Girl.recent_history.append("ask topless")
         $ Girl.daily_history.append("ask topless")
@@ -1521,7 +1521,7 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                 call change_Girl_stat(Girl, "inhibition", 30, 2)
             elif not Girl.outfit["bra"]:
                 $ Girl.eyes = "surprised"
-                $ Girl.blushing = "blush2"
+                $ Girl.blushing = "_blush2"
                 ch_v "I kinda don't have anything under this. . ."
                 call change_Girl_stat(Girl, "inhibition", 30, 1)
                 menu:
@@ -1543,14 +1543,14 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                             $ Girl.outfit["top"] = ""
                             call change_Girl_stat(Girl, "inhibition", 30, 2)
                             call change_Girl_stat(Girl, "inhibition", 60, 1)
-                            call expression Girl.tag + "First_Topless"
+                            call expression Girl.tag + "_First_Topless"
                         else:
                             $ Girl.change_face("bemused")
                             call Top_Off_Refused (Girl)
                     "I know, take it off.":
 
                         call ToplessorNothing (Girl)
-                $ Girl.blushing = "blush1"
+                $ Girl.blushing = "_blush1"
             else:
                 $ Girl.change_face("sexy")
                 call Top_Off_Refused (Girl)
@@ -1590,7 +1590,7 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                 call change_Girl_stat(Girl, "inhibition", 30, 2)
             elif not Girl.outfit["bra"]:
                 $ Girl.eyes = "surprised"
-                $ Girl.blushing = "blush2"
+                $ Girl.blushing = "_blush2"
                 if Girl == RogueX:
                     ch_r "I'm not exactly decent under this, you know."
                 elif Girl == KittyX:
@@ -1661,14 +1661,14 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                             $ Girl.outfit["top"] = ""
                             call change_Girl_stat(Girl, "inhibition", 30, 2)
                             call change_Girl_stat(Girl, "inhibition", 60, 1)
-                            call expression Girl.tag + "First_Topless"
+                            call expression Girl.tag + "_First_Topless"
                         else:
                             $ Girl.change_face("bemused")
                             call Top_Off_Refused (Girl)
                     "I know, take it off.":
 
                         call ToplessorNothing (Girl)
-                $ Girl.blushing = "blush1"
+                $ Girl.blushing = "_blush1"
             else:
                 $ Girl.change_face("sexy")
                 call Top_Off_Refused (Girl)
@@ -1710,7 +1710,7 @@ label Top_Off(Girl, Intro=1, line=0, counter=0):
                 $ Girl.outfit["gloves"] = ""
                 call change_Girl_stat(Girl, "inhibition", 30, 2)
                 call change_Girl_stat(Girl, "inhibition", 60, 1)
-                call expression Girl.tag + "First_Topless"
+                call expression Girl.tag + "_First_Topless"
             elif "no_topless" in Girl.recent_history:
                 $ Girl.change_face("angry")
                 if Girl == RogueX:
@@ -1911,7 +1911,7 @@ label ToplessorNothing(Girl=0):
         call change_Girl_stat(Girl, "obedience", 90, 2)
         $ Girl.top_pulled_up = 1
         "[Girl.name] slowly pulls her top up over her tits."
-        call expression Girl.tag + "First_Topless"
+        call expression Girl.tag + "_First_Topless"
     else:
         call change_Girl_stat(Girl, "love", 200, -10)
         call change_Girl_stat(Girl, "obedience", 40, -1, 1)
@@ -2083,7 +2083,7 @@ label Bottoms_Off(Girl, Intro=1, line=0, counter=0):
                         "[Girl.name] grumbles to herself, and then unzips her [Girl.outfit[bottom]], sliding them off her bare ass."
                     else:
                         "[Girl.name] grumbles to herself, and then pulls her [line] down her bare ass."
-                call expression Girl.tag + "First_Bottomless" pass (1)
+                call expression Girl.tag + "_First_Bottomless" pass (1)
                 if taboo:
                     call change_Girl_stat(Girl, "inhibition", 90, (int(taboo/10)))
                 $ counter = 1
@@ -2107,7 +2107,7 @@ label Bottoms_Off(Girl, Intro=1, line=0, counter=0):
                         "[Girl.name] tsks in irritation, and pulls down her [Girl.outfit[underwear]] too."
                     else:
                         "[Girl.name] tsks in irritation, and pulls down her [Girl.outfit[underwear]]."
-                call expression Girl.tag + "First_Bottomless" pass (1)
+                call expression Girl.tag + "_First_Bottomless" pass (1)
                 if Girl == RogueX:
                     ch_r "I wasn't getting anything out of it with those on. Give it another go."
                 elif Girl == KittyX:
@@ -2548,7 +2548,7 @@ label Bottoms_Off_Legs(Girl=0):
                 elif Girl == JubesX and JubesX.outfit["jacket"] == "closed_jacket":
                     $ Girl.outfit["jacket"] = ""
                     "She pulls her [Girl.outfit[jacket]] off."
-                    call expression Girl.tag + "First_Bottomless"
+                    call expression Girl.tag + "_First_Bottomless"
                 elif Girl.outfit["jacket"]:
                     $ Girl.outfit["jacket"] = ""
                     "She pulls her [Girl.outfit[jacket]] off."
@@ -2571,7 +2571,7 @@ label Bottoms_Off_Legs(Girl=0):
                         "She glances up at you as her [line] fall clear of her."
                     else:
                         "She glances up at you as she removes her [line]."
-                call expression Girl.tag + "First_Bottomless"
+                call expression Girl.tag + "_First_Bottomless"
 
 
             "Lose the [Girl.outfit[bottom]]." if Girl.outfit["bottom"]:
@@ -2610,7 +2610,7 @@ label Bottoms_Off_Legs(Girl=0):
                         "She blushes and looks at you slyly before removing her [line]."
                     else:
                         "She glaces at you slyly before removing her [line]."
-                    call expression Girl.tag + "First_Bottomless"
+                    call expression Girl.tag + "_First_Bottomless"
                 elif not Girl.seen_underwear:
                     if Girl == KittyX:
                         "She blushes and looks at you as her [line] drops at her feet."
@@ -2687,7 +2687,7 @@ label Bottoms_Off_Legs(Girl=0):
                     "She reaches under her [Girl.outfit[bottom]] and pulls her [line] down."
                 else:
                     "She glances up at you as she removes her [line]."
-                call expression Girl.tag + "First_Bottomless"
+                call expression Girl.tag + "_First_Bottomless"
 
             "Just give me a clear view. . ." if (Girl.outfit["underwear"] and not Girl.underwear_pulled_down) or (Girl.outfit["bottom"] and not Girl.upskirt):
                 if approval >= 2:
@@ -2723,7 +2723,7 @@ label Bottoms_Off_Legs(Girl=0):
                     $ Girl.recent_history.append("no_bottomless")
                     $ Girl.daily_history.append("no_bottomless")
                     return
-                call expression Girl.tag + "First_Bottomless"
+                call expression Girl.tag + "_First_Bottomless"
 
             "Lose the [Girl.outfit[hose]]." if Girl.outfit["hose"]:
                 $ Girl.change_face("bemused", 1)
@@ -2759,8 +2759,8 @@ label Bottoms_Off_Legs(Girl=0):
                 elif not Girl.outfit["underwear"]:
                     $ Girl.change_face("sly", 2)
                     "She blushes and looks at you slyly before removing her [line]."
-                    $ Girl.blushing = "blush1"
-                    call expression Girl.tag + "First_Bottomless"
+                    $ Girl.blushing = "_blush1"
+                    call expression Girl.tag + "_First_Bottomless"
                 elif not Girl.seen_underwear:
                     "[Girl.name] shyly removes her [line]."
                     $ Girl.seen_underwear = 1

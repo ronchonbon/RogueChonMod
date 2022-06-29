@@ -955,7 +955,7 @@ label tops_menu(Girl):
         #                 if Girl == StormX and (StormX in Rules or Girl.taboo < 20):
         #                     ch_s "No, I suppose it's fine, for now at least."
         #                 elif Girl.seen_breasts and approval_check(Girl, 1000, taboo_modifier= 4 - public) or approval_check(Girl, 1200, taboo_modifier= 5 - public):
-        #                     $ Girl.blushing = "blush2"
+        #                     $ Girl.blushing = "_blush2"
         #
         #                     if Girl == RogueX:
         #                         ch_r "'course, I don't exactly need something under it either. . ."
@@ -972,7 +972,7 @@ label tops_menu(Girl):
         #                     elif Girl == JubesX:
         #                         ch_v "Oh, I was just warning -you-. . ."
         #
-        #                     $ Girl.blushing = "blush1"
+        #                     $ Girl.blushing = "_blush1"
         #                 elif approval_check(Girl, 900, taboo_modifier=3 - public) and "lace_bra" in Girl.inventory:
         #                     if Girl == RogueX:
         #                         ch_r "I suppose this would work. . ."
@@ -1551,7 +1551,7 @@ label bottoms_menu(Girl):
 #                     extend ""
 #                     "Then you could slip on a pair of panties. . .":
 #                         if (Girl.seen_pussy and approval_check(Girl, 1100, taboo_modifier=4)) or approval_check(Girl, 1500, taboo_modifier=4):
-#                             $ Girl.blushing = "blush1"
+#                             $ Girl.blushing = "_blush1"
 #
 #                             if Girl == RogueX:
 #                                 ch_r "Alright, I guess it's fine."
@@ -1955,7 +1955,7 @@ label bras_menu(Girl):
                     "She reaches into her [Girl.outfit[jacket]] grabs her [line], and pulls it out, dropping it to the ground."
 
                 if not renpy.showing('dress_screen'):
-                    call expression Girl.tag + "First_Topless"
+                    call expression Girl.tag + "_First_Topless"
             else:
                 call change_bra(Girl, "", redress = False)
 
@@ -2225,7 +2225,7 @@ label underwears_menu(Girl):
 
                 "She reaches under her skirt and pulls her [line] off."
             else:
-                $ Girl.blushing = "blush1"
+                $ Girl.blushing = "_blush1"
 
                 show black_screen onlayer black
 
@@ -2434,7 +2434,7 @@ label accessories_menu(Girl):
                     else:
                         $ Girl.outfit["hair"] = "long"
 
-                    $ Girl.add_word(1,"hair","hair", 0, 0)
+                    $ Girl.add_word(1,"hair", "hair", 0, 0)
 
                     ch_s "Like this?"
                 else:
@@ -2456,7 +2456,7 @@ label accessories_menu(Girl):
                     else:
                         $ Girl.outfit["hair"] = "mohawk"
 
-                    $ Girl.add_word(1,"hair","hair", 0, 0)
+                    $ Girl.add_word(1,"hair", "hair", 0, 0)
 
                     ch_s "Like this?"
                 else:
@@ -2590,7 +2590,7 @@ label accessories_menu(Girl):
 
                     $ Girl.outfit["hair"] = "short"
 
-                    $ Girl.add_word(1,"hair","hair", 0, 0)
+                    $ Girl.add_word(1,"hair", "hair", 0, 0)
 
                     ch_s "Like this?"
                 else:
@@ -2657,7 +2657,7 @@ label accessories_menu(Girl):
                             ch_r "Well I don't see how that's any of your business, [Girl.player_petname]."
                         elif Girl == KittyX:
                             ch_k "Not that it's any of your business, [Girl.player_petname]."
-            "I like it waxed clean down there." if Girl.pubes == "hairy":
+            "I like it waxed clean down there." if Girl.pubes == "_hairy":
                 $ Girl.change_face("bemused", 1)
 
                 if "shave" in Girl.to_do:

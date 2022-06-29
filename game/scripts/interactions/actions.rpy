@@ -71,7 +71,7 @@ label start_action(Girl, action, context = None):
                     call excited_for_kiss_obedience_lines(Girl, action)
 
                     call change_Girl_stat(Girl, "obedience", 60, 1)
-                elif approval_check(Girl, 250, "O",Alt=[[KittyX,LauraX],300]) and approval_check(Girl, 250, "L",Alt=[[KittyX,LauraX],200]):
+                elif approval_check(Girl, 250, "O",Alt=[[KittyX,LauraX],300]) and approval_check(Girl, 250, "L",Alt=[[KittyX,LauraX], 200]):
                     $ Girl.change_face("bemused")
 
                     Girl.voice "Ok, fine."
@@ -163,7 +163,7 @@ label before_action(Girl, action, context = None):
         elif Girl.action_counter["kiss"] > 1 and Girl.addiction >= 50:
             $ Girl.change_face("sucking")
         else:
-            $ Girl.change_face("kiss",2)
+            $ Girl.change_face("kiss", 2)
 
         if Girl == RogueX and not Girl.action_counter["kiss"]:
             call Rogue_first_kiss
@@ -268,7 +268,7 @@ label before_action(Girl, action, context = None):
 
                 $ Girl.seen_underwear = True
 
-                call expression Girl.tag + "First_Bottomless" pass(1)
+                call expression Girl.tag + "_First_Bottomless" pass(1)
             elif action == "hotdog":
                 $ line = renpy.random.choice(["You press yourself against her ass.",
                     "You press yourself against her mound.",
@@ -418,7 +418,7 @@ label action_cycle(Girl, action):
             if Girl.lust >= 50 and Girl.breasts_covered and (Girl.outfit["bra"] or Girl.outfit["top"]):
                 call pulls_off_top_narration(Girl)
                 call expose_breasts(Girl)
-                call expression Girl.tag + "First_Topless"
+                call expression Girl.tag + "_First_Topless"
 
     call end_of_action_reactions(Girl, action)
 

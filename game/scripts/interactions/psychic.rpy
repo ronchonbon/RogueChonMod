@@ -94,7 +94,7 @@ label MindFuck(TempLoc=0):
             call set_the_scene
             Girl.voice "There. . ."
 
-            $ Player.add_word(1,"MindFuck","MindFuck", 0,"MindFuck")
+            $ Player.add_word(1,"MindFuck", "MindFuck", 0,"MindFuck")
             call shift_focus(Girl)
             call enter_main_sex_menu(Girl)
 
