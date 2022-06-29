@@ -1,21 +1,20 @@
 init python:
 
-    def ring_body_piercings():
-        name = "ring body piercings"
-        image_string = "ring_body_piercings"
+    def Item_string():
+        name = "Item name"
+        image_string = "Item_string"
 
-        clothing_type = "body_piercings"
+        clothing_type = "pants"
 
-        Owner_names = ["Rogue", "Kitty", "Emma", "Laura", "Jean", "Storm", "Jubes"]
+        Owner_names = ["Rogue", "Emma"]
 
         dialogue_lines = {
-            "wardrobe": "You'd look really hot with ring body piercings."
             }
 
-        hides = []
-        covers = []
+        hides = ["pussy"]
+        covers = ["pussy", "thighs"]
 
-        number_of_states = 1
+        number_of_states = 2
 
         menu_image = None
 

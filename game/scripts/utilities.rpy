@@ -5,6 +5,23 @@ init python:
 
         return split_name[character.name.count(" ")]
 
+    def sort_Girls_by_approval(Girls):
+        sorted_Girls = [Girls[0]]
+
+        Girls.remove(Girls[0])
+
+        while Girls:
+            for g in range(len(sorted_Girls)):
+                if approval_check(Girls[0], Check = True) > approval_check(sorted_Girls[g], Check = True):
+                    sorted_Girls.insert(g, Girls[0])
+
+            if Girls[0] not in sorted_Girls:
+                sorted_Girls.append(Girls[0])
+
+            Girls.remove(Girls[0])
+
+        return sorted_Girls
+
 label change_Player_stat(flavor, check, update, greater_than = False):
     $ stat = getattr(Player, flavor)
 
@@ -996,7 +1013,7 @@ label reset_all_girls_at_end:
                     G.change_into(barbell_body_piercings())
                     G.to_do.remove("barbell")
 
-            G.change_Outfit("sleepwear")
+            G.change_Outfit("sleepwear", instant = True)
 
             G.addiction += G.addiction_rate
             G.addiction -= 3*G.resistance
@@ -1056,15 +1073,16 @@ label offscreen_studying:
     if len(Studiers) < 2:
         return
 
-    $ renpy.random.shuffle(Studiers)
+    python:
+        renpy.random.shuffle(Studiers)
 
-    for GA in Studiers:
-        for GB in Studiers:
-            if GA != GB:
-                GA.check_if_likes(GB, 800, 5, 1)
-                GB.check_if_likes(GA, 800, 5, 1)
+        for GA in Studiers:
+            for GB in Studiers:
+                if GA != GB:
+                    GA.check_if_likes(GB, 800, 5, 1)
+                    GB.check_if_likes(GA, 800, 5, 1)
 
-        GA.XP += 5
+            GA.XP += 5
 
     return
 
@@ -1728,8 +1746,7 @@ label Girls_arrive(arriving_Girls):
     if arriving_Girls in all_Girls:
         $ arriving_Girls = [arriving_Girls]
 
-    while len(arriving_Girls) > 2:
-        $ arriving_Girls.remove(arriving_Girls[-1])
+    $ arriving_Girls = sort_Girls_by_approval(arriving_Girls)
 
     python:
         Primary = None

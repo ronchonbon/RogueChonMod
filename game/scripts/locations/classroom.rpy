@@ -341,7 +341,8 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
         $ D20 = renpy.random.randint(1, 15)
         $ Girl.change_face("sly")
         "You notice one of [Girl.name]'s shoes slip from her foot beneath the desk. She tosses you a sly grin."
-        if Girl.outfit["hose"]:
+
+        if Girl.Wardrobe.current_Outfit.Clothes["hose"]:
             "You feel the smooth texture of her stockinged foot begin to slowly slide back and forth along the length of your calf."
         else:
             "You feel the smooth skin of her bare foot begin to slowly slide back and forth along the length of your calf."
@@ -415,14 +416,14 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                             "[Girl.name]'s sly smile turns sultry as she feels your fingers sneak between her legs, slowly tracing the soft contours of her mound."
 
                         call change_Girl_stat(Girl, "lust", 94, 5)
-                        if Girl.outfit["underwear"] == "shorts":
-                            "You think her shorts are becoming damp as you stroke the thin material. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
-                        elif Girl.outfit["underwear"]:
-                            "You think her panties are becoming damp as you stroke the thin material. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
+
+                        if Girl.Wardrobe.current_Outfit.Clothes["underwear"]:
+                            "You think her [Girl.Wardrobe.current_Outfit.Clothes[underwear].name] are becoming damp as you stroke the thin material. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
                         elif Girl.pubes:
                             "You feel her soft fur moisten as you stroke the soft flesh below. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
                         else:
                             "You feel her lips moisten as you stroke the soft flesh. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
+
                         $ Player.primary_action = "fondle_pussy"
                         $ D20 += 5
 

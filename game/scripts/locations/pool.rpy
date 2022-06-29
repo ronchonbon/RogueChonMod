@@ -877,9 +877,9 @@ label swim:
         for G in Present:
             if approval_check(G, 700):
                 if G.Wardrobe.current_Outfit.name == "swimwear":
-                    $ Swimmers.append(G)
+                    Swimmers.append(G)
                 elif G.Wardrobe.current_Outfit.fully_nude:
-                    $ Swimmers.append(G)
+                    Swimmers.append(G)
                 else:
                     if "swimwear" not in self.Wardrobe.Outfits.keys():
                         if self.tag == "Rogue":
@@ -906,7 +906,7 @@ label swim:
                     else:
                         G.change_Outfit("swimwear")
 
-                        $ Swimmers.append(G)
+                        Swimmers.append(G)
 
     if len(Swimmers) > 1 and len(Chillers) > 1:
         "Some of the girls get changed and join you, while the others chill out poolside."

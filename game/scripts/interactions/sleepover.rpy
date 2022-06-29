@@ -6,25 +6,34 @@ label sleepover:
             if G.location == Player.location:
                 Player.Party.append(G)
 
-    if not Player.Party and Player.location == "bg_player":
-        call remove_all
+    if not Player.Party:
+        if Player.location == "bg_player":
+            "It's getting late, so you go to sleep."
 
-        "It's getting late, so you go to sleep."
+            # if "met" not in JubesX.history and day >= 2:
+            #     $ time_index = 4
+            #
+            #     call meet_Jubes
 
-        # if "met" not in JubesX.history and day >= 2:
-        #     $ time_index = 4
-        #
-        #     call meet_Jubes
+            call wait
 
-        call wait
+            return
+        else:
+            jump return_player_to_room
+    else:
+        $ Player.Party = sort_Girls_by_approval(Player.Party)
 
-        return
+    if Player.location != "bg_player" and Player.location in bedrooms:
+        $ temp_Girls = all_Girls[:]
 
-    while len(Player.Party) > 2:
-        $ Player.Party.remove(Player.Party[2])
+        while temp_Girls:
+            if Player.location == temp_Girls[0].home and temp_Girls[0] not in Player.Party:
+                "You probably shouldn't sleep here, you head back to your own room."
 
-    if Player.Party:
-        call shift_focus(Player.Party[0])
+                call remove_all
+                jump player_room
+
+    call shift_focus(Player.Party[0])
 
     if Player.location != "bg_player":
         $ temp_Girls = all_Girls[:]
@@ -35,26 +44,17 @@ label sleepover:
                     "[temp_Girls[0].name] probably wouldn't appreciate you staying over, you head back to your own room."
 
                     call remove_all
-
                     jump return_player_to_room
 
-                if temp_Girls[0] != Player.Party[0]:
-                    $ Player.Party.reverse()
+                while temp_Girls[0] != Player.Party[0]:
+                    $ renpy.random.shuffle(Player.Party)
 
                 $ temp_Girls = [None]
 
             $ temp_Girls.remove(temp_Girls[0])
 
     if Player.location == "bg_player":
-        if len(Player.Party) == 2:
-            $ renpy.random.shuffle(Player.Party)
-
-            if approval_check(Player.Party[0],Check=1) <= approval_check(Player.Party[1],Check=1):
-                $ Player.Party.reverse()
-
-        if not Player.Party:
-            pass
-        elif Player.Party[0].event_counter["sleepover"] >= 3 and approval_check(Player.Party[0], 800):
+        if Player.Party[0].event_counter["sleepover"] >= 3 and approval_check(Player.Party[0], 800):
             pass
         elif Player.Party[0] == RogueX:
             ch_r "It's getting late and I'm getting a bit tired."
@@ -85,57 +85,65 @@ label sleepover:
             ch_s "It is getting late, I would like to get ready for bed. . ."
         elif Player.Party[0] == JubesX:
             ch_v "Well, it's pretty late, you should be getting some sleep. . ."
-    else:
-        "Something went wrong."
-        "Tell Oni \"[Player.Party] - [Player.location]\""
-
-
-    if day <= 4:
-
-        jump return_player_to_room
 
     if EmmaX in Player.Party:
         if "classcaught" not in EmmaX.history:
             if Player.location == EmmaX.home:
                 ch_e "You should probably get going, we wouldn't want any rumors to spread."
+
                 jump return_player_to_room
             else:
                 ch_e "I should probably get going, we wouldn't want any rumors to spread."
-                call remove_Girl(EmmaX)
-        elif len(Player.Party) >= 2 and "threesome" not in EmmaX.history:
 
+                call remove_Girl(EmmaX)
+        elif len(Player.Party) > 1 and "threesome" not in EmmaX.history:
             if (Player.location == EmmaX.home or Player.location == "bg_player") and approval_check(EmmaX, 1100, "LI"):
-                if Player.Party[0] != EmmaX:
-                    $ Player.Party.reverse()
-                ch_e "[Player.Party[1].name] dear, I need a moment with [Player.name], but you can leave."
-                $ Player.Party[1].change_face("confused", 1)
+                while Player.Party[0] != EmmaX:
+                    $ renpy.random.shuffle(Player.Party)
+
+                if len(Player.Party) > 2:
+                    ch_e "Girls, I need a moment with [Player.name], but you can leave."
+                else:
+                    ch_e "[Player.Party[1].name] dear, I need a moment with [Player.name], but you can leave."
+
+                python:
+                    for G in Player.Party:
+                        if G != EmmaX:
+                            G.change_face("confused", 1)
+
                 Player.Party[1].voice "Oh, ok. . ."
-                call remove_Girl(Player.Party[1])
+
+                $ temp_Girls = Player.Party[:]
+                $ temp_Girls.remove(EmmaX)
+
+                while temp_Girls:
+                    call remove_Girl(temp_Girls[0])
+
+                    $ temp_Girls.remove(temp_Girls[0])
+
                 ch_e "Sorry about that, but I had to discuss something with you in private."
             else:
-
                 ch_e "Yes, I really should be leaving, don't let me bother you two."
+
                 call remove_Girl(EmmaX)
+
             if "sleeptime" not in EmmaX.history:
                 $ EmmaX.history.append("sleeptime")
-        if not Player.Party or (EmmaX not in Player.Party and Player.location == EmmaX.home):
-
-            jump return_player_to_room
 
     $ Player.Party[0].change_face("sexy", 1)
 
-    $ line = 0
-    if Player.Party[0].event_counter["sleepover"] >= 3 and approval_check(Player.Party[0], 800):
+    $ asked = False
 
+    if Player.Party[0].event_counter["sleepover"] >= 3 and approval_check(Player.Party[0], 800):
         if Player.Party[0].home == Player.location:
             Player.Party[0].voice "Are you staying over tonight?"
         else:
             Player.Party[0].voice "I'm staying over, right?"
-        $ line = 1
 
+        $ asked = True
     elif Player.Party[0].event_counter["sleepover"] < 3 and approval_check(Player.Party[0], 1100, "LI"):
-
         $ Player.Party[0].change_face("bemused", 1)
+
         if Player.Party[0] == RogueX:
             if Player.location == Player.Party[0].home:
                 ch_r "I was thinking. . . maybe you wanted to stay the night?"
@@ -171,11 +179,10 @@ label sleepover:
                 ch_v "Would you maybe wanna sleep here?"
             else:
                 ch_v "Would you maybe want me to sleep here?"
-        $ line = 1
 
+        $ asked = True
 
-    if line:
-
+    if asked:
         menu:
             extend ""
             "Sure.":
@@ -184,16 +191,16 @@ label sleepover:
                     call change_Girl_stat(Player.Party[0], "obedience", 80, 10)
                     call change_Girl_stat(Player.Party[0], "obedience", 50, 20)
                     call change_Girl_stat(Player.Party[0], "inhibition", 25, 20)
+
                 call change_Girl_stat(Player.Party[0], "love", 70, 5)
                 $ Player.Party[0].change_face("smile")
             "No, sorry.":
-
-
                 call change_Girl_stat(Player.Party[0], "obedience", 50, 2)
                 call change_Girl_stat(Player.Party[0], "obedience", 30, 5)
                 call change_Girl_stat(Player.Party[0], "inhibition", 40, 3)
+
                 $ Player.Party[0].change_face("sad")
-                $ line = 0
+
                 if Player.Party[0] == RogueX:
                     ch_r "Ok, see you tomorrow then. 'Night."
                 elif Player.Party[0] == KittyX:
@@ -209,7 +216,6 @@ label sleepover:
                 elif Player.Party[0] == JubesX:
                     ch_v "Ok, cool, cool. . . later then. . ."
     else:
-
         if Player.Party[0] == RogueX:
             if Player.location == Player.Party[0].home:
                 ch_r "You should get going."
@@ -233,8 +239,6 @@ label sleepover:
         elif Player.Party[0] == JeanX:
             if Player.location == Player.Party[0].home:
                 ch_j "So get going."
-
-
         elif Player.Party[0] == StormX:
             if Player.location == Player.Party[0].home:
                 ch_s "Could you please leave me?"
@@ -246,25 +250,23 @@ label sleepover:
             else:
                 ch_v "I've got some stuff to take care of, so I guess you should get going."
 
+        $ decision = None
+        $ agreed = False
+
         menu:
             extend ""
             "Ok, I'll head out. Good night." if Player.Party[0].home == Player.location:
-
-                $ line = "leave"
+                $ decision = "leave"
             "Ok, see you later then. Good night." if Player.Party[0].home != Player.location:
-
-                $ line = "leave"
-
+                $ decision = "leave"
             "Are you sure I can't stay the night? . ." if not Player.Party[0].event_counter["sleepover"] and Player.Party[0].home == Player.location:
-                $ line = "please"
+                $ decision = "please"
             "Are you sure you can't stay? . ." if not Player.Party[0].event_counter["sleepover"] and Player.Party[0].home != Player.location:
-                $ line = "please"
-
+                $ decision = "please"
             "That's not what you said the other night . ." if Player.Party[0].event_counter["sleepover"]:
-
-                if approval_check(Player.Party[0],900)or approval_check(Player.Party[0],700,"L") or approval_check(Player.Party[0],500,"O"):
+                if approval_check(Player.Party[0],900) or approval_check(Player.Party[0],700,"L") or approval_check(Player.Party[0],500,"O"):
                     $ Player.Party[0].change_face("bemused", 1)
-                    $ line = 1
+
                     if Player.Party[0] == RogueX:
                         ch_r "Well. . . that didn't turn out so bad, I suppose. . ."
                     elif Player.Party[0] == KittyX:
@@ -279,6 +281,8 @@ label sleepover:
                         ch_s "That was pleasant. . ."
                     elif Player.Party[0] == JubesX:
                         ch_v "Yeah, yeah. . ."
+
+                    $ agreed = True
                 else:
                     $ Player.Party[0].change_face("smile", brows = "confused")
 
@@ -296,17 +300,16 @@ label sleepover:
                         ch_s "Yes, but not tonight, unfortunately. . ."
                     elif Player.Party[0] == JubesX:
                         ch_v "Yeah, I know, but I've got stuff to do tonight. . ."
-                    if Player.location != "bg_player":
 
+                    if Player.location != "bg_player":
                         ch_p "Ok, I'll be going then."
 
-
-    if line == "leave":
-
+    if decision == "leave":
         call change_Girl_stat(Player.Party[0], "love", 90, 3)
         call change_Girl_stat(Player.Party[0], "inhibition", 25, 2)
+
         $ Player.Party[0].change_face("smile")
-        $ line = 0
+
         if Player.Party[0] == RogueX:
             ch_r "Yeah, good night, [RogueX.player_petname]. . ."
         elif Player.Party[0] == KittyX:
@@ -321,12 +324,12 @@ label sleepover:
             ch_s "Yes, good night."
         elif Player.Party[0] == JubesX:
             ch_v "Yup. . . later then. . ."
-
-    if line == "please":
-
+    elif decision == "please":
         if approval_check(Player.Party[0], 1000) or approval_check(Player.Party[0],700,"L") or approval_check(Player.Party[0],500,"O"):
             $ Player.Party[0].change_face("bemused")
-            $ line = 1
+
+            $ agreed = True
+
             if Player.Party[0] == RogueX:
                 ch_r "Well. . . I suppose it would be alright."
             elif Player.Party[0] == KittyX:
@@ -343,7 +346,7 @@ label sleepover:
                 ch_v "Well. . . fine. . ."
         else:
             $ Player.Party[0].change_face("smile", brows = "confused")
-            $ line = 0
+
             if Player.Party[0] == RogueX:
                 ch_r "I'm afraid not, [RogueX.player_petname]. Head home, I'll see you later."
             elif Player.Party[0] == KittyX:
@@ -359,23 +362,18 @@ label sleepover:
             elif Player.Party[0] == JubesX:
                 ch_v "Nope."
 
-    if not line:
-
+    if not agreed:
         if Player.Party[0].home == Player.location:
-
             call clear_the_room (Player.Party[0], 1)
             jump return_player_to_room
         else:
-
             call remove_Girl(Player.Party[0])
             call sleepover
+
             return
 
-
-    if len(Player.Party) >= 2:
-
+    if len(Player.Party) == 2:
         if Player.Party[0].likes[Player.Party[1].tag] >= 700 and approval_check(Player.Party[0], 1200):
-
             if Player.Party[0] == RogueX:
                 ch_r "And you, [Player.Party[1].name]?"
             elif Player.Party[0] == KittyX:
@@ -410,9 +408,11 @@ label sleepover:
             elif Player.Party[0] == JubesX:
                 ch_v "You've gotta go though, -right- [Player.Party[1].name]?"
 
-        if Player.Party[1].likes[Player.Party[0].tag] >= 500 and approval_check(Player.Party[1], 1200):
+        $ asked_to_stay = False
 
+        if Player.Party[1].likes[Player.Party[0].tag] >= 500 and approval_check(Player.Party[1], 1200):
             $ Player.Party[1].change_face("smile")
+
             if Player.Party[1] == RogueX:
                 ch_r "I'd like to stay too."
             elif Player.Party[1] == KittyX:
@@ -427,9 +427,11 @@ label sleepover:
                 ch_s "I would prefer to stay."
             elif Player.Party[1] == JubesX:
                 ch_v "I can stay too, right?"
-            $ line = 1
+
+            $ asked_to_stay = True
         else:
             $ Player.Party[0].change_face("smile", 1)
+
             if Player.Party[1] == RogueX:
                 ch_r "I guess I should be going."
             elif Player.Party[1] == KittyX:
@@ -445,12 +447,12 @@ label sleepover:
                 ch_s "Ah, I should be going then."
             elif Player.Party[1] == JubesX:
                 ch_v "Um, yeah, I've got stuff to do, so. . ."
-            $ line = 0
+
         menu:
             extend ""
             "You should stay, [Player.Party[1].name].":
-
                 if Player.Party[1].likes[Player.Party[0].tag] >= 500 and approval_check(Player.Party[1], 1200):
+                    $ asked_to_stay = True
 
                     if Player.Party[1] == RogueX:
                         ch_r "Oh, I'd love to."
@@ -466,10 +468,11 @@ label sleepover:
                         ch_s "Thank you, I would love to."
                     elif Player.Party[1] == JubesX:
                         ch_v "Oh! Thanks!"
-                    $ line = 1
+
                     $ Player.Party[0].check_if_likes(Player.Party[1],800,3, 1)
                 else:
                     $ Player.Party[1].change_face("sadside", 1,mouth = "smile")
+
                     if Player.Party[1] == RogueX:
                         ch_r "I don't want to be a bother."
                     elif Player.Party[1] == KittyX:
@@ -485,6 +488,7 @@ label sleepover:
                         ch_s "I would not want to intrude."
                     elif Player.Party[1] == JubesX:
                         ch_v ". . . nah, really. . . stuff to do."
+
                     $ line = 0
                     $ Player.Party[0].check_if_likes(Player.Party[1],700,-5, 1)
 
@@ -545,6 +549,7 @@ label sleepover:
                         $ Player.Party[1].check_if_likes(Player.Party[0],700,-5, 1)
                         $ line = 0
             "You should get going, [Player.Party[1].name].":
+                $ asked_to_stay = False
 
                 if Player.Party[1] == RogueX:
                     ch_r "Oh, ok."
@@ -560,11 +565,8 @@ label sleepover:
                     ch_s "Ah, I understand."
                 elif Player.Party[1] == JubesX:
                     ch_v "Oh, ok, yeah. . ."
-                $ line = 0
 
-    if line == 0:
-
-        if len(Player.Party) >= 2:
+        if not asked_to_stay:
             if Player.Party[0] == RogueX:
                 ch_r "Later, [Player.Party[1].name]."
             elif Player.Party[0] == KittyX:
@@ -594,79 +596,15 @@ label sleepover:
                 ch_s "Good night."
             elif Player.Party[1] == JubesX:
                 ch_v "Night!"
-        if Player.Party:
-            call clear_the_room (Player.Party[0], 1, 1)
 
-    if not Player.Party:
+    call shift_focus(Player.Party[0])
 
-        if Player.location != "bg_player":
-            jump return_player_to_room
-        call clear_the_room ("all", 1)
-
-        "It's getting late, so you go to sleep."
-        call wait
-        return
-
-    if Player.location != "bg_player" and Player.location != Player.Party[0].home:
-
-        "You probably shouldn't sleep here, you head back to your own room."
-        call remove_all
-        $ renpy.pop_call()
-        jump player_room
-
-    jump sleepover_Morning
-
-
-label return_player_to_room:
-    $ del Player.Party[:]
-
-    $ temp_Girls = all_Girls[:]
-
-    $ renpy.random.shuffle(temp_Girls)
-
-    while temp_Girls:
-        if Player.location != temp_Girls[0].home and temp_Girls[0].location == Player.location:
-            "[temp_Girls[0].name] heads out."
-
-            call remove_Girl(temp_Girls[0])
-
-        $ temp_Girls.remove(temp_Girls[0])
-
-    if Player.location != "bg_player":
-        "You head back to your room."
-
-    jump player_room
-
-
-
-
-label sleepover_Morning:
-
-    $ temp_Girls = all_Girls[:]
-    while temp_Girls:
-        if temp_Girls[0].location == Player.location and temp_Girls[0] not in Player.Party:
-            call remove_Girl(temp_Girls[0])
-        $ temp_Girls.remove(temp_Girls[0])
-
-    call shift_focus (Player.Party[0])
-
-    if Player.Party[0] == StormX and not StormX.sleepwear["outfit_active"] and StormX.taboo < 20:
-
-        $ Player.Party[0].change_outfit("nude")
-    else:
-        $ Player.Party[0].change_outfit("sleepwear")
-    $ Player.Party[0].today_outfit_name == Player.Party[0].outfit
-    if len(Player.Party) >= 2:
-
-        if Player.Party[1] == StormX and not StormX.sleepwear["outfit_active"] and StormX.taboo < 20:
-
-            $ Player.Party[1].change_outfit("nude")
-        else:
-            $ Player.Party[1].change_outfit("sleepwear")
-        $ Player.Party[1].today_outfit_name == Player.Party[1].outfit
-        "The girls change into their sleepwear."
-    else:
-        "[Player.Party[0].name] changes into her sleepwear."
+    python:
+        for G in Player.Party:
+            if "sleepwear" not in G.Wardrobe.Outfits and G.taboo < 20:
+                G.change_Outfit("nude")
+            else:
+                G.change_Outfit("sleepwear")
 
     if Player.Party[0] == RogueX:
         ch_r "Hmm, that's a bit more comfortable."
@@ -683,10 +621,7 @@ label sleepover_Morning:
     elif Player.Party[0] == JubesX:
         ch_v "Ah, that's better."
 
-
-
-
-    if len(Player.Party) >= 2:
+    if len(Player.Party) > 1:
         if Player.Party[1] == RogueX:
             ch_r "Let's turn in."
         elif Player.Party[1] == KittyX:
@@ -702,8 +637,6 @@ label sleepover_Morning:
         elif Player.Party[1] == JubesX:
             ch_v "Night."
     else:
-
-
         if Player.Party[0] == RogueX:
             ch_r "Let's turn in."
         elif Player.Party[0] == KittyX:
@@ -719,16 +652,33 @@ label sleepover_Morning:
         elif Player.Party[0] == JubesX:
             ch_v "Night."
 
+    jump morning_after
+
+label return_player_to_room:
+    $ Player.Party = []
+
+    $ temp_Girls = all_Girls[:]
+    $ renpy.random.shuffle(temp_Girls)
+
+    while temp_Girls:
+        if Player.location != temp_Girls[0].home and temp_Girls[0].location == Player.location:
+            "[temp_Girls[0].name] heads out."
+
+            call remove_Girl(temp_Girls[0])
+
+        $ temp_Girls.remove(temp_Girls[0])
+
+    if Player.location != "bg_player":
+        "You head back to your room."
+
+    jump player_room
+
+label morning_after:
     show black_screen onlayer black
-    pause 1
-
-
-
-
-
 
     $ time_index = 0
-    $ current_time = time_options[(time_index)]
+    $ current_time = time_options[time_index]
+
     $ day += 1
 
     if weekday < 6:
@@ -736,44 +686,23 @@ label sleepover_Morning:
     else:
         $ weekday = 0
 
-
-
     $ day_of_week = week[weekday]
 
-    $ Player.semen = Player.max_semen
-    $ Player.spunk = 0
     $ round = 50
 
-    $ temp_Girls = Player.Party[:]
-    while temp_Girls:
-        $ temp_Girls[0].remaining_actions = temp_Girls[0].max_actions
-        $ temp_Girls.remove(temp_Girls[0])
+    $ Player.semen = Player.max_semen
 
+    python:
+        for G in Player.Party:
+            G.remaining_actions = G.max_actions
 
-
-
-
-
-
-
-
-
-
-
-
-
-    call Morningwood_Check
-
-    $ Player.Party[0].change_face("smile")
-    if len(Player.Party) >= 2:
-        $ Player.Party[1].change_face("smile")
+    # call Morningwood_Check
 
     hide black_screen onlayer black
 
     if "morningwood" in Player.daily_history:
-
         if Player.Party[0] == RogueX:
-            ch_r "So, that aside, Sleep well?"
+            ch_r "So, that aside, sleep well?"
         elif Player.Party[0] == KittyX:
             ch_k "So anyway. . . G'morning . . ."
         elif Player.Party[0] == EmmaX:
@@ -811,6 +740,7 @@ label sleepover_Morning:
                 call change_Girl_stat(Player.Party[0], "love", 90, 8)
                 call change_Girl_stat(Player.Party[0], "obedience", 50, 10)
                 call change_Girl_stat(Player.Party[0], "inhibition", 70, 8)
+
             $ Player.Party[0].blushing = "_blush1"
 
             if Player.Party[0] == RogueX:
@@ -834,14 +764,15 @@ label sleepover_Morning:
             elif Player.Party[0] == JubesX:
                 ch_v "Yeah. . . it's nice having company. . ."
                 ch_v "You keep it so cozy. . ."
-
         "I loved sleeping next to you." if not Player.Party[0].event_counter["sleepover"]:
+            $ reaction = "nice"
+
             call change_Girl_stat(Player.Party[0], "love", 90, 15)
             call change_Girl_stat(Player.Party[0], "love", 70, 10)
             call change_Girl_stat(Player.Party[0], "obedience", 50, 12)
             call change_Girl_stat(Player.Party[0], "inhibition", 70, 12)
-            $ line = "nice"
         "It was fun.":
+            $ reaction = "fun"
 
             if not Player.Party[0].event_counter["sleepover"]:
                 call change_Girl_stat(Player.Party[0], "love", 90, 10)
@@ -852,13 +783,14 @@ label sleepover_Morning:
                 call change_Girl_stat(Player.Party[0], "love", 70, 8)
                 call change_Girl_stat(Player.Party[0], "obedience", 80, 10)
                 call change_Girl_stat(Player.Party[0], "inhibition", 35, 8)
+
             call change_Girl_stat(Player.Party[0], "obedience", 50, 8)
+
             if approval_check(Player.Party[0], 800, "L"):
                 $ Player.Party[0].change_face("bemused")
             else:
                 $ Player.Party[0].change_face("confused")
 
-            $ line = "fun"
             if Player.Party[0] == RogueX:
                 ch_r "Ok, well glad I wasn't {i}too{/i} much bother."
             elif Player.Party[0] == KittyX:
@@ -874,16 +806,20 @@ label sleepover_Morning:
                 ch_s ". . . fun."
             elif Player.Party[0] == JubesX:
                 ch_v "Yeah. . . it's nice having company. . ."
-                $ line = "nice"
         "You were constantly tossing around.":
+            $ reaction = "toss"
 
             $ Player.Party[0].blushing = "_blush1"
+
             if approval_check(Player.Party[0], 800, "L") or approval_check(Player.Party[0], 1200):
                 $ Player.Party[0].change_face("bemused")
+
                 Player.Party[0].voice "Hmm?"
             else:
                 $ Player.Party[0].change_face("angry")
+
                 Player.Party[0].voice "!!!"
+
             if Player.Party[0].event_counter["sleepover"] < 5:
                 if Player.Party[0] == RogueX:
                     ch_r "It's not like I've had much experience sleeping next to someone. . ."
@@ -900,6 +836,7 @@ label sleepover_Morning:
                     ch_s "I do have a lot of energy. . ."
                 elif Player.Party[0] == JubesX:
                     ch_v "I'm just not used to sleeping nights. . ."
+
                 call change_Girl_stat(Player.Party[0], "love", 60, -8)
                 call change_Girl_stat(Player.Party[0], "obedience", 50, 22)
                 call change_Girl_stat(Player.Party[0], "inhibition", 50, 22)
@@ -918,8 +855,8 @@ label sleepover_Morning:
                     ch_s "I suppose that I do."
                 elif Player.Party[0] == JubesX:
                     ch_v "You don't need to harp on it. . ."
-            $ line = "toss"
         "You need to learn to stick to your side.":
+            $ reaction = "toss"
 
             if Player.Party[0].event_counter["sleepover"] < 5:
                 call change_Girl_stat(Player.Party[0], "love", 80, -8)
@@ -927,7 +864,9 @@ label sleepover_Morning:
             if approval_check(Player.Party[0], 500, "O"):
                 call change_Girl_stat(Player.Party[0], "love", 80, -2)
                 call change_Girl_stat(Player.Party[0], "obedience", 90, 5)
+
                 $ Player.Party[0].change_face("normal")
+
                 if Player.Party[0] == RogueX:
                     ch_r "Yes, [RogueX.player_petname], I'll try my best."
                 elif Player.Party[0] == KittyX:
@@ -942,11 +881,14 @@ label sleepover_Morning:
                     ch_s "I. . . can try. . ."
                 elif Player.Party[0] == JubesX:
                     ch_v "I thought you wanted the attention. . ."
+
                 if Player.Party[0].event_counter["sleepover"] < 5:
                     call change_Girl_stat(Player.Party[0], "obedience", 80, 8)
             else:
                 $ Player.Party[0].change_face("angry")
+
                 call change_Girl_stat(Player.Party[0], "obedience", 90, 5)
+
                 if Player.Party[0] == RogueX:
                     ch_r "Hmmph, you'll be sleeping alone, keep talk'in like that."
                 elif Player.Party[0] == KittyX:
@@ -961,60 +903,87 @@ label sleepover_Morning:
                     ch_s "That seems unlikely."
                 elif Player.Party[0] == JubesX:
                     ch_v "I could just stay out of the bed entirely. . ."
+
                 if Player.Party[0].event_counter["sleepover"] < 5:
                     call change_Girl_stat(Player.Party[0], "inhibition", 35, 20)
-            $ line = "toss"
 
-    if not Player.Party[0].event_counter["sleepover"] and line == "nice":
+    if reaction == "nice":
         if Player.Party[0] == RogueX:
             $ Player.Party[0].blushing = "_blush1"
+
             ch_r "Aw, that's right sweet of ya, [RogueX.player_petname]."
             ch_r "Makes me want to do it again sometime."
         elif Player.Party[0] == KittyX:
             $ Player.Party[0].blushing = "_blush2"
+
             ch_k "Yeah, I. . [KittyX.like]I had fun too."
+
             $ Player.Party[0].blushing = "_blush1"
+
             ch_k "I wouldn't[KittyX.like]mind doing it again."
+
             $ Player.Party[0].blushing = "_blush2"
+
             ch_k "You know, some other time. . . "
+
             $ Player.Party[0].blushing = "_blush1"
         elif Player.Party[0] == EmmaX:
             $ Player.Party[0].change_face("smile", 1)
+
             ch_e "You're a hopeless romantic, [EmmaX.player_petname]."
+
             $ Player.Party[0].change_face("smile", 2,eyes = "side")
+
             ch_e "I suppose I can be a bit hopeless too. . ."
         elif Player.Party[0] == LauraX:
             $ Player.Party[0].change_face("confused", 1)
+
             ch_l "Oh. . ."
+
             $ Player.Party[0].change_face("surprised", 2,brows = "confused")
+
             ch_l "Yeah, so did I, now that you mention it. . ."
+
             $ Player.Party[0].change_face("confused", 1)
+
             ch_l "Huh."
         elif Player.Party[0] == JeanX:
             $ Player.Party[0].change_face("confused", 1)
+
             ch_j "Huh? . ."
             ch_j "Oh, yeah. . . it was great. . ."
+
             $ Player.Party[0].change_face("smile", 1)
         elif Player.Party[0] == StormX:
             $ Player.Party[0].change_face("smile", 1)
+
             ch_s "Well, yes, it was nice to sleep next to you as well, [StormX.player_petname]."
+
             $ Player.Party[0].change_face("smile", 2,eyes = "leftside")
+
             ch_s "I think we should make a habit of this. . ."
+
             $ Player.Party[0].change_face("smile", 1)
         elif Player.Party[0] == JubesX:
             $ Player.Party[0].change_face("smile", 1)
+
             ch_v "Yeah, I enjoyed it too. . ."
+
             $ Player.Party[0].change_face("sad", 1)
+
             ch_v "I haven't really been sleeping much since. . ."
+
             $ Player.Party[0].change_face("sadside", 1)
+
             ch_v ". . . the change."
+
             $ Player.Party[0].change_face("smile", 1)
+
             ch_v "It's nice having someone to stay with me. . ."
 
     $ Player.Party[0].blushing = ""
 
-    if len(Player.Party) >= 2:
-
+    if len(Player.Party) > 1:
         if "morningwood" in Player.daily_history:
             if Player.Party[1] == RogueX:
                 ch_r "And what about me?"
@@ -1032,6 +1001,7 @@ label sleepover_Morning:
                 ch_v "Yeah. . . 'morning."
         else:
             "[Player.Party[1].name] rolls over in bed."
+
             if Player.Party[1] == RogueX:
                 ch_r "Mmm, yeah, 'Morning [RogueX.player_petname]."
             elif Player.Party[1] == KittyX:
@@ -1053,6 +1023,7 @@ label sleepover_Morning:
                     call change_Girl_stat(Player.Party[1], "love", 90, 8)
                     call change_Girl_stat(Player.Party[1], "obedience", 50, 10)
                     call change_Girl_stat(Player.Party[1], "inhibition", 70, 8)
+
                 $ Player.Party[1].blushing = "_blush1"
 
                 if Player.Party[1] == RogueX:
@@ -1069,14 +1040,15 @@ label sleepover_Morning:
                     ch_s "And I enjoy it as well, [StormX.player_petname]."
                 elif Player.Party[1] == JubesX:
                     ch_v "Yeah. . . it's nice having company. . ."
-
             "And it was great sleeping with you as well, [Player.Party[1].name]." if not Player.Party[1].event_counter["sleepover"]:
+                $ reaction = "nice"
+
                 call change_Girl_stat(Player.Party[1], "love", 90, 15)
                 call change_Girl_stat(Player.Party[1], "love", 70, 10)
                 call change_Girl_stat(Player.Party[1], "obedience", 50, 12)
                 call change_Girl_stat(Player.Party[1], "inhibition", 70, 12)
-                $ line = "nice"
             "I had fun sleeping with you too, [Player.Party[1].name].":
+                $ reaction = "fun"
 
                 if not Player.Party[1].event_counter["sleepover"]:
                     call change_Girl_stat(Player.Party[1], "love", 90, 10)
@@ -1087,13 +1059,14 @@ label sleepover_Morning:
                     call change_Girl_stat(Player.Party[1], "love", 70, 8)
                     call change_Girl_stat(Player.Party[1], "obedience", 80, 10)
                     call change_Girl_stat(Player.Party[1], "inhibition", 35, 8)
+
                 call change_Girl_stat(Player.Party[1], "obedience", 50, 8)
+
                 if approval_check(Player.Party[1], 800, "L"):
                     $ Player.Party[1].change_face("bemused")
                 else:
                     $ Player.Party[1].change_face("confused")
 
-                $ line = "fun"
                 if Player.Party[1] == RogueX:
                     ch_r "Yeah, uh, fun."
                 elif Player.Party[1] == KittyX:
@@ -1109,77 +1082,105 @@ label sleepover_Morning:
                     ch_s ". . . fun."
                 elif Player.Party[1] == JubesX:
                     ch_v "Yeah. . . it's nice having company. . ."
-                    $ line = "nice"
+            "You were constantly tossing around, [Player.Party[1].name]." if reaction == "toss":
+                $ reaction = "toss"
+            "You were tossing around constantly too, [Player.Party[1].name]." if reaction != "toss":
+                $ reaction = "toss"
+            "You need to learn to stick to your side, [Player.Party[1].name]." if reaction == "toss":
+                $ reaction = "turn"
+            "And you need to learn to stick to your side too, [Player.Party[1].name]." if reaction != "toss":
+                $ reaction = "turn"
 
-            "You were constantly tossing around, [Player.Party[1].name]." if line == "toss":
-                $ line = "toss"
-            "You were tossing around constantly too, [Player.Party[1].name]." if line != "toss":
-                $ line = "toss"
-
-            "You need to learn to stick to your side, [Player.Party[1].name]." if line == "toss":
-                $ line = "turn"
-            "And you need to learn to stick to your side too, [Player.Party[1].name]." if line != "toss":
-                $ line = "turn"
-
-        if not Player.Party[1].event_counter["sleepover"] and line == "nice":
+        if reaction == "nice":
             if Player.Party[1] == RogueX:
                 $ Player.Party[1].blushing = "_blush1"
+
                 ch_r "Aw, that's right sweet of ya, [RogueX.player_petname]."
                 ch_r "I think I'd want to do that again."
                 ch_r "And, uh, you too, [Player.Party[0].name]."
             elif Player.Party[1] == KittyX:
                 $ Player.Party[1].blushing = "_blush2"
+
                 ch_k "Yeah, I. . [KittyX.like]I had fun too."
+
                 $ Player.Party[1].blushing = "_blush1"
+
                 ch_k "I wouldn't[KittyX.like]mind doing it again."
+
                 $ Player.Party[1].blushing = "_blush2"
+
                 ch_k "You know, some other time. . . "
+
                 $ Player.Party[1].blushing = "_blush1"
+
                 ch_k "And[KittyX.like]you too, [Player.Party[0].name]."
             elif Player.Party[1] == EmmaX:
                 $ Player.Party[1].change_face("smile", 1)
+
                 ch_e "You're a hopeless romantic, [EmmaX.player_petname]."
+
                 $ Player.Party[1].change_face("smile", 2,eyes = "side")
+
                 ch_e "I suppose I can be a bit hopeless too. . ."
                 ch_e "You know what I'm talking about, [Player.Party[0].name]."
             elif Player.Party[1] == LauraX:
                 $ LauraX.change_face("confused", 1)
+
                 ch_l "Oh. . ."
+
                 $ Player.Party[1].change_face("surprised", 2,brows = "confused")
+
                 ch_l "Yeah, so did I, now that you mention it. . ."
+
                 $ Player.Party[1].change_face("confused", 1)
+
                 ch_l "Huh."
                 ch_l "Weird, right, [Player.Party[0].name]?"
             elif Player.Party[1] == JeanX:
                 $ Player.Party[1].change_face("confused", 1)
+
                 ch_j "Huh? . ."
                 ch_j "Oh, yeah. . . it was great. . ."
+
                 $ Player.Party[0].change_face("smile", 1)
             elif Player.Party[1] == StormX:
                 $ Player.Party[1].change_face("smile", 1)
+
                 ch_s "Well, yes, it was nice to sleep next to you as well, [StormX.player_petname]."
+
                 $ Player.Party[1].change_face("smile", 2,eyes = "leftside")
+
                 ch_s "I think we should make a habit of this. . ."
+
                 $ Player.Party[1].change_face("smile", 1)
             elif Player.Party[1] == JubesX:
                 $ Player.Party[1].change_face("smile", 1)
+
                 ch_v "Yeah, I enjoyed it too. . ."
+
                 $ Player.Party[1].change_face("sad", 1)
+
                 ch_v "I haven't really been sleeping much since. . ."
+
                 $ Player.Party[1].change_face("sadside", 1)
+
                 ch_v ". . . the change."
+
                 $ Player.Party[1].change_face("smile", 1)
+
                 ch_v "It's nice having someone to stay with me. . ."
-
-
-        elif line == "toss":
+        elif reaction == "toss":
             $ Player.Party[1].blushing = "_blush1"
+
             if approval_check(Player.Party[1], 800, "L") or approval_check(Player.Party[1], 1200):
                 $ Player.Party[1].change_face("bemused")
+
                 Player.Party[1].voice "Hmm?"
             else:
                 $ Player.Party[1].change_face("angry")
+
                 Player.Party[1].voice "!!!"
+
             if Player.Party[1].event_counter["sleepover"] < 5:
                 if Player.Party[1] == RogueX:
                     ch_r "It's not like I've had much experience sleeping next to someone. . ."
@@ -1196,6 +1197,7 @@ label sleepover_Morning:
                     ch_s "I do have a lot of energy. . ."
                 elif Player.Party[1] == JubesX:
                     ch_v "I'm just not used to sleeping nights. . ."
+
                 call change_Girl_stat(Player.Party[1], "love", 60, -8)
                 call change_Girl_stat(Player.Party[1], "obedience", 50, 22)
                 call change_Girl_stat(Player.Party[1], "inhibition", 50, 22)
@@ -1214,14 +1216,16 @@ label sleepover_Morning:
                     ch_s "I suppose that I do."
                 elif Player.Party[1] == JubesX:
                     ch_v "I could just stay out of the bed entirely. . ."
-        elif line == "turn":
+        elif reaction == "turn":
             if Player.Party[1].event_counter["sleepover"] < 5:
                 call change_Girl_stat(Player.Party[1], "love", 80, -8)
                 call change_Girl_stat(Player.Party[1], "obedience", 50, 40)
             if approval_check(Player.Party[1], 500, "O"):
                 call change_Girl_stat(Player.Party[1], "love", 80, -2)
                 call change_Girl_stat(Player.Party[1], "obedience", 90, 5)
+
                 $ Player.Party[1].change_face("normal")
+
                 if Player.Party[1] == RogueX:
                     ch_r "Yes, [RogueX.player_petname], I'll try my best."
                 elif Player.Party[1] == KittyX:
@@ -1236,11 +1240,14 @@ label sleepover_Morning:
                     ch_s "I. . . can try. . ."
                 elif Player.Party[1] == JubesX:
                     ch_v "I could just stay out of the bed entirely. . ."
+
                 if Player.Party[1].event_counter["sleepover"] < 5:
                     call change_Girl_stat(Player.Party[1], "obedience", 80, 8)
             else:
                 $ Player.Party[1].change_face("angry")
+
                 call change_Girl_stat(Player.Party[1], "obedience", 90, 5)
+
                 if Player.Party[1] == RogueX:
                     ch_r "Hmmph, you'll be sleeping alone, keep talk'in like that."
                 elif Player.Party[1] == KittyX:
@@ -1255,69 +1262,36 @@ label sleepover_Morning:
                     ch_s "That seems unlikely."
                 elif Player.Party[1] == JubesX:
                     ch_v "I could just stay out of the bed entirely. . ."
+
                 if Player.Party[1].event_counter["sleepover"] < 5:
                     call change_Girl_stat(Player.Party[1], "inhibition", 35, 20)
 
         $ Player.Party[1].blushing = ""
 
+    if len(Player.Party) > 2:
+        "The rest lazily wake up."
 
-
-    if len(Player.Party) >= 2:
-        $ Player.Party[1].event_counter["sleepover"] += 1
-
-
-    $ Player.Party[0].event_counter["sleepover"] += 1
-
-
-
-
-    $ time_index = 3
-    $ current_time = time_options[(time_index)]
-    $ day -= 1
-
-    if weekday == 0:
-        $ weekday = 6
-    else:
-        $ weekday -= 1
-
-    $ day_of_week = week[weekday]
+    python:
+        for G in Player.Party:
+            G.event_counter["sleepover"] += 1
 
     call wait
 
     python:
-        for G in all_Girls:
-            if G.location == Player.location:
-                Player.Party.append(G)
-
+        for G in Player.Party:
             if "morningwood" in G.traits:
                 G.recent_history.append("blowjob")
                 G.daily_history.append("blowjob")
                 G.daily_history.append("morningwood")
                 G.traits.remove("morningwood")
 
-
-
-    if Player.Party:
-        $ Player.Party[0].change_face("normal")
-        $ Player.Party[0].change_outfit("today")
-
-        if len(Player.Party) >= 2:
-            $ Player.Party[1].change_face("normal")
-            $ Player.Party[1].change_outfit("today")
-
-            "The girls get changed for the day."
-        else:
-            "[Player.Party[0].name] gets changed for the day."
+            G.change_face("normal")
+            G.change_Outfit()
 
     $ Player.Party = []
 
-
-
-
-
-
-
     call set_Girls_locations
+
     return
 
 
@@ -1328,44 +1302,33 @@ label sleepover_Morning:
 
 
 
-label Morningwood_Check(Girls=[0,-3], D20=0):
+label Morningwood_Check(Girls=[0,-3]):
+    $ D20 = renpy.random.randint(0, 3)
 
-
-
-    $ D20 = renpy.random.randint(0,3)
     $ line = 0
 
-    if len(Player.Party) >= 2:
-
+    if len(Player.Party) > 1:
         if Player.Party[0].likes[Player.Party[1].tag] >= 900:
-
             $ Girls[0] = 2
         elif Player.Party[0].likes[Player.Party[1].tag] >= 750:
-
             $ Girls[0] = 0
         elif Player.Party[0].likes[Player.Party[1].tag] <= 400:
-
             $ Girls[0] = 2
         else:
             $ Girls[0] = 0
 
         if Player.Party[1].likes[Player.Party[0].tag] >= 900:
-
             $ Girls[1] = 2
         elif Player.Party[1].likes[Player.Party[0].tag] >= 750:
-
             $ Girls[1] = 0
         elif Player.Party[1].likes[Player.Party[0].tag] <= 400:
-
             $ Girls[1] = -5
         else:
             $ Girls[1] = -3
     else:
         $ Girls[0] -= 2
 
-
     if "chill" in Player.Party[0].traits:
-
         $ Girls[0] = 0
     else:
         if Player.Party[0].action_counter["blowjob"] >= 5 or approval_check(Player.Party[0], 900, "I"):
@@ -1378,38 +1341,28 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
             $ Girls[0] += 1
 
         if "hungry" in Player.Party[0].traits and D20 >= 2:
-
             $ Girls[0] += 2
         if Player.Party[0].thirst >= 60:
-
             $ Girls[0] += 2
         elif Player.Party[0].thirst >= 30:
-
             $ Girls[0] += 1
+
         if Player.Party[0].lust >= 50:
-
             $ Girls[0] += 1
-        if Player.Party[0].SEXP <= 15:
 
+        if Player.Party[0].SEXP <= 15:
             $ Girls[0] -= 1
 
-
         if Girls[1] >= 0:
-
             $ Girls[0] += 1
 
-
     if JubesX in Player.Party:
-
-        if len(Player.Party) >= 2:
+        if len(Player.Party) > 1:
             $ line = "no"
         else:
             return
     elif Girls[0] >= D20:
         $ line = "yes"
-
-
-
 
     if len(Player.Party) >= 2:
         if Player.Party[1].action_counter["blowjob"] >= 5 or approval_check(Player.Party[1], 900, "I"):
@@ -1422,29 +1375,23 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
             $ Girls[1] += 1
 
         if "hungry" in Player.Party[1].traits and D20 >= 2:
-
             $ Girls[1] += 2
-        if Player.Party[1].thirst >= 60:
 
+        if Player.Party[1].thirst >= 60:
             $ Girls[1] += 2
         elif Player.Party[1].thirst >= 30:
-
             $ Girls[1] += 1
+
         if Player.Party[1].lust >= 50:
-
             $ Girls[1] += 1
-        if Player.Party[1].SEXP <= 15:
 
+        if Player.Party[1].SEXP <= 15:
             $ Girls[1] -= 1
 
-
         if Girls[0] >= 0:
-
             $ Girls[1] += 1
 
-
         if Player.Party[1] == JubesX:
-
             if Girls[1] >= (D20 + 1):
                 $ line = "other"
             elif Girls[1] <= -1:
@@ -1457,25 +1404,22 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
         elif Girls[1] <= -1:
             $ line = "no"
 
-
         if line == "other" and Player.Party[0].likes[Player.Party[1].tag] >= 500 and "chill" not in Player.Party[1].traits:
-
             $ Player.Party.reverse()
+
             $ Girls[0] = "yes"
             $ Girls[1] = 0
 
-
-
     if line:
-
         if line == "no":
-
             "You hear a little commotion as you start to wake up."
             if Player.Party[1] == RogueX:
                 ch_r "You get'cher head out of there, [Player.Party[0].name]!"
             elif Player.Party[1] == KittyX:
                 "You hear a thump and feel a small woosh as something heavy drops under the bed."
+
                 Player.Party[0].voice "Ow!"
+
                 ch_k "Serves you right, [Player.Party[0].name]."
             elif Player.Party[1] == EmmaX:
                 ch_e "Step away from [Player.name], [Player.Party[0].name]."
@@ -1492,7 +1436,9 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
                 ch_r "I didn't mean no harm, [Player.Party[1].name]."
             elif Player.Party[0] == KittyX:
                 "You hear a thump and feel a small woosh as something drops under the bed."
+
                 Player.Party[0].voice "Ow!"
+
                 ch_k "Spoilsport."
             elif Player.Party[0] == EmmaX:
                 ch_e "Don't be a bore, dear."
@@ -1505,10 +1451,10 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
                 ch_s "I didn't intend to wake you. . ."
             elif Player.Party[0] == JubesX:
                 ch_v "Oh, fine. . ."
+
             if Player.Party[0] != JeanX:
                 return
         elif line == "double":
-
             $ second_girl_main_action = "blowjob"
             $ Player.Party[1].recent_history.append("blowjob")
             $ Player.Party[1].daily_history.append("blowjob")
@@ -1520,14 +1466,10 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
         $ Player.Party[0].daily_history.append("blowjob")
         $ Player.Party[0].daily_history.append("morningwood")
         $ Player.Party[0].traits.append("morningwood")
-        call sleepover_MorningWood
+
+        call morning_afterWood
 
         call sex_over(put_clothes_on = False)
-    else:
-
-
-
-        pass
 
     return
 
@@ -1536,7 +1478,7 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
 
 
 
-label sleepover_MorningWood:
+label morning_afterWood:
 
     $ Player.add_word(1,"interruption")
     call shift_focus (Player.Party[0])
@@ -2078,19 +2020,9 @@ label sleepover_MorningWood:
         $ action_speed = 1
         if Partner:
             $ second_girl_main_action = "blowjob"
-        call Morning_Partner
+            $ Partner.change_face("sexy")
+            call show_Girl(Partner, x_position = 0.7, transition = ease)
 
         call start_action(Player.Party[0], "blowjob")
-
-    return
-
-
-
-label Morning_Partner:
-
-    if not Partner:
-        return
-    $ Partner.change_face("sexy")
-    call show_Girl(Partner, x_position = 0.7, transition = ease)
 
     return

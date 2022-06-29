@@ -713,15 +713,13 @@ label classroom:
 label danger_room_entry:
     $ number_of_girls = 0
 
+    $ Changing = []
+
     $ temp_Girls = Player.Party[:]
 
     while temp_Girls:
-        if temp_Girls[0].outfit_name != "gym_clothes":
+        if temp_Girls[0].Wardrobe.current_Outfit.name != "gym_clothes":
             if approval_check(temp_Girls[0], 1300, "LO") or "passive" in temp_Girls[0].traits:
-                $ approval_passed = True
-            elif approval_check(temp_Girls[0], 800, "LO") and temp_Girls[0].first_custom_outfit["outfit_active"]:
-                $ approval_passed = True
-            elif approval_check(temp_Girls[0], 600, "LO") and temp_Girls[0].gym_clothes["outfit_active"] != 1:
                 $ approval_passed = True
             else:
                 $ approval_passed = False
@@ -741,7 +739,7 @@ label danger_room_entry:
 
                 temp_Girls[0].voice "[line]"
 
-                $ temp_Girls[0].outfit_name = "gym_clothes"
+                $ Changing.append(temp_Girls[0])
 
                 $ number_of_girls += 1
             else:
@@ -811,7 +809,7 @@ label danger_room_entry:
 
                     temp_Girls[0].voice "[line]"
 
-                    $ temp_Girls[0].outfit_name = "gym_clothes"
+                    $ Changing.append(temp_Girls[0])
 
                     $ number_of_girls += 1
 
@@ -821,8 +819,8 @@ label danger_room_entry:
         show black_screen onlayer black
 
         python:
-            for G in Player.Party:
-                G.change_outfit()
+            for G in Changing:
+                G.change_Outfit("gym_clothes")
 
         hide black_screen onlayer black
 
@@ -929,7 +927,7 @@ label shower_entry:
                 if D20 >= 10:
                     G.add_word(1,"showered", "showered", 0, 0)
 
-                G.change_outfit("shower")
+                G.change_Outfit("shower")
 
             G.location = "bg_showerroom"
 

@@ -3,18 +3,23 @@ init python:
     import copy
 
     class ClothingClass(object):
-        def __init__(self, name, image_string, Clothing_type, dialogue_lines, hides = [], covers = [], poseable = False, number_of_states = 1):
+        def __init__(self, name, image_string, Clothing_type, Owner_names, dialogue_lines, hides = [], covers = [], number_of_states = 1, menu_image = None, poses = []):
             self.name = name
             self.string = image_string
+
+            self.Owner_names = Owner_names
 
             self.Clothing_type = Clothing_type
 
             self.hides = hides
             self.covers = covers
 
+            self.max_undress_state = number_of_states - 1
+
+            self.menu_image = menu_image
+
             self.poseable = poseable
 
-            self.max_undress_state = number_of_states - 1
             self.undress_state = 0
 
             self.covered_by = [None]
