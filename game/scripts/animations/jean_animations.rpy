@@ -1,5 +1,5 @@
 image Jean_blinking:
-    "images/Jean_standing/Jean_standing_eyes[JeanX.eyes].png"
+    "images/Jean_standing/Jean_standing_eyes_[JeanX.eyes].png"
     choice:
         3.5
     choice:
@@ -691,7 +691,7 @@ image Jean_titjob_hair_animation5:
         repeat
 
 layeredimage Jean_sprite titjob:
-    if JeanX.outfit["bra"] in ["_green_bra", "_lace_bra"]:
+    if JeanX.outfit["bra"] in ["green_bra", "lace_bra"]:
         "Jean_titjob_bra_back_animation[action_speed]" pos (0.0, -0.025)
 
     always:
@@ -709,7 +709,7 @@ layeredimage Jean_sprite titjob:
     always:
         "Zero_cock_Jean"
 
-    if JeanX.outfit["bra"] in ["_sports_bra", "_bikini_top"]:
+    if JeanX.outfit["bra"] in ["sports_bra", "bikini_top"]:
         "Jean_titjob_bra_stretch_animation[action_speed]"
 
     always:
@@ -721,7 +721,7 @@ layeredimage Jean_sprite titjob:
     anchor (0.5, 0.0) offset (300, 750) zoom 1.1
 
 image Jean_blowjob_blinking:
-    "images/Jean_blowjob/Jean_blowjob_eyes[JeanX.eyes].png"
+    "images/Jean_blowjob/Jean_blowjob_eyes_[JeanX.eyes].png"
     choice:
         3.5
     choice:

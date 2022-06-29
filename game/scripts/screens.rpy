@@ -615,11 +615,11 @@ screen Inventory_screen:
         showif "Xavier's files" in Player.inventory:
             text "Xavier's Files" size 15
 
-        showif "_dildo" in Player.inventory:
-            $ inventory_count = Player.inventory.count("_dildo")
+        showif "dildo" in Player.inventory:
+            $ inventory_count = Player.inventory.count("dildo")
             text "Dildos: [inventory_count]" size 15
-        showif "_vibrator" in Player.inventory:
-            $ inventory_count = Player.inventory.count("_vibrator")
+        showif "vibrator" in Player.inventory:
+            $ inventory_count = Player.inventory.count("vibrator")
             text "Vibrators: [inventory_count]" size 15
 
         showif "Dazzler and Longshot" in Player.inventory:

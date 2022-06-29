@@ -192,7 +192,7 @@ label are_girls_angry:
     $ temp_Girls = all_Girls[:]
 
     while temp_Girls:
-        if temp_Girls[0].location == Player.location and "_angry" in temp_Girls[0].recent_history:
+        if temp_Girls[0].location == Player.location and "angry" in temp_Girls[0].recent_history:
             if Player.location == temp_Girls[0].home:
                 if temp_Girls[0] == RogueX:
                     ch_r "You should get out, I'm fix'in ta throw down."
@@ -355,13 +355,6 @@ label who_likes_who(Check = 70, D20 = 0):
                     else:
                         GA.check_if_likes(GB, Check, D20, 1)
 
-                    if GA == EmmaX:
-                        GA.check_if_likes(GB, 1000, int(GB.outfit["shame"]/4), 1)
-                    elif GB in [EmmaX, StormX] and GA != LauraX:
-                        GA.check_if_likes(GB, 1000, int(GB.outfit["shame"]/4), 1)
-                    else:
-                        GA.check_if_likes(GB, 1000, int(GB.outfit["shame"]/5), 1)
-
     return
 
 label check_addiction:
@@ -408,7 +401,7 @@ label check_addiction:
             pass
         elif addicted_Girls[0].event_happened[3]:
             pass
-        elif "_angry" not in addicted_Girls[0].recent_history and "addiction" not in addicted_Girls[0].daily_history and addicted_Girls[0].remaining_actions >= 1:
+        elif "angry" not in addicted_Girls[0].recent_history and "addiction" not in addicted_Girls[0].daily_history and addicted_Girls[0].remaining_actions >= 1:
             if (addicted_Girls[0].addiction >= 60 or (addicted_Girls[0].addiction >= 40 and addicted_Girls[0] == JubesX)) and addicted_Girls[0].resistance:
                 if Player.location == addicted_Girls[0].home or Player.location == "bg_player":
                     call addiction_fix(addicted_Girls[0])
@@ -469,9 +462,9 @@ label check_addiction:
     return
 
 label dildo_check(Girl):
-    if "_dildo" in Player.inventory:
+    if "dildo" in Player.inventory:
         "You pull out a large rubber dildo. Lucky you remembered to keep it handy."
-    elif "_dildo" in Girl.inventory:
+    elif "dildo" in Girl.inventory:
         "You ask [Girl.name] to get out her favorite Dildo."
     else:
         "You don't have one of those on you."
@@ -481,9 +474,9 @@ label dildo_check(Girl):
     return "found"
 
 label vibrator_check(Girl):
-    if "_vibrator" in Player.inventory:
+    if "vibrator" in Player.inventory:
         "You pull out the \"shocker\" vibrator, handy."
-    elif "_vibrator" in Girl.inventory:
+    elif "vibrator" in Girl.inventory:
         "You ask [Girl.name] to get out her vibrator."
     else:
         "You don't have one of those on you."

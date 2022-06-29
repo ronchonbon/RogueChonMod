@@ -29,11 +29,11 @@ label meet_Mystique:
         "That's me.":
             ch_m "Pleasure to meet you. Have a seat right there."
         "Yeah, listen, this seems like a total waste of time":
-            $ MystiqueX.change_face("_bemused")
+            $ MystiqueX.change_face("bemused")
 
             ch_m "Hmm, your report mentioned a complete disregard for social etiquette and authority."
 
-            $ MystiqueX.change_face("_normal")
+            $ MystiqueX.change_face("normal")
 
             ch_m "Have a seat."
         ". . .":
@@ -42,19 +42,19 @@ label meet_Mystique:
             menu:
                 extend ""
                 "Sorry, I just wasn't expecting. . .":
-                    $ MystiqueX.change_face("_bemused", eyes = "_side")
+                    $ MystiqueX.change_face("bemused", eyes = "side")
 
                     ch_m "Right. Please have a seat."
                 "I get it, sexy therapist right?":
-                    $ MystiqueX.change_face("_bemused")
+                    $ MystiqueX.change_face("bemused")
 
                     ch_m "Yes, your report mentioned a complete disregard for social etiquette and authority."
 
-                    $ MystiqueX.change_face("_normal")
+                    $ MystiqueX.change_face("normal")
 
                     ch_m "Please refrain from comments about my appearance. Have a seat."
                 ". . .":
-                    $ MystiqueX.change_face("_bemused", eyes = "_side")
+                    $ MystiqueX.change_face("bemused", eyes = "side")
 
                     "[line]"
 
@@ -92,11 +92,11 @@ label meet_Mystique:
             $ note_count += 1
             $ line = note_lines[note_count]
 
-            $ MystiqueX.change_face("_bemused", eyes = "_side")
+            $ MystiqueX.change_face("bemused", eyes = "side")
 
             ch_m "This can be as easy or as difficult as you make it, [Player.name]."
 
-            $ MystiqueX.change_face("_normal")
+            $ MystiqueX.change_face("normal")
 
             ch_m "Perhaps we should start with why you think you are here."
 
@@ -121,7 +121,7 @@ label meet_Mystique:
             $ line = note_lines[note_count]
 
             if note_count > 2:
-                $ MystiqueX.change_face("_normal", brows = "_confused")
+                $ MystiqueX.change_face("normal", brows = "confused")
 
                 "You notice the faintest hint of contempt flash over her otherwise stony face."
 
@@ -166,7 +166,7 @@ label discover_Mystique:
 
     "You enter the danger room. [MystiqueX.name]'s in the middle of an intense training simulation."
 
-    $ MystiqueX.change_face("_surprised")
+    $ MystiqueX.change_face("surprised")
 
     "You lock eyes with her just as she attempts a difficult maneuver."
 
@@ -189,7 +189,7 @@ label discover_Mystique:
 
     $ MystiqueX.name = "Mystique"
     $ MystiqueX.names.append("Mystique")
-    $ MystiqueX.change_face("_angry")
+    $ MystiqueX.change_face("angry")
 
     ch_m "You will be quiet, or you will die."
     "You try to make a run for it but she quickly jumps between you and the door."
@@ -211,18 +211,18 @@ label discover_Mystique:
 
     ch_p "Wait! If you do that, everyone on campus will be looking for you. That would be bad, right?"
 
-    $ MystiqueX.change_face("_confused")
+    $ MystiqueX.change_face("confused")
 
     ch_m "You may be right..."
 
-    $ MystiqueX.eyes = "_closed"
+    $ MystiqueX.eyes = "closed"
 
     pause 0.5
 
     ch_m "Fine."
 
     $ MystiqueX.disguise = "Raven"
-    $ MystiqueX.change_face("_sly")
+    $ MystiqueX.change_face("sly")
 
     call show_Girl(MystiqueX, transition = Mystique_dissolve)
 

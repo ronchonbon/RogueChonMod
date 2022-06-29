@@ -73,7 +73,7 @@ layeredimage Jubes_sprite standing:
 
     if not JubesX.outfit["top"]:
         Null()
-    elif JubesX.outfit["top"] == "_towel":
+    elif JubesX.outfit["top"] == "towel":
         "images/Jubes_standing/Jubes_standing_top[JubesX.outfit[top]][JubesX.arm_pose].png"
     elif JubesX.top_pulled_up:
         "images/Jubes_standing/Jubes_standing_top[JubesX.outfit[top]]_up.png"
@@ -132,7 +132,7 @@ layeredimage Jubes_sprite standing:
     if JubesX.wet and JubesX.arm_pose == 1:
         "images/Jubes_standing/Jubes_standing_water_arm[JubesX.arm_pose].png"
 
-    if JubesX.outfit["held_item"] and JubesX.arm_pose == 1:
+    if JubesX.held_item and JubesX.arm_pose == 1:
         "images/Jubes_standing/Jubes_standing_held[JubesX.outfit[held_item]].png"
 
     always:
@@ -153,15 +153,15 @@ layeredimage Jubes_head:
         "images/Jubes_standing/Jubes_standing_head[JubesX.blushing].png"
 
     always:
-        "images/Jubes_standing/Jubes_standing_brows[JubesX.brows].png"
+        "images/Jubes_standing/Jubes_standing_brows_[JubesX.brows].png"
 
     always:
-        "images/Jubes_standing/Jubes_standing_mouth[JubesX.mouth].png"
+        "images/Jubes_standing/Jubes_standing_mouth_[JubesX.mouth].png"
 
     if JubesX.spunk["mouth"]:
-        "images/Jubes_standing/Jubes_standing_spunk_mouth[JubesX.mouth].png"
+        "images/Jubes_standing/Jubes_standing_spunk_mouth_[JubesX.mouth].png"
 
-    if JubesX.eyes == "_closed":
+    if JubesX.eyes == "closed":
         "images/Jubes_standing/Jubes_standing_eyes_closed.png"
     else:
         "Jubes_blinking"
@@ -207,7 +207,7 @@ image Jubes_titjob_jacket_back:
     anchor (0.5, 0.5)
 
 layeredimage Jubes_titjob_bra_back:
-    if JubesX.outfit["bra"] not in ["_sports_bra", "_bikini_top"]:
+    if JubesX.outfit["bra"] not in ["sports_bra", "bikini_top"]:
         Null()
     elif JubesX.bra_pulled_up:
         "images/Jubes_titjob/Jubes_titjob_bra[JubesX.outfit[bra]]_back_up.png"
@@ -252,7 +252,7 @@ layeredimage Jubes_titjob_breasts:
 
     if not JubesX.outfit["piercings"] or not JubesX.breasts_covered:
         Null()
-    elif JubesX.outfit["top"] == "_pink_shirt":
+    elif JubesX.outfit["top"] == "pink_shirt":
         "images/Jubes_titjob/Jubes_titjob_piercings[JubesX.outfit[piercings]][JubesX.outfit[top]]_covered.png"
     elif JubesX.outfit["bra"]:
         "images/Jubes_titjob/Jubes_titjob_piercings[JubesX.outfit[piercings]][JubesX.outfit[bra]]_covered.png"
@@ -263,7 +263,7 @@ layeredimage Jubes_titjob_breasts:
     anchor (0.5, 0.5)
 
 layeredimage Jubes_blowjob_head:
-    if JubesX.blushing == "_blush2":
+    if JubesX.blushing == "blush2":
         "images/Jubes_blowjob/Jubes_blowjob_head_blush.png"
     else:
         "images/Jubes_blowjob/Jubes_blowjob_head.png"
@@ -275,7 +275,7 @@ layeredimage Jubes_blowjob_head:
     elif renpy.showing("Jubes_sprite blowjob") and action_speed > 2:
         "images/Jubes_blowjob/Jubes_blowjob_mouth_sucking.png"
     else:
-        "images/Jubes_blowjob/Jubes_blowjob_mouth[JubesX.mouth].png"
+        "images/Jubes_blowjob/Jubes_blowjob_mouth_[JubesX.mouth].png"
 
     if renpy.showing("Jubes_sprite blowjob") and action_speed == 2:
         "Jubes_blowjob_mouth_animations"
@@ -286,15 +286,15 @@ layeredimage Jubes_blowjob_head:
         "images/Jubes_blowjob/Jubes_blowjob_spunk_mouth_tongue.png"
     elif renpy.showing("Jubes_sprite blowjob") and action_speed > 2:
         "images/Jubes_blowjob/Jubes_blowjob_spunk_mouth_sucking_under.png"
-    elif JubesX.mouth == "_sucking":
-        "images/Jubes_blowjob/Jubes_blowjob_spunk_mouth[JubesX.mouth]_under.png"
+    elif JubesX.mouth == "sucking":
+        "images/Jubes_blowjob/Jubes_blowjob_spunk_mouth_[JubesX.mouth]_under.png"
     else:
-        "images/Jubes_blowjob/Jubes_blowjob_spunk_mouth[JubesX.mouth].png"
+        "images/Jubes_blowjob/Jubes_blowjob_spunk_mouth_[JubesX.mouth].png"
 
     always:
-        "images/Jubes_blowjob/Jubes_blowjob_brows[JubesX.brows].png"
+        "images/Jubes_blowjob/Jubes_blowjob_brows_[JubesX.brows].png"
 
-    if JubesX.eyes == "_closed":
+    if JubesX.eyes == "closed":
         "images/Jubes_blowjob/Jubes_blowjob_eyes_closed.png"
     else:
         "Jubes_blowjob_blinking"

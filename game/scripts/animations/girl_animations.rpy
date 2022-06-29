@@ -130,10 +130,10 @@ transform vampire:
         repeat
 
 label show_Girl(Girl, x_position = None, y_position = None, sprite_layer = None, color_transform = None, animation_transform = None, transition = None):
-    $ renpy.start_predict("images/" + Girl.tag + "_standing/*.*")
+    $ renpy.start_predict("images/" + Girl.tag + "standing/*.*")
 
     if Girl == RogueX:
-        $ renpy.start_predict("images/" + Girl.tag + "_blowjob/*.*")
+        $ renpy.start_predict("images/" + Girl.tag + "blowjob/*.*")
     elif Girl == MystiqueX:
         $ renpy.start_predict("images/Raven_standing/*.*")
 
@@ -373,13 +373,13 @@ label hide_Girl(Girl, transition = None):
         elif Girl == MystiqueX:
             hide Mystique_sprite
 
-    $ renpy.stop_predict("images/" + Girl.tag + "_standing/*.*")
-    $ renpy.stop_predict("images/" + Girl.tag + "_handjob/*.*")
-    $ renpy.stop_predict("images/" + Girl.tag + "_titjob/*.*")
-    $ renpy.stop_predict("images/" + Girl.tag + "_footjob/*.*")
-    $ renpy.stop_predict("images/" + Girl.tag + "_blowjob/*.*")
-    $ renpy.stop_predict("images/" + Girl.tag + "_sex/*.*")
-    $ renpy.stop_predict("images/" + Girl.tag + "_doggy/*.*")
+    $ renpy.stop_predict("images/" + Girl.tag + "standing/*.*")
+    $ renpy.stop_predict("images/" + Girl.tag + "handjob/*.*")
+    $ renpy.stop_predict("images/" + Girl.tag + "titjob/*.*")
+    $ renpy.stop_predict("images/" + Girl.tag + "footjob/*.*")
+    $ renpy.stop_predict("images/" + Girl.tag + "blowjob/*.*")
+    $ renpy.stop_predict("images/" + Girl.tag + "sex/*.*")
+    $ renpy.stop_predict("images/" + Girl.tag + "doggy/*.*")
 
     return
 
@@ -392,7 +392,7 @@ label hide_all(fade = False):
     $ temp_Girls = all_Girls[:]
 
     while temp_Girls:
-        if temp_Girls not in Player.Party and renpy.showing(temp_Girls[0].tag + "_sprite"):
+        if temp_Girls not in Player.Party and renpy.showing(temp_Girls[0].tag + "sprite"):
             call hide_Girl(temp_Girls[0], transition = False)
 
         $ temp_Girls.remove(temp_Girls[0])
@@ -555,19 +555,19 @@ label show_full_body(Girl):
     return
 
 label smooch(Girl):
-    $ Girl.change_face("_kiss")
+    $ Girl.change_face("kiss")
 
     call show_Girl(Girl, animation_transform = smooch_animation)
 
     pause 1.0
 
-    $ Girl.change_face("_sexy")
+    $ Girl.change_face("sexy")
 
     return
 
 label kiss_launch(Girl):
     $ Girl.pose = "kiss"
-    $ Girl.change_face("_kiss")
+    $ Girl.change_face("kiss")
 
     call show_Girl(Girl, animation_transform = kiss_launch_animation)
 
@@ -595,7 +595,7 @@ label pussy_launch(Girl):
     return
 
 label show_handjob(Girl, orgasm = False):
-    if renpy.showing(Girl.tag + "_sprite handjob"):
+    if renpy.showing(Girl.tag + "sprite handjob"):
         return
 
     $ action_speed = 0
@@ -622,7 +622,7 @@ label show_handjob(Girl, orgasm = False):
     $ Girl.outfit["gloves"] = ""
     $ Girl.arm_pose = 1
 
-    $ renpy.start_predict("images/" + Girl.tag + "_handjob/*.*")
+    $ renpy.start_predict("images/" + Girl.tag + "handjob/*.*")
 
     call get_color_transform
     $ color_transform = _return
@@ -652,7 +652,7 @@ label show_handjob(Girl, orgasm = False):
     return
 
 label show_titjob(Girl, orgasm = False):
-    if renpy.showing(Girl.tag + "_sprite titjob"):
+    if renpy.showing(Girl.tag + "sprite titjob"):
         return
 
     $ action_speed = 0
@@ -679,7 +679,7 @@ label show_titjob(Girl, orgasm = False):
     $ Girl.outfit["bra"] = ""
     $ Girl.outfit["gloves"] = ""
 
-    call expression Girl.tag + "_First_Topless"
+    call expression Girl.tag + "First_Topless"
 
     if not orgasm:
         if not Girl.action_counter["titjob"] and "cockout" not in Player.recent_history:
@@ -703,7 +703,7 @@ label show_titjob(Girl, orgasm = False):
     else:
         "[Girl.name] wraps her tits around your cock."
 
-    $ renpy.start_predict("images/" + Girl.tag + "_titjob/*.*")
+    $ renpy.start_predict("images/" + Girl.tag + "titjob/*.*")
 
     call get_color_transform
     $ color_transform = _return
@@ -733,7 +733,7 @@ label show_titjob(Girl, orgasm = False):
     return
 
 label show_blowjob(Girl, orgasm = False):
-    if renpy.showing(Girl.tag + "_sprite blowjob"):
+    if renpy.showing(Girl.tag + "sprite blowjob"):
         return
 
     $ action_speed = 0
@@ -755,7 +755,7 @@ label show_blowjob(Girl, orgasm = False):
     else:
         "[Girl.name] bends down and begins to suck on your cock."
 
-    $ renpy.start_predict("images/" + Girl.tag + "_blowjob/*.*")
+    $ renpy.start_predict("images/" + Girl.tag + "blowjob/*.*")
 
     call get_color_transform
     $ color_transform = _return
@@ -809,12 +809,12 @@ label show_sex(Girl, action):
 
         return
 
-    if renpy.showing(Girl.tag + "_sprite sex"):
+    if renpy.showing(Girl.tag + "sprite sex"):
         return
 
     $ action_speed = 0
 
-    $ renpy.start_predict("images/" + Girl.tag + "_sex/*.*")
+    $ renpy.start_predict("images/" + Girl.tag + "sex/*.*")
 
     call get_color_transform
     $ color_transform = _return
@@ -837,12 +837,12 @@ label show_sex(Girl, action):
     return
 
 label show_doggy(Girl):
-    if renpy.showing(Girl.tag + "_sprite doggy"):
+    if renpy.showing(Girl.tag + "sprite doggy"):
         return
 
     $ action_speed = 0
 
-    $ renpy.start_predict("images/" + Girl.tag + "_doggy/*.*")
+    $ renpy.start_predict("images/" + Girl.tag + "doggy/*.*")
 
     call get_color_transform
     $ color_transform = _return
@@ -900,16 +900,16 @@ label lesbian_launch(Girl):
 
     while temp_Girls:
         if "unseen" in temp_Girls[0].recent_history:
-            $ temp_Girls[0].eyes = "_closed"
+            $ temp_Girls[0].eyes = "closed"
         elif Girl == temp_Girls[0]:
             if Girl == RogueX:
-                $ temp_Girls[0].eyes = "_side"
+                $ temp_Girls[0].eyes = "side"
             elif Girl == EmmaX:
-                $ temp_Girls[0].eyes = "_squint"
+                $ temp_Girls[0].eyes = "squint"
             else:
-                $ temp_Girls[0].eyes = "_leftside"
+                $ temp_Girls[0].eyes = "leftside"
         else:
-            $ temp_Girls[0].eyes = "_side"
+            $ temp_Girls[0].eyes = "side"
 
         if temp_Girls[0] == KittyX or temp_Girls[0] == LauraX:
             $ temp_Girls[0].arm_pose = 1

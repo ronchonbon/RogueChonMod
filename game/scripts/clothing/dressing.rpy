@@ -12,7 +12,7 @@ label remove_jacket(Girl):
     $ Girl.set_outfit_flags()
 
     if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Topless"
+        call expression Girl.tag + "First_Topless"
 
     return
 
@@ -66,7 +66,7 @@ label remove_suspenders(Girl):
     $ Girl.set_outfit_flags()
 
     if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Topless"
+        call expression Girl.tag + "First_Topless"
 
     return
 
@@ -93,7 +93,7 @@ label remove_top(Girl):
     $ Girl.set_outfit_flags()
 
     if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Topless"
+        call expression Girl.tag + "First_Topless"
 
     return
 
@@ -190,8 +190,8 @@ label remove_dress(Girl):
     $ Girl.set_outfit_flags()
 
     if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Topless"
-        call expression Girl.tag + "_First_Bottomless"
+        call expression Girl.tag + "First_Topless"
+        call expression Girl.tag + "First_Bottomless"
 
     return
 
@@ -302,8 +302,8 @@ label remove_bodysuit(Girl):
     $ Girl.set_outfit_flags()
 
     if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Topless"
-        call expression Girl.tag + "_First_Bottomless"
+        call expression Girl.tag + "First_Topless"
+        call expression Girl.tag + "First_Bottomless"
 
     return
 
@@ -472,7 +472,7 @@ label remove_bra(Girl):
     $ Girl.set_outfit_flags()
 
     if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Topless"
+        call expression Girl.tag + "First_Topless"
 
     return
 
@@ -602,7 +602,7 @@ label remove_bottom(Girl):
     $ Girl.set_outfit_flags()
 
     if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Bottomless" pass(1)
+        call expression Girl.tag + "First_Bottomless" pass(1)
 
     return
 
@@ -795,8 +795,8 @@ label change_hose(Girl, item, redress = True):
         $ temp_bodysuit = None
 
     if Girl.outfit["hose"]:
-        if Girl.outfit["hose"] == "_stockings_and_garterbelt":
-            $ Girl.outfit["hose"] = "_garterbelt"
+        if Girl.outfit["hose"] == "stockings_and_garterbelt":
+            $ Girl.outfit["hose"] = "garterbelt"
 
             pause 0.2
 
@@ -805,8 +805,8 @@ label change_hose(Girl, item, redress = True):
         pause 0.2
 
     if item:
-        if item == "_stockings_and_garterbelt":
-            $ Girl.outfit["hose"] = "_garterbelt"
+        if item == "stockings_and_garterbelt":
+            $ Girl.outfit["hose"] = "garterbelt"
 
             pause 0.2
 
@@ -902,8 +902,8 @@ label change_socks(Girl, item, redress = True):
         pause 0.2
 
     if Girl.outfit["hose"]:
-        if Girl.outfit["hose"] == "_stockings_and_garterbelt":
-            $ Girl.outfit["hose"] = "_garterbelt"
+        if Girl.outfit["hose"] == "stockings_and_garterbelt":
+            $ Girl.outfit["hose"] = "garterbelt"
 
             pause 0.2
 
@@ -941,7 +941,7 @@ label remove_underwear(Girl):
     $ Girl.set_outfit_flags()
 
     if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Bottomless"
+        call expression Girl.tag + "First_Bottomless"
 
     return
 
@@ -1069,11 +1069,11 @@ label change_underwear(Girl, item, redress = True):
     else:
         $ temp_bodysuit = None
 
-    if Girl.outfit["hose"] in hoses or Girl.outfit["hose"] == "_stockings_and_garterbelt":
+    if Girl.outfit["hose"] in hoses or Girl.outfit["hose"] == "stockings_and_garterbelt":
         $ temp_hose = Girl.outfit["hose"]
 
-        if Girl.outfit["hose"] == "_stockings_and_garterbelt":
-            $ Girl.outfit["hose"] = "_garterbelt"
+        if Girl.outfit["hose"] == "stockings_and_garterbelt":
+            $ Girl.outfit["hose"] = "garterbelt"
 
             pause 0.2
 
@@ -1095,8 +1095,8 @@ label change_underwear(Girl, item, redress = True):
 
     if redress:
         if temp_hose:
-            if temp_hose == "_stockings_and_garterbelt":
-                $ Girl.outfit["hose"] = "_garterbelt"
+            if temp_hose == "stockings_and_garterbelt":
+                $ Girl.outfit["hose"] = "garterbelt"
 
                 pause 0.2
 
@@ -1200,7 +1200,7 @@ label expose_underwear(Girl):
 
         pause 0.2
 
-    if Girl.outfit["hose"] in ["_tights", "_ripped_tights", "_pantyhose", "_ripped_pantyhose"]:
+    if Girl.outfit["hose"] in ["tights", "ripped_tights", "pantyhose", "ripped_pantyhose"]:
         $ Girl.outfit["hose"] = ""
 
         pause 0.2
@@ -1208,7 +1208,7 @@ label expose_underwear(Girl):
     $ Girl.set_outfit_flags()
 
     if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Bottomless" pass(1)
+        call expression Girl.tag + "First_Bottomless" pass(1)
 
     return
 
@@ -1249,7 +1249,7 @@ label expose_breasts(Girl):
     $ Girl.set_outfit_flags()
 
     if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Topless" pass(1)
+        call expression Girl.tag + "First_Topless" pass(1)
 
     return
 
@@ -1264,7 +1264,7 @@ label expose_pussy(Girl):
     $ Girl.set_outfit_flags()
 
     if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Bottomless" pass(1)
+        call expression Girl.tag + "First_Bottomless" pass(1)
 
     return
 
@@ -1314,7 +1314,7 @@ label fully_undress(Girl):
     $ Girl.set_outfit_flags()
 
     if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Topless" pass(1)
+        call expression Girl.tag + "First_Topless" pass(1)
 
     if Girl.outfit["boots"]:
         $ Girl.outfit["boots"] = ""
@@ -1332,8 +1332,8 @@ label fully_undress(Girl):
         pause 0.2
 
     if Girl.outfit["hose"]:
-        if Girl.outfit["hose"] == "_stockings_and_garterbelt":
-            $ Girl.outfit["hose"] = "_garterbelt"
+        if Girl.outfit["hose"] == "stockings_and_garterbelt":
+            $ Girl.outfit["hose"] = "garterbelt"
 
             pause 0.2
 
@@ -1347,7 +1347,7 @@ label fully_undress(Girl):
     $ Girl.set_outfit_flags()
 
     if not renpy.showing('dress_screen'):
-        call expression Girl.tag + "_First_Bottomless" pass(1)
+        call expression Girl.tag + "First_Bottomless" pass(1)
 
     return
 

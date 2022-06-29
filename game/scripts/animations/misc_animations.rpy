@@ -179,7 +179,7 @@ layeredimage Xavier_sprite:
     always:
         "images/NPC/Xavier_mouth[Xavier_mouth].png"
 
-    if Xavier_eyes == "_closed":
+    if Xavier_eyes == "closed":
         "images/NPC/Xavier_eyes[Xavier_eyes].png"
     else:
         "Xavier_blinking"
@@ -206,30 +206,30 @@ image Xavier_blinking:
     repeat
 
 label change_Xavier_face(face = Xavier_emotion):
-    if face == "_psychic":
-        $ Xavier_mouth = "_stern"
-        $ Xavier_brows = "_concentrate"
-        $ Xavier_eyes = "_concentrate"
+    if face == "psychic":
+        $ Xavier_mouth = "stern"
+        $ Xavier_brows = "concentrate"
+        $ Xavier_eyes = "concentrate"
         $ Xavier_psychic = True
-    elif face == "_hypno":
-        $ Xavier_mouth = "_neutral"
-        $ Xavier_brows = "_neutral"
-        $ Xavier_eyes = "_hypno"
+    elif face == "hypno":
+        $ Xavier_mouth = "neutral"
+        $ Xavier_brows = "neutral"
+        $ Xavier_eyes = "hypno"
         $ Xavier_psychic = False
-    elif face == "_shocked":
-        $ Xavier_mouth = "_neutral"
-        $ Xavier_brows = "_shocked"
-        $ Xavier_eyes = "_shocked"
+    elif face == "shocked":
+        $ Xavier_mouth = "neutral"
+        $ Xavier_brows = "shocked"
+        $ Xavier_eyes = "shocked"
         $ Xavier_psychic = False
-    elif face == "_happy":
-        $ Xavier_mouth = "_smile"
-        $ Xavier_brows = "_happy"
-        $ Xavier_eyes = "_happy"
+    elif face == "happy":
+        $ Xavier_mouth = "smile"
+        $ Xavier_brows = "happy"
+        $ Xavier_eyes = "happy"
         $ Xavier_psychic = False
     elif face == "angry":
-        $ Xavier_mouth = "_stern"
-        $ Xavier_brows = "_concentrate"
-        $ Xavier_eyes = "_happy"
+        $ Xavier_mouth = "stern"
+        $ Xavier_brows = "concentrate"
+        $ Xavier_eyes = "happy"
         $ Xavier_psychic = False
 
     return

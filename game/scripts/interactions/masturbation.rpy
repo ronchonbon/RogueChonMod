@@ -17,7 +17,7 @@ label masturbate(Girl, context = None):
                     "Would you like some help? I could lend some helping hands. . ." if Girl.remaining_actions:
                         call change_Girl_stat(Girl, "love", 90, 1)
                         call change_Girl_stat(Girl, "obedience", 50, 2)
-                        $ Girl.change_face("_sexy")
+                        $ Girl.change_face("sexy")
 
                         call lend_some_helping_hands_lines(Girl, "masturbation")
 
@@ -32,7 +32,7 @@ label masturbate(Girl, context = None):
                     "Would you like some help? I could. . . up to you, I guess." if Player.semen and Girl.remaining_actions:
                         call change_Girl_stat(Girl, "love", 70, 2)
                         call change_Girl_stat(Girl, "love", 90, 1)
-                        $ Girl.change_face("_sexy")
+                        $ Girl.change_face("sexy")
 
                         call lend_some_helping_hands_lines(Girl, "masturbation")
 
@@ -50,7 +50,7 @@ label masturbate(Girl, context = None):
 
                         return _return
                     "Why don't we take care of each other?" if Player.semen and Girl.remaining_actions:
-                        $ Girl.change_face("_sexy")
+                        $ Girl.change_face("sexy")
 
                         call why_dont_we_take_care_of_each_other_lines(Girl, "masturbation")
                         call enter_main_sex_menu(Girl)
@@ -60,7 +60,7 @@ label masturbate(Girl, context = None):
                         if Girl.lust >= 50:
                             call change_Girl_stat(Girl, "love", 70, 2)
                             call change_Girl_stat(Girl, "love", 90, 1)
-                            $ Girl.change_face("_sexy")
+                            $ Girl.change_face("sexy")
 
                             call well_in_hand_lust_lines(Girl, "masturbation")
 
@@ -69,11 +69,11 @@ label masturbate(Girl, context = None):
 
                             $ accepted = True
                         elif approval_check(Girl, 1000):
-                            $ Girl.change_face("_sly")
+                            $ Girl.change_face("sly")
 
                             call well_in_hand_approved_lines(Girl, "masturbation")
                         else:
-                            $ Girl.change_face("_angry")
+                            $ Girl.change_face("angry")
 
                             call well_in_hand_disapproved_lines(Girl, "masturbation")
 
@@ -88,19 +88,19 @@ label masturbate(Girl, context = None):
                 call reset_player
 
                 if approval:
-                    $ Girl.change_face("_bemused", 2)
+                    $ Girl.change_face("bemused", 2)
 
                     if Player.location == "bg_rogue":
                         call what_did_you_come_over_for_approval_lines(Girl, "masturbation")
                     else:
                         call fancy_bumping_into_you_approval_lines(Girl, "masturbation")
 
-                    $ Girl.blushing = "_blush1"
+                    $ Girl.blushing = "blush1"
                 else:
                     call change_Girl_stat(Girl, "love", 200, -5)
-                    $ Girl.change_face("_angry")
-                    $ Girl.recent_history.append("_angry")
-                    $ Girl.daily_history.append("_angry")
+                    $ Girl.change_face("angry")
+                    $ Girl.recent_history.append("angry")
+                    $ Girl.daily_history.append("angry")
 
                     if Player.location == "bg_rogue":
                         call what_did_you_come_over_for_disapproval_lines(Girl, "masturbation")
@@ -165,12 +165,12 @@ label before_masturbation(Girl):
     call expose_pussy(Girl)
 
     if "unseen" in Girl.recent_history:
-        $ Girl.change_face("_sexy", eyes = "_closed")
+        $ Girl.change_face("sexy", eyes = "closed")
         $ Girl.arm_pose = 2
 
         "You see [Girl.name] leaning back, masturbating. You don't think she's noticed you yet."
     else:
-        $ Girl.change_face("_sexy")
+        $ Girl.change_face("sexy")
         $ Girl.arm_pose = 2
 
         "[Girl.name] lays back and starts to toy with herself."
@@ -207,7 +207,7 @@ label masturbation_cycle(Girl):
         $ Girl.lust_face()
 
         if "unseen" in Girl.recent_history:
-            $ Girl.eyes = "_closed"
+            $ Girl.eyes = "closed"
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
@@ -233,7 +233,7 @@ label masturbation_cycle(Girl):
                 if "unseen" not in Girl.recent_history:
                     call Player_Cumming (Girl)
 
-                    if "_angry" in Girl.recent_history:
+                    if "angry" in Girl.recent_history:
                         call show_full_body(Girl)
 
                         return "stop"
@@ -292,7 +292,7 @@ label masturbation_cycle(Girl):
 
                 $ Girl.lust += 25
 
-    $ Girl.change_face("_bemused", 0)
+    $ Girl.change_face("bemused", 0)
 
     if "unseen" not in Girl.recent_history:
         call end_of_action_lines(Girl, "masturbation")
@@ -301,26 +301,26 @@ label masturbation_cycle(Girl):
 
 label after_masturbation(Girl, context):
     if context == "interrupt":
-        $ Girl.change_face("_surprised", 1)
+        $ Girl.change_face("surprised", 1)
 
         $ girl_secondary_action = None
 
         "[Girl.name] stops what she's doing with a start, eyes wide."
 
-        call expression Girl.tag + "_First_Bottomless" pass(1)
+        call expression Girl.tag + "First_Bottomless" pass(1)
 
-        $ Girl.change_face("_surprised", 1)
+        $ Girl.change_face("surprised", 1)
 
         if Player.secondary_action == "jerking_off":
             call caught_masturbating_lines(Girl, "masturbation")
 
-            $ Girl.eyes = "_down"
+            $ Girl.eyes = "down"
 
             call notices_penis_is_out_lines(Girl, "masturbation")
 
             menu:
                 "Long enough, it was an excellent show.":
-                    $ Girl.change_face("_sexy")
+                    $ Girl.change_face("sexy")
                     call change_Girl_stat(Girl, "obedience", 50, 3)
                     call change_Girl_stat(Girl, "obedience", 70, 2)
 
@@ -332,7 +332,7 @@ label after_masturbation(Girl, context):
 
                         call masturbation_excellent_show_cock_out_happy_lines(Girl, "masturbation")
                 "I. . . just got here?":
-                    $ Girl.change_face("_angry")
+                    $ Girl.change_face("angry")
                     call change_Girl_stat(Girl, "love", 70, 2)
                     call change_Girl_stat(Girl, "love", 90, 1)
                     call change_Girl_stat(Girl, "obedience", 50, 2)
@@ -346,7 +346,7 @@ label after_masturbation(Girl, context):
                         $ approval_bonus += 10
 
                         call change_Girl_stat(Girl, "lust", 90, 5)
-                        $ Girl.change_face("_bemused", 1)
+                        $ Girl.change_face("bemused", 1)
 
                         call masturbation_just_got_here_cock_out_happy_lines(Girl, "masturbation")
                     else:
@@ -363,13 +363,13 @@ label after_masturbation(Girl, context):
             menu:
                 extend ""
                 "Long enough.":
-                    $ Girl.change_face("_sexy", 1)
+                    $ Girl.change_face("sexy", 1)
                     call change_Girl_stat(Girl, "obedience", 50, 3)
                     call change_Girl_stat(Girl, "obedience", 70, 2)
 
                     call masturbation_watching_for_long_enough_lines(Girl, "masturbation")
                 "I just got here.":
-                    $ Girl.change_face("_bemused", 1)
+                    $ Girl.change_face("bemused", 1)
                     call change_Girl_stat(Girl, "love", 70, 2)
                     call change_Girl_stat(Girl, "love", 90, 1)
 
@@ -406,7 +406,7 @@ label after_masturbation(Girl, context):
 
             return "stop"
 
-        $ Girl.change_face("_sexy", 1)
+        $ Girl.change_face("sexy", 1)
 
         if Girl.lust < 20:
             call end_of_masturbation_satisfied_lines(Girl, "masturbation")
@@ -418,7 +418,7 @@ label after_masturbation(Girl, context):
             "Well, I have something you could take care of. . ." if Player.semen and Girl.remaining_actions:
                 return "switch"
             "You could just keep going. . ." if Player.semen:
-                $ Girl.change_face("_sly")
+                $ Girl.change_face("sly")
 
                 if Girl.remaining_actions and round >= 10:
                     call masturbation_keep_going_lines(Girl, "masturbation")
@@ -432,14 +432,14 @@ label after_masturbation(Girl, context):
                 if Girl.love < 800 and Girl.inhibition < 500 and Girl.obedience < 500:
                     $ Girl.change_outfit()
 
-                $ Girl.change_face("_normal")
-                $ Girl.brows = "_confused"
+                $ Girl.change_face("normal")
+                $ Girl.brows = "confused"
 
                 call masturbation_good_here_lines(Girl, "masturbation")
 
-                $ Girl.brows = "_normal"
+                $ Girl.brows = "normal"
             "You should probably stop for now." if Girl.lust > 30:
-                $ Girl.change_face("_angry")
+                $ Girl.change_face("angry")
 
                 call masturbation_stop_for_now_lines(Girl, "masturbation")
 

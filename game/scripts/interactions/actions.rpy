@@ -7,7 +7,7 @@ label start_action(Girl, action, context = None):
         $ approval = _return
 
         if Girl == EmmaX and action == "kiss" and not approval_check(Girl, 1000):
-            $ Girl.change_face("_sadside")
+            $ Girl.change_face("sadside")
 
             ch_e "Not when we barely know each other. . ."
 
@@ -52,43 +52,43 @@ label start_action(Girl, action, context = None):
         if not accepted:
             if action == "kiss":
                 if approval > 1 and not Girl.action_counter["kiss"] and not Girl.forced:
-                    $ Girl.change_face("_sexy")
-                    $ Girl.eyes = "_side"
+                    $ Girl.change_face("sexy")
+                    $ Girl.eyes = "side"
 
                     call excited_for_first_kiss_lines(Girl, action)
                 elif approval and not Girl.action_counter["kiss"]:
-                    $ Girl.change_face("_sexy")
-                    $ Girl.eyes = "_side"
+                    $ Girl.change_face("sexy")
+                    $ Girl.eyes = "side"
 
                     call less_excited_for_first_kiss_lines(Girl, action)
                 elif approval > 1 and Girl.love > Girl.obedience:
-                    $ Girl.change_face("_sexy")
+                    $ Girl.change_face("sexy")
 
                     call excited_for_kiss_love_lines(Girl, action)
                 elif approval_check(Girl, 500, "O") and Girl.obedience > Girl.love:
-                    $ Girl.change_face("_normal")
+                    $ Girl.change_face("normal")
 
                     call excited_for_kiss_obedience_lines(Girl, action)
 
                     call change_Girl_stat(Girl, "obedience", 60, 1)
                 elif approval_check(Girl, 250, "O",Alt=[[KittyX,LauraX],300]) and approval_check(Girl, 250, "L",Alt=[[KittyX,LauraX],200]):
-                    $ Girl.change_face("_bemused")
+                    $ Girl.change_face("bemused")
 
                     Girl.voice "Ok, fine."
 
                     call change_Girl_stat(Girl, "obedience", 50, 3)
                 elif Girl.addiction >= 50:
-                    $ Girl.change_face("_sexy")
-                    $ Girl.eyes = "_manic"
+                    $ Girl.change_face("sexy")
+                    $ Girl.eyes = "manic"
 
                     call kiss_addicted_lines(Girl, action)
                 elif approval:
-                    $ Girl.change_face("_bemused")
+                    $ Girl.change_face("bemused")
 
                     call kiss_accepted_lines(Girl, action)
                 else:
-                    $ Girl.change_face("_normal")
-                    $ Girl.mouth = "_sad"
+                    $ Girl.change_face("normal")
+                    $ Girl.mouth = "sad"
 
                     call otherwise_not_interested_lines(Girl, action)
 
@@ -150,7 +150,7 @@ label start_action(Girl, action, context = None):
             return "stop"
 
 label before_action(Girl, action, context = None):
-    $ Girl.change_face("_sexy")
+    $ Girl.change_face("sexy")
 
     if action == "kiss":
         call change_Girl_stat(Girl, "inhibition", 10, 1)
@@ -159,11 +159,11 @@ label before_action(Girl, action, context = None):
         call kiss_launch(Girl)
 
         if Girl.action_counter["kiss"] >= 10 and Girl.inhibition >= 300:
-            $ Girl.change_face("_sucking")
+            $ Girl.change_face("sucking")
         elif Girl.action_counter["kiss"] > 1 and Girl.addiction >= 50:
-            $ Girl.change_face("_sucking")
+            $ Girl.change_face("sucking")
         else:
-            $ Girl.change_face("_kiss",2)
+            $ Girl.change_face("kiss",2)
 
         if Girl == RogueX and not Girl.action_counter["kiss"]:
             call Rogue_first_kiss
@@ -183,23 +183,23 @@ label before_action(Girl, action, context = None):
             elif action in breast_actions:
                 call Top_Off(Girl)
 
-            if "_angry" in Girl.recent_history:
+            if "angry" in Girl.recent_history:
                 return "stop"
 
         $ approval_bonus = 0
     elif action in job_actions:
         if action not in dildo_actions:
             if Girl.forced:
-                $ Girl.change_face("_sad")
+                $ Girl.change_face("sad")
             elif not Girl.action_counter[action]:
-                $ Girl.brows = "_confused"
-                $ Girl.eyes = "_sexy"
-                $ Girl.mouth = "_smile"
+                $ Girl.brows = "confused"
+                $ Girl.eyes = "sexy"
+                $ Girl.mouth = "smile"
         else:
             if not Girl.forced and context != "auto":
                 call Bottoms_Off(Girl)
 
-                if "_angry" in Girl.recent_history:
+                if "angry" in Girl.recent_history:
                     return "stop"
 
             $ approval_bonus = 0
@@ -268,7 +268,7 @@ label before_action(Girl, action, context = None):
 
                 $ Girl.seen_underwear = True
 
-                call expression Girl.tag + "_First_Bottomless" pass(1)
+                call expression Girl.tag + "First_Bottomless" pass(1)
             elif action == "hotdog":
                 $ line = renpy.random.choice(["You press yourself against her ass.",
                     "You press yourself against her mound.",
@@ -418,14 +418,14 @@ label action_cycle(Girl, action):
             if Girl.lust >= 50 and Girl.breasts_covered and (Girl.outfit["bra"] or Girl.outfit["top"]):
                 call pulls_off_top_narration(Girl)
                 call expose_breasts(Girl)
-                call expression Girl.tag + "_First_Topless"
+                call expression Girl.tag + "First_Topless"
 
     call end_of_action_reactions(Girl, action)
 
     return [None, "stop"]
 
 label after_action(Girl, action, context = None):
-    $ Girl.change_face("_sexy")
+    $ Girl.change_face("sexy")
     $ Girl.remaining_actions -= 1
 
     call action_specific_consequences(Girl, action)
@@ -470,9 +470,9 @@ label after_action(Girl, action, context = None):
             $ achievements.append(achievement)
 
         if action not in ["anal"]:
-            $ Girl.change_face("_smile", 1)
+            $ Girl.change_face("smile", 1)
         elif action in ["anal"]:
-            $ Girl.change_face("_bemused", 1)
+            $ Girl.change_face("bemused", 1)
 
         call achievement_lines(Girl, action)
     elif Girl.action_counter[action] == 1:

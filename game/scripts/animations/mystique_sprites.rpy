@@ -74,15 +74,15 @@ layeredimage Mystique_head:
         "images/Mystique_standing/Mystique_standing_head.png"
 
     always:
-        "images/Mystique_standing/Mystique_standing_brows[MystiqueX.brows].png"
+        "images/Mystique_standing/Mystique_standing_brows_[MystiqueX.brows].png"
 
     always:
-        "images/Mystique_standing/Mystique_standing_mouth[MystiqueX.mouth].png"
+        "images/Mystique_standing/Mystique_standing_mouth_[MystiqueX.mouth].png"
 
     if MystiqueX.spunk["mouth"]:
-        "images/Mystique_standing/Mystique_standing_spunk_mouth[MystiqueX.mouth].png"
+        "images/Mystique_standing/Mystique_standing_spunk_mouth_[MystiqueX.mouth].png"
 
-    if MystiqueX.eyes == "_closed":
+    if MystiqueX.eyes == "closed":
         "images/Mystique_standing/Mystique_standing_eyes_closed.png"
     else:
         "Mystique_blinking"
@@ -154,12 +154,12 @@ layeredimage Raven_head:
         "images/Raven_standing/Raven_standing_head.png"
 
     always:
-        "images/Raven_standing/Raven_standing_brows[MystiqueX.brows].png"
+        "images/Raven_standing/Raven_standing_brows_[MystiqueX.brows].png"
 
     always:
-        "images/Raven_standing/Raven_standing_mouth[MystiqueX.mouth].png"
+        "images/Raven_standing/Raven_standing_mouth_[MystiqueX.mouth].png"
 
-    if MystiqueX.eyes == "_closed":
+    if MystiqueX.eyes == "closed":
         "images/Raven_standing/Raven_standing_eyes_closed.png"
     else:
         "Raven_blinking"

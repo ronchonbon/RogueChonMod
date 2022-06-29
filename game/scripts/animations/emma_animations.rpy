@@ -1,5 +1,5 @@
 image Emma_blinking:
-    "images/Emma_standing/Emma_standing_eyes[EmmaX.eyes].png"
+    "images/Emma_standing/Emma_standing_eyes_[EmmaX.eyes].png"
     choice:
         3.5
     choice:
@@ -15,7 +15,7 @@ image Emma_blinking:
     repeat
 
 image Emma_blinking_diamond:
-    "images/Emma_standing/Emma_standing_eyes[EmmaX.eyes]_diamond.png"
+    "images/Emma_standing/Emma_standing_eyes_[EmmaX.eyes]_diamond.png"
     choice:
         3.5
     choice:
@@ -438,7 +438,7 @@ layeredimage Emma_sprite titjob:
     anchor (0.5, 0.0) offset (440, 1050) zoom 1.72
 
 image Emma_blowjob_blinking:
-    "images/Emma_blowjob/Emma_blowjob_eyes[EmmaX.eyes].png"
+    "images/Emma_blowjob/Emma_blowjob_eyes_[EmmaX.eyes].png"
     choice:
         3.5
     choice:

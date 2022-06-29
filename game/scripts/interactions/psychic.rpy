@@ -48,7 +48,7 @@ label MindFuck_Screen:
             alpha .2
     return
 
-label psychicFlash(Face="_sly", TempLoc=0):
+label psychicFlash(Face="sly", TempLoc=0):
     call MindFuck_Screen
     $ line = Girl.location
     $ Girl.location = Player.location
@@ -89,7 +89,7 @@ label MindFuck(TempLoc=0):
             call MindFuck_Screen
             $ TempLoc = Girl.location
             $ Girl.location = Player.location
-            $ Girl.change_face("_sly")
+            $ Girl.change_face("sly")
 
             call set_the_scene
             Girl.voice "There. . ."

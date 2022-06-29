@@ -1,5 +1,5 @@
 image Storm_blinking:
-    "images/Storm_standing/Storm_standing_eyes[StormX.eyes].png"
+    "images/Storm_standing/Storm_standing_eyes_[StormX.eyes].png"
     choice:
         3.5
     choice:
@@ -790,7 +790,7 @@ image Storm_titjob_hair_animation5:
         repeat
 
 layeredimage Storm_sprite titjob:
-    if StormX.outfit["bra"] in ["_black_bra", "_lace_bra"]:
+    if StormX.outfit["bra"] in ["black_bra", "lace_bra"]:
         "Storm_titjob_bra_back_animation[action_speed]"
 
     always:
@@ -802,13 +802,13 @@ layeredimage Storm_sprite titjob:
     always:
         "Storm_titjob_head_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
 
-    if not StormX.outfit["bra"] == "_cosplay_bra":
+    if not StormX.outfit["bra"] == "cosplay_bra":
         "Storm_titjob_breasts_under_animation[action_speed]"
 
     always:
         "Zero_cock_Storm"
 
-    if StormX.outfit["bra"] in ["_sports_bra", "_bikini_top"]:
+    if StormX.outfit["bra"] in ["sports_bra", "bikini_top"]:
         "Storm_titjob_bra_stretch_animation[action_speed]"
 
     always:
@@ -820,7 +820,7 @@ layeredimage Storm_sprite titjob:
     anchor (0.5, 0.0) offset (320, 700)
 
 image Storm_blowjob_blinking:
-    "images/Storm_blowjob/Storm_blowjob_eyes[StormX.eyes].png"
+    "images/Storm_blowjob/Storm_blowjob_eyes_[StormX.eyes].png"
     choice:
         3.5
     choice:

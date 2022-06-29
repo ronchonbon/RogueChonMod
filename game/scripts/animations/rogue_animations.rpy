@@ -1,5 +1,5 @@
 image Rogue_blinking:
-    "images/Rogue_blowjob/Rogue_blowjob_eyes[RogueX.eyes].png"
+    "images/Rogue_blowjob/Rogue_blowjob_eyes_[RogueX.eyes].png"
     choice:
         3.5
     choice:
@@ -954,7 +954,7 @@ layeredimage Rogue_sprite sex:
     anchor (0.5, 0.0) offset (370, 770)
 
 image Rogue_doggy_blinking:
-    "images/Rogue_doggy/Rogue_doggy_eyes[RogueX.eyes].png"
+    "images/Rogue_doggy/Rogue_doggy_eyes_[RogueX.eyes].png"
     choice:
         3.5
     choice:

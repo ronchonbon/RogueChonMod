@@ -22,7 +22,7 @@ label Microtransactions_Intro:
     pause 0.1
     $ round -= 5
     $ Player.location = "bg_study"
-    call change_Xavier_face ("_happy")
+    call change_Xavier_face ("happy")
     call set_the_scene
     hide black_screen onlayer black
     ch_x "[Player.name], I'm glad you came to see me."
@@ -34,16 +34,16 @@ label Microtransactions_Intro:
     menu:
         extend ""
         "What, like -I- give -you- cash?":
-            call change_Xavier_face ("_shocked")
+            call change_Xavier_face ("shocked")
             ch_x "What? How would that make sense? You give me cash so I give you cash?"
         "What a rip-off!":
-            call change_Xavier_face ("_shocked")
+            call change_Xavier_face ("shocked")
             ch_x "I haven't even explained the system yet!"
         "Shill!":
-            call change_Xavier_face ("_shocked")
+            call change_Xavier_face ("shocked")
             ch_x "what are you even talking about?"
     ch_x "I don't understand what the problem is, it's just a form of surprise mechanic!"
-    call change_Xavier_face ("_happy")
+    call change_Xavier_face ("happy")
     ch_x "You open a small box and receive an item!"
     ch_x "It really is a remarkable system!"
     ch_x "It involves using a certain invention developed by a friend of mine."
@@ -64,9 +64,9 @@ label Microtransactions_Intro:
         "Yes, I get it.":
             pass
         "Huh?":
-            call change_Xavier_face ("_shocked")
+            call change_Xavier_face ("shocked")
             ch_x ". . . I don't think I could dumb it down further."
-    call change_Xavier_face ("_happy")
+    call change_Xavier_face ("happy")
     ch_x "Here, a nice starter package, just bring this to Henry in the lab."
     menu:
         extend ""

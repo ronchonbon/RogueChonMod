@@ -85,11 +85,11 @@ init -1:
 
     default number_of_holders = 1
 
-    default Xavier_brows = "_happy"
-    default Xavier_eyes = "_happy"
-    default Xavier_mouth = "_smile"
+    default Xavier_brows = "happy"
+    default Xavier_eyes = "happy"
+    default Xavier_mouth = "smile"
     default Xavier_psychic = False
-    default Xavier_emotion = "_happy"
+    default Xavier_emotion = "happy"
     default Xavier_location = stage_center
 
     default Gwen_name = "????"
@@ -99,30 +99,6 @@ init -1:
     default simulation = False
 
     default menu_context = None
-
-    define face_inner_accessories = ["_earrings", "_blindfold"]
-    define face_outer_accessories = ["_towel", "_shades", "_DVA_headband", "_pink_ears", "_bunny_ears"]
-    define gags = ["_ballgag"]
-    define tattoos = ["_tattoos"]
-    define nipple_accessories = ["_spider_webs"]
-    define bras = ["_tank", "_buttoned_tank", "_sports_bra", "_cami", "_bikini_top", "_black_bra", "_lace_bra", "_strapless_bra", "_leather_bra", "_white_tank", "_wolvie_bra", "_green_bra", "_corset", "_lace_corset", "_tube_top", "_dress_corset", "_cosplay_bra", "_harness_bra", "_string_bikini_top", "_kitty_bra", "_orange_top", "_black_strapless_bra", "_bustier", "_pink_strapless_bra", "_purple_strapless_bra", "_black_corset", "_black_bustier", "_ino_top", "_white_bustier"]
-    define underwears = ["_shorts", "_bikini_bottoms", "_black_panties", "_green_panties", "_lace_panties", "_sports_panties", "_white_panties", "_leather_panties", "_wolvie_panties", "_cosplay_panties", "_tiger_panties", "_blue_panties", "_harness_panties", "_seethrough_panties", "_spider_web_panties", "_string_bikini_bottoms", "_kitty_panties", "_nighty_panties", "_pink_micropanties", "_purple_micropanties", "_zipper_panties", "_boy_shorts", "_g_string", "_crotchless_panties", "_black_lace_panties"]
-    define hoses = ["_tights", "_ripped_tights", "_pantyhose", "_ripped_pantyhose", "_stockings_and_garterbelt", "_garterbelt", "_fishnet_pantyhose", "_ripped_fishnet_pantyhose"]
-    define socks = ["_stockings", "_knee_stockings", "_socks", "_fishnet_stockings", "_knee_socks"]
-    define bodysuits = ["_Raven_suit", "_swimsuit", "_sexy_swimsuit", "_catsuit", "_latex_suit", "_black_swimsuit", "_Taimanin_leotard", "_domme_suit", "_bunny_suit", "_slave_outfit", "_sci_fi_suit"]
-    define pants = ["_jeans", "_yoga_pants", "_capris", "_black_jeans", "_white_pants", "_leather_pants", "_mesh_pants", "_khaki_pants", "_opaque_fetish_pants", "_sheer_fetish_pants", "_black_and_blue_pants", "_black_yoga_pants"]
-    define skirts = ["_skirt", "_cosplay_skirt", "_blue_skirt", "_dress_skirt", "_plaid_skirt", "_star_skirt", "_ino_skirt", "_school_uniform_skirt", "_purple_skirt", "_Sakura_skirt"]
-    define shorts = ["_shorts", "_jean_shorts", "_black_shorts", "_pink_shorts", "_sports_shorts", "_white_shorts"]
-    define dresses = ["_blue_dress", "_red_dress", "_qipao", "_black_dress", "_Ahsoka_outfit", "_Mavis_dress"]
-    define boots = ["_thigh_boots", "_ring_anklets", "_domme_boots"]
-    define tops = ["_mesh_top", "_pink_top", "_red_shirt", "_dress_top", "_green_shirt", "_pink_shirt", "_yellow_shirt", "_white_shirt", "_black_shirt", "_nighty", "_towel", "_opaque_fetish_top", "_sheer_fetish_top", "_violet_shirt", "_leather_top", "_fishnet_top", "_school_uniform_shirt", "_Sakura_top"]
-    define necks = ["_spiked_collar", "_gold_necklace", "_star_necklace", "_flower_necklace", "_choker", "_ring_necklace", "_slut_choker"]
-    define gloves = ["_gloves", "_wrists", "_black_gloves", "_bunny_gloves"]
-    define sleeves = ["_ring_armlets"]
-    define suspenders = ["_suspenders"]
-    define belts = ["_sweater"]
-    define jackets = ["_hoodie", "_jacket", "_classic_jacket", "_black_jacket"]
-    define cloaks = ["_Raven_cloak", "_black_cape", "_white_cape"]
 
     define hand_actions = ["massage", "fondle_thighs", "fondle_breasts", "fondle_pussy", "finger_pussy", "fondle_ass", "finger_ass"]
     define finger_actions = ["finger_pussy", "finger_ass"]
@@ -165,7 +141,7 @@ label start:
         renpy.start_predict("images/backgrounds/*.*")
 
         for G in all_Girls:
-            renpy.start_predict("images/" + G.tag + "_standing/*.*")
+            renpy.start_predict("images/" + G.tag + "standing/*.*")
 
     $ Player = PlayerClass()
 
@@ -206,101 +182,127 @@ label start:
     #
     # ""
 
-    $ time_index = 2
-    $ current_time = time_options[time_index]
-
-    $ Player.location = "bg_campus"
-
-    scene background onlayer background
-    scene
-
-    show midground zorder 2
-    show foreground zorder 4
-    show cover zorder 7
-    show Chibi_cock onlayer screens
-
-    $ MystiqueX.change_outfit("supervillain")
-
-    python:
-        for G in all_Girls:
-            active_Girls.append(G)
-
-    #         G.change_face("_surprised", blushing = 2)
-    #         G.change_outfit("nude")
-    #         G.mouth = "_smirk"
-    #         G.grool = 2
-    #         G.spunk["mouth"] = True
-    #         G.spunk["pussy"] = True
-    #         G.spunk["anus"] = True
+    # $ time_index = 2
+    # $ current_time = time_options[time_index]
     #
-    # $ Player.sprite = True
-    # $ show_feet = False
-    # $ action_speed = 2
+    # $ Player.location = "bg_campus"
     #
-    # $ Player.cock_position = "anal"
-    # $ Player.primary_action = "fondle_breasts"
-    # $ Player.secondary_action = "fondle_thighs"
+    # scene background onlayer background
+    # scene
     #
-    # $ girl_secondary_action = "finger_pussy"
+    # show midground zorder 2
+    # show foreground zorder 4
+    # show cover zorder 7
+    # show Chibi_cock onlayer screens
+    #
+    # $ exit = False
+    #
+    # show Rogue_sprite standing at sprite_location(stage_left)
+    # show Kitty_sprite standing at sprite_location(stage_right)
+    #
+    # while not exit:
+    #     menu:
+    #         "First casual outfit":
+    #             $ new_Outfit_name = "first_casual"
+    #         "Second casual outfit":
+    #             $ new_Outfit_name = "second_casual"
+    #         "Gym clothes":
+    #             $ new_Outfit_name = "gym_clothes"
+    #         "Swimwear":
+    #             $ new_Outfit_name = "swimwear"
+    #         "Sleepwear":
+    #             $ new_Outfit_name = "sleepwear"
+    #         "Shower":
+    #             $ new_Outfit_name = "shower"
+    #         "Halloween costume":
+    #             $ new_Outfit_name = "Halloween_costume"
+    #
+    #     python:
+    #         for G in [RogueX, KittyX]:
+    #             G.Wardrobe.change_Outfit(new_Outfit_name)
 
-    $ location = "bg_campus"
-    $ time_index = 0
-    $ exit = False
-
-    while not exit:
-        call add_Girls([RogueX, LauraX, MystiqueX], static = True)
-
-        menu:
-            "Location":
-                menu:
-                    "Player's room":
-                        $ Player.location = "bg_player"
-                    "Campus":
-                        $ Player.location = "bg_campus"
-                    "Classroom":
-                        $ Player.location = "bg_classroom"
-                    "Danger Room":
-                        $ Player.location = "bg_dangerroom"
-                    "Showers":
-                        $ Player.location = "bg_showerroom"
-                    "Pool":
-                        $ Player.location = "bg_pool"
-                    "Restaurant":
-                        $ Player.location = "bg_restaurant"
-                    "Movie theater":
-                        $ Player.location = "bg_movies"
-                    "Back":
-                        pass
-            "Time":
-                menu:
-                    "Morning":
-                        $ time_index = 0
-                        $ current_time = time_options[time_index]
-                    "Midday":
-                        $ time_index = 1
-                        $ current_time = time_options[time_index]
-                    "Evening":
-                        $ time_index = 2
-                        $ current_time = time_options[time_index]
-                    "Night":
-                        $ time_index = 3
-                        $ current_time = time_options[time_index]
-                    "Lights off":
-                        $ time_index = 4
-                        $ current_time = time_options[time_index]
-                    "Back":
-                        pass
-            "Exit":
-                $ exit = True
-
-    call hide_all
-
-    python:
-        for G in all_Girls:
-            G.location = "hold"
-
-    $ active_Girls = []
-    $ focused_Girl = RogueX
+    # $ MystiqueX.change_outfit("supervillain")
+    #
+    # python:
+    #     for G in all_Girls:
+    #         active_Girls.append(G)
+    #
+    # #         G.change_face("surprised", blushing = 2)
+    # #         G.change_outfit("nude")
+    # #         G.mouth = "smirk"
+    # #         G.grool = 2
+    # #         G.spunk["mouth"] = True
+    # #         G.spunk["pussy"] = True
+    # #         G.spunk["anus"] = True
+    # #
+    # # $ Player.sprite = True
+    # # $ show_feet = False
+    # # $ action_speed = 2
+    # #
+    # # $ Player.cock_position = "anal"
+    # # $ Player.primary_action = "fondle_breasts"
+    # # $ Player.secondary_action = "fondle_thighs"
+    # #
+    # # $ girl_secondary_action = "finger_pussy"
+    #
+    # $ location = "bg_campus"
+    # $ time_index = 0
+    # $ exit = False
+    #
+    # while not exit:
+    #     call add_Girls([RogueX, LauraX, MystiqueX], static = True)
+    #
+    #     menu:
+    #         "Location":
+    #             menu:
+    #                 "Player's room":
+    #                     $ Player.location = "bg_player"
+    #                 "Campus":
+    #                     $ Player.location = "bg_campus"
+    #                 "Classroom":
+    #                     $ Player.location = "bg_classroom"
+    #                 "Danger Room":
+    #                     $ Player.location = "bg_dangerroom"
+    #                 "Showers":
+    #                     $ Player.location = "bg_showerroom"
+    #                 "Pool":
+    #                     $ Player.location = "bg_pool"
+    #                 "Restaurant":
+    #                     $ Player.location = "bg_restaurant"
+    #                 "Movie theater":
+    #                     $ Player.location = "bg_movies"
+    #                 "Back":
+    #                     pass
+    #         "Time":
+    #             menu:
+    #                 "Morning":
+    #                     $ time_index = 0
+    #                     $ current_time = time_options[time_index]
+    #                 "Midday":
+    #                     $ time_index = 1
+    #                     $ current_time = time_options[time_index]
+    #                 "Evening":
+    #                     $ time_index = 2
+    #                     $ current_time = time_options[time_index]
+    #                 "Night":
+    #                     $ time_index = 3
+    #                     $ current_time = time_options[time_index]
+    #                 "Lights off":
+    #                     $ time_index = 4
+    #                     $ current_time = time_options[time_index]
+    #                 "Back":
+    #                     pass
+    #         "Exit":
+    #             $ exit = True
+    #
+    # call hide_all
+    #
+    # python:
+    #     for G in all_Girls:
+    #         G.location = "hold"
+    #
+    # $ active_Girls = []
+    # $ focused_Girl = RogueX
 
     jump prologue
 

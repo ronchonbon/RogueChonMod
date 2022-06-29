@@ -1,5 +1,5 @@
 image Kitty_blinking:
-    "images/Kitty_standing/Kitty_standing_eyes[KittyX.eyes].png"
+    "images/Kitty_standing/Kitty_standing_eyes_[KittyX.eyes].png"
     choice:
         3.5
     choice:
@@ -538,7 +538,7 @@ layeredimage Kitty_sprite titjob:
     anchor (0.5, 0.0) offset (280, 800)
 
 image Kitty_blowjob_blinking:
-    "images/Kitty_blowjob/Kitty_blowjob_eyes[KittyX.eyes].png"
+    "images/Kitty_blowjob/Kitty_blowjob_eyes_[KittyX.eyes].png"
     choice:
         3.5
     choice:
@@ -1057,7 +1057,7 @@ layeredimage Kitty_sprite sex:
     anchor (0.5, 0.0) offset (230, 785) zoom 0.9
 
 image Kitty_doggy_blinking:
-    "images/Kitty_doggy/Kitty_doggy_eyes[KittyX.eyes].png"
+    "images/Kitty_doggy/Kitty_doggy_eyes_[KittyX.eyes].png"
     choice:
         3.5
     choice:

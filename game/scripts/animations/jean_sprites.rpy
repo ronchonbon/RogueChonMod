@@ -89,10 +89,10 @@ layeredimage Jean_sprite standing:
     if not renpy.showing("Jean_sprite handjob") and JeanX.arm_pose == 1:
         "images/Jean_standing/Jean_standing_hand[JeanX.arm_pose]_left.png"
 
-    if JeanX.outfit["bra"] == "_sports_bra" and not renpy.showing("Jean_sprite handjob") and JeanX.arm_pose == 1:
+    if JeanX.outfit["bra"] == "sports_bra" and not renpy.showing("Jean_sprite handjob") and JeanX.arm_pose == 1:
         "images/Jean_standing/Jean_standing_bra[JeanX.outfit[bra]][JeanX.arm_pose]_sleeves.png"
 
-    if JeanX.outfit["top"] == "_pink_shirt" and not renpy.showing("Jean_sprite handjob") and JeanX.arm_pose == 1:
+    if JeanX.outfit["top"] == "pink_shirt" and not renpy.showing("Jean_sprite handjob") and JeanX.arm_pose == 1:
         "images/Jean_standing/Jean_standing_top[JeanX.outfit[top]][JeanX.arm_pose]_sleeves.png"
 
     if not JeanX.outfit["suspenders"]:
@@ -114,7 +114,7 @@ layeredimage Jean_sprite standing:
     if JeanX.wet and JeanX.arm_pose == 1:
         "images/Jean_standing/Jean_standing_water_arm[JeanX.arm_pose].png"
 
-    if JeanX.outfit["held_item"] and JeanX.arm_pose == 2:
+    if JeanX.held_item and JeanX.arm_pose == 2:
         "images/Jean_standing/Jean_standing_held[JeanX.outfit[held_item]].png"
 
     always:
@@ -125,7 +125,7 @@ layeredimage Jean_sprite standing:
 layeredimage Jean_hair_back:
     if JeanX.wet:
         "images/Jean_standing/Jean_standing_hair_wet_back.png"
-    elif JeanX.outfit["hair"] != "_pony":
+    elif JeanX.outfit["hair"] != "pony":
         "images/Jean_standing/Jean_standing_hair[JeanX.outfit[hair]]_back.png"
 
     anchor (0.5, 0.5)
@@ -135,14 +135,14 @@ layeredimage Jean_head:
         "images/Jean_standing/Jean_standing_head[JeanX.blushing].png"
 
     always:
-        "images/Jean_standing/Jean_standing_brows[JeanX.brows][JeanX.blushing].png"
+        "images/Jean_standing/Jean_standing_brows_[JeanX.brows][JeanX.blushing].png"
 
     if JeanX.spunk["mouth"]:
-        "images/Jean_standing/Jean_standing_spunk_mouth[JeanX.mouth].png"
+        "images/Jean_standing/Jean_standing_spunk_mouth_[JeanX.mouth].png"
     else:
-        "images/Jean_standing/Jean_standing_mouth[JeanX.mouth].png"
+        "images/Jean_standing/Jean_standing_mouth_[JeanX.mouth].png"
 
-    if JeanX.eyes == "_closed":
+    if JeanX.eyes == "closed":
         "images/Jean_standing/Jean_standing_eyes_closed.png"
     else:
         "Jean_blinking"
@@ -185,7 +185,7 @@ layeredimage Jean_titjob_body:
     always:
         "images/Jean_titjob/Jean_titjob_body.png"
 
-    if JeanX.outfit["bra"] in ["_sports_bra", "_bikini_top"]:
+    if JeanX.outfit["bra"] in ["sports_bra", "bikini_top"]:
         "images/Jean_titjob/Jean_titjob_bra[JeanX.outfit[bra]]_base.png"
 
     if JeanX.outfit["top"]:
@@ -224,7 +224,7 @@ layeredimage Jean_titjob_breasts:
 
     if not JeanX.outfit["bra"]:
         Null()
-    elif JeanX.outfit["bra"] == "_corset" and not renpy.showing("Jean_sprite titjob"):
+    elif JeanX.outfit["bra"] == "corset" and not renpy.showing("Jean_sprite titjob"):
         "images/Jean_titjob/Jean_titjob_bra[JeanX.outfit[bra]].png"
     elif JeanX.bra_pulled_up:
         "images/Jean_titjob/Jean_titjob_bra[JeanX.outfit[bra]]_up.png"
@@ -254,17 +254,17 @@ layeredimage Jean_titjob_hair:
 layeredimage Jean_blowjob_hair_back:
     if JeanX.wet:
         "images/Jean_blowjob/Jean_blowjob_hair_wet_back.png"
-    elif JeanX.outfit["hair"] != "_pony":
+    elif JeanX.outfit["hair"] != "pony":
         "images/Jean_blowjob/Jean_blowjob_hair[JeanX.outfit[hair]]_back.png"
 
     anchor (0.5, 0.5)
 
 layeredimage Jean_blowjob_head:
-    if renpy.showing("Jean_sprite sex") and (JeanX.wet or JeanX.outfit["hair"] == "_wet"):
+    if renpy.showing("Jean_sprite sex") and (JeanX.wet or JeanX.outfit["hair"] == "wet"):
         "images/Jean_blowjob/Jean_blowjob_hair_mid.png"
     elif JeanX.wet:
         "images/Jean_blowjob/Jean_blowjob_hair_wet_back.png"
-    elif JeanX.outfit["hair"] != "_pony":
+    elif JeanX.outfit["hair"] != "pony":
         "images/Jean_blowjob/Jean_blowjob_hair[JeanX.outfit[hair]]_back.png"
 
     always:
@@ -279,7 +279,7 @@ layeredimage Jean_blowjob_head:
     elif renpy.showing("Jean_sprite blowjob") and action_speed > 2:
         "images/Jean_blowjob/Jean_blowjob_mouth_sucking.png"
     else:
-        "images/Jean_blowjob/Jean_blowjob_mouth[JeanX.mouth].png"
+        "images/Jean_blowjob/Jean_blowjob_mouth_[JeanX.mouth].png"
 
     if not JeanX.spunk["mouth"]:
         Null()
@@ -289,15 +289,15 @@ layeredimage Jean_blowjob_head:
         "images/Jean_blowjob/Jean_blowjob_spunk_mouth_tongue.png"
     elif renpy.showing("Jean_sprite blowjob") and action_speed > 2:
         "images/Jean_blowjob/Jean_blowjob_spunk_mouth_sucking_under.png"
-    elif JeanX.mouth == "_sucking":
+    elif JeanX.mouth == "sucking":
         "images/Jean_blowjob/Jean_blowjob_spunk_mouth_sucking_under.png"
     else:
-        "images/Jean_blowjob/Jean_blowjob_spunk_mouth[JeanX.mouth].png"
+        "images/Jean_blowjob/Jean_blowjob_spunk_mouth_[JeanX.mouth].png"
 
     always:
-        "images/Jean_blowjob/Jean_blowjob_brows[JeanX.brows].png"
+        "images/Jean_blowjob/Jean_blowjob_brows_[JeanX.brows].png"
 
-    if JeanX.eyes == "_closed":
+    if JeanX.eyes == "closed":
         "images/Jean_blowjob/Jean_blowjob_eyes_closed.png"
     else:
         "Jean_blowjob_blinking"
@@ -357,7 +357,7 @@ layeredimage Jean_blowjob_head:
 #     if JeanX.outfit["rope"]:
 #         "images/Jean_kneeling/Jean_kneeling_rope[JeanX.outfit[rope]].png"
 #
-#     if JeanX.outfit["held_item"]:
+#     if JeanX.held_item:
 #         "images/Jean_kneeling/Jean_kneeling_held_item[JeanX.outfit[held_item]].png"
 #
 #     anchor (0.5, 0.0) offset (0, 320) zoom 0.45

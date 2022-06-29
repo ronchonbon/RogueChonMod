@@ -1,5 +1,5 @@
 image Jubes_blinking:
-    "images/Jubes_standing/Jubes_standing_eyes[JubesX.eyes].png"
+    "images/Jubes_standing/Jubes_standing_eyes_[JubesX.eyes].png"
     choice:
         3.5
     choice:
@@ -569,7 +569,7 @@ layeredimage Jubes_sprite titjob:
     if JubesX.outfit["jacket"]:
         "Jubes_titjob_jacket_back_animation[action_speed]"
 
-    if JubesX.outfit["bra"] in ["_sports_bra", "_bikini_top"]:
+    if JubesX.outfit["bra"] in ["sports_bra", "bikini_top"]:
         "Jubes_titjob_bra_back_animation[action_speed]"
 
     always:
@@ -590,7 +590,7 @@ layeredimage Jubes_sprite titjob:
     anchor (0.5, 0.0) offset (360, 800) zoom 1.15
 
 image Jubes_blowjob_blinking:
-    "images/Jubes_blowjob/Jubes_blowjob_eyes[JubesX.eyes].png"
+    "images/Jubes_blowjob/Jubes_blowjob_eyes_[JubesX.eyes].png"
     choice:
         3.5
     choice:

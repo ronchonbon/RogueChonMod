@@ -462,8 +462,8 @@ label showering:
                     $ temp_Girls[0].recent_history.append("showered")
                     $ temp_Girls[0].daily_history.append("showered")
 
-                    call expression temp_Girls[0].tag + "_First_Bottomless" pass (1)
-                    call expression temp_Girls[0].tag + "_First_Topless" pass (1)
+                    call expression temp_Girls[0].tag + "First_Bottomless" pass (1)
+                    call expression temp_Girls[0].tag + "First_Topless" pass (1)
                 else:
                     call remove_Girl(temp_Girls[0])
 
@@ -503,20 +503,20 @@ label showering:
 
         if RogueX in intruding_Girls:
             if RogueX.seen_peen == 1:
-                $ RogueX.change_face("_surprised",2,eyes = "_down")
+                $ RogueX.change_face("surprised",2,eyes = "down")
 
                 ch_r "Oh!"
 
-                $ RogueX.change_face("_bemused", 1,eyes = "_side")
+                $ RogueX.change_face("bemused", 1,eyes = "side")
 
                 ch_r "I am so sorry, I should {i}not{/i} have just barged in like that."
             else:
-                $ RogueX.change_face("_bemused", 1,eyes = "_side")
+                $ RogueX.change_face("bemused", 1,eyes = "side")
 
                 ch_r "I simply {i}must{/i} be more careful. . ."
 
         if KittyX in intruding_Girls:
-            $ KittyX.change_face("_bemused",2,eyes = "_side")
+            $ KittyX.change_face("bemused",2,eyes = "side")
 
             if KittyX.seen_peen == 1:
                 ch_k "Sorry! Sorry! I need to stop just casually phasing into places!"
@@ -525,15 +525,15 @@ label showering:
 
         if EmmaX in intruding_Girls:
             if EmmaX.seen_peen == 1:
-                $ EmmaX.change_face("_surprised")
+                $ EmmaX.change_face("surprised")
 
                 ch_e "Oh! Dreadfully sorry."
 
-                $ EmmaX.change_face("_sexy", eyes = "_down")
+                $ EmmaX.change_face("sexy", eyes = "down")
 
                 ch_e "I hope we can meet again under. . . different circumstances."
             else:
-                $ EmmaX.change_face("_sexy", eyes = "_down")
+                $ EmmaX.change_face("sexy", eyes = "down")
 
                 ch_e "I really should pay closer attention. . ."
 
@@ -548,59 +548,59 @@ label showering:
 
         if LauraX in intruding_Girls:
             if LauraX.seen_peen == 1:
-                $ LauraX.change_face("_surprised", eyes = "_down")
+                $ LauraX.change_face("surprised", eyes = "down")
 
                 ch_l "Hey. That's interesting. . ."
             else:
-                $ LauraX.change_face("_normal", eyes = "_down")
+                $ LauraX.change_face("normal", eyes = "down")
 
                 ch_l ". . ."
 
-                $ LauraX.change_face("_normal")
+                $ LauraX.change_face("normal")
 
                 ch_l "I'm supposed to knock, aren't I."
 
         if JeanX in intruding_Girls:
             if JeanX.seen_peen == 1:
-                $ JeanX.change_face("_surprised", eyes = "_down")
+                $ JeanX.change_face("surprised", eyes = "down")
 
                 ch_j "Well what do we have here? . ."
             else:
-                $ JeanX.change_face("_normal", eyes = "_down")
+                $ JeanX.change_face("normal", eyes = "down")
 
                 ch_j ". . ."
 
-                $ JeanX.change_face("_normal")
+                $ JeanX.change_face("normal")
 
                 ch_j "Oh, nice to catch you. . . like this. . ."
 
         if StormX in intruding_Girls:
             if StormX.seen_peen == 1:
-                $ StormX.change_face("_surprised")
+                $ StormX.change_face("surprised")
 
                 ch_s "Oh! Hello there."
 
-                $ StormX.change_face("_sexy", eyes = "_down")
+                $ StormX.change_face("sexy", eyes = "down")
 
                 ch_s "And hello to you as well. . ."
             else:
-                $ StormX.change_face("_sexy", eyes = "_down")
+                $ StormX.change_face("sexy", eyes = "down")
 
                 ch_s "I'm sorry to intrude. . ."
 
-            $ StormX.change_face("_sexy")
+            $ StormX.change_face("sexy")
 
         if JubesX in intruding_Girls:
-            $ JubesX.change_face("_bemused",2,eyes = "_side")
+            $ JubesX.change_face("bemused",2,eyes = "side")
 
             if JubesX.seen_peen == 1:
                 ch_v "Oh, sorry! I wasn't paying attention."
 
-                $ JubesX.eyes = "_down"
+                $ JubesX.eyes = "down"
 
                 pause 1
 
-                $ JubesX.eyes = "_side"
+                $ JubesX.eyes = "side"
 
                 ch_v "um. . . hey. . ."
             else:
@@ -663,8 +663,8 @@ label showering:
                 $ intruding_Girls[0].recent_history.append("showered")
                 $ intruding_Girls[0].daily_history.append("showered")
 
-                call expression intruding_Girls[0].tag + "_First_Bottomless" pass (1)
-                call expression intruding_Girls[0].tag + "_First_Topless" pass (1)
+                call expression intruding_Girls[0].tag + "First_Bottomless" pass (1)
+                call expression intruding_Girls[0].tag + "First_Topless" pass (1)
 
                 if intruding_Girls[0] == RogueX:
                     ch_r "I wouldn't mind stick'in around though."
@@ -775,7 +775,7 @@ label Shower_Sex(Options=0, line=0):
     if "showered" in Player.recent_history:
         $ D20 = 0
 
-    $ staying_Girls[0].change_face("_sly")
+    $ staying_Girls[0].change_face("sly")
 
     if len(staying_Girls) > 1 and D20 >= 10:
         "As you do so, both girls press their bodies body up against yours."
@@ -828,7 +828,7 @@ label Shower_Sex(Options=0, line=0):
                 call change_Girl_stat(staying_Girls[0], "love", 80, -1)
                 call change_Girl_stat(staying_Girls[0], "obedience", 80, 5)
                 call change_Girl_stat(staying_Girls[0], "inhibition", 80, -1)
-                $ staying_Girls[0].change_face("_sad")
+                $ staying_Girls[0].change_face("sad")
                 "She seems a bit disappointed."
             "Stop them." if len(staying_Girls) > 1:
                 $ line = 0
@@ -840,8 +840,8 @@ label Shower_Sex(Options=0, line=0):
                 call change_Girl_stat(staying_Girls[0], "inhibition", 80, -1)
                 call change_Girl_stat(staying_Girls[1], "obedience", 80, 5)
                 call change_Girl_stat(staying_Girls[1], "inhibition", 80, -1)
-                $ staying_Girls[0].change_face("_sad")
-                $ staying_Girls[1].change_face("_sad")
+                $ staying_Girls[0].change_face("sad")
+                $ staying_Girls[1].change_face("sad")
                 "They seem a bit disappointed."
     if line:
 
@@ -982,7 +982,7 @@ label Shower_Sex(Options=0, line=0):
         if 2 <= Options[0] <= 3:
 
             if approval_check(staying_Girls[1], 1300) and staying_Girls[1].likes[staying_Girls[0].tag] >= 800:
-                $ staying_Girls[1].change_face("_sexy", 1)
+                $ staying_Girls[1].change_face("sexy", 1)
                 call change_Girl_stat(staying_Girls[0], "lust", 50, 5)
                 call change_Girl_stat(staying_Girls[0], "lust", 70, 5)
                 call change_Girl_stat(staying_Girls[1], "lust", 50, 12)
@@ -993,7 +993,7 @@ label Shower_Sex(Options=0, line=0):
                 call change_Player_stat("focus", 80, 3)
                 $ line = 4
             elif approval_check(staying_Girls[1], 1200) and staying_Girls[1].likes[staying_Girls[0].tag] >= 700:
-                $ staying_Girls[1].change_face("_sexy",2,eyes = "_closed")
+                $ staying_Girls[1].change_face("sexy",2,eyes = "closed")
                 call change_Girl_stat(staying_Girls[1], "lust", 50, 10)
                 call change_Girl_stat(staying_Girls[1], "lust", 70, 10)
                 call change_Player_stat("focus", 50, 5)
@@ -1002,7 +1002,7 @@ label Shower_Sex(Options=0, line=0):
                 "[staying_Girls[1].name] seems really into this, and leans into it."
             else:
                 call change_Girl_stat(staying_Girls[1], "lust", 50, 10)
-                $ staying_Girls[1].change_face("_sadside", brows = "_confused")
+                $ staying_Girls[1].change_face("sadside", brows = "confused")
                 "[staying_Girls[1].name] doesn't really seem to appreciate this."
                 "She pulls away."
                 $ line = 3
@@ -1025,12 +1025,12 @@ label Shower_Sex(Options=0, line=0):
                     "[staying_Girls[1].name] seems really into this, and joins her on the other side."
                 $ line = 4
             elif ((approval_check(staying_Girls[1], 1200) and staying_Girls[1].likes[staying_Girls[0].tag] >= 600)) or approval_check(staying_Girls[1], 1600):
-                $ staying_Girls[1].change_face("_sexy",2,eyes = "_down")
+                $ staying_Girls[1].change_face("sexy",2,eyes = "down")
                 call change_Girl_stat(staying_Girls[1], "lust", 50, 10)
                 call change_Girl_stat(staying_Girls[1], "lust", 70, 5)
                 "[staying_Girls[1].name] seems really into this, and watches her do it."
             else:
-                $ staying_Girls[1].change_face("_sadside", brows = "_confused")
+                $ staying_Girls[1].change_face("sadside", brows = "confused")
                 call change_Girl_stat(staying_Girls[1], "lust", 50, 5)
                 "[staying_Girls[1].name] doesn't really seem to appreciate this."
                 $ line = 3
@@ -1046,27 +1046,27 @@ label Shower_Sex(Options=0, line=0):
                 call change_Girl_stat(staying_Girls[0], "love", 80, -2)
                 call change_Girl_stat(staying_Girls[0], "obedience", 80, 5)
                 call change_Girl_stat(staying_Girls[0], "inhibition", 80, -2)
-                $ staying_Girls[0].change_face("_sad")
+                $ staying_Girls[0].change_face("sad")
                 "She seems a bit disappointed."
             "Stop them." if len(staying_Girls) > 1:
                 $ line = 0
                 call show_full_body(staying_Girls[0])
                 call show_full_body(staying_Girls[1])
                 "You take a step back, pulling away from them."
-                $ staying_Girls[0].change_face("_sad")
+                $ staying_Girls[0].change_face("sad")
                 call change_Girl_stat(staying_Girls[0], "love", 80, -2)
                 call change_Girl_stat(staying_Girls[0], "obedience", 80, 5)
                 call change_Girl_stat(staying_Girls[0], "inhibition", 80, -2)
                 if line == 3:
                     call change_Girl_stat(staying_Girls[1], "love", 80, 4)
                     call change_Girl_stat(staying_Girls[1], "obedience", 80, 5)
-                    $ staying_Girls[1].change_face("_bemused")
+                    $ staying_Girls[1].change_face("bemused")
                     "[staying_Girls[0].name] seems a bit disappointed, but [staying_Girls[1].name] seems pleased."
                 else:
                     call change_Girl_stat(staying_Girls[1], "love", 80, -1)
                     call change_Girl_stat(staying_Girls[1], "obedience", 80, 5)
                     call change_Girl_stat(staying_Girls[1], "inhibition", 80, -1)
-                    $ staying_Girls[1].change_face("_sad")
+                    $ staying_Girls[1].change_face("sad")
                     "They seem a bit disappointed."
 
     if line:

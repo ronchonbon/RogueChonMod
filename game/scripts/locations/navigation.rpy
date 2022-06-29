@@ -341,8 +341,8 @@ label girls_room_entry:
                         ch_s "Oh, hello, [Girl.player_petname]. I was just getting changed."
                     elif Girl == JubesX:
                         ch_v "Oh, hey, [Girl.player_petname], I was getting dressed."
-                elif "_angry" in Girl.recent_history:
-                    $ Girl.change_face("_angry")
+                elif "angry" in Girl.recent_history:
+                    $ Girl.change_face("angry")
 
                     call get_out_lines(Girl)
                     jump reset_location
@@ -384,8 +384,8 @@ label girls_room_entry:
                 $ Girl.location = Girl.home
 
                 jump reset_location
-            elif "no_entry" in Girl.recent_history or "_angry" in Girl.recent_history:
-                $ Girl.change_face("_angry")
+            elif "no_entry" in Girl.recent_history or "angry" in Girl.recent_history:
+                $ Girl.change_face("angry")
 
                 call get_out_lines(Girl)
 
@@ -783,24 +783,24 @@ label danger_room_entry:
                 menu:
                     extend ""
                     "Yeah, they look great.":
-                        $ G.change_face("_smile")
+                        $ G.change_face("smile")
                         call change_Girl_stat(G, "love", 80, 2)
                         call change_Girl_stat(G, "obedience", 40, 1)
                         call change_Girl_stat(G, "inhibition", 30, 1)
 
                         $ change = 1
                     "No, stay in that.":
-                        $ G.change_face("_confused")
+                        $ G.change_face("confused")
                         call change_Girl_stat(G, "obedience", 50, 5)
 
                         $ change = 0
                     "Whichever you like.":
-                        $ G.change_face("_confused")
+                        $ G.change_face("confused")
                         call change_Girl_stat(G, "inhibition", 50, 1)
 
                         $ change =  renpy.random.randint(0, 3)
                     "I don't care.":
-                        $ G.change_face("_angry")
+                        $ G.change_face("angry")
                         call change_Girl_stat(G, "love", 50, -3, 1)
                         call change_Girl_stat(G, "obedience", 50, 4)
                         call change_Girl_stat(G, "inhibition", 50, 2)
@@ -1270,7 +1270,7 @@ label study_entry:
                             call change_Girl_stat(StormX, "love", 90, 3)
                             call change_Girl_stat(StormX, "obedience", 80, 10)
                             call change_Girl_stat(StormX, "inhibition", 60, 10)
-                            $ StormX.change_face("_sly")
+                            $ StormX.change_face("sly")
 
                             ch_s "Oh, this should be interesting. . ."
                             "She pulls some picks from behind her ear."
@@ -1278,7 +1278,7 @@ label study_entry:
                             ch_s "Click on 3. . . 4. . . click on 5, back to 2. . . and we're in."
 
                             $ StormX.traits.append("Sneakthief")
-                            $ StormX.change_face("_normal")
+                            $ StormX.change_face("normal")
 
                             return
                         else:
@@ -1314,7 +1314,7 @@ label study_room:
         $ door_locked = False
 
         call set_Character_taboos
-        call change_Xavier_face("_happy")
+        call change_Xavier_face("happy")
         call set_the_scene(location = "bg_study", fade = True)
 
     call quick_event_calls

@@ -48,23 +48,23 @@ layeredimage Laura_sprite standing:
 
     if not LauraX.outfit["underwear"]:
         Null()
-    elif LauraX.underwear_pulled_down and LauraX.grool > 1 and LauraX.outfit["underwear"] not in ["_leather_panties", "_bikini_bottoms"]:
+    elif LauraX.underwear_pulled_down and LauraX.grool > 1 and LauraX.outfit["underwear"] not in ["leather_panties", "bikini_bottoms"]:
         "images/Laura_standing/Laura_standing_underwear[LauraX.outfit[underwear]]_down_grool.png"
     elif LauraX.underwear_pulled_down:
         "images/Laura_standing/Laura_standing_underwear[LauraX.outfit[underwear]]_down.png"
-    elif LauraX.grool > 1 and LauraX.outfit["underwear"] not in ["_leather_panties", "_bikini_bottoms"]:
+    elif LauraX.grool > 1 and LauraX.outfit["underwear"] not in ["leather_panties", "bikini_bottoms"]:
         "images/Laura_standing/Laura_standing_underwear[LauraX.outfit[underwear]]_grool.png"
     else:
         "images/Laura_standing/Laura_standing_underwear[LauraX.outfit[underwear]].png"
 
     if LauraX.hose_pulled_down:
         Null()
-    elif LauraX.outfit["hose"] == "_stockings_and_garterbelt":
+    elif LauraX.outfit["hose"] == "stockings_and_garterbelt":
         "images/Laura_standing/Laura_standing_hose_stockings.png"
     elif LauraX.outfit["hose"]:
         "images/Laura_standing/Laura_standing_hose[LauraX.outfit[hose]].png"
 
-    if not LauraX.hose_pulled_down and LauraX.outfit["hose"] == "_stockings_and_garterbelt":
+    if not LauraX.hose_pulled_down and LauraX.outfit["hose"] == "stockings_and_garterbelt":
         "images/Laura_standing/Laura_standing_hose_garterbelt.png"
 
     if LauraX.outfit["bottom"] and LauraX.grool > 1:
@@ -108,17 +108,17 @@ layeredimage Laura_sprite standing:
 
     if not LauraX.outfit["gloves"]:
         Null()
-    elif LauraX.outfit["gloves"] == "_gloves":
+    elif LauraX.outfit["gloves"] == "gloves":
         "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose]_right.png"
-    elif LauraX.outfit["gloves"] == "_bunny_gloves" and LauraX.arm_pose == 1:
+    elif LauraX.outfit["gloves"] == "bunny_gloves" and LauraX.arm_pose == 1:
         "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose].png"
     else:
         "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose].png"
 
-    if LauraX.outfit["gloves"] == "_gloves" and LauraX.arm_pose == 2:
+    if LauraX.outfit["gloves"] == "gloves" and LauraX.arm_pose == 2:
         "images/Laura_standing/Laura_standing_gloves[LauraX.outfit[gloves]][LauraX.arm_pose]_left.png"
 
-    if LauraX.outfit["dress"] == "_Mavis_dress":
+    if LauraX.outfit["dress"] == "Mavis_dress":
         "images/Laura_standing/Laura_standing_sleeves[LauraX.outfit[dress]][LauraX.arm_pose].png"
 
     if LauraX.outfit["piercings"] and LauraX.pussy_covered:
@@ -162,7 +162,7 @@ layeredimage Laura_sprite standing:
     if LauraX.wet and LauraX.arm_pose == 2:
         "images/Laura_standing/Laura_standing_water_arm[LauraX.arm_pose].png"
 
-    if LauraX.outfit["held_item"] and LauraX.arm_pose == 2:
+    if LauraX.held_item and LauraX.arm_pose == 2:
         "images/Laura_standing/Laura_standing_held[LauraX.outfit[held_item]].png"
 
     always:
@@ -190,24 +190,24 @@ layeredimage Laura_head:
         "images/Laura_standing/Laura_standing_head.png"
         # "images/Laura_standing/Laura_standing_head[LauraX.blushing].png"
 
-    if LauraX.blushing == "_blush2":
-        "images/Laura_standing/Laura_standing_brows[LauraX.brows]_blush.png"
+    if LauraX.blushing == "blush2":
+        "images/Laura_standing/Laura_standing_brows_[LauraX.brows]_blush.png"
     else:
-        "images/Laura_standing/Laura_standing_brows[LauraX.brows].png"
+        "images/Laura_standing/Laura_standing_brows_[LauraX.brows].png"
 
     if renpy.showing("Laura_sprite titjob") and action_speed in [3, 5]:
         "images/Laura_standing/Laura_standing_mouth_tongue.png"
     else:
-        "images/Laura_standing/Laura_standing_mouth[LauraX.mouth].png"
+        "images/Laura_standing/Laura_standing_mouth_[LauraX.mouth].png"
 
     if not LauraX.spunk["mouth"]:
         Null()
     elif renpy.showing("Laura_sprite titjob") and action_speed in [3, 5]:
         "images/Laura_standing/Laura_standing_spunk_mouth_tongue.png"
     else:
-        "images/Laura_standing/Laura_standing_spunk_mouth[LauraX.mouth].png"
+        "images/Laura_standing/Laura_standing_spunk_mouth_[LauraX.mouth].png"
 
-    if LauraX.eyes == "_closed":
+    if LauraX.eyes == "closed":
         "images/Laura_standing/Laura_standing_eyes_closed.png"
     else:
         "Laura_blinking"
@@ -285,7 +285,7 @@ layeredimage Laura_titjob_left_arm:
     always:
         "images/Laura_titjob/Laura_titjob_left_hand.png"
 
-    if LauraX.outfit["gloves"] == "_gloves":
+    if LauraX.outfit["gloves"] == "gloves":
         "images/Laura_titjob/Laura_titjob_gloves[LauraX.outfit[gloves]]_left.png"
 
     if LauraX.outfit["piercings"]:
@@ -297,7 +297,7 @@ layeredimage Laura_titjob_right_arm:
     always:
         "images/Laura_titjob/Laura_titjob_right_hand.png"
 
-    if LauraX.outfit["gloves"] == "_gloves":
+    if LauraX.outfit["gloves"] == "gloves":
         "images/Laura_titjob/Laura_titjob_gloves[LauraX.outfit[gloves]]_right.png"
 
     if LauraX.outfit["piercings"]:
@@ -309,7 +309,7 @@ layeredimage Laura_titjob_right_arm_back:
     always:
         "images/Laura_titjob/Laura_titjob_right_hand_back.png"
 
-    if LauraX.outfit["gloves"] == "_gloves":
+    if LauraX.outfit["gloves"] == "gloves":
         "images/Laura_titjob/Laura_titjob_gloves[LauraX.outfit[gloves]]_right_back.png"
 
     anchor (0.5, 0.5)

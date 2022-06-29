@@ -157,7 +157,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
     elif Player.Party[0] == EmmaX and Second and ("threesome" not in EmmaX.history or "taboo" not in EmmaX.history):
         "[EmmaX.name] starts to lean close to you, but then notices [Second.name]."
 
-        $ Player.Party[0].change_face("_sly", 1,eyes = "_side")
+        $ Player.Party[0].change_face("sly", 1,eyes = "side")
 
         "She stops immediately and looks a bit embarrassed."
     elif D20 > 17 and approval_check(Player.Party[0], 1000) and Player.Party[0].action_counter["blowjob"] > 5:
@@ -189,7 +189,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
     elif not action or action == "striptease":
         pass
     elif action == "blowjob":
-        $ Player.Party[0].change_face("_sly")
+        $ Player.Party[0].change_face("sly")
 
         if Player.Party[0] == KittyX:
             "[KittyX.name] reaches her hand through your textbook and you can feel it in your lap."
@@ -199,7 +199,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
             "[Player.Party[0].name] gets a predatory grin, and begins to unzip your pants."
             "She pulls your dick out and pops it into her mouth."
     elif action == "handjob":
-        $ Player.Party[0].change_face("_sly")
+        $ Player.Party[0].change_face("sly")
 
         if Player.Party[0] == KittyX:
             "[KittyX.name] reaches her hand through your textbook and you can feel it in your lap."
@@ -213,14 +213,14 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
                     "After a moment, you can feel a tugging on your zipper as it releases."
                     "You cock floats free of your pants, lifted half under its own power and half due to. . ."
 
-                    $ Player.Party[0].change_face("_sly", eyes = "_leftside")
+                    $ Player.Party[0].change_face("sly", eyes = "leftside")
 
                     "You glance over at [JeanX.name] and she smiles mischieviously as the pressure builds."
                     "You can feel a strong rubbing sensation along the length of the shaft, up and down."
                     "It feels similar to a hand or mouth wrapped around itpassing from root to tip and back."
                     "[JeanX.name] throws an arm over your shoulders and leans against you as this pressure continues. . ."
                 "Flex your power to shut it down":
-                    $ Player.Party[0].change_face("_sad")
+                    $ Player.Party[0].change_face("sad")
                     call change_Girl_stat(Player.Party[0], "love", 80, -2)
                     call change_Girl_stat(Player.Party[0], "obedience", 50, 3)
                     call change_Girl_stat(Player.Party[0], "obedience", 80, 5)
@@ -234,7 +234,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
             "She pulls your dick out and begins to slowly stroke it."
 
     elif action == "masturbation":
-        $ Player.Party[0].change_face("_sly", eyes = "_side")
+        $ Player.Party[0].change_face("sly", eyes = "side")
 
         "[Player.Party[0].name] leans back a bit and starts to rub herself."
     elif action == "kiss":
@@ -261,7 +261,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
             call check_if_second_minds(Player.Party[0], Player.Party[1])
 
             if _return == 3:
-                $ Player.Party[1].change_face("_angry")
+                $ Player.Party[1].change_face("angry")
 
                 "[Player.Party[1].name] glowers at you a bit."
 
@@ -281,7 +281,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
             else:
                 "[Player.Party[0].name] stops what she's doing."
 
-            $ Player.Party[0].change_face("_sad")
+            $ Player.Party[0].change_face("sad")
 
             if Player.Party[0] == RogueX:
                 ch_r "Buzzkill."
@@ -317,7 +317,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
                 menu:
                     extend ""
                     "Go ahead.":
-                        $ Player.Party[0].change_face("_sly")
+                        $ Player.Party[0].change_face("sly")
 
                         if Player.Party[0] == RogueX:
                             ch_r "Nice."
@@ -334,7 +334,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
                         elif Player.Party[0] == JubesX:
                             ch_v "Sweet!"
                     "We should stop.":
-                        $ Player.Party[0].change_face("_sad")
+                        $ Player.Party[0].change_face("sad")
 
                         if Player.Party[0] == RogueX:
                             ch_r "Hmph."
@@ -351,7 +351,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
                         elif Player.Party[0] == JubesX:
                             ch_v "Aw!"
 
-                        $ Player.Party[0].change_face("_normal")
+                        $ Player.Party[0].change_face("normal")
 
                         return
 

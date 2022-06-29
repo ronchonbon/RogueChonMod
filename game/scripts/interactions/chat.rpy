@@ -103,7 +103,7 @@ label chat:
                     "You hear some muffled giggles in the background."
                     ch_v "Um. . . anyway."
 
-            if "_angry" not in Girl.recent_history:
+            if "angry" not in Girl.recent_history:
                 if Girl == RogueX:
                     ch_r "So what did you want to talk about, [Girl.player_petname]?"
                 elif Girl == KittyX:
@@ -145,7 +145,7 @@ label chat:
 
                 "You send [Girl.name] a text."
 
-                if "_angry" not in Girl.recent_history:
+                if "angry" not in Girl.recent_history:
                     if Girl == RogueX:
                         ch_r "So what did you want to talk about, [Girl.player_petname]?"
                     elif Girl == KittyX:
@@ -178,7 +178,7 @@ label chat_menu:
     # if Girl.location != Player.location:
     #     show cellphone
 
-    if "_angry" in Girl.recent_history:
+    if "angry" in Girl.recent_history:
         if Girl == RogueX:
             ch_r "I really don't want to talk to you right now."
         elif Girl == KittyX:
@@ -210,7 +210,7 @@ label chat_menu:
 
                 call set_the_scene
             else:
-                call expression Girl.tag + "_Summon"
+                call expression Girl.tag + "Summon"
         "Ask [Girl.name] to leave" if Girl.location == Player.location:
             call dismiss_girl(Girl)
 
@@ -229,7 +229,7 @@ label chat_menu:
                     else:
                         ch_p "I'd like to get naughty."
 
-                    if "_angry" in Girl.recent_history:
+                    if "angry" in Girl.recent_history:
                         if Girl == RogueX:
                             ch_r "I don't want to deal with you right now."
                         elif Girl == KittyX:
@@ -245,7 +245,7 @@ label chat_menu:
                         elif Girl == JubesX:
                             ch_v "Not in the mood, [Girl.player_petname]?"
                     elif approval_check(Girl, 600, "LI"):
-                        $ Girl.change_face("_sexy")
+                        $ Girl.change_face("sexy")
 
                         if Girl == RogueX:
                             ch_r "Heh, all right, [Girl.player_petname]."
@@ -306,7 +306,7 @@ label chat_menu:
                 "Dirty Talk" if Girl.SEXP >= 10:
                     ch_p "About when we get together. . ."
 
-                    call expression Girl.tag + "_SexChat"
+                    call expression Girl.tag + "SexChat"
                 "Date (locked)" if time_index > 2:
                     pass
                 "Date" if time_index <= 2:
@@ -324,12 +324,12 @@ label chat_menu:
         "Talk with her":
             menu:
                 "I just wanted to talk. . .":
-                    call expression Girl.tag + "_Chitchat"
+                    call expression Girl.tag + "Chitchat"
                 "Relationship status":
                     ch_p "Could we talk about us?"
 
                     if Girl.location == Player.location:
-                        call expression Girl.tag + "_Relationship"
+                        call expression Girl.tag + "Relationship"
                     else:
                         if Girl == RogueX:
                             ch_r "That sounds like it might be a little heavy to do over the phone."
@@ -354,21 +354,21 @@ label chat_menu:
                 "Other girls":
                     menu:
                         "How do you feel about [RogueX.name]?" if Girl != RogueX:
-                            call expression Girl.tag + "_About" pass (RogueX)
+                            call expression Girl.tag + "About" pass (RogueX)
                         "How do you feel about [KittyX.name]?" if Girl != KittyX and "met" in KittyX.history:
-                            call expression Girl.tag + "_About" pass (KittyX)
+                            call expression Girl.tag + "About" pass (KittyX)
                         "How do you feel about [EmmaX.name]?" if Girl != EmmaX and "met" in EmmaX.history:
-                            call expression Girl.tag + "_About" pass (EmmaX)
+                            call expression Girl.tag + "About" pass (EmmaX)
                         "How do you feel about [LauraX.name]?" if Girl != LauraX and "met" in LauraX.history:
-                            call expression Girl.tag + "_About" pass (LauraX)
+                            call expression Girl.tag + "About" pass (LauraX)
                         "How do you feel about [JeanX.name]?" if Girl != JeanX and "met" in JeanX.history:
-                            call expression Girl.tag + "_About" pass (JeanX)
+                            call expression Girl.tag + "About" pass (JeanX)
                         "How do you feel about [StormX.name]?" if Girl != StormX and "met" in StormX.history:
-                            call expression Girl.tag + "_About" pass (StormX)
+                            call expression Girl.tag + "About" pass (StormX)
                         "How do you feel about [JubesX.name]?" if Girl != JubesX and "met" in JubesX.history:
-                            call expression Girl.tag + "_About" pass (JubesX)
+                            call expression Girl.tag + "About" pass (JubesX)
                         "About hooking up with other girls. . .":
-                            call expression Girl.tag + "_Monogamy"
+                            call expression Girl.tag + "Monogamy"
                         "Never mind.":
                             pass
                 "Could I get your number?" if Girl not in Player.Phonebook:
@@ -494,8 +494,6 @@ label chat_menu:
             while temp_Girls:
                 $ Player.Party.remove(temp_Girls[0])
 
-                call change_into_scheduled_outfit([temp_Girls[0]], 0)
-
                 if temp_Girls[0] == RogueX:
                     if temp_Girls[0].location == Player.location:
                         ch_r "Ok, I'll probably stick around for a bit anyway."
@@ -607,7 +605,7 @@ label switch_chat:
 
     call shift_focus(Girl)
 
-    if "_angry" not in Girl.recent_history:
+    if "angry" not in Girl.recent_history:
         if Girl == RogueX:
             ch_r "So what did you want to talk about, [Girl.player_petname]?"
         elif Girl == KittyX:
@@ -642,19 +640,19 @@ label change_attributes(Girl):
             "Shift her personality" if approval_check(Girl, 900, "L", taboo_modifier=0) or approval_check(Girl, 900, "O", taboo_modifier=0) or approval_check(Girl, 900, "I", taboo_modifier=0):
                 ch_p "Could we talk about us?"
 
-                call expression Girl.tag + "_Personality"
+                call expression Girl.tag + "Personality"
             "Your petname":
                 ch_p "Could we talk about my pet name?"
 
-                call expression Girl.tag + "_names"
+                call expression Girl.tag + "names"
             "[Girl.name]'s petname":
                 ch_p "I've got a pet name for you, you know?"
 
-                call expression Girl.tag + "_Pet"
+                call expression Girl.tag + "Pet"
             "[Girl.name]'s name" if len(Girl.names) > 1:
                 ch_p "You know how you told me you went by a different name?"
 
-                call expression Girl.tag + "_Rename"
+                call expression Girl.tag + "Rename"
             "Follow options" if "follow" in Girl.traits:
                 ch_p "You know how you ask if I want to follow you sometimes?"
 
@@ -674,7 +672,7 @@ label change_attributes(Girl):
                 menu:
                     extend ""
                     "You can go where you want, I'll catch up later." if "freetravels" not in Girl.traits:
-                        $ Girl.change_face("_perplexed")
+                        $ Girl.change_face("perplexed")
 
                         if Girl == RogueX:
                             ch_r "Oh, ok, not a problem."
@@ -697,7 +695,7 @@ label change_attributes(Girl):
 
                         $ line = "free"
                     "You can ask if I want to follow you." if "asktravels" not in Girl.traits or "freetravels" in Girl.traits:
-                        $ Girl.change_face("_perplexed")
+                        $ Girl.change_face("perplexed")
 
                         if Girl == RogueX:
                             ch_r "Oh, ok, not a problem."
@@ -721,18 +719,18 @@ label change_attributes(Girl):
                         $ line = "ask"
                     "Don't ever leave when I'm around." if "lockedtravels" not in Girl.traits or "freetravels" in Girl.traits:
                         if approval_check(Girl, 500, "O",Alt=[[EmmaX,JeanX],600]) or approval_check(Girl, 900, "L"):
-                            $ Girl.change_face("_sexy")
+                            $ Girl.change_face("sexy")
 
                             if Girl == RogueX:
                                 ch_r "Oh, Ok."
                             elif Girl == KittyX:
                                 ch_k "Aw, you miss me when I'm not around!"
                             elif Girl == EmmaX:
-                                $ Girl.change_face("_angry", eyes = "_side")
+                                $ Girl.change_face("angry", eyes = "side")
 
                                 ch_e "I don't know why I put up with your nonsense."
 
-                                $ Girl.change_face("_sexy", 1)
+                                $ Girl.change_face("sexy", 1)
 
                                 ch_e "But {i}fine.{/i}"
                             elif Girl == LauraX:
@@ -755,7 +753,7 @@ label change_attributes(Girl):
 
                             $ line = "lock"
                         else:
-                            $ Girl.change_face("_angry")
+                            $ Girl.change_face("angry")
 
                             if Girl == RogueX:
                                 ch_r "Well, I don't really care what you think on the matter."
@@ -816,7 +814,7 @@ label change_attributes(Girl):
                     "Yes [[default]":
                         ch_p "You can come over whenever you feel like it."
 
-                        $ Girl.change_face("_smile")
+                        $ Girl.change_face("smile")
 
                         if Girl == RogueX:
                             ch_r "Will do."
@@ -837,7 +835,7 @@ label change_attributes(Girl):
                     "No":
                         ch_p "Could you please not just drop by unannounced?"
 
-                        $ Girl.change_face("_perplexed")
+                        $ Girl.change_face("perplexed")
 
                         if Girl == RogueX:
                             ch_r "Oh, ok, not a problem."
@@ -854,7 +852,7 @@ label change_attributes(Girl):
                         elif Girl == JubesX:
                             ch_v "Sure, I can give you space. . ."
 
-                        $ Girl.change_face("_smile")
+                        $ Girl.change_face("smile")
                         $ Girl.add_word(1, 0, 0,"lockedout")
             "Switch to. . .":
                 call switch_chat
@@ -864,8 +862,6 @@ label change_attributes(Girl):
 label dismiss_girl(Girl):
     if Girl in Player.Party:
         $ Player.Party.remove(Girl)
-
-    call change_into_scheduled_outfit([Girl], 0)
 
     $ leaving = False
 
@@ -972,7 +968,7 @@ label dismiss_girl(Girl):
                 elif Girl == JubesX:
                     ch_v "Yeah, but I'm not."
             elif not approval_check(Girl, 300, "O"):
-                $ Girl.change_face("_confused")
+                $ Girl.change_face("confused")
 
                 if Girl == RogueX:
                     ch_r "Well if you want me to go, then maybe I should stick around."
@@ -1048,7 +1044,7 @@ label dismiss_girl(Girl):
                         call change_Girl_stat(Girl, "obedience", 50, 10)
                         call change_Girl_stat(Girl, "obedience", 80, 5)
 
-                    $ Girl.change_face("_angry")
+                    $ Girl.change_face("angry")
 
                     if Girl == RogueX:
                         ch_r "Fine, if you're going to be a dick about it."
@@ -1075,7 +1071,7 @@ label dismiss_girl(Girl):
                         call change_Girl_stat(Girl, "inhibition", 50, 5)
                         call change_Girl_stat(Girl, "inhibition", 80, 3)
 
-                    $ Girl.change_face("_angry")
+                    $ Girl.change_face("angry")
 
                     if Girl == RogueX:
                         ch_r "Like hell I will."
@@ -1097,7 +1093,7 @@ label dismiss_girl(Girl):
                         call change_Girl_stat(Girl, "obedience", 50, 10)
                         call change_Girl_stat(Girl, "obedience", 80, 5)
 
-                    $ Girl.change_face("_sad")
+                    $ Girl.change_face("sad")
 
                     if Girl == RogueX:
                         ch_r "Ok, if that's what you want."
@@ -1123,7 +1119,7 @@ label dismiss_girl(Girl):
                         call change_Girl_stat(Girl, "inhibition", 50, 3)
                         call change_Girl_stat(Girl, "inhibition", 80, 2)
 
-                    $ Girl.change_face("_sad")
+                    $ Girl.change_face("sad")
 
                     if Girl == RogueX:
                         ch_r "You wish."

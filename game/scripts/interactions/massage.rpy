@@ -2,7 +2,7 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
     $ Girl = check_girl(Girl)
     call shift_focus (Girl)
     $ approval_bonus = 0
-    if "_angry" in Girl.recent_history:
+    if "angry" in Girl.recent_history:
         return
 
     $ approval = approval_check(Girl, 500, taboo_modifier = 1)
@@ -10,9 +10,9 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
     if Girl == JeanX and not JeanX.taboo:
         $ approval = 2
     if approval >= 2:
-        $ Girl.change_face("_bemused", 1)
+        $ Girl.change_face("bemused", 1)
         if Girl.forced:
-            $ Girl.change_face("_sad")
+            $ Girl.change_face("sad")
             call change_Girl_stat(Girl, "love", 20, -2, 1)
             call change_Girl_stat(Girl, "obedience", 90, 1)
             call change_Girl_stat(Girl, "inhibition", 60, 1)
@@ -35,7 +35,7 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
         jump Massage_Prep
     else:
 
-        $ Girl.change_face("_angry", 1)
+        $ Girl.change_face("angry", 1)
         if "no_massage" in Girl.recent_history:
             if Girl == RogueX:
                 ch_r "Heh, I {i}just{/i} told you \"no,\" [Girl.player_petname]."
@@ -67,7 +67,7 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
             elif Girl == JubesX:
                 ch_v "Seriously, stop asking."
         else:
-            $ Girl.change_face("_bemused")
+            $ Girl.change_face("bemused")
             if Girl == RogueX:
                 ch_r "I don't know, not right now."
             elif Girl == KittyX:
@@ -85,7 +85,7 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
         menu:
             extend ""
             "Sorry, never mind." if "no_massage" in Girl.daily_history:
-                $ Girl.change_face("_bemused")
+                $ Girl.change_face("bemused")
                 if Girl == RogueX:
                     ch_r "Ok, no problem, [Girl.player_petname]."
                 elif Girl == KittyX:
@@ -102,7 +102,7 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
                     ch_v "No prob."
                 return
             "Maybe later?" if "no_massage" not in Girl.daily_history:
-                $ Girl.change_face("_sexy")
+                $ Girl.change_face("sexy")
                 call change_Girl_stat(Girl, "love", 80, 1)
                 call change_Girl_stat(Girl, "inhibition", 20, 1)
                 call change_Girl_stat(Girl, "obedience", 20, 1)
@@ -125,7 +125,7 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
                 return
             "Come on, please?":
                 if approval:
-                    $ Girl.change_face("_sexy")
+                    $ Girl.change_face("sexy")
                     call change_Girl_stat(Girl, "obedience", 90, 1)
                     call change_Girl_stat(Girl, "obedience", 40, 2)
                     call change_Girl_stat(Girl, "inhibition", 30, 2)
@@ -145,13 +145,13 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
                         ch_v "Ok, fine."
                     jump Massage_Prep
                 else:
-                    $ Girl.change_face("_sexy")
+                    $ Girl.change_face("sexy")
                     if Girl == RogueX:
                         ch_r "Heh, no thanks, [Girl.player_petname]."
                     elif Girl == KittyX:
                         ch_k "Heh, sorry, [Girl.player_petname]."
                     else:
-                        $ Girl.change_face("_sly", brows = "_confused")
+                        $ Girl.change_face("sly", brows = "confused")
                         Girl.voice "No."
 
     if "no_massage" in Girl.daily_history:
@@ -169,10 +169,10 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
             ch_s "I am unlikely to bend on this."
         elif Girl == JubesX:
             ch_v "This is getting totally weird."
-        $ Girl.recent_history.append("_angry")
-        $ Girl.daily_history.append("_angry")
+        $ Girl.recent_history.append("angry")
+        $ Girl.daily_history.append("angry")
     elif Girl.forced:
-        $ Girl.change_face("_angry", 1)
+        $ Girl.change_face("angry", 1)
         call change_Girl_stat(Girl, "lust", 60, 5)
         call change_Girl_stat(Girl, "obedience", 50, -2)
         if Girl == RogueX:
@@ -189,10 +189,10 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
             ch_s "I am uninterested."
         elif Girl == JubesX:
             ch_v "Definitely not."
-        $ Girl.recent_history.append("_angry")
-        $ Girl.daily_history.append("_angry")
+        $ Girl.recent_history.append("angry")
+        $ Girl.daily_history.append("angry")
     elif Girl.taboo:
-        $ Girl.change_face("_angry", 1)
+        $ Girl.change_face("angry", 1)
         if Girl == RogueX:
             ch_r "I don't want you touching me in public."
         elif Girl == KittyX:
@@ -208,8 +208,8 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
         elif Girl == JubesX:
             ch_v "This is too public. . ."
     else:
-        $ Girl.change_face("_sexy")
-        $ Girl.mouth = "_sad"
+        $ Girl.change_face("sexy")
+        $ Girl.mouth = "sad"
         if Girl == RogueX:
             ch_r "Seriously, no thanks, [Girl.player_petname]."
         elif Girl == KittyX:
@@ -290,7 +290,7 @@ label Massage_Prep(Girl=focused_Girl, Current=0, Past=0, MCount=0):
                 if Girl.outfit["jacket"] and Girl.outfit["top"]:
                     $ Girl.outfit["jacket"] = ""
                     "She does take off the jacket though."
-    if "_angry" in Girl.recent_history:
+    if "angry" in Girl.recent_history:
         return
 
 label Massage_Cycle:
@@ -562,7 +562,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if Girl.outfit["top"] not in ("_mesh_top","_pink_top","_jacket"):
+            if Girl.outfit["top"] not in ("mesh_top","pink_top","jacket"):
                 $ Girl.addiction -= 3
         elif Current == "hands":
             if Past == "arms":
@@ -608,7 +608,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if not Girl.outfit["bottom"] and Girl.outfit["hose"] != "_pantyhose":
+            if not Girl.outfit["bottom"] and Girl.outfit["hose"] != "pantyhose":
                 $ Girl.addiction -= 1
         elif Current == "ass":
             if Past in ("back","hips"):
@@ -636,7 +636,7 @@ label Massage_Cycle:
                 call change_Girl_stat(Girl, "lust", 90, 2)
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and Girl.outfit["hose"] != "_pantyhose":
+            if not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and Girl.outfit["hose"] != "pantyhose":
                 $ Girl.addiction -= 3
         elif Current == "pussy":
             if Past in ("hips","ass"):
@@ -664,7 +664,7 @@ label Massage_Cycle:
                 call change_Girl_stat(Girl, "lust", 200, 3)
                 $ line = "You continue to rub " +Girl.name+ "'s " +Current
 
-            if not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and Girl.outfit["hose"] != "_pantyhose":
+            if not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and Girl.outfit["hose"] != "pantyhose":
                 $ Girl.addiction -= 5
         elif Current == "thighs":
             if Past == "calves":
@@ -690,7 +690,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if Girl.bottom_number() <= 6 and Girl.outfit["hose"] != "_pantyhose":
+            if Girl.bottom_number() <= 6 and Girl.outfit["hose"] != "pantyhose":
                 $ Girl.addiction -= 3
         elif Current == "calves":
             if Past == "feet":
@@ -716,7 +716,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if Girl.bottom_number() <= 6 and Girl.outfit["hose"] != "_pantyhose":
+            if Girl.bottom_number() <= 6 and Girl.outfit["hose"] != "pantyhose":
                 $ Girl.addiction -= 2
         elif Current == "feet":
             if Past == "calves":
@@ -739,7 +739,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to rub " +Girl.name+ "'s " +Current
 
-            if Girl.outfit["boots"] != "boots" and Girl.outfit["hose"] != "_pantyhose":
+            if Girl.outfit["boots"] != "boots" and Girl.outfit["hose"] != "pantyhose":
                 $ Girl.addiction -= 3
 
 
@@ -826,7 +826,7 @@ label Massage_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (Girl)
-                if "_angry" in Girl.recent_history:
+                if "angry" in Girl.recent_history:
                     call show_full_body(Girl)
                     call show_full_body(Partner)
                     return
@@ -842,7 +842,7 @@ label Massage_Cycle:
                     call Girl_Cumming (Girl)
                 else:
                     call Girl_Cumming (Girl, 1)
-                    $ Girl.change_face("_bemused",2,eyes = "_side")
+                    $ Girl.change_face("bemused",2,eyes = "side")
                     if Girl == RogueX:
                         ch_r "Oh. . . wow. . . um. . ."
                         ch_r "That was nice. . ."
@@ -855,7 +855,7 @@ label Massage_Cycle:
                         ch_e "I'm not sure what you think just happened, but don't let it get to your head."
                     elif Girl == LauraX:
                         ch_l "Huh. . ."
-                        $ Girl.change_face("_sexy", 1)
+                        $ Girl.change_face("sexy", 1)
                         ch_l "Good job."
                     elif Girl == JeanX:
                         ch_j "Wow, you really know what you're doing there. . ."
@@ -870,7 +870,7 @@ label Massage_Cycle:
                         ch_v "Oh!"
                         ch_v "Um. . ."
                         ch_v "Yes, that was fantastic."
-                    $ Girl.change_face("_sexy", 1)
+                    $ Girl.change_face("sexy", 1)
 
                 jump Massage_After
 
@@ -897,7 +897,7 @@ label Massage_After:
     if "addictive" in Player.traits:
         $ Girl.addiction_rate += 1
 
-    $ Girl.change_face("_smile", 1)
+    $ Girl.change_face("smile", 1)
     if MCount == 10 and not Girl.forced:
 
         if Girl == RogueX:
@@ -964,7 +964,7 @@ label Massage_After:
 
 label Massage_BadEnd:
 
-    $ Girl.change_face("_angry", 1)
+    $ Girl.change_face("angry", 1)
     if "massagefail" in Girl.recent_history:
 
         $ Girl.action_counter["massage"] += 1

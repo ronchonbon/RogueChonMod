@@ -1,5 +1,5 @@
 image Laura_blinking:
-    "images/Laura_standing/Laura_standing_eyes[LauraX.eyes].png"
+    "images/Laura_standing/Laura_standing_eyes_[LauraX.eyes].png"
     choice:
         3.5
     choice:

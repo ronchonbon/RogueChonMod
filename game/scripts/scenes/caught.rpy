@@ -3,7 +3,7 @@ label caught_changing(Girl):
 
     $ D20 = renpy.random.randint(1, 20)
 
-    $ Girl.change_face("_surprised", 1, mouth = "_kiss")
+    $ Girl.change_face("surprised", 1, mouth = "kiss")
 
     call remove_all
 
@@ -58,18 +58,18 @@ label caught_changing(Girl):
     else:
         if D20 > 5:
             if not approval_check(Girl, 70*D20) and (not Girl.seen_pussy or not Girl.seen_breasts):
-                $ Girl.change_face("_surprised", brows = "_angry")
+                $ Girl.change_face("surprised", brows = "angry")
                 call change_Girl_stat(Girl, "love", 80, -50)
 
                 if not Girl.breasts_covered or not Girl.pussy_covered:
-                    call expression Girl.tag + "_First_Bottomless" pass (1)
-                    call expression Girl.tag + "_First_Topless" pass (1)
+                    call expression Girl.tag + "First_Bottomless" pass (1)
+                    call expression Girl.tag + "First_Topless" pass (1)
 
                     if Girl != StormX:
-                        $ Girl.outfit["top"] = "_towel"
+                        $ Girl.outfit["top"] = "towel"
                         "She grabs a towel and covers up."
             else:
-                $ Girl.change_face("_surprised", 1,brows = "_confused")
+                $ Girl.change_face("surprised", 1,brows = "confused")
 
                 if "exhibitionist" in Girl.traits:
                     call change_Girl_stat(Girl, "lust", 200, 2*D20)
@@ -77,12 +77,12 @@ label caught_changing(Girl):
                     call change_Girl_stat(Girl, "lust", 200, D20)
 
                 if D20 > 17:
-                    call expression Girl.tag + "_First_Bottomless"
-                    call expression Girl.tag + "_First_Topless" pass (1)
+                    call expression Girl.tag + "First_Bottomless"
+                    call expression Girl.tag + "First_Topless" pass (1)
                 elif D20 > 15:
-                    call expression Girl.tag + "_First_Bottomless"
+                    call expression Girl.tag + "First_Bottomless"
                 elif D20 > 14:
-                    call expression Girl.tag + "_First_Topless"
+                    call expression Girl.tag + "First_Topless"
 
             call change_Girl_stat(Girl, "inhibition", 70, 20)
 
@@ -110,10 +110,10 @@ label caught_changing(Girl):
                     call change_Girl_stat(Girl, "inhibition", 60, 1)
         else:
             if not approval_check(Girl, 800) and (not Girl.seen_pussy or not Girl.seen_breasts):
-                $ Girl.change_face("_angry", brows = "_confused")
+                $ Girl.change_face("angry", brows = "confused")
                 call change_Girl_stat(Girl, "love", 80, -5)
             else:
-                $ Girl.change_face("_sexy", brows = "_confused")
+                $ Girl.change_face("sexy", brows = "confused")
 
             call change_Girl_stat(Girl, "inhibition", 50, 3)
 
@@ -141,7 +141,7 @@ label caught_changing(Girl):
                     call change_Girl_stat(Girl, "obedience", 80, 2)
                     call change_Girl_stat(Girl, "inhibition", 60, 1)
 
-        $ Girl.change_face("_sexy")
+        $ Girl.change_face("sexy")
 
         if approval_check(Girl, 1000):
             if Girl == RogueX:
@@ -215,20 +215,20 @@ label caught_changing(Girl):
                     call change_Girl_stat(Girl, "obedience", 50, 1)
                     call change_Girl_stat(Girl, "obedience", 80, 2)
                     call change_Girl_stat(Girl, "inhibition", 60, 2)
-                    $ Girl.change_face("_sexy")
+                    $ Girl.change_face("sexy")
 
                     ch_s "I suppose that could not hurt. . ."
 
                     $ Girl.set_temp_outfit()
                 else:
                     call change_Girl_stat(Girl, "inhibition", 60, 2)
-                    $ Girl.change_face("_smile")
+                    $ Girl.change_face("smile")
 
                     ch_s "Ha! I would not want to be too much of a distraction."
 
                     $ Girl.change_outfit("today")
             "Why not lose the rest too?":
-                $ Girl.change_face("_sexy")
+                $ Girl.change_face("sexy")
                 if approval_check(Girl, 700):
                     call change_Girl_stat(Girl, "love", 50, 1)
                     call change_Girl_stat(Girl, "love", 70, 1)
@@ -263,7 +263,7 @@ label caught_changing(Girl):
                 if approval_check(Girl, 1100):
                     call change_Girl_stat(Girl, "obedience", 50, 2)
                     call change_Girl_stat(Girl, "inhibition", 60, 1)
-                    $ Girl.change_face("_sexy")
+                    $ Girl.change_face("sexy")
 
                     ch_s "If you want. . ."
 
@@ -272,7 +272,7 @@ label caught_changing(Girl):
                     call change_Girl_stat(Girl, "love", 50, -2)
                     call change_Girl_stat(Girl, "love", 80, -1)
                     call change_Girl_stat(Girl, "obedience", 50, 2)
-                    $ Girl.change_face("_sexy", eyes = "_side")
+                    $ Girl.change_face("sexy", eyes = "side")
 
                     ch_s ". . . Very well."
 
@@ -280,7 +280,7 @@ label caught_changing(Girl):
                 else:
                     call change_Girl_stat(Girl, "love", 80, -2)
                     call change_Girl_stat(Girl, "obedience", 50, -1)
-                    $ Girl.change_face("_angry")
+                    $ Girl.change_face("angry")
 
                     ch_s "You do not decide that, [Girl.player_petname]."
 
@@ -291,7 +291,7 @@ label caught_changing(Girl):
                 if approval_check(Girl, 1300):
                     call change_Girl_stat(Girl, "obedience", 50, 2)
                     call change_Girl_stat(Girl, "inhibition", 60, 1)
-                    $ Girl.change_face("_sexy")
+                    $ Girl.change_face("sexy")
 
                     ch_s "Fine. . ."
 
@@ -302,7 +302,7 @@ label caught_changing(Girl):
                     call change_Girl_stat(Girl, "love", 80, -2)
                     call change_Girl_stat(Girl, "obedience", 50, 2)
                     call change_Girl_stat(Girl, "obedience", 80, 1)
-                    $ Girl.change_face("_sexy", eyes = "_side")
+                    $ Girl.change_face("sexy", eyes = "side")
 
                     ch_s ". . . Fine."
 
@@ -313,7 +313,7 @@ label caught_changing(Girl):
                     call change_Girl_stat(Girl, "love", 80, -2)
                     call change_Girl_stat(Girl, "obedience", 50, -2)
                     call change_Girl_stat(Girl, "obedience", 80, 2)
-                    $ Girl.change_face("_angry")
+                    $ Girl.change_face("angry")
 
                     ch_s "I do not think that I will, [Girl.player_petname]."
 
@@ -326,7 +326,7 @@ label caught_showering(Girl):
 
     $ Girl.add_word(1,"showered","showered", 0, 0)
     $ Girl.change_outfit("nude")
-    $ Girl.change_face("_smile", 1)
+    $ Girl.change_face("smile", 1)
 
     $ Girl.location = "bg_showerroom"
     $ Girl.wet = True
@@ -359,15 +359,15 @@ label caught_showering(Girl):
         "You knock on the door. You hear some shuffling inside."
 
         if Girl == StormX:
-            $ Girl.outfit["face_outer_accessory"] = "_towel"
+            $ Girl.outfit["face_outer_accessory"] = "towel"
         else:
-            $ Girl.outfit["top"] = "_towel"
+            $ Girl.outfit["top"] = "towel"
 
         if "will_masturbate" in Girl.daily_history:
             "You hear a sharp shuffling sound and the water gets cut off."
             "After several seconds and some more shuffling, [Girl.name] comes to the door."
 
-            $ Girl.change_face("_perplexed",2,mouth = "_normal")
+            $ Girl.change_face("perplexed",2,mouth = "normal")
 
             call shift_focus(Girl)
             call set_the_scene(location = "bg_showerroom")
@@ -417,7 +417,7 @@ label caught_showering(Girl):
 
         if "will_masturbate" in Girl.daily_history:
             $ Girl.drain_word("will_masturbate", 0, 1)
-            $ Girl.change_face("_sexy", eyes = "_closed")
+            $ Girl.change_face("sexy", eyes = "closed")
             $ Girl.add_word(1,"unseen","unseen", 0, 0)
 
             call set_the_scene
@@ -435,22 +435,22 @@ label caught_showering(Girl):
         elif D20 >= 15:
             call set_the_scene
 
-            $ Girl.change_face("_surprised", 1)
+            $ Girl.change_face("surprised", 1)
 
             "As you enter the showers, you see [Girl.name] washing up."
 
-            call expression Girl.tag + "_First_Bottomless" pass (1)
-            call expression Girl.tag + "_First_Topless" pass (1)
+            call expression Girl.tag + "First_Bottomless" pass (1)
+            call expression Girl.tag + "First_Topless" pass (1)
 
             if not approval_check(Girl, 1200) or not Girl.seen_pussy or not Girl.seen_breasts:
-                $ Girl.brows = "_angry"
+                $ Girl.brows = "angry"
 
                 if Girl != StormX:
-                    $ Girl.outfit["top"] = "_towel"
+                    $ Girl.outfit["top"] = "towel"
 
                     "She grabs a towel and covers up."
 
-                $ Girl.change_face("_angry", 1)
+                $ Girl.change_face("angry", 1)
                 call change_Girl_stat(Girl, "love", 80, -5)
             else:
                 if "exhibitionist" in Girl.traits:
@@ -458,7 +458,7 @@ label caught_showering(Girl):
                 else:
                     call change_Girl_stat(Girl, "lust", 80, D20)
 
-                $ Girl.brows = "_confused"
+                $ Girl.brows = "confused"
 
             call change_Girl_stat(Girl, "inhibition", 70, 3)
 
@@ -503,19 +503,19 @@ label caught_showering(Girl):
                     call change_Girl_stat(EmmaX, "inhibition", 60, 2)
         else:
             if Girl == StormX:
-                $ Girl.outfit["face_outer_accessory"] = "_towel"
+                $ Girl.outfit["face_outer_accessory"] = "towel"
             else:
-                $ Girl.outfit["top"] = "_towel"
+                $ Girl.outfit["top"] = "towel"
 
             call set_the_scene
 
             "As you enter the showers, you see [Girl.name] putting on a towel."
 
             if not approval_check(Girl, 1100) and (not Girl.seen_pussy or not Girl.seen_breasts):
-                $ Girl.change_face("_angry", brows = "_confused")
+                $ Girl.change_face("angry", brows = "confused")
                 call change_Girl_stat(Girl, "love", 80, -5)
             else:
-                $ Girl.change_face("_sexy", brows = "_confused")
+                $ Girl.change_face("sexy", brows = "confused")
 
             call change_Girl_stat(Girl, "inhibition", 50, 3)
 
@@ -562,7 +562,7 @@ label caught_showering(Girl):
                     call change_Girl_stat(EmmaX, "obedience", 80, 2)
                     call change_Girl_stat(EmmaX, "inhibition", 60, 2)
 
-        $ Girl.change_face("_sexy")
+        $ Girl.change_face("sexy")
 
         if Girl == StormX:
             ch_s "Oh, that's fine, [Girl.player_petname]."
@@ -610,17 +610,17 @@ label caught_showering(Girl):
             elif Girl == JubesX:
                 ch_v "You just have to ask. . ."
 
-            if Girl.outfit["top"] == "_towel":
+            if Girl.outfit["top"] == "towel":
                 $ Girl.outfit["top"] = ""
 
                 pause 0.5
 
-                $ Girl.outfit["top"] = "_towel"
+                $ Girl.outfit["top"] = "towel"
 
                 "She flashes you real quick."
 
-                call expression Girl.tag + "_First_Bottomless" pass (1)
-                call expression Girl.tag + "_First_Topless" pass (1)
+                call expression Girl.tag + "First_Bottomless" pass (1)
+                call expression Girl.tag + "First_Topless" pass (1)
 
                 if Girl == LauraX:
                     ch_l "Heh!"
@@ -695,7 +695,7 @@ label caught_masturbating(Girl):
         "Peek inside":
             call set_the_scene
 
-            $ Girl.change_face("_kiss", 1, eyes = "_closed")
+            $ Girl.change_face("kiss", 1, eyes = "closed")
 
             $ Player.primary_action = "masturbation"
             $ girl_secondary_action = "fondle_pussy"
@@ -728,7 +728,7 @@ label caught_masturbating(Girl):
         "You hear some soft moans, followed by some shuffling around as items tumble to the ground."
         "After several seconds and some more shuffling of clothing, [Girl.name] comes to the door."
 
-        $ Girl.change_face("_confused", 1,eyes = "_surprised", mouth = "_smile")
+        $ Girl.change_face("confused", 1,eyes = "surprised", mouth = "smile")
 
         call stop_all_actions
         call set_the_scene(location = Girl.home)
@@ -756,8 +756,8 @@ label caught_masturbating(Girl):
         call expose_pussy(Girl)
         call set_the_scene
 
-        $ Girl.change_face("_sexy")
-        $ Girl.eyes = "_closed"
+        $ Girl.change_face("sexy")
+        $ Girl.eyes = "closed"
         $ Girl.arm_pose = 2
         $ Girl.daily_history.append("unseen")
         $ Girl.recent_history.append("unseen")
@@ -770,78 +770,78 @@ label caught_masturbating(Girl):
         call shift_focus(Girl)
         call before_masturbation(Girl)
 
-        if "_angry" in Girl.recent_history:
+        if "angry" in Girl.recent_history:
             return
 
-        $ Girl.change_face("_sexy", brows = "_confused")
+        $ Girl.change_face("sexy", brows = "confused")
 
         if Girl.action_counter["masturbation"] == 1:
             if Girl == RogueX:
                 ch_r "Well that was a bit unexpected. . ."
 
-                $ Girl.change_face("_bemused", eyes = "_side")
+                $ Girl.change_face("bemused", eyes = "side")
 
                 ch_r "but not exactly unpleasant. . ."
 
-                $ Girl.change_face("_sexy")
+                $ Girl.change_face("sexy")
 
                 ch_r "Maybe next time I'll give you a heads up first."
             elif Girl == KittyX:
                 ch_k "So[KittyX.like]I wasn't expecting company. . ."
 
-                $ Girl.change_face("_bemused", eyes = "_side")
+                $ Girl.change_face("bemused", eyes = "side")
 
                 ch_k "but I didn't exactly mind it either. . ."
 
-                $ Girl.change_face("_sexy")
+                $ Girl.change_face("sexy")
 
                 ch_k "Maybe knock next time?"
             elif Girl == EmmaX:
                 ch_e "I wasn't expecting visitors. . ."
 
-                $ Girl.change_face("_bemused", eyes = "_side")
+                $ Girl.change_face("bemused", eyes = "side")
 
                 ch_e "although for you I could make an exception. . ."
 
-                $ Girl.change_face("_sexy")
+                $ Girl.change_face("sexy")
 
                 ch_e "Perhaps next time you could knock?"
             elif Girl == LauraX:
                 ch_l "So what are you doing here? . ."
 
-                $ Girl.change_face("_bemused", eyes = "_side")
+                $ Girl.change_face("bemused", eyes = "side")
 
                 ch_l "not that I mind the company. . ."
 
-                $ Girl.change_face("_sexy")
+                $ Girl.change_face("sexy")
 
                 ch_l "But you know, give me a heads up first."
             elif Girl == JeanX:
-                $ Girl.change_face("_bemused", eyes = "_side")
+                $ Girl.change_face("bemused", eyes = "side")
 
                 ch_j "Well that was fun. . ."
 
-                $ Girl.change_face("_sexy")
+                $ Girl.change_face("sexy")
 
                 ch_j "So what brings you here? . ."
             elif Girl == StormX:
                 ch_s "That was an interesting experience. . ."
 
-                $ Girl.change_face("_bemused", eyes = "_side")
+                $ Girl.change_face("bemused", eyes = "side")
 
                 ch_s "I certainly didn't mnd the attention. . ."
 
-                $ Girl.change_face("_sexy")
+                $ Girl.change_face("sexy")
 
                 ch_s "You might want to knock in future though."
             elif Girl == JubesX:
                 ch_v "I don't usually get unexpected visitors . ."
 
-                $ Girl.change_face("_bemused", eyes = "_side")
+                $ Girl.change_face("bemused", eyes = "side")
 
                 ch_v "but I didn't mind the company. . ."
 
-                $ Girl.change_face("_sexy")
+                $ Girl.change_face("sexy")
 
                 ch_v "Maybe knock next time?"
         else:
@@ -887,8 +887,8 @@ label caught_lesbian(GirlA, GirlB):
                 "You hear some soft moans, followed by some shuffling around as items tumble to the ground."
                 "After several seconds and some more shuffling of clothing, [GirlA.name] comes to the door."
 
-                $ GirlA.change_face("_confused", 2, eyes = "_surprised", mouth = "_smile")
-                $ GirlB.change_face("_confused", 2, eyes = "_surprised", mouth = "_smile")
+                $ GirlA.change_face("confused", 2, eyes = "surprised", mouth = "smile")
+                $ GirlB.change_face("confused", 2, eyes = "surprised", mouth = "smile")
 
                 call stop_all_actions
                 call set_the_scene
@@ -909,8 +909,8 @@ label caught_lesbian(GirlA, GirlB):
                 elif GirlA == JubesX:
                     ch_v "Oh, hey. . . me and [GirlB.name] were just. . . having some fun."
 
-                $ GirlA.change_face("_smile", 1)
-                $ GirlB.change_face("_smile", 1)
+                $ GirlA.change_face("smile", 1)
+                $ GirlB.change_face("smile", 1)
 
                 $ approval_bonus += 10
 
@@ -918,8 +918,8 @@ label caught_lesbian(GirlA, GirlB):
             "Peek inside":
                 call set_the_scene
 
-                $ GirlA.change_face("_kiss", 1, eyes = "_closed")
-                $ GirlB.change_face("_kiss", 1, eyes = "_closed")
+                $ GirlA.change_face("kiss", 1, eyes = "closed")
+                $ GirlB.change_face("kiss", 1, eyes = "closed")
 
                 $ Player.primary_action = "lesbian"
                 $ girl_secondary_action = "fondle_pussy"
@@ -929,8 +929,8 @@ label caught_lesbian(GirlA, GirlB):
             "Enter quietly":
                 call set_the_scene
 
-                $ GirlA.change_face("_kiss", 1,eyes = "_closed")
-                $ GirlB.change_face("_kiss", 1,eyes = "_closed")
+                $ GirlA.change_face("kiss", 1,eyes = "closed")
+                $ GirlB.change_face("kiss", 1,eyes = "closed")
 
                 $ Player.primary_action = "lesbian"
                 $ girl_secondary_action = "fondle_pussy"
@@ -981,13 +981,13 @@ label caught_having_sex(Girl):
 
     call set_the_scene
 
-    $ Girl.change_face("_sad")
+    $ Girl.change_face("sad")
 
     call outfitShame(Girl, 20)
 
     show Xavier_sprite at sprite_location(stage_left)
 
-    call change_Xavier_face("_shocked")
+    call change_Xavier_face("shocked")
 
     $ punishment_days = Girl.event_counter["caught"]
 
@@ -1022,21 +1022,21 @@ label caught_having_sex(Girl):
             for G in all_Girls:
                 if G.location == Player.location and not G.breasts_covered:
                     if G == StormX:
-                        G.outfit["face_outer_accessory"] = "_towel"
+                        G.outfit["face_outer_accessory"] = "towel"
                     else:
-                        G.outfit["top"] = "_towel"
+                        G.outfit["top"] = "towel"
 
         hide black_screen onlayer black
 
-        if StormX in [Girl, Partner] and StormX.outfit["face_outer_accessory"] == "_towel":
+        if StormX in [Girl, Partner] and StormX.outfit["face_outer_accessory"] == "towel":
             ch_x ". . ."
             ch_x "Ororo, for Christ's sake. . ."
             ch_x "Put on some actual clothes!"
 
             show black_screen onlayer black
 
-            $ StormX.outfit["top"] = "_white_shirt"
-            $ StormX.outfit["bottom"] = "_skirt"
+            $ StormX.outfit["top"] = "white_shirt"
+            $ StormX.outfit["bottom"] = "skirt"
 
             hide black_screen onlayer black
 
@@ -1048,7 +1048,7 @@ label caught_having_sex(Girl):
         "And this isn't even the first time this has happened!"
 
     if Partner:
-        $ Partner.change_face("_surprised",2)
+        $ Partner.change_face("surprised",2)
 
         if Partner in Rules:
             if Partner == KittyX:
@@ -1064,7 +1064,7 @@ label caught_having_sex(Girl):
         else:
             ch_x "And [Partner.name], you were just watching this occur!"
 
-        $ Partner.change_face("_bemused", 1, eyes = "_side")
+        $ Partner.change_face("bemused", 1, eyes = "side")
 
     if EmmaX.location == Player.location and EmmaX not in Rules:
         if not EmmaX.event_counter["caught"]:
@@ -1073,18 +1073,18 @@ label caught_having_sex(Girl):
             ch_x "What sort of message does that send?"
             ch_x "How appropriate would it be if I were to just wander the halls with Miss Grey on my lap?"
 
-            call change_Xavier_face("_hypno")
+            call change_Xavier_face("hypno")
 
             ch_x "Just. . . running my hands along her firm little body without a care in the world. . ."
 
-            call change_Xavier_face("_happy")
+            call change_Xavier_face("happy")
 
             if JeanX.location == Player.location:
                 "You glance over at [JeanX.name], she shrugs."
 
             ch_x ". . ."
 
-            call change_Xavier_face("_shocked")
+            call change_Xavier_face("shocked")
 
             ch_x "Yes, well, as I was saying! . ."
         else:
@@ -1102,15 +1102,15 @@ label caught_having_sex(Girl):
             ch_x "What sort of message does that send?"
             ch_x "Do you think it would be appropriate for me to engage in such escapades?"
 
-            call change_Xavier_face("_hypno")
+            call change_Xavier_face("hypno")
 
             ch_x "Just. . . rolling down the halls with my balls flowing freely in the wind. . ."
 
-            call change_Xavier_face("_happy")
+            call change_Xavier_face("happy")
 
             ch_x ". . ."
 
-            call change_Xavier_face("_shocked")
+            call change_Xavier_face("shocked")
 
             ch_x "Do not distract me! . ."
         else:
@@ -1159,7 +1159,7 @@ label caught_having_sex(Girl):
 
             call change_Girl_stat(Girl, "obedience", 50, -5)
 
-            call change_Xavier_face("_happy")
+            call change_Xavier_face("happy")
 
             if Girl.event_counter["caught"]:
                 ch_x "But you know you've done this before. . . at least [Girl.event_counter[caught]] times. . ."
@@ -1167,12 +1167,12 @@ label caught_having_sex(Girl):
                 ch_x "Not with Ms. Frost, perhaps, but you know you've done this before. . ."
                 ch_x "at least [total_caught] times. . ."
 
-                $ Girl.change_face("_sexy", brows = "_confused")
+                $ Girl.change_face("sexy", brows = "confused")
             elif Girl == StormX and total_caught:
                 ch_x "Not with Ms. Munroe, perhaps, but you know you've done this before. . ."
                 ch_x "at least [total_caught] times. . ."
 
-                $ Girl.change_face("_sexy", brows = "_confused")
+                $ Girl.change_face("sexy", brows = "confused")
             elif total_caught:
                 ch_x "Not with this young lady, perhaps, but you know you've done this before. . ."
                 ch_x "at least [total_caught] times. . ."
@@ -1189,7 +1189,7 @@ label caught_having_sex(Girl):
             ch_x "Now return to your rooms and reflect on what you've done."
         "Just having a little fun, right [Girl.petname]?":
             $ Girl.name_check()
-            $ Girl.change_face("_bemused")
+            $ Girl.change_face("bemused")
             call change_Girl_stat(Girl, "lust", 90, 5)
 
             if RogueX.location == Player.location and RogueX.event_counter["caught"] < 5:
@@ -1225,7 +1225,7 @@ label caught_having_sex(Girl):
                 call change_Girl_stat(JubesX, "obedience", 80, 5)
                 call change_Girl_stat(JubesX, "love", 90, 10)
 
-            call change_Xavier_face("_angry")
+            call change_Xavier_face("angry")
 
             $ punishment_days += 10
 
@@ -1285,7 +1285,7 @@ label caught_having_sex(Girl):
         "Just this. . . Plan Zeta, [JubesX.name]!" if Girl == JubesX and Player.level >= 5:
             $ Plan = JubesX
         "You can suck it, old man.":
-            $ Girl.change_face("_surprised")
+            $ Girl.change_face("surprised")
             call change_Girl_stat(Girl, "lust", 90, 10)
 
             if RogueX.location == Player.location and RogueX.event_counter["caught"] < 3:
@@ -1322,7 +1322,7 @@ label caught_having_sex(Girl):
                 call change_Girl_stat(JubesX, "obedience", 50, 25)
                 call change_Girl_stat(JubesX, "obedience", 90, 30)
 
-            call change_Xavier_face("_angry")
+            call change_Xavier_face("angry")
 
             $ punishment_days += 20
 
@@ -1399,11 +1399,11 @@ label caught_having_sex(Girl):
             return
         elif approval_check(Plan, 1000, taboo_modifier = 1, Loc = "No"):
             if Plan == RogueX:
-                $ Plan.change_face("_perplexed", brows = "_sad")
+                $ Plan.change_face("perplexed", brows = "sad")
 
                 ch_r "I'm not comfortable with something that extreme, [RogueX.player_petname]. . ."
             elif Plan == KittyX:
-                $ Plan.change_face("_perplexed", brows = "_sad")
+                $ Plan.change_face("perplexed", brows = "sad")
 
                 if "Xavier's photo" in Player.inventory:
                     ch_k "You know. . . I really don't think that's a good idea. . ."
@@ -1414,19 +1414,19 @@ label caught_having_sex(Girl):
 
                     $ Player.history.append("kappa")
             elif Plan == EmmaX:
-                $ Plan.change_face("_perplexed", brows = "_sad")
+                $ Plan.change_face("perplexed", brows = "sad")
 
                 ch_e "Um, I don't believe we're quite at that point yet, [EmmaX.player_petname]. . ."
             elif Plan == LauraX:
-                $ Plan.change_face("_angry", eyes= "_side", brows = "_angry")
+                $ Plan.change_face("angry", eyes= "side", brows = "angry")
 
                 ch_l "I told you that was a stupid idea. . ."
             elif Plan == JeanX:
-                $ Plan.change_face("_perplexed", brows = "_sad")
+                $ Plan.change_face("perplexed", brows = "sad")
 
                 ch_j "Look, this is your mess, I'm not going to clean it up, [JeanX.player_petname]. . ."
             elif Plan == StormX:
-                $ Plan.change_face("_perplexed", brows = "_sad")
+                $ Plan.change_face("perplexed", brows = "sad")
 
                 if "Xavier's files" in Player.inventory:
                     ch_s "I really doubt that we should attempt that. . ."
@@ -1437,20 +1437,20 @@ label caught_having_sex(Girl):
 
                     $ Player.history.append("rho")
             elif Plan == JubesX:
-                $ Plan.change_face("_perplexed", brows = "_sad")
+                $ Plan.change_face("perplexed", brows = "sad")
 
                 ch_v "What?! Um, no, let's not."
 
             menu:
                 "Dammit [Plan.name]. . .":
-                    $ Plan.change_face("_angry")
+                    $ Plan.change_face("angry")
                     call change_Girl_stat(Plan, "obedience", 50, 5)
                     call change_Girl_stat(Plan, "love", 90, -5)
                 "Yeah, I guess you're right. . .":
-                    $ Plan.change_face("_bemused")
+                    $ Plan.change_face("bemused")
                     call change_Girl_stat(Plan, "love", 90, 5)
         else:
-            $ Plan.change_face("_confused")
+            $ Plan.change_face("confused")
 
             if Plan == RogueX:
                 ch_r "What nonsense are you talking now?"
@@ -1485,7 +1485,7 @@ label caught_having_sex(Girl):
                 ch_s "Yes, this is 'Ro. What plan?"
                 ch_p "What's on second! I don't know!"
 
-                $ Plan.change_face("_smile")
+                $ Plan.change_face("smile")
 
                 ch_s "Ah! \"Third base!\""
             elif Plan == JubesX:
@@ -1494,7 +1494,7 @@ label caught_having_sex(Girl):
                 ch_v "Is this a \"Gundam\" thing?"
                 ch_p "Oh, yeah, I guess I haven't mentioned that. . ."
 
-        call change_Xavier_face("_angry")
+        call change_Xavier_face("angry")
 
         $ punishment_days += 10
 
@@ -1565,63 +1565,63 @@ label caught_having_sex(Girl):
     elif Girl == JeanX and "nowhammy" not in JeanX.traits and JeanX.event_counter["caught"] > 1:
         ch_x "Oh, and Jean, dear, I'd like a word?"
 
-        $ Girl.change_face("_bemused")
+        $ Girl.change_face("bemused")
 
         ch_j "What is it?"
         ch_x "I understand that you've been using your abilities to. . ."
         ch_x "cover up for some of your. . . transgressions."
 
-        $ Girl.change_face("_bemused", eyes = "up")
+        $ Girl.change_face("bemused", eyes = "up")
 
         ch_j "Oh, you mean how I mindwipe the \"NPCs\" that get too nosy?"
 
-        call change_Xavier_face("_angry")
+        call change_Xavier_face("angry")
 
         ch_x "If by \"NPCs\" you mean your fellow students. . ."
         ch_x ". . . and by \"get too nosy,\" you mean \"notice you having sex in public\". . ."
         ch_x ". . . then yes, that is exactly what I mean."
 
-        $ Girl.change_face("_bemused", eyes = "_side")
+        $ Girl.change_face("bemused", eyes = "side")
 
         ch_j "Ok, yeah."
         ch_x "I would like you to cease this activity at once!"
         ch_x "It is a total abuse of your abilities and of those students' autonomy!"
 
-        $ Girl.change_face("_angry", 1)
+        $ Girl.change_face("angry", 1)
 
         ch_j "Who cares."
 
-        call change_Xavier_face("_shocked")
+        call change_Xavier_face("shocked")
 
         ch_x "!!!"
         ch_x "I do!"
 
-        call change_Xavier_face("_angry")
+        call change_Xavier_face("angry")
 
         ch_x "That is it, young lady. Until further notice, you're forbidden from. . . whammying your fellow students!"
 
-        $ Girl.change_face("_angry", 1,mouth = "_surprised")
+        $ Girl.change_face("angry", 1,mouth = "surprised")
 
         ch_j "Bullshit!"
 
-        $ Girl.change_face("_angry", 0,eyes = "_psychic")
+        $ Girl.change_face("angry", 0,eyes = "psychic")
 
         ch_x "Ugh. . ."
 
-        call change_Xavier_face("_psychic")
+        call change_Xavier_face("psychic")
 
         ch_x "[Player.name]. . . this may take a while. . ."
         ch_x "You may as well leave. . ."
 
         $ JeanX.traits.append("nowhammy")
-        $ Girl.change_face("_normal")
+        $ Girl.change_face("normal")
 
     if EmmaX.location == Player.location and EmmaX not in Rules:
         ch_x "Emma, I'd like you to stay after for a brief discussion about \"boundaries\". . ."
 
         if EmmaX.event_counter["caught"]:
             call change_Girl_stat(EmmaX, "love", 90, -5)
-            $ Girl.change_face("_angry", eyes = "_closed")
+            $ Girl.change_face("angry", eyes = "closed")
 
             ch_e "Not again. . ."
 
@@ -1633,7 +1633,7 @@ label caught_having_sex(Girl):
 
         if StormX.event_counter["caught"]:
             call change_Girl_stat(StormX, "love", 90, -5)
-            $ Girl.change_face("_angry", eyes = "_closed")
+            $ Girl.change_face("angry", eyes = "closed")
 
             ch_s "Again? . ."
         if StormX not in Rules and "Xavier's files" not in Player.inventory:
@@ -1670,16 +1670,16 @@ label execute_plan(Girl):
 
     call shift_focus(Girl)
 
-    $ Girl.change_face("_sly")
+    $ Girl.change_face("sly")
 
     "As you say this, a sly grin crosses [Girl.name]'s face."
     "You quickly approach Xavier and place your hands on his head."
 
-    call change_Xavier_face("_psychic")
+    call change_Xavier_face("psychic")
 
     ch_x ". . ."
 
-    call change_Xavier_face("_shocked")
+    call change_Xavier_face("shocked")
 
     "Xavier realizes with a shock that with your powers, his telepathy is useless."
 
@@ -1703,23 +1703,23 @@ label execute_plan(Girl):
 
         if first_time:
             if approval_check(Partner, 1000) or Partner == JeanX:
-                $ Partner.change_face("_surprised")
+                $ Partner.change_face("surprised")
 
                 "[Partner.name] looks a bit caught off guard, but goes along with the idea."
 
-                $ Partner.change_face("_sly")
+                $ Partner.change_face("sly")
             else:
-                $ Partner.change_face("_surprised")
+                $ Partner.change_face("surprised")
 
                 "[Partner.name] looks a bit uncomfortable with what's happening and takes off."
 
                 call remove_Girl(Partner)
         else:
-            $ Partner.change_face("_sly")
+            $ Partner.change_face("sly")
 
             "[Partner.name] understands what's going on here."
 
-    call change_Xavier_face("_angry")
+    call change_Xavier_face("angry")
 
     if Girl == RogueX:
         $ RogueX.outfit["gloves"] = ""
@@ -1730,7 +1730,7 @@ label execute_plan(Girl):
         "[RogueX.name] moves in and also grabs his head, duplicating his powers as he watches helplessly."
         "Now that she posesses his full power, while his are negated, he has no defenses."
 
-        call change_Xavier_face("_hypno")
+        call change_Xavier_face("hypno")
 
         if "Omega" in Player.traits:
             ch_x "Oh, not again."
@@ -1783,7 +1783,7 @@ label execute_plan(Girl):
 
         "[Girl.name] moves behind Xavier and activates her own telepathy."
 
-        call change_Xavier_face("_angry")
+        call change_Xavier_face("angry")
 
         if (Girl == EmmaX and "Psi" in Player.traits) or (Girl == JeanX and "Alpha" in Player.traits):
             ch_x "Oh, not again. . ."
@@ -1817,7 +1817,7 @@ label execute_plan(Girl):
 
             $ LauraX.name_check()
             $ LauraX.claws = 1
-            $ LauraX.change_face("_sly")
+            $ LauraX.change_face("sly")
 
             ch_p "She could cause a lot of trouble if she keeps getting called down here. . ."
             "[LauraX.name] draws her claws along the arm of the Professor's chair, tracing fine lines into the metal."
@@ -1924,7 +1924,7 @@ label execute_plan(Girl):
                     call change_Girl_stat(JeanX, "love", 50, 5)
                     call change_Girl_stat(JeanX, "love", 70, 5)
                     call change_Girl_stat(JeanX, "love", 90, 5)
-                    $ Girl.change_face("_sly", 1)
+                    $ Girl.change_face("sly", 1)
 
                     ch_j "Nice. . ."
             "You know, I did like it when [JeanX.name] couldn't use her \"whammy.\"" if "whammy" in JeanX.traits:
@@ -1938,11 +1938,11 @@ label execute_plan(Girl):
                     call change_Girl_stat(JeanX, "obedience", 80, 5)
                     call change_Girl_stat(JeanX, "love", 70, -5)
                     call change_Girl_stat(JeanX, "love", 90, -5)
-                    $ JeanX.change_face("_angry", 1,mouth = "_surprised")
+                    $ JeanX.change_face("angry", 1,mouth = "surprised")
 
                     ch_j "Hey!"
 
-                    $ JeanX.change_face("_angry", 1)
+                    $ JeanX.change_face("angry", 1)
             "Raise my stipend." if Player.income < 30:
                 if Girl == RogueX and "Omega" not in Player.traits:
                     ch_x "Very well. . . but I can only raise it by so much. . ."
@@ -2009,7 +2009,7 @@ label execute_plan(Girl):
 
         ch_p "Ok, that's enough. Make Xavier forget that any of this happened, and then let's get out of here."
 
-        $ Girl.outfit["gloves"] = "_gloves"
+        $ Girl.outfit["gloves"] = "gloves"
         $ Girl.arm_pose = 1
     elif Girl == KittyX:
         if "Kappa" not in Player.traits:

@@ -6,16 +6,16 @@ label Rogue_Relationship:
             ch_r "What did you want to ask me about?"
             "Do you want to be my girlfriend?" if RogueX not in Player.Harem and "ex" not in RogueX.traits:
                 $ RogueX.daily_history.append("relationship")
-                if "asked boyfriend" in RogueX.daily_history and "_angry" in RogueX.daily_history:
-                    $ RogueX.change_face("_angry", 1)
+                if "asked boyfriend" in RogueX.daily_history and "angry" in RogueX.daily_history:
+                    $ RogueX.change_face("angry", 1)
                     ch_r "Seriously, stop bugging me."
                     return
                 elif "asked boyfriend" in RogueX.daily_history:
-                    $ RogueX.change_face("_angry", 1)
+                    $ RogueX.change_face("angry", 1)
                     ch_r "You already asked about that, the answer's still no."
                     return
                 elif RogueX.broken_up[0]:
-                    $ RogueX.change_face("_angry", 1)
+                    $ RogueX.change_face("angry", 1)
                     ch_r "I already told you, not while you're with her."
                     if Player.Harem:
                         $ RogueX.daily_history.append("asked boyfriend")
@@ -33,18 +33,18 @@ label Rogue_Relationship:
                     return
 
                 if RogueX.event_happened[5]:
-                    $ RogueX.change_face("_bemused", 1)
+                    $ RogueX.change_face("bemused", 1)
                     ch_r "I mean, I asked you about this before. . ."
                 else:
-                    $ RogueX.change_face("_surprised", 2)
+                    $ RogueX.change_face("surprised", 2)
                     ch_r "Wow, this is unexpected, [RogueX.player_petname]. . ."
-                    $ RogueX.change_face("_smile", 1)
+                    $ RogueX.change_face("smile", 1)
 
                 call Rogue_OtherWoman
 
                 if RogueX.love >= 800:
-                    $ RogueX.change_face("_surprised", 1)
-                    $ RogueX.mouth = "_smile"
+                    $ RogueX.change_face("surprised", 1)
+                    $ RogueX.mouth = "smile"
                     call change_Girl_stat(RogueX, "love", 200, 40)
                     ch_r "I'd love to!"
                     if "boyfriend" not in RogueX.player_petnames:
@@ -54,26 +54,26 @@ label Rogue_Relationship:
                     $ Player.Harem.append(RogueX)
                     call Harem_Initiation
                     "[RogueX.name] leaps in and kisses you deeply."
-                    $ RogueX.change_face("_kiss", 1)
+                    $ RogueX.change_face("kiss", 1)
                     $ RogueX.action_counter["kiss"] += 1
                 elif RogueX.obedience >= 500:
-                    $ RogueX.change_face("_perplexed")
+                    $ RogueX.change_face("perplexed")
                     ch_r "I'm not sure I'd call what we have \"dating.\""
                 elif RogueX.inhibition >= 500:
-                    $ RogueX.change_face("_smile")
+                    $ RogueX.change_face("smile")
                     ch_r "I don't really want to be tied down like that."
                 else:
-                    $ RogueX.change_face("_perplexed", 1)
+                    $ RogueX.change_face("perplexed", 1)
                     ch_r "I don't really feel that way about you right now, [RogueX.player_petname]."
 
             "Do you want to get back together?" if "ex" in RogueX.traits:
                 $ RogueX.daily_history.append("relationship")
-                if "asked boyfriend" in RogueX.daily_history and "_angry" in RogueX.daily_history:
-                    $ RogueX.change_face("_angry", 1)
+                if "asked boyfriend" in RogueX.daily_history and "angry" in RogueX.daily_history:
+                    $ RogueX.change_face("angry", 1)
                     ch_r "Seriously, stop bugging me."
                     return
                 elif "asked boyfriend" in RogueX.daily_history:
-                    $ RogueX.change_face("_angry", 1)
+                    $ RogueX.change_face("angry", 1)
                     ch_r "You already asked about that, the answer's still no."
                     return
 
@@ -90,8 +90,8 @@ label Rogue_Relationship:
                 call Rogue_OtherWoman
 
                 if RogueX.love >= 800:
-                    $ RogueX.change_face("_surprised", 1)
-                    $ RogueX.mouth = "_smile"
+                    $ RogueX.change_face("surprised", 1)
+                    $ RogueX.mouth = "smile"
                     call change_Girl_stat(RogueX, "love", 90, 5)
                     ch_r "If you're in, I'm in!"
                     if "boyfriend" not in RogueX.player_petnames:
@@ -102,11 +102,11 @@ label Rogue_Relationship:
                     $ Player.Harem.append(RogueX)
                     call Harem_Initiation
                     "[RogueX.name] leaps in and kisses you deeply."
-                    $ RogueX.change_face("_kiss", 1)
+                    $ RogueX.change_face("kiss", 1)
                     $ RogueX.action_counter["kiss"] += 1
                 elif RogueX.love >= 600 and approval_check(RogueX, 1500):
-                    $ RogueX.change_face("_smile", 1)
-                    $ RogueX.mouth = "_smile"
+                    $ RogueX.change_face("smile", 1)
+                    $ RogueX.mouth = "smile"
                     call change_Girl_stat(RogueX, "love", 90, 5)
                     ch_r "We can give this another try."
                     if "boyfriend" not in RogueX.player_petnames:
@@ -117,16 +117,16 @@ label Rogue_Relationship:
                     $ Player.Harem.append(RogueX)
                     call Harem_Initiation
                     "[RogueX.name] gives you a quick kiss."
-                    $ RogueX.change_face("_kiss", 1)
+                    $ RogueX.change_face("kiss", 1)
                     $ RogueX.action_counter["kiss"] += 1
                 elif RogueX.obedience >= 500:
-                    $ RogueX.change_face("_sad")
+                    $ RogueX.change_face("sad")
                     ch_r "Whatever we had, whatever we have right now, that's not it."
                 elif RogueX.inhibition >= 500:
-                    $ RogueX.change_face("_perplexed")
+                    $ RogueX.change_face("perplexed")
                     ch_r "We tried that, it didn't work out."
                 else:
-                    $ RogueX.change_face("_perplexed", 1)
+                    $ RogueX.change_face("perplexed", 1)
                     ch_r "I'm not ready for more heartbreak, [RogueX.player_petname]."
 
 
@@ -153,7 +153,7 @@ label Rogue_Relationship:
                             ch_r "Yes?"
                             "I'm ok with that now.":
                                 if approval_check(RogueX, 800, "O"):
-                                    $ RogueX.change_face("_sexy", 1)
+                                    $ RogueX.change_face("sexy", 1)
                                     ch_r "I hope to serve well, Master."
                                     call change_Girl_stat(RogueX, "obedience", 200, 100)
                                     $ RogueX.player_petnames.append("master")
@@ -162,7 +162,7 @@ label Rogue_Relationship:
                                     ch_r "Well, I'm not really interested in that sort of thing anymore."
                                     ch_r "I mean, maybe later."
                             "Never mind.":
-                                $ RogueX.change_face("_sad")
+                                $ RogueX.change_face("sad")
                                 ch_r "Oh."
                                 call change_Girl_stat(RogueX, "obedience", 200, -5)
                                 call change_Girl_stat(RogueX, "love", 90, -5)
@@ -179,7 +179,7 @@ label Rogue_OtherWoman(counter=0):
         return
     $ counter = int((RogueX.likes[Player.Harem[0].tag] - 500)/2)
 
-    $ RogueX.change_face("_perplexed")
+    $ RogueX.change_face("perplexed")
     if len(Player.Harem) >= 2:
         ch_r "But you're with [Player.Harem[0].name] right now, and a whole mess'a other girls!"
     else:
@@ -188,7 +188,7 @@ label Rogue_OtherWoman(counter=0):
         extend ""
         "She said I can be with you too." if "RogueYes" in Player.traits:
             if approval_check(RogueX, 1800, Bonus = counter):
-                $ RogueX.change_face("_smile", 1)
+                $ RogueX.change_face("smile", 1)
                 if RogueX.love >= RogueX.obedience:
                     ch_r "I s'pose I can learn ta share."
                 elif RogueX.obedience >= RogueX.inhibition:
@@ -196,14 +196,14 @@ label Rogue_OtherWoman(counter=0):
                 else:
                     ch_r "Ok, sure."
             else:
-                $ RogueX.change_face("_angry", 1)
+                $ RogueX.change_face("angry", 1)
                 ch_r "Well that harlot!"
                 $ renpy.pop_call()
 
 
         "I could ask if she'd be ok with me dating you both." if "RogueYes" not in Player.traits:
             if approval_check(RogueX, 1800, Bonus = counter):
-                $ RogueX.change_face("_smile", 1)
+                $ RogueX.change_face("smile", 1)
                 if RogueX.love >= RogueX.obedience:
                     ch_r "I s'pose I can learn ta share."
                 elif RogueX.obedience >= RogueX.inhibition:
@@ -212,20 +212,20 @@ label Rogue_OtherWoman(counter=0):
                     ch_r "Ok, sure."
                 ch_r "You go ask her if she's inta that, then get back to me tomorrow."
             else:
-                $ RogueX.change_face("_angry", 1)
+                $ RogueX.change_face("angry", 1)
                 ch_r "Well that harlot!"
             $ renpy.pop_call()
         "What she doesn't know won't hurt her.":
 
             if not approval_check(RogueX, 1800, Bonus = -counter):
-                $ RogueX.change_face("_angry", 1)
+                $ RogueX.change_face("angry", 1)
                 if not approval_check(RogueX, 1800):
                     ch_r "Well now I don't wantcha."
                 else:
                     ch_r "I ain't in a sharin mood."
                 $ renpy.pop_call()
             else:
-                $ RogueX.change_face("_smile", 1)
+                $ RogueX.change_face("smile", 1)
                 if RogueX.love >= RogueX.obedience:
                     ch_r "I s'pose somethin could be arranged. . ."
                 elif RogueX.obedience >= RogueX.inhibition:
@@ -235,12 +235,12 @@ label Rogue_OtherWoman(counter=0):
                 $ RogueX.add_word(1, 0, 0,"downlow")
         "I can break it off with her.":
 
-            $ RogueX.change_face("_sad")
+            $ RogueX.change_face("sad")
             ch_r "Well then talk to me after you have."
             $ renpy.pop_call()
         "You're right, I was dumb to ask.":
 
-            $ RogueX.change_face("_sad")
+            $ RogueX.change_face("sad")
             ch_r "Yeah. . ."
             $ renpy.pop_call()
 
@@ -375,25 +375,25 @@ label Rogue_Monogamy:
         "Could you not hook up with other girls?" if "monogamous" not in RogueX.traits:
             if RogueX.thirst >= 60 and not approval_check(RogueX, 1700, "LO", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly", 1)
+                $ RogueX.change_face("sly", 1)
                 if "monogamous" not in RogueX.daily_history:
                     call change_Girl_stat(RogueX, "obedience", 90, -2)
                 ch_r "I might consider that, but you don't exactly make yourself available. . ."
                 return
             elif approval_check(RogueX, 1200, "LO", taboo_modifier=0) and RogueX.love >= RogueX.obedience:
 
-                $ RogueX.change_face("_sly", 1)
+                $ RogueX.change_face("sly", 1)
                 if "monogamous" not in RogueX.daily_history:
                     call change_Girl_stat(RogueX, "love", 90, 1)
                 ch_r "Aw, would that make you jealous?"
                 ch_r "I suppose I could restain myself. . ."
             elif approval_check(RogueX, 700, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly", 1,eyes = "_side")
+                $ RogueX.change_face("sly", 1,eyes = "side")
                 ch_r "If that's what you really want. . ."
             else:
 
-                $ RogueX.change_face("_sly", 1,brows = "_confused")
+                $ RogueX.change_face("sly", 1,brows = "confused")
                 ch_r "Who I \"hook up\" with is my own damned business."
                 return
             if "monogamous" not in RogueX.daily_history:
@@ -402,27 +402,27 @@ label Rogue_Monogamy:
         "Don't hook up with other girls." if "monogamous" not in RogueX.traits:
             if approval_check(RogueX, 900, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly", 1,eyes = "_side")
+                $ RogueX.change_face("sly", 1,eyes = "side")
                 ch_r "Ok."
             elif RogueX.thirst >= 60 and not approval_check(RogueX, 1700, "LO", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly", 1)
+                $ RogueX.change_face("sly", 1)
                 if "monogamous" not in RogueX.daily_history:
                     call change_Girl_stat(RogueX, "obedience", 90, -2)
                 ch_r "I might consider that, but you don't exactly make yourself available. . ."
                 return
             elif approval_check(RogueX, 550, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly", 1,eyes = "_side")
+                $ RogueX.change_face("sly", 1,eyes = "side")
                 ch_r "If that's what you really want. . ."
             elif approval_check(RogueX, 1400, "LO", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly", 1)
+                $ RogueX.change_face("sly", 1)
                 ch_r "Is that any way to ask a girl?"
                 ch_r "Still, I'll do it for you. . ."
             else:
 
-                $ RogueX.change_face("_sly", 1,brows = "_confused")
+                $ RogueX.change_face("sly", 1,brows = "confused")
                 ch_r "Who I \"hook up\" with is my own damned business."
                 return
             if "monogamous" not in RogueX.daily_history:
@@ -430,13 +430,13 @@ label Rogue_Monogamy:
             $ RogueX.add_word(1, 0,"monogamous","monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in RogueX.traits:
             if approval_check(RogueX, 700, "O", taboo_modifier=0):
-                $ RogueX.change_face("_sly", 1,eyes = "_side")
+                $ RogueX.change_face("sly", 1,eyes = "side")
                 ch_r "As you wish."
             elif approval_check(RogueX, 800, "L", taboo_modifier=0):
-                $ RogueX.change_face("_sly", 1)
+                $ RogueX.change_face("sly", 1)
                 ch_r "I hope you don't give me any reasons to want to. . ."
             else:
-                $ RogueX.change_face("_sly", 1,brows = "_confused")
+                $ RogueX.change_face("sly", 1,brows = "confused")
                 if "monogamous" not in RogueX.daily_history:
                     call change_Girl_stat(RogueX, "love", 90, -2)
                 ch_r "Oh? Well, glad I got your permission there."
@@ -455,31 +455,31 @@ label Rogue_Monogamy:
 label Rogue_Jumped:
 
     ch_p "Hey, Remember that time you threw yourself at me?"
-    $ RogueX.change_face("_sly", 1,brows = "_confused")
+    $ RogueX.change_face("sly", 1,brows = "confused")
     menu:
         ch_r "Yeah?"
         "Could you maybe just ask instead?" if "chill" not in RogueX.traits:
             if RogueX.thirst >= 60 and not approval_check(RogueX, 1500, "LO", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly", 1)
+                $ RogueX.change_face("sly", 1)
                 if "chill" not in RogueX.daily_history:
                     call change_Girl_stat(RogueX, "obedience", 90, -2)
                 ch_r "Maybe don't keep me waiting then. . ."
                 return
             elif approval_check(RogueX, 1000, "LO", taboo_modifier=0) and RogueX.love >= RogueX.obedience:
 
-                $ RogueX.change_face("_sly", 1)
+                $ RogueX.change_face("sly", 1)
                 if "chill" not in RogueX.daily_history:
                     call change_Girl_stat(RogueX, "love", 90, 1)
                 ch_r "Sorry, [RogueX.player_petname], I just got a little lonely. . ."
                 ch_r "I'll be good. . ."
             elif approval_check(RogueX, 500, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly", 1,eyes = "_side")
+                $ RogueX.change_face("sly", 1,eyes = "side")
                 ch_r "If that's what you really want. . ."
             else:
 
-                $ RogueX.change_face("_sly", 1,brows = "_confused")
+                $ RogueX.change_face("sly", 1,brows = "confused")
                 ch_r "I can't make any promises."
                 return
             if "chill" not in RogueX.daily_history:
@@ -488,27 +488,27 @@ label Rogue_Jumped:
         "Don't bother me like that." if "chill" not in RogueX.traits:
             if approval_check(RogueX, 900, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly", 1,eyes = "_side")
+                $ RogueX.change_face("sly", 1,eyes = "side")
                 ch_r "Ok."
             elif RogueX.thirst >= 60 and not approval_check(RogueX, 600, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly", 1)
+                $ RogueX.change_face("sly", 1)
                 if "chill" not in RogueX.daily_history:
                     call change_Girl_stat(RogueX, "obedience", 90, -2)
                 ch_r "Maybe don't keep me waiting then. . ."
                 return
             elif approval_check(RogueX, 450, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly", 1,eyes = "_side")
+                $ RogueX.change_face("sly", 1,eyes = "side")
                 ch_r "If that's what you really want. . ."
             elif approval_check(RogueX, 500, "LO", taboo_modifier=0) and not approval_check(RogueX, 500, "I", taboo_modifier=0):
 
-                $ RogueX.change_face("_sly", 1)
+                $ RogueX.change_face("sly", 1)
                 ch_r "You might want to watch your mouth."
                 ch_r "Still, I'll try to keep to myself. . ."
             else:
 
-                $ RogueX.change_face("_sly", 1,brows = "_confused")
+                $ RogueX.change_face("sly", 1,brows = "confused")
                 ch_r "No promises."
                 return
             if "chill" not in RogueX.daily_history:
@@ -516,13 +516,13 @@ label Rogue_Jumped:
             $ RogueX.add_word(1, 0,"chill","chill")
         "Knock yourself out.":
             if approval_check(RogueX, 800, "L", taboo_modifier=0):
-                $ RogueX.change_face("_sly", 1)
+                $ RogueX.change_face("sly", 1)
                 ch_r "Will do. . ."
             elif approval_check(RogueX, 700, "O", taboo_modifier=0):
-                $ RogueX.change_face("_sly", 1,eyes = "_side")
+                $ RogueX.change_face("sly", 1,eyes = "side")
                 ch_r "Yes sir."
             else:
-                $ RogueX.change_face("_sly", 1,brows = "_confused")
+                $ RogueX.change_face("sly", 1,brows = "confused")
                 if "chill" not in RogueX.daily_history:
                     call change_Girl_stat(RogueX, "love", 90, -2)
                 ch_r "Maybe. If I've got nothing better to do."
@@ -543,21 +543,21 @@ label Rogue_Not_Virgin:
     menu:
         "I noticed that when we had sex, you didn't seem to be a virgin."
         "Wasn't I your first time?":
-            $ RogueX.change_face("_bemused", 1)
+            $ RogueX.change_face("bemused", 1)
             call change_Girl_stat(RogueX, "love", 60, 5)
             call change_Girl_stat(RogueX, "obedience", 20, 15)
             ch_r "Oh, no! You definitely were, it's just. . . you know,"
             ch_r "I lead a pretty active lifestyle, so I lost that physical barrier years ago."
         "So you get around?":
-            $ RogueX.change_face("_sexy", 1)
-            $ RogueX.brows = "_angry"
+            $ RogueX.change_face("sexy", 1)
+            $ RogueX.brows = "angry"
             call change_Girl_stat(RogueX, "obedience", 30, 15)
             call change_Girl_stat(RogueX, "obedience", 60, 5)
             call change_Girl_stat(RogueX, "inhibition", 30, 15)
             call change_Girl_stat(RogueX, "inhibition", 60, 5)
             ch_r "Jerk, not like that. I tore it years ago in combat training."
         "Are you a slut?":
-            $ RogueX.change_face("_angry", 1)
+            $ RogueX.change_face("angry", 1)
             call change_Girl_stat(RogueX, "love", 30, -20, 1)
             call change_Girl_stat(RogueX, "love", 60, -40, 1)
             call change_Girl_stat(RogueX, "obedience", 30, 30)
@@ -594,7 +594,7 @@ label Rogue_SexChat:
                 else:
                     menu:
                         "Sex.":
-                            $ RogueX.change_face("_sly")
+                            $ RogueX.change_face("sly")
                             if RogueX.player_favorite_action == "sex":
                                 call change_Girl_stat(RogueX, "lust", 80, 5)
                                 ch_r "Yeah, I know that. . ."
@@ -605,15 +605,15 @@ label Rogue_SexChat:
                             elif RogueX.action_counter["sex"] >= 5:
                                 ch_r "Can't say as I mind a good roll in the hay."
                             elif not RogueX.action_counter["sex"]:
-                                $ RogueX.change_face("_perplexed")
+                                $ RogueX.change_face("perplexed")
                                 ch_r "Who {i}exactly{/i} are y'all having sex {i}with?{/i}"
                             else:
-                                $ RogueX.change_face("_bemused")
+                                $ RogueX.change_face("bemused")
                                 ch_r "Heh, [RogueX.player_petname], flithy mouth on you. . ."
                             $ RogueX.player_favorite_action = "sex"
                         "Anal.":
 
-                            $ RogueX.change_face("_sly")
+                            $ RogueX.change_face("sly")
                             if RogueX.player_favorite_action == "anal":
                                 call change_Girl_stat(RogueX, "lust", 80, 5)
                                 ch_r "So I hear. . ."
@@ -624,15 +624,15 @@ label Rogue_SexChat:
                             elif RogueX.action_counter["anal"] >= 10:
                                 ch_r "It's not a bad way to spend some time. . ."
                             elif not RogueX.action_counter["anal"]:
-                                $ RogueX.change_face("_perplexed")
+                                $ RogueX.change_face("perplexed")
                                 ch_r "Who {i}exactly{/i} are y'all fucking {i}with?{/i}"
                             else:
-                                $ RogueX.change_face("_bemused")
+                                $ RogueX.change_face("bemused")
                                 ch_r "Heh, heh, I . . . I don't {i}mind{/i} it. . ."
                             $ RogueX.player_favorite_action = "anal"
                         "Blowjobs.":
 
-                            $ RogueX.change_face("_sly")
+                            $ RogueX.change_face("sly")
                             if RogueX.player_favorite_action == "blowjob":
                                 call change_Girl_stat(RogueX, "lust", 80, 3)
                                 ch_r "I'm not surprised. . ."
@@ -643,15 +643,15 @@ label Rogue_SexChat:
                             elif RogueX.action_counter["blowjob"] >= 10:
                                 ch_r "I'm getting to enjoy it too . . ."
                             elif not RogueX.action_counter["blowjob"]:
-                                $ RogueX.change_face("_perplexed")
+                                $ RogueX.change_face("perplexed")
                                 ch_r "Who {i}exactly{/i} is sucking you off?"
                             else:
-                                $ RogueX.change_face("_bemused")
+                                $ RogueX.change_face("bemused")
                                 ch_r "I'm. . . getting used to the taste. . ."
                             $ RogueX.player_favorite_action = "blowjob"
                         "Titjobs.":
 
-                            $ RogueX.change_face("_sly")
+                            $ RogueX.change_face("sly")
                             if RogueX.player_favorite_action == "titjob":
                                 call change_Girl_stat(RogueX, "lust", 80, 5)
                                 ch_r "So I hear. . ."
@@ -662,15 +662,15 @@ label Rogue_SexChat:
                             elif RogueX.action_counter["titjob"] >= 10:
                                 ch_r "It's certainly an interesting experience . . ."
                             elif not RogueX.action_counter["titjob"]:
-                                $ RogueX.change_face("_perplexed")
+                                $ RogueX.change_face("perplexed")
                                 ch_r "Who {i}exactly{/i} is tit fucking you?"
                             else:
-                                $ RogueX.change_face("_bemused")
+                                $ RogueX.change_face("bemused")
                                 ch_r "I can't say as I blame you. . ."
                             $ RogueX.player_favorite_action = "titjob"
                         "Footjobs.":
 
-                            $ RogueX.change_face("_sly")
+                            $ RogueX.change_face("sly")
                             if RogueX.player_favorite_action == "footjob":
                                 call change_Girl_stat(RogueX, "lust", 80, 5)
                                 ch_r "Yeah, you've said that before. . ."
@@ -681,15 +681,15 @@ label Rogue_SexChat:
                             elif RogueX.action_counter["footjob"] >= 10:
                                 ch_r "It is pretty nice to touch someone like that . . ."
                             elif not RogueX.action_counter["footjob"]:
-                                $ RogueX.change_face("_perplexed")
+                                $ RogueX.change_face("perplexed")
                                 ch_r "Who {i}exactly{/i} is jerking you off?"
                             else:
-                                $ RogueX.change_face("_bemused")
+                                $ RogueX.change_face("bemused")
                                 ch_r "I do like the sensation. . ."
                             $ RogueX.player_favorite_action = "footjob"
                         "Handjobs.":
 
-                            $ RogueX.change_face("_sly")
+                            $ RogueX.change_face("sly")
                             if RogueX.player_favorite_action == "handjob":
                                 call change_Girl_stat(RogueX, "lust", 80, 5)
                                 ch_r "Yeah, you've said that before. . ."
@@ -700,16 +700,16 @@ label Rogue_SexChat:
                             elif RogueX.action_counter["handjob"] >= 10:
                                 ch_r "It is pretty nice to touch someone like that . . ."
                             elif not RogueX.action_counter["handjob"]:
-                                $ RogueX.change_face("_perplexed")
+                                $ RogueX.change_face("perplexed")
                                 ch_r "Who {i}exactly{/i} is jerking you off?"
                             else:
-                                $ RogueX.change_face("_bemused")
+                                $ RogueX.change_face("bemused")
                                 ch_r "I do like the sensation. . ."
                             $ RogueX.player_favorite_action = "handjob"
                         "Feeling you up.":
 
                             $ counter = RogueX.action_counter["fondle_breasts"]+ RogueX.action_counter["fondle_thighs"]+ RogueX.action_counter["suck_breasts"] + RogueX.action_counter["hotdog"]
-                            $ RogueX.change_face("_sly")
+                            $ RogueX.change_face("sly")
                             if RogueX.player_favorite_action == "fondle":
                                 call change_Girl_stat(RogueX, "lust", 80, 3)
                                 ch_r "Yeah, I think we've established that. . ."
@@ -720,16 +720,16 @@ label Rogue_SexChat:
                             elif counter >= 10:
                                 ch_r "It's nice to have someone who can really touch me . . ."
                             elif not counter:
-                                $ RogueX.change_face("_perplexed")
+                                $ RogueX.change_face("perplexed")
                                 ch_r "Who {i}exactly{/i} are you feeling up?"
                             else:
-                                $ RogueX.change_face("_bemused")
+                                $ RogueX.change_face("bemused")
                                 ch_r "I do like how that feels. . ."
                             $ RogueX.player_favorite_action = "fondle"
                             $ counter = 0
                         "Kissing you.":
 
-                            $ RogueX.change_face("_sly")
+                            $ RogueX.change_face("sly")
                             if RogueX.player_favorite_action == "kiss":
                                 call change_Girl_stat(RogueX, "love", 90, 3)
                                 ch_r "I've heard it before, but don't mind hearing it again. . ."
@@ -740,10 +740,10 @@ label Rogue_SexChat:
                             elif RogueX.action_counter["kiss"] >= 10:
                                 ch_r "I love kissing you too . . ."
                             elif not RogueX.action_counter["kiss"]:
-                                $ RogueX.change_face("_perplexed")
+                                $ RogueX.change_face("perplexed")
                                 ch_r "Who {i}exactly{/i} are you smooch'in?"
                             else:
-                                $ RogueX.change_face("_bemused")
+                                $ RogueX.change_face("bemused")
                                 ch_r "It's nice being able to kiss someone without hurting them. . ."
                             $ RogueX.player_favorite_action = "kiss"
 
@@ -751,15 +751,15 @@ label Rogue_SexChat:
             "What's your favorite thing to do?":
 
                 if not approval_check(RogueX, 800):
-                    $ RogueX.change_face("_perplexed")
+                    $ RogueX.change_face("perplexed")
                     ch_r "I don't think that's any of your business. . ."
                 else:
                     if RogueX.SEXP >= 50:
-                        $ RogueX.change_face("_sly")
+                        $ RogueX.change_face("sly")
                         ch_r "If you can't tell. . ."
                     else:
-                        $ RogueX.change_face("_bemused")
-                        $ RogueX.eyes = "_side"
+                        $ RogueX.change_face("bemused")
+                        $ RogueX.eyes = "side"
                         ch_r "I don't know, I guess maybe. . ."
 
 
@@ -803,27 +803,27 @@ label Rogue_SexChat:
 
             "Don't talk as much during sex." if "vocal" in RogueX.traits:
                 if "setvocal" in RogueX.daily_history:
-                    $ RogueX.change_face("_perplexed")
+                    $ RogueX.change_face("perplexed")
                     ch_r "We've been over this already."
                 else:
                     if approval_check(RogueX, 1000) and RogueX.obedience <= RogueX.love:
-                        $ RogueX.change_face("_bemused")
+                        $ RogueX.change_face("bemused")
                         call change_Girl_stat(RogueX, "obedience", 90, 1)
                         ch_r "Heh, ok, if that's what you want. . ."
                         $ RogueX.traits.remove("vocal")
                     elif approval_check(RogueX, 700, "O"):
-                        $ RogueX.change_face("_sadside")
+                        $ RogueX.change_face("sadside")
                         call change_Girl_stat(RogueX, "obedience", 90, 1)
                         ch_r "If that's what you want, [RogueX.player_petname]."
                         $ RogueX.traits.remove("vocal")
                     elif approval_check(RogueX, 600):
-                        $ RogueX.change_face("_sly")
+                        $ RogueX.change_face("sly")
                         call change_Girl_stat(RogueX, "love", 90, -3)
                         call change_Girl_stat(RogueX, "obedience", 50, -1)
                         call change_Girl_stat(RogueX, "inhibition", 90, 5)
                         ch_r "I'll say what I want, and you'll like it, [RogueX.player_petname]."
                     else:
-                        $ RogueX.change_face("_angry")
+                        $ RogueX.change_face("angry")
                         call change_Girl_stat(RogueX, "love", 90, -5)
                         call change_Girl_stat(RogueX, "obedience", 60, -3)
                         call change_Girl_stat(RogueX, "inhibition", 90, 10)
@@ -832,26 +832,26 @@ label Rogue_SexChat:
                     $ RogueX.daily_history.append("setvocal")
             "Talk dirty to me during sex." if "vocal" not in RogueX.traits:
                 if "setvocal" in RogueX.daily_history:
-                    $ RogueX.change_face("_perplexed")
+                    $ RogueX.change_face("perplexed")
                     ch_r "We've been over this already."
                 else:
                     if approval_check(RogueX, 1000) and RogueX.obedience <= RogueX.love:
-                        $ RogueX.change_face("_sly")
+                        $ RogueX.change_face("sly")
                         call change_Girl_stat(RogueX, "obedience", 90, 2)
                         ch_r "Heh, ok, if that's what you want. . ."
                         $ RogueX.traits.append("vocal")
                     elif approval_check(RogueX, 700, "O"):
-                        $ RogueX.change_face("_sadside")
+                        $ RogueX.change_face("sadside")
                         call change_Girl_stat(RogueX, "obedience", 90, 2)
                         ch_r "If that's what you want, [RogueX.player_petname]."
                         $ RogueX.traits.append("vocal")
                     elif approval_check(RogueX, 600):
-                        $ RogueX.change_face("_sly")
+                        $ RogueX.change_face("sly")
                         call change_Girl_stat(RogueX, "obedience", 90, 3)
                         ch_r "I can give it a shot, [RogueX.player_petname]."
                         $ RogueX.traits.append("vocal")
                     else:
-                        $ RogueX.change_face("_angry")
+                        $ RogueX.change_face("angry")
                         call change_Girl_stat(RogueX, "inhibition", 90, 5)
                         ch_r "I'll say what I want, when I want."
 
@@ -860,27 +860,27 @@ label Rogue_SexChat:
 
             "Don't do your own thing as much during sex." if "passive" not in RogueX.traits:
                 if "initiative" in RogueX.daily_history:
-                    $ RogueX.change_face("_perplexed")
+                    $ RogueX.change_face("perplexed")
                     ch_r "We've been over this already."
                 else:
                     if approval_check(RogueX, 1000) and RogueX.obedience <= RogueX.love:
-                        $ RogueX.change_face("_bemused")
+                        $ RogueX.change_face("bemused")
                         call change_Girl_stat(RogueX, "obedience", 90, 1)
                         ch_r "Heh, ok, lead the way. . ."
                         $ RogueX.traits.append("passive")
                     elif approval_check(RogueX, 700, "O"):
-                        $ RogueX.change_face("_sadside")
+                        $ RogueX.change_face("sadside")
                         call change_Girl_stat(RogueX, "obedience", 90, 1)
                         ch_r "I'll restrain myself then, [RogueX.player_petname]."
                         $ RogueX.traits.append("passive")
                     elif approval_check(RogueX, 600):
-                        $ RogueX.change_face("_sly")
+                        $ RogueX.change_face("sly")
                         call change_Girl_stat(RogueX, "love", 90, -3)
                         call change_Girl_stat(RogueX, "obedience", 50, -1)
                         call change_Girl_stat(RogueX, "inhibition", 90, 5)
                         ch_r "You know you don't want that, [RogueX.player_petname]."
                     else:
-                        $ RogueX.change_face("_angry")
+                        $ RogueX.change_face("angry")
                         call change_Girl_stat(RogueX, "love", 90, -5)
                         call change_Girl_stat(RogueX, "obedience", 60, -3)
                         call change_Girl_stat(RogueX, "inhibition", 90, 10)
@@ -889,26 +889,26 @@ label Rogue_SexChat:
                     $ RogueX.daily_history.append("initiative")
             "Take more initiative during sex." if "passive" in RogueX.traits:
                 if "initiative" in RogueX.daily_history:
-                    $ RogueX.change_face("_perplexed")
+                    $ RogueX.change_face("perplexed")
                     ch_r "We've been over this already."
                 else:
                     if approval_check(RogueX, 1000) and RogueX.obedience <= RogueX.love:
-                        $ RogueX.change_face("_bemused")
+                        $ RogueX.change_face("bemused")
                         call change_Girl_stat(RogueX, "obedience", 90, 1)
                         ch_r "Heh, I think I can handle that. . ."
                         $ RogueX.traits.remove("passive")
                     elif approval_check(RogueX, 700, "O"):
-                        $ RogueX.change_face("_sadside")
+                        $ RogueX.change_face("sadside")
                         call change_Girl_stat(RogueX, "obedience", 90, 1)
                         ch_r "I can do that, [RogueX.player_petname]."
                         $ RogueX.traits.remove("passive")
                     elif approval_check(RogueX, 600):
-                        $ RogueX.change_face("_sly")
+                        $ RogueX.change_face("sly")
                         call change_Girl_stat(RogueX, "obedience", 90, 3)
                         ch_r "I can certainly try, [RogueX.player_petname]."
                         $ RogueX.traits.remove("passive")
                     else:
-                        $ RogueX.change_face("_angry")
+                        $ RogueX.change_face("angry")
                         call change_Girl_stat(RogueX, "inhibition", 90, 5)
                         ch_r "If I want to, I will, but not because you say so."
 
@@ -950,7 +950,7 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
             return
         if Player.location != "bg_restaurant" and Player.location != "bg_halloween" and (not taboo or approval_check(RogueX, 800, "I")):
             if RogueX.location == Player.location and RogueX.thirst >= 30 and "refused" not in RogueX.daily_history and "quicksex" not in RogueX.daily_history:
-                $ RogueX.change_face("_sly", 1)
+                $ RogueX.change_face("sly", 1)
                 ch_r "Hey, do you want to get a little frisky?"
                 call Quick_Sex (RogueX)
                 return
@@ -1016,20 +1016,20 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
 
     elif Options[0] == "mandrill":
         $ RogueX.daily_history.append("cologne chat")
-        $ RogueX.change_face("_confused")
+        $ RogueX.change_face("confused")
         ch_r "(sniff, sniff). . . something kind of smells like monkey butt in here. . ."
-        $ RogueX.change_face("_sly", 1)
+        $ RogueX.change_face("sly", 1)
         ch_r ". . . but you're looking pretty handsome today, [RogueX.player_petname]."
     elif Options[0] == "purple":
         $ RogueX.daily_history.append("cologne chat")
-        $ RogueX.change_face("_sly", 1)
+        $ RogueX.change_face("sly", 1)
         ch_r "(sniff, sniff). . . hmm, you're smelling good today. . ."
         ch_r ". . . was there anything I could do to make you happy?"
     elif Options[0] == "corruption":
         $ RogueX.daily_history.append("cologne chat")
-        $ RogueX.change_face("_confused")
+        $ RogueX.change_face("confused")
         ch_r "(sniff, sniff). . . that's a pretty strong scent you've got there. . ."
-        $ RogueX.change_face("_sly")
+        $ RogueX.change_face("sly")
         ch_r ". . . I'm gettin some pretty naughty thoughts over here, [RogueX.player_petname]. . ."
 
     elif Options[0] == "blowjob":
@@ -1088,10 +1088,10 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
         call show_full_body(Girl)
 
     elif Options[0] == "seenpeen":
-        $ RogueX.change_face("_sly", 1)
+        $ RogueX.change_face("sly", 1)
         ch_r "You really did surprise me when you whipped that cock out."
         ch_r "I didn't know they looked so big up close."
-        $ RogueX.change_face("_bemused", 1)
+        $ RogueX.change_face("bemused", 1)
         call change_Girl_stat(RogueX, "love", 90, 5)
         $ RogueX.history.remove("seenpeen")
     elif Options[0] == "topless":
@@ -1105,10 +1105,10 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
         $ RogueX.history.remove("bottomless")
 
     elif Options[0] == "luv":
-        $ RogueX.change_face("_bemused", 1)
+        $ RogueX.change_face("bemused", 1)
         ch_r ". . ."
         ch_r "You know, time was, I really thought I'd end up alone, unable to touch anyone. . ."
-        $ RogueX.change_face("_smile")
+        $ RogueX.change_face("smile")
         ch_r "I'm really glad that I was able to find you."
         ch_r "I love you, [RogueX.player_petname]."
         menu:
@@ -1120,7 +1120,7 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
             "I love you too, [RogueX.petname].":
                 $ RogueX.name_check()
                 if _return:
-                    $ RogueX.change_face("_angry")
+                    $ RogueX.change_face("angry")
                     call change_Girl_stat(RogueX, "love", 90, -1)
                     call change_Girl_stat(RogueX, "obedience", 80, 10)
                     call change_Girl_stat(RogueX, "inhibition", 80, 4)
@@ -1129,12 +1129,12 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
                     call change_Girl_stat(RogueX, "obedience", 80, 4)
                     call change_Girl_stat(RogueX, "inhibition", 80, 4)
             "Yeah, same here.":
-                $ RogueX.change_face("_perplexed")
+                $ RogueX.change_face("perplexed")
                 call change_Girl_stat(RogueX, "love", 90, -1)
                 call change_Girl_stat(RogueX, "obedience", 80, 10)
                 call change_Girl_stat(RogueX, "inhibition", 80, 4)
             "Whatever.":
-                $ RogueX.change_face("_angry")
+                $ RogueX.change_face("angry")
                 call change_Girl_stat(RogueX, "love", 200, -10)
                 call change_Girl_stat(RogueX, "obedience", 80, 4)
                 call change_Girl_stat(RogueX, "inhibition", 80, 10)
@@ -1172,37 +1172,37 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
 
         $ D20 = renpy.random.randint(1, 16)
         if D20 == 1:
-            $ RogueX.change_face("_confused")
+            $ RogueX.change_face("confused")
             ch_r "I'm so nervous about this Genetics test with Professor McCoy. I don't get this stuff at all."
         elif D20 == 2:
-            $ RogueX.change_face("_sad")
+            $ RogueX.change_face("sad")
             ch_r "Feeling kinda down today, [RogueX.player_petname]. Family problems. It's. . .kinda complicated."
         elif D20 == 3:
-            $ RogueX.change_face("_sly")
+            $ RogueX.change_face("sly")
             ch_r "So, um. . .maybe you heard about the friends I used to hang out with? They're not all as bad as they seem. Mostly."
         elif D20 == 4:
-            $ RogueX.change_face("_smile")
+            $ RogueX.change_face("smile")
             ch_r "I had the best workout earlier in the Danger Room today! Wish you coulda seen me!"
         elif D20 == 5:
-            $ RogueX.change_face("_smile")
+            $ RogueX.change_face("smile")
             ch_r "Ever wonder what it would be like to be able to fly? That's gotta be the coolest power, right?"
         elif D20 == 6:
-            $ RogueX.change_face("_smile")
+            $ RogueX.change_face("smile")
             ch_r "Ever been out to Breakstone Lake, behind the Mansion? It's so nice and peaceful. Kinda reminds me of back home in Mississippi, during the summer. Just a little chillier."
         elif D20 == 7:
-            $ RogueX.change_face("_smile")
-            $ RogueX.eyes = "_surprised"
+            $ RogueX.change_face("smile")
+            $ RogueX.eyes = "surprised"
             ch_r "I just saw the coolest thing, when I was walking through the courtyard! A bunch of deer, in the woods, just over by the fence!"
-            $ RogueX.eyes = "_side"
+            $ RogueX.eyes = "side"
             ch_r "Their fur looked so. . .{i}soft{/i}. I wonder what they actually feel like?"
         elif D20 == 8:
-            $ RogueX.change_face("_smile")
+            $ RogueX.change_face("smile")
             ch_r "Hey, did you see the Avengers on the news this morning? Those guys make everything look {i}so{/i} easy!"
         elif D20 == 9:
-            $ RogueX.change_face("_smile")
+            $ RogueX.change_face("smile")
             ch_r "A couple of us are gonna get together and go for a jog around one of the Mansion's sub-basements tomorrow. You should come with us!"
         elif D20 == 10:
-            $ RogueX.change_face("_down")
+            $ RogueX.change_face("down")
             ch_r "I have {i}so{/i} much homework this week! And I {i}so{/i} don't feel like doing any of it!"
         elif D20 == 11:
             $ RogueX.change_face("startled")
@@ -1210,25 +1210,25 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
             ch_r "I don't know if I could handle that kind of responsibility."
             ch_r "Might be even worse than mine, in their own way."
         elif D20 == 12:
-            $ RogueX.change_face("_sad")
+            $ RogueX.change_face("sad")
             ch_r "The Mansion's a great place to live. . .but sometimes I get weirded out when I think how we could get attacked by some super-maniac any given second."
         elif D20 == 13:
-            $ RogueX.change_face("_smile")
+            $ RogueX.change_face("smile")
             ch_r "I love it when you get a really good night's sleep. Feels amazing!"
         elif D20 == 14:
-            $ RogueX.change_face("_bemused")
+            $ RogueX.change_face("bemused")
             ch_r "I heard they're thinking about maybe having a school dance this year. That could be. . .{i}interesting{/i}."
         elif D20 == 15:
-            $ RogueX.change_face("_smile")
+            $ RogueX.change_face("smile")
             ch_r "You been outside today? Wow, is it gorgeous!"
         elif D20 == 16:
-            $ RogueX.change_face("_smile")
+            $ RogueX.change_face("smile")
             ch_r "You know, I tagged Wolverine once,"
-            $ RogueX.change_face("_sadside")
-            $ RogueX.brows = "_confused"
+            $ RogueX.change_face("sadside")
+            $ RogueX.brows = "confused"
             ch_r "I still catch myself calling people \"bub\" from time to time."
         else:
-            $ RogueX.change_face("_smile")
+            $ RogueX.change_face("smile")
             ch_r "I like hanging out with you like this!"
     $ line = 0
     return
@@ -1239,7 +1239,7 @@ label Rogue_names:
     if approval_check(RogueX, 600, "L", taboo_modifier=0) or approval_check(RogueX, 300, "O", taboo_modifier=0):
         pass
     else:
-        $ RogueX.mouth = "_smile"
+        $ RogueX.mouth = "smile"
         ch_r "I'll call you what I like, [RogueX.player_petname], and you'll like it."
         return
     menu:
@@ -1297,47 +1297,47 @@ label Rogue_Pet:
 
                         $ RogueX.petname = "girl"
                         if "boyfriend" in RogueX.player_petnames or approval_check(RogueX, 500, "L"):
-                            $ RogueX.change_face("_sexy", 1)
+                            $ RogueX.change_face("sexy", 1)
                             ch_r "I sure am your girl, [RogueX.player_petname]."
                         else:
-                            $ RogueX.change_face("_angry")
+                            $ RogueX.change_face("angry")
                             ch_r "I ain't your girl, [RogueX.player_petname]."
                     "I think I'll call you \"boo\".":
 
                         $ RogueX.petname = "boo"
                         if "boyfriend" in RogueX.player_petnames or approval_check(RogueX, 500, "L"):
-                            $ RogueX.change_face("_sexy", 1)
+                            $ RogueX.change_face("sexy", 1)
                             ch_r "Aw, I am your boo, [RogueX.player_petname]."
                         else:
-                            $ RogueX.change_face("_angry")
+                            $ RogueX.change_face("angry")
                             ch_r "I ain't your boo, [RogueX.player_petname]."
                     "I think I'll call you \"bae\".":
 
                         $ RogueX.petname = "bae"
                         if "boyfriend" in RogueX.player_petnames or approval_check(RogueX, 500, "L"):
-                            $ RogueX.change_face("_sexy", 1)
+                            $ RogueX.change_face("sexy", 1)
                             ch_r "Aw, I am your bae, [RogueX.player_petname]."
                         else:
-                            $ RogueX.change_face("_angry")
+                            $ RogueX.change_face("angry")
                             ch_r "I ain't your bae, [RogueX.player_petname]."
                     "I think I'll call you \"baby\".":
 
                         $ RogueX.petname = "baby"
                         if "boyfriend" in RogueX.player_petnames or approval_check(RogueX, 500, "L"):
-                            $ RogueX.change_face("_sexy", 1)
+                            $ RogueX.change_face("sexy", 1)
                             ch_r "Aw, cute, [RogueX.player_petname]."
                         else:
-                            $ RogueX.change_face("_angry")
+                            $ RogueX.change_face("angry")
                             ch_r "I ain't your baby, [RogueX.player_petname]."
                     "I think I'll call you \"chere\".":
 
                         $ RogueX.petname = "chere"
                         if "lover" in RogueX.player_petnames or approval_check(RogueX, 600, "L"):
-                            $ RogueX.change_face("_sexy", 1)
+                            $ RogueX.change_face("sexy", 1)
                             ch_r "Oh, tre romantic, [RogueX.player_petname]."
                         else:
-                            $ RogueX.change_face("_angry", 1)
-                            $ RogueX.eyes = "_side"
+                            $ RogueX.change_face("angry", 1)
+                            $ RogueX.eyes = "side"
                             ch_r "That has some. . . bad memories, [RogueX.player_petname]."
                     "I think I'll call you \"sweetie\".":
 
@@ -1345,25 +1345,25 @@ label Rogue_Pet:
                         if "boyfriend" in RogueX.player_petnames or approval_check(RogueX, 500, "L"):
                             ch_r "Aw, that's sweet, [RogueX.player_petname]."
                         else:
-                            $ RogueX.change_face("_angry", 1)
+                            $ RogueX.change_face("angry", 1)
                             ch_r "That's a bit much, [RogueX.player_petname]."
                     "I think I'll call you \"sexy\".":
 
-                        $ RogueX.petname = "_sexy"
+                        $ RogueX.petname = "sexy"
                         if "lover" in RogueX.player_petnames or approval_check(RogueX, 900):
-                            $ RogueX.change_face("_sexy", 1)
+                            $ RogueX.change_face("sexy", 1)
                             ch_r "You're not so bad yourself, [RogueX.player_petname]."
                         else:
-                            $ RogueX.change_face("_angry", 1)
+                            $ RogueX.change_face("angry", 1)
                             ch_r "Inappropriate, [RogueX.player_petname]."
                     "I think I'll call you \"lover\".":
 
                         $ RogueX.petname = "lover"
                         if "lover" in RogueX.player_petnames or approval_check(RogueX, 900):
-                            $ RogueX.change_face("_sexy", 1)
+                            $ RogueX.change_face("sexy", 1)
                             ch_r "Oh, I love you too, [RogueX.player_petname]."
                         else:
-                            $ RogueX.change_face("_angry", 1)
+                            $ RogueX.change_face("angry", 1)
                             ch_r "Not any time soon, [RogueX.player_petname]."
                     "Back":
 
@@ -1374,75 +1374,75 @@ label Rogue_Pet:
                     "I think I'll call you \"slave\".":
                         $ RogueX.petname = "slave"
                         if "master" in RogueX.player_petnames or approval_check(RogueX, 700, "O"):
-                            $ RogueX.change_face("_bemused", 1)
+                            $ RogueX.change_face("bemused", 1)
                             ch_r "As you wish, [RogueX.player_petname]."
                         else:
-                            $ RogueX.change_face("_angry", 1)
+                            $ RogueX.change_face("angry", 1)
                             ch_r "I ain't anyone's slave, [RogueX.player_petname]."
                     "I think I'll call you \"pet\".":
 
                         $ RogueX.petname = "pet"
                         if "master" in RogueX.player_petnames or approval_check(RogueX, 600, "O"):
-                            $ RogueX.change_face("_bemused", 1)
+                            $ RogueX.change_face("bemused", 1)
                             ch_r "Hmm, make sure to pet me, [RogueX.player_petname]."
                         else:
-                            $ RogueX.change_face("_angry", 1)
+                            $ RogueX.change_face("angry", 1)
                             ch_r "I ain't your pet, [RogueX.player_petname]."
                     "I think I'll call you \"slut\".":
 
                         $ RogueX.petname = "slut"
                         if "sex friend" in RogueX.player_petnames or approval_check(RogueX, 1000, "OI"):
-                            $ RogueX.change_face("_sexy")
+                            $ RogueX.change_face("sexy")
                             ch_r "You know me too well, [RogueX.player_petname]."
                         else:
-                            $ RogueX.change_face("_angry", 1)
-                            $ RogueX.mouth = "_surprised"
+                            $ RogueX.change_face("angry", 1)
+                            $ RogueX.mouth = "surprised"
                             ch_r "Well I never!"
                     "I think I'll call you \"whore\".":
 
                         $ RogueX.petname = "whore"
                         if "fuckbuddy" in RogueX.player_petnames or approval_check(RogueX, 1100, "OI"):
-                            $ RogueX.change_face("_sly")
+                            $ RogueX.change_face("sly")
                             ch_r "I guess I am. . ."
                         else:
-                            $ RogueX.change_face("_angry", 1)
+                            $ RogueX.change_face("angry", 1)
                             ch_r "You look'in to start something, [RogueX.player_petname]?"
                     "I think I'll call you \"sugartits\".":
 
                         $ RogueX.petname = "sugartits"
                         if "sex friend" in RogueX.player_petnames or approval_check(RogueX, 1500):
-                            $ RogueX.change_face("_sly", 1)
+                            $ RogueX.change_face("sly", 1)
                             ch_r "Heh."
                         else:
-                            $ RogueX.change_face("_angry", 1)
+                            $ RogueX.change_face("angry", 1)
                             ch_r "Better not to my face, [RogueX.player_petname]."
                     "I think I'll call you \"sex friend\".":
 
                         $ RogueX.petname = "sex friend"
                         if "sex friend" in RogueX.player_petnames or approval_check(RogueX, 600, "I"):
-                            $ RogueX.change_face("_sly")
+                            $ RogueX.change_face("sly")
                             ch_r "Rreow. . ."
                         else:
-                            $ RogueX.change_face("_angry", 1)
+                            $ RogueX.change_face("angry", 1)
                             ch_r "Hey, no need to advertise, [RogueX.player_petname]."
                     "I think I'll call you \"fuckbuddy\".":
 
                         $ RogueX.petname = "fuckbuddy"
                         if "fuckbuddy" in RogueX.player_petnames or approval_check(RogueX, 700, "I"):
-                            $ RogueX.change_face("_sly")
+                            $ RogueX.change_face("sly")
                             ch_r "That sounds about right, [RogueX.player_petname]."
                         else:
-                            $ RogueX.change_face("_angry", 1)
-                            $ RogueX.mouth = "_surprised"
+                            $ RogueX.change_face("angry", 1)
+                            $ RogueX.mouth = "surprised"
                             ch_r "Inappropriate, [RogueX.player_petname]."
                     "I think I'll call you \"baby girl\".":
 
                         $ RogueX.petname = "baby girl"
                         if "daddy" in RogueX.player_petnames or approval_check(RogueX, 1200):
-                            $ RogueX.change_face("_smile", 1)
+                            $ RogueX.change_face("smile", 1)
                             ch_r "You know it, [RogueX.player_petname]."
                         else:
-                            $ RogueX.change_face("_angry", 1)
+                            $ RogueX.change_face("angry", 1)
                             ch_r "I ain't your baby girl, [RogueX.player_petname]."
                     "Back":
 
@@ -1457,7 +1457,7 @@ label Rogue_Pet:
 
 label Rogue_Rename:
 
-    $ RogueX.mouth = "_smile"
+    $ RogueX.mouth = "smile"
     ch_r "Yeah? What of it?"
     menu:
         extend ""
@@ -1533,11 +1533,11 @@ label Rogue_Summon(approval_bonus=approval_bonus):
     $ RogueX.change_outfit()
     if "no_summon" in RogueX.recent_history:
 
-        if "_angry" in RogueX.recent_history:
+        if "angry" in RogueX.recent_history:
             ch_r "What part of \"no\" don't you understand?"
         elif RogueX.recent_history.count("no_summon") > 1:
             ch_r "I already told you no, take a hint."
-            $ RogueX.recent_history.append("_angry")
+            $ RogueX.recent_history.append("angry")
         elif time_index > 2:
             ch_r "I told you it was too late for that tonight."
         else:
