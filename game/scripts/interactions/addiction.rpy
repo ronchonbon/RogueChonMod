@@ -1740,7 +1740,7 @@ label addiction_fix(Girl):
     call shift_focus(Girl)
 
     $ Girl.location = Player.location
-    $ Girl.change_outfit()
+    $ Girl.change_Outfit()
 
     call Girls_arrive(Girl)
 

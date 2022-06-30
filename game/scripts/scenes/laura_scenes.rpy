@@ -2021,9 +2021,9 @@ label Laura_Fuckbuddy:
     $ LauraX.location = Player.location
     call shift_focus (LauraX)
     call set_the_scene
-    $ LauraX.outfit_name = "casual1"
-    $ LauraX.today_outfit_name = "casual1"
-    $ LauraX.change_outfit("casual1")
+    $ LauraX.outfit_name = "first_casual"
+    $ LauraX.today_outfit_name = "first_casual"
+    $ LauraX.change_Outfit("first_casual")
     call show_Girl (LauraX)
     call set_Character_taboos
     $ Player.primary_action = "masturbation"
@@ -2319,8 +2319,8 @@ label Laura_Dressup:
     $ LauraX.location = Player.location
     call set_the_scene
 
-    $ LauraX.outfit_name = "casual1"
-    $ LauraX.change_outfit("casual1")
+    $ LauraX.outfit_name = "first_casual"
+    $ LauraX.change_Outfit("first_casual")
 
     call show_Girl(LauraX, transition = vpunch)
 
@@ -2371,7 +2371,7 @@ label Laura_Dressup:
     $ KittyX.location = Player.location
     call set_the_scene
     $ KittyX.outfit_name = KittyX.today_outfit_name
-    $ KittyX.change_outfit()
+    $ KittyX.change_Outfit()
     call show_Girl (KittyX)
 
     $ KittyX.change_face("smile")
@@ -2505,8 +2505,8 @@ label Laura_Dressup3:
     "You can't help but feel curious. . ."
 
     $ KittyX.outfit_name = KittyX.today_outfit_name
-    $ KittyX.change_outfit()
-    $ LauraX.change_outfit("nude")
+    $ KittyX.change_Outfit()
+    $ LauraX.change_Outfit("nude")
     $ LauraX.outfit["bra"] = "wolvie_bra"
     $ LauraX.outfit["underwear"] = "wolvie_panties"
     menu:
@@ -2690,7 +2690,7 @@ label Laura_Dressup3:
                 call Laura_First_Topless
                 call Laura_First_Bottomless (1)
                 pause 1
-                $ LauraX.change_outfit(LauraX.today_outfit_name,)
+                $ LauraX.change_Outfit(LauraX.today_outfit_name,)
                 "And then puts on her usual outfit."
 
                 if approval_check(KittyX, 1200):

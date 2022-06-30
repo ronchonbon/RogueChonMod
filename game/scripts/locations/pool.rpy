@@ -340,7 +340,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 $ Girl.outfit["top"] = ""
                 call expression Girl.tag + "_First_Topless"
                 if Type == "no_panties":
-                    $ Girl.outfit["bottom"] = ""
+                    $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
                     $ Girl.outfit["hose"] = ""
                     call expression Girl.tag + "_First_Bottomless"
                 $ Girl.add_word(1,"tan","tan")
@@ -383,7 +383,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             call expression Girl.tag + "_First_Topless"
 
             if Type == "legs" or Type == "both":
-                $ Girl.outfit["bottom"] = ""
+                $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
                 $ Girl.outfit["hose"] = ""
             if Type == "panties" or Type == "both":
                 $ Girl.outfit["underwear"] = ""
@@ -419,7 +419,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             if Type == "over":
                 $ Girl.outfit["top"] = ""
             if Type == "legs":
-                $ Girl.outfit["bottom"] = ""
+                $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
                 $ Girl.outfit["hose"] = ""
             $ Girl.add_word(1,"tan","tan")
 
@@ -471,7 +471,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             $ Girl.add_word(1,"no_tan","no_tan")
             return
         if not Girl.outfit["bra"] and not Girl.outfit["top"] and not Girl.outfit["underwear"] and not Girl.outfit["bottom"] and Girl.outfit["hose"] != "pantyhose":
-            $ Girl.change_outfit("nude")
+            $ Girl.change_Outfit("nude")
         $ Mod = 0
         $ line = 0
         if Girl.check_clothing():
@@ -613,11 +613,11 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
             $ Girl.outfit["bra"] = ""
             call expression Girl.tag + "_First_Topless"
 
-            $ Girl.outfit["bottom"] = ""
+            $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
             $ Girl.outfit["hose"] = ""
             $ Girl.outfit["underwear"] = ""
             call expression Girl.tag + "_First_Bottomless"
-            $ Girl.change_outfit("nude")
+            $ Girl.change_Outfit("nude")
             $ Girl.add_word(1,"dip","dip")
 
         elif line == "sorry":
@@ -669,12 +669,12 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
 
                         show black_screen onlayer black
                         "She goes and changes into her suit. . ."
-                        $ Girl.change_outfit("swimwear")
+                        $ Girl.change_Outfit("swimwear")
                         hide black_screen onlayer black
                         $ Girl.add_word(1,"no_dip","no_dip")
                         $ Count = 1
                     else:
-                        if not Girl.change_outfit("swimwear"):
+                        if not Girl.change_Outfit("swimwear"):
                             $ Count = 0
                     if not Count:
 
@@ -713,7 +713,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                                 return
                         $ Girl.outfit["top"] = ""
                         "She starts to strip down."
-                        $ Girl.outfit["bottom"] = ""
+                        $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
                         $ Girl.outfit["hose"] = ""
                         "And ends up in her underwear."
                         $ Girl.seen_underwear = 1
@@ -866,13 +866,12 @@ label wardrobe_malfunction(Girl):
     return
 
 label swim:
-    $ D20 = renpy.random.randint(1, 20)
-
     $ Player.daily_history.append("swim")
 
     python:
         Swimmers = []
         Chillers = []
+        Changers = []
 
         for G in Present:
             if approval_check(G, 700):
@@ -881,53 +880,72 @@ label swim:
                 elif G.Wardrobe.current_Outfit.fully_nude:
                     Swimmers.append(G)
                 else:
-                    if "swimwear" not in self.Wardrobe.Outfits.keys():
-                        if self.tag == "Rogue":
+                    if "swimwear" not in G.Wardrobe.Outfits.keys():
+                        if G == RogueX:
                             ch_r("I don't really have a swimsuit I could wear. . .")
-                        elif self.tag == "Kitty":
+                        elif G == KittyX:
                             ch_k("I wish I had something cute to wear, but I don't. . .")
-                        elif self.tag == "Emma":
+                        elif G == EmmaX:
                             ch_e("I really don't own the proper attire. . .")
-                        elif self.tag == "Laura":
+                        elif G == LauraX:
                             ch_l("Don't have a suit. . .")
-                        elif self.tag == "Jean":
+                        elif G == JeanX:
                             ch_j("I might, if you buy me a suit. . .")
-                        elif self.tag == "Storm":
+                        elif G == StormX:
                             ch_s("I -am- afraid I don't have a suit. . .")
-                        elif self.tag == "Jubes":
+                        elif G == JubesX:
                             ch_v("I haven't picked out a suit yet. . .")
 
                         Chillers.append(G)
-                    elif self.tag == "Kitty" and "blue_skirt" not in self.Wardrobe.Clothes and self.inhibition <= 400:
+                    elif G == KittyX and "blue_skirt" not in G.Wardrobe.Clothes and G.inhibition <= 400:
                         ch_k("I don't know, I do have a suit, but it's a little daring. . .")
                         ch_k("If only I had a little skirt or something. . .")
 
                         Chillers.append(G)
                     else:
-                        G.change_Outfit("swimwear")
+                        Changers.append(G)
 
-                        Swimmers.append(G)
+    if Changers:
+        show black_screen onlayer black
+
+        pause 0.4
+
+        $ temp_Girls = Changers[:]
+
+        while temp_Girls:
+            $ temp_Girls[0].change_Outfit("swimwear", instant = True)
+
+            $ temp_Girls.remove(temp_Girls[0])
+
+        hide black_screen onlayer black
 
     if len(Swimmers) > 1 and len(Chillers) > 1:
         "Some of the girls get changed and join you, while the others chill out poolside."
     elif len(Swimmers) > 1 and Chillers:
         "[Chillers[0].name] chills out poolside while the rest of the girls get changed and join you."
+    elif len(Swimmers) > 1:
+        "The girls get changed and join you."
     elif Swimmers and len(Chillers) > 1:
         "[Swimmers[0].name] gets changed and joins you while the rest of the girls chill out poolside."
-    elif Swimmers and Chillers:
-        "[Swimmers[0].name] gets changed and joins you while [Chillers[0].name] chills out poolside."
     elif Swimmers:
         "[Swimmers[0].name] gets changed and joins you."
+    elif len(Chillers) > 1:
+        "The girls chill out poolside."
+    elif Swimmers and Chillers:
+        "[Swimmers[0].name] gets changed and joins you while [Chillers[0].name] chills out poolside."
     elif Chillers:
         "[Chillers[0].name] chills out poolside."
 
     call show_swimming(Swimmers[:])
 
+    $ D20 = renpy.random.randint(1, 20)
+
     if D20 >= 15 and Swimmers:
         call wardrobe_malfunction (Swimmers[0])
+
     if D20 >= 11:
         "You take a nice, refreshing swim."
-    elif D20 == 2:
+    elif D20 < 3:
         "You join some of the others in a rousing game of Marco Polo."
     elif D20 == 3:
         "You manage to snag one of the floating chairs and drift lazily on the water."
@@ -961,7 +979,7 @@ label swim:
     $ temp_Girls = Swimmers[:]
 
     while temp_Girls:
-        call show_Girl(temp_Girls[0], sprite_layer = 6, color_transform = reset_zoom_instantly, transition = dissolve)
+        call show_Girl(temp_Girls[0], sprite_layer = 6, animation_transform = reset_zoom_instantly, transition = dissolve)
 
         $ temp_Girls.remove(temp_Girls[0])
 
@@ -983,10 +1001,8 @@ label show_swimming(Swimmers):
 
         $ x_position = renpy.random.random()
 
-        if x_position < 0.2:
-            $ x_position = 0.2
-        elif x_position > 0.8:
-            $ x_position = 0.8
+        while x_position < 0.3 or x_position > 0.7:
+            $ x_position = renpy.random.random()
 
         call show_Girl(Swimmers[0], sprite_layer = 1, animation_transform = swimming(x_position), transition = dissolve)
 

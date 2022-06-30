@@ -46,7 +46,7 @@ label enter_main_sex_menu(Girl):
         if Girl.location == Player.location:
             call sex_menu_caught_or_angry_lines(Girl)
 
-        $ Girl.change_outfit()
+        $ Girl.change_Outfit()
         $ Girl.drain_word("caught", 1, 0)
 
         return

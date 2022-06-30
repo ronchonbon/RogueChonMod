@@ -8,6 +8,7 @@ label meet_Kitty:
     $ KittyX.location = Player.location
     $ KittyX.arm_pose = 1
     $ KittyX.change_face("surprised")
+    $ KittyX.change_Outfit("first_casual", instant = True)
 
     call get_color_transform
     $ color_transform = _return
@@ -2055,7 +2056,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
 
     elif line == "legs":
         $ line = Girl.outfit["bottom"]
-        $ Girl.outfit["bottom"] = ""
+        $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
         call expression Girl.tag + "_First_Bottomless" pass (1)
         "She reaches down and snags [Girl.name]'s [line], tugging them through her body."
 
@@ -2173,7 +2174,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
     if Girl == JeanX and approval < 2:
         "With a quick nod, her clothes come flying back to her."
         $ Girl.drain_word("yoinked")
-        $ Girl.change_outfit()
+        $ Girl.change_Outfit()
         "[KittyX.name]'s left a little dazed."
     elif TempBonus > 0:
         if approval < 2:

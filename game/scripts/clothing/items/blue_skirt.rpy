@@ -1,9 +1,9 @@
-init python:
+init -1 python:
 
     def blue_skirt():
         name = "blue skirt"
         image_string = "blue_skirt"
-        
+
         clothing_type = "skirt"
 
         Owner_names = ["Kitty"]
@@ -11,12 +11,12 @@ init python:
         dialogue_lines = {
             }
 
+        shame = -2
+
         hides = ["pussy"]
         covers = ["pussy"]
 
         number_of_states = 2
-
-        menu_image = None
 
         poses = [
             "arm pose 1",
@@ -28,4 +28,4 @@ init python:
             "sex",
             "doggy"]
 
-        return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, hides = hides, covers = covers, number_of_states = number_of_states, menu_image = menu_image, poses = poses)
+        return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

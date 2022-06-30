@@ -1241,7 +1241,7 @@ label Rogue_Fuckbuddy_Jerk:
         $ RogueX.outfit["top"] = 0
         $ RogueX.outfit["bra"] = 0
         ch_r "I offer these things on a silver platter, and nothing!"
-        $ RogueX.change_outfit()
+        $ RogueX.change_Outfit()
         ch_r "Look, I don't care what you call it. Just let me know if you want a tumble."
         if simulation:
             return True

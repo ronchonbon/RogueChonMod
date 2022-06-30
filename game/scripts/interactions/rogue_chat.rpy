@@ -1530,7 +1530,6 @@ label Rogue_Personality(counter=0):
 
 
 label Rogue_Summon(approval_bonus=approval_bonus):
-    $ RogueX.change_outfit()
     if "no_summon" in RogueX.recent_history:
 
         if "angry" in RogueX.recent_history:
@@ -1786,7 +1785,6 @@ label Rogue_Summon(approval_bonus=approval_bonus):
         call Girls_arrive (RogueX)
         return
     call set_Character_taboos
-    $ RogueX.change_outfit()
     $ RogueX.location = Player.location
     call set_the_scene
     return

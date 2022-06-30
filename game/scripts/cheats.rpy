@@ -61,8 +61,8 @@ label cheat_editor(Girl):
                         $ Girl.addiction -= 10
                     "Back":
                         pass
-            # "Wardrobe":
-            #     call wardrobe_editor(Girl)
+            "Wardrobe":
+                call wardrobe_editor(Girl)
             "Unlock all Girls":
                 python:
                     for G in [RogueX, KittyX]:
@@ -100,6 +100,10 @@ label cheat_editor(Girl):
             "Unlock all clothes":
                 python:
                     for G in all_Girls:
+                        for C in all_Clothes:
+                            if G.tag in C.Owner_names:
+                                if C.name not in G.Wardrobe.Clothes.keys():
+                                    G.Wardrobe.Clothes[C.name] = C
 
             "Return":
                 call checkout
@@ -147,21 +151,38 @@ label wardrobe_editor(Girl):
                             jump wardrobe_menu
             "Emotions":
                 call face_editor(Girl)
+            "Wardrobe":
+                $ quit = False
+
+                while not quit:
+                    call screen Clothing_picker(Girl)
+
+                    if _return != "quit":
+                        $ Clothing_name = _return
+
+                        $ currently_wearing = False
+
+                        python:
+                            for Clothing in Girl.Wardrobe.current_Outfit.Clothes.values():
+                                if Clothing:
+                                    if Clothing.name == Clothing_name:
+                                        currently_wearing = True
+
+                                        break
+
+                        if currently_wearing:
+                            $ Girl.change_out_of(Girl.Wardrobe.Clothes[Clothing_name].type)
+                        else:
+                            $ Girl.change_into(Clothing_name)
+                    else:
+                        $ quit = True
             "Misc":
                 while True:
                     menu:
                         "Toggle arm pose":
                             if Girl.arm_pose == 1:
-                                if Girl == JeanX and Girl.outfit["bodysuit"] == "sci_fi":
-                                    $ Girl.outfit["bodysuit"] = ""
-
                                 $ Girl.arm_pose = 2
                             else:
-                                if Girl == EmmaX and Girl.outfit["bodysuit"] == "domme_suit":
-                                    $ Girl.outfit["bodysuit"] = ""
-                                elif Girl == EmmaX and Girl.outfit["gloves"] == "spiked_bracelets":
-                                    $ Girl.outfit["gloves"] = ""
-
                                 $ Girl.arm_pose = 1
                         "Toggle wet look":
                             if not Girl.wet:

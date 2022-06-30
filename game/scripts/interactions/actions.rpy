@@ -415,9 +415,11 @@ label action_cycle(Girl, action):
             return [action, context]
 
         if action in breast_actions:
-            if Girl.lust >= 50 and Girl.breasts_covered and (Girl.outfit["bra"] or Girl.outfit["top"]):
+            if Girl.lust >= 50 and Girl.Outfit.breasts_covered:
                 call pulls_off_top_narration(Girl)
-                call expose_breasts(Girl)
+
+                $ Girl.expose_breasts()
+
                 call expression Girl.tag + "_First_Topless"
 
     call end_of_action_reactions(Girl, action)

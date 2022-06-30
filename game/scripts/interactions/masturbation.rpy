@@ -78,7 +78,7 @@ label masturbate(Girl, context = None):
                             call well_in_hand_disapproved_lines(Girl, "masturbation")
 
             if not accepted:
-                $ Girl.change_outfit()
+                $ Girl.change_Outfit()
                 $ Girl.arm_pose = 1
                 $ Girl.remaining_actions -= 1
 
@@ -430,7 +430,7 @@ label after_masturbation(Girl, context):
                 return "continue"
             "I'm good here. [[Stop]":
                 if Girl.love < 800 and Girl.inhibition < 500 and Girl.obedience < 500:
-                    $ Girl.change_outfit()
+                    $ Girl.change_Outfit()
 
                 $ Girl.change_face("normal")
                 $ Girl.brows = "confused"

@@ -31,3 +31,5 @@ game/cache/screens.rpyb
 game/cache/shaders.txt
 
 game/cache/pyanalysis.rpyb
+
+game/cache/py3analysis.rpyb

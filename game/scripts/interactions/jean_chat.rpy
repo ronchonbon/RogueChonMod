@@ -1759,7 +1759,7 @@ label Jean_Personality(counter=0):
 
 
 label Jean_Summon(approval_bonus=approval_bonus):
-    $ JeanX.change_outfit()
+    $ JeanX.change_Outfit()
     if "no_summon" in JeanX.recent_history:
         if "angry" in JeanX.recent_history:
             ch_j "Go away!"
@@ -2016,7 +2016,7 @@ label Jean_Summon(approval_bonus=approval_bonus):
         return
     $ JeanX.location = Player.location
     call set_Character_taboos
-    $ JeanX.change_outfit()
+    $ JeanX.change_Outfit()
     call set_the_scene
     return
 
@@ -2255,15 +2255,15 @@ label Jean_Leave:
                         $ JeanX.outfit["underwear"] = "green_panties"
                     if approval_check(JeanX, 1200, taboo_modifier=4):
                         $ line = JeanX.outfit["bottom"]
-                        $ JeanX.outfit["bottom"] = ""
+                        $ JeanX.Outfit.remove_Clothing(["pants", "skirt"])
                         "She pulls off her [line] and slips on the [JeanX.outfit[underwear]]."
                     elif JeanX.outfit["bottom"] == "skirt":
                         "She pulls out her [JeanX.outfit[underwear]] and pulls them up under her skirt."
-                        $ JeanX.outfit["bottom"] = ""
+                        $ JeanX.Outfit.remove_Clothing(["pants", "skirt"])
                         "Then she drops the skirt to the floor."
                     else:
                         $ line = JeanX.outfit["bottom"]
-                        $ JeanX.outfit["bottom"] = ""
+                        $ JeanX.Outfit.remove_Clothing(["pants", "skirt"])
                         "She steps away a moment and then comes back wearing only the [JeanX.outfit[underwear]]."
                     return
                 else:
@@ -2449,7 +2449,7 @@ label Jean_Leave:
                             call Jean_First_Bottomless
                     elif approval_check(JeanX, 1200, taboo_modifier=4):
                         $ temp_bottom = JeanX.outfit["bottom"]
-                        $ JeanX.outfit["bottom"] = ""
+                        $ JeanX.Outfit.remove_Clothing(["pants", "skirt"])
                         pause 0.5
                         $ JeanX.outfit["bottom"] = temp_bottom
                         "She pulls off her [JeanX.outfit[bottom]] and [line], then pulls the [JeanX.outfit[bottom]] back on."

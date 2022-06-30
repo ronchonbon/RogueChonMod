@@ -629,14 +629,14 @@ label change_attributes(Girl):
     while True:
         menu:
             ch_p "Let's talk about you."
-            "Your wardrobe.":
-                ch_p "I wanted to talk about your style."
-
-                if Player.location == "bg_halloween":
-                    Girl.voice "Not at the party. . ."
-                else:
-                    call set_Character_taboos
-                    call change_wardrobe(Girl)
+            # "Your wardrobe.":
+            #     ch_p "I wanted to talk about your style."
+            #
+            #     if Player.location == "bg_halloween":
+            #         Girl.voice "Not at the party. . ."
+            #     else:
+            #         call set_Character_taboos
+            #         call change_wardrobe(Girl)
             "Shift her personality" if approval_check(Girl, 900, "L", taboo_modifier=0) or approval_check(Girl, 900, "O", taboo_modifier=0) or approval_check(Girl, 900, "I", taboo_modifier=0):
                 ch_p "Could we talk about us?"
 

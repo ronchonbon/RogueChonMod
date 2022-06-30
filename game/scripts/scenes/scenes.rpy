@@ -2347,7 +2347,7 @@ label PhoneSex(Girl=0):
     hide PhoneSex
 
     call get_dressed
-    $ Girl.change_outfit(check_if_yoinked = True)
+    $ Girl.change_Outfit(check_if_yoinked = True)
     call checkout
     call reset_player
     $ Player.recent_history.remove("phonesex")
@@ -2442,7 +2442,7 @@ label Rogue_First_Topless(Silent=0, Templine=0):
                     if Templine == "bad":
                         call change_Girl_stat(RogueX, "love", 90, -20)
                         ch_r "Yeah, that's enough outta you, [RogueX.player_petname]."
-                        $ RogueX.change_outfit()
+                        $ RogueX.change_Outfit()
                         $ RogueX.recent_history.append("no_topless")
                         $ RogueX.daily_history.append("no_topless")
                         $ RogueX.recent_history.append("angry")
@@ -2591,7 +2591,7 @@ label Kitty_First_Topless(Silent=0, Templine=0):
                     if Templine == "bad":
                         call change_Girl_stat(KittyX, "love", 90, -20)
                         ch_k "Well you sure know how to ruin a mood."
-                        $ KittyX.change_outfit()
+                        $ KittyX.change_Outfit()
                         $ KittyX.recent_history.append("no_topless")
                         $ KittyX.daily_history.append("no_topless")
                         $ KittyX.recent_history.append("angry")
@@ -2790,7 +2790,7 @@ label Emma_First_Topless(Silent=0, Templine=0):
                     if Templine == "bad":
                         call change_Girl_stat(EmmaX, "love", 90, -20)
                         ch_e "I think you've seen enough for now, [EmmaX.player_petname]."
-                        $ EmmaX.change_outfit()
+                        $ EmmaX.change_Outfit()
                         $ EmmaX.recent_history.append("no_topless")
                         $ EmmaX.daily_history.append("no_topless")
                         $ EmmaX.recent_history.append("angry")
@@ -2988,7 +2988,7 @@ label Laura_First_Topless(Silent=0, Templine=0):
                     if Templine == "bad":
                         call change_Girl_stat(LauraX, "love", 90, -20)
                         ch_l "Still kinda rude though."
-                        $ LauraX.change_outfit()
+                        $ LauraX.change_Outfit()
                         $ LauraX.recent_history.append("no_topless")
                         $ LauraX.daily_history.append("no_topless")
                         $ LauraX.recent_history.append("angry")
@@ -3209,7 +3209,7 @@ label Jean_First_Topless(Silent=0, Templine=0):
                     if Templine == "bad":
                         call change_Girl_stat(JeanX, "love", 90, -20)
                         ch_j "Still, inappropriate on your part!"
-                        $ JeanX.change_outfit()
+                        $ JeanX.change_Outfit()
                         $ JeanX.recent_history.append("no_topless")
                         $ JeanX.daily_history.append("no_topless")
                         $ JeanX.recent_history.append("angry")
@@ -3443,7 +3443,7 @@ label Jubes_First_Topless(Silent=0, Templine=0):
                     if Templine == "bad":
                         call change_Girl_stat(JubesX, "love", 90, -20)
                         ch_v "Still, you don't just -say- something like that!"
-                        $ JubesX.change_outfit()
+                        $ JubesX.change_Outfit()
                         $ JubesX.recent_history.append("no_topless")
                         $ JubesX.daily_history.append("no_topless")
                         $ JubesX.recent_history.append("angry")

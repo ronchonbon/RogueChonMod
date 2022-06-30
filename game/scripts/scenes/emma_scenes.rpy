@@ -674,7 +674,7 @@ label Emma_Caught_Classroom:
 
         $ multi_action = True
 
-        $ EmmaX.change_outfit()
+        $ EmmaX.change_Outfit()
 
         "[EmmaX.name] collects her things and strides toward the door."
         "She turns back with her hand on the door."
@@ -770,7 +770,7 @@ label Emma_Detention:
 
     show black_screen onlayer black
 
-    $ EmmaX.change_outfit()
+    $ EmmaX.change_Outfit()
     $ EmmaX.change_face("sly")
     $ EmmaX.arm_pose = 2
 
@@ -883,7 +883,7 @@ label Emma_Detention:
     ch_e "Ok, I think that's plenty for now. . ."
     ch_e "You wouldn't want to make this a habit. . ."
     $ approval_bonus = 0
-    $ EmmaX.change_outfit()
+    $ EmmaX.change_Outfit()
     $ Player.drain_word("locked", 0, 0, 1)
     return
 

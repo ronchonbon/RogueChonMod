@@ -326,7 +326,7 @@ label Girl_Stripping(Girl):
                 call change_Girl_stat(Girl, "inhibition", 30, 1)
                 call change_Player_stat("focus", 60, 5)
                 $ line = Girl.outfit["bottom"]
-                $ Girl.outfit["bottom"] = ""
+                $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
                 if Girl == KittyX:
                     "Her [line] slide through her legs until they're only on her toes, before she kicks them to the floor."
                 else:
@@ -451,7 +451,7 @@ label Girl_Stripping(Girl):
             if approval_check(Girl, 1350, taboo_modifier = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.seen_pussy and approval_check(Girl, 1100, taboo_modifier = 3) and not Girl.taboo):
                 call change_Girl_stat(Girl, "lust", 75, 10)
                 $ line = Girl.outfit["bottom"]
-                $ Girl.outfit["bottom"] = ""
+                $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
                 if not Girl.seen_pussy:
                     call change_Girl_stat(Girl, "obedience", 60, 3)
                     call change_Girl_stat(Girl, "obedience", 200, 5)
@@ -2527,7 +2527,7 @@ label Bottoms_Off_Legs(Girl=0):
 
                 if Girl.outfit["bottom"]:
                     $ line = Girl.outfit["bottom"]
-                    $ Girl.outfit["bottom"] = ""
+                    $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
                     if not Girl.seen_underwear:
                         if Girl == RogueX:
                             "[Girl.name] shyly removes her [line]."
@@ -2601,7 +2601,7 @@ label Bottoms_Off_Legs(Girl=0):
                     return
 
                 $ line = Girl.outfit["bottom"]
-                $ Girl.outfit["bottom"] = ""
+                $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
                 if not Girl.outfit["underwear"] and Girl.outfit["hose"] != "pantyhose":
                     $ Girl.change_face("sly", 2)
                     if Girl == KittyX:

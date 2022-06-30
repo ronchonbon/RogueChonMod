@@ -295,7 +295,7 @@ label Strip_Study_Right:
             call change_Girl_stat(Player.Party[0], "inhibition", 30, 1)
             call change_Girl_stat(Player.Party[0], "inhibition", 50, 1)
             $ line = Player.Party[0].outfit["bottom"]
-            $ Player.Party[0].outfit["bottom"] = ""
+            $ Player.Party[0].Outfit.remove_Clothing(["pants", "skirt"])
             "She unfastens her [line] and slides them down her legs."
             if Player.Party[0].outfit["underwear"]:
                 if not Player.Party[0].seen_underwear:

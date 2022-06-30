@@ -4,7 +4,7 @@ label meet_Jean:
     $ JeanX.name = "???"
     $ JeanX.location = "bg_showerroom"
 
-    $ JeanX.outfit["bottom"] = ""
+    $ JeanX.Outfit.remove_Clothing(["pants", "skirt"])
 
     $ JeanX.change_face("sly")
 

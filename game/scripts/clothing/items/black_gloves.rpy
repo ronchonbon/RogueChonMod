@@ -1,4 +1,4 @@
-init python:
+init -1 python:
 
     def black_gloves():
         name = "black gloves"
@@ -13,12 +13,12 @@ init python:
             "wardrobe": "Black gloves on, please."
             }
 
+        shame = 0
+
         hides = []
         covers = []
 
         number_of_states = 1
-
-        menu_image = None
 
         poses = [
             "arm pose 1",
@@ -30,4 +30,4 @@ init python:
             "sex",
             "doggy"]
 
-        return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, hides = hides, covers = covers, number_of_states = number_of_states, menu_image = menu_image, poses = poses)
+        return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

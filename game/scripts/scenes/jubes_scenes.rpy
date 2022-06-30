@@ -11,7 +11,7 @@ label meet_Jubes:
     $ JubesX.location = Player.location
     $ JubesX.arm_pose = 2
     $ JubesX.change_face("sucking", 1)
-    $ JubesX.change_outfit("casual1")
+    $ JubesX.change_Outfit("first_casual")
 
     ch_u "\"Slurp, slurp, slurp.\""
 
@@ -2261,9 +2261,9 @@ label Jubes_Fuckbuddy:
     $ JubesX.location = Player.location
     call shift_focus (JubesX)
     call set_the_scene
-    $ JubesX.outfit_name = "casual1"
-    $ JubesX.today_outfit_name = "casual1"
-    $ JubesX.change_outfit("casual1")
+    $ JubesX.outfit_name = "first_casual"
+    $ JubesX.today_outfit_name = "first_casual"
+    $ JubesX.change_Outfit("first_casual")
     call show_Girl (JubesX)
     call set_Character_taboos
     $ Player.primary_action = "masturbation"

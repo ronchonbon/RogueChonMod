@@ -1699,7 +1699,7 @@ label Storm_Personality(counter=0):
 
 
 label Storm_Summon(approval_bonus=approval_bonus):
-    $ StormX.change_outfit()
+    $ StormX.change_Outfit()
     if "no_summon" in StormX.recent_history:
         if "angry" in StormX.recent_history:
             ch_s "I am far too irate for this."
@@ -1962,7 +1962,7 @@ label Storm_Summon(approval_bonus=approval_bonus):
         return
     $ StormX.location = Player.location
     call set_Character_taboos
-    $ StormX.change_outfit()
+    $ StormX.change_Outfit()
     call set_the_scene
     return
 
@@ -2212,15 +2212,15 @@ label Storm_Leave:
                         $ StormX.outfit["underwear"] = "black_panties"
                     if approval_check(StormX, 1200, taboo_modifier=4):
                         $ line = StormX.outfit["bottom"]
-                        $ StormX.outfit["bottom"] = ""
+                        $ StormX.Outfit.remove_Clothing(["pants", "skirt"])
                         "She pulls off her [line] and slips on the [StormX.outfit[underwear]]."
                     elif StormX.outfit["bottom"] == "skirt":
                         "She pulls out her [StormX.outfit[underwear]] and pulls them up under her skirt."
-                        $ StormX.outfit["bottom"] = ""
+                        $ StormX.Outfit.remove_Clothing(["pants", "skirt"])
                         "Then she drops the skirt to the floor."
                     else:
                         $ line = StormX.outfit["bottom"]
-                        $ StormX.outfit["bottom"] = ""
+                        $ StormX.Outfit.remove_Clothing(["pants", "skirt"])
                         "She steps away a moment and then comes back wearing only the [StormX.outfit[underwear]]."
                     return
                 else:
@@ -2426,7 +2426,7 @@ label Storm_Leave:
                             call Storm_First_Bottomless
                     elif approval_check(StormX, 1200, taboo_modifier=4):
                         $ temp_bottom = StormX.outfit["bottom"]
-                        $ StormX.outfit["bottom"] = ""
+                        $ StormX.Outfit.remove_Clothing(["pants", "skirt"])
                         pause 0.5
                         $ StormX.outfit["bottom"] = temp_bottom
                         "She pulls off her [StormX.outfit[bottom]] and [line], then pulls the [StormX.outfit[bottom]] back on."

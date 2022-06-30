@@ -303,8 +303,7 @@ label set_the_scene(location = None, show_Characters = True, fade = False, stati
     else:
         call hide_all
 
-    if fade:
-        hide black_screen onlayer black
+    hide black_screen onlayer black
 
     return
 
@@ -625,7 +624,7 @@ label quick_event_calls:
                 else:
                     $ event_Girls[0].location = event_Girls[0].weekly_schedule[weekday][time_index]
 
-                $ event_Girls[0].change_outfit()
+                $ event_Girls[0].change_Outfit()
 
         $ event_Girls.remove(event_Girls[0])
 
@@ -769,6 +768,8 @@ label set_Girls_locations:
             else:
                 G.location = Player.location
 
+    hide black_screen onlayer black
+
     while leaving_Girls:
         call expression leaving_Girls[0].tag + "_Leave"
 
@@ -812,12 +813,19 @@ label wait:
 
     if time_index < 3:
         $ time_index += 1
+        $ current_time = time_options[time_index]
+
+        $ round = 100
 
         $ Player.recent_history = []
 
         call set_Girls_locations
     else:
         $ time_index = 0
+        $ current_time = time_options[time_index]
+
+        $ round = 100
+
         $ day += 1
 
         if weekday < 6:
@@ -858,10 +866,6 @@ label wait:
 
     $ multi_action = True
 
-    $ current_time = time_options[(time_index)]
-
-    $ round = 100
-
     call set_Character_taboos
     call who_likes_who
 
@@ -895,8 +899,6 @@ label wait:
 
     call offscreen_lesbian
     call checkout
-
-    pause 0.5
 
     hide black_screen onlayer black
 
@@ -1114,8 +1116,8 @@ label reset_all_girls_at_beginning:
             G.addiction += G.addiction_rate
             G.addiction_rate -= G.resistance if G.addiction_rate > 3 else 0
 
-            if G.taboo and G.Wardrobe.current_Outfit.shame and G in active_Girls:
-                stat_change = int((G.taboo*G.Wardrobe.current_Outfit.shame)/200)
+            if G.taboo and G.Outfit.shame and G in active_Girls:
+                stat_change = int((G.taboo*G.Outfit.shame)/200)
 
                 G.change_stat("obedience", 90, stat_change)
                 G.change_stat("inhibition", 90, stat_change)
@@ -1135,7 +1137,7 @@ label reset_all_girls_at_beginning:
 
                 G.traits.append("stoodup")
 
-            if G.Wardrobe.current_Outfit.Clothes["buttplug"]:
+            if G.Outfit.Clothes["buttplug"]:
                 bonus = 1
             else:
                 bonus = 0
@@ -2482,7 +2484,7 @@ label exit_gym:
     $ line = None
 
     while temp_Girls:
-        if temp_Girls[0].Wardrobe.current_Outfit.name == "gym_clothes":
+        if temp_Girls[0].Outfit.name == "gym_clothes":
             if len(Player.Party) > 1:
                 $ line = "We should change out of these if we're leaving. . ."
             else:
@@ -2686,7 +2688,7 @@ label locked_door(arriving_Girls):
                         return False
                 elif Primary == StormX:
                     if approval_check(Primary, 800,"LI") and not approval_check(Primary, 500,"O"):
-                        $ Primary.change_outfit()
+                        $ Primary.change_Outfit()
 
                         "You hear some clicking from the door."
                         "The door swings open."
@@ -2756,7 +2758,7 @@ label locked_door(arriving_Girls):
                         return False
                 elif Primary == StormX:
                     if approval_check(Primary, 800,"LI") and not approval_check(Primary, 500,"O"):
-                        $ Primary.change_outfit()
+                        $ Primary.change_Outfit()
 
                         "You hear some clicking from the door."
                         "The door swings open."
@@ -3920,7 +3922,7 @@ label Sex_Dialog(Primary, Secondary):
         "[line4]"
         if second_girl_main_action == "suck_breasts" or second_girl_main_action == "fondle_breasts":
 
-            if approval_check(Primary,500,"I",taboo_modifier=2) and Primary.lust >= 50 and (Primary.Wardrobe.current_Outfit.Clothes["bra"] or Primary.top_number() > 1):
+            if approval_check(Primary,500,"I",taboo_modifier=2) and Primary.lust >= 50 and (Primary.Outfit.Clothes["bra"] or Primary.top_number() > 1):
 
                 $ Primary.top_pulled_up = 1
                 "[Primary.name] seems frustrated and pulls her top open."
@@ -3980,7 +3982,7 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
 
 
         call outfitShame (Girl2, 20)
-        $ Tempshame = Girl2.Wardrobe.current_Outfit.Clothes["shame"]
+        $ Tempshame = Girl2.Outfit.Clothes["shame"]
 
         if Girl == StormX:
 
@@ -5044,7 +5046,7 @@ label Girls_taboo(Girl, Choice=0):
             show black_screen onlayer black
             call show_full_body(Girl)
             call remove_Girl(Girl)
-            $ Girl.change_outfit()
+            $ Girl.change_Outfit()
             hide black_screen onlayer black
             $ Player.location = "bg_player"
             jump player_room
@@ -5283,7 +5285,7 @@ label sex_over(put_clothes_on = True):
             Girls = 0
 
             for G in Present:
-                if G.change_outfit() == 2:
+                if G.change_Outfit() == 2:
                     if line:
                         line = line + " and " + G.name
                     else:
@@ -5307,13 +5309,13 @@ label Girl_TightsRipped(Girl=0, Count=0):
     if Girl not in all_Girls:
         return
 
-    if Girl.Wardrobe.current_Outfit.Clothes["hose"] == "tights":
+    if Girl.Outfit.Clothes["hose"] == "tights":
         $ Count = 1
-        $ Girl.Wardrobe.current_Outfit.Clothes["hose"] = "ripped_tights"
+        $ Girl.Outfit.Clothes["hose"] = "ripped_tights"
         $ Girl.change_face("angry")
-    elif Girl.Wardrobe.current_Outfit.Clothes["hose"] == "pantyhose":
+    elif Girl.Outfit.Clothes["hose"] == "pantyhose":
         $ Count = 1
-        $ Girl.Wardrobe.current_Outfit.Clothes["hose"] = "ripped_pantyhose"
+        $ Girl.Outfit.Clothes["hose"] = "ripped_pantyhose"
         $ Girl.change_face("angry")
     else:
 
@@ -5357,11 +5359,11 @@ label Girl_TightsRipped(Girl=0, Count=0):
 
     if Count:
 
-        if not Girl.Wardrobe.current_Outfit.Clothes["bottom"] and Girl.Wardrobe.current_Outfit.Clothes["underwear"] != "shorts":
+        if not Girl.Outfit.Clothes["bottom"] and Girl.Outfit.Clothes["underwear"] != "shorts":
             if Girl == StormX and StormX in Rules:
 
                 pass
-            elif Girl.Wardrobe.current_Outfit.Clothes["underwear"]:
+            elif Girl.Outfit.Clothes["underwear"]:
                 if Girl.seen_underwear:
                     $ Count = 3 if not approval_check(Girl, 600) else Count
                 else:
@@ -5384,7 +5386,7 @@ label Girl_TightsRipped(Girl=0, Count=0):
                 extend ""
                 "I think those look really good on you.":
                     $ Girl.change_face("smile", 1)
-                    $ Girl.inventory.append(Girl.Wardrobe.current_Outfit.Clothes["hose"])
+                    $ Girl.inventory.append(Girl.Outfit.Clothes["hose"])
                     if Girl == RogueX:
                         ch_r "You think so? That's sweet, maybe I'll keep them on hand."
                     elif Girl == KittyX:
@@ -5447,6 +5449,6 @@ label Girl_TightsRipped(Girl=0, Count=0):
                 ch_s "I really probably should change."
             $ Girl.blushing = "_blush1"
             call remove_Girl(Girl)
-            $ Girl.change_outfit()
+            $ Girl.change_Outfit()
 
     return

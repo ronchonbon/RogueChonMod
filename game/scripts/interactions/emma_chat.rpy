@@ -1872,7 +1872,7 @@ label Emma_Personality(counter=0):
 
 
 label Emma_Summon(approval_bonus=approval_bonus):
-    $ EmmaX.change_outfit()
+    $ EmmaX.change_Outfit()
     if "no_summon" in EmmaX.recent_history:
         if "angry" in EmmaX.recent_history:
             ch_e "I'm not in the mood for this, [EmmaX.player_petname]."
@@ -2129,7 +2129,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
         return
     $ EmmaX.location = Player.location
     call set_Character_taboos
-    $ EmmaX.change_outfit()
+    $ EmmaX.change_Outfit()
     call set_the_scene
     return
 
@@ -2369,15 +2369,15 @@ label Emma_Leave:
                         $ EmmaX.outfit["underwear"] = "green_panties"
                     if approval_check(EmmaX, 1200, taboo_modifier=4):
                         $ line = EmmaX.outfit["bottom"]
-                        $ EmmaX.outfit["bottom"] = ""
+                        $ EmmaX.Outfit.remove_Clothing(["pants", "skirt"])
                         "She pulls off her [line] and slips on the [EmmaX.outfit[underwear]]."
                     elif EmmaX.outfit["bottom"] == "skirt":
                         "She pulls out her [EmmaX.outfit[underwear]] and pulls them up under her skirt."
-                        $ EmmaX.outfit["bottom"] = ""
+                        $ EmmaX.Outfit.remove_Clothing(["pants", "skirt"])
                         "Then she drops the skirt to the floor."
                     else:
                         $ line = EmmaX.outfit["bottom"]
-                        $ EmmaX.outfit["bottom"] = ""
+                        $ EmmaX.Outfit.remove_Clothing(["pants", "skirt"])
                         "She steps away a moment and then comes back wearing only the [EmmaX.outfit[underwear]]."
                     return
                 elif EmmaX.taboo and approval_check(EmmaX, 800, taboo_modifier=0):
@@ -2561,7 +2561,7 @@ label Emma_Leave:
                             call Emma_First_Bottomless
                     elif approval_check(EmmaX, 1200, taboo_modifier=4):
                         $ temp_bottom = EmmaX.outfit["bottom"]
-                        $ EmmaX.outfit["bottom"] = ""
+                        $ EmmaX.Outfit.remove_Clothing(["pants", "skirt"])
                         pause 0.5
                         $ EmmaX.outfit["bottom"] = temp_bottom
                         "She pulls off her [EmmaX.outfit[bottom]] and [line], then pulls the [EmmaX.outfit[bottom]] back on."

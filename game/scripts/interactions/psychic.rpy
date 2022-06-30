@@ -64,7 +64,7 @@ label psychicFlash(Face="sly", TempLoc=0):
         hide Emma_sprite with fade
     elif Girl == JeanX:
         hide Jean_sprite with fade
-    $ Girl.change_outfit("today")
+    $ Girl.change_Outfit()
     scene onlayer black
     $ Girl.arm_pose = 1
     $ line = 0
@@ -106,7 +106,7 @@ label MindFuck(TempLoc=0):
                 ch_j "Ok, that'll do it. . ."
                 ch_j "Be thinking about me. . ."
 
-            $ Girl.change_outfit("today")
+            $ Girl.change_Outfit()
 
             python:
                 for key in Girl.spunk.keys():

@@ -677,7 +677,7 @@ label swimsuit_shop:
 
                             $ Girl.outfit["bodysuit"] = ""
                             $ Girl.outfit["dress"] = ""
-                            $ Girl.outfit["bottom"] = ""
+                            $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
                             $ Girl.outfit["hose"] = ""
                             $ Girl.outfit["underwear"] = item
 
@@ -752,7 +752,7 @@ label swimsuit_shop:
 
                             $ Player.Party[0].change_likes(Girl,3)
 
-                    $ Girl.change_outfit()
+                    $ Girl.change_Outfit()
 
                     $ door_locked = False
 
@@ -1173,7 +1173,7 @@ label lingerie_shop:
 
                             $ Girl.outfit["dress"] = ""
                             $ Girl.outfit["bodysuit"] = ""
-                            $ Girl.outfit["bottom"] = ""
+                            $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
                             $ Girl.outfit["underwear"] = item
 
                             hide black_screen onlayer black
@@ -1195,7 +1195,7 @@ label lingerie_shop:
 
                             $ Girl.outfit["dress"] = ""
                             $ Girl.outfit["bodysuit"] = ""
-                            $ Girl.outfit["bottom"] = ""
+                            $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
                             $ Girl.outfit["hose"] = item
 
                             hide black_screen onlayer black
@@ -1273,7 +1273,7 @@ label lingerie_shop:
 
                             $ Player.Party[0].change_likes(Girl,3)
 
-                    $ Girl.change_outfit()
+                    $ Girl.change_Outfit()
 
                     $ door_locked = False
 
@@ -1950,7 +1950,7 @@ label clothing_shop:
 
                             $ Player.Party[0].change_likes(Girl,3)
 
-                    $ Girl.change_outfit()
+                    $ Girl.change_Outfit()
 
                     $ door_locked = False
 

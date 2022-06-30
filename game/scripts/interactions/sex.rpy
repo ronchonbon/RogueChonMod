@@ -1188,7 +1188,7 @@ label girl_initiated_action(Girl, action):
         elif Girl.wearing_pants:
             "[Girl.name] grabs her dildo, pulling down her pants as she does."
 
-            $ Girl.outfit["bottom"] = ""
+            $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
         else:
             if action == "dildo_pussy":
                 "[Girl.name] grabs her dildo, rubbing it suggestively against her crotch."

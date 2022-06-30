@@ -1702,7 +1702,7 @@ label Jubes_Personality(counter=0):
 
 
 label Jubes_Summon(approval_bonus=approval_bonus):
-    $ JubesX.change_outfit()
+    $ JubesX.change_Outfit()
     if "no_summon" in JubesX.recent_history:
         if "angry" in JubesX.recent_history:
             ch_v "Grrrrrrrrr."
@@ -1970,7 +1970,7 @@ label Jubes_Summon(approval_bonus=approval_bonus):
         return
     $ JubesX.location = Player.location
     call set_Character_taboos
-    $ JubesX.change_outfit()
+    $ JubesX.change_Outfit()
     call set_the_scene
     return
 
@@ -2217,15 +2217,15 @@ label Jubes_Leave:
                         $ JubesX.outfit["underwear"] = "blue_panties"
                     if approval_check(JubesX, 1200, taboo_modifier=4):
                         $ line = JubesX.outfit["bottom"]
-                        $ JubesX.outfit["bottom"] = ""
+                        $ JubesX.Outfit.remove_Clothing(["pants", "skirt"])
                         "She pulls off her [line] and slips on the [JubesX.outfit[underwear]]."
                     elif JubesX.outfit["bottom"] == "skirt":
                         "She pulls out her [JubesX.outfit[underwear]] and pulls them up under her skirt."
-                        $ JubesX.outfit["bottom"] = ""
+                        $ JubesX.Outfit.remove_Clothing(["pants", "skirt"])
                         "Then she drops the skirt to the floor."
                     else:
                         $ line = JubesX.outfit["bottom"]
-                        $ JubesX.outfit["bottom"] = ""
+                        $ JubesX.Outfit.remove_Clothing(["pants", "skirt"])
                         "She steps away a moment and then comes back wearing only the [JubesX.outfit[underwear]]."
                     return
                 else:
@@ -2393,7 +2393,7 @@ label Jubes_Leave:
                             call Jubes_First_Bottomless
                     elif approval_check(JubesX, 1200, taboo_modifier=4):
                         $ temp_bottom = JubesX.outfit["bottom"]
-                        $ JubesX.outfit["bottom"] = ""
+                        $ JubesX.Outfit.remove_Clothing(["pants", "skirt"])
                         pause 0.5
                         $ JubesX.outfit["bottom"] = temp_bottom
                         "She pulls off her [JubesX.outfit[bottom]] and [line], then pulls the [JubesX.outfit[bottom]] back on."

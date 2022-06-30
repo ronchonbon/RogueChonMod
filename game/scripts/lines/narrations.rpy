@@ -4382,7 +4382,7 @@ label auto_action_narrations(Girl, action):
         elif Girl.wearing_pants:
             "You press up against [Girl.name]'s backside, sliding her pants down as you do."
 
-            $ Girl.outfit["bottom"] = ""
+            $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
         else:
             "You press up against [Girl.name]'s backside."
 
@@ -4403,7 +4403,7 @@ label auto_action_narrations(Girl, action):
         elif Girl.wearing_pants:
             "You press up against [Girl.name]'s backside, sliding her pants down as you do."
 
-            $ Girl.outfit["bottom"] = ""
+            $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
         else:
             "You press up against [Girl.name]'s backside."
 

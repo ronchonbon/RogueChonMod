@@ -1614,7 +1614,7 @@ label Date_Prep(Girl=0):
     if Girl.clothing[7]:
 
         if Girl.clothing[7] == 2:
-            $ Girl.outfit_name = "casual2"
+            $ Girl.outfit_name = "second_casual"
         elif Girl.clothing[7] == 3:
             $ Girl.outfit_name = "custom1"
         elif Girl.clothing[7] == 4:
@@ -1624,9 +1624,9 @@ label Date_Prep(Girl=0):
         elif Girl.clothing[7] == 6:
             $ Girl.outfit_name = "custom3"
         else:
-            $ Girl.outfit_name = "casual1"
+            $ Girl.outfit_name = "first_casual"
     else:
-        $ Options = ["casual2", "casual1"]
+        $ Options = ["second_casual", "first_casual"]
         $ Options.append("custom1") if Girl.first_custom_outfit["outfit_active"] == 2 else Options
         $ Options.append("custom2") if Girl.second_custom_outfit["outfit_active"] == 2 else Options
         $ Options.append("custom3") if Girl.third_custom_outfit["outfit_active"] == 2 else Options
@@ -1634,7 +1634,7 @@ label Date_Prep(Girl=0):
         $ Girl.outfit_name = Options[0]
         $ del Options[:]
     $ Girl.location = "date"
-    $ Girl.change_outfit()
+    $ Girl.change_Outfit()
     $ Girl.change_face("smile")
     return
 
@@ -3350,7 +3350,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             elif Girl == JubesX:
                 ch_v "More fun than the movie? . ."
 
-    $ Girl.change_outfit()
+    $ Girl.change_Outfit()
     return
 
 

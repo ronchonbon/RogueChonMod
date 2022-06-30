@@ -1,4 +1,4 @@
-init -2:
+init -3:
 
     $ config.narrator_menu = True
 
@@ -401,6 +401,42 @@ screen quick_menu():
         textbutton _("F.Skip") action Skip(fast=True, confirm=True)
         textbutton _("Auto") action Preference("auto-forward", "toggle")
         textbutton _("Prefs") action ShowMenu('preferences')
+
+screen Clothing_picker(Girl):
+    window:
+        anchor (0.5, 0.5) pos (0.5, 0.5)
+
+        style "menu_window"
+
+        window anchor (0.5, 0.5) pos (0.5, 0.5) xysize (int(4.2*256), 600):
+            vpgrid:
+                cols 4
+                spacing 0
+
+                mousewheel True
+                draggable True
+
+                side_yfill True
+
+                imagebutton:
+                    anchor (0.5, 0.5) pos (0.5, 0.5) xysize (256, 256)
+                    auto "images/Button_X_%s.png"
+                    action Return("quit")
+
+                for Clothing in Girl.Wardrobe.Clothes.values():
+                    $ img = f"images/menu_images/{Girl.tag}/{Clothing.string}.png"
+
+                    imagebutton:
+                        anchor (0.5, 0.5) pos (0.5, 0.5) xysize (256, 256)
+                        idle img
+                        hover img
+                        action Return(Clothing.name)
+
+
+
+
+
+
 
 screen inventory_button:
     imagebutton:

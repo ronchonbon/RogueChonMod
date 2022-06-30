@@ -3904,7 +3904,7 @@ label AskPanties(Girl=0, Store=0):
                         "You exit the room for a minute"
                         hide black_screen onlayer black
                         $ Girl.daily_history.append("commando")
-                        $ Girl.change_outfit()
+                        $ Girl.change_Outfit()
                         call outfitShame (Girl, 20)
                         "When you return, she quietly hands you her balled up panties."
                         $ line = 0
@@ -4006,7 +4006,7 @@ label AskPanties(Girl=0, Store=0):
                 call set_the_scene
                 "[Girl.name] nods and leaves for a minute."
                 $ Girl.daily_history.append("commando")
-                $ Girl.change_outfit()
+                $ Girl.change_Outfit()
                 call outfitShame (Girl, 20)
                 $ Girl.location = Player.location
                 call set_the_scene
@@ -4120,7 +4120,7 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
             call expression Girl.tag + "_First_Bottomless"
 
         $ Girl.daily_history.append("commando")
-        $ Girl.change_outfit()
+        $ Girl.change_Outfit()
         call outfitShame (Girl, 20)
         return
     elif Girl == JeanX and Girl.wearing_skirt and not approval_check(Girl, 400, "L"):
@@ -4134,7 +4134,7 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
             call expression Girl.tag + "_First_Bottomless"
 
         $ Girl.daily_history.append("commando")
-        $ Girl.change_outfit()
+        $ Girl.change_Outfit()
         call outfitShame (Girl, 20)
         return
 
@@ -4146,7 +4146,7 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
         $ Type = 2
 
     if Girl.wearing_pants:
-        $ Girl.outfit["bottom"] = ""
+        $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
 
         $ Type = 1
     elif Girl.wearing_skirt:
@@ -4207,6 +4207,6 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
     call expression Girl.tag + "_First_Bottomless" pass (1)
 
     $ Girl.daily_history.append("commando")
-    $ Girl.change_outfit()
+    $ Girl.change_Outfit()
     call outfitShame (Girl, 20)
     return

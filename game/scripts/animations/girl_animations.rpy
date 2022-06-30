@@ -108,7 +108,7 @@ transform dancing(x_position):
 
 transform swimming(x_position):
     subpixel True
-    pos (x_position, 0.4) zoom 0.5
+    pos (x_position, 0.2) zoom 0.8
     choice:
         yoffset 0
     choice:

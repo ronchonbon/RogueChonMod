@@ -778,7 +778,7 @@ init python:
             return
 
         def try_on(self, Clothing):
-            self.Wardrobe.current_Outfit.change_into_Clothing(Clothing = Clothing)
+            self.Outfit.change_into(Clothing = Clothing)
 
             return
 
@@ -789,42 +789,62 @@ init python:
 
         def change_into(self, Clothing_name):
             if Clothing_name not in self.Wardrobe.Clothes.keys():
-                renpy.say(self, "I don't have a piece of clothing named [Clothing_name].")
+                renpy.say(self.voice, "I don't have a piece of clothing named [Clothing_name].")
 
                 return
 
-            self.Wardrobe.current_Outfit.change_into(Clothing = self.Wardrobe.Clothes[Clothing_name])
+            self.Outfit.change_into(Clothing = self.Wardrobe.Clothes[Clothing_name])
 
             return
 
         def change_out_of(self, Clothing_type):
-            self.Wardrobe.current_Outfit.change_out_of(Clothing_type = Clothing_type)
+            self.Outfit.change_out_of(Clothing_type = Clothing_type)
 
             return
 
         def undress(self, instant = False):
-            self.Wardrobe.current_Outfit.undress(instant = instant)
+            self.Outfit.undress(instant = instant)
 
             return
 
         def expose_breasts(self):
+            for Clothing_type in reversed(self.hide_breasts):
+                self.Outfit.Clothes[Clothing_type].take_off()
+
+                if self.Outfit.Clothes[Clothing_type].undress_state == 0:
+                    self.Outfit.remove_Clothing(Clothing_type)
 
             return
 
         def expose_underwear(self):
+            for Clothing_type in reversed(self.hide_underwear):
+                self.Outfit.Clothes[Clothing_type].take_off()
+
+                if self.Outfit.Clothes[Clothing_type].undress_state == 0:
+                    self.Outfit.remove_Clothing(Clothing_type)
 
             return
 
         def expose_pussy(self):
+            for Clothing_type in reversed(self.hide_pussy):
+                self.Outfit.Clothes[Clothing_type].take_off()
+
+                if self.Outfit.Clothes[Clothing_type].undress_state == 0:
+                    self.Outfit.remove_Clothing(Clothing_type)
 
             return
 
         def fix_clothing(self):
-            for Clothing_type in self.Wardrobe.current_Outfit.removable():
-                if self.Wardrobe.current_Outfit.Clothes[Clothing_type].undress_state:
-                    self.Wardrobe.current_Outfit.Clothes[Clothing_type] = 0
+            for Clothing_type in self.Outfit.removable():
+                if self.Wardrobe.temp_Outfit.Clothes[Clothing_type] and not self.Outfit.Clothes[Clothing_type]:
+                    self.Wardrobe.temp_Outfit.Clothes[Clothing_type].undress_state = self.Wardrobe.temp_Outfit.Clothes[Clothing_type].max_undress_state
+
+                    self.Outfit.add_Clothing(self.Wardrobe.temp_Outfit.Clothes[Clothing_type])
 
                     renpy.pause(0.2)
+
+                if self.Outfit.Clothes[Clothing_type].undress_state:
+                    self.Outfit.Clothes[Clothing_type].put_on()
 
             return
 
@@ -843,7 +863,7 @@ init python:
                 Outfit_name = self.todays_Outfit_name
 
             if Outfit_name not in self.Wardrobe.Outfits.keys():
-                renpy.say(self, "I don't have an outfit named [new_Outfit_name].")
+                renpy.say(self.voice, "I don't have an outfit named [new_Outfit_name].")
 
                 return
 
@@ -855,6 +875,8 @@ init python:
                     self.spunk[key] = False
 
             self.Wardrobe.change_Outfit(Outfit = self.Wardrobe.Outfits[Outfit_name], instant = instant)
+
+            self.Outfit = self.Wardrobe.current_Outfit
 
             return
 
@@ -873,87 +895,87 @@ init python:
             Halloween_costume = OutfitClass(name = "Halloween_costume")
 
             if self.tag == "Rogue":
-                first_casual.Clothes.update({
+                first_casual.update_Clothes({
                     "hair": Evolutions_hair(),
                     "underwear": black_panties(), "hose": black_tights(),
                     "skirt": black_skirt(),
                     "bra": black_tanktop(), "top": green_mesh_top(),
                     "neck": spiked_collar(), "gloves": black_gloves()})
 
-                second_casual.Clothes.update({
+                second_casual.update_Clothes({
                     "hair": Evolutions_hair(),
                     "underwear": black_panties(),
                     "pants": jeans(),
                     "bra": black_buttoned_tanktop(), "top": pink_top(),
                     "neck": spiked_collar(), "gloves": black_gloves()})
 
-                gym_clothes.Clothes.update({
+                gym_clothes.update_Clothes({
                     "hair": Evolutions_hair(),
                     "underwear": yellowgreen_shorts(),
                     "bra": yellowgreen_sports_bra(),
                     "gloves": black_gloves(),
                     "jacket": green_hoodie()})
 
-                swimwear.Clothes.update({
+                swimwear.update_Clothes({
                     "hair": Evolutions_hair(),
                     "underwear": green_bikini_bottoms(),
                     "bra": yellow_bikini_top()})
 
-                sleepwear.Clothes.update({
+                sleepwear.update_Clothes({
                     "hair": Evolutions_hair(),
                     "underwear": green_panties(),
                     "bra": black_tanktop()})
 
-                shower.Clothes.update({
+                shower.update_Clothes({
                     "hair": Evolutions_hair(),
                     "top": green_towel()})
 
-                Halloween_costume.Clothes.update({
+                Halloween_costume.update_Clothes({
                     "hair": Jill_hair(),
                     "underwear": black_panties(),
                     "skirt": black_skirt(),
                     "bra": blue_tubetop(),
                     "gloves": black_gloves(), "belt": white_sweater()})
             elif self.tag == "Kitty":
-                first_casual.Clothes.update({
+                first_casual.update_Clothes({
                     "hair": Evolutions_hair(),
                     "underwear": green_panties(),
                     "pants": blue_capris(),
                     "bra": yellow_cami(), "top": pink_top(),
                     "neck": gold_necklace()})
 
-                second_casual.Clothes.update({
+                second_casual.update_Clothes({
                     "hair": Evolutions_hair(),
                     "underwear": green_panties(),
                     "pants": black_jeans(),
                     "bra": pink_strapless_bra(), "top": red_shirt(),
                     "neck": star_necklace()})
 
-                gym_clothes.Clothes.update({
+                gym_clothes.update_Clothes({
                     "hair": Evolutions_hair(),
                     "underwear": green_panties(),
                     "bra": purple_sports_bra(),
                     "pants": yellow_shorts()})
 
-                swimwear.Clothes.update({
+                swimwear.update_Clothes({
                     "hair": Evolutions_hair(),
                     "underwear": blue_bikini_bottoms(),
                     "bra": blue_bikini_top(),
                     "skirt": blue_skirt()})
 
-                sleepwear.Clothes.update({
+                sleepwear.update_Clothes({
                     "hair": Evolutions_hair(),
                     "underwear": green_panties(),
                     "bra": yellow_cami()})
 
-                shower.Clothes.update({
+                shower.update_Clothes({
                     "hair": Evolutions_hair(),
                     "top": pink_towel()})
 
-                nude.Clothes.update({
+                nude.update_Clothes({
                     "hair": Evolutions_hair()})
 
-                Halloween_costume.Clothes.update({
+                Halloween_costume.update_Clothes({
                     "hair": Evolutions_hair(),
                     "underwear": pink_lace_panties(),
                     "skirt": Aerith_skirt(),
@@ -971,8 +993,8 @@ init python:
                 "nude": nude,
                 "Halloween_costume": Halloween_costume})
 
-            if self.tag in ["Emma", "Storm"]:
-                self.Wardrobe.Outfits.update({"teacher": teacher})
+            # if self.tag in ["Emma", "Storm"]:
+            #     self.Wardrobe.Outfits.update({"teacher": teacher})
 
             for Outfit in self.Wardrobe.Outfits.values():
                 for Clothing in Outfit.Clothes.values():

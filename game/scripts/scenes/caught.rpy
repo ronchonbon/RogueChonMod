@@ -8,12 +8,12 @@ label caught_changing(Girl):
     call remove_all
 
     if D20 > 17:
-        $ Girl.change_outfit("nude")
+        $ Girl.change_Outfit("nude")
     else:
-        $ Girl.change_outfit("today")
+        $ Girl.change_Outfit()
 
         if D20 > 15:
-            $ Girl.outfit["bottom"] = ""
+            $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
             $ Girl.outfit["hose"] = ""
             $ Girl.outfit["underwear"] = ""
         elif D20 > 14:
@@ -21,7 +21,7 @@ label caught_changing(Girl):
             $ Girl.outfit["top"] = ""
         elif D20 > 10:
             $ Girl.outfit["top"] = ""
-            $ Girl.outfit["bottom"] = ""
+            $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
         elif D20 > 5:
             $ Girl.outfit["top"] = ""
 
@@ -198,7 +198,7 @@ label caught_changing(Girl):
         "Yes.":
             pass
         "Actually, I should get going. . .":
-            $ Girl.change_outfit("today")
+            $ Girl.change_Outfit()
 
             jump reset_location
 
@@ -208,7 +208,7 @@ label caught_changing(Girl):
             "Ok.":
                 "She finishes getting changed."
 
-                $ Girl.change_outfit("today")
+                $ Girl.change_Outfit()
             "Actually, you could leave them off.":
                 if approval_check(Girl, 350+(10*D20)):
                     call change_Girl_stat(Girl, "love", 70, 3)
@@ -226,7 +226,7 @@ label caught_changing(Girl):
 
                     ch_s "Ha! I would not want to be too much of a distraction."
 
-                    $ Girl.change_outfit("today")
+                    $ Girl.change_Outfit()
             "Why not lose the rest too?":
                 $ Girl.change_face("sexy")
                 if approval_check(Girl, 700):
@@ -238,7 +238,7 @@ label caught_changing(Girl):
 
                     ch_s "Oh, you are a naughty one. . ."
 
-                    $ Girl.change_outfit("nude")
+                    $ Girl.change_Outfit("nude")
                     $ Girl.set_temp_outfit()
                 elif approval_check(Girl, 350+(10*D20)):
                     call change_Girl_stat(Girl, "love", 80, 1)
@@ -256,7 +256,7 @@ label caught_changing(Girl):
 
                     ch_s "You are joking, [Girl.player_petname]."
 
-                    $ Girl.change_outfit("today")
+                    $ Girl.change_Outfit()
             "Don't, stay like that.":
                 call change_Girl_stat(Girl, "obedience", 80, 2)
 
@@ -284,7 +284,7 @@ label caught_changing(Girl):
 
                     ch_s "You do not decide that, [Girl.player_petname]."
 
-                    $ Girl.change_outfit("today")
+                    $ Girl.change_Outfit()
             "Lose the rest of it.":
                 call change_Girl_stat(Girl, "obedience", 80, 2)
 
@@ -295,7 +295,7 @@ label caught_changing(Girl):
 
                     ch_s "Fine. . ."
 
-                    $ Girl.change_outfit("nude")
+                    $ Girl.change_Outfit("nude")
                     $ Girl.set_temp_outfit()
                 elif approval_check(Girl,800) and approval_check(Girl, 500, "O"):
                     call change_Girl_stat(Girl, "love", 50, -2)
@@ -306,7 +306,7 @@ label caught_changing(Girl):
 
                     ch_s ". . . Fine."
 
-                    $ Girl.change_outfit("nude")
+                    $ Girl.change_Outfit("nude")
                     $ Girl.set_temp_outfit()
                 else:
                     call change_Girl_stat(Girl, "love", 50, -2)
@@ -317,7 +317,7 @@ label caught_changing(Girl):
 
                     ch_s "I do not think that I will, [Girl.player_petname]."
 
-                    $ Girl.change_outfit("today")
+                    $ Girl.change_Outfit()
 
     return
 
@@ -325,7 +325,7 @@ label caught_showering(Girl):
     call set_the_scene(location = "bg_door", fade = True)
 
     $ Girl.add_word(1,"showered", "showered", 0, 0)
-    $ Girl.change_outfit("nude")
+    $ Girl.change_Outfit("nude")
     $ Girl.change_face("smile", 1)
 
     $ Girl.location = "bg_showerroom"
@@ -346,7 +346,7 @@ label caught_showering(Girl):
         "Come back later":
             call remove_Girl(Girl)
 
-            $ Girl.change_outfit("today")
+            $ Girl.change_Outfit()
             $ Girl.drain_word("will_masturbate", 0, 1)
             $ Girl.lust = 25
             $ Girl.thirst -= int(Girl.thirst/2) if Girl.thirst >= 50 else int(Girl.thirst/4)
@@ -861,7 +861,7 @@ label caught_masturbating(Girl):
                 ch_v "You stop by a lot. . ."
 
         $ Girl.arm_pose = 1
-        $ Girl.change_outfit()
+        $ Girl.change_Outfit()
 
     $ Girl.location = Girl.home
 
@@ -966,7 +966,7 @@ label caught_having_sex(Girl):
 
     call stop_all_actions
 
-    $ Girl.change_outfit()
+    $ Girl.change_Outfit()
 
     $ total_caught = 0
 

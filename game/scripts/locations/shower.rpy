@@ -452,7 +452,7 @@ label showering:
         while temp_Girls:
             if temp_Girls[0].location == Player.location:
                 if temp_Girls[0] in staying_Girls:
-                    $ temp_Girls[0].change_outfit("nude")
+                    $ temp_Girls[0].change_Outfit("nude")
                     $ temp_Girls[0].wet = True
 
                     python:
@@ -544,7 +544,7 @@ label showering:
 
                 $ intruding_Girls.remove(EmmaX)
 
-                $ EmmaX.change_outfit()
+                $ EmmaX.change_Outfit()
 
         if LauraX in intruding_Girls:
             if LauraX.seen_peen == 1:
@@ -616,7 +616,7 @@ label showering:
 
             call remove_Girl(EmmaX)
 
-            $ EmmaX.change_outfit()
+            $ EmmaX.change_Outfit()
 
         if intruding_Girls:
             if approval_check(intruding_Girls[0], 1200):
@@ -653,7 +653,7 @@ label showering:
                 $ intruding_Girls.remove(intruding_Girls[0])
 
             while intruding_Girls:
-                $ intruding_Girls[0].change_outfit("nude")
+                $ intruding_Girls[0].change_Outfit("nude")
                 $ intruding_Girls[0].wet = True
 
                 python:
@@ -744,22 +744,22 @@ label showering:
     call get_dressed
 
     if RogueX.location == Player.location:
-        $ RogueX.change_outfit("shower")
+        $ RogueX.change_Outfit("shower")
 
     if KittyX.location == Player.location:
-        $ KittyX.change_outfit("shower")
+        $ KittyX.change_Outfit("shower")
 
     if EmmaX.location == Player.location:
-        $ EmmaX.change_outfit("shower")
+        $ EmmaX.change_Outfit("shower")
 
     if LauraX.location == Player.location:
-        $ LauraX.change_outfit("shower")
+        $ LauraX.change_Outfit("shower")
 
     if JeanX.location == Player.location:
-        $ JeanX.change_outfit("shower")
+        $ JeanX.change_Outfit("shower")
 
     if JubesX.location == Player.location:
-        $ JubesX.change_outfit("shower")
+        $ JubesX.change_Outfit("shower")
 
     return
 

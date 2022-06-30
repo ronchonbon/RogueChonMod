@@ -1790,7 +1790,6 @@ label Kitty_Personality(counter=0):
 
 
 label Kitty_Summon(approval_bonus=approval_bonus):
-    $ KittyX.change_outfit()
     if "no_summon" in KittyX.recent_history:
         if "angry" in KittyX.recent_history:
             ch_k "Get a clue, [KittyX.player_petname]!"
@@ -2043,7 +2042,6 @@ label Kitty_Summon(approval_bonus=approval_bonus):
         return
     call set_Character_taboos
     $ KittyX.location = Player.location
-    $ KittyX.change_outfit()
     call set_Character_taboos
     call set_the_scene
     return

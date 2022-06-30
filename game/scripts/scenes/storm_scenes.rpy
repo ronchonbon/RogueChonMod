@@ -142,7 +142,7 @@ label meet_Storm:
     "Greeting you at the top is what appears to be an indoor garden. Bright sunlight streams through the windows."
 
     $ StormX.location = "bg_storm"
-    $ StormX.change_outfit("nude")
+    $ StormX.change_Outfit("nude")
     $ StormX.change_face("normal", eyes = "side")
 
     call show_Girl(StormX, x_position = stage_center, color_transform = silhouette, transition = False)
@@ -579,9 +579,9 @@ label Storm_Nudity:
                 call change_Girl_stat(StormX, "obedience", 80, 5)
                 call change_Girl_stat(StormX, "inhibition", 200, -3)
                 ch_s "If it would make you more comforable, then I would not mind it."
-                $ StormX.today_outfit_name = "casual1"
-                $ StormX.outfit_name = "casual1"
-                $ StormX.change_outfit("casual1")
+                $ StormX.today_outfit_name = "first_casual"
+                $ StormX.outfit_name = "first_casual"
+                $ StormX.change_Outfit("first_casual")
 
             "Should I get naked too?" if "naked" not in Player.recent_history:
                 $ StormX.change_face("surprised", mouth = "sucking")
@@ -935,7 +935,7 @@ label Storm_Detention:
     show black_screen onlayer black
     $ Player.location = "bg_classroom"
     $ StormX.location = "bg_classroom"
-    $ StormX.change_outfit()
+    $ StormX.change_Outfit()
     call set_the_scene
     $ StormX.change_face("sly")
     $ StormX.arm_pose = 2
@@ -1042,7 +1042,7 @@ label Storm_Detention:
     ch_s "Ok, I think that's plenty for now. . ."
     ch_s "You wouldn't want to make this a habit. . ."
     $ approval_bonus = 0
-    $ StormX.change_outfit()
+    $ StormX.change_Outfit()
     $ Player.drain_word("locked", 0, 0, 1)
     return
 
@@ -2252,7 +2252,7 @@ label Storm_Poolnight:
     $ taboo = 0
     $ StormX.taboo = 0
     $ StormX.change_face("sly", 1)
-    $ StormX.change_outfit("nude")
+    $ StormX.change_Outfit("nude")
     $ StormX.recent_history.append("poolnight")
     if "sexfriend" not in StormX.player_petnames:
         call show_Girl(StormX, x_position = 0.5, y_position = 0.6, sprite_layer = 1, color_transform = night, transition = easebottom)

@@ -1704,7 +1704,7 @@ label Laura_Personality(counter=0):
 
 
 label Laura_Summon(approval_bonus=approval_bonus):
-    $ LauraX.change_outfit()
+    $ LauraX.change_Outfit()
     if "no_summon" in LauraX.recent_history:
         if "angry" in LauraX.recent_history:
             ch_l "Grrrrrrrrr."
@@ -1966,7 +1966,7 @@ label Laura_Summon(approval_bonus=approval_bonus):
         return
     $ LauraX.location = Player.location
     call set_Character_taboos
-    $ LauraX.change_outfit()
+    $ LauraX.change_Outfit()
     call set_the_scene
     return
 
@@ -2212,15 +2212,15 @@ label Laura_Leave:
                         $ LauraX.outfit["underwear"] = "leather_panties"
                     if approval_check(LauraX, 1200, taboo_modifier=4):
                         $ line = LauraX.outfit["bottom"]
-                        $ LauraX.outfit["bottom"] = ""
+                        $ LauraX.Outfit.remove_Clothing(["pants", "skirt"])
                         "She pulls off her [line] and slips on the [LauraX.outfit[underwear]]."
                     elif LauraX.outfit["bottom"] == "skirt":
                         "She pulls out her [LauraX.outfit[underwear]] and pulls them up under her skirt."
-                        $ LauraX.outfit["bottom"] = ""
+                        $ LauraX.Outfit.remove_Clothing(["pants", "skirt"])
                         "Then she drops the skirt to the floor."
                     else:
                         $ line = LauraX.outfit["bottom"]
-                        $ LauraX.outfit["bottom"] = ""
+                        $ LauraX.Outfit.remove_Clothing(["pants", "skirt"])
                         "She steps away a moment and then comes back wearing only the [LauraX.outfit[underwear]]."
                     return
                 else:
@@ -2412,7 +2412,7 @@ label Laura_Leave:
                             call Laura_First_Bottomless
                     elif approval_check(LauraX, 1200, taboo_modifier=4):
                         $ temp_bottom = LauraX.outfit["bottom"]
-                        $ LauraX.outfit["bottom"] = ""
+                        $ LauraX.Outfit.remove_Clothing(["pants", "skirt"])
                         pause 0.5
                         $ LauraX.outfit["bottom"] = temp_bottom
                         "She pulls off her [LauraX.outfit[bottom]] and [line], then pulls the [LauraX.outfit[bottom]] back on."
