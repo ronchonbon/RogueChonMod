@@ -18,46 +18,46 @@ layeredimage Laura_grool_dripping_animation:
     always:
         "grool_dripping_animation" pos (0.155, 1.1)
 
-    if LauraX.grool > 1 and not LauraX.pussy_covered:
+    if LauraX.grool > 1 and not LauraX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.155, 1.1)
 
-    if LauraX.grool > 1 and not LauraX.pussy_covered:
+    if LauraX.grool > 1 and not LauraX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.155, 1.1)
 
-    if LauraX.grool > 1 and not LauraX.pussy_covered:
+    if LauraX.grool > 1 and not LauraX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.155, 1.1)
 
 layeredimage Laura_grool_animations:
     if not LauraX.grool:
         Null()
-    elif LauraX.bottom_pulled_down:
+    elif LauraX.Clothes["pants"].state:
         AlphaMask("Laura_grool_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask_pants.png")
-    elif LauraX.underwear_pulled_down:
+    elif LauraX.Clothes["underwear"].state:
         AlphaMask("Laura_grool_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask_underwear.png")
-    elif not LauraX.pussy_covered:
+    elif not LauraX.Outfit.pussy_covered:
         AlphaMask("Laura_grool_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask.png")
 
 layeredimage Laura_spunk_dripping_animation:
     always:
         "spunk_dripping_animation" pos (0.155, 1.1)
 
-    if not LauraX.pussy_covered:
+    if not LauraX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.155, 1.1)
 
-    if not LauraX.pussy_covered:
+    if not LauraX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.155, 1.1)
 
-    if not LauraX.pussy_covered:
+    if not LauraX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.155, 1.1)
 
 layeredimage Laura_spunk_animations:
     if not LauraX.spunk["pussy"] and not LauraX.spunk["anus"]:
         Null()
-    elif LauraX.bottom_pulled_down:
+    elif LauraX.Clothes["pants"].state:
         AlphaMask("Laura_spunk_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask_pants.png")
-    elif LauraX.underwear_pulled_down:
+    elif LauraX.Clothes["underwear"].state:
         AlphaMask("Laura_spunk_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask_underwear.png")
-    elif not LauraX.pussy_covered:
+    elif not LauraX.Outfit.pussy_covered:
         AlphaMask("Laura_spunk_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask.png")
 
 layeredimage Laura_standing_fondling_animations:

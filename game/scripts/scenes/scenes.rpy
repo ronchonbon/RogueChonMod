@@ -2354,7 +2354,7 @@ label PhoneSex(Girl=0):
     return
 
 label Rogue_First_Topless(Silent=0, Templine=0):
-    if RogueX.breasts_covered:
+    if RogueX.Outfit.breasts_covered:
 
         return
     if RogueX.location != Player.location and "phonesex" not in Player.recent_history:
@@ -2460,7 +2460,7 @@ label Rogue_First_Topless(Silent=0, Templine=0):
     return
 
 label Rogue_First_Bottomless(Silent=0):
-    if RogueX.pussy_covered:
+    if RogueX.Outfit.pussy_covered:
         return
     if RogueX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -2503,7 +2503,7 @@ label Rogue_First_Bottomless(Silent=0):
     return
 
 label Kitty_First_Topless(Silent=0, Templine=0):
-    if KittyX.breasts_covered:
+    if KittyX.Outfit.breasts_covered:
         return
     if KittyX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -2611,7 +2611,7 @@ label Kitty_First_Topless(Silent=0, Templine=0):
     return
 
 label Kitty_First_Bottomless(Silent=0):
-    if KittyX.pussy_covered:
+    if KittyX.Outfit.pussy_covered:
         return
     if KittyX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -2677,7 +2677,7 @@ label Kitty_First_Bottomless(Silent=0):
     return
 
 label Emma_First_Topless(Silent=0, Templine=0):
-    if EmmaX.breasts_covered:
+    if EmmaX.Outfit.breasts_covered:
         return
     if EmmaX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -2810,7 +2810,7 @@ label Emma_First_Topless(Silent=0, Templine=0):
     return
 
 label Emma_First_Bottomless(Silent=0):
-    if EmmaX.pussy_covered:
+    if EmmaX.Outfit.pussy_covered:
         return
     if EmmaX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -2893,7 +2893,7 @@ label Emma_First_Bottomless(Silent=0):
     return
 
 label Laura_First_Topless(Silent=0, Templine=0):
-    if LauraX.breasts_covered:
+    if LauraX.Outfit.breasts_covered:
         return
     if LauraX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -3008,7 +3008,7 @@ label Laura_First_Topless(Silent=0, Templine=0):
     return
 
 label Laura_First_Bottomless(Silent=0):
-    if LauraX.pussy_covered:
+    if LauraX.Outfit.pussy_covered:
         return
     if LauraX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -3095,7 +3095,7 @@ label Laura_First_Bottomless(Silent=0):
     return
 
 label Jean_First_Topless(Silent=0, Templine=0):
-    if JeanX.breasts_covered and not Templine:
+    if JeanX.Outfit.breasts_covered and not Templine:
 
 
         return
@@ -3229,7 +3229,7 @@ label Jean_First_Topless(Silent=0, Templine=0):
     return
 
 label Jean_First_Bottomless(Silent=0):
-    if JeanX.pussy_covered:
+    if JeanX.Outfit.pussy_covered:
         return
     if JeanX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -3323,7 +3323,7 @@ label Jean_First_Bottomless(Silent=0):
     return
 
 label Storm_First_Topless(Silent=0, Templine=0):
-    if StormX.breasts_covered:
+    if StormX.Outfit.breasts_covered:
         return
     if StormX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -3334,7 +3334,7 @@ label Storm_First_Topless(Silent=0, Templine=0):
     return
 
 label Storm_First_Bottomless(Silent=0):
-    if StormX.pussy_covered:
+    if StormX.Outfit.pussy_covered:
         return
     if StormX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -3345,7 +3345,7 @@ label Storm_First_Bottomless(Silent=0):
     return
 
 label Jubes_First_Topless(Silent=0, Templine=0):
-    if JubesX.breasts_covered:
+    if JubesX.Outfit.breasts_covered:
         return
     if JubesX.location != Player.location and "phonesex" not in Player.recent_history:
         return
@@ -3463,7 +3463,7 @@ label Jubes_First_Topless(Silent=0, Templine=0):
     return
 
 label Jubes_First_Bottomless(Silent=0):
-    if JubesX.pussy_covered:
+    if JubesX.Outfit.pussy_covered:
         return
     if JubesX.location != Player.location and "phonesex" not in Player.recent_history:
         return

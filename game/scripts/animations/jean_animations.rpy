@@ -691,8 +691,8 @@ image Jean_titjob_hair_animation5:
         repeat
 
 layeredimage Jean_sprite titjob:
-    if JeanX.outfit["bra"] in ["green_bra", "lace_bra"]:
-        "Jean_titjob_bra_back_animation[action_speed]" pos (0.0, -0.025)
+    # if JeanX.Clothes["bra"].string in ["green_bra", "lace_bra"]:
+    #     "Jean_titjob_bra_back_animation[action_speed]" pos (0.0, -0.025)
 
     always:
         "Jean_titjob_hair_back_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
@@ -709,8 +709,8 @@ layeredimage Jean_sprite titjob:
     always:
         "Zero_cock_Jean"
 
-    if JeanX.outfit["bra"] in ["sports_bra", "bikini_top"]:
-        "Jean_titjob_bra_stretch_animation[action_speed]"
+    # if JeanX.Outfit["bra"] in ["sports bra", "bikini top"]:
+    #     "Jean_titjob_bra_stretch_animation[action_speed]"
 
     always:
         "Jean_titjob_breasts_animation[action_speed]" pos (0.0, -0.025)

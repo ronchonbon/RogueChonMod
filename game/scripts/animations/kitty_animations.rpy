@@ -18,46 +18,42 @@ layeredimage Kitty_grool_dripping_animation:
     always:
         "grool_dripping_animation" pos (0.25, 1.2)
 
-    if KittyX.grool > 1 and not KittyX.pussy_covered:
+    if KittyX.grool > 1 and not KittyX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.25, 1.2)
 
-    if KittyX.grool > 1 and not KittyX.pussy_covered:
+    if KittyX.grool > 1 and not KittyX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.25, 1.2)
 
-    if KittyX.grool > 1 and not KittyX.pussy_covered:
+    if KittyX.grool > 1 and not KittyX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.25, 1.2)
 
 layeredimage Kitty_grool_animations:
     if not KittyX.grool:
         Null()
-    # elif KittyX.bottom_pulled_down:
-    #     AlphaMask("Kitty_grool_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask_pants.png")
-    elif KittyX.outfit["underwear"] and KittyX.underwear_pulled_down:
+    elif KittyX.Clothes["underwear"] and KittyX.Clothes["underwear"].state:
         AlphaMask("Kitty_grool_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask_underwear.png")
-    elif not KittyX.pussy_covered:
+    elif not KittyX.Outfit.pussy_covered:
         AlphaMask("Kitty_grool_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask.png")
 
 layeredimage Kitty_spunk_dripping_animation:
     always:
         "spunk_dripping_animation" pos (0.25, 1.2)
 
-    if not KittyX.pussy_covered:
+    if not KittyX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.25, 1.2)
 
-    if not KittyX.pussy_covered:
+    if not KittyX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.25, 1.2)
 
-    if not KittyX.pussy_covered:
+    if not KittyX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.25, 1.2)
 
 layeredimage Kitty_spunk_animations:
     if not KittyX.spunk["pussy"] and not KittyX.spunk["anus"]:
         Null()
-    # elif KittyX.bottom_pulled_down:
-    #     AlphaMask("Kitty_spunk_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask_pants.png")
-    elif KittyX.outfit["underwear"] and KittyX.underwear_pulled_down:
+    elif KittyX.Clothes["underwear"] and KittyX.Clothes["underwear"].state:
         AlphaMask("Kitty_spunk_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask_underwear.png")
-    elif not KittyX.pussy_covered:
+    elif not KittyX.Outfit.pussy_covered:
         AlphaMask("Kitty_spunk_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask.png")
 
 layeredimage Kitty_standing_fondling_animations:

@@ -253,15 +253,15 @@ label before_action(Girl, action, context = None):
                 elif action == "anal":
                     $ word = renpy.random.choice(["ass", "back door"])
 
-                if (Girl.wearing_pants and not Girl.bottom_pulled_down) and (Girl.outfit["underwear"] and not Girl.underwear_pulled_down):
+                if (Girl.wearing_pants and not Girl.Clothes["pants"].state) and (Girl.outfit["underwear"] and not Girl.Clothes["underwear"].state):
                     "You quickly pull down her pants and her [Girl.outfit['underwear']] and press against her [word]."
 
-                    $ Girl.bottom_pulled_down = True
-                    $ Girl.underwear_pulled_down = True
-                elif (Girl.outfit["underwear"] and not Girl.underwear_pulled_down):
+                    $ Girl.Clothes["pants"].state = True
+                    $ Girl.Clothes["underwear"].state = True
+                elif (Girl.outfit["underwear"] and not Girl.Clothes["underwear"].state):
                     "You quickly pull down her [Girl.outfit['underwear']] and press against her [word]."
 
-                    $ Girl.underwear_pulled_down = True
+                    $ Girl.Clothes["underwear"].state = True
 
                 if Girl.wearing_skirt:
                     $ Girl.upskirt = True

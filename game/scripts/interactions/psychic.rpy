@@ -58,7 +58,7 @@ label psychicFlash(Face="sly", TempLoc=0):
     $ Girl.arm_pose = 2
     $ Girl.top_pulled_up = 1
     $ Girl.upskirt = 1
-    $ Girl.underwear_pulled_down = 1
+    $ Girl.Clothes["underwear"].state = 1
     ". . . {w=0.3}{nw}"
     if Girl == EmmaX:
         hide Emma_sprite with fade

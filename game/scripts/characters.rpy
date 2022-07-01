@@ -164,7 +164,8 @@ init python:
 
             self.grool = 0
             self.wet = False
-            self.spunk = {"hair": False, "face": False, "mouth": False, "chin": False,
+            self.spunk = {
+                "hair": False, "face": False, "mouth": False, "chin": False,
                 "breasts": False, "back": False, "belly": False, "hand": False,
                 "pussy": False, "anus": False}
 
@@ -176,7 +177,8 @@ init python:
             for action in all_actions:
                 self.action_counter[action] = 0
 
-            self.event_counter = {"orgasmed": 0, "caught": 0, "sleepover": 0, "ass_slapped": 0,
+            self.event_counter = {
+                "orgasmed": 0, "caught": 0, "sleepover": 0, "ass_slapped": 0,
                 "swallowed": 0, "creampied": 0, "anal_creampied": 0,
                 "been_with_girl": 0, "seen_with_girl": 0,
                 "forced": 0}
@@ -193,9 +195,8 @@ init python:
             self.secondary_action = None
 
             self.Wardrobe = WardrobeClass()
-            self.set_default_Outfits()
-
-            self.todays_Outfit_name = "first_casual"
+            self.Outfit = self.Wardrobe.current_Outfit
+            self.Clothes = self.Outfit.Clothes
 
             self.Outfit_schedule = [
                 "first_casual",
@@ -206,6 +207,9 @@ init python:
                 "second_casual",
                 "first_casual"]
 
+            self.todays_Outfit_name = self.Outfit_schedule[weekday]
+
+            self.set_default_Outfits()
             self.change_Outfit("first_casual", instant = True)
 
             self.held_item = None
@@ -216,13 +220,14 @@ init python:
                 self.home = "bg_rogue"
                 self.pubes = "_hairy"
 
-                self.weekly_schedule = [["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
-                                 ["bg_classroom", "bg_dangerroom", "bg_rogue", "bg_rogue"],
-                                 ["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
-                                 ["bg_classroom", "bg_dangerroom", "bg_rogue", "bg_rogue"],
-                                 ["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
-                                 ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"],
-                                 ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"]]
+                self.weekly_schedule = [
+                    ["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
+                    ["bg_classroom", "bg_dangerroom", "bg_rogue", "bg_rogue"],
+                    ["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
+                    ["bg_classroom", "bg_dangerroom", "bg_rogue", "bg_rogue"],
+                    ["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
+                    ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"],
+                    ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"]]
 
                 self.likes = {"Kitty": 600, "Emma": 500, "Laura": 500, "Jean": 200, "Storm": 600, "Jubes": 500, "Mystique": 0}
 
@@ -243,13 +248,14 @@ init python:
                 self.like = ", like, "
                 self.Like = "Like, "
 
-                self.weekly_schedule = [["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
-                                 ["bg_classroom", "bg_pool", "bg_kitty", "bg_kitty"],
-                                 ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
-                                 ["bg_classroom", "bg_pool", "bg_kitty", "bg_kitty"],
-                                 ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
-                                 ["bg_campus", "bg_dangerroom", "bg_mall", "bg_kitty"],
-                                 ["bg_campus", "bg_dangerroom", "bg_kitty", "bg_kitty"]]
+                self.weekly_schedule = [
+                    ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
+                    ["bg_classroom", "bg_pool", "bg_kitty", "bg_kitty"],
+                    ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
+                    ["bg_classroom", "bg_pool", "bg_kitty", "bg_kitty"],
+                    ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
+                    ["bg_campus", "bg_dangerroom", "bg_mall", "bg_kitty"],
+                    ["bg_campus", "bg_dangerroom", "bg_kitty", "bg_kitty"]]
 
                 self.likes = {"Rogue": 600, "Emma": 500, "Laura": 500, "Jean": 300, "Storm": 600, "Jubes": 600, "Mystique": 0}
 
@@ -269,13 +275,14 @@ init python:
 
                 self.diamond = False
 
-                self.weekly_schedule = [["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
-                                 ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_emma"],
-                                 ["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
-                                 ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_emma"],
-                                 ["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
-                                 ["bg_pool", "bg_pool", "bg_emma", "bg_emma"],
-                                 ["bg_pool", "bg_pool", "bg_emma", "bg_emma"]]
+                self.weekly_schedule = [
+                    ["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
+                    ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_emma"],
+                    ["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
+                    ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_emma"],
+                    ["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
+                    ["bg_pool", "bg_pool", "bg_emma", "bg_emma"],
+                    ["bg_pool", "bg_pool", "bg_emma", "bg_emma"]]
 
                 self.likes = {"Rogue": 500, "Kitty": 500, "Laura": 500, "Jean": 100, "Storm": 500, "Jubes": 500, "Mystique": 0}
 
@@ -301,13 +308,14 @@ init python:
                 self.scent_timer = False
                 self.claws = False
 
-                self.weekly_schedule = [["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
-                                        ["bg_dangerroom", "bg_classroom", "bg_campus", "bg_laura"],
-                                        ["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
-                                        ["bg_dangerroom", "bg_classroom", "bg_campus", "bg_laura"],
-                                        ["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
-                                        ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"],
-                                        ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"]]
+                self.weekly_schedule = [
+                    ["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
+                    ["bg_dangerroom", "bg_classroom", "bg_campus", "bg_laura"],
+                    ["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
+                    ["bg_dangerroom", "bg_classroom", "bg_campus", "bg_laura"],
+                    ["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
+                    ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"],
+                    ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"]]
 
                 self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 500, "Jean": 300, "Storm": 500, "Jubes": 600, "Mystique": 0}
 
@@ -327,13 +335,14 @@ init python:
                 self.home = "bg_jean"
                 self.pubes = "_hairy"
 
-                self.weekly_schedule = [["bg_classroom", "bg_classroom", "bg_dangerroom", "bg_jean"],
-                                        ["bg_jean", "bg_classroom", "bg_jean", "bg_jean"],
-                                        ["bg_jean", "bg_classroom", "bg_dangerroom", "bg_jean"],
-                                        ["bg_classroom", "bg_classroom", "bg_jean", "bg_jean"],
-                                        ["bg_jean", "bg_classroom", "bg_dangerroom", "bg_jean"],
-                                        ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"],
-                                        ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"]]
+                self.weekly_schedule = [
+                    ["bg_classroom", "bg_classroom", "bg_dangerroom", "bg_jean"],
+                    ["bg_jean", "bg_classroom", "bg_jean", "bg_jean"],
+                    ["bg_jean", "bg_classroom", "bg_dangerroom", "bg_jean"],
+                    ["bg_classroom", "bg_classroom", "bg_jean", "bg_jean"],
+                    ["bg_jean", "bg_classroom", "bg_dangerroom", "bg_jean"],
+                    ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"],
+                    ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"]]
 
                 self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 300, "Laura": 500, "Storm": 300, "Jubes": 300, "Mystique": 0}
 
@@ -351,13 +360,14 @@ init python:
                 self.home = "bg_storm"
                 self.pubes = "_hairy"
 
-                self.weekly_schedule = [["bg_storm", "bg_dangerroom", "bg_dangerroom", "bg_storm"],
-                                        ["bg_teacher", "bg_teacher", "bg_classroom", "bg_storm"],
-                                        ["bg_storm", "bg_dangerroom", "bg_dangerroom", "bg_storm"],
-                                        ["bg_teacher", "bg_teacher", "bg_classroom", "bg_storm"],
-                                        ["bg_pool", "bg_campus", "bg_classroom", "bg_storm"],
-                                        ["bg_storm", "bg_campus", "bg_storm", "bg_pool"],
-                                        ["bg_storm", "bg_campus", "bg_storm", "bg_pool"]]
+                self.weekly_schedule = [
+                    ["bg_storm", "bg_dangerroom", "bg_dangerroom", "bg_storm"],
+                    ["bg_teacher", "bg_teacher", "bg_classroom", "bg_storm"],
+                    ["bg_storm", "bg_dangerroom", "bg_dangerroom", "bg_storm"],
+                    ["bg_teacher", "bg_teacher", "bg_classroom", "bg_storm"],
+                    ["bg_pool", "bg_campus", "bg_classroom", "bg_storm"],
+                    ["bg_storm", "bg_campus", "bg_storm", "bg_pool"],
+                    ["bg_storm", "bg_campus", "bg_storm", "bg_pool"]]
 
                 self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 400, "Laura": 500, "Jean": 300, "Jubes": 500, "Mystique": 0}
 
@@ -375,13 +385,14 @@ init python:
                 self.home = "bg_jubes"
                 self.pubes = "_hairy"
 
-                self.weekly_schedule = [["bg_jubes", "bg_dangerroom", "bg_dangerroom", "bg_jubes"],
-                                        ["bg_classroom", "bg_classroom", "bg_jubes", "bg_jubes"],
-                                        ["bg_jubes", "bg_dangerroom", "bg_dangerroom", "bg_jubes"],
-                                        ["bg_dangerroom", "bg_dangerroom", "bg_jubes", "bg_jubes"],
-                                        ["bg_pool", "bg_campus", "bg_mall", "bg_jubes"],
-                                        ["bg_jubes", "bg_campus", "bg_mall", "bg_pool"],
-                                        ["bg_jubes", "bg_campus", "bg_jubes", "bg_pool"]]
+                self.weekly_schedule = [
+                    ["bg_jubes", "bg_dangerroom", "bg_dangerroom", "bg_jubes"],
+                    ["bg_classroom", "bg_classroom", "bg_jubes", "bg_jubes"],
+                    ["bg_jubes", "bg_dangerroom", "bg_dangerroom", "bg_jubes"],
+                    ["bg_dangerroom", "bg_dangerroom", "bg_jubes", "bg_jubes"],
+                    ["bg_pool", "bg_campus", "bg_mall", "bg_jubes"],
+                    ["bg_jubes", "bg_campus", "bg_mall", "bg_pool"],
+                    ["bg_jubes", "bg_campus", "bg_jubes", "bg_pool"]]
 
                 self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 500, "Laura": 600, "Jean": 300, "Storm": 500, "Mystique": 0}
 
@@ -401,13 +412,14 @@ init python:
 
                 self.disguise = None
 
-                self.weekly_schedule = [["bg_office", "bg_office", "bg_office", "bg_mystique"],
-                                 ["bg_office", "bg_office", "bg_office", "bg_mystique"],
-                                 ["bg_office", "bg_office", "bg_office", "bg_mystique"],
-                                 ["bg_office", "bg_office", "bg_office", "bg_mystique"],
-                                 ["bg_office", "bg_office", "bg_dangerroom", "bg_mystique"],
-                                 ["bg_mystique", "bg_office", "bg_dangerroom", "bg_mystique"],
-                                 ["bg_mystique", "bg_pool", "bg_mall", "bg_mystique"]]
+                self.weekly_schedule = [
+                    ["bg_office", "bg_office", "bg_office", "bg_mystique"],
+                    ["bg_office", "bg_office", "bg_office", "bg_mystique"],
+                    ["bg_office", "bg_office", "bg_office", "bg_mystique"],
+                    ["bg_office", "bg_office", "bg_office", "bg_mystique"],
+                    ["bg_office", "bg_office", "bg_dangerroom", "bg_mystique"],
+                    ["bg_mystique", "bg_office", "bg_dangerroom", "bg_mystique"],
+                    ["bg_mystique", "bg_pool", "bg_mall", "bg_mystique"]]
 
                 self.likes = {"Rogue": 0, "Kitty": 0, "Emma": 0, "Laura": 0, "Jean": 0, "Storm": 0, "Jubes": 0}
 
@@ -795,10 +807,14 @@ init python:
 
             self.Outfit.change_into(Clothing = self.Wardrobe.Clothes[Clothing_name])
 
+            self.Wardrobe.temp_Outfit = copy.deepcopy(self.Outfit)
+
             return
 
         def change_out_of(self, Clothing_type):
             self.Outfit.change_out_of(Clothing_type = Clothing_type)
+
+            self.Wardrobe.temp_Outfit = copy.deepcopy(self.Outfit)
 
             return
 
@@ -808,43 +824,49 @@ init python:
             return
 
         def expose_breasts(self):
-            for Clothing_type in reversed(self.hide_breasts):
-                self.Outfit.Clothes[Clothing_type].take_off()
+            for Clothing_type in reversed(self.Outfit.hide_breasts):
+                if self.Clothes[Clothing_type].number_of_states > 2:
+                    self.Clothes[Clothing_type].state += 2
 
-                if self.Outfit.Clothes[Clothing_type].undress_state == 0:
+                    renpy.pause(0.2)
+                elif self.Clothes[Clothing_type].number_of_states == 1:
+                    self.Clothes[Clothing_type].take_off()
+                else:
                     self.Outfit.remove_Clothing(Clothing_type)
+
+                    renpy.pause(0.2)
 
             return
 
         def expose_underwear(self):
-            for Clothing_type in reversed(self.hide_underwear):
-                self.Outfit.Clothes[Clothing_type].take_off()
+            for Clothing_type in reversed(self.Outfit.hide_underwear):
+                self.Clothes[Clothing_type].take_off()
 
-                if self.Outfit.Clothes[Clothing_type].undress_state == 0:
+                if self.Clothes[Clothing_type].state < 1:
                     self.Outfit.remove_Clothing(Clothing_type)
 
             return
 
         def expose_pussy(self):
-            for Clothing_type in reversed(self.hide_pussy):
-                self.Outfit.Clothes[Clothing_type].take_off()
+            for Clothing_type in reversed(self.Outfit.hide_pussy):
+                self.Clothes[Clothing_type].take_off()
 
-                if self.Outfit.Clothes[Clothing_type].undress_state == 0:
+                if self.Clothes[Clothing_type].state < 1:
                     self.Outfit.remove_Clothing(Clothing_type)
 
             return
 
         def fix_clothing(self):
             for Clothing_type in self.Outfit.removable():
-                if self.Wardrobe.temp_Outfit.Clothes[Clothing_type] and not self.Outfit.Clothes[Clothing_type]:
-                    self.Wardrobe.temp_Outfit.Clothes[Clothing_type].undress_state = self.Wardrobe.temp_Outfit.Clothes[Clothing_type].max_undress_state
+                if self.Wardrobe.temp_Outfit.Clothes[Clothing_type] and not self.Clothes[Clothing_type]:
+                    self.Wardrobe.temp_Outfit.Clothes[Clothing_type].state = self.Wardrobe.temp_Outfit.Clothes[Clothing_type].undressed_state
 
                     self.Outfit.add_Clothing(self.Wardrobe.temp_Outfit.Clothes[Clothing_type])
 
                     renpy.pause(0.2)
 
-                if self.Outfit.Clothes[Clothing_type].undress_state:
-                    self.Outfit.Clothes[Clothing_type].put_on()
+                if self.Clothes[Clothing_type].state > 0:
+                    self.Clothes[Clothing_type].put_on()
 
             return
 
@@ -877,6 +899,8 @@ init python:
             self.Wardrobe.change_Outfit(Outfit = self.Wardrobe.Outfits[Outfit_name], instant = instant)
 
             self.Outfit = self.Wardrobe.current_Outfit
+
+            self.Clothes = self.Outfit.Clothes
 
             return
 

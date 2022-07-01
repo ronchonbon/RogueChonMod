@@ -2,17 +2,17 @@ layeredimage Jubes_sprite standing:
     # always:
     #     "images/Jubes_standing/Jubes_standing_head_reference.png"
 
-    if JubesX.outfit["jacket"]:
-        "images/Jubes_standing/Jubes_standing_jacket[JubesX.outfit[jacket]]_collar.png"
+    if JubesX.Clothes["jacket"]:
+        "images/Jubes_standing/Jubes_standing_jacket_[JubesX.Clothes[jacket].string]_collar.png"
 
-    if JubesX.outfit["jacket"] and JubesX.jacket_opened:
-        "images/Jubes_standing/Jubes_standing_jacket[JubesX.outfit[jacket]][JubesX.arm_pose]_back_open.png"
+    if JubesX.Clothes["jacket"] and JubesX.Clothes["jacket"].state:
+        "images/Jubes_standing/Jubes_standing_jacket[JubesX.Clothes[jacket].string][JubesX.arm_pose]_back.png"
 
-    if JubesX.outfit["bottom"] and JubesX.bottom_pulled_down:
-        "images/Jubes_standing/Jubes_standing_bottom[JubesX.outfit[bottom]]_back_down.png"
+    if JubesX.Clothes["pants"] and JubesX.Clothes["pants"].state:
+        "images/Jubes_standing/Jubes_standing_pants_[JubesX.Clothes[pants].string]_back.png"
 
-    if JubesX.outfit["underwear"] and JubesX.underwear_pulled_down:
-        "images/Jubes_standing/Jubes_standing_underwear[JubesX.outfit[underwear]]_back_down.png"
+    if JubesX.Clothes["underwear"] and JubesX.Clothes["underwear"].state:
+        "images/Jubes_standing/Jubes_standing_underwear_[JubesX.Clothes[underwear].string]_back.png"
 
     always:
         "Jubes_hair_back" pos (0.324, 0.406) zoom 0.37
@@ -23,32 +23,24 @@ layeredimage Jubes_sprite standing:
     if JubesX.pubes:
         "images/Jubes_standing/Jubes_standing_pubes.png"
 
-    if JubesX.outfit["piercings"]:
-        "images/Jubes_standing/Jubes_standing_piercings_breasts[JubesX.outfit[piercings]].png"
+    if JubesX.Clothes["body_piercings"]:
+        "images/Jubes_standing/Jubes_standing_body_piercings_breasts_[JubesX.Clothes[body_piercings].string].png"
 
-    if JubesX.outfit["piercings"]:
-        "images/Jubes_standing/Jubes_standing_piercings_pussy[JubesX.outfit[piercings]].png"
+    if JubesX.Clothes["body_piercings"]:
+        "images/Jubes_standing/Jubes_standing_body_piercings_pussy_[JubesX.Clothes[body_piercings].string].png"
 
-    if not JubesX.outfit["bra"]:
+    if JubesX.Clothes["bra"]:
+        "images/Jubes_standing/Jubes_standing_bra_[JubesX.Clothes[bra].string]_[JubesX.Clothes[bra].state].png"
+
+    if not JubesX.Clothes["underwear"]:
         Null()
-    elif JubesX.bra_pulled_up:
-        "images/Jubes_standing/Jubes_standing_bra[JubesX.outfit[bra]]_up.png"
-    else:
-        "images/Jubes_standing/Jubes_standing_bra[JubesX.outfit[bra]].png"
-
-    if not JubesX.outfit["underwear"]:
-        Null()
-    elif JubesX.underwear_pulled_down and JubesX.grool > 1:
-        "images/Jubes_standing/Jubes_standing_underwear[JubesX.outfit[underwear]]_down_grool.png"
-    elif JubesX.underwear_pulled_down:
-        "images/Jubes_standing/Jubes_standing_underwear[JubesX.outfit[underwear]]_down.png"
     elif JubesX.grool > 1:
-        "images/Jubes_standing/Jubes_standing_underwear[JubesX.outfit[underwear]]_grool.png"
+        "images/Jubes_standing/Jubes_standing_underwear_[JubesX.Clothes[underwear].string]_grool_[JubesX.Clothes[underwear].state].png"
     else:
-        "images/Jubes_standing/Jubes_standing_underwear[JubesX.outfit[underwear]].png"
+        "images/Jubes_standing/Jubes_standing_underwear_[JubesX.Clothes[underwear].string]_[JubesX.Clothes[underwear].state].png"
 
-    if JubesX.outfit["hose"] and not JubesX.hose_pulled_down:
-        "images/Jubes_standing/Jubes_standing_hose[JubesX.outfit[hose]].png"
+    if JubesX.Clothes["hose"]:
+        "images/Jubes_standing/Jubes_standing_hose_[JubesX.Clothes[hose].string].png"
 
     always:
         "Jubes_grool_animations"
@@ -59,63 +51,38 @@ layeredimage Jubes_sprite standing:
     always:
         "Jubes_spunk_animations"
 
-    if not JubesX.outfit["bottom"]:
-        Null()
-    elif JubesX.bottom_pulled_down or JubesX.upskirt:
-        "images/Jubes_standing/Jubes_standing_bottom[JubesX.outfit[bottom]]_down.png"
-    else:
-        "images/Jubes_standing/Jubes_standing_bottom[JubesX.outfit[bottom]].png"
+    if JubesX.Clothes["pants"]:
+        "images/Jubes_standing/Jubes_standing_pants_[JubesX.Clothes[pants].string]_[JubesX.Clothes[pants].state].png"
 
-    if JubesX.outfit["bottom"] and not JubesX.bottom_pulled_down and JubesX.grool > 1:
-        "images/Jubes_standing/Jubes_standing_grool.png"
-    elif JubesX.grool:
+    if JubesX.Clothes["skirt"]:
+        "images/Jubes_standing/Jubes_standing_skirt_[JubesX.Clothes[skirt].string]_[JubesX.Clothes[skirt].state].png"
+
+    if JubesX.grool and not JubesX.Outfit.pussy_covered:
         "images/Jubes_standing/Jubes_standing_grool.png"
 
-    if not JubesX.outfit["top"]:
-        Null()
-    elif JubesX.outfit["top"] == "towel":
-        "images/Jubes_standing/Jubes_standing_top[JubesX.outfit[top]][JubesX.arm_pose].png"
-    elif JubesX.top_pulled_up:
-        "images/Jubes_standing/Jubes_standing_top[JubesX.outfit[top]]_up.png"
-    else:
-        "images/Jubes_standing/Jubes_standing_top[JubesX.outfit[top]].png"
+    if JubesX.Clothes["top"]:
+        "images/Jubes_standing/Jubes_standing_top[JubesX.arm_pose]_[JubesX.Clothes[top].string]_[JubesX.Clothes[top].state].png"
 
-    if JubesX.outfit["neck"]:
-        "images/Jubes_standing/Jubes_standing_neck[JubesX.outfit[neck]].png"
+    if JubesX.Clothes["neck"]:
+        "images/Jubes_standing/Jubes_standing_neck[JubesX.Clothes[neck].string].png"
 
     always:
         "Jubes_head" pos (0.324, 0.406) zoom 0.37
 
-    if JubesX.outfit["piercings"] and JubesX.pussy_covered:
-        "images/Jubes_standing/Jubes_standing_piercings_pussy[JubesX.outfit[piercings]]_covered.png"
+    if JubesX.Clothes["body_piercings"] and JubesX.Outfit.pussy_covered:
+        "images/Jubes_standing/Jubes_standing_body_piercings_pussy[JubesX.Clothes[body_piercings].string]_covered.png"
 
-    if JubesX.outfit["piercings"] and JubesX.breasts_covered:
-        "images/Jubes_standing/Jubes_standing_piercings_breasts[JubesX.outfit[piercings]]_covered.png"
+    if JubesX.Clothes["body_piercings"] and JubesX.Outfit.breasts_covered:
+        "images/Jubes_standing/Jubes_standing_body_piercings_breasts[JubesX.Clothes[body_piercings].string]_covered.png"
 
-    if JubesX.outfit["jacket"] and JubesX.jacket_closed and JubesX.arm_pose == 2:
-        "images/Jubes_standing/Jubes_standing_jacket[JubesX.outfit[jacket]][JubesX.arm_pose]_sleeves_closed.png"
+    if JubesX.Clothes["jacket"] and JubesX.Clothes["jacket"].state == -1 and JubesX.arm_pose == 2:
+        "images/Jubes_standing/Jubes_standing_jacket[JubesX.arm_pose]_[JubesX.Clothes[jacket].string]_sleeves.png"
 
-    if not JubesX.outfit["suspenders"]:
-        Null()
-    elif JubesX.suspenders_aside:
-        "images/Jubes_standing/Jubes_standing_suspenders[JubesX.outfit[suspenders]]_aside.png"
-    else:
-        "images/Jubes_standing/Jubes_standing_suspenders[JubesX.outfit[suspenders]].png"
+    if JubesX.Clothes["suspenders"]:
+        "images/Jubes_standing/Jubes_standing_suspenders_[JubesX.Clothes[suspenders].string]_[JubesX.Clothes[suspsenders].state].png"
 
-    if not JubesX.outfit["jacket"]:
-        Null()
-    elif JubesX.jacket_opened and JubesX.upskirt:
-        "images/Jubes_standing/Jubes_standing_jacket[JubesX.outfit[jacket]][JubesX.arm_pose]_open_up.png"
-    elif JubesX.jacket_opened:
-        "images/Jubes_standing/Jubes_standing_jacket[JubesX.outfit[jacket]][JubesX.arm_pose]_open.png"
-    elif JubesX.jacket_closed and JubesX.upskirt:
-        "images/Jubes_standing/Jubes_standing_jacket[JubesX.outfit[jacket]][JubesX.arm_pose]_closed_up.png"
-    elif JubesX.jacket_closed:
-        "images/Jubes_standing/Jubes_standing_jacket[JubesX.outfit[jacket]][JubesX.arm_pose]_closed.png"
-    elif JubesX.upskirt:
-        "images/Jubes_standing/Jubes_standing_jacket[JubesX.outfit[jacket]][JubesX.arm_pose]_up.png"
-    else:
-        "images/Jubes_standing/Jubes_standing_jacket[JubesX.outfit[jacket]][JubesX.arm_pose].png"
+    if JubesX.Clothes["jacket"]:
+        "images/Jubes_standing/Jubes_standing_jacket[JubesX.arm_pose]_[JubesX.Clothes[jacket].string]_[JubesX.Clothes[jacket].state].png"
 
     always:
         "images/Jubes_standing/Jubes_standing_hand[JubesX.arm_pose]_left.png"
@@ -133,7 +100,7 @@ layeredimage Jubes_sprite standing:
         "images/Jubes_standing/Jubes_standing_water_arm[JubesX.arm_pose].png"
 
     if JubesX.held_item and JubesX.arm_pose == 1:
-        "images/Jubes_standing/Jubes_standing_held[JubesX.outfit[held_item]].png"
+        "images/Jubes_standing/Jubes_standing_held_item_[JubesX.Clothes[held_item].string].png"
 
     always:
         "Jubes_standing_fondling_animations" zoom 0.91
@@ -142,9 +109,9 @@ layeredimage Jubes_sprite standing:
 
 layeredimage Jubes_hair_back:
     if JubesX.wet:
-        "images/Jubes_standing/Jubes_standing_hair_wet_back.png"
+        "images/Jubes_standing/Jubes_standing_hair_wet_hair_back.png"
     else:
-        "images/Jubes_standing/Jubes_standing_hair[JubesX.outfit[hair]]_back.png"
+        "images/Jubes_standing/Jubes_standing_hair_[JubesX.Clothes[hair].string]_back.png"
 
     anchor (0.5, 0.5)
 
@@ -166,8 +133,8 @@ layeredimage Jubes_head:
     else:
         "Jubes_blinking"
 
-    if JubesX.outfit["face_inner_accessory"]:
-        "images/Jubes_standing/Jubes_standing_face_inner_accessory[JubesX.outfit[face_inner_accessory]].png"
+    if JubesX.Clothes["face_inner_accessory"]:
+        "images/Jubes_standing/Jubes_standing_face_inner_accessory_[JubesX.Clothes[face_inner_accessory].string].png"
 
     if JubesX.spunk["chin"]:
         "images/Jubes_standing/Jubes_standing_spunk_chin.png"
@@ -176,15 +143,15 @@ layeredimage Jubes_head:
         "images/Jubes_standing/Jubes_standing_spunk_face.png"
 
     if JubesX.wet:
-        "images/Jubes_standing/Jubes_standing_hair_wet.png"
+        "images/Jubes_standing/Jubes_standing_hair_wet_hair.png"
     else:
-        "images/Jubes_standing/Jubes_standing_hair[JubesX.outfit[hair]].png"
+        "images/Jubes_standing/Jubes_standing_hair_[JubesX.Clothes[hair].string].png"
 
-    if JubesX.outfit["face_outer_accessory"]:
-        "images/Jubes_standing/Jubes_standing_face_outer_accessory[JubesX.outfit[face_outer_accessory]].png"
+    if JubesX.Clothes["face_outer_accessory"]:
+        "images/Jubes_standing/Jubes_standing_face_outer_accessory_[JubesX.Clothes[face_outer_accessory].string].png"
 
     if JubesX.spunk["hair"]:
-        "images/Jubes_standing/Jubes_standing_spunk_hair[JubesX.outfit[hair]].png"
+        "images/Jubes_standing/Jubes_standing_spunk_hair_[JubesX.Clothes[hair].string].png"
 
     if JubesX.wet:
         "images/Jubes_standing/Jubes_standing_water_head.png"
@@ -202,29 +169,23 @@ image Jubes_handjob_over:
     anchor (0.5, 0.5)
 
 image Jubes_titjob_jacket_back:
-    "images/Jubes_titjob/Jubes_titjob_jacket[JubesX.outfit[jacket]]_back.png"
+    "images/Jubes_titjob/Jubes_titjob_jacket_[JubesX.Clothes[jacket].string]_back.png"
 
     anchor (0.5, 0.5)
 
 layeredimage Jubes_titjob_bra_back:
-    if JubesX.outfit["bra"] not in ["sports_bra", "bikini_top"]:
+    if JubesX.Clothes["bra"].string not in ["sports_bra", "bikini_top"]:
         Null()
-    elif JubesX.bra_pulled_up:
-        "images/Jubes_titjob/Jubes_titjob_bra[JubesX.outfit[bra]]_back_up.png"
+    elif JubesX.Clothes["bra"].state:
+        "images/Jubes_titjob/Jubes_titjob_bra_[JubesX.Clothes[bra].string]_back_[JubesX.Clothes[bra].state].png"
     else:
-        "images/Jubes_titjob/Jubes_titjob_bra[JubesX.outfit[bra]]_back.png"
+        "images/Jubes_titjob/Jubes_titjob_bra_[JubesX.Clothes[bra].string]_back.png"
 
     anchor (0.5, 0.5)
 
 layeredimage Jubes_titjob_body:
     always:
         "images/Jubes_titjob/Jubes_titjob_body.png"
-
-    if JubesX.outfit["jacket"]:
-        "images/Jubes_titjob/Jubes_titjob_jacket[JubesX.outfit[jacket]].png"
-
-    if JubesX.outfit["top"]:
-        "images/Jubes_titjob/Jubes_titjob_top[JubesX.outfit[top]]_base.png"
 
     if JubesX.spunk["breasts"]:
         "images/Jubes_titjob/Jubes_titjob_spunk_breasts_under.png"
@@ -239,23 +200,6 @@ image Jubes_titjob_breasts_under:
 layeredimage Jubes_titjob_breasts:
     always:
         "images/Jubes_titjob/Jubes_titjob_breasts.png"
-
-    if not JubesX.outfit["bra"]:
-        Null()
-    elif JubesX.bra_pulled_up:
-        "images/Jubes_titjob/Jubes_titjob_bra[JubesX.outfit[bra]]_up.png"
-    else:
-        "images/Jubes_titjob/Jubes_titjob_bra[JubesX.outfit[bra]].png"
-
-    if JubesX.outfit["piercings"]:
-        "images/Jubes_titjob/Jubes_titjob_piercings[JubesX.outfit[piercings]].png"
-
-    if not JubesX.outfit["piercings"] or not JubesX.breasts_covered:
-        Null()
-    elif JubesX.outfit["top"] == "pink_shirt":
-        "images/Jubes_titjob/Jubes_titjob_piercings[JubesX.outfit[piercings]][JubesX.outfit[top]]_covered.png"
-    elif JubesX.outfit["bra"]:
-        "images/Jubes_titjob/Jubes_titjob_piercings[JubesX.outfit[piercings]][JubesX.outfit[bra]]_covered.png"
 
     if JubesX.spunk["breasts"]:
         "images/Jubes_titjob/Jubes_titjob_spunk_breasts.png"
@@ -299,9 +243,6 @@ layeredimage Jubes_blowjob_head:
     else:
         "Jubes_blowjob_blinking"
 
-    if JubesX.outfit["face_inner_accessory"]:
-        "images/Jubes_blowjob/Jubes_blowjob_face_inner_accessory[JubesX.outfit[face_inner_accessory]].png"
-
     if JubesX.spunk["face"]:
         "images/Jubes_blowjob/Jubes_blowjob_spunk_face.png"
 
@@ -309,9 +250,9 @@ layeredimage Jubes_blowjob_head:
         "images/Jubes_blowjob/Jubes_blowjob_water_head.png"
 
     if JubesX.wet:
-        "images/Jubes_blowjob/Jubes_blowjob_hair_wet.png"
+        "images/Jubes_blowjob/Jubes_blowjob_hair_wet_hair.png"
     else:
-        "images/Jubes_blowjob/Jubes_blowjob_hair[JubesX.outfit[hair]].png"
+        "images/Jubes_blowjob/Jubes_blowjob_hair_[JubesX.Clothes[hair].string].png"
 
     if JubesX.spunk["hair"]:
         "images/Jubes_blowjob/Jubes_blowjob_spunk_hair.png"

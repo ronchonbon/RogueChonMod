@@ -18,17 +18,22 @@ init -2 python:
             self.hides = hides
             self.covers = covers
 
-            self.max_undress_state = number_of_states - 1
+            self.number_of_states = number_of_states
 
             self.poses = poses
 
-            self.undress_state = 0
+            self.state = 0
+
+            if number_of_states > 1:
+                self.undressed_state = 1
+            else:
+                self.undressed_state = 0
 
             self.set_Clothing_flags()
 
         def put_on(self):
-            while self.undress_state > 0:
-                self.undress_state -= 1
+            while self.state > 0:
+                self.state -= 1
 
                 renpy.pause(0.2)
 
@@ -37,8 +42,8 @@ init -2 python:
             return
 
         def take_off(self):
-            while self.undress_state < self.max_undress_state:
-                self.undress_state += 1
+            while self.state < self.undressed_state:
+                self.state += 1
 
                 renpy.pause(0.2)
 
@@ -57,31 +62,31 @@ init -2 python:
             self.covers_feet = False
 
             if "breasts" in self.hides:
-                if self.type in ["bodysuit", "dress"] and self.undress_state < 2:
+                if self.type in ["bodysuit", "dress"] and self.state < 2:
                     self.hides_breasts = True
-                elif self.type in ["top", "jacket"] and not self.undress_state:
+                elif self.type in ["top", "jacket"] and self.state < 1:
                     self.hides_breasts = True
                 else:
                     self.hides_breasts = True
 
             if "breasts" in self.covers:
-                if self.type in ["bodysuit", "dress"] and self.undress_state < 2:
+                if self.type in ["bodysuit", "dress"] and self.state < 2:
                     self.covers_breasts = True
-                elif self.type in ["top", "jacket"] and not self.undress_state:
+                elif self.type in ["top", "jacket"] and self.state < 1:
                     self.covers_breasts = True
                 else:
                     self.covers_breasts = True
 
             if "pussy" in self.hides:
-                if not self.undress_state:
+                if self.state != 1:
                     self.hides_pussy = True
 
             if "pussy" in self.covers:
-                if not self.undress_state:
+                if self.state != 1:
                     self.covers_pussy = True
 
             if "thighs" in self.covers:
-                if not self.undress_state:
+                if self.state != 1:
                     self.covers_thighs = True
 
             if "feet" in self.covers:
@@ -214,7 +219,7 @@ init -2 python:
 
                 renpy.pause(0.2)
 
-            Clothing.undress_state = Clothing.max_undress_state
+            Clothing.state = Clothing.undressed_state
             self.add_Clothing(Clothing)
 
             renpy.pause(0.2)
@@ -230,7 +235,7 @@ init -2 python:
 
             for c in range(len(covering_Clothes)):
                 if temp_Clothes[covering_Clothes[c]]:
-                    temp_Clothes[covering_Clothes[c]].undress_state = temp_Clothes[covering_Clothes[c]].max_undress_state
+                    temp_Clothes[covering_Clothes[c]].state = temp_Clothes[covering_Clothes[c]].undressed_state
                     self.add_Clothing(temp_Clothes[covering_Clothes[c]])
 
                     renpy.pause(0.2)
@@ -279,7 +284,7 @@ init -2 python:
 
             for c in range(len(covering_Clothes)):
                 if temp_Clothes[covering_Clothes[c]]:
-                    temp_Clothes[covering_Clothes[c]].undress_state = temp_Clothes[covering_Clothes[c]].max_undress_state
+                    temp_Clothes[covering_Clothes[c]].state = temp_Clothes[covering_Clothes[c]].undressed_state
                     self.add_Clothing(temp_Clothes[covering_Clothes[c]])
 
                     renpy.pause(0.2)
@@ -449,7 +454,7 @@ init -2 python:
 
                 for Clothing_type in Outfit.removable:
                     if Outfit.Clothes[Clothing_type]:
-                        Outfit.Clothes[Clothing_type].undress_state = Outfit.Clothes[Clothing_type].max_undress_state
+                        Outfit.Clothes[Clothing_type].state = Outfit.Clothes[Clothing_type].undressed_state
 
                         self.current_Outfit.add_Clothing(Outfit.Clothes[Clothing_type])
 

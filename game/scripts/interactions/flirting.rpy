@@ -4190,7 +4190,7 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
     elif Girl.wearing_shorts:
         "She hands you the panties and then pulls her shorts back up."
 
-        $ Girl.bottom_pulled_down = False
+        $ Girl.Clothes["pants"].state = False
     elif Girl.wearing_skirt and Girl.outfit["hose"] in ["tights", "pantyhose"]:
         "She hands you the panties and then pulls her [Girl.outfit[hose]] back on and her skirt back down."
 

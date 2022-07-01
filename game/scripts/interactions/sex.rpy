@@ -1139,7 +1139,7 @@ label girl_initiated_action(Girl, action):
                 "grabs your arm and rubs your hand against her asshole"])
 
 
-        if (Girl.outfit["bottom"] and not Girl.upskirt) or (Girl.outfit["underwear"] and not Girl.underwear_pulled_down):
+        if (Girl.outfit["bottom"] and not Girl.upskirt) or (Girl.outfit["underwear"] and not Girl.Clothes["underwear"].state):
             if approval_check(Girl, 1250, taboo_modifier = 1) or (Girl.seen_pussy and approval_check(Girl, 500) and not taboo):
                 call expose_pussy(Girl)
 
@@ -1222,13 +1222,13 @@ label girl_initiated_action(Girl, action):
 
                 "[line]"
 
-                $ Girl.bottom_pulled_down
+                $ Girl.Clothes["pants"].state
             elif Girl.wearing_shorts:
                 $ line = renpy.random.choice(["[Girl.name] rolls onto her back and pulls you against her, sliding her shorts off as she does so."])
 
                 "[line]"
 
-                $ Girl.bottom_pulled_down
+                $ Girl.Clothes["pants"].state
             else:
                 $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock.",
                     "[Girl.name] rolls back and pulls you toward her.",

@@ -1,12 +1,9 @@
 layeredimage Kitty_sprite standing:
-    if KittyX.Outfit.Clothes["skirt"] == "Aerith_skirt":
+    if KittyX.Outfit.Clothes["skirt"].string == "Aerith_skirt":
         "images/Kitty_standing/Kitty_standing_skirt_[KittyX.Outfit.Clothes[skirt].string]_back.png"
 
     always:
         "Kitty_hair_back" pos (0.24, 0.3) zoom 0.5
-
-    if KittyX.Outfit.Clothes["buttplug"]:
-        "images/Kitty_standing/Kitty_standing_buttplug_[KittyX.Outfit.Clothes[buttplug].string].png"
 
     always:
         "images/Kitty_standing/Kitty_standing_arms[KittyX.arm_pose].png"
@@ -25,14 +22,10 @@ layeredimage Kitty_sprite standing:
 
     if not KittyX.Outfit.Clothes["underwear"]:
         Null()
-    elif KittyX.Outfit.Clothes["underwear"].undress_state and KittyX.grool > 1:
-        "images/Kitty_standing/Kitty_standing_underwear_[KittyX.Outfit.Clothes[underwear].string]_grool_[KittyX.Outfit.Clothes[underwear].undress_state].png"
-    elif KittyX.Outfit.Clothes["underwear"].undress_state:
-        "images/Kitty_standing/Kitty_standing_underwear_[KittyX.Outfit.Clothes[underwear].string]_[KittyX.Outfit.Clothes[underwear].undress_state].png"
     elif KittyX.grool > 1:
-        "images/Kitty_standing/Kitty_standing_underwear_[KittyX.Outfit.Clothes[underwear].string]_grool.png"
+        "images/Kitty_standing/Kitty_standing_underwear_[KittyX.Outfit.Clothes[underwear].string]_grool_[KittyX.Outfit.Clothes[underwear].state].png"
     else:
-        "images/Kitty_standing/Kitty_standing_underwear_[KittyX.Outfit.Clothes[underwear].string].png"
+        "images/Kitty_standing/Kitty_standing_underwear_[KittyX.Outfit.Clothes[underwear].string]_[KittyX.Outfit.Clothes[underwear].state].png"
 
     if KittyX.Outfit.Clothes["hose"]:
         "images/Kitty_standing/Kitty_standing_hose_[KittyX.Outfit.Clothes[hose].string].png"
@@ -52,46 +45,30 @@ layeredimage Kitty_sprite standing:
     always:
         "Kitty_spunk_animations"
 
-    if not KittyX.Outfit.Clothes["bra"]:
-        Null()
-    elif KittyX.Outfit.Clothes["bra"].undress_state:
-        "images/Kitty_standing/Kitty_standing_bra[KittyX.arm_pose]_[KittyX.Outfit.Clothes[bra].string]_[KittyX.Outfit.Clothes[bra].undress_state].png"
-    else:
-        "images/Kitty_standing/Kitty_standing_bra[KittyX.arm_pose]_[KittyX.Outfit.Clothes[bra].string].png"
+    if KittyX.Outfit.Clothes["bra"]:
+        "images/Kitty_standing/Kitty_standing_bra[KittyX.arm_pose]_[KittyX.Outfit.Clothes[bra].string]_[KittyX.Outfit.Clothes[bra].state].png"
 
     if KittyX.Outfit.Clothes["neck"]:
         "images/Kitty_standing/Kitty_standing_neck_[KittyX.Outfit.Clothes[neck].string].png"
 
     if not KittyX.Outfit.Clothes["pants"]:
         Null()
-    elif KittyX.grool > 1 and KittyX.Outfit.Clothes["pants"] == "yellow_shorts":
+    elif KittyX.grool > 1 and KittyX.Outfit.Clothes["pants"].string == "yellow_shorts":
         "images/Kitty_standing/Kitty_standing_pants_[KittyX.Outfit.Clothes[pants].string]_grool.png"
     else:
         "images/Kitty_standing/Kitty_standing_pants_[KittyX.Outfit.Clothes[pants].string].png"
 
-    if not KittyX.Outfit.Clothes["skirt"]:
-        Null()
-    elif KittyX.Outfit.Clothes["skirt"].undress_state:
-        "images/Kitty_standing/Kitty_standing_skirt_[KittyX.Outfit.Clothes[skirt].string]_[KittyX.Outfit.Clothes[skirt].undress_state].png"
-    else:
-        "images/Kitty_standing/Kitty_standing_skirt_[KittyX.Outfit.Clothes[skirt].string].png"
+    if KittyX.Outfit.Clothes["skirt"]:
+        "images/Kitty_standing/Kitty_standing_skirt_[KittyX.Outfit.Clothes[skirt].string]_[KittyX.Outfit.Clothes[skirt].state].png"
 
-    if not KittyX.Outfit.Clothes["top"]:
-        Null()
-    elif KittyX.Outfit.Clothes["top"].undress_state:
-        "images/Kitty_standing/Kitty_standing_top[KittyX.arm_pose]_[KittyX.Outfit.Clothes[top].string]_[KittyX.Outfit.Clothes[top].undress_state].png"
-    else:
-        "images/Kitty_standing/Kitty_standing_top[KittyX.arm_pose]_[KittyX.Outfit.Clothes[top].string].png"
+    if KittyX.Outfit.Clothes["top"]:
+        "images/Kitty_standing/Kitty_standing_top[KittyX.arm_pose]_[KittyX.Outfit.Clothes[top].string]_[KittyX.Outfit.Clothes[top].state].png"
 
-    if KittyX.Outfit.Clothes["body_piercings"] and KittyX.breasts_covered:
+    if KittyX.Outfit.Clothes["body_piercings"] and KittyX.Outfit.breasts_covered:
         "images/Kitty_standing/Kitty_standing_body_piercings_breasts_[KittyX.Outfit.Clothes[body_piercings].string]_covered.png"
 
-    if not KittyX.Outfit.Clothes["jacket"]:
-        Null()
-    elif KittyX.Outfit.Clothes["jacket"].undress_state:
-        "images/Kitty_standing/Kitty_standing_jacket[KittyX.arm_pose]_[KittyX.Outfit.Clothes[jacket].string]_[KittyX.Outfit.Clothes[jacket].undress_state].png"
-    else:
-        "images/Kitty_standing/Kitty_standing_jacket[KittyX.arm_pose]_[KittyX.Outfit.Clothes[jacket].string].png"
+    if KittyX.Outfit.Clothes["jacket"]:
+        "images/Kitty_standing/Kitty_standing_jacket[KittyX.arm_pose]_[KittyX.Outfit.Clothes[jacket].string]_[KittyX.Outfit.Clothes[jacket].state].png"
 
     always:
         "Kitty_head" pos (0.24, 0.3) zoom 0.5
@@ -126,7 +103,7 @@ layeredimage Kitty_hair_back:
 
 layeredimage Kitty_head:
     if KittyX.wet:
-        "images/Kitty_standing/Kitty_standing_face_wet_hair[KittyX.blushing].png"
+        "images/Kitty_standing/Kitty_standing_face_wet_hair_[KittyX.blushing].png"
     else:
         "images/Kitty_standing/Kitty_standing_face_[KittyX.Outfit.Clothes[hair].string][KittyX.blushing].png"
 
@@ -205,9 +182,9 @@ layeredimage Kitty_blowjob_head:
 
     if not renpy.showing("Kitty_sprite blowjob"):
         Null()
-    elif action_speed > 1 and KittyX.wet and KittyX.blushing:
+    elif action_speed > 1 and (KittyX.wet or KittyX.Outfit.Clothes["hair"].string == "wet_hair") and KittyX.blushing:
         "images/Kitty_blowjob/Kitty_blowjob_face_open_wet_blush.png"
-    elif action_speed > 1 and KittyX.wet:
+    elif action_speed > 1 and (KittyX.wet or KittyX.Outfit.Clothes["hair"].string == "wet_hair"):
         "images/Kitty_blowjob/Kitty_blowjob_face_open_wet.png"
     elif action_speed > 1 and KittyX.blushing:
         "images/Kitty_blowjob/Kitty_blowjob_face_open_blush.png"
@@ -216,9 +193,9 @@ layeredimage Kitty_blowjob_head:
 
     if renpy.showing("Kitty_sprite blowjob") and action_speed > 1:
         Null()
-    elif KittyX.wet and KittyX.blushing:
+    elif (KittyX.wet or KittyX.Outfit.Clothes["hair"].string == "wet_hair") and KittyX.blushing:
         "images/Kitty_blowjob/Kitty_blowjob_face_closed_wet_blush.png"
-    elif KittyX.wet:
+    elif (KittyX.wet or KittyX.Outfit.Clothes["hair"].string == "wet_hair"):
         "images/Kitty_blowjob/Kitty_blowjob_face_closed_wet.png"
     elif KittyX.blushing:
         "images/Kitty_blowjob/Kitty_blowjob_face_closed_blush.png"
@@ -268,7 +245,7 @@ layeredimage Kitty_blowjob_head:
     if KittyX.spunk["hair"]:
         "images/Kitty_blowjob/Kitty_blowjob_spunk_hair.png"
 
-    if not KittyX.wet:
+    if not (KittyX.wet or KittyX.Outfit.Clothes["hair"].string == "wet_hair"):
         Null()
     elif action_speed > 2:
         "images/Kitty_blowjob/Kitty_blowjob_head_open_wet.png"
@@ -306,18 +283,6 @@ layeredimage Kitty_blowjob_body:
     always:
         "images/Kitty_blowjob/Kitty_blowjob_body.png"
 
-    if KittyX.Outfit.Clothes["neck"]:
-        "images/Kitty_blowjob/Kitty_blowjob_neck_[KittyX.Outfit.Clothes[neck].string].png"
-
-    if KittyX.Outfit.Clothes["body_piercings"]:
-        "images/Kitty_blowjob/Kitty_blowjob_body_piercings_[KittyX.Outfit.Clothes[body_piercings].string].png"
-
-    if KittyX.Outfit.Clothes["bra"]:
-        "images/Kitty_blowjob/Kitty_blowjob_bra_[KittyX.Outfit.Clothes[bra].string].png"
-
-    if KittyX.Outfit.Clothes["top"]:
-        "images/Kitty_blowjob/Kitty_blowjob_top_[KittyX.Outfit.Clothes[top].string].png"
-
     if KittyX.spunk["breasts"]:
         "images/Kitty_blowjob/Kitty_blowjob_spunk_body.png"
 
@@ -334,33 +299,6 @@ layeredimage Kitty_sex_body:
         "images/Kitty_sex/Kitty_sex_body_[KittyX.Outfit.Clothes[body_piercings].string].png"
     else:
         "images/Kitty_sex/Kitty_sex_body.png"
-
-    if KittyX.Outfit.Clothes["neck"]:
-        "images/Kitty_sex/Kitty_sex_neck_[KittyX.Outfit.Clothes[neck].string].png"
-
-    if KittyX.Outfit.Clothes["skirt"] == "Aerith_skirt":
-        "images/Kitty_sex/Kitty_sex_skirt_[KittyX.Outfit.Clothes[bottom].string]_waist.png"
-
-    if not KittyX.Outfit.Clothes["bra"]:
-        Null()
-    elif KittyX.Outfit.Clothes["bra"].undress_state:
-        "images/Kitty_sex/Kitty_sex_bra_[KittyX.Outfit.Clothes[bra].string]_[KittyX.Outfit.Clothes[bra].undress_state].png"
-    else:
-        "images/Kitty_sex/Kitty_sex_bra_[KittyX.Outfit.Clothes[bra].string].png"
-
-    if not KittyX.Outfit.Clothes["top"]:
-        Null()
-    elif KittyX.Outfit.Clothes["top"].undress_state:
-        "images/Kitty_sex/Kitty_sex_top_[KittyX.Outfit.Clothes[top].string]_[KittyX.Outfit.Clothes[top].undress_state].png"
-    else:
-        "images/Kitty_sex/Kitty_sex_top_[KittyX.Outfit.Clothes[top].string].png"
-
-    if not KittyX.Outfit.Clothes["jacket"]:
-        Null()
-    elif KittyX.Outfit.Clothes["jacket"].undress_state:
-        "images/Kitty_sex/Kitty_sex_jacket_[KittyX.Outfit.Clothes[jacket].string]_[KittyX.Outfit.Clothes[jacket].undress_state].png"
-    else:
-        "images/Kitty_sex/Kitty_sex_jacket_[KittyX.Outfit.Clothes[jacket].string].png"
 
     if KittyX.spunk["breasts"]:
         "images/Kitty_sex/Kitty_sex_spunk_breasts.png"
@@ -383,13 +321,6 @@ layeredimage Kitty_sex_body:
     anchor (0.5, 0.5)
 
 layeredimage Kitty_sex_legs:
-    if KittyX.Outfit.Clothes["bottom"] not in skirts:
-        Null()
-    elif KittyX.Outfit.Clothes["bottom"] == "dress_skirt" and KittyX.upskirt:
-        "images/Kitty_sex/Kitty_sex_bottom[KittyX.Outfit.Clothes[bottom].string]_back_up.png"
-    else:
-        "images/Kitty_sex/Kitty_sex_bottom[KittyX.Outfit.Clothes[bottom].string]_back.png"
-
     always:
         "images/Kitty_sex/Kitty_sex_legs.png"
 
@@ -436,15 +367,6 @@ layeredimage Kitty_sex_legs:
     else:
         "images/Kitty_sex/Kitty_sex_pussy_grool.png"
 
-    if not KittyX.Outfit.Clothes["body_piercings"]:
-        Null()
-    elif Player.sprite and Player.cock_position == "in" and action_speed >= 2:
-        "images/Kitty_sex/Kitty_sex_body_piercings_pussy[KittyX.Outfit.Clothes[body_piercings].string]_fucking.png"
-    elif "dildo_pussy" in [Player.primary_action, Player.secondary_action]:
-        "images/Kitty_sex/Kitty_sex_body_piercings_pussy[KittyX.Outfit.Clothes[body_piercings].string]_fucking.png"
-    else:
-        "images/Kitty_sex/Kitty_sex_body_piercings_pussy[KittyX.Outfit.Clothes[body_piercings].string].png"
-
     if not KittyX.pubes:
         Null()
     elif Player.sprite and Player.cock_position == "in" and action_speed >= 2:
@@ -462,30 +384,6 @@ layeredimage Kitty_sex_legs:
 
     if KittyX.spunk["pussy"]:
         "images/Kitty_sex/Kitty_sex_spunk_pussy_under.png"
-
-    if not KittyX.Outfit.Clothes["underwear"] or KittyX.Outfit.Clothes["underwear"].undress_state:
-        Null()
-    elif KittyX.grool:
-        "images/Kitty_sex/Kitty_sex_underwear[KittyX.Outfit.Clothes[underwear].string]_grool.png"
-    else:
-        "images/Kitty_sex/Kitty_sex_underwear[KittyX.Outfit.Clothes[underwear].string].png"
-
-    if KittyX.Outfit.Clothes["hose"] and not KittyX.hose_pulled_down:
-        "images/Kitty_sex/Kitty_sex_hose[KittyX.Outfit.Clothes[hose].string].png"
-
-    if not KittyX.Outfit.Clothes["bottom"]:
-        Null()
-    elif KittyX.Outfit.Clothes["bottom"] not in skirts and KittyX.grool > 1 and not KittyX.bottom_pulled_down:
-        "images/Kitty_sex/Kitty_sex_bottom[KittyX.Outfit.Clothes[bottom].string]_grool.png"
-    elif KittyX.bottom_pulled_down and KittyX.Outfit.Clothes["bottom"] == "capris":
-        Null()
-    elif KittyX.bottom_pulled_down or KittyX.upskirt:
-        "images/Kitty_sex/Kitty_sex_bottom[KittyX.Outfit.Clothes[bottom].string]_down.png"
-    else:
-        "images/Kitty_sex/Kitty_sex_bottom[KittyX.Outfit.Clothes[bottom].string].png"
-
-    if KittyX.Outfit.Clothes["top"] == "towel" and not KittyX.Outfit.Clothes["top"].undress_state:
-        "images/Kitty_sex/Kitty_sex_top[KittyX.Outfit.Clothes[top].string]_legs.png"
 
     if Player.sprite and Player.cock_position == "anal":
         AlphaMask("Zero_cock_Kitty", "images/Kitty_sex/Kitty_sex_anus_mask.png")
@@ -544,12 +442,6 @@ layeredimage Kitty_sex_feet:
     always:
         "images/Kitty_sex/Kitty_sex_feet.png"
 
-    if KittyX.Outfit.Clothes["hose"] and KittyX.Outfit.Clothes["hose"] != "garterbelt" and KittyX.hose_pulled_down:
-        "images/Kitty_sex/Kitty_sex_hose[KittyX.Outfit.Clothes[hose].string]_feet.png"
-
-    if KittyX.Outfit.Clothes["bottom"] in pants and not KittyX.bottom_pulled_down:
-        "images/Kitty_sex/Kitty_sex_bottom[KittyX.Outfit.Clothes[bottom].string]_feet.png"
-
     if KittyX.wet:
         "images/Kitty_sex/Kitty_sex_water_feet.png"
 
@@ -579,19 +471,6 @@ layeredimage Kitty_doggy_body:
 
     always:
         "images/Kitty_doggy/Kitty_doggy_body.png"
-
-    if not KittyX.Outfit.Clothes["bra"]:
-        Null()
-    elif KittyX.Outfit.Clothes["bra"].undress_state:
-        "images/Kitty_doggy/Kitty_doggy_bra[KittyX.Outfit.Clothes[bra].string]_up.png"
-    else:
-        "images/Kitty_doggy/Kitty_doggy_bra[KittyX.Outfit.Clothes[bra].string].png"
-
-    if KittyX.Outfit.Clothes["top"]:
-        "images/Kitty_doggy/Kitty_doggy_top[KittyX.Outfit.Clothes[top].string].png"
-
-    if KittyX.Outfit.Clothes["jacket"]:
-        "images/Kitty_doggy/Kitty_doggy_jacket[KittyX.Outfit.Clothes[jacket].string].png"
 
     if KittyX.spunk["back"]:
         "images/Kitty_doggy/Kitty_doggy_spunk_back.png"
@@ -630,7 +509,7 @@ layeredimage Kitty_doggy_head:
     if KittyX.wet:
         "images/Kitty_doggy/Kitty_doggy_hair_wet.png"
     else:
-        "images/Kitty_doggy/Kitty_doggy_hair[KittyX.Outfit.Clothes[hair].string].png"
+        "images/Kitty_doggy/Kitty_doggy_hair_[KittyX.Outfit.Clothes[hair].string].png"
 
     if KittyX.wet:
         "images/Kitty_doggy/Kitty_doggy_water_hair.png"
@@ -641,34 +520,11 @@ layeredimage Kitty_doggy_head:
     anchor (0.5, 0.5)
 
 layeredimage Kitty_doggy_ass:
-    if KittyX.Outfit.Clothes["bottom"] and KittyX.Outfit.Clothes["bottom"] != "capris" and (KittyX.bottom_pulled_down or KittyX.upskirt):
-        "images/Kitty_doggy/Kitty_doggy_bottom[KittyX.Outfit.Clothes[bottom].string]_back_down.png"
-
-    if not KittyX.Outfit.Clothes["underwear"] or not KittyX.Outfit.Clothes["underwear"].undress_state:
-        Null()
-    elif KittyX.grool > 1:
-        "images/Kitty_doggy/Kitty_doggy_underwear[KittyX.Outfit.Clothes[underwear].string]_back_down_grool.png"
-    else:
-        "images/Kitty_doggy/Kitty_doggy_underwear[KittyX.Outfit.Clothes[underwear].string]_back_down.png"
-
     always:
         "images/Kitty_doggy/Kitty_doggy_ass.png"
 
     if KittyX.wet:
         "images/Kitty_doggy/Kitty_doggy_water_ass.png"
-
-    if KittyX.Outfit.Clothes["hose"]:
-        "images/Kitty_doggy/Kitty_doggy_hose[KittyX.Outfit.Clothes[hose].string].png"
-
-    if not KittyX.Outfit.Clothes["underwear"] or not KittyX.Outfit.Clothes["underwear"].undress_state:
-        Null()
-    elif KittyX.grool > 1:
-        "images/Kitty_doggy/Kitty_doggy_underwear[KittyX.Outfit.Clothes[underwear].string]_down_grool.png"
-    else:
-        "images/Kitty_doggy/Kitty_doggy_underwear[KittyX.Outfit.Clothes[underwear].string]_down.png"
-
-    if KittyX.Outfit.Clothes["bottom"] and (KittyX.bottom_pulled_down or KittyX.upskirt):
-        "images/Kitty_doggy/Kitty_doggy_bottom[KittyX.Outfit.Clothes[bottom].string]_down.png"
 
     if Player.primary_action == "eat_pussy":
         "images/Kitty_doggy/Kitty_doggy_pussy_open.png"
@@ -714,9 +570,6 @@ layeredimage Kitty_doggy_ass:
     else:
         "images/Kitty_doggy/Kitty_doggy_pubes.png"
 
-    if KittyX.Outfit.Clothes["body_piercings"]:
-        "images/Kitty_doggy/Kitty_doggy_body_piercings_pussy[KittyX.Outfit.Clothes[body_piercings].string].png"
-
     if KittyX.used_to_anal:
         "images/Jean_doggy/Jean_doggy_anus_loose.png"
     else:
@@ -736,9 +589,6 @@ layeredimage Kitty_doggy_ass:
     elif "dildo_ass" in [Player.primary_action, Player.secondary_action]:
         "Kitty_doggy_anus_anal_animation1" pos (0.113, 0.475)
 
-    if KittyX.Outfit.Clothes["hose"] and not KittyX.hose_pulled_down:
-        "images/Kitty_doggy/Kitty_doggy_hose[KittyX.Outfit.Clothes[hose].string].png"
-
     if not KittyX.spunk["anus"]:
         Null()
     elif Player.cock_position == "anal" and action_speed:
@@ -749,37 +599,6 @@ layeredimage Kitty_doggy_ass:
         "images/Jean_doggy/Jean_doggy_spunk_anus_open.png"
     else:
         "images/Jean_doggy/Jean_doggy_spunk_anus_loose.png"
-
-    if not KittyX.Outfit.Clothes["underwear"] or KittyX.Outfit.Clothes["underwear"].undress_state:
-        Null()
-    elif Player.sprite and Player.cock_position in ["in", "anal"]:
-        Null()
-    elif KittyX.grool > 1:
-        "images/Kitty_doggy/Kitty_doggy_underwear[KittyX.Outfit.Clothes[underwear].string]_grool.png"
-    else:
-        "images/Kitty_doggy/Kitty_doggy_underwear[KittyX.Outfit.Clothes[underwear].string].png"
-
-    if KittyX.Outfit.Clothes["hose"]:
-        "images/Kitty_doggy/Kitty_doggy_hose[KittyX.Outfit.Clothes[hose].string].png"
-
-    if not KittyX.Outfit.Clothes["bottom"]:
-        Null()
-    elif KittyX.Outfit.Clothes["bottom"] in skirts and KittyX.upskirt:
-        "images/Kitty_doggy/Kitty_doggy_bottom[KittyX.Outfit.Clothes[bottom].string]_down.png"
-    elif KittyX.Outfit.Clothes["bottom"] not in skirts and KittyX.grool > 1:
-        "images/Kitty_doggy/Kitty_doggy_bottom[KittyX.Outfit.Clothes[bottom].string]_grool.png"
-    else:
-        "images/Kitty_doggy/Kitty_doggy_bottom[KittyX.Outfit.Clothes[bottom].string].png"
-
-    if KittyX.Outfit.Clothes["top"] == "pink_top" and not (KittyX.bottom_pulled_down or KittyX.upskirt):
-        "images/Kitty_doggy/Kitty_doggy_top[KittyX.Outfit.Clothes[top].string]_tail.png"
-
-    if KittyX.Outfit.Clothes["bra"] != "towel":
-        Null()
-    elif KittyX.upskirt:
-        "images/Kitty_doggy/Kitty_doggy_bra[KittyX.Outfit.Clothes[bra].string]_legs_down.png"
-    else:
-        "images/Kitty_doggy/Kitty_doggy_bra[KittyX.Outfit.Clothes[bra].string]_legs.png"
 
     if Player.sprite and Player.cock_position == "in":
         AlphaMask("Zero_cock_Kitty", "Zero_cock_Kitty_mask")
@@ -832,24 +651,11 @@ image Kitty_doggy_anus_mask:
     anchor (0.52, 0.69)
 
 layeredimage Kitty_doggy_shins:
-    if not KittyX.Outfit.Clothes["hose"] or KittyX.Outfit.Clothes["hose"] == "garterbelt" or KittyX.hose_pulled_down:
+    always:
         "images/Kitty_doggy/Kitty_doggy_shins.png"
-    elif KittyX.Outfit.Clothes["hose"] in ["ripped_pantyhose", "ripped_tights"]:
-        "images/Kitty_doggy/Kitty_doggy_hose_ripped_shins.png"
-    else:
-        "images/Kitty_doggy/Kitty_doggy_hose_shins.png"
 
-    if KittyX.Outfit.Clothes["bottom"] in pants:
-        "images/Kitty_doggy/Kitty_doggy_bottom[KittyX.Outfit.Clothes[bottom].string]_shins.png"
-
-    if not KittyX.Outfit.Clothes["hose"] or KittyX.Outfit.Clothes["hose"] == "garterbelt" and (not Player.sprite or Player.cock_position == "footjob"):
-        "images/Kitty_doggy/Kitty_doggy_feet_footjob.png"
-    elif not KittyX.Outfit.Clothes["hose"] or KittyX.Outfit.Clothes["hose"] == "garterbelt":
+    always:
         "images/Kitty_doggy/Kitty_doggy_feet.png"
-    elif KittyX.Outfit.Clothes["hose"] in ["ripped_pantyhose", "ripped_tights"] and (not Player.sprite or Player.cock_position == "footjob"):
-        "images/Kitty_doggy/Kitty_doggy_hose_ripped_feet_footjob.png"
-    elif KittyX.Outfit.Clothes["hose"] in ["ripped_pantyhose", "ripped_tights"]:
-        "images/Kitty_doggy/Kitty_doggy_hose_ripped_feet.png"
 
     anchor (0.5, 0.5)
 

@@ -18,46 +18,46 @@ layeredimage Storm_grool_dripping_animation:
     always:
         "grool_dripping_animation" pos (0.19, 1.05)
 
-    if StormX.grool > 1 and not StormX.pussy_covered:
+    if StormX.grool > 1 and not StormX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.19, 1.05)
 
-    if StormX.grool > 1 and not StormX.pussy_covered:
+    if StormX.grool > 1 and not StormX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.19, 1.05)
 
-    if StormX.grool > 1 and not StormX.pussy_covered:
+    if StormX.grool > 1 and not StormX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.19, 1.05)
 
 layeredimage Storm_grool_animations:
     if not StormX.grool:
         Null()
-    elif StormX.bottom_pulled_down:
+    elif StormX.Clothes["pants"].state:
         AlphaMask("Storm_grool_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask_pants.png")
-    elif StormX.underwear_pulled_down:
+    elif StormX.Clothes["underwear"].state:
         AlphaMask("Storm_grool_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask_underwear.png")
-    elif not StormX.pussy_covered:
+    elif not StormX.Outfit.pussy_covered:
         AlphaMask("Storm_grool_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask.png")
 
 layeredimage Storm_spunk_dripping_animation:
     always:
         "spunk_dripping_animation" pos (0.19, 1.05)
 
-    if not StormX.pussy_covered:
+    if not StormX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.19, 1.05)
 
-    if not StormX.pussy_covered:
+    if not StormX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.19, 1.05)
 
-    if not StormX.pussy_covered:
+    if not StormX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.19, 1.05)
 
 layeredimage Storm_spunk_animations:
     if not StormX.spunk["pussy"] and not StormX.spunk["anus"]:
         Null()
-    elif StormX.bottom_pulled_down:
+    elif StormX.Clothes["pants"].state:
         AlphaMask("Storm_spunk_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask_pants.png")
-    elif StormX.underwear_pulled_down:
+    elif StormX.Clothes["underwear"].state:
         AlphaMask("Storm_spunk_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask_underwear.png")
-    elif not StormX.pussy_covered:
+    elif not StormX.Outfit.pussy_covered:
         AlphaMask("Storm_spunk_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask.png")
 
 layeredimage Storm_standing_fondling_animations:
@@ -790,8 +790,8 @@ image Storm_titjob_hair_animation5:
         repeat
 
 layeredimage Storm_sprite titjob:
-    if StormX.outfit["bra"] in ["black_bra", "lace_bra"]:
-        "Storm_titjob_bra_back_animation[action_speed]"
+    # if StormX.Clothes["bra"].string in ["black_bra", "lace_bra"]:
+    #     "Storm_titjob_bra_back_animation[action_speed]"
 
     always:
         "Storm_titjob_hair_back_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
@@ -802,14 +802,14 @@ layeredimage Storm_sprite titjob:
     always:
         "Storm_titjob_head_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
 
-    if not StormX.outfit["bra"] == "cosplay_bra":
-        "Storm_titjob_breasts_under_animation[action_speed]"
+    # if not StormX.Clothes["bra"].string == "cosplay_bra":
+    #     "Storm_titjob_breasts_under_animation[action_speed]"
 
     always:
         "Zero_cock_Storm"
 
-    if StormX.outfit["bra"] in ["sports_bra", "bikini_top"]:
-        "Storm_titjob_bra_stretch_animation[action_speed]"
+    # if StormX.Clothes["bra"].string in ["sports_bra", "bikini_top"]:
+    #     "Storm_titjob_bra_stretch_animation[action_speed]"
 
     always:
         "Storm_titjob_breasts_animation[action_speed]"

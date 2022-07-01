@@ -18,46 +18,46 @@ layeredimage Jubes_grool_dripping_animation:
     always:
         "grool_dripping_animation" pos (0.295, 1.05)
 
-    if JubesX.grool > 1 and not JubesX.pussy_covered:
+    if JubesX.grool > 1 and not JubesX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.295, 1.05)
 
-    if JubesX.grool > 1 and not JubesX.pussy_covered:
+    if JubesX.grool > 1 and not JubesX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.295, 1.05)
 
-    if JubesX.grool > 1 and not JubesX.pussy_covered:
+    if JubesX.grool > 1 and not JubesX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.295, 1.05)
 
 layeredimage Jubes_grool_animations:
     if not JubesX.grool:
         Null()
-    elif JubesX.bottom_pulled_down:
+    elif JubesX.Clothes["pants"].state:
         AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_pants.png")
-    elif JubesX.underwear_pulled_down:
+    elif JubesX.Clothes["underwear"].state:
         AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
-    elif not JubesX.pussy_covered:
+    elif not JubesX.Outfit.pussy_covered:
         AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask.png")
 
 layeredimage Jubes_spunk_dripping_animation:
     always:
         "spunk_dripping_animation" pos (0.295, 1.05)
 
-    if not JubesX.pussy_covered:
+    if not JubesX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.295, 1.05)
 
-    if not JubesX.pussy_covered:
+    if not JubesX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.295, 1.05)
 
-    if not JubesX.pussy_covered:
+    if not JubesX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.295, 1.05)
 
 layeredimage Jubes_spunk_animations:
     if not JubesX.spunk["pussy"] and not JubesX.spunk["anus"]:
         Null()
-    elif JubesX.bottom_pulled_down:
+    elif JubesX.Clothes["pants"].state:
         AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_pants.png")
-    elif JubesX.underwear_pulled_down:
+    elif JubesX.Clothes["underwear"].state:
         AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
-    elif not JubesX.pussy_covered:
+    elif not JubesX.Outfit.pussy_covered:
         AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask.png")
 
 layeredimage Jubes_standing_fondling_animations:
@@ -566,11 +566,11 @@ image Jubes_titjob_breasts_animation5:
         repeat
 
 layeredimage Jubes_sprite titjob:
-    if JubesX.outfit["jacket"]:
-        "Jubes_titjob_jacket_back_animation[action_speed]"
-
-    if JubesX.outfit["bra"] in ["sports_bra", "bikini_top"]:
-        "Jubes_titjob_bra_back_animation[action_speed]"
+    # if JubesX.Clothes["jacket"]:
+    #     "Jubes_titjob_jacket_back_animation[action_speed]"
+    #
+    # if JubesX.Clothes["bra"].string in ["sports_bra", "bikini_top"]:
+    #     "Jubes_titjob_bra_back_animation[action_speed]"
 
     always:
         "Jubes_titjob_body_animation[action_speed]"

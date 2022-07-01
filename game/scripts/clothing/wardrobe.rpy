@@ -2906,10 +2906,10 @@ label accessories_menu(Girl):
                 else:
                     $ Girl.outfit["suspenders"] = "suspenders"
             "Shift suspenders." if Girl.outfit["suspenders"]:
-                if Girl.suspenders_aside:
-                    $ Girl.suspenders_aside = False
+                if Girl.Clothes["suspenders"].state:
+                    $ Girl.Clothes["suspenders"].state = False
                 else:
-                    $ Girl.suspenders_aside = True
+                    $ Girl.Clothes["suspenders"].state = True
             "Toggle tattoos." if Girl == StormX:
                 if Girl.outfit["tattoos"] == "tattoos":
                     $ Girl.outfit["tattoos"] = ""

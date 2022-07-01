@@ -18,46 +18,46 @@ layeredimage Rogue_grool_dripping_animation:
     always:
         "grool_dripping_animation" pos (0.26, 1.2)
 
-    if RogueX.grool > 1 and not RogueX.pussy_covered:
+    if RogueX.grool > 1 and not RogueX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.26, 1.2)
 
-    if RogueX.grool > 1 and not RogueX.pussy_covered:
+    if RogueX.grool > 1 and not RogueX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.26, 1.2)
 
-    if RogueX.grool > 1 and not RogueX.pussy_covered:
+    if RogueX.grool > 1 and not RogueX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.26, 1.2)
 
 layeredimage Rogue_grool_animations:
     if not RogueX.grool:
         Null()
-    elif RogueX.bottom_pulled_down:
+    elif RogueX.Clothes["pants"].state:
         AlphaMask("Rogue_grool_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_pants.png")
-    elif RogueX.underwear_pulled_down:
+    elif RogueX.Clothes["underwear"].state:
         AlphaMask("Rogue_grool_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_underwear.png")
-    elif not RogueX.pussy_covered:
+    elif not RogueX.Outfit.pussy_covered:
         AlphaMask("Rogue_grool_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask.png")
 
 layeredimage Rogue_spunk_dripping_animation:
     always:
         "spunk_dripping_animation" pos (0.26, 1.2)
 
-    if not RogueX.pussy_covered:
+    if not RogueX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.26, 1.2)
 
-    if not RogueX.pussy_covered:
+    if not RogueX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.26, 1.2)
 
-    if not RogueX.pussy_covered:
+    if not RogueX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.26, 1.2)
 
 layeredimage Rogue_spunk_animations:
     if not RogueX.spunk["pussy"] and not RogueX.spunk["anus"]:
         Null()
-    elif RogueX.bottom_pulled_down:
+    elif RogueX.Clothes["pants"].state:
         AlphaMask("Rogue_spunk_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_pants.png")
-    elif RogueX.underwear_pulled_down:
+    elif RogueX.Clothes["underwear"].state:
         AlphaMask("Rogue_spunk_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_underwear.png")
-    elif not RogueX.pussy_covered:
+    elif not RogueX.Outfit.pussy_covered:
         AlphaMask("Rogue_spunk_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask.png")
 
 layeredimage Rogue_standing_fondling_animations:

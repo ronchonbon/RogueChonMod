@@ -34,46 +34,46 @@ layeredimage Emma_grool_dripping_animation:
     always:
         "grool_dripping_animation" pos (0.232, 1.1)
 
-    if EmmaX.grool > 1 and not EmmaX.pussy_covered:
+    if EmmaX.grool > 1 and not EmmaX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.232, 1.1)
 
-    if EmmaX.grool > 1 and not EmmaX.pussy_covered:
+    if EmmaX.grool > 1 and not EmmaX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.232, 1.1)
 
-    if EmmaX.grool > 1 and not EmmaX.pussy_covered:
+    if EmmaX.grool > 1 and not EmmaX.Outfit.pussy_covered:
         "grool_dripping_animation" pos (0.232, 1.1)
 
 layeredimage Emma_grool_animations:
     if not EmmaX.grool:
         Null()
-    elif EmmaX.bottom_pulled_down:
+    elif EmmaX.Clothes["pants"].state:
         AlphaMask("Emma_grool_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask_pants.png")
-    elif EmmaX.underwear_pulled_down:
+    elif EmmaX.Clothes["underwear"].state:
         AlphaMask("Emma_grool_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask_underwear.png")
-    elif not EmmaX.pussy_covered:
+    elif not EmmaX.Outfit.pussy_covered:
         AlphaMask("Emma_grool_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask.png")
 
 layeredimage Emma_spunk_dripping_animation:
     always:
         "spunk_dripping_animation" pos (0.232, 1.1)
 
-    if not EmmaX.pussy_covered:
+    if not EmmaX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.232, 1.1)
 
-    if not EmmaX.pussy_covered:
+    if not EmmaX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.232, 1.1)
 
-    if not EmmaX.pussy_covered:
+    if not EmmaX.Outfit.pussy_covered:
         "spunk_dripping_animation" pos (0.232, 1.1)
 
 layeredimage Emma_spunk_animations:
     if not EmmaX.spunk["pussy"] and not EmmaX.spunk["anus"]:
         Null()
-    elif EmmaX.bottom_pulled_down:
+    elif EmmaX.Clothes["pants"].state:
         AlphaMask("Emma_spunk_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask_pants.png")
-    elif EmmaX.underwear_pulled_down:
+    elif EmmaX.Clothes["underwear"].state:
         AlphaMask("Emma_spunk_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask_underwear.png")
-    elif not EmmaX.pussy_covered:
+    elif not EmmaX.Outfit.pussy_covered:
         AlphaMask("Emma_spunk_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask.png")
 
 layeredimage Emma_standing_fondling_animations:
