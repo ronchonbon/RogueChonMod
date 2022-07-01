@@ -1,17 +1,17 @@
 init -1 python:
 
-    def wet_hair():
-        name = "wet hair"
-        image_string = "wet_hair"
+    def tail_plug():
+        name = "tail plug"
+        image_string = "tail_plug"
 
-        clothing_type = "hair"
+        clothing_type = "buttplug"
 
-        Owner_names = ["Rogue", "Kitty"]
+        Owner_names = ["Kitty"]
 
         dialogue_lines = {
             }
 
-        shame = 0
+        shame = 5
 
         hides = []
         covers = []
@@ -20,12 +20,6 @@ init -1 python:
 
         poses = [
             "arm pose 1",
-            "arm pose 2",
-            "handjob",
-            "titjob",
-            "footjob",
-            "blowjob",
-            "sex",
-            "doggy"]
+            "arm pose 2"]
 
         return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

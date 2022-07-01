@@ -1,22 +1,22 @@
 init -1 python:
 
-    def black_stockings():
-        name = "black stockings"
-        image_string = "black_stockings"
+    def pink_nighty_panties():
+        name = "pink nighty panties"
+        image_string = "pink_nighty_panties"
 
-        clothing_type = "socks"
+        clothing_type = "underwear"
 
-        Owner_names = ["Rogue"]
+        Owner_names = ["Kitty"]
 
         dialogue_lines = {
             }
 
         shame = 1
 
-        hides = []
-        covers = ["feet"]
+        hides = ["pussy"]
+        covers = ["pussy"]
 
-        number_of_states = 1
+        number_of_states = 2
 
         poses = [
             "arm pose 1",

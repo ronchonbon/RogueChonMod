@@ -6,7 +6,7 @@ init -1 python:
 
         clothing_type = "gloves"
 
-        Owner_names = ["Rogue"]
+        Owner_names = ["Rogue", "Kitty"]
 
         dialogue_lines = {
             "mall": "What about those black gloves?",

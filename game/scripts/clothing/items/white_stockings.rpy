@@ -1,12 +1,12 @@
 init -1 python:
 
-    def black_stockings():
-        name = "black stockings"
-        image_string = "black_stockings"
+    def white_stockings():
+        name = "white stockings"
+        image_string = "white_stockings"
 
         clothing_type = "socks"
 
-        Owner_names = ["Rogue"]
+        Owner_names = ["Kitty"]
 
         dialogue_lines = {
             }

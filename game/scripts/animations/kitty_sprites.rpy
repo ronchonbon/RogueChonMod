@@ -1,5 +1,5 @@
 layeredimage Kitty_sprite standing:
-    if KittyX.Outfit.Clothes["skirt"].string == "Aerith_skirt":
+    if KittyX.Outfit.Clothes["skirt"] and KittyX.Outfit.Clothes["skirt"].string == "Aerith_skirt":
         "images/Kitty_standing/Kitty_standing_skirt_[KittyX.Outfit.Clothes[skirt].string]_back.png"
 
     always:

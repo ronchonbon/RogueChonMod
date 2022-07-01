@@ -13,7 +13,7 @@ init -1 python:
 
         shame = -2
 
-        hides = ["pussy"]
+        hides = []
         covers = ["pussy", "thighs", "feet"]
 
         number_of_states = 1

@@ -73,17 +73,17 @@ label cheat_editor(Girl):
                         G.history.append("met")
 
                         if G == EmmaX:
-                            EmmaX.name = "Emma"
-                            EmmaX.names.append("Emma")
+                            G.name = "Emma"
+                            G.names.append("Emma")
                             G.history.append("classcaught")
                         elif G == LauraX:
-                            LauraX.name = "Laura"
-                            LauraX.names.append("X-23")
-                            LauraX.names.append("Laura")
+                            G.name = "Laura"
+                            G.names.append("X-23")
+                            G.names.append("Laura")
                             G.history.append("dress0")
                         elif G == StormX:
-                            StormX.names.append("Ororo")
-                            StormX.names.append("Ms. Munroe")
+                            G.names.append("Ororo")
+                            G.names.append("Ms. Munroe")
 
                         if G.location == "hold":
                             G.location = G.home
@@ -96,16 +96,17 @@ label cheat_editor(Girl):
             "Add all Girls to Harem":
                 python:
                     for G in all_Girls:
-                        Player.Harem.append(G)
+                        if G not in Player.Harem:
+                            Player.Harem.append(G)
             "Unlock all clothes":
                 python:
-                    import copy
+                    for Clothing in Rogue_Clothes:
+                        if Clothing.name not in RogueX.Wardrobe.Clothes.keys():
+                            RogueX.Wardrobe.Clothes[Clothing.name] = Clothing
 
-                    for G in all_Girls:
-                        for C in all_Clothes:
-                            if G.tag in C.Owner_names:
-                                if C.name not in G.Wardrobe.Clothes.keys():
-                                    G.Wardrobe.Clothes[C.name] = copy.deepcopy(C)
+                    for Clothing in Kitty_Clothes:
+                        if Clothing.name not in KittyX.Wardrobe.Clothes.keys():
+                            KittyX.Wardrobe.Clothes[Clothing.name] = Clothing
 
             "Return":
                 call checkout

@@ -1,17 +1,17 @@
 init -1 python:
 
-    def black_stockings():
-        name = "black stockings"
-        image_string = "black_stockings"
+    def pink_striped_socks():
+        name = "pink striped socks"
+        image_string = "pink_striped_socks"
 
         clothing_type = "socks"
 
-        Owner_names = ["Rogue"]
+        Owner_names = ["Kitty"]
 
         dialogue_lines = {
             }
 
-        shame = 1
+        shame = 0
 
         hides = []
         covers = ["feet"]

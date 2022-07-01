@@ -1,20 +1,20 @@
 init -1 python:
 
-    def black_stockings():
-        name = "black stockings"
-        image_string = "black_stockings"
+    def white_ripped_pantyhose():
+        name = "white ripped pantyhose"
+        image_string = "white_ripped_pantyhose"
 
-        clothing_type = "socks"
+        clothing_type = "hose"
 
-        Owner_names = ["Rogue"]
+        Owner_names = ["Kitty"]
 
         dialogue_lines = {
             }
 
-        shame = 1
+        shame = 0
 
         hides = []
-        covers = ["feet"]
+        covers = ["thighs", "feet"]
 
         number_of_states = 1
 

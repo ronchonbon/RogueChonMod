@@ -352,7 +352,7 @@ screen preferences():
             frame:
                 style_group "pref"
                 has vbox
-                label _("There is no Audio")
+                label _("There is no audio")
 
 screen yesno_prompt(message, yes_action, no_action):
     modal True
@@ -424,7 +424,8 @@ screen Clothing_picker(Girl):
                     action Return("quit")
 
                 for Clothing in Girl.Wardrobe.Clothes.values():
-                    $ img = f"images/menu_images/{Girl.tag}/{Clothing.string}.png"
+                    # $ img = f"images/menu_images/{Girl.tag}/{Clothing.string}.png"
+                    $ img = f"images/Button_{Girl.tag}_hover.png"
 
                     imagebutton:
                         anchor (0.5, 0.5) pos (0.5, 0.5) xysize (256, 256)
