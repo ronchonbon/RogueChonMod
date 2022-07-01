@@ -1,8 +1,8 @@
 init -1 python:
 
-    def yellowgreen_shorts():
-        name = "exercise shorts"
-        image_string = "yellowgreen_shorts"
+    def spider_web_panties():
+        name = "spider-web panties"
+        image_string = "spider_web_panties"
 
         clothing_type = "underwear"
 
@@ -11,21 +11,15 @@ init -1 python:
         dialogue_lines = {
             }
 
-        shame = 0
+        shame = 2
 
-        hides = ["pussy"]
+        hides = []
         covers = ["pussy"]
 
-        number_of_states = 2
+        number_of_states = 1
 
         poses = [
             "arm pose 1",
-            "arm pose 2",
-            "handjob",
-            "titjob",
-            "footjob",
-            "blowjob",
-            "sex",
-            "doggy"]
+            "arm pose 2"]
 
         return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

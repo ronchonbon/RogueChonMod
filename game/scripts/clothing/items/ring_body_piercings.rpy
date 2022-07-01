@@ -12,7 +12,7 @@ init -1 python:
             "wardrobe": "You'd look really hot with ring body piercings."
             }
 
-        shame = 5
+        shame = 2
 
         hides = []
         covers = []

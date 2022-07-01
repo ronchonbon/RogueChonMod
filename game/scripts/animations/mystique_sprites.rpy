@@ -11,50 +11,38 @@ layeredimage Mystique_sprite standing normal:
     always:
         "Mystique_spunk_animations"
 
-    if not MystiqueX.Clothes["underwear"]:
-        Null()
-    elif MystiqueX.Clothes["underwear"].state:
-        "images/Mystique_standing/Mystique_standing_underwear_[MystiqueX.Clothes[underwear]]_down.png"
-    else:
-        "images/Mystique_standing/Mystique_standing_underwear_[MystiqueX.Clothes[underwear]].png"
+    if MystiqueX.Clothes["underwear"]:
+        "images/Mystique_standing/Mystique_standing_underwear_[MystiqueX.Clothes[underwear].string]_[MystiqueX.Clothes[underwear].state].png"
 
-    if not MystiqueX.Clothes["bottom"]:
-        Null()
-    else:
-        "images/Mystique_standing/Mystique_standing_bottom[MystiqueX.Clothes[bottom]].png"
+    if MystiqueX.Clothes["skirt"]:
+        "images/Mystique_standing/Mystique_standing_skirt[MystiqueX.Clothes[skirt].string].png"
 
     always:
-        "images/Mystique_standing/Mystique_standing_arms1.png"
+        "images/Mystique_standing/Mystique_standing_arms.png"
 
     always:
         "images/Mystique_standing/Mystique_standing_breasts.png"
 
-    if not MystiqueX.Clothes["bra"]:
-        Null()
-    elif MystiqueX.Clothes["bra"].state:
-        "images/Mystique_standing/Mystique_standing_bra_[MystiqueX.Clothes[bra]]_up.png"
-    else:
-        "images/Mystique_standing/Mystique_standing_bra_[MystiqueX.Clothes[bra]].png"
+    if MystiqueX.Clothes["bra"]:
+        "images/Mystique_standing/Mystique_standing_bra_[MystiqueX.Clothes[bra].string]_[MystiqueX.Clothes[bra].state].png"
 
     if MystiqueX.Clothes["boots"]:
-        "images/Mystique_standing/Mystique_standing_boots[MystiqueX.Clothes[boots]].png"
+        "images/Mystique_standing/Mystique_standing_boots_[MystiqueX.Clothes[boots].string].png"
 
     if MystiqueX.Clothes["dress"]:
-        "images/Mystique_standing/Mystique_standing_dress[MystiqueX.Clothes[dress]].png"
+        "images/Mystique_standing/Mystique_standing_dress_[MystiqueX.Clothes[dress].string].png"
 
     if MystiqueX.Clothes["belt"]:
-        "images/Mystique_standing/Mystique_standing_belt[MystiqueX.Clothes[belt]].png"
+        "images/Mystique_standing/Mystique_standing_belt_[MystiqueX.Clothes[belt].string].png"
 
-    if not MystiqueX.Clothes["top"]:
-        Null()
-    else:
-        "images/Mystique_standing/Mystique_standing_top_[MystiqueX.Clothes[top]].png"
+    if MystiqueX.Clothes["top"]:
+        "images/Mystique_standing/Mystique_standing_top_[MystiqueX.Clothes[top].string].png"
 
     if MystiqueX.Clothes["jacket"]:
-        "images/Mystique_standing/Mystique_standing_jacket_[MystiqueX.Clothes[jacket]]1.png"
+        "images/Mystique_standing/Mystique_standing_jacket_[MystiqueX.Clothes[jacket].string].png"
 
     if MystiqueX.Clothes["gloves"]:
-        "images/Mystique_standing/Mystique_standing_gloves[MystiqueX.Clothes[gloves]]1.png"
+        "images/Mystique_standing/Mystique_standing_gloves[MystiqueX.Clothes[gloves].string].png"
 
     always:
         "Mystique_head" pos (0.54, 0.32) zoom 0.43
@@ -88,10 +76,10 @@ layeredimage Mystique_head:
         "Mystique_blinking"
 
     always:
-        "images/Mystique_standing/Mystique_standing_hair_long.png"
+        "images/Mystique_standing/Mystique_standing_hair_long_hair.png"
 
     if MystiqueX.Clothes["face_outer_accessory"]:
-        "images/Mystique_standing/Mystique_standing_face_outer_accessory[MystiqueX.Clothes[face_outer_accessory]].png"
+        "images/Mystique_standing/Mystique_standing_face_outer_accessory_[MystiqueX.Clothes[face_outer_accessory].string].png"
 
     anchor (0.5, 0.5)
 
@@ -99,50 +87,38 @@ layeredimage Mystique_sprite standing Raven:
     always:
         "images/Raven_standing/Raven_standing_body.png"
 
-    if not MystiqueX.disguise_outfit["underwear"]:
-        Null()
-    elif MystiqueX.Clothes["underwear"].state:
-        "images/Mystique_standing/Mystique_standing_underwear_[MystiqueX.disguise_outfit[underwear]]_down.png"
-    else:
-        "images/Mystique_standing/Mystique_standing_underwear_[MystiqueX.disguise_outfit[underwear]].png"
+    if MystiqueX.disguise_Clothes["underwear"]:
+        "images/Mystique_standing/Mystique_standing_underwear_[MystiqueX.disguise_Clothes[underwear].string]_[MystiqueX.disguise_Clothes[underwear].state].png"
 
-    if not MystiqueX.disguise_outfit["bottom"]:
-        Null()
-    else:
-        "images/Mystique_standing/Mystique_standing_bottom[MystiqueX.disguise_outfit[bottom]].png"
+    if MystiqueX.disguise_Clothes["skirt"]:
+        "images/Mystique_standing/Mystique_standing_skirt_[MystiqueX.disguise_Clothes[skirt].string].png"
 
     always:
-        "images/Raven_standing/Raven_standing_arms1.png"
+        "images/Raven_standing/Raven_standing_arms.png"
 
     always:
         "images/Raven_standing/Raven_standing_breasts.png"
 
-    if not MystiqueX.disguise_outfit["bra"]:
-        Null()
-    elif MystiqueX.Clothes["bra"].state:
-        "images/Mystique_standing/Mystique_standing_bra_[MystiqueX.disguise_outfit[bra]]_up.png"
-    else:
-        "images/Mystique_standing/Mystique_standing_bra_[MystiqueX.disguise_outfit[bra]].png"
+    if MystiqueX.disguise_Clothes["bra"]:
+        "images/Mystique_standing/Mystique_standing_bra_[MystiqueX.disguise_Clothes[bra].string]_[MystiqueX.disguise_Clothes[bra].state].png"
 
-    if MystiqueX.disguise_outfit["boots"]:
-        "images/Mystique_standing/Mystique_standing_boots[MystiqueX.disguise_outfit[boots]].png"
+    if MystiqueX.disguise_Clothes["boots"]:
+        "images/Mystique_standing/Mystique_standing_boots_[MystiqueX.disguise_Clothes[boots].string].png"
 
-    if MystiqueX.disguise_outfit["dress"]:
-        "images/Mystique_standing/Mystique_standing_dress[MystiqueX.disguise_outfit[dress]].png"
+    if MystiqueX.disguise_Clothes["dress"]:
+        "images/Mystique_standing/Mystique_standing_dress_[MystiqueX.disguise_Clothes[dress].string].png"
 
-    if MystiqueX.disguise_outfit["belt"]:
-        "images/Mystique_standing/Mystique_standing_belt[MystiqueX.disguise_outfit[belt]].png"
+    if MystiqueX.disguise_Clothes["belt"]:
+        "images/Mystique_standing/Mystique_standing_belt_[MystiqueX.disguise_Clothes[belt].string].png"
 
-    if not MystiqueX.disguise_outfit["top"]:
-        Null()
-    else:
-        "images/Mystique_standing/Mystique_standing_top_[MystiqueX.disguise_outfit[top]].png"
+    if MystiqueX.disguise_Clothes["top"]:
+        "images/Mystique_standing/Mystique_standing_top_[MystiqueX.disguise_Clothes[top].string].png"
 
-    if MystiqueX.disguise_outfit["jacket"]:
-        "images/Mystique_standing/Mystique_standing_jacket_[MystiqueX.disguise_outfit[jacket]]1.png"
+    if MystiqueX.disguise_Clothes["jacket"]:
+        "images/Mystique_standing/Mystique_standing_jacket_[MystiqueX.disguise_Clothes[jacket].string].png"
 
-    if MystiqueX.disguise_outfit["gloves"]:
-        "images/Mystique_standing/Mystique_standing_gloves[MystiqueX.disguise_outfit[gloves]]1.png"
+    if MystiqueX.disguise_Clothes["gloves"]:
+        "images/Mystique_standing/Mystique_standing_gloves_[MystiqueX.disguise_Clothes[gloves].string].png"
 
     always:
         "Raven_head" pos (0.54, 0.32) zoom 0.43
@@ -165,9 +141,9 @@ layeredimage Raven_head:
         "Raven_blinking"
 
     always:
-        "images/Raven_standing/Raven_standing_hair_short.png"
+        "images/Raven_standing/Raven_standing_hair_short_hair.png"
 
-    if MystiqueX.disguise_outfit["face_outer_accessory"]:
-        "images/Mystique_standing/Mystique_standing_face_outer_accessory[MystiqueX.disguise_outfit[face_outer_accessory]].png"
+    if MystiqueX.disguise_Clothes["face_outer_accessory"]:
+        "images/Mystique_standing/Mystique_standing_face_outer_accessory_[MystiqueX.disguise_Clothes[face_outer_accessory].string].png"
 
     anchor (0.5, 0.5)

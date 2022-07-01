@@ -1,20 +1,20 @@
 init -1 python:
 
-    def black_jeans():
-        name = "black jeans"
-        image_string = "black_jeans"
+    def wet_hair():
+        name = "wet hair"
+        image_string = "wet_hair"
 
-        clothing_type = "pants"
+        clothing_type = "hair"
 
-        Owner_names = ["Kitty"]
+        Owner_names = ["Rogue"]
 
         dialogue_lines = {
             }
 
         shame = 0
 
-        hides = ["pussy"]
-        covers = ["pussy", "thighs"]
+        hides = []
+        covers = []
 
         number_of_states = 1
 

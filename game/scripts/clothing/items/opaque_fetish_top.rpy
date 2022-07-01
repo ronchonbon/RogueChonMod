@@ -1,17 +1,17 @@
 init -1 python:
 
-    def Aerith_corset():
-        name = "Aerith's corset"
-        image_string = "Aerith_corset"
+    def opaque_fetish_top():
+        name = "opaque fetish top"
+        image_string = "opaque_fetish_top"
 
-        clothing_type = "bra"
+        clothing_type = "top"
 
-        Owner_names = ["Kitty"]
+        Owner_names = ["Rogue"]
 
         dialogue_lines = {
             }
 
-        shame = 0
+        shame = 1
 
         hides = ["breasts"]
         covers = ["breasts"]
@@ -20,12 +20,6 @@ init -1 python:
 
         poses = [
             "arm pose 1",
-            "arm pose 2",
-            "handjob",
-            "titjob",
-            "footjob",
-            "blowjob",
-            "sex",
-            "doggy"]
+            "arm pose 2"]
 
         return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

@@ -11,7 +11,7 @@ init -1 python:
         dialogue_lines = {
             }
 
-        shame = -5
+        shame = 0
 
         hides = ["breasts"]
         covers = ["breasts"]

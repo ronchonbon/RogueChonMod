@@ -1,12 +1,12 @@
 init -1 python:
 
-    def Aerith_corset():
-        name = "Aerith's corset"
-        image_string = "Aerith_corset"
+    def Rogue_jacket():
+        name = "Rogue's jacket"
+        image_string = "Rogue_jacket"
 
-        clothing_type = "bra"
+        clothing_type = "jacket"
 
-        Owner_names = ["Kitty"]
+        Owner_names = ["Rogue"]
 
         dialogue_lines = {
             }
@@ -16,16 +16,10 @@ init -1 python:
         hides = ["breasts"]
         covers = ["breasts"]
 
-        number_of_states = 2
+        number_of_states = 1
 
         poses = [
             "arm pose 1",
-            "arm pose 2",
-            "handjob",
-            "titjob",
-            "footjob",
-            "blowjob",
-            "sex",
-            "doggy"]
+            "arm pose 2"]
 
         return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

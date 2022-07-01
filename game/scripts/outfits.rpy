@@ -319,6 +319,9 @@ init -2 python:
             self.breasts_hidden = False
             self.breasts_covered = False
 
+            self.underwear_hidden = False
+            self.underwear_covered = False
+
             self.pussy_hidden = False
             self.pussy_covered = False
 
@@ -341,6 +344,18 @@ init -2 python:
                         break
                     elif Clothing.covers_breasts:
                         self.breasts_covered = True
+
+            for Clothing_type in self.hide_underwear:
+                Clothing = self.Clothes[Clothing_type]
+
+                if Clothing:
+                    if Clothing.hides_pussy:
+                        self.underwear_hidden = True
+                        self.underwear_covered = True
+
+                        break
+                    elif Clothing.covers_pussy:
+                        self.underwear_covered = True
 
             for Clothing_type in self.hide_pussy:
                 Clothing = self.Clothes[Clothing_type]
@@ -385,24 +400,27 @@ init -2 python:
             for Clothing_type in self.types:
                 if self.Clothes[Clothing_type]:
                     self.shame += self.Clothes[Clothing_type].shame
-
-            if not self.breasts_hidden:
-                self.shame += 5
+                elif Clothing_type == "bra":
+                    self.shame += 2
+                elif Clothing_type == "underwear":
+                    self.shame += 5
 
             if not self.breasts_covered:
+                self.shame += 10
+            elif not self.breasts_hidden:
                 self.shame += 5
 
-            if not self.pussy_hidden:
-                self.shame += 10
-
             if not self.pussy_covered:
-                self.shame += 10
+                self.shame += 20
+            elif not self.pussy_hidden:
+                self.shame += 15
+            elif not self.underwear_covered:
+                self.shame += 5
+            elif not self.underwear_hidden:
+                self.shame += 2
 
             if not self.thighs_covered:
                 self.shame += 2
-
-            if not self.Clothes["underwear"]:
-                self.shame += 5
 
             if self.shame < 0:
                 self.shame = 0

@@ -1,7 +1,7 @@
 init -1 python:
 
     def Aerith_skirt():
-        name = "Aerith skirt"
+        name = "Aerith's skirt"
         image_string = "Aerith_skirt"
 
         clothing_type = "skirt"
@@ -11,7 +11,7 @@ init -1 python:
         dialogue_lines = {
             }
 
-        shame = -5
+        shame = 0
 
         hides = ["pussy"]
         covers = ["pussy", "thighs"]

@@ -99,11 +99,13 @@ label cheat_editor(Girl):
                         Player.Harem.append(G)
             "Unlock all clothes":
                 python:
+                    import copy
+
                     for G in all_Girls:
                         for C in all_Clothes:
                             if G.tag in C.Owner_names:
                                 if C.name not in G.Wardrobe.Clothes.keys():
-                                    G.Wardrobe.Clothes[C.name] = C
+                                    G.Wardrobe.Clothes[C.name] = copy.deepcopy(C)
 
             "Return":
                 call checkout

@@ -12,7 +12,7 @@ init -1 python:
             "wardrobe": "Try your spiked collar on for me."
             }
 
-        shame = 2
+        shame = 1
 
         hides = []
         covers = []

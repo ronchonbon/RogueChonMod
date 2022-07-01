@@ -1,8 +1,8 @@
 init -1 python:
 
-    def green_mesh_top():
-        name = "green mesh top"
-        image_string = "green_mesh_top"
+    def sheer_fetish_top():
+        name = "sheer fetish top"
+        image_string = "sheer_fetish_top"
 
         clothing_type = "top"
 
@@ -11,7 +11,7 @@ init -1 python:
         dialogue_lines = {
             }
 
-        shame = 1
+        shame = 2
 
         hides = []
         covers = ["breasts"]
@@ -20,12 +20,6 @@ init -1 python:
 
         poses = [
             "arm pose 1",
-            "arm pose 2",
-            "handjob",
-            "titjob",
-            "footjob",
-            "blowjob",
-            "sex",
-            "doggy"]
+            "arm pose 2"]
 
         return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

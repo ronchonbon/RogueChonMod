@@ -1,20 +1,20 @@
 init -1 python:
 
-    def black_jeans():
-        name = "black jeans"
-        image_string = "black_jeans"
+    def black_ripped_tights():
+        name = "black ripped tights"
+        image_string = "black_ripped_tights"
 
-        clothing_type = "pants"
+        clothing_type = "hose"
 
-        Owner_names = ["Kitty"]
+        Owner_names = ["Rogue"]
 
         dialogue_lines = {
             }
 
-        shame = 0
+        shame = 2
 
-        hides = ["pussy"]
-        covers = ["pussy", "thighs"]
+        hides = []
+        covers = ["thighs", "feet"]
 
         number_of_states = 1
 

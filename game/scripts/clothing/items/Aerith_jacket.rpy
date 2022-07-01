@@ -1,7 +1,7 @@
 init -1 python:
 
     def Aerith_jacket():
-        name = "Aerith jacket"
+        name = "Aerith's jacket"
         image_string = "Aerith_jacket"
 
         clothing_type = "jacket"
@@ -11,7 +11,7 @@ init -1 python:
         dialogue_lines = {
             }
 
-        shame = -2
+        shame = 0
 
         hides = ["breasts"]
         covers = ["breasts"]
