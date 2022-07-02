@@ -162,7 +162,7 @@ label masturbate(Girl, context = None):
             return "stop"
 
 label before_masturbation(Girl):
-    call expose_pussy(Girl)
+    $ Girl.expose_pussy()
 
     if "unseen" in Girl.recent_history:
         $ Girl.change_face("sexy", eyes = "closed")

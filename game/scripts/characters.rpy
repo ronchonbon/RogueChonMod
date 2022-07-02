@@ -23,6 +23,7 @@ init python:
             self.traits = []
             self.history = []
 
+            self.focused_Girl = None
             self.Phonebook = []
             self.Party = []
             self.Keys = []
@@ -81,7 +82,7 @@ init python:
 
             return
 
-        def change_stat(self, flavor, check, update, greater_than = False, x_position = 0.75):
+        def change_stat(self, flavor, check, update, greater_than = False):
             stat = getattr(self, flavor)
 
             if greater_than:
@@ -122,7 +123,7 @@ init python:
             self.XP_goal = 100
             self.level = 1
 
-            # sprite_layer = [background_characters (eg. teachers), midground (eg. pool mask), midground_characters (eg. students), foreground (eg. desks), foreground_characters (eg. Present), focused_Girl, cover (eg. fog)]
+            # sprite_layer = [background_characters (eg. teachers), midground (eg. pool mask), midground_characters (eg. students), foreground (eg. desks), foreground_characters (eg. Present), Player.focused_Girl, cover (eg. fog)]
             self.sprite_location = stage_center
             self.sprite_layer = 6
 

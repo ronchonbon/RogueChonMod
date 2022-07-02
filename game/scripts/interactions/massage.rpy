@@ -229,7 +229,7 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
     $ approval_bonus = 0
     return
 
-label Massage_Prep(Girl=focused_Girl, Current=0, Past=0, MCount=0):
+label Massage_Prep(Girl=Player.focused_Girl, Current=0, Past=0, MCount=0):
     call top_off (Girl, "massage")
     if not Girl.Clothes["top"] and "no_topless" not in Girl.recent_history:
         call change_Girl_stat(Girl, "obedience", 50, 3)

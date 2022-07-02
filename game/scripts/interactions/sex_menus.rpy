@@ -83,98 +83,98 @@ label girl_sex_menu(Girl):
     $ having_sex = True
 
     while having_sex:
-        if focused_Girl == RogueX:
+        if Player.focused_Girl == RogueX:
             $ main_line = "So what would you like to do?"
-            $ fondle_line = "Well where exactly were you interested in touching, " + focused_Girl.player_petname + "_?"
-            $ handjob_line = "What did you have in mind, " + focused_Girl.player_petname + "_?"
+            $ fondle_line = "Well where exactly were you interested in touching, " + Player.focused_Girl.player_petname + "_?"
+            $ handjob_line = "What did you have in mind, " + Player.focused_Girl.player_petname + "_?"
             $ show_line = "What sort of show were you expecting?"
-        elif focused_Girl == KittyX:
+        elif Player.focused_Girl == KittyX:
             $ main_line = "So what would you like to do?"
-            $ fondle_line = "Um, what did you want to touch, " + focused_Girl.player_petname + "_?"
-            $ handjob_line = focused_Girl.Like + "_what did you want me to do?"
-            $ show_line = focused_Girl.Like + "_what did you want to see?"
-        elif focused_Girl == EmmaX:
+            $ fondle_line = "Um, what did you want to touch, " + Player.focused_Girl.player_petname + "_?"
+            $ handjob_line = Player.focused_Girl.Like + "_what did you want me to do?"
+            $ show_line = Player.focused_Girl.Like + "_what did you want to see?"
+        elif Player.focused_Girl == EmmaX:
             $ main_line = "So, what was it you hoped to do?"
-            $ fondle_line = "Well? Where did you want to touch, " + focused_Girl.player_petname + "_?"
+            $ fondle_line = "Well? Where did you want to touch, " + Player.focused_Girl.player_petname + "_?"
             $ handjob_line = "What did you want me to do?"
             $ show_line = "What did you want to see?"
-        elif focused_Girl == LauraX:
+        elif Player.focused_Girl == LauraX:
             $ main_line = "What did you want to do?"
             $ fondle_line = "Yeah? Like where?"
             $ handjob_line = "Oh? Like what?"
             $ show_line = "What kind of show are you thinking?"
-        elif focused_Girl == JeanX:
+        elif Player.focused_Girl == JeanX:
             $ main_line = "What did you want to do?"
             $ fondle_line = "Yeah? Like where?"
             $ handjob_line = "Oh? Like what?"
             $ show_line = "What kind of show are you thinking?"
-        elif focused_Girl == StormX:
+        elif Player.focused_Girl == StormX:
             $ main_line = "So, what was it you hoped to do?"
-            $ fondle_line = "What did you wish to touch, " + focused_Girl.player_petname + "_?"
+            $ fondle_line = "What did you wish to touch, " + Player.focused_Girl.player_petname + "_?"
             $ handjob_line = "What did you want me to do?"
             $ show_line = "What did you want to see?"
-        elif focused_Girl == JubesX:
+        elif Player.focused_Girl == JubesX:
             $ main_line = "So what did you wanna do?"
             $ fondle_line = "Where were you thinking?"
             $ handjob_line = "What were you thinking?"
             $ show_line = "What kind of show?"
 
         menu:
-            focused_Girl.voice "[main_line]"
+            Player.focused_Girl.voice "[main_line]"
             "Do you want to make out?":
-                if focused_Girl.remaining_actions:
-                    call start_action(focused_Girl, "kiss")
+                if Player.focused_Girl.remaining_actions:
+                    call start_action(Player.focused_Girl, "kiss")
                 else:
-                    call out_of_action_lines(focused_Girl)
+                    call out_of_action_lines(Player.focused_Girl)
 
                     $ having_sex = False
             "Could I touch you?":
-                if focused_Girl.remaining_actions:
-                    if focused_Girl in [EmmaX, StormX]:
-                        $ focused_Girl.change_face("sly")
+                if Player.focused_Girl.remaining_actions:
+                    if Player.focused_Girl in [EmmaX, StormX]:
+                        $ Player.focused_Girl.change_face("sly")
                     else:
-                        $ focused_Girl.mouth = "smile"
+                        $ Player.focused_Girl.mouth = "smile"
 
                     menu:
-                        focused_Girl.voice "[fondle_line]"
+                        Player.focused_Girl.voice "[fondle_line]"
                         "Could I give you a massage?":
-                            call Massage (focused_Girl)
-                        "Your thighs?" if focused_Girl.remaining_actions:
-                            call start_action(focused_Girl, "fondle_thighs")
+                            call Massage (Player.focused_Girl)
+                        "Your thighs?" if Player.focused_Girl.remaining_actions:
+                            call start_action(Player.focused_Girl, "fondle_thighs")
                         "Your breasts?":
-                            call start_action(focused_Girl, "fondle_breasts")
-                        "Suck your nipples?" if focused_Girl.remaining_actions and focused_Girl.action_counter["suck_breasts"]:
-                            call start_action(focused_Girl, "suck_breasts")
-                        "Your pussy?" if focused_Girl.remaining_actions:
-                            call start_action(focused_Girl, "fondle_pussy")
-                        "Eat your pussy?" if focused_Girl.remaining_actions and focused_Girl.action_counter["eat_pussy"]:
-                            call start_action(focused_Girl, "eat_pussy")
+                            call start_action(Player.focused_Girl, "fondle_breasts")
+                        "Suck your nipples?" if Player.focused_Girl.remaining_actions and Player.focused_Girl.action_counter["suck_breasts"]:
+                            call start_action(Player.focused_Girl, "suck_breasts")
+                        "Your pussy?" if Player.focused_Girl.remaining_actions:
+                            call start_action(Player.focused_Girl, "fondle_pussy")
+                        "Eat your pussy?" if Player.focused_Girl.remaining_actions and Player.focused_Girl.action_counter["eat_pussy"]:
+                            call start_action(Player.focused_Girl, "eat_pussy")
                         "Your ass?":
-                            call start_action(focused_Girl, "fondle_ass")
-                        "Eat your ass?" if focused_Girl.remaining_actions and focused_Girl.action_counter["eat_ass"]:
-                            call start_action(focused_Girl, "eat_ass")
+                            call start_action(Player.focused_Girl, "fondle_ass")
+                        "Eat your ass?" if Player.focused_Girl.remaining_actions and Player.focused_Girl.action_counter["eat_ass"]:
+                            call start_action(Player.focused_Girl, "eat_ass")
                         "Never mind [[something else]":
                             pass
                 else:
-                    call out_of_action_lines(focused_Girl)
+                    call out_of_action_lines(Player.focused_Girl)
 
                     $ having_sex = False
             "Could you take care of something for me?" if Player.semen:
-                if Player.semen and focused_Girl.remaining_actions:
+                if Player.semen and Player.focused_Girl.remaining_actions:
                     menu:
-                        focused_Girl.voice "[handjob_line]"
+                        Player.focused_Girl.voice "[handjob_line]"
                         "Could you give me a handjob?":
-                            call start_action(focused_Girl, "handjob")
+                            call start_action(Player.focused_Girl, "handjob")
                         "Could use your feet?":
-                            call start_action(focused_Girl, "footjob")
+                            call start_action(Player.focused_Girl, "footjob")
                         "Could you give me a titjob?":
-                            call start_action(focused_Girl, "titjob")
+                            call start_action(Player.focused_Girl, "titjob")
                         "Could you suck my cock?":
-                            call start_action(focused_Girl, "blowjob")
+                            call start_action(Player.focused_Girl, "blowjob")
                         "Never mind [[something else]":
                             pass
-                elif Player.semen and not focused_Girl.remaining_actions:
-                    call out_of_action_lines(focused_Girl)
+                elif Player.semen and not Player.focused_Girl.remaining_actions:
+                    call out_of_action_lines(Player.focused_Girl)
 
                     $ having_sex = False
                 else:
@@ -183,173 +183,173 @@ label girl_sex_menu(Girl):
                     $ having_sex = False
             "Could you put on a show for me?":
                 menu:
-                    focused_Girl.voice "[show_line]"
+                    Player.focused_Girl.voice "[show_line]"
                     "Dance for me?":
-                        if focused_Girl.remaining_actions:
-                            call Group_Strip(focused_Girl)
+                        if Player.focused_Girl.remaining_actions:
+                            call Group_Strip(Player.focused_Girl)
                         else:
-                            call out_of_action_lines(focused_Girl)
+                            call out_of_action_lines(Player.focused_Girl)
 
                             $ having_sex = False
                     "Could you undress for me?":
-                        call undress_Girl(focused_Girl)
-                    "You've got a little something. . . " if focused_Girl.spunk:
-                        call sex_menu_cleanup_lines(focused_Girl)
-                        call Girl_Cleanup(focused_Girl,"ask")
+                        call undress_Girl(Player.focused_Girl)
+                    "You've got a little something. . . " if Player.focused_Girl.spunk:
+                        call sex_menu_cleanup_lines(Player.focused_Girl)
+                        call Girl_Cleanup(Player.focused_Girl,"ask")
                     "Could I watch you get yourself off?":
-                        if focused_Girl.remaining_actions:
-                            call masturbate(focused_Girl)
+                        if Player.focused_Girl.remaining_actions:
+                            call masturbate(Player.focused_Girl)
                         else:
-                            call out_of_action_lines(focused_Girl)
+                            call out_of_action_lines(Player.focused_Girl)
 
                             $ having_sex = False
-                    "Maybe make out with [RogueX.name]?" if focused_Girl != RogueX and RogueX.location == Player.location:
+                    "Maybe make out with [RogueX.name]?" if Player.focused_Girl != RogueX and RogueX.location == Player.location:
                         call LesScene(RogueX)
-                    "Maybe make out with [KittyX.name]?" if focused_Girl != KittyX and  KittyX.location == Player.location:
+                    "Maybe make out with [KittyX.name]?" if Player.focused_Girl != KittyX and  KittyX.location == Player.location:
                         call LesScene(KittyX)
-                    "Maybe make out with [LauraX.name]?" if focused_Girl != LauraX and LauraX.location == Player.location:
+                    "Maybe make out with [LauraX.name]?" if Player.focused_Girl != LauraX and LauraX.location == Player.location:
                         call LesScene(LauraX)
-                    "Maybe make out with [JeanX.name]?" if focused_Girl != JeanX and JeanX.location == Player.location:
+                    "Maybe make out with [JeanX.name]?" if Player.focused_Girl != JeanX and JeanX.location == Player.location:
                         call LesScene(JeanX)
-                    "Maybe make out with [StormX.name]?" if focused_Girl != StormX and StormX.location == Player.location:
+                    "Maybe make out with [StormX.name]?" if Player.focused_Girl != StormX and StormX.location == Player.location:
                         call LesScene(StormX)
-                    "Maybe make out with [JubesX.name]?" if focused_Girl != JubesX and JubesX.location == Player.location:
+                    "Maybe make out with [JubesX.name]?" if Player.focused_Girl != JubesX and JubesX.location == Player.location:
                         call LesScene(JubesX)
                     "Never mind [[something else]":
                         pass
             "Could we maybe. . . ?":
-                if focused_Girl.remaining_actions:
+                if Player.focused_Girl.remaining_actions:
                     menu:
-                        focused_Girl.voice "[main_line]"
+                        Player.focused_Girl.voice "[main_line]"
                         "Come over here, I've got something in mind. . .":
                             if Player.semen:
-                                call start_action(focused_Girl, "hotdog")
+                                call start_action(Player.focused_Girl, "hotdog")
                             else:
                                 "The spirit is apparently willing, but the flesh is spongy and bruised."
 
                                 $ having_sex = False
                         "Fuck your pussy.":
                             if Player.semen:
-                                call start_action(focused_Girl, "sex")
+                                call start_action(Player.focused_Girl, "sex")
                             else:
                                 "The spirit is apparently willing, but the flesh is spongy and bruised."
 
                                 $ having_sex = False
                         "Fuck your ass.":
                             if Player.semen:
-                                call start_action(focused_Girl, "anal")
+                                call start_action(Player.focused_Girl, "anal")
                             else:
                                 "The spirit is apparently willing, but the flesh is spongy and bruised."
 
                                 $ having_sex = False
                         "How about some toys? [[Pussy]":
-                            call dildo_check(focused_Girl)
+                            call dildo_check(Player.focused_Girl)
 
                             if _return == "found":
-                                call start_action(focused_Girl, "dildo_pussy")
+                                call start_action(Player.focused_Girl, "dildo_pussy")
                         "How about some toys? [[Anal]":
-                            call dildo_check(focused_Girl)
+                            call dildo_check(Player.focused_Girl)
 
                             if _return == "found":
-                                call start_action(focused_Girl, "dildo_ass")
+                                call start_action(Player.focused_Girl, "dildo_ass")
                         "Never mind [[something else]":
                             pass
                 else:
-                    call out_of_action_lines(focused_Girl)
+                    call out_of_action_lines(Player.focused_Girl)
 
                     $ having_sex = False
             "Hey, do you want in on this? [[Threesome]" if len(Present) > 1 and not Partner:
-                call Sex_Menu_Threesome(focused_Girl)
+                call Sex_Menu_Threesome(Player.focused_Girl)
             "Hey, [Partner.name]? [[Switch lead]" if Partner:
                 call shift_focus(Partner)
             "Cheat Menu" if config.developer:
-                call cheat_menu(focused_Girl)
+                call cheat_menu(Player.focused_Girl)
             "Never mind. [[exit]":
-                if focused_Girl.lust >= 50 or focused_Girl.addiction >= 50:
-                    $ focused_Girl.change_face("sad")
+                if Player.focused_Girl.lust >= 50 or Player.focused_Girl.addiction >= 50:
+                    $ Player.focused_Girl.change_face("sad")
 
-                    if focused_Girl.remaining_actions and focused_Girl.SEXP >= 15 and round > 20:
-                        if "round2" not in focused_Girl.recent_history:
-                            call exit_sex_menu_experienced_first_round_lines(focused_Girl)
+                    if Player.focused_Girl.remaining_actions and Player.focused_Girl.SEXP >= 15 and round > 20:
+                        if "round2" not in Player.focused_Girl.recent_history:
+                            call exit_sex_menu_experienced_first_round_lines(Player.focused_Girl)
 
-                            call change_Girl_stat(focused_Girl, "inhibition", 30, 2)
-                            call change_Girl_stat(focused_Girl, "inhibition", 50, 1)
-                        elif focused_Girl.addiction >= 50:
-                            call exit_sex_menu_experienced_addicted_lines(focused_Girl)
+                            call change_Girl_stat(Player.focused_Girl, "inhibition", 30, 2)
+                            call change_Girl_stat(Player.focused_Girl, "inhibition", 50, 1)
+                        elif Player.focused_Girl.addiction >= 50:
+                            call exit_sex_menu_experienced_addicted_lines(Player.focused_Girl)
                         else:
-                            call exit_sex_menu_experienced_lines(focused_Girl)
+                            call exit_sex_menu_experienced_lines(Player.focused_Girl)
 
                         menu:
                             extend ""
-                            "Yeah, I'm done for now." if Player.semen and "round2" not in focused_Girl.recent_history:
-                                if "unsatisfied" in focused_Girl.recent_history and not focused_Girl.session_orgasms:
-                                    $ focused_Girl.change_face("angry")
-                                    $ focused_Girl.eyes = "side"
-                                    call change_Girl_stat(focused_Girl, "love", 70, -2)
-                                    call change_Girl_stat(focused_Girl, "love", 90, -4)
-                                    call change_Girl_stat(focused_Girl, "obedience", 30, 2)
-                                    call change_Girl_stat(focused_Girl, "obedience", 70, 1)
+                            "Yeah, I'm done for now." if Player.semen and "round2" not in Player.focused_Girl.recent_history:
+                                if "unsatisfied" in Player.focused_Girl.recent_history and not Player.focused_Girl.session_orgasms:
+                                    $ Player.focused_Girl.change_face("angry")
+                                    $ Player.focused_Girl.eyes = "side"
+                                    call change_Girl_stat(Player.focused_Girl, "love", 70, -2)
+                                    call change_Girl_stat(Player.focused_Girl, "love", 90, -4)
+                                    call change_Girl_stat(Player.focused_Girl, "obedience", 30, 2)
+                                    call change_Girl_stat(Player.focused_Girl, "obedience", 70, 1)
 
-                                    call exit_sex_menu_done_for_now_unsatisfied_lines(focused_Girl)
-
-                                    $ having_sex = False
-                                else:
-                                    $ focused_Girl.change_face("bemused", 1)
-                                    call change_Girl_stat(focused_Girl, "obedience", 50, 2)
-
-                                    call exit_sex_menu_done_for_now_satisfied_lines(focused_Girl)
-
-                                    $ having_sex = False
-                            "I gave it a shot." if "round2" in focused_Girl.recent_history:
-                                if "unsatisfied" in focused_Girl.recent_history and not focused_Girl.session_orgasms:
-                                    $ focused_Girl.change_face("angry")
-                                    $ focused_Girl.eyes = "side"
-
-                                    call exit_sex_menu_gave_it_a_shot_unsatisfied_lines(focused_Girl)
+                                    call exit_sex_menu_done_for_now_unsatisfied_lines(Player.focused_Girl)
 
                                     $ having_sex = False
                                 else:
-                                    $ focused_Girl.change_face("bemused", 1)
+                                    $ Player.focused_Girl.change_face("bemused", 1)
+                                    call change_Girl_stat(Player.focused_Girl, "obedience", 50, 2)
 
-                                    call exit_sex_menu_gave_it_a_shot_satisfied_lines(focused_Girl)
+                                    call exit_sex_menu_done_for_now_satisfied_lines(Player.focused_Girl)
 
                                     $ having_sex = False
-                            "Hey, I did my part." if focused_Girl.session_orgasms > 2:
-                                $ focused_Girl.change_face("sly", 1)
+                            "I gave it a shot." if "round2" in Player.focused_Girl.recent_history:
+                                if "unsatisfied" in Player.focused_Girl.recent_history and not Player.focused_Girl.session_orgasms:
+                                    $ Player.focused_Girl.change_face("angry")
+                                    $ Player.focused_Girl.eyes = "side"
 
-                                call exit_sex_menu_did_my_part_lines(focused_Girl)
+                                    call exit_sex_menu_gave_it_a_shot_unsatisfied_lines(Player.focused_Girl)
+
+                                    $ having_sex = False
+                                else:
+                                    $ Player.focused_Girl.change_face("bemused", 1)
+
+                                    call exit_sex_menu_gave_it_a_shot_satisfied_lines(Player.focused_Girl)
+
+                                    $ having_sex = False
+                            "Hey, I did my part." if Player.focused_Girl.session_orgasms > 2:
+                                $ Player.focused_Girl.change_face("sly", 1)
+
+                                call exit_sex_menu_did_my_part_lines(Player.focused_Girl)
 
                                 $ having_sex = False
                             "I'm tapped out for the moment, let's try again later." if not Player.semen:
-                                $ focused_Girl.change_face("normal")
+                                $ Player.focused_Girl.change_face("normal")
 
-                                call exit_sex_menu_out_of_semen_lines(focused_Girl)
+                                call exit_sex_menu_out_of_semen_lines(Player.focused_Girl)
 
                                 $ having_sex = False
-                            "Ok, we can try something else." if multi_action and "round2" not in focused_Girl.recent_history:
-                                $ focused_Girl.change_face("smile")
-                                call change_Girl_stat(focused_Girl, "love", 70, 2)
-                                call change_Girl_stat(focused_Girl, "love", 90, 1)
+                            "Ok, we can try something else." if multi_action and "round2" not in Player.focused_Girl.recent_history:
+                                $ Player.focused_Girl.change_face("smile")
+                                call change_Girl_stat(Player.focused_Girl, "love", 70, 2)
+                                call change_Girl_stat(Player.focused_Girl, "love", 90, 1)
 
-                                call exit_sex_menu_less_than_two_rounds_lines(focused_Girl)
+                                call exit_sex_menu_less_than_two_rounds_lines(Player.focused_Girl)
 
-                                $ focused_Girl.recent_history.append("round2")
-                                $ focused_Girl.daily_history.append("round2")
-                            "Again? Ok, fine." if multi_action and "round2" in focused_Girl.recent_history:
-                                $ focused_Girl.change_face("sly")
+                                $ Player.focused_Girl.recent_history.append("round2")
+                                $ Player.focused_Girl.daily_history.append("round2")
+                            "Again? Ok, fine." if multi_action and "round2" in Player.focused_Girl.recent_history:
+                                $ Player.focused_Girl.change_face("sly")
 
-                                call exit_sex_menu_more_than_two_rounds_lines(focused_Girl)
+                                call exit_sex_menu_more_than_two_rounds_lines(Player.focused_Girl)
                     else:
-                        $ focused_Girl.change_face("bemused", 1)
+                        $ Player.focused_Girl.change_face("bemused", 1)
 
-                        call exit_sex_menu_girl_also_tired_lines(focused_Girl)
+                        call exit_sex_menu_girl_also_tired_lines(Player.focused_Girl)
 
-                        call change_Girl_stat(focused_Girl, "inhibition", 30, 2)
-                        call change_Girl_stat(focused_Girl, "inhibition", 50, 1)
+                        call change_Girl_stat(Player.focused_Girl, "inhibition", 30, 2)
+                        call change_Girl_stat(Player.focused_Girl, "inhibition", 50, 1)
 
                         $ having_sex = False
                 else:
-                    call generic_exit_sex_menu_lines(focused_Girl)
+                    call generic_exit_sex_menu_lines(Player.focused_Girl)
 
                     $ having_sex = False
 

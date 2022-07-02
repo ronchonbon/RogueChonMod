@@ -179,7 +179,7 @@ label top_off(Girl, context = 1):
                 "Just pull it up." if Girl.Outfit.breasts_covered:
                     $ Girl.change_face("bemused", 1)
 
-                    call expose_breasts(Girl)
+                    $ Girl.expose_breasts()
                 "Lose it all." if Girl.Clothes["top"] and Girl.Clothes["bra"]:
                     $ Girl.change_face("bemused", 1)
                     $ Girl.take_off("jacket")
@@ -1629,7 +1629,7 @@ label Group_Stripping:
     while round >= 10 and dancing_Girls:
         $ round -= 2 if round > 2 else round
 
-        if dancing_Girls[Count] != focused_Girl:
+        if dancing_Girls[Count] != Player.focused_Girl:
             call shift_focus (dancing_Girls[Count])
 
         call Girl_Stripping (dancing_Girls[Count])
@@ -1662,7 +1662,7 @@ label Group_Stripping:
                 $ approval_bonus = stored_approval_bonus[1]
 
             call shift_focus (dancing_Girls[Count])
-            call Activity_Check (focused_Girl, Partner)
+            call Activity_Check (Player.focused_Girl, Partner)
 
         if len(dancing_Girls) < 2 or "stopdancing" in dancing_Girls[1].recent_history:
 
@@ -1671,7 +1671,7 @@ label Group_Stripping:
             $ between_event_count = 0
             $ Partner = 0
 
-            call Activity_Check (focused_Girl, Partner)
+            call Activity_Check (Player.focused_Girl, Partner)
 
             if not dancing_Girls or "stopdancing" in dancing_Girls[0].recent_history:
                 jump Group_Strip_End
@@ -2323,7 +2323,7 @@ label Bottoms_Off(Girl, Intro = 1):
                 if taboo:
                     call change_Girl_stat(Girl, "inhibition", 90, (int(taboo/10)))
 
-                call expose_pussy(Girl)
+                $ Girl.expose_pussy()
 
                 if Girl == KittyX:
                     if counter:
@@ -2911,7 +2911,7 @@ label Bottoms_Off_Legs(Girl):
                     else:
                         Girl.voice "Fine."
 
-                    call expose_pussy(Girl)
+                    $ Girl.expose_pussy()
 
                     if Girl.Clothes["bottom"]:
                         "She shifts her [Girl.Clothes[bottom].name] out of the way."

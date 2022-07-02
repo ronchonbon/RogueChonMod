@@ -91,7 +91,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
             $ approval_bonus = 0
             call shift_focus (Partner)
             call show_full_body(Partner)
-            call Player_Cumming (focused_Girl, approval_bonus=0)
+            call Player_Cumming (Player.focused_Girl, approval_bonus=0)
 
             call shift_focus (Partner)
             call show_full_body(Partner)
@@ -1582,7 +1582,7 @@ label Girl_Orgasm_After:
         "Actually, let [Partner.name] do it." if Partner in all_Girls:
             call shift_focus (Partner)
             call show_full_body(Partner)
-            call Girl_CleanCock (focused_Girl)
+            call Girl_CleanCock (Player.focused_Girl)
 
             call shift_focus (Partner)
             call show_full_body(Partner)
@@ -1956,7 +1956,7 @@ label Girl_Cleanup(Girl=0, Choice = "random", Options=[], counter=0, Cleaned=0, 
     $ Girl.recent_history.append("cleaned")
     $ Girl.daily_history.append("cleaned")
 
-    if focused_Girl != Girl:
+    if Player.focused_Girl != Girl:
 
         if Original in all_Girls:
             $ Original = Partner
@@ -2525,7 +2525,7 @@ label Girl_Cleanup(Girl=0, Choice = "random", Options=[], counter=0, Cleaned=0, 
             $ Girl.recent_history.append("painted")
             $ Girl.daily_history.append("painted")
 
-    if Original in all_Girls and focused_Girl != Original:
+    if Original in all_Girls and Player.focused_Girl != Original:
 
         call shift_focus (Original)
     return
@@ -2841,7 +2841,7 @@ label Partner_Cleanup_Check(Girl=0, B=0):
 
         if Girl.event_counter["swallowed"] >=5:
             $ Options.append("eat")
-        call show_full_body(focused_Girl)
+        call show_full_body(Player.focused_Girl)
         call show_full_body(Partner)
         if Choice == "partner lick":
             $ Girl.check_if_likes(Partner,900, 10, 1)

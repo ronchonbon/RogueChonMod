@@ -481,7 +481,7 @@ screen status_screen:
                     imagebutton idle "images/iconinbt.png" hover "images/iconinbt.png" action NullAction() hovered tt.Action("Inhibitions: [Partner.inhibition]")
                     bar range 100 value (Partner.inhibition/10) xmaximum 200 ymaximum 40 left_bar "images/barfulli.png" right_bar "images/barempty.png"
 
-    add "images/BarBackdrop_" + focused_Girl.tag + ".png"
+    add "images/BarBackdrop_" + Player.focused_Girl.tag + ".png"
     frame:
         style_group "stat_bar"
         pos (0.0, 0.0)
@@ -489,12 +489,12 @@ screen status_screen:
         has vbox
 
         hbox:
-            imagebutton idle "images/iconlove.png" hover "images/iconlove.png" action NullAction() hovered tt.Action("Love: [focused_Girl.love]")
-            bar range 100 value (focused_Girl.love/10) xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
+            imagebutton idle "images/iconlove.png" hover "images/iconlove.png" action NullAction() hovered tt.Action("Love: [Player.focused_Girl.love]")
+            bar range 100 value (Player.focused_Girl.love/10) xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
 
         hbox:
-            imagebutton idle "images/iconlust.png" hover "images/iconlust.png" action NullAction() hovered tt.Action("Lust: [focused_Girl.lust]")
-            bar range 100 value focused_Girl.lust xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
+            imagebutton idle "images/iconlust.png" hover "images/iconlust.png" action NullAction() hovered tt.Action("Lust: [Player.focused_Girl.lust]")
+            bar range 100 value Player.focused_Girl.lust xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
 
     frame:
         pos (0.15, 0.0)
@@ -502,12 +502,12 @@ screen status_screen:
         has vbox
 
         hbox:
-            imagebutton idle "images/iconobed.png" hover "images/iconobed.png" action NullAction() hovered tt.Action("Obedience: [focused_Girl.obedience]")
-            bar range 100 value (focused_Girl.obedience/10) xmaximum 200 ymaximum 40 left_bar "images/barfullO.png" right_bar "images/barempty.png"
+            imagebutton idle "images/iconobed.png" hover "images/iconobed.png" action NullAction() hovered tt.Action("Obedience: [Player.focused_Girl.obedience]")
+            bar range 100 value (Player.focused_Girl.obedience/10) xmaximum 200 ymaximum 40 left_bar "images/barfullO.png" right_bar "images/barempty.png"
 
         hbox:
-            imagebutton idle "images/iconaddict.png" hover "images/iconaddict.png" action NullAction() hovered tt.Action("Addiction: [focused_Girl.addiction]")
-            bar range 100 value focused_Girl.addiction xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
+            imagebutton idle "images/iconaddict.png" hover "images/iconaddict.png" action NullAction() hovered tt.Action("Addiction: [Player.focused_Girl.addiction]")
+            bar range 100 value Player.focused_Girl.addiction xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
 
     frame:
         pos (0.3, 0.0)
@@ -515,18 +515,18 @@ screen status_screen:
         has vbox
 
         hbox:
-            imagebutton idle "images/iconinbt.png" hover "images/iconinbt.png" action NullAction() hovered tt.Action("Inhibitions: [focused_Girl.inhibition]")
-            bar range 100 value (focused_Girl.inhibition/10) xmaximum 200 ymaximum 40 left_bar "images/barfulli.png" right_bar "images/barempty.png"
+            imagebutton idle "images/iconinbt.png" hover "images/iconinbt.png" action NullAction() hovered tt.Action("Inhibitions: [Player.focused_Girl.inhibition]")
+            bar range 100 value (Player.focused_Girl.inhibition/10) xmaximum 200 ymaximum 40 left_bar "images/barfulli.png" right_bar "images/barempty.png"
 
         hbox:
-            imagebutton idle "images/iconaddictrate.png" hover "images/iconaddictrate.png" action NullAction() hovered tt.Action("Addiction Rate: [focused_Girl.addiction_rate]")
-            bar range 100 value (focused_Girl.addiction_rate*10) xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
+            imagebutton idle "images/iconaddictrate.png" hover "images/iconaddictrate.png" action NullAction() hovered tt.Action("Addiction Rate: [Player.focused_Girl.addiction_rate]")
+            bar range 100 value (Player.focused_Girl.addiction_rate*10) xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
 
     showif not Player.primary_action:
-        imagebutton auto "images/Button_" + focused_Girl.tag + "_%s.png" action ShowTransient("Focus_Map") pos (0.71, 0.016) focus_mask True
+        imagebutton auto "images/Button_" + Player.focused_Girl.tag + "_%s.png" action ShowTransient("Focus_Map") pos (0.71, 0.016) focus_mask True
 
     showif config.developer:
-        imagebutton auto "images/Button_" + focused_Girl.tag + "_%s.png" action ui.callsinnewcontext("cheat_editor",focused_Girl) pos (0.755, 0.016) focus
+        imagebutton auto "images/Button_" + Player.focused_Girl.tag + "_%s.png" action ui.callsinnewcontext("cheat_editor",Player.focused_Girl) pos (0.755, 0.016) focus
 
     frame:
         pos (0.45, 0.0085)
@@ -548,7 +548,7 @@ screen status_screen:
         hbox:
             text "Level: [Player.level]" size 18
         hbox:
-            text "[focused_Girl.tag] Level: [focused_Girl.level]" size 18
+            text "[Player.focused_Girl.tag] Level: [Player.focused_Girl.level]" size 18
 
     frame:
         pos (0.905, 0.047)

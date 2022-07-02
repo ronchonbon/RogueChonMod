@@ -9,7 +9,6 @@ init -1:
     default weekday = 6
     default day_of_week = week[weekday]
 
-    default focused_Girl = None
     default Partner = None
     default Present = []
     default Nearby = []
@@ -39,15 +38,12 @@ init -1:
 
     default stack_depth = 0
 
-    default Events = []
-
     default being_punished = 0
 
     default approval_bonus = 0
     default approval = 0
 
     default between_event_count = 0
-    default stored_count = 0
     default counter = 0
 
     default achievements = []
@@ -63,8 +59,6 @@ init -1:
     default stage_right = 0.65
     default stage_far_right = 0.75
     default stage_far_far_right = 0.85
-
-    default number_of_holders = 1
 
     default Xavier_brows = "happy"
     default Xavier_eyes = "happy"

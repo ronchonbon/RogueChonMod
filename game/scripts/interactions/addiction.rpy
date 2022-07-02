@@ -794,7 +794,7 @@ label addiction_ultimatum:
             "No":
                 pass
     while between_event_count:
-        $ stored_count = approval_bonus
+        $ stored_bonus = approval_bonus
 
         if not approval_check(Girl, 1200, "LO"):
             $ Girl.forced = 1
@@ -945,11 +945,11 @@ label addiction_ultimatum:
                         if Girl.addiction >= 50:
                             call girl_touches_you (Girl)
                     "How about you let me touch your breasts?":
-                        $ stored_count = approval_bonus
+                        $ stored_bonus = approval_bonus
 
                         call top_off (Girl, 2)
 
-                        $ approval_bonus = stored_count
+                        $ approval_bonus = stored_bonus
 
                         call start_action(Girl, "fondle_breasts")
 
@@ -972,11 +972,11 @@ label addiction_ultimatum:
                             elif Girl == JubesX:
                                 ch_v "So, fair trade?"
                     "How about you just let me touch your thighs?":
-                        $ stored_count = approval_bonus
+                        $ stored_bonus = approval_bonus
 
                         call Bottoms_Off (Girl, 2)
 
-                        $ approval_bonus = stored_count
+                        $ approval_bonus = stored_bonus
 
                         if Girl.legs_covered:
                             if Girl == RogueX:
@@ -1018,11 +1018,11 @@ label addiction_ultimatum:
                             if Girl.legs_covered:
                                 call girl_touches_you (Girl)
                     "How about you let me touch your pussy?":
-                        $ stored_count = approval_bonus
+                        $ stored_bonus = approval_bonus
 
                         call Bottoms_Off (Girl, 0)
 
-                        $ approval_bonus = stored_count
+                        $ approval_bonus = stored_bonus
 
                         call start_action(Girl, "fondle_pussy")
 
@@ -1081,7 +1081,7 @@ label addiction_ultimatum:
                         elif Girl == JubesX:
                             ch_v "That had to be plenty."
             "How about you strip for me, and then I let you touch me?":
-                $ stored_count = Girl.check_clothing()
+                $ stored_bonus = Girl.check_clothing()
 
                 call Group_Strip(Girl)
 
@@ -1094,7 +1094,7 @@ label addiction_ultimatum:
                     "That was pretty weak, I'll need a bit more.":
                         $ Girl.change_face("angry")
 
-                        if stored_count > Girl.check_clothing() and Girl.check_clothing() < 3:
+                        if stored_bonus > Girl.check_clothing() and Girl.check_clothing() < 3:
                             call change_Girl_stat(Girl, "love", 200, -40)
                             call change_Girl_stat(Girl, "inhibition", 50, 5)
                             call change_Girl_stat(Girl, "obedience", 50, 20)
@@ -1241,7 +1241,7 @@ label addiction_ultimatum:
         if Girl.addiction <= 20:
             return
 
-        $ approval_bonus = stored_count
+        $ approval_bonus = stored_bonus
 
         if not Girl.remaining_actions:
             if between_event_count:
@@ -2215,7 +2215,7 @@ label addiction_serum:
             ch_v "No chance."
         return
 
-    $ stored_count = Girl.remaining_actions
+    $ stored_actions = Girl.remaining_actions
     $ Girl.remaining_actions = 0
 
     if not Girl.had_chat[2]:
@@ -2385,7 +2385,7 @@ label addiction_serum:
 
                 $ Girl.had_chat[3] = 1
             "Never mind.":
-                $ Girl.remaining_actions = stored_count
+                $ Girl.remaining_actions = stored_actions
 
                 return
 
@@ -2711,7 +2711,7 @@ label addiction_serum:
                 elif Girl == JubesX:
                     ch_v "Oookay. . ."
 
-                $ Girl.remaining_actions = stored_count
+                $ Girl.remaining_actions = stored_actions
 
                 return
 
@@ -2869,7 +2869,7 @@ label addiction_serum:
                 if Girl.had_chat[3]:
                     ch_r "Well, I think that hit the spot. . ."
 
-                    $ Girl.remaining_actions = stored_count
+                    $ Girl.remaining_actions = stored_actions
 
                     return
                 else:
@@ -2878,7 +2878,7 @@ label addiction_serum:
                 if Girl.had_chat[3]:
                     ch_k "Hmm, delicious. . ."
 
-                    $ Girl.remaining_actions = stored_count
+                    $ Girl.remaining_actions = stored_actions
 
                     return
                 else:
@@ -2887,7 +2887,7 @@ label addiction_serum:
                 if Girl.had_chat[3]:
                     ch_e "Quite satisfying. . ."
 
-                    $ Girl.remaining_actions = stored_count
+                    $ Girl.remaining_actions = stored_actions
 
                     return
                 else:
@@ -2896,7 +2896,7 @@ label addiction_serum:
                 if Girl.had_chat[3]:
                     ch_l "That was good. . ."
 
-                    $ Girl.remaining_actions = stored_count
+                    $ Girl.remaining_actions = stored_actions
 
                     return
                 else:
@@ -2905,7 +2905,7 @@ label addiction_serum:
                 if Girl.had_chat[3]:
                     ch_j "That was actually real tasty. . ."
 
-                    $ Girl.remaining_actions = stored_count
+                    $ Girl.remaining_actions = stored_actions
 
                     return
                 else:
@@ -2914,7 +2914,7 @@ label addiction_serum:
                 if Girl.had_chat[3]:
                     ch_s "That should take care of it. . ."
 
-                    $ Girl.remaining_actions = stored_count
+                    $ Girl.remaining_actions = stored_actions
 
                     return
                 else:
@@ -2924,7 +2924,7 @@ label addiction_serum:
                     ch_v "Mmmmm. . ."
                     ch_v "Mmmmm!!"
 
-                    $ Girl.remaining_actions = stored_count
+                    $ Girl.remaining_actions = stored_actions
 
                     return
                 else:
@@ -2998,7 +2998,7 @@ label addiction_serum:
 
             $ line = 0
 
-            $ Girl.remaining_actions = stored_count
+            $ Girl.remaining_actions = stored_actions
 
             return
 
@@ -3176,6 +3176,6 @@ label addiction_serum:
 
         $ Girl.recent_history.append("no_serum")
 
-    $ Girl.remaining_actions = stored_count
+    $ Girl.remaining_actions = stored_actions
 
     return

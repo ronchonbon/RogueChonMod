@@ -1078,11 +1078,11 @@ label Les_Partner:
         $ temp_Girls.remove(temp_Girls[0])
 
 
-label Les_Prep(Girl=focused_Girl, temp_Girls=[]):
+label Les_Prep(Girl=Player.focused_Girl, temp_Girls=[]):
 
     $ line = 0
     if Girl not in all_Girls or Girl == Partner:
-        $ Girl = focused_Girl
+        $ Girl = Player.focused_Girl
         if Girl == Partner:
             $ Partner = 0
             $ line = 1
@@ -1136,7 +1136,7 @@ label Les_Prep(Girl=focused_Girl, temp_Girls=[]):
     $ Girl.add_word(0,"lesbian", "lesbian")
     $ Partner.add_word(0,"lesbian", "lesbian")
 
-label Les_Cycle(Girl=focused_Girl):
+label Les_Cycle(Girl=Player.focused_Girl):
     $ Girl = check_girl(Girl)
     while round > 0:
         call shift_focus (Girl)
@@ -1487,7 +1487,7 @@ label Les_Response(Speaker=0, Subject=0, Step = 1, B=0, B2=0, approval_bonus=0, 
     if Speaker not in all_Girls:
         $ Speaker = Partner
     if Subject not in all_Girls:
-        $ Subject = focused_Girl
+        $ Subject = Player.focused_Girl
     if Speaker == EmmaX:
 
         if "threesome" not in EmmaX.history or "classcaught" not in EmmaX.history or (taboo > 20 and "taboo" not in EmmaX.history):

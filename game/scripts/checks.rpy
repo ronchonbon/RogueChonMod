@@ -3,12 +3,12 @@ init python:
     def check_girl(Girl, local = False):
         if Girl in all_Girls and (not local or Player.location == Check.location):
             return Girl
-        elif Player.location == focused_Girl.location:
-            return focused_Girl
+        elif Player.location == Player.focused_Girl.location:
+            return Player.focused_Girl
         else:
             for Girl in all_Girls:
                 if Player.location == Girl.location:
-                    focused_Girl = Girl
+                    Player.focused_Girl = Girl
 
                     return Girl
 
@@ -140,7 +140,7 @@ label check_who_is_present(location = Player.location):
             if G in Nearby:
                 Nearby.remove(G)
 
-    if Present and focused_Girl not in Present:
+    if Present and Player.focused_Girl not in Present:
         $ renpy.random.shuffle(Present)
 
         call shift_focus(Present[0])

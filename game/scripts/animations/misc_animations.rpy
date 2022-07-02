@@ -275,14 +275,14 @@ image PhoneRG:
 image PhoneScreen:
     contains:
         ConditionSwitch(
-            "focused_Girl.location == 'bg_rogue'", "PhoneRG",
-            "True", "[focused_Girl.location]")
+            "Player.focused_Girl.location == 'bg_rogue'", "PhoneRG",
+            "True", "[Player.focused_Girl.location]")
 
         offset (-800,-300)
         zoom 1.5
 
     contains:
-        "[focused_Girl.tag]_sprite"
+        "[Player.focused_Girl.tag]_sprite"
         pos (0, 0)
         offset (290,50)
         anchor (0.6, 0)

@@ -1096,7 +1096,7 @@ label slap_ass(Girl):
 
 label girl_initiated_action(Girl, action):
     if action == "kiss":
-        "[focused_Girl.name] presses her body against yours, and kisses you deeply."
+        "[Player.focused_Girl.name] presses her body against yours, and kisses you deeply."
     elif action in breast_actions:
         if action == "fondle_breasts":
             $ covered_phrase = "arm and shoves your hand against her covered breast"
@@ -1141,7 +1141,7 @@ label girl_initiated_action(Girl, action):
 
         if (Girl.Clothes["bottom"] and not Girl.upskirt) or (Girl.Clothes["underwear"] and not Girl.Clothes["underwear"].state):
             if approval_check(Girl, 1250, taboo_modifier = 1) or (Girl.seen_pussy and approval_check(Girl, 500) and not taboo):
-                call expose_pussy(Girl)
+                $ Girl.expose_pussy()
 
                 $ line = 0
 
@@ -1455,7 +1455,7 @@ label first_action_response(Girl, action, context):
         $ Girl.SEXP += 1
 
         if Girl == JubesX:
-            "[focused_Girl.name] bites your lip as she pulls back, and licks some blood off her lips."
+            "[Player.focused_Girl.name] bites your lip as she pulls back, and licks some blood off her lips."
 
             ch_v "Sorry about that. . ."
             ch_v "Won't happen again."

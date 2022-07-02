@@ -238,7 +238,7 @@ label before_action(Girl, action, context = None):
             if _return == "rejected":
                 return "stop"
 
-            call expose_pussy(Girl)
+            $ Girl.expose_pussy()
         elif context != "auto":
             if action in ["sex", "anal"]:
                 call automatically_strip(Girl)
@@ -298,7 +298,7 @@ label before_action(Girl, action, context = None):
             $ Girl.lust += int(taboo/5)
 
     if action in inside_panties_actions:
-        call expose_pussy(Girl)
+        $ Girl.expose_pussy()
 
     if taboo:
         $ Girl.drain_word("no_taboo")

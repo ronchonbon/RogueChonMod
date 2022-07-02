@@ -120,7 +120,7 @@ label classroom_seating:
             "No, I'll sit away from her a bit.":
                 pass
 
-    if Present and focused_Girl not in Present:
+    if Present and Player.focused_Girl not in Present:
         call shift_focus(Present[0])
 
     if len(Present) > 2:
