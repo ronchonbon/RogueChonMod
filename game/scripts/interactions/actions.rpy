@@ -181,7 +181,7 @@ label before_action(Girl, action, context = None):
             if action in inside_panties_actions:
                 call Bottoms_Off(Girl)
             elif action in breast_actions:
-                call Top_Off(Girl)
+                call top_off(Girl)
 
             if "angry" in Girl.recent_history:
                 return "stop"
@@ -241,7 +241,7 @@ label before_action(Girl, action, context = None):
             call expose_pussy(Girl)
         elif context != "auto":
             if action in ["sex", "anal"]:
-                call AutoStrip(Girl)
+                call automatically_strip(Girl)
             elif action == "hotdog":
                 call Bottoms_Off(Girl)
 
@@ -253,13 +253,13 @@ label before_action(Girl, action, context = None):
                 elif action == "anal":
                     $ word = renpy.random.choice(["ass", "back door"])
 
-                if (Girl.wearing_pants and not Girl.Clothes["pants"].state) and (Girl.outfit["underwear"] and not Girl.Clothes["underwear"].state):
-                    "You quickly pull down her pants and her [Girl.outfit['underwear']] and press against her [word]."
+                if (Girl.wearing_pants and not Girl.Clothes["pants"].state) and (Girl.Clothes["underwear"] and not Girl.Clothes["underwear"].state):
+                    "You quickly pull down her pants and her [Girl.Clothes[underwear].name] and press against her [word]."
 
                     $ Girl.Clothes["pants"].state = True
                     $ Girl.Clothes["underwear"].state = True
-                elif (Girl.outfit["underwear"] and not Girl.Clothes["underwear"].state):
-                    "You quickly pull down her [Girl.outfit['underwear']] and press against her [word]."
+                elif (Girl.Clothes["underwear"] and not Girl.Clothes["underwear"].state):
+                    "You quickly pull down her [Girl.Clothes[underwear].name] and press against her [word]."
 
                     $ Girl.Clothes["underwear"].state = True
 
@@ -390,8 +390,8 @@ label action_cycle(Girl, action):
                 return [action, context]
 
         if action in inside_panties_actions:
-            if Girl.outfit["underwear"] or Girl.legs_covered: #This checks if Rogue wants to strip down.
-                call Girl_Undress(Girl, "auto")
+            if Girl.Clothes["underwear"] or Girl.legs_covered: #This checks if Rogue wants to strip down.
+                call undress_Girl(Girl, "auto")
 
         call Sex_Dialog(Girl, Partner)
 

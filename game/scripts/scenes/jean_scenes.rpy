@@ -617,7 +617,7 @@ label Jean_Love:
                 extend ""
                 "Yeah" if Player.Harem:
                     $ JeanX.change_face("angry", 1,eyes = "side")
-                    call Haremchange_stat (JeanX, 700, -5)
+                    call change_Harem_stat (JeanX, 700, -5)
                     if len(Player.Harem) >= 2:
                         ch_j "Bitches."
                     elif Player.Harem:

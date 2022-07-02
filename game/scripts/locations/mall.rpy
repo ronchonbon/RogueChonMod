@@ -620,17 +620,17 @@ label swimsuit_shop:
 
                 menu:
                     "What did you want to try on here?"
-                    "Bikini top" if Girl.outfit["bra"] != "bikini_top":
+                    "Bikini top" if Girl.Clothes["bra"] != "bikini_top":
                         $ item = "bikini_top"
-                    "Bikini top (locked)" if Girl.outfit["bra"] == "bikini_top":
+                    "Bikini top (locked)" if Girl.Clothes["bra"] == "bikini_top":
                         pass
-                    "Bikini bottoms" if Girl.outfit["underwear"] != "bikini_bottoms":
+                    "Bikini bottoms" if Girl.Clothes["underwear"] != "bikini_bottoms":
                         $ item = "bikini_bottoms"
-                    "Bikini bottoms (locked)" if Girl.outfit["underwear"] == "bikini_bottoms":
+                    "Bikini bottoms (locked)" if Girl.Clothes["underwear"] == "bikini_bottoms":
                         pass
-                    "Blue swimskirt" if Girl == KittyX and Girl.outfit["bottom"] != "blue_skirt":
+                    "Blue swimskirt" if Girl == KittyX and Girl.Clothes["bottom"] != "blue_skirt":
                         $ item = "blue_skirt"
-                    "Blue swimskirt (locked)" if Girl == KittyX and Girl.outfit["bottom"] == "blue_skirt":
+                    "Blue swimskirt (locked)" if Girl == KittyX and Girl.Clothes["bottom"] == "blue_skirt":
                         pass
                     "Leave dressing area.":
                         $ leave = True
@@ -652,11 +652,11 @@ label swimsuit_shop:
 
                             "You back out of the room for a moment. . ."
 
-                            $ Girl.outfit["jacket"] = ""
-                            $ Girl.outfit["top"] = ""
-                            $ Girl.outfit["dress"] = ""
-                            $ Girl.outfit["bodysuit"] = ""
-                            $ Girl.outfit["bra"] = item
+                            $ Girl.take_off("jacket")
+                            $ Girl.take_off("top")
+                            $ Girl.take_off("dress")
+                            $ Girl.take_off("bodysuit")
+                            $ Girl.Clothes["bra"] = item
 
                             hide black_screen onlayer black
                     elif item in underwears:
@@ -675,17 +675,17 @@ label swimsuit_shop:
 
                             "You back out of the room for a moment. . ."
 
-                            $ Girl.outfit["bodysuit"] = ""
-                            $ Girl.outfit["dress"] = ""
+                            $ Girl.take_off("bodysuit")
+                            $ Girl.take_off("dress")
                             $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
-                            $ Girl.outfit["hose"] = ""
-                            $ Girl.outfit["underwear"] = item
+                            $ Girl.take_off("hose")
+                            $ Girl.Clothes["underwear"] = item
 
                             hide black_screen onlayer black
                     elif item in skirts:
                         $ Girl.change_face("smile")
 
-                        if Girl.seen_pussy or (Girl.outfit["underwear"] and Girl.seen_underwear) or (Girl.outfit["underwear"] and approval_check(Girl, 900, taboo_modifier = 2)) or approval_check(Girl, 1200, taboo_modifier = 2):
+                        if Girl.seen_pussy or (Girl.Clothes["underwear"] and Girl.seen_underwear) or (Girl.Clothes["underwear"] and approval_check(Girl, 900, taboo_modifier = 2)) or approval_check(Girl, 1200, taboo_modifier = 2):
 
                             Girl.voice "Sure. . ."
 
@@ -699,7 +699,7 @@ label swimsuit_shop:
 
                             "You back out of the room for a moment. . ."
 
-                            $ Girl.outfit["bottom"] = item
+                            $ Girl.Clothes["bottom"] = item
 
                             hide black_screen onlayer black
 
@@ -713,7 +713,7 @@ label swimsuit_shop:
                     else:
                         $ cart.append(item)
 
-                        if Girl == StormX and item in ["bikini_top", "bikini_bottoms"] and (Girl.outfit["bra"] == "bikini_top" or Girl.outfit["underwear"] == "bikini_bottoms"):
+                        if Girl == StormX and item in ["bikini_top", "bikini_bottoms"] and (Girl.Clothes["bra"] == "bikini_top" or Girl.Clothes["underwear"] == "bikini_bottoms"):
                             ch_s "Oh! I understand the purpose of the flap now!"
                 elif leave:
                     if cart and len(Player.Party) > 1:
@@ -1006,80 +1006,80 @@ label lingerie_shop:
 
                 menu:
                     "What did you want to try on here?"
-                    "Lace bra" if Girl != LauraX and Girl.outfit["bra"] != "lace_bra":
+                    "Lace bra" if Girl != LauraX and Girl.Clothes["bra"] != "lace_bra":
                         $ item = "lace_bra"
-                    "Lace bra (locked)" if Girl.outfit["bra"] == "lace_bra":
+                    "Lace bra (locked)" if Girl.Clothes["bra"] == "lace_bra":
                         pass
-                    "Corset" if Girl in [LauraX, JeanX] and Girl.outfit["bra"] != "corset":
+                    "Corset" if Girl in [LauraX, JeanX] and Girl.Clothes["bra"] != "corset":
                         $ item = "corset"
-                    "Corset (locked)" if Girl in [LauraX, JeanX] and Girl.outfit["bra"] == "corset":
+                    "Corset (locked)" if Girl in [LauraX, JeanX] and Girl.Clothes["bra"] == "corset":
                         pass
-                    "Lace corset" if Girl == LauraX and Girl.outfit["bra"] != "lace_corset":
+                    "Lace corset" if Girl == LauraX and Girl.Clothes["bra"] != "lace_corset":
                         $ item = "lace_corset"
-                    "Lace corset (locked)" if Girl.outfit["bra"] == "lace_corset":
+                    "Lace corset (locked)" if Girl.Clothes["bra"] == "lace_corset":
                         pass
-                    "Lace panties" if Girl.outfit["underwear"] != "lace_panties":
+                    "Lace panties" if Girl.Clothes["underwear"] != "lace_panties":
                         $ item = "lace_panties"
-                    "Lace panties (locked)" if Girl.outfit["underwear"] == "lace_panties":
+                    "Lace panties (locked)" if Girl.Clothes["underwear"] == "lace_panties":
                         pass
-                    "Tiger-striped panties" if Girl == JubesX and Girl.outfit["underwear"] != "tiger_panties":
+                    "Tiger-striped panties" if Girl == JubesX and Girl.Clothes["underwear"] != "tiger_panties":
                         $ item = "tiger_panties"
-                    "Tiger-striped panties (locked)" if Girl.outfit["underwear"] == "tiger_panties":
+                    "Tiger-striped panties (locked)" if Girl.Clothes["underwear"] == "tiger_panties":
                         pass
-                    "Pantyhose" if Girl.outfit["hose"] != "pantyhose":
+                    "Pantyhose" if Girl.Clothes["hose"] != "pantyhose":
                         $ item = "pantyhose"
-                    "Pantyhose (locked)" if Girl.outfit["hose"] == "pantyhose":
+                    "Pantyhose (locked)" if Girl.Clothes["hose"] == "pantyhose":
                         pass
-                    "Stockings and garterbelt" if Girl.outfit["hose"] != "stockings_and_garterbelt":
+                    "Stockings and garterbelt" if Girl.Clothes["hose"] != "stockings_and_garterbelt":
                         $ item = "stockings_and_garterbelt"
-                    "Stockings and garterbelt (locked)" if Girl.outfit["hose"] == "stockings_and_garterbelt":
+                    "Stockings and garterbelt (locked)" if Girl.Clothes["hose"] == "stockings_and_garterbelt":
                         pass
-                    "Knee stockings" if Girl == KittyX and Girl.outfit["hose"] != "knee_stockings":
+                    "Knee stockings" if Girl == KittyX and Girl.Clothes["hose"] != "knee_stockings":
                         $ item = "knee_stockings"
-                    "Knee stockings (locked)" if Girl.outfit["hose"] == "knee_stockings":
+                    "Knee stockings (locked)" if Girl.Clothes["hose"] == "knee_stockings":
                         pass
-                    "High socks" if Girl == JubesX and Girl.outfit["hose"] != "socks":
+                    "High socks" if Girl == JubesX and Girl.Clothes["hose"] != "socks":
                         $ item = "socks"
-                    "High socks (locked)" if Girl.outfit["hose"] == "socks":
+                    "High socks (locked)" if Girl.Clothes["hose"] == "socks":
                         pass
-                    "Nighty" if Girl in [RogueX, KittyX] and Girl.outfit["top"] != "nighty":
+                    "Nighty" if Girl in [RogueX, KittyX] and Girl.Clothes["top"] != "nighty":
                         $ item = "nighty"
-                    "Nighty (locked)" if Girl.outfit["top"] == "nighty":
+                    "Nighty (locked)" if Girl.Clothes["top"] == "nighty":
                         pass
-                    "Harness bra" if Girl == RogueX and Girl.outfit["bra"] != "harness_bra":
+                    "Harness bra" if Girl == RogueX and Girl.Clothes["bra"] != "harness_bra":
                         $ item = "harness_bra"
-                    "Harness bra (locked)" if Girl.outfit["bra"] == "harness_bra":
+                    "Harness bra (locked)" if Girl.Clothes["bra"] == "harness_bra":
                         pass
-                    "Kitty bra" if Girl == KittyX and Girl.outfit["bra"] != "kitty_bra":
+                    "Kitty bra" if Girl == KittyX and Girl.Clothes["bra"] != "kitty_bra":
                         $ item = "kitty_bra"
-                    "Kitty bra (locked)" if Girl.outfit["bra"] == "kitty_bra":
+                    "Kitty bra (locked)" if Girl.Clothes["bra"] == "kitty_bra":
                         pass
-                    "Orange top" if Girl == KittyX and Girl.outfit["bra"] != "orange_top":
+                    "Orange top" if Girl == KittyX and Girl.Clothes["bra"] != "orange_top":
                         $ item = "orange_top"
-                    "Orange top (locked)" if Girl.outfit["bra"] == "orange_top":
+                    "Orange top (locked)" if Girl.Clothes["bra"] == "orange_top":
                         pass
-                    "Harness panties" if Girl == RogueX and Girl.outfit["underwear"] != "harness_panties":
+                    "Harness panties" if Girl == RogueX and Girl.Clothes["underwear"] != "harness_panties":
                         $ item = "harness_panties"
-                    "Harness panties (locked)" if Girl.outfit["underwear"] == "harness_panties":
+                    "Harness panties (locked)" if Girl.Clothes["underwear"] == "harness_panties":
                         pass
-                    "Kitty panties" if Girl == KittyX and Girl.outfit["underwear"] != "kitty_panties":
+                    "Kitty panties" if Girl == KittyX and Girl.Clothes["underwear"] != "kitty_panties":
                         $ item = "kitty_panties"
-                    "Kitty panties (locked)" if Girl.outfit["underwear"] == "kitty_panties":
+                    "Kitty panties (locked)" if Girl.Clothes["underwear"] == "kitty_panties":
                         pass
-                    "Nighty panties" if Girl == KittyX and Girl.outfit["underwear"] != "nighty_panties":
+                    "Nighty panties" if Girl == KittyX and Girl.Clothes["underwear"] != "nighty_panties":
                         $ item = "nighty_panties"
-                    "Nighty panties (locked)" if Girl.outfit["underwear"] == "nighty_panties":
+                    "Nighty panties (locked)" if Girl.Clothes["underwear"] == "nighty_panties":
                         pass
-                    "Take off the [Girl.outfit[hose]]." if Girl.outfit["hose"]:
-                        if Girl.outfit["hose"] != "pantyhose" or approval_check(Girl, 900, taboo_modifier = 2):
+                    "Take off the [Girl.Clothes[hose].name]." if Girl.Clothes["hose"]:
+                        if Girl.Clothes["hose"] != "pantyhose" or approval_check(Girl, 900, taboo_modifier = 2):
                             if Girl in [EmmaX, StormX]:
                                 Girl.voice "I suppose. . ."
                             else:
                                 Girl.voice "Ok. . ."
 
-                            if Girl.outfit["hose"] in hoses:
+                            if Girl.Clothes["hose"] in hoses:
                                 call change_hose(Girl, "")
-                            elif Girl.outfit["hose"] in socks:
+                            elif Girl.Clothes["hose"] in socks:
                                 call change_socks(Girl, "")
                         else:
                             if Girl in [EmmaX, StormX]:
@@ -1148,11 +1148,11 @@ label lingerie_shop:
 
                             "You back out of the room for a moment. . ."
 
-                            $ Girl.outfit["jacket"] = ""
-                            $ Girl.outfit["top"] = ""
-                            $ Girl.outfit["dress"] = ""
-                            $ Girl.outfit["bodysuit"] = ""
-                            $ Girl.outfit["bra"] = item
+                            $ Girl.take_off("jacket")
+                            $ Girl.take_off("top")
+                            $ Girl.take_off("dress")
+                            $ Girl.take_off("bodysuit")
+                            $ Girl.Clothes["bra"] = item
 
                             hide black_screen onlayer black
                     elif item in underwears:
@@ -1171,10 +1171,10 @@ label lingerie_shop:
 
                             "You back out of the room for a moment. . ."
 
-                            $ Girl.outfit["dress"] = ""
-                            $ Girl.outfit["bodysuit"] = ""
+                            $ Girl.take_off("dress")
+                            $ Girl.take_off("bodysuit")
                             $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
-                            $ Girl.outfit["underwear"] = item
+                            $ Girl.Clothes["underwear"] = item
 
                             hide black_screen onlayer black
                     elif item in hoses:
@@ -1193,10 +1193,10 @@ label lingerie_shop:
 
                             "You back out of the room for a moment. . ."
 
-                            $ Girl.outfit["dress"] = ""
-                            $ Girl.outfit["bodysuit"] = ""
+                            $ Girl.take_off("dress")
+                            $ Girl.take_off("bodysuit")
                             $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
-                            $ Girl.outfit["hose"] = item
+                            $ Girl.Clothes["hose"] = item
 
                             hide black_screen onlayer black
                     elif item in socks:
@@ -1206,7 +1206,7 @@ label lingerie_shop:
 
                         call change_socks(Girl, item, redress = False)
 
-                        $ Girl.outfit["hose"] = item
+                        $ Girl.Clothes["hose"] = item
                     elif item in tops:
                         if Girl.seen_breasts or approval_check(Girl, 500, taboo_modifier = 2):
                             $ Girl.change_face("sexy")
@@ -1223,7 +1223,7 @@ label lingerie_shop:
 
                             "You back out of the room for a moment. . ."
 
-                            $ Girl.outfit["top"] = item
+                            $ Girl.Clothes["top"] = item
 
                             hide black_screen onlayer black
 
@@ -1598,97 +1598,97 @@ label clothing_shop:
 
                 menu:
                     "What did you want to try on here?"
-                    "Raven cloak" if Girl == RogueX and Girl.outfit["cloak"] != "Raven_cloak":
+                    "Raven cloak" if Girl == RogueX and Girl.Clothes["cloak"] != "Raven_cloak":
                         $ item = "Raven_cloak"
-                    "Raven cloak (locked)" if Girl.outfit["cloak"] == "Raven_cloak":
+                    "Raven cloak (locked)" if Girl.Clothes["cloak"] == "Raven_cloak":
                         pass
-                    "Classic jacket" if Girl == RogueX and Girl.outfit["jacket"] != "classic_jacket":
+                    "Classic jacket" if Girl == RogueX and Girl.Clothes["jacket"] != "classic_jacket":
                         $ item = "classic_jacket"
-                    "Classic jacket (locked)" if Girl.outfit["jacket"] == "classic_jacket":
+                    "Classic jacket (locked)" if Girl.Clothes["jacket"] == "classic_jacket":
                         pass
-                    "Opaque fetish top" if Girl == RogueX and Girl.outfit["top"] != "opaque_fetish_top":
+                    "Opaque fetish top" if Girl == RogueX and Girl.Clothes["top"] != "opaque_fetish_top":
                         $ item = "opaque_fetish_top"
-                    "Opaque fetish top (locked)" if Girl.outfit["top"] == "opaque_fetish_top":
+                    "Opaque fetish top (locked)" if Girl.Clothes["top"] == "opaque_fetish_top":
                         pass
-                    "Sheer fetish top" if Girl == RogueX and Girl.outfit["top"] != "sheer_fetish_top":
+                    "Sheer fetish top" if Girl == RogueX and Girl.Clothes["top"] != "sheer_fetish_top":
                         $ item = "sheer_fetish_top"
-                    "Sheer fetish top (locked)" if Girl.outfit["top"] == "sheer_fetish_top":
+                    "Sheer fetish top (locked)" if Girl.Clothes["top"] == "sheer_fetish_top":
                         pass
-                    "Opaque fetish pants" if Girl == RogueX and Girl.outfit["bottom"] != "opaque_fetish_pants":
+                    "Opaque fetish pants" if Girl == RogueX and Girl.Clothes["bottom"] != "opaque_fetish_pants":
                         $ item = "opaque_fetish_pants"
-                    "Opaque fetish pants (locked)" if Girl.outfit["bottom"] == "opaque_fetish_pants":
+                    "Opaque fetish pants (locked)" if Girl.Clothes["bottom"] == "opaque_fetish_pants":
                         pass
-                    "Sheer fetish pants" if Girl == RogueX and Girl.outfit["bottom"] != "sheer_fetish_pants":
+                    "Sheer fetish pants" if Girl == RogueX and Girl.Clothes["bottom"] != "sheer_fetish_pants":
                         $ item = "sheer_fetish_pants"
-                    "Sheer fetish pants (locked)" if Girl.outfit["bottom"] == "sheer_fetish_pants":
+                    "Sheer fetish pants (locked)" if Girl.Clothes["bottom"] == "sheer_fetish_pants":
                         pass
-                    "Red dress" if Girl == RogueX and Girl.outfit["dress"] != "red_dress":
+                    "Red dress" if Girl == RogueX and Girl.Clothes["dress"] != "red_dress":
                         $ item = "red_dress"
-                    "Red dress (locked)" if Girl.outfit["dress"] == "red_dress":
+                    "Red dress (locked)" if Girl.Clothes["dress"] == "red_dress":
                         pass
-                    "Blue dress" if Girl == RogueX and Girl.outfit["dress"] != "blue_dress":
+                    "Blue dress" if Girl == RogueX and Girl.Clothes["dress"] != "blue_dress":
                         $ item = "blue_dress"
-                    "Blue dress (locked)" if Girl.outfit["dress"] == "blue_dress":
+                    "Blue dress (locked)" if Girl.Clothes["dress"] == "blue_dress":
                         pass
-                    "Raven suit" if Girl == RogueX and Girl.outfit["bodysuit"] != "Raven_suit":
+                    "Raven suit" if Girl == RogueX and Girl.Clothes["bodysuit"] != "Raven_suit":
                         $ item = "Raven_suit"
-                    "Raven suit (locked)" if Girl.outfit["bodysuit"] == "Raven_suit":
+                    "Raven suit (locked)" if Girl.Clothes["bodysuit"] == "Raven_suit":
                         pass
-                    "Swimsuit" if Girl == RogueX and Girl.outfit["bodysuit"] != "swimsuit":
+                    "Swimsuit" if Girl == RogueX and Girl.Clothes["bodysuit"] != "swimsuit":
                         $ item = "swimsuit"
-                    "Swimsuit (locked)" if Girl.outfit["bodysuit"] == "swimsuit":
+                    "Swimsuit (locked)" if Girl.Clothes["bodysuit"] == "swimsuit":
                         pass
-                    "Sexy swimsuit" if Girl == RogueX and Girl.outfit["bodysuit"] != "sexy_swimsuit":
+                    "Sexy swimsuit" if Girl == RogueX and Girl.Clothes["bodysuit"] != "sexy_swimsuit":
                         $ item = "sexy_swimsuit"
-                    "Sexy swimsuit (locked)" if Girl.outfit["bodysuit"] == "sexy_swimsuit":
+                    "Sexy swimsuit (locked)" if Girl.Clothes["bodysuit"] == "sexy_swimsuit":
                         pass
-                    "Classic catsuit" if Girl == RogueX and Girl.outfit["bodysuit"] != "catsuit":
+                    "Classic catsuit" if Girl == RogueX and Girl.Clothes["bodysuit"] != "catsuit":
                         $ item = "catsuit"
-                    "Classic catsuit (locked)" if Girl.outfit["bodysuit"] == "catsuit":
+                    "Classic catsuit (locked)" if Girl.Clothes["bodysuit"] == "catsuit":
                         pass
-                    "Violet shirt" if Girl == KittyX and Girl.outfit["top"] != "violet_shirt":
+                    "Violet shirt" if Girl == KittyX and Girl.Clothes["top"] != "violet_shirt":
                         $ item = "violet_shirt"
-                    "Violet shirt (locked)" if Girl.outfit["top"] == "violet_shirt":
+                    "Violet shirt (locked)" if Girl.Clothes["top"] == "violet_shirt":
                         pass
-                    "Black and blue pants" if Girl == KittyX and Girl.outfit["bottom"] != "black_and_blue_pants":
+                    "Black and blue pants" if Girl == KittyX and Girl.Clothes["bottom"] != "black_and_blue_pants":
                         $ item = "black_and_blue_pants"
-                    "Black and blue pants (locked)" if Girl.outfit["bottom"] == "black_and_blue_pants":
+                    "Black and blue pants (locked)" if Girl.Clothes["bottom"] == "black_and_blue_pants":
                         pass
-                    "Qipao" if Girl == KittyX and Girl.outfit["dress"] != "qipao":
+                    "Qipao" if Girl == KittyX and Girl.Clothes["dress"] != "qipao":
                         $ item = "qipao"
-                    "Qipao (locked)" if Girl.outfit["dress"] == "qipao":
+                    "Qipao (locked)" if Girl.Clothes["dress"] == "qipao":
                         pass
-                    "Domme outfit" if Girl == EmmaX and Girl.outfit["bodysuit"] != "domme_suit":
+                    "Domme outfit" if Girl == EmmaX and Girl.Clothes["bodysuit"] != "domme_suit":
                         $ item = "domme_suit"
-                    "Domme outfit (locked)" if Girl.outfit["bodysuit"] == "domme_suit":
+                    "Domme outfit (locked)" if Girl.Clothes["bodysuit"] == "domme_suit":
                         pass
-                    "Spiked collar" if Girl == EmmaX and Girl.outfit["neck"] != "spiked_collar":
+                    "Spiked collar" if Girl == EmmaX and Girl.Clothes["neck"] != "spiked_collar":
                         $ item = "spiked_collar"
-                    "Spiked collar (locked)" if Girl.outfit["neck"] == "spiked_collar":
+                    "Spiked collar (locked)" if Girl.Clothes["neck"] == "spiked_collar":
                         pass
-                    "Domme boots" if Girl == EmmaX and Girl.outfit["boots"] != "domme_boots":
+                    "Domme boots" if Girl == EmmaX and Girl.Clothes["boots"] != "domme_boots":
                         $ item = "domme_boots"
-                    "Domme boots (locked)" if Girl.outfit["boots"] == "domme_boots":
+                    "Domme boots (locked)" if Girl.Clothes["boots"] == "domme_boots":
                         pass
-                    "Bunny suit" if Girl == LauraX and Girl.outfit["bodysuit"] != "bunny_suit":
+                    "Bunny suit" if Girl == LauraX and Girl.Clothes["bodysuit"] != "bunny_suit":
                         $ item = "bunny_suit"
-                    "Bunny suit (locked)" if Girl.outfit["bodysuit"] == "bunny_suit":
+                    "Bunny suit (locked)" if Girl.Clothes["bodysuit"] == "bunny_suit":
                         pass
-                    "Bunny ears" if Girl == LauraX and Girl.outfit["face_outer_accessory"] != "bunny_ears":
+                    "Bunny ears" if Girl == LauraX and Girl.Clothes["face_outer_accessory"] != "bunny_ears":
                         $ item = "bunny_ears"
-                    "Bunny ears (locked)" if Girl.outfit["face_outer_accessory"] == "bunny_ears":
+                    "Bunny ears (locked)" if Girl.Clothes["face_outer_accessory"] == "bunny_ears":
                         pass
-                    "Bunny cuffs" if Girl == LauraX and Girl.outfit["gloves"] != "bunny_gloves":
+                    "Bunny cuffs" if Girl == LauraX and Girl.Clothes["gloves"] != "bunny_gloves":
                         $ item = "bunny_gloves"
-                    "Bunny cuffs (locked)" if Girl.outfit["gloves"] == "bunny_gloves":
+                    "Bunny cuffs (locked)" if Girl.Clothes["gloves"] == "bunny_gloves":
                         pass
-                    "Sci-fi suit" if Girl == JeanX and Girl.outfit["bodysuit"] != "sci_fi_suit":
+                    "Sci-fi suit" if Girl == JeanX and Girl.Clothes["bodysuit"] != "sci_fi_suit":
                         $ item = "sci_fi_suit"
-                    "Sci-fi suit (locked)" if Girl.outfit["bodysuit"] == "sci_fi_suit":
+                    "Sci-fi suit (locked)" if Girl.Clothes["bodysuit"] == "sci_fi_suit":
                         pass
-                    "Take off the [Girl.outfit[cloak]]." if Girl.outfit["cloak"]:
-                        $ Girl.outfit["cloak"] = ""
-                    "Take off the [Girl.outfit[top]]." if Girl.outfit["top"]:
+                    "Take off the [Girl.Clothes[cloak].name]." if Girl.Clothes["cloak"]:
+                        $ Girl.take_off("cloak")
+                    "Take off the [Girl.Clothes[top].name]." if Girl.Clothes["top"]:
                         if Girl.seen_underwear or approval_check(Girl, 500, taboo_modifier=2):
                             if Girl in [EmmaX, StormX]:
                                 Girl.voice "I suppose. . ."
@@ -1703,7 +1703,7 @@ label clothing_shop:
                                 Girl.voice "I do not think so. . ."
                             else:
                                 Girl.voice "No thanks. . ."
-                    "Take off the [Girl.outfit[dress]]." if Girl.outfit["dress"]:
+                    "Take off the [Girl.Clothes[dress].name]." if Girl.Clothes["dress"]:
                         if Girl.seen_underwear or approval_check(Girl, 500, taboo_modifier=2):
                             if Girl in [EmmaX, StormX]:
                                 Girl.voice "I suppose. . ."
@@ -1718,7 +1718,7 @@ label clothing_shop:
                                 Girl.voice "I do not think so. . ."
                             else:
                                 Girl.voice "No thanks. . ."
-                    "Take off the [Girl.outfit[bottom]]." if Girl.outfit["bottom"]:
+                    "Take off the [Girl.Clothes[bottom].name]." if Girl.Clothes["bottom"]:
                         if Girl.seen_underwear or approval_check(Girl, 500, taboo_modifier=2):
                             if Girl in [EmmaX, StormX]:
                                 Girl.voice "I suppose. . ."
@@ -1733,7 +1733,7 @@ label clothing_shop:
                                 Girl.voice "I do not think so. . ."
                             else:
                                 Girl.voice "No thanks. . ."
-                    "Take off the [Girl.outfit[bodysuit]]." if Girl.outfit["bodysuit"]:
+                    "Take off the [Girl.Clothes[bodysuit].name]." if Girl.Clothes["bodysuit"]:
                         if Girl.seen_underwear or approval_check(Girl, 500, taboo_modifier=2):
                             if Girl in [EmmaX, StormX]:
                                 Girl.voice "I suppose. . ."
@@ -1748,20 +1748,20 @@ label clothing_shop:
                                 Girl.voice "I do not think so. . ."
                             else:
                                 Girl.voice "No thanks. . ."
-                    "Take off the [Girl.outfit[face_outer_accessory]]." if Girl.outfit["face_outer_accessory"]:
-                        $ Girl.outfit["face_outer_accessory"] = ""
-                    "Take off the [Girl.outfit[neck]]." if Girl.outfit["neck"]:
-                        $ Girl.outfit["neck"] = ""
-                    "Take off the [Girl.outfit[gloves]]." if Girl.outfit["gloves"]:
-                        $ Girl.outfit["gloves"] = ""
-                    "Take off the [Girl.outfit[boots]]." if Girl.outfit["boots"]:
-                        $ Girl.outfit["boots"] = ""
+                    "Take off the [Girl.Clothes[face_outer_accessory].name]." if Girl.Clothes["face_outer_accessory"]:
+                        $ Girl.take_off("face_outer_accessory")
+                    "Take off the [Girl.Clothes[neck].name]." if Girl.Clothes["neck"]:
+                        $ Girl.take_off("neck")
+                    "Take off the [Girl.Clothes[gloves].name]." if Girl.Clothes["gloves"]:
+                        $ Girl.take_off("gloves")
+                    "Take off the [Girl.Clothes[boots].name]." if Girl.Clothes["boots"]:
+                        $ Girl.take_off("boots")
                     "Leave dressing area.":
                         $ leave = True
 
                 if item:
                     if item in jackets:
-                        if Girl.outfit["top"] or Girl.seen_breasts or approval_check(Girl, 500, taboo_modifier = 2):
+                        if Girl.Clothes["top"] or Girl.seen_breasts or approval_check(Girl, 500, taboo_modifier = 2):
                             Girl.voice "Sure. . ."
 
                             call change_jacket(Girl, item, redress = False)
@@ -1774,7 +1774,7 @@ label clothing_shop:
 
                             "You back out of the room for a moment. . ."
 
-                            $ Girl.outfit["jacket"] = item
+                            $ Girl.Clothes["jacket"] = item
 
                             hide black_screen onlayer black
                     elif item in tops:
@@ -1793,7 +1793,7 @@ label clothing_shop:
 
                             "You back out of the room for a moment. . ."
 
-                            $ Girl.outfit["top"] = item
+                            $ Girl.Clothes["top"] = item
 
                             hide black_screen onlayer black
                     elif item in dresses or item in bodysuits:
@@ -1816,9 +1816,9 @@ label clothing_shop:
                             "You back out of the room for a moment. . ."
 
                             if item in dresses:
-                                $ Girl.outfit["dress"] = item
+                                $ Girl.Clothes["dress"] = item
                             elif item in bodysuits:
-                                $ Girl.outfit["bodysuit"] = item
+                                $ Girl.Clothes["bodysuit"] = item
 
                             hide black_screen onlayer black
                     elif item in bras:
@@ -1837,11 +1837,11 @@ label clothing_shop:
 
                             "You back out of the room for a moment. . ."
 
-                            $ Girl.outfit["jacket"] = ""
-                            $ Girl.outfit["top"] = ""
-                            $ Girl.outfit["dress"] = ""
-                            $ Girl.outfit["bodysuit"] = ""
-                            $ Girl.outfit["bra"] = item
+                            $ Girl.take_off("jacket")
+                            $ Girl.take_off("top")
+                            $ Girl.take_off("dress")
+                            $ Girl.take_off("bodysuit")
+                            $ Girl.Clothes["bra"] = item
 
                             hide black_screen onlayer black
                     elif item in pants or item in skirts or item in shorts:
@@ -1860,49 +1860,49 @@ label clothing_shop:
 
                             "You back out of the room for a moment. . ."
 
-                            $ Girl.outfit["bottom"] = item
+                            $ Girl.Clothes["bottom"] = item
 
                             hide black_screen onlayer black
                     elif item in cloaks:
                         Girl.voice "Sure. . ."
 
-                        $ Girl.outfit["cloak"] = ""
+                        $ Girl.take_off("cloak")
 
                         pause 0.2
 
-                        $ Girl.outfit["cloak"] = item
+                        $ Girl.Clothes["cloak"] = item
                     elif item in face_outer_accessories:
                         Girl.voice "Sure. . ."
 
-                        $ Girl.outfit["face_outer_accessory"] = ""
+                        $ Girl.take_off("face_outer_accessory")
 
                         pause 0.2
 
-                        $ Girl.outfit["face_outer_accessory"] = item
+                        $ Girl.Clothes["face_outer_accessory"] = item
                     elif item in necks:
                         Girl.voice "Sure. . ."
 
-                        $ Girl.outfit["neck"] = ""
+                        $ Girl.take_off("neck")
 
                         pause 0.2
 
-                        $ Girl.outfit["neck"] = item
+                        $ Girl.Clothes["neck"] = item
                     elif item in gloves:
                         Girl.voice "Sure. . ."
 
-                        $ Girl.outfit["gloves"] = ""
+                        $ Girl.take_off("gloves")
 
                         pause 0.2
 
-                        $ Girl.outfit["gloves"] = item
+                        $ Girl.Clothes["gloves"] = item
                     elif item in boots:
                         Girl.voice "Sure. . ."
 
-                        $ Girl.outfit["boots"] = ""
+                        $ Girl.take_off("boots")
 
                         pause 0.2
 
-                        $ Girl.outfit["boots"] = item
+                        $ Girl.Clothes["boots"] = item
 
                     if item in cart:
                         pass

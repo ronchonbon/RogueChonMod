@@ -1069,11 +1069,11 @@ label Rogue_Chitchat(O=0, Options=["default", "default", "default"]):
         call show_sex(RogueX, "massage")
         if RogueX.wearing_skirt:
             $ RogueX.upskirt = True
-            if RogueX.outfit["underwear"] and RogueX.seen_underwear and approval_check(RogueX, 800, taboo_modifier = 3):
+            if RogueX.Clothes["underwear"] and RogueX.seen_underwear and approval_check(RogueX, 800, taboo_modifier = 3):
                 pass
-            elif RogueX.outfit["underwear"] and approval_check(RogueX, 800, taboo_modifier = 3):
+            elif RogueX.Clothes["underwear"] and approval_check(RogueX, 800, taboo_modifier = 3):
                 $ RogueX.seen_underwear = True
-            elif RogueX.outfit["underwear"]:
+            elif RogueX.Clothes["underwear"]:
                 $ RogueX.upskirt = True
             elif RogueX.seen_pussy and approval_check(RogueX, 1000, taboo_modifier = 4):
                 pass

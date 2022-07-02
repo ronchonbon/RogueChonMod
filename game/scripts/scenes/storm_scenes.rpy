@@ -573,7 +573,7 @@ label Storm_Nudity:
                 ch_s "I just don't see the point in \"gardening\" down there. . ."
                 $ StormX.change_face("angry", 1)
 
-            "So could you put some clothes on?" if "nudity" in StormX.history and not StormX.outfit["top"]:
+            "So could you put some clothes on?" if "nudity" in StormX.history and not StormX.Clothes["top"]:
                 $ StormX.change_face("sly")
                 call change_Girl_stat(StormX, "love", 70, -2)
                 call change_Girl_stat(StormX, "obedience", 80, 5)
@@ -826,7 +826,7 @@ label Storm_Hairtalk:
                 $ taboo = 0
                 $ StormX.taboo = 0
                 ch_s "I. . . suppose that I might accomodate that. . ."
-                call Girl_Undress (StormX)
+                call undress_Girl (StormX)
                 $ taboo = 40
                 $ StormX.taboo = 40
             else:
@@ -1520,7 +1520,7 @@ label Storm_Love:
                         ch_s ". . ."
                         ch_s "No."
                 $ StormX.add_word(1,"strong", 0, 0, 0)
-                $ line +=1
+                $ line + = 1
             "Nope.":
                 call change_Girl_stat(StormX, "love", 200, -5)
                 call change_Girl_stat(StormX, "obedience", 80, -2)

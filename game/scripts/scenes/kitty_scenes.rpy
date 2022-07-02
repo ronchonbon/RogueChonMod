@@ -1876,7 +1876,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
         $ TempBonus = 400
     elif KittyX.likes[Girl.tag] <= 400:
         $ TempBonus = 200
-    elif KittyX.likes[Girl.tag] >= 800 or approval_check(Girl, 500, "I", taboo_modifier=3):
+    elif KittyX.likes[Girl.tag] >= 800 or approval_check(Girl, 500, "I", taboo_modifier = 3):
 
         $ TempBonus = 0
     else:
@@ -1885,8 +1885,8 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
 
     menu:
         "Hey [KittyX.name], why don't you snag [Girl.name]'s. . ."
-        ". . . [Girl.outfit[top]]?" if Girl.outfit["top"]:
-            if Girl.outfit["bra"]:
+        ". . . [Girl.Clothes[top].name]?" if Girl.Clothes["top"]:
+            if Girl.Clothes["bra"]:
 
                 $ Shy = 2
                 if approval_check(KittyX, 800, taboo_modifier=2, Bonus=TempBonus):
@@ -1904,16 +1904,16 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 $ Shy = 3
                 if approval_check(KittyX, 800, taboo_modifier=2.5, Bonus=(TempBonus*1.5)):
                     $ line = "over"
-                elif approval_check(KittyX, 600, taboo_modifier=1.5, Bonus=TempBonus):
+                elif approval_check(KittyX, 600, taboo_modifier = 1.5, Bonus=TempBonus):
                     $ line = "no"
                 else:
                     $ line = "noway"
 
-        ". . . [Girl.outfit[bra]]?" if Girl.outfit["bra"]:
-            if Girl.outfit["top"]:
+        ". . . [Girl.Clothes[bra].name]?" if Girl.Clothes["bra"]:
+            if Girl.Clothes["top"]:
 
                 $ Shy = 1
-                if approval_check(KittyX, 1200, taboo_modifier=1, Bonus=TempBonus):
+                if approval_check(KittyX, 1200, taboo_modifier = 1, Bonus=TempBonus):
 
 
                     $ line = "chest"
@@ -1928,13 +1928,13 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 $ Shy = 3
                 if approval_check(KittyX, 800, taboo_modifier=2.5, Bonus=(TempBonus*1.5)):
                     $ line = "chest"
-                elif approval_check(KittyX, 600, taboo_modifier=1.5, Bonus=TempBonus):
+                elif approval_check(KittyX, 600, taboo_modifier = 1.5, Bonus=TempBonus):
                     $ line = "no"
                 else:
                     $ line = "noway"
 
-        ". . . [Girl.outfit[bottom]]?" if Girl.outfit["bottom"]:
-            if Girl.outfit["underwear"] or Girl.outfit["hose"] == "tights":
+        ". . . [Girl.Clothes[bottom].name]?" if Girl.Clothes["bottom"]:
+            if Girl.Clothes["underwear"] or Girl.Clothes["hose"] == "tights":
 
                 $ Shy = 2
                 if approval_check(KittyX, 1000, taboo_modifier=2, Bonus=TempBonus):
@@ -1952,16 +1952,16 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 $ Shy = 3
                 if approval_check(KittyX, 1000, taboo_modifier=2.5, Bonus=(TempBonus*1.5)):
                     $ line = "legs"
-                elif approval_check(KittyX, 800, taboo_modifier=1.5, Bonus=TempBonus):
+                elif approval_check(KittyX, 800, taboo_modifier = 1.5, Bonus=TempBonus):
                     $ line = "no"
                 else:
                     $ line = "noway"
 
-        ". . . [Girl.outfit[underwear]]?" if Girl.outfit["underwear"]:
-            if Girl.outfit["bottom"] or Girl.outfit["hose"] == "tights":
+        ". . . [Girl.Clothes[underwear].name]?" if Girl.Clothes["underwear"]:
+            if Girl.Clothes["bottom"] or Girl.Clothes["hose"] == "tights":
 
                 $ Shy = 1
-                if approval_check(KittyX, 1000, taboo_modifier=1, Bonus=TempBonus):
+                if approval_check(KittyX, 1000, taboo_modifier = 1, Bonus=TempBonus):
 
 
                     $ line = "panties"
@@ -1976,16 +1976,16 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 $ Shy = 3
                 if approval_check(KittyX, 1000, taboo_modifier=2.5, Bonus=(TempBonus*1.5)):
                     $ line = "panties"
-                elif approval_check(KittyX, 800, taboo_modifier=1.5, Bonus=TempBonus):
+                elif approval_check(KittyX, 800, taboo_modifier = 1.5, Bonus=TempBonus):
                     $ line = "no"
                 else:
                     $ line = "noway"
 
-        ". . . [Girl.outfit[hose]]?" if Girl.outfit["hose"]:
-            if Girl.outfit["bottom"]:
+        ". . . [Girl.Clothes[hose].name]?" if Girl.Clothes["hose"]:
+            if Girl.Clothes["bottom"]:
 
                 $ Shy = 1
-                if approval_check(KittyX, 800, taboo_modifier=1, Bonus=TempBonus):
+                if approval_check(KittyX, 800, taboo_modifier = 1, Bonus=TempBonus):
 
 
                     $ line = "hose"
@@ -1995,7 +1995,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 else:
 
                     $ line = "noway"
-            elif Girl.outfit["underwear"] or Girl.outfit["hose"] != "pantyhose":
+            elif Girl.Clothes["underwear"] or Girl.Clothes["hose"] != "pantyhose":
 
                 $ Shy = 2
                 if approval_check(KittyX, 1000, taboo_modifier=2, Bonus=TempBonus):
@@ -2013,7 +2013,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 $ Shy = 3
                 if approval_check(KittyX, 1000, taboo_modifier=2.5, Bonus=(TempBonus*1.5)):
                     $ line = "hose"
-                elif approval_check(KittyX, 800, taboo_modifier=1.5, Bonus=TempBonus):
+                elif approval_check(KittyX, 800, taboo_modifier = 1.5, Bonus=TempBonus):
                     $ line = "no"
                 else:
                     $ line = "noway"
@@ -2040,42 +2040,42 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
 
     $ Girl.change_face("surprised", 2)
     if line == "over":
-        $ line = Girl.outfit["top"]
-        $ Girl.outfit["top"] = ""
+        $ line = Girl.Clothes["top"]
+        $ Girl.take_off("top")
         call expression Girl.tag + "_First_Topless" pass (1)
         "She reaches out and snags [Girl.name]'s [line], tugging it through her body."
 
     elif line == "chest":
-        $ line = Girl.outfit["bra"]
-        $ Girl.outfit["bra"] = ""
+        $ line = Girl.Clothes["bra"]
+        $ Girl.take_off("bra")
         call expression Girl.tag + "_First_Topless" pass (1)
-        if Girl.outfit["top"]:
-            "She reaches through [Girl.name]'s [Girl.outfit[top]] and snags her [line]."
+        if Girl.Clothes["top"]:
+            "She reaches through [Girl.name]'s [Girl.Clothes[top].name] and snags her [line]."
         else:
             "She reaches out and snags [Girl.name]'s [line], tugging it free."
 
     elif line == "legs":
-        $ line = Girl.outfit["bottom"]
+        $ line = Girl.Clothes["bottom"]
         $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
         call expression Girl.tag + "_First_Bottomless" pass (1)
         "She reaches down and snags [Girl.name]'s [line], tugging them through her body."
 
     elif line == "panties":
-        $ line = Girl.outfit["underwear"]
-        $ Girl.outfit["underwear"] = ""
+        $ line = Girl.Clothes["underwear"]
+        $ Girl.take_off("underwear")
         call expression Girl.tag + "_First_Bottomless" pass (1)
-        if Girl.outfit["bottom"]:
-            "She reaches down through [Girl.name]'s [Girl.outfit[bottom]] and snags her [line]."
-        elif Girl.outfit["hose"]:
-            "She reaches down through [Girl.name]'s [Girl.outfit[hose]] and snags her [line]."
+        if Girl.Clothes["bottom"]:
+            "She reaches down through [Girl.name]'s [Girl.Clothes[bottom].name] and snags her [line]."
+        elif Girl.Clothes["hose"]:
+            "She reaches down through [Girl.name]'s [Girl.Clothes[hose].name] and snags her [line]."
         else:
             "She reaches out and snags [Girl.name]'s [line], tugging them free."
     elif line == "hose":
-        $ line = Girl.outfit["hose"]
-        $ Girl.outfit["hose"] = ""
+        $ line = Girl.Clothes["hose"]
+        $ Girl.take_off("hose")
         call expression Girl.tag + "_First_Bottomless" pass (1)
-        if Girl.outfit["bottom"]:
-            "She reaches down through [Girl.name]'s [Girl.outfit[bottom]] and snags her [line]."
+        if Girl.Clothes["bottom"]:
+            "She reaches down through [Girl.name]'s [Girl.Clothes[bottom].name] and snags her [line]."
         else:
             "She reaches out and snags [Girl.name]'s [line], tugging them free."
 

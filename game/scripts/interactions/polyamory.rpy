@@ -1207,7 +1207,7 @@ label Les_Cycle(Girl=focused_Girl):
                                         ch_p "Oh, yeah, take it off. . ."
                                         jump Les_Interupted
                                     else:
-                                        call Girl_Undress (Partner)
+                                        call undress_Girl (Partner)
                                         call shift_focus (Partner)
                                         jump Les_Cycle
                                 "Clean up Partner":
@@ -1225,7 +1225,7 @@ label Les_Cycle(Girl=focused_Girl):
                                 ch_p "Oh yeah, why don't you. . ."
                                 jump Les_Interupted
                             else:
-                                call Girl_Undress (Girl)
+                                call undress_Girl (Girl)
                         "Clean up [Girl.name] (locked)" if not Girl.spunk:
                             pass
                         "Clean up [Girl.name]" if Girl.spunk:
@@ -1479,7 +1479,7 @@ label Post_Les_Dialog:
 
 
 
-label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Result=0, approval=0):
+label Les_Response(Speaker=0, Subject=0, Step = 1, B=0, B2=0, approval_bonus=0, Result=0, approval=0):
 
 
 
@@ -3668,4 +3668,168 @@ label Share(Girl=0, Other=0):
 
 
             $ Other.broken_up[0] = 7
+    return
+
+
+label Sex_Menu_Threesome(Girl=0):
+    if not Girl or Girl not in all_Girls:
+        return
+
+    menu:
+        "Do you want to join us [RogueX.name]?" if RogueX.location == Player.location and Girl != RogueX:
+            if Partner == RogueX:
+
+                ch_r "If I'd been do'in it right you wouldn't hafta ask. . ."
+            else:
+                if Girl == JeanX:
+
+                    call Girl_Whammy (RogueX)
+                call Girls_Noticed (Girl, RogueX, 1)
+                if Girl.location != Player.location:
+
+                    ch_r "Oh, well. . . I'm still game. . ."
+                    call shift_focus(RogueX)
+                    $ renpy.pop_call()
+                elif RogueX.location == Player.location:
+                    ch_r "I s'pose I could lend a hand 0. ."
+                else:
+                    "She seems uncomfortable with this situation and leaves the room."
+
+        "Do you want to join us [KittyX.name]?" if KittyX.location == Player.location and Girl != KittyX:
+            if Partner == KittyX:
+
+                ch_k "Lol, what are you even talking about?"
+            else:
+                if Girl == JeanX:
+
+                    call Girl_Whammy (KittyX)
+                call Girls_Noticed (Girl, KittyX, 1)
+                if Girl.location != Player.location:
+
+                    ch_k "Whoa, drama much? 0. ."
+                    call shift_focus(KittyX)
+                    $ renpy.pop_call()
+                elif KittyX.location == Player.location:
+                    ch_k "I could[KittyX.like]give it a try. . ."
+                else:
+                    "She seems uncomfortable with this situation and leaves the room."
+
+        "Do you want to join us [EmmaX.name]?" if EmmaX.location == Player.location and Girl != EmmaX:
+            if Partner == EmmaX:
+
+                ch_e "Have I not been keeping up?"
+            else:
+                if Girl == JeanX:
+
+                    call Girl_Whammy (EmmaX)
+                call Girls_Noticed (Girl, EmmaX, 1)
+                if Girl.location != Player.location:
+
+                    ch_e "Pity. . ."
+                    call shift_focus(EmmaX)
+                    $ renpy.pop_call()
+                elif EmmaX.location == Player.location:
+                    ch_e "So what did you have in mind for us. . ."
+                else:
+                    "She seems uncomfortable with this situation and leaves the room."
+
+        "Do you want to join us [LauraX.name]?" if LauraX.location == Player.location and Girl != LauraX:
+            if Partner == LauraX:
+
+                ch_l "I already am."
+            else:
+                if Girl == JeanX:
+
+                    call Girl_Whammy (LauraX)
+                call Girls_Noticed (Girl, LauraX, 1)
+                if Girl.location != Player.location:
+
+                    ch_l "Her loss. . ."
+                    call shift_focus(LauraX)
+                    $ renpy.pop_call()
+                elif LauraX.location == Player.location:
+                    ch_l "Hm, ok. . ."
+                else:
+                    "She seems uncomfortable with this situation and leaves the room."
+
+        "Do you want to join us [JeanX.name]?" if JeanX.location == Player.location and Girl != JeanX:
+            if Partner == JeanX:
+
+                ch_j "I've been here the entire time. . ."
+            else:
+                call Girls_Noticed (Girl, JeanX, 1)
+                if Girl.location != Player.location:
+
+                    ch_j "Huh. Her loss. . ."
+                    call shift_focus(JeanX)
+                    $ renpy.pop_call()
+                elif JeanX.location == Player.location:
+                    ch_j "Sure."
+                else:
+                    "She seems annoyed with this whole situation and leaves the room."
+
+        "Do you want to join us [StormX.name]?" if StormX.location == Player.location and Girl != StormX:
+            if Partner == StormX:
+
+                ch_s "You hadn't noticed?"
+            else:
+                if Girl == JeanX:
+
+                    call Girl_Whammy (StormX)
+                call Girls_Noticed (Girl, StormX, 1)
+                if Girl.location != Player.location:
+
+                    ch_s "Oh, that's too bad. . ."
+                    call shift_focus(StormX)
+                    $ renpy.pop_call()
+
+                elif StormX.location == Player.location:
+                    ch_s "Delighted. . ."
+                else:
+                    "She seems uncomfortable with this situation and leaves the room."
+
+        "Do you want to join us [JubesX.name]?" if JubesX.location == Player.location and Girl != JubesX:
+            if Partner == JubesX:
+
+                ch_v "I thought I already was!"
+            else:
+                if Girl == JeanX:
+
+                    call Girl_Whammy (JubesX)
+                call Girls_Noticed (Girl, JubesX, 1)
+                if Girl.location != Player.location:
+
+                    ch_v "Oh, well. . ."
+                    call shift_focus(JubesX)
+                    $ renpy.pop_call()
+                elif JubesX.location == Player.location:
+                    ch_v "Sure!"
+                else:
+                    "She seems uncomfortable with this situation and leaves the room."
+        "Never mind [[something else]":
+
+            pass
+    if AloneCheck(Girl) and Girl.taboo == 20:
+        $ Girl.taboo = 0
+        $ taboo = 0
+    return
+
+label Partner_Like(Girl=0, value = 1, Altvalue = 1, Measure=800, Partner=Partner):
+
+    if Partner:
+        if second_girl_main_action:
+
+            if second_girl_main_action == "watch":
+                pass
+            elif second_girl_main_action in ("handjob", "blowjob"):
+                $ value += 1
+            elif second_girl_main_action in ("eat_pussy", "eat_ass"):
+                $ value += 3
+            else:
+                $ value += 2
+
+
+        $ Partner.check_if_likes(Girl,Measure,value, 1)
+        $ Girl.check_if_likes(Partner,Measure,value, 1)
+
     return

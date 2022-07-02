@@ -14,16 +14,16 @@ label caught_changing(Girl):
 
         if D20 > 15:
             $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
-            $ Girl.outfit["hose"] = ""
-            $ Girl.outfit["underwear"] = ""
+            $ Girl.take_off("hose")
+            $ Girl.take_off("underwear")
         elif D20 > 14:
-            $ Girl.outfit["bra"] = ""
-            $ Girl.outfit["top"] = ""
+            $ Girl.take_off("bra")
+            $ Girl.take_off("top")
         elif D20 > 10:
-            $ Girl.outfit["top"] = ""
+            $ Girl.take_off("top")
             $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
         elif D20 > 5:
-            $ Girl.outfit["top"] = ""
+            $ Girl.take_off("top")
 
     $ Girl.location = Player.location
 
@@ -66,7 +66,7 @@ label caught_changing(Girl):
                     call expression Girl.tag + "_First_Topless" pass (1)
 
                     if Girl != StormX:
-                        $ Girl.outfit["top"] = "towel"
+                        $ Girl.Clothes["top"] = "towel"
                         "She grabs a towel and covers up."
             else:
                 $ Girl.change_face("surprised", 1,brows = "confused")
@@ -359,9 +359,9 @@ label caught_showering(Girl):
         "You knock on the door. You hear some shuffling inside."
 
         if Girl == StormX:
-            $ Girl.outfit["face_outer_accessory"] = "towel"
+            $ Girl.Clothes["face_outer_accessory"] = "towel"
         else:
-            $ Girl.outfit["top"] = "towel"
+            $ Girl.Clothes["top"] = "towel"
 
         if "will_masturbate" in Girl.daily_history:
             "You hear a sharp shuffling sound and the water gets cut off."
@@ -446,7 +446,7 @@ label caught_showering(Girl):
                 $ Girl.brows = "angry"
 
                 if Girl != StormX:
-                    $ Girl.outfit["top"] = "towel"
+                    $ Girl.Clothes["top"] = "towel"
 
                     "She grabs a towel and covers up."
 
@@ -503,9 +503,9 @@ label caught_showering(Girl):
                     call change_Girl_stat(EmmaX, "inhibition", 60, 2)
         else:
             if Girl == StormX:
-                $ Girl.outfit["face_outer_accessory"] = "towel"
+                $ Girl.Clothes["face_outer_accessory"] = "towel"
             else:
-                $ Girl.outfit["top"] = "towel"
+                $ Girl.Clothes["top"] = "towel"
 
             call set_the_scene
 
@@ -610,12 +610,12 @@ label caught_showering(Girl):
             elif Girl == JubesX:
                 ch_v "You just have to ask. . ."
 
-            if Girl.outfit["top"] == "towel":
-                $ Girl.outfit["top"] = ""
+            if Girl.Clothes["top"] == "towel":
+                $ Girl.take_off("top")
 
                 pause 0.5
 
-                $ Girl.outfit["top"] = "towel"
+                $ Girl.Clothes["top"] = "towel"
 
                 "She flashes you real quick."
 
@@ -1012,7 +1012,7 @@ label caught_having_sex(Girl):
     else:
         ch_x "Having sexual relations in such a public location, it shows very poor character of you!"
 
-    if Girl.outfit["shame"] >= 40:
+    if Girl.Clothes["shame"] >= 40:
         ch_x "[Girl.name], my dear, you're practically naked! At least throw a towel on!"
         "He throws [Girl.name] the towel."
 
@@ -1022,26 +1022,26 @@ label caught_having_sex(Girl):
             for G in all_Girls:
                 if G.location == Player.location and not G.breasts_covered:
                     if G == StormX:
-                        G.outfit["face_outer_accessory"] = "towel"
+                        G.Clothes["face_outer_accessory"] = "towel"
                     else:
-                        G.outfit["top"] = "towel"
+                        G.Clothes["top"] = "towel"
 
         hide black_screen onlayer black
 
-        if StormX in [Girl, Partner] and StormX.outfit["face_outer_accessory"] == "towel":
+        if StormX in [Girl, Partner] and StormX.Clothes["face_outer_accessory"] == "towel":
             ch_x ". . ."
             ch_x "Ororo, for Christ's sake. . ."
             ch_x "Put on some actual clothes!"
 
             show black_screen onlayer black
 
-            $ StormX.outfit["top"] = "white_shirt"
-            $ StormX.outfit["bottom"] = "skirt"
+            $ StormX.Clothes["top"] = "white_shirt"
+            $ StormX.Clothes["bottom"] = "skirt"
 
             hide black_screen onlayer black
 
             ch_x ". . . fine."
-    elif Girl.outfit["shame"] >= 20:
+    elif Girl.Clothes["shame"] >= 20:
         ch_x "[Girl.name], my dear, that attire is positively scandalous."
 
     if Girl.event_counter["caught"]:
@@ -1722,7 +1722,7 @@ label execute_plan(Girl):
     call change_Xavier_face("angry")
 
     if Girl == RogueX:
-        $ RogueX.outfit["gloves"] = ""
+        $ RogueX.take_off("gloves")
         $ RogueX.arm_pose = 2
 
         call show_Girl(RogueX, x_position = stage_left + 0.1, y_position = 0.1, sprite_layer = 1, transition = ease)
@@ -2009,7 +2009,7 @@ label execute_plan(Girl):
 
         ch_p "Ok, that's enough. Make Xavier forget that any of this happened, and then let's get out of here."
 
-        $ Girl.outfit["gloves"] = "gloves"
+        $ Girl.Clothes["gloves"] = "gloves"
         $ Girl.arm_pose = 1
     elif Girl == KittyX:
         if "Kappa" not in Player.traits:

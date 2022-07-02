@@ -853,7 +853,7 @@ label Girl_In_mouth:
                 ch_s "I appreciate you asking. . ."
             elif Girl == JubesX:
                 ch_v "Well, doesn't hurt to ask. . ."
-            if approval_check(Girl, 1200, taboo_modifier=1) and "full" not in Girl.recent_history:
+            if approval_check(Girl, 1200, taboo_modifier = 1) and "full" not in Girl.recent_history:
                 call change_Girl_stat(Girl, "inhibition", 30, 3)
                 call change_Girl_stat(Girl, "inhibition", 70, 2)
                 $ Girl.change_face("sexy", 1)
@@ -875,7 +875,7 @@ label Girl_In_mouth:
                 jump Girl_Handy_Finish
 
         "Give it a try, you might like it." if "full" not in Girl.recent_history:
-            if approval_check(Girl, 1200, taboo_modifier=1):
+            if approval_check(Girl, 1200, taboo_modifier = 1):
                 call change_Girl_stat(Girl, "obedience", 50, 5)
                 call change_Girl_stat(Girl, "obedience", 70, 3)
                 $ Girl.brows = "confused"
@@ -916,7 +916,7 @@ label Girl_In_mouth:
                 jump Girl_Handy_Finish
         "Seriously, put it in your mouth.":
 
-            if approval_check(Girl, 1500, "LI", taboo_modifier=1) or approval_check(Girl, 1200, "OI", taboo_modifier=1):
+            if approval_check(Girl, 1500, "LI", taboo_modifier = 1) or approval_check(Girl, 1200, "OI", taboo_modifier = 1):
                 $ Girl.change_face("sucking", 1)
             elif approval_check(Girl, 1000, "OI", Bonus = (Girl.addiction*10)):
                 $ Girl.change_face("angry", 1)
@@ -1603,7 +1603,7 @@ label Girl_CleanCock(Girl):
         $ Girl.arm_pose = 1
     $ Player.cock_position = "out"
     $ action_speed = 0
-    if Player.primary_action == "anal" and not approval_check(Girl, 1600, taboo_modifier=1) and not Girl.addiction >= 80:
+    if Player.primary_action == "anal" and not approval_check(Girl, 1600, taboo_modifier = 1) and not Girl.addiction >= 80:
         if Girl == JeanX:
             $ Girl.change_face("sly", 1,eyes = "psychic")
             "You feel a slight breeze and the juices swirl off your cock and onto the floor."
@@ -1611,12 +1611,12 @@ label Girl_CleanCock(Girl):
         else:
             "She wipes your cock clean."
     elif Girl.action_counter["blowjob"] > 3 or Girl.event_counter["swallowed"]:
-        if approval_check(Girl, 1200, taboo_modifier=1) or Girl.addiction >= 60:
+        if approval_check(Girl, 1200, taboo_modifier = 1) or Girl.addiction >= 60:
             call show_blowjob(Girl, orgasm = True)
             $ action_speed = 1
             $ Girl.change_face("sucking", 1)
-            if approval_check(Girl, 1500, taboo_modifier=1):
-                if Partner and approval_check(Partner, 1500, taboo_modifier=1):
+            if approval_check(Girl, 1500, taboo_modifier = 1):
+                if Partner and approval_check(Partner, 1500, taboo_modifier = 1):
                     "Both girls look up at you as they lick your cock clean."
                 elif Girl.love > Girl.inhibition and Girl.love > Girl.obedience:
                     "She looks up at you lovingly as she licks your cock clean."
@@ -1634,7 +1634,7 @@ label Girl_CleanCock(Girl):
         else:
             if not renpy.showing(Girl.tag+" handjob"):
                 call show_handjob(Girl, orgasm = True)
-            if Partner and approval_check(Partner, 1000, taboo_modifier=1):
+            if Partner and approval_check(Partner, 1000, taboo_modifier = 1):
                 "Both girls reach down and wipe your cock clean."
             else:
                 "She wipes your cock clean."
@@ -1643,7 +1643,7 @@ label Girl_CleanCock(Girl):
             pass
         elif not renpy.showing(Girl.tag+" handjob"):
             call show_handjob(Girl, orgasm = True)
-        if Partner and approval_check(Partner, 1000, taboo_modifier=1):
+        if Partner and approval_check(Partner, 1000, taboo_modifier = 1):
             "Both girls reach down and wipe your cock clean."
         else:
             "She wipes your cock clean."
@@ -1872,7 +1872,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
                         $ action_context = "shift"
                     "No, I'm not done yet.":
                         if Player.primary_action == "sex" or Player.primary_action == "anal":
-                            if approval_check(Girl, 1000, taboo_modifier=1) or approval_check(Girl, 400, "O", taboo_modifier=1):
+                            if approval_check(Girl, 1000, taboo_modifier = 1) or approval_check(Girl, 400, "O", taboo_modifier = 1):
                                 call change_Girl_stat(Girl, "love", 200, -5)
                                 call change_Girl_stat(Girl, "obedience", 50, 2,Alt=[[JeanX],900,5])
                                 call change_Girl_stat(Girl, "obedience", 80, 3)
@@ -1919,7 +1919,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
 
 
 
-label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Original=0):
+label Girl_Cleanup(Girl=0, Choice = "random", Options=[], counter=0, Cleaned=0, Original=0):
     if Girl not in all_Girls or ("painted" in Girl.recent_history and Choice != "ask"):
         return
     if Choice == "after":
@@ -2679,7 +2679,7 @@ label Self_Cleanup(Girl=0):
         elif Girl == JubesX:
             ch_v "You really coated me, huh?"
         $ Girl.eyes = "sexy"
-    elif counter >=3:
+    elif counter > = 3:
         if Girl == RogueX:
             ch_r "That was a real mess you left me to clean up."
         elif Girl == KittyX:
@@ -2747,7 +2747,7 @@ label Partner_Cleanup_Check(Girl=0, B=0):
         ch_j "There."
         return
 
-    if not approval_check(Partner, 1400, Bonus=3*B) or Partner.likes[Girl.tag] < (500-2*B):
+    if not approval_check(Partner, 1400, Bonus = 3*B) or Partner.likes[Girl.tag] < (500-2*B):
 
         $ Partner.change_face("sly")
         call change_Girl_stat(Partner, "obedience", 50, -3)
@@ -2763,7 +2763,7 @@ label Partner_Cleanup_Check(Girl=0, B=0):
                 call change_Girl_stat(Partner, "obedience", 50, 3)
                 $ Choice = "random"
             "Yeah, go ahead.":
-                if approval_check(Partner, 600,"O", Bonus=3*B):
+                if approval_check(Partner, 600,"O", Bonus = 3*B):
 
                     $ Partner.change_face("sad")
                     call change_Girl_stat(Partner, "obedience", 50, 10)
@@ -2774,7 +2774,7 @@ label Partner_Cleanup_Check(Girl=0, B=0):
                     call change_Girl_stat(Partner, "love", 70, -3)
                     call change_Girl_stat(Partner, "obedience", 50, 3)
                     call Partner_CGline (4)
-                elif approval_check(Partner, 1200, Bonus=3*B):
+                elif approval_check(Partner, 1200, Bonus = 3*B):
 
                     $ Partner.change_face("normal")
                     call change_Girl_stat(Partner, "love", 70, -3)
@@ -2805,18 +2805,18 @@ label Partner_Cleanup_Check(Girl=0, B=0):
 
     if Choice != "random":
         call change_Girl_stat(Girl, "lust", 60, 5)
-        if not approval_check(Girl, 1400, Bonus=3*B) or Girl.likes[Partner.tag] < (500-2*B):
+        if not approval_check(Girl, 1400, Bonus = 3*B) or Girl.likes[Partner.tag] < (500-2*B):
 
             if Girl.likes[Partner.tag] >= 800:
                 call change_Girl_stat(Girl, "inhibition", 90, 5)
                 $ Partner.check_if_likes(Girl,900,5, 1)
                 call Partner_CGline (8, Girl)
-            elif approval_check(Girl, 1200, Bonus=3*B):
+            elif approval_check(Girl, 1200, Bonus = 3*B):
                 call change_Girl_stat(Girl, "obedience", 50, 3)
                 call change_Girl_stat(Girl, "obedience", 80, 2)
                 call change_Girl_stat(Girl, "inhibition", 70, 3)
                 call Partner_CGline (9, Girl)
-            elif approval_check(Girl, 1000, Bonus=3*B) and Girl.likes[Partner.tag] >= (600-B):
+            elif approval_check(Girl, 1000, Bonus = 3*B) and Girl.likes[Partner.tag] >= (600-B):
                 call change_Girl_stat(Girl, "love", 70, 1)
                 call change_Girl_stat(Girl, "obedience", 50, 3)
                 call change_Girl_stat(Girl, "obedience", 80, 3)
@@ -2852,7 +2852,7 @@ label Partner_Cleanup_Check(Girl=0, B=0):
 
     return
 
-label Partner_CGline(lineNum=1, Girl=0):
+label Partner_CGline(lineNum = 1, Girl=0):
 
     if not Partner or not lineNum:
         return

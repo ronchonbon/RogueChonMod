@@ -612,14 +612,14 @@ label show_handjob(Girl, orgasm = False):
             "[Girl.name] looks around to see if anyone can see her."
 
     if not orgasm:
-        if not Girl.action_counter["handjob"] and Girl.outfit["gloves"]:
+        if not Girl.action_counter["handjob"] and Girl.Clothes["gloves"]:
             "As you pull out your cock, [Girl.name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
         else:
             "She then leans over and grabs your cock."
     else:
         "[Girl.name] bends down and grabs your cock."
 
-    $ Girl.outfit["gloves"] = ""
+    $ Girl.take_off("gloves")
     $ Girl.arm_pose = 1
 
     $ renpy.start_predict("images/" + Girl.tag + "_handjob/*.*")
@@ -668,36 +668,36 @@ label show_titjob(Girl, orgasm = False):
         else:
             "[Girl.name] looks around to see if anyone can see her."
 
-    if Girl.outfit["bra"] and Girl.outfit["top"]:
-        "She throws off her [Girl.outfit[top]] and her [Girl.outfit[bra]]."
-    elif Girl.outfit["top"]:
-        "She throws off her [Girl.outfit[top]], baring her breasts underneath."
-    elif Girl.outfit["bra"]:
-        "She tugs off her [Girl.outfit[bra]] and throws it aside."
+    if Girl.Clothes["bra"] and Girl.Clothes["top"]:
+        "She throws off her [Girl.Clothes[top]] and her [Girl.Clothes[bra].name]."
+    elif Girl.Clothes["top"]:
+        "She throws off her [Girl.Clothes[top].name], baring her breasts underneath."
+    elif Girl.Clothes["bra"]:
+        "She tugs off her [Girl.Clothes[bra].name] and throws it aside."
 
-    $ Girl.outfit["top"] = ""
-    $ Girl.outfit["bra"] = ""
-    $ Girl.outfit["gloves"] = ""
+    $ Girl.take_off("top")
+    $ Girl.take_off("bra")
+    $ Girl.take_off("gloves")
 
     call expression Girl.tag + "_First_Topless"
 
     if not orgasm:
         if not Girl.action_counter["titjob"] and "cockout" not in Player.recent_history:
-            if not Girl.outfit["bra"] and not Girl.outfit["top"]:
+            if not Girl.Clothes["bra"] and not Girl.Clothes["top"]:
                 "As you pull out your cock, [Girl.name] hesitantly places it between her breasts and starts to rub them up and down the shaft."
-            elif Girl.outfit["bra"] and not Girl.outfit["top"]:
-                "As you pull out your cock, [Girl.name] hesitantly places it under her [Girl.outfit['bra']], between her breasts and starts to rub them up and down the shaft."
-            elif Girl.outfit["bra"] and Girl.outfit["top"]:
-                "As you pull out your cock, [Girl.name] hesitantly places it under her [Girl.outfit['top']], between her breasts and starts to rub them up and down the shaft."
+            elif Girl.Clothes["bra"] and not Girl.Clothes["top"]:
+                "As you pull out your cock, [Girl.name] hesitantly places it under her [Girl.Clothes[bra].name], between her breasts, and starts to rub them up and down the shaft."
+            elif Girl.Clothes["bra"] and Girl.Clothes["top"]:
+                "As you pull out your cock, [Girl.name] hesitantly places it under her [Girl.Clothes[top].name], between her breasts, and starts to rub them up and down the shaft."
             else:
-                "As you pull out your cock, [Girl.name] hesitantly places it under her clothes, between her breasts and starts to rub them up and down the shaft."
+                "As you pull out your cock, [Girl.name] hesitantly places it under her clothes, between her breasts, and starts to rub them up and down the shaft."
         elif "cockout" not in Player.recent_history:
-            if not Girl.outfit["bra"] and not Girl.outfit["top"]:
+            if not Girl.Clothes["bra"] and not Girl.Clothes["top"]:
                 "As you pull out your cock, [Girl.name] places it between her breasts and starts to rub them up and down the shaft."
-            elif Girl.outfit["bra"] and not Girl.outfit["top"]:
-                "As you pull out your cock, [Girl.name] places it under her [Girl.outfit['bra']], between her breasts and starts to rub them up and down the shaft."
-            elif Girl.outfit["bra"] and Girl.outfit["top"]:
-                "As you pull out your cock, [Girl.name] places it under her [Girl.outfit['top']], between her breasts and starts to rub them up and down the shaft."
+            elif Girl.Clothes["bra"] and not Girl.Clothes["top"]:
+                "As you pull out your cock, [Girl.name] places it under her [Girl.Clothes[bra].name], between her breasts, and starts to rub them up and down the shaft."
+            elif Girl.Clothes["bra"] and Girl.Clothes["top"]:
+                "As you pull out your cock, [Girl.name] places it under her [Girl.Clothes[top].name], between her breasts, and starts to rub them up and down the shaft."
             else:
                 "As you pull out your cock, [Girl.name] places it under her clothes, between her breasts and starts to rub them up and down the shaft."
     else:

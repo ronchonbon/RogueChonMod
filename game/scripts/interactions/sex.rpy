@@ -34,7 +34,7 @@ label set_approval_bonus(Girl, action, context):
         if Girl.action_counter["suck_breasts"]: #You've done it before
             $ approval_bonus += 15
 
-        if not Girl.outfit["bra"] and not Girl.outfit["top"]:
+        if not Girl.Clothes["bra"] and not Girl.Clothes["top"]:
             $ approval_bonus += 15
 
         if Girl.lust > 75: #She's really horny
@@ -194,7 +194,7 @@ label set_approval_bonus(Girl, action, context):
         elif Girl.action_counter[action]: #You've done it before
             $ approval_bonus += 3
 
-        if Girl.addiction >= 75 and Girl.event_counter["swallowed"] >=3: #She's really strung out and has swallowed
+        if Girl.addiction >= 75 and Girl.event_counter["swallowed"] > = 3: #She's really strung out and has swallowed
             $ approval_bonus += 10
         if Girl.addiction >= 75:
             $ approval_bonus += 5
@@ -217,7 +217,7 @@ label set_approval_bonus(Girl, action, context):
 
         if Girl.seen_breasts and approval_check(Girl, 500): # You've seen her tits.
             $ approval_bonus += 10
-        if not Girl.outfit["bra"] and not Girl.outfit["top"]: #She's already topless
+        if not Girl.Clothes["bra"] and not Girl.Clothes["top"]: #She's already topless
             $ approval_bonus += 10
 
         if "exhibitionist" in Girl.traits:
@@ -246,7 +246,7 @@ label set_approval_bonus(Girl, action, context):
         elif Girl.action_counter[action]: #You've done it before
             $ approval_bonus += 7
 
-        if Girl.addiction >= 75 and Girl.event_counter["swallowed"] >=3: #She's really strung out and has swallowed
+        if Girl.addiction >= 75 and Girl.event_counter["swallowed"] > = 3: #She's really strung out and has swallowed
             $ approval_bonus += 25
         elif Girl.addiction >= 75: #She's really strung out
             $ approval_bonus += 15
@@ -288,7 +288,7 @@ label set_approval_bonus(Girl, action, context):
             $ approval_bonus -= 20
         elif "anal" in Girl.daily_history or "dildo_ass" in Girl.daily_history:
             $ approval_bonus -= 10
-        elif (Girl.action_counter["anal"] + Girl.action_counter["dildo_ass"]) > 0 or Girl.outfit["buttplug"]: #You've done it before
+        elif (Girl.action_counter["anal"] + Girl.action_counter["dildo_ass"]) > 0 or Girl.Clothes["buttplug"]: #You've done it before
             $ approval_bonus += 20
 
         if Girl.legs_covered: # she's got pants on.
@@ -316,7 +316,7 @@ label set_approval_bonus(Girl, action, context):
         elif Girl.action_counter["sex"]: #You've done it before
             $ approval_bonus += 10
 
-        if Girl.addiction >= 75 and (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) >=3: #She's really strung out and has creampied
+        if Girl.addiction >= 75 and (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) > = 3: #She's really strung out and has creampied
             $ approval_bonus += 20
         elif Girl.addiction >= 75:
             $ approval_bonus += 15
@@ -343,7 +343,7 @@ label set_approval_bonus(Girl, action, context):
         elif Girl.action_counter["anal"] : #You've done it before
             $ approval_bonus += 15
 
-        if Girl.addiction >= 75 and (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) >=3: #She's really strung out and has creampied
+        if Girl.addiction >= 75 and (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) > = 3: #She's really strung out and has creampied
             $ approval_bonus += 25
         elif Girl.addiction >= 75:
             $ approval_bonus += 15
@@ -883,7 +883,7 @@ label jerking_off(Girl = None):
 label girl_touches_you(Girl, forced = False):
     call shift_focus (Girl)
 
-    $ gloves = Girl.outfit["gloves"]
+    $ gloves = Girl.Clothes["gloves"]
 
     $ Girl.arm_pose = 2
 
@@ -893,7 +893,7 @@ label girl_touches_you(Girl, forced = False):
 
     if forced and Player.level >= 5:
         if gloves == "gloves":
-            $ Girl.outfit["gloves"] = ""
+            $ Girl.take_off("gloves")
 
             "She pulls off her gloves and reaches for your face."
         else:
@@ -944,7 +944,7 @@ label girl_touches_you(Girl, forced = False):
 
                     $ Girl.recent_history.append("no_tag")
                     $ Girl.daily_history.append("no_tag")
-                    $ Girl.outfit["gloves"] = gloves
+                    $ Girl.Clothes["gloves"] = gloves
                     $ Girl.arm_pose = 1
 
                     return
@@ -957,7 +957,7 @@ label girl_touches_you(Girl, forced = False):
         call change_Girl_stat(Girl, "lust", 90, 5)
 
         if gloves == "gloves":
-            $ Girl.outfit["gloves"] = ""
+            $ Girl.take_off("gloves")
 
             $ line = "She pulls off her gloves and"
         else:
@@ -1000,11 +1000,11 @@ label girl_touches_you(Girl, forced = False):
 
     if round <= 15:
         Girl.voice "I suppose we don't have time for any more than that."
-    if gloves and not Girl.outfit["gloves"]:
+    if gloves and not Girl.Clothes["gloves"]:
         "Appearing sated, she puts her gloves back on."
 
     $ Girl.blushing = "_blush1"
-    $ Girl.outfit["gloves"] = gloves
+    $ Girl.Clothes["gloves"] = gloves
     $ Girl.arm_pose = 1
     $ Girl.change_face()
 
@@ -1024,7 +1024,7 @@ label slap_ass(Girl):
     $ Girl.event_counter["ass_slapped"] += 1
     $ Girl.blushing = "_blush2" if taboo else 1
 
-    if approval_check(Girl, 200, "O", taboo_modifier=1):
+    if approval_check(Girl, 200, "O", taboo_modifier = 1):
         $ Girl.change_face("sexy", 1)
         $ Girl.mouth = "surprised"
         call change_Girl_stat(Girl, "lust", 51, 3, 1)
@@ -1105,11 +1105,11 @@ label girl_initiated_action(Girl, action):
             $ covered_phrase = "head and shoves your face into her chest"
             $ topless_phrase = covered_phrase
 
-        if (Girl.outfit["top"] or Girl.outfit["bra"]) and not Girl.top_pulled_up:
+        if (Girl.Clothes["top"] or Girl.Clothes["bra"]) and not Girl.top_pulled_up:
             if approval_check(Girl, 1250, taboo_modifier = 1) or (Girl.seen_breasts and approval_check(Girl, 500) and not taboo):
                 $ Girl.top_pulled_up = 1
 
-                $ line = Girl.outfit["top"] if Girl.outfit["top"] else Girl.outfit["bra"]
+                $ line = Girl.Clothes["top"] if Girl.Clothes["top"] else Girl.Clothes["bra"]
 
                 "With a mischievous grin, [Girl.name] pulls her [line] up over her breasts."
 
@@ -1139,7 +1139,7 @@ label girl_initiated_action(Girl, action):
                 "grabs your arm and rubs your hand against her asshole"])
 
 
-        if (Girl.outfit["bottom"] and not Girl.upskirt) or (Girl.outfit["underwear"] and not Girl.Clothes["underwear"].state):
+        if (Girl.Clothes["bottom"] and not Girl.upskirt) or (Girl.Clothes["underwear"] and not Girl.Clothes["underwear"].state):
             if approval_check(Girl, 1250, taboo_modifier = 1) or (Girl.seen_pussy and approval_check(Girl, 500) and not taboo):
                 call expose_pussy(Girl)
 
@@ -1147,17 +1147,17 @@ label girl_initiated_action(Girl, action):
 
                 if Girl.wearing_skirt:
                     $ line = Girl.name + " hikes up her skirt"
-                elif Girl.outfit["bottom"]:
-                    $ line = Girl.name + " pulls down her " + Girl.outfit["bottom"]
+                elif Girl.Clothes["bottom"]:
+                    $ line = Girl.name + " pulls down her " + Girl.Clothes["bottom"]
                 else:
                     $ line = 0
 
-                if Girl.outfit["underwear"]:
+                if Girl.Clothes["underwear"]:
                     if line:
-                        "[line] and pulls her [Girl.outfit['underwear']] out of the way."
+                        "[line] and pulls her [Girl.Clothes[underwear].name] out of the way."
                         "She then [phrase], clearly intending you to get to work."
                     else:
-                        "She pulls her [Girl.outfit['underwear']] out of the way, and then [phrase]."
+                        "She pulls her [Girl.Clothes[underwear].name] out of the way, and then [phrase]."
                         "She clearly intends for you to get to work."
                 else:
                     "[line], and then [phrase]."
@@ -1214,11 +1214,11 @@ label girl_initiated_action(Girl, action):
 
                 $ Girl.upskirt = True
             elif Girl.wearing_pants:
-                $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock, sliding her [Girl.outfit['bottom']] down as she does so.",
-                    "[Girl.name] rolls back and pulls you against her, sliding her [Girl.outfit['bottom']] off as she does so.",
-                    "[Girl.name] pushes you down and climbs on top of you, sliding her [Girl.outfit['bottom']] down as she does so.",
-                    "[Girl.name] turns around, sliding her [Girl.outfit['bottom']] down as she does so.",
-                    "[Girl.name] lays back, sliding her [Girl.outfit['bottom']] down as she does so."])
+                $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock, sliding her [Girl.Clothes[bottom].name] down as she does so.",
+                    "[Girl.name] rolls back and pulls you against her, sliding her [Girl.Clothes[bottom].name] off as she does so.",
+                    "[Girl.name] pushes you down and climbs on top of you, sliding her [Girl.Clothes[bottom].name] down as she does so.",
+                    "[Girl.name] turns around, sliding her [Girl.Clothes[bottom].name] down as she does so.",
+                    "[Girl.name] lays back, sliding her [Girl.Clothes[bottom].name] down as she does so."])
 
                 "[line]"
 

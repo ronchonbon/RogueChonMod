@@ -2364,21 +2364,21 @@ label Emma_Leave:
                 elif approval_check(EmmaX, 700, taboo_modifier=5):
                     ch_e "I suppose that I could. . ."
                     if "lace_panties" in EmmaX.inventory:
-                        $ EmmaX.outfit["underwear"]  = "lace_panties"
+                        $ EmmaX.Clothes["underwear"]  = "lace_panties"
                     else:
-                        $ EmmaX.outfit["underwear"] = "green_panties"
+                        $ EmmaX.Clothes["underwear"] = "green_panties"
                     if approval_check(EmmaX, 1200, taboo_modifier=4):
-                        $ line = EmmaX.outfit["bottom"]
+                        $ line = EmmaX.Clothes["bottom"]
                         $ EmmaX.Outfit.remove_Clothing(["pants", "skirt"])
-                        "She pulls off her [line] and slips on the [EmmaX.outfit[underwear]]."
-                    elif EmmaX.outfit["bottom"] == "skirt":
-                        "She pulls out her [EmmaX.outfit[underwear]] and pulls them up under her skirt."
+                        "She pulls off her [line] and slips on the [EmmaX.Clothes[underwear].name]."
+                    elif EmmaX.Clothes["bottom"] == "skirt":
+                        "She pulls out her [EmmaX.Clothes[underwear].name] and pulls them up under her skirt."
                         $ EmmaX.Outfit.remove_Clothing(["pants", "skirt"])
                         "Then she drops the skirt to the floor."
                     else:
-                        $ line = EmmaX.outfit["bottom"]
+                        $ line = EmmaX.Clothes["bottom"]
                         $ EmmaX.Outfit.remove_Clothing(["pants", "skirt"])
-                        "She steps away a moment and then comes back wearing only the [EmmaX.outfit[underwear]]."
+                        "She steps away a moment and then comes back wearing only the [EmmaX.Clothes[underwear].name]."
                     return
                 elif EmmaX.taboo and approval_check(EmmaX, 800, taboo_modifier=0):
                     ch_e "I like how you think, but not in public like this."
@@ -2416,7 +2416,7 @@ label Emma_Leave:
     menu Emma_Clothes_Under:
         "Tops":
             menu:
-                "How about you lose the [EmmaX.outfit[bra]]?" if EmmaX.outfit["bra"]:
+                "How about you lose the [EmmaX.Clothes[bra].name]?" if EmmaX.Clothes["bra"]:
                     $ EmmaX.change_face("bemused", 1)
                     if EmmaX.seen_breasts and approval_check(EmmaX, 900, taboo_modifier=(4-Public)):
                         ch_e "Of course."
@@ -2425,9 +2425,9 @@ label Emma_Leave:
                             ch_e "I'd rather not out here. . ."
                         else:
                             ch_e "I suppose for you. . ."
-                    elif EmmaX.outfit["jacket"] == "jacket" and approval_check(EmmaX, 700, taboo_modifier=(3-Public)):
+                    elif EmmaX.Clothes["jacket"] == "jacket" and approval_check(EmmaX, 700, taboo_modifier=(3-Public)):
                         ch_e "This is a bit daring without anything under it. . ."
-                    elif not EmmaX.outfit["top"]:
+                    elif not EmmaX.Clothes["top"]:
                         call ask_for_dress_screen (EmmaX)
                         if not _return:
                             ch_e "I don't think that would be appropriate."
@@ -2437,63 +2437,63 @@ label Emma_Leave:
                         if not _return:
                             ch_e "I'm afraid not, [EmmaX.player_petname]."
                             return
-                    $ line = EmmaX.outfit["bra"]
-                    $ EmmaX.outfit["bra"] = ""
-                    if EmmaX.outfit["top"]:
-                        "She reaches under her [EmmaX.outfit[top]] grabs her [line], and pulls it out, dropping it to the ground."
+                    $ line = EmmaX.Clothes["bra"]
+                    $ EmmaX.take_off("bra")
+                    if EmmaX.Clothes["top"]:
+                        "She reaches under her [EmmaX.Clothes[top].name] grabs her [line], and pulls it out, dropping it to the ground."
                     else:
                         "She lets her [line] fall to the ground."
                         if not renpy.showing('dress_screen'):
                             call Emma_First_Topless
 
-                "I like that corset you have." if EmmaX.outfit["bra"] != "corset":
+                "I like that corset you have." if EmmaX.Clothes["bra"] != "corset":
                     if EmmaX.seen_breasts or approval_check(EmmaX, 1000, taboo_modifier=(3-Public)):
                         ch_e "So do I."
-                        $ EmmaX.outfit["bra"] = "corset"
+                        $ EmmaX.Clothes["bra"] = "corset"
                         $ EmmaX.top_pulled_up = 1
                     else:
                         call ask_for_dress_screen (EmmaX)
                         if not _return:
                             ch_e "I don't think that would be appropriate. . ."
                         else:
-                            $ EmmaX.outfit["bra"] = "corset"
+                            $ EmmaX.Clothes["bra"] = "corset"
 
-                "I like that lace bra." if "lace_bra" in EmmaX.inventory and EmmaX.outfit["bra"] != "lace_bra":
+                "I like that lace bra." if "lace_bra" in EmmaX.inventory and EmmaX.Clothes["bra"] != "lace_bra":
                     if EmmaX.seen_breasts or approval_check(EmmaX, 1300, taboo_modifier=(3-Public)):
                         ch_e "Fine."
-                        $ EmmaX.outfit["bra"] = "lace_bra"
+                        $ EmmaX.Clothes["bra"] = "lace_bra"
                     else:
                         call ask_for_dress_screen (EmmaX)
                         if not _return:
                             ch_e "It's a bit revealing. . ."
                         else:
-                            $ EmmaX.outfit["bra"] = "lace_bra"
+                            $ EmmaX.Clothes["bra"] = "lace_bra"
 
-                "I like that sports bra." if EmmaX.outfit["bra"] != "sports_bra":
+                "I like that sports bra." if EmmaX.Clothes["bra"] != "sports_bra":
                     if EmmaX.seen_breasts or approval_check(EmmaX, 1000, taboo_modifier=(3-Public)):
                         ch_e "Fine."
-                        $ EmmaX.outfit["bra"] = "sports_bra"
+                        $ EmmaX.Clothes["bra"] = "sports_bra"
                     else:
                         call ask_for_dress_screen (EmmaX)
                         if not _return:
                             ch_e "I'm not sure about that. . ."
                         else:
-                            $ EmmaX.outfit["bra"] = "sports_bra"
+                            $ EmmaX.Clothes["bra"] = "sports_bra"
 
-                "I like that bikini top." if EmmaX.outfit["bra"] != "bikini_top" and "bikini_top" in EmmaX.inventory:
+                "I like that bikini top." if EmmaX.Clothes["bra"] != "bikini_top" and "bikini_top" in EmmaX.inventory:
                     if Player.location == "bg_pool":
                         ch_e "Fine."
-                        $ EmmaX.outfit["bra"] = "bikini_top"
+                        $ EmmaX.Clothes["bra"] = "bikini_top"
                     else:
                         if EmmaX.seen_breasts or approval_check(EmmaX, 800, taboo_modifier=2):
                             ch_e "Fine."
-                            $ EmmaX.outfit["bra"] = "bikini_top"
+                            $ EmmaX.Clothes["bra"] = "bikini_top"
                         else:
                             call ask_for_dress_screen (EmmaX)
                             if not _return:
                                 ch_e "I don't know about wearing that here. . ."
                             else:
-                                $ EmmaX.outfit["bra"] = "bikini_top"
+                                $ EmmaX.Clothes["bra"] = "bikini_top"
                 "Never mind":
                     pass
             return
@@ -2501,18 +2501,18 @@ label Emma_Leave:
 
 
             menu:
-                "You could lose the hose." if EmmaX.outfit["hose"]:
-                    $ EmmaX.outfit["hose"] = ""
-                "The thigh-high hose would look good with that." if EmmaX.outfit["hose"] != "stockings" and "stockings_and_garterbelt" in EmmaX.inventory:
-                    $ EmmaX.outfit["hose"] = "stockings"
-                "The pantyhose would look good with that." if EmmaX.outfit["hose"] != "pantyhose" and "pantyhose" in EmmaX.inventory:
-                    $ EmmaX.outfit["hose"] = "pantyhose"
-                "The ripped pantyhose would look good with that." if EmmaX.outfit["hose"] != "ripped_pantyhose" and "ripped_pantyhose" in EmmaX.inventory:
-                    $ EmmaX.outfit["hose"] = "ripped_pantyhose"
-                "The stockings and garterbelt would look good with that." if EmmaX.outfit["hose"] != "stockings_and_garterbelt" and "stockings_and_garterbelt" in EmmaX.inventory:
-                    $ EmmaX.outfit["hose"] = "stockings_and_garterbelt"
-                "Maybe just the garterbelt?" if EmmaX.outfit["hose"] != "garterbelt" and "stockings_and_garterbelt" in EmmaX.inventory:
-                    $ EmmaX.outfit["hose"] = "garterbelt"
+                "You could lose the hose." if EmmaX.Clothes["hose"]:
+                    $ EmmaX.take_off("hose")
+                "The thigh-high hose would look good with that." if EmmaX.Clothes["hose"] != "stockings" and "stockings_and_garterbelt" in EmmaX.inventory:
+                    $ EmmaX.Clothes["hose"] = "stockings"
+                "The pantyhose would look good with that." if EmmaX.Clothes["hose"] != "pantyhose" and "pantyhose" in EmmaX.inventory:
+                    $ EmmaX.Clothes["hose"] = "pantyhose"
+                "The ripped pantyhose would look good with that." if EmmaX.Clothes["hose"] != "ripped_pantyhose" and "ripped_pantyhose" in EmmaX.inventory:
+                    $ EmmaX.Clothes["hose"] = "ripped_pantyhose"
+                "The stockings and garterbelt would look good with that." if EmmaX.Clothes["hose"] != "stockings_and_garterbelt" and "stockings_and_garterbelt" in EmmaX.inventory:
+                    $ EmmaX.Clothes["hose"] = "stockings_and_garterbelt"
+                "Maybe just the garterbelt?" if EmmaX.Clothes["hose"] != "garterbelt" and "stockings_and_garterbelt" in EmmaX.inventory:
+                    $ EmmaX.Clothes["hose"] = "garterbelt"
                 "Never mind":
                     pass
             return
@@ -2520,7 +2520,7 @@ label Emma_Leave:
 
 
             menu:
-                "You could lose those panties. . ." if EmmaX.outfit["underwear"]:
+                "You could lose those panties. . ." if EmmaX.Clothes["underwear"]:
                     $ EmmaX.change_face("bemused", 1)
                     if (approval_check(EmmaX, 900) or EmmaX.seen_pussy) and not EmmaX.taboo:
 
@@ -2553,20 +2553,20 @@ label Emma_Leave:
                                 else:
                                     ch_e "I could, but I won't, [EmmaX.player_petname]!"
                                 return
-                    $ line = EmmaX.outfit["underwear"]
-                    $ EmmaX.outfit["underwear"] = ""
-                    if not EmmaX.outfit["bottom"]:
+                    $ line = EmmaX.Clothes["underwear"]
+                    $ EmmaX.take_off("underwear")
+                    if not EmmaX.Clothes["bottom"]:
                         "She pulls off her [line], then drops them to the ground."
                         if not renpy.showing('dress_screen'):
                             call Emma_First_Bottomless
                     elif approval_check(EmmaX, 1200, taboo_modifier=4):
-                        $ temp_bottom = EmmaX.outfit["bottom"]
+                        $ temp_bottom = EmmaX.Clothes["bottom"]
                         $ EmmaX.Outfit.remove_Clothing(["pants", "skirt"])
                         pause 0.5
-                        $ EmmaX.outfit["bottom"] = temp_bottom
-                        "She pulls off her [EmmaX.outfit[bottom]] and [line], then pulls the [EmmaX.outfit[bottom]] back on."
+                        $ EmmaX.Clothes["bottom"] = temp_bottom
+                        "She pulls off her [EmmaX.Clothes[bottom]] and [line], then pulls the [EmmaX.Clothes[bottom].name] back on."
                         call Emma_First_Bottomless (1)
-                    elif EmmaX.outfit["bottom"] == "skirt":
+                    elif EmmaX.Clothes["bottom"] == "skirt":
                         "She reaches under her skirt and pulls her [line] off."
                     else:
                         $ EmmaX.blushing = "_blush1"
@@ -2574,57 +2574,57 @@ label Emma_Leave:
                         $ EmmaX.blushing = ""
                     $ line = 0
 
-                "Why don't you wear the white panties instead?" if EmmaX.outfit["underwear"] and EmmaX.outfit["underwear"] != "white_panties":
+                "Why don't you wear the white panties instead?" if EmmaX.Clothes["underwear"] and EmmaX.Clothes["underwear"] != "white_panties":
                     if approval_check(EmmaX, 1100, taboo_modifier=(4-Public)):
                         ch_e "Ok."
-                        $ EmmaX.outfit["underwear"] = "white_panties"
+                        $ EmmaX.Clothes["underwear"] = "white_panties"
                     else:
                         call ask_for_dress_screen (EmmaX)
                         if not _return:
                             ch_e "I really don't see how that's any of your concern."
                         else:
-                            $ EmmaX.outfit["underwear"] = "white_panties"
+                            $ EmmaX.Clothes["underwear"] = "white_panties"
 
-                "Why don't you wear the sporty panties instead?" if EmmaX.outfit["underwear"] and EmmaX.outfit["underwear"] != "sports_panties":
+                "Why don't you wear the sporty panties instead?" if EmmaX.Clothes["underwear"] and EmmaX.Clothes["underwear"] != "sports_panties":
                     if approval_check(EmmaX, 1200, taboo_modifier=(4-Public)):
                         ch_e "Fine."
-                        $ EmmaX.outfit["underwear"] = "sports_panties"
+                        $ EmmaX.Clothes["underwear"] = "sports_panties"
                     else:
                         call ask_for_dress_screen (EmmaX)
                         if not _return:
                             ch_e "I really don't see how that's any of your concern."
                         else:
-                            $ EmmaX.outfit["underwear"] = "sports_panties"
+                            $ EmmaX.Clothes["underwear"] = "sports_panties"
 
-                "Why don't you wear the lace panties instead?" if "lace_panties" in EmmaX.inventory and EmmaX.outfit["underwear"] and EmmaX.outfit["underwear"] != "lace_panties":
+                "Why don't you wear the lace panties instead?" if "lace_panties" in EmmaX.inventory and EmmaX.Clothes["underwear"] and EmmaX.Clothes["underwear"] != "lace_panties":
                     if approval_check(EmmaX, 1300, taboo_modifier=(4-Public)):
                         ch_e "Fine."
-                        $ EmmaX.outfit["underwear"] = "lace_panties"
+                        $ EmmaX.Clothes["underwear"] = "lace_panties"
                     else:
                         call ask_for_dress_screen (EmmaX)
                         if not _return:
                             ch_e "I really don't see how that's any of your concern."
                         else:
-                            $ EmmaX.outfit["underwear"] = "lace_panties"
+                            $ EmmaX.Clothes["underwear"] = "lace_panties"
 
-                "I like those bikini bottoms." if EmmaX.outfit["underwear"] != "bikini_bottoms" and "bikini_bottoms" in EmmaX.inventory:
+                "I like those bikini bottoms." if EmmaX.Clothes["underwear"] != "bikini_bottoms" and "bikini_bottoms" in EmmaX.inventory:
                     if Player.location == "bg_pool":
                         ch_e "Fine."
-                        $ EmmaX.outfit["underwear"] = "bikini_bottoms"
+                        $ EmmaX.Clothes["underwear"] = "bikini_bottoms"
                     else:
                         if approval_check(EmmaX, 800, taboo_modifier=2):
                             ch_e "Fine."
-                            $ EmmaX.outfit["underwear"] = "bikini_bottoms"
+                            $ EmmaX.Clothes["underwear"] = "bikini_bottoms"
                         else:
                             call ask_for_dress_screen (EmmaX)
                             if not _return:
                                 ch_e "I don't know about wearing those here. . ."
                             else:
-                                $ EmmaX.outfit["underwear"] = "bikini_bottoms"
+                                $ EmmaX.Clothes["underwear"] = "bikini_bottoms"
 
-                "You know, you could wear some panties with that. . ." if not EmmaX.outfit["underwear"]:
+                "You know, you could wear some panties with that. . ." if not EmmaX.Clothes["underwear"]:
                     $ EmmaX.change_face("bemused", 1)
-                    if EmmaX.outfit["bottom"] and (EmmaX.love+EmmaX.obedience) <= (2* EmmaX.inhibition):
+                    if EmmaX.Clothes["bottom"] and (EmmaX.love+EmmaX.obedience) <= (2* EmmaX.inhibition):
                         $ EmmaX.mouth = "smile"
                         ch_e "I could, but won't."
                         menu:
@@ -2642,13 +2642,13 @@ label Emma_Leave:
                         ch_e "If you insist. . ."
                         "How about the white ones?":
                             ch_e "Fine."
-                            $ EmmaX.outfit["underwear"] = "white_panties"
+                            $ EmmaX.Clothes["underwear"] = "white_panties"
                         "How about the sporty ones?":
                             ch_e "Fine."
-                            $ EmmaX.outfit["underwear"] = "sports_panties"
+                            $ EmmaX.Clothes["underwear"] = "sports_panties"
                         "How about the lace ones?" if "lace_panties" in EmmaX.inventory:
                             ch_e "Fine."
-                            $ EmmaX.outfit["underwear"]  = "lace_panties"
+                            $ EmmaX.Clothes["underwear"]  = "lace_panties"
                 "Never mind":
                     pass
             return
@@ -2661,29 +2661,29 @@ label Emma_Leave:
 
     menu Emma_Clothes_Misc:
 
-        "You look good with your hair flowing." if EmmaX.outfit["hair"] != "wavy":
+        "You look good with your hair flowing." if EmmaX.Clothes["hair"] != "wavy":
             if approval_check(EmmaX, 600):
-                $ EmmaX.outfit["hair"] = "wavy"
+                $ EmmaX.Clothes["hair"] = "wavy"
 
                 ch_e "Like this?"
             else:
                 ch_e "Yes, I do."
 
-        "Maybe keep your hair straight." if EmmaX.outfit["hair"] != "wet":
+        "Maybe keep your hair straight." if EmmaX.Clothes["hair"] != "wet":
             if approval_check(EmmaX, 600):
-                $ EmmaX.outfit["hair"] = "wet"
+                $ EmmaX.Clothes["hair"] = "wet"
                 ch_e "You think?"
             else:
                 ch_e "I tend to prefer it a bit more loose."
 
-        "Add hat" if EmmaX.outfit["face_outer_accessory"] != "hat" and "halloween" in EmmaX.history:
+        "Add hat" if EmmaX.Clothes["face_outer_accessory"] != "hat" and "halloween" in EmmaX.history:
             ch_p "That hat you wore to the party was nice."
 
-            $ EmmaX.outfit["face_outer_accessory"] = "hat"
-        "Remove hat" if EmmaX.outfit["face_outer_accessory"] == "hat":
+            $ EmmaX.Clothes["face_outer_accessory"] = "hat"
+        "Remove hat" if EmmaX.Clothes["face_outer_accessory"] == "hat":
             ch_p "You could probably lose the hat."
 
-            $ EmmaX.outfit["face_outer_accessory"] = ""
+            $ EmmaX.take_off("face_outer_accessory")
 
         "Grow Pubes." if not EmmaX.pubes and "pubes" not in EmmaX.to_do:
             ch_p "You know, I like some nice hair down there. Maybe grow it out."
@@ -2730,7 +2730,7 @@ label Emma_Leave:
         "Piercings. [[See what she looks like without them first] (locked)" if not EmmaX.seen_pussy and not EmmaX.seen_breasts:
             pass
 
-        "Add ring piercings" if EmmaX.outfit["piercings"] != "ring" and (EmmaX.seen_pussy or EmmaX.seen_breasts):
+        "Add ring piercings" if EmmaX.Clothes["piercings"] != "ring" and (EmmaX.seen_pussy or EmmaX.seen_breasts):
             ch_p "You know, you'd look really nice with some ring body piercings."
             if "ring" in EmmaX.to_do:
                 ch_e "Yes, yes, it's on my schedule."
@@ -2750,7 +2750,7 @@ label Emma_Leave:
                     return
                 $ EmmaX.to_do.append("ring")
 
-        "Add barbell piercings." if EmmaX.outfit["piercings"] != "barbell" and (EmmaX.seen_pussy or EmmaX.seen_breasts):
+        "Add barbell piercings." if EmmaX.Clothes["piercings"] != "barbell" and (EmmaX.seen_pussy or EmmaX.seen_breasts):
             ch_p "You know, you'd look really nice with some barbell body piercings."
             if "barbell" in EmmaX.to_do:
                 ch_e "Yes, yes, it's on my schedule."
@@ -2769,9 +2769,9 @@ label Emma_Leave:
                     ch_e "Well, I'm just not ready for that sort of thing, [EmmaX.player_petname]."
                     return
                 $ EmmaX.to_do.append("barbell")
-                $ EmmaX.outfit["piercings"] = "barbell"
+                $ EmmaX.Clothes["piercings"] = "barbell"
 
-        "Remove piercings" if EmmaX.outfit["piercings"]:
+        "Remove piercings" if EmmaX.Clothes["piercings"]:
             ch_p "You know, you'd look better without those piercings."
             $ EmmaX.change_face("bemused", 1)
             $ approval = approval_check(EmmaX, 1350, taboo_modifier=0)
@@ -2786,22 +2786,22 @@ label Emma_Leave:
                 $ EmmaX.brows = "angry"
                 ch_e "Well {i}I{/i} enjoy them."
                 return
-            $ EmmaX.outfit["piercings"] = ""
+            $ EmmaX.take_off("piercings")
 
-        "Add_choker" if EmmaX.outfit["neck"] != "choker":
+        "Add_choker" if EmmaX.Clothes["neck"] != "choker":
             ch_e "Why don't you try on that white choker."
             ch_e "Ok. . ."
-            $ EmmaX.outfit["neck"] = "choker"
-        "Remove_choker" if EmmaX.outfit["neck"]:
+            $ EmmaX.Clothes["neck"] = "choker"
+        "Remove_choker" if EmmaX.Clothes["neck"]:
             ch_e "WMaybe go without a collar."
             ch_e "Ok. . ."
-            $ EmmaX.outfit["neck"] = ""
+            $ EmmaX.take_off("neck")
 
-        "Maybe lose the gloves." if EmmaX.outfit["gloves"]:
-            $ EmmaX.outfit["gloves"] = ""
+        "Maybe lose the gloves." if EmmaX.Clothes["gloves"]:
+            $ EmmaX.take_off("gloves")
             ch_e "Ok."
-        "Put your gloves on." if not EmmaX.outfit["gloves"]:
-            $ EmmaX.outfit["gloves"] = "gloves"
+        "Put your gloves on." if not EmmaX.Clothes["gloves"]:
+            $ EmmaX.Clothes["gloves"] = "gloves"
             ch_e "Ok."
         "Never mind":
             pass

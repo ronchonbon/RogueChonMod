@@ -765,7 +765,7 @@ label showering:
 
 label Shower_Sex(Options=0, line=0):
 
-    if len(staying_Girls) > 1 and (approval_check(staying_Girls[1], 1800,Check=1) > approval_check(staying_Girls[0], 1800,Check=1)):
+    if len(staying_Girls) > 1 and (approval_check(staying_Girls[1], 1800,Check = 1) > approval_check(staying_Girls[0], 1800,Check = 1)):
         $ renpy.random.shuffle(staying_Girls)
     call shift_focus (staying_Girls[0])
 
@@ -974,7 +974,7 @@ label Shower_Sex(Options=0, line=0):
     if line and len(staying_Girls) > 1:
 
         $ D20 += 5 if approval_check(staying_Girls[1], 1800) else 0
-        if staying_Girls[1].likes[staying_Girls[0].tag] <= 800 and 2 <= Options[0] <=3:
+        if staying_Girls[1].likes[staying_Girls[0].tag] <= 800 and 2 <= Options[0] < = 3:
             $ D20 -= 5
         if staying_Girls[1].likes[staying_Girls[0].tag] <= 600:
             $ D20 -= 5

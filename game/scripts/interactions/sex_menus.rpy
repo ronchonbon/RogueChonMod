@@ -192,7 +192,7 @@ label girl_sex_menu(Girl):
 
                             $ having_sex = False
                     "Could you undress for me?":
-                        call Girl_Undress(focused_Girl)
+                        call undress_Girl(focused_Girl)
                     "You've got a little something. . . " if focused_Girl.spunk:
                         call sex_menu_cleanup_lines(focused_Girl)
                         call Girl_Cleanup(focused_Girl,"ask")
@@ -427,13 +427,13 @@ label kiss_menu(Girl):
                         "Swap to [Partner.name]":
                             call shift_focus(Partner)
                         "Undress [Partner.name]":
-                            call Girl_Undress(Partner)
+                            call undress_Girl(Partner)
                         "Clean up Partner" if any(Partner.spunk):
                             call Girl_Cleanup(Partner, "ask")
                         "Never mind":
                             pass
                 "Undress [Girl.name]":
-                    call Girl_Undress(Girl)
+                    call undress_Girl(Girl)
                 "Clean up [Girl.name]" if any(Girl.spunk):
                     call Girl_Cleanup(Girl, "ask")
                 "Never mind":
@@ -497,7 +497,7 @@ label masturbation_menu(Girl):
                         "Swap to [Partner.name]":
                             call shift_focus(Partner)
                         "Undress [Partner.name]":
-                            call Girl_Undress(Partner)
+                            call undress_Girl(Partner)
                         "Clean up [Partner.name]" if any(Partner.spunk):
                             call Girl_Cleanup (Partner, "ask")
                         "Never mind":
@@ -512,7 +512,7 @@ label masturbation_menu(Girl):
 
                         return "interrupt"
                     else:
-                        call Girl_Undress(Girl)
+                        call undress_Girl(Girl)
                 "Clean up [Girl.name]" if any(Girl.spunk):
                     if "unseen" in Girl.recent_history:
                         ch_p "You've got a little something on you. . ."
@@ -595,7 +595,7 @@ label fondle_menu(Girl, action):
                                 return ["suck_breasts", "shift"]
                             "Just suck on them without asking." if action == "fondle_breasts":
                                 return ["suck_breasts", "auto"]
-                            "Pull back to fondling." if action =="suck_breasts":
+                            "Pull back to fondling." if action = = "suck_breasts":
                                 return ["fondle_breasts", "pullback"]
                             "I want to lick your pussy." if action in ["fondle_pussy", "finger_pussy"]:
                                 return ["eat_pussy", "shift"]
@@ -625,7 +625,7 @@ label fondle_menu(Girl, action):
                                     return ["dildo_ass", "shift"]
                             "Pull out and start rubbing again." if action in ["finger_ass"]:
                                 return ["fondle_ass", "pullback"]
-                            "Switch to fondling." if action =="eat_ass":
+                            "Switch to fondling." if action = = "eat_ass":
                                 return ["fondle_ass", "pullback"]
                             "Never mind":
                                 pass
@@ -650,7 +650,7 @@ label fondle_menu(Girl, action):
                         "Swap to [Partner.name]":
                             call shift_focus(Partner)
                         "Undress [Partner.name]":
-                            call Girl_Undress(Partner)
+                            call undress_Girl(Partner)
                         "Clean up [Partner.name]" if any(Partner.spunk):
                             call Girl_Cleanup(Partner,"ask")
                         "Never mind":
@@ -660,7 +660,7 @@ label fondle_menu(Girl, action):
                 "Hide her feet" if show_feet and Girl.pose in ["sex", "doggy"]:
                     $ show_feet = False
                 "Undress [Girl.name]":
-                    call Girl_Undress(Girl)
+                    call undress_Girl(Girl)
                 "Clean up [Girl.name]" if any(Girl.spunk):
                     call Girl_Cleanup(Girl,"ask")
                 "Never mind":
@@ -870,13 +870,13 @@ label handjob_menu(Girl, action):
                             "Swap to [Partner.name]":
                                 call shift_focus(Partner)
                             "Undress [Partner.name]":
-                                call Girl_Undress(Partner)
+                                call undress_Girl(Partner)
                             "Clean up [Partner.name]" if any(Partner.spunk):
                                 call Girl_Cleanup(Partner,"ask")
                             "Never mind":
                                 pass
                     "Undress [Girl.name]":
-                        call Girl_Undress(Girl)
+                        call undress_Girl(Girl)
                     "Clean up [Girl.name]" if any(Girl.spunk):
                         call Girl_Cleanup(Girl, "ask")
                     "Never mind":
@@ -978,7 +978,7 @@ label sex_menu(Girl, action):
                         "Swap to [Partner.name]":
                             call shift_focus(Partner)
                         "Undress [Partner.name]":
-                            call Girl_Undress(Partner)
+                            call undress_Girl(Partner)
                         "Clean up [Partner.name]" if any(Partner.spunk):
                             call Girl_Cleanup(Partner,"ask")
                         "Never mind":
@@ -990,7 +990,7 @@ label sex_menu(Girl, action):
                 "Hide her feet" if show_feet and Girl.pose in ["sex", "doggy"]:
                     $ show_feet = False
                 "Undress [Girl.name]":
-                    call Girl_Undress(Girl)
+                    call undress_Girl(Girl)
                 "Clean up [Girl.name]" if any(Girl.spunk):
                     call Girl_Cleanup(Girl,"ask")
                 "Never mind":
@@ -1514,7 +1514,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
             call change_Girl_stat(Girl, "obedience", 70, 3)
             call change_Girl_stat(Girl, "inhibition", 50, 3)
 
-            if not approval_check(Girl, 700, "O", taboo_modifier=1): #checks if obedience is 700+
+            if not approval_check(Girl, 700, "O", taboo_modifier = 1): #checks if obedience is 700+
                 $ Girl.change_face("angry")
 
                 call were_done_here_lines(Girl, action)
@@ -1544,7 +1544,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
             call change_Girl_stat(Girl, "obedience", 70, 3)
             call change_Girl_stat(Girl, "inhibition", 50, 3)
 
-            if not approval_check(Girl, 700, "O", taboo_modifier=1):   #checks if obedience is 700+
+            if not approval_check(Girl, 700, "O", taboo_modifier = 1):   #checks if obedience is 700+
                 $ Girl.change_face("angry")
 
                 call were_done_here_lines(Girl, action)
@@ -1571,7 +1571,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
             call change_Girl_stat(Girl, "obedience", 70, 3)
             call change_Girl_stat(Girl, "inhibition", 50, 3)
 
-            if not approval_check(Girl, 500, "O", taboo_modifier=1): #checks if obedience is 700+
+            if not approval_check(Girl, 500, "O", taboo_modifier = 1): #checks if obedience is 700+
                 $ Girl.change_face("angry")
 
                 call were_done_here_lines(Girl, action)

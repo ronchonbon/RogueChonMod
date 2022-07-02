@@ -293,7 +293,7 @@ label girls_room_entry:
                         "There's no answer, she's probably asleep."
 
                         jump reset_location
-                if (D20 >= 19 and Girl.lust >= 50) or (D20 >=15 and Girl.lust >= 70) or (D20 >=10 and Girl.lust >= 80):
+                if (D20 >= 19 and Girl.lust >= 50) or (D20 > = 15 and Girl.lust >= 70) or (D20 > = 10 and Girl.lust >= 80):
                     "You hear some soft moans, followed by some shuffling around as items tumble to the ground."
                     "After several seconds and some more shuffling of clothing, [Girl.name] comes to the door."
 
@@ -1324,43 +1324,43 @@ label study_room:
             "Chat" if time_index > 2:
                 call chat
             "Plan Omega!" if time_index < 3 and RogueX.location == Player.location and Player.level >= 5:
-                if approval_check(RogueX, 1500, taboo_modifier=1, Loc="No"):
+                if approval_check(RogueX, 1500, taboo_modifier = 1, Loc = "No"):
                     call execute_plan(RogueX)
                 else:
                     ch_r "I don't want to do that. . ."
             "Plan Kappa!" if time_index < 3 and KittyX.location == Player.location and Player.level >= 5:
-                if "Xavier's photo" in Player.inventory and approval_check(KittyX, 1500, taboo_modifier=1, Loc="No"):
+                if "Xavier's photo" in Player.inventory and approval_check(KittyX, 1500, taboo_modifier = 1, Loc = "No"):
                     call execute_plan(KittyX)
                 elif "Xavier's photo" in Player.inventory:
                     ch_k "I don't really want to do that. . ."
                 else:
                     ch_k "What?"
             "Plan Psi!" if time_index < 3 and EmmaX.location == Player.location and Player.level >= 5:
-                if approval_check(EmmaX, 1500, taboo_modifier=1, Loc="No"):
+                if approval_check(EmmaX, 1500, taboo_modifier = 1, Loc = "No"):
                     call execute_plan(EmmaX)
                 else:
                     ch_e "I'd rather not. . ."
             "Plan Chi!" if time_index < 3 and LauraX.location == Player.location and Player.level >= 5:
-                if LauraX.level >= 2 and approval_check(LauraX, 1500, taboo_modifier=1, Loc="No") and approval_check(LauraX, 750, "I"):
+                if LauraX.level >= 2 and approval_check(LauraX, 1500, taboo_modifier = 1, Loc = "No") and approval_check(LauraX, 750, "I"):
                     call execute_plan(LauraX)
                 elif LauraX.level < 2 or not approval_check(LauraX, 750, "I"):
                     ch_l "I'm not ready for that."
                 else:
                     ch_l "Huh?"
             "Plan Alpha!" if time_index < 3 and JeanX.location == Player.location and Player.level >= 5:
-                if approval_check(JeanX, 1500, taboo_modifier=1, Loc="No"):
+                if approval_check(JeanX, 1500, taboo_modifier = 1, Loc = "No"):
                     call execute_plan(JeanX)
                 else:
                     ch_j "You're on your own there."
             "Plan Rho!" if time_index < 3 and StormX.location == Player.location and Player.level >= 5:
-                if "Xavier's files" in Player.inventory and approval_check(StormX, 1500, taboo_modifier=1, Loc="No"):
+                if "Xavier's files" in Player.inventory and approval_check(StormX, 1500, taboo_modifier = 1, Loc = "No"):
                     call execute_plan(StormX)
                 elif "Xavier's files" in Player.inventory:
                     ch_s "I do not believe that would be approrpriate."
                 else:
                     ch_s "What is that?"
             "Plan Zeta!" if time_index < 3 and JubesX.location == Player.location and Player.level >= 5:
-                if approval_check(JubesX, 1500, taboo_modifier=1, Loc="No"):
+                if approval_check(JubesX, 1500, taboo_modifier = 1, Loc = "No"):
                     call execute_plan(JubesX)
                 else:
                     ch_v "What's a \"Zeta?\""

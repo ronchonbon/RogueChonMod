@@ -487,7 +487,6 @@ label vibrator_check(Girl):
 
 label check_if_cheated:
     $ temp_Girls = all_Girls[:]
-
     $ renpy.random.shuffle(temp_Girls)
 
     while temp_Girls:

@@ -32,11 +32,11 @@ label forced_approval_checks(Girl, action):
 
 label action_approval_checks(Girl, action):
     if action == "kiss":
-        $ approval = approval_check(Girl, 700, taboo_modifier=1,Alt=[[RogueX,JeanX],500])
+        $ approval = approval_check(Girl, 700, taboo_modifier = 1,Alt=[[RogueX,JeanX],500])
     elif action == "masturbation":
         $ approval = approval_check(Girl, 1200, taboo_modifier = 2)
     elif action == "fondle_thighs":
-        $ approval = approval_check(Girl, 750, taboo_modifier=1)
+        $ approval = approval_check(Girl, 750, taboo_modifier = 1)
     elif action == "fondle_breasts":
         $ approval = approval_check(Girl, 950, taboo_modifier = 3)
     elif action == "suck_breasts":
@@ -55,7 +55,7 @@ label action_approval_checks(Girl, action):
     elif action == "eat_pussy":
         $ approval = approval_check(Girl, 1250, taboo_modifier = 4) # 125, 140, 155, taboo -160(285)
     elif action == "fondle_ass":
-        $ approval = approval_check(Girl, 850, taboo_modifier=1, Alt = [[StormX], 750]) # 85, 100, 115, taboo -40(125)
+        $ approval = approval_check(Girl, 850, taboo_modifier = 1, Alt = [[StormX], 750]) # 85, 100, 115, taboo -40(125)
     elif action == "finger_ass":
         $ approval = approval_check(Girl, 1300, taboo_modifier = 3) # 130, 145, 160, taboo -120(250)
     elif action == "eat_ass":

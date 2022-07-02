@@ -65,7 +65,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 ch_e "Not with this sort of company. . ."
                 return
 
-    if not Girl.outfit["top"] and not Girl.outfit["bra"] and not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and (not Girl.outfit["jacket"] or Girl != JubesX):
+    if not Girl.Clothes["top"] and not Girl.Clothes["bra"] and not Girl.Clothes["bottom"] and not Girl.Clothes["underwear"] and (not Girl.Clothes["jacket"] or Girl != JubesX):
 
         $ Girl.change_face("sly")
         if Girl == RogueX:
@@ -92,49 +92,49 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
             menu:
                 extend ""
-                "Take it all off?" if (Girl.outfit["top"] or Girl.outfit["bra"]) and (Girl.outfit["bottom"] or Girl.outfit["underwear"] or Girl.outfit["hose"]):
-                    if Girl.outfit["top"] == "towel" and not Girl.outfit["bottom"] and not Girl.outfit["hose"] and not Girl.outfit["underwear"]:
+                "Take it all off?" if (Girl.Clothes["top"] or Girl.Clothes["bra"]) and (Girl.Clothes["bottom"] or Girl.Clothes["underwear"] or Girl.Clothes["hose"]):
+                    if Girl.Clothes["top"] == "towel" and not Girl.Clothes["bottom"] and not Girl.Clothes["hose"] and not Girl.Clothes["underwear"]:
                         $ Type = "no_panties"
-                    elif (Girl.outfit["bottom"] or Girl.outfit["hose"]) and not Girl.outfit["underwear"]:
+                    elif (Girl.Clothes["bottom"] or Girl.Clothes["hose"]) and not Girl.Clothes["underwear"]:
                         $ Type = "no_panties"
-                    elif Girl.outfit["top"] and not Girl.outfit["bra"]:
+                    elif Girl.Clothes["top"] and not Girl.Clothes["bra"]:
                         $ Type = "no_bra"
                     else:
                         $ Type = "both"
                     $ Mod = 200
 
-                "lose the top?" if Girl.outfit["bra"] and not Girl.outfit["top"]:
+                "lose the top?" if Girl.Clothes["bra"] and not Girl.Clothes["top"]:
                     $ Type = "bra"
 
-                "maybe just lose the jacket?" if Girl.outfit["jacket"] and Girl == JubesX:
-                    if Girl.outfit["jacket"] == "closed_jacket" and not Girl.outfit["bottom"] and not Girl.outfit["hose"] and not Girl.outfit["underwear"]:
+                "maybe just lose the jacket?" if Girl.Clothes["jacket"] and Girl == JubesX:
+                    if Girl.Clothes["jacket"] == "closed_jacket" and not Girl.Clothes["bottom"] and not Girl.Clothes["hose"] and not Girl.Clothes["underwear"]:
                         $ Type = "no_panties"
-                    elif Girl.outfit["jacket"] == "closed_jacket" and not Girl.outfit["top"] and not Girl.outfit["bra"]:
+                    elif Girl.Clothes["jacket"] == "closed_jacket" and not Girl.Clothes["top"] and not Girl.Clothes["bra"]:
                         $ Type = "no_bra"
                     else:
                         $ Type = "jacket"
 
-                "maybe just lose the [Girl.outfit[top]]?" if Girl.outfit["top"]:
-                    if Girl.outfit["top"] == "towel" and not Girl.outfit["bottom"] and not Girl.outfit["hose"] and not Girl.outfit["underwear"]:
+                "maybe just lose the [Girl.Clothes[top].name]?" if Girl.Clothes["top"]:
+                    if Girl.Clothes["top"] == "towel" and not Girl.Clothes["bottom"] and not Girl.Clothes["hose"] and not Girl.Clothes["underwear"]:
                         $ Type = "no_panties"
-                    elif not Girl.outfit["bra"]:
+                    elif not Girl.Clothes["bra"]:
                         $ Type = "no_bra"
                     else:
                         $ Type = "over"
 
-                "maybe just lose the [Girl.outfit[bottom]]?" if Girl.outfit["bottom"]:
-                    if not Girl.outfit["underwear"]:
+                "maybe just lose the [Girl.Clothes[bottom].name]?" if Girl.Clothes["bottom"]:
+                    if not Girl.Clothes["underwear"]:
                         $ Type = "no_panties"
                     else:
                         $ Type = "legs"
 
-                "maybe just lose the [Girl.outfit[hose]]?" if Girl.outfit["hose"] and not Girl.outfit["bottom"]:
-                    if not Girl.outfit["underwear"]:
+                "maybe just lose the [Girl.Clothes[hose].name]?" if Girl.Clothes["hose"] and not Girl.Clothes["bottom"]:
+                    if not Girl.Clothes["underwear"]:
                         $ Type = "no_panties"
                     else:
                         $ Type = "legs"
 
-                "maybe just lose the [Girl.outfit[underwear]]?" if Girl.outfit["underwear"]:
+                "maybe just lose the [Girl.Clothes[underwear].name]?" if Girl.Clothes["underwear"]:
                     $ Type = "panties"
                     $ Mod = 200
                 "never mind.":
@@ -337,11 +337,11 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
             if line == "sure":
 
-                $ Girl.outfit["top"] = ""
+                $ Girl.take_off("top")
                 call expression Girl.tag + "_First_Topless"
                 if Type == "no_panties":
                     $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
-                    $ Girl.outfit["hose"] = ""
+                    $ Girl.take_off("hose")
                     call expression Girl.tag + "_First_Bottomless"
                 $ Girl.add_word(1,"tan","tan")
             else:
@@ -375,18 +375,18 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
             if Type == "jacket" or Type == "both":
                 if Girl == JubesX:
-                    $ Girl.outfit["jacket"] = ""
+                    $ Girl.take_off("jacket")
             if Type == "over" or Type == "both":
-                $ Girl.outfit["top"] = ""
+                $ Girl.take_off("top")
             if Type == "bra" or Type == "both":
-                $ Girl.outfit["bra"] = ""
+                $ Girl.take_off("bra")
             call expression Girl.tag + "_First_Topless"
 
             if Type == "legs" or Type == "both":
                 $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
-                $ Girl.outfit["hose"] = ""
+                $ Girl.take_off("hose")
             if Type == "panties" or Type == "both":
-                $ Girl.outfit["underwear"] = ""
+                $ Girl.take_off("underwear")
             call expression Girl.tag + "_First_Bottomless"
 
             $ Girl.add_word(1,"tan","tan")
@@ -415,12 +415,12 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 ch_v "Sure. . ."
 
             if Type == "jacket":
-                $ Girl.outfit["jacket"] = ""
+                $ Girl.take_off("jacket")
             if Type == "over":
-                $ Girl.outfit["top"] = ""
+                $ Girl.take_off("top")
             if Type == "legs":
                 $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
-                $ Girl.outfit["hose"] = ""
+                $ Girl.take_off("hose")
             $ Girl.add_word(1,"tan","tan")
 
         elif line == "sorry":
@@ -470,7 +470,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
             $ Girl.add_word(1,"no_tan","no_tan")
             return
-        if not Girl.outfit["bra"] and not Girl.outfit["top"] and not Girl.outfit["underwear"] and not Girl.outfit["bottom"] and Girl.outfit["hose"] != "pantyhose":
+        if not Girl.Clothes["bra"] and not Girl.Clothes["top"] and not Girl.Clothes["underwear"] and not Girl.Clothes["bottom"] and Girl.Clothes["hose"] != "pantyhose":
             $ Girl.change_Outfit("nude")
         $ Mod = 0
         $ line = 0
@@ -609,13 +609,13 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                 ch_v "Sure!"
 
 
-            $ Girl.outfit["top"] = ""
-            $ Girl.outfit["bra"] = ""
+            $ Girl.take_off("top")
+            $ Girl.take_off("bra")
             call expression Girl.tag + "_First_Topless"
 
             $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
-            $ Girl.outfit["hose"] = ""
-            $ Girl.outfit["underwear"] = ""
+            $ Girl.take_off("hose")
+            $ Girl.take_off("underwear")
             call expression Girl.tag + "_First_Bottomless"
             $ Girl.change_Outfit("nude")
             $ Girl.add_word(1,"dip","dip")
@@ -684,7 +684,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                                 if Girl.bra_number() > 2 and Girl.underwear_number() > 2 and approval_check(Girl, 1000):
 
                                     pass
-                                elif Girl.outfit["bra"] and Girl.outfit["underwear"] and approval_check(Girl, 1200):
+                                elif Girl.Clothes["bra"] and Girl.Clothes["underwear"] and approval_check(Girl, 1200):
 
                                     pass
                                 else:
@@ -711,10 +711,10 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                                 Girl.voice "Thanks."
                                 $ Girl.add_word(1,"no_dip","no_dip")
                                 return
-                        $ Girl.outfit["top"] = ""
+                        $ Girl.take_off("top")
                         "She starts to strip down."
                         $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
-                        $ Girl.outfit["hose"] = ""
+                        $ Girl.take_off("hose")
                         "And ends up in her underwear."
                         $ Girl.seen_underwear = 1
                 "Never mind then.":
@@ -971,8 +971,8 @@ label swim:
         "You decide to make use of the diving board. You do a couple of dives before taking it easy and just swimming around."
 
     call who_likes_who (80, 3)
-    call RoomStatboost ("love", 80, 3)
-    call RoomStatboost ("lust", 30, 5)
+    call change_Present_stat ("love", 80, 3)
+    call change_Present_stat ("lust", 30, 5)
 
     $ round -= 20 if round >= 20 else round
 

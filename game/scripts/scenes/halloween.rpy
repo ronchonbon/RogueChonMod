@@ -277,7 +277,7 @@ label Halloween_Party_entry(HWEvents=[], halloween_costume=0, HWline=[]):
 
     $ Present.append(RogueX)
     $ RogueX.location = "bg_halloween"
-    $ RogueX.add_word(1, 0,RogueX.outfit["hair"], 0,"halloween")
+    $ RogueX.add_word(1, 0,RogueX.Clothes["hair"], 0,"halloween")
     $ RogueX.outfitday = "costume"
     $ RogueX.outfit_name = RogueX.outfitday
     $ RogueX.change_Outfit()
@@ -438,7 +438,7 @@ label Halloween_Party_entry(HWEvents=[], halloween_costume=0, HWline=[]):
 
     $ Present.append(KittyX)
     $ KittyX.location = "bg_halloween"
-    $ KittyX.add_word(1, 0,KittyX.outfit["hair"], 0,"halloween")
+    $ KittyX.add_word(1, 0,KittyX.Clothes["hair"], 0,"halloween")
     $ KittyX.outfitday = "costume"
     $ KittyX.outfit_name = KittyX.outfitday
     $ KittyX.change_Outfit()
@@ -607,7 +607,7 @@ label Halloween_Party_entry(HWEvents=[], halloween_costume=0, HWline=[]):
 
     $ Present.append(LauraX)
     $ LauraX.location = "bg_halloween"
-    $ LauraX.add_word(1, 0,LauraX.outfit["hair"], 0,"halloween")
+    $ LauraX.add_word(1, 0,LauraX.Clothes["hair"], 0,"halloween")
     $ LauraX.outfitday = "costume"
     $ LauraX.outfit_name = LauraX.outfitday
     $ LauraX.change_Outfit()
@@ -777,11 +777,11 @@ label Halloween_Party_entry(HWEvents=[], halloween_costume=0, HWline=[]):
             call HWchange_stat (LauraX, "love", 90, 1)
             ch_l "Oh?"
             $ LauraX.change_face("smile")
-            $ LauraX.outfit["suspenders"] = "suspenders2"
+            $ LauraX.Clothes["suspenders"] = "suspenders2"
             call HWchange_stat (LauraX, "inhibition", 50, 1)
             call HWchange_stat (LauraX, "inhibition", 60, 1)
             ch_l "Yeah. . ."
-            $ LauraX.outfit["suspenders"] = "suspenders"
+            $ LauraX.Clothes["suspenders"] = "suspenders"
         "How is that different from your normal look?":
             $ LauraX.change_face("normal", eyes = "down")
             call HWchange_stat (LauraX, "love", 80, -1)
@@ -829,7 +829,7 @@ label Halloween_Jean:
 
     $ Present.append(JeanX)
     $ JeanX.location = "bg_halloween"
-    $ JeanX.add_word(1, 0,JeanX.outfit["hair"], 0,"halloween")
+    $ JeanX.add_word(1, 0,JeanX.Clothes["hair"], 0,"halloween")
     $ JeanX.outfitday = "costume"
     $ JeanX.outfit_name = JeanX.outfitday
     $ JeanX.change_Outfit()
@@ -1084,7 +1084,7 @@ label Halloween_Jean:
     $ Present.append(StormX)
     $ StormX.change_face("smile")
     $ StormX.location = "bg_halloween"
-    $ StormX.add_word(1, 0,StormX.outfit["hair"], 0,"halloween")
+    $ StormX.add_word(1, 0,StormX.Clothes["hair"], 0,"halloween")
     $ StormX.outfitday = "costume"
     $ StormX.outfit_name = StormX.outfitday
     $ StormX.change_Outfit()
@@ -1251,7 +1251,7 @@ label Halloween_Emma:
     $ Present.append(EmmaX)
     $ EmmaX.location = "bg_halloween"
     $ EmmaX.change_face("smile")
-    $ EmmaX.add_word(1, 0,EmmaX.outfit["hair"], 0,"halloween")
+    $ EmmaX.add_word(1, 0,EmmaX.Clothes["hair"], 0,"halloween")
     $ EmmaX.outfitday = "costume"
     $ EmmaX.outfit_name = EmmaX.outfitday
     $ EmmaX.change_Outfit()

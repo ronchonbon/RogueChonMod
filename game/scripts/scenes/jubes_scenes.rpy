@@ -1324,7 +1324,7 @@ label Jubes_BF(temp_Girls=[]):
                     call change_Girl_stat(JubesX, "love", 200, -5)
                     call change_Girl_stat(JubesX, "obedience", 80, 7)
                     $ JubesX.change_face("angry", 1,eyes = "side")
-                    call Haremchange_stat (JubesX, 700, -20)
+                    call change_Harem_stat (JubesX, 700, -20)
                     ch_v "Bitches."
                 "It's. . . complicated.":
                     call change_Girl_stat(JubesX, "love", 200, -20)
@@ -1335,7 +1335,7 @@ label Jubes_BF(temp_Girls=[]):
                     $ JubesX.change_face("angry", 1,eyes = "side")
                     if len(Player.Harem) >= 2:
                         ch_v "Probably those bitches."
-                        call Haremchange_stat (JubesX, 700, -10)
+                        call change_Harem_stat (JubesX, 700, -10)
                     elif Player.Harem:
                         ch_v "Probably because of her."
                         $ JubesX.check_if_likes(Player.Harem[0],800,-20, 1)
@@ -1393,7 +1393,7 @@ label Jubes_BF(temp_Girls=[]):
                         call change_Girl_stat(JubesX, "love", 200, -10)
                         call change_Girl_stat(JubesX, "obedience", 80, 10)
                         $ JubesX.change_face("angry", 1)
-                        call Haremchange_stat (JubesX, 700, -10)
+                        call change_Harem_stat (JubesX, 700, -10)
                         ch_v "Eh, I'll pass."
                     else:
                         call change_Girl_stat(JubesX, "love", 200,5)
@@ -1404,7 +1404,7 @@ label Jubes_BF(temp_Girls=[]):
                 "What? Of course not.":
                     call change_Girl_stat(JubesX, "love", 200, -25)
                     call change_Girl_stat(JubesX, "obedience", 80, 5)
-                    call Haremchange_stat (JubesX, 700, -20)
+                    call change_Harem_stat (JubesX, 700, -20)
                     $ JubesX.change_face("angry", 1)
                     ch_v "Well, fine then."
                     $ line = "no"
@@ -1439,7 +1439,7 @@ label Jubes_BF(temp_Girls=[]):
                 call remove_Girl(JubesX)
                 $ line = 0
                 return
-        call Haremchange_stat (JubesX, 900, 20)
+        call change_Harem_stat (JubesX, 900, 20)
 
 
     if not simulation:
@@ -1538,7 +1538,7 @@ label Jubes_Cleanhouse:
         call change_Girl_stat(JubesX, "love", 200, -10)
         call change_Girl_stat(JubesX, "obedience", 80, 10)
         $ JubesX.change_face("angry", 1)
-        call Haremchange_stat (JubesX, 700, -15)
+        call change_Harem_stat (JubesX, 700, -15)
         ch_v "No, this is bullshit, never mind."
     else:
         call change_Girl_stat(JubesX, "love", 200, 5)
@@ -1552,7 +1552,7 @@ label Jubes_Cleanhouse:
                 $ Player.traits.remove("JubesYes")
             $ JubesX.player_petnames.append("boyfriend")
             call Harem_Initiation
-            call Haremchange_stat (JubesX, 900, 20)
+            call change_Harem_stat (JubesX, 900, 20)
             $ JubesX.event_happened[5] = 20
     return
 

@@ -947,7 +947,7 @@ label addiction_ultimatum:
                     "How about you let me touch your breasts?":
                         $ stored_count = approval_bonus
 
-                        call Top_Off (Girl, 2)
+                        call top_off (Girl, 2)
 
                         $ approval_bonus = stored_count
 

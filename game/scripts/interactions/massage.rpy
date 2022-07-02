@@ -230,8 +230,8 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
     return
 
 label Massage_Prep(Girl=focused_Girl, Current=0, Past=0, MCount=0):
-    call Top_Off (Girl, "massage")
-    if not Girl.outfit["top"] and "no_topless" not in Girl.recent_history:
+    call top_off (Girl, "massage")
+    if not Girl.Clothes["top"] and "no_topless" not in Girl.recent_history:
         call change_Girl_stat(Girl, "obedience", 50, 3)
         call change_Girl_stat(Girl, "inhibition", 50, 3)
     elif Girl.forced:
@@ -286,9 +286,9 @@ label Massage_Prep(Girl=focused_Girl, Current=0, Past=0, MCount=0):
             elif Girl == StormX:
                 ch_s "So long as I get some skin contact from this. . ."
             elif Girl == JubesX:
-                ch_v "But you know, give me som contact after."
-                if Girl.outfit["jacket"] and Girl.outfit["top"]:
-                    $ Girl.outfit["jacket"] = ""
+                ch_v "But you know, give me some contact after."
+                if Girl.Clothes["jacket"] and Girl.Clothes["top"]:
+                    $ Girl.take_off("jacket")
                     "She does take off the jacket though."
     if "angry" in Girl.recent_history:
         return
@@ -401,7 +401,7 @@ label Massage_Cycle:
                 $ Past = Current
                 $ Current = "feet"
             "Her clothes":
-                call Girl_Undress (Girl)
+                call undress_Girl (Girl)
                 jump Massage_Choices
             "I don't have time for this. [[Auto]":
                 menu:
@@ -486,7 +486,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "_'s " +Current
 
-            if not Girl.outfit["top"]:
+            if not Girl.Clothes["top"]:
                 $ Girl.addiction -= 3
         elif Current == "back":
             if Past in ("neck", "shoulders", "breasts", "hips"):
@@ -509,9 +509,9 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "_'s " +Current
 
-            if not Girl.outfit["top"]:
+            if not Girl.Clothes["top"]:
                 $ Girl.addiction -= 2
-            if not Girl.outfit["bra"]:
+            if not Girl.Clothes["bra"]:
                 $ Girl.addiction -= 2
         elif Current == "breasts":
             if Past == "back":
@@ -536,7 +536,7 @@ label Massage_Cycle:
                 call change_Girl_stat(Girl, "lust", 200, 2)
                 $ line = "You continue to rub " +Girl.name+ "_'s " +Current
 
-            if not Girl.outfit["top"] and not Girl.outfit["bra"]:
+            if not Girl.Clothes["top"] and not Girl.Clothes["bra"]:
                 $ Girl.addiction -= 5
         elif Current == "arms":
             if Past == "shoulders":
@@ -562,7 +562,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "_'s " +Current
 
-            if Girl.outfit["top"] not in ("mesh_top", "pink_top", "jacket"):
+            if Girl.Clothes["top"] not in ("mesh_top", "pink_top", "jacket"):
                 $ Girl.addiction -= 3
         elif Current == "hands":
             if Past == "arms":
@@ -608,7 +608,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "_'s " +Current
 
-            if not Girl.outfit["bottom"] and Girl.outfit["hose"] != "pantyhose":
+            if not Girl.Clothes["bottom"] and Girl.Clothes["hose"] != "pantyhose":
                 $ Girl.addiction -= 1
         elif Current == "ass":
             if Past in ("back", "hips"):
@@ -636,7 +636,7 @@ label Massage_Cycle:
                 call change_Girl_stat(Girl, "lust", 90, 2)
                 $ line = "You continue to massage " +Girl.name+ "_'s " +Current
 
-            if not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and Girl.outfit["hose"] != "pantyhose":
+            if not Girl.Clothes["bottom"] and not Girl.Clothes["underwear"] and Girl.Clothes["hose"] != "pantyhose":
                 $ Girl.addiction -= 3
         elif Current == "pussy":
             if Past in ("hips", "ass"):
@@ -664,7 +664,7 @@ label Massage_Cycle:
                 call change_Girl_stat(Girl, "lust", 200, 3)
                 $ line = "You continue to rub " +Girl.name+ "_'s " +Current
 
-            if not Girl.outfit["bottom"] and not Girl.outfit["underwear"] and Girl.outfit["hose"] != "pantyhose":
+            if not Girl.Clothes["bottom"] and not Girl.Clothes["underwear"] and Girl.Clothes["hose"] != "pantyhose":
                 $ Girl.addiction -= 5
         elif Current == "thighs":
             if Past == "calves":
@@ -690,7 +690,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "_'s " +Current
 
-            if Girl.bottom_number() <= 6 and Girl.outfit["hose"] != "pantyhose":
+            if Girl.bottom_number() <= 6 and Girl.Clothes["hose"] != "pantyhose":
                 $ Girl.addiction -= 3
         elif Current == "calves":
             if Past == "feet":
@@ -716,7 +716,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to massage " +Girl.name+ "_'s " +Current
 
-            if Girl.bottom_number() <= 6 and Girl.outfit["hose"] != "pantyhose":
+            if Girl.bottom_number() <= 6 and Girl.Clothes["hose"] != "pantyhose":
                 $ Girl.addiction -= 2
         elif Current == "feet":
             if Past == "calves":
@@ -739,7 +739,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ line = "You continue to rub " +Girl.name+ "_'s " +Current
 
-            if Girl.outfit["boots"] != "boots" and Girl.outfit["hose"] != "pantyhose":
+            if Girl.Clothes["boots"] != "boots" and Girl.Clothes["hose"] != "pantyhose":
                 $ Girl.addiction -= 3
 
 
@@ -968,7 +968,7 @@ label Massage_BadEnd:
     if "massagefail" in Girl.recent_history:
 
         $ Girl.action_counter["massage"] += 1
-        $ Girl.remaining_actions -=1
+        $ Girl.remaining_actions - = 1
         $ Girl.addiction_rate += 2 if Girl.addiction_rate < 5 else Girl.addiction_rate
         if "addictive" in Player.traits:
             $ Girl.addiction_rate += 1

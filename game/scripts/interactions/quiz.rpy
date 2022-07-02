@@ -13,7 +13,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
 
 
     if Player.Party[0] == RogueX:
-        if not RogueX.outfit["top"] and not RogueX.outfit["bottom"] and RogueX.underwear_number <= 5:
+        if not RogueX.Clothes["top"] and not RogueX.Clothes["bottom"] and RogueX.underwear_number <= 5:
 
             $ RogueX.change_face("sly")
             ch_r "Well, I did consider suggesting we do some \"strip studying,\". . ."
@@ -28,7 +28,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
         ch_r "Get three wrong, and we're done for the night. Good luck."
     elif Player.Party[0] == KittyX:
         "[KittyX.name] takes the book from your hand, and sets it aside."
-        if not KittyX.outfit["top"] and not KittyX.outfit["bottom"]:
+        if not KittyX.Clothes["top"] and not KittyX.Clothes["bottom"]:
 
             $ KittyX.change_face("sly")
             ch_k "I was[KittyX.like]thinking about maybe \"strip studying,\". . ."
@@ -149,7 +149,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
         ch_s "You get three mistakes, make them count."
     elif Player.Party[0] == JubesX:
         "[JubesX.name] takes the book from your hand, and sets it aside."
-        if not JubesX.outfit["top"] and not JubesX.outfit["bottom"]:
+        if not JubesX.Clothes["top"] and not JubesX.Clothes["bottom"]:
 
             $ JubesX.change_face("sly")
             ch_v "I was thinking of maybe doing some \"strip studying,\". . ."
@@ -250,23 +250,23 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
 
 
 label Strip_Study_Right:
-    if Player.Party[0].outfit["hose"]:
+    if Player.Party[0].Clothes["hose"]:
 
-        $ line = Player.Party[0].outfit["hose"]
-        $ Player.Party[0].outfit["hose"] = ""
+        $ line = Player.Party[0].Clothes["hose"]
+        $ Player.Party[0].take_off("hose")
         "She slowly removes her [line]. . ."
         call change_Girl_stat(Player.Party[0], "lust", 50, 3)
         return
 
-    if Player.Party[0].outfit["top"]:
+    if Player.Party[0].Clothes["top"]:
 
-        if Player.Party[0] == StormX or Player.Party[0].seen_breasts or (Player.Party[0].outfit["bra"] and approval_check(Player.Party[0], 300)) or approval_check(Player.Party[0], 850):
+        if Player.Party[0] == StormX or Player.Party[0].seen_breasts or (Player.Party[0].Clothes["bra"] and approval_check(Player.Party[0], 300)) or approval_check(Player.Party[0], 850):
             call change_Girl_stat(Player.Party[0], "inhibition", 25, 1)
             call change_Girl_stat(Player.Party[0], "inhibition", 50, 1)
-            $ line = Player.Party[0].outfit["top"]
-            $ Player.Party[0].outfit["top"] = ""
+            $ line = Player.Party[0].Clothes["top"]
+            $ Player.Party[0].take_off("top")
             "She pulls her [line] off and throws it aside."
-            if not Player.Party[0].outfit["bra"]:
+            if not Player.Party[0].Clothes["bra"]:
                 call expression Player.Party[0].tag + "_First_Topless"
         else:
             if Player.Party[0] == RogueX:
@@ -288,16 +288,16 @@ label Strip_Study_Right:
             $ between_event_count = 0
         return
 
-    if Player.Party[0].outfit["bottom"]:
+    if Player.Party[0].Clothes["bottom"]:
 
-        if Player.Party[0] == StormX or (Player.Party[0].seen_underwear and Player.Party[0].seen_pussy) or (Player.Party[0].outfit["underwear"] and (approval_check(Player.Party[0], 700) or Player.Party[0].seen_underwear)) or approval_check(Player.Party[0], 950):
+        if Player.Party[0] == StormX or (Player.Party[0].seen_underwear and Player.Party[0].seen_pussy) or (Player.Party[0].Clothes["underwear"] and (approval_check(Player.Party[0], 700) or Player.Party[0].seen_underwear)) or approval_check(Player.Party[0], 950):
             call change_Girl_stat(Player.Party[0], "lust", 50, 5)
             call change_Girl_stat(Player.Party[0], "inhibition", 30, 1)
             call change_Girl_stat(Player.Party[0], "inhibition", 50, 1)
-            $ line = Player.Party[0].outfit["bottom"]
+            $ line = Player.Party[0].Clothes["bottom"]
             $ Player.Party[0].Outfit.remove_Clothing(["pants", "skirt"])
             "She unfastens her [line] and slides them down her legs."
-            if Player.Party[0].outfit["underwear"]:
+            if Player.Party[0].Clothes["underwear"]:
                 if not Player.Party[0].seen_underwear:
                     call change_Girl_stat(Player.Party[0], "inhibition", 200, 2)
                     call change_Girl_stat(Player.Party[0], "inhibition", 50, 3)
@@ -323,13 +323,13 @@ label Strip_Study_Right:
             $ between_event_count = 0
         return
 
-    if Player.Party[0].outfit["bra"]:
+    if Player.Party[0].Clothes["bra"]:
         if Player.Party[0] == StormX or approval_check(Player.Party[0], 900) or (Player.Party[0].seen_breasts and approval_check(Player.Party[0], 600)):
             call change_Girl_stat(Player.Party[0], "lust", 60, 5)
             call change_Girl_stat(Player.Party[0], "inhibition", 50, 2)
             call change_Girl_stat(Player.Party[0], "inhibition", 200, 1)
-            $ line = Player.Party[0].outfit["bra"]
-            $ Player.Party[0].outfit["bra"] = ""
+            $ line = Player.Party[0].Clothes["bra"]
+            $ Player.Party[0].take_off("bra")
             "She pulls her [line] over her head and tosses it aside."
             if not Player.Party[0].seen_breasts:
                 call change_Girl_stat(Player.Party[0], "inhibition", 200, 3)
@@ -355,13 +355,13 @@ label Strip_Study_Right:
             $ between_event_count = 0
         return
 
-    if Player.Party[0].outfit["underwear"]:
+    if Player.Party[0].Clothes["underwear"]:
         if Player.Party[0] == StormX or approval_check(Player.Party[0], 950) or (Player.Party[0].seen_pussy and approval_check(Player.Party[0], 600)):
             call change_Girl_stat(Player.Party[0], "lust", 70, 10)
             call change_Girl_stat(Player.Party[0], "inhibition", 70, 2)
             call change_Girl_stat(Player.Party[0], "inhibition", 200, 2)
-            $ line = Player.Party[0].outfit["underwear"]
-            $ Player.Party[0].outfit["underwear"] = ""
+            $ line = Player.Party[0].Clothes["underwear"]
+            $ Player.Party[0].take_off("underwear")
             "She slides her [line] off, leaving her pussy bare."
             if not Player.Party[0].seen_pussy:
                 call change_Girl_stat(Player.Party[0], "inhibition", 50, 4)
@@ -1325,7 +1325,7 @@ label Emma_StripStudy_Intro:
     if Player.Party[0] != EmmaX:
         $ Player.Party.reverse()
     call shift_focus (Player.Party[0])
-    if not EmmaX.outfit["top"] and not EmmaX.outfit["bottom"]:
+    if not EmmaX.Clothes["top"] and not EmmaX.Clothes["bottom"]:
 
         $ EmmaX.change_face("sly")
         ch_e "I was considering some way of. . . motivating you. . ."

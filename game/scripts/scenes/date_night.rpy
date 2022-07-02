@@ -2162,17 +2162,17 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
     else:
         $ GirlBonus = Date_Bonus[1] + Date_Cost[1]
 
-    if Girl.action_counter["anal"] and approval_check(Girl, 1500) and GirlBonus >=15:
+    if Girl.action_counter["anal"] and approval_check(Girl, 1500) and GirlBonus > = 15:
         $ OptionsDS.append("anal")
-    if Girl.action_counter["sex"] and approval_check(Girl, 1500) and GirlBonus >=10:
+    if Girl.action_counter["sex"] and approval_check(Girl, 1500) and GirlBonus > = 10:
         $ OptionsDS.append("sex")
-    if Girl.action_counter["blowjob"] and approval_check(Girl, 1300) and GirlBonus >=10:
+    if Girl.action_counter["blowjob"] and approval_check(Girl, 1300) and GirlBonus > = 10:
         $ OptionsDS.append("blowjob")
-    if Girl.action_counter["handjob"] and approval_check(Girl, 1000) and GirlBonus >=10:
+    if Girl.action_counter["handjob"] and approval_check(Girl, 1000) and GirlBonus > = 10:
         $ OptionsDS.append("handjob")
-    if Girl.action_counter["fondle_pussy"] and approval_check(Girl, 1000) and GirlBonus >=10:
+    if Girl.action_counter["fondle_pussy"] and approval_check(Girl, 1000) and GirlBonus > = 10:
         $ OptionsDS.append("pussy")
-    if approval_check(Girl, 1000) and GirlBonus >=10:
+    if approval_check(Girl, 1000) and GirlBonus > = 10:
         $ OptionsDS.append("footjob")
 
     $ renpy.random.shuffle(OptionsDS)
@@ -2422,8 +2422,8 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
         call check_if_second_minds (Girl, Previous)
         if _return == 4:
 
-            if Girl.outfit["bottom"]:
-                "She takes your hand and pulls it over to her crotch, shoving it under her [Girl.outfit['bottom']]."
+            if Girl.Clothes["bottom"]:
+                "She takes your hand and pulls it over to her crotch, shoving it under her [Girl.Clothes[bottom].name]."
             else:
                 "She takes your hand and shoves it into her crotch."
             $ Girl.change_face("sadside", 2)
@@ -2432,8 +2432,8 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             call change_Girl_stat(Girl, "inhibition", 80, -5)
             call Date_Bonus (Girl, -3)
         else:
-            if Girl.outfit["bottom"]:
-                "She takes your hand and pulls it over to her crotch, shoving it under her [Girl.outfit['bottom']]."
+            if Girl.Clothes["bottom"]:
+                "She takes your hand and pulls it over to her crotch, shoving it under her [Girl.Clothes[bottom].name]."
             else:
                 "She takes your hand and shoves it into her crotch."
             "You can feel that she's warm as a furnace."
@@ -2967,7 +2967,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             $ OptionsDS.append("handjob")
         if Girl.action_counter["fondle_pussy"] and approval_check(Girl, 900, Bonus=(10*GirlBonus)):
             $ OptionsDS.append("pussy")
-        elif approval_check(Girl, 1200, Bonus=(5*GirlBonus)) and Girl.outfit["underwear"]:
+        elif approval_check(Girl, 1200, Bonus=(5*GirlBonus)) and Girl.Clothes["underwear"]:
             $ OptionsDS.append("panties")
         elif approval_check(Girl, 1200, Bonus=(5*GirlBonus)):
             $ OptionsDS.append("flash")
@@ -2977,7 +2977,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
 
         if OptionsDS[0] == "anal":
             $ Girl.change_face("sexy", 1)
-            if Girl.outfit["underwear"]:
+            if Girl.Clothes["underwear"]:
                 "As you make out, [Girl.name] reaches down and undoes your fly. She pulls her panties aside and shifts into your lap."
             else:
                 "As you make out, [Girl.name] reaches down and undoes your fly. She hikes her skirt up a bit and shifts into your lap."
@@ -2993,7 +2993,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 $ Girl.check_if_likes(Previous, 1000,3, 1)
                 $ Previous.check_if_likes(Girl, 1000, 2, 1)
             if Girl.event_counter["anal_creampied"]:
-                if Girl.outfit["underwear"]:
+                if Girl.Clothes["underwear"]:
                     "After several minutes of this, you can't take it anymore and come inside her."
                     "She pulls her panties back up and returns to her seat."
                 else:
@@ -3042,7 +3042,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             $ Girl.daily_history.append("anal")
         elif OptionsDS[0] == "sex":
             $ Girl.change_face("sexy", 1)
-            if Girl.outfit["underwear"]:
+            if Girl.Clothes["underwear"]:
                 "As you make out, [Girl.name] reaches down and undoes your fly. She pulls her panties aside and shifts into your lap."
             else:
                 "As you make out, [Girl.name] reaches down and undoes your fly. She hikes her skirt up a bit and shifts into your lap."
@@ -3058,7 +3058,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 $ Girl.check_if_likes(Previous, 1000,3, 1)
                 $ Previous.check_if_likes(Girl, 1000, 2, 1)
             if Girl.event_counter["creampied"]:
-                if Girl.outfit["underwear"]:
+                if Girl.Clothes["underwear"]:
                     "After several minutes of this, you can't take it anymore and come inside her."
                     "She pulls her panties up over her dripping slit and returns to her seat."
                 else:
@@ -3190,11 +3190,11 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
 
                     "You also reach down and begin stroking their pussies."
                 else:
-                    if Girl.outfit["bottom"]:
-                        "You also lean over, reach into her [Girl.outfit['bottom']], and begin to stroke her pussy."
-                    elif Girl.outfit["hose"]:
-                        "You also lean in, reach under her [Girl.outfit['hose']], and begin to stroke her pussy."
-                    elif Girl.outfit["underwear"]:
+                    if Girl.Clothes["bottom"]:
+                        "You also lean over, reach into her [Girl.Clothes[bottom].name], and begin to stroke her pussy."
+                    elif Girl.Clothes["hose"]:
+                        "You also lean in, reach under her [Girl.Clothes[hose].name], and begin to stroke her pussy."
+                    elif Girl.Clothes["underwear"]:
                         "You also lean in, reach under her panties, and begin to stroke her pussy."
                     else:
                         "You also lean over, notice she isn't wearing anything down there, and begin to stroke her pussy."
@@ -3260,11 +3260,11 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             $ Girl.daily_history.append("handjob")
         elif OptionsDS[0] == "pussy":
             $ Girl.change_face("sexy")
-            if Girl.outfit["bottom"]:
-                "As you make out, [Girl.name] grabs your hand and shoves it down her [Girl.outfit['bottom']]."
-            elif Girl.outfit["hose"]:
-                "As you make out, [Girl.name] grabs your hand and shoves it down her [Girl.outfit['hose']]."
-            elif Girl.outfit["underwear"]:
+            if Girl.Clothes["bottom"]:
+                "As you make out, [Girl.name] grabs your hand and shoves it down her [Girl.Clothes[bottom].name]."
+            elif Girl.Clothes["hose"]:
+                "As you make out, [Girl.name] grabs your hand and shoves it down her [Girl.Clothes[hose].name]."
+            elif Girl.Clothes["underwear"]:
                 "As you make out, [Girl.name] grabs your hand and shoves it down her panties."
             else:
                 "As you make out, [Girl.name] grabs your hand and shoves it between her legs."
@@ -3309,7 +3309,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             "After a second, she hands you a cloth lump, apparently her panties."
             $ Girl.daily_history.append("commando")
             call change_Girl_stat(Girl, "inhibition", 60, 2)
-            $ Girl.outfit["underwear"] = ""
+            $ Girl.take_off("underwear")
             if Girl == RogueX:
                 ch_r "Just a little downpayment on later, [Girl.player_petname]."
             elif Girl == KittyX:
@@ -3355,7 +3355,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
 
 
 
-label Date_Paying(Activity="dinner", Total_Cost=0):
+label Date_Paying(Activity = "dinner", Total_Cost=0):
 
     if Activity == "dinner":
         $ Total_Cost = Play_Cost + Date_Cost[0] + Date_Cost[1]
@@ -3777,7 +3777,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
                 elif Player.Party[Count] == JubesX:
                     ch_v "Yeah, that's fine."
             else:
-                if Date_Cost[Count] >=15:
+                if Date_Cost[Count] > = 15:
 
                     call change_Girl_stat(Player.Party[Count], "love", 200, -5,Alt=[[LauraX], 200,3])
                 else:
@@ -3815,7 +3815,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
         $ Count = len(Player.Party)
         while Count > 0:
             $ Count -= 1
-            if Total_Cost >=15:
+            if Total_Cost > = 15:
                 call change_Girl_stat(Player.Party[Count], "love", 200, -4)
                 if Play_Cost > Date_Cost[Count]:
                     call change_Girl_stat(Player.Party[Count], "love", 200, -10,Alt=[[EmmaX,LauraX], 200,-5])
@@ -4432,7 +4432,7 @@ label Date_Ditched(Girls=0):
         $ Player.Party.remove(Player.Party[0])
     return
 
-label Girl_Date_Over(Girl=0, Angry=1):
+label Girl_Date_Over(Girl=0, Angry = 1):
 
     if Angry:
         $ Girl.recent_history.append("angry")

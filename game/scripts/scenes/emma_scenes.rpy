@@ -1098,7 +1098,7 @@ label Emma_taboo_Talk:
 
 
 
-label Emma_ThreeCheck(Pass=3, Quest=[], Girl=0, temp_Girls=[]):
+label Emma_ThreeCheck(Pass = 3, Quest=[], Girl=0, temp_Girls=[]):
 
     if EmmaX.SEXP <= 30:
         $ EmmaX.change_face("confused")

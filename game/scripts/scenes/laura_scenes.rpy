@@ -536,7 +536,7 @@ label Laura_BF(temp_Girls=[]):
                     call change_Girl_stat(LauraX, "love", 200, -5)
                     call change_Girl_stat(LauraX, "obedience", 80, 7)
                     $ LauraX.change_face("angry", 1,eyes = "side")
-                    call Haremchange_stat (LauraX, 700, -20)
+                    call change_Harem_stat (LauraX, 700, -20)
                     ch_l "Bitches."
                 "It's. . . complicated.":
                     call change_Girl_stat(LauraX, "love", 200, -20)
@@ -547,7 +547,7 @@ label Laura_BF(temp_Girls=[]):
                     $ LauraX.change_face("angry", 1,eyes = "side")
                     if len(Player.Harem) >= 2:
                         ch_l "Probably those bitches."
-                        call Haremchange_stat (LauraX, 700, -10)
+                        call change_Harem_stat (LauraX, 700, -10)
                     elif Player.Harem:
                         ch_l "Probably because of her."
                         $ LauraX.check_if_likes(Player.Harem[0],800,-20, 1)
@@ -605,7 +605,7 @@ label Laura_BF(temp_Girls=[]):
                         call change_Girl_stat(LauraX, "love", 200, -10)
                         call change_Girl_stat(LauraX, "obedience", 80, 10)
                         $ LauraX.change_face("angry", 1)
-                        call Haremchange_stat (LauraX, 700, -10)
+                        call change_Harem_stat (LauraX, 700, -10)
                         ch_l "Eh, I'll pass."
                     else:
                         call change_Girl_stat(LauraX, "love", 200,5)
@@ -616,7 +616,7 @@ label Laura_BF(temp_Girls=[]):
                 "What? Of course not.":
                     call change_Girl_stat(LauraX, "love", 200, -25)
                     call change_Girl_stat(LauraX, "obedience", 80, 5)
-                    call Haremchange_stat (LauraX, 700, -20)
+                    call change_Harem_stat (LauraX, 700, -20)
                     $ LauraX.change_face("angry", 1)
                     ch_l "Well, fine then."
                     $ line = "no"
@@ -651,7 +651,7 @@ label Laura_BF(temp_Girls=[]):
                 call remove_Girl(LauraX)
                 $ line = 0
                 return
-        call Haremchange_stat (LauraX, 900, 20)
+        call change_Harem_stat (LauraX, 900, 20)
 
 
     if not simulation:
@@ -750,7 +750,7 @@ label Laura_Cleanhouse:
         call change_Girl_stat(LauraX, "love", 200, -10)
         call change_Girl_stat(LauraX, "obedience", 80, 10)
         $ LauraX.change_face("angry", 1)
-        call Haremchange_stat (LauraX, 700, -15)
+        call change_Harem_stat (LauraX, 700, -15)
         ch_l "No, this is bullshit, never mind."
     else:
         call change_Girl_stat(LauraX, "love", 200, 5)
@@ -764,7 +764,7 @@ label Laura_Cleanhouse:
                 $ Player.traits.remove("LauraYes")
             $ LauraX.player_petnames.append("boyfriend")
             call Harem_Initiation
-            call Haremchange_stat (LauraX, 900, 20)
+            call change_Harem_stat (LauraX, 900, 20)
             $ LauraX.event_happened[5] = 20
     return
 
@@ -2269,7 +2269,7 @@ label Gwentro:
         easeout .15 xpos 910
         easeout .15 xpos 880
         easeout .15 xpos 900
-    ch_g "Well, \"When in Rome. . .\"{w=1.8}{nw}"
+    ch_g "Well, \"When in Rome. . .\"{w = 1.8}{nw}"
     call GwenFace ("angry", 1)
     ch_g "Huh."
     ch_g "Apparently I can't get my clothes off here."
@@ -2507,8 +2507,8 @@ label Laura_Dressup3:
     $ KittyX.outfit_name = KittyX.today_outfit_name
     $ KittyX.change_Outfit()
     $ LauraX.change_Outfit("nude")
-    $ LauraX.outfit["bra"] = "wolvie_bra"
-    $ LauraX.outfit["underwear"] = "wolvie_panties"
+    $ LauraX.Clothes["bra"] = "wolvie_bra"
+    $ LauraX.Clothes["underwear"] = "wolvie_panties"
     menu:
         extend ""
         "Sneak a peek [[no key] (locked)" if KittyX not in Player.Keys:
@@ -2679,14 +2679,14 @@ label Laura_Dressup3:
                 elif approval_check(LauraX, 1400):
                     ch_l "Bold choice. . ."
                 $ KittyX.change_face("surprised", 2,eyes = "side")
-                $ LauraX.outfit["bra"] = ""
+                $ LauraX.take_off("bra")
                 "[LauraX.name] starts stripping out of the new clothes. . ."
                 if approval_check(KittyX, 1200):
                     $ KittyX.change_face("sly", 1)
                 else:
                     $ KittyX.change_face("angry", 1,eyes = "side")
 
-                $ LauraX.outfit["underwear"] = ""
+                $ LauraX.take_off("underwear")
                 call Laura_First_Topless
                 call Laura_First_Bottomless (1)
                 pause 1

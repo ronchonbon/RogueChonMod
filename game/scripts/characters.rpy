@@ -794,6 +794,11 @@ init python:
 
             return
 
+        def take_off(self, Clothing_type):
+            self.Outfit.change_out_of(Clothing_type)
+
+            return
+
         def give(self, Clothing):
             self.Wardrobe.add_Clothing(Clothing = Clothing)
 
@@ -1150,14 +1155,14 @@ init python:
                 counter = int(self.taboo/10)
 
             if self.petname in ("girl", "boo", "bae", "baby", "sweetie"):
-                if approval_check(self, 500, "L", taboo_modifier=1,Alt=[[LauraX],600]):
+                if approval_check(self, 500, "L", taboo_modifier = 1,Alt=[[LauraX],600]):
                     self.change_stat("love", 80, 1)
                 else:
                     self.change_stat("love", 50, -1)
 
                     return True
             elif self.petname in ("sexy", "lover", "beloved"):
-                if approval_check(self, 900, taboo_modifier=1,Alt=[[LauraX], 1100]):
+                if approval_check(self, 900, taboo_modifier = 1,Alt=[[LauraX], 1100]):
                     self.change_stat("love", 80, 2)
                     self.change_stat("obedience", 80, 1)
                     self.change_stat("inhibition", 70, 1)
@@ -1167,12 +1172,12 @@ init python:
                     self.change_stat("inhibition", 20, -1)
                     return True
             elif self.petname == "slave":
-                if approval_check(self, 800, "O", taboo_modifier=3,Alt=[[EmmaX,StormX],900]):
+                if approval_check(self, 800, "O", taboo_modifier = 3,Alt=[[EmmaX,StormX],900]):
                     self.change_stat("lust", 90, (3+counter))
                     self.change_stat("obedience", 95, (2+counter))
                     self.change_stat("inhibition", 30, 1)
                     self.change_stat("inhibition", 70, 1)
-                elif approval_check(self, 500, "O", taboo_modifier=3,Alt=[[EmmaX,StormX],600]):
+                elif approval_check(self, 500, "O", taboo_modifier = 3,Alt=[[EmmaX,StormX],600]):
                     self.change_stat("lust", 90, 1)
                     self.change_stat("love", 200, -1)
                     self.change_stat("obedience", 80, 2)
@@ -1239,7 +1244,7 @@ init python:
 
                     return True
             elif self.petname == "sugartits":
-                if approval_check(self, 1500, taboo_modifier=1,Alt=[[EmmaX], 1300]):
+                if approval_check(self, 1500, taboo_modifier = 1,Alt=[[EmmaX], 1300]):
                     self.change_stat("obedience", 80, 1)
                     self.change_stat("obedience", 50, 2)
                     self.change_stat("inhibition", 70, 1,Alt=[[EmmaX],70, 2])
@@ -1252,12 +1257,12 @@ init python:
 
                     return True
             elif self.petname == "sex friend":
-                if approval_check(self, 750, "O", taboo_modifier=1) or approval_check(self, 600, "I", taboo_modifier=1):
+                if approval_check(self, 750, "O", taboo_modifier = 1) or approval_check(self, 600, "I", taboo_modifier = 1):
                     self.change_stat("lust", 90, 3)
                     self.change_stat("obedience", 95, 2)
                     self.change_stat("inhibition", 40, 2)
                     self.change_stat("inhibition", 80, 1)
-                elif approval_check(self, 600, "O", taboo_modifier=1) or approval_check(self, 400, "I", taboo_modifier=1):
+                elif approval_check(self, 600, "O", taboo_modifier = 1) or approval_check(self, 400, "I", taboo_modifier = 1):
                     self.change_stat("lust", 90, 2)
                     self.change_stat("love", 200, (-1-counter))
                     self.change_stat("obedience", 80, 1)
@@ -1270,12 +1275,12 @@ init python:
                     self.change_stat("inhibition", 20, -1)
                     return True
             elif self.petname == "fuckbuddy":
-                if approval_check(self, 700, "O", taboo_modifier=2) or approval_check(self, 700, "I", taboo_modifier=1):
+                if approval_check(self, 700, "O", taboo_modifier=2) or approval_check(self, 700, "I", taboo_modifier = 1):
                     self.change_stat("lust", 90, 3)
                     self.change_stat("obedience", 95, 2)
                     self.change_stat("inhibition", 40, 2)
                     self.change_stat("inhibition", 85, 1)
-                elif approval_check(self, 600, "O", taboo_modifier=2) or approval_check(self, 500, "I", taboo_modifier=1):
+                elif approval_check(self, 600, "O", taboo_modifier=2) or approval_check(self, 500, "I", taboo_modifier = 1):
                     self.change_stat("lust", 90, 2)
                     self.change_stat("love", 200, (-1-counter))
                     self.change_stat("obedience", 80, 1)
@@ -1289,7 +1294,7 @@ init python:
 
                     return True
             elif self.petname in ["baby girl", "mommy"]:
-                if approval_check(self, 1200, taboo_modifier=1):
+                if approval_check(self, 1200, taboo_modifier = 1):
                     self.change_stat("obedience", 80, 1)
                     self.change_stat("obedience", 50, 2)
                     self.change_stat("inhibition", 70, 1)
@@ -1302,28 +1307,28 @@ init python:
 
                     return True
             elif self.petname == "chere":
-                if approval_check(self, 600, "L", taboo_modifier=1):
+                if approval_check(self, 600, "L", taboo_modifier = 1):
                     self.change_stat("love", 80, 2)
                 else:
                     self.change_stat("love", 50, -1)
 
                     return True
             elif self.petname == "kitten":
-                if approval_check(self, 600, "L", taboo_modifier=1):
+                if approval_check(self, 600, "L", taboo_modifier = 1):
                     self.change_stat("love", 80, 2)
                 else:
                     self.change_stat("love", 50, -1)
 
                     return True
             elif self.petname == "darling":
-                if approval_check(self, 600, "L", taboo_modifier=1):
+                if approval_check(self, 600, "L", taboo_modifier = 1):
                     self.change_stat("love", 80, 2)
                 else:
                     self.change_stat("love", 50, -1)
 
                     return True
             elif self.petname == "Wolvie":
-                if approval_check(self, 500, "I", taboo_modifier=1):
+                if approval_check(self, 500, "I", taboo_modifier = 1):
                     self.change_stat("love", 80, 1)
                 else:
                     self.change_stat("love", 50, -1)

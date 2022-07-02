@@ -1203,8 +1203,8 @@ label Rogue_Fuckbuddy:
                 $ RogueX.player_petnames.append("fuck buddy")
                 $ RogueX.arm_pose = 2
                 ch_r "Whoo hoo!"
-                $ RogueX.outfit["top"] = 0
-                $ RogueX.outfit["bra"] = 0
+                $ RogueX.Clothes["top"] = 0
+                $ RogueX.Clothes["bra"] = 0
                 if simulation:
                     return True
                 call Rogue_First_Topless (1)
@@ -1238,8 +1238,8 @@ label Rogue_Fuckbuddy_Jerk:
     $ RogueX.change_face("bemused", 1)
     if RogueX.event_happened[10] > 1:
         $ RogueX.arm_pose = 2
-        $ RogueX.outfit["top"] = 0
-        $ RogueX.outfit["bra"] = 0
+        $ RogueX.Clothes["top"] = 0
+        $ RogueX.Clothes["bra"] = 0
         ch_r "I offer these things on a silver platter, and nothing!"
         $ RogueX.change_Outfit()
         ch_r "Look, I don't care what you call it. Just let me know if you want a tumble."
@@ -1428,7 +1428,7 @@ label Rogue_Frisky_Class:
         $ D20 = renpy.random.randint(1, 20)
         $ RogueX.change_face("sly")
         "You notice one of [RogueX.name]'s shoes slip from her foot beneath the desk. She tosses you a sly grin."
-        if RogueX.outfit["hose"]:
+        if RogueX.Clothes["hose"]:
             "You feel the smooth texture of her stockinged foot begin to slowly slide back and forth along the length of your calf."
         else:
             "You feel the smooth skin of her bare foot begin to slowly slide back and forth along the length of your calf."
@@ -1488,16 +1488,16 @@ label Rogue_Frisky_Class:
 
                     if line == "fondle_pussy":
                         $ RogueX.change_face("sly")
-                        if RogueX.outfit["bottom"] == "skirt":
+                        if RogueX.Clothes["bottom"] == "skirt":
                             "[RogueX.name]'s sly smile turns sultry as she feels your fingers sneak under the hem of her skirt, slowly tracing the soft contours of her mound."
-                        elif RogueX.outfit["bottom"] == "pants":
+                        elif RogueX.Clothes["bottom"] == "pants":
                             "[RogueX.name]'s sly smile turns sultry as she feels your fingers sneak down her pants, slowly tracing the soft contours of her mound."
                         else:
                             "[RogueX.name]'s sly smile turns sultry as she feels your fingers sneak between her legs, slowly tracing the soft contours of her mound."
 
-                        if RogueX.outfit["underwear"] == "shorts":
+                        if RogueX.Clothes["underwear"] == "shorts":
                             "You think her shorts are becoming damp as you stroke the thin material. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
-                        elif RogueX.outfit["underwear"]:
+                        elif RogueX.Clothes["underwear"]:
                             "You think her panties are becoming damp as you stroke the thin material. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
                         elif RogueX.pubes:
                             "You feel her soft fur moisten as you stroke the soft flesh below. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
