@@ -195,7 +195,7 @@ label girl_sex_menu(Girl):
                         call undress_Girl(Player.focused_Girl)
                     "You've got a little something. . . " if Player.focused_Girl.spunk:
                         call sex_menu_cleanup_lines(Player.focused_Girl)
-                        call Girl_Cleanup(Player.focused_Girl,"ask")
+                        call Girl_Cleanup(Player.focused_Girl, "ask")
                     "Could I watch you get yourself off?":
                         if Player.focused_Girl.remaining_actions:
                             call masturbate(Player.focused_Girl)
@@ -263,7 +263,7 @@ label girl_sex_menu(Girl):
             "Hey, [Partner.name]? [[Switch lead]" if Partner:
                 call shift_focus(Partner)
             "Cheat Menu" if config.developer:
-                call cheat_menu(Player.focused_Girl)
+                call sex_cheats(Player.focused_Girl)
             "Never mind. [[exit]":
                 if Player.focused_Girl.lust >= 50 or Player.focused_Girl.addiction >= 50:
                     $ Player.focused_Girl.change_face("sad")
@@ -652,7 +652,7 @@ label fondle_menu(Girl, action):
                         "Undress [Partner.name]":
                             call undress_Girl(Partner)
                         "Clean up [Partner.name]" if any(Partner.spunk):
-                            call Girl_Cleanup(Partner,"ask")
+                            call Girl_Cleanup(Partner, "ask")
                         "Never mind":
                             pass
                 "Show her feet" if not show_feet and Girl.pose in ["sex", "doggy"]:
@@ -662,7 +662,7 @@ label fondle_menu(Girl, action):
                 "Undress [Girl.name]":
                     call undress_Girl(Girl)
                 "Clean up [Girl.name]" if any(Girl.spunk):
-                    call Girl_Cleanup(Girl,"ask")
+                    call Girl_Cleanup(Girl, "ask")
                 "Never mind":
                     pass
         "Back to Sex Menu" if multi_action:
@@ -872,7 +872,7 @@ label handjob_menu(Girl, action):
                             "Undress [Partner.name]":
                                 call undress_Girl(Partner)
                             "Clean up [Partner.name]" if any(Partner.spunk):
-                                call Girl_Cleanup(Partner,"ask")
+                                call Girl_Cleanup(Partner, "ask")
                             "Never mind":
                                 pass
                     "Undress [Girl.name]":
@@ -945,7 +945,7 @@ label sex_menu(Girl, action):
                         if Player.secondary_action:
                             $ Girl.remaining_actions -= 1
                     else:
-                        call Sex_Basic_Dialog(Girl,"tired")
+                        call Sex_Basic_Dialog(Girl, "tired")
                 "Shift primary action":
                     if Girl.remaining_actions and multi_action:
                         menu:
@@ -980,7 +980,7 @@ label sex_menu(Girl, action):
                         "Undress [Partner.name]":
                             call undress_Girl(Partner)
                         "Clean up [Partner.name]" if any(Partner.spunk):
-                            call Girl_Cleanup(Partner,"ask")
+                            call Girl_Cleanup(Partner, "ask")
                         "Never mind":
                             pass
                 "Just take a look at her.":
@@ -992,7 +992,7 @@ label sex_menu(Girl, action):
                 "Undress [Girl.name]":
                     call undress_Girl(Girl)
                 "Clean up [Girl.name]" if any(Girl.spunk):
-                    call Girl_Cleanup(Girl,"ask")
+                    call Girl_Cleanup(Girl, "ask")
                 "Never mind":
                     pass
         "Back to Sex Menu" if multi_action:
@@ -1411,7 +1411,7 @@ label try_something_else_menu(Girl, action):
                 call change_Girl_stat(Girl, "love", 80, -4, 1)
                 call change_Girl_stat(Girl, "obedience", 30, -1, 1)
                 call change_Girl_stat(Girl, "obedience", 50, -1, 1)
-                $ Girl.add_word(1,"angry", "angry")
+                $ Girl.add_word(1, "angry", "angry")
 
                 return [None, "stop"]
         "Finish up.":
@@ -1440,7 +1440,7 @@ label try_something_else_menu(Girl, action):
                 call change_Girl_stat(Girl, "love", 80, -4, 1)
                 call change_Girl_stat(Girl, "obedience", 30, -1, 1)
                 call change_Girl_stat(Girl, "obedience", 50, -1, 1)
-                $ Girl.add_word(1,"angry", "angry")
+                $ Girl.add_word(1, "angry", "angry")
 
                 return [None, "stop"]
 

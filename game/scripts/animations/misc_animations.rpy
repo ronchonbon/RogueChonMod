@@ -174,13 +174,13 @@ layeredimage Xavier_sprite:
         "images/NPC/Xavier_body.png"
 
     always:
-        "images/NPC/Xavier_brows_[Xavier_brows].png"
+        "images/NPC/Xavier_brows_[Xavier.brows].png"
 
     always:
-        "images/NPC/Xavier_mouth_[Xavier_mouth].png"
+        "images/NPC/Xavier_mouth_[Xavier.mouth].png"
 
     if Xavier_eyes == "closed":
-        "images/NPC/Xavier_eyes_[Xavier_eyes].png"
+        "images/NPC/Xavier_eyes_[Xavier.eyes].png"
     else:
         "Xavier_blinking"
 
@@ -190,53 +190,20 @@ layeredimage Xavier_sprite:
     anchor (0.5, 0.0) offset (60, 355) zoom 0.7
 
 image Xavier_blinking:
-    "images/NPC/Xavier_eyes_[Xavier_eyes].png"
+    "images/NPC/Xavier_eyes_[Xavier.eyes].png"
     choice:
         3.5
     choice:
         3.25
     choice:
         3
-    "images/NPC/Xavier_eyes_squint.png"
+    "images/NPC/Xavier_eyes_half_blink.png"
     0.05
     "images/NPC/Xavier_eyes_closed.png"
     0.15
-    "images/NPC/Xavier_eyes_squint.png"
+    "images/NPC/Xavier_eyes_half_blink.png"
     0.05
     repeat
-
-label change_Xavier_face(face = Xavier_emotion):
-    if face == "psychic":
-        $ Xavier_mouth = "stern"
-        $ Xavier_brows = "concentrate"
-        $ Xavier_eyes = "concentrate"
-        $ Xavier_psychic = True
-    elif face == "hypno":
-        $ Xavier_mouth = "neutral"
-        $ Xavier_brows = "neutral"
-        $ Xavier_eyes = "hypno"
-        $ Xavier_psychic = False
-    elif face == "shocked":
-        $ Xavier_mouth = "neutral"
-        $ Xavier_brows = "shocked"
-        $ Xavier_eyes = "shocked"
-        $ Xavier_psychic = False
-    elif face == "happy":
-        $ Xavier_mouth = "smile"
-        $ Xavier_brows = "happy"
-        $ Xavier_eyes = "happy"
-        $ Xavier_psychic = False
-    elif face == "angry":
-        $ Xavier_mouth = "stern"
-        $ Xavier_brows = "concentrate"
-        $ Xavier_eyes = "happy"
-        $ Xavier_psychic = False
-
-    return
-
-
-
-
 
 
 
@@ -278,7 +245,7 @@ image PhoneScreen:
             "Player.focused_Girl.location == 'bg_rogue'", "PhoneRG",
             "True", "[Player.focused_Girl.location]")
 
-        offset (-800,-300)
+        offset (-800, -300)
         zoom 1.5
 
     contains:
@@ -318,7 +285,7 @@ image dress_screen_shadow:
 
             "True", Null(),
             )
-        offset (210,-170)
+        offset (210, -170)
         zoom 1
 
 
@@ -436,7 +403,7 @@ image VibratorLeftBreast:
 image VibratorPussy:
     contains:
         "UI_Vibrator"
-        pos (240,665)
+        pos (240, 665)
         zoom 0.5
         anchor (0.5, 0.5)
         alpha 0.5
@@ -451,7 +418,7 @@ image VibratorPussy:
 image VibratorAnal:
     contains:
         "UI_Vibrator"
-        pos (270,640)
+        pos (270, 640)
         zoom 0.5
         anchor (0.5, 0.5)
         alpha 0.3
@@ -466,7 +433,7 @@ image VibratorAnal:
 image VibratorPussyInsert:
     contains:
         "UI_Vibrator"
-        pos (240,645)
+        pos (240, 645)
         zoom 0.5
         anchor (0.5, 0.5)
         alpha 0.5
@@ -475,7 +442,7 @@ image VibratorPussyInsert:
 image VibratorAnalInsert:
     contains:
         "UI_Vibrator"
-        pos (250,640)
+        pos (250, 640)
         zoom 0.5
         anchor (0.5, 0.5)
         alpha 0.3

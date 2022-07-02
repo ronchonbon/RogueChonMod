@@ -2,7 +2,7 @@ label meet_Kitty:
     call set_the_scene(location = "bg_campus", fade = True)
 
     "As you rush to class, you see another student running straight at you."
-    "You try to move aside, but aren't fast enough to get out of her way,"
+    "You try to move aside, but aren't fast enough to get out of her way, "
 
     $ KittyX.name = "???"
     $ KittyX.location = Player.location
@@ -381,7 +381,7 @@ label Kitty_BF:
     if simulation:
         return True
     $ approval_bonus = 10
-    $ Player.add_word(1,"interruption")
+    $ Player.add_word(1, "interruption")
     call enter_main_sex_menu(KittyX)
     $ approval_bonus = 0
     return
@@ -691,7 +691,7 @@ label Kitty_Love_End:
         call set_Character_taboos
         ch_k "Ok, so like I was saying. . ."
     call change_Girl_stat(KittyX, "obedience", 70, 10)
-    $ Player.add_word(1,"interruption")
+    $ Player.add_word(1, "interruption")
     menu:
         extend ""
         "Yeah, let's do this. . . [[have sex]":
@@ -1026,7 +1026,7 @@ label Kitty_Sub_Asked:
                             call change_Girl_stat(KittyX, "love", 200, -5)
                             call change_Girl_stat(KittyX, "obedience", 200, 10)
                             ch_k ". . ."
-                        elif approval_check(KittyX,650, "O"):
+                        elif approval_check(KittyX, 650, "O"):
                             call change_Girl_stat(KittyX, "love", 200, -5)
                             call change_Girl_stat(KittyX, "obedience", 200, 10)
                             ch_k "I, um. . ."
@@ -1412,7 +1412,7 @@ label Kitty_Fuckbuddy:
     "Out of nowhere, you feel a hand stroking across your cock."
     "Even though you're fully dressed, it definitely feels like soft skin touching your own."
     "You glance down and see a slender arm snaked around your waist, before vanishing into your pants."
-    "As you try to control your rising erection, a voice whispers into your ear,"
+    "As you try to control your rising erection, a voice whispers into your ear, "
     ch_k "Any time, just let me know. . ."
     "-and suddenly the pressure is gone."
     "Looking around, you don't see anyone nearby, and it doesn't look like anyone else noticed what happened."
@@ -1433,9 +1433,9 @@ label Kitty_Daddy:
     call set_the_scene
     ch_k ". . ."
     if KittyX in Player.Harem:
-        ch_k "Hey, so[KittyX.like]we've been dating,"
+        ch_k "Hey, so[KittyX.like]we've been dating, "
     else:
-        ch_k "Hey, so[KittyX.like]we've been hanging out,"
+        ch_k "Hey, so[KittyX.like]we've been hanging out, "
     if KittyX.love > KittyX.obedience and KittyX.love > KittyX.inhibition:
         ch_k "and you're so sweet. . ."
     elif KittyX.obedience > KittyX.inhibition:
@@ -2164,12 +2164,12 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
 
 
     if approval:
-        $ Girl.check_if_likes(KittyX,900,(2*Shy), 1)
-        $ KittyX.check_if_likes(Girl,900,(2*Shy), 1)
-        $ Girl.add_word(1,"yoinked")
+        $ Girl.check_if_likes(KittyX, 900, (2*Shy), 1)
+        $ KittyX.check_if_likes(Girl, 900, (2*Shy), 1)
+        $ Girl.add_word(1, "yoinked")
     else:
         call remove_Girl(Girl)
-        $ Girl.check_if_likes(KittyX,900,-(2*Shy), 1)
+        $ Girl.check_if_likes(KittyX, 900, -(2*Shy), 1)
 
     if Girl == JeanX and approval < 2:
         "With a quick nod, her clothes come flying back to her."

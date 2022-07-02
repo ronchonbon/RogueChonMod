@@ -956,7 +956,7 @@ label gifts:
                             $ Player.inventory.remove("256 Shades of Grey")
 
                             $ Girl.inventory.append("256 Shades of Grey")
-                            call change_Girl_stat(Girl, "obedience", 200, 50,Alt=[[JeanX], 200, 10])
+                            call change_Girl_stat(Girl, "obedience", 200, 50, Alt = [[JeanX], 200, 10])
                         else:
                             if Girl == EmmaX:
                                 ch_e "You're repeating yourself."

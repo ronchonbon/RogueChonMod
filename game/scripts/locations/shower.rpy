@@ -220,11 +220,11 @@ label showering:
                             elif G == StormX:
                                 if approval_check(G, 700, "LO"):
                                     staying_Girls.append(G)
-                            elif approval_check(G, 1200,Alt=[[KittyX], 1400]) or (approval_check(G, 600,Alt=[[KittyX],700]) and G.seen_breasts and G.seen_pussy):
+                            elif approval_check(G, 1200, Alt = [[KittyX], 1400]) or (approval_check(G, 600, Alt = [[KittyX],700]) and G.seen_breasts and G.seen_pussy):
                                 staying_Girls.append(G)
-                            elif line == "spot" and approval_check(G, 1000, "LI",Alt=[[KittyX], 1200]):
+                            elif line == "spot" and approval_check(G, 1000, "LI", Alt = [[KittyX], 1200]):
                                 staying_Girls.append(G)
-                            elif line == "watch you" and approval_check(G, 600, "O",Alt=[[EmmaX],500]):
+                            elif line == "watch you" and approval_check(G, 600, "O", Alt = [[EmmaX],500]):
                                 staying_Girls.append(G)
 
                 if line == "spot":
@@ -796,8 +796,8 @@ label Shower_Sex(Options=0, line=0):
             call change_Girl_stat(staying_Girls[0], "lust", 90, 10)
             call change_Girl_stat(staying_Girls[1], "lust", 90, 10)
             "You got a good look at them washing off, and they didn't seem to mind the view either."
-            $ staying_Girls[0].check_if_likes(staying_Girls[1],600,4, 1)
-            $ staying_Girls[1].check_if_likes(staying_Girls[0],600,4, 1)
+            $ staying_Girls[0].check_if_likes(staying_Girls[1], 600,4, 1)
+            $ staying_Girls[1].check_if_likes(staying_Girls[0], 600,4, 1)
             $ staying_Girls[0].check_if_likes(staying_Girls[1],800, 2, 1)
             $ staying_Girls[1].check_if_likes(staying_Girls[0],800, 2, 1)
         else:
@@ -1072,21 +1072,21 @@ label Shower_Sex(Options=0, line=0):
     if line:
 
         if len(staying_Girls) > 1 and line != 3:
-            $ staying_Girls[0].check_if_likes(staying_Girls[1],600,4, 1)
-            $ staying_Girls[1].check_if_likes(staying_Girls[0],600,4, 1)
+            $ staying_Girls[0].check_if_likes(staying_Girls[1], 600,4, 1)
+            $ staying_Girls[1].check_if_likes(staying_Girls[0], 600,4, 1)
             $ staying_Girls[0].check_if_likes(staying_Girls[1],800,3, 1)
             $ staying_Girls[1].check_if_likes(staying_Girls[0],800,3, 1)
-            $ staying_Girls[0].check_if_likes(staying_Girls[1],900, 1, 1)
-            $ staying_Girls[1].check_if_likes(staying_Girls[0],900, 1, 1)
+            $ staying_Girls[0].check_if_likes(staying_Girls[1], 900, 1, 1)
+            $ staying_Girls[1].check_if_likes(staying_Girls[0], 900, 1, 1)
         if 2 <= Options[0] <= 3 and D20 >= 15:
 
-            $ staying_Girls[1].check_if_likes(staying_Girls[0],900,4, 1)
+            $ staying_Girls[1].check_if_likes(staying_Girls[0], 900,4, 1)
             call change_Player_stat("focus", 50, 10)
             call change_Player_stat("focus", 80, 5)
             "After a few minutes of this, it looks like [staying_Girls[1].name] gets off."
             call Girl_Cumming (staying_Girls[1], 1)
             if line == 4:
-                $ staying_Girls[0].check_if_likes(staying_Girls[1],900,3, 1)
+                $ staying_Girls[0].check_if_likes(staying_Girls[1], 900,3, 1)
                 "It looks like [staying_Girls[0].name] is reacting positively to it as well. . ."
                 call Girl_Cumming (staying_Girls[0], 1)
             if len(staying_Girls) > 1:
@@ -1106,8 +1106,8 @@ label Shower_Sex(Options=0, line=0):
             if line == 4:
                 call change_Girl_stat(staying_Girls[0], "inhibition", 90, 7)
                 call change_Girl_stat(staying_Girls[1], "inhibition", 90, 4)
-                $ staying_Girls[0].check_if_likes(staying_Girls[1],900,3, 1)
-                $ staying_Girls[1].check_if_likes(staying_Girls[0],900,3, 1)
+                $ staying_Girls[0].check_if_likes(staying_Girls[1], 900,3, 1)
+                $ staying_Girls[1].check_if_likes(staying_Girls[0], 900,3, 1)
                 "After a few minutes of this, the two of them manage to get you off."
             else:
                 call change_Girl_stat(staying_Girls[0], "inhibition", 90, 5)
@@ -1133,11 +1133,11 @@ label Shower_Sex(Options=0, line=0):
             call Girl_Cumming (staying_Girls[0], 1)
             if line == 4:
                 call change_Girl_stat(staying_Girls[1], "inhibition", 90, 6)
-                $ staying_Girls[0].check_if_likes(staying_Girls[1],900,3, 1)
+                $ staying_Girls[0].check_if_likes(staying_Girls[1], 900,3, 1)
                 "It looks like [staying_Girls[1].name] is enjoying herself as well. . ."
                 call Girl_Cumming (staying_Girls[1], 1)
             if len(staying_Girls) > 1:
-                $ staying_Girls[1].check_if_likes(staying_Girls[0],900,3, 1)
+                $ staying_Girls[1].check_if_likes(staying_Girls[0], 900,3, 1)
                 "The girls take a step back."
                 call show_full_body(staying_Girls[1])
             else:

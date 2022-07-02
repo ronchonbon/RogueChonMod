@@ -1,10 +1,10 @@
 
 
-label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
+label Group_Strip_Study(temp_Girls = [], QuizOrder = []):
     $ Count = 0
     $ between_event_count = 1
     $ counter = 0
-    $ QuizOrder = [1, 2,3,4,5,6,7,8,9, 10, 11, 12, 13, 14, 15]
+    $ QuizOrder = [1, 2,3,4,5, 6,7,8, 9, 10, 11, 12, 13, 14, 15]
     $ renpy.random.shuffle(QuizOrder)
     if EmmaX in Player.Party and Player.Party[0] != EmmaX:
 
@@ -91,7 +91,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
                 call change_Girl_stat(LauraX, "love", 80, -5)
                 call change_Girl_stat(LauraX, "obedience", 70, 10)
                 call change_Girl_stat(LauraX, "inhibition", 70, -5)
-                if approval_check(LauraX,600,"L"):
+                if approval_check(LauraX, 600, "L"):
                     $ LauraX.change_face("sadside", 1)
                 else:
                     $ LauraX.change_face("angry", 1)
@@ -132,7 +132,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
                 call change_Girl_stat(JeanX, "love", 80, -5)
                 call change_Girl_stat(JeanX, "obedience", 70, 10)
                 call change_Girl_stat(JeanX, "inhibition", 70, -5)
-                if approval_check(JeanX,600,"L"):
+                if approval_check(JeanX, 600, "L"):
                     $ JeanX.change_face("sadside", 1)
                 else:
                     $ JeanX.change_face("angry", 1)
@@ -165,20 +165,20 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
         ch_v "I mean, you can figure out the rules, right?"
         ch_v "I ask a question, you answer. . ."
         ch_v "-but you only get three strikes and you're out."
-        ch_v "Get a question -right,- and maybe I get more naked. . ."
+        ch_v "Get a question -right, - and maybe I get more naked. . ."
         $ JubesX.change_face("sly", 1)
 
 
     $ temp_Girls = Player.Party[:]
     while temp_Girls:
-        $ temp_Girls[0].add_word(1, 0,"stripstudy", 0,"stripstudy")
+        $ temp_Girls[0].add_word(1, 0, "stripstudy", 0, "stripstudy")
         $ temp_Girls.remove(temp_Girls[0])
 
     if len(Player.Party) >= 2:
         if counter == 3:
 
             pass
-        elif approval_check(Player.Party[1], 1300) or approval_check(Player.Party[1], 500,"I"):
+        elif approval_check(Player.Party[1], 1300) or approval_check(Player.Party[1], 500, "I"):
             if Player.Party[1] == RogueX:
                 ch_r "I guess we'll take turns."
             elif Player.Party[1] == KittyX:
@@ -1257,7 +1257,7 @@ label Jubes_Quiz_Question:
         menu:
             ch_v "Where did I grow up?"
             "A. Hong Kong":
-                ch_v "My -parents,- maybe. . ."
+                ch_v "My -parents, - maybe. . ."
                 return False
             "B. Beverly Hills":
                 return True

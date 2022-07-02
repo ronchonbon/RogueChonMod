@@ -401,7 +401,7 @@ label Jean_Monogamy:
                 return
             if "monogamous" not in JeanX.daily_history:
                 call change_Girl_stat(JeanX, "obedience", 90, 3)
-            $ JeanX.add_word(1, 0,"monogamous")
+            $ JeanX.add_word(1, 0, "monogamous")
             $ JeanX.traits.append("monogamous")
         "Don't hook up with other girls." if "monogamous" not in JeanX.traits:
             if approval_check(JeanX, 900, "O", taboo_modifier=0):
@@ -431,7 +431,7 @@ label Jean_Monogamy:
                 return
             if "monogamous" not in JeanX.daily_history:
                 call change_Girl_stat(JeanX, "obedience", 90, 3)
-            $ JeanX.add_word(1, 0,"monogamous")
+            $ JeanX.add_word(1, 0, "monogamous")
             $ JeanX.traits.append("monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in JeanX.traits:
             if approval_check(JeanX, 700, "O", taboo_modifier=0):
@@ -449,7 +449,7 @@ label Jean_Monogamy:
                 call change_Girl_stat(JeanX, "obedience", 90, 3)
             if "monogamous" in JeanX.traits:
                 $ JeanX.traits.remove("monogamous")
-            $ JeanX.add_word(1, 0,"monogamous")
+            $ JeanX.add_word(1, 0, "monogamous")
         "Never mind.":
             pass
     return
@@ -492,7 +492,7 @@ label Jean_Jumped:
                 return
             if "chill" not in JeanX.daily_history:
                 call change_Girl_stat(JeanX, "obedience", 90, 3)
-            $ JeanX.add_word(1, 0,"chill")
+            $ JeanX.add_word(1, 0, "chill")
             $ JeanX.traits.append("chill")
         "Don't bother me like that." if "chill" not in JeanX.traits:
             if approval_check(JeanX, 800, "O", taboo_modifier=0):
@@ -524,7 +524,7 @@ label Jean_Jumped:
                 return
             if "chill" not in JeanX.daily_history:
                 call change_Girl_stat(JeanX, "obedience", 90, 3)
-            $ JeanX.add_word(1, 0,"chill")
+            $ JeanX.add_word(1, 0, "chill")
             $ JeanX.traits.append("chill")
         "Knock yourself out.":
             if approval_check(JeanX, 800, "L", taboo_modifier=0):
@@ -542,7 +542,7 @@ label Jean_Jumped:
                 call change_Girl_stat(JeanX, "obedience", 90, 3)
             if "chill" in JeanX.traits:
                 $ JeanX.traits.remove("chill")
-            $ JeanX.add_word(1, 0,"chill")
+            $ JeanX.add_word(1, 0, "chill")
         "Um, never mind.":
             pass
     return
@@ -992,7 +992,7 @@ label Jean_SexChat:
 
 
 
-label Jean_Chitchat(O=0, Options=["default", "default", "default"]):
+label Jean_Chitchat(O=0, Options = ["default", "default", "default"]):
     $ round -= 3 if round > 3 else (round-1)
     if O:
         $ Options = [O]
@@ -1620,7 +1620,7 @@ label Jean_Pet:
                             ch_j ". . . fine, [JeanX.player_petname]."
                         else:
                             $ JeanX.change_face("angry", 1)
-                            ch_j "I'm not your -pet,- [JeanX.player_petname]."
+                            ch_j "I'm not your -pet, - [JeanX.player_petname]."
                     "I think I'll call you \"slut\".":
 
                         $ JeanX.petname = "slut"
@@ -1700,7 +1700,7 @@ label Jean_Rename:
             ch_j "Well, yeah. I like it."
         "Nevermind.":
             pass
-    $ JeanX.add_word(1, 0,"namechange")
+    $ JeanX.add_word(1, 0, "namechange")
     return
 
 
@@ -2503,7 +2503,7 @@ label Jean_Leave:
                     $ JeanX.change_face("bemused", 1)
                     if JeanX.Clothes["bottom"] and (JeanX.love+JeanX.obedience) <= (2*JeanX.inhibition):
                         $ JeanX.mouth = "smile"
-                        ch_j "I -could,- but I'd rather not. . ."
+                        ch_j "I -could, - but I'd rather not. . ."
                         menu:
                             "Fine by me":
                                 return

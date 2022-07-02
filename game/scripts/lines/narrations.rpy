@@ -14,7 +14,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ TempFocus += -3 if Player.focus > 50 else 2
             $ GirlA.addiction -= 1 if D20S > 10 else 2
             return
-        if GirlA in (EmmaX,LauraX,StormX):
+        if GirlA in (EmmaX,LauraX, StormX):
 
             if action_speed <= 1:
 
@@ -118,7 +118,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             $ TempLust += 6 if GirlA.lust > 60 else 3
             return
 
-        if GirlA in (EmmaX,StormX) or (GirlA.action_counter["titjob"] > 4 and GirlA.action_counter["blowjob"]):
+        if GirlA in (EmmaX, StormX) or (GirlA.action_counter["titjob"] > 4 and GirlA.action_counter["blowjob"]):
 
             if action_speed <= 1:
 
@@ -193,7 +193,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
         if GirlA == KittyX:
             $ TempFocus -= 2
-        elif GirlA in (EmmaX,StormX):
+        elif GirlA in (EmmaX, StormX):
             $ TempFocus += 1
 
         $ GirlA.addiction -= 2
@@ -237,7 +237,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
         if action_speed == 1:
 
-            if GirlA.action_counter["blowjob"] > 4 or GirlA in (EmmaX,LauraX,StormX):
+            if GirlA.action_counter["blowjob"] > 4 or GirlA in (EmmaX,LauraX, StormX):
 
                 $ line = line + renpy.random.choice(["Her deft licks are masterful, your cock twitches with each stroke",
                                     "She gently blows across the head as she covers your cock in smooth licks",
@@ -273,7 +273,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
         elif action_speed == 2:
 
-            if GirlA.action_counter["blowjob"] > 4 or GirlA in (EmmaX,LauraX,StormX):
+            if GirlA.action_counter["blowjob"] > 4 or GirlA in (EmmaX,LauraX, StormX):
 
                 $ line = line + renpy.random.choice(["She masterfully bobs on your cock, and it twitches with each stroke",
                                     "She rapidly bobs up and down on your cock, a frenzy of motion",
@@ -307,7 +307,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
         elif action_speed == 3:
 
-            if GirlA.action_counter["blowjob"] > 4 or GirlA in (EmmaX,LauraX,StormX):
+            if GirlA.action_counter["blowjob"] > 4 or GirlA in (EmmaX,LauraX, StormX):
 
                 $ line = line + renpy.random.choice(["She masterfully bobs on your cock, and it twitches with each stroke",
                                     "She smoothly bobs up and down on your cock, a frenzy of motion",
@@ -344,7 +344,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
 
 
-            if GirlA.action_counter["blowjob"] > 4 or GirlA in (EmmaX,LauraX,StormX):
+            if GirlA.action_counter["blowjob"] > 4 or GirlA in (EmmaX,LauraX, StormX):
 
                 $ line = line + renpy.random.choice(["She masterfully bobs on your cock, and it twitches with each stroke",
                                     "She rapidly bobs to the base of your cock, a frenzy of motion",
@@ -400,7 +400,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             $ line = "You continue to slowly drive into " + GirlA.name + "_. "
 
 
-        if GirlA.action_counter["sex"] > 4 or GirlA in (EmmaX,LauraX,StormX):
+        if GirlA.action_counter["sex"] > 4 or GirlA in (EmmaX,LauraX, StormX):
             if action_speed > 1:
 
                 $ line = line + renpy.random.choice(["She bounces rapidly against your cock",
@@ -681,7 +681,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
         if D20S > 18:
             if GirlA == KittyX:
                 $ line = "You continue to fondle " + GirlA.name + "_. They fit comfortably into your palms."
-            elif GirlA in (EmmaX,StormX):
+            elif GirlA in (EmmaX, StormX):
                 $ line = "You continue to fondle " + GirlA.name + "_. You can barely wrap your hands around them."
         $ GirlA.addiction -= 2
 
@@ -2098,7 +2098,7 @@ label Girl_Self_lines(GirlA=Primary, Mode = "T3", Action=girl_secondary_action, 
 
 
 
-label Girl_Self_Set(GirlA=Primary, Mode = "T3", Action=girl_secondary_action, Length=0, between_event_count=0, Options=[]):
+label Girl_Self_Set(GirlA=Primary, Mode = "T3", Action=girl_secondary_action, Length=0, between_event_count=0, Options = []):
 
 
 
@@ -3294,12 +3294,12 @@ label Dirty_Talk(Girl=Primary, D20=0, TempCheck=0, Templine=0, Temp_action=secon
 
                 $ Templine = "Hmm, like what you see, "+KittyX.player_petname+"?"
             elif Temp_action == "fondle_breasts":
-                if ActiveGirl in (EmmaX,StormX):
+                if ActiveGirl in (EmmaX, StormX):
                     $ Templine = "I'm so jelly here "+ActiveGirl.name+"."
                 else:
                     $ Templine = "I love these tits, "+ActiveGirl.name+"."
             elif Temp_action == "suck_breasts":
-                if ActiveGirl in (EmmaX,StormX):
+                if ActiveGirl in (EmmaX, StormX):
                     $ Templine = "These tits are {i}amazing,{/i} "+ActiveGirl.name+"."
                 else:
                     $ Templine = "Hmm, you taste so good, "+ActiveGirl.name+"."
@@ -3570,7 +3570,7 @@ label Dirty_Talk(Girl=Primary, D20=0, TempCheck=0, Templine=0, Temp_action=secon
 
                 $ Templine = "Looking good, "+LauraX.player_petname+"?"
             elif Temp_action == "fondle_breasts":
-                if ActiveGirl in (EmmaX,StormX):
+                if ActiveGirl in (EmmaX, StormX):
                     $ Templine = "These things are huge."
                 else:
                     $ Templine = "Your titties feel so nice, "+ActiveGirl.name+"."
@@ -3944,7 +3944,7 @@ label Dirty_Talk(Girl=Primary, D20=0, TempCheck=0, Templine=0, Temp_action=secon
                                         "You are coming along quite nicely, " + StormX.player_petname + "_.",
                                         "Oooh, that is magnificent. . .",
                                         "More, I want more. . .",
-                                        "You are simply -adorable,- " + StormX.player_petname + "_.",
+                                        "You are simply -adorable, - " + StormX.player_petname + "_.",
                                         "You will {i}have{/i} to do that one again. . .",
                                         "You do leave an impression, " + StormX.player_petname + "_."
                                         ])
@@ -3973,7 +3973,7 @@ label Dirty_Talk(Girl=Primary, D20=0, TempCheck=0, Templine=0, Temp_action=secon
 
                 $ Templine = "Like what you see there, "+JubesX.player_petname+"?"
             elif Temp_action == "fondle_breasts":
-                if ActiveGirl in (EmmaX,StormX):
+                if ActiveGirl in (EmmaX, StormX):
                     $ Templine = "Wow, how do you work with these. . ."
                 else:
                     $ Templine = "Maybe I need to find a new bra, "+ActiveGirl.name+"."

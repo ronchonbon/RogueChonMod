@@ -157,7 +157,7 @@ label girls_room_entry:
 
     if Girl in Player.Party:
         if time_index > 2 or (time_index == 2 and round <= 10):
-            if approval_check(Girl, 1000, "LI", Alt = [[JubesX], 500]) or approval_check(Girl, 600, "OI",Alt = [[JubesX], 300]):
+            if approval_check(Girl, 1000, "LI", Alt = [[JubesX], 500]) or approval_check(Girl, 600, "OI", Alt = [[JubesX], 300]):
                 if Girl == RogueX:
                     ch_r "It's pretty late, [Girl.player_petname], but you can come in for a little bit."
                 elif Girl == KittyX:
@@ -915,7 +915,7 @@ label shower_entry:
         if D20 > 15:
             call caught_showering(showering_Girls[0])
         elif D20 > 13:
-            $ showering_Girls[0].add_word(1,"showered", "showered", 0, 0)
+            $ showering_Girls[0].add_word(1, "showered", "showered", 0, 0)
 
             call set_Character_taboos
             call set_the_scene(location = "bg_showerroom", fade = True)
@@ -925,7 +925,7 @@ label shower_entry:
         for G in showering_Girls:
             if G not in Player.Party:
                 if D20 >= 10:
-                    G.add_word(1,"showered", "showered", 0, 0)
+                    G.add_word(1, "showered", "showered", 0, 0)
 
                 G.change_Outfit("shower")
 

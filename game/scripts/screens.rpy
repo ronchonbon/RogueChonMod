@@ -526,7 +526,7 @@ screen status_screen:
         imagebutton auto "images/Button_" + Player.focused_Girl.tag + "_%s.png" action ShowTransient("Focus_Map") pos (0.71, 0.016) focus_mask True
 
     showif config.developer:
-        imagebutton auto "images/Button_" + Player.focused_Girl.tag + "_%s.png" action ui.callsinnewcontext("cheat_editor",Player.focused_Girl) pos (0.755, 0.016) focus
+        imagebutton auto "images/Button_" + Player.focused_Girl.tag + "_%s.png" action ui.callsinnewcontext("cheat_menu",Player.focused_Girl) pos (0.755, 0.016) focus
 
     frame:
         pos (0.45, 0.0085)

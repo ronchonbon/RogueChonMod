@@ -264,7 +264,7 @@ label sleepover:
             "Are you sure you can't stay? . ." if not Player.Party[0].event_counter["sleepover"] and Player.Party[0].home != Player.location:
                 $ decision = "please"
             "That's not what you said the other night . ." if Player.Party[0].event_counter["sleepover"]:
-                if approval_check(Player.Party[0],900) or approval_check(Player.Party[0],700,"L") or approval_check(Player.Party[0],500,"O"):
+                if approval_check(Player.Party[0], 900) or approval_check(Player.Party[0],700, "L") or approval_check(Player.Party[0],500, "O"):
                     $ Player.Party[0].change_face("bemused", 1)
 
                     if Player.Party[0] == RogueX:
@@ -325,7 +325,7 @@ label sleepover:
         elif Player.Party[0] == JubesX:
             ch_v "Yup. . . later then. . ."
     elif decision == "please":
-        if approval_check(Player.Party[0], 1000) or approval_check(Player.Party[0],700,"L") or approval_check(Player.Party[0],500,"O"):
+        if approval_check(Player.Party[0], 1000) or approval_check(Player.Party[0],700, "L") or approval_check(Player.Party[0],500, "O"):
             $ Player.Party[0].change_face("bemused")
 
             $ agreed = True
@@ -339,7 +339,7 @@ label sleepover:
             elif Player.Party[0] == LauraX:
                 ch_l "Suit yourself."
             elif Player.Party[0] == JeanX:
-                ch_j "-Fine,- geeze."
+                ch_j "-Fine, - geeze."
             elif Player.Party[0] == StormX:
                 ch_s "Oh, I suppose we could make do. . ."
             elif Player.Party[0] == JubesX:
@@ -490,7 +490,7 @@ label sleepover:
                         ch_v ". . . nah, really. . . stuff to do."
 
                     $ line = 0
-                    $ Player.Party[0].check_if_likes(Player.Party[1],700,-5, 1)
+                    $ Player.Party[0].check_if_likes(Player.Party[1],700, -5, 1)
 
 
                 if line:
@@ -545,8 +545,8 @@ label sleepover:
                         elif Player.Party[0] == JubesX:
                             ch_v "Oh. . . cool. Promise I won't bite."
                             ch_v "much. . ."
-                        $ Player.Party[0].check_if_likes(Player.Party[1],700,-5, 1)
-                        $ Player.Party[1].check_if_likes(Player.Party[0],700,-5, 1)
+                        $ Player.Party[0].check_if_likes(Player.Party[1],700, -5, 1)
+                        $ Player.Party[1].check_if_likes(Player.Party[0],700, -5, 1)
                         $ line = 0
             "You should get going, [Player.Party[1].name].":
                 $ asked_to_stay = False
@@ -1302,7 +1302,7 @@ label morning_after:
 
 
 
-label Morningwood_Check(Girls=[0,-3]):
+label Morningwood_Check(Girls = [0, -3]):
     $ D20 = renpy.random.randint(0, 3)
 
     $ line = 0
@@ -1480,7 +1480,7 @@ label Morningwood_Check(Girls=[0,-3]):
 
 label morning_afterWood:
 
-    $ Player.add_word(1,"interruption")
+    $ Player.add_word(1, "interruption")
     call shift_focus (Player.Party[0])
     $ Player.focus = 30
     if Player.primary_action == "blowjob":
@@ -1850,7 +1850,7 @@ label morning_afterWood:
                 elif Player.Party[0] == LauraX:
                     ch_l "No."
                 elif Player.Party[0] == JeanX:
-                    ch_j "Well I -was,- but then you had to be a dickbag about it."
+                    ch_j "Well I -was, - but then you had to be a dickbag about it."
                 elif Player.Party[0] == StormX:
                     ch_s "I am no longer in the mood."
                 elif Player.Party[0] == JubesX:

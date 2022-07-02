@@ -1453,7 +1453,7 @@ label Group_Strip(Girl):
 
         if Girl == EmmaX and "classcaught" in EmmaX.recent_history:
             pass
-        elif not approval_check(dancing_Girls[counter], 600, taboo_modifier = 1, Alt = [[EmmaX],(650+taboo*10)]) or (dancing_Girls[counter] == EmmaX and taboo and "taboo" not in EmmaX.history):
+        elif not approval_check(dancing_Girls[counter], 600, taboo_modifier = 1, Alt = [[EmmaX], (650+taboo*10)]) or (dancing_Girls[counter] == EmmaX and taboo and "taboo" not in EmmaX.history):
             if not approval_check(dancing_Girls[counter], 400):
                 if dancing_Girls[counter] == RogueX:
                     ch_r "I'm just some sort'a gogo dancer now?"
@@ -1731,7 +1731,7 @@ label Girl_Stripping(Girl):
                 jump strip_ultimatum
         elif Girl.Clothes["top"] and Girl.Clothes["bra"] and (Girl.Clothes["underwear"] or Girl.Clothes["bottom"] or Girl.Clothes["hose"] == "tights"):
 
-            if approval_check(Girl, 750, taboo_modifier = 3,Alt=[[StormX],(300-Nudist*3)]):
+            if approval_check(Girl, 750, taboo_modifier = 3, Alt = [[StormX], (300-Nudist*3)]):
                 call change_Girl_stat(Girl, "obedience", 50, 1)
                 call change_Girl_stat(Girl, "inhibition", 25, 1)
                 call change_Player_stat("focus", 60, 3)
@@ -1746,7 +1746,7 @@ label Girl_Stripping(Girl):
 
         elif Girl.Clothes["bottom"] and (Girl.Clothes["underwear"] or Girl.Clothes["hose"] == "tights"):
 
-            if approval_check(Girl, 1200, taboo_modifier = 3,Alt=[[StormX],(600-Nudist*3)]) or (Girl.seen_underwear and approval_check(Girl, 900, taboo_modifier = 3) and not Girl.taboo):
+            if approval_check(Girl, 1200, taboo_modifier = 3, Alt = [[StormX], (600-Nudist*3)]) or (Girl.seen_underwear and approval_check(Girl, 900, taboo_modifier = 3) and not Girl.taboo):
                 call change_Girl_stat(Girl, "lust", 50, 5)
                 call change_Girl_stat(Girl, "obedience", 50, 1)
                 call change_Girl_stat(Girl, "inhibition", 30, 1)
@@ -1776,7 +1776,7 @@ label Girl_Stripping(Girl):
                     jump strip_ultimatum
 
             elif Girl.hose_number() >= 6 and approval_check(Girl, 1200, taboo_modifier = 3):
-                if approval_check(Girl, 1200, taboo_modifier = 3,Alt=[[StormX],(600-Nudist*3)]):
+                if approval_check(Girl, 1200, taboo_modifier = 3, Alt = [[StormX], (600-Nudist*3)]):
                     call change_Girl_stat(Girl, "lust", 50, 4)
                     call change_Player_stat("focus", 60, 4)
                 else:
@@ -1813,7 +1813,7 @@ label Girl_Stripping(Girl):
                 jump strip_ultimatum
         elif Girl.Clothes["top"] and not Girl.Clothes["bra"] and (Girl.Clothes["underwear"] or Girl.Clothes["hose"] == "tights"):
 
-            if approval_check(Girl, 1250, taboo_modifier = 3,Alt=[[StormX],(650-Nudist*3)]) or (Girl.seen_breasts and approval_check(Girl, 1000, taboo_modifier = 3) and not Girl.taboo):
+            if approval_check(Girl, 1250, taboo_modifier = 3, Alt = [[StormX], (650-Nudist*3)]) or (Girl.seen_breasts and approval_check(Girl, 1000, taboo_modifier = 3) and not Girl.taboo):
                 call change_Girl_stat(Girl, "lust", 60, 5)
                 call change_Girl_stat(Girl, "obedience", 50, 2)
                 call change_Girl_stat(Girl, "inhibition", 50, 10)
@@ -1828,7 +1828,7 @@ label Girl_Stripping(Girl):
                     call change_Girl_stat(Girl, "inhibition", 200, 3)
                     if Girl == KittyX:
                         "She hesitantly glances your way, and then with tug her [line] passes through her, tossing it to the ground."
-                    elif Girl in (EmmaX,LauraX,StormX):
+                    elif Girl in (EmmaX,LauraX, StormX):
                         "She glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     else:
                         "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
@@ -1843,7 +1843,7 @@ label Girl_Stripping(Girl):
 
         elif Girl.Clothes["bra"] and not Girl.Clothes["top"]:
 
-            if approval_check(Girl, 1250, taboo_modifier = 3,Alt=[[StormX],(650-Nudist*3)]) or (Girl.seen_breasts and approval_check(Girl, 1000, taboo_modifier = 3) and not Girl.taboo):
+            if approval_check(Girl, 1250, taboo_modifier = 3, Alt = [[StormX], (650-Nudist*3)]) or (Girl.seen_breasts and approval_check(Girl, 1000, taboo_modifier = 3) and not Girl.taboo):
                 call change_Girl_stat(Girl, "lust", 60, 5)
                 call change_Girl_stat(Girl, "obedience", 50, 2)
                 call change_Girl_stat(Girl, "inhibition", 50, 1)
@@ -1854,7 +1854,7 @@ label Girl_Stripping(Girl):
                     $ Girl.change_face("bemused", 1)
                     if Girl == KittyX:
                         "She hesitantly glances your way, and then with a shrug pulls her [line] through herself, tossing it to the ground."
-                    elif Girl in (EmmaX,LauraX,StormX):
+                    elif Girl in (EmmaX,LauraX, StormX):
                         "She glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     else:
                         "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
@@ -1874,7 +1874,7 @@ label Girl_Stripping(Girl):
 
         elif Girl.Clothes["bottom"]:
 
-            if approval_check(Girl, 1350, taboo_modifier = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.seen_pussy and approval_check(Girl, 1100, taboo_modifier = 3) and not Girl.taboo):
+            if approval_check(Girl, 1350, taboo_modifier = 3, Alt = [[StormX], (800-Nudist*3)]) or (Girl.seen_pussy and approval_check(Girl, 1100, taboo_modifier = 3) and not Girl.taboo):
                 call change_Girl_stat(Girl, "lust", 75, 10)
                 $ line = Girl.Clothes["bottom"]
                 $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
@@ -1937,7 +1937,7 @@ label Girl_Stripping(Girl):
                 jump strip_ultimatum
         elif Girl.Clothes["top"] and not Girl.Clothes["underwear"]:
 
-            if approval_check(Girl, 1350, taboo_modifier = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.seen_pussy and approval_check(Girl, 1100, taboo_modifier = 3) and not Girl.taboo):
+            if approval_check(Girl, 1350, taboo_modifier = 3, Alt = [[StormX], (800-Nudist*3)]) or (Girl.seen_pussy and approval_check(Girl, 1100, taboo_modifier = 3) and not Girl.taboo):
                 $ line = Girl.Clothes["top"]
                 $ Girl.take_off("top")
                 if not Girl.seen_pussy:
@@ -1947,7 +1947,7 @@ label Girl_Stripping(Girl):
                     call change_Girl_stat(Girl, "inhibition", 200, 4)
                     if Girl == KittyX:
                         "She hesitantly glances your way, and then with a tug pulls her [line] through herself, tossing it to the ground."
-                    elif Girl in (EmmaX,LauraX,StormX):
+                    elif Girl in (EmmaX,LauraX, StormX):
                         "She glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     else:
                         "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
@@ -1979,7 +1979,7 @@ label Girl_Stripping(Girl):
 
         elif Girl.Clothes["bra"]:
 
-            if approval_check(Girl, 1250, taboo_modifier = 3,Alt=[[StormX],(750-Nudist*3)]) or (Girl.seen_breasts and approval_check(Girl, 1100, taboo_modifier = 3) and not Girl.taboo):
+            if approval_check(Girl, 1250, taboo_modifier = 3, Alt = [[StormX], (750-Nudist*3)]) or (Girl.seen_breasts and approval_check(Girl, 1100, taboo_modifier = 3) and not Girl.taboo):
                 call change_Girl_stat(Girl, "lust", 60, 5)
                 $ line = Girl.Clothes["bra"]
                 $ Girl.take_off("bra")
@@ -1990,7 +1990,7 @@ label Girl_Stripping(Girl):
                     call change_Girl_stat(Girl, "inhibition", 200, 3)
                     if Girl == KittyX:
                         "She hesitantly glances your way, and then with a tug pulls her [line] through herself, tossing it to the ground."
-                    elif Girl in (EmmaX,LauraX,StormX):
+                    elif Girl in (EmmaX,LauraX, StormX):
                         "She glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     else:
                         "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
@@ -2008,7 +2008,7 @@ label Girl_Stripping(Girl):
 
         elif Girl.Clothes["underwear"]:
 
-            if approval_check(Girl, 1350, taboo_modifier = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.seen_pussy and approval_check(Girl, 1100, taboo_modifier = 3) and not Girl.taboo):
+            if approval_check(Girl, 1350, taboo_modifier = 3, Alt = [[StormX], (800-Nudist*3)]) or (Girl.seen_pussy and approval_check(Girl, 1100, taboo_modifier = 3) and not Girl.taboo):
                 call change_Girl_stat(Girl, "lust", 75, 10)
                 $ line = Girl.Clothes["underwear"]
                 $ Girl.take_off("underwear")
@@ -2323,7 +2323,7 @@ label Bottoms_Off(Girl, Intro = 1):
                 if taboo:
                     call change_Girl_stat(Girl, "inhibition", 90, (int(taboo/10)))
 
-                $ Girl.expose_pussy()
+                $ Girl.expose_pussy(Girl)
 
                 if Girl == KittyX:
                     if counter:
@@ -2911,7 +2911,7 @@ label Bottoms_Off_Legs(Girl):
                     else:
                         Girl.voice "Fine."
 
-                    $ Girl.expose_pussy()
+                    $ Girl.expose_pussy(Girl)
 
                     if Girl.Clothes["bottom"]:
                         "She shifts her [Girl.Clothes[bottom].name] out of the way."
@@ -3008,7 +3008,7 @@ label Bottoms_Off_Legs(Girl):
                     $ Girl.Clothes["hose"] = "ripped_pantyhose"
                 if Girl.Clothes["hose"] not in Girl.inventory:
                     $ Girl.inventory.append(Girl.Clothes["hose"])
-                $ Girl.add_word(1,"ripped", "ripped")
+                $ Girl.add_word(1, "ripped", "ripped")
                 "You tear holes in her [line]."
                 if not approval_check(Girl, 1200, taboo_modifier=0):
                     $ Girl.change_face("angry", 1,eyes = "down")

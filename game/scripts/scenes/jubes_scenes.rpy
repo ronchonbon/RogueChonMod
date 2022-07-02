@@ -3,7 +3,7 @@ label meet_Jubes:
 
     pause 3.0
 
-    $ Player.add_word(1,"interruption")
+    $ Player.add_word(1, "interruption")
     $ Player.focus = 30
 
     $ JubesX.name = "???"
@@ -221,7 +221,7 @@ label meet_Jubes:
                 $ JubesX.change_face("startled", 2)
                 ch_v "Oh, I was just. . . thirsty?"
                 $ JubesX.change_face("smile", 1)
-                $ JubesX.add_word(1,"thirst", 0, 0, 0)
+                $ JubesX.add_word(1, "thirst", 0, 0, 0)
 
 
             "What were you doing?" if "thirst" not in JubesX.recent_history:
@@ -229,7 +229,7 @@ label meet_Jubes:
                 $ JubesX.change_face("startled", 2)
                 ch_v "I was just. . . getting a drink?"
                 $ JubesX.change_face("smile", 1)
-                $ JubesX.add_word(1,"thirst", 0, 0, 0)
+                $ JubesX.add_word(1, "thirst", 0, 0, 0)
 
 
 
@@ -240,7 +240,7 @@ label meet_Jubes:
                 ch_v "Yeah, I kinda have to. . ."
                 $ JubesX.change_face("sad", 1)
                 ch_v "Sorry again. . ."
-                $ JubesX.add_word(1,"blood", 0, 0, 0)
+                $ JubesX.add_word(1, "blood", 0, 0, 0)
             "Can you turn into a bat?" if "vamp" in JubesX.recent_history and "bat" not in JubesX.recent_history:
                 call change_Girl_stat(JubesX, "love", 90, 1)
                 $ JubesX.change_face("confused", 1)
@@ -248,7 +248,7 @@ label meet_Jubes:
                 $ JubesX.change_face("sly", 1)
                 ch_v "But I am strong and can turn into mist."
                 ch_v "Sometimes."
-                $ JubesX.add_word(1,"bat", 0, 0, 0)
+                $ JubesX.add_word(1, "bat", 0, 0, 0)
             "Is it contagious?" if "vamp" in JubesX.recent_history and "contagious" not in JubesX.history:
                 $ JubesX.change_face("sadside", 2)
                 ch_v "Infectious. . ."
@@ -258,7 +258,7 @@ label meet_Jubes:
                 ch_v "It was, but Dr. Strange was able to cast a spell or something."
                 ch_v "So you don't need to worry about it spreading to you or anything."
                 $ JubesX.change_face("sad", 1)
-                $ JubesX.add_word(1, 0, 0, 0,"contagious")
+                $ JubesX.add_word(1, 0, 0, 0, "contagious")
             "Why me?" if "vamp" in JubesX.recent_history and "devamp" not in JubesX.recent_history:
                 call change_Girl_stat(JubesX, "love", 90, 1)
                 $ JubesX.change_face("sly", 1,eyes = "side")
@@ -267,7 +267,7 @@ label meet_Jubes:
                 ch_v "I sorta figured that if you could negate powers, then maybe. . ."
                 $ JubesX.change_face("smile", 1)
                 ch_v "Maybe you could \"de-vampire\" me?"
-                $ JubesX.add_word(1,"devamp", 0, 0, 0)
+                $ JubesX.add_word(1, "devamp", 0, 0, 0)
                 menu:
                     extend ""
                     "You don't want to be a vampire":
@@ -303,7 +303,7 @@ label meet_Jubes:
                     ch_v "You know, among other things. . ."
                 else:
                     ch_v ". . . among other things. . ."
-                $ JubesX.add_word(1,"mutant", 0, 0, 0)
+                $ JubesX.add_word(1, "mutant", 0, 0, 0)
                 menu:
                     extend ""
                     "So what's your power?":
@@ -342,7 +342,7 @@ label meet_Jubes:
             "Well, I guess I'm out of questions.":
 
 
-                $ JubesX.add_word(1,"thirst", 0, 0, 0)
+                $ JubesX.add_word(1, "thirst", 0, 0, 0)
                 $ counter = 0
 
         if "thirst" in JubesX.recent_history and "vamp" not in JubesX.recent_history:
@@ -373,7 +373,7 @@ label meet_Jubes:
                     ch_v "Let me explain!"
             $ JubesX.change_face("sadside", 1)
             ch_v "So. . . I'm. . . a vampire?"
-            $ JubesX.add_word(1,"vamp", 0, 0, 0)
+            $ JubesX.add_word(1, "vamp", 0, 0, 0)
             menu:
                 extend ""
                 "This isn't a refreshment stand!":
@@ -555,7 +555,7 @@ label meet_Jubes:
     ch_v "I might see you around sometime."
     ch_v "In the moonlight. . ."
 
-    $ JubesX.add_word(1, 0, 0, 0,"met")
+    $ JubesX.add_word(1, 0, 0, 0, "met")
     $ active_Girls.append(JubesX) if JubesX not in active_Girls else active_Girls
 
     call remove_Girl(JubesX)
@@ -632,7 +632,7 @@ label Jubes_Sunshine:
             call change_Girl_stat(JubesX, "obedience", 90, 5)
             $ JubesX.change_face("confused", 1)
             ch_v "Yes. . ."
-            ch_v "But I am a -vampire,- remember?"
+            ch_v "But I am a -vampire, - remember?"
         "Ok.":
             call change_Girl_stat(JubesX, "love", 90, -2)
             call change_Girl_stat(JubesX, "inhibition", 90, 2)
@@ -669,7 +669,7 @@ label Jubes_Sunshine:
     ch_v "I don't really know what caused it, but I guess it had to do with your blood. . ."
     $ JubesX.change_face("smile", 1)
     ch_v "Anyway, I just wanted to say \"thank you,\" this is great!"
-    $ JubesX.add_word(1, 0, 0, 0,"sunshine")
+    $ JubesX.add_word(1, 0, 0, 0, "sunshine")
 
     call remove_Girl(JubesX)
 
@@ -727,7 +727,7 @@ label check_sunshock:
                 else:
                     ch_v "Thanks, that's sweet of you."
 
-                $ JubesX.add_word(1,"stayed", 0, 0, 0)
+                $ JubesX.add_word(1, "stayed", 0, 0, 0)
 
                 jump reset_location
             "Oh, too bad, you can stay here then.":
@@ -762,7 +762,7 @@ label is_Jubes_sunshocked:
 
         return True
 
-    $ JubesX.add_word(1,"sunshock", 0, 0, 0)
+    $ JubesX.add_word(1, "sunshock", 0, 0, 0)
 
     ch_v "Oh, wait, I'm kinda on a \"low charge\" at the moment, so I don't really want to go out in the sunlight?"
 
@@ -880,7 +880,7 @@ label Jubes_Mall:
 
     call clear_the_room (JubesX, 0, 0)
     call set_the_scene
-    $ Player.add_word(1, 0, 0, 0,"mall")
+    $ Player.add_word(1, 0, 0, 0, "mall")
 
     $ JubesX.change_face("surprised", 1,mouth = "sucking")
     ch_v "Hey, I just realized something!"
@@ -1141,7 +1141,7 @@ label Jubes_Key:
 
 
 
-label Jubes_BF(temp_Girls=[]):
+label Jubes_BF(temp_Girls = []):
     call shift_focus (JubesX)
     if JubesX.location != Player.location:
         if JubesX not in Player.Party:
@@ -1318,7 +1318,7 @@ label Jubes_BF(temp_Girls=[]):
                     call change_Girl_stat(JubesX, "love", 200, -5)
                     call change_Girl_stat(JubesX, "obedience", 80, 7)
                     $ JubesX.change_face("angry", 1,eyes = "side")
-                    $ JubesX.check_if_likes(Player.Harem[0],800,-20, 1)
+                    $ JubesX.check_if_likes(Player.Harem[0],800, -20, 1)
                     ch_v "That bitch."
                 "They wouldn't be cool with that." if len(Player.Harem) > 1:
                     call change_Girl_stat(JubesX, "love", 200, -5)
@@ -1338,7 +1338,7 @@ label Jubes_BF(temp_Girls=[]):
                         call change_Harem_stat (JubesX, 700, -10)
                     elif Player.Harem:
                         ch_v "Probably because of her."
-                        $ JubesX.check_if_likes(Player.Harem[0],800,-20, 1)
+                        $ JubesX.check_if_likes(Player.Harem[0],800, -20, 1)
                     $ line = "no"
                 "I'm just not into you like that.":
                     call change_Girl_stat(JubesX, "love", 200, -10)
@@ -1457,7 +1457,7 @@ label Jubes_BF(temp_Girls=[]):
     if simulation:
         return True
     $ approval_bonus = 10
-    $ Player.add_word(1,"interruption")
+    $ Player.add_word(1, "interruption")
     call enter_main_sex_menu(JubesX)
     $ approval_bonus = 0
 
@@ -1521,10 +1521,10 @@ label Jubes_Cleanhouse:
     ch_v "I can't believe you're putting me through this."
     ch_v "Making me choose between you and putting up with this whole arrangement."
     $ line = 0
-    if approval_check(JubesX, 1400) and approval_check(JubesX, 600,"O"):
+    if approval_check(JubesX, 1400) and approval_check(JubesX, 600, "O"):
 
         pass
-    elif approval_check(JubesX, 1200) and approval_check(JubesX, 500,"O"):
+    elif approval_check(JubesX, 1200) and approval_check(JubesX, 500, "O"):
 
         $ temp_Girls = Player.Harem[:]
         while temp_Girls and line != "no":
@@ -1673,7 +1673,7 @@ label Jubes_Sub:
                 call change_Girl_stat(JubesX, "love", 75, -5)
                 call change_Girl_stat(JubesX, "obedience", 200, -5)
                 $ JubesX.change_face("sadside", 1)
-                ch_v ". . . kind of,"
+                ch_v ". . . kind of, "
                 $ JubesX.change_face("sly", 1)
                 call change_Girl_stat(JubesX, "inhibition", 70, 5)
                 call change_Girl_stat(JubesX, "lust", 50, 5)
@@ -2186,7 +2186,7 @@ label Jubes_Sexfriend:
                     if Player.Harem:
                         $ JubesX.change_face("surprised", 2)
                         ch_v "Oh, [Player.Harem[0].name]?"
-                        $ JubesX.check_if_likes(Player.Harem[0],600,-25, 1)
+                        $ JubesX.check_if_likes(Player.Harem[0], 600, -25, 1)
                     $ JubesX.change_face("sly", 2)
                     ch_v "Well, she doesn't need to know about it. . ."
                     menu:
@@ -2238,7 +2238,7 @@ label Jubes_Sexfriend:
                     call change_Girl_stat(JubesX, "inhibition", 90, 15)
                     ch_v "Kinky."
 
-        $ Player.add_word(1,"interruption")
+        $ Player.add_word(1, "interruption")
         call before_action(JubesX, "sex", JubesX)
         call enter_main_sex_menu(JubesX)
 
@@ -2280,7 +2280,7 @@ label Jubes_Fuckbuddy:
     $ JubesX.player_petnames.append("fuck buddy")
     $ JubesX.event_happened[10] += 1
 
-    $ Player.add_word(1,"interruption")
+    $ Player.add_word(1, "interruption")
     call before_action(JubesX, "sex", JubesX)
     call enter_main_sex_menu(JubesX)
 

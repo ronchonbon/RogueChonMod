@@ -392,7 +392,7 @@ label Jubes_Monogamy:
                 return
             if "monogamous" not in JubesX.daily_history:
                 call change_Girl_stat(JubesX, "obedience", 90, 3)
-            $ JubesX.add_word(1, 0,"monogamous")
+            $ JubesX.add_word(1, 0, "monogamous")
             $ JubesX.traits.append("monogamous")
         "Don't hook up with other girls." if "monogamous" not in JubesX.traits:
             if approval_check(JubesX, 900, "O", taboo_modifier=0):
@@ -421,7 +421,7 @@ label Jubes_Monogamy:
                 return
             if "monogamous" not in JubesX.daily_history:
                 call change_Girl_stat(JubesX, "obedience", 90, 3)
-            $ JubesX.add_word(1, 0,"monogamous")
+            $ JubesX.add_word(1, 0, "monogamous")
             $ JubesX.traits.append("monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in JubesX.traits:
             if approval_check(JubesX, 700, "O", taboo_modifier=0):
@@ -439,7 +439,7 @@ label Jubes_Monogamy:
                 call change_Girl_stat(JubesX, "obedience", 90, 3)
             if "monogamous" in JubesX.traits:
                 $ JubesX.traits.remove("monogamous")
-            $ JubesX.add_word(1, 0,"monogamous")
+            $ JubesX.add_word(1, 0, "monogamous")
         "Never mind.":
             pass
     return
@@ -479,7 +479,7 @@ label Jubes_Jumped:
                 return
             if "chill" not in JubesX.daily_history:
                 call change_Girl_stat(JubesX, "obedience", 90, 3)
-            $ JubesX.add_word(1, 0,"chill")
+            $ JubesX.add_word(1, 0, "chill")
             $ JubesX.traits.append("chill")
         "Don't bother me like that." if "chill" not in JubesX.traits:
             if approval_check(JubesX, 800, "O", taboo_modifier=0):
@@ -509,7 +509,7 @@ label Jubes_Jumped:
                 return
             if "chill" not in JubesX.daily_history:
                 call change_Girl_stat(JubesX, "obedience", 90, 3)
-            $ JubesX.add_word(1, 0,"chill")
+            $ JubesX.add_word(1, 0, "chill")
             $ JubesX.traits.append("chill")
         "Knock yourself out.":
             if approval_check(JubesX, 800, "L", taboo_modifier=0):
@@ -527,7 +527,7 @@ label Jubes_Jumped:
                 call change_Girl_stat(JubesX, "obedience", 90, 3)
             if "chill" in JubesX.traits:
                 $ JubesX.traits.remove("chill")
-            $ JubesX.add_word(1, 0,"chill")
+            $ JubesX.add_word(1, 0, "chill")
         "Um, never mind.":
             pass
     return
@@ -895,7 +895,7 @@ label Jubes_SexChat:
 
 
 
-label Jubes_Chitchat(O=0, Options=["default", "default", "default"]):
+label Jubes_Chitchat(O=0, Options = ["default", "default", "default"]):
     $ round -= 3 if round > 3 else (round-1)
     if O:
         $ Options = [O]
@@ -1075,7 +1075,7 @@ label Jubes_Chitchat(O=0, Options=["default", "default", "default"]):
         ch_v "It was, but Dr. Strange was able to cast a spell or something."
         ch_v "So you don't need to worry about it spreading to you or anything."
         $ JubesX.change_face("sad", 1)
-        $ JubesX.add_word(1, 0, 0, 0,"contagious")
+        $ JubesX.add_word(1, 0, 0, 0, "contagious")
 
     elif Options[0] == "jubes":
 
@@ -1643,7 +1643,7 @@ label Jubes_Rename:
                 ch_v "That's kinda. . . formal, [JubesX.player_petname]."
         "Nevermind.":
             pass
-    $ JubesX.add_word(1, 0,"namechange")
+    $ JubesX.add_word(1, 0, "namechange")
     return
 
 

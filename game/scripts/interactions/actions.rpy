@@ -71,7 +71,7 @@ label start_action(Girl, action, context = None):
                     call excited_for_kiss_obedience_lines(Girl, action)
 
                     call change_Girl_stat(Girl, "obedience", 60, 1)
-                elif approval_check(Girl, 250, "O",Alt=[[KittyX,LauraX],300]) and approval_check(Girl, 250, "L",Alt=[[KittyX,LauraX], 200]):
+                elif approval_check(Girl, 250, "O", Alt = [[KittyX,LauraX],300]) and approval_check(Girl, 250, "L", Alt = [[KittyX,LauraX], 200]):
                     $ Girl.change_face("bemused")
 
                     Girl.voice "Ok, fine."

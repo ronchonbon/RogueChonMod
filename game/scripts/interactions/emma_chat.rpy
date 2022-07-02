@@ -502,7 +502,7 @@ label Emma_Monogamy:
                 return
             if "monogamous" not in EmmaX.daily_history:
                 call change_Girl_stat(EmmaX, "obedience", 90, 3)
-            $ EmmaX.add_word(1, 0,"monogamous")
+            $ EmmaX.add_word(1, 0, "monogamous")
             $ EmmaX.traits.append("monogamous")
         "Don't hook up with other girls." if "monogamous" not in EmmaX.traits:
             if approval_check(EmmaX, 900, "O", taboo_modifier=0):
@@ -532,7 +532,7 @@ label Emma_Monogamy:
                 return
             if "monogamous" not in EmmaX.daily_history:
                 call change_Girl_stat(EmmaX, "obedience", 90, 3)
-            $ EmmaX.add_word(1, 0,"monogamous")
+            $ EmmaX.add_word(1, 0, "monogamous")
             $ EmmaX.traits.append("monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in EmmaX.traits:
             if approval_check(EmmaX, 700, "O", taboo_modifier=0):
@@ -550,7 +550,7 @@ label Emma_Monogamy:
                 call change_Girl_stat(EmmaX, "obedience", 90, 3)
             if "monogamous" in EmmaX.traits:
                 $ EmmaX.traits.remove("monogamous")
-            $ EmmaX.add_word(1, 0,"monogamous")
+            $ EmmaX.add_word(1, 0, "monogamous")
         "Never mind.":
             pass
     return
@@ -592,7 +592,7 @@ label Emma_Jumped:
                 return
             if "chill" not in EmmaX.daily_history:
                 call change_Girl_stat(EmmaX, "obedience", 90, 3)
-            $ EmmaX.add_word(1, 0,"chill")
+            $ EmmaX.add_word(1, 0, "chill")
             $ EmmaX.traits.append("chill")
         "Don't bother me like that." if "chill" not in EmmaX.traits:
             if approval_check(EmmaX, 900, "O", taboo_modifier=0):
@@ -624,7 +624,7 @@ label Emma_Jumped:
                 return
             if "chill" not in EmmaX.daily_history:
                 call change_Girl_stat(EmmaX, "obedience", 90, 3)
-            $ EmmaX.add_word(1, 0,"chill")
+            $ EmmaX.add_word(1, 0, "chill")
             $ EmmaX.traits.append("chill")
         "Knock yourself out.":
             if approval_check(EmmaX, 800, "L", taboo_modifier=0):
@@ -642,7 +642,7 @@ label Emma_Jumped:
                 call change_Girl_stat(EmmaX, "obedience", 90, 3)
             if "chill" in EmmaX.traits:
                 $ EmmaX.traits.remove("chill")
-            $ EmmaX.add_word(1, 0,"chill")
+            $ EmmaX.add_word(1, 0, "chill")
         "Um, never mind.":
             pass
     return
@@ -1034,7 +1034,7 @@ label Emma_SexChat:
 
 
 
-label Emma_Chitchat(O=0, Options=["default", "default", "default"]):
+label Emma_Chitchat(O=0, Options = ["default", "default", "default"]):
     $ round -= 3 if round > 3 else (round-1)
     if O:
         $ Options = [O]
@@ -1352,7 +1352,7 @@ label Emma_Chitchat(O=0, Options=["default", "default", "default"]):
     elif Options[0] == "handy":
 
         $ EmmaX.change_face("sly", eyes = "side")
-        ch_e "You know, I was thinking about my hand,"
+        ch_e "You know, I was thinking about my hand, "
         $ EmmaX.change_face("sly")
         ch_e "on your cock. . ."
         ch_e "Oh, that expression is priceless. . ."
@@ -1432,7 +1432,7 @@ label Emma_Chitchat(O=0, Options=["default", "default", "default"]):
 
     elif Options[0] == "seenpeen":
         $ EmmaX.change_face("sly", 1)
-        ch_e "Perhaps I should have mentioned it earlier,"
+        ch_e "Perhaps I should have mentioned it earlier, "
         $ EmmaX.change_face("sly", 1, eyes = "down")
         ch_e "That cock you've got is certainly an interesting specimen."
         $ EmmaX.change_face("bemused", 1)
@@ -1815,7 +1815,7 @@ label Emma_Rename:
             $ EmmaX.change_face()
         "Nevermind.":
             pass
-    $ EmmaX.add_word(1, 0,"namechange")
+    $ EmmaX.add_word(1, 0, "namechange")
     return
 
 

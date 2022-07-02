@@ -94,7 +94,7 @@ label MindFuck(TempLoc=0):
             call set_the_scene
             Girl.voice "There. . ."
 
-            $ Player.add_word(1,"MindFuck", "MindFuck", 0,"MindFuck")
+            $ Player.add_word(1, "MindFuck", "MindFuck", 0, "MindFuck")
             call shift_focus(Girl)
             call enter_main_sex_menu(Girl)
 
@@ -125,7 +125,7 @@ label MindFuck(TempLoc=0):
             elif Girl == JeanX:
                 ch_j "You know, like if you let your guards down a little. . ."
                 ch_j "I could work my way in there and we could have some fun. . ."
-            $ Player.add_word(1,"mfuck?")
+            $ Player.add_word(1, "mfuck?")
             jump MindFuck_Menu
         "Nah, over the phone is fine.":
             if Girl == EmmaX:

@@ -55,7 +55,7 @@ label chat:
                 return
 
             if Girl == LauraX and Girl.location == Player.location and "scent" in Player.daily_history:
-                if not approval_check(Girl, 1700) and not approval_check(Girl, 600,"O"):
+                if not approval_check(Girl, 1700) and not approval_check(Girl, 600, "O"):
                     python:
                         for G in all_Girls:
                             if G in Player.daily_history and "saw with " + G.tag not in Girl.traits and Girl.likes[G.tag] <= 700:
@@ -391,7 +391,7 @@ label chat_menu:
                             ch_v "Sure, yeah."
 
                         $ Player.Phonebook.append(Girl)
-                    elif approval_check(Girl, 200, "O",Alt=[[EmmaX],500-EmmaX.inhibition]):
+                    elif approval_check(Girl, 200, "O", Alt = [[EmmaX],500-EmmaX.inhibition]):
                         if Girl == RogueX:
                             ch_r "If you want it, I guess."
                         elif Girl == KittyX:
@@ -437,7 +437,7 @@ label chat_menu:
 
                 return
 
-            if approval_check(Girl, 600,Alt=[[EmmaX,JeanX],900]):
+            if approval_check(Girl, 600, Alt = [[EmmaX,JeanX], 900]):
                 $ Player.Party.append(Girl)
 
                 if Girl == RogueX:
@@ -718,7 +718,7 @@ label change_attributes(Girl):
 
                         $ line = "ask"
                     "Don't ever leave when I'm around." if "lockedtravels" not in Girl.traits or "freetravels" in Girl.traits:
-                        if approval_check(Girl, 500, "O",Alt=[[EmmaX,JeanX],600]) or approval_check(Girl, 900, "L"):
+                        if approval_check(Girl, 500, "O", Alt = [[EmmaX,JeanX], 600]) or approval_check(Girl, 900, "L"):
                             $ Girl.change_face("sexy")
 
                             if Girl == RogueX:
@@ -853,7 +853,7 @@ label change_attributes(Girl):
                             ch_v "Sure, I can give you space. . ."
 
                         $ Girl.change_face("smile")
-                        $ Girl.add_word(1, 0, 0,"lockedout")
+                        $ Girl.add_word(1, 0, 0, "lockedout")
             "Switch to. . .":
                 call switch_chat
             "Never mind.":

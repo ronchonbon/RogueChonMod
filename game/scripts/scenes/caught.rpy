@@ -324,7 +324,7 @@ label caught_changing(Girl):
 label caught_showering(Girl):
     call set_the_scene(location = "bg_door", fade = True)
 
-    $ Girl.add_word(1,"showered", "showered", 0, 0)
+    $ Girl.add_word(1, "showered", "showered", 0, 0)
     $ Girl.change_Outfit("nude")
     $ Girl.change_face("smile", 1)
 
@@ -418,7 +418,7 @@ label caught_showering(Girl):
         if "will_masturbate" in Girl.daily_history:
             $ Girl.drain_word("will_masturbate", 0, 1)
             $ Girl.change_face("sexy", eyes = "closed")
-            $ Girl.add_word(1,"unseen", "unseen", 0, 0)
+            $ Girl.add_word(1, "unseen", "unseen", 0, 0)
 
             call set_the_scene
 
@@ -491,7 +491,7 @@ label caught_showering(Girl):
                         call change_Girl_stat(Girl, "obedience", 80, 2)
                         call change_Girl_stat(Girl, "inhibition", 60, 1)
                 "Why, would it have made a difference?":
-                    if not approval_check(Girl, 500,"I"):
+                    if not approval_check(Girl, 500, "I"):
                         call change_Girl_stat(Girl, "love", 50, -3)
                         call change_Girl_stat(Girl, "obedience", 50, 2)
 
@@ -549,7 +549,7 @@ label caught_showering(Girl):
                         call change_Girl_stat(Girl, "obedience", 80, 2)
                         call change_Girl_stat(Girl, "inhibition", 60, 1)
                 "I still like the view. . ." if Girl != EmmaX:
-                    if approval_check(Girl, 500,"I"):
+                    if approval_check(Girl, 500, "I"):
                         call change_Girl_stat(Girl, "love", 80, 1)
                     else:
                         call change_Girl_stat(Girl, "love", 50, -1)
@@ -936,8 +936,8 @@ label caught_lesbian(GirlA, GirlB):
                 $ girl_secondary_action = "fondle_pussy"
                 $ second_girl_main_action = "fondle_pussy"
 
-                $ GirlA.add_word(1,"unseen", "unseen")
-                $ GirlB.add_word(1,"unseen", "unseen")
+                $ GirlA.add_word(1, "unseen", "unseen")
+                $ GirlB.add_word(1, "unseen", "unseen")
 
                 $ Partner = Girl2
                 $ interrupted = 0
@@ -987,7 +987,7 @@ label caught_having_sex(Girl):
 
     show Xavier_sprite at sprite_location(stage_left)
 
-    call change_Xavier_face("shocked")
+    $ Xavier.change_face("shocked")
 
     $ punishment_days = Girl.event_counter["caught"]
 
@@ -1073,18 +1073,18 @@ label caught_having_sex(Girl):
             ch_x "What sort of message does that send?"
             ch_x "How appropriate would it be if I were to just wander the halls with Miss Grey on my lap?"
 
-            call change_Xavier_face("hypno")
+            $ Xavier.change_face("hypno")
 
             ch_x "Just. . . running my hands along her firm little body without a care in the world. . ."
 
-            call change_Xavier_face("happy")
+            $ Xavier.change_face("happy")
 
             if JeanX.location == Player.location:
                 "You glance over at [JeanX.name], she shrugs."
 
             ch_x ". . ."
 
-            call change_Xavier_face("shocked")
+            $ Xavier.change_face("shocked")
 
             ch_x "Yes, well, as I was saying! . ."
         else:
@@ -1102,15 +1102,15 @@ label caught_having_sex(Girl):
             ch_x "What sort of message does that send?"
             ch_x "Do you think it would be appropriate for me to engage in such escapades?"
 
-            call change_Xavier_face("hypno")
+            $ Xavier.change_face("hypno")
 
             ch_x "Just. . . rolling down the halls with my balls flowing freely in the wind. . ."
 
-            call change_Xavier_face("happy")
+            $ Xavier.change_face("happy")
 
             ch_x ". . ."
 
-            call change_Xavier_face("shocked")
+            $ Xavier.change_face("shocked")
 
             ch_x "Do not distract me! . ."
         else:
@@ -1159,7 +1159,7 @@ label caught_having_sex(Girl):
 
             call change_Girl_stat(Girl, "obedience", 50, -5)
 
-            call change_Xavier_face("happy")
+            $ Xavier.change_face("happy")
 
             if Girl.event_counter["caught"]:
                 ch_x "But you know you've done this before. . . at least [Girl.event_counter[caught]] times. . ."
@@ -1181,7 +1181,7 @@ label caught_having_sex(Girl):
 
             $ punishment_days += 5
 
-            if being_punished:
+            if Player.being_punished:
                 ch_x "I'm extending your punishment by [punishment_days] days."
             else:
                 ch_x "I'm halving your daily stipend for [punishment_days] days."
@@ -1225,13 +1225,13 @@ label caught_having_sex(Girl):
                 call change_Girl_stat(JubesX, "obedience", 80, 5)
                 call change_Girl_stat(JubesX, "love", 90, 10)
 
-            call change_Xavier_face("angry")
+            $ Xavier.change_face("angry")
 
             $ punishment_days += 10
 
             ch_x "If that's your attitude, harsher methods might be necessary."
 
-            if being_punished:
+            if Player.being_punished:
                 ch_x "I'm extending your punishment by [punishment_days] days."
             else:
                 ch_x "I'm halving your daily stipend for [punishment_days] days."
@@ -1322,13 +1322,13 @@ label caught_having_sex(Girl):
                 call change_Girl_stat(JubesX, "obedience", 50, 25)
                 call change_Girl_stat(JubesX, "obedience", 90, 30)
 
-            call change_Xavier_face("angry")
+            $ Xavier.change_face("angry")
 
             $ punishment_days += 20
 
             ch_x "If that's your attitude, harsher methods might be necessary."
 
-            if being_punished:
+            if Player.being_punished:
                 ch_x "I'm extending your punishment by [punishment_days] days!"
             else:
                 ch_x "I'm halving your daily stipend for [punishment_days] days!"
@@ -1494,13 +1494,13 @@ label caught_having_sex(Girl):
                 ch_v "Is this a \"Gundam\" thing?"
                 ch_p "Oh, yeah, I guess I haven't mentioned that. . ."
 
-        call change_Xavier_face("angry")
+        $ Xavier.change_face("angry")
 
         $ punishment_days += 10
 
         ch_x "I have no idea what that was about, but it sounds like you haven't learned."
 
-        if being_punished:
+        if Player.being_punished:
             ch_x "I'm extending your punishment by [punishment_days] days."
         else:
             ch_x "I'm halving your daily stipend for [punishment_days] days."
@@ -1542,14 +1542,14 @@ label caught_having_sex(Girl):
 
         ch_x "I've had enough of you, begone."
 
-    $ being_punished += punishment_days
+    $ Player.being_punished += punishment_days
 
     $ Girl.event_counter["caught"] += 1
 
     if Partner:
         $ Partner.event_counter["caught"] += 1
 
-    $ Girl.add_word(0,"caught", "caught")
+    $ Girl.add_word(0, "caught", "caught")
 
     if Girl == KittyX and KittyX not in Rules and "Xavier's photo" not in Player.inventory:
         "It would probably be a good idea to find some way to get Xavier to leave you alone."
@@ -1575,7 +1575,7 @@ label caught_having_sex(Girl):
 
         ch_j "Oh, you mean how I mindwipe the \"NPCs\" that get too nosy?"
 
-        call change_Xavier_face("angry")
+        $ Xavier.change_face("angry")
 
         ch_x "If by \"NPCs\" you mean your fellow students. . ."
         ch_x ". . . and by \"get too nosy,\" you mean \"notice you having sex in public\". . ."
@@ -1591,12 +1591,12 @@ label caught_having_sex(Girl):
 
         ch_j "Who cares."
 
-        call change_Xavier_face("shocked")
+        $ Xavier.change_face("shocked")
 
         ch_x "!!!"
         ch_x "I do!"
 
-        call change_Xavier_face("angry")
+        $ Xavier.change_face("angry")
 
         ch_x "That is it, young lady. Until further notice, you're forbidden from. . . whammying your fellow students!"
 
@@ -1608,7 +1608,7 @@ label caught_having_sex(Girl):
 
         ch_x "Ugh. . ."
 
-        call change_Xavier_face("psychic")
+        $ Xavier.change_face("psychic")
 
         ch_x "[Player.name]. . . this may take a while. . ."
         ch_x "You may as well leave. . ."
@@ -1675,11 +1675,11 @@ label execute_plan(Girl):
     "As you say this, a sly grin crosses [Girl.name]'s face."
     "You quickly approach Xavier and place your hands on his head."
 
-    call change_Xavier_face("psychic")
+    $ Xavier.change_face("psychic")
 
     ch_x ". . ."
 
-    call change_Xavier_face("shocked")
+    $ Xavier.change_face("shocked")
 
     "Xavier realizes with a shock that with your powers, his telepathy is useless."
 
@@ -1719,7 +1719,7 @@ label execute_plan(Girl):
 
             "[Partner.name] understands what's going on here."
 
-    call change_Xavier_face("angry")
+    $ Xavier.change_face("angry")
 
     if Girl == RogueX:
         $ RogueX.take_off("gloves")
@@ -1730,7 +1730,7 @@ label execute_plan(Girl):
         "[RogueX.name] moves in and also grabs his head, duplicating his powers as he watches helplessly."
         "Now that she posesses his full power, while his are negated, he has no defenses."
 
-        call change_Xavier_face("hypno")
+        $ Xavier.change_face("hypno")
 
         if "Omega" in Player.traits:
             ch_x "Oh, not again."
@@ -1783,7 +1783,7 @@ label execute_plan(Girl):
 
         "[Girl.name] moves behind Xavier and activates her own telepathy."
 
-        call change_Xavier_face("angry")
+        $ Xavier.change_face("angry")
 
         if (Girl == EmmaX and "Psi" in Player.traits) or (Girl == JeanX and "Alpha" in Player.traits):
             ch_x "Oh, not again. . ."
@@ -1898,7 +1898,7 @@ label execute_plan(Girl):
         ch_v "Well, [JubesX.player_petname], what should we ask for?"
 
     $ count = 3
-    $ being_punished = 0
+    $ Player.being_punished = 0
 
     while count > 0:
         $ count -= 1

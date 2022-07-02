@@ -448,7 +448,7 @@ label Kitty_Monogamy:
                 return
             if "monogamous" not in KittyX.daily_history:
                 call change_Girl_stat(KittyX, "obedience", 90, 3)
-            $ KittyX.add_word(1, 0,"monogamous")
+            $ KittyX.add_word(1, 0, "monogamous")
             $ KittyX.traits.append("monogamous")
         "Don't hook up with other girls." if "monogamous" not in KittyX.traits:
             if approval_check(KittyX, 800, "O", taboo_modifier=0):
@@ -478,7 +478,7 @@ label Kitty_Monogamy:
                 return
             if "monogamous" not in KittyX.daily_history:
                 call change_Girl_stat(KittyX, "obedience", 90, 3)
-            $ KittyX.add_word(1, 0,"monogamous")
+            $ KittyX.add_word(1, 0, "monogamous")
             $ KittyX.traits.append("monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in KittyX.traits:
             if approval_check(KittyX, 650, "O", taboo_modifier=0):
@@ -497,7 +497,7 @@ label Kitty_Monogamy:
                 call change_Girl_stat(KittyX, "obedience", 90, 3)
             if "monogamous" in KittyX.traits:
                 $ KittyX.traits.remove("monogamous")
-            $ KittyX.add_word(1, 0,"monogamous")
+            $ KittyX.add_word(1, 0, "monogamous")
         "Never mind.":
             pass
     return
@@ -538,7 +538,7 @@ label Kitty_Jumped:
                 return
             if "chill" not in KittyX.daily_history:
                 call change_Girl_stat(KittyX, "obedience", 90, 3)
-            $ KittyX.add_word(1, 0,"chill")
+            $ KittyX.add_word(1, 0, "chill")
             $ KittyX.traits.append("chill")
         "Don't bother me like that." if "chill" not in KittyX.traits:
             if approval_check(KittyX, 900, "O", taboo_modifier=0):
@@ -568,7 +568,7 @@ label Kitty_Jumped:
                 return
             if "chill" not in KittyX.daily_history:
                 call change_Girl_stat(KittyX, "obedience", 90, 3)
-            $ KittyX.add_word(1, 0,"chill")
+            $ KittyX.add_word(1, 0, "chill")
             $ KittyX.traits.append("chill")
         "Knock yourself out.":
             if approval_check(KittyX, 800, "L", taboo_modifier=0):
@@ -588,7 +588,7 @@ label Kitty_Jumped:
                 call change_Girl_stat(KittyX, "obedience", 90, 3)
             if "chill" in KittyX.traits:
                 $ KittyX.traits.remove("chill")
-            $ KittyX.add_word(1, 0,"chill")
+            $ KittyX.add_word(1, 0, "chill")
         "Um, never mind.":
             pass
     return
@@ -959,7 +959,7 @@ label Kitty_SexChat:
 
 
 
-label Kitty_Chitchat(O=0, Options=["default", "default", "default"]):
+label Kitty_Chitchat(O=0, Options = ["default", "default", "default"]):
     $ round -= 3 if round > 3 else (round-1)
     if O:
         $ Options = [O]
@@ -1731,7 +1731,7 @@ label Kitty_Rename:
             $ KittyX.change_face()
         "Nevermind.":
             pass
-    $ KittyX.add_word(1, 0,"namechange")
+    $ KittyX.add_word(1, 0, "namechange")
     return
 
 

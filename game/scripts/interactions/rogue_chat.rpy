@@ -232,7 +232,7 @@ label Rogue_OtherWoman(counter=0):
                     ch_r "If you insist."
                 else:
                     ch_r "Don't see why not."
-                $ RogueX.add_word(1, 0, 0,"downlow")
+                $ RogueX.add_word(1, 0, 0, "downlow")
         "I can break it off with her.":
 
             $ RogueX.change_face("sad")
@@ -398,7 +398,7 @@ label Rogue_Monogamy:
                 return
             if "monogamous" not in RogueX.daily_history:
                 call change_Girl_stat(RogueX, "obedience", 90, 3)
-            $ RogueX.add_word(1, 0,"monogamous", "monogamous")
+            $ RogueX.add_word(1, 0, "monogamous", "monogamous")
         "Don't hook up with other girls." if "monogamous" not in RogueX.traits:
             if approval_check(RogueX, 900, "O", taboo_modifier=0):
 
@@ -427,7 +427,7 @@ label Rogue_Monogamy:
                 return
             if "monogamous" not in RogueX.daily_history:
                 call change_Girl_stat(RogueX, "obedience", 90, 3)
-            $ RogueX.add_word(1, 0,"monogamous", "monogamous")
+            $ RogueX.add_word(1, 0, "monogamous", "monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in RogueX.traits:
             if approval_check(RogueX, 700, "O", taboo_modifier=0):
                 $ RogueX.change_face("sly", 1,eyes = "side")
@@ -444,7 +444,7 @@ label Rogue_Monogamy:
                 call change_Girl_stat(RogueX, "obedience", 90, 3)
             if "monogamous" in RogueX.traits:
                 $ RogueX.traits.remove("monogamous")
-            $ RogueX.add_word(1, 0,"monogamous")
+            $ RogueX.add_word(1, 0, "monogamous")
         "Never mind.":
             pass
     return
@@ -484,7 +484,7 @@ label Rogue_Jumped:
                 return
             if "chill" not in RogueX.daily_history:
                 call change_Girl_stat(RogueX, "obedience", 90, 3)
-            $ RogueX.add_word(1, 0,"chill", "chill")
+            $ RogueX.add_word(1, 0, "chill", "chill")
         "Don't bother me like that." if "chill" not in RogueX.traits:
             if approval_check(RogueX, 900, "O", taboo_modifier=0):
 
@@ -513,7 +513,7 @@ label Rogue_Jumped:
                 return
             if "chill" not in RogueX.daily_history:
                 call change_Girl_stat(RogueX, "obedience", 90, 3)
-            $ RogueX.add_word(1, 0,"chill", "chill")
+            $ RogueX.add_word(1, 0, "chill", "chill")
         "Knock yourself out.":
             if approval_check(RogueX, 800, "L", taboo_modifier=0):
                 $ RogueX.change_face("sly", 1)
@@ -530,7 +530,7 @@ label Rogue_Jumped:
                 call change_Girl_stat(RogueX, "obedience", 90, 3)
             if "chill" in RogueX.traits:
                 $ RogueX.traits.remove("chill")
-            $ RogueX.add_word(1, 0,"chill")
+            $ RogueX.add_word(1, 0, "chill")
         "Um, never mind.":
             pass
     return
@@ -546,7 +546,7 @@ label Rogue_Not_Virgin:
             $ RogueX.change_face("bemused", 1)
             call change_Girl_stat(RogueX, "love", 60, 5)
             call change_Girl_stat(RogueX, "obedience", 20, 15)
-            ch_r "Oh, no! You definitely were, it's just. . . you know,"
+            ch_r "Oh, no! You definitely were, it's just. . . you know, "
             ch_r "I lead a pretty active lifestyle, so I lost that physical barrier years ago."
         "So you get around?":
             $ RogueX.change_face("sexy", 1)
@@ -931,7 +931,7 @@ label Rogue_SexChat:
 
 
 
-label Rogue_Chitchat(O=0, Options=["default", "default", "default"]):
+label Rogue_Chitchat(O=0, Options = ["default", "default", "default"]):
     $ round -= 3 if round > 3 else (round-1)
     if O:
         $ Options = [O]
@@ -964,7 +964,7 @@ label Rogue_Chitchat(O=0, Options=["default", "default", "default"]):
             $ Options.append("blowjob")
         if "steal" in RogueX.traits:
             $ Options.append("steal")
-        if being_punished and "caught chat" not in RogueX.daily_history:
+        if Player.being_punished and "caught chat" not in RogueX.daily_history:
             $ Options.append("caught")
         if RogueX.event_happened[0] and "key chat" not in RogueX.daily_history:
             $ Options.append("key")
@@ -1223,7 +1223,7 @@ label Rogue_Chitchat(O=0, Options=["default", "default", "default"]):
             ch_r "You been outside today? Wow, is it gorgeous!"
         elif D20 == 16:
             $ RogueX.change_face("smile")
-            ch_r "You know, I tagged Wolverine once,"
+            ch_r "You know, I tagged Wolverine once, "
             $ RogueX.change_face("sadside")
             $ RogueX.brows = "confused"
             ch_r "I still catch myself calling people \"bub\" from time to time."

@@ -175,7 +175,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
     elif approval_check(Player.Party[0], 500):
         $ action = "snuggle"
 
-        if Player.Party[0] == JeanX and not approval_check(Player.Party[0], 700,"L"):
+        if Player.Party[0] == JeanX and not approval_check(Player.Party[0], 700, "L"):
             "[Player.Party[0].name] briefly rests against your shoulder, but then shakes herself and pulls back."
 
             $ action = None

@@ -348,7 +348,7 @@ label Emma_Caught_Classroom:
 
     "As you walk down the halls, you hear some odd noises coming from the classroom."
 
-    $ Player.add_word(1,"interruption")
+    $ Player.add_word(1, "interruption")
 
     $ taboo = 0
     $ Count = 0
@@ -428,7 +428,7 @@ label Emma_Caught_Classroom:
                 $ EmmaX.change_face("sly", brows = "angry")
                 call change_Girl_stat(EmmaX, "lust", 80, 3)
 
-                ch_e "I imagine I shouldn't, but you know how it can be,"
+                ch_e "I imagine I shouldn't, but you know how it can be, "
 
                 $ EmmaX.brows = "normal"
                 call change_Girl_stat(EmmaX, "lust", 80, 5)
@@ -920,7 +920,7 @@ label Emma_taboo_Talk:
 
     $ EmmaX.change_face("sly")
     if "taboocheck" not in EmmaX.history:
-        ch_e "[EmmaX.player_petname], I know that we've had some. . . fun,"
+        ch_e "[EmmaX.player_petname], I know that we've had some. . . fun, "
         $ EmmaX.change_face("sly", eyes = "side")
         ch_e "but that was between us, in private."
         $ EmmaX.change_face("sly")
@@ -1098,7 +1098,7 @@ label Emma_taboo_Talk:
 
 
 
-label Emma_ThreeCheck(Pass = 3, Quest=[], Girl=0, temp_Girls=[]):
+label Emma_ThreeCheck(Pass = 3, Quest = [], Girl=0, temp_Girls = []):
 
     if EmmaX.SEXP <= 30:
         $ EmmaX.change_face("confused")
@@ -1140,7 +1140,7 @@ label Emma_ThreeCheck(Pass = 3, Quest=[], Girl=0, temp_Girls=[]):
         elif approval_check(EmmaX, 500, "O"):
             ch_e "[EmmaX.player_petname], there is something. . . compelling about you. . ."
         elif approval_check(EmmaX, 500, "I"):
-            ch_e "[EmmaX.player_petname], you know that I'm. . . flexible,"
+            ch_e "[EmmaX.player_petname], you know that I'm. . . flexible, "
         else:
             ch_e "[EmmaX.player_petname], I don't know what this even is yet, but. . ."
         ch_e "I'm a teacher at this school, and I can't exactly be caught forming some sort of. . ."
@@ -1401,7 +1401,7 @@ label Emma_BF:
     if simulation:
         return True
     $ approval_bonus = 10
-    $ Player.add_word(1,"interruption")
+    $ Player.add_word(1, "interruption")
     call enter_main_sex_menu(EmmaX)
     $ approval_bonus = 0
     return
@@ -1677,7 +1677,7 @@ label Emma_Love:
             call change_Girl_stat(EmmaX, "obedience", 90, 20)
             ch_e "That cow!"
             $ EmmaX.recent_history.append("angry")
-            $ EmmaX.check_if_likes(line,800,-50, 1)
+            $ EmmaX.check_if_likes(line,800, -50, 1)
     ch_e "I suppose I'll just have to let this go."
     ch_e "I'll. . . see you in a bit."
     ch_e "I need some time to consider this."
@@ -1699,7 +1699,7 @@ label Emma_Love_End:
         ch_e "I think we've certainly waited long enough. . ."
     else:
         ch_e "Whatever do you intend to do about it?"
-    $ Player.add_word(1,"interruption")
+    $ Player.add_word(1, "interruption")
     menu:
         extend ""
         "Yeah, let's do this. . . [[have sex]":
@@ -2022,7 +2022,7 @@ label Emma_Sub_Asked:
                             call change_Girl_stat(EmmaX, "love", 200, -5)
                             call change_Girl_stat(EmmaX, "obedience", 200, 10)
                             ch_e ". . ."
-                        elif approval_check(EmmaX,650, "O"):
+                        elif approval_check(EmmaX, 650, "O"):
                             call change_Girl_stat(EmmaX, "love", 200, -5)
                             call change_Girl_stat(EmmaX, "obedience", 200, 10)
                             ch_e "I- um. . .hmmm. . ."
@@ -2382,7 +2382,7 @@ label Emma_Fuckbuddy:
     "Out of nowhere, you feel a tongue sliding across your cock."
     "Even though you're fully dressed, it definitely feels like a mouth has enveloped your cock."
     "You look down, but can't see any movement, although your cock has become diamond hard."
-    "As you try to control your obvious erection, a voice tickles the back of your mind,"
+    "As you try to control your obvious erection, a voice tickles the back of your mind, "
     ch_e "To me, my X-Man. . ."
     "-and suddenly the pressure is gone."
     "Looking around, you don't see anyone nearby, and it doesn't look like anyone else noticed what happened."
@@ -2401,9 +2401,9 @@ label Emma_Daddy:
     call set_the_scene
     ch_e ". . ."
     if EmmaX in Player.Harem:
-        ch_e "We have been dating a while, [EmmaX.player_petname],"
+        ch_e "We have been dating a while, [EmmaX.player_petname], "
     else:
-        ch_e "We have been enjoying ourselves,"
+        ch_e "We have been enjoying ourselves, "
     if EmmaX.love > EmmaX.obedience and EmmaX.love > EmmaX.inhibition:
         ch_e "and you certainly are sweet. . ."
     elif EmmaX.obedience > EmmaX.inhibition:

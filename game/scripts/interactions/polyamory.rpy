@@ -24,7 +24,7 @@ label AskDateOther:
     return
 
 
-label Les_Interupted(Girl=0, temp_Girls=[]):
+label Les_Interupted(Girl=0, temp_Girls = []):
     $ Girl = check_girl(Girl)
 
     if "unseen" not in Girl.recent_history:
@@ -134,7 +134,7 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
                 call change_Girl_stat(Girl, "love", 90, 1)
                 call change_Girl_stat(Girl, "obedience", 50, 2)
                 call change_Girl_stat(Girl, "obedience", 70, 2)
-                "She looks pointedly at your cock,"
+                "She looks pointedly at your cock, "
                 if Girl == RogueX:
                     ch_r "Suuure . . ."
                 elif Girl == KittyX:
@@ -262,7 +262,7 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
         return
     $ action_context = "interrupted"
 
-label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
+label LesScene(Girl=0, Bonus=0, temp_Girls = []):
     $ Girl = check_girl(Girl)
     call shift_focus (Girl)
 
@@ -329,8 +329,8 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
     $ Partner.drain_word("unseen", 1, 0)
     $ line = 0
 
-    $ Girl.add_word(1,"noticed "+Partner.tag,"noticed "+Partner.tag)
-    $ Partner.add_word(1,"noticed "+Girl.tag,"noticed "+Girl.tag)
+    $ Girl.add_word(1, "noticed "+Partner.tag, "noticed "+Partner.tag)
+    $ Partner.add_word(1, "noticed "+Girl.tag, "noticed "+Girl.tag)
 
     if Player.location in bedrooms:
         $ taboo = 0
@@ -1078,7 +1078,7 @@ label Les_Partner:
         $ temp_Girls.remove(temp_Girls[0])
 
 
-label Les_Prep(Girl=Player.focused_Girl, temp_Girls=[]):
+label Les_Prep(Girl=Player.focused_Girl, temp_Girls = []):
 
     $ line = 0
     if Girl not in all_Girls or Girl == Partner:
@@ -1103,8 +1103,8 @@ label Les_Prep(Girl=Player.focused_Girl, temp_Girls=[]):
 
     $ line = 0
 
-    $ Girl.add_word(1,"noticed "+Partner.tag,"noticed "+Partner.tag)
-    $ Partner.add_word(1,"noticed "+Girl.tag,"noticed "+Girl.tag)
+    $ Girl.add_word(1, "noticed "+Partner.tag, "noticed "+Partner.tag)
+    $ Partner.add_word(1, "noticed "+Girl.tag, "noticed "+Girl.tag)
 
     if "unseen" not in Girl.recent_history:
 
@@ -1133,8 +1133,8 @@ label Les_Prep(Girl=Player.focused_Girl, temp_Girls=[]):
     if Girl.taboo:
         $ Girl.drain_word("no_taboo")
     $ Girl.drain_word("no_lesbian")
-    $ Girl.add_word(0,"lesbian", "lesbian")
-    $ Partner.add_word(0,"lesbian", "lesbian")
+    $ Girl.add_word(0, "lesbian", "lesbian")
+    $ Partner.add_word(0, "lesbian", "lesbian")
 
 label Les_Cycle(Girl=Player.focused_Girl):
     $ Girl = check_girl(Girl)
@@ -1365,8 +1365,8 @@ label Les_After:
                 ch_v "It was cool to have an audience. . ."
     if not action_context:
         call Post_Les_Dialog
-    $ Girl.add_word(1, 0, 0, 0,"les "+Partner.tag)
-    $ Partner.add_word(1, 0, 0, 0,"les "+Girl.tag)
+    $ Girl.add_word(1, 0, 0, 0, "les "+Partner.tag)
+    $ Partner.add_word(1, 0, 0, 0, "les "+Girl.tag)
     $ approval_bonus = 0
     call checkout
     return
@@ -1588,8 +1588,8 @@ label Les_Response(Speaker=0, Subject=0, Step = 1, B=0, B2=0, approval_bonus=0, 
                 ch_v "Come on, you in, [Subject.tag]? . ."
             if B2 >= 100:
                 $ Result = 1
-                $ Speaker.change_likes(Subject,(int(B/10)))
-                $ Subject.change_likes(Speaker,(int(B2/10)))
+                $ Speaker.likes[Subject.tag] += (int(B/10))
+                $ Subject.likes[Speaker.tag] += (int(B2/10))
         else:
             return Result
 
@@ -1753,12 +1753,12 @@ label Les_Response(Speaker=0, Subject=0, Step = 1, B=0, B2=0, approval_bonus=0, 
                         ch_s "This is not how one asks a favor."
                     elif Speaker == JubesX:
                         ch_v "No way!"
-                    $ Speaker.add_word(1,"angry", "angry")
+                    $ Speaker.add_word(1, "angry", "angry")
             "[Subject.name], what do you think?":
                 $ Subject.change_face("sexy", 1)
-                $ Speaker.change_likes(Subject,(int(B/10)))
+                $ Speaker.likes[Subject.tag] += (int(B/10))
                 if B >= 50:
-                    $ Subject.change_likes(Speaker,5)
+                    $ Subject.likes[Speaker.tag] += 5
                 if Subject == RogueX:
                     if Speaker == KittyX:
                         if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
@@ -1781,7 +1781,7 @@ label Les_Response(Speaker=0, Subject=0, Step = 1, B=0, B2=0, approval_bonus=0, 
                             ch_k "Come on [Speaker.tag], you know we have fun."
                         else:
                             ch_k "Come on [Speaker.tag], could be fun."
-                    elif Speaker in (EmmaX,StormX):
+                    elif Speaker in (EmmaX, StormX):
                         if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                             ch_k "I mean, it might be nice to show [Subject.player_petname] what you've taught me. . ."
                         else:
@@ -2028,7 +2028,7 @@ label Girl_Whammy(Other):
 
     if "nowhammy" not in JeanX.traits and Other.likes[JeanX.tag] < 800:
 
-        $ Player.add_word(1, 0, 0, 0,"whammied")
+        $ Player.add_word(1, 0, 0, 0, "whammied")
         if Other == EmmaX and EmmaX.level >= JeanX.level:
             ch_e "Oh, don't even try that nonsense with me, Ms. Grey."
             return
@@ -2097,7 +2097,7 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
 
             $ Player.Harem.remove(Asked)
             if Player.Harem:
-                $ Player.Harem.insert(0,Asked)
+                $ Player.Harem.insert(0, Asked)
             else:
                 $ Player.Harem.append(Asked)
 
@@ -3329,7 +3329,7 @@ label Harem_Start(Newbie=0, round2=0):
     $ Count = 0
     return
 
-label Harem_Initiation(temp_Girls=[], temp_Girls2=[]):
+label Harem_Initiation(temp_Girls = [], temp_Girls2 = []):
 
 
     $ temp_Girls = Player.Harem[:]
@@ -3347,7 +3347,7 @@ label Harem_Initiation(temp_Girls=[], temp_Girls2=[]):
 
 
 
-label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
+label Call_For_Les(Girl=0, Girl2=0, temp_Girls = []):
 
 
     if Girl not in active_Girls:
@@ -3383,7 +3383,7 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
     "You get a call from [Girl.name]."
     if Girl == RogueX:
         ch_r "Hey, [Player.name]. . . I was just over here with [Girl2.name] and. . ."
-        ch_r "One thing lead to another, you know how that goes. . . and we were just wondering,"
+        ch_r "One thing lead to another, you know how that goes. . . and we were just wondering, "
         ch_r "Would you like to come over and join us?"
     elif Girl == KittyX:
         ch_k "Oh, hi, [Girl.player_petname]. . . I was just hanging out with [Girl2.name] and. . ."
@@ -3391,7 +3391,7 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
         ch_k "Did you wanna come over and join us?"
     elif Girl == EmmaX:
         ch_e "[Girl.player_petname]. . . I was just here entertaining [Girl2.name]. . ."
-        ch_e "One thing lead to another, I'm sure you get the picture. . . and we were just wondering,"
+        ch_e "One thing lead to another, I'm sure you get the picture. . . and we were just wondering, "
         ch_e "Would you like to come lend us a hand?"
         ch_e "Or other bits. . ."
     elif Girl == LauraX:
@@ -3419,7 +3419,7 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 call change_Girl_stat(Girl, "love", 95, 5)
                 call change_Girl_stat(Girl, "obedience", 95, 3)
                 call change_Girl_stat(Girl, "inhibition", 95, 2)
-                if Girl in (EmmaX,StormX):
+                if Girl in (EmmaX, StormX):
                     ch_e "Lovely, see you in a bit."
                 else:
                     Girl.voice "Cool. See you here."
@@ -3517,10 +3517,10 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
     $ Girl.drain_word("lesbian", 1, 0)
     $ Girl2.drain_word("lesbian", 1, 0)
 
-    $ Girl.add_word(0,"lesbian", "lesbian")
-    $ Girl2.add_word(0,"lesbian", "lesbian")
-    $ Girl.add_word(1, 0, 0, 0,"les "+Girl2.tag)
-    $ Girl2.add_word(1, 0, 0, 0,"les "+Girl.tag)
+    $ Girl.add_word(0, "lesbian", "lesbian")
+    $ Girl2.add_word(0, "lesbian", "lesbian")
+    $ Girl.add_word(1, 0, 0, 0, "les "+Girl2.tag)
+    $ Girl2.add_word(1, 0, 0, 0, "les "+Girl.tag)
 
     call set_the_scene
     "As you approach her room, you hear soft moans from inside, and notice that the door is slightly ajar."
@@ -3627,7 +3627,7 @@ label Share(Girl=0, Other=0):
 
         if Other == JeanX or Other.likes[Girl.tag] >= 800 or approval_check(Other, 1800) or (approval_check(Other, 1500) and Other.likes[Girl.tag] >= 500):
 
-            $ Other.add_word(1, 0, 0,"poly "+Girl.tag, 0)
+            $ Other.add_word(1, 0, 0, "poly "+Girl.tag, 0)
 
 
             call change_Girl_stat(Other, "obedience", 80, 10)
@@ -3656,7 +3656,7 @@ label Share(Girl=0, Other=0):
         else:
 
             "[Girl.name] sends you a text."
-            Girl.voice "I talked to [Other.name] about sharing you, and she said she wasn't into that sort of thing,"
+            Girl.voice "I talked to [Other.name] about sharing you, and she said she wasn't into that sort of thing, "
             if not approval_check(Other, 2000):
                 call change_Girl_stat(Other, "love", 200, -15)
                 call change_Girl_stat(Other, "obedience", 50, -5)

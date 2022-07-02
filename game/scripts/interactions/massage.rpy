@@ -296,7 +296,7 @@ label Massage_Prep(Girl=Player.focused_Girl, Current=0, Past=0, MCount=0):
 label Massage_Cycle:
 
 
-    $ Girl.add_word(1,"massage", "massage", 0, 0)
+    $ Girl.add_word(1, "massage", "massage", 0, 0)
 
     if Girl.pose == "doggy" or Girl.pose == "sex":
         call show_sex(Girl, "massage")
@@ -790,13 +790,13 @@ label Massage_Cycle:
                         $ Past = Current
                         $ Current = 0
                     "I'm enjoying this":
-                        $ Girl.add_word(1,"massagefail")
+                        $ Girl.add_word(1, "massagefail")
                         jump Massage_BadEnd
-            $ Girl.add_word(1,"massagefail")
+            $ Girl.add_word(1, "massagefail")
         else:
 
             "[line]. She stiffens and sits up."
-            $ Girl.add_word(1,"massagefail")
+            $ Girl.add_word(1, "massagefail")
             jump Massage_BadEnd
 
         $ round -= 6

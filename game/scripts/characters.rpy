@@ -36,6 +36,8 @@ init python:
             self.cash = 20
             self.XP_goal = 100
 
+            self.being_punished = 0
+
             self.inventory = []
 
             self.stat_points = 0
@@ -914,7 +916,6 @@ init python:
             first_casual = OutfitClass(name = "first_casual")
             second_casual = OutfitClass(name = "second_casual")
             gym_clothes = OutfitClass(name = "gym_clothes")
-            swimwear = OutfitClass(name = "swimwear")
             sleepwear = OutfitClass(name = "sleepwear")
             shower = OutfitClass(name = "shower")
             nude = OutfitClass(name = "nude")
@@ -945,11 +946,6 @@ init python:
                     "bra": yellowgreen_sports_bra(),
                     "gloves": black_gloves(),
                     "jacket": green_hoodie()})
-
-                swimwear.update_Clothes({
-                    "hair": Evolutions_hair(),
-                    "underwear": green_bikini_bottoms(),
-                    "bra": yellow_bikini_top()})
 
                 sleepwear.update_Clothes({
                     "hair": Evolutions_hair(),
@@ -987,12 +983,6 @@ init python:
                     "bra": purple_sports_bra(),
                     "pants": yellow_shorts()})
 
-                swimwear.update_Clothes({
-                    "hair": Evolutions_hair(),
-                    "underwear": blue_bikini_bottoms(),
-                    "bra": blue_bikini_top(),
-                    "skirt": blue_skirt()})
-
                 sleepwear.update_Clothes({
                     "hair": Evolutions_hair(),
                     "underwear": green_panties(),
@@ -1012,19 +1002,105 @@ init python:
                     "bra": Aerith_corset(),
                     "neck": flower_necklace(),
                     "jacket": Aerith_jacket()})
+            elif self.tag == "Emma":
+                first_casual.update_Clothes({
+                    "hair": wavy_hair(),
+                    "underwear": white_panties(),
+                    "pants": white_pants(),
+                    "bra": white_corset(),
+                    "neck": white_choker(),
+                    "jacket": white_jacket()})
+
+                second_casual.update_Clothes({
+                    "hair": wavy_hair(),
+                    "underwear": white_panties(),
+                    "skirt": white_skirt(), "boots": white_boots(),
+                    "bra": white_corset(),
+                    "neck": white_choker(),
+                    "cloak": white_cape()})
+
+                gym_clothes.update_Clothes({
+                    "hair": wavy_hair(),
+                    "underwear": white_sports_panties(),
+                    "bra": white_sports_bra(),
+                    "pants": white_pants()})
+
+                sleepwear.update_Clothes({
+                    "hair": wavy_hair(),
+                    "underwear": white_panties(),
+                    "bra": white_corset()})
+
+                shower.update_Clothes({
+                    "hair": wavy_hair(),
+                    "top": white_towel()})
+
+                nude.update_Clothes({
+                    "hair": wavy_hair()})
+
+                teacher.update_Clothes({
+                    "hair": wavy_hair(),
+                    "underwear": white_panties(),
+                    "pants": white_pants(),
+                    "bra": white_corset(),
+                    "neck": white_choker(),
+                    "jacket": white_jacket()})
+
+                Halloween_costume.update_Clothes({
+                    "hair": wavy_hair(),
+                    "face_outer_accessory": Dimitrescu_hat(),
+                    "underwear": white_panties(), "hose": white_stockings_and_garterbelt(),
+                    "skirt": Dimitrescu_skirt(),
+                    "top": Dimitrescu_top(),
+                    "neck": white_choker()})
+            elif self.tag == "Laura":
+                first_casual.update_Clothes({
+                    "hair": long_hair(),
+                    "underwear": leather_panties(),
+                    "pants": leather_pants(),
+                    "bra": leather_bra(),
+                    "neck": leash_choker(), "gloves": black_wristbands()})
+
+                second_casual.update_Clothes({
+                    "hair": long_hair(),
+                    "underwear": leather_panties(),
+                    "skirt": belty_skirt(),
+                    "bra": leather_bra(),
+                    "neck": leash_choker(), "gloves": black_wristbands(),
+                    "jacket": grey_jacket()})
+
+                gym_clothes.update_Clothes({
+                    "hair": long_hair(),
+                    "underwear": leather_panties(),
+                    "bra": leather_bra(),
+                    "gloves": black_wristbands()})
+
+                sleepwear.update_Clothes({
+                    "hair": long_hair(),
+                    "underwear": leather_panties(),
+                    "bra": leather_bra()})
+
+                shower.update_Clothes({
+                    "hair": long_hair(),
+                    "top": yellow_towel()})
+
+                Halloween_costume.update_Clothes({
+                    "hair": long_hair(),
+                    "underwear": leather_panties(), "hose": black_stockings(),
+                    "skirt": Tifa_skirt(),
+                    "bra": white_tanktop(),
+                    "neck": leash_choker(), "gloves": Tifa_gloves(), "suspenders": Tifa_suspenders()})
 
             self.Wardrobe.Outfits.update({
                 "first_casual": first_casual,
                 "second_casual": second_casual,
                 "gym_clothes": gym_clothes,
-                "swimwear": swimwear,
                 "sleepwear": sleepwear,
                 "shower": shower,
                 "nude": nude,
                 "Halloween_costume": Halloween_costume})
 
-            # if self.tag in ["Emma", "Storm"]:
-            #     self.Wardrobe.Outfits.update({"teacher": teacher})
+            if self.tag in ["Emma", "Storm"]:
+                self.Wardrobe.Outfits.update({"teacher": teacher})
 
             for Outfit in self.Wardrobe.Outfits.values():
                 for Clothing in Outfit.Clothes.values():
@@ -1033,25 +1109,6 @@ init python:
 
             return
 
-
-
-
-
-
-
-
-
-
-
-        def change_likes(self, GirlB, value):
-            if self.likes[GirlB.tag] + value > 1000:
-                self.likes[GirlB.tag] = 1000
-            elif self.likes[GirlB.tag] + value < 0:
-                self.likes[GirlB.tag] = 0
-            else:
-                self.likes[GirlB.tag] += value
-
-            return
 
 
 
@@ -1156,29 +1213,29 @@ init python:
                 counter = int(self.taboo/10)
 
             if self.petname in ("girl", "boo", "bae", "baby", "sweetie"):
-                if approval_check(self, 500, "L", taboo_modifier = 1,Alt=[[LauraX],600]):
+                if approval_check(self, 500, "L", taboo_modifier = 1, Alt = [[LauraX], 600]):
                     self.change_stat("love", 80, 1)
                 else:
                     self.change_stat("love", 50, -1)
 
                     return True
             elif self.petname in ("sexy", "lover", "beloved"):
-                if approval_check(self, 900, taboo_modifier = 1,Alt=[[LauraX], 1100]):
+                if approval_check(self, 900, taboo_modifier = 1, Alt = [[LauraX], 1100]):
                     self.change_stat("love", 80, 2)
                     self.change_stat("obedience", 80, 1)
                     self.change_stat("inhibition", 70, 1)
                 else:
-                    self.change_stat("love", 50, (-1-counter))
+                    self.change_stat("love", 50, -1 - counter)
                     self.change_stat("obedience", 50, 1)
                     self.change_stat("inhibition", 20, -1)
                     return True
             elif self.petname == "slave":
-                if approval_check(self, 800, "O", taboo_modifier = 3,Alt=[[EmmaX,StormX],900]):
+                if approval_check(self, 800, "O", taboo_modifier = 3, Alt = [[EmmaX, StormX], 900]):
                     self.change_stat("lust", 90, (3+counter))
                     self.change_stat("obedience", 95, (2+counter))
                     self.change_stat("inhibition", 30, 1)
                     self.change_stat("inhibition", 70, 1)
-                elif approval_check(self, 500, "O", taboo_modifier = 3,Alt=[[EmmaX,StormX],600]):
+                elif approval_check(self, 500, "O", taboo_modifier = 3, Alt = [[EmmaX, StormX], 600]):
                     self.change_stat("lust", 90, 1)
                     self.change_stat("love", 200, -1)
                     self.change_stat("obedience", 80, 2)
@@ -1191,12 +1248,12 @@ init python:
 
                     return True
             elif self.petname == "pet":
-                if approval_check(self, 1500, taboo_modifier=2,Alt=[[LauraX],800]):
+                if approval_check(self, 1500, taboo_modifier=2, Alt = [[LauraX],800]):
                     self.change_stat("lust", 90, (3+counter))
                     self.change_stat("obedience", 95, (2+counter))
                     self.change_stat("inhibition", 30, 1)
                     self.change_stat("inhibition", 70, 1)
-                elif approval_check(self, 1200, taboo_modifier=2,Alt=[[LauraX],650]):
+                elif approval_check(self, 1200, taboo_modifier=2, Alt = [[LauraX], 650]):
                     self.change_stat("lust", 60, 1)
                     self.change_stat("obedience", 80, 2)
                     self.change_stat("inhibition", 70, 1)
@@ -1208,12 +1265,12 @@ init python:
 
                     return True
             elif self.petname == "slut":
-                if approval_check(self, 500, "O", taboo_modifier=2) or approval_check(self, 500, "I", taboo_modifier=2,Alt=[[LauraX],400]):
+                if approval_check(self, 500, "O", taboo_modifier=2) or approval_check(self, 500, "I", taboo_modifier=2, Alt = [[LauraX],400]):
                     self.change_stat("lust", 90, (4+counter))
                     self.change_stat("obedience", 95, (2+counter))
                     self.change_stat("inhibition", 40, 2)
                     self.change_stat("inhibition", 80, 1)
-                elif approval_check(self, 300, "O", taboo_modifier=2) or approval_check(self, 300, "I", taboo_modifier=2,Alt=[[LauraX], 200]):
+                elif approval_check(self, 300, "O", taboo_modifier=2) or approval_check(self, 300, "I", taboo_modifier=2, Alt = [[LauraX], 200]):
                     self.change_stat("lust", 90, 1)
                     self.change_stat("love", 200, (-1-counter))
                     self.change_stat("obedience", 80, (2+counter))
@@ -1226,12 +1283,12 @@ init python:
 
                     return True
             elif self.petname == "whore":
-                if approval_check(self, 600, "O", taboo_modifier=2,Alt=[[EmmaX],700]) or approval_check(self, 600, "I", taboo_modifier=2,Alt=[[LauraX],400]):
+                if approval_check(self, 600, "O", taboo_modifier=2, Alt = [[EmmaX],700]) or approval_check(self, 600, "I", taboo_modifier=2, Alt = [[LauraX],400]):
                     self.change_stat("lust", 90, 4)
                     self.change_stat("obedience", 95, 2)
                     self.change_stat("inhibition", 50, 2)
                     self.change_stat("inhibition", 80, 1)
-                elif approval_check(self, 400, "O", taboo_modifier=2,Alt=[[EmmaX],500]) or approval_check(self, 400, "I", taboo_modifier=2):
+                elif approval_check(self, 400, "O", taboo_modifier=2, Alt = [[EmmaX],500]) or approval_check(self, 400, "I", taboo_modifier=2):
                     self.change_stat("lust", 90, 1)
                     self.change_stat("love", 200, (-2-counter))
                     self.change_stat("obedience", 80, 2)
@@ -1245,11 +1302,11 @@ init python:
 
                     return True
             elif self.petname == "sugartits":
-                if approval_check(self, 1500, taboo_modifier = 1,Alt=[[EmmaX], 1300]):
+                if approval_check(self, 1500, taboo_modifier = 1, Alt = [[EmmaX], 1300]):
                     self.change_stat("obedience", 80, 1)
                     self.change_stat("obedience", 50, 2)
-                    self.change_stat("inhibition", 70, 1,Alt=[[EmmaX],70, 2])
-                    self.change_stat("inhibition", 30, 2,Alt=[[KittyX],60,3])
+                    self.change_stat("inhibition", 70, 1, Alt = [[EmmaX],70, 2])
+                    self.change_stat("inhibition", 30, 2, Alt = [[KittyX], 60,3])
                 else:
                     self.change_stat("love", 200, (-2-counter))
                     self.change_stat("love", 50, (-1-counter))
@@ -1356,7 +1413,7 @@ init python:
 
 
 
-        def lust_face(self, extreme = False, kissing = False):
+        def lust_face(self, extreme = False):
             if self.thirst >= 80:
                 self.lust += 2
             elif self.thirst >= 50:
@@ -1381,6 +1438,8 @@ init python:
                     kissing = True
             elif second_girl_main_action == "kiss":
                 kissing = True
+            else:
+                kissing = False
 
             if kissing:
                 self.eyes = "closed"
@@ -1448,101 +1507,7 @@ init python:
             return
 
         def set_default_outfits(self):
-            if self.tag == "Emma":
-                self.first_casual_outfit = get_base_outfit(
-                    {"hair": "wavy",
-                    "bra": "corset", "underwear": "white_panties",
-                    "bottom": "white_pants",
-                    "neck": "choker",
-                    "jacket": "jacket",
-                    "outfit_active": 2})
-
-                self.second_casual_outfit = get_base_outfit(
-                    {"hair": "wavy",
-                    "bra": "corset", "underwear": "white_panties",
-                    "bottom": "skirt",
-                    "boots": "thigh_boots",
-                    "neck": "choker",
-                    "shame": 5, "outfit_active": 2})
-
-                self.gym_clothes = get_base_outfit(
-                    {"hair": "wavy",
-                    "bra": "sports_bra", "underwear": "sports_panties",
-                    "bottom": "white_pants",
-                    "shame": 10})
-
-                self.sleepwear = get_base_outfit(
-                    {"hair": "wavy",
-                    "bra": "corset", "underwear": "white_panties",
-                    "shame": 25})
-
-                self.swimwear = get_base_outfit(
-                    {"hair": "wavy",
-                    "bra": "bikini_top", "underwear": "bikini_bottoms",
-                    "shame": 25})
-
-                self.halloween_costume = get_base_outfit(
-                    {"hair": "wavy",
-                    "face_outer_accessory": "hat",
-                    "underwear": "lace_panties",
-                    "hose": "stockings_and_garterbelt", "bottom": "dress_skirt",
-                    "top": "dress_top",
-                    "neck": "choker",
-                    "outfit_active": 2})
-
-                self.domme_outfit = get_base_outfit(
-                    {"hair": "wavy",
-                    "bodysuit": "domme_suit",
-                    "boots": "domme_suit",
-                    "neck": "spiked_collar", "gloves": "spiked_bracelets",
-                    "held_item": "whip",
-                    "outfit_active": 2})
-
-                self.nude["hair"] = "wavy"
-            elif self.tag == "Laura":
-                self.first_casual_outfit = get_base_outfit(
-                    {"hair": "long",
-                    "bra": "leather_bra", "underwear": "leather_panties",
-                    "bottom": "leather_pants",
-                    "neck": "leash_choker",
-                    "gloves": "wrists",
-                    "outfit_active": 2})
-
-                self.second_casual_outfit = get_base_outfit(
-                    {"hair": "long",
-                    "bra": "leather_bra", "underwear": "leather_panties",
-                    "bottom": "skirt",
-                    "neck": "leash_choker",
-                    "gloves": "wrists",
-                    "jacket": "jacket",
-                    "outfit_active": 2})
-
-                self.gym_clothes = get_base_outfit(
-                    {"hair": "long",
-                    "bra": "leather_bra", "underwear": "leather_panties",
-                    "bottom": "leather_pants",
-                    "gloves": "wrists"})
-
-                self.sleepwear = get_base_outfit(
-                    {"hair": "long",
-                    "bra": "leather_bra", "underwear": "leather_panties",
-                    "shame": 20})
-
-                self.swimwear = get_base_outfit(
-                    {"hair": "long",
-                    "bra": "bikini_top", "underwear": "bikini_bottoms"})
-
-                self.halloween_costume = get_base_outfit(
-                    {"hair": "long",
-                    "bra": "white_tank", "underwear": "leather_panties",
-                    "hose": "black_stockings", "bottom": "cosplay_skirt",
-                    "neck": "leash_choker",
-                    "gloves": "gloves",
-                    "suspenders": "suspenders",
-                    "outfit_active": 2})
-
-                self.nude["hair"] = "long"
-            elif self.tag == "Jean":
+            if self.tag == "Jean":
                 self.first_casual_outfit = get_base_outfit(
                     {"hair": "short",
                     "bra": "green_bra", "underwear": "green_panties",
@@ -1717,5 +1682,47 @@ init python:
                     "belt": "skull_belt", "gloves": "gloves"})
 
                 self.nude["hair"] = "short"
+
+            return
+
+    class NPCClass(object):
+        def __init__(self, name):
+            self.name = name
+
+            self.sprite_location = stage_center
+
+            self.mouth = "smile"
+            self.brows = "happy"
+            self.eyes = "happy"
+
+            if self.name == "Xavier":
+                self.psychic = False
+
+        def change_face(self, emotion):
+            if emotion == "psychic":
+                self.mouth = "stern"
+                self.brows = "concentrate"
+                self.eyes = "concentrate"
+                self.psychic = True
+            elif emotion == "hypno":
+                self.mouth = "neutral"
+                self.brows = "neutral"
+                self.eyes = "hypno"
+                self.psychic = False
+            elif emotion == "shocked":
+                self.mouth = "neutral"
+                self.brows = "shocked"
+                self.eyes = "shocked"
+                self.psychic = False
+            elif emotion == "happy":
+                self.mouth = "smile"
+                self.brows = "happy"
+                self.eyes = "happy"
+                self.psychic = False
+            elif emotion == "angry":
+                self.mouth = "stern"
+                self.brows = "concentrate"
+                self.eyes = "happy"
+                self.psychic = False
 
             return

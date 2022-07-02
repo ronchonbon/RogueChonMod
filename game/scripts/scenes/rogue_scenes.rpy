@@ -454,7 +454,7 @@ label Rogue_Key:
 label Rogue_BF:
     call shift_focus (RogueX)
 
-    $ Player.add_word(1,"interruption")
+    $ Player.add_word(1, "interruption")
     $ RogueX.drain_word("asked_to_meet")
     if RogueX.location != Player.location and RogueX not in Player.Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
@@ -603,7 +603,7 @@ label Rogue_Love:
     else:
         "[RogueX.name] suddenly stares at you very intently."
 
-    $ Player.add_word(1,"interruption")
+    $ Player.add_word(1, "interruption")
     $ Player.location = "bg_rogue"
 
     call set_the_scene
@@ -799,7 +799,7 @@ label Rogue_Sub:
     if RogueX.location != Player.location and RogueX not in Player.Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
-    $ Player.add_word(1,"interruption")
+    $ Player.add_word(1, "interruption")
 
     call set_the_scene
 
@@ -917,7 +917,7 @@ label Rogue_Master:
     if RogueX.location != Player.location and RogueX not in Player.Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
-    $ Player.add_word(1,"interruption")
+    $ Player.add_word(1, "interruption")
 
     call set_the_scene
 
@@ -1113,7 +1113,7 @@ label Rogue_Sexfriend:
         ch_r "Now, sex friend. . . how would you like to celebrate?"
         if simulation:
             return True
-    $ Player.add_word(1,"interruption")
+    $ Player.add_word(1, "interruption")
     $ approval_bonus = 25
     call enter_main_sex_menu(RogueX)
     $ approval_bonus = 0
@@ -1228,7 +1228,7 @@ label Rogue_Fuckbuddy:
     if simulation:
         return True
     $ approval_bonus = 30
-    $ Player.add_word(1,"interruption")
+    $ Player.add_word(1, "interruption")
     call enter_main_sex_menu(RogueX)
     $ approval_bonus = 0
     return
@@ -1274,9 +1274,9 @@ label Rogue_Daddy:
     call set_the_scene
     ch_r ". . ."
     if RogueX in Player.Harem:
-        ch_r "You know, even though we've been dating,"
+        ch_r "You know, even though we've been dating, "
     else:
-        ch_r "Even though we've been hanging out,"
+        ch_r "Even though we've been hanging out, "
     if RogueX.love > RogueX.obedience and RogueX.love > RogueX.inhibition:
         ch_r "and you're really sweet to me. . ."
     elif RogueX.obedience > RogueX.inhibition:
@@ -1424,7 +1424,7 @@ label Rogue_Frisky_Class:
 
 
     if line == "flirt":
-        $ Player.add_word(1,"interruption")
+        $ Player.add_word(1, "interruption")
         $ D20 = renpy.random.randint(1, 20)
         $ RogueX.change_face("sly")
         "You notice one of [RogueX.name]'s shoes slip from her foot beneath the desk. She tosses you a sly grin."

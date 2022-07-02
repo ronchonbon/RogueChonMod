@@ -406,7 +406,7 @@ label Storm_Monogamy:
                 return
             if "monogamous" not in StormX.daily_history:
                 call change_Girl_stat(StormX, "obedience", 90, 3)
-            $ StormX.add_word(1, 0,"monogamous")
+            $ StormX.add_word(1, 0, "monogamous")
             $ StormX.traits.append("monogamous")
         "Don't hook up with other girls." if "monogamous" not in StormX.traits:
             if approval_check(StormX, 900, "O", taboo_modifier=0):
@@ -435,7 +435,7 @@ label Storm_Monogamy:
                 return
             if "monogamous" not in StormX.daily_history:
                 call change_Girl_stat(StormX, "obedience", 90, 3)
-            $ StormX.add_word(1, 0,"monogamous")
+            $ StormX.add_word(1, 0, "monogamous")
             $ StormX.traits.append("monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in StormX.traits:
             if approval_check(StormX, 700, "O", taboo_modifier=0):
@@ -453,7 +453,7 @@ label Storm_Monogamy:
                 call change_Girl_stat(StormX, "obedience", 90, 3)
             if "monogamous" in StormX.traits:
                 $ StormX.traits.remove("monogamous")
-            $ StormX.add_word(1, 0,"monogamous")
+            $ StormX.add_word(1, 0, "monogamous")
         "Never mind.":
             pass
     return
@@ -493,7 +493,7 @@ label Storm_Jumped:
                 return
             if "chill" not in StormX.daily_history:
                 call change_Girl_stat(StormX, "obedience", 90, 3)
-            $ StormX.add_word(1, 0,"chill")
+            $ StormX.add_word(1, 0, "chill")
             $ StormX.traits.append("chill")
         "Don't bother me like that." if "chill" not in StormX.traits:
             if approval_check(StormX, 800, "O", taboo_modifier=0):
@@ -523,7 +523,7 @@ label Storm_Jumped:
                 return
             if "chill" not in StormX.daily_history:
                 call change_Girl_stat(StormX, "obedience", 90, 3)
-            $ StormX.add_word(1, 0,"chill")
+            $ StormX.add_word(1, 0, "chill")
             $ StormX.traits.append("chill")
         "Knock yourself out.":
             if approval_check(StormX, 800, "L", taboo_modifier=0):
@@ -541,7 +541,7 @@ label Storm_Jumped:
                 call change_Girl_stat(StormX, "obedience", 90, 3)
             if "chill" in StormX.traits:
                 $ StormX.traits.remove("chill")
-            $ StormX.add_word(1, 0,"chill")
+            $ StormX.add_word(1, 0, "chill")
         "Um, never mind.":
             pass
     return
@@ -909,7 +909,7 @@ label Storm_SexChat:
 
 
 
-label Storm_Chitchat(O=0, Options=["default", "default", "default"]):
+label Storm_Chitchat(O=0, Options = ["default", "default", "default"]):
     $ round -= 3 if round > 3 else (round-1)
     if O:
         $ Options = [O]
@@ -1640,7 +1640,7 @@ label Storm_Rename:
             ch_s "Sounds good."
         "Nevermind.":
             pass
-    $ StormX.add_word(1, 0,"namechange")
+    $ StormX.add_word(1, 0, "namechange")
     return
 
 
@@ -2575,7 +2575,7 @@ label Storm_Leave:
                     $ StormX.Clothes["hair"] = "wet_long"
                 else:
                     $ StormX.Clothes["hair"] = "long"
-                $ StormX.add_word(1,"hair", "hair", 0, 0)
+                $ StormX.add_word(1, "hair", "hair", 0, 0)
                 ch_s "Like this?"
             else:
                 ch_s "Thank you, but I'm not interested in that style right now."
@@ -2594,7 +2594,7 @@ label Storm_Leave:
                     $ StormX.Clothes["hair"] = "wet_mohawk"
                 else:
                     $ StormX.Clothes["hair"] = "mohawk"
-                $ StormX.add_word(1,"hair", "hair", 0, 0)
+                $ StormX.add_word(1, "hair", "hair", 0, 0)
                 ch_s "Like this?"
             else:
                 ch_s "Thank you, but I'm not interested in that style right now."
@@ -2611,7 +2611,7 @@ label Storm_Leave:
                 "She steps away for a few minutes."
                 hide black_screen onlayer black
                 $ StormX.Clothes["hair"] = "short"
-                $ StormX.add_word(1,"hair", "hair", 0, 0)
+                $ StormX.add_word(1, "hair", "hair", 0, 0)
                 ch_s "Like this?"
             else:
                 ch_s "Thank you, but I'm not interested in that style right now."

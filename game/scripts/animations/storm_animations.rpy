@@ -612,10 +612,10 @@ image Storm_titjob_bra_stretch_animation3:
         ease 0.4 yzoom 2
         repeat
     parallel:
-        ease 0.3 offset (-100,-115)
-        ease 0.7 offset (-90,-155)
+        ease 0.3 offset (-100, -115)
+        ease 0.7 offset (-90, -155)
         pause 0.2
-        ease 0.4 offset (-100,-105)
+        ease 0.4 offset (-100, -105)
         repeat
 
 image Storm_titjob_bra_stretch_animation5:

@@ -1,18 +1,6 @@
 init python:
 
-    def check_girl(Girl, local = False):
-        if Girl in all_Girls and (not local or Player.location == Check.location):
-            return Girl
-        elif Player.location == Player.focused_Girl.location:
-            return Player.focused_Girl
-        else:
-            for Girl in all_Girls:
-                if Player.location == Girl.location:
-                    Player.focused_Girl = Girl
-
-                    return Girl
-
-    def approval_check(Girl, T = 1000, flavor = "LOI", spread = 150, temp_modifier = 1, taboo_modifier = 0, cologne = True, Bonus = 0, Loc = 0, Check=0, Alt=[[], 0]):
+    def approval_check(Girl, T = 1000, flavor = "LOI", spread = 150, temp_modifier = 1, taboo_modifier = 0, cologne = True, Bonus = 0, Loc = 0, Check=0, Alt = [[], 0]):
         while Alt[0]:
             if Girl in Alt[0]:
                 T = Alt[1] if Alt[1] else T
@@ -125,8 +113,11 @@ init python:
 
         return True
 
-label check_who_is_present(location = Player.location):
+label check_who_is_present(location = None):
     $ Present = Player.Party[:] if Player.Party else []
+
+    if not location:
+        $ location = Player.location
 
     python:
         for G in all_Girls:
@@ -379,8 +370,8 @@ label check_addiction:
 
                 JubesX.voice "I know I asked to meet you in your room earlier, but I really need a fix."
 
-                $ Player.add_word(1,"asked_for_fix", 0, 0, 0)
-                $ JubesX.add_word(1,"asked_to_meet", "asked_to_meet", 0, 0)
+                $ Player.add_word(1, "asked_for_fix", 0, 0, 0)
+                $ JubesX.add_word(1, "asked_to_meet", "asked_to_meet", 0, 0)
 
                 call return_to_room
 
@@ -388,7 +379,7 @@ label check_addiction:
             else:
                 "[JubesX.name] texts and asks if you could get her a fix later."
 
-                $ JubesX.add_word(1,"asked_to_meet", "asked_to_meet", 0, 0)
+                $ JubesX.add_word(1, "asked_to_meet", "asked_to_meet", 0, 0)
 
                 call return_to_room
 
@@ -412,9 +403,9 @@ label check_addiction:
                         "[addicted_Girls[0].name] texts you. . ."
                         addicted_Girls[0].voice "I know I asked to meet you in your room earlier, but I'm serious, this is important."
 
-                        $ Player.add_word(1,"asked_for_fix", 0, 0, 0)
+                        $ Player.add_word(1, "asked_for_fix", 0, 0, 0)
 
-                        $ addicted_Girls[0].add_word(1,"asked_to_meet", "asked_to_meet", 0, 0)
+                        $ addicted_Girls[0].add_word(1, "asked_to_meet", "asked_to_meet", 0, 0)
 
                         call return_to_room
 
@@ -422,7 +413,7 @@ label check_addiction:
                     else:
                         "[addicted_Girls[0].name] texts and asks if you could meet her in your room later."
 
-                        $ addicted_Girls[0].add_word(1,"asked_to_meet", "asked_to_meet", 0, 0)
+                        $ addicted_Girls[0].add_word(1, "asked_to_meet", "asked_to_meet", 0, 0)
 
                         call return_to_room
 
@@ -441,9 +432,9 @@ label check_addiction:
                         "[addicted_Girls[0].name] texts you. . ."
                         addicted_Girls[0].voice "I know I asked to meet you in your room earlier, but I'm serious, this is important."
 
-                        $ Player.add_word(1,"asked_for_fix", 0, 0, 0)
+                        $ Player.add_word(1, "asked_for_fix", 0, 0, 0)
 
-                        $ addicted_Girls[0].add_word(1,"asked_to_meet", "asked_to_meet", 0, 0)
+                        $ addicted_Girls[0].add_word(1, "asked_to_meet", "asked_to_meet", 0, 0)
 
                         call return_to_room
 
@@ -451,7 +442,7 @@ label check_addiction:
                     else:
                         "[addicted_Girls[0].name] texts and asks if you could meet her in your room later."
 
-                        $ addicted_Girls[0].add_word(1,"asked_to_meet", "asked_to_meet", 0, 0)
+                        $ addicted_Girls[0].add_word(1, "asked_to_meet", "asked_to_meet", 0, 0)
 
                         call return_to_room
 

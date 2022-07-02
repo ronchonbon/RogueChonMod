@@ -170,7 +170,7 @@ label pullback_reactions(Girl, action):
 
     if action in finger_actions:
         $ lines.append("As your finger slides out, " + Girl.name + " gasps and looks upset.")
-        $ lines.append("As your hand pulls out," + Girl.name + " gasps and looks upset.")
+        $ lines.append("As your hand pulls out, " + Girl.name + " gasps and looks upset.")
 
     $ line = renpy.random.choice(lines)
 

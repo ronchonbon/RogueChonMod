@@ -748,9 +748,9 @@ label swimsuit_shop:
                             elif Girl == JubesX:
                                 ch_v "I know, right?"
 
-                            $ Girl.change_likes(Player.Party[0],5)
+                            $ Girl.likes[Player.Party[0].tag] += 5
 
-                            $ Player.Party[0].change_likes(Girl,3)
+                            $ Player.Party[0].likes[Girl.tag] += 3
 
                     $ Girl.change_Outfit()
 
@@ -783,7 +783,7 @@ label swimsuit_shop:
                                 $ Girl.change_face("sad")
 
                                 if "shopblock" not in Girl.daily_history:
-                                    $ Girl.add_word(1,"shopblock", "shopblock")
+                                    $ Girl.add_word(1, "shopblock", "shopblock")
                                     call change_Girl_stat(Girl, "love", 50, -2)
                                     call change_Girl_stat(Girl, "love", 90, -2)
                                     call change_Girl_stat(Girl, "obedience", 50, 3)
@@ -838,7 +838,7 @@ label swimsuit_shop:
                             if item in cart:
                                 $ cart.remove(item)
 
-                                $ Player.add_word(1,"purchased")
+                                $ Player.add_word(1, "purchased")
 
                                 $ Girl.inventory.append(item)
                                 $ Girl.change_face("bemused", 1)
@@ -1269,9 +1269,9 @@ label lingerie_shop:
                             elif Girl == JubesX:
                                 ch_v "I know, right?"
 
-                            $ Girl.change_likes(Player.Party[0],5)
+                            $ Girl.likes[Player.Party[0].tag] += 5
 
-                            $ Player.Party[0].change_likes(Girl,3)
+                            $ Player.Party[0].likes[Girl.tag] += 3
 
                     $ Girl.change_Outfit()
 
@@ -1330,7 +1330,7 @@ label lingerie_shop:
                                 $ Girl.change_face("sad")
 
                                 if "shopblock" not in Girl.daily_history:
-                                    $ Girl.add_word(1,"shopblock", "shopblock")
+                                    $ Girl.add_word(1, "shopblock", "shopblock")
                                     call change_Girl_stat(Girl, "love", 50, -2)
                                     call change_Girl_stat(Girl, "love", 90, -2)
                                     call change_Girl_stat(Girl, "obedience", 50, 3)
@@ -1383,7 +1383,7 @@ label lingerie_shop:
                             if item in cart:
                                 $ cart.remove(item)
 
-                                $ Player.add_word(1,"purchased")
+                                $ Player.add_word(1, "purchased")
 
                                 $ Girl.inventory.append(item)
                                 $ Girl.change_face("bemused", 1)
@@ -1946,9 +1946,9 @@ label clothing_shop:
                             elif Girl == JubesX:
                                 ch_v "I know, right?"
 
-                            $ Girl.change_likes(Player.Party[0],5)
+                            $ Girl.likes[Player.Party[0].tag] += 5
 
-                            $ Player.Party[0].change_likes(Girl,3)
+                            $ Player.Party[0].likes[Girl.tag] += 3
 
                     $ Girl.change_Outfit()
 
@@ -2017,7 +2017,7 @@ label clothing_shop:
                                 $ Girl.change_face("sad")
 
                                 if "shopblock" not in Girl.daily_history:
-                                    $ Girl.add_word(1,"shopblock", "shopblock")
+                                    $ Girl.add_word(1, "shopblock", "shopblock")
                                     call change_Girl_stat(Girl, "love", 50, -2)
                                     call change_Girl_stat(Girl, "love", 90, -2)
                                     call change_Girl_stat(Girl, "obedience", 50, 3)
@@ -2072,7 +2072,7 @@ label clothing_shop:
                             if item in cart:
                                 $ cart.remove(item)
 
-                                $ Player.add_word(1,"purchased")
+                                $ Player.add_word(1, "purchased")
 
                                 $ Girl.inventory.append(item)
                                 $ Girl.change_face("bemused", 1)

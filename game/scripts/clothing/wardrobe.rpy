@@ -2434,7 +2434,7 @@ label accessories_menu(Girl):
                     else:
                         $ Girl.Clothes["hair"] = "long"
 
-                    $ Girl.add_word(1,"hair", "hair", 0, 0)
+                    $ Girl.add_word(1, "hair", "hair", 0, 0)
 
                     ch_s "Like this?"
                 else:
@@ -2456,7 +2456,7 @@ label accessories_menu(Girl):
                     else:
                         $ Girl.Clothes["hair"] = "mohawk"
 
-                    $ Girl.add_word(1,"hair", "hair", 0, 0)
+                    $ Girl.add_word(1, "hair", "hair", 0, 0)
 
                     ch_s "Like this?"
                 else:
@@ -2590,7 +2590,7 @@ label accessories_menu(Girl):
 
                     $ Girl.Clothes["hair"] = "short"
 
-                    $ Girl.add_word(1,"hair", "hair", 0, 0)
+                    $ Girl.add_word(1, "hair", "hair", 0, 0)
 
                     ch_s "Like this?"
                 else:
@@ -3135,11 +3135,11 @@ label set_outfit_schedule(Girl):
                             $ Girl.clothing[7] = _return
                         "On dates you should wear. . .(locked)" if counter < 1:
                             pass
-                        "When teaching you should wear. . ." if Girl in(EmmaX,StormX) and counter >= 3:
+                        "When teaching you should wear. . ." if Girl in(EmmaX, StormX) and counter >= 3:
                             call choose_outfit(Girl, 90)
 
                             $ Girl.clothing[8] = _return
-                        "When teaching you should wear. . .(locked)" if Girl in(EmmaX,StormX) and counter < 3:
+                        "When teaching you should wear. . .(locked)" if Girl in(EmmaX, StormX) and counter < 3:
                             pass
                         "Back":
                             pass
@@ -4743,7 +4743,7 @@ label outfitShame(Girl, Custom = 3, Check=0, Count=0, Tempshame=50, Agree = 1):
         else:
             $ Girl.outfit_name = renpy.random.choice(["first_casual", "second_casual"])
 
-        $ Girl.add_word(1,"modesty", "modesty")
+        $ Girl.add_word(1, "modesty", "modesty")
         $ Girl.wet = False
         $ Girl.change_Outfit()
         if Girl == RogueX:

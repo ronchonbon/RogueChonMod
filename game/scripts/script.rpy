@@ -51,6 +51,8 @@ label start:
     $ JubesX = GirlClass("Jubes", 500, 50, 50, 10)
     $ MystiqueX = GirlClass("Mystique", 0, 0, 0, 15)
 
+    $ Xavier = NPCClass("Xavier")
+
     $ Player.focused_Girl = RogueX
 
     show screen status_screen

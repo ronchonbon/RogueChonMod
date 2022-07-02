@@ -255,7 +255,7 @@ label HWchange_stat(Girl=0, HWType=0, HWCheck=0, HWvalue=0, HWStore=0):
     return
 
 
-label Halloween_Party_entry(HWEvents=[], halloween_costume=0, HWline=[]):
+label Halloween_Party_entry(HWEvents = [], halloween_costume=0, HWline = []):
 
 
 
@@ -277,7 +277,7 @@ label Halloween_Party_entry(HWEvents=[], halloween_costume=0, HWline=[]):
 
     $ Present.append(RogueX)
     $ RogueX.location = "bg_halloween"
-    $ RogueX.add_word(1, 0,RogueX.Clothes["hair"], 0,"halloween")
+    $ RogueX.add_word(1, 0,RogueX.Clothes["hair"], 0, "halloween")
     $ RogueX.outfitday = "costume"
     $ RogueX.outfit_name = RogueX.outfitday
     $ RogueX.change_Outfit()
@@ -438,7 +438,7 @@ label Halloween_Party_entry(HWEvents=[], halloween_costume=0, HWline=[]):
 
     $ Present.append(KittyX)
     $ KittyX.location = "bg_halloween"
-    $ KittyX.add_word(1, 0,KittyX.Clothes["hair"], 0,"halloween")
+    $ KittyX.add_word(1, 0,KittyX.Clothes["hair"], 0, "halloween")
     $ KittyX.outfitday = "costume"
     $ KittyX.outfit_name = KittyX.outfitday
     $ KittyX.change_Outfit()
@@ -607,7 +607,7 @@ label Halloween_Party_entry(HWEvents=[], halloween_costume=0, HWline=[]):
 
     $ Present.append(LauraX)
     $ LauraX.location = "bg_halloween"
-    $ LauraX.add_word(1, 0,LauraX.Clothes["hair"], 0,"halloween")
+    $ LauraX.add_word(1, 0,LauraX.Clothes["hair"], 0, "halloween")
     $ LauraX.outfitday = "costume"
     $ LauraX.outfit_name = LauraX.outfitday
     $ LauraX.change_Outfit()
@@ -696,17 +696,17 @@ label Halloween_Party_entry(HWEvents=[], halloween_costume=0, HWline=[]):
                     ch_l "You know better than that. . ."
                     call HWchange_stat (LauraX, "obedience", 80, 3)
                     call HWchange_stat (LauraX, "obedience", 200, 1)
-                    $ LauraX.add_word(1, 0, 0, 0,"partyfoul")
+                    $ LauraX.add_word(1, 0, 0, 0, "partyfoul")
                 else:
 
                     call HWchange_stat (LauraX, "love", 80, -2)
                     call HWchange_stat (LauraX, "love", 90, -3)
                     ch_l ". . ."
                     ch_l "If you knew. . ."
-                    $ LauraX.add_word(1, 0, 0, 0,"partyfoul")
+                    $ LauraX.add_word(1, 0, 0, 0, "partyfoul")
                 $ LauraX.change_face("angry")
 
-                $ LauraX.add_word(1,"angry", "angry", 0, 0)
+                $ LauraX.add_word(1, "angry", "angry", 0, 0)
 
 
                 ch_l "I don't have time for this."
@@ -829,7 +829,7 @@ label Halloween_Jean:
 
     $ Present.append(JeanX)
     $ JeanX.location = "bg_halloween"
-    $ JeanX.add_word(1, 0,JeanX.Clothes["hair"], 0,"halloween")
+    $ JeanX.add_word(1, 0,JeanX.Clothes["hair"], 0, "halloween")
     $ JeanX.outfitday = "costume"
     $ JeanX.outfit_name = JeanX.outfitday
     $ JeanX.change_Outfit()
@@ -887,14 +887,14 @@ label Halloween_Jean:
             $ JeanX.change_face("confused")
             ch_j "I thought you had \"power cancelling\" powers."
             ch_j "It's fire now?"
-            $ JeanX.add_word(1,"fire", 0)
+            $ JeanX.add_word(1, "fire", 0)
         "A fireman." if halloween_costume == 3:
             call HWchange_stat (JeanX, "love", 90, 1)
             call HWchange_stat (JeanX, "obedience", 50, 1)
             call HWchange_stat (JeanX, "inhibition", 50, 1)
             ch_j "Oh, ok. Hello \"Fire Man.\""
             $ JeanX.player_petname = "Fire Man"
-            $ JeanX.add_word(1,"fire", 0)
+            $ JeanX.add_word(1, "fire", 0)
         "Skip the intros." if "halloween" in Player.history:
             menu:
                 "Are you sure you want to skip the remaining inros and go straight to the party?"
@@ -1040,7 +1040,7 @@ label Halloween_Jean:
             $ JeanX.change_face("smile", eyes = "surprised")
             call HWchange_stat (JeanX, "inhibition", 70, 2)
             "You hear mumbles of \"yes, Jessie\". . ."
-            $ JeanX.add_word(1,"jessie", 0)
+            $ JeanX.add_word(1, "jessie", 0)
     $ JeanX.change_face("smile")
     show Jean_sprite standing:
         ease 1 pos (300,50)
@@ -1084,7 +1084,7 @@ label Halloween_Jean:
     $ Present.append(StormX)
     $ StormX.change_face("smile")
     $ StormX.location = "bg_halloween"
-    $ StormX.add_word(1, 0,StormX.Clothes["hair"], 0,"halloween")
+    $ StormX.add_word(1, 0, StormX.Clothes["hair"], 0, "halloween")
     $ StormX.outfitday = "costume"
     $ StormX.outfit_name = StormX.outfitday
     $ StormX.change_Outfit()
@@ -1251,7 +1251,7 @@ label Halloween_Emma:
     $ Present.append(EmmaX)
     $ EmmaX.location = "bg_halloween"
     $ EmmaX.change_face("smile")
-    $ EmmaX.add_word(1, 0,EmmaX.Clothes["hair"], 0,"halloween")
+    $ EmmaX.add_word(1, 0,EmmaX.Clothes["hair"], 0, "halloween")
     $ EmmaX.outfitday = "costume"
     $ EmmaX.outfit_name = EmmaX.outfitday
     $ EmmaX.change_Outfit()
@@ -1292,10 +1292,10 @@ label Halloween_Emma:
                     ch_e "I'm sure you did. . ."
                 "I meant the giant vampire lady!":
                     $ EmmaX.change_face("confused", 2,eyes = "surprised")
-                    $ EmmaX.add_word(1,"vampire", 0)
+                    $ EmmaX.add_word(1, "vampire", 0)
         "Let me guess, that giant vampire lady?":
             $ EmmaX.change_face("confused", 2)
-            $ EmmaX.add_word(1,"vampire", "vampire")
+            $ EmmaX.add_word(1, "vampire", "vampire")
         "Skip the intros." if "halloween" in Player.history:
             menu:
                 "Are you sure you want to skip the remaining inros and go straight to the party?"
@@ -1542,7 +1542,7 @@ label Halloween_Skip:
         $ Options[0].outfitday = "costume"
         $ Options[0].outfit_name = EmmaX.outfitday
         $ Options[0].change_Outfit()
-        $ Options[0].add_word(1, 0, 0, 0,"halloween")
+        $ Options[0].add_word(1, 0, 0, 0, "halloween")
 
         $ Options.remove(Options[0])
 
@@ -1595,7 +1595,7 @@ label Halloween_Events:
 
                             ]
         $ renpy.random.shuffle(HWEvents)
-        $ Player.add_word(1,"halloween", "halloween", 0,"halloween")
+        $ Player.add_word(1, "halloween", "halloween", 0, "halloween")
         "Introductions out of the way, you take a look around the party in progress."
     "[HWEvents[0]]"
     $ round -= 5

@@ -42,12 +42,12 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
     if "no_tan" in Girl.recent_history:
         $ Girl.change_face("angry")
         Girl.voice "I just told you \"no.\""
-        $ Girl.add_word(1,"angry","angry")
+        $ Girl.add_word(1, "angry", "angry")
         return
     elif "no_tan" in Girl.daily_history:
         $ Girl.change_face("angry")
         Girl.voice "Not today."
-        $ Girl.add_word(1,"angry","angry")
+        $ Girl.add_word(1, "angry", "angry")
         return
 
     if Girl == EmmaX:
@@ -82,7 +82,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             ch_s "I cannot get much more naked. . ."
         elif Girl == JubesX:
             ch_v "I'm already pretty naked here. . ."
-        $ Girl.add_word(1,"tan","tan")
+        $ Girl.add_word(1, "tan", "tan")
         return
 
     $ line = 0
@@ -265,7 +265,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                         elif Girl == JubesX:
                             ch_v "Nope."
 
-                        $ Girl.add_word(1,"no_tan","no_tan")
+                        $ Girl.add_word(1, "no_tan", "no_tan")
                         return
                 "Hot.":
                     if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
@@ -343,9 +343,9 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                     $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
                     $ Girl.take_off("hose")
                     call expression Girl.tag + "_First_Bottomless"
-                $ Girl.add_word(1,"tan","tan")
+                $ Girl.add_word(1, "tan", "tan")
             else:
-                $ Girl.add_word(1,"no_tan","no_tan")
+                $ Girl.add_word(1, "no_tan", "no_tan")
 
             $ line = 0
 
@@ -389,7 +389,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 $ Girl.take_off("underwear")
             call expression Girl.tag + "_First_Bottomless"
 
-            $ Girl.add_word(1,"tan","tan")
+            $ Girl.add_word(1, "tan", "tan")
 
         elif line == "sorry" and (Type == "over" or Type == "legs" or Type == "jacket"):
 
@@ -421,7 +421,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             if Type == "legs":
                 $ Girl.Outfit.remove_Clothing(["pants", "skirt"])
                 $ Girl.take_off("hose")
-            $ Girl.add_word(1,"tan","tan")
+            $ Girl.add_word(1, "tan", "tan")
 
         elif line == "sorry":
 
@@ -445,7 +445,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 ch_s "I am sorry to disappoint you."
             elif Girl == JubesX:
                 ch_v "Sorry. . ."
-            $ Girl.add_word(1,"no_tan","no_tan")
+            $ Girl.add_word(1, "no_tan", "no_tan")
 
         elif line == "no":
 
@@ -468,7 +468,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             elif Girl == JubesX:
                 ch_v "Sure. . ."
 
-            $ Girl.add_word(1,"no_tan","no_tan")
+            $ Girl.add_word(1, "no_tan", "no_tan")
             return
         if not Girl.Clothes["bra"] and not Girl.Clothes["top"] and not Girl.Clothes["underwear"] and not Girl.Clothes["bottom"] and Girl.Clothes["hose"] != "pantyhose":
             $ Girl.change_Outfit("nude")
@@ -518,12 +518,12 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
     elif "no_dip" in Girl.recent_history:
         $ Girl.change_face("angry")
         Girl.voice "I just told you \"no.\""
-        $ Girl.add_word(1,"angry","angry")
+        $ Girl.add_word(1, "angry", "angry")
         return
     elif "no_dip" in Girl.daily_history:
         $ Girl.change_face("angry")
         Girl.voice "Not today."
-        $ Girl.add_word(1,"angry","angry")
+        $ Girl.add_word(1, "angry", "angry")
         return
     elif "dip" in Girl.recent_history:
         $ Girl.change_face("confused")
@@ -563,7 +563,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
         elif Girl == JubesX:
             ch_v "Sure!"
 
-        $ Girl.add_word(1,"dip","dip")
+        $ Girl.add_word(1, "dip", "dip")
     else:
 
         if Girl.seen_pussy and Girl.seen_breasts:
@@ -618,7 +618,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
             $ Girl.take_off("underwear")
             call expression Girl.tag + "_First_Bottomless"
             $ Girl.change_Outfit("nude")
-            $ Girl.add_word(1,"dip","dip")
+            $ Girl.add_word(1, "dip", "dip")
 
         elif line == "sorry":
 
@@ -671,7 +671,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                         "She goes and changes into her suit. . ."
                         $ Girl.change_Outfit("swimwear")
                         hide black_screen onlayer black
-                        $ Girl.add_word(1,"no_dip","no_dip")
+                        $ Girl.add_word(1, "no_dip", "no_dip")
                         $ Count = 1
                     else:
                         if not Girl.change_Outfit("swimwear"):
@@ -690,7 +690,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                                 else:
                                     $ Girl.change_face("sly", 1)
                                     Girl.voice "That's not going to work either."
-                                    $ Girl.add_word(1,"no_dip","no_dip")
+                                    $ Girl.add_word(1, "no_dip", "no_dip")
                                     return
                                 $ Girl.change_face("smile", 1)
                                 if Girl == RogueX:
@@ -709,7 +709,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                                     ch_v "I guess so. . ."
                             "Ok then, never mind.":
                                 Girl.voice "Thanks."
-                                $ Girl.add_word(1,"no_dip","no_dip")
+                                $ Girl.add_word(1, "no_dip", "no_dip")
                                 return
                         $ Girl.take_off("top")
                         "She starts to strip down."
@@ -736,7 +736,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
                         ch_s "Thank you, [Girl.player_petname]."
                     elif Girl == JubesX:
                         ch_v "Ok."
-                    $ Girl.add_word(1,"no_dip","no_dip")
+                    $ Girl.add_word(1, "no_dip", "no_dip")
                     return
 
         elif line == "no":
@@ -762,7 +762,7 @@ label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
             elif Girl == JubesX:
                 ch_v "Sorry. . ."
 
-            $ Girl.add_word(1,"no_dip","no_dip")
+            $ Girl.add_word(1, "no_dip", "no_dip")
             return
 
     call show_swimming(Girl)
@@ -813,7 +813,7 @@ label wardrobe_malfunction(Girl):
             else:
                 $ offset = -100
 
-    if approval_check(Girl, 800 - offset,"I") or approval_check(Girl, 1600 - offset) or (Girl == StormX and StormX in Rules):
+    if approval_check(Girl, 800 - offset, "I") or approval_check(Girl, 1600 - offset) or (Girl == StormX and StormX in Rules):
         $ Girl.change_face("sly")
 
         $ Girl.remove_Clothing("bra")
@@ -826,7 +826,7 @@ label wardrobe_malfunction(Girl):
         "She smiles and tosses her top over her head."
 
         call expression Girl.tag + "_First_Topless"
-    elif approval_check(Girl, 500 - offset,"I") or approval_check(Girl, 1200 - offset):
+    elif approval_check(Girl, 500 - offset, "I") or approval_check(Girl, 1200 - offset):
         $ Girl.change_face("sly", 1)
 
         call change_Girl_stat(Girl, "obedience", 60, 2)
@@ -993,7 +993,7 @@ label show_swimming(Swimmers):
 
     while Swimmers:
         $ Swimmers[0].wet = True
-        $ Swimmers[0].add_word(0,"swim","swim", 0, 0)
+        $ Swimmers[0].add_word(0, "swim", "swim", 0, 0)
 
         python:
             for key in Swimmers[0].spunk.keys():

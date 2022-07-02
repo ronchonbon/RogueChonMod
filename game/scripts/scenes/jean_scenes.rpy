@@ -8,7 +8,7 @@ label meet_Jean:
 
     $ JeanX.change_face("sly")
 
-    $ JeanX.add_word(1,"showered", "showered", 0, 0)
+    $ JeanX.add_word(1, "showered", "showered", 0, 0)
 
     call Jeanname(1)
     call set_the_scene(location = "bg_showerroom", fade = True)
@@ -200,7 +200,7 @@ label meet_Jean:
                         ch_j "Right. . ."
                     "You just flashed me.":
                         $ JeanX.change_face("confused", 2)
-                        call change_Girl_stat(JeanX, "love", 90,-5)
+                        call change_Girl_stat(JeanX, "love", 90, -5)
                         call change_Girl_stat(JeanX, "obedience", 200, 10)
                         ch_j "How did you remember. . ."
                         $ JeanX.change_face("angry", 1)

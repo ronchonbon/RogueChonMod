@@ -399,7 +399,7 @@ label Laura_Monogamy:
                 return
             if "monogamous" not in LauraX.daily_history:
                 call change_Girl_stat(LauraX, "obedience", 90, 3)
-            $ LauraX.add_word(1, 0,"monogamous")
+            $ LauraX.add_word(1, 0, "monogamous")
             $ LauraX.traits.append("monogamous")
         "Don't hook up with other girls." if "monogamous" not in LauraX.traits:
             if approval_check(LauraX, 900, "O", taboo_modifier=0):
@@ -428,7 +428,7 @@ label Laura_Monogamy:
                 return
             if "monogamous" not in LauraX.daily_history:
                 call change_Girl_stat(LauraX, "obedience", 90, 3)
-            $ LauraX.add_word(1, 0,"monogamous")
+            $ LauraX.add_word(1, 0, "monogamous")
             $ LauraX.traits.append("monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in LauraX.traits:
             if approval_check(LauraX, 700, "O", taboo_modifier=0):
@@ -446,7 +446,7 @@ label Laura_Monogamy:
                 call change_Girl_stat(LauraX, "obedience", 90, 3)
             if "monogamous" in LauraX.traits:
                 $ LauraX.traits.remove("monogamous")
-            $ LauraX.add_word(1, 0,"monogamous")
+            $ LauraX.add_word(1, 0, "monogamous")
         "Never mind.":
             pass
     return
@@ -486,7 +486,7 @@ label Laura_Jumped:
                 return
             if "chill" not in LauraX.daily_history:
                 call change_Girl_stat(LauraX, "obedience", 90, 3)
-            $ LauraX.add_word(1, 0,"chill")
+            $ LauraX.add_word(1, 0, "chill")
             $ LauraX.traits.append("chill")
         "Don't bother me like that." if "chill" not in LauraX.traits:
             if approval_check(LauraX, 800, "O", taboo_modifier=0):
@@ -516,7 +516,7 @@ label Laura_Jumped:
                 return
             if "chill" not in LauraX.daily_history:
                 call change_Girl_stat(LauraX, "obedience", 90, 3)
-            $ LauraX.add_word(1, 0,"chill")
+            $ LauraX.add_word(1, 0, "chill")
             $ LauraX.traits.append("chill")
         "Knock yourself out.":
             if approval_check(LauraX, 800, "L", taboo_modifier=0):
@@ -534,7 +534,7 @@ label Laura_Jumped:
                 call change_Girl_stat(LauraX, "obedience", 90, 3)
             if "chill" in LauraX.traits:
                 $ LauraX.traits.remove("chill")
-            $ LauraX.add_word(1, 0,"chill")
+            $ LauraX.add_word(1, 0, "chill")
         "Um, never mind.":
             pass
     return
@@ -902,7 +902,7 @@ label Laura_SexChat:
 
 
 
-label Laura_Chitchat(O=0, Options=["default", "default", "default"]):
+label Laura_Chitchat(O=0, Options = ["default", "default", "default"]):
     $ round -= 3 if round > 3 else (round-1)
     if O:
         $ Options = [O]
@@ -1645,7 +1645,7 @@ label Laura_Rename:
             $ LauraX.change_face()
         "Nevermind.":
             pass
-    $ LauraX.add_word(1, 0,"namechange")
+    $ LauraX.add_word(1, 0, "namechange")
     return
 
 

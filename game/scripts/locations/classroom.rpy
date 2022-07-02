@@ -154,7 +154,7 @@ label classroom_seating:
 
 
 
-label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
+label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls = []):
     if Girl not in all_Girls:
         return
     $ Partner = 0
@@ -511,7 +511,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         call change_Girl_stat(Girl, "lust", 94, 5)
                         if "cockout" not in Player.recent_history:
                             "[Girl.name]'s hand slowly unzips your pants and pulls your cock free."
-                            $ Player.add_word(1,"cockout")
+                            $ Player.add_word(1, "cockout")
                             call Seen_First_Peen (Girl, Partner)
                             call change_Girl_stat(Girl, "lust", 94, 5)
                         $ Player.secondary_action = "handjob"
@@ -564,7 +564,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                             call change_Girl_stat(Girl, "lust", 94, 5)
                             if "cockout" not in Player.recent_history:
                                 "[Girl.name]'s hand slowly unzips your pants and pulls your cock free."
-                                $ Player.add_word(1,"cockout")
+                                $ Player.add_word(1, "cockout")
                                 call Seen_First_Peen (Girl, Partner)
                                 call change_Girl_stat(Girl, "lust", 94, 5)
                             $ Player.secondary_action = "handjob"
@@ -659,8 +659,8 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
 
                     if Partner:
 
-                        $ Partner.change_likes(Girl, 2)
-                        $ Girl.change_likes(Partner, 2)
+                        $ Partner.likes[Girl.tag] += 2
+                        $ Girl.likes[Partner.tag] += 2
                         call change_Girl_stat(Partner, "lust", 95, 3)
                         $ lineB = renpy.random.choice([0,
                                             0,
@@ -684,8 +684,8 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
 
                     elif "saw with "+ Girl.tag in Present[1].traits:
                         Present[1].voice "Well!"
-                        $ Present[1].change_likes(Girl,-4)
-                        $ Girl.change_likes(Present[1],-2)
+                        $ Present[1].likes[Girl.tag] += -4
+                        $ Girl.likes[Present[1].tag] += -2
                         call remove_Girl(Present[1])
                     elif approval_check(Present[1], 1500) and Present[1].likes[Girl.tag] >= 600:
 
@@ -695,18 +695,18 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         "She seems to be kinda into it. . ."
                         if approval_check(Present[1], 800, "I") or "exhibitionist" in Present[1].traits:
                             call change_Girl_stat(Girl, "inhibition", 90, 3)
-                            $ Present[1].change_likes(Girl,3)
-                            $ Girl.change_likes(Present[1],5)
+                            $ Present[1].likes[Girl.tag] += 3
+                            $ Girl.likes[Present[1].tag] += 5
                             call change_Girl_stat(Present[1], "lust", 89, 7)
                             "You notice that [Present[1].name]'s begun feeling herself up as well."
-                            $ Present[1].add_word(1,"frisky", "frisky", 0, 0)
+                            $ Present[1].add_word(1, "frisky", "frisky", 0, 0)
                             $ Partner = Present[1]
                     else:
 
 
                         $ Present[1].eyes = "leftside"
                         "[Present[1].name] seems to notice what you and [Girl.name] are doing."
-                        $ Present[1].add_word(1, 0, 0,"saw with " + Girl.tag)
+                        $ Present[1].add_word(1, 0, 0, "saw with " + Girl.tag)
                         $ Present[1].change_face("angry", 1)
                         if Present[1] == RogueX:
                             ch_r "How dare you! Hussy."
@@ -716,8 +716,8 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                             ch_l "Cool off, you two."
                         elif Present[1] == JeanX:
                             ch_j "Hey, cut it out."
-                        $ Present[1].change_likes(Girl,-2)
-                        $ Girl.change_likes(Present[1],-3)
+                        $ Present[1].likes[Girl.tag] += -2
+                        $ Girl.likes[Present[1].tag] += -3
                         $ D20 += 15
                         if "go on" in Player.recent_history:
                             $ line = "caught"
@@ -726,8 +726,8 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
 
                 if Teacher and "frisky" in Teacher.recent_history:
 
-                    $ Teacher.change_likes(Girl, 2)
-                    $ Girl.change_likes(Teacher, 2)
+                    $ Teacher.likes[Girl.tag] += 2
+                    $ Girl.likes[Teacher.tag] += 2
                     call change_Girl_stat(Teacher, "lust", 95, 3)
                     $ lineB = renpy.random.choice([0,
                                     0,
@@ -773,7 +773,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
 
 
 
-        if "exhibitionist" not in Girl.traits and not approval_check(Girl, 700,"I"):
+        if "exhibitionist" not in Girl.traits and not approval_check(Girl, 700, "I"):
 
             $ line = "too far"
         if line not in ("rejected", "handholding", "tease"):
@@ -796,12 +796,12 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                     $ Girl.change_face("sly", 1)
                     if approval_check(Teacher, 800, "I") or "exhibitionist" in Teacher.traits:
                         call change_Girl_stat(Teacher, "inhibition", 90, 3)
-                        $ Teacher.change_likes(Girl,3)
-                        $ Girl.change_likes(Teacher,5)
+                        $ Teacher.likes[Girl.tag] += 3
+                        $ Girl.likes[Teacher.tag] += 5
                         call change_Girl_stat(Teacher, "lust", 89, 7)
                         "You notice that [Teacher.name]'s hand has snaked down beneath the podium and begun to move."
-                        $ Teacher.add_word(1,"frisky", "frisky", 0, 0)
-                        $ Player.add_word(1,"go on", "go on", 0, 0)
+                        $ Teacher.add_word(1, "frisky", "frisky", 0, 0)
+                        $ Player.add_word(1, "go on", "go on", 0, 0)
                     "[Girl.name] looks around and shrugs. . ."
                     jump Frisky_Class_Loop
                 else:
@@ -817,7 +817,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                 "Dr. McCoy stops his lecture in mid-sentence when he notices that the whole class is looking at you and [Girl.name]."
                 ch_b "Oh, my stars and garters!"
                 ch_b "[Player.name]!?! {b}WHAT ARE YOU DOING? BOTH OF YOU, TO THE PROFESSOR'S OFFICE, IMMEDIATELY!{/b}"
-            $ Girl.add_word(1, 0, 0, 0,"friskyclass")
+            $ Girl.add_word(1, 0, 0, 0, "friskyclass")
             $ line = 0
             call change_Girl_stat(Girl, "love", 80, -10)
             call change_Girl_stat(Girl, "obedience", 70, -5)
@@ -854,7 +854,7 @@ label Frisky_Class_End:
             "[Girl.name] startles briefly."
             $ Girl.change_face("sad", 2)
             "[Girl.name] she looks over at you a bit upset that you ended things so abruptly."
-        $ Girl.add_word(1, 0, 0, 0,"friskyclass")
+        $ Girl.add_word(1, 0, 0, 0, "friskyclass")
         $ Girl.change_face("sly", 1)
         "[Girl.name] takes in a deep breath and exhales it in a sigh, leaning in to whisper."
         if Girl == RogueX:
