@@ -176,7 +176,7 @@ image Jubes_titjob_jacket_back:
 layeredimage Jubes_titjob_bra_back:
     if JubesX.Clothes["bra"].string not in ["sports_bra", "bikini_top"]:
         Null()
-    elif JubesX.Clothes["bra"].state:
+    elif JubesX.Clothes["bra"] and JubesX.Clothes["bra"].state:
         "images/Jubes_titjob/Jubes_titjob_bra_[JubesX.Clothes[bra].string]_back_[JubesX.Clothes[bra].state].png"
     else:
         "images/Jubes_titjob/Jubes_titjob_bra_[JubesX.Clothes[bra].string]_back.png"

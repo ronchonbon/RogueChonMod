@@ -56,7 +56,7 @@ label Storm_Relationship:
                     call Harem_Initiation
                     "[StormX.name] moves in and kisses you deeply."
                     $ StormX.change_face("kiss", 1)
-                    $ StormX.action_counter["kiss"] += 1
+                    $ StormX.Action_counter["kiss"] += 1
                 elif StormX.obedience >= 500:
                     $ StormX.change_face("perplexed")
                     ch_s "I'm unsure, \"dating\". . ."
@@ -104,7 +104,7 @@ label Storm_Relationship:
                     call Harem_Initiation
                     "[StormX.name] pulls you in and kisses you deeply."
                     $ StormX.change_face("kiss", 1)
-                    $ StormX.action_counter["kiss"] += 1
+                    $ StormX.Action_counter["kiss"] += 1
                 elif StormX.love >= 600 and approval_check(StormX, 1500):
                     $ StormX.change_face("smile", 1)
                     call change_Girl_stat(StormX, "love", 90, 5)
@@ -119,7 +119,7 @@ label Storm_Relationship:
                     $ StormX.change_face("kiss", 1)
                     "[StormX.name] gives you a quick kiss."
                     $ StormX.change_face("sly", 1)
-                    $ StormX.action_counter["kiss"] += 1
+                    $ StormX.Action_counter["kiss"] += 1
                 elif StormX.obedience >= 500:
                     $ StormX.change_face("sad")
                     ch_s "Perhaps \"relationships\" are beyond us."
@@ -582,9 +582,9 @@ label Storm_SexChat:
                                 call change_Girl_stat(StormX, "love", 90, 5)
                                 call change_Girl_stat(StormX, "lust", 80, 10)
                                 ch_s "I also enjoy that. . ."
-                            elif StormX.action_counter["sex"] >= 5:
+                            elif StormX.Action_counter["sex"] >= 5:
                                 ch_s "It certainly is enjoyable. . ."
-                            elif not StormX.action_counter["sex"]:
+                            elif not StormX.Action_counter["sex"]:
                                 $ StormX.change_face("perplexed")
                                 ch_s "And who is fucking you?"
                             else:
@@ -601,9 +601,9 @@ label Storm_SexChat:
                                 call change_Girl_stat(StormX, "love", 90, 5)
                                 call change_Girl_stat(StormX, "lust", 80, 10)
                                 ch_s "I also enjoy that. . ."
-                            elif StormX.action_counter["anal"] >= 10:
+                            elif StormX.Action_counter["anal"] >= 10:
                                 ch_s "It certainly is enjoyable. . ."
-                            elif not StormX.action_counter["anal"]:
+                            elif not StormX.Action_counter["anal"]:
                                 $ StormX.change_face("perplexed")
                                 ch_s "And who is fucking you?"
                             else:
@@ -620,9 +620,9 @@ label Storm_SexChat:
                                 call change_Girl_stat(StormX, "love", 90, 5)
                                 call change_Girl_stat(StormX, "lust", 80, 5)
                                 ch_s "I would have to agree. . ."
-                            elif StormX.action_counter["blowjob"] >= 10:
+                            elif StormX.Action_counter["blowjob"] >= 10:
                                 ch_s "You are quite delicious. . ."
-                            elif not StormX.action_counter["blowjob"]:
+                            elif not StormX.Action_counter["blowjob"]:
                                 $ StormX.change_face("perplexed")
                                 ch_s "Who's sucking your dick?!"
                             else:
@@ -639,9 +639,9 @@ label Storm_SexChat:
                                 call change_Girl_stat(StormX, "love", 90, 5)
                                 call change_Girl_stat(StormX, "lust", 80, 7)
                                 ch_s "I also enjoy that. . ."
-                            elif StormX.action_counter["titjob"] >= 10:
+                            elif StormX.Action_counter["titjob"] >= 10:
                                 ch_s "It certainly is enjoyable. . ."
-                            elif not StormX.action_counter["titjob"]:
+                            elif not StormX.Action_counter["titjob"]:
                                 $ StormX.change_face("perplexed")
                                 ch_s "And who is titfucking you?"
                             else:
@@ -660,9 +660,9 @@ label Storm_SexChat:
                                 call change_Girl_stat(StormX, "love", 90, 5)
                                 call change_Girl_stat(StormX, "lust", 80, 7)
                                 ch_s "I also enjoy that. . ."
-                            elif StormX.action_counter["footjob"] >= 10:
+                            elif StormX.Action_counter["footjob"] >= 10:
                                 ch_s "I like it too . . ."
-                            elif not StormX.action_counter["footjob"]:
+                            elif not StormX.Action_counter["footjob"]:
                                 $ StormX.change_face("perplexed")
                                 ch_s "And who is playing footsie with you?"
                             else:
@@ -679,9 +679,9 @@ label Storm_SexChat:
                                 call change_Girl_stat(StormX, "love", 90, 5)
                                 call change_Girl_stat(StormX, "lust", 80, 7)
                                 ch_s "I also enjoy that. . ."
-                            elif StormX.action_counter["handjob"] >= 10:
+                            elif StormX.Action_counter["handjob"] >= 10:
                                 ch_s "I like it too . . ."
-                            elif not StormX.action_counter["handjob"]:
+                            elif not StormX.Action_counter["handjob"]:
                                 $ StormX.change_face("perplexed")
                                 ch_s "And who is jerking you off?"
                             else:
@@ -690,7 +690,7 @@ label Storm_SexChat:
                             $ StormX.player_favorite_action = "handjob"
                         "Feeling you up.":
 
-                            $ counter = StormX.action_counter["fondle_breasts"]+ StormX.action_counter["fondle_thighs"]+ StormX.action_counter["suck_breasts"] + StormX.action_counter["hotdog"]
+                            $ counter = StormX.Action_counter["fondle_breasts"]+ StormX.Action_counter["fondle_thighs"]+ StormX.Action_counter["suck_breasts"] + StormX.Action_counter["hotdog"]
                             $ StormX.change_face("sly")
                             if StormX.player_favorite_action == "fondle":
                                 call change_Girl_stat(StormX, "lust", 80, 3)
@@ -719,9 +719,9 @@ label Storm_SexChat:
                                 call change_Girl_stat(StormX, "love", 90, 5)
                                 call change_Girl_stat(StormX, "lust", 80, 5)
                                 ch_s "I also enjoy that. . ."
-                            elif StormX.action_counter["kiss"] >= 10:
+                            elif StormX.Action_counter["kiss"] >= 10:
                                 ch_s "It certainly is enjoyable. . ."
-                            elif not StormX.action_counter["kiss"]:
+                            elif not StormX.Action_counter["kiss"]:
                                 $ StormX.change_face("perplexed")
                                 ch_s "And who are you kissing?"
                             else:
@@ -956,7 +956,7 @@ label Storm_Chitchat(O=0, Options = ["default", "default", "default"]):
 
 
 
-        if StormX.action_counter["kiss"] >= 5:
+        if StormX.Action_counter["kiss"] >= 5:
 
             $ Options.append("kissed")
         if "dangerroom" in Player.daily_history:
@@ -976,7 +976,7 @@ label Storm_Chitchat(O=0, Options = ["default", "default", "default"]):
 
             if "lingerie" not in StormX.had_chat:
                 $ Options.append("lingerie")
-        if StormX.action_counter["handjob"]:
+        if StormX.Action_counter["handjob"]:
 
             $ Options.append("handy")
         if StormX.event_counter["swallowed"]:
@@ -991,10 +991,10 @@ label Storm_Chitchat(O=0, Options = ["default", "default", "default"]):
         if StormX.event_counter["creampied"] or StormX.event_counter["anal_creampied"]:
 
             $ Options.append("creampie")
-        if StormX.action_counter["sex"] or StormX.action_counter["anal"]:
+        if StormX.Action_counter["sex"] or StormX.Action_counter["anal"]:
 
             $ Options.append("sexed")
-        if StormX.action_counter["anal"]:
+        if StormX.Action_counter["anal"]:
 
             $ Options.append("anal")
 
@@ -1156,7 +1156,7 @@ label Storm_Chitchat(O=0, Options = ["default", "default", "default"]):
 
     elif Options[0] == "fondled":
 
-        if StormX.action_counter["fondle_breasts"]+ StormX.action_counter["fondle_pussy"] + StormX.action_counter["fondle_ass"] >= 15:
+        if StormX.Action_counter["fondle_breasts"]+ StormX.Action_counter["fondle_pussy"] + StormX.Action_counter["fondle_ass"] >= 15:
             ch_s "Please touch me. . . sometime. . ."
         else:
             ch_s "You know, you could touch me. . . if you wanted."
@@ -1721,7 +1721,7 @@ label Storm_Summon(approval_bonus=approval_bonus):
         $ approval_bonus = -30
     elif StormX.location == "bg_dangerroom":
         $ approval_bonus = -10
-    elif StormX.location == "bg_showerroom":
+    elif StormX.location == "bg_shower":
         $ approval_bonus = -30
 
     if D20 <= 3:
@@ -1776,7 +1776,7 @@ label Storm_Summon(approval_bonus=approval_bonus):
             ch_s "I am in my room, [StormX.player_petname], care to join me?"
         elif StormX.location == "bg_player":
             ch_s "I am in your room, [StormX.player_petname], coming home soon?"
-        elif StormX.location == "bg_showerroom":
+        elif StormX.location == "bg_shower":
             if approval_check(StormX, 1600):
                 ch_s "I am in the shower right now. Care to join me?"
             else:
@@ -1933,7 +1933,7 @@ label Storm_Summon(approval_bonus=approval_bonus):
         elif StormX.location == "bg_player":
             ch_s "I will be waiting."
             jump player_room
-        elif StormX.location == "bg_showerroom":
+        elif StormX.location == "bg_shower":
             ch_s "I will leave you some hot water."
             jump shower_room
         elif StormX.location == "bg_campus":
@@ -1983,7 +1983,7 @@ label Storm_Leave:
             ch_s "I am planning to relax in your room."
         elif StormX.location == "bg_pool":
             ch_s "I was going to take a swim."
-        elif StormX.location == "bg_showerroom":
+        elif StormX.location == "bg_shower":
             if approval_check(StormX, 1400):
                 ch_s "I am hitting the showers, I will see you later."
             else:
@@ -2002,7 +2002,7 @@ label Storm_Leave:
         $ approval_bonus = 30
     elif StormX.location == "bg_dangerroom":
         $ approval_bonus = 20
-    elif StormX.location == "bg_showerroom":
+    elif StormX.location == "bg_shower":
         $ approval_bonus = 40
     else:
         $ approval_bonus = 0
@@ -2019,7 +2019,7 @@ label Storm_Leave:
         ch_s "I am planning to relax in your room, care to join me?"
     elif StormX.location == "bg_pool":
         ch_s "I was going to take a swim, care to join me?"
-    elif StormX.location == "bg_showerroom":
+    elif StormX.location == "bg_shower":
         if approval_check(StormX, 1400):
             ch_s "I am hitting the showers, care to join me?"
         else:
@@ -2138,7 +2138,7 @@ label Storm_Leave:
             ch_s "I will see you soon then."
         elif StormX.location == "bg_player":
             ch_s "I will be waiting."
-        elif StormX.location == "bg_showerroom":
+        elif StormX.location == "bg_shower":
             ch_s "I will leave you some hot water."
         elif StormX.location == "bg_campus":
             ch_s "I will keep an eye out for you."
@@ -2161,7 +2161,7 @@ label Storm_Leave:
             jump classroom
         elif destination == "bg_dangerroom":
             jump danger_room
-        elif destination == "bg_showerroom":
+        elif destination == "bg_shower":
             jump shower_room
         elif destination == "bg_pool":
             jump pool

@@ -40,7 +40,7 @@ layeredimage background:
         "images/backgrounds/[Player.location].png"
 
 layeredimage midground:
-    if Player.location == "bg_showerroom":
+    if Player.location == "bg_shower":
         "rolling_fog_midground"
 
     if Player.location == "bg_pool":
@@ -57,5 +57,5 @@ layeredimage cover:
     if Player.location == "bg_restaurant":
         "images/backgrounds/bg_restaurant_table.png"
 
-    if Player.location == "bg_showerroom":
+    if Player.location == "bg_shower":
         "rolling_fog_cover" alpha 0.8

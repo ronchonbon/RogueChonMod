@@ -28,7 +28,7 @@ label MindFuck_Screen:
     elif Player.location == "bg_dangerroom":
         show bg_danger onlayer black:
             alpha .2
-    elif Player.location == "bg_showerroom":
+    elif Player.location == "bg_shower":
         show bg_shower onlayer black:
             alpha .2
     elif Player.location == "bg_study":

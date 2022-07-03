@@ -30,7 +30,7 @@ layeredimage Kitty_grool_dripping_animation:
 layeredimage Kitty_grool_animations:
     if not KittyX.grool:
         Null()
-    elif KittyX.Clothes["underwear"] and KittyX.Clothes["underwear"].state:
+    elif KittyX.Clothes["underwear"] and KittyX.Clothes["underwear"] and KittyX.Clothes["underwear"] and KittyX.Clothes["underwear"].state:
         AlphaMask("Kitty_grool_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask_underwear.png")
     elif not KittyX.Outfit.pussy_covered:
         AlphaMask("Kitty_grool_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask.png")
@@ -51,51 +51,58 @@ layeredimage Kitty_spunk_dripping_animation:
 layeredimage Kitty_spunk_animations:
     if not KittyX.spunk["pussy"] and not KittyX.spunk["anus"]:
         Null()
-    elif KittyX.Clothes["underwear"] and KittyX.Clothes["underwear"].state:
+    elif KittyX.Clothes["underwear"] and KittyX.Clothes["underwear"] and KittyX.Clothes["underwear"] and KittyX.Clothes["underwear"].state:
         AlphaMask("Kitty_spunk_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask_underwear.png")
     elif not KittyX.Outfit.pussy_covered:
         AlphaMask("Kitty_spunk_dripping_animation", "images/Kitty_standing/Kitty_standing_grool_mask.png")
 
 layeredimage Kitty_standing_fondling_animations:
-    if not girl_secondary_action:
+    if not KittyX.primary_Action or KittyX.primary_Action.Target != KittyX:
         Null()
-    elif girl_secondary_action == "fondle_breasts":
-        "Girl_fondle_breast_left_animation" pos (0.243, 0.747)
-    elif girl_secondary_action == "fondle_breasts":
+    elif KittyX.primary_Action.type == "fondle_breasts":
         "Girl_fondle_breast_right_animation" pos (0.128, 0.72)
-    elif girl_secondary_action == "fondle_pussy":
+    elif KittyX.primary_Action.type == "fondle_pussy":
         "Girl_fondle_pussy_animation" pos (0.223, 1.105)
-    elif girl_secondary_action in "finger_pussy":
+    elif KittyX.primary_Action.type in "finger_pussy":
         "Girl_finger_pussy_animation" pos (0.224, 1.16)
 
-    if not Player.primary_action:
+    if not KittyX.secondary_Action or KittyX.secondary_Action.Target != KittyX:
         Null()
-    elif Player.primary_action == "fondle_thighs":
+    elif KittyX.secondary_Action.type == "fondle_breasts":
+        "Girl_fondle_breast_left_animation" pos (0.243, 0.747)
+    elif KittyX.secondary_Action.type == "fondle_pussy":
+        "Girl_fondle_pussy_animation" pos (0.223, 1.105)
+    elif KittyX.secondary_Action.type in "finger_pussy":
+        "Girl_finger_pussy_animation" pos (0.224, 1.16)
+
+    if not Player.primary_Action or Player.primary_Action.Target != KittyX:
+        Null()
+    elif Player.primary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.178, 1.345)
-    elif Player.primary_action == "fondle_breasts":
-        "Zero_fondle_breasts_right_animation" pos (0.168, 0.73)
-    elif Player.primary_action == "suck_breasts":
-        "Zero_suck_breasts_right_animation" pos (0.108, 0.665)
-    elif Player.primary_action == "fondle_pussy":
+    elif Player.primary_Action.type == "fondle_breasts":
+        "Zero_fondle_breasts_left_animation" pos (0.21, 0.73)
+    elif Player.primary_Action.type == "suck_breasts":
+        "Zero_suck_breasts_left_animation" pos (0.223, 0.7)
+    elif Player.primary_Action.type == "fondle_pussy":
         "Zero_fondle_pussy_animation" pos (0.228, 1.085)
-    elif Player.primary_action == "finger_pussy":
+    elif Player.primary_Action.type == "finger_pussy":
         "Zero_finger_pussy_animation" pos (0.208, 1.34)
-    elif Player.primary_action == "eat_pussy":
+    elif Player.primary_Action.type == "eat_pussy":
         "Zero_eat_pussy_animation" pos (0.238, 1.185)
 
-    if not Player.secondary_action:
+    if not Player.secondary_Action or Player.secondary_Action.Target != KittyX:
         Null()
-    elif Player.secondary_action == "fondle_thighs":
+    elif Player.secondary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.178, 1.345)
-    elif Player.secondary_action == "fondle_breasts":
-        "Zero_fondle_breasts_left_animation" pos (0.21, 0.73)
-    elif Player.secondary_action == "suck_breasts":
-        "Zero_suck_breasts_left_animation" pos (0.223, 0.7)
-    elif Player.secondary_action == "fondle_pussy":
+    elif Player.secondary_Action.type == "fondle_breasts":
+        "Zero_fondle_breasts_right_animation" pos (0.168, 0.73)
+    elif Player.secondary_Action.type == "suck_breasts":
+        "Zero_suck_breasts_right_animation" pos (0.108, 0.665)
+    elif Player.secondary_Action.type == "fondle_pussy":
         "Zero_fondle_pussy_animation" pos (0.228, 1.085)
-    elif Player.secondary_action == "finger_pussy":
+    elif Player.secondary_Action.type == "finger_pussy":
         "Zero_finger_pussy_animation" pos (0.208, 1.34)
-    elif Player.secondary_action == "eat_pussy":
+    elif Player.secondary_Action.type == "eat_pussy":
         "Zero_eat_pussy_animation" pos (0.238, 1.185)
 
 image Kitty_handjob_under_hand_animation0:
@@ -161,13 +168,13 @@ layeredimage Kitty_sprite handjob:
         "Kitty_sprite standing" pos (0.05, 0.0)
 
     always:
-        "Kitty_handjob_under_hand_animation[action_speed]" pos (-0.01, 0.455) zoom 0.28
+        "Kitty_handjob_under_hand_animation[Action.type_speed]" pos (-0.01, 0.455) zoom 0.28
 
     always:
         "Zero_cock_Kitty"
 
     always:
-        "Kitty_handjob_over_hand_animation[action_speed]" pos (-0.01, 0.455) zoom 0.28
+        "Kitty_handjob_over_hand_animation[Action.type_speed]" pos (-0.01, 0.455) zoom 0.28
 
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
 
@@ -512,21 +519,21 @@ image Kitty_titjob_breasts_animation5:
 
 layeredimage Kitty_sprite titjob:
     always:
-        "Kitty_titjob_hair_back_animation[action_speed]" pos (0.0, -0.2) zoom 0.9
+        "Kitty_titjob_hair_back_animation[Action.type_speed]" pos (0.0, -0.2) zoom 0.9
 
     always:
-        "Kitty_titjob_body_animation[action_speed]"
+        "Kitty_titjob_body_animation[Action.type_speed]"
 
     always:
-        "Kitty_titjob_arms_animation[action_speed]"
+        "Kitty_titjob_arms_animation[Action.type_speed]"
 
     always:
-        "Kitty_titjob_head_animation[action_speed]" pos (0.0, -0.2) zoom 0.9
+        "Kitty_titjob_head_animation[Action.type_speed]" pos (0.0, -0.2) zoom 0.9
 
     always:
-        "Kitty_titjob_breasts_animation[action_speed]"
+        "Kitty_titjob_breasts_animation[Action.type_speed]"
 
-    if action_speed:
+    if Action.type_speed:
         AlphaMask("Zero_cock_Kitty", "Zero_cock_Kitty_mask") offset (-100, -100)
     else:
         "Zero_cock_Kitty" offset (-100, -100)
@@ -767,19 +774,19 @@ image Kitty_blowjob_spunk_mouth_over_animation4:
 
 layeredimage Kitty_sprite blowjob:
     always:
-        "Kitty_blowjob_body_animation[action_speed]"
+        "Kitty_blowjob_body_animation[Action.type_speed]"
 
     always:
-        "Kitty_blowjob_head_animation[action_speed]" pos (0.0, -0.05) zoom 0.9
+        "Kitty_blowjob_head_animation[Action.type_speed]" pos (0.0, -0.05) zoom 0.9
 
     always:
         "Zero_cock_Kitty"
 
-    if action_speed > 1:
-        "Kitty_blowjob_face_mask_animation[action_speed]" anchor (0.5, 0.5) pos (0.0, -0.05) zoom 0.9
+    if Action.type_speed > 1:
+        "Kitty_blowjob_face_mask_animation[Action.type_speed]" anchor (0.5, 0.5) pos (0.0, -0.05) zoom 0.9
 
-    if KittyX.spunk["mouth"] and action_speed > 1:
-        "Kitty_blowjob_spunk_mouth_over_animation[action_speed]" pos (0.0, -0.05) zoom 0.9
+    if KittyX.spunk["mouth"] and Action.type_speed > 1:
+        "Kitty_blowjob_spunk_mouth_over_animation[Action.type_speed]" pos (0.0, -0.05) zoom 0.9
 
     anchor (0.5, 0.0) offset (250, 750) zoom 1.1
 
@@ -1037,18 +1044,18 @@ image Kitty_sex_spunk_anus_over_animation:
 
 layeredimage Kitty_sprite sex:
     if Player.cock_position in ["in", "anal"]:
-        "Kitty_sex_body_animation[action_speed]"
+        "Kitty_sex_body_animation[Action.type_speed]"
     elif Player.cock_position == "footjob":
-        "Kitty_sex_body_footjob_animation[action_speed]"
+        "Kitty_sex_body_footjob_animation[Action.type_speed]"
     elif Player.cock_position == "out":
-        "Kitty_sex_body_hotdog_animation[action_speed]"
+        "Kitty_sex_body_hotdog_animation[Action.type_speed]"
 
     if Player.cock_position in ["in", "anal"]:
-        "Kitty_sex_legs_animation[action_speed]"
+        "Kitty_sex_legs_animation[Action.type_speed]"
     elif Player.cock_position == "footjob":
-        "Kitty_sex_legs_footjob_animation[action_speed]"
+        "Kitty_sex_legs_footjob_animation[Action.type_speed]"
     elif Player.cock_position == "out":
-        "Kitty_sex_legs_hotdog_animation[action_speed]"
+        "Kitty_sex_legs_hotdog_animation[Action.type_speed]"
 
     anchor (0.5, 0.0) offset (230, 785) zoom 0.9
 
@@ -1297,29 +1304,29 @@ image Kitty_doggy_feet_animation2:
 
 layeredimage Kitty_sprite doggy:
     if Player.cock_position == "anal":
-        "Kitty_doggy_body_animation[action_speed]"
-    elif Player.cock_position == "in" and action_speed > 1:
-        "Kitty_doggy_body_animation[action_speed]"
+        "Kitty_doggy_body_animation[Action.type_speed]"
+    elif Player.cock_position == "in" and Action.type_speed > 1:
+        "Kitty_doggy_body_animation[Action.type_speed]"
     else:
         "Kitty_doggy_body"
 
     if Player.cock_position == "anal":
-        "Kitty_doggy_ass_animation[action_speed]"
-    elif Player.cock_position == "in" and action_speed > 1:
-        "Kitty_doggy_ass_animation[action_speed]"
+        "Kitty_doggy_ass_animation[Action.type_speed]"
+    elif Player.cock_position == "in" and Action.type_speed > 1:
+        "Kitty_doggy_ass_animation[Action.type_speed]"
     else:
         "Kitty_doggy_ass"
 
     if Player.sprite and Player.cock_position == "footjob":
-        "Kitty_doggy_shin_animation[action_speed]"
+        "Kitty_doggy_shin_animation[Action.type_speed]"
     elif not Player.sprite and show_feet:
         "Kitty_doggy_shins"
 
     if Player.sprite and Player.cock_position == "footjob":
-        "Kitty_doggy_cock_footjob_animation[action_speed]" pos (-0.005, 0.24) zoom 1.1
+        "Kitty_doggy_cock_footjob_animation[Action.type_speed]" pos (-0.005, 0.24) zoom 1.1
 
     if Player.cock_position == "footjob":
-        "Kitty_doggy_feet_animation[action_speed]"
+        "Kitty_doggy_feet_animation[Action.type_speed]"
     elif not Player.sprite and show_feet:
         "Kitty_doggy_feet"
 

@@ -160,17 +160,17 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
         $ Player.Party[0].change_face("sly", 1,eyes = "side")
 
         "She stops immediately and looks a bit embarrassed."
-    elif D20 > 17 and approval_check(Player.Party[0], 1000) and Player.Party[0].action_counter["blowjob"] > 5:
+    elif D20 > 17 and approval_check(Player.Party[0], 1000) and Player.Party[0].Action_counter["blowjob"] > 5:
         $ action = "blowjob"
-    elif D20 > 14 and Player.Party[0] == JubesX and approval_check(Player.Party[0], 1000) and Player.Party[0].action_counter["blowjob"] > 5:
+    elif D20 > 14 and Player.Party[0] == JubesX and approval_check(Player.Party[0], 1000) and Player.Party[0].Action_counter["blowjob"] > 5:
         $ action = "blowjob"
-    elif D20 > 14 and approval_check(Player.Party[0], 1000) and Player.Party[0].action_counter["handjob"] >= 5:
+    elif D20 > 14 and approval_check(Player.Party[0], 1000) and Player.Party[0].Action_counter["handjob"] >= 5:
         $ action = "handjob"
-    elif D20 > 10 and (approval_check(Player.Party[0], 1300) or (Player.Party[0].action_counter["masturbation"] and approval_check(Player.Party[0], 1000))) and Player.Party[0].lust >= 70:
+    elif D20 > 10 and (approval_check(Player.Party[0], 1300) or (Player.Party[0].Action_counter["masturbation"] and approval_check(Player.Party[0], 1000))) and Player.Party[0].lust >= 70:
         $ action = "masturbation"
     elif D20 > 10 and approval_check(Player.Party[0], 1200) and Player.Party[0].lust >= 30:
         $ action = "striptease"
-    elif approval_check(Player.Party[0], 700) and Player.Party[0].action_counter["kiss"] > 1:
+    elif approval_check(Player.Party[0], 700) and Player.Party[0].Action_counter["kiss"] > 1:
         $ action = "kiss"
     elif approval_check(Player.Party[0], 500):
         $ action = "snuggle"
@@ -251,7 +251,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
 
         call Group_Strip_Study
     elif action in all_actions and len(Player.Party) == 1:
-        if AloneCheck(Player.Party[0]) and Player.Party[0].taboo == 20:
+        if check_if_alone(Player.Party[0]) and Player.Party[0].taboo == 20:
             $ Player.Party[0].taboo = 0
             $ taboo = 0
 
@@ -355,7 +355,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
 
                         return
 
-            if AloneCheck(Player.Party[0]) and Player.Party[0].taboo == 20:
+            if check_if_alone(Player.Party[0]) and Player.Party[0].taboo == 20:
                 $ Player.Party[0].taboo = 0
                 $ taboo = 0
 

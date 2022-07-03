@@ -891,7 +891,7 @@ label Massage_After:
         call change_Girl_stat(Girl, "love", 50, 2)
         call change_Girl_stat(Girl, "obedience", 30, 2)
 
-    $ Girl.action_counter["massage"] += 1
+    $ Girl.Action_counter["massage"] += 1
     $ Girl.remaining_actions -= 1
     $ Girl.addiction_rate += 2 if Girl.addiction_rate < 5 else Girl.addiction_rate
     if "addictive" in Player.traits:
@@ -925,7 +925,7 @@ label Massage_After:
         elif Girl == JubesX:
             ch_v "That really did the trick. . ."
             ch_v "Head, shoulder, knees, toes. . ."
-    elif Girl.action_counter["massage"] == 1:
+    elif Girl.Action_counter["massage"] == 1:
 
         if Girl == RogueX:
             ch_r "That was very relaxing, [Girl.player_petname]."
@@ -967,7 +967,7 @@ label Massage_BadEnd:
     $ Girl.change_face("angry", 1)
     if "massagefail" in Girl.recent_history:
 
-        $ Girl.action_counter["massage"] += 1
+        $ Girl.Action_counter["massage"] += 1
         $ Girl.remaining_actions - = 1
         $ Girl.addiction_rate += 2 if Girl.addiction_rate < 5 else Girl.addiction_rate
         if "addictive" in Player.traits:

@@ -1331,13 +1331,13 @@ label Morningwood_Check(Girls = [0, -3]):
     if "chill" in Player.Party[0].traits:
         $ Girls[0] = 0
     else:
-        if Player.Party[0].action_counter["blowjob"] >= 5 or approval_check(Player.Party[0], 900, "I"):
+        if Player.Party[0].Action_counter["blowjob"] >= 5 or approval_check(Player.Party[0], 900, "I"):
             $ Girls[0] += 3
-        elif Player.Party[0].action_counter["blowjob"] and approval_check(Player.Party[0], 900):
+        elif Player.Party[0].Action_counter["blowjob"] and approval_check(Player.Party[0], 900):
             $ Girls[0] += 2
         elif approval_check(Player.Party[0], 1400):
             $ Girls[0] += 2
-        elif Player.Party[0].action_counter["blowjob"] or approval_check(Player.Party[0], 900):
+        elif Player.Party[0].Action_counter["blowjob"] or approval_check(Player.Party[0], 900):
             $ Girls[0] += 1
 
         if "hungry" in Player.Party[0].traits and D20 >= 2:
@@ -1365,13 +1365,13 @@ label Morningwood_Check(Girls = [0, -3]):
         $ line = "yes"
 
     if len(Player.Party) >= 2:
-        if Player.Party[1].action_counter["blowjob"] >= 5 or approval_check(Player.Party[1], 900, "I"):
+        if Player.Party[1].Action_counter["blowjob"] >= 5 or approval_check(Player.Party[1], 900, "I"):
             $ Girls[1] += 3
-        elif Player.Party[1].action_counter["blowjob"] and approval_check(Player.Party[1], 900):
+        elif Player.Party[1].Action_counter["blowjob"] and approval_check(Player.Party[1], 900):
             $ Girls[1] += 2
         elif approval_check(Player.Party[1], 1400):
             $ Girls[1] += 2
-        elif Player.Party[1].action_counter["blowjob"] or approval_check(Player.Party[1], 900):
+        elif Player.Party[1].Action_counter["blowjob"] or approval_check(Player.Party[1], 900):
             $ Girls[1] += 1
 
         if "hungry" in Player.Party[1].traits and D20 >= 2:

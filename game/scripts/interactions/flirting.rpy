@@ -294,7 +294,7 @@ label Flirt(Girl=0):
                         "You lean close for a kiss, but [Girl.name] gently elbows your ribs."
                         ch_v "Oh, um, no thanks. . ."
                     return
-                if Girl.action_counter["kiss"]:
+                if Girl.Action_counter["kiss"]:
 
                     if approval_check(Girl, 750, "L", taboo_modifier = 1):
                         $ Girl.change_face("sexy", 1)
@@ -498,14 +498,14 @@ label Flirt(Girl=0):
                         elif Girl == JubesX:
                             ch_v "Back off, creep!"
 
-                $ Girl.action_counter["kiss"] += 1
+                $ Girl.Action_counter["kiss"] += 1
                 $ Girl.addiction -= 1
                 $ Girl.addiction_rate += 1
                 $ Girl.addiction_rate = 3 if Girl.addiction_rate < 3 else Girl.addiction_rate
 
                 if Girl.taboo and Girl == EmmaX:
                     if "threesome" not in EmmaX.history:
-                        if not AloneCheck(EmmaX):
+                        if not check_if_alone(EmmaX):
 
                             call Emma_ThreeCheck
 
@@ -1603,7 +1603,7 @@ label Flirt(Girl=0):
                                 $ Count = 0
                             "Fondle it a little":
 
-                                if Girl.action_counter["fondle_breasts"]and approval_check(Girl, 1000, taboo_modifier=2):
+                                if Girl.Action_counter["fondle_breasts"]and approval_check(Girl, 1000, taboo_modifier=2):
                                     $ Girl.change_face("sexy", 1)
                                     $ Girl.eyes = "closed"
                                     call change_Girl_stat(Girl, "lust", 90, 5)
@@ -1648,14 +1648,14 @@ label Flirt(Girl=0):
                 elif Player.location == "bg_halloween":
                     "She shrugs away from you and winks."
                     Girl.voice "Not now. . ."
-                elif Girl.action_counter["fondle_breasts"]and approval_check(Girl, 1100, taboo_modifier = 3):
+                elif Girl.Action_counter["fondle_breasts"]and approval_check(Girl, 1100, taboo_modifier = 3):
                     $ Girl.change_face("sexy", 1)
                     if Girl == RogueX:
                         ch_r "You know, maybe we could keep this party roll'in. . ."
                     elif Girl == KittyX:
                         ch_k "I wouldn't mind if we kept. . . you know. . ."
                     elif Girl == EmmaX:
-                        if "threesome" not in EmmaX.history and not AloneCheck(EmmaX):
+                        if "threesome" not in EmmaX.history and not check_if_alone(EmmaX):
 
                             call Emma_ThreeCheck
                         ch_e "Were you just sampling, or did you want to continue?"
@@ -2416,7 +2416,7 @@ label Compliment(Girl=0, line0=0, line1=0, line2=0, Options = [], CountList = []
             elif Girl == LauraX:
                 ch_l "Probably blood, mostly. Ninjas."
             elif Girl == JeanX:
-                $ line = renpy.random.choice([RogueX.name,KittyX.name,EmmaX.name])
+                $ line = renpy.random.choice([RogueX.name, KittyX.name,EmmaX.name])
                 ch_j "Oh, just something I found in [line]'s room."
                 $ line = 8
             elif Girl == StormX:

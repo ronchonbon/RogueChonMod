@@ -1202,7 +1202,7 @@ label Laura_Love_End:
     ch_l "So. . . now that we have some free time. . ."
     call change_Girl_stat(LauraX, "lust", 90, 10)
 
-    if not LauraX.action_counter["sex"]:
+    if not LauraX.Action_counter["sex"]:
         $ LauraX.change_face("bemused", 2)
         ch_l "I think I'm ready. . ."
     else:

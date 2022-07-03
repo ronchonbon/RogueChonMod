@@ -2,7 +2,7 @@ label meet_Jean:
     $ Present = [JeanX]
 
     $ JeanX.name = "???"
-    $ JeanX.location = "bg_showerroom"
+    $ JeanX.location = "bg_shower"
 
     $ JeanX.Outfit.remove_Clothing(["pants", "skirt"])
 
@@ -11,7 +11,7 @@ label meet_Jean:
     $ JeanX.add_word(1, "showered", "showered", 0, 0)
 
     call Jeanname(1)
-    call set_the_scene(location = "bg_showerroom", fade = True)
+    call set_the_scene(location = "bg_shower", fade = True)
     call shift_focus(JeanX)
 
     "As you approach the showers, you notice someone getting dressed."
@@ -379,7 +379,7 @@ label Jean_Like:
 
     ch_j "You know. . . you're more fun to hang out with than I expected."
     $ line = "Y"
-    if JeanX.action_counter["massage"] >= 5:
+    if JeanX.Action_counter["massage"] >= 5:
         call change_Girl_stat(JeanX, "lust", 60, 5)
         ch_j "You give really good massages. . ."
         $ line = "and Y"

@@ -1,6 +1,6 @@
 label set_approval_bonus(Girl, action, context):
     if action == "fondle_thighs":
-        if Girl.action_counter["fondle_thighs"]:
+        if Girl.Action_counter["fondle_thighs"]:
             $ approval_bonus += 10
 
         if Girl.legs_covered:
@@ -17,7 +17,7 @@ label set_approval_bonus(Girl, action, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 25
     elif action == "fondle_breasts":
-        if Girl.action_counter["fondle_breasts"]:
+        if Girl.Action_counter["fondle_breasts"]:
             $ approval_bonus += 15
 
         if Girl.lust > 75: #She's really horny
@@ -31,7 +31,7 @@ label set_approval_bonus(Girl, action, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 20
     elif action == "suck_breasts":
-        if Girl.action_counter["suck_breasts"]: #You've done it before
+        if Girl.Action_counter["suck_breasts"]: #You've done it before
             $ approval_bonus += 15
 
         if not Girl.Clothes["bra"] and not Girl.Clothes["top"]:
@@ -51,7 +51,7 @@ label set_approval_bonus(Girl, action, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 25
     elif action == "fondle_pussy":
-        if Girl.action_counter["fondle_pussy"]: #You've done it before
+        if Girl.Action_counter["fondle_pussy"]: #You've done it before
             $ approval_bonus += 20
 
         if Girl.legs_covered: # she's got pants on.
@@ -71,7 +71,7 @@ label set_approval_bonus(Girl, action, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 25
     elif action == "eat_pussy":
-        if Girl.action_counter["eat_pussy"]: #You've done it before
+        if Girl.Action_counter["eat_pussy"]: #You've done it before
             $ approval_bonus += 15
 
         if Girl.legs_covered: # she's got pants on.
@@ -96,7 +96,7 @@ label set_approval_bonus(Girl, action, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 25
     elif action == "fondle_ass":
-        if Girl.action_counter["fondle_ass"]: #You've done it before
+        if Girl.Action_counter["fondle_ass"]: #You've done it before
             $ approval_bonus += 10
 
         if Girl.legs_covered: # she's got pants on.
@@ -113,7 +113,7 @@ label set_approval_bonus(Girl, action, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 25
     elif action == "finger_ass":
-        if Girl.action_counter["finger_ass"]: #You've done it before
+        if Girl.Action_counter["finger_ass"]: #You've done it before
             $ approval_bonus += 25
 
         if Girl.legs_covered: # she's got pants on.
@@ -139,7 +139,7 @@ label set_approval_bonus(Girl, action, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 25
     elif action == "eat_ass":
-        if Girl.action_counter["eat_ass"]: #You've done it before
+        if Girl.Action_counter["eat_ass"]: #You've done it before
             $ approval_bonus += 20
 
         if Girl.legs_covered: # she's got pants on.
@@ -164,11 +164,11 @@ label set_approval_bonus(Girl, action, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 25
     elif action == "handjob":
-        if Girl.action_counter[action] >= 7: # She loves it
+        if Girl.Action_counter[action] >= 7: # She loves it
             $ approval_bonus += 10
-        elif Girl.action_counter[action] >= 3: #You've done it before several times
+        elif Girl.Action_counter[action] >= 3: #You've done it before several times
             $ approval_bonus += 7
-        elif Girl.action_counter[action]: #You've done it before
+        elif Girl.Action_counter[action]: #You've done it before
             $ approval_bonus += 3
 
         if "exhibitionist" in Girl.traits:
@@ -187,11 +187,11 @@ label set_approval_bonus(Girl, action, context):
         if context == "shift":
             $ approval_bonus += 15
     elif action == "footjob":
-        if Girl.action_counter[action] >= 7: # She loves it
+        if Girl.Action_counter[action] >= 7: # She loves it
             $ approval_bonus += 10
-        elif Girl.action_counter[action] >= 3: #You've done it before several times
+        elif Girl.Action_counter[action] >= 3: #You've done it before several times
             $ approval_bonus += 7
-        elif Girl.action_counter[action]: #You've done it before
+        elif Girl.Action_counter[action]: #You've done it before
             $ approval_bonus += 3
 
         if Girl.addiction >= 75 and Girl.event_counter["swallowed"] > = 3: #She's really strung out and has swallowed
@@ -208,11 +208,11 @@ label set_approval_bonus(Girl, action, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 40
     elif action == "titjob":
-        if Girl.action_counter[action] >= 7: # She loves it
+        if Girl.Action_counter[action] >= 7: # She loves it
             $ approval_bonus += 10
-        elif Girl.action_counter[action] >= 3: #You've done it before several times
+        elif Girl.Action_counter[action] >= 3: #You've done it before several times
             $ approval_bonus += 7
-        elif Girl.action_counter[action]: #You've done it before
+        elif Girl.Action_counter[action]: #You've done it before
             $ approval_bonus += 5
 
         if Girl.seen_breasts and approval_check(Girl, 500): # You've seen her tits.
@@ -239,11 +239,11 @@ label set_approval_bonus(Girl, action, context):
         if context == "shift":
             $ approval_bonus += 15
     elif action == "blowjob":
-        if Girl.action_counter[action] >= 7: # She loves it
+        if Girl.Action_counter[action] >= 7: # She loves it
             $ approval_bonus += 15
-        elif Girl.action_counter[action] >= 3: #You've done it before several times
+        elif Girl.Action_counter[action] >= 3: #You've done it before several times
             $ approval_bonus += 10
-        elif Girl.action_counter[action]: #You've done it before
+        elif Girl.Action_counter[action]: #You've done it before
             $ approval_bonus += 7
 
         if Girl.addiction >= 75 and Girl.event_counter["swallowed"] > = 3: #She's really strung out and has swallowed
@@ -262,7 +262,7 @@ label set_approval_bonus(Girl, action, context):
         if context == "shift":
             $ approval_bonus += 15
     elif action == "dildo_pussy":
-        if Girl.action_counter[action]: #You've done it before
+        if Girl.Action_counter[action]: #You've done it before
             $ approval_bonus += 15
         if Girl.legs_covered: # she's got pants on.
             $ approval_bonus -= 20
@@ -288,7 +288,7 @@ label set_approval_bonus(Girl, action, context):
             $ approval_bonus -= 20
         elif "anal" in Girl.daily_history or "dildo_ass" in Girl.daily_history:
             $ approval_bonus -= 10
-        elif (Girl.action_counter["anal"] + Girl.action_counter["dildo_ass"]) > 0 or Girl.Clothes["buttplug"]: #You've done it before
+        elif (Girl.Action_counter["anal"] + Girl.Action_counter["dildo_ass"]) > 0 or Girl.Clothes["buttplug"]: #You've done it before
             $ approval_bonus += 20
 
         if Girl.legs_covered: # she's got pants on.
@@ -309,11 +309,11 @@ label set_approval_bonus(Girl, action, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 40
     elif action == "sex":
-        if Girl.action_counter["sex"] >= 7: # She loves it
+        if Girl.Action_counter["sex"] >= 7: # She loves it
             $ approval_bonus += 15
-        elif Girl.action_counter["sex"] >= 3: #You've done it before several times
+        elif Girl.Action_counter["sex"] >= 3: #You've done it before several times
             $ approval_bonus += 12
-        elif Girl.action_counter["sex"]: #You've done it before
+        elif Girl.Action_counter["sex"]: #You've done it before
             $ approval_bonus += 10
 
         if Girl.addiction >= 75 and (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) > = 3: #She's really strung out and has creampied
@@ -336,11 +336,11 @@ label set_approval_bonus(Girl, action, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 40
     elif action == "anal":
-        if Girl.action_counter["anal"]  >= 7: # She loves it
+        if Girl.Action_counter["anal"]  >= 7: # She loves it
             $ approval_bonus += 20
-        elif Girl.action_counter["anal"]  >= 3: #You've done it before several times
+        elif Girl.Action_counter["anal"]  >= 3: #You've done it before several times
             $ approval_bonus += 17
-        elif Girl.action_counter["anal"] : #You've done it before
+        elif Girl.Action_counter["anal"] : #You've done it before
             $ approval_bonus += 15
 
         if Girl.addiction >= 75 and (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) > = 3: #She's really strung out and has creampied
@@ -370,9 +370,9 @@ label set_approval_bonus(Girl, action, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 40
     elif action == "hotdog":
-        if Girl.action_counter["hotdog"] >= 3: #You've done it before several times
+        if Girl.Action_counter["hotdog"] >= 3: #You've done it before several times
             $ approval_bonus += 10
-        elif Girl.action_counter["hotdog"]: #You've done it before
+        elif Girl.Action_counter["hotdog"]: #You've done it before
             $ approval_bonus += 5
 
         if Girl.lust > 85:
@@ -456,23 +456,23 @@ label end_of_action_round(Girl, action):
 
     if Girl.SEXP >= 100 or approval_check(Girl, 1200, "LO"):
         pass
-    elif counter == (5 + Girl.action_counter[action]):
+    elif counter == (5 + Girl.Action_counter[action]):
         call starting_to_get_bored_reactions(Girl, action)
     elif action in ["fondle_pussy", "finger_ass", "dildo_pussy", "dildo_ass"] and Girl.lust >= 80:
         pass
     elif action in ["fondle_breasts", "suck_breasts"] and Girl.lust >= 85:
         pass
-    elif action in fondle_actions and counter == (15 + Girl.action_counter[action]) and Girl.SEXP >= 15 and not approval_check(Girl, 1500):
+    elif action in fondle_actions and counter == (15 + Girl.Action_counter[action]) and Girl.SEXP >= 15 and not approval_check(Girl, 1500):
         call definitely_bored_now_reactions(Girl, action)
 
         if _return[1] != "continue":
             return _return
-    elif action in ["handjob, footjob, titjob, blowjob", "sex", "anal", "hotdog"] and counter == (10 + Girl.action_counter[action]) and Girl.SEXP <= 100 and not approval_check(Girl, 1200, "LO"):
+    elif action in ["handjob, footjob, titjob, blowjob", "sex", "anal", "hotdog"] and counter == (10 + Girl.Action_counter[action]) and Girl.SEXP <= 100 and not approval_check(Girl, 1200, "LO"):
         call definitely_bored_now_reactions(Girl, action)
 
         if _return[1] != "continue":
             return _return
-    elif action in ["kiss", "dildo_pussy", "dildo_ass"] and counter == (15 + Girl.action_counter[action]) and Girl.SEXP >= 15 and not approval_check(Girl, 1200, "LO"):
+    elif action in ["kiss", "dildo_pussy", "dildo_ass"] and counter == (15 + Girl.Action_counter[action]) and Girl.SEXP >= 15 and not approval_check(Girl, 1200, "LO"):
         call definitely_bored_now_reactions(Girl, action)
 
         if _return[1] != "continue":
@@ -689,8 +689,8 @@ label jerking_off(Girl = None):
 
             $ counter = 0
 
-            if Girl.action_counter["handjob"] >= 5 and approval_check(Girl, 1100, taboo_modifier = 3):
-                $ counter = Girl.action_counter["handjob"] - 4
+            if Girl.Action_counter["handjob"] >= 5 and approval_check(Girl, 1100, taboo_modifier = 3):
+                $ counter = Girl.Action_counter["handjob"] - 4
                 $ counter = 10 if counter > 10 else counter
 
                 while counter:
@@ -698,8 +698,8 @@ label jerking_off(Girl = None):
 
                     $ counter -= 1
 
-            if Girl.action_counter["blowjob"] >= 5 and approval_check(Girl, 1300, taboo_modifier = 3):
-                $ counter = Girl.action_counter["blowjob"] - 4
+            if Girl.Action_counter["blowjob"] >= 5 and approval_check(Girl, 1300, taboo_modifier = 3):
+                $ counter = Girl.Action_counter["blowjob"] - 4
                 $ counter = 10 if counter > 10 else counter
                 $ counter += 5 if "hungry" in Girl.traits else 0
 
@@ -708,8 +708,8 @@ label jerking_off(Girl = None):
 
                     $ counter -= 1
 
-            if Girl.action_counter["titjob"] >= 5 and approval_check(Girl, 1200, taboo_modifier = 5):
-                $ counter = Girl.action_counter["titjob"] - 4
+            if Girl.Action_counter["titjob"] >= 5 and approval_check(Girl, 1200, taboo_modifier = 5):
+                $ counter = Girl.Action_counter["titjob"] - 4
                 $ counter = 10 if counter > 10 else counter
 
                 while counter:
@@ -717,8 +717,8 @@ label jerking_off(Girl = None):
 
                     $ counter -= 1
 
-            if Girl.action_counter["sex"] >= 5 and approval_check(Girl, 1400, taboo_modifier = 5):
-                $ counter = Girl.action_counter["sex"] - 4
+            if Girl.Action_counter["sex"] >= 5 and approval_check(Girl, 1400, taboo_modifier = 5):
+                $ counter = Girl.Action_counter["sex"] - 4
                 $ counter = 10 if counter > 10 else counter
                 $ counter += 5 if Girl.lust >= 70 else 0
 
@@ -727,8 +727,8 @@ label jerking_off(Girl = None):
 
                     $ counter -= 1
 
-            if Girl.action_counter["anal"] >= 5 and approval_check(Girl, 1550, taboo_modifier = 5):
-                $ counter = Girl.action_counter["anal"] - 4
+            if Girl.Action_counter["anal"] >= 5 and approval_check(Girl, 1550, taboo_modifier = 5):
+                $ counter = Girl.Action_counter["anal"] - 4
                 $ counter = 10 if counter > 10 else counter
                 $ counter += 5 if Girl.lust >= 70 and Girl.used_to_anal else 0
 
@@ -754,7 +754,7 @@ label jerking_off(Girl = None):
                     ch_s "Did you want a hand?"
                 elif Girl == JubesX:
                     ch_v "I could, uh, give you a hand there. . ."
-            elif options[0] == "blowjob" or (Girl == JubesX and JubesX.action_counter["blowjob"]):
+            elif options[0] == "blowjob" or (Girl == JubesX and JubesX.Action_counter["blowjob"]):
                 if Girl == RogueX:
                     ch_r "Sure my mouth wouldn't do better?"
                 elif Girl == KittyX:
@@ -870,7 +870,7 @@ label jerking_off(Girl = None):
                 call Group_Strip_End
             elif Player.primary_action == "masturbation":
                 $ Girl.remaining_actions -= 1
-                $ Girl.action_counter["masturbation"] += 1
+                $ Girl.Action_counter["masturbation"] += 1
 
                 call checkout
             elif Player.primary_action:
@@ -1494,7 +1494,7 @@ label first_action_response(Girl, action, context):
 label action_specific_consequences(Girl, action):
     $ achievement = None
 
-    $ Girl.action_counter[action] += 1
+    $ Girl.Action_counter[action] += 1
 
     if action == "kiss":
         call Partner_Like(Girl, 1)
@@ -1570,7 +1570,7 @@ label action_approved(Girl, action):
         call action_forcefully_approved_lines(Girl, action)
     elif not taboo and "no_taboo" in Girl.daily_history:
         call private_enough_lines(Girl, action)
-    elif Girl.action_counter[action] < 3:
+    elif Girl.Action_counter[action] < 3:
         $ Girl.change_face("sexy", 1)
         $ Girl.brows = "confused"
         $ Girl.mouth = "kiss"
@@ -1600,7 +1600,7 @@ label action_disapproved(Girl, action):
         call said_no_today_lines(Girl, action)
     elif taboo and "no_taboo" in Girl.daily_history:
         call taboo_lines(Girl, action)
-    elif not Girl.action_counter[action]:
+    elif not Girl.Action_counter[action]:
         $ Girl.change_face("bemused")
 
         call action_not_done_yet_lines(Girl, action)
@@ -1675,7 +1675,7 @@ label action_rejected(Girl, action):
         $ Girl.add_word(1, "no_taboo", "no_taboo")
     elif action in anal_insertion_actions and not Girl.used_to_anal and action in Girl.daily_history:
         call anal_insertion_not_loose_done_today_reactions(Girl, action)
-    elif Girl.action_counter[action]:
+    elif Girl.Action_counter[action]:
         $ Girl.change_face("sad")
 
         call previous_action_rejected_lines(Girl, action)

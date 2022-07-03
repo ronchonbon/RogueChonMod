@@ -1548,7 +1548,7 @@ label Group_Strip(Girl):
 
         $ dancing_Girls[counter].recent_history.append("stripping")
         $ dancing_Girls[counter].daily_history.append("stripping")
-        $ dancing_Girls[counter].action_counter["striptease"] += 1
+        $ dancing_Girls[counter].Action_counter["striptease"] += 1
         $ dancing_Girls[counter].remaining_actions -= 1
 
         $ temp_approval_bonus = approval_bonus
@@ -2112,11 +2112,11 @@ label Girl_Stripping(Girl):
                     $ approval_bonus = 10
                 elif approval_bonus <= 20:
                     $ approval_bonus += 1
-            if taboo and Girl.action_counter["striptease"] <= 10:
+            if taboo and Girl.Action_counter["striptease"] <= 10:
                 call change_Girl_stat(Girl, "obedience", 50, 7)
-            elif taboo or Girl.action_counter["striptease"] <= 10:
+            elif taboo or Girl.Action_counter["striptease"] <= 10:
                 call change_Girl_stat(Girl, "obedience", 50, 5)
-            elif Girl.action_counter["striptease"] <= 50:
+            elif Girl.Action_counter["striptease"] <= 50:
                 call change_Girl_stat(Girl, "obedience", 50, 3)
         "Keep Dancing. . ." if "keepdancing" in Girl.recent_history:
             $ Girl.eyes = "sexy"
@@ -2153,11 +2153,11 @@ label Girl_Stripping(Girl):
 
             if "watching" not in Girl.recent_history:
                 if "keepdancing" not in Girl.recent_history:
-                    if taboo and Girl.action_counter["striptease"] <= 10:
+                    if taboo and Girl.Action_counter["striptease"] <= 10:
                         call change_Girl_stat(Girl, "inhibition", 50, 3)
-                    elif taboo or Girl.action_counter["striptease"] <= 10:
+                    elif taboo or Girl.Action_counter["striptease"] <= 10:
                         call change_Girl_stat(Girl, "inhibition", 50, 1)
-                elif Girl.action_counter["striptease"] <= 50:
+                elif Girl.Action_counter["striptease"] <= 50:
                     call change_Girl_stat(Girl, "inhibition", 50, 2)
                     call change_Girl_stat(Girl, "lust", 70, 2)
                 $ Girl.recent_history.append("watching")
@@ -2259,7 +2259,7 @@ label Bottoms_Off(Girl, Intro = 1):
         else:
             if Girl.Clothes["bottom"] and not Girl.upskirt:
                 ch_p "This might be easier without your [Girl.Clothes[bottom].name] on."
-            elif Girl.Clothes["underwear"] and not Girl.Clothes["underwear"].state:
+            elif Girl.Clothes["underwear"] and not Girl.Clothes["underwear"] and Girl.Clothes["underwear"] and not Girl.Clothes["underwear"].state:
                 ch_p "This might be easier without your [Girl.Clothes[underwear].name] on."
 
     $ approval = approval_check(Girl, 1200, taboo_modifier = 5)
@@ -2917,7 +2917,7 @@ label Bottoms_Off_Legs(Girl):
                         "She shifts her [Girl.Clothes[bottom].name] out of the way."
                     else:
                         "She shifts her [Girl.Clothes[underwear].name] out of the way."
-                elif approval >= 1 and Girl.Clothes["bottom"] and Girl.Clothes["underwear"] and not Girl.Clothes["underwear"].state:
+                elif approval >= 1 and Girl.Clothes["bottom"] and Girl.Clothes["underwear"] and not Girl.Clothes["underwear"] and approval >= 1 and Girl.Clothes["bottom"] and Girl.Clothes["underwear"] and not Girl.Clothes["underwear"].state:
                     if Girl == RogueX:
                         ch_r "I'll show you a little bit. . ."
                     elif Girl == KittyX:

@@ -1,5 +1,7 @@
 init -1:
 
+    default stack_depth = 0
+
     default day = 1
     default round = 100
     default time_options = ["morning", "midday", "evening", "night", "night"]
@@ -19,24 +21,9 @@ init -1:
 
     default bedrooms = ["bg_player"]
 
-    default taboo = 0
-
-    default multi_action = True
-
-    default position_timer = 100
-
-    default stack_depth = 0
-
-    default approval_bonus = 0
-    default approval = 0
-
-    default between_event_count = 0
-
-    default achievements = []
+    default door_locked = False
 
     default show_feet = False
-
-    default always_return_to_room = True
 
     default stage_far_far_left = 0.15
     default stage_far_left = 0.25
@@ -46,36 +33,31 @@ init -1:
     default stage_far_right = 0.75
     default stage_far_far_right = 0.85
 
-    default door_locked = False
+    define hand_Action_types = ["massage", "fondle_thighs", "fondle_breasts", "fondle_pussy", "finger_pussy", "fondle_ass", "finger_ass"]
+    define finger_Action_types = ["finger_pussy", "finger_ass"]
+    define mouth_Action_types = ["kiss", "suck_breasts", "eat_pussy", "eat_ass"]
+    define cock_Action_types = ["handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"]
+    define dildo_Action_types = ["dildo_pussy", "dildo_ass"]
+    define breast_Action_types = ["fondle_breasts", "suck_breasts"]
+    define pussy_Action_types = ["fondle_pussy", "finger_pussy", "eat_pussy", "dildo_pussy"]
+    define ass_Action_types = ["fondle_ass", "finger_ass", "eat_ass", "dildo_ass"]
 
-    default simulation = False
+    define active_Action_types = ["massage", "kiss", "fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]
+    define passive_Action_types = ["striptease", "masturbation", "handjob", "footjob", "titjob", "blowjob"]
+    define fondle_Action_types = ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]
+    define job_Action_types = ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]
+    define sex_Action_types = ["sex", "anal", "hotdog"]
 
-    default menu_context = None
+    define below_Action_types = ["fondle_thighs", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"]
+    define inside_panties_Action_types = ["finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"]
+    define insertion_Action_types = ["finger_pussy", "finger_ass", "dildo_pussy", "dildo_ass", "sex", "anal"]
+    define pussy_insertion_Action_types = ["finger_pussy", "dildo_pussy", "sex"]
+    define anal_insertion_Action_types = ["finger_ass", "dildo_ass", "anal"]
+    define contact_Action_types = ["massage", "kiss", "fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_ass", "finger_ass", "eat_ass", "handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"]
+    define kinky_Action_types = ["masturbation", "finger_ass", "eat_ass", "titjob", "footjob", "dildo_pussy", "dildo_ass", "anal", "hotdog"]
 
-    define hand_actions = ["massage", "fondle_thighs", "fondle_breasts", "fondle_pussy", "finger_pussy", "fondle_ass", "finger_ass"]
-    define finger_actions = ["finger_pussy", "finger_ass"]
-    define mouth_actions = ["kiss", "suck_breasts", "eat_pussy", "eat_ass"]
-    define cock_actions = ["handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"]
-    define dildo_actions = ["dildo_pussy", "dildo_ass"]
-    define breast_actions = ["fondle_breasts", "suck_breasts"]
-    define pussy_actions = ["fondle_pussy", "finger_pussy", "eat_pussy", "dildo_pussy"]
-    define ass_actions = ["fondle_ass", "finger_ass", "eat_ass", "dildo_ass"]
-
-    define active_actions = ["massage", "kiss", "fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]
-    define passive_actions = ["striptease", "masturbation", "handjob", "footjob", "titjob", "blowjob"]
-    define fondle_actions = ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]
-    define job_actions = ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]
-    define sex_actions = ["sex", "anal", "hotdog"]
-
-    define below_actions = ["fondle_thighs", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"]
-    define inside_panties_actions = ["finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"]
-    define insertion_actions = ["finger_pussy", "finger_ass", "dildo_pussy", "dildo_ass", "sex", "anal"]
-    define pussy_insertion_actions = ["finger_pussy", "dildo_pussy", "sex"]
-    define anal_insertion_actions = ["finger_ass", "dildo_ass", "anal"]
-    define contact_actions = ["massage", "kiss", "fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_ass", "finger_ass", "eat_ass", "handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"]
-    define kinky_actions = ["masturbation", "finger_ass", "eat_ass", "titjob", "footjob", "dildo_pussy", "dildo_ass", "anal", "hotdog"]
-
-    define all_actions = ["massage", "kiss",
+    define all_Action_types = [
+        "massage", "kiss",
         "striptease", "masturbation",
         "fondle_thighs",
         "fondle_breasts", "suck_breasts",

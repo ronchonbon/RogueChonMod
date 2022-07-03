@@ -1292,7 +1292,7 @@ label tops_menu(Girl):
         # elif item == "towel":
         #     $ Girl.change_face("bemused", 1)
         #
-        #     $ bonus = 5 if Player.location == "bg_showerroom" else 0
+        #     $ bonus = 5 if Player.location == "bg_shower" else 0
         #
         #     if Girl.Clothes["bra"] or (Girl.seen_breasts and approval_check(Girl, 500, taboo_modifier=(3-public-bonus))):
         #         if Girl == RogueX:
@@ -4691,7 +4691,7 @@ label outfitShame(Girl, Custom = 3, Check=0, Count=0, Tempshame=50, Agree = 1):
     elif Tempshame <= 12:
 
         pass
-    elif Girl.Clothes["top"] == "towel" and Girl.location == "bg_showerroom":
+    elif Girl.Clothes["top"] == "towel" and Girl.location == "bg_shower":
 
         pass
     elif Tempshame <= 15 and (approval_check(Girl, 1500) or approval_check(Girl, 500, "I")):

@@ -56,7 +56,7 @@ label Jubes_Relationship:
                     call Harem_Initiation
                     "[JubesX.name] tackles you and kisses you deeply."
                     $ JubesX.change_face("kiss", 1)
-                    $ JubesX.action_counter["kiss"] += 1
+                    $ JubesX.Action_counter["kiss"] += 1
                 elif JubesX.obedience >= 500:
                     $ JubesX.change_face("perplexed")
                     ch_v "I don't know if I want to -date- you. . ."
@@ -104,7 +104,7 @@ label Jubes_Relationship:
                     call Harem_Initiation
                     "[JubesX.name] pulls you in and kisses you deeply."
                     $ JubesX.change_face("kiss", 1)
-                    $ JubesX.action_counter["kiss"] += 1
+                    $ JubesX.Action_counter["kiss"] += 1
                 elif JubesX.love >= 600 and approval_check(JubesX, 1500):
                     $ JubesX.change_face("smile", 1)
                     call change_Girl_stat(JubesX, "love", 90, 5)
@@ -119,7 +119,7 @@ label Jubes_Relationship:
                     $ JubesX.change_face("kiss", 1)
                     "[JubesX.name] gives you a quick kiss."
                     $ JubesX.change_face("sly", 1)
-                    $ JubesX.action_counter["kiss"] += 1
+                    $ JubesX.Action_counter["kiss"] += 1
                 elif JubesX.obedience >= 500:
                     $ JubesX.change_face("sad")
                     ch_v "Nah, we gave it a shot."
@@ -568,9 +568,9 @@ label Jubes_SexChat:
                                 call change_Girl_stat(JubesX, "love", 90, 5)
                                 call change_Girl_stat(JubesX, "lust", 80, 10)
                                 ch_v "I really like it too!"
-                            elif JubesX.action_counter["sex"] >= 5:
+                            elif JubesX.Action_counter["sex"] >= 5:
                                 ch_v "Well I don't mind that."
-                            elif not JubesX.action_counter["sex"]:
+                            elif not JubesX.Action_counter["sex"]:
                                 $ JubesX.change_face("perplexed")
                                 ch_v "Who's fucking you?"
                             else:
@@ -587,9 +587,9 @@ label Jubes_SexChat:
                                 call change_Girl_stat(JubesX, "love", 90, 5)
                                 call change_Girl_stat(JubesX, "lust", 80, 10)
                                 ch_v "I love it too!"
-                            elif JubesX.action_counter["anal"] >= 10:
+                            elif JubesX.Action_counter["anal"] >= 10:
                                 ch_v "Yeah, it's. . . nice. . ."
-                            elif not JubesX.action_counter["anal"]:
+                            elif not JubesX.Action_counter["anal"]:
                                 $ JubesX.change_face("perplexed")
                                 ch_v "Who's fucking you?"
                             else:
@@ -606,9 +606,9 @@ label Jubes_SexChat:
                                 call change_Girl_stat(JubesX, "love", 90, 5)
                                 call change_Girl_stat(JubesX, "lust", 80, 5)
                                 ch_v "Me too!"
-                            elif JubesX.action_counter["blowjob"] >= 10:
+                            elif JubesX.Action_counter["blowjob"] >= 10:
                                 ch_v "Yeah, you're delicious."
-                            elif not JubesX.action_counter["blowjob"]:
+                            elif not JubesX.Action_counter["blowjob"]:
                                 $ JubesX.change_face("perplexed")
                                 ch_v "Who's sucking your dick?!"
                             else:
@@ -625,9 +625,9 @@ label Jubes_SexChat:
                                 call change_Girl_stat(JubesX, "love", 90, 5)
                                 call change_Girl_stat(JubesX, "lust", 80, 7)
                                 ch_v "Yeah, I enjoy that too. . ."
-                            elif JubesX.action_counter["titjob"] >= 10:
+                            elif JubesX.Action_counter["titjob"] >= 10:
                                 ch_v "It's certainly an interesting experience . . ."
-                            elif not JubesX.action_counter["titjob"]:
+                            elif not JubesX.Action_counter["titjob"]:
                                 $ JubesX.change_face("perplexed")
                                 ch_v "Who's titfucking you?"
                             else:
@@ -646,9 +646,9 @@ label Jubes_SexChat:
                                 call change_Girl_stat(JubesX, "love", 90, 5)
                                 call change_Girl_stat(JubesX, "lust", 80, 7)
                                 ch_v "I do like using my feet. . ."
-                            elif JubesX.action_counter["footjob"] >= 10:
+                            elif JubesX.Action_counter["footjob"] >= 10:
                                 ch_v "I like it too . . ."
-                            elif not JubesX.action_counter["footjob"]:
+                            elif not JubesX.Action_counter["footjob"]:
                                 $ JubesX.change_face("perplexed")
                                 ch_v "Who's playing footsie with you?"
                             else:
@@ -665,9 +665,9 @@ label Jubes_SexChat:
                                 call change_Girl_stat(JubesX, "love", 90, 5)
                                 call change_Girl_stat(JubesX, "lust", 80, 7)
                                 ch_v "You do feel pretty comfy. . ."
-                            elif JubesX.action_counter["handjob"] >= 10:
+                            elif JubesX.Action_counter["handjob"] >= 10:
                                 ch_v "I like it too . . ."
-                            elif not JubesX.action_counter["handjob"]:
+                            elif not JubesX.Action_counter["handjob"]:
                                 $ JubesX.change_face("perplexed")
                                 ch_v "Who's jerking you off?"
                             else:
@@ -676,7 +676,7 @@ label Jubes_SexChat:
                             $ JubesX.player_favorite_action = "handjob"
                         "Feeling you up.":
 
-                            $ counter = JubesX.action_counter["fondle_breasts"]+ JubesX.action_counter["fondle_thighs"]+ JubesX.action_counter["suck_breasts"] + JubesX.action_counter["hotdog"]
+                            $ counter = JubesX.Action_counter["fondle_breasts"]+ JubesX.Action_counter["fondle_thighs"]+ JubesX.Action_counter["suck_breasts"] + JubesX.Action_counter["hotdog"]
                             $ JubesX.change_face("sly")
                             if JubesX.player_favorite_action == "fondle":
                                 call change_Girl_stat(JubesX, "lust", 80, 3)
@@ -705,9 +705,9 @@ label Jubes_SexChat:
                                 call change_Girl_stat(JubesX, "love", 90, 5)
                                 call change_Girl_stat(JubesX, "lust", 80, 5)
                                 ch_v "Hmm, the taste of you on my lips. . ."
-                            elif JubesX.action_counter["kiss"] >= 10:
+                            elif JubesX.Action_counter["kiss"] >= 10:
                                 ch_v "I love kissing you too . . ."
-                            elif not JubesX.action_counter["kiss"]:
+                            elif not JubesX.Action_counter["kiss"]:
                                 $ JubesX.change_face("perplexed")
                                 ch_v "Who are you kissing?"
                             else:
@@ -944,7 +944,7 @@ label Jubes_Chitchat(O=0, Options = ["default", "default", "default"]):
 
 
 
-        if JubesX.action_counter["kiss"] >= 5:
+        if JubesX.Action_counter["kiss"] >= 5:
 
             $ Options.append("kissed")
 
@@ -967,7 +967,7 @@ label Jubes_Chitchat(O=0, Options = ["default", "default", "default"]):
 
             if "lingerie" not in JubesX.had_chat:
                 $ Options.append("lingerie")
-        if JubesX.action_counter["handjob"]:
+        if JubesX.Action_counter["handjob"]:
 
             $ Options.append("handy")
         if JubesX.event_counter["swallowed"]:
@@ -982,10 +982,10 @@ label Jubes_Chitchat(O=0, Options = ["default", "default", "default"]):
         if JubesX.event_counter["creampied"] or JubesX.event_counter["anal_creampied"]:
 
             $ Options.append("creampie")
-        if JubesX.action_counter["sex"] or JubesX.action_counter["anal"]:
+        if JubesX.Action_counter["sex"] or JubesX.Action_counter["anal"]:
 
             $ Options.append("sexed")
-        if JubesX.action_counter["anal"]:
+        if JubesX.Action_counter["anal"]:
 
             $ Options.append("anal")
 
@@ -1722,7 +1722,7 @@ label Jubes_Summon(approval_bonus=approval_bonus):
         $ approval_bonus = -10
     elif JubesX.location == "bg_dangerroom":
         $ approval_bonus = -10
-    elif JubesX.location == "bg_showerroom":
+    elif JubesX.location == "bg_shower":
         $ approval_bonus = -30
 
     if D20 <= 3:
@@ -1777,7 +1777,7 @@ label Jubes_Summon(approval_bonus=approval_bonus):
             ch_v "I'm in my room, [JubesX.player_petname], did you wanna drop by?"
         elif JubesX.location == "bg_player":
             ch_v "I'm in your room, [JubesX.player_petname], are you coming back?"
-        elif JubesX.location == "bg_showerroom":
+        elif JubesX.location == "bg_shower":
             if approval_check(JubesX, 1600):
                 ch_v "I'm in the shower right now. Join me?"
             else:
@@ -1934,7 +1934,7 @@ label Jubes_Summon(approval_bonus=approval_bonus):
         elif JubesX.location == "bg_player":
             ch_v "I'll be waiting."
             jump player_room
-        elif JubesX.location == "bg_showerroom":
+        elif JubesX.location == "bg_shower":
             ch_v "I'll leave you some hot water."
             jump shower_room
         elif JubesX.location == "bg_campus":
@@ -1991,7 +1991,7 @@ label Jubes_Leave:
             ch_v "I'm gonna hang out in your room for a bit."
         elif JubesX.location == "bg_pool":
             ch_v "I was hitting the pool."
-        elif JubesX.location == "bg_showerroom":
+        elif JubesX.location == "bg_shower":
             if approval_check(JubesX, 1400):
                 ch_v "I'm hitting the showers, later."
             else:
@@ -2010,7 +2010,7 @@ label Jubes_Leave:
         $ approval_bonus = 10
     elif JubesX.location == "bg_dangerroom":
         $ approval_bonus = 20
-    elif JubesX.location == "bg_showerroom":
+    elif JubesX.location == "bg_shower":
         $ approval_bonus = 40
     else:
         $ approval_bonus = 0
@@ -2026,7 +2026,7 @@ label Jubes_Leave:
         ch_v "I'm headed back to my room, you interested?"
     elif JubesX.location == "bg_player":
         ch_v "I'm going to hang out in your room for a bit, you interested?"
-    elif JubesX.location == "bg_showerroom":
+    elif JubesX.location == "bg_shower":
         if approval_check(JubesX, 1600):
             ch_v "I'm hitting the showers, you should join me."
         else:
@@ -2147,7 +2147,7 @@ label Jubes_Leave:
             ch_v "Ok."
         elif JubesX.location == "bg_player":
             ch_v "Good."
-        elif JubesX.location == "bg_showerroom":
+        elif JubesX.location == "bg_shower":
             ch_v "Ok, nice."
         elif JubesX.location == "bg_campus":
             ch_v "Ok, nice."
@@ -2170,7 +2170,7 @@ label Jubes_Leave:
             jump classroom
         elif destination == "bg_dangerroom":
             jump danger_room
-        elif destination == "bg_showerroom":
+        elif destination == "bg_shower":
             jump shower_room
         elif destination == "bg_pool":
             jump pool

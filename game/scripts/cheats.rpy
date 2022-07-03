@@ -3,17 +3,7 @@ label cheat_menu(Girl):
 
     while True:
         menu:
-            "[Girl.name]: Love: [Girl.love], Obedience: [Girl.obedience], Inhibition: [Girl.inhibition], Lust: [Girl.lust], Taboo: [taboo], Location: [Girl.location]"
-            "Activities":
-                menu:
-                    "Recent Actions":
-                        "[Girl.recent_history]"
-                    "Daily Actions":
-                        "[Girl.daily_history]"
-                    "Traits":
-                        "[Girl.traits]"
-                    "History":
-                        "[Girl.history]"
+            "[Girl.name]: Love: [Girl.love], Obedience: [Girl.obedience], Inhibition: [Girl.inhibition], Friendship: [Girl.friendship], Lust: [Girl.lust], Location: [Girl.location]"
             "Raise love":
                 $ Girl.love += 100
             "Lower love":
@@ -30,10 +20,6 @@ label cheat_menu(Girl):
                 $ Girl.lust += 10
             "Lower lust":
                 $ Girl.lust -= 10
-            "Raise addiction":
-                $ Girl.addiction += 10
-            "Lower addiction":
-                $ Girl.addiction -= 10
             "Wardrobe":
                 call wardrobe_editor(Girl)
             "Unlock all Girls":
@@ -43,17 +29,13 @@ label cheat_menu(Girl):
 
                         Player.Phonebook.append(G)
 
-                        G.history.append("met")
-
                         if G == EmmaX:
                             G.name = "Emma"
                             G.names.append("Emma")
-                            G.history.append("classcaught")
                         elif G == LauraX:
                             G.name = "Laura"
                             G.names.append("X-23")
                             G.names.append("Laura")
-                            G.history.append("dress0")
                         elif G == StormX:
                             G.names.append("Ororo")
                             G.names.append("Ms. Munroe")
@@ -108,16 +90,12 @@ label wardrobe_editor(Girl):
                                 call show_blowjob(Girl)
                             else:
                                 call show_full_body(Girl)
-                        "Missionary":
-                            $ Girl.pose = "sex"
-
+                        "Sex":
                             if not renpy.showing(Girl.tag + " sex"):
                                 call show_sex(Girl, "sex")
                             else:
                                 call show_full_body(Girl)
                         "Doggy":
-                            $ Girl.pose = "doggy"
-
                             if not renpy.showing(Girl.tag + " doggy"):
                                 call show_sex(Girl, "anal")
                             else:

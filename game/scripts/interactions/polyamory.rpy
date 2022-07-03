@@ -318,7 +318,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls = []):
     $ line = Girl.likes[Partner.tag]
     if line >= 900:
         $ Bonus += 150
-    elif line >= 800 or "poly "+Partner.tag in Girl.traits:
+    elif line >= 800 or "poly " +Partner.tag in Girl.traits:
         $ Bonus += 100
     elif line >= 700:
         $ Bonus += 50
@@ -329,8 +329,8 @@ label LesScene(Girl=0, Bonus=0, temp_Girls = []):
     $ Partner.drain_word("unseen", 1, 0)
     $ line = 0
 
-    $ Girl.add_word(1, "noticed "+Partner.tag, "noticed "+Partner.tag)
-    $ Partner.add_word(1, "noticed "+Girl.tag, "noticed "+Girl.tag)
+    $ Girl.add_word(1, "noticed " +Partner.tag, "noticed " +Partner.tag)
+    $ Partner.add_word(1, "noticed " +Girl.tag, "noticed " +Girl.tag)
 
     if Player.location in bedrooms:
         $ taboo = 0
@@ -691,7 +691,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls = []):
             $ line = renpy.random.choice(["You do like to watch.",
                                     "So you'd like us to go again?",
                                     "You want to watch some more?",
-                                    "You want me to get it on with "+Partner.tag+"?"])
+                                    "You want me to get it on with " +Partner.tag + "?"])
             Girl.voice "[line]"
         $ line = 0
 
@@ -1103,8 +1103,8 @@ label Les_Prep(Girl=Player.focused_Girl, temp_Girls = []):
 
     $ line = 0
 
-    $ Girl.add_word(1, "noticed "+Partner.tag, "noticed "+Partner.tag)
-    $ Partner.add_word(1, "noticed "+Girl.tag, "noticed "+Girl.tag)
+    $ Girl.add_word(1, "noticed " +Partner.tag, "noticed " +Partner.tag)
+    $ Partner.add_word(1, "noticed " +Girl.tag, "noticed " +Girl.tag)
 
     if "unseen" not in Girl.recent_history:
 
@@ -1365,8 +1365,8 @@ label Les_After:
                 ch_v "It was cool to have an audience. . ."
     if not action_context:
         call Post_Les_Dialog
-    $ Girl.add_word(1, 0, 0, 0, "les "+Partner.tag)
-    $ Partner.add_word(1, 0, 0, 0, "les "+Girl.tag)
+    $ Girl.add_word(1, 0, 0, 0, "les " +Partner.tag)
+    $ Partner.add_word(1, 0, 0, 0, "les " +Girl.tag)
     $ approval_bonus = 0
     call checkout
     return
@@ -1390,7 +1390,7 @@ label Post_Les_Dialog:
     elif Girl == JubesX:
         ch_v "That was a blast. . ."
 
-    if "les "+Partner.tag in Girl.history:
+    if "les " +Partner.tag in Girl.history:
 
         if Partner == RogueX:
             ch_r "Mmmm yeah. . ."
@@ -3320,7 +3320,7 @@ label Harem_Start(Newbie=0, round2=0):
         $ Count = len(Player.Harem)
         while Count:
             $ Count -= 1
-            $ Player.Harem[Count].drain_word("saw with "+Newbie.tag, 0, 0, 1)
+            $ Player.Harem[Count].drain_word("saw with " +Newbie.tag, 0, 0, 1)
         "You should give [Newbie.name] a call."
     else:
         $ Player.traits.append(Newbie.tag + "_No")
@@ -3519,8 +3519,8 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls = []):
 
     $ Girl.add_word(0, "lesbian", "lesbian")
     $ Girl2.add_word(0, "lesbian", "lesbian")
-    $ Girl.add_word(1, 0, 0, 0, "les "+Girl2.tag)
-    $ Girl2.add_word(1, 0, 0, 0, "les "+Girl.tag)
+    $ Girl.add_word(1, 0, 0, 0, "les " +Girl2.tag)
+    $ Girl2.add_word(1, 0, 0, 0, "les " +Girl.tag)
 
     call set_the_scene
     "As you approach her room, you hear soft moans from inside, and notice that the door is slightly ajar."
@@ -3599,7 +3599,7 @@ label Share(Girl=0, Other=0):
 
 
 
-    $ Girl.drain_word("ask "+Other.tag, 0, 0, 1)
+    $ Girl.drain_word("ask " +Other.tag, 0, 0, 1)
 
     if Girl.broken_up[0]:
 
@@ -3627,7 +3627,7 @@ label Share(Girl=0, Other=0):
 
         if Other == JeanX or Other.likes[Girl.tag] >= 800 or approval_check(Other, 1800) or (approval_check(Other, 1500) and Other.likes[Girl.tag] >= 500):
 
-            $ Other.add_word(1, 0, 0, "poly "+Girl.tag, 0)
+            $ Other.add_word(1, 0, 0, "poly " +Girl.tag, 0)
 
 
             call change_Girl_stat(Other, "obedience", 80, 10)
@@ -3635,7 +3635,7 @@ label Share(Girl=0, Other=0):
 
             $ temp_Girls = Player.Harem[:]
             while temp_Girls:
-                $ temp_Girls[0].drain_word("saw with "+Other.tag, 0, 0, 1)
+                $ temp_Girls[0].drain_word("saw with " +Other.tag, 0, 0, 1)
                 $ temp_Girls.remove(temp_Girls[0])
             if Girl.event_happened[5]:
 
@@ -3643,15 +3643,15 @@ label Share(Girl=0, Other=0):
 
             elif Player.location in bedrooms:
 
-                if Other.tag+"Yes" not in Player.traits:
-                    $ Player.traits.append(Other.tag+"Yes")
+                if Other.tag + "Yes" not in Player.traits:
+                    $ Player.traits.append(Other.tag + "Yes")
                 call expression Other.tag + "_BF"
                 $ renpy.pop_call()
                 $ renpy.pop_call()
             else:
 
-                if Other.tag+"Yes" not in Player.traits:
-                    $ Player.traits.append(Other.tag+"Yes")
+                if Other.tag + "Yes" not in Player.traits:
+                    $ Player.traits.append(Other.tag + "Yes")
                 call ask_to_meet(Other)
         else:
 
@@ -3809,7 +3809,7 @@ label Sex_Menu_Threesome(Girl=0):
         "Never mind [[something else]":
 
             pass
-    if AloneCheck(Girl) and Girl.taboo == 20:
+    if check_if_alone(Girl) and Girl.taboo == 20:
         $ Girl.taboo = 0
         $ taboo = 0
     return

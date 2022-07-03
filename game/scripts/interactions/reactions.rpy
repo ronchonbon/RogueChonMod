@@ -206,16 +206,16 @@ label first_time_asking_reactions(Girl, action):
         $ Girl.blushing = "_blush1"
 
     if action == "titjob":
-        if Girl.action_counter["blowjob"]:
+        if Girl.Action_counter["blowjob"]:
             $ Girl.mouth = "smile"
 
             call mouth_not_enough(Girl, action)
-        elif Girl.action_counter["handjob"]:
+        elif Girl.Action_counter["handjob"]:
             $ Girl.mouth = "smile"
 
             call hand_not_enough(Girl, action)
     elif action == "blowjob":
-        if Girl.action_counter["handjob"]:
+        if Girl.Action_counter["handjob"]:
             $ Girl.mouth = "smile"
 
             call hand_not_enough(Girl, action)

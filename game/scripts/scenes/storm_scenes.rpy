@@ -848,7 +848,7 @@ label Storm_Hairtalk:
                 ch_s "I do not think that I should do that. . ."
         "Maybe some fondling?":
             call change_Girl_stat(StormX, "obedience", 80, 2)
-            if approval_check(StormX, 900) or ((StormX.action_counter["fondle_breasts"]+ StormX.action_counter["fondle_pussy"] + StormX.action_counter["fondle_ass"]) > 0):
+            if approval_check(StormX, 900) or ((StormX.Action_counter["fondle_breasts"]+ StormX.Action_counter["fondle_pussy"] + StormX.Action_counter["fondle_ass"]) > 0):
                 $ StormX.change_face("bemused", 1,eyes = "side")
                 pause 0.4
                 $ StormX.eyes = "leftside"

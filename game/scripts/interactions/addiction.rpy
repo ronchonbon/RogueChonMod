@@ -39,7 +39,7 @@ label addiction_event(Girl):
 
             ch_r "Hey there [Girl.player_petname]. You seem to be fitting in well. . ."
 
-            if not Girl.action_counter["kiss"]:
+            if not Girl.Action_counter["kiss"]:
                 ch_r "Look, since the other day when I first. . . touched you, "
             else:
                 ch_r "Look, since the other day when I first. . . kissed you, "
@@ -54,7 +54,7 @@ label addiction_event(Girl):
 
             ch_k "Oh. . . hey, [Girl.player_petname]. I've been thinking. . ."
 
-            if not Girl.action_counter["kiss"]:
+            if not Girl.Action_counter["kiss"]:
                 ch_k "Look, since a while back when I first. . . touched you, "
             else:
                 ch_k "Look, since a while back when I first. . . kissed you, "
@@ -181,7 +181,7 @@ label addiction_event(Girl):
 
     menu:
         extend ""
-        "Another kiss?" if Girl.action_counter["kiss"]:
+        "Another kiss?" if Girl.Action_counter["kiss"]:
             if approval_check(Girl, 660, "LI", Alt = [[RogueX,JeanX],560]):
                 call change_Girl_stat(Girl, "lust", 80, 3)
                 call change_Girl_stat(Girl, "love", 80, 6)
@@ -223,7 +223,7 @@ label addiction_event(Girl):
                     ch_v "Nah. . ."
 
                 jump addiction_bad_end
-        "How about a kiss?" if not Girl.action_counter["kiss"]:
+        "How about a kiss?" if not Girl.Action_counter["kiss"]:
             if approval_check(Girl, 660, "LI", Alt = [[RogueX,JeanX],560]):
                 call change_Girl_stat(Girl, "lust", 80, 3)
                 call change_Girl_stat(Girl, "love", 80, 6)
@@ -297,7 +297,7 @@ label addiction_event(Girl):
 
                 call girl_touches_you (Girl)
         "What, you just want to touch my face? No thanks." if Girl != JubesX:
-            if approval_check(Girl, 500, "L", Alt = [[RogueX,JeanX],400]) or Girl.action_counter["kiss"]:
+            if approval_check(Girl, 500, "L", Alt = [[RogueX,JeanX],400]) or Girl.Action_counter["kiss"]:
                 call change_Girl_stat(Girl, "love", 200, -3)
                 call change_Girl_stat(Girl, "inhibition", 50, 3)
                 $ Girl.brows = "confused"
@@ -376,7 +376,7 @@ label addiction_event(Girl):
 
                 call girl_touches_you (Girl)
         "You want to drink my blood? No thanks." if Girl == JubesX:
-            if approval_check(Girl, 500, "L") or Girl.action_counter["kiss"]:
+            if approval_check(Girl, 500, "L") or Girl.Action_counter["kiss"]:
                 call change_Girl_stat(Girl, "love", 200, -3)
                 call change_Girl_stat(Girl, "inhibition", 50, 3)
                 $ Girl.brows = "confused"
@@ -875,7 +875,7 @@ label addiction_ultimatum:
                     if round == 10:
                         Girl.voice "I suppose we don't have time for any more than that."
             "How about a kiss?":
-                if Girl.action_counter["kiss"] or approval_check(Girl, 600, "LI", Alt = [[RogueX,JeanX],560]) or Girl.player_petname in ("master", "sir"):
+                if Girl.Action_counter["kiss"] or approval_check(Girl, 600, "LI", Alt = [[RogueX,JeanX],560]) or Girl.player_petname in ("master", "sir"):
                     $ Girl.forced = 0
                     call change_Girl_stat(Girl, "lust", 80, 3)
                     call change_Girl_stat(Girl, "love", 80, 6)
@@ -3013,7 +3013,7 @@ label addiction_serum:
             "She glances hesitantly at you, but gulps it down, and wipes her lips."
 
             call change_Girl_stat(Girl, "inhibition", 70, 2)
-        elif Girl.event_counter["swallowed"] >= 5 or Girl not in (RogueX,KittyX):
+        elif Girl.event_counter["swallowed"] >= 5 or Girl not in (RogueX, KittyX):
             "She looks a bit confused, but then grins, gulps it down, and wipes her lips."
 
             call change_Girl_stat(Girl, "inhibition", 50, 1)
@@ -3049,7 +3049,7 @@ label addiction_serum:
                 ch_v "That makes sense."
 
             $ Girl.had_chat[3] = 1
-        elif Girl.event_counter["swallowed"] or Girl not in (RogueX,KittyX):
+        elif Girl.event_counter["swallowed"] or Girl not in (RogueX, KittyX):
             $ Girl.change_face("surprised")
 
             if Girl == RogueX:

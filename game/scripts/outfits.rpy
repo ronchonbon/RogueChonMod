@@ -122,7 +122,7 @@ init -2 python:
                 "jacket", "cloak"]
 
             self.hide_breasts = ["bodysuit", "bra", "dress", "top", "jacket"]
-            self.hide_underwear = ["bodysuit", "pants", "skirt", "dress"]
+            self.hide_underwear = ["bodysuit", "pants", "skirt", "dress", "top", "jacket"]
             self.hide_pussy = ["underwear", "bodysuit", "pants", "skirt", "dress"]
             self.cover_thighs = ["bodysuit", "hose", "pants", "skirt", "boots", "dress"]
             self.cover_feet = ["hose", "socks", "boots"]

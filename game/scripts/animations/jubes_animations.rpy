@@ -30,9 +30,9 @@ layeredimage Jubes_grool_dripping_animation:
 layeredimage Jubes_grool_animations:
     if not JubesX.grool:
         Null()
-    elif JubesX.Clothes["pants"].state:
+    elif JubesX.Clothes["pants"] and JubesX.Clothes["pants"].state:
         AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_pants.png")
-    elif JubesX.Clothes["underwear"].state:
+    elif JubesX.Clothes["underwear"] and JubesX.Clothes["underwear"].state:
         AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
     elif not JubesX.Outfit.pussy_covered:
         AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask.png")
@@ -53,53 +53,60 @@ layeredimage Jubes_spunk_dripping_animation:
 layeredimage Jubes_spunk_animations:
     if not JubesX.spunk["pussy"] and not JubesX.spunk["anus"]:
         Null()
-    elif JubesX.Clothes["pants"].state:
+    elif JubesX.Clothes["pants"] and JubesX.Clothes["pants"].state:
         AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_pants.png")
-    elif JubesX.Clothes["underwear"].state:
+    elif JubesX.Clothes["underwear"] and JubesX.Clothes["underwear"].state:
         AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
     elif not JubesX.Outfit.pussy_covered:
         AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask.png")
 
 layeredimage Jubes_standing_fondling_animations:
-    if not girl_secondary_action:
+    if not JubesX.primary_Action or JubesX.primary_Action.Target != JubesX:
         Null()
-    elif girl_secondary_action == "fondle_breasts":
-        "Girl_fondle_breast_left_animation" pos (0.33, 0.68)
-    elif girl_secondary_action == "fondle_breasts":
+    elif JubesX.primary_Action.type == "fondle_breasts":
         "Girl_fondle_breast_right_animation" pos (0.195, 0.665)
-    elif girl_secondary_action == "fondle_pussy":
+    elif JubesX.primary_Action.type == "fondle_pussy":
         "Girl_fondle_pussy_animation" pos (0.28, 1.013)
-    elif girl_secondary_action in "finger_pussy":
+    elif JubesX.primary_Action.type in "finger_pussy":
         "Girl_finger_pussy_animation" pos (0.28, 1.06)
 
-    if not Player.primary_action:
+    if not JubesX.secondary_Action or JubesX.secondary_Action.Target != JubesX:
         Null()
-    elif Player.primary_action == "fondle_thighs":
+    elif JubesX.secondary_Action.type == "fondle_breasts":
+        "Girl_fondle_breast_left_animation" pos (0.33, 0.68)
+    elif JubesX.secondary_Action.type == "fondle_pussy":
+        "Girl_fondle_pussy_animation" pos (0.28, 1.013)
+    elif JubesX.secondary_Action.type in "finger_pussy":
+        "Girl_finger_pussy_animation" pos (0.28, 1.06)
+
+    if not Player.primary_Action or Player.primary_Action.Target != JubesX:
+        Null()
+    elif Player.primary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.215, 1.22)
-    elif Player.primary_action == "fondle_breasts":
-        "Zero_fondle_breasts_right_animation" pos (0.24, 0.675)
-    elif Player.primary_action == "suck_breasts":
-        "Zero_suck_breasts_right_animation" pos (0.175, 0.605)
-    elif Player.primary_action == "fondle_pussy":
+    elif Player.primary_Action.type == "fondle_breasts":
+        "Zero_fondle_breasts_left_animation" pos (0.29, 0.655)
+    elif Player.primary_Action.type == "suck_breasts":
+        "Zero_suck_breasts_left_animation" pos (0.315, 0.615)
+    elif Player.primary_Action.type == "fondle_pussy":
         "Zero_fondle_pussy_animation" pos (0.28, 1.0)
-    elif Player.primary_action == "finger_pussy":
+    elif Player.primary_Action.type == "finger_pussy":
         "Zero_finger_pussy_animation" pos (0.255, 1.17)
-    elif Player.primary_action == "eat_pussy":
+    elif Player.primary_Action.type == "eat_pussy":
         "Zero_eat_pussy_animation" pos (0.287, 1.1)
 
-    if not Player.secondary_action:
+    if not Player.secondary_Action or Player.secondary_Action.Target != JubesX:
         Null()
-    elif Player.secondary_action == "fondle_thighs":
+    elif Player.secondary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.215, 1.22)
-    elif Player.secondary_action == "fondle_breasts":
-        "Zero_fondle_breasts_left_animation" pos (0.29, 0.655)
-    elif Player.secondary_action == "suck_breasts":
-        "Zero_suck_breasts_left_animation" pos (0.315, 0.615)
-    elif Player.secondary_action == "fondle_pussy":
+    elif Player.secondary_Action.type == "fondle_breasts":
+        "Zero_fondle_breasts_right_animation" pos (0.24, 0.675)
+    elif Player.secondary_Action.type == "suck_breasts":
+        "Zero_suck_breasts_right_animation" pos (0.175, 0.605)
+    elif Player.secondary_Action.type == "fondle_pussy":
         "Zero_fondle_pussy_animation" pos (0.28, 1.0)
-    elif Player.secondary_action == "finger_pussy":
+    elif Player.secondary_Action.type == "finger_pussy":
         "Zero_finger_pussy_animation" pos (0.255, 1.17)
-    elif Player.secondary_action == "eat_pussy":
+    elif Player.secondary_Action.type == "eat_pussy":
         "Zero_eat_pussy_animation" pos (0.287, 1.1)
 
 image Jubes_handjob_under_hand_animation0:

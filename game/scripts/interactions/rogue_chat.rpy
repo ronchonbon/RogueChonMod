@@ -55,7 +55,7 @@ label Rogue_Relationship:
                     call Harem_Initiation
                     "[RogueX.name] leaps in and kisses you deeply."
                     $ RogueX.change_face("kiss", 1)
-                    $ RogueX.action_counter["kiss"] += 1
+                    $ RogueX.Action_counter["kiss"] += 1
                 elif RogueX.obedience >= 500:
                     $ RogueX.change_face("perplexed")
                     ch_r "I'm not sure I'd call what we have \"dating.\""
@@ -103,7 +103,7 @@ label Rogue_Relationship:
                     call Harem_Initiation
                     "[RogueX.name] leaps in and kisses you deeply."
                     $ RogueX.change_face("kiss", 1)
-                    $ RogueX.action_counter["kiss"] += 1
+                    $ RogueX.Action_counter["kiss"] += 1
                 elif RogueX.love >= 600 and approval_check(RogueX, 1500):
                     $ RogueX.change_face("smile", 1)
                     $ RogueX.mouth = "smile"
@@ -118,7 +118,7 @@ label Rogue_Relationship:
                     call Harem_Initiation
                     "[RogueX.name] gives you a quick kiss."
                     $ RogueX.change_face("kiss", 1)
-                    $ RogueX.action_counter["kiss"] += 1
+                    $ RogueX.Action_counter["kiss"] += 1
                 elif RogueX.obedience >= 500:
                     $ RogueX.change_face("sad")
                     ch_r "Whatever we had, whatever we have right now, that's not it."
@@ -145,7 +145,7 @@ label Rogue_Relationship:
             "About that talk we had before. . .":
 
                 menu:
-                    "You weren't a virgin?" if RogueX.action_counter["sex"] and not RogueX.had_chat[0]:
+                    "You weren't a virgin?" if RogueX.Action_counter["sex"] and not RogueX.had_chat[0]:
                         call Rogue_Not_Virgin
 
                     "You said you wanted me to be your Master?" if RogueX.event_happened[8] and "master" not in RogueX.player_petnames:
@@ -602,9 +602,9 @@ label Rogue_SexChat:
                                 call change_Girl_stat(RogueX, "love", 90, 5)
                                 call change_Girl_stat(RogueX, "lust", 80, 10)
                                 ch_r "Oooh, I love a good pipe cleaning too. . ."
-                            elif RogueX.action_counter["sex"] >= 5:
+                            elif RogueX.Action_counter["sex"] >= 5:
                                 ch_r "Can't say as I mind a good roll in the hay."
-                            elif not RogueX.action_counter["sex"]:
+                            elif not RogueX.Action_counter["sex"]:
                                 $ RogueX.change_face("perplexed")
                                 ch_r "Who {i}exactly{/i} are y'all having sex {i}with?{/i}"
                             else:
@@ -621,9 +621,9 @@ label Rogue_SexChat:
                                 call change_Girl_stat(RogueX, "love", 90, 5)
                                 call change_Girl_stat(RogueX, "lust", 80, 10)
                                 ch_r "I can't say as I mind that. . ."
-                            elif RogueX.action_counter["anal"] >= 10:
+                            elif RogueX.Action_counter["anal"] >= 10:
                                 ch_r "It's not a bad way to spend some time. . ."
-                            elif not RogueX.action_counter["anal"]:
+                            elif not RogueX.Action_counter["anal"]:
                                 $ RogueX.change_face("perplexed")
                                 ch_r "Who {i}exactly{/i} are y'all fucking {i}with?{/i}"
                             else:
@@ -640,9 +640,9 @@ label Rogue_SexChat:
                                 call change_Girl_stat(RogueX, "love", 90, 5)
                                 call change_Girl_stat(RogueX, "lust", 80, 5)
                                 ch_r "I guess I have developed a real taste for you. . ."
-                            elif RogueX.action_counter["blowjob"] >= 10:
+                            elif RogueX.Action_counter["blowjob"] >= 10:
                                 ch_r "I'm getting to enjoy it too . . ."
-                            elif not RogueX.action_counter["blowjob"]:
+                            elif not RogueX.Action_counter["blowjob"]:
                                 $ RogueX.change_face("perplexed")
                                 ch_r "Who {i}exactly{/i} is sucking you off?"
                             else:
@@ -659,9 +659,9 @@ label Rogue_SexChat:
                                 call change_Girl_stat(RogueX, "love", 90, 5)
                                 call change_Girl_stat(RogueX, "lust", 80, 7)
                                 ch_r "I really enjoy it too. . ."
-                            elif RogueX.action_counter["titjob"] >= 10:
+                            elif RogueX.Action_counter["titjob"] >= 10:
                                 ch_r "It's certainly an interesting experience . . ."
-                            elif not RogueX.action_counter["titjob"]:
+                            elif not RogueX.Action_counter["titjob"]:
                                 $ RogueX.change_face("perplexed")
                                 ch_r "Who {i}exactly{/i} is tit fucking you?"
                             else:
@@ -678,9 +678,9 @@ label Rogue_SexChat:
                                 call change_Girl_stat(RogueX, "love", 90, 5)
                                 call change_Girl_stat(RogueX, "lust", 80, 7)
                                 ch_r "I do enjoy that sensation. . ."
-                            elif RogueX.action_counter["footjob"] >= 10:
+                            elif RogueX.Action_counter["footjob"] >= 10:
                                 ch_r "It is pretty nice to touch someone like that . . ."
-                            elif not RogueX.action_counter["footjob"]:
+                            elif not RogueX.Action_counter["footjob"]:
                                 $ RogueX.change_face("perplexed")
                                 ch_r "Who {i}exactly{/i} is jerking you off?"
                             else:
@@ -697,9 +697,9 @@ label Rogue_SexChat:
                                 call change_Girl_stat(RogueX, "love", 90, 5)
                                 call change_Girl_stat(RogueX, "lust", 80, 7)
                                 ch_r "I love how you feel in my hand. . ."
-                            elif RogueX.action_counter["handjob"] >= 10:
+                            elif RogueX.Action_counter["handjob"] >= 10:
                                 ch_r "It is pretty nice to touch someone like that . . ."
-                            elif not RogueX.action_counter["handjob"]:
+                            elif not RogueX.Action_counter["handjob"]:
                                 $ RogueX.change_face("perplexed")
                                 ch_r "Who {i}exactly{/i} is jerking you off?"
                             else:
@@ -708,7 +708,7 @@ label Rogue_SexChat:
                             $ RogueX.player_favorite_action = "handjob"
                         "Feeling you up.":
 
-                            $ counter = RogueX.action_counter["fondle_breasts"]+ RogueX.action_counter["fondle_thighs"]+ RogueX.action_counter["suck_breasts"] + RogueX.action_counter["hotdog"]
+                            $ counter = RogueX.Action_counter["fondle_breasts"]+ RogueX.Action_counter["fondle_thighs"]+ RogueX.Action_counter["suck_breasts"] + RogueX.Action_counter["hotdog"]
                             $ RogueX.change_face("sly")
                             if RogueX.player_favorite_action == "fondle":
                                 call change_Girl_stat(RogueX, "lust", 80, 3)
@@ -737,9 +737,9 @@ label Rogue_SexChat:
                                 call change_Girl_stat(RogueX, "love", 90, 5)
                                 call change_Girl_stat(RogueX, "lust", 80, 5)
                                 ch_r "I can't get over your lips either. . ."
-                            elif RogueX.action_counter["kiss"] >= 10:
+                            elif RogueX.Action_counter["kiss"] >= 10:
                                 ch_r "I love kissing you too . . ."
-                            elif not RogueX.action_counter["kiss"]:
+                            elif not RogueX.Action_counter["kiss"]:
                                 $ RogueX.change_face("perplexed")
                                 ch_r "Who {i}exactly{/i} are you smooch'in?"
                             else:
@@ -766,7 +766,7 @@ label Rogue_SexChat:
                     if not RogueX.favorite_action or RogueX.favorite_action == "kiss":
                         ch_r "I guess I love it when we kiss. . ."
                     elif RogueX.favorite_action == "anal":
-                        if RogueX.action_counter["anal"] >= 10:
+                        if RogueX.Action_counter["anal"] >= 10:
                             ch_r "I like when you fuck my ass."
                         else:
                             ch_r "I like when you stick it in my. . . butt."
@@ -960,7 +960,7 @@ label Rogue_Chitchat(O=0, Options = ["default", "default", "default"]):
             $ Options.append("dance")
         if approval_check(RogueX, 800, "L") and "nametag chat" not in RogueX.daily_history:
             $ Options.append("close")
-        if RogueX.action_counter["blowjob"] >= 2:
+        if RogueX.Action_counter["blowjob"] >= 2:
             $ Options.append("blowjob")
         if "steal" in RogueX.traits:
             $ Options.append("steal")
@@ -978,7 +978,7 @@ label Rogue_Chitchat(O=0, Options = ["default", "default", "default"]):
         if "corruption" in Player.traits and "cologne chat" not in RogueX.daily_history:
             $ Options.append("corruption")
 
-        if not RogueX.had_chat[0] and RogueX.action_counter["sex"]:
+        if not RogueX.had_chat[0] and RogueX.Action_counter["sex"]:
             $ Options.append("virgin")
 
         if "seenpeen" in RogueX.history:
@@ -1550,7 +1550,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
         $ approval_bonus = -10
     elif RogueX.location == "bg_dangerroom":
         $ approval_bonus = -20
-    elif RogueX.location == "bg_showerroom":
+    elif RogueX.location == "bg_shower":
         $ approval_bonus = -40
 
     if D20 <= 3:
@@ -1605,7 +1605,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
             ch_r "I'm in my room, [RogueX.player_petname], want to swing by?"
         elif RogueX.location == "bg_player":
             ch_r "I happen to be in your room, [RogueX.player_petname], I'm waiting for you. . ."
-        elif RogueX.location == "bg_showerroom":
+        elif RogueX.location == "bg_shower":
             if approval_check(RogueX, 1600):
                 ch_r "I'm kinda in the shower right now, [RogueX.player_petname], care to join me?"
             else:
@@ -1756,7 +1756,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
         elif RogueX.location == "bg_player":
             ch_r "I'll be waiting."
             jump player_room
-        elif RogueX.location == "bg_showerroom":
+        elif RogueX.location == "bg_shower":
             ch_r "I guess I'll be here."
             jump shower_room
         elif RogueX.location == "bg_campus":
@@ -1808,7 +1808,7 @@ label Rogue_Leave:
             ch_r "I'll be heading to your room, [RogueX.player_petname]."
         elif RogueX.location == "bg_pool":
             ch_r "I'm headed for the pool."
-        elif RogueX.location == "bg_showerroom":
+        elif RogueX.location == "bg_shower":
             if approval_check(RogueX, 1400):
                 ch_r "I'm hitting the showers, later."
             else:
@@ -1827,7 +1827,7 @@ label Rogue_Leave:
         $ approval_bonus = 10
     elif RogueX.location == "bg_dangerroom":
         $ approval_bonus = 20
-    elif RogueX.location == "bg_showerroom":
+    elif RogueX.location == "bg_shower":
         $ approval_bonus = 40
     else:
         $ approval_bonus = 0
@@ -1842,7 +1842,7 @@ label Rogue_Leave:
         ch_r "I'm heading back to my room, [RogueX.player_petname], want to swing by?"
     elif RogueX.location == "bg_player":
         ch_r "I'll be heading to your room, [RogueX.player_petname]."
-    elif RogueX.location == "bg_showerroom":
+    elif RogueX.location == "bg_shower":
         if approval_check(RogueX, 1600):
             ch_r "I'm hitting the showers, [RogueX.player_petname], care to join me?"
         else:
@@ -1955,7 +1955,7 @@ label Rogue_Leave:
             ch_r "I'll meet you there."
         elif RogueX.location == "bg_player":
             ch_r "I'll be waiting."
-        elif RogueX.location == "bg_showerroom":
+        elif RogueX.location == "bg_shower":
             ch_r "I guess I'll see you there."
         elif RogueX.location == "bg_campus":
             ch_r "Let's head over there."
@@ -1978,7 +1978,7 @@ label Rogue_Leave:
             jump classroom
         elif destination == "bg_dangerroom":
             jump danger_room
-        elif destination == "bg_showerroom":
+        elif destination == "bg_shower":
             jump shower_room
         elif destination == "bg_pool":
             jump pool

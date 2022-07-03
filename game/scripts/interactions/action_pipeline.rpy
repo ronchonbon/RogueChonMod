@@ -51,12 +51,12 @@ label start_action(Girl, action, context = None):
 
         if not accepted:
             if action == "kiss":
-                if approval > 1 and not Girl.action_counter["kiss"] and not Girl.forced:
+                if approval > 1 and not Girl.Action_counter["kiss"] and not Girl.forced:
                     $ Girl.change_face("sexy")
                     $ Girl.eyes = "side"
 
                     call excited_for_first_kiss_lines(Girl, action)
-                elif approval and not Girl.action_counter["kiss"]:
+                elif approval and not Girl.Action_counter["kiss"]:
                     $ Girl.change_face("sexy")
                     $ Girl.eyes = "side"
 
@@ -99,10 +99,10 @@ label start_action(Girl, action, context = None):
 
                 $ accepted = True
             else:
-                if not Girl.action_counter[action] and "no_" + action not in Girl.recent_history:
+                if not Girl.Action_counter[action] and "no_" + action not in Girl.recent_history:
                     call first_time_asking_reactions(Girl, action)
 
-                if not Girl.action_counter[action] and approval:
+                if not Girl.Action_counter[action] and approval:
                     call first_action_approval(Girl, action)
                 elif approval:
                     call action_approved(Girl, action)
@@ -158,14 +158,14 @@ label before_action(Girl, action, context = None):
 
         call kiss_launch(Girl)
 
-        if Girl.action_counter["kiss"] >= 10 and Girl.inhibition >= 300:
+        if Girl.Action_counter["kiss"] >= 10 and Girl.inhibition >= 300:
             $ Girl.change_face("sucking")
-        elif Girl.action_counter["kiss"] > 1 and Girl.addiction >= 50:
+        elif Girl.Action_counter["kiss"] > 1 and Girl.addiction >= 50:
             $ Girl.change_face("sucking")
         else:
             $ Girl.change_face("kiss", 2)
 
-        if Girl == RogueX and not Girl.action_counter["kiss"]:
+        if Girl == RogueX and not Girl.Action_counter["kiss"]:
             call Rogue_first_kiss
 
             return "stop"
@@ -191,7 +191,7 @@ label before_action(Girl, action, context = None):
         if action not in dildo_actions:
             if Girl.forced:
                 $ Girl.change_face("sad")
-            elif not Girl.action_counter[action]:
+            elif not Girl.Action_counter[action]:
                 $ Girl.brows = "confused"
                 $ Girl.eyes = "sexy"
                 $ Girl.mouth = "smile"
@@ -458,11 +458,11 @@ label after_action(Girl, action, context = None):
 
     if achievement is not None and achievement in achievements:
         pass
-    elif action == "titjob" and Girl.action_counter[action] > 5:
+    elif action == "titjob" and Girl.Action_counter[action] > 5:
         pass
-    elif action == "kiss" and Girl.action_counter[action] > 10:
+    elif action == "kiss" and Girl.Action_counter[action] > 10:
         pass
-    elif action not in dildo_actions and Girl.action_counter[action] >= 10:
+    elif action not in dildo_actions and Girl.Action_counter[action] >= 10:
         if action not in ["anal"]:
             $ Girl.SEXP += 5
         else:
@@ -477,15 +477,15 @@ label after_action(Girl, action, context = None):
             $ Girl.change_face("bemused", 1)
 
         call achievement_lines(Girl, action)
-    elif Girl.action_counter[action] == 1:
+    elif Girl.Action_counter[action] == 1:
         call first_action_response(Girl, action, context)
-    elif (action in cock_actions or action == "kiss") and Girl.action_counter[action] == 5:
+    elif (action in cock_actions or action == "kiss") and Girl.Action_counter[action] == 5:
         call action_done_five_times_lines(Girl, action)
     elif action in sex_actions and context == "stop":
         if "unsatisfied" in Girl.recent_history:
             call unsatisfied_reactions(Girl, action)
 
-    if action == "kiss" and context == "stop" and Girl.action_counter["kiss"] > 5 and Girl.lust > 50 and approval_check(Girl, 950):
+    if action == "kiss" and context == "stop" and Girl.Action_counter["kiss"] > 5 and Girl.lust > 50 and approval_check(Girl, 950):
         call would_you_like_more_lines(Girl, action)
 
     if context == "switch":

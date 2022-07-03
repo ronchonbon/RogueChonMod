@@ -9,7 +9,7 @@ define ch_s = Character('[StormX.name]', color = "#b2d950", image = "Storm_sprit
 define ch_v = Character('[JubesX.name]', color = "#b2d950", image = "Jubes_sprite", show_two_window = True)
 define ch_m = Character('[MystiqueX.name]', color = "b2d950", image = "Mystique_sprite", show_two_window = True)
 
-define ch_x = Character('Professor X', color = "#a09400", image = "Xavier_sprite", show_two_window = True)
+define ch_x = Character('[Xavier.name]', color = "#a09400", image = "Xavier_sprite", show_two_window = True)
 define ch_b = Character('Dr. McCoy', color = "#1033b2", show_two_window = True)
 
 define ch_u = Character('???', color = "#85bb65", show_two_window = True)
@@ -51,7 +51,7 @@ label start:
     $ JubesX = GirlClass("Jubes", 500, 50, 50, 10)
     $ MystiqueX = GirlClass("Mystique", 0, 0, 0, 15)
 
-    $ Xavier = NPCClass("Xavier")
+    $ Xavier = NPCClass("Professor X")
 
     $ Player.focused_Girl = RogueX
 

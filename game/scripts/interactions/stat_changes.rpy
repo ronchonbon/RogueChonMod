@@ -103,7 +103,7 @@ label forced_rejected_changes(Girl, action):
     return
 
 label first_action_changes(Girl, action):
-    if not Girl.action_counter[action]:
+    if not Girl.Action_counter[action]:
         if action == "fondle_thighs":
             if Girl.forced:
                 call change_Girl_stat(Girl, "love", 90, -10)
@@ -249,7 +249,7 @@ label first_action_changes(Girl, action):
                 call change_Girl_stat(Girl, "obedience", 70, 30)
                 call change_Girl_stat(Girl, "inhibition", 80, 60)
         elif action == "anal":
-            if not Girl.action_counter["anal"]:
+            if not Girl.Action_counter["anal"]:
                 if Girl.forced:
                     call change_Girl_stat(Girl, "love", 90, -150)
                     call change_Girl_stat(Girl, "obedience", 70, 70)

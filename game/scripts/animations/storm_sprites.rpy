@@ -61,7 +61,7 @@ layeredimage Storm_sprite standing:
 
     if not StormX.Clothes["pants"]:
         Null()
-    elif StormX.grool > 1 and not StormX.Clothes["pants"].state:
+    elif StormX.grool > 1 and not StormX.Clothes["pants"] and StormX.grool > 1 and not StormX.Clothes["pants"].state:
         "images/Storm_standing/Storm_standing_pants_[StormX.Clothes[pants].string]_grool.png"
     else:
         "images/Storm_standing/Storm_standing_pants_[StormX.Clothes[pants].string]_[StormX.Clothes[pants].state].png"
@@ -97,7 +97,7 @@ layeredimage Storm_sprite standing:
 
     if not StormX.Clothes["top"]:
         Null()
-    elif StormX.Outfit.breasts_supported or StormX.Clothes["top"].state:
+    elif StormX.Outfit.breasts_supported or StormX.Clothes["top"] and StormX.Outfit.breasts_supported or StormX.Clothes["top"].state:
         "images/Storm_standing/Storm_standing_top_[StormX.Clothes[top].string]_up_[StormX.Clothes[top].state].png"
     else:
         "images/Storm_standing/Storm_standing_top_[StormX.Clothes[top].string]_down.png"
@@ -120,7 +120,7 @@ layeredimage Storm_sprite standing:
 
     if not StormX.Clothes["jacket"]:
         Null()
-    elif StormX.Outfit.breasts_supported or StormX.Clothes["jacket"].state:
+    elif StormX.Outfit.breasts_supported or StormX.Clothes["jacket"] and StormX.Outfit.breasts_supported or StormX.Clothes["jacket"].state:
         "images/Storm_standing/Storm_standing_jacket[StormX.arm_pose]_[StormX.Clothes[jacket].string]_up_[StormX.Clothes[jacket].state].png"
     else:
         "images/Storm_standing/Storm_standing_jacket[StormX.arm_pose]_[StormX.Clothes[jacket].string]_down.png"

@@ -438,7 +438,7 @@ label Halloween_Party_entry(HWEvents = [], halloween_costume=0, HWline = []):
 
     $ Present.append(KittyX)
     $ KittyX.location = "bg_halloween"
-    $ KittyX.add_word(1, 0,KittyX.Clothes["hair"], 0, "halloween")
+    $ KittyX.add_word(1, 0, KittyX.Clothes["hair"], 0, "halloween")
     $ KittyX.outfitday = "costume"
     $ KittyX.outfit_name = KittyX.outfitday
     $ KittyX.change_Outfit()
@@ -458,7 +458,7 @@ label Halloween_Party_entry(HWEvents = [], halloween_costume=0, HWline = []):
     $ KittyX.change_face("smile", eyes = "down")
     ch_k "Lemme guess who you are. . ."
     $ KittyX.change_face("smile")
-    $ HWline = [Player.name+" Right?", "A mysterious sailor. . .", "Oooh, dangerous assassin. . .", "A noble hero."]
+    $ HWline = [Player.name + " Right?", "A mysterious sailor. . .", "Oooh, dangerous assassin. . .", "A noble hero."]
     $ HWline = HWline[halloween_costume]
     ch_k "[HWline]"
     menu:

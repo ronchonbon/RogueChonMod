@@ -439,6 +439,8 @@ screen Clothing_picker(Girl):
 
 
 
+
+
 screen inventory_button:
     imagebutton:
         auto "images/UI_Backpack_%s.png"
@@ -704,79 +706,3 @@ screen Inventory_screen:
         action Hide("Inventory_screen")
         pos (0.81, 0.015)
         focus_mask True
-
-label mandrill_screen:
-    if "mandrill" in Player.traits:
-        "You already have this on."
-
-        return
-
-    if "purple" in Player.traits or "corruption" in Player.traits:
-        "You'll confuse the scent you already have on."
-
-        return
-
-    $ inventory_count = Player.inventory.count("Mandrill Cologne")
-
-    "This cologne is guaranteed to make women love you more [[+Love]. You have [inventory_count] doses left."
-    "Product warning, any love gained while under the effects may be lost when this wears off, if the limits are reached."
-
-    menu:
-        "Use it now?"
-        "Yes":
-            $ Player.traits.append("mandrill")
-            $ Player.inventory.remove("Mandrill Cologne")
-        "No":
-            pass
-
-    return
-
-label purplerain_screen:
-    if "purple" in Player.traits:
-        "You already have this on."
-        return
-
-    if "mandrill" in Player.traits or "corruption" in Player.traits:
-        "You'll confuse the scent you already have on."
-        return
-
-    $ inventory_count = Player.inventory.count("Purple Rain Cologne")
-
-    "This cologne is guaranteed to make women more suggestible to your orders until tomorrow [[+Obedience]. You have [inventory_count] doses left."
-    "Product warning, any obedience gained whie under the effects may be lost when this wears off, if the limits are reached."
-
-    menu:
-        "Use it now?"
-        "Yes":
-            $ Player.traits.append("purple")
-            $ Player.inventory.remove("Purple Rain Cologne")
-        "No":
-            pass
-
-    return
-
-label corruption_screen:
-    if "corruption" in Player.traits:
-        "You already have this on."
-
-        return
-
-    if "purple" in Player.traits or "mandrill" in Player.traits:
-        "You'll confuse the scent you already have on."
-
-        return
-
-    $ inventory_count = Player.inventory.count("Corruption cologne")
-
-    "This cologne is guaranteed to make women let loose their wild side [[-Inhibition]. You have [inventory_count] doses left."
-    "Product warning, any Inhibition lost whie under the effects may be regained when this wears off, if the limits are reached."
-
-    menu:
-        "Use it now?"
-        "Yes":
-            $ Player.traits.append("corruption")
-            $ Player.inventory.remove("Corruption cologne")
-        "No":
-            pass
-
-    return

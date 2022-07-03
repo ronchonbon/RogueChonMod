@@ -318,7 +318,7 @@ label tour_parting:
     $ RogueX.emotion = "normal"
     $ RogueX.blushing = ""
 
-    if not RogueX.action_counter["kiss"]:
+    if not RogueX.Action_counter["kiss"]:
         $ line = "Want to make out a little?"
     else:
         $ line = "Want to make out a little more?"
@@ -359,11 +359,11 @@ label tour_parting:
 
                     "You head back to your room."
             else:
-                if (RogueX.love >= 530 or RogueX.obedience > 50) and not RogueX.action_counter["kiss"]:
+                if (RogueX.love >= 530 or RogueX.obedience > 50) and not RogueX.Action_counter["kiss"]:
                     $ RogueX.addiction_rate += 1
                     call change_Girl_stat(RogueX, "lust", 200, 5)
                     call change_Girl_stat(RogueX, "love", 200, 10)
-                    $ RogueX.action_counter["kiss"] += 1
+                    $ RogueX.Action_counter["kiss"] += 1
                     $ RogueX.change_face("bemused", 1)
 
                     ch_r "Well, maybe one kiss."
@@ -401,7 +401,7 @@ label Rogue_first_kiss:
 
     call kiss_launch(RogueX)
 
-    $ RogueX.action_counter["kiss"] += 1
+    $ RogueX.Action_counter["kiss"] += 1
 
     "She leans in for a kiss."
     "You lean in and your lips meet [RogueX.name]'s."
@@ -505,7 +505,7 @@ label Rogue_BF:
             call change_Girl_stat(RogueX, "love", 200, 30)
             "Rogue leaps in and kisses you deeply."
             $ RogueX.change_face("kiss")
-            $ RogueX.action_counter["kiss"] += 1
+            $ RogueX.Action_counter["kiss"] += 1
         "Um, ok.":
             $ RogueX.brows = "confused"
             "[RogueX.name] is a bit put off by your casual acceptence of reality, but takes it as a positive sign and hugs you."
@@ -519,7 +519,7 @@ label Rogue_BF:
                     call change_Girl_stat(RogueX, "love", 200, 30)
                     "Rogue leaps in and kisses you deeply."
                     $ RogueX.change_face("kiss")
-                    $ RogueX.action_counter["kiss"] += 1
+                    $ RogueX.Action_counter["kiss"] += 1
                 "She wouldn't understand." if len(Player.Harem) == 1:
                     $ line = "no."
                 "They wouldn't be cool with that." if len(Player.Harem) > 1:
@@ -642,7 +642,7 @@ label Rogue_Love:
         $ RogueX.change_face("kiss")
         "Rogue leaps into your arms and gives you a kiss."
         $ RogueX.change_face("sexy", 1)
-        $ RogueX.action_counter["kiss"] += 1
+        $ RogueX.Action_counter["kiss"] += 1
     else:
         ch_r "Even though we've had our rough patches from time to time. . ."
         ch_r "I still love you."
@@ -672,7 +672,7 @@ label Rogue_Love:
     ch_r "Anyway, I am glad I've been able to share this with you."
     $ RogueX.change_face("sly")
     ch_r "I'm hoping to share a lot more with you if I can. . ."
-    if not RogueX.action_counter["sex"]:
+    if not RogueX.Action_counter["sex"]:
         call change_Girl_stat(RogueX, "obedience", 70, 10)
         ch_r "So. . . did you want to . . . consumate this?"
         menu:
@@ -812,9 +812,9 @@ label Rogue_Sub:
         ch_r "We've been dating for a bit now."
     else:
         ch_r "We've been hanging out for a while now."
-    if RogueX.action_counter["fondle_breasts"]or RogueX.action_counter["fondle_pussy"] or RogueX.action_counter["fondle_ass"]:
+    if RogueX.Action_counter["fondle_breasts"]or RogueX.Action_counter["fondle_pussy"] or RogueX.Action_counter["fondle_ass"]:
         ch_r "I've let you touch me. . ."
-    if RogueX.action_counter["handjob"] or RogueX.action_counter["blowjob"]:
+    if RogueX.Action_counter["handjob"] or RogueX.Action_counter["blowjob"]:
         ch_r "I've touched you. . ."
     if RogueX.love >= 900 and (RogueX in Player.Harem):
         ch_r "I love you so much. . ."
@@ -931,7 +931,7 @@ label Rogue_Master:
         ch_r "This situation we have has really added some . . . spice to our relationship."
     else:
         ch_r "This situation we have has been very. . . interesting."
-    if RogueX.action_counter["anal"] or RogueX.action_counter["dildo_ass"]:
+    if RogueX.Action_counter["anal"] or RogueX.Action_counter["dildo_ass"]:
         ch_r "We've even done some butt stuff."
     if RogueX.love >= 900 and (RogueX in Player.Harem):
         ch_r "I'm devoted to you. . ."
@@ -1464,13 +1464,13 @@ label Rogue_Frisky_Class:
 
                 "Try and slip your hand to her lap." if line != "fondle_pussy":
                     $ line = "fondle_pussy"
-                    if approval_check(RogueX, 1500) and RogueX.action_counter["fondle_pussy"] and RogueX.SEXP >= 40:
+                    if approval_check(RogueX, 1500) and RogueX.Action_counter["fondle_pussy"] and RogueX.SEXP >= 40:
                         $ RogueX.change_face("sly")
                         call change_Girl_stat(RogueX, "love", 90, 5)
                         call change_Girl_stat(RogueX, "obedience", 70, 5)
                         call change_Girl_stat(RogueX, "inhibition", 60, 5)
                         "[RogueX.name] gets a mischievous grin and places her hand on your arm."
-                    elif approval_check(RogueX, 1800) and RogueX.action_counter["fondle_pussy"]:
+                    elif approval_check(RogueX, 1800) and RogueX.Action_counter["fondle_pussy"]:
                         $ RogueX.change_face("smile")
                         call change_Girl_stat(RogueX, "love", 80, 3)
                         call change_Girl_stat(RogueX, "obedience", 70, 7)
@@ -1513,13 +1513,13 @@ label Rogue_Frisky_Class:
 
                 "Start fondling her tits." if line != "fondle_breasts":
                     $ line = "fondle_breasts"
-                    if approval_check(RogueX, 1500) and RogueX.action_counter["fondle_breasts"]and RogueX.SEXP >= 40:
+                    if approval_check(RogueX, 1500) and RogueX.Action_counter["fondle_breasts"]and RogueX.SEXP >= 40:
                         call change_Girl_stat(RogueX, "love", 80, 5)
                         call change_Girl_stat(RogueX, "obedience", 70, 5)
                         call change_Girl_stat(RogueX, "inhibition", 60, 3)
                         $ RogueX.change_face("sly")
                         "[RogueX.name] closes her eyes and caresses your arm."
-                    elif approval_check(RogueX, 1800) and RogueX.action_counter["fondle_breasts"]:
+                    elif approval_check(RogueX, 1800) and RogueX.Action_counter["fondle_breasts"]:
                         call change_Girl_stat(RogueX, "love", 80, 3)
                         call change_Girl_stat(RogueX, "obedience", 70, 7)
                         call change_Girl_stat(RogueX, "inhibition", 60, 3)

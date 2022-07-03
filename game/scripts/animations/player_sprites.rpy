@@ -62,7 +62,7 @@ layeredimage Zero_doggy_cock_in:
     anchor (0.5, 0.5)
 
 layeredimage Chibi_cock:
-    if "cockout" not in Player.recent_history:
+    if Player.cock_out or Player.naked:
         Null()
     else:
         "images/player/Chibi_cock_[Player.color].png"

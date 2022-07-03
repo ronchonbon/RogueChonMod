@@ -1662,9 +1662,9 @@ label Date_Dinner:
     $ line = "You eat your " + line
 
     if JubesX in Player.Party and "surfturf" in JubesX.recent_history:
-        $ line = line + "_, "+JubesX.name+" picks at her food but barely eats any of it."
+        $ line = line + "_, " +JubesX.name + " picks at her food but barely eats any of it."
     elif KittyX in Player.Party and "surfturf" in KittyX.recent_history:
-        $ line = line + "_, "+KittyX.name+" eats the steak but pushes the lobster to the side."
+        $ line = line + "_, " +KittyX.name + " eats the steak but pushes the lobster to the side."
     else:
         $ line = line + "_, and have a pleasant conversation over the meal."
 
@@ -2162,15 +2162,15 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
     else:
         $ GirlBonus = Date_Bonus[1] + Date_Cost[1]
 
-    if Girl.action_counter["anal"] and approval_check(Girl, 1500) and GirlBonus > = 15:
+    if Girl.Action_counter["anal"] and approval_check(Girl, 1500) and GirlBonus > = 15:
         $ OptionsDS.append("anal")
-    if Girl.action_counter["sex"] and approval_check(Girl, 1500) and GirlBonus > = 10:
+    if Girl.Action_counter["sex"] and approval_check(Girl, 1500) and GirlBonus > = 10:
         $ OptionsDS.append("sex")
-    if Girl.action_counter["blowjob"] and approval_check(Girl, 1300) and GirlBonus > = 10:
+    if Girl.Action_counter["blowjob"] and approval_check(Girl, 1300) and GirlBonus > = 10:
         $ OptionsDS.append("blowjob")
-    if Girl.action_counter["handjob"] and approval_check(Girl, 1000) and GirlBonus > = 10:
+    if Girl.Action_counter["handjob"] and approval_check(Girl, 1000) and GirlBonus > = 10:
         $ OptionsDS.append("handjob")
-    if Girl.action_counter["fondle_pussy"] and approval_check(Girl, 1000) and GirlBonus > = 10:
+    if Girl.Action_counter["fondle_pussy"] and approval_check(Girl, 1000) and GirlBonus > = 10:
         $ OptionsDS.append("pussy")
     if approval_check(Girl, 1000) and GirlBonus > = 10:
         $ OptionsDS.append("footjob")
@@ -2220,7 +2220,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
             call change_Girl_stat(Girl, "inhibition", 80, 3)
             $ Girl.addiction -= 20
             $ Girl.seen_peen += 1
-            $ Girl.action_counter["anal"] += 1
+            $ Girl.Action_counter["anal"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("anal")
             $ Girl.recent_history.append("dinnersex")
@@ -2265,7 +2265,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
             call change_Girl_stat(Girl, "inhibition", 80, 2)
             $ Girl.addiction -= 20
             $ Girl.seen_peen += 1
-            $ Girl.action_counter["sex"] += 1
+            $ Girl.Action_counter["sex"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("sex")
             $ Girl.recent_history.append("dinnersex")
@@ -2344,7 +2344,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
             call change_Girl_stat(Girl, "inhibition", 80, 2)
             $ Girl.seen_peen += 1
             $ Girl.addiction -= 10
-            $ Girl.action_counter["blowjob"] += 1
+            $ Girl.Action_counter["blowjob"] += 1
             $ Player.semen -= 1
             if _return == 3:
                 "[Previous.name] stares daggers at you both as [Girl.name] crawls out from under the table."
@@ -2364,7 +2364,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
                 "She unzips your pants under the table, and proceeds to caress your cock."
                 "On the other side, [Previous.name] also reaches down and gets into the action."
                 $ line = "They"
-                $ Previous.action_counter["handjob"] += 1
+                $ Previous.Action_counter["handjob"] += 1
                 $ Previous.recent_history.append("handjob")
                 $ Previous.daily_history.append("handjob")
                 $ Girl.check_if_likes(Previous, 600,3, 1)
@@ -2377,10 +2377,10 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
             else:
                 "She unzips your pants under the table, and proceeds to caress your cock."
                 $ line = "She"
-            if Girl.action_counter["blowjob"] and (approval_check(Girl, 1200) or Girl == JubesX):
+            if Girl.Action_counter["blowjob"] and (approval_check(Girl, 1200) or Girl == JubesX):
                 "Just as you're about to cum, [Girl.name] ducks her head under the table and comes up with a mouth full."
                 $ Girl.seen_peen += 1
-                $ Girl.action_counter["blowjob"] += 1
+                $ Girl.Action_counter["blowjob"] += 1
                 $ Girl.addiction -= 20
                 $ Girl.event_counter["swallowed"] += 1
                 $ Girl.recent_history.append("swallow")
@@ -2409,7 +2409,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
             $ line = 0
             call change_Girl_stat(Girl, "inhibition", 30, 4)
             call change_Girl_stat(Girl, "inhibition", 80, 2)
-            $ Girl.action_counter["handjob"] += 1
+            $ Girl.Action_counter["handjob"] += 1
             $ Player.semen -= 1
             $ Girl.addiction -= 5
             $ Girl.recent_history.append("handjob")
@@ -2486,7 +2486,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
             call change_Girl_stat(Girl, "love", 90, 3)
             call change_Girl_stat(Girl, "inhibition", 30, 5)
             call change_Girl_stat(Girl, "inhibition", 90, 2)
-            $ Girl.action_counter["fondle_pussy"] += 1
+            $ Girl.Action_counter["fondle_pussy"] += 1
             $ Girl.event_counter["orgasmed"]+= 1
             $ Girl.recent_history.append("fondle_pussy")
             $ Girl.recent_history.append("dinnersex")
@@ -2954,18 +2954,18 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
 
             "You get back to it, [Previous.name] settles back into her seat with a glare."
 
-        if Girl.action_counter["anal"] and approval_check(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.bottom_number() <= 5:
+        if Girl.Action_counter["anal"] and approval_check(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.bottom_number() <= 5:
             $ OptionsDS.append("anal")
-        if Girl.action_counter["sex"] and approval_check(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.bottom_number() <= 5:
+        if Girl.Action_counter["sex"] and approval_check(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.bottom_number() <= 5:
             $ OptionsDS.append("sex")
-        if Girl.action_counter["blowjob"] and approval_check(Girl, 1300, Bonus=(10*GirlBonus)):
+        if Girl.Action_counter["blowjob"] and approval_check(Girl, 1300, Bonus=(10*GirlBonus)):
             $ OptionsDS.append("blowjob")
             if Girl == JubesX:
                 $ OptionsDS.append("blowjob")
                 $ OptionsDS.append("blowjob")
-        if Girl.action_counter["handjob"] and approval_check(Girl, 1000, Bonus=(10*GirlBonus)):
+        if Girl.Action_counter["handjob"] and approval_check(Girl, 1000, Bonus=(10*GirlBonus)):
             $ OptionsDS.append("handjob")
-        if Girl.action_counter["fondle_pussy"] and approval_check(Girl, 900, Bonus=(10*GirlBonus)):
+        if Girl.Action_counter["fondle_pussy"] and approval_check(Girl, 900, Bonus=(10*GirlBonus)):
             $ OptionsDS.append("pussy")
         elif approval_check(Girl, 1200, Bonus=(5*GirlBonus)) and Girl.Clothes["underwear"]:
             $ OptionsDS.append("panties")
@@ -3036,7 +3036,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
             call change_Girl_stat(Girl, "inhibition", 50, 4)
             call change_Girl_stat(Girl, "inhibition", 90, 3)
             $ Girl.seen_peen += 1
-            $ Girl.action_counter["anal"] += 1
+            $ Girl.Action_counter["anal"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("anal")
             $ Girl.daily_history.append("anal")
@@ -3101,7 +3101,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
             call change_Girl_stat(Girl, "inhibition", 50, 4)
             call change_Girl_stat(Girl, "inhibition", 90, 3)
             $ Girl.seen_peen += 1
-            $ Girl.action_counter["sex"] += 1
+            $ Girl.Action_counter["sex"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("sex")
             $ Girl.daily_history.append("sex")
@@ -3164,7 +3164,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
             call change_Girl_stat(Girl, "inhibition", 40, 3)
             call change_Girl_stat(Girl, "inhibition", 80, 2)
             $ Girl.seen_peen += 1
-            $ Girl.action_counter["blowjob"] += 1
+            $ Girl.Action_counter["blowjob"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("blowjob")
             $ Girl.daily_history.append("blowjob")
@@ -3185,7 +3185,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
             else:
                 "She then leans over and begins to stroke it."
             $ Girl.change_face("surprised")
-            if Girl.action_counter["fondle_pussy"]:
+            if Girl.Action_counter["fondle_pussy"]:
                 if _return == 1:
 
                     "You also reach down and begin stroking their pussies."
@@ -3199,7 +3199,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
                     else:
                         "You also lean over, notice she isn't wearing anything down there, and begin to stroke her pussy."
             $ Girl.change_face("sexy", 1, eyes = "closed")
-            if Girl.action_counter["fondle_pussy"]:
+            if Girl.Action_counter["fondle_pussy"]:
                 if _return == 1:
                     "After several minutes of this, [Girl.name] and [Previous.name] shudder in orgasm, which sets you off as well."
                 else:
@@ -3252,9 +3252,9 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
             call change_Girl_stat(Girl, "love", 90, 2)
             call change_Girl_stat(Girl, "inhibition", 40, 3)
             call change_Girl_stat(Girl, "inhibition", 80, 2)
-            $ Girl.action_counter["fondle_pussy"] += 1
+            $ Girl.Action_counter["fondle_pussy"] += 1
             $ Girl.event_counter["orgasmed"]+= 1
-            $ Girl.action_counter["handjob"] += 1
+            $ Girl.Action_counter["handjob"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("handjob")
             $ Girl.daily_history.append("handjob")
@@ -3299,7 +3299,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
             call change_Girl_stat(Girl, "love", 90, 2)
             call change_Girl_stat(Girl, "inhibition", 40, 2)
             call change_Girl_stat(Girl, "inhibition", 80, 2)
-            $ Girl.action_counter["fondle_pussy"] += 1
+            $ Girl.Action_counter["fondle_pussy"] += 1
             $ Girl.event_counter["orgasmed"]+= 1
             $ Girl.recent_history.append("fondle_pussy")
             $ Girl.daily_history.append("fondle_pussy")

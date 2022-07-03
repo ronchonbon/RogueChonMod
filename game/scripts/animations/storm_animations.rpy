@@ -30,9 +30,9 @@ layeredimage Storm_grool_dripping_animation:
 layeredimage Storm_grool_animations:
     if not StormX.grool:
         Null()
-    elif StormX.Clothes["pants"].state:
+    elif StormX.Clothes["pants"] and StormX.Clothes["pants"].state:
         AlphaMask("Storm_grool_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask_pants.png")
-    elif StormX.Clothes["underwear"].state:
+    elif StormX.Clothes["underwear"] and StormX.Clothes["underwear"].state:
         AlphaMask("Storm_grool_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask_underwear.png")
     elif not StormX.Outfit.pussy_covered:
         AlphaMask("Storm_grool_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask.png")
@@ -53,53 +53,60 @@ layeredimage Storm_spunk_dripping_animation:
 layeredimage Storm_spunk_animations:
     if not StormX.spunk["pussy"] and not StormX.spunk["anus"]:
         Null()
-    elif StormX.Clothes["pants"].state:
+    elif StormX.Clothes["pants"] and StormX.Clothes["pants"].state:
         AlphaMask("Storm_spunk_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask_pants.png")
-    elif StormX.Clothes["underwear"].state:
+    elif StormX.Clothes["underwear"] and StormX.Clothes["underwear"].state:
         AlphaMask("Storm_spunk_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask_underwear.png")
     elif not StormX.Outfit.pussy_covered:
         AlphaMask("Storm_spunk_dripping_animation", "images/Storm_standing/Storm_standing_grool_mask.png")
 
 layeredimage Storm_standing_fondling_animations:
-    if not girl_secondary_action:
+    if not StormX.primary_Action or StormX.primary_Action.Target != StormX:
         Null()
-    elif girl_secondary_action == "fondle_breasts":
-        "Storm_fondle_breast_left_animation" pos (0.24, 0.72)
-    elif girl_secondary_action == "fondle_breasts":
+    elif StormX.primary_Action.type == "fondle_breasts":
         "Storm_fondle_breast_right_animation" pos (0.078, 0.675)
-    elif girl_secondary_action == "fondle_pussy":
+    elif StormX.primary_Action.type == "fondle_pussy":
         "Storm_fondle_pussy_animation" pos (0.17, 0.994)
-    elif girl_secondary_action in "finger_pussy":
+    elif StormX.primary_Action.type in "finger_pussy":
         "Storm_finger_pussy_animation" pos (0.175, 1.05)
 
-    if not Player.primary_action:
+    if not StormX.secondary_Action or StormX.secondary_Action.Target != StormX:
         Null()
-    elif Player.primary_action == "fondle_thighs":
+    elif StormX.secondary_Action.type == "fondle_breasts":
+        "Storm_fondle_breast_left_animation" pos (0.24, 0.72)
+    elif StormX.secondary_Action.type == "fondle_pussy":
+        "Storm_fondle_pussy_animation" pos (0.17, 0.994)
+    elif StormX.secondary_Action.type in "finger_pussy":
+        "Storm_finger_pussy_animation" pos (0.175, 1.05)
+
+    if not Player.primary_Action or Player.primary_Action.Target != StormX:
+        Null()
+    elif Player.primary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.12, 1.2)
-    elif Player.primary_action == "fondle_breasts":
-        "Zero_fondle_breasts_right_animation" pos (0.135, 0.645)
-    elif Player.primary_action == "suck_breasts":
-        "Zero_suck_breasts_right_animation" pos (0.07, 0.64)
-    elif Player.primary_action == "fondle_pussy":
+    elif Player.primary_Action.type == "fondle_breasts":
+        "Zero_fondle_breasts_left_animation" pos (0.2, 0.69)
+    elif Player.primary_Action.type == "suck_breasts":
+        "Zero_suck_breasts_left_animation" pos (0.225, 0.67)
+    elif Player.primary_Action.type == "fondle_pussy":
         "Zero_fondle_pussy_animation" pos (0.18, 0.98)
-    elif Player.primary_action == "finger_pussy":
+    elif Player.primary_Action.type == "finger_pussy":
         "Zero_finger_pussy_animation" pos (0.155, 1.17)
-    elif Player.primary_action == "eat_pussy":
+    elif Player.primary_Action.type == "eat_pussy":
         "Zero_eat_pussy_animation" pos (0.185, 1.07)
 
-    if not Player.secondary_action:
+    if not Player.secondary_Action or Player.secondary_Action.Target != StormX:
         Null()
-    elif Player.secondary_action == "fondle_thighs":
+    elif Player.secondary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.12, 1.2)
-    elif Player.secondary_action == "fondle_breasts":
-        "Zero_fondle_breasts_left_animation" pos (0.2, 0.69)
-    elif Player.secondary_action == "suck_breasts":
-        "Zero_suck_breasts_left_animation" pos (0.225, 0.67)
-    elif Player.secondary_action == "fondle_pussy":
+    elif Player.secondary_Action.type == "fondle_breasts":
+        "Zero_fondle_breasts_right_animation" pos (0.135, 0.645)
+    elif Player.secondary_Action.type == "suck_breasts":
+        "Zero_suck_breasts_right_animation" pos (0.07, 0.64)
+    elif Player.secondary_Action.type == "fondle_pussy":
         "Zero_fondle_pussy_animation" pos (0.18, 0.98)
-    elif Player.secondary_action == "finger_pussy":
+    elif Player.secondary_Action.type == "finger_pussy":
         "Zero_finger_pussy_animation" pos (0.155, 1.17)
-    elif Player.secondary_action == "eat_pussy":
+    elif Player.secondary_Action.type == "eat_pussy":
         "Zero_eat_pussy_animation" pos (0.185, 1.07)
 
 image Storm_handjob_under_hand_animation0:
@@ -165,13 +172,13 @@ layeredimage Storm_sprite handjob:
         "Storm_sprite standing"
 
     always:
-        "Storm_handjob_under_hand_animation[action_speed]" pos (0.08, 0.455) zoom 0.28
+        "Storm_handjob_under_hand_animation[Action.type_speed]" pos (0.08, 0.455) zoom 0.28
 
     always:
         "Zero_cock_Storm"
 
     always:
-        "Storm_handjob_over_hand_animation[action_speed]" pos (0.08, 0.455) zoom 0.28
+        "Storm_handjob_over_hand_animation[Action.type_speed]" pos (0.08, 0.455) zoom 0.28
 
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
 
@@ -791,31 +798,31 @@ image Storm_titjob_hair_animation5:
 
 layeredimage Storm_sprite titjob:
     # if StormX.Clothes["bra"].string in ["black_bra", "lace_bra"]:
-    #     "Storm_titjob_bra_back_animation[action_speed]"
+    #     "Storm_titjob_bra_back_animation[Action.type_speed]"
 
     always:
-        "Storm_titjob_hair_back_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
+        "Storm_titjob_hair_back_animation[Action.type_speed]" pos (0.0, -0.15) zoom 0.9
 
     always:
-        "Storm_titjob_body_animation[action_speed]"
+        "Storm_titjob_body_animation[Action.type_speed]"
 
     always:
-        "Storm_titjob_head_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
+        "Storm_titjob_head_animation[Action.type_speed]" pos (0.0, -0.15) zoom 0.9
 
     # if not StormX.Clothes["bra"].string == "cosplay_bra":
-    #     "Storm_titjob_breasts_under_animation[action_speed]"
+    #     "Storm_titjob_breasts_under_animation[Action.type_speed]"
 
     always:
         "Zero_cock_Storm"
 
     # if StormX.Clothes["bra"].string in ["sports_bra", "bikini_top"]:
-    #     "Storm_titjob_bra_stretch_animation[action_speed]"
+    #     "Storm_titjob_bra_stretch_animation[Action.type_speed]"
 
     always:
-        "Storm_titjob_breasts_animation[action_speed]"
+        "Storm_titjob_breasts_animation[Action.type_speed]"
 
     always:
-        "Storm_titjob_hair_animation[action_speed]" pos (0.0, -0.15) zoom 0.9
+        "Storm_titjob_hair_animation[Action.type_speed]" pos (0.0, -0.15) zoom 0.9
 
     anchor (0.5, 0.0) offset (320, 700)
 

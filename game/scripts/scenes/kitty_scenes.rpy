@@ -338,7 +338,7 @@ label Kitty_BF:
             call change_Girl_stat(KittyX, "love", 200, 30)
             "[KittyX.name] wraps her arms around you and starts kissing you passionately."
             call kiss_launch(KittyX)
-            $ KittyX.action_counter["kiss"] += 1
+            $ KittyX.Action_counter["kiss"] += 1
         "Uhm[KittyX.like]okay.":
             $ KittyX.brows = "confused"
             "[KittyX.name] seems a little put off by how casually you’re taking all this."
@@ -352,7 +352,7 @@ label Kitty_BF:
                     call change_Girl_stat(KittyX, "love", 200, 30)
                     "[KittyX.name] wraps her arms around you and starts kissing you passionately."
                     call kiss_launch(KittyX)
-                    $ KittyX.action_counter["kiss"] += 1
+                    $ KittyX.Action_counter["kiss"] += 1
                 "She wouldn't understand." if len(Player.Harem) == 1:
                     $ line = "no"
                 "They wouldn't be cool with that." if len(Player.Harem) > 1:

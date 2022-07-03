@@ -1,69 +1,3 @@
-label training:
-    $ D20 = renpy.random.randint(1, 20)
-
-    $ Player.XP += (5 + (int(round / 10)))
-    $ Player.daily_history.append("dangerroom")
-
-    call set_the_scene
-
-    if round >= 80:
-        $ line = "You have a long session in the Danger Room."
-    elif round >= 50:
-        $ line = "You have a short workout in the Danger Room."
-    else:
-        $ line = "You squeeze in a quick session in the Danger Room."
-
-    if D20 >= 18:
-        "[line] During the exercise, Cyclops accidentally shoots you."
-        "Luckily you're immune to the beams, but your clothes weren't so lucky."
-
-        call change_Present_stat ("love", 80, 2)
-        call change_Present_stat ("lust", 80, 5)
-    elif D20 >= 17:
-        "[line] You participate in a hand-to-hand combat class."
-        "Before you begin, Cyclops explains that it’s always good to know how to defend yourself when you can’t rely on your powers."
-        "It sounds like there’s a story there."
-    elif D20 >= 16:
-        "Some of the senior students walk over to talk about your powers."
-        "Nightcrawler wonders aloud what would happen if he grabbed you and tried to teleport while you tried to disable his powers."
-        "You succeed in freaking each other out."
-    else:
-        $ line = line + renpy.random.choice([" It was fairly boring.",
-                    " You do some training with basic firearms.",
-                    " You run the obstacle course.",
-                    " You fight in a simulated battle against the Brotherhood.",
-                    " You help take down a holographic Sentinel.",
-                    " You take part in a training exercise against the Avengers. As if the X-Men and Avengers would ever fight.",
-                    " You and some of the others take part in a survival exercise. . . also known as \"try to last as long as you can while Wolverine hunts you down one by one.\"",
-                    " You decide to test yourself by facing off against Magneto solo. It goes about as well as you’d expect.",
-                    " You use the Danger Room’s holograms to relive some of the original X-Men’s biggest battles. You learn quite a bit about teamwork.",
-                    " Beast is teaching a class on parkour. You take part and pick up a few pointers. You’re no Spider-Man, but at least you pick up a few things.",
-                    " You participate in an emergency drill. You pick up quite a few tips about first aid, triage and the proper way to move injured people.",
-                    " You take part in an urban emergency situation exercise. Cyclops takes the time to explain to you how to use cover to get close enough to use your powers.",
-                    " You take part in a jungle simulation exercise under Wolverine. You learn some basic survival techniques, but you privately hope you never need them.",
-                    " Your team fight a simulation of Magneto."])
-        "[line]"
-
-    $ temp_Girls = active_Girls[:]
-
-    while temp_Girls:
-        if temp_Girls[0].location == Player.location:
-            call Girl_TightsRipped(temp_Girls[0])
-
-        $ temp_Girls.remove(temp_Girls[0])
-
-    call wait
-    call set_Girls_locations
-    call set_the_scene
-
-    "The training session has ended, what would you like to do next?"
-
-    return
-
-
-
-
-
 label Breakup(Girl=0, Other=0, Anger=0, temp_Girls = []):
 
 
@@ -300,7 +234,7 @@ label Breakup(Girl=0, Other=0, Anger=0, temp_Girls = []):
             Girl.voice "Date us both at once? What does she think about that?"
         menu Breakup_Threeway_Offer:
             extend ""
-            "She said it would be ok with her." if "poly "+ Girl.tag in Other.traits or Girl.tag+"Yes" in Player.traits:
+            "She said it would be ok with her." if "poly " + Girl.tag in Other.traits or Girl.tag + "Yes" in Player.traits:
 
                 if approval_check(Girl, 1800, Bonus = counter):
                     $ Girl.change_face("smile", 1)
@@ -338,7 +272,7 @@ label Breakup(Girl=0, Other=0, Anger=0, temp_Girls = []):
 
                         Girl.voice "If she's in, I am."
 
-                    $ Girl.add_word(1, 0, 0, "poly "+Other.tag, 0)
+                    $ Girl.add_word(1, 0, 0, "poly " +Other.tag, 0)
                 else:
                     $ Anger += 2
                     call change_Girl_stat(Girl, "love", 50, -10, 1)
@@ -384,8 +318,8 @@ label Breakup(Girl=0, Other=0, Anger=0, temp_Girls = []):
                     call change_Girl_stat(Girl, "inhibition", 80, 5)
                     $ Girl.change_face("sexy")
                     Girl.voice "I guess I could."
-                    $ Girl.add_word(1, 0, 0, "ask "+Other.tag, 0)
-                    $ Girl.add_word(1, 0, 0, "poly "+Other.tag, 0)
+                    $ Girl.add_word(1, 0, 0, "ask " +Other.tag, 0)
+                    $ Girl.add_word(1, 0, 0, "poly " +Other.tag, 0)
                 "No, let's just keep it under cover.":
                     call change_Girl_stat(Girl, "love", 50, -5, 1)
                     call change_Girl_stat(Girl, "love", 80, -5, 1)
@@ -395,10 +329,10 @@ label Breakup(Girl=0, Other=0, Anger=0, temp_Girls = []):
 
         if line == "breakup":
             pass
-        elif line != "bargaining" and "poly "+ Other.tag not in Girl.traits:
+        elif line != "bargaining" and "poly " + Other.tag not in Girl.traits:
 
 
-            if "ask "+ Other.tag not in Girl.traits and not approval_check(Girl, 1800, Bonus = -(int((Girl.likes[Other.tag] - 600)/2))):
+            if "ask " + Other.tag not in Girl.traits and not approval_check(Girl, 1800, Bonus = -(int((Girl.likes[Other.tag] - 600)/2))):
 
 
                 call change_Girl_stat(Girl, "love", 50, -5, 1)
@@ -459,8 +393,8 @@ label Breakup(Girl=0, Other=0, Anger=0, temp_Girls = []):
                 else:
 
                     Girl.voice "If she's in, I am."
-                $ Girl.add_word(1, 0, 0, "poly "+Other.tag, 0)
-                if "ask "+ Other.tag in Girl.traits:
+                $ Girl.add_word(1, 0, 0, "poly " +Other.tag, 0)
+                if "ask " + Other.tag in Girl.traits:
 
                     Girl.voice "I'll talk to [Other.name] about it."
                 else:
@@ -875,7 +809,7 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
                 ch_v "I have a sensitive nose. . ."
 
             if Girl.cheated_on:
-                $ line = line+" Again!"
+                $ line = line + " Again!"
             Girl.voice "[line]"
             menu:
                 extend ""
@@ -1287,12 +1221,12 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
     $ temp_Girls = all_Girls[:]
     while temp_Girls:
 
-        $ Girl.drain_word("saw with "+temp_Girls[0].tag, 0, 0, 1)
+        $ Girl.drain_word("saw with " +temp_Girls[0].tag, 0, 0, 1)
         $ temp_Girls.remove(temp_Girls[0])
 
     if line == "polyamorous":
-        $ Girl.add_word(1, 0, 0, "poly "+Other.tag, 0)
-        $ Girl.add_word(1, 0, 0, "ask "+Other.tag, 0)
+        $ Girl.add_word(1, 0, 0, "poly " +Other.tag, 0)
+        $ Girl.add_word(1, 0, 0, "ask " +Other.tag, 0)
     else:
         $ Girl.check_if_likes(Other, 1000, -50, 1)
 
@@ -2209,7 +2143,7 @@ label CalltoFap(Girl=0, Fap=0):
             else:
                 Girl.voice "Oh, you would, would you. . ."
             $ Fap = 3
-        "Only if I can watch." if AloneCheck(Girl):
+        "Only if I can watch." if check_if_alone(Girl):
             if approval_check(Girl, 1200):
 
                 call change_Girl_stat(Girl, "love", 80, 4)
@@ -3554,180 +3488,7 @@ label Jubes_First_Bottomless(Silent=0):
 
 
 
-label study_Explore:
-    $ line = 0
-    $ D20 = renpy.random.randint(1, 20)
-    menu:
-        "Where would you like to look?"
-        "Bookshelf":
-            if D20 >= 5 + counter:
-                $ line = "book"
-            else:
-                "As you search the bookshelf, you accidentally knock one of the books off."
-                "It hammers against the floor, and a little light blinks on the desk."
-        "Left Desk Drawer":
-            if KittyX.location != Player.location and StormX.location != Player.location:
-                "You can't seem to get it open, it would be nice to have someone open the catch from the inside."
-            elif D20 >= 10 + counter:
-                $ line = "left"
-            else:
-                "As you open the drawer, it makes a loud a squeak."
-                "As you look around, you notice a little light starts blinking on the desk."
-        "Middle Desk Drawer":
-            if KittyX.location != Player.location and StormX.location != Player.location:
-                "You can't seem to get it open, it would be nice to have someone open the catch from the inside."
-            elif D20 >= 15 + counter:
-                $ line = "middle"
-            else:
-                "As you open the drawer, it makes a loud a squeak."
-                "As you look around, you notice a little light starts blinking on the desk."
-        "Right Desk Drawer":
-            if KittyX.location != Player.location and StormX.location != Player.location:
-                "You can't seem to get it open, it would be nice to have someone open the catch from the inside."
-            elif D20 >= 5 + counter:
-                $ line = "right"
-            else:
-                "As you open the drawer, it makes a loud a squeak."
-                "As you look around, you notice a little light starts blinking on the desk."
-        "Never mind [[back]":
-            jump study_room
 
-    $ D20 = renpy.random.randint(1, 20)
-    if not line:
-        "Probably best to get out of here."
-        "You slip out and head back to your room."
-
-        $ Player.location = "bg_room"
-
-        jump reset_location
-    elif line == "book":
-        if D20 >= 15 and "Well Studied" not in achievements:
-            "As you check the books on the shelf, you notice that one of them is actually a disguised lockbox."
-            if KittyX.location == Player.location:
-                menu:
-                    "Since [KittyX.name] is around, have her check inside?"
-                    "Check in the box":
-                        if approval_check(KittyX, 700, "I") or approval_check(KittyX, 1800):
-                            if "Well Studied" not in achievements:
-                                call change_Girl_stat(KittyX, "obedience", 50, 10)
-                                call change_Girl_stat(KittyX, "inhibition", 60, 15)
-                                ch_k "Sounds like a plan."
-                                "[KittyX.name] swipes her hand through the box, and pulls out a stack of bills."
-                                "Looks like Xavier was hiding a rainy day fund in here."
-                                $ Player.cash += 500
-                                "[[$500 acquired.]"
-                                $ achievements.append("Well Studied")
-                            else:
-                                "Looks like this has been thoroughly looted."
-                        else:
-                            call change_Girl_stat(KittyX, "love", 90, -3)
-                            call change_Girl_stat(KittyX, "obedience", 50, 1)
-                            call change_Girl_stat(KittyX, "inhibition", 60, 2)
-                            ch_k "I really don't think we should do that."
-                    "Put it back.":
-                        "You place the box back on the shelf."
-            elif StormX.location == Player.location:
-                menu:
-                    "Since [StormX.name] is around, have her check inside?"
-                    "Check in the box":
-                        if approval_check(StormX, 700, "I") or approval_check(StormX, 1800):
-                            if "Well Studied" not in achievements:
-                                call change_Girl_stat(StormX, "obedience", 50, 10)
-                                call change_Girl_stat(StormX, "inhibition", 60, 15)
-                                ch_s "I suppose I could. . ."
-                                "[StormX.name] picks the lock on the box, and pulls out a stack of bills."
-                                "Looks like Charles had some money set aside. . ."
-                                $ Player.cash += 500
-                                "[[$500 acquired.]"
-                                $ achievements.append("Well Studied")
-                            else:
-                                "Looks like this has been thoroughly looted."
-                        else:
-                            call change_Girl_stat(StormX, "love", 90, -3)
-                            call change_Girl_stat(StormX, "obedience", 50, 1)
-                            call change_Girl_stat(StormX, "inhibition", 60, 2)
-                            ch_s "I really don't think we should do that."
-                    "Put it back.":
-                        "You place the box back on the shelf."
-            else:
-                "You can't think of any way to get it open, too bad you aren't a ghost or something."
-                "You place the box back on the shelf."
-        elif D20 >= 15:
-            "There doesn't seem to be anything more of interest in here."
-        else:
-            "You search through the books for a few minutes, but don't find anything."
-            "It would probably take a more thorough search."
-    elif line == "left":
-        if "Xavier's photo" not in Player.inventory:
-            if D20 >= 10:
-                "Buried under a pile of documents, you find a printed out photo."
-                "It appears to be a selfie of Mystique making out with Xavier."
-                "She's reaching down to adjust his . . . oh, {i}that's{/i} interesting."
-                if StormX.location == Player.location:
-                    ch_s "You should probably put that back, it looks personal."
-                else:
-                    "[[Xavier's photo acquired.]"
-                    $ Player.inventory.append("Xavier's photo")
-                    if "kappa" in Player.history:
-                        $ Player.history.remove("kappa")
-            else:
-                "You search through some documents, but don't find anything."
-                "It would probably take a more thorough search."
-        else:
-            "There doesn't seem to be anything more of interest in here."
-    elif line == "middle":
-        if "all" not in Player.Keys:
-            "Under a few trinkets, you find a small keyring."
-            "[[Keyring acquired.]"
-            if "Xavier" not in Player.Keys:
-                $ Player.Keys.append("Xavier")
-            if RogueX not in Player.Keys:
-                $ Player.Keys.append(RogueX)
-            if KittyX not in Player.Keys:
-                $ Player.Keys.append(KittyX)
-            if EmmaX not in Player.Keys:
-                $ Player.Keys.append(EmmaX)
-            if LauraX not in Player.Keys:
-                $ Player.Keys.append(LauraX)
-            if JeanX not in Player.Keys:
-                $ Player.Keys.append(JeanX)
-            if StormX not in Player.Keys:
-                $ Player.Keys.append(StormX)
-            if JubesX not in Player.Keys:
-                $ Player.Keys.append(JubesX)
-            if "all" not in Player.Keys:
-                $ Player.Keys.append("all")
-        else:
-            "There doesn't seem to be anything interesting in here."
-    elif line == "right":
-        "There doesn't seem to be anything more of interest in here, maybe later?"
-        if "Xavier's files" not in Player.inventory:
-            if D20 >= 10:
-                "You search through some documents, but don't find anything."
-                if StormX.location == Player.location:
-                    ch_s "Hmm. . ."
-                    "She reaches under some of the documents and finds a small notch."
-                    "With a soft \"click\"a panel flips open in the drawer, revealing some file folders."
-                    "Inside are some fairly. . . detailed reports on the girls at the school."
-                    $ StormX.change_face("surprised", 2)
-                    "These include body measurements, sexual histories. . . masturbation habits?"
-                    call change_Girl_stat(StormX, "obedience", 70, 5)
-                    call change_Girl_stat(StormX, "inhibition", 70, 5)
-                    $ StormX.change_face("angry")
-                    ch_s "Well, I don't think Charles should be holding information like this. . ."
-                    $ StormX.change_face("normal", 1)
-                    "[[Xavier's files acquired.]"
-                    $ Player.inventory.append("Xavier's files")
-                    if "rho" in Player.history:
-                        $ Player.history.remove("rho")
-            else:
-                "You search through some documents, but don't find anything."
-                "It would probably take a more thorough search."
-        else:
-            "There doesn't seem to be anything more of interest in here."
-
-    $ counter += 3
-    jump study_Explore
 
 label Seen_First_Peen(Primary=0, Secondary=0, Silent=0, Undress=0, Passive=0, GirlsNum=0, React=0, temp_Girls = []):
 
@@ -3931,7 +3692,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
         else:
             "You whip your cock out."
         $ Player.add_word(1, "cockout")
-        if not Girl.forced and not React and taboo > 20 and (not approval_check(Girl, 1500) or Girl.SEXP < 10) and Player.location != "bg_showerroom" and Girl not in (JeanX, StormX):
+        if not Girl.forced and not React and taboo > 20 and (not approval_check(Girl, 1500) or Girl.SEXP < 10) and Player.location != "bg_shower" and Girl not in (JeanX, StormX):
 
             if not approval_check(Girl, 800) and not approval_check(Girl, 500, "I"):
 

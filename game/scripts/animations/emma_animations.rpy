@@ -46,9 +46,9 @@ layeredimage Emma_grool_dripping_animation:
 layeredimage Emma_grool_animations:
     if not EmmaX.grool:
         Null()
-    elif EmmaX.Clothes["pants"].state:
+    elif EmmaX.Clothes["pants"] and EmmaX.Clothes["pants"].state:
         AlphaMask("Emma_grool_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask_pants.png")
-    elif EmmaX.Clothes["underwear"].state:
+    elif EmmaX.Clothes["underwear"] and EmmaX.Clothes["underwear"].state:
         AlphaMask("Emma_grool_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask_underwear.png")
     elif not EmmaX.Outfit.pussy_covered:
         AlphaMask("Emma_grool_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask.png")
@@ -69,53 +69,60 @@ layeredimage Emma_spunk_dripping_animation:
 layeredimage Emma_spunk_animations:
     if not EmmaX.spunk["pussy"] and not EmmaX.spunk["anus"]:
         Null()
-    elif EmmaX.Clothes["pants"].state:
+    elif EmmaX.Clothes["pants"] and EmmaX.Clothes["pants"].state:
         AlphaMask("Emma_spunk_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask_pants.png")
-    elif EmmaX.Clothes["underwear"].state:
+    elif EmmaX.Clothes["underwear"] and EmmaX.Clothes["underwear"].state:
         AlphaMask("Emma_spunk_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask_underwear.png")
     elif not EmmaX.Outfit.pussy_covered:
         AlphaMask("Emma_spunk_dripping_animation", "images/Emma_standing/Emma_standing_grool_mask.png")
 
 layeredimage Emma_standing_fondling_animations:
-    if not girl_secondary_action:
+    if not EmmaX.primary_Action or EmmaX.primary_Action.Target != EmmaX:
         Null()
-    elif girl_secondary_action == "fondle_breasts":
-        "Girl_fondle_breast_left_animation" pos (0.245, 0.72)
-    elif girl_secondary_action == "fondle_breasts":
+    elif EmmaX.primary_Action.type == "fondle_breasts":
         "Girl_fondle_breast_right_animation" pos (0.115, 0.715)
-    elif girl_secondary_action == "fondle_pussy":
+    elif EmmaX.primary_Action.type == "fondle_pussy":
         "Girl_fondle_pussy_animation" pos (0.22, 1.055)
-    elif girl_secondary_action in "finger_pussy":
+    elif EmmaX.primary_Action.type in "finger_pussy":
         "Girl_finger_pussy_animation" pos (0.226, 1.1)
 
-    if not Player.primary_action:
+    if not EmmaX.secondary_Action or EmmaX.secondary_Action.Target != EmmaX:
         Null()
-    elif Player.primary_action == "fondle_thighs":
+    elif EmmaX.secondary_Action.type == "fondle_breasts":
+        "Girl_fondle_breast_left_animation" pos (0.245, 0.72)
+    elif EmmaX.secondary_Action.type == "fondle_pussy":
+        "Girl_fondle_pussy_animation" pos (0.22, 1.055)
+    elif EmmaX.secondary_Action.type in "finger_pussy":
+        "Girl_finger_pussy_animation" pos (0.226, 1.1)
+
+    if not Player.primary_Action or Player.primary_Action.Target != EmmaX:
+        Null()
+    elif Player.primary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.15, 1.25)
-    elif Player.primary_action == "fondle_breasts":
-        "Zero_fondle_breasts_right_animation" pos (0.14, 0.735)
-    elif Player.primary_action == "suck_breasts":
-        "Zero_suck_breasts_right_animation" pos (0.09, 0.67)
-    elif Player.primary_action == "fondle_pussy":
+    elif Player.primary_Action.type == "fondle_breasts":
+        "Zero_fondle_breasts_left_animation" pos (0.205, 0.72)
+    elif Player.primary_Action.type == "suck_breasts":
+        "Zero_suck_breasts_left_animation" pos (0.23, 0.65)
+    elif Player.primary_Action.type == "fondle_pussy":
         "Zero_fondle_pussy_animation" pos (0.25, 1.1)
-    elif Player.primary_action == "finger_pussy":
+    elif Player.primary_Action.type == "finger_pussy":
         "Zero_finger_pussy_animation" pos (0.2, 1.22)
-    elif Player.primary_action == "eat_pussy":
+    elif Player.primary_Action.type == "eat_pussy":
         "Zero_eat_pussy_animation" pos (0.225, 1.125)
 
-    if not Player.secondary_action:
+    if not Player.secondary_Action or Player.secondary_Action.Target != EmmaX:
         Null()
-    elif Player.secondary_action == "fondle_thighs":
+    elif Player.secondary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.15, 1.25)
-    elif Player.secondary_action == "fondle_breasts":
-        "Zero_fondle_breasts_left_animation" pos (0.205, 0.72)
-    elif Player.secondary_action == "suck_breasts":
-        "Zero_suck_breasts_left_animation" pos (0.23, 0.65)
-    elif Player.secondary_action == "fondle_pussy":
+    elif Player.secondary_Action.type == "fondle_breasts":
+        "Zero_fondle_breasts_right_animation" pos (0.14, 0.735)
+    elif Player.secondary_Action.type == "suck_breasts":
+        "Zero_suck_breasts_right_animation" pos (0.09, 0.67)
+    elif Player.secondary_Action.type == "fondle_pussy":
         "Zero_fondle_pussy_animation" pos (0.25, 1.1)
-    elif Player.secondary_action == "finger_pussy":
+    elif Player.secondary_Action.type == "finger_pussy":
         "Zero_finger_pussy_animation" pos (0.2, 1.22)
-    elif Player.secondary_action == "eat_pussy":
+    elif Player.secondary_Action.type == "eat_pussy":
         "Zero_eat_pussy_animation" pos (0.225, 1.125)
 
 image Emma_handjob_under_hand_animation0:
@@ -181,13 +188,13 @@ layeredimage Emma_sprite handjob:
         "Emma_sprite standing" pos (0.05, 0.0)
 
     always:
-        "Emma_handjob_under_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+        "Emma_handjob_under_hand_animation[Action.type_speed]" pos (-0.035, 0.455) zoom 0.28
 
     always:
         "Zero_cock_Emma"
 
     always:
-        "Emma_handjob_over_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+        "Emma_handjob_over_hand_animation[Action.type_speed]" pos (-0.035, 0.455) zoom 0.28
 
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
 
@@ -421,19 +428,19 @@ image Emma_titjob_breasts_animation5:
 
 layeredimage Emma_sprite titjob:
     always:
-        "Emma_titjob_hair_back_animation[action_speed]" pos (0.0, -0.24) zoom 0.56
+        "Emma_titjob_hair_back_animation[Action.type_speed]" pos (0.0, -0.24) zoom 0.56
 
     always:
-        "Emma_titjob_body_animation[action_speed]"
+        "Emma_titjob_body_animation[Action.type_speed]"
 
     always:
-        "Emma_titjob_head_animation[action_speed]" pos (0.0, -0.24) zoom 0.56
+        "Emma_titjob_head_animation[Action.type_speed]" pos (0.0, -0.24) zoom 0.56
 
     always:
         "Zero_cock_Emma"
 
     always:
-        "Emma_titjob_breasts_animation[action_speed]" pos (0.0, -0.04) zoom 0.9
+        "Emma_titjob_breasts_animation[Action.type_speed]" pos (0.0, -0.04) zoom 0.9
 
     anchor (0.5, 0.0) offset (440, 1050) zoom 1.72
 

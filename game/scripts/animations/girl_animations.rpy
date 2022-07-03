@@ -426,7 +426,7 @@ label get_color_transform:
     return color_transform
 
 label get_transition:
-    if Player.location in ["bg_dangerroom", "bg_jean", "bg_jubes", "bg_laura", "bg_mall", "bg_player", "bg_pool", "bg_shop", "bg_showerroom", "bg_storm"]:
+    if Player.location in ["bg_dangerroom", "bg_jean", "bg_jubes", "bg_laura", "bg_mall", "bg_player", "bg_pool", "bg_shop", "bg_shower", "bg_storm"]:
         $ entrance_transition = easeinleft
         $ exit_transition = easeoutleft
     elif Player.location in ["bg_classroom", "bg_movies", "bg_restaurant", "bg_study"]:
@@ -477,7 +477,7 @@ label remove_Girl(Girl, transition = None):
         $ Girl.location = "nearby"
     elif Player.location == Girl.home:
         if Girl == JubesX and JubesX.addiction >= 60:
-            $ Girl.location = "bg_showerroom"
+            $ Girl.location = "bg_shower"
         else:
             $ Girl.location = "bg_campus"
     else:
@@ -612,7 +612,7 @@ label show_handjob(Girl, orgasm = False):
             "[Girl.name] looks around to see if anyone can see her."
 
     if not orgasm:
-        if not Girl.action_counter["handjob"] and Girl.Clothes["gloves"]:
+        if not Girl.Action_counter["handjob"] and Girl.Clothes["gloves"]:
             "As you pull out your cock, [Girl.name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
         else:
             "She then leans over and grabs your cock."
@@ -682,7 +682,7 @@ label show_titjob(Girl, orgasm = False):
     call expression Girl.tag + "_First_Topless"
 
     if not orgasm:
-        if not Girl.action_counter["titjob"] and "cockout" not in Player.recent_history:
+        if not Girl.Action_counter["titjob"] and "cockout" not in Player.recent_history:
             if not Girl.Clothes["bra"] and not Girl.Clothes["top"]:
                 "As you pull out your cock, [Girl.name] hesitantly places it between her breasts and starts to rub them up and down the shaft."
             elif Girl.Clothes["bra"] and not Girl.Clothes["top"]:
@@ -750,7 +750,7 @@ label show_blowjob(Girl, orgasm = False):
             "[Girl.name] looks around to see if anyone can see her."
 
     if not orgasm:
-        if not Girl.action_counter["blowjob"] and "cockout" not in Player.recent_history:
+        if not Girl.Action_counter["blowjob"] and "cockout" not in Player.recent_history:
             "[Girl.name] hesitantly pulls down your pants and touches her mouth to your cock."
     else:
         "[Girl.name] bends down and begins to suck on your cock."

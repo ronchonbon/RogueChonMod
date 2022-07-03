@@ -8,13 +8,13 @@ label enter_main_sex_menu(Girl):
 
             return
 
-        if "threesome" not in Girl.history and not AloneCheck(Girl):
+        if "threesome" not in Girl.history and not check_if_alone(Girl):
             call expression Girl.tag + "_ThreeCheck"
 
         if taboo > 20 and "taboo" not in Girl.history:
             call expression Girl.tag + "_taboo_Talk"
 
-            if Player.location == "bg_classroom" or Player.location in bedrooms and AloneCheck(Girl):
+            if Player.location == "bg_classroom" or Player.location in bedrooms and check_if_alone(Girl):
                 ch_p "We could just lock the door, right?"
                 ch_e "We certainly could. . ."
                 "[Girl.name] walks to the door and locks it behind her."
@@ -143,15 +143,15 @@ label girl_sex_menu(Girl):
                             call start_action(Player.focused_Girl, "fondle_thighs")
                         "Your breasts?":
                             call start_action(Player.focused_Girl, "fondle_breasts")
-                        "Suck your nipples?" if Player.focused_Girl.remaining_actions and Player.focused_Girl.action_counter["suck_breasts"]:
+                        "Suck your nipples?" if Player.focused_Girl.remaining_actions and Player.focused_Girl.Action_counter["suck_breasts"]:
                             call start_action(Player.focused_Girl, "suck_breasts")
                         "Your pussy?" if Player.focused_Girl.remaining_actions:
                             call start_action(Player.focused_Girl, "fondle_pussy")
-                        "Eat your pussy?" if Player.focused_Girl.remaining_actions and Player.focused_Girl.action_counter["eat_pussy"]:
+                        "Eat your pussy?" if Player.focused_Girl.remaining_actions and Player.focused_Girl.Action_counter["eat_pussy"]:
                             call start_action(Player.focused_Girl, "eat_pussy")
                         "Your ass?":
                             call start_action(Player.focused_Girl, "fondle_ass")
-                        "Eat your ass?" if Player.focused_Girl.remaining_actions and Player.focused_Girl.action_counter["eat_ass"]:
+                        "Eat your ass?" if Player.focused_Girl.remaining_actions and Player.focused_Girl.Action_counter["eat_ass"]:
                             call start_action(Player.focused_Girl, "eat_ass")
                         "Never mind [[something else]":
                             pass
@@ -406,9 +406,9 @@ label kiss_menu(Girl):
                 "Shift primary action":
                     if Girl.remaining_actions and multi_action:
                         menu:
-                            "Move a hand to her thighs. . ." if Girl.action_counter["kiss"] >= 1:
+                            "Move a hand to her thighs. . ." if Girl.Action_counter["kiss"] >= 1:
                                 return ["fondle_thighs", "auto"]
-                            "Move a hand to her breasts. . ." if Girl.action_counter["kiss"] >= 1:
+                            "Move a hand to her breasts. . ." if Girl.Action_counter["kiss"] >= 1:
                                 return ["fondle_breasts", "auto"]
                             "Never mind":
                                 pass
@@ -438,7 +438,7 @@ label kiss_menu(Girl):
                     call Girl_Cleanup(Girl, "ask")
                 "Never mind":
                     pass
-        "Back to Sex Menu" if multi_action and Girl.action_counter["kiss"] >= 5:
+        "Back to Sex Menu" if multi_action and Girl.Action_counter["kiss"] >= 5:
             ch_p "Let's try something else."
 
             return [None, "switch"]
@@ -538,7 +538,7 @@ label fondle_menu(Girl, action):
         "Keep going. . .":
             pass
         "I want to stick a finger in. . ." if action == "fondle_pussy":
-            if Girl.action_counter["finger_pussy"]:
+            if Girl.Action_counter["finger_pussy"]:
                 return ["finger_pussy", "auto"]
             else:
                 menu:
@@ -710,9 +710,9 @@ label handjob_menu(Girl, action):
         "Suck on it. (locked)" if action == "blowjob" and action_speed == 3:
             pass
         "Take it deeper." if action == "blowjob" and action_speed != 4:
-            if "pushed" not in Girl.recent_history and Girl.action_counter["blowjob"] < 5:
-                call change_Girl_stat(Girl, "love", 80, -(20 - 2*Girl.action_counter["blowjob"]))
-                call change_Girl_stat(Girl, "obedience", 80, 30 - 3*Girl.action_counter["blowjob"])
+            if "pushed" not in Girl.recent_history and Girl.Action_counter["blowjob"] < 5:
+                call change_Girl_stat(Girl, "love", 80, -(20 - 2*Girl.Action_counter["blowjob"]))
+                call change_Girl_stat(Girl, "obedience", 80, 30 - 3*Girl.Action_counter["blowjob"])
                 $ Girl.recent_history.append("pushed")
 
             if Player.secondary_action == "jerking_off" and action_speed != 3:
@@ -729,9 +729,9 @@ label handjob_menu(Girl, action):
 
             $ D20 = renpy.random.randint(1, 20)
 
-            if Girl.action_counter["blowjob"] < 5:
+            if Girl.Action_counter["blowjob"] < 5:
                 $ D20 -= 10
-            elif Girl.action_counter["blowjob"] < 10:
+            elif Girl.Action_counter["blowjob"] < 10:
                 $ D20 -= 5
 
             if D20 > 15:
@@ -1380,7 +1380,7 @@ label try_something_else_menu(Girl, action):
             if action != "anal":
                 return ["blowjob", "shift"]
             else:
-                if Girl.action_counter["anal"] >= 5 and Girl.action_counter["blowjob"] >= 10 and Girl.SEXP >= 50:
+                if Girl.Action_counter["anal"] >= 5 and Girl.Action_counter["blowjob"] >= 10 and Girl.SEXP >= 50:
                     return ["blowjob", "shift"]
                 else:
                     call no_ass_to_mouth_lines(Girl, action)

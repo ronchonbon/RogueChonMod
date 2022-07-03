@@ -56,7 +56,7 @@ label Jean_Relationship:
                     call Harem_Initiation
                     "[JeanX.name] floats in and kisses you deeply."
                     $ JeanX.change_face("kiss", 1)
-                    $ JeanX.action_counter["kiss"] += 1
+                    $ JeanX.Action_counter["kiss"] += 1
                 elif JeanX.obedience >= 500:
                     $ JeanX.change_face("perplexed")
                     ch_j "\"Dating\". . . I mean. . ."
@@ -105,7 +105,7 @@ label Jean_Relationship:
                     call Harem_Initiation
                     "[JeanX.name] floats in and kisses you."
                     $ JeanX.change_face("kiss", 1)
-                    $ JeanX.action_counter["kiss"] += 1
+                    $ JeanX.Action_counter["kiss"] += 1
                 elif JeanX.love >= 600 and approval_check(JeanX, 1500):
                     $ JeanX.change_face("smile", 1)
                     call change_Girl_stat(JeanX, "love", 90, 5)
@@ -120,7 +120,7 @@ label Jean_Relationship:
                     $ JeanX.change_face("kiss", 1)
                     "[JeanX.name] gives you a quick kiss."
                     $ JeanX.change_face("sly", 1)
-                    $ JeanX.action_counter["kiss"] += 1
+                    $ JeanX.Action_counter["kiss"] += 1
                 elif JeanX.obedience >= 500:
                     $ JeanX.change_face("sad")
                     ch_j "That's not really where we're at."
@@ -583,9 +583,9 @@ label Jean_SexChat:
                                 call change_Girl_stat(JeanX, "love", 90, 5)
                                 call change_Girl_stat(JeanX, "lust", 80, 10)
                                 ch_j "I really like it too!"
-                            elif JeanX.action_counter["sex"] >= 5:
+                            elif JeanX.Action_counter["sex"] >= 5:
                                 ch_j "Well I don't mind that."
-                            elif not JeanX.action_counter["sex"]:
+                            elif not JeanX.Action_counter["sex"]:
                                 $ JeanX.change_face("perplexed")
                                 ch_j "Oh? Who with?"
                             else:
@@ -602,9 +602,9 @@ label Jean_SexChat:
                                 call change_Girl_stat(JeanX, "love", 90, 5)
                                 call change_Girl_stat(JeanX, "lust", 80, 10)
                                 ch_j "I love it too!"
-                            elif JeanX.action_counter["anal"] >= 10:
+                            elif JeanX.Action_counter["anal"] >= 10:
                                 ch_j "Yeah, it's. . . nice. . ."
-                            elif not JeanX.action_counter["anal"]:
+                            elif not JeanX.Action_counter["anal"]:
                                 $ JeanX.change_face("perplexed")
                                 ch_j "Oh? Who with?"
                             else:
@@ -621,9 +621,9 @@ label Jean_SexChat:
                                 call change_Girl_stat(JeanX, "love", 90, 5)
                                 call change_Girl_stat(JeanX, "lust", 80, 5)
                                 ch_j "I can't say I hate it either. . ."
-                            elif JeanX.action_counter["blowjob"] >= 10:
+                            elif JeanX.Action_counter["blowjob"] >= 10:
                                 ch_j "Yeah, you're surprisingly tasty."
-                            elif not JeanX.action_counter["blowjob"]:
+                            elif not JeanX.Action_counter["blowjob"]:
                                 $ JeanX.change_face("perplexed")
                                 ch_j "Oh? Who with?"
                             else:
@@ -640,9 +640,9 @@ label Jean_SexChat:
                                 call change_Girl_stat(JeanX, "love", 90, 5)
                                 call change_Girl_stat(JeanX, "lust", 80, 7)
                                 ch_j "Yeah, I enjoy that too. . ."
-                            elif JeanX.action_counter["titjob"] >= 10:
+                            elif JeanX.Action_counter["titjob"] >= 10:
                                 ch_j "Nice, right?"
-                            elif not JeanX.action_counter["titjob"]:
+                            elif not JeanX.Action_counter["titjob"]:
                                 $ JeanX.change_face("perplexed")
                                 ch_j "Oh? Who with?"
                             else:
@@ -661,9 +661,9 @@ label Jean_SexChat:
                                 call change_Girl_stat(JeanX, "love", 90, 5)
                                 call change_Girl_stat(JeanX, "lust", 80, 7)
                                 ch_j "I do like using my feet. . ."
-                            elif JeanX.action_counter["footjob"] >= 10:
+                            elif JeanX.Action_counter["footjob"] >= 10:
                                 ch_j "I like it too . . ."
-                            elif not JeanX.action_counter["footjob"]:
+                            elif not JeanX.Action_counter["footjob"]:
                                 $ JeanX.change_face("perplexed")
                                 ch_j "Oh? Who with?"
                             else:
@@ -680,9 +680,9 @@ label Jean_SexChat:
                                 call change_Girl_stat(JeanX, "love", 90, 5)
                                 call change_Girl_stat(JeanX, "lust", 80, 7)
                                 ch_j "I do have quite the touch. . ."
-                            elif JeanX.action_counter["handjob"] >= 10:
+                            elif JeanX.Action_counter["handjob"] >= 10:
                                 ch_j "I like it too . . ."
-                            elif not JeanX.action_counter["handjob"]:
+                            elif not JeanX.Action_counter["handjob"]:
                                 $ JeanX.change_face("perplexed")
                                 ch_j "Oh? Who with?"
                             else:
@@ -691,7 +691,7 @@ label Jean_SexChat:
                             $ JeanX.player_favorite_action = "handjob"
                         "Feeling you up.":
 
-                            $ counter = JeanX.action_counter["fondle_breasts"]+ JeanX.action_counter["fondle_thighs"]+ JeanX.action_counter["suck_breasts"] + JeanX.action_counter["hotdog"]
+                            $ counter = JeanX.Action_counter["fondle_breasts"]+ JeanX.Action_counter["fondle_thighs"]+ JeanX.Action_counter["suck_breasts"] + JeanX.Action_counter["hotdog"]
                             $ JeanX.change_face("sly")
                             if JeanX.player_favorite_action == "fondle":
                                 call change_Girl_stat(JeanX, "lust", 80, 3)
@@ -720,9 +720,9 @@ label Jean_SexChat:
                                 call change_Girl_stat(JeanX, "love", 90, 5)
                                 call change_Girl_stat(JeanX, "lust", 80, 5)
                                 ch_j "I. . . do too, ok? . ."
-                            elif JeanX.action_counter["kiss"] >= 10:
+                            elif JeanX.Action_counter["kiss"] >= 10:
                                 ch_j "Yeah, it's fun . . ."
-                            elif not JeanX.action_counter["kiss"]:
+                            elif not JeanX.Action_counter["kiss"]:
                                 $ JeanX.change_face("perplexed")
                                 ch_j "Oh? Who with?"
                             else:
@@ -1038,7 +1038,7 @@ label Jean_Chitchat(O=0, Options = ["default", "default", "default"]):
 
 
 
-        if JeanX.action_counter["kiss"] >= 5:
+        if JeanX.Action_counter["kiss"] >= 5:
 
             $ Options.append("kissed")
         if "dangerroom" in Player.daily_history:
@@ -1058,7 +1058,7 @@ label Jean_Chitchat(O=0, Options = ["default", "default", "default"]):
 
             if "lingerie" not in JeanX.had_chat:
                 $ Options.append("lingerie")
-        if JeanX.action_counter["handjob"]:
+        if JeanX.Action_counter["handjob"]:
 
             $ Options.append("handy")
         if JeanX.event_counter["swallowed"]:
@@ -1073,10 +1073,10 @@ label Jean_Chitchat(O=0, Options = ["default", "default", "default"]):
         if JeanX.event_counter["creampied"] or JeanX.event_counter["anal_creampied"]:
 
             $ Options.append("creampie")
-        if JeanX.action_counter["sex"] or JeanX.action_counter["anal"]:
+        if JeanX.Action_counter["sex"] or JeanX.Action_counter["anal"]:
 
             $ Options.append("sexed")
-        if JeanX.action_counter["anal"]:
+        if JeanX.Action_counter["anal"]:
 
             $ Options.append("anal")
 
@@ -1221,7 +1221,7 @@ label Jean_Chitchat(O=0, Options = ["default", "default", "default"]):
 
     elif Options[0] == "fondled":
 
-        if JeanX.action_counter["fondle_breasts"]+ JeanX.action_counter["fondle_pussy"] + JeanX.action_counter["fondle_ass"] >= 15:
+        if JeanX.Action_counter["fondle_breasts"]+ JeanX.Action_counter["fondle_pussy"] + JeanX.Action_counter["fondle_ass"] >= 15:
             ch_j "Hey, give me a nice, hard, rubdown. . ."
         else:
             ch_j "Hey, gimme another massage. . . "
@@ -1779,7 +1779,7 @@ label Jean_Summon(approval_bonus=approval_bonus):
         $ approval_bonus = -10
     elif JeanX.location == "bg_jean":
         $ approval_bonus = -10
-    elif JeanX.location == "bg_showerroom":
+    elif JeanX.location == "bg_shower":
         $ approval_bonus = -30
 
     if D20 <= 3:
@@ -1834,7 +1834,7 @@ label Jean_Summon(approval_bonus=approval_bonus):
             ch_j "I'm in my room, [JeanX.player_petname]."
         elif JeanX.location == "bg_player":
             ch_j "I'm in your room, [JeanX.player_petname], where are you?"
-        elif JeanX.location == "bg_showerroom":
+        elif JeanX.location == "bg_shower":
             if approval_check(JeanX, 1600):
                 ch_j "I'm in the shower right now."
             else:
@@ -1987,7 +1987,7 @@ label Jean_Summon(approval_bonus=approval_bonus):
         elif JeanX.location == "bg_player":
             ch_j "Don't keep me waiting."
             jump player_room
-        elif JeanX.location == "bg_showerroom":
+        elif JeanX.location == "bg_shower":
             ch_j "I'll see you then."
             jump shower_room
         elif JeanX.location == "bg_campus":
@@ -2037,7 +2037,7 @@ label Jean_Leave:
             ch_j "I'm hanging out in your room for a bit."
         elif JeanX.location == "bg_pool":
             ch_j "I going to hit the pool."
-        elif JeanX.location == "bg_showerroom":
+        elif JeanX.location == "bg_shower":
             if approval_check(JeanX, 1400):
                 ch_j "I'm hitting the showers."
             else:
@@ -2055,7 +2055,7 @@ label Jean_Leave:
 
     if JeanX.location == "bg_classroom":
         $ approval_bonus = 10
-    elif JeanX.location == "bg_showerroom":
+    elif JeanX.location == "bg_shower":
         $ approval_bonus = 40
     else:
         $ approval_bonus = 0
@@ -2070,7 +2070,7 @@ label Jean_Leave:
         ch_j "I'm headed back to my room."
     elif JeanX.location == "bg_player":
         ch_j "I'm going to hang out in your room for a bit."
-    elif JeanX.location == "bg_showerroom":
+    elif JeanX.location == "bg_shower":
         if approval_check(JeanX, 1600):
             ch_j "I'm hitting the showers."
         else:
@@ -2184,7 +2184,7 @@ label Jean_Leave:
             ch_j "Ok."
         elif JeanX.location == "bg_player":
             ch_j "Good."
-        elif JeanX.location == "bg_showerroom":
+        elif JeanX.location == "bg_shower":
             ch_j "Ok, nice."
         elif JeanX.location == "bg_campus":
             ch_j "Ok."
@@ -2207,7 +2207,7 @@ label Jean_Leave:
             jump classroom
         elif destination == "bg_dangerroom":
             jump danger_room
-        elif destination == "bg_showerroom":
+        elif destination == "bg_shower":
             jump shower_room
         elif destination == "bg_pool":
             jump pool

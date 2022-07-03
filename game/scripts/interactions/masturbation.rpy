@@ -24,7 +24,7 @@ label masturbate(Girl, context = None):
                         call change_Girl_stat(Girl, "obedience", 70, 2)
                         call change_Girl_stat(Girl, "inhibition", 70, 1)
 
-                        $ Girl.action_counter["masturbation"] += 1
+                        $ Girl.Action_counter["masturbation"] += 1
 
                         call start_action(Girl, "fondle_breasts", "auto")
 
@@ -41,7 +41,7 @@ label masturbate(Girl, context = None):
 
                         $ D20 = renpy.random.randint(1, 20)
 
-                        $ Girl.action_counter["masturbation"] += 1
+                        $ Girl.Action_counter["masturbation"] += 1
 
                         if D20 > 10:
                             call start_action(Girl, "fondle_breasts", "auto")
@@ -113,10 +113,10 @@ label masturbate(Girl, context = None):
                 return "stop"
 
         if not accepted:
-            if not Girl.action_counter["masturbation"] and "no_masturbation" not in Girl.recent_history:
+            if not Girl.Action_counter["masturbation"] and "no_masturbation" not in Girl.recent_history:
                 call first_time_asking_reactions(Girl, "masturbation")
 
-            if not Girl.action_counter["masturbation"] and approval:
+            if not Girl.Action_counter["masturbation"] and approval:
                 call first_action_approval(Girl, "masturbation")
             elif approval:
                 call action_approved(Girl, "masturbation")
@@ -175,7 +175,7 @@ label before_masturbation(Girl):
 
         "[Girl.name] lays back and starts to toy with herself."
 
-        if not Girl.action_counter["masturbation"]:
+        if not Girl.Action_counter["masturbation"]:
             if Girl.forced:
                 call change_Girl_stat(Girl, "love", 90, -20)
                 call change_Girl_stat(Girl, "obedience", 70, 45)
@@ -379,7 +379,7 @@ label after_masturbation(Girl, context):
                     call change_Girl_stat(Girl, "obedience", 70, 2)
 
         $ Girl.drain_word("unseen", 1, 0)
-        $ Girl.action_counter["masturbation"] += 1
+        $ Girl.Action_counter["masturbation"] += 1
 
         if round <= 10:
             call too_late_to_masturbate_lines(Girl, "masturbation")
@@ -389,7 +389,7 @@ label after_masturbation(Girl, context):
         return "join"
     else:
         $ Girl.remaining_actions -= 1
-        $ Girl.action_counter["masturbation"] += 1
+        $ Girl.Action_counter["masturbation"] += 1
 
         if Partner == EmmaX:
             call Partner_Like(Girl, 4)
