@@ -456,33 +456,7 @@ image Alt_Screen_Mask:
 
 screen status_screen:
     default tt = Tooltip(" ")
-
-    if Partner in all_Girls:
-        frame:
-            background None
-            pos (0.0, 0.3)
-
-            add AlphaMask("images/BarBackdrop_" + Partner.tag + ".png", "Alt_Screen_Mask")
-
-            frame:
-                style_group "stat_bar"
-                pos (0.0, 0.2)
-                background None
-                has vbox
-
-                hbox:
-                    imagebutton idle "images/iconlust.png" hover "images/iconlust.png" action NullAction() hovered tt.Action("Lust: [Partner.lust]")
-                    bar range 100 value Partner.lust xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
-
-                    imagebutton idle "images/iconlove.png" hover "images/iconlove.png" action NullAction() hovered tt.Action("Love: [Partner.love]")
-                    bar range 100 value (Partner.love/10) xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
-
-                    imagebutton idle "images/iconobed.png" hover "images/iconobed.png" action NullAction() hovered tt.Action("Obedience: [Partner.obedience]")
-                    bar range 100 value (Partner.obedience/10) xmaximum 200 ymaximum 40 left_bar "images/barfullO.png" right_bar "images/barempty.png"
-
-                    imagebutton idle "images/iconinbt.png" hover "images/iconinbt.png" action NullAction() hovered tt.Action("Inhibitions: [Partner.inhibition]")
-                    bar range 100 value (Partner.inhibition/10) xmaximum 200 ymaximum 40 left_bar "images/barfulli.png" right_bar "images/barempty.png"
-
+    
     add "images/BarBackdrop_" + Player.focused_Girl.tag + ".png"
     frame:
         style_group "stat_bar"
@@ -524,7 +498,7 @@ screen status_screen:
             imagebutton idle "images/iconaddictrate.png" hover "images/iconaddictrate.png" action NullAction() hovered tt.Action("Addiction Rate: [Player.focused_Girl.addiction_rate]")
             bar range 100 value (Player.focused_Girl.addiction_rate*10) xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
 
-    showif not Player.primary_action:
+    showif not Player.primary_Action:
         imagebutton auto "images/Button_" + Player.focused_Girl.tag + "_%s.png" action ShowTransient("Focus_Map") pos (0.71, 0.016) focus_mask True
 
     showif config.developer:

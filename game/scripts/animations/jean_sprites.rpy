@@ -17,16 +17,16 @@ layeredimage Jean_sprite standing:
     always:
         "images/Jean_standing/Jean_standing_breasts.png"
 
-    if JeanX.Clothes["body_piercings"]:
+    if JeanX.Clothes["body_piercings"].string:
         "images/Jean_standing/Jean_standing_body_piercings_breasts_[JeanX.Clothes[body_piercings].string].png"
 
-    if JeanX.Clothes["body_piercings"]:
+    if JeanX.Clothes["body_piercings"].string:
         "images/Jean_standing/Jean_standing_body_piercings_pussy_[JeanX.Clothes[body_piercings].string].png"
 
-    if JeanX.Clothes["underwear"]:
+    if JeanX.Clothes["underwear"].string:
         "images/Jean_standing/Jean_standing_underwear_[JeanX.Clothes[underwear].string]_[JeanX.Clothes[underwear.state].string].png"
 
-    if JeanX.Clothes["hose"]:
+    if JeanX.Clothes["hose"].string:
         "images/Jean_standing/Jean_standing_hose_[JeanX.Clothes[hose].string].png"
 
     if JeanX.grool and not JeanX.Outfit.pussy_covered:
@@ -35,29 +35,29 @@ layeredimage Jean_sprite standing:
     if JeanX.spunk["pussy"] or JeanX.spunk["anus"]:
         "images/Jean_standing/Jean_standing_spunk_pussy.png"
 
-    if JeanX.Clothes["pants"]:
+    if JeanX.Clothes["pants"].string:
         "images/Jean_standing/Jean_standing_pants_[JeanX.Clothes[pants].string]_[JeanX.Clothes[pants].state].png"
 
-    if JeanX.Clothes["skirt"]:
+    if JeanX.Clothes["skirt"].string:
         "images/Jean_standing/Jean_standing_skirt_[JeanX.Clothes[skirt].string]_[JeanX.Clothes[skirt].state].png"
 
     always:
         "images/Jean_standing/Jean_standing_arm[JeanX.arm_pose]_left.png"
 
-    if JeanX.Clothes["bra"]:
+    if JeanX.Clothes["bra"].string:
         "images/Jean_standing/Jean_standing_bra[JeanX.arm_pose]_[JeanX.Clothes[bra].string]_[JeanX.Clothes[bra].state].png"
 
-    if JeanX.Clothes["top"]:
+    if JeanX.Clothes["top"].string:
         "images/Jean_standing/Jean_standing_top[JeanX.arm_pose]_[JeanX.Clothes[top].string]_[JeanX.Clothes[top].state].png"
 
     always:
         "Jean_head" pos (0.32, 0.27) zoom 0.32
 
-    if JeanX.Clothes["body_piercings"] and JeanX.Outfit.pussy_covered:
+    if JeanX.Clothes["body_piercings"].string and JeanX.Outfit.pussy_covered:
         "images/Jean_standing/Jean_standing_body_piercings_pussy[JeanX.Clothes[body_piercings].string]_covered.png"
 
-    if JeanX.Clothes["body_piercings"] and JeanX.Outfit.breasts_covered:
-        "images/Jean_standing/Jean_standing_body_piercings_breasts[JeanX.Clothes[body_piercings].string]_covered.png"
+    if JeanX.Clothes["body_piercings"].string and JeanX.Outfit.breasts_covered:
+        "images/Jean_standing/Jean_standing_body_piercings_breasts_[JeanX.Clothes[body_piercings].string]_covered.png"
 
     always:
         "images/Jean_standing/Jean_standing_hand[JeanX.arm_pose]_right.png"
@@ -71,7 +71,7 @@ layeredimage Jean_sprite standing:
     if JeanX.Clothes["top"].string == "pink_shirt" and not renpy.showing("Jean_sprite handjob") and JeanX.arm_pose == 1:
         "images/Jean_standing/Jean_standing_top[JeanX.arm_pose]_[JeanX.Clothes[top].string]_sleeves.png"
 
-    if JeanX.Clothes["suspenders"]:
+    if JeanX.Clothes["suspenders"].string:
         "images/Jean_standing/Jean_standing_suspenders_[JeanX.Clothes[suspenders].string]_[JeanX.Clothes[suspenders].state].png"
 
     if JeanX.spunk["breasts"]:
@@ -214,24 +214,24 @@ layeredimage Jean_blowjob_head:
     always:
         "images/Jean_blowjob/Jean_blowjob_head[JeanX.blushing].png"
 
-    if renpy.showing("Jean_sprite titjob") and action_speed > 2:
+    if renpy.showing("Jean_sprite titjob") and JeanX.primary_Action.speed > 2:
         "images/Jean_blowjob/Jean_blowjob_mouth_tongue.png"
-    elif renpy.showing("Jean_sprite blowjob") and action_speed == 1:
+    elif renpy.showing("Jean_sprite blowjob") and JeanX.primary_Action.speed == 1:
         "images/Jean_blowjob/Jean_blowjob_mouth_tongue.png"
-    elif renpy.showing("Jean_sprite blowjob") and action_speed == 2:
+    elif renpy.showing("Jean_sprite blowjob") and JeanX.primary_Action.speed == 2:
         "Jean_blowjob_mouth_animations"
-    elif renpy.showing("Jean_sprite blowjob") and action_speed > 2:
+    elif renpy.showing("Jean_sprite blowjob") and JeanX.primary_Action.speed > 2:
         "images/Jean_blowjob/Jean_blowjob_mouth_sucking.png"
     else:
         "images/Jean_blowjob/Jean_blowjob_mouth_[JeanX.mouth].png"
 
     if not JeanX.spunk["mouth"]:
         Null()
-    elif renpy.showing("Jean_sprite titjob") and action_speed > 2:
+    elif renpy.showing("Jean_sprite titjob") and JeanX.primary_Action.speed > 2:
         "images/Jean_blowjob/Jean_blowjob_spunk_mouth_tongue.png"
-    elif renpy.showing("Jean_sprite blowjob") and action_speed == 1:
+    elif renpy.showing("Jean_sprite blowjob") and JeanX.primary_Action.speed == 1:
         "images/Jean_blowjob/Jean_blowjob_spunk_mouth_tongue.png"
-    elif renpy.showing("Jean_sprite blowjob") and action_speed > 2:
+    elif renpy.showing("Jean_sprite blowjob") and JeanX.primary_Action.speed > 2:
         "images/Jean_blowjob/Jean_blowjob_spunk_mouth_sucking_under.png"
     elif JeanX.mouth == "sucking":
         "images/Jean_blowjob/Jean_blowjob_spunk_mouth_sucking_under.png"

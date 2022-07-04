@@ -1,4 +1,4 @@
-label out_of_action_lines(Girl):
+label out_of_Actions_lines(Girl):
     if Girl == RogueX:
         $ lines = ["Sorry, " + Girl.player_petname + " but I'm a bit worn out.",
             "I'm a bit worn out right now, " + Girl.player_petname + " maybe later."]
@@ -399,7 +399,7 @@ label sex_menu_cleanup_lines(Girl):
 
     return
 
-label end_of_action_lines(Girl, action):
+label end_of_action_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Ok, " + Girl.player_petname + " that's enough of that for now."]
     elif Girl == KittyX:
@@ -407,7 +407,7 @@ label end_of_action_lines(Girl, action):
             "Ok, we need to take a break.",
             "Ok, I'm kinda done for now, I need a break."]
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("Ok, I gotta rest my jaw for a minute. . .")
     elif Girl == EmmaX:
         $ lines = ["We need to stop for a moment, let me catch my breath.",
@@ -416,16 +416,16 @@ label end_of_action_lines(Girl, action):
             "That's probably enough of that.",
             "Ok, that's enough, for now. . ."]
 
-        if action in cock_actions:
+        if Action_type in cock_Action_types:
             $ lines.append("Ok, seriously, I'm putting it down for a minute.")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("Ok, I need to rest my jaw for a minute. . .")
     elif Girl == LauraX:
         $ lines = ["Ok, " + Girl.player_petname + " breaktime.",
             "Ok, I'm kinda done for now, I need a break."]
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("Ok, I'm taking a quick break. . .")
     elif Girl == JeanX:
         $ lines = ["Ok, " + Girl.player_petname + " time for a break.",
@@ -441,7 +441,7 @@ label end_of_action_lines(Girl, action):
 
     return
 
-label ten_rounds_left_lines(Girl, action):
+label ten_rounds_left_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["You might want to wrap this up, it's getting late."]
     elif Girl == KittyX:
@@ -453,11 +453,11 @@ label ten_rounds_left_lines(Girl, action):
             "It's about time for a break.",
             "It's getting a bit late. . ."]
 
-        if actions in active_actions:
+        if Action_type in active_Action_types:
             $ lines.append("You might want to wrap this up, it's getting late.")
             $ lines.append("You might want to think about your endgame here. . .")
 
-        if actions in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I think I'll probably take a break soon.")
     elif Girl == LauraX:
         $ lines = ["It's getting late, we should wrap this up.",
@@ -468,10 +468,10 @@ label ten_rounds_left_lines(Girl, action):
     elif Girl == StormX:
         $ lines = ["It is getting late, " + Girl.player_petname + "_. . ."]
 
-        if actions in active_actions:
+        if Action_type in active_Action_types:
             $ lines.append("You might want to consider finishing. . .")
 
-        if actions in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I will probably take a break soon.")
     elif Girl == JubesX:
         $ lines = ["I could use a break soon. . .",
@@ -483,7 +483,7 @@ label ten_rounds_left_lines(Girl, action):
 
     return
 
-label five_rounds_left_lines(Girl, action):
+label five_rounds_left_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Seriously, it'll be time to stop soon."]
     elif Girl == KittyX:
@@ -496,12 +496,12 @@ label five_rounds_left_lines(Girl, action):
             "Do you mind if we take a break?",
             "We'll need a break soon."]
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("Ung, I'm almost finished. . .")
     elif Girl == LauraX:
         $ lines = ["Tick tock, " + Girl.player_petname + "_."]
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("Five minutes, maybe.")
     elif Girl == JeanX:
         $ lines = ["We should probably wrap this up, " + Girl.player_petname + "_.",
@@ -510,12 +510,12 @@ label five_rounds_left_lines(Girl, action):
         $ lines = ["We should take a break soon.",
             "We shall require a break soon."]
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("Ah! I am nearly finished. . .")
     elif Girl == JubesX:
         $ lines = [". . . I could really use a break here. . ."]
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("Five minutes, maybe.")
 
     $ line = renpy.random.choice(lines)
@@ -524,7 +524,7 @@ label five_rounds_left_lines(Girl, action):
 
     return
 
-label tired_lines(Girl, action):
+label tired_lines(Girl, Action_type):
     if Girl == RogueX:
         if not multi_action:
             $ lines = ["Look, I think we can stay on this one thing. . ."]
@@ -570,18 +570,18 @@ label tired_lines(Girl, action):
 
     return
 
-label auto_rejected_lines(Girl, action):
+label auto_rejected_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Ah, ah, Just keep doing what you were doing, " + Girl.player_petname + "_.",
             "Hey, just keep doing what you were doing, " + Girl.player_petname + "_.",
             "Oh! No, no thank you, " + Girl.player_petname + "_.",
             "Um, no, I'm not really. . . don't."]
 
-        if action in hand_actions:
+        if Action_type in hand_Action_types:
             $ lines.append("Hands off the merchandise, " + Girl.player_petname + "_.")
             $ lines.append("Hands off, " + Girl.player_petname + "_.")
 
-        if action in finger_actions:
+        if Action_type in finger_Action_types:
             $ lines.append("Keep it out of there, " + Girl.player_petname + "_.")
             $ lines.append("Keep it outside, " + Girl.player_petname + "_.")
     elif Girl == KittyX:
@@ -592,73 +592,73 @@ label auto_rejected_lines(Girl, action):
             "Um, what do you think you're doing?",
             "Hmm, kinda rude, " + Girl.player_petname + "_."]
 
-        if action in hand_actions:
+        if Action_type in hand_Action_types:
             $ lines.append("Hands off, " + Girl.player_petname + "_.")
 
-        if action in ass_actions:
+        if Action_type in ass_Action_types:
             $ lines.append("Um" + Girl.like + "_what are you doing back there?!")
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Hey, what are you planning to do with that?!")
 
-        if action in below_actions:
+        if Action_type in below_Action_types:
             $ lines.append("Heh, keep it above the belt, " + Girl.player_petname + "_.")
 
-        if action in insertion_actions:
+        if Action_type in insertion_Action_types:
             $ lines.append("Um, no take that out.")
     elif Girl == EmmaX:
         $ lines = ["Whoa, back off, " + Girl.player_petname + "_.",
             "" + Girl.player_petname + "_! Not now. . .",
             "Do you really think you can handle that?"]
 
-        if action in hand_actions:
+        if Action_type in hand_Action_types:
             $ lines.append("Hands off, " + Girl.player_petname + "_.")
 
-        if action in finger_actions:
+        if Action_type in finger_Action_types:
             $ lines.append("Careful what you put in there, you may not get it back.")
 
-        if action in mouth_actions:
+        if Action_type in mouth_Action_types:
             $ lines.append("I like where your head is at, so to speak, but perhaps hold off on that.")
 
-        if action in ass_actions:
+        if Action_type in ass_Action_types:
             $ lines.append("Oh? What exactly are you doing back there?")
 
-        if action in fondle_actions:
+        if Action_type in fondle_Action_types:
             $ lines.append("Down boy, you were doing so well. . .")
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Excuse yourself, what are you planning to do with that?!")
 
-        if action in below_actions:
+        if Action_type in below_Action_types:
             $ lines.append("Perhaps we keep it above the waist, " + Girl.player_petname + "_.")
 
-        if action == "hotdog":
+        if Action_type == "hotdog":
             $ lines.append("You might want to take a step back, " + Girl.player_petname + "_?")
     elif Girl == LauraX:
         $ lines = ["Roll it back, " + Girl.player_petname + "_. . .",
             "Whoa, back off, " + Girl.player_petname + "_.",
             "" + Girl.player_petname + "_! No. . ."]
 
-        if action in hand_actions:
+        if Action_type in hand_Action_types:
             $ lines.append("Watch your hands, or lose them.")
             $ lines.append("Hands off, " + Girl.player_petname + "_.")
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Hey, what are you planning to do with that?!")
 
-        if action in below_actions:
+        if Action_type in below_Action_types:
             $ lines.append("Maybe we keep it above the waist, " + Girl.player_petname + "_.")
 
-        if action in anal_insertion_actions:
+        if Action_type in anal_insertion_Action_types:
             $ lines.append("Oh? A backdoor intruder?")
 
-        if action == "eat_pussy":
+        if Action_type == "eat_pussy":
             $ lines.append("Hey, good instincts, but maybe hold off?")
 
-        if action == "sex":
+        if Action_type == "sex":
             $ lines.append("Oh, taking it all the way, are we?")
 
-        if action == "hotdog":
+        if Action_type == "hotdog":
             $ lines.append("You might want to take a step back, " + Girl.player_petname + "_?")
     elif Girl == JeanX:
         $ lines = ["Not so fast, " + Girl.player_petname + "_. . .",
@@ -666,19 +666,19 @@ label auto_rejected_lines(Girl, action):
             "Ooo! Not right now, " + Girl.player_petname + "_.",
             "Whoa there, " + Girl.player_petname + "_!"]
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Hey, what are you planning to do with that?!")
 
-        if action in below_actions:
+        if Action_type in below_Action_types:
             $ lines.append("Keep it above the waist, " + Girl.player_petname + "_.")
 
-        if action in insertion_actions:
+        if Action_type in insertion_Action_types:
             $ lines.append("Just sticking it in?")
 
-        if action in anal_insertion_actions:
+        if Action_type in anal_insertion_Action_types:
             $ lines.append("Sticking in the back?")
 
-        if action == "hotdog":
+        if Action_type == "hotdog":
             $ lines.append("Little close there, " + Girl.player_petname + "_?")
     elif Girl == StormX:
         $ lines = ["Probably not, right now. . .",
@@ -688,42 +688,42 @@ label auto_rejected_lines(Girl, action):
             "" + Girl.player_petname + "_! Not now. . .",
             "Are you certain that is what you want?"]
 
-        if action in finger_actions:
+        if Action_type in finger_Action_types:
             $ lines.append("Careful what you put in there, you may not get it back.")
 
-        if action in hand_actions:
+        if Action_type in hand_Action_types:
             $ lines.append("Release me, " + Girl.player_petname + "_.")
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Excuse yourself, what are you planning to do with that?!")
 
-        if action in anal_insertion_actions:
+        if Action_type in anal_insertion_Action_types:
             $ lines.append("Excuse me, what are you aiming at?")
 
-        if action in below_actions:
+        if Action_type in below_Action_types:
             $ lines.append("Perhaps we keep it above the waist, " + Girl.player_petname + "_.")
 
-        if action == "eat_pussy":
+        if Action_type == "eat_pussy":
             $ lines.append("I appreciate the intent, but this is not the time for it.")
 
-        if action == "hotdog":
+        if Action_type == "hotdog":
             $ lines.append("You are rather close, " + Girl.player_petname + "_. . .")
     elif Girl == JubesX:
         $ lines = ["Cool your jets, " + Girl.player_petname + "_. . .",
             "Whoa, back off, " + Girl.player_petname + "_.",
             "" + Girl.player_petname + "_! No. . ."]
 
-        if action in hand_actions:
+        if Action_type in hand_Action_types:
             $ lines.append("Watch your hands, or lose them.")
             $ lines.append("Hands off, " + Girl.player_petname + "_.")
 
-        if action in below_actions:
+        if Action_type in below_Action_types:
             $ lines.append("Maybe we keep it above the waist, " + Girl.player_petname + "_.")
 
-        if action == "eat_pussy":
+        if Action_type == "eat_pussy":
             $ lines.append("Hey, good instincts, but maybe hold off?")
 
-        if action == "sex":
+        if Action_type == "sex":
             $ lines.append("Oh, taking it all the way, are we?")
 
     $ line = renpy.random.choice(lines)
@@ -732,7 +732,7 @@ label auto_rejected_lines(Girl, action):
 
     return
 
-label private_enough_lines(Girl, action):
+label private_enough_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I guess this is private enough. . .",
             "Ok, I guess this is private enough. . .",
@@ -796,7 +796,7 @@ label private_enough_lines(Girl, action):
 
     return
 
-label recent_action_lines(Girl, action):
+label recent_action_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Mmm, again? Ok.",
             "Mmm, again? Ok, let's get to it.",
@@ -805,22 +805,22 @@ label recent_action_lines(Girl, action):
             "I guess I have a bit more in me. . .",
             "Again? K."]
 
-        if action == "handjob":
+        if Action_type == "handjob":
             $ lines.append("Mmm, again? Let me flex my hand a bit. . .")
 
-        if action == "footjob":
+        if Action_type == "footjob":
             $ lines.append("I don't want to wear them out. . .")
 
-        if action == "titjob":
+        if Action_type == "titjob":
             $ lines.append("Mmm, again? Ok, let me get the girls ready.")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("Mmm, again? [stretches her jaw]")
 
-        if action in sex_actions:
+        if Action_type in sex_Action_types:
             $ lines.append("You want to go again? Ok.")
 
-        if action in anal_insertion_actions:
+        if Action_type in anal_insertion_Action_types:
             $ lines.append("I think I'm warmed up. . .")
     if Girl == KittyX:
         $ lines = ["Mmm, again? Ok.",
@@ -830,19 +830,19 @@ label recent_action_lines(Girl, action):
             "Prrr. . .",
             "Mmm, again? Ok, let's get to it."]
 
-        if action == "handjob":
+        if Action_type == "handjob":
             $ lines.append("You're giving me carpal tunnel. . .")
 
-        if action == "footjob":
+        if Action_type == "footjob":
             $ lines.append("I'm getting foot cramps. . .")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("Mmm, again? [stretches her jaw]")
 
-        if action in sex_actions:
+        if Action_type in sex_Action_types:
             $ lines.append("Another round? {i}Fine.{/i}")
 
-        if action in anal_insertion_actions:
+        if Action_type in anal_insertion_Action_types:
             $ lines.append("I guess I'm warmed up. . .")
     if Girl == EmmaX:
         $ lines = ["Mmmm, again? I suppose. . .",
@@ -853,19 +853,19 @@ label recent_action_lines(Girl, action):
             "Mmmm. . .",
             "Alright."]
 
-        if action == "handjob":
+        if Action_type == "handjob":
             $ lines.append("I will need to grade papers later, you know. . .")
 
-        if action == "footjob":
+        if Action_type == "footjob":
             $ lines.append("You know, heels are nightmare on the arches. . .")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("Mmm, again? [yawns]")
 
-        if action in sex_actions:
+        if Action_type in sex_Action_types:
             $ lines.append("Again? " + Girl.player_petname + "_, you're insatiable!")
 
-        if action in anal_insertion_actions:
+        if Action_type in anal_insertion_Action_types:
             $ lines.append("I am warmed up. . .")
     if Girl == LauraX:
         $ lines = ["Mmmm, again? I guess. . .",
@@ -876,19 +876,19 @@ label recent_action_lines(Girl, action):
             "Mmmm. . .",
             "Again? Fine, whatever."]
 
-        if action == "handjob":
+        if Action_type == "handjob":
             $ lines.append("Hmm, another handy then. . .")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("Mmm, again? [yawns]")
 
-        if action in sex_actions:
+        if Action_type in sex_Action_types:
             $ lines.append("Again? Your funeral.")
 
-        if action in anal_insertion_actions:
+        if Action_type in anal_insertion_Action_types:
             $ lines.append("I am warmed up. . .")
 
-        if action in active_actions:
+        if Action_type in active_Action_types:
             $ lines.append("Sure, get in there.")
     if Girl == JeanX:
         $ lines = ["Mmmm, again? I guess. . .",
@@ -900,13 +900,13 @@ label recent_action_lines(Girl, action):
             "Ok, sure.",
             "Again? Fine, whatever."]
 
-        if action in job_actions:
+        if Action_type in job_Action_types:
             $ lines.append("Well, I guess another wouldn't hurt. . .")
 
-        if action in sex_actions:
+        if Action_type in sex_Action_types:
             $ lines.append("Again? Your funeral.")
 
-        if action in anal_insertion_actions:
+        if Action_type in anal_insertion_Action_types:
             $ lines.append("I am warmed up. . .")
     if Girl == StormX:
         $ lines = ["Mmmm, again? I suppose. . .",
@@ -919,19 +919,19 @@ label recent_action_lines(Girl, action):
             "Mmmm. . .",
             "Of course."]
 
-        if action in job_actions:
+        if Action_type in job_Action_types:
             $ lines.append("I do not know if I have it in me. . .")
 
-        if action in sex_actions:
+        if Action_type in sex_Action_types:
             $ lines.append("Again? " + Girl.player_petname + "_, you are a lion!")
 
-        if action in anal_insertion_actions:
+        if Action_type in anal_insertion_Action_types:
             $ lines.append("I am properly stretched out. . .")
     if Girl == JubesX:
         $ lines = ["Mmmm, again? I guess. . .",
             "I have built up some more stress. . ."]
 
-        if action == "handjob":
+        if Action_type == "handjob":
             $ lines.append("Hmm, another handy then. . .")
 
     $ line = renpy.random.choice(lines)
@@ -940,7 +940,7 @@ label recent_action_lines(Girl, action):
 
     return
 
-label taboo_action_rejected_lines(Girl, action):
+label taboo_action_rejected_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I really don't think this is the right place for that!",
             "" + Girl.player_petname + "_! Not in public!",
@@ -949,15 +949,15 @@ label taboo_action_rejected_lines(Girl, action):
             "Not here!",
             "I'd be a bit embarassed doing that here."]
 
-        if action in cock_actions:
+        if Action_type in cock_Action_types:
             $ lines.append("You really expect me to do that here? You realize how. . . exposed that would be?")
             $ lines.append("You really expect me to do that here?")
             $ lines.append("Even if I wanted to, it certainly wouldn't be here!")
 
-        if action in sex_actions:
+        if Action_type in sex_Action_types:
             $ lines.append("That you would even suggest such a thing in a place like this. . .")
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I can't do that here!")
     elif Girl == KittyX:
         $ lines = ["I don't like being so. . . exposed.",
@@ -971,13 +971,13 @@ label taboo_action_rejected_lines(Girl, action):
             "Not here, not anywhere near here.",
             "" + Girl.Like + "_not here though?"]
 
-        if action in cock_actions:
+        if Action_type in cock_Action_types:
             $ lines.append("You're being ridiculous. That? Here?!")
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("You really expect me to do that here? You realize how. . . exposed that would be?")
 
-        if action in sex_actions:
+        if Action_type in sex_Action_types:
             $ lines.append("I can't believe you'd even consider it around here!")
     elif Girl == EmmaX:
         $ lines = ["I can't be seen doing that with you.",
@@ -990,10 +990,10 @@ label taboo_action_rejected_lines(Girl, action):
             "How can you imagine this would be an appropriate location?",
             "This area is a bit too exposed for that sort of thing. . ."]
 
-        if action in cock_actions:
+        if Action_type in cock_Action_types:
             $ lines.append("Can you imagine the scandal? Here?")
 
-        if action == "anal":
+        if Action_type == "anal":
             if approval_check(EmmaX, 500, "I"):
                 $ lines.append("How can you imagine this would be an appropriate location?.{p}This place, I mean, not anal.{p}Anal can be nice, sometimes.")
             else:
@@ -1005,11 +1005,11 @@ label taboo_action_rejected_lines(Girl, action):
             "This is too exposed.",
             "This place is way too exposed."]
 
-        if action in cock_actions:
+        if Action_type in cock_Action_types:
             $ lines.append("You really expect me to do that here? This isn't exactly \"covert\".")
             $ lines.append("This area is a bit too exposed for that sort of thing. . .")
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I couldn't do that in public.")
     elif Girl == JeanX:
         $ lines = ["I'm. . . not comfortable. . . in public. . .",
@@ -1019,10 +1019,10 @@ label taboo_action_rejected_lines(Girl, action):
             "I'm just not comfortable with that right now. . .",
             "This area is a bit too exposed for that sort of thing. . ."]
 
-        if action in cock_actions:
+        if Action_type in cock_Action_types:
             $ lines.append("You really expect me to do that here?{p}You know I can't \"take care of that\" anymore. . .")
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I. . . couldn't do that in public. . .")
     elif Girl == StormX:
         $ lines = ["I should not be seen doing that.",
@@ -1032,18 +1032,18 @@ label taboo_action_rejected_lines(Girl, action):
             "This truly is not an appropriate place for that.",
             "This area is a bit too exposed for that sort of thing. . ."]
 
-        if action in cock_actions:
+        if Action_type in cock_Action_types:
             $ lines.append("I could not possibly do that here.")
 
-        if action in sex_actions:
+        if Action_type in sex_Action_types:
             $ lines.append("How could you imagine that this would be an appropriate location?")
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I cannot do that here.")
     elif Girl == JubesX:
         $ lines = ["I don't wanna make a scene."]
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I don't want to do this in public!")
 
     $ line = renpy.random.choice(lines)
@@ -1052,20 +1052,20 @@ label taboo_action_rejected_lines(Girl, action):
 
     return
 
-label taboo_lines(Girl, action):
+label taboo_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I told you not in public!",
             "I already told you this is too public!",
             "This is just way too exposed!",
             "I said not in public!"]
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I already told you that I wouldn't do that out here!")
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Stop swinging that thing around in public!")
 
-        if action == "hotdog":
+        if Action_type == "hotdog":
             $ lines.append("I told you that I didn't want you rubb'in up on me in public!")
     elif Girl == KittyX:
         $ lines = ["Not here!",
@@ -1075,10 +1075,10 @@ label taboo_lines(Girl, action):
             "I already told you this is too public!",
             "I{i}just{/i}" + Girl.like + "_told you, not in public!"]
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I already told you that I wouldn't do that out here!")
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Stop swinging that thing around in public!")
     elif Girl == EmmaX:
         $ lines = ["As I said, not here, " + Girl.player_petname + "_.",
@@ -1088,10 +1088,10 @@ label taboo_lines(Girl, action):
             "I already told you this is too public!",
             "I already told you. . . not in such an exposed location."]
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I already told you that I wouldn't do that out here!")
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Stop showing that thing around in public!")
     elif Girl == LauraX:
         $ lines = ["I told you, not here, " + Girl.player_petname + "_.",
@@ -1102,10 +1102,10 @@ label taboo_lines(Girl, action):
             "I already told you this is too public!",
             "I told you. . . this place is too exposed."]
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I already told you that I wouldn't do that out here!")
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Stop swinging that thing around in public!")
     elif Girl == JeanX:
         $ lines = ["I told you. . . not here, " + Girl.player_petname + "_.",
@@ -1116,7 +1116,7 @@ label taboo_lines(Girl, action):
             "I told you, I'm not comfortable with that. . .",
             "I'm not comfortable with that. . ."]
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Stop swinging that thing around in public!")
     elif Girl == StormX:
         $ lines = ["This area is too public, " + Girl.player_petname + "_.",
@@ -1128,10 +1128,10 @@ label taboo_lines(Girl, action):
             "I have already informed you, this is too public!",
             "I already informed you. . . not in such an exposed location."]
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I already told you that I wouldn't do that out here!")
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Stop showing that thing around in public!")
     elif Girl == JubesX:
         $ lines = ["I told you, not here, " + Girl.player_petname + "_.",
@@ -1143,7 +1143,7 @@ label taboo_lines(Girl, action):
 
     return
 
-label action_not_done_yet_lines(Girl, action):
+label action_not_done_yet_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I just don't think I'm ready yet, " + Girl.player_petname + "_. . .",
             "I. . . don't think that's. . .",
@@ -1158,19 +1158,19 @@ label action_not_done_yet_lines(Girl, action):
             "I'm just not into that, " + Girl.player_petname + "_. . .",
             "I. . . don't think that's. . ."]
 
-        if action in pussy_actions:
+        if Action_type in pussy_Action_types:
             $ lines.append("Um, not down there, " + Girl.player_petname + "_. . .")
 
-        if action in ass_actions:
+        if Action_type in ass_Action_types:
             $ lines.append("That's kinda naughty, " + Girl.player_petname + "_. . .")
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("I'm just not into toys, " + Girl.player_petname + "_. . .")
 
-        if action == "handjob":
+        if Action_type == "handjob":
             $ lines.append("I don't really want to touch it, " + Girl.player_petname + "_. . .")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("I don't think I'd like the taste, " + Girl.player_petname + "_. . .")
     elif Girl == KittyX:
         $ lines = ["I'm" + Girl.like + "_not ready for that, " + Girl.player_petname + "_. . .",
@@ -1182,22 +1182,22 @@ label action_not_done_yet_lines(Girl, action):
             "I don't know, " + Girl.player_petname + "_. . .",
             "That's kinda hot, " + Girl.player_petname + "_. . ."]
 
-        if action in pussy_actions:
+        if Action_type in pussy_Action_types:
             $ lines.append("Um, not down there, " + Girl.player_petname + "_. . .")
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("I'm just not into toys, " + Girl.player_petname + "_. . .")
 
-        if action in ["eat_pussy", "eat_ass"]:
+        if Action_type in ["eat_pussy", "eat_ass"]:
             $ lines.append("That's pretty intimate, " + Girl.player_petname + "_. . .")
 
-        if action in ["eat_ass", "dildo_ass", "anal"]:
+        if Action_type in ["eat_ass", "dildo_ass", "anal"]:
             $ lines.append("I don't know that I'm. . ." + Girl.like + "_that kind of girl?")
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("That's. . . private? You know?")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("I don't know about the taste, " + Girl.player_petname + "_. . .")
     elif Girl == EmmaX:
         $ lines = ["Let's work up to that, perhaps. . .",
@@ -1211,23 +1211,23 @@ label action_not_done_yet_lines(Girl, action):
             "I don't know that you're ready for that yet.",
             "Hmm, that could be amusing, " + Girl.player_petname + "_. . ."]
 
-        if action in breast_actions:
+        if Action_type in breast_Action_types:
             $ lines.append("I highly doubt you could handle them, " + Girl.player_petname + "_. . .")
 
-        if action in ass_actions:
+        if Action_type in ass_Action_types:
             $ lines.append("That's really not my usual style. . .")
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("I'm a bit past toys, " + Girl.player_petname + "_. . .")
             $ lines.append("I'm just not into toys, " + Girl.player_petname + "_. . .")
 
-        if action in sex_actions:
+        if Action_type in sex_Action_types:
             $ lines.append("I really doubt you understand what you're in for. . .")
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("I don't know that I want to perform.")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("I'm not sure you're up to my usual tastes, " + Girl.player_petname + "_. . .")
     elif Girl == LauraX:
         $ lines = ["Look, I don't know if we're ready for that, " + Girl.player_petname + "_. . .",
@@ -1240,17 +1240,17 @@ label action_not_done_yet_lines(Girl, action):
             "I don't know that I want to do that right now.",
             "Hmm, that could be amusing, " + Girl.player_petname + "_. . ."]
 
-        if action in ass_actions:
+        if Action_type in ass_Action_types:
             $ lines.append("That's really not my style. . .")
             $ lines.append("I'm not really into that, " + Girl.player_petname + "_. . .")
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("I'm just not into toys, " + Girl.player_petname + "_. . .")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("I don't know if your taste will match your scent, " + Girl.player_petname + "_. . .")
 
-        if action in ["sex", "anal"]:
+        if Action_type in ["sex", "anal"]:
             $ lines.append("Oh, you have no idea what you're in for. . .")
             $ lines.append("I don't know that you're ready for that yet.")
     elif Girl == JeanX:
@@ -1263,20 +1263,20 @@ label action_not_done_yet_lines(Girl, action):
             "I don't know, it's kind of a bad time. . .",
             "Hmm, that could be amusing, " + Girl.player_petname + "_. . ."]
 
-        if action in hand_actions:
+        if Action_type in hand_Action_types:
             $ lines.append("Look, don't touch, " + Girl.player_petname + "_. . .")
 
-        if action in ass_actions:
+        if Action_type in ass_Action_types:
             $ lines.append("That's really not my style. . .")
             $ lines.append("Not really my thing, " + Girl.player_petname + "_. . .")
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("I'm just not into toys, " + Girl.player_petname + "_. . .")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("I have been wondering what you taste like, " + Girl.player_petname + "_. . .")
 
-        if action in ["sex", "anal"]:
+        if Action_type in ["sex", "anal"]:
             $ lines.append("Oh, this would be interesting. . .")
             $ lines.append("I don't know that you're ready for that yet.")
     elif Girl == StormX:
@@ -1292,14 +1292,14 @@ label action_not_done_yet_lines(Girl, action):
             "I am unsure, " + Girl.player_petname + "_. . .",
             "Hmm, that could be entertaining, " + Girl.player_petname + "_. . ."]
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("I'm a bit past toys, " + Girl.player_petname + "_. . .")
             $ lines.append("I'm just not into toys, " + Girl.player_petname + "_. . .")
 
-        if action in active_actions:
+        if Action_type in active_Action_types:
             $ lines.append("I would rather you did not, " + Girl.player_petname + "_.")
 
-        if action in ["sex", "anal"]:
+        if Action_type in ["sex", "anal"]:
             $ lines.append("I seriously doubt that you understand what you would be in for. . .")
             $ lines.append("I do not know that you are yet prepared for that.")
     elif Girl == JubesX:
@@ -1312,10 +1312,10 @@ label action_not_done_yet_lines(Girl, action):
             "Not yet, " + Girl.player_petname + "_. . .",
             "Seriously, " + Girl.player_petname + "_. . ."]
 
-        if action in ass_actions:
+        if Action_type in ass_Action_types:
             $ lines.append("That's really not my style. . .")
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("I'm just not into toys, " + Girl.player_petname + "_. . .")
 
     $ line = renpy.random.choice(lines)
@@ -1324,7 +1324,7 @@ label action_not_done_yet_lines(Girl, action):
 
     return
 
-label sorry_never_mind_lines(Girl, action):
+label sorry_never_mind_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Ok, no problem, " + Girl.player_petname + "_.",
             "Yeah, fine, " + Girl.player_petname + "_.",
@@ -1397,7 +1397,7 @@ label sorry_never_mind_lines(Girl, action):
 
     return
 
-label maybe_later_lines(Girl, action):
+label maybe_later_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I'll give it some thought, " + Girl.player_petname + "_.",
             "It's. . . possible, " + Girl.player_petname + "_.",
@@ -1410,10 +1410,10 @@ label maybe_later_lines(Girl, action):
             "I might get hungry, " + Girl.player_petname + "_.",
             "Yeah, maybe, " + Girl.player_petname + "_."]
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + "_.")
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             if Girl.lust > 50:
                 $ lines.append("Well, definitely later. . . but I'll have to think about inviting you.")
             else:
@@ -1431,10 +1431,10 @@ label maybe_later_lines(Girl, action):
             "I'll be thinking about it, " + Girl.player_petname + "_.",
             "Anything's possible, " + Girl.player_petname + "_."]
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + "_.")
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             if Girl.lust > 50:
                 $ lines.append("Well, I know what {i}I'll{/i} be doing later. Not sure if you can come.{p}I mean- you know, be there.{p}I'm not sure you'll {i}be{/i} there.{p}. . .coming.")
             else:
@@ -1452,11 +1452,11 @@ label maybe_later_lines(Girl, action):
             "I'll be thinking about it, " + Girl.player_petname + "_.",
             "Anything's possible, " + Girl.player_petname + "_."]
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + "_.")
             $ lines.append("Perhaps I'll practice on my own time, " + Girl.player_petname + "_.")
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             if Girl.lust > 50:
                 $ lines.append("I have plans for. . . later, but perhaps you could take part.")
             else:
@@ -1475,10 +1475,10 @@ label maybe_later_lines(Girl, action):
             "I'll be thinking about it, " + Girl.player_petname + "_.",
             "Anything's possible, " + Girl.player_petname + "_."]
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + "_.")
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             if Girl.lust > 50:
                 $ lines.append("I probably will be, but not with an audience.")
             else:
@@ -1494,10 +1494,10 @@ label maybe_later_lines(Girl, action):
             "I guess eventually. . .",
             "Well, I'll give it some thought, " + Girl.player_petname + "_."]
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + "_.")
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             if Girl.lust > 50:
                 $ lines.append("Well -I- will, but after you leave.")
             else:
@@ -1513,11 +1513,11 @@ label maybe_later_lines(Girl, action):
             "I expect it will happen at some point, " + Girl.player_petname + "_.",
             "I will give it some thought, " + Girl.player_petname + "_."]
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + "_.")
             $ lines.append("Perhaps I'll practice on my own time, " + Girl.player_petname + "_.")
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             if Girl.lust > 50:
                 $ lines.append("I expect that I will be finished by then. . .")
             else:
@@ -1531,10 +1531,10 @@ label maybe_later_lines(Girl, action):
         "I'll be thinking about it, " + Girl.player_petname + "_.",
         "Anything's possible, " + Girl.player_petname + "_."]
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("Maybe I'll practice on my own time, " + Girl.player_petname + "_.")
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             if Girl.lust > 50:
                 $ lines.append("Maybe, just not with so many eyes on me. . .")
             else:
@@ -1546,7 +1546,7 @@ label maybe_later_lines(Girl, action):
 
     return
 
-label pull_back_before_get_in_lines(Girl, action):
+label pull_back_before_get_in_lines(Girl, Action_type):
     if Girl == RogueX:
         if Girl.Action_counter[action]:
             $ lines = ["Well ok, " + Girl.player_petname + "_, no harm done. Just give me a little warning next time.",
@@ -1554,7 +1554,7 @@ label pull_back_before_get_in_lines(Girl, action):
         else:
             $ lines = ["Well ok, " + Girl.player_petname + "_, I'm not really ready for that, but maybe if you ask nicely next time . . ."]
 
-            if action in anal_insertion_actions:
+            if Action_type in anal_insertion_Action_types:
                 $ lines.append("Well ok, " + Girl.player_petname + "_, that's a bit dirty, maybe ask a girl?")
 
     $ line = renpy.random.choice(lines)
@@ -1563,7 +1563,7 @@ label pull_back_before_get_in_lines(Girl, action):
 
     return
 
-label would_you_like_more_lines(Girl, action):
+label would_you_like_more_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["You maybe want to try something more?"]
 
@@ -1573,7 +1573,7 @@ label would_you_like_more_lines(Girl, action):
 
     return
 
-label caught_masturbating_lines(Girl, action):
+label caught_masturbating_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["H- how long you been stand'in there, " + Girl.player_petname + "_?"]
     elif Girl == KittyX:
@@ -1595,7 +1595,7 @@ label caught_masturbating_lines(Girl, action):
 
     return
 
-label notices_penis_is_out_lines(Girl, action):
+label notices_penis_is_out_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["And why is your cock out like that?!"]
     elif Girl == KittyX:
@@ -1615,7 +1615,7 @@ label notices_penis_is_out_lines(Girl, action):
 
     Girl.voice "[line]"
 
-label too_late_to_masturbate_lines(Girl, action):
+label too_late_to_masturbate_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["It's getting too late to do much about it right now though."]
     elif Girl == KittyX:
@@ -1637,7 +1637,7 @@ label too_late_to_masturbate_lines(Girl, action):
 
     return
 
-label begging_lines(Girl, action):
+label begging_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Heh, I suppose I can hardly refuse ya when you use the magic words . . .",
             "Well, if you're gonna beg. . .",
@@ -1659,16 +1659,16 @@ label begging_lines(Girl, action):
             "Fine. . . [She licks her lips].",
             "Heh, ok, alright."]
 
-        if action in cock_actions:
+        if Action_type in cock_Action_types:
             $ lines.append("Ok, lemme see it.")
             $ lines.append("Sure. Drop trou.")
             $ lines.append("I suppose, whip it out.")
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("I suppose it would help to have something nice to look at. . .")
             $ lines.append("I've kind of needed this anyways. . .",)
 
-        if action == "suck_breasts":
+        if Action_type == "suck_breasts":
             $ lines.append("You better work your mouth that hard on these.")
     elif Girl == KittyX:
         $ lines = ["Well" + Girl.like + "_if you ask nicely. . .",
@@ -1682,14 +1682,14 @@ label begging_lines(Girl, action):
             "Ok. . . [She gestures for you to come over].",
             "Heh, ok, ok."]
 
-        if action in cock_actions:
+        if Action_type in cock_Action_types:
             $ lines.append("Cool, lemme see it.")
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I could maybe give it a try.")
             $ lines.append("I guess I could. . .")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("Fiiine. . . [She licks her lips].")
     elif Girl == EmmaX:
         $ lines = ["Politeness can be rewarded. . .",
@@ -1819,7 +1819,7 @@ label begging_lines(Girl, action):
 
     return
 
-label please_not_good_enough_lines(Girl, action):
+label please_not_good_enough_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I'm afraid not this time, sorry " + Girl.player_petname + "_."]
     elif Girl == KittyX:
@@ -1850,7 +1850,7 @@ label please_not_good_enough_lines(Girl, action):
 
     return
 
-label action_already_rejected_lines(Girl, action):
+label action_already_rejected_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Learn to take \"no\" for an answer, " + Girl.player_petname + "_.",
             "I just don't want to, " + Girl.player_petname + "_.",
@@ -1923,7 +1923,7 @@ label action_already_rejected_lines(Girl, action):
 
     return
 
-label otherwise_not_interested_lines(Girl, action):
+label otherwise_not_interested_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Nah, I don't think I'm interested.",
             "Heh, no, I'm not doing that.",
@@ -2113,7 +2113,7 @@ label otherwise_not_interested_lines(Girl, action):
 
     return
 
-label previous_action_rejected_lines(Girl, action):
+label previous_action_rejected_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Sorry, " + Girl.player_petname + " you aren't touching these again.",
             "Sorry, " + Girl.player_petname + " you aren't getting these in your mouth.",
@@ -2233,7 +2233,7 @@ label previous_action_rejected_lines(Girl, action):
 
     return
 
-label forced_but_not_unwelcome_lines(Girl, action):
+label forced_but_not_unwelcome_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Fine, if that's what you want.",
             "Hmmph, well I guess you can go to town. . .",
@@ -2349,7 +2349,7 @@ label forced_but_not_unwelcome_lines(Girl, action):
 
     return
 
-label forced_but_welcome_lines(Girl, action):
+label forced_but_welcome_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Sure, get in there.",
             "Fine, grab a cheek."]
@@ -2360,7 +2360,7 @@ label forced_but_welcome_lines(Girl, action):
 
     return
 
-label said_no_recently_lines(Girl, action):
+label said_no_recently_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I {i}just{/i} told you \"no,\" " + Girl.player_petname + "_.",
             "I {i}just{/i} told you \"no,\" " + Girl.player_petname + "_.",
@@ -2414,7 +2414,7 @@ label said_no_recently_lines(Girl, action):
 
     return
 
-label action_accepted_enthusiastically_lines(Girl, action):
+label action_accepted_enthusiastically_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Ok " + Girl.player_petname + " come and get'em.",
             "Ok " + Girl.player_petname + " go ahead.",
@@ -2479,7 +2479,7 @@ label action_accepted_enthusiastically_lines(Girl, action):
 
     return
 
-label daily_action_lines(Girl, action):
+label daily_action_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Didn't get enough earlier?",
             "Again? Oh, you're insatiable!",
@@ -2490,42 +2490,42 @@ label daily_action_lines(Girl, action):
             "So you'd like another go?",
             "You can't stay away from this. . ."]
 
-        if action in hand_actions or action in mouth_actions or action == "hotdog":
+        if Action_type in hand_Action_types or Action_type in mouth_Action_types or Action_type == "hotdog":
             $ lines.append("Are you sure that's all you want?")
 
-            if action == "kiss":
+            if Action_type == "kiss":
                 $ lines.append("Gimme some sugar, sugar.")
                 $ lines.append("Let me get some saliva going.")
-            elif action in hand_actions:
+            elif Action_type in hand_Action_types:
                 $ lines.append("You do have a smooth touch. . .")
-        elif action == "sex" or action == "anal":
+        elif Action_type in ["sex", "anal"]:
             $ lines.append("Maybe not so hard this time though.")
             $ lines.append("Maybe not so rough this time though.")
             $ lines.append("I'm still a bit sore from earlier.")
 
-            if action == "anal":
+            if Action_type == "anal":
                 $ lines.append("You can't stay away from this booty. . .")
-        elif action in fondle_actions or action in dildo_actions or action == "sex" or action == "anal":
+        elif Action_type in fondle_Action_types or Action_type in dildo_Action_types or Action_type in ["sex", "anal"]:
             $ lines.append("You sure know how to keep a girl satisfied. . .")
             $ lines.append("I'm still tingling a bit from earlier.")
             $ lines.append("Take it a bit gently, I'm still quivering from earlier.")
             $ lines.append("You're going to wear me out.")
 
-            if action in dildo_actions:
+            if Action_type in dildo_Action_types:
                 $ lines.append("Breaking out the toys again?")
-        elif action == "masturbation":
+        elif Action_type == "masturbation":
             $ lines.append("You enjoyed the show?")
             $ lines.append("It is nice to have an audience. . .")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("{i}I'm{/i} used to being the one sucking people dry. . .")
             $ lines.append("My jaw's still a bit sore from earlier.")
             $ lines.append("You're going to give me lockjaw.")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("My tits are still a bit sore from earlier.")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("My arm's still a bit sore from earlier.")
             $ lines.append("You're going to give me calluses.")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("My feet are kinda sore from earlier.")
             $ lines.append("My feet are a bit sore from earlier.")
     elif Girl == KittyX:
@@ -2541,38 +2541,38 @@ label daily_action_lines(Girl, action):
             "So you'd like another round?",
             "You can't stay away from this. . ."]
 
-        if action in hand_actions or action in mouth_actions or action == "hotdog":
+        if Action_type in hand_Action_types or Action_type in mouth_Action_types or Action_type == "hotdog":
             $ lines.append("Are you sure that's all you want?")
 
-            if action == "kiss":
+            if Action_type == "kiss":
                 $ lines.append("Let me get some saliva going.")
                 $ lines.append("Come'ere tasty.")
-        elif action == "sex" or action == "anal":
+        elif Action_type in ["sex", "anal"]:
             $ lines.append("Maybe not so rough this time though.")
             $ lines.append("You're going to make me sore.")
             $ lines.append("I'm still a bit sore from earlier.")
             $ lines.append("I'm still a little sore from earlier.")
-        elif action in fondle_actions or action in dildo_actions or action == "sex" or action == "anal":
+        elif Action_type in fondle_Action_types or Action_type in dildo_Action_types or Action_type in ["sex", "anal"]:
             $ lines.append("You're going to wear me out.")
             $ lines.append("You're wearing me out here!")
             $ lines.append("Take it a bit gently, I'm still shaking from earlier.")
             $ lines.append("Take it easy though.")
 
-            if action in dildo_actions:
+            if Action_type in dildo_Action_types:
                 $ lines.append("Breaking out the toys again?")
-            elif action "eat_pussy":
+            elif Action_type "eat_pussy":
                 $ lines.append("What a girl wants. . .")
-        elif action == "masturbation":
+        elif Action_type == "masturbation":
             $ lines.append("I kinda liked the audience. . .")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("My jaw's still a bit sore from earlier.")
             $ lines.append("You're going to give me lockhee- . . . jaw.")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("My tits are still kinda sore from earlier.")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("You're going to give me calluses")
             $ lines.append("My hand's kinda sore from earlier.")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("My feet are kinda sore from earlier.")
     elif Girl == EmmaX:
         $ lines = ["You didn't get enough earlier?",
@@ -2592,39 +2592,39 @@ label daily_action_lines(Girl, action):
             "I was that good?",
             "I must have done something right."]
 
-        if action in hand_actions or action in mouth_actions or action == "hotdog":
+        if Action_type in hand_Action_types or Action_type in mouth_Action_types or Action_type == "hotdog":
             $ lines.append("Are you sure that's all you want?")
 
-            if action == "kiss":
+            if Action_type == "kiss":
                 $ lines.append("Let me get some saliva going.")
-            elif action in hand_actions:
+            elif Action_type in hand_Action_types:
                 $ lines.append("Relax, gently. . .")
-        elif action == "sex" or action == "anal":
+        elif Action_type in ["sex", "anal"]:
             $ lines.append("Perhaps not so rough this time?")
             $ lines.append("I'm still a bit sore from earlier.")
             $ lines.append("I'm still a little sore from earlier.")
-        elif action in fondle_actions or action in dildo_actions or action == "sex" or action == "anal":
+        elif Action_type in fondle_Action_types or Action_type in dildo_Action_types or Action_type in ["sex", "anal"]:
             $ lines.append("You're wearing me out, " + Girl.player_petname + "_.")
             $ lines.append("You're going to wear me out.")
             $ lines.append("Take it a bit gently, I'm still shaking from earlier.")
 
-            if action in dildo_actions:
+            if Action_type in dildo_Action_types:
                 $ lines.append("Breaking out the toys again?")
-            elif action "eat_pussy":
+            elif Action_type "eat_pussy":
                 $ lines.append("What a queen deserves. . .")
-        elif action == "masturbation":
+        elif Action_type == "masturbation":
             $ lines.append("I did enjoy the audience participation. . .")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("My jaw's still a bit sore from earlier.")
             $ lines.append("My jaw's still sore from our prior engagement.")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("You're going to wear them out.")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("I'd rather not get calluses.")
             $ lines.append("You're going to wear out my arm.")
             $ lines.append("My hand's a bit sore from earlier.")
             $ lines.append("My hand's rather sore from before.")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("My feet are rather sore from earlier.")
     elif Girl == LauraX:
         $ lines = ["You didn't get enough earlier?",
@@ -2649,31 +2649,29 @@ label daily_action_lines(Girl, action):
             "You'd like another round?",
             "I must be better than I thought."]
 
-        if action in hand_actions or action in mouth_actions or action == "hotdog":
+        if Action_type in hand_Action_types or Action_type in mouth_Action_types or Action_type == "hotdog":
             $ lines.append("Are you sure that's all you want?")
 
-            if action == "kiss":
+            if Action_type == "kiss":
                 $ lines.append("Let me get some saliva going.")
-            elif action in hand_actions:
+            elif Action_type in hand_Action_types:
                 $ lines.append("Chill. . .")
-        elif action == "sex" or action == "anal":
+        elif Action_type in ["sex", "anal"]:
             $ lines.append("I'm still a bit sore from earlier.")
-        elif action in fondle_actions or action in dildo_actions or action == "sex" or action == "anal":
+        elif Action_type in fondle_Action_types or Action_type in dildo_Action_types or Action_type in ["sex", "anal"]:
             $ lines.append("Take it slow, I'm still shaking from earlier.")
             $ lines.append("Wear'in me out here.")
             $ lines.append("You're going to wear me out.")
 
-            if action in dildo_actions:
+            if Action_type in dildo_Action_types:
                 $ lines.append("Breaking out the toys again?")
-        elif action == "masturbation":
+        elif Action_type == "masturbation":
             $ lines.append("I liked having an audience. . .")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("You're really working these puppies.")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("I'm glad I don't grow calluses.")
-            $ lines.append("Again the with handjobs, huh?")
-        elif sex_actions in Girl.recent_history:
-            $ lines.append("Your funeral, " + Girl.player_petname + "_.")
+            $ lines.append("Again with the handjobs, huh?")
     elif Girl == JeanX:
         $ lines = ["You didn't get enough earlier?",
             "Huh? Again?",
@@ -2697,26 +2695,24 @@ label daily_action_lines(Girl, action):
             "Again? Sure.",
             "You're really into this. . ."]
 
-        if action in hand_actions or action in mouth_actions or action == "hotdog":
+        if Action_type in hand_Action_types or Action_type in mouth_Action_types or Action_type == "hotdog":
             $ lines.append("Are you sure that's all you want?")
 
-            if action in hand_actions:
+            if Action_type in hand_Action_types:
                 $ lines.append("Chill. . .")
-        elif action in fondle_actions or action in dildo_actions or action == "sex" or action == "anal":
+        elif Action_type in fondle_Action_types or Action_type in dildo_Action_types or Action_type in ["sex", "anal"]:
             $ lines.append("Take it slow, I'm still shaking from earlier.")
             $ lines.append("You're wearing me out here.")
             $ lines.append("You're going to wear me out.")
 
-            if action in dildo_actions:
+            if Action_type in dildo_Action_types:
                 $ lines.append("Breaking out the toys again?")
-        elif action == "masturbation":
+        elif Action_type == "masturbation":
             $ lines.append("I do like having an audience. . .")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("You're really working these babies.")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("Again the with handjobs, huh?")
-        elif sex_actions in Girl.recent_history:
-            $ lines.append("Your funeral, " + Girl.player_petname + "_.")
     elif Girl == StormX:
         $ lines = ["You didn't get enough earlier?",
             "Huh? Again?",
@@ -2737,39 +2733,39 @@ label daily_action_lines(Girl, action):
             "So you would like another round?",
             "You really are into this. . ."]
 
-        if action in hand_actions or action in mouth_actions or action == "hotdog":
+        if Action_type in hand_Action_types or Action_type in mouth_Action_types or Action_type == "hotdog":
             $ lines.append("Are you sure that is all you would want?")
 
-            if action in hand_actions:
+            if Action_type in hand_Action_types:
                 $ lines.append("Relax, gently. . .")
                 $ lines.append("Gently. . . gently. . .")
-        elif action == "sex" or action == "anal":
+        elif Action_type in ["sex", "anal"]:
             $ lines.append("Perhaps not so rough this time?")
             $ lines.append("I am still a bit sore from earlier.")
             $ lines.append("I am still rather sore from earlier.")
-        elif action in fondle_actions or action in dildo_actions or action == "sex" or action == "anal":
+        elif Action_type in fondle_Action_types or Action_type in dildo_Action_types or Action_type in ["sex", "anal"]:
             $ lines.append("Take it a bit gently, I am still glowing from earlier.")
             $ lines.append("You're going to wear me out.")
             $ lines.append("You are wearing me out, " + Girl.player_petname + "_.")
             $ lines.append("You are tiring me, " + Girl.player_petname + "_.")
 
-            if action in dildo_actions:
+            if Action_type in dildo_Action_types:
                 $ lines.append("Breaking out the toys again?")
-            elif action "eat_pussy":
+            elif Action_type "eat_pussy":
                 $ lines.append("What a queen deserves. . .")
                 $ lines.append("I did enjoy the audience participation. . .")
-        elif action == "masturbation":
+        elif Action_type == "masturbation":
             $ lines.append("I put on quite the show?")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("My jaw is still rather sore.")
             $ lines.append("My jaw is still recovering.")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("You will wear them out like this.")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("My arm will wear out.")
             $ lines.append("My hand is quite sore from earlier.")
             $ lines.append("My hand is rather sore from before.")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("My feet are rather sore from earlier.")
     elif Girl == JubesX:
         $ lines = ["You didn't get enough earlier?",
@@ -2784,12 +2780,12 @@ label daily_action_lines(Girl, action):
             "Another one?",
             "I guess you want more."]
 
-        if action in hand_actions:
+        if Action_type in hand_Action_types:
                 $ lines.append("Relax. . .")
                 $ lines.append("Take it slow, I'm still shaking from earlier.")
-        elif action == "masturbation":
+        elif Action_type == "masturbation":
             $ lines.append("I enjoyed having an audience. . .")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("I'm glad I don't grow calluses.")
             $ lines.append("Again with the handjobs, huh?")
 
@@ -2799,7 +2795,7 @@ label daily_action_lines(Girl, action):
 
     return
 
-label taboo_and_said_no_today_lines(Girl, action):
+label taboo_and_said_no_today_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I told you not to touch me like that in public!",
             "I told you that wasn't appropriate!",
@@ -2886,7 +2882,7 @@ label taboo_and_said_no_today_lines(Girl, action):
 
     return
 
-label said_no_today_lines(Girl, action):
+label said_no_today_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I already told you \"no,\" " + Girl.player_petname + "_.",
             "I already told you no, take a hint.",
@@ -2942,7 +2938,7 @@ label said_no_today_lines(Girl, action):
 
     return
 
-label forced_action_rejected_lines(Girl, action):
+label forced_action_rejected_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I don't want you touching me.",
             "I don't want your lips on me.",
@@ -3049,7 +3045,7 @@ label forced_action_rejected_lines(Girl, action):
 
     return
 
-label try_something_else_lines(Girl, action):
+label try_something_else_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I know you're having fun, but maybe we could try something else " + Girl.player_petname + "_.",
             "" + Girl.player_petname + " this is getting uncomfortable, maybe we could try something else.",
@@ -3062,7 +3058,7 @@ label try_something_else_lines(Girl, action):
 
     return
 
-label this_is_boring_lines(Girl, action):
+label this_is_boring_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Well if that's your attitude, I don't need your \"help\"."]
     elif Girl == KittyX:
@@ -3114,7 +3110,7 @@ label this_is_boring_lines(Girl, action):
 
     return
 
-label satisfied_lines(Girl, action):
+label satisfied_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["That was. . . nice.",
             "That was . . . real pleasant, " + Girl.player_petname + "_.",
@@ -3238,7 +3234,7 @@ label satisfied_lines(Girl, action):
 
     return
 
-label was_that_enough_lines(Girl, action):
+label was_that_enough_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Was that enough for you?",
             "Did you get your jollies?",
@@ -3376,7 +3372,7 @@ label get_out_lines(Girl):
 
     return
 
-label first_time_pussy_eaten_lines(Girl, action):
+label first_time_pussy_eaten_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["That's pretty intimate, " + Girl.player_petname + "_. . ."]
 
@@ -3386,7 +3382,7 @@ label first_time_pussy_eaten_lines(Girl, action):
 
     return
 
-label first_time_ass_eaten_lines(Girl, action):
+label first_time_ass_eaten_lines(Girl, Action_type):
     if Girl == RogueX:
         if Girl.love >= Girl.obedience and Girl.love >= Girl.inhibition:
             Girl.voice "I'm not really sure I want you lick'in down there. . ."
@@ -3405,7 +3401,7 @@ label first_time_ass_eaten_lines(Girl, action):
 
     return
 
-label trying_to_convince_lines(Girl, action):
+label trying_to_convince_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Ok, you're probably right. . .",
             "Well, ok, put it here.",
@@ -3513,7 +3509,7 @@ label trying_to_convince_lines(Girl, action):
 
     return
 
-label unconvinced_lines(Girl, action):
+label unconvinced_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Tsk, not this time, " + Girl.player_petname + " that just seems. . . dirty.",
             "I really don't think that I would."]
@@ -3548,7 +3544,7 @@ label unconvinced_lines(Girl, action):
 
     return
 
-label unsatisfied_lines(Girl, action):
+label unsatisfied_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I didn't exactly get off there. . .",
             "That didn't really do it for me. . .",
@@ -3577,7 +3573,7 @@ label unsatisfied_lines(Girl, action):
 
     return
 
-label starting_to_get_bored_lines(Girl, action):
+label starting_to_get_bored_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["You like how those feel, huh?",
             "You're just going at them, huh?",
@@ -3671,7 +3667,7 @@ label starting_to_get_bored_lines(Girl, action):
 
     return
 
-label definitely_bored_now_lines(Girl, action):
+label definitely_bored_now_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I'm getting rug-burn here " + Girl.player_petname + "_. Can we do something else?",
             "I'm getting a little tired, " + Girl.player_petname + "_. Can we do something else?",
@@ -3776,7 +3772,7 @@ label definitely_bored_now_lines(Girl, action):
 
     return
 
-label no_ass_to_mouth_lines(Girl, action):
+label no_ass_to_mouth_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["No thanks, " + Girl.player_petname + "_. Maybe a Handy instead?"]
 
@@ -3784,7 +3780,7 @@ label no_ass_to_mouth_lines(Girl, action):
 
     return
 
-label since_you_are_so_nice_lines(Girl, action):
+label since_you_are_so_nice_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Well, since you're be'in so nice about it, I guess we can give it a go. . .",
             "I guess if you really want to try it. . .",
@@ -3827,50 +3823,50 @@ label since_you_are_so_nice_lines(Girl, action):
 
     return
 
-label used_to_action_lines(Girl, action):
+label used_to_action_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["You want some of this action?",
             "So you'd like another go?",
             "You can't stay away from this. . ."]
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("You sure do like to watch.")
             $ lines.append("So you'd like me to go again?")
             $ lines.append("You want to watch some more?")
             $ lines.append("You want me ta diddle myself?")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("So you'd like another handy?")
             $ lines.append("A little. . . [fist pumping hand gestures]?")
             $ lines.append("A little tender loving care?")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("You want me to use my feet?")
             $ lines.append("So you'd like another foot rub?")
             $ lines.append("So you'd like me to. . . [she rubs her foot along your leg]?")
             $ lines.append("So you'd like another foot rub?")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("A little soft embrace?")
             $ lines.append("You want some of this action [jiggles her tits]?")
             $ lines.append("So you'd like another titjob?")
             $ lines.append("You want me to pillow your crank?")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("You want some of this action [mimes blowing]?")
             $ lines.append("So you'd like another blowjob?")
             $ lines.append("A little. . . lick?")
             $ lines.append("You want me to wet your willy?")
             $ lines.append("You want me to slick your pole?")
             $ lines.append("You want me to grease your skids?")
-        elif action in dildo_actions:
+        elif Action_type in dildo_Action_types:
             $ lines.append("You want me ta lube up your toy?")
-        elif action == "sex":
+        elif Action_type == "sex":
             $ lines.append("You want to stick it in my pussy again?")
             $ lines.append("You want me to ride your pole?")
             $ lines.append("You wanna dip your wick?")
-        elif action == "anal":
+        elif Action_type == "anal":
             $ lines.append("You want to stick it in my ass again?")
             $ lines.append("You can't stay away from this booty.")
             $ lines.append("You want me to ride your pole?")
             $ lines.append("You wanna dip your wick?")
-        elif action == "hotdog":
+        elif Action_type == "hotdog":
             $ lines.append("A little. . . bounce?")
     elif Girl == KittyX:
         $ lines = ["You want some of this?",
@@ -3882,40 +3878,40 @@ label used_to_action_lines(Girl, action):
             "You're really digging this. . .",
             "Again?"]
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("You like to watch me.")
             $ lines.append("You want me to get myself off?")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("So you'd like another handy?")
             $ lines.append("A little. . . [fist pumping hand gestures]?")
             $ lines.append("A little TLC?")
             $ lines.append("You want another rub?")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("You want me to use my feet?")
             $ lines.append("So you'd like another foot sesh?")
             $ lines.append("A little. . . [she rubs her foot along your leg]?")
             $ lines.append("You want another rub?")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("You want some of this action [rubs her chest]?")
             $ lines.append("So you'd like another titjob?")
             $ lines.append("A little. . . puffpuff?")
             $ lines.append("A little soft embrace?")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("You want me to [mimes blowing]?")
             $ lines.append("So you wanna 'nother blowjob?")
             $ lines.append("A little. . . lick?")
             $ lines.append("You want me to suck you off?")
-        elif action in dildo_actions:
+        elif Action_type in dildo_Action_types:
             $ lines.append("You want me ta lube up your toy?")
-        elif action == "sex":
+        elif Action_type == "sex":
             $ lines.append("You want to stick it in my pussy again?")
             $ lines.append("You wanna slide into me?")
             $ lines.append("You gonna make me purr?")
-        elif action == "anal":
+        elif Action_type == "anal":
             $ lines.append("You want to stick it in my ass again?")
             $ lines.append("I do have booty for days. . .")
             $ lines.append("You wanna slide into me?")
-        elif action == "hotdog":
+        elif Action_type == "hotdog":
             $ lines.append("You want another rub?")
     elif Girl == EmmaX:
         $ lines = ["You want more?",
@@ -3931,38 +3927,38 @@ label used_to_action_lines(Girl, action):
             "You're really into this. . .",
             "Once more?"]
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("You really do like to watch.")
             $ lines.append("You enjoy watching me.")
             $ lines.append("You want me to take care of myself?")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("More of this? [fist pumping hand gestures]")
             $ lines.append("Oh, did you want some attention?")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("You'd like me to use my feet again?")
             $ lines.append("So you'd like another footjob?")
             $ lines.append("Mmmm, some. . . [she rubs her foot along your leg]?")
             $ lines.append("A little foot rub?")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("You want some of these? [jiggles her tits]")
             $ lines.append("So you'd like another titjob?")
             $ lines.append("A little. . . [bounces tits]?")
             $ lines.append("A little warm embrace?")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("You want me to [mimes blowing]?")
             $ lines.append("So you want another blowjob?")
             $ lines.append("You want me to suck you off?")
             $ lines.append("Are you asking if I'm hungry?")
-        elif action in dildo_actions:
+        elif Action_type in dildo_Action_types:
             $ lines.append("You'd like me to lube up your toy?")
-        elif action == "sex":
+        elif Action_type == "sex":
             $ lines.append("You want to stick it in my pussy again?")
             $ lines.append("Do you intend to make me melt?")
             $ lines.append("You want me to ride you?")
-        elif action == "anal":
+        elif Action_type == "anal":
             $ lines.append("You'd like to stick it in my ass again?")
             $ lines.append("You want me to ride you?")
-        elif action == "hotdog":
+        elif Action_type == "hotdog":
             $ lines.append("You want another rub?")
     elif Girl == LauraX:
         $ lines = ["You want some more?",
@@ -3978,39 +3974,39 @@ label used_to_action_lines(Girl, action):
             "You're really into this. . .",
             "Again?"]
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("You like to watch.")
             $ lines.append("You really like to watch me.")
             $ lines.append("You want me to masturbate again?")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("So you'd like another handy?")
             $ lines.append("You want a. . . [fist pumping hand gestures]?")
             $ lines.append("Another handjob?")
             $ lines.append("A little TLC?")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("You want me to use my feet?")
             $ lines.append("So you'd like another footjob?")
             $ lines.append("A little. . . [she rubs her foot along your leg]?")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("You want some of this action [rubs her chest]?")
             $ lines.append("So you'd like another titjob?")
             $ lines.append("Another titjob?")
             $ lines.append("A little [points at her chest]?")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("You want me to [mimes blowing]?")
             $ lines.append("So you want another blowjob?")
             $ lines.append("You want me to lick you?")
             $ lines.append("You want me to suck you off?")
             $ lines.append("A little bj?")
-        elif action in dildo_actions:
+        elif Action_type in dildo_Action_types:
             $ lines.append("You want me ta lube up your toy?")
-        elif action == "sex":
+        elif Action_type == "sex":
             $ lines.append("You want to stick it in my pussy again?")
             $ lines.append("You want to plow me?")
-        elif action == "anal":
+        elif Action_type == "anal":
             $ lines.append("You want to stick it in my ass again?")
             $ lines.append("You want to plow me?")
-        elif action == "hotdog":
+        elif Action_type == "hotdog":
             $ lines.append("You want another rub?")
     elif Girl == JeanX:
         $ lines = ["You want some more?",
@@ -4026,40 +4022,40 @@ label used_to_action_lines(Girl, action):
             "You're really into this. . .",
             "Again?"]
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("You do like to watch.")
             $ lines.append("You'd like me to masturbate again?")
             $ lines.append("You like to watch me.")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("So you'd like another handjob?")
             $ lines.append("You want a. . . [fist pumping hand gestures]?")
             $ lines.append("Another handjob?")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("You want me to use my feet?")
             $ lines.append("So you'd like another footjob?")
             $ lines.append("A little foot rub?")
             $ lines.append("A little. . . [she rubs her foot along your leg]?")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("You want some of this action [rubs her chest]?")
             $ lines.append("So you'd like another titjob?")
             $ lines.append("Another titjob?")
             $ lines.append("A little [points at her chest]?")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("You want me to [mimes blowing]?")
             $ lines.append("So you want another blowjob?")
             $ lines.append("You want me to lick you?")
             $ lines.append("You want me to suck you off?")
             $ lines.append("A BJ?")
-        elif action in dildo_actions:
+        elif Action_type in dildo_Action_types:
             $ lines.append("You want me ta lube up your toy?")
-        elif action == "sex":
+        elif Action_type == "sex":
             $ lines.append("You want to stick it in my pussy again?")
             $ lines.append("You want to fuck me?")
             $ lines.append("You want to plow me?")
-        elif action == "anal":
+        elif Action_type == "anal":
             $ lines.append("You want to fuck me?")
             $ lines.append("You want to plow me?")
-        elif action == "hotdog":
+        elif Action_type == "hotdog":
             $ lines.append("You want another rub?")
     elif Girl == StormX:
         $ lines = ["You want more?",
@@ -4077,49 +4073,49 @@ label used_to_action_lines(Girl, action):
             "You really are into this. . .",
             "Once more?"]
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("You really do like to watch.")
             $ lines.append("You enjoy watching me do that?")
             $ lines.append("You want me to take care of myself?")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("More of this? [fist pumping hand gestures]")
             $ lines.append("Oh, did you want some attention?")
             $ lines.append("So you'd like another handy?")
             $ lines.append("Another handjob?")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("You would like me to use my feet again?")
             $ lines.append("So you would like another footjob?")
             $ lines.append("Mmmm, some. . . [she rubs her foot along your leg]?")
             $ lines.append("A little foot rub?")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("You wish to use these? [jiggles her tits]")
             $ lines.append("So you would like another titjob?")
             $ lines.append(". . . [bounces tits]?")
             $ lines.append("You would like to give it a hug?")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append(". . . [mimes blowing]?")
             $ lines.append("So you would like another blowjob?")
             $ lines.append("You wish for me to suck you off?")
             $ lines.append("Are you asking if I am hungry?")
-        elif action in dildo_actions:
+        elif Action_type in dildo_Action_types:
             $ lines.append("You want me ta lube up your toy?")
-        elif action == "sex":
+        elif Action_type == "sex":
             $ lines.append("You want to stick it in my pussy again?")
             $ lines.append("Did you want me to ride you?")
             $ lines.append("You want me to ride you?")
-        elif action == "anal":
+        elif Action_type == "anal":
             $ lines.append("You'd like to stick it in my ass again?")
             $ lines.append("Did you want me to ride you?")
             $ lines.append("You want me to ride you?")
-        elif action == "hotdog":
+        elif Action_type == "hotdog":
             $ lines.append("You want another rub?")
     elif Girl == JubesX:
         $ lines = ["Again?"]
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("You do enjoy watching.")
             $ lines.append("You really enjoy watching me.")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("You want me to shlick again?")
 
     $ line = renpy.random.choice(lines)
@@ -4128,7 +4124,7 @@ label used_to_action_lines(Girl, action):
 
     return
 
-label auto_accepted_lines(Girl, action):
+label auto_accepted_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Ok, " + Girl.player_petname + "_, let's do this.",
             "Hmm, stick it in. . .",
@@ -4170,7 +4166,7 @@ label auto_accepted_lines(Girl, action):
 
     return
 
-label were_done_here_lines(Girl, action):
+label were_done_here_lines(Girl, Action_type):
     $ lines = ["" + Girl.name + " shoves you away and slaps you in the face.",
         "" + Girl.name + " shoves you away."]
 
@@ -4219,7 +4215,7 @@ label were_done_here_lines(Girl, action):
 
     return
 
-label first_action_approval_lines(Girl, action):
+label first_action_approval_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Hmm, could be fun. . .",
             "Sure. . .",
@@ -4228,13 +4224,13 @@ label first_action_approval_lines(Girl, action):
             "Hmm, I've always wanted to try it. . .",
             "Hmm, it has been on my list. . ."]
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("I guess it could be fun with you watching. . .")
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("I guess it could be fun with a partner. . .")
 
-        if action in cock_actions:
+        if Action_type in cock_Action_types:
             $ lines.append("Hmm, you look ready for it, at least. . .")
     elif Girl == KittyX:
         $ lines = ["That's kinda gross. . .",
@@ -4305,31 +4301,31 @@ label first_action_approval_lines(Girl, action):
 
     return
 
-label first_action_approval_mostly_love_lines(Girl, action):
+label first_action_approval_mostly_love_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["If that's what you like. . ."]
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("I've had a reasonable amount of experience with these, you know. . .")
 
-        if action in cock_actions:
+        if Action_type in cock_Action_types:
             $ lines.append("It looks like you need some relief. . .")
             $ lines.append("Huh, well that's certainly one way to get off.")
 
-        if action in contact_actions:
+        if Action_type in contact_Action_types:
             $ lines.append("Well, I've never really been able to touch people without draining them, this could be an interesting experience. . .")
             $ lines.append("Well, I've never been able to do this before now, so this might be fun.")
 
-        if action in kinky_actions:
+        if Action_type in kinky_Action_types:
             $ lines.append("I guess if you really want to try it. . .")
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("Since my love life's been a bit. . . limited, I've gotten pretty good at this.")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("I've never really put something like that in my mouth. . . might be interesting.")
 
-        if action == "dildo_ass":
+        if Action_type == "dildo_ass":
             $ lines.append("I haven't actually used one of these, back there before. . .")
     elif Girl == KittyX:
         $ lines = ["That's, I don't know. . .",
@@ -4401,7 +4397,7 @@ label first_action_approval_mostly_love_lines(Girl, action):
 
     return
 
-label first_action_approval_mostly_obedience_lines(Girl, action):
+label first_action_approval_mostly_obedience_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["If that's what you want, " + Girl.player_petname + "_. . .",
             "If that's what you want. . .",
@@ -4466,16 +4462,16 @@ label first_action_approval_mostly_obedience_lines(Girl, action):
 
     return
 
-label first_action_approval_addicted_lines(Girl, action):
+label first_action_approval_addicted_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I guess. . .",
             "Hmmmm. . . ."]
 
-        if action == "handjob":
+        if Action_type == "handjob":
             $ lines.append("I think, if I could just touch that. . .")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("I think. . . for some reason I really do want that in my mouth. . .")
-        elif action in below_actions:
+        elif Action_type in below_Action_types:
             $ lines.append("Well. . . I bet it would feel really good down there.")
     elif Girl == KittyX:
         $ lines = ["I kind of {i}need{/i} to. . .",
@@ -4485,7 +4481,7 @@ label first_action_approval_addicted_lines(Girl, action):
             "I. . . if that's how you want to do it. . . maybe?",
             "Hmmm. . ."]
 
-        if action == "blowjob" or action == "kiss":
+        if Action_type == "blowjob" or Action_type == "kiss":
             $ lines.append("My mouth is watering. . .")
     elif Girl == EmmaX:
         $ lines = ["Mmmmmmmm. . .",
@@ -4502,7 +4498,7 @@ label first_action_approval_addicted_lines(Girl, action):
             "Hmm, sounds fun. . .",
             "Hrmm. . ."]
 
-        if action == "blowjob" or action == "kiss":
+        if Action_type == "blowjob" or Action_type == "kiss":
             $ lines.append("[wipes away a little drool]")
     elif Girl == JeanX:
         $ lines = ["Hmmmm. . . .",
@@ -4528,18 +4524,18 @@ label first_action_approval_addicted_lines(Girl, action):
 
     return
 
-label action_forcefully_approved_lines(Girl, action):
+label action_forcefully_approved_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["That's really what you want?",
             "This isn't going to become a habit, will it?",
             "You want me to do that again?"]
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("The toys again?")
-        elif action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+        elif Action_type in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
             $ lines.append("That's it?")
             $ lines.append("That's all you want?")
-        elif action == "masturbation":
+        elif Action_type == "masturbation":
             $ lines.append("So you just want to watch then?")
             $ lines.append("You want to watch me again?")
     elif Girl == KittyX:
@@ -4547,15 +4543,15 @@ label action_forcefully_approved_lines(Girl, action):
             "Again? Why do you do this to me?",
             "You really ask a lot here. . ."]
 
-        if action in job_actions:
+        if Action_type in job_Action_types:
             $ lines.append("You want me to do that again?")
-        elif action in dildo_actions:
+        elif Action_type in dildo_Action_types:
             $ lines.append("The toys again?")
-        elif action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+        elif Action_type in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
             $ lines.append("That's it, right?")
             $ lines.append("That's all?")
             $ lines.append("That's {i}all{/i} you want?")
-        elif action == "masturbation":
+        elif Action_type == "masturbation":
             $ lines.append("So you {i}just{/i} want to watch. . .")
             $ lines.append("Again? Just looking?",)
     elif Girl == EmmaX:
@@ -4564,14 +4560,14 @@ label action_forcefully_approved_lines(Girl, action):
             "You don't hold back. . .",
             "Maybe that's going a bit too far. . ."]
 
-        if action in job_actions:
+        if Action_type in job_Action_types:
             $ lines.append("You aren't getting used to this service, are you?")
-        elif action in dildo_actions:
+        elif Action_type in dildo_Action_types:
             $ lines.append("The toys again?")
-        elif action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+        elif Action_type in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
             $ lines.append("No more than that?")
             $ lines.append("That's it?")
-        elif action == "masturbation":
+        elif Action_type == "masturbation":
             $ lines.append("But. . . {i}only{/i} a show?")
             $ lines.append("Again? Just you only want to watch?")
     elif Girl == LauraX:
@@ -4582,12 +4578,12 @@ label action_forcefully_approved_lines(Girl, action):
             "You don't hold back. . .",
             "That's pushing it. . ."]
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("The toys again?")
-        elif action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+        elif Action_type in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
             $ lines.append("Nothing more than that?")
             $ lines.append("That's it?")
-        elif action == "masturbation":
+        elif Action_type == "masturbation":
             $ lines.append("And you {i}just{/i} want to watch. . .")
     elif Girl == JeanX:
         $ lines = ["Well that's a big ask. . .",
@@ -4596,14 +4592,14 @@ label action_forcefully_approved_lines(Girl, action):
             "You'll pay for this eventually. . .",
             "Well you're optimistic. . ."]
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("The toys again?")
-        elif action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+        elif Action_type in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
             $ lines.append("And that's it?")
             $ lines.append("That's it?")
-        elif action in ["footjob", "hotdog"]:
+        elif Action_type in ["footjob", "hotdog"]:
             $ lines.append("Odd. . .")
-        elif action == "masturbation":
+        elif Action_type == "masturbation":
             $ lines.append("But -just- watch, right? . .")
     elif Girl == StormX:
         $ lines = ["Tsk, again?",
@@ -4611,22 +4607,22 @@ label action_forcefully_approved_lines(Girl, action):
             "You do not restrain yourself. . .",
             "Perhaps that is going a bit too far. . ."]
 
-        if action in dildo_actions:
+        if Action_type in dildo_Action_types:
             $ lines.append("The toys again?")
-        elif action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+        elif Action_type in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
             $ lines.append("Nothing more than that?")
             $ lines.append("That is all you want?")
             $ lines.append("And that is -all- that you expect?")
-        elif action in ["footjob", "titjob"]:
+        elif Action_type in ["footjob", "titjob"]:
             $ lines.append("You enjoy making use of these?")
-        elif action == "masturbation":
+        elif Action_type == "masturbation":
             $ lines.append("You only like to watch?")
     elif Girl == JubesX:
         $ lines = ["Hmm, again?"]
 
-        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+        if Action_type in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
             $ lines.append("Nothing more than that?")
-        elif action == "masturbation":
+        elif Action_type == "masturbation":
             $ lines.append("Nothing more than watching? . .")
 
     $ line = renpy.random.choice(lines)
@@ -4635,7 +4631,7 @@ label action_forcefully_approved_lines(Girl, action):
 
     return
 
-label action_forcefully_accepted_lines(Girl, action):
+label action_forcefully_accepted_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Ok, fine.",
             ". . . Ok, if that's what you want.",
@@ -4711,29 +4707,29 @@ label action_forcefully_accepted_lines(Girl, action):
 
     return
 
-label action_done_five_times_lines(Girl, action):
+label action_done_five_times_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I think I've got the hang of this.",
             "We're making a regular habit of this.",
             "This is. . . interesting.",
             "We're really making this a regular thing."]
 
-        if action == "handjob":
+        if Action_type == "handjob":
             $ lines.append("I think I've got this well in hand.")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("I kinda like this sensation.{p}}Never thought about touching people with my feet.")
     elif Girl == KittyX:
         $ lines = ["Why did we not do this sooner?!",
             "I'm really starting to love this.",
             "I'm surprised how much I enjoy this."]
 
-        if action == "handjob":
+        if Action_type == "handjob":
             $ lines.append("Let me know any time you need me to give you a hand.")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("Let me know any time you need me to \"foot you up\".")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("Huh, I guess these are good for something.")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("I'm getting better at this. . . right?")
     elif Girl == EmmaX:
         $ lines = ["Please do call again. . .",
@@ -4741,12 +4737,12 @@ label action_done_five_times_lines(Girl, action):
             "We really should have done this sooner.",
             "I can't imagine why I waited so long."]
 
-        if action in cock_actions or action in fondle_actions:
+        if Action_type in cock_actions or Action_type in fondle_Action_types:
             $ lines.append("Best you've had, I'm sure.")
 
-            if action == "titjob":
+            if Action_type == "titjob":
                 $ lines.append("You certainly get a lot of mileage out of these.")
-        elif action in active_actions:
+        elif Action_type in active_Action_types:
             $ lines.append("You're pretty good at that.")
     elif Girl == LauraX:
         $ lines = ["I think I've got this down, maybe I should get a punch card.",
@@ -4755,7 +4751,7 @@ label action_done_five_times_lines(Girl, action):
             "You know, this was a good idea.",
             "I'm glad you're into this."]
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I'm really getting the hang of this. . . right?")
     elif Girl == JeanX:
         $ lines = ["Fun, right?",
@@ -4763,9 +4759,9 @@ label action_done_five_times_lines(Girl, action):
             "I'm getting used to this. . .",
             "I'm glad we have similar interests. . ."]
 
-        if action in active_actions:
+        if Action_type in active_Action_types:
             $ lines.append("You're pretty good at this. . .")
-        elif action in passive_actions:
+        elif Action_type in passive_Action_types:
             $ lines.append("I'm pretty good at this, right?")
     elif Girl == StormX:
         $ lines = ["I have gotten used to these. . .",
@@ -4775,7 +4771,7 @@ label action_done_five_times_lines(Girl, action):
             "I am glad you \"bumped into\" me.",
             "You do certainly make the experience enjoyable."]
 
-        if action in active_actions:
+        if Action_type in active_Action_types:
             $ lines.append("You are quite skilled at this.")
 
     $ line = renpy.random.choice(lines)
@@ -4784,7 +4780,7 @@ label action_done_five_times_lines(Girl, action):
 
     return
 
-label switching_action_lines(Girl, action):
+label switching_action_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Mmm, so what else did you have in mind?"]
     elif Girl == KittyX:
@@ -4811,121 +4807,121 @@ label switching_action_lines(Girl, action):
 
     return
 
-label before_action_less_than_three_times_lines(Girl, action):
+label before_action_less_than_three_times_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Again?",
             "So you'd like another go?"]
 
-        if action == "handjob":
+        if Action_type == "handjob":
             $ lines.append("So you'd like another handy?")
 
-        if action == "titjob":
+        if Action_type == "titjob":
             $ lines.append("So you'd like another titjob?")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("So you'd like another blowjob?")
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("You like to watch, huh?")
 
-        if action in ["dildo_pussy", "sex"]:
+        if Action_type in ["dildo_pussy", "sex"]:
             $ lines.append("You want to stick it in my pussy again?")
 
-        if action in ["dildo_ass", "anal"]:
+        if Action_type in ["dildo_ass", "anal"]:
             $ lines.append("You want to stick it in my ass again?")
     elif Girl == KittyX:
         $ lines = ["Did you. . . like it last time?",
             "So you'd like another round?"]
 
-        if action == "handjob":
+        if Action_type == "handjob":
             $ lines.append("Hmm, magic fingers. . .")
 
-        if action == "footjob":
+        if Action_type == "footjob":
             $ lines.append("Hmm, magic toes. . .")
 
-        if action == "titjob":
+        if Action_type == "titjob":
             $ lines.append("So you'd like another titjob?")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("So you'd like another blowjob?")
 
-        if action in ["dildo_pussy", "sex"]:
+        if Action_type in ["dildo_pussy", "sex"]:
             $ lines.append("You want to stick it in my pussy again?")
 
-        if action in ["dildo_ass", "anal"]:
+        if Action_type in ["dildo_ass", "anal"]:
             $ lines.append("You want to stick it in my ass again?")
     elif Girl == EmmaX:
         $ lines = ["Enjoyed last time?. . .",
             "Oh, very well. . .",
             "Oh? Another round?"]
 
-        if action == "titjob":
+        if Action_type == "titjob":
             $ lines.append("Hmm, another titjob?")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("Another blowjob?")
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("You enjoyed the show?")
 
-        if action in ["dildo_pussy", "sex"]:
+        if Action_type in ["dildo_pussy", "sex"]:
             $ lines.append("You want to stick it in my pussy again?")
 
-        if action in ["dildo_ass", "anal"]:
+        if Action_type in ["dildo_ass", "anal"]:
             $ lines.append("You want to stick it in my ass again?")
     elif Girl == LauraX:
         $ lines = ["You seem to like this one. . .",
             "Did you. . . like it last time?",
             "Oh? Another round?"]
 
-        if action == "footjob":
+        if Action_type == "footjob":
             $ lines.append("Hmm, magic toes. . .")
 
-        if action == "titjob":
+        if Action_type == "titjob":
             $ lines.append("Another titjob??")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("You'd like another blowjob?")
 
-        if action in ["dildo_pussy", "sex"]:
+        if Action_type in ["dildo_pussy", "sex"]:
             $ lines.append("You want to stick it in my pussy again?")
 
-        if action in ["dildo_ass", "anal"]:
+        if Action_type in ["dildo_ass", "anal"]:
             $ lines.append("You want to stick it in my ass again?")
     elif Girl == JeanX:
         $ lines = ["You enjoyed that, huh.",
             "Hmm, it is kinda fun. . .",
             "Oh? Another round?"]
 
-        if action == job_actions:
+        if Action_type == job_Action_types:
             $ lines.append("I guess you're getting used to these. . .")
 
-        if action == "titjob":
+        if Action_type == "titjob":
             $ lines.append("Again with the tits, uh?")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("You'd like another blowjob?")
 
-        if action in ["dildo_pussy", "sex"]:
+        if Action_type in ["dildo_pussy", "sex"]:
             $ lines.append("You want to stick it in my pussy again?")
     elif Girl == StormX:
         $ lines = ["You enjoyed it last time?. . .",
             "Oh, very well. . .",
             "Oh? Another round?"]
 
-        if action == "titjob":
+        if Action_type == "titjob":
             $ lines.append("Hmm, another titjob?")
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("Another blowjob?")
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("You enjoyed the show?")
 
-        if action in ["dildo_pussy", "sex"]:
+        if Action_type in ["dildo_pussy", "sex"]:
             $ lines.append("You want to stick it in my pussy again?")
 
-        if action in ["dildo_ass", "anal"]:
+        if Action_type in ["dildo_ass", "anal"]:
             $ lines.append("You want to stick it in my ass again?")
     elif Girl == JubesX:
         $ lines = ["You seem to like this one. . .",
@@ -4937,7 +4933,7 @@ label before_action_less_than_three_times_lines(Girl, action):
 
     return
 
-label anal_insertion_not_loose_not_done_today_lines(Girl, action):
+label anal_insertion_not_loose_not_done_today_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["You could have been a bit more gentle last time, " + Girl.player_petname + "_. . ."]
     elif Girl == KittyX:
@@ -4959,7 +4955,7 @@ label anal_insertion_not_loose_not_done_today_lines(Girl, action):
 
     return
 
-label anal_insertion_not_loose_done_today_lines(Girl, action):
+label anal_insertion_not_loose_done_today_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Sorry, I just need a little break back there, " + Girl.player_petname + "_.",
             "I'm still a little sore from earlier, " + Girl.player_petname + "_."]
@@ -4988,7 +4984,7 @@ label anal_insertion_not_loose_done_today_lines(Girl, action):
 
     return
 
-label hard_cock_lines(Girl, action):
+label hard_cock_lines(Girl, Action_type):
     if Girl == EmmaX:
         $ lines = ["My word " + Girl.player_petname + "_, your member is hard enough to crack diamond. . . and I should know."]
     elif Girl == LauraX:
@@ -5004,142 +5000,142 @@ label hard_cock_lines(Girl, action):
 
     return
 
-label first_time_asking_lines(Girl, action):
+label first_time_asking_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = []
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("You want me to get myself off, while you watch?")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("You want me to rub your cock, with my hand?")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("Huh, so like a handy, but with my feet?")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("You want me to rub your cock with my breasts?")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("You want me to put your dick. . . in my mouth?")
-        elif action in dildo_actions:
+        elif Action_type in dildo_Action_types:
             $ lines.append("Hmmm, so you'd like to try out some toys?")
-        elif action == "sex":
+        elif Action_type == "sex":
             $ lines.append("So, you'd like to take this to the next level? Actual sex? . . .")
-        elif action == "anal":
+        elif Action_type == "anal":
             $ lines.append("Wait, so you want to stick it in my butt?!")
-        elif action == "hotdog":
+        elif Action_type == "hotdog":
             $ lines.append("Wait, so you want to grind against my butt?!")
     elif Girl == KittyX:
         $ lines = ["I haven't really had much experience with this. . . "]
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("You want me to. . . touch myself?{p}And you're going to . . .watch?")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("So you want a handy then?")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("Huh, so you'd like me to touch your cock with my feet?")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("You want to rub your cock against my. . . breasts?")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("You want me to suck your dick?")
-        elif action in dildo_actions:
+        elif Action_type in dildo_Action_types:
             $ lines.append("Hmmm, so you'd like to try out some toys?")
-        elif action == "anal":
+        elif Action_type == "anal":
             $ lines.append("You want to go in the \"out\" door?!")
-        elif action == "hotdog":
+        elif Action_type == "hotdog":
             $ lines.append("So, just grinding against me?")
 
-        if action in [dildo_actions, "sex", "anal"]:
+        if Action_type in [dildo_Action_types, "sex", "anal"]:
             $ lines.append("You want to try and fit that. . .?")
     elif Girl == EmmaX:
         $ lines = ["Hmm, are you sure you can handle that, " + Girl.player_petname + "_?",
             "Hmm, are you sure you're really prepared for this? . . ",
             "Hmm, you don't take half measures. . ."]
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("So you enjoy a good show then. . .")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("Mmm, so you're into feet then, " + Girl.player_petname + "_?")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("So you'd like me to suck you off?")
-        elif action in dildo_actions:
+        elif Action_type in dildo_Action_types:
             $ lines.append("Hmmm, so you'd like to try out some toys?")
-        elif action == "anal":
+        elif Action_type == "anal":
             $ lines.append("Oooh, naughty boy. Anal?")
-        elif action == "hotdog":
+        elif Action_type == "hotdog":
             $ lines.append("You just want me to grind against you then?")
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("You'd like me to take care of that for you?")
     elif Girl == LauraX:
         $ lines = []
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("So you want me to masturbate while you watch?")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("Handjob, huh. . .")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("Standard footjob?")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("You want a titjob, huh?")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("You want me to suck your cock?")
-        elif action in dildo_actions:
+        elif Action_type in dildo_Action_types:
             $ lines.append("Hmmm, so you'd like to try out some toys?")
-        elif action == "sex":
+        elif Action_type == "sex":
             $ lines.append("Huh, you wanna fuck me? . . ")
-        elif action == "anal":
+        elif Action_type == "anal":
             $ lines.append("Huh, anal?")
-        elif action == "hotdog":
+        elif Action_type == "hotdog":
             $ lines.append("What, just grinding?")
 
-        if action in [dildo_actions, "sex", "anal"]:
+        if Action_type in [dildo_Action_types, "sex", "anal"]:
             $ lines.append("You want to try and fit that. . .?")
     elif Girl == JeanX:
         $ lines = ["I can't blame you. . ."]
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("Oh, so you want to watch while I get off?")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("You want a handjob, hmm. . .")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.apppend("Oh, a foot person, eh?")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("Oh, you want me to put these to work. . .")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("Oh! You want me to suck you off?")
-        elif action in dildo_actions:
+        elif Action_type in dildo_Action_types:
             $ lines.append("Hmmm, so you'd like to try out some toys?")
-        elif action == "sex":
+        elif Action_type == "sex":
             $ lines.append("Oh, you wanna fuck . . ")
-        elif action == "anal":
+        elif Action_type == "anal":
             $ lines.append("Oh, you're into anal?")
-        elif action == "hotdog":
+        elif Action_type == "hotdog":
             $ lines.append("What, just grinding?")
     elif Girl == StormX:
         $ lines = ["Hmm, are you certain you are prepared for this? . . ",
             "Hmm, you don't take half measures. . ."]
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("Oh, so you like the watch? . .")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("You would like me to jerk you off?")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("Oh, you would like me to use my feet, " + Girl.player_petname + "_?")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("You would like me to suck on your penis?")
-        elif action in dildo_actions:
+        elif Action_type in dildo_Action_types:
             $ lines.append("Hmmm, so you'd like to try out some toys?")
-        elif action == "anal":
+        elif Action_type == "anal":
             $ lines.append("I am shocked! Anal?")
-        elif action == "hotdog":
+        elif Action_type == "hotdog":
             $ lines.append("You would just like to press against each other like this?")
 
-        if action in breast_actions:
+        if Action_type in breast_Action_types:
             $ lines.append("My breasts are really appealing to you, " + Girl.player_petname + "_?")
     elif Girl == JubesX:
         $ lines = []
 
-        if action == "masturbation":
+        if Action_type == "masturbation":
             $ lines.append("So you like watching me masturbate?")
-        elif action == "handjob":
+        elif Action_type == "handjob":
             $ lines.append("Handjob, huh. . .")
 
     if len(lines) > 0:
@@ -5149,78 +5145,78 @@ label first_time_asking_lines(Girl, action):
 
     return
 
-label first_time_forcing_lines(Girl, action):
+label first_time_forcing_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I suppose there are worst things you could ask for.",
             "Seriously?"]
 
-        if action in anal_insertion_actions:
+        if Action_type in anal_insertion_Action_types:
             $ lines.append("You had to go for the butt, uh?")
 
-        if action in ["sex", "anal"]:
+        if Action_type in ["sex", "anal"]:
             $ lines.append("You'd really take it that far?")
 
-        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+        if Action_type in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
             $ lines.append(". . . That's all?")
     elif Girl == KittyX:
         $ lines = ["I suppose there are worst things you could ask for."]
 
-        if action in ass_actions:
+        if Action_type in ass_Action_types:
             $ lines.append("Always about the butt, huh?")
 
-        if action in ["sex", "anal"]:
+        if Action_type in ["sex", "anal"]:
             $ lines.append("You'd really do this when you have me over a barrel?")
 
-        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+        if Action_type in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
             $ lines.append(". . . That's it?")
 
-        if action == "anal":
+        if Action_type == "anal":
             $ lines.append("Anal? Really?")
     elif Girl == EmmaX:
         $ lines = ["I suppose there are worst things you could ask for."]
 
-        if action in ass_actions:
+        if Action_type in ass_Action_types:
             $ lines.append("They always go for the butt. . .")
 
-        if action in ["sex", "anal"]:
+        if Action_type in ["sex", "anal"]:
             $ lines.append("Are you sure this is how you'd like to use your power?")
 
-        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+        if Action_type in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
             $ lines.append(". . . nothing more than that?")
 
-        if action == "anal":
+        if Action_type == "anal":
             $ lines.append("Anal? That's your goto?")
     elif Girl == LauraX:
         $ lines = ["I suppose there are worst things you could ask for."]
 
-        if action in ass_actions:
+        if Action_type in ass_Action_types:
             $ lines.append("Always about the butt, huh?")
 
-        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+        if Action_type in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
             $ lines.append(". . . nothing more?")
 
-        if action == "anal":
+        if Action_type == "anal":
             $ lines.append("Anal? That's what you're pushing for?")
     elif Girl == JeanX:
         $ lines = ["That's the card you're going to play?",
             "I suppose there are worst things you could ask for."]
 
-        if action in ["sex", "anal"]:
+        if Action_type in ["sex", "anal"]:
             $ lines.append("Pretty bold of you. . .")
 
-        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+        if Action_type in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
             $ lines.append(". . . nothing more?{p}Which of us has a pussy here?")
     elif Girl == StormX:
         $ lines = ["This is what you would have me do?",
             "I suppose there are worst things you could ask for."]
 
-        if action in ass_actions:
+        if Action_type in ass_Action_types:
             $ lines.append("They always go for the butt. . .")
 
-        if action in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
+        if Action_type in ["kiss", "fondle_thighs", "fondle_ass", "hotdog"]:
             $ lines.append(". . . and no more than that?")
 
-        if action == "anal":
+        if Action_type == "anal":
             $ lines.append("Oh. Of course it would be anal.")
 
     $ line = renpy.random.choice(lines)
@@ -5229,7 +5225,7 @@ label first_time_forcing_lines(Girl, action):
 
     return
 
-label mouth_not_enough(Girl, action):
+label mouth_not_enough(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["My mouth wasn't enough?"]
 
@@ -5239,7 +5235,7 @@ label mouth_not_enough(Girl, action):
 
     return
 
-label what_do_you_think_youre_doing_lines(Girl, action):
+label what_do_you_think_youre_doing_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Hey, what do you think you're doing back there?!",
             "Hmm, kinda rude, " + Girl.player_petname + "_."]
@@ -5250,7 +5246,7 @@ label what_do_you_think_youre_doing_lines(Girl, action):
 
     return
 
-label hand_not_enough(Girl, action):
+label hand_not_enough(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["My hand wasn't enough?"]
 
@@ -5260,40 +5256,40 @@ label hand_not_enough(Girl, action):
 
     return
 
-label achievement_lines(Girl, action):
+label achievement_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I. . . really think I enjoy this. . ."
             "I'm really starting to enjoy this.",
             "I think I'm getting addicted to this.",
             "I. . . really think I enjoy this. . ."]
 
-        if action == "handjob":
+        if Action_type == "handjob":
             $ lines.append("I guess you can call me \"Handi-Queen\".")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("I guess I've gotten used to this foot thing.")
     elif Girl == KittyX:
         $ lines = ["I just can't seem to quit you.",
             "I didn't think I'd love this so much!",
             "I. . . liked that a lot."]
 
-        if action == "handjob":
+        if Action_type == "handjob":
             $ lines.append("I've kinda become" + Girl.like + "_a \"Handi-Queen\" or something.")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("I guess I've gotten pretty smooth at the \"Kittypedi\".")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("I can't" + Girl.like + "_get your taste out of my mind.")
     elif Girl == EmmaX:
         $ lines = ["I seem to fit you like a glove. . .",
             "You're one of the better partners I've had at that.",
             "That was. . . pleasant."]
 
-        if action == "handjob":
+        if Action_type == "handjob":
             $ lines.append("I've apparently become the \"queen\" of handjobs as well.")
-        elif action == "footjob":
+        elif Action_type == "footjob":
             $ lines.append("I'm glad that you enjoy my feet.")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("You taste positively intoxicating, " + Girl.player_petname + "_.")
-        elif action == "titjob":
+        elif Action_type == "titjob":
             $ lines.append("They've been trained well over the years.")
     elif Girl == LauraX:
         $ lines = ["Looks like you filled out the punch card, " + Girl.player_petname + "_.",
@@ -5302,7 +5298,7 @@ label achievement_lines(Girl, action):
             "I think you've got a knack for that.",
             "That was. . . nice."]
 
-        if action == "blowjob":
+        if Action_type == "blowjob":
             $ lines.append("Your flavor is intoxicating.")
     elif Girl == JeanX:
         $ lines = ["This seems to be all we do lately. . .",
@@ -5318,9 +5314,9 @@ label achievement_lines(Girl, action):
             "I have certainly come to enjoy this.",
             "That was. . . enjoyable."]
 
-        if action == "handjob":
+        if Action_type == "handjob":
             $ lines.append("I seem to have become the \"queen\" of good handjobs.")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("I cannot imagine how I went this long without such a delicacy, " + Girl.player_petname + "_.")
 
     $ line = renpy.random.choice(lines)
@@ -5329,7 +5325,7 @@ label achievement_lines(Girl, action):
 
     return
 
-label convinced_after_saying_no_lines(Girl, action):
+label convinced_after_saying_no_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I guess if it'll get you off. . .",
             "Fine!",
@@ -5390,7 +5386,7 @@ label convinced_after_saying_no_lines(Girl, action):
 
     return
 
-label accepted_without_question_lines(Girl, action):
+label accepted_without_question_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Well. . . ok.",
             "Sure, I guess.",
@@ -5408,20 +5404,20 @@ label accepted_without_question_lines(Girl, action):
             "I guess I could. . . give it a go.",
             "Heh, ok, ok."]
 
-        if action == "titjob":
+        if Action_type == "titjob":
             $ lines.append("Fine. . . [She drools a bit into her cleavage].")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("Fine. . . [She licks her lips].")
             $ lines.append("Well, sure, ahhhhhh.")
             $ lines.append("Yum.")
-        elif action in ["sex", "anal"]:
+        elif Action_type in ["sex", "anal"]:
             $ lines.append("Well, sure, stick it in.")
-        elif action in hand_actions:
+        elif Action_type in hand_Action_types:
             $ lines.append("Well, sure, give it a rub.")
-        elif action in dildo_actions:
+        elif Action_type in dildo_Action_types:
             $ lines.append("Well, sure, stick it in.")
             $ lines.append("I guess I could. . . stick it in.")
-        elif action in cock_actions:
+        elif Action_type in cock_Action_types:
             $ lines.append("I guess I could. . . whip it out.")
             $ lines.append("Ok, lemme see it.")
             $ lines.append("I suppose, drop trou.")
@@ -5447,24 +5443,24 @@ label accepted_without_question_lines(Girl, action):
             "Sure, why not?",
             "Lol, ok."]
 
-        if action == "titjob":
+        if Action_type == "titjob":
             $ lines.append("Fine. . . [She drools a bit into her cleavage].")
-        elif action == "blowjob":
+        elif Action_type == "blowjob":
             $ lines.append("Yum.")
             $ lines.append("Ok. . . [She licks her lips].")
             $ lines.append("Well, sure, ahhhhhh.")
-        elif action in ["sex", "anal"]:
+        elif Action_type in ["sex", "anal"]:
             $ lines.append("Well, sure, stick it in.")
-        elif action in hand_actions:
+        elif Action_type in hand_Action_types:
             $ lines.append("Well, sure, give it a rub.")
-        elif action in active_actions:
+        elif Action_type in active_Action_types:
             $ lines.append("You could, I guess.")
-        elif action in passive_actions:
+        elif Action_type in passive_Action_types:
             $ lines.append("I guess I could. . .")
-        elif action in dildo_actions:
+        elif Action_type in dildo_Action_types:
             $ lines.append("I guess I could. . . stick it in.")
             $ lines.append("Well, sure, stick it in.")
-        elif action in cock_actions:
+        elif Action_type in cock_Action_types:
             $ lines.append("Cool, lemme see it.")
             $ lines.append("Well, sure, put it here.")
             $ lines.append("Sure, whip it out.")
@@ -5515,11 +5511,11 @@ label accepted_without_question_lines(Girl, action):
             "Sure, why not?",
             "[chuckles]. . . ok."]
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I suppose I could. . .")
             $ lines.append("I'll do it.")
 
-        if action in cock_actions:
+        if Action_type in cock_Action_types:
             $ lines.append("Well, give it here.")
     elif Girl == LauraX:
         $ lines = ["Sure, I guess.",
@@ -5569,7 +5565,7 @@ label accepted_without_question_lines(Girl, action):
             "Sure.",
             "Heh, ok."]
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I suppose I could. . .")
     elif Girl == JeanX:
         $ lines = ["Sure, I guess.",
@@ -5615,7 +5611,7 @@ label accepted_without_question_lines(Girl, action):
             "Sure.",
             "Sure, why not. . ."]
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I suppose I could. . .")
     elif Girl == StormX:
         $ lines = ["Oh, I suppose we might.",
@@ -5662,11 +5658,11 @@ label accepted_without_question_lines(Girl, action):
             "Sure, why not?",
             "[chuckles]. . . Fine."]
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I would do this.")
             $ lines.append("I suppose that I could. . .")
 
-        if action in cock_actions:
+        if Action_type in cock_Action_types:
             $ lines.append("Very well, give it here.")
     elif Girl == JubesX:
         $ lines = ["Sure, I guess.",
@@ -5680,7 +5676,7 @@ label accepted_without_question_lines(Girl, action):
             "Sure.",
             "Heh, ok."]
 
-        if action in passive_actions:
+        if Action_type in passive_Action_types:
             $ lines.append("I suppose I could. . .")
 
     $ line = renpy.random.choice(lines)
@@ -5689,7 +5685,7 @@ label accepted_without_question_lines(Girl, action):
 
     return
 
-label excited_for_first_kiss_lines(Girl, action):
+label excited_for_first_kiss_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I've never really been able to do this, so I'm a bit excited to try. . ."]
     elif Girl == KittyX:
@@ -5711,7 +5707,7 @@ label excited_for_first_kiss_lines(Girl, action):
 
     return
 
-label less_excited_for_first_kiss_lines(Girl, action):
+label less_excited_for_first_kiss_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I guess it's worth a shot. . ."]
     elif Girl == KittyX:
@@ -5733,7 +5729,7 @@ label less_excited_for_first_kiss_lines(Girl, action):
 
     return
 
-label excited_for_kiss_love_lines(Girl, action):
+label excited_for_kiss_love_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Sure, why not?"]
     elif Girl == KittyX:
@@ -5755,7 +5751,7 @@ label excited_for_kiss_love_lines(Girl, action):
 
     return
 
-label excited_for_kiss_obedience_lines(Girl, action):
+label excited_for_kiss_obedience_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["If you wish."]
     elif Girl == KittyX:
@@ -5777,7 +5773,7 @@ label excited_for_kiss_obedience_lines(Girl, action):
 
     return
 
-label kiss_addicted_lines(Girl, action):
+label kiss_addicted_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Hm. . . ok, let's do this."]
     elif Girl == KittyX:
@@ -5799,7 +5795,7 @@ label kiss_addicted_lines(Girl, action):
 
     return
 
-label kiss_accepted_lines(Girl, action):
+label kiss_accepted_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Hmm, ok."]
     elif Girl == KittyX:
@@ -5821,7 +5817,7 @@ label kiss_accepted_lines(Girl, action):
 
     return
 
-label lend_some_helping_hands_lines(Girl, action):
+label lend_some_helping_hands_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Well, " + Girl.player_petname + "_, I suppose I could use some help with these. . .",
             "Well, " + Girl.player_petname + "_, I suppose you could help me with these. . ."]
@@ -5849,7 +5845,7 @@ label lend_some_helping_hands_lines(Girl, action):
 
     return
 
-label why_dont_we_take_care_of_each_other_lines(Girl, action):
+label why_dont_we_take_care_of_each_other_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Well what did you have in mind?"]
     elif Girl == KittyX:
@@ -5871,7 +5867,7 @@ label why_dont_we_take_care_of_each_other_lines(Girl, action):
 
     return
 
-label well_in_hand_lust_lines(Girl, action):
+label well_in_hand_lust_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Well, " + Girl.player_petname + "_, I suppose I do at that . ."]
     elif Girl == KittyX:
@@ -5893,7 +5889,7 @@ label well_in_hand_lust_lines(Girl, action):
 
     return
 
-label well_in_hand_approved_lines(Girl, action):
+label well_in_hand_approved_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Well I did, but I think I've got it taken care of for now. . ."]
     elif Girl == KittyX:
@@ -5915,7 +5911,7 @@ label well_in_hand_approved_lines(Girl, action):
 
     return
 
-label well_in_hand_disapproved_lines(Girl, action):
+label well_in_hand_disapproved_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Well I did, but now you've blown the mood."]
     elif Girl == KittyX:
@@ -5937,7 +5933,7 @@ label well_in_hand_disapproved_lines(Girl, action):
 
     return
 
-label what_did_you_come_over_for_approval_lines(Girl, action):
+label what_did_you_come_over_for_approval_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["So what did you come over for anyway, " + Girl.player_petname + "_?"]
     elif Girl == KittyX:
@@ -5959,7 +5955,7 @@ label what_did_you_come_over_for_approval_lines(Girl, action):
 
     return
 
-label fancy_bumping_into_you_approval_lines(Girl, action):
+label fancy_bumping_into_you_approval_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["So . . . fancy bumping into you here, " + Girl.player_petname + "_. . ."]
     elif Girl == KittyX:
@@ -5981,7 +5977,7 @@ label fancy_bumping_into_you_approval_lines(Girl, action):
 
     return
 
-label what_did_you_come_over_for_disapproval_lines(Girl, action):
+label what_did_you_come_over_for_disapproval_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Well if you don't mind, I'd kind of appreciate you getting out of here. Maybe knock next time?"]
     elif Girl == KittyX:
@@ -6005,7 +6001,7 @@ label what_did_you_come_over_for_disapproval_lines(Girl, action):
 
     return
 
-label fancy_bumping_into_you_disapproval_lines(Girl, action):
+label fancy_bumping_into_you_disapproval_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Well if you don't mind, I'm getting out of here. Maybe knock next time?"]
     elif Girl == KittyX:
@@ -6027,7 +6023,7 @@ label fancy_bumping_into_you_disapproval_lines(Girl, action):
 
     return
 
-label masturbation_join_in_lines(Girl, action):
+label masturbation_join_in_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Yeah, did you want something, " + Girl.player_petname + "_?"]
     elif Girl == KittyX:
@@ -6049,7 +6045,7 @@ label masturbation_join_in_lines(Girl, action):
 
     return
 
-label masturbation_excellent_show_cock_out(Girl, action):
+label masturbation_excellent_show_cock_out(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Well, I imagine it was. . ."]
     elif Girl == KittyX:
@@ -6071,7 +6067,7 @@ label masturbation_excellent_show_cock_out(Girl, action):
 
     return
 
-label masturbation_excellent_show_cock_out_happy_lines(Girl, action):
+label masturbation_excellent_show_cock_out_happy_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["And the view from this angle ain't so bad either. . ."]
     elif Girl == KittyX:
@@ -6093,7 +6089,7 @@ label masturbation_excellent_show_cock_out_happy_lines(Girl, action):
 
     return
 
-label masturbation_just_got_here_cock_out_lines(Girl, action):
+label masturbation_just_got_here_cock_out_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["A likely story . . ."]
     elif Girl == KittyX:
@@ -6117,7 +6113,7 @@ label masturbation_just_got_here_cock_out_lines(Girl, action):
 
     return
 
-label masturbation_just_got_here_cock_out_happy_lines(Girl, action):
+label masturbation_just_got_here_cock_out_happy_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Still, can't blame a fella for take'in inspirations."]
     elif Girl == KittyX:
@@ -6139,7 +6135,7 @@ label masturbation_just_got_here_cock_out_happy_lines(Girl, action):
 
     return
 
-label masturbation_watching_for_long_enough_lines(Girl, action):
+label masturbation_watching_for_long_enough_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Well I hope you got a good show out of it. . ."]
     elif Girl == KittyX:
@@ -6161,7 +6157,7 @@ label masturbation_watching_for_long_enough_lines(Girl, action):
 
     return
 
-label masturbation_just_got_here_lines(Girl, action):
+label masturbation_just_got_here_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["A likely story . . ."]
     elif Girl == KittyX:
@@ -6183,7 +6179,7 @@ label masturbation_just_got_here_lines(Girl, action):
 
     return
 
-label masturbation_keep_going_lines(Girl, action):
+label masturbation_keep_going_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Well, alright. . ."]
     elif Girl == KittyX:
@@ -6205,7 +6201,7 @@ label masturbation_keep_going_lines(Girl, action):
 
     return
 
-label masturbation_worn_out_lines(Girl, action):
+label masturbation_worn_out_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["I need to take a little break here, " + Girl.player_petname + "_.",
             "I'm kinda worn out, maybe time for a break. . ."]
@@ -6230,7 +6226,7 @@ label masturbation_worn_out_lines(Girl, action):
 
     return
 
-label end_of_masturbation_satisfied_lines(Girl, action):
+label end_of_masturbation_satisfied_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["That really worked for me, " + Girl.player_petname + "_. How about you?"]
     elif Girl == KittyX:
@@ -6252,7 +6248,7 @@ label end_of_masturbation_satisfied_lines(Girl, action):
 
     return
 
-label end_of_masturbation_lines(Girl, action):
+label end_of_masturbation_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Yeah, what did you want?"]
     elif Girl == KittyX:
@@ -6274,7 +6270,7 @@ label end_of_masturbation_lines(Girl, action):
 
     return
 
-label masturbation_good_here_lines(Girl, action):
+label masturbation_good_here_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Well. . . ok then. . ."]
     elif Girl == KittyX:
@@ -6290,7 +6286,7 @@ label masturbation_good_here_lines(Girl, action):
     elif Girl == JubesX:
         $ lines = ["Ok, cool. . ."]
 
-label masturbation_stop_for_now_lines(Girl, action):
+label masturbation_stop_for_now_lines(Girl, Action_type):
     if Girl == RogueX:
         $ lines = ["Well if you say so."]
     elif Girl == KittyX:
@@ -6411,9 +6407,6 @@ label meeting_in_shower_lines(Girl, approval, first, someone_left):
         if first:
             ch_r "Hey, [Girl.player_petname]."
 
-            if "showered" in Girl.recent_history:
-                ch_r "I was just getting ready to head out."
-
             if not approval:
                 ch_r "See ya later."
         elif not approval and someone_left:
@@ -6425,9 +6418,6 @@ label meeting_in_shower_lines(Girl, approval, first, someone_left):
     elif Girl == KittyX:
         if first:
             ch_k "Hey, [Girl.player_petname]."
-
-            if "showered" in Girl.recent_history:
-                ch_k "I just got finished."
 
             if not approval:
                 ch_k "Oh, um, I should get out of your way. . ."
@@ -6441,9 +6431,6 @@ label meeting_in_shower_lines(Girl, approval, first, someone_left):
         if first:
             ch_e "Oh, hello, [Girl.player_petname]."
 
-            if "showered" in Girl.recent_history:
-                ch_e "I was about finished here."
-
             if not approval:
                 ch_e "I should get going."
         elif not approval and someone_left:
@@ -6455,9 +6442,6 @@ label meeting_in_shower_lines(Girl, approval, first, someone_left):
     elif Girl == LauraX:
         if first:
             ch_l "Oh, hey."
-
-            if "showered" in Girl.recent_history:
-                ch_l "I'm done here."
 
             if not approval:
                 ch_l "See you later."
@@ -6471,9 +6455,6 @@ label meeting_in_shower_lines(Girl, approval, first, someone_left):
         if first:
             ch_j "Oh, hey. . . you."
 
-            if "showered" in Girl.recent_history:
-                ch_j "I'm wrapping up here."
-
             if not approval:
                 ch_j "Later."
         elif not approval and someone_left:
@@ -6485,9 +6466,6 @@ label meeting_in_shower_lines(Girl, approval, first, someone_left):
     elif Girl == StormX:
         if first:
             ch_s "Oh, hello, [Girl.player_petname]."
-
-            if "showered" in Girl.recent_history:
-                ch_s "I was finishing up here."
 
             if not approval:
                 ch_s "I am heading out at the moment."
@@ -6501,9 +6479,6 @@ label meeting_in_shower_lines(Girl, approval, first, someone_left):
         if first:
             ch_v "Yo, [Girl.player_petname]."
 
-            if "showered" in Girl.recent_history:
-                ch_v "I just finished up here."
-
             if not approval:
                 ch_v "I should, uh, get going. . ."
         elif not approval and someone_left:
@@ -6515,7 +6490,7 @@ label meeting_in_shower_lines(Girl, approval, first, someone_left):
 
     return
 
-label template(Girl, action):
+label template(Girl, Action_type):
     if Girl == RogueX:
         $ lines = []
     elif Girl == KittyX:

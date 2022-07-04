@@ -44,7 +44,7 @@ init python:
             self.focusing = False
 
     class GirlClass(object):
-        def __init__(self, name, love, obedience, inhibition, friendship, lust):
+        def __init__(self, name, love, obedience, inhibition, lust):
             self.name = name
             self.tag = name
             self.names = [name]
@@ -52,8 +52,11 @@ init python:
             self.love = love
             self.obedience = obedience
             self.inhibition = inhibition
-            self.friendship = friendship
+
             self.lust = lust
+
+            self.addiction = 0
+            self.addiction_rate = 0
 
             # 0 = happy, 9 = furious
             self.mood = 0
@@ -122,13 +125,16 @@ init python:
 
             self.held_item = None
 
-            self.primary_Action = None
-            self.secondary_Action = None
+            self.primary_Action = ActionClass(None, Target = None)
+            self.secondary_Action = ActionClass(None, Target = None)
 
             self.Action_counter = {}
 
             for Action_type in all_Action_types:
                 self.Action_counter[Action_type] = 0
+
+            self.petname = self.name
+            self.petnames = [self.name]
 
             if self.tag == "Rogue":
                 self.voice = ch_r
@@ -149,6 +155,9 @@ init python:
                 self.likes = {"Kitty": 600, "Emma": 500, "Laura": 500, "Jean": 200, "Storm": 600, "Jubes": 500, "Mystique": 0}
 
                 self.used_to_anal = 0
+
+                self.player_petname = "Sugar"
+                self.player_petnames = [self.player_petname, Player.name]
             elif self.tag == "Kitty":
                 self.voice = ch_k
 
@@ -170,7 +179,10 @@ init python:
 
                 self.likes = {"Rogue": 600, "Emma": 500, "Laura": 500, "Jean": 300, "Storm": 600, "Jubes": 600, "Mystique": 0}
 
-                self.used_to_anal = False
+                self.used_to_anal = 0
+
+                self.player_petname = Player.name[:1]
+                self.player_petnames = ["sweetie", self.player_petname, Player.name]
             elif self.tag == "Emma":
                 self.voice = ch_e
 
@@ -191,6 +203,12 @@ init python:
 
                 self.likes = {"Rogue": 500, "Kitty": 500, "Laura": 500, "Jean": 100, "Storm": 500, "Jubes": 500, "Mystique": 0}
 
+                self.used_to_anal = 1
+
+                last_name = get_last_name(Player)
+
+                self.player_petname = "Mr. " + last_name
+                self.player_petnames = ["young man", self.player_petname, Player.name]
             elif self.tag == "Laura":
                 self.voice = ch_l
 
@@ -210,6 +228,11 @@ init python:
                     ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"]]
 
                 self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 500, "Jean": 300, "Storm": 500, "Jubes": 600, "Mystique": 0}
+
+                self.used_to_anal = 1
+
+                self.player_petname = Player.name
+                self.player_petnames = ["guy", self.player_petname]
             elif self.tag == "Jean":
                 self.voice = ch_j
 
@@ -227,6 +250,11 @@ init python:
                     ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"]]
 
                 self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 300, "Laura": 500, "Storm": 300, "Jubes": 300, "Mystique": 0}
+
+                self.used_to_anal = 0
+
+                self.player_petname = "um. . ."
+                self.player_petnames = [self.player_petname]
             elif self.tag == "Storm":
                 self.voice = ch_s
 
@@ -244,6 +272,11 @@ init python:
                     ["bg_storm", "bg_campus", "bg_storm", "bg_pool"]]
 
                 self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 400, "Laura": 500, "Jean": 300, "Jubes": 500, "Mystique": 0}
+
+                self.used_to_anal = 0
+
+                self.player_petname = Player.name
+                self.player_petnames = [self.player_petname]
             elif self.tag == "Jubes":
                 self.voice = ch_v
 
@@ -262,7 +295,10 @@ init python:
 
                 self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 500, "Laura": 600, "Jean": 300, "Storm": 500, "Mystique": 0}
 
-                self.used_to_anal = False
+                self.used_to_anal = 0
+
+                self.player_petname = "Bro"
+                self.player_petnames = [self.player_petname, Player.name]
             elif self.tag == "Mystique":
                 self.voice = ch_m
 
@@ -283,7 +319,12 @@ init python:
 
                 self.likes = {"Rogue": 0, "Kitty": 0, "Emma": 0, "Laura": 0, "Jean": 0, "Storm": 0, "Jubes": 0}
 
-                self.used_to_anal = True
+                self.used_to_anal = 1
+
+                last_name = get_last_name(Player)
+
+                self.player_petname = "Mr. " + last_name
+                self.player_petnames = [self.player_petname, Player.name]
 
             bedrooms.append(self.home)
 
@@ -292,7 +333,7 @@ init python:
         def change_face(self, emotion = None, blushing = 0, manic = False, mouth = None, eyes = None, brows = None):
             emotion = self.emotion if not emotion else emotion
 
-            if (self.forced or "angry" in self.recent_history) and emotion in ["normal", "bemused", "sexy", "sly", "smile", "startled"]:
+            if self.mood > 4 and emotion in ["normal", "bemused", "sexy", "sly", "smile", "startled"]:
                 emotion = "angry"
             elif self.event_counter["forced"] > 0 and emotion in ["normal", "bemused", "sexy", "sly", "smile", "startled"]:
                 emotion = "sad"
@@ -479,6 +520,7 @@ init python:
                 self.emotion = "angry"
             else:
                 self.emotion = "normal"
+
             return
 
         def try_on(self, Clothing):
@@ -554,7 +596,7 @@ init python:
             return
 
         def fix_clothing(self):
-            for Clothing_type in self.Outfit.removable():
+            for Clothing_type in self.Outfit.removable:
                 if self.Wardrobe.temp_Outfit.Clothes[Clothing_type] and not self.Clothes[Clothing_type]:
                     self.Wardrobe.temp_Outfit.Clothes[Clothing_type].state = self.Wardrobe.temp_Outfit.Clothes[Clothing_type].undressed_state
 
@@ -562,7 +604,7 @@ init python:
 
                     renpy.pause(0.2)
 
-                if self.Clothes[Clothing_type].state > 0:
+                if self.Clothes[Clothing_type] and self.Clothes[Clothing_type].state > 0:
                     self.Clothes[Clothing_type].put_on()
 
             return
@@ -589,9 +631,8 @@ init python:
             if self.location not in ["bg_shower", "bg_pool"]:
                 self.wet = False
 
-            if any(self.spunk) and ("painted" not in self.daily_history or "cleaned" not in self.daily_history):
-                for key in self.spunk.keys():
-                    self.spunk[key] = False
+            for key in self.spunk.keys():
+                self.spunk[key] = False
 
             self.Wardrobe.change_Outfit(Outfit = self.Wardrobe.Outfits[Outfit_name], instant = instant)
 
@@ -931,7 +972,7 @@ init python:
 
             for Outfit in self.Wardrobe.Outfits.values():
                 for Clothing in Outfit.Clothes.values():
-                    if Clothing:
+                    if Clothing.name:
                         self.Wardrobe.add_Clothing(Clothing)
 
             return
@@ -946,7 +987,7 @@ init python:
             self.brows = "happy"
             self.eyes = "happy"
 
-            if self.name == "Xavier":
+            if self.name == "Professor X":
                 self.psychic = False
 
         def change_face(self, emotion):

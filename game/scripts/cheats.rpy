@@ -3,7 +3,7 @@ label cheat_menu(Girl):
 
     while True:
         menu:
-            "[Girl.name]: Love: [Girl.love], Obedience: [Girl.obedience], Inhibition: [Girl.inhibition], Friendship: [Girl.friendship], Lust: [Girl.lust], Location: [Girl.location]"
+            "[Girl.name]: Love: [Girl.love], Obedience: [Girl.obedience], Inhibition: [Girl.inhibition], Lust: [Girl.lust], Location: [Girl.location]"
             "Raise love":
                 $ Girl.love += 100
             "Lower love":
@@ -296,7 +296,7 @@ label sex_cheats(Girl):
             "Juice up":
                 $ Player.semen = Player.max_semen
 
-                $ Girl.remaining_actions = Girl.max_actions
+                $ Girl.remaining_Actions = Girl.max_Actions
             "Cold shower":
                 $ Player.focus = 0
             "Exit":

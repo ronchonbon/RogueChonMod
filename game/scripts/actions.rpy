@@ -5,3 +5,5 @@ init python:
             self.type = Action_type
 
             self.Target = Target
+
+            self.speed = 0

@@ -53,8 +53,8 @@ label study_Explore:
                     "Check in the box":
                         if approval_check(KittyX, 700, "I") or approval_check(KittyX, 1800):
                             if "Well Studied" not in achievements:
-                                call change_Girl_stat(KittyX, "obedience", 50, 10)
-                                call change_Girl_stat(KittyX, "inhibition", 60, 15)
+                                call change_Girl_stat(KittyX, "obedience", 10)
+                                call change_Girl_stat(KittyX, "inhibition", 15)
                                 ch_k "Sounds like a plan."
                                 "[KittyX.name] swipes her hand through the box, and pulls out a stack of bills."
                                 "Looks like Xavier was hiding a rainy day fund in here."
@@ -64,9 +64,9 @@ label study_Explore:
                             else:
                                 "Looks like this has been thoroughly looted."
                         else:
-                            call change_Girl_stat(KittyX, "love", 90, -3)
-                            call change_Girl_stat(KittyX, "obedience", 50, 1)
-                            call change_Girl_stat(KittyX, "inhibition", 60, 2)
+                            call change_Girl_stat(KittyX, "love", -3)
+                            call change_Girl_stat(KittyX, "obedience", 1)
+                            call change_Girl_stat(KittyX, "inhibition", 2)
                             ch_k "I really don't think we should do that."
                     "Put it back.":
                         "You place the box back on the shelf."
@@ -76,8 +76,8 @@ label study_Explore:
                     "Check in the box":
                         if approval_check(StormX, 700, "I") or approval_check(StormX, 1800):
                             if "Well Studied" not in achievements:
-                                call change_Girl_stat(StormX, "obedience", 50, 10)
-                                call change_Girl_stat(StormX, "inhibition", 60, 15)
+                                call change_Girl_stat(StormX, "obedience", 10)
+                                call change_Girl_stat(StormX, "inhibition", 15)
                                 ch_s "I suppose I could. . ."
                                 "[StormX.name] picks the lock on the box, and pulls out a stack of bills."
                                 "Looks like Charles had some money set aside. . ."
@@ -87,9 +87,9 @@ label study_Explore:
                             else:
                                 "Looks like this has been thoroughly looted."
                         else:
-                            call change_Girl_stat(StormX, "love", 90, -3)
-                            call change_Girl_stat(StormX, "obedience", 50, 1)
-                            call change_Girl_stat(StormX, "inhibition", 60, 2)
+                            call change_Girl_stat(StormX, "love", -3)
+                            call change_Girl_stat(StormX, "obedience", 1)
+                            call change_Girl_stat(StormX, "inhibition", 2)
                             ch_s "I really don't think we should do that."
                     "Put it back.":
                         "You place the box back on the shelf."
@@ -155,8 +155,8 @@ label study_Explore:
                     "Inside are some fairly. . . detailed reports on the girls at the school."
                     $ StormX.change_face("surprised", 2)
                     "These include body measurements, sexual histories. . . masturbation habits?"
-                    call change_Girl_stat(StormX, "obedience", 70, 5)
-                    call change_Girl_stat(StormX, "inhibition", 70, 5)
+                    call change_Girl_stat(StormX, "obedience", 5)
+                    call change_Girl_stat(StormX, "inhibition", 5)
                     $ StormX.change_face("angry")
                     ch_s "Well, I don't think Charles should be holding information like this. . ."
                     $ StormX.change_face("normal", 1)
@@ -252,11 +252,11 @@ label execute_plan(Girl):
             ch_x "Oh, not again."
             ch_x "What is it you want this time?"
 
-            call change_Girl_stat(RogueX, "obedience", 80, 3)
-            call change_Girl_stat(RogueX, "inhibition", 70, 1)
+            call change_Girl_stat(RogueX, "obedience", 3)
+            call change_Girl_stat(RogueX, "inhibition", 1)
         else:
-            call change_Girl_stat(RogueX, "obedience", 50, 40)
-            call change_Girl_stat(RogueX, "inhibition", 70, 20)
+            call change_Girl_stat(RogueX, "obedience", 40)
+            call change_Girl_stat(RogueX, "inhibition", 20)
 
         ch_r "Well, [RogueX.player_petname], what would you like to do with this opportunity?"
         ch_r "I think we'll only get three tries at this. . ."
@@ -273,14 +273,14 @@ label execute_plan(Girl):
             ch_x "Oh, not again."
             ch_x "What is it you want this time?"
 
-            call change_Girl_stat(KittyX, "obedience", 80, 3)
-            call change_Girl_stat(KittyX, "inhibition", 70, 1)
+            call change_Girl_stat(KittyX, "obedience", 3)
+            call change_Girl_stat(KittyX, "inhibition", 1)
         else:
             ch_x "What is the meaning of this? Unhand me!"
             "You pull out the photo you found earlier in his study."
 
-            call change_Girl_stat(KittyX, "obedience", 50, 40)
-            call change_Girl_stat(KittyX, "inhibition", 70, 30)
+            call change_Girl_stat(KittyX, "obedience", 40)
+            call change_Girl_stat(KittyX, "inhibition", 30)
 
             ch_p "I have here a rather. . . compromising photo of you and Mystique."
             ch_p "I was thinking maybe you could cut me a little slack around here."
@@ -290,8 +290,8 @@ label execute_plan(Girl):
             ch_x "Very well. . . I'll forget about your punishment."
             ch_p "Oh, I think we can do a bit better than that. . ."
 
-            call change_Girl_stat(KittyX, "obedience", 200, 30)
-            call change_Girl_stat(KittyX, "inhibition", 200, 10)
+            call change_Girl_stat(KittyX, "obedience", 30)
+            call change_Girl_stat(KittyX, "inhibition", 10)
 
         ch_k "Well, [KittyX.player_petname], what should we ask for?"
     elif Girl in [EmmaX, JeanX]:
@@ -304,13 +304,13 @@ label execute_plan(Girl):
         if (Girl == EmmaX and "Psi" in Player.traits) or (Girl == JeanX and "Alpha" in Player.traits):
             ch_x "Oh, not again. . ."
 
-            call change_Girl_stat(Girl, "obedience", 80, 3)
-            call change_Girl_stat(Girl, "inhibition", 80, 1)
+            call change_Girl_stat(Girl, "obedience", 3)
+            call change_Girl_stat(Girl, "inhibition", 1)
         else:
-            call change_Girl_stat(Girl, "obedience", 50, 40)
-            call change_Girl_stat(Girl, "inhibition", 70, 30)
-            call change_Girl_stat(Girl, "obedience", 200, 30)
-            call change_Girl_stat(Girl, "inhibition", 200, 10)
+            call change_Girl_stat(Girl, "obedience", 40)
+            call change_Girl_stat(Girl, "inhibition", 30)
+            call change_Girl_stat(Girl, "obedience", 30)
+            call change_Girl_stat(Girl, "inhibition", 10)
 
         Girl.voice "Well, [Girl.player_petname], what should we ask for?"
     elif Girl == LauraX:
@@ -323,8 +323,8 @@ label execute_plan(Girl):
 
             ch_x "What is it you want this time?"
 
-            call change_Girl_stat(LauraX, "obedience", 80, 3)
-            call change_Girl_stat(LauraX, "inhibition", 80, 1)
+            call change_Girl_stat(LauraX, "obedience", 3)
+            call change_Girl_stat(LauraX, "inhibition", 1)
         else:
             ch_x "What is the meaning of this? Unhand me!"
             ch_p "[LauraX.name] and I were talking, and it seems like neither of us appreciates you bothering us."
@@ -340,10 +340,10 @@ label execute_plan(Girl):
             ch_x "Very well. . . I'll forget about your punishment."
             ch_p "Oh, I think we can do a bit better than that. . ."
 
-            call change_Girl_stat(LauraX, "obedience", 50, 40)
-            call change_Girl_stat(LauraX, "inhibition", 80, 30)
-            call change_Girl_stat(LauraX, "obedience", 200, 30)
-            call change_Girl_stat(LauraX, "inhibition", 200, 10)
+            call change_Girl_stat(LauraX, "obedience", 40)
+            call change_Girl_stat(LauraX, "inhibition", 30)
+            call change_Girl_stat(LauraX, "obedience", 30)
+            call change_Girl_stat(LauraX, "inhibition", 10)
 
         ch_l "Well, [LauraX.player_petname], what should we ask for?"
     elif Girl == StormX:
@@ -359,14 +359,14 @@ label execute_plan(Girl):
             ch_x "Oh, not this again."
             ch_x "What is it you want this time?"
 
-            call change_Girl_stat(StormX, "obedience", 80, 3)
-            call change_Girl_stat(StormX, "inhibition", 70, 1)
+            call change_Girl_stat(StormX, "obedience", 3)
+            call change_Girl_stat(StormX, "inhibition", 1)
         else:
             ch_x "What is the meaning of this? Unhand me!"
             "You pull out the files you found earlier in his study."
 
-            call change_Girl_stat(StormX, "obedience", 50, 40)
-            call change_Girl_stat(StormX, "inhibition", 70, 30)
+            call change_Girl_stat(StormX, "obedience", 40)
+            call change_Girl_stat(StormX, "inhibition", 30)
 
             ch_p "I have here some rather. . . questionable \"medical\" files."
             ch_p "I was thinking maybe you could cut me a little slack around here."
@@ -375,8 +375,8 @@ label execute_plan(Girl):
             ch_x "Very well. . . I'll forget about your punishment."
             ch_p "Oh, I think we can do a bit better than that. . ."
 
-            call change_Girl_stat(StormX, "obedience", 200, 30)
-            call change_Girl_stat(StormX, "inhibition", 200, 10)
+            call change_Girl_stat(StormX, "obedience", 30)
+            call change_Girl_stat(StormX, "inhibition", 10)
 
         ch_s "Well, [StormX.player_petname], what should we ask for?"
     elif Girl == JubesX:
@@ -393,21 +393,21 @@ label execute_plan(Girl):
             ch_x "Oh, not again."
             ch_x "What is it you want this time?"
 
-            call change_Girl_stat(JubesX, "obedience", 80, 3)
-            call change_Girl_stat(JubesX, "inhibition", 70, 1)
+            call change_Girl_stat(JubesX, "obedience", 3)
+            call change_Girl_stat(JubesX, "inhibition", 1)
         else:
             ch_x "What is the meaning of this? Unhand me!"
 
-            call change_Girl_stat(JubesX, "inhibition", 70, 30)
+            call change_Girl_stat(JubesX, "inhibition", 30)
 
             ch_v "Look into my eyes. . ."
 
-            call change_Girl_stat(JubesX, "obedience", 50, 40)
-            call change_Girl_stat(JubesX, "inhibition", 200, 10)
+            call change_Girl_stat(JubesX, "obedience", 40)
+            call change_Girl_stat(JubesX, "inhibition", 10)
 
             ch_v "See the sparks dancing around them? . . ."
 
-            call change_Girl_stat(JubesX, "obedience", 200, 30)
+            call change_Girl_stat(JubesX, "obedience", 30)
 
             "She slowly mesmerizes him into a trance, using a combination of her vampiric abilties and fireworks. . ."
 
@@ -436,10 +436,10 @@ label execute_plan(Girl):
                 $ JeanX.traits.append("whammy")
 
                 if JeanX.location == Player.location:
-                    call change_Girl_stat(JeanX, "obedience", 50, 5)
-                    call change_Girl_stat(JeanX, "love", 50, 5)
-                    call change_Girl_stat(JeanX, "love", 70, 5)
-                    call change_Girl_stat(JeanX, "love", 90, 5)
+                    call change_Girl_stat(JeanX, "obedience", 5)
+                    call change_Girl_stat(JeanX, "love", 5)
+                    call change_Girl_stat(JeanX, "love", 5)
+                    call change_Girl_stat(JeanX, "love", 5)
                     $ Girl.change_face("sly", 1)
 
                     ch_j "Nice. . ."
@@ -450,10 +450,10 @@ label execute_plan(Girl):
                 $ JeanX.traits.remove("whammy")
 
                 if JeanX.location == Player.location:
-                    call change_Girl_stat(JeanX, "obedience", 50, 5)
-                    call change_Girl_stat(JeanX, "obedience", 80, 5)
-                    call change_Girl_stat(JeanX, "love", 70, -5)
-                    call change_Girl_stat(JeanX, "love", 90, -5)
+                    call change_Girl_stat(JeanX, "obedience", 5)
+                    call change_Girl_stat(JeanX, "obedience", 5)
+                    call change_Girl_stat(JeanX, "love", -5)
+                    call change_Girl_stat(JeanX, "love", -5)
                     $ JeanX.change_face("angry", 1,mouth = "surprised")
 
                     ch_j "Hey!"
@@ -517,9 +517,9 @@ label execute_plan(Girl):
 
     if Girl == RogueX:
         if "Omega" not in Player.traits:
-            call change_Girl_stat(Girl, "lust", 90, 10)
-            call change_Girl_stat(Girl, "love", 70, 30)
-            call change_Girl_stat(Girl, "love", 200, 20)
+            call change_Girl_stat(Girl, "lust", 10)
+            call change_Girl_stat(Girl, "love", 30)
+            call change_Girl_stat(Girl, "love", 20)
 
             $ Player.traits.append("Omega")
 
@@ -529,10 +529,10 @@ label execute_plan(Girl):
         $ Girl.arm_pose = 1
     elif Girl == KittyX:
         if "Kappa" not in Player.traits:
-            call change_Girl_stat(Girl, "lust", 90, 10)
-            call change_Girl_stat(Girl, "inhibition", 80, 10)
-            call change_Girl_stat(Girl, "love", 70, 10)
-            call change_Girl_stat(Girl, "love", 200, 20)
+            call change_Girl_stat(Girl, "lust", 10)
+            call change_Girl_stat(Girl, "inhibition", 10)
+            call change_Girl_stat(Girl, "love", 10)
+            call change_Girl_stat(Girl, "love", 20)
 
             $ Player.traits.append("Kappa")
 
@@ -541,18 +541,18 @@ label execute_plan(Girl):
         ch_p "Ok, that's enough. Make Xavier forget that any of this happened, and then let's get out of here."
 
         if "Psi" not in Player.traits:
-            call change_Girl_stat(Girl, "lust", 90, 10)
-            call change_Girl_stat(Girl, "inhibition", 80, 10)
-            call change_Girl_stat(Girl, "love", 70, 10)
-            call change_Girl_stat(Girl, "love", 200, 20)
+            call change_Girl_stat(Girl, "lust", 10)
+            call change_Girl_stat(Girl, "inhibition", 10)
+            call change_Girl_stat(Girl, "love", 10)
+            call change_Girl_stat(Girl, "love", 20)
 
             $ Player.traits.append("Psi")
     elif Girl == LauraX:
         if "Chi" not in Player.traits:
-            call change_Girl_stat(Girl, "lust", 90, 10)
-            call change_Girl_stat(Girl, "inhibition", 80, 10)
-            call change_Girl_stat(Girl, "love", 70, 10)
-            call change_Girl_stat(Girl, "love", 200, 20)
+            call change_Girl_stat(Girl, "lust", 10)
+            call change_Girl_stat(Girl, "inhibition", 10)
+            call change_Girl_stat(Girl, "love", 10)
+            call change_Girl_stat(Girl, "love", 20)
 
             $ Player.traits.append("Chi")
 
@@ -562,29 +562,29 @@ label execute_plan(Girl):
         ch_p "Ok, that's enough. Make Xavier forget that any of this happened, and then let's get out of here."
 
         if "Alpha" not in Player.traits:
-            call change_Girl_stat(Girl, "lust", 70, 20)
-            call change_Girl_stat(Girl, "lust", 90, 10)
-            call change_Girl_stat(Girl, "inhibition", 80, 10)
-            call change_Girl_stat(Girl, "obedience", 70, 10)
-            call change_Girl_stat(Girl, "obedience", 200, 20)
-            call change_Girl_stat(Girl, "love", 70, 10)
-            call change_Girl_stat(Girl, "love", 200, 20)
+            call change_Girl_stat(Girl, "lust", 20)
+            call change_Girl_stat(Girl, "lust", 10)
+            call change_Girl_stat(Girl, "inhibition", 10)
+            call change_Girl_stat(Girl, "obedience", 10)
+            call change_Girl_stat(Girl, "obedience", 20)
+            call change_Girl_stat(Girl, "love", 10)
+            call change_Girl_stat(Girl, "love", 20)
 
             $ Player.traits.append("Alpha")
     elif Girl == StormX:
         if "Rho" not in Player.traits:
-            call change_Girl_stat(Girl, "lust", 90, 10)
-            call change_Girl_stat(Girl, "inhibition", 80, 10)
-            call change_Girl_stat(Girl, "love", 70, 10)
-            call change_Girl_stat(Girl, "love", 200, 20)
+            call change_Girl_stat(Girl, "lust", 10)
+            call change_Girl_stat(Girl, "inhibition", 10)
+            call change_Girl_stat(Girl, "love", 10)
+            call change_Girl_stat(Girl, "love", 20)
 
             $ Player.traits.append("Rho")
     elif Girl == JubesX:
         if "Zeta" not in Player.traits:
-            call change_Girl_stat(Girl, "lust", 90, 10)
-            call change_Girl_stat(Girl, "inhibition", 80, 10)
-            call change_Girl_stat(Girl, "love", 70, 10)
-            call change_Girl_stat(Girl, "love", 200, 20)
+            call change_Girl_stat(Girl, "lust", 10)
+            call change_Girl_stat(Girl, "inhibition", 10)
+            call change_Girl_stat(Girl, "love", 10)
+            call change_Girl_stat(Girl, "love", 20)
 
             $ Player.traits.append("Zeta")
 

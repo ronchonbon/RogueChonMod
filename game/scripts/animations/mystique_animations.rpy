@@ -42,7 +42,7 @@ layeredimage Mystique_grool_dripping_animation:
 layeredimage Mystique_grool_animations:
     if not MystiqueX.grool:
         Null()
-    elif MystiqueX.Clothes["dress"]:
+    elif MystiqueX.Clothes["dress"].string:
         AlphaMask("Mystique_grool_dripping_animation", "images/Mystique_standing/Mystique_standing_grool_mask_dress.png")
     elif not MystiqueX.Outfit.pussy_covered:
         AlphaMask("Mystique_grool_dripping_animation", "images/Mystique_standing/Mystique_standing_grool_mask.png")
@@ -63,13 +63,13 @@ layeredimage Mystique_spunk_dripping_animation:
 layeredimage Mystique_spunk_animations:
     if not MystiqueX.spunk["pussy"] and not MystiqueX.spunk["anus"]:
         Null()
-    elif MystiqueX.Clothes["dress"]:
+    elif MystiqueX.Clothes["dress"].string:
         AlphaMask("Mystique_grool_dripping_animation", "images/Mystique_standing/Mystique_standing_grool_mask_dress.png")
     elif not MystiqueX.Outfit.pussy_covered:
         AlphaMask("Mystique_grool_dripping_animation", "images/Mystique_standing/Mystique_standing_grool_mask.png")
 
 layeredimage Mystique_standing_fondling_animations:
-    if not MystiqueX.primary_Action or MystiqueX.primary_Action.Target != MystiqueX:
+    if MystiqueX.primary_Action.Target != MystiqueX:
         Null()
     elif MystiqueX.primary_Action.type == "fondle_breasts":
         "Mystique_fondle_breast_right_animation" pos (0.395, 0.621)
@@ -78,7 +78,7 @@ layeredimage Mystique_standing_fondling_animations:
     elif MystiqueX.primary_Action.type in "finger_pussy":
         "Mystique_finger_pussy_animation" pos (0.485, 1.06)
 
-    if not MystiqueX.secondary_Action or MystiqueX.secondary_Action.Target != MystiqueX:
+    if MystiqueX.secondary_Action.Target != MystiqueX:
         Null()
     elif MystiqueX.secondary_Action.type == "fondle_breasts":
         "Mystique_fondle_breast_left_animation" pos (0.518, 0.633)
@@ -87,7 +87,7 @@ layeredimage Mystique_standing_fondling_animations:
     elif MystiqueX.secondary_Action.type in "finger_pussy":
         "Mystique_finger_pussy_animation" pos (0.485, 1.06)
 
-    if not Player.primary_Action or Player.primary_Action.Target != MystiqueX:
+    if Player.primary_Action.Target != MystiqueX:
         Null()
     elif Player.primary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.415, 1.22)
@@ -102,7 +102,7 @@ layeredimage Mystique_standing_fondling_animations:
     elif Player.primary_Action.type == "eat_pussy":
         "Zero_eat_pussy_animation" pos (0.49, 1.09)
 
-    if not Player.secondary_Action or Player.secondary_Action.Target != MystiqueX:
+    if Player.secondary_Action.Target != MystiqueX:
         Null()
     elif Player.secondary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.415, 1.22)

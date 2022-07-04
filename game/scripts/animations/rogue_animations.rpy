@@ -30,9 +30,9 @@ layeredimage Rogue_grool_dripping_animation:
 layeredimage Rogue_grool_animations:
     if not RogueX.grool:
         Null()
-    elif RogueX.Clothes["pants"] and RogueX.Clothes["pants"].state:
+    elif RogueX.Clothes["pants"].state:
         AlphaMask("Rogue_grool_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_pants.png")
-    elif RogueX.Clothes["underwear"] and RogueX.Clothes["underwear"].state:
+    elif RogueX.Clothes["underwear"].state:
         AlphaMask("Rogue_grool_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_underwear.png")
     elif not RogueX.Outfit.pussy_covered:
         AlphaMask("Rogue_grool_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask.png")
@@ -53,15 +53,15 @@ layeredimage Rogue_spunk_dripping_animation:
 layeredimage Rogue_spunk_animations:
     if not RogueX.spunk["pussy"] and not RogueX.spunk["anus"]:
         Null()
-    elif RogueX.Clothes["pants"] and RogueX.Clothes["pants"].state:
+    elif RogueX.Clothes["pants"].state:
         AlphaMask("Rogue_spunk_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_pants.png")
-    elif RogueX.Clothes["underwear"] and RogueX.Clothes["underwear"].state:
+    elif RogueX.Clothes["underwear"].state:
         AlphaMask("Rogue_spunk_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask_underwear.png")
     elif not RogueX.Outfit.pussy_covered:
         AlphaMask("Rogue_spunk_dripping_animation", "images/Rogue_standing/Rogue_standing_grool_mask.png")
 
 layeredimage Rogue_standing_fondling_animations:
-    if not RogueX.primary_Action or RogueX.primary_Action.Target != RogueX:
+    if RogueX.primary_Action.Target != RogueX:
         Null()
     elif RogueX.primary_Action.type == "fondle_breasts":
         "Girl_fondle_breast_right_animation" pos (0.17, 0.72)
@@ -70,7 +70,7 @@ layeredimage Rogue_standing_fondling_animations:
     elif RogueX.primary_Action.type in "finger_pussy":
         "Girl_finger_pussy_animation" pos (0.242, 1.135)
 
-    if not RogueX.secondary_Action or RogueX.secondary_Action.Target != RogueX:
+    if RogueX.secondary_Action.Target != RogueX:
         Null()
     elif RogueX.secondary_Action.type == "fondle_breasts":
         "Girl_fondle_breast_left_animation" pos (0.313, 0.725)
@@ -79,7 +79,7 @@ layeredimage Rogue_standing_fondling_animations:
     elif RogueX.secondary_Action.type in "finger_pussy":
         "Girl_finger_pussy_animation" pos (0.242, 1.135)
 
-    if not Player.primary_Action or Player.primary_Action.Target != RogueX:
+    if Player.primary_Action.Target != RogueX:
         Null()
     elif Player.primary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.185, 1.3)
@@ -94,7 +94,7 @@ layeredimage Rogue_standing_fondling_animations:
     elif Player.primary_Action.type == "eat_pussy":
         "Zero_eat_pussy_animation" pos (0.25, 1.17)
 
-    if not Player.secondary_Action or Player.secondary_Action.Target != RogueX:
+    if Player.secondary_Action.Target != RogueX:
         Null()
     elif Player.secondary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.185, 1.3)
@@ -172,13 +172,13 @@ layeredimage Rogue_sprite handjob:
         "Rogue_sprite standing" pos (0.05, 0.0)
 
     always:
-        "Rogue_handjob_under_hand_animation[Action.type_speed]" pos (-0.035, 0.455) zoom 0.28
+        "Rogue_handjob_under_hand_animation[RogueX.primary_Action.speed]" pos (-0.035, 0.455) zoom 0.28
 
     always:
         "Zero_cock_Rogue"
 
     always:
-        "Rogue_handjob_over_hand_animation[Action.type_speed]" pos (-0.035, 0.455) zoom 0.28
+        "Rogue_handjob_over_hand_animation[RogueX.primary_Action.speed]" pos (-0.035, 0.455) zoom 0.28
 
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
 
@@ -388,19 +388,19 @@ image Rogue_titjob_breasts_animation5:
 
 layeredimage Rogue_sprite titjob:
     always:
-        "Rogue_titjob_hair_back_animation[Action.type_speed]" pos (0.025, -0.48) zoom 0.9
+        "Rogue_titjob_hair_back_animation[RogueX.primary_Action.speed]" pos (0.025, -0.48) zoom 0.9
 
     always:
-        "Rogue_titjob_body_animation[Action.type_speed]"
+        "Rogue_titjob_body_animation[RogueX.primary_Action.speed]"
 
     always:
-        "Rogue_titjob_head_animation[Action.type_speed]" pos (0.025, -0.48) zoom 0.9
+        "Rogue_titjob_head_animation[RogueX.primary_Action.speed]" pos (0.025, -0.48) zoom 0.9
 
     always:
         "Zero_cock_Rogue"
 
     always:
-        "Rogue_titjob_breasts_animation[Action.type_speed]"
+        "Rogue_titjob_breasts_animation[RogueX.primary_Action.speed]"
 
     anchor (0.5, 0.0) offset (200, 850) zoom 0.72
 
@@ -675,19 +675,19 @@ image Rogue_blowjob_face_mask_animation4:
 
 layeredimage Rogue_sprite blowjob:
     always:
-        "Rogue_blowjob_hair_back_animation[Action.type_speed]" pos (0.031, 0.317) zoom 0.2755
+        "Rogue_blowjob_hair_back_animation[RogueX.primary_Action.speed]" pos (0.031, 0.317) zoom 0.2755
 
     always:
-        "Rogue_blowjob_body_animation[Action.type_speed]"
+        "Rogue_blowjob_body_animation[RogueX.primary_Action.speed]"
 
     always:
-        "Rogue_blowjob_head_animation[Action.type_speed]" pos (0.031, 0.317) zoom 0.2755
+        "Rogue_blowjob_head_animation[RogueX.primary_Action.speed]" pos (0.031, 0.317) zoom 0.2755
 
     always:
         "Zero_cock_Rogue"
 
-    if Action.type_speed > 1:
-        "Rogue_blowjob_face_mask_animation[Action.type_speed]" anchor (0.5, 0.5) pos (0.031, 0.317) zoom 0.2755
+    if RogueX.primary_Action.speed > 1:
+        "Rogue_blowjob_face_mask_animation[RogueX.primary_Action.speed]" anchor (0.5, 0.5) pos (0.031, 0.317) zoom 0.2755
 
     anchor (0.5, 0.0) offset (220, -320) zoom 2.75
 
@@ -944,19 +944,19 @@ image Rogue_sex_spunk_anus_over_animation:
         repeat
 
 layeredimage Rogue_sprite sex:
-    if Player.cock_position in ["in", "anal"]:
-        "Rogue_sex_body_animation[Action.type_speed]"
-    elif Player.cock_position == "footjob":
-        "Rogue_sex_body_footjob_animation[Action.type_speed]"
-    elif Player.cock_position == "out":
-        "Rogue_sex_body_hotdog_animation[Action.type_speed]"
+    if Player.primary_Action.type in ["sex", "anal"]:
+        "Rogue_sex_body_animation[Player.primary_Action.speed]"
+    elif Player.primary_Action.type == "hotdog":
+        "Rogue_sex_body_hotdog_animation[Player.primary_Action.speed]"
+    elif RogueX.primary_Action.type == "footjob":
+        "Rogue_sex_body_footjob_animation[RogueX.primary_Action.speed]"
 
-    if Player.cock_position in ["in", "anal"]:
-        "Rogue_sex_legs_animation[Action.type_speed]"
-    elif Player.cock_position == "footjob":
-        "Rogue_sex_legs_footjob_animation[Action.type_speed]"
-    elif Player.cock_position == "out":
-        "Rogue_sex_legs_hotdog_animation[Action.type_speed]"
+    if Player.primary_Action.type in ["sex", "anal"]:
+        "Rogue_sex_legs_animation[Player.primary_Action.speed]"
+    elif Player.primary_Action.type == "hotdog":
+        "Rogue_sex_legs_hotdog_animation[Player.primary_Action.speed]"
+    elif RogueX.primary_Action.type == "footjob":
+        "Rogue_sex_legs_footjob_animation[RogueX.primary_Action.speed]"
 
     anchor (0.5, 0.0) offset (370, 770)
 
@@ -1202,30 +1202,30 @@ image Rogue_doggy_feet_animation2:
         repeat
 
 layeredimage Rogue_sprite doggy:
-    if Player.cock_position == "anal":
-        "Rogue_doggy_body_animation[Action.type_speed]"
-    elif Player.cock_position == "in" and Action.type_speed > 1:
-        "Rogue_doggy_body_animation[Action.type_speed]"
+    if Player.primary_Action.type == "anal":
+        "Rogue_doggy_body_animation[Player.primary_Action.speed]"
+    elif Player.primary_Action.type == "sex" and Player.primary_Action.speed > 1:
+        "Rogue_doggy_body_animation[Player.primary_Action.speed]"
     else:
         "Rogue_doggy_body"
 
-    if Player.cock_position == "anal":
-        "Rogue_doggy_ass_animation[Action.type_speed]"
-    elif Player.cock_position == "in" and Action.type_speed > 1:
-        "Rogue_doggy_ass_animation[Action.type_speed]"
+    if Player.primary_Action.type == "anal":
+        "Rogue_doggy_ass_animation[Player.primary_Action.speed]"
+    elif Player.primary_Action.type == "sex" and Player.primary_Action.speed > 1:
+        "Rogue_doggy_ass_animation[Player.primary_Action.speed]"
     else:
         "Rogue_doggy_ass"
 
-    if Player.sprite and Player.cock_position == "footjob":
-        "Rogue_doggy_shin_animation[Action.type_speed]"
+    if Player.sprite and RogueX.primary_Action.type == "footjob":
+        "Rogue_doggy_shin_animation[RogueX.primary_Action.speed]"
     elif not Player.sprite and show_feet:
         "Rogue_doggy_shins"
 
-    if Player.sprite and Player.cock_position == "footjob":
+    if Player.sprite and RogueX.primary_Action.type == "footjob":
         "Zero_cock_Rogue"
 
-    if Player.cock_position == "footjob":
-        "Rogue_doggy_feet_animation[Action.type_speed]"
+    if Player.primary_Action.type == "footjob":
+        "Rogue_doggy_feet_animation[RogueX.primary_Action.speed]"
     elif not Player.sprite and show_feet:
         "Rogue_doggy_feet"
 

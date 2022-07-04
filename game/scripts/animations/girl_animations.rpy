@@ -468,9 +468,6 @@ label remove_Girl(Girl, transition = None):
     if Girl in Nearby:
         $ Nearby.remove(Girl)
 
-    if Partner == Girl:
-        $ Partner = None
-
     if Player.location in ["bg_campus", "bg_classroom", "bg_dangerroom", "bg_pool"]:
         $ Nearby.append(Girl)
 
@@ -517,22 +514,18 @@ label shift_view(Girl, view):
                 call middle_launch(Girl)
             "Lower half":
                 call pussy_launch(Girl)
-            "Doggy" if Girl in [RogueX, KittyX, EmmaX, LauraX, JeanX]:
-                $ Girl.pose = "doggy"
-
-                call show_sex(Girl, None)
-            "Cowgirl" if Girl in [EmmaX, JeanX, StormX]:
-                $ Girl.pose = "sex"
-
-                call show_sex(Girl, None)
             "Missionary" if Girl in [RogueX, KittyX, LauraX]:
-                $ Girl.pose = "sex"
-
-                call show_sex(Girl, None)
+                call show_sex(Girl)
+            "Cowgirl" if Girl in [EmmaX, JeanX, StormX]:
+                call show_sex(Girl)
+            "Doggy" if Girl in [RogueX, KittyX, EmmaX, LauraX, JeanX, StormX]:
+                call show_doggy(Girl)
             "Never mind":
                 pass
     else:
-        if view == "full":
+        if view == "kiss":
+            call kiss_launch(Girl)
+        elif view == "full":
             call show_full_body(Girl)
         elif view == "breasts":
             call breasts_launch(Girl)
@@ -540,16 +533,14 @@ label shift_view(Girl, view):
             call middle_launch(Girl)
         elif view == "pussy":
             call pussy_launch(Girl)
-        elif view in ["sex", "doggy"]:
-            call show_sex(Girl, None)
-        elif view == "kiss":
-            call kiss_launch(Girl)
+        elif view == "sex":
+            call show_sex(Girl)
+        elif view == "doggy":
+            call show_doggy(Girl)
 
     return
 
 label show_full_body(Girl):
-    $ Girl.pose = "full"
-
     call show_Girl(Girl, animation_transform = reset_zoom)
 
     return
@@ -566,7 +557,6 @@ label smooch(Girl):
     return
 
 label kiss_launch(Girl):
-    $ Girl.pose = "kiss"
     $ Girl.change_face("kiss")
 
     call show_Girl(Girl, animation_transform = kiss_launch_animation)
@@ -574,53 +564,28 @@ label kiss_launch(Girl):
     return
 
 label breasts_launch(Girl):
-    $ Girl.pose = "breasts"
-
     call show_Girl(Girl, animation_transform = breasts_launch_animation)
 
     return
 
 label middle_launch(Girl):
-    $ Girl.pose = "middle"
-
     call show_Girl(Girl, animation_transform = middle_launch_animation)
 
     return
 
 label pussy_launch(Girl):
-    $ Girl.pose = "pussy"
-
     call show_Girl(Girl, animation_transform = pussy_launch_animation)
 
     return
 
-label show_handjob(Girl, orgasm = False):
+label show_handjob(Girl):
     if renpy.showing(Girl.tag + "_sprite handjob"):
         return
 
-    $ action_speed = 0
+    if Girl.primary_Action:
+        $ Girl.primary_Action.speed = 0
 
     call show_Girl(Girl, animation_transform = show_handjob_animation)
-
-    if taboo:
-        if len(Present) >= 2:
-            if Present[0] != Girl:
-                "[Girl.name] looks back at [Present[0].name] to see if she's watching."
-            elif Present[1] != Girl:
-                "[Girl.name] looks back at [Present[1].name] to see if she's watching."
-        else:
-            "[Girl.name] looks around to see if anyone can see her."
-
-    if not orgasm:
-        if not Girl.Action_counter["handjob"] and Girl.Clothes["gloves"]:
-            "As you pull out your cock, [Girl.name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
-        else:
-            "She then leans over and grabs your cock."
-    else:
-        "[Girl.name] bends down and grabs your cock."
-
-    $ Girl.take_off("gloves")
-    $ Girl.arm_pose = 1
 
     $ renpy.start_predict("images/" + Girl.tag + "_handjob/*.*")
 
@@ -651,57 +616,14 @@ label show_handjob(Girl, orgasm = False):
 
     return
 
-label show_titjob(Girl, orgasm = False):
+label show_titjob(Girl):
     if renpy.showing(Girl.tag + "_sprite titjob"):
         return
 
-    $ action_speed = 0
+    if Girl.primary_Action:
+        $ Girl.primary_Action.speed = 0
 
     call show_Girl(Girl, animation_transform = show_titjob_animation)
-
-    if taboo:
-        if len(Present) >= 2:
-            if Present[0] != Girl:
-                "[Girl.name] looks back at [Present[0].name] to see if she's watching."
-            elif Present[1] != Girl:
-                "[Girl.name] looks back at [Present[1].name] to see if she's watching."
-        else:
-            "[Girl.name] looks around to see if anyone can see her."
-
-    if Girl.Clothes["bra"] and Girl.Clothes["top"]:
-        "She throws off her [Girl.Clothes[top]] and her [Girl.Clothes[bra].name]."
-    elif Girl.Clothes["top"]:
-        "She throws off her [Girl.Clothes[top].name], baring her breasts underneath."
-    elif Girl.Clothes["bra"]:
-        "She tugs off her [Girl.Clothes[bra].name] and throws it aside."
-
-    $ Girl.take_off("top")
-    $ Girl.take_off("bra")
-    $ Girl.take_off("gloves")
-
-    call expression Girl.tag + "_First_Topless"
-
-    if not orgasm:
-        if not Girl.Action_counter["titjob"] and "cockout" not in Player.recent_history:
-            if not Girl.Clothes["bra"] and not Girl.Clothes["top"]:
-                "As you pull out your cock, [Girl.name] hesitantly places it between her breasts and starts to rub them up and down the shaft."
-            elif Girl.Clothes["bra"] and not Girl.Clothes["top"]:
-                "As you pull out your cock, [Girl.name] hesitantly places it under her [Girl.Clothes[bra].name], between her breasts, and starts to rub them up and down the shaft."
-            elif Girl.Clothes["bra"] and Girl.Clothes["top"]:
-                "As you pull out your cock, [Girl.name] hesitantly places it under her [Girl.Clothes[top].name], between her breasts, and starts to rub them up and down the shaft."
-            else:
-                "As you pull out your cock, [Girl.name] hesitantly places it under her clothes, between her breasts, and starts to rub them up and down the shaft."
-        elif "cockout" not in Player.recent_history:
-            if not Girl.Clothes["bra"] and not Girl.Clothes["top"]:
-                "As you pull out your cock, [Girl.name] places it between her breasts and starts to rub them up and down the shaft."
-            elif Girl.Clothes["bra"] and not Girl.Clothes["top"]:
-                "As you pull out your cock, [Girl.name] places it under her [Girl.Clothes[bra].name], between her breasts, and starts to rub them up and down the shaft."
-            elif Girl.Clothes["bra"] and Girl.Clothes["top"]:
-                "As you pull out your cock, [Girl.name] places it under her [Girl.Clothes[top].name], between her breasts, and starts to rub them up and down the shaft."
-            else:
-                "As you pull out your cock, [Girl.name] places it under her clothes, between her breasts and starts to rub them up and down the shaft."
-    else:
-        "[Girl.name] wraps her tits around your cock."
 
     $ renpy.start_predict("images/" + Girl.tag + "_titjob/*.*")
 
@@ -732,28 +654,14 @@ label show_titjob(Girl, orgasm = False):
 
     return
 
-label show_blowjob(Girl, orgasm = False):
+label show_blowjob(Girl):
     if renpy.showing(Girl.tag + "_sprite blowjob"):
         return
 
-    $ action_speed = 0
+    if Girl.primary_Action:
+        $ Girl.primary_Action.speed = 0
 
     call show_Girl(Girl, animation_transform = show_blowjob_animation)
-
-    if taboo:
-        if len(Present) >= 2:
-            if Present[0] != Girl:
-                "[Girl.name] looks back at [Present[0].name] to see if she's watching."
-            elif Present[1] != Girl:
-                "[Girl.name] looks back at [Present[1].name] to see if she's watching."
-        else:
-            "[Girl.name] looks around to see if anyone can see her."
-
-    if not orgasm:
-        if not Girl.Action_counter["blowjob"] and "cockout" not in Player.recent_history:
-            "[Girl.name] hesitantly pulls down your pants and touches her mouth to your cock."
-    else:
-        "[Girl.name] bends down and begins to suck on your cock."
 
     $ renpy.start_predict("images/" + Girl.tag + "_blowjob/*.*")
 
@@ -784,35 +692,14 @@ label show_blowjob(Girl, orgasm = False):
 
     return
 
-label show_sex(Girl, action):
-    if action == "massage":
-        $ Player.cock_position = None
-    elif action == "footjob":
-        $ show_feet = True
-
-        $ Player.cock_position = "footjob"
-    elif action == "hotdog":
-        $ Player.cock_position = "out"
-    elif action == "sex":
-        $ Player.cock_position = "in"
-
-        if Player.secondary_action in pussy_actions:
-            $ Player.secondary_action = None
-    elif action == "anal":
-        $ Player.cock_position = "anal"
-
-        if Player.secondary_action in ass_actions:
-            $ Player.secondary_action = None
-
-    if Girl.pose == "doggy":
-        call show_doggy(Girl)
-
-        return
-
+label show_sex(Girl):
     if renpy.showing(Girl.tag + "_sprite sex"):
         return
 
-    $ action_speed = 0
+    if Player.primary_Action:
+        $ Player.primary_Action.speed = 0
+    elif Girl.primary_Action:
+        $ Girl.primary_Action.speed = 0
 
     $ renpy.start_predict("images/" + Girl.tag + "_sex/*.*")
 
@@ -840,7 +727,10 @@ label show_doggy(Girl):
     if renpy.showing(Girl.tag + "_sprite doggy"):
         return
 
-    $ action_speed = 0
+    if Player.primary_Action:
+        $ Player.primary_Action.speed = 0
+    elif Girl.primary_Action:
+        $ Girl.primary_Action.speed = 0
 
     $ renpy.start_predict("images/" + Girl.tag + "_doggy/*.*")
 
@@ -863,6 +753,17 @@ label show_doggy(Girl):
         show Jubes_sprite doggy zorder 150 at sprite_location(stage_center), color_transform
 
     return
+
+
+
+
+
+
+
+
+
+
+
 
 label close_launch(GirlA, GirlB = None):
     if GirlB:

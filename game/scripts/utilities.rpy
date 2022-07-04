@@ -43,9 +43,6 @@ label change_Girl_stat(Girl, flavor, update, alternate_values = {}):
         $ check = alternate_values[Girl][0]
         $ update = alternate_values[Girl][1]
 
-    if flavor in ["love", "obedience", "inhibition", "friendship"]:
-        $ check *= 10
-
     $ stat = getattr(Girl, flavor)
 
     $ stat += update
@@ -57,8 +54,6 @@ label change_Girl_stat(Girl, flavor, update, alternate_values = {}):
             $ shade = "#2554c7"
         elif flavor == "inhibition":
             $ shade = "#FFF380"
-        elif flavor == "friendship":
-            $ shade = "#c11b17"
         elif flavor == "lust":
             $ shade = "#FAAFBE"
 
@@ -201,33 +196,33 @@ label event_calls:
     return
 
 label traveling_event_calls(location):
-    if location == "bg_classroom" and "met" not in KittyX.history:
-        call meet_Kitty
-
-        return
-
-    if EmmaX in active_Girls:
-        if location == "bg_classroom":
-            if "noise" in Player.history and "attic" not in Player.history and EmmaX.teaching and EmmaX.location == "bg_classroom" and time_index < 2 and weekday < 5:
-                call meet_Storm_ask_Emma
-
-                return
-
-            if time_index == 2 and weekday in [0, 2, 4]:
-                if not Player.Party:
-                    if "classcaught" not in EmmaX.history:
-                        call Emma_Caught_Classroom
-
-                        return
-                    elif D20 <= 10 and "will_masturbate" in EmmaX.daily_history:
-                        call Emma_Caught_Classroom
-
-                        return
-
-                if "detention" in Player.traits and not Player.Party:
-                    call Emma_Detention
-
-                    return
+    # if location == "bg_classroom" and "met" not in KittyX.history:
+    #     call meet_Kitty
+    #
+    #     return
+    #
+    # if EmmaX in active_Girls:
+    #     if location == "bg_classroom":
+    #         if "noise" in Player.history and "attic" not in Player.history and EmmaX.teaching and EmmaX.location == "bg_classroom" and time_index < 2 and weekday < 5:
+    #             call meet_Storm_ask_Emma
+    #
+    #             return
+    #
+    #         if time_index == 2 and weekday in [0, 2, 4]:
+    #             if not Player.Party:
+    #                 if "classcaught" not in EmmaX.history:
+    #                     call Emma_Caught_Classroom
+    #
+    #                     return
+    #                 elif D20 <= 10 and "will_masturbate" in EmmaX.daily_history:
+    #                     call Emma_Caught_Classroom
+    #
+    #                     return
+    #
+    #             if "detention" in Player.traits and not Player.Party:
+    #                 call Emma_Detention
+    #
+    #                 return
 
     # if "met" not in LauraX.history:
     #     if location == "bg_dangerroom":
@@ -275,17 +270,17 @@ label traveling_event_calls(location):
     #
     #                 return
 
-    if JubesX in active_Girls:
-        if location in ["bg_classroom", "bg_dangerroom", "bg_campus", "bg_pool"]:
-            if time_index < 3 and "sunshine" not in JubesX.history:
-                call Jubes_Sunshine
-
-                return
-
-            if "sunshine" in JubesX.history and "mall" not in Player.history and time_index < 3 and JubesX.addiction < 50:
-                call Jubes_Mall
-
-                return
+    # if JubesX in active_Girls:
+    #     if location in ["bg_classroom", "bg_dangerroom", "bg_campus", "bg_pool"]:
+    #         if time_index < 3 and "sunshine" not in JubesX.history:
+    #             call Jubes_Sunshine
+    #
+    #             return
+    #
+    #         if "sunshine" in JubesX.history and "mall" not in Player.history and time_index < 3 and JubesX.addiction < 50:
+    #             call Jubes_Mall
+    #
+    #             return
 
     return
 
@@ -409,7 +404,7 @@ label set_Girls_locations:
 
                 if G == JubesX and G.addiction > 60:
                     G.location = G.home
-                elif G.location != Player.location:
+                else:
                     G.location = G.weekly_schedule[weekday][time_index]
 
                 if G.location == "bg_teacher":
@@ -490,15 +485,7 @@ label wait:
 
         $ Player.Party = []
 
-        if Player.being_punished:
-            $ Player.cash += int(Player.income/2)
-
-            if Player.being_punished == 1:
-                "Your punishment from Xavier has expired."
-
-            $ Player.being_punished -= 1
-        else:
-            $ Player.cash += Player.income
+        $ Player.cash += Player.income
 
         $ Player.semen = Player.max_semen
         $ Player.spunk = False
@@ -507,9 +494,6 @@ label wait:
         call reset_all_Girls_at_end
         call change_clothes
 
-    $ multi_action = True
-
-    call set_Character_taboos
     call reset_all_Girls_at_beginning
 
     $ Player.semen += 1
@@ -564,17 +548,14 @@ label checkout:
             G.inhibition = 1000 if G.inhibition > 1000 else G.inhibition
             G.inhibition = 0 if G.inhibition < 0 else G.inhibition
 
-            G.friendship = 1000 if G.friendship > 1000 else G.friendship
-            G.friendship = 0 if G.friendship < 0 else G.friendship
-
             G.lust = 99 if G.lust > 99 else G.lust
             G.lust = 0 if G.lust < 0 else G.lust
 
-            G.remaining_actions = G.max_actions if G.remaining_actions > G.max_actions else G.remaining_actions
-            G.remaining_actions = 0 if G.remaining_actions < 0 else G.remaining_actions
+            G.mood = 9 if G.mood > 9 else G.mood
+            G.mood = 0 if G.mood < 0 else G.mood
 
-            if G.forced and G.event_counter["forced"] < 10:
-                G.event_counter["forced"] += 1
+            G.remaining_Actions = G.max_Actions if G.remaining_Actions > G.max_Actions else G.remaining_Actions
+            G.remaining_Actions = 0 if G.remaining_Actions < 0 else G.remaining_Actions
 
             for GB in all_Girls:
                 if GB != G:
@@ -585,15 +566,7 @@ label checkout:
 
 label reset_player:
     call get_dressed
-    call stop_all_actions
-
-    $ Player.focusing = False
-
-    $ multi_action = True
-
-    $ position_timer = 100
-
-    $ Partner = None
+    call stop_all_Actions
 
     return
 
@@ -609,7 +582,7 @@ label reset_all_Girls_at_end:
 
             G.change_Outfit("sleepwear", instant = True)
 
-            G.remaining_actions = G.max_actions
+            G.remaining_Actions = G.max_Actions
 
             G.lust -= 5 if G.lust >= 50 else 0
 
@@ -623,7 +596,7 @@ label reset_all_Girls_at_end:
 label reset_all_Girls_at_beginning:
     python:
         for G in active_Girls:
-            G.remaining_actions += 1 if time_index != 0 else 0
+            G.remaining_Actions += 1 if time_index != 0 else 0
 
             if G.location == "bg_classroom" or G.location == "bg_dangerroom" or G.teaching:
                 G.XP += 10
@@ -675,6 +648,8 @@ label clear_the_room(Girl, passive = False, silent = False):
 
     if Girl.location != Player.location:
         call add_Girls(Girl)
+    else:
+        call shift_focus(Girl)
 
     if not passive and not silent:
         if hosted:
@@ -740,7 +715,7 @@ label clear_the_room(Girl, passive = False, silent = False):
                 elif Girl == JubesX:
                     ch_v "Hey, could you check out, [Girls[0].name]? I've gotta talk to [Player.name]."
 
-    call stop_all_actions
+    call stop_all_Actions
 
     $ renpy.random.shuffle(Girls)
 
@@ -808,23 +783,25 @@ label clear_the_room(Girl, passive = False, silent = False):
                     ch_v "I'm gonna peace out. . ."
 
             if passive and silent:
-                call remove_Girl(Girls[0], transition = None)
+                call remove_Girl(Girls[0], transition = False)
             else:
                 call remove_Girl(Girls[0])
 
             $ Girls.remove(Girls[0])
 
+    call set_the_scene
+
     return
 
-label stop_all_actions(visual = False):
-    $ Player.primary_action = None
-    $ Player.secondary_action = None
+label stop_all_Actions(visual = False):
+    $ Player.primary_Action = ActionClass(None, Target = None)
+    $ Player.secondary_Action = ActionClass(None, Target = None)
 
     $ temp_Girls = Present[:]
 
     while temp_Girls:
-        $ temp_Girls[0].main_action = None
-        $ temp_Girls[0].secondary_action = None
+        $ temp_Girls[0].main_action = ActionClass(None, Target = None)
+        $ temp_Girls[0].secondary_Action = ActionClass(None, Target = None)
 
         if visual:
             call show_full_body(temp_Girls[0])
@@ -935,57 +912,5 @@ label shift_focus(Girl):
     $ Player.focused_Girl = Girl
 
     $ renpy.restart_interaction()
-
-    return
-
-label sex_over(put_clothes_on = True):
-    call stop_all_actions
-
-    $ temp_Girls = Present[:]
-    $ renpy.random.shuffle(temp_Girls)
-
-    while temp_Girls:
-        $ temp_Girls[0].session_orgasms = 0
-
-        call Girl_Cleanup(temp_Girls[0], "after")
-
-        if Player.spunk:
-            if temp_Girls[0] == RogueX:
-                ch_r "Let me take care of that for you. . ."
-            elif temp_Girls[0] == KittyX:
-                ch_k "You've got a little something. . ."
-                ch_k "just let me get that."
-            elif temp_Girls[0] == EmmaX:
-                ch_e "[EmmaX.player_petname], let's get you presentable. . ."
-            elif temp_Girls[0] == LauraX:
-                ch_l "[LauraX.player_petname], you've got a little something. . ."
-            elif temp_Girls[0] == JeanX:
-                ch_j "[JeanX.player_petname], you might want to clean up. . ."
-            elif temp_Girls[0] == StormX:
-                ch_s "Allow me to take care of that, [StormX.player_petname]. . ."
-            elif temp_Girls[0] == JubesX:
-                ch_v "Oh, I can clean that up for you, [JubesX.player_petname]. . ."
-
-            call Girl_Cleanup(temp_Girls[0])
-
-        $ temp_Girls.remove(temp_Girls[0])
-
-    $ temp_Girls = Present[:]
-    $ renpy.random.shuffle(temp_Girls)
-
-    while temp_Girls:
-        call show_full_body(temp_Girls[0])
-
-        $ temp_Girls.remove(temp_Girls[0])
-
-    if put_clothes_on:
-        python:
-            for G in Present:
-                G.change_Outfit()
-
-        call get_dressed
-
-    call checkout
-    call reset_player
 
     return

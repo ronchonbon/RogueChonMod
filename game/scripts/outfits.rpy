@@ -160,7 +160,7 @@ init -2 python:
             self.Clothes = {}
 
             for Clothing_type in self.types:
-                self.Clothes[Clothing_type] = None
+                self.Clothes[Clothing_type] = ClothingClass(name = None, image_string = None, Clothing_type = None, Owner_names = None, dialogue_lines = None)
 
             self.set_Outfit_flags()
 

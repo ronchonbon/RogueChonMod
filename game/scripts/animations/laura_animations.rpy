@@ -30,9 +30,9 @@ layeredimage Laura_grool_dripping_animation:
 layeredimage Laura_grool_animations:
     if not LauraX.grool:
         Null()
-    elif LauraX.Clothes["pants"] and LauraX.Clothes["pants"].state:
+    elif LauraX.Clothes["pants"].state:
         AlphaMask("Laura_grool_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask_pants.png")
-    elif LauraX.Clothes["underwear"] and LauraX.Clothes["underwear"].state:
+    elif LauraX.Clothes["underwear"].state:
         AlphaMask("Laura_grool_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask_underwear.png")
     elif not LauraX.Outfit.pussy_covered:
         AlphaMask("Laura_grool_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask.png")
@@ -53,15 +53,15 @@ layeredimage Laura_spunk_dripping_animation:
 layeredimage Laura_spunk_animations:
     if not LauraX.spunk["pussy"] and not LauraX.spunk["anus"]:
         Null()
-    elif LauraX.Clothes["pants"] and LauraX.Clothes["pants"].state:
+    elif LauraX.Clothes["pants"].state:
         AlphaMask("Laura_spunk_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask_pants.png")
-    elif LauraX.Clothes["underwear"] and LauraX.Clothes["underwear"].state:
+    elif LauraX.Clothes["underwear"].state:
         AlphaMask("Laura_spunk_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask_underwear.png")
     elif not LauraX.Outfit.pussy_covered:
         AlphaMask("Laura_spunk_dripping_animation", "images/Laura_standing/Laura_standing_grool_mask.png")
 
 layeredimage Laura_standing_fondling_animations:
-    if not LauraX.primary_Action or LauraX.primary_Action.Target != LauraX:
+    if LauraX.primary_Action.Target != LauraX:
         Null()
     elif LauraX.primary_Action.type == "fondle_breasts":
         "Girl_fondle_breast_right_animation" pos (0.1, 0.69)
@@ -70,7 +70,7 @@ layeredimage Laura_standing_fondling_animations:
     elif LauraX.primary_Action.type in "finger_pussy":
         "Girl_finger_pussy_animation" pos (0.145, 1.14)
 
-    if not LauraX.secondary_Action or LauraX.secondary_Action.Target != LauraX:
+    if LauraX.secondary_Action.Target != LauraX:
         Null()
     elif LauraX.secondary_Action.type == "fondle_breasts":
         "Girl_fondle_breast_left_animation" pos (0.235, 0.695)
@@ -79,7 +79,7 @@ layeredimage Laura_standing_fondling_animations:
     elif LauraX.secondary_Action.type in "finger_pussy":
         "Girl_finger_pussy_animation" pos (0.145, 1.14)
 
-    if not Player.primary_Action or Player.primary_Action.Target != LauraX:
+    if Player.primary_Action.Target != LauraX:
         Null()
     elif Player.primary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.09, 1.32)
@@ -94,7 +94,7 @@ layeredimage Laura_standing_fondling_animations:
     elif Player.primary_Action.type == "eat_pussy":
         "Zero_eat_pussy_animation" pos (0.15, 1.16)
 
-    if not Player.secondary_Action or Player.secondary_Action.Target != LauraX:
+    if Player.secondary_Action.Target != LauraX:
         Null()
     elif Player.secondary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.09, 1.32)
@@ -172,13 +172,13 @@ layeredimage Laura_sprite handjob:
         "Laura_sprite standing"
 
     always:
-        "Laura_handjob_under_hand_animation[Action.type_speed]" pos (0.035, 0.455) zoom 0.28
+        "Laura_handjob_under_hand_animation[LauraX.primary_Action.speed]" pos (0.035, 0.455) zoom 0.28
 
     always:
         "Zero_cock_Laura"
 
     always:
-        "Laura_handjob_over_hand_animation[Action.type_speed]" pos (0.035, 0.455) zoom 0.28
+        "Laura_handjob_over_hand_animation[LauraX.primary_Action.speed]" pos (0.035, 0.455) zoom 0.28
 
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
 
@@ -881,36 +881,36 @@ image Laura_titjob_hair_animation5:
 
 layeredimage Laura_sprite titjob:
     always:
-        "Laura_titjob_hair_back_animation[Action.type_speed]" pos (-0.035, -0.26) zoom 0.55
+        "Laura_titjob_hair_back_animation[LauraX.primary_Action.speed]" pos (-0.035, -0.26) zoom 0.55
 
     always:
-        "Laura_titjob_body_animation[Action.type_speed]"
+        "Laura_titjob_body_animation[LauraX.primary_Action.speed]"
 
     always:
-        "Laura_titjob_right_arm_back_animation[Action.type_speed]" pos (0.0, 0.01)
+        "Laura_titjob_right_arm_back_animation[LauraX.primary_Action.speed]" pos (0.0, 0.01)
 
     always:
-        "Laura_titjob_right_breast_animation[Action.type_speed]" pos (0.0, 0.01)
+        "Laura_titjob_right_breast_animation[LauraX.primary_Action.speed]" pos (0.0, 0.01)
 
     always:
-        "Laura_titjob_right_arm_animation[Action.type_speed]" pos (0.0, 0.01)
+        "Laura_titjob_right_arm_animation[LauraX.primary_Action.speed]" pos (0.0, 0.01)
 
     always:
-        "Laura_titjob_head_animation[Action.type_speed]" pos (-0.035, -0.26) zoom 0.55
+        "Laura_titjob_head_animation[LauraX.primary_Action.speed]" pos (-0.035, -0.26) zoom 0.55
 
     always:
         "Zero_cock_Laura"
 
     always:
-        "Laura_titjob_left_breast_animation[Action.type_speed]"
+        "Laura_titjob_left_breast_animation[LauraX.primary_Action.speed]"
 
     always:
-        "Laura_titjob_left_arm_animation[Action.type_speed]" pos (0.0, 0.01)
+        "Laura_titjob_left_arm_animation[LauraX.primary_Action.speed]" pos (0.0, 0.01)
 
     always:
-        "Laura_titjob_hair_mid_animation[Action.type_speed]" pos (-0.035, -0.26) zoom 0.55
+        "Laura_titjob_hair_mid_animation[LauraX.primary_Action.speed]" pos (-0.035, -0.26) zoom 0.55
 
     always:
-        "Laura_titjob_hair_animation[Action.type_speed]" pos (-0.035, -0.26) zoom 0.55
+        "Laura_titjob_hair_animation[LauraX.primary_Action.speed]" pos (-0.035, -0.26) zoom 0.55
 
     anchor (0.5, 0.0) offset (400, 900) zoom 1.05

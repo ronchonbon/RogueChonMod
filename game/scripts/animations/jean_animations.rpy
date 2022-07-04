@@ -15,7 +15,7 @@ image Jean_blinking:
     repeat
 
 layeredimage Jean_standing_fondling_animations:
-    if not JeanX.primary_Action.type or JeanX.primary_Action.Target != JeanX:
+    if JeanX.primary_Action.Target != JeanX:
         Null()
     elif JeanX.primary_Action.type == "fondle_breasts":
         "Girl_fondle_breast_right_animation" pos (0.185, 0.625)
@@ -24,7 +24,7 @@ layeredimage Jean_standing_fondling_animations:
     elif JeanX.primary_Action.type in "finger_pussy":
         "Girl_finger_pussy_animation" pos (0.27, 1.04)
 
-    if not JeanX.secondary_Action.type or JeanX.secondary_Action.Target != JeanX:
+    if JeanX.secondary_Action.Target != JeanX:
         Null()
     elif JeanX.secondary_Action.type == "fondle_breasts":
         "Girl_fondle_breast_left_animation" pos (0.305, 0.635)
@@ -33,7 +33,7 @@ layeredimage Jean_standing_fondling_animations:
     elif JeanX.secondary_Action.type in "finger_pussy":
         "Girl_finger_pussy_animation" pos (0.27, 1.04)
 
-    if not Player.primary_Action or Player.primary_Action.Target != JeanX:
+    if Player.primary_Action.Target != JeanX:
         Null()
     elif Player.primary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.225, 1.22)
@@ -48,7 +48,7 @@ layeredimage Jean_standing_fondling_animations:
     elif Player.primary_Action.type == "eat_pussy":
         "Zero_eat_pussy_animation" pos (0.275, 1.07)
 
-    if not Player.secondary_Action.type pr Player.secondary_Action.Target != JeanX:
+    if Player.secondary_Action.Target != JeanX:
         Null()
     elif Player.secondary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.225, 1.22)
@@ -126,13 +126,13 @@ layeredimage Jean_sprite handjob:
         "Jean_sprite standing"
 
     always:
-        "Jean_handjob_under_hand_animation[Action.type_speed]" pos (0.035, 0.455) zoom 0.28
+        "Jean_handjob_under_hand_animation[JeanX.primary_Action.speed]" pos (0.035, 0.455) zoom 0.28
 
     always:
         "Zero_cock_Jean"
 
     always:
-        "Jean_handjob_over_hand_animation[Action.type_speed]" pos (0.035, 0.455) zoom 0.28
+        "Jean_handjob_over_hand_animation[JeanX.primary_Action.speed]" pos (0.035, 0.455) zoom 0.28
 
     anchor (0.5, 0.0) offset (240, -220) zoom 2.5
 
@@ -699,31 +699,31 @@ image Jean_titjob_hair_animation5:
 
 layeredimage Jean_sprite titjob:
     # if JeanX.Clothes["bra"].string in ["green_bra", "lace_bra"]:
-    #     "Jean_titjob_bra_back_animation[Action.type_speed]" pos (0.0, -0.025)
+    #     "Jean_titjob_bra_back_animation[JeanX.primary_Action.speed]" pos (0.0, -0.025)
 
     always:
-        "Jean_titjob_hair_back_animation[Action.type_speed]" pos (0.0, -0.15) zoom 0.9
+        "Jean_titjob_hair_back_animation[JeanX.primary_Action.speed]" pos (0.0, -0.15) zoom 0.9
 
     always:
-        "Jean_titjob_body_animation[Action.type_speed]"
+        "Jean_titjob_body_animation[JeanX.primary_Action.speed]"
 
     always:
-        "Jean_titjob_head_animation[Action.type_speed]" pos (0.0, -0.15) zoom 0.9
+        "Jean_titjob_head_animation[JeanX.primary_Action.speed]" pos (0.0, -0.15) zoom 0.9
 
     always:
-        "Jean_titjob_right_breast_animation[Action.type_speed]" pos (0.0, -0.025)
+        "Jean_titjob_right_breast_animation[JeanX.primary_Action.speed]" pos (0.0, -0.025)
 
     always:
         "Zero_cock_Jean"
 
-    # if JeanX.Outfit["bra"] in ["sports bra", "bikini top"]:
-    #     "Jean_titjob_bra_stretch_animation[Action.type_speed]"
+    # if JeanX.Outfit["bra"].name in ["sports bra", "bikini top"]:
+    #     "Jean_titjob_bra_stretch_animation[JeanX.primary_Action.speed]"
 
     always:
-        "Jean_titjob_breasts_animation[Action.type_speed]" pos (0.0, -0.025)
+        "Jean_titjob_breasts_animation[JeanX.primary_Action.speed]" pos (0.0, -0.025)
 
     always:
-        "Jean_titjob_hair_animation[Action.type_speed]" pos (0.0, -0.15) zoom 0.9
+        "Jean_titjob_hair_animation[JeanX.primary_Action.speed]" pos (0.0, -0.15) zoom 0.9
 
     anchor (0.5, 0.0) offset (300, 750) zoom 1.1
 

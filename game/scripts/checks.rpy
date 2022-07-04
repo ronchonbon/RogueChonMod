@@ -1,6 +1,6 @@
 init python:
 
-    def approval_check(Girl, flavor = "LOIF", threshold = 1000, spread = 150, report_value = False, alternate_thresholds = {}):
+    def approval_check(Girl, threshold = 1000, flavor = "LOI", spread = 150, report_value = False, alternate_thresholds = {}):
         if Girl in alternate_thresholds.keys():
             threshold = alternate_thresholds[Girl]
 
@@ -19,19 +19,14 @@ init python:
         else:
             I = 0
 
-        if "F" in flavor:
-            F = Girl.friendship
-        else:
-            F = 0
-
         if report_value:
-            return L + O + I + F
+            return L + O + I
 
-        if L + O + I + F >= threshold + 2*spread:
+        if L + O + I >= threshold + 2*spread:
             return 3
-        elif L + O + I + F >= threshold + spread:
+        elif L + O + I >= threshold + spread:
             return 2
-        elif L + O + I + F >= threshold:
+        elif L + O + I >= threshold:
             return 1
         else:
             return 0

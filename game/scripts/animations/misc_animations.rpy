@@ -1,34 +1,33 @@
 transform stat_rising(x_position):
     ypos 0.25 alpha 0.0
     choice:
-        pause 0.6
         xpos x_position alpha 1.0
     choice:
-        pause 0.7
+        pause 0.1
         xpos x_position - 0.015 alpha 1.0
     choice:
-        pause 0.8
+        pause 0.2
         xpos x_position + 0.015 alpha 1.0
     choice:
-        pause 0.9
+        pause 0.3
         xpos x_position - 0.03 alpha 1.0
     choice:
-        pause 1.0
+        pause 0.4
         xpos x_position + 0.03 alpha 1.0
     choice:
-        pause 1.1
+        pause 0.5
         xpos x_position alpha 1.0
     choice:
-        pause 1.2
+        pause 0.6
         xpos x_position - 0.015 alpha 1.0
     choice:
-        pause 1.3
+        pause 0.7
         xpos x_position + 0.015 alpha 1.0
     choice:
-        pause 1.4
+        pause 0.8
         xpos x_position - 0.03 alpha 1.0
     choice:
-        pause 1.5
+        pause 0.9
         xpos x_position + 0.03 alpha 1.0
     parallel:
         linear 1.0 ypos 0.0
@@ -38,34 +37,33 @@ transform stat_rising(x_position):
 transform stat_falling(x_position):
     ypos 0.0 alpha 0.05
     choice:
-        pause 0.6
         xpos x_position alpha 1.0
     choice:
-        pause 0.7
+        pause 0.1
         xpos x_position - 0.015 alpha 1.0
     choice:
-        pause 0.8
+        pause 0.2
         xpos x_position + 0.015 alpha 1.0
     choice:
-        pause 0.9
+        pause 0.3
         xpos x_position - 0.03 alpha 1.0
     choice:
-        pause 1.0
+        pause 0.4
         xpos x_position + 0.03 alpha 1.0
     choice:
-        pause 1.1
+        pause 0.5
         xpos x_position alpha 1.0
     choice:
-        pause 1.2
+        pause 0.6
         xpos x_position - 0.015 alpha 1.0
     choice:
-        pause 1.3
+        pause 0.7
         xpos x_position + 0.015 alpha 1.0
     choice:
-        pause 1.4
+        pause 0.8
         xpos x_position - 0.03 alpha 1.0
     choice:
-        pause 1.5
+        pause 0.9
         xpos x_position + 0.03 alpha 1.0
     parallel:
         linear 1.0 ypos 0.25
@@ -179,12 +177,12 @@ layeredimage Xavier_sprite:
     always:
         "images/NPC/Xavier_mouth_[Xavier.mouth].png"
 
-    if Xavier_eyes == "closed":
+    if Xavier.eyes == "closed":
         "images/NPC/Xavier_eyes_[Xavier.eyes].png"
     else:
         "Xavier_blinking"
 
-    if Xavier_psychic:
+    if Xavier.psychic:
         "images/NPC/Xavier_psychic.png"
 
     anchor (0.5, 0.0) offset (60, 355) zoom 0.7

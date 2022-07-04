@@ -30,9 +30,9 @@ layeredimage Jubes_grool_dripping_animation:
 layeredimage Jubes_grool_animations:
     if not JubesX.grool:
         Null()
-    elif JubesX.Clothes["pants"] and JubesX.Clothes["pants"].state:
+    elif JubesX.Clothes["pants"].state:
         AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_pants.png")
-    elif JubesX.Clothes["underwear"] and JubesX.Clothes["underwear"].state:
+    elif JubesX.Clothes["underwear"].state:
         AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
     elif not JubesX.Outfit.pussy_covered:
         AlphaMask("Jubes_grool_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask.png")
@@ -53,15 +53,15 @@ layeredimage Jubes_spunk_dripping_animation:
 layeredimage Jubes_spunk_animations:
     if not JubesX.spunk["pussy"] and not JubesX.spunk["anus"]:
         Null()
-    elif JubesX.Clothes["pants"] and JubesX.Clothes["pants"].state:
+    elif JubesX.Clothes["pants"].state:
         AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_pants.png")
-    elif JubesX.Clothes["underwear"] and JubesX.Clothes["underwear"].state:
+    elif JubesX.Clothes["underwear"].state:
         AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask_underwear.png")
     elif not JubesX.Outfit.pussy_covered:
         AlphaMask("Jubes_spunk_dripping_animation", "images/Jubes_standing/Jubes_standing_grool_mask.png")
 
 layeredimage Jubes_standing_fondling_animations:
-    if not JubesX.primary_Action or JubesX.primary_Action.Target != JubesX:
+    if JubesX.primary_Action.Target != JubesX:
         Null()
     elif JubesX.primary_Action.type == "fondle_breasts":
         "Girl_fondle_breast_right_animation" pos (0.195, 0.665)
@@ -70,7 +70,7 @@ layeredimage Jubes_standing_fondling_animations:
     elif JubesX.primary_Action.type in "finger_pussy":
         "Girl_finger_pussy_animation" pos (0.28, 1.06)
 
-    if not JubesX.secondary_Action or JubesX.secondary_Action.Target != JubesX:
+    if JubesX.secondary_Action.Target != JubesX:
         Null()
     elif JubesX.secondary_Action.type == "fondle_breasts":
         "Girl_fondle_breast_left_animation" pos (0.33, 0.68)
@@ -79,7 +79,7 @@ layeredimage Jubes_standing_fondling_animations:
     elif JubesX.secondary_Action.type in "finger_pussy":
         "Girl_finger_pussy_animation" pos (0.28, 1.06)
 
-    if not Player.primary_Action or Player.primary_Action.Target != JubesX:
+    if Player.primary_Action.Target != JubesX:
         Null()
     elif Player.primary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.215, 1.22)
@@ -94,7 +94,7 @@ layeredimage Jubes_standing_fondling_animations:
     elif Player.primary_Action.type == "eat_pussy":
         "Zero_eat_pussy_animation" pos (0.287, 1.1)
 
-    if not Player.secondary_Action or Player.secondary_Action.Target != JubesX:
+    if Player.secondary_Action.Target != JubesX:
         Null()
     elif Player.secondary_Action.type == "fondle_thighs":
         "Zero_fondle_thigh_animation" pos (0.215, 1.22)
@@ -172,13 +172,13 @@ layeredimage Jubes_sprite handjob:
         "Jubes_sprite standing" pos (0.05, 0.0)
 
     always:
-        "Jubes_handjob_under_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+        "Jubes_handjob_under_hand_animation[JubesX.primary_Action.speed]" pos (-0.035, 0.455) zoom 0.28
 
     always:
         "Zero_cock_Jubes"
 
     always:
-        "Jubes_handjob_over_hand_animation[action_speed]" pos (-0.035, 0.455) zoom 0.28
+        "Jubes_handjob_over_hand_animation[JubesX.primary_Action.speed]" pos (-0.035, 0.455) zoom 0.28
 
     anchor (0.5, 0.0) offset (220, -220) zoom 2.5
 
@@ -573,26 +573,26 @@ image Jubes_titjob_breasts_animation5:
         repeat
 
 layeredimage Jubes_sprite titjob:
-    # if JubesX.Clothes["jacket"]:
-    #     "Jubes_titjob_jacket_back_animation[action_speed]"
+    # if JubesX.Clothes["jacket"].string:
+    #     "Jubes_titjob_jacket_back_animation[JubesX.primary_Action.speed]"
     #
     # if JubesX.Clothes["bra"].string in ["sports_bra", "bikini_top"]:
-    #     "Jubes_titjob_bra_back_animation[action_speed]"
+    #     "Jubes_titjob_bra_back_animation[JubesX.primary_Action.speed]"
 
     always:
-        "Jubes_titjob_body_animation[action_speed]"
+        "Jubes_titjob_body_animation[JubesX.primary_Action.speed]"
 
     always:
-        "Jubes_titjob_head_animation[action_speed]" pos (0.0, -0.19) zoom 0.9
+        "Jubes_titjob_head_animation[JubesX.primary_Action.speed]" pos (0.0, -0.19) zoom 0.9
 
     always:
-        "Jubes_titjob_breasts_under_animation[action_speed]"
+        "Jubes_titjob_breasts_under_animation[JubesX.primary_Action.speed]"
 
     always:
         "Zero_cock_Jubes"
 
     always:
-        "Jubes_titjob_breasts_animation[action_speed]"
+        "Jubes_titjob_breasts_animation[JubesX.primary_Action.speed]"
 
     anchor (0.5, 0.0) offset (360, 800) zoom 1.15
 

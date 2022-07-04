@@ -25,9 +25,9 @@ label sex_shop:
                     if Player.Party:
                         if approval_check(Player.Party[0], 800):
                             $ Player.Party[0].change_face("sly")
-                            call change_Girl_stat(Player.Party[0], "love", 80, 1)
-                            call change_Girl_stat(Player.Party[0], "obedience", 50, 3)
-                            call change_Girl_stat(Player.Party[0], "inhibition", 50, 3)
+                            call change_Girl_stat(Player.Party[0], "love", 1)
+                            call change_Girl_stat(Player.Party[0], "obedience", 3)
+                            call change_Girl_stat(Player.Party[0], "inhibition", 3)
 
                             if Player.Party[0] == RogueX:
                                 ch_r "Oh, what's that for, [Player.Party[0].player_petname]?"
@@ -45,9 +45,9 @@ label sex_shop:
                                 ch_v "What're you gonna do with that. . ."
                         else:
                             $ Player.Party[0].change_face("confused", 2)
-                            call change_Girl_stat(Player.Party[0], "love", 60, -2)
-                            call change_Girl_stat(Player.Party[0], "obedience", 70, 4)
-                            call change_Girl_stat(Player.Party[0], "inhibition", 50, 2)
+                            call change_Girl_stat(Player.Party[0], "love", -2)
+                            call change_Girl_stat(Player.Party[0], "obedience", 4)
+                            call change_Girl_stat(Player.Party[0], "inhibition", 2)
 
                             if Player.Party[0] == RogueX:
                                 ch_r "Is that. . . oh. . ."
@@ -66,7 +66,7 @@ label sex_shop:
 
                             $ Player.Party[0].change_face("confused", 1)
 
-                        call change_Girl_stat(Player.Party[0], "lust", 60, 5)
+                        call change_Girl_stat(Player.Party[0], "lust", 5)
                 else:
                     "You don't have enough for that."
             "Buy \"Shocker\" vibrator for $25.":
@@ -81,9 +81,9 @@ label sex_shop:
                     if Player.Party:
                         if approval_check(Player.Party[0], 800):
                             $ Player.Party[0].change_face("sly")
-                            call change_Girl_stat(Player.Party[0], "love", 80, 2)
-                            call change_Girl_stat(Player.Party[0], "obedience", 50, 2)
-                            call change_Girl_stat(Player.Party[0], "inhibition", 50, 3)
+                            call change_Girl_stat(Player.Party[0], "love", 2)
+                            call change_Girl_stat(Player.Party[0], "obedience", 2)
+                            call change_Girl_stat(Player.Party[0], "inhibition", 3)
 
                             if Player.Party[0] == RogueX:
                                 ch_r "Oh, what's that for, [Player.Party[0].player_petname]?"
@@ -100,11 +100,11 @@ label sex_shop:
                             elif Player.Party[0] == JubesX:
                                 ch_v "What're you gonna do with that. . ."
 
-                            call change_Girl_stat(Player.Party[0], "lust", 60, 5)
+                            call change_Girl_stat(Player.Party[0], "lust", 5)
                         else:
                             $ Player.Party[0].change_face("confused", 2)
-                            call change_Girl_stat(Player.Party[0], "obedience", 70, 2)
-                            call change_Girl_stat(Player.Party[0], "inhibition", 50, 2)
+                            call change_Girl_stat(Player.Party[0], "obedience", 2)
+                            call change_Girl_stat(Player.Party[0], "inhibition", 2)
 
                             if Player.Party[0] == RogueX:
                                 ch_r "Is that. . . oh. . ."
@@ -162,9 +162,9 @@ label sex_shop:
 
                             $ Girl.inventory.append("dildo")
                             $ Girl.change_face("bemused")
-                            call change_Girl_stat(Girl, "love", 200, 30)
-                            call change_Girl_stat(Girl, "obedience", 200, 30)
-                            call change_Girl_stat(Girl, "inhibition", 200, 30)
+                            call change_Girl_stat(Girl, "love", 30)
+                            call change_Girl_stat(Girl, "obedience", 30)
+                            call change_Girl_stat(Girl, "inhibition", 30)
 
                             if Girl == RogueX:
                                 ch_r "Well, I've got some ideas in mind for this. . ."
@@ -173,7 +173,7 @@ label sex_shop:
                             else:
                                 Girl.voice "I'm sure I can find some place to store it. . ."
 
-                            call change_Girl_stat(Girl, "lust", 89, 10)
+                            call change_Girl_stat(Girl, "lust", 10)
                         elif approval_check(Girl, 600):
                             $ Player.inventory.remove("dildo")
 
@@ -181,22 +181,22 @@ label sex_shop:
                             $ Girl.change_face("confused")
 
                             if Girl != EmmaX:
-                                call change_Girl_stat(Girl, "love", 200, 10)
-                                call change_Girl_stat(Girl, "obedience", 200, 10)
-                                call change_Girl_stat(Girl, "inhibition", 200, 10)
+                                call change_Girl_stat(Girl, "love", 10)
+                                call change_Girl_stat(Girl, "obedience", 10)
+                                call change_Girl_stat(Girl, "inhibition", 10)
 
                             if Girl == RogueX:
                                 ch_r "Huh, well I guess I can find a place for it. . ."
 
-                                call change_Girl_stat(Girl, "lust", 89, 10)
+                                call change_Girl_stat(Girl, "lust", 10)
                                 $ Girl.change_face("surprised")
 
                                 ch_r "I- I mean. . . I'll just put it away."
                             elif Girl == KittyX:
                                 ch_k "I don't know what. . ."
 
-                                call change_Girl_stat(Girl, "lust", 89, 5)
-                                call change_Girl_stat(Girl, "lust", 89, 10)
+                                call change_Girl_stat(Girl, "lust", 5)
+                                call change_Girl_stat(Girl, "lust", 10)
                                 $ Girl.change_face("surprised")
 
                                 ch_k "Oh!"
@@ -204,29 +204,29 @@ label sex_shop:
                             elif Girl == EmmaX:
                                 ch_e "This is not an appropriate gift from a student. . ."
 
-                                call change_Girl_stat(Girl, "lust", 89, 5)
-                                call change_Girl_stat(Girl, "lust", 89, 10)
+                                call change_Girl_stat(Girl, "lust", 5)
+                                call change_Girl_stat(Girl, "lust", 10)
                                 $ Girl.change_face("sadside", 1)
 
                                 ch_e "Hm. . ."
 
-                                call change_Girl_stat(Girl, "love", 200, 10)
-                                call change_Girl_stat(Girl, "obedience", 200, 10)
-                                call change_Girl_stat(Girl, "inhibition", 200, 10)
+                                call change_Girl_stat(Girl, "love", 10)
+                                call change_Girl_stat(Girl, "obedience", 10)
+                                call change_Girl_stat(Girl, "inhibition", 10)
                                 $ Girl.change_face("sly")
 
                                 ch_e "I suppose I can find {i}some{/i} use for it. . ."
                             elif Girl == LauraX:
                                 ch_l "Huh, you're a weird gift giver."
 
-                                call change_Girl_stat(Girl, "lust", 89, 5)
-                                call change_Girl_stat(Girl, "lust", 89, 10)
+                                call change_Girl_stat(Girl, "lust", 5)
+                                call change_Girl_stat(Girl, "lust", 10)
                                 $ Girl.change_face("smile")
 
                                 ch_l "It's very thoughtful though."
                             elif Girl == JeanX:
-                                call change_Girl_stat(Girl, "lust", 89, 5)
-                                call change_Girl_stat(Girl, "lust", 89, 10)
+                                call change_Girl_stat(Girl, "lust", 5)
+                                call change_Girl_stat(Girl, "lust", 10)
 
                                 ch_j "Well we know where your mind it at."
 
@@ -239,8 +239,8 @@ label sex_shop:
 
                                     ch_s "I don't know that I should accept this from a student. . ."
 
-                                call change_Girl_stat(Girl, "lust", 89, 5)
-                                call change_Girl_stat(Girl, "lust", 89, 10)
+                                call change_Girl_stat(Girl, "lust", 5)
+                                call change_Girl_stat(Girl, "lust", 10)
 
                                 ch_s "Hm. . ."
 
@@ -250,7 +250,7 @@ label sex_shop:
                             elif Girl == JubesX:
                                 ch_v "I guess I have some use for it. . ."
 
-                                call change_Girl_stat(Girl, "lust", 89, 10)
+                                call change_Girl_stat(Girl, "lust", 10)
                                 $ Girl.change_face("surprised")
 
                                 ch_v "I- I mean. . . decorative."
@@ -277,9 +277,9 @@ label sex_shop:
                                 ch_v "This really isn't something I need. . ."
                         else:
                             $ Girl.change_face("angry")
-                            call change_Girl_stat(Girl, "love", 50, -20)
-                            call change_Girl_stat(Girl, "obedience", 20, 10)
-                            call change_Girl_stat(Girl, "inhibition", 20, 20)
+                            call change_Girl_stat(Girl, "love", -20)
+                            call change_Girl_stat(Girl, "obedience", 10)
+                            call change_Girl_stat(Girl, "inhibition", 20)
 
                             if Girl == RogueX:
                                 ch_r "That's a pretty forward gift to be giving a lady. . ."
@@ -296,7 +296,7 @@ label sex_shop:
                             elif Girl == JubesX:
                                 ch_v "This is an odd design for a. . . wait."
 
-                            call change_Girl_stat(Girl, "lust", 89, 5)
+                            call change_Girl_stat(Girl, "lust", 5)
 
                             "She hands it back to you."
 
@@ -352,9 +352,9 @@ label sex_shop:
 
                             $ Girl.inventory.append("vibrator")
                             $ Girl.change_face("bemused")
-                            call change_Girl_stat(Girl, "love", 200, 30)
-                            call change_Girl_stat(Girl, "obedience", 200, 30)
-                            call change_Girl_stat(Girl, "inhibition", 200, 30)
+                            call change_Girl_stat(Girl, "love", 30)
+                            call change_Girl_stat(Girl, "obedience", 30)
+                            call change_Girl_stat(Girl, "inhibition", 30)
 
                             if Girl == RogueX:
                                 ch_r "Well, I've got some ideas in mind for this. . ."
@@ -364,14 +364,14 @@ label sex_shop:
                             elif Girl == EmmaX:
                                 ch_e "How very thoughtful of you. . ."
 
-                                call change_Girl_stat(Girl, "lust", 89, 10)
+                                call change_Girl_stat(Girl, "lust", 10)
                                 $ Girl.change_face("sly")
 
                                 ch_e "I'm sure I can put this to good use. . ."
                             elif Girl == LauraX:
                                 ch_l "This is. . . [[bzzzt]- "
 
-                                call change_Girl_stat(Girl, "lust", 89, 10)
+                                call change_Girl_stat(Girl, "lust", 10)
                                 $ Girl.change_face("sly")
 
                                 ch_l "-some kind of sex thing, huh. . ."
@@ -382,34 +382,34 @@ label sex_shop:
                             elif Girl == JubesX:
                                 ch_v "Oh, this could be nice. . ."
 
-                            call change_Girl_stat(Girl, "lust", 89, 10)
+                            call change_Girl_stat(Girl, "lust", 10)
                         elif approval_check(Girl, 400):
                             $ Player.inventory.remove("vibrator")
 
                             $ Girl.inventory.append("vibrator")
                             $ Girl.change_face("confused")
-                            call change_Girl_stat(Girl, "love", 200, 10)
-                            call change_Girl_stat(Girl, "obedience", 200, 10)
-                            call change_Girl_stat(Girl, "inhibition", 200, 10)
+                            call change_Girl_stat(Girl, "love", 10)
+                            call change_Girl_stat(Girl, "obedience", 10)
+                            call change_Girl_stat(Girl, "inhibition", 10)
 
                             if Girl == RogueX:
                                 ch_r "I guess I can use this to work the kinks out. . ."
 
-                                call change_Girl_stat(Girl, "lust", 89, 10)
+                                call change_Girl_stat(Girl, "lust", 10)
                                 $ Girl.change_face("surprised")
 
                                 ch_r "Muscle knots, I mean!"
                             elif Girl == KittyX:
                                 ch_k "I've heard these are very relaxing. . ."
 
-                                call change_Girl_stat(Girl, "lust", 89, 10)
+                                call change_Girl_stat(Girl, "lust", 10)
                                 $ Girl.change_face("surprised")
 
                                 ch_k "-for my back!"
                             elif Girl == EmmaX:
                                 ch_e "How very thoughtful of you. . ."
 
-                                call change_Girl_stat(Girl, "lust", 89, 10)
+                                call change_Girl_stat(Girl, "lust", 10)
                                 $ Girl.change_face("sly")
 
                                 ch_e "A back massager, I assume. . ."
@@ -417,7 +417,7 @@ label sex_shop:
                                 ch_l "This is. . . [[bzzzt]- "
 
                                 $ Girl.change_face("sly")
-                                call change_Girl_stat(Girl, "lust", 89, 10)
+                                call change_Girl_stat(Girl, "lust", 10)
 
                                 ch_l "-oooh. . ."
                             elif Girl == JeanX:
@@ -449,9 +449,9 @@ label sex_shop:
                                 ch_v "I don't need this. . ."
                         else:
                             $ Girl.change_face("angry")
-                            call change_Girl_stat(Girl, "love", 50, -20)
-                            call change_Girl_stat(Girl, "obedience", 20, 10)
-                            call change_Girl_stat(Girl, "inhibition", 20, 20)
+                            call change_Girl_stat(Girl, "love", -20)
+                            call change_Girl_stat(Girl, "obedience", 10)
+                            call change_Girl_stat(Girl, "inhibition", 20)
 
                             if Girl == RogueX:
                                 ch_r "I don't think I have much use for that."
@@ -468,7 +468,7 @@ label sex_shop:
                             elif Girl == JubesX:
                                 ch_v "Put that away. . ."
 
-                            call change_Girl_stat(Girl, "lust", 89, 5)
+                            call change_Girl_stat(Girl, "lust", 5)
 
                             "She hands it back to you."
 
@@ -784,10 +784,10 @@ label swimsuit_shop:
 
                                 if "shopblock" not in Girl.daily_history:
                                     $ Girl.add_word(1, "shopblock", "shopblock")
-                                    call change_Girl_stat(Girl, "love", 50, -2)
-                                    call change_Girl_stat(Girl, "love", 90, -2)
-                                    call change_Girl_stat(Girl, "obedience", 50, 3)
-                                    call change_Girl_stat(Girl, "obedience", 80, 3)
+                                    call change_Girl_stat(Girl, "love", -2)
+                                    call change_Girl_stat(Girl, "love", -2)
+                                    call change_Girl_stat(Girl, "obedience", 3)
+                                    call change_Girl_stat(Girl, "obedience", 3)
 
                                 "You put all the stuff back."
 
@@ -842,9 +842,9 @@ label swimsuit_shop:
 
                                 $ Girl.inventory.append(item)
                                 $ Girl.change_face("bemused", 1)
-                                call change_Girl_stat(Girl, "love", 200, 20)
-                                call change_Girl_stat(Girl, "obedience", 200, 10)
-                                call change_Girl_stat(Girl, "inhibition", 200, 5)
+                                call change_Girl_stat(Girl, "love", 20)
+                                call change_Girl_stat(Girl, "obedience", 10)
+                                call change_Girl_stat(Girl, "inhibition", 5)
 
                                 if item == "bikini_top":
                                     if Girl == RogueX:
@@ -1331,10 +1331,10 @@ label lingerie_shop:
 
                                 if "shopblock" not in Girl.daily_history:
                                     $ Girl.add_word(1, "shopblock", "shopblock")
-                                    call change_Girl_stat(Girl, "love", 50, -2)
-                                    call change_Girl_stat(Girl, "love", 90, -2)
-                                    call change_Girl_stat(Girl, "obedience", 50, 3)
-                                    call change_Girl_stat(Girl, "obedience", 80, 3)
+                                    call change_Girl_stat(Girl, "love", -2)
+                                    call change_Girl_stat(Girl, "love", -2)
+                                    call change_Girl_stat(Girl, "obedience", 3)
+                                    call change_Girl_stat(Girl, "obedience", 3)
 
                                 "You put all the stuff back."
 
@@ -1389,9 +1389,9 @@ label lingerie_shop:
                                 $ Girl.change_face("bemused", 1)
 
                                 if item == "lace_bra":
-                                    call change_Girl_stat(Girl, "love", 200, 25)
-                                    call change_Girl_stat(Girl, "obedience", 200, 20)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 20)
+                                    call change_Girl_stat(Girl, "love", 25)
+                                    call change_Girl_stat(Girl, "obedience", 20)
+                                    call change_Girl_stat(Girl, "inhibition", 20)
 
                                     if Girl == RogueX:
                                         ch_r "I don't know that I'd wear this out, but maybe in private."
@@ -1406,24 +1406,24 @@ label lingerie_shop:
                                     elif Girl == JubesX:
                                         ch_v "It's not my usual style. . ."
                                 elif item == "corset":
-                                    call change_Girl_stat(Girl, "love", 200, 15)
-                                    call change_Girl_stat(Girl, "obedience", 200, 20)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 10)
+                                    call change_Girl_stat(Girl, "love", 15)
+                                    call change_Girl_stat(Girl, "obedience", 20)
+                                    call change_Girl_stat(Girl, "inhibition", 10)
 
                                     if Girl == LauraX:
                                         ch_l "This is. . . kinda cool. . ."
                                     elif Girl == JeanX:
                                         ch_j "Thanks?"
                                 elif item == "lace_corset":
-                                    call change_Girl_stat(Girl, "love", 200, 25)
-                                    call change_Girl_stat(Girl, "obedience", 200, 30)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 20)
+                                    call change_Girl_stat(Girl, "love", 25)
+                                    call change_Girl_stat(Girl, "obedience", 30)
+                                    call change_Girl_stat(Girl, "inhibition", 20)
 
                                     ch_l "You think this'd look good on me?"
                                 elif item == "harness_bra":
-                                    call change_Girl_stat(Girl, "love", 200, 25)
-                                    call change_Girl_stat(Girl, "obedience", 200, 30)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 20)
+                                    call change_Girl_stat(Girl, "love", 25)
+                                    call change_Girl_stat(Girl, "obedience", 30)
+                                    call change_Girl_stat(Girl, "inhibition", 20)
 
                                     ch_r "Not exactly my usual gear, [Girl.player_petname]. . ."
 
@@ -1431,9 +1431,9 @@ label lingerie_shop:
 
                                     ch_r "But never did mind a wardrobe change."
                                 elif item == "lace_panties":
-                                    call change_Girl_stat(Girl, "love", 200, 25)
-                                    call change_Girl_stat(Girl, "obedience", 200, 20)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 20)
+                                    call change_Girl_stat(Girl, "love", 25)
+                                    call change_Girl_stat(Girl, "obedience", 20)
+                                    call change_Girl_stat(Girl, "inhibition", 20)
 
                                     if Girl == RogueX:
                                         ch_r "These are a bit flimsy. . ."
@@ -1454,15 +1454,15 @@ label lingerie_shop:
                                     elif Girl == JubesX:
                                         ch_v "A little. . . intimate. . ."
                                 elif item == "tiger_panties":
-                                    call change_Girl_stat(Girl, "love", 200, 25)
-                                    call change_Girl_stat(Girl, "obedience", 200, 20)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 20)
+                                    call change_Girl_stat(Girl, "love", 25)
+                                    call change_Girl_stat(Girl, "obedience", 20)
+                                    call change_Girl_stat(Girl, "inhibition", 20)
 
                                     ch_v "These are stink'in cute. . ."
                                 elif item == "harness_panties":
-                                    call change_Girl_stat(Girl, "love", 200, 25)
-                                    call change_Girl_stat(Girl, "obedience", 200, 20)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 20)
+                                    call change_Girl_stat(Girl, "love", 25)
+                                    call change_Girl_stat(Girl, "obedience", 20)
+                                    call change_Girl_stat(Girl, "inhibition", 20)
 
                                     ch_r "Not exactly my usual gear, [Girl.player_petname]. . ."
 
@@ -1470,15 +1470,15 @@ label lingerie_shop:
 
                                     ch_r "But never did mind a wardrobe change."
                                 elif item == "pantyhose":
-                                    call change_Girl_stat(Girl, "love", 200, 5)
-                                    call change_Girl_stat(Girl, "obedience", 200, 5)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 5)
+                                    call change_Girl_stat(Girl, "love", 5)
+                                    call change_Girl_stat(Girl, "obedience", 5)
+                                    call change_Girl_stat(Girl, "inhibition", 5)
 
                                     Girl.voice "These are lovely. . ."
                                 elif item == "stockings_and_garterbelt":
-                                    call change_Girl_stat(Girl, "love", 200, 5)
-                                    call change_Girl_stat(Girl, "obedience", 200, 5)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 5)
+                                    call change_Girl_stat(Girl, "love", 5)
+                                    call change_Girl_stat(Girl, "obedience", 5)
+                                    call change_Girl_stat(Girl, "inhibition", 5)
 
                                     if Girl == EmmaX:
                                         ch_e "These are lovely. . ."
@@ -1487,26 +1487,26 @@ label lingerie_shop:
                                     else:
                                         Girl.voice "These are pretty nice. . ."
                                 elif item == "knee_stockings":
-                                    call change_Girl_stat(Girl, "love", 200, 5)
-                                    call change_Girl_stat(Girl, "obedience", 200, 5)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 5)
+                                    call change_Girl_stat(Girl, "love", 5)
+                                    call change_Girl_stat(Girl, "obedience", 5)
+                                    call change_Girl_stat(Girl, "inhibition", 5)
 
                                     Girl.voice "These are pretty nice. . ."
                                 elif item == "socks":
-                                    call change_Girl_stat(Girl, "love", 200, 5)
-                                    call change_Girl_stat(Girl, "obedience", 200, 5)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 5)
+                                    call change_Girl_stat(Girl, "love", 5)
+                                    call change_Girl_stat(Girl, "obedience", 5)
+                                    call change_Girl_stat(Girl, "inhibition", 5)
 
                                     Girl.voice "These are pretty nice. . ."
                                 elif item == "nighty":
-                                    call change_Girl_stat(Girl, "love", 200, 40)
-                                    call change_Girl_stat(Girl, "obedience", 200, 20)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 30)
+                                    call change_Girl_stat(Girl, "love", 40)
+                                    call change_Girl_stat(Girl, "obedience", 20)
+                                    call change_Girl_stat(Girl, "inhibition", 30)
 
                                     if Girl == RogueX:
                                         ch_r "Well, it's a little revealing, but still pretty cute."
 
-                                    call change_Girl_stat(Girl, "lust", 89, 10)
+                                    call change_Girl_stat(Girl, "lust", 10)
 
                     $ Player.drain_word("purchased")
 
@@ -2018,10 +2018,10 @@ label clothing_shop:
 
                                 if "shopblock" not in Girl.daily_history:
                                     $ Girl.add_word(1, "shopblock", "shopblock")
-                                    call change_Girl_stat(Girl, "love", 50, -2)
-                                    call change_Girl_stat(Girl, "love", 90, -2)
-                                    call change_Girl_stat(Girl, "obedience", 50, 3)
-                                    call change_Girl_stat(Girl, "obedience", 80, 3)
+                                    call change_Girl_stat(Girl, "love", -2)
+                                    call change_Girl_stat(Girl, "love", -2)
+                                    call change_Girl_stat(Girl, "obedience", 3)
+                                    call change_Girl_stat(Girl, "obedience", 3)
 
                                 "You put all the stuff back."
 
@@ -2078,17 +2078,17 @@ label clothing_shop:
                                 $ Girl.change_face("bemused", 1)
 
                                 if item == "Raven_suit":
-                                    call change_Girl_stat(Girl, "love", 200, 25)
-                                    call change_Girl_stat(Girl, "obedience", 200, 20)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 20)
+                                    call change_Girl_stat(Girl, "love", 25)
+                                    call change_Girl_stat(Girl, "obedience", 20)
+                                    call change_Girl_stat(Girl, "inhibition", 20)
                                 elif item == "Raven_cloak":
-                                    call change_Girl_stat(Girl, "love", 200, 15)
-                                    call change_Girl_stat(Girl, "obedience", 200, 20)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 10)
+                                    call change_Girl_stat(Girl, "love", 15)
+                                    call change_Girl_stat(Girl, "obedience", 20)
+                                    call change_Girl_stat(Girl, "inhibition", 10)
                                 elif item in ["opaque_fetish_top", "opaque_fetish_pants"]:
-                                    call change_Girl_stat(Girl, "love", 200, 25)
-                                    call change_Girl_stat(Girl, "obedience", 200, 30)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 20)
+                                    call change_Girl_stat(Girl, "love", 25)
+                                    call change_Girl_stat(Girl, "obedience", 30)
+                                    call change_Girl_stat(Girl, "inhibition", 20)
 
                                     ch_r "Always did like mesh."
 
@@ -2096,9 +2096,9 @@ label clothing_shop:
 
                                     ch_r "Thanks, [Girl.player_petname]."
                                 elif item in ["sheer_fetish_top", "sheer_fetish_pants"]:
-                                    call change_Girl_stat(Girl, "love", 200, 25)
-                                    call change_Girl_stat(Girl, "obedience", 200, 30)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 20)
+                                    call change_Girl_stat(Girl, "love", 25)
+                                    call change_Girl_stat(Girl, "obedience", 30)
+                                    call change_Girl_stat(Girl, "inhibition", 20)
 
                                     ch_r "Always did like mesh."
 
@@ -2106,21 +2106,21 @@ label clothing_shop:
 
                                     ch_r "Thanks, [Girl.player_petname]."
                                 elif item == "qipao":
-                                    call change_Girl_stat(Girl, "love", 200, 25)
-                                    call change_Girl_stat(Girl, "obedience", 200, 20)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 20)
+                                    call change_Girl_stat(Girl, "love", 25)
+                                    call change_Girl_stat(Girl, "obedience", 20)
+                                    call change_Girl_stat(Girl, "inhibition", 20)
                                 elif item == "bunny_suit":
-                                    call change_Girl_stat(Girl, "love", 200, 25)
-                                    call change_Girl_stat(Girl, "obedience", 200, 20)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 20)
+                                    call change_Girl_stat(Girl, "love", 25)
+                                    call change_Girl_stat(Girl, "obedience", 20)
+                                    call change_Girl_stat(Girl, "inhibition", 20)
                                 elif item == "bunny_cuffs":
-                                    call change_Girl_stat(Girl, "love", 200, 25)
-                                    call change_Girl_stat(Girl, "obedience", 200, 20)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 20)
+                                    call change_Girl_stat(Girl, "love", 25)
+                                    call change_Girl_stat(Girl, "obedience", 20)
+                                    call change_Girl_stat(Girl, "inhibition", 20)
                                 elif item == "bunny_ears":
-                                    call change_Girl_stat(Girl, "love", 200, 5)
-                                    call change_Girl_stat(Girl, "obedience", 200, 5)
-                                    call change_Girl_stat(Girl, "inhibition", 200, 5)
+                                    call change_Girl_stat(Girl, "love", 5)
+                                    call change_Girl_stat(Girl, "obedience", 5)
+                                    call change_Girl_stat(Girl, "inhibition", 5)
 
                     $ Player.drain_word("purchased")
 

@@ -63,8 +63,6 @@ layeredimage Zero_doggy_cock_in:
 
 layeredimage Chibi_cock:
     if Player.cock_out or Player.naked:
-        Null()
-    else:
         "images/player/Chibi_cock_[Player.color].png"
 
     anchor (0.5, 0.5) offset (-850, -180) zoom 0.5

@@ -141,7 +141,7 @@ label sunbathe:
         return
 
     if len(Sunbathers) == 2:
-        $ line = Sunbathers[0].name + ", " Sunbathers[1].name
+        $ line = Sunbathers[0].name + ", " + Sunbathers[1].name
     elif len(Sunbathers) > 1:
         $ line = "girls"
     else:
@@ -210,7 +210,7 @@ label skinny_dip:
         return
 
     if len(Dippers) == 2:
-        $ line = Dippers[0].name + ", " Dippers[1].name
+        $ line = Dippers[0].name + ", " + Dippers[1].name
     elif len(Dippers) > 1:
         $ line = "girls"
     else:
@@ -288,14 +288,14 @@ label wardrobe_malfunction(Girl):
             $ Girl.change_face("confused")
 
             if Girl != StormX:
-                call change_Girl_stat(Girl, "obedience", 60, 2)
-                call change_Girl_stat(Girl, "inhibition", 50, -2)
+                call change_Girl_stat(Girl, "obedience", 2)
+                call change_Girl_stat(Girl, "inhibition", -2)
                 Girl.voice ". . ."
                 $ Girl.change_face("surprised", 2,eyes = "down")
 
-            call change_Girl_stat(Girl, "love", 80, 3)
-            call change_Girl_stat(Girl, "love", 90, 1)
-            call change_Girl_stat(Girl, "lust", 50, 2)
+            call change_Girl_stat(Girl, "love", 3)
+            call change_Girl_stat(Girl, "love", 1)
+            call change_Girl_stat(Girl, "lust", 2)
 
             $ offset = 100
         "Say nothing.":
@@ -313,10 +313,10 @@ label wardrobe_malfunction(Girl):
 
         $ Girl.remove_Clothing("bra")
 
-        call change_Girl_stat(Girl, "obedience", 60, 2)
-        call change_Girl_stat(Girl, "inhibition", 50, 4)
-        call change_Girl_stat(Girl, "inhibition", 90, 2)
-        call change_Girl_stat(Girl, "lust", 50, 5)
+        call change_Girl_stat(Girl, "obedience", 2)
+        call change_Girl_stat(Girl, "inhibition", 4)
+        call change_Girl_stat(Girl, "inhibition", 2)
+        call change_Girl_stat(Girl, "lust", 5)
 
         "She smiles and tosses her top over her head."
 
@@ -324,24 +324,24 @@ label wardrobe_malfunction(Girl):
     elif approval_check(Girl, 500 - offset, "I") or approval_check(Girl, 1200 - offset):
         $ Girl.change_face("sly", 1)
 
-        call change_Girl_stat(Girl, "obedience", 60, 2)
-        call change_Girl_stat(Girl, "inhibition", 50, 3)
-        call change_Girl_stat(Girl, "inhibition", 80, 2)
-        call change_Girl_stat(Girl, "lust", 50, 3)
+        call change_Girl_stat(Girl, "obedience", 2)
+        call change_Girl_stat(Girl, "inhibition", 3)
+        call change_Girl_stat(Girl, "inhibition", 2)
+        call change_Girl_stat(Girl, "lust", 3)
 
         "She smiles, and leaves the top how it is."
 
         call expression Girl.tag + "_First_Topless"
     else:
         if approval_check(Girl, 800 - offset) or (Girl == StormX):
-            call change_Girl_stat(Girl, "obedience", 60, 2)
-            call change_Girl_stat(Girl, "inhibition", 70, 2)
-            call change_Girl_stat(Girl, "lust", 50, 1)
+            call change_Girl_stat(Girl, "obedience", 2)
+            call change_Girl_stat(Girl, "inhibition", 2)
+            call change_Girl_stat(Girl, "lust", 1)
 
             $ Girl.change_face("bemused", 2)
         else:
-            call change_Girl_stat(Girl, "love", 70, -2)
-            call change_Girl_stat(Girl, "inhibition", 50, 1)
+            call change_Girl_stat(Girl, "love", -2)
+            call change_Girl_stat(Girl, "inhibition", 1)
 
             $ Girl.change_face("angry", 2)
 
@@ -352,9 +352,9 @@ label wardrobe_malfunction(Girl):
         "She tugs her top back into place."
 
         if offset == 0:
-            call change_Girl_stat(Girl, "love", 70, -5)
-            call change_Girl_stat(Girl, "obedience", 60, -2)
-            call change_Girl_stat(Girl, "inhibition", 60, 2)
+            call change_Girl_stat(Girl, "love", -5)
+            call change_Girl_stat(Girl, "obedience", -2)
+            call change_Girl_stat(Girl, "inhibition", 2)
 
             Girl.voice "You could have told me."
 

@@ -55,8 +55,8 @@ label world_map:
             #     call check_sunshock
             #
             #     $ destination = "bg_mall"
-            "The attic" if "attic" in Player.history and Player.location != "bg_storm":
-                jump meet_Storm
+            # "The attic" if "attic" in Player.history and Player.location != "bg_storm":
+            #     jump meet_Storm
             "Stay where I am.":
                 return
 
