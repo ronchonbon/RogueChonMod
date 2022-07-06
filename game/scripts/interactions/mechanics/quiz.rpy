@@ -4,7 +4,7 @@ label Group_Strip_Study(temp_Girls = [], QuizOrder = []):
     $ Count = 0
     $ between_event_count = 1
     $ counter = 0
-    $ QuizOrder = [1, 2,3,4,5, 6,7,8, 9, 10, 11, 12, 13, 14, 15]
+    $ QuizOrder = [1, 2,3,4, 5, 6, 7,8, 9, 10, 11, 12, 13, 14, 15]
     $ renpy.random.shuffle(QuizOrder)
     if EmmaX in Player.Party and Player.Party[0] != EmmaX:
 
@@ -861,7 +861,7 @@ label Laura_Quiz_Question:
             "D. Red":
                 return False
     if QuizOrder[between_event_count] == 2:
-        $ LauraX.change_face("perplexed", 1,eyes = "side")
+        $ LauraX.change_face("perplexed", 1, eyes = "side")
         ch_l "Um. . ."
         $ LauraX.change_face("sly")
         menu:
@@ -1000,7 +1000,7 @@ label Jean_Quiz_Question:
             "D. Red":
                 return False
     if QuizOrder[between_event_count] == 2:
-        $ JeanX.change_face("perplexed", 1,eyes = "side")
+        $ JeanX.change_face("perplexed", 1, eyes = "side")
         ch_j "Um. . ."
         $ JeanX.change_face("sly")
         menu:

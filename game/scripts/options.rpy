@@ -77,26 +77,6 @@ init -1 python hide:
     config.has_music = False
     config.has_voice = False
 
-    config.help = "README.html"
-
-    config.enter_transition = None
-    config.exit_transition = None
-    config.intra_transition = None
-    config.main_game_transition = None
-    config.game_main_transition = None
-    config.end_splash_transition = None
-    config.end_game_transition = None
-    config.after_load_transition = None
-    config.window_show_transition = None
-    config.window_hide_transition = None
-    config.adv_nvl_transition = dissolve
-    config.nvl_adv_transition = dissolve
-    config.enter_yesno_transition = None
-    config.exit_yesno_transition = None
-    config.enter_replay_transition = None
-    config.exit_replay_transition = None
-    config.say_attribute_transition = None
-
 python early:
 
     config.save_directory = "Rogue-Like Chonky Mod"

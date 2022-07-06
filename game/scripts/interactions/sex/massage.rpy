@@ -409,7 +409,7 @@ label Massage_Cycle:
                     "Yeah [[Auto complete]":
                         "Ok."
                         "You just do a quick massage, hitting all the basics and working out her muscles."
-                        $ D20 = renpy.random.randint(2,5)
+                        $ D20 = renpy.random.randint(2, 5)
                         $ Girl.addiction -= (10 + (4*D20))
                         $ MCount = D20
                         $ Girl.lust += (5*D20)
@@ -842,7 +842,7 @@ label Massage_Cycle:
                     call Girl_Cumming (Girl)
                 else:
                     call Girl_Cumming (Girl, 1)
-                    $ Girl.change_face("bemused", 2,eyes = "side")
+                    $ Girl.change_face("bemused", 2, eyes = "side")
                     if Girl == RogueX:
                         ch_r "Oh. . . wow. . . um. . ."
                         ch_r "That was nice. . ."

@@ -69,7 +69,7 @@ label caught_changing(Girl):
                         $ Girl.Clothes["top"] = "towel"
                         "She grabs a towel and covers up."
             else:
-                $ Girl.change_face("surprised", 1,brows = "confused")
+                $ Girl.change_face("surprised", 1, brows = "confused")
 
                 if "exhibitionist" in Girl.traits:
                     call change_Girl_stat(Girl, "lust", 2*D20)
@@ -367,7 +367,7 @@ label caught_showering(Girl):
             "You hear a sharp shuffling sound and the water gets cut off."
             "After several seconds and some more shuffling, [Girl.name] comes to the door."
 
-            $ Girl.change_face("perplexed", 2,mouth = "normal")
+            $ Girl.change_face("perplexed", 2, mouth = "normal")
 
             call shift_focus(Girl)
             call set_the_scene(location = "bg_shower")
@@ -728,7 +728,7 @@ label caught_masturbating(Girl):
         "You hear some soft moans, followed by some shuffling around as items tumble to the ground."
         "After several seconds and some more shuffling of clothing, [Girl.name] comes to the door."
 
-        $ Girl.change_face("confused", 1,eyes = "surprised", mouth = "smile")
+        $ Girl.change_face("confused", 1, eyes = "surprised", mouth = "smile")
 
         call stop_all_Actions
         call set_the_scene(location = Girl.home)
@@ -929,8 +929,8 @@ label caught_lesbian(GirlA, GirlB):
             "Enter quietly":
                 call set_the_scene
 
-                $ GirlA.change_face("kiss", 1,eyes = "closed")
-                $ GirlB.change_face("kiss", 1,eyes = "closed")
+                $ GirlA.change_face("kiss", 1, eyes = "closed")
+                $ GirlB.change_face("kiss", 1, eyes = "closed")
 
                 $ Player.primary_Action = "lesbian"
                 $ girl_secondary_Action = "fondle_pussy"
@@ -1600,11 +1600,11 @@ label caught_having_sex(Girl):
 
         ch_x "That is it, young lady. Until further notice, you're forbidden from. . . whammying your fellow students!"
 
-        $ Girl.change_face("angry", 1,mouth = "surprised")
+        $ Girl.change_face("angry", 1, mouth = "surprised")
 
         ch_j "Bullshit!"
 
-        $ Girl.change_face("angry", 0,eyes = "psychic")
+        $ Girl.change_face("angry", 0, eyes = "psychic")
 
         ch_x "Ugh. . ."
 

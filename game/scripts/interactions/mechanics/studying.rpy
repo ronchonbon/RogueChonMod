@@ -68,25 +68,21 @@ label study:
 
         return
 
-    if EmmaX in Player.Party and len(Player.Party) >= 2:
-        ch_e "I suppose you could both use some work."
-    else:
-        if EmmaX in Player.Party:
-            ch_e "Very well."
-        elif Player.Party[0] == RogueX:
-            ch_r "Sure."
-        elif Player.Party[0] == KittyX:
-            ch_k "Sure."
-        elif Player.Party[0] == LauraX:
-            ch_l "Fine."
-        elif Player.Party[0] == JeanX:
-            ch_j "I guess."
-        elif Player.Party[0] == StormX:
-            ch_s "I suppose we could go over a few things. . ."
-        elif Player.Party[0] == JubesX:
-            ch_v "I guess we could study. . ."
+    if Player.Party[0] == RogueX:
+        ch_r "Sure."
+    elif Player.Party[0] == KittyX:
+        ch_k "Sure."
+    elif Player.Party[0] == EmmaX:
+        ch_e "Very well."
+    elif Player.Party[0] == LauraX:
+        ch_l "Fine."
+    elif Player.Party[0] == JeanX:
+        ch_j "I guess."
+    elif Player.Party[0] == StormX:
+        ch_s "I suppose we could go over a few things. . ."
+    elif Player.Party[0] == JubesX:
+        ch_v "I guess we could study. . ."
 
-    $ Player.recent_history.append("study")
     $ Player.XP += 5
 
     $ line = renpy.random.choice(["you run you through some basic routines, it's fairly uneventful.",
@@ -98,41 +94,30 @@ label study:
         "You study for the game design course."])
     "[line]"
 
-    call change_Girl_stat(Player.Party[0], "love", 2)
-    $ Player.Party[0].XP += 5
+    $ temp_Girls = Player.Party[:]
 
-    if len(Player.Party) >= 2:
-        call change_Girl_stat(Player.Party[1], "love", 2)
-        $ Player.Party[0].check_if_likes(Player.Party[1], 700, 5, 1)
-        $ Player.Party[1].check_if_likes(Player.Party[0], 700, 5, 1)
-        $ Player.Party[1].XP += 5
+    while temp_Girls:
+        call change_Girl_stat(temp_Girls[0], "love", 2)
+        $ temp_Girls[0].XP += 5
 
-    $ D20 = renpy.random.randint(1, 20)
+        $ temp_Girls.remove(temp_Girls[0])
 
-    if len(Player.Party) >= 2 and EmmaX in Player.Party and "threesome" not in EmmaX.history:
-        $ frisky_possible = False
-    else:
-        $ frisky_possible = True
+    if Player.Party[0] == RogueX:
+        ch_r "It's getting a bit late, we should wrap this up. . ."
+    elif Player.Party[0] == KittyX:
+        ch_k "It's kinda late, we should probably stop. . ."
+    elif Player.Party[0] == EmmaX:
+        ch_e "I'm afraid it's getting a bit late, we should wrap this up. . ."
+    elif Player.Party[0] == LauraX:
+        ch_l "I'm bored now."
+    elif Player.Party[0] == JeanX:
+        ch_j "Ok, that's enough of that. . ."
+    elif Player.Party[0] == StormX:
+        ch_s "I think that will be enough for now."
+    elif Player.Party[0] == JubesX:
+        ch_v "Ugh, my head hurts!"
 
-    if frisky_possible and D20 >= 10:
-        call frisky_study
-    else:
-        if EmmaX in Player.Party:
-            ch_e "I'm afraid it's getting a bit late, we should wrap this up. . ."
-        elif Player.Party[0] == RogueX:
-            ch_r "It's getting a bit late, we should wrap this up. . ."
-        elif Player.Party[0] == KittyX:
-            ch_k "It's kinda late, we should probably stop. . ."
-        elif Player.Party[0] == LauraX:
-            ch_l "I'm bored now."
-        elif Player.Party[0] == JeanX:
-            ch_j "Ok, that's enough of that. . ."
-        elif Player.Party[0] == StormX:
-            ch_s "I think that will be enough for now."
-        elif Player.Party[0] == JubesX:
-            ch_v "Ugh, my head hurts!"
-
-        $ Player.XP += 5
+    $ Player.XP += 5
 
     $ Player.Party = []
 
@@ -142,9 +127,22 @@ label study:
         return
 
     call wait
-    call set_Girls_locations
 
     return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 label frisky_study(Prime_Bonus=0, Second_Bonus=0):
     call shift_focus(Player.Party[0])
@@ -157,7 +155,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
     elif Player.Party[0] == EmmaX and Second and ("threesome" not in EmmaX.history or "taboo" not in EmmaX.history):
         "[EmmaX.name] starts to lean close to you, but then notices [Second.name]."
 
-        $ Player.Party[0].change_face("sly", 1,eyes = "side")
+        $ Player.Party[0].change_face("sly", 1, eyes = "side")
 
         "She stops immediately and looks a bit embarrassed."
     elif D20 > 17 and approval_check(Player.Party[0], 1000) and Player.Party[0].Action_counter["blowjob"] > 5:
@@ -265,9 +263,9 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
 
                 "[Player.Party[1].name] glowers at you a bit."
 
-                $ Player.Party[0].check_if_likes(Second,700,5, 1)
+                $ Player.Party[0].check_if_likes(Second, 700, 5, 1)
 
-                $ Player.Party[1].check_if_likes(Player.Party[0],700,5, 1)
+                $ Player.Party[1].check_if_likes(Player.Party[0], 700, 5, 1)
         elif len(Player.Party) == 2:
             call check_if_second_minds(Player.Party[0], Player.Party[1])
 

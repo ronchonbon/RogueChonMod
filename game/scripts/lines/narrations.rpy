@@ -77,7 +77,7 @@ label Sex_Dialog(Primary, Secondary):
         "[line4]"
         if second_Girl_main_action == "suck_breasts" or second_Girl_main_action == "fondle_breasts":
 
-            if approval_check(Primary,500, "I",taboo_modifier=2) and Primary.lust >= 50 and (Primary.Clothes["bra"] or Primary.top_number() > 1):
+            if approval_check(Primary, 500, "I",taboo_modifier=2) and Primary.lust >= 50 and (Primary.Clothes["bra"] or Primary.top_number() > 1):
 
                 $ Primary.top_pulled_up = 1
                 "[Primary.name] seems frustrated and pulls her top open."

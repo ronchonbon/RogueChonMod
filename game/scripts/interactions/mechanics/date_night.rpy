@@ -13,7 +13,7 @@ label check_if_second_minds(Girl = None, Previous = None, repeat = 0):
 
         return True
     elif Previous == JeanX and not approval_check(Previous, 500, "L"):
-        $ Previous.change_face("sly", 1,eyes = "side")
+        $ Previous.change_face("sly", 1, eyes = "side")
 
         if Player.location == "bg_restaurant":
             "[Previous.name] rolls her eyes, but goes back to her meal."
@@ -355,7 +355,7 @@ label Date_Ask(Girl=0):
                         ch_v "So?! Well. . . so. . ."
                         ch_v "Whatever."
                     $ Girl.change_face("bemused")
-                elif approval_check(Girl, 500, "O", Alt = [[EmmaX],700]):
+                elif approval_check(Girl, 500, "O", Alt = [[EmmaX], 700]):
                     $ Girl.change_face("surprised")
                     Girl.voice ". . ."
                     $ Girl.change_face("sad")
@@ -407,7 +407,7 @@ label Date_Ask(Girl=0):
                     elif Girl == LauraX:
                         ch_l "Dick."
                     elif Girl == JeanX:
-                        $ Girl.change_face("angry", 1,eyes = "psychic")
+                        $ Girl.change_face("angry", 1, eyes = "psychic")
                         ch_j ". . ."
                         $ Girl.change_face("angry", 1)
                     elif Girl == StormX:
@@ -1398,7 +1398,7 @@ label Date_Crossed(Girls = [], Check=0, Count=0, counter=0):
                         call Girl_Date_Over (LauraX)
                 "[JeanX.name], you can go" if JeanX in Player.Party:
                     if approval_check(JeanX, 800, "LO"):
-                        $ JeanX.change_face("normal", 1,eyes = "side")
+                        $ JeanX.change_face("normal", 1, eyes = "side")
                         if JeanX == Player.Party[0]:
                             ch_j "You heard him, get going [Player.Party[1].name]."
                             "[JeanX.name] apparently ignored you. . . and [Player.Party[1].name] walks off."
@@ -2442,7 +2442,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
                 "On the other side, [Previous.name] also reaches down and gets into the action."
                 "You both stroke her pussy for several minutes, until finally she shudders in orgasm."
                 "You slowly pulls your hands free with a sly smile."
-                $ Girl.check_if_likes(Previous,700, 6, 1)
+                $ Girl.check_if_likes(Previous, 700, 6, 1)
                 $ Girl.check_if_likes(Previous, 1000, 6, 1)
                 $ Previous.check_if_likes(Girl, 1000, 2, 1)
             else:
@@ -2989,7 +2989,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
             if _return == 1:
 
                 "[Previous.name] also leans over and toys with [Girl.name]'s pussy."
-                $ Girl.check_if_likes(Previous,700,3, 1)
+                $ Girl.check_if_likes(Previous, 700,3, 1)
                 $ Girl.check_if_likes(Previous, 1000,3, 1)
                 $ Previous.check_if_likes(Girl, 1000, 2, 1)
             if Girl.event_counter["anal_creampied"]:
@@ -3054,7 +3054,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
             if _return == 1:
 
                 "[Previous.name] also leans over and toys with [Girl.name]'s pussy."
-                $ Girl.check_if_likes(Previous,700,3, 1)
+                $ Girl.check_if_likes(Previous, 700,3, 1)
                 $ Girl.check_if_likes(Previous, 1000,3, 1)
                 $ Previous.check_if_likes(Girl, 1000, 2, 1)
             if Girl.event_counter["creampied"]:
@@ -3277,7 +3277,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
             elif _return == 1:
 
                 "[Previous.name] leans in and begins to fondle her breasts as well."
-                $ Girl.check_if_likes(Previous,700, 6, 1)
+                $ Girl.check_if_likes(Previous, 700, 6, 1)
                 $ Girl.check_if_likes(Previous, 1000,3, 1)
                 $ Previous.check_if_likes(Girl, 1000, 2, 1)
             "After several minutes of this, she shudders in orgasm and leans back with a contented sigh."
@@ -3877,12 +3877,12 @@ label Date_Paying(Activity = "dinner", Total_Cost=0):
     $ Count = int(Date_Bonus[0]/2)
     $ Count = 10 if Count >= 10 else Count
 
-    call change_Girl_stat(Player.Party[0], "lust", Alt = [[EmmaX],75,Count])
+    call change_Girl_stat(Player.Party[0], "lust", Alt = [[EmmaX], 75,Count])
 
     $ Count = int(Date_Bonus[1]/2)
     $ Count = 10 if Count >= 10 else Count
     if len(Player.Party) >= 2:
-        call change_Girl_stat(Player.Party[1], "lust", Alt = [[EmmaX],75,Count])
+        call change_Girl_stat(Player.Party[1], "lust", Alt = [[EmmaX], 75,Count])
 
     $ Count = 0
     $ Play_Cost = 0
@@ -4017,7 +4017,7 @@ label Girl_Date_End(Girl=0):
         "You walk [Girl.name] back to her room."
     if Date_Bonus[0] < 0:
 
-        $ Girl.change_face("angry", 0,eyes = "side")
+        $ Girl.change_face("angry", 0, eyes = "side")
         if Girl == RogueX:
             ch_r "Well that was a waste of an evening. I'll see you around, [Player.name]."
         elif Girl == KittyX:

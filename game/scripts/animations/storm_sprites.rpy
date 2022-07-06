@@ -5,7 +5,7 @@ layeredimage Storm_sprite standing:
     if StormX.Clothes["jacket"].string:
         "images/Storm_standing/Storm_standing_jacket_[StormX.Clothes[jacket].string]_back.png"
 
-    if StormX.Clothes["bra"].string in ["black_bra", "sports_bra"] and StormX.Clothes["bra"].state:
+    if StormX.Clothes["bra"].string in ["black_bra", "black_sports_bra"] and StormX.Clothes["bra"].state:
         "images/Storm_standing/Storm_standing_bra_[StormX.Clothes[bra].string]_back.png"
 
     if StormX.Clothes["skirt"].string:
@@ -34,7 +34,7 @@ layeredimage Storm_sprite standing:
 
     if not StormX.Clothes["underwear"].string:
         Null()
-    elif StormX.Clothes["underwear"].string == "bikini_bottoms" and (StormX.Clothes["bra"].string != "bikini_top" or StormX.Clothes["bra"].state):
+    elif StormX.Clothes["underwear"].string == "black_bikini_bottoms" and (StormX.Clothes["bra"].string != "black_bikini_top" or StormX.Clothes["bra"].state):
         "images/Storm_standing/Storm_standing_underwear_[StormX.Clothes[underwear].string]_2.png"
     elif StormX.grool > 1 and StormX.Clothes["underwear"].string != "Elena_panties":
         "images/Storm_standing/Storm_standing_underwear_[StormX.Clothes[underwear].string]_grool_[StormX.Clothes[underwear].state].png"
@@ -128,7 +128,7 @@ layeredimage Storm_sprite standing:
     always:
         "Storm_head" pos (0.28, 0.318) zoom 0.47
 
-    if StormX.Clothes["jacket"].string != "jacket" or not StormX.arm_pose == 2:
+    if StormX.Clothes["jacket"].string != "black_jacket" or not StormX.arm_pose == 2:
         Null()
     elif renpy.showing("Storm_sprite handjob"):
         "images/Storm_handjob/Storm_handjob_jacket[StormX.arm_pose]_[StormX.Clothes[jacket].string].png"
@@ -210,7 +210,7 @@ layeredimage Storm_head:
     if StormX.spunk["face"]:
         "images/Storm_standing/Storm_standing_spunk_face.png"
 
-    if StormX.Clothes["face_outer_accessory"].string == "towel":
+    if StormX.Clothes["face_outer_accessory"].string == "head_towel":
         Null()
     elif renpy.showing("Storm_sprite sex") and StormX.Clothes["hair"].string == "long_hair":
         "images/Storm_sex/Storm_sex_hair.png"
@@ -254,7 +254,7 @@ layeredimage Storm_titjob_body:
     if StormX.wet:
         "images/Storm_titjob/Storm_titjob_water_body.png"
 
-    if StormX.Clothes["hair"].string == "long" and not StormX.wet:
+    if StormX.Clothes["hair"].string == "long_hair" and not StormX.wet:
         "images/Storm_titjob/Storm_titjob_hair_mid.png"
 
     anchor (0.5, 0.5)

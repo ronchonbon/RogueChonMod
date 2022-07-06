@@ -454,7 +454,7 @@ label execute_plan(Girl):
                     call change_Girl_stat(JeanX, "obedience", 5)
                     call change_Girl_stat(JeanX, "love", -5)
                     call change_Girl_stat(JeanX, "love", -5)
-                    $ JeanX.change_face("angry", 1,mouth = "surprised")
+                    $ JeanX.change_face("angry", 1, mouth = "surprised")
 
                     ch_j "Hey!"
 

@@ -34,8 +34,8 @@ init python:
 
             self.inventory = []
 
-            self.primary_Action = None
-            self.secondary_Action = None
+            self.primary_Action = ActionClass(None, Target = None)
+            self.secondary_Action = ActionClass(None, Target = None)
 
             self.semen = 2
             self.max_semen = 3
@@ -557,8 +557,8 @@ init python:
 
             return
 
-        def undress(self, instant = False):
-            self.Outfit.undress(instant = instant)
+        def undress(self):
+            self.Outfit.undress()
 
             return
 
@@ -624,7 +624,7 @@ init python:
                 Outfit_name = self.todays_Outfit_name
 
             if Outfit_name not in self.Wardrobe.Outfits.keys():
-                renpy.say(self.voice, "I don't have an outfit named [new_Outfit_name].")
+                renpy.say(self.voice, "I don't have an outfit named [Outfit_name].")
 
                 return
 

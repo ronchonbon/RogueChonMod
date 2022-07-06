@@ -207,7 +207,7 @@ layeredimage Emma_head:
     if EmmaX.spunk["hair"]:
         "images/Emma_standing/Emma_standing_spunk_hair_[EmmaX.Clothes[hair].string].png"
 
-    if EmmaX.Clothes["face_outer_accessory"].string != "hat":
+    if EmmaX.Clothes["face_outer_accessory"].string != "Dimitrescu_hat":
         Null()
     elif EmmaX.wet or EmmaX.Clothes["hair"].string == "bangs":
         "images/Emma_standing/Emma_standing_shadow_head_wet.png"
@@ -428,7 +428,7 @@ layeredimage Emma_head_diamond:
     if EmmaX.spunk["hair"]:
         "images/Emma_standing/Emma_standing_spunk_hair_[EmmaX.Clothes[hair].string].png"
 
-    if EmmaX.Clothes["face_outer_accessory"].string != "hat":
+    if EmmaX.Clothes["face_outer_accessory"].string != "Dimitrescu_hat":
         Null()
     elif EmmaX.wet or EmmaX.Clothes["hair"].string == "bangs":
         "images/Emma_standing/Emma_standing_shadow_head_wet.png"

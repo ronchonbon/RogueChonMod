@@ -291,7 +291,7 @@ label wardrobe_malfunction(Girl):
                 call change_Girl_stat(Girl, "obedience", 2)
                 call change_Girl_stat(Girl, "inhibition", -2)
                 Girl.voice ". . ."
-                $ Girl.change_face("surprised", 2,eyes = "down")
+                $ Girl.change_face("surprised", 2, eyes = "down")
 
             call change_Girl_stat(Girl, "love", 3)
             call change_Girl_stat(Girl, "love", 1)

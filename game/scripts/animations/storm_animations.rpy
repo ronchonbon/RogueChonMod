@@ -797,7 +797,7 @@ image Storm_titjob_hair_animation5:
         repeat
 
 layeredimage Storm_sprite titjob:
-    # if StormX.Clothes["bra"].string in ["black_bra", "lace_bra"]:
+    # if StormX.Clothes["bra"].string in ["black_bra", "black_lace_bra"]:
     #     "Storm_titjob_bra_back_animation[StormX.primary_Action.speed]"
 
     always:
@@ -809,13 +809,13 @@ layeredimage Storm_sprite titjob:
     always:
         "Storm_titjob_head_animation[StormX.primary_Action.speed]" pos (0.0, -0.15) zoom 0.9
 
-    # if StormX.Clothes["bra"].string != "cosplay_bra":
+    # if StormX.Clothes["bra"].string != "Elena_bra":
     #     "Storm_titjob_breasts_under_animation[StormX.primary_Action.speed]"
 
     always:
         "Zero_cock_Storm"
 
-    # if StormX.Clothes["bra"].string in ["sports_bra", "bikini_top"]:
+    # if StormX.Clothes["bra"].string in ["black_sports_bra", "black_bikini_top"]:
     #     "Storm_titjob_bra_stretch_animation[StormX.primary_Action.speed]"
 
     always:

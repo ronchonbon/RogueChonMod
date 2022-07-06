@@ -1,3 +1,323 @@
+label summon_Rogue:
+    $ D20 = renpy.random.randint(1, 20)
+
+    if D20 <= 3:
+        $ line = "no"
+    elif time_index > 2:
+        if approval_check(RogueX, 700, "L") or approval_check(RogueX, 300, "O"):
+            ch_r "Ok, it's getting late but I can hang out for a bit."
+
+            call add_Girls(RogueX)
+        else:
+            ch_r "It's a bit late, [RogueX.player_petname], maybe tomorrow."
+
+        return
+    elif not approval_check(RogueX, 700, "L") or not approval_check(RogueX, 600, "O"):
+        if not approval_check(RogueX, 300):
+            ch_r "Not really interested, [RogueX.player_petname]."
+
+            return
+        elif RogueX.location == "bg_classroom":
+            ch_r "I'm kinda in class right now, [RogueX.player_petname], you could join me."
+        elif RogueX.location == "bg_dangerroom":
+            ch_r "I'm training at the moment, [RogueX.player_petname], care to join me?"
+        elif RogueX.location == "bg_campus":
+            ch_r "I'm hanging out on campus, [RogueX.player_petname], want to hang with me?"
+        elif RogueX.location == "bg_rogue":
+            ch_r "I'm in my room, [RogueX.player_petname], want to swing by?"
+        elif RogueX.location == "bg_player":
+            ch_r "I happen to be in your room, [RogueX.player_petname], I'm waiting for you. . ."
+        elif RogueX.location == "bg_shower":
+            if approval_check(RogueX, 1600):
+                ch_r "I'm kinda in the shower right now, [RogueX.player_petname], care to join me?"
+            else:
+                ch_r "I'm kinda in the shower right now, [RogueX.player_petname], maybe we could touch base later."
+
+                return
+        elif RogueX.location == "hold":
+            ch_r "I'm not really around right now, see you later?"
+
+            return
+        else:
+            ch_r "Why don't you come over here, [RogueX.player_petname]?"
+
+        menu:
+            extend ""
+            "Sure, I'll be right there.":
+                call change_Girl_stat(RogueX, "love", 1)
+                call change_Girl_stat(RogueX, "inhibition", 1)
+
+                ch_r "See you then!"
+
+                $ line = "go to"
+            "Nah, we can talk later.":
+                call change_Girl_stat(RogueX, "obedience", 1)
+                call change_Girl_stat(RogueX, "obedience", 2)
+
+                ch_r "Oh, ok. Talk to you later then."
+            "Could you please come visit me? I'm lonely.":
+                if approval_check(RogueX, 600, "L") or approval_check(RogueX, 1400):
+                    call change_Girl_stat(RogueX, "love", 1)
+                    call change_Girl_stat(RogueX, "obedience", 1)
+
+                    $ line = "lonely"
+                else:
+                    call change_Girl_stat(RogueX, "inhibition", 1)
+
+                    $ line = "no"
+            "I said come over here.":
+                if approval_check(RogueX, 600, "O"):
+                    call change_Girl_stat(RogueX, "love", 1)
+                    call change_Girl_stat(RogueX, "love", -1)
+                    call change_Girl_stat(RogueX, "obedience", 1)
+
+                    $ line = "command"
+                elif D20 >= 7 and approval_check(RogueX, 1400):
+                    call change_Girl_stat(RogueX, "love", -2)
+                    call change_Girl_stat(RogueX, "love", -1)
+                    call change_Girl_stat(RogueX, "obedience", 2)
+                    call change_Girl_stat(RogueX, "obedience", 1)
+
+                    ch_r "I suppose I can, [RogueX.player_petname]."
+
+                    $ line = "yes"
+                elif approval_check(RogueX, 200, "O"):
+                    call change_Girl_stat(RogueX, "love", -4)
+                    call change_Girl_stat(RogueX, "love", -2)
+
+                    ch_r "I don't know who you think you are, boss'in me around like that."
+
+                    call change_Girl_stat(RogueX, "obedience", -2)
+                    call change_Girl_stat(RogueX, "inhibition", 2)
+                    call change_Girl_stat(RogueX, "inhibition", 1)
+
+                    ch_r "If you want to see me, you know where to find me."
+                else:
+                    call change_Girl_stat(RogueX, "love", 1)
+                    call change_Girl_stat(RogueX, "obedience", -1)
+                    call change_Girl_stat(RogueX, "inhibition", 1)
+                    call change_Girl_stat(RogueX, "inhibition", 1)
+
+                    $ line = "no"
+    else:
+        if RogueX.love > RogueX.obedience:
+            ch_r "I'd love to, [RogueX.player_petname]."
+        else:
+            ch_r "Ok, I'll be right over, [RogueX.player_petname]."
+
+        $ line = "yes"
+
+    if not line:
+        return
+    elif line == "go to":
+        call hide_Girl(RogueX)
+        call change_clothes
+
+        if RogueX.location == "bg_player":
+            ch_r "I'll be waiting."
+        elif RogueX.location == "bg_rogue":
+            ch_r "I'll get tidied up."
+        elif RogueX.location == "bg_campus":
+            ch_r "I'll keep an eye out for you."
+        elif RogueX.location == "bg_classroom":
+            ch_r "See you then!"
+        elif RogueX.location == "bg_dangerroom":
+            ch_r "I'll be warming up!"
+        elif RogueX.location == "bg_shower":
+            ch_r "I guess I'll be here."
+
+        call hide_all
+
+        $ Player.traveling = True
+
+        if RogueX.location == "bg_player":
+            jump player_room
+        elif RogueX.location == "bg_rogue":
+            $ Girl = RogueX
+
+            jump girls_room
+        elif RogueX.location == "bg_campus":
+            jump campus
+        elif RogueX.location == "bg_classroom":
+            jump classroom
+        elif RogueX.location == "bg_dangerroom":
+            jump danger_room
+        elif RogueX.location == "bg_shower":
+            jump shower_room
+        elif RogueX.location == "bg_pool":
+            jump pool
+        elif RogueX.location == "bg_study":
+            jump study
+        elif RogueX.location == "bg_mall":
+            jump mall
+    elif line == "no":
+        if RogueX.location == "bg_classroom":
+            ch_r "I seriously can't, [RogueX.player_petname], big test coming up."
+        elif RogueX.location == "bg_dangerroom":
+            ch_r "Wish I could, [RogueX.player_petname], but I need to get some hours in."
+        else:
+            ch_r "I'm sorry, [RogueX.player_petname], but I'm kinda busy right now."
+
+        return
+    elif line == "lonely":
+        ch_r "Oh, how could I say \"no\" to you, [RogueX.player_petname]?"
+    elif line == "command":
+        ch_r "Fine, if you insist, [RogueX.player_petname]."
+
+    $ RogueX.change_Outfit()
+    
+    call Girls_arrive(RogueX)
+
+    return
+
+label Rogue_leaving:
+    if not approval_check(RogueX, 700):
+        if not approval_check(RogueX, 600, "LO"):
+            ch_r "I'm headed out, see you later."
+        elif RogueX.location == "bg_classroom":
+            ch_r "I'm headed to class right now, [RogueX.player_petname]."
+        elif RogueX.location == "bg_dangerroom":
+            ch_r "I'm hitting the Danger Room, [RogueX.player_petname]."
+        elif RogueX.location == "bg_campus":
+            ch_r "I'm going to hang out on campus, [RogueX.player_petname]."
+        elif RogueX.location == "bg_rogue":
+            ch_r "I'm heading back to my room, [RogueX.player_petname]."
+        elif RogueX.location == "bg_player":
+            ch_r "I'll be heading to your room, [RogueX.player_petname]."
+        elif RogueX.location == "bg_pool":
+            ch_r "I'm headed for the pool."
+        elif RogueX.location == "bg_shower":
+            if approval_check(RogueX, 1400):
+                ch_r "I'm hitting the showers, later."
+            else:
+                ch_r "I'm . . . headed out, see you later."
+        else:
+            ch_r "I'm headed out, see you later."
+
+        call hide_Girl(RogueX)
+
+        return
+
+    if RogueX.location == "bg_classroom":
+        ch_r "I'm headed to class right now, [RogueX.player_petname], you could join me."
+    elif RogueX.location == "bg_dangerroom":
+        ch_r "I'm hitting the Danger Room, [RogueX.player_petname], care to join me?"
+    elif RogueX.location == "bg_campus":
+        ch_r "I'm going to hang out on campus, [RogueX.player_petname], want to hang with me?"
+    elif RogueX.location == "bg_rogue":
+        ch_r "I'm heading back to my room, [RogueX.player_petname], want to swing by?"
+    elif RogueX.location == "bg_player":
+        ch_r "I'll be heading to your room, [RogueX.player_petname]."
+    elif RogueX.location == "bg_shower":
+        if approval_check(RogueX, 1600):
+            ch_r "I'm hitting the showers, [RogueX.player_petname], care to join me?"
+        else:
+            ch_r "I'm hitting the showers, [RogueX.player_petname], maybe we could touch base later."
+
+            return
+    elif RogueX.location == "bg_pool":
+        ch_r "I'm headed for the pool. Wanna come?"
+    else:
+        ch_r "Why don't you come with me, [RogueX.player_petname]?"
+
+    $ D20 = renpy.random.randint(1, 20)
+
+    menu:
+        extend ""
+        "Sure, I'll catch up.":
+            $ line = "go to"
+        "Nah, we can talk later.":
+            ch_r "Oh, ok. Talk to you later then."
+
+            $ line = None
+        "Could you please stay with me? I'll get lonely.":
+            if approval_check(RogueX, 600, "L") or approval_check(RogueX, 1400):
+                $ line = "lonely"
+            else:
+                $ line = "no"
+        "No, stay here.":
+            if approval_check(RogueX, 600, "O"):
+                $ line = "command"
+            elif D20 >= 7 and approval_check(RogueX, 1400):
+                ch_r "I suppose I can, [RogueX.player_petname]."
+
+                $ line = "yes"
+            elif not approval_check(RogueX, 200, "O"):
+                ch_r "I don't know who you think you are, boss'in me around like that."
+                ch_r "If you want to see me, you know where to find me."
+
+                $ line = None
+            else:
+                $ line = "no"
+
+    if not line:
+        call hide_Girl(RogueX)
+
+        return
+    elif line == "no":
+        if RogueX.location == "bg_classroom":
+            ch_r "I seriously can't, [RogueX.player_petname], big test coming up."
+        elif RogueX.location == "bg_dangerroom":
+            ch_r "Wish I could, [RogueX.player_petname], but I need to get some hours in."
+        else:
+            ch_r "I'm sorry, [RogueX.player_petname], but I'm kinda busy right now."
+
+        call hide_Girl(RogueX)
+
+        return
+    elif line == "go to":
+        call hide_Girl(RogueX)
+        call change_clothes
+
+        if RogueX.location == "bg_player":
+            ch_r "I'll be waiting."
+        elif RogueX.location == "bg_rogue":
+            ch_r "I'll meet you there."
+        elif RogueX.location == "bg_campus":
+            ch_r "Let's head over there."
+        elif RogueX.location == "bg_classroom":
+            ch_r "See you then!"
+        elif RogueX.location == "bg_dangerroom":
+            ch_r "I'll be warming up!"
+        elif RogueX.location == "bg_shower":
+            ch_r "I guess I'll see you there."
+        elif RogueX.location == "bg_pool":
+            ch_r "Let's head over there."
+
+        call hide_all
+
+        $ Player.traveling = True
+
+        if RogueX.location == "bg_player":
+            jump player_room
+        elif RogueX.location == "bg_rogue":
+            $ Girl = RogueX
+
+            jump girls_room
+        elif RogueX.location == "bg_campus":
+            jump campus
+        elif RogueX.location == "bg_classroom":
+            jump classroom
+        elif RogueX.location == "bg_dangerroom":
+            jump danger_room
+        elif RogueX.location == "bg_shower":
+            jump shower_room
+        elif RogueX.location == "bg_pool":
+            jump pool
+        elif RogueX.location == "bg_study":
+            jump study
+        elif RogueX.location == "bg_mall":
+            jump mall
+    elif line == "lonely":
+        ch_r "Oh, how could I say \"no\" to you, [RogueX.player_petname]?"
+    elif line == "command":
+        ch_r "Fine, if you insist, [RogueX.player_petname]."
+
+    ch_r "I can stay for a bit."
+
+    $ RogueX.location = Player.location
+
+    return
 
 
 label Rogue_Relationship:
@@ -389,11 +709,11 @@ label Rogue_Monogamy:
                 ch_r "I suppose I could restain myself. . ."
             elif approval_check(RogueX, 700, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("sly", 1,eyes = "side")
+                $ RogueX.change_face("sly", 1, eyes = "side")
                 ch_r "If that's what you really want. . ."
             else:
 
-                $ RogueX.change_face("sly", 1,brows = "confused")
+                $ RogueX.change_face("sly", 1, brows = "confused")
                 ch_r "Who I \"hook up\" with is my own damned business."
                 return
             if "monogamous" not in RogueX.daily_history:
@@ -402,7 +722,7 @@ label Rogue_Monogamy:
         "Don't hook up with other girls." if "monogamous" not in RogueX.traits:
             if approval_check(RogueX, 900, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("sly", 1,eyes = "side")
+                $ RogueX.change_face("sly", 1, eyes = "side")
                 ch_r "Ok."
             elif RogueX.thirst >= 60 and not approval_check(RogueX, 1700, "LO", taboo_modifier=0):
 
@@ -413,7 +733,7 @@ label Rogue_Monogamy:
                 return
             elif approval_check(RogueX, 550, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("sly", 1,eyes = "side")
+                $ RogueX.change_face("sly", 1, eyes = "side")
                 ch_r "If that's what you really want. . ."
             elif approval_check(RogueX, 1400, "LO", taboo_modifier=0):
 
@@ -422,7 +742,7 @@ label Rogue_Monogamy:
                 ch_r "Still, I'll do it for you. . ."
             else:
 
-                $ RogueX.change_face("sly", 1,brows = "confused")
+                $ RogueX.change_face("sly", 1, brows = "confused")
                 ch_r "Who I \"hook up\" with is my own damned business."
                 return
             if "monogamous" not in RogueX.daily_history:
@@ -430,13 +750,13 @@ label Rogue_Monogamy:
             $ RogueX.add_word(1, 0, "monogamous", "monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in RogueX.traits:
             if approval_check(RogueX, 700, "O", taboo_modifier=0):
-                $ RogueX.change_face("sly", 1,eyes = "side")
+                $ RogueX.change_face("sly", 1, eyes = "side")
                 ch_r "As you wish."
             elif approval_check(RogueX, 800, "L", taboo_modifier=0):
                 $ RogueX.change_face("sly", 1)
                 ch_r "I hope you don't give me any reasons to want to. . ."
             else:
-                $ RogueX.change_face("sly", 1,brows = "confused")
+                $ RogueX.change_face("sly", 1, brows = "confused")
                 if "monogamous" not in RogueX.daily_history:
                     call change_Girl_stat(RogueX, "love", -2)
                 ch_r "Oh? Well, glad I got your permission there."
@@ -455,7 +775,7 @@ label Rogue_Monogamy:
 label Rogue_Jumped:
 
     ch_p "Hey, Remember that time you threw yourself at me?"
-    $ RogueX.change_face("sly", 1,brows = "confused")
+    $ RogueX.change_face("sly", 1, brows = "confused")
     menu:
         ch_r "Yeah?"
         "Could you maybe just ask instead?" if "chill" not in RogueX.traits:
@@ -475,11 +795,11 @@ label Rogue_Jumped:
                 ch_r "I'll be good. . ."
             elif approval_check(RogueX, 500, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("sly", 1,eyes = "side")
+                $ RogueX.change_face("sly", 1, eyes = "side")
                 ch_r "If that's what you really want. . ."
             else:
 
-                $ RogueX.change_face("sly", 1,brows = "confused")
+                $ RogueX.change_face("sly", 1, brows = "confused")
                 ch_r "I can't make any promises."
                 return
             if "chill" not in RogueX.daily_history:
@@ -488,7 +808,7 @@ label Rogue_Jumped:
         "Don't bother me like that." if "chill" not in RogueX.traits:
             if approval_check(RogueX, 900, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("sly", 1,eyes = "side")
+                $ RogueX.change_face("sly", 1, eyes = "side")
                 ch_r "Ok."
             elif RogueX.thirst >= 60 and not approval_check(RogueX, 600, "O", taboo_modifier=0):
 
@@ -499,7 +819,7 @@ label Rogue_Jumped:
                 return
             elif approval_check(RogueX, 450, "O", taboo_modifier=0):
 
-                $ RogueX.change_face("sly", 1,eyes = "side")
+                $ RogueX.change_face("sly", 1, eyes = "side")
                 ch_r "If that's what you really want. . ."
             elif approval_check(RogueX, 500, "LO", taboo_modifier=0) and not approval_check(RogueX, 500, "I", taboo_modifier=0):
 
@@ -508,7 +828,7 @@ label Rogue_Jumped:
                 ch_r "Still, I'll try to keep to myself. . ."
             else:
 
-                $ RogueX.change_face("sly", 1,brows = "confused")
+                $ RogueX.change_face("sly", 1, brows = "confused")
                 ch_r "No promises."
                 return
             if "chill" not in RogueX.daily_history:
@@ -519,10 +839,10 @@ label Rogue_Jumped:
                 $ RogueX.change_face("sly", 1)
                 ch_r "Will do. . ."
             elif approval_check(RogueX, 700, "O", taboo_modifier=0):
-                $ RogueX.change_face("sly", 1,eyes = "side")
+                $ RogueX.change_face("sly", 1, eyes = "side")
                 ch_r "Yes sir."
             else:
-                $ RogueX.change_face("sly", 1,brows = "confused")
+                $ RogueX.change_face("sly", 1, brows = "confused")
                 if "chill" not in RogueX.daily_history:
                     call change_Girl_stat(RogueX, "love", -2)
                 ch_r "Maybe. If I've got nothing better to do."
@@ -1523,477 +1843,4 @@ label Rogue_Personality(counter=0):
             return
         "Nevermind.":
             return
-    return
-
-
-
-
-
-label Rogue_Summon(approval_bonus=approval_bonus):
-    if "no_summon" in RogueX.recent_history:
-
-        if "angry" in RogueX.recent_history:
-            ch_r "What part of \"no\" don't you understand?"
-        elif RogueX.recent_history.count("no_summon") > 1:
-            ch_r "I already told you no, take a hint."
-            $ RogueX.recent_history.append("angry")
-        elif time_index > 2:
-            ch_r "I told you it was too late for that tonight."
-        else:
-            ch_r "I told you I was busy."
-        $ RogueX.recent_history.append("no_summon")
-        return
-
-    $ D20 = renpy.random.randint(1, 20)
-    $ line = 0
-    if RogueX.location == "bg_classroom":
-        $ approval_bonus = -10
-    elif RogueX.location == "bg_dangerroom":
-        $ approval_bonus = -20
-    elif RogueX.location == "bg_shower":
-        $ approval_bonus = -40
-
-    if D20 <= 3:
-
-        $ line = "no"
-    elif "lesbian" in RogueX.recent_history:
-
-        if approval_check(RogueX, 2000):
-            ch_r "I'm enjoying some company right now, [RogueX.player_petname], care to join us?"
-            menu:
-                extend ""
-                "Sure":
-                    $ line = "go to"
-                "No thanks.":
-                    ch_r "Suit yourself."
-                    return
-        else:
-            ch_r "What? Um, no, um, not right now."
-            ch_r "Maybe we could touch base later."
-            $ RogueX.recent_history.append("no_summon")
-            return
-    elif time_index > 2:
-        if approval_check(RogueX, 700, "L") or approval_check(RogueX, 300, "O"):
-
-            ch_r "Ok, it's getting late but I can hang out for a bit."
-            $ RogueX.location = Player.location
-            call set_the_scene
-        else:
-
-            ch_r "It's a bit late, [RogueX.player_petname], maybe tomorrow."
-            $ RogueX.recent_history.append("no_summon")
-        return
-    elif not approval_check(RogueX, 700, "L") or not approval_check(RogueX, 600, "O"):
-
-        if not approval_check(RogueX, 300):
-            ch_r "Not really interested, [RogueX.player_petname]."
-            $ RogueX.recent_history.append("no_summon")
-            return
-
-
-        if "summoned" in RogueX.recent_history:
-            pass
-        elif "goto" in RogueX.recent_history:
-            ch_r "You were just over here and then you took off. Why not just head back?"
-        elif RogueX.location == "bg_classroom":
-            ch_r "I'm kinda in class right now, [RogueX.player_petname], you could join me."
-        elif RogueX.location == "bg_dangerroom":
-            ch_r "I'm training at the moment, [RogueX.player_petname], care to join me?"
-        elif RogueX.location == "bg_campus":
-            ch_r "I'm hanging out on campus, [RogueX.player_petname], want to hang with me?"
-        elif RogueX.location == "bg_rogue":
-            ch_r "I'm in my room, [RogueX.player_petname], want to swing by?"
-        elif RogueX.location == "bg_player":
-            ch_r "I happen to be in your room, [RogueX.player_petname], I'm waiting for you. . ."
-        elif RogueX.location == "bg_shower":
-            if approval_check(RogueX, 1600):
-                ch_r "I'm kinda in the shower right now, [RogueX.player_petname], care to join me?"
-            else:
-                ch_r "I'm kinda in the shower right now, [RogueX.player_petname], maybe we could touch base later."
-                $ RogueX.recent_history.append("no_summon")
-                return
-        elif RogueX.location == "hold":
-            ch_r "I'm not really around right now, see you later?"
-            $ RogueX.recent_history.append("no_summon")
-            return
-        else:
-
-            ch_r "Why don't you come over here, [RogueX.player_petname]?"
-
-        if "summoned" in RogueX.recent_history:
-            ch_r "Ok, fine, but why are you leading me on a merry chase?"
-            $ line = "yes"
-
-        elif "goto" in RogueX.recent_history:
-            menu:
-                extend ""
-                "You're right, be right back.":
-                    ch_r "See you then!"
-                    $ line = "go to"
-                "Nah, it's better here.":
-                    ch_r "Fine by me."
-                "But I'd {i}really{/i} like to see you over here.":
-                    if approval_check(RogueX, 600, "L") or approval_check(RogueX, 1400):
-                        $ line = "lonely"
-                    else:
-                        $ line = "no"
-                "I said come over here.":
-                    if approval_check(RogueX, 600, "O"):
-
-                        $ line = "command"
-                    elif D20 >= 7 and approval_check(RogueX, 1400):
-
-                        ch_r "I suppose I can, [RogueX.player_petname]."
-                        $ line = "yes"
-                    elif approval_check(RogueX, 200, "O"):
-
-                        ch_r "I don't think so."
-                        ch_r "If you want to see me, you know where to find me."
-                    else:
-
-                        $ line = "no"
-        else:
-            menu:
-                extend ""
-                "Sure, I'll be right there.":
-                    call change_Girl_stat(RogueX, "love", 1)
-                    call change_Girl_stat(RogueX, "inhibition", 1)
-                    ch_r "See you then!"
-                    $ line = "go to"
-                "Nah, we can talk later.":
-
-                    call change_Girl_stat(RogueX, "obedience", 1)
-                    call change_Girl_stat(RogueX, "obedience", 2)
-                    ch_r "Oh, ok. Talk to you later then."
-                "Could you please come visit me? I'm lonely.":
-
-                    if approval_check(RogueX, 600, "L") or approval_check(RogueX, 1400):
-                        call change_Girl_stat(RogueX, "love", 1)
-                        call change_Girl_stat(RogueX, "obedience", 1)
-                        $ line = "lonely"
-                    else:
-                        call change_Girl_stat(RogueX, "inhibition", 1)
-                        $ line = "no"
-                "I said come over here.":
-
-                    if approval_check(RogueX, 600, "O"):
-
-                        call change_Girl_stat(RogueX, "love", 1)
-                        call change_Girl_stat(RogueX, "love", -1)
-                        call change_Girl_stat(RogueX, "obedience", 1)
-                        $ line = "command"
-
-                    elif D20 >= 7 and approval_check(RogueX, 1400):
-
-                        call change_Girl_stat(RogueX, "love", -2)
-                        call change_Girl_stat(RogueX, "love", -1)
-                        call change_Girl_stat(RogueX, "obedience", 2)
-                        call change_Girl_stat(RogueX, "obedience", 1)
-                        ch_r "I suppose I can, [RogueX.player_petname]."
-                        $ line = "yes"
-
-                    elif approval_check(RogueX, 200, "O"):
-
-                        call change_Girl_stat(RogueX, "love", -4)
-                        call change_Girl_stat(RogueX, "love", -2)
-                        ch_r "I don't know who you think you are, boss'in me around like that."
-                        call change_Girl_stat(RogueX, "inhibition", 2)
-                        call change_Girl_stat(RogueX, "inhibition", 1)
-                        call change_Girl_stat(RogueX, "obedience", -2)
-                        ch_r "If you want to see me, you know where to find me."
-                    else:
-
-                        call change_Girl_stat(RogueX, "inhibition", 1)
-                        call change_Girl_stat(RogueX, "inhibition", 1)
-                        call change_Girl_stat(RogueX, "love", 1)
-                        call change_Girl_stat(RogueX, "obedience", -1)
-                        $ line = "no"
-    else:
-
-
-        if RogueX.love > RogueX.obedience:
-            ch_r "I'd love to, [RogueX.player_petname]."
-        else:
-            ch_r "Ok, I'll be right over, [RogueX.player_petname]."
-        $ line = "yes"
-
-    $ approval_bonus = 0
-
-    if not line:
-
-        $ RogueX.recent_history.append("no_summon")
-        return
-
-    if line == "no":
-
-        if RogueX.location == "bg_classroom":
-            ch_r "I seriously can't, [RogueX.player_petname], big test coming up."
-        elif RogueX.location == "bg_dangerroom":
-            ch_r "Wish I could, [RogueX.player_petname], but I need to get some hours in."
-        else:
-            ch_r "I'm sorry, [RogueX.player_petname], but I'm kinda busy right now."
-        $ RogueX.recent_history.append("no_summon")
-        return
-
-    elif line == "go to":
-
-        $ renpy.pop_call()
-        $ approval_bonus = 0
-        $ line = 0
-        $ RogueX.recent_history.append("goto")
-        $ Player.recent_history.append("goto")
-        if RogueX.location == "bg_classroom":
-            ch_r "See you then!"
-            jump classroom
-        elif RogueX.location == "bg_dangerroom":
-            ch_r "I'll be warming up!"
-            jump danger_room
-        elif RogueX.location == "bg_rogue":
-            ch_r "I'll get tidied up."
-
-            $ Girl = RogueX
-            jump girls_room
-        elif RogueX.location == "bg_player":
-            ch_r "I'll be waiting."
-            jump player_room
-        elif RogueX.location == "bg_shower":
-            ch_r "I guess I'll be here."
-            jump shower_room
-        elif RogueX.location == "bg_campus":
-            ch_r "I'll keep an eye out for you."
-            jump campus
-        elif RogueX.location in bedrooms:
-            ch_r "I'll see you there."
-            $ Player.location = RogueX.location
-            jump reset_location
-        else:
-            ch_r "You know, I'll just meet you in my room."
-            $ RogueX.location = "bg_rogue"
-
-            $ Girl = RogueX
-            jump girls_room
-
-
-    elif line == "lonely":
-        ch_r "Oh, how could I say \"no\" to you, [RogueX.player_petname]?"
-    elif line == "command":
-        ch_r "Fine, if you insist, [RogueX.player_petname]."
-
-    $ RogueX.recent_history.append("summoned")
-    $ line = 0
-    if "locked" in Player.traits:
-        call Girls_arrive (RogueX)
-        return
-    call set_Character_taboos
-    $ RogueX.location = Player.location
-    call set_the_scene
-    return
-
-
-
-
-label Rogue_Leave:
-    if "freetravels" in RogueX.traits or not approval_check(RogueX, 700):
-        if not approval_check(RogueX, 600, "LO"):
-            ch_r "I'm headed out, see you later."
-        elif RogueX.location == "bg_classroom":
-            ch_r "I'm headed to class right now, [RogueX.player_petname]."
-        elif RogueX.location == "bg_dangerroom":
-            ch_r "I'm hitting the Danger Room, [RogueX.player_petname]."
-        elif RogueX.location == "bg_campus":
-            ch_r "I'm going to hang out on campus, [RogueX.player_petname]."
-        elif RogueX.location == "bg_rogue":
-            ch_r "I'm heading back to my room, [RogueX.player_petname]."
-        elif RogueX.location == "bg_player":
-            ch_r "I'll be heading to your room, [RogueX.player_petname]."
-        elif RogueX.location == "bg_pool":
-            ch_r "I'm headed for the pool."
-        elif RogueX.location == "bg_shower":
-            if approval_check(RogueX, 1400):
-                ch_r "I'm hitting the showers, later."
-            else:
-                ch_r "I'm . . . headed out, see you later."
-        else:
-            ch_r "I'm headed out, see you later."
-
-        call hide_Girl(RogueX)
-
-        return
-
-    if "follow" not in RogueX.traits:
-        $ RogueX.traits.append("follow")
-
-    if RogueX.location == "bg_classroom":
-        $ approval_bonus = 10
-    elif RogueX.location == "bg_dangerroom":
-        $ approval_bonus = 20
-    elif RogueX.location == "bg_shower":
-        $ approval_bonus = 40
-    else:
-        $ approval_bonus = 0
-
-    if RogueX.location == "bg_classroom":
-        ch_r "I'm headed to class right now, [RogueX.player_petname], you could join me."
-    elif RogueX.location == "bg_dangerroom":
-        ch_r "I'm hitting the Danger Room, [RogueX.player_petname], care to join me?"
-    elif RogueX.location == "bg_campus":
-        ch_r "I'm going to hang out on campus, [RogueX.player_petname], want to hang with me?"
-    elif RogueX.location == "bg_rogue":
-        ch_r "I'm heading back to my room, [RogueX.player_petname], want to swing by?"
-    elif RogueX.location == "bg_player":
-        ch_r "I'll be heading to your room, [RogueX.player_petname]."
-    elif RogueX.location == "bg_shower":
-        if approval_check(RogueX, 1600):
-            ch_r "I'm hitting the showers, [RogueX.player_petname], care to join me?"
-        else:
-            ch_r "I'm hitting the showers, [RogueX.player_petname], maybe we could touch base later."
-
-            return
-    elif RogueX.location == "bg_pool":
-        ch_r "I'm headed for the pool. Wanna come?"
-    else:
-        ch_r "Why don't you come with me, [RogueX.player_petname]?"
-
-    $ D20 = renpy.random.randint(1, 20)
-
-    $ line = None
-
-    menu:
-        extend ""
-        "Sure, I'll catch up.":
-            if "followed" not in RogueX.recent_history:
-                call change_Girl_stat(RogueX, "love", 1)
-                call change_Girl_stat(RogueX, "inhibition", 1)
-
-            $ line = "go to"
-        "Nah, we can talk later.":
-            if "followed" not in RogueX.recent_history:
-                call change_Girl_stat(RogueX, "obedience", 1)
-                call change_Girl_stat(RogueX, "obedience", 2)
-
-            ch_r "Oh, ok. Talk to you later then."
-        "Could you please stay with me? I'll get lonely.":
-            if approval_check(RogueX, 600, "L") or approval_check(RogueX, 1400):
-                if "followed" not in RogueX.recent_history:
-                    call change_Girl_stat(RogueX, "love", 1)
-                    call change_Girl_stat(RogueX, "obedience", 1)
-
-                $ line = "lonely"
-            else:
-                if "followed" not in RogueX.recent_history:
-                    call change_Girl_stat(RogueX, "inhibition", 1)
-
-                $ line = "no"
-        "No, stay here.":
-            if approval_check(RogueX, 600, "O"):
-                if "followed" not in RogueX.recent_history:
-                    call change_Girl_stat(RogueX, "love", 1)
-                    call change_Girl_stat(RogueX, "love", -1)
-                    call change_Girl_stat(RogueX, "obedience", 1)
-
-                $ line = "command"
-            elif D20 >= 7 and approval_check(RogueX, 1400):
-                if "followed" not in RogueX.recent_history:
-                    call change_Girl_stat(RogueX, "love", -2)
-                    call change_Girl_stat(RogueX, "love", -1)
-                    call change_Girl_stat(RogueX, "obedience", 2)
-                    call change_Girl_stat(RogueX, "obedience", 1)
-
-                ch_r "I suppose I can, [RogueX.player_petname]."
-
-                $ line = "yes"
-            elif approval_check(RogueX, 200, "O"):
-                if "followed" not in RogueX.recent_history:
-                    call change_Girl_stat(RogueX, "love", -4)
-                    call change_Girl_stat(RogueX, "love", -2)
-
-                ch_r "I don't know who you think you are, boss'in me around like that."
-
-                if "followed" not in RogueX.recent_history:
-                    call change_Girl_stat(RogueX, "inhibition", 2)
-                    call change_Girl_stat(RogueX, "inhibition", 1)
-                    call change_Girl_stat(RogueX, "obedience", -2)
-
-                ch_r "If you want to see me, you know where to find me."
-            else:
-                if "followed" not in RogueX.recent_history:
-                    call change_Girl_stat(RogueX, "inhibition", 1)
-                    call change_Girl_stat(RogueX, "inhibition", 1)
-                    call change_Girl_stat(RogueX, "love", 1)
-                    call change_Girl_stat(RogueX, "obedience", -1)
-
-                $ line = "no"
-
-    $ RogueX.recent_history.append("followed")
-
-    if not line:
-        call hide_Girl(RogueX)
-
-        return
-
-    if line == "no":
-        if RogueX.location == "bg_classroom":
-            ch_r "I seriously can't, [RogueX.player_petname], big test coming up."
-        elif RogueX.location == "bg_dangerroom":
-            ch_r "Wish I could, [RogueX.player_petname], but I need to get some hours in."
-        else:
-            ch_r "I'm sorry, [RogueX.player_petname], but I'm kinda busy right now."
-
-        call hide_Girl(RogueX)
-
-        return
-
-    elif line == "go to":
-        call hide_Girl(RogueX)
-        call change_clothes
-
-        if RogueX.location == "bg_classroom":
-            ch_r "See you then!"
-        elif RogueX.location == "bg_dangerroom":
-            ch_r "I'll be warming up!"
-        elif RogueX.location == "bg_rogue":
-            ch_r "I'll meet you there."
-        elif RogueX.location == "bg_player":
-            ch_r "I'll be waiting."
-        elif RogueX.location == "bg_shower":
-            ch_r "I guess I'll see you there."
-        elif RogueX.location == "bg_campus":
-            ch_r "Let's head over there."
-        elif RogueX.location == "bg_pool":
-            ch_r "Let's head over there."
-
-        call hide_all
-
-        $ destination = RogueX.location
-
-        if destination == "bg_player":
-            jump player_room
-        elif destination == "bg_rogue":
-            $ Girl = RogueX
-
-            jump girls_room
-        elif destination == "bg_campus":
-            jump campus
-        elif destination == "bg_classroom":
-            jump classroom
-        elif destination == "bg_dangerroom":
-            jump danger_room
-        elif destination == "bg_shower":
-            jump shower_room
-        elif destination == "bg_pool":
-            jump pool
-        elif destination == "bg_study":
-            jump study
-        elif destination == "bg_mall":
-            jump mall
-
-    elif line == "lonely":
-        ch_r "Oh, how could I say \"no\" to you, [RogueX.player_petname]?"
-    elif line == "command":
-        ch_r "Fine, if you insist, [RogueX.player_petname]."
-
-    ch_r "I can stay for a bit."
-
-    $ RogueX.location = Player.location
-
     return

@@ -775,7 +775,7 @@ label jerking_off(Girl = None):
                         ch_e "Oh. . ."
                         ch_e "Carry on then, [Girl.player_petname]."
 
-                        $ Girl.change_face("sly", 0,eyes = "down")
+                        $ Girl.change_face("sly", 0, eyes = "down")
                     elif Girl == LauraX:
                         ch_l "Can't say I didn't offer."
                     elif Girl == JeanX:

@@ -1,69 +1,7 @@
-label chat:
-    menu:
-        "Chat with [RogueX.name]" if RogueX.location == Player.location:
-            $ Girl = RogueX
-        "Text [RogueX.name]" if RogueX.location != Player.location and RogueX in Player.Phonebook:
-            $ Girl = RogueX
-        "Chat with [KittyX.name]" if KittyX.location == Player.location:
-            $ Girl = KittyX
-        "Text [KittyX.name]" if KittyX.location != Player.location and KittyX in Player.Phonebook:
-            $ Girl = KittyX
-        "Chat with [EmmaX.name]" if EmmaX.location == Player.location:
-            $ Girl = EmmaX
-        "Text [EmmaX.name]" if EmmaX.location != Player.location and EmmaX in Player.Phonebook:
-            $ Girl = EmmaX
-        "Chat with [LauraX.name]" if LauraX.location == Player.location:
-            $ Girl = LauraX
-        "Text [LauraX.name]" if LauraX.location != Player.location and LauraX in Player.Phonebook:
-            $ Girl = LauraX
-        "Chat with [JeanX.name]" if JeanX.location == Player.location:
-            $ Girl = JeanX
-        "Text [JeanX.name]" if JeanX.location != Player.location and JeanX in Player.Phonebook:
-            $ Girl = JeanX
-        "Chat with [StormX.name]" if StormX.location == Player.location:
-            $ Girl = StormX
-        "Text [StormX.name]" if StormX.location != Player.location and StormX in Player.Phonebook:
-            $ Girl = StormX
-        "Chat with [JubesX.name]" if JubesX.location == Player.location:
-            $ Girl = JubesX
-        "Text [JubesX.name]" if JubesX.location != Player.location and JubesX in Player.Phonebook:
-            $ Girl = JubesX
-        "Chat with [MystiqueX.name]" if MystiqueX.location == Player.location:
-            $ Girl = MystiqueX
-        "Text [MystiqueX.name]" if MystiqueX.location != Player.location and MystiqueX in Player.Phonebook:
-            $ Girl = MystiqueX
-        "Never mind":
-            return
-
-    if Girl:
-        if Girl.location == Player.location:
-            call chat_menu
-        elif Girl in Player.Phonebook:
-            if Girl.location == "hold":
-                "She doesn't seem to be picking up."
-            else:
-                "You send [Girl.name] a text."
-
-                call chat_menu
-        else:
-            "You don't know her number, you'll have to go to her."
-
-    return
-
-label chat_menu:
+label chat_menu(Girl):
     call shift_focus(Girl)
 
     menu:
-        "Come on over." if Girl.location != Player.location:
-            if Girl in Nearby and Player.location != "bg_showerrroom":
-                $ Nearby.remove(Girl)
-                $ Present.append(Girl)
-
-                call add_Girls(Girl)
-
-                "[Girl.name] comes and joins you."
-            else:
-                call expression Girl.tag + "_Summon"
         "Ask [Girl.name] to leave" if Girl.location == Player.location:
             call dismiss_Girl(Girl)
 
@@ -258,8 +196,6 @@ label chat_menu:
                     Player.Party.remove(G)
 
             return
-        "Switch to. . .":
-            call switch_chat
         "Never mind.":
             if Girl == RogueX:
                 ch_r "Ok, later then."
@@ -279,29 +215,6 @@ label chat_menu:
             return
 
     jump chat_menu
-
-label switch_chat:
-    menu:
-        "[RogueX.name]" if Girl != RogueX:
-            $ Girl = RogueX
-        "[KittyX.name]" if Girl != KittyX:
-            $ Girl = KittyX
-        "[EmmaX.name]" if Girl != EmmaX:
-            $ Girl = EmmaX
-        "[LauraX.name]" if Girl != LauraX:
-            $ Girl = LauraX
-        "[JeanX.name]" if Girl != JeanX:
-            $ Girl = JeanX
-        "[StormX.name]" if Girl != StormX:
-            $ Girl = StormX
-        "[JubesX.name]" if Girl != JubesX:
-            $ Girl = JubesX
-        "Never mind":
-            return
-
-    call shift_focus(Girl)
-
-    return
 
 label dismiss_Girl(Girl):
     if Girl in Player.Party:

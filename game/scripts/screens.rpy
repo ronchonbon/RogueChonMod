@@ -35,9 +35,6 @@ init -3:
         xmaximum 192
         xalign 1.0
 
-    style soundtest_button:
-        xalign 1.0
-
     style yesno_button:
         size_group "yesno"
 
@@ -402,6 +399,14 @@ screen quick_menu():
         textbutton _("Auto") action Preference("auto-forward", "toggle")
         textbutton _("Prefs") action ShowMenu('preferences')
 
+screen Girl_picker():
+    for Girl in all_Girls:
+        if renpy.showing(Girl.tag + "_sprite"):
+            button:
+                background None
+                anchor (0.5, 0.5) pos (Girl.sprite_location + 0.02, 0.6) xysize (250, 900)
+                action Call("chat_menu", Girl)
+
 screen Clothing_picker(Girl):
     window:
         anchor (0.5, 0.5) pos (0.5, 0.5)
@@ -456,7 +461,7 @@ image Alt_Screen_Mask:
 
 screen status_screen:
     default tt = Tooltip(" ")
-    
+
     add "images/BarBackdrop_" + Player.focused_Girl.tag + ".png"
     frame:
         style_group "stat_bar"
@@ -498,11 +503,11 @@ screen status_screen:
             imagebutton idle "images/iconaddictrate.png" hover "images/iconaddictrate.png" action NullAction() hovered tt.Action("Addiction Rate: [Player.focused_Girl.addiction_rate]")
             bar range 100 value (Player.focused_Girl.addiction_rate*10) xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
 
-    showif not Player.primary_Action:
+    showif not Player.primary_Action.type:
         imagebutton auto "images/Button_" + Player.focused_Girl.tag + "_%s.png" action ShowTransient("Focus_Map") pos (0.71, 0.016) focus_mask True
 
     showif config.developer:
-        imagebutton auto "images/Button_" + Player.focused_Girl.tag + "_%s.png" action ui.callsinnewcontext("cheat_menu",Player.focused_Girl) pos (0.755, 0.016) focus
+        imagebutton auto "images/Button_" + Player.focused_Girl.tag + "_%s.png" action Call("cheat_menu", Player.focused_Girl) pos (0.755, 0.016) focus
 
     frame:
         pos (0.45, 0.0085)
@@ -564,16 +569,22 @@ screen status_screen:
         hbox:
             if RogueX in Nearby:
                 imagebutton auto "images/Button_Rogue_%s.png" action NullAction() hovered tt.Action(RogueX.name) at tiny_button
+
             if KittyX in Nearby:
                 imagebutton auto "images/Button_Kitty_%s.png" action NullAction() hovered tt.Action(KittyX.name) at tiny_button
+
             if EmmaX in Nearby:
                 imagebutton auto "images/Button_Emma_%s.png" action NullAction() hovered tt.Action(EmmaX.name) at tiny_button
+
             if LauraX in Nearby:
                 imagebutton auto "images/Button_Laura_%s.png" action NullAction() hovered tt.Action(LauraX.name) at tiny_button
+
             if JeanX in Nearby:
                 imagebutton auto "images/Button_Jean_%s.png" action NullAction() hovered tt.Action(JeanX.name) at tiny_button
+
             if StormX in Nearby:
                 imagebutton auto "images/Button_Storm_%s.png" action NullAction() hovered tt.Action(StormX.name) at tiny_button
+
             if JubesX in Nearby:
                 imagebutton auto "images/Button_Jubes_%s.png" action NullAction() hovered tt.Action(JubesX.name) at tiny_button
 
@@ -591,31 +602,31 @@ screen Focus_Map:
         has hbox
 
         vbox:
-            imagebutton auto "images/Button_Rogue_%s.png" action ui.callsinnewcontext("shift_focus", RogueX) focus_mask True
+            imagebutton auto "images/Button_Rogue_%s.png" action Call("shift_focus", RogueX) focus_mask True
 
             if KittyX in active_Girls:
-                imagebutton auto "images/Button_Kitty_%s.png" action ui.callsinnewcontext("shift_focus", KittyX) focus_mask True
+                imagebutton auto "images/Button_Kitty_%s.png" action Call("shift_focus", KittyX) focus_mask True
 
         vbox:
             if EmmaX in active_Girls:
-                imagebutton auto "images/Button_Emma_%s.png" action ui.callsinnewcontext("shift_focus", EmmaX) focus_mask True
+                imagebutton auto "images/Button_Emma_%s.png" action Call("shift_focus", EmmaX) focus_mask True
 
             if LauraX in active_Girls:
-                imagebutton auto "images/Button_Laura_%s.png" action ui.callsinnewcontext("shift_focus", LauraX) focus_mask True
+                imagebutton auto "images/Button_Laura_%s.png" action Call("shift_focus", LauraX) focus_mask True
 
         vbox:
             if JeanX in active_Girls:
-                imagebutton auto "images/Button_Jean_%s.png" action ui.callsinnewcontext("shift_focus", JeanX) focus_mask True
+                imagebutton auto "images/Button_Jean_%s.png" action Call("shift_focus", JeanX) focus_mask True
 
             if StormX in active_Girls:
-                imagebutton auto "images/Button_Storm_%s.png" action ui.callsinnewcontext("shift_focus", StormX) focus_mask True
+                imagebutton auto "images/Button_Storm_%s.png" action Call("shift_focus", StormX) focus_mask True
 
         vbox:
             if JubesX in active_Girls:
-                imagebutton auto "images/Button_Jubes_%s.png" action ui.callsinnewcontext("shift_focus", JubesX) focus_mask True
+                imagebutton auto "images/Button_Jubes_%s.png" action Call("shift_focus", JubesX) focus_mask True
 
             if MystiqueX in active_Girls:
-                imagebutton auto "images/Button_Mystique_%s.png" action ui.callsinnewcontext("shift_focus", MystiqueX) focus_mask True
+                imagebutton auto "images/Button_Mystique_%s.png" action Call("shift_focus", MystiqueX) focus_mask True
 
 screen Inventory_screen:
     frame:
@@ -648,15 +659,15 @@ screen Inventory_screen:
         showif "Mandrill Cologne" in Player.inventory:
             $ inventory_count = Player.inventory.count("Mandrill Cologne")
 
-            textbutton "Mandrill Cologne: [inventory_count] doses" action ui.callsinnewcontext("mandrill_screen") text_size 15
+            textbutton "Mandrill Cologne: [inventory_count] doses" action Call("mandrill_screen") text_size 15
         showif "Purple Rain Cologne" in Player.inventory:
             $ inventory_count = Player.inventory.count("Purple Rain Cologne")
 
-            textbutton "Purple Rain Cologne: [inventory_count] doses" action ui.callsinnewcontext("purplerain_screen") text_size 15
+            textbutton "Purple Rain Cologne: [inventory_count] doses" action Call("purplerain_screen") text_size 15
         showif "Corruption Cologne" in Player.inventory:
             $ inventory_count = Player.inventory.count("Corruption Cologne")
 
-            textbutton "Corruption Cologne: [inventory_count] doses" action ui.callsinnewcontext("corruption_screen") text_size 15
+            textbutton "Corruption Cologne: [inventory_count] doses" action Call("corruption_screen") text_size 15
 
         showif "Xavier" in Player.Keys:
             text "Xavier's Key" size 15

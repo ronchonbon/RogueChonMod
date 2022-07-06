@@ -353,6 +353,10 @@ label tour_parting:
 
     $ round = 10
 
+    show screen status_screen()
+    show screen inventory_button()
+    show screen Girl_picker()
+
     jump player_room
 
 label Rogue_first_kiss:
@@ -611,7 +615,7 @@ label Rogue_Love:
                 call change_Girl_stat(RogueX, "love", -50)
                 call change_Girl_stat(RogueX, "obedience", 50)
                 jump Rogue_Love_Jerk
-    $ RogueX.change_face("bemused", 1,eyes = "side")
+    $ RogueX.change_face("bemused", 1, eyes = "side")
     $ RogueX.player_petnames.append("lover")
     call Rogue_AnnaMarie
     ch_r "Anyway, I am glad I've been able to share this with you."

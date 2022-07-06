@@ -274,7 +274,7 @@ label meet_Emma:
 
                             ch_e "[EmmaX.player_petname], that is incredibly inappropriate!"
 
-                            $ EmmaX.change_face("sadside", 0,brows = "angry")
+                            $ EmmaX.change_face("sadside", 0, brows = "angry")
 
                             ch_e "I would {i}never{/i} consider such a thing with a student."
 
@@ -1578,7 +1578,7 @@ label Emma_Love:
                 call change_Girl_stat(EmmaX, "love", 5)
                 call change_Girl_stat(EmmaX, "obedience", 10)
             if approval_check(EmmaX, 1200, "OI"):
-                $ EmmaX.change_face("sly", 1,brows = "angry")
+                $ EmmaX.change_face("sly", 1, brows = "angry")
                 call change_Girl_stat(EmmaX, "love", 5)
                 call change_Girl_stat(EmmaX, "obedience", 5)
                 call change_Girl_stat(EmmaX, "inhibition", -5)
@@ -2318,7 +2318,7 @@ label Emma_Sexfriend:
                         ch_e "I can't wait to get started, [EmmaX.player_petname]."
                     "That's pretty slutty, [EmmaX.name].":
                         if approval_check(EmmaX, 2000):
-                            $ EmmaX.change_face("angry", 1,brows = "confused")
+                            $ EmmaX.change_face("angry", 1, brows = "confused")
                             call change_Girl_stat(EmmaX, "love", -10)
                             call change_Girl_stat(EmmaX, "obedience", 15)
                             ch_e "I suppose you're not wrong."

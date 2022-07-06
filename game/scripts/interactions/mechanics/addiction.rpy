@@ -71,7 +71,7 @@ label addiction_event(Girl):
             ch_e "You've been doing well in your studies, it seems. . ."
             ch_e "Look, since the other day when we first. . . came into contact. . ."
 
-            $ Girl.change_face("sadside", 1,brows = "angry")
+            $ Girl.change_face("sadside", 1, brows = "angry")
 
             ch_e "I've been. . . struggling with something."
             ch_e "A feeling. . ."
@@ -120,7 +120,7 @@ label addiction_event(Girl):
 
                     ch_j "None of your business!"
 
-                    $ Girl.change_face("bemused", 1,eyes = "side")
+                    $ Girl.change_face("bemused", 1, eyes = "side")
 
                     ch_j "I was just thinking about the last time we touched and. . ."
                     ch_j "I don't know. Whatever."
@@ -182,7 +182,7 @@ label addiction_event(Girl):
     menu:
         extend ""
         "Another kiss?" if Girl.Action_counter["kiss"]:
-            if approval_check(Girl, 660, "LI", Alt = [[RogueX,JeanX],560]):
+            if approval_check(Girl, 660, "LI", Alt = [[RogueX,JeanX], 560]):
                 call change_Girl_stat(Girl, "lust", 3)
                 call change_Girl_stat(Girl, "love", 6)
                 $ Girl.change_face("sexy")
@@ -224,7 +224,7 @@ label addiction_event(Girl):
 
                 jump addiction_bad_end
         "How about a kiss?" if not Girl.Action_counter["kiss"]:
-            if approval_check(Girl, 660, "LI", Alt = [[RogueX,JeanX],560]):
+            if approval_check(Girl, 660, "LI", Alt = [[RogueX,JeanX], 560]):
                 call change_Girl_stat(Girl, "lust", 3)
                 call change_Girl_stat(Girl, "love", 6)
                 $ Girl.change_face("bemused", 1)
@@ -875,7 +875,7 @@ label addiction_ultimatum:
                     if round == 10:
                         Girl.voice "I suppose we don't have time for any more than that."
             "How about a kiss?":
-                if Girl.Action_counter["kiss"] or approval_check(Girl, 600, "LI", Alt = [[RogueX,JeanX],560]) or Girl.player_petname in ("master", "sir"):
+                if Girl.Action_counter["kiss"] or approval_check(Girl, 600, "LI", Alt = [[RogueX,JeanX], 560]) or Girl.player_petname in ("master", "sir"):
                     $ Girl.forced = 0
                     call change_Girl_stat(Girl, "lust", 3)
                     call change_Girl_stat(Girl, "love", 6)
@@ -2131,7 +2131,7 @@ label addiction_fix_end:
                 pass
             "See you next time. . .":
                 if not Girl.forced and approval_check(Girl, 800):
-                    $ Girl.change_face("bemused", 1,eyes = "side")
+                    $ Girl.change_face("bemused", 1, eyes = "side")
 
                     if Girl == RogueX:
                         ch_r "Yeah, later."
@@ -2511,7 +2511,7 @@ label addiction_serum:
             "Give it to her":
                 $ Girl.forced = 0
                 $ Girl.mouth = "smile"
-                call change_Girl_stat(Girl, "love", Alt = [[JeanX],500,3])
+                call change_Girl_stat(Girl, "love", Alt = [[JeanX], 500,3])
 
                 ch_p "No problem."
 

@@ -3011,7 +3011,7 @@ label Bottoms_Off_Legs(Girl):
                 $ Girl.add_word(1, "ripped", "ripped")
                 "You tear holes in her [line]."
                 if not approval_check(Girl, 1200, taboo_modifier=0):
-                    $ Girl.change_face("angry", 1,eyes = "down")
+                    $ Girl.change_face("angry", 1, eyes = "down")
                     if Girl == RogueX:
                         ch_r "Dammit, [Girl.player_petname], those are gettin expensive!"
                     elif Girl == KittyX:

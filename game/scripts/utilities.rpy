@@ -12,7 +12,7 @@ init python:
 
         while Girls:
             for g in range(len(sorted_Girls)):
-                if approval_check(Girls[0], check = True) > approval_check(sorted_Girls[g], check = True):
+                if approval_check(Girls[0], report_value = True) > approval_check(sorted_Girls[g], report_value = True):
                     sorted_Girls.insert(g, Girls[0])
 
             if Girls[0] not in sorted_Girls:
@@ -352,7 +352,7 @@ label tenth_round:
             ch_j "I'm going to sleep in a bit, did you want to join me?"
         elif Occupant == StormX:
             ch_s "I am going to bed soon, care to join me?"
-    elif approval_check(Occupant, "LF", 1000) or approval_check(Occupant, "OI", 600):
+    elif approval_check(Occupant, 1000, "L") or approval_check(Occupant, 600, "OI"):
         if Occupant == RogueX:
             ch_r "It's pretty late, [Occupant.player_petname], but you can stay for a little bit."
         elif Occupant == KittyX:
@@ -423,7 +423,7 @@ label set_Girls_locations:
     hide black_screen onlayer black
 
     while leaving_Girls:
-        call expression leaving_Girls[0].tag + "_Leave"
+        call expression leaving_Girls[0].tag + "_leaving"
 
         $ leaving_Girls.remove(leaving_Girls[0])
 
@@ -579,8 +579,6 @@ label reset_all_Girls_at_end:
 
             if G in active_Girls and G.location != Player.location:
                 G.location = G.home
-
-            G.change_Outfit("sleepwear", instant = True)
 
             G.remaining_Actions = G.max_Actions
 

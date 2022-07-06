@@ -13,7 +13,7 @@ label showering:
 
         while temp_Girls:
             if temp_Girls[0].location == Player.location:
-                $ temp_Girls[0].change_Outfit("nude")
+                $ temp_Girls[0].undress()
                 $ temp_Girls[0].wet = True
 
                 python:
@@ -280,7 +280,7 @@ label Shower_Sex(Options=0, line=0):
                 call change_Player_stat("focus", 80, 3)
                 $ line = 4
             elif approval_check(staying_Girls[1], 1200) and staying_Girls[1].likes[staying_Girls[0].tag] >= 700:
-                $ staying_Girls[1].change_face("sexy", 2,eyes = "closed")
+                $ staying_Girls[1].change_face("sexy", 2, eyes = "closed")
                 call change_Girl_stat(staying_Girls[1], "lust", 10)
                 call change_Girl_stat(staying_Girls[1], "lust", 10)
                 call change_Player_stat("focus", 50, 5)
@@ -312,7 +312,7 @@ label Shower_Sex(Options=0, line=0):
                     "[staying_Girls[1].name] seems really into this, and joins her on the other side."
                 $ line = 4
             elif ((approval_check(staying_Girls[1], 1200) and staying_Girls[1].likes[staying_Girls[0].tag] >= 600)) or approval_check(staying_Girls[1], 1600):
-                $ staying_Girls[1].change_face("sexy", 2,eyes = "down")
+                $ staying_Girls[1].change_face("sexy", 2, eyes = "down")
                 call change_Girl_stat(staying_Girls[1], "lust", 10)
                 call change_Girl_stat(staying_Girls[1], "lust", 5)
                 "[staying_Girls[1].name] seems really into this, and watches her do it."

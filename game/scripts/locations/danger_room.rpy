@@ -12,8 +12,8 @@ label training:
         "[line] During the exercise, Cyclops accidentally shoots you."
         "Luckily you're immune to the beams, but your clothes weren't so lucky."
 
-        call change_Present_stat("love", 80, 2)
-        call change_Present_stat("lust", 80, 5)
+        call change_Present_stat("love", 2)
+        call change_Present_stat("lust", 5)
     elif D20 >= 17:
         "[line] You participate in a hand-to-hand combat class."
         "Before you begin, Cyclops explains that it’s always good to know how to defend yourself when you can’t rely on your powers."

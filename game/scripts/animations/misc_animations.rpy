@@ -230,7 +230,7 @@ image PhoneSex:
     contains:
 
         AlphaMask("PhoneScreen", "images/PhoneMask.png")
-    offset (300,50)
+    offset (300, 50)
 
 image PhoneRG:
 
@@ -249,7 +249,7 @@ image PhoneScreen:
     contains:
         "[Player.focused_Girl.tag]_sprite"
         pos (0, 0)
-        offset (290,50)
+        offset (290, 50)
         anchor (0.6, 0)
         zoom 1.1
 

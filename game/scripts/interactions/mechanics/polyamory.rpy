@@ -487,7 +487,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls = []):
 
 
     if not Girl.event_counter["seen_with_girl"]:
-        $ Girl.change_face("surprised", 1,mouth = "kiss")
+        $ Girl.change_face("surprised", 1, mouth = "kiss")
         if Girl == RogueX:
             ch_r "You want me and [Partner.name] to hook up, while you watch?"
         elif Girl == KittyX:
@@ -3545,8 +3545,8 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls = []):
                 $ line = 2
             "Peek inside" if line != 1:
                 call set_the_scene
-                $ Girl.change_face("kiss", 1,eyes = "closed")
-                $ Girl2.change_face("kiss", 1,eyes = "closed")
+                $ Girl.change_face("kiss", 1, eyes = "closed")
+                $ Girl2.change_face("kiss", 1, eyes = "closed")
                 $ Player.primary_Action = "lesbian"
                 $ girl_secondary_Action = "fondle_pussy"
                 $ second_girl_main_action = "fondle_pussy"

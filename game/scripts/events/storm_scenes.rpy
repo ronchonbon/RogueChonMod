@@ -298,7 +298,7 @@ label meet_Storm:
                         call change_Girl_stat(StormX, "love", 2)
                         call change_Girl_stat(StormX, "obedience", 5)
                         ch_s "Have I been making too much noise?"
-                        $ StormX.change_face("smile", 1,eyes = "down")
+                        $ StormX.change_face("smile", 1, eyes = "down")
                         call change_Girl_stat(StormX, "obedience", 5)
                         ch_s "I suppose that I should be a better neighbor."
                         $ StormX.change_face("smile")
@@ -319,10 +319,10 @@ label meet_Storm:
                     "So about the leak." if "water" in Player.recent_history:
                         $ Player.drain_word("water")
                         "You point to some puddles under some of her plants."
-                        $ StormX.change_face("surprised", 2,eyes = "leftside")
+                        $ StormX.change_face("surprised", 2, eyes = "leftside")
                         call change_Girl_stat(StormX, "obedience", 5)
                         ch_s "Ah, yes. My apologies."
-                        $ StormX.change_face("smile", 2,brows = "sad")
+                        $ StormX.change_face("smile", 2, brows = "sad")
                         ch_s "I was watering my plants, and must have gotten a bit out of hand."
                         $ StormX.change_face("smile", 1)
                         ch_s "One moment. . ."
@@ -497,7 +497,7 @@ label Storm_Nudity:
                 $ StormX.add_word(1, "tits", 0, 0, 0)
                 $ StormX.change_face("surprised", 2)
                 ch_s ". . ."
-                $ StormX.change_face("sly", 1,brows = "angry", eyes = "down")
+                $ StormX.change_face("sly", 1, brows = "angry", eyes = "down")
                 call change_Girl_stat(StormX, "obedience", 15)
                 call change_Girl_stat(StormX, "inhibition", 15)
                 call change_Girl_stat(StormX, "lust", 2)
@@ -529,7 +529,7 @@ label Storm_Nudity:
                         call change_Girl_stat(StormX, "obedience", 2)
                         call change_Girl_stat(StormX, "inhibition", 5)
                         ch_s "Thank you?"
-                        $ StormX.change_face("smile", 1,eyes = "side")
+                        $ StormX.change_face("smile", 1, eyes = "side")
                         ch_s "Kitty's do have their own charm, certainly. . ."
                         $ StormX.change_face("smile")
                     "Yeah.":
@@ -540,14 +540,14 @@ label Storm_Nudity:
                 ch_s "Was there something else about my body?"
 
             "Could I get a feel?" if "touching" not in StormX.recent_history:
-                $ StormX.change_face("angry", 2,eyes = "surprised")
+                $ StormX.change_face("angry", 2, eyes = "surprised")
                 call change_Girl_stat(StormX, "love", -10)
                 call change_Girl_stat(StormX, "obedience", 10)
                 call change_Girl_stat(StormX, "lust", 2)
                 ch_s ". . ."
                 call Storm_Touching
             "So what about sex, is that on the table?" if "touching" not in StormX.recent_history:
-                $ StormX.change_face("angry", 2,eyes = "surprised")
+                $ StormX.change_face("angry", 2, eyes = "surprised")
                 call change_Girl_stat(StormX, "love", -3)
                 call change_Girl_stat(StormX, "obedience", 5)
                 call change_Girl_stat(StormX, "lust", 2)
@@ -556,7 +556,7 @@ label Storm_Nudity:
 
             "You've certainly got a jungle going on down there." if "pubes" not in StormX.recent_history:
                 $ StormX.add_word(1, "pubes", 0, 0, 0)
-                $ StormX.change_face("angry", 2,eyes = "surprised")
+                $ StormX.change_face("angry", 2, eyes = "surprised")
                 call change_Girl_stat(StormX, "love", -10)
                 call change_Girl_stat(StormX, "obedience", 5)
                 call change_Girl_stat(StormX, "inhibition", -5)
@@ -569,7 +569,7 @@ label Storm_Nudity:
                         call change_Girl_stat(StormX, "lust", 5)
                     ". . .":
                         pass
-                $ StormX.change_face("angry", 2,eyes = "down")
+                $ StormX.change_face("angry", 2, eyes = "down")
                 ch_s "I just don't see the point in \"gardening\" down there. . ."
                 $ StormX.change_face("angry", 1)
 
@@ -615,7 +615,7 @@ label Storm_Touching:
             $ StormX.change_face("normal")
             ch_s "Children these days are so impulsive."
         "Who said I was \"common?\"":
-            $ StormX.change_face("surpised", 2,mouth = "sucking")
+            $ StormX.change_face("surpised", 2, mouth = "sucking")
             call change_Girl_stat(StormX, "love", 5)
             call change_Girl_stat(StormX, "obedience", 10)
             ch_s "Ha! You do have an excellent sense of humor."
@@ -662,7 +662,7 @@ label Storm_Peter:
     call shift_focus (StormX)
     call set_the_scene
 
-    $ StormX.change_face("angry", 2,eyes = "surprised")
+    $ StormX.change_face("angry", 2, eyes = "surprised")
     ch_s "[Player.name]!"
     $ StormX.change_face("angry")
     ch_s "Yes, I know your name is not \"Peter Parker.\""
@@ -792,7 +792,7 @@ label Storm_Hairtalk:
             ch_s ". . . If you are certain. . ."
         "Maybe you could flash me?":
             call change_Girl_stat(StormX, "obedience", 2)
-            $ StormX.change_face("bemused", 1,eyes = "side")
+            $ StormX.change_face("bemused", 1, eyes = "side")
             pause 0.4
             $ StormX.eyes = "leftside"
             pause 0.4
@@ -815,7 +815,7 @@ label Storm_Hairtalk:
         "Maybe take some clothes off?":
             call change_Girl_stat(StormX, "obedience", 2)
             call change_Girl_stat(StormX, "obedience", 1)
-            $ StormX.change_face("bemused", 1,eyes = "side")
+            $ StormX.change_face("bemused", 1, eyes = "side")
             pause 0.4
             $ StormX.eyes = "leftside"
             pause 0.4
@@ -849,7 +849,7 @@ label Storm_Hairtalk:
         "Maybe some fondling?":
             call change_Girl_stat(StormX, "obedience", 2)
             if approval_check(StormX, 900) or ((StormX.Action_counter["fondle_breasts"]+ StormX.Action_counter["fondle_pussy"] + StormX.Action_counter["fondle_ass"]) > 0):
-                $ StormX.change_face("bemused", 1,eyes = "side")
+                $ StormX.change_face("bemused", 1, eyes = "side")
                 pause 0.4
                 $ StormX.eyes = "leftside"
                 pause 0.4
@@ -1397,7 +1397,7 @@ label Storm_Love:
             call change_Girl_stat(StormX, "love", 5)
             call change_Girl_stat(StormX, "obedience", 2)
             call change_Girl_stat(StormX, "inhibition", 2)
-            $ StormX.change_face("smile", 1,eyes = "side")
+            $ StormX.change_face("smile", 1, eyes = "side")
             ch_s "Thank you, yes, but I managed."
         "Wow.":
             call change_Girl_stat(StormX, "obedience", 2)
@@ -1448,7 +1448,7 @@ label Storm_Love:
         "Yeah, I bet.":
             call change_Girl_stat(StormX, "love", -2)
             call change_Girl_stat(StormX, "obedience", 2)
-            $ StormX.change_face("angry", 1,brows = "confused")
+            $ StormX.change_face("angry", 1, brows = "confused")
             ch_s ". . ."
         "So you're crazy then?":
             call change_Girl_stat(StormX, "love", -5)
@@ -1462,7 +1462,7 @@ label Storm_Love:
         "Ok.":
             call change_Girl_stat(StormX, "love", -5)
             $ StormX.event_happened[6] += 1
-            $ StormX.change_face("angry", 1,eyes = "side")
+            $ StormX.change_face("angry", 1, eyes = "side")
             ch_s "Why do I feel like you are not engaged in this conversation?"
 
     ch_s "The experience left me with fairly strong \"claustrophobia.\" a fear of confinement."
@@ -1478,7 +1478,7 @@ label Storm_Love:
                 call change_Girl_stat(StormX, "love", 2)
                 call change_Girl_stat(StormX, "obedience", 2)
                 $ StormX.add_word(1, "iknow", 0, 0, 0)
-                $ StormX.change_face("smile", 1,brows = "confused")
+                $ StormX.change_face("smile", 1, brows = "confused")
                 $ line += 1
                 ch_s "Oh?"
             "I'm afraid I don't. . .":
@@ -1563,7 +1563,7 @@ label Storm_Love_Redux:
             $ StormX.change_face("surprised", 2)
             ch_s "No!"
             call change_Girl_stat(StormX, "love", 2)
-            $ StormX.change_face("smile", 1,eyes = "side")
+            $ StormX.change_face("smile", 1, eyes = "side")
             ch_s ". . . no. . ."
             call change_Girl_stat(StormX, "love", 3)
             call change_Girl_stat(StormX, "obedience", 2)
@@ -1583,7 +1583,7 @@ label Storm_Love_Redux:
             if not approval_check(StormX, 600, "OI"):
                 call change_Girl_stat(StormX, "love", -3)
                 $ StormX.event_happened[6] += 1
-                $ StormX.change_face("angry", 1,mouth = "smile")
+                $ StormX.change_face("angry", 1, mouth = "smile")
             ch_s "Try to avoid a swelled head, [StormX.player_petname]"
         "Cool!":
             call change_Girl_stat(StormX, "love", -5)
@@ -1630,7 +1630,7 @@ label Storm_Love_Redux:
             call change_Girl_stat(StormX, "obedience", 5)
             call change_Girl_stat(StormX, "inhibition", -5)
             $ StormX.event_happened[6] += 2
-            $ StormX.change_face("angry", 1,eyes = "side")
+            $ StormX.change_face("angry", 1, eyes = "side")
             ch_s "No, I suppose you would not."
         "I guess I do too. . .":
             call change_Girl_stat(StormX, "obedience", 5)
@@ -1653,7 +1653,7 @@ label Storm_Love_Redux:
 
     if len(Player.Harem) >= 2:
         ch_s "I do not expect to keep you for myself. . ."
-        $ StormX.change_face("smile", 1,eyes = "side")
+        $ StormX.change_face("smile", 1, eyes = "side")
         ch_s "The others also love you so much. . ."
         ch_s ". . . but the part of you that entraps me is mine."
     $ StormX.change_face("smile", 1)
@@ -1684,7 +1684,7 @@ label Storm_Love_Redux:
             ch_s ". . ."
             if not approval_check(StormX, 900, "L"):
                 call change_Girl_stat(StormX, "love", (901-StormX.love))
-            $ StormX.change_face("smile", 1,eyes = "side")
+            $ StormX.change_face("smile", 1, eyes = "side")
             ch_s "Ok."
             $ StormX.player_petname = "beloved"
 
@@ -1766,7 +1766,7 @@ label Storm_Sub:
             ch_s ". . ."
             call change_Girl_stat(StormX, "inhibition", 7)
             call change_Girl_stat(StormX, "lust", 5)
-            $ StormX.change_face("bemused", 2,eyes = "side")
+            $ StormX.change_face("bemused", 2, eyes = "side")
             $ line = ". . .sometimes. . ."
     while line:
         menu:
@@ -1781,7 +1781,7 @@ label Storm_Sub:
                     call change_Girl_stat(StormX, "obedience", 5)
                     call change_Girl_stat(StormX, "lust", 5)
                     $ StormX.add_word(1, "repeat", 0, 0, 0)
-                    $ StormX.change_face("bemused", 2,eyes = "side")
+                    $ StormX.change_face("bemused", 2, eyes = "side")
                 else:
                     $ StormX.change_face("bemused")
                     call change_Girl_stat(StormX, "love", 2)
@@ -1810,7 +1810,7 @@ label Storm_Sub:
                 call change_Girl_stat(StormX, "inhibition", 2)
             "It turns me on too.":
                 $ line = 0
-                $ StormX.change_face("sly", 1,mouth = "smile")
+                $ StormX.change_face("sly", 1, mouth = "smile")
                 call change_Girl_stat(StormX, "love", 2)
                 call change_Girl_stat(StormX, "obedience", 5)
                 call change_Girl_stat(StormX, "inhibition", 3)
@@ -1855,7 +1855,7 @@ label Storm_Sub:
     menu:
         extend ""
         "If you want?":
-            $ StormX.change_face("perplexed", 1,eyes = "side")
+            $ StormX.change_face("perplexed", 1, eyes = "side")
             call change_Girl_stat(StormX, "love", 3)
             ch_s ". . . right. . ."
             call change_Girl_stat(StormX, "inhibition", -2)
@@ -1944,7 +1944,7 @@ label Storm_Sub_Asked:
                 call change_Girl_stat(StormX, "love", 5)
                 call change_Girl_stat(StormX, "obedience", 5)
                 ch_s ". . . ye-"
-                $ StormX.change_face("angry", 1,eyes = "side")
+                $ StormX.change_face("angry", 1, eyes = "side")
                 call change_Girl_stat(StormX, "obedience", -3)
                 call change_Girl_stat(StormX, "inhibition", 5)
                 ch_s "-no. . ."
@@ -2057,7 +2057,7 @@ label Storm_Master:
             call change_Girl_stat(StormX, "inhibition", 3)
             ch_s "I expected that you might. . ."
         "What about you?":
-            $ StormX.change_face("sly", 1,eyes = "side")
+            $ StormX.change_face("sly", 1, eyes = "side")
             call change_Girl_stat(StormX, "love", 1)
             call change_Girl_stat(StormX, "obedience", 2)
             call change_Girl_stat(StormX, "inhibition", 3)
@@ -2084,7 +2084,7 @@ label Storm_Master:
             call change_Girl_stat(StormX, "inhibition", 3)
             call change_Girl_stat(StormX, "inhibition", 2)
         "Would you enjoy that?" if "aboutyou" not in StormX.recent_history:
-            $ StormX.change_face("sly", 1,eyes = "side")
+            $ StormX.change_face("sly", 1, eyes = "side")
             call change_Girl_stat(StormX, "love", 1)
             call change_Girl_stat(StormX, "obedience", 2)
             call change_Girl_stat(StormX, "inhibition", 3)
@@ -2095,16 +2095,16 @@ label Storm_Master:
             call change_Girl_stat(StormX, "love", -2)
             call change_Girl_stat(StormX, "obedience", -2)
             ch_s "Oh, you wound me. . ."
-            $ StormX.change_face("sly", 1,eyes = "side")
+            $ StormX.change_face("sly", 1, eyes = "side")
             ch_s "Perhaps you assume too much. . ."
         "You want to call me \"Master,\" don't you.":
-            $ StormX.change_face("sly", 1,eyes = "side")
+            $ StormX.change_face("sly", 1, eyes = "side")
             call change_Girl_stat(StormX, "obedience", 5)
             call change_Girl_stat(StormX, "inhibition", 2)
             call change_Girl_stat(StormX, "lust", 5)
             ch_s "Well. . ."
         "Yeah?":
-            $ StormX.change_face("sly", 1,eyes = "side")
+            $ StormX.change_face("sly", 1, eyes = "side")
             call change_Girl_stat(StormX, "love", -3)
             call change_Girl_stat(StormX, "obedience", -3)
             ch_s "Hmm. . ."
@@ -2129,7 +2129,7 @@ label Storm_Master:
                 ch_s "Master."
                 $ StormX.player_petnames.append("master")
             "What do you want to call me?" if "master" not in StormX.player_petnames:
-                $ StormX.change_face("sly", 1,eyes = "side")
+                $ StormX.change_face("sly", 1, eyes = "side")
                 call change_Girl_stat(StormX, "love", 3)
                 call change_Girl_stat(StormX, "obedience", 7)
                 call change_Girl_stat(StormX, "lust", 5)
@@ -2146,7 +2146,7 @@ label Storm_Master:
                 call change_Girl_stat(StormX, "obedience", 12)
                 call change_Girl_stat(StormX, "lust", 5)
                 ch_s ". . ."
-                $ StormX.change_face("sly", 1,eyes = "side")
+                $ StormX.change_face("sly", 1, eyes = "side")
                 call change_Girl_stat(StormX, "obedience", 7)
                 call change_Girl_stat(StormX, "lust", 5)
                 ch_s ". . ."
@@ -2160,7 +2160,7 @@ label Storm_Master:
                 if line < 2:
                     call change_Girl_stat(StormX, "obedience", 2)
                     call change_Girl_stat(StormX, "inhibition", 2)
-                    $ StormX.change_face("sly", 2,eyes = "side")
+                    $ StormX.change_face("sly", 2, eyes = "side")
                     ch_s ". . ."
                     call change_Girl_stat(StormX, "lust", 5)
                 else:
@@ -2168,7 +2168,7 @@ label Storm_Master:
                     call change_Girl_stat(StormX, "love", 3)
                     call change_Girl_stat(StormX, "inhibition", 3)
                     ch_s "Alright, that is perhaps a bit much. . ."
-                $ StormX.change_face("sly", 2,eyes = "side")
+                $ StormX.change_face("sly", 2, eyes = "side")
                 ch_s "Master."
                 $ line += 1
             "Yes, call me that from now on." if "master" in StormX.player_petnames:
@@ -2194,7 +2194,7 @@ label Storm_Master:
                 call change_Girl_stat(StormX, "inhibition", -3)
                 $ line = "context"
             "I still would rather not have you call me that." if "context" in StormX.recent_history and "master" not in StormX.player_petnames:
-                $ StormX.change_face("sad", 1,mouth = "smile")
+                $ StormX.change_face("sad", 1, mouth = "smile")
                 call change_Girl_stat(StormX, "love", 5)
                 call change_Girl_stat(StormX, "obedience", 5)
                 ch_s "I can understand that."
@@ -2306,7 +2306,7 @@ label Storm_Poolnight:
             jump reset_location
     hide Storm_sprite
     call set_the_scene
-    $ StormX.change_face("sly", 1,eyes = "leftside")
+    $ StormX.change_face("sly", 1, eyes = "leftside")
     ch_s "Now that you have me, [StormX.player_petname]. . ."
     $ StormX.change_face("sly", 1)
     ch_s "What do you intend to do with me. . ."
@@ -2329,12 +2329,12 @@ label Storm_Fuckbuddy:
     $ Player.traits.append("locked")
     $ Nearby = []
     call set_Character_taboos
-    $ StormX.change_face("sly", 1,eyes = "side")
+    $ StormX.change_face("sly", 1, eyes = "side")
     call change_Girl_stat(StormX, "inhibition", 5)
     "After class, [StormX.name] walks past you, and places a hand on your chest as you head out."
     call change_Girl_stat(StormX, "inhibition", 5)
     "She leans back and locks the door."
-    $ StormX.change_face("sly", 1,eyes = "down")
+    $ StormX.change_face("sly", 1, eyes = "down")
     call change_Girl_stat(StormX, "inhibition", 10)
     ch_s "I do have needs, you know."
     $ StormX.player_petnames.append("fuck buddy")

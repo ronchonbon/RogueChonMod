@@ -174,7 +174,7 @@ init -2 python:
                 Clothing_types = [Clothing_types]
 
             for Clothing_type in Clothing_types:
-                self.Clothes[Clothing_type] = None
+                self.Clothes[Clothing_type] = ClothingClass(name = None, image_string = None, Clothing_type = None, Owner_names = None, dialogue_lines = None)
 
             return
 
@@ -188,7 +188,7 @@ init -2 python:
             covering_Clothes = self.coverage[Clothing.type]
 
             for c in reversed(range(len(covering_Clothes))):
-                if self.Clothes[covering_Clothes[c]]:
+                if self.Clothes[covering_Clothes[c]].name:
                     self.Clothes[covering_Clothes[c]].take_off()
 
                     self.remove_Clothing(covering_Clothes[c])
@@ -202,7 +202,7 @@ init -2 python:
                 if self.Clothes["dress"] and "dress" not in covering_Clothes:
                     self.Clothes["dress"].take_off()
 
-            if self.Clothes[Clothing.type] and Clothing.type in self.removable:
+            if self.Clothes[Clothing.type].name and Clothing.type in self.removable:
                 self.Clothes[Clothing.type].take_off()
                 self.remove_Clothing(Clothing.type)
 
@@ -234,7 +234,7 @@ init -2 python:
                     self.Clothes["dress"].put_on()
 
             for c in range(len(covering_Clothes)):
-                if temp_Clothes[covering_Clothes[c]]:
+                if temp_Clothes[covering_Clothes[c]].name:
                     temp_Clothes[covering_Clothes[c]].state = temp_Clothes[covering_Clothes[c]].undressed_state
                     self.add_Clothing(temp_Clothes[covering_Clothes[c]])
 
@@ -257,7 +257,7 @@ init -2 python:
             covering_Clothes = self.coverage[Clothing_type]
 
             for c in reversed(range(len(covering_Clothes))):
-                if self.Clothes[covering_Clothes[c]]:
+                if self.Clothes[covering_Clothes[c]].name:
                     self.Clothes[covering_Clothes[c]].take_off()
                     self.remove_Clothing(covering_Clothes[c])
 
@@ -283,7 +283,7 @@ init -2 python:
                     self.Clothes["dress"].put_on()
 
             for c in range(len(covering_Clothes)):
-                if temp_Clothes[covering_Clothes[c]]:
+                if temp_Clothes[covering_Clothes[c]].name:
                     temp_Clothes[covering_Clothes[c]].state = temp_Clothes[covering_Clothes[c]].undressed_state
                     self.add_Clothing(temp_Clothes[covering_Clothes[c]])
 
@@ -297,7 +297,7 @@ init -2 python:
 
         def undress(self):
             for Clothing_type in reversed(self.removable):
-                if self.Clothes[Clothing_type]:
+                if self.Clothes[Clothing_type].name:
                     self.Clothes[Clothing_type].take_off()
 
                     self.remove_Clothing(Clothing_type)
@@ -461,6 +461,9 @@ init -2 python:
             return
 
         def change_Outfit(self, Outfit, instant = False):
+            if self.current_Outfit.name == Outfit.name:
+                return
+
             self.last_Outfit = copy.deepcopy(self.current_Outfit)
 
             if not instant:
@@ -471,7 +474,7 @@ init -2 python:
                         self.current_Outfit.add_Clothing(Outfit.Clothes[Clothing_type])
 
                 for Clothing_type in Outfit.removable:
-                    if Outfit.Clothes[Clothing_type]:
+                    if Outfit.Clothes[Clothing_type].name:
                         Outfit.Clothes[Clothing_type].state = Outfit.Clothes[Clothing_type].undressed_state
 
                         self.current_Outfit.add_Clothing(Outfit.Clothes[Clothing_type])
@@ -483,7 +486,7 @@ init -2 python:
                 if Outfit.Clothes["hair"]:
                     self.current_Outfit.add_Clothing(Outfit.Clothes["hair"])
 
-            self.current_Outfit = Outfit
+            self.current_Outfit = copy.deepcopy(Outfit)
 
             self.temp_Outfit = copy.deepcopy(self.current_Outfit)
 

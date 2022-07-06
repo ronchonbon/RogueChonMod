@@ -55,9 +55,6 @@ label start:
 
     $ Player.focused_Girl = RogueX
 
-    show screen status_screen
-    show screen inventory_button
-
     $ Player.cash = 100000
 
     jump prologue

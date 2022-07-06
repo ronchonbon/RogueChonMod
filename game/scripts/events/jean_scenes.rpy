@@ -53,7 +53,7 @@ label meet_Jean:
             call change_Girl_stat(JeanX, "obedience", 5)
             $ JeanX.IX -= 5
             ch_j "I KNOW!!!"
-            $ JeanX.change_face("bemused", 0,eyes = "side")
+            $ JeanX.change_face("bemused", 0, eyes = "side")
             ch_j "Seriously [JeanX.player_petname], you need to -relax.-"
         "No, it's. . . oh, that's right, [Player.name]." if Player.name == JeanX.player_petname:
             call change_Girl_stat(JeanX, "love", 5)
@@ -77,23 +77,23 @@ label meet_Jean:
             menu:
                 extend ""
                 "Oh, yeah. [JeanX.player_petname].":
-                    $ JeanX.change_face("confused", 1,eyes = "side")
+                    $ JeanX.change_face("confused", 1, eyes = "side")
                     call change_Girl_stat(JeanX, "love", 5)
                     call change_Girl_stat(JeanX, "obedience", 5)
                     ch_j "Ok. . ."
                 "Whatever.":
-                    $ JeanX.change_face("confused", 1,eyes = "side")
+                    $ JeanX.change_face("confused", 1, eyes = "side")
                     call change_Girl_stat(JeanX, "obedience", 10)
                     ch_j ". . ."
                     ch_j "Right. . ."
                 "No, it's [Player.name], pay attention!":
-                    $ JeanX.change_face("confused", 1,eyes = "side")
+                    $ JeanX.change_face("confused", 1, eyes = "side")
                     call change_Girl_stat(JeanX, "love", -10)
                     call change_Girl_stat(JeanX, "obedience", 10)
                     call change_Girl_stat(JeanX, "inhibition", -10)
                     ch_j "Huh?"
                     ch_j "But I. . ."
-                    $ JeanX.change_face("angry", 1,eyes = "psychic")
+                    $ JeanX.change_face("angry", 1, eyes = "psychic")
                     ch_j "Quack like a duck!"
                     menu:
                         extend ""
@@ -104,7 +104,7 @@ label meet_Jean:
                             call change_Girl_stat(JeanX, "inhibition", 10)
                             ch_j "Ah, ok, now we're getting somewhere."
                         "Quack [[sarcastically]":
-                            $ JeanX.change_face("angry", 0,eyes = "squint")
+                            $ JeanX.change_face("angry", 0, eyes = "squint")
                             call change_Girl_stat(JeanX, "love", -3)
                             call change_Girl_stat(JeanX, "obedience", 10)
                             call change_Girl_stat(JeanX, "inhibition", -5)
@@ -112,14 +112,14 @@ label meet_Jean:
                             $ JeanX.change_face("sly")
                             ch_j "Good enough. . ."
                         "No.":
-                            $ JeanX.change_face("confused", 1,eyes = "side")
+                            $ JeanX.change_face("confused", 1, eyes = "side")
                             call change_Girl_stat(JeanX, "love", -10)
                             call change_Girl_stat(JeanX, "obedience", 15)
                             call change_Girl_stat(JeanX, "inhibition", -5)
                             ch_j "This doesn't make sense. . ."
-                            $ JeanX.change_face("angry", 1,eyes = "psychic")
+                            $ JeanX.change_face("angry", 1, eyes = "psychic")
                             ch_j "Could you be too dumb to mind-take? . . "
-                            $ JeanX.change_face("confused", 1,eyes = "psychic")
+                            $ JeanX.change_face("confused", 1, eyes = "psychic")
                             ch_j "No, it worked on Logan. . ."
                             $ argued = True
 
@@ -138,7 +138,7 @@ label meet_Jean:
 
         call fix_clothing(JeanX)
 
-        $ JeanX.change_face("sly", 0,eyes = "side")
+        $ JeanX.change_face("sly", 0, eyes = "side")
         $ JeanX.arm_pose = 1
         ch_j "Can't blame you, everyone does, the pervs."
         menu:
@@ -196,7 +196,7 @@ label meet_Jean:
                         call change_Girl_stat(JeanX, "love", 5)
                         call change_Girl_stat(JeanX, "obedience", 5)
                         ch_j ". . ."
-                        $ JeanX.change_face("confused", 1,eyes = "side")
+                        $ JeanX.change_face("confused", 1, eyes = "side")
                         ch_j "Right. . ."
                     "You just flashed me.":
                         $ JeanX.change_face("confused", 2)
@@ -262,7 +262,7 @@ label meet_Jean:
             call change_Girl_stat(JeanX, "love", -5)
             call change_Girl_stat(JeanX, "obedience", 15)
             ch_j "Now you're just fucking with me."
-            $ JeanX.change_face("angry", 1,mouth = "surprised")
+            $ JeanX.change_face("angry", 1, mouth = "surprised")
             call change_Girl_stat(JeanX, "love", -5)
             ch_j "I do the fucking!"
             $ JeanX.change_face("angry", 1)
@@ -297,7 +297,7 @@ label meet_Jean:
                 call change_Girl_stat(JeanX, "obedience", 20)
                 call change_Girl_stat(JeanX, "inhibition", -40)
                 ch_j "Ok, goo- you're just bullshitting me again!"
-    $ JeanX.change_face("angry", 1,eyes = "psychic")
+    $ JeanX.change_face("angry", 1, eyes = "psychic")
     ch_j "Argh!"
     "You feel a slight breeze against your cheek."
     $ JeanX.change_face("angry", 1)
@@ -314,10 +314,10 @@ label meet_Jean:
         ". . .":
             call change_Girl_stat(JeanX, "love", 3)
     call change_Girl_stat(JeanX, "obedience", 10)
-    $ JeanX.change_face("angry", 1,eyes = "psychic")
+    $ JeanX.change_face("angry", 1, eyes = "psychic")
     "A locker rips from the wall and heads your way."
     "With a pulse of your power, it loses momentum and falls over."
-    $ JeanX.change_face("angry", 1,eyes = "side")
+    $ JeanX.change_face("angry", 1, eyes = "side")
     call change_Girl_stat(JeanX, "obedience", 10)
     call change_Girl_stat(JeanX, "inhibition", -10)
     ch_j ". . ."
@@ -325,7 +325,7 @@ label meet_Jean:
     ch_j "I'm not sure what to do with you. . ."
     $ JeanX.change_face("angry", 1)
     ch_j "I'm not used to anyone being able to just. . ."
-    $ JeanX.change_face("angry", 2,eyes = "side")
+    $ JeanX.change_face("angry", 2, eyes = "side")
     ch_j ". . . ignore me like that. . ."
     ch_j "I'll need to give this some thought. . ."
 
@@ -372,7 +372,7 @@ label Jean_Like:
     $ JeanX.daily_history.append("relationship")
     call set_Character_taboos
     $ line = 0
-    $ JeanX.change_face("sly", 1,eyes = "down")
+    $ JeanX.change_face("sly", 1, eyes = "down")
     ". . .{w=0.5}{nw}"
     $ JeanX.change_face("sly", 1)
     "She looks at you appraisingly."
@@ -431,7 +431,7 @@ label Jean_Like:
                 call change_Girl_stat(JeanX, "love", 5)
                 call change_Girl_stat(JeanX, "obedience", -5)
                 ch_j "Ha! Girlfriend. . ."
-                $ JeanX.change_face("bemused", 1,eyes = "side")
+                $ JeanX.change_face("bemused", 1, eyes = "side")
                 ch_j "That's just precious!"
 
                 $ JeanX.change_face("sly", 1)
@@ -442,7 +442,7 @@ label Jean_Like:
                 ch_j "but I just don't see you as \"relationship\" material. . ."
             "Couldn't we be sex friends?":
 
-                $ JeanX.change_face("bemused", 1,eyes = "side")
+                $ JeanX.change_face("bemused", 1, eyes = "side")
                 call change_Girl_stat(JeanX, "love", 5)
                 call change_Girl_stat(JeanX, "obedience", 10)
                 call change_Girl_stat(JeanX, "inhibition", 5)
@@ -465,7 +465,7 @@ label Jean_Like:
                 $ JeanX.change_face("surprised", 1)
                 call change_Girl_stat(JeanX, "obedience", -10)
                 ch_j "How should I know?!"
-                $ JeanX.change_face("bemused", 1,eyes = "side")
+                $ JeanX.change_face("bemused", 1, eyes = "side")
                 ch_j "I guess give me some reason to respect you or something?"
                 $ JeanX.change_face("sly", 1)
                 ch_j "I mean, fucking around, that's fine, but let's keep this casual."
@@ -503,7 +503,7 @@ label Jean_Love:
         call change_Girl_stat(JeanX, "lust", 5)
         ch_j "I mean, you really know how to lay it down."
     if JeanX.obedience < 900:
-        $ JeanX.change_face("sly", 1,eyes = "side")
+        $ JeanX.change_face("sly", 1, eyes = "side")
         call change_Girl_stat(JeanX, "love", 5)
         ch_j "And you're so sweet to me. . ."
     ch_j "I kinda feel like. . ."
@@ -616,14 +616,14 @@ label Jean_Love:
             menu:
                 extend ""
                 "Yeah" if Player.Harem:
-                    $ JeanX.change_face("angry", 1,eyes = "side")
+                    $ JeanX.change_face("angry", 1, eyes = "side")
                     call change_Harem_stat (JeanX, 700, -5)
                     if len(Player.Harem) >= 2:
                         ch_j "Bitches."
                     elif Player.Harem:
                         ch_j "That bitch."
                 "I just don't like you like that.":
-                    $ JeanX.change_face("sad", 2,eyes = "surprised")
+                    $ JeanX.change_face("sad", 2, eyes = "surprised")
                     call change_Girl_stat(JeanX, "love", -5)
                     call change_Girl_stat(JeanX, "love", -5)
                     call change_Girl_stat(JeanX, "obedience", 5)
@@ -634,7 +634,7 @@ label Jean_Love:
                     ch_j "."
                     ch_j ". ."
                     ch_j ". . ."
-            $ JeanX.change_face("smile", 1,brows = "angry")
+            $ JeanX.change_face("smile", 1, brows = "angry")
             ch_j "Well, you'll come around."
             ch_j "You don't find a catch like this every day."
 
@@ -676,7 +676,7 @@ label Jean_Love:
                             menu:
                                 extend ""
                                 "No! No \"wink!\"":
-                                    $ JeanX.change_face("sly", 1,eyes = "stunned")
+                                    $ JeanX.change_face("sly", 1, eyes = "stunned")
                                     call change_Girl_stat(JeanX, "obedience", 5)
                                     call change_Girl_stat(JeanX, "obedience", 3)
                                     pause 0.3
@@ -712,7 +712,7 @@ label Jean_Sub:
     $ JeanX.daily_history.append("relationship")
     call set_Character_taboos
     $ line = 0
-    $ JeanX.change_face("sly", 1,eyes = "side")
+    $ JeanX.change_face("sly", 1, eyes = "side")
     ch_j "Hey. . . [JeanX.player_petname]."
     $ JeanX.eyes = "squint"
     ch_j "We need to talk."
@@ -720,9 +720,9 @@ label Jean_Sub:
     ch_j ". . ."
     ch_j "When we first met. . . I was pretty rude."
     ch_j "I get that."
-    $ JeanX.change_face("sly", 1,eyes = "leftside")
+    $ JeanX.change_face("sly", 1, eyes = "leftside")
     ch_j "When you're practically perfect in every way, you can look down your lessers."
-    $ JeanX.change_face("angry", 1,eyes = "leftside")
+    $ JeanX.change_face("angry", 1, eyes = "leftside")
     ch_j ". . ."
     ch_j "Maybe that came out wrong."
     $ JeanX.change_face("sly", 1)
@@ -749,7 +749,7 @@ label Jean_Sub:
     menu:
         extend ""
         "Tell me what you want.":
-            $ JeanX.change_face("sly", 1,eyes = "side")
+            $ JeanX.change_face("sly", 1, eyes = "side")
             call change_Girl_stat(JeanX, "love", 5)
             call change_Girl_stat(JeanX, "obedience", 2)
             ch_j "Well. . . just that. . ."
@@ -768,7 +768,7 @@ label Jean_Sub:
             call change_Girl_stat(JeanX, "lust", 10)
             $ JeanX.change_face("surprised", 2)
             ch_j "!!!"
-            $ JeanX.change_face("sly", 1,eyes = "side")
+            $ JeanX.change_face("sly", 1, eyes = "side")
             call change_Girl_stat(JeanX, "obedience", -5)
             ch_j "Well. . . I don't know about that!"
             ch_j "I mean. . . I could -maybe- call you. . ."
@@ -782,7 +782,7 @@ label Jean_Sub:
             ch_j ". . ."
             ch_j "You still seem kinda lost here. . ."
             ch_j "Maybe I'm still not being clear, but. . ."
-            $ JeanX.change_face("angry", 1,eyes = "side")
+            $ JeanX.change_face("angry", 1, eyes = "side")
             call change_Girl_stat(JeanX, "obedience", -3)
             ch_j "If I have to spell it out for you, then maybe it's not worth it."
             menu:
@@ -851,14 +851,14 @@ label Jean_Master:
     $ JeanX.daily_history.append("relationship")
     call set_Character_taboos
     $ line = 0
-    $ JeanX.change_face("sly", 1,eyes = "side")
+    $ JeanX.change_face("sly", 1, eyes = "side")
     ch_j "Hey. . . [JeanX.player_petname]."
     ch_j "Would you. . . want me to call you. . ."
     ch_j "\"Master?\""
     $ JeanX.history.append("master")
     menu:
         "Yeah, do that.":
-            $ JeanX.change_face("sly", 1,eyes = "side")
+            $ JeanX.change_face("sly", 1, eyes = "side")
             call change_Girl_stat(JeanX, "love", 5)
             call change_Girl_stat(JeanX, "obedience", 5)
             ch_j "Well. . . Ok then."
@@ -987,21 +987,21 @@ label Jean_Daddy:
                     $ JeanX.change_face("angry", 2)
                     ch_j " . . . "
                     ch_j "Fine, be that way!"
-                    $ JeanX.change_face("angry", 1,eyes = "side")
+                    $ JeanX.change_face("angry", 1, eyes = "side")
                 "You've got some real daddy issues, uh?":
                     call change_Girl_stat(JeanX, "love", -15)
                     call change_Girl_stat(JeanX, "obedience", 45)
                     call change_Girl_stat(JeanX, "inhibition", 5)
                     $ JeanX.change_face("angry", 2)
                     ch_j "Oh, whatever, like you know!"
-                    $ JeanX.change_face("angry", 1,eyes = "side")
+                    $ JeanX.change_face("angry", 1, eyes = "side")
         "You've got some real daddy issues, uh?":
             call change_Girl_stat(JeanX, "love", -15)
             call change_Girl_stat(JeanX, "obedience", 45)
             call change_Girl_stat(JeanX, "inhibition", 5)
             $ JeanX.change_face("angry", 2)
             ch_j "Oh, whatever, like you know!"
-            $ JeanX.change_face("angry", 1,eyes = "side")
+            $ JeanX.change_face("angry", 1, eyes = "side")
     $ JeanX.player_petnames.append("daddy")
     return
 

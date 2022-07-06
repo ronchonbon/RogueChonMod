@@ -40,7 +40,7 @@ layeredimage Laura_sprite standing:
 
     if not LauraX.Clothes["underwear"].string:
         Null()
-    elif LauraX.grool > 1 and LauraX.Clothes["underwear"].string not in ["leather_panties", "bikini_bottoms"]:
+    elif LauraX.grool > 1 and LauraX.Clothes["underwear"].string not in ["leather_panties", "black_bikini_bottoms"]:
         "images/Laura_standing/Laura_standing_underwear_[LauraX.Clothes[underwear].string]_grool_[LauraX.Clothes[underwear].state].png"
     else:
         "images/Laura_standing/Laura_standing_underwear_[LauraX.Clothes[underwear].string]_[LauraX.Clothes[underwear].state].png"

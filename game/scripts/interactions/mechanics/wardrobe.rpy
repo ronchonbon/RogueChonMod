@@ -626,7 +626,7 @@ label outfits_menu(Girl):
 
                     $ agreed = True
                 elif Girl == StormX and not approval_check(Girl, 500, taboo_modifier=0):
-                    $ Girl.change_face("confused", 1,mouth = "smirk")
+                    $ Girl.change_face("confused", 1, mouth = "smirk")
 
                     ch_s "I don't exactly get nude on command, you know. . ."
 
@@ -673,25 +673,25 @@ label outfits_menu(Girl):
 
                         ch_e "I assure you that it is, but that's not the way to ask."
                     elif Girl == LauraX:
-                        $ Girl.change_face("confused", 1,mouth = "smirk")
+                        $ Girl.change_face("confused", 1, mouth = "smirk")
 
                         ch_l "Yeah, but I'm not exactly showing it off."
 
                         $ Girl.change_face("bemused", 0)
                     elif Girl == JeanX:
-                        $ Girl.change_face("confused", 1,mouth = "smirk")
+                        $ Girl.change_face("confused", 1, mouth = "smirk")
 
                         ch_j "Yeah, but I'm not sharing."
 
                         $ Girl.change_face("bemused", 0)
                     elif Girl == StormX:
-                        $ Girl.change_face("confused", 1,mouth = "smirk")
+                        $ Girl.change_face("confused", 1, mouth = "smirk")
 
                         ch_s "Yeah, but I'm not exactly showing it off."
 
                         $ Girl.change_face("bemused", 0)
                     elif Girl == JubesX:
-                        $ Girl.change_face("confused", 1,mouth = "smirk")
+                        $ Girl.change_face("confused", 1, mouth = "smirk")
 
                         ch_v "Yeah, but you'll just have to keep guessing. . ."
 
@@ -768,7 +768,7 @@ label outfits_menu(Girl):
                                     ch_v "Fun. . ."
 
                             elif Girl == EmmaX and approval_check(Girl, 400, "I") and approval_check(Girl, 1200, taboo_modifier=0):
-                                $ Girl.change_face("bemused", 1,eyes = "side")
+                                $ Girl.change_face("bemused", 1, eyes = "side")
 
                                 ch_e "You shouldn't suggest such things. . ."
                             else:
@@ -4290,7 +4290,7 @@ label outfitShame(Girl, Custom = 3, Check=0, Count=0, Tempshame=50, Agree = 1):
             return True
         if not Agree:
 
-            $ Girl.change_face("bemused", 2,eyes = "side")
+            $ Girl.change_face("bemused", 2, eyes = "side")
             if Girl == RogueX:
                 ch_r "I don't really feel comfortable in this. . ."
             elif Girl == KittyX:

@@ -12,17 +12,17 @@ label world_map:
                 menu:
                     "[RogueX.name]'s room" if Player.location != "bg_rogue":
                         $ destination = RogueX
-                    "[KittyX.name]'s room" if "met" in KittyX.history and Player.location != "bg_kitty":
+                    "[KittyX.name]'s room" if Player.location != "bg_kitty":
                         $ destination = KittyX
-                    "[EmmaX.name]'s room" if "met" in EmmaX.history and Player.location != "bg_emma":
+                    "[EmmaX.name]'s room" if Player.location != "bg_emma":
                         $ destination = EmmaX
-                    "[LauraX.name]'s room" if "met" in LauraX.history and Player.location != "bg_laura":
+                    "[LauraX.name]'s room" if Player.location != "bg_laura":
                         $ destination = LauraX
-                    "[JeanX.name]'s room" if "met" in JeanX.history and Player.location != "bg_jean":
+                    "[JeanX.name]'s room" if Player.location != "bg_jean":
                         $ destination = JeanX
-                    "[StormX.name]'s room" if "met" in StormX.history and Player.location != "bg_storm":
+                    "[StormX.name]'s room" if Player.location != "bg_storm":
                         $ destination = StormX
-                    "[JubesX.name]'s room" if "met" in JubesX.history and Player.location != "bg_jubes":
+                    "[JubesX.name]'s room" if Player.location != "bg_jubes":
                         $ destination = JubesX
                     "Back":
                         pass
@@ -120,8 +120,6 @@ label player_room:
     while True:
         menu:
             "You are in your room. What would you like to do?"
-            "Chat":
-                call chat
             "Study":
                 call study
             "Lock the door" if not door_locked:
@@ -238,12 +236,10 @@ label girls_room:
 
         menu:
             extend ""
-            "Chat":
-                call chat
             "Would you like to study?":
                 call study
             "Lock the door" if not door_locked:
-                if Girl.location == Player.location and not approval_check(Girl, 1000, Alt = [[LauraX, JeanX], 1200]):
+                if Girl.location == Player.location and not approval_check(Girl, 1000, alternate_thresholds = {LauraX: 1200, JeanX: 1200}):
                     if Girl == RogueX:
                         ch_r "Hey, could you maybe keep that open, [RogueX.player_petname]?"
                     elif Girl == KittyX:
@@ -308,8 +304,6 @@ label campus:
     while True:
         menu:
             "You are in the university square. What would you like to do?"
-            "Chat":
-                call chat
             "Wait" if time_index < 3:
                 "You wait around a bit."
 
@@ -377,8 +371,6 @@ label classroom:
                     "Class is already letting out. You can hang out until they lock up for the night."
             "Take the morning class (locked)" if weekday < 5 and time_index == 1 and round <= 15:
                 pass
-            "Chat":
-                call chat
             "Lock the door" if not door_locked:
                 if weekday >= 5 or time_index >= 2:
                     "You lock the door."
@@ -460,8 +452,6 @@ label danger_room:
                     call set_the_scene
                 else:
                     "There isn't time to do much before the next rotation."
-            "Chat":
-                call chat
             "Lock the door" if not door_locked:
                 if time_index > 2:
                     "You lock the door."
@@ -587,8 +577,6 @@ label shower_room:
                 call set_the_scene
             "Shower (locked)" if round < 30:
                 pass
-            "Chat":
-                call chat
             "Wait" if time_index < 3:
                 "You hang out for a bit."
 
@@ -605,7 +593,7 @@ label shower_room:
                         Nearby = []
 
                         for G in active_Girls:
-                            if G.location != Player.location and "showered" not in G.daily_history and (G.location == G.home or G.location == "bg_dangerroom"):
+                            if G.location != Player.location and (G.location == G.home or G.location == "bg_dangerroom"):
                                 G.location = "nearby"
 
                                 Nearby.append(G)
@@ -641,8 +629,6 @@ label pool:
     while True:
         menu:
             "You're at the pool. What would you like to do?"
-            "Chat":
-                call chat
             "Want to swim?" if round >= 30:
                 call check_who_is_present
 
@@ -741,8 +727,6 @@ label study_room:
 
         menu:
             extend ""
-            "Chat" if time_index > 2:
-                call chat
             "Wait":
                 if time_index > 2:
                     "You probably don't want to be here when Xavier gets in."

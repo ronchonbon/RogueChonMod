@@ -698,7 +698,7 @@ image Jean_titjob_hair_animation5:
         repeat
 
 layeredimage Jean_sprite titjob:
-    # if JeanX.Clothes["bra"].string in ["green_bra", "lace_bra"]:
+    # if JeanX.Clothes["bra"].string in ["green_bra", "green_lace_bra"]:
     #     "Jean_titjob_bra_back_animation[JeanX.primary_Action.speed]" pos (0.0, -0.025)
 
     always:

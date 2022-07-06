@@ -397,7 +397,7 @@ label Storm_Monogamy:
                 ch_s "Very well, for now. . ."
             elif approval_check(StormX, 700, "O", taboo_modifier=0):
 
-                $ StormX.change_face("sly", 1,eyes = "side")
+                $ StormX.change_face("sly", 1, eyes = "side")
                 ch_s "Fine."
             else:
 
@@ -411,7 +411,7 @@ label Storm_Monogamy:
         "Don't hook up with other girls." if "monogamous" not in StormX.traits:
             if approval_check(StormX, 900, "O", taboo_modifier=0):
 
-                $ StormX.change_face("sly", 1,eyes = "side")
+                $ StormX.change_face("sly", 1, eyes = "side")
                 ch_s "If that is what you want."
             elif StormX.thirst >= 60 and not approval_check(StormX, 1700, "LO", taboo_modifier=0):
 
@@ -422,7 +422,7 @@ label Storm_Monogamy:
                 return
             elif approval_check(StormX, 600, "O", taboo_modifier=0):
 
-                $ StormX.change_face("sly", 1,eyes = "side")
+                $ StormX.change_face("sly", 1, eyes = "side")
                 ch_s "Fine."
             elif approval_check(StormX, 1400, "LO", taboo_modifier=0):
 
@@ -430,7 +430,7 @@ label Storm_Monogamy:
                 ch_s "Take care with your words, but I will consider it."
             else:
 
-                $ StormX.change_face("sly", 1,brows = "confused")
+                $ StormX.change_face("sly", 1, brows = "confused")
                 ch_s "I would watch your tone."
                 return
             if "monogamous" not in StormX.daily_history:
@@ -439,13 +439,13 @@ label Storm_Monogamy:
             $ StormX.traits.append("monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in StormX.traits:
             if approval_check(StormX, 700, "O", taboo_modifier=0):
-                $ StormX.change_face("sly", 1,eyes = "side")
+                $ StormX.change_face("sly", 1, eyes = "side")
                 ch_s ". . . ok then."
             elif approval_check(StormX, 800, "L", taboo_modifier=0):
                 $ StormX.change_face("sly", 1)
                 ch_s "Fine. . ."
             else:
-                $ StormX.change_face("sly", 1,brows = "confused")
+                $ StormX.change_face("sly", 1, brows = "confused")
                 if "monogamous" not in StormX.daily_history:
                     call change_Girl_stat(StormX, "love", -2)
                 ch_s "It sounds like I have some weekend plans to make then."
@@ -463,7 +463,7 @@ label Storm_Monogamy:
 label Storm_Jumped:
 
     ch_p "Hey, Remember that time you threw yourself at me?"
-    $ StormX.change_face("sly", 1,brows = "confused")
+    $ StormX.change_face("sly", 1, brows = "confused")
     menu:
         ch_s "Yeah?"
         "Could you maybe just ask instead?" if "chill" not in StormX.traits:
@@ -480,11 +480,11 @@ label Storm_Jumped:
                 if "chill" not in StormX.daily_history:
                     call change_Girl_stat(StormX, "love", 1)
                 ch_s "I am sorry, but I have needs. . ."
-                $ StormX.change_face("sly", 1,eyes = "side")
+                $ StormX.change_face("sly", 1, eyes = "side")
                 ch_s "I will -try- to keep them in check. . ."
             elif approval_check(StormX, 500, "O", taboo_modifier=0):
 
-                $ StormX.change_face("sly", 1,eyes = "side")
+                $ StormX.change_face("sly", 1, eyes = "side")
                 ch_s "I am sorry about that. . ."
             else:
 
@@ -498,7 +498,7 @@ label Storm_Jumped:
         "Don't bother me like that." if "chill" not in StormX.traits:
             if approval_check(StormX, 800, "O", taboo_modifier=0):
 
-                $ StormX.change_face("sly", 1,eyes = "side")
+                $ StormX.change_face("sly", 1, eyes = "side")
                 ch_s "Very well."
             elif StormX.thirst >= 60 and not approval_check(StormX, 500, "O", taboo_modifier=0):
 
@@ -509,7 +509,7 @@ label Storm_Jumped:
                 return
             elif approval_check(StormX, 400, "O", taboo_modifier=0):
 
-                $ StormX.change_face("sly", 1,eyes = "side")
+                $ StormX.change_face("sly", 1, eyes = "side")
                 ch_s "Fine. . ."
             elif approval_check(StormX, 500, "LO", taboo_modifier=0) and not approval_check(StormX, 500, "I", taboo_modifier=0):
 
@@ -530,10 +530,10 @@ label Storm_Jumped:
                 $ StormX.change_face("sly", 1)
                 ch_s "Noted. . ."
             elif approval_check(StormX, 700, "O", taboo_modifier=0):
-                $ StormX.change_face("sly", 1,eyes = "side")
+                $ StormX.change_face("sly", 1, eyes = "side")
                 ch_s "Very well. . ."
             else:
-                $ StormX.change_face("sly", 1,brows = "confused")
+                $ StormX.change_face("sly", 1, brows = "confused")
                 if "chill" not in StormX.daily_history:
                     call change_Girl_stat(StormX, "love", -2)
                 ch_s "If I find myself in need, certainly."
@@ -1089,7 +1089,7 @@ label Storm_Chitchat(O=0, Options = ["default", "default", "default"]):
         menu:
             extend ""
             "Hey. . .I'm the best there is at what I do.":
-                $ StormX.change_face("bemused", 1,eyes = "leftside")
+                $ StormX.change_face("bemused", 1, eyes = "leftside")
                 ch_s "Well, one of the best, perhaps."
                 $ StormX.change_face("smile", 1)
                 ch_s "But we'll get you there. . ."

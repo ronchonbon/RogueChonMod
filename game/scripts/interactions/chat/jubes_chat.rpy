@@ -383,7 +383,7 @@ label Jubes_Monogamy:
                 ch_v "Fine, I'll be more careful. . ."
             elif approval_check(JubesX, 700, "O", taboo_modifier=0):
 
-                $ JubesX.change_face("sly", 1,eyes = "side")
+                $ JubesX.change_face("sly", 1, eyes = "side")
                 ch_v "Sure."
             else:
 
@@ -397,7 +397,7 @@ label Jubes_Monogamy:
         "Don't hook up with other girls." if "monogamous" not in JubesX.traits:
             if approval_check(JubesX, 900, "O", taboo_modifier=0):
 
-                $ JubesX.change_face("sly", 1,eyes = "side")
+                $ JubesX.change_face("sly", 1, eyes = "side")
                 ch_v "Fine."
             elif JubesX.thirst >= 60 and not approval_check(JubesX, 1700, "LO", taboo_modifier=0):
 
@@ -408,7 +408,7 @@ label Jubes_Monogamy:
                 return
             elif approval_check(JubesX, 600, "O", taboo_modifier=0):
 
-                $ JubesX.change_face("sly", 1,eyes = "side")
+                $ JubesX.change_face("sly", 1, eyes = "side")
                 ch_v "If you insist."
             elif approval_check(JubesX, 1400, "LO", taboo_modifier=0):
 
@@ -416,7 +416,7 @@ label Jubes_Monogamy:
                 ch_v "Yeah, ok, but ask nicely next time."
             else:
 
-                $ JubesX.change_face("sly", 1,brows = "confused")
+                $ JubesX.change_face("sly", 1, brows = "confused")
                 ch_v "Nah."
                 return
             if "monogamous" not in JubesX.daily_history:
@@ -425,13 +425,13 @@ label Jubes_Monogamy:
             $ JubesX.traits.append("monogamous")
         "It's ok if you hook up with other girls." if "monogamous" in JubesX.traits:
             if approval_check(JubesX, 700, "O", taboo_modifier=0):
-                $ JubesX.change_face("sly", 1,eyes = "side")
+                $ JubesX.change_face("sly", 1, eyes = "side")
                 ch_v "Cool, cool."
             elif approval_check(JubesX, 800, "L", taboo_modifier=0):
                 $ JubesX.change_face("sly", 1)
                 ch_v "Ok, but make sure you make it up to me. . ."
             else:
-                $ JubesX.change_face("sly", 1,brows = "confused")
+                $ JubesX.change_face("sly", 1, brows = "confused")
                 if "monogamous" not in JubesX.daily_history:
                     call change_Girl_stat(JubesX, "love", -2)
                 ch_v "Nice. . ."
@@ -449,7 +449,7 @@ label Jubes_Monogamy:
 label Jubes_Jumped:
 
     ch_p "Hey, Remember that time you threw yourself at me?"
-    $ JubesX.change_face("sly", 1,brows = "confused")
+    $ JubesX.change_face("sly", 1, brows = "confused")
     menu:
         ch_v "Yeah?"
         "Could you maybe just ask instead?" if "chill" not in JubesX.traits:
@@ -466,11 +466,11 @@ label Jubes_Jumped:
                 if "chill" not in JubesX.daily_history:
                     call change_Girl_stat(JubesX, "love", 1)
                 ch_v "Sorry, I. . . have needs. . ."
-                $ JubesX.change_face("sly", 1,eyes = "side")
+                $ JubesX.change_face("sly", 1, eyes = "side")
                 ch_v "I'll do better. . ."
             elif approval_check(JubesX, 500, "O", taboo_modifier=0):
 
-                $ JubesX.change_face("sly", 1,eyes = "side")
+                $ JubesX.change_face("sly", 1, eyes = "side")
                 ch_v "Sorry. . ."
             else:
 
@@ -484,7 +484,7 @@ label Jubes_Jumped:
         "Don't bother me like that." if "chill" not in JubesX.traits:
             if approval_check(JubesX, 800, "O", taboo_modifier=0):
 
-                $ JubesX.change_face("sly", 1,eyes = "side")
+                $ JubesX.change_face("sly", 1, eyes = "side")
                 ch_v "Fine."
             elif JubesX.thirst >= 60 and not approval_check(JubesX, 500, "O", taboo_modifier=0):
 
@@ -495,7 +495,7 @@ label Jubes_Jumped:
                 return
             elif approval_check(JubesX, 400, "O", taboo_modifier=0):
 
-                $ JubesX.change_face("sly", 1,eyes = "side")
+                $ JubesX.change_face("sly", 1, eyes = "side")
                 ch_v "Sure. . ."
             elif approval_check(JubesX, 500, "LO", taboo_modifier=0) and not approval_check(JubesX, 500, "I", taboo_modifier=0):
 
@@ -516,10 +516,10 @@ label Jubes_Jumped:
                 $ JubesX.change_face("sly", 1)
                 ch_v "Game on. . ."
             elif approval_check(JubesX, 700, "O", taboo_modifier=0):
-                $ JubesX.change_face("sly", 1,eyes = "side")
+                $ JubesX.change_face("sly", 1, eyes = "side")
                 ch_v "You got it!"
             else:
-                $ JubesX.change_face("sly", 1,brows = "confused")
+                $ JubesX.change_face("sly", 1, brows = "confused")
                 if "chill" not in JubesX.daily_history:
                     call change_Girl_stat(JubesX, "love", -2)
                 ch_v "Yeah, we'll see. . ."

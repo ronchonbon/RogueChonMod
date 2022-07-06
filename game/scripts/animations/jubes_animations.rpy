@@ -576,7 +576,7 @@ layeredimage Jubes_sprite titjob:
     # if JubesX.Clothes["jacket"].string:
     #     "Jubes_titjob_jacket_back_animation[JubesX.primary_Action.speed]"
     #
-    # if JubesX.Clothes["bra"].string in ["sports_bra", "bikini_top"]:
+    # if JubesX.Clothes["bra"].string in ["blue_sports_bra", "pink_bikini_top"]:
     #     "Jubes_titjob_bra_back_animation[JubesX.primary_Action.speed]"
 
     always:

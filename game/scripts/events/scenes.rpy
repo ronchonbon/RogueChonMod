@@ -106,7 +106,7 @@ label Breakup(Girl=0, Other=0, Anger=0, temp_Girls = []):
             call change_Girl_stat(Girl, "love", -15)
             call change_Girl_stat(Girl, "obedience", 5)
             call change_Girl_stat(Girl, "obedience", 5)
-            call change_Girl_stat(Girl, "obedience", 200,5)
+            call change_Girl_stat(Girl, "obedience", 200, 5)
             call change_Girl_stat(Girl, "inhibition", -5)
             $ Anger += 1
 
@@ -936,7 +936,7 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
         "Don't you like her?":
 
             call change_Girl_stat(Girl, "obedience", 30)
-            if B >= 100 or approval_check(Girl,500, "I"):
+            if B >= 100 or approval_check(Girl, 500, "I"):
 
                 $ Girl.change_face("confused", eyes = "side")
                 call change_Girl_stat(Girl, "inhibition", 25)
@@ -1406,7 +1406,7 @@ label NoFap(Girl=0, TabStore=taboo, counter=0):
 
         if not approval_check(Girl, 800):
 
-            $ Girl.change_face("angry", 2,eyes = "surprised")
+            $ Girl.change_face("angry", 2, eyes = "surprised")
             call change_Girl_stat(Girl, "love", -1)
             call change_Girl_stat(Girl, "obedience", 1)
             call change_Girl_stat(Girl, "obedience", 1)
@@ -1448,7 +1448,7 @@ label NoFap(Girl=0, TabStore=taboo, counter=0):
 
         if not approval_check(Girl, 800):
 
-            $ Girl.change_face("angry", 2,eyes = "surprised")
+            $ Girl.change_face("angry", 2, eyes = "surprised")
             call change_Girl_stat(Girl, "love", -5)
             call change_Girl_stat(Girl, "obedience", 3)
             call change_Girl_stat(Girl, "obedience", 1)
@@ -1573,7 +1573,7 @@ label NoFap(Girl=0, TabStore=taboo, counter=0):
                     call change_Girl_stat(Girl, "obedience", 5)
                     call change_Girl_stat(Girl, "inhibition", 5)
                     call change_Girl_stat(Girl, "lust", 5)
-                $ Girl.change_face("bemused", 2,eyes = "side")
+                $ Girl.change_face("bemused", 2, eyes = "side")
                 if Girl == RogueX:
                     ch_r "Not that I was, but. . . sure."
                 elif Girl == KittyX:
@@ -1694,7 +1694,7 @@ label NoFap(Girl=0, TabStore=taboo, counter=0):
                     call change_Girl_stat(Girl, "obedience", 5)
                     call change_Girl_stat(Girl, "inhibition", 5)
                     call change_Girl_stat(Girl, "lust", 5)
-                $ Girl.change_face("bemused", 2,eyes = "side")
+                $ Girl.change_face("bemused", 2, eyes = "side")
                 if Girl == RogueX:
                     ch_r "It's not like I even do. . ."
                 elif Girl == KittyX:
@@ -1873,7 +1873,7 @@ label NoFap(Girl=0, TabStore=taboo, counter=0):
                 if "askedfap" not in Girl.history:
                     call change_Girl_stat(Girl, "love", 5)
                     call change_Girl_stat(Girl, "obedience", 5)
-                $ Girl.change_face("angry", 2,eyes = "side")
+                $ Girl.change_face("angry", 2, eyes = "side")
                 if Girl == RogueX:
                     ch_r "Damned straight, \"never mind.\""
                 elif Girl == EmmaX:
@@ -2348,7 +2348,7 @@ label Rogue_First_Topless(Silent=0, Templine=0):
                     $ RogueX.mouth = "sad"
                     if Templine in (EmmaX, StormX):
                         if RogueX.likes[Templine.tag] >= 800:
-                            $ RogueX.change_face("sly", 2,eyes = "side")
+                            $ RogueX.change_face("sly", 2, eyes = "side")
                             call change_Girl_stat(RogueX, "obedience", 5)
                             ch_r "Well, I mean they would be quite the handful. . ."
                             $ RogueX.likes[Templine.tag] += 20
@@ -2361,7 +2361,7 @@ label Rogue_First_Topless(Silent=0, Templine=0):
                             $ Templine = "bad"
                     elif Templine == KittyX:
                         if RogueX.likes[KittyX.tag] >= 800:
-                            $ RogueX.change_face("sly", 2,eyes = "side")
+                            $ RogueX.change_face("sly", 2, eyes = "side")
                             call change_Girl_stat(RogueX, "obedience", 5)
                             ch_r "They are kind of adorable. . ."
                             $ RogueX.likes[KittyX.tag] += 20
@@ -2497,7 +2497,7 @@ label Kitty_First_Topless(Silent=0, Templine=0):
                     $ KittyX.mouth = "sad"
                     if Templine in (EmmaX, StormX):
                         if KittyX.likes[Templine.tag] >= 800:
-                            $ KittyX.change_face("sly", 2,eyes = "side")
+                            $ KittyX.change_face("sly", 2, eyes = "side")
                             call change_Girl_stat(KittyX, "obedience", 5)
                             ch_k "Yeah, like you just wanna shove your head into there. . ."
                             $ KittyX.likes[Templine.tag] += 20
@@ -2510,7 +2510,7 @@ label Kitty_First_Topless(Silent=0, Templine=0):
                             $ Templine = "bad"
                     elif Templine:
                         if KittyX.likes[Templine.tag] >= 800:
-                            $ KittyX.change_face("sly", 2,eyes = "side")
+                            $ KittyX.change_face("sly", 2, eyes = "side")
                             call change_Girl_stat(KittyX, "obedience", 5)
                             ch_k "Yeah, like two ripe apples. . . I mean-"
                             $ KittyX.likes[Templine.tag] += 20
@@ -2681,7 +2681,7 @@ label Emma_First_Topless(Silent=0, Templine=0):
                     $ EmmaX.mouth = "sad"
                     if Templine == KittyX:
                         if EmmaX.likes[KittyX.tag] >= 800:
-                            $ EmmaX.change_face("sly", 2,eyes = "side")
+                            $ EmmaX.change_face("sly", 2, eyes = "side")
                             call change_Girl_stat(EmmaX, "obedience", 5)
                             ch_e "They are rather . . . pert. . ."
                             $ EmmaX.likes[KittyX.tag] += 20
@@ -2695,7 +2695,7 @@ label Emma_First_Topless(Silent=0, Templine=0):
 
                     elif Templine == StormX:
                         if EmmaX.likes[Templine.tag] >= 800:
-                            $ EmmaX.change_face("sly", 2,eyes = "side")
+                            $ EmmaX.change_face("sly", 2, eyes = "side")
                             call change_Girl_stat(EmmaX, "obedience", 5)
                             ch_e "They are lovely, but. . ."
                             $ EmmaX.likes[Templine.tag] += 20
@@ -2708,7 +2708,7 @@ label Emma_First_Topless(Silent=0, Templine=0):
                             $ Templine = "bad"
                     elif Templine:
                         if EmmaX.likes[Templine.tag] >= 800:
-                            $ EmmaX.change_face("sly", 2,eyes = "side")
+                            $ EmmaX.change_face("sly", 2, eyes = "side")
                             call change_Girl_stat(EmmaX, "obedience", 5)
                             ch_e "They are rather . . . ripe. . ."
                             $ EmmaX.likes[Templine.tag] += 20
@@ -2849,7 +2849,7 @@ label Laura_First_Topless(Silent=0, Templine=0):
             "Your tits? They look great.":
                 call change_Girl_stat(LauraX, "love", 20)
                 call change_Girl_stat(LauraX, "inhibition", 20)
-                $ LauraX.change_face("sexy", 1,eyes = "down")
+                $ LauraX.change_face("sexy", 1, eyes = "down")
                 ch_l "Huh. I mean I guess so. . ."
                 $ LauraX.change_face("smile", 0)
                 call change_Girl_stat(LauraX, "love", 20)
@@ -2892,7 +2892,7 @@ label Laura_First_Topless(Silent=0, Templine=0):
                     $ LauraX.mouth = "sad"
                     if Templine in (EmmaX, StormX):
                         if LauraX.likes[Templine.tag] >= 800:
-                            $ LauraX.change_face("sly", 2,eyes = "side")
+                            $ LauraX.change_face("sly", 2, eyes = "side")
                             call change_Girl_stat(LauraX, "obedience", 5)
                             ch_l "They are kinda huge. . ."
                             $ LauraX.likes[Templine.tag] += 20
@@ -2906,7 +2906,7 @@ label Laura_First_Topless(Silent=0, Templine=0):
 
                     elif Templine == KittyX:
                         if LauraX.likes[KittyX.tag] >= 800:
-                            $ LauraX.change_face("sly", 2,eyes = "side")
+                            $ LauraX.change_face("sly", 2, eyes = "side")
                             call change_Girl_stat(LauraX, "obedience", 5)
                             ch_l "She is very. . . streamlined. . ."
                             $ LauraX.likes[KittyX.tag] += 20
@@ -3053,7 +3053,7 @@ label Jean_First_Topless(Silent=0, Templine=0):
             "Yeah, they look amazing.":
                 call change_Girl_stat(JeanX, "love", 10)
                 call change_Girl_stat(JeanX, "inhibition", 20)
-                $ JeanX.change_face("sexy", 1,eyes = "down")
+                $ JeanX.change_face("sexy", 1, eyes = "down")
                 ch_j "Yeah, they are pretty tight. . ."
                 $ JeanX.change_face("smile", 0)
                 call change_Girl_stat(JeanX, "obedience", 20)
@@ -3108,7 +3108,7 @@ label Jean_First_Topless(Silent=0, Templine=0):
                     $ JeanX.mouth = "sad"
                     if Templine in (EmmaX, StormX):
                         if JeanX.likes[Templine.tag] >= 700:
-                            $ JeanX.change_face("sly", 2,eyes = "side")
+                            $ JeanX.change_face("sly", 2, eyes = "side")
                             ch_j "Well, they are. . . heavy. . ."
                             $ JeanX.likes[Templine.tag] += 20
                         else:
@@ -3120,7 +3120,7 @@ label Jean_First_Topless(Silent=0, Templine=0):
 
                     elif Templine == KittyX:
                         if JeanX.likes[KittyX.tag] >= 700:
-                            $ JeanX.change_face("sly", 2,eyes = "side")
+                            $ JeanX.change_face("sly", 2, eyes = "side")
                             ch_j "She is very. . . cute. . ."
                             $ JeanX.likes[KittyX.tag] += 20
                         else:
@@ -3130,7 +3130,7 @@ label Jean_First_Topless(Silent=0, Templine=0):
                             $ Templine = "bad"
                     else:
                         if JeanX.likes[Templine.tag] >= 700:
-                            $ JeanX.change_face("sly", 2,eyes = "side")
+                            $ JeanX.change_face("sly", 2, eyes = "side")
                             ch_j "She is very. . . petite. . ."
                             $ JeanX.likes[Templine.tag] += 20
                         else:
@@ -3303,7 +3303,7 @@ label Jubes_First_Topless(Silent=0, Templine=0):
                 call change_Girl_stat(JubesX, "inhibition", 20)
                 $ JubesX.change_face("smile", 2)
                 pause 0.5
-                $ JubesX.change_face("sexy", 1,eyes = "down")
+                $ JubesX.change_face("sexy", 1, eyes = "down")
                 ch_v "Ah! Um. . . yeah, I guess. . ."
                 $ JubesX.change_face("smile")
                 call change_Girl_stat(JubesX, "love", 20)
@@ -3347,7 +3347,7 @@ label Jubes_First_Topless(Silent=0, Templine=0):
                     $ JubesX.mouth = "sad"
                     if Templine in (EmmaX, StormX):
                         if JubesX.likes[Templine.tag] >= 800:
-                            $ JubesX.change_face("sly", 2,eyes = "side")
+                            $ JubesX.change_face("sly", 2, eyes = "side")
                             call change_Girl_stat(JubesX, "obedience", 5)
                             ch_v "Well they are really ginormous. . ."
                             $ JubesX.likes[Templine.tag] += 20
@@ -3361,7 +3361,7 @@ label Jubes_First_Topless(Silent=0, Templine=0):
 
                     elif Templine == KittyX:
                         if JubesX.likes[KittyX.tag] >= 800:
-                            $ JubesX.change_face("sly", 2,eyes = "side")
+                            $ JubesX.change_face("sly", 2, eyes = "side")
                             call change_Girl_stat(JubesX, "obedience", 5)
                             ch_v ". . . I guess they are really cute. . ."
                             $ JubesX.likes[KittyX.tag] += 20

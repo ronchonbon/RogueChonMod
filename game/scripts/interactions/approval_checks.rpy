@@ -32,7 +32,7 @@ label forced_approval_checks(Girl, action):
 
 label action_approval_checks(Girl, action):
     if action == "kiss":
-        $ approval = approval_check(Girl, 700, taboo_modifier = 1, Alt = [[RogueX,JeanX],500])
+        $ approval = approval_check(Girl, 700, taboo_modifier = 1, Alt = [[RogueX,JeanX], 500])
     elif action == "masturbation":
         $ approval = approval_check(Girl, 1200, taboo_modifier = 2)
     elif action == "fondle_thighs":
