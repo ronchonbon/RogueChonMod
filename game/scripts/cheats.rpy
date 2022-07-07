@@ -1,6 +1,4 @@
 label cheat_menu(Girl):
-    $ counter = 0
-
     while True:
         menu:
             "[Girl.name]: Love: [Girl.love], Obedience: [Girl.obedience], Inhibition: [Girl.inhibition], Lust: [Girl.lust], Location: [Girl.location]"
@@ -92,12 +90,12 @@ label wardrobe_editor(Girl):
                                 call show_full_body(Girl)
                         "Sex":
                             if not renpy.showing(Girl.tag + " sex"):
-                                call show_sex(Girl, "sex")
+                                call show_sex(Girl)
                             else:
                                 call show_full_body(Girl)
                         "Doggy":
                             if not renpy.showing(Girl.tag + " doggy"):
-                                call show_sex(Girl, "anal")
+                                call show_doggy(Girl)
                             else:
                                 call show_full_body(Girl)
                         "Back":

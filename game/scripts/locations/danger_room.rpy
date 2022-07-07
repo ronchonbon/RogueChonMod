@@ -33,10 +33,10 @@ label training:
                     " You decide to test yourself by facing off against Magneto solo. It goes about as well as you’d expect.",
                     " You use the Danger Room’s holograms to relive some of the original X-Men’s biggest battles. You learn quite a bit about teamwork.",
                     " Beast is teaching a class on parkour. You take part and pick up a few pointers. You’re no Spider-Man, but at least you pick up a few things.",
-                    " You participate in an emergency drill. You pick up quite a few tips about first aid, triage and the proper way to move injured people.",
+                    " You participate in an emergency drill. You pick up quite a few tips about first aid, triage, and the proper way to move injured people.",
                     " You take part in an urban emergency situation exercise. Cyclops takes the time to explain to you how to use cover to get close enough to use your powers.",
                     " You take part in a jungle simulation exercise under Wolverine. You learn some basic survival techniques, but you privately hope you never need them.",
-                    " Your team fight a simulation of Magneto."])
+                    " Your team fights a simulation of Magneto."])
 
         "[line]"
 

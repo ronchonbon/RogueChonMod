@@ -1,4 +1,5 @@
 define ch_p = Character('[Player.name]', color = "#87CEEB", show_two_window = True)
+define ch_p_text = Character('[Player.name]', kind = nvl)
 
 define ch_r = Character('[RogueX.name]', color = "#85bb65", image = "Rogue_sprite", show_two_window = True)
 define ch_k = Character('[KittyX.name]', color = "#F5A9D0", image = "Kitty_sprite", show_two_window = True)
@@ -8,6 +9,15 @@ define ch_j = Character('[JeanX.name]', color = "#b2d950", image = "Jean_sprite"
 define ch_s = Character('[StormX.name]', color = "#b2d950", image = "Storm_sprite", show_two_window = True)
 define ch_v = Character('[JubesX.name]', color = "#b2d950", image = "Jubes_sprite", show_two_window = True)
 define ch_m = Character('[MystiqueX.name]', color = "b2d950", image = "Mystique_sprite", show_two_window = True)
+
+define ch_r_text = Character('[RogueX.name]', kind = nvl)
+define ch_k_text = Character('[KittyX.name]', kind = nvl)
+define ch_e_text = Character('[EmmaX.name]', kind = nvl)
+define ch_l_text = Character('[LauraX.name]', kind = nvl)
+define ch_j_text = Character('[JeanX.name]', kind = nvl)
+define ch_s_text = Character('[StormX.name]', kind = nvl)
+define ch_v_text = Character('[JubesX.name]', kind = nvl)
+define ch_m_text = Character('[MystiqueX.name]', kind = nvl)
 
 define ch_x = Character('[Xavier.name]', color = "#a09400", image = "Xavier_sprite", show_two_window = True)
 define ch_b = Character('Dr. McCoy', color = "#1033b2", show_two_window = True)

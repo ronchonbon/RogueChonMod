@@ -15,6 +15,8 @@ init -1 python hide:
     config.optimize_texture_bounds = True
     config.image_cache_size = 200
 
+    config.narrator_menu = True
+
     theme.tv(
         widget = "#6A7183",
         widget_hover = "#1A2B47",
@@ -29,12 +31,10 @@ init -1 python hide:
         rounded_window = False)
 
     style.window.background = Frame("images/chatbox.png", 12, 12)
-
     style.window.left_margin = 6
     style.window.right_margin = 6
     style.window.top_margin = 6
     style.window.bottom_margin = 6
-
     style.window.left_padding = 25
     style.window.right_padding = 25
     style.window.top_padding = 25
@@ -44,14 +44,13 @@ init -1 python hide:
     style.window.yminimum = 5
 
     style.say_who_window.background = Frame("images/Nametag.png", 20, 20) #namebox.png
-    style.say_who_window.xalign = 0.05
-    style.say_who_window.yalign = -100
-    style.say_who_window.xminimum = 50
-
     style.say_who_window.left_padding = 10
     style.say_who_window.right_padding = 10
     style.say_who_window.top_padding = 10
     style.say_who_window.bottom_padding = 10
+    style.say_who_window.xalign = 0.05
+    style.say_who_window.yalign = -100
+    style.say_who_window.xminimum = 50
 
     style.say_balloon = Style(style.default)
     style.say_balloon.background = Frame("images/Wordballoon.png", 50, 50)
@@ -59,9 +58,9 @@ init -1 python hide:
     style.say_balloon.right_padding = 25
     style.say_balloon.top_padding = 25
     style.say_balloon.bottom_padding = 25
-    style.say_balloon.yminimum = 0
     style.say_balloon.xminimum = 100
     style.say_balloon.xmaximum = 450
+    style.say_balloon.yminimum = 0
     style.say_balloon.font = "ltromatic.ttf"
 
     style.textbox = Style(style.default)

@@ -49,6 +49,8 @@ label before_Action(Girl, Action_type, context = None):
 
         if Action_type == "handjob":
             call show_handjob(Girl)
+        elif Action_type == "footjob":
+            call show_sex(Girl)
         elif Action_type == "titjob":
             call show_titjob(Girl)
         elif Action_type == "blowjob":
@@ -89,7 +91,7 @@ label Action_cycle(Girl, Action_type):
         $ counter += 1
         $ round -= 1
 
-        if (Action_type in ["blowjob"] and Action_type_speed) or Action_type in ["sex", "anal"]:
+        if (Action_type in ["blowjob"] and Girl.primary_Action.speed) or (Action_type in ["sex", "anal"] and Player.primary_Action.speed):
             $ Player.cock_wet = True
             $ Player.spunk = False if (Player.spunk and not Girl.spunk["pussy"]) else Player.spunk
 

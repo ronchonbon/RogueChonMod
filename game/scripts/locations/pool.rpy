@@ -89,8 +89,8 @@ label swim:
     elif D20 == 10:
         "You decide to make use of the diving board. You do a couple of dives before taking it easy and just swimming around."
 
-    call change_Present_stat("love", 80, 3)
-    call change_Present_stat("lust", 30, 5)
+    call change_Present_stat("love", 3)
+    call change_Present_stat("lust", 5)
 
     $ round -= 20 if round >= 20 else round
 
@@ -116,19 +116,19 @@ label sunbathe:
     while not chosen:
         menu:
             "With whom?"
-            "[RogueX.name]" if Player.location == RogueX.location:
+            "[RogueX.name]" if Player.location == RogueX.location and RogueX not in Sunbathers:
                 $ Sunbathers.append(RogueX)
-            "[KittyX.name]" if Player.location == KittyX.location:
+            "[KittyX.name]" if Player.location == KittyX.location and KittyX not in Sunbathers:
                 $ Sunbathers.append(KittyX)
-            "[EmmaX.name]" if Player.location == EmmaX.location:
+            "[EmmaX.name]" if Player.location == EmmaX.location and EmmaX not in Sunbathers:
                 $ Sunbathers.append(EmmaX)
-            "[LauraX.name]" if Player.location == LauraX.location:
+            "[LauraX.name]" if Player.location == LauraX.location and LauraX not in Sunbathers:
                 $ Sunbathers.append(LauraX)
-            "[JeanX.name]" if Player.location == JeanX.location:
+            "[JeanX.name]" if Player.location == JeanX.location and JeanX not in Sunbathers:
                 $ Sunbathers.append(JeanX)
-            "[StormX.name]" if Player.location == StormX.location:
+            "[StormX.name]" if Player.location == StormX.location and StormX not in Sunbathers:
                 $ Sunbathers.append(StormX)
-            "[JubesX.name]" if Player.location == JubesX.location:
+            "[JubesX.name]" if Player.location == JubesX.location and JubesX not in Sunbathers:
                 $ Sunbathers.append(JubesX)
             "Done.":
                 $ chosen = True
@@ -153,11 +153,13 @@ label sunbathe:
         nonnude_Girls = []
 
         for G in Sunbathers:
-            if G.breasts_covered or G.pussy_covered:
+            if G.Outfit.breasts_covered or G.Outfit.pussy_covered:
                 nonnude_Girls.append(G)
 
     if len(nonnude_Girls) > 1:
-        ch_p "You [len(nonnude_Girls)] don't want to get tanlines, right? You could. . ."
+        $ line = len(nonnude_Girls)
+
+        ch_p "You [line] don't want to get tanlines, right? You could. . ."
     else:
         ch_p "You don't want to get tanlines, right? You could. . ."
 
@@ -184,19 +186,19 @@ label skinny_dip:
     while not chosen:
         menu:
             "With whom?"
-            "[RogueX.name]" if Player.location == RogueX.location:
+            "[RogueX.name]" if Player.location == RogueX.location and RogueX not in Dippers:
                 $ Dippers.append(RogueX)
-            "[KittyX.name]" if Player.location == KittyX.location:
+            "[KittyX.name]" if Player.location == KittyX.location and KittyX not in Dippers:
                 $ Dippers.append(KittyX)
-            "[EmmaX.name]" if Player.location == EmmaX.location:
+            "[EmmaX.name]" if Player.location == EmmaX.location and EmmaX not in Dippers:
                 $ Dippers.append(EmmaX)
-            "[LauraX.name]" if Player.location == LauraX.location:
+            "[LauraX.name]" if Player.location == LauraX.location and LauraX not in Dippers:
                 $ Dippers.append(LauraX)
-            "[JeanX.name]" if Player.location == JeanX.location:
+            "[JeanX.name]" if Player.location == JeanX.location and JeanX not in Dippers:
                 $ Dippers.append(JeanX)
-            "[StormX.name]" if Player.location == StormX.location:
+            "[StormX.name]" if Player.location == StormX.location and StormX not in Dippers:
                 $ Dippers.append(StormX)
-            "[JubesX.name]" if Player.location == JubesX.location:
+            "[JubesX.name]" if Player.location == JubesX.location and JubesX not in Dippers:
                 $ Dippers.append(JubesX)
             "Done.":
                 $ chosen = True

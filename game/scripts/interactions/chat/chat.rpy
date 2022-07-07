@@ -1,220 +1,227 @@
 label chat_menu(Girl):
     call shift_focus(Girl)
 
-    menu:
-        "Ask [Girl.name] to leave" if Girl.location == Player.location:
-            call dismiss_Girl(Girl)
+    $ chatting = True
 
-            return
-        "Romance her":
-            menu:
-                "Sex Menu" if Girl.location == Player.location:
-                    if Girl.love >= Girl.obedience:
-                        ch_p "Did you want to fool around?"
-                    else:
-                        ch_p "I'd like to get naughty."
+    while chatting:
+        menu:
+            "Ask [Girl.name] to leave" if Girl.location == Player.location:
+                call dismiss_Girl(Girl)
 
-                    if approval_check(Girl, 600, "LI"):
-                        $ Girl.change_face("sexy")
+                $ chatting = False
+            "Romance her":
+                menu:
+                    "Sex Menu" if Girl.location == Player.location:
+                        if Girl.love >= Girl.obedience:
+                            ch_p "Did you want to fool around?"
+                        else:
+                            ch_p "I'd like to get naughty."
 
-                        if Girl == RogueX:
-                            ch_r "Heh, all right, [Girl.player_petname]."
-                        elif Girl == KittyX:
-                            ch_k "Mmmm, ok, [Girl.player_petname]."
-                        elif Girl == EmmaX:
-                            ch_e "Perhaps. . ."
-                        elif Girl == LauraX:
-                            ch_l "Cool."
-                        elif Girl == JeanX:
-                            ch_j "Yeah?"
-                        elif Girl == StormX:
-                            ch_s "Oh?"
-                        elif Girl == JubesX:
-                            ch_v "Yeah?"
+                        if approval_check(Girl, 600, "LI"):
+                            $ Girl.change_face("sexy")
 
-                        call enter_main_sex_menu(Girl)
+                            if Girl == RogueX:
+                                ch_r "Heh, all right, [Girl.player_petname]."
+                            elif Girl == KittyX:
+                                ch_k "Mmmm, ok, [Girl.player_petname]."
+                            elif Girl == EmmaX:
+                                ch_e "Perhaps. . ."
+                            elif Girl == LauraX:
+                                ch_l "Cool."
+                            elif Girl == JeanX:
+                                ch_j "Yeah?"
+                            elif Girl == StormX:
+                                ch_s "Oh?"
+                            elif Girl == JubesX:
+                                ch_v "Yeah?"
 
-                        return
-                    elif approval_check(Girl, 400, "OI"):
-                        if Girl == RogueX:
-                            ch_r "If that's what you want, [Girl.player_petname]."
-                        elif Girl == KittyX:
-                            ch_k "Yes, [Girl.player_petname]."
-                        elif Girl == EmmaX:
-                            ch_e "If that's what you want, [Girl.player_petname]."
-                        elif Girl == LauraX:
-                            ch_l "Yes, [Girl.player_petname]."
-                        elif Girl == JeanX:
-                            ch_j "Whatever. . ."
-                        elif Girl == StormX:
-                            ch_s "Fine."
-                        elif Girl == JubesX:
-                            ch_v "What would you like, [Girl.player_petname]?"
+                            call enter_main_sex_menu(Girl)
+                        elif approval_check(Girl, 400, "OI"):
+                            if Girl == RogueX:
+                                ch_r "If that's what you want, [Girl.player_petname]."
+                            elif Girl == KittyX:
+                                ch_k "Yes, [Girl.player_petname]."
+                            elif Girl == EmmaX:
+                                ch_e "If that's what you want, [Girl.player_petname]."
+                            elif Girl == LauraX:
+                                ch_l "Yes, [Girl.player_petname]."
+                            elif Girl == JeanX:
+                                ch_j "Whatever. . ."
+                            elif Girl == StormX:
+                                ch_s "Fine."
+                            elif Girl == JubesX:
+                                ch_v "What would you like, [Girl.player_petname]?"
 
-                        call enter_main_sex_menu(Girl)
+                            call enter_main_sex_menu(Girl)
+                        else:
+                            if Girl == RogueX:
+                                ch_r "I'm not really interested, [Girl.player_petname]."
+                            elif Girl == KittyX:
+                                ch_k "No thanks, [Girl.player_petname]."
+                            elif Girl == EmmaX:
+                                ch_e "No thank you, [Girl.player_petname]."
+                            elif Girl == LauraX:
+                                ch_l "No thanks, [Girl.player_petname]."
+                            elif Girl == JeanX:
+                                ch_j "Not interested."
+                            elif Girl == StormX:
+                                ch_s "I am uninterested."
+                            elif Girl == JubesX:
+                                ch_v "Nah, not into it."
+                    "Sex Menu (locked)" if Girl.location != Player.location:
+                        pass
+                    "Back":
+                        pass
+            "Talk with her":
+                menu:
+                    "Could I get your number?" if Girl not in Player.Phonebook:
+                        if Girl == EmmaX and approval_check(Girl, 800, "LI"):
+                            ch_e "I don't see why not."
 
-                        return
-                    else:
-                        if Girl == RogueX:
-                            ch_r "I'm not really interested, [Girl.player_petname]."
-                        elif Girl == KittyX:
-                            ch_k "No thanks, [Girl.player_petname]."
-                        elif Girl == EmmaX:
-                            ch_e "No thank you, [Girl.player_petname]."
-                        elif Girl == LauraX:
-                            ch_l "No thanks, [Girl.player_petname]."
-                        elif Girl == JeanX:
-                            ch_j "Not interested."
-                        elif Girl == StormX:
-                            ch_s "I am uninterested."
-                        elif Girl == JubesX:
-                            ch_v "Nah, not into it."
-                "Sex Menu (locked)" if Girl.location != Player.location:
-                    pass
-                "Back":
-                    pass
-        "Talk with her":
-            menu:
-                "Could I get your number?" if Girl not in Player.Phonebook:
-                    if Girl == EmmaX and approval_check(Girl, 800, "LI"):
-                        ch_e "I don't see why not."
+                            $ Player.Phonebook.append(Girl)
+                        elif Girl != EmmaX and(approval_check(Girl, 400, "L") or approval_check(Girl, 200, "I")):
+                            if Girl == RogueX:
+                                ch_r "Sure, I suppose."
+                            elif Girl == KittyX:
+                                ch_k "OMG[Girl.like]sure."
+                            elif Girl == LauraX:
+                                ch_l "Oh, sure."
+                            elif Girl == JeanX:
+                                ch_j "Huh? Ok."
+                            elif Girl == StormX:
+                                ch_s "Oh? Certainly."
+                            elif Girl == JubesX:
+                                ch_v "Sure, yeah."
 
-                        $ Player.Phonebook.append(Girl)
-                    elif Girl != EmmaX and(approval_check(Girl, 400, "L") or approval_check(Girl, 200, "I")):
-                        if Girl == RogueX:
-                            ch_r "Sure, I suppose."
-                        elif Girl == KittyX:
-                            ch_k "OMG[Girl.like]sure."
-                        elif Girl == LauraX:
-                            ch_l "Oh, sure."
-                        elif Girl == JeanX:
-                            ch_j "Huh? Ok."
-                        elif Girl == StormX:
-                            ch_s "Oh? Certainly."
-                        elif Girl == JubesX:
-                            ch_v "Sure, yeah."
+                            $ Player.Phonebook.append(Girl)
+                        elif approval_check(Girl, 200, "O", alternate_thresholds = {EmmaX: 500 - EmmaX.inhibition}):
+                            if Girl == RogueX:
+                                ch_r "If you want it, I guess."
+                            elif Girl == KittyX:
+                                ch_k "[Girl.Like]fine."
+                            elif Girl == EmmaX:
+                                ch_e "Hmm. . . fine, hand me your phone."
+                            elif Girl == LauraX:
+                                ch_l "I guess."
+                            elif Girl == JeanX:
+                                ch_j "Huh? Ok."
+                            elif Girl == StormX:
+                                ch_s "I don't see why not."
+                            elif Girl == JubesX:
+                                ch_v "I guess?"
 
-                        $ Player.Phonebook.append(Girl)
-                    elif approval_check(Girl, 200, "O", alternate_thresholds = {EmmaX: 500 - EmmaX.inhibition}):
-                        if Girl == RogueX:
-                            ch_r "If you want it, I guess."
-                        elif Girl == KittyX:
-                            ch_k "[Girl.Like]fine."
-                        elif Girl == EmmaX:
-                            ch_e "Hmm. . . fine, hand me your phone."
-                        elif Girl == LauraX:
-                            ch_l "I guess."
-                        elif Girl == JeanX:
-                            ch_j "Huh? Ok."
-                        elif Girl == StormX:
-                            ch_s "I don't see why not."
-                        elif Girl == JubesX:
-                            ch_v "I guess?"
+                            $ Player.Phonebook.append(Girl)
+                        else:
+                            if Girl == RogueX:
+                                ch_r "I don't really want you calling me."
+                            elif Girl == KittyX:
+                                ch_k "[Girl.Like]I'd rather not?"
+                            elif Girl == EmmaX:
+                                ch_e "I don't think it's appropriate to give my number out to a student like that."
+                            elif Girl == LauraX:
+                                ch_l "Um, probably not."
+                            elif Girl == JeanX:
+                                ch_j "I'd rather you didn't call me."
+                            elif Girl == StormX:
+                                ch_s "I would rather not."
+                            elif Girl == JubesX:
+                                ch_v "Nah, unlisted."
+                    "Back":
+                        pass
+            "Add her to party" if Girl not in Player.Party and Girl.location == Player.location:
+                ch_p "Could you follow me for a bit?"
 
-                        $ Player.Phonebook.append(Girl)
-                    else:
-                        if Girl == RogueX:
-                            ch_r "I don't really want you calling me."
-                        elif Girl == KittyX:
-                            ch_k "[Girl.Like]I'd rather not?"
-                        elif Girl == EmmaX:
-                            ch_e "I don't think it's appropriate to give my number out to a student like that."
-                        elif Girl == LauraX:
-                            ch_l "Um, probably not."
-                        elif Girl == JeanX:
-                            ch_j "I'd rather you didn't call me."
-                        elif Girl == StormX:
-                            ch_s "I would rather not."
-                        elif Girl == JubesX:
-                            ch_v "Nah, unlisted."
-                "Back":
-                    pass
-        "Add her to party" if Girl not in Player.Party and Girl.location == Player.location:
-            ch_p "Could you follow me for a bit?"
+                if Girl == EmmaX and approval_check(Girl, 1250):
+                    $ Player.Party.append(Girl)
 
-            if Girl == EmmaX and approval_check(Girl, 1250):
-                $ Player.Party.append(Girl)
+                    ch_e "Lead away."
 
-                ch_e "Lead away."
+                if approval_check(Girl, 600, alternate_thresholds = {EmmaX: 900, JeanX: 900}):
+                    $ Player.Party.append(Girl)
 
-                return
+                    if Girl == RogueX:
+                        ch_r "Ok, Where did you want to go?"
+                    elif Girl == KittyX:
+                        ch_k "[Girl.Like]where to?"
+                    elif Girl == EmmaX:
+                        ch_e "You'd better not bore me."
+                    elif Girl == LauraX:
+                        ch_l "Where to?"
+                    elif Girl == JeanX:
+                        ch_j "Um, sure."
+                    elif Girl == StormX:
+                        ch_s "Oh, certainly."
+                    elif Girl == JubesX:
+                        ch_v "Sure, what's up?"
+                elif not approval_check(Girl, 400):
+                    if Girl == RogueX:
+                        ch_r "Um, no thanks."
+                    elif Girl == KittyX:
+                        ch_k "Ew, no."
+                    elif Girl == EmmaX:
+                        ch_e "I can't imagine why I would."
+                    elif Girl == LauraX:
+                        ch_l "No."
+                    elif Girl == JeanX:
+                        ch_j "What? No."
+                    elif Girl == StormX:
+                        ch_s "Hm, no thank you."
+                    elif Girl == JubesX:
+                        ch_v "Nah, not into it."
+                else:
+                    if Girl == RogueX:
+                        ch_r "I'm fine here, thanks."
+                    elif Girl == KittyX:
+                        ch_k "I think I'll stay here."
+                    elif Girl == EmmaX:
+                        ch_e "I'd rather not."
+                    elif Girl == LauraX:
+                        ch_l "I'd rather not."
+                    elif Girl == JeanX:
+                        ch_j "What? No."
+                    elif Girl == StormX:
+                        ch_s "I'm comfortable here."
+                    elif Girl == JubesX:
+                        ch_v "Def not."
+            "Disband party" if Girl in Player.Party:
+                ch_p "Ok, you can leave if you prefer."
 
-            if approval_check(Girl, 600, alternate_thresholds = {EmmaX: 900, JeanX: 900}):
-                $ Player.Party.append(Girl)
-
+                python:
+                    for G in Player.Party:
+                        Player.Party.remove(G)
+            "Never mind.":
                 if Girl == RogueX:
-                    ch_r "Ok, Where did you want to go?"
+                    ch_r "Ok, later then."
                 elif Girl == KittyX:
-                    ch_k "[Girl.Like]where to?"
+                    ch_k "Ok, bye."
                 elif Girl == EmmaX:
-                    ch_e "You'd better not bore me."
+                    ch_e "We'll talk later then."
                 elif Girl == LauraX:
-                    ch_l "Where to?"
+                    ch_l "Ok."
                 elif Girl == JeanX:
-                    ch_j "Um, sure."
+                    ch_j "Ok?"
                 elif Girl == StormX:
-                    ch_s "Oh, certainly."
+                    ch_s "Very well then."
                 elif Girl == JubesX:
-                    ch_v "Sure, what's up?"
+                    ch_v "K. . ."
 
-                return
-            elif not approval_check(Girl, 400):
-                if Girl == RogueX:
-                    ch_r "Um, no thanks."
-                elif Girl == KittyX:
-                    ch_k "Ew, no."
-                elif Girl == EmmaX:
-                    ch_e "I can't imagine why I would."
-                elif Girl == LauraX:
-                    ch_l "No."
-                elif Girl == JeanX:
-                    ch_j "What? No."
-                elif Girl == StormX:
-                    ch_s "Hm, no thank you."
-                elif Girl == JubesX:
-                    ch_v "Nah, not into it."
-            else:
-                if Girl == RogueX:
-                    ch_r "I'm fine here, thanks."
-                elif Girl == KittyX:
-                    ch_k "I think I'll stay here."
-                elif Girl == EmmaX:
-                    ch_e "I'd rather not."
-                elif Girl == LauraX:
-                    ch_l "I'd rather not."
-                elif Girl == JeanX:
-                    ch_j "What? No."
-                elif Girl == StormX:
-                    ch_s "I'm comfortable here."
-                elif Girl == JubesX:
-                    ch_v "Def not."
-        "Disband party" if Girl in Player.Party:
-            ch_p "Ok, you can leave if you prefer."
+                $ chatting = False
 
-            python:
-                for G in Player.Party:
-                    Player.Party.remove(G)
+    return
 
-            return
+label text_menu(Girl):
+    call shift_focus(Girl)
+
+    menu(nvl = True):
+        ch_p_text "Hey."
+        "Come over here.":
+            ch_p_text "Come over here."
+
+            call expression "summon_" + Girl.tag
         "Never mind.":
-            if Girl == RogueX:
-                ch_r "Ok, later then."
-            elif Girl == KittyX:
-                ch_k "Ok, bye."
-            elif Girl == EmmaX:
-                ch_e "We'll talk later then."
-            elif Girl == LauraX:
-                ch_l "Ok."
-            elif Girl == JeanX:
-                ch_j "Ok?"
-            elif Girl == StormX:
-                ch_s "Very well then."
-            elif Girl == JubesX:
-                ch_v "K. . ."
+            ch_p_text "Never mind."
 
-            return
-
-    jump chat_menu
+    return
 
 label dismiss_Girl(Girl):
     if Girl in Player.Party:

@@ -103,7 +103,7 @@ layeredimage Kitty_hair_back:
 
 layeredimage Kitty_head:
     if KittyX.wet:
-        "images/Kitty_standing/Kitty_standing_face_wet_hair_[KittyX.blushing].png"
+        "images/Kitty_standing/Kitty_standing_face_wet_hair[KittyX.blushing].png"
     else:
         "images/Kitty_standing/Kitty_standing_face_[KittyX.Clothes[hair].string][KittyX.blushing].png"
 
@@ -180,23 +180,23 @@ layeredimage Kitty_blowjob_head:
     if KittyX.wet or KittyX.Clothes["hair"].string == "wet_hair":
         "images/Kitty_blowjob/Kitty_blowjob_hair_back.png"
 
-    if not renpy.showing("Kitty_sprite blowjob"):
+    if not renpy.showing("Kitty_sprite blowjob") or KittyX.primary_Action.speed < 2:
         Null()
-    elif KittyX.primary_Action.speed > 1 and (KittyX.wet or KittyX.Clothes["hair"].string == "wet_hair") and KittyX.blushing:
-        "images/Kitty_blowjob/Kitty_blowjob_face_open_wet_blush.png"
-    elif KittyX.primary_Action.speed > 1 and (KittyX.wet or KittyX.Clothes["hair"].string == "wet_hair"):
-        "images/Kitty_blowjob/Kitty_blowjob_face_open_wet.png"
-    elif KittyX.primary_Action.speed > 1 and KittyX.blushing:
+    elif (KittyX.wet or KittyX.Clothes["hair"].string == "wet_hair") and KittyX.blushing:
+        "images/Kitty_blowjob/Kitty_blowjob_face_open_wet_hair_blush.png"
+    elif (KittyX.wet or KittyX.Clothes["hair"].string == "wet_hair"):
+        "images/Kitty_blowjob/Kitty_blowjob_face_open_wet_hair.png"
+    elif KittyX.blushing:
         "images/Kitty_blowjob/Kitty_blowjob_face_open_blush.png"
-    elif KittyX.primary_Action.speed > 1:
+    else:
         "images/Kitty_blowjob/Kitty_blowjob_face_open.png"
 
     if renpy.showing("Kitty_sprite blowjob") and KittyX.primary_Action.speed > 1:
         Null()
     elif (KittyX.wet or KittyX.Clothes["hair"].string == "wet_hair") and KittyX.blushing:
-        "images/Kitty_blowjob/Kitty_blowjob_face_closed_wet_blush.png"
+        "images/Kitty_blowjob/Kitty_blowjob_face_closed_wet_hair_blush.png"
     elif (KittyX.wet or KittyX.Clothes["hair"].string == "wet_hair"):
-        "images/Kitty_blowjob/Kitty_blowjob_face_closed_wet.png"
+        "images/Kitty_blowjob/Kitty_blowjob_face_closed_wet_hair.png"
     elif KittyX.blushing:
         "images/Kitty_blowjob/Kitty_blowjob_face_closed_blush.png"
     else:
@@ -245,13 +245,6 @@ layeredimage Kitty_blowjob_head:
     if KittyX.spunk["hair"]:
         "images/Kitty_blowjob/Kitty_blowjob_spunk_hair.png"
 
-    if not not (KittyX.wet or KittyX.Clothes["hair"].string == "wet_hair"):
-        Null()
-    elif KittyX.primary_Action.speed > 2:
-        "images/Kitty_blowjob/Kitty_blowjob_head_open_wet.png"
-    else:
-        "images/Kitty_blowjob/Kitty_blowjob_head_closed_wet.png"
-
     anchor (0.5, 0.5)
 
 layeredimage Kitty_blowjob_mouth:
@@ -293,7 +286,7 @@ layeredimage Kitty_blowjob_body:
 
 layeredimage Kitty_sex_body:
     always:
-        "Kitty_hair_back" pos (0.28, -0.065) rotate -10 zoom 0.75
+        "Kitty_hair_back" pos (0.28, -0.065) rotate -10 zoom 0.375
 
     if KittyX.Clothes["body_piercings"].string:
         "images/Kitty_sex/Kitty_sex_body_[KittyX.Clothes[body_piercings].string].png"
@@ -428,10 +421,10 @@ layeredimage Kitty_sex_legs:
     elif Player.primary_Action == "eat_ass":
         "licking" pos (0.292, 0.548) zoom 0.39
 
-    if Player.sprite and Player.primary_Action.type == "footjob":
+    if Player.sprite and KittyX.primary_Action.type == "footjob":
         "Zero_cock_Kitty"
 
-    if Player.primary_Action.type == "footjob" or show_feet:
+    if KittyX.primary_Action.type == "footjob" or show_feet:
         "Kitty_sex_feet" pos (0.291, 0.391)
     else:
         AlphaMask("Kitty_sex_feet", "images/Kitty_sex/Kitty_sex_feet_mask.png")
@@ -507,12 +500,12 @@ layeredimage Kitty_doggy_head:
         "images/Kitty_doggy/Kitty_doggy_spunk_face.png"
 
     if KittyX.wet:
-        "images/Kitty_doggy/Kitty_doggy_hair_wet.png"
+        "images/Kitty_doggy/Kitty_doggy_hair_wet_hair.png"
     else:
         "images/Kitty_doggy/Kitty_doggy_hair_[KittyX.Clothes[hair].string].png"
 
     if KittyX.wet:
-        "images/Kitty_doggy/Kitty_doggy_water_hair.png"
+        "images/Kitty_doggy/Kitty_doggy_water_head.png"
 
     if KittyX.spunk["hair"]:
         "images/Kitty_doggy/Kitty_doggy_spunk_hair.png"

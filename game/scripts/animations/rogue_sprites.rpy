@@ -347,10 +347,10 @@ layeredimage Rogue_sex_legs:
     elif Player.primary_Action == "eat_ass":
         "licking" pos (0.292, 0.548) zoom 0.35
 
-    if Player.sprite and Player.primary_Action.type == "footjob":
+    if Player.sprite and RogueX.primary_Action.type == "footjob":
         "Zero_cock_Rogue"
 
-    if Player.primary_Action.type == "footjob" or show_feet:
+    if RogueX.primary_Action.type == "footjob" or show_feet:
         "Rogue_sex_feet" pos (0.291, 0.391)
     else:
         AlphaMask("Rogue_sex_feet", "images/Rogue_sex/Rogue_sex_feet_mask.png")
