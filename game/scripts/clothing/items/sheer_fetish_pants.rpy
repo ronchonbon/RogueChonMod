@@ -1,12 +1,10 @@
 init -1 python:
 
-    def sheer_fetish_pants():
+    def sheer_fetish_pants(Owner):
         name = "sheer fetish pants"
         image_string = "sheer_fetish_pants"
 
         clothing_type = "pants"
-
-        Owner_names = ["Rogue"]
 
         dialogue_lines = {
             }
@@ -20,6 +18,9 @@ init -1 python:
 
         poses = [
             "arm pose 1",
-            "arm pose 2"]
+            "arm pose 2",
+            "handjob",
+            "blowjob",
+            "doggy"]
 
-        return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

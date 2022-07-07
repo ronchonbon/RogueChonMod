@@ -3,13 +3,13 @@ init -2 python:
     import copy
 
     class ClothingClass(object):
-        def __init__(self, name, image_string, Clothing_type, Owner_names, dialogue_lines, shame = 0, hides = [], covers = [], number_of_states = 1, poses = []):
+        def __init__(self, Owner, name, image_string, Clothing_type, dialogue_lines, shame = 0, hides = [], covers = [], number_of_states = 1, poses = []):
+            self.Owner = Owner
+
             self.name = name
             self.string = image_string
 
             self.type = Clothing_type
-
-            self.Owner_names = Owner_names
 
             self.dialogue_lines = dialogue_lines
 
@@ -160,7 +160,7 @@ init -2 python:
             self.Clothes = {}
 
             for Clothing_type in self.types:
-                self.Clothes[Clothing_type] = ClothingClass(name = None, image_string = None, Clothing_type = None, Owner_names = None, dialogue_lines = None)
+                self.Clothes[Clothing_type] = ClothingClass(Owner = None, name = None, image_string = None, Clothing_type = None, dialogue_lines = None)
 
             self.set_Outfit_flags()
 
@@ -174,7 +174,7 @@ init -2 python:
                 Clothing_types = [Clothing_types]
 
             for Clothing_type in Clothing_types:
-                self.Clothes[Clothing_type] = ClothingClass(name = None, image_string = None, Clothing_type = None, Owner_names = None, dialogue_lines = None)
+                self.Clothes[Clothing_type] = ClothingClass(Owner = None, name = None, image_string = None, Clothing_type = None, dialogue_lines = None)
 
             return
 

@@ -67,7 +67,7 @@ label dildo_check(Girl):
     if "dildo" in Player.inventory:
         "You pull out a large rubber dildo. Lucky you remembered to keep it handy."
     elif "dildo" in Girl.inventory:
-        "You ask [Girl.name] to get out her favorite Dildo."
+        "You ask [Girl.name] to get out her favorite dildo."
     else:
         "You don't have one of those on you."
 
@@ -77,7 +77,7 @@ label dildo_check(Girl):
 
 label vibrator_check(Girl):
     if "vibrator" in Player.inventory:
-        "You pull out the \"shocker\" vibrator, handy."
+        "You pull out the \"Shocker\" vibrator, handy."
     elif "vibrator" in Girl.inventory:
         "You ask [Girl.name] to get out her vibrator."
     else:

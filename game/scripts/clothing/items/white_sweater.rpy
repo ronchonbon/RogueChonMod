@@ -1,12 +1,10 @@
 init -1 python:
 
-    def white_sweater():
+    def white_sweater(Owner):
         name = "white sweater"
         image_string = "white_sweater"
 
         clothing_type = "belt"
-
-        Owner_names = ["Rogue"]
 
         dialogue_lines = {
             }
@@ -22,10 +20,8 @@ init -1 python:
             "arm pose 1",
             "arm pose 2",
             "handjob",
-            "titjob",
-            "footjob",
             "blowjob",
             "sex",
             "doggy"]
 
-        return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

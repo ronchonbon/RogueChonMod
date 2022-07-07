@@ -1,15 +1,12 @@
 init -1 python:
 
-    def barbell_body_piercings():
+    def barbell_body_piercings(Owner):
         name = "barbell body piercings"
         image_string = "barbell_body_piercings"
 
         clothing_type = "body_piercings"
 
-        Owner_names = ["Rogue", "Kitty", "Emma", "Laura", "Jean", "Storm", "Jubes"]
-
         dialogue_lines = {
-            "wardrobe": "You'd look really hot with barbell body piercings."
             }
 
         shame = 2
@@ -29,4 +26,4 @@ init -1 python:
             "sex",
             "doggy"]
 
-        return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

@@ -118,9 +118,6 @@ label summon_Rogue:
     if not line:
         return
     elif line == "go to":
-        call hide_Girl(RogueX)
-        call change_clothes
-
         if RogueX.location == "bg_player":
             ch_r_text "I'll be waiting."
         elif RogueX.location == "bg_rogue":

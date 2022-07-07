@@ -1,12 +1,10 @@
 init -1 python:
 
-    def Taimanin_leotard():
+    def Taimanin_leotard(Owner):
         name = "Taimanin leotard"
         image_string = "Taimanin_leotard"
 
         clothing_type = "bodysuit"
-
-        Owner_names = ["Kitty"]
 
         dialogue_lines = {
             }
@@ -20,6 +18,7 @@ init -1 python:
 
         poses = [
             "arm pose 1",
-            "arm pose 2"]
+            "arm pose 2",
+            "handjob"]
 
-        return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

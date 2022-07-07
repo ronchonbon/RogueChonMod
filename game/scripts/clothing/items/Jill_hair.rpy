@@ -1,12 +1,10 @@
 init -1 python:
 
-    def Jill_hair():
+    def Jill_hair(Owner):
         name = "Jill's hair"
         image_string = "Jill_hair"
 
         clothing_type = "hair"
-
-        Owner_names = ["Rogue"]
 
         dialogue_lines = {
             }
@@ -23,9 +21,8 @@ init -1 python:
             "arm pose 2",
             "handjob",
             "titjob",
-            "footjob",
             "blowjob",
             "sex",
             "doggy"]
 
-        return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

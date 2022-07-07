@@ -1,12 +1,10 @@
 init -1 python:
 
-    def black_harness_panties():
+    def black_harness_panties(Owner):
         name = "black harness panties"
         image_string = "black_harness_panties"
 
         clothing_type = "underwear"
-
-        Owner_names = ["Rogue"]
 
         dialogue_lines = {
             }
@@ -20,6 +18,10 @@ init -1 python:
 
         poses = [
             "arm pose 1",
-            "arm pose 2"]
+            "arm pose 2",
+            "handjob",
+            "blowjob",
+            "sex",
+            "doggy"]
 
-        return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

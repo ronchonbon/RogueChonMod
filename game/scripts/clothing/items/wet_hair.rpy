@@ -1,12 +1,10 @@
 init -1 python:
 
-    def wet_hair():
+    def wet_hair(Owner):
         name = "wet hair"
         image_string = "wet_hair"
 
         clothing_type = "hair"
-
-        Owner_names = ["Rogue", "Kitty"]
 
         dialogue_lines = {
             }
@@ -28,4 +26,4 @@ init -1 python:
             "sex",
             "doggy"]
 
-        return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

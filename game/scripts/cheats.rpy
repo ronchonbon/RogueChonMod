@@ -22,7 +22,7 @@ label cheat_menu(Girl):
                 call wardrobe_editor(Girl)
             "Unlock all Girls":
                 python:
-                    for G in [RogueX, KittyX]:
+                    for G in [RogueX, KittyX, EmmaX]:
                         active_Girls.append(G)
 
                         Player.Phonebook.append(G)
@@ -52,6 +52,8 @@ label cheat_menu(Girl):
                         if G not in Player.Harem:
                             Player.Harem.append(G)
             "Unlock all clothes":
+                call item_registry
+
                 python:
                     for Clothing in Rogue_Clothes:
                         if Clothing.name not in RogueX.Wardrobe.Clothes.keys():
@@ -60,6 +62,10 @@ label cheat_menu(Girl):
                     for Clothing in Kitty_Clothes:
                         if Clothing.name not in KittyX.Wardrobe.Clothes.keys():
                             KittyX.Wardrobe.Clothes[Clothing.name] = Clothing
+
+                    for Clothing in Emma_Clothes:
+                        if Clothing.name not in EmmaX.Wardrobe.Clothes.keys():
+                            EmmaX.Wardrobe.Clothes[Clothing.name] = Clothing
             "Done":
                 call checkout
 

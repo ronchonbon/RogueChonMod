@@ -1,3 +1,341 @@
+label summon_Emma:
+    $ D20 = renpy.random.randint(1, 20)
+
+    if D20 <= 3:
+        $ line = "no"
+    if time_index > 2:
+        if approval_check(EmmaX, 700, "L") or approval_check(EmmaX, 300, "O"):
+            ch_e_text "It's getting late, but fine, what did you want?"
+
+            call add_Girls(EmmaX)
+        else:
+            ch_e_text "It's late, [EmmaX.player_petname], tell me tomorrow."
+
+        return
+    elif not approval_check(EmmaX, 700, "L") or not approval_check(EmmaX, 600, "O"):
+        if not approval_check(EmmaX, 300):
+            ch_e_text "I don't really feel up to that, [EmmaX.player_petname]."
+
+            return
+
+        if EmmaX.location == "bg_classroom" or EmmaX.teaching:
+            ch_e_text "You can find me in the classroom, [EmmaX.player_petname]."
+        elif EmmaX.location == "bg_dangerroom":
+            ch_e_text "I'm getting some training in, [EmmaX.player_petname], care to join me?"
+        elif EmmaX.location == "bg_campus":
+            ch_e_text "I'm relaxing in the square, if you'd care to join me."
+        elif EmmaX.location == "bg_emma":
+            ch_e_text "I'm in my room, [EmmaX.player_petname]."
+        elif EmmaX.location == "bg_player":
+            ch_e_text "I'm waiting in your room, [EmmaX.player_petname]. . ."
+        elif EmmaX.location == "bg_shower":
+            if approval_check(EmmaX, 1600):
+                ch_e_text "I'm in the shower right now, [EmmaX.player_petname], do you need an invitation?"
+            else:
+                ch_e_text "I'm in the shower right now, [EmmaX.player_petname], perhaps I'll see you later."
+
+                return
+        elif EmmaX.location == "hold":
+            ch_e_text "I'm off campus for a bit, I'll be back later."
+
+            return
+        else:
+            ch_e_text "You could always come over here, [EmmaX.player_petname]."
+
+        menu(nvl = True):
+            extend ""
+            "Sure, I'll be right there.":
+                ch_p_text "Sure, I'll be right there."
+
+                call change_Girl_stat(EmmaX, "love", 1)
+                call change_Girl_stat(EmmaX, "inhibition", 1)
+
+                ch_e_text "I'll be waiting."
+
+                $ line = "go to"
+            "Nah, we can talk later.":
+                ch_p_text "Nah, we can talk later."
+
+                call change_Girl_stat(EmmaX, "obedience", 1)
+                call change_Girl_stat(EmmaX, "obedience", 2)
+
+                ch_e_text "Very well."
+            "Could you please come visit me? I'm lonely.":
+                ch_p_text "Could you please come visit me? I'm lonely."
+
+                if approval_check(EmmaX, 600, "L") or approval_check(EmmaX, 1400):
+                    call change_Girl_stat(EmmaX, "love", 1)
+                    call change_Girl_stat(EmmaX, "obedience", 1)
+
+                    $ line = "lonely"
+                else:
+                    call change_Girl_stat(EmmaX, "inhibition", 1)
+
+                    $ line = "no"
+            "I said come over here.":
+                ch_p_text "I said come over here."
+
+                if approval_check(EmmaX, 600, "O"):
+                    call change_Girl_stat(EmmaX, "love", 1)
+                    call change_Girl_stat(EmmaX, "love", -1)
+                    call change_Girl_stat(EmmaX, "obedience", 1)
+
+                    $ line = "command"
+                elif D20 >= 7 and approval_check(EmmaX, 1400):
+                    call change_Girl_stat(EmmaX, "love", -2)
+                    call change_Girl_stat(EmmaX, "love", -1)
+                    call change_Girl_stat(EmmaX, "obedience", 2)
+                    call change_Girl_stat(EmmaX, "obedience", 1)
+
+                    ch_e_text "Ok, fine, [EmmaX.player_petname]."
+
+                    $ line = "yes"
+                elif approval_check(EmmaX, 200, "O"):
+                    call change_Girl_stat(EmmaX, "love", -4)
+                    call change_Girl_stat(EmmaX, "love", -2)
+
+                    ch_e_text "Who do you think is in charge here?!"
+                    call change_Girl_stat(EmmaX, "inhibition", 2)
+                    call change_Girl_stat(EmmaX, "inhibition", 1)
+                    call change_Girl_stat(EmmaX, "obedience", -2)
+
+                    ch_e_text "You'd better hope you don't find me here."
+                else:
+                    call change_Girl_stat(EmmaX, "inhibition", 1)
+                    call change_Girl_stat(EmmaX, "inhibition", 1)
+                    call change_Girl_stat(EmmaX, "love", 1)
+                    call change_Girl_stat(EmmaX, "obedience", -1)
+
+                    $ line = "no"
+    else:
+        if EmmaX.love > EmmaX.obedience:
+            ch_e_text "I'd love to."
+        else:
+            ch_e_text "I'll be right there, [EmmaX.player_petname]."
+
+        $ line = "yes"
+
+    if not line:
+        return
+    elif line == "go to":
+        if EmmaX.location == "bg_player":
+            ch_e_text "I'll be waiting for you."
+        elif EmmaX.location == "bg_emma":
+            ch_e_text "I'll tidy up a few things."
+        elif EmmaX.location == "bg_campus":
+            ch_e_text "I've got a nice location picked out."
+        elif EmmaX.location == "bg_classroom" or EmmaX.teaching:
+            ch_e_text "You don't want to miss too much."
+        elif EmmaX.location == "bg_dangerroom":
+            ch_e_text "I'll try to save some for you."
+        elif EmmaX.location == "bg_shower":
+            ch_e_text "Don't keep me waiting. . ."
+
+        call hide_all
+
+        $ Player.traveling = True
+
+        if EmmaX.location == "bg_player":
+            jump player_room
+        elif EmmaX.location == "bg_emma":
+            $ Girl = EmmaX
+
+            jump girls_room
+        elif EmmaX.location == "bg_campus":
+            jump campus
+        elif EmmaX.location == "bg_classroom":
+            jump classroom
+        elif EmmaX.location == "bg_dangerroom":
+            jump danger_room
+        elif EmmaX.location == "bg_shower":
+            jump shower_room
+        elif EmmaX.location == "bg_pool":
+            jump pool
+        elif EmmaX.location == "bg_study":
+            jump study
+        elif EmmaX.location == "bg_mall":
+            jump mall
+    elif line == "no":
+        if EmmaX.teaching:
+            ch_e_text "I can't exactly leave class, [EmmaX.player_petname]."
+        elif EmmaX.location == "bg_classroom":
+            ch_e_text "I have a lot of paperwork, [EmmaX.player_petname]."
+        elif EmmaX.location == "bg_dangerroom":
+            ch_e_text "I'm just getting warmed up here."
+        else:
+            ch_e_text "I have a lot to finish up here."
+
+        return
+    elif line == "lonely":
+        ch_e_text "Well, we can't have that now."
+    elif line == "command":
+        ch_e_text "If I must. . ."
+
+    $ EmmaX.change_Outfit()
+
+    call Girls_arrive(EmmaX)
+
+    return
+
+label Emma_leaving:
+    if not approval_check(EmmaX, 700):
+        if EmmaX.teaching:
+            ch_e "I have a class to teach."
+        elif EmmaX.location == "bg_classroom":
+            ch_e "I have some paperwork to take care of."
+        elif EmmaX.location == "bg_dangerroom":
+            ch_e "I have a workout scheduled."
+        elif EmmaX.location == "bg_campus":
+            ch_e "I'm going to take in some sun."
+        elif EmmaX.location == "bg_emma":
+            ch_e "I'm heading back to my room."
+        elif EmmaX.location == "bg_player":
+            ch_e "I'll be heading to your room."
+        elif EmmaX.location == "bg_shower" and approval_check(EmmaX, 1400):
+            ch_e "I'm going to take a quick shower."
+        elif EmmaX.location == "bg_pool":
+            ch_e "I was heading for a swim."
+        else:
+            ch_e "I'll see you later."
+
+        call hide_Girl(EmmaX)
+
+        return
+
+    if EmmaX.teaching:
+        ch_e "I've got a class to teach, but you could probably learn a thing or two from it."
+    elif EmmaX.location == "bg_classroom":
+        ch_e "I have some paperwork to take care of, but you could keep me company."
+    elif EmmaX.location == "bg_dangerroom":
+        ch_e "I have a workout planned, but there's room for one more."
+    elif EmmaX.location == "bg_campus":
+        ch_e "I'm planning to get some sunning in, care to join me?"
+    elif EmmaX.location == "bg_emma":
+        ch_e "I'm heading back to my room, but you can walk me back."
+    elif EmmaX.location == "bg_player":
+        ch_e "I'm actually heading to your room, [EmmaX.player_petname]."
+    elif EmmaX.location == "bg_shower":
+        if approval_check(EmmaX, 1600):
+            ch_e "I'm catching a quick shower, care to join me?"
+        else:
+            ch_e "I'm headed for the showers, make sure to keep your distance."
+
+            return
+    elif EmmaX.location == "bg_pool":
+        ch_e "I was heading for a swim. Care to join me?"
+    else:
+        ch_e "Would you care to come with me?"
+
+    $ D20 = renpy.random.randint(1, 20)
+
+    menu:
+        extend ""
+        "Sure, I'll catch up.":
+            $ line = "go to"
+        "Nah, we can talk later.":
+            ch_e "Very well, I'll talk to you later."
+
+            $ line = None
+        "Could you please stay with me? I'll get lonely.":
+            if approval_check(EmmaX, 600, "L") or approval_check(EmmaX, 1400):
+                $ line = "lonely"
+            else:
+                $ line = "no"
+        "No, stay here.":
+            if approval_check(EmmaX, 600, "O"):
+                $ line = "command"
+            elif D20 >= 7 and approval_check(EmmaX, 1400):
+                ch_e "I guess it wasn't that important. . ."
+
+                $ line = "yes"
+            elif approval_check(EmmaX, 200, "O"):
+                ch_e "Does that work with your little strumpets?"
+
+                $ line = None
+            else:
+                $ line = "no"
+
+    if not line:
+        call hide_Girl(EmmaX)
+
+        return
+    elif line == "no":
+        if EmmaX.teaching:
+            ch_e "I'm not \"cutting class,\" [EmmaX.player_petname]."
+        elif EmmaX.location == "bg_classroom":
+            ch_e "I'm afraid not, [EmmaX.player_petname], I need to get this work done."
+        elif EmmaX.location == "bg_dangerroom":
+            ch_e "I'm sorry, but how do you think I keep this figure?"
+        else:
+            ch_e "I'm sorry, I'm just much too busy at the moment."
+
+        call hide_Girl(EmmaX)
+
+        return
+    elif line == "go to":
+        call hide_Girl(EmmaX)
+        call change_clothes
+
+        if EmmaX.teaching:
+            ch_e "I'll see you there."
+        elif EmmaX.location == "bg_classroom":
+            ch_e "Excellent, that should pass the time."
+        elif EmmaX.location == "bg_dangerroom":
+            ch_e "I'll try to leave some for you."
+        elif EmmaX.location == "bg_emma":
+            ch_e "I'll be waiting."
+        elif EmmaX.location == "bg_player":
+            ch_e "I'll be waiting."
+        elif EmmaX.location == "bg_shower":
+            ch_e "I'll get started."
+        elif EmmaX.location == "bg_campus":
+            ch_e "Ok, let's."
+        elif EmmaX.location == "bg_pool":
+            ch_e "Ok, let's."
+
+        call hide_all
+
+        $ Player.traveling = False
+
+        if EmmaX.location == "bg_player":
+            jump player_room
+        elif EmmaX.location == "bg_emma":
+            $ Girl = EmmaX
+
+            jump girls_room
+        elif EmmaX.location == "bg_campus":
+            jump campus
+        elif EmmaX.location == "bg_classroom":
+            jump classroom
+        elif EmmaX.location == "bg_dangerroom":
+            jump danger_room
+        elif EmmaX.location == "bg_shower":
+            jump shower_room
+        elif EmmaX.location == "bg_pool":
+            jump pool
+        elif EmmaX.location == "bg_study":
+            jump study
+        elif EmmaX.location == "bg_mall":
+            jump mall
+    elif line == "lonely":
+        ch_e "Well we wouldn't want that. . ."
+    elif line == "command":
+        ch_e "If you insist."
+
+    ch_e "I suppose I can stay for a while."
+
+    $ EmmaX.location = Player.location
+
+    return
+
+
+
+
+
+
+
+
+
 
 
 label Emma_chat_Minimal:
@@ -1871,480 +2209,7 @@ label Emma_Personality(counter=0):
 
 
 
-label Emma_Summon(approval_bonus=approval_bonus):
-    $ EmmaX.change_Outfit()
-    if "no_summon" in EmmaX.recent_history:
-        if "angry" in EmmaX.recent_history:
-            ch_e "I'm not in the mood for this, [EmmaX.player_petname]."
-        elif EmmaX.recent_history.count("no_summon") > 1:
-            ch_e "You heard me the first time."
-            $ EmmaX.recent_history.append("angry")
-        elif time_index > 2:
-            ch_e "It's past your bedtime."
-        else:
-            ch_e "As I said, I've got things to do."
-        $ EmmaX.recent_history.append("no_summon")
-        return
 
-    $ D20 = renpy.random.randint(1, 20)
-    $ line = 0
-    if EmmaX.teaching:
-        $ approval_bonus = -30
-    elif EmmaX.location == "bg_classroom":
-        $ approval_bonus = -10
-    elif EmmaX.location == "bg_dangerroom":
-        $ approval_bonus = -10
-    elif EmmaX.location == "bg_shower":
-        $ approval_bonus = -30
-
-    if D20 <= 3:
-
-        $ line = "no"
-    if time_index > 2:
-        if approval_check(EmmaX, 700, "L") or approval_check(EmmaX, 300, "O"):
-
-            ch_e "It's getting late, but fine, what did you want?"
-            $ EmmaX.location = Player.location
-            call set_the_scene
-        else:
-
-            ch_e "It's late, [EmmaX.player_petname], tell me tomorrow."
-            $ EmmaX.recent_history.append("no_summon")
-        return
-    elif "lesbian" in EmmaX.recent_history:
-
-        if approval_check(EmmaX, 2000):
-            ch_e "I'm. . . entertaining at the moment, [EmmaX.player_petname], care to join us?"
-            menu:
-                extend ""
-                "Sure":
-                    $ line = "go to"
-                "No thanks.":
-                    ch_e "Your loss."
-                    return
-        else:
-            ch_e "Oh. . . that might be an issue, we're- I'm. . ."
-            ch_e "indisposed. . ."
-            ch_e "Perhaps we could meet later."
-            $ EmmaX.recent_history.append("no_summon")
-            return
-    elif not approval_check(EmmaX, 700, "L") or not approval_check(EmmaX, 600, "O"):
-
-        if not approval_check(EmmaX, 300):
-            ch_e "I don't really feel up to that, [EmmaX.player_petname]."
-            $ EmmaX.recent_history.append("no_summon")
-            return
-
-
-        if "summoned" in EmmaX.recent_history:
-            pass
-        elif "goto" in EmmaX.recent_history:
-            ch_e "You only just left, why not return?"
-        elif EmmaX.location == "bg_classroom" or EmmaX.teaching:
-            ch_e "You can find me in the class room, [EmmaX.player_petname]."
-        elif EmmaX.location == "bg_dangerroom":
-            ch_e "I'm getting some training in, [EmmaX.player_petname], care to join me?"
-        elif EmmaX.location == "bg_campus":
-            ch_e "I'm relaxing in the square, if you'd care to join me."
-        elif EmmaX.location == "bg_emma":
-            ch_e "I'm in my room, [EmmaX.player_petname]."
-        elif EmmaX.location == "bg_player":
-            ch_e "I'm waiting in your room, [EmmaX.player_petname]. . ."
-        elif EmmaX.location == "bg_shower":
-            if approval_check(EmmaX, 1600):
-                ch_e "I'm in the shower right now, [EmmaX.player_petname], do you need an invitation?"
-            else:
-                ch_e "I'm in the shower right now, [EmmaX.player_petname], perhaps I'll see you later."
-                $ EmmaX.recent_history.append("no_summon")
-                return
-        elif EmmaX.location == "hold":
-            ch_e "I'm off campus for a bit, I'll be back later."
-            $ EmmaX.recent_history.append("no_summon")
-            return
-        else:
-            ch_e "You could always come over here, [EmmaX.player_petname]."
-
-
-        if "summoned" in EmmaX.recent_history:
-            ch_e "Again? Very well."
-            $ line = "yes"
-        elif "goto" in EmmaX.recent_history:
-            menu:
-                extend ""
-                "You're right, be right back.":
-                    ch_e "I'll be waiting."
-                    $ line = "go to"
-                "Nah, it's better here.":
-                    ch_e "Very well."
-                "But I'd {i}really{/i} like to see you over here.":
-                    if approval_check(EmmaX, 600, "L") or approval_check(EmmaX, 1400):
-                        $ line = "lonely"
-                    else:
-                        $ line = "no"
-                "I said come over here.":
-                    if approval_check(EmmaX, 600, "O"):
-
-                        $ line = "command"
-                    elif D20 >= 7 and approval_check(EmmaX, 1400):
-
-                        ch_e "Hmm, very well."
-                        $ line = "yes"
-                    elif approval_check(EmmaX, 200, "O"):
-
-                        ch_e "If you're lucky, I'll still be here when you arrive."
-                    else:
-
-                        $ line = "no"
-        else:
-            menu:
-                extend ""
-                "Sure, I'll be right there.":
-                    call change_Girl_stat(EmmaX, "love", 1)
-                    call change_Girl_stat(EmmaX, "inhibition", 1)
-                    ch_e "I'll be waiting."
-                    $ line = "go to"
-                "Nah, we can talk later.":
-
-                    call change_Girl_stat(EmmaX, "obedience", 1)
-                    call change_Girl_stat(EmmaX, "obedience", 2)
-                    ch_e "Very well."
-                "Could you please come visit me? I'm lonely.":
-
-                    if approval_check(EmmaX, 600, "L") or approval_check(EmmaX, 1400):
-                        call change_Girl_stat(EmmaX, "love", 1)
-                        call change_Girl_stat(EmmaX, "obedience", 1)
-                        $ line = "lonely"
-                    else:
-                        call change_Girl_stat(EmmaX, "inhibition", 1)
-                        $ line = "no"
-                "I said come over here.":
-
-                    if approval_check(EmmaX, 600, "O"):
-
-                        call change_Girl_stat(EmmaX, "love", 1)
-                        call change_Girl_stat(EmmaX, "love", -1)
-                        call change_Girl_stat(EmmaX, "obedience", 1)
-                        $ line = "command"
-
-                    elif D20 >= 7 and approval_check(EmmaX, 1400):
-
-                        call change_Girl_stat(EmmaX, "love", -2)
-                        call change_Girl_stat(EmmaX, "love", -1)
-                        call change_Girl_stat(EmmaX, "obedience", 2)
-                        call change_Girl_stat(EmmaX, "obedience", 1)
-                        ch_e "Ok, fine, [EmmaX.player_petname]."
-                        $ line = "yes"
-
-                    elif approval_check(EmmaX, 200, "O"):
-
-                        call change_Girl_stat(EmmaX, "love", -4)
-                        call change_Girl_stat(EmmaX, "love", -2)
-                        ch_e "Who do you think is in charge here?!"
-                        call change_Girl_stat(EmmaX, "inhibition", 2)
-                        call change_Girl_stat(EmmaX, "inhibition", 1)
-                        call change_Girl_stat(EmmaX, "obedience", -2)
-                        ch_e "You'd better hope you don't find me here."
-                    else:
-
-                        call change_Girl_stat(EmmaX, "inhibition", 1)
-                        call change_Girl_stat(EmmaX, "inhibition", 1)
-                        call change_Girl_stat(EmmaX, "love", 1)
-                        call change_Girl_stat(EmmaX, "obedience", -1)
-                        $ line = "no"
-    else:
-
-
-        if EmmaX.love > EmmaX.obedience:
-            ch_e "I'd love to."
-        else:
-            ch_e "I'll be right there, [EmmaX.player_petname]."
-        $ line = "yes"
-
-    $ approval_bonus = 0
-
-    if not line:
-
-        $ EmmaX.recent_history.append("no_summon")
-        return
-
-    if line == "no":
-
-        if EmmaX.teaching:
-            ch_e "I can't exactly leave class, [EmmaX.player_petname]."
-        elif EmmaX.location == "bg_classroom":
-            ch_e "I have a lot of paperwork, [EmmaX.player_petname]."
-        elif EmmaX.location == "bg_dangerroom":
-            ch_e "I'm just getting warmed up here."
-        else:
-            ch_e "I have a lot to finish up here."
-        $ EmmaX.recent_history.append("no_summon")
-        return
-
-    elif line == "go to":
-
-        $ renpy.pop_call()
-        $ approval_bonus = 0
-        $ line = 0
-        $ EmmaX.recent_history.append("goto")
-        $ Player.recent_history.append("goto")
-        if EmmaX.location == "bg_classroom" or EmmaX.teaching:
-            ch_e "You don't want to miss too much."
-            jump classroom
-        elif EmmaX.location == "bg_dangerroom":
-            ch_e "I'll try to save some for you."
-            jump danger_room
-        elif EmmaX.location == "bg_emma":
-            ch_e "I'll tidy up a few things."
-            $ Girl = EmmaX
-            jump girls_room
-        elif EmmaX.location == "bg_player":
-            ch_e "I'll be waiting for you."
-            jump player_room
-        elif EmmaX.location == "bg_shower":
-            ch_e "Don't keep me waiting. . ."
-            jump shower_room
-        elif EmmaX.location == "bg_campus":
-            ch_e "I've got a nice location picked out."
-            jump campus
-        elif EmmaX.location in bedrooms:
-            ch_e "I'll try to keep occupied."
-            $ Player.location = EmmaX.location
-            jump reset_location
-        else:
-            ch_e "You know, I'll just meet you in my room."
-            $ EmmaX.location = "bg_emma"
-            $ Girl = EmmaX
-            jump girls_room
-
-
-    elif line == "lonely":
-        ch_e "Well, we can't have that now."
-    elif line == "command":
-        ch_e "If I must. . ."
-
-    $ EmmaX.recent_history.append("summoned")
-    $ line = 0
-    if "locked" in Player.traits:
-        call Girls_arrive (EmmaX)
-        return
-    $ EmmaX.location = Player.location
-    call set_Character_taboos
-    $ EmmaX.change_Outfit()
-    call set_the_scene
-    return
-
-
-
-
-label Emma_Leave:
-    if "freetravels" in EmmaX.traits or not approval_check(EmmaX, 700):
-        if EmmaX.teaching:
-            ch_e "I have a class to teach."
-        elif EmmaX.location == "bg_classroom":
-            ch_e "I have some paperwork to take care of."
-        elif EmmaX.location == "bg_dangerroom":
-            ch_e "I have a workout scheduled."
-        elif EmmaX.location == "bg_campus":
-            ch_e "I'm going to take in some sun."
-        elif EmmaX.location == "bg_emma":
-            ch_e "I'm heading back to my room."
-        elif EmmaX.location == "bg_player":
-            ch_e "I'll be heading to your room."
-        elif EmmaX.location == "bg_shower" and approval_check(EmmaX, 1400):
-            ch_e "I'm going to take a quick shower."
-        elif EmmaX.location == "bg_pool":
-            ch_e "I was heading for a swim."
-        else:
-            ch_e "I'll see you later."
-
-        call hide_Girl(EmmaX)
-
-        return
-
-    if "follow" not in EmmaX.traits:
-        $ EmmaX.traits.append("follow")
-
-    if EmmaX.teaching:
-        $ approval_bonus = -40
-    elif EmmaX.location == "bg_classroom":
-        $ approval_bonus = -10
-    elif EmmaX.location == "bg_dangerroom":
-        $ approval_bonus = 20
-    elif EmmaX.location == "bg_shower":
-        $ approval_bonus = 20
-    else:
-        $ approval_bonus = 0
-
-    if EmmaX.teaching:
-        ch_e "I've got a class to teach, but you could probably learn a thing or two from it."
-    elif EmmaX.location == "bg_classroom":
-        ch_e "I have some paperwork to take care of, but you could keep me company."
-    elif EmmaX.location == "bg_dangerroom":
-        ch_e "I have a workout planned, but there's room for one more."
-    elif EmmaX.location == "bg_campus":
-        ch_e "I'm planning to get some sunning in, care to join me?"
-    elif EmmaX.location == "bg_emma":
-        ch_e "I'm heading back to my room, but you can walk me back."
-    elif EmmaX.location == "bg_player":
-        ch_e "I'm actually heading to your room, [EmmaX.player_petname]."
-    elif EmmaX.location == "bg_shower":
-        if approval_check(EmmaX, 1600):
-            ch_e "I'm catching a quick shower, care to join me?"
-        else:
-            ch_e "I'm headed for the showers, make sure to keep your distance."
-
-            return
-    elif EmmaX.location == "bg_pool":
-        ch_e "I was heading for a swim. Care to join me?"
-    else:
-        ch_e "Would you care to come with me?"
-
-    $ D20 = renpy.random.randint(1, 20)
-
-    $ line = None
-
-    menu:
-        extend ""
-        "Sure, I'll catch up.":
-            if "followed" not in EmmaX.recent_history:
-                call change_Girl_stat(EmmaX, "love", 1)
-                call change_Girl_stat(EmmaX, "inhibition", 1)
-
-            $ line = "go to"
-        "Nah, we can talk later.":
-            if "followed" not in EmmaX.recent_history:
-                call change_Girl_stat(EmmaX, "obedience", 1)
-                call change_Girl_stat(EmmaX, "obedience", 2)
-
-            ch_e "Very well, I'll talk to you later."
-        "Could you please stay with me? I'll get lonely.":
-            if approval_check(EmmaX, 600, "L") or approval_check(EmmaX, 1400):
-                if "followed" not in EmmaX.recent_history:
-                    call change_Girl_stat(EmmaX, "love", 1)
-                    call change_Girl_stat(EmmaX, "obedience", 1)
-
-                $ line = "lonely"
-            else:
-                if "followed" not in EmmaX.recent_history:
-                    call change_Girl_stat(EmmaX, "inhibition", 1)
-
-                $ line = "no"
-        "No, stay here.":
-            if approval_check(EmmaX, 600, "O"):
-                if "followed" not in EmmaX.recent_history:
-                    if EmmaX.love >= 50:
-                        call change_Girl_stat(EmmaX, "love", 1)
-                    call change_Girl_stat(EmmaX, "love", -1)
-                    call change_Girl_stat(EmmaX, "obedience", 1)
-
-                $ line = "command"
-            elif D20 >= 7 and approval_check(EmmaX, 1400):
-                if "followed" not in EmmaX.recent_history:
-                    call change_Girl_stat(EmmaX, "love", -2)
-                    call change_Girl_stat(EmmaX, "love", -1)
-                    call change_Girl_stat(EmmaX, "obedience", 2)
-                    call change_Girl_stat(EmmaX, "obedience", 1)
-
-                ch_e "I guess it wasn't that important. . ."
-
-                $ line = "yes"
-            elif approval_check(EmmaX, 200, "O"):
-                if "followed" not in EmmaX.recent_history:
-                    call change_Girl_stat(EmmaX, "love", -4)
-                    call change_Girl_stat(EmmaX, "love", -2)
-
-                ch_e "Does that work with your little strumpets?"
-
-                if "followed" not in EmmaX.recent_history:
-                    call change_Girl_stat(EmmaX, "inhibition", 2)
-                    call change_Girl_stat(EmmaX, "inhibition", 1)
-                    call change_Girl_stat(EmmaX, "obedience", -2)
-            else:
-                if "followed" not in EmmaX.recent_history:
-                    call change_Girl_stat(EmmaX, "inhibition", 1)
-                    call change_Girl_stat(EmmaX, "inhibition", 1)
-                    call change_Girl_stat(EmmaX, "love", 1)
-                    call change_Girl_stat(EmmaX, "obedience", -1)
-
-                $ line = "no"
-
-    $ EmmaX.recent_history.append("followed")
-
-    if not line:
-        call hide_Girl(EmmaX)
-
-        return
-
-    if line == "no":
-        if EmmaX.teaching:
-            ch_e "I'm not \"cutting class,\" [EmmaX.player_petname]."
-        elif EmmaX.location == "bg_classroom":
-            ch_e "I'm afraid not, [EmmaX.player_petname], I need to get this work done."
-        elif EmmaX.location == "bg_dangerroom":
-            ch_e "I'm sorry, but how do you think I keep this figure?"
-        else:
-            ch_e "I'm sorry, I'm just much too busy at the moment."
-
-        call hide_Girl(EmmaX)
-
-        return
-
-    elif line == "go to":
-        call hide_Girl(EmmaX)
-        call change_clothes
-
-        if EmmaX.teaching:
-            ch_e "I'll see you there."
-        elif EmmaX.location == "bg_classroom":
-            ch_e "Excellent, that should pass the time."
-        elif EmmaX.location == "bg_dangerroom":
-            ch_e "I'll try to leave some for you."
-        elif EmmaX.location == "bg_emma":
-            ch_e "I'll be waiting."
-        elif EmmaX.location == "bg_player":
-            ch_e "I'll be waiting."
-        elif EmmaX.location == "bg_shower":
-            ch_e "I'll get started."
-        elif EmmaX.location == "bg_campus":
-            ch_e "Ok, let's."
-        elif EmmaX.location == "bg_pool":
-            ch_e "Ok, let's."
-
-        call hide_all
-
-        $ destination = EmmaX.location
-
-        if destination == "bg_player":
-            jump player_room
-        elif destination == "bg_emma":
-            $ Girl = EmmaX
-
-            jump girls_room
-        elif destination == "bg_campus":
-            jump campus
-        elif destination == "bg_classroom":
-            jump classroom
-        elif destination == "bg_dangerroom":
-            jump danger_room
-        elif destination == "bg_shower":
-            jump shower_room
-        elif destination == "bg_pool":
-            jump pool
-        elif destination == "bg_study":
-            jump study
-        elif destination == "bg_mall":
-            jump mall
-
-    elif line == "lonely":
-        ch_e "Well we wouldn't want that. . ."
-    elif line == "command":
-        ch_e "If you insist."
-
-    ch_e "I suppose I can stay for a while."
-
-    $ EmmaX.location = Player.location
-
-    return
 
 
 

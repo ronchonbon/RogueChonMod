@@ -1,12 +1,10 @@
 init -1 python:
 
-    def dyed_hair():
+    def dyed_hair(Owner):
         name = "dyed hair"
         image_string = "dyed_hair"
 
         clothing_type = "hair"
-
-        Owner_names = ["Kitty"]
 
         dialogue_lines = {
             }
@@ -21,11 +19,6 @@ init -1 python:
         poses = [
             "arm pose 1",
             "arm pose 2",
-            "handjob",
-            "titjob",
-            "footjob",
-            "blowjob",
-            "sex",
-            "doggy"]
+            "handjob"]
 
-        return ClothingClass(name, image_string, clothing_type, dialogue_lines, Owner_names, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
