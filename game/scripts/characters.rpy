@@ -818,40 +818,40 @@ init python:
             #         "skirt": Tifa_skirt(self),
             #         "bra": white_tanktop(self),
             #         "neck": leash_choker(self), "gloves": Tifa_gloves(self), "suspenders": Tifa_suspenders(self)})
-            # elif self.tag == "Jean":
-            #     first_casual.update_Clothes({
-            #         "hair": short_hair(self),
-            #         "underwear": green_panties(self),
-            #         "pants": khaki_pants(self),
-            #         "bra": green_bra(self), "top": pink_shirt(self)})
-            #
-            #     second_casual.update_Clothes({
-            #         "hair": short_hair(self),
-            #         "underwear": green_panties(self),
-            #         "skirt": green_skirt(self),
-            #         "bra": green_bra(self), "top": green_shirt(self)})
-            #
-            #     gym_clothes.update_Clothes({
-            #         "hair": short_hair(self),
-            #         "underwear": green_panties(self),
-            #         "pants": green_yoga_pants(self),
-            #         "bra": blackyellow_sports_bra(self)})
-            #
-            #     sleepwear.update_Clothes({
-            #         "hair": short_hair(self),
-            #         "underwear": green_panties(self),
-            #         "bra": green_bra(self), "top": pink_shirt(self)})
-            #
-            #     shower.update_Clothes({
-            #         "hair": short_hair(self),
-            #         "top": red_towel(self)})
-            #
-            #     Halloween_costume.update_Clothes({
-            #         "hair": ponytail(self),
-            #         "underwear": green_bra(self),
-            #         "pants": blue_shorts(self),
-            #         "bra": green_bra(self), "top": yellow_shirt(self),
-            #         "suspenders": Misty_suspenders(self)}))
+            elif self.tag == "Jean":
+                first_casual.update_Clothes({
+                    "hair": long_hair(self),
+                    "underwear": green_panties(self),
+                    "pants": khaki_pants(self),
+                    "bra": green_bra(self), "top": pink_shirt(self)})
+
+                second_casual.update_Clothes({
+                    "hair": long_hair(self),
+                    "underwear": green_panties(self),
+                    "skirt": green_skirt(self),
+                    "bra": green_bra(self), "top": green_shirt(self)})
+
+                gym_clothes.update_Clothes({
+                    "hair": long_hair(self),
+                    "underwear": green_panties(self),
+                    "pants": green_yoga_pants(self),
+                    "bra": blackyellow_sports_bra(self)})
+
+                sleepwear.update_Clothes({
+                    "hair": long_hair(self),
+                    "underwear": green_panties(self),
+                    "bra": green_bra(self), "top": pink_shirt(self)})
+
+                shower.update_Clothes({
+                    "hair": long_hair(self),
+                    "top": red_towel(self)})
+
+                Halloween_costume.update_Clothes({
+                    "hair": ponytail(self),
+                    "underwear": green_bra(self),
+                    "pants": blue_shorts(self),
+                    "bra": green_bra(self), "top": yellow_shirt(self),
+                    "suspenders": Misty_suspenders(self)})
             # elif self.tag == "Storm":
             #     first_casual.update_Clothes({
             #         "hair": long_hair(self),

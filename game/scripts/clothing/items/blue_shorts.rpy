@@ -1,23 +1,20 @@
 init -1 python:
 
-    def black_corset(Owner):
-        name = "black corset"
-        image_string = "black_corset"
+    def blue_shorts(Owner):
+        name = "blue shorts"
+        image_string = "blue_shorts"
 
-        clothing_type = "bra"
+        clothing_type = "pants"
 
         dialogue_lines = {
             }
 
         shame = 0
 
-        hides = ["breasts"]
-        covers = ["breasts"]
+        hides = ["pussy"]
+        covers = ["pussy"]
 
-        if Owner == EmmaX:
-            number_of_states = 1
-        elif Owner == JeanX:
-            number_of_states = 2
+        number_of_states = 2
 
         poses = [
             "arm pose 1",

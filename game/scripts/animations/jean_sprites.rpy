@@ -24,7 +24,7 @@ layeredimage Jean_sprite standing:
         "images/Jean_standing/Jean_standing_body_piercings_pussy_[JeanX.Clothes[body_piercings].string].png"
 
     if JeanX.Clothes["underwear"].string:
-        "images/Jean_standing/Jean_standing_underwear_[JeanX.Clothes[underwear].string]_[JeanX.Clothes[underwear.state].string].png"
+        "images/Jean_standing/Jean_standing_underwear_[JeanX.Clothes[underwear].string]_[JeanX.Clothes[underwear].state].png"
 
     if JeanX.Clothes["hose"].string:
         "images/Jean_standing/Jean_standing_hose_[JeanX.Clothes[hose].string].png"
@@ -50,6 +50,9 @@ layeredimage Jean_sprite standing:
     if JeanX.Clothes["top"].string:
         "images/Jean_standing/Jean_standing_top[JeanX.arm_pose]_[JeanX.Clothes[top].string]_[JeanX.Clothes[top].state].png"
 
+    if JeanX.Clothes["suspenders"].string:
+        "images/Jean_standing/Jean_standing_suspenders_[JeanX.Clothes[suspenders].string]_[JeanX.Clothes[suspenders].state].png"
+
     always:
         "Jean_head" pos (0.32, 0.27) zoom 0.32
 
@@ -70,9 +73,6 @@ layeredimage Jean_sprite standing:
 
     if JeanX.Clothes["top"].string == "pink_shirt" and not renpy.showing("Jean_sprite handjob") and JeanX.arm_pose == 1:
         "images/Jean_standing/Jean_standing_top[JeanX.arm_pose]_[JeanX.Clothes[top].string]_sleeves.png"
-
-    if JeanX.Clothes["suspenders"].string:
-        "images/Jean_standing/Jean_standing_suspenders_[JeanX.Clothes[suspenders].string]_[JeanX.Clothes[suspenders].state].png"
 
     if JeanX.spunk["breasts"]:
         "images/Jean_standing/Jean_standing_spunk_breasts.png"

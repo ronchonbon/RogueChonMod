@@ -1,10 +1,10 @@
 init -1 python:
 
-    def black_corset(Owner):
-        name = "black corset"
-        image_string = "black_corset"
+    def Misty_suspenders(Owner):
+        name = "Misty's suspenders"
+        image_string = "Misty_suspenders"
 
-        clothing_type = "bra"
+        clothing_type = "suspenders"
 
         dialogue_lines = {
             }
@@ -14,10 +14,7 @@ init -1 python:
         hides = ["breasts"]
         covers = ["breasts"]
 
-        if Owner == EmmaX:
-            number_of_states = 1
-        elif Owner == JeanX:
-            number_of_states = 2
+        number_of_states = 2
 
         poses = [
             "arm pose 1",

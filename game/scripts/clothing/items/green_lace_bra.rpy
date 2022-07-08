@@ -1,8 +1,8 @@
 init -1 python:
 
-    def black_corset(Owner):
-        name = "black corset"
-        image_string = "black_corset"
+    def green_lace_bra(Owner):
+        name = "green lace bra"
+        image_string = "green_lace_bra"
 
         clothing_type = "bra"
 
@@ -14,10 +14,7 @@ init -1 python:
         hides = ["breasts"]
         covers = ["breasts"]
 
-        if Owner == EmmaX:
-            number_of_states = 1
-        elif Owner == JeanX:
-            number_of_states = 2
+        number_of_states = 1
 
         poses = [
             "arm pose 1",
