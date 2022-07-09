@@ -69,3 +69,5 @@ init -1:
 
     define Emma_harden = ImageDissolve("images/wipes/Emma_harden.jpg", 0.5, 8)
     define Mystique_dissolve = ImageDissolve("images/wipes/Mystique_dissolve.jpg", 1.0, 8)
+
+    define EventScheduler = EventSchedulerClass()

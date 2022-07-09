@@ -1,5 +1,7 @@
 init python:
 
+    import copy
+
     class PlayerClass(object):
         def __init__(self, name, color):
             self.name = name
@@ -222,6 +224,8 @@ init python:
                 self.home = "bg_mystique"
 
                 self.disguise = None
+                self.disguise_Outfit = copy.deepcopy(self.Outfit)
+                self.disguise_Clothes = self.disguise_Outfit.Clothes
 
                 self.likes = {"Rogue": 0, "Kitty": 0, "Emma": 0, "Laura": 0, "Jean": 0, "Storm": 0, "Jubes": 0}
 
@@ -513,8 +517,8 @@ init python:
 
             return
 
-        def undress(self):
-            self.Outfit.undress()
+        def undress(self, instant = False):
+            self.Outfit.undress(instant = instant)
 
             return
 
@@ -591,6 +595,10 @@ init python:
             self.Outfit = self.Wardrobe.current_Outfit
             self.Clothes = self.Outfit.Clothes
 
+            if self.tag == "Mystique":
+                self.disguise_Outfit = copy.deepcopy(self.Outfit)
+                self.disguise_Clothes = self.disguise_Outfit.Clothes
+
             return
 
         def choose_Outfits(self):
@@ -609,7 +617,6 @@ init python:
                 Halloween_costume = OutfitClass("Halloween_costume")
 
             if self.tag == "Mystique":
-                disguise = OutfitClass("disguise")
                 villain = OutfitClass("villain")
             else:
                 hero = OutfitClass("hero", wear_in_public = True, wear_in_private = True, activewear = True)
@@ -720,14 +727,6 @@ init python:
                     "hair": wavy_hair(self),
                     "top": white_towel(self)})
 
-                teacher.update_Clothes({
-                    "hair": wavy_hair(self),
-                    "underwear": white_panties(self),
-                    "pants": white_pants(self),
-                    "bra": white_corset(self),
-                    "neck": white_choker(self),
-                    "jacket": white_jacket(self)})
-
                 Halloween_costume.update_Clothes({
                     "hair": wavy_hair(self),
                     "face_outer_accessory": Dimitrescu_hat(self),
@@ -834,13 +833,6 @@ init python:
             #     shower.update_Clothes({
             #         "hair": wavy_hair(self), "face_outer_accessory": head_towel(self)})
             #
-            #     teacher.update_Clothes({
-            #         "hair": long_hair(self),
-            #         "underwear": white_panties(self),
-            #         "pants": black_jeans(self),
-            #         "bra": black_sports_bra(self),
-            #         "jacket": black_jacket(self)})
-            #
             #     Halloween_costume.update_Clothes({
             #         "hair": short_hair(self),
             #         "underwear": Elena_panties(self),
@@ -916,6 +908,11 @@ init python:
 
             if self.tag not in ["Jubes", "Mystique"]:
                 self.Wardrobe.Outfits.update({"Halloween_costume": Halloween_costume})
+
+            if self.tag == "Mystique":
+                self.Wardrobe.Outfits.update({"villain": villain})
+            else:
+                self.Wardrobe.Outfits.update({"hero": hero})
 
             for Outfit in self.Wardrobe.Outfits.values():
                 for Clothing in Outfit.Clothes.values():

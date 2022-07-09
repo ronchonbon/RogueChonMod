@@ -71,7 +71,7 @@ init python:
 
         return
 
-    def reset_all_Girls_at_end():
+    def reset_Girls_at_end():
         total_SEXP = 0
 
         for G in all_Girls:
@@ -91,7 +91,7 @@ init python:
 
         return
 
-    def reset_all_Girls_at_beginning():
+    def reset_Girls_at_beginning():
         for G in active_Girls:
             G.remaining_Actions += 1 if time_index != 0 else 0
 
@@ -123,8 +123,9 @@ init python:
                 if G.level == 10:
                     renpy.say(None, "[G.name]'s reached max level!")
 
-            G.set_default_emotion()
             G.change_face()
+
+            G.History.increment()
 
         return
 
@@ -132,6 +133,49 @@ init python:
         Player.focused_Girl = Girl
 
         return
+
+    def random_name(seed = True):
+        if seed:
+            base = Player.name[:1]
+        else:
+            alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            index = renpy.random.randint(0, 25)
+            base = str(alphabet[index])
+
+        names = {
+            "A":"Abe",
+            "B":"Barry",
+            "C":"Carl",
+            "D":"Dennis",
+            "E":"Erik",
+            "F":"Foggy",
+            "G":"Gil",
+            "H":"Hunk",
+            "I":"Ike",
+            "J":"Jeff",
+            "K":"Kirk",
+            "L":"Lance",
+            "M":"Mitch",
+            "N":"Norm",
+            "O":"Ollie",
+            "P":"Pete",
+            "Q":"Quince",
+            "R":"Rory",
+            "S":"Sonny",
+            "T":"Todd",
+            "U":"Uri",
+            "V":"Vince",
+            "W":"Wally",
+            "X":"Ray",
+            "Y":"Yuri",
+            "Z":"Zoro"}
+
+        while base not in names.key() or names[base] == Player.name:
+            alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            index = renpy.random.randint(0, 25)
+            base = str(alphabet[index])
+
+        return names[base]
 
 label change_Player_stat(flavor, update):
     $ stat = getattr(Player, flavor)
@@ -486,10 +530,8 @@ label wait:
         $ Player.spunk = False
         $ Player.reputation += 10 if Player.reputation < 800 else 0
 
-        $ reset_all_Girls_at_end()
+        $ reset_Girls_at_end()
         $ change_clothes()
-
-    $ reset_all_Girls_at_beginning()
 
     $ Player.semen += 1
     $ Player.focus -= 5 if Player.focus >= 10 else 0
@@ -514,6 +556,7 @@ label wait:
         if Player.level == 10:
             "You've reached max level!"
 
+    $ reset_Girls_at_beginning()
     $ checkout()
 
     hide black_screen onlayer black

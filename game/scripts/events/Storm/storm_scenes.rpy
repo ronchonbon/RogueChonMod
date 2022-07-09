@@ -579,9 +579,9 @@ label Storm_Nudity:
                 call change_Girl_stat(StormX, "obedience", 5)
                 call change_Girl_stat(StormX, "inhibition", -3)
                 ch_s "If it would make you more comforable, then I would not mind it."
-                $ StormX.today_outfit_name = "first_casual"
-                $ StormX.outfit_name = "first_casual"
-                $ StormX.change_Outfit("first_casual")
+                $ StormX.today_outfit_name = "default"
+                $ StormX.outfit_name = "default"
+                $ StormX.change_Outfit("default")
 
             "Should I get naked too?" if "naked" not in Player.recent_history:
                 $ StormX.change_face("surprised", mouth = "sucking")

@@ -1,4 +1,4 @@
-init python:
+init -2 python:
 
     class EventClass(object):
         def __init__(self, label, conditions, **kwargs):

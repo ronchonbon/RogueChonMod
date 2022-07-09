@@ -318,11 +318,11 @@ label outfits_menu(Girl):
                     "Never mind":
                         pass
             "I really like that green top and skirt outfit you have." if Girl == RogueX:
-                $ Girl.change_Outfit("first_casual")
+                $ Girl.change_Outfit("default")
 
                 menu:
                     "You should wear this one for now.":
-                        $ Girl.outfit_name = "first_casual"
+                        $ Girl.outfit_name = "default"
 
                         ch_r "Ok, [Girl.player_petname], I like this one too."
                     "Let's try something else though.":
@@ -338,11 +338,11 @@ label outfits_menu(Girl):
                     "Let's try something else though.":
                         ch_r "Ok."
             "I really like that pink shirt and capris outfit you wear." if Girl == KittyX:
-                $ Girl.change_Outfit("first_casual")
+                $ Girl.change_Outfit("default")
 
                 menu:
                     "You should wear this one out. [[set current outfit]":
-                        $ Girl.outfit_name = "first_casual"
+                        $ Girl.outfit_name = "default"
 
                         ch_k "I used to wear that one[Girl.like]every day!"
                     "Let's try something else though.":
@@ -358,11 +358,11 @@ label outfits_menu(Girl):
                     "Let's try something else though.":
                         ch_k "K."
             "I really like that teacher's look you wear." if Girl == EmmaX:
-                $ Girl.change_Outfit("first_casual")
+                $ Girl.change_Outfit("default")
 
                 menu:
                     "You should wear this one out. [[set current outfit]":
-                        $ Girl.outfit_name = "first_casual"
+                        $ Girl.outfit_name = "default"
 
                         ch_e "Yes, a very tasteful look."
                     "Let's try something else though.":
@@ -378,11 +378,11 @@ label outfits_menu(Girl):
                     "Let's try something else though.":
                         ch_e "Very well."
             "Your leather combat outfit looks awesome." if Girl == LauraX:
-                $ Girl.change_Outfit("first_casual")
+                $ Girl.change_Outfit("default")
 
                 menu:
                     "You should wear this one out. [[set current outfit]":
-                        $ Girl.outfit_name = "first_casual"
+                        $ Girl.outfit_name = "default"
 
                         ch_l "Yeah, I love wearing this one in the field."
                     "Let's try something else though.":
@@ -397,11 +397,11 @@ label outfits_menu(Girl):
                     "Let's try something else though.":
                         ch_l "Ok."
             "Your pink shirt and pants outfit is cute." if Girl == JeanX:
-                $ Girl.change_Outfit("first_casual")
+                $ Girl.change_Outfit("default")
 
                 menu:
                     "You should wear this one out. [[set current outfit]":
-                        $ Girl.outfit_name = "first_casual"
+                        $ Girl.outfit_name = "default"
 
                         ch_j "Yeah, I've worn this one a long time."
                     "Let's try something else though.":
@@ -416,11 +416,11 @@ label outfits_menu(Girl):
                     "Let's try something else though.":
                         ch_j "Sure. . ."
             "Try on that skirt combo." if Girl == StormX:
-                $ Girl.change_Outfit("first_casual")
+                $ Girl.change_Outfit("default")
 
                 menu:
                     "You should wear this one out. [[set current outfit]":
-                        $ Girl.outfit_name = "first_casual"
+                        $ Girl.outfit_name = "default"
 
                         ch_s "Yes, this is my preferred casual outfit."
                     "Let's try something else though.":
@@ -436,11 +436,11 @@ label outfits_menu(Girl):
                     "Let's try something else though.":
                         ch_s "Ok."
             "You look great in your red and blue outfit." if Girl == JubesX:
-                $ Girl.change_Outfit("first_casual")
+                $ Girl.change_Outfit("default")
 
                 menu:
                     "You should wear this one out. [[set current outfit]":
-                        $ Girl.outfit_name = "first_casual"
+                        $ Girl.outfit_name = "default"
 
                         ch_v "Yeah, this one's a classic, right?"
                     "Let's try something else though.":
@@ -2960,7 +2960,7 @@ label accessories_menu(Girl):
 
 label alternate_clothes(Girl, outfit = 1):
     if Girl.clothing[outfit] == 1 or not Girl.clothing[outfit]:
-        $ Girl.outfit_name = "first_casual"
+        $ Girl.outfit_name = "default"
     elif Girl.clothing[outfit] == 2:
         $ Girl.outfit_name = "second_casual"
     elif Girl.clothing[outfit] == 4:
@@ -2976,7 +2976,7 @@ label alternate_clothes(Girl, outfit = 1):
     elif Girl.clothing[outfit] == 6:
         $ Girl.outfit_name = "custom3"
     else:
-        $ Girl.outfit_name = "first_casual"
+        $ Girl.outfit_name = "default"
 
     return
 
@@ -4741,7 +4741,7 @@ label outfitShame(Girl, Custom = 3, Check=0, Count=0, Tempshame=50, Agree = 1):
         elif Girl.location == "bg_pool" and Girl.swimwear["outfit_active"]:
             $ Girl.outfit_name =  "swimwear"
         else:
-            $ Girl.outfit_name = renpy.random.choice(["first_casual", "second_casual"])
+            $ Girl.outfit_name = renpy.random.choice(["default", "second_casual"])
 
         $ Girl.add_word(1, "modesty", "modesty")
         $ Girl.wet = False

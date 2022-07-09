@@ -1,6 +1,6 @@
 init python:
 
-    def approval_check(Girl, threshold = 1000, flavor = "LOI", spread = 150, report_value = False, alternate_thresholds = {}):
+    def approval_check(Girl, threshold, flavor = "LOI", spread = 150, report_value = False, alternate_thresholds = {}):
         if Girl in alternate_thresholds.keys():
             threshold = alternate_thresholds[Girl]
 

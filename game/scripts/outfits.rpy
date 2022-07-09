@@ -301,14 +301,16 @@ init -2 python:
 
             return
 
-        def undress(self):
+        def undress(self, instant = False):
             for type in reversed(self.removable):
                 if self.Clothes[type].name:
-                    self.Clothes[type].take_off()
+                    if not instant:
+                        self.Clothes[type].take_off()
 
                     self.remove_Clothing(type)
 
-                    renpy.pause(0.2)
+                    if not instant:
+                        renpy.pause(0.2)
 
             return
 
@@ -477,7 +479,7 @@ init -2 python:
             self.last_Outfit = copy.deepcopy(self.current_Outfit)
 
             if not instant:
-                self.current_Outfit.undress()
+                self.current_Outfit.undress(instant = instant)
 
                 for type in Outfit.intrinsic:
                     if Outfit.Clothes[type]:

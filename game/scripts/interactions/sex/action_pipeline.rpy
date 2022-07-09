@@ -39,7 +39,7 @@ label before_Action(Girl, Action_type, context = None):
 
     if Action_type == "kiss":
         if Girl == RogueX and not Girl.permanent_History["kiss"]:
-            call Rogue_first_kiss
+            call first_kiss
 
             return "stop"
         else:

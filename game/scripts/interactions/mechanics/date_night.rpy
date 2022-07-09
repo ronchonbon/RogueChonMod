@@ -1624,9 +1624,9 @@ label Date_Prep(Girl=0):
         elif Girl.clothing[7] == 6:
             $ Girl.outfit_name = "custom3"
         else:
-            $ Girl.outfit_name = "first_casual"
+            $ Girl.outfit_name = "default"
     else:
-        $ Options = ["second_casual", "first_casual"]
+        $ Options = ["second_casual", "default"]
         $ Options.append("custom1") if Girl.first_custom_outfit["outfit_active"] == 2 else Options
         $ Options.append("custom2") if Girl.second_custom_outfit["outfit_active"] == 2 else Options
         $ Options.append("custom3") if Girl.third_custom_outfit["outfit_active"] == 2 else Options
