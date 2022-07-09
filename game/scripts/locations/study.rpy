@@ -184,7 +184,7 @@ label execute_plan(Girl):
 
         jump reset_location
 
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
 
     $ Girl.change_face("sly")
 

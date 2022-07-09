@@ -139,7 +139,7 @@ label check_if_second_minds(Girl = None, Previous = None, repeat = 0):
 label Date_Ask(Girl=0):
 
     $ Girl = check_girl(Girl)
-    call shift_focus (Girl)
+    $ shift_focus (Girl)
     if "going_on_date" in Girl.daily_history:
         $ Girl.change_face("bemused")
         if Girl == RogueX:
@@ -1030,7 +1030,7 @@ label DateNight(Date_Bonus = [0, 0], Play_Cost=0, Date_Cost = [0, 0]):
 
     $ Player.location = "bg_campus"
     $ Player.add_word(1, "date")
-    call shift_focus (Player.Party[0])
+    $ shift_focus (Player.Party[0])
     call set_the_scene
 
     if len(Player.Party) >= 2:
@@ -4473,5 +4473,5 @@ label Girl_Date_Over(Girl=0, Angry = 1):
     if not Player.Party:
 
         jump Date_End
-    call shift_focus (Player.Party[0])
+    $ shift_focus (Player.Party[0])
     return

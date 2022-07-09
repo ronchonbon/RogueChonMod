@@ -7,7 +7,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
 
     $ Girl = check_girl(Girl)
 
-    call shift_focus (Girl)
+    $ shift_focus (Girl)
     if Player.primary_Action == "blowjob":
         $ approval_bonus += 5
 
@@ -89,11 +89,11 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
         "Actually, let [Partner.name] take it." if Partner in all_Girls and action_context != "swap":
             $ action_context = "swap"
             $ approval_bonus = 0
-            call shift_focus (Partner)
+            $ shift_focus (Partner)
             call show_full_body(Partner)
             call Player_Cumming (Player.focused_Girl, approval_bonus=0)
 
-            call shift_focus (Partner)
+            $ shift_focus (Partner)
             call show_full_body(Partner)
 
             $ action_context = None
@@ -1580,11 +1580,11 @@ label Girl_Orgasm_After:
         "Yes":
             call Girl_CleanCock(Girl)
         "Actually, let [Partner.name] do it." if Partner in all_Girls:
-            call shift_focus (Partner)
+            $ shift_focus (Partner)
             call show_full_body(Partner)
             call Girl_CleanCock (Player.focused_Girl)
 
-            call shift_focus (Partner)
+            $ shift_focus (Partner)
             call show_full_body(Partner)
 
             "[Partner.name] Steps back."
@@ -1962,7 +1962,7 @@ label Girl_Cleanup(Girl=0, Choice = "random", Options = [], counter=0, Cleaned=0
             $ Original = Partner
         else:
             $ Original = Girl
-        call shift_focus (Girl)
+        $ shift_focus (Girl)
 
     if Choice == "ask":
         $ Choice = "random"
@@ -2527,7 +2527,7 @@ label Girl_Cleanup(Girl=0, Choice = "random", Options = [], counter=0, Cleaned=0
 
     if Original in all_Girls and Player.focused_Girl != Original:
 
-        call shift_focus (Original)
+        $ shift_focus (Original)
     return
 
 

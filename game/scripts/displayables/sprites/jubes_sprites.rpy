@@ -6,7 +6,7 @@ layeredimage Jubes_sprite standing:
         "images/Jubes_standing/Jubes_standing_jacket_[JubesX.Clothes[jacket].string]_collar.png"
 
     if JubesX.Clothes["jacket"].state:
-        "images/Jubes_standing/Jubes_standing_jacket[JubesX.Clothes[jacket].string][JubesX.arm_pose]_back.png"
+        "images/Jubes_standing/Jubes_standing_jacket[JubesX.arm_pose]_[JubesX.Clothes[jacket].string]_back.png"
 
     if JubesX.Clothes["pants"].state:
         "images/Jubes_standing/Jubes_standing_pants_[JubesX.Clothes[pants].string]_back.png"

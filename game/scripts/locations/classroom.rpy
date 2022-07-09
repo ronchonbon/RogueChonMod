@@ -67,7 +67,7 @@ label classroom_seating:
                 G.location = "nearby"
 
     if Present and Player.focused_Girl not in Present:
-        call shift_focus(Present[0])
+        $ shift_focus(Present[0])
 
     if len(Present) > 2:
         "You figure out seating arrangements with the girls."
@@ -145,7 +145,7 @@ label take_class:
 
 
 label frisky_class(Girl):
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
     call set_the_scene
 
     if EmmaX.teaching:

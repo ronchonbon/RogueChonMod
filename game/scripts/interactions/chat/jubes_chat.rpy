@@ -2137,7 +2137,7 @@ label Jubes_Leave:
 
     elif line == "go to":
         call hide_Girl(JubesX)
-        call change_clothes
+        $ change_clothes()
 
         if JubesX.location == "bg_classroom":
             ch_v "Ok, get a move on then."

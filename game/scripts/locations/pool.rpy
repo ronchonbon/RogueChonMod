@@ -275,7 +275,7 @@ label show_swimming(Swimmers):
 
 
 label wardrobe_malfunction(Girl):
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
 
     $ Girl.expose_breasts()
 

@@ -1,5 +1,5 @@
 label caught_changing(Girl):
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
 
     $ D20 = renpy.random.randint(1, 20)
 
@@ -369,7 +369,7 @@ label caught_showering(Girl):
 
             $ Girl.change_face("perplexed", 2, mouth = "normal")
 
-            call shift_focus(Girl)
+            $ shift_focus(Girl)
             call set_the_scene(location = "bg_shower")
 
             if Girl == RogueX:
@@ -393,7 +393,7 @@ label caught_showering(Girl):
         else:
             "You hear the rustling of a towel and some knocking around, but after a few seconds [Girl.name] comes to the door."
 
-            call shift_focus(Girl)
+            $ shift_focus(Girl)
             call set_the_scene(location = "bg_shower")
 
             if Girl == RogueX:
@@ -413,7 +413,7 @@ label caught_showering(Girl):
     else:
         $ Player.location = "bg_shower"
 
-        call shift_focus(Girl)
+        $ shift_focus(Girl)
 
         if "will_masturbate" in Girl.daily_history:
             $ Girl.drain_word("will_masturbate", 0, 1)
@@ -428,7 +428,7 @@ label caught_showering(Girl):
 
             "You see [Girl.name] under the shower, feeling herself up."
 
-            call shift_focus(Girl)
+            $ shift_focus(Girl)
             call before_masturbation(Girl)
 
             jump reset_location
@@ -750,7 +750,7 @@ label caught_masturbating(Girl):
 
         $ approval_bonus += 10
     elif line == "enter":
-        call shift_focus(Girl)
+        $ shift_focus(Girl)
         show black_screen onlayer black
 
         $ Girl.expose_pussy()
@@ -767,7 +767,7 @@ label caught_masturbating(Girl):
 
         hide black_screen onlayer black
 
-        call shift_focus(Girl)
+        $ shift_focus(Girl)
         call before_masturbation(Girl)
 
         if "angry" in Girl.recent_history:
@@ -942,7 +942,7 @@ label caught_lesbian(GirlA, GirlB):
                 $ Partner = Girl2
                 $ interrupted = 0
 
-                call shift_focus(Girl)
+                $ shift_focus(Girl)
                 call Les_Prep(Girl)
             "Leave quietly":
                 "You leave the girls to their business and slip out."
@@ -959,8 +959,8 @@ label caught_lesbian(GirlA, GirlB):
     return
 
 label caught_having_sex(Girl):
-    call shift_focus(Girl)
-    call checkout
+    $ shift_focus(Girl)
+    $ checkout()
 
     Girl.voice "!!!"
 

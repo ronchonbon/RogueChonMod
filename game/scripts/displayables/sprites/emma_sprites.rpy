@@ -11,7 +11,7 @@ layeredimage Emma_sprite standing normal:
     if EmmaX.Clothes["skirt"].string == "Dimitrescu_skirt":
         "images/Emma_standing/Emma_standing_skirt_[EmmaX.Clothes[skirt].string]_back.png"
 
-    if EmmaX.Clothes["bra"].string == "white_corset" and not EmmaX.Clothes["bra"].state and not (EmmaX.Clothes["jacket"].string or EmmaX.Clothes["top"].string):
+    if EmmaX.Clothes["bra"].string in ["white_corset", "black_corset"] and not EmmaX.Clothes["bra"].state and not (EmmaX.Clothes["jacket"].string or EmmaX.Clothes["top"].string):
         "images/Emma_standing/Emma_standing_bra[EmmaX.arm_pose]_[EmmaX.Clothes[bra].string]_back.png"
 
     if EmmaX.Clothes["underwear"].state:
@@ -239,8 +239,8 @@ layeredimage Emma_sprite standing diamond:
     if EmmaX.Clothes["skirt"].string == "Dimitrescu_skirt":
         "images/Emma_standing/Emma_standing_skirt_[EmmaX.Clothes[skirt].string]_back.png"
 
-    if EmmaX.Clothes["bra"].string == "white_corset" and not EmmaX.Clothes["bra"].state and not (EmmaX.Clothes["jacket"].string or EmmaX.Clothes["top"].string):
-        "images/Emma_standing/Emma_standing_bra_[EmmaX.Clothes[bra].string][EmmaX.arm_pose]_back.png"
+    if EmmaX.Clothes["bra"].string in ["white_corset", "black_corset"] and not EmmaX.Clothes["bra"].state and not (EmmaX.Clothes["jacket"].string or EmmaX.Clothes["top"].string):
+        "images/Emma_standing/Emma_standing_bra[EmmaX.arm_pose]_[EmmaX.Clothes[bra].string]_back.png"
 
     if EmmaX.Clothes["underwear"].state:
         "images/Emma_standing/Emma_standing_underwear_[EmmaX.Clothes[underwear].string]_back.png"

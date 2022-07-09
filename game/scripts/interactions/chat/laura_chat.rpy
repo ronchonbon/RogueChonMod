@@ -44,7 +44,7 @@ label summon_Laura:
         menu(nvl = True):
             extend ""
             "Sure, I'll be right there.":
-                ch_p_text "Sure, I'll be right there."
+                ch_p_nvl "Sure, I'll be right there."
 
                 call change_Girl_stat(LauraX, "love", 1)
                 call change_Girl_stat(LauraX, "inhibition", 1)
@@ -53,14 +53,14 @@ label summon_Laura:
 
                 $ line = "go to"
             "Nah, we can talk later.":
-                ch_p_text "Nah, we can talk later."
+                ch_p_nvl "Nah, we can talk later."
 
                 call change_Girl_stat(LauraX, "obedience", 1)
                 call change_Girl_stat(LauraX, "obedience", 2)
 
                 ch_l "Ok. Later then."
             "Could you please come visit me? I'm lonely.":
-                ch_p_text "Could you please come visit me? I'm lonely."
+                ch_p_nvl "Could you please come visit me? I'm lonely."
 
                 if approval_check(LauraX, 650, "L") or approval_check(LauraX, 1500):
                     call change_Girl_stat(LauraX, "love", 1)
@@ -74,7 +74,7 @@ label summon_Laura:
 
                     ch_l "Man, you are such a sap."
             "Come on, it'll be fun.":
-                ch_p_text "Come on, it'll be fun."
+                ch_p_nvl "Come on, it'll be fun."
 
                 if approval_check(LauraX, 400, "L") and approval_check(LauraX, 800):
                     call change_Girl_stat(LauraX, "love", 1)
@@ -86,7 +86,7 @@ label summon_Laura:
 
                     $ line = "no"
             "I said come over here.":
-                ch_p_text "I said come over here."
+                ch_p_nvl "I said come over here."
 
                 if approval_check(LauraX, 600, "O"):
                     call change_Girl_stat(LauraX, "love", 1)
@@ -296,7 +296,7 @@ label Laura_leaving:
         return
     elif line == "go to":
         call hide_Girl(LauraX)
-        call change_clothes
+        $ change_clothes()
 
         if LauraX.location == "bg_classroom":
             ch_l "Ok, get a move on then."

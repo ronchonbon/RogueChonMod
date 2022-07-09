@@ -87,7 +87,7 @@ label change_wardrobe(Girl):
 
         return
 
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
 
     $ public = 0
 
@@ -207,7 +207,7 @@ label change_wardrobe(Girl):
 
                 $ Girl = stored_Girl
 
-                call shift_focus(Girl)
+                $ shift_focus(Girl)
             "You look good like that.":
                 if "wardrobe" not in Girl.recent_history:
                     if Girl == StormX and (Girl.top_number() + Girl.bra_number()<4) or (Girl.underwear_number() + Girl.bottom_number() < 5):
@@ -2981,7 +2981,7 @@ label alternate_clothes(Girl, outfit = 1):
     return
 
 label set_outfit_schedule(Girl):
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
 
     while True:
         $ counter = 0
@@ -3568,7 +3568,7 @@ label Private_outfit(Girl):
     elif "no_comfy" in Girl.recent_history:
         pass
     elif approval_check(Girl, 1200, "LI") and (2*Girl.inhibition) >=(Girl.love + Girl.obedience +100):
-        call shift_focus(Girl)
+        $ shift_focus(Girl)
 
         if Girl == RogueX:
             ch_r "Be right there [Girl.player_petname]. . ."
@@ -3596,7 +3596,7 @@ label Private_outfit(Girl):
         $ Girl.change_Outfit()
         $ Girl.recent_history.append("comfy")
     else:
-        call shift_focus(Girl)
+        $ shift_focus(Girl)
 
         if Girl == RogueX:
             ch_r "Be right there [Girl.player_petname]. . ."
@@ -3667,7 +3667,7 @@ label Private_outfit(Girl):
 label Custom_Out(Girl=0, Custom = 3, Shame=0, Agree=0):
 
     $ Girl = check_girl(Girl)
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
     $ Girl.change_face("sexy", 1)
 
     if Custom == 3:

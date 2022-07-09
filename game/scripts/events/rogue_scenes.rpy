@@ -43,7 +43,7 @@ label prologue:
     $ RogueX.location = Player.location
 
     call show_Girl(RogueX, x_position = stage_far_far_right, color_transform = color_transform, transition = easeinright)
-    call shift_focus(RogueX)
+    $ shift_focus(RogueX)
 
     ch_r "What's that Prof? This new kid can negate mutant powers?"
 
@@ -527,7 +527,7 @@ label Rogue_boyfriend_bad_ending:
     return
 
 label Rogue_key:
-    call shift_focus(RogueX)
+    $ shift_focus(RogueX)
     call set_the_scene
 
     $ RogueX.change_face("bemused")
@@ -549,7 +549,7 @@ label Rogue_key:
 
 
 label Rogue_Love:
-    call shift_focus (RogueX)
+    $ shift_focus (RogueX)
     $ RogueX.drain_word("asked_to_meet")
 
     if Player.location != "bg_rogue":
@@ -763,7 +763,7 @@ label Rogue_AnnaMarie:
 
 
 label Rogue_Sub:
-    call shift_focus (RogueX)
+    $ shift_focus (RogueX)
     $ RogueX.drain_word("asked_to_meet")
     if RogueX.location != Player.location and RogueX not in Player.Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
@@ -881,7 +881,7 @@ label Rogue_Sub_Jerk:
 
 
 label Rogue_Master:
-    call shift_focus (RogueX)
+    $ shift_focus (RogueX)
     $ RogueX.drain_word("asked_to_meet")
     if RogueX.location != Player.location and RogueX not in Player.Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
@@ -1004,7 +1004,7 @@ label Rogue_Obed_Jerk:
 
 
 label Rogue_Sexfriend:
-    call shift_focus (RogueX)
+    $ shift_focus (RogueX)
     $ RogueX.daily_history.append("relationship")
     if RogueX in Player.Harem:
         if RogueX.location != Player.location and RogueX not in Player.Party:
@@ -1125,7 +1125,7 @@ label Rogue_Sexfriend_Jerk:
 
 
 label Rogue_Fuckbuddy:
-    call shift_focus (RogueX)
+    $ shift_focus (RogueX)
     $ RogueX.drain_word("asked_to_meet")
     if RogueX in Player.Harem:
         if RogueX.location != Player.location and RogueX not in Player.Party:
@@ -1239,7 +1239,7 @@ label Rogue_Fuckbuddy_Jerk:
 label Rogue_Daddy:
     $ RogueX.daily_history.append("relationship")
     $ RogueX.drain_word("asked_to_meet")
-    call shift_focus (RogueX)
+    $ shift_focus (RogueX)
     call set_the_scene
     ch_r ". . ."
     if RogueX in Player.Harem:

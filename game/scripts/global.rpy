@@ -25,13 +25,13 @@ init -1:
 
     default show_feet = False
 
-    default stage_far_far_left = 0.15
-    default stage_far_left = 0.25
-    default stage_left = 0.35
-    default stage_center = 0.5
-    default stage_right = 0.65
-    default stage_far_right = 0.75
-    default stage_far_far_right = 0.85
+    define stage_far_far_left = 0.15
+    define stage_far_left = 0.25
+    define stage_left = 0.35
+    define stage_center = 0.5
+    define stage_right = 0.65
+    define stage_far_right = 0.75
+    define stage_far_far_right = 0.85
 
     define hand_Action_types = ["massage", "fondle_thighs", "fondle_breasts", "fondle_pussy", "finger_pussy", "fondle_ass", "finger_ass"]
     define finger_Action_types = ["finger_pussy", "finger_ass"]

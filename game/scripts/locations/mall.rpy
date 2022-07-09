@@ -528,7 +528,7 @@ label swimsuit_shop:
                 return
 
         if Girl:
-            call shift_focus(Girl)
+            $ shift_focus(Girl)
 
             $ Girl.change_face("smile", 1)
 
@@ -931,7 +931,7 @@ label lingerie_shop:
                 return
 
         if Girl:
-            call shift_focus(Girl)
+            $ shift_focus(Girl)
 
             $ Girl.change_face("smile", 1)
 
@@ -1553,7 +1553,7 @@ label clothing_shop:
                 return
 
         if Girl:
-            call shift_focus(Girl)
+            $ shift_focus(Girl)
 
             $ Girl.change_face("smile", 1)
 

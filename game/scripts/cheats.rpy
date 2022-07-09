@@ -72,7 +72,7 @@ label cheat_menu(Girl):
                         if Clothing.name not in JeanX.Wardrobe.Clothes.keys():
                             JeanX.Wardrobe.Clothes[Clothing.name] = Clothing
             "Done":
-                call checkout
+                $ checkout()
 
                 return
 

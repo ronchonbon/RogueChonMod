@@ -42,7 +42,7 @@ label meet_Jubes:
 
     hide black_screen onlayer black
 
-    call shift_focus(JubesX)
+    $ shift_focus(JubesX)
 
     $ counter = 3
 
@@ -871,7 +871,7 @@ label is_Jubes_sunshocked:
 
 
 label Jubes_Mall:
-    call shift_focus(JubesX)
+    $ shift_focus(JubesX)
 
     if JubesX.location == Player.location:
         "[JubesX.name] suddently freezes up, then turns to you."
@@ -1142,7 +1142,7 @@ label Jubes_Key:
 
 
 label Jubes_BF(temp_Girls = []):
-    call shift_focus (JubesX)
+    $ shift_focus (JubesX)
     if JubesX.location != Player.location:
         if JubesX not in Player.Party:
             "[JubesX.name] approaches you and motions that she wants to speak to you alone."
@@ -1562,7 +1562,7 @@ label Jubes_Cleanhouse:
 
 label Jubes_Sub:
     $ JubesX.drain_word("asked_to_meet")
-    call shift_focus (JubesX)
+    $ shift_focus (JubesX)
     if JubesX.location != Player.location and JubesX not in Player.Party:
         "Suddenly, [JubesX.name] shows up and says she needs to talk to you."
 
@@ -1931,7 +1931,7 @@ label Jubes_Sub_Asked:
 
 label Jubes_Master:
     $ JubesX.drain_word("asked_to_meet")
-    call shift_focus (JubesX)
+    $ shift_focus (JubesX)
     if JubesX.location != Player.location and JubesX not in Player.Party:
         "Suddenly, [JubesX.name] shows up and says she needs to talk to you."
 
@@ -2259,7 +2259,7 @@ label Jubes_Fuckbuddy:
     "You hear a knock on the door, and go to answer it."
 
     $ JubesX.location = Player.location
-    call shift_focus (JubesX)
+    $ shift_focus (JubesX)
     call set_the_scene
     $ JubesX.outfit_name = "first_casual"
     $ JubesX.today_outfit_name = "first_casual"
@@ -2294,7 +2294,7 @@ label Jubes_Fuckbuddy:
 label Jubes_Daddy:
     $ JubesX.daily_history.append("relationship")
     $ JubesX.drain_word("asked_to_meet")
-    call shift_focus (JubesX)
+    $ shift_focus (JubesX)
     call set_the_scene
     ch_v ". . ."
     if JubesX in Player.Harem:

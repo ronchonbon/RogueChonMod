@@ -5,62 +5,62 @@ label summon_Rogue:
         $ line = "no"
     elif time_index > 2:
         if approval_check(RogueX, 700, "L") or approval_check(RogueX, 300, "O"):
-            ch_r_text "Ok, it's getting late but I can hang out for a bit."
+            ch_r_nvl "Ok, it's getting late but I can hang out for a bit."
 
             call add_Girls(RogueX)
         else:
-            ch_r_text "It's a bit late, [RogueX.player_petname], maybe tomorrow."
+            ch_r_nvl "It's a bit late, [RogueX.player_petname], maybe tomorrow."
 
         return
     elif not approval_check(RogueX, 700, "L") or not approval_check(RogueX, 600, "O"):
         if not approval_check(RogueX, 300):
-            ch_r_text "Not really interested, [RogueX.player_petname]."
+            ch_r_nvl "Not really interested, [RogueX.player_petname]."
 
             return
         elif RogueX.location == "bg_classroom":
-            ch_r_text "I'm kinda in class right now, [RogueX.player_petname], you could join me."
+            ch_r_nvl "I'm kinda in class right now, [RogueX.player_petname], you could join me."
         elif RogueX.location == "bg_dangerroom":
-            ch_r_text "I'm training at the moment, [RogueX.player_petname], care to join me?"
+            ch_r_nvl "I'm training at the moment, [RogueX.player_petname], care to join me?"
         elif RogueX.location == "bg_campus":
-            ch_r_text "I'm hanging out on campus, [RogueX.player_petname], want to hang with me?"
+            ch_r_nvl "I'm hanging out on campus, [RogueX.player_petname], want to hang with me?"
         elif RogueX.location == "bg_rogue":
-            ch_r_text "I'm in my room, [RogueX.player_petname], want to swing by?"
+            ch_r_nvl "I'm in my room, [RogueX.player_petname], want to swing by?"
         elif RogueX.location == "bg_player":
-            ch_r_text "I happen to be in your room, [RogueX.player_petname], I'm waiting for you. . ."
+            ch_r_nvl "I happen to be in your room, [RogueX.player_petname], I'm waiting for you. . ."
         elif RogueX.location == "bg_shower":
             if approval_check(RogueX, 1600):
-                ch_r_text "I'm kinda in the shower right now, [RogueX.player_petname], care to join me?"
+                ch_r_nvl "I'm kinda in the shower right now, [RogueX.player_petname], care to join me?"
             else:
-                ch_r_text "I'm kinda in the shower right now, [RogueX.player_petname], maybe we could touch base later."
+                ch_r_nvl "I'm kinda in the shower right now, [RogueX.player_petname], maybe we could touch base later."
 
                 return
         elif RogueX.location == "hold":
-            ch_r_text "I'm not really around right now, see you later?"
+            ch_r_nvl "I'm not really around right now, see you later?"
 
             return
         else:
-            ch_r_text "Why don't you come over here, [RogueX.player_petname]?"
+            ch_r_nvl "Why don't you come over here, [RogueX.player_petname]?"
 
         menu(nvl = True):
             extend ""
             "Sure, I'll be right there.":
-                ch_p_text "Sure, I'll be right there."
+                ch_p_nvl "Sure, I'll be right there."
 
                 call change_Girl_stat(RogueX, "love", 1)
                 call change_Girl_stat(RogueX, "inhibition", 1)
 
-                ch_r_text "See you then!"
+                ch_r_nvl "See you then!"
 
                 $ line = "go to"
             "Nah, we can talk later.":
-                ch_p_text "Nah, we can talk later."
+                ch_p_nvl "Nah, we can talk later."
 
                 call change_Girl_stat(RogueX, "obedience", 1)
                 call change_Girl_stat(RogueX, "obedience", 2)
 
-                ch_r_text "Oh, ok. Talk to you later then."
+                ch_r_nvl "Oh, ok. Talk to you later then."
             "Could you please come visit me? I'm lonely.":
-                ch_p_text "Could you please come visit me? I'm lonely."
+                ch_p_nvl "Could you please come visit me? I'm lonely."
 
                 if approval_check(RogueX, 600, "L") or approval_check(RogueX, 1400):
                     call change_Girl_stat(RogueX, "love", 1)
@@ -72,7 +72,7 @@ label summon_Rogue:
 
                     $ line = "no"
             "I said come over here.":
-                ch_p_text "I said come over here."
+                ch_p_nvl "I said come over here."
 
                 if approval_check(RogueX, 600, "O"):
                     call change_Girl_stat(RogueX, "love", 1)
@@ -86,20 +86,20 @@ label summon_Rogue:
                     call change_Girl_stat(RogueX, "obedience", 2)
                     call change_Girl_stat(RogueX, "obedience", 1)
 
-                    ch_r_text "I suppose I can, [RogueX.player_petname]."
+                    ch_r_nvl "I suppose I can, [RogueX.player_petname]."
 
                     $ line = "yes"
                 elif approval_check(RogueX, 200, "O"):
                     call change_Girl_stat(RogueX, "love", -4)
                     call change_Girl_stat(RogueX, "love", -2)
 
-                    ch_r_text "I don't know who you think you are, boss'in me around like that."
+                    ch_r_nvl "I don't know who you think you are, boss'in me around like that."
 
                     call change_Girl_stat(RogueX, "obedience", -2)
                     call change_Girl_stat(RogueX, "inhibition", 2)
                     call change_Girl_stat(RogueX, "inhibition", 1)
 
-                    ch_r_text "If you want to see me, you know where to find me."
+                    ch_r_nvl "If you want to see me, you know where to find me."
                 else:
                     call change_Girl_stat(RogueX, "love", 1)
                     call change_Girl_stat(RogueX, "obedience", -1)
@@ -109,9 +109,9 @@ label summon_Rogue:
                     $ line = "no"
     else:
         if RogueX.love > RogueX.obedience:
-            ch_r_text "I'd love to, [RogueX.player_petname]."
+            ch_r_nvl "I'd love to, [RogueX.player_petname]."
         else:
-            ch_r_text "Ok, I'll be right over, [RogueX.player_petname]."
+            ch_r_nvl "Ok, I'll be right over, [RogueX.player_petname]."
 
         $ line = "yes"
 
@@ -119,17 +119,17 @@ label summon_Rogue:
         return
     elif line == "go to":
         if RogueX.location == "bg_player":
-            ch_r_text "I'll be waiting."
+            ch_r_nvl "I'll be waiting."
         elif RogueX.location == "bg_rogue":
-            ch_r_text "I'll get tidied up."
+            ch_r_nvl "I'll get tidied up."
         elif RogueX.location == "bg_campus":
-            ch_r_text "I'll keep an eye out for you."
+            ch_r_nvl "I'll keep an eye out for you."
         elif RogueX.location == "bg_classroom":
-            ch_r_text "See you then!"
+            ch_r_nvl "See you then!"
         elif RogueX.location == "bg_dangerroom":
-            ch_r_text "I'll be warming up!"
+            ch_r_nvl "I'll be warming up!"
         elif RogueX.location == "bg_shower":
-            ch_r_text "I guess I'll be here."
+            ch_r_nvl "I guess I'll be here."
 
         call hide_all
 
@@ -157,17 +157,17 @@ label summon_Rogue:
             jump mall
     elif line == "no":
         if RogueX.location == "bg_classroom":
-            ch_r_text "I seriously can't, [RogueX.player_petname], big test coming up."
+            ch_r_nvl "I seriously can't, [RogueX.player_petname], big test coming up."
         elif RogueX.location == "bg_dangerroom":
-            ch_r_text "Wish I could, [RogueX.player_petname], but I need to get some hours in."
+            ch_r_nvl "Wish I could, [RogueX.player_petname], but I need to get some hours in."
         else:
-            ch_r_text "I'm sorry, [RogueX.player_petname], but I'm kinda busy right now."
+            ch_r_nvl "I'm sorry, [RogueX.player_petname], but I'm kinda busy right now."
 
         return
     elif line == "lonely":
-        ch_r_text "Oh, how could I say \"no\" to you, [RogueX.player_petname]?"
+        ch_r_nvl "Oh, how could I say \"no\" to you, [RogueX.player_petname]?"
     elif line == "command":
-        ch_r_text "Fine, if you insist, [RogueX.player_petname]."
+        ch_r_nvl "Fine, if you insist, [RogueX.player_petname]."
 
     $ RogueX.change_Outfit()
 
@@ -272,7 +272,7 @@ label Rogue_leaving:
         return
     elif line == "go to":
         call hide_Girl(RogueX)
-        call change_clothes
+        $ change_clothes()
 
         if RogueX.location == "bg_player":
             ch_r "I'll be waiting."

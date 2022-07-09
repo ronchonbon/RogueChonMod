@@ -5,62 +5,62 @@ label summon_Emma:
         $ line = "no"
     elif time_index > 2:
         if approval_check(EmmaX, 700, "L") or approval_check(EmmaX, 300, "O"):
-            ch_e_text "It's getting late, but fine, what did you want?"
+            ch_e_nvl "It's getting late, but fine, what did you want?"
 
             call add_Girls(EmmaX)
         else:
-            ch_e_text "It's late, [EmmaX.player_petname], tell me tomorrow."
+            ch_e_nvl "It's late, [EmmaX.player_petname], tell me tomorrow."
 
         return
     elif not approval_check(EmmaX, 700, "L") or not approval_check(EmmaX, 600, "O"):
         if not approval_check(EmmaX, 300):
-            ch_e_text "I don't really feel up to that, [EmmaX.player_petname]."
+            ch_e_nvl "I don't really feel up to that, [EmmaX.player_petname]."
 
             return
         elif EmmaX.location == "bg_classroom" or EmmaX.teaching:
-            ch_e_text "You can find me in the classroom, [EmmaX.player_petname]."
+            ch_e_nvl "You can find me in the classroom, [EmmaX.player_petname]."
         elif EmmaX.location == "bg_dangerroom":
-            ch_e_text "I'm getting some training in, [EmmaX.player_petname], care to join me?"
+            ch_e_nvl "I'm getting some training in, [EmmaX.player_petname], care to join me?"
         elif EmmaX.location == "bg_campus":
-            ch_e_text "I'm relaxing in the square, if you'd care to join me."
+            ch_e_nvl "I'm relaxing in the square, if you'd care to join me."
         elif EmmaX.location == "bg_emma":
-            ch_e_text "I'm in my room, [EmmaX.player_petname]."
+            ch_e_nvl "I'm in my room, [EmmaX.player_petname]."
         elif EmmaX.location == "bg_player":
-            ch_e_text "I'm waiting in your room, [EmmaX.player_petname]. . ."
+            ch_e_nvl "I'm waiting in your room, [EmmaX.player_petname]. . ."
         elif EmmaX.location == "bg_shower":
             if approval_check(EmmaX, 1600):
-                ch_e_text "I'm in the shower right now, [EmmaX.player_petname], do you need an invitation?"
+                ch_e_nvl "I'm in the shower right now, [EmmaX.player_petname], do you need an invitation?"
             else:
-                ch_e_text "I'm in the shower right now, [EmmaX.player_petname], perhaps I'll see you later."
+                ch_e_nvl "I'm in the shower right now, [EmmaX.player_petname], perhaps I'll see you later."
 
                 return
         elif EmmaX.location == "hold":
-            ch_e_text "I'm off campus for a bit, I'll be back later."
+            ch_e_nvl "I'm off campus for a bit, I'll be back later."
 
             return
         else:
-            ch_e_text "You could always come over here, [EmmaX.player_petname]."
+            ch_e_nvl "You could always come over here, [EmmaX.player_petname]."
 
         menu(nvl = True):
             extend ""
             "Sure, I'll be right there.":
-                ch_p_text "Sure, I'll be right there."
+                ch_p_nvl "Sure, I'll be right there."
 
                 call change_Girl_stat(EmmaX, "love", 1)
                 call change_Girl_stat(EmmaX, "inhibition", 1)
 
-                ch_e_text "I'll be waiting."
+                ch_e_nvl "I'll be waiting."
 
                 $ line = "go to"
             "Nah, we can talk later.":
-                ch_p_text "Nah, we can talk later."
+                ch_p_nvl "Nah, we can talk later."
 
                 call change_Girl_stat(EmmaX, "obedience", 1)
                 call change_Girl_stat(EmmaX, "obedience", 2)
 
-                ch_e_text "Very well."
+                ch_e_nvl "Very well."
             "Could you please come visit me? I'm lonely.":
-                ch_p_text "Could you please come visit me? I'm lonely."
+                ch_p_nvl "Could you please come visit me? I'm lonely."
 
                 if approval_check(EmmaX, 600, "L") or approval_check(EmmaX, 1400):
                     call change_Girl_stat(EmmaX, "love", 1)
@@ -72,7 +72,7 @@ label summon_Emma:
 
                     $ line = "no"
             "I said come over here.":
-                ch_p_text "I said come over here."
+                ch_p_nvl "I said come over here."
 
                 if approval_check(EmmaX, 600, "O"):
                     call change_Girl_stat(EmmaX, "love", 1)
@@ -86,20 +86,20 @@ label summon_Emma:
                     call change_Girl_stat(EmmaX, "obedience", 2)
                     call change_Girl_stat(EmmaX, "obedience", 1)
 
-                    ch_e_text "Ok, fine, [EmmaX.player_petname]."
+                    ch_e_nvl "Ok, fine, [EmmaX.player_petname]."
 
                     $ line = "yes"
                 elif approval_check(EmmaX, 200, "O"):
                     call change_Girl_stat(EmmaX, "love", -4)
                     call change_Girl_stat(EmmaX, "love", -2)
 
-                    ch_e_text "Who do you think is in charge here?!"
+                    ch_e_nvl "Who do you think is in charge here?!"
 
                     call change_Girl_stat(EmmaX, "inhibition", 2)
                     call change_Girl_stat(EmmaX, "inhibition", 1)
                     call change_Girl_stat(EmmaX, "obedience", -2)
 
-                    ch_e_text "You'd better hope you don't find me here."
+                    ch_e_nvl "You'd better hope you don't find me here."
                 else:
                     call change_Girl_stat(EmmaX, "love", 1)
                     call change_Girl_stat(EmmaX, "obedience", -1)
@@ -109,9 +109,9 @@ label summon_Emma:
                     $ line = "no"
     else:
         if EmmaX.love > EmmaX.obedience:
-            ch_e_text "I'd love to."
+            ch_e_nvl "I'd love to."
         else:
-            ch_e_text "I'll be right there, [EmmaX.player_petname]."
+            ch_e_nvl "I'll be right there, [EmmaX.player_petname]."
 
         $ line = "yes"
 
@@ -119,17 +119,17 @@ label summon_Emma:
         return
     elif line == "go to":
         if EmmaX.location == "bg_player":
-            ch_e_text "I'll be waiting for you."
+            ch_e_nvl "I'll be waiting for you."
         elif EmmaX.location == "bg_emma":
-            ch_e_text "I'll tidy up a few things."
+            ch_e_nvl "I'll tidy up a few things."
         elif EmmaX.location == "bg_campus":
-            ch_e_text "I've got a nice location picked out."
+            ch_e_nvl "I've got a nice location picked out."
         elif EmmaX.location == "bg_classroom" or EmmaX.teaching:
-            ch_e_text "You don't want to miss too much."
+            ch_e_nvl "You don't want to miss too much."
         elif EmmaX.location == "bg_dangerroom":
-            ch_e_text "I'll try to save some for you."
+            ch_e_nvl "I'll try to save some for you."
         elif EmmaX.location == "bg_shower":
-            ch_e_text "Don't keep me waiting. . ."
+            ch_e_nvl "Don't keep me waiting. . ."
 
         call hide_all
 
@@ -157,19 +157,19 @@ label summon_Emma:
             jump mall
     elif line == "no":
         if EmmaX.teaching:
-            ch_e_text "I can't exactly leave class, [EmmaX.player_petname]."
+            ch_e_nvl "I can't exactly leave class, [EmmaX.player_petname]."
         elif EmmaX.location == "bg_classroom":
-            ch_e_text "I have a lot of paperwork, [EmmaX.player_petname]."
+            ch_e_nvl "I have a lot of paperwork, [EmmaX.player_petname]."
         elif EmmaX.location == "bg_dangerroom":
-            ch_e_text "I'm just getting warmed up here."
+            ch_e_nvl "I'm just getting warmed up here."
         else:
-            ch_e_text "I have a lot to finish up here."
+            ch_e_nvl "I have a lot to finish up here."
 
         return
     elif line == "lonely":
-        ch_e_text "Well, we can't have that now."
+        ch_e_nvl "Well, we can't have that now."
     elif line == "command":
-        ch_e_text "If I must. . ."
+        ch_e_nvl "If I must. . ."
 
     $ EmmaX.change_Outfit()
 
@@ -274,7 +274,7 @@ label Emma_leaving:
         return
     elif line == "go to":
         call hide_Girl(EmmaX)
-        call change_clothes
+        $ change_clothes()
 
         if EmmaX.teaching:
             ch_e "I'll see you there."
@@ -340,7 +340,7 @@ label Emma_leaving:
 
 label Emma_chat_Minimal:
     $ EmmaX.change_face()
-    call shift_focus (EmmaX)
+    $ shift_focus (EmmaX)
     if EmmaX.location != Player.location:
         show cellphone at sprite_location(EmmaX.sprite_location)
     else:

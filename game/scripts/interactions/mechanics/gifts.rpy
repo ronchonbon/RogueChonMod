@@ -478,7 +478,7 @@ label shop:
 label gifts:
     $ Girl = check_girl(Girl)
 
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
 
     while True:
         if not Player.inventory:

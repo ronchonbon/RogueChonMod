@@ -454,7 +454,7 @@ label add_Girls(Girls, fade = False, static = False):
                 Present.append(G)
 
     call set_the_scene(fade = fade, static = static)
-    call shift_focus(Girls[0])
+    $ shift_focus(Girls[0])
 
     return
 
@@ -490,7 +490,7 @@ label remove_Girl(Girl, transition = None):
     return
 
 label remove_all:
-    call check_who_is_present
+    $ check_who_is_present
 
     if Present:
         $ temp_Girls = Present[:]

@@ -67,7 +67,7 @@ label Les_Interupted(Girl=0, temp_Girls = []):
     elif Girl == JubesX:
         ch_v "Oh? hey [Girl.player_petname]. What'd you see?"
     $ Girl.remaining_Actions -= 1 if Girl.remaining_Actions > 0 else 0
-    call checkout
+    $ checkout()
     call reset_player
     $ line = 0
 
@@ -264,7 +264,7 @@ label Les_Interupted(Girl=0, temp_Girls = []):
 
 label LesScene(Girl=0, Bonus=0, temp_Girls = []):
     $ Girl = check_girl(Girl)
-    call shift_focus (Girl)
+    $ shift_focus (Girl)
 
     if not Girl.remaining_Actions:
 
@@ -460,7 +460,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls = []):
                         elif Girl == JubesX:
                             ch_v "Nice."
 
-                call shift_focus(Girl)
+                $ shift_focus(Girl)
                 jump Les_Prep
 
             "So maybe I could join you girls?" if Player.semen and Girl.remaining_Actions:
@@ -660,7 +660,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls = []):
                 ch_s "Very well. . ."
             elif Girl == JubesX:
                 ch_v "I guess we can do that for you. . ."
-            call shift_focus(Girl)
+            $ shift_focus(Girl)
             jump Les_Prep
         elif approval and "lesbian" in Girl.daily_history:
             $ Girl.change_face("sexy", 1)
@@ -941,7 +941,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls = []):
         elif Girl == JubesX:
             ch_v "Ok, fine, if you're into it."
             ch_v "Come on over here."
-        call shift_focus(Girl)
+        $ shift_focus(Girl)
         jump Les_Prep
 
 
@@ -1099,7 +1099,7 @@ label Les_Prep(Girl=Player.focused_Girl, temp_Girls = []):
 
     if line:
 
-        call shift_focus (Partner)
+        $ shift_focus (Partner)
 
     $ line = 0
 
@@ -1139,7 +1139,7 @@ label Les_Prep(Girl=Player.focused_Girl, temp_Girls = []):
 label Les_Cycle(Girl=Player.focused_Girl):
     $ Girl = check_girl(Girl)
     while round > 0:
-        call shift_focus (Girl)
+        $ shift_focus (Girl)
         call lesbian_launch(Girl)
         $ Girl.lust_face()
 
@@ -1208,7 +1208,7 @@ label Les_Cycle(Girl=Player.focused_Girl):
                                         jump Les_Interupted
                                     else:
                                         call undress_Girl (Partner)
-                                        call shift_focus (Partner)
+                                        $ shift_focus (Partner)
                                         jump Les_Cycle
                                 "Clean up Partner":
                                     if "unseen" in Girl.recent_history:
@@ -1248,7 +1248,7 @@ label Les_Cycle(Girl=Player.focused_Girl):
                     jump Les_After
 
 
-        call shift_focus (Girl)
+        $ shift_focus (Girl)
         call Sex_Dialog (Girl, Partner)
 
         $ counter += 1
@@ -1314,7 +1314,7 @@ label Les_After:
     call show_full_body(Girl)
     if not Partner:
         $ approval_bonus = 0
-        call checkout
+        $ checkout()
         return
     call show_full_body(Partner)
     $ Girl.change_face("sexy")
@@ -1368,7 +1368,7 @@ label Les_After:
     $ Girl.add_word(1, 0, 0, 0, "les " +Partner.tag)
     $ Partner.add_word(1, 0, 0, 0, "les " +Girl.tag)
     $ approval_bonus = 0
-    call checkout
+    $ checkout()
     return
 
 
@@ -2130,7 +2130,7 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
 
 
     $ Player.Party = [Player.Harem[0]]
-    call shift_focus (Player.Harem[0])
+    $ shift_focus (Player.Harem[0])
     call set_the_scene
     call clear_the_room (Player.Harem[0])
 
@@ -2670,9 +2670,9 @@ label Harem_Start(Newbie=0, round2=0):
 
     $ Player.Party = [Player.Harem[0],Player.Harem[1]]
 
-    call check_who_is_present
+    $ check_who_is_present
     $ Player.Party = [Player.Harem[0],Player.Harem[1]]
-    call shift_focus (Player.Harem[0])
+    $ shift_focus (Player.Harem[0])
     call set_the_scene
 
     $ Player.Party[0].change_face("bemused")
@@ -3590,7 +3590,7 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls = []):
     $ girl_secondary_Action = "fondle_pussy"
     $ second_girl_main_action = "fondle_pussy"
     $ Partner = Girl2
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
     call Les_Prep(Girl)
     jump reset_location
     return
@@ -3688,7 +3688,7 @@ label Sex_Menu_Threesome(Girl=0):
                 if Girl.location != Player.location:
 
                     ch_r "Oh, well. . . I'm still game. . ."
-                    call shift_focus(RogueX)
+                    $ shift_focus(RogueX)
                     $ renpy.pop_call()
                 elif RogueX.location == Player.location:
                     ch_r "I s'pose I could lend a hand 0. ."
@@ -3707,7 +3707,7 @@ label Sex_Menu_Threesome(Girl=0):
                 if Girl.location != Player.location:
 
                     ch_k "Whoa, drama much? 0. ."
-                    call shift_focus(KittyX)
+                    $ shift_focus(KittyX)
                     $ renpy.pop_call()
                 elif KittyX.location == Player.location:
                     ch_k "I could[KittyX.like]give it a try. . ."
@@ -3726,7 +3726,7 @@ label Sex_Menu_Threesome(Girl=0):
                 if Girl.location != Player.location:
 
                     ch_e "Pity. . ."
-                    call shift_focus(EmmaX)
+                    $ shift_focus(EmmaX)
                     $ renpy.pop_call()
                 elif EmmaX.location == Player.location:
                     ch_e "So what did you have in mind for us. . ."
@@ -3745,7 +3745,7 @@ label Sex_Menu_Threesome(Girl=0):
                 if Girl.location != Player.location:
 
                     ch_l "Her loss. . ."
-                    call shift_focus(LauraX)
+                    $ shift_focus(LauraX)
                     $ renpy.pop_call()
                 elif LauraX.location == Player.location:
                     ch_l "Hm, ok. . ."
@@ -3761,7 +3761,7 @@ label Sex_Menu_Threesome(Girl=0):
                 if Girl.location != Player.location:
 
                     ch_j "Huh. Her loss. . ."
-                    call shift_focus(JeanX)
+                    $ shift_focus(JeanX)
                     $ renpy.pop_call()
                 elif JeanX.location == Player.location:
                     ch_j "Sure."
@@ -3780,7 +3780,7 @@ label Sex_Menu_Threesome(Girl=0):
                 if Girl.location != Player.location:
 
                     ch_s "Oh, that's too bad. . ."
-                    call shift_focus(StormX)
+                    $ shift_focus(StormX)
                     $ renpy.pop_call()
 
                 elif StormX.location == Player.location:
@@ -3800,7 +3800,7 @@ label Sex_Menu_Threesome(Girl=0):
                 if Girl.location != Player.location:
 
                     ch_v "Oh, well. . ."
-                    call shift_focus(JubesX)
+                    $ shift_focus(JubesX)
                     $ renpy.pop_call()
                 elif JubesX.location == Player.location:
                     ch_v "Sure!"

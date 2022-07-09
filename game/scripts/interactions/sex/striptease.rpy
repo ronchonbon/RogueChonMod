@@ -1,5 +1,5 @@
 label top_off(Girl, context = 1):
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
 
     if "angry" in Girl.recent_history:
         if Girl == RogueX:
@@ -647,7 +647,7 @@ label top_off(Girl, context = 1):
     return
 
 label top_off_refused(Girl):
-    call shift_focus (Girl)
+    $ shift_focus (Girl)
 
     $ Girl.change_face("angry")
 
@@ -758,7 +758,7 @@ label top_off_refused(Girl):
     return
 
 label topless_or_nothing(Girl):
-    call shift_focus (Girl)
+    $ shift_focus (Girl)
 
     $ Girl.change_face("angry")
 
@@ -883,7 +883,7 @@ label topless_or_nothing(Girl):
     return
 
 label bottoms_off_refused(Girl, counter):
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
 
     if Girl == RogueX:
         if "no_bottomless" in Girl.recent_history:
@@ -1017,7 +1017,7 @@ label bottoms_off_refused(Girl, counter):
     return
 
 label no_panties_on(Girl, counter):
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
 
     if Girl == RogueX:
         if Girl.Outfit.pussy_covered:
@@ -1118,7 +1118,7 @@ label no_panties_on(Girl, counter):
     return True
 
 label undress_Girl(Girl, context = "ask"):
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
 
     $ stored_bonus = approval_bonus
 
@@ -1425,7 +1425,7 @@ label strip_ultimatum(Girl):
 
 
 label Group_Strip(Girl):
-    call check_who_is_present
+    $ check_who_is_present
 
     if not Present:
         "Nobody's here."
@@ -1437,7 +1437,7 @@ label Group_Strip(Girl):
     while dancing_Girls[0] != Girl:
         $ renpy.random.shuffle(dancing_Girls)
 
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
     call set_the_scene
 
     $ round -= 5 if round > 5 else round - 1
@@ -1630,7 +1630,7 @@ label Group_Stripping:
         $ round -= 2 if round > 2 else round
 
         if dancing_Girls[Count] != Player.focused_Girl:
-            call shift_focus (dancing_Girls[Count])
+            $ shift_focus (dancing_Girls[Count])
 
         call Girl_Stripping (dancing_Girls[Count])
 
@@ -1661,7 +1661,7 @@ label Group_Stripping:
                 $ stored_approval_bonus[0] = approval_bonus
                 $ approval_bonus = stored_approval_bonus[1]
 
-            call shift_focus (dancing_Girls[Count])
+            $ shift_focus (dancing_Girls[Count])
             call Activity_Check (Player.focused_Girl, Partner)
 
         if len(dancing_Girls) < 2 or "stopdancing" in dancing_Girls[1].recent_history:
@@ -2197,7 +2197,7 @@ label Girl_Stripping(Girl):
 
 
 label Bottoms_Off(Girl, Intro = 1):
-    call shift_focus (Girl)
+    $ shift_focus (Girl)
 
     if "angry" in Girl.recent_history:
         if Girl == RogueX:
@@ -2729,7 +2729,7 @@ label Bottoms_Off(Girl, Intro = 1):
     return
 
 label Bottoms_Off_Legs(Girl):
-    call shift_focus (Girl)
+    $ shift_focus (Girl)
 
     if Girl.forced:
         $ Girl.change_face("sad", 1)

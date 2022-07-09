@@ -2,7 +2,7 @@ layeredimage Jean_sprite standing:
     # always:
     #     "images/Jean_standing/Jean_standing_head_reference.png"
 
-    if not renpy.showing("Jean_sprite blowjob"):
+    always:
         "Jean_hair_back" pos (0.32, 0.27) zoom 0.32
 
     always:

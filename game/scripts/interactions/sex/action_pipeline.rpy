@@ -118,6 +118,6 @@ label after_Action(Girl, Action_type, context = None):
 
     $ Player.sprite = False
 
-    call checkout
+    $ checkout()
 
     return

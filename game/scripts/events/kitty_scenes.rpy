@@ -13,7 +13,7 @@ label meet_Kitty:
     $ color_transform = _return
 
     call show_Girl(KittyX, x_position = stage_center, color_transform = color_transform, transition = vpunch)
-    call shift_focus(KittyX)
+    $ shift_focus(KittyX)
 
     "She crashes into you at a full jog, and you both fall to the ground."
     "You scramble to your feet and offer the girl a hand up."
@@ -367,7 +367,7 @@ label Kitty_boyfriend_bad_ending:
     return
 
 label Kitty_key:
-    call shift_focus(KittyX)
+    $ shift_focus(KittyX)
     call set_the_scene
 
     $ KittyX.change_face("bemused")
@@ -388,7 +388,7 @@ label Kitty_key:
 label Kitty_Love:
 
 
-    call shift_focus (KittyX)
+    $ shift_focus (KittyX)
     $ KittyX.drain_word("asked_to_meet")
     if KittyX.event_happened[6]:
 
@@ -738,7 +738,7 @@ label Kitty_Love_Redux:
 
 
 label Kitty_Sub:
-    call shift_focus (KittyX)
+    $ shift_focus (KittyX)
     $ KittyX.drain_word("asked_to_meet")
     if KittyX.location != Player.location and KittyX not in Player.Party:
         "Suddenly, [KittyX.name] shows up and says she needs to talk to you."
@@ -1045,7 +1045,7 @@ label Kitty_Sub_Asked:
 
 
 label Kitty_Master:
-    call shift_focus (KittyX)
+    $ shift_focus (KittyX)
     $ KittyX.drain_word("asked_to_meet")
     if KittyX.location != Player.location and KittyX not in Player.Party:
         "Suddenly, [KittyX.name] shows up and says she needs to talk to you."
@@ -1392,7 +1392,7 @@ label Kitty_Fuckbuddy:
 label Kitty_Daddy:
     $ KittyX.daily_history.append("relationship")
     $ KittyX.drain_word("asked_to_meet")
-    call shift_focus (KittyX)
+    $ shift_focus (KittyX)
     call set_the_scene
     ch_k ". . ."
     if KittyX in Player.Harem:

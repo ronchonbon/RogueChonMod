@@ -25,7 +25,7 @@ label showering:
     if showering_Girls:
         $ renpy.random.shuffle(showering_Girls)
 
-        call shift_focus(showering_Girls[0])
+        $ shift_focus(showering_Girls[0])
 
         if len(showering_Girls) > 1:
             "You take a quick shower with [showering_Girls[0].name] and [showering_Girls[1].name]."
@@ -54,7 +54,7 @@ label showering:
 label Shower_Sex(Options=0, line=0):
     if len(staying_Girls) > 1 and (approval_check(staying_Girls[1], 1800,Check = 1) > approval_check(staying_Girls[0], 1800,Check = 1)):
         $ renpy.random.shuffle(staying_Girls)
-    call shift_focus (staying_Girls[0])
+    $ shift_focus (staying_Girls[0])
 
     $ D20 = renpy.random.randint(1, 20)
     $ D20 += 5 if approval_check(staying_Girls[0], 1800) else 0
@@ -448,5 +448,5 @@ label Shower_Sex(Options=0, line=0):
                 "After a minute or so of this, she draws back and finshes washing herself off."
                 if 4 <= Options[0] <= 5:
                     "You're left pretty hard."
-    call shift_focus (staying_Girls[0])
+    $ shift_focus (staying_Girls[0])
     return

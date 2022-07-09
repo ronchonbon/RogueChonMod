@@ -5,63 +5,63 @@ label summon_Jean:
         $ line = "no"
     elif time_index > 2:
         if approval_check(JeanX, 500, "L") or approval_check(JeanX, 400, "O"):
-            ch_j_text "You're up too? Yeah, that's fine."
+            ch_j_nvl "You're up too? Yeah, that's fine."
 
             call add_Girls(JeanX)
         else:
-            ch_j_text "I'd rather not. . ."
+            ch_j_nvl "I'd rather not. . ."
 
         return
     elif not approval_check(JeanX, 700, "L") or not approval_check(JeanX, 600, "O"):
         if not approval_check(JeanX, 300):
-            ch_j_text "I'm busy, [JeanX.player_petname]."
+            ch_j_nvl "I'm busy, [JeanX.player_petname]."
 
             return
         elif JeanX.location == "bg_classroom":
-            ch_j_text "I'm in class right now."
+            ch_j_nvl "I'm in class right now."
         elif JeanX.location == "bg_dangerroom":
-            ch_j_text "I'm in the Danger Room, [JeanX.player_petname]."
+            ch_j_nvl "I'm in the Danger Room, [JeanX.player_petname]."
         elif JeanX.location == "bg_campus":
-            ch_j_text "I'm relaxing in the quad right now."
+            ch_j_nvl "I'm relaxing in the quad right now."
         elif JeanX.location == "bg_jean":
-            ch_j_text "I'm in my room, [JeanX.player_petname]."
+            ch_j_nvl "I'm in my room, [JeanX.player_petname]."
         elif JeanX.location == "bg_player":
-            ch_j_text "I'm in your room, [JeanX.player_petname], where are you?"
+            ch_j_nvl "I'm in your room, [JeanX.player_petname], where are you?"
         elif JeanX.location == "bg_shower":
             if approval_check(JeanX, 1600):
-                ch_j_text "I'm in the shower right now."
+                ch_j_nvl "I'm in the shower right now."
             else:
-                ch_j_text "I'm in the shower right now, [JeanX.player_petname]."
-                ch_j_text "Don't come knocking."
+                ch_j_nvl "I'm in the shower right now, [JeanX.player_petname]."
+                ch_j_nvl "Don't come knocking."
 
                 return
         elif JeanX.location == "hold":
-            ch_j_text "I'm busy at the moment."
+            ch_j_nvl "I'm busy at the moment."
 
             return
         else:
-            ch_j_text "Why don't you come to me?"
+            ch_j_nvl "Why don't you come to me?"
 
         menu(nvl = True):
             extend ""
             "Ok, I'll be right there.":
-                ch_p_text "Ok, I'll be right there."
+                ch_p_nvl "Ok, I'll be right there."
 
                 call change_Girl_stat(JeanX, "love", 1)
                 call change_Girl_stat(JeanX, "inhibition", 1)
 
-                ch_j_text "Good."
+                ch_j_nvl "Good."
 
                 $ line = "go to"
             "Ok, we can talk later then.":
-                ch_p_text "Ok, we can talk later then."
+                ch_p_nvl "Ok, we can talk later then."
 
                 call change_Girl_stat(JeanX, "obedience", 1)
                 call change_Girl_stat(JeanX, "obedience", 2)
 
-                ch_j_text "Ok."
+                ch_j_nvl "Ok."
             "Could you please come visit me? I'm lonely.":
-                ch_p_text "Could you please come visit me? I'm lonely."
+                ch_p_nvl "Could you please come visit me? I'm lonely."
 
                 if approval_check(JeanX, 650, "L") or approval_check(JeanX, 1500):
                     call change_Girl_stat(JeanX, "love", 1)
@@ -73,9 +73,9 @@ label summon_Jean:
 
                     $ line = "no"
 
-                    ch_j_text "Needy much?"
+                    ch_j_nvl "Needy much?"
             "Come on, it'll be fun.":
-                ch_p_text "Come on, it'll be fun."
+                ch_p_nvl "Come on, it'll be fun."
 
                 if approval_check(JeanX, 400, "L") and approval_check(JeanX, 800):
                     call change_Girl_stat(JeanX, "love", 1)
@@ -87,7 +87,7 @@ label summon_Jean:
 
                     $ line = "no"
             "I said come over here.":
-                ch_p_text "I said come over here."
+                ch_p_nvl "I said come over here."
 
                 if approval_check(JeanX, 600, "O"):
                     call change_Girl_stat(JeanX, "love", 1)
@@ -101,20 +101,20 @@ label summon_Jean:
                     call change_Girl_stat(JeanX, "obedience", 2)
                     call change_Girl_stat(JeanX, "obedience", 1)
 
-                    ch_j_text "Ok, fine."
+                    ch_j_nvl "Ok, fine."
 
                     $ line = "yes"
                 elif approval_check(JeanX, 200, "O"):
                     call change_Girl_stat(JeanX, "love", -4)
                     call change_Girl_stat(JeanX, "love", -3)
 
-                    ch_j_text "And I said \"no.\""
+                    ch_j_nvl "And I said \"no.\""
 
                     call change_Girl_stat(JeanX, "obedience", -3)
                     call change_Girl_stat(JeanX, "inhibition", 2)
                     call change_Girl_stat(JeanX, "inhibition", 1)
 
-                    ch_j_text "I'm staying here."
+                    ch_j_nvl "I'm staying here."
                 else:
                     call change_Girl_stat(JeanX, "love", 1)
                     call change_Girl_stat(JeanX, "obedience", -1)
@@ -124,9 +124,9 @@ label summon_Jean:
                     $ line = "no"
     else:
         if JeanX.love > JeanX.obedience:
-            ch_j_text "Ok, fine."
+            ch_j_nvl "Ok, fine."
         else:
-            ch_j_text "Ok, if you insist. . ."
+            ch_j_nvl "Ok, if you insist. . ."
 
         $ line = "yes"
 
@@ -134,17 +134,17 @@ label summon_Jean:
         return
     elif line == "go to":
         if JeanX.location == "bg_classroom":
-            ch_j_text "Ok then."
+            ch_j_nvl "Ok then."
         elif JeanX.location == "bg_dangerroom":
-            ch_j_text "I'll try not to finish the exercise myself."
+            ch_j_nvl "I'll try not to finish the exercise myself."
         elif JeanX.location == "bg_jean":
-            ch_j_text "Don't keep me waiting."
+            ch_j_nvl "Don't keep me waiting."
         elif JeanX.location == "bg_player":
-            ch_j_text "Don't keep me waiting."
+            ch_j_nvl "Don't keep me waiting."
         elif JeanX.location == "bg_shower":
-            ch_j_text "I'll see you then."
+            ch_j_nvl "I'll see you then."
         elif JeanX.location == "bg_campus":
-            ch_j_text "Ok."
+            ch_j_nvl "Ok."
 
         call hide_all
 
@@ -171,13 +171,13 @@ label summon_Jean:
         elif JeanX.location == "bg_mall":
             jump mall
     elif line == "no":
-        ch_j_text "Sorry, [JeanX.player_petname], I'm kinda busy."
+        ch_j_nvl "Sorry, [JeanX.player_petname], I'm kinda busy."
 
         return
     elif line == "lonely":
-        ch_j_text "Oh. . . fine. . ."
+        ch_j_nvl "Oh. . . fine. . ."
     elif line == "command":
-        ch_j_text "Fine, [JeanX.player_petname]."
+        ch_j_nvl "Fine, [JeanX.player_petname]."
 
     $ JeanX.change_Outfit()
 
@@ -287,7 +287,7 @@ label Jean_leaving:
         return
     elif line == "go to":
         call hide_Girl(JeanX)
-        call change_clothes
+        $ change_clothes()
 
         if JeanX.location == "bg_classroom":
             ch_j "Ok."

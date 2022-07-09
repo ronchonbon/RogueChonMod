@@ -5,61 +5,61 @@ label summon_Kitty:
         $ line = "no"
     elif time_index > 2:
         if approval_check(KittyX, 700, "L") or approval_check(KittyX, 300, "O"):
-            ch_k_text "It's[KittyX.like]getting kinda late, but we can hang out for a bit."
+            ch_k_nvl "It's[KittyX.like]getting kinda late, but we can hang out for a bit."
 
             call add_Girls(KittyX)
         else:
-            ch_k_text "It's kinda late? Maybe tomorrow."
+            ch_k_nvl "It's kinda late? Maybe tomorrow."
 
         return
     elif not approval_check(KittyX, 700, "L") or not approval_check(KittyX, 600, "O"):
         if not approval_check(KittyX, 300):
-            ch_k_text "I'm kinda busy, [KittyX.player_petname]."
+            ch_k_nvl "I'm kinda busy, [KittyX.player_petname]."
 
             return
         elif KittyX.location == "bg_classroom":
-            ch_k_text "I'm[KittyX.like]in class right now, [KittyX.player_petname], you up for it?"
+            ch_k_nvl "I'm[KittyX.like]in class right now, [KittyX.player_petname], you up for it?"
         elif KittyX.location == "bg_dangerroom":
-            ch_k_text "I'm in the Danger Room, [KittyX.player_petname], want in?"
+            ch_k_nvl "I'm in the Danger Room, [KittyX.player_petname], want in?"
         elif KittyX.location == "bg_campus":
-            ch_k_text "I'm chillin in the quad, [KittyX.player_petname], want to come?"
+            ch_k_nvl "I'm chillin in the quad, [KittyX.player_petname], want to come?"
         elif KittyX.location == "bg_kitty":
-            ch_k_text "I'm in my room, [KittyX.player_petname], want to hang?"
+            ch_k_nvl "I'm in my room, [KittyX.player_petname], want to hang?"
         elif KittyX.location == "bg_player":
-            ch_k_text "I'm in your room, [KittyX.player_petname],come home. . ."
+            ch_k_nvl "I'm in your room, [KittyX.player_petname],come home. . ."
         elif KittyX.location == "bg_shower":
             if approval_check(KittyX, 1600):
-                ch_k_text "I'm[KittyX.like]in the shower right now, [KittyX.player_petname], want to get wet?"
+                ch_k_nvl "I'm[KittyX.like]in the shower right now, [KittyX.player_petname], want to get wet?"
             else:
-                ch_k_text "I'm[KittyX.like]in the shower right now, [KittyX.player_petname], maybe we could touch base later."
+                ch_k_nvl "I'm[KittyX.like]in the shower right now, [KittyX.player_petname], maybe we could touch base later."
 
                 return
         elif KittyX.location == "hold":
-            ch_k_text "I'm[KittyX.like]kinda off the grid right now. Sorry?"
+            ch_k_nvl "I'm[KittyX.like]kinda off the grid right now. Sorry?"
 
             return
         else:
-            ch_k_text "Why don't you come over here, [KittyX.player_petname]?"
+            ch_k_nvl "Why don't you come over here, [KittyX.player_petname]?"
 
         menu(nvl = True):
             extend ""
             "Sure, I'll be right there.":
-                ch_p_text "Sure, I'll be right there."
+                ch_p_nvl "Sure, I'll be right there."
 
                 call change_Girl_stat(KittyX, "love", 1)
                 call change_Girl_stat(KittyX, "inhibition", 1)
 
-                ch_k_text "See ya!"
+                ch_k_nvl "See ya!"
 
             "Nah, we can talk later.":
-                ch_p_text "Nah, we can talk later."
+                ch_p_nvl "Nah, we can talk later."
 
                 call change_Girl_stat(KittyX, "obedience", 1)
                 call change_Girl_stat(KittyX, "obedience", 2)
 
-                ch_k_text "Oh, ok. Later then."
+                ch_k_nvl "Oh, ok. Later then."
             "Could you please come visit me? I'm lonely.":
-                ch_p_text "Could you please come visit me? I'm lonely."
+                ch_p_nvl "Could you please come visit me? I'm lonely."
 
                 if approval_check(KittyX, 600, "L") or approval_check(KittyX, 1400):
                     call change_Girl_stat(KittyX, "love", 1)
@@ -71,7 +71,7 @@ label summon_Kitty:
 
                     $ line = "no"
             "I said come over here.":
-                ch_p_text "I said come over here."
+                ch_p_nvl "I said come over here."
 
                 if approval_check(KittyX, 600, "O"):
                     call change_Girl_stat(KittyX, "love", 1)
@@ -85,20 +85,20 @@ label summon_Kitty:
                     call change_Girl_stat(KittyX, "obedience", 2)
                     call change_Girl_stat(KittyX, "obedience", 1)
 
-                    ch_k_text "Ok, fine, [KittyX.player_petname]."
+                    ch_k_nvl "Ok, fine, [KittyX.player_petname]."
 
                     $ line = "yes"
                 elif approval_check(KittyX, 200, "O"):
                     call change_Girl_stat(KittyX, "love", -4)
                     call change_Girl_stat(KittyX, "love", -2)
 
-                    ch_k_text "You're not my supervisor!"
+                    ch_k_nvl "You're not my supervisor!"
 
                     call change_Girl_stat(KittyX, "obedience", -2)
                     call change_Girl_stat(KittyX, "inhibition", 2)
                     call change_Girl_stat(KittyX, "inhibition", 1)
 
-                    ch_k_text "You know where to find me."
+                    ch_k_nvl "You know where to find me."
                 else:
                     call change_Girl_stat(KittyX, "love", 1)
                     call change_Girl_stat(KittyX, "obedience", -1)
@@ -107,9 +107,9 @@ label summon_Kitty:
                     $ line = "no"
     else:
         if KittyX.love > KittyX.obedience:
-            ch_k_text "Sure!"
+            ch_k_nvl "Sure!"
         else:
-            ch_k_text "Ok, be there in a gif, [KittyX.player_petname]."
+            ch_k_nvl "Ok, be there in a gif, [KittyX.player_petname]."
 
         $ line = "yes"
 
@@ -117,20 +117,20 @@ label summon_Kitty:
         return
     elif line == "go to":
         call hide_Girl(KittyX)
-        call change_clothes
+        $ change_clothes()
 
         if KittyX.location == "bg_player":
-            ch_k_text "I'll be here for you."
+            ch_k_nvl "I'll be here for you."
         elif KittyX.location == "bg_kitty":
-            ch_k_text "I'll clean up a few things."
+            ch_k_nvl "I'll clean up a few things."
         elif KittyX.location == "bg_campus":
-            ch_k_text "I've got a nice spot in the shade."
+            ch_k_nvl "I've got a nice spot in the shade."
         elif KittyX.location == "bg_classroom":
-            ch_k_text "I'll hold a seat for you!"
+            ch_k_nvl "I'll hold a seat for you!"
         elif KittyX.location == "bg_dangerroom":
-            ch_k_text "I'll be warming up!"
+            ch_k_nvl "I'll be warming up!"
         elif KittyX.location == "bg_shower":
-            ch_k_text "I guess I'll be lathering up."
+            ch_k_nvl "I guess I'll be lathering up."
 
         call hide_all
 
@@ -158,17 +158,17 @@ label summon_Kitty:
             jump mall
     elif line == "no":
         if KittyX.location == "bg_classroom":
-            ch_k_text "I[KittyX.like]really need to study, [KittyX.player_petname]."
+            ch_k_nvl "I[KittyX.like]really need to study, [KittyX.player_petname]."
         elif KittyX.location == "bg_dangerroom":
-            ch_k_text "I'm just getting a workout in."
+            ch_k_nvl "I'm just getting a workout in."
         else:
-            ch_k_text "I'm sorry, [KittyX.player_petname], but I'm kinda busy."
+            ch_k_nvl "I'm sorry, [KittyX.player_petname], but I'm kinda busy."
 
         return
     elif line == "lonely":
-        ch_k_text "Awwww, how sweet!"
+        ch_k_nvl "Awwww, how sweet!"
     elif line == "command":
-        ch_k_text "Very well, [KittyX.player_petname]."
+        ch_k_nvl "Very well, [KittyX.player_petname]."
 
     call Girls_arrive (KittyX)
 
@@ -269,7 +269,7 @@ label Kitty_leaving:
         return
     elif line == "go to":
         call hide_Girl(KittyX)
-        call change_clothes
+        $ change_clothes()
 
         if KittyX.location == "bg_player":
             ch_k "I'll be waiting."

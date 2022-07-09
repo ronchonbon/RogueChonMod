@@ -630,7 +630,7 @@ label pool:
         menu:
             "You're at the pool. What would you like to do?"
             "Want to swim?" if round >= 30:
-                call check_who_is_present
+                $ check_who_is_present
 
                 if time_index > 2 and not Present:
                     "It's a bit late for a swim."

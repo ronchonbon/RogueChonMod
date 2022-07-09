@@ -64,6 +64,6 @@ label after_masturbation(Girl, context):
     $ Girl.remaining_Actions -= 1
     $ Girl.Action_counter["masturbation"] += 1
 
-    call checkout
+    $ checkout()
 
     return "stop"

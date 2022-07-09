@@ -7,7 +7,7 @@ label meet_Emma:
     $ EmmaX.name = "???"
     $ EmmaX.teaching = True
 
-    call change_clothes
+    $ change_clothes()
     call add_Girls(EmmaX)
 
     ch_e "Hello students. My name is Emma Frost, and I have been invited to conduct this class."
@@ -355,7 +355,7 @@ label Emma_Caught_Classroom:
 
     hide black_screen onlayer black
 
-    call shift_focus(EmmaX)
+    $ shift_focus(EmmaX)
 
     $ girl_secondary_Action = "fondle_pussy"
     $ second_girl_secondary_Action = "fondle_breasts"
@@ -716,7 +716,7 @@ label Emma_Teacher_Caught(Girl=0):
         return
 
     ch_e "[Player.name]? [Girl.name]? Could you stop what you're doing immediately?"
-    call checkout
+    $ checkout()
     call reset_player
 
     $ Girl.change_face("bemused", 2, eyes = "side")
@@ -756,7 +756,7 @@ label Emma_Teacher_Caught(Girl=0):
 
 
 label Emma_Detention:
-    call shift_focus (EmmaX)
+    $ shift_focus (EmmaX)
 
     $ Player.location = "bg_classroom"
 
@@ -895,7 +895,7 @@ label Emma_Detention:
 
 
 label Emma_Key:
-    call shift_focus (EmmaX)
+    $ shift_focus (EmmaX)
     call set_the_scene
     $ EmmaX.change_face("bemused")
     $ EmmaX.arm_pose = 2
@@ -1305,7 +1305,7 @@ label Emma_ThreeCheck(Pass = 3, Quest = [], Girl=0, temp_Girls = []):
 
 label Emma_BF:
     $ EmmaX.drain_word("asked_to_meet")
-    call shift_focus (EmmaX)
+    $ shift_focus (EmmaX)
 
     if EmmaX not in Player.Party:
         "[EmmaX.name] approaches you and asks if the two of you can talk."
@@ -1788,7 +1788,7 @@ label Emma_Love_Redux:
 
 label Emma_Sub:
     $ EmmaX.drain_word("asked_to_meet")
-    call shift_focus (EmmaX)
+    $ shift_focus (EmmaX)
 
     if EmmaX.location != Player.location and EmmaX not in Player.Party:
         "[EmmaX.name] shows up and says she needs to talk to you."
@@ -2075,7 +2075,7 @@ label Emma_Sub_Asked:
 
 label Emma_Master:
     $ EmmaX.drain_word("asked_to_meet")
-    call shift_focus (EmmaX)
+    $ shift_focus (EmmaX)
     $ EmmaX.location = Player.location
     call set_the_scene
     if EmmaX.location != Player.location and EmmaX not in Player.Party:
@@ -2397,7 +2397,7 @@ label Emma_Fuckbuddy:
 label Emma_Daddy:
     $ EmmaX.drain_word("asked_to_meet")
     $ EmmaX.daily_history.append("relationship")
-    call shift_focus (EmmaX)
+    $ shift_focus (EmmaX)
     call set_the_scene
     ch_e ". . ."
     if EmmaX in Player.Harem:

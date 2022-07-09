@@ -476,7 +476,7 @@ label sex_over(put_clothes_on = True):
 
         call get_dressed
 
-    call checkout
+    $ checkout()
     call reset_player
 
     return
@@ -797,7 +797,7 @@ label jerking_off(Girl = None):
                 $ Girl.remaining_Action_types -= 1
                 $ Girl.Action_counter["masturbation"] += 1
 
-                call checkout
+                $ checkout()
             elif Player.primary_Action.type:
                 call after_Action_type(Girl, Player.primary_Action.type, "shift")
 
@@ -806,7 +806,7 @@ label jerking_off(Girl = None):
     return "continue"
 
 label girl_touches_you(Girl, forced = False):
-    call shift_focus (Girl)
+    $ shift_focus (Girl)
 
     $ gloves = Girl.Clothes["gloves"]
 

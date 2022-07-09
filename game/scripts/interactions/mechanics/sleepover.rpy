@@ -23,7 +23,7 @@ label sleepover:
     else:
         $ Player.Party = sort_Girls_by_approval(Player.Party)
 
-    call shift_focus(Player.Party[0])
+    $ shift_focus(Player.Party[0])
 
     if Player.location != "bg_player":
         $ temp_Girls = all_Girls[:]
@@ -536,7 +536,7 @@ label sleepover:
             elif Player.Party[1] == JubesX:
                 ch_v "Night!"
 
-    call shift_focus(Player.Party[0])
+    $ shift_focus(Player.Party[0])
 
     python:
         for G in Player.Party:
@@ -1379,7 +1379,7 @@ label Morningwood_Check(Girls = [0, -3]):
 label morning_afterWood:
 
     $ Player.add_word(1, "interruption")
-    call shift_focus (Player.Party[0])
+    $ shift_focus (Player.Party[0])
     $ Player.focus = 30
     if Player.primary_Action == "blowjob":
         ch_u "\"Slurp, slurp, slurp.\""
@@ -1910,7 +1910,7 @@ label morning_afterWood:
             jump return_player_to_room
 
         elif line == "sex":
-            call shift_focus(Player.Party[0])
+            $ shift_focus(Player.Party[0])
             call enter_main_sex_menu(Player.Party[0])
     else:
 

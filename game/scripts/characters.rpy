@@ -1,14 +1,14 @@
 init python:
 
     class PlayerClass(object):
-        def __init__(self):
-            self.name = "Zero"
+        def __init__(self, name, color):
+            self.name = name
+            self.color = color
 
             self.location = "bg_entrance"
             self.traveling = False
 
             self.sprite = False
-            self.color = "green"
 
             self.naked = False
             self.cock_out = False
@@ -39,9 +39,6 @@ init python:
 
             self.semen = 2
             self.max_semen = 3
-
-            self.focus = 0
-            self.focusing = False
 
     class GirlClass(object):
         def __init__(self, name, love, obedience, inhibition, lust):
@@ -981,40 +978,39 @@ init python:
         def __init__(self, name):
             self.name = name
 
-            self.sprite_location = stage_center
-
-            self.mouth = "smile"
             self.brows = "happy"
             self.eyes = "happy"
+            self.mouth = "smile"
 
-            if self.name == "Professor X":
-                self.psychic = False
+            self.psychic = False
+
+            self.sprite_location = stage_center
 
         def change_face(self, emotion):
             if emotion == "psychic":
-                self.mouth = "stern"
                 self.brows = "concentrate"
                 self.eyes = "concentrate"
+                self.mouth = "stern"
                 self.psychic = True
             elif emotion == "hypno":
-                self.mouth = "neutral"
                 self.brows = "neutral"
                 self.eyes = "hypno"
+                self.mouth = "neutral"
                 self.psychic = False
             elif emotion == "shocked":
-                self.mouth = "neutral"
                 self.brows = "shocked"
                 self.eyes = "shocked"
+                self.mouth = "neutral"
                 self.psychic = False
             elif emotion == "happy":
-                self.mouth = "smile"
                 self.brows = "happy"
                 self.eyes = "happy"
+                self.mouth = "smile"
                 self.psychic = False
             elif emotion == "angry":
-                self.mouth = "stern"
                 self.brows = "concentrate"
                 self.eyes = "happy"
+                self.mouth = "stern"
                 self.psychic = False
 
             return

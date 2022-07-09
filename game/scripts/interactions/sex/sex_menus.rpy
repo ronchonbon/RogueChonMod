@@ -22,7 +22,7 @@ label enter_main_sex_menu(Girl):
     return
 
 label girl_sex_menu(Girl):
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
     call set_the_scene
 
     $ having_sex = True

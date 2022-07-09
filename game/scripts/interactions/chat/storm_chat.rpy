@@ -2128,7 +2128,7 @@ label Storm_Leave:
 
     elif line == "go to":
         call hide_Girl(StormX)
-        call change_clothes
+        $ change_clothes()
 
         if StormX.location == "bg_classroom" or StormX.teaching:
             ch_s "I will see you soon then."

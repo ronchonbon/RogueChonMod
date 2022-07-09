@@ -10,17 +10,138 @@ init python:
 
         Girls.remove(Girls[0])
 
-        while Girls:
+        for G in Girls:
             for g in range(len(sorted_Girls)):
-                if approval_check(Girls[0], report_value = True) > approval_check(sorted_Girls[g], report_value = True):
-                    sorted_Girls.insert(g, Girls[0])
+                if approval_check(G, report_value = True) > approval_check(sorted_Girls[g], report_value = True):
+                    sorted_Girls.insert(g, G)
 
-            if Girls[0] not in sorted_Girls:
-                sorted_Girls.append(Girls[0])
-
-            Girls.remove(Girls[0])
+            if G not in sorted_Girls:
+                sorted_Girls.append(G)
 
         return sorted_Girls
+
+    def change_clothes():
+        for G in active_Girls:
+            if G not in Player.Party:
+                Outfit_name = None
+
+                if G.location == "bg_dangerroom":
+                    Outfit_name = "gym_clothes"
+                elif G.location == "bg_pool" and "swimwear" in G.Wardrobe.Outfits.keys():
+                    Outfit_name = "swimwear"
+                elif G.location == "bg_shower":
+                    Outfit_name = "shower"
+                elif G.teaching:
+                    Outfit_name = "teacher"
+
+                G.change_Outfit(Outfit_name, instant = True)
+
+        return
+
+    def checkout():
+        Player.focus = 99 if Player.focus > 99 else Player.focus
+        Player.focus = 0 if Player.focus < 0 else Player.focus
+
+        Player.semen = Player.max_semen if Player.semen > Player.max_semen else Player.semen
+        Player.semen = 0 if Player.semen < 0 else Player.semen
+
+        Player.reputation = 1000 if Player.reputation > 1000 else Player.reputation
+        Player.reputation = 0 if Player.reputation < 0 else Player.reputation
+
+        Player.XP = 3330 if Player.XP > 3330 else Player.XP
+
+        for G in all_Girls:
+            G.love = 1000 if G.love > 1000 else G.love
+            G.love = 0 if G.love < 0 else G.love
+
+            G.obedience = 1000 if G.obedience > 1000 else G.obedience
+            G.obedience = 0 if G.obedience < 0 else G.obedience
+
+            G.inhibition = 1000 if G.inhibition > 1000 else G.inhibition
+            G.inhibition = 0 if G.inhibition < 0 else G.inhibition
+
+            G.lust = 99 if G.lust > 99 else G.lust
+            G.lust = 0 if G.lust < 0 else G.lust
+
+            G.mood = 9 if G.mood > 9 else G.mood
+            G.mood = 0 if G.mood < 0 else G.mood
+
+            G.remaining_Actions = G.max_Actions if G.remaining_Actions > G.max_Actions else G.remaining_Actions
+            G.remaining_Actions = 0 if G.remaining_Actions < 0 else G.remaining_Actions
+
+            for GB in all_Girls:
+                if GB != G:
+                    G.likes[GB.tag] = 1000 if G.likes[GB.tag] > 1000 else G.likes[GB.tag]
+                    G.likes[GB.tag] = 0 if G.likes[GB.tag] < 0 else G.likes[GB.tag]
+
+        return
+
+    def reset_all_Girls_at_end():
+        total_SEXP = 0
+
+        for G in all_Girls:
+            total_SEXP += G.SEXP
+
+            if G in active_Girls and G.location != Player.location:
+                G.location = G.home
+
+            G.remaining_Actions = G.max_Actions
+
+            G.lust -= 5 if G.lust >= 50 else 0
+
+            for key in G.spunk.keys():
+                G.spunk[key] = False
+
+            G.todays_Outfit_name = G.Outfit_schedule[weekday]
+
+        return
+
+    def reset_all_Girls_at_beginning():
+        for G in active_Girls:
+            G.remaining_Actions += 1 if time_index != 0 else 0
+
+            if G.location == "bg_classroom" or G.location == "bg_dangerroom" or G.teaching:
+                G.XP += 10
+
+            G.blushing = ""
+            G.wet = False
+            G.held_item = None
+
+            if G.Clothes["buttplug"]:
+                bonus = 1
+            else:
+                bonus = 0
+
+            if G.used_to_anal < 2:
+                if G.Action_counter["anal"] + G.Action_counter["dildo_ass"] + bonus >= 15:
+                    G.used_to_anal = 2
+                elif G.Action_counter["anal"] + G.Action_counter["dildo_ass"] + bonus >= 3:
+                    G.used_to_anal = 1
+
+            G.XP = 3330 if G.XP > 3330 else G.XP
+
+            if G.XP >= G.XP_goal and G.level < 10:
+                G.XP_goal = int((1.15*G.XP_goal) + 100)
+                G.level += 1
+                G.stat_points += 1
+
+                renpy.say(None, "[G.name]'s leveled up! I bet she has some new tricks to learn.")
+
+                if G.level == 10:
+                    renpy.say(None, "[G.name]'s reached max level!")
+
+            G.set_default_faces()
+            G.change_face()
+
+        return
+
+    def shift_focus(Girl):
+        if Player.focused_Girl == Girl:
+            return
+
+        Player.focused_Girl = Girl
+
+        return
 
 label change_Player_stat(flavor, update):
     $ stat = getattr(Player, flavor)
@@ -32,7 +153,7 @@ label change_Player_stat(flavor, update):
     $ setattr(Player, flavor, stat)
 
     if update > 0:
-        show expression Text(" +[update]", size = 40, color = "#FFFFFF") at stat_rising(0.75) onlayer screens
+        show expression Text("+[update]", size = 40, color = "#FFFFFF") at stat_rising(0.75) onlayer screens
     elif update < 0:
         show expression Text("[update]", size = 40, color = "#FFFFFF") at stat_falling(0.75) onlayer screens
 
@@ -58,7 +179,7 @@ label change_Girl_stat(Girl, flavor, update, alternate_values = {}):
             $ shade = "#FAAFBE"
 
             if update > 0:
-                show expression Text(" +[update]", size = 40, color = shade) at stat_rising(Girl.sprite_location) onlayer screens
+                show expression Text("+[update]", size = 40, color = shade) at stat_rising(Girl.sprite_location) onlayer screens
             elif update < 0:
                 show expression Text("[update]", size = 40, color = shade) at stat_falling(Girl.sprite_location) onlayer screens
 
@@ -69,7 +190,7 @@ label change_Girl_stat(Girl, flavor, update, alternate_values = {}):
             return
 
         if update > 0:
-            show expression Text(" +[update]", size = 40, color = shade) at stat_rising(Girl.sprite_location) onlayer screens
+            show expression Text("+[update]", size = 40, color = shade) at stat_rising(Girl.sprite_location) onlayer screens
         elif update < 0:
             show expression Text("[update]", size = 40, color = shade) at stat_falling(Girl.sprite_location) onlayer screens
 
@@ -80,7 +201,7 @@ label change_Girl_stat(Girl, flavor, update, alternate_values = {}):
     return
 
 label change_Present_stat(flavor, update):
-    call check_who_is_present
+    $ check_who_is_present
 
     $ temp_Girls = Present[:]
 
@@ -106,11 +227,11 @@ label set_the_scene(location = None, show_Characters = True, fade = False, stati
                 G.location = Player.location
 
     if show_Characters:
-        call check_who_is_present(location = Player.location)
+        $ check_who_is_present(location = Player.location)
 
         if Present:
             if Player.focused_Girl not in Present:
-                call shift_focus(Present[0])
+                $ shift_focus(Present[0])
 
             $ offset = (stage_far_far_right - stage_far_left)/len(Present)
             $ total_offset = offset
@@ -188,103 +309,6 @@ label set_the_scene(location = None, show_Characters = True, fade = False, stati
         call hide_all
 
     hide black_screen onlayer black
-
-    return
-
-label event_calls:
-
-    return
-
-label traveling_event_calls(location):
-    # if location == "bg_classroom" and "met" not in KittyX.history:
-    #     call meet_Kitty
-    #
-    #     return
-    #
-    # if EmmaX in active_Girls:
-    #     if location == "bg_classroom":
-    #         if "noise" in Player.history and "attic" not in Player.history and EmmaX.teaching and EmmaX.location == "bg_classroom" and time_index < 2 and weekday < 5:
-    #             call meet_Storm_ask_Emma
-    #
-    #             return
-    #
-    #         if time_index == 2 and weekday in [0, 2, 4]:
-    #             if not Player.Party:
-    #                 if "classcaught" not in EmmaX.history:
-    #                     call Emma_Caught_Classroom
-    #
-    #                     return
-    #                 elif D20 <= 10 and "will_masturbate" in EmmaX.daily_history:
-    #                     call Emma_Caught_Classroom
-    #
-    #                     return
-    #
-    #             if "detention" in Player.traits and not Player.Party:
-    #                 call Emma_Detention
-    #
-    #                 return
-
-    # if "met" not in LauraX.history:
-    #     if location == "bg_dangerroom":
-    #         call meet_Laura
-    #
-    #         return
-    # else:
-    #     if location == "bg_campus" and KittyX in active_Girls and time_index < 3 and "dress0" in LauraX.history:
-    #         call Laura_Dressup
-    #
-    #         return
-
-    # if "met" not in JeanX.history:
-    #     if location == "bg_shower":
-    #         call meet_Jean
-    #
-    #         return
-
-    # if "met" not in StormX.history:
-    #     if location == "bg_player":
-    #         if "noise" not in Player.history and "attic" not in Player.history and day >= 1:
-    #             call meet_Storm_prelude
-    #
-    #             return
-    #         elif "attic" in Player.history and "water" not in Player.history and day >= 5:
-    #             call meet_StormWater
-    #
-    #             return
-    # else:
-    #     if location == "bg_classroom":
-    #         if StormX.teaching and "Peter" in StormX.history:
-    #             call Storm_Peter
-    #
-    #             return
-    #
-    #         if StormX.location == "bg_classroom" and time_index == 2 and "mohawk" not in StormX.history and approval_check(StormX, 200, "I"):
-    #             call Storm_Hairtalk
-    #
-    #             return
-    #
-    #     if location == "bg_pool":
-    #         if time_index == 3 and "poolnight" in Player.history:
-    #             if "sex friend" not in StormX.player_petnames or (D20 < 5 and "poolnight" not in Player.recent_history):
-    #                 call Storm_Poolnight
-    #
-    #                 return
-
-    # if JubesX in active_Girls:
-    #     if location in ["bg_classroom", "bg_dangerroom", "bg_campus", "bg_pool"]:
-    #         if time_index < 3 and "sunshine" not in JubesX.history:
-    #             call Jubes_Sunshine
-    #
-    #             return
-    #
-    #         if "sunshine" in JubesX.history and "mall" not in Player.history and time_index < 3 and JubesX.addiction < 50:
-    #             call Jubes_Mall
-    #
-    #             return
-
-    return
-
-label quick_event_calls:
 
     return
 
@@ -427,29 +451,10 @@ label set_Girls_locations:
 
         $ leaving_Girls.remove(leaving_Girls[0])
 
-    call change_clothes
+    $ change_clothes()
 
     if arriving_Girls:
         call Girls_arrive(arriving_Girls)
-
-    return
-
-label change_clothes:
-    python:
-        for G in active_Girls:
-            if G not in Player.Party:
-                Outfit_name = None
-
-                if G.location == "bg_dangerroom":
-                    Outfit_name = "gym_clothes"
-                elif G.location == "bg_pool" and "swimwear" in G.Wardrobe.Outfits.keys():
-                    Outfit_name = "swimwear"
-                elif G.location == "bg_shower":
-                    Outfit_name = "shower"
-                elif G.teaching:
-                    Outfit_name = "teacher"
-
-                G.change_Outfit(Outfit_name, instant = True)
 
     return
 
@@ -458,7 +463,7 @@ label wait:
 
     $ stack_depth = renpy.call_stack_depth()
 
-    call checkout
+    $ checkout()
     call reset_player
 
     if time_index < 3:
@@ -491,10 +496,10 @@ label wait:
         $ Player.spunk = False
         $ Player.reputation += 10 if Player.reputation < 800 else 0
 
-        call reset_all_Girls_at_end
-        call change_clothes
+        $ reset_all_Girls_at_end()
+        $ change_clothes()
 
-    call reset_all_Girls_at_beginning
+    $ reset_all_Girls_at_beginning()
 
     $ Player.semen += 1
     $ Player.focus -= 5 if Player.focus >= 10 else 0
@@ -519,115 +524,15 @@ label wait:
         if Player.level == 10:
             "You've reached max level!"
 
-    call checkout
+    $ checkout()
 
     hide black_screen onlayer black
-
-    return
-
-label checkout:
-    python:
-        Player.focus = 99 if Player.focus > 99 else Player.focus
-        Player.focus = 0 if Player.focus < 0 else Player.focus
-
-        Player.semen = Player.max_semen if Player.semen > Player.max_semen else Player.semen
-        Player.semen = 0 if Player.semen < 0 else Player.semen
-
-        Player.reputation = 1000 if Player.reputation > 1000 else Player.reputation
-        Player.reputation = 0 if Player.reputation < 0 else Player.reputation
-
-        Player.XP = 3330 if Player.XP > 3330 else Player.XP
-
-        for G in all_Girls:
-            G.love = 1000 if G.love > 1000 else G.love
-            G.love = 0 if G.love < 0 else G.love
-
-            G.obedience = 1000 if G.obedience > 1000 else G.obedience
-            G.obedience = 0 if G.obedience < 0 else G.obedience
-
-            G.inhibition = 1000 if G.inhibition > 1000 else G.inhibition
-            G.inhibition = 0 if G.inhibition < 0 else G.inhibition
-
-            G.lust = 99 if G.lust > 99 else G.lust
-            G.lust = 0 if G.lust < 0 else G.lust
-
-            G.mood = 9 if G.mood > 9 else G.mood
-            G.mood = 0 if G.mood < 0 else G.mood
-
-            G.remaining_Actions = G.max_Actions if G.remaining_Actions > G.max_Actions else G.remaining_Actions
-            G.remaining_Actions = 0 if G.remaining_Actions < 0 else G.remaining_Actions
-
-            for GB in all_Girls:
-                if GB != G:
-                    G.likes[GB.tag] = 1000 if G.likes[GB.tag] > 1000 else G.likes[GB.tag]
-                    G.likes[GB.tag] = 0 if G.likes[GB.tag] < 0 else G.likes[GB.tag]
 
     return
 
 label reset_player:
     call get_dressed
     call stop_all_Actions
-
-    return
-
-label reset_all_Girls_at_end:
-    python:
-        total_SEXP = 0
-
-        for G in all_Girls:
-            total_SEXP += G.SEXP
-
-            if G in active_Girls and G.location != Player.location:
-                G.location = G.home
-
-            G.remaining_Actions = G.max_Actions
-
-            G.lust -= 5 if G.lust >= 50 else 0
-
-            for key in G.spunk.keys():
-                G.spunk[key] = False
-
-            G.todays_Outfit_name = G.Outfit_schedule[weekday]
-
-    return
-
-label reset_all_Girls_at_beginning:
-    python:
-        for G in active_Girls:
-            G.remaining_Actions += 1 if time_index != 0 else 0
-
-            if G.location == "bg_classroom" or G.location == "bg_dangerroom" or G.teaching:
-                G.XP += 10
-
-            G.blushing = ""
-            G.wet = False
-            G.held_item = None
-
-            if G.Clothes["buttplug"]:
-                bonus = 1
-            else:
-                bonus = 0
-
-            if G.used_to_anal < 2:
-                if G.Action_counter["anal"] + G.Action_counter["dildo_ass"] + bonus >= 15:
-                    G.used_to_anal = 2
-                elif G.Action_counter["anal"] + G.Action_counter["dildo_ass"] + bonus >= 3:
-                    G.used_to_anal = 1
-
-            G.XP = 3330 if G.XP > 3330 else G.XP
-
-            if G.XP >= G.XP_goal and G.level < 10:
-                G.XP_goal = int((1.15*G.XP_goal) + 100)
-                G.level += 1
-                G.stat_points += 1
-
-                renpy.say(None, "[G.name]'s leveled up! I bet she has some new tricks to learn.")
-
-                if G.level == 10:
-                    renpy.say(None, "[G.name]'s reached max level!")
-
-            G.set_default_faces()
-            G.change_face()
 
     return
 
@@ -647,7 +552,7 @@ label clear_the_room(Girl, passive = False, silent = False):
     if Girl.location != Player.location:
         call add_Girls(Girl)
     else:
-        call shift_focus(Girl)
+        $ shift_focus(Girl)
 
     if not passive and not silent:
         if hosted:
@@ -870,28 +775,6 @@ label exit_gym:
 
     return
 
-label dismiss_menu:
-    menu:
-        "Did you want to ask someone to leave?"
-        "[RogueX.name]" if RogueX.location == Player.location or RogueX in Player.Party:
-            call dismiss_Girl(RogueX)
-        "[KittyX.name]" if KittyX.location == Player.location or KittyX in Player.Party:
-            call dismiss_Girl(KittyX)
-        "[EmmaX.name]" if EmmaX.location == Player.location or EmmaX in Player.Party:
-            call dismiss_Girl(EmmaX)
-        "[LauraX.name]" if LauraX.location == Player.location or LauraX in Player.Party:
-            call dismiss_Girl(LauraX)
-        "[JeanX.name]" if JeanX.location == Player.location or JeanX in Player.Party:
-            call dismiss_Girl(JeanX)
-        "[StormX.name]" if StormX.location == Player.location or StormX in Player.Party:
-            call dismiss_Girl(StormX)
-        "[JubesX.name]" if JubesX.location == Player.location or JubesX in Player.Party:
-            call dismiss_Girl(JubesX)
-        "Never mind.":
-            pass
-
-    return
-
 label get_dressed:
     if Player.naked:
         "You get dressed."
@@ -901,14 +784,4 @@ label get_dressed:
         "You put your cock away."
 
         $ Player.cock_out = False
-    return
-
-label shift_focus(Girl):
-    if Player.focused_Girl == Girl:
-        return
-
-    $ Player.focused_Girl = Girl
-
-    $ renpy.restart_interaction()
-
     return

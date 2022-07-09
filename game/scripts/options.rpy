@@ -12,7 +12,7 @@ init -1 python hide:
 
     config.gl2 = True
     config.cache_surfaces = False
-    config.optimize_texture_bounds = True
+    config.optimize_nvlure_bounds = True
     config.image_cache_size = 200
 
     config.narrator_menu = True
@@ -20,10 +20,10 @@ init -1 python hide:
     theme.tv(
         widget = "#6A7183",
         widget_hover = "#1A2B47",
-        widget_text = "#C9C9CB",
+        widget_nvl = "#C9C9CB",
         widget_selected = "#E3E3E4",
         disabled = "#ADB9CC",
-        disabled_text = "#DFBA14",
+        disabled_nvl = "#DFBA14",
         label = "#39435E",
         frame = "#ADB9CC",
         mm_root = "images/titleimage.jpg",
@@ -84,7 +84,7 @@ init -1 python hide:
 
     config.default_fullscreen = False
 
-    config.default_text_cps = 0
+    config.default_nvl_cps = 0
 
     config.default_afm_time = 10
 

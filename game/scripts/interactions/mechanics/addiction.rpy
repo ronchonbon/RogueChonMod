@@ -31,7 +31,7 @@ label addiction_event(Girl):
             "[Girl.name] turns to you with a bit of a dazed look."
 
     call clear_the_room(Girl)
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
 
     if Girl.event_happened[1] == 1:
         if Girl == RogueX:
@@ -1577,7 +1577,7 @@ label addiction_bad_end:
     $ Girl.addiction_rate += 2
 
     call sex_over
-    call checkout
+    $ checkout()
 
     $ Girl.arm_pose = 1
 
@@ -1737,7 +1737,7 @@ label addiction_fix(Girl):
     $ Girl = check_girl(Girl)
 
     call set_the_scene
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
 
     $ Girl.location = Player.location
     $ Girl.change_Outfit()

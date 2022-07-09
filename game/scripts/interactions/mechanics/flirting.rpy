@@ -2,7 +2,7 @@
 label Flirt(Girl=0):
 
     $ Girl = check_girl(Girl)
-    call shift_focus (Girl)
+    $ shift_focus (Girl)
 
     if Girl.location != Player.location:
 
@@ -568,7 +568,7 @@ label Flirt(Girl=0):
                                 "She shrugs away from you and winks."
                                 Girl.voice "Not now. . ."
                             else:
-                                call shift_focus(Girl)
+                                $ shift_focus(Girl)
                                 $ Player.primary_Action = "kiss"
                                 call stop_all_Actions (1)
                             return
@@ -2796,7 +2796,7 @@ label Love_You(Girl=0):
 label TouchCheek(Girl=0):
     if Girl not in all_Girls:
         return
-    call shift_focus (Girl)
+    $ shift_focus (Girl)
     $ Girl.change_face("surprised", 1)
     if "no_cheek" in Girl.daily_history:
         "You reach out to brush [Girl.name]'s face with your hand, but she slaps it away."
@@ -3215,7 +3215,7 @@ label Hold_Hands(Girl=0, Gloves=0):
 
 label Girl_Headpat(Girl=0):
     $ Girl = check_girl(Girl)
-    call shift_focus (Girl)
+    $ shift_focus (Girl)
     $ Girl.change_face("surprised", 1)
     if "no_headpat" in Girl.daily_history:
         "You reach out to pat [Girl.name] on the head, but she slaps it away."

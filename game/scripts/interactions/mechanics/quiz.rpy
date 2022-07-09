@@ -9,7 +9,7 @@ label Group_Strip_Study(temp_Girls = [], QuizOrder = []):
     if EmmaX in Player.Party and Player.Party[0] != EmmaX:
 
         $ Player.Party.reverse()
-        call shift_focus (Player.Party[0])
+        $ shift_focus (Player.Party[0])
 
 
     if Player.Party[0] == RogueX:
@@ -239,7 +239,7 @@ label Group_Strip_Study(temp_Girls = [], QuizOrder = []):
         if len(Player.Party) >= 2 and counter != 3 and Player.Party[1].check_clothing:
 
             $ Player.Party.reverse()
-            call shift_focus (Player.Party[0])
+            $ shift_focus (Player.Party[0])
 
 
     return
@@ -1324,7 +1324,7 @@ label Jubes_Quiz_Question:
 label Emma_StripStudy_Intro:
     if Player.Party[0] != EmmaX:
         $ Player.Party.reverse()
-    call shift_focus (Player.Party[0])
+    $ shift_focus (Player.Party[0])
     if not EmmaX.Clothes["top"] and not EmmaX.Clothes["bottom"]:
 
         $ EmmaX.change_face("sly")

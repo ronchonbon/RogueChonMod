@@ -53,7 +53,7 @@ label Halloween_chat(Girl=0):
 label Halloween_chat_Menu:
     $ Girl = check_girl(Girl)
     $ Girl.change_face()
-    call shift_focus (Girl)
+    $ shift_focus (Girl)
 
     if "angry" in Girl.recent_history:
         if Girl == RogueX:
@@ -208,7 +208,7 @@ label Halloween_chat_Menu:
 
 label Emma_HWchat_Minimal:
     $ EmmaX.change_face()
-    call shift_focus (EmmaX)
+    $ shift_focus (EmmaX)
     menu:
         ch_e "What was it you wished to discuss, [EmmaX.player_petname]?"
         "Romance her":
@@ -282,7 +282,7 @@ label Halloween_Party_entry(HWEvents = [], halloween_costume=0, HWline = []):
     $ RogueX.outfit_name = RogueX.outfitday
     $ RogueX.change_Outfit()
 
-    call shift_focus (RogueX)
+    $ shift_focus (RogueX)
     show Rogue_sprite standing at sprite_location(1200, 50):
         offset (0, 0)
         anchor (0.5, 0.0)
@@ -443,7 +443,7 @@ label Halloween_Party_entry(HWEvents = [], halloween_costume=0, HWline = []):
     $ KittyX.outfit_name = KittyX.outfitday
     $ KittyX.change_Outfit()
 
-    call shift_focus (KittyX)
+    $ shift_focus (KittyX)
     show Kitty_sprite standing at sprite_location(1200, 50):
         offset (0, 0)
         anchor (0.5, 0.0)
@@ -612,7 +612,7 @@ label Halloween_Party_entry(HWEvents = [], halloween_costume=0, HWline = []):
     $ LauraX.outfit_name = LauraX.outfitday
     $ LauraX.change_Outfit()
 
-    call shift_focus (LauraX)
+    $ shift_focus (LauraX)
     show Laura_sprite standing at sprite_location(1200, 50):
         offset (0, 0)
         anchor (0.5, 0.0)
@@ -834,7 +834,7 @@ label Halloween_Jean:
     $ JeanX.outfit_name = JeanX.outfitday
     $ JeanX.change_Outfit()
 
-    call shift_focus (JeanX)
+    $ shift_focus (JeanX)
     show Jean_sprite standing at sprite_location(1200, 50):
         offset (0, 0)
         anchor (0.5, 0.0)
@@ -1089,7 +1089,7 @@ label Halloween_Jean:
     $ StormX.outfit_name = StormX.outfitday
     $ StormX.change_Outfit()
 
-    call shift_focus (StormX)
+    $ shift_focus (StormX)
     show Storm_sprite standing at sprite_location(1200, 50):
         offset (0, 0)
         anchor (0.5, 0.0)
@@ -1256,7 +1256,7 @@ label Halloween_Emma:
     $ EmmaX.outfit_name = EmmaX.outfitday
     $ EmmaX.change_Outfit()
 
-    call shift_focus (EmmaX)
+    $ shift_focus (EmmaX)
     show Emma_sprite standing at sprite_location(-200, 50):
         offset (0, 0)
         anchor (0.5, 0.0)

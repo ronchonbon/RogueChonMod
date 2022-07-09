@@ -698,7 +698,7 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
 
 
     $ Girl.add_word(1, 0, "relationship", 0, 0)
-    call shift_focus (Girl)
+    $ shift_focus (Girl)
 
     $ Girl.change_face("angry")
     if Girl.location != Player.location and Girl not in Player.Party:
@@ -2236,7 +2236,7 @@ label PhoneSex(Girl=0):
     $ Player.add_word(1, "phonesex", "phonesex", 0, "phonesex")
 
 
-    call shift_focus (Girl)
+    $ shift_focus (Girl)
     show PhoneSex zorder 150
 
     $ Girl.add_word(1, "phonesex", "phonesex", 0, "phonesex")
@@ -2282,7 +2282,7 @@ label PhoneSex(Girl=0):
 
     call get_dressed
     $ Girl.change_Outfit(check_if_yoinked = True)
-    call checkout
+    $ checkout()
     call reset_player
     $ Player.recent_history.remove("phonesex")
     return

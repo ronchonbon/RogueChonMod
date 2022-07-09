@@ -11,7 +11,7 @@ label meet_Storm_prelude:
 label meet_Storm_ask_Emma:
     $ EmmaX.teaching = False
 
-    call shift_focus(EmmaX)
+    $ shift_focus(EmmaX)
     call set_the_scene(location = "bg_classroom", fade = True)
 
     "Before class, you approach [EmmaX.name]."
@@ -153,7 +153,7 @@ label meet_Storm:
     $ color_transform = _return
 
     call show_Girl(StormX, color_transform = color_transform, transition = dissolve)
-    call shift_focus(StormX)
+    $ shift_focus(StormX)
 
     "And she's naked."
 
@@ -659,7 +659,7 @@ label Storm_Peter:
 
     $ StormX.location = "bg_classroom"
 
-    call shift_focus (StormX)
+    $ shift_focus (StormX)
     call set_the_scene
 
     $ StormX.change_face("angry", 2, eyes = "surprised")
@@ -698,7 +698,7 @@ label Storm_Teacher_Caught(Girl=0):
         return
 
     ch_s "[Player.name]? [Girl.name]? Could you please stop what you are doing there?"
-    call checkout
+    $ checkout()
     call reset_player
 
     $ Girl.change_face("bemused", 2, eyes = "side")
@@ -727,7 +727,7 @@ label Storm_Teacher_Caught(Girl=0):
 
 label Storm_Hairtalk:
 
-    call shift_focus (StormX)
+    $ shift_focus (StormX)
     $ Player.location = "bg_classroom"
 
     call clear_the_room (StormX, 0, 1)
@@ -925,7 +925,7 @@ label Storm_Hairtalk:
 
 label Storm_Detention:
 
-    call shift_focus (StormX)
+    $ shift_focus (StormX)
     call clear_the_room (StormX, 0, 1)
     if True:
         "You enter the room and see [StormX.name] waiting for you at the back of the room."
@@ -1054,7 +1054,7 @@ label Storm_Detention:
 
 
 label Storm_Key:
-    call shift_focus (StormX)
+    $ shift_focus (StormX)
     call set_the_scene
     $ StormX.change_face("bemused")
     $ StormX.arm_pose = 2
@@ -1072,7 +1072,7 @@ label Storm_Key:
 
 
 label Storm_BF:
-    call shift_focus (StormX)
+    $ shift_focus (StormX)
     if StormX.location != Player.location:
 
         if StormX not in Player.Party:
@@ -1703,7 +1703,7 @@ label Storm_Love_Badend:
 
 
 label Storm_Sub:
-    call shift_focus (StormX)
+    $ shift_focus (StormX)
     $ StormX.drain_word("asked_to_meet")
 
 
@@ -1990,7 +1990,7 @@ label Storm_Sub_Asked:
 
 label Storm_Master:
     $ StormX.drain_word("asked_to_meet")
-    call shift_focus (StormX)
+    $ shift_focus (StormX)
 
     call set_the_scene
     if StormX.location != Player.location and StormX not in Player.Party:
@@ -2244,7 +2244,7 @@ label Storm_Sexfriend:
 
 
 label Storm_Poolnight:
-    call shift_focus (StormX)
+    $ shift_focus (StormX)
     call set_the_scene
     call clear_the_room (StormX, 1, 1)
     $ StormX.location = "bg_pool"
@@ -2351,7 +2351,7 @@ label Storm_Fuckbuddy:
 
 label Storm_Daddy:
     $ StormX.daily_history.append("relationship")
-    call shift_focus (StormX)
+    $ shift_focus (StormX)
     call set_the_scene
     ch_s ". . ."
     $ line = 0

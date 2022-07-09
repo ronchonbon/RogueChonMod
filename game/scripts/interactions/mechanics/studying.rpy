@@ -145,7 +145,7 @@ label study:
 
 
 label frisky_study(Prime_Bonus=0, Second_Bonus=0):
-    call shift_focus(Player.Party[0])
+    $ shift_focus(Player.Party[0])
 
     if len(Player.Party) >= 2:
         $ Second = Player.Party[1]

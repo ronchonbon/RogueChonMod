@@ -1,6 +1,6 @@
 label Massage(Girl=0, Current=0, Past=0, MCount=0):
     $ Girl = check_girl(Girl)
-    call shift_focus (Girl)
+    $ shift_focus (Girl)
     $ approval_bonus = 0
     if "angry" in Girl.recent_history:
         return
@@ -304,7 +304,7 @@ label Massage_Cycle:
     $ Player.primary_Action = "massage"
 
     while round >= 10 and MCount < 10:
-        call shift_focus (Girl)
+        $ shift_focus (Girl)
         $ Girl.lust_face()
 
         call shift_view (Girl, Girl.pose)
@@ -959,7 +959,7 @@ label Massage_After:
             ch_v "Hey, good job with that one."
     call change_Girl_stat(Girl, "love", int(MCount/2))
     $ approval_bonus = 0
-    call checkout
+    $ checkout()
     return
 
 label Massage_BadEnd:
@@ -987,7 +987,7 @@ label Massage_BadEnd:
         elif Girl == JubesX:
             ch_v "Ok, cut that out, [Girl.player_petname]."
         $ approval_bonus = 0
-        call checkout
+        $ checkout()
     elif Current == "breasts":
         if Girl == RogueX:
             ch_r "I think you should probably watch your hands there, [Girl.player_petname]."

@@ -12,7 +12,7 @@ label meet_Jean:
 
     call Jeanname(1)
     call set_the_scene(location = "bg_shower", fade = True)
-    call shift_focus(JeanX)
+    $ shift_focus(JeanX)
 
     "As you approach the showers, you notice someone getting dressed."
     ch_j "Hmm. . . I don't think I've seen you around before."
@@ -341,7 +341,7 @@ label meet_Jean:
 
     ch_p "Who the hell was that? . ."
 
-    call shift_focus(RogueX)
+    $ shift_focus(RogueX)
 
     $ round -= 10
 
@@ -940,7 +940,7 @@ label Jean_Master:
 
 label Jean_Daddy:
     $ JeanX.daily_history.append("relationship")
-    call shift_focus (JeanX)
+    $ shift_focus (JeanX)
     call set_the_scene
     ch_j ". . ."
     if JeanX in Player.Harem:

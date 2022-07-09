@@ -13,7 +13,7 @@ label meet_Laura:
     $ LauraX.names = []
     $ LauraX.location = Player.location
 
-    call change_clothes
+    $ change_clothes()
 
     $ LauraX.change_face("normal")
 
@@ -26,7 +26,7 @@ label meet_Laura:
     "When you come to, a girl pulls you up by your arm."
 
     call show_Girl(LauraX, animation_transform = reset_zoom)
-    call shift_focus(LauraX)
+    $ shift_focus(LauraX)
 
     $ LauraX.change_face("surprised", eyes = "squint", brows = "sad")
 
@@ -328,7 +328,7 @@ label meet_Laura:
     $ LauraX.history.append("met")
     $ LauraX.to_do.append("mission")
 
-    call shift_focus(RogueX)
+    $ shift_focus(RogueX)
 
     $ round -= 20
 
@@ -355,7 +355,7 @@ label Laura_Key:
 
 
 label Laura_BF(temp_Girls = []):
-    call shift_focus (LauraX)
+    $ shift_focus (LauraX)
     if LauraX.location != Player.location:
         $ LauraX.location = Player.location
         if LauraX not in Player.Party:
@@ -1315,7 +1315,7 @@ label Laura_Love_Redux:
 
 label Laura_Sub:
     $ LauraX.drain_word("asked_to_meet")
-    call shift_focus (LauraX)
+    $ shift_focus (LauraX)
     if LauraX.location != Player.location and LauraX not in Player.Party:
         "Suddenly, [LauraX.name] shows up and says she needs to talk to you."
 
@@ -1688,7 +1688,7 @@ label Laura_Sub_Asked:
 
 label Laura_Master:
     $ LauraX.drain_word("asked_to_meet")
-    call shift_focus (LauraX)
+    $ shift_focus (LauraX)
     if LauraX.location != Player.location and LauraX not in Player.Party:
         "Suddenly, [LauraX.name] shows up and says she needs to talk to you."
 
@@ -2019,7 +2019,7 @@ label Laura_Fuckbuddy:
     "You hear a knock on the door, and go to answer it."
 
     $ LauraX.location = Player.location
-    call shift_focus (LauraX)
+    $ shift_focus (LauraX)
     call set_the_scene
     $ LauraX.outfit_name = "first_casual"
     $ LauraX.today_outfit_name = "first_casual"
@@ -2054,7 +2054,7 @@ label Laura_Fuckbuddy:
 label Laura_Daddy:
     $ LauraX.daily_history.append("relationship")
     $ LauraX.drain_word("asked_to_meet")
-    call shift_focus (LauraX)
+    $ shift_focus (LauraX)
     call set_the_scene
     ch_l ". . ."
     if LauraX in Player.Harem:
@@ -2313,7 +2313,7 @@ label Laura_Dressup:
 
 
     $ active_Girls.append(LauraX) if LauraX not in active_Girls else active_Girls
-    call shift_focus (LauraX)
+    $ shift_focus (LauraX)
     $ Player.location = "bg_campus"
     call remove_all
     $ LauraX.location = Player.location
@@ -2367,7 +2367,7 @@ label Laura_Dressup:
     call remove_Girl(LauraX)
     "[LauraX.name] walks away, and as you watch her go you feel a tap on your shoulder."
 
-    call shift_focus (KittyX)
+    $ shift_focus (KittyX)
     $ KittyX.location = Player.location
     call set_the_scene
     $ KittyX.outfit_name = KittyX.today_outfit_name
@@ -2521,7 +2521,7 @@ label Laura_Dressup3:
             $ Player.location = "bg_kitty"
 
             call clear_the_room ("all", 0, 1)
-            call shift_focus (LauraX)
+            $ shift_focus (LauraX)
             $ KittyX.location = "bg_kitty"
             $ LauraX.location = "bg_kitty"
             call set_the_scene
@@ -2568,7 +2568,7 @@ label Laura_Dressup3:
             $ Player.location = "bg_kitty"
 
             call clear_the_room ("all", 0, 1)
-            call shift_focus (LauraX)
+            $ shift_focus (LauraX)
             $ KittyX.location = "bg_kitty"
             $ LauraX.location = "bg_kitty"
             call set_the_scene

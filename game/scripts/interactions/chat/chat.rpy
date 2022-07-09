@@ -1,5 +1,5 @@
 label chat_menu(Girl):
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
 
     $ chatting = True
 
@@ -210,16 +210,16 @@ label chat_menu(Girl):
     return
 
 label text_menu(Girl):
-    call shift_focus(Girl)
+    $ shift_focus(Girl)
 
     menu(nvl = True):
-        ch_p_text "Hey."
+        ch_p_nvl "Hey."
         "Come over here.":
-            ch_p_text "Come over here."
+            ch_p_nvl "Come over here."
 
             call expression "summon_" + Girl.tag
         "Never mind.":
-            ch_p_text "Never mind."
+            ch_p_nvl "Never mind."
 
     return
 

@@ -38,13 +38,12 @@ init python:
 
         return True
 
-label check_who_is_present(location = None):
-    $ Present = Player.Party[:] if Player.Party else []
+    def check_who_is_present(location = None):
+        Present = Player.Party[:] if Player.Party else []
 
-    if not location:
-        $ location = Player.location
+        if not location:
+            location = Player.location
 
-    python:
         for G in all_Girls:
             if G not in Player.Party:
                 if G not in Present and G.location == location:
@@ -56,12 +55,12 @@ label check_who_is_present(location = None):
             if G in Nearby:
                 Nearby.remove(G)
 
-    if Present and Player.focused_Girl not in Present:
-        $ renpy.random.shuffle(Present)
+        if Present and Player.focused_Girl not in Present:
+            renpy.random.shuffle(Present)
 
-        call shift_focus(Present[0])
+            shift_focus(Present[0])
 
-    return
+        return
 
 label dildo_check(Girl):
     if "dildo" in Player.inventory:
