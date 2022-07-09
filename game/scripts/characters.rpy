@@ -781,43 +781,43 @@ init python:
                     "skirt": Dimitrescu_skirt(self),
                     "top": Dimitrescu_top(self),
                     "neck": white_choker(self)})
-            # elif self.tag == "Laura":
-            #     first_casual.update_Clothes({
-            #         "hair": long_hair(self),
-            #         "underwear": leather_panties(self),
-            #         "pants": leather_pants(self),
-            #         "bra": leather_bra(self),
-            #         "neck": leash_choker(self), "gloves": black_wristbands(self)})
-            #
-            #     second_casual.update_Clothes({
-            #         "hair": long_hair(self),
-            #         "underwear": leather_panties(self),
-            #         "skirt": belty_skirt(self),
-            #         "bra": leather_bra(self),
-            #         "neck": leash_choker(self), "gloves": black_wristbands(self),
-            #         "jacket": grey_jacket(self)})
-            #
-            #     gym_clothes.update_Clothes({
-            #         "hair": long_hair(self),
-            #         "underwear": leather_panties(self),
-            #         "bra": leather_bra(self),
-            #         "gloves": black_wristbands(self)})
-            #
-            #     sleepwear.update_Clothes({
-            #         "hair": long_hair(self),
-            #         "underwear": leather_panties(self),
-            #         "bra": leather_bra(self)})
-            #
-            #     shower.update_Clothes({
-            #         "hair": long_hair(self),
-            #         "top": yellow_towel(self)})
-            #
-            #     Halloween_costume.update_Clothes({
-            #         "hair": long_hair(self),
-            #         "underwear": leather_panties(self), "hose": black_stockings(self),
-            #         "skirt": Tifa_skirt(self),
-            #         "bra": white_tanktop(self),
-            #         "neck": leash_choker(self), "gloves": Tifa_gloves(self), "suspenders": Tifa_suspenders(self)})
+            elif self.tag == "Laura":
+                first_casual.update_Clothes({
+                    "hair": long_hair(self),
+                    "underwear": leather_panties(self),
+                    "pants": leather_pants(self),
+                    "bra": leather_bra(self),
+                    "neck": leash_choker(self), "gloves": black_wristbands(self)})
+
+                second_casual.update_Clothes({
+                    "hair": long_hair(self),
+                    "underwear": leather_panties(self),
+                    "skirt": black_belty_skirt(self),
+                    "bra": leather_bra(self),
+                    "neck": leash_choker(self), "gloves": black_wristbands(self),
+                    "jacket": grey_jacket(self)})
+
+                gym_clothes.update_Clothes({
+                    "hair": long_hair(self),
+                    "underwear": leather_panties(self),
+                    "bra": leather_bra(self),
+                    "gloves": black_wristbands(self)})
+
+                sleepwear.update_Clothes({
+                    "hair": long_hair(self),
+                    "underwear": leather_panties(self),
+                    "bra": leather_bra(self)})
+
+                shower.update_Clothes({
+                    "hair": long_hair(self),
+                    "top": yellow_towel(self)})
+
+                Halloween_costume.update_Clothes({
+                    "hair": long_hair(self),
+                    "underwear": leather_panties(self), "hose": black_stockings(self),
+                    "skirt": black_skirt(self),
+                    "bra": white_tanktop(self),
+                    "neck": leash_choker(self), "gloves": Tifa_gloves(self), "suspenders": Tifa_suspenders(self)})
             elif self.tag == "Jean":
                 first_casual.update_Clothes({
                     "hair": long_hair(self),

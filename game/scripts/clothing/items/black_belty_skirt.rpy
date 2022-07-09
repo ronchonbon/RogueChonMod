@@ -1,8 +1,8 @@
 init -1 python:
 
-    def black_skirt(Owner):
-        name = "black skirt"
-        image_string = "black_skirt"
+    def black_belty_skirt(Owner):
+        name = "black belty skirt"
+        image_string = "black_belty_skirt"
 
         clothing_type = "skirt"
 

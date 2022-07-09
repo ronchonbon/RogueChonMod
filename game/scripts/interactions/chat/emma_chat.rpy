@@ -3,7 +3,7 @@ label summon_Emma:
 
     if D20 <= 3:
         $ line = "no"
-    if time_index > 2:
+    elif time_index > 2:
         if approval_check(EmmaX, 700, "L") or approval_check(EmmaX, 300, "O"):
             ch_e_text "It's getting late, but fine, what did you want?"
 
@@ -17,8 +17,7 @@ label summon_Emma:
             ch_e_text "I don't really feel up to that, [EmmaX.player_petname]."
 
             return
-
-        if EmmaX.location == "bg_classroom" or EmmaX.teaching:
+        elif EmmaX.location == "bg_classroom" or EmmaX.teaching:
             ch_e_text "You can find me in the classroom, [EmmaX.player_petname]."
         elif EmmaX.location == "bg_dangerroom":
             ch_e_text "I'm getting some training in, [EmmaX.player_petname], care to join me?"
@@ -95,16 +94,17 @@ label summon_Emma:
                     call change_Girl_stat(EmmaX, "love", -2)
 
                     ch_e_text "Who do you think is in charge here?!"
+
                     call change_Girl_stat(EmmaX, "inhibition", 2)
                     call change_Girl_stat(EmmaX, "inhibition", 1)
                     call change_Girl_stat(EmmaX, "obedience", -2)
 
                     ch_e_text "You'd better hope you don't find me here."
                 else:
-                    call change_Girl_stat(EmmaX, "inhibition", 1)
-                    call change_Girl_stat(EmmaX, "inhibition", 1)
                     call change_Girl_stat(EmmaX, "love", 1)
                     call change_Girl_stat(EmmaX, "obedience", -1)
+                    call change_Girl_stat(EmmaX, "inhibition", 1)
+                    call change_Girl_stat(EmmaX, "inhibition", 1)
 
                     $ line = "no"
     else:

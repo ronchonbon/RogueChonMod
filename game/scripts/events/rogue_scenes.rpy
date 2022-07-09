@@ -12,6 +12,13 @@ label prologue:
     show cover zorder 7
     show Chibi_cock onlayer screens
 
+    menu:
+        "Skip prologue?"
+        "Yes":
+            jump prologue_end
+        "No":
+            pass
+
     "You recently discovered that you were a mutant when a Sentinel attacked your home.\nYou were rescued by a squad of X-Men and given this address."
     "You've arrived in the early evening at the Xavier Institute, where you've been promised a new home."
     "Things have been tough for mutants in the years since Apocalypse's fall, but this sounds like it might be a good deal."
@@ -351,6 +358,7 @@ label tour_parting:
 
     $ active_Girls.append(RogueX)
 
+label prologue_end:
     $ round = 10
 
     show screen status_screen()

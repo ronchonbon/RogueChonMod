@@ -1,10 +1,10 @@
 init -1 python:
 
-    def black_skirt(Owner):
-        name = "black skirt"
-        image_string = "black_skirt"
+    def leather_mesh_pants(Owner):
+        name = "leather and mesh pants"
+        image_string = "leather_mesh_pants"
 
-        clothing_type = "skirt"
+        clothing_type = "pants"
 
         dialogue_lines = {
             }
@@ -12,16 +12,13 @@ init -1 python:
         shame = 0
 
         hides = ["pussy"]
-        covers = ["pussy"]
+        covers = ["pussy", "thighs"]
 
-        number_of_states = 2
+        number_of_states = 1
 
         poses = [
             "arm pose 1",
             "arm pose 2",
-            "handjob",
-            "blowjob",
-            "sex",
-            "doggy"]
+            "handjob"]
 
         return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

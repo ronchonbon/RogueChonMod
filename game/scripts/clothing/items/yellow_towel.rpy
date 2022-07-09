@@ -1,20 +1,20 @@
 init -1 python:
 
-    def black_skirt(Owner):
-        name = "black skirt"
-        image_string = "black_skirt"
+    def yellow_towel(Owner):
+        name = "yellow towel"
+        image_string = "yellow_towel"
 
-        clothing_type = "skirt"
+        clothing_type = "top"
 
         dialogue_lines = {
             }
 
         shame = 0
 
-        hides = ["pussy"]
-        covers = ["pussy"]
+        hides = ["breasts", "pussy"]
+        covers = ["breasts", "pussy"]
 
-        number_of_states = 2
+        number_of_states = 1
 
         poses = [
             "arm pose 1",

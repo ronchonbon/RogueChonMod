@@ -15,7 +15,7 @@ layeredimage Mystique_sprite standing normal:
         "images/Mystique_standing/Mystique_standing_underwear_[MystiqueX.Clothes[underwear].string]_[MystiqueX.Clothes[underwear].state].png"
 
     if MystiqueX.Clothes["skirt"].string:
-        "images/Mystique_standing/Mystique_standing_skirt[MystiqueX.Clothes[skirt].string].png"
+        "images/Mystique_standing/Mystique_standing_skirt_[MystiqueX.Clothes[skirt].string].png"
 
     always:
         "images/Mystique_standing/Mystique_standing_arms.png"

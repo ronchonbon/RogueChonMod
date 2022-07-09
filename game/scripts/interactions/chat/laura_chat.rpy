@@ -1,3 +1,354 @@
+label summon_Laura:
+    $ D20 = renpy.random.randint(1, 20)
+
+    if D20 <= 3:
+        $ line = "no"
+    elif time_index > 2:
+        if approval_check(LauraX, 500, "L") or approval_check(LauraX, 400, "O"):
+            ch_l "You're up too? Sure, we can hang."
+
+            call add_Girls(LauraX)
+        else:
+            ch_l "Nah."
+
+        return
+    elif not approval_check(LauraX, 700, "L") or not approval_check(LauraX, 600, "O"):
+        if not approval_check(LauraX, 300):
+            ch_l "I'm busy, [LauraX.player_petname]."
+
+            return
+        elif LauraX.location == "bg_classroom":
+            ch_l "I'm in class, did you want to come too?"
+        elif LauraX.location == "bg_dangerroom":
+            ch_l "I'm in the Danger Room, [LauraX.player_petname], want in?"
+        elif LauraX.location == "bg_campus":
+            ch_l "I'm napping under a tree here, want to come?"
+        elif LauraX.location == "bg_laura":
+            ch_l "I'm in my room, [LauraX.player_petname], want to hang?"
+        elif LauraX.location == "bg_player":
+            ch_l "I'm in your room, [LauraX.player_petname], why aren't you?"
+        elif LauraX.location == "bg_shower":
+            if approval_check(LauraX, 1600):
+                ch_l "I'm in the shower right now. Join me?"
+            else:
+                ch_l "I'm in the shower right now, [LauraX.player_petname]. We can connect later."
+
+                return
+        elif LauraX.location == "hold":
+            ch_l "I'm on task right now. Sorry?"
+
+            return
+        else:
+            ch_l "Why don't you come to me?"
+
+        menu(nvl = True):
+            extend ""
+            "Sure, I'll be right there.":
+                ch_p_text "Sure, I'll be right there."
+
+                call change_Girl_stat(LauraX, "love", 1)
+                call change_Girl_stat(LauraX, "inhibition", 1)
+
+                ch_l "See you when you get here."
+
+                $ line = "go to"
+            "Nah, we can talk later.":
+                ch_p_text "Nah, we can talk later."
+
+                call change_Girl_stat(LauraX, "obedience", 1)
+                call change_Girl_stat(LauraX, "obedience", 2)
+
+                ch_l "Ok. Later then."
+            "Could you please come visit me? I'm lonely.":
+                ch_p_text "Could you please come visit me? I'm lonely."
+
+                if approval_check(LauraX, 650, "L") or approval_check(LauraX, 1500):
+                    call change_Girl_stat(LauraX, "love", 1)
+                    call change_Girl_stat(LauraX, "obedience", 1)
+
+                    $ line = "lonely"
+                else:
+                    call change_Girl_stat(LauraX, "inhibition", 1)
+
+                    $ line = "no"
+
+                    ch_l "Man, you are such a sap."
+            "Come on, it'll be fun.":
+                ch_p_text "Come on, it'll be fun."
+
+                if approval_check(LauraX, 400, "L") and approval_check(LauraX, 800):
+                    call change_Girl_stat(LauraX, "love", 1)
+                    call change_Girl_stat(LauraX, "obedience", 1)
+
+                    $ line = "fun"
+                else:
+                    call change_Girl_stat(LauraX, "inhibition", 1)
+
+                    $ line = "no"
+            "I said come over here.":
+                ch_p_text "I said come over here."
+
+                if approval_check(LauraX, 600, "O"):
+                    call change_Girl_stat(LauraX, "love", 1)
+                    call change_Girl_stat(LauraX, "love", -1)
+                    call change_Girl_stat(LauraX, "obedience", 1)
+
+                    $ line = "command"
+                elif D20 >= 7 and approval_check(LauraX, 1500):
+                    call change_Girl_stat(LauraX, "love", -2)
+                    call change_Girl_stat(LauraX, "love", -1)
+                    call change_Girl_stat(LauraX, "obedience", 2)
+                    call change_Girl_stat(LauraX, "obedience", 1)
+
+                    ch_l "Ok, fine."
+
+                    $ line = "yes"
+                elif approval_check(LauraX, 200, "O"):
+                    call change_Girl_stat(LauraX, "love", -4)
+                    call change_Girl_stat(LauraX, "love", -3)
+
+                    ch_l "Don't even try it."
+
+                    call change_Girl_stat(LauraX, "obedience", -3)
+                    call change_Girl_stat(LauraX, "inhibition", 2)
+                    call change_Girl_stat(LauraX, "inhibition", 1)
+
+                    ch_l "I'm staying put."
+                else:
+                    call change_Girl_stat(LauraX, "love", 1)
+                    call change_Girl_stat(LauraX, "obedience", -1)
+                    call change_Girl_stat(LauraX, "inhibition", 1)
+                    call change_Girl_stat(LauraX, "inhibition", 1)
+
+                    $ line = "no"
+    else:
+        if LauraX.love > LauraX.obedience:
+            ch_l "Sure!"
+        else:
+            ch_l "Ok, I'm in route."
+
+        $ line = "yes"
+
+    if not line:
+        return
+    elif line == "go to":
+        if LauraX.location == "bg_classroom":
+            ch_l "K, there's room next to me."
+        elif LauraX.location == "bg_dangerroom":
+            ch_l "I'll try to leave some bots for 'ya."
+        elif LauraX.location == "bg_laura":
+            ch_l "I'll. . . make some space."
+        elif LauraX.location == "bg_player":
+            ch_l "I'll be waiting."
+        elif LauraX.location == "bg_shower":
+            ch_l "I'll leave you some hot water."
+        elif LauraX.location == "bg_campus":
+            ch_l "Look for the biggest tree."
+
+        call hide_all
+
+        $ Player.traveling = True
+
+        if LauraX.location == "bg_player":
+            jump player_room
+        elif LauraX.location == "bg_emma":
+            $ Girl = LauraX
+
+            jump girls_room
+        elif LauraX.location == "bg_campus":
+            jump campus
+        elif LauraX.location == "bg_classroom":
+            jump classroom
+        elif LauraX.location == "bg_dangerroom":
+            jump danger_room
+        elif LauraX.location == "bg_shower":
+            jump shower_room
+        elif LauraX.location == "bg_pool":
+            jump pool
+        elif LauraX.location == "bg_study":
+            jump study
+        elif LauraX.location == "bg_mall":
+            jump mall
+    elif line == "no":
+        if LauraX.location == "bg_classroom":
+            ch_l "I can't skip this lecture."
+        elif LauraX.location == "bg_dangerroom":
+            ch_l "I'm just getting warmed up though!"
+        else:
+            ch_l "Sorry, [LauraX.player_petname], I'm kinda busy."
+
+        return
+    elif line == "lonely":
+        ch_l "You are such a dork!"
+    elif line == "command":
+        ch_l "Yes, [LauraX.player_petname]."
+
+    $ LauraX.change_Outfit()
+
+    call Girls_arrive(LauraX)
+
+    return
+
+label Laura_leaving:
+    if not approval_check(LauraX, 700):
+        if LauraX.location == "bg_classroom":
+            ch_l "I've got class."
+        elif LauraX.location == "bg_dangerroom":
+            ch_l "I'm hitting the Danger Room."
+        elif LauraX.location == "bg_campus":
+            ch_l "I'm taking a nap in the quad."
+        elif LauraX.location == "bg_laura":
+            ch_l "I'm headed back to my room."
+        elif LauraX.location == "bg_player":
+            ch_l "I'm gonna hang out in your room for a bit."
+        elif LauraX.location == "bg_pool":
+            ch_l "I was hitting the pool."
+        elif LauraX.location == "bg_shower":
+            if approval_check(LauraX, 1400):
+                ch_l "I'm hitting the showers, later."
+            else:
+                ch_l "I'm headed out."
+        else:
+            ch_l "I'm headed out, later."
+
+        call hide_Girl(LauraX)
+
+        return
+
+    if LauraX.location == "bg_classroom":
+        ch_l "I've got class, want in?"
+    elif LauraX.location == "bg_dangerroom":
+        ch_l "I've got some Danger Room time, want in?"
+    elif LauraX.location == "bg_campus":
+        ch_l "I'm taking a nap on the quad, you want in?"
+    elif LauraX.location == "bg_laura":
+        ch_l "I'm headed back to my room, you want in?"
+    elif LauraX.location == "bg_player":
+        ch_l "I'm going to hang out in your room for a bit, you coming?"
+    elif LauraX.location == "bg_shower":
+        if approval_check(LauraX, 1600):
+            ch_l "I'm hitting the showers, you could use one too."
+        else:
+            ch_l "I'm hitting the showers, see you later."
+
+            return
+    elif LauraX.location == "bg_pool":
+        ch_l "I was hitting the pool. Wanna come?"
+    else:
+        ch_l "Wanna join me?"
+
+    $ D20 = renpy.random.randint(1, 20)
+
+    menu:
+        extend ""
+        "Sure, I'll catch up.":
+            $ line = "go to"
+        "Nah, we can talk later.":
+            ch_l "Sure, whatever."
+
+            $ line = None
+        "Could you please stay with me? I'll get lonely.":
+            if approval_check(LauraX, 650, "L") or approval_check(LauraX, 1500):
+                $ line = "lonely"
+            else:
+                $ line = "no"
+
+                ch_l "Man, you are such a sap."
+        "Come on, it'll be fun.":
+            if approval_check(LauraX, 400, "L") and approval_check(LauraX, 800):
+                call change_Girl_stat(LauraX, "love", 1)
+                call change_Girl_stat(LauraX, "obedience", 1)
+
+                $ line = "fun"
+            else:
+                call change_Girl_stat(LauraX, "inhibition", 1)
+
+                $ line = "no"
+        "No, stay here.":
+            if approval_check(LauraX, 600, "O"):
+                $ line = "command"
+            elif D20 >= 7 and approval_check(LauraX, 1400):
+                ch_l "I guess if you need me here."
+
+                $ line = "yes"
+            elif approval_check(LauraX, 200, "O"):
+                ch_l "Don't tell me what to do."
+                ch_l "I'm out of here."
+
+                $ line = None
+            else:
+                $ line = "no"
+
+    if not line:
+        call hide_Girl(LauraX)
+
+        return
+    elif line == "no":
+        if LauraX.location == "bg_classroom":
+            ch_l "I really can't miss this one."
+        elif LauraX.location == "bg_dangerroom":
+            ch_l "Sorry [LauraX.player_petname], but I'm going a little stir crazy."
+        else:
+            ch_l "Sorry, I have stuff to do."
+
+        call hide_Girl(LauraX)
+
+        return
+    elif line == "go to":
+        call hide_Girl(LauraX)
+        call change_clothes
+
+        if LauraX.location == "bg_classroom":
+            ch_l "Ok, get a move on then."
+        elif LauraX.location == "bg_dangerroom":
+            ch_l "I'll get warmed up."
+        elif LauraX.location == "bg_laura":
+            ch_l "Ok."
+        elif LauraX.location == "bg_player":
+            ch_l "Good."
+        elif LauraX.location == "bg_shower":
+            ch_l "Ok, nice."
+        elif LauraX.location == "bg_campus":
+            ch_l "Ok, nice."
+        elif LauraX.location == "bg_pool":
+            ch_l "Cool."
+
+        call hide_all
+
+        $ Player.traveling = False
+
+        if LauraX.location == "bg_player":
+            jump player_room
+        elif LauraX.location == "bg_emma":
+            $ Girl = LauraX
+
+            jump girls_room
+        elif LauraX.location == "bg_campus":
+            jump campus
+        elif LauraX.location == "bg_classroom":
+            jump classroom
+        elif LauraX.location == "bg_dangerroom":
+            jump danger_room
+        elif LauraX.location == "bg_shower":
+            jump shower_room
+        elif LauraX.location == "bg_pool":
+            jump pool
+        elif LauraX.location == "bg_study":
+            jump study
+        elif LauraX.location == "bg_mall":
+            jump mall
+    elif line == "lonely":
+        ch_l "Well, I guess you should never go alone. . ."
+    elif line == "command":
+        ch_l "Yes [LauraX.player_petname]."
+
+    ch_l "I'll stick around."
+
+    $ LauraX.location = Player.location
+
+    return
+
+
 
 
 
@@ -1703,962 +2054,478 @@ label Laura_Personality(counter=0):
 
 
 
-label Laura_Summon(approval_bonus=approval_bonus):
-    $ LauraX.change_Outfit()
-    if "no_summon" in LauraX.recent_history:
-        if "angry" in LauraX.recent_history:
-            ch_l "Grrrrrrrrr."
-        elif LauraX.recent_history.count("no_summon") > 1:
-            ch_l "Back off!"
-            $ LauraX.recent_history.append("angry")
-        else:
-
-
-            ch_l "Like I said, I'm busy."
-        $ LauraX.recent_history.append("no_summon")
-        return
-
-    $ D20 = renpy.random.randint(1, 20)
-    $ line = 0
-    if LauraX.location == "bg_classroom":
-        $ approval_bonus = -10
-    elif LauraX.location == "bg_dangerroom":
-        $ approval_bonus = -10
-    elif LauraX.location == "bg_shower":
-        $ approval_bonus = -30
-
-    if D20 <= 3:
-
-        $ line = "no"
-    if time_index > 2:
-        if approval_check(LauraX, 500, "L") or approval_check(LauraX, 400, "O"):
-
-            ch_l "You're up too? Sure, we can hang."
-            $ LauraX.location = Player.location
-            call set_the_scene
-        else:
-
-            ch_l "Nah."
-            $ LauraX.recent_history.append("no_summon")
-        return
-    elif "lesbian" in LauraX.recent_history:
-
-        if approval_check(LauraX, 2000):
-            ch_l "I'm kinda with a girl right now? Wanna come over?"
-            menu:
-                extend ""
-                "Sure":
-                    $ line = "go to"
-                "No thanks.":
-                    ch_l "Heh, your call."
-                    return
-        else:
-            ch_l "Oh, um, kinda busy here."
-            ch_l "I'll see you later, eh?"
-            $ LauraX.recent_history.append("no_summon")
-            return
-    elif not approval_check(LauraX, 700, "L") or not approval_check(LauraX, 600, "O"):
-
-        if not approval_check(LauraX, 300):
-            ch_l "I'm busy, [LauraX.player_petname]."
-            $ LauraX.recent_history.append("no_summon")
-            return
-
-
-        if "summoned" in LauraX.recent_history:
-            pass
-        elif "goto" in LauraX.recent_history:
-            ch_l "You were just over here."
-        elif LauraX.location == "bg_classroom":
-            ch_l "I'm in class, did you want to come too?"
-        elif LauraX.location == "bg_dangerroom":
-            ch_l "I'm in the Danger Room, [LauraX.player_petname], want in?"
-        elif LauraX.location == "bg_campus":
-            ch_l "I'm napping under a tree here, want to come?"
-        elif LauraX.location == "bg_laura":
-            ch_l "I'm in my room, [LauraX.player_petname], want to hang?"
-        elif LauraX.location == "bg_player":
-            ch_l "I'm in your room, [LauraX.player_petname], why aren't you?"
-        elif LauraX.location == "bg_shower":
-            if approval_check(LauraX, 1600):
-                ch_l "I'm in the shower right now. Join me?"
-            else:
-                ch_l "I'm in the shower right now, [LauraX.player_petname]. We can connect later."
-                $ LauraX.recent_history.append("no_summon")
-                return
-        elif LauraX.location == "hold":
-            ch_l "I'm on task right now. Sorry?"
-            $ LauraX.recent_history.append("no_summon")
-            return
-        else:
-            ch_l "Why don't you come to me?"
-
-
-        if "summoned" in LauraX.recent_history:
-            ch_l "Again? Ok, fine."
-            $ line = "yes"
-        elif "goto" in LauraX.recent_history:
-            menu:
-                extend ""
-                "You're right, be right back.":
-                    ch_l "See you when you get here."
-                    $ line = "go to"
-                "Nah, it's better here.":
-                    ch_l "If you say so."
-                "But I'd {i}really{/i} like to see you over here.":
-                    if approval_check(LauraX, 600, "L") or approval_check(LauraX, 1400):
-                        $ line = "lonely"
-                    else:
-                        $ line = "no"
-                "I said come over here.":
-                    if approval_check(LauraX, 600, "O"):
-
-                        $ line = "command"
-                    elif D20 >= 7 and approval_check(LauraX, 1400):
-
-                        ch_l "Hmph."
-                        $ line = "yes"
-                    elif approval_check(LauraX, 200, "O"):
-
-                        ch_l "Whatever."
-                        ch_l "I'll be here if you change your mind."
-                    else:
-
-                        $ line = "no"
-        else:
-            menu:
-                extend ""
-                "Sure, I'll be right there.":
-                    call change_Girl_stat(LauraX, "love", 1)
-                    call change_Girl_stat(LauraX, "inhibition", 1)
-                    ch_l "See you when you get here."
-                    $ line = "go to"
-                "Nah, we can talk later.":
-
-                    call change_Girl_stat(LauraX, "obedience", 1)
-                    call change_Girl_stat(LauraX, "obedience", 2)
-                    ch_l "Ok. Later then."
-                "Could you please come visit me? I'm lonely.":
-
-                    if approval_check(LauraX, 650, "L") or approval_check(LauraX, 1500):
-                        call change_Girl_stat(LauraX, "love", 1)
-                        call change_Girl_stat(LauraX, "obedience", 1)
-                        $ line = "lonely"
-                    else:
-                        call change_Girl_stat(LauraX, "inhibition", 1)
-                        $ line = "no"
-                        ch_l "Man, you are such a sap."
-                "Come on, it'll be fun.":
-
-                    if approval_check(LauraX, 400, "L") and approval_check(LauraX, 800):
-                        call change_Girl_stat(LauraX, "love", 1)
-                        call change_Girl_stat(LauraX, "obedience", 1)
-                        $ line = "fun"
-                    else:
-                        call change_Girl_stat(LauraX, "inhibition", 1)
-                        $ line = "no"
-                "I said come over here.":
-
-                    if approval_check(LauraX, 600, "O"):
-
-                        call change_Girl_stat(LauraX, "love", 1)
-                        call change_Girl_stat(LauraX, "love", -1)
-                        call change_Girl_stat(LauraX, "obedience", 1)
-                        $ line = "command"
-
-                    elif D20 >= 7 and approval_check(LauraX, 1500):
-
-                        call change_Girl_stat(LauraX, "love", -2)
-                        call change_Girl_stat(LauraX, "love", -1)
-                        call change_Girl_stat(LauraX, "obedience", 2)
-                        call change_Girl_stat(LauraX, "obedience", 1)
-                        ch_l "Ok, fine."
-                        $ line = "yes"
-
-                    elif approval_check(LauraX, 200, "O"):
-
-                        call change_Girl_stat(LauraX, "love", -4)
-                        call change_Girl_stat(LauraX, "love", -3)
-                        ch_l "Don't even try it."
-                        call change_Girl_stat(LauraX, "inhibition", 2)
-                        call change_Girl_stat(LauraX, "inhibition", 1)
-                        call change_Girl_stat(LauraX, "obedience", -3)
-                        ch_l "I'm staying put."
-                    else:
-
-                        call change_Girl_stat(LauraX, "inhibition", 1)
-                        call change_Girl_stat(LauraX, "inhibition", 1)
-                        call change_Girl_stat(LauraX, "love", 1)
-                        call change_Girl_stat(LauraX, "obedience", -1)
-                        $ line = "no"
-    else:
-
-
-        if LauraX.love > LauraX.obedience:
-            ch_l "Sure!"
-        else:
-            ch_l "Ok, I'm in route."
-        $ line = "yes"
-
-    $ approval_bonus = 0
-
-    if not line:
-
-        $ LauraX.recent_history.append("no_summon")
-        return
-
-    if line == "no":
-
-        if LauraX.location == "bg_classroom":
-            ch_l "I can't skip this lecture."
-        elif LauraX.location == "bg_dangerroom":
-            ch_l "I'm just getting warmed up though!"
-        else:
-            ch_l "Sorry, [LauraX.player_petname], I'm kinda busy."
-        $ LauraX.recent_history.append("no_summon")
-        return
-
-    elif line == "go to":
-
-        $ renpy.pop_call()
-        $ LauraX.recent_history.append("goto")
-        $ Player.recent_history.append("goto")
-        $ line = 0
-        if LauraX.location == "bg_classroom":
-            ch_l "K, there's room next to me."
-            jump classroom
-        elif LauraX.location == "bg_dangerroom":
-            ch_l "I'll try to leave some bots for 'ya."
-            jump danger_room
-        elif LauraX.location == "bg_laura":
-            ch_l "I'll. . . make some space."
-            $ Girl = LauraX
-            jump girls_room
-        elif LauraX.location == "bg_player":
-            ch_l "I'll be waiting."
-            jump player_room
-        elif LauraX.location == "bg_shower":
-            ch_l "I'll leave you some hot water."
-            jump shower_room
-        elif LauraX.location == "bg_campus":
-            ch_l "Look for the biggest tree."
-            jump campus
-        elif LauraX.location in bedrooms:
-            ch_l "Yeah, see you."
-            $ Player.location = LauraX.location
-            jump reset_location
-        else:
-            ch_l "Um, I'll just meet you in my room."
-            $ LauraX.location = "bg_laura"
-            $ Girl = LauraX
-            jump girls_room
-
-
-    elif line == "lonely":
-        ch_l "You are such a dork!"
-    elif line == "command":
-        ch_l "Yes, [LauraX.player_petname]."
-
-    $ LauraX.recent_history.append("summoned")
-    $ line = 0
-    if "locked" in Player.traits:
-        call Girls_arrive (LauraX)
-        return
-    $ LauraX.location = Player.location
-    call set_Character_taboos
-    $ LauraX.change_Outfit()
-    call set_the_scene
-    return
 
 
 
 
-label Laura_Leave:
-    if "freetravels" in LauraX.traits or not approval_check(LauraX, 700):
-        if LauraX.location == "bg_classroom":
-            ch_l "I've got class."
-        elif LauraX.location == "bg_dangerroom":
-            ch_l "I'm hitting the Danger Room."
-        elif LauraX.location == "bg_campus":
-            ch_l "I'm taking a nap in the quad."
-        elif LauraX.location == "bg_laura":
-            ch_l "I'm headed back to my room."
-        elif LauraX.location == "bg_player":
-            ch_l "I'm gonna hang out in your room for a bit."
-        elif LauraX.location == "bg_pool":
-            ch_l "I was hitting the pool."
-        elif LauraX.location == "bg_shower":
-            if approval_check(LauraX, 1400):
-                ch_l "I'm hitting the showers, later."
-            else:
-                ch_l "I'm headed out."
-        else:
-            ch_l "I'm headed out, later."
 
-        call hide_Girl(LauraX)
 
-        return
 
-    if "follow" not in LauraX.traits:
-        $ LauraX.traits.append("follow")
 
-    if LauraX.location == "bg_classroom":
-        $ approval_bonus = 10
-    elif LauraX.location == "bg_dangerroom":
-        $ approval_bonus = 20
-    elif LauraX.location == "bg_shower":
-        $ approval_bonus = 40
-    else:
-        $ approval_bonus = 0
-
-    if LauraX.location == "bg_classroom":
-        ch_l "I've got class, want in?"
-    elif LauraX.location == "bg_dangerroom":
-        ch_l "I've got some Danger Room time, want in?"
-    elif LauraX.location == "bg_campus":
-        ch_l "I'm taking a nap on the quad, you want in?"
-    elif LauraX.location == "bg_laura":
-        ch_l "I'm headed back to my room, you want in?"
-    elif LauraX.location == "bg_player":
-        ch_l "I'm going to hang out in your room for a bit, you coming?"
-    elif LauraX.location == "bg_shower":
-        if approval_check(LauraX, 1600):
-            ch_l "I'm hitting the showers, you could use one too."
-        else:
-            ch_l "I'm hitting the showers, see you later."
-
-            return
-    elif LauraX.location == "bg_pool":
-        ch_l "I was hitting the pool. Wanna come?"
-    else:
-        ch_l "Wanna join me?"
-
-    $ D20 = renpy.random.randint(1, 20)
-
-    $ line = None
-
+label Laura_NoPantiesOn:
     menu:
-        extend ""
-        "Sure, I'll catch up.":
-            if "followed" not in LauraX.recent_history:
-                call change_Girl_stat(LauraX, "love", 1)
-                call change_Girl_stat(LauraX, "inhibition", 1)
-            $ line = "go to"
-        "Nah, we can talk later.":
-
-            if "followed" not in LauraX.recent_history:
-                call change_Girl_stat(LauraX, "obedience", 1)
-                call change_Girl_stat(LauraX, "obedience", 2)
-            ch_l "Sure, whatever."
-        "Could you please stay with me? I'll get lonely.":
-
-            if approval_check(LauraX, 650, "L") or approval_check(LauraX, 1500):
-                if "followed" not in LauraX.recent_history:
-                    call change_Girl_stat(LauraX, "love", 1)
-                    call change_Girl_stat(LauraX, "obedience", 1)
-                $ line = "lonely"
-            else:
-                if "followed" not in LauraX.recent_history:
-                    call change_Girl_stat(LauraX, "inhibition", 1)
-                $ line = "no"
-                ch_l "Man, you are such a sap."
-        "Come on, it'll be fun.":
-
-            if approval_check(LauraX, 400, "L") and approval_check(LauraX, 800):
-                call change_Girl_stat(LauraX, "love", 1)
-                call change_Girl_stat(LauraX, "obedience", 1)
-                $ line = "fun"
-            else:
-                call change_Girl_stat(LauraX, "inhibition", 1)
-                $ line = "no"
-        "No, stay here.":
-
-            if approval_check(LauraX, 600, "O"):
-
-                if "followed" not in LauraX.recent_history:
-                    call change_Girl_stat(LauraX, "love", -2)
-                    call change_Girl_stat(LauraX, "obedience", 1)
-                $ line = "command"
-
-            elif D20 >= 7 and approval_check(LauraX, 1400):
-
-                if "followed" not in LauraX.recent_history:
-                    call change_Girl_stat(LauraX, "love", -2)
-                    call change_Girl_stat(LauraX, "love", -1)
-                    call change_Girl_stat(LauraX, "obedience", 2)
-                    call change_Girl_stat(LauraX, "obedience", 1)
-                ch_l "I guess if you need me here."
-                $ line = "yes"
-
-            elif approval_check(LauraX, 200, "O"):
-
-                if "followed" not in LauraX.recent_history:
-                    call change_Girl_stat(LauraX, "love", -4)
-                    call change_Girl_stat(LauraX, "love", -2)
-                ch_l "Don't tell me what to do."
-                if "followed" not in LauraX.recent_history:
-                    call change_Girl_stat(LauraX, "inhibition", 2)
-                    call change_Girl_stat(LauraX, "inhibition", 1)
-                    call change_Girl_stat(LauraX, "obedience", -2)
-                ch_l "I'm out of here."
-            else:
-
-                if "followed" not in LauraX.recent_history:
-                    call change_Girl_stat(LauraX, "inhibition", 1)
-                    call change_Girl_stat(LauraX, "inhibition", 1)
-                    call change_Girl_stat(LauraX, "love", 1)
-                    call change_Girl_stat(LauraX, "love", -2)
-                    call change_Girl_stat(LauraX, "obedience", -1)
-                $ line = "no"
-
-    $ LauraX.recent_history.append("followed")
-
-    if not line:
-        call hide_Girl(LauraX)
-
-        return
-
-    if line == "no":
-        if LauraX.location == "bg_classroom":
-            ch_l "I really can't miss this one."
-        elif LauraX.location == "bg_dangerroom":
-            ch_l "Sorry [LauraX.player_petname], but I'm going a little stir crazy."
-        else:
-            ch_l "Sorry, I have stuff to do."
-
-        call hide_Girl(LauraX)
-
-        return
-
-    elif line == "go to":
-        call hide_Girl(LauraX)
-        call change_clothes
-
-        if LauraX.location == "bg_classroom":
-            ch_l "Ok, get a move on then."
-        elif LauraX.location == "bg_dangerroom":
-            ch_l "I'll get warmed up."
-        elif LauraX.location == "bg_laura":
-            ch_l "Ok."
-        elif LauraX.location == "bg_player":
-            ch_l "Good."
-        elif LauraX.location == "bg_shower":
-            ch_l "Ok, nice."
-        elif LauraX.location == "bg_campus":
-            ch_l "Ok, nice."
-        elif LauraX.location == "bg_pool":
-            ch_l "Cool."
-
-        call hide_all
-
-        $ destination = LauraX.location
-
-        if destination == "bg_player":
-            jump player_room
-        elif destination == "bg_laura":
-            $ Girl = LauraX
-
-            jump girls_room
-        elif destination == "bg_campus":
-            jump campus
-        elif destination == "bg_classroom":
-            jump classroom
-        elif destination == "bg_dangerroom":
-            jump danger_room
-        elif destination == "bg_shower":
-            jump shower_room
-        elif destination == "bg_pool":
-            jump pool
-        elif destination == "bg_study":
-            jump study
-        elif destination == "bg_mall":
-            jump mall
-
-    elif line == "lonely":
-        ch_l "Well, I guess you should never go alone. . ."
-    elif line == "command":
-        ch_l "Yes [LauraX.player_petname]."
-
-    ch_l "I'll stick around."
-
-    $ LauraX.location = Player.location
-
-    return
-
-
-
-
-
-
-
-    label Laura_NoPantiesOn:
-        menu:
-            ch_l "I'm going commando today."
-            "Then you could slip on a pair of panties. . .":
-                if LauraX.seen_pussy and approval_check(LauraX, 1100, taboo_modifier=4):
-                    $ LauraX.blushing = "_blush1"
-                    ch_l "No, commando's fine. . ."
-                    $ LauraX.blushing = ""
-                elif approval_check(LauraX, 1500, taboo_modifier=4):
-                    $ LauraX.blushing = "_blush1"
-                    ch_l "No, commando's fine. . ."
-                    $ LauraX.blushing = ""
-                elif approval_check(LauraX, 700, taboo_modifier=4):
-                    ch_l "Yeah, I guess."
-                    if "lace_panties" in LauraX.inventory:
-                        ch_l "I like how you think."
-                        $ LauraX.Clothes["underwear"]  = "lace_panties"
-                    else:
-                        $ LauraX.Clothes["underwear"] = "leather_panties"
-                    if approval_check(LauraX, 1200, taboo_modifier=4):
-                        $ line = LauraX.Clothes["bottom"]
-                        $ LauraX.Outfit.remove_Clothing(["pants", "skirt"])
-                        "She pulls off her [line] and slips on the [LauraX.Clothes[underwear].name]."
-                    elif LauraX.Clothes["bottom"] == "skirt":
-                        "She pulls out her [LauraX.Clothes[underwear].name] and pulls them up under her skirt."
-                        $ LauraX.Outfit.remove_Clothing(["pants", "skirt"])
-                        "Then she drops the skirt to the floor."
-                    else:
-                        $ line = LauraX.Clothes["bottom"]
-                        $ LauraX.Outfit.remove_Clothing(["pants", "skirt"])
-                        "She steps away a moment and then comes back wearing only the [LauraX.Clothes[underwear].name]."
-                    return
+        ch_l "I'm going commando today."
+        "Then you could slip on a pair of panties. . .":
+            if LauraX.seen_pussy and approval_check(LauraX, 1100, taboo_modifier=4):
+                $ LauraX.blushing = "_blush1"
+                ch_l "No, commando's fine. . ."
+                $ LauraX.blushing = ""
+            elif approval_check(LauraX, 1500, taboo_modifier=4):
+                $ LauraX.blushing = "_blush1"
+                ch_l "No, commando's fine. . ."
+                $ LauraX.blushing = ""
+            elif approval_check(LauraX, 700, taboo_modifier=4):
+                ch_l "Yeah, I guess."
+                if "lace_panties" in LauraX.inventory:
+                    ch_l "I like how you think."
+                    $ LauraX.Clothes["underwear"]  = "lace_panties"
                 else:
-                    ch_l "Nope."
-                    return False
-            "You could always just wear nothing at all. . .":
-
-                if approval_check(LauraX, 1100, "LI", taboo_modifier = 3) and LauraX.love > LauraX.inhibition:
-                    ch_l "True. . ."
-                elif approval_check(LauraX, 700, "OI", taboo_modifier = 3) and LauraX.obedience > LauraX.inhibition:
-                    ch_l "Yes. . ."
-                elif approval_check(LauraX, 600, "I", taboo_modifier = 3):
-                    ch_l "Hrmm. . ."
-                elif approval_check(LauraX, 1300, taboo_modifier = 3):
-                    ch_l "Fine."
+                    $ LauraX.Clothes["underwear"] = "leather_panties"
+                if approval_check(LauraX, 1200, taboo_modifier=4):
+                    $ line = LauraX.Clothes["bottom"]
+                    $ LauraX.Outfit.remove_Clothing(["pants", "skirt"])
+                    "She pulls off her [line] and slips on the [LauraX.Clothes[underwear].name]."
+                elif LauraX.Clothes["bottom"] == "skirt":
+                    "She pulls out her [LauraX.Clothes[underwear].name] and pulls them up under her skirt."
+                    $ LauraX.Outfit.remove_Clothing(["pants", "skirt"])
+                    "Then she drops the skirt to the floor."
                 else:
-                    $ LauraX.change_face("surprised")
-                    $ LauraX.brows = "angry"
-                    if LauraX.taboo > 20:
-                        ch_l "Yeah, but not in public, [LauraX.player_petname]!"
-                    else:
-                        ch_l "You aren't that cute, [LauraX.player_petname]!"
-                    return False
-            "Never mind.":
-
-                ch_l "Ok. . ."
+                    $ line = LauraX.Clothes["bottom"]
+                    $ LauraX.Outfit.remove_Clothing(["pants", "skirt"])
+                    "She steps away a moment and then comes back wearing only the [LauraX.Clothes[underwear].name]."
+                return
+            else:
+                ch_l "Nope."
                 return False
-        return True
+        "You could always just wear nothing at all. . .":
 
-
-
-
-    menu Laura_Clothes_Under:
-        "Tops":
-            menu:
-                "How about you lose the [LauraX.Clothes[bra].name]?" if LauraX.Clothes["bra"]:
-                    $ LauraX.change_face("bemused", 1)
-                    if LauraX.seen_breasts and approval_check(LauraX, 900, taboo_modifier=2.7):
-                        ch_l "Ok."
-                    elif approval_check(LauraX, 1100, taboo_modifier=2):
-                        if LauraX.taboo:
-                            ch_l "I don't know, here. . ."
-                        else:
-                            ch_l "Maybe. . ."
-                    elif LauraX.Clothes["top"] == "jacket" and approval_check(LauraX, 600, taboo_modifier=2):
-                        ch_l "This jacket is a bit revealing. . ."
-                    elif LauraX.Clothes["top"] and approval_check(LauraX, 500, taboo_modifier=2):
-                        ch_l "I guess I could. . ."
-                    elif not LauraX.Clothes["top"]:
-                        call ask_for_dress_screen (LauraX)
-                        if not _return:
-                            ch_l "Not without some other top."
-                            return
-                    else:
-                        call ask_for_dress_screen (LauraX)
-                        if not _return:
-                            ch_l "Nah."
-                            return
-                    $ line = LauraX.Clothes["bra"]
-                    $ LauraX.take_off("bra")
-                    if LauraX.Clothes["top"]:
-                        "She reaches under her [LauraX.Clothes[top].name] grabs her [line], and pulls it off, dropping it to the ground."
-                    else:
-                        "She pulls off her [line] and drops it to the ground."
-                        if not renpy.showing('dress_screen'):
-                            call Laura_First_Topless
-
-
-                "Add leather_bra" if LauraX.Clothes["bra"] != "leather_bra":
-                    ch_p "Try on that leather bra."
-                    ch_l "Ok."
-                    $ LauraX.Clothes["bra"] = "leather_bra"
-
-                "Add _white_tanktop" if LauraX.Clothes["bra"] != "white_tank" and "halloween" in LauraX.history:
-                    ch_p "Try on that _white_tanktop."
-                    ch_l "Ok."
-                    $ LauraX.Clothes["bra"] = "white_tank"
-
-                "Add red corset." if LauraX.Clothes["bra"] != "corset" and "corset" in LauraX.inventory:
-                    ch_p "I like that red corset."
-                    if LauraX.seen_breasts or approval_check(LauraX, 1000, taboo_modifier = 1):
-                        ch_l "K."
-                        $ LauraX.Clothes["bra"] = "corset"
-                    else:
-                        call ask_for_dress_screen (LauraX)
-                        if not _return:
-                            ch_l "It's a bit revealing. . ."
-                        else:
-                            $ LauraX.Clothes["bra"] = "corset"
-
-                "Add lace corset" if LauraX.Clothes["bra"] != "lace_corset" and "lace_corset" in LauraX.inventory:
-                    ch_p "I like that lace corset."
-                    if LauraX.seen_breasts or approval_check(LauraX, 1300, taboo_modifier=2):
-                        ch_l "K."
-                        $ LauraX.Clothes["bra"] = "lace_corset"
-                    else:
-                        call ask_for_dress_screen (LauraX)
-                        if not _return:
-                            ch_l "It's a bit transparent. . ."
-                        else:
-                            $ LauraX.Clothes["bra"] = "lace_corset"
-
-                "Add wolverine tanktop" if LauraX.Clothes["bra"] != "wolvie_bra" and "wolvie_bra" in LauraX.inventory:
-                    ch_p "I like that wolverine tanktop."
-                    if LauraX.seen_breasts or approval_check(LauraX, 1000, taboo_modifier=2):
-                        ch_l "K."
-                        $ LauraX.Clothes["bra"] = "wolvie_bra"
-                    else:
-                        call ask_for_dress_screen (LauraX)
-                        if not _return:
-                            ch_l "It's a {i}little{/i} embarrassing. . ."
-                        else:
-                            $ LauraX.Clothes["bra"] = "wolvie_bra"
-
-                "Add bikini_top" if LauraX.Clothes["bra"] != "bikini_top" and "bikini_top" in LauraX.inventory:
-                    ch_p "I like that bikini top."
-                    if Player.location == "bg_pool":
-                        ch_l "K."
-                        $ LauraX.Clothes["bra"] = "bikini_top"
-                    else:
-                        if LauraX.seen_breasts or approval_check(LauraX, 1000, taboo_modifier=2):
-                            ch_l "K."
-                            $ LauraX.Clothes["bra"] = "bikini_top"
-                        else:
-                            call ask_for_dress_screen (LauraX)
-                            if not _return:
-                                ch_l "This is not really a \"bikini\" sort of place. . ."
-                            else:
-                                $ LauraX.Clothes["bra"] = "bikini_top"
-                "Never mind":
-                    pass
-            return
-        "Hose and stockings options":
-
-            menu:
-                "You could lose the hose." if LauraX.Clothes["hose"] and LauraX.Clothes["hose"] != 'ripped_tights' and LauraX.Clothes["hose"] != '_tights':
-                    $ LauraX.take_off("hose")
-                "The thigh-high hose would look good with that." if LauraX.Clothes["hose"] != "stockings":
-                    $ LauraX.Clothes["hose"] = "stockings"
-                "The black stockings would look good with that." if LauraX.Clothes["hose"] != "black_stockings" and "halloween" in LauraX.history:
-                    $ LauraX.Clothes["hose"] = "black_stockings"
-                "The stockings and garterbelt would look good with that." if LauraX.Clothes["hose"] != "stockings_and_garterbelt" and "stockings_and_garterbelt" in LauraX.inventory:
-                    $ LauraX.Clothes["hose"] = "stockings_and_garterbelt"
-                "Just the garterbelt would look good with that." if LauraX.Clothes["hose"] != "garterbelt" and "stockings_and_garterbelt" in LauraX.inventory:
-                    $ LauraX.Clothes["hose"] = "garterbelt"
-                "Never mind":
-                    pass
-            return
-        "Panties":
-
-
-            menu:
-                "You could lose those panties. . ." if LauraX.Clothes["underwear"]:
-                    $ LauraX.change_face("bemused", 1)
-                    if approval_check(LauraX, 900) and (LauraX.Clothes["bottom"] or (LauraX.seen_pussy and not LauraX.taboo)):
-
-                        if approval_check(LauraX, 850, "L"):
-                            ch_l "True. . ."
-                        elif approval_check(LauraX, 500, "O"):
-                            ch_l "Agreed."
-                        elif approval_check(LauraX, 350, "I"):
-                            ch_l "Heh."
-                        else:
-                            ch_l "Sure, I guess."
-                    else:
-                        if approval_check(LauraX, 1100, "LI", taboo_modifier = 3) and LauraX.love > LauraX.inhibition:
-                            ch_l "Well look, it's not about you, but. . ."
-                        elif approval_check(LauraX, 700, "OI", taboo_modifier = 3) and LauraX.obedience > LauraX.inhibition:
-                            ch_l "Well. . ."
-                        elif approval_check(LauraX, 600, "I", taboo_modifier = 3):
-                            ch_l "Hrmm. . ."
-                        elif approval_check(LauraX, 1300, taboo_modifier = 3):
-                            ch_l "Okay, okay."
-                        else:
-                            call ask_for_dress_screen (LauraX)
-                            if not _return:
-                                $ LauraX.change_face("surprised")
-                                $ LauraX.brows = "angry"
-                                if LauraX.taboo > 20:
-                                    ch_l "This is too public."
-                                else:
-                                    ch_l "You're not that cute, [LauraX.player_petname]!"
-                                return
-                    $ line = LauraX.Clothes["underwear"]
-                    $ LauraX.take_off("underwear")
-                    if not LauraX.Clothes["bottom"]:
-                        "She pulls off her [line], then drops them to the ground."
-                        if not renpy.showing('dress_screen'):
-                            call Laura_First_Bottomless
-                    elif approval_check(LauraX, 1200, taboo_modifier=4):
-                        $ temp_bottom = LauraX.Clothes["bottom"]
-                        $ LauraX.Outfit.remove_Clothing(["pants", "skirt"])
-                        pause 0.5
-                        $ LauraX.Clothes["bottom"] = temp_bottom
-                        "She pulls off her [LauraX.Clothes[bottom]] and [line], then pulls the [LauraX.Clothes[bottom].name] back on."
-                        call Laura_First_Bottomless (1)
-                    elif LauraX.Clothes["bottom"] == "skirt":
-                        "She reaches under her skirt and pulls her [line] off."
-                    else:
-                        $ LauraX.blushing = "_blush1"
-                        "She steps away a moment and then comes back."
-                        $ LauraX.blushing = ""
-                    $ line = 0
-
-                "Why don't you wear the black panties instead?" if LauraX.Clothes["underwear"] and LauraX.Clothes["underwear"] != "leather_panties" and LauraX.Clothes["underwear"] != "leather_panties":
-                    if approval_check(LauraX, 1100, taboo_modifier = 3):
-                        ch_l "Ok."
-                        $ LauraX.Clothes["underwear"] = "leather_panties"
-                    else:
-                        call ask_for_dress_screen (LauraX)
-                        if not _return:
-                            ch_l "That's none of your busines."
-                        else:
-                            $ LauraX.Clothes["underwear"] = "leather_panties"
-
-                "Why don't you wear the wolverine panties instead?" if "wolvie_panties" in LauraX.inventory and LauraX.Clothes["underwear"] and LauraX.Clothes["underwear"] != "wolvie_panties":
-                    if approval_check(LauraX, 1000, taboo_modifier = 3):
-                        ch_l "I guess."
-                        $ LauraX.Clothes["underwear"] = "wolvie_panties"
-                    else:
-                        call ask_for_dress_screen (LauraX)
-                        if not _return:
-                            ch_l "That's none of your busines."
-                        else:
-                            $ LauraX.Clothes["underwear"] = "wolvie_panties"
-
-                "Why don't you wear the lace panties instead?" if "lace_panties" in LauraX.inventory and LauraX.Clothes["underwear"] and LauraX.Clothes["underwear"] != "lace_panties":
-                    if approval_check(LauraX, 1300, taboo_modifier = 3):
-                        ch_l "I guess."
-                        $ LauraX.Clothes["underwear"] = "lace_panties"
-                    else:
-                        call ask_for_dress_screen (LauraX)
-                        if not _return:
-                            ch_l "That's none of your busines."
-                        else:
-                            $ LauraX.Clothes["underwear"] = "lace_panties"
-
-                "I like those bikini bottoms." if "bikini_bottoms" in LauraX.inventory and LauraX.Clothes["underwear"] != "bikini_bottoms":
-                    if Player.location == "bg_pool":
-                        ch_l "K."
-                        $ LauraX.Clothes["underwear"] = "bikini_bottoms"
-                    else:
-                        if approval_check(LauraX, 1000, taboo_modifier=2):
-                            ch_l "K."
-                            $ LauraX.Clothes["underwear"] = "bikini_bottoms"
-                        else:
-                            call ask_for_dress_screen (LauraX)
-                            if not _return:
-                                ch_l "This is not really a \"bikini\" sort of place. . ."
-                            else:
-                                $ LauraX.Clothes["underwear"] = "bikini_bottoms"
-
-                "You know, you could wear some panties with that. . ." if not LauraX.Clothes["underwear"]:
-                    $ LauraX.change_face("bemused", 1)
-                    if LauraX.Clothes["bottom"] and (LauraX.love+LauraX.obedience) <= (2*LauraX.inhibition):
-                        $ LauraX.mouth = "smile"
-                        ch_l "I don't know about that."
-                        menu:
-                            "Fine by me":
-                                return
-                            "I insist, put some on.":
-                                if (LauraX.love+LauraX.obedience) <= (1.5*LauraX.inhibition):
-                                    $ LauraX.change_face("angry", eyes = "side")
-                                    ch_l "Well I insist otherwise."
-                                    return
-                                else:
-                                    $ LauraX.change_face("sadside")
-                                    ch_l "Oh, fine."
-                    else:
-                        ch_l "I guess. . ."
-                    menu:
-                        extend ""
-                        "How about the black ones?":
-                            ch_l "Sure, ok."
-                            $ LauraX.Clothes["underwear"] = "leather_panties"
-                        "How about the wolvie ones?" if "wolvie_panties" in LauraX.inventory:
-                            ch_l "Sure."
-                            $ LauraX.Clothes["underwear"]  = "wolvie_panties"
-                        "How about the lace ones?" if "lace_panties" in LauraX.inventory:
-                            ch_l "Alright."
-                            $ LauraX.Clothes["underwear"]  = "lace_panties"
-                "Never mind":
-                    pass
-            return
-        "Never mind":
-            pass
-    return
-
-
-
-
-    menu Laura_Clothes_Misc:
-
-        "Dry Hair" if LauraX.Clothes["hair"] == "wet":
-            ch_p "Maybe dry out your hair."
-            if approval_check(LauraX, 600):
-                ch_l "Ok."
-                $ LauraX.Clothes["hair"] = "long"
-            else:
-                ch_l "I don't know, it's fine like this."
-
-        "Wet Hair style" if LauraX.Clothes["hair"] != "wet":
-            ch_p "You should go for that wet look with your hair."
-            if approval_check(LauraX, 800):
-                ch_l "Hmm?"
-                $ LauraX.Clothes["hair"] = "wet"
-                "She wanders off for a minute and comes back."
-                ch_l "Like this?"
-            else:
-                ch_l "Ugh, too much work."
-
-        "Grow pubes" if not LauraX.pubes:
-            ch_p "You know, I like some nice hair down there. Maybe grow it out."
-            if "pubes" in LauraX.to_do:
-                $ LauraX.change_face("bemused", 1)
-                ch_l "Even I can't grow it out instantly."
-            else:
-                $ LauraX.change_face("bemused", 1)
-                if approval_check(LauraX, 1000, taboo_modifier=0):
-                    ch_l "Sure, that's easier. . ."
-                else:
-                    $ LauraX.change_face("surprised")
-                    $ LauraX.brows = "angry"
-                    ch_l "I think I'll do what I want down there."
-                    return
-                $ LauraX.to_do.append("pubes")
-                $ LauraX.pubes_counter = 6
-        "Shave pubes" if LauraX.pubes == "_hairy":
-            ch_p "I like it waxed clean down there."
-            $ LauraX.change_face("bemused", 1)
-            if "shave" in LauraX.to_do:
-                ch_l "Yeah, I know, I'll get to it."
-            else:
-                if approval_check(LauraX, 1100, taboo_modifier=0):
-                    ch_l "Really? I guess I could give it a shave. . ."
-                else:
-                    $ LauraX.change_face("surprised")
-                    $ LauraX.brows = "angry"
-                    ch_l "I think I'll do what I want down there."
-                    return
-                $ LauraX.to_do.append("shave")
-
-        "Piercings. [[See what she looks like without them first] (locked)" if not LauraX.seen_pussy and not LauraX.seen_breasts:
-            pass
-
-        "Add ring piercings" if LauraX.Clothes["piercings"] != "ring" and (LauraX.seen_pussy or LauraX.seen_breasts):
-            ch_p "You know, you'd look really nice with some ring body piercings."
-            if "ring" in LauraX.to_do:
-                ch_l "Yeah, I know, I'll get to it."
-            else:
-                $ LauraX.change_face("bemused", 1)
-                $ approval = approval_check(LauraX, 1150, taboo_modifier=0)
-                if approval_check(LauraX, 900, "L", taboo_modifier=0) or (approval and LauraX.love > 2* LauraX.obedience):
-                    ch_l "You think I'd look good with them?"
-                elif approval_check(LauraX, 600, "I", taboo_modifier=0) or (approval and LauraX.inhibition > LauraX.obedience):
-                    ch_l "I've been thinking about that for a while."
-                elif approval_check(LauraX, 500, "O", taboo_modifier=0) or approval:
-                    ch_l "Yes, [LauraX.player_petname]."
-                else:
-                    $ LauraX.change_face("surprised")
-                    $ LauraX.brows = "angry"
-                    ch_l "Not interested, [LauraX.player_petname]."
-                    return
-                $ LauraX.to_do.append("ring")
-
-        "Add barbell piercings" if LauraX.Clothes["piercings"] != "barbell" and (LauraX.seen_pussy or LauraX.seen_breasts):
-            ch_p "You know, you'd look really nice with some barbell body piercings."
-            if "barbell" in LauraX.to_do:
-                ch_l "Yeah, I know, I'll get to it."
-            else:
-                $ LauraX.change_face("bemused", 1)
-                $ approval = approval_check(LauraX, 1150, taboo_modifier=0)
-                if approval_check(LauraX, 900, "L", taboo_modifier=0) or (approval and LauraX.love > 2*LauraX.obedience):
-                    ch_l "You think I'd look good with them?"
-                elif approval_check(LauraX, 600, "I", taboo_modifier=0) or (approval and LauraX.inhibition > LauraX.obedience):
-                    ch_l "I've been thinking about that for a while."
-                elif approval_check(LauraX, 500, "O", taboo_modifier=0) or approval:
-                    ch_l "Yes, [LauraX.player_petname]."
-                else:
-                    $ LauraX.change_face("surprised")
-                    $ LauraX.brows = "angry"
-                    ch_l "Not interested, [LauraX.player_petname]."
-                    return
-                $ LauraX.to_do.append("barbell")
-
-        "Remove piercings" if LauraX.Clothes["piercings"]:
-            ch_p "You know, you'd look better without those piercings."
-            $ LauraX.change_face("bemused", 1)
-            $ approval = approval_check(LauraX, 1350, taboo_modifier=0)
-            if approval_check(LauraX, 950, "L", taboo_modifier=0) or (approval and LauraX.love > LauraX.obedience):
-                ch_l "Make up your mind . ."
-            elif approval_check(LauraX, 700, "I", taboo_modifier=0) or (approval and LauraX.inhibition > LauraX.obedience):
-                ch_l "In, out, snickt."
-            elif approval_check(LauraX, 600, "O", taboo_modifier=0) or approval:
+            if approval_check(LauraX, 1100, "LI", taboo_modifier = 3) and LauraX.love > LauraX.inhibition:
+                ch_l "True. . ."
+            elif approval_check(LauraX, 700, "OI", taboo_modifier = 3) and LauraX.obedience > LauraX.inhibition:
+                ch_l "Yes. . ."
+            elif approval_check(LauraX, 600, "I", taboo_modifier = 3):
+                ch_l "Hrmm. . ."
+            elif approval_check(LauraX, 1300, taboo_modifier = 3):
                 ch_l "Fine."
             else:
                 $ LauraX.change_face("surprised")
                 $ LauraX.brows = "angry"
-                ch_l "I've sort of grown attached."
-                return
-            $ LauraX.take_off("piercings")
+                if LauraX.taboo > 20:
+                    ch_l "Yeah, but not in public, [LauraX.player_petname]!"
+                else:
+                    ch_l "You aren't that cute, [LauraX.player_petname]!"
+                return False
+        "Never mind.":
 
-        "Medallion_choker" if LauraX.Clothes["neck"] != "leash_choker":
-            ch_p "Why don't you try on that medallion choker?"
             ch_l "Ok. . ."
-            $ LauraX.Clothes["neck"] = "leash_choker"
-        "Remove Necklace" if LauraX.Clothes["neck"]:
-            ch_p "Maybe go without a necklace."
-            ch_l "Ok. . ."
-            $ LauraX.take_off("neck")
-
-        "Add Suspenders" if LauraX.Clothes["suspenders"] != "suspenders" and LauraX.Clothes["suspenders"] != "suspenders2" and "halloween" in LauraX.history:
-            $ LauraX.Clothes["suspenders"] = "suspenders"
-        "Remove Suspenders" if LauraX.Clothes["suspenders"] == "suspenders" or LauraX.Clothes["suspenders"] == "suspenders2":
-            $ LauraX.take_off("suspenders")
-
-        "Shift Suspenders" if LauraX.Clothes["suspenders"] == "suspenders" or LauraX.Clothes["suspenders"] == "suspenders2":
-            $ LauraX.Clothes["suspenders"] = "suspenders" if LauraX.Clothes["suspenders"] == "suspenders2" else "suspenders2"
-        "Toggle Wristbands":
-
-            if LauraX.Clothes["gloves"] != "wrists":
-                ch_p "Why don't you put those wristbands on."
-            else:
-                ch_p "Maybe go without the wristbands."
-            ch_l "Ok. . ."
-            $ LauraX.Clothes["gloves"] = "wrists" if LauraX.Clothes["gloves"] != "wrists" else 0
-        "Toggle Gloves" if "halloween" in LauraX.history:
-            if LauraX.Clothes["gloves"] != "gloves":
-                ch_p "Why don't you put those long gloves on."
-            else:
-                ch_p "Maybe go without the gloves."
-            ch_l "Ok. . ."
-            $ LauraX.Clothes["gloves"] = "gloves" if LauraX.Clothes["gloves"] != "gloves" else 0
-        "Never mind":
-
-            pass
-    return
+            return False
+    return True
 
 
+
+
+menu Laura_Clothes_Under:
+    "Tops":
+        menu:
+            "How about you lose the [LauraX.Clothes[bra].name]?" if LauraX.Clothes["bra"]:
+                $ LauraX.change_face("bemused", 1)
+                if LauraX.seen_breasts and approval_check(LauraX, 900, taboo_modifier=2.7):
+                    ch_l "Ok."
+                elif approval_check(LauraX, 1100, taboo_modifier=2):
+                    if LauraX.taboo:
+                        ch_l "I don't know, here. . ."
+                    else:
+                        ch_l "Maybe. . ."
+                elif LauraX.Clothes["top"] == "jacket" and approval_check(LauraX, 600, taboo_modifier=2):
+                    ch_l "This jacket is a bit revealing. . ."
+                elif LauraX.Clothes["top"] and approval_check(LauraX, 500, taboo_modifier=2):
+                    ch_l "I guess I could. . ."
+                elif not LauraX.Clothes["top"]:
+                    call ask_for_dress_screen (LauraX)
+                    if not _return:
+                        ch_l "Not without some other top."
+                        return
+                else:
+                    call ask_for_dress_screen (LauraX)
+                    if not _return:
+                        ch_l "Nah."
+                        return
+                $ line = LauraX.Clothes["bra"]
+                $ LauraX.take_off("bra")
+                if LauraX.Clothes["top"]:
+                    "She reaches under her [LauraX.Clothes[top].name] grabs her [line], and pulls it off, dropping it to the ground."
+                else:
+                    "She pulls off her [line] and drops it to the ground."
+                    if not renpy.showing('dress_screen'):
+                        call Laura_First_Topless
+
+
+            "Add leather_bra" if LauraX.Clothes["bra"] != "leather_bra":
+                ch_p "Try on that leather bra."
+                ch_l "Ok."
+                $ LauraX.Clothes["bra"] = "leather_bra"
+
+            "Add _white_tanktop" if LauraX.Clothes["bra"] != "white_tank" and "halloween" in LauraX.history:
+                ch_p "Try on that _white_tanktop."
+                ch_l "Ok."
+                $ LauraX.Clothes["bra"] = "white_tank"
+
+            "Add red corset." if LauraX.Clothes["bra"] != "corset" and "corset" in LauraX.inventory:
+                ch_p "I like that red corset."
+                if LauraX.seen_breasts or approval_check(LauraX, 1000, taboo_modifier = 1):
+                    ch_l "K."
+                    $ LauraX.Clothes["bra"] = "corset"
+                else:
+                    call ask_for_dress_screen (LauraX)
+                    if not _return:
+                        ch_l "It's a bit revealing. . ."
+                    else:
+                        $ LauraX.Clothes["bra"] = "corset"
+
+            "Add lace corset" if LauraX.Clothes["bra"] != "lace_corset" and "lace_corset" in LauraX.inventory:
+                ch_p "I like that lace corset."
+                if LauraX.seen_breasts or approval_check(LauraX, 1300, taboo_modifier=2):
+                    ch_l "K."
+                    $ LauraX.Clothes["bra"] = "lace_corset"
+                else:
+                    call ask_for_dress_screen (LauraX)
+                    if not _return:
+                        ch_l "It's a bit transparent. . ."
+                    else:
+                        $ LauraX.Clothes["bra"] = "lace_corset"
+
+            "Add wolverine tanktop" if LauraX.Clothes["bra"] != "wolvie_bra" and "wolvie_bra" in LauraX.inventory:
+                ch_p "I like that wolverine tanktop."
+                if LauraX.seen_breasts or approval_check(LauraX, 1000, taboo_modifier=2):
+                    ch_l "K."
+                    $ LauraX.Clothes["bra"] = "wolvie_bra"
+                else:
+                    call ask_for_dress_screen (LauraX)
+                    if not _return:
+                        ch_l "It's a {i}little{/i} embarrassing. . ."
+                    else:
+                        $ LauraX.Clothes["bra"] = "wolvie_bra"
+
+            "Add bikini_top" if LauraX.Clothes["bra"] != "bikini_top" and "bikini_top" in LauraX.inventory:
+                ch_p "I like that bikini top."
+                if Player.location == "bg_pool":
+                    ch_l "K."
+                    $ LauraX.Clothes["bra"] = "bikini_top"
+                else:
+                    if LauraX.seen_breasts or approval_check(LauraX, 1000, taboo_modifier=2):
+                        ch_l "K."
+                        $ LauraX.Clothes["bra"] = "bikini_top"
+                    else:
+                        call ask_for_dress_screen (LauraX)
+                        if not _return:
+                            ch_l "This is not really a \"bikini\" sort of place. . ."
+                        else:
+                            $ LauraX.Clothes["bra"] = "bikini_top"
+            "Never mind":
+                pass
+        return
+    "Hose and stockings options":
+
+        menu:
+            "You could lose the hose." if LauraX.Clothes["hose"] and LauraX.Clothes["hose"] != 'ripped_tights' and LauraX.Clothes["hose"] != '_tights':
+                $ LauraX.take_off("hose")
+            "The thigh-high hose would look good with that." if LauraX.Clothes["hose"] != "stockings":
+                $ LauraX.Clothes["hose"] = "stockings"
+            "The black stockings would look good with that." if LauraX.Clothes["hose"] != "black_stockings" and "halloween" in LauraX.history:
+                $ LauraX.Clothes["hose"] = "black_stockings"
+            "The stockings and garterbelt would look good with that." if LauraX.Clothes["hose"] != "stockings_and_garterbelt" and "stockings_and_garterbelt" in LauraX.inventory:
+                $ LauraX.Clothes["hose"] = "stockings_and_garterbelt"
+            "Just the garterbelt would look good with that." if LauraX.Clothes["hose"] != "garterbelt" and "stockings_and_garterbelt" in LauraX.inventory:
+                $ LauraX.Clothes["hose"] = "garterbelt"
+            "Never mind":
+                pass
+        return
+    "Panties":
+
+
+        menu:
+            "You could lose those panties. . ." if LauraX.Clothes["underwear"]:
+                $ LauraX.change_face("bemused", 1)
+                if approval_check(LauraX, 900) and (LauraX.Clothes["bottom"] or (LauraX.seen_pussy and not LauraX.taboo)):
+
+                    if approval_check(LauraX, 850, "L"):
+                        ch_l "True. . ."
+                    elif approval_check(LauraX, 500, "O"):
+                        ch_l "Agreed."
+                    elif approval_check(LauraX, 350, "I"):
+                        ch_l "Heh."
+                    else:
+                        ch_l "Sure, I guess."
+                else:
+                    if approval_check(LauraX, 1100, "LI", taboo_modifier = 3) and LauraX.love > LauraX.inhibition:
+                        ch_l "Well look, it's not about you, but. . ."
+                    elif approval_check(LauraX, 700, "OI", taboo_modifier = 3) and LauraX.obedience > LauraX.inhibition:
+                        ch_l "Well. . ."
+                    elif approval_check(LauraX, 600, "I", taboo_modifier = 3):
+                        ch_l "Hrmm. . ."
+                    elif approval_check(LauraX, 1300, taboo_modifier = 3):
+                        ch_l "Okay, okay."
+                    else:
+                        call ask_for_dress_screen (LauraX)
+                        if not _return:
+                            $ LauraX.change_face("surprised")
+                            $ LauraX.brows = "angry"
+                            if LauraX.taboo > 20:
+                                ch_l "This is too public."
+                            else:
+                                ch_l "You're not that cute, [LauraX.player_petname]!"
+                            return
+                $ line = LauraX.Clothes["underwear"]
+                $ LauraX.take_off("underwear")
+                if not LauraX.Clothes["bottom"]:
+                    "She pulls off her [line], then drops them to the ground."
+                    if not renpy.showing('dress_screen'):
+                        call Laura_First_Bottomless
+                elif approval_check(LauraX, 1200, taboo_modifier=4):
+                    $ temp_bottom = LauraX.Clothes["bottom"]
+                    $ LauraX.Outfit.remove_Clothing(["pants", "skirt"])
+                    pause 0.5
+                    $ LauraX.Clothes["bottom"] = temp_bottom
+                    "She pulls off her [LauraX.Clothes[bottom]] and [line], then pulls the [LauraX.Clothes[bottom].name] back on."
+                    call Laura_First_Bottomless (1)
+                elif LauraX.Clothes["bottom"] == "skirt":
+                    "She reaches under her skirt and pulls her [line] off."
+                else:
+                    $ LauraX.blushing = "_blush1"
+                    "She steps away a moment and then comes back."
+                    $ LauraX.blushing = ""
+                $ line = 0
+
+            "Why don't you wear the black panties instead?" if LauraX.Clothes["underwear"] and LauraX.Clothes["underwear"] != "leather_panties" and LauraX.Clothes["underwear"] != "leather_panties":
+                if approval_check(LauraX, 1100, taboo_modifier = 3):
+                    ch_l "Ok."
+                    $ LauraX.Clothes["underwear"] = "leather_panties"
+                else:
+                    call ask_for_dress_screen (LauraX)
+                    if not _return:
+                        ch_l "That's none of your busines."
+                    else:
+                        $ LauraX.Clothes["underwear"] = "leather_panties"
+
+            "Why don't you wear the wolverine panties instead?" if "wolvie_panties" in LauraX.inventory and LauraX.Clothes["underwear"] and LauraX.Clothes["underwear"] != "wolvie_panties":
+                if approval_check(LauraX, 1000, taboo_modifier = 3):
+                    ch_l "I guess."
+                    $ LauraX.Clothes["underwear"] = "wolvie_panties"
+                else:
+                    call ask_for_dress_screen (LauraX)
+                    if not _return:
+                        ch_l "That's none of your busines."
+                    else:
+                        $ LauraX.Clothes["underwear"] = "wolvie_panties"
+
+            "Why don't you wear the lace panties instead?" if "lace_panties" in LauraX.inventory and LauraX.Clothes["underwear"] and LauraX.Clothes["underwear"] != "lace_panties":
+                if approval_check(LauraX, 1300, taboo_modifier = 3):
+                    ch_l "I guess."
+                    $ LauraX.Clothes["underwear"] = "lace_panties"
+                else:
+                    call ask_for_dress_screen (LauraX)
+                    if not _return:
+                        ch_l "That's none of your busines."
+                    else:
+                        $ LauraX.Clothes["underwear"] = "lace_panties"
+
+            "I like those bikini bottoms." if "bikini_bottoms" in LauraX.inventory and LauraX.Clothes["underwear"] != "bikini_bottoms":
+                if Player.location == "bg_pool":
+                    ch_l "K."
+                    $ LauraX.Clothes["underwear"] = "bikini_bottoms"
+                else:
+                    if approval_check(LauraX, 1000, taboo_modifier=2):
+                        ch_l "K."
+                        $ LauraX.Clothes["underwear"] = "bikini_bottoms"
+                    else:
+                        call ask_for_dress_screen (LauraX)
+                        if not _return:
+                            ch_l "This is not really a \"bikini\" sort of place. . ."
+                        else:
+                            $ LauraX.Clothes["underwear"] = "bikini_bottoms"
+
+            "You know, you could wear some panties with that. . ." if not LauraX.Clothes["underwear"]:
+                $ LauraX.change_face("bemused", 1)
+                if LauraX.Clothes["bottom"] and (LauraX.love+LauraX.obedience) <= (2*LauraX.inhibition):
+                    $ LauraX.mouth = "smile"
+                    ch_l "I don't know about that."
+                    menu:
+                        "Fine by me":
+                            return
+                        "I insist, put some on.":
+                            if (LauraX.love+LauraX.obedience) <= (1.5*LauraX.inhibition):
+                                $ LauraX.change_face("angry", eyes = "side")
+                                ch_l "Well I insist otherwise."
+                                return
+                            else:
+                                $ LauraX.change_face("sadside")
+                                ch_l "Oh, fine."
+                else:
+                    ch_l "I guess. . ."
+                menu:
+                    extend ""
+                    "How about the black ones?":
+                        ch_l "Sure, ok."
+                        $ LauraX.Clothes["underwear"] = "leather_panties"
+                    "How about the wolvie ones?" if "wolvie_panties" in LauraX.inventory:
+                        ch_l "Sure."
+                        $ LauraX.Clothes["underwear"]  = "wolvie_panties"
+                    "How about the lace ones?" if "lace_panties" in LauraX.inventory:
+                        ch_l "Alright."
+                        $ LauraX.Clothes["underwear"]  = "lace_panties"
+            "Never mind":
+                pass
+        return
+    "Never mind":
+        pass
 return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc
+
+
+
+
+menu Laura_Clothes_Misc:
+
+    "Dry Hair" if LauraX.Clothes["hair"] == "wet":
+        ch_p "Maybe dry out your hair."
+        if approval_check(LauraX, 600):
+            ch_l "Ok."
+            $ LauraX.Clothes["hair"] = "long"
+        else:
+            ch_l "I don't know, it's fine like this."
+
+    "Wet Hair style" if LauraX.Clothes["hair"] != "wet":
+        ch_p "You should go for that wet look with your hair."
+        if approval_check(LauraX, 800):
+            ch_l "Hmm?"
+            $ LauraX.Clothes["hair"] = "wet"
+            "She wanders off for a minute and comes back."
+            ch_l "Like this?"
+        else:
+            ch_l "Ugh, too much work."
+
+    "Grow pubes" if not LauraX.pubes:
+        ch_p "You know, I like some nice hair down there. Maybe grow it out."
+        if "pubes" in LauraX.to_do:
+            $ LauraX.change_face("bemused", 1)
+            ch_l "Even I can't grow it out instantly."
+        else:
+            $ LauraX.change_face("bemused", 1)
+            if approval_check(LauraX, 1000, taboo_modifier=0):
+                ch_l "Sure, that's easier. . ."
+            else:
+                $ LauraX.change_face("surprised")
+                $ LauraX.brows = "angry"
+                ch_l "I think I'll do what I want down there."
+                return
+            $ LauraX.to_do.append("pubes")
+            $ LauraX.pubes_counter = 6
+    "Shave pubes" if LauraX.pubes == "_hairy":
+        ch_p "I like it waxed clean down there."
+        $ LauraX.change_face("bemused", 1)
+        if "shave" in LauraX.to_do:
+            ch_l "Yeah, I know, I'll get to it."
+        else:
+            if approval_check(LauraX, 1100, taboo_modifier=0):
+                ch_l "Really? I guess I could give it a shave. . ."
+            else:
+                $ LauraX.change_face("surprised")
+                $ LauraX.brows = "angry"
+                ch_l "I think I'll do what I want down there."
+                return
+            $ LauraX.to_do.append("shave")
+
+    "Piercings. [[See what she looks like without them first] (locked)" if not LauraX.seen_pussy and not LauraX.seen_breasts:
+        pass
+
+    "Add ring piercings" if LauraX.Clothes["piercings"] != "ring" and (LauraX.seen_pussy or LauraX.seen_breasts):
+        ch_p "You know, you'd look really nice with some ring body piercings."
+        if "ring" in LauraX.to_do:
+            ch_l "Yeah, I know, I'll get to it."
+        else:
+            $ LauraX.change_face("bemused", 1)
+            $ approval = approval_check(LauraX, 1150, taboo_modifier=0)
+            if approval_check(LauraX, 900, "L", taboo_modifier=0) or (approval and LauraX.love > 2* LauraX.obedience):
+                ch_l "You think I'd look good with them?"
+            elif approval_check(LauraX, 600, "I", taboo_modifier=0) or (approval and LauraX.inhibition > LauraX.obedience):
+                ch_l "I've been thinking about that for a while."
+            elif approval_check(LauraX, 500, "O", taboo_modifier=0) or approval:
+                ch_l "Yes, [LauraX.player_petname]."
+            else:
+                $ LauraX.change_face("surprised")
+                $ LauraX.brows = "angry"
+                ch_l "Not interested, [LauraX.player_petname]."
+                return
+            $ LauraX.to_do.append("ring")
+
+    "Add barbell piercings" if LauraX.Clothes["piercings"] != "barbell" and (LauraX.seen_pussy or LauraX.seen_breasts):
+        ch_p "You know, you'd look really nice with some barbell body piercings."
+        if "barbell" in LauraX.to_do:
+            ch_l "Yeah, I know, I'll get to it."
+        else:
+            $ LauraX.change_face("bemused", 1)
+            $ approval = approval_check(LauraX, 1150, taboo_modifier=0)
+            if approval_check(LauraX, 900, "L", taboo_modifier=0) or (approval and LauraX.love > 2*LauraX.obedience):
+                ch_l "You think I'd look good with them?"
+            elif approval_check(LauraX, 600, "I", taboo_modifier=0) or (approval and LauraX.inhibition > LauraX.obedience):
+                ch_l "I've been thinking about that for a while."
+            elif approval_check(LauraX, 500, "O", taboo_modifier=0) or approval:
+                ch_l "Yes, [LauraX.player_petname]."
+            else:
+                $ LauraX.change_face("surprised")
+                $ LauraX.brows = "angry"
+                ch_l "Not interested, [LauraX.player_petname]."
+                return
+            $ LauraX.to_do.append("barbell")
+
+    "Remove piercings" if LauraX.Clothes["piercings"]:
+        ch_p "You know, you'd look better without those piercings."
+        $ LauraX.change_face("bemused", 1)
+        $ approval = approval_check(LauraX, 1350, taboo_modifier=0)
+        if approval_check(LauraX, 950, "L", taboo_modifier=0) or (approval and LauraX.love > LauraX.obedience):
+            ch_l "Make up your mind . ."
+        elif approval_check(LauraX, 700, "I", taboo_modifier=0) or (approval and LauraX.inhibition > LauraX.obedience):
+            ch_l "In, out, snickt."
+        elif approval_check(LauraX, 600, "O", taboo_modifier=0) or approval:
+            ch_l "Fine."
+        else:
+            $ LauraX.change_face("surprised")
+            $ LauraX.brows = "angry"
+            ch_l "I've sort of grown attached."
+            return
+        $ LauraX.take_off("piercings")
+
+    "Medallion_choker" if LauraX.Clothes["neck"] != "leash_choker":
+        ch_p "Why don't you try on that medallion choker?"
+        ch_l "Ok. . ."
+        $ LauraX.Clothes["neck"] = "leash_choker"
+    "Remove Necklace" if LauraX.Clothes["neck"]:
+        ch_p "Maybe go without a necklace."
+        ch_l "Ok. . ."
+        $ LauraX.take_off("neck")
+
+    "Add Suspenders" if LauraX.Clothes["suspenders"] != "suspenders" and LauraX.Clothes["suspenders"] != "suspenders2" and "halloween" in LauraX.history:
+        $ LauraX.Clothes["suspenders"] = "suspenders"
+    "Remove Suspenders" if LauraX.Clothes["suspenders"] == "suspenders" or LauraX.Clothes["suspenders"] == "suspenders2":
+        $ LauraX.take_off("suspenders")
+
+    "Shift Suspenders" if LauraX.Clothes["suspenders"] == "suspenders" or LauraX.Clothes["suspenders"] == "suspenders2":
+        $ LauraX.Clothes["suspenders"] = "suspenders" if LauraX.Clothes["suspenders"] == "suspenders2" else "suspenders2"
+    "Toggle Wristbands":
+
+        if LauraX.Clothes["gloves"] != "wrists":
+            ch_p "Why don't you put those wristbands on."
+        else:
+            ch_p "Maybe go without the wristbands."
+        ch_l "Ok. . ."
+        $ LauraX.Clothes["gloves"] = "wrists" if LauraX.Clothes["gloves"] != "wrists" else 0
+    "Toggle Gloves" if "halloween" in LauraX.history:
+        if LauraX.Clothes["gloves"] != "gloves":
+            ch_p "Why don't you put those long gloves on."
+        else:
+            ch_p "Maybe go without the gloves."
+        ch_l "Ok. . ."
+        $ LauraX.Clothes["gloves"] = "gloves" if LauraX.Clothes["gloves"] != "gloves" else 0
+    "Never mind":
+
+        pass
+return

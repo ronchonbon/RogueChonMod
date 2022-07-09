@@ -1,27 +1,24 @@
 init -1 python:
 
-    def black_skirt(Owner):
-        name = "black skirt"
-        image_string = "black_skirt"
+    def bunny_ears(Owner):
+        name = "bunny ears"
+        image_string = "bunny_ears"
 
-        clothing_type = "skirt"
+        clothing_type = "face_outer_accessory"
 
         dialogue_lines = {
             }
 
         shame = 0
 
-        hides = ["pussy"]
-        covers = ["pussy"]
+        hides = []
+        covers = []
 
-        number_of_states = 2
+        number_of_states = 1
 
         poses = [
             "arm pose 1",
             "arm pose 2",
-            "handjob",
-            "blowjob",
-            "sex",
-            "doggy"]
+            "handjob"]
 
         return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
