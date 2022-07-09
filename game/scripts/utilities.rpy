@@ -26,31 +26,24 @@ init python:
                 Outfit_name = None
 
                 if G.location == "bg_dangerroom":
-                    Outfit_name = "gym_clothes"
-                elif G.location == "bg_pool" and "swimwear" in G.Wardrobe.Outfits.keys():
-                    Outfit_name = "swimwear"
+                    G.change_Outfit(G.Wardrobe.gym_Outfit.name, instant = True)
+                elif G.location == "bg_pool" and G.Wardrobe.swimming_Outfit.name != "null":
+                    G.change_Outfit(G.Wardrobe.swimming_Outfit.name, instant = True)
                 elif G.location == "bg_shower":
-                    Outfit_name = "shower"
-                elif G.teaching:
-                    Outfit_name = "teacher"
-
-                G.change_Outfit(Outfit_name, instant = True)
+                    G.change_Outfit("shower", instant = True)
 
         return
 
     def checkout():
-        Player.focus = 99 if Player.focus > 99 else Player.focus
-        Player.focus = 0 if Player.focus < 0 else Player.focus
-
-        Player.semen = Player.max_semen if Player.semen > Player.max_semen else Player.semen
-        Player.semen = 0 if Player.semen < 0 else Player.semen
+        Player.XP = 3330 if Player.XP > 3330 else Player.XP
 
         Player.reputation = 1000 if Player.reputation > 1000 else Player.reputation
         Player.reputation = 0 if Player.reputation < 0 else Player.reputation
 
-        Player.XP = 3330 if Player.XP > 3330 else Player.XP
+        Player.semen = Player.max_semen if Player.semen > Player.max_semen else Player.semen
+        Player.semen = 0 if Player.semen < 0 else Player.semen
 
-        for G in all_Girls:
+        for G in active_Girls:
             G.love = 1000 if G.love > 1000 else G.love
             G.love = 0 if G.love < 0 else G.love
 
@@ -66,10 +59,12 @@ init python:
             G.mood = 9 if G.mood > 9 else G.mood
             G.mood = 0 if G.mood < 0 else G.mood
 
+            G.XP = 3330 if G.XP > 3330 else G.XP
+
             G.remaining_Actions = G.max_Actions if G.remaining_Actions > G.max_Actions else G.remaining_Actions
             G.remaining_Actions = 0 if G.remaining_Actions < 0 else G.remaining_Actions
 
-            for GB in all_Girls:
+            for GB in active_Girls:
                 if GB != G:
                     G.likes[GB.tag] = 1000 if G.likes[GB.tag] > 1000 else G.likes[GB.tag]
                     G.likes[GB.tag] = 0 if G.likes[GB.tag] < 0 else G.likes[GB.tag]
@@ -92,7 +87,7 @@ init python:
             for key in G.spunk.keys():
                 G.spunk[key] = False
 
-            G.todays_Outfit_name = G.Outfit_schedule[weekday]
+            G.choose_Outfits()
 
         return
 
@@ -118,8 +113,6 @@ init python:
                 elif G.Action_counter["anal"] + G.Action_counter["dildo_ass"] + bonus >= 3:
                     G.used_to_anal = 1
 
-            G.XP = 3330 if G.XP > 3330 else G.XP
-
             if G.XP >= G.XP_goal and G.level < 10:
                 G.XP_goal = int((1.15*G.XP_goal) + 100)
                 G.level += 1
@@ -130,15 +123,12 @@ init python:
                 if G.level == 10:
                     renpy.say(None, "[G.name]'s reached max level!")
 
-            G.set_default_faces()
+            G.set_default_emotion()
             G.change_face()
 
         return
 
     def shift_focus(Girl):
-        if Player.focused_Girl == Girl:
-            return
-
         Player.focused_Girl = Girl
 
         return
@@ -412,14 +402,11 @@ label tenth_round:
 label set_Girls_locations:
     $ Nearby = []
 
-    $ temp_Girls = active_Girls[:]
-    $ renpy.random.shuffle(temp_Girls)
-
     python:
         leaving_Girls = []
         arriving_Girls = []
 
-        for G in temp_Girls:
+        for G in active_Girls:
             if G not in Player.Party:
                 previous_location = G.location
 
@@ -429,7 +416,7 @@ label set_Girls_locations:
                 if G == JubesX and G.addiction > 60:
                     G.location = G.home
                 else:
-                    G.location = G.weekly_schedule[weekday][time_index]
+                    G.set_location()
 
                 if G.location == "bg_teacher":
                     G.location = "bg_classroom"
@@ -443,6 +430,9 @@ label set_Girls_locations:
                     arriving_Girls.append(G)
             else:
                 G.location = Player.location
+
+        renpy.random.shuffle(leaving_Girls)
+        renpy.random.shuffle(arriving_Girls)
 
     hide black_screen onlayer black
 
@@ -697,14 +687,14 @@ label clear_the_room(Girl, passive = False, silent = False):
     return
 
 label stop_all_Actions(visual = False):
-    $ Player.primary_Action = ActionClass(None, Target = None)
-    $ Player.secondary_Action = ActionClass(None, Target = None)
+    $ Player.primary_Action = ActionClass(None, None)
+    $ Player.secondary_Action = ActionClass(None, None)
 
     $ temp_Girls = Present[:]
 
     while temp_Girls:
-        $ temp_Girls[0].main_action = ActionClass(None, Target = None)
-        $ temp_Girls[0].secondary_Action = ActionClass(None, Target = None)
+        $ temp_Girls[0].main_action = ActionClass(None, None)
+        $ temp_Girls[0].secondary_Action = ActionClass(None, None)
 
         if visual:
             call show_full_body(temp_Girls[0])

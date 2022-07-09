@@ -2,7 +2,7 @@ init -1 python:
 
     def ring_body_piercings(Owner):
         name = "ring body piercings"
-        image_string = "ring_body_piercings"
+        string = "ring_body_piercings"
 
         clothing_type = "body_piercings"
 
@@ -27,4 +27,4 @@ init -1 python:
             "sex",
             "doggy"]
 
-        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

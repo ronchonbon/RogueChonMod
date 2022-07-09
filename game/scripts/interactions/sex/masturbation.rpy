@@ -62,7 +62,7 @@ label masturbation_cycle(Girl):
 
 label after_masturbation(Girl, context):
     $ Girl.remaining_Actions -= 1
-    $ Girl.Action_counter["masturbation"] += 1
+    $ Girl.permanent_History["masturbation"] += 1
 
     $ checkout()
 

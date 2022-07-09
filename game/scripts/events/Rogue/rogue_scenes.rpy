@@ -12,12 +12,13 @@ label prologue:
     show cover zorder 7
     show Chibi_cock onlayer screens
 
-    menu:
-        "Skip prologue?"
-        "Yes":
-            jump prologue_end
-        "No":
-            pass
+    if config.developer:
+        menu:
+            "Skip prologue?"
+            "Yes":
+                jump prologue_end
+            "No":
+                pass
 
     "You recently discovered that you were a mutant when a Sentinel attacked your home.\nYou were rescued by a squad of X-Men and given this address."
     "You've arrived in the early evening at the Xavier Institute, where you've been promised a new home."

@@ -2,7 +2,7 @@ init -1 python:
 
     def green_towel(Owner):
         name = "green towel"
-        image_string = "green_towel"
+        string = "green_towel"
 
         clothing_type = "top"
 
@@ -23,4 +23,4 @@ init -1 python:
             "blowjob",
             "doggy"]
 
-        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

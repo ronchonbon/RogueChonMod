@@ -2,7 +2,7 @@ init -1 python:
 
     def sci_fi_suit(Owner):
         name = "sci-fi suit"
-        image_string = "sci_fi_suit"
+        string = "sci_fi_suit"
 
         clothing_type = "bodysuit"
 
@@ -19,4 +19,4 @@ init -1 python:
         poses = [
             "arm pose 1"]
 
-        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

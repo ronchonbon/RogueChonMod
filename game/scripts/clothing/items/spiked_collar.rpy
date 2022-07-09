@@ -2,7 +2,7 @@ init -1 python:
 
     def spiked_collar(Owner):
         name = "spiked collar"
-        image_string = "spiked_collar"
+        string = "spiked_collar"
 
         clothing_type = "neck"
 
@@ -24,4 +24,4 @@ init -1 python:
             "sex",
             "doggy"]
 
-        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

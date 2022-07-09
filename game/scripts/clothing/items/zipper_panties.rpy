@@ -2,7 +2,7 @@ init -1 python:
 
     def zipper_panties(Owner):
         name = "zipper panties"
-        image_string = "zipper_panties"
+        string = "zipper_panties"
 
         clothing_type = "underwear"
 
@@ -21,4 +21,4 @@ init -1 python:
             "arm pose 2",
             "handjob"]
 
-        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

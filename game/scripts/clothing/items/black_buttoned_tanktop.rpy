@@ -2,7 +2,7 @@ init -1 python:
 
     def black_buttoned_tanktop(Owner):
         name = "black buttoned tanktop"
-        image_string = "black_buttoned_tanktop"
+        string = "black_buttoned_tanktop"
 
         clothing_type = "bra"
 
@@ -25,4 +25,4 @@ init -1 python:
             "sex",
             "doggy"]
 
-        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

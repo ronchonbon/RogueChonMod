@@ -2,7 +2,7 @@ init -1 python:
 
     def barbell_body_piercings(Owner):
         name = "barbell body piercings"
-        image_string = "barbell_body_piercings"
+        string = "barbell_body_piercings"
 
         clothing_type = "body_piercings"
 
@@ -26,4 +26,4 @@ init -1 python:
             "sex",
             "doggy"]
 
-        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

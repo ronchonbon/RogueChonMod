@@ -2,7 +2,7 @@ init -1 python:
 
     def white_choker(Owner):
         name = "white choker"
-        image_string = "white_choker"
+        string = "white_choker"
 
         clothing_type = "neck"
 
@@ -23,4 +23,4 @@ init -1 python:
             "blowjob",
             "doggy"]
 
-        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

@@ -2,7 +2,7 @@ init -1 python:
 
     def spiked_bracelets(Owner):
         name = "spiked bracelets"
-        image_string = "spiked_bracelets"
+        string = "spiked_bracelets"
 
         clothing_type = "gloves"
 
@@ -19,4 +19,4 @@ init -1 python:
         poses = [
             "arm pose 2"]
 
-        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

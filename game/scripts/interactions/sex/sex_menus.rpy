@@ -86,15 +86,15 @@ label girl_sex_menu(Girl):
                             call start_Action(Girl, "fondle_thighs")
                         "Your breasts?":
                             call start_Action(Girl, "fondle_breasts")
-                        "Suck your nipples?" if Girl.remaining_Actions and Girl.Action_counter["suck_breasts"]:
+                        "Suck your nipples?" if Girl.remaining_Actions and Girl.permanent_History["suck_breasts"]:
                             call start_Action(Girl, "suck_breasts")
                         "Your pussy?" if Girl.remaining_Actions:
                             call start_Action(Girl, "fondle_pussy")
-                        "Eat your pussy?" if Girl.remaining_Actions and Girl.Action_counter["eat_pussy"]:
+                        "Eat your pussy?" if Girl.remaining_Actions and Girl.permanent_History["eat_pussy"]:
                             call start_Action(Girl, "eat_pussy")
                         "Your ass?":
                             call start_Action(Girl, "fondle_ass")
-                        "Eat your ass?" if Girl.remaining_Actions and Girl.Action_counter["eat_ass"]:
+                        "Eat your ass?" if Girl.remaining_Actions and Girl.permanent_History["eat_ass"]:
                             call start_Action(Girl, "eat_ass")
                         "Maybe something else.":
                             pass
@@ -254,7 +254,7 @@ label fondle_menu(Girl, Action_type):
         "Keep going. . .":
             pass
         "I want to stick a finger in. . ." if Action_type == "fondle_pussy":
-            if Girl.Action_counter["finger_pussy"]:
+            if Girl.permanent_History["finger_pussy"]:
                 return ["finger_pussy", "auto"]
             else:
                 menu:
@@ -391,9 +391,9 @@ label handjob_menu(Girl, Action_type):
 
             $ D20 = renpy.random.randint(1, 20)
 
-            if Girl.Action_counter["blowjob"] < 5:
+            if Girl.permanent_History["blowjob"] < 5:
                 $ D20 -= 10
-            elif Girl.Action_counter["blowjob"] < 10:
+            elif Girl.permanent_History["blowjob"] < 10:
                 $ D20 -= 5
 
             if D20 > 15:
@@ -964,7 +964,7 @@ label try_something_else_menu(Girl, Action_type):
             if Action_type != "anal":
                 return ["blowjob", "shift"]
             else:
-                if Girl.Action_counter["anal"] >= 5 and Girl.Action_counter["blowjob"] >= 10 and Girl.SEXP >= 50:
+                if Girl.permanent_History["anal"] >= 5 and Girl.permanent_History["blowjob"] >= 10 and Girl.SEXP >= 50:
                     return ["blowjob", "shift"]
                 else:
                     call no_ass_to_mouth_lines(Girl, Action_type)

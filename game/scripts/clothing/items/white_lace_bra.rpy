@@ -2,7 +2,7 @@ init -1 python:
 
     def white_lace_bra(Owner):
         name = "white lace bra"
-        image_string = "white_lace_bra"
+        string = "white_lace_bra"
 
         clothing_type = "bra"
 
@@ -24,4 +24,4 @@ init -1 python:
             "blowjob",
             "doggy"]
 
-        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

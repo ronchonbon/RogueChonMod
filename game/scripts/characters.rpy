@@ -5,15 +5,18 @@ init python:
             self.name = name
             self.color = color
 
-            self.location = "bg_entrance"
-            self.traveling = False
-
             self.sprite = False
 
             self.naked = False
             self.cock_out = False
             self.cock_wet = False
             self.spunk = False
+
+            self.location = "bg_entrance"
+            self.traveling = False
+
+            self.semen = 3
+            self.max_semen = 3
 
             self.focused_Girl = None
             self.Phonebook = []
@@ -25,6 +28,7 @@ init python:
             self.XP = 0
             self.XP_goal = 100
             self.stat_points = 0
+
             self.SEXP = 0
 
             self.reputation = 600
@@ -34,11 +38,13 @@ init python:
 
             self.inventory = []
 
-            self.primary_Action = ActionClass(None, Target = None)
-            self.secondary_Action = ActionClass(None, Target = None)
+            self.primary_Action = ActionClass(None, None)
+            self.secondary_Action = ActionClass(None, None)
 
-            self.semen = 2
-            self.max_semen = 3
+            self.History = HistoryClass(default = False)
+            self.recent_History = self.History.recent
+            self.daily_History = self.History.daily
+            self.permanent_History = self.History.permanent
 
     class GirlClass(object):
         def __init__(self, name, love, obedience, inhibition, lust):
@@ -67,14 +73,23 @@ init python:
             self.arm_pose = 1
 
             self.grool = 0
-            self.wet = False
             self.spunk = {
                 "hair": False, "face": False, "mouth": False, "chin": False,
                 "breasts": False, "back": False, "belly": False, "hand": False,
                 "pussy": False, "anus": False}
+            self.wet = False
+
+            self.held_item = None
+
+            # sprite_layer = [background_characters (eg. teachers), midground (eg. pool mask), midground_characters (eg. students), foreground (eg. desks), foreground_characters (eg. Present), Player.focused_Girl, cover (eg. fog)]
+            self.sprite_location = stage_center
+            self.sprite_layer = 6
 
             self.location = "hold"
             self.teaching = False
+
+            self.remaining_Actions = 3
+            self.max_Actions = 3
 
             self.level = 1
             self.XP = 0
@@ -84,51 +99,17 @@ init python:
 
             self.reputation = 600
 
-            # sprite_layer = [background_characters (eg. teachers), midground (eg. pool mask), midground_characters (eg. students), foreground (eg. desks), foreground_characters (eg. Present), Player.focused_Girl, cover (eg. fog)]
-            self.sprite_location = stage_center
-            self.sprite_layer = 6
-
-            self.remaining_Actions = 3
-            self.max_Actions = 3
-
-            self.seen_peen = False
-            self.seen_breasts = False
-            self.seen_pussy = False
-            self.seen_underwear = False
-
-            self.event_counter = {
-                "orgasmed": 0, "caught": 0, "sleepover": 0, "ass_slapped": 0,
-                "swallowed": 0, "creampied": 0, "anal_creampied": 0,
-                "been_with_girl": 0, "seen_with_girl": 0,
-                "forced": 0}
+            self.History = HistoryClass()
+            self.recent_History = self.History.recent
+            self.daily_History = self.History.daily
+            self.permanent_History = self.History.permanent
 
             self.Wardrobe = WardrobeClass()
             self.Outfit = self.Wardrobe.current_Outfit
             self.Clothes = self.Outfit.Clothes
 
-            self.Outfit_schedule = [
-                "first_casual",
-                "second_casual",
-                "first_casual",
-                "second_casual",
-                "first_casual",
-                "second_casual",
-                "first_casual"]
-
-            self.todays_Outfit_name = self.Outfit_schedule[weekday]
-
-            self.set_default_Outfits()
-            self.change_Outfit("first_casual", instant = True)
-
-            self.held_item = None
-
-            self.primary_Action = ActionClass(None, Target = None)
-            self.secondary_Action = ActionClass(None, Target = None)
-
-            self.Action_counter = {}
-
-            for Action_type in all_Action_types:
-                self.Action_counter[Action_type] = 0
+            self.primary_Action = ActionClass(None, None)
+            self.secondary_Action = ActionClass(None, None)
 
             self.petname = self.name
             self.petnames = [self.name]
@@ -139,15 +120,6 @@ init python:
                 self.pubes = "_hairy"
 
                 self.home = "bg_rogue"
-
-                self.weekly_schedule = [
-                    ["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
-                    ["bg_classroom", "bg_dangerroom", "bg_rogue", "bg_rogue"],
-                    ["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
-                    ["bg_classroom", "bg_dangerroom", "bg_rogue", "bg_rogue"],
-                    ["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
-                    ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"],
-                    ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"]]
 
                 self.likes = {"Kitty": 600, "Emma": 500, "Laura": 500, "Jean": 200, "Storm": 600, "Jubes": 500, "Mystique": 0}
 
@@ -165,15 +137,6 @@ init python:
                 self.like = ", like, "
                 self.Like = "Like, "
 
-                self.weekly_schedule = [
-                    ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
-                    ["bg_classroom", "bg_pool", "bg_kitty", "bg_kitty"],
-                    ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
-                    ["bg_classroom", "bg_pool", "bg_kitty", "bg_kitty"],
-                    ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
-                    ["bg_campus", "bg_dangerroom", "bg_mall", "bg_kitty"],
-                    ["bg_campus", "bg_dangerroom", "bg_kitty", "bg_kitty"]]
-
                 self.likes = {"Rogue": 600, "Emma": 500, "Laura": 500, "Jean": 300, "Storm": 600, "Jubes": 600, "Mystique": 0}
 
                 self.used_to_anal = 0
@@ -188,15 +151,6 @@ init python:
                 self.home = "bg_emma"
 
                 self.diamond = False
-
-                self.weekly_schedule = [
-                    ["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
-                    ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_emma"],
-                    ["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
-                    ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_emma"],
-                    ["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
-                    ["bg_pool", "bg_pool", "bg_emma", "bg_emma"],
-                    ["bg_pool", "bg_pool", "bg_emma", "bg_emma"]]
 
                 self.likes = {"Rogue": 500, "Kitty": 500, "Laura": 500, "Jean": 100, "Storm": 500, "Jubes": 500, "Mystique": 0}
 
@@ -215,15 +169,6 @@ init python:
 
                 self.claws = False
 
-                self.weekly_schedule = [
-                    ["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
-                    ["bg_dangerroom", "bg_classroom", "bg_campus", "bg_laura"],
-                    ["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
-                    ["bg_dangerroom", "bg_classroom", "bg_campus", "bg_laura"],
-                    ["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
-                    ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"],
-                    ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"]]
-
                 self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 500, "Jean": 300, "Storm": 500, "Jubes": 600, "Mystique": 0}
 
                 self.used_to_anal = 1
@@ -237,36 +182,18 @@ init python:
 
                 self.home = "bg_jean"
 
-                self.weekly_schedule = [
-                    ["bg_classroom", "bg_classroom", "bg_dangerroom", "bg_jean"],
-                    ["bg_jean", "bg_classroom", "bg_jean", "bg_jean"],
-                    ["bg_jean", "bg_classroom", "bg_dangerroom", "bg_jean"],
-                    ["bg_classroom", "bg_classroom", "bg_jean", "bg_jean"],
-                    ["bg_jean", "bg_classroom", "bg_dangerroom", "bg_jean"],
-                    ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"],
-                    ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"]]
-
                 self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 300, "Laura": 500, "Storm": 300, "Jubes": 300, "Mystique": 0}
 
                 self.used_to_anal = 0
 
                 self.player_petname = "um. . ."
-                self.player_petnames = [self.player_petname]
+                self.player_petnames = [self.player_petname, Player.name]
             elif self.tag == "Storm":
                 self.voice = ch_s
 
                 self.pubes = "_hairy"
 
                 self.home = "bg_storm"
-
-                self.weekly_schedule = [
-                    ["bg_storm", "bg_dangerroom", "bg_dangerroom", "bg_storm"],
-                    ["bg_teacher", "bg_teacher", "bg_classroom", "bg_storm"],
-                    ["bg_storm", "bg_dangerroom", "bg_dangerroom", "bg_storm"],
-                    ["bg_teacher", "bg_teacher", "bg_classroom", "bg_storm"],
-                    ["bg_pool", "bg_campus", "bg_classroom", "bg_storm"],
-                    ["bg_storm", "bg_campus", "bg_storm", "bg_pool"],
-                    ["bg_storm", "bg_campus", "bg_storm", "bg_pool"]]
 
                 self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 400, "Laura": 500, "Jean": 300, "Jubes": 500, "Mystique": 0}
 
@@ -280,15 +207,6 @@ init python:
                 self.pubes = "_hairy"
 
                 self.home = "bg_jubes"
-
-                self.weekly_schedule = [
-                    ["bg_jubes", "bg_dangerroom", "bg_dangerroom", "bg_jubes"],
-                    ["bg_classroom", "bg_classroom", "bg_jubes", "bg_jubes"],
-                    ["bg_jubes", "bg_dangerroom", "bg_dangerroom", "bg_jubes"],
-                    ["bg_dangerroom", "bg_dangerroom", "bg_jubes", "bg_jubes"],
-                    ["bg_pool", "bg_campus", "bg_mall", "bg_jubes"],
-                    ["bg_jubes", "bg_campus", "bg_mall", "bg_pool"],
-                    ["bg_jubes", "bg_campus", "bg_jubes", "bg_pool"]]
 
                 self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 500, "Laura": 600, "Jean": 300, "Storm": 500, "Mystique": 0}
 
@@ -305,15 +223,6 @@ init python:
 
                 self.disguise = None
 
-                self.weekly_schedule = [
-                    ["bg_office", "bg_office", "bg_office", "bg_mystique"],
-                    ["bg_office", "bg_office", "bg_office", "bg_mystique"],
-                    ["bg_office", "bg_office", "bg_office", "bg_mystique"],
-                    ["bg_office", "bg_office", "bg_office", "bg_mystique"],
-                    ["bg_office", "bg_office", "bg_dangerroom", "bg_mystique"],
-                    ["bg_mystique", "bg_office", "bg_dangerroom", "bg_mystique"],
-                    ["bg_mystique", "bg_pool", "bg_mall", "bg_mystique"]]
-
                 self.likes = {"Rogue": 0, "Kitty": 0, "Emma": 0, "Laura": 0, "Jean": 0, "Storm": 0, "Jubes": 0}
 
                 self.used_to_anal = 1
@@ -327,12 +236,14 @@ init python:
 
             all_Girls.append(self)
 
+            self.default_Outfits()
+
         def change_face(self, emotion = None, blushing = 0, manic = False, mouth = None, eyes = None, brows = None):
-            emotion = self.emotion if not emotion else emotion
+            emotion = self.default_emotion() if not emotion else emotion
 
             if self.mood > 4 and emotion in ["normal", "bemused", "sexy", "sly", "smile", "startled"]:
                 emotion = "angry"
-            elif self.event_counter["forced"] > 0 and emotion in ["normal", "bemused", "sexy", "sly", "smile", "startled"]:
+            elif self.History.daily["forced"] > 0 and emotion in ["normal", "bemused", "sexy", "sly", "smile", "startled"]:
                 emotion = "sad"
 
             if emotion == "normal":
@@ -502,53 +413,101 @@ init python:
 
             return
 
-        def set_default_faces(self):
+        def default_emotion(self):
             if self.lust >= 50 and approval_check(self, 1200):
-                self.emotion = "sexy"
+                emotion = "sexy"
             elif self.addiction > 75:
-                self.emotion = "manic"
+                emotion = "manic"
             elif self.love >= self.obedience and self.love >= 500:
-                self.emotion = "smile"
+                emotion = "smile"
             elif self.inhibition >= self.obedience and self.inhibition >= 500:
-                self.emotion = "smile"
+                emotion = "smile"
             elif self.addiction > 50:
-                self.emotion = "manic"
+                emotion = "manic"
             elif self.love + self.obedience < 300:
-                self.emotion = "angry"
+                emotion = "angry"
             else:
-                self.emotion = "normal"
+                emotion = "normal"
+
+            return emotion
+
+        def set_location(self):
+            self.location = None
+
+            if time_index < 3 and weekday < 5:
+                if self.tag == "Emma":
+                    if time_index == 0 and weekday in [1, 3]:
+                        self.location = "bg_teacher"
+                    elif time_index == 1 and weekday in [0, 2, 4]:
+                        self.location = "bg_teacher"
+                    elif time_index == 2 and weekday in [0, 2, 4]:
+                        self.location = "bg_classroom"
+                elif self.tag == "Storm":
+                    if time_index == 0 and weekday in [0, 2, 4]:
+                        self.location = "bg_teacher"
+                    elif time_index == 1 and weekday in [1, 3]:
+                        self.location = "bg_teacher"
+                    elif time_index == 2 and weekday in [1, 3]:
+                        self.location = "bg_classroom"
+                elif self.tag == "Mystique":
+                    if time_index < 2:
+                        self.location = "bg_office"
+
+            if self.location:
+                return
+
+            possible_locations = []
+
+            possible.locations.append(self.home)
+
+            if time_index < 2 and weekday < 5:
+                possible_locations.append("bg_classroom")
+
+            if time_index < 3:
+                possible_locations.append("bg_campus")
+                possible_locations.append("bg_dangerroom")
+                possible_locations.append("bg_mall")
+
+            if time_index < 3 and weekday > 4:
+                possible_locations.append("bg_pool")
+            elif time_index in [1, 2]:
+                possible_locations.append("bg_pool")
+
+            renpy.random.shuffle(possible_locations)
+
+            self.location = possible_locations[0]
 
             return
 
         def try_on(self, Clothing):
-            self.Outfit.change_into(Clothing = Clothing)
+            self.Outfit.change_into(Clothing)
 
             return
 
-        def take_off(self, Clothing_type):
-            self.Outfit.change_out_of(Clothing_type)
+        def take_off(self, type):
+            self.Outfit.change_out_of(type)
 
             return
 
         def give(self, Clothing):
-            self.Wardrobe.add_Clothing(Clothing = Clothing)
+            self.Wardrobe.add_Clothing(Clothing)
 
             return
 
         def change_into(self, Clothing_name):
             if Clothing_name not in self.Wardrobe.Clothes.keys():
-                renpy.say(self.voice, "I don't have a piece of clothing named [Clothing_name].")
+                self.voice("I don't have a piece of clothing named [Clothing_name].")
 
                 return
 
-            self.Outfit.change_into(Clothing = self.Wardrobe.Clothes[Clothing_name])
+            self.Outfit.change_into(self.Wardrobe.Clothes[Clothing_name])
 
             self.Wardrobe.temp_Outfit = copy.deepcopy(self.Outfit)
 
             return
 
-        def change_out_of(self, Clothing_type):
-            self.Outfit.change_out_of(Clothing_type = Clothing_type)
+        def change_out_of(self, type):
+            self.Outfit.change_out_of(type)
 
             self.Wardrobe.temp_Outfit = copy.deepcopy(self.Outfit)
 
@@ -560,68 +519,65 @@ init python:
             return
 
         def expose_breasts(self):
-            for Clothing_type in reversed(self.Outfit.hide_breasts):
-                if self.Clothes[Clothing_type].number_of_states > 2:
-                    self.Clothes[Clothing_type].state += 2
+            for type in reversed(self.Outfit.hide_breasts):
+                if self.Clothes[type].number_of_states > 2:
+                    self.Clothes[type].state += 2
 
                     renpy.pause(0.2)
-                elif self.Clothes[Clothing_type].number_of_states == 1:
-                    self.Clothes[Clothing_type].take_off()
+                elif self.Clothes[type].number_of_states == 1:
+                    self.Clothes[type].take_off()
                 else:
-                    self.Outfit.remove_Clothing(Clothing_type)
+                    self.Outfit.remove_Clothing(type)
 
                     renpy.pause(0.2)
 
             return
 
         def expose_underwear(self):
-            for Clothing_type in reversed(self.Outfit.hide_underwear):
-                self.Clothes[Clothing_type].take_off()
+            for type in reversed(self.Outfit.hide_underwear):
+                self.Clothes[type].take_off()
 
-                if self.Clothes[Clothing_type].state < 1:
-                    self.Outfit.remove_Clothing(Clothing_type)
+                if self.Clothes[type].state < 1:
+                    self.Outfit.remove_Clothing(type)
 
             return
 
         def expose_pussy(self):
-            for Clothing_type in reversed(self.Outfit.hide_pussy):
-                self.Clothes[Clothing_type].take_off()
+            for type in reversed(self.Outfit.hide_pussy):
+                self.Clothes[type].take_off()
 
-                if self.Clothes[Clothing_type].state < 1:
-                    self.Outfit.remove_Clothing(Clothing_type)
+                if self.Clothes[type].state < 1:
+                    self.Outfit.remove_Clothing(type)
 
             return
 
         def fix_clothing(self):
-            for Clothing_type in self.Outfit.removable:
-                if self.Wardrobe.temp_Outfit.Clothes[Clothing_type] and not self.Clothes[Clothing_type]:
-                    self.Wardrobe.temp_Outfit.Clothes[Clothing_type].state = self.Wardrobe.temp_Outfit.Clothes[Clothing_type].undressed_state
+            for type in self.Outfit.removable:
+                if self.Wardrobe.temp_Outfit.Clothes[type] and not self.Clothes[type]:
+                    self.Wardrobe.temp_Outfit.Clothes[type].state = self.Wardrobe.temp_Outfit.Clothes[type].undressed_state
 
-                    self.Outfit.add_Clothing(self.Wardrobe.temp_Outfit.Clothes[Clothing_type])
+                    self.Outfit.add_Clothing(self.Wardrobe.temp_Outfit.Clothes[type])
 
                     renpy.pause(0.2)
 
-                if self.Clothes[Clothing_type] and self.Clothes[Clothing_type].state > 0:
-                    self.Clothes[Clothing_type].put_on()
+                if self.Clothes[type] and self.Clothes[type].state > 0:
+                    self.Clothes[type].put_on()
 
             return
 
         def add_Outfit(self, Outfit):
-            self.Wardrobe.add_Outfit(Outfit = Outfit)
+            self.Wardrobe.add_Outfit(Outfit)
 
             return
 
-        def remove_Outfit(self, Outfit_name):
-            self.Wardrobe.remove_Outfit(Outfit_name = Outfit_name)
+        def remove_Outfit(self, name):
+            self.Wardrobe.remove_Outfit(name)
 
             return
 
-        def change_Outfit(self, Outfit_name = None, instant = False):
-            if not Outfit_name:
-                Outfit_name = self.todays_Outfit_name
-
-            if Outfit_name not in self.Wardrobe.Outfits.keys():
-                renpy.say(self.voice, "I don't have an outfit named [Outfit_name].")
+        def change_Outfit(self, name, instant = False):
+            if name not in self.Wardrobe.Outfits.keys():
+                self.voice("I don't have an outfit named [name].")
 
                 return
 
@@ -631,41 +587,42 @@ init python:
             for key in self.spunk.keys():
                 self.spunk[key] = False
 
-            self.Wardrobe.change_Outfit(Outfit = self.Wardrobe.Outfits[Outfit_name], instant = instant)
-
+            self.Wardrobe.change_Outfit(Outfit = self.Wardrobe.Outfits[name], instant = instant)
             self.Outfit = self.Wardrobe.current_Outfit
-
             self.Clothes = self.Outfit.Clothes
 
             return
 
-        def set_default_Outfits(self):
-            first_casual = OutfitClass(name = "first_casual")
-            second_casual = OutfitClass(name = "second_casual")
-            gym_clothes = OutfitClass(name = "gym_clothes")
-            sleepwear = OutfitClass(name = "sleepwear")
-            shower = OutfitClass(name = "shower")
-            nude = OutfitClass(name = "nude")
+        def choose_Outfits(self):
+            self.Wardrobe.choose_Outfits()
 
-            if self.tag in ["Emma", "Storm"]:
-                teacher = OutfitClass(name = "teacher")
+            return
+
+        def default_Outfits(self):
+            default = OutfitClass("default", wear_in_public = True, wear_in_private = True)
+            casual = OutfitClass("casual", wear_in_public = True, wear_in_private = True)
+            gym_clothes = OutfitClass("gym_clothes", activewear = True)
+            pajamas = OutfitClass("pajamas", sleepwear = True)
+            shower = OutfitClass("shower")
 
             if self.tag not in ["Jubes", "Mystique"]:
-                Halloween_costume = OutfitClass(name = "Halloween_costume")
+                Halloween_costume = OutfitClass("Halloween_costume")
 
             if self.tag == "Mystique":
-                disguise = OutfitClass(name = "disguise")
-                villain = OutfitClass(name = "villain")
+                disguise = OutfitClass("disguise")
+                villain = OutfitClass("villain")
+            else:
+                hero = OutfitClass("hero", wear_in_public = True, wear_in_private = True, activewear = True)
 
             if self.tag == "Rogue":
-                first_casual.update_Clothes({
+                default.update_Clothes({
                     "hair": Evolutions_hair(self),
                     "underwear": black_panties(self), "hose": black_tights(self),
                     "skirt": black_skirt(self),
                     "bra": black_tanktop(self), "top": green_mesh_top(self),
                     "neck": spiked_collar(self), "gloves": black_gloves(self)})
 
-                second_casual.update_Clothes({
+                casual.update_Clothes({
                     "hair": Evolutions_hair(self),
                     "underwear": black_panties(self),
                     "pants": jeans(self),
@@ -679,7 +636,7 @@ init python:
                     "gloves": black_gloves(self),
                     "jacket": green_hoodie(self)})
 
-                sleepwear.update_Clothes({
+                pajamas.update_Clothes({
                     "hair": Evolutions_hair(self),
                     "underwear": green_panties(self),
                     "bra": black_tanktop(self)})
@@ -695,14 +652,14 @@ init python:
                     "bra": blue_tubetop(self),
                     "gloves": black_gloves(self), "belt": white_sweater(self)})
             elif self.tag == "Kitty":
-                first_casual.update_Clothes({
+                default.update_Clothes({
                     "hair": Evolutions_hair(self),
                     "underwear": green_panties(self),
                     "pants": blue_capris(self),
                     "bra": yellow_cami(self), "top": pink_top(self),
                     "neck": gold_necklace(self)})
 
-                second_casual.update_Clothes({
+                casual.update_Clothes({
                     "hair": Evolutions_hair(self),
                     "underwear": green_panties(self),
                     "pants": black_jeans(self),
@@ -715,7 +672,7 @@ init python:
                     "bra": purple_sports_bra(self),
                     "pants": yellow_shorts(self)})
 
-                sleepwear.update_Clothes({
+                pajamas.update_Clothes({
                     "hair": Evolutions_hair(self),
                     "underwear": green_panties(self),
                     "bra": yellow_cami(self)})
@@ -732,7 +689,7 @@ init python:
                     "neck": flower_necklace(self),
                     "jacket": Aerith_jacket(self)})
             elif self.tag == "Emma":
-                first_casual.update_Clothes({
+                default.update_Clothes({
                     "hair": wavy_hair(self),
                     "underwear": white_panties(self),
                     "pants": white_pants(self),
@@ -740,7 +697,7 @@ init python:
                     "neck": white_choker(self),
                     "jacket": white_jacket(self)})
 
-                second_casual.update_Clothes({
+                casual.update_Clothes({
                     "hair": wavy_hair(self),
                     "underwear": white_panties(self),
                     "pants": Emma_white_shorts(self), "boots": white_boots(self),
@@ -754,7 +711,7 @@ init python:
                     "bra": white_sports_bra(self),
                     "pants": white_pants(self)})
 
-                sleepwear.update_Clothes({
+                pajamas.update_Clothes({
                     "hair": wavy_hair(self),
                     "underwear": white_panties(self),
                     "bra": white_corset(self)})
@@ -779,14 +736,14 @@ init python:
                     "top": Dimitrescu_top(self),
                     "neck": white_choker(self)})
             elif self.tag == "Laura":
-                first_casual.update_Clothes({
+                default.update_Clothes({
                     "hair": long_hair(self),
                     "underwear": leather_panties(self),
                     "pants": leather_pants(self),
                     "bra": leather_bra(self),
                     "neck": leash_choker(self), "gloves": black_wristbands(self)})
 
-                second_casual.update_Clothes({
+                casual.update_Clothes({
                     "hair": long_hair(self),
                     "underwear": leather_panties(self),
                     "skirt": black_belty_skirt(self),
@@ -800,7 +757,7 @@ init python:
                     "bra": leather_bra(self),
                     "gloves": black_wristbands(self)})
 
-                sleepwear.update_Clothes({
+                pajamas.update_Clothes({
                     "hair": long_hair(self),
                     "underwear": leather_panties(self),
                     "bra": leather_bra(self)})
@@ -816,13 +773,13 @@ init python:
                     "bra": white_tanktop(self),
                     "neck": leash_choker(self), "gloves": Tifa_gloves(self), "suspenders": Tifa_suspenders(self)})
             elif self.tag == "Jean":
-                first_casual.update_Clothes({
+                default.update_Clothes({
                     "hair": long_hair(self),
                     "underwear": green_panties(self),
                     "pants": khaki_pants(self),
                     "bra": green_bra(self), "top": pink_shirt(self)})
 
-                second_casual.update_Clothes({
+                casual.update_Clothes({
                     "hair": long_hair(self),
                     "underwear": green_panties(self),
                     "skirt": green_skirt(self),
@@ -834,7 +791,7 @@ init python:
                     "pants": green_yoga_pants(self),
                     "bra": blackyellow_sports_bra(self)})
 
-                sleepwear.update_Clothes({
+                pajamas.update_Clothes({
                     "hair": long_hair(self),
                     "underwear": green_panties(self),
                     "bra": green_bra(self), "top": pink_shirt(self)})
@@ -850,13 +807,13 @@ init python:
                     "bra": green_bra(self), "top": yellow_shirt(self),
                     "suspenders": Misty_suspenders(self)})
             # elif self.tag == "Storm":
-            #     first_casual.update_Clothes({
+            #     default.update_Clothes({
             #         "hair": long_hair(self),
             #         "underwear": white_panties(self),
             #         "skirt": purple_skirt(self),
             #         "bra": black_bra(self), "top": white_shirt(self)})
             #
-            #     second_casual.update_Clothes({
+            #     casual.update_Clothes({
             #         "hair": long_hair(self),
             #         "underwear": white_panties(self),
             #         "pants": black_jeans(self),
@@ -869,7 +826,7 @@ init python:
             #         "pants": white_yoga_pants(self),
             #         "bra": black_sports_bra(self)})
             #
-            #     sleepwear.update_Clothes({
+            #     pajamas.update_Clothes({
             #         "hair": long_hair(self),
             #         "underwear": white_panties(self),
             #         "top": white_shirt(self)})
@@ -891,14 +848,14 @@ init python:
             #         "bra": Elena_bra(self),
             #         "neck": ring_necklace(self), "sleeves": ring_armlets(self)})
             # elif self.tag == "Jubes":
-            #     first_casual.update_Clothes({
+            #     default.update_Clothes({
             #         "hair": short_hair(self), "face_outer_accessory": pink_shades(self),
             #         "underwear": blue_panties(self),
             #         "pants": jean_shorts(self),
             #         "bra": blue_sports_bra(self), "top": red_shirt(self),
             #         "jacket": yellow_jacket(self)})
             #
-            #     second_casual.update_Clothes({
+            #     casual.update_Clothes({
             #         "hair": short_hair(self), "face_outer_accessory": pink_shades(self),
             #         "underwear": blue_panties(self),
             #         "pants": leather_pants(self),
@@ -911,7 +868,7 @@ init python:
             #         "pants": leather_pants(self),
             #         "bra": blue_sports_bra(self), "top": black_shirt(self)})
             #
-            #     sleepwear.update_Clothes({
+            #     pajamas.update_Clothes({
             #         "hair": short_hair(self),
             #         "underwear": blue_panties(self),
             #         "bra": blue_sports_bra(self)})
@@ -920,14 +877,14 @@ init python:
             #         "hair": short_hair(self),
             #         "top": yellow_towel(self)})
             # elif self.tag == "Mystique":
-            #     first_casual.update_Clothes({
+            #     default.update_Clothes({
             #         "face_inner_accessory": black_glasses(self), "hair": short_hair(self),
             #         "underwear": black_panties(self), "hose": brown_pantyhose(self),
             #         "skirt": grey_skirt(self),
             #         "bra": black_bra(self), "top": purple_shirt(self),
             #         "jacket": grey_jacket(self)})
             #
-            #     second_casual.update_Clothes({
+            #     casual.update_Clothes({
             #         "face_inner_accessory": black_glasses(self), "hair": short_hair(self),
             #         "underwear": black_panties(self), "hose": brown_pantyhose(self),
             #         "skirt": grey_skirt(self),
@@ -940,7 +897,7 @@ init python:
             #         "skirt": grey_skirt(self),
             #         "bra": black_bra(self), "top": purple_shirt(self)})
             #
-            #     sleepwear.update_Clothes({
+            #     pajamas.update_Clothes({
             #         "hair": short_hair(self),
             #         "underwear": black_panties(self),
             #         "bra": black_bra(self), "top": purple_shirt(self)})
@@ -954,15 +911,8 @@ init python:
             #         "dress": white_dress(self),
             #         "gloves": white_gloves(self), "belt": skull_belt(self)})
 
-            self.Wardrobe.Outfits.update({
-                "first_casual": first_casual,
-                "second_casual": second_casual,
-                "gym_clothes": gym_clothes,
-                "sleepwear": sleepwear,
-                "shower": shower})
-
-            if self.tag in ["Emma", "Storm"]:
-                self.Wardrobe.Outfits.update({"teacher": teacher})
+            for Outfit in [default, casual, gym_clothes, pajamas, shower]:
+                self.Wardrobe.Outfits.update({Outfit.name: Outfit})
 
             if self.tag not in ["Jubes", "Mystique"]:
                 self.Wardrobe.Outfits.update({"Halloween_costume": Halloween_costume})
@@ -971,6 +921,8 @@ init python:
                 for Clothing in Outfit.Clothes.values():
                     if Clothing.name:
                         self.Wardrobe.add_Clothing(Clothing)
+
+            self.Wardrobe.choose_Outfits()
 
             return
 

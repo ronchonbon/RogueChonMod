@@ -3,24 +3,24 @@ init -2 python:
     import copy
 
     class ClothingClass(object):
-        def __init__(self, Owner, name, image_string, Clothing_type, dialogue_lines, shame = 0, hides = [], covers = [], number_of_states = 1, poses = []):
+        def __init__(self, Owner, name, string, type, dialogue_lines, **kwargs):
             self.Owner = Owner
 
             self.name = name
-            self.string = image_string
+            self.string = string
 
-            self.type = Clothing_type
+            self.type = type
 
             self.dialogue_lines = dialogue_lines
 
-            self.shame = shame
+            self.shame = kwargs.get("shame", 0)
 
-            self.hides = hides
-            self.covers = covers
+            self.hides = kwargs.get("hides", [])
+            self.covers = kwargs.get("covers", [])
 
-            self.number_of_states = number_of_states
+            self.number_of_states = kwargs.get("number_of_states", 1)
 
-            self.poses = poses
+            self.poses = kwargs.get("poses", [])
 
             self.state = 0
 
@@ -95,8 +95,14 @@ init -2 python:
             return
 
     class OutfitClass(object):
-        def __init__(self, name):
+        def __init__(self, name, **kwargs):
             self.name = name
+
+            self.wear_in_public = kwargs.get(wear_in_public, False)
+            self.wear_in_private = kwargs.get(wear_in_private, False)
+            self.activewear = kwargs.get(activewear, False)
+            self.sleepwear = kwargs.get(sleepwear, False)
+            self.swimwear = kwargs.get(swimwear, False)
 
             self.types = ["face_tattoos", "face_piercings", "makeup", "gag",
                 "face_inner_accessory", "hair", "face_outer_accessory",
@@ -159,8 +165,8 @@ init -2 python:
 
             self.Clothes = {}
 
-            for Clothing_type in self.types:
-                self.Clothes[Clothing_type] = ClothingClass(Owner = None, name = None, image_string = None, Clothing_type = None, dialogue_lines = None)
+            for type in self.types:
+                self.Clothes[type] = ClothingClass(Owner = None, name = None, string = None, type = None, dialogue_lines = None)
 
             self.set_Outfit_flags()
 
@@ -169,12 +175,12 @@ init -2 python:
 
             return
 
-        def remove_Clothing(self, Clothing_types):
-            if Clothing_types in self.types:
-                Clothing_types = [Clothing_types]
+        def remove_Clothing(self, types):
+            if types in self.types:
+                types = [types]
 
-            for Clothing_type in Clothing_types:
-                self.Clothes[Clothing_type] = ClothingClass(Owner = None, name = None, image_string = None, Clothing_type = None, dialogue_lines = None)
+            for type in types:
+                self.Clothes[type] = ClothingClass(Owner = None, name = None, string = None, type = None, dialogue_lines = None)
 
             return
 
@@ -246,15 +252,15 @@ init -2 python:
 
             return
 
-        def change_out_of(self, Clothing_type):
-            if not self.Clothes[Clothing_type]:
+        def change_out_of(self, type):
+            if not self.Clothes[type]:
                 return
-            elif Clothing_type == "hair":
+            elif type == "hair":
                 return
 
             temp_Clothes = copy.deepcopy(self.Clothes)
 
-            covering_Clothes = self.coverage[Clothing_type]
+            covering_Clothes = self.coverage[type]
 
             for c in reversed(range(len(covering_Clothes))):
                 if self.Clothes[covering_Clothes[c]].name:
@@ -263,19 +269,19 @@ init -2 python:
 
                     renpy.pause(0.2)
 
-            if Clothing_type in ["underwear", "hose"]:
+            if type in ["underwear", "hose"]:
                 if self.Clothes["skirt"] and "skirt" not in covering_Clothes:
                     self.Clothes["skirt"].take_off()
 
                 if self.Clothes["dress"] and "dress" not in covering_Clothes:
                     self.Clothes["dress"].take_off()
 
-            self.Clothes[Clothing_type].take_off()
-            self.remove_Clothing(Clothing_type)
+            self.Clothes[type].take_off()
+            self.remove_Clothing(type)
 
             renpy.pause(0.2)
 
-            if Clothing_type in ["underwear", "hose"]:
+            if type in ["underwear", "hose"]:
                 if self.Clothes["skirt"] and "skirt" not in covering_Clothes:
                     self.Clothes["skirt"].put_on()
 
@@ -296,11 +302,11 @@ init -2 python:
             return
 
         def undress(self):
-            for Clothing_type in reversed(self.removable):
-                if self.Clothes[Clothing_type].name:
-                    self.Clothes[Clothing_type].take_off()
+            for type in reversed(self.removable):
+                if self.Clothes[type].name:
+                    self.Clothes[type].take_off()
 
-                    self.remove_Clothing(Clothing_type)
+                    self.remove_Clothing(type)
 
                     renpy.pause(0.2)
 
@@ -333,8 +339,8 @@ init -2 python:
             if self.Clothes["bra"]:
                 self.breasts_supported = True
 
-            for Clothing_type in self.hide_breasts:
-                Clothing = self.Clothes[Clothing_type]
+            for type in self.hide_breasts:
+                Clothing = self.Clothes[type]
 
                 if Clothing:
                     if Clothing.hides_breasts:
@@ -345,8 +351,8 @@ init -2 python:
                     elif Clothing.covers_breasts:
                         self.breasts_covered = True
 
-            for Clothing_type in self.hide_underwear:
-                Clothing = self.Clothes[Clothing_type]
+            for type in self.hide_underwear:
+                Clothing = self.Clothes[type]
 
                 if Clothing:
                     if Clothing.hides_pussy:
@@ -357,8 +363,8 @@ init -2 python:
                     elif Clothing.covers_pussy:
                         self.underwear_covered = True
 
-            for Clothing_type in self.hide_pussy:
-                Clothing = self.Clothes[Clothing_type]
+            for type in self.hide_pussy:
+                Clothing = self.Clothes[type]
 
                 if Clothing:
                     if Clothing.hides_pussy:
@@ -369,8 +375,8 @@ init -2 python:
                     elif Clothing.covers_pussy:
                         self.pussy_covered = True
 
-            for Clothing_type in self.cover_thighs:
-                Clothing = self.Clothes[Clothing_type]
+            for type in self.cover_thighs:
+                Clothing = self.Clothes[type]
 
                 if Clothing:
                     if Clothing.covers_thighs:
@@ -378,8 +384,8 @@ init -2 python:
 
                         break
 
-            for Clothing_type in self.cover_feet:
-                Clothing = self.Clothes[Clothing_type]
+            for type in self.cover_feet:
+                Clothing = self.Clothes[type]
 
                 if Clothing:
                     if Clothing.covers_feet:
@@ -387,8 +393,8 @@ init -2 python:
 
                         break
 
-            for Clothing_type in self.removable:
-                Clothing = self.Clothes[Clothing_type]
+            for type in self.removable:
+                Clothing = self.Clothes[type]
 
                 if Clothing:
                     self.fully_nude = False
@@ -397,12 +403,12 @@ init -2 python:
 
             self.shame = 0
 
-            for Clothing_type in self.types:
-                if self.Clothes[Clothing_type]:
-                    self.shame += self.Clothes[Clothing_type].shame
-                elif Clothing_type == "bra":
+            for type in self.types:
+                if self.Clothes[type]:
+                    self.shame += self.Clothes[type].shame
+                elif type == "bra":
                     self.shame += 2
-                elif Clothing_type == "underwear":
+                elif type == "underwear":
                     self.shame += 5
 
             if not self.breasts_covered:
@@ -433,11 +439,15 @@ init -2 python:
 
             self.Outfits = {}
 
-            self.current_Outfit = OutfitClass(name = "null")
+            self.public_Outfit = OutfitClass("null")
+            self.private_Outfit = OutfitClass("null")
+            self.gym_Outfit = OutfitClass("null")
+            self.sleeping_Outfit = OutfitClass("null")
+            self.swimming_Outfit = OutfitClass("null")
 
-            self.last_Outfit = OutfitClass(name = "null")
-
-            self.temp_Outfit = OutfitClass(name = "null")
+            self.current_Outfit = self.public_Outfit
+            self.last_Outfit = self.public_Outfit
+            self.temp_Outfit = self.public_Outfit
 
         def add_Clothing(self, Clothing):
             if Clothing not in self.Clothes:
@@ -451,9 +461,9 @@ init -2 python:
 
             return
 
-        def remove_Outfit(self, Outfit_name):
+        def remove_Outfit(self, name):
             for Outfit in self.Outfits:
-                if Outfit.name == Outfit_name:
+                if Outfit.name == name:
                     self.Outfits.remove(Outfit)
 
                     break
@@ -469,19 +479,19 @@ init -2 python:
             if not instant:
                 self.current_Outfit.undress()
 
-                for Clothing_type in Outfit.intrinsic:
-                    if Outfit.Clothes[Clothing_type]:
-                        self.current_Outfit.add_Clothing(Outfit.Clothes[Clothing_type])
+                for type in Outfit.intrinsic:
+                    if Outfit.Clothes[type]:
+                        self.current_Outfit.add_Clothing(Outfit.Clothes[type])
 
-                for Clothing_type in Outfit.removable:
-                    if Outfit.Clothes[Clothing_type].name:
-                        Outfit.Clothes[Clothing_type].state = Outfit.Clothes[Clothing_type].undressed_state
+                for type in Outfit.removable:
+                    if Outfit.Clothes[type].name:
+                        Outfit.Clothes[type].state = Outfit.Clothes[type].undressed_state
 
-                        self.current_Outfit.add_Clothing(Outfit.Clothes[Clothing_type])
+                        self.current_Outfit.add_Clothing(Outfit.Clothes[type])
 
                         renpy.pause(0.2)
 
-                        self.current_Outfit.Clothes[Clothing_type].put_on()
+                        self.current_Outfit.Clothes[type].put_on()
 
                 if Outfit.Clothes["hair"]:
                     self.current_Outfit.add_Clothing(Outfit.Clothes["hair"])
@@ -489,5 +499,42 @@ init -2 python:
             self.current_Outfit = copy.deepcopy(Outfit)
 
             self.temp_Outfit = copy.deepcopy(self.current_Outfit)
+
+            return
+
+        def choose_Outfits(self):
+            public_Outfits = []
+            private_Outfits = []
+            gym_Outfits = []
+            sleeping_Outfits = []
+            swimming_Outfits = []
+
+            for Outfit in self.Outfits.values():
+                if Outfit.wear_in_public:
+                    public_Outfits.append(Outfit)
+
+                if Outfit.wear_in_private:
+                    private_Outfits.append(Outfit)
+
+                if Outfit.activewear:
+                    gym_Outfits.append(Outfit)
+
+                if Outfit.sleepwear:
+                    sleeping_Outfits.append(Outfit)
+
+                if Outfit.swimwear:
+                    swimming_Outfits.append(Outfit)
+
+            renpy.random.shuffle(public_Outfits)
+            renpy.random.shuffle(private_Outfits)
+            renpy.random.shuffle(gym_Outfits)
+            renpy.random.shuffle(sleeping_Outfits)
+            renpy.random.shuffle(swimming_Outfits)
+
+            self.public_Outfit = public_Outfits[0] if public_Outfits else OutfitClass("null")
+            self.private_Outfit = private_Outfits[0] if private_Outfits else OutfitClass("null")
+            self.gym_Outfit = gym_Outfits[0] if gym_Outfits else OutfitClass("null")
+            self.sleeping_Outfit = sleeping_Outfits[0] if sleeping_Outfits else OutfitClass("null")
+            self.swimming_Outfit = swimming_Outfits[0] if swimming_Outfits else OutfitClass("null")
 
             return

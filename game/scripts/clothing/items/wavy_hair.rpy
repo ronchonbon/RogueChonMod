@@ -2,7 +2,7 @@ init -1 python:
 
     def wavy_hair(Owner):
         name = "wavy hair"
-        image_string = "wavy_hair"
+        string = "wavy_hair"
 
         clothing_type = "hair"
 
@@ -26,4 +26,4 @@ init -1 python:
             "sex",
             "doggy"]
 
-        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

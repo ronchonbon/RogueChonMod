@@ -47,21 +47,15 @@ init -3:
         insensitive_color "#4448"
 
 screen say(who, what, two_window = False):
-    if not two_window:
+    vbox:
+        anchor (0.5, 0.0) pos (0.15, 0.18)
+
+        style "say_two_window_vbox"
+
         window:
-            anchor (0.5, 0.0) pos (0.15, 0.18)
+            anchor (0.5, 0.0) pos (0.5, 0.0)
 
-            style "textbox"
-            id "textbox"
-
-            has vbox:
-                style "say_vbox"
-
-            if who:
-                text who:
-                    size 20
-                    id "who"
-                    font "CRIMFBRG.ttf"
+            style "say_balloon"
 
             text what:
                 size 20
@@ -69,34 +63,17 @@ screen say(who, what, two_window = False):
                 color "#000000"
                 font "CRIMFBRG.ttf"
                 text_align 0.5
-    else:
-        vbox:
-            anchor (0.5, 0.0) pos (0.15, 0.18)
 
-            style "say_two_window_vbox"
+    if who:
+        window:
+            anchor (0.5, 0.0) pos (0.15, 0.13)
 
-            window:
-                anchor (0.5, 0.0) pos (0.5, 0.0)
+            style "say_who_window"
 
-                style "say_balloon"
-
-                text what:
-                    size 20
-                    id "what"
-                    color "#000000"
-                    font "CRIMFBRG.ttf"
-                    text_align 0.5
-
-        if who:
-            window:
-                anchor (0.5, 0.0) pos (0.15, 0.13)
-
-                style "say_who_window"
-
-                text who:
-                    size 20
-                    id "who"
-                    font "CRIMFBRG.ttf"
+            text who:
+                size 20
+                id "who"
+                font "CRIMFBRG.ttf"
 
     use quick_menu
 

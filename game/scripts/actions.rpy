@@ -1,8 +1,8 @@
 init python:
 
     class ActionClass(object):
-        def __init__(self, Action_type = None, Target = None):
-            self.type = Action_type
+        def __init__(self, type, Target):
+            self.type = type
 
             self.Target = Target
 

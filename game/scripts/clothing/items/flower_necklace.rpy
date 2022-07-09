@@ -2,7 +2,7 @@ init -1 python:
 
     def flower_necklace(Owner):
         name = "flower necklace"
-        image_string = "flower_necklace"
+        string = "flower_necklace"
 
         clothing_type = "neck"
 
@@ -22,4 +22,4 @@ init -1 python:
             "handjob",
             "sex"]
 
-        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

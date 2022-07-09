@@ -2,7 +2,7 @@ init -1 python:
 
     def orange_top(Owner):
         name = "orange top"
-        image_string = "orange_top"
+        string = "orange_top"
 
         clothing_type = "bra"
 
@@ -21,4 +21,4 @@ init -1 python:
             "arm pose 2",
             "handjob"]
 
-        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

@@ -1,6 +1,6 @@
 label set_approval_bonus(Girl, Action_type, context):
     if Action_type == "fondle_thighs":
-        if Girl.Action_counter["fondle_thighs"]:
+        if Girl.permanent_History["fondle_thighs"]:
             $ approval_bonus += 10
 
         if Girl.legs_covered:
@@ -17,7 +17,7 @@ label set_approval_bonus(Girl, Action_type, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 25
     elif Action_type == "fondle_breasts":
-        if Girl.Action_counter["fondle_breasts"]:
+        if Girl.permanent_History["fondle_breasts"]:
             $ approval_bonus += 15
 
         if Girl.lust > 75: #She's really horny
@@ -31,7 +31,7 @@ label set_approval_bonus(Girl, Action_type, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 20
     elif Action_type == "suck_breasts":
-        if Girl.Action_counter["suck_breasts"]: #You've done it before
+        if Girl.permanent_History["suck_breasts"]: #You've done it before
             $ approval_bonus += 15
 
         if not Girl.Clothes["bra"] and not Girl.Clothes["top"]:
@@ -51,7 +51,7 @@ label set_approval_bonus(Girl, Action_type, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 25
     elif Action_type == "fondle_pussy":
-        if Girl.Action_counter["fondle_pussy"]: #You've done it before
+        if Girl.permanent_History["fondle_pussy"]: #You've done it before
             $ approval_bonus += 20
 
         if Girl.legs_covered: # she's got pants on.
@@ -71,7 +71,7 @@ label set_approval_bonus(Girl, Action_type, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 25
     elif Action_type == "eat_pussy":
-        if Girl.Action_counter["eat_pussy"]: #You've done it before
+        if Girl.permanent_History["eat_pussy"]: #You've done it before
             $ approval_bonus += 15
 
         if Girl.legs_covered: # she's got pants on.
@@ -96,7 +96,7 @@ label set_approval_bonus(Girl, Action_type, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 25
     elif Action_type == "fondle_ass":
-        if Girl.Action_counter["fondle_ass"]: #You've done it before
+        if Girl.permanent_History["fondle_ass"]: #You've done it before
             $ approval_bonus += 10
 
         if Girl.legs_covered: # she's got pants on.
@@ -113,7 +113,7 @@ label set_approval_bonus(Girl, Action_type, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 25
     elif Action_type == "finger_ass":
-        if Girl.Action_counter["finger_ass"]: #You've done it before
+        if Girl.permanent_History["finger_ass"]: #You've done it before
             $ approval_bonus += 25
 
         if Girl.legs_covered: # she's got pants on.
@@ -139,7 +139,7 @@ label set_approval_bonus(Girl, Action_type, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 25
     elif Action_type == "eat_ass":
-        if Girl.Action_counter["eat_ass"]: #You've done it before
+        if Girl.permanent_History["eat_ass"]: #You've done it before
             $ approval_bonus += 20
 
         if Girl.legs_covered: # she's got pants on.
@@ -164,11 +164,11 @@ label set_approval_bonus(Girl, Action_type, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 25
     elif Action_type == "handjob":
-        if Girl.Action_counter[Action_type] >= 7: # She loves it
+        if Girl.permanent_History[Action_type] >= 7: # She loves it
             $ approval_bonus += 10
-        elif Girl.Action_counter[Action_type] >= 3: #You've done it before several times
+        elif Girl.permanent_History[Action_type] >= 3: #You've done it before several times
             $ approval_bonus += 7
-        elif Girl.Action_counter[Action_type]: #You've done it before
+        elif Girl.permanent_History[Action_type]: #You've done it before
             $ approval_bonus += 3
 
         if "exhibitionist" in Girl.traits:
@@ -187,11 +187,11 @@ label set_approval_bonus(Girl, Action_type, context):
         if context == "shift":
             $ approval_bonus += 15
     elif Action_type == "footjob":
-        if Girl.Action_counter[Action_type] >= 7: # She loves it
+        if Girl.permanent_History[Action_type] >= 7: # She loves it
             $ approval_bonus += 10
-        elif Girl.Action_counter[Action_type] >= 3: #You've done it before several times
+        elif Girl.permanent_History[Action_type] >= 3: #You've done it before several times
             $ approval_bonus += 7
-        elif Girl.Action_counter[Action_type]: #You've done it before
+        elif Girl.permanent_History[Action_type]: #You've done it before
             $ approval_bonus += 3
 
         if Girl.addiction >= 75 and Girl.event_counter["swallowed"] > = 3: #She's really strung out and has swallowed
@@ -208,11 +208,11 @@ label set_approval_bonus(Girl, Action_type, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 40
     elif Action_type == "titjob":
-        if Girl.Action_counter[Action_type] >= 7: # She loves it
+        if Girl.permanent_History[Action_type] >= 7: # She loves it
             $ approval_bonus += 10
-        elif Girl.Action_counter[Action_type] >= 3: #You've done it before several times
+        elif Girl.permanent_History[Action_type] >= 3: #You've done it before several times
             $ approval_bonus += 7
-        elif Girl.Action_counter[Action_type]: #You've done it before
+        elif Girl.permanent_History[Action_type]: #You've done it before
             $ approval_bonus += 5
 
         if Girl.seen_breasts and approval_check(Girl, 500): # You've seen her tits.
@@ -239,11 +239,11 @@ label set_approval_bonus(Girl, Action_type, context):
         if context == "shift":
             $ approval_bonus += 15
     elif Action_type == "blowjob":
-        if Girl.Action_counter[Action_type] >= 7: # She loves it
+        if Girl.permanent_History[Action_type] >= 7: # She loves it
             $ approval_bonus += 15
-        elif Girl.Action_counter[Action_type] >= 3: #You've done it before several times
+        elif Girl.permanent_History[Action_type] >= 3: #You've done it before several times
             $ approval_bonus += 10
-        elif Girl.Action_counter[Action_type]: #You've done it before
+        elif Girl.permanent_History[Action_type]: #You've done it before
             $ approval_bonus += 7
 
         if Girl.addiction >= 75 and Girl.event_counter["swallowed"] > = 3: #She's really strung out and has swallowed
@@ -262,7 +262,7 @@ label set_approval_bonus(Girl, Action_type, context):
         if context == "shift":
             $ approval_bonus += 15
     elif Action_type == "dildo_pussy":
-        if Girl.Action_counter[Action_type]: #You've done it before
+        if Girl.permanent_History[Action_type]: #You've done it before
             $ approval_bonus += 15
         if Girl.legs_covered: # she's got pants on.
             $ approval_bonus -= 20
@@ -288,7 +288,7 @@ label set_approval_bonus(Girl, Action_type, context):
             $ approval_bonus -= 20
         elif "anal" in Girl.daily_history or "dildo_ass" in Girl.daily_history:
             $ approval_bonus -= 10
-        elif (Girl.Action_counter["anal"] + Girl.Action_counter["dildo_ass"]) > 0 or Girl.Clothes["buttplug"]: #You've done it before
+        elif (Girl.permanent_History["anal"] + Girl.permanent_History["dildo_ass"]) > 0 or Girl.Clothes["buttplug"]: #You've done it before
             $ approval_bonus += 20
 
         if Girl.legs_covered: # she's got pants on.
@@ -309,11 +309,11 @@ label set_approval_bonus(Girl, Action_type, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 40
     elif Action_type == "sex":
-        if Girl.Action_counter["sex"] >= 7: # She loves it
+        if Girl.permanent_History["sex"] >= 7: # She loves it
             $ approval_bonus += 15
-        elif Girl.Action_counter["sex"] >= 3: #You've done it before several times
+        elif Girl.permanent_History["sex"] >= 3: #You've done it before several times
             $ approval_bonus += 12
-        elif Girl.Action_counter["sex"]: #You've done it before
+        elif Girl.permanent_History["sex"]: #You've done it before
             $ approval_bonus += 10
 
         if Girl.addiction >= 75 and (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) > = 3: #She's really strung out and has creampied
@@ -336,11 +336,11 @@ label set_approval_bonus(Girl, Action_type, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 40
     elif Action_type == "anal":
-        if Girl.Action_counter["anal"]  >= 7: # She loves it
+        if Girl.permanent_History["anal"]  >= 7: # She loves it
             $ approval_bonus += 20
-        elif Girl.Action_counter["anal"]  >= 3: #You've done it before several times
+        elif Girl.permanent_History["anal"]  >= 3: #You've done it before several times
             $ approval_bonus += 17
-        elif Girl.Action_counter["anal"] : #You've done it before
+        elif Girl.permanent_History["anal"] : #You've done it before
             $ approval_bonus += 15
 
         if Girl.addiction >= 75 and (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) > = 3: #She's really strung out and has creampied
@@ -370,9 +370,9 @@ label set_approval_bonus(Girl, Action_type, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 40
     elif Action_type == "hotdog":
-        if Girl.Action_counter["hotdog"] >= 3: #You've done it before several times
+        if Girl.permanent_History["hotdog"] >= 3: #You've done it before several times
             $ approval_bonus += 10
-        elif Girl.Action_counter["hotdog"]: #You've done it before
+        elif Girl.permanent_History["hotdog"]: #You've done it before
             $ approval_bonus += 5
 
         if Girl.lust > 85:
@@ -614,8 +614,8 @@ label jerking_off(Girl = None):
 
             $ counter = 0
 
-            if Girl.Action_counter["handjob"] >= 5 and approval_check(Girl, 1100, taboo_modifier = 3):
-                $ counter = Girl.Action_counter["handjob"] - 4
+            if Girl.permanent_History["handjob"] >= 5 and approval_check(Girl, 1100, taboo_modifier = 3):
+                $ counter = Girl.permanent_History["handjob"] - 4
                 $ counter = 10 if counter > 10 else counter
 
                 while counter:
@@ -623,8 +623,8 @@ label jerking_off(Girl = None):
 
                     $ counter -= 1
 
-            if Girl.Action_counter["blowjob"] >= 5 and approval_check(Girl, 1300, taboo_modifier = 3):
-                $ counter = Girl.Action_counter["blowjob"] - 4
+            if Girl.permanent_History["blowjob"] >= 5 and approval_check(Girl, 1300, taboo_modifier = 3):
+                $ counter = Girl.permanent_History["blowjob"] - 4
                 $ counter = 10 if counter > 10 else counter
                 $ counter += 5 if "hungry" in Girl.traits else 0
 
@@ -633,8 +633,8 @@ label jerking_off(Girl = None):
 
                     $ counter -= 1
 
-            if Girl.Action_counter["titjob"] >= 5 and approval_check(Girl, 1200, taboo_modifier = 5):
-                $ counter = Girl.Action_counter["titjob"] - 4
+            if Girl.permanent_History["titjob"] >= 5 and approval_check(Girl, 1200, taboo_modifier = 5):
+                $ counter = Girl.permanent_History["titjob"] - 4
                 $ counter = 10 if counter > 10 else counter
 
                 while counter:
@@ -642,8 +642,8 @@ label jerking_off(Girl = None):
 
                     $ counter -= 1
 
-            if Girl.Action_counter["sex"] >= 5 and approval_check(Girl, 1400, taboo_modifier = 5):
-                $ counter = Girl.Action_counter["sex"] - 4
+            if Girl.permanent_History["sex"] >= 5 and approval_check(Girl, 1400, taboo_modifier = 5):
+                $ counter = Girl.permanent_History["sex"] - 4
                 $ counter = 10 if counter > 10 else counter
                 $ counter += 5 if Girl.lust >= 70 else 0
 
@@ -652,8 +652,8 @@ label jerking_off(Girl = None):
 
                     $ counter -= 1
 
-            if Girl.Action_counter["anal"] >= 5 and approval_check(Girl, 1550, taboo_modifier = 5):
-                $ counter = Girl.Action_counter["anal"] - 4
+            if Girl.permanent_History["anal"] >= 5 and approval_check(Girl, 1550, taboo_modifier = 5):
+                $ counter = Girl.permanent_History["anal"] - 4
                 $ counter = 10 if counter > 10 else counter
                 $ counter += 5 if Girl.lust >= 70 and Girl.used_to_anal else 0
 
@@ -679,7 +679,7 @@ label jerking_off(Girl = None):
                     ch_s "Did you want a hand?"
                 elif Girl == JubesX:
                     ch_v "I could, uh, give you a hand there. . ."
-            elif options[0] == "blowjob" or (Girl == JubesX and JubesX.Action_counter["blowjob"]):
+            elif options[0] == "blowjob" or (Girl == JubesX and JubesX.permanent_History["blowjob"]):
                 if Girl == RogueX:
                     ch_r "Sure my mouth wouldn't do better?"
                 elif Girl == KittyX:
@@ -795,7 +795,7 @@ label jerking_off(Girl = None):
                 call Group_Strip_End
             elif Player.primary_Action.type == "masturbation":
                 $ Girl.remaining_Action_types -= 1
-                $ Girl.Action_counter["masturbation"] += 1
+                $ Girl.permanent_History["masturbation"] += 1
 
                 $ checkout()
             elif Player.primary_Action.type:
@@ -1344,7 +1344,7 @@ label first_Action_type_response(Girl, Action_type, context):
 label Action_specific_consequences(Girl, Action_type):
     $ achievement = None
 
-    $ Girl.Action_counter[Action_type] += 1
+    $ Girl.permanent_History[Action_type] += 1
 
     if Action_type == "kiss":
         call Partner_Like(Girl, 1)
@@ -1420,7 +1420,7 @@ label Action_type_approved(Girl, Action_type):
         call Action_type_forcefully_approved_lines(Girl, Action_type)
     elif not taboo and "no_taboo" in Girl.daily_history:
         call private_enough_lines(Girl, Action_type)
-    elif Girl.Action_counter[Action_type] < 3:
+    elif Girl.permanent_History[Action_type] < 3:
         $ Girl.change_face("sexy", 1)
         $ Girl.brows = "confused"
         $ Girl.mouth = "kiss"
@@ -1450,7 +1450,7 @@ label Action_type_disapproved(Girl, Action_type):
         call said_no_today_lines(Girl, Action_type)
     elif taboo and "no_taboo" in Girl.daily_history:
         call taboo_lines(Girl, Action_type)
-    elif not Girl.Action_counter[Action_type]:
+    elif not Girl.permanent_History[Action_type]:
         $ Girl.change_face("bemused")
 
         call Action_type_not_done_yet_lines(Girl, Action_type)
@@ -1525,7 +1525,7 @@ label Action_type_rejected(Girl, Action_type):
         $ Girl.add_word(1, "no_taboo", "no_taboo")
     elif Action_type in anal_insertion_Action_types and not Girl.used_to_anal and Action_type in Girl.daily_history:
         call anal_insertion_not_loose_done_today_reactions(Girl, Action_type)
-    elif Girl.Action_counter[Action_type]:
+    elif Girl.permanent_History[Action_type]:
         $ Girl.change_face("sad")
 
         call previous_Action_type_rejected_lines(Girl, Action_type)

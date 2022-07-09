@@ -2,7 +2,7 @@ init -1 python:
 
     def plaid_skirt(Owner):
         name = "plaid skirt"
-        image_string = "plaid_skirt"
+        string = "plaid_skirt"
 
         clothing_type = "skirt"
 
@@ -21,4 +21,4 @@ init -1 python:
             "arm pose 2",
             "handjob"]
 
-        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

@@ -38,7 +38,7 @@ label before_Action(Girl, Action_type, context = None):
     $ Actor.primary_Action = ActionClass(Action_type, Target = Target)
 
     if Action_type == "kiss":
-        if Girl == RogueX and not Girl.Action_counter["kiss"]:
+        if Girl == RogueX and not Girl.permanent_History["kiss"]:
             call Rogue_first_kiss
 
             return "stop"
@@ -113,7 +113,7 @@ label Action_cycle(Girl, Action_type):
 
 label after_Action(Girl, Action_type, context = None):
     $ Girl.change_face("sexy")
-    $ Girl.Action_counter[Action_type] += 1
+    $ Girl.permanent_History[Action_type] += 1
     $ Girl.remaining_Actions -= 1
 
     $ Player.sprite = False

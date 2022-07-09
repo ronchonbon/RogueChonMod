@@ -8,8 +8,8 @@ image black_screen:
         alpha 1.0
         linear 0.4 alpha 0.0
 
-image rolling_fog_midground:
-    "images/backgrounds/fog2.png"
+image rolling_steam_midground:
+    "images/backgrounds/steam2.png"
 
     subpixel True
     xpos -1920
@@ -18,8 +18,8 @@ image rolling_fog_midground:
         xpos -1920
         repeat
 
-image rolling_fog_cover:
-    "images/backgrounds/fog1.png"
+image rolling_steam_cover:
+    "images/backgrounds/steam1.png"
 
     subpixel True
     xpos 1920
@@ -41,7 +41,7 @@ layeredimage background:
 
 layeredimage midground:
     if Player.location == "bg_shower":
-        "rolling_fog_midground"
+        "rolling_steam_midground"
 
     if Player.location == "bg_pool":
         AlphaMask("images/backgrounds/[Player.location]_[current_time].png", "images/backgrounds/bg_pool_mask.png")
@@ -58,4 +58,4 @@ layeredimage cover:
         "images/backgrounds/bg_restaurant_table.png"
 
     if Player.location == "bg_shower":
-        "rolling_fog_cover" alpha 0.8
+        "rolling_steam_cover" alpha 0.8

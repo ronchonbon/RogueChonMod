@@ -2,7 +2,7 @@ init -1 python:
 
     def Evolutions_hair(Owner):
         name = "Evolutions hair"
-        image_string = "Evolutions_hair"
+        string = "Evolutions_hair"
 
         clothing_type = "hair"
 
@@ -25,4 +25,4 @@ init -1 python:
             "sex",
             "doggy"]
 
-        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

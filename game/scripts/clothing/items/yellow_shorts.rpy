@@ -2,7 +2,7 @@ init -1 python:
 
     def yellow_shorts(Owner):
         name = "yellow shorts"
-        image_string = "yellow_shorts"
+        string = "yellow_shorts"
 
         clothing_type = "pants"
 
@@ -23,4 +23,4 @@ init -1 python:
             "sex",
             "doggy"]
 
-        return ClothingClass(Owner, name, image_string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
+        return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)
