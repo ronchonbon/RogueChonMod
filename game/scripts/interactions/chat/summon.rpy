@@ -1,266 +1,3 @@
-label chat_menu(Girl):
-    $ shift_focus(Girl)
-
-    $ chatting = True
-
-    while chatting:
-        menu:
-            "Ask [Girl.name] to leave" if Girl.location == Player.location:
-                call dismiss(Girl)
-
-                $ chatting = False
-            "Romance her":
-                menu:
-                    "Sex Menu" if Girl.location == Player.location:
-                        if Girl.love >= Girl.obedience:
-                            Player.voice "Did you want to fool around?"
-                        else:
-                            Player.voice "I'd like to get naughty."
-
-                        if approval_check(Girl, 600, "LI"):
-                            $ Girl.change_face("sexy")
-
-                            if Girl == RogueX:
-                                Girl.voice "Heh, all right, [Girl.player_petname]."
-                            elif Girl == KittyX:
-                                Girl.voice "Mmmm, ok, [Girl.player_petname]."
-                            elif Girl == EmmaX:
-                                Girl.voice "Perhaps. . ."
-                            elif Girl == LauraX:
-                                Girl.voice "Cool."
-                            elif Girl == JeanX:
-                                Girl.voice "Yeah?"
-                            elif Girl == StormX:
-                                Girl.voice "Oh?"
-                            elif Girl == JubesX:
-                                Girl.voice "Yeah?"
-                            elif Girl == MystiqueX:
-                                Girl.voice "Mhm. . . ?"
-
-                            call enter_main_sex_menu(Girl)
-                        elif approval_check(Girl, 400, "OI"):
-                            if Girl == RogueX:
-                                Girl.voice "If that's what you want, [Girl.player_petname]."
-                            elif Girl == KittyX:
-                                Girl.voice "Yes, [Girl.player_petname]."
-                            elif Girl == EmmaX:
-                                Girl.voice "If that's what you want, [Girl.player_petname]."
-                            elif Girl == LauraX:
-                                Girl.voice "Yes, [Girl.player_petname]."
-                            elif Girl == JeanX:
-                                Girl.voice "Whatever. . ."
-                            elif Girl == StormX:
-                                Girl.voice "Fine."
-                            elif Girl == JubesX:
-                                Girl.voice "What would you like, [Girl.player_petname]?"
-                            elif Girl == MystiqueX:
-                                Girl.voice "What would you like, [Girl.player_petname]?"
-
-                            call enter_main_sex_menu(Girl)
-                        else:
-                            if Girl == RogueX:
-                                Girl.voice "I'm not really interested, [Girl.player_petname]."
-                            elif Girl == KittyX:
-                                Girl.voice "No thanks, [Girl.player_petname]."
-                            elif Girl == EmmaX:
-                                Girl.voice "No thank you, [Girl.player_petname]."
-                            elif Girl == LauraX:
-                                Girl.voice "No thanks, [Girl.player_petname]."
-                            elif Girl == JeanX:
-                                Girl.voice "Not interested."
-                            elif Girl == StormX:
-                                Girl.voice "I am uninterested."
-                            elif Girl == JubesX:
-                                Girl.voice "Nah, not into it."
-                            elif Girl == MystiqueX:
-                                Girl.voice "No."
-                    "Sex Menu (locked)" if Girl.location != Player.location:
-                        pass
-                    "Back":
-                        pass
-            "Talk with her":
-                menu:
-                    "Could I get your number?" if Girl not in Player.Phonebook:
-                        if Girl == EmmaX and approval_check(Girl, 800, "LI"):
-                            Girl.voice "I don't see why not."
-
-                            $ Player.Phonebook.append(Girl)
-                        elif Girl != EmmaX and(approval_check(Girl, 400, "L") or approval_check(Girl, 200, "I")):
-                            if Girl == RogueX:
-                                Girl.voice "Sure, I suppose."
-                            elif Girl == KittyX:
-                                Girl.voice "OMG[Girl.like]sure."
-                            elif Girl == LauraX:
-                                Girl.voice "Oh, sure."
-                            elif Girl == JeanX:
-                                Girl.voice "Huh? Ok."
-                            elif Girl == StormX:
-                                Girl.voice "Oh? Certainly."
-                            elif Girl == JubesX:
-                                Girl.voice "Sure, yeah."
-                            elif Girl == MystiqueX:
-                                Girl.voice "You may."
-
-                            $ Player.Phonebook.append(Girl)
-                        elif approval_check(Girl, 200, "O", alternate_thresholds = {EmmaX: 500 - Girl.inhibition}):
-                            if Girl == RogueX:
-                                Girl.voice "If you want it, I guess."
-                            elif Girl == KittyX:
-                                Girl.voice "[Girl.Like]fine."
-                            elif Girl == EmmaX:
-                                Girl.voice "Hmm. . . fine, hand me your phone."
-                            elif Girl == LauraX:
-                                Girl.voice "I guess."
-                            elif Girl == JeanX:
-                                Girl.voice "Huh? Ok."
-                            elif Girl == StormX:
-                                Girl.voice "I don't see why not."
-                            elif Girl == JubesX:
-                                Girl.voice "I guess?"
-                            elif Girl == MystiqueX:
-                                Girl.voice "Hmm. . . ok."
-
-                            $ Player.Phonebook.append(Girl)
-                        else:
-                            if Girl == RogueX:
-                                Girl.voice "I don't really want you calling me."
-                            elif Girl == KittyX:
-                                Girl.voice "[Girl.Like]I'd rather not?"
-                            elif Girl == EmmaX:
-                                Girl.voice "I don't think it's appropriate to give my number out to a student like that."
-                            elif Girl == LauraX:
-                                Girl.voice "Um, probably not."
-                            elif Girl == JeanX:
-                                Girl.voice "I'd rather you didn't call me."
-                            elif Girl == StormX:
-                                Girl.voice "I would rather not."
-                            elif Girl == JubesX:
-                                Girl.voice "Nah, unlisted."
-                            elif Girl == MystiqueX:
-                                Girl.voice "Not likely."
-                    "Back":
-                        pass
-            "Add her to party" if Girl not in Player.Party and Girl.location == Player.location:
-                Player.voice "Could you follow me for a bit?"
-
-                if Girl == EmmaX and approval_check(Girl, 1250):
-                    $ Player.Party.append(Girl)
-
-                    Girl.voice "Lead away."
-
-                if approval_check(Girl, 600, alternate_thresholds = {EmmaX: 900, JeanX: 900, MystiqueX: 1000}):
-                    $ Player.Party.append(Girl)
-
-                    if Girl == RogueX:
-                        Girl.voice "Ok, Where did you want to go?"
-                    elif Girl == KittyX:
-                        Girl.voice "[Girl.Like]where to?"
-                    elif Girl == EmmaX:
-                        Girl.voice "You'd better not bore me."
-                    elif Girl == LauraX:
-                        Girl.voice "Where to?"
-                    elif Girl == JeanX:
-                        Girl.voice "Um, sure."
-                    elif Girl == StormX:
-                        Girl.voice "Oh, certainly."
-                    elif Girl == JubesX:
-                        Girl.voice "Sure, what's up?"
-                    elif Girl == MystiqueX:
-                        Girl.voice "Where to, [Girl.player_petname]?"
-                elif not approval_check(Girl, 400):
-                    if Girl == RogueX:
-                        Girl.voice "Um, no thanks."
-                    elif Girl == KittyX:
-                        Girl.voice "Ew, no."
-                    elif Girl == EmmaX:
-                        Girl.voice "I can't imagine why I would."
-                    elif Girl == LauraX:
-                        Girl.voice "No."
-                    elif Girl == JeanX:
-                        Girl.voice "What? No."
-                    elif Girl == StormX:
-                        Girl.voice "Hm, no thank you."
-                    elif Girl == JubesX:
-                        Girl.voice "Nah, not into it."
-                    elif Girl == MystiqueX:
-                        Girl.voice "Ah, no."
-                else:
-                    if Girl == RogueX:
-                        Girl.voice "I'm fine here, thanks."
-                    elif Girl == KittyX:
-                        Girl.voice "I think I'll stay here."
-                    elif Girl == EmmaX:
-                        Girl.voice "I'd rather not."
-                    elif Girl == LauraX:
-                        Girl.voice "I'd rather not."
-                    elif Girl == JeanX:
-                        Girl.voice "What? No."
-                    elif Girl == StormX:
-                        Girl.voice "I'm comfortable here."
-                    elif Girl == JubesX:
-                        Girl.voice "Def not."
-                    elif Girl == MystiqueX:
-                        Girl.voice "Not this time."
-            "Disband party" if Girl in Player.Party:
-                Player.voice "Ok, you can leave if you prefer."
-
-                python:
-                    for G in Player.Party:
-                        Player.Party.remove(G)
-            "Never mind.":
-                if Girl == RogueX:
-                    Girl.voice "Ok, later then."
-                elif Girl == KittyX:
-                    Girl.voice "Ok, bye."
-                elif Girl == EmmaX:
-                    Girl.voice "We'll talk later then."
-                elif Girl == LauraX:
-                    Girl.voice "Ok."
-                elif Girl == JeanX:
-                    Girl.voice "Ok?"
-                elif Girl == StormX:
-                    Girl.voice "Very well then."
-                elif Girl == JubesX:
-                    Girl.voice "K."
-                elif Girl == MystiqueX:
-                    Girl.voice "Very well."
-
-                $ chatting = False
-
-    return
-
-label text_menu(Girl):
-    $ shift_focus(Girl)
-
-    Player.text "Hey."
-
-    if Girl == RogueX:
-        Girl.text "hey [Girl.player_petname]."
-    elif Girl == KittyX:
-        Girl.text "oh hey [Girl.player_petname]"
-    elif Girl == EmmaX:
-        Girl.text "Yes?"
-    elif Girl == LauraX:
-        Girl.text "Watsup?"
-    elif Girl == JeanX:
-        Girl.text "hi"
-    elif Girl == StormX:
-        Girl.text "Hello."
-    elif Girl == JubesX:
-        Girl.text "hey!"
-    elif Girl == MystiqueX:
-        Girl.text "Yes, [Girl.player_petname]?"
-
-    menu(nvl = True):
-        "Come over here.":
-            Player.text "Come over here."
-
-            call expression "summon_" + Girl.tag
-        "Never mind.":
-            Player.text "Never mind."
-
-    return
-
 label summon(Girl):
     $ D20 = renpy.random.randint(1, 20)
 
@@ -905,6 +642,235 @@ label summon(Girl):
     $ Girl.change_Outfit()
 
     call Girls_arrive(Girl)
+
+    return
+
+label dismiss(Girl):
+    if Girl in Player.Party:
+        $ Player.Party.remove(Girl)
+
+    $ leaving = False
+
+    menu:
+        "You can leave if you like.":
+            if Girl.location == Player.location and not approval_check(Girl, 700, "O"):
+                if Girl == RogueX:
+                    Girl.voice "Thanks, but I think I'll stick around."
+                elif Girl == KittyX:
+                    Girl.voice "Well, I think I'll stay."
+                elif Girl == EmmaX:
+                    Girl.voice "Be that as it may, I'll stick around for a bit."
+                elif Girl == LauraX:
+                    Girl.voice "Ok. [[she does not seem to be moving. . .]"
+                elif Girl == JeanX:
+                    Girl.voice "Ok. [[she does not seem to be moving. . .]"
+                elif Girl == StormX:
+                    Girl.voice "You have been heard. [[she does not seem to be moving. . .]"
+                elif Girl == JubesX:
+                    Girl.voice "K. . . [[she does not seem to be moving. . .]"
+            else:
+                if Girl == RogueX:
+                    Girl.voice "Sure, ok. See you later."
+                elif Girl == KittyX:
+                    Girl.voice "Ok, later!"
+                elif Girl == EmmaX:
+                    Girl.voice "Very well, [Girl.player_petname]"
+                elif Girl == LauraX:
+                    Girl.voice "Ok."
+                elif Girl == JeanX:
+                    Girl.voice "Ok."
+                elif Girl == StormX:
+                    Girl.voice "Ok then."
+                elif Girl == JubesX:
+                    Girl.voice "K. . ."
+
+                $ leaving = True
+        "Could you give me the room please?":
+            if Girl.location == Player.location and not approval_check(Girl, 800, "LO"):
+                if Girl == RogueX:
+                    Girl.voice "I'd rather stick around."
+                elif Girl == KittyX:
+                    Girl.voice "I've got nowhere better to be."
+                elif Girl == EmmaX:
+                    Girl.voice "As it happens, I don't have any other plans."
+                elif Girl == LauraX:
+                    Girl.voice "Nobody's kicking you out [[She doesn't move]."
+                elif Girl == JeanX:
+                    Girl.voice "What? No."
+                elif Girl == StormX:
+                    Girl.voice "I'd rather stay."
+                elif Girl == JubesX:
+                    Girl.voice "Nah, I'm good here."
+            elif not approval_check(Girl, 500, "LO"):
+                if Girl == RogueX:
+                    Girl.voice "I think I should probably stick around."
+                elif Girl == KittyX:
+                    Girl.voice "Yeah, no."
+                elif Girl == EmmaX:
+                    Girl.voice "I don't think that I can."
+                elif Girl == LauraX:
+                    Girl.voice "Nope."
+                elif Girl == JeanX:
+                    Girl.voice "What? No."
+                elif Girl == StormX:
+                    Girl.voice "No, thank you."
+                elif Girl == JubesX:
+                    Girl.voice "Nah, I'm good here."
+            else:
+                if "dismissed" not in Girl.daily_history:
+                    call change_Girl_stat(Girl, "obedience", 5)
+                    call change_Girl_stat(Girl, "obedience", 5)
+
+                if Girl == RogueX:
+                    Girl.voice "Not a problem, see you later then."
+                elif Girl == KittyX:
+                    Girl.voice "Sure, ok."
+                elif Girl == EmmaX:
+                    Girl.voice "Very well. . ."
+                elif Girl == LauraX:
+                    Girl.voice "Sure, ok."
+                elif Girl == JeanX:
+                    Girl.voice "Whatever."
+                elif Girl == StormX:
+                    Girl.voice "Ok then."
+                elif Girl == JubesX:
+                    Girl.voice "Fine. . ."
+
+                $ leaving = True
+        "You can go now.":
+            if Girl.location == Player.location and not approval_check(Girl, 500, "O"):
+                if Girl == RogueX:
+                    Girl.voice "I think I'll stay."
+                elif Girl == KittyX:
+                    Girl.voice "Um, no."
+                elif Girl == EmmaX:
+                    Girl.voice "No, I don't believe that I can."
+                elif Girl == LauraX:
+                    Girl.voice "But I won't."
+                elif Girl == JeanX:
+                    Girl.voice "Right. [[she's not moving]"
+                elif Girl == StormX:
+                    Girl.voice "But I would rather stay."
+                elif Girl == JubesX:
+                    Girl.voice "Yeah, but I'm not."
+            elif not approval_check(Girl, 300, "O"):
+                $ Girl.change_face("confused")
+
+                if Girl == RogueX:
+                    Girl.voice "Well if you want me to go, then maybe I should stick around."
+                elif Girl == KittyX:
+                    Girl.voice "Not when you've got me curious."
+                elif Girl == EmmaX:
+                    Girl.voice "Now I am intrigued."
+                elif Girl == LauraX:
+                    Girl.voice "Why?"
+                elif Girl == JeanX:
+                    Girl.voice "Uh-huh. [[she's not moving]"
+                elif Girl == StormX:
+                    Girl.voice "Oh?"
+                elif Girl == JubesX:
+                    Girl.voice "Why's that?"
+            else:
+                if Girl == RogueX:
+                    Girl.voice "If you wish."
+                elif Girl == KittyX:
+                    Girl.voice "Um, ok."
+                elif Girl == EmmaX:
+                    Girl.voice "Very well. . ."
+                elif Girl == LauraX:
+                    Girl.voice "Ok."
+                elif Girl == JeanX:
+                    Girl.voice "Whatever."
+                elif Girl == StormX:
+                    Girl.voice "Ok then."
+                elif Girl == JubesX:
+                    Girl.voice "Oh, ok. . ."
+
+                $ leaving = True
+        "Never mind.":
+            return
+
+    if leaving:
+        call remove_Girl(Girl)
+    elif not leaving:
+        menu:
+            extend ""
+            "I insist, get going.":
+                if approval_check(Girl, 1200, "LO") or approval_check(Girl, 500, "O"):
+                    if Girl == RogueX:
+                        Girl.voice "Ok, if you insist."
+                    elif Girl == KittyX:
+                        Girl.voice "Um, ok."
+                    elif Girl == EmmaX:
+                        Girl.voice "Very well. . ."
+                    elif Girl == LauraX:
+                        Girl.voice "Ok, fine."
+                    elif Girl == JeanX:
+                        Girl.voice ". . ."
+                        Girl.voice "Fine."
+                    elif Girl == StormX:
+                        Girl.voice ". . . Fine."
+                    elif Girl == JubesX:
+                        Girl.voice "Ok, fine. . ."
+
+                    $ leaving = True
+                elif approval_check(Girl, 1000, "LO") or approval_check(Girl, 300, "O"):
+                    $ Girl.change_face("angry")
+
+                    if Girl == RogueX:
+                        Girl.voice "Fine, if you're going to be a dick about it."
+                    elif Girl == KittyX:
+                        Girl.voice "Fine, jerk!"
+                    elif Girl == EmmaX:
+                        Girl.voice "I'll leave, but do not test me, [Girl.player_petname]"
+                    elif Girl == LauraX:
+                        Girl.voice "I've got stuff to do anyway."
+                    elif Girl == JeanX:
+                        Girl.voice ". . ."
+                        Girl.voice "Oh, I forgot to mention, I needed to go do. . . something."
+                    elif Girl == StormX:
+                        Girl.voice "Well, I did have some errands to run."
+                    elif Girl == JubesX:
+                        Girl.voice "Whatever. . ."
+
+                    $ leaving = True
+                else:
+                    $ Girl.change_face("angry")
+
+                    if Girl == RogueX:
+                        Girl.voice "Like hell I will."
+                    elif Girl == KittyX:
+                        Girl.voice "Noooope."
+                    elif Girl == EmmaX:
+                        Girl.voice "Well now I'm definitely not."
+                    elif Girl == LauraX:
+                        Girl.voice "Not until I see what you have planned here."
+                    elif Girl == JeanX:
+                        Girl.voice "Well that doesn't sound fun."
+                    elif Girl == StormX:
+                        Girl.voice "I would definitely prefer to stay now."
+                    elif Girl == JubesX:
+                        Girl.voice "Well now I'm -definitely- sticking around. . ."
+            "Ok, never mind.":
+                pass
+
+    if leaving:
+        call remove_Girl(Girl)
+
+    return
+
+label Girls_arrive(arriving_Girls):
+    if arriving_Girls in all_Girls:
+        $ arriving_Girls = [arriving_Girls]
+
+    $ arriving_Girls = sort_Girls_by_approval(arriving_Girls)
+
+    call add_Girls(arriving_Girls)
+
+    python:
+        for G in all_Girls:
+            if G in Nearby:
+                G.location = "nearby"
 
     return
 
@@ -1589,219 +1555,5 @@ label Girl_leaving(Girl):
         Girl.voice "I suppose I can stay."
 
     $ Girl.location = Player.location
-
-    return
-
-label dismiss(Girl):
-    if Girl in Player.Party:
-        $ Player.Party.remove(Girl)
-
-    $ leaving = False
-
-    menu:
-        "You can leave if you like.":
-            if Girl.location == Player.location and not approval_check(Girl, 700, "O"):
-                if Girl == RogueX:
-                    Girl.voice "Thanks, but I think I'll stick around."
-                elif Girl == KittyX:
-                    Girl.voice "Well, I think I'll stay."
-                elif Girl == EmmaX:
-                    Girl.voice "Be that as it may, I'll stick around for a bit."
-                elif Girl == LauraX:
-                    Girl.voice "Ok. [[she does not seem to be moving. . .]"
-                elif Girl == JeanX:
-                    Girl.voice "Ok. [[she does not seem to be moving. . .]"
-                elif Girl == StormX:
-                    Girl.voice "You have been heard. [[she does not seem to be moving. . .]"
-                elif Girl == JubesX:
-                    Girl.voice "K. . . [[she does not seem to be moving. . .]"
-            else:
-                if Girl == RogueX:
-                    Girl.voice "Sure, ok. See you later."
-                elif Girl == KittyX:
-                    Girl.voice "Ok, later!"
-                elif Girl == EmmaX:
-                    Girl.voice "Very well, [Girl.player_petname]"
-                elif Girl == LauraX:
-                    Girl.voice "Ok."
-                elif Girl == JeanX:
-                    Girl.voice "Ok."
-                elif Girl == StormX:
-                    Girl.voice "Ok then."
-                elif Girl == JubesX:
-                    Girl.voice "K. . ."
-
-                $ leaving = True
-        "Could you give me the room please?":
-            if Girl.location == Player.location and not approval_check(Girl, 800, "LO"):
-                if Girl == RogueX:
-                    Girl.voice "I'd rather stick around."
-                elif Girl == KittyX:
-                    Girl.voice "I've got nowhere better to be."
-                elif Girl == EmmaX:
-                    Girl.voice "As it happens, I don't have any other plans."
-                elif Girl == LauraX:
-                    Girl.voice "Nobody's kicking you out [[She doesn't move]."
-                elif Girl == JeanX:
-                    Girl.voice "What? No."
-                elif Girl == StormX:
-                    Girl.voice "I'd rather stay."
-                elif Girl == JubesX:
-                    Girl.voice "Nah, I'm good here."
-            elif not approval_check(Girl, 500, "LO"):
-                if Girl == RogueX:
-                    Girl.voice "I think I should probably stick around."
-                elif Girl == KittyX:
-                    Girl.voice "Yeah, no."
-                elif Girl == EmmaX:
-                    Girl.voice "I don't think that I can."
-                elif Girl == LauraX:
-                    Girl.voice "Nope."
-                elif Girl == JeanX:
-                    Girl.voice "What? No."
-                elif Girl == StormX:
-                    Girl.voice "No, thank you."
-                elif Girl == JubesX:
-                    Girl.voice "Nah, I'm good here."
-            else:
-                if "dismissed" not in Girl.daily_history:
-                    call change_Girl_stat(Girl, "obedience", 5)
-                    call change_Girl_stat(Girl, "obedience", 5)
-
-                if Girl == RogueX:
-                    Girl.voice "Not a problem, see you later then."
-                elif Girl == KittyX:
-                    Girl.voice "Sure, ok."
-                elif Girl == EmmaX:
-                    Girl.voice "Very well. . ."
-                elif Girl == LauraX:
-                    Girl.voice "Sure, ok."
-                elif Girl == JeanX:
-                    Girl.voice "Whatever."
-                elif Girl == StormX:
-                    Girl.voice "Ok then."
-                elif Girl == JubesX:
-                    Girl.voice "Fine. . ."
-
-                $ leaving = True
-        "You can go now.":
-            if Girl.location == Player.location and not approval_check(Girl, 500, "O"):
-                if Girl == RogueX:
-                    Girl.voice "I think I'll stay."
-                elif Girl == KittyX:
-                    Girl.voice "Um, no."
-                elif Girl == EmmaX:
-                    Girl.voice "No, I don't believe that I can."
-                elif Girl == LauraX:
-                    Girl.voice "But I won't."
-                elif Girl == JeanX:
-                    Girl.voice "Right. [[she's not moving]"
-                elif Girl == StormX:
-                    Girl.voice "But I would rather stay."
-                elif Girl == JubesX:
-                    Girl.voice "Yeah, but I'm not."
-            elif not approval_check(Girl, 300, "O"):
-                $ Girl.change_face("confused")
-
-                if Girl == RogueX:
-                    Girl.voice "Well if you want me to go, then maybe I should stick around."
-                elif Girl == KittyX:
-                    Girl.voice "Not when you've got me curious."
-                elif Girl == EmmaX:
-                    Girl.voice "Now I am intrigued."
-                elif Girl == LauraX:
-                    Girl.voice "Why?"
-                elif Girl == JeanX:
-                    Girl.voice "Uh-huh. [[she's not moving]"
-                elif Girl == StormX:
-                    Girl.voice "Oh?"
-                elif Girl == JubesX:
-                    Girl.voice "Why's that?"
-            else:
-                if Girl == RogueX:
-                    Girl.voice "If you wish."
-                elif Girl == KittyX:
-                    Girl.voice "Um, ok."
-                elif Girl == EmmaX:
-                    Girl.voice "Very well. . ."
-                elif Girl == LauraX:
-                    Girl.voice "Ok."
-                elif Girl == JeanX:
-                    Girl.voice "Whatever."
-                elif Girl == StormX:
-                    Girl.voice "Ok then."
-                elif Girl == JubesX:
-                    Girl.voice "Oh, ok. . ."
-
-                $ leaving = True
-        "Never mind.":
-            return
-
-    if leaving:
-        call remove_Girl(Girl)
-    elif not leaving:
-        menu:
-            extend ""
-            "I insist, get going.":
-                if approval_check(Girl, 1200, "LO") or approval_check(Girl, 500, "O"):
-                    if Girl == RogueX:
-                        Girl.voice "Ok, if you insist."
-                    elif Girl == KittyX:
-                        Girl.voice "Um, ok."
-                    elif Girl == EmmaX:
-                        Girl.voice "Very well. . ."
-                    elif Girl == LauraX:
-                        Girl.voice "Ok, fine."
-                    elif Girl == JeanX:
-                        Girl.voice ". . ."
-                        Girl.voice "Fine."
-                    elif Girl == StormX:
-                        Girl.voice ". . . Fine."
-                    elif Girl == JubesX:
-                        Girl.voice "Ok, fine. . ."
-
-                    $ leaving = True
-                elif approval_check(Girl, 1000, "LO") or approval_check(Girl, 300, "O"):
-                    $ Girl.change_face("angry")
-
-                    if Girl == RogueX:
-                        Girl.voice "Fine, if you're going to be a dick about it."
-                    elif Girl == KittyX:
-                        Girl.voice "Fine, jerk!"
-                    elif Girl == EmmaX:
-                        Girl.voice "I'll leave, but do not test me, [Girl.player_petname]"
-                    elif Girl == LauraX:
-                        Girl.voice "I've got stuff to do anyway."
-                    elif Girl == JeanX:
-                        Girl.voice ". . ."
-                        Girl.voice "Oh, I forgot to mention, I needed to go do. . . something."
-                    elif Girl == StormX:
-                        Girl.voice "Well, I did have some errands to run."
-                    elif Girl == JubesX:
-                        Girl.voice "Whatever. . ."
-
-                    $ leaving = True
-                else:
-                    $ Girl.change_face("angry")
-
-                    if Girl == RogueX:
-                        Girl.voice "Like hell I will."
-                    elif Girl == KittyX:
-                        Girl.voice "Noooope."
-                    elif Girl == EmmaX:
-                        Girl.voice "Well now I'm definitely not."
-                    elif Girl == LauraX:
-                        Girl.voice "Not until I see what you have planned here."
-                    elif Girl == JeanX:
-                        Girl.voice "Well that doesn't sound fun."
-                    elif Girl == StormX:
-                        Girl.voice "I would definitely prefer to stay now."
-                    elif Girl == JubesX:
-                        Girl.voice "Well now I'm -definitely- sticking around. . ."
-            "Ok, never mind.":
-                pass
-
-    if leaving:
-        call remove_Girl(Girl)
 
     return

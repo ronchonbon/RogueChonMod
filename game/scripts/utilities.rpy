@@ -769,21 +769,6 @@ label return_to_room:
 
     return
 
-label Girls_arrive(arriving_Girls):
-    if arriving_Girls in all_Girls:
-        $ arriving_Girls = [arriving_Girls]
-
-    $ arriving_Girls = sort_Girls_by_approval(arriving_Girls)
-
-    call add_Girls(arriving_Girls)
-
-    python:
-        for G in all_Girls:
-            if G in Nearby:
-                G.location = "nearby"
-
-    return
-
 label exit_gym:
     python:
         line = None
