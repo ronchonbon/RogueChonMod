@@ -22,7 +22,7 @@ label discover_Mystique:
 
     call show_Girl(MystiqueX, transition = Mystique_dissolve)
 
-    ch_p "Wha... what's going on?"
+    ch_p "Wha. . . what's going on?"
     ch_m "Idiot! Unhand me!"
     ch_p "You're Mystique!!!"
 
@@ -52,7 +52,7 @@ label discover_Mystique:
 
     $ MystiqueX.change_face("confused")
 
-    ch_m "You may be right..."
+    ch_m "You may be right. . ."
 
     $ MystiqueX.eyes = "closed"
 
@@ -67,5 +67,10 @@ label discover_Mystique:
 
     ch_m "Meet me in my room."
 
+    $ MystiqueX.History.update("discovered")
+
     call hide_all
-    jump player_room
+
+    $ Girl = MystiqueX
+
+    jump girls_room

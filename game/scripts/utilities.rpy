@@ -782,7 +782,7 @@ label Girls_arrive(arriving_Girls):
             if G in Nearby:
                 G.location = "nearby"
 
-    return True
+    return
 
 label exit_gym:
     python:

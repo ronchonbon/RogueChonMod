@@ -48,6 +48,9 @@ init python:
             self.daily_History = self.History.daily
             self.permanent_History = self.History.permanent
 
+            Player.voice = ch_p
+            Player.text = ch_p_nvl
+
     class GirlClass(object):
         def __init__(self, name, love, obedience, inhibition, lust):
             self.name = name
@@ -118,6 +121,7 @@ init python:
 
             if self.tag == "Rogue":
                 self.voice = ch_r
+                self.text = ch_r_nvl
 
                 self.pubes = "_hairy"
 
@@ -131,6 +135,7 @@ init python:
                 self.player_petnames = [self.player_petname, Player.name]
             elif self.tag == "Kitty":
                 self.voice = ch_k
+                self.text = ch_k_nvl
 
                 self.pubes = "_hairy"
 
@@ -147,6 +152,7 @@ init python:
                 self.player_petnames = ["sweetie", self.player_petname, Player.name]
             elif self.tag == "Emma":
                 self.voice = ch_e
+                self.text = ch_e_nvl
 
                 self.pubes = ""
 
@@ -164,6 +170,7 @@ init python:
                 self.player_petnames = ["young man", self.player_petname, Player.name]
             elif self.tag == "Laura":
                 self.voice = ch_l
+                self.text = ch_l_nvl
 
                 self.pubes = "_hairy"
 
@@ -179,6 +186,7 @@ init python:
                 self.player_petnames = ["guy", self.player_petname]
             elif self.tag == "Jean":
                 self.voice = ch_j
+                self.text = ch_j_nvl
 
                 self.pubes = "_hairy"
 
@@ -192,6 +200,7 @@ init python:
                 self.player_petnames = [self.player_petname, Player.name]
             elif self.tag == "Storm":
                 self.voice = ch_s
+                self.text = ch_s_nvl
 
                 self.pubes = "_hairy"
 
@@ -205,6 +214,7 @@ init python:
                 self.player_petnames = [self.player_petname]
             elif self.tag == "Jubes":
                 self.voice = ch_v
+                self.text = ch_v_nvl
 
                 self.pubes = "_hairy"
 
@@ -218,6 +228,7 @@ init python:
                 self.player_petnames = [self.player_petname, Player.name]
             elif self.tag == "Mystique":
                 self.voice = ch_m
+                self.text = ch_m_nvl
 
                 self.pubes = ""
 

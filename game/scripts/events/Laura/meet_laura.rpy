@@ -325,6 +325,7 @@ label meet_Laura:
     $ Nearby = []
 
     $ LauraX.location = "hold"
+    $ LauraX.History.update("met")
 
     $ shift_focus(RogueX)
 

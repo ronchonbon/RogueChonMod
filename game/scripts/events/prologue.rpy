@@ -359,6 +359,8 @@ label tour_parting:
 
     $ active_Girls.append(RogueX)
 
+    $ RogueX.History.update("met")
+
 label prologue_end:
     $ round = 10
 

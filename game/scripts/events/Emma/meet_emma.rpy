@@ -333,4 +333,6 @@ label meet_Emma:
 
     $ active_Girls.append(EmmaX)
 
+    $ EmmaX.History.update("met")
+
     return

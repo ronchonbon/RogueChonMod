@@ -228,6 +228,8 @@ label meet_Kitty:
 
     $ active_Girls.append(KittyX)
 
+    $ KittyX.History("met")
+
     $ round -= 10
 
     return

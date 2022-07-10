@@ -422,9 +422,10 @@ label meet_Jean:
     "She collects her things and leaves the room."
     ch_p "Was that. . . ?"
 
-    $ JeanX.name = "Jean"
-
     $ active_Girls.append(JeanX)
+
+    $ JeanX.name = "Jean"
+    $ JeanX.History.update("met")
 
     $ round -= 10
 

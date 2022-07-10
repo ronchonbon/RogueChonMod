@@ -150,4 +150,6 @@ label meet_Mystique_end:
 
     $ active_Girls.append(MystiqueX)
 
+    $ MystiqueX.History.update("met")
+
     jump campus
