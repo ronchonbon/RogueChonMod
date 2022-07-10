@@ -1,10 +1,10 @@
 init -1 python:
 
-    def gold_necklace(Owner):
-        name = "gold necklace"
-        string = "gold_necklace"
+    def wet_short_hair(Owner):
+        name = "wet short hair"
+        string = "wet_short_hair"
 
-        clothing_type = "neck"
+        clothing_type = "hair"
 
         dialogue_lines = {
             }
@@ -20,6 +20,9 @@ init -1 python:
             "arm pose 1",
             "arm pose 2",
             "handjob",
-            "sex"]
+            "titjob",
+            "blowjob",
+            "sex",
+            "doggy"]
 
         return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

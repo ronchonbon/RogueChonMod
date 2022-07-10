@@ -1,8 +1,8 @@
 init -1 python:
 
-    def gold_necklace(Owner):
-        name = "gold necklace"
-        string = "gold_necklace"
+    def ring_necklace(Owner):
+        name = "ring necklace"
+        string = "ring_necklace"
 
         clothing_type = "neck"
 

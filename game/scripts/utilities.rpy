@@ -105,8 +105,6 @@ init python:
                 if G.level == 10:
                     renpy.say(None, "[G.name]'s reached max level!")
 
-            G.change_face()
-
             G.History.increment()
 
         return

@@ -14,7 +14,7 @@ init -1 python:
         hides = []
         covers = []
 
-        number_of_states = 2
+        number_of_states = 1
 
         poses = [
             "arm pose 1",

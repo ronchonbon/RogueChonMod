@@ -103,8 +103,11 @@ label swim:
 
     if len(Swimmers) > 1:
         "You all get out of the pool and rest for a bit."
-    else:
+    elif Swimmers:
         "You both hop out of the pool and rest for a bit."
+    else:
+        "You hop out of the pool and rest for a bit."
+
 
     return
 

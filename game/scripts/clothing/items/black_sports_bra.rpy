@@ -1,25 +1,24 @@
 init -1 python:
 
-    def gold_necklace(Owner):
-        name = "gold necklace"
-        string = "gold_necklace"
+    def black_sports_bra(Owner):
+        name = "black sports bra"
+        string = "black_sports_bra"
 
-        clothing_type = "neck"
+        clothing_type = "bra"
 
         dialogue_lines = {
             }
 
         shame = 0
 
-        hides = []
-        covers = []
+        hides = ["breasts"]
+        covers = ["breasts"]
 
-        number_of_states = 1
+        number_of_states = 2
 
         poses = [
             "arm pose 1",
             "arm pose 2",
-            "handjob",
-            "sex"]
+            "handjob"]
 
         return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

@@ -14,7 +14,10 @@ init -1 python:
         hides = ["pussy"]
         covers = ["pussy", "thighs"]
 
-        number_of_states = 1
+        if Owner == KittyX:
+            number_of_states = 1
+        elif Owner == StormX:
+            number_of_states = 2
 
         poses = [
             "arm pose 1",
