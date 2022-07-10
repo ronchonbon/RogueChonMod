@@ -68,7 +68,7 @@ label Action_cycle(Girl, Action_type):
     while round > 0:
         $ stack_depth = renpy.call_stack_depth()
 
-        if Player.focus < 100:
+        if Player.climax < 100:
             if Action_type == "kiss":
                 call kiss_menu(Girl)
             elif Action_type in fondle_Action_types:

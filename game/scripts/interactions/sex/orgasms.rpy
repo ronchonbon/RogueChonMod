@@ -1,7 +1,7 @@
 label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
     if "phonesex" in Player.recent_history:
         $ Player.semen -= 1
-        $ Player.focus = 0
+        $ Player.climax = 0
         "You spray jizz across the room."
         return
 
@@ -222,7 +222,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
                             elif Girl == JubesX:
                                 ch_v "Well. . . I still think that was a waste."
                             $ line = 0
-                            $ Player.focus -= 5
+                            $ Player.climax -= 5
                             return
 
             $ Girl.change_face("sexy", 1)
@@ -244,7 +244,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
             elif Girl == JubesX:
                 ch_v "Ok, so what'd you want?"
             $ line = 0
-            $ Player.focus = 95
+            $ Player.climax = 95
             return
 
 label Manic_Suck:
@@ -1572,7 +1572,7 @@ label Girl_Orgasm_After:
     if not renpy.showing(Girl.tag + " handjob"):
         $ Girl.arm_pose = 1
     $ Player.semen -= 1
-    $ Player.focus = 0
+    $ Player.climax = 0
     $ action_speed = 0
     $ Girl.thirst -= 10 if Girl.thirst > 50 else 5
     menu:
@@ -1867,7 +1867,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls = []):
                     "Finish up." if Player.focusing:
                         "You release your concentration. . ."
                         $ Player.focusing = 0
-                        $ Player.focus += 15
+                        $ Player.climax += 15
                     "Let's try something else." if multi_action:
                         $ action_context = "shift"
                     "No, I'm not done yet.":

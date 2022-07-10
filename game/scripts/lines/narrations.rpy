@@ -118,7 +118,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             else:
                 $ line = line + "_She just seems to be looking it over"
                 $ TempLust += 2 if GirlA.lust < 40 else 0
-                $ TempFocus += -3 if Player.focus > 50 else 2
+                $ TempFocus += -3 if Player.climax > 50 else 2
             $ GirlA.addiction -= 1 if D20S > 10 else 2
             return
         if GirlA in (EmmaX,LauraX, StormX):
@@ -131,7 +131,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She knows what to do now, and rubs your cock with smooth strokes, focusing occasionally on the head",
                                     "She moves very smoothly, stroking casually and very gently, like she's been doing this for years",
                                     "You can't tell where she is at any moment, all you know is that it works"])
-                $ TempFocus += 20 if Player.focus < 60 else 7
+                $ TempFocus += 20 if Player.climax < 60 else 7
             else:
 
                 $ line = line + renpy.random.choice(["Her movements have become masterful, her slightest touch starts you twitching",
@@ -140,7 +140,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She knows what to do now, and rubs your cock with smooth strokes, focusing occasionally on the head",
                                     "She moves very smoothly, stroking casually and very gently, you can tell she's had plenty of practice",
                                     "You can't tell where she is at any moment, all you know is that it works"])
-                $ TempFocus += 20 if Player.focus > 70 else 7
+                $ TempFocus += 20 if Player.climax > 70 else 7
         elif GirlA.Action_counter["handjob"] > 4:
 
             if action_speed <= 1:
@@ -152,7 +152,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She knows what to do now, and rubs your cock with smooth strokes, focusing occasionally on the head",
                                     "She moves very smoothly, stroking casually and very gently, like she's been doing this for years",
                                     "You can't tell where she is at any moment, all you know is that it works"])
-                $ TempFocus += 20 if Player.focus < 40 else 5
+                $ TempFocus += 20 if Player.climax < 40 else 5
             else:
 
                 $ line = line + renpy.random.choice(["Her movements have become almost masterful, her slightest touch starts you twitching",
@@ -162,7 +162,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She knows what to do now, and rubs your cock with smooth strokes, focusing occasionally on the head",
                                     "She moves very smoothly, stroking casually and very gently, like she's been doing this for years",
                                     "You can't tell where she is at any moment, all you know is that it works"])
-                $ TempFocus += 20 if Player.focus > 70 else 5
+                $ TempFocus += 20 if Player.climax > 70 else 5
         elif 2 < GirlA.Action_counter["handjob"] <= 4:
 
             if action_speed <= 1:
@@ -172,7 +172,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She has a smooth motion going now, gentle and precise",
                                     "Her lessons are paying off, she's really becoming very talented at this",
                                     "She gently caresses the shaft, and cups the balls in her other hand, giving them a warm massage"])
-                $ TempFocus += 15 if Player.focus < 60 else 7
+                $ TempFocus += 15 if Player.climax < 60 else 7
             else:
 
                 $ line = line + renpy.random.choice(["She's begining to figure things out, her fingers cause tingles as they caress the shaft",
@@ -181,7 +181,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She has a smooth motion going now, gentle and precise",
                                     "Her lessons are paying off, she's really becoming very talented at this",
                                     "She quickly strokes your cock, with a very deft pressure"])
-                $ TempFocus += 15 if Player.focus > 60 else 5
+                $ TempFocus += 15 if Player.climax > 60 else 5
         else:
 
             if action_speed <= 1:
@@ -192,7 +192,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                 "Her fingers fumble with your shaft a bit",
                                 "She squeezes one of your balls too tightly, but stops when you wince",
                                 "She has a firm grip, and she's not letting go. This may take a few tries"])
-                $ TempFocus += 12 if Player.focus > 60 else 5
+                $ TempFocus += 12 if Player.climax > 60 else 5
             else:
 
                 $ line = line + renpy.random.choice(["She really wasn't prepared for speeding up, and your cock often slips out of her hand",
@@ -201,7 +201,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                 "Her fingers fumble with your shaft a bit",
                                 "She squeezes one of your balls too tightly, but stops when you wince",
                                 "She has a firm grip, and she's not letting go. This train is out of control"])
-                $ TempFocus += 10 if Player.focus > 60 else 2
+                $ TempFocus += 10 if Player.climax > 60 else 2
 
         $ TempLust += 2 if GirlA.lust < 60 else 0
         $ TempLust += 2 if GirlA.Action_counter["handjob"] > 2 else 0
@@ -221,7 +221,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             else:
                 $ line = GirlA.name + " squeezes her breasts together and slowly moves them along your shaft"
             $ action_speed = 1
-            $ TempFocus += 12 if Player.focus < 60 else 6
+            $ TempFocus += 12 if Player.climax < 60 else 6
             $ TempLust += 6 if GirlA.lust > 60 else 3
             return
 
@@ -237,7 +237,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     GirlA.name + " drips some spittle down to make sure you're properly lubed",
                                     GirlA.name + " gently caresses the shaft between her tits"])
 
-                $ TempFocus += 15 if Player.focus < 70 else 5
+                $ TempFocus += 15 if Player.climax < 70 else 5
                 $ TempLust += 7 if GirlA.lust > 60 else 4
             else:
 
@@ -249,7 +249,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     GirlA.name + " covers her tits with drool to keep them well lubed",
                                     GirlA.name + " rapidly caresses the shaft between her tits"])
 
-                $ TempFocus += 20 if Player.focus > 40 else 5
+                $ TempFocus += 20 if Player.climax > 40 else 5
                 $ TempLust += 6 if GirlA.lust > 70 else 4
 
 
@@ -263,7 +263,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                 GirlA.name + " pauses to rub her nipples across the shaft",
                                 GirlA.name + " gently caresses the shaft between her tits"])
 
-                $ TempFocus += 15 if Player.focus < 60 else 5
+                $ TempFocus += 15 if Player.climax < 60 else 5
                 $ TempLust += 6 if GirlA.lust > 60 else 3
             else:
 
@@ -273,7 +273,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                             GirlA.name + " bounces her whole body up and down",
                             GirlA.name + " rapidly slides the shaft between her tits"])
 
-                $ TempFocus += 15 if Player.focus > 50 else 7
+                $ TempFocus += 15 if Player.climax > 50 else 7
                 $ TempLust += 6 if GirlA.lust > 60 else 4
         else:
 
@@ -285,7 +285,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                             GirlA.name + " kind of bounces her tits around your cock",
                             GirlA.name + " smooshes her cleavage as tight as she can and rubs up and down"])
 
-                $ TempFocus += 12 if Player.focus < 60 else 6
+                $ TempFocus += 12 if Player.climax < 60 else 6
                 $ TempLust += 6 if GirlA.lust > 60 else 3
             else:
 
@@ -295,7 +295,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                             GirlA.name + " slaps her tits against your dick",
                             GirlA.name + " smooshes her cleavage as tight as she can and rubs up and down quite quickly"])
 
-                $ TempFocus += 8 if Player.focus > 70 else 4
+                $ TempFocus += 8 if Player.climax > 70 else 4
                 $ TempLust += 5 if GirlA.lust > 60 else 3
 
         if GirlA == KittyX:
@@ -353,7 +353,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She's really getting good at this, alternating between deep suction and gentle licks",
                                     "She moves very smoothly, tongue dancing casually and very gently, like she's been doing this for years",
                                     "She puts the tip into her mouth and her tounge dances around it"])
-                $ TempFocus += 20 if Player.focus < 70 else 15
+                $ TempFocus += 20 if Player.climax < 70 else 15
                 $ TempLust += 2 if GirlA.lust > 80 else 1
 
             elif GirlA.Action_counter["blowjob"] > 1:
@@ -365,7 +365,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "Her tongue moves carefully along the shaft",
                                     "She's really starting to learn some clever tricks to making you feel good",
                                     "She licks her way down the shaft, and gently teases the balls"])
-                $ TempFocus += 20 if Player.focus > 60 else 10
+                $ TempFocus += 20 if Player.climax > 60 else 10
                 $ TempLust += 2 if GirlA.lust > 80 else 1
             else:
 
@@ -375,7 +375,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She tentatively kisses around the head a bit",
                                     "She nibbles one of your balls, but stops when you wince",
                                     "She licks all over your dick, but she doesn't really have a handle on it"])
-                $ TempFocus += 15 if Player.focus > 60 else 5
+                $ TempFocus += 15 if Player.climax > 60 else 5
             $ GirlA.addiction -= 2
 
         elif action_speed == 2:
@@ -388,7 +388,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She's really getting good at this, alternating between deep suction and quick licks across the head",
                                     "She moves very smoothly, bobbing in and out like she's been doing this for years",
                                     "She puts the tip into her mouth and her tounge swirls rapidly around it"])
-                $ TempFocus += 20 if Player.focus < 80 else 10
+                $ TempFocus += 20 if Player.climax < 80 else 10
                 $ TempLust += 2 if GirlA.lust > 70 else 1
 
             elif GirlA.Action_counter["blowjob"] > 1:
@@ -399,7 +399,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She's really starting to learn some clever tricks to making you feel good",
                                     "She rapidly licks her way around the head",
                                     "Her mouth envelopes the head, then she quickly draws it in and draws back with a pop"])
-                $ TempFocus += 15 if Player.focus > 80 else 10
+                $ TempFocus += 15 if Player.climax > 80 else 10
                 $ TempLust += 1 if GirlA.lust > 60 else 0
             else:
 
@@ -409,7 +409,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "Her head bobs rapidly, until she goes a bit too deep and starts to gag",
                                     "She lets her teeth get a bit too much action",
                                     "She bobs quickly on your cock, but clamps down a bit too tight for comfort"])
-                $ TempFocus += 9 if Player.focus > 80 else 3
+                $ TempFocus += 9 if Player.climax > 80 else 3
             $ GirlA.addiction -= 2
 
         elif action_speed == 3:
@@ -423,7 +423,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She's really getting good at this, alternating between deep suction and quick licks across the head",
                                     "She moves very smoothly, bobbing in and out like she's been doing this for years",
                                     "She puts the shaft into her mouth and her tounge swirls rapidly around it"])
-                $ TempFocus += 22 if Player.focus > 40 else 10
+                $ TempFocus += 22 if Player.climax > 40 else 10
                 $ TempLust += 3 if GirlA.lust > 60 else 1
 
             elif GirlA.Action_counter["blowjob"] > 1:
@@ -435,7 +435,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She's really starting to learn some clever tricks to making you feel good",
                                     "She rapidly licks her way up and down the shaft as her mouth envelopes you",
                                     "Her mouth envelopes the shaft, then she quickly draws it in and draws back with a pop"])
-                $ TempFocus += 15 if Player.focus > 50 else 5
+                $ TempFocus += 15 if Player.climax > 50 else 5
             else:
 
 
@@ -445,7 +445,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "Her head bobs rapidly, until she goes a bit too deep and starts to gag",
                                     "She lets her teeth get a bit too much action",
                                     "She bobs quickly on your cock, but clamps down a bit too tight for comfort"])
-                $ TempFocus += 6 if Player.focus < 50 else 3
+                $ TempFocus += 6 if Player.climax < 50 else 3
             $ GirlA.addiction -= 2 if D20S > 10 else 3
         else:
 
@@ -460,7 +460,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She's really getting good at this, alternating between deep suction and quick licks across the head",
                                     "She moves very smoothly, bobbing in and out like she's been doing this for years",
                                     "She puts the entire shaft into her mouth and her tounge swirls rapidly around it"])
-                $ TempFocus += 25 if Player.focus > 40 else 8
+                $ TempFocus += 25 if Player.climax > 40 else 8
                 $ TempLust += 3 if GirlA.lust > 60 else 2
 
             elif GirlA.Action_counter["blowjob"] > 1:
@@ -472,7 +472,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She's really starting to learn some clever tricks to making you feel good",
                                     "She completely envelops the shaft with her throat.",
                                     "Her mouth envelopes the head, then she quickly draws it all the way in and draws back with a pop"])
-                $ TempFocus += 20 if Player.focus > 40 else 5
+                $ TempFocus += 20 if Player.climax > 40 else 5
                 $ TempLust += -3 if GirlA.lust < 60 else -1
                 $ TempLust += 5 if GirlA.obedience > 500 else 0
             else:
@@ -484,7 +484,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "Her head bobs rapidly, until she goes a bit too deep and starts to gag",
                                     "She lets her teeth get a bit too much action",
                                     "She bobs quickly on your cock, but clamps down a bit too tight for comfort"])
-                $ TempFocus += 15 if Player.focus > 80 else 5
+                $ TempFocus += 15 if Player.climax > 80 else 5
                 $ TempLust += -5 if GirlA.lust < 60 else -2
                 $ TempLust += 7 if GirlA.obedience > 500 else 0
             $ GirlA.addiction -= 3
@@ -516,7 +516,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                             "You alternate between shallow rapid thrusts, and the occasional deep, slow one",
                             "You pound away at her",
                             "She grinds furiously back and forth along your cock"])
-                $ TempFocus += 18 if Player.focus > 50 else 12
+                $ TempFocus += 18 if Player.climax > 50 else 12
                 $ TempLust += 16 if GirlA.lust > 70 else 10
             else:
 
@@ -526,7 +526,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                             "You alternate between long and slow thrusts, and the occasional quick one",
                             "You slowly slide back and forth near the entrance",
                             "She slides slowly back and forth along your cock, teasing you"])
-                $ TempFocus += 14 if Player.focus < 60 else 12
+                $ TempFocus += 14 if Player.climax < 60 else 12
                 $ TempLust += 12 if 40 > GirlA.lust > 90 else 10
 
         elif GirlA.Action_counter["sex"] > 1:
@@ -538,7 +538,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                         "You alternate between shallow rapid thrusts, and the occasional deep, slow one",
                         "You pound away at her",
                         "She grinds furiously back and forth along your cock"])
-                $ TempFocus += 12 if Player.focus > 50 else 9
+                $ TempFocus += 12 if Player.climax > 50 else 9
                 $ TempLust += 14 if GirlA.lust > 80 else 10
             else:
 
@@ -548,7 +548,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                         "You alternate between long and slow thrusts, and the occasional quick one",
                         "You slowly slide back and forth near the entrance",
                         "She slides slowly back and forth along your cock"])
-                $ TempFocus += 12 if Player.focus < 70 else 7
+                $ TempFocus += 12 if Player.climax < 70 else 7
                 $ TempLust += 10 if 50 > GirlA.lust > 90 else 8
         else:
 
@@ -560,7 +560,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                         "She bounces rapidly against your cock, occasionally popping out and having to stick it back in",
                         "You pound away at her",
                         "She moves rapidly back and forth along your cock, but seems a bit uncomfortable"])
-                $ TempFocus += 10 if Player.focus > 60 else 9
+                $ TempFocus += 10 if Player.climax > 60 else 9
                 $ TempLust += 10 if GirlA.lust > 80 else 6
             else:
 
@@ -570,7 +570,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                         "You alternate between long and slow thrusts, and the occasional quick one",
                         "You slowly slide back and forth near the entrance",
                         "She slides slowly back and forth along your cock"])
-                $ TempFocus += 10 if Player.focus < 70 else 9
+                $ TempFocus += 10 if Player.climax < 70 else 9
                 $ TempLust += 8 if 60 > GirlA.lust > 90 else 6
 
         $ GirlA.addiction -= 2
@@ -608,7 +608,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                         "You alternate between shallow rapid thrusts, and the occasional deep, slow one",
                         "You grind away at her",
                         "She grinds furiously back and forth along your cock"])
-                $ TempFocus += (TempLust2 + 8) if Player.focus < 60 else (TempLust2 + 4)
+                $ TempFocus += (TempLust2 + 8) if Player.climax < 60 else (TempLust2 + 4)
                 $ TempLust += (TempLust2 + 8) if 50 > GirlA.lust > 80 else (TempLust2 + 2)
 
             elif action_speed:
@@ -619,7 +619,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                         "You alternate between long and slow thrusts, and the occasional rapid ones",
                         "You slowly slide back and forth near her rim",
                         "She slides slowly back and forth along your cock, teasing you"])
-                $ TempFocus += (TempLust2 + 8) if Player.focus < 60 else (TempLust2 + 3)
+                $ TempFocus += (TempLust2 + 8) if Player.climax < 60 else (TempLust2 + 3)
                 $ TempLust += (TempLust2 + 7) if 30 > GirlA.lust > 70 else (TempLust2 + 3)
         else:
 
@@ -632,7 +632,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                         "She bounces rapidly against your cock",
                         "You pound away at her",
                         "She slides rapidly back and forth along your cock, but seems a bit uncomfortable"])
-                $ TempFocus += (TempLust2 + 5) if Player.focus < 60 else (TempLust2 + 3)
+                $ TempFocus += (TempLust2 + 5) if Player.climax < 60 else (TempLust2 + 3)
                 $ TempLust += (TempLust2 + 4) if 50 > GirlA.lust > 80 else (TempLust2 + 2)
 
             elif action_speed:
@@ -642,7 +642,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                         "You slowly grind back and forth across her rear",
                         "You slowly slide back and forth near her rim",
                         "She slides slowly back and forth along your cock"])
-                $ TempFocus += (TempLust2 + 5) if Player.focus < 60 else (TempLust2 + 3)
+                $ TempFocus += (TempLust2 + 5) if Player.climax < 60 else (TempLust2 + 3)
                 $ TempLust += (TempLust2 + 5) if 50 > GirlA.lust > 70 else (TempLust2 + 2)
 
         if TempLust2:
@@ -674,7 +674,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                 "You alternate between shallow rapid thrusts, and the occasional deep, slow one",
                                 "You pound away at her",
                                 "She grinds furiously back and forth along your cock"])
-                $ TempFocus += 18 if Player.focus > 60 else 12
+                $ TempFocus += 18 if Player.climax > 60 else 12
                 $ TempLust += 14 if GirlA.lust > 80 else 9
             else:
 
@@ -685,7 +685,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                 "You alternate between long and slow thrusts, and the occasional quick one",
                                 "You slowly slide back and forth near the rim",
                                 "She slides slowly back and forth along your cock, teasing you"])
-                $ TempFocus += 12 if Player.focus > 60 else 9
+                $ TempFocus += 12 if Player.climax > 60 else 9
                 $ TempLust += 12 if 50 < GirlA.lust < 90 else 8
 
         elif GirlA.used_to_anal:
@@ -698,7 +698,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                 "You alternate between shallow rapid thrusts, and the occasional deep, slow one",
                                 "You pound away at her",
                                 "She grinds furiously back and forth along your cock"])
-                $ TempFocus += 12 if Player.focus > 60 else 8
+                $ TempFocus += 12 if Player.climax > 60 else 8
                 $ TempLust += 12 if GirlA.lust > 80 else 6
 
             elif action_speed:
@@ -709,7 +709,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                 "You alternate between long and slow thrusts, and the occasional quick one",
                                 "You slowly slide back and forth near the rim",
                                 "She slides slowly back and forth along your cock"])
-                $ TempFocus += 13 if Player.focus > 60 else 8
+                $ TempFocus += 13 if Player.climax > 60 else 8
                 $ TempLust += 8 if 70 > GirlA.lust > 90 else 4
         else:
 
@@ -722,7 +722,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                 "She bounces rapidly against your cock, occasionally popping out and having to stick it back in",
                                 "You pound away at her",
                                 "She moves rapidly back and forth along your cock, but seems a bit uncomfortable"])
-                $ TempFocus += 10 if Player.focus > 60 else 8
+                $ TempFocus += 10 if Player.climax > 60 else 8
                 $ TempLust += 2 if GirlA.lust > 80 else -3
 
             elif action_speed:
@@ -732,7 +732,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                 "You slowly grind back and forth inside her",
                                 "You slowly slide back and forth near the rim",
                                 "She slides slowly back and forth along your cock"])
-                $ TempFocus += 10 if Player.focus > 60 else 6
+                $ TempFocus += 10 if Player.climax > 60 else 6
                 $ TempLust += 4 if GirlA.lust > 60 else -1
 
         if GirlA.used_to_anal > 1:
@@ -752,7 +752,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "You pass your hands gently over her warm breasts",
                                     "Her firm nipples catch on the fabric of her top as you grasp her warm flesh",
                                     "She gasps as you grasp her under her_top"])
-            $ TempFocus += 2 if Player.focus < 40 else 1
+            $ TempFocus += 2 if Player.climax < 40 else 1
             $ TempLust += 4 if GirlA.lust > 50 else 2
         elif not GirlA.top_pulled_up and GirlA.Clothes["top"]:
 
@@ -760,7 +760,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "You pass your hands gently over her warm breasts",
                                     "Her nipples catch on the fabric of her top as you grasp her warm flesh, you can see them stiffen",
                                     "She gasps as you grasp her under her " + GirlA.Clothes[top].name])
-            $ TempFocus += 2 if Player.focus < 50 else 1
+            $ TempFocus += 2 if Player.climax < 50 else 1
             $ TempLust += 4 if GirlA.lust > 50 else 2
         elif not GirlA.top_pulled_up and GirlA.Clothes["bra"]:
 
@@ -768,7 +768,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "You pass your hands gently over her warm breasts",
                                     "Her nipples catch on the fabric of her " + GirlA.Clothes["bra"] + " as you grasp her warm flesh, you can see them stiffen",
                                     "She gasps as you grasp her under her " + GirlA.Clothes[bra].name])
-            $ TempFocus += 3 if Player.focus < 60 else 2
+            $ TempFocus += 3 if Player.climax < 60 else 2
             $ TempLust += 5 if GirlA.lust > 50 else 2
         elif GirlA.Clothes["piercings"]:
 
@@ -776,14 +776,14 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "You pass your hands gently over her warm breasts, and blow across her pierced nipples",
                                     "Her piercings catch lightly on your fingers as you grasp her warm flesh, you can see the nipples stiffen",
                                     "She gasps as you lightly thumb across her pierced nipples"])
-            $ TempFocus += 4 if Player.focus < 70 else 2
+            $ TempFocus += 4 if Player.climax < 70 else 2
             $ TempLust += 6 if GirlA.lust > 40 else 4
         else:
             $ line = line + renpy.random.choice(["You reach out and massage her glorious breasts",
                                     "You pass your hands gently over her warm breasts, and blow across her nipples",
                                     "Her nipples catch lightly on your fingers as you grasp her warm flesh, you can see them stiffen",
                                     "She gasps as you lightly thumb her rigid nipples"])
-            $ TempFocus += 4 if Player.focus < 60 else 2
+            $ TempFocus += 4 if Player.climax < 60 else 2
             $ TempLust += 6 if GirlA.lust > 50 else 3
         if D20S > 18:
             if GirlA == KittyX:
@@ -801,7 +801,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                         "You gently nibble at her nipples as you suck on them through the layered tops",
                                         "You  place a nipple between your lips, and give it a quick tug through the " + GirlA.Clothes["top"],
                                         "She gasps as you gently nibble her rigid nipples poking through her tops"])
-            $ TempFocus += 2 if Player.focus < 50 else 1
+            $ TempFocus += 2 if Player.climax < 50 else 1
             $ TempLust += 2 if GirlA.lust < 30 else 1
         elif not GirlA.top_pulled_up and GirlA.Clothes["top"]:
 
@@ -811,7 +811,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                         "You slowly lick her nipples through her moist_top",
                                         "You gently place a nipple between your lips, and draw it out until it releases with a *pop*",
                                         "She gasps as you lightly lick her rigid nipples, poking through her_top"])
-            $ TempFocus += 2 if Player.focus < 50 else 1
+            $ TempFocus += 2 if Player.climax < 50 else 1
             $ TempLust += 5 if GirlA.lust > 50 else 3
         elif not GirlA.top_pulled_up and GirlA.Clothes["bra"]:
 
@@ -820,7 +820,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                         "You slowly lick her nipples through her moist " + GirlA.Clothes["bra"],
                                         "You gently place a nipple between your lips, and draw it out until it releases with a *pop*",
                                         "She gasps as you lightly lick her rigid nipples, poking through her " + GirlA.Clothes[bra].name])
-            $ TempFocus += 4 if Player.focus < 60 else 3
+            $ TempFocus += 4 if Player.climax < 60 else 3
             $ TempLust += 5 if GirlA.lust > 50 else 2
         elif GirlA.Clothes["piercings"]:
 
@@ -830,7 +830,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "You slowly lick around, and then blow across her nipples",
                                     "You gently place a pierced nipple between your lips, and draw it out until it releases with a *pop*",
                                     "She gasps as you lightly lick her rigid nipples"])
-            $ TempFocus += 5 if Player.focus < 70 else 4
+            $ TempFocus += 5 if Player.climax < 70 else 4
             $ TempLust += 10 if GirlA.lust > 40 else 7
             $ GirlA.addiction -= 2
         else:
@@ -840,7 +840,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "You slowly lick around, and then blow across her nipples",
                                     "You gently place a nipple between your lips, and draw it out until it releases with a *pop*",
                                     "She gasps as you lightly lick her rigid nipples"])
-            $ TempFocus += 5 if Player.focus < 60 else 3
+            $ TempFocus += 5 if Player.climax < 60 else 3
             $ TempLust += 10 if GirlA.lust > 50 else 7
             $ GirlA.addiction -= 2
 
@@ -855,7 +855,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                         "She gasps as you stroke her warm thighs through the_pants",
                                         "You draw your hand from her knee to mid-thigh, and she gasps a little",
                                         "You slide a hand up her inner thigh, to just below her . . ."])
-            $ TempFocus += 1 if Player.focus < 50 else 0
+            $ TempFocus += 1 if Player.climax < 50 else 0
             $ TempLust += 1 if GirlA.lust < 50 else 0
         elif GirlA.wearing_skirt and GirlA.Clothes["hose"] in ["tights", "pantyhose"]:
 
@@ -864,7 +864,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                         "Her legs twitch a bit beneath her_skirt",
                                         "She gasps as you stroke her lightly covered thighs",
                                         "You slide a hand up her inner thigh, to just below her . . "])
-            $ TempFocus += 2 if Player.focus < 40 else 0
+            $ TempFocus += 2 if Player.climax < 40 else 0
             $ TempLust += 2 if GirlA.lust < 40 else 0
             $ GirlA.addiction -= 1 if D20S > 10 else 0
         elif GirlA.wearing_skirt and GirlA.Clothes["hose"]:
@@ -874,7 +874,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                         "Her legs twitch a bit beneath her_skirt",
                                         "She gasps as you stroke her warm thighs",
                                         "You slide a hand up her inner thigh, to just above the hose"])
-            $ TempFocus += 2 if Player.focus < 50 else 0
+            $ TempFocus += 2 if Player.climax < 50 else 0
             $ TempLust += 2 if GirlA.lust < 50 else 0
             $ GirlA.addiction -= 1 if D20S > 10 else 0
         elif GirlA.wearing_skirt:
@@ -885,7 +885,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                         "She gasps as you stroke her warm thighs",
                                         "You draw your hand from her knee to mid-thigh, and she gasps a little",
                                         "You slide a hand up her inner thigh, to just her_skirt"])
-            $ TempFocus += 2 if Player.focus < 50 else 0
+            $ TempFocus += 2 if Player.climax < 50 else 0
             $ TempLust += 2 if GirlA.lust < 50 else 0
             $ GirlA.addiction -= 2 if D20S > 10 else 1
         elif GirlA.Clothes["hose"] in ["tights", "pantyhose"]:
@@ -896,7 +896,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                         "She gasps as you stroke her warm thighs",
                                         "You slide a hand up her inner thigh, the smooth faberic creasing",
                                         "You slide a hand up her inner thigh, to just below her. . "])
-            $ TempFocus += 2 if Player.focus < 40 else 0
+            $ TempFocus += 2 if Player.climax < 40 else 0
             $ TempLust += 2 if GirlA.lust < 40 else 0
             $ GirlA.addiction -= 1 if D20S > 10 else 0
         elif GirlA.Clothes["hose"]:
@@ -907,7 +907,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                         "She gasps as you stroke her warm thighs",
                                         "You slide a hand up her inner thigh, to just above the hose",
                                         "You slide a hand up her inner thigh, to just below her. . "])
-            $ TempFocus += 2 if Player.focus < 50 else 0
+            $ TempFocus += 2 if Player.climax < 50 else 0
             $ TempLust += 2 if GirlA.lust < 50 else 0
             $ GirlA.addiction -= 1 if D20S > 10 else 0
         else:
@@ -917,7 +917,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                         "She gasps as you stroke her warm thighs",
                                         "You draw your hand from her knee to mid-thigh, and she gasps a little",
                                         "You slide a hand up her inner thigh, to just below her. . "])
-            $ TempFocus += 2 if Player.focus < 50 else 0
+            $ TempFocus += 2 if Player.climax < 50 else 0
             $ TempLust += 2 if GirlA.lust < 50 else 0
             $ GirlA.addiction -= 2 if D20S > 10 else 1
 
@@ -972,7 +972,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ TempFocus += 2
                 $ TempLust += 2
 
-            $ TempFocus += 4 if Player.focus < 50 else 3
+            $ TempFocus += 4 if Player.climax < 50 else 3
             $ TempLust += 6 if GirlA.lust > 40 else 3
             $ GirlA.addiction -= 2
         else:
@@ -1025,7 +1025,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                     "She gasps as you rub her bare pussy",
                                                     "You slide a hand up her inner thigh, she moans a little as you reach the point where they meet"])
                     if D20S <= 10:
-                        $ TempFocus += 3 if Player.focus < 50 else 1
+                        $ TempFocus += 3 if Player.climax < 50 else 1
                         $ TempLust += 4 if GirlA.lust > 40 else 2
                         $ GirlA.addiction -= 2
                     else:
@@ -1068,7 +1068,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                 "She gasps as you reach under her and lightly stroke her ass",
                                                 "You slide a hand up her inner thigh, she moans a little as you reach the point where they meet"])
                 if D20S <= 10:
-                    $ TempFocus += 3 if Player.focus < 50 else 1
+                    $ TempFocus += 3 if Player.climax < 50 else 1
                     $ TempLust += 4 if GirlA.lust > 40 else 2
                     $ GirlA.addiction -= 2
                 else:
@@ -1076,11 +1076,11 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                     $ TempLust += 1
 
             if D20S > 10:
-                $ TempFocus += 3 if Player.focus < 50 else 1
+                $ TempFocus += 3 if Player.climax < 50 else 1
                 $ TempLust += 4 if GirlA.lust > 40 else 2
                 $ GirlA.addiction -= 2
             else:
-                $ TempFocus += 2 if Player.focus < 50 else 1
+                $ TempFocus += 2 if Player.climax < 50 else 1
                 $ TempLust += 2 if GirlA.lust > 40 else 1
             if GirlA.Clothes["piercings"] and D20S <= 3:
                 "You tug on her piercing with your thumb, then let it snap back"
@@ -1101,7 +1101,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                     "You put your hand against her mound and lick the surface of her_pants",
                                                     "With a little nibble, you tug at the denim",
                                                     "She gasps as you reach under her warm lips and lightly stroke her ass"])
-            $ TempFocus += 1 if Player.focus < 70 else 0
+            $ TempFocus += 1 if Player.climax < 70 else 0
             $ TempLust += 3 if GirlA.lust > 60 else 2
         else:
             if GirlA.wearing_skirt:
@@ -1153,7 +1153,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                         "You slowly lick into her gap and she gasps as you press the walls aside",
                                                         "She gasps as you reach under her warm lips and lightly stroke her ass"])
                     if D20S <= 10:
-                        $ TempFocus += 3 if Player.focus < 70 else 1
+                        $ TempFocus += 3 if Player.climax < 70 else 1
                         $ TempLust += 4 if GirlA.lust > 60 else 2
                         $ GirlA.addiction -= 3
                     else:
@@ -1206,7 +1206,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                     "You slowly lick into her gap and she gasps as you press the walls aside",
                                                     "She gasps as you reach under her warm lips and lightly stroke her ass"])
                 if D20S <= 10:
-                    $ TempFocus += 3 if Player.focus < 70 else 1
+                    $ TempFocus += 3 if Player.climax < 70 else 1
                     $ TempLust += 4 if GirlA.lust > 60 else 2
                     $ GirlA.addiction -= 3
                 else:
@@ -1214,11 +1214,11 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                     $ TempLust += 1
 
             if D20S > 10:
-                $ TempFocus += 4 if Player.focus < 70 else 1
+                $ TempFocus += 4 if Player.climax < 70 else 1
                 $ TempLust += 10 if GirlA.lust > 60 else 5
                 $ GirlA.addiction -= 3
             else:
-                $ TempFocus += 2 if Player.focus < 50 else 1
+                $ TempFocus += 2 if Player.climax < 50 else 1
                 $ TempLust += 5 if GirlA.lust > 60 else 3
             if GirlA.Clothes["piercings"] and D20S <= 3:
                 "You tug on her piercing with your teeth, then let it snap back"
@@ -1273,7 +1273,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                 "She gasps as you rub her bare hole",
                                                 "You slide a hand up her inner thigh, she moans a little as it slides betweek her cheeks"])
                 if D20S <= 10:
-                    $ TempFocus += 2 if Player.focus < 50 else 1
+                    $ TempFocus += 2 if Player.climax < 50 else 1
                     $ TempLust += 3 if GirlA.lust > 40 else 2
                     $ GirlA.addiction -= 1
                 else:
@@ -1313,7 +1313,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                             "She gasps as you reach under her and lightly stroke her ass",
                                             "You slide a hand up her inner thigh, she moans a little as it slides betweek her cheeks"])
             if D20S <= 10:
-                $ TempFocus += 2 if Player.focus < 50 else 1
+                $ TempFocus += 2 if Player.climax < 50 else 1
                 $ TempLust += 3 if GirlA.lust > 40 else 2
                 $ GirlA.addiction -= 1
             else:
@@ -1321,11 +1321,11 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ TempLust += 1
 
         if D20S > 10:
-            $ TempFocus += 2 if Player.focus < 50 else 1
+            $ TempFocus += 2 if Player.climax < 50 else 1
             $ TempLust += 3 if GirlA.lust > 40 else 2
             $ GirlA.addiction -= 1
         else:
-            $ TempFocus += 2 if Player.focus < 50 else 1
+            $ TempFocus += 2 if Player.climax < 50 else 1
             $ TempLust += 2 if GirlA.lust > 40 else 1
 
 
@@ -1378,7 +1378,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                 "You press into her and she gasps as you  slide a finger into her anus",
                                                 "You rub her pussy with your thumb as you dive into her anus with your middle finger"])
 
-        $ TempFocus += 2 if Player.focus < 50 else 1
+        $ TempFocus += 2 if Player.climax < 50 else 1
         $ TempLust += 6 if GirlA.lust > 70 else 3
         if not GirlA.used_to_anal:
             $ TempLust -= 3
@@ -1399,7 +1399,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                         "She gasps as you press on her asshole through the thick fabric",
                                                         "You put your hand against her mound and lick the surface of her_pants",
                                                         "With a little nibble, you tug at the denim"])
-            $ TempFocus += 1 if Player.focus < 70 else 0
+            $ TempFocus += 1 if Player.climax < 70 else 0
             $ TempLust += 1 if GirlA.lust < 60 else 0
         else:
             if GirlA.wearing_skirt:
@@ -1442,7 +1442,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                         "You put your hand against her mound and lick around her rim",
                                                         "You slowly lick into her gap and she gasps as you press the rim apart"])
                     if D20S <= 10:
-                        $ TempFocus += 2 if Player.focus < 70 else 0
+                        $ TempFocus += 2 if Player.climax < 70 else 0
                         $ TempLust += 3 if GirlA.lust > 60 else 1
                         $ GirlA.addiction -= 3
                     else:
@@ -1489,7 +1489,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                     "You slowly lick into her gap and she gasps as you press the walls aside",
                                                     "She gasps as you reach under her warm lips and lightly stroke her ass"])
                 if D20S <= 10:
-                    $ TempFocus += 2 if Player.focus < 70 else 0
+                    $ TempFocus += 2 if Player.climax < 70 else 0
                     $ TempLust += 3 if GirlA.lust > 60 else 1
                     $ GirlA.addiction -= 3
                 else:
@@ -1497,11 +1497,11 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                     $ TempLust += 1
 
             if D20S > 10:
-                $ TempFocus += 3 if Player.focus < 70 else 0
+                $ TempFocus += 3 if Player.climax < 70 else 0
                 $ TempLust += 9 if GirlA.lust > 60 else 4
                 $ GirlA.addiction -= 3
             else:
-                $ TempFocus += 1 if Player.focus < 50 else 0
+                $ TempFocus += 1 if Player.climax < 50 else 0
                 $ TempLust += 4 if GirlA.lust > 60 else 2
 
         $ TempLust += 2 if GirlA.used_to_anal > 1 else 0
@@ -1512,17 +1512,17 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
         if GirlA.wearing_pants and not GirlA.upskirt:
             $ line = renpy.random.choice(["You rub the dildo against the outside of her_pants",
                                         "You slap the dildo lightly against her mound"])
-            $ TempFocus += 1 if Player.focus < 50 else 0
+            $ TempFocus += 1 if Player.climax < 50 else 0
             $ TempLust += 3 if GirlA.lust < 50 else 1
         elif GirlA.hose_number() >= 10:
             $ line = renpy.random.choice(["You rub the dildo against the outside of her_tights",
                                         "You slap the dildo lightly at the outside of her_tights"])
-            $ TempFocus += 1 if Player.focus < 50 else 0
+            $ TempFocus += 1 if Player.climax < 50 else 0
             $ TempLust += 3 if GirlA.lust < 50 else 1
         elif GirlA.Clothes["hose"] in ["tights", "pantyhose"]:
             $ line = renpy.random.choice(["You rub the dildo against the outside of her hose",
                                         "You slap the dildo lightly at the outside of her hose"])
-            $ TempFocus += 1 if Player.focus < 50 else 0
+            $ TempFocus += 1 if Player.climax < 50 else 0
             $ TempLust += 3 if GirlA.lust < 50 else 1
         else:
             if GirlA.wearing_skirt and GirlA.Clothes["underwear"]:
@@ -1530,7 +1530,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                             "You slide the toy deep into her pussy",
                                             "She gasps as you rotate the dildo within her tight pussy",
                                             "You rub her clit with your thumb as you dive into her puss with the rubber phallus"])
-                $ TempFocus += 2 if Player.focus < 50 else 1
+                $ TempFocus += 2 if Player.climax < 50 else 1
                 $ TempLust += 8 if GirlA.lust > 70 else 5
             elif GirlA.wearing_skirt:
                 $ line = renpy.random.choice(["You push her skirt aside, and slide the dildo into her tight hole",
@@ -1538,7 +1538,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                             "You lift her skirt a bit and she gasps as you slide the dildo firmly into her tight puss",
                                             "She gasps as you rotate the dildo within her slit",
                                             "You rub her clit with your thumb as you dive into her pussy with the rubber phallus"])
-                $ TempFocus += 2 if Player.focus < 50 else 1
+                $ TempFocus += 2 if Player.climax < 50 else 1
                 $ TempLust += 8 if GirlA.lust > 70 else 5
             elif GirlA.Clothes["underwear"] and not GirlA.Clothes["underwear"] and GirlA.Clothes["underwear"] and not GirlA.Clothes["underwear"].state:
                 $ line = renpy.random.choice(["You push her panties aside, and slide the dildo into her tight pussy",
@@ -1547,7 +1547,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                             "She gasps as you rub her tight pussy with the toy",
                                             "You rub her clit with your thumb as you dive into her pussy with the dildo",
                                             "You reach into her gap and she gasps as you slide the dildo in and press against her tight slit through the thin material"])
-                $ TempFocus += 2 if Player.focus < 50 else 1
+                $ TempFocus += 2 if Player.climax < 50 else 1
                 $ TempLust += 8 if GirlA.lust > 70 else 5
             else:
                 $ line = renpy.random.choice(["You reach out and slide the dildo along her mound",
@@ -1557,7 +1557,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                             "She gasps as you rub her clit with the hard rubber",
                                             "You rub her clit with your thumb as you dive into her pussy with the dildo",
                                             "You reach into her gap and she gasps as you slide the toy across and press it into her wet pussy"])
-                $ TempFocus += 3 if Player.focus < 50 else 1
+                $ TempFocus += 3 if Player.climax < 50 else 1
                 $ TempLust += 10 if GirlA.lust > 70 else 8
 
 
@@ -1565,17 +1565,17 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
         if GirlA.wearing_pants and not GirlA.upskirt:
             $ line = renpy.random.choice(["You rub the dildo against the outside of her_pants",
                                         "You slap the dildo lightly against her ass"])
-            $ TempFocus += 1 if Player.focus < 50 else 0
+            $ TempFocus += 1 if Player.climax < 50 else 0
             $ TempLust += 3 if GirlA.lust < 50 else 1
         elif GirlA.hose_number() >= 10:
             $ line = renpy.random.choice(["You rub the dildo against the outside of her_tights",
                                         "You slap the dildo lightly at the outside of her_tights"])
-            $ TempFocus += 1 if Player.focus < 50 else 0
+            $ TempFocus += 1 if Player.climax < 50 else 0
             $ TempLust += 3 if GirlA.lust < 50 else 1
         elif GirlA.Clothes["hose"] in ["tights", "pantyhose"]:
             $ line = renpy.random.choice(["You rub the dildo against the outside of her hose",
                                         "You slap the dildo lightly at the outside of her hose"])
-            $ TempFocus += 1 if Player.focus < 50 else 0
+            $ TempFocus += 1 if Player.climax < 50 else 0
             $ TempLust += 3 if GirlA.lust < 50 else 1
         else:
             if GirlA.wearing_skirt and GirlA.Clothes["underwear"]:
@@ -1583,7 +1583,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                             "You slide the toy deep into her ass",
                                             "She gasps as you rotate the dildo within her tight asshole",
                                             "You rub her clit with your thumb as you dive into her ass with the rubber phallus"])
-                $ TempFocus += 2 if Player.focus < 50 else 1
+                $ TempFocus += 2 if Player.climax < 50 else 1
                 $ TempLust += 8 if GirlA.lust > 70 else 5
             elif GirlA.wearing_skirt:
                 $ line = renpy.random.choice(["You push her skirt aside, and slide the dildo into her tight hole",
@@ -1591,7 +1591,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                             "You lift her skirt a bit and she gasps as you slide the dildo firmly into her tight anus",
                                             "She gasps as you rotate the dildo within her ass",
                                             "You rub her clit with your thumb as you dive into her ass with the rubber phallus"])
-                $ TempFocus += 2 if Player.focus < 50 else 1
+                $ TempFocus += 2 if Player.climax < 50 else 1
                 $ TempLust += 8 if GirlA.lust > 70 else 5
             elif GirlA.Clothes["underwear"] and not GirlA.Clothes["underwear"] and GirlA.Clothes["underwear"] and not GirlA.Clothes["underwear"].state:
                 $ line = renpy.random.choice(["You push her panties aside, and slide the dildo into her tight ass",
@@ -1600,7 +1600,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                             "She gasps as you rub her tight asshole with the toy",
                                             "You rub her clit with your thumb as you dive into her asshole with the dildo",
                                             "You reach into her gap and she gasps as you slide the dildo in and press against her tight anus through the thin material"])
-                $ TempFocus += 2 if Player.focus < 50 else 1
+                $ TempFocus += 2 if Player.climax < 50 else 1
                 $ TempLust += 8 if GirlA.lust > 70 else 5
             else:
                 $ line = renpy.random.choice(["You reach out and slide the dildo between her cheeks",
@@ -1610,7 +1610,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                             "She gasps as you rub her anus with the hard rubber",
                                             "You rub her clit with your thumb as you dive into her asshole with the dildo",
                                             "You reach into her gap and she gasps as you slide the toy across and press it into her firm anus"])
-                $ TempFocus += 3 if Player.focus < 50 else 1
+                $ TempFocus += 3 if Player.climax < 50 else 1
                 $ TempLust += 10 if GirlA.lust > 70 else 6
             if not GirlA.used_to_anal:
                 $ TempLust -= 3
@@ -1639,7 +1639,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             else:
                 $ line = line + "_She just seems to be looking it over"
                 $ TempLust += 2 if GirlA.lust < 40 else 0
-                $ TempFocus += -3 if Player.focus > 50 else 2
+                $ TempFocus += -3 if Player.climax > 50 else 2
 
             $ GirlA.addiction -= 1 if D20S > 10 else 2
             return
@@ -1652,7 +1652,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                 "She moves very smoothly, stroking casually and very gently, like she's been doing this for years",
                                                 "You can't tell where she is at any moment, all you know is that it works"])
 
-                $ TempFocus += 20 if Player.focus > 70 else 5
+                $ TempFocus += 20 if Player.climax > 70 else 5
             else:
 
                 $ line = line + renpy.random.choice(["Her movements have become almost masterful, her slightest touch starts you twitching",
@@ -1661,7 +1661,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                 "She moves very smoothly, stroking casually and very gently, like she's been doing this for years",
                                                 "You can't tell where she is at any moment, all you know is that it works"])
 
-                $ TempFocus += 20 if Player.focus < 40 else 5
+                $ TempFocus += 20 if Player.climax < 40 else 5
 
         elif GirlA.Action_counter["footjob"] >= 3:
             if action_speed <= 1:
@@ -1671,7 +1671,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                 "Her lessons are paying off, she's really becoming very talented at this",
                                                 "She gently caresses the shaft, and brushes the balls in her other foot, giving them a light massage"])
 
-                $ TempFocus += 15 if Player.focus > 60 else 5
+                $ TempFocus += 15 if Player.climax > 60 else 5
             else:
 
                 $ line = line + renpy.random.choice(["She's begining to figure things out, her toes cause tingles as they caress the shaft",
@@ -1681,7 +1681,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                                 "Her lessons are paying off, she's really becoming very talented at this",
                                                 "She quickly strokes your cock, with a very deft pressure"])
 
-                $ TempFocus += 15 if Player.focus < 60 else 7
+                $ TempFocus += 15 if Player.climax < 60 else 7
         else:
 
             if action_speed <= 1:
@@ -1692,7 +1692,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                             "She nudges one of your balls too tightly, but stops when you wince",
                                             "She has a firm grip, and she's not letting go. This may take a few tries"])
 
-                $ TempFocus += 10 if Player.focus > 60 else 5
+                $ TempFocus += 10 if Player.climax > 60 else 5
             else:
                 $ line = line + renpy.random.choice(["She really wasn't prepared for speeding up, and your cock often slips between her feet",
                                             "She rapidly moves her feet up and down the shaft. She's a little rough at this, but at least she tries",
@@ -1701,7 +1701,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                             "She nudges one of your balls too tightly, but stops when you wince",
                                             "She has a firm grip, and she's not letting go. This train is out of control"])
 
-                $ TempFocus += 8 if Player.focus > 60 else 2
+                $ TempFocus += 8 if Player.climax > 60 else 2
 
         $ TempLust += 2 if GirlA.lust < 60 else 0
         $ TempLust += 3 if GirlA.Action_counter["footjob"] > 2 else 0
@@ -1720,7 +1720,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             else:
                 $ line = line + "_She just seems to be looking it over"
                 $ TempLust += 2 if GirlA.lust < 40 else 0
-                $ TempFocus += -3 if Player.focus > 50 else 2
+                $ TempFocus += -3 if Player.climax > 50 else 2
             return
 
         if psychic == "handjob" or not psychic:
@@ -1733,9 +1733,9 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "You can't tell where she is at any moment, all you know is that it works"])
             if action_speed <= 1:
 
-                $ TempFocus += 15 if Player.focus > 60 else 5
+                $ TempFocus += 15 if Player.climax > 60 else 5
             else:
-                $ TempFocus += 15 if Player.focus < 60 else 7
+                $ TempFocus += 15 if Player.climax < 60 else 7
             $ TempLust += 2 if GirlA.lust < 60 else 0
         elif psychic == "mouth":
             $ line = line + renpy.random.choice(["She masterfully bobs on your cock, and it twitches with each stroke",
@@ -1744,7 +1744,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                 "She's really getting good at this, alternating between deep suction and quick licks across the head",
                                 "She moves very smoothly, bobbing in and out like she's been doing this for years",
                                 "She puts the shaft into her mouth and her tounge swirls rapidly around it"])
-            $ TempFocus += 22 if Player.focus > 40 else 10
+            $ TempFocus += 22 if Player.climax > 40 else 10
             $ TempLust += 3 if GirlA.lust > 60 else 1
         elif psychic == "tits":
             $ line = renpy.random.choice([GirlA.name + " juggles her breast projections up and down around your cock",
@@ -1752,7 +1752,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                 GirlA.name + " has a smooth motion going now, gentle and precise",
                                 GirlA.name + " pauses to rub her nipples across the shaft",
                                 GirlA.name + " gently caresses the shaft between her tits"])
-            $ TempFocus += 15 if Player.focus < 60 else 5
+            $ TempFocus += 15 if Player.climax < 60 else 5
             $ TempLust += 6 if GirlA.lust > 60 else 3
         elif psychic == "sex" or psychic == "anal":
 
@@ -1762,7 +1762,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                             "You alternate between shallow rapid thrusts, and the occasional deep, slow one",
                             "You pound away at it",
                             "She grinds it furiously back and forth along your cock"])
-            $ TempFocus += 12 if Player.focus > 60 else 8
+            $ TempFocus += 12 if Player.climax > 60 else 8
             $ TempLust += 12 if GirlA.lust > 80 else 6
 
 
@@ -1780,8 +1780,8 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                         "Her tongue dances around yours",
                                         "She nibbles your ear as her hands slide across your back",
                                         "Your hands slide down her body as your lips press hers"])
-            $ TempFocus += 1 if Player.focus < 50 else 0
-            $ TempFocus += 1 if Player.focus < 90 else 0
+            $ TempFocus += 1 if Player.climax < 50 else 0
+            $ TempFocus += 1 if Player.climax < 90 else 0
             $ TempLust += 3 if GirlA.lust < 50 else 0
             $ TempLust += 1 if GirlA.lust < 90 else 0
         elif GirlA.Action_counter["kiss"] > 5 or GirlA == EmmaX:
@@ -1792,7 +1792,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                         "You squeeze her tightly as your lips connect",
                                         "Her tongue flickers out to meet yours",
                                         "Your hands slide down her body as your lips brush hers"])
-            $ TempFocus += 1 if Player.focus < 70 else 0
+            $ TempFocus += 1 if Player.climax < 70 else 0
             $ TempLust += 3 if GirlA.lust < 50 else 0
             $ TempLust += 1 if GirlA.lust < 90 else 0
         else:
@@ -1801,7 +1801,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                         "Her lips part slightly as you hold her close",
                                         "You squeeze her tightly as your lips connect",
                                         "Your hands slide down her body as your lips brush hers"])
-            $ TempFocus += 1 if Player.focus < 70 else 0
+            $ TempFocus += 1 if Player.climax < 70 else 0
             $ TempLust += 2 if GirlA.lust < 30 else 0
             $ TempLust += 1 if GirlA.lust < 70 else 0
     else:
@@ -1862,7 +1862,7 @@ label Offhand_Dialog(Girl=Primary, Templine=0):
                             " Her nipples catch lightly on your fingers as you grasp her warm flesh, you can feel them stiffen.",
                             " She gasps as you lightly thumb her rigid nipples."])
         $ PrimaryLust += 3
-        $ TempFocus += 2 if Player.focus < 90 else 0
+        $ TempFocus += 2 if Player.climax < 90 else 0
 
     elif Player.secondary_Action == "suck_breasts":
         if Girl.Clothes["bra"] or Girl.top_number() > 1:
@@ -1879,7 +1879,7 @@ label Offhand_Dialog(Girl=Primary, Templine=0):
                     " You gently place a nipple between your lips, and draw it out until it releases with a *pop*.",
                     " She gasps as you lightly lick her rigid nipples."])
         $ PrimaryLust += 4 if 60 < Girl.lust < 80 else 2
-        $ TempFocus += 3 if Player.focus < 90 else 0
+        $ TempFocus += 3 if Player.climax < 90 else 0
 
     elif Player.secondary_Action == "fondle_pussy":
         if Girl.pubes and D20X >= 15:
@@ -1894,7 +1894,7 @@ label Offhand_Dialog(Girl=Primary, Templine=0):
                         " You reach between her legs and she gasps as you stroke along her crevice.",
                         " You slide a hand up her inner thigh, she moans a little as you reach the point where they meet."])
         $ PrimaryLust += 4 if 60 < Girl.lust < 90 else 2
-        $ TempFocus += 4 if Player.focus < 90 else 0
+        $ TempFocus += 4 if Player.climax < 90 else 0
 
     elif Player.secondary_Action == "eat_pussy":
         if Girl.bottom_number() <= 5 and Girl.underwear_number() <= 1:
@@ -1918,7 +1918,7 @@ label Offhand_Dialog(Girl=Primary, Templine=0):
                     " With a little nibble, you tug back the fabric.",
                     " You slowly lick into her gap and she gasps as you press the walls aside."])
         $ PrimaryLust += 5 if Girl.lust > 50 else 2
-        $ TempFocus += 4 if Player.focus < 90 else 0
+        $ TempFocus += 4 if Player.climax < 90 else 0
 
     elif Player.secondary_Action == "fondle_ass":
         $ line = renpy.random.choice([" You reach out and brush your hands across her ass.",
@@ -1928,8 +1928,8 @@ label Offhand_Dialog(Girl=Primary, Templine=0):
                     " She gasps as you reach under her and lightly stroke her ass.",
                     " You slide a hand up her inner thigh, she moans a little as it slides betweek her cheeks."])
         $ PrimaryLust += 2 if Girl.lust < 50 else 1
-        $ TempFocus += 1 if Player.focus < 50 else 0
-        $ TempFocus += 1 if Player.focus < 80 else 0
+        $ TempFocus += 1 if Player.climax < 50 else 0
+        $ TempFocus += 1 if Player.climax < 80 else 0
 
     elif Player.secondary_Action == "finger_ass":
         $ line = renpy.random.choice([" You reach out and slide a finger into her ass.",
@@ -1940,7 +1940,7 @@ label Offhand_Dialog(Girl=Primary, Templine=0):
                     " You reach into her gap and she gasps as you slide your hand across and press against her hole.",
                     " She gasps as you reach under her warm lips and lightly stroke her ass."])
         $ PrimaryLust += 3 if Girl.lust > 70 and Girl.used_to_anal else 1
-        $ TempFocus += 2 if Player.focus < 90 else 0
+        $ TempFocus += 2 if Player.climax < 90 else 0
 
     elif Player.secondary_Action == "jerking_off":
         if Player.primary_Action == "masturbation":
@@ -1966,7 +1966,7 @@ label Offhand_Dialog(Girl=Primary, Templine=0):
                             " As you do, you stoke yourself."])
         if "unseen" not in Girl.recent_history:
             $ PrimaryLust += 3 if 20 < Girl.lust < 70 else 2
-            $ TempFocus += 1 if Player.focus < 70 else 0
+            $ TempFocus += 1 if Player.climax < 70 else 0
         $ TempFocus += 5
     return
 
@@ -2026,10 +2026,10 @@ label Girl_Self_lines(GirlA=Primary, Mode = "T3", Action=girl_secondary_Action, 
                                 "She moves very smoothly, stroking casually and very gently, like she's been doing this for years",
                                 "Her hand slides slowly down your shaft"])
         if Player.primary_Action == "massage":
-            $ TempFocusX += 10 if Player.focus > 60 else 4
+            $ TempFocusX += 10 if Player.climax > 60 else 4
             $ TempFocusX += 2 if GirlA.Action_counter["handjob"] > 2 else 0
         else:
-            $ TempFocus += 10 if Player.focus > 60 else 4
+            $ TempFocus += 10 if Player.climax > 60 else 4
             $ TempFocus += 2 if GirlA.Action_counter["handjob"] > 2 else 0
 
         $ TempLustX += 2 if GirlA.lust < 60 else 1
@@ -2179,14 +2179,14 @@ label Girl_Self_lines(GirlA=Primary, Mode = "T3", Action=girl_secondary_Action, 
         $ TempLustX += 5 if Player.primary_Action == "masturbation" and GirlA != Partner else 0
 
         if Player.primary_Action == "massage":
-            $ TempFocusX += 4 if Player.focus < 50 else 3
+            $ TempFocusX += 4 if Player.climax < 50 else 3
             call change_Player_stat("focus", 200, TempFocusX)
             call change_Girl_stat(GirlA, "lust", TempLustX)
             return
         else:
             if "TempFocus" not in locals().keys():
                 "Tell Oni the error was \"[Player.primary_Action]\"."
-            $ TempFocus += 4 if Player.focus < 50 else 3
+            $ TempFocus += 4 if Player.climax < 50 else 3
 
         if Partner != GirlA:
 
@@ -2365,7 +2365,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, Templ
                                 ", stroking the shaft vigorously, lightly touching the tip",
                                 ", moving very smoothly, stroking casually",
                                 ", hand sliding slowly down your shaft"])
-        $ TempFocus += 3 if Player.focus > 70 else 2
+        $ TempFocus += 3 if Player.climax > 70 else 2
 
         $ TempLust += 2 if GirlA.lust < 60 else 0
         $ TempLust += 2 if GirlA.Action_counter["handjob"] > 2 else 0
@@ -2376,7 +2376,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, Templ
     elif Action == "blowjob":
         if action_speed > 2 and Player.primary_Action == "blowjob":
             $ line = "Since " + GirlB.name + " is working so hard, " + GirlA.name + " settles for the occasional nibble or lick."
-            $ TempFocus += 5 if Player.focus > 60 else 3
+            $ TempFocus += 5 if Player.climax > 60 else 3
             $ TempLust += 2 if GirlA.lust > 80 else 1
         else:
             if D20S <= 8 and (Player.primary_Action == "blowjob" or Player.primary_Action == "handjob"):
@@ -2403,7 +2403,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, Templ
                                     ", really starting to learn some clever tricks to making you feel good",
                                     ", licking her way down the shaft, and gently teasing the balls"])
 
-            $ TempFocus += 20 if Player.focus > 60 else 10
+            $ TempFocus += 20 if Player.climax > 60 else 10
             $ TempLust += 2 if GirlA.lust > 80 else 1
 
             $ GirlA.addiction -= 2
@@ -2788,7 +2788,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, Templ
         $ SecondaryLust += TempLust
         $ PrimaryLust += TempLust2
 
-    $ Player.focus += TempFocus
+    $ Player.climax += TempFocus
     return
 
 
@@ -3024,7 +3024,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
         call show_Girl(GirlA, y_position = 0.25, transition = ease)
 
         $ approval = 4
-        $ TempFocus += 3 if Player.focus > 70 else 2
+        $ TempFocus += 3 if Player.climax > 70 else 2
         $ TempLust += 2 if GirlA.lust < 60 else 0
         $ TempLust += 2 if GirlA.Action_counter["handjob"] > 2 else 0
         $ GirlA.addiction -= 1 if D20 > 10 else 2
@@ -3037,7 +3037,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
         $ Action = "blowjob"
         $ approval = 4
 
-        $ TempFocus += 20 if Player.focus > 60 else 10
+        $ TempFocus += 20 if Player.climax > 60 else 10
         $ TempLust += 2 if GirlA.lust > 80 else 1
         $ GirlA.addiction -= 2
 
@@ -3196,7 +3196,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
 
         $ GirlA.lust += TempLust
         $ GirlB.lust += TempLust2
-    $ Player.focus += TempFocus
+    $ Player.climax += TempFocus
 
     return
 

@@ -1380,7 +1380,7 @@ label morning_afterWood:
 
     $ Player.add_word(1, "interruption")
     $ shift_focus (Player.Party[0])
-    $ Player.focus = 30
+    $ Player.climax = 30
     if Player.primary_Action == "blowjob":
         ch_u "\"Slurp, slurp, slurp.\""
     else:

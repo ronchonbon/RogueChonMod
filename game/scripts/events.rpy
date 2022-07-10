@@ -16,7 +16,7 @@ init -2 python:
         def check_conditions(self):
             met = True
 
-            for condition in self.conditions
+            for condition in self.conditions:
                 if not eval(condition):
                     met = False
 

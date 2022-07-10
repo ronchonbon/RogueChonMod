@@ -402,12 +402,12 @@ label set_approval_bonus(Girl, Action_type, context):
     return approval_bonus
 
 label end_of_Action_round(Girl, Action_type):
-    $ Player.focus = 50 if not Player.semen and Player.focus >= 50 else Player.focus
+    $ Player.climax = 50 if not Player.semen and Player.climax >= 50 else Player.focus
 
-    if Player.focus >= 100 or Girl.lust >= 100:
+    if Player.climax >= 100 or Girl.lust >= 100:
         $ orgasmed = False
 
-        if Player.focus >= 100:
+        if Player.climax >= 100:
             $ orgasmed = True
 
         if orgasmed:
@@ -1330,11 +1330,11 @@ label first_Action_type_response(Girl, Action_type, context):
         if Girl.love >= 500 and "unsatisfied" not in Girl.recent_history:
             $ Girl.mouth = "smile"
             call satisfied_lines(Girl, Action_type)
-        elif Action_type in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"] and Girl.obedience <= 500 and Player.focus <= 20:
+        elif Action_type in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"] and Girl.obedience <= 500 and Player.climax <= 20:
             $ Girl.change_face("perplexed", 1)
 
             call was_that_enough_lines(Girl, Action_type)
-        elif Action_type in cock_Action_types and Player.focus <= 20:
+        elif Action_type in cock_Action_types and Player.climax <= 20:
             $ Girl.mouth = "sad"
 
             call was_that_enough_lines(Girl, Action_type)

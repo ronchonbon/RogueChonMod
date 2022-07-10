@@ -4,7 +4,7 @@ label enter_main_sex_menu(Girl):
 
         return
 
-    if Player.focus >= 95:
+    if Player.climax >= 95:
         "You're practically buzzing, the slightest breeze could set you off."
 
     if not Girl.remaining_Actions:
@@ -974,7 +974,7 @@ label try_something_else_menu(Girl, Action_type):
             "You release your concentration. . ."
 
             $ Player.focusing = 0
-            $ Player.focus += 15
+            $ Player.climax += 15
         "No, get back down there." if Action_type in ["handjob", "footjob", "titjob", "blowjob"]:
             if approval_check(Girl, 1200) or approval_check(Girl, 500, "O"):
                 call change_Girl_stat(Girl, "love", -5)

@@ -690,9 +690,9 @@ label frisky_class(Girl):
             if Girl.primary_Action and Girl.primary_Action.type == "handjob":
                 "[Girl.name]'s hand continues to caress your cock. . ."
 
-                $ Player.focus += 15 if Player.focus < 60 else 10
+                $ Player.climax += 15 if Player.climax < 60 else 10
 
-                if Player.focus >= 100:
+                if Player.climax >= 100:
                     "As you start to reach your limits, [Girl.name] places a hand over your cock."
                     "You jizz all over her hand."
 

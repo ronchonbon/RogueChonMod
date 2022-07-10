@@ -5,7 +5,7 @@ init -3:
     style choice_menu_window is window:
         background None
 
-    style choice_menu_nvl is button_nvl clear:
+    style choice_menu_text is button_text clear:
         size 24
 
     style choice_menu_button is button:
@@ -38,7 +38,7 @@ init -3:
         background None
         xpadding 5
 
-    style quick_button_nvl is default:
+    style quick_button_text is default:
         size 20
         idle_color "#8888"
         hover_color "#ccc"
@@ -131,7 +131,7 @@ screen input(prompt):
         input:
             size 25
             id "input"
-            style "input_nvl"
+            style "input_text"
             color "#6E6E6E"
 
     use quick_menu

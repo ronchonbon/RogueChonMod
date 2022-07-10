@@ -818,12 +818,12 @@ label Massage_Cycle:
             if line:
                 $ line3 = line + "_."
 
-        $ Player.focus = 50 if not Player.semen and Player.focus >= 50 else Player.focus
-        $ Player.focus = 80 if Player.focus >= 80 and girl_secondary_Action != "handjob" else Player.focus
+        $ Player.climax = 50 if not Player.semen and Player.climax >= 50 else Player.focus
+        $ Player.climax = 80 if Player.climax >= 80 and girl_secondary_Action != "handjob" else Player.focus
 
-        if Player.focus >= 100 or Girl.lust >= 100:
+        if Player.climax >= 100 or Girl.lust >= 100:
 
-            if Player.focus >= 100:
+            if Player.climax >= 100:
 
                 call Player_Cumming (Girl)
                 if "angry" in Girl.recent_history:

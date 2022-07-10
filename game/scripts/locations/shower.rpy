@@ -386,7 +386,7 @@ label Shower_Sex(Options=0, line=0):
 
         elif 4 <= Options[0] <= 5 and D20 >= 10:
 
-            $ Player.focus = 15
+            $ Player.climax = 15
             if Options[0] == 5:
                 $ staying_Girls[0].spunk["breasts"] = True
 

@@ -3,7 +3,7 @@ style Action_menu is default
 style Action_menu_window is window:
     background None
 
-style Action_menu_nvl is button_nvl clear:
+style Action_menu_text is button_text clear:
     size 24
 
 screen Action_menu():

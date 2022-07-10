@@ -481,7 +481,7 @@ label set_Girls_locations:
     hide black_screen onlayer black
 
     while leaving_Girls:
-        call expression leaving_Girls[0].tag + "_leaving"
+        call Girl_leaving(leaving_Girls[0])
 
         $ leaving_Girls.remove(leaving_Girls[0])
 
@@ -534,7 +534,7 @@ label wait:
         $ change_clothes()
 
     $ Player.semen += 1
-    $ Player.focus -= 5 if Player.focus >= 10 else 0
+    $ Player.climax -= 5 if Player.climax >= 10 else 0
 
     if Player.level < 10 and Player.XP >= Player.XP_goal:
         $ Player.XP_goal = int(1.15*Player.XP_goal + 100)

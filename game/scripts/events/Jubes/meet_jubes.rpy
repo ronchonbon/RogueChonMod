@@ -3,7 +3,7 @@ label meet_Jubes:
 
     pause 3.0
 
-    $ Player.focus = 30
+    $ Player.climax = 30
 
     $ JubesX.name = "???"
     $ JubesX.names = []

@@ -960,7 +960,9 @@ label Girl_leaving(Girl):
             elif Girl == StormX:
                 Girl.voice "I am planning to relax in your room."
             elif Girl == JubesX:
+                Girl.voice "I'm gonna go hang in your room."
             elif Girl == MystiqueX:
+                Girl.voice "I plan on spending some time in your room."
         elif Girl.location == "bg_pool":
             if Girl == RogueX:
                 Girl.voice "I'm headed for the pool."

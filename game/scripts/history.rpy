@@ -41,7 +41,7 @@ init python:
             for item in items:
                 self.update(item)
 
-            for type in all_types:
+            for type in all_Action_types:
                 self.update(type)
 
             return

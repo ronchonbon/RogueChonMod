@@ -44,7 +44,6 @@ label prologue:
     $ RogueX.location = Player.location
 
     call show_Girl(RogueX, x_position = stage_far_far_right, color_transform = color_transform, transition = easeinright)
-    $ shift_focus(RogueX)
 
     ch_r "What's that Prof? This new kid can negate mutant powers?"
 
@@ -363,6 +362,8 @@ label tour_parting:
 
 label prologue_end:
     $ round = 10
+
+    $ shift_focus(RogueX)
 
     show screen status_screen()
     show screen inventory_button()

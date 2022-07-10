@@ -307,6 +307,6 @@ label sex_cheats(Girl):
 
                 $ Girl.remaining_Actions = Girl.max_Actions
             "Cold shower":
-                $ Player.focus = 0
+                $ Player.climax = 0
             "Exit":
                 return

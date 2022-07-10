@@ -24,7 +24,7 @@ init -2 python:
 
             self.state = 0
 
-            if number_of_states > 1:
+            if self.number_of_states > 1:
                 self.undressed_state = 1
             else:
                 self.undressed_state = 0
@@ -98,11 +98,11 @@ init -2 python:
         def __init__(self, name, **kwargs):
             self.name = name
 
-            self.wear_in_public = kwargs.get(wear_in_public, False)
-            self.wear_in_private = kwargs.get(wear_in_private, False)
-            self.activewear = kwargs.get(activewear, False)
-            self.sleepwear = kwargs.get(sleepwear, False)
-            self.swimwear = kwargs.get(swimwear, False)
+            self.wear_in_public = kwargs.get("wear_in_public", False)
+            self.wear_in_private = kwargs.get("wear_in_private", False)
+            self.activewear = kwargs.get("activewear", False)
+            self.sleepwear = kwargs.get("sleepwear", False)
+            self.swimwear = kwargs.get("swimwear", False)
 
             self.types = ["face_tattoos", "face_piercings", "makeup", "gag",
                 "face_inner_accessory", "hair", "face_outer_accessory",

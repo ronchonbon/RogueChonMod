@@ -17,6 +17,8 @@ init python:
             self.location = "bg_entrance"
             self.traveling = False
 
+            self.climax = 0
+
             self.semen = 3
             self.max_semen = 3
 
@@ -48,8 +50,8 @@ init python:
             self.daily_History = self.History.daily
             self.permanent_History = self.History.permanent
 
-            Player.voice = ch_p
-            Player.text = ch_p_nvl
+            self.voice = ch_p
+            self.text = ch_p_nvl
 
     class GirlClass(object):
         def __init__(self, name, love, obedience, inhibition, lust):
@@ -931,6 +933,7 @@ init python:
                         self.Wardrobe.add_Clothing(Clothing)
 
             self.Wardrobe.choose_Outfits()
+            self.change_Outfit(self.Wardrobe.public_Outfit.name)
 
             return
 

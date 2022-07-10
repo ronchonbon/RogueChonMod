@@ -235,27 +235,28 @@ label text_menu(Girl):
     Player.text "Hey."
 
     if Girl == RogueX:
-        Girl.text "hey [Girl.player_petname]."
+        $ line = "hey [Girl.player_petname]."
     elif Girl == KittyX:
-        Girl.text "oh hey [Girl.player_petname]"
+        $ line = "oh hey [Girl.player_petname]"
     elif Girl == EmmaX:
-        Girl.text "Yes?"
+        $ line = "Yes?"
     elif Girl == LauraX:
-        Girl.text "Watsup?"
+        $ line = "Watsup?"
     elif Girl == JeanX:
-        Girl.text "hi"
+        $ line = "hi"
     elif Girl == StormX:
-        Girl.text "Hello."
+        $ line = "Hello."
     elif Girl == JubesX:
-        Girl.text "hey!"
+        $ line = "hey!"
     elif Girl == MystiqueX:
-        Girl.text "Yes, [Girl.player_petname]?"
+        $ line = "Yes, [Girl.player_petname]?"
 
     menu(nvl = True):
+        Girl.text "[line]"
         "Want to come over?":
             Player.text "Want to come over?"
 
-            call expression "summon_" + Girl.tag
+            call summon(Girl)
         "Never mind.":
             Player.text "Never mind."
 

@@ -1143,7 +1143,7 @@ label Les_Cycle(Girl=Player.focused_Girl):
         call lesbian_launch(Girl)
         $ Girl.lust_face()
 
-        if Player.focus < 100:
+        if Player.climax < 100:
 
             menu:
                 "Keep watching. . .":
@@ -1254,11 +1254,11 @@ label Les_Cycle(Girl=Player.focused_Girl):
         $ counter += 1
         $ round -= 1
 
-        $ Player.focus = 50 if not Player.semen and Player.focus >= 50 else Player.focus
+        $ Player.climax = 50 if not Player.semen and Player.climax >= 50 else Player.focus
 
-        if Player.focus >= 100 or Girl.lust >= 100:
+        if Player.climax >= 100 or Girl.lust >= 100:
 
-            if Player.focus >= 100:
+            if Player.climax >= 100:
 
                 if "unseen" not in Girl.recent_history:
                     call Player_Cumming (Girl)
@@ -1273,7 +1273,7 @@ label Les_Cycle(Girl=Player.focused_Girl):
                     $ line = "came"
                 else:
                     "You grunt and try to hold it in."
-                    $ Player.focus = 95
+                    $ Player.climax = 95
                     jump Les_Interupted
 
             if Girl.lust >= 100:
@@ -1291,7 +1291,7 @@ label Les_Cycle(Girl=Player.focused_Girl):
 
 
 
-        $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
+        $ Player.climax -= 12 if Player.focusing and Player.climax > 50 else 0
 
         if "unseen" in Girl.recent_history:
             if round == 10:

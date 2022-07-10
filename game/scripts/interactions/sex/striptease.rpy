@@ -2069,13 +2069,13 @@ label Girl_Stripping(Girl):
         call change_Girl_stat(Girl, "lust", 2)
         call change_Player_stat("focus", 200, 5)
 
-    if not Player.semen and Player.focus >= 50:
-        $ Player.focus = 50
+    if not Player.semen and Player.climax >= 50:
+        $ Player.climax = 50
 
-    if Player.focus >= 100 or Girl.lust >= 100:
+    if Player.climax >= 100 or Girl.lust >= 100:
 
 
-        if Player.focus >= 100:
+        if Player.climax >= 100:
 
             call Player_Cumming (Girl)
             if "angry" in Girl.recent_history:
@@ -2084,7 +2084,7 @@ label Girl_Stripping(Girl):
             if not Player.semen and Player.secondary_Action == "jerking_off":
                 "You're spitting dust here, maybe just watch quietly for a while."
                 $ Player.secondary_Action = None
-            if Player.focus > 80:
+            if Player.climax > 80:
                 jump Group_Strip_End
 
         if Girl.lust >= 100:

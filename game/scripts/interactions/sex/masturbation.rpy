@@ -30,7 +30,7 @@ label masturbation_cycle(Girl):
     while round > 0:
         $ stack_depth = renpy.call_stack_depth()
 
-        if Player.focus < 100:
+        if Player.climax < 100:
             call masturbation_menu(Girl)
 
             if _return != "continue":
@@ -41,12 +41,12 @@ label masturbation_cycle(Girl):
         $ counter += 1
         $ round -= 1
 
-        $ Player.focus = 50 if not Player.semen and Player.focus >= 50 else Player.focus
+        $ Player.climax = 50 if not Player.semen and Player.climax >= 50 else Player.focus
 
-        if Player.focus >= 100 or Girl.lust >= 100:
+        if Player.climax >= 100 or Girl.lust >= 100:
             $ orgasmed = False
 
-            if Player.focus >= 100:
+            if Player.climax >= 100:
                 $ orgasmed = True
 
             if orgasmed:

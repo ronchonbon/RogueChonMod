@@ -70,7 +70,7 @@ screen status_screen:
         has vbox
 
         hbox:
-            bar range 100 value Player.focus xmaximum 200 ymaximum 40 left_bar "images/barfullP.png" right_bar "images/baremptyP.png"
+            bar range 100 value Player.climax xmaximum 200 ymaximum 40 left_bar "images/barfullP.png" right_bar "images/baremptyP.png"
 
         hbox:
             bar range 100 value (Player.semen*20) xmaximum 200 ymaximum 40 left_bar "images/barfullS.png" right_bar "images/baremptyS.png"
