@@ -32,16 +32,16 @@ label Jean_Like:
 
     ch_j "You know. . . you're more fun to hang out with than I expected."
     $ line = "Y"
-    if JeanX.Action_counter["massage"] >= 5:
+    if JeanX.permanent_History["massage"] >= 5:
         call change_Girl_stat(JeanX, "lust", 5)
         ch_j "You give really good massages. . ."
         $ line = "and Y"
-    if JeanX.event_counter["orgasmed"]>= 10:
+    if JeanX.permanent_History["orgasmed"]>= 10:
         $ JeanX.change_face("sly", 1)
         call change_Girl_stat(JeanX, "lust", 5)
         ch_j "[line]ou -really- know how to finish them. . ."
         $ line = "and Y"
-        if JeanX.event_counter["orgasmed"]>= 30:
+        if JeanX.permanent_History["orgasmed"]>= 30:
             call change_Girl_stat(JeanX, "lust", 10)
             ch_j ". . . seriously. . ."
     if JeanX.seen_peen:
@@ -88,7 +88,7 @@ label Jean_Like:
                 ch_j "That's just precious!"
 
                 $ JeanX.change_face("sly", 1)
-                if JeanX.event_counter["orgasmed"]>= 10:
+                if JeanX.permanent_History["orgasmed"]>= 10:
                     ch_j "Look, you're pretty hot and all, and you can get it. . ."
                 else:
                     ch_j "Look, you're pretty hot and all. . ."

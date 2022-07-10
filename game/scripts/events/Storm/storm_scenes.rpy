@@ -142,7 +142,7 @@ label meet_Storm:
     "Greeting you at the top is what appears to be an indoor garden. Bright sunlight streams through the windows."
 
     $ StormX.location = "bg_storm"
-    $ StormX.change_Outfit("nude")
+    $ StormX.undress()
     $ StormX.change_face("normal", eyes = "side")
 
     call show_Girl(StormX, x_position = stage_center, color_transform = silhouette, transition = False)
@@ -581,7 +581,7 @@ label Storm_Nudity:
                 ch_s "If it would make you more comforable, then I would not mind it."
                 $ StormX.today_outfit_name = "default"
                 $ StormX.outfit_name = "default"
-                $ StormX.change_Outfit("default")
+                $ StormX.change_Outfit()
 
             "Should I get naked too?" if "naked" not in Player.recent_history:
                 $ StormX.change_face("surprised", mouth = "sucking")
@@ -848,7 +848,7 @@ label Storm_Hairtalk:
                 ch_s "I do not think that I should do that. . ."
         "Maybe some fondling?":
             call change_Girl_stat(StormX, "obedience", 2)
-            if approval_check(StormX, 900) or ((StormX.Action_counter["fondle_breasts"]+ StormX.Action_counter["fondle_pussy"] + StormX.Action_counter["fondle_ass"]) > 0):
+            if approval_check(StormX, 900) or ((StormX.permanent_History["fondle_breasts"]+ StormX.permanent_History["fondle_pussy"] + StormX.permanent_History["fondle_ass"]) > 0):
                 $ StormX.change_face("bemused", 1, eyes = "side")
                 pause 0.4
                 $ StormX.eyes = "leftside"
@@ -2252,7 +2252,7 @@ label Storm_Poolnight:
     $ taboo = 0
     $ StormX.taboo = 0
     $ StormX.change_face("sly", 1)
-    $ StormX.change_Outfit("nude")
+    $ StormX.undress()
     $ StormX.recent_history.append("poolnight")
     if "sexfriend" not in StormX.player_petnames:
         call show_Girl(StormX, x_position = 0.5, y_position = 0.6, sprite_layer = 1, color_transform = night, transition = easebottom)

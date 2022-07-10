@@ -243,7 +243,7 @@ init -2 python:
             return
 
         def undress(self, instant = False):
-            for type in reversed(self.removable):
+            for type in reversed(removable_Clothing_types):
                 if self.Clothes[type].name:
                     if not instant:
                         self.Clothes[type].take_off()
@@ -422,11 +422,11 @@ init -2 python:
             if not instant:
                 self.current_Outfit.undress(instant = instant)
 
-                for type in Outfit.intrinsic:
+                for type in intrinsic_Clothing_types:
                     if Outfit.Clothes[type]:
                         self.current_Outfit.add_Clothing(Outfit.Clothes[type])
 
-                for type in Outfit.removable:
+                for type in removable_Clothing_types:
                     if Outfit.Clothes[type].name:
                         Outfit.Clothes[type].state = Outfit.Clothes[type].undressed_state
 

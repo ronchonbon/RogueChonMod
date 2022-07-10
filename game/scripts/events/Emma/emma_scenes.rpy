@@ -1020,7 +1020,7 @@ label Emma_BF:
             call change_Girl_stat(EmmaX, "love", 25)
             call kiss_launch(EmmaX)
             "[EmmaX.name] wraps her arms around you and starts kissing you passionately."
-            $ EmmaX.Action_counter["kiss"] += 1
+            $ EmmaX.permanent_History["kiss"] += 1
         "Uhm, okay.":
             $ EmmaX.brows = "confused"
             "[EmmaX.name] seems a little put off by how casually you’re taking all this."
@@ -1033,7 +1033,7 @@ label Emma_BF:
                     call change_Girl_stat(EmmaX, "love", 30)
                     "[EmmaX.name] wraps her arms around you and starts kissing you passionately."
                     call kiss_launch(EmmaX)
-                    $ EmmaX.Action_counter["kiss"] += 1
+                    $ EmmaX.permanent_History["kiss"] += 1
                 "She wouldn't understand." if len(Player.Harem) == 1:
                     $ line = "no"
                 "They wouldn't be cool with that." if len(Player.Harem) > 1:
@@ -1357,7 +1357,7 @@ label Emma_Love_End:
     ch_e "So. . . now that we have some time together. . ."
     call change_Girl_stat(EmmaX, "lust", 10)
 
-    if not EmmaX.Action_counter["sex"]:
+    if not EmmaX.permanent_History["sex"]:
         ch_e "I think we've certainly waited long enough. . ."
     else:
         ch_e "Whatever do you intend to do about it?"
@@ -1976,7 +1976,7 @@ label Emma_Sexfriend:
                         call change_Girl_stat(EmmaX, "inhibition", 50)
                         call change_Girl_stat(EmmaX, "lust", 5)
                         "[EmmaX.name] leans in and gives you a passionate kiss."
-                        $ EmmaX.Action_counter["kiss"] += 1
+                        $ EmmaX.permanent_History["kiss"] += 1
                         ch_e "I can't wait to get started, [EmmaX.player_petname]."
                     "That's pretty slutty, [EmmaX.name].":
                         if approval_check(EmmaX, 2000):

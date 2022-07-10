@@ -1,6 +1,6 @@
 init -1 python:
 
-    def Clothing(Owner):
+    def Item(Owner):
         name = "black lace bra"
         string = "black_lace_bra"
 

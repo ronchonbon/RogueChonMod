@@ -12,7 +12,7 @@ label meet_Laura:
     $ LauraX.name = "???"
     $ LauraX.names = []
     $ LauraX.location = Player.location
-    $ LauraX.change_Outfit("default", instant = True)
+    $ LauraX.change_Outfit(instant = True)
 
     call get_color_transform
     $ color_transform = _return

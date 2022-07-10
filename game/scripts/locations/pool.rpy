@@ -34,7 +34,7 @@ label swim:
 
         python:
             for G in Changers:
-                G.change_Outfit("swimwear", instant = True)
+                G.change_Outfit(G.Wardrobe.swimming_Outfit.name, instant = True)
 
         hide black_screen onlayer black
 

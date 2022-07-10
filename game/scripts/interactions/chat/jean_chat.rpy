@@ -53,7 +53,7 @@ label Jean_Relationship:
                     call Harem_Initiation
                     "[JeanX.name] floats in and kisses you deeply."
                     $ JeanX.change_face("kiss", 1)
-                    $ JeanX.Action_counter["kiss"] += 1
+                    $ JeanX.permanent_History["kiss"] += 1
                 elif JeanX.obedience >= 500:
                     $ JeanX.change_face("perplexed")
                     ch_j "\"Dating\". . . I mean. . ."
@@ -102,7 +102,7 @@ label Jean_Relationship:
                     call Harem_Initiation
                     "[JeanX.name] floats in and kisses you."
                     $ JeanX.change_face("kiss", 1)
-                    $ JeanX.Action_counter["kiss"] += 1
+                    $ JeanX.permanent_History["kiss"] += 1
                 elif JeanX.love >= 600 and approval_check(JeanX, 1500):
                     $ JeanX.change_face("smile", 1)
                     call change_Girl_stat(JeanX, "love", 5)
@@ -117,7 +117,7 @@ label Jean_Relationship:
                     $ JeanX.change_face("kiss", 1)
                     "[JeanX.name] gives you a quick kiss."
                     $ JeanX.change_face("sly", 1)
-                    $ JeanX.Action_counter["kiss"] += 1
+                    $ JeanX.permanent_History["kiss"] += 1
                 elif JeanX.obedience >= 500:
                     $ JeanX.change_face("sad")
                     ch_j "That's not really where we're at."
@@ -580,9 +580,9 @@ label Jean_SexChat:
                                 call change_Girl_stat(JeanX, "love", 5)
                                 call change_Girl_stat(JeanX, "lust", 10)
                                 ch_j "I really like it too!"
-                            elif JeanX.Action_counter["sex"] >= 5:
+                            elif JeanX.permanent_History["sex"] >= 5:
                                 ch_j "Well I don't mind that."
-                            elif not JeanX.Action_counter["sex"]:
+                            elif not JeanX.permanent_History["sex"]:
                                 $ JeanX.change_face("perplexed")
                                 ch_j "Oh? Who with?"
                             else:
@@ -599,9 +599,9 @@ label Jean_SexChat:
                                 call change_Girl_stat(JeanX, "love", 5)
                                 call change_Girl_stat(JeanX, "lust", 10)
                                 ch_j "I love it too!"
-                            elif JeanX.Action_counter["anal"] >= 10:
+                            elif JeanX.permanent_History["anal"] >= 10:
                                 ch_j "Yeah, it's. . . nice. . ."
-                            elif not JeanX.Action_counter["anal"]:
+                            elif not JeanX.permanent_History["anal"]:
                                 $ JeanX.change_face("perplexed")
                                 ch_j "Oh? Who with?"
                             else:
@@ -618,9 +618,9 @@ label Jean_SexChat:
                                 call change_Girl_stat(JeanX, "love", 5)
                                 call change_Girl_stat(JeanX, "lust", 5)
                                 ch_j "I can't say I hate it either. . ."
-                            elif JeanX.Action_counter["blowjob"] >= 10:
+                            elif JeanX.permanent_History["blowjob"] >= 10:
                                 ch_j "Yeah, you're surprisingly tasty."
-                            elif not JeanX.Action_counter["blowjob"]:
+                            elif not JeanX.permanent_History["blowjob"]:
                                 $ JeanX.change_face("perplexed")
                                 ch_j "Oh? Who with?"
                             else:
@@ -637,9 +637,9 @@ label Jean_SexChat:
                                 call change_Girl_stat(JeanX, "love", 5)
                                 call change_Girl_stat(JeanX, "lust", 7)
                                 ch_j "Yeah, I enjoy that too. . ."
-                            elif JeanX.Action_counter["titjob"] >= 10:
+                            elif JeanX.permanent_History["titjob"] >= 10:
                                 ch_j "Nice, right?"
-                            elif not JeanX.Action_counter["titjob"]:
+                            elif not JeanX.permanent_History["titjob"]:
                                 $ JeanX.change_face("perplexed")
                                 ch_j "Oh? Who with?"
                             else:
@@ -658,9 +658,9 @@ label Jean_SexChat:
                                 call change_Girl_stat(JeanX, "love", 5)
                                 call change_Girl_stat(JeanX, "lust", 7)
                                 ch_j "I do like using my feet. . ."
-                            elif JeanX.Action_counter["footjob"] >= 10:
+                            elif JeanX.permanent_History["footjob"] >= 10:
                                 ch_j "I like it too . . ."
-                            elif not JeanX.Action_counter["footjob"]:
+                            elif not JeanX.permanent_History["footjob"]:
                                 $ JeanX.change_face("perplexed")
                                 ch_j "Oh? Who with?"
                             else:
@@ -677,9 +677,9 @@ label Jean_SexChat:
                                 call change_Girl_stat(JeanX, "love", 5)
                                 call change_Girl_stat(JeanX, "lust", 7)
                                 ch_j "I do have quite the touch. . ."
-                            elif JeanX.Action_counter["handjob"] >= 10:
+                            elif JeanX.permanent_History["handjob"] >= 10:
                                 ch_j "I like it too . . ."
-                            elif not JeanX.Action_counter["handjob"]:
+                            elif not JeanX.permanent_History["handjob"]:
                                 $ JeanX.change_face("perplexed")
                                 ch_j "Oh? Who with?"
                             else:
@@ -688,7 +688,7 @@ label Jean_SexChat:
                             $ JeanX.player_favorite_action = "handjob"
                         "Feeling you up.":
 
-                            $ counter = JeanX.Action_counter["fondle_breasts"]+ JeanX.Action_counter["fondle_thighs"]+ JeanX.Action_counter["suck_breasts"] + JeanX.Action_counter["hotdog"]
+                            $ counter = JeanX.permanent_History["fondle_breasts"]+ JeanX.permanent_History["fondle_thighs"]+ JeanX.permanent_History["suck_breasts"] + JeanX.permanent_History["hotdog"]
                             $ JeanX.change_face("sly")
                             if JeanX.player_favorite_action == "fondle":
                                 call change_Girl_stat(JeanX, "lust", 3)
@@ -717,9 +717,9 @@ label Jean_SexChat:
                                 call change_Girl_stat(JeanX, "love", 5)
                                 call change_Girl_stat(JeanX, "lust", 5)
                                 ch_j "I. . . do too, ok? . ."
-                            elif JeanX.Action_counter["kiss"] >= 10:
+                            elif JeanX.permanent_History["kiss"] >= 10:
                                 ch_j "Yeah, it's fun . . ."
-                            elif not JeanX.Action_counter["kiss"]:
+                            elif not JeanX.permanent_History["kiss"]:
                                 $ JeanX.change_face("perplexed")
                                 ch_j "Oh? Who with?"
                             else:
@@ -1005,7 +1005,7 @@ label Jean_Chitchat(O=0, Options = ["default", "default", "default"]):
                 $ Player.Phonebook.append(JeanX)
                 return
 
-        if "hungry" not in JeanX.traits and (JeanX.event_counter["swallowed"] + JeanX.had_chat[2]) >= 10 and JeanX.location == Player.location:
+        if "hungry" not in JeanX.traits and (JeanX.permanent_History["swallowed"] + JeanX.had_chat[2]) >= 10 and JeanX.location == Player.location:
             call Jean_Hungry
             return
 
@@ -1035,7 +1035,7 @@ label Jean_Chitchat(O=0, Options = ["default", "default", "default"]):
 
 
 
-        if JeanX.Action_counter["kiss"] >= 5:
+        if JeanX.permanent_History["kiss"] >= 5:
 
             $ Options.append("kissed")
         if "dangerroom" in Player.daily_history:
@@ -1055,25 +1055,25 @@ label Jean_Chitchat(O=0, Options = ["default", "default", "default"]):
 
             if "lingerie" not in JeanX.had_chat:
                 $ Options.append("lingerie")
-        if JeanX.Action_counter["handjob"]:
+        if JeanX.permanent_History["handjob"]:
 
             $ Options.append("handy")
-        if JeanX.event_counter["swallowed"]:
+        if JeanX.permanent_History["swallowed"]:
 
             $ Options.append("swallowed")
         if "cleaned" in JeanX.daily_history or "painted" in JeanX.daily_history:
 
             $ Options.append("facial")
-        if JeanX.event_counter["sleepover"]:
+        if JeanX.permanent_History["sleepover"]:
 
             $ Options.append("sleepwear")
-        if JeanX.event_counter["creampied"] or JeanX.event_counter["anal_creampied"]:
+        if JeanX.permanent_History["creampied"] or JeanX.permanent_History["anal_creampied"]:
 
             $ Options.append("creampie")
-        if JeanX.Action_counter["sex"] or JeanX.Action_counter["anal"]:
+        if JeanX.permanent_History["sex"] or JeanX.permanent_History["anal"]:
 
             $ Options.append("sexed")
-        if JeanX.Action_counter["anal"]:
+        if JeanX.permanent_History["anal"]:
 
             $ Options.append("anal")
 
@@ -1218,7 +1218,7 @@ label Jean_Chitchat(O=0, Options = ["default", "default", "default"]):
 
     elif Options[0] == "fondled":
 
-        if JeanX.Action_counter["fondle_breasts"]+ JeanX.Action_counter["fondle_pussy"] + JeanX.Action_counter["fondle_ass"] >= 15:
+        if JeanX.permanent_History["fondle_breasts"]+ JeanX.permanent_History["fondle_pussy"] + JeanX.permanent_History["fondle_ass"] >= 15:
             ch_j "Hey, give me a nice, hard, rubdown. . ."
         else:
             ch_j "Hey, gimme another massage. . . "

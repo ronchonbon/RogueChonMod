@@ -431,14 +431,14 @@ label frisky_class(Girl):
                 "Try and slip your hand to her lap." if context != "fondle_pussy":
                     $ context = "fondle_pussy"
 
-                    if approval_check(Girl, 1200) and Girl.Action_counter["fondle_pussy"] and Girl.SEXP >= 40:
+                    if approval_check(Girl, 1200) and Girl.permanent_History["fondle_pussy"] and Girl.SEXP >= 40:
                         $ Girl.change_face("sly")
                         call change_Girl_stat(Girl, "love", 5)
                         call change_Girl_stat(Girl, "obedience", 5)
                         call change_Girl_stat(Girl, "inhibition", 5)
 
                         "[Girl.name] gets a mischievous grin and places her hand on your arm."
-                    elif approval_check(Girl, 1400) and Girl.Action_counter["fondle_pussy"]:
+                    elif approval_check(Girl, 1400) and Girl.permanent_History["fondle_pussy"]:
                         $ Girl.change_face("smile")
                         call change_Girl_stat(Girl, "love", 3)
                         call change_Girl_stat(Girl, "obedience", 7)
@@ -499,14 +499,14 @@ label frisky_class(Girl):
                 "Start fondling her tits." if context != "fondle_breasts":
                     $ context = "fondle_breasts"
 
-                    if approval_check(Girl, 1100) and Girl.Action_counter["fondle_breasts"]and Girl.SEXP >= 40:
+                    if approval_check(Girl, 1100) and Girl.permanent_History["fondle_breasts"]and Girl.SEXP >= 40:
                         $ Girl.change_face("sly")
                         call change_Girl_stat(Girl, "love", 5)
                         call change_Girl_stat(Girl, "obedience", 5)
                         call change_Girl_stat(Girl, "inhibition", 3)
 
                         "[Girl.name] closes her eyes and caresses your arm."
-                    elif approval_check(Girl, 1300) and Girl.Action_counter["fondle_breasts"]:
+                    elif approval_check(Girl, 1300) and Girl.permanent_History["fondle_breasts"]:
                         $ Girl.change_face("smile", 1)
                         call change_Girl_stat(Girl, "love", 3)
                         call change_Girl_stat(Girl, "obedience", 7)
@@ -549,14 +549,14 @@ label frisky_class(Girl):
 
                     if "handjob" in Girl.recent_history:
                         "[Girl.name] grins and her hand grasps your cock again."
-                    elif approval_check(Girl, 1200) and Girl.Action_counter["handjob"] and Girl.SEXP >= 40:
+                    elif approval_check(Girl, 1200) and Girl.permanent_History["handjob"] and Girl.SEXP >= 40:
                         $ Girl.change_face("sly")
                         call change_Girl_stat(Girl, "love", 5)
                         call change_Girl_stat(Girl, "obedience", 5)
                         call change_Girl_stat(Girl, "inhibition", 5)
 
                         "[Girl.name] gets a mischievous grin and her hand starts to caress your crotch."
-                    elif approval_check(Girl, 1400) and Girl.Action_counter["fondle_pussy"]:
+                    elif approval_check(Girl, 1400) and Girl.permanent_History["fondle_pussy"]:
                         $ Girl.change_face("smile")
                         call change_Girl_stat(Girl, "love", 3)
                         call change_Girl_stat(Girl, "obedience", 7)
@@ -596,7 +596,7 @@ label frisky_class(Girl):
                         "She begins to gently stroke it. . ."
 
                         if "handjob" not in Girl.recent_history:
-                            $ Girl.Action_counter["handjob"] += 1
+                            $ Girl.permanent_History["handjob"] += 1
 
                         $ D20 += 5
                 "Stop her handjob." if Girl.primary_Action and Girl.primary_Action.type == "handjob":
@@ -628,7 +628,7 @@ label frisky_class(Girl):
                         $ D20 += 2
 
             if not Girl.primary_Action and Player.semen and "stophand" not in Girl.recent_history:
-                if approval_check(Girl, 1200) and approval_check(Girl, 400, "I") and Girl.Action_counter["handjob"] and Girl.SEXP >= 40:
+                if approval_check(Girl, 1200) and approval_check(Girl, 400, "I") and Girl.permanent_History["handjob"] and Girl.SEXP >= 40:
                     $ Girl.change_face("sly")
 
                     "[Girl.name] gets a mischievous grin and her hand starts to caress your crotch."
@@ -658,7 +658,7 @@ label frisky_class(Girl):
                             "She begins to gently stroke it. . ."
 
                             if "handjob" not in Girl.recent_history:
-                                $ Girl.Action_counter["handjob"] += 1
+                                $ Girl.permanent_History["handjob"] += 1
 
                             $ D20 += 10
                         "Stop her.":
@@ -698,11 +698,11 @@ label frisky_class(Girl):
 
                     $ Player.semen -= 1
 
-                    if (Girl.Action_counter["blowjob"] and approval_check(Girl, 1200)) or Girl == JubesX:
+                    if (Girl.permanent_History["blowjob"] and approval_check(Girl, 1200)) or Girl == JubesX:
                         "She quickly licks it all up."
 
                         $ Girl.addiction -= 20
-                        $ Girl.event_counter["swallowed"] += 1
+                        $ Girl.permanent_History["swallowed"] += 1
                         $ Girl.recent_history.append("swallow")
                         $ Girl.daily_history.append("swallow")
                     else:

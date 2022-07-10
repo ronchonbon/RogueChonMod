@@ -6,7 +6,7 @@ label meet_Emma:
 
     $ EmmaX.name = "???"
     $ EmmaX.teaching = True
-    $ EmmaX.change_Outfit("hero", instant = True)
+    $ EmmaX.change_Outfit(instant = True)
 
     call add_Girls(EmmaX)
 

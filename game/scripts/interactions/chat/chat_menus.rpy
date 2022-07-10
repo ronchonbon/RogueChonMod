@@ -235,9 +235,9 @@ label text_menu(Girl):
     Player.text "Hey."
 
     if Girl == RogueX:
-        $ line = "hey [Girl.player_petname]."
+        $ line = "hey " + Girl.player_petname + "."
     elif Girl == KittyX:
-        $ line = "oh hey [Girl.player_petname]"
+        $ line = "oh hey " + Girl.player_petname + "."
     elif Girl == EmmaX:
         $ line = "Yes?"
     elif Girl == LauraX:
@@ -249,7 +249,7 @@ label text_menu(Girl):
     elif Girl == JubesX:
         $ line = "hey!"
     elif Girl == MystiqueX:
-        $ line = "Yes, [Girl.player_petname]?"
+        $ line = "Yes, " + Girl.player_petname + "?"
 
     menu(nvl = True):
         Girl.text "[line]"

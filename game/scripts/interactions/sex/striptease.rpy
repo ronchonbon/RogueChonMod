@@ -1425,7 +1425,7 @@ label strip_ultimatum(Girl):
 
 
 label Group_Strip(Girl):
-    $ check_who_is_present
+    call check_who_is_present
 
     if not Present:
         "Nobody's here."
@@ -1548,7 +1548,7 @@ label Group_Strip(Girl):
 
         $ dancing_Girls[counter].recent_history.append("stripping")
         $ dancing_Girls[counter].daily_history.append("stripping")
-        $ dancing_Girls[counter].Action_counter["striptease"] += 1
+        $ dancing_Girls[counter].permanent_History["striptease"] += 1
         $ dancing_Girls[counter].remaining_Actions -= 1
 
         $ temp_approval_bonus = approval_bonus
@@ -1563,8 +1563,8 @@ label Group_Strip(Girl):
             $ temp_approval_bonus += 15
         elif "ex" in dancing_Girls[counter].traits:
             $ temp_approval_bonus -= 40
-        elif dancing_Girls[counter].event_counter["forced"] and not dancing_Girls[counter].forced:
-            $ temp_approval_bonus -= 5*dancing_Girls[counter].event_counter["forced"]
+        elif dancing_Girls[counter].permanent_History["forced"] and not dancing_Girls[counter].forced:
+            $ temp_approval_bonus -= 5*dancing_Girls[counter].permanent_History["forced"]
 
         $ stored_approval_bonus.append(temp_approval_bonus)
 
@@ -2112,11 +2112,11 @@ label Girl_Stripping(Girl):
                     $ approval_bonus = 10
                 elif approval_bonus <= 20:
                     $ approval_bonus += 1
-            if taboo and Girl.Action_counter["striptease"] <= 10:
+            if taboo and Girl.permanent_History["striptease"] <= 10:
                 call change_Girl_stat(Girl, "obedience", 7)
-            elif taboo or Girl.Action_counter["striptease"] <= 10:
+            elif taboo or Girl.permanent_History["striptease"] <= 10:
                 call change_Girl_stat(Girl, "obedience", 5)
-            elif Girl.Action_counter["striptease"] <= 50:
+            elif Girl.permanent_History["striptease"] <= 50:
                 call change_Girl_stat(Girl, "obedience", 3)
         "Keep Dancing. . ." if "keepdancing" in Girl.recent_history:
             $ Girl.eyes = "sexy"
@@ -2153,11 +2153,11 @@ label Girl_Stripping(Girl):
 
             if "watching" not in Girl.recent_history:
                 if "keepdancing" not in Girl.recent_history:
-                    if taboo and Girl.Action_counter["striptease"] <= 10:
+                    if taboo and Girl.permanent_History["striptease"] <= 10:
                         call change_Girl_stat(Girl, "inhibition", 3)
-                    elif taboo or Girl.Action_counter["striptease"] <= 10:
+                    elif taboo or Girl.permanent_History["striptease"] <= 10:
                         call change_Girl_stat(Girl, "inhibition", 1)
-                elif Girl.Action_counter["striptease"] <= 50:
+                elif Girl.permanent_History["striptease"] <= 50:
                     call change_Girl_stat(Girl, "inhibition", 2)
                     call change_Girl_stat(Girl, "lust", 2)
                 $ Girl.recent_history.append("watching")

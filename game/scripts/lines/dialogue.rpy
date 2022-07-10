@@ -1548,7 +1548,7 @@ label maybe_later_lines(Girl, Action_type):
 
 label pull_back_before_get_in_lines(Girl, Action_type):
     if Girl == RogueX:
-        if Girl.Action_counter[action]:
+        if Girl.permanent_History[action]:
             $ lines = ["Well ok, " + Girl.player_petname + "_, no harm done. Just give me a little warning next time.",
                 "Well ok, " + Girl.player_petname + "_, it has been kinda fun."]
         else:
@@ -6334,7 +6334,7 @@ label maybe_blowjob_instead_lines(Girl):
     return
 
 label maybe_handjob_instead_lines(Girl):
-    if Girl.Action_counter["handjob"]:
+    if Girl.permanent_History["handjob"]:
         if Girl == RogueX:
             $ lines = ["Maybe you'd settle for a handy?"]
         elif Girl == KittyX:

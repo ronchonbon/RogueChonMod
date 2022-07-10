@@ -859,7 +859,7 @@ label Massage_Cycle:
                         ch_l "Good job."
                     elif Girl == JeanX:
                         ch_j "Wow, you really know what you're doing there. . ."
-                        if Girl.event_counter["orgasmed"]< 2:
+                        if Girl.permanent_History["orgasmed"]< 2:
                             call change_Girl_stat(Girl, "love", 2)
                             call change_Girl_stat(Girl, "obedience", 2)
                     elif Girl == StormX:
@@ -891,7 +891,7 @@ label Massage_After:
         call change_Girl_stat(Girl, "love", 2)
         call change_Girl_stat(Girl, "obedience", 2)
 
-    $ Girl.Action_counter["massage"] += 1
+    $ Girl.permanent_History["massage"] += 1
     $ Girl.remaining_Actions -= 1
     $ Girl.addiction_rate += 2 if Girl.addiction_rate < 5 else Girl.addiction_rate
     if "addictive" in Player.traits:
@@ -925,7 +925,7 @@ label Massage_After:
         elif Girl == JubesX:
             ch_v "That really did the trick. . ."
             ch_v "Head, shoulder, knees, toes. . ."
-    elif Girl.Action_counter["massage"] == 1:
+    elif Girl.permanent_History["massage"] == 1:
 
         if Girl == RogueX:
             ch_r "That was very relaxing, [Girl.player_petname]."
@@ -967,7 +967,7 @@ label Massage_BadEnd:
     $ Girl.change_face("angry", 1)
     if "massagefail" in Girl.recent_history:
 
-        $ Girl.Action_counter["massage"] += 1
+        $ Girl.permanent_History["massage"] += 1
         $ Girl.remaining_Actions -= 1
         $ Girl.addiction_rate += 2 if Girl.addiction_rate < 5 else Girl.addiction_rate
         if "addictive" in Player.traits:

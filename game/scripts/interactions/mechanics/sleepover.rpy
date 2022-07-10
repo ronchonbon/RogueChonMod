@@ -78,14 +78,14 @@ label sleepover:
 
     $ asked = False
 
-    if Player.Party[0].event_counter["sleepover"] >= 3 and approval_check(Player.Party[0], 800):
+    if Player.Party[0].permanent_History["sleepover"] >= 3 and approval_check(Player.Party[0], 800):
         if Player.Party[0].home == Player.location:
             Player.Party[0].voice "Are you staying over tonight?"
         else:
             Player.Party[0].voice "I'm staying over, right?"
 
         $ asked = True
-    elif Player.Party[0].event_counter["sleepover"] < 3 and approval_check(Player.Party[0], 1100, "LI"):
+    elif Player.Party[0].permanent_History["sleepover"] < 3 and approval_check(Player.Party[0], 1100, "LI"):
         $ Player.Party[0].change_face("bemused", blushing = 1)
 
         if Player.Party[0] == RogueX:
@@ -133,7 +133,7 @@ label sleepover:
         menu:
             extend ""
             "Sure.":
-                if Player.Party[0].event_counter["sleepover"] <= 5:
+                if Player.Party[0].permanent_History["sleepover"] <= 5:
                     call change_Girl_stat(Player.Party[0], "love", 10)
                     call change_Girl_stat(Player.Party[0], "obedience", 10)
                     call change_Girl_stat(Player.Party[0], "obedience", 20)
@@ -204,11 +204,11 @@ label sleepover:
                 $ decision = "leave"
             "Ok, see you later then. Good night." if Player.Party[0].home != Player.location:
                 $ decision = "leave"
-            "Are you sure I can't stay the night? . ." if not Player.Party[0].event_counter["sleepover"] and Player.Party[0].home == Player.location:
+            "Are you sure I can't stay the night? . ." if not Player.Party[0].permanent_History["sleepover"] and Player.Party[0].home == Player.location:
                 $ decision = "please"
-            "Are you sure you can't stay? . ." if not Player.Party[0].event_counter["sleepover"] and Player.Party[0].home != Player.location:
+            "Are you sure you can't stay? . ." if not Player.Party[0].permanent_History["sleepover"] and Player.Party[0].home != Player.location:
                 $ decision = "please"
-            "That's not what you said the other night . ." if Player.Party[0].event_counter["sleepover"]:
+            "That's not what you said the other night . ." if Player.Party[0].permanent_History["sleepover"]:
                 if approval_check(Player.Party[0], 900) or approval_check(Player.Party[0], 700, "L") or approval_check(Player.Party[0], 500, "O"):
                     $ Player.Party[0].change_face("bemused", blushing = 1)
 
@@ -540,10 +540,7 @@ label sleepover:
 
     python:
         for G in Player.Party:
-            if "sleepwear" not in G.Wardrobe.Outfits:
-                G.change_Outfit("nude")
-            else:
-                G.change_Outfit("sleepwear")
+            G.change_Outfit(G.Wardrobe.sleeping_Outfit.name)
 
     if Player.Party[0] == RogueX:
         ch_r "Hmm, that's a bit more comfortable."
@@ -659,8 +656,10 @@ label morning_after:
 
     menu:
         extend ""
-        "It's always nice sleeping with you." if Player.Party[0].event_counter["sleepover"]:
-            if Player.Party[0].event_counter["sleepover"] < 5:
+        "It's always nice sleeping with you." if Player.Party[0].permanent_History["sleepover"]:
+            $ reaction = None
+
+            if Player.Party[0].permanent_History["sleepover"] < 5:
                 call change_Girl_stat(Player.Party[0], "love", 8)
                 call change_Girl_stat(Player.Party[0], "obedience", 10)
                 call change_Girl_stat(Player.Party[0], "inhibition", 8)
@@ -688,7 +687,7 @@ label morning_after:
             elif Player.Party[0] == JubesX:
                 ch_v "Yeah. . . it's nice having company. . ."
                 ch_v "You keep it so cozy. . ."
-        "I loved sleeping next to you." if not Player.Party[0].event_counter["sleepover"]:
+        "I loved sleeping next to you." if not Player.Party[0].permanent_History["sleepover"]:
             $ reaction = "nice"
 
             call change_Girl_stat(Player.Party[0], "love", 15)
@@ -698,12 +697,12 @@ label morning_after:
         "It was fun.":
             $ reaction = "fun"
 
-            if not Player.Party[0].event_counter["sleepover"]:
+            if not Player.Party[0].permanent_History["sleepover"]:
                 call change_Girl_stat(Player.Party[0], "love", 10)
                 call change_Girl_stat(Player.Party[0], "love", 8)
                 call change_Girl_stat(Player.Party[0], "obedience", 15)
                 call change_Girl_stat(Player.Party[0], "inhibition", 15)
-            elif Player.Party[0].event_counter["sleepover"] < 5:
+            elif Player.Party[0].permanent_History["sleepover"] < 5:
                 call change_Girl_stat(Player.Party[0], "love", 8)
                 call change_Girl_stat(Player.Party[0], "obedience", 10)
                 call change_Girl_stat(Player.Party[0], "inhibition", 8)
@@ -744,7 +743,7 @@ label morning_after:
 
                 Player.Party[0].voice "!!!"
 
-            if Player.Party[0].event_counter["sleepover"] < 5:
+            if Player.Party[0].permanent_History["sleepover"] < 5:
                 if Player.Party[0] == RogueX:
                     ch_r "It's not like I've had much experience sleeping next to someone. . ."
                 elif Player.Party[0] == KittyX:
@@ -782,7 +781,7 @@ label morning_after:
         "You need to learn to stick to your side.":
             $ reaction = "toss"
 
-            if Player.Party[0].event_counter["sleepover"] < 5:
+            if Player.Party[0].permanent_History["sleepover"] < 5:
                 call change_Girl_stat(Player.Party[0], "love", -8)
                 call change_Girl_stat(Player.Party[0], "obedience", 40)
             if approval_check(Player.Party[0], 500, "O"):
@@ -806,7 +805,7 @@ label morning_after:
                 elif Player.Party[0] == JubesX:
                     ch_v "I thought you wanted the attention. . ."
 
-                if Player.Party[0].event_counter["sleepover"] < 5:
+                if Player.Party[0].permanent_History["sleepover"] < 5:
                     call change_Girl_stat(Player.Party[0], "obedience", 8)
             else:
                 $ Player.Party[0].change_face("angry")
@@ -828,7 +827,7 @@ label morning_after:
                 elif Player.Party[0] == JubesX:
                     ch_v "I could just stay out of the bed entirely. . ."
 
-                if Player.Party[0].event_counter["sleepover"] < 5:
+                if Player.Party[0].permanent_History["sleepover"] < 5:
                     call change_Girl_stat(Player.Party[0], "inhibition", 20)
 
     if reaction == "nice":
@@ -926,8 +925,8 @@ label morning_after:
 
         menu:
             extend ""
-            "I always love sleeping with you too, [Player.Party[1].name]." if Player.Party[1].event_counter["sleepover"]:
-                if Player.Party[1].event_counter["sleepover"] < 5:
+            "I always love sleeping with you too, [Player.Party[1].name]." if Player.Party[1].permanent_History["sleepover"]:
+                if Player.Party[1].permanent_History["sleepover"] < 5:
                     call change_Girl_stat(Player.Party[1], "love", 8)
                     call change_Girl_stat(Player.Party[1], "obedience", 10)
                     call change_Girl_stat(Player.Party[1], "inhibition", 8)
@@ -948,7 +947,7 @@ label morning_after:
                     ch_s "And I enjoy it as well, [StormX.player_petname]."
                 elif Player.Party[1] == JubesX:
                     ch_v "Yeah. . . it's nice having company. . ."
-            "And it was great sleeping with you as well, [Player.Party[1].name]." if not Player.Party[1].event_counter["sleepover"]:
+            "And it was great sleeping with you as well, [Player.Party[1].name]." if not Player.Party[1].permanent_History["sleepover"]:
                 $ reaction = "nice"
 
                 call change_Girl_stat(Player.Party[1], "love", 15)
@@ -958,12 +957,12 @@ label morning_after:
             "I had fun sleeping with you too, [Player.Party[1].name].":
                 $ reaction = "fun"
 
-                if not Player.Party[1].event_counter["sleepover"]:
+                if not Player.Party[1].permanent_History["sleepover"]:
                     call change_Girl_stat(Player.Party[1], "love", 10)
                     call change_Girl_stat(Player.Party[1], "love", 8)
                     call change_Girl_stat(Player.Party[1], "obedience", 15)
                     call change_Girl_stat(Player.Party[1], "inhibition", 15)
-                elif Player.Party[1].event_counter["sleepover"] < 5:
+                elif Player.Party[1].permanent_History["sleepover"] < 5:
                     call change_Girl_stat(Player.Party[1], "love", 8)
                     call change_Girl_stat(Player.Party[1], "obedience", 10)
                     call change_Girl_stat(Player.Party[1], "inhibition", 8)
@@ -1089,7 +1088,7 @@ label morning_after:
 
                 Player.Party[1].voice "!!!"
 
-            if Player.Party[1].event_counter["sleepover"] < 5:
+            if Player.Party[1].permanent_History["sleepover"] < 5:
                 if Player.Party[1] == RogueX:
                     ch_r "It's not like I've had much experience sleeping next to someone. . ."
                 elif Player.Party[1] == KittyX:
@@ -1125,7 +1124,7 @@ label morning_after:
                 elif Player.Party[1] == JubesX:
                     ch_v "I could just stay out of the bed entirely. . ."
         elif reaction == "turn":
-            if Player.Party[1].event_counter["sleepover"] < 5:
+            if Player.Party[1].permanent_History["sleepover"] < 5:
                 call change_Girl_stat(Player.Party[1], "love", -8)
                 call change_Girl_stat(Player.Party[1], "obedience", 40)
             if approval_check(Player.Party[1], 500, "O"):
@@ -1149,7 +1148,7 @@ label morning_after:
                 elif Player.Party[1] == JubesX:
                     ch_v "I could just stay out of the bed entirely. . ."
 
-                if Player.Party[1].event_counter["sleepover"] < 5:
+                if Player.Party[1].permanent_History["sleepover"] < 5:
                     call change_Girl_stat(Player.Party[1], "obedience", 8)
             else:
                 $ Player.Party[1].change_face("angry")
@@ -1171,7 +1170,7 @@ label morning_after:
                 elif Player.Party[1] == JubesX:
                     ch_v "I could just stay out of the bed entirely. . ."
 
-                if Player.Party[1].event_counter["sleepover"] < 5:
+                if Player.Party[1].permanent_History["sleepover"] < 5:
                     call change_Girl_stat(Player.Party[1], "inhibition", 20)
 
         $ Player.Party[1].blushing = ""
@@ -1183,7 +1182,7 @@ label morning_after:
 
     python:
         for G in Player.Party:
-            G.event_counter["sleepover"] += 1
+            G.permanent_History["sleepover"] += 1
             G.change_Outfit()
 
     $ Player.Party = []
@@ -1229,13 +1228,13 @@ label Morningwood_Check(Girls = [0, -3]):
     if "chill" in Player.Party[0].traits:
         $ Girls[0] = 0
     else:
-        if Player.Party[0].Action_counter["blowjob"] >= 5 or approval_check(Player.Party[0], 900, "I"):
+        if Player.Party[0].permanent_History["blowjob"] >= 5 or approval_check(Player.Party[0], 900, "I"):
             $ Girls[0] += 3
-        elif Player.Party[0].Action_counter["blowjob"] and approval_check(Player.Party[0], 900):
+        elif Player.Party[0].permanent_History["blowjob"] and approval_check(Player.Party[0], 900):
             $ Girls[0] += 2
         elif approval_check(Player.Party[0], 1400):
             $ Girls[0] += 2
-        elif Player.Party[0].Action_counter["blowjob"] or approval_check(Player.Party[0], 900):
+        elif Player.Party[0].permanent_History["blowjob"] or approval_check(Player.Party[0], 900):
             $ Girls[0] += 1
 
         if "hungry" in Player.Party[0].traits and D20 >= 2:
@@ -1263,13 +1262,13 @@ label Morningwood_Check(Girls = [0, -3]):
         $ line = "yes"
 
     if len(Player.Party) >= 2:
-        if Player.Party[1].Action_counter["blowjob"] >= 5 or approval_check(Player.Party[1], 900, "I"):
+        if Player.Party[1].permanent_History["blowjob"] >= 5 or approval_check(Player.Party[1], 900, "I"):
             $ Girls[1] += 3
-        elif Player.Party[1].Action_counter["blowjob"] and approval_check(Player.Party[1], 900):
+        elif Player.Party[1].permanent_History["blowjob"] and approval_check(Player.Party[1], 900):
             $ Girls[1] += 2
         elif approval_check(Player.Party[1], 1400):
             $ Girls[1] += 2
-        elif Player.Party[1].Action_counter["blowjob"] or approval_check(Player.Party[1], 900):
+        elif Player.Party[1].permanent_History["blowjob"] or approval_check(Player.Party[1], 900):
             $ Girls[1] += 1
 
         if "hungry" in Player.Party[1].traits and D20 >= 2:

@@ -1690,7 +1690,7 @@ label Jubes_Fuckbuddy:
     call set_the_scene
     $ JubesX.outfit_name = "default"
     $ JubesX.today_outfit_name = "default"
-    $ JubesX.change_Outfit("default")
+    $ JubesX.change_Outfit()
     call show_Girl (JubesX)
     call set_Character_taboos
     $ Player.primary_Action = "masturbation"

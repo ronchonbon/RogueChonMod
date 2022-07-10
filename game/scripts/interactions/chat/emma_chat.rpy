@@ -170,7 +170,7 @@ label Emma_Relationship:
                     call Harem_Initiation
                     "[EmmaX.name] draws you in and kisses you deeply."
                     $ EmmaX.change_face("kiss", 1)
-                    $ EmmaX.Action_counter["kiss"] += 1
+                    $ EmmaX.permanent_History["kiss"] += 1
                 elif EmmaX.obedience >= 500:
                     $ EmmaX.change_face("perplexed")
                     ch_e "I don't believe \"dating\" would be the right term for it."
@@ -217,7 +217,7 @@ label Emma_Relationship:
                     call Harem_Initiation
                     "[EmmaX.name] leans in and kisses you deeply."
                     $ EmmaX.change_face("kiss", 1)
-                    $ EmmaX.Action_counter["kiss"] += 1
+                    $ EmmaX.permanent_History["kiss"] += 1
                 elif EmmaX.love >= 600 and approval_check(EmmaX, 1500):
                     $ EmmaX.change_face("smile", 1)
                     call change_Girl_stat(EmmaX, "love", 5)
@@ -232,7 +232,7 @@ label Emma_Relationship:
                     $ EmmaX.change_face("kiss", 1)
                     "[EmmaX.name] gives you a quick kiss."
                     $ EmmaX.change_face("sly", 1)
-                    $ EmmaX.Action_counter["kiss"] += 1
+                    $ EmmaX.permanent_History["kiss"] += 1
                 elif EmmaX.obedience >= 500:
                     $ EmmaX.change_face("sad")
                     ch_e "Let's keep things as they are, for now."
@@ -681,7 +681,7 @@ label Emma_SexChat:
                                 call change_Girl_stat(EmmaX, "love", 5)
                                 call change_Girl_stat(EmmaX, "lust", 10)
                                 ch_e "Oh. . . as chance would have it. . ."
-                            elif EmmaX.Action_counter["sex"]:
+                            elif EmmaX.permanent_History["sex"]:
                                 ch_e "I can see why."
                             else:
                                 $ EmmaX.change_face("perplexed")
@@ -697,9 +697,9 @@ label Emma_SexChat:
                                 call change_Girl_stat(EmmaX, "love", 5)
                                 call change_Girl_stat(EmmaX, "lust", 10)
                                 ch_e "{i}Mine too{/i}. . ."
-                            elif EmmaX.Action_counter["anal"] >= 10:
+                            elif EmmaX.permanent_History["anal"] >= 10:
                                 ch_e "It certainly is a workout. . ."
-                            elif not EmmaX.Action_counter["anal"]:
+                            elif not EmmaX.permanent_History["anal"]:
                                 $ EmmaX.change_face("perplexed")
                                 ch_e "Who's ass {i}are{/i} you fucking?"
                             else:
@@ -716,9 +716,9 @@ label Emma_SexChat:
                                 call change_Girl_stat(EmmaX, "love", 5)
                                 call change_Girl_stat(EmmaX, "lust", 5)
                                 ch_e "Hmm, you are delicious. . ."
-                            elif EmmaX.Action_counter["blowjob"] >= 10:
+                            elif EmmaX.permanent_History["blowjob"] >= 10:
                                 ch_e "I certainly can't complain . . ."
-                            elif not EmmaX.Action_counter["blowjob"]:
+                            elif not EmmaX.permanent_History["blowjob"]:
                                 $ EmmaX.change_face("perplexed")
                                 ch_e "Oh? Is some little whore sucking you off?"
                             else:
@@ -735,9 +735,9 @@ label Emma_SexChat:
                                 call change_Girl_stat(EmmaX, "love", 5)
                                 call change_Girl_stat(EmmaX, "lust", 7)
                                 ch_e "I really enjoy it too. . ."
-                            elif EmmaX.Action_counter["titjob"] >= 10:
+                            elif EmmaX.permanent_History["titjob"] >= 10:
                                 ch_e "I can't imagine why . . ."
-                            elif not EmmaX.Action_counter["titjob"]:
+                            elif not EmmaX.permanent_History["titjob"]:
                                 $ EmmaX.change_face("perplexed")
                                 ch_e "Oh, is someone else providing that service?"
                             else:
@@ -754,9 +754,9 @@ label Emma_SexChat:
                                 call change_Girl_stat(EmmaX, "love", 5)
                                 call change_Girl_stat(EmmaX, "lust", 7)
                                 ch_e "It certainly is a diversion. . ."
-                            elif EmmaX.Action_counter["footjob"] >= 10:
+                            elif EmmaX.permanent_History["footjob"] >= 10:
                                 ch_e "Yes, it certainly is a workout . . ."
-                            elif not EmmaX.Action_counter["footjob"]:
+                            elif not EmmaX.permanent_History["footjob"]:
                                 $ EmmaX.change_face("perplexed")
                                 ch_e "Oh, is some little skank offering footsies now?"
                             else:
@@ -773,9 +773,9 @@ label Emma_SexChat:
                                 call change_Girl_stat(EmmaX, "love", 5)
                                 call change_Girl_stat(EmmaX, "lust", 7)
                                 ch_e "It certainly is a diversion. . ."
-                            elif EmmaX.Action_counter["handjob"] >= 10:
+                            elif EmmaX.permanent_History["handjob"] >= 10:
                                 ch_e "Yes, it certainly is a workout . . ."
-                            elif not EmmaX.Action_counter["handjob"]:
+                            elif not EmmaX.permanent_History["handjob"]:
                                 $ EmmaX.change_face("perplexed")
                                 ch_e "Oh, is some little skank offering handies now?"
                             else:
@@ -784,7 +784,7 @@ label Emma_SexChat:
                             $ EmmaX.player_favorite_action = "handjob"
                         "Feeling you up.":
 
-                            $ counter = EmmaX.Action_counter["fondle_breasts"]+ EmmaX.Action_counter["fondle_thighs"]+ EmmaX.Action_counter["suck_breasts"] + EmmaX.Action_counter["hotdog"]
+                            $ counter = EmmaX.permanent_History["fondle_breasts"]+ EmmaX.permanent_History["fondle_thighs"]+ EmmaX.permanent_History["suck_breasts"] + EmmaX.permanent_History["hotdog"]
                             $ EmmaX.change_face("sly")
                             if EmmaX.player_favorite_action == "fondle":
                                 call change_Girl_stat(EmmaX, "lust", 3)
@@ -811,9 +811,9 @@ label Emma_SexChat:
                                 call change_Girl_stat(EmmaX, "love", 5)
                                 call change_Girl_stat(EmmaX, "lust", 5)
                                 ch_e "For some reason, the romantic in me agrees. . ."
-                            elif EmmaX.Action_counter["kiss"] >= 10:
+                            elif EmmaX.permanent_History["kiss"] >= 10:
                                 ch_e "I love kissing you too . . ."
-                            elif not EmmaX.Action_counter["kiss"]:
+                            elif not EmmaX.permanent_History["kiss"]:
                                 $ EmmaX.change_face("perplexed")
                                 ch_e "Who {i}are{/i} you kissing, [EmmaX.player_petname]?"
                             else:
@@ -1047,7 +1047,7 @@ label Emma_Chitchat(O=0, Options = ["default", "default", "default"]):
                 $ Player.Phonebook.append(EmmaX)
                 return
 
-        if "hungry" not in EmmaX.traits and (EmmaX.event_counter["swallowed"] + EmmaX.had_chat[2]) >= 10 and EmmaX.location == Player.location:
+        if "hungry" not in EmmaX.traits and (EmmaX.permanent_History["swallowed"] + EmmaX.had_chat[2]) >= 10 and EmmaX.location == Player.location:
             call Emma_Hungry
             return
         if Player.location != "bg_restaurant" and Player.location != "bg_halloween" and (not taboo or approval_check(EmmaX, 800, "I")):
@@ -1085,7 +1085,7 @@ label Emma_Chitchat(O=0, Options = ["default", "default", "default"]):
             if "cheek" in EmmaX.daily_history and "cheek" not in EmmaX.had_chat:
 
                 $ Options.append("cheek")
-            if EmmaX.Action_counter["kiss"] >= 5:
+            if EmmaX.permanent_History["kiss"] >= 5:
 
                 $ Options.append("kissed")
             if "dangerroom" in Player.daily_history:
@@ -1113,25 +1113,25 @@ label Emma_Chitchat(O=0, Options = ["default", "default", "default"]):
             if "bottomless" in EmmaX.history:
                 $ Options.append("bottomless")
 
-            if EmmaX.Action_counter["handjob"]:
+            if EmmaX.permanent_History["handjob"]:
 
                 $ Options.append("handy")
-            if EmmaX.event_counter["swallowed"]:
+            if EmmaX.permanent_History["swallowed"]:
 
                 $ Options.append("swallowed")
             if "cleaned" in EmmaX.daily_history or "painted" in EmmaX.daily_history:
 
                 $ Options.append("facial")
-            if EmmaX.event_counter["sleepover"]:
+            if EmmaX.permanent_History["sleepover"]:
 
                 $ Options.append("sleepwear")
-            if EmmaX.event_counter["creampied"] or EmmaX.event_counter["anal_creampied"]:
+            if EmmaX.permanent_History["creampied"] or EmmaX.permanent_History["anal_creampied"]:
 
                 $ Options.append("creampie")
-            if EmmaX.Action_counter["sex"] or EmmaX.Action_counter["anal"]:
+            if EmmaX.permanent_History["sex"] or EmmaX.permanent_History["anal"]:
 
                 $ Options.append("sexed")
-            if EmmaX.Action_counter["anal"]:
+            if EmmaX.permanent_History["anal"]:
 
                 $ Options.append("anal")
             if "public" in EmmaX.history and "public" not in EmmaX.had_chat:
@@ -1318,7 +1318,7 @@ label Emma_Chitchat(O=0, Options = ["default", "default", "default"]):
 
     elif Options[0] == "fondled":
 
-        if EmmaX.Action_counter["fondle_breasts"]+ EmmaX.Action_counter["fondle_pussy"] + EmmaX.Action_counter["fondle_ass"] >= 10:
+        if EmmaX.permanent_History["fondle_breasts"]+ EmmaX.permanent_History["fondle_pussy"] + EmmaX.permanent_History["fondle_ass"] >= 10:
             ch_e "I'll need a helping hand later."
         else:
             ch_e "You've displayed some rather significant talents in. . . massage."

@@ -71,28 +71,10 @@ init python:
 
         return
 
-    def reset_Girls_at_end():
-        total_SEXP = 0
-
-        for G in all_Girls:
-            total_SEXP += G.SEXP
-
-            if G in active_Girls and G.location != Player.location:
-                G.location = G.home
-
-            G.remaining_Actions = G.max_Actions
-
-            G.lust -= 5 if G.lust >= 50 else 0
-
-            for key in G.spunk.keys():
-                G.spunk[key] = False
-
-            G.choose_Outfits()
-
-        return
-
     def reset_Girls_at_beginning():
         for G in active_Girls:
+            G.change_face()
+
             G.remaining_Actions += 1 if time_index != 0 else 0
 
             if G.location == "bg_classroom" or G.location == "bg_dangerroom" or G.teaching:
@@ -108,9 +90,9 @@ init python:
                 bonus = 0
 
             if G.used_to_anal < 2:
-                if G.Action_counter["anal"] + G.Action_counter["dildo_ass"] + bonus >= 15:
+                if G.permanent_History["anal"] + G.permanent_History["dildo_ass"] + bonus >= 15:
                     G.used_to_anal = 2
-                elif G.Action_counter["anal"] + G.Action_counter["dildo_ass"] + bonus >= 3:
+                elif G.permanent_History["anal"] + G.permanent_History["dildo_ass"] + bonus >= 3:
                     G.used_to_anal = 1
 
             if G.XP >= G.XP_goal and G.level < 10:
@@ -177,6 +159,27 @@ init python:
 
         return names[base]
 
+label reset_Girls_at_end:
+    python:
+        total_SEXP = 0
+
+        for G in all_Girls:
+            total_SEXP += G.SEXP
+
+            if G in active_Girls and G.location != Player.location:
+                G.location = G.home
+
+            G.remaining_Actions = G.max_Actions
+
+            G.lust -= 5 if G.lust >= 50 else 0
+
+            for key in G.spunk.keys():
+                G.spunk[key] = False
+
+            G.choose_Outfits()
+
+    return
+
 label change_Player_stat(flavor, update):
     $ stat = getattr(Player, flavor)
 
@@ -235,7 +238,7 @@ label change_Girl_stat(Girl, flavor, update, alternate_values = {}):
     return
 
 label change_Present_stat(flavor, update):
-    $ check_who_is_present
+    call check_who_is_present
 
     $ temp_Girls = Present[:]
 
@@ -261,7 +264,7 @@ label set_the_scene(location = None, show_Characters = True, fade = False, stati
                 G.location = Player.location
 
     if show_Characters:
-        $ check_who_is_present(location = Player.location)
+        call check_who_is_present(location = Player.location)
 
         if Present:
             if Player.focused_Girl not in Present:
@@ -397,7 +400,7 @@ label tenth_round:
 
     if Occupant == JubesX:
         pass
-    elif Occupant.event_counter["sleepover"] or Occupant.SEXP >= 30:
+    elif Occupant.permanent_History["sleepover"] or Occupant.SEXP >= 30:
         if Occupant == RogueX:
             ch_r "It's pretty late, [RogueX.player_petname], but you're welcome to stick around. . ."
         elif Occupant == KittyX:
@@ -530,7 +533,7 @@ label wait:
         $ Player.spunk = False
         $ Player.reputation += 10 if Player.reputation < 800 else 0
 
-        $ reset_Girls_at_end()
+        call reset_Girls_at_end
         $ change_clothes()
 
     $ Player.semen += 1

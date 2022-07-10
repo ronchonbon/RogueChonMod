@@ -375,7 +375,7 @@ label danger_room_entry:
 
         python:
             for G in Changing:
-                G.change_Outfit("gym_clothes", instant = True)
+                G.change_Outfit(G.Wardrobe.gym_Outfit.name, instant = True)
 
         hide black_screen onlayer black
 
@@ -582,7 +582,7 @@ label pool:
         menu:
             "You're at the pool. What would you like to do?"
             "Want to swim?" if round >= 30:
-                $ check_who_is_present
+                call check_who_is_present
 
                 if time_index > 2 and not Present:
                     "It's a bit late for a swim."

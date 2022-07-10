@@ -8,7 +8,7 @@ label caught_changing(Girl):
     call remove_all
 
     if D20 > 17:
-        $ Girl.change_Outfit("nude")
+        $ Girl.undress()
     else:
         $ Girl.change_Outfit()
 
@@ -238,7 +238,7 @@ label caught_changing(Girl):
 
                     ch_s "Oh, you are a naughty one. . ."
 
-                    $ Girl.change_Outfit("nude")
+                    $ Girl.undress()
                     $ Girl.set_temp_outfit()
                 elif approval_check(Girl, 350+(10*D20)):
                     call change_Girl_stat(Girl, "love", 1)
@@ -295,7 +295,7 @@ label caught_changing(Girl):
 
                     ch_s "Fine. . ."
 
-                    $ Girl.change_Outfit("nude")
+                    $ Girl.undress()
                     $ Girl.set_temp_outfit()
                 elif approval_check(Girl,800) and approval_check(Girl, 500, "O"):
                     call change_Girl_stat(Girl, "love", -2)
@@ -306,7 +306,7 @@ label caught_changing(Girl):
 
                     ch_s ". . . Fine."
 
-                    $ Girl.change_Outfit("nude")
+                    $ Girl.undress()
                     $ Girl.set_temp_outfit()
                 else:
                     call change_Girl_stat(Girl, "love", -2)
@@ -325,7 +325,7 @@ label caught_showering(Girl):
     call set_the_scene(location = "bg_door", fade = True)
 
     $ Girl.add_word(1, "showered", "showered", 0, 0)
-    $ Girl.change_Outfit("nude")
+    $ Girl.undress()
     $ Girl.change_face("smile", 1)
 
     $ Girl.location = "bg_shower"
@@ -775,7 +775,7 @@ label caught_masturbating(Girl):
 
         $ Girl.change_face("sexy", brows = "confused")
 
-        if Girl.Action_counter["masturbation"] == 1:
+        if Girl.permanent_History["masturbation"] == 1:
             if Girl == RogueX:
                 ch_r "Well that was a bit unexpected. . ."
 
@@ -975,7 +975,7 @@ label caught_having_sex(Girl):
             if G.location == Player.location:
                 G.location = "bg_study"
 
-            total_caught += G.event_counter["caught"]
+            total_caught += G.permanent_History["caught"]
 
     $ Player.location = "bg_study"
 
@@ -989,7 +989,7 @@ label caught_having_sex(Girl):
 
     $ Xavier.change_face("shocked")
 
-    $ punishment_days = Girl.event_counter["caught"]
+    $ punishment_days = Girl.permanent_History["caught"]
 
     if EmmaX in [Girl, Partner] and StormX in [Girl, Partner]:
         ch_x "I'm very disappointed in the both of you!."
@@ -1044,7 +1044,7 @@ label caught_having_sex(Girl):
     elif Girl.Clothes["shame"] >= 20:
         ch_x "[Girl.name], my dear, that attire is positively scandalous."
 
-    if Girl.event_counter["caught"]:
+    if Girl.permanent_History["caught"]:
         "And this isn't even the first time this has happened!"
 
     if Partner:
@@ -1067,7 +1067,7 @@ label caught_having_sex(Girl):
         $ Partner.change_face("bemused", 1, eyes = "side")
 
     if EmmaX.location == Player.location and EmmaX not in Rules:
-        if not EmmaX.event_counter["caught"]:
+        if not EmmaX.permanent_History["caught"]:
             ch_x "Emma, you are entrusted as a teacher here, I can't have you fraternizing with the students."
             ch_x "This is especially true in the school's public spaces!"
             ch_x "What sort of message does that send?"
@@ -1092,7 +1092,7 @@ label caught_having_sex(Girl):
             ch_x "I should hope it will be the last."
 
     if StormX.location == Player.location and StormX not in Rules:
-        if not StormX.event_counter["caught"]:
+        if not StormX.permanent_History["caught"]:
             if EmmaX.location == Player.location and EmmaX not in Rules:
                 ch_x "And Ororo! You also know better than to be fraternizing with the students!"
             else:
@@ -1125,33 +1125,33 @@ label caught_having_sex(Girl):
     menu:
         ch_x "Well what have you to say for yourselves?"
         "Sorry sir, won't do it again.":
-            if RogueX.location == Player.location and RogueX.event_counter["caught"] < 3:
+            if RogueX.location == Player.location and RogueX.permanent_History["caught"] < 3:
                 call change_Girl_stat(RogueX, "love", 20)
                 call change_Girl_stat(RogueX, "inhibition", -15)
                 call change_Girl_stat(RogueX, "love", 5)
 
-            if KittyX.location == Player.location and KittyX.event_counter["caught"] < 3:
+            if KittyX.location == Player.location and KittyX.permanent_History["caught"] < 3:
                 call change_Girl_stat(KittyX, "love", 10)
                 call change_Girl_stat(KittyX, "inhibition", -25)
                 call change_Girl_stat(KittyX, "inhibition", -10)
 
-            if EmmaX.location == Player.location and EmmaX.event_counter["caught"] < 3:
+            if EmmaX.location == Player.location and EmmaX.permanent_History["caught"] < 3:
                 call change_Girl_stat(EmmaX, "love", 5)
                 call change_Girl_stat(EmmaX, "inhibition", -15)
 
-            if LauraX.location == Player.location and LauraX.event_counter["caught"] < 3:
+            if LauraX.location == Player.location and LauraX.permanent_History["caught"] < 3:
                 call change_Girl_stat(LauraX, "inhibition", -20)
                 call change_Girl_stat(LauraX, "inhibition", -10)
 
-            if JeanX.location == Player.location and JeanX.event_counter["caught"] < 3:
+            if JeanX.location == Player.location and JeanX.permanent_History["caught"] < 3:
                 call change_Girl_stat(JeanX, "obedience", -20)
                 call change_Girl_stat(JeanX, "obedience", -10)
 
-            if StormX.location == Player.location and StormX.event_counter["caught"] < 3:
+            if StormX.location == Player.location and StormX.permanent_History["caught"] < 3:
                 call change_Girl_stat(StormX, "love", 5)
                 call change_Girl_stat(StormX, "inhibition", -5)
 
-            if JubesX.location == Player.location and JubesX.event_counter["caught"] < 3:
+            if JubesX.location == Player.location and JubesX.permanent_History["caught"] < 3:
                 call change_Girl_stat(JubesX, "love", 10)
                 call change_Girl_stat(JubesX, "obedience", 5)
                 call change_Girl_stat(JubesX, "inhibition", -10)
@@ -1161,8 +1161,8 @@ label caught_having_sex(Girl):
 
             $ Xavier.change_face("happy")
 
-            if Girl.event_counter["caught"]:
-                ch_x "But you know you've done this before. . . at least [Girl.event_counter[caught]] times. . ."
+            if Girl.permanent_History["caught"]:
+                ch_x "But you know you've done this before. . . at least [Girl.permanent_History[caught]] times. . ."
             elif Girl == EmmaX and total_caught:
                 ch_x "Not with Ms. Frost, perhaps, but you know you've done this before. . ."
                 ch_x "at least [total_caught] times. . ."
@@ -1192,35 +1192,35 @@ label caught_having_sex(Girl):
             $ Girl.change_face("bemused")
             call change_Girl_stat(Girl, "lust", 5)
 
-            if RogueX.location == Player.location and RogueX.event_counter["caught"] < 5:
+            if RogueX.location == Player.location and RogueX.permanent_History["caught"] < 5:
                 call change_Girl_stat(RogueX, "love", 20)
                 call change_Girl_stat(RogueX, "love", 10)
 
-            if KittyX.location == Player.location and KittyX.event_counter["caught"] < 5:
+            if KittyX.location == Player.location and KittyX.permanent_History["caught"] < 5:
                 call change_Girl_stat(KittyX, "inhibition", 10)
                 call change_Girl_stat(KittyX, "love", 10)
 
-            if EmmaX.location == Player.location and EmmaX.event_counter["caught"] < 5:
+            if EmmaX.location == Player.location and EmmaX.permanent_History["caught"] < 5:
                 call change_Girl_stat(EmmaX, "inhibition", 10)
                 call change_Girl_stat(EmmaX, "love", 10)
 
-            if LauraX.location == Player.location and LauraX.event_counter["caught"] < 5:
+            if LauraX.location == Player.location and LauraX.permanent_History["caught"] < 5:
                 call change_Girl_stat(LauraX, "inhibition", 10)
                 call change_Girl_stat(LauraX, "obedience", 5)
                 call change_Girl_stat(LauraX, "love", 5)
 
-            if JeanX.location == Player.location and JeanX.event_counter["caught"] < 5:
+            if JeanX.location == Player.location and JeanX.permanent_History["caught"] < 5:
                 call change_Girl_stat(JeanX, "inhibition", 10)
                 call change_Girl_stat(JeanX, "obedience", 5)
                 call change_Girl_stat(JeanX, "obedience", 5)
                 call change_Girl_stat(JeanX, "love", 5)
 
-            if StormX.location == Player.location and StormX.event_counter["caught"] < 5:
+            if StormX.location == Player.location and StormX.permanent_History["caught"] < 5:
                 call change_Girl_stat(StormX, "inhibition", 15)
                 call change_Girl_stat(StormX, "obedience", 5)
                 call change_Girl_stat(StormX, "love", 5)
 
-            if JubesX.location == Player.location and JubesX.event_counter["caught"] < 5:
+            if JubesX.location == Player.location and JubesX.permanent_History["caught"] < 5:
                 call change_Girl_stat(JubesX, "inhibition", 5)
                 call change_Girl_stat(JubesX, "obedience", 5)
                 call change_Girl_stat(JubesX, "love", 10)
@@ -1236,36 +1236,36 @@ label caught_having_sex(Girl):
             else:
                 ch_x "I'm halving your daily stipend for [punishment_days] days."
 
-            if RogueX.location == Player.location and RogueX.event_counter["caught"] < 3:
+            if RogueX.location == Player.location and RogueX.permanent_History["caught"] < 3:
                 call change_Girl_stat(RogueX, "obedience", 20)
                 call change_Girl_stat(RogueX, "obedience", 20)
                 call change_Girl_stat(RogueX, "inhibition", -20)
                 call change_Girl_stat(RogueX, "inhibition", -10)
 
-            if KittyX.location == Player.location and KittyX.event_counter["caught"] < 3:
+            if KittyX.location == Player.location and KittyX.permanent_History["caught"] < 3:
                 call change_Girl_stat(KittyX, "obedience", 20)
                 call change_Girl_stat(KittyX, "obedience", 20)
                 call change_Girl_stat(KittyX, "inhibition", -20)
 
-            if EmmaX.location == Player.location and EmmaX.event_counter["caught"] < 3:
+            if EmmaX.location == Player.location and EmmaX.permanent_History["caught"] < 3:
                 call change_Girl_stat(EmmaX, "obedience", 20)
                 call change_Girl_stat(EmmaX, "obedience", 20)
                 call change_Girl_stat(EmmaX, "inhibition", -20)
 
-            if LauraX.location == Player.location and LauraX.event_counter["caught"] < 3:
+            if LauraX.location == Player.location and LauraX.permanent_History["caught"] < 3:
                 call change_Girl_stat(LauraX, "obedience", 20)
                 call change_Girl_stat(LauraX, "obedience", 20)
                 call change_Girl_stat(LauraX, "inhibition", -20)
 
-            if JeanX.location == Player.location and JeanX.event_counter["caught"] < 3:
+            if JeanX.location == Player.location and JeanX.permanent_History["caught"] < 3:
                 call change_Girl_stat(JeanX, "obedience", 20)
                 call change_Girl_stat(JeanX, "obedience", 20)
 
-            if StormX.location == Player.location and StormX.event_counter["caught"] < 3:
+            if StormX.location == Player.location and StormX.permanent_History["caught"] < 3:
                 call change_Girl_stat(StormX, "obedience", 20)
                 call change_Girl_stat(StormX, "inhibition", -10)
 
-            if JubesX.location == Player.location and JubesX.event_counter["caught"] < 3:
+            if JubesX.location == Player.location and JubesX.permanent_History["caught"] < 3:
                 call change_Girl_stat(JubesX, "obedience", 10)
                 call change_Girl_stat(JubesX, "inhibition", -10)
 
@@ -1288,36 +1288,36 @@ label caught_having_sex(Girl):
             $ Girl.change_face("surprised")
             call change_Girl_stat(Girl, "lust", 10)
 
-            if RogueX.location == Player.location and RogueX.event_counter["caught"] < 3:
+            if RogueX.location == Player.location and RogueX.permanent_History["caught"] < 3:
                 call change_Girl_stat(RogueX, "obedience", 20)
                 call change_Girl_stat(RogueX, "obedience", 40)
 
-            if KittyX.location == Player.location and KittyX.event_counter["caught"] < 3:
+            if KittyX.location == Player.location and KittyX.permanent_History["caught"] < 3:
                 call change_Girl_stat(KittyX, "obedience", 25)
                 call change_Girl_stat(KittyX, "obedience", 40)
 
-            if EmmaX.location == Player.location and EmmaX.event_counter["caught"] < 3:
+            if EmmaX.location == Player.location and EmmaX.permanent_History["caught"] < 3:
                 call change_Girl_stat(EmmaX, "love", 5)
                 call change_Girl_stat(EmmaX, "obedience", 20)
                 call change_Girl_stat(EmmaX, "obedience", 30)
 
-            if LauraX.location == Player.location and LauraX.event_counter["caught"] < 3:
+            if LauraX.location == Player.location and LauraX.permanent_History["caught"] < 3:
                 call change_Girl_stat(LauraX, "love", 5)
                 call change_Girl_stat(LauraX, "obedience", 25)
                 call change_Girl_stat(LauraX, "obedience", 30)
 
-            if JeanX.location == Player.location and JeanX.event_counter["caught"] < 3:
+            if JeanX.location == Player.location and JeanX.permanent_History["caught"] < 3:
                 call change_Girl_stat(JeanX, "love", 5)
                 call change_Girl_stat(JeanX, "love", 10)
                 call change_Girl_stat(JeanX, "obedience", 25)
                 call change_Girl_stat(JeanX, "obedience", 30)
 
-            if StormX.location == Player.location and StormX.event_counter["caught"] < 3:
+            if StormX.location == Player.location and StormX.permanent_History["caught"] < 3:
                 call change_Girl_stat(StormX, "love", -5)
                 call change_Girl_stat(StormX, "obedience", 20)
                 call change_Girl_stat(StormX, "obedience", 30)
 
-            if JubesX.location == Player.location and JubesX.event_counter["caught"] < 3:
+            if JubesX.location == Player.location and JubesX.permanent_History["caught"] < 3:
                 call change_Girl_stat(JubesX, "love", 10)
                 call change_Girl_stat(JubesX, "obedience", 25)
                 call change_Girl_stat(JubesX, "obedience", 30)
@@ -1333,45 +1333,45 @@ label caught_having_sex(Girl):
             else:
                 ch_x "I'm halving your daily stipend for [punishment_days] days!"
 
-            if RogueX.location == Player.location and RogueX.event_counter["caught"] < 3:
+            if RogueX.location == Player.location and RogueX.permanent_History["caught"] < 3:
                 if RogueX.inhibition > 500:
                     call change_Girl_stat(RogueX, "inhibition", 15)
 
                 call change_Girl_stat(RogueX, "inhibition", -20)
                 call change_Girl_stat(RogueX, "inhibition", -10)
 
-            if KittyX.location == Player.location and KittyX.event_counter["caught"] < 3:
+            if KittyX.location == Player.location and KittyX.permanent_History["caught"] < 3:
                 if KittyX.inhibition > 500:
                     call change_Girl_stat(KittyX, "inhibition", 15)
 
                 call change_Girl_stat(KittyX, "inhibition", -20)
                 call change_Girl_stat(KittyX, "inhibition", -10)
 
-            if EmmaX.location == Player.location and EmmaX.event_counter["caught"] < 3:
+            if EmmaX.location == Player.location and EmmaX.permanent_History["caught"] < 3:
                 if EmmaX.inhibition > 500:
                     call change_Girl_stat(EmmaX, "inhibition", 15)
 
                 call change_Girl_stat(EmmaX, "inhibition", -20)
                 call change_Girl_stat(EmmaX, "inhibition", -10)
 
-            if LauraX.location == Player.location and LauraX.event_counter["caught"] < 3:
+            if LauraX.location == Player.location and LauraX.permanent_History["caught"] < 3:
                 if LauraX.inhibition > 500:
                     call change_Girl_stat(LauraX, "inhibition", 15)
 
                 call change_Girl_stat(LauraX, "inhibition", -15)
                 call change_Girl_stat(LauraX, "inhibition", -10)
 
-            if JeanX.location == Player.location and JeanX.event_counter["caught"] < 3:
+            if JeanX.location == Player.location and JeanX.permanent_History["caught"] < 3:
                 call change_Girl_stat(JeanX, "inhibition", 15)
 
-            if StormX.location == Player.location and StormX.event_counter["caught"] < 3:
+            if StormX.location == Player.location and StormX.permanent_History["caught"] < 3:
                 if StormX.inhibition > 500:
                     call change_Girl_stat(StormX, "inhibition", 5)
 
                 call change_Girl_stat(StormX, "inhibition", -10)
                 call change_Girl_stat(StormX, "inhibition", -5)
 
-            if JubesX.location == Player.location and JubesX.event_counter["caught"] < 3:
+            if JubesX.location == Player.location and JubesX.permanent_History["caught"] < 3:
                 if JubesX.inhibition > 500:
                     call change_Girl_stat(JubesX, "inhibition", 15)
 
@@ -1505,36 +1505,36 @@ label caught_having_sex(Girl):
         else:
             ch_x "I'm halving your daily stipend for [punishment_days] days."
 
-            if RogueX.location == Player.location and RogueX.event_counter["caught"] < 3:
+            if RogueX.location == Player.location and RogueX.permanent_History["caught"] < 3:
                 call change_Girl_stat(RogueX, "obedience", 10)
                 call change_Girl_stat(RogueX, "obedience", 10)
                 call change_Girl_stat(RogueX, "inhibition", -10)
                 call change_Girl_stat(RogueX, "inhibition", -5)
 
-            if KittyX.location == Player.location and KittyX.event_counter["caught"] < 3:
+            if KittyX.location == Player.location and KittyX.permanent_History["caught"] < 3:
                 call change_Girl_stat(KittyX, "obedience", 10)
                 call change_Girl_stat(KittyX, "obedience", 10)
                 call change_Girl_stat(KittyX, "inhibition", -10)
                 call change_Girl_stat(KittyX, "inhibition", -5)
 
-            if EmmaX.location == Player.location and EmmaX.event_counter["caught"] < 3:
+            if EmmaX.location == Player.location and EmmaX.permanent_History["caught"] < 3:
                 call change_Girl_stat(EmmaX, "obedience", 10)
                 call change_Girl_stat(EmmaX, "inhibition", -5)
 
-            if LauraX.location == Player.location and LauraX.event_counter["caught"] < 3:
+            if LauraX.location == Player.location and LauraX.permanent_History["caught"] < 3:
                 call change_Girl_stat(LauraX, "obedience", 10)
                 call change_Girl_stat(LauraX, "obedience", 10)
                 call change_Girl_stat(LauraX, "inhibition", -10)
                 call change_Girl_stat(LauraX, "inhibition", -5)
 
-            if JeanX.location == Player.location and JeanX.event_counter["caught"] < 3:
+            if JeanX.location == Player.location and JeanX.permanent_History["caught"] < 3:
                 call change_Girl_stat(JeanX, "obedience", -10)
 
-            if StormX.location == Player.location and StormX.event_counter["caught"] < 3:
+            if StormX.location == Player.location and StormX.permanent_History["caught"] < 3:
                 call change_Girl_stat(StormX, "obedience", 10)
                 call change_Girl_stat(StormX, "inhibition", -5)
 
-            if JubesX.location == Player.location and JubesX.event_counter["caught"] < 3:
+            if JubesX.location == Player.location and JubesX.permanent_History["caught"] < 3:
                 call change_Girl_stat(JubesX, "obedience", 5)
                 call change_Girl_stat(JubesX, "obedience", 5)
                 call change_Girl_stat(JubesX, "inhibition", -8)
@@ -1544,25 +1544,25 @@ label caught_having_sex(Girl):
 
     $ Player.being_punished += punishment_days
 
-    $ Girl.event_counter["caught"] += 1
+    $ Girl.permanent_History["caught"] += 1
 
     if Partner:
-        $ Partner.event_counter["caught"] += 1
+        $ Partner.permanent_History["caught"] += 1
 
     $ Girl.add_word(0, "caught", "caught")
 
     if Girl == KittyX and KittyX not in Rules and "Xavier's photo" not in Player.inventory:
         "It would probably be a good idea to find some way to get Xavier to leave you alone."
 
-        if KittyX.event_counter["caught"] > 1:
+        if KittyX.permanent_History["caught"] > 1:
             "Maybe I should try searching the office when he's not around."
 
-        if KittyX.event_counter["caught"] > 2:
+        if KittyX.permanent_History["caught"] > 2:
             "I bet [KittyX.name] could help me get in."
 
-        if KittyX.event_counter["caught"] > 3:
+        if KittyX.permanent_History["caught"] > 3:
             "I bet there's something in that lefthand drawer. . ."
-    elif Girl == JeanX and "nowhammy" not in JeanX.traits and JeanX.event_counter["caught"] > 1:
+    elif Girl == JeanX and "nowhammy" not in JeanX.traits and JeanX.permanent_History["caught"] > 1:
         ch_x "Oh, and Jean, dear, I'd like a word?"
 
         $ Girl.change_face("bemused")
@@ -1619,7 +1619,7 @@ label caught_having_sex(Girl):
     if EmmaX.location == Player.location and EmmaX not in Rules:
         ch_x "Emma, I'd like you to stay after for a brief discussion about \"boundaries\". . ."
 
-        if EmmaX.event_counter["caught"]:
+        if EmmaX.permanent_History["caught"]:
             call change_Girl_stat(EmmaX, "love", -5)
             $ Girl.change_face("angry", eyes = "closed")
 
@@ -1631,7 +1631,7 @@ label caught_having_sex(Girl):
         else:
             ch_x "Ororo, I'd like you to stay after for a brief discussion about \"boundaries\". . ."
 
-        if StormX.event_counter["caught"]:
+        if StormX.permanent_History["caught"]:
             call change_Girl_stat(StormX, "love", -5)
             $ Girl.change_face("angry", eyes = "closed")
 
@@ -1639,13 +1639,13 @@ label caught_having_sex(Girl):
         if StormX not in Rules and "Xavier's files" not in Player.inventory:
             "It would probably be a good idea to find some way to get Xavier to leave you alone."
 
-            if StormX.event_counter["caught"] > 1:
+            if StormX.permanent_History["caught"] > 1:
                 "Maybe I should try searching the office when he's not around."
 
-            if StormX.event_counter["caught"] > 2:
+            if StormX.permanent_History["caught"] > 2:
                 "I bet [StormX.name] could help me get in."
 
-            if StormX.event_counter["caught"] > 3:
+            if StormX.permanent_History["caught"] > 3:
                 "I bet there's something in that righthand drawer. . ."
 
     call remove_all

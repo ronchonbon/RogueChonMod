@@ -262,7 +262,7 @@ init python:
 
             if self.mood > 4 and emotion in ["normal", "bemused", "sexy", "sly", "smile", "startled"]:
                 emotion = "angry"
-            elif self.History.daily["forced"] > 0 and emotion in ["normal", "bemused", "sexy", "sly", "smile", "startled"]:
+            elif self.daily_History["forced"] > 0 and emotion in ["normal", "bemused", "sexy", "sly", "smile", "startled"]:
                 emotion = "sad"
 
             if emotion == "normal":
@@ -477,7 +477,7 @@ init python:
 
             possible_locations = []
 
-            possible.locations.append(self.home)
+            possible_locations.append(self.home)
 
             if time_index < 2 and weekday < 5:
                 possible_locations.append("bg_classroom")
@@ -594,7 +594,10 @@ init python:
 
             return
 
-        def change_Outfit(self, name, instant = False):
+        def change_Outfit(self, name = None, instant = False):
+            if not name:
+                name = self.Wardrobe.public_Outfit.name
+
             if name not in self.Wardrobe.Outfits.keys():
                 self.voice("I don't have an outfit named [name].")
 
@@ -606,7 +609,7 @@ init python:
             for key in self.spunk.keys():
                 self.spunk[key] = False
 
-            self.Wardrobe.change_Outfit(Outfit = self.Wardrobe.Outfits[name], instant = instant)
+            self.Wardrobe.change_Outfit(self.Wardrobe.Outfits[name], instant = instant)
             self.Outfit = self.Wardrobe.current_Outfit
             self.Clothes = self.Outfit.Clothes
 
@@ -633,8 +636,8 @@ init python:
 
             if self.tag == "Mystique":
                 villain = OutfitClass("villain")
-            else:
-                hero = OutfitClass("hero", wear_in_public = True, wear_in_private = True, activewear = True)
+            # else:
+            #     hero = OutfitClass("hero", wear_in_public = True, wear_in_private = True, activewear = True)
 
             if self.tag == "Rogue":
                 default.update_Clothes({
@@ -926,8 +929,8 @@ init python:
 
             if self.tag == "Mystique":
                 self.Wardrobe.Outfits.update({"villain": villain})
-            else:
-                self.Wardrobe.Outfits.update({"hero": hero})
+            # else:
+            #     self.Wardrobe.Outfits.update({"hero": hero})
 
             for Outfit in self.Wardrobe.Outfits.values():
                 for Clothing in Outfit.Clothes.values():

@@ -868,7 +868,7 @@ label Laura_Love_End:
     ch_l "So. . . now that we have some free time. . ."
     call change_Girl_stat(LauraX, "lust", 10)
 
-    if not LauraX.Action_counter["sex"]:
+    if not LauraX.permanent_History["sex"]:
         $ LauraX.change_face("bemused", 2)
         ch_l "I think I'm ready. . ."
     else:
@@ -1689,7 +1689,7 @@ label Laura_Fuckbuddy:
     call set_the_scene
     $ LauraX.outfit_name = "default"
     $ LauraX.today_outfit_name = "default"
-    $ LauraX.change_Outfit("default")
+    $ LauraX.change_Outfit()
     call show_Girl (LauraX)
     call set_Character_taboos
     $ Player.primary_Action = "masturbation"
@@ -1986,7 +1986,7 @@ label Laura_Dressup:
     call set_the_scene
 
     $ LauraX.outfit_name = "default"
-    $ LauraX.change_Outfit("default")
+    $ LauraX.change_Outfit()
 
     call show_Girl(LauraX, transition = vpunch)
 
@@ -2052,7 +2052,7 @@ label Laura_Dressup:
             ch_k "Oh, I see, [LauraX.name]."
             ch_k "She's back?"
         "I was checking out that fine piece over there.":
-            if approval_check(KittyX, 1200, "LO") or KittyX.event_counter["been_with_girl"] >= 10:
+            if approval_check(KittyX, 1200, "LO") or KittyX.permanent_History["been_with_girl"] >= 10:
                 call change_Girl_stat(KittyX, "obedience", 5)
                 call change_Girl_stat(KittyX, "inhibition", 5)
                 $ KittyX.change_face("bemused", 1)
@@ -2172,7 +2172,7 @@ label Laura_Dressup3:
 
     $ KittyX.outfit_name = KittyX.today_outfit_name
     $ KittyX.change_Outfit()
-    $ LauraX.change_Outfit("nude")
+    $ LauraX.undress()
     $ LauraX.Clothes["bra"] = "wolvie_bra"
     $ LauraX.Clothes["underwear"] = "wolvie_panties"
     menu:
@@ -2196,7 +2196,7 @@ label Laura_Dressup3:
             "[LauraX.name] stares at you, her eyes narrowed. She's clearly on edge."
             $ LauraX.change_face("sad", 2, brows = "confused", eyes = "leftside")
             ch_l "Didn't you lock the door?"
-            if KittyX.event_counter["sleepover"] < 5:
+            if KittyX.permanent_History["sleepover"] < 5:
                 $ KittyX.change_face("smile", eyes = "side")
                 ch_k "Yeah, but I gave him a key."
                 $ LauraX.change_face("sad", 1, brows = "confused", eyes = "leftside")

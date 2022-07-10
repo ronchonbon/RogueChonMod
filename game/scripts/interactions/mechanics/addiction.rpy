@@ -39,7 +39,7 @@ label addiction_event(Girl):
 
             ch_r "Hey there [Girl.player_petname]. You seem to be fitting in well. . ."
 
-            if not Girl.Action_counter["kiss"]:
+            if not Girl.permanent_History["kiss"]:
                 ch_r "Look, since the other day when I first. . . touched you, "
             else:
                 ch_r "Look, since the other day when I first. . . kissed you, "
@@ -54,7 +54,7 @@ label addiction_event(Girl):
 
             ch_k "Oh. . . hey, [Girl.player_petname]. I've been thinking. . ."
 
-            if not Girl.Action_counter["kiss"]:
+            if not Girl.permanent_History["kiss"]:
                 ch_k "Look, since a while back when I first. . . touched you, "
             else:
                 ch_k "Look, since a while back when I first. . . kissed you, "
@@ -181,7 +181,7 @@ label addiction_event(Girl):
 
     menu:
         extend ""
-        "Another kiss?" if Girl.Action_counter["kiss"]:
+        "Another kiss?" if Girl.permanent_History["kiss"]:
             if approval_check(Girl, 660, "LI", Alt = [[RogueX,JeanX], 560]):
                 call change_Girl_stat(Girl, "lust", 3)
                 call change_Girl_stat(Girl, "love", 6)
@@ -223,7 +223,7 @@ label addiction_event(Girl):
                     ch_v "Nah. . ."
 
                 jump addiction_bad_end
-        "How about a kiss?" if not Girl.Action_counter["kiss"]:
+        "How about a kiss?" if not Girl.permanent_History["kiss"]:
             if approval_check(Girl, 660, "LI", Alt = [[RogueX,JeanX], 560]):
                 call change_Girl_stat(Girl, "lust", 3)
                 call change_Girl_stat(Girl, "love", 6)
@@ -297,7 +297,7 @@ label addiction_event(Girl):
 
                 call girl_touches_you (Girl)
         "What, you just want to touch my face? No thanks." if Girl != JubesX:
-            if approval_check(Girl, 500, "L", Alt = [[RogueX,JeanX],400]) or Girl.Action_counter["kiss"]:
+            if approval_check(Girl, 500, "L", Alt = [[RogueX,JeanX],400]) or Girl.permanent_History["kiss"]:
                 call change_Girl_stat(Girl, "love", -3)
                 call change_Girl_stat(Girl, "inhibition", 3)
                 $ Girl.brows = "confused"
@@ -376,7 +376,7 @@ label addiction_event(Girl):
 
                 call girl_touches_you (Girl)
         "You want to drink my blood? No thanks." if Girl == JubesX:
-            if approval_check(Girl, 500, "L") or Girl.Action_counter["kiss"]:
+            if approval_check(Girl, 500, "L") or Girl.permanent_History["kiss"]:
                 call change_Girl_stat(Girl, "love", -3)
                 call change_Girl_stat(Girl, "inhibition", 3)
                 $ Girl.brows = "confused"
@@ -875,7 +875,7 @@ label addiction_ultimatum:
                     if round == 10:
                         Girl.voice "I suppose we don't have time for any more than that."
             "How about a kiss?":
-                if Girl.Action_counter["kiss"] or approval_check(Girl, 600, "LI", Alt = [[RogueX,JeanX], 560]) or Girl.player_petname in ("master", "sir"):
+                if Girl.permanent_History["kiss"] or approval_check(Girl, 600, "LI", Alt = [[RogueX,JeanX], 560]) or Girl.player_petname in ("master", "sir"):
                     $ Girl.forced = 0
                     call change_Girl_stat(Girl, "lust", 3)
                     call change_Girl_stat(Girl, "love", 6)
@@ -2268,7 +2268,7 @@ label addiction_serum:
                 $ Girl.blushing = "_blush1"
 
                 if Girl == RogueX:
-                    if Girl.event_counter["swallowed"]:
+                    if Girl.permanent_History["swallowed"]:
                         $ Girl.change_face("bemused")
 
                         ch_r "Hmm, well it has seemed to work for me in the past. . ."
@@ -2283,7 +2283,7 @@ label addiction_serum:
                     else:
                         ch_r "Well, I guess if touching you works, this could work too. . ."
                 elif Girl == KittyX:
-                    if Girl.event_counter["swallowed"]:
+                    if Girl.permanent_History["swallowed"]:
                         $ Girl.change_face("bemused")
 
                         ch_k "Well. . . It's not like that doesn't work. . ."
@@ -2299,7 +2299,7 @@ label addiction_serum:
                     else:
                         ch_k "I guess this might be the simplest way. . ."
                 elif Girl == EmmaX:
-                    if Girl.event_counter["swallowed"]:
+                    if Girl.permanent_History["swallowed"]:
                         $ Girl.change_face("bemused")
 
                         ch_e "I suppose it does have some. . . restorative properties. . ."
@@ -2314,7 +2314,7 @@ label addiction_serum:
                     else:
                         ch_e "I have entertained worse offers. . ."
                 elif Girl == LauraX:
-                    if Girl.event_counter["swallowed"]:
+                    if Girl.permanent_History["swallowed"]:
                         $ Girl.change_face("bemused")
 
                         ch_l "Yeah, makes sense. . ."
@@ -2332,7 +2332,7 @@ label addiction_serum:
                     call change_Girl_stat(Girl, "obedience", 1)
                     call change_Girl_stat(Girl, "inhibition", 2)
 
-                    if Girl.event_counter["swallowed"]:
+                    if Girl.permanent_History["swallowed"]:
                         $ Girl.change_face("surprised")
 
                         ch_j "Oh!"
@@ -2351,7 +2351,7 @@ label addiction_serum:
                     else:
                         ch_j "So what kinda deal are we talking here?"
                 elif Girl == StormX:
-                    if Girl.event_counter["swallowed"]:
+                    if Girl.permanent_History["swallowed"]:
                         $ Girl.change_face("bemused")
 
                         ch_s "It has worked out in the past. . ."
@@ -2366,7 +2366,7 @@ label addiction_serum:
                     else:
                         ch_s "I could consider it. . ."
                 elif Girl == JubesX:
-                    if Girl.event_counter["swallowed"]:
+                    if Girl.permanent_History["swallowed"]:
                         $ Girl.change_face("bemused")
 
                         ch_v "I guess that works too. . ."
@@ -3013,7 +3013,7 @@ label addiction_serum:
             "She glances hesitantly at you, but gulps it down, and wipes her lips."
 
             call change_Girl_stat(Girl, "inhibition", 2)
-        elif Girl.event_counter["swallowed"] >= 5 or Girl not in (RogueX, KittyX):
+        elif Girl.permanent_History["swallowed"] >= 5 or Girl not in (RogueX, KittyX):
             "She looks a bit confused, but then grins, gulps it down, and wipes her lips."
 
             call change_Girl_stat(Girl, "inhibition", 1)
@@ -3049,7 +3049,7 @@ label addiction_serum:
                 ch_v "That makes sense."
 
             $ Girl.had_chat[3] = 1
-        elif Girl.event_counter["swallowed"] or Girl not in (RogueX, KittyX):
+        elif Girl.permanent_History["swallowed"] or Girl not in (RogueX, KittyX):
             $ Girl.change_face("surprised")
 
             if Girl == RogueX:

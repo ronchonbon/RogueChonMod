@@ -62,7 +62,7 @@ label Kitty_boyfriend:
 
             call kiss_launch(KittyX)
 
-            $ KittyX.Action_counter["kiss"] += 1
+            $ KittyX.permanent_History["kiss"] += 1
         "Uhm[KittyX.like]okay.":
             $ KittyX.brows = "confused"
 
@@ -80,7 +80,7 @@ label Kitty_boyfriend:
 
                     call kiss_launch(KittyX)
 
-                    $ KittyX.Action_counter["kiss"] += 1
+                    $ KittyX.permanent_History["kiss"] += 1
                 "She wouldn't understand." if len(Player.Harem) == 1:
                     $ line = "no"
                 "They wouldn't be cool with that." if len(Player.Harem) > 1:

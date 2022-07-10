@@ -2162,15 +2162,15 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
     else:
         $ GirlBonus = Date_Bonus[1] + Date_Cost[1]
 
-    if Girl.Action_counter["anal"] and approval_check(Girl, 1500) and GirlBonus > = 15:
+    if Girl.permanent_History["anal"] and approval_check(Girl, 1500) and GirlBonus > = 15:
         $ OptionsDS.append("anal")
-    if Girl.Action_counter["sex"] and approval_check(Girl, 1500) and GirlBonus > = 10:
+    if Girl.permanent_History["sex"] and approval_check(Girl, 1500) and GirlBonus > = 10:
         $ OptionsDS.append("sex")
-    if Girl.Action_counter["blowjob"] and approval_check(Girl, 1300) and GirlBonus > = 10:
+    if Girl.permanent_History["blowjob"] and approval_check(Girl, 1300) and GirlBonus > = 10:
         $ OptionsDS.append("blowjob")
-    if Girl.Action_counter["handjob"] and approval_check(Girl, 1000) and GirlBonus > = 10:
+    if Girl.permanent_History["handjob"] and approval_check(Girl, 1000) and GirlBonus > = 10:
         $ OptionsDS.append("handjob")
-    if Girl.Action_counter["fondle_pussy"] and approval_check(Girl, 1000) and GirlBonus > = 10:
+    if Girl.permanent_History["fondle_pussy"] and approval_check(Girl, 1000) and GirlBonus > = 10:
         $ OptionsDS.append("pussy")
     if approval_check(Girl, 1000) and GirlBonus > = 10:
         $ OptionsDS.append("footjob")
@@ -2220,7 +2220,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
             call change_Girl_stat(Girl, "inhibition", 3)
             $ Girl.addiction -= 20
             $ Girl.seen_peen += 1
-            $ Girl.Action_counter["anal"] += 1
+            $ Girl.permanent_History["anal"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("anal")
             $ Girl.recent_history.append("dinnersex")
@@ -2265,7 +2265,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
             call change_Girl_stat(Girl, "inhibition", 2)
             $ Girl.addiction -= 20
             $ Girl.seen_peen += 1
-            $ Girl.Action_counter["sex"] += 1
+            $ Girl.permanent_History["sex"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("sex")
             $ Girl.recent_history.append("dinnersex")
@@ -2299,7 +2299,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
             $ Girl.recent_history.append("blowjob")
             $ Girl.recent_history.append("dinnersex")
             $ Girl.daily_history.append("blowjob")
-            if Girl.event_counter["swallowed"]:
+            if Girl.permanent_History["swallowed"]:
                 "[Girl.name] wipes her mouth as she climbs out from under the table."
                 if Girl == RogueX:
                     ch_r "I don't think we need desert, [Girl.player_petname]."
@@ -2316,7 +2316,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
                 elif Girl == JubesX:
                     ch_v "My compliments to the chef. . ."
                 $ Girl.addiction -= 20
-                $ Girl.event_counter["swallowed"] += 1
+                $ Girl.permanent_History["swallowed"] += 1
                 $ Girl.recent_history.append("swallow")
                 $ Girl.daily_history.append("swallow")
             else:
@@ -2337,14 +2337,14 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
                     "She then licks it up. . ."
                     ch_v "My compliments to the chef. . ."
                     $ Girl.addiction -= 20
-                    $ Girl.event_counter["swallowed"] += 1
+                    $ Girl.permanent_History["swallowed"] += 1
                     $ Girl.recent_history.append("swallow")
                     $ Girl.daily_history.append("swallow")
             call change_Girl_stat(Girl, "inhibition", 4)
             call change_Girl_stat(Girl, "inhibition", 2)
             $ Girl.seen_peen += 1
             $ Girl.addiction -= 10
-            $ Girl.Action_counter["blowjob"] += 1
+            $ Girl.permanent_History["blowjob"] += 1
             $ Player.semen -= 1
             if _return == 3:
                 "[Previous.name] stares daggers at you both as [Girl.name] crawls out from under the table."
@@ -2364,7 +2364,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
                 "She unzips your pants under the table, and proceeds to caress your cock."
                 "On the other side, [Previous.name] also reaches down and gets into the action."
                 $ line = "They"
-                $ Previous.Action_counter["handjob"] += 1
+                $ Previous.permanent_History["handjob"] += 1
                 $ Previous.recent_history.append("handjob")
                 $ Previous.daily_history.append("handjob")
                 $ Girl.check_if_likes(Previous, 600,3, 1)
@@ -2377,12 +2377,12 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
             else:
                 "She unzips your pants under the table, and proceeds to caress your cock."
                 $ line = "She"
-            if Girl.Action_counter["blowjob"] and (approval_check(Girl, 1200) or Girl == JubesX):
+            if Girl.permanent_History["blowjob"] and (approval_check(Girl, 1200) or Girl == JubesX):
                 "Just as you're about to cum, [Girl.name] ducks her head under the table and comes up with a mouth full."
                 $ Girl.seen_peen += 1
-                $ Girl.Action_counter["blowjob"] += 1
+                $ Girl.permanent_History["blowjob"] += 1
                 $ Girl.addiction -= 20
-                $ Girl.event_counter["swallowed"] += 1
+                $ Girl.permanent_History["swallowed"] += 1
                 $ Girl.recent_history.append("swallow")
                 $ Girl.daily_history.append("swallow")
             else:
@@ -2403,13 +2403,13 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
                     "She then licks it up. . ."
                     ch_v "My compliments to the chef. . ."
                     $ Girl.addiction -= 20
-                    $ Girl.event_counter["swallowed"] += 1
+                    $ Girl.permanent_History["swallowed"] += 1
                     $ Girl.recent_history.append("swallow")
                     $ Girl.daily_history.append("swallow")
             $ line = 0
             call change_Girl_stat(Girl, "inhibition", 4)
             call change_Girl_stat(Girl, "inhibition", 2)
-            $ Girl.Action_counter["handjob"] += 1
+            $ Girl.permanent_History["handjob"] += 1
             $ Player.semen -= 1
             $ Girl.addiction -= 5
             $ Girl.recent_history.append("handjob")
@@ -2480,14 +2480,14 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = [
                     ch_s "And you as well, [Previous.player_petname]."
                 elif Girl == JubesX:
                     ch_v "And thanks for the assist, [Previous.player_petname]."
-                $ Girl.event_counter["been_with_girl"] += 1
-                $ Previous.event_counter["been_with_girl"] += 1
+                $ Girl.permanent_History["been_with_girl"] += 1
+                $ Previous.permanent_History["been_with_girl"] += 1
             $ Girl.addiction -= 5
             call change_Girl_stat(Girl, "love", 3)
             call change_Girl_stat(Girl, "inhibition", 5)
             call change_Girl_stat(Girl, "inhibition", 2)
-            $ Girl.Action_counter["fondle_pussy"] += 1
-            $ Girl.event_counter["orgasmed"]+= 1
+            $ Girl.permanent_History["fondle_pussy"] += 1
+            $ Girl.permanent_History["orgasmed"]+= 1
             $ Girl.recent_history.append("fondle_pussy")
             $ Girl.recent_history.append("dinnersex")
             $ Girl.daily_history.append("fondle_pussy")
@@ -2954,18 +2954,18 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
 
             "You get back to it, [Previous.name] settles back into her seat with a glare."
 
-        if Girl.Action_counter["anal"] and approval_check(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.bottom_number() <= 5:
+        if Girl.permanent_History["anal"] and approval_check(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.bottom_number() <= 5:
             $ OptionsDS.append("anal")
-        if Girl.Action_counter["sex"] and approval_check(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.bottom_number() <= 5:
+        if Girl.permanent_History["sex"] and approval_check(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.bottom_number() <= 5:
             $ OptionsDS.append("sex")
-        if Girl.Action_counter["blowjob"] and approval_check(Girl, 1300, Bonus=(10*GirlBonus)):
+        if Girl.permanent_History["blowjob"] and approval_check(Girl, 1300, Bonus=(10*GirlBonus)):
             $ OptionsDS.append("blowjob")
             if Girl == JubesX:
                 $ OptionsDS.append("blowjob")
                 $ OptionsDS.append("blowjob")
-        if Girl.Action_counter["handjob"] and approval_check(Girl, 1000, Bonus=(10*GirlBonus)):
+        if Girl.permanent_History["handjob"] and approval_check(Girl, 1000, Bonus=(10*GirlBonus)):
             $ OptionsDS.append("handjob")
-        if Girl.Action_counter["fondle_pussy"] and approval_check(Girl, 900, Bonus=(10*GirlBonus)):
+        if Girl.permanent_History["fondle_pussy"] and approval_check(Girl, 900, Bonus=(10*GirlBonus)):
             $ OptionsDS.append("pussy")
         elif approval_check(Girl, 1200, Bonus=(5*GirlBonus)) and Girl.Clothes["underwear"]:
             $ OptionsDS.append("panties")
@@ -2992,25 +2992,25 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
                 $ Girl.check_if_likes(Previous, 700,3, 1)
                 $ Girl.check_if_likes(Previous, 1000,3, 1)
                 $ Previous.check_if_likes(Girl, 1000, 2, 1)
-            if Girl.event_counter["anal_creampied"]:
+            if Girl.permanent_History["anal_creampied"]:
                 if Girl.Clothes["underwear"]:
                     "After several minutes of this, you can't take it anymore and come inside her."
                     "She pulls her panties back up and returns to her seat."
                 else:
                     "After several minutes of this, you can't take it anymore and come inside her."
                     "She wipes off as best she can and shifts back into her seat."
-                $ Girl.event_counter["anal_creampied"] += 1
+                $ Girl.permanent_History["anal_creampied"] += 1
                 $ Girl.recent_history.append("creampie anal")
                 $ Girl.daily_history.append("creampie anal")
             else:
                 "After several minutes of this, she pulls out and shifts back into her seat, finishing you off with her hand."
-                if Girl.event_counter["swallowed"]:
+                if Girl.permanent_History["swallowed"]:
                     if 0 < _return < 3:
                         "You cum into the popcorn bucket, which she and [Previous.name] then finish off together."
                     else:
                         "You cum into the popcorn bucket, which she then finishes off."
                     $ Girl.addiction -= 20
-                    $ Girl.event_counter["swallowed"] += 1
+                    $ Girl.permanent_History["swallowed"] += 1
                     $ Girl.spunk["mouth"] = True
                     $ Girl.recent_history.append("swallowed")
                     $ Girl.daily_history.append("swallowed")
@@ -3036,7 +3036,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
             call change_Girl_stat(Girl, "inhibition", 4)
             call change_Girl_stat(Girl, "inhibition", 3)
             $ Girl.seen_peen += 1
-            $ Girl.Action_counter["anal"] += 1
+            $ Girl.permanent_History["anal"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("anal")
             $ Girl.daily_history.append("anal")
@@ -3057,26 +3057,26 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
                 $ Girl.check_if_likes(Previous, 700,3, 1)
                 $ Girl.check_if_likes(Previous, 1000,3, 1)
                 $ Previous.check_if_likes(Girl, 1000, 2, 1)
-            if Girl.event_counter["creampied"]:
+            if Girl.permanent_History["creampied"]:
                 if Girl.Clothes["underwear"]:
                     "After several minutes of this, you can't take it anymore and come inside her."
                     "She pulls her panties up over her dripping slit and returns to her seat."
                 else:
                     "After several minutes of this, you can't take it anymore and come inside her."
                     "She wipes up as best she can and returns to her seat."
-                $ Girl.event_counter["creampied"] += 1
+                $ Girl.permanent_History["creampied"] += 1
                 $ Girl.recent_history.append("creampie sex")
                 $ Girl.daily_history.append("creampie sex")
             else:
                 "After several minutes of this, she pulls out and shifts back into her seat, finishing you off with her hand."
-                if Girl.event_counter["swallowed"]:
+                if Girl.permanent_History["swallowed"]:
                     if 0 < _return < 3:
                         "You cum into the popcorn bucket, which she and [Previous.name] then finish off together."
                     else:
                         "You cum into the popcorn bucket, which she then finishes off."
                     $ Girl.spunk["mouth"] = True
                     $ Girl.addiction -= 20
-                    $ Girl.event_counter["swallowed"] += 1
+                    $ Girl.permanent_History["swallowed"] += 1
                     $ Girl.recent_history.append("swallowed")
                     $ Girl.daily_history.append("swallowed")
                 else:
@@ -3101,7 +3101,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
             call change_Girl_stat(Girl, "inhibition", 4)
             call change_Girl_stat(Girl, "inhibition", 3)
             $ Girl.seen_peen += 1
-            $ Girl.Action_counter["sex"] += 1
+            $ Girl.permanent_History["sex"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("sex")
             $ Girl.daily_history.append("sex")
@@ -3121,7 +3121,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
             else:
                 "She sucks on it contentedly for several minutes before you finally cum."
             $ Girl.spunk["mouth"] = True
-            if Girl.event_counter["swallowed"]:
+            if Girl.permanent_History["swallowed"]:
                 "[Girl.name] wipes her mouth as she shifts back into her seat and washes it down with some soda."
                 $ Girl.change_face("sexy")
                 if Girl == RogueX:
@@ -3139,7 +3139,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
                 elif Girl == JubesX:
                     ch_v "Now -that's- refreshing. . ."
                 $ Girl.addiction -= 20
-                $ Girl.event_counter["swallowed"] += 1
+                $ Girl.permanent_History["swallowed"] += 1
                 $ Girl.recent_history.append("swallowed")
                 $ Girl.daily_history.append("swallowed")
             else:
@@ -3164,7 +3164,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
             call change_Girl_stat(Girl, "inhibition", 3)
             call change_Girl_stat(Girl, "inhibition", 2)
             $ Girl.seen_peen += 1
-            $ Girl.Action_counter["blowjob"] += 1
+            $ Girl.permanent_History["blowjob"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("blowjob")
             $ Girl.daily_history.append("blowjob")
@@ -3185,7 +3185,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
             else:
                 "She then leans over and begins to stroke it."
             $ Girl.change_face("surprised")
-            if Girl.Action_counter["fondle_pussy"]:
+            if Girl.permanent_History["fondle_pussy"]:
                 if _return == 1:
 
                     "You also reach down and begin stroking their pussies."
@@ -3199,14 +3199,14 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
                     else:
                         "You also lean over, notice she isn't wearing anything down there, and begin to stroke her pussy."
             $ Girl.change_face("sexy", 1, eyes = "closed")
-            if Girl.Action_counter["fondle_pussy"]:
+            if Girl.permanent_History["fondle_pussy"]:
                 if _return == 1:
                     "After several minutes of this, [Girl.name] and [Previous.name] shudder in orgasm, which sets you off as well."
                 else:
                     "After several minutes of this, she shudders in orgasm, which sets you off as well."
                 "[Girl.name] catches the jizz in the popcorn bucket."
             $ Girl.eyes = "sexy"
-            if Girl.event_counter["swallowed"]:
+            if Girl.permanent_History["swallowed"]:
                 if 0 < _return < 3:
                     "The girls finish off the remaining popcorn with a grin."
                 else:
@@ -3227,7 +3227,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
                 elif Girl == JubesX:
                     ch_v "Now -that's- refreshing. . ."
                 $ Girl.addiction -= 20
-                $ Girl.event_counter["swallowed"] += 1
+                $ Girl.permanent_History["swallowed"] += 1
                 $ Girl.recent_history.append("swallowed")
                 $ Girl.daily_history.append("swallowed")
             else:
@@ -3252,9 +3252,9 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
             call change_Girl_stat(Girl, "love", 2)
             call change_Girl_stat(Girl, "inhibition", 3)
             call change_Girl_stat(Girl, "inhibition", 2)
-            $ Girl.Action_counter["fondle_pussy"] += 1
-            $ Girl.event_counter["orgasmed"]+= 1
-            $ Girl.Action_counter["handjob"] += 1
+            $ Girl.permanent_History["fondle_pussy"] += 1
+            $ Girl.permanent_History["orgasmed"]+= 1
+            $ Girl.permanent_History["handjob"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("handjob")
             $ Girl.daily_history.append("handjob")
@@ -3299,8 +3299,8 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS = [], temp_Girls = []
             call change_Girl_stat(Girl, "love", 2)
             call change_Girl_stat(Girl, "inhibition", 2)
             call change_Girl_stat(Girl, "inhibition", 2)
-            $ Girl.Action_counter["fondle_pussy"] += 1
-            $ Girl.event_counter["orgasmed"]+= 1
+            $ Girl.permanent_History["fondle_pussy"] += 1
+            $ Girl.permanent_History["orgasmed"]+= 1
             $ Girl.recent_history.append("fondle_pussy")
             $ Girl.daily_history.append("fondle_pussy")
         elif OptionsDS[0] == "panties":

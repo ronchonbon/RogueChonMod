@@ -11,6 +11,11 @@ init python:
             if default:
                 self.set_default_items()
 
+        def initialize(self, item):
+            for tracker in [self.recent, self.daily, self.permanent]:
+                if item not in tracker:
+                    tracker.update({item: 0})
+
         def update(self, item):
             for tracker in [self.recent, self.daily, self.permanent]:
                 if item not in tracker:
@@ -39,9 +44,9 @@ init python:
                 "dumped", "forced"]
 
             for item in items:
-                self.update(item)
+                self.initialize(item)
 
             for type in all_Action_types:
-                self.update(type)
+                self.initialize(type)
 
             return

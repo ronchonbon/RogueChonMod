@@ -10,7 +10,7 @@ label meet_Jubes:
     $ JubesX.location = Player.location
     $ JubesX.arm_pose = 2
     $ JubesX.change_face("sucking", 1)
-    $ JubesX.change_Outfit("default")
+    $ JubesX.change_Outfit()
 
     ch_u "\"Slurp, slurp, slurp.\""
 

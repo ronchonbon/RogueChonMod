@@ -16,14 +16,14 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
     elif Girl.addiction > 50:
         $ approval_bonus += 5
 
-    if Girl.event_counter["swallowed"] >= 10:
+    if Girl.permanent_History["swallowed"] >= 10:
         $ approval_bonus += 15
-    elif Girl.event_counter["swallowed"] >= 3:
+    elif Girl.permanent_History["swallowed"] >= 3:
         $ approval_bonus += 5
 
-    if (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) >= 10:
+    if (Girl.permanent_History["creampied"] + Girl.permanent_History["anal_creampied"]) >= 10:
         $ approval_bonus += 15
-    elif (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) >= 3:
+    elif (Girl.permanent_History["creampied"] + Girl.permanent_History["anal_creampied"]) >= 3:
         $ approval_bonus += 5
 
     $ D20 = renpy.random.randint(1, 20)
@@ -112,7 +112,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
             jump Girl_Orgasm_After
         "Pull back" if Player.primary_Action != "psy" and Girl.location == Player.location and action_context != "swap":
             if renpy.showing(Girl.tag + " blowjob"):
-                if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.event_counter["swallowed"]:
+                if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.permanent_History["swallowed"]:
                     jump Manic_Suck
 
                 call show_full_body(Girl)
@@ -122,7 +122,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
                 call show_full_body(Girl)
             elif renpy.showing(Girl.tag + " sex"):
                 call show_full_body(Girl)
-            if approval_check(Girl, 500, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.addiction > 50 and Girl.event_counter["swallowed"]:
+            if approval_check(Girl, 500, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.addiction > 50 and Girl.permanent_History["swallowed"]:
                 $ Girl.eyes = "manic"
                 $ Girl.mouth = "kiss"
                 $ action_speed = 0
@@ -298,7 +298,7 @@ label Girl_Warn_Her:
         jump Girl_Swallowed
 
 
-    if Player.primary_Action == "sex" and Girl.event_counter["creampied"] >= 5:
+    if Player.primary_Action == "sex" and Girl.permanent_History["creampied"] >= 5:
 
         $ Girl.change_face("sexy")
         $ Player.primary_Action.type = "sex"
@@ -310,7 +310,7 @@ label Girl_Warn_Her:
             call Girl_Cumming (Girl)
         jump Girl_Creampied
 
-    elif Player.primary_Action == "sex" and Girl.event_counter["creampied"] and D20 >= 10:
+    elif Player.primary_Action == "sex" and Girl.permanent_History["creampied"] and D20 >= 10:
 
         $ Girl.change_face("sexy")
         $ Player.primary_Action.type = "sex"
@@ -322,7 +322,7 @@ label Girl_Warn_Her:
             call Girl_Cumming (Girl)
         jump Girl_Creampied
 
-    elif Player.primary_Action == "anal" and Girl.event_counter["anal_creampied"] >= 5:
+    elif Player.primary_Action == "anal" and Girl.permanent_History["anal_creampied"] >= 5:
 
         $ Girl.change_face("sexy")
         $ Player.primary_Action.type = "anal"
@@ -334,7 +334,7 @@ label Girl_Warn_Her:
             call Girl_Cumming (Girl)
         jump Girl_Creampied
 
-    elif Player.primary_Action == "anal" and Girl.event_counter["anal_creampied"] and D20 >= 10:
+    elif Player.primary_Action == "anal" and Girl.permanent_History["anal_creampied"] and D20 >= 10:
 
         $ Girl.change_face("sexy")
         $ Player.primary_Action.type = "anal"
@@ -346,7 +346,7 @@ label Girl_Warn_Her:
             call Girl_Cumming (Girl)
         jump Girl_Creampied
 
-    elif Player.primary_Action != "anal" and Girl.event_counter["swallowed"] >= 5:
+    elif Player.primary_Action != "anal" and Girl.permanent_History["swallowed"] >= 5:
 
         if renpy.showing(Girl.tag + " blowjob"):
             $ Girl.change_face("sucking")
@@ -368,7 +368,7 @@ label Girl_Warn_Her:
         call Sex_Basic_Dialog (Girl, "warned")
         jump Girl_Swallowed
 
-    elif Girl.event_counter["swallowed"] and D20 >= 10:
+    elif Girl.permanent_History["swallowed"] and D20 >= 10:
 
         if renpy.showing(Girl.tag + " doggy") or renpy.showing(Girl.tag + " sex"):
             call show_handjob(Girl, orgasm = True)
@@ -405,16 +405,16 @@ label Girl_Warn_Her:
         elif Girl.SEXP > 20:
             jump Girl_Facial
 
-        if renpy.showing(Girl.tag + " handjob") and Girl.Action_counter["handjob"]:
+        if renpy.showing(Girl.tag + " handjob") and Girl.permanent_History["handjob"]:
             jump Girl_Handy_Finish
-        elif renpy.showing(Girl.tag + " blowjob") and Girl.Action_counter["blowjob"]:
+        elif renpy.showing(Girl.tag + " blowjob") and Girl.permanent_History["blowjob"]:
             jump Girl_Handy_Finish
-        elif renpy.showing(Girl.tag + " titjob") and Girl.Action_counter["titjob"]:
+        elif renpy.showing(Girl.tag + " titjob") and Girl.permanent_History["titjob"]:
             jump Girl_Facial
-        elif (renpy.showing(Girl.tag + " doggy") or renpy.showing(Girl.tag + " sex")) and Girl.Action_counter["sex"] and Player.primary_Action == "sex":
+        elif (renpy.showing(Girl.tag + " doggy") or renpy.showing(Girl.tag + " sex")) and Girl.permanent_History["sex"] and Player.primary_Action == "sex":
             "She gently pushes you back off of her."
             jump Girl_Cum_Outside
-        elif (renpy.showing(Girl.tag + " doggy") or renpy.showing(Girl.tag + " sex")) and Girl.Action_counter["anal"] and Player.primary_Action == "anal":
+        elif (renpy.showing(Girl.tag + " doggy") or renpy.showing(Girl.tag + " sex")) and Girl.permanent_History["anal"] and Player.primary_Action == "anal":
             "She gently pushes you back off of her."
             jump Girl_Cum_Outside
 
@@ -478,7 +478,7 @@ label Girl_In_mouth:
                 ch_s "I am afraid that I am rather full at the moment. . ."
             elif Girl == JubesX:
                 ch_v "I, um. . . I think I'm actually stuffed. . ."
-        elif Girl.event_counter["swallowed"] >= 5 or "hungry" in Girl.traits:
+        elif Girl.permanent_History["swallowed"] >= 5 or "hungry" in Girl.traits:
 
             $ Girl.change_face("sexy")
             $ Girl.mouth = "smile"
@@ -489,7 +489,7 @@ label Girl_In_mouth:
             $ action_speed = 0
             call Sex_Basic_Dialog (Girl, "swallowgood")
             $ Girl.change_face()
-        elif Girl.event_counter["swallowed"]:
+        elif Girl.permanent_History["swallowed"]:
             $ Girl.change_face("bemused")
             $ Girl.spunk["mouth"] = True
             $ Girl.spunk["chin"] = True
@@ -500,7 +500,7 @@ label Girl_In_mouth:
             if action_context != "warn":
                 call Sex_Basic_Dialog (Girl, "notwarned")
             $ Girl.change_face()
-        elif Girl.addiction >= 50 and Girl.inhibition < 400 and Girl.Action_counter["blowjob"] < 10 and Girl != JubesX:
+        elif Girl.addiction >= 50 and Girl.inhibition < 400 and Girl.permanent_History["blowjob"] < 10 and Girl != JubesX:
             $ Girl.change_face("bemused", 1)
             $ Girl.spunk["mouth"] = True
             Girl.voice ". . ."
@@ -708,7 +708,7 @@ label Girl_In_mouth:
     if "full" in Girl.recent_history:
         pass
 
-    elif Girl.event_counter["swallowed"] >= 5 or "hungry" in Girl.traits:
+    elif Girl.permanent_History["swallowed"] >= 5 or "hungry" in Girl.traits:
 
         $ Girl.change_face("sucking")
         if not renpy.showing(Girl.tag + " blowjob"):
@@ -729,7 +729,7 @@ label Girl_In_mouth:
         $ Girl.spunk["mouth"] = False
         jump Girl_Swallowed
 
-    elif Girl.addiction >= 80 and Girl.event_counter["swallowed"]:
+    elif Girl.addiction >= 80 and Girl.permanent_History["swallowed"]:
 
         $ Girl.brows = "confused"
         $ Girl.eyes = "manic"
@@ -754,7 +754,7 @@ label Girl_In_mouth:
         call change_Girl_stat(Girl, "inhibition", 5)
         jump Girl_Swallowed
 
-    elif Girl.event_counter["swallowed"]:
+    elif Girl.permanent_History["swallowed"]:
         if approval_check(Girl, 900):
             $ Girl.brows = "confused"
             if renpy.showing(Girl.tag + " titjob"):
@@ -970,7 +970,7 @@ label Girl_In_mouth:
     $ action_speed = 0
     $ Girl.change_face("sexy")
 
-    if approval_check(Girl, 1000) and Girl.event_counter["swallowed"] >= 3:
+    if approval_check(Girl, 1000) and Girl.permanent_History["swallowed"] >= 3:
         call Sex_Basic_Dialog (Girl, "swallow2")
     elif approval_check(Girl, 800):
         call Sex_Basic_Dialog (Girl, "swallowfirst")
@@ -979,7 +979,7 @@ label Girl_In_mouth:
         call Sex_Basic_Dialog (Girl, "swallowfirst")
     call change_Girl_stat(Girl, "inhibition", 3)
     call change_Girl_stat(Girl, "inhibition", 2)
-    $ Girl.Action_counter["blowjob"] += 1
+    $ Girl.permanent_History["blowjob"] += 1
     jump Girl_Swallowed
 
 label Girl_Creampie_P:
@@ -988,7 +988,7 @@ label Girl_Creampie_P:
         $ Girl.spunk["pussy"] = True
         $ Player.spunk = "in"
         $ action_speed = 0
-        if approval_check(Girl, 1300) or Girl.event_counter["creampied"]:
+        if approval_check(Girl, 1300) or Girl.permanent_History["creampied"]:
             $ Girl.change_face("surprised")
             "You come in her pussy. Her eyes widen in surprise, but she takes it in stride."
             $ Girl.change_face("sexy")
@@ -1034,11 +1034,11 @@ label Girl_Creampie_P:
         jump Girl_Creampied
 
 
-    if approval_check(Girl, 1200) or Girl.event_counter["creampied"]:
+    if approval_check(Girl, 1200) or Girl.permanent_History["creampied"]:
         $ Girl.change_face("sexy")
-        if Girl.event_counter["creampied"] >= 3:
+        if Girl.permanent_History["creampied"] >= 3:
             "She smiles and speeds up her actions, causing you to erupt inside her."
-        elif Girl.event_counter["creampied"]:
+        elif Girl.permanent_History["creampied"]:
             "She gets a mischievous look and speeds up, you burst inside her."
         else:
             "As you continue to pound her, she nods her head."
@@ -1091,7 +1091,7 @@ label Girl_Creampie_A:
         $ Girl.spunk["anus"] = True
         $ Player.spunk = "anal"
         $ action_speed = 0
-        if approval_check(Girl, 1200) or Girl.event_counter["creampied"]:
+        if approval_check(Girl, 1200) or Girl.permanent_History["creampied"]:
             $ Girl.change_face("surprised", 1)
             "You come in her ass. Her eyes widen in surprise, but she takes it in stride."
             $ Girl.change_face("sexy")
@@ -1137,11 +1137,11 @@ label Girl_Creampie_A:
         jump Girl_Creampied
 
 
-    if approval_check(Girl, 1200) or Girl.event_counter["creampied"]:
+    if approval_check(Girl, 1200) or Girl.permanent_History["creampied"]:
         $ Girl.change_face("sexy")
-        if Girl.event_counter["creampied"] >= 3:
+        if Girl.permanent_History["creampied"] >= 3:
             "She smiles and speeds up her actions, causing you to erupt inside her."
-        elif Girl.event_counter["creampied"]:
+        elif Girl.permanent_History["creampied"]:
             "She gets a mischievous look and speeds up, you burst inside her."
         else:
             "As you continue to pound her, she nods her head."
@@ -1189,7 +1189,7 @@ label Girl_Creampie_A:
 
 label Girl_Facial:
     if renpy.showing(Girl.tag + " blowjob"):
-        if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.event_counter["swallowed"]:
+        if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.permanent_History["swallowed"]:
             jump Manic_Suck
         call show_handjob(Girl, orgasm = True)
         $ action_speed = 2
@@ -1209,7 +1209,7 @@ label Girl_Facial:
             $ Girl.spunk["hair"] = True
         else:
             $ Girl.spunk["face"] = True
-        if not Girl.Action_counter["titjob"]:
+        if not Girl.permanent_History["titjob"]:
             "She glances up but continues to rub her breasts up and down on your cock. When you come, you spray all over her face."
         else:
             "As you're about to finish, you aim squarely at her face, and spray all over it."
@@ -1222,7 +1222,7 @@ label Girl_Facial:
             $ Girl.spunk["hair"] = True
         else:
             $ Girl.spunk["face"] = True
-        if not Girl.Action_counter["handjob"]:
+        if not Girl.permanent_History["handjob"]:
             "She looks a bit confused but continues to stroke while staring at it like a live snake. When you finish, you spray all over her face."
         else:
             "As you're about to finish, you aim squarely at her face, and spray all over it."
@@ -1289,7 +1289,7 @@ label Girl_Facial:
 
 label Girl_TitSpunk:
     if renpy.showing(Girl.tag + " blowjob"):
-        if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.event_counter["swallowed"]:
+        if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.permanent_History["swallowed"]:
             jump Manic_Suck
 
 
@@ -1351,7 +1351,7 @@ label Girl_Cum_Outside:
 
             call show_sex(Girl, "hotdog")
     $ action_speed = 0
-    if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience))  and Girl.event_counter["swallowed"]:
+    if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience))  and Girl.permanent_History["swallowed"]:
         $ Girl.eyes = "manic"
         $ Girl.blushing = "_blush1"
         call show_blowjob(Girl, orgasm = True)
@@ -1401,7 +1401,7 @@ label Girl_Cum_Outside:
             "You pick up the pace and with a grunt you spray all over her stomach."
 
 
-    if Girl.addiction >= 60 and approval_check(Girl, 800, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.event_counter["swallowed"]:
+    if Girl.addiction >= 60 and approval_check(Girl, 800, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.permanent_History["swallowed"]:
 
         $ Girl.eyes = "manic"
         $ Girl.blushing = "_blush1"
@@ -1489,7 +1489,7 @@ label Girl_Handy_Finish:
 
 
 label Girl_Swallowed:
-    $ Girl.event_counter["swallowed"] += 1
+    $ Girl.permanent_History["swallowed"] += 1
     call change_Girl_stat(Girl, "inhibition", 3)
     $ Girl.addiction -= 20
     if Girl.spunk["mouth"]:
@@ -1539,7 +1539,7 @@ label Girl_Swallowed:
     if Player.primary_Action == "anal":
         call change_Girl_stat(Girl, "obedience", 2)
         call change_Girl_stat(Girl, "obedience", 2)
-    if Girl.event_counter["swallowed"] == 1:
+    if Girl.permanent_History["swallowed"] == 1:
         $ Girl.SEXP += 12
         call change_Girl_stat(Girl, "inhibition", 5)
     jump Girl_Orgasm_After
@@ -1547,12 +1547,12 @@ label Girl_Swallowed:
 
 label Girl_Creampied:
     if Player.primary_Action == "sex":
-        $ Girl.event_counter["creampied"] += 1
+        $ Girl.permanent_History["creampied"] += 1
         call change_Girl_stat(Girl, "lust", 10)
         $ Girl.recent_history.append("creampie sex")
         $ Girl.daily_history.append("creampie sex")
     elif Player.primary_Action == "anal":
-        $ Girl.event_counter["anal_creampied"] += 1
+        $ Girl.permanent_History["anal_creampied"] += 1
         call change_Girl_stat(Girl, "lust", 5)
         $ Girl.recent_history.append("creampie anal")
         $ Girl.daily_history.append("creampie anal")
@@ -1561,7 +1561,7 @@ label Girl_Creampied:
     $ Girl.addiction_rate += 2
     if "addictive" in Player.traits:
         $ Girl.addiction_rate += 3
-    if Girl.event_counter["creampied"] == 1:
+    if Girl.permanent_History["creampied"] == 1:
         $ Girl.SEXP += 10
         call change_Girl_stat(Girl, "inhibition", 5)
 
@@ -1610,7 +1610,7 @@ label Girl_CleanCock(Girl):
             $ Girl.change_face("sly", 0)
         else:
             "She wipes your cock clean."
-    elif Girl.Action_counter["blowjob"] > 3 or Girl.event_counter["swallowed"]:
+    elif Girl.permanent_History["blowjob"] > 3 or Girl.permanent_History["swallowed"]:
         if approval_check(Girl, 1200, taboo_modifier = 1) or Girl.addiction >= 60:
             call show_blowjob(Girl, orgasm = True)
             $ action_speed = 1
@@ -1697,7 +1697,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls = []):
     $ Girl.thirst -= 5
 
     $ Girl.session_orgasms += 1
-    $ Girl.event_counter["orgasmed"]+= 1
+    $ Girl.permanent_History["orgasmed"]+= 1
     $ Girl.lust = 30 if "hotblooded" in Girl.traits else 0
     $ Girl.lust += (Girl.session_orgasms*5)
     $ Girl.lust = 60 if Girl.lust >= 60 else Girl.lust
@@ -1775,7 +1775,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls = []):
     if Player.primary_Action != "masturbation":
         if Girl.session_orgasms == 1:
 
-            $ Girl.event_counter["forced"] -= 1 if 5 > Girl.event_counter["forced"] > 0 else 0
+            $ Girl.permanent_History["forced"] -= 1 if 5 > Girl.permanent_History["forced"] > 0 else 0
         call change_Girl_stat(Girl, "lust", 1)
         call change_Girl_stat(Girl, "love", 1)
         call change_Girl_stat(Girl, "love", 1)
@@ -1788,7 +1788,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls = []):
         while temp_Girls:
             if temp_Girls[0].location == Player.location and "noticed " +Girl.tag in temp_Girls[0].recent_history:
                 $ temp_Girls[0].lust += 15 if temp_Girls[0].likes[Girl.tag] >= 500 else 10
-                $ temp_Girls[0].lust += 5 if temp_Girls[0].event_counter["been_with_girl"] >= 5 else 0
+                $ temp_Girls[0].lust += 5 if temp_Girls[0].permanent_History["been_with_girl"] >= 5 else 0
             if temp_Girls[0].lust >= 100:
                 call Girl_Cumming (temp_Girls[0], 1)
             $ temp_Girls.remove(temp_Girls[0])
@@ -1930,7 +1930,7 @@ label Girl_Cleanup(Girl=0, Choice = "random", Options = [], counter=0, Cleaned=0
         $ counter = 1
         $ approval_bonus = 0
 
-    if Girl.addiction > 80 and Girl.event_counter["swallowed"]:
+    if Girl.addiction > 80 and Girl.permanent_History["swallowed"]:
 
         $ Choice = "eat"
         $ Girl.eyes = "manic"
@@ -2265,7 +2265,7 @@ label Girl_Cleanup(Girl=0, Choice = "random", Options = [], counter=0, Cleaned=0
 
 
                 $ Girl.change_face("sly")
-                if "hungry" in Girl.traits or (Girl.event_counter["swallowed"] >= 5 and approval_check(Girl, 800)):
+                if "hungry" in Girl.traits or (Girl.permanent_History["swallowed"] >= 5 and approval_check(Girl, 800)):
 
                     call change_Girl_stat(Girl, "obedience", 1)
                     call change_Girl_stat(Girl, "inhibition", 3)
@@ -2287,7 +2287,7 @@ label Girl_Cleanup(Girl=0, Choice = "random", Options = [], counter=0, Cleaned=0
                     elif Girl == JubesX:
                         $ Girl.change_face("smile")
                         ch_v "Sweet!"
-                elif Girl.event_counter["swallowed"] and approval_check(Girl, 800):
+                elif Girl.permanent_History["swallowed"] and approval_check(Girl, 800):
 
                     call change_Girl_stat(Girl, "obedience", 1)
                     call change_Girl_stat(Girl, "obedience", 1)
@@ -2481,9 +2481,9 @@ label Girl_Cleanup(Girl=0, Choice = "random", Options = [], counter=0, Cleaned=0
 
     if Choice == "random":
         $ Options = ["clean"]
-        if Girl.event_counter["swallowed"] and approval_check(Girl, 800):
+        if Girl.permanent_History["swallowed"] and approval_check(Girl, 800):
             $ Options.append("eat")
-            if Girl.event_counter["swallowed"] >=5:
+            if Girl.permanent_History["swallowed"] >=5:
                 $ Options.append("eat")
             if "hungry" in Girl.traits:
                 $ Options.append("eat")
@@ -2514,7 +2514,7 @@ label Girl_Cleanup(Girl=0, Choice = "random", Options = [], counter=0, Cleaned=0
         "She leaves the jizz right where it is and gives you a wink."
         if Girl.spunk["hand"]:
             $ Girl.spunk["hand"] = False
-            if Girl.event_counter["swallowed"]:
+            if Girl.permanent_History["swallowed"]:
                 "She does lick off her hand though."
             else:
                 "She does wipe her hand off though."
@@ -2631,9 +2631,9 @@ label Self_Cleanup(Girl=0):
 
             call change_Girl_stat(Girl, "inhibition", 2)
             $ Girl.spunk["mouth"] = False
-            $ Girl.event_counter["swallowed"] += 1
+            $ Girl.permanent_History["swallowed"] += 1
             $ Girl.addiction -= (10*counter)
-            if Girl.event_counter["swallowed"] == 1:
+            if Girl.permanent_History["swallowed"] == 1:
                 $ Girl.SEXP += 12
             $ Girl.recent_history.append("swallowed")
             $ Girl.daily_history.append("swallowed")
@@ -2696,7 +2696,7 @@ label Self_Cleanup(Girl=0):
             ch_s "Perhaps next time take better care where you fire."
         elif Girl == JubesX:
             ch_v "Whew, that was a lot."
-    if Choice == "eat" and Girl.event_counter["swallowed"] >= 5:
+    if Choice == "eat" and Girl.permanent_History["swallowed"] >= 5:
         if Girl == RogueX:
             ch_r "That was delicious."
         elif Girl == KittyX:
@@ -2839,7 +2839,7 @@ label Partner_Cleanup_Check(Girl=0, B=0):
 
         call Partner_Clean_Girl (Girl)
 
-        if Girl.event_counter["swallowed"] >=5:
+        if Girl.permanent_History["swallowed"] >=5:
             $ Options.append("eat")
         call show_full_body(Player.focused_Girl)
         call show_full_body(Partner)
@@ -3291,9 +3291,9 @@ label Partner_Clean_Girl(Girl=0):
             call change_Girl_stat(Girl, "inhibition", 2)
             call change_Player_stat("focus",80,3)
             "Then [Partner.name] swallows and wipes her mouth."
-            $ Partner.event_counter["swallowed"] += 1
+            $ Partner.permanent_History["swallowed"] += 1
             $ Partner.addiction -= (10*counter)
-            if Partner.event_counter["swallowed"] == 1:
+            if Partner.permanent_History["swallowed"] == 1:
                 $ Partner.SEXP += 12
             $ Partner.recent_history.append("swallowed")
             $ Partner.daily_history.append("swallowed")

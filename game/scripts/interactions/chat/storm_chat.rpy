@@ -56,7 +56,7 @@ label Storm_Relationship:
                     call Harem_Initiation
                     "[StormX.name] moves in and kisses you deeply."
                     $ StormX.change_face("kiss", 1)
-                    $ StormX.Action_counter["kiss"] += 1
+                    $ StormX.permanent_History["kiss"] += 1
                 elif StormX.obedience >= 500:
                     $ StormX.change_face("perplexed")
                     ch_s "I'm unsure, \"dating\". . ."
@@ -104,7 +104,7 @@ label Storm_Relationship:
                     call Harem_Initiation
                     "[StormX.name] pulls you in and kisses you deeply."
                     $ StormX.change_face("kiss", 1)
-                    $ StormX.Action_counter["kiss"] += 1
+                    $ StormX.permanent_History["kiss"] += 1
                 elif StormX.love >= 600 and approval_check(StormX, 1500):
                     $ StormX.change_face("smile", 1)
                     call change_Girl_stat(StormX, "love", 5)
@@ -119,7 +119,7 @@ label Storm_Relationship:
                     $ StormX.change_face("kiss", 1)
                     "[StormX.name] gives you a quick kiss."
                     $ StormX.change_face("sly", 1)
-                    $ StormX.Action_counter["kiss"] += 1
+                    $ StormX.permanent_History["kiss"] += 1
                 elif StormX.obedience >= 500:
                     $ StormX.change_face("sad")
                     ch_s "Perhaps \"relationships\" are beyond us."
@@ -582,9 +582,9 @@ label Storm_SexChat:
                                 call change_Girl_stat(StormX, "love", 5)
                                 call change_Girl_stat(StormX, "lust", 10)
                                 ch_s "I also enjoy that. . ."
-                            elif StormX.Action_counter["sex"] >= 5:
+                            elif StormX.permanent_History["sex"] >= 5:
                                 ch_s "It certainly is enjoyable. . ."
-                            elif not StormX.Action_counter["sex"]:
+                            elif not StormX.permanent_History["sex"]:
                                 $ StormX.change_face("perplexed")
                                 ch_s "And who is fucking you?"
                             else:
@@ -601,9 +601,9 @@ label Storm_SexChat:
                                 call change_Girl_stat(StormX, "love", 5)
                                 call change_Girl_stat(StormX, "lust", 10)
                                 ch_s "I also enjoy that. . ."
-                            elif StormX.Action_counter["anal"] >= 10:
+                            elif StormX.permanent_History["anal"] >= 10:
                                 ch_s "It certainly is enjoyable. . ."
-                            elif not StormX.Action_counter["anal"]:
+                            elif not StormX.permanent_History["anal"]:
                                 $ StormX.change_face("perplexed")
                                 ch_s "And who is fucking you?"
                             else:
@@ -620,9 +620,9 @@ label Storm_SexChat:
                                 call change_Girl_stat(StormX, "love", 5)
                                 call change_Girl_stat(StormX, "lust", 5)
                                 ch_s "I would have to agree. . ."
-                            elif StormX.Action_counter["blowjob"] >= 10:
+                            elif StormX.permanent_History["blowjob"] >= 10:
                                 ch_s "You are quite delicious. . ."
-                            elif not StormX.Action_counter["blowjob"]:
+                            elif not StormX.permanent_History["blowjob"]:
                                 $ StormX.change_face("perplexed")
                                 ch_s "Who's sucking your dick?!"
                             else:
@@ -639,9 +639,9 @@ label Storm_SexChat:
                                 call change_Girl_stat(StormX, "love", 5)
                                 call change_Girl_stat(StormX, "lust", 7)
                                 ch_s "I also enjoy that. . ."
-                            elif StormX.Action_counter["titjob"] >= 10:
+                            elif StormX.permanent_History["titjob"] >= 10:
                                 ch_s "It certainly is enjoyable. . ."
-                            elif not StormX.Action_counter["titjob"]:
+                            elif not StormX.permanent_History["titjob"]:
                                 $ StormX.change_face("perplexed")
                                 ch_s "And who is titfucking you?"
                             else:
@@ -660,9 +660,9 @@ label Storm_SexChat:
                                 call change_Girl_stat(StormX, "love", 5)
                                 call change_Girl_stat(StormX, "lust", 7)
                                 ch_s "I also enjoy that. . ."
-                            elif StormX.Action_counter["footjob"] >= 10:
+                            elif StormX.permanent_History["footjob"] >= 10:
                                 ch_s "I like it too . . ."
-                            elif not StormX.Action_counter["footjob"]:
+                            elif not StormX.permanent_History["footjob"]:
                                 $ StormX.change_face("perplexed")
                                 ch_s "And who is playing footsie with you?"
                             else:
@@ -679,9 +679,9 @@ label Storm_SexChat:
                                 call change_Girl_stat(StormX, "love", 5)
                                 call change_Girl_stat(StormX, "lust", 7)
                                 ch_s "I also enjoy that. . ."
-                            elif StormX.Action_counter["handjob"] >= 10:
+                            elif StormX.permanent_History["handjob"] >= 10:
                                 ch_s "I like it too . . ."
-                            elif not StormX.Action_counter["handjob"]:
+                            elif not StormX.permanent_History["handjob"]:
                                 $ StormX.change_face("perplexed")
                                 ch_s "And who is jerking you off?"
                             else:
@@ -690,7 +690,7 @@ label Storm_SexChat:
                             $ StormX.player_favorite_action = "handjob"
                         "Feeling you up.":
 
-                            $ counter = StormX.Action_counter["fondle_breasts"]+ StormX.Action_counter["fondle_thighs"]+ StormX.Action_counter["suck_breasts"] + StormX.Action_counter["hotdog"]
+                            $ counter = StormX.permanent_History["fondle_breasts"]+ StormX.permanent_History["fondle_thighs"]+ StormX.permanent_History["suck_breasts"] + StormX.permanent_History["hotdog"]
                             $ StormX.change_face("sly")
                             if StormX.player_favorite_action == "fondle":
                                 call change_Girl_stat(StormX, "lust", 3)
@@ -719,9 +719,9 @@ label Storm_SexChat:
                                 call change_Girl_stat(StormX, "love", 5)
                                 call change_Girl_stat(StormX, "lust", 5)
                                 ch_s "I also enjoy that. . ."
-                            elif StormX.Action_counter["kiss"] >= 10:
+                            elif StormX.permanent_History["kiss"] >= 10:
                                 ch_s "It certainly is enjoyable. . ."
-                            elif not StormX.Action_counter["kiss"]:
+                            elif not StormX.permanent_History["kiss"]:
                                 $ StormX.change_face("perplexed")
                                 ch_s "And who are you kissing?"
                             else:
@@ -925,7 +925,7 @@ label Storm_Chitchat(O=0, Options = ["default", "default", "default"]):
                 $ Player.Phonebook.append(StormX)
                 return
 
-        if "hungry" not in StormX.traits and (StormX.event_counter["swallowed"] + StormX.had_chat[2]) >= 10 and StormX.location == Player.location:
+        if "hungry" not in StormX.traits and (StormX.permanent_History["swallowed"] + StormX.had_chat[2]) >= 10 and StormX.location == Player.location:
             call Storm_Hungry
             return
 
@@ -956,7 +956,7 @@ label Storm_Chitchat(O=0, Options = ["default", "default", "default"]):
 
 
 
-        if StormX.Action_counter["kiss"] >= 5:
+        if StormX.permanent_History["kiss"] >= 5:
 
             $ Options.append("kissed")
         if "dangerroom" in Player.daily_history:
@@ -976,25 +976,25 @@ label Storm_Chitchat(O=0, Options = ["default", "default", "default"]):
 
             if "lingerie" not in StormX.had_chat:
                 $ Options.append("lingerie")
-        if StormX.Action_counter["handjob"]:
+        if StormX.permanent_History["handjob"]:
 
             $ Options.append("handy")
-        if StormX.event_counter["swallowed"]:
+        if StormX.permanent_History["swallowed"]:
 
             $ Options.append("swallowed")
         if "cleaned" in StormX.daily_history or "painted" in StormX.daily_history:
 
             $ Options.append("facial")
-        if StormX.event_counter["sleepover"]:
+        if StormX.permanent_History["sleepover"]:
 
             $ Options.append("sleepwear")
-        if StormX.event_counter["creampied"] or StormX.event_counter["anal_creampied"]:
+        if StormX.permanent_History["creampied"] or StormX.permanent_History["anal_creampied"]:
 
             $ Options.append("creampie")
-        if StormX.Action_counter["sex"] or StormX.Action_counter["anal"]:
+        if StormX.permanent_History["sex"] or StormX.permanent_History["anal"]:
 
             $ Options.append("sexed")
-        if StormX.Action_counter["anal"]:
+        if StormX.permanent_History["anal"]:
 
             $ Options.append("anal")
 
@@ -1156,7 +1156,7 @@ label Storm_Chitchat(O=0, Options = ["default", "default", "default"]):
 
     elif Options[0] == "fondled":
 
-        if StormX.Action_counter["fondle_breasts"]+ StormX.Action_counter["fondle_pussy"] + StormX.Action_counter["fondle_ass"] >= 15:
+        if StormX.permanent_History["fondle_breasts"]+ StormX.permanent_History["fondle_pussy"] + StormX.permanent_History["fondle_ass"] >= 15:
             ch_s "Please touch me. . . sometime. . ."
         else:
             ch_s "You know, you could touch me. . . if you wanted."

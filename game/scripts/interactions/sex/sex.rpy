@@ -179,7 +179,7 @@ label set_approval_bonus(Girl, Action_type, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 40
 
-        if Girl.addiction >= 75 and Girl.event_counter["swallowed"] >= 3: #She's really strung out and has swallowed
+        if Girl.addiction >= 75 and Girl.permanent_History["swallowed"] >= 3: #She's really strung out and has swallowed
             $ approval_bonus += 15
         if Girl.addiction >= 75:
             $ approval_bonus += 5
@@ -194,7 +194,7 @@ label set_approval_bonus(Girl, Action_type, context):
         elif Girl.permanent_History[Action_type]: #You've done it before
             $ approval_bonus += 3
 
-        if Girl.addiction >= 75 and Girl.event_counter["swallowed"] > = 3: #She's really strung out and has swallowed
+        if Girl.addiction >= 75 and Girl.permanent_History["swallowed"] > = 3: #She's really strung out and has swallowed
             $ approval_bonus += 10
         if Girl.addiction >= 75:
             $ approval_bonus += 5
@@ -231,7 +231,7 @@ label set_approval_bonus(Girl, Action_type, context):
         if Girl.lust > 75: #She's really horny
             $ approval_bonus += 10
 
-        if Girl.addiction >= 75 and Girl.event_counter["swallowed"] >= 3: #She's really strung out and has swallowed
+        if Girl.addiction >= 75 and Girl.permanent_History["swallowed"] >= 3: #She's really strung out and has swallowed
             $ approval_bonus += 15
         if Girl.addiction >= 75:
             $ approval_bonus += 5
@@ -246,7 +246,7 @@ label set_approval_bonus(Girl, Action_type, context):
         elif Girl.permanent_History[Action_type]: #You've done it before
             $ approval_bonus += 7
 
-        if Girl.addiction >= 75 and Girl.event_counter["swallowed"] > = 3: #She's really strung out and has swallowed
+        if Girl.addiction >= 75 and Girl.permanent_History["swallowed"] > = 3: #She's really strung out and has swallowed
             $ approval_bonus += 25
         elif Girl.addiction >= 75: #She's really strung out
             $ approval_bonus += 15
@@ -316,7 +316,7 @@ label set_approval_bonus(Girl, Action_type, context):
         elif Girl.permanent_History["sex"]: #You've done it before
             $ approval_bonus += 10
 
-        if Girl.addiction >= 75 and (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) > = 3: #She's really strung out and has creampied
+        if Girl.addiction >= 75 and (Girl.permanent_History["creampied"] + Girl.permanent_History["anal_creampied"]) > = 3: #She's really strung out and has creampied
             $ approval_bonus += 20
         elif Girl.addiction >= 75:
             $ approval_bonus += 15
@@ -343,7 +343,7 @@ label set_approval_bonus(Girl, Action_type, context):
         elif Girl.permanent_History["anal"] : #You've done it before
             $ approval_bonus += 15
 
-        if Girl.addiction >= 75 and (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) > = 3: #She's really strung out and has creampied
+        if Girl.addiction >= 75 and (Girl.permanent_History["creampied"] + Girl.permanent_History["anal_creampied"]) > = 3: #She's really strung out and has creampied
             $ approval_bonus += 25
         elif Girl.addiction >= 75:
             $ approval_bonus += 15
@@ -389,8 +389,8 @@ label set_approval_bonus(Girl, Action_type, context):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 40
 
-    if Girl.event_counter["forced"] and not Girl.forced:
-        $ approval_bonus -= 5*Girl.event_counter["forced"]
+    if Girl.permanent_History["forced"] and not Girl.forced:
+        $ approval_bonus -= 5*Girl.permanent_History["forced"]
 
     if taboo and "no_taboo" in Girl.daily_history:
         $ approval_bonus -= 10
@@ -484,7 +484,7 @@ label sex_over(put_clothes_on = True):
 label slap_ass(Girl):
     call punch
 
-    $ Girl.event_counter["ass_slapped"] += 1
+    $ Girl.permanent_History["ass_slapped"] += 1
 
     return
 

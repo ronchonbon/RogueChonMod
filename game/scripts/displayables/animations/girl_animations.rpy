@@ -490,7 +490,7 @@ label remove_Girl(Girl, transition = None):
     return
 
 label remove_all:
-    $ check_who_is_present
+    call check_who_is_present
 
     if Present:
         $ temp_Girls = Present[:]

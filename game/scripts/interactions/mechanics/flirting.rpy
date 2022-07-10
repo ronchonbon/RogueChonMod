@@ -294,7 +294,7 @@ label Flirt(Girl=0):
                         "You lean close for a kiss, but [Girl.name] gently elbows your ribs."
                         ch_v "Oh, um, no thanks. . ."
                     return
-                if Girl.Action_counter["kiss"]:
+                if Girl.permanent_History["kiss"]:
 
                     if approval_check(Girl, 750, "L", taboo_modifier = 1):
                         $ Girl.change_face("sexy", 1)
@@ -498,7 +498,7 @@ label Flirt(Girl=0):
                         elif Girl == JubesX:
                             ch_v "Back off, creep!"
 
-                $ Girl.Action_counter["kiss"] += 1
+                $ Girl.permanent_History["kiss"] += 1
                 $ Girl.addiction -= 1
                 $ Girl.addiction_rate += 1
                 $ Girl.addiction_rate = 3 if Girl.addiction_rate < 3 else Girl.addiction_rate
@@ -1603,7 +1603,7 @@ label Flirt(Girl=0):
                                 $ Count = 0
                             "Fondle it a little":
 
-                                if Girl.Action_counter["fondle_breasts"]and approval_check(Girl, 1000, taboo_modifier=2):
+                                if Girl.permanent_History["fondle_breasts"]and approval_check(Girl, 1000, taboo_modifier=2):
                                     $ Girl.change_face("sexy", 1)
                                     $ Girl.eyes = "closed"
                                     call change_Girl_stat(Girl, "lust", 5)
@@ -1648,7 +1648,7 @@ label Flirt(Girl=0):
                 elif Player.location == "bg_halloween":
                     "She shrugs away from you and winks."
                     Girl.voice "Not now. . ."
-                elif Girl.Action_counter["fondle_breasts"]and approval_check(Girl, 1100, taboo_modifier = 3):
+                elif Girl.permanent_History["fondle_breasts"]and approval_check(Girl, 1100, taboo_modifier = 3):
                     $ Girl.change_face("sexy", 1)
                     if Girl == RogueX:
                         ch_r "You know, maybe we could keep this party roll'in. . ."

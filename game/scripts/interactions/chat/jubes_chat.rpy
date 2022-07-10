@@ -56,7 +56,7 @@ label Jubes_Relationship:
                     call Harem_Initiation
                     "[JubesX.name] tackles you and kisses you deeply."
                     $ JubesX.change_face("kiss", 1)
-                    $ JubesX.Action_counter["kiss"] += 1
+                    $ JubesX.permanent_History["kiss"] += 1
                 elif JubesX.obedience >= 500:
                     $ JubesX.change_face("perplexed")
                     ch_v "I don't know if I want to -date- you. . ."
@@ -104,7 +104,7 @@ label Jubes_Relationship:
                     call Harem_Initiation
                     "[JubesX.name] pulls you in and kisses you deeply."
                     $ JubesX.change_face("kiss", 1)
-                    $ JubesX.Action_counter["kiss"] += 1
+                    $ JubesX.permanent_History["kiss"] += 1
                 elif JubesX.love >= 600 and approval_check(JubesX, 1500):
                     $ JubesX.change_face("smile", 1)
                     call change_Girl_stat(JubesX, "love", 5)
@@ -119,7 +119,7 @@ label Jubes_Relationship:
                     $ JubesX.change_face("kiss", 1)
                     "[JubesX.name] gives you a quick kiss."
                     $ JubesX.change_face("sly", 1)
-                    $ JubesX.Action_counter["kiss"] += 1
+                    $ JubesX.permanent_History["kiss"] += 1
                 elif JubesX.obedience >= 500:
                     $ JubesX.change_face("sad")
                     ch_v "Nah, we gave it a shot."
@@ -568,9 +568,9 @@ label Jubes_SexChat:
                                 call change_Girl_stat(JubesX, "love", 5)
                                 call change_Girl_stat(JubesX, "lust", 10)
                                 ch_v "I really like it too!"
-                            elif JubesX.Action_counter["sex"] >= 5:
+                            elif JubesX.permanent_History["sex"] >= 5:
                                 ch_v "Well I don't mind that."
-                            elif not JubesX.Action_counter["sex"]:
+                            elif not JubesX.permanent_History["sex"]:
                                 $ JubesX.change_face("perplexed")
                                 ch_v "Who's fucking you?"
                             else:
@@ -587,9 +587,9 @@ label Jubes_SexChat:
                                 call change_Girl_stat(JubesX, "love", 5)
                                 call change_Girl_stat(JubesX, "lust", 10)
                                 ch_v "I love it too!"
-                            elif JubesX.Action_counter["anal"] >= 10:
+                            elif JubesX.permanent_History["anal"] >= 10:
                                 ch_v "Yeah, it's. . . nice. . ."
-                            elif not JubesX.Action_counter["anal"]:
+                            elif not JubesX.permanent_History["anal"]:
                                 $ JubesX.change_face("perplexed")
                                 ch_v "Who's fucking you?"
                             else:
@@ -606,9 +606,9 @@ label Jubes_SexChat:
                                 call change_Girl_stat(JubesX, "love", 5)
                                 call change_Girl_stat(JubesX, "lust", 5)
                                 ch_v "Me too!"
-                            elif JubesX.Action_counter["blowjob"] >= 10:
+                            elif JubesX.permanent_History["blowjob"] >= 10:
                                 ch_v "Yeah, you're delicious."
-                            elif not JubesX.Action_counter["blowjob"]:
+                            elif not JubesX.permanent_History["blowjob"]:
                                 $ JubesX.change_face("perplexed")
                                 ch_v "Who's sucking your dick?!"
                             else:
@@ -625,9 +625,9 @@ label Jubes_SexChat:
                                 call change_Girl_stat(JubesX, "love", 5)
                                 call change_Girl_stat(JubesX, "lust", 7)
                                 ch_v "Yeah, I enjoy that too. . ."
-                            elif JubesX.Action_counter["titjob"] >= 10:
+                            elif JubesX.permanent_History["titjob"] >= 10:
                                 ch_v "It's certainly an interesting experience . . ."
-                            elif not JubesX.Action_counter["titjob"]:
+                            elif not JubesX.permanent_History["titjob"]:
                                 $ JubesX.change_face("perplexed")
                                 ch_v "Who's titfucking you?"
                             else:
@@ -646,9 +646,9 @@ label Jubes_SexChat:
                                 call change_Girl_stat(JubesX, "love", 5)
                                 call change_Girl_stat(JubesX, "lust", 7)
                                 ch_v "I do like using my feet. . ."
-                            elif JubesX.Action_counter["footjob"] >= 10:
+                            elif JubesX.permanent_History["footjob"] >= 10:
                                 ch_v "I like it too . . ."
-                            elif not JubesX.Action_counter["footjob"]:
+                            elif not JubesX.permanent_History["footjob"]:
                                 $ JubesX.change_face("perplexed")
                                 ch_v "Who's playing footsie with you?"
                             else:
@@ -665,9 +665,9 @@ label Jubes_SexChat:
                                 call change_Girl_stat(JubesX, "love", 5)
                                 call change_Girl_stat(JubesX, "lust", 7)
                                 ch_v "You do feel pretty comfy. . ."
-                            elif JubesX.Action_counter["handjob"] >= 10:
+                            elif JubesX.permanent_History["handjob"] >= 10:
                                 ch_v "I like it too . . ."
-                            elif not JubesX.Action_counter["handjob"]:
+                            elif not JubesX.permanent_History["handjob"]:
                                 $ JubesX.change_face("perplexed")
                                 ch_v "Who's jerking you off?"
                             else:
@@ -676,7 +676,7 @@ label Jubes_SexChat:
                             $ JubesX.player_favorite_action = "handjob"
                         "Feeling you up.":
 
-                            $ counter = JubesX.Action_counter["fondle_breasts"]+ JubesX.Action_counter["fondle_thighs"]+ JubesX.Action_counter["suck_breasts"] + JubesX.Action_counter["hotdog"]
+                            $ counter = JubesX.permanent_History["fondle_breasts"]+ JubesX.permanent_History["fondle_thighs"]+ JubesX.permanent_History["suck_breasts"] + JubesX.permanent_History["hotdog"]
                             $ JubesX.change_face("sly")
                             if JubesX.player_favorite_action == "fondle":
                                 call change_Girl_stat(JubesX, "lust", 3)
@@ -705,9 +705,9 @@ label Jubes_SexChat:
                                 call change_Girl_stat(JubesX, "love", 5)
                                 call change_Girl_stat(JubesX, "lust", 5)
                                 ch_v "Hmm, the taste of you on my lips. . ."
-                            elif JubesX.Action_counter["kiss"] >= 10:
+                            elif JubesX.permanent_History["kiss"] >= 10:
                                 ch_v "I love kissing you too . . ."
-                            elif not JubesX.Action_counter["kiss"]:
+                            elif not JubesX.permanent_History["kiss"]:
                                 $ JubesX.change_face("perplexed")
                                 ch_v "Who are you kissing?"
                             else:
@@ -911,7 +911,7 @@ label Jubes_Chitchat(O=0, Options = ["default", "default", "default"]):
                 $ Player.Phonebook.append(JubesX)
                 return
 
-        if "hungry" not in JubesX.traits and JubesX.event_counter["swallowed"] >= 3 and JubesX.location == Player.location:
+        if "hungry" not in JubesX.traits and JubesX.permanent_History["swallowed"] >= 3 and JubesX.location == Player.location:
             call Jubes_Hungry
             return
 
@@ -944,7 +944,7 @@ label Jubes_Chitchat(O=0, Options = ["default", "default", "default"]):
 
 
 
-        if JubesX.Action_counter["kiss"] >= 5:
+        if JubesX.permanent_History["kiss"] >= 5:
 
             $ Options.append("kissed")
 
@@ -967,25 +967,25 @@ label Jubes_Chitchat(O=0, Options = ["default", "default", "default"]):
 
             if "lingerie" not in JubesX.had_chat:
                 $ Options.append("lingerie")
-        if JubesX.Action_counter["handjob"]:
+        if JubesX.permanent_History["handjob"]:
 
             $ Options.append("handy")
-        if JubesX.event_counter["swallowed"]:
+        if JubesX.permanent_History["swallowed"]:
 
             $ Options.append("swallowed")
         if "cleaned" in JubesX.daily_history or "painted" in JubesX.daily_history:
 
             $ Options.append("facial")
-        if JubesX.event_counter["sleepover"]:
+        if JubesX.permanent_History["sleepover"]:
 
             $ Options.append("sleepwear")
-        if JubesX.event_counter["creampied"] or JubesX.event_counter["anal_creampied"]:
+        if JubesX.permanent_History["creampied"] or JubesX.permanent_History["anal_creampied"]:
 
             $ Options.append("creampie")
-        if JubesX.Action_counter["sex"] or JubesX.Action_counter["anal"]:
+        if JubesX.permanent_History["sex"] or JubesX.permanent_History["anal"]:
 
             $ Options.append("sexed")
-        if JubesX.Action_counter["anal"]:
+        if JubesX.permanent_History["anal"]:
 
             $ Options.append("anal")
 

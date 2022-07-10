@@ -38,7 +38,8 @@ init python:
 
         return True
 
-    def check_who_is_present(location = None):
+label check_who_is_present(location = None):
+    python:
         Present = Player.Party[:] if Player.Party else []
 
         if not location:
@@ -60,7 +61,7 @@ init python:
 
             shift_focus(Present[0])
 
-        return
+    return
 
 label dildo_check(Girl):
     if "dildo" in Player.inventory:

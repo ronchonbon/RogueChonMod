@@ -318,7 +318,7 @@ label outfits_menu(Girl):
                     "Never mind":
                         pass
             "I really like that green top and skirt outfit you have." if Girl == RogueX:
-                $ Girl.change_Outfit("default")
+                $ Girl.change_Outfit()
 
                 menu:
                     "You should wear this one for now.":
@@ -338,7 +338,7 @@ label outfits_menu(Girl):
                     "Let's try something else though.":
                         ch_r "Ok."
             "I really like that pink shirt and capris outfit you wear." if Girl == KittyX:
-                $ Girl.change_Outfit("default")
+                $ Girl.change_Outfit()
 
                 menu:
                     "You should wear this one out. [[set current outfit]":
@@ -358,7 +358,7 @@ label outfits_menu(Girl):
                     "Let's try something else though.":
                         ch_k "K."
             "I really like that teacher's look you wear." if Girl == EmmaX:
-                $ Girl.change_Outfit("default")
+                $ Girl.change_Outfit()
 
                 menu:
                     "You should wear this one out. [[set current outfit]":
@@ -378,7 +378,7 @@ label outfits_menu(Girl):
                     "Let's try something else though.":
                         ch_e "Very well."
             "Your leather combat outfit looks awesome." if Girl == LauraX:
-                $ Girl.change_Outfit("default")
+                $ Girl.change_Outfit()
 
                 menu:
                     "You should wear this one out. [[set current outfit]":
@@ -397,7 +397,7 @@ label outfits_menu(Girl):
                     "Let's try something else though.":
                         ch_l "Ok."
             "Your pink shirt and pants outfit is cute." if Girl == JeanX:
-                $ Girl.change_Outfit("default")
+                $ Girl.change_Outfit()
 
                 menu:
                     "You should wear this one out. [[set current outfit]":
@@ -416,7 +416,7 @@ label outfits_menu(Girl):
                     "Let's try something else though.":
                         ch_j "Sure. . ."
             "Try on that skirt combo." if Girl == StormX:
-                $ Girl.change_Outfit("default")
+                $ Girl.change_Outfit()
 
                 menu:
                     "You should wear this one out. [[set current outfit]":
@@ -436,7 +436,7 @@ label outfits_menu(Girl):
                     "Let's try something else though.":
                         ch_s "Ok."
             "You look great in your red and blue outfit." if Girl == JubesX:
-                $ Girl.change_Outfit("default")
+                $ Girl.change_Outfit()
 
                 menu:
                     "You should wear this one out. [[set current outfit]":

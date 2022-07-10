@@ -112,7 +112,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
         if not action_speed:
             $ line = GirlA.name + " holds your cock in her hand. "
-            if GirlA.Action_counter["handjob"] > 2:
+            if GirlA.permanent_History["handjob"] > 2:
                 $ line = line + "_She just seems to be enjoying the feel of it"
                 $ TempLust += 2 if GirlA.lust < 60 else 0
             else:
@@ -141,7 +141,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She moves very smoothly, stroking casually and very gently, you can tell she's had plenty of practice",
                                     "You can't tell where she is at any moment, all you know is that it works"])
                 $ TempFocus += 20 if Player.climax > 70 else 7
-        elif GirlA.Action_counter["handjob"] > 4:
+        elif GirlA.permanent_History["handjob"] > 4:
 
             if action_speed <= 1:
 
@@ -163,7 +163,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                                     "She moves very smoothly, stroking casually and very gently, like she's been doing this for years",
                                     "You can't tell where she is at any moment, all you know is that it works"])
                 $ TempFocus += 20 if Player.climax > 70 else 5
-        elif 2 < GirlA.Action_counter["handjob"] <= 4:
+        elif 2 < GirlA.permanent_History["handjob"] <= 4:
 
             if action_speed <= 1:
 
@@ -204,7 +204,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ TempFocus += 10 if Player.climax > 60 else 2
 
         $ TempLust += 2 if GirlA.lust < 60 else 0
-        $ TempLust += 2 if GirlA.Action_counter["handjob"] > 2 else 0
+        $ TempLust += 2 if GirlA.permanent_History["handjob"] > 2 else 0
         $ GirlA.addiction -= 1 if D20S > 10 else 2
 
 
@@ -216,7 +216,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
         if not action_speed:
             if GirlA == KittyX:
                 $ line = GirlA.name + " begins to rub her chest against you"
-            elif GirlA.Action_counter["titjob"] > 2:
+            elif GirlA.permanent_History["titjob"] > 2:
                 $ line = GirlA.name + " begins to bounce her breasts up and down"
             else:
                 $ line = GirlA.name + " squeezes her breasts together and slowly moves them along your shaft"
@@ -225,7 +225,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             $ TempLust += 6 if GirlA.lust > 60 else 3
             return
 
-        if GirlA in (EmmaX, StormX) or (GirlA.Action_counter["titjob"] > 4 and GirlA.Action_counter["blowjob"]):
+        if GirlA in (EmmaX, StormX) or (GirlA.permanent_History["titjob"] > 4 and GirlA.permanent_History["blowjob"]):
 
             if action_speed <= 1:
 
@@ -253,7 +253,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ TempLust += 6 if GirlA.lust > 70 else 4
 
 
-        elif GirlA.Action_counter["titjob"] > 1:
+        elif GirlA.permanent_History["titjob"] > 1:
 
             if action_speed <= 1:
 
@@ -314,7 +314,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ GirlA.change_face("sly")
                 $ line = GirlA.name + " stares at your cock. She licks her lips in anticipation"
                 $ TempLust += 3 if GirlA.lust < 40 else 1
-            elif GirlA.Action_counter["blowjob"] > 2:
+            elif GirlA.permanent_History["blowjob"] > 2:
                 $ GirlA.change_face("sly")
                 $ line = GirlA.name + " stares at your cock. She seems pretty excited about it"
                 $ TempLust += 2 if GirlA.lust < 60 else 0
@@ -327,7 +327,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ line = GirlA.name + " stares at your cock with trepidation"
                 $ TempLust += 2 if GirlA.lust < 40 else 0
 
-            if GirlA.Action_counter["blowjob"] <= 1 or (GirlA.obedience >= 500 and GirlA.obedience > GirlA.inhibition):
+            if GirlA.permanent_History["blowjob"] <= 1 or (GirlA.obedience >= 500 and GirlA.obedience > GirlA.inhibition):
                 $ TempLust += 2 if GirlA.lust > 60 else 0
                 $ line = line + "_, but she seems to be waiting for some instruction"
             else:
@@ -344,7 +344,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
         if action_speed == 1:
 
-            if GirlA.Action_counter["blowjob"] > 4 or GirlA in (EmmaX,LauraX, StormX):
+            if GirlA.permanent_History["blowjob"] > 4 or GirlA in (EmmaX,LauraX, StormX):
 
                 $ line = line + renpy.random.choice(["Her deft licks are masterful, your cock twitches with each stroke",
                                     "She gently blows across the head as she covers your cock in smooth licks",
@@ -356,7 +356,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ TempFocus += 20 if Player.climax < 70 else 15
                 $ TempLust += 2 if GirlA.lust > 80 else 1
 
-            elif GirlA.Action_counter["blowjob"] > 1:
+            elif GirlA.permanent_History["blowjob"] > 1:
 
                 $ line = line + renpy.random.choice(["She's begining to figure things out, her tongue makes your hair stand on end",
                                     "She's still learning, but learning fast. She seems eager to use her mouth for more than talk",
@@ -380,7 +380,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
         elif action_speed == 2:
 
-            if GirlA.Action_counter["blowjob"] > 4 or GirlA in (EmmaX,LauraX, StormX):
+            if GirlA.permanent_History["blowjob"] > 4 or GirlA in (EmmaX,LauraX, StormX):
 
                 $ line = line + renpy.random.choice(["She masterfully bobs on your cock, and it twitches with each stroke",
                                     "She rapidly bobs up and down on your cock, a frenzy of motion",
@@ -391,7 +391,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ TempFocus += 20 if Player.climax < 80 else 10
                 $ TempLust += 2 if GirlA.lust > 70 else 1
 
-            elif GirlA.Action_counter["blowjob"] > 1:
+            elif GirlA.permanent_History["blowjob"] > 1:
 
                 $ line = line + renpy.random.choice(["She's begining to figure things out, she bobs carefully up and down the head",
                                     "She's still learning, but learning fast. She keeps her teeth well clear, aside from a playful nip",
@@ -414,7 +414,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
         elif action_speed == 3:
 
-            if GirlA.Action_counter["blowjob"] > 4 or GirlA in (EmmaX,LauraX, StormX):
+            if GirlA.permanent_History["blowjob"] > 4 or GirlA in (EmmaX,LauraX, StormX):
 
                 $ line = line + renpy.random.choice(["She masterfully bobs on your cock, and it twitches with each stroke",
                                     "She smoothly bobs up and down on your cock, a frenzy of motion",
@@ -426,7 +426,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ TempFocus += 22 if Player.climax > 40 else 10
                 $ TempLust += 3 if GirlA.lust > 60 else 1
 
-            elif GirlA.Action_counter["blowjob"] > 1:
+            elif GirlA.permanent_History["blowjob"] > 1:
 
                 $ line = line + renpy.random.choice(["She's begining to figure things out, she bobs carefully up and down the shaft",
                                     "She's still learning, but learning fast. She keeps her teeth well clear, aside from a playful nip",
@@ -451,7 +451,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
 
 
-            if GirlA.Action_counter["blowjob"] > 4 or GirlA in (EmmaX,LauraX, StormX):
+            if GirlA.permanent_History["blowjob"] > 4 or GirlA in (EmmaX,LauraX, StormX):
 
                 $ line = line + renpy.random.choice(["She masterfully bobs on your cock, and it twitches with each stroke",
                                     "She rapidly bobs to the base of your cock, a frenzy of motion",
@@ -463,7 +463,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ TempFocus += 25 if Player.climax > 40 else 8
                 $ TempLust += 3 if GirlA.lust > 60 else 2
 
-            elif GirlA.Action_counter["blowjob"] > 1:
+            elif GirlA.permanent_History["blowjob"] > 1:
 
                 $ line = line + renpy.random.choice(["She's begining to figure things out, she bobs carefully up and down the shaft",
                                     "She's still learning, but learning fast. She keeps her teeth well clear, aside from a playful nip",
@@ -507,7 +507,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             $ line = "You continue to slowly drive into " + GirlA.name + "_. "
 
 
-        if GirlA.Action_counter["sex"] > 4 or GirlA in (EmmaX,LauraX, StormX):
+        if GirlA.permanent_History["sex"] > 4 or GirlA in (EmmaX,LauraX, StormX):
             if action_speed > 1:
 
                 $ line = line + renpy.random.choice(["She bounces rapidly against your cock",
@@ -529,7 +529,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ TempFocus += 14 if Player.climax < 60 else 12
                 $ TempLust += 12 if 40 > GirlA.lust > 90 else 10
 
-        elif GirlA.Action_counter["sex"] > 1:
+        elif GirlA.permanent_History["sex"] > 1:
             if action_speed > 1:
 
                 $ line = line + renpy.random.choice(["She bounces rapidly against your cock",
@@ -599,7 +599,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
         else:
             $ line = "You continue to grind against " + GirlA.name + "_. "
 
-        if GirlA.Action_counter["hotdog"] >= 2:
+        if GirlA.permanent_History["hotdog"] >= 2:
             if action_speed > 1:
 
                 $ line = line + renpy.random.choice(["She bounces rapidly against your cock",
@@ -665,7 +665,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             $ line = "You continue to push into " + GirlA.name + "_'s ass. "
 
 
-        if GirlA.Action_counter["anal"] >= 5:
+        if GirlA.permanent_History["anal"] >= 5:
             if action_speed > 1:
 
                 $ line = line + renpy.random.choice(["She bounces rapidly against your cock",
@@ -1633,7 +1633,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
         $ line = GirlA.name + " continues stroke your cock with her feet. "
 
         if not action_speed:
-            if GirlA.Action_counter["footjob"] > 2:
+            if GirlA.permanent_History["footjob"] > 2:
                 $ line = line + "_She just seems to be enjoying the feel of it"
                 $ TempLust += 2 if GirlA.lust < 60 else 0
             else:
@@ -1644,7 +1644,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             $ GirlA.addiction -= 1 if D20S > 10 else 2
             return
 
-        if GirlA.Action_counter["footjob"] > 4:
+        if GirlA.permanent_History["footjob"] > 4:
             if action_speed <= 1:
                 $ line = line + renpy.random.choice(["Her movements have become almost masterful, her slightest touch starts you twitching",
                                                 "She slowly caresses you in a way that makes your blood boil, then pulls back at the last second",
@@ -1663,7 +1663,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
                 $ TempFocus += 20 if Player.climax < 40 else 5
 
-        elif GirlA.Action_counter["footjob"] >= 3:
+        elif GirlA.permanent_History["footjob"] >= 3:
             if action_speed <= 1:
                 $ line = line + renpy.random.choice(["She's begining to figure things out, her toes cause tingles as they caress the shaft",
                                                 "She's still learning, but learning fast",
@@ -1704,7 +1704,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
                 $ TempFocus += 8 if Player.climax > 60 else 2
 
         $ TempLust += 2 if GirlA.lust < 60 else 0
-        $ TempLust += 3 if GirlA.Action_counter["footjob"] > 2 else 0
+        $ TempLust += 3 if GirlA.permanent_History["footjob"] > 2 else 0
         $ GirlA.addiction -= 1
 
 
@@ -1714,7 +1714,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
 
         if not action_speed:
             $ line = GirlA.name + "_'s construct just rests on your cock. "
-            if GirlA.Action_counter["handjob"] > 2:
+            if GirlA.permanent_History["handjob"] > 2:
                 $ line = line + "_She seems to be enjoying your reaction"
                 $ TempLust += 2 if GirlA.lust < 60 else 0
             else:
@@ -1771,7 +1771,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
     elif Player.primary_Action == "kiss":
         $ GirlA.addiction -= 3
         $ GirlA.addiction -= 3 if GirlA == JubesX else 0
-        if GirlA.Action_counter["kiss"] > 10 and GirlA.love >= 700:
+        if GirlA.permanent_History["kiss"] > 10 and GirlA.love >= 700:
             $ line = renpy.random.choice(["She hungrily presses her lips against yours",
                                         "She confidently presses her lips against yours",
                                         "Her lips part as you hold her close",
@@ -1784,7 +1784,7 @@ label Primary_SexDialog(GirlA=Primary, Templine=0, TempLust=0, TempLust2=0):
             $ TempFocus += 1 if Player.climax < 90 else 0
             $ TempLust += 3 if GirlA.lust < 50 else 0
             $ TempLust += 1 if GirlA.lust < 90 else 0
-        elif GirlA.Action_counter["kiss"] > 5 or GirlA == EmmaX:
+        elif GirlA.permanent_History["kiss"] > 5 or GirlA == EmmaX:
             $ line = renpy.random.choice(["She confidently presses her lips against yours",
                                         "You softly kiss her plump lips",
                                         "Her lips part as you hold her close",
@@ -2027,13 +2027,13 @@ label Girl_Self_lines(GirlA=Primary, Mode = "T3", Action=girl_secondary_Action, 
                                 "Her hand slides slowly down your shaft"])
         if Player.primary_Action == "massage":
             $ TempFocusX += 10 if Player.climax > 60 else 4
-            $ TempFocusX += 2 if GirlA.Action_counter["handjob"] > 2 else 0
+            $ TempFocusX += 2 if GirlA.permanent_History["handjob"] > 2 else 0
         else:
             $ TempFocus += 10 if Player.climax > 60 else 4
-            $ TempFocus += 2 if GirlA.Action_counter["handjob"] > 2 else 0
+            $ TempFocus += 2 if GirlA.permanent_History["handjob"] > 2 else 0
 
         $ TempLustX += 2 if GirlA.lust < 60 else 1
-        $ TempLustX += 2 if GirlA.Action_counter["handjob"] > 2 else 0
+        $ TempLustX += 2 if GirlA.permanent_History["handjob"] > 2 else 0
         $ GirlA.addiction -= 1
     else:
         if GirlA.lust >= 80:
@@ -2235,7 +2235,7 @@ label Girl_Self_Set(GirlA=Primary, Mode = "T3", Action=girl_secondary_Action, Le
             $ Options.append("vibrator_pussy")
     else:
 
-        if GirlA.Action_counter["handjob"] >= 5 and Mode != "T5" and Player.primary_Action in ("fondle_pussy", "fondle_breasts", "fondle_thighs", "kiss", "fondle_ass", "suck_breasts"):
+        if GirlA.permanent_History["handjob"] >= 5 and Mode != "T5" and Player.primary_Action in ("fondle_pussy", "fondle_breasts", "fondle_thighs", "kiss", "fondle_ass", "suck_breasts"):
 
             $ Options.append("handjob")
 
@@ -2368,7 +2368,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, Templ
         $ TempFocus += 3 if Player.climax > 70 else 2
 
         $ TempLust += 2 if GirlA.lust < 60 else 0
-        $ TempLust += 2 if GirlA.Action_counter["handjob"] > 2 else 0
+        $ TempLust += 2 if GirlA.permanent_History["handjob"] > 2 else 0
         $ GirlA.addiction -= 1 if D20S > 10 else 2
 
 
@@ -2708,7 +2708,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, Templ
 
 
     elif Action in ("kiss", "kiss girl", "kiss both"):
-        if Player.primary_Action == "blowjob" and GirlA.Action_counter["blowjob"] > 5 and second_girl_main_action == "kiss girl":
+        if Player.primary_Action == "blowjob" and GirlA.permanent_History["blowjob"] > 5 and second_girl_main_action == "kiss girl":
             $ line = GirlA.name + " also continues to kiss " + GirlB.name
             $ line = line + renpy.random.choice([", occasionally taking a lick of your cock as well",
                                             ", licking along her cheek",
@@ -2867,7 +2867,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
 
         if Mode == "lesbian":
 
-            if girl_secondary_Action == "kiss girl" and GirlA.lust <= 20 and GirlA.event_counter["orgasmed"]< 1:
+            if girl_secondary_Action == "kiss girl" and GirlA.lust <= 20 and GirlA.permanent_History["orgasmed"]< 1:
 
                 return
             elif girl_secondary_Action and position_timer <= round:
@@ -2908,13 +2908,13 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
                 $ Action = "kiss girl"
                 $ girl_secondary_Action = "kiss girl"
                 if "lesbian" not in GirlA.recent_history:
-                    $ GirlA.event_counter["been_with_girl"] += 1
+                    $ GirlA.permanent_History["been_with_girl"] += 1
                     $ GirlA.recent_history.append("lesbian")
             return
     elif not approval_check(GirlA, 500, "I"):
 
         pass
-    elif GirlA.likes[GirlB.tag] >= 600 and approval_check(GirlA, (1500-(10*GirlA.event_counter["been_with_girl"])-(10*(GirlA.likes[GirlB.tag]-60)))):
+    elif GirlA.likes[GirlB.tag] >= 600 and approval_check(GirlA, (1500-(10*GirlA.permanent_History["been_with_girl"])-(10*(GirlA.likes[GirlB.tag]-60)))):
 
         $ State = "threeway"
     elif approval_check(GirlA, 1000):
@@ -3026,7 +3026,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
         $ approval = 4
         $ TempFocus += 3 if Player.climax > 70 else 2
         $ TempLust += 2 if GirlA.lust < 60 else 0
-        $ TempLust += 2 if GirlA.Action_counter["handjob"] > 2 else 0
+        $ TempLust += 2 if GirlA.permanent_History["handjob"] > 2 else 0
         $ GirlA.addiction -= 1 if D20 > 10 else 2
     elif Options[0] == "blowjob":
         call Seen_First_Peen (GirlA, GirlB, React = 1)
@@ -3047,10 +3047,10 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
         $ line = line + " and slides her hands along " + GirlB.name + "_'s breasts"
         $ Action = "fondle_breasts"
         if "lesbian" not in GirlA.recent_history:
-            $ GirlA.event_counter["been_with_girl"] += 1
+            $ GirlA.permanent_History["been_with_girl"] += 1
             $ GirlA.recent_history.append("lesbian")
         if "lesbian" not in GirlB.recent_history:
-            $ GirlB.event_counter["been_with_girl"] += 1
+            $ GirlB.permanent_History["been_with_girl"] += 1
             $ GirlB.recent_history.append("lesbian")
         $ TempLust += 2 if approval_check(GirlA, 500, "I") else 1
         $ TempLust2 += 4 if GirlB.likes[GirlA.tag] >= 800 else 2
@@ -3060,10 +3060,10 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
         $ line = line + " and slurps " + GirlB.name + "_'s nipple into her mouth"
         $ Action = "suck_breasts"
         if "lesbian" not in GirlA.recent_history:
-            $ GirlA.event_counter["been_with_girl"] += 1
+            $ GirlA.permanent_History["been_with_girl"] += 1
             $ GirlA.recent_history.append("lesbian")
         if "lesbian" not in GirlB.recent_history:
-            $ GirlB.event_counter["been_with_girl"] += 1
+            $ GirlB.permanent_History["been_with_girl"] += 1
             $ GirlB.recent_history.append("lesbian")
         $ TempLust += 2 if approval_check(GirlA, 500, "I") else 1
         $ TempLust2 += 5 if GirlB.likes[GirlA.tag] >= 800 else 2
@@ -3073,10 +3073,10 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
         $ line = line + " and runs her finger along " + GirlB.name + "_'s pussy"
         $ Action = "fondle_pussy"
         if "lesbian" not in GirlA.recent_history:
-            $ GirlA.event_counter["been_with_girl"] += 1
+            $ GirlA.permanent_History["been_with_girl"] += 1
             $ GirlA.recent_history.append("lesbian")
         if "lesbian" not in GirlB.recent_history:
-            $ GirlB.event_counter["been_with_girl"] += 1
+            $ GirlB.permanent_History["been_with_girl"] += 1
             $ GirlB.recent_history.append("lesbian")
         $ TempLust += 2 if approval_check(GirlA, 500, "I") else 1
         $ TempLust2 += 5 if GirlB.likes[GirlA.tag] >= 800 else 3
@@ -3086,10 +3086,10 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
         $ line = line + " and runs her tongue along " + GirlB.name + "_'s pussy"
         $ Action = "eat_pussy"
         if "lesbian" not in GirlA.recent_history:
-            $ GirlA.event_counter["been_with_girl"] += 1
+            $ GirlA.permanent_History["been_with_girl"] += 1
             $ GirlA.recent_history.append("lesbian")
         if "lesbian" not in GirlB.recent_history:
-            $ GirlB.event_counter["been_with_girl"] += 1
+            $ GirlB.permanent_History["been_with_girl"] += 1
             $ GirlB.recent_history.append("lesbian")
         $ TempLust += 3 if approval_check(GirlA, 600, "I") else 1
         $ TempLust2 += 8 if GirlB.likes[GirlA.tag] >= 800 else 5
@@ -3099,10 +3099,10 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
         $ line = line + " and gives " + GirlB.name + "_'s ass a firm squeeze"
         $ Action = "fondle_ass"
         if "lesbian" not in GirlA.recent_history:
-            $ GirlA.event_counter["been_with_girl"] += 1
+            $ GirlA.permanent_History["been_with_girl"] += 1
             $ GirlA.recent_history.append("lesbian")
         if "lesbian" not in GirlB.recent_history:
-            $ GirlB.event_counter["been_with_girl"] += 1
+            $ GirlB.permanent_History["been_with_girl"] += 1
             $ GirlB.recent_history.append("lesbian")
         $ TempLust += 1 if approval_check(GirlA, 400, "I") else 0
         $ TempLust2 += 3 if GirlB.likes[GirlA.tag] >= 600 else 2
@@ -3112,10 +3112,10 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
         $ line = line + " and starts to lick around " + GirlB.name + "_'s ass"
         $ Action = "eat_ass"
         if "lesbian" not in GirlA.recent_history:
-            $ GirlA.event_counter["been_with_girl"] += 1
+            $ GirlA.permanent_History["been_with_girl"] += 1
             $ GirlA.recent_history.append("lesbian")
         if "lesbian" not in GirlB.recent_history:
-            $ GirlB.event_counter["been_with_girl"] += 1
+            $ GirlB.permanent_History["been_with_girl"] += 1
             $ GirlB.recent_history.append("lesbian")
         $ TempLust += 3 if approval_check(GirlA, 800, "I") else 1
         $ TempLust2 += 6 if GirlB.likes[GirlA.tag] >= 800 else 4
@@ -3161,10 +3161,10 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_main_ac
     if Action == "kiss girl" or Action == "kiss both":
 
         if "lesbian" not in GirlA.recent_history:
-            $ GirlA.event_counter["been_with_girl"] += 1
+            $ GirlA.permanent_History["been_with_girl"] += 1
             $ GirlA.recent_history.append("lesbian")
         if "lesbian" not in GirlB.recent_history:
-            $ GirlB.event_counter["been_with_girl"] += 1
+            $ GirlB.permanent_History["been_with_girl"] += 1
             $ GirlB.recent_history.append("lesbian")
         $ TempLust += 1 if approval_check(GirlA, 500, "I") else 0
         $ TempLust += 1 if GirlA.likes[GirlB.tag] >= 800 else 0
@@ -4530,16 +4530,16 @@ label auto_action_narrations(Girl, action):
     return
 
 label kissing_narrations(Girl):
-    if Girl.Action_counter["kiss"] >= 10 and Girl.lust >= 80:
+    if Girl.permanent_History["kiss"] >= 10 and Girl.lust >= 80:
         $ line = renpy.random.choice(["She's all over you, running her hands along your body.",
             "She's all over you, licking all over your face and neck.",
             "She's all over you, kissing all over your face and grinding against you."])
-    elif Girl.Action_counter["kiss"] > 7:
+    elif Girl.permanent_History["kiss"] > 7:
         $ line = renpy.random.choice(["She's really sucking face.",
             "You kiss deeply and passionately.",
             "You kiss deeply and passionately.",
             "You kiss deeply and passionately."])
-    elif Girl.Action_counter["kiss"] > 3:
+    elif Girl.permanent_History["kiss"] > 3:
         $ line = renpy.random.choice(["She's really getting into it.",
             "She's really getting into it, her tongue's going at it.",
             "She's really getting into it, there's some heavy tongue action."])
@@ -4614,7 +4614,7 @@ label start_of_sex_narration(Girl, action):
 
     if taboo:
         if Girl in [RogueX, KittyX]:
-            if (action == "sex" and not Girl.Action_counter["sex"]) or (action == "anal" and not Girl.Action_counter["anal"]):
+            if (action == "sex" and not Girl.permanent_History["sex"]) or (action == "anal" and not Girl.permanent_History["anal"]):
                 "[Girl.name] [check_line]. . ."
 
                 if "cockout" in Player.recent_history:
@@ -4651,7 +4651,7 @@ label start_of_sex_narration(Girl, action):
             call change_Girl_stat(JeanX, "lust", int(taboo/5))
     else:
         if Girl in [RogueX, KittyX]:
-            if (action == "sex" and not Girl.Action_counter["sex"]) or (action == "anal" and not Girl.Action_counter["anal"]):
+            if (action == "sex" and not Girl.permanent_History["sex"]) or (action == "anal" and not Girl.permanent_History["anal"]):
                 if "cockout" in Player.recent_history:
                     "[Girl.name] [first_action_line]."
                 else:

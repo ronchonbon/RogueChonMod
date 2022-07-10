@@ -22,7 +22,7 @@ label meet_Kitty:
     $ KittyX.name = "???"
     $ KittyX.change_face("surprised")
     $ KittyX.location = Player.location
-    $ KittyX.change_Outfit("default", instant = True)
+    $ KittyX.change_Outfit(instant = True)
 
     call get_color_transform
     $ color_transform = _return

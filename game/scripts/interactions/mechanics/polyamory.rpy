@@ -28,7 +28,7 @@ label Les_Interupted(Girl=0, temp_Girls = []):
     $ Girl = check_girl(Girl)
 
     if "unseen" not in Girl.recent_history:
-        if Girl.event_counter["orgasmed"]< 3 and Girl.remaining_Actions:
+        if Girl.permanent_History["orgasmed"]< 3 and Girl.remaining_Actions:
             menu:
                 "Did you want to stop them?"
                 "Yeah.":
@@ -271,9 +271,9 @@ label LesScene(Girl=0, Bonus=0, temp_Girls = []):
         call Sex_Basic_Dialog (Girl, "tired")
         return
 
-    if Girl.event_counter["seen_with_girl"]:
+    if Girl.permanent_History["seen_with_girl"]:
         $ approval_bonus += 10
-    elif Girl.event_counter["been_with_girl"]:
+    elif Girl.permanent_History["been_with_girl"]:
         $ approval_bonus += 5
     if Girl.SEXP >= 50:
         $ approval_bonus += 25
@@ -336,8 +336,8 @@ label LesScene(Girl=0, Bonus=0, temp_Girls = []):
         $ taboo = 0
         $ Girl.taboo = 0
         $ Partner.taboo = 0
-    if Girl.event_counter["forced"] and not Girl.forced:
-        $ approval_bonus -= 5*Girl.event_counter["forced"]
+    if Girl.permanent_History["forced"] and not Girl.forced:
+        $ approval_bonus -= 5*Girl.permanent_History["forced"]
 
     $ approval = approval_check(Girl, 1350, taboo_modifier = 2, Bonus = Bonus)
 
@@ -486,7 +486,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls = []):
 
 
 
-    if not Girl.event_counter["seen_with_girl"]:
+    if not Girl.permanent_History["seen_with_girl"]:
         $ Girl.change_face("surprised", 1, mouth = "kiss")
         if Girl == RogueX:
             ch_r "You want me and [Partner.name] to hook up, while you watch?"
@@ -549,7 +549,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls = []):
             ch_v "Oh, that'll work."
 
 
-    if not Girl.event_counter["seen_with_girl"] and approval:
+    if not Girl.permanent_History["seen_with_girl"] and approval:
 
         if Girl.forced:
             $ Girl.change_face("sad")
@@ -668,7 +668,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls = []):
                                     "Didn't get enough earlier?",
                                     "I don't mind having an audience. . ."])
             Girl.voice "[line]"
-        elif Girl.event_counter["been_with_girl"] < 3:
+        elif Girl.permanent_History["been_with_girl"] < 3:
             $ Girl.change_face("sexy", 1)
             $ Girl.brows = "confused"
             if Girl == RogueX:
@@ -1004,7 +1004,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls = []):
             ch_v "It's too public here."
         call change_Girl_stat(Girl, "lust", 5)
         call change_Girl_stat(Girl, "obedience", -3)
-    elif Girl.event_counter["been_with_girl"]:
+    elif Girl.permanent_History["been_with_girl"]:
         $ Girl.change_face("sad")
         if Girl == RogueX:
             if Bonus >= 100:
@@ -1111,7 +1111,7 @@ label Les_Prep(Girl=Player.focused_Girl, temp_Girls = []):
         $ Girl.change_face("sexy")
         $ Girl.arm_pose = 2
         "[Girl.name] move's closer to [Partner.name] and wraps her arms around her neck."
-        if not Girl.event_counter["seen_with_girl"]:
+        if not Girl.permanent_History["seen_with_girl"]:
 
             if Girl.forced:
                 call change_Girl_stat(Girl, "love", -20)
@@ -1323,9 +1323,9 @@ label Les_After:
     else:
         call Partner_Like (Girl, 3)
 
-    $ Girl.event_counter["seen_with_girl"] += 1
-    $ Partner.event_counter["seen_with_girl"] += 1
-    if Girl.event_counter["seen_with_girl"] == 1:
+    $ Girl.permanent_History["seen_with_girl"] += 1
+    $ Partner.permanent_History["seen_with_girl"] += 1
+    if Girl.permanent_History["seen_with_girl"] == 1:
         $ Girl.SEXP += 15
         if Girl.love >= 500 and Girl.session_orgasms:
             if Girl == RogueX:
@@ -1344,7 +1344,7 @@ label Les_After:
                 ch_s "I did enjoy being watched. . ."
             elif Girl == JubesX:
                 ch_v "It was cool to have an audience. . ."
-    if Partner.event_counter["seen_with_girl"] == 1:
+    if Partner.permanent_History["seen_with_girl"] == 1:
         $ Partner.SEXP += 15
         if Partner.love >= 500 and Partner.session_orgasms:
             if Partner == RogueX:
@@ -1527,7 +1527,7 @@ label Les_Response(Speaker=0, Subject=0, Step = 1, B=0, B2=0, approval_bonus=0, 
             ch_v "Sorry, I'm just worn out. . ."
         return False
 
-    if Speaker.event_counter["been_with_girl"]:
+    if Speaker.permanent_History["been_with_girl"]:
         $ approval_bonus += 10
     if Speaker.SEXP >= 50:
         $ approval_bonus += 25
@@ -1761,51 +1761,51 @@ label Les_Response(Speaker=0, Subject=0, Step = 1, B=0, B2=0, approval_bonus=0, 
                     $ Subject.likes[Speaker.tag] += 5
                 if Subject == RogueX:
                     if Speaker == KittyX:
-                        if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
+                        if Subject.permanent_History["been_with_girl"] and Speaker.permanent_History["been_with_girl"]:
                             ch_r "You know that we work well together."
                         else:
                             ch_r "It could be a lot of fun."
                     elif Speaker == EmmaX:
-                        if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
+                        if Subject.permanent_History["been_with_girl"] and Speaker.permanent_History["been_with_girl"]:
                             ch_r "You could do that thing from last time. . ."
                         else:
                             ch_r "I was hoping you could give me some after class lessons. . ."
                     else:
-                        if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
+                        if Subject.permanent_History["been_with_girl"] and Speaker.permanent_History["been_with_girl"]:
                             ch_r "Oh, it's not that bad."
                         else:
                             ch_r "It could be a lot of fun."
                 elif Subject == KittyX:
                     if Speaker == RogueX:
-                        if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
+                        if Subject.permanent_History["been_with_girl"] and Speaker.permanent_History["been_with_girl"]:
                             ch_k "Come on [Speaker.tag], you know we have fun."
                         else:
                             ch_k "Come on [Speaker.tag], could be fun."
                     elif Speaker in (EmmaX, StormX):
-                        if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
+                        if Subject.permanent_History["been_with_girl"] and Speaker.permanent_History["been_with_girl"]:
                             ch_k "I mean, it might be nice to show [Subject.player_petname] what you've taught me. . ."
                         else:
                             ch_k "I've seen you watching me in class. . ."
                     else:
-                        if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
+                        if Subject.permanent_History["been_with_girl"] and Speaker.permanent_History["been_with_girl"]:
                             ch_k "We have so much fun together though."
                         else:
                             ch_k "It could be fun!"
                 elif Subject == EmmaX:
                     if Speaker == StormX:
                         ch_e "I really think we have a few things we could teach [EmmaX.player_petname] here. . ."
-                    elif Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
+                    elif Subject.permanent_History["been_with_girl"] and Speaker.permanent_History["been_with_girl"]:
                         ch_e "What's the matter [Speaker.name], too shy around [Player.name]?"
                     else:
                         ch_e "What's the matter [Speaker.name], I've seen how you look at me. . ."
                 elif Subject == LauraX:
                     if Speaker == EmmaX:
-                        if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
+                        if Subject.permanent_History["been_with_girl"] and Speaker.permanent_History["been_with_girl"]:
                             ch_l "Wow, you aren't this shy when [Subject.player_petname]'s not around."
                         else:
                             ch_l "Come on, you look really squishy."
                     else:
-                        if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
+                        if Subject.permanent_History["been_with_girl"] and Speaker.permanent_History["been_with_girl"]:
                             ch_l "What, you don't want to fuck with [Player.name] around?"
                         else:
                             ch_l "Come on, you look like you have it in you."
@@ -1813,28 +1813,28 @@ label Les_Response(Speaker=0, Subject=0, Step = 1, B=0, B2=0, approval_bonus=0, 
                     if Speaker == EmmaX:
                         ch_j "Come on, we both know you're into this shit."
                     else:
-                        if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
+                        if Subject.permanent_History["been_with_girl"] and Speaker.permanent_History["been_with_girl"]:
                             ch_j "What, -now- you're getting shy?"
                         else:
                             ch_j "Come on, I bet you really get around."
                 elif Subject == StormX:
                     if Speaker == KittyX:
-                        if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
+                        if Subject.permanent_History["been_with_girl"] and Speaker.permanent_History["been_with_girl"]:
                             ch_s "Now [Speaker.tag], this certainly wouldn't be your first lesson. . ."
                         else:
                             ch_s "Now [Speaker.tag], haven't you taken -any- interest in me?"
                     elif Speaker == EmmaX:
-                        if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
+                        if Subject.permanent_History["been_with_girl"] and Speaker.permanent_History["been_with_girl"]:
                             ch_s "Now [Subject.player_petname], that isn't what you've said in the past. . ."
                         else:
                             ch_s "Oh? You want to pass up the opportunity to teach [StormX.player_petname] a few things. . ."
                     else:
-                        if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
+                        if Subject.permanent_History["been_with_girl"] and Speaker.permanent_History["been_with_girl"]:
                             ch_s "You haven't enjoyed our time together?"
                         else:
                             ch_s "I can promise you would enjoy yourself. . ."
                 elif Subject == JubesX:
-                    if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
+                    if Subject.permanent_History["been_with_girl"] and Speaker.permanent_History["been_with_girl"]:
                         ch_v "I mean, it's not like this is our -first time- or anything. . ."
                     else:
                         ch_v "I think I can carry my weight over here. . ."
@@ -1991,13 +1991,13 @@ label Les_FirstKiss:
     if "les " + Partner.tag in Girl.history:
 
         $ line = "experienced"
-    elif Girl.event_counter["been_with_girl"] and Partner.event_counter["been_with_girl"]:
+    elif Girl.permanent_History["been_with_girl"] and Partner.permanent_History["been_with_girl"]:
 
         $ line = "first both"
-    elif Girl.event_counter["been_with_girl"]:
+    elif Girl.permanent_History["been_with_girl"]:
 
         $ line = "first girl"
-    elif Partner.event_counter["been_with_girl"]:
+    elif Partner.permanent_History["been_with_girl"]:
 
         $ line = "first partner"
 
@@ -2670,7 +2670,7 @@ label Harem_Start(Newbie=0, round2=0):
 
     $ Player.Party = [Player.Harem[0],Player.Harem[1]]
 
-    $ check_who_is_present
+    call check_who_is_present
     $ Player.Party = [Player.Harem[0],Player.Harem[1]]
     $ shift_focus (Player.Harem[0])
     call set_the_scene
