@@ -104,68 +104,9 @@ init -2 python:
             self.sleepwear = kwargs.get("sleepwear", False)
             self.swimwear = kwargs.get("swimwear", False)
 
-            self.types = ["face_tattoos", "face_piercings", "makeup", "gag",
-                "face_inner_accessory", "hair", "face_outer_accessory",
-                "body_tattoos", "body_piercings", "buttplug",
-                "nipple_accessories", "underwear", "hose",
-                "bodysuit", "rope",
-                "socks", "pants", "skirt", "boots",
-                "bra", "dress", "top",
-                "neck", "gloves", "sleeves", "belt", "suspenders",
-                "jacket", "cloak"]
-
-            self.intrinsic = ["face_tattoos", "face_piercings",
-                "body_tattoos", "body_piercings"]
-
-            self.removable = ["makeup", "gag",
-                "face_inner_accessory", "face_outer_accessory",
-                "buttplug",
-                "nipple_accessories", "underwear", "hose",
-                "bodysuit", "rope",
-                "socks", "pants", "skirt", "boots",
-                "bra", "dress", "top",
-                "neck", "gloves", "sleeves", "belt", "suspenders",
-                "jacket", "cloak"]
-
-            self.hide_breasts = ["bodysuit", "bra", "dress", "top", "jacket"]
-            self.hide_underwear = ["bodysuit", "pants", "skirt", "dress", "top", "jacket"]
-            self.hide_pussy = ["underwear", "bodysuit", "pants", "skirt", "dress"]
-            self.cover_thighs = ["bodysuit", "hose", "pants", "skirt", "boots", "dress"]
-            self.cover_feet = ["hose", "socks", "boots"]
-
-            self.coverage = {"face_tattoos": [],
-                "face_piercings": [],
-                "makeup": [],
-                "gag": [],
-                "face_inner_accessory": [],
-                "hair": [],
-                "face_outer_accessory": [],
-                "body_tattoos": [],
-                "body_piercings": [],
-                "buttplug": ["underwear"],
-                "nipple_accessories": ["bodysuit", "bra", "dress", "top"],
-                "underwear": ["hose", "bodysuit", "pants", "suspenders", "boots"],
-                "hose": ["bodysuit", "pants", "socks", "boots"],
-                "bodysuit": ["bra", "dress", "top", "jacket", "cloak", "socks", "pants", "skirt", "boots"],
-                "rope": ["bra", "dress", "top", "jacket", "cloak", "socks", "pants", "skirt", "boots"],
-                "socks": ["boots"],
-                "pants": ["boots", "suspenders"],
-                "skirt": ["boots", "suspenders"],
-                "boots": [],
-                "bra": ["dress", "top", "suspenders", "jacket", "cloak"],
-                "dress": ["top", "belt", "suspenders", "jacket", "cloak"],
-                "top": ["belt", "suspenders", "jacket", "cloak"],
-                "neck": [],
-                "gloves": [],
-                "sleeves": ["jacket"],
-                "belt": ["suspenders"],
-                "suspenders": ["jacket", "cloak"],
-                "jacket": ["cloak"],
-                "cloak": []}
-
             self.Clothes = {}
 
-            for type in self.types:
+            for type in all_Clothing_types:
                 self.Clothes[type] = ClothingClass(Owner = None, name = None, string = None, type = None, dialogue_lines = None)
 
             self.set_Outfit_flags()
@@ -176,7 +117,7 @@ init -2 python:
             return
 
         def remove_Clothing(self, types):
-            if types in self.types:
+            if types in all_Clothing_types:
                 types = [types]
 
             for type in types:
@@ -208,7 +149,7 @@ init -2 python:
                 if self.Clothes["dress"] and "dress" not in covering_Clothes:
                     self.Clothes["dress"].take_off()
 
-            if self.Clothes[Clothing.type].name and Clothing.type in self.removable:
+            if self.Clothes[Clothing.type].name and Clothing.type in removable_Clothing_types:
                 self.Clothes[Clothing.type].take_off()
                 self.remove_Clothing(Clothing.type)
 
@@ -341,7 +282,7 @@ init -2 python:
             if self.Clothes["bra"]:
                 self.breasts_supported = True
 
-            for type in self.hide_breasts:
+            for type in breast_hiding_Clothing_types:
                 Clothing = self.Clothes[type]
 
                 if Clothing:
@@ -353,7 +294,7 @@ init -2 python:
                     elif Clothing.covers_breasts:
                         self.breasts_covered = True
 
-            for type in self.hide_underwear:
+            for type in underwear_hiding_Clothing_types:
                 Clothing = self.Clothes[type]
 
                 if Clothing:
@@ -365,7 +306,7 @@ init -2 python:
                     elif Clothing.covers_pussy:
                         self.underwear_covered = True
 
-            for type in self.hide_pussy:
+            for type in pussy_hiding_Clothing_types:
                 Clothing = self.Clothes[type]
 
                 if Clothing:
@@ -377,7 +318,7 @@ init -2 python:
                     elif Clothing.covers_pussy:
                         self.pussy_covered = True
 
-            for type in self.cover_thighs:
+            for type in thigh_covering_Clothing_types:
                 Clothing = self.Clothes[type]
 
                 if Clothing:
@@ -386,7 +327,7 @@ init -2 python:
 
                         break
 
-            for type in self.cover_feet:
+            for type in feet_covering_Clothing_types:
                 Clothing = self.Clothes[type]
 
                 if Clothing:
@@ -395,7 +336,7 @@ init -2 python:
 
                         break
 
-            for type in self.removable:
+            for type in removable_Clothing_types:
                 Clothing = self.Clothes[type]
 
                 if Clothing:
@@ -405,7 +346,7 @@ init -2 python:
 
             self.shame = 0
 
-            for type in self.types:
+            for type in all_Clothing_types:
                 if self.Clothes[type]:
                     self.shame += self.Clothes[type].shame
                 elif type == "bra":

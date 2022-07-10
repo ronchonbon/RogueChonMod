@@ -1,18 +1,18 @@
 init -1 python:
 
-    def Item_string(Owner):
-        name = "Item name"
-        string = "Item_string"
+    def Clothing(Owner):
+        name = "black lace bra"
+        string = "black_lace_bra"
 
-        clothing_type = "pants"
+        clothing_type = "bra"
 
         dialogue_lines = {
             }
 
-        shame = 0
+        shame = 1
 
         hides = ["pussy"]
-        covers = ["pussy", "thighs"]
+        covers = ["pussy"]
 
         number_of_states = 2
 

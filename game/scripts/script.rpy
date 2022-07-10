@@ -63,7 +63,8 @@ label start:
 
     $ Player.cash = 100000
 
-    call item_registry
+    $ Event_registry()
+    
     jump prologue
 
 return

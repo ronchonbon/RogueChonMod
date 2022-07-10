@@ -14,6 +14,7 @@ init python:
             self.cock_wet = False
             self.spunk = False
 
+            self.destination = "bg_entrance"
             self.location = "bg_entrance"
             self.traveling = False
 
@@ -92,6 +93,7 @@ init python:
             self.sprite_location = stage_center
             self.sprite_layer = 6
 
+            self.destination = "hold"
             self.location = "hold"
             self.teaching = False
 
@@ -569,7 +571,7 @@ init python:
             return
 
         def fix_clothing(self):
-            for type in self.Outfit.removable:
+            for type in removable_Clothing_types:
                 if self.Wardrobe.temp_Outfit.Clothes[type] and not self.Clothes[type]:
                     self.Wardrobe.temp_Outfit.Clothes[type].state = self.Wardrobe.temp_Outfit.Clothes[type].undressed_state
 
@@ -933,7 +935,7 @@ init python:
                         self.Wardrobe.add_Clothing(Clothing)
 
             self.Wardrobe.choose_Outfits()
-            self.change_Outfit(self.Wardrobe.public_Outfit.name)
+            self.change_Outfit(self.Wardrobe.public_Outfit.name, instant = True)
 
             return
 

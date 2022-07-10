@@ -2,65 +2,65 @@ label world_map:
     $ stack_depth = renpy.call_stack_depth()
 
     while True:
-        $ destination = None
+        $ Player.destination = None
 
         menu:
             "Where would you like to go?"
             "My room" if Player.location != "bg_player":
-                $ destination = "bg_player"
+                $ Player.destination = "bg_player"
             "Girl's rooms":
                 menu:
                     "[RogueX.name]'s room" if Player.location != "bg_rogue":
-                        $ destination = RogueX
+                        $ Player.destination = RogueX
                     "[KittyX.name]'s room" if Player.location != "bg_kitty":
-                        $ destination = KittyX
+                        $ Player.destination = KittyX
                     "[EmmaX.name]'s room" if Player.location != "bg_emma":
-                        $ destination = EmmaX
+                        $ Player.destination = EmmaX
                     "[LauraX.name]'s room" if Player.location != "bg_laura":
-                        $ destination = LauraX
+                        $ Player.destination = LauraX
                     "[JeanX.name]'s room" if Player.location != "bg_jean":
-                        $ destination = JeanX
+                        $ Player.destination = JeanX
                     "[StormX.name]'s room" if Player.location != "bg_storm":
-                        $ destination = StormX
+                        $ Player.destination = StormX
                     "[JubesX.name]'s room" if Player.location != "bg_jubes":
-                        $ destination = JubesX
+                        $ Player.destination = JubesX
                     "Back":
                         pass
             "University Square" if Player.location != "bg_campus":
                 call check_sunshock
 
-                $ destination = "bg_campus"
+                $ Player.destination = "bg_campus"
             "Class" if Player.location != "bg_classroom":
                 if time_index < 3:
-                    $ destination = "bg_classroom"
+                    $ Player.destination = "bg_classroom"
                 elif "Xavier" in Player.Keys:
                     "The door is locked, but you were able to use Xavier's key to get in."
 
-                    $ destination = "bg_classroom"
+                    $ Player.destination = "bg_classroom"
                 else:
                     "It's late for classes and the classrooms are locked down."
 
-                    $ destination = None
+                    $ Player.destination = None
             "The Danger Room" if Player.location != "bg_dangerroom":
-                $ destination = "bg_dangerroom"
+                $ Player.destination = "bg_dangerroom"
             "The showers" if Player.location != "bg_shower":
-                $ destination = "bg_shower"
+                $ Player.destination = "bg_shower"
             "The pool" if Player.location != "bg_pool":
                 call check_sunshock
 
-                $ destination = "bg_pool"
+                $ Player.destination = "bg_pool"
             "Xavier's study" if Player.location != "bg_study":
-                $ destination = "bg_study"
+                $ Player.destination = "bg_study"
             # "The mall" if time_index < 3 and Player.location != "bg_mall":#if "mall" in Player.history:
             #     call check_sunshock
             #
-            #     $ destination = "bg_mall"
+            #     $ Player.destination = "bg_mall"
             # "The attic" if "attic" in Player.history and Player.location != "bg_storm":
             #     jump meet_Storm
             "Stay where I am.":
                 return
 
-        if destination:
+        if Player.destination:
             $ stack_depth = renpy.call_stack_depth()
 
             while stack_depth > 0:
@@ -75,25 +75,25 @@ label world_map:
 
             $ Player.traveling = True
 
-            if destination == "bg_player":
+            if Player.destination == "bg_player":
                 jump player_room
-            elif destination in all_Girls:
-                $ Girl = destination
+            elif Player.destination in all_Girls:
+                $ Girl = Player.destination
 
                 jump girls_room
-            elif destination == "bg_campus":
+            elif Player.destination == "bg_campus":
                 jump campus
-            elif destination == "bg_classroom":
+            elif Player.destination == "bg_classroom":
                 jump classroom
-            elif destination == "bg_dangerroom":
+            elif Player.destination == "bg_dangerroom":
                 jump danger_room
-            elif destination == "bg_shower":
+            elif Player.destination == "bg_shower":
                 jump shower_room
-            elif destination == "bg_pool":
+            elif Player.destination == "bg_pool":
                 jump pool
-            elif destination == "bg_study":
+            elif Player.destination == "bg_study":
                 jump study_room
-            elif destination == "bg_mall":
+            elif Player.destination == "bg_mall":
                 jump mall
 
 label player_room:
@@ -104,18 +104,13 @@ label player_room:
 
         $ Nearby = []
 
-        call traveling_event_calls(location = "bg_player")
         call set_the_scene(location = "bg_player", fade = True)
     else:
         call set_the_scene(location = "bg_player")
 
-    call quick_event_calls
-
     if round <= 10:
         call tenth_round
         call set_the_scene
-
-    call event_calls
 
     while True:
         menu:
@@ -132,13 +127,11 @@ label player_room:
                 $ door_locked = False
             "Sleep" if time_index > 2:
                 call tenth_round
-                call event_calls
                 call set_the_scene
             "Wait" if time_index < 3:
                 "You wait around a bit."
 
                 call tenth_round
-                call event_calls
                 call set_the_scene
             "Special options":
                 call SpecialMenu
@@ -211,7 +204,6 @@ label girls_room:
 
         $ Nearby = []
 
-        call traveling_event_calls(location = Girl.home)
         call set_the_scene(location = "bg_door", fade = True)
         call girls_room_entry
 
@@ -220,13 +212,9 @@ label girls_room:
 
         call set_the_scene(location = Girl.home, fade = True)
 
-    call quick_event_calls
-
     if round <= 10:
         call tenth_round
         call set_the_scene
-
-    call event_calls
 
     while True:
         if Girl.location == Player.location:
@@ -264,13 +252,11 @@ label girls_room:
                 $ door_locked = False
             "Sleep" if time_index > 2:
                 call tenth_round
-                call event_calls
                 call set_the_scene
             "Wait" if time_index < 3:
                 "You wait around a bit."
 
                 call tenth_round
-                call event_calls
                 call set_the_scene
             "Leave":
                 call world_map
@@ -283,10 +269,7 @@ label campus:
 
         $ Nearby = []
 
-        call traveling_event_calls(location = "bg_campus")
-
     call set_the_scene(location = "bg_campus", fade = True)
-    call quick_event_calls
 
     if round <= 10:
         if time_index > 2:
@@ -299,8 +282,6 @@ label campus:
         call tenth_round
         call set_the_scene
 
-    call event_calls
-
     while True:
         menu:
             "You are in the university square. What would you like to do?"
@@ -308,7 +289,6 @@ label campus:
                 "You wait around a bit."
 
                 call tenth_round
-                call event_calls
                 call set_the_scene
             "Leave":
                 call world_map
@@ -321,8 +301,6 @@ label classroom:
 
         $ Nearby = []
 
-        call traveling_event_calls(location = "bg_classroom")
-
         if Player.location != "bg_classroom":
             call set_the_scene(location = "bg_classroom", fade = True)
 
@@ -332,8 +310,6 @@ label classroom:
         $ door_locked = False
 
         call set_the_scene(location = "bg_classroom")
-
-    call quick_event_calls
 
     if round <= 10:
         if time_index > 2:
@@ -346,8 +322,6 @@ label classroom:
         call tenth_round
         call set_the_scene
 
-    call event_calls
-
     while True:
         menu:
             "What would you like to do?"
@@ -355,7 +329,6 @@ label classroom:
                 if round >= 30:
                     call take_class
                     call tenth_round
-                    call event_calls
                     call set_the_scene
                 else:
                     "Class is already letting out. You can hang out until the next one."
@@ -365,7 +338,6 @@ label classroom:
                 if round >= 30:
                     call take_class
                     call tenth_round
-                    call event_calls
                     call set_the_scene
                 else:
                     "Class is already letting out. You can hang out until they lock up for the night."
@@ -386,7 +358,6 @@ label classroom:
                 "You hang out for a bit."
 
                 call tenth_round
-                call event_calls
                 call set_the_scene
 
                 if time_index < 2:
@@ -418,13 +389,10 @@ label danger_room:
 
         $ Nearby = []
 
-        call traveling_event_calls(location = "bg_dangerroom")
         call set_the_scene(location = "bg_dangerroom", fade = True)
         call danger_room_entry
     else:
         call set_the_scene(location = "bg_dangerroom")
-
-    call quick_event_calls
 
     if round <= 10:
         if time_index > 2:
@@ -437,8 +405,6 @@ label danger_room:
         call tenth_round
         call set_the_scene
 
-    call event_calls
-
     while True:
         menu:
             "What would you like to do?"
@@ -448,7 +414,6 @@ label danger_room:
                 elif round >= 30:
                     call training
                     call tenth_round
-                    call event_calls
                     call set_the_scene
                 else:
                     "There isn't time to do much before the next rotation."
@@ -467,7 +432,6 @@ label danger_room:
                 "You hang out for a bit."
 
                 call tenth_round
-                call event_calls
                 call set_the_scene
             "Leave":
                 call world_map
@@ -547,13 +511,10 @@ label shower_room:
         $ Present = []
         $ Nearby = []
 
-        call traveling_event_calls(location = "bg_shower")
         call shower_entry
 
     if Player.location != "bg_shower":
         call set_the_scene(location = "bg_shower", fade = True)
-
-    call quick_event_calls
 
     if round <= 10:
         if time_index == 3:
@@ -566,14 +527,11 @@ label shower_room:
         call tenth_round
         call set_the_scene
 
-    call event_calls
-
     while True:
         menu:
             "You're in the showers. What would you like to do?"
             "Shower" if round >= 30:
                 call showering
-                call event_calls
                 call set_the_scene
             "Shower (locked)" if round < 30:
                 pass
@@ -585,7 +543,6 @@ label shower_room:
                     "Kinda weird."
 
                 call tenth_round
-                call event_calls
                 call set_the_scene
 
                 python:
@@ -608,10 +565,7 @@ label pool:
 
         $ Nearby = []
 
-        call traveling_event_calls(location = "bg_pool")
-
     call set_the_scene(location = "bg_pool", fade = True)
-    call quick_event_calls
 
     if round <= 10:
         if time_index > 2:
@@ -623,8 +577,6 @@ label pool:
 
         call tenth_round
         call set_the_scene
-
-    call event_calls
 
     while True:
         menu:
@@ -650,7 +602,6 @@ label pool:
                 "You hang out for a bit."
 
                 call tenth_round
-                call event_calls
                 call set_the_scene
             "Leave":
                 call world_map
@@ -693,7 +644,6 @@ label study_room:
 
         $ Nearby = []
 
-        call traveling_event_calls(location = "bg_study")
         call set_the_scene(location = "bg_door", fade = True)
         call study_entry
 
@@ -703,8 +653,6 @@ label study_room:
         call set_the_scene(location = "bg_study", fade = True)
 
         $ Xavier.change_face("happy")
-
-    call quick_event_calls
 
     if round <= 10:
         if time_index > 2:
@@ -716,8 +664,6 @@ label study_room:
 
         call tenth_round
         call set_the_scene
-
-    call event_calls
 
     while True:
         if time_index > 2:
@@ -738,7 +684,6 @@ label study_room:
                     jump player_room
                 else:
                     call tenth_round
-                    call event_calls
                     call set_the_scene
 
                     ch_x "Not that I mind the company, but is there something I can do for you?"
@@ -753,14 +698,11 @@ label mall:
 
         $ Nearby = []
 
-        call traveling_event_calls(location = "bg_mall")
         call set_the_scene(location = "bg_mall", fade = True)
 
         "You're at the Salem Centre Mall."
     else:
         call set_the_scene(location = "bg_mall")
-
-    call quick_event_calls
 
     if round <= 10:
         if time_index > 2:
@@ -772,8 +714,6 @@ label mall:
 
         call tenth_round
         call set_the_scene
-
-    call event_calls
 
     if len(Player.Party) > 1:
         "You wander the various stores with the girls, seeing what they have to offer. . ."
@@ -806,7 +746,6 @@ label mall:
                     "You wander around with [Player.Party[0].name]and see what they have available."
 
                 call tenth_round
-                call event_calls
                 call set_the_scene
             "Head back to school":
                 call world_map

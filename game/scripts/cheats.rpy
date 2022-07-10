@@ -49,28 +49,13 @@ label cheat_menu(Girl):
                         if G not in Player.Harem:
                             Player.Harem.append(G)
             "Unlock all clothes":
-                call item_registry
-
                 python:
-                    for Clothing in Rogue_Clothes:
-                        if Clothing.name not in RogueX.Wardrobe.Clothes.keys():
-                            RogueX.Wardrobe.Clothes[Clothing.name] = Clothing
+                    for G in [RogueX, KittyX, EmmaX, LauraX, JeanX]:
+                        Clothes = Clothing_registry(G)
 
-                    for Clothing in Kitty_Clothes:
-                        if Clothing.name not in KittyX.Wardrobe.Clothes.keys():
-                            KittyX.Wardrobe.Clothes[Clothing.name] = Clothing
-
-                    for Clothing in Emma_Clothes:
-                        if Clothing.name not in EmmaX.Wardrobe.Clothes.keys():
-                            EmmaX.Wardrobe.Clothes[Clothing.name] = Clothing
-
-                    for Clothing in Laura_Clothes:
-                        if Clothing.name not in LauraX.Wardrobe.Clothes.keys():
-                            LauraX.Wardrobe.Clothes[Clothing.name] = Clothing
-
-                    for Clothing in Jean_Clothes:
-                        if Clothing.name not in JeanX.Wardrobe.Clothes.keys():
-                            JeanX.Wardrobe.Clothes[Clothing.name] = Clothing
+                        for Clothing in Clothes:
+                            if Clothing.name not in G.Wardrobe.Clothes.keys():
+                                G.Wardrobe.Clothes[Clothing.name] = Clothing
             "Done":
                 $ checkout()
 

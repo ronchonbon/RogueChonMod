@@ -1,3 +1,18 @@
+init python:
+
+    def meet_Kitty():
+        label = meet_Kitty
+
+        conditions = [
+            "'met' not in KittyX.permanent_History.keys()",
+            "Player.destination == 'bg_classroom'",
+            "Player.traveling"]
+
+        priority = True
+        repeatable = False
+
+        return EventClass(label, conditions, priority = priority, repeatable = repeatable)
+
 label meet_Kitty:
     call set_the_scene(location = "bg_campus", fade = True)
 
@@ -228,7 +243,7 @@ label meet_Kitty:
 
     $ active_Girls.append(KittyX)
 
-    $ KittyX.History("met")
+    $ KittyX.History.update("met")
 
     $ round -= 10
 

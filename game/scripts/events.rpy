@@ -41,10 +41,16 @@ init -2 python:
 
     class EventSchedulerClass(object):
         def __init__(self):
-            self.Events = []
+            self.Events = {}
+
+        def add_Event(self, Event):
+            if Event.label not in self.Events.keys():
+                self.Events[Event.label] = Event
+
+            return
 
         def update_conditions(self):
-            for Event in self.Events:
+            for Event in self.Events.values():
                 Event.check_conditions()
 
             return
@@ -54,7 +60,7 @@ init -2 python:
 
             active_Events = []
 
-            for Event in self.Events:
+            for Event in self.Events.values():
                 if Event.active:
                     active_Events.append(Event)
 
