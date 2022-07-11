@@ -8,7 +8,7 @@ transform tiny_button:
     zoom 0.5
 
 screen status():
-    add "images/ui/backdrops/[Player.focused_Girl.tag]_backdrop.png"
+    add "images/UI/backdrops/[Player.focused_Girl.tag]_backdrop.png"
 
     vbox pos (0.005, 0.005):
         spacing 5
@@ -16,13 +16,13 @@ screen status():
         hbox:
             spacing 5
 
-            add "images/ui/icons/love_icon.png"
+            add "images/UI/icons/love_icon.png"
             bar range 1000 value Player.focused_Girl.love xmaximum 200 ymaximum 40 left_bar At("full_bar", love_color) right_bar "empty_bar" thumb None yalign 1.0
 
         hbox:
             spacing 5
 
-            add "images/ui/icons/lust_icon.png"
+            add "images/UI/icons/lust_icon.png"
             bar range 100 value Player.focused_Girl.lust xmaximum 200 ymaximum 40 left_bar At("full_bar", lust_color) right_bar "empty_bar" thumb None yalign 1.0
 
     vbox pos (0.155, 0.005):
@@ -31,13 +31,13 @@ screen status():
         hbox:
             spacing 5
 
-            add "images/ui/icons/obedience_icon.png"
+            add "images/UI/icons/obedience_icon.png"
             bar range 1000 value Player.focused_Girl.obedience xmaximum 200 ymaximum 40 left_bar At("full_bar", obedience_color) right_bar "empty_bar" thumb None yalign 1.0
 
         hbox:
             spacing 5
 
-            add "images/ui/icons/addiction_icon.png"
+            add "images/UI/icons/addiction_icon.png"
             bar range 100 value Player.focused_Girl.addiction xmaximum 200 ymaximum 40 left_bar "full_bar" right_bar "empty_bar" thumb None yalign 1.0
 
     vbox pos (0.305, 0.005):
@@ -46,13 +46,13 @@ screen status():
         hbox:
             spacing 5
 
-            add "images/ui/icons/inhibition_icon.png"
+            add "images/UI/icons/inhibition_icon.png"
             bar range 1000 value Player.focused_Girl.inhibition xmaximum 200 ymaximum 40 left_bar At("full_bar", inhibition_color) right_bar "empty_bar" thumb None yalign 1.0
 
         hbox:
             spacing 5
 
-            add "images/ui/icons/addiction_rate_icon.png"
+            add "images/UI/icons/addiction_rate_icon.png"
             bar range 100 value 10*Player.focused_Girl.addiction_rate xmaximum 200 ymaximum 40 left_bar "full_bar" right_bar "empty_bar" thumb None yalign 1.0
 
     vbox pos (0.455, 0.005):
@@ -104,17 +104,17 @@ screen status():
     frame pos (0.905, 0.047):
         background None
 
-        add "images/ui/icons/clock_base.png":
+        add "images/UI/icons/clock_base.png":
             anchor (0.5, 0.5) yzoom -1.0
 
         if round < 50:
-            add "images/ui/icons/clock_red.png" at rotate_red(round):
+            add "images/UI/icons/clock_red.png" at rotate_red(round):
                 anchor (0.5, 0.5)
         else:
-            add "images/ui/icons/clock_white.png" at rotate_white(round):
+            add "images/UI/icons/clock_white.png" at rotate_white(round):
                 anchor (0.5, 0.5)
 
-        add "images/ui/icons/clock_face.png":
+        add "images/UI/icons/clock_face.png":
             anchor (0.5, 0.5)
 
     frame pos (0.93, 0.018):

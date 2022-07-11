@@ -98,18 +98,11 @@ init python:
 
     build.include_update = False
 
-    build.classify("**~", None)
-    build.classify("**.bak", None)
-    build.classify("**/.**", None)
-    build.classify("**/#**", None)
-    build.classify("**/thumbs.db", None)
-    build.classify("**/script Remove from Launch.*", None)
-
     build.classify("**.png", "archive")
     build.classify("**.jpg", "archive")
     build.classify("**.rpy", "archive")
     build.classify("**.rpyc", "archive")
-    build.classify("**.TTF", "archive")
+    build.classify("**.ttf", "archive")
 
     build.documentation("*.html")
     build.documentation("*.txt")

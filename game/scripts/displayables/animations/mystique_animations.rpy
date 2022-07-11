@@ -6,11 +6,11 @@ image Mystique_blinking:
         3.25
     choice:
         3
-    "images/Mystique_standing/Mystique_standing_eyes_half_blink.png"
+    "images/Mystique_standing/Mystique_standing_eyes_half.png"
     0.05
     "images/Mystique_standing/Mystique_standing_eyes_closed.png"
     0.15
-    "images/Mystique_standing/Mystique_standing_eyes_half_blink.png"
+    "images/Mystique_standing/Mystique_standing_eyes_half.png"
     0.05
     repeat
 
