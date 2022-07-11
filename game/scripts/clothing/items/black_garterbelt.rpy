@@ -24,7 +24,7 @@ init -1 python:
                 "blowjob",
                 "sex",
                 "doggy"]
-        elif Owner in [JeanX, StormX, JubesX]:
+        elif Owner.tag in ["Jean", "Storm", "Jubes"]:
             poses = [
                 "arm pose 1",
                 "arm pose 2",

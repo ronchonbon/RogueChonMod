@@ -14,7 +14,7 @@ init -1 python:
         hides = ["pussy"]
         covers = ["pussy"]
 
-        if Owner in [LauraX, JeanX]:
+        if Owner.tag in ["Laura", "Jean"]:
             number_of_states = 2
         elif Owner.tag == "Storm":
             number_of_states = 3
@@ -25,7 +25,7 @@ init -1 python:
                 "arm pose 2",
                 "handjob",
                 "sex"]
-        elif Owner in [JeanX, StormX]:
+        elif Owner.tag in ["Jean", "Storm"]:
             poses = [
                 "arm pose 1",
                 "arm pose 2",

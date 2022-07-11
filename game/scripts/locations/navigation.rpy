@@ -1,4 +1,6 @@
 label world_map:
+    hide screen Girl_picker
+
     $ stack_depth = renpy.call_stack_depth()
 
     while True:
@@ -113,6 +115,8 @@ label player_room:
         call set_the_scene
 
     while True:
+        show screen Girl_picker()
+
         menu:
             "You are in your room. What would you like to do?"
             "Study":
@@ -218,12 +222,14 @@ label girls_room:
 
     while True:
         if Girl.location == Player.location:
-            "You are in [Girl.name]'s room. What would you like to do?"
+            $ line = "You are in " + Girl.name + "'s room. What would you like to do?"
         else:
-            "You are in [Girl.name]'s room, but she isn't here. What would you like to do?"
+            $ line = "You are in + " + Girl.name + "'s room, but she isn't here. What would you like to do?"
+
+        show screen Girl_picker()
 
         menu:
-            extend ""
+            "[line]"
             "Would you like to study?":
                 call study
             "Lock the door" if not door_locked:
@@ -283,6 +289,8 @@ label campus:
         call set_the_scene
 
     while True:
+        show screen Girl_picker()
+
         menu:
             "You are in the university square. What would you like to do?"
             "Wait" if time_index < 3:
@@ -323,6 +331,8 @@ label classroom:
         call set_the_scene
 
     while True:
+        show screen Girl_picker()
+
         menu:
             "What would you like to do?"
             "Take the morning class" if weekday < 5 and time_index == 0 and round > 15:
@@ -406,6 +416,8 @@ label danger_room:
         call set_the_scene
 
     while True:
+        show screen Girl_picker()
+
         menu:
             "What would you like to do?"
             "Train":
@@ -528,6 +540,8 @@ label shower_room:
         call set_the_scene
 
     while True:
+        show screen Girl_picker()
+
         menu:
             "You're in the showers. What would you like to do?"
             "Shower" if round >= 30:
@@ -579,6 +593,8 @@ label pool:
         call set_the_scene
 
     while True:
+        show screen Girl_picker()
+
         menu:
             "You're at the pool. What would you like to do?"
             "Want to swim?" if round >= 30:
@@ -608,6 +624,8 @@ label pool:
 
 label study_entry:
     while True:
+        show screen Girl_picker()
+
         menu:
             "You're at the door, what do you do?"
             "Knock politely":
@@ -666,13 +684,15 @@ label study_room:
         call set_the_scene
 
     while True:
+        show screen Girl_picker()
+
         if time_index > 2:
-            "You are in Xavier's study, but he isn't in at the moment. What would you like to do?"
+            $ line = "You are in Xavier's study, but he isn't in at the moment. What would you like to do?"
         else:
-            "You are in Xavier's study. What would you like to do?"
+            $ line = "You are in Xavier's study. What would you like to do?"
 
         menu:
-            extend ""
+            "[line]"
             "Wait":
                 if time_index > 2:
                     "You probably don't want to be here when Xavier gets in."
@@ -729,6 +749,8 @@ label mall:
             $ Player.traveling = False
 
             jump campus
+
+        show screen Girl_picker()
 
         menu:
             "Where would you like to go?"

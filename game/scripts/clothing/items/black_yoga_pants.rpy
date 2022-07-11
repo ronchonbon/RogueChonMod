@@ -22,7 +22,7 @@ init -1 python:
                 "arm pose 2",
                 "handjob",
                 "doggy"]
-        elif Owner in [EmmaX, LauraX]:
+        elif Owner.tag in ["Emma", "Laura"]:
             poses = [
                 "arm pose 1",
                 "arm pose 2",

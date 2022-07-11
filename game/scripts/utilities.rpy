@@ -12,7 +12,7 @@ init python:
 
         for G in Girls:
             for g in range(len(sorted_Girls)):
-                if approval_check(G, report_value = True) > approval_check(sorted_Girls[g], report_value = True):
+                if approval_check(G) > approval_check(sorted_Girls[g]):
                     sorted_Girls.insert(g, G)
 
             if G not in sorted_Girls:

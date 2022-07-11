@@ -14,17 +14,17 @@ init -1 python:
         hides = ["pussy"]
         covers = ["pussy", "thighs"]
 
-        if Girl in [EmmaX, LauraX]:
+        if Owner.tag in ["Emma", "Laura"]:
             number_of_states = 1
-        elif Girl == JubesX:
+        elif Owner.tag == "Jubes":
             number_of_states = 2
 
-        if Girl in [EmmaX, JubesX]:
+        if Owner.tag in ["Emma", "Jubes"]:
             poses = [
                 "arm pose 1",
                 "arm pose 2",
                 "handjob"]
-        elif Girl == LauraX:
+        elif Owner.tag == "Laura":
             poses = [
                 "arm pose 1",
                 "arm pose 2",

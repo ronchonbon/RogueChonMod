@@ -1,6 +1,6 @@
 init python:
 
-    def approval_check(Girl, threshold, flavor = "LOI", spread = 150, report_value = False, alternate_thresholds = {}):
+    def approval_check(Girl, threshold = None, flavor = "LOI", spread = 150, alternate_thresholds = {}):
         if Girl in alternate_thresholds.keys():
             threshold = alternate_thresholds[Girl]
 
@@ -19,7 +19,7 @@ init python:
         else:
             I = 0
 
-        if report_value:
+        if not threshold:
             return L + O + I
 
         if L + O + I >= threshold + 2*spread:

@@ -23,20 +23,21 @@ label cheat_menu(Girl):
             "Unlock all Girls":
                 python:
                     for G in all_Girls:
-                        active_Girls.append(G)
+                        if G not in active_Girls:
+                            active_Girls.append(G)
 
-                        Player.Phonebook.append(G)
+                            Player.Phonebook.append(G)
 
-                        if G == EmmaX:
-                            G.names.append("Ms. Frost")
-                        elif G == LauraX:
-                            G.names.append("X-23")
-                        elif G == StormX:
-                            G.names.append("Ororo")
-                            G.names.append("Ms. Munroe")
+                            if G == EmmaX:
+                                G.names.append("Ms. Frost")
+                            elif G == LauraX:
+                                G.names.append("X-23")
+                            elif G == StormX:
+                                G.names.append("Ororo")
+                                G.names.append("Ms. Munroe")
 
-                        if G.location == "hold":
-                            G.location = G.home
+                            if G.location == "hold":
+                                G.location = G.home
             "Maximize all Girls' stats":
                 python:
                     for G in all_Girls:

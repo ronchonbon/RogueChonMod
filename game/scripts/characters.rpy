@@ -238,7 +238,7 @@ init python:
 
                 self.home = "bg_mystique"
 
-                self.disguise = None
+                self.disguise = "Raven"
                 self.disguise_Outfit = copy.deepcopy(self.Outfit)
                 self.disguise_Clothes = self.disguise_Outfit.Clothes
 
@@ -542,13 +542,13 @@ init python:
                 if self.Clothes[type].number_of_states > 2:
                     self.Clothes[type].state += 2
 
-                    renpy.pause(0.2)
+                    renpy.pause(0.1)
                 elif self.Clothes[type].number_of_states == 1:
                     self.Clothes[type].take_off()
                 else:
                     self.Outfit.remove_Clothing(type)
 
-                    renpy.pause(0.2)
+                    renpy.pause(0.1)
 
             return
 
@@ -725,10 +725,10 @@ init python:
                 casual.update_Clothes({
                     "hair": wavy_hair(self),
                     "underwear": white_panties(self),
-                    "pants": Emma_white_shorts(self), "boots": white_boots(self),
+                    "pants": white_shorts(self), "boots": white_boots(self),
                     "bra": white_corset(self),
                     "neck": white_choker(self),
-                    "cloak": Emma_white_cape(self)})
+                    "cloak": white_cape(self)})
 
                 gym_clothes.update_Clothes({
                     "hair": wavy_hair(self),

@@ -14,7 +14,7 @@ init -1 python:
         hides = ["pussy"]
         covers = ["pussy"]
 
-        if Owner in [KittyX, StormX]:
+        if Owner.tag in ["Kitty", "Storm"]:
             number_of_states = 1
         elif Owner.tag == "Emma":
             number_of_states = 2

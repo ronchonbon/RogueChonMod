@@ -7,222 +7,166 @@ transform rotate_red(x):
 transform tiny_button:
     zoom 0.5
 
-screen inventory_button:
-    imagebutton:
-        auto "images/UI_Backpack_%s.png"
-        action Show("Inventory_screen")
-        pos (0.81, 0.015)
+screen status():
+    add "images/ui/backdrops/[Player.focused_Girl.tag]_backdrop.png"
+
+    vbox pos (0.005, 0.005):
+        spacing 5
+
+        hbox:
+            spacing 5
+
+            add "images/ui/icons/love_icon.png"
+            bar range 1000 value Player.focused_Girl.love xmaximum 200 ymaximum 40 left_bar At("full_bar", love_color) right_bar "empty_bar" thumb None yalign 1.0
+
+        hbox:
+            spacing 5
+
+            add "images/ui/icons/lust_icon.png"
+            bar range 100 value Player.focused_Girl.lust xmaximum 200 ymaximum 40 left_bar At("full_bar", lust_color) right_bar "empty_bar" thumb None yalign 1.0
+
+    vbox pos (0.155, 0.005):
+        spacing 5
+
+        hbox:
+            spacing 5
+
+            add "images/ui/icons/obedience_icon.png"
+            bar range 1000 value Player.focused_Girl.obedience xmaximum 200 ymaximum 40 left_bar At("full_bar", obedience_color) right_bar "empty_bar" thumb None yalign 1.0
+
+        hbox:
+            spacing 5
+
+            add "images/ui/icons/addiction_icon.png"
+            bar range 100 value Player.focused_Girl.addiction xmaximum 200 ymaximum 40 left_bar "full_bar" right_bar "empty_bar" thumb None yalign 1.0
+
+    vbox pos (0.305, 0.005):
+        spacing 5
+
+        hbox:
+            spacing 5
+
+            add "images/ui/icons/inhibition_icon.png"
+            bar range 1000 value Player.focused_Girl.inhibition xmaximum 200 ymaximum 40 left_bar At("full_bar", inhibition_color) right_bar "empty_bar" thumb None yalign 1.0
+
+        hbox:
+            spacing 5
+
+            add "images/ui/icons/addiction_rate_icon.png"
+            bar range 100 value 10*Player.focused_Girl.addiction_rate xmaximum 200 ymaximum 40 left_bar "full_bar" right_bar "empty_bar" thumb None yalign 1.0
+
+    vbox pos (0.455, 0.005):
+        spacing 5
+
+        hbox:
+            spacing 5
+
+            null height 50
+            bar range 100 value Player.climax xmaximum 200 ymaximum 40 left_bar "full_bar" right_bar "empty_bar" thumb None yalign 1.0
+
+        hbox:
+            spacing 5
+
+            null height 50
+            bar range 100 value 20*Player.semen xmaximum 200 ymaximum 40 left_bar "full_bar" right_bar "empty_bar" thumb None yalign 1.0
+
+    imagebutton pos (0.71, 0.016) :
+        auto f"{Player.focused_Girl.tag}_%s"
+        action ShowTransient("focus_map")
         focus_mask True
-        
-screen status_screen:
-    default tt = Tooltip(" ")
-
-    add "images/BarBackdrop_" + Player.focused_Girl.tag + ".png"
-    frame:
-        style_group "stat_bar"
-        pos (0.0, 0.0)
-        background None
-        has vbox
-
-        hbox:
-            imagebutton idle "images/iconlove.png" hover "images/iconlove.png" action NullAction() hovered tt.Action("Love: [Player.focused_Girl.love]")
-            bar range 100 value (Player.focused_Girl.love/10) xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
-
-        hbox:
-            imagebutton idle "images/iconlust.png" hover "images/iconlust.png" action NullAction() hovered tt.Action("Lust: [Player.focused_Girl.lust]")
-            bar range 100 value Player.focused_Girl.lust xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
-
-    frame:
-        pos (0.15, 0.0)
-        background None
-        has vbox
-
-        hbox:
-            imagebutton idle "images/iconobed.png" hover "images/iconobed.png" action NullAction() hovered tt.Action("Obedience: [Player.focused_Girl.obedience]")
-            bar range 100 value (Player.focused_Girl.obedience/10) xmaximum 200 ymaximum 40 left_bar "images/barfullO.png" right_bar "images/barempty.png"
-
-        hbox:
-            imagebutton idle "images/iconaddict.png" hover "images/iconaddict.png" action NullAction() hovered tt.Action("Addiction: [Player.focused_Girl.addiction]")
-            bar range 100 value Player.focused_Girl.addiction xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
-
-    frame:
-        pos (0.3, 0.0)
-        background None
-        has vbox
-
-        hbox:
-            imagebutton idle "images/iconinbt.png" hover "images/iconinbt.png" action NullAction() hovered tt.Action("Inhibitions: [Player.focused_Girl.inhibition]")
-            bar range 100 value (Player.focused_Girl.inhibition/10) xmaximum 200 ymaximum 40 left_bar "images/barfulli.png" right_bar "images/barempty.png"
-
-        hbox:
-            imagebutton idle "images/iconaddictrate.png" hover "images/iconaddictrate.png" action NullAction() hovered tt.Action("Addiction Rate: [Player.focused_Girl.addiction_rate]")
-            bar range 100 value (Player.focused_Girl.addiction_rate*10) xmaximum 200 ymaximum 40 left_bar "images/barfull.png" right_bar "images/barempty.png"
-
-    showif not Player.primary_Action.type:
-        imagebutton auto "images/Button_" + Player.focused_Girl.tag + "_%s.png" action ShowTransient("Focus_Map") pos (0.71, 0.016) focus_mask True
 
     showif config.developer:
-        imagebutton auto "images/Button_" + Player.focused_Girl.tag + "_%s.png" action Call("cheat_menu", Player.focused_Girl) pos (0.755, 0.016) focus
+        imagebutton pos (0.755, 0.016):
+            auto f"{Player.focused_Girl.tag}_%s"
+            action Call("cheat_menu", Player.focused_Girl)
+            focus_mask True
 
-    frame:
-        pos (0.45, 0.0085)
+    imagebutton pos (0.8, 0.01):
+        auto "inventory_%s"
+        action Show("inventory")
+        focus_mask True
+
+    frame pos (0.58, 0.015):
+        minimum (200, 0)
         background None
+
         has vbox
 
-        hbox:
-            bar range 100 value Player.climax xmaximum 200 ymaximum 40 left_bar "images/barfullP.png" right_bar "images/baremptyP.png"
-
-        hbox:
-            bar range 100 value (Player.semen*20) xmaximum 200 ymaximum 40 left_bar "images/barfullS.png" right_bar "images/baremptyS.png"
-
-    frame:
-        minimum (200, 0) pos (0.58, 0.015)
-        background None
-        has vbox
         hbox:
             text "Money: $[Player.cash]" size 18
+
         hbox:
             text "Level: [Player.level]" size 18
+
         hbox:
             text "[Player.focused_Girl.tag] Level: [Player.focused_Girl.level]" size 18
 
-    frame:
-        pos (0.905, 0.047)
+    frame pos (0.905, 0.047):
         background None
 
-        add "images/Clockbase.png":
-            anchor (0.5, 0.5)
-            yzoom -1
-            subpixel True
+        add "images/ui/icons/clock_base.png":
+            anchor (0.5, 0.5) yzoom -1.0
 
         if round < 50:
-            add "images/Clockred.png" at rotate_red(round):
+            add "images/ui/icons/clock_red.png" at rotate_red(round):
                 anchor (0.5, 0.5)
-                subpixel True
         else:
-            add "images/Clockwhite.png" at rotate_white(round):
+            add "images/ui/icons/clock_white.png" at rotate_white(round):
                 anchor (0.5, 0.5)
-                subpixel True
 
-        imagebutton idle "images/Clockface.png" hover "images/Clockface.png" action NullAction() hovered tt.Action("Time Left: [round]%") anchor (0.5, 0.5)
+        add "images/ui/icons/clock_face.png":
+            anchor (0.5, 0.5)
 
-    frame:
-        minimum (200, 0) pos (0.93, 0.018)
+    frame pos (0.93, 0.018):
+        minimum (200, 0)
         background None
+
         has vbox
+
         hbox:
             text "Day: [day] [day_of_week]" size 18
+
         hbox:
             text "Time: [current_time]" size 16
+
         hbox:
             text "Stack depth: [stack_depth]" size 14
 
-    frame:
-        pos (0.905, 0.1)
-        background None
-        has vbox
-        hbox:
-            if RogueX in Nearby:
-                imagebutton auto "images/Button_Rogue_%s.png" action NullAction() hovered tt.Action(RogueX.name) at tiny_button
+    vpgrid pos (0.905, 0.1):
+        cols 4
 
-            if KittyX in Nearby:
-                imagebutton auto "images/Button_Kitty_%s.png" action NullAction() hovered tt.Action(KittyX.name) at tiny_button
+        for G in Nearby:
+            add f"{G.tag}_hover" at tiny_button
 
-            if EmmaX in Nearby:
-                imagebutton auto "images/Button_Emma_%s.png" action NullAction() hovered tt.Action(EmmaX.name) at tiny_button
+screen focus_map():
+    imagebutton auto "exit_%s" action Hide("focus_map") pos (0.71, 0.016) focus_mask True
 
-            if LauraX in Nearby:
-                imagebutton auto "images/Button_Laura_%s.png" action NullAction() hovered tt.Action(LauraX.name) at tiny_button
+    vpgrid pos (0.71, 0.09):
+        cols 4
 
-            if JeanX in Nearby:
-                imagebutton auto "images/Button_Jean_%s.png" action NullAction() hovered tt.Action(JeanX.name) at tiny_button
+        for G in active_Girls:
+            if G.location != Player.location:
+                imagebutton auto f"{G.tag}_%s" action Call("text_menu", G) focus_mask True
+            else:
+                imagebutton auto f"{G.tag}_%s" action NullAction() focus_mask True
 
-            if StormX in Nearby:
-                imagebutton auto "images/Button_Storm_%s.png" action NullAction() hovered tt.Action(StormX.name) at tiny_button
-
-            if JubesX in Nearby:
-                imagebutton auto "images/Button_Jubes_%s.png" action NullAction() hovered tt.Action(JubesX.name) at tiny_button
-
-    if tt.value != " ":
-        frame:
-            pos (0.9, 0.12)
-            has vbox
-            text tt.value
-
-screen Focus_Map:
-    imagebutton auto "images/Button_X_%s.png" action Hide("Focus_Map") pos (0.71, 0.016) focus_mask True
-
-    frame:
-        pos (0.71, 0.09)
-        has hbox
-
-        vbox:
-            imagebutton auto "images/Button_Rogue_%s.png" action Call("text_menu", RogueX) focus_mask True
-
-            if KittyX in active_Girls:
-                imagebutton auto "images/Button_Kitty_%s.png" action Call("text_menu", KittyX) focus_mask True
-
-        vbox:
-            if EmmaX in active_Girls:
-                imagebutton auto "images/Button_Emma_%s.png" action Call("text_menu", EmmaX) focus_mask True
-
-            if LauraX in active_Girls:
-                imagebutton auto "images/Button_Laura_%s.png" action Call("text_menu", LauraX) focus_mask True
-
-        vbox:
-            if JeanX in active_Girls:
-                imagebutton auto "images/Button_Jean_%s.png" action Call("text_menu", JeanX) focus_mask True
-
-            if StormX in active_Girls:
-                imagebutton auto "images/Button_Storm_%s.png" action Call("text_menu", StormX) focus_mask True
-
-        vbox:
-            if JubesX in active_Girls:
-                imagebutton auto "images/Button_Jubes_%s.png" action Call("text_menu", JubesX) focus_mask True
-
-            if MystiqueX in active_Girls:
-                imagebutton auto "images/Button_Mystique_%s.png" action Call("text_menu", MystiqueX) focus_mask True
-
-screen Inventory_screen:
-    frame:
-        minimum (300, 0) pos (0.83, 0.125)
-        has vbox
-
+screen inventory():
+    vbox pos (0.83, 0.125):
         text "Inventory:" size 20
+
         showif "Xavier's photo" in Player.inventory:
             text "Xavier's Photo" size 15
+
         showif "Xavier's files" in Player.inventory:
             text "Xavier's Files" size 15
 
         showif "dildo" in Player.inventory:
             $ inventory_count = Player.inventory.count("dildo")
             text "Dildos: [inventory_count]" size 15
+
         showif "vibrator" in Player.inventory:
             $ inventory_count = Player.inventory.count("vibrator")
             text "Vibrators: [inventory_count]" size 15
-
-        showif "Dazzler and Longshot" in Player.inventory:
-            $ inventory_count = Player.inventory.count("Dazzler and Longshot")
-            text "Dazzler and Longshot: [inventory_count]" size 15
-        showif "256 Shades of Grey" in Player.inventory:
-            $ inventory_count = Player.inventory.count("256 Shades of Grey")
-            text "256 Shades of Grey: [inventory_count]" size 15
-        showif "Avengers Tower Penthouse" in Player.inventory:
-            $ inventory_count = Player.inventory.count("Avengers Tower Penthouse")
-            text "Avengers Tower Penthouse: [inventory_count]" size 15
-
-        showif "Mandrill Cologne" in Player.inventory:
-            $ inventory_count = Player.inventory.count("Mandrill Cologne")
-
-            textbutton "Mandrill Cologne: [inventory_count] doses" action Call("mandrill_screen") text_size 15
-        showif "Purple Rain Cologne" in Player.inventory:
-            $ inventory_count = Player.inventory.count("Purple Rain Cologne")
-
-            textbutton "Purple Rain Cologne: [inventory_count] doses" action Call("purplerain_screen") text_size 15
-        showif "Corruption Cologne" in Player.inventory:
-            $ inventory_count = Player.inventory.count("Corruption Cologne")
-
-            textbutton "Corruption Cologne: [inventory_count] doses" action Call("corruption_screen") text_size 15
 
         showif "Xavier" in Player.Keys:
             text "Xavier's Key" size 15
@@ -241,8 +185,7 @@ screen Inventory_screen:
         showif JubesX in Player.Keys:
             text "Jubes's Key" size 15
 
-    imagebutton:
-        auto "images/UI_Backpack_%s.png"
-        action Hide("Inventory_screen")
-        pos (0.81, 0.015)
+    imagebutton pos (0.8, 0.01):
+        auto "inventory_%s"
+        action Hide("inventory")
         focus_mask True

@@ -215,45 +215,6 @@ image Xavier_blinking:
 
 
 
-
-image cellphone:
-    "images/cellphone.png"
-    xoffset 0
-    yoffset 100
-
-
-image PhoneSex:
-
-    contains:
-
-        "images/PhoneFrame.png"
-    contains:
-
-        AlphaMask("PhoneScreen", "images/PhoneMask.png")
-    offset (300, 50)
-
-image PhoneRG:
-
-    "bg_rogue"
-    xoffset 500
-
-image PhoneScreen:
-    contains:
-        ConditionSwitch(
-            "Player.focused_Girl.location == 'bg_rogue'", "PhoneRG",
-            "True", "[Player.focused_Girl.location]")
-
-        offset (-800, -300)
-        zoom 1.5
-
-    contains:
-        "[Player.focused_Girl.tag]_sprite"
-        pos (0, 0)
-        offset (290, 50)
-        anchor (0.6, 0)
-        zoom 1.1
-
-
 image dress_screen:
 
     contains:
@@ -298,41 +259,6 @@ image dress_screen_shadow:
 
 
 
-
-
-
-image CircleTest:
-    contains:
-        "images/Clockbase.png"
-        anchor (0.5, 0.5)
-
-        yzoom -1
-    contains:
-
-        ConditionSwitch(
-            "round>= 50", "ClockWhite",
-            "True",Null(),
-            ),
-    contains:
-        ConditionSwitch(
-            "round<= 50", "ClockRed",
-            "True",Null(),
-            ),
-    contains:
-        "images/Clockface.png"
-        anchor (0.5, 0.5)
-
-image ClockWhite:
-    contains:
-        "images/Clockwhite.png"
-        anchor (0.5, 0.5)
-        rotate -(int(round *3.6))
-
-image ClockRed:
-    contains:
-        "images/Clockred.png"
-        anchor (0.5, 0.5)
-        rotate -(int(round *3.6-180))
 
 image blue_screen:
 
@@ -445,12 +371,3 @@ image VibratorAnalInsert:
         anchor (0.5, 0.5)
         alpha 0.3
         rotate 0
-
-
-
-
-
-
-
-
-image UI_Backpack = "images/UI_Backpack_idle.png"

@@ -35,7 +35,7 @@ init -2 python:
             while self.state > 0:
                 self.state -= 1
 
-                renpy.pause(0.2)
+                renpy.pause(0.1)
 
             self.set_Clothing_flags()
 
@@ -45,7 +45,7 @@ init -2 python:
             while self.state < self.undressed_state:
                 self.state += 1
 
-                renpy.pause(0.2)
+                renpy.pause(0.1)
 
             self.set_Clothing_flags()
 
@@ -132,7 +132,7 @@ init -2 python:
 
             temp_Clothes = copy.deepcopy(self.Clothes)
 
-            covering_Clothes = self.coverage[Clothing.type]
+            covering_Clothes = Clothing_coverage[Clothing.type]
 
             for c in reversed(range(len(covering_Clothes))):
                 if self.Clothes[covering_Clothes[c]].name:
@@ -140,7 +140,7 @@ init -2 python:
 
                     self.remove_Clothing(covering_Clothes[c])
 
-                    renpy.pause(0.2)
+                    renpy.pause(0.1)
 
             if Clothing.type in ["underwear", "hose"]:
                 if self.Clothes["skirt"] and "skirt" not in covering_Clothes:
@@ -153,23 +153,23 @@ init -2 python:
                 self.Clothes[Clothing.type].take_off()
                 self.remove_Clothing(Clothing.type)
 
-                renpy.pause(0.2)
+                renpy.pause(0.1)
 
             if Clothing.type == "pants" and self.Clothes["skirt"]:
                 self.Clothes["skirt"].take_off()
                 self.remove_Clothing("skirt")
 
-                renpy.pause(0.2)
+                renpy.pause(0.1)
             elif Clothing.type == "skirt" and self.Clothes["pants"]:
                 self.Clothes["pants"].take_off()
                 self.remove_Clothing("pants")
 
-                renpy.pause(0.2)
+                renpy.pause(0.1)
 
             Clothing.state = Clothing.undressed_state
             self.add_Clothing(Clothing)
 
-            renpy.pause(0.2)
+            renpy.pause(0.1)
 
             self.Clothes[Clothing.type].put_on()
 
@@ -185,7 +185,7 @@ init -2 python:
                     temp_Clothes[covering_Clothes[c]].state = temp_Clothes[covering_Clothes[c]].undressed_state
                     self.add_Clothing(temp_Clothes[covering_Clothes[c]])
 
-                    renpy.pause(0.2)
+                    renpy.pause(0.1)
 
                     self.Clothes[covering_Clothes[c]].put_on()
 
@@ -201,14 +201,14 @@ init -2 python:
 
             temp_Clothes = copy.deepcopy(self.Clothes)
 
-            covering_Clothes = self.coverage[type]
+            covering_Clothes = Clothing_coverage[type]
 
             for c in reversed(range(len(covering_Clothes))):
                 if self.Clothes[covering_Clothes[c]].name:
                     self.Clothes[covering_Clothes[c]].take_off()
                     self.remove_Clothing(covering_Clothes[c])
 
-                    renpy.pause(0.2)
+                    renpy.pause(0.1)
 
             if type in ["underwear", "hose"]:
                 if self.Clothes["skirt"] and "skirt" not in covering_Clothes:
@@ -220,7 +220,7 @@ init -2 python:
             self.Clothes[type].take_off()
             self.remove_Clothing(type)
 
-            renpy.pause(0.2)
+            renpy.pause(0.1)
 
             if type in ["underwear", "hose"]:
                 if self.Clothes["skirt"] and "skirt" not in covering_Clothes:
@@ -234,7 +234,7 @@ init -2 python:
                     temp_Clothes[covering_Clothes[c]].state = temp_Clothes[covering_Clothes[c]].undressed_state
                     self.add_Clothing(temp_Clothes[covering_Clothes[c]])
 
-                    renpy.pause(0.2)
+                    renpy.pause(0.1)
 
                     self.Clothes[covering_Clothes[c]].put_on()
 
@@ -251,7 +251,7 @@ init -2 python:
                     self.remove_Clothing(type)
 
                     if not instant:
-                        renpy.pause(0.2)
+                        renpy.pause(0.1)
 
             return
 
@@ -432,7 +432,7 @@ init -2 python:
 
                         self.current_Outfit.add_Clothing(Outfit.Clothes[type])
 
-                        renpy.pause(0.2)
+                        renpy.pause(0.1)
 
                         self.current_Outfit.Clothes[type].put_on()
 

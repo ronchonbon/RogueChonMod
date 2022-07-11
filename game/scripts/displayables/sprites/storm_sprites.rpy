@@ -69,9 +69,7 @@ layeredimage Storm_sprite standing:
     if StormX.Clothes["skirt"].string:
         "images/Storm_standing/Storm_standing_skirt_[StormX.Clothes[skirt].string]_[StormX.Clothes[skirt].state].png"
 
-    if StormX.arm_pose == 1:
-        "images/Storm_standing/Storm_standing_hands[StormX.arm_pose].png"
-    elif StormX.arm_pose == 2:
+    if StormX.arm_pose == 2:
         "images/Storm_standing/Storm_standing_hand[StormX.arm_pose]_right.png"
 
     if StormX.arm_pose == 2:
@@ -82,8 +80,8 @@ layeredimage Storm_sprite standing:
     else:
         "images/Storm_standing/Storm_standing_breasts_down.png"
 
-    if StormX.Clothes["tattoos"].string:
-        "images/Storm_standing/Storm_standing_tattoos_[StormX.Clothes[tattoos].string].png"
+    if StormX.Clothes["body_tattoos"].string:
+        "images/Storm_standing/Storm_standing_body_tattoos_[StormX.Clothes[body_tattoos].string].png"
 
     if not StormX.Clothes["body_piercings"].string:
         Null()
@@ -125,6 +123,9 @@ layeredimage Storm_sprite standing:
     else:
         "images/Storm_standing/Storm_standing_jacket[StormX.arm_pose]_[StormX.Clothes[jacket].string]_down.png"
 
+    if StormX.arm_pose == 1:
+        "images/Storm_standing/Storm_standing_hands[StormX.arm_pose].png"
+        
     always:
         "Storm_head" pos (0.28, 0.318) zoom 0.47
 

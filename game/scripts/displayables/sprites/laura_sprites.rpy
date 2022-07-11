@@ -148,7 +148,7 @@ layeredimage Laura_sprite standing:
     always:
         "Laura_standing_fondling_animations"
 
-    anchor (0.5, 0.0) offset (45, 170) zoom 0.5
+    anchor (0.5, 0.0) offset (45, 170) zoom 0.535
 
 layeredimage Laura_hair_back:
     if LauraX.wet:

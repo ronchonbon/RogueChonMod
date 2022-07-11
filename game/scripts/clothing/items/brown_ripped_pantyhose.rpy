@@ -1,23 +1,20 @@
 init -1 python:
 
-    def jean_shorts(Owner):
-        name = "jean shorts"
-        string = "jean_shorts"
+    def brown_ripped_pantyhose(Owner):
+        name = "brown ripped pantyhose"
+        string = "brown_ripped_pantyhose"
 
-        clothing_type = "pants"
+        clothing_type = "hose"
 
         dialogue_lines = {
             }
 
-        shame = 1
+        shame = 2
 
-        hides = ["pussy"]
-        covers = ["pussy"]
+        hides = []
+        covers = ["thighs", "feet"]
 
-        if Owner.tag in ["Rogue", "Laura"]:
-            number_of_states = 1
-        elif Owner.tag == "Jubes":
-            number_of_states = 2
+        number_of_states = 1
 
         poses = [
             "arm pose 1",

@@ -14,7 +14,7 @@ label summon(Girl):
             elif Girl == LauraX:
                 Girl.text "You're up too? Sure, we can hang."
             elif Girl == JeanX:
-                Girl.text "you're up too? Yeah, that's fine"
+                Girl.text "you're up too? yeah, thats fine"
             elif Girl == StormX:
                 Girl.text "You are awake? I can join you."
             elif Girl == JubesX:

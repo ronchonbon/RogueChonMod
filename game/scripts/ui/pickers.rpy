@@ -1,5 +1,5 @@
 screen Girl_picker():
-    for Girl in all_Girls:
+    for Girl in active_Girls:
         if renpy.showing(Girl.tag + "_sprite"):
             button:
                 background None
@@ -7,32 +7,23 @@ screen Girl_picker():
                 action Call("chat_menu", Girl)
 
 screen Clothing_picker(Girl):
-    window:
-        anchor (0.5, 0.5) pos (0.5, 0.5)
+    window anchor (0.5, 0.5) pos (0.5, 0.5) xysize (int(6.2*256), 800):
+        vpgrid:
+            cols 6
+            spacing 0
 
-        style "menu_window"
+            mousewheel True
+            draggable True
 
-        window anchor (0.5, 0.5) pos (0.5, 0.5) xysize (int(4.2*256), 600):
-            vpgrid:
-                cols 4
-                spacing 0
+            side_yfill True
 
-                mousewheel True
-                draggable True
+            imagebutton:
+                anchor (0.5, 0.5) pos (0.5, 0.5) xysize (256, 256)
+                auto "exit_%s"
+                action Return("quit")
 
-                side_yfill True
-
+            for Clothing in Girl.Wardrobe.Clothes.values():
                 imagebutton:
                     anchor (0.5, 0.5) pos (0.5, 0.5) xysize (256, 256)
-                    auto "images/Button_X_%s.png"
-                    action Return("quit")
-
-                for Clothing in Girl.Wardrobe.Clothes.values():
-                    # $ img = f"images/menu_images/{Girl.tag}/{Clothing.string}.png"
-                    $ img = f"images/Button_{Girl.tag}_hover.png"
-
-                    imagebutton:
-                        anchor (0.5, 0.5) pos (0.5, 0.5) xysize (256, 256)
-                        idle img
-                        hover img
-                        action Return(Clothing.name)
+                    auto f"{Girl.tag}_%s"
+                    action Return(Clothing.name)

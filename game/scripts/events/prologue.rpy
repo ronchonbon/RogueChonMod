@@ -354,19 +354,17 @@ label tour_parting:
 
                 "You head back to your room."
 
+label prologue_end:
     $ RogueX.location = "bg_rogue"
 
     $ active_Girls.append(RogueX)
 
     $ RogueX.History.update("met")
 
-label prologue_end:
     $ round = 10
 
     $ shift_focus(RogueX)
 
-    show screen status_screen()
-    show screen inventory_button()
-    show screen Girl_picker()
+    show screen status()
 
     jump player_room

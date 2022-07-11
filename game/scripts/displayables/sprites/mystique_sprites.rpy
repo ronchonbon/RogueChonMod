@@ -18,7 +18,7 @@ layeredimage Mystique_sprite standing normal:
         "images/Mystique_standing/Mystique_standing_skirt_[MystiqueX.Clothes[skirt].string].png"
 
     always:
-        "images/Mystique_standing/Mystique_standing_arms.png"
+        "images/Mystique_standing/Mystique_standing_arms[MystiqueX.arm_pose].png"
 
     always:
         "images/Mystique_standing/Mystique_standing_breasts.png"
@@ -53,7 +53,7 @@ layeredimage Mystique_sprite standing normal:
     anchor (0.5, 0.0) offset (0, 180) zoom 0.55
 
 image Mystique_hair_back:
-    "images/Mystique_standing/Mystique_standing_hair_long_back.png"
+    "images/Mystique_standing/Mystique_standing_hair_[MystiqueX.Clothes[hair].string]_back.png"
 
     anchor (0.5, 0.5)
 
@@ -94,7 +94,7 @@ layeredimage Mystique_sprite standing Raven:
         "images/Mystique_standing/Mystique_standing_skirt_[MystiqueX.disguise_Clothes[skirt].string].png"
 
     always:
-        "images/Raven_standing/Raven_standing_arms.png"
+        "images/Raven_standing/Raven_standing_arms[MystiqueX.arm_pose].png"
 
     always:
         "images/Raven_standing/Raven_standing_breasts.png"
@@ -141,7 +141,7 @@ layeredimage Raven_head:
         "Raven_blinking"
 
     always:
-        "images/Raven_standing/Raven_standing_hair_short_hair.png"
+        "images/Raven_standing/Raven_standing_hair_[MystiqueX.disguise_Clothes[hair].string].png"
 
     if MystiqueX.disguise_Clothes["face_outer_accessory"].string:
         "images/Mystique_standing/Mystique_standing_face_outer_accessory_[MystiqueX.disguise_Clothes[face_outer_accessory].string].png"

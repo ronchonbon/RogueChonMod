@@ -5,9 +5,6 @@ layeredimage Jubes_sprite standing:
     if JubesX.Clothes["jacket"].string:
         "images/Jubes_standing/Jubes_standing_jacket_[JubesX.Clothes[jacket].string]_collar.png"
 
-    if JubesX.Clothes["jacket"].state:
-        "images/Jubes_standing/Jubes_standing_jacket[JubesX.arm_pose]_[JubesX.Clothes[jacket].string]_back.png"
-
     if JubesX.Clothes["pants"].state:
         "images/Jubes_standing/Jubes_standing_pants_[JubesX.Clothes[pants].string]_back.png"
 
@@ -28,6 +25,9 @@ layeredimage Jubes_sprite standing:
 
     if JubesX.Clothes["body_piercings"].string:
         "images/Jubes_standing/Jubes_standing_body_piercings_pussy_[JubesX.Clothes[body_piercings].string].png"
+
+    if JubesX.Clothes["jacket"].state:
+        "images/Jubes_standing/Jubes_standing_jacket[JubesX.arm_pose]_[JubesX.Clothes[jacket].string]_back.png"
 
     if JubesX.Clothes["bra"].string:
         "images/Jubes_standing/Jubes_standing_bra_[JubesX.Clothes[bra].string]_[JubesX.Clothes[bra].state].png"
@@ -79,7 +79,7 @@ layeredimage Jubes_sprite standing:
         "images/Jubes_standing/Jubes_standing_jacket[JubesX.arm_pose]_[JubesX.Clothes[jacket].string]_sleeves.png"
 
     if JubesX.Clothes["suspenders"].string:
-        "images/Jubes_standing/Jubes_standing_suspenders_[JubesX.Clothes[suspenders].string]_[JubesX.Clothes[suspsenders].state].png"
+        "images/Jubes_standing/Jubes_standing_suspenders_[JubesX.Clothes[suspenders].string]_[JubesX.Clothes[suspenders].state].png"
 
     if JubesX.Clothes["jacket"].string:
         "images/Jubes_standing/Jubes_standing_jacket[JubesX.arm_pose]_[JubesX.Clothes[jacket].string]_[JubesX.Clothes[jacket].state].png"
@@ -105,7 +105,7 @@ layeredimage Jubes_sprite standing:
     always:
         "Jubes_standing_fondling_animations" zoom 0.91
 
-    anchor (0.5, 0.0) offset (15, 150) zoom 0.55
+    anchor (0.5, 0.0) offset (15, 150) zoom 0.54
 
 layeredimage Jubes_hair_back:
     if JubesX.wet:

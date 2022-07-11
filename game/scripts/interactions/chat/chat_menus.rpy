@@ -1,4 +1,6 @@
 label chat_menu(Girl):
+    hide screen Girl_picker
+
     $ shift_focus(Girl)
 
     $ chatting = True
@@ -230,6 +232,9 @@ label chat_menu(Girl):
     return
 
 label text_menu(Girl):
+    hide screen Girl_picker
+    nvl clear
+
     $ shift_focus(Girl)
 
     Player.text "Hey."
