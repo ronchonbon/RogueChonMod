@@ -20,6 +20,7 @@ init -1 python:
             "arm pose 1",
             "arm pose 2",
             "handjob",
+            "footjob",
             "sex",
             "doggy"]
 

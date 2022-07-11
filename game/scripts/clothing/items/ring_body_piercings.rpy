@@ -7,7 +7,6 @@ init -1 python:
         clothing_type = "body_piercings"
 
         dialogue_lines = {
-            "wardrobe": "You'd look really hot with ring body piercings."
             }
 
         shame = 2

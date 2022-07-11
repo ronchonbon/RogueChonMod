@@ -1,10 +1,10 @@
 init -1 python:
 
-    def Emma_white_shorts(Owner):
-        name = "Emma's white shorts"
-        string = "Emma_white_shorts"
+    def grey_skirt(Owner):
+        name = "grey skirt"
+        string = "grey_skirt"
 
-        clothing_type = "pants"
+        clothing_type = "skirt"
 
         dialogue_lines = {
             }
@@ -14,7 +14,7 @@ init -1 python:
         hides = ["pussy"]
         covers = ["pussy"]
 
-        number_of_states = 2
+        number_of_states = 1
 
         poses = [
             "arm pose 1",

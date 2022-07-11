@@ -823,103 +823,103 @@ init python:
                     "pants": blue_shorts(self),
                     "bra": green_bra(self), "top": yellow_shirt(self),
                     "suspenders": Misty_suspenders(self)})
-            # elif self.tag == "Storm":
-            #     default.update_Clothes({
-            #         "hair": long_hair(self),
-            #         "underwear": white_panties(self),
-            #         "skirt": purple_skirt(self),
-            #         "bra": black_bra(self), "top": white_shirt(self)})
-            #
-            #     casual.update_Clothes({
-            #         "hair": long_hair(self),
-            #         "underwear": white_panties(self),
-            #         "pants": black_jeans(self),
-            #         "bra": black_sports_bra(self),
-            #         "jacket": black_jacket(self)})
-            #
-            #     gym_clothes.update_Clothes({
-            #         "hair": long_hair(self),
-            #         "underwear": white_panties(self),
-            #         "pants": white_yoga_pants(self),
-            #         "bra": black_sports_bra(self)})
-            #
-            #     pajamas.update_Clothes({
-            #         "hair": long_hair(self),
-            #         "underwear": white_panties(self),
-            #         "top": white_shirt(self)})
-            #
-            #     shower.update_Clothes({
-            #         "hair": wavy_hair(self), "face_outer_accessory": head_towel(self)})
-            #
-            #     Halloween_costume.update_Clothes({
-            #         "hair": short_hair(self),
-            #         "underwear": Elena_panties(self),
-            #         "boots": ring_anklets(self),
-            #         "bra": Elena_bra(self),
-            #         "neck": ring_necklace(self), "sleeves": ring_armlets(self)})
-            # elif self.tag == "Jubes":
-            #     default.update_Clothes({
-            #         "hair": short_hair(self), "face_outer_accessory": pink_shades(self),
-            #         "underwear": blue_panties(self),
-            #         "pants": jean_shorts(self),
-            #         "bra": blue_sports_bra(self), "top": red_shirt(self),
-            #         "jacket": yellow_jacket(self)})
-            #
-            #     casual.update_Clothes({
-            #         "hair": short_hair(self), "face_outer_accessory": pink_shades(self),
-            #         "underwear": blue_panties(self),
-            #         "pants": leather_pants(self),
-            #         "bra": blue_sports_bra(self), "top": black_shirt(self),
-            #         "jacket": yellow_jacket(self)})
-            #
-            #     gym_clothes.update_Clothes({
-            #         "hair": short_hair(self),
-            #         "underwear": blue_panties(self),
-            #         "pants": leather_pants(self),
-            #         "bra": blue_sports_bra(self), "top": black_shirt(self)})
-            #
-            #     pajamas.update_Clothes({
-            #         "hair": short_hair(self),
-            #         "underwear": blue_panties(self),
-            #         "bra": blue_sports_bra(self)})
-            #
-            #     shower.update_Clothes({
-            #         "hair": short_hair(self),
-            #         "top": yellow_towel(self)})
-            # elif self.tag == "Mystique":
-            #     default.update_Clothes({
-            #         "face_inner_accessory": black_glasses(self), "hair": short_hair(self),
-            #         "underwear": black_panties(self), "hose": brown_pantyhose(self),
-            #         "skirt": grey_skirt(self),
-            #         "bra": black_bra(self), "top": purple_shirt(self),
-            #         "jacket": grey_jacket(self)})
-            #
-            #     casual.update_Clothes({
-            #         "face_inner_accessory": black_glasses(self), "hair": short_hair(self),
-            #         "underwear": black_panties(self), "hose": brown_pantyhose(self),
-            #         "skirt": grey_skirt(self),
-            #         "bra": black_bra(self), "top": purple_shirt(self),
-            #         "jacket": grey_jacket(self)})
-            #
-            #     gym_clothes.update_Clothes({
-            #         "hair": short_hair(self),
-            #         "underwear": black_panties(self),
-            #         "skirt": grey_skirt(self),
-            #         "bra": black_bra(self), "top": purple_shirt(self)})
-            #
-            #     pajamas.update_Clothes({
-            #         "hair": short_hair(self),
-            #         "underwear": black_panties(self),
-            #         "bra": black_bra(self), "top": purple_shirt(self)})
-            #
-            #     shower.update_Clothes({
-            #         "hair": short_hair(self)})
-            #
-            #     villain.update_Clothes({
-            #         "hair": long_hair(self), "face_outer_accessory": forehead_skull(self),
-            #         "boots": white_boots(self),
-            #         "dress": white_dress(self),
-            #         "gloves": white_gloves(self), "belt": skull_belt(self)})
+            elif self.tag == "Storm":
+                default.update_Clothes({
+                    "hair": long_hair(self),
+                    "underwear": white_panties(self),
+                    "skirt": purple_skirt(self),
+                    "bra": black_bra(self), "top": white_shirt(self)})
+
+                casual.update_Clothes({
+                    "hair": long_hair(self),
+                    "underwear": white_panties(self),
+                    "pants": black_jeans(self),
+                    "bra": black_sports_bra(self),
+                    "jacket": black_jacket(self)})
+
+                gym_clothes.update_Clothes({
+                    "hair": long_hair(self),
+                    "underwear": white_panties(self),
+                    "pants": white_yoga_pants(self),
+                    "bra": black_sports_bra(self)})
+
+                pajamas.update_Clothes({
+                    "hair": long_hair(self),
+                    "underwear": white_panties(self),
+                    "top": white_shirt(self)})
+
+                shower.update_Clothes({
+                    "hair": wavy_hair(self), "face_outer_accessory": head_towel(self)})
+
+                Halloween_costume.update_Clothes({
+                    "hair": short_hair(self),
+                    "underwear": Elena_panties(self),
+                    "boots": ring_anklets(self),
+                    "bra": Elena_bra(self),
+                    "neck": ring_necklace(self), "sleeves": ring_armlets(self)})
+            elif self.tag == "Jubes":
+                default.update_Clothes({
+                    "hair": short_hair(self), "face_outer_accessory": pink_shades(self),
+                    "underwear": blue_panties(self),
+                    "pants": jean_shorts(self),
+                    "bra": blue_sports_bra(self), "top": red_shirt(self),
+                    "jacket": yellow_jacket(self)})
+
+                casual.update_Clothes({
+                    "hair": short_hair(self), "face_outer_accessory": pink_shades(self),
+                    "underwear": blue_panties(self),
+                    "pants": leather_pants(self),
+                    "bra": blue_sports_bra(self), "top": black_shirt(self),
+                    "jacket": yellow_jacket(self)})
+
+                gym_clothes.update_Clothes({
+                    "hair": short_hair(self),
+                    "underwear": blue_panties(self),
+                    "pants": leather_pants(self),
+                    "bra": blue_sports_bra(self), "top": black_shirt(self)})
+
+                pajamas.update_Clothes({
+                    "hair": short_hair(self),
+                    "underwear": blue_panties(self),
+                    "bra": blue_sports_bra(self)})
+
+                shower.update_Clothes({
+                    "hair": short_hair(self),
+                    "top": yellow_towel(self)})
+            elif self.tag == "Mystique":
+                default.update_Clothes({
+                    "face_inner_accessory": black_glasses(self), "hair": short_hair(self),
+                    "underwear": black_panties(self), "hose": brown_pantyhose(self),
+                    "skirt": grey_skirt(self),
+                    "bra": black_bra(self), "top": purple_shirt(self),
+                    "jacket": grey_jacket(self)})
+
+                casual.update_Clothes({
+                    "face_inner_accessory": black_glasses(self), "hair": short_hair(self),
+                    "underwear": black_panties(self), "hose": brown_pantyhose(self),
+                    "skirt": grey_skirt(self),
+                    "bra": black_bra(self), "top": purple_shirt(self),
+                    "jacket": grey_jacket(self)})
+
+                gym_clothes.update_Clothes({
+                    "hair": short_hair(self),
+                    "underwear": black_panties(self),
+                    "skirt": grey_skirt(self),
+                    "bra": black_bra(self), "top": purple_shirt(self)})
+
+                pajamas.update_Clothes({
+                    "hair": short_hair(self),
+                    "underwear": black_panties(self),
+                    "bra": black_bra(self), "top": purple_shirt(self)})
+
+                shower.update_Clothes({
+                    "hair": short_hair(self)})
+
+                villain.update_Clothes({
+                    "hair": long_hair(self), "face_outer_accessory": forehead_skull(self),
+                    "boots": white_boots(self),
+                    "dress": white_dress(self),
+                    "gloves": white_gloves(self), "belt": skull_belt(self)})
 
             for Outfit in [default, casual, gym_clothes, pajamas, shower]:
                 self.Wardrobe.Outfits.update({Outfit.name: Outfit})

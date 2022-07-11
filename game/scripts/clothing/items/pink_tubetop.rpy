@@ -1,20 +1,20 @@
 init -1 python:
 
-    def red_pantyhose(Owner):
-        name = "red pantyhose"
-        string = "red_pantyhose"
+    def pink_tubetop(Owner):
+        name = "pink tubetop"
+        string = "pink_tubetop"
 
-        clothing_type = "hose"
+        clothing_type = "bra"
 
         dialogue_lines = {
             }
 
         shame = 0
 
-        hides = []
-        covers = []
+        hides = ["breasts"]
+        covers = ["breasts"]
 
-        number_of_states = 1
+        number_of_states = 2
 
         poses = [
             "arm pose 1",

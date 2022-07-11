@@ -9,7 +9,7 @@ init -1 python:
         dialogue_lines = {
             }
 
-        shame = 0
+        shame = 5
 
         hides = []
         covers = []

@@ -1,20 +1,20 @@
 init -1 python:
 
-    def Emma_black_shorts(Owner):
-        name = "Emma's black shorts"
-        string = "Emma_black_shorts"
+    def white_socks(Owner):
+        name = "white socks"
+        string = "white_socks"
 
-        clothing_type = "pants"
+        clothing_type = "socks"
 
         dialogue_lines = {
             }
 
         shame = 0
 
-        hides = ["pussy"]
-        covers = ["pussy"]
+        hides = []
+        covers = ["feet"]
 
-        number_of_states = 2
+        number_of_states = 1
 
         poses = [
             "arm pose 1",

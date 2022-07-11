@@ -14,16 +14,22 @@ init -1 python:
         hides = ["pussy"]
         covers = ["pussy", "thighs"]
 
-        if Owner == KittyX:
+        if Owner.tag == "Kitty":
             number_of_states = 1
-        elif Owner == StormX:
+        elif Owner.tag == "Storm":
             number_of_states = 2
 
-        poses = [
-            "arm pose 1",
-            "arm pose 2",
-            "handjob",
-            "sex",
-            "doggy"]
+        if Owner.tag == "Kitty":
+            poses = [
+                "arm pose 1",
+                "arm pose 2",
+                "handjob",
+                "sex",
+                "doggy"]
+        elif Owner.tag == "Storm":
+            poses = [
+                "arm pose 1",
+                "arm pose 2",
+                "handjob"]
 
         return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

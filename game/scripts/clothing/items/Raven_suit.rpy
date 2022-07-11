@@ -14,7 +14,7 @@ init -1 python:
         hides = ["breasts", "pussy"]
         covers = ["breasts", "pussy"]
 
-        number_of_states = 1
+        number_of_states = 2
 
         poses = [
             "arm pose 1",

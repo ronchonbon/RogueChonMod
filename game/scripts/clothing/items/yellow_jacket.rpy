@@ -1,24 +1,26 @@
 init -1 python:
 
-    def Emma_white_cape(Owner):
-        name = "Emma's white cape"
-        string = "Emma_white_cape"
+    def yellow_jacket(Owner):
+        name = "yellow jacket"
+        string = "yellow_jacket"
 
-        clothing_type = "cloak"
+        clothing_type = "yellow_jacket"
 
         dialogue_lines = {
             }
 
         shame = 0
 
-        hides = []
-        covers = []
+        hides = ["breasts"]
+        covers = ["breasts"]
 
-        number_of_states = 1
+        number_of_states = 3
 
         poses = [
             "arm pose 1",
             "arm pose 2",
-            "handjob"]
+            "handjob",
+            "titjob",
+            "blowjob"]
 
         return ClothingClass(Owner, name, string, clothing_type, dialogue_lines, shame = shame, hides = hides, covers = covers, number_of_states = number_of_states, poses = poses)

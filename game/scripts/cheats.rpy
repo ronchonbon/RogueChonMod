@@ -22,7 +22,7 @@ label cheat_menu(Girl):
                 call wardrobe_editor(Girl)
             "Unlock all Girls":
                 python:
-                    for G in [RogueX, KittyX, EmmaX, LauraX, JeanX]:
+                    for G in all_Girls:
                         active_Girls.append(G)
 
                         Player.Phonebook.append(G)
@@ -50,7 +50,7 @@ label cheat_menu(Girl):
                             Player.Harem.append(G)
             "Unlock all clothes":
                 python:
-                    for G in [RogueX, KittyX, EmmaX, LauraX, JeanX]:
+                    for G in all_Girls:
                         Clothes = Clothing_registry(G)
 
                         for Clothing in Clothes:

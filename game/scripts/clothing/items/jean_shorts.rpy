@@ -14,7 +14,10 @@ init -1 python:
         hides = ["pussy"]
         covers = ["pussy"]
 
-        number_of_states = 1
+        if Girl in [RogueX, LauraX]:
+            number_of_states = 1
+        elif Girl == JubesX:
+            number_of_states = 2
 
         poses = [
             "arm pose 1",
